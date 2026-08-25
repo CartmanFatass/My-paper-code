@@ -4,7 +4,7 @@
   "active_round_id": null,
   "blockers": [
     {
-      "code": "EXTERNAL_PRO_COMMITMENT_OBSERVATION_REQUIRED",
+      "code": "HISTORICAL_PRO_PROMPT_HASH_MISMATCH",
       "observed_refs": [
         {
           "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_SELF_CONTAINED_MATHEMATICAL_CLOSURE_QUESTION_20260822.md",
@@ -14,19 +14,20 @@
           "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_PRO_OPERATION_BINDING_20260822.md",
           "sha256": "e524fef5821992a5224c2b3e9b413ca7becb7c3c4cd935f2974fcda97b96a233"
         },
+        "prompt-hash-mismatch:historical=8d39b8f263408f2e60b581ca3d4a52045782da9187c48d10a72366793c648081;current=ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037;match=false"
+      ],
+      "resume_condition_ref": "Exact historical archive and handoff recovered; EM then decides whether the mismatched prompt identity permits any scientific intake."
+    },
+    {
+      "code": "EXISTING_PRO_OPERATION_ARCHIVE_GAP",
+      "observed_refs": [
+        "agentify-operation:93228d88-4593-42da-a67b-81af94bb5413;idempotency_key=VNFC-PCPI-R05-PRO-MATH-CLOSURE-SELF-CONTAINED-20260822-01-a17be95b-7196-441a-a2c2-4898eb952421;request_fingerprint=7a50edae56eeb5999397a4dcfeb41307213a4dba0114d2d32f21fd65f2537935;status=COMPLETE;terminal=NATURAL_COMPLETION_VERIFIED;sendCount=1;sendActionCount=1;newUserMessageCount=1;archive_ref=null",
         {
           "path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
           "sha256": "0ea6037d9aa3be8498a7b1ab346b8af6303a6a6fce10293ed403feb81d5ce9c6"
-        },
-        {
-          "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
-          "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
         }
       ],
-      "resume_condition_ref": {
-        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
-        "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
-      }
+      "resume_condition_ref": "agentify-operation:93228d88-4593-42da-a67b-81af94bb5413/exact-archive-and-handoff-recovery-without-resend"
     }
   ],
   "direction_id": "variable_n_fleet_churn",
@@ -48,39 +49,33 @@
         "sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037"
       },
       {
-        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_SCIENCE_CARD_20260822.md",
-        "sha256": "164a5c60213850cf7652917443eb65208d232f7abf9d950680d258503f87bc48"
-      },
-      {
         "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_PRO_OPERATION_BINDING_20260822.md",
         "sha256": "e524fef5821992a5224c2b3e9b413ca7becb7c3c4cd935f2974fcda97b96a233"
       },
       {
         "path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
         "sha256": "0ea6037d9aa3be8498a7b1ab346b8af6303a6a6fce10293ed403feb81d5ce9c6"
-      }
+      },
+      "agentify-operation:93228d88-4593-42da-a67b-81af94bb5413;request_fingerprint=7a50edae56eeb5999397a4dcfeb41307213a4dba0114d2d32f21fd65f2537935;terminal=NATURAL_COMPLETION_VERIFIED;archive_ref=null"
     ],
-    "kind": "OBSERVE_EXTERNAL_PRO_BINDING_COMMITMENT",
+    "kind": "RECOVER_EXISTING_PRO_ARCHIVE_AND_HANDOFF",
     "owner": "TRANSPORT"
   },
   "phase": "WAITING",
   "question_sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037",
   "registry_revision_seen": 9,
-  "revision": 3,
+  "revision": 4,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:13:10Z",
+  "updated_at": "2026-08-25T12:35:19Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "PREPARED_ZERO_COMMIT",
-        "EXISTING_COMMITTED_OPERATION",
-        "UNKNOWN_COMMITMENT"
+        "ARCHIVE_AND_HANDOFF_RECOVERED",
+        "ARCHIVE_UNAVAILABLE",
+        "ARCHIVE_IDENTITY_MISMATCH"
       ],
-      "kind": "TRANSPORT_EXTERNAL_PRO_COMMITMENT_OBSERVATION",
-      "ref": {
-        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
-        "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
-      }
+      "kind": "TRANSPORT_EXISTING_PRO_ARCHIVE_HANDOFF_RECOVERY",
+      "ref": "agentify-operation:93228d88-4593-42da-a67b-81af94bb5413;terminal=NATURAL_COMPLETION_VERIFIED;archive_ref=null;resend=forbidden"
     }
   ],
   "writer": "EM-variable_n_fleet_churn"

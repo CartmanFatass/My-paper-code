@@ -4,8 +4,9 @@
   "active_round_id": null,
   "blockers": [
     {
-      "code": "EXTERNAL_PRO_OPERATION_UNRECONCILED",
+      "code": "EXTERNAL_PRO_COMMITMENT_UNKNOWN_NO_RESEND",
       "observed_refs": [
+        "agent://VQFPCommitmentObserve",
         {
           "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_CHATGPT_PRO_RECLOSURE_EM_INTAKE_20260823.md",
           "sha256": "a019bc43550bfd8e9ba8c3f96767f32b19cd70d8528e993421743726c2204aae"
@@ -13,16 +14,9 @@
         {
           "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
           "sha256": "b2629c4826b0d592f613ea0396332e04b63c587b805f2ac8d1980fdc5bd6516c"
-        },
-        {
-          "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_READINESS_20260825.md",
-          "sha256": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174"
         }
       ],
-      "resume_condition_ref": {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_READINESS_20260825.md",
-        "sha256": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174"
-      }
+      "resume_condition_ref": "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
     }
   ],
   "direction_id": "voronoi_quadrature_field_policy",
@@ -35,21 +29,10 @@
   "last_checkpoint_sha": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174",
   "next_action": {
     "input_refs": [
+      "agent://VQFPCommitmentObserve",
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_READINESS_20260825.md",
         "sha256": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174"
-      },
-      {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_CHATGPT_PRO_RECLOSURE_OR_REVISION_QUESTION_20260825.md",
-        "sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9"
-      },
-      {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_EVIDENCE_SET_20260825.md",
-        "sha256": "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9"
-      },
-      {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_SCIENCE_CARD_20260823.md",
-        "sha256": "cd59f04a3b16400d377eb97b7facc75aa32cbba34528db0e222b335a2c9c1192"
       },
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_CHATGPT_PRO_RECLOSURE_EM_INTAKE_20260823.md",
@@ -58,29 +41,26 @@
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
         "sha256": "b2629c4826b0d592f613ea0396332e04b63c587b805f2ac8d1980fdc5bd6516c"
-      }
+      },
+      "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
     ],
-    "kind": "OBSERVE_EXTERNAL_PRO_OPERATION_AND_BIND_PREPARED_ROUND",
-    "owner": "TRANSPORT"
+    "kind": "RECOVER_HISTORICAL_EXTERNAL_PRO_IDENTITY",
+    "owner": "ROOT"
   },
   "phase": "WAITING",
   "question_sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9",
   "registry_revision_seen": 9,
-  "revision": 3,
+  "revision": 4,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:11:27.108632Z",
+  "updated_at": "2026-08-25T12:35:25.100715Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "EXISTING_OPERATION_RECOVERED",
-        "DISTINCT_OPERATION_PREFLIGHT_READY",
-        "COMMITMENT_UNKNOWN_NO_RESEND"
+        "EXACT_OPERATION_IDENTITY_RECOVERED",
+        "RECOVERY_EXHAUSTED"
       ],
-      "kind": "EXTERNAL_PRO_OPERATION_RECONCILIATION",
-      "ref": {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_READINESS_20260825.md",
-        "sha256": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174"
-      }
+      "kind": "HISTORICAL_EXTERNAL_PRO_IDENTITY_RECOVERY",
+      "ref": "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
     }
   ],
   "writer": "EM-voronoi_quadrature_field_policy"
