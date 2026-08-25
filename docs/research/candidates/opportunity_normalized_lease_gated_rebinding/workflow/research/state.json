@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "opportunity_normalized_lease_gated_rebinding",
+  "direction_ref": {
+    "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
+    "sha256": "80e545b0369e937da24c282c5c0d9d53ad75ff24169c8e209b4d5b0728ade3ce"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "fb6d4f3f28e6653fa649de81e96e500e427ad074ed90e8ddae4fbec76989623b",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "d220e8f525298a41c2763789b90871c5c253379b483d824e29b35c8ec4d02154",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-opportunity_normalized_lease_gated_rebinding"
+}

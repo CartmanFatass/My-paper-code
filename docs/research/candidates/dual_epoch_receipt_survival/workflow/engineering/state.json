@@ -1,0 +1,33 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "blockers": [],
+  "candidate_sha": null,
+  "changed_paths": [],
+  "direction_id": "dual_epoch_receipt_survival",
+  "integration": {
+    "integrated_sha": null,
+    "target_branch": "main",
+    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+  },
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "UNREQUESTED"
+  },
+  "phase": "UNREQUESTED",
+  "revision": 1,
+  "run_refs": [],
+  "schema_version": 1,
+  "scope_ref": {
+    "heading": "Engineering request",
+    "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
+    "sha256": "1d73a0633a2de69a2e310dfc4bd9dd03b2f8f5ffa4722f2d8080fbde438e5307"
+  },
+  "updated_at": "2026-08-24T00:00:00Z",
+  "verification_refs": [],
+  "waiting_on": [],
+  "worktree_ref": null,
+  "writer": "CM-dual_epoch_receipt_survival"
+}

@@ -1,0 +1,33 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "blockers": [],
+  "candidate_sha": null,
+  "changed_paths": [],
+  "direction_id": "renewal_indexed_score_plasticity",
+  "integration": {
+    "integrated_sha": null,
+    "target_branch": "main",
+    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+  },
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "UNREQUESTED"
+  },
+  "phase": "UNREQUESTED",
+  "revision": 1,
+  "run_refs": [],
+  "schema_version": 1,
+  "scope_ref": {
+    "heading": "Engineering request",
+    "path": "docs/research/candidates/renewal_indexed_score_plasticity/DIRECTION.md",
+    "sha256": "ceb569a3c713221955d9da5c6b8295dc243d0cf0487b34f92625cf41b15bcade"
+  },
+  "updated_at": "2026-08-24T00:00:00Z",
+  "verification_refs": [],
+  "waiting_on": [],
+  "worktree_ref": null,
+  "writer": "CM-renewal_indexed_score_plasticity"
+}

@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "eociv_lite",
+  "direction_ref": {
+    "path": "docs/research/candidates/eociv_lite/DIRECTION.md",
+    "sha256": "aa2e90a6ca0cc052e05cc2e28243cc903eb667fbaf6d6b73304e3a8e6e9468b3"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "2c2c3c9e0eac9c55b15f27cee9c8b96f0ddb20720b87d510a5e0ed2c720401d6",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "b5965c93263dc75ab5e530598ce0357191ec713eba359052040d402315965a10",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-eociv_lite"
+}

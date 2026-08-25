@@ -1,0 +1,58 @@
+{
+  "actionable": true,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "metric_ground_transport_allocation",
+  "direction_ref": {
+    "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+    "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
+  },
+  "engineering_request": {
+    "acceptance_refs": [
+      "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md#acceptance-criteria",
+      "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md#explicit-non-scope"
+    ],
+    "scope_ref": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md#engineering-request--preactivity-resource-estimator"
+  },
+  "evidence_set_sha256": "0138ac6e69329ea5864065a0aa42a6630de31825f9da297267efabc66f6d78b7",
+  "last_checkpoint_sha": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23",
+  "next_action": {
+    "input_refs": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "677aa70951b8f1df244a6dd112e8bd142cbe8c8ddd75a9d0bac65d25d306c15d"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+        "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md",
+        "sha256": "d279c20bb8193ef2e6f0fa6acb3af6be80bf04e584af3c07b6b83c1b4bfb04aa"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B1_REVISION_04_RESULT_INTAKE.md",
+        "sha256": "ca7c9360556bd1b90df934e4b7beffaf0ef4f0c8c82193a98fc1ca220b5998b9"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B1_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE.md",
+        "sha256": "104b90d56ceaca304eb5ae361b24464cafce03d43056eec0d9fc438719caca1d"
+      },
+      "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md"
+    ],
+    "kind": "ROOT_DISPATCH_PREACTIVITY_RESOURCE_ESTIMATOR"
+  },
+  "phase": "ENGINEERING_REQUESTED",
+  "question_sha256": "f9bd1122f7fa3daca8b9631ce908b9499ceb7eb8f70caece39ee6482b85e0935",
+  "registry_revision_seen": 4,
+  "revision": 3,
+  "schema_version": 1,
+  "updated_at": "2026-08-25T05:37:47Z",
+  "waiting_on": [],
+  "writer": "EM-metric_ground_transport_allocation"
+}

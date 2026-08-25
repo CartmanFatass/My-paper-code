@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_runtime_worktrees",
+  "title": "HMASD runtime worktree registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "revision", "updated_at", "writer", "worktrees"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "writer": { "type": "string", "const": "Root" },
+    "worktrees": { "type": "array", "items": { "$ref": "#/$defs/worktree" } }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
+    },
+    "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },
+    "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "relative_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+$"
+    },
+    "unknown_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_sha",
+        "worktree_exists",
+        "registration_count",
+        "registration_branch",
+        "registration_head",
+        "branch_sha"
+      ],
+      "properties": {
+        "target_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "worktree_exists": { "type": "boolean" },
+        "registration_count": { "type": "integer", "minimum": 0 },
+        "registration_branch": { "anyOf": [{ "type": "string", "pattern": "^refs/heads/omp/" }, { "type": "null" }] },
+        "registration_head": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "branch_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] }
+      }
+    },
+    "unknown_outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "status",
+        "recorded_at",
+        "error",
+        "registry_revision_before",
+        "registry_revision_observed",
+        "observation"
+      ],
+      "properties": {
+        "operation": { "type": "string", "enum": ["APPLY", "RELEASE"] },
+        "status": { "type": "string", "const": "UNKNOWN" },
+        "recorded_at": { "$ref": "#/$defs/timestamp" },
+        "error": { "type": "string", "minLength": 1 },
+        "registry_revision_before": { "type": "integer", "minimum": 1 },
+        "registry_revision_observed": {
+          "anyOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }]
+        },
+        "observation": { "$ref": "#/$defs/unknown_observation" }
+      }
+    },
+    "worktree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "worktree_ref",
+        "direction_id",
+        "kind",
+        "assignment_id",
+        "canonical_absolute_path",
+        "branch",
+        "base_sha",
+        "candidate_sha",
+        "integrated_sha",
+        "lifecycle",
+        "receipt_path",
+        "operation_token"
+      ],
+      "properties": {
+        "worktree_ref": { "$ref": "#/$defs/id" },
+        "direction_id": { "$ref": "#/$defs/direction_id" },
+        "kind": { "type": "string", "enum": ["research", "engineering"] },
+        "assignment_id": { "$ref": "#/$defs/id" },
+        "canonical_absolute_path": { "type": "string", "pattern": "^(?:/|[A-Za-z]:[\\\\/])[^\\u0000]*$" },
+        "branch": { "type": "string", "pattern": "^omp/[a-z0-9][a-z0-9_-]{1,63}/(?:research|engineering)/[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+        "base_sha": { "$ref": "#/$defs/git_sha" },
+        "candidate_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "lifecycle": {
+          "type": "string",
+          "enum": ["PROVISIONING", "PROVISIONED", "CANDIDATE_READY", "PREPARED_FOR_INTEGRATION", "INTEGRATED", "APPLY_OUTCOME_UNKNOWN", "RELEASE_OUTCOME_UNKNOWN", "RELEASED", "RETAINED_FOR_RECOVERY"]
+        },
+        "receipt_path": { "$ref": "#/$defs/relative_path" },
+        "operation_token": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
+        "unknown_outcome": {
+          "anyOf": [{ "$ref": "#/$defs/unknown_outcome" }, { "type": "null" }]
+        }
+      }
+    }
+  }
+}

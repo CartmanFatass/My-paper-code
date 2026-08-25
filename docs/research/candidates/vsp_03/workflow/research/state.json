@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "vsp_03",
+  "direction_ref": {
+    "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+    "sha256": "c93391c11c6adcbbb6fa09c6160ef95da1f42fa969a996d7ba87b7b8b5d9bc20"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "1d691915bb023209a7040873c6884395763a8f0e3bb56cb65d368e48e3251b75",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "2bf2ba28a41b0338302bcbeeb2d013e8b8500ca674c0117b06ecd34edceb6d42",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-vsp_03"
+}

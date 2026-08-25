@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_external_review_index",
+  "title": "HMASD external review index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "revision",
+    "updated_at",
+    "writer",
+    "direction_id",
+    "workflow_version",
+    "rounds"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
+    "direction_id": { "$ref": "#/$defs/direction_id" },
+    "workflow_version": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+    "rounds": { "type": "array", "items": { "$ref": "#/$defs/round" } }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+$"
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "nullable_ref": {
+      "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
+    },
+    "provider_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "idempotency_key",
+        "session_ref",
+        "terminal_state",
+        "archive_ref",
+        "handoff_ref",
+        "completed_at"
+      ],
+      "properties": {
+        "operation_id": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "idempotency_key": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "session_ref": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "terminal_state": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
+        "archive_ref": { "$ref": "#/$defs/nullable_ref" },
+        "handoff_ref": { "$ref": "#/$defs/nullable_ref" },
+        "completed_at": {
+          "anyOf": [{ "$ref": "#/$defs/timestamp" }, { "type": "null" }]
+        }
+      }
+    },
+    "round": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "round_id",
+        "question_sha256",
+        "evidence_set_sha256",
+        "status",
+        "prompt_refs",
+        "providers",
+        "local_synthesis_ref",
+        "created_at",
+        "completed_at"
+      ],
+      "properties": {
+        "round_id": { "type": "string", "pattern": "^[0-9a-f]{20}$" },
+        "question_sha256": { "$ref": "#/$defs/sha256" },
+        "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DIVERGENT_PENDING",
+            "DIVERGENT_RUNNING",
+            "LOCAL_RESEARCH",
+            "SYNTHESIS_READY",
+            "CONVERGENCE_RUNNING",
+            "COMPLETE",
+            "BLOCKED"
+          ]
+        },
+        "prompt_refs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["gemini_divergent", "pro_divergent", "pro_convergence"],
+          "properties": {
+            "gemini_divergent": { "$ref": "#/$defs/ref" },
+            "pro_divergent": { "$ref": "#/$defs/ref" },
+            "pro_convergence": { "$ref": "#/$defs/nullable_ref" }
+          }
+        },
+        "providers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["gemini_divergent", "pro_divergent", "pro_convergence"],
+          "properties": {
+            "gemini_divergent": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] },
+            "pro_divergent": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] },
+            "pro_convergence": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] }
+          }
+        },
+        "local_synthesis_ref": { "$ref": "#/$defs/nullable_ref" },
+        "created_at": { "$ref": "#/$defs/timestamp" },
+        "completed_at": {
+          "anyOf": [{ "$ref": "#/$defs/timestamp" }, { "type": "null" }]
+        }
+      }
+    }
+  }
+}

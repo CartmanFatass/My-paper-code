@@ -1,0 +1,33 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "blockers": [],
+  "candidate_sha": null,
+  "changed_paths": [],
+  "direction_id": "ec4g_r1",
+  "integration": {
+    "integrated_sha": null,
+    "target_branch": "main",
+    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+  },
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "UNREQUESTED"
+  },
+  "phase": "UNREQUESTED",
+  "revision": 1,
+  "run_refs": [],
+  "schema_version": 1,
+  "scope_ref": {
+    "heading": "Engineering request",
+    "path": "docs/research/candidates/ec4g_r1/DIRECTION.md",
+    "sha256": "aec521304d7727b365cecd4e534f29ff55391fd5abde9d3f24d860065c2c28ac"
+  },
+  "updated_at": "2026-08-24T00:00:00Z",
+  "verification_refs": [],
+  "waiting_on": [],
+  "worktree_ref": null,
+  "writer": "CM-ec4g_r1"
+}

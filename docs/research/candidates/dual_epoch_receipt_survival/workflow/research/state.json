@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "dual_epoch_receipt_survival",
+  "direction_ref": {
+    "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
+    "sha256": "1d73a0633a2de69a2e310dfc4bd9dd03b2f8f5ffa4722f2d8080fbde438e5307"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "4fd1a7c2b4e54e100412121c7288759b120b4631fdfaf8946e21622a7e0eceb2",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "a1826149ef4f35cd430b56ba2955ea868e0f8aea8051972d5c995378de4df89f",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-dual_epoch_receipt_survival"
+}

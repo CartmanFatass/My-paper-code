@@ -6,7 +6,7 @@ hooks = false
 
 [agents]
 max_threads = 40
-max_depth = 2
+max_depth = 1
 interrupt_message = true
 
 [agents.HMASDCodeProjectManager]

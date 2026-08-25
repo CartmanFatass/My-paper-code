@@ -46,12 +46,21 @@ data/
 *.pdf
 *.md
 !README.md
+!CONTEXT.md
 !AGENTS.md
 # Stable project and research documentation.
 !memory/*.md
 !docs/project/*.md
 !docs/report/*.md
 !docs/plans/*.md
+!docs/migration/
+!docs/migration/*.md
+!tests/fixtures/hmasd_external_review/prompts/
+!tests/fixtures/hmasd_external_review/prompts/*.md
+!docs/research/portfolio/
+!docs/research/portfolio/**
+!docs/external-review/directions/
+!docs/external-review/directions/**
 !docs/research/RESEARCH_MAP.md
 !docs/research/cdc/**/*.md
 !docs/research/designs/*.md
@@ -60,8 +69,14 @@ data/
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 
-# Retired non-native assistant layouts must not reappear as hidden local state.
-/.agents/
+# Codex project skills are durable workflow definitions. Other retired
+# assistant layouts must not reappear as hidden local state.
+!/.agents/
+!/.agents/skills/
+!/.agents/skills/**/
+!/.agents/skills/**/SKILL.md
+/.codex/runtime/**
+/.omp/runtime/**
 /.claude/
 # Generated from the account-visible Codex model cache; never commit account
 # catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.

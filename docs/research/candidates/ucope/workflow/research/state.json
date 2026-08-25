@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "ucope",
+  "direction_ref": {
+    "path": "docs/research/candidates/ucope/DIRECTION.md",
+    "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "724ce24ab8548807ca400aa8179a05b5e103a023bb61f8f639c9a16b5aeeebee",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "0c608c5f791d055f58fd51a308065b2c4024f1e1b4eeb8ef6b3995bb90eaad58",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-ucope"
+}

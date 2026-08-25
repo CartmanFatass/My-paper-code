@@ -1,0 +1,35 @@
+{
+  "direction_id": "example-direction",
+  "revision": 1,
+  "rounds": [
+    {
+      "completed_at": null,
+      "created_at": "2026-08-24T00:00:00Z",
+      "evidence_set_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "local_synthesis_ref": null,
+      "prompt_refs": {
+        "gemini_divergent": {
+          "path": "docs/external-review/directions/example-direction/round-0001/GEMINI_DIVERGENT_PROMPT.md",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "pro_convergence": null,
+        "pro_divergent": {
+          "path": "docs/external-review/directions/example-direction/round-0001/PRO_DIVERGENT_PROMPT.md",
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      },
+      "providers": {
+        "gemini_divergent": null,
+        "pro_convergence": null,
+        "pro_divergent": null
+      },
+      "question_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "round_id": "038544507c6e759ace8b",
+      "status": "DIVERGENT_PENDING"
+    }
+  ],
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "workflow_version": "hmasd-external-review-v1",
+  "writer": "EM-example-direction"
+}

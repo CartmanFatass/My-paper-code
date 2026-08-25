@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HMASD Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">HMASD / read-only observability</p>
+      <h1>Autonomous research workflow</h1>
+      <p id="generated" class="muted">Loading coherent snapshot…</p>
+    </div>
+    <div id="health" class="health" aria-live="polite">Connecting</div>
+  </header>
+
+  <main>
+    <nav class="tabs" aria-label="Dashboard views">
+      <button class="tab active" data-view="portfolio" type="button">Portfolio</button>
+      <button class="tab" data-view="agents" type="button">Tasks</button>
+      <button class="tab" data-view="runs" type="button">Runs</button>
+      <button class="tab" data-view="external_reviews" type="button">External reviews</button>
+      <button class="tab" data-view="worktrees" type="button">Worktrees</button>
+    </nav>
+    <div id="notice" class="notice" hidden></div>
+    <section id="view" class="view" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <span>Local loopback service · no write controls</span>
+    <span id="revision"></span>
+  </footer>
+  <script src="/app.js" defer></script>
+</body>
+</html>

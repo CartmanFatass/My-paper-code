@@ -1,0 +1,16 @@
+{
+  "archive_path": "docs/external-review/directions/example-direction/a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
+  "archive_sha256": "3e121f2b5dc8ebd2785c7a7b0d56da7044721307661368d0093755fa0883d74b",
+  "commitment_state": "COMMITTED",
+  "direction_id": "example-direction",
+  "evidence_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "idempotency_key": "fixture-idempotency",
+  "operation_id": "fixture-operation",
+  "prompt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+  "question_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "request_fingerprint": "4444444444444444444444444444444444444444444444444444444444444444",
+  "round_id": "a2604c701f39adec08f5",
+  "provider": "chatgpt",
+  "session_id": "fixture-conversation",
+  "stable_key": "fixture-stable"
+}

@@ -1,0 +1,29 @@
+{
+  "artifact_refs": [],
+  "assignment_id": "research-round-1",
+  "changed_paths": [],
+  "checkpoint_sha": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "decision_requests": [],
+  "generation": 3,
+  "logical_identity": "EM-example-direction",
+  "materiality": "DIRECTION",
+  "next_action": null,
+  "payload": {
+    "conclusion_refs": [
+      {
+        "path": "docs/research/candidates/example-direction/DIRECTION.md",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "direction_id": "example-direction",
+    "evidence_set_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "engineering_request_ref": null,
+    "kind": "em",
+    "question_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "role": "hmasd-em",
+  "schema_version": 1,
+  "state_refs": [],
+  "status": "COMPLETED",
+  "summary": "Late result from a superseded generation."
+}

@@ -1,0 +1,739 @@
+{
+  "directions": [
+    {
+      "abbreviation": "APFI",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMActivePostChurnPopulationFlowIdentification",
+        "logical_identity": "EM-active_post_churn_population_flow_identification",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/active_post_churn_population_flow_identification/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/active_post_churn_population_flow_identification/workflow/external-review/index.json",
+      "id": "active_post_churn_population_flow_identification",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/active_post_churn_population_flow_identification",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/active_post_churn_population_flow_identification/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "ACVC",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMAcvc",
+        "logical_identity": "EM-acvc",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/acvc/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/acvc/workflow/external-review/index.json",
+      "id": "acvc",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/acvc",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/acvc/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "CRTO",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMCommitmentResidualTriggeredOptions",
+        "logical_identity": "EM-commitment_residual_triggered_options",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/commitment_residual_triggered_options/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/commitment_residual_triggered_options/workflow/external-review/index.json",
+      "id": "commitment_residual_triggered_options",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/commitment_residual_triggered_options",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/commitment_residual_triggered_options/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "CCIC",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMCovarianceCalibratedInformationClock",
+        "logical_identity": "EM-covariance_calibrated_information_clock",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/covariance_calibrated_information_clock/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/covariance_calibrated_information_clock/workflow/external-review/index.json",
+      "id": "covariance_calibrated_information_clock",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/covariance_calibrated_information_clock",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/covariance_calibrated_information_clock/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "DISH",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMDegradedIncumbentShadowHandover",
+        "logical_identity": "EM-degraded_incumbent_shadow_handover",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/external-review/index.json",
+      "id": "degraded_incumbent_shadow_handover",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "DEARS",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMDualEpochReceiptSurvival",
+        "logical_identity": "EM-dual_epoch_receipt_survival",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/external-review/index.json",
+      "id": "dual_epoch_receipt_survival",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/dual_epoch_receipt_survival",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "EC4G",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMEc4gR1",
+        "logical_identity": "EM-ec4g_r1",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/ec4g_r1/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/ec4g_r1/workflow/external-review/index.json",
+      "id": "ec4g_r1",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/ec4g_r1",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/ec4g_r1/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "EOCIVLITE",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMEocivLite",
+        "logical_identity": "EM-eociv_lite",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/eociv_lite/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/eociv_lite/workflow/external-review/index.json",
+      "id": "eociv_lite",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/eociv_lite",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/eociv_lite/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "EBCR",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMEventTriggeredBudgetedCooperativeRenewal",
+        "logical_identity": "EM-event_triggered_budgeted_cooperative_renewal",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/workflow/external-review/index.json",
+      "id": "event_triggered_budgeted_cooperative_renewal",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "EGRR",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMExpressibilityGatedRenewalCreditRelay",
+        "logical_identity": "EM-expressibility_gated_renewal_credit_relay",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/external-review/index.json",
+      "id": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "FIELDSLOT",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMFieldSlotCoordination",
+        "logical_identity": "EM-field_slot_coordination",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/field_slot_coordination/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/field_slot_coordination/workflow/external-review/index.json",
+      "id": "field_slot_coordination",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/field_slot_coordination",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/field_slot_coordination/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "FSBS",
+      "agent": {
+        "generation": 2,
+        "job_name": "EMFiniteSemanticBoundarySupport",
+        "logical_identity": "EM-finite_semantic_boundary_support",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/external-review/index.json",
+      "id": "finite_semantic_boundary_support",
+      "lifecycle": "ACTIVE",
+      "lifecycle_decision_ref": {
+        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/finite_semantic_boundary_support",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "MGTAP",
+      "agent": {
+        "generation": 2,
+        "job_name": "EMMetricGroundTransportAllocation",
+        "logical_identity": "EM-metric_ground_transport_allocation",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/external-review/index.json",
+      "id": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "lifecycle_decision_ref": {
+        "heading": "MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/metric_ground_transport_allocation",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "ONLGR",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMOpportunityNormalizedLeaseGatedRebinding",
+        "logical_identity": "EM-opportunity_normalized_lease_gated_rebinding",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/external-review/index.json",
+      "id": "opportunity_normalized_lease_gated_rebinding",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "OEER",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMOptimizerEntropyExposureBoundaryRelay",
+        "logical_identity": "EM-optimizer_entropy_exposure_boundary_relay",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/workflow/external-review/index.json",
+      "id": "optimizer_entropy_exposure_boundary_relay",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "ORBITSHADOW",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMOrbitShadowRead",
+        "logical_identity": "EM-orbit_shadow_read",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/orbit_shadow_read/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/orbit_shadow_read/workflow/external-review/index.json",
+      "id": "orbit_shadow_read",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/orbit_shadow_read",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/orbit_shadow_read/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "RECCTLITE",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMRecctLite",
+        "logical_identity": "EM-recct_lite",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/recct_lite/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/recct_lite/workflow/external-review/index.json",
+      "id": "recct_lite",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/recct_lite",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/recct_lite/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "RISP",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMRenewalIndexedScorePlasticity",
+        "logical_identity": "EM-renewal_indexed_score_plasticity",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/renewal_indexed_score_plasticity/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/renewal_indexed_score_plasticity/workflow/external-review/index.json",
+      "id": "renewal_indexed_score_plasticity",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/renewal_indexed_score_plasticity",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/renewal_indexed_score_plasticity/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "RCLE",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMRosterConsistentLatentExploration",
+        "logical_identity": "EM-roster_consistent_latent_exploration",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/external-review/index.json",
+      "id": "roster_consistent_latent_exploration",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/roster_consistent_latent_exploration",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "ROSTERSMF",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMRosterSmf",
+        "logical_identity": "EM-roster_smf",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/roster_smf/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/roster_smf/workflow/external-review/index.json",
+      "id": "roster_smf",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/roster_smf",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/roster_smf/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "SCOPE1S",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMScope1s",
+        "logical_identity": "EM-scope_1s",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/scope_1s/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/scope_1s/workflow/external-review/index.json",
+      "id": "scope_1s",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/scope_1s",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/scope_1s/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "SGSP",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMSemanticGraphonSharedPolicy",
+        "logical_identity": "EM-semantic_graphon_shared_policy",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/external-review/index.json",
+      "id": "semantic_graphon_shared_policy",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/semantic_graphon_shared_policy",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "SCDMP",
+      "agent": {
+        "generation": 2,
+        "job_name": "EMSemigroupConsistentDurationModelPolicy",
+        "logical_identity": "EM-semigroup_consistent_duration_model_policy",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json",
+      "id": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "lifecycle_decision_ref": {
+        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "UCOPE",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMUcope",
+        "logical_identity": "EM-ucope",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/ucope/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/ucope/workflow/external-review/index.json",
+      "id": "ucope",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/ucope",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/ucope/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VAPFOLR",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVapFolrCore",
+        "logical_identity": "EM-vap_folr_core",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vap_folr_core/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vap_folr_core/workflow/external-review/index.json",
+      "id": "vap_folr_core",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vap_folr_core",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vap_folr_core/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VNFC",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVariableNFleetChurn",
+        "logical_identity": "EM-variable_n_fleet_churn",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/variable_n_fleet_churn/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
+      "id": "variable_n_fleet_churn",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/variable_n_fleet_churn",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/variable_n_fleet_churn/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VQFP",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVoronoiQuadratureFieldPolicy",
+        "logical_identity": "EM-voronoi_quadrature_field_policy",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
+      "id": "voronoi_quadrature_field_policy",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/voronoi_quadrature_field_policy",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSP02",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVsp02",
+        "logical_identity": "EM-vsp_02",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_02/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_02/workflow/external-review/index.json",
+      "id": "vsp_02",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_02",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_02/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSP03",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVsp03",
+        "logical_identity": "EM-vsp_03",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_03/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_03/workflow/external-review/index.json",
+      "id": "vsp_03",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_03",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_03/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSP04",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVsp04",
+        "logical_identity": "EM-vsp_04",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_04/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_04/workflow/external-review/index.json",
+      "id": "vsp_04",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_04",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_04/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSP05",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVsp05",
+        "logical_identity": "EM-vsp_05",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_05/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_05/workflow/external-review/index.json",
+      "id": "vsp_05",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_05",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_05/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSP06MSSR",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVsp06Mssr",
+        "logical_identity": "EM-vsp_06_mssr",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_06_mssr/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_06_mssr/workflow/external-review/index.json",
+      "id": "vsp_06_mssr",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_06_mssr",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_06_mssr/workflow/research/state.json"
+    },
+    {
+      "abbreviation": "VSPC1",
+      "agent": {
+        "generation": 1,
+        "job_name": "EMVspC1",
+        "logical_identity": "EM-vsp_c1",
+        "runtime_ref": null
+      },
+      "dependencies": [],
+      "engineering_state_path": "docs/research/candidates/vsp_c1/workflow/engineering/state.json",
+      "external_review_index_path": "docs/research/candidates/vsp_c1/workflow/external-review/index.json",
+      "id": "vsp_c1",
+      "lifecycle": "REGISTERED",
+      "lifecycle_decision_ref": {
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+      },
+      "path": "docs/research/candidates/vsp_c1",
+      "reactivation_condition_ref": null,
+      "research_state_path": "docs/research/candidates/vsp_c1/workflow/research/state.json"
+    }
+  ],
+  "goal": {
+    "path": "docs/research/portfolio/PORTFOLIO.md",
+    "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+  },
+  "revision": 4,
+  "schema_version": 1,
+  "updated_at": "2026-08-25T05:37:47Z",
+  "workflow_version": "hmasd-autonomous-v1",
+  "writer": "Portfolio"
+}

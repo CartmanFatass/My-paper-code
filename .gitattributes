@@ -1,0 +1,18 @@
+# Byte-addressed workflow authorities. Existing historical artifacts keep their
+# repository representation; only active structural authorities and adapters
+# receive an explicit cross-host checkout contract.
+/docs/research/portfolio/** text eol=lf
+/docs/research/candidates/**/DIRECTION.md text eol=lf
+/docs/research/candidates/**/workflow/**/*.json text eol=lf
+/docs/external-review/directions/** text eol=lf
+/tests/fixtures/hmasd_external_review/*.json text eol=lf
+/tests/fixtures/hmasd_external_review/prompts/*.md text eol=lf
+/tests/fixtures/hmasd_phase0/*.json text eol=lf
+/.codex/** text eol=lf
+/.agents/** text eol=lf
+/AGENTS.md text eol=lf
+/CONTEXT.md text eol=lf
+/scripts/hmasd_*.py text eol=lf
+/scripts/schemas/hmasd_*.schema.json text eol=lf
+/tests/hmasd_*.py text eol=lf
+/docs/migration/*.md text eol=lf

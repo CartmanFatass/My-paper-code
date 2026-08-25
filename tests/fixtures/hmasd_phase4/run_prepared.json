@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "writer": "Operator-fixture-run",
+  "run_id": "fixture-run",
+  "direction_id": "fixture-direction",
+  "assignment_id": "fixture-assignment",
+  "operator_identity": "Operator-fixture-run",
+  "status": "PREPARED",
+  "command": ["python3", "-c", "print('fixture')"],
+  "command_sha256": "8b62b3069228bdf6f7eb890dcf2e5a3a52bfc46dc26295df8e1b28389d6a16b8",
+  "claim_sha256": "4441732227a5571a3b4e1edbe53e3e0f5e37e940b17253912a9d381a5054e47f",
+  "cwd": "/home/fires/hmasd",
+  "parameters": {"seed": 7},
+  "parameters_sha256": "beced1fe696351bb996169a4f1987ca19b5f52f37c7ef3071f9c044cf3580bfc",
+  "code_sha": "3333333333333333333333333333333333333333",
+  "environment": {
+    "python": "3.12",
+    "platform": "linux",
+    "hostname": "fixture-host",
+    "captured_variables": {}
+  },
+  "estimate": {
+    "wall_seconds": 7200,
+    "basis": "fixture",
+    "peak_memory_gib": 0.01
+  },
+  "resources": {
+    "preflight_ref": "preflight.json",
+    "preflight_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "runner_spec_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "workers": 1,
+    "threads_per_worker": 1,
+    "memory_safe": true
+  },
+  "process": {
+    "execution_token": null,
+    "pid": null,
+    "process_group_id": null,
+    "linux_boot_id": null,
+    "proc_start_ticks": null,
+    "identity_persisted_at": null,
+    "group_quiescent": null,
+    "started_at": null,
+    "ended_at": null,
+    "exit_code": null,
+    "terminal_reason": null
+  },
+  "outputs": {
+    "stdout": "stdout.log",
+    "stderr": "stderr.log",
+    "checkpoints": "checkpoints",
+    "metrics": "metrics",
+    "artifacts": "artifacts"
+  },
+  "observed_metrics": {},
+  "created_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-24T00:00:00Z"
+}
