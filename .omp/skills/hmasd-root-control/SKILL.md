@@ -62,10 +62,26 @@ absolute worktree paths, and local tab mappings remain in ignored runtime state.
 7. Keep the task tree at two subagent levels: Root → EM/CM → specialist. EM and
    CM are the only project spawn-capable managers; specialists are leaves.
    Ordinary worker target is 28, preserving four Root/review/recovery slots.
-8. Wait on Hub completion, process exit, an observed file change, or one bounded
-   reassessment. Never continuously poll or create a successor merely because
-   an observation is delayed. Apply one safe recovery route when needed.
-9. Stop only at `IDLE`, `COMPLETE`, an explicit user decision request, or an
+8. Treat a completed research or engineering round, accepted-result promotion,
+   terminal-run evidence promotion, external prompt/archive readiness,
+   Portfolio lifecycle change, or schema migration as a material checkpoint.
+   The trigger is event-driven, not a timer or recurring poller.
+   Before dispatching work that consumes it or stopping Root, validate every
+   changed path, stage only Root-owned authority paths and assignment-owned
+   paths named by settled envelopes, commit the checkpoint, and attempt its
+   push to `omp/workflow`. Never use `git add -A` for automatic checkpoints;
+   leave unrelated changes unstaged and return a conflict when one path mixes
+   ownership. Exclude runtime maps, raw runs, generated logs, secrets, and
+   unverified source.
+9. Fetch and compare the remote tip before a checkpoint push. Reconcile an
+   unknown push outcome by fetching before retry. Ordinary intermediate events
+   may batch into the next checkpoint, but no completed material checkpoint may
+   cross a Root wake-cycle boundary uncommitted.
+10. Wait on Hub completion, process exit, an observed file change, or one
+   bounded reassessment. Never continuously poll or create a successor merely
+   because an observation is delayed. Apply one safe recovery route when
+   needed.
+11. Stop only at `IDLE`, `COMPLETE`, an explicit user decision request, or an
    exhausted safe recovery result.
 
 The cycle has one reconciliation pass and at most one bounded reassessment per

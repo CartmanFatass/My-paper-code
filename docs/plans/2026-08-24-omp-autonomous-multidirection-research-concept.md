@@ -578,15 +578,25 @@ A conflict-free, path-compliant change may integrate automatically. Conflict,
 stale base, or out-of-scope paths return to Root. Git operations on
 `omp/workflow` do not require user approval. Other branches do.
 
-Root commits and pushes at material checkpoints:
+Root commits and pushes at event-driven material checkpoints:
 
 - research or engineering round completion;
 - accepted result promotion;
 - run terminal evidence promotion;
 - external-review prompt or archive readiness;
-- material direction/portfolio lifecycle change.
+- material direction/portfolio lifecycle change; and
+- schema migration.
 
-Intermediate ordinary events batch into the next checkpoint.
+This is not a timer or background poller. Before a dependent dispatch or Root
+stop, Root validates the exact changed paths, stages only Root-owned authority
+paths and assignment-owned paths named by settled envelopes, commits locally,
+and attempts the push to `omp/workflow`. `git add -A` is forbidden for automatic
+checkpoints. Unrelated user changes remain unstaged; runtime maps, raw runs,
+generated logs, secrets, and unverified source never enter a checkpoint.
+Ordinary intermediate events may batch, but no completed material checkpoint
+crosses a Root wake-cycle boundary uncommitted. Root fetches and compares the
+remote tip before push; unknown push outcome is fetched and reconciled before
+any retry.
 
 ## External scientific review
 

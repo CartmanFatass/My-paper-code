@@ -400,6 +400,45 @@ def test_seven_complete_skills_and_authority_files() -> None:
     assert "WATCHDOG.yml" not in watchdog
 
 
+def test_root_material_checkpoints_are_event_driven_scoped_and_pushed() -> None:
+    instructions = (REPO_ROOT / ".omp" / "AGENTS.md").read_text(encoding="utf-8")
+    root_skill = (
+        REPO_ROOT / ".omp" / "skills" / "hmasd-root-control" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    concept = (
+        REPO_ROOT
+        / "docs"
+        / "plans"
+        / "2026-08-24-omp-autonomous-multidirection-research-concept.md"
+    ).read_text(encoding="utf-8")
+    implementation = (
+        REPO_ROOT
+        / "docs"
+        / "plans"
+        / "2026-08-24-omp-autonomous-multidirection-research-implementation.md"
+    ).read_text(encoding="utf-8")
+
+    for text in (instructions, root_skill, concept, implementation):
+        lowered = text.lower()
+        assert "event-driven" in lowered
+        assert "git add -a" in lowered
+        assert "unrelated" in lowered
+        assert "uncommitted" in lowered
+        assert "fetch" in lowered
+        assert "unknown push" in lowered
+        assert "omp/workflow" in lowered
+
+    for trigger in (
+        "research or engineering round",
+        "accepted-result promotion",
+        "terminal-run evidence",
+        "external prompt/archive readiness",
+        "portfolio lifecycle change",
+        "schema migration",
+    ):
+        assert trigger in root_skill.lower()
+
+
 def test_headless_advisor_boundary_is_deleted() -> None:
     assert not (REPO_ROOT / "scripts" / "run_hmasd_advisor.py").exists()
     assert not (REPO_ROOT / "tests" / "run_hmasd_advisor_test.py").exists()

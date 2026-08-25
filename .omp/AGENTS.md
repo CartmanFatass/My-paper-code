@@ -71,6 +71,20 @@ project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
   registry revision, logical manager/job generations, run terminal states,
   external round references, worktree references, exact blockers, and the
   Dashboard URL when running. The summary is derived evidence, never state.
+- Material checkpoints are event-driven, not timer-driven: completed research
+  or engineering rounds, accepted-result promotion, terminal-run evidence
+  promotion, external prompt/archive readiness, Portfolio lifecycle changes,
+  and schema migrations. Before a dependent dispatch or any Root stop, Root
+  commits the checkpoint and attempts its push to `omp/workflow`; no completed
+  checkpoint may cross a Root wake-cycle boundary uncommitted.
+- Root stages only validated Root-owned authority paths and assignment-owned
+  paths named by settled envelopes. `git add -A` is forbidden for automatic
+  checkpoints. Unrelated user changes remain unstaged; mixed ownership in one
+  path is a conflict. Runtime maps, raw runs, generated logs, secrets, and
+  unverified source are never checkpoint content.
+- Before pushing, Root fetches and compares the remote tip. An unknown push
+  outcome is reconciled by fetching before any retry; it is never blindly
+  pushed again or merged into a later checkpoint.
 - Agents skip formatters, linters, project-wide tests, and unrelated
   validation unless their exact assignment says otherwise. Root performs
   unified validation after integration.

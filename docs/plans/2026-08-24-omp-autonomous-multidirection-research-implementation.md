@@ -1321,13 +1321,22 @@ Material checkpoints are:
 - accepted result promotion;
 - terminal run evidence promotion;
 - external prompt/archive readiness;
-- direction lifecycle create/activate/park/merge/close/reactivate;
+- direction lifecycle create/activate/park/merge/close/reactivate; and
 - schema migration.
 
-Intermediate state updates batch into the next checkpoint. A checkpoint commit
-contains the authoritative Markdown and small JSON it changes, not local
-runtime state or raw run output. Root fetches before push and compares the
-remote SHA; an unknown push outcome is reconciled before retry.
+The trigger is event-driven, never a timer or recurring model poller. Before a
+dependent dispatch or Root stop, Root validates every changed path, stages only
+Root-owned authority paths and assignment-owned paths named by settled
+envelopes, commits the checkpoint locally, and attempts its push to
+`omp/workflow`. Automatic checkpointing must never use `git add -A`. Unrelated
+user changes remain unstaged; a path containing mixed ownership is a conflict.
+Checkpoint content excludes ignored runtime state, raw runs, generated logs,
+secrets, and unverified source.
+
+Intermediate state updates may batch into the next checkpoint, but no completed
+material checkpoint may cross a Root wake-cycle boundary uncommitted. Root
+fetches before push and compares the remote SHA; an unknown push outcome is
+reconciled before retry and never folded blindly into a later checkpoint.
 
 ## 16. Recovery matrix
 
