@@ -235,7 +235,6 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
     identities = (
         "Root",
         "hmasd-git-integration",
-        "Portfolio",
         "EM-example-direction",
         "CM-example-direction",
         "hmasd-project-scout",

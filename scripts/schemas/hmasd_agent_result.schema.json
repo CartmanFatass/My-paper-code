@@ -25,7 +25,7 @@
     "schema_version": { "type": "integer", "const": 1 },
     "role": {
       "type": "string",
-      "pattern": "^(?:root|librarian|hmasd-(?:portfolio|em|cm|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager))$"
+      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager))$"
     },
     "logical_identity": { "$ref": "#/$defs/logical_identity" },
     "generation": { "type": "integer", "minimum": 1 },
@@ -66,7 +66,7 @@
   "$defs": {
     "logical_identity": {
       "type": "string",
-      "pattern": "^(?:Root|Portfolio|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$"
+      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$"
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },

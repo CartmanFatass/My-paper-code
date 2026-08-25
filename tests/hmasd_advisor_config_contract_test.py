@@ -9,7 +9,7 @@ EXPECTED_CONFIG = """modelRoles:
   advisor: opencode-go/glm-5.3:high
 
 advisor:
-  enabled: true
+  enabled: false
 
 autoResume: true
 
@@ -21,13 +21,10 @@ launch:
 
 task:
   maxConcurrency: 32
-  maxRecursionDepth: 3
+  maxRecursionDepth: 2
   enableEffort: true
   enableLsp: true
   agentAdvisor:
-    hmasd-portfolio: openai-codex/gpt-5.6-sol:high
-    hmasd-em: openai-codex/gpt-5.6-sol:high
-    hmasd-cm: opencode-go/glm-5.3:high
     hmasd-implementer: opencode-go/glm-5.3:high
     hmasd-implementer-terra: opencode-go/glm-5.3:high
   disabledAgents:
@@ -39,14 +36,14 @@ task:
 """
 
 EXPECTED_ADVISORS = {
-    "hmasd-portfolio": "openai-codex/gpt-5.6-sol:high",
-    "hmasd-em": "openai-codex/gpt-5.6-sol:high",
-    "hmasd-cm": "opencode-go/glm-5.3:high",
     "hmasd-implementer": "opencode-go/glm-5.3:high",
     "hmasd-implementer-terra": "opencode-go/glm-5.3:high",
 }
 
+
 EXPECTED_NO_ADVISOR = {
+    "hmasd-em",
+    "hmasd-cm",
     "hmasd-project-scout",
     "hmasd-code-scout",
     "hmasd-reviewer",
@@ -90,11 +87,9 @@ def test_project_config_matches_phase_one_exactly() -> None:
 def test_watchdog_routes_by_primary_role_without_authority() -> None:
     watchdog = (REPO_ROOT / ".omp" / "WATCHDOG.md").read_text(encoding="utf-8")
     expected_routes = (
-        "Root                         -> architecture",
-        "hmasd-portfolio, hmasd-em    -> science",
-        "hmasd-cm                     -> architecture + engineering",
+        "Root, hmasd-em, hmasd-cm     -> no Advisor",
         "hmasd-implementer,\nhmasd-implementer-terra      -> engineering",
-        "all other roles              -> no advice",
+        "all other roles              -> no Advisor",
     )
     for route in expected_routes:
         assert route in watchdog
@@ -109,7 +104,7 @@ def test_watchdog_routes_by_primary_role_without_authority() -> None:
 def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
     assert _agent_advisor_mapping(config) == EXPECTED_ADVISORS
-    assert "modelRoles:\n  advisor: opencode-go/glm-5.3:high" in config
+    assert "advisor:\n  enabled: false" in config
 
     agent_dir = REPO_ROOT / ".omp" / "agents"
     project_agents = {path.stem for path in agent_dir.glob("*.md")}
@@ -122,9 +117,7 @@ def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
     instructions = (REPO_ROOT / ".omp" / "AGENTS.md").read_text(encoding="utf-8")
     watchdog = (REPO_ROOT / ".omp" / "WATCHDOG.md").read_text(encoding="utf-8")
     assert "task.agentAdvisor[agentName]" in watchdog
-    assert "`session_init`" in instructions
     assert "`session_init`" in watchdog
-    assert "cold revival" in instructions.lower()
     assert "cold revival" in watchdog.lower()
     assert "not a direct mutation of an already running Hub job by job ID" in watchdog
     assert "newly resolved child session rather than\nan in-place mutation" in watchdog

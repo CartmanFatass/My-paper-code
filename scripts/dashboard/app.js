@@ -143,14 +143,17 @@
     const rows = agents.map((agent) => [
       cell(agent.logical_identity, "strong"),
       agent.agent_type,
+      agent.parent_identity || "—",
+      agent.direction_id || "—",
       agent.job_name,
       badge(String(agent.lifecycle || "unknown").toLowerCase()),
+      agent.phase || "—",
       agent.generation,
       agent.last_seen_at || "—",
     ]);
     const node = document.createDocumentFragment();
-    node.appendChild(heading("Agents", "Logical identities and runtime lifecycle; inspect detail in Agent Hub", current.status));
-    node.appendChild(table(["Logical identity", "Type", "Job", "Lifecycle", "Generation", "Last seen"], rows, "No logical agents are currently visible."));
+    node.appendChild(heading("Agents", "Direct Root → EM/CM ownership and runtime lifecycle; inspect detail in Agent Hub", current.status));
+    node.appendChild(table(["Logical identity", "Type", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No logical agents are currently visible."));
     view.replaceChildren(node);
   }
 

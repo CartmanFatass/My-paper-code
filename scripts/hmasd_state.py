@@ -539,8 +539,8 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
         if role != "hmasd-git-integration" or identity != "Root":
             raise OwnershipError("Git integration result must be owned by Root")
     elif payload_kind == "portfolio":
-        if role != "hmasd-portfolio" or identity != "Portfolio":
-            raise OwnershipError("portfolio result must be owned by Portfolio")
+        if role != "root" or identity != "Root":
+            raise OwnershipError("portfolio result must be owned by Root")
     elif payload_kind == "em":
         if role != "hmasd-em" or identity != f"EM-{payload['direction_id']}":
             raise OwnershipError("EM result does not match its direction manager")

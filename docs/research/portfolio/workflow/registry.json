@@ -14,9 +14,9 @@
       "id": "active_post_churn_population_flow_identification",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction active_post_churn_population_flow_identification",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/active_post_churn_population_flow_identification",
       "reactivation_condition_ref": null,
@@ -36,9 +36,9 @@
       "id": "acvc",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction acvc",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/acvc",
       "reactivation_condition_ref": null,
@@ -58,9 +58,9 @@
       "id": "commitment_residual_triggered_options",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction commitment_residual_triggered_options",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/commitment_residual_triggered_options",
       "reactivation_condition_ref": null,
@@ -80,9 +80,9 @@
       "id": "covariance_calibrated_information_clock",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction covariance_calibrated_information_clock",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/covariance_calibrated_information_clock",
       "reactivation_condition_ref": null,
@@ -102,9 +102,9 @@
       "id": "degraded_incumbent_shadow_handover",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction degraded_incumbent_shadow_handover",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/degraded_incumbent_shadow_handover",
       "reactivation_condition_ref": null,
@@ -124,9 +124,9 @@
       "id": "dual_epoch_receipt_survival",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction dual_epoch_receipt_survival",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/dual_epoch_receipt_survival",
       "reactivation_condition_ref": null,
@@ -146,9 +146,9 @@
       "id": "ec4g_r1",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction ec4g_r1",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/ec4g_r1",
       "reactivation_condition_ref": null,
@@ -168,9 +168,9 @@
       "id": "eociv_lite",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction eociv_lite",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/eociv_lite",
       "reactivation_condition_ref": null,
@@ -190,9 +190,9 @@
       "id": "event_triggered_budgeted_cooperative_renewal",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction event_triggered_budgeted_cooperative_renewal",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal",
       "reactivation_condition_ref": null,
@@ -212,9 +212,9 @@
       "id": "expressibility_gated_renewal_credit_relay",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction expressibility_gated_renewal_credit_relay",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay",
       "reactivation_condition_ref": null,
@@ -234,9 +234,9 @@
       "id": "field_slot_coordination",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction field_slot_coordination",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/field_slot_coordination",
       "reactivation_condition_ref": null,
@@ -245,7 +245,7 @@
     {
       "abbreviation": "FSBS",
       "agent": {
-        "generation": 1,
+        "generation": 2,
         "job_name": "EMFiniteSemanticBoundarySupport",
         "logical_identity": "EM-finite_semantic_boundary_support",
         "runtime_ref": null
@@ -254,11 +254,11 @@
       "engineering_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/external-review/index.json",
       "id": "finite_semantic_boundary_support",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Direction finite_semantic_boundary_support",
+        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/finite_semantic_boundary_support",
       "reactivation_condition_ref": null,
@@ -267,7 +267,7 @@
     {
       "abbreviation": "MGTAP",
       "agent": {
-        "generation": 1,
+        "generation": 2,
         "job_name": "EMMetricGroundTransportAllocation",
         "logical_identity": "EM-metric_ground_transport_allocation",
         "runtime_ref": null
@@ -276,11 +276,11 @@
       "engineering_state_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/external-review/index.json",
       "id": "metric_ground_transport_allocation",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Direction metric_ground_transport_allocation",
+        "heading": "MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/metric_ground_transport_allocation",
       "reactivation_condition_ref": null,
@@ -300,9 +300,9 @@
       "id": "opportunity_normalized_lease_gated_rebinding",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction opportunity_normalized_lease_gated_rebinding",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding",
       "reactivation_condition_ref": null,
@@ -322,9 +322,9 @@
       "id": "optimizer_entropy_exposure_boundary_relay",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction optimizer_entropy_exposure_boundary_relay",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay",
       "reactivation_condition_ref": null,
@@ -344,9 +344,9 @@
       "id": "orbit_shadow_read",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction orbit_shadow_read",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/orbit_shadow_read",
       "reactivation_condition_ref": null,
@@ -366,9 +366,9 @@
       "id": "recct_lite",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction recct_lite",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/recct_lite",
       "reactivation_condition_ref": null,
@@ -388,9 +388,9 @@
       "id": "renewal_indexed_score_plasticity",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction renewal_indexed_score_plasticity",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/renewal_indexed_score_plasticity",
       "reactivation_condition_ref": null,
@@ -410,9 +410,9 @@
       "id": "roster_consistent_latent_exploration",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction roster_consistent_latent_exploration",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/roster_consistent_latent_exploration",
       "reactivation_condition_ref": null,
@@ -432,9 +432,9 @@
       "id": "roster_smf",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction roster_smf",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/roster_smf",
       "reactivation_condition_ref": null,
@@ -454,9 +454,9 @@
       "id": "scope_1s",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction scope_1s",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/scope_1s",
       "reactivation_condition_ref": null,
@@ -476,9 +476,9 @@
       "id": "semantic_graphon_shared_policy",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction semantic_graphon_shared_policy",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/semantic_graphon_shared_policy",
       "reactivation_condition_ref": null,
@@ -487,7 +487,7 @@
     {
       "abbreviation": "SCDMP",
       "agent": {
-        "generation": 1,
+        "generation": 2,
         "job_name": "EMSemigroupConsistentDurationModelPolicy",
         "logical_identity": "EM-semigroup_consistent_duration_model_policy",
         "runtime_ref": null
@@ -496,11 +496,11 @@
       "engineering_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json",
       "id": "semigroup_consistent_duration_model_policy",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Direction semigroup_consistent_duration_model_policy",
+        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/semigroup_consistent_duration_model_policy",
       "reactivation_condition_ref": null,
@@ -520,9 +520,9 @@
       "id": "ucope",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction ucope",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/ucope",
       "reactivation_condition_ref": null,
@@ -542,9 +542,9 @@
       "id": "vap_folr_core",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vap_folr_core",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vap_folr_core",
       "reactivation_condition_ref": null,
@@ -564,9 +564,9 @@
       "id": "variable_n_fleet_churn",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction variable_n_fleet_churn",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/variable_n_fleet_churn",
       "reactivation_condition_ref": null,
@@ -586,9 +586,9 @@
       "id": "voronoi_quadrature_field_policy",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction voronoi_quadrature_field_policy",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/voronoi_quadrature_field_policy",
       "reactivation_condition_ref": null,
@@ -608,9 +608,9 @@
       "id": "vsp_02",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_02",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_02",
       "reactivation_condition_ref": null,
@@ -630,9 +630,9 @@
       "id": "vsp_03",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_03",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_03",
       "reactivation_condition_ref": null,
@@ -652,9 +652,9 @@
       "id": "vsp_04",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_04",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_04",
       "reactivation_condition_ref": null,
@@ -674,9 +674,9 @@
       "id": "vsp_05",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_05",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_05",
       "reactivation_condition_ref": null,
@@ -696,9 +696,9 @@
       "id": "vsp_06_mssr",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_06_mssr",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_06_mssr",
       "reactivation_condition_ref": null,
@@ -718,9 +718,9 @@
       "id": "vsp_c1",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Direction vsp_c1",
+        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
       },
       "path": "docs/research/candidates/vsp_c1",
       "reactivation_condition_ref": null,
@@ -729,11 +729,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "0f3e9b90104d259d8234fe35b248f3d92b5868e2149de602ca91c945b41ae32b"
+    "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
   },
-  "revision": 1,
+  "revision": 4,
   "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-25T05:37:47Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }

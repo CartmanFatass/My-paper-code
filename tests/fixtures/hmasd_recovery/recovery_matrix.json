@@ -108,7 +108,7 @@
     "expected_agent": {
       "generation": 1,
       "logical_identity": "EM-example-direction",
-      "parent_identity": "Portfolio"
+      "parent_identity": "Root"
     },
     "expected_worktree": {
       "assignment_id": "run-example",

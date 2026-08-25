@@ -66,6 +66,37 @@ def test_valid_phase0_fixtures_validate() -> None:
         result = run_cli("validate", "--kind", kind, "--path", str(path))
         assert result.returncode == 0, (kind, result.stderr)
 
+def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:
+    document = fixture("agent_result")
+    document.update(
+        {
+            "assignment_id": "root-portfolio-wake",
+            "logical_identity": "Root",
+            "materiality": "PORTFOLIO",
+            "payload": {
+                "kind": "portfolio",
+                "direction_actions": [],
+                "portfolio_ref": {
+                    "path": "docs/research/portfolio/PORTFOLIO.md",
+                    "sha256": "a" * 64,
+                },
+                "registry_revision": 1,
+            },
+            "role": "root",
+            "summary": "Root reconciled portfolio lifecycle.",
+        }
+    )
+    path = tmp_path / "root-portfolio.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    document["role"] = "hmasd-portfolio"
+    document["logical_identity"] = "Portfolio"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
 
 def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(
     tmp_path: Path,

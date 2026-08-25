@@ -709,8 +709,6 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
 def _agent_type(logical_identity: str) -> str:
     if logical_identity == "Root":
         return "hmasd-root"
-    if logical_identity == "Portfolio":
-        return "hmasd-portfolio"
     if logical_identity.startswith("EM-"):
         return "hmasd-em"
     if logical_identity.startswith("CM-"):
@@ -734,13 +732,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             "generation": 1,
             "lifecycle": "ACTIVE",
             "job_name": "Root",
-        },
-        "Portfolio": {
-            "logical_identity": "Portfolio",
-            "agent_type": "hmasd-portfolio",
-            "generation": 1,
-            "lifecycle": "ACTIVE",
-            "job_name": "Portfolio",
+            "parent_identity": "Root",
         },
     }
     if registry_doc.status == "ok" and registry_doc.value is not None:
@@ -759,15 +751,42 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                     "generation": generation,
                     "lifecycle": item.get("lifecycle", "UNKNOWN"),
                     "job_name": agent.get("job_name", identity),
+                    "parent_identity": "Root",
+                    "direction_id": identifier,
                 }
-            cm_identity = f"CM-{identifier}"
-            logical[cm_identity] = {
-                "logical_identity": cm_identity,
-                "agent_type": "hmasd-cm",
-                "generation": generation,
-                "lifecycle": item.get("lifecycle", "UNKNOWN"),
-                "job_name": _manager_job_name("CM", identifier),
-            }
+
+            engineering_ref = item.get("engineering_state_path")
+            if not isinstance(engineering_ref, str):
+                statuses.append("invalid")
+                _warning_add(warnings, f"invalid:{identifier}:engineering_state_path")
+                continue
+            engineering = sources.read_document(engineering_ref, "engineering_state")
+            generated_values.append(engineering.updated_at)
+            if engineering.revision is not None:
+                refs[f"engineering_state:{identifier}"] = engineering.revision
+            if engineering.status != "ok" or engineering.value is None:
+                statuses.append(engineering.status)
+                _warning_add(warnings, engineering.warning)
+                continue
+            phase = engineering.value.get("phase")
+            active_agents = engineering.value.get("active_agents")
+            cm_expected = (
+                phase != "UNREQUESTED"
+                or engineering.value.get("actionable") is True
+                or isinstance(active_agents, list) and bool(active_agents)
+            )
+            if cm_expected:
+                cm_identity = f"CM-{identifier}"
+                logical[cm_identity] = {
+                    "logical_identity": cm_identity,
+                    "agent_type": "hmasd-cm",
+                    "generation": generation,
+                    "lifecycle": phase if isinstance(phase, str) else "UNKNOWN",
+                    "job_name": _manager_job_name("CM", identifier),
+                    "parent_identity": "Root",
+                    "direction_id": identifier,
+                    "phase": phase if isinstance(phase, str) else "UNKNOWN",
+                }
     else:
         statuses.append(registry_doc.status)
         _warning_add(warnings, registry_doc.warning)
@@ -814,11 +833,17 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             elif expected_generation != observed_generation:
                 statuses.append("stale")
                 _warning_add(warnings, f"stale:agent_generation:{identity}")
+            expected_parent = entry.get("parent_identity")
+            observed_parent = item.get("parent_identity")
+            if not runtime_only and expected_parent != observed_parent:
+                statuses.append("stale")
+                _warning_add(warnings, f"stale:agent_parent:{identity}")
             for source, target in (
                 ("agent_type", "agent_type"),
                 ("generation", "generation"),
                 ("lifecycle", "lifecycle"),
                 ("job_ref", "job_name"),
+                ("parent_identity", "parent_identity"),
                 ("last_seen_at", "last_seen_at"),
             ):
                 if source in item and isinstance(item[source], (str, int)):
@@ -829,7 +854,17 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
         entry = logical[identity]
         output = {
             key: entry[key]
-            for key in ("logical_identity", "agent_type", "generation", "lifecycle", "job_name", "last_seen_at")
+            for key in (
+                "logical_identity",
+                "agent_type",
+                "parent_identity",
+                "direction_id",
+                "generation",
+                "lifecycle",
+                "phase",
+                "job_name",
+                "last_seen_at",
+            )
             if key in entry and isinstance(entry[key], (str, int))
         }
         output["hub_instruction"] = f"Inspect {identity} in Agent Hub via /agents."

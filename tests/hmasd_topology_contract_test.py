@@ -12,27 +12,6 @@ FrontmatterValue = str | list[str]
 
 
 EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
-    "hmasd-portfolio": {
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "max",
-        "tools": ["read", "write", "edit", "grep", "glob", "task", "hub"],
-        "spawns": [
-            "hmasd-em",
-            "hmasd-research-scout",
-            "hmasd-research-innovator",
-            "hmasd-research-critic",
-            "hmasd-research-principles-analyst",
-            "hmasd-research-artifact-writer",
-            "hmasd-code-scout",
-            "hmasd-external-pro-transport",
-            "hmasd-external-gemini-transport",
-            "librarian",
-        ],
-        "autoloadSkills": [
-            "hmasd-portfolio-control",
-            "hmasd-scientific-external-review",
-        ],
-    },
     "hmasd-em": {
         "model": "openai-codex/gpt-5.6-sol",
         "thinking-level": "max",
@@ -210,6 +189,7 @@ LEGACY_ACTIVE_NAMES = (
     "hmasd-code-project-manager",
     "hmasd-explorer-agentify-transport",
     "hmasd-cpm-agentify-transport",
+    "hmasd-portfolio",
 )
 
 
@@ -256,7 +236,7 @@ def _list_field(metadata: dict[str, FrontmatterValue], key: str) -> list[str]:
 def test_exact_project_agent_inventory_and_frontmatter() -> None:
     paths = sorted(AGENT_ROOT.glob("*.md"))
     assert {path.stem for path in paths} == set(EXPECTED_AGENTS)
-    assert len(paths) == 18
+    assert len(paths) == 17
     for path in paths:
         metadata = _parse_frontmatter(path)
         expected = EXPECTED_AGENTS[path.stem]
@@ -279,17 +259,16 @@ def test_exact_project_agent_inventory_and_frontmatter() -> None:
             assert "read-summarize" not in metadata
 
 
-def test_depth_three_graph_and_leaf_specialists() -> None:
+def test_depth_two_graph_and_leaf_specialists() -> None:
     parsed = {
         name: _parse_frontmatter(AGENT_ROOT / f"{name}.md")
         for name in EXPECTED_AGENTS
     }
-    assert "hmasd-em" in _list_field(parsed["hmasd-portfolio"], "spawns")
     assert "hmasd-project-scout" in _list_field(parsed["hmasd-cm"], "spawns")
     assert _list_field(parsed["hmasd-em"], "spawns")
     for name, metadata in parsed.items():
         spawns = _list_field(metadata, "spawns")
-        if name not in {"hmasd-portfolio", "hmasd-em", "hmasd-cm"}:
+        if name not in {"hmasd-em", "hmasd-cm"}:
             assert spawns == [], name
         assert "task" not in spawns, name
         assert "hmasd-workflow-recovery-manager" not in spawns, name
@@ -324,17 +303,19 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     assert "bundled `scout`" not in instructions
 
 
-def test_eight_complete_skills_and_authority_files() -> None:
+def test_seven_complete_skills_and_authority_files() -> None:
     expected_anchors = {
         "hmasd-root-control": (
             "portfolio.md",
             ".omp/runtime",
-            "hub jobs",
             "bounded reassessment",
+            "2–8",
+            "zero",
+            "28",
+            "four root/review/recovery slots",
             "idle",
             "complete",
         ),
-        "hmasd-portfolio-control": ("2–8", "zero", "28", "four advisory slots"),
         "hmasd-em-direction-cycle": (
             "two specialists",
             "up to four",
@@ -390,7 +371,7 @@ def test_eight_complete_skills_and_authority_files() -> None:
     }
     skill_paths = sorted((REPO_ROOT / ".omp" / "skills").glob("*/SKILL.md"))
     assert {path.parent.name for path in skill_paths} == set(expected_anchors)
-    assert len(skill_paths) == 8
+    assert len(skill_paths) == 7
     for path in skill_paths:
         metadata = _parse_frontmatter(path)
         assert _string_field(metadata, "name") == path.parent.name

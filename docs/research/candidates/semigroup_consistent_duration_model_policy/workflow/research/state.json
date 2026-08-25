@@ -10,17 +10,34 @@
   },
   "engineering_request": null,
   "evidence_set_sha256": "32e66fc87a773ecbad4cb61887b073502c795a909b236e24dcc01e17c28445fa",
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+        "sha256": "52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_UAV_SUSPENDED_PAYLOAD_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260820.md",
+        "sha256": "eae6d39238a86269f9b7d8c67aaae20af796e53c0c893ea85cf93e3e6b29a78d"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md",
+        "sha256": "dab9e0ac46f6163140d6cb4886088b481b1dc36fdd1776d31ed9d5233b7cf6dd"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FUSION_IDENTITY_CROSSWALK_AND_DISCRIMINATOR_20260825.md",
+        "sha256": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be"
+      }
+    ],
+    "kind": "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP"
   },
-  "phase": "IDLE",
+  "phase": "COMPLETE",
   "question_sha256": "d035824e97cd047514d224000300b3ff19025d86707685441bba67b984912e75",
-  "registry_revision_seen": 1,
-  "revision": 1,
+  "registry_revision_seen": 4,
+  "revision": 3,
   "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-25T07:19:16.142591Z",
   "waiting_on": [],
   "writer": "EM-semigroup_consistent_duration_model_policy"
 }

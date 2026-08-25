@@ -2,25 +2,25 @@
 
 ## Metadata
 
-- Status: implementation-ready draft; this document does not itself authorize
-  workflow execution or code changes.
-- Date: 2026-08-24
+- Status: implemented; amended 2026-08-25 for Root-owned Portfolio control and
+  a two-level subagent tree.
+- Original date: 2026-08-24.
 - Owning concept:
-  `docs/plans/2026-08-24-omp-autonomous-multidirection-research-concept.md`
-- Existing implemented baseline: routed headless Advisors; Phase 1 replaces
-  them with per-agent-type continuous Advisors.
+  `docs/plans/2026-08-24-omp-autonomous-multidirection-research-concept.md`.
+- Root, EM, and CM continuous Advisors are disabled; only Implementer leaves
+  opt in, while deep-tree review uses explicit frozen checkpoint bundles.
 - Target integration branch: `omp/workflow`.
 
 ## 1. Outcome and acceptance boundary
 
 The implementation is complete when one resumed Root OMP session can:
 
-1. reconcile durable portfolio and direction state;
+1. reconcile durable portfolio and direction state directly in Root;
 2. maintain 2–8 active research directions without a fixed registration cap;
-3. revive bounded Portfolio, EM, and CM logical sessions instead of polling;
+3. revive bounded EM and CM logical sessions instead of polling;
 4. execute scientific research, engineering, local CPU runs, external review,
-   Git integration, recovery, and compact reporting through the declared agent
-   topology;
+   Git integration, recovery, and compact reporting through a two-level
+   subagent topology;
 5. preserve one authoritative source for every scientific, workflow, run,
    external-send, and Git fact;
 6. expose a read-only local Dashboard without making it a control surface; and
@@ -59,12 +59,12 @@ These decisions resolve ambiguities in the concept before implementation.
    are machine-local under ignored `.omp/runtime/` or `temp/`; tracked state
    stores logical references only.
 5. OMP has native `autoResume`, but no generic persistent-goal engine and no
-   post-compaction hook. Root recovers its goal from `PORTFOLIO.md`; Root,
-   Portfolio, EM, and CM perform prompt-driven reconciliation on startup,
-   resume, or a detected compaction boundary.
-6. All task agents are non-blocking. Specialists are leaves. A missing reviewer,
-   test, Dashboard, or Advisor result is an evidence gap, not a permission
-   failure.
+   post-compaction hook. Root recovers its goal from `PORTFOLIO.md` and directly
+   reconciles cross-direction lifecycle; Root, EM, and CM perform prompt-driven
+   reconciliation on startup, resume, or a detected compaction boundary.
+6. All task agents are non-blocking. EM and CM are the only project
+   spawn-capable managers; specialists are leaves. A missing reviewer, test,
+   Dashboard, or Advisor result is an evidence gap, not a permission failure.
 7. The project uses the existing sibling worktree container
    `/home/fires/hmasd-worktrees/`, not a worktree directory under repository
    `temp/`.
@@ -82,15 +82,15 @@ These decisions resolve ambiguities in the concept before implementation.
 
 | Current baseline | Target | Cutover rule |
 | --- | --- | --- |
-| `task.maxRecursionDepth: 2` | depth 3 | Change only when all depth-3 spawn lists are valid. |
-| No Portfolio agent | `hmasd-portfolio` | Add in the same boundary as EM/CM renames. |
+| Depth-3 Root → Portfolio → EM path | depth 2 | Merge Portfolio behavior into Root before lowering recursion. |
+| `hmasd-portfolio` | removed | Root directly owns ranking, lifecycle, resources, and EM/CM dispatch. |
 | `hmasd-independent-research-explorer` | `hmasd-em` | Rename file and every spawn/caller; no alias. |
 | `hmasd-code-project-manager` | `hmasd-cm` | Rename file and every spawn/caller; no alias. |
 | `hmasd-explorer-agentify-transport` | `hmasd-external-pro-transport` | Rename cleanly; no compatibility definition. |
 | `hmasd-cpm-agentify-transport` | removed | Delete after all callers use research transports. |
 | Reviewer `xhigh` | Reviewer `high` | Per-task effort may explicitly raise it. |
-| No project Skills | eight Skills | Add contracts before agent frontmatter references them. |
-| No `.omp/RULES.md` | sticky hard boundaries | Keep only non-negotiable rules. |
+| Eight Skills | seven Skills | Merge Portfolio control into Root and delete the duplicate Skill. |
+| Continuous Advisors | Implementer-only | Keep Root and managers off; use frozen checkpoint review for deep-tree evidence. |
 | Provisional worktree helpers | one direction helper | Reuse safe path and Git primitives; remove replaced entry points. |
 | Partial run wrappers | one observed-run contract | Preserve useful worker and atomic-write code. |
 | Historical research maps | portfolio/direction authorities | Migrate facts once; retain old files only as provenance. |
@@ -109,11 +109,10 @@ survives the cutover. Git history is the migration archive.
 ├── config.yml
 ├── lsp.json
 ├── mcp.json
-├── WATCHDOG.md                      # one role-aware continuous Advisor contract
-├── agents/                           # exactly 18 hmasd-* definitions
+├── WATCHDOG.md                      # active Implementer-only Advisor contract
+├── agents/                          # exactly 17 hmasd-* definitions
 ├── skills/
-│   ├── hmasd-root-control/SKILL.md
-│   ├── hmasd-portfolio-control/SKILL.md
+│   ├── hmasd-root-control/SKILL.md  # includes Portfolio control
 │   ├── hmasd-em-direction-cycle/SKILL.md
 │   ├── hmasd-cm-engineering-cycle/SKILL.md
 │   ├── hmasd-result-run/SKILL.md
@@ -234,7 +233,7 @@ All tracked and long-lived local JSON follows these rules:
   absolute prefixes;
 - direction IDs match `[a-z0-9][a-z0-9_-]{1,63}` so existing stable
   underscore IDs remain unchanged; new IDs prefer kebab-case;
-- logical manager identities are `Portfolio`, `EM-<direction>`, or
+- logical manager identities are `Root`, `EM-<direction>`, or
   `CM-<direction>`;
 - OMP job names are stable CamelCase without punctuation;
 - optional values are explicit `null`; absent required keys are invalid;
@@ -669,7 +668,7 @@ modelRoles:
   advisor: opencode-go/glm-5.3:high
 
 advisor:
-  enabled: true
+  enabled: false
 
 autoResume: true
 
@@ -681,13 +680,10 @@ launch:
 
 task:
   maxConcurrency: 32
-  maxRecursionDepth: 3
+  maxRecursionDepth: 2
   enableEffort: true
   enableLsp: true
   agentAdvisor:
-    hmasd-portfolio: openai-codex/gpt-5.6-sol:high
-    hmasd-em: openai-codex/gpt-5.6-sol:high
-    hmasd-cm: opencode-go/glm-5.3:high
     hmasd-implementer: opencode-go/glm-5.3:high
     hmasd-implementer-terra: opencode-go/glm-5.3:high
   disabledAgents:
@@ -698,34 +694,25 @@ task:
     - security-reviewer
 ```
 
-Root inherits the default GLM Advisor. Portfolio and EM receive Sol-high science
-advice. CM receives architecture and engineering advice from GLM; both
-Implementers receive engineering advice from GLM. Reviewer, Verifier, Scouts,
-Experiment Operator, transports, Artifact Writer, and Recovery Manager have no
-Advisor. This preserves early transcript-delta correction where it matters
-without paying for redundant review of every leaf.
+Root's Advisor subsystem is disabled. OMP task subagents default to no Advisor,
+and the only two `task.agentAdvisor` entries opt in the Implementer leaves.
+Root, EM, and CM remain off because their complete descendant and Hub context
+is not available to a continuous Advisor.
 
-`/agents` and `task.agentAdvisor[agentName]` configure future spawns by project
-agent name; the effective choice persists in the spawned session's
-`session_init`. It is not a direct mutation of an already running Hub job by job
-ID. The mapping above is authoritative and is not toggled during ordinary
-workflow execution.
-
-Use one role-aware `.omp/WATCHDOG.md` and no `WATCHDOG.yml` roster. Omitting a
-roster lets each child session's `modelRoles.advisor` select the configured
-per-type model. The WATCHDOG routes strictly by primary role:
+`.omp/WATCHDOG.md` routes strictly by primary role:
 
 ```text
-Root                         -> architecture
-hmasd-portfolio, hmasd-em    -> science
-hmasd-cm                     -> architecture + engineering
+Root, hmasd-em, hmasd-cm     -> no Advisor
 hmasd-implementer,
 hmasd-implementer-terra      -> engineering
-all other roles              -> no advice
+all other roles              -> no Advisor
 ```
 
-The Advisor may inspect transcript deltas continuously but remains read-only,
-non-gating, and unable to approve, reject, block, or authorize work.
+Implementers are scope-frozen leaves. A material assignment change cancels and
+replaces the leaf rather than relying on unseen Hub steering. Deep-tree
+assessment uses an explicit checkpoint Reviewer or Research Critic with
+complete frozen envelopes and artifact references. Advice remains read-only and
+non-gating.
 
 `task` and `librarian` remain available. Bundled `task` is Root-only and used
 only when no project role fits. All project agent frontmatter uses
@@ -758,12 +745,11 @@ unrelated user-global rules without explicit user authorization.
 
 ## 9. Agent frontmatter and tool contracts
 
-All 18 project definitions declare concrete model selectors, thinking level,
+All 17 project definitions declare concrete model selectors, thinking level,
 `blocking: false`, exact `spawns`, and `autoloadSkills` where applicable.
 
 | Agent | Model / effort | Direct tools | Spawns | Autoload Skills |
 | --- | --- | --- | --- | --- |
-| `hmasd-portfolio` | Sol max | read/write/edit/grep/glob/task/hub | EM, research specialists, artifact writer, code scout, both transports, librarian | portfolio-control, scientific-external-review |
 | `hmasd-em` | Sol max | read/write/edit/grep/glob/task/hub | research specialists, artifact writer, code scout, both transports, librarian | em-direction-cycle, scientific-external-review |
 | `hmasd-cm` | Sol high | read/write/edit/grep/glob/bash/task/hub | engineering specialists, experiment operator, research scout, librarian | cm-engineering-cycle, result-run, git-integration |
 | `hmasd-project-scout` | Luna medium | read/grep/glob | none | none |
@@ -804,27 +790,22 @@ condition.
 
 ### `hmasd-root-control`
 
-- Reconcile `PORTFOLIO.md`, registry, `.omp/runtime`, Hub jobs, worktrees, runs,
-  Agentify references, and Git before new dispatch.
-- Maintain the persistent goal by reference to `PORTFOLIO.md`.
-- Start/revive one Portfolio and required CM logical sessions.
-- Inject only material transitions into manager context.
+- Reconcile `PORTFOLIO.md`, registry, all direction states, `.omp/runtime`, Hub
+  jobs, worktrees, runs, Agentify references, and Git before dispatch.
+- Rank current and recently active directions; target 2–8 only after scientific
+  qualification, with zero as a valid IDLE result.
+- Create, activate, park, merge, close, and reactivate with reasons written only
+  to `PORTFOLIO.md`, then replace registry state by CAS using authority writer
+  `Portfolio`.
+- Keep scientific qualification separate from resources: missing estimates
+  create preparation work; absolute safe work up to 7200 seconds is schedulable;
+  longer work requires performance review and explicit user approval; unsafe
+  memory is reduced, batched, or sharded.
+- Start or revive EM and CM sessions directly. Inject only material transitions
+  and keep Root → EM/CM → specialist as the maximum path.
 - Stop at IDLE, COMPLETE, a rules-defined user decision, or exhausted recovery.
-- Never continuously poll; use Hub completion, process exit, file change, or
+- Never continuously poll; use Hub completion, process exit, file change, or one
   bounded reassessment.
-
-### `hmasd-portfolio-control`
-
-- Validate registry mechanically, then rank scientifically from
-  `PORTFOLIO.md`.
-- Target 2–8 active directions only after mechanical eligibility and scientific
-  qualification; never activate a low-value direction to satisfy cardinality.
-  Zero qualified directions is a valid IDLE outcome.
-- Create, activate, park, merge, close, and reactivate with scientific reasons
-  written only to `PORTFOLIO.md`.
-- Dispatch/revive EM instances with stable logical identity and generation.
-- Perform one bounded reassessment before IDLE.
-- Keep the ordinary worker target at 28, preserving four advisory slots.
 
 ### `hmasd-em-direction-cycle`
 
@@ -1226,10 +1207,10 @@ RECONCILE_SCOPE
 
 ### 13.5 Session generations
 
-Reuse a Portfolio/EM/CM session when durable identity and current generation
-match. Rotate only for material direction redefinition, state/context
-inconsistency, untrustworthy recovery, or context-exhaustion risk. On resume or
-compaction boundary, compare:
+Reuse an EM/CM session when durable identity, owned scope, checkpoint, and
+current generation match. Rotate only for incompatible direction redefinition,
+state/context inconsistency, ownership mismatch, untrustworthy recovery, or
+context-exhaustion risk. On resume or compaction boundary, compare:
 
 ```text
 logical identity and generation
@@ -1322,7 +1303,7 @@ freeze question/evidence
 ```
 
 Agentify defaults remain six inflight queries and twelve tabs. Work beyond those
-limits runs in waves. Portfolio assigns one to three monitor transports by the
+limits runs in waves. Root assigns one to three monitor transports through the
 deterministic partition helper. Duplicate observation is harmless; duplicate
 submission is forbidden.
 
@@ -1378,9 +1359,9 @@ full repository suite until the final integration phase.
 
 RED:
 
-1. Add failing contract tests for target config, exactly 18 project agents,
+1. Add failing contract tests for target config, exactly 17 project agents,
    legacy names absent from active `.omp` definitions/callers, disabled bundled
-   agents, depth 3, eight Skills, `.omp/RULES.md`, and `.omp/WATCHDOG.md`.
+   agents, depth 2, seven Skills, `.omp/RULES.md`, and `.omp/WATCHDOG.md`.
    Historical documents are provenance and excluded from the legacy-name ban.
 2. Add schema fixtures for valid, unknown-version, extra-key, stale-revision,
    invalid-path, wrong-writer, foreign Agentify archive, and both runtime
@@ -1415,25 +1396,25 @@ RED:
 
 GREEN:
 
-1. Create Skills, `.omp/RULES.md`, and the role-aware `.omp/WATCHDOG.md`.
-2. Perform the agent clean rename/add/delete boundary.
-3. Enable native Root/per-agent-type Advisors with the exact model mapping,
-   replace the headless Advisor tests, then delete `.omp/advisors/*`,
-   `run_hmasd_advisor.py`, and its tests.
-4. Update `.omp/AGENTS.md`, config recursion, concurrency, async/launch,
-   autoResume, bundled disablement, and Advisor policy.
+1. Create the seven Skills, `.omp/RULES.md`, and the active Implementer-only
+   `.omp/WATCHDOG.md`.
+2. Perform the agent clean rename/add/delete boundary, including removal of the
+   Portfolio agent.
+3. Disable Root and manager continuous Advisors; opt in only the two Implementer
+   leaves and preserve frozen checkpoint review for deep-tree evidence.
+4. Update `.omp/AGENTS.md`, recursion depth 2, concurrency, async/launch,
+   autoResume, bundled disablement, and checkpoint-review policy.
 5. Apply the user-global 372K model overrides without replacing unrelated
    settings.
 
 Acceptance:
 
-- live project-agent discovery lists exactly 18 `hmasd-*` roles;
-- Root -> Portfolio -> EM -> project specialist reaches depth 3;
+- live project-agent discovery lists exactly 17 `hmasd-*` roles;
+- Root → EM/CM → project specialist reaches at most depth 2;
 - every specialist is a leaf;
 - a real dispatch uses `hmasd-project-scout`, not bundled `scout`;
-- Root uses GLM Advisor; Portfolio/EM use Sol; CM/Implementers use GLM; every
-  other project type spawns with no Advisor;
-- Advisor choice survives cold revival through `session_init`;
+- continuous Advisors run only on scope-frozen Implementer leaves and frozen
+  checkpoint review remains available for deep-tree evidence;
 - all newly authoritative Markdown paths are visible to Git.
 
 ### Phase 2: Portfolio and direction bootstrap
@@ -1452,16 +1433,16 @@ GREEN:
    sources without inventing conclusions.
 2. Create each direction's `DIRECTION.md` and workflow JSON by citing existing
    source documents; historical maps remain provenance.
-3. Update `.omp/AGENTS.md` so the registry owns lifecycle while
+3. Update `.omp/AGENTS.md` so Root owns lifecycle through the registry while
    `RESEARCH_MAP.md` remains navigation/provenance.
-4. Implement bounded Root, Portfolio, and EM cycles in Skills/prompts.
+4. Implement bounded Root and EM cycles in Skills/prompts.
 
 Acceptance:
 
 - registered directions have no hard cap;
 - at most eight may be active;
-- Portfolio targets 2–8 only after scientific qualification and may enter IDLE
-  with zero qualified directions;
+- Root targets 2–8 only after scientific qualification and may enter IDLE with
+  zero qualified directions;
 - parking/closure does not delete science;
 - no primary model polls while IDLE.
 
@@ -1604,8 +1585,8 @@ Acceptance:
 1. Run focused tests from Phases 0–7 once against the final code.
 2. Run project LSP diagnostics on changed Python and agent/config files where
    supported.
-3. Start one synthetic Portfolio with two fixture directions.
-4. Exercise one depth-3 research dispatch, one parked/revived EM, one no-op CM
+3. Run one synthetic Root portfolio reconciliation with two fixture directions.
+4. Exercise one depth-2 research dispatch, one parked/revived EM, one no-op CM
    integration in a temporary Git repository, one short observed run, one fake
    external-review completion, and the actual Dashboard.
 5. Obtain an independent read-only final diff review using
@@ -1620,8 +1601,8 @@ Acceptance:
 
 | Claim | Direct evidence | Owner |
 | --- | --- | --- |
-| Topology and disablement are exact | discovery/config contract test plus live depth-3 project-scout dispatch | Root |
-| Advisor routing is exact | Root/Portfolio/EM/CM/Implementer spawn matrix, resolved models, no-Advisor leaf checks, and cold revival | Root |
+| Topology and disablement are exact | discovery/config contract test plus live depth-2 project-scout dispatch | Root |
+| Continuous advice is leaf-scoped safely | disabled Root/manager config, exact Implementer mapping check, and frozen checkpoint review contract | Root |
 | State is atomic and single-writer | concurrent initialize/replace/migrate, kill-write, checksum, revision, lock, and parent-directory-fsync evidence | Verifier |
 | Scientific facts are not duplicated | schema negative fixtures and path/field audit | hmasd-research-principles-analyst |
 | Git applies only safe candidates | conflict/path/base tests plus target-advance, orphan provision, multi-commit, branch cleanup, and prepare/apply race | Verifier |

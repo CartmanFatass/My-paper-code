@@ -8,9 +8,8 @@ authoritative controls or claim to parse arbitrary shell semantics.
 from __future__ import annotations
 
 import json
-import os
 import re
-import stat
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -19,32 +18,28 @@ from typing import Any
 SHELL_TOOLS = {"bash", "exec_command", "shell_command", "unified_exec"}
 PATCH_TOOLS = {"apply_patch", "applypatch"}
 GLOBAL_MUTATION = re.compile(
-    r"(?i)(?:\bsubst(?:\.exe)?\b|\bnew-psdrive\b|\bnet(?:\.exe)?\s+use\b|"
-    r"\bmklink\b|\bmountvol\b|\bgit(?:\.exe)?\b[^\r\n]*\bworktree\s+"
-    r"(?:add|move|remove|prune|lock|unlock|repair)\b|"
-    r"-itemtype\s+(?:junction|symboliclink)|\bnew-item\b[^\r\n]*"
-    r"-itemtype\s+(?:junction|symboliclink))"
+    r"(?i)(?:\bmount(?:\.?fuse)?\b|\bumount\b|\bln\b[^\r\n]*"
+    r"(?:-\s*s\b|--symbolic\b)|\bgit\b[^\r\n]*\bworktree\s+"
+    r"(?:add|move|remove|prune|lock|unlock|repair)\b)"
 )
 MUTATION = re.compile(
-    r"(?i)(?:\bnew-item\b|\bmkdir\b|\bset-content\b|\badd-content\b|"
-    r"\bout-file\b|\bremove-item\b|\bmove-item\b|\bcopy-item\b|"
-    r"\brename-item\b|\bclear-content\b|\bdel\b|\berase\b|\brmdir\b|"
-    r"\bset-acl\b|\bicacls\b|\btakeown\b|(?:^|[\s;&|])(?:md|ni|rm|mv|cp)\s)"
+    r"(?i)(?:\bmkdir\b|\binstall\b|\btee\b|\btruncate\b|\bnew-item\b|"
+    r"\bset-content\b|\badd-content\b|\bout-file\b|\bremove-item\b|"
+    r"\bmove-item\b|\bcopy-item\b|\brename-item\b|\bclear-content\b|"
+    r"\bdel\b|\berase\b|\brmdir\b|\brm\b|\bmv\b|\bcp\b|\bset-acl\b|"
+    r"\bicacls\b|\btakeown\b|(?:^|[\s;&|])(?:md|ni)\s)"
 )
-DYNAMIC_TARGET = re.compile(r"(?:\$\{|\$[A-Za-z_]|%[A-Za-z_][A-Za-z0-9_]*%|`|\$\(|\[IO\.)")
-QUOTED_WINDOWS_PATH = re.compile(r"(?i)(?:\"([^\"]*[A-Z]:[\\/][^\"]*)\"|'([^']*[A-Z]:[\\/][^']*)')")
-BARE_WINDOWS_PATH = re.compile(r"(?i)(?<![A-Za-z0-9_])([A-Z]:[\\/][^\s;|>'\"\)\]]+)")
-UNC_PATH = re.compile(r"(?<![\\])((?:\\\\|//)[^\s;|>'\"\)\]]+)")
+REDIRECTION = re.compile(r"(?m)(?<![<>=])-?>{1,2}(?![=])")
+DYNAMIC_TARGET = re.compile(r"(?:\$\{|\$[A-Za-z_]|`|\$\()")
 PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
 )
 PATH_ARGUMENT = re.compile(
     r'''(?ix)(?:-\s*(?:literalpath|path|destination|target|filepath)\s+|(?<![<>=])>{1,2}\s*)(?:"([^"]*)"|'([^']*)'|([^\s;|]+))'''
 )
-PATH_ALIAS = re.compile(r"(?:^|[\\/])(?:\.{1,2})(?=$|[\\/])")
+PATH_ALIAS = re.compile(r"(?:^|/)(?:\.{1,2})(?=$|/)")
 RECURSIVE_DELETE = re.compile(
-    r"(?is)\b(?:remove-item|rmdir|rd|del|erase|rm)(?:\.exe)?\b[^\r\n;&|]*"
-    r"(?:-\s*recurse\b|-\s*r\b|/s\b)"
+    r"(?is)\b(?:rmdir|rm)\b[^\r\n;&|]*(?:--recursive\b|-\s*r\b)"
 )
 class GuardError(RuntimeError):
     """A fail-closed decision for a recognized workspace-boundary case."""
@@ -84,34 +79,25 @@ def _canonical(path: Path) -> Path:
 
 
 def _same(left: Path, right: Path) -> bool:
-    return os.path.normcase(str(left)) == os.path.normcase(str(right))
+    return left == right
 
 
 def _inside(path: Path, root: Path) -> bool:
     try:
-        return os.path.commonpath((os.path.normcase(str(path)), os.path.normcase(str(root)))) == os.path.normcase(str(root))
+        path.relative_to(root)
     except ValueError:
         return False
-
-
-def _is_reparse_point(path: Path) -> bool:
-    """Return whether *path* is a Windows symlink/junction-like reparse point."""
-
-    try:
-        attributes = path.stat(follow_symlinks=False).st_file_attributes
-    except (AttributeError, OSError):
-        return False
-    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400))
+    return True
 
 
 def _has_path_alias(path: Path) -> bool:
-    """Reject lexical aliases and existing symlink/junction components."""
+    """Reject lexical aliases and existing symlink components."""
 
     if PATH_ALIAS.search(str(path)):
         return True
     candidate = path if path.is_absolute() else Path.cwd() / path
     while True:
-        if candidate.is_symlink() or _is_reparse_point(candidate):
+        if candidate.is_symlink():
             return True
         parent = candidate.parent
         if parent == candidate:
@@ -119,39 +105,40 @@ def _has_path_alias(path: Path) -> bool:
         candidate = parent
 
 
+
+
 def _target_path(raw: str, cwd: Path) -> Path:
     """Validate one syntactic target and return its canonical path."""
 
     value = raw.strip()
-    if value.startswith(("\\\\", "//")):
-        raise GuardError("UNC mutation targets are outside the HMASD workspace")
+    if value.startswith("//"):
+        raise GuardError("network mutation targets are outside the HMASD workspace")
     candidate = Path(value)
     if _has_path_alias(candidate):
-        raise GuardError("symlink, junction, or path alias mutation target is forbidden")
+        raise GuardError("symlink or path alias mutation target is forbidden")
     if not candidate.is_absolute():
         candidate = cwd / candidate
     if _has_path_alias(candidate):
-        raise GuardError("symlink, junction, or path alias mutation target is forbidden")
+        raise GuardError("symlink or path alias mutation target is forbidden")
     return _canonical(candidate)
 
 
 def _marker_root(start: Path) -> Path:
-    """Resolve the project from stable control-plane markers.
+    """Resolve the project from the active OMP control-plane markers."""
 
-    Hook payloads occasionally contain a not-yet-created child directory.  Walk
-    from its nearest existing ancestor instead of treating that normal case as
-    a hook failure.  The markers deliberately work in Gitless test copies.
-    """
     candidate = _canonical(start)
     if not candidate.exists():
         candidate = candidate.parent
     if candidate.is_file():
         candidate = candidate.parent
     for ancestor in (candidate, *candidate.parents):
-        if (ancestor / "AGENTS.md").is_file() and (ancestor / ".codex" / "config.toml").is_file():
+        control = ancestor / ".omp"
+        if _has_path_alias(control):
+            continue
+        if (control / "AGENTS.md").is_file() or (control / "config.yml").is_file():
             return ancestor
     raise GuardError(
-        "cannot resolve HMASD workspace from AGENTS.md and .codex/config.toml markers "
+        "cannot resolve HMASD workspace from .omp/AGENTS.md or .omp/config.yml "
         f"(start={start!s}; process_cwd={Path.cwd()!s})"
     )
 
@@ -167,7 +154,7 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
     git_dir = root / ".git"
     if git_dir.exists() or git_dir.is_symlink():
         if _has_path_alias(git_dir):
-            raise GuardError("symlink, junction, or path alias Git root is forbidden")
+            raise GuardError("symlink or path alias Git root is forbidden")
         try:
             git_top = _canonical(Path(_git(root, "rev-parse", "--show-toplevel")))
         except (GuardError, OSError):
@@ -181,16 +168,17 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
     return root, [root], git_verified
 
 
-def _extract_absolute_paths(command: str) -> list[Path]:
-    raw: list[str] = []
-    for match in QUOTED_WINDOWS_PATH.finditer(command):
-        raw.append(match.group(1) or match.group(2))
-    raw.extend(match.group(1).rstrip(",") for match in BARE_WINDOWS_PATH.finditer(command))
-    if UNC_PATH.search(command):
-        raise GuardError("UNC mutation targets are outside the HMASD workspace")
+def _extract_absolute_paths(command: str, cwd: Path) -> list[Path]:
+    try:
+        tokens = shlex.split(command, posix=True)
+    except ValueError as exc:
+        raise GuardError(f"shell command has invalid quoting: {exc}") from exc
     unique: list[Path] = []
-    for value in raw:
-        candidate = _target_path(value, Path.cwd())
+    for token in tokens:
+        value = token.lstrip("<>")
+        if not value.startswith("/") or value == "/":
+            continue
+        candidate = _target_path(value, cwd)
         if not any(_same(candidate, prior) for prior in unique):
             unique.append(candidate)
     return unique
@@ -217,11 +205,12 @@ def _recursive_delete_is_broad(command: str, cwd: Path, repo: Path) -> bool:
         return False
     try:
         targets = _extract_target_paths(command, cwd)
+        targets.extend(_extract_absolute_paths(command, cwd))
     except GuardError:
         # Aliased and unresolved recursive targets are broad by definition.
         return True
     command_match = re.search(
-        r"(?is)\b(?:remove-item|rmdir|rd|del|erase|rm)(?:\.exe)?\b([^\r\n;&|]*)",
+        r"(?is)\b(?:rmdir|rm)\b([^\r\n;&|]*)",
         command,
     )
     if command_match:
@@ -248,7 +237,7 @@ def _recursive_delete_is_broad(command: str, cwd: Path, repo: Path) -> bool:
     if command_match:
         args = command_match.group(1)
         # A recursive delete without a recognized path is cwd-wide by default.
-        if not targets and not re.search(r"(?<![\w-])(?:[A-Za-z]:[\\/]|[^\s-]+)", args):
+        if not targets and not re.search(r"(?<![\w-])/[^\s-]+", args):
             return True
     return not targets
 
@@ -303,9 +292,9 @@ def _guard_shell(
     if not isinstance(command, str) or not command.strip():
         raise GuardError("shell payload has no command")
     if GLOBAL_MUTATION.search(command):
-        raise GuardError("drive mapping, path alias, or raw Git worktree mutation is forbidden")
+        raise GuardError("mount, path alias, or raw Git worktree mutation is forbidden")
 
-    mutating = bool(MUTATION.search(command) or re.search(r"(?m)(?<![<>=])-?>{1,2}(?![=])", command))
+    mutating = bool(MUTATION.search(command) or REDIRECTION.search(command))
     if not mutating:
         return
     if DYNAMIC_TARGET.search(command):
@@ -313,7 +302,7 @@ def _guard_shell(
     if _recursive_delete_is_broad(command, cwd, repo):
         raise GuardError("recursive deletion target is broad or unresolved")
     target_paths = _extract_target_paths(command, cwd)
-    absolute_paths = _extract_absolute_paths(command)
+    absolute_paths = _extract_absolute_paths(command, cwd)
     candidates = target_paths + [path for path in absolute_paths if not any(_same(path, prior) for prior in target_paths)]
     if not candidates:
         if not any(_inside(cwd, root) for root in allowed_roots):
@@ -337,29 +326,13 @@ def main() -> int:
         return 0
     try:
         cwd_raw = payload.get("cwd") or payload.get("working_directory")
-        # The CLI normally supplies cwd.  If an older hook payload omits it,
+        # The CLI normally supplies cwd. If an older hook payload omits it,
         # the launcher itself is already running from the project root.
         cwd_input = Path(cwd_raw) if isinstance(cwd_raw, str) and cwd_raw else Path.cwd()
         if _has_path_alias(cwd_input):
-            raise GuardError("symlink, junction, or path alias working directory is forbidden")
+            raise GuardError("symlink or path alias working directory is forbidden")
         cwd = _canonical(cwd_input)
-        try:
-            repo, allowed_roots, _git_verified = _workspace_scope(cwd)
-        except GuardError:
-            # Windows PowerShell 5 can corrupt a non-ASCII path while
-            # forwarding redirected hook JSON.  Recover only when that
-            # decoded path does not exist and the independently inherited
-            # process cwd has the same drive and final component, then require
-            # the normal HMASD marker check on the inherited cwd.
-            process_cwd = _canonical(Path.cwd())
-            if (
-                cwd.exists()
-                or os.path.normcase(cwd.drive) != os.path.normcase(process_cwd.drive)
-                or os.path.normcase(cwd.name) != os.path.normcase(process_cwd.name)
-            ):
-                raise
-            cwd = process_cwd
-            repo, allowed_roots, _git_verified = _workspace_scope(cwd)
+        repo, allowed_roots, _git_verified = _workspace_scope(cwd)
         if tool_name in PATCH_TOOLS:
             _guard_patch(
                 cwd,

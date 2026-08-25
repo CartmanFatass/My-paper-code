@@ -9,6 +9,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import NoReturn
 
 
 class Refusal(RuntimeError):
@@ -22,14 +23,12 @@ class Inspection:
     directories: tuple[Path, ...] = ()
 
 
-def _refuse(message: str) -> None:
+def _refuse(message: str) -> NoReturn:
     raise Refusal(message)
 
 
 def _same_path(left: Path, right: Path) -> bool:
-    return os.path.normcase(os.path.normpath(str(left))) == os.path.normcase(
-        os.path.normpath(str(right))
-    )
+    return left == right
 
 
 def _under(path: Path, root: Path) -> bool:
@@ -45,19 +44,19 @@ def _safe_input(raw: str, label: str) -> Path:
         _refuse(f"{label} is not an exact absolute path")
     if "\x00" in raw:
         _refuse(f"{label} contains an invalid path character")
-    if any(token in raw for token in ("*", "?", "[", "]", "{" , "}")):
+    if any(token in raw for token in ("*", "?", "[", "]", "{", "}")):
         _refuse(f"{label} contains unsupported pattern syntax")
-    if raw.startswith(("\\\\", "//")):
-        _refuse(f"{label} must not be a network path")
-    pieces = raw.replace("\\", "/").split("/")
+    if "\\" in raw:
+        _refuse(f"{label} contains an unsupported path separator")
+    if "//" in raw:
+        _refuse(f"{label} contains a separator alias")
+    pieces = raw.split("/")
     if any(piece in (".", "..") for piece in pieces):
         _refuse(f"{label} contains a lexical path alias")
-    if "//" in raw or "\\\\" in raw:
-        _refuse(f"{label} contains a separator alias")
     candidate = Path(raw)
     if not candidate.is_absolute():
         _refuse(f"{label} must be absolute")
-    if raw.endswith(("/", "\\")) and raw != candidate.anchor:
+    if raw.endswith("/") and raw != candidate.anchor:
         _refuse(f"{label} contains a trailing alias")
     try:
         resolved = candidate.resolve(strict=False)
@@ -68,22 +67,19 @@ def _safe_input(raw: str, label: str) -> Path:
     return candidate
 
 
-def _reparse(path: Path) -> bool:
+def _is_symlink(path: Path) -> bool:
     try:
         info = os.lstat(path)
     except OSError as exc:
         _refuse(f"cannot inspect path component {path}: {exc}")
-    if stat.S_ISLNK(info.st_mode):
-        return True
-    attributes = getattr(info, "st_file_attributes", 0)
-    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400))
+    return stat.S_ISLNK(info.st_mode)
 
 
 def _require_directory(path: Path, label: str) -> None:
     if not os.path.lexists(path):
         _refuse(f"{label} does not exist")
-    if _reparse(path):
-        _refuse(f"{label} contains a link or reparse point")
+    if _is_symlink(path):
+        _refuse(f"{label} contains a symlink")
     try:
         mode = os.lstat(path).st_mode
     except OSError as exc:
@@ -104,8 +100,8 @@ def _walk_existing_chain(anchor: Path, candidate: Path, label: str) -> bool:
         current /= part
         if not os.path.lexists(current):
             return False
-        if _reparse(current):
-            _refuse(f"{label} contains a link or reparse point")
+        if _is_symlink(current):
+            _refuse(f"{label} contains a symlink")
         try:
             mode = os.lstat(current).st_mode
         except OSError as exc:
@@ -137,15 +133,9 @@ def _assignment_layout(repo: Path, assignment: Path) -> None:
         parts = assignment.relative_to(repo).parts
     except ValueError:
         _refuse("assignment root is unrelated to repository top")
-    lower = tuple(part.casefold() for part in parts)
-    normal = len(parts) == 4 and lower[:2] == ("temp", "sessions")
-    transport = len(parts) == 5 and lower[:3] == (
-        "temp",
-        "sessions",
-        "agentify_transport_operator",
-    )
-    if not (normal or transport):
-        _refuse("assignment root is not an exact assignment-scoped temp root")
+    direction = len(parts) == 3 and parts[:2] == ("temp", "directions")
+    if not direction:
+        _refuse("assignment root is not an exact temp/directions/<direction-id> root")
     if any(not part or part in (".", "..") for part in parts):
         _refuse("assignment root contains an invalid component")
 
@@ -182,8 +172,8 @@ def _empty_tree(target: Path) -> tuple[Path, ...]:
     pending = [target]
     while pending:
         current = pending.pop()
-        if _reparse(current):
-            _refuse("target contains a link or reparse point")
+        if _is_symlink(current):
+            _refuse("target contains a symlink")
         try:
             with os.scandir(current) as entries:
                 children = list(entries)
@@ -192,8 +182,8 @@ def _empty_tree(target: Path) -> tuple[Path, ...]:
         directories.append(current)
         for entry in children:
             child = Path(entry.path)
-            if _reparse(child):
-                _refuse("target contains a link or reparse point")
+            if _is_symlink(child):
+                _refuse("target contains a symlink")
             try:
                 mode = entry.stat(follow_symlinks=False).st_mode
             except OSError as exc:
@@ -207,6 +197,9 @@ def _empty_tree(target: Path) -> tuple[Path, ...]:
 
 def inspect(repo: Path, assignment: Path, target: Path) -> Inspection:
     _require_directory(repo, "repository top")
+    control = repo / ".omp"
+    if not ((control / "AGENTS.md").is_file() or (control / "config.yml").is_file()):
+        _refuse("repository top lacks .omp/AGENTS.md or .omp/config.yml")
     if not _same_path(repo, _git_top(repo)):
         _refuse("repository top does not match Git's exact top")
     _assignment_layout(repo, assignment)
@@ -219,8 +212,8 @@ def inspect(repo: Path, assignment: Path, target: Path) -> Inspection:
     if not _walk_existing_chain(assignment, target, "target"):
         _status(repo, target)
         return Inspection("ALREADY_ABSENT", target)
-    if _reparse(target):
-        _refuse("target is a link or reparse point")
+    if _is_symlink(target):
+        _refuse("target is a symlink")
     try:
         if not stat.S_ISDIR(os.lstat(target).st_mode):
             _refuse("target is not a directory")

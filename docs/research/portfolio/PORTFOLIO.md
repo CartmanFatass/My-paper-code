@@ -458,7 +458,7 @@ Abbreviations and OMP job names are new mechanical identifiers required by the w
 
 The registry is the sole lifecycle authority. The `lifecycle` field is the active flag; there is no separate stored `active` boolean. Workflow JSON stores references and operational hashes only, and never duplicates the scientific position or conclusion.
 
-## Deliberate operational neutral state
+## Bootstrap deliberate operational neutral state
 
 - Initial lifecycle: `REGISTERED` for all 33 directions; historical map states remain provenance.
 - Active directions: zero; no qualification is asserted by bootstrap.
@@ -472,3 +472,87 @@ These neutral values are explicitly operational and do not imply a scientific ne
 ## Provenance boundary
 
 Historical research files, result records, code-science indexes, and `RESEARCH_MAP.md` remain unchanged. They provide citations and provenance; this portfolio and the direction authorities are the new workflow-facing references.
+
+## Startup wake cycle — 2026-08-25T03:33:31Z
+
+### Evidence and qualification boundary
+
+The user's explicit startup request is the wake event for this bounded Portfolio cycle; it is not scientific evidence. Before ranking, registry revision 1 passed the state CLI schema and ownership checks. Its goal and all 33 lifecycle-decision references matched the exact prior `PORTFOLIO.md` SHA-256, every registered candidate path resolved to one nonsymlink `DIRECTION.md`, and every recorded direction-content SHA in the 33 research and 33 engineering states matched exact authority bytes. All 33 research states were `IDLE`, all 33 engineering states were `UNREQUESTED`, all external-review indexes had zero rounds, and Root's reconciled runtime agent and worktree registries were empty.
+
+Qualification uses only the direction authorities and their cited evidence: expected discriminative information, specificity of the unresolved question, leverage across the portfolio, and whether useful local evidence work can begin without a result command, external provider send, engineering continuation, or unresolved resource dependency. Historical map labels are provenance, not lifecycle values.
+
+Three directions qualify. The remaining 30 are deliberately left `REGISTERED`, rather than being converted to `PARKED`: their evidence supports deferral in this cycle, but does not uniformly establish a durable reactivation condition. This preserves the neutral distinction instead of manufacturing lifecycle semantics. Dependencies remain `[]`; no direction authority establishes a formal dependency edge.
+
+### Lifecycle decisions
+
+| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
+| --- | --- | --- | --- |
+| `active_post_churn_population_flow_identification` | unchanged | `REGISTERED` | Both recorded witnesses reduce to a two-rule controller; no genuinely non-reducible censored-flow case is recorded. |
+| `acvc` | unchanged | `REGISTERED` | The adaptive learner lost to the deterministic comparator; the retained protocol lesson does not supply a new prospective object. |
+| `commitment_residual_triggered_options` | unchanged | `REGISTERED` | The competence gate failed before learned activity, and no replacement representation/optimization discriminator is yet recorded. |
+| `covariance_calibrated_information_clock` | unchanged | `REGISTERED` | The current proposal is reducible to scalar ESS; no equal-ESS, opposite-action witness is recorded. |
+| `degraded_incumbent_shadow_handover` | unchanged | `REGISTERED` | Direct-UAV science is retained, while the present concurrency and overhead substrate is a resource boundary rather than new research evidence. |
+| `dual_epoch_receipt_survival` | unchanged | `REGISTERED` | Positive owner/skill-lineage evidence and the negative typed/reset/raw successor are retained; no new discriminator is recorded. |
+| `ec4g_r1` | unchanged | `REGISTERED` | Content, physical, and selectivity tests failed, and the remaining question is already covered by DEARS. |
+| `eociv_lite` | unchanged | `REGISTERED` | Fidelity-valid episodes remained unidentified; no new opportunity-gated variable-axis object is recorded. |
+| `event_triggered_budgeted_cooperative_renewal` | unchanged | `REGISTERED` | Coordination beat local behavior but lost to fixed-4, leaving the bundled mechanism unsupported without a successor object. |
+| `expressibility_gated_renewal_credit_relay` | unchanged | `REGISTERED` | Expressibility and selectivity passed, but utility and allocation improvement were zero; no successor mechanism is recorded. |
+| `field_slot_coordination` | unchanged | `REGISTERED` | The evidence contains only a preliminary compression idea and no finite registered algorithm object. |
+| `finite_semantic_boundary_support` | activate | `ACTIVE` | The fixed-cardinality contract is complete, while the missing variable-axis cooperative/UAV edge is specific and has cross-direction leverage because the remaining VSP-04 and VSP-C1 questions are recorded as contained by FSBS. A local definition and discriminator synthesis can begin without scientific execution. |
+| `metric_ground_transport_allocation` | activate | `ACTIVE` | Structural checks passed and the evidence records one remaining terminal discriminator after the stationarity failure. A bounded result-blind evidence audit can determine whether that discriminator is identifying and proportionate before any command is owned. |
+| `opportunity_normalized_lease_gated_rebinding` | unchanged | `REGISTERED` | ROAD beat RAW but lost to NEVER and barely beat SHAM; the completed result is retained without a new prospective question. |
+| `optimizer_entropy_exposure_boundary_relay` | unchanged | `REGISTERED` | The completed result is retained, the primary relay is unsupported, and no exposed amplification successor is recorded. |
+| `orbit_shadow_read` | unchanged | `REGISTERED` | Typed owner-role binding is useful, but no independent utility beyond DEARS is established. |
+| `recct_lite` | unchanged | `REGISTERED` | Pointer exposure exists, while target gaps and target effect are both zero; no new target is recorded. |
+| `renewal_indexed_score_plasticity` | unchanged | `REGISTERED` | The Pro-closed object and blinded frontier are retained, but the current measurement component is not a practical continuation. |
+| `roster_consistent_latent_exploration` | unchanged | `REGISTERED` | The panel is Pro-closed and the cited immediate-window intake identifies a technical lease-authority gap, no immediate Operator activity, and a dormant Root/CM continuation rather than a new research cycle. |
+| `roster_smf` | unchanged | `REGISTERED` | Exact census dominates sampled-mass compression under the current access law. |
+| `scope_1s` | unchanged | `REGISTERED` | Synthetic carrier separation exists, but no real variable-axis object is identified. |
+| `semantic_graphon_shared_policy` | unchanged | `REGISTERED` | The closed RSCF object remains valuable, but the current package is too expensive for a practical short run. |
+| `semigroup_consistent_duration_model_policy` | activate | `ACTIVE` | The evidence contains a UAV order opportunity and a competent order-erased foundation in separate mature objects; their unresolved fusion is a specific, high-leverage cooperative/UAV discriminator that can first be tested by local evidence synthesis. |
+| `ucope` | unchanged | `REGISTERED` | The object is Pro-closed and S0 is complete; S1 implementation is an engineering continuation outside this Portfolio assignment. |
+| `vap_folr_core` | unchanged | `REGISTERED` | Early typed-state evidence is retained, while later objects are non-identifying and DEARS is the cleaner route. |
+| `variable_n_fleet_churn` | unchanged | `REGISTERED` | PCPI science is closed and bindable, but current construction cost is disproportionate. |
+| `voronoi_quadrature_field_policy` | unchanged | `REGISTERED` | VNPA science is closed and analytic G is proved, but the full construction exceeds practical ceilings. |
+| `vsp_02` | unchanged | `REGISTERED` | Adam carry/reset exact-success sets match; no separate high-value continuation is recorded. |
+| `vsp_03` | unchanged | `REGISTERED` | The truth-table divergence is coherent, but the host is incomplete and RECCT covers the route. |
+| `vsp_04` | unchanged | `REGISTERED` | The declared-table separator is circular in ancestry, and FSBS contains the remaining question; activating both would duplicate attention. |
+| `vsp_05` | unchanged | `REGISTERED` | Handoff conformance exists, but no eligible prospective proposal truth is authenticated. |
+| `vsp_06_mssr` | unchanged | `REGISTERED` | A generic compiler reproduces the histories and the host semantics remain incomplete. |
+| `vsp_c1` | unchanged | `REGISTERED` | The fourth-corner design is clean, but no real four-clone host or value beyond FSBS is established; FSBS receives the nonduplicative attention. |
+
+### Bounded dispatch boundary
+
+Revive generation 1 of `EM-finite_semantic_boundary_support`, `EM-metric_ground_transport_allocation`, and `EM-semigroup_consistent_duration_model_policy` against the exact revision-2 registry and their frozen direction, research-state, and external-index references. This startup turn is limited to repository evidence reconciliation, disjoint local specialist work, and one evidence-separated synthesis per direction. It authorizes no scientific result command, external provider send, engineering implementation or CM dispatch, Root runtime mutation, or Git operation. A later observed material handoff is the next wake event.
+
+## Generation-3 resume reassessment — 2026-08-25T05:24:40Z
+
+### Reconciled active evidence
+
+The revision-2 Portfolio, registry, and direction-scoped research authorities remain the frozen evidence boundary for this resume cycle. This is a reassessment of the three previously active directions, not a new ranking of the other 30 registered directions. Dependencies remain `[]`; the evidence establishes no new formal dependency edge.
+
+`finite_semantic_boundary_support` remains qualified because its unresolved variable-axis cooperative/UAV edge is specific, locally investigable without scientific execution, and nonduplicatively contains the recorded residual VSP-04 and VSP-C1 questions. `semigroup_consistent_duration_model_policy` remains qualified because the recorded order-aware UAV opportunity and competent order-erased foundation still leave a specific unresolved fusion discriminator that is actionable through local evidence synthesis.
+
+`metric_ground_transport_allocation` is now complete and non-actionable under its current authority. Its accepted result is bounded structural nonidentification: all other registered checks passed, but every matched arm/binding calibration selection failed the prospectively registered optimization-validity gate. This supports no positive, negative, generic-effect, practical-equivalence, retention, deletion, warehouse, or UAV conclusion. The evidence justifies at most one terminal prospective optimization-closure successor, but that successor requires a new complete science-bearing revision and fresh mathematical closure before construction or scientific activity. Neither prerequisite exists in the current authority, so another local evidence-only EM cycle would duplicate the completed reconciliation rather than answer a live question.
+
+### Lifecycle decisions
+
+| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
+| --- | --- | --- | --- |
+| `finite_semantic_boundary_support` | resume with a fresh generation-2 EM | `ACTIVE` | The variable-axis cooperative/UAV edge remains unresolved, specific, cross-directionally useful, and locally actionable without scientific execution. |
+| `metric_ground_transport_allocation` | park | `PARKED` | The current object is complete and structurally nonidentified, and its only supported continuation requires a new prospectively closed science-bearing successor that is not presently authoritative. |
+| `semigroup_consistent_duration_model_policy` | resume with a fresh generation-2 EM | `ACTIVE` | The unresolved fusion between the mature order-aware and order-erased objects remains a specific locally actionable discriminator. |
+
+MGTAP may be reconsidered only after a new prospective optimization-closure revision has the required mathematical closure and establishes a live direction-scoped question. The present result remains retained evidence; parking is a resource-attention decision, not scientific deletion.
+
+### Bounded dispatch boundary
+
+Dispatch fresh generation 2 of `EM-finite_semantic_boundary_support` and `EM-semigroup_consistent_duration_model_policy` against the reconciled registry and exact direction, research-state, and external-index references. Do not dispatch MGTAP while its research authority is `COMPLETE` and non-actionable. Each EM turn is limited to repository evidence reconciliation, justified disjoint local specialist work, and one evidence-separated synthesis. It authorizes no scientific result command, external provider send, direction-authority mutation, engineering implementation or CM dispatch, Root runtime mutation, or Git operation.
+
+## MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z
+
+The generation-3 parking decision above is superseded for current lifecycle purposes. The accepted MGTAP result establishes bounded structural nonidentification on the completed revision-04 object, but its same-direction result intake and accepted convergence intake already isolate one terminal prospective optimization-closure successor: preserve the scientific object and change only matched update-time support under a fail-closed stationarity gate. That is a definable scientific discriminator. The required new authority and mathematical closure are preparation work before activity; their absence does not make the question scientifically unactionable.
+
+No available evidence supplies a command-level absolute resource estimate for that successor. A relative factor without an absolute baseline is not a scheduling fact, and a missing projection is a work item rather than a stopping condition. Portfolio therefore reactivates MGTAP for a fresh generation-2 EM evidence cycle that must freeze the exact workload/command boundary and request an estimate of peak memory, wall time, storage, and devices without running the command. An estimate at or below 7,200 seconds and within safe workstation capacity may later be scheduled without user approval; an estimate above 7,200 seconds requires a performance-reasonableness review attempt and explicit user approval, while an unsafe memory plan must be reduced, batched, or sharded.
+
+This reactivation authorizes no science-card or `DIRECTION.md` mutation, external provider turn, source change, CM dispatch, identity, lease, Operator, result-bearing command, result or partial-value access, Git operation, deployment, or flight. Its exact next boundary is one local identifiability audit plus one source-grounded command/workload and resource-estimation handoff.

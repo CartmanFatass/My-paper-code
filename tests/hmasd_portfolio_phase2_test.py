@@ -76,12 +76,14 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_bootstrap_registry_preserves_stable_ids_and_validates_public_contract() -> None:
+def test_registry_preserves_stable_ids_and_validates_live_contract() -> None:
     registry = load_json(REGISTRY_PATH)
     assert tuple(direction["id"] for direction in registry["directions"]) == EXPECTED_IDS
     assert len(registry["directions"]) == len(EXPECTED_IDS)
-    assert sum(direction["lifecycle"] == "ACTIVE" for direction in registry["directions"]) == 0
-    assert all(direction["lifecycle"] == "REGISTERED" for direction in registry["directions"])
+    assert sum(direction["lifecycle"] == "ACTIVE" for direction in registry["directions"]) <= 8
+    assert {direction["lifecycle"] for direction in registry["directions"]} <= {
+        "REGISTERED", "ACTIVE", "PARKED", "CLOSED"
+    }
     assert all(direction["dependencies"] == [] for direction in registry["directions"])
 
     result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(REGISTRY_PATH))
@@ -121,21 +123,42 @@ def test_each_direction_authority_and_three_states_reconcile_to_registry() -> No
         authority_sha = sha256(authority)
         assert research["direction_id"] == direction_id
         assert research["writer"] == f"EM-{direction_id}"
-        assert research["phase"] == "IDLE"
-        assert research["actionable"] is False
+        assert research["phase"] in {
+            "SCOPING",
+            "DIVERGENT_REVIEW",
+            "LOCAL_RESEARCH",
+            "SYNTHESIS",
+            "CONVERGENCE",
+            "ENGINEERING_REQUESTED",
+            "WAITING",
+            "IDLE",
+            "COMPLETE",
+        }
+        assert isinstance(research["actionable"], bool)
         assert research["direction_ref"] == {
             "path": f"docs/research/candidates/{direction_id}/DIRECTION.md",
             "sha256": authority_sha,
         }
         assert engineering["direction_id"] == direction_id
         assert engineering["writer"] == f"CM-{direction_id}"
-        assert engineering["phase"] == "UNREQUESTED"
-        assert engineering["actionable"] is False
+        assert engineering["phase"] in {
+            "UNREQUESTED",
+            "SCOPING",
+            "IMPLEMENTING",
+            "VERIFYING",
+            "RUN_READY",
+            "RUNNING",
+            "INTEGRATING",
+            "WAITING",
+            "COMPLETE",
+            "FAILED",
+        }
+        assert isinstance(engineering["actionable"], bool)
         assert engineering["scope_ref"]["path"] == research["direction_ref"]["path"]
         assert engineering["scope_ref"]["sha256"] == authority_sha
         assert external["direction_id"] == direction_id
         assert external["writer"] == f"EM-{direction_id}"
-        assert external["rounds"] == []
+        assert isinstance(external["rounds"], list)
 
 
 def test_registry_rejects_duplicate_ids_abbreviations_paths_and_jobs(tmp_path: Path) -> None:

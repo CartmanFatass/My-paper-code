@@ -1,28 +1,31 @@
 # HMASD native OMP workflow
 
 This repository uses one user-facing Root OMP session and a bounded,
-non-blocking task tree. Roles divide context and capability; they never grant
-or deny ordinary authorized reversible work. The exact active project inventory
-is the 18 `hmasd-*` definitions under `.omp/agents/`.
+non-blocking two-level task tree. Roles divide context and capability; they
+never grant or deny ordinary authorized reversible work. The exact active
+project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
 
 ## Authority and startup
 
 - `.omp/RULES.md` contains the only sticky hard boundaries. Skills and agent
   contracts contain bounded-cycle details.
-- Root is authoritative for user scope, Portfolio/EM/CM dispatch, recovery,
-  worktree allocation, external archive validation, Git integration, and final
-  delivery. `PORTFOLIO.md` is Root's durable scientific goal reference; Root
-  does not copy it into prompts or JSON.
+- Root is authoritative for user scope, cross-direction Portfolio ranking and
+  lifecycle, direct EM/CM dispatch, recovery, worktree allocation, external
+  archive validation, Git integration, and final delivery. `PORTFOLIO.md`
+  remains Root's durable scientific goal and lifecycle-reason authority; the
+  registry remains the lifecycle/dependency authority.
 - At `START_OR_RESUME`, Root loads `hmasd-root-control` and
   `hmasd-git-integration`, reads `PORTFOLIO.md`, and reconciles registry,
-  runtime mappings, Hub jobs, worktrees, run manifests, Agentify references,
-  and Git before dispatch.
+  direction states, runtime mappings, Hub jobs, worktrees, run manifests,
+  Agentify references, and Git before dispatch.
 - Root repeats that prompt-driven reconciliation after resume or a detected
   compaction boundary. It uses the persisted goal reference, not a generic
   persistent-goal engine or a post-compaction hook.
-- `autoResume` and native per-agent-type Advisors are enabled in
-  `.omp/config.yml`. Advisor selection is resolved at spawn and persists in
-  `session_init`, including cold revival; it is not mutated by Hub job ID.
+- `autoResume` is enabled and Root's continuous Advisor is disabled in
+  `.omp/config.yml`. `task.agentAdvisor` contains only the two Implementer
+  leaves, enabling engineering advice for `hmasd-implementer` and
+  `hmasd-implementer-terra`. Every other project role runs without a
+  continuous Advisor.
 - Root stops only at `IDLE`, `COMPLETE`, an explicit user decision boundary, or
   an exhausted safe recovery route. It never runs a recurring primary-agent
   model poller.
@@ -31,14 +34,13 @@ is the 18 `hmasd-*` definitions under `.omp/agents/`.
 
 - Use only the exact project role names in `.omp/agents/`; do not invent aliases,
   compatibility names, or generated per-direction definitions.
-- `hmasd-portfolio`, `hmasd-em`, and `hmasd-cm` are the only project
-  spawn-capable managers. All other project roles are non-blocking leaves.
-- Root may directly invoke every project role. Normal routing through
-  Portfolio, EM, and CM is an efficiency convention, not a permission gate.
+- `hmasd-em` and `hmasd-cm` are the only project spawn-capable managers. All
+  other project roles are non-blocking leaves; there is no Portfolio agent.
+- Root directly invokes EM and CM managers and may directly invoke every project
+  leaf.
 - The bundled `task` agent is Root-only and may be used only when no project
-  role fits. The bundled `librarian` is available to Root, Portfolio, EM, and
-  CM. Only Root may dispatch `hmasd-workflow-recovery-manager`; managers do not
-  spawn it.
+  role fits. The bundled `librarian` is available to Root, EM, and CM. Only Root
+  may dispatch `hmasd-workflow-recovery-manager`; managers do not spawn it.
 - Bundled agents disabled in config cannot be used as substitutes for explicit
   project roles. Repository investigation uses `hmasd-project-scout`, code
   investigation uses `hmasd-code-scout`, and scientific investigation uses
@@ -46,8 +48,8 @@ is the 18 `hmasd-*` definitions under `.omp/agents/`.
 - Every task agent is non-blocking and asynchronous. Specialists are leaves;
   missing reviewer, test, Dashboard, or Advisor output is an evidence gap, not
   a permission failure.
-- Use `task` with `maxRecursionDepth: 3` only for a valid declared spawn edge.
-  Root → Portfolio → EM → specialist is the maximum research path.
+- Use `task` with `maxRecursionDepth: 2` only for a valid declared spawn edge.
+  Root → EM/CM → specialist is the maximum path.
 
 ## Hub lifecycle
 
@@ -56,10 +58,9 @@ is the 18 `hmasd-*` definitions under `.omp/agents/`.
   completion. Do not substitute a polling loop.
 - The Experiment Operator owns exactly one result-bearing command from
   `hub start` through terminal return and records its observed manifest.
-- A parked Portfolio, EM, or CM session is revived by a parent Hub message
-  carrying only material transitions. File changes, process exits, or Hub
-  completion wake bounded reassessment; they do not create successor sessions
-  automatically.
+- A parked EM or CM session is revived by a parent Hub message carrying only
+  material transitions. File changes, process exits, or Hub completion wake
+  bounded reassessment; they do not create successor sessions automatically.
 - Cross-task callers invoke documented CLIs and declared role names, never
   private helper functions or duplicate state writers.
 - Start the optional Dashboard through Hub under the stable process name
@@ -81,6 +82,13 @@ Advisors inspect transcript deltas read-only and non-gating. They never approve,
 reject, block, authorize, mutate, run tests, dispatch agents, or become a state
 authority. The configured matrix, not an invocation profile or a job-ID
 mutation, selects the model.
+- Hub steering may be absent from an Advisor transcript. Implementer
+  assignments are therefore scope-frozen after spawn: a material change to
+  goals, non-goals, owned paths, authorization, or interfaces cancels that leaf
+  and dispatches a replacement with the complete assignment. Ordinary EM/CM
+  managers have no Advisor and may accept compatible Hub updates in place.
+  Without complete scope context, an Advisor may request reconciliation but
+  cannot issue a blocker.
 
 ## Root-managed paths and state
 

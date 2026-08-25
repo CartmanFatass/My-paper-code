@@ -211,7 +211,7 @@ def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
         ),
         (
             "docs/research/candidates/example-direction/workflow/engineering/state.json",
-            ("portfolio",),
+            ("portfolio", "agents"),
             "engineering_state:example-direction",
         ),
         (
@@ -273,13 +273,12 @@ def test_any_persistently_changing_source_returns_http_conflict_without_data(
     assert payload["data"] == {}
 
 
-def test_valid_root_portfolio_em_and_cm_runtime_rows_are_reconciled(tmp_path: Path) -> None:
+def test_valid_root_em_and_cm_runtime_rows_are_reconciled(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     runtime_path = root / dashboard.RUNTIME_AGENTS_REL
     runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
     runtime["agents"] = [
         _runtime_agent("Root", "hmasd-root", "Root", "Root"),
-        _runtime_agent("Portfolio", "hmasd-portfolio", "Root", "Portfolio"),
         runtime["agents"][0],
         _runtime_agent("CM-example-direction", "hmasd-cm", "Root", "CMExampleDirection"),
     ]
@@ -290,9 +289,13 @@ def test_valid_root_portfolio_em_and_cm_runtime_rows_are_reconciled(tmp_path: Pa
     assert agents["status"] == "ok"
     assert agents["warnings"] == []
     by_identity = {item["logical_identity"]: item for item in agents["data"]["agents"]}
-    assert set(by_identity) == {"Root", "Portfolio", "EM-example-direction", "CM-example-direction"}
+    assert set(by_identity) == {"Root", "EM-example-direction", "CM-example-direction"}
     assert by_identity["Root"]["agent_type"] == "hmasd-root"
+    assert by_identity["EM-example-direction"]["parent_identity"] == "Root"
+    assert by_identity["EM-example-direction"]["direction_id"] == "example-direction"
     assert by_identity["CM-example-direction"]["agent_type"] == "hmasd-cm"
+    assert by_identity["CM-example-direction"]["parent_identity"] == "Root"
+    assert by_identity["CM-example-direction"]["phase"] == "SCOPING"
 
 
 def test_runtime_manager_generation_mismatch_remains_stale(tmp_path: Path) -> None:

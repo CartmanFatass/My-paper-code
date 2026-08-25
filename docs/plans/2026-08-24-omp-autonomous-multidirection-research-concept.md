@@ -2,44 +2,40 @@
 
 ## Status
 
-The role-scoped per-agent-type Advisor design below is approved as the target.
-The repository still contains the previously implemented routed headless
-Advisor as a provisional baseline until the detailed plan's clean cutover.
-The remainder of the workflow is an implementation-ready design, not executable
-state or authorization to modify HMASD or Agentify.
+Implemented target, amended 2026-08-25: cross-direction Portfolio selection,
+lifecycle, resource attention, and EM/CM dispatch are merged into the
+user-facing Root session. `PORTFOLIO.md` and its registry remain durable
+authorities; there is no Portfolio agent. The task tree has two subagent levels.
+Root, EM, and CM continuous Advisors are disabled. Only Implementer leaves opt
+in to engineering advice; frozen checkpoint reviews cover cross-direction and
+deep-tree evidence.
 
 Detailed implementation contract:
 `docs/plans/2026-08-24-omp-autonomous-multidirection-research-implementation.md`.
-It resolves schemas, interfaces, phases, verification, rollout, and deletion
-conditions.
 
-## Role-scoped per-agent-type Advisors (approved target)
+## Advisor policy
 
-HMASD uses native continuous Advisors only for roles where early transcript-
-delta correction is materially different from a later Reviewer:
+Root's Advisor subsystem is disabled. `task.agentAdvisor` contains only the two
+Implementer leaves:
 
 ```text
-Root                         -> architecture / opencode-go/glm-5.3:high
-hmasd-portfolio              -> science / openai-codex/gpt-5.6-sol:high
-hmasd-em                     -> science / openai-codex/gpt-5.6-sol:high
-hmasd-cm                     -> architecture + engineering / opencode-go/glm-5.3:high
+Root, hmasd-em, hmasd-cm     -> no Advisor
 hmasd-implementer            -> engineering / opencode-go/glm-5.3:high
 hmasd-implementer-terra      -> engineering / opencode-go/glm-5.3:high
 all other project agents     -> no Advisor
 ```
 
-Root uses `advisor.enabled` and the default Advisor model role. Subagents use
-`task.agentAdvisor[agentName]`; OMP resolves the choice when the child spawns
-and persists it in `session_init`, including cold revival. `/agents` configures
-future spawns by agent name, not an already-running Hub job by job ID. The
-mapping is stable workflow configuration and is not toggled per ordinary task.
+Implementers are scope-frozen leaves with complete assignments, owned files,
+diffs, and focused checks in one primary transcript. A material scope change
+cancels and replaces the leaf instead of relying on Hub steering that its
+Advisor may not receive. Deep-tree evidence is reviewed through explicit frozen
+checkpoint bundles sent to `hmasd-reviewer` or `hmasd-research-critic`;
+continuous advice never becomes a gate.
 
-One `.omp/WATCHDOG.md` routes strictly by the primary role. No WATCHDOG roster
-fixes a model, because a roster model would override the per-session Advisor
-role. The Advisor continuously reviews transcript deltas but remains read-only
-and advisory: it never approves, rejects, blocks, authorizes, gates, mutates,
-runs tests, dispatches agents, or becomes a state authority. Root/user approval
-boundaries remain authoritative.
+One `.omp/WATCHDOG.md` routes strictly to Implementer engineering review. The
+Advisor remains read-only and advisory: it never approves, rejects, blocks,
+authorizes, gates, mutates, runs tests, dispatches agents, or becomes a state
+authority. Root and user approval boundaries remain authoritative.
 
 Architecture checks control-plane simplicity, state authority, irreversible
 effects, lifecycle, and recovery. Engineering checks batching, independent
@@ -159,18 +155,16 @@ future TODO.
 
 ```text
 Root main session                              depth 0
-├── Portfolio                                  depth 1
-│   ├── EM-<direction>                         depth 2
-│   │   ├── research scout                     depth 3
-│   │   ├── research innovator                 depth 3
-│   │   ├── research critic                    depth 3
-│   │   ├── principles analyst                 depth 3
-│   │   ├── artifact writer                    depth 3
-│   │   ├── code scout                         depth 3
-│   │   ├── external Pro transport             depth 3
-│   │   ├── external Gemini transport          depth 3
-│   │   └── librarian                          depth 3
-│   └── 2–8 active directions
+├── EM-<direction>                             depth 1
+│   ├── research scout                         depth 2
+│   ├── research innovator                     depth 2
+│   ├── research critic                        depth 2
+│   ├── principles analyst                     depth 2
+│   ├── artifact writer                        depth 2
+│   ├── code scout                             depth 2
+│   ├── external Pro transport                 depth 2
+│   ├── external Gemini transport              depth 2
+│   └── librarian                              depth 2
 ├── CM-<direction>                              depth 1
 │   ├── project/code scout                     depth 2
 │   ├── implementer                            depth 2
@@ -180,35 +174,24 @@ Root main session                              depth 0
 │   ├── experiment operator                    depth 2
 │   ├── research scout                         depth 2
 │   └── librarian                              depth 2
-└── Root-direct project agents, task, librarian
+└── Root-direct project leaves, task, librarian
 ```
 
-The full research path requires `task.maxRecursionDepth: 3`. The provisional
-baseline uses depth 2 and is not sufficient.
-
-All project agents are non-blocking and asynchronous. Specialists are leaves and
-cannot spawn further agents. Root, Portfolio, EM, and CM are the only ordinary
-spawn-capable layers. Workflow Recovery is Root-only.
+The maximum path uses `task.maxRecursionDepth: 2`. All project agents are
+non-blocking and asynchronous. EM and CM are the only project spawn-capable
+managers; specialists are leaves and Workflow Recovery remains Root-only.
 
 ### Root authority
 
-Root may directly invoke every project agent. Normal routing through Portfolio,
-EM, and CM is an efficiency convention, not a permission gate. Bundled `task`
-is retained but may be invoked explicitly only by Root when no project-specific
-role fits. Bundled `librarian` is available to Root, Portfolio, EM, and CM.
+Root owns user scope, cross-direction selection and synthesis, resource
+attention, shared scientific opportunities, direction lifecycle, direct EM/CM
+dispatch, recovery, and final integration. Root may directly invoke every
+project agent. Bundled `task` is retained for Root only when no project-specific
+role fits; bundled `librarian` is available to Root, EM, and CM.
 
-### Portfolio authority
-
-Portfolio owns cross-direction selection, synthesis, resource attention, shared
-scientific opportunities, and direction lifecycle. It may directly invoke:
-
-- EM instances;
-- all research specialists and artifact writers;
-- external Pro/Gemini transports;
-- code scout for cross-direction engineering visibility;
-- librarian.
-
-Portfolio does not directly implement code.
+Root records lifecycle reasons in `PORTFOLIO.md` and replaces the registry by
+CAS using the durable authority writer `Portfolio`; that writer label is not an
+agent identity. Root does not directly implement direction code.
 
 ### EM authority
 
@@ -225,26 +208,25 @@ ambiguity returns to Root/EM rather than being silently redefined by CM.
 
 ### Agent inventory
 
-The project will expose exactly these 18 project agent types:
+The project exposes exactly these 17 project agent types:
 
-1. `hmasd-portfolio`
-2. `hmasd-em`
-3. `hmasd-cm`
-4. `hmasd-project-scout`
-5. `hmasd-code-scout`
-6. `hmasd-implementer`
-7. `hmasd-implementer-terra`
-8. `hmasd-reviewer`
-9. `hmasd-verifier`
-10. `hmasd-experiment-operator`
-11. `hmasd-workflow-recovery-manager`
-12. `hmasd-external-pro-transport`
-13. `hmasd-external-gemini-transport`
-14. `hmasd-research-scout`
-15. `hmasd-research-innovator`
-16. `hmasd-research-critic`
-17. `hmasd-research-principles-analyst`
-18. `hmasd-research-artifact-writer`
+1. `hmasd-em`
+2. `hmasd-cm`
+3. `hmasd-project-scout`
+4. `hmasd-code-scout`
+5. `hmasd-implementer`
+6. `hmasd-implementer-terra`
+7. `hmasd-reviewer`
+8. `hmasd-verifier`
+9. `hmasd-experiment-operator`
+10. `hmasd-workflow-recovery-manager`
+11. `hmasd-external-pro-transport`
+12. `hmasd-external-gemini-transport`
+13. `hmasd-research-scout`
+14. `hmasd-research-innovator`
+15. `hmasd-research-critic`
+16. `hmasd-research-principles-analyst`
+17. `hmasd-research-artifact-writer`
 
 The obsolete engineering `hmasd-cpm-agentify-transport` is removed. Existing
 Pro research transport is cleanly renamed `hmasd-external-pro-transport`.
@@ -279,31 +261,29 @@ and the mapping between both forms.
 
 ## Agent lifecycle and automatic continuation
 
-Portfolio, EM, and CM are long-lived logical identities executed through bounded
-turns:
+EM and CM are long-lived logical identities executed through bounded turns:
 
 ```text
 persistent session/transcript
 + bounded tick
 + idle/parked when waiting
-+ parent message to revive
-+ generation rotation at material boundaries
++ Root message to revive
++ generation rotation at incompatible boundaries
 ```
 
 They are not permanent inference loops. A parked OMP agent does not wake on file
-changes by itself; Root or its parent manager sends a Hub message when work is
-newly actionable. This is automatic inside the Root control loop and does not
-require user session management.
+changes by itself; Root sends a Hub message when work becomes actionable.
 
 Lifecycle policy:
 
-- prefer revival and reuse of the existing Portfolio/EM/CM session;
-- rotate generation only after a material direction redefinition, state/context
-  inconsistency, untrustworthy recovery, or context exhaustion risk;
-- after OMP compaction, perform a light reconciliation of current state,
-  active children, pending actions, and external/run references;
-- continue the generation when reconciliation succeeds;
-- create a new generation from durable state when it does not.
+- prefer revival and reuse of the existing EM/CM session while role, identity,
+  owned paths, and frozen checkpoint remain compatible;
+- rotate only for incompatible direction redefinition, ownership/checkpoint
+  mismatch, untrustworthy recovery, or context exhaustion;
+- after OMP compaction, Root reconciles portfolio and workflow state while each
+  active EM/CM reconciles its bounded direction state;
+- continue the generation when reconciliation succeeds, otherwise reconstruct
+  it from durable state.
 
 Concrete OMP handles are local runtime data under ignored
 `.omp/runtime/*.json`. Git stores only logical identity, direction, generation,
@@ -317,8 +297,8 @@ it is not durable direction state.
 Automatic continuation is event-driven through native OMP task completion, Hub
 messages, process termination, file changes, and external-review/run completion.
 There is no continuous model polling. When current open directions have no
-work, Portfolio performs one bounded reassessment of the registered direction
-pool. If nothing qualifies, it enters IDLE.
+work, Root performs one bounded reassessment of the registered direction pool.
+If nothing qualifies, it enters IDLE.
 
 ## Agent Hub observability
 
@@ -344,8 +324,8 @@ control/recovery reserve implemented in Skills, not a lease system or mechanical
 capacity gate. Ordinary work targets at most 28 active worker slots; urgent
 control or recovery work may start and let ordinary work queue naturally.
 
-- Portfolio dynamically chooses 2–8 active directions after mechanical
-  eligibility filtering and scientific ranking.
+- Root dynamically chooses 2–8 active directions after mechanical eligibility
+  filtering and scientific ranking.
 - Each EM starts two specialists by default and may expand to four when the
   material question and current capacity justify it.
 - Each CM starts two specialists by default and may expand to six when file
@@ -356,27 +336,26 @@ control or recovery work may start and let ordinary work queue naturally.
 No new capacity scheduler or resource lease is introduced. Real resource
 conflicts may justify a later narrow mechanism only after they are observed.
 
-Portfolio may autonomously create, register, activate, park, merge, close, and
-reactivate directions. Registered directions have no hard count limit. Every
-merge/closure records a material scientific reason, inheritance relationship,
-and reactivation condition in the authoritative Markdown/Git history.
+Root may create, register, activate, park, merge, close, and reactivate
+directions. Registered directions have no hard count limit. Every merge or
+closure records a material scientific reason, inheritance relationship, and
+reactivation condition in authoritative Markdown/Git history.
 
 Mechanical eligibility filters hard blockers, duplicate IDs, dependencies, and
-resource impossibility. Portfolio performs the scientific ranking using
-information value, scientific potential, shared benefit, evidence, and cost.
+resource impossibility. Root performs scientific ranking using information
+value, potential, shared benefit, evidence, and absolute cost estimates.
 
 ## Project skills and hard rules
 
-Eight project Skills are loaded through agent frontmatter `autoloadSkills`:
+Seven project Skills define the workflow:
 
 1. `hmasd-root-control`
-2. `hmasd-portfolio-control`
-3. `hmasd-em-direction-cycle`
-4. `hmasd-cm-engineering-cycle`
-5. `hmasd-result-run`
-6. `hmasd-scientific-external-review`
-7. `hmasd-workflow-recovery`
-8. `hmasd-git-integration`
+2. `hmasd-em-direction-cycle`
+3. `hmasd-cm-engineering-cycle`
+4. `hmasd-result-run`
+5. `hmasd-scientific-external-review`
+6. `hmasd-workflow-recovery`
+7. `hmasd-git-integration`
 
 Skills define role procedures, scientific methods, dispatch strategy,
 performance expectations, escalation, recovery reasoning, and how to use
@@ -417,13 +396,13 @@ next_action
 Ordinary `event_id` is not used. External irreversible operations retain their
 Agentify idempotency and operation IDs.
 
-Role-specific schemas cover Portfolio, EM research, CM engineering,
-implementation, review, verification, run, external transport, monitor, and
-artifact writing. Exact field schemas belong in the later design document.
+Role-specific schemas cover Root portfolio decisions, EM research, CM
+engineering, implementation, review, verification, run, external transport,
+monitor, and artifact writing. Exact field schemas belong in the detailed plan.
 
 Only material direction, portfolio, user, blocker, or terminal transitions are
-actively injected into Root/Portfolio context. Full outputs remain in agent
-transcripts, artifacts, files, and Agent Hub.
+injected into Root context. Full outputs remain in agent transcripts, artifacts,
+files, and Agent Hub.
 
 ## Scientific and workflow state
 
@@ -566,18 +545,17 @@ effort may raise it to xhigh.
 
 ## Model and context policy
 
-Every project agent declares a full concrete OpenAI-Codex selector rather than a
-project role alias. Existing Sol/Luna/Terra assignment is preserved, with the
-new Portfolio using Sol max.
+Every project agent declares a concrete OpenAI-Codex selector rather than a
+project role alias. Existing Sol/Luna/Terra assignments are preserved.
 
-Reviewer changes from the provisional xhigh default to Sol high with optional
-per-task escalation.
+Reviewer remains Sol high with optional per-task escalation. Root and manager
+Advisors are disabled; only the two Implementer mappings opt in explicitly.
 
-At user scope, every current OpenAI-Codex model receives a `contextWindow` model
+At user scope, every current OpenAI-Codex model receives a `contextWindow`
 override of 372,000 tokens. New catalog models require the same override when
 introduced. HMASD does not override OMP compaction thresholds; it uses default
 reserve-based compaction, mid-turn safety checks, and automatic continuation.
-Long-lived Portfolio/EM/CM agents perform a light state reconciliation after
+Root and long-lived EM/CM agents perform light state reconciliation after
 compaction.
 
 ## Git and worktrees

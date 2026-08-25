@@ -11,45 +11,25 @@ Ordinary workflow execution never toggles the mapping.
 Route strictly by the primary role recorded for the session:
 
 ```text
-Root                         -> architecture
-hmasd-portfolio, hmasd-em    -> science
-hmasd-cm                     -> architecture + engineering
+Root, hmasd-em, hmasd-cm     -> no Advisor
 hmasd-implementer,
 hmasd-implementer-terra      -> engineering
-all other roles              -> no advice
+all other roles              -> no Advisor
 ```
 
-Root uses the configured default GLM Advisor. Portfolio and EM use the
-configured Sol Advisor. CM and both Implementers use the configured GLM Advisor.
-Reviewer, Verifier, Project/Code/Research Scouts, Innovator, Critic, Principles
-Analyst, Experiment Operator, both transports, Artifact Writer, and Recovery
-Manager receive no Advisor. Never apply a science, architecture, or engineering
-check outside the route above.
+Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
+`task.agentAdvisor` entries opt in the two Implementer leaves with
+`opencode-go/glm-5.3:high`. Root, EM, CM, Reviewer, Verifier,
+Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment
+Operator, both transports, Artifact Writer, and Recovery Manager receive no
+continuous Advisor.
 
-## Architecture route
-
-For Root and CM architecture review, watch for unnecessary control-plane
-machinery, duplicate state authorities or writers, hidden approval layers,
-unsafe irreversible effects, broken logical-session lifecycle, unbounded
-polling, and recovery that can replay an unknown effect. Prefer ordinary files,
-functions, process exits, Git, Hub lifecycle events, and bounded reconciliation.
-
-## Science route
-
-For Portfolio and EM science review, examine action/state growth, sparse-reward
-exploration, explore/exploit balance, variable-agent robustness, variable
-skill-duration and k/t exploration catastrophe, discriminating experiments,
-grouped MARL assumptions, causal alternatives, and innovations not constrained
-by the current direction. Keep source fact, external evidence, inference, and
-speculation distinct. When needed, read `docs/new-libs` and
-`/home/fires/projects/Inst-sci` as research context; neither path becomes a
-scientific authority by itself.
 
 ## Engineering route
 
-For CM and both Implementers, examine batching, genuinely independent
-parallelism, applicable C++ backends, algorithmic complexity, peak memory, data
-movement, interface/caller coverage, and focused behavioral evidence. Require
+For both Implementers, examine batching, genuinely independent parallelism,
+applicable C++ backends, algorithmic complexity, peak memory, data movement,
+interface/caller coverage, and focused behavioral evidence. Require
 preservation of scientific, numerical, RNG, checkpoint, external-effect, and
 any explicitly required bit-identity semantics. Flag a cross-file rename that
 does not use native LSP and an exported-symbol edit that lacks LSP references.
@@ -67,6 +47,25 @@ Missing, delayed, or unavailable advice is an evidence gap. Ordinary authorized
 reversible work continues. User decisions, external commitment state, exact run
 approval requests, canonical path checks, and Git authority remain governed by
 `.omp/RULES.md` and the relevant Skill.
+
+## Transcript-completeness boundary
+
+Hub or IRC steering delivered to a running primary may be absent from the
+Advisor transcript. The Advisor therefore must not classify deviation from the
+initial assignment as a blocker solely because it cannot see a later parent
+scope update. It may issue one non-blocking request to reconcile scope. Only an
+observed hard-boundary violation remains actionable without that context.
+
+Implementer assignments are scope-frozen after spawn. If parent steering
+materially changes goals, non-goals, owned paths, authorization, or interfaces,
+Root/CM cancels that leaf and dispatches a replacement with the complete
+assignment instead of relying on unseen Hub text. Primary-agent paraphrase is
+not evidence that its Advisor received the authoritative update.
+
+Implementers are leaves and own no descendant task tree. Their Advisor may
+assess only the implementer's complete primary transcript, assigned files,
+diffs, and focused checks. Cross-direction or multi-manager assessment uses an
+explicit checkpoint review with frozen envelopes and artifact references.
 
 ## Cold-revival contract
 
