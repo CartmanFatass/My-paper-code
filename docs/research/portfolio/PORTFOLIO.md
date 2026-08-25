@@ -556,3 +556,64 @@ The generation-3 parking decision above is superseded for current lifecycle purp
 No available evidence supplies a command-level absolute resource estimate for that successor. A relative factor without an absolute baseline is not a scheduling fact, and a missing projection is a work item rather than a stopping condition. Portfolio therefore reactivates MGTAP for a fresh generation-2 EM evidence cycle that must freeze the exact workload/command boundary and request an estimate of peak memory, wall time, storage, and devices without running the command. An estimate at or below 7,200 seconds and within safe workstation capacity may later be scheduled without user approval; an estimate above 7,200 seconds requires a performance-reasonableness review attempt and explicit user approval, while an unsafe memory plan must be reduced, batched, or sharded.
 
 This reactivation authorizes no science-card or `DIRECTION.md` mutation, external provider turn, source change, CM dispatch, identity, lease, Operator, result-bearing command, result or partial-value access, Git operation, deployment, or flight. Its exact next boundary is one local identifiability audit plus one source-grounded command/workload and resource-estimation handoff.
+
+## Post-evidence manager continuation — 2026-08-25T11:40:48Z
+
+### Reconciled manager evidence
+
+The generation-2 FSBS cycle completed its fixed-authority audit and found no
+meaning-complete variable-axis cooperative/UAV edge. Its research state is
+revision 3, `WAITING`, non-actionable, with no engineering request and the
+exact resume condition recorded in
+`FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md`.
+The fixed-cardinality B1 evidence remains retained; this is an authority gap,
+not a negative scientific result.
+
+The generation-2 SCDMP cycle completed the fusion identity crosswalk. Its
+research state is revision 3, `COMPLETE`, non-actionable, with no engineering
+request. The two mature objects share role-level concepts but do not establish
+one task-native identity satisfying the competent order-erased foundation and
+the foundation-conditioned direct order-opportunity gate.
+
+MGTAP research state revision 3 contains one explicit engineering request for
+a nonregistered, non-scientific preactivity resource estimator. CM generation 1
+implemented that bounded estimator and advanced engineering state to revision
+2, `VERIFYING`. The user's continuation wake resumes only that validation and
+environment work. It does not authorize production successor construction or a
+scientific result command.
+
+UCOPE remains the clearest registered engineering-continuation candidate. Its
+direction authority records that the variable-k paid-probe object is Pro-closed,
+S0 is complete, and S1 implementation is the current continuation. Bootstrap
+state deliberately created no durable engineering request, so the next action
+is one bounded EM reconciliation of the exact S1 scope, acceptance, source, and
+resource boundary before any CM dispatch.
+
+### Lifecycle decisions
+
+| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
+| --- | --- | --- | --- |
+| `finite_semantic_boundary_support` | park | `PARKED` | The current fixed authority cannot define the required variable-axis cooperative/UAV object or an engineering scope. Reactivation requires a new direction-science authority that fixes the varied quantity/support, host roles, isolating intervention/comparator, matched resource/activity/inference gates, and allowed conclusion. |
+| `metric_ground_transport_allocation` | continue CM verification | `ACTIVE` | One exact preactivity resource-estimator request is durable and implemented; focused validation remains actionable without scientific execution. |
+| `semigroup_consistent_duration_model_policy` | park | `PARKED` | The bounded fusion crosswalk is complete and the frozen objects do not establish same-target native identity. Reactivation requires a new meaning-complete same-target authority satisfying identity, foundation competence, and foundation-conditioned opportunity. |
+| `ucope` | activate for bounded EM reconciliation | `ACTIVE` | The retained Pro-closed object and completed S0 identify S1 as the current continuation, but a revision-4-aware durable engineering request must be authored before CM work. |
+
+Formal dependencies remain `[]`; the decisions change resource attention and
+do not manufacture a dependency graph or reinterpret retained results.
+
+### Bounded dispatch boundary
+
+Resume `CM-metric_ground_transport_allocation` generation 1 against the exact
+MGTAP estimator handoff and engineering-state revision 2. Its scope is limited
+to resolving environment/diagnostic defects, running the focused estimator
+contract checks, and returning an auditable non-scientific estimate boundary.
+The real estimate command, if required after source verification, remains owned
+by exactly one Experiment Operator.
+
+Dispatch `EM-ucope` generation 1 against registry revision 5, the exact UCOPE
+direction authority, its two cited source documents, research-state revision 1,
+and external-index revision 1. The cycle may create a durable S1 engineering
+request only if exact implementation scope, acceptance, preserved invariants,
+source paths, and resource boundary are evidence-backed. It authorizes no CM
+dispatch by EM, source mutation, external provider turn, result command,
+Operator, or Git integration.

@@ -254,14 +254,18 @@
       "engineering_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/external-review/index.json",
       "id": "finite_semantic_boundary_support",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "PARKED",
       "lifecycle_decision_ref": {
-        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
+        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
       },
       "path": "docs/research/candidates/finite_semantic_boundary_support",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
+      },
       "research_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/research/state.json"
     },
     {
@@ -496,14 +500,18 @@
       "engineering_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json",
       "id": "semigroup_consistent_duration_model_policy",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "PARKED",
       "lifecycle_decision_ref": {
-        "heading": "Generation-3 resume reassessment — 2026-08-25T05:24:40Z",
+        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
       },
       "path": "docs/research/candidates/semigroup_consistent_duration_model_policy",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
+      },
       "research_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/research/state.json"
     },
     {
@@ -518,11 +526,11 @@
       "engineering_state_path": "docs/research/candidates/ucope/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/ucope/workflow/external-review/index.json",
       "id": "ucope",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
       },
       "path": "docs/research/candidates/ucope",
       "reactivation_condition_ref": null,
@@ -729,11 +737,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+    "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
   },
-  "revision": 4,
+  "revision": 5,
   "schema_version": 1,
-  "updated_at": "2026-08-25T05:37:47Z",
+  "updated_at": "2026-08-25T11:40:48Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }
