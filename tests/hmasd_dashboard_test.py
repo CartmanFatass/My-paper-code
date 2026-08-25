@@ -130,7 +130,16 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
     second = dashboard.build_snapshot(root)
     assert dashboard._json_text(first) == dashboard._json_text(second)
     assert set(first["data"]) == {"portfolio", "agents", "runs", "external_reviews", "worktrees"}
-    assert first["data"]["portfolio"]["data"]["directions"][0]["id"] == "example-direction"
+    portfolio = first["data"]["portfolio"]["data"]
+    assert portfolio["directions"][0]["id"] == "example-direction"
+    assert portfolio["directions"][0]["current_route"]["owner"] == "CM"
+    assert portfolio["summary"] == {
+        "total": 1,
+        "lifecycle_counts": {"REGISTERED": 1},
+        "owner_counts": {"CM": 1},
+        "actionable_count": 1,
+        "queued_count": 0,
+    }
     assert first["data"]["agents"]["data"]["agents"][0]["logical_identity"]
     assert first["data"]["runs"]["data"]["runs"][0]["run_id"] == "example-run"
     assert first["data"]["external_reviews"]["data"]["rounds"][0]["round_id"]
@@ -188,6 +197,15 @@ def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) ->
         server.shutdown()
         server.server_close()
         thread.join(timeout=2)
+
+
+
+def test_portfolio_semantics_accept_more_than_eight_active_queues() -> None:
+    directions = [
+        {"id": f"direction-{index}", "lifecycle": "ACTIVE", "dependencies": []}
+        for index in range(9)
+    ]
+    assert dashboard._semantic_valid("portfolio_registry", {"directions": directions})
 
 
 def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:

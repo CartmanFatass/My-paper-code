@@ -327,8 +327,6 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
         ids = [identifier for identifier in raw_ids if isinstance(identifier, str)]
         if len(ids) != len(set(ids)):
             return False
-        if sum(item.get("lifecycle") == "ACTIVE" for item in directions if isinstance(item, dict)) > 8:
-            return False
         known = set(ids)
         graph: dict[str, list[str]] = {}
         for item in directions:
@@ -575,8 +573,11 @@ def _safe_research(value: Mapping[str, Any]) -> dict[str, Any]:
         ]
         result["waiting_kinds"] = sorted(set(waiting_kinds))
     next_action = value.get("next_action")
-    if isinstance(next_action, Mapping) and isinstance(next_action.get("kind"), str):
-        result["next_action_kind"] = next_action["kind"]
+    if isinstance(next_action, Mapping):
+        if isinstance(next_action.get("kind"), str):
+            result["next_action_kind"] = next_action["kind"]
+        if isinstance(next_action.get("owner"), str):
+            result["next_action_owner"] = next_action["owner"]
     return result
 
 
@@ -603,9 +604,30 @@ def _safe_engineering(value: Mapping[str, Any]) -> dict[str, Any]:
             for key in ("target_branch", "target_sha_seen", "integrated_sha")
             if key in integration and (isinstance(integration[key], str) or integration[key] is None)
         }
+    blockers = value.get("blockers")
+    if isinstance(blockers, list):
+        result["blocker_codes"] = sorted(
+            {
+                item["code"]
+                for item in blockers
+                if isinstance(item, Mapping) and isinstance(item.get("code"), str)
+            }
+        )
+    waiting = value.get("waiting_on")
+    if isinstance(waiting, list):
+        result["waiting_kinds"] = sorted(
+            {
+                item["kind"]
+                for item in waiting
+                if isinstance(item, Mapping) and isinstance(item.get("kind"), str)
+            }
+        )
     next_action = value.get("next_action")
-    if isinstance(next_action, Mapping) and isinstance(next_action.get("kind"), str):
-        result["next_action_kind"] = next_action["kind"]
+    if isinstance(next_action, Mapping):
+        if isinstance(next_action.get("kind"), str):
+            result["next_action_kind"] = next_action["kind"]
+        if isinstance(next_action.get("owner"), str):
+            result["next_action_owner"] = next_action["owner"]
     return result
 
 
@@ -673,6 +695,30 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
             else:
                 statuses.append(document.status)
                 _warning_add(warnings, document.warning)
+        research = output.get("research_state")
+        engineering = output.get("engineering_state")
+        research = research if isinstance(research, Mapping) else {}
+        engineering = engineering if isinstance(engineering, Mapping) else {}
+        route_source = (
+            engineering
+            if engineering.get("phase") not in {None, "UNREQUESTED"}
+            else research
+        )
+        blocker_codes = sorted(
+            set(research.get("blocker_codes", []))
+            | set(engineering.get("blocker_codes", []))
+        )
+        waiting_kinds = sorted(
+            set(research.get("waiting_kinds", []))
+            | set(engineering.get("waiting_kinds", []))
+        )
+        output["current_route"] = {
+            "owner": route_source.get("next_action_owner"),
+            "kind": route_source.get("next_action_kind"),
+            "actionable": bool(research.get("actionable") or engineering.get("actionable")),
+            "blocker_codes": blocker_codes,
+            "waiting_kinds": waiting_kinds,
+        }
         ext_ref = item.get("external_review_index_path")
         if isinstance(ext_ref, str):
             ext_doc = sources.read_document(ext_ref, "external_review_index")
@@ -697,11 +743,32 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
             statuses.append("invalid")
             _warning_add(warnings, f"invalid:{identifier}:external_review_index_path")
         directions.append(output)
+    lifecycle_counts: dict[str, int] = {}
+    owner_counts: dict[str, int] = {}
+    actionable_count = 0
+    queued_count = 0
+    for direction in directions:
+        lifecycle = str(direction.get("lifecycle", "UNKNOWN"))
+        lifecycle_counts[lifecycle] = lifecycle_counts.get(lifecycle, 0) + 1
+        route = direction.get("current_route")
+        if isinstance(route, Mapping):
+            owner = route.get("owner")
+            if isinstance(owner, str):
+                owner_counts[owner] = owner_counts.get(owner, 0) + 1
+            actionable_count += int(route.get("actionable") is True)
+            queued_count += int(bool(route.get("waiting_kinds") or route.get("blocker_codes")))
+    summary = {
+        "total": len(directions),
+        "lifecycle_counts": lifecycle_counts,
+        "owner_counts": owner_counts,
+        "actionable_count": actionable_count,
+        "queued_count": queued_count,
+    }
     return _projection(
         status=_status_join(statuses),
         generated_at=_max_timestamp(generated_values),
         revision_refs=refs,
-        data={"goal": goal, "directions": directions},
+        data={"goal": goal, "summary": summary, "directions": directions},
         warnings=warnings,
     )
 

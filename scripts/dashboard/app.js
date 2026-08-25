@@ -53,6 +53,15 @@
     return header;
   }
 
+  function metric(label, value, detail = "") {
+    const card = document.createElement("div");
+    card.className = "metric-card";
+    card.append(cell(label, "label"), cell(value, "metric-value"));
+    if (detail) card.append(cell(detail, "muted metric-detail"));
+    return card;
+  }
+
+
   function warningsFor(sectionData) {
     if (!sectionData.warnings?.length) return null;
     const box = document.createElement("div");
@@ -111,8 +120,11 @@
     const current = section("portfolio");
     const data = current.data || {};
     const directions = Array.isArray(data.directions) ? data.directions : [];
+    const summary = data.summary || {};
+    const lifecycleCounts = summary.lifecycle_counts || {};
+    const ownerCounts = summary.owner_counts || {};
     const node = document.createDocumentFragment();
-    node.appendChild(heading("Portfolio", "Lifecycle, dependencies, and compact direction state", current.status));
+    node.appendChild(heading("Portfolio", "All directions, explicit next owners, and queued work", current.status));
     if (data.goal) {
       const goal = document.createElement("div");
       goal.className = "goal-card";
@@ -120,20 +132,44 @@
       goal.append(cell(data.goal.path, "mono"), cell(`sha ${String(data.goal.sha256 || "").slice(0, 12)}…`, "muted mono"));
       node.appendChild(goal);
     }
+    const metrics = document.createElement("div");
+    metrics.className = "metric-grid";
+    const ownerDetail = Object.entries(ownerCounts)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([owner, count]) => `${owner} ${count}`)
+      .join(" · ");
+    metrics.append(
+      metric("Directions", summary.total ?? directions.length, `${lifecycleCounts.ACTIVE || 0} active`),
+      metric("Actionable now", summary.actionable_count || 0),
+      metric("Queued / blocked", summary.queued_count || 0),
+      metric("Next owners", Object.keys(ownerCounts).length, ownerDetail || "none"),
+    );
+    node.appendChild(metrics);
     const rows = directions.map((direction) => {
       const research = direction.research_state || {};
       const engineering = direction.engineering_state || {};
-      const dependencies = Array.isArray(direction.dependencies) ? direction.dependencies.join(", ") : "—";
+      const route = direction.current_route || {};
       const status = direction.lifecycle || direction.research_state_status || "—";
+      const queue = [
+        ...(Array.isArray(route.waiting_kinds) ? route.waiting_kinds : []),
+        ...(Array.isArray(route.blocker_codes) ? route.blocker_codes : []),
+      ].join(", ") || "—";
       return [
         cell(`${direction.abbreviation || "—"} · ${direction.id || "—"}`, "strong"),
         badge(status.toLowerCase()),
-        dependencies,
+        cell(route.owner || "—", "strong"),
+        badge(route.actionable ? "ready" : "waiting"),
         `${research.phase || "—"} / ${engineering.phase || "—"}`,
+        cell(queue, queue === "—" ? "muted" : "queue"),
+        cell(route.kind || "—", "mono"),
         direction.external_round_count ?? 0,
       ];
     });
-    node.appendChild(table(["Direction", "Lifecycle", "Dependencies", "Research / engineering", "Review rounds"], rows, "No directions registered."));
+    node.appendChild(table(
+      ["Direction", "Lifecycle", "Next owner", "Actionable", "Research / engineering", "Queue / blockers", "Next action", "Reviews"],
+      rows,
+      "No directions registered.",
+    ));
     view.replaceChildren(node);
   }
 

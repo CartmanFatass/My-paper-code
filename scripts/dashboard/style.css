@@ -42,10 +42,15 @@ h3 { color: var(--muted); font-size: .9rem; letter-spacing: .08em; text-transfor
 .view-heading { align-items: flex-start; display: flex; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .view-heading p { font-size: .9rem; margin: 7px 0 0; }
 .badge { border: 1px solid currentColor; border-radius: 999px; display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .04em; padding: 3px 8px; text-transform: uppercase; white-space: nowrap; }
-.badge-ok, .badge-active, .badge-succeeded, .badge-complete, .badge-provisioned { color: var(--good); }
-.badge-missing, .badge-parked, .badge-prepared, .badge-running, .badge-divergent_pending { color: var(--warn); }
+.badge-ok, .badge-active, .badge-succeeded, .badge-complete, .badge-provisioned, .badge-ready { color: var(--good); }
+.badge-missing, .badge-parked, .badge-prepared, .badge-running, .badge-divergent_pending, .badge-waiting { color: var(--warn); }
 .badge-invalid, .badge-stale, .badge-failed, .badge-blocked, .badge-unknown { color: var(--bad); }
 .goal-card { align-items: center; background: var(--panel-strong); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 0 0 20px; padding: 14px 16px; }
+.metric-grid { display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 20px; }
+.metric-card { background: var(--panel-strong); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-direction: column; gap: 5px; min-height: 92px; padding: 14px 16px; }
+.metric-value { font-size: 1.7rem; font-weight: 720; letter-spacing: -.04em; }
+.metric-detail { font-size: .76rem; line-height: 1.35; }
+.queue { color: var(--warn); font-size: .8rem; }
 .label { color: var(--muted); font-size: .8rem; text-transform: uppercase; }
 .strong { font-weight: 650; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .83em; }
@@ -63,4 +68,5 @@ footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; 
   .masthead, main, footer { padding-left: 16px; padding-right: 16px; }
   .view { padding: 15px; }
   .view-heading { flex-direction: column; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
 }
