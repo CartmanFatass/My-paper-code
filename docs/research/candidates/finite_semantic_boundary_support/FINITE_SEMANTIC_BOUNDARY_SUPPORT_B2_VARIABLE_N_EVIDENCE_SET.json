@@ -1,0 +1,30 @@
+{
+  "direction_id": "finite_semantic_boundary_support",
+  "kind": "direction_science_evidence_set",
+  "question": "On the exact finite cooperative route-consensus host, can one shared permutation-invariant two-stage policy trained at roster sizes N=3 and N=5 learn to use an actor-visible valid carrier-mission association to select one mission-relevant sealed peer record per UAV under a one-read/one-service cap, and does that association improve correct selection and common team return when the frozen policy is evaluated at the unseen actual roster size N=7 relative to a conditionally exchangeable whole-carrier reassociation?",
+  "question_sha256": "df05afacc7ae21ef9809bd0adb022f5bdef38f0b74a13c2df05adddfd4646aa5",
+  "question_sha256_basis": "UTF-8 bytes of question followed by one LF",
+  "references": [
+    {
+      "path": "docs/research/RESEARCH_MAP.md",
+      "sha256": "8c2db819f73999775aaee740c0868790a8aef9b058154601f731db5e78829cbf"
+    },
+    {
+      "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md",
+      "sha256": "983917539fb0a4546d80e3bf9393393d2c7d9fd7f7f3d4862478b390cc26ecae"
+    },
+    {
+      "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_PROJECT_ALIGNMENT_ADDENDUM.md",
+      "sha256": "5fe9b143e134613469b2db9e3949e40e7b642bea7f3bcf0e879d1cba513be145"
+    },
+    {
+      "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md",
+      "sha256": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c"
+    },
+    {
+      "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_COOPERATIVE_UAV_SCIENCE_CARD.md",
+      "sha256": "59421efea8e770cb727dcc76331e16299fb831ff93555f3d455093305d4887b2"
+    }
+  ],
+  "schema_version": 1
+}

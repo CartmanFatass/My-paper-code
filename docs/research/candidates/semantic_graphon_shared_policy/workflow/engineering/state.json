@@ -1,24 +1,40 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "base_sha": "f890479fdec42fdc11376059a248e31b8c1ab134",
   "blockers": [],
   "candidate_sha": null,
-  "changed_paths": [],
+  "changed_paths": [
+    "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_20260825.md",
+    "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json"
+  ],
   "direction_id": "semantic_graphon_shared_policy",
   "integration": {
     "integrated_sha": null,
     "target_branch": "omp/workflow",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "f890479fdec42fdc11376059a248e31b8c1ab134"
   },
   "last_checkpoint_sha": null,
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED",
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md",
+        "sha256": "99f02e729b5924ec2e9403f3cade56da266a23f7b4115fdaaaf09cfd2de29fb1"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/research/state.json",
+        "sha256": "1449770b5ad305eef8154b2dca37ec1cb770f19fc665d686ff438a8b0e287166"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_20260825.md",
+        "sha256": "5293843c72e5efe6319d9396d6bf2cb86bcc669f5b80072614c352e6016c3f41"
+      }
+    ],
+    "kind": "PORTFOLIO_INTAKE_STATIC_FULL_COST_ASSESSMENT",
     "owner": "ROOT"
   },
-  "phase": "UNREQUESTED",
-  "revision": 2,
+  "phase": "COMPLETE",
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
@@ -26,8 +42,13 @@
     "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
     "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-25T12:49:21Z",
+  "verification_refs": [
+    {
+      "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_20260825.md",
+      "sha256": "5293843c72e5efe6319d9396d6bf2cb86bcc669f5b80072614c352e6016c3f41"
+    }
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-semantic_graphon_shared_policy"

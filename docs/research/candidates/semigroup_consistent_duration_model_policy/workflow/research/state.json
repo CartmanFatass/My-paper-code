@@ -1,44 +1,64 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
   "active_round_id": null,
   "blockers": [],
   "direction_id": "semigroup_consistent_duration_model_policy",
   "direction_ref": {
     "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-    "sha256": "52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3"
+    "sha256": "55caac196324ba0335ea6ecebfd3b6a7ddfc2ebe62129c6c9d2f66f434528683"
   },
   "engineering_request": null,
-  "evidence_set_sha256": "32e66fc87a773ecbad4cb61887b073502c795a909b236e24dcc01e17c28445fa",
-  "last_checkpoint_sha": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be",
+  "evidence_set_sha256": "29bccb94957be0a4c87bf919195dc054417337be0f322f337cef3846451c9539",
+  "last_checkpoint_sha": "a5d879a2c769c9d293b3454f8892a6cc2c7c72da4630be2cd81c80150ad7b60e",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-        "sha256": "52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3"
+        "sha256": "55caac196324ba0335ea6ecebfd3b6a7ddfc2ebe62129c6c9d2f66f434528683"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TRI_UAV_NATIVE_FUSION_PRINCIPLE_AUTHORITY_20260825.md",
+        "sha256": "a5d879a2c769c9d293b3454f8892a6cc2c7c72da4630be2cd81c80150ad7b60e"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FUSION_IDENTITY_CROSSWALK_AND_DISCRIMINATOR_20260825.md",
+        "sha256": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be"
       },
       {
         "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_UAV_SUSPENDED_PAYLOAD_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260820.md",
         "sha256": "eae6d39238a86269f9b7d8c67aaae20af796e53c0c893ea85cf93e3e6b29a78d"
       },
       {
-        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md",
-        "sha256": "dab9e0ac46f6163140d6cb4886088b481b1dc36fdd1776d31ed9d5233b7cf6dd"
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_UAV_SP_R02_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE_20260821.md",
+        "sha256": "e729db16fe03b14cfaa83b1fbd0061afe2ba3a14f2d350b79602426a78435b87"
       },
       {
-        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FUSION_IDENTITY_CROSSWALK_AND_DISCRIMINATOR_20260825.md",
-        "sha256": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be"
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TBCC_R02_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE_20260821.md",
+        "sha256": "94a2ee97d7d60f9f1144e3da7c6d6a8a739ed93a44f17cfc64132a80068f2d83"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_SCIENCE_CARD.md",
+        "sha256": "7e47785323990aad720e3990808379fc5fd649df03aca6fd012d315fb95518b3"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_V5_EXTERNAL_PRO_RESULT_CONVERGENCE_INTAKE.md",
+        "sha256": "83c281ac6633dd07d19bed1cd9d066d7cbb05ddaea9d0cc62218bcb6ac844f22"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B3_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE.md",
+        "sha256": "7566e8eba45631d3707d9048b31948517ddcd6c80765b3ff8a5fd7702b874865"
       }
     ],
-    "kind": "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP",
+    "kind": "FREEZE_TRI_NATIVE_FUSION_QUANTITATIVE_CARD",
     "owner": "EM"
   },
-  "phase": "COMPLETE",
-  "question_sha256": "d035824e97cd047514d224000300b3ff19025d86707685441bba67b984912e75",
-  "registry_revision_seen": 4,
-  "revision": 4,
+  "phase": "LOCAL_RESEARCH",
+  "question_sha256": "7506749d50500afe5c7108634aaa97e5975854ee8be239a53834be08a4116c55",
+  "registry_revision_seen": 9,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-25T07:19:16.142591Z",
+  "updated_at": "2026-08-25T12:48:49.846213Z",
   "waiting_on": [],
   "writer": "EM-semigroup_consistent_duration_model_policy"
 }

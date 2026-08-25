@@ -1,74 +1,66 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [
-    {
-      "code": "VARIABLE_AXIS_COOPERATIVE_UAV_SPECIFICATION_ABSENT",
-      "observed_refs": [
-        {
-          "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-          "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
-        },
-        {
-          "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md",
-          "sha256": "983917539fb0a4546d80e3bf9393393d2c7d9fd7f7f3d4862478b390cc26ecae"
-        },
-        {
-          "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md",
-          "sha256": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c"
-        }
-      ],
-      "resume_condition_ref": {
-        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md",
-        "sha256": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c"
-      }
-    }
-  ],
+  "blockers": [],
   "direction_id": "finite_semantic_boundary_support",
   "direction_ref": {
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-    "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
+    "sha256": "d2cd484ac41829a27d3f4e0649bbc889693dfac39eb4e5e1a91f94237cafb1dd"
   },
-  "engineering_request": null,
-  "evidence_set_sha256": "a3ad2573a18fb8832888c01ee8b536d4164922d66b638e8f83c805be9ca976e5",
-  "last_checkpoint_sha": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c",
+  "engineering_request": {
+    "acceptance_refs": [
+      "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_CM_CONSTRUCTION_HANDOFF_20260825.md#acceptance-criteria",
+      "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_CM_CONSTRUCTION_HANDOFF_20260825.md#explicit-forbidden-boundary"
+    ],
+    "scope_ref": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_CM_CONSTRUCTION_HANDOFF_20260825.md#engineering-request-cm-b2-construction-and-static-resource-projection"
+  },
+  "evidence_set_sha256": "e924ace51c1ee3bc0de90411266286fef13f19a5e53ddb5ed646df2c4aecccfb",
+  "last_checkpoint_sha": "a1c6cf94660602604da7350e07db55515f42aa0c9f211d82b31a2b77a42552b7",
   "next_action": {
     "input_refs": [
       {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "d02edd6b91c1fb103964f1f5b5a72c5f4d1fb0c0a651ba7b792bb2d1f2d685ee"
+      },
+      {
         "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-        "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
+        "sha256": "d2cd484ac41829a27d3f4e0649bbc889693dfac39eb4e5e1a91f94237cafb1dd"
       },
       {
-        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md",
-        "sha256": "983917539fb0a4546d80e3bf9393393d2c7d9fd7f7f3d4862478b390cc26ecae"
+        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_EVIDENCE_SET.json",
+        "sha256": "e924ace51c1ee3bc0de90411266286fef13f19a5e53ddb5ed646df2c4aecccfb"
       },
       {
-        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md",
-        "sha256": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c"
+        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_COOPERATIVE_UAV_SCIENCE_CARD.md",
+        "sha256": "59421efea8e770cb727dcc76331e16299fb831ff93555f3d455093305d4887b2"
+      },
+      {
+        "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_CM_CONSTRUCTION_HANDOFF_20260825.md",
+        "sha256": "a1c6cf94660602604da7350e07db55515f42aa0c9f211d82b31a2b77a42552b7"
+      },
+      {
+        "path": "docs/research/candidates/finite_semantic_boundary_support/workflow/external-review/index.json",
+        "sha256": "b9cb5a5442decb80bfc730cca79c765b0eff4ef66b3bdf5ee436a6dbf3bf32a8"
+      },
+      {
+        "path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
+        "sha256": "c84745f7e9e132697fe570080949f078b25ef5a0b6ec5a0b6415db318bbdd531"
       }
     ],
-    "kind": "AWAIT_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY",
-    "owner": "EM"
+    "kind": "ROOT_ROUTE_CM_FSBS_B2_CONSTRUCTION",
+    "owner": "CM"
   },
-  "phase": "WAITING",
-  "question_sha256": "e780a3dc58e18e641feb75afc4f41ea0b04fb77d3f23ff288a608d6e4b10d45b",
-  "registry_revision_seen": 4,
-  "revision": 4,
+  "phase": "ENGINEERING_REQUESTED",
+  "question_sha256": "df05afacc7ae21ef9809bd0adb022f5bdef38f0b74a13c2df05adddfd4646aa5",
+  "registry_revision_seen": 9,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-25T07:13:30Z",
-  "waiting_on": [
-    {
-      "expected_terminal_states": [
-        "REVISED",
-        "CLOSED"
-      ],
-      "kind": "DIRECTION_SCIENCE_EDGE_AUTHORITY",
-      "ref": {
-        "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-        "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
-      }
-    }
-  ],
+  "updated_at": "2026-08-25T13:10:58Z",
+  "waiting_on": [],
   "writer": "EM-finite_semantic_boundary_support"
 }
