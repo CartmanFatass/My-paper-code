@@ -1,5 +1,5 @@
 {
-  "actionable": true,
+  "actionable": false,
   "active_agents": [],
   "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
   "blockers": [],
@@ -23,34 +23,42 @@
         "sha256": "6783edb0349a2da8b50c4a24a7cee1f09893f52cf1b4f1ba2dd3958e4163dce9"
       },
       {
-        "path": "experiments/candidates/metric_ground_transport_allocation/resource_estimate.py",
-        "sha256": "a065fe181556049d3ce041197c5ffd74e985ed22f0db28a00cd72d7dc5b47e62"
+        "path": "temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/manifest.json",
+        "sha256": "795aa6b11fe0ddd2aa95ccd11bc655e11bb79c786832ea6c0e79155ab51a3b87"
       },
       {
-        "path": "requirements-cloud-test.txt",
-        "sha256": "c8d90af08df1c4040970f43eeeab3157c41ddbdbd3cbcd36759a4d1779ccd926"
+        "path": "temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/resource-estimate.json",
+        "sha256": "0cedd7679976b6ccdc1b1eb52440acdb1bf3d425e6ce5ba33acf6eca195e27b6"
       },
-      "git-code-sha:f890479fdec42fdc11376059a248e31b8c1ab134",
-      "/home/fires/hmasd/temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/resource-estimate.json",
-      "temp/runtime/venvs/mgtap-estimator/bin/python -m experiments.candidates.metric_ground_transport_allocation.resource_estimate --output /home/fires/hmasd/temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/resource-estimate.json"
+      "run:mgtap-preactivity-resource-estimate-20260825"
     ],
-    "kind": "RUN_PREACTIVITY_RESOURCE_ESTIMATOR",
-    "owner": "EXPERIMENT_OPERATOR"
+    "kind": "INTERPRET_RESOURCE_REPORT_AND_SCHEDULE",
+    "owner": "EM"
   },
-  "phase": "RUN_READY",
-  "revision": 6,
-  "run_refs": [],
+  "phase": "COMPLETE",
+  "revision": 7,
+  "run_refs": [
+    {
+      "path": "temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/manifest.json",
+      "sha256": "795aa6b11fe0ddd2aa95ccd11bc655e11bb79c786832ea6c0e79155ab51a3b87"
+    }
+  ],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
     "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
   },
-  "updated_at": "2026-08-25T12:35:38Z",
+  "updated_at": "2026-08-25T12:41:31Z",
   "verification_refs": [
     "agent://MGTAPEstimatorVerifyCMG2.MGTAPEstimatorImplementerG2",
     "checkpoint 8aa98fe: temp/mgtap-verify-venv/bin/python -m pytest -q tests/experiments/candidates/metric_ground_transport_allocation/test_resource_estimate.py => 6 passed",
-    "checkpoint 8aa98fe: resource_estimate module --help exited 0 and required --output"
+    "checkpoint 8aa98fe: resource_estimate module --help exited 0 and required --output",
+    {
+      "path": "temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/resource-estimate.json",
+      "sha256": "0cedd7679976b6ccdc1b1eb52440acdb1bf3d425e6ce5ba33acf6eca195e27b6"
+    },
+    "run mgtap-preactivity-resource-estimate-20260825: SUCCEEDED exit 0; output 16011 bytes; memory safe; group quiescent; sole claim SUCCEEDED"
   ],
   "waiting_on": [],
   "worktree_ref": null,
