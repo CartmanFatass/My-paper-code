@@ -176,9 +176,18 @@
   function renderAgents() {
     const current = section("agents");
     const agents = Array.isArray(current.data?.agents) ? current.data.agents : [];
+    const roles = Array.isArray(current.data?.role_configs) ? current.data.role_configs : [];
+    const roleRows = roles.map((role) => [
+      cell(role.role, "strong"),
+      cell(role.model, "mono"),
+      badge(String(role.thinking_level || "unknown").toLowerCase()),
+      cell(role.definition_path, "mono muted"),
+    ]);
     const rows = agents.map((agent) => [
       cell(agent.logical_identity, "strong"),
       agent.agent_type,
+      cell(agent.configured_model || "—", "mono"),
+      badge(String(agent.thinking_level || "unknown").toLowerCase()),
       agent.parent_identity || "—",
       agent.direction_id || "—",
       agent.job_name,
@@ -188,8 +197,12 @@
       agent.last_seen_at || "—",
     ]);
     const node = document.createDocumentFragment();
-    node.appendChild(heading("Agents", "Direct Root → EM/CM ownership and runtime lifecycle; inspect detail in Agent Hub", current.status));
-    node.appendChild(table(["Logical identity", "Type", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No logical agents are currently visible."));
+    node.appendChild(heading("Agents", "Configured role models/effort and current logical runtime ownership", current.status));
+    node.appendChild(table(["Role", "Configured model", "Effort", "Definition"], roleRows, "No project agent definitions are visible."));
+    const subheading = document.createElement("h3");
+    subheading.textContent = "Logical agents";
+    node.appendChild(subheading);
+    node.appendChild(table(["Logical identity", "Type", "Model", "Effort", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No logical agents are currently visible."));
     view.replaceChildren(node);
   }
 

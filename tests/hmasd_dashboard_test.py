@@ -35,6 +35,16 @@ def fixture_root(tmp_path: Path) -> Path:
     root = tmp_path / "checkout"
     (root / ".omp").mkdir(parents=True)
     (root / ".omp" / "AGENTS.md").write_text("HMASD fixture\n", encoding="utf-8")
+    agents = root / ".omp" / "agents"
+    agents.mkdir()
+    (agents / "hmasd-em.md").write_text(
+        "---\nname: hmasd-em\nmodel: openai-codex/gpt-test-em\nthinking-level: max\n---\n",
+        encoding="utf-8",
+    )
+    (agents / "hmasd-cm.md").write_text(
+        "---\nname: hmasd-cm\nmodel: openai-codex/gpt-test-cm\nthinking-level: high\n---\n",
+        encoding="utf-8",
+    )
     _copy_json("portfolio_registry.json", root / dashboard.REGISTRY_REL)
     _copy_json("runtime_agents.json", root / dashboard.RUNTIME_AGENTS_REL)
     _copy_json("runtime_worktrees.json", root / dashboard.RUNTIME_WORKTREES_REL)
@@ -140,7 +150,27 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
         "actionable_count": 1,
         "queued_count": 0,
     }
-    assert first["data"]["agents"]["data"]["agents"][0]["logical_identity"]
+    assert first["data"]["agents"]["data"]["role_configs"] == [
+        {
+            "role": "hmasd-cm",
+            "model": "openai-codex/gpt-test-cm",
+            "thinking_level": "high",
+            "definition_path": ".omp/agents/hmasd-cm.md",
+        },
+        {
+            "role": "hmasd-em",
+            "model": "openai-codex/gpt-test-em",
+            "thinking_level": "max",
+            "definition_path": ".omp/agents/hmasd-em.md",
+        },
+    ]
+    cm_agent = next(
+        agent
+        for agent in first["data"]["agents"]["data"]["agents"]
+        if agent["agent_type"] == "hmasd-cm"
+    )
+    assert cm_agent["configured_model"] == "openai-codex/gpt-test-cm"
+    assert cm_agent["thinking_level"] == "high"
     assert first["data"]["runs"]["data"]["runs"][0]["run_id"] == "example-run"
     assert first["data"]["external_reviews"]["data"]["rounds"][0]["round_id"]
     assert first["data"]["worktrees"]["data"]["worktrees"][0]["worktree_ref"] == "wt-example"

@@ -475,6 +475,22 @@ class _SnapshotAttempt:
         self._file_labels[path] = relative
         return digest
 
+    def read_text(self, relative: str) -> tuple[str | None, str | None]:
+        path = _safe_relative_path(self.root, relative, must_exist=False)
+        if path is None:
+            return None, f"invalid_path:{relative}"
+        raw, error = _read_bytes(path)
+        digest = hashlib.sha256(raw).hexdigest() if raw is not None else None
+        self._file_digests[path] = digest
+        self._file_labels[path] = relative
+        if raw is None:
+            return None, error or f"missing:{relative}"
+        try:
+            return raw.decode("utf-8"), None
+        except UnicodeDecodeError:
+            return None, f"invalid_utf8:{relative}"
+
+
     def directory_entries(self, path: Path, label: str) -> tuple[tuple[Path, str], ...]:
         observed = self._directories.get(path)
         if observed is None:
@@ -787,11 +803,53 @@ def _manager_job_name(prefix: str, direction_id: str) -> str:
     return prefix + "".join(part[:1].upper() + part[1:] for part in re.split(r"[-_]+", direction_id) if part)
 
 
+def _agent_role_configs(sources: _SnapshotAttempt) -> tuple[list[dict[str, str]], list[str]]:
+    directory = sources.root / ".omp" / "agents"
+    configs: list[dict[str, str]] = []
+    warnings: list[str] = []
+    for path, _ in sources.directory_entries(directory, ".omp/agents"):
+        if path.suffix != ".md":
+            continue
+        relative = path.relative_to(sources.root).as_posix()
+        text, error = sources.read_text(relative)
+        if text is None:
+            warnings.append(error or f"invalid:{relative}")
+            continue
+        lines = text.splitlines()
+        if not lines or lines[0] != "---":
+            warnings.append(f"invalid:agent_frontmatter:{relative}")
+            continue
+        fields: dict[str, str] = {}
+        for line in lines[1:]:
+            if line == "---":
+                break
+            key, separator, value = line.partition(":")
+            if separator and key in {"name", "model", "thinking-level"}:
+                fields[key] = value.strip()
+        if not all(fields.get(key) for key in ("name", "model", "thinking-level")):
+            warnings.append(f"invalid:agent_frontmatter:{relative}")
+            continue
+        configs.append(
+            {
+                "role": fields["name"],
+                "model": fields["model"],
+                "thinking_level": fields["thinking-level"],
+                "definition_path": relative,
+            }
+        )
+    return sorted(configs, key=lambda item: item["role"]), sorted(set(warnings))
+
+
 def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:
     warnings: list[str] = []
     statuses: list[str] = []
     refs: dict[str, int] = {}
     generated_values: list[str | None] = [registry_doc.updated_at]
+    role_configs, role_warnings = _agent_role_configs(sources)
+    warnings.extend(role_warnings)
+    if role_warnings:
+        statuses.append("invalid")
+    config_by_role = {item["role"]: item for item in role_configs}
     logical: dict[str, dict[str, Any]] = {
         "Root": {
             "logical_identity": "Root",
@@ -934,6 +992,10 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             )
             if key in entry and isinstance(entry[key], (str, int))
         }
+        role_config = config_by_role.get(str(output.get("agent_type")))
+        if role_config is not None:
+            output["configured_model"] = role_config["model"]
+            output["thinking_level"] = role_config["thinking_level"]
         output["hub_instruction"] = f"Inspect {identity} in Agent Hub via /agents."
         agents.append(output)
     if not statuses:
@@ -942,7 +1004,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
         status=_status_join(statuses),
         generated_at=_max_timestamp(generated_values),
         revision_refs=refs,
-        data={"agents": agents},
+        data={"agents": agents, "role_configs": role_configs},
         warnings=warnings,
     )
 
