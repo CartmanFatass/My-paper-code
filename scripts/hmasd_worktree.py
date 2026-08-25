@@ -27,15 +27,17 @@ from pathlib import Path
 from typing import Any, Generator, Iterable, Mapping, Sequence
 
 try:
-    from scripts import hmasd_platform
+    from scripts import hmasd_platform, hmasd_state
 except ImportError:
     import hmasd_platform
+    import hmasd_state
 
 
 STATE_SCRIPT = Path(__file__).with_name("hmasd_state.py")
 RUNTIME_KIND = "runtime_worktrees"
 TARGET_BRANCH = "main"
 RECEIPT_SCHEMA = "hmasd.worktree-receipt/v1"
+PATH_POLICY_REF = "docs/project/git-path-policy-v1.json"
 
 _DIRECTION = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
 _ASSIGNMENT = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}\Z")
@@ -493,6 +495,90 @@ def _validate_relative(value: str, *, label: str) -> str:
 
 def _relative_under(path: str, allowed: str) -> bool:
     return path == allowed or path.startswith(allowed + "/")
+
+
+def _load_path_policy(repo: Path) -> tuple[dict[str, Any], str]:
+    """Load the ordered two-tier classifier without granting path ownership."""
+
+    relative = _validate_relative(PATH_POLICY_REF, label="path policy ref")
+    path = repo / Path(relative)
+    if not path.is_file():
+        # Disposable repositories used to verify the helper do not contain the
+        # HMASD control files.  They use the versioned policy shipped beside
+        # this script; the real checkout resolves the same relative path in
+        # the repository being integrated.
+        path = Path(__file__).resolve().parents[1] / Path(relative)
+    _assert_no_symlink_chain(path, label="path policy", require_existing=True)
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise InvalidInput(f"path policy is unreadable: {exc}") from exc
+    if not isinstance(value, dict) or set(value) != {
+        "schema_version",
+        "default_classification",
+        "rules",
+    }:
+        raise InvalidInput("path policy has an invalid top-level contract")
+    if (
+        not isinstance(value["schema_version"], int)
+        or isinstance(value["schema_version"], bool)
+        or value["schema_version"] != 1
+    ):
+        raise Unsupported("path policy schema_version must be 1")
+    classifications = {"direction-owned", "shared-core"}
+    if value["default_classification"] not in classifications:
+        raise InvalidInput("path policy default_classification is invalid")
+    if not isinstance(value["rules"], list):
+        raise InvalidInput("path policy rules must be an array")
+    normalized_rules: list[dict[str, str]] = []
+    for index, rule in enumerate(value["rules"]):
+        if not isinstance(rule, dict) or set(rule) != {"type", "path", "classification"}:
+            raise InvalidInput(f"path policy rule {index} has an invalid contract")
+        rule_type = rule["type"]
+        if rule_type not in {"exact", "prefix"}:
+            raise InvalidInput(f"path policy rule {index} type is invalid")
+        classification = rule["classification"]
+        if classification not in classifications:
+            raise InvalidInput(f"path policy rule {index} classification is invalid")
+        normalized_rules.append(
+            {
+                "type": rule_type,
+                "path": _validate_relative(rule["path"], label=f"path policy rule {index} path"),
+                "classification": classification,
+            }
+        )
+    normalized = {
+        "schema_version": 1,
+        "default_classification": value["default_classification"],
+        "rules": normalized_rules,
+    }
+    digest = hmasd_state.sha256_bytes(hmasd_state.canonical_bytes(normalized))
+    return normalized, digest
+
+
+def classify_path(path: str, policy: Mapping[str, Any]) -> str:
+    """Classify one changed path using the first matching ordered rule."""
+
+    normalized = _validate_relative(path, label="classified path")
+    for rule in policy["rules"]:
+        rule_path = str(rule["path"])
+        if rule["type"] == "exact" and normalized == rule_path:
+            return str(rule["classification"])
+        if rule["type"] == "prefix" and _relative_under(normalized, rule_path):
+            return str(rule["classification"])
+    return str(policy["default_classification"])
+
+
+def _path_policy_facts(repo: Path, paths: Sequence[str]) -> dict[str, Any]:
+    policy, digest = _load_path_policy(repo)
+    return {
+        "ref": PATH_POLICY_REF,
+        "sha256": digest,
+        "classifications": [
+            {"path": path, "classification": classify_path(path, policy)}
+            for path in paths
+        ],
+    }
 
 
 def _changed_paths(repo: Path, base: str, candidate: str) -> list[str]:
@@ -1001,6 +1087,9 @@ def _receipt_skeleton(repo: Path, container: Path, entry: Mapping[str, Any], reg
         "lifecycle": entry["lifecycle"],
         "changed_paths": [],
         "allowed_paths": [],
+        "path_policy_ref": None,
+        "path_policy_sha256": None,
+        "path_classifications": [],
         "verification_evidence": {"status": "MISSING", "refs": [], "missing": []},
         "conflict": {"status": "NOT_CHECKED", "detail": None},
         "facts": None,
@@ -1382,6 +1471,7 @@ def _facts(
     target_sha: str,
     changed_paths: Sequence[str],
     allowed_paths: Sequence[str],
+    path_policy: Mapping[str, Any],
     verification: Mapping[str, Any],
     conflict: Mapping[str, Any],
 ) -> dict[str, Any]:
@@ -1414,6 +1504,7 @@ def _facts(
         "current_branch": _current_branch(repo),
         "changed_paths": list(changed_paths),
         "allowed_paths": list(allowed_paths),
+        "path_policy": dict(path_policy),
         "status": status,
         "verification": dict(verification),
         "conflict": dict(conflict),
@@ -1681,7 +1772,7 @@ def _prepare_integration_facts(
     target: str,
     normalized_allowed: Sequence[str],
     verification_refs: Sequence[str],
-) -> tuple[str, str, list[str], dict[str, Any], dict[str, Any]]:
+) -> tuple[str, str, list[str], dict[str, Any], dict[str, Any], dict[str, Any]]:
     candidate = str(entry.get("candidate_sha") or "").lower()
     if not _FULL_SHA.fullmatch(candidate):
         raise UnsafeState("candidate SHA is absent")
@@ -1703,6 +1794,7 @@ def _prepare_integration_facts(
         raise OwnershipRefusal(
             f"candidate changed paths outside assignment allowlist: {', '.join(out_of_scope)}"
         )
+    path_policy = _path_policy_facts(repo, changed)
     merge_result = _run_git(repo, "merge-tree", "--write-tree", target_sha, candidate, check=False)
     if merge_result.returncode:
         conflict = {
@@ -1712,7 +1804,7 @@ def _prepare_integration_facts(
         raise UnsafeState("candidate has an integration conflict", details={"conflict": conflict})
     conflict = {"status": "CLEAN", "detail": None}
     evidence = _verification(verification_refs, repo)
-    return candidate, target_sha, changed, conflict, evidence
+    return candidate, target_sha, changed, conflict, evidence, path_policy
 
 
 def prepare_integration(
@@ -1750,7 +1842,7 @@ def prepare_integration(
             receipt_path,
             receipt,
         )
-        candidate, target_sha, changed, conflict, evidence = _prepare_integration_facts(
+        candidate, target_sha, changed, conflict, evidence, path_policy = _prepare_integration_facts(
             repo,
             entry,
             target,
@@ -1788,7 +1880,7 @@ def prepare_integration(
             normalized_allowed,
             verification_refs,
         )
-        if current != (candidate, target_sha, changed, conflict, evidence):
+        if current != (candidate, target_sha, changed, conflict, evidence, path_policy):
             raise UnknownApply("integration facts changed after the registry prepared transition")
         facts = _facts(
             repo,
@@ -1799,6 +1891,7 @@ def prepare_integration(
             target_sha=target_sha,
             changed_paths=changed,
             allowed_paths=normalized_allowed,
+            path_policy=path_policy,
             verification=evidence,
             conflict=conflict,
         )
@@ -1809,6 +1902,9 @@ def prepare_integration(
                 "candidate_sha": candidate,
                 "changed_paths": changed,
                 "allowed_paths": normalized_allowed,
+                "path_policy_ref": path_policy["ref"],
+                "path_policy_sha256": path_policy["sha256"],
+                "path_classifications": path_policy["classifications"],
                 "verification_evidence": evidence,
                 "conflict": conflict,
                 "facts": facts,
@@ -1825,6 +1921,9 @@ def prepare_integration(
             "receipt": str(receipt_path),
             "worktree": updated_entry,
             "changed_paths": changed,
+            "path_policy_ref": path_policy["ref"],
+            "path_policy_sha256": path_policy["sha256"],
+            "path_classifications": path_policy["classifications"],
             "verification_evidence": evidence,
             "conflict": conflict,
             "registry_revision": updated["revision"],
@@ -1833,7 +1932,20 @@ def prepare_integration(
 
 def _apply_facts(repo: Path, common: Path, container: Path, entry: Mapping[str, Any], state: Mapping[str, Any], receipt: Mapping[str, Any]) -> dict[str, Any]:
     target_sha, _ = _target_observation(repo, TARGET_BRANCH)
-    return _facts(repo, common, container, entry, state, target_sha=target_sha, changed_paths=list(receipt.get("changed_paths", [])), allowed_paths=list(receipt.get("allowed_paths", [])), verification=dict(receipt.get("verification_evidence", {})), conflict=dict(receipt.get("conflict", {})))
+    changed_paths = list(receipt.get("changed_paths", []))
+    return _facts(
+        repo,
+        common,
+        container,
+        entry,
+        state,
+        target_sha=target_sha,
+        changed_paths=changed_paths,
+        allowed_paths=list(receipt.get("allowed_paths", [])),
+        path_policy=_path_policy_facts(repo, changed_paths),
+        verification=dict(receipt.get("verification_evidence", {})),
+        conflict=dict(receipt.get("conflict", {})),
+    )
 
 
 def _validated_apply_candidate(
@@ -1847,6 +1959,15 @@ def _validated_apply_candidate(
     expected_facts = receipt.get("facts")
     if not isinstance(expected_facts, dict) or receipt.get("facts_sha256") != _digest(expected_facts):
         raise InvalidInput("receipt facts are missing or tampered")
+    expected_policy = expected_facts.get("path_policy")
+    if not isinstance(expected_policy, dict):
+        raise InvalidInput("receipt path policy facts are missing")
+    if (
+        receipt.get("path_policy_ref") != expected_policy.get("ref")
+        or receipt.get("path_policy_sha256") != expected_policy.get("sha256")
+        or receipt.get("path_classifications") != expected_policy.get("classifications")
+    ):
+        raise InvalidInput("receipt path policy fields are missing or tampered")
     current_facts = _apply_facts(repo, common, container, entry, state, receipt)
     if current_facts != expected_facts:
         raise StaleFacts("one or more prepare/apply facts changed")

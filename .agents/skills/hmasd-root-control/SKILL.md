@@ -1,45 +1,54 @@
 ---
 name: hmasd-root-control
-description: Reconcile and orchestrate HMASD work from the Root top-level task without making Portfolio, scientific, or engineering decisions.
+description: Reconcile HMASD work from the permanent Root task, including user-authorized material decisions.
 ---
 
 # HMASD Root Control
 
-Root is the low-cost operational orchestrator. It has the tools needed to route, wait, recover, validate archives, and integrate Git, but material decisions remain with User, Portfolio, EM, or CM.
-
-## Inputs
-
-Read the durable Portfolio/registry, direction states, run manifests, Agentify references, Git/worktree state, and ignored .codex/runtime/tasks.json when present. Treat live task/thread/host/cursor IDs only as reconstructable runtime references.
-
-During the runtime transition, `.codex/runtime/worktrees.json` is the canonical
-Root-owned journal. A missing canonical journal may be initialized from
-`.omp/runtime/worktrees.json` only after the state CLI validates schema, receipt,
-and Git/path facts; the legacy source remains read-only. Canonical-only state is
-valid. If both documents exist, use canonical: a canonical revision ahead of
-legacy is normal forward progress, equal revisions require matching rows/facts,
-and a legacy-ahead revision or same-revision conflict fails closed. Never write
-the legacy journal. `runtime_agents` is retired; native task listing plus
-`runtime_tasks` replaces that map.
-
-Consume a Decision Packet only after validating its sender identity, generation, authority paths, revisions, checkpoint SHA, scope, owned paths, and requested action. A packet is evidence and routing input, not an approval token.
+Root has the highest operational capability. It reconciles, creates or resumes
+manager tasks when their durable scope requires it, validates archives, and
+integrates Git. Within user authorization Root may form a material Portfolio,
+scientific, or engineering decision, but records it in the correct existing
+Markdown authority heading as `Decision owner: <identity>`, using existing
+heading/path/hash refs. JSON writers remain domain writers; the runtime actor
+comes from sender/session. Writer ownership is not a runtime role.
 
 ## One bounded wake
 
-1. Reconcile durable state, existing project tasks, runtime refs, worktrees, manifests, external operations, and Git once.
-2. Classify every observation as current, stale, missing, conflicted, or materially changed.
-3. Route validated work to an existing matching Portfolio, EM, or CM top-level task using task coordination tools when available.
-4. Creating a user-owned Codex task requires an explicit user request. If the required peer task does not exist and no such request is present, return that exact creation request instead of spawning a manager subagent.
-5. Use only direct leaf subagents allowed by hmasd-root-task; never spawn Portfolio, EM, or CM.
-6. Wait with bounded, cursor-aware task snapshots or one owned process session. Do not repeatedly ingest full transcripts or poll with model turns.
-7. Apply only mechanical in-scope choices. Route any change in direction value, science, engineering design, or material scope back to its decision owner.
-8. Perform exact Root-owned archive/Git/runtime effects, checkpoint the observed result, and stop at IDLE, COMPLETE, one user/owner decision, or an exhausted safe recovery route.
+1. Read durable authorities, referenced Work Packets, effect/run/worktree facts,
+   Git, and reconstructable runtime task references.
+2. Run `reconcile --once`: at most one bounded action for each runnable
+   direction. Serialize the same scope/target/authority revision; unrelated
+   directions may proceed in parallel within capacity.
+3. Use or create the matching independent Portfolio, EM, or CM task only when
+   its defined condition holds; reuse a parked identity and report duplicates.
+4. Transfer cross-task work only by an immutable Work Packet with authority
+   refs and revisions. Delivery is at-least-once for the same `work_id` and the
+   receiver must intake it idempotently. Do not generate a new packet for the
+   same authority revision. Completion, waiting, and failure update the
+   referenced existing authority or result; they are not packet states.
+5. Perform only Root-owned runtime, archive, and mechanical Git effects. Root
+   never edits an integration conflict.
 
-## Owned writes
+## Effects and failures
 
-Root writes ignored Codex task/worktree runtime refs and invokes existing CLIs. Root validates exact external archive bytes and performs final Git integration. Root does not write Portfolio conclusions, direction research/engineering state, Agentify commitment, or run manifests.
+An unknown run, send, or push is observed, never replayed. A local failure is
+limited to its scope: new evidence may form a new Work Packet, while unrelated
+directions continue. Do not use bare `BLOCKED` as control state or apply a
+global recovery budget. Runtime maps are reconstructable caches, not identity
+authority.
 
-A runtime map can cache logical identity, kind, direction ID, generation, task title, thread/host/cursor references, project root, worktree ref, checkpoint SHA, lifecycle, and last-seen time. It is never identity authority and its absence never permits blind duplicate work.
+Path tier policy only classifies and records paths; it does not create an
+approval service or widen `allowed_paths`. Root requires the one user
+confirmation bound to an exact shared-core action before that effect. The
+existing Markdown confirmation records Action digest, Base SHA, sorted exact
+paths, objective/non-goals, and allowed Git effects. Root canonicalizes those
+fields as JSON and checks its SHA-256 before execution and again before commit;
+after the candidate SHA exists, append its result ref to that confirmation.
 
-## Failure handling
+An implementation folder name may differ from its direction ID. Ownership comes
+from the Work Packet's exact `owned_paths` and authority refs, not folder names;
+path policy only classifies those paths.
 
-Unknown run or send outcome is observe-only. Missing runtime mapping is reconstructed once from durable facts and task listings. Duplicate or ambiguous task identity fails closed. One wake permits one safe reproduction and one materially distinct recovery route.
+Use every genuine registered leaf only when it materially helps; all are direct
+leaves and may not delegate.

@@ -1,14 +1,20 @@
 ---
 name: hmasd-em-task
-description: Bootstrap or resume one direction-scoped HMASD EM top-level Codex task.
+description: Bootstrap or resume an independent direction-scoped HMASD EM top-level task.
 ---
 
 # HMASD EM Task
 
-Use this only in a user-facing EM/<direction-id>/g<generation> task. Recommended model: GPT-5.6 Sol at max reasoning.
+Use only in an EM/<direction-id>/g<generation> task. Recommended model:
+GPT-5.6 Sol at max reasoning.
 
-The initiating message must freeze direction ID, EM logical identity, generation, registry/direction/state refs, checkpoint, and the scientific question or material user update.
+The initiating Work Packet or durable authority must identify direction,
+generation, authority refs/revisions, scientific question, and bounded scope.
+Repeated delivery of the same `work_id` is normal and must be intaken
+idempotently; unchanged authority refs do not create a new packet.
+Load `hmasd-em-direction-cycle` and `hmasd-scientific-external-review`.
 
-Load hmasd-em-direction-cycle and hmasd-scientific-external-review. Direct leaves are limited to hmasd-research-scout, hmasd-research-innovator, hmasd-research-critic, hmasd-research-principles-analyst, hmasd-code-scout, hmasd-research-artifact-writer, hmasd-explorer-agentify-transport, and hmasd-external-gemini-transport. Every child is a leaf.
-
-EM forms direction science, writes EM-owned authorities, reports material results to Portfolio, and sends orchestration refs to Root. EM never spawns CM, runs a real experiment, integrates Git, or treats provider output as authority.
+Use responsibility-relevant genuine direct leaves when useful. Every child is a
+leaf and may not delegate. EM forms direction science and writes EM-owned
+authorities; it does not own task runtime, Git integration, or real result
+commands. Root creates/reuses CM after durable Portfolio engineering investment.

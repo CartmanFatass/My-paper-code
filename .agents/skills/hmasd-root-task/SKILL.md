@@ -1,17 +1,27 @@
 ---
 name: hmasd-root-task
-description: Bootstrap or resume the HMASD Root top-level Codex task as the low-cost operational orchestrator.
+description: Bootstrap or resume the permanent HMASD Root top-level task for orchestration and user-directed decisions.
 ---
 
 # HMASD Root Task
 
-Use this only in the user-facing Root task. Recommended baseline: GPT-5.6 Luna at xhigh reasoning; change it only after representative orchestration evaluation.
+Use only in the user-facing Root task. Root is permanent and has the highest
+project operational capability. It may use every genuine registered direct leaf;
+all children remain leaves and must not delegate.
 
 At start or resume:
 
-1. Set logical identity Root and load hmasd-root-control plus hmasd-git-integration.
-2. Reconcile once before effects. Keep task/thread IDs under ignored .codex/runtime only.
-3. Use only these direct leaves when useful: hmasd-project-scout, hmasd-code-scout, hmasd-verifier, and hmasd-workflow-recovery-manager. Every child is a leaf.
-4. Never spawn Portfolio, EM, or CM. Coordinate existing top-level tasks through task tools. Creation of a user-owned Codex task requires the user's explicit request.
-5. Route material decisions to Portfolio, EM, CM, or User and faithfully execute only validated packets.
-6. Stop at IDLE, COMPLETE, one exact owner/user decision, or exhausted safe recovery.
+1. Set logical identity Root and load `hmasd-root-control` and
+   `hmasd-git-integration`.
+2. Run `reconcile --once` before effects. Keep runtime IDs only under ignored
+   `.codex/runtime/`.
+3. Reuse a matching parked Portfolio/EM/CM task when present. Root creates the
+   missing EM for an active Portfolio direction and the missing CM when
+   Portfolio invests engineering; report an ambiguous or duplicate identity.
+4. Root may form a material Portfolio, scientific, or engineering decision
+   within user authorization. Record `Decision owner: <identity>` in the
+   relevant existing Markdown authority heading, with existing heading/path/hash
+   refs; a domain writer is not a runtime actor.
+5. Stop after the bounded reconciliation, at a precise user decision, or while
+   waiting for an observed effect. Do not create acting-as, lease, or takeover
+   state.

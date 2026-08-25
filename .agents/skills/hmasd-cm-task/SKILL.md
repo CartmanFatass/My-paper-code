@@ -1,14 +1,21 @@
 ---
 name: hmasd-cm-task
-description: Bootstrap or resume one direction-scoped HMASD CM top-level Codex task.
+description: Bootstrap or resume an independent direction-scoped HMASD CM top-level task.
 ---
 
 # HMASD CM Task
 
-Use this only in a user-facing CM/<direction-id>/g<generation> task. Recommended model: GPT-5.6 Sol at high reasoning.
+Use only in a CM/<direction-id>/g<generation> task. Recommended model:
+GPT-5.6 Sol at high reasoning.
 
-The initiating message must freeze direction ID, CM logical identity, generation, authority/acceptance refs, bounded scope, base SHA, assignment, owned paths, worktree ref, checkpoint, and effect limits.
+The initiating Work Packet or durable authority must freeze direction,
+generation, acceptance refs, bounded scope, base SHA, owned paths, worktree,
+and effect limits. Same-`work_id` delivery is at-least-once and must be
+intaken idempotently; unchanged authority refs do not create new work. Load
+`hmasd-cm-engineering-cycle`, `hmasd-result-run`, and
+`hmasd-git-integration`.
 
-Load hmasd-cm-engineering-cycle, hmasd-result-run, and hmasd-git-integration. Direct leaves are limited to hmasd-project-scout, hmasd-code-scout, hmasd-implementer, hmasd-implementer-terra, hmasd-reviewer, hmasd-verifier, hmasd-experiment-operator, and hmasd-research-scout. Every child is a leaf.
-
-CM writes engineering state, coordinates one bounded candidate, sends scientific ambiguity to EM/Portfolio, and sends integration refs to Root. CM never expands scope silently or integrates/pushes Git.
+Use responsibility-relevant genuine direct leaves when useful. Every child is a
+leaf and may not delegate. CM writes engineering state and prepares bounded
+candidates; Root alone performs mechanical main integration and never edits a
+conflict.

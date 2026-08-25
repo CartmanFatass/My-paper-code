@@ -1,41 +1,55 @@
 # HMASD Research Workflow
 
-HMASD 的研究工作流把高价值决策、低成本编排和有界执行分开，使每类工作既可直接互动，又保有明确的科学与工程责任。
-
 ## Language
 
 **Top-level Task**:
-用户可直接进入、持续互动且保存独立会话记录的长期工作身份。它与其他 Top-level Task 同级，不因由谁创建而成为其下级代理。
-_Avoid_: Main session, manager subagent
+可被用户直接进入并独立恢复的长期工作身份；其创建关系不构成上下级或权限关系。
+_Avoid_: manager subagent
 
 **Root**:
-拥有完整操作能力的低成本编排者，负责可靠地传递已形成的决定、调度工作和整合结果，但不形成重要的 Portfolio、科学或工程决定。
-_Avoid_: Decision maker, sole entry point, Portfolio owner
+永久持有最高项目操作能力的编排身份，可在用户已授权的范围内形成 Portfolio、科学或工程决定，并把决定写入正确的既有权威。
+_Avoid_: sole entry point, permission gate
 
 **Portfolio**:
-负责跨研究方向判断、排序、生命周期和工程投入选择的最高能力决策者。它按需或周期性工作，并把已形成的决定交给 Root 编排。
-_Avoid_: Audit, read-only reviewer, second Root
+负责跨方向选择、排序、生命周期和工程投入判断的责任域；它按需存在且可独立恢复。
+_Avoid_: audit, read-only reviewer
 
 **EM**:
-一个研究方向内的科学判断与综合责任者，负责形成该方向的科学结论和下一步研究需求。
-_Avoid_: Research worker, Portfolio delegate
+负责一个方向科学判断、证据综合和下一步研究需求的责任域；它按需存在且可独立恢复。
+_Avoid_: research worker
 
 **CM**:
-一个研究方向内有界工程范围的技术判断与协调责任者，负责把冻结的科学需求转化为工程结论和可整合结果。
-_Avoid_: Implementer, generic project manager
-
-**Decision Authority**:
-对某类重要判断形成可执行结论的责任。它与执行该结论所需的操作权限相互独立。
-_Avoid_: Permission, tool access
-
-**Operational Authority**:
-执行、协调、恢复和整合已授权工作的能力，不自动包含改变科学、Portfolio 或工程决定的权力。
-_Avoid_: Decision authority
-
-**Decision Packet**:
-由用户、Portfolio、EM 或 CM 形成并记录的有界结论、约束和下一步请求，用于让 Root 在不重新判断其内容的情况下编排执行。
-_Avoid_: Approval token, handoff gate
+负责一个方向有界工程判断、实现协调和可整合结果的责任域；它按需存在且可独立恢复。
+_Avoid_: generic project manager
 
 **Durable Authority**:
-在会话之外仍可恢复和核对的项目事实。会话记录提供互动来源，重要决定需要进入其所属的 Durable Authority 才能驱动跨任务工作。
-_Avoid_: Transcript, dashboard, runtime task ID
+会话之外可恢复和核对的既有项目事实；决定必须写入所属权威后才能成为跨任务依据。
+_Avoid_: transcript, dashboard, runtime task ID
+
+**Domain Writer**:
+对某类 Durable Authority 内容负责的责任身份；它不等同于实际执行一次工作的身份。
+_Avoid_: runtime actor, permission check
+
+**Runtime Actor**:
+实际发送、接收或执行一次有界工作的会话身份；它与 Domain Writer 分离，并为运行时可追溯性服务。
+_Avoid_: domain writer, decision owner
+
+**Work Packet**:
+一次有界跨会话工作传递的不可变运行时载体，引用已有权威的精确版本且可至少一次投递；同一标识的重复接收不改变其语义。
+_Avoid_: decision authority, workflow state machine
+
+**Effect**:
+会改变外部或持久状态的精确操作；它以独立身份和回执核对，未知提交只观察而不重放。
+_Avoid_: ordinary reasoning step
+
+**Reconciliation**:
+基于当前权威和 Effect 事实推进一个有界可运行动作的过程；它不推断全局流程状态。
+_Avoid_: daemon, global recovery engine
+
+**Direction-owned Code**:
+某一研究方向可以自主修改、测试和提交的代码范围。
+_Avoid_: shared-core
+
+**Shared-core**:
+未归入任何方向的共享代码范围；精确修改须先得到用户一次明确确认。
+_Avoid_: default direction-owned code

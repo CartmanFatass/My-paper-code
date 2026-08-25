@@ -915,3 +915,128 @@ def test_fixture_declares_candidate_contract() -> None:
         "direction": "example-direction",
         "kind": "engineering",
     }
+
+
+def _write_path_policy(repo: Path, rules: list[dict[str, str]]) -> Path:
+    path = repo / "docs" / "project" / "git-path-policy-v1.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "default_classification": "shared-core",
+                "rules": rules,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_path_policy_ordered_exact_prefix_default_and_alias_refusal(repo_and_container: tuple[Path, Path]) -> None:
+    from scripts import hmasd_worktree as worktree_module
+
+    repo, _ = repo_and_container
+    policy = {
+        "schema_version": 1,
+        "default_classification": "shared-core",
+        "rules": [
+            {"type": "prefix", "path": "src", "classification": "direction-owned"},
+            {"type": "exact", "path": "src/owned.py", "classification": "shared-core"},
+        ],
+    }
+    assert worktree_module.classify_path("src/owned.py", policy) == "direction-owned"
+    assert worktree_module.classify_path("unmatched/file.py", policy) == "shared-core"
+    with pytest.raises(worktree_module.OwnershipRefusal):
+        worktree_module.classify_path("src/../owned.py", policy)
+
+    _write_path_policy(
+        repo,
+        [{"type": "prefix", "path": "../escaped", "classification": "direction-owned"}],
+    )
+    with pytest.raises(worktree_module.OwnershipRefusal):
+        worktree_module._load_path_policy(repo)
+
+
+def test_policy_classification_is_receipted_but_cannot_bypass_assignment_allowlist(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    _write_path_policy(
+        repo,
+        [
+            {"type": "exact", "path": "src/owned.py", "classification": "shared-core"},
+            {"type": "prefix", "path": "src", "classification": "direction-owned"},
+        ],
+    )
+    commit(repo, "path policy")
+    worktree = entry(provision(repo, container, "policy-receipt"))
+    path = Path(worktree["canonical_absolute_path"])
+    (path / "src" / "owned.py").write_text("VALUE = 'policy'\n", encoding="utf-8")
+    candidate = commit(path, "candidate")
+    assert run_cli(repo, "record-candidate", "--worktree-ref", worktree["worktree_ref"], "--candidate", candidate).returncode == 0
+    prepared = run_cli(
+        repo,
+        "prepare-integration",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--target",
+        "main",
+        "--allowed-path",
+        "src",
+    )
+    assert prepared.returncode == 0, prepared.stderr
+    receipt = Path(payload(prepared)["receipt"])
+    document = json.loads(receipt.read_text(encoding="utf-8"))
+    assert document["path_classifications"] == [
+        {"path": "src/owned.py", "classification": "shared-core"}
+    ]
+
+    # The classification is provenance, never a substitute for the existing
+    # assignment allowlist.
+    other = entry(provision(repo, container, "policy-allowlist"))
+    other_path = Path(other["canonical_absolute_path"])
+    (other_path / "src" / "owned.py").write_text("VALUE = 'blocked'\n", encoding="utf-8")
+    other_candidate = commit(other_path, "candidate")
+    assert run_cli(repo, "record-candidate", "--worktree-ref", other["worktree_ref"], "--candidate", other_candidate).returncode == 0
+    refused = run_cli(
+        repo,
+        "prepare-integration",
+        "--worktree-ref",
+        other["worktree_ref"],
+        "--target",
+        "main",
+        "--allowed-path",
+        "experiments/candidates",
+    )
+    assert refused.returncode in {5, 6}
+
+
+def test_receipt_rejects_policy_field_tamper_and_policy_fact_advance(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    policy_path = _write_path_policy(
+        repo,
+        [{"type": "prefix", "path": "src", "classification": "direction-owned"}],
+    )
+    commit(repo, "path policy")
+    _, _, _, receipt_path = prepared_candidate(repo, container, "policy-tamper")
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["path_policy_sha256"] = "0" * 64
+    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tampered = run_cli(repo, "apply", "--receipt", str(receipt_path), "--actor", "root")
+    assert tampered.returncode == 2
+
+    # Restore a freshly prepared receipt, then advance only the versioned
+    # policy.  Applying must re-read and reject changed policy facts.
+    _, _, _, fresh_receipt = prepared_candidate(repo, container, "policy-advance")
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    policy["rules"][0]["classification"] = "shared-core"
+    policy_path.write_text(json.dumps(policy, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    commit(repo, "path policy advanced")
+    advanced = run_cli(repo, "apply", "--receipt", str(fresh_receipt), "--actor", "root")
+    assert advanced.returncode == 4

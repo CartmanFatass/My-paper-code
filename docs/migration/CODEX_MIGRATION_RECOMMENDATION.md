@@ -1,5 +1,71 @@
 # HMASD OMP 工作流迁移到 Codex 的当前建议
 
+## 当前 v1 控制面（默认入口）
+
+本节是默认阅读入口，也是当前唯一的工作流设计。后续第 1--14 节全部是
+**Historical/Superseded** 材料，仅为迁移来源、既有 OMP 事实和用户历史决策保留；
+它们不再规定 v1 行为。特别是，原有第 13 节逐字保留以保存其历史记录，但不构成
+新的控制面或 durable schema 迁移依据。
+
+### 仅有四个控制原语
+
+1. **Authority**：既有 tracked 科学、工程、Portfolio、run、worktree 和 external
+   authority 是唯一 durable 事实来源，继续使用现有 writer/CAS 合同。
+2. **Work Packet**：不可变、带内容摘要的 ignored runtime 传递物，引用 scope、
+   authority revision、目标、边界和 Effect refs；它可从 durable facts 重建，不保存
+   独立状态、claim、result 或 checkpoint。其 locator delivery 是 at-least-once；接收端
+   对同一 `work_id` 幂等处理重投递，不生成新 packet。
+3. **Effect**：只有实际外部发送、命令启动或 Git apply/push 等副作用拥有独立 ID
+   和 receipt。提交结果为 `UNKNOWN` 时只观察和核对，绝不重放；actual Effect 仍是
+   at-most-once。
+4. **`reconcile --once`**：一次调用只依据当前事实为每个可运行方向推进一个有界
+   动作后退出。同一 scope/target/revision 串行，不同方向可受容量限制并行；没有
+   daemon、SQLite、全局 DAG 或全局状态机。
+
+### 任务、决定与恢复
+
+Root 永久拥有最高项目操作能力，可使用全部 genuine leaf capability。用户已授权时，
+Root 可以直接形成 Portfolio、科学或工程决定，但必须在正确既有 Markdown authority
+的被引用 heading 下写入一行 `Decision owner: Root`（或实际 owner）。既有 JSON 的
+`writer` 继续只表示 domain writer；runtime actor 由 Work Packet sender/session
+provenance 记录，不能暗示存在新的 JSON `decision_owner` 字段。Portfolio 在活动方向
+需要时创建，EM 在方向科学工作需要时创建，CM 在 Portfolio 投入工程时创建。Root
+自动复用匹配的 parked identity；若发现重复或身份冲突，只报告而不创建。
+
+会话或进程不可用时可有界重启或恢复；Effect 失败按其 receipt 重试或观察 UNKNOWN；
+科学、工程或实现失败由责任人依据新证据形成新的 Work Packet。不存在裸 `BLOCKED`
+传播：任何等待或失败必须说明 project、direction、feature 或 exact Effect 范围，
+且不得关闭无关方向。
+
+### 代码、Git 与用户接口
+
+代码仅分为两层。direction-owned 路径可由该方向自主修改、测试、commit 和 push；
+shared-core 修改须先得到用户对精确动作的一次确认，并由用户或 Root 在相关 Markdown
+authority heading 中记录。该 heading 至少包含 `Action digest`、`Base SHA`、排序后的
+exact path set、objective/non-goals 和 allowed Git effects；Action digest 是这些绑定字段
+按项目 canonical JSON 序列化后计算的 SHA256。candidate SHA 仅在实现完成后作为 result
+ref 追加，批准前不要求未知的 candidate。Root 在执行或 commit 前比较记录与当前 base、
+paths 和 requested effects。小型有序路径 policy 只机械分类、从不成为 approval service；
+未匹配路径一律是 shared-core。
+
+source/test implementation folder 名不必等于 direction ID。方向所有权仅来自 Work Packet
+的 exact `owned_paths` 和 authority refs，path policy 从不把路径映射为方向。候选在方向
+worktree/branch 中产生，保持既有 `omp/<direction>/<kind>/<assignment>` 命名；Root 只机械
+整合已验证候选，不手工解决冲突。
+
+Dashboard v1 只读。用户始终可通过 Root 或任一 manager task 直接作出指示，受影响
+任务从 authority revision 获取更新。v1 不增加安全控制面、写式 Dashboard、`llms.txt`、
+Code Index、文档 registry 或其他新的长期权威；机械任务由脚本承担，而非靠 LLM 对
+关键词作状态解释。
+
+### v1 实施与验证边界
+
+实施顺序为：先完成 Work Packet、`reconcile --once`、两层路径规则和 focused tests；
+再用半写入、重复投递、会话中断、同 key 串行/跨方向并行、UNKNOWN Effect 和局部失败
+夹具验证；最后由 Portfolio 选择一个真实低成本方向，完成一次
+Portfolio→EM→CM→Operator→EM→Portfolio 的本地 Git 黄金路径。v1 完成不要求 remote
+push、Dashboard 写入、全方向预建 task、MCP、`llms.txt`、Code Index 或通用恢复引擎。
+
 ## 1. 决策状态
 
 状态：适配层先在本地 `omp/workflow` 完成，随后按用户指令选择性集成到本地
@@ -293,7 +359,34 @@ push outcome unknown 时先 fetch/reconcile，禁止盲目重推或把它混入�
 checkpoint。Codex 工作 task 和 leaf 不自行 commit/push；Root 保持唯一 Git
 integration 与 checkpoint writer。
 
-## 13. 结论
+## 13. 跨角色流水线与显式下一责任人
+
+Codex 迁移必须保留 2026-08-25 的 OMP clean cutover：Portfolio 不再使用含义
+模糊的 `PARKED`。当前 lifecycle 只有 `REGISTERED | ACTIVE | CLOSED`。
+`REGISTERED` 表示保留且持续参与筛选、但尚未选择工作队列；`ACTIVE` 同时覆盖
+可立即执行和已进入依赖/资源队列的方向，不再承担并发槽位计数。真正的并发度由
+worker 数、CPU/RAM、Transport 可用性和 7200 秒边界控制。
+
+research/engineering state schema v2 的每个 `next_action` 必须携带显式
+`owner`：
+
+| 下一步工作 | owner |
+|---|---|
+| 科研问题、原理推导、证据综合、结果解释 | `EM` |
+| 实现、代码修复、代码验证、资源估算器构造 | `CM` |
+| 冻结后的外部科学审查 | `TRANSPORT` |
+| 一个精确的 result-bearing command | `EXPERIMENT_OPERATOR` |
+| lifecycle、Git、checkpoint reconciliation | `ROOT` |
+| 权威材料无法回答的真实决定 | `USER` |
+
+责任人指“下一步实际做工作的人”，不是发现缺口的人。CM 发现科学原理缺口时，
+必须通过 Root 回交 EM；EM 形成冻结工程请求后交 CM。可运行 handoff 在同一个
+Root wake 内 dispatch；暂不可运行时保留相同 owner，并以精确 `waiting_on`
+依赖或本地资源队列记录。任何 material transition 都不得以 ownerless 状态结束。
+Codex 适配层必须把该字段映射到对应顶层 peer task/执行 subagent，而不是依赖
+自然语言摘要猜测下一角色。
+
+## 14. 结论
 
 目标模型是“同级高权限工作 task + 单层执行 subagent”：Root 便宜而可靠，
 Portfolio 稀疏但强，EM/CM 各自保有专业决策权，用户可以直接与任一 task 互动。

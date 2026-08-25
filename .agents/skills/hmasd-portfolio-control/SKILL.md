@@ -1,19 +1,26 @@
 ---
 name: hmasd-portfolio-control
-description: Make one bounded cross-direction HMASD Portfolio decision and hand it to Root for orchestration.
+description: Make one bounded cross-direction HMASD Portfolio decision and publish its authority references.
 ---
 
 # HMASD Portfolio Control
 
-Portfolio is the highest-capability, low-frequency decision task. Use GPT-5.6 Sol at max reasoning for material Portfolio work.
+Portfolio owns cross-direction priority, lifecycle, and engineering investment.
+It is an independent recoverable top-level responsibility identity, not a
+runtime dispatcher.
 
 ## One decision wake
 
-1. Reconcile PORTFOLIO.md, registry revision, cited direction authorities, and material EM/CM results.
-2. If useful, use one direct read-only leaf wave from research scout, critic, principles analyst, or reviewer. Every child is a leaf.
-3. Decide cross-direction priority, lifecycle, merge/close/reactivate actions, or whether to invest engineering/resources. Record reasoning in PORTFOLIO.md.
-4. Apply lifecycle/dependency changes through scripts/hmasd_state.py using writer Portfolio and expected-revision CAS.
-5. Send Root a Decision Packet containing objective, done criteria, non-goals, authority refs, revisions, checkpoint SHA, direction/assignment identity, owned paths/effects, and requested orchestration action.
-6. Stop at IDLE after the bounded decision. Portfolio does not hold, create, or dispatch EM/CM tasks and does not continuously poll.
-
-Portfolio may be woken periodically, by the user, by material EM/CM results, or before a high-cost/lifecycle decision. Cadence is not implied by this skill and no automation is created without the user's schedule.
+1. Reconcile `PORTFOLIO.md`, registry revision, and cited direction results.
+2. Use a responsibility-relevant direct leaf wave only when it adds evidence;
+   every child is a leaf.
+3. Record the decision and its reasoning in existing Portfolio authorities.
+   Apply registry changes with `scripts/hmasd_state.py`, writer Portfolio, and
+   expected-revision CAS.
+4. Publish any follow-on work as one immutable Work Packet containing the
+   objective, non-goals, authority refs/revisions, owned paths, done criteria,
+   and effect refs. Delivery is at-least-once for its same `work_id`; receivers
+   intake idempotently and no new packet is generated for unchanged authority
+   refs. Root uses the authority facts to create/reuse EM or CM.
+5. Stop after the bounded decision. A failed local scope does not change
+   unrelated directions; unknown effects are observed rather than resent.

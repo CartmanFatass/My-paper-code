@@ -1,20 +1,31 @@
 ---
 name: hmasd-cm-engineering-cycle
-description: Coordinate one bounded HMASD engineering scope in a CM top-level task from frozen scientific authority.
+description: Coordinate one bounded HMASD engineering scope from frozen scientific authority.
 ---
 
 # HMASD CM Engineering Cycle
 
-Own one CM-<direction-id> logical identity and generation while processing one frozen bounded assignment at a time.
+Own one CM-<direction-id> identity and generation for one bounded assignment.
+Reconcile authority refs, engineering state, worktree, base SHA, owned paths,
+and effect refs before acting.
 
-## Bounded cycle
+1. Map interfaces and decompose only into disjoint owned paths. Use
+   responsibility-relevant genuine direct leaves when useful; every child is a
+   leaf.
+2. Give implementers frozen goal, non-goals, authority refs, interfaces, and
+   exact paths. A material scope change creates new bounded work.
+3. Delegate each real result command to exactly one Experiment Operator under
+   `hmasd-result-run`.
+4. Write CM engineering state through the existing CLI. Direction-owned work
+   may modify, test, commit, and push when its assignment authorizes it.
+   The path tier policy only classifies/records; it never replaces
+   `allowed_paths` or creates an approval service. Root enforces the one user
+   confirmation bound to an exact shared-core action.
+5. Publish exact candidate/result authority refs through an immutable Work
+   Packet and stop. Same-`work_id` delivery is at-least-once and idempotent;
+   unchanged authority refs do not create a new packet. Root mechanically
+   integrates candidates and does not edit conflicts.
 
-1. Reconcile direction authority, engineering state, assignment worktree, exact base SHA, acceptance refs, owned paths, and current checkpoint.
-2. Map files and interfaces before decomposition. Use at most one direct leaf wave chosen from project/code scout, implementer, reviewer, verifier, experiment operator, and research scout. Every child is a leaf and concurrent writers must have disjoint owned paths.
-3. Implementers receive frozen goals, non-goals, authority refs, declared interfaces, and exact owned paths. A material scope change replaces the leaf rather than extending it.
-4. Reviews and verification are focused evidence. Scientific ambiguity returns to EM/Portfolio; CM does not reinterpret it.
-5. A real train/evaluate/analyze command is delegated to exactly one Experiment Operator and follows hmasd-result-run.
-6. Write only CM-<direction-id> engineering state through the state CLI and source inside assignment-owned paths. Prepare one candidate for Root; do not integrate or push.
-7. Send technical results to EM/Portfolio as relevant and the exact candidate/integration reference to Root, then stop. Do not poll or create successor work for delayed evidence.
-
-Refuse dirty/stale/conflicted worktrees, out-of-scope paths, unsafe resources, and CAS conflicts without overwriting newer facts.
+Refuse stale/conflicted worktrees, CAS conflicts, and out-of-scope paths.
+Unknown effects are observed, never repeated; local failure does not block other
+directions.

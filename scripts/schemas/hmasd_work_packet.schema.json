@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_work_packet.schema.json",
+  "title": "HMASD runtime Work Packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "work_id",
+    "scope_ref",
+    "sender_identity",
+    "target_identity",
+    "authority_refs",
+    "objective",
+    "non_goals",
+    "owned_paths",
+    "done_criteria",
+    "effect_refs"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "work_id": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "scope_ref": { "$ref": "#/$defs/authority_ref" },
+    "sender_identity": { "$ref": "#/$defs/identity" },
+    "target_identity": { "$ref": "#/$defs/identity" },
+    "authority_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/authority_ref" },
+      "uniqueItems": true
+    },
+    "objective": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "non_goals": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "pattern": "\\S" },
+      "uniqueItems": true
+    },
+    "owned_paths": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/owned_path" },
+      "uniqueItems": true
+    },
+    "done_criteria": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "pattern": "\\S" },
+      "uniqueItems": true
+    },
+    "effect_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/effect_ref" },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]{0,127}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*[\\u0000-\\u001F\\u007F-\\u009F])(?!.*:)(?!\\.{1,2}(?:/|$))(?!.*\\/\\.{1,2}(?:/|$))(?![^/]*[. ](?:/|$))(?!.*\\/[^/]*[. ](?:/|$))[^/]+(?:/[^/]+)*$"
+    },
+    "owned_path": {
+      "allOf": [
+        { "$ref": "#/$defs/path" },
+        {
+          "not": {
+            "enum": [
+              "experiments/candidates",
+              "tests/experiments/candidates",
+              "docs/research/candidates",
+              "temp/directions"
+            ]
+          }
+        }
+      ]
+    },
+    "authority_ref": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "revision"],
+          "properties": {
+            "path": { "$ref": "#/$defs/path" },
+            "revision": { "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "$ref": "#/$defs/path" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      ]
+    },
+    "effect_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" }
+      }
+    }
+  }
+}

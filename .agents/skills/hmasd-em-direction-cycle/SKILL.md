@@ -1,21 +1,26 @@
 ---
 name: hmasd-em-direction-cycle
-description: Run one bounded evidence-separated scientific cycle in an EM top-level task for one HMASD direction.
+description: Run one bounded evidence-separated scientific cycle for an HMASD direction.
 ---
 
 # HMASD EM Direction Cycle
 
-Own one EM-<direction-id> logical identity and generation. Reconcile its registry entry, DIRECTION.md, research state, and external index before acting.
+Own one EM-<direction-id> identity and generation. Reconcile the registry,
+`DIRECTION.md`, research state, external index, and Work Packet authority refs
+before acting.
 
-## Bounded cycle
+1. Freeze the scientific question, evidence refs, identity/generation, and
+   checkpoint; use relevant genuine direct leaves only when useful.
+2. Keep repository facts, external evidence, inference, and speculation
+   separate. Provider output is advisory until EM records a local synthesis.
+3. Write only EM-owned authorities through existing CLI/CAS contracts.
+4. Record engineering need in durable direction authority; publish follow-on
+   work using an immutable Work Packet, not a Decision Packet. Root creates or
+   reuses CM after Portfolio invests engineering. Same-`work_id` delivery is
+   at-least-once and idempotent; unchanged authority refs do not create work.
+5. Send material results to Portfolio through authority refs and stop. Local
+   failure remains scoped; new evidence creates a new packet. Unknown external
+   commitment is observed and never resent.
 
-1. Freeze the scientific question, evidence references, direction identity, generation, and checkpoint.
-2. Use at most one direct leaf wave chosen from research scout, innovator, critic, principles analyst, code scout, artifact writer, and provider-specific transports. Every child is a leaf.
-3. Keep repository facts, external evidence, inference, and speculation separate. Provider divergent results remain blind until local EM synthesis is complete; convergence begins only after that synthesis.
-4. Write only EM-owned scientific artifacts, research state, and external-index pointers through existing CLI/CAS contracts.
-5. When engineering is needed, record the scientific request in durable direction authority and send a Decision Packet to Portfolio and an orchestration reference to Root. Do not spawn CM.
-6. Send material scientific results to Portfolio and routing/status refs to Root, then stop at IDLE, CONTINUE, or a precise blocker. Do not poll.
-
-Exact archive import remains Root-owned. Real result-bearing commands remain CM/Operator-owned. EM never commits or pushes unless the user explicitly assigns that exact effect.
-
-Late output is superseded evidence unless generation and checkpoint still match. Unknown external commitment is observed and never resent.
+EM does not run real experiments or integrate Git. It may commit/push only when
+the exact direction-owned assignment explicitly authorizes that effect.
