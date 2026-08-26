@@ -1978,6 +1978,11 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
                         },
                     ],
                 }
+                if recovery_kind == "SAME_SCOPE_REPAIR":
+                    turn["error"] = {
+                        "message": "must not be interpreted as capacity",
+                        "codexErrorInfo": "internalServerError",
+                    }
                 thread["turns"].append(turn)
                 fail_next_list = True
                 peer.emit(
