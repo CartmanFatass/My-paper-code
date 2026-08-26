@@ -1565,6 +1565,7 @@ class AppServerClient:
                 result["thread_id"] = thread_id
             return result
 
+        candidate_ids: list[str] = []
         exact: list[dict[str, Any]] = []
         for row in rows:
             if (
@@ -1575,6 +1576,47 @@ class AppServerClient:
             thread_id = row.get("id")
             if not isinstance(thread_id, str) or not thread_id:
                 return stopped("UNKNOWN", "OPERATOR_CHILD_ID_UNKNOWN")
+            if thread_id not in candidate_ids:
+                candidate_ids.append(thread_id)
+
+        if not candidate_ids:
+            parent_read = self._read_thread_full(parent_thread_id)
+            if parent_read.get("status") != "OK":
+                return stopped("UNKNOWN", "OPERATOR_PARENT_READ_UNKNOWN", parent_thread_id)
+            parent = parent_read["thread"]
+            if parent.get("id") != parent_thread_id:
+                return stopped(
+                    "TASK_IDENTITY_CONFLICT", "OPERATOR_PARENT_IDENTITY_CHANGED",
+                    parent_thread_id,
+                )
+            turns = parent.get("turns")
+            if not isinstance(turns, list):
+                return stopped("UNKNOWN", "OPERATOR_PARENT_HISTORY_UNKNOWN", parent_thread_id)
+            for turn in turns:
+                if not isinstance(turn, Mapping):
+                    continue
+                items = turn.get("items", [])
+                if not isinstance(items, list):
+                    return stopped("UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id)
+                for item in items:
+                    if not isinstance(item, Mapping) or (
+                        item.get("type") != "subAgentActivity"
+                        or item.get("kind") != "started"
+                    ):
+                        continue
+                    child_id = item.get("agentThreadId")
+                    agent_path = item.get("agentPath")
+                    if (
+                        not isinstance(child_id, str) or not child_id
+                        or not isinstance(agent_path, str) or not agent_path
+                    ):
+                        return stopped(
+                            "UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id
+                        )
+                    if child_id not in candidate_ids:
+                        candidate_ids.append(child_id)
+
+        for thread_id in candidate_ids:
             read = self._read_thread_full(thread_id)
             if read.get("status") != "OK":
                 return stopped("UNKNOWN", "OPERATOR_CHILD_READ_UNKNOWN", thread_id)
@@ -1582,11 +1624,12 @@ class AppServerClient:
             if (
                 thread.get("id") != thread_id
                 or thread.get("parentThreadId") != parent_thread_id
-                or thread.get("agentRole") != _OPERATOR_ROLE
             ):
                 return stopped(
                     "TASK_IDENTITY_CONFLICT", "OPERATOR_CHILD_IDENTITY_CHANGED", thread_id
                 )
+            if thread.get("agentRole") != _OPERATOR_ROLE:
+                continue
             documents = [
                 document
                 for document in self._json_documents(thread.get("turns", []))

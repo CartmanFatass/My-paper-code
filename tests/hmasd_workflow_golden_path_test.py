@@ -709,9 +709,10 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("cm_early_return", "OPERATOR_CHILD_NOT_TERMINAL"),
         ("cm_refs_empty", "CM_OPERATOR_REFS_MISMATCH"),
         ("cm_refs_wrong_fresh", "CM_OPERATOR_REFS_MISMATCH"),
-        ("candidate_read_unknown", "NATIVE_OBSERVATION_STOP"),
+        ("candidate_read_unknown", "OPERATOR_CHILD_READ_UNKNOWN"),
         ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("candidate_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
+        ("parent_activity_malformed", "OPERATOR_PARENT_ACTIVITY_INVALID"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -824,6 +825,32 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 for suffix in ("a", "b"):
                     child = child_stub(f"thread-operator-exact-{suffix}", "golden-run")
                     self.threads[child["id"]] = child
+            discovered = []
+            if case in {"candidate_read_unknown", "candidate_binding_unknown"}:
+                discovered = [self.collision_id]
+            elif case == "candidate_ambiguous":
+                discovered = ["thread-operator-exact-a", "thread-operator-exact-b"]
+            if discovered or case == "parent_activity_malformed":
+                activities = [
+                    {
+                        "type": "subAgentActivity",
+                        "kind": "started",
+                        "agentThreadId": child_id,
+                        "agentPath": f"/root/{child_id}",
+                    }
+                    for child_id in discovered
+                ]
+                if case == "parent_activity_malformed":
+                    activities.append(
+                        {
+                            "type": "subAgentActivity",
+                            "kind": "started",
+                            "agentPath": "/root/native_ll_missing_child_id",
+                        }
+                    )
+                self.threads["thread-cm-alpha"]["turns"].append(
+                    {"id": "turn-parent-activity", "status": "interrupted", "items": activities}
+                )
             self.transport = _LocalFakeAppServer(repo)
             self.transport.threads = self.threads
             self.transport.requests = []
@@ -846,7 +873,14 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             if method == "thread/list":
                 self.transport._emit(
                     request_id,
-                    {"data": list(self.threads.values()), "nextCursor": None},
+                    {
+                        "data": [
+                            thread
+                            for thread in self.threads.values()
+                            if thread.get("parentThreadId") is None
+                        ],
+                        "nextCursor": None,
+                    },
                 )
                 return
             thread_id = params.get("threadId")
@@ -907,6 +941,18 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     ],
                 }
                 self.threads[operator_thread["id"]] = operator_thread
+                turn["items"].append(
+                    {
+                        "type": "subAgentActivity",
+                        "kind": "started",
+                        "agentThreadId": operator_thread["id"],
+                        "agentPath": f"/root/{spawn_assignment['task_name']}",
+                    }
+                )
+                # Native history may persist the same start activity more than
+                # once; identity is the exact child thread ID, so duplicates
+                # are harmless.
+                turn["items"].append(dict(turn["items"][-1]))
                 execute_count += 1
                 completed = _run(
                     [sys.executable, str(RUN_SCRIPT), "execute", "--manifest", str(manifest)],
@@ -1064,6 +1110,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         assert cm_return_count <= 1
         return
     assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
+    assert "RETURN_WITNESS_PRESENT" in json.dumps(first["events"], sort_keys=True)
     assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stderr.log"),
