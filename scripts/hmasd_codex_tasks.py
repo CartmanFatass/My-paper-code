@@ -737,13 +737,35 @@ class AppServerClient:
         *,
         max_attempts: int = 3,
         root_override_reason: str | None = None,
+        expected_cwd: str | None = None,
+        expected_thread_source: str | None = None,
     ) -> dict[str, Any]:
         if max_attempts < 1:
             raise ValueError("max_attempts must be positive")
         read = self._read_thread_full(thread_id)
         if read["status"] != "OK":
             return read
-        history = read["thread"].get("turns", [])
+        thread = read["thread"]
+        if expected_cwd is not None and (
+            thread.get("id") != thread_id
+            or thread.get("name") != target_identity
+            or not self._same_cwd(thread.get("cwd"), expected_cwd)
+            or (
+                expected_thread_source is not None
+                and thread.get("threadSource") != expected_thread_source
+            )
+        ):
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "FINAL_THREAD_IDENTITY_CHANGED",
+                "target_identity": target_identity,
+                "thread_id": thread_id,
+                "observed_thread_id": thread.get("id"),
+                "observed_name": thread.get("name"),
+                "observed_cwd": thread.get("cwd"),
+                "observed_thread_source": thread.get("threadSource"),
+            }
+        history = thread.get("turns", [])
         records = self._attempt_records(history, work_id)
         invariant_conflict = any(
             record.get("packet_locator") != packet_locator
@@ -1335,6 +1357,74 @@ class AppServerClient:
             not isinstance(root_override_reason, str) or not root_override_reason.strip()
         ):
             raise ValueError("root override reason must be non-empty")
+        resolution = plan.get("task_resolution")
+        expected_resolution_status = (
+            "CREATE_TASK" if verb == "CREATE_TASK_INTENT" else "REUSE"
+        )
+        required_resolution_fields = {
+            "status",
+            "logical_identity",
+            "kind",
+            "generation",
+            *(
+                {"direction_id"}
+                if expected_resolution_status == "CREATE_TASK"
+                else {"lifecycle", "thread_id"}
+            ),
+        }
+        missing_resolution_fields = sorted(
+            field
+            for field in required_resolution_fields
+            if not isinstance(resolution, Mapping) or field not in resolution
+        )
+        if missing_resolution_fields:
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "INCOMPLETE_TASK_RESOLUTION",
+                "work_id": work_id,
+                "missing_fields": missing_resolution_fields,
+            }
+        generation = resolution.get("generation")
+        target_text = str(target)
+        if target_text == "Portfolio":
+            expected_kind = "portfolio"
+            expected_direction: str | None = None
+        elif target_text.startswith(("EM-", "CM-")):
+            expected_kind = target_text[:2].lower()
+            expected_direction = target_text[3:]
+        else:
+            expected_kind = None
+            expected_direction = None
+        thread_locator_valid = (
+            expected_resolution_status != "REUSE"
+            or (
+                isinstance(resolution.get("thread_id"), str)
+                and bool(resolution["thread_id"].strip())
+            )
+        )
+        if (
+            resolution.get("status") != expected_resolution_status
+            or resolution.get("logical_identity") != target
+            or resolution.get("kind") != expected_kind
+            or not isinstance(generation, int)
+            or isinstance(generation, bool)
+            or generation < 1
+            or not thread_locator_valid
+            or (
+                expected_resolution_status == "CREATE_TASK"
+                and resolution.get("direction_id") != expected_direction
+            )
+            or (
+                expected_resolution_status == "REUSE"
+                and resolution.get("lifecycle")
+                not in {"CREATED", "ACTIVE", "PARKED"}
+            )
+        ):
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "INVALID_TASK_RESOLUTION",
+                "work_id": work_id,
+            }
         repo = Path(cwd).absolute()
         with self._dispatch_lock(repo):
             listed = self._list_all_threads(cwd=cwd)
@@ -1371,7 +1461,6 @@ class AppServerClient:
             thread_id: str | None = None
             thread_full: dict[str, Any] | None = None
             needs_create = False
-            resolution = plan.get("task_resolution", {})
             tagged_thread: Mapping[str, Any] | None = None
             tagged_generation = (
                 resolution.get("generation")
@@ -1440,15 +1529,30 @@ class AppServerClient:
                 if isinstance(value, str) and value
             }
             known_thread_ids.update(exact_thread_ids)
-            task_resolution = hmasd_work_packet.resolve_target_task(
+            if tagged_thread is not None:
+                known_thread_ids.add(str(tagged_thread["id"]))
+            fresh_resolution = hmasd_work_packet.resolve_target_task(
                 str(target), initial_task_rows
             )
+            fresh_status = fresh_resolution.get("status")
+            status_matches_plan = fresh_status == resolution["status"]
+            tagged_create_recovery = (
+                resolution["status"] == "CREATE_TASK"
+                and tagged_thread is not None
+                and fresh_status == "REUSE"
+            )
+            if not status_matches_plan and not tagged_create_recovery:
+                return {
+                    "status": "TASK_IDENTITY_CONFLICT",
+                    "target_identity": target,
+                    "reason": "PLAN_BOUND_TASK_STATUS_MISMATCH",
+                    "expected_status": resolution["status"],
+                    "observed_status": fresh_status,
+                }
             if (
-                isinstance(resolution, Mapping)
-                and resolution.get("status") in {"CREATE_TASK", "REUSE"}
-                and task_resolution.get("status") in {"CREATE_TASK", "REUSE"}
+                fresh_resolution.get("status") in {"CREATE_TASK", "REUSE"}
             ):
-                fresh_thread_id = task_resolution.get("thread_id")
+                fresh_thread_id = fresh_resolution.get("thread_id")
                 fresh_row = next(
                     (
                         row
@@ -1465,13 +1569,13 @@ class AppServerClient:
                     "thread_id": resolution.get("thread_id"),
                 }
                 observed_binding = {
-                    "logical_identity": task_resolution.get("logical_identity"),
-                    "kind": task_resolution.get("kind"),
-                    "direction_id": task_resolution.get(
+                    "logical_identity": fresh_resolution.get("logical_identity"),
+                    "kind": fresh_resolution.get("kind"),
+                    "direction_id": fresh_resolution.get(
                         "direction_id", fresh_row.get("direction_id")
                     ),
-                    "generation": task_resolution.get("generation"),
-                    "thread_id": task_resolution.get("thread_id"),
+                    "generation": fresh_resolution.get("generation"),
+                    "thread_id": fresh_resolution.get("thread_id"),
                 }
                 target_text = str(target)
                 if target_text == "Portfolio":
@@ -1512,16 +1616,6 @@ class AppServerClient:
                         "expected": expected_fact,
                         "observed": observed_fact,
                     }
-            if task_resolution.get("status") == "REUSE":
-                cached_thread_id = task_resolution.get("thread_id")
-                if isinstance(cached_thread_id, str) and cached_thread_id:
-                    known_thread_ids.add(cached_thread_id)
-            elif task_resolution.get("status") == "TASK_IDENTITY_CONFLICT":
-                return {
-                    "status": "TASK_IDENTITY_CONFLICT",
-                    "target_identity": target,
-                    "reason": task_resolution.get("reason"),
-                }
             if len(known_thread_ids) > 1:
                 return {
                     "status": "TASK_IDENTITY_CONFLICT",
@@ -1651,17 +1745,17 @@ class AppServerClient:
                 created = self.create_thread(
                     cwd=cwd,
                     target_identity=target,
-                    generation=task_resolution["generation"],
+                    generation=resolution["generation"],
                 )
                 if created["status"] != "CREATED":
                     return created
                 thread_id = created["thread_id"]
                 reconcile_seed_tasks.append(
                     {
-                        "logical_identity": task_resolution["logical_identity"],
-                        "kind": task_resolution.get("kind"),
-                        "direction_id": task_resolution.get("direction_id"),
-                        "generation": task_resolution["generation"],
+                        "logical_identity": resolution["logical_identity"],
+                        "kind": resolution.get("kind"),
+                        "direction_id": resolution.get("direction_id"),
+                        "generation": resolution["generation"],
                         "thread_id": thread_id,
                     }
                 )
@@ -1694,6 +1788,12 @@ class AppServerClient:
                 packet_locator,
                 target,
                 root_override_reason=root_override_reason,
+                expected_cwd=cwd,
+                expected_thread_source=(
+                    self._manager_thread_source(str(target), int(tagged_generation))
+                    if tagged_thread is not None
+                    else None
+                ),
             )
             if warning:
                 sent = {**sent, "warning": "ROOT_OVERRIDE_ACTIVE"}

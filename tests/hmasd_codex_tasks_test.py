@@ -42,6 +42,51 @@ def observed_em(thread_id: str = "thread-1") -> list[dict[str, Any]]:
     ]
 
 
+def create_em_plan(
+    *,
+    work_id: str = WORK_ID,
+    target_identity: str = "EM-alpha",
+    direction_id: str = "alpha",
+    requested_target_identity: str | None = None,
+) -> dict[str, Any]:
+    plan: dict[str, Any] = {
+        "verb": "CREATE_TASK_INTENT",
+        "work_id": work_id,
+        "target_identity": target_identity,
+        "task_resolution": {
+            "status": "CREATE_TASK",
+            "logical_identity": target_identity,
+            "kind": "em",
+            "direction_id": direction_id,
+            "generation": 1,
+        },
+    }
+    if requested_target_identity is not None:
+        plan["requested_target_identity"] = requested_target_identity
+    return plan
+
+
+def reuse_em_plan(
+    *,
+    thread_id: str = "thread-1",
+    work_id: str = WORK_ID,
+    lifecycle: str = "PARKED",
+) -> dict[str, Any]:
+    return {
+        "verb": "DISPATCH_EXISTING",
+        "work_id": work_id,
+        "target_identity": "EM-alpha",
+        "task_resolution": {
+            "status": "REUSE",
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "generation": 1,
+            "lifecycle": lifecycle,
+            "thread_id": thread_id,
+        },
+    }
+
+
 class FakeTransport:
     """In-memory JSONL peer which exercises the real client state machine."""
 
@@ -191,7 +236,10 @@ def response_peer(
     read_thread_name: str | None = None,
     read_thread_cwd: str | None = None,
 ) -> FakeTransport:
+    created_thread: dict[str, Any] | None = None
+
     def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        nonlocal created_thread
         method = request.get("method")
         request_id = request.get("id")
         if request_id is None:
@@ -222,8 +270,15 @@ def response_peer(
                 "nextCursor": None,
             }
         elif method == "thread/start":
+            created_thread = {
+                "id": "thread-new",
+                "name": None,
+                "cwd": request["params"]["cwd"],
+                "threadSource": request["params"].get("threadSource"),
+                "turns": [],
+            }
             result = {
-                "thread": {"id": "thread-new", "turns": []},
+                "thread": created_thread,
                 "model": "fake",
                 "modelProvider": "fake",
                 "cwd": request["params"]["cwd"],
@@ -233,6 +288,8 @@ def response_peer(
                 "instructionSources": ["C:/Projects/HMASD/AGENTS.md"],
             }
         elif method == "thread/name/set":
+            if created_thread is not None:
+                created_thread["name"] = request["params"]["name"]
             result = {}
         elif method == "thread/fork":
             if fork_error is not None:
@@ -270,9 +327,16 @@ def response_peer(
                         "content": [{"type": "text", "text": history_text}],
                     }
                 ]
+            created_fact = (
+                created_thread
+                if created_thread is not None
+                and created_thread.get("id") == request["params"]["threadId"]
+                else {}
+            )
             result = {
                 "thread": {
                     "id": request["params"]["threadId"],
+                    **created_fact,
                     **({"status": read_thread_status} if read_thread_status is not None else {}),
                     **({"name": read_thread_name} if read_thread_name is not None else {}),
                     **({"cwd": read_thread_cwd} if read_thread_cwd is not None else {}),
@@ -598,11 +662,7 @@ def test_unrelated_unnamed_thread_does_not_block_manager_creation(
     peer = response_peer(
         listed_threads=[{**unrelated_thread, "cwd": tmp_path.as_posix()}]
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1065,11 +1125,7 @@ def test_execute_plan_waits_for_its_started_turn_without_redundant_resume(
         read_thread_cwd=str(tmp_path),
         read_thread_status={"type": "idle"},
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": work_id,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan(work_id=work_id)
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1255,11 +1311,7 @@ def test_execute_plan_refreshes_native_identity_and_lifecycle_after_wait(
         turn_hook=rename_after_dispatch,
         start_status="active",
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=scenario.transport, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1477,11 +1529,7 @@ def test_execute_plan_dispatch_requires_explicit_observed_task_snapshot() -> Non
 
 def test_active_snapshot_without_thread_identity_is_observation_unknown() -> None:
     peer = response_peer()
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-beta",
-    }
+    plan = create_em_plan(target_identity="EM-beta", direction_id="beta")
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1500,11 +1548,7 @@ def test_active_snapshot_without_thread_identity_is_observation_unknown() -> Non
 
 def test_active_native_peer_without_protocol_work_id_is_observation_unknown() -> None:
     peer = response_peer(read_thread_status={"type": "active"})
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-beta",
-    }
+    plan = create_em_plan(target_identity="EM-beta", direction_id="beta")
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1523,11 +1567,7 @@ def test_active_native_peer_without_protocol_work_id_is_observation_unknown() ->
 
 def test_execute_plan_create_then_dispatches_without_a_daemon() -> None:
     peer = response_peer()
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "requested_target_identity": "EM-alpha",
-    }
+    plan = create_em_plan(requested_target_identity="EM-alpha")
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1545,11 +1585,7 @@ def test_execute_plan_create_then_dispatches_without_a_daemon() -> None:
 
 def test_execute_plan_first_turn_exposes_only_exact_slice_and_return_contract() -> None:
     peer = response_peer()
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1581,11 +1617,7 @@ def test_execute_plan_new_first_dispatch_does_not_probe_return_witness(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     peer = response_peer()
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
 
     def unexpected_reconcile(**_: Any) -> None:
         raise AssertionError("first dispatch must not inspect a return witness")
@@ -1627,11 +1659,7 @@ def test_create_observes_and_compares_active_peers_before_creating_identity(
             "pairs": [{"reasons": [{"type": "OWNED_PATH_OVERLAP"}]}],
         },
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1681,12 +1709,7 @@ def test_execute_plan_terminal_history_with_tasks_mapping_return_never_resumes(
         "read_return",
         lambda **_: VALIDATED_RETURN_STUB,
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1829,12 +1852,7 @@ def test_execute_plan_propagates_valid_return_with_unknown_effect_as_observe_onl
             }
         ],
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": work_id,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan(work_id=work_id)
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -1892,12 +1910,7 @@ def test_damaged_return_reconstruction_is_not_treated_as_closed(
             },
         },
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
 
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
@@ -1938,12 +1951,7 @@ def test_execute_plan_attempt_three_still_observes_present_return_before_exhaust
             }
         )
     peer = response_peer()
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         monkeypatch.setattr(
             client,
@@ -2020,12 +2028,7 @@ def test_execute_plan_terminal_history_with_invalid_return_never_resumes(
         raise failure
 
     monkeypatch.setattr(tasks.hmasd_work_packet, "reconcile_once", reconcile_once)
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2044,7 +2047,9 @@ def test_execute_plan_terminal_history_with_invalid_return_never_resumes(
     assert "turn/start" not in methods
 
 
-def test_execute_plan_create_reuses_one_fresh_exact_native_identity(tmp_path: Path) -> None:
+def test_closed_create_plan_does_not_select_fresh_reuse_on_its_behalf(
+    tmp_path: Path,
+) -> None:
     peer = response_peer(
         listed_threads=[
             {
@@ -2056,13 +2061,9 @@ def test_execute_plan_create_reuses_one_fresh_exact_native_identity(tmp_path: Pa
             }
         ],
         read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "requested_target_identity": "EM-alpha",
-    }
+    plan = create_em_plan(requested_target_identity="EM-alpha")
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2070,11 +2071,12 @@ def test_execute_plan_create_reuses_one_fresh_exact_native_identity(tmp_path: Pa
             cwd=str(tmp_path),
             observed_tasks=observed_em("thread-existing"),
         )
-    assert result["status"] == "DELIVERED"
-    assert result["thread_id"] == "thread-existing"
+    assert result["status"] == "TASK_IDENTITY_CONFLICT"
+    assert result["reason"] == "PLAN_BOUND_TASK_STATUS_MISMATCH"
     methods = [request.get("method") for request in peer.requests]
     assert "thread/start" not in methods
     assert "thread/name/set" not in methods
+    assert "turn/start" not in methods
 
 
 @pytest.mark.parametrize(
@@ -2110,11 +2112,7 @@ def test_execute_plan_rejects_missing_or_contradictory_native_task_facts(
         read_thread_cwd=str(tmp_path),
         read_thread_status={"type": "idle"},
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2138,11 +2136,7 @@ def test_execute_plan_reuses_exact_cached_identity_when_cwd_list_omits_it(
         read_thread_name="EM-alpha",
         read_thread_cwd=str(tmp_path),
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = reuse_em_plan(thread_id="thread-cached")
     observed = [
         {
             "kind": "em",
@@ -2168,20 +2162,39 @@ def test_execute_plan_reuses_exact_cached_identity_when_cwd_list_omits_it(
     assert "thread/name/set" not in methods
 
 
-def test_execute_plan_rejects_plan_thread_id_when_fresh_snapshot_omits_target(
-    tmp_path: Path,
+@pytest.mark.parametrize(
+    "plan",
+    [
+        {
+            "verb": "DISPATCH_EXISTING",
+            "work_id": WORK_ID,
+            "target_identity": "EM-alpha",
+            "task_resolution": {
+                "status": "REUSE",
+                "thread_id": "thread-existing",
+            },
+        },
+        {
+            "verb": "CREATE_TASK_INTENT",
+            "work_id": WORK_ID,
+            "target_identity": "EM-alpha",
+            "task_resolution": {
+                "status": "CREATE_TASK",
+                "logical_identity": "EM-alpha",
+                "kind": "em",
+            },
+        },
+    ],
+    ids=["incomplete-reuse", "incomplete-create"],
+)
+def test_execute_plan_rejects_incomplete_planner_task_resolution(
+    tmp_path: Path, plan: dict[str, Any]
 ) -> None:
     peer = response_peer(
         listed_threads=[],
         read_thread_name="EM-alpha",
         read_thread_cwd=str(tmp_path),
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"status": "REUSE", "thread_id": "thread-planned"},
-    }
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2190,23 +2203,9 @@ def test_execute_plan_rejects_plan_thread_id_when_fresh_snapshot_omits_target(
             observed_tasks=[],
         )
 
-    assert result == {
-        "status": "TASK_IDENTITY_CONFLICT",
-        "target_identity": "EM-alpha",
-        "reason": "PLAN_BOUND_TASK_MISMATCH",
-        "expected": {
-            "logical_identity": "EM-alpha",
-            "kind": "em",
-            "direction_id": "alpha",
-            "thread_id": "thread-planned",
-        },
-        "observed": {
-            "logical_identity": "EM-alpha",
-            "kind": "em",
-            "direction_id": "alpha",
-            "thread_id": None,
-        },
-    }
+    assert result["status"] == "PROTOCOL_DEFECT"
+    assert result["reason"] == "INCOMPLETE_TASK_RESOLUTION"
+    assert result["work_id"] == WORK_ID
     methods = [request.get("method") for request in peer.requests]
     assert "thread/start" not in methods
     assert "turn/start" not in methods
@@ -2274,6 +2273,88 @@ def test_execute_plan_rejects_fresh_generation_that_differs_from_plan(
     assert "turn/start" not in methods
 
 
+@pytest.mark.parametrize(
+    ("mutation", "uses_target_tag"),
+    [
+        ({"name": "EM-beta"}, False),
+        ({"cwd": "C:/Projects/other"}, False),
+        ({"threadSource": "hmasd-manager:EM-beta:g1"}, True),
+    ],
+    ids=["name", "cwd", "thread-source"],
+)
+def test_execute_plan_revalidates_native_identity_on_final_read(
+    tmp_path: Path,
+    mutation: dict[str, Any],
+    uses_target_tag: bool,
+) -> None:
+    thread = {
+        "id": "thread-existing",
+        "name": "EM-alpha",
+        "cwd": tmp_path.as_posix(),
+        "status": {"type": "idle"},
+        "turns": [],
+    }
+    if uses_target_tag:
+        thread["threadSource"] = "hmasd-manager:EM-alpha:g1"
+    base = response_peer(listed_threads=[thread])
+    read_count = 0
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        nonlocal read_count
+        if request.get("method") != "thread/read":
+            base.responder(request, peer)
+            return
+        read_count += 1
+        observed = {**thread, **(mutation if read_count == 2 else {})}
+        peer.emit({"id": request["id"], "result": {"thread": observed}})
+
+    peer = FakeTransport(respond)
+    if uses_target_tag:
+        plan = {
+            "verb": "CREATE_TASK_INTENT",
+            "work_id": WORK_ID,
+            "target_identity": "EM-alpha",
+            "task_resolution": {
+                "status": "CREATE_TASK",
+                "logical_identity": "EM-alpha",
+                "kind": "em",
+                "direction_id": "alpha",
+                "generation": 1,
+            },
+        }
+        observed_tasks: list[dict[str, Any]] = []
+    else:
+        plan = {
+            "verb": "DISPATCH_EXISTING",
+            "work_id": WORK_ID,
+            "target_identity": "EM-alpha",
+            "task_resolution": {
+                "status": "REUSE",
+                "logical_identity": "EM-alpha",
+                "kind": "em",
+                "generation": 1,
+                "lifecycle": "PARKED",
+                "thread_id": "thread-existing",
+            },
+        }
+        observed_tasks = observed_em("thread-existing")
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_tasks,
+        )
+
+    assert result["status"] == "TASK_IDENTITY_CONFLICT"
+    assert result["reason"] == "FINAL_THREAD_IDENTITY_CHANGED"
+    assert result["thread_id"] == "thread-existing"
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/read") == 2
+    assert "thread/start" not in methods
+    assert "turn/start" not in methods
+
+
 def test_dispatch_existing_fails_closed_on_fresh_cache_identity_conflict(
     tmp_path: Path,
 ) -> None:
@@ -2282,12 +2363,7 @@ def test_dispatch_existing_fails_closed_on_fresh_cache_identity_conflict(
         read_thread_name="EM-alpha",
         read_thread_cwd=str(tmp_path),
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"status": "REUSE", "thread_id": "thread-planned"},
-    }
+    plan = reuse_em_plan(thread_id="thread-planned")
     observed = [
         {
             "kind": "em",
@@ -2327,11 +2403,7 @@ def test_exact_listed_identity_with_invalid_thread_id_never_creates(
     if listed_id is not None:
         row["id"] = listed_id
     peer = response_peer(listed_threads=[row])
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2370,11 +2442,7 @@ def test_cached_identity_read_mismatch_never_creates(
         read_thread_name=read_name,
         read_thread_cwd=actual_cwd,
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = reuse_em_plan(thread_id="thread-cached")
     observed = [
         {
             "kind": "em",
@@ -2410,11 +2478,7 @@ def test_cached_identity_unknown_read_never_creates(tmp_path: Path) -> None:
         listed_threads=[],
         read_thread_error={"code": -32001, "message": "not observed"},
     )
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = reuse_em_plan(thread_id="thread-cached")
     observed = [
         {
             "kind": "em",
@@ -2440,7 +2504,7 @@ def test_cached_identity_unknown_read_never_creates(tmp_path: Path) -> None:
     assert "turn/start" not in methods
 
 
-def test_execute_plan_scans_all_native_list_pages_before_reusing_identity(
+def test_execute_plan_scans_all_pages_before_rejecting_stale_create_plan(
     tmp_path: Path,
 ) -> None:
     pages = {
@@ -2453,10 +2517,12 @@ def test_execute_plan_scans_all_native_list_pages_before_reusing_identity(
             data, cursor = pages[request["params"].get("cursor")]
             peer.emit({"id": request["id"], "result": {"data": data, "nextCursor": cursor}})
             return
-        response_peer(read_thread_name="EM-alpha").responder(request, peer)
+        response_peer(
+            read_thread_name="EM-alpha", read_thread_cwd=str(tmp_path)
+        ).responder(request, peer)
 
     peer = FakeTransport(respond)
-    plan = {"verb": "CREATE_TASK_INTENT", "work_id": WORK_ID, "target_identity": "EM-alpha"}
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2464,13 +2530,14 @@ def test_execute_plan_scans_all_native_list_pages_before_reusing_identity(
             cwd=str(tmp_path),
             observed_tasks=observed_em("thread-existing"),
         )
-    assert result["status"] == "DELIVERED"
-    assert result["thread_id"] == "thread-existing"
+    assert result["status"] == "TASK_IDENTITY_CONFLICT"
+    assert result["reason"] == "PLAN_BOUND_TASK_STATUS_MISMATCH"
     list_requests = [item for item in peer.requests if item.get("method") == "thread/list"]
     assert [item["params"].get("cursor") for item in list_requests] == [None, "cursor-2"]
     methods = [item.get("method") for item in peer.requests]
     assert "thread/start" not in methods
     assert "thread/name/set" not in methods
+    assert "turn/start" not in methods
 
 
 def test_execute_plan_detects_duplicate_identity_across_native_list_pages_before_create(
@@ -2489,7 +2556,7 @@ def test_execute_plan_detects_duplicate_identity_across_native_list_pages_before
         response_peer().responder(request, peer)
 
     peer = FakeTransport(respond)
-    plan = {"verb": "CREATE_TASK_INTENT", "work_id": WORK_ID, "target_identity": "EM-alpha"}
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
@@ -2512,7 +2579,7 @@ def test_execute_plan_fails_closed_on_repeated_native_list_cursor(tmp_path: Path
         response_peer().responder(request, peer)
 
     peer = FakeTransport(respond)
-    plan = {"verb": "CREATE_TASK_INTENT", "work_id": WORK_ID, "target_identity": "EM-alpha"}
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
@@ -2534,11 +2601,7 @@ def test_execute_plan_create_rejects_duplicate_fresh_native_identity(tmp_path: P
         for index in (1, 2)
     ]
     peer = response_peer(listed_threads=rows)
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
@@ -2562,12 +2625,7 @@ def test_dispatch_existing_rejects_duplicate_fresh_native_identity(tmp_path: Pat
         for index in (1, 2)
     ]
     peer = response_peer(listed_threads=rows, read_thread_name="EM-alpha")
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
 
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
@@ -2597,18 +2655,12 @@ def test_execute_plan_dispatch_rechecks_thread_id_and_canonical_name(tmp_path: P
         ],
         read_thread_name="EM-alpha",
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
         )
     assert result["status"] == "TASK_IDENTITY_CONFLICT"
-    assert result["observed_name"] == "CM-alpha"
     assert "turn/start" not in [request.get("method") for request in peer.requests]
 
 
@@ -2625,6 +2677,7 @@ def test_execute_plan_compare_conflict_prevents_dispatch(
             }
         ],
         read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
     )
     compared: list[list[str]] = []
 
@@ -2633,12 +2686,7 @@ def test_execute_plan_compare_conflict_prevents_dispatch(
         return {"outcome": "CONFLICT", "work_ids": work_ids, "pairs": []}
 
     monkeypatch.setattr(tasks.hmasd_work_packet, "compare_work_ids", compare)
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     peer_work = "b" * 64
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
@@ -2744,6 +2792,7 @@ def test_root_override_bypasses_compare_but_is_bound_in_native_envelope(
             }
         ],
         read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
     )
     monkeypatch.setattr(
         tasks.hmasd_work_packet,
@@ -2756,12 +2805,7 @@ def test_root_override_bypasses_compare_but_is_bound_in_native_envelope(
             ],
         },
     )
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2813,12 +2857,7 @@ def test_root_override_cannot_bypass_effect_authority_or_observation_defects(
         read_thread_name="EM-alpha",
     )
     monkeypatch.setattr(tasks.hmasd_work_packet, "compare_work_ids", lambda *_: comparison)
-    plan = {
-        "verb": "DISPATCH_EXISTING",
-        "work_id": WORK_ID,
-        "target_identity": "EM-alpha",
-        "task_resolution": {"thread_id": "thread-1"},
-    }
+    plan = reuse_em_plan()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
@@ -2853,12 +2892,7 @@ def test_first_turn_contract_is_the_same_for_canonical_participant_kinds(
 
 def test_execute_plan_uses_canonical_target_identity_not_requested_alias() -> None:
     peer = response_peer()
-    plan = {
-        "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
-        "requested_target_identity": "EM/alpha/g1",
-        "target_identity": "EM-alpha",
-    }
+    plan = create_em_plan(requested_target_identity="EM/alpha/g1")
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan, packet_locator=LOCATOR, cwd="C:/Projects/HMASD", observed_tasks=[]
