@@ -129,7 +129,7 @@ def default_server_command() -> tuple[str, ...]:
         executable = shutil.which("codex.exe" if sys.platform == "win32" else "codex")
     if executable is None:
         executable = "codex.exe" if sys.platform == "win32" else "codex"
-    return (executable, "app-server")
+    return (executable, "-c", "project_doc_max_bytes=0", "app-server")
 
 
 def _canonical_bytes(value: Mapping[str, Any]) -> bytes:
@@ -534,12 +534,39 @@ class AppServerClient:
             after_send=True,
         )
         if named["status"] != "OK":
-            return {
-                "status": "UNKNOWN",
-                "reason": "THREAD_CREATED_NAME_UNKNOWN",
-                "thread_id": thread_id,
-                "name_result": named,
-            }
+            observed = self._read_thread_full(thread_id)
+            observed_name = (
+                observed.get("thread", {}).get("name")
+                if observed.get("status") == "OK"
+                else None
+            )
+            if observed.get("status") == "OK" and observed_name != target_identity:
+                if observed_name not in {None, ""}:
+                    return {
+                        "status": "TASK_IDENTITY_CONFLICT",
+                        "target_identity": target_identity,
+                        "thread_id": thread_id,
+                        "observed_name": observed_name,
+                    }
+                return {
+                    "status": "UNKNOWN",
+                    "reason": "THREAD_CREATED_NAME_UNKNOWN",
+                    "target_identity": target_identity,
+                    "thread_id": thread_id,
+                    "observed_name": observed_name,
+                    "observed_status": observed.get("thread", {}).get("status"),
+                    "name_result": named,
+                }
+            if observed.get("status") != "OK":
+                return {
+                    "status": "UNKNOWN",
+                    "reason": "THREAD_CREATED_NAME_UNKNOWN",
+                    "target_identity": target_identity,
+                    "thread_id": thread_id,
+                    "observed_name": None,
+                    "name_result": named,
+                    "observation_status": observed.get("status"),
+                }
         native = response["result"]
         return {
             "status": "CREATED",
@@ -688,7 +715,6 @@ class AppServerClient:
         packet_locator: str,
         target_identity: str,
         *,
-        repo: Path | None = None,
         max_attempts: int = 3,
         root_override_reason: str | None = None,
     ) -> dict[str, Any]:
@@ -967,6 +993,69 @@ class AppServerClient:
             in {"ACTIVE", "RUNNING"}
         ]
 
+    @staticmethod
+    def _native_lifecycle(status: Any) -> str | None:
+        state = (
+            str(status.get("type", "")).replace("-", "").lower()
+            if isinstance(status, Mapping)
+            else str(status).replace("-", "").lower()
+        )
+        if state in {"active", "running", "inprogress"}:
+            return "ACTIVE"
+        if state == "idle":
+            return "PARKED"
+        if state in {"completed", "failed", "interrupted"}:
+            return "COMPLETED"
+        return None
+
+    @classmethod
+    def _native_task_snapshot(
+        cls,
+        rows: Sequence[Mapping[str, Any]],
+        prior_tasks: Sequence[Mapping[str, Any]],
+        *,
+        include_unlisted: bool = True,
+    ) -> list[dict[str, Any]]:
+        prior_by_thread = {
+            str(task.get("thread_id", task.get("session_id"))): dict(task)
+            for task in prior_tasks
+            if isinstance(task.get("thread_id", task.get("session_id")), str)
+        }
+        snapshot_by_thread = dict(prior_by_thread) if include_unlisted else {}
+        for row in rows:
+            thread_id = row.get("id")
+            if not isinstance(thread_id, str) or not thread_id:
+                continue
+            task = dict(prior_by_thread.get(thread_id, {}))
+            identity = row.get("name")
+            if isinstance(identity, str) and identity:
+                task["logical_identity"] = identity
+            elif not isinstance(task.get("logical_identity"), str):
+                continue
+            identity = str(task["logical_identity"])
+            task["thread_id"] = thread_id
+            generation = task.get("generation")
+            if not isinstance(generation, int) or isinstance(generation, bool) or generation < 1:
+                task["generation"] = 1
+            lifecycle = cls._native_lifecycle(row.get("status"))
+            if lifecycle is not None and task.get("lifecycle") not in {
+                "COMPLETED",
+                "RETIRED",
+            }:
+                task["lifecycle"] = lifecycle
+            elif not isinstance(task.get("lifecycle"), str):
+                task["lifecycle"] = "PARKED"
+            if identity == "Portfolio":
+                task.setdefault("kind", "portfolio")
+            elif identity.startswith("EM-"):
+                task.setdefault("kind", "em")
+                task.setdefault("direction_id", identity[3:])
+            elif identity.startswith("CM-"):
+                task.setdefault("kind", "cm")
+                task.setdefault("direction_id", identity[3:])
+            snapshot_by_thread[thread_id] = task
+        return [snapshot_by_thread[key] for key in sorted(snapshot_by_thread)]
+
     def _read_known_identity(
         self,
         thread_id: str,
@@ -1094,14 +1183,14 @@ class AppServerClient:
         )
 
     @staticmethod
-    def _terminal_return_fact(
+    def _validated_return_fact(
         *,
         repo: Path,
         work_id: str,
         observed_tasks: Sequence[Mapping[str, Any]],
         thread_id: str,
-        terminal: Mapping[str, Any],
-    ) -> dict[str, Any]:
+        terminal: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any] | None:
         try:
             return_plan = hmasd_work_packet.reconcile_once(
                 repo=repo,
@@ -1118,15 +1207,7 @@ class AppServerClient:
         return_resolution = return_plan.get("task_resolution", {})
         if return_resolution.get("status") != "RETURN_WITNESS":
             if return_plan.get("verb") in _DISPATCH_VERBS:
-                return {
-                    "status": "RETURN_WITNESS_MISSING",
-                    "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
-                    "recoverable": True,
-                    "work_id": work_id,
-                    "thread_id": thread_id,
-                    "turn_id": terminal.get("turn_id"),
-                    "turn_status": terminal.get("turn_status"),
-                }
+                return None
             return {
                 "status": "PROTOCOL_DEFECT",
                 "reason": "RETURN_WITNESS_INVALID",
@@ -1144,15 +1225,21 @@ class AppServerClient:
                 "work_id": work_id,
                 "thread_id": thread_id,
             }
-        return {
+        result = {
             "status": witness["agent_result"]["status"],
             "reason": "RETURN_WITNESS_PRESENT",
             "work_id": work_id,
             "thread_id": thread_id,
-            "turn_id": terminal.get("turn_id"),
-            "turn_status": terminal.get("turn_status"),
             "return_witness": witness,
         }
+        if terminal is not None:
+            result.update(
+                {
+                    "turn_id": terminal.get("turn_id"),
+                    "turn_status": terminal.get("turn_status"),
+                }
+            )
+        return result
 
     @staticmethod
     def _override_allows_compare(compare: Mapping[str, Any]) -> bool:
@@ -1216,6 +1303,9 @@ class AppServerClient:
                 for row in listed["threads"]
                 if self._same_cwd(row.get("cwd"), cwd)
             ]
+            initial_task_rows = self._native_task_snapshot(
+                rows, self._task_rows(observed_tasks)
+            )
             exact = [row for row in rows if row.get("name") == target]
             exact_thread_ids: list[str] = []
             for row in exact:
@@ -1250,7 +1340,7 @@ class AppServerClient:
             }
             known_thread_ids.update(exact_thread_ids)
             task_resolution = hmasd_work_packet.resolve_target_task(
-                str(target), self._task_rows(observed_tasks)
+                str(target), initial_task_rows
             )
             if task_resolution.get("status") == "REUSE":
                 cached_thread_id = task_resolution.get("thread_id")
@@ -1361,40 +1451,27 @@ class AppServerClient:
             if thread_full is not None and self._terminal_attempt_needs_return_observation(
                 thread_full["thread"], work_id, packet_locator, target
             ):
-                try:
-                    return_plan = hmasd_work_packet.reconcile_once(
-                        repo=repo,
-                        work_id=work_id,
-                        observed_tasks=self._task_rows(observed_tasks),
-                    )["plan"]
-                except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict):
-                    return {
-                        "status": "PROTOCOL_DEFECT",
-                        "reason": "RETURN_WITNESS_INVALID",
-                        "work_id": work_id,
-                        "thread_id": thread_id,
-                    }
-                return_resolution = return_plan.get("task_resolution", {})
-                if return_resolution.get("status") == "RETURN_WITNESS":
-                    return {
-                        "status": "NO_EFFECT",
-                        "reason": "RETURN_WITNESS_PRESENT",
-                        "work_id": work_id,
-                        "thread_id": thread_id,
-                    }
-                if return_plan.get("verb") not in _DISPATCH_VERBS:
-                    return {
-                        "status": "PROTOCOL_DEFECT",
-                        "reason": "RETURN_WITNESS_INVALID",
-                        "work_id": work_id,
-                        "thread_id": thread_id,
-                    }
+                reconcile_rows = list(rows)
+                if all(row.get("id") != thread_id for row in reconcile_rows):
+                    reconcile_rows.append(thread_full["thread"])
+                reconcile_task_rows = self._native_task_snapshot(
+                    reconcile_rows,
+                    self._task_rows(observed_tasks),
+                    include_unlisted=False,
+                )
+                return_fact = self._validated_return_fact(
+                    repo=repo,
+                    work_id=work_id,
+                    observed_tasks=reconcile_task_rows,
+                    thread_id=thread_id,
+                )
+                if return_fact is not None:
+                    return return_fact
             sent = self.send(
                 thread_id,
                 work_id,
                 packet_locator,
                 target,
-                repo=repo,
                 root_override_reason=root_override_reason,
             )
             if warning:
@@ -1415,13 +1492,55 @@ class AppServerClient:
             )
             if terminal.get("status") not in {"COMPLETED", "TERMINAL"}:
                 return terminal
-            return self._terminal_return_fact(
+            fresh = self._list_all_threads(cwd=cwd)
+            if fresh.get("status") != "OK":
+                return fresh
+            fresh_rows = [
+                row
+                for row in fresh["threads"]
+                if self._same_cwd(row.get("cwd"), cwd)
+            ]
+            current = next(
+                (row for row in fresh_rows if row.get("id") == thread_id), None
+            )
+            if current is not None and current.get("name") != target:
+                return {
+                    "status": "TASK_IDENTITY_CONFLICT",
+                    "target_identity": target,
+                    "thread_id": thread_id,
+                    "observed_name": current.get("name"),
+                    "observed_status": current.get("status"),
+                }
+            if current is None:
+                full = self._read_known_identity(
+                    thread_id, target_identity=str(target), cwd=cwd
+                )
+                if full.get("status") != "OK":
+                    return full
+                fresh_rows.append(full["thread"])
+            fresh_task_rows = self._native_task_snapshot(
+                fresh_rows,
+                self._task_rows(observed_tasks),
+                include_unlisted=False,
+            )
+            return_fact = self._validated_return_fact(
                 repo=repo,
                 work_id=work_id,
-                observed_tasks=self._task_rows(observed_tasks),
+                observed_tasks=fresh_task_rows,
                 thread_id=thread_id,
                 terminal=terminal,
             )
+            if return_fact is not None:
+                return return_fact
+            return {
+                "status": "RETURN_WITNESS_MISSING",
+                "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
+                "recoverable": True,
+                "work_id": work_id,
+                "thread_id": thread_id,
+                "turn_id": terminal.get("turn_id"),
+                "turn_status": terminal.get("turn_status"),
+            }
         return sent
 
     @staticmethod
@@ -1638,7 +1757,6 @@ def _parser() -> argparse.ArgumentParser:
     send.add_argument("--work-id", required=True)
     send.add_argument("--packet-locator", required=True)
     send.add_argument("--target-identity", required=True)
-    send.add_argument("--repo", default=".")
     wait = commands.add_parser("wait")
     wait.add_argument("--thread-id", required=True)
     wait.add_argument("--turn-id", required=True)
@@ -1684,7 +1802,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.work_id,
                     args.packet_locator,
                     args.target_identity,
-                    repo=Path(args.repo),
                 )
                 delivery_status = result.get("status")
                 if (
