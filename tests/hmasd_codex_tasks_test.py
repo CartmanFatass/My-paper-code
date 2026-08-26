@@ -759,29 +759,282 @@ def test_standalone_wait_resumes_inflight_thread_before_listening() -> None:
 def test_execute_plan_waits_for_its_started_turn_without_redundant_resume(
     tmp_path: Path,
 ) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    direction_path = tmp_path / "docs/research/candidates/alpha/DIRECTION.json"
+    for path, document in (
+        (state_path, {"direction": "alpha", "revision": 7}),
+        (direction_path, {"direction": "alpha", "revision": 3}),
+    ):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [
+                {
+                    "path": "docs/research/candidates/alpha/DIRECTION.json",
+                    "revision": 3,
+                }
+            ],
+            "objective": "complete one bounded participant slice",
+            "non_goals": ["do not coordinate global topology"],
+            "owned_paths": ["experiments/candidates/alpha"],
+            "done_criteria": ["publish one immutable typed return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    work_id = packet["work_id"]
     peer = response_peer(complete_turn=True, listed_threads=[])
     plan = {
         "verb": "CREATE_TASK_INTENT",
-        "work_id": WORK_ID,
+        "work_id": work_id,
         "target_identity": "EM-alpha",
     }
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
-            packet_locator=LOCATOR,
+            packet_locator=f".codex/runtime/work/ready/{work_id}/packet.json",
             cwd=str(tmp_path),
             observed_tasks=[],
             wait_timeout=0.1,
         )
 
     assert result == {
-        "status": "COMPLETED",
+        "status": "RETURN_WITNESS_MISSING",
+        "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
+        "recoverable": True,
+        "work_id": work_id,
         "thread_id": "thread-new",
         "turn_id": "turn-new",
         "turn_status": "completed",
     }
     methods = [request.get("method") for request in peer.requests]
     assert methods.count("thread/resume") == 1
+
+
+def test_execute_plan_reports_one_typed_return_and_redelivery_is_idempotent(
+    tmp_path: Path,
+) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    direction_path = tmp_path / "docs/research/candidates/alpha/DIRECTION.json"
+    for path, document in (
+        (state_path, {"direction": "alpha", "revision": 7}),
+        (direction_path, {"direction": "alpha", "revision": 3}),
+    ):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [
+                {
+                    "path": "docs/research/candidates/alpha/DIRECTION.json",
+                    "revision": 3,
+                }
+            ],
+            "objective": "complete one bounded participant slice",
+            "non_goals": ["do not coordinate global topology"],
+            "owned_paths": ["experiments/candidates/alpha"],
+            "done_criteria": ["publish one immutable typed return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    work_id = packet["work_id"]
+    locator = f".codex/runtime/work/ready/{work_id}/packet.json"
+    participant_task = {
+        "logical_identity": "EM-alpha",
+        "kind": "em",
+        "direction_id": "alpha",
+        "generation": 1,
+        "lifecycle": "PARKED",
+        "thread_id": "thread-em-alpha",
+    }
+    agent_result = {
+        "schema_version": 1,
+        "role": "hmasd-em",
+        "logical_identity": "EM-alpha",
+        "generation": 1,
+        "assignment_id": work_id,
+        "status": "COMPLETED",
+        "materiality": "DIRECTION",
+        "summary": "Completed the one exact bounded participant slice.",
+        "changed_paths": [],
+        "state_refs": [],
+        "artifact_refs": [],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "em",
+            "direction_id": "alpha",
+            "question_sha256": "a" * 64,
+            "evidence_set_sha256": "b" * 64,
+            "conclusion_refs": [],
+            "engineering_request_ref": None,
+        },
+    }
+    native_thread: dict[str, Any] | None = None
+    witness_publish_count = 0
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        nonlocal native_thread, witness_publish_count
+        request_id = request.get("id")
+        if request_id is None:
+            return
+        method = request.get("method")
+        if method == "initialize":
+            result: dict[str, Any] = {
+                "serverInfo": {"name": "fake", "version": "1"}
+            }
+        elif method == "thread/list":
+            result = {
+                "data": [] if native_thread is None else [native_thread],
+                "nextCursor": None,
+            }
+        elif method == "thread/start":
+            native_thread = {
+                "id": "thread-em-alpha",
+                "name": None,
+                "cwd": request["params"]["cwd"],
+                "status": {"type": "idle"},
+                "turns": [],
+            }
+            result = {
+                "thread": native_thread,
+                "model": "fake",
+                "modelProvider": "fake",
+                "cwd": request["params"]["cwd"],
+                "approvalPolicy": "never",
+                "sandbox": {"type": "dangerFullAccess"},
+                "instructionSources": [str(tmp_path / "AGENTS.md")],
+            }
+        elif method == "thread/name/set":
+            assert native_thread is not None
+            native_thread["name"] = request["params"]["name"]
+            result = {}
+        elif method == "thread/read":
+            assert native_thread is not None
+            result = {"thread": native_thread}
+        elif method == "thread/resume":
+            assert native_thread is not None
+            result = {
+                "thread": native_thread,
+                "model": "fake",
+                "modelProvider": "fake",
+                "cwd": str(tmp_path),
+                "approvalPolicy": "never",
+                "sandbox": {"type": "dangerFullAccess"},
+            }
+        elif method == "turn/start":
+            assert native_thread is not None
+            witness_publish_count += 1
+            tasks.hmasd_work_packet.publish_return(
+                repo=tmp_path,
+                work_id=work_id,
+                observed_tasks=[participant_task],
+                agent_result=agent_result,
+            )
+            terminal_turn = {
+                "id": "turn-em-alpha",
+                "status": "completed",
+                "items": [
+                    {
+                        "type": "userMessage",
+                        "content": request["params"]["input"],
+                    }
+                ],
+            }
+            native_thread["turns"] = [terminal_turn]
+            result = {
+                "turn": {
+                    "id": "turn-em-alpha",
+                    "status": "inProgress",
+                    "items": [],
+                }
+            }
+            peer.emit({"id": request_id, "result": result})
+            peer.emit(
+                {
+                    "method": "turn/completed",
+                    "params": {
+                        "threadId": "thread-em-alpha",
+                        "turn": terminal_turn,
+                    },
+                }
+            )
+            return
+        else:
+            raise AssertionError(f"unexpected method: {method}")
+        peer.emit({"id": request_id, "result": result})
+
+    peer = FakeTransport(respond)
+    plan = tasks.hmasd_work_packet.reconcile_once(
+        repo=tmp_path, work_id=work_id, observed_tasks=[]
+    )["plan"]
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        first = client.execute_plan(
+            plan,
+            packet_locator=locator,
+            cwd=str(tmp_path),
+            observed_tasks=[],
+            wait_timeout=0.1,
+        )
+        redelivered = client.execute_plan(
+            plan,
+            packet_locator=locator,
+            cwd=str(tmp_path),
+            observed_tasks=[participant_task],
+            wait_timeout=0.1,
+        )
+
+    assert first["status"] == "COMPLETED"
+    assert first["work_id"] == work_id
+    assert first["return_witness"]["agent_result"] == agent_result
+    assert redelivered == {
+        "status": "NO_EFFECT",
+        "reason": "RETURN_WITNESS_PRESENT",
+        "work_id": work_id,
+        "thread_id": "thread-em-alpha",
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("thread/name/set") == 1
+    assert methods.count("turn/start") == 1
+    assert witness_publish_count == 1
+    return_path = (
+        tmp_path
+        / ".codex/runtime/work/returns"
+        / work_id
+        / "return.json"
+    )
+    assert list(return_path.parent.iterdir()) == [return_path]
+    named_targets = [
+        request["params"]["name"]
+        for request in peer.requests
+        if request.get("method") == "thread/name/set"
+    ]
+    assert named_targets == ["EM-alpha"]
+    assert "Root" not in json.dumps(peer.requests)
 
 
 @pytest.mark.parametrize(

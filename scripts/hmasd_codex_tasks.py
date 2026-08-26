@@ -1094,6 +1094,67 @@ class AppServerClient:
         )
 
     @staticmethod
+    def _terminal_return_fact(
+        *,
+        repo: Path,
+        work_id: str,
+        observed_tasks: Sequence[Mapping[str, Any]],
+        thread_id: str,
+        terminal: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        try:
+            return_plan = hmasd_work_packet.reconcile_once(
+                repo=repo,
+                work_id=work_id,
+                observed_tasks=observed_tasks,
+            )["plan"]
+        except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict):
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "RETURN_WITNESS_INVALID",
+                "work_id": work_id,
+                "thread_id": thread_id,
+            }
+        return_resolution = return_plan.get("task_resolution", {})
+        if return_resolution.get("status") != "RETURN_WITNESS":
+            if return_plan.get("verb") in _DISPATCH_VERBS:
+                return {
+                    "status": "RETURN_WITNESS_MISSING",
+                    "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
+                    "recoverable": True,
+                    "work_id": work_id,
+                    "thread_id": thread_id,
+                    "turn_id": terminal.get("turn_id"),
+                    "turn_status": terminal.get("turn_status"),
+                }
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "RETURN_WITNESS_INVALID",
+                "work_id": work_id,
+                "thread_id": thread_id,
+            }
+        try:
+            witness = hmasd_work_packet.read_return(repo=repo, work_id=work_id)
+        except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict):
+            witness = None
+        if witness is None:
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "RETURN_WITNESS_INVALID",
+                "work_id": work_id,
+                "thread_id": thread_id,
+            }
+        return {
+            "status": witness["agent_result"]["status"],
+            "reason": "RETURN_WITNESS_PRESENT",
+            "work_id": work_id,
+            "thread_id": thread_id,
+            "turn_id": terminal.get("turn_id"),
+            "turn_status": terminal.get("turn_status"),
+            "return_witness": witness,
+        }
+
+    @staticmethod
     def _override_allows_compare(compare: Mapping[str, Any]) -> bool:
         if compare.get("outcome") != "CONFLICT":
             return False
@@ -1345,12 +1406,21 @@ class AppServerClient:
             in {"DELIVERED", "DELIVERY_OBSERVED_AFTER_UNKNOWN", "ALREADY_DELIVERED"}
             and isinstance(sent.get("turn_id"), str)
         ):
-            return self.wait(
+            terminal = self.wait(
                 thread_id,
                 sent["turn_id"],
                 timeout=wait_timeout,
                 resume=delivery_status == "ALREADY_DELIVERED",
                 observe_active=delivery_status == "ALREADY_DELIVERED",
+            )
+            if terminal.get("status") not in {"COMPLETED", "TERMINAL"}:
+                return terminal
+            return self._terminal_return_fact(
+                repo=repo,
+                work_id=work_id,
+                observed_tasks=self._task_rows(observed_tasks),
+                thread_id=thread_id,
+                terminal=terminal,
             )
         return sent
 
