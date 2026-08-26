@@ -1,0 +1,6 @@
+interface:
+  display_name: "HMASD MARL Experiment Design"
+  short_description: "Bound MARL experiments without invented evidence"
+  default_prompt: "Use $hmasd-marl-experiment-design to bound this HMASD MARL experiment before any result-bearing run."
+policy:
+  allow_implicit_invocation: false
