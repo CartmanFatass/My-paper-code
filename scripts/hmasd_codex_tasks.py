@@ -25,9 +25,10 @@ import time
 from typing import Any, Mapping, Protocol, Sequence
 
 try:
-    from scripts import hmasd_platform, hmasd_work_packet
+    from scripts import hmasd_platform, hmasd_state, hmasd_work_packet
 except ImportError:
     import hmasd_platform
+    import hmasd_state
     import hmasd_work_packet
 
 
@@ -903,18 +904,18 @@ class AppServerClient:
         inputs: list[dict[str, Any]] = [{"type": "text", "text": envelope}]
         if attempt == 1:
             inputs.append({"type": "text", "text": _PARTICIPANT_SLICE_INSTRUCTION})
-            if participant_contract is not None:
-                inputs.append(
-                    {
-                        "type": "text",
-                        "text": json.dumps(
-                            participant_contract,
-                            ensure_ascii=False,
-                            sort_keys=True,
-                            separators=(",", ":"),
-                        ),
-                    }
-                )
+        if participant_contract is not None:
+            inputs.append(
+                {
+                    "type": "text",
+                    "text": json.dumps(
+                        participant_contract,
+                        ensure_ascii=False,
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    ),
+                }
+            )
         turn_params: dict[str, Any] = {
             "threadId": thread_id,
             "input": inputs,
@@ -1478,8 +1479,7 @@ class AppServerClient:
             raise ValueError("run manifest does not freeze a valid Operator assignment")
         run_script = Path(__file__).with_name("hmasd_run.py").resolve()
         task_suffix = re.sub(r"[^a-z0-9]+", "_", run_id.lower()).strip("_")
-        return {
-            "action": "create_or_reuse_one_native_child_then_wait",
+        assignment = {
             "assignment_id": assignment_id,
             "command": command,
             "cwd": run_cwd,
@@ -1500,74 +1500,13 @@ class AppServerClient:
             "run_owner": run_owner,
             "task_name": f"native_ll_{task_suffix}",
         }
+        marker = manifest.get("parameters", {}).get("expected_stdout_marker")
+        if isinstance(marker, str) and marker:
+            assignment["expected_stdout_marker"] = marker
+        return assignment
 
     @staticmethod
-    def _operator_child_fact(
-        rows: Sequence[Mapping[str, Any]],
-        *,
-        parent_thread_id: str,
-        assignment: Mapping[str, Any],
-    ) -> dict[str, Any] | None:
-        expected_name = str(assignment["task_name"])
-
-        def binds_run(row: Mapping[str, Any]) -> bool:
-            if row.get("name") == expected_name:
-                return True
-            source = row.get("source")
-            spawn = (
-                source.get("subAgent", {}).get("thread_spawn", {})
-                if isinstance(source, Mapping)
-                and isinstance(source.get("subAgent"), Mapping)
-                else {}
-            )
-            if isinstance(spawn, Mapping) and str(spawn.get("agent_path", "")).endswith(
-                "/" + expected_name
-            ):
-                return True
-            for document in AppServerClient._protocol_documents_for_role(
-                row.get("turns", []), _OPERATOR_ROLE
-            ):
-                if document.get("run_id") == assignment["run_id"]:
-                    return True
-            return False
-
-        exact = [
-            row
-            for row in rows
-            if row.get("parentThreadId") == parent_thread_id
-            and row.get("agentRole") == _OPERATOR_ROLE
-            and binds_run(row)
-        ]
-        if len(exact) > 1:
-            return {
-                "status": "TASK_IDENTITY_CONFLICT",
-                "reason": "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN",
-                "run_id": assignment["run_id"],
-                "thread_ids": sorted(str(row.get("id")) for row in exact),
-            }
-        if not exact:
-            return {
-                "status": "TASK_IDENTITY_CONFLICT",
-                "reason": "OPERATOR_CHILD_NOT_OBSERVED",
-                "run_id": assignment["run_id"],
-            }
-        thread_id = exact[0].get("id")
-        if not isinstance(thread_id, str) or not thread_id:
-            return {
-                "status": "TASK_IDENTITY_CONFLICT",
-                "reason": "OPERATOR_CHILD_ID_INVALID",
-                "run_id": assignment["run_id"],
-            }
-        return {
-            "status": "OBSERVED",
-            "thread_id": thread_id,
-            "parent_thread_id": parent_thread_id,
-            "agent_role": _OPERATOR_ROLE,
-            "run_id": assignment["run_id"],
-        }
-
-    @staticmethod
-    def _protocol_documents_for_role(value: Any, role: str) -> list[dict[str, Any]]:
+    def _json_documents(value: Any) -> list[dict[str, Any]]:
         found: list[dict[str, Any]] = []
         if isinstance(value, Mapping):
             text_value = value.get("text")
@@ -1576,17 +1515,188 @@ class AppServerClient:
                     document = json.loads(text_value)
                 except json.JSONDecodeError:
                     document = None
-                if isinstance(document, Mapping) and (
-                    document.get("logical_identity") == role
-                    or document.get("agent_role") == role
-                ):
+                if isinstance(document, Mapping):
                     found.append(dict(document))
             for item in value.values():
-                found.extend(AppServerClient._protocol_documents_for_role(item, role))
+                found.extend(AppServerClient._json_documents(item))
         elif isinstance(value, list):
             for item in value:
-                found.extend(AppServerClient._protocol_documents_for_role(item, role))
+                found.extend(AppServerClient._json_documents(item))
         return found
+
+    def _observe_operator_child(
+        self,
+        rows: Sequence[Mapping[str, Any]],
+        *,
+        parent_thread_id: str,
+        assignment: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        def stopped(status: str, reason: str, thread_id: str | None = None) -> dict[str, Any]:
+            result = {"status": status, "reason": reason}
+            if thread_id is not None:
+                result["thread_id"] = thread_id
+            return result
+
+        exact: list[dict[str, Any]] = []
+        for row in rows:
+            if (
+                row.get("parentThreadId") != parent_thread_id
+                or row.get("agentRole") != _OPERATOR_ROLE
+            ):
+                continue
+            thread_id = row.get("id")
+            if not isinstance(thread_id, str) or not thread_id:
+                return stopped("UNKNOWN", "OPERATOR_CHILD_ID_UNKNOWN")
+            read = self._read_thread_full(thread_id)
+            if read.get("status") != "OK":
+                return stopped("UNKNOWN", "OPERATOR_CHILD_READ_UNKNOWN", thread_id)
+            thread = read["thread"]
+            if (
+                thread.get("id") != thread_id
+                or thread.get("parentThreadId") != parent_thread_id
+                or thread.get("agentRole") != _OPERATOR_ROLE
+            ):
+                return stopped(
+                    "TASK_IDENTITY_CONFLICT", "OPERATOR_CHILD_IDENTITY_CHANGED", thread_id
+                )
+            documents = [
+                document
+                for document in self._json_documents(thread.get("turns", []))
+                if document.get("protocol") == OPERATOR_ASSIGNMENT_MARKER
+                and document.get("agent_role") == _OPERATOR_ROLE
+            ]
+            if not documents:
+                return stopped("UNKNOWN", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN", thread_id)
+            run_ids = {document.get("run_id") for document in documents}
+            if assignment["run_id"] in run_ids:
+                exact.append(thread)
+        if len(exact) > 1:
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN",
+                "thread_ids": sorted(str(thread["id"]) for thread in exact),
+            }
+        if not exact:
+            return {"status": "CREATE_EXACT"}
+        return {
+            "status": "RESUME_EXACT",
+            "thread_id": exact[0]["id"],
+            "thread": exact[0],
+            "assignment": next(
+                document
+                for document in self._json_documents(exact[0].get("turns", []))
+                if document.get("protocol") == OPERATOR_ASSIGNMENT_MARKER
+                and document.get("agent_role") == _OPERATOR_ROLE
+                and document.get("run_id") == assignment["run_id"]
+            ),
+        }
+
+    @staticmethod
+    def _operator_evidence_error(reason: str) -> dict[str, Any]:
+        return {"status": "OPERATOR_EVIDENCE_INVALID", "reason": reason}
+
+    @classmethod
+    def _validate_operator_evidence(
+        cls,
+        *,
+        repo: Path,
+        observation: Mapping[str, Any],
+        assignment: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        thread = observation["thread"]
+        turns = thread.get("turns")
+        if not isinstance(turns, list) or not turns or turns[-1].get("status") != "completed":
+            return cls._operator_evidence_error("OPERATOR_CHILD_NOT_TERMINAL")
+        frozen = observation["assignment"]
+        bound = ("assignment_id", "agent_role", "command", "cwd", "logical_identity",
+                 "manifest", "output_root", "parent_identity", "protocol", "run_id", "run_owner")
+        if any(frozen.get(key) != assignment.get(key) for key in bound):
+            return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
+        results = [document for document in cls._json_documents(turns[-1].get("items", []))
+                   if document.get("payload", {}).get("kind") == "run"]
+        if len(results) != 1:
+            return cls._operator_evidence_error("OPERATOR_RESULT_MISSING_OR_AMBIGUOUS")
+        result = results[0]
+        if result.get("role") != _OPERATOR_ROLE or result.get("logical_identity") != _OPERATOR_ROLE:
+            return cls._operator_evidence_error("OPERATOR_RESULT_IDENTITY_MISMATCH")
+        try:
+            hmasd_state.validate_document("agent_result", result)
+        except hmasd_state.StateError:
+            return cls._operator_evidence_error("OPERATOR_RESULT_SCHEMA_INVALID")
+        payload = result["payload"]
+        if (
+            result.get("assignment_id") != assignment["assignment_id"]
+            or result.get("status") != "COMPLETED"
+            or payload.get("run_id") != assignment["run_id"]
+            or payload.get("terminal_status") != "SUCCEEDED"
+            or payload.get("exit_code") != 0
+        ):
+            return cls._operator_evidence_error("OPERATOR_RESULT_BINDING_MISMATCH")
+        manifest_ref = payload.get("manifest_ref")
+        if not isinstance(manifest_ref, Mapping) or manifest_ref.get("path") != assignment["manifest"]:
+            return cls._operator_evidence_error("OPERATOR_MANIFEST_REF_MISMATCH")
+        refs = [*result.get("state_refs", []), *result.get("artifact_refs", [])]
+        for reference in refs:
+            if not isinstance(reference, Mapping) or set(reference) != {"path", "sha256"}:
+                return cls._operator_evidence_error("OPERATOR_RESULT_REF_INVALID")
+            path = repo / Path(*_relative_posix_path(str(reference["path"])).split("/"))
+            try:
+                if not path.is_file() or hmasd_state.sha256_file(path) != reference["sha256"]:
+                    return cls._operator_evidence_error("OPERATOR_RESULT_REF_STALE")
+            except OSError:
+                return cls._operator_evidence_error("OPERATOR_RESULT_REF_STALE")
+        manifest_path = repo / Path(*str(assignment["manifest"]).split("/"))
+        if manifest_ref not in refs or hmasd_state.sha256_file(manifest_path) != manifest_ref["sha256"]:
+            return cls._operator_evidence_error("OPERATOR_MANIFEST_REF_STALE")
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return cls._operator_evidence_error("OPERATOR_MANIFEST_INVALID")
+        process = manifest.get("process", {})
+        frozen_manifest = (manifest.get("writer"), manifest.get("operator_identity"),
+                           manifest.get("run_id"), manifest.get("assignment_id"),
+                           manifest.get("command"), manifest.get("cwd"), str(manifest_path.parent))
+        expected_manifest = (assignment["run_owner"], assignment["run_owner"],
+                             assignment["run_id"], assignment["assignment_id"],
+                             assignment["command"], assignment["cwd"], assignment["output_root"])
+        if (frozen_manifest != expected_manifest or manifest.get("status") != "SUCCEEDED"
+                or process.get("exit_code") != 0 or process.get("group_quiescent") is not True):
+            return cls._operator_evidence_error("OPERATOR_MANIFEST_TERMINAL_MISMATCH")
+        stdout_path = manifest_path.parent / str(manifest.get("outputs", {}).get("stdout", ""))
+        stdout_rel = stdout_path.relative_to(repo).as_posix()
+        if not any(reference.get("path") == stdout_rel for reference in result["artifact_refs"]):
+            return cls._operator_evidence_error("OPERATOR_STDOUT_REF_MISSING")
+        marker = assignment.get("expected_stdout_marker")
+        if isinstance(marker, str) and stdout_path.read_text(encoding="utf-8").count(marker) != 1:
+            return cls._operator_evidence_error("OPERATOR_STDOUT_MARKER_MISMATCH")
+        return {"status": "VALID", "thread_id": observation["thread_id"]}
+
+    @classmethod
+    def _completed_operator_return(
+        cls,
+        *,
+        repo: Path,
+        return_fact: Mapping[str, Any],
+        observation: Mapping[str, Any] | None,
+        assignment: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        if observation is None or observation.get("status") != "RESUME_EXACT":
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "OPERATOR_CHILD_NOT_OBSERVED",
+            }
+        evidence = cls._validate_operator_evidence(
+            repo=repo, observation=observation, assignment=assignment
+        )
+        if evidence.get("status") != "VALID":
+            return evidence
+        return {
+            **return_fact,
+            "operator_child": {
+                "thread_id": observation["thread_id"],
+                "run_id": assignment["run_id"],
+            },
+        }
 
     def execute_plan(
         self,
@@ -2065,6 +2175,22 @@ class AppServerClient:
                 thread_full = self._read_thread_full(thread_id)
                 if thread_full.get("status") != "OK":
                     return thread_full
+            operator_contract = operator_assignment
+            operator_observation: dict[str, Any] | None = None
+            if operator_assignment is not None:
+                operator_observation = self._observe_operator_child(
+                    rows,
+                    parent_thread_id=str(thread_id),
+                    assignment=operator_assignment,
+                )
+                action = operator_observation.get("status")
+                if action not in {"CREATE_EXACT", "RESUME_EXACT"}:
+                    return operator_observation
+                operator_contract = {**operator_assignment, "action": action}
+                if action == "RESUME_EXACT":
+                    operator_contract["observed_child_thread_id"] = operator_observation[
+                        "thread_id"
+                    ]
             if thread_full is not None and self._terminal_attempt_needs_return_observation(
                 thread_full["thread"], work_id, packet_locator, target
             ):
@@ -2085,14 +2211,12 @@ class AppServerClient:
                 if return_fact is not None:
                     if operator_assignment is None:
                         return return_fact
-                    child = self._operator_child_fact(
-                        reconcile_rows,
-                        parent_thread_id=str(thread_id),
+                    return self._completed_operator_return(
+                        repo=repo,
+                        return_fact=return_fact,
+                        observation=operator_observation,
                         assignment=operator_assignment,
                     )
-                    if child is not None and child.get("status") != "OBSERVED":
-                        return child
-                    return {**return_fact, "operator_child": child}
             sent = self.send(
                 thread_id,
                 work_id,
@@ -2105,7 +2229,7 @@ class AppServerClient:
                     closed_thread_source is not None
                     and (needs_create or tagged_thread is not None)
                 ),
-                participant_contract=operator_assignment,
+                participant_contract=operator_contract,
             )
             if warning:
                 sent = {**sent, "warning": "ROOT_OVERRIDE_ACTIVE"}
@@ -2166,14 +2290,19 @@ class AppServerClient:
             if return_fact is not None:
                 if operator_assignment is None:
                     return return_fact
-                child = self._operator_child_fact(
+                child = self._observe_operator_child(
                     fresh_rows,
                     parent_thread_id=str(thread_id),
                     assignment=operator_assignment,
                 )
-                if child is not None and child.get("status") != "OBSERVED":
+                if child.get("status") != "RESUME_EXACT":
                     return child
-                return {**return_fact, "operator_child": child}
+                return self._completed_operator_return(
+                    repo=repo,
+                    return_fact=return_fact,
+                    observation=child,
+                    assignment=operator_assignment,
+                )
             return {
                 "status": "RETURN_WITNESS_MISSING",
                 "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
@@ -2327,6 +2456,46 @@ class AppServerClient:
                         "TYPED_CONFLICT",
                         conflict={"type": type(exc).__name__, "detail": str(exc)},
                     )
+                receiver = witness.get("receiver", {}) if witness is not None else {}
+                target_identity = receiver.get("logical_identity")
+                try:
+                    assignment = self._cm_operator_assignment(
+                        repo=repo,
+                        work_id=current_work_id,
+                        packet_locator=(
+                            f".codex/runtime/work/ready/{current_work_id}/packet.json"
+                        ),
+                        target_identity=str(target_identity),
+                    )
+                except (ValueError, hmasd_work_packet.WorkPacketError) as exc:
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": "INVALID_CM_OPERATOR_ASSIGNMENT", "detail": str(exc)},
+                    )
+                if assignment is not None:
+                    parent = next(
+                        (
+                            task.get("thread_id")
+                            for task in current_tasks
+                            if task.get("logical_identity") == target_identity
+                        ),
+                        None,
+                    )
+                    listed = self._list_all_threads(cwd=cwd)
+                    if not isinstance(parent, str) or listed.get("status") != "OK":
+                        return stopped("NATIVE_OBSERVATION_STOP")
+                    child = self._observe_operator_child(
+                        listed["threads"],
+                        parent_thread_id=parent,
+                        assignment=assignment,
+                    )
+                    if child.get("status") != "RESUME_EXACT":
+                        return stopped("EXECUTE_PLAN_STOP", result=child)
+                    evidence = self._validate_operator_evidence(
+                        repo=repo, observation=child, assignment=assignment
+                    )
+                    if evidence.get("status") != "VALID":
+                        return stopped("EXECUTE_PLAN_STOP", result=evidence)
                 return stopped("TERMINAL_NO_NEXT", return_witness=witness)
 
             if verb == "CONFLICT":

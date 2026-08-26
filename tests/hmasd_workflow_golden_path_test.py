@@ -88,7 +88,12 @@ def _prepare_run(repo: Path, code_sha: str) -> Path:
             "--code-sha",
             code_sha,
             "--parameters",
-            json.dumps({"seed": 7}),
+            json.dumps(
+                {
+                    "seed": 7,
+                    "expected_stdout_marker": "HMASD_LOCAL_GOLDEN_OPERATOR_OK",
+                }
+            ),
             "--estimate",
             json.dumps(
                 {
@@ -684,14 +689,28 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
 
 
 @pytest.mark.parametrize(
-    ("operator_role", "terminal_expected"),
+    ("case", "expected_reason"),
     [
-        ("hmasd-experiment-operator", True),
-        ("hmasd-verifier", False),
+        ("valid", None),
+        ("wrong_identity", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
+        ("wrong_role", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
+        ("child_nonterminal", "OPERATOR_CHILD_NOT_TERMINAL"),
+        ("wrong_manifest_ref", "OPERATOR_MANIFEST_REF_MISMATCH"),
+        ("wrong_manifest_owner", "TYPED_CONFLICT"),
+        ("wrong_manifest_run", "TYPED_CONFLICT"),
+        ("wrong_manifest_command", "TYPED_CONFLICT"),
+        ("manifest_nonterminal", "OPERATOR_MANIFEST_TERMINAL_MISMATCH"),
+        ("manifest_nonzero", "OPERATOR_MANIFEST_TERMINAL_MISMATCH"),
+        ("manifest_nonquiescent", "OPERATOR_MANIFEST_TERMINAL_MISMATCH"),
+        ("stdout_marker_wrong", "OPERATOR_STDOUT_MARKER_MISMATCH"),
+        ("cm_early_return", "OPERATOR_CHILD_NOT_TERMINAL"),
+        ("candidate_read_unknown", "NATIVE_OBSERVATION_STOP"),
+        ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("candidate_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
-    tmp_path: Path, operator_role: str, terminal_expected: bool
+    tmp_path: Path, case: str, expected_reason: str | None
 ) -> None:
     repo, code_sha = _native_worktree(tmp_path)
     direction = repo / "docs" / "research" / "candidates" / "alpha"
@@ -740,8 +759,47 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     execute_count = 0
     cm_turn_inputs: list[list[dict[str, Any]]] = []
 
+    def child_stub(thread_id: str, run_id: str, *, bound: bool = True) -> dict[str, Any]:
+        document = {
+            "protocol": "hmasd.experiment-operator.assignment.v1",
+            "agent_role": "hmasd-experiment-operator",
+            "logical_identity": "hmasd-experiment-operator",
+            "run_id": run_id,
+        }
+        return {
+            "id": thread_id,
+            "name": "native_ll_golden_run",
+            "parentThreadId": "thread-cm-alpha",
+            "agentRole": "hmasd-experiment-operator",
+            "cwd": str(repo),
+            "status": {"type": "idle"},
+            "turns": [
+                {
+                    "id": f"turn-{thread_id}",
+                    "status": "completed",
+                    "items": [
+                        {
+                            "type": "userMessage",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": json.dumps(document if bound else {"run_id": run_id}),
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
+
     class InterruptedCmPeer:
         def __init__(self) -> None:
+            collision = child_stub(
+                "thread-operator-collision",
+                "golden_run",
+                bound=case != "candidate_binding_unknown",
+            )
+            self.collision_id = str(collision["id"])
             self.threads: dict[str, dict[str, Any]] = {
                 "thread-cm-alpha": {
                     "id": "thread-cm-alpha",
@@ -751,39 +809,12 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     "status": {"type": "idle"},
                     "turns": [],
                 },
-                "thread-operator-collision": {
-                    "id": "thread-operator-collision",
-                    "name": "native_ll_golden_run",
-                    "parentThreadId": "thread-cm-alpha",
-                    "agentRole": "hmasd-experiment-operator",
-                    "cwd": str(repo),
-                    "status": {"type": "idle"},
-                    "turns": [
-                        {
-                            "id": "turn-operator-collision",
-                            "status": "completed",
-                            "items": [
-                                {
-                                    "type": "userMessage",
-                                    "content": [
-                                        {
-                                            "type": "text",
-                                            "text": json.dumps(
-                                                {
-                                                    "protocol": "hmasd.experiment-operator.assignment.v1",
-                                                    "agent_role": "hmasd-experiment-operator",
-                                                    "logical_identity": "hmasd-experiment-operator",
-                                                    "run_id": "golden_run",
-                                                }
-                                            ),
-                                        }
-                                    ],
-                                }
-                            ],
-                        }
-                    ],
-                },
+                collision["id"]: collision,
             }
+            if case == "candidate_ambiguous":
+                for suffix in ("a", "b"):
+                    child = child_stub(f"thread-operator-exact-{suffix}", "golden-run")
+                    self.threads[child["id"]] = child
             self.transport = _LocalFakeAppServer(repo)
             self.transport.threads = self.threads
             self.transport.requests = []
@@ -811,6 +842,11 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 return
             thread_id = params.get("threadId")
             if method == "thread/read":
+                if case == "candidate_read_unknown" and thread_id == self.collision_id:
+                    self.transport.pending.append(
+                        (json.dumps({"id": request_id, "error": {"code": -32001}}) + "\n").encode()
+                    )
+                    return
                 self.transport._emit(request_id, {"thread": self.threads[thread_id]})
                 return
             if method == "thread/resume":
@@ -829,6 +865,13 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             self.threads[thread_id]["turns"].append(turn)
             if attempt == 1:
                 operator_create_count += 1
+                spawn_assignment = next(
+                    json.loads(item["text"])
+                    for item in params["input"]
+                    if item.get("type") == "text"
+                    and '"protocol":"hmasd.experiment-operator.assignment.v1"'
+                    in item.get("text", "")
+                )
                 operator_thread = {
                     "id": "thread-operator-golden-run",
                     "name": "native_ll_golden_run",
@@ -846,14 +889,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": json.dumps(
-                                                {
-                                                    "protocol": "hmasd.experiment-operator.assignment.v1",
-                                                    "agent_role": "hmasd-experiment-operator",
-                                                    "logical_identity": "hmasd-experiment-operator",
-                                                    "run_id": "golden-run",
-                                                }
-                                            ),
+                                            "text": json.dumps(spawn_assignment),
                                         }
                                     ],
                                 }
@@ -868,6 +904,23 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     cwd=repo,
                 )
                 assert completed.returncode == 0
+                manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
+                if case == "wrong_manifest_owner":
+                    manifest_document["writer"] = "Operator-other"
+                elif case == "wrong_manifest_run":
+                    manifest_document["run_id"] = "other-run"
+                elif case == "wrong_manifest_command":
+                    manifest_document["command"] = [sys.executable, "-c", "print('other')"]
+                elif case == "manifest_nonterminal":
+                    manifest_document["status"] = "RUNNING"
+                elif case == "manifest_nonzero":
+                    manifest_document["process"]["exit_code"] = 1
+                elif case == "manifest_nonquiescent":
+                    manifest_document["process"]["group_quiescent"] = False
+                if case.startswith("wrong_manifest") or case.startswith("manifest_"):
+                    _canonical_write(manifest, manifest_document)
+                if case == "stdout_marker_wrong":
+                    (manifest.parent / "stdout.log").write_text("WRONG_MARKER\n", encoding="utf-8")
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
                     repo, "temp/directions/alpha/exp/golden-run/stdout.log"
@@ -877,8 +930,14 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 )
                 operator_result = {
                     "schema_version": 1,
-                    "role": operator_role,
-                    "logical_identity": "hmasd-experiment-operator",
+                    "role": (
+                        "hmasd-verifier" if case == "wrong_role" else "hmasd-experiment-operator"
+                    ),
+                    "logical_identity": (
+                        "hmasd-verifier"
+                        if case == "wrong_identity"
+                        else "hmasd-experiment-operator"
+                    ),
                     "generation": 1,
                     "assignment_id": "cm-owned-operator-golden",
                     "status": "COMPLETED",
@@ -898,15 +957,20 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         "exit_code": 0,
                     },
                 }
-                operator_thread["turns"][0]["items"].append(
-                    {
-                        "type": "agentMessage",
-                        "content": [
-                            {"type": "text", "text": json.dumps(operator_result)}
-                        ],
-                    }
-                )
-            else:
+                if case == "wrong_manifest_ref":
+                    operator_result["payload"]["manifest_ref"] = stdout_ref
+                if case in {"child_nonterminal", "cm_early_return"}:
+                    operator_thread["turns"][0]["status"] = "inProgress"
+                else:
+                    operator_thread["turns"][0]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "content": [
+                                {"type": "text", "text": json.dumps(operator_result)}
+                            ],
+                        }
+                    )
+            if attempt != 1 or case == "cm_early_return":
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
                     repo, "temp/directions/alpha/exp/golden-run/stdout.log"
@@ -972,14 +1036,13 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     with native.AppServerClient(transport=peer, timeout=0.2) as client:
         first = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
         repeated = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
-    if not terminal_expected:
-        for result in (first, repeated):
-            assert result["stop"]["reason"] == "EXECUTE_PLAN_STOP"
-            assert result["stop"]["result"]["status"] == "OPERATOR_EVIDENCE_INVALID"
-            assert result["stop"]["result"]["reason"] == "OPERATOR_RESULT_IDENTITY_MISMATCH"
-        assert operator_create_count == 1
-        assert execute_count == 1
-        assert cm_return_count == 1
+    if expected_reason is not None:
+        stops = [first["stop"], repeated["stop"]]
+        assert expected_reason in json.dumps(stops, sort_keys=True)
+        assert all(stop["reason"] != "TERMINAL_NO_NEXT" for stop in stops)
+        assert operator_create_count <= 1
+        assert execute_count <= 1
+        assert cm_return_count <= 1
         return
     assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
     assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
@@ -1000,6 +1063,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         "assignment_id": "cm-owned-operator-golden",
         "command": [sys.executable, "-c", f"print('{marker}')"],
         "cwd": str(repo),
+        "expected_stdout_marker": marker,
         "execute_argv": [
             sys.executable,
             str(RUN_SCRIPT),
