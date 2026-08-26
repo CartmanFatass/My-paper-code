@@ -68,6 +68,7 @@ data/
 !docs/research/candidates/**/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
+/.scratch/
 
 # Codex project skills are durable workflow definitions. Other retired
 # assistant layouts must not reappear as hidden local state.
