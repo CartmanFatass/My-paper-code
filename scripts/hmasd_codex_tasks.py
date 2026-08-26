@@ -1479,6 +1479,13 @@ class AppServerClient:
             raise ValueError("run manifest does not freeze a valid Operator assignment")
         run_script = Path(__file__).with_name("hmasd_run.py").resolve()
         task_suffix = re.sub(r"[^a-z0-9]+", "_", run_id.lower()).strip("_")
+        task_digest = hmasd_state.sha256_bytes(run_id.encode("utf-8"))[:10]
+        outputs = manifest.get("outputs", {})
+        try:
+            stdout_ref = (manifest_path.parent / outputs["stdout"]).relative_to(repo).as_posix()
+            stderr_ref = (manifest_path.parent / outputs["stderr"]).relative_to(repo).as_posix()
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError("run manifest output refs are invalid") from exc
         assignment = {
             "assignment_id": assignment_id,
             "command": command,
@@ -1498,11 +1505,19 @@ class AppServerClient:
             "protocol": OPERATOR_ASSIGNMENT_MARKER,
             "run_id": run_id,
             "run_owner": run_owner,
-            "task_name": f"native_ll_{task_suffix}",
+            "result_contract": {
+                "artifact_refs": [stdout_ref, stderr_ref],
+                "assignment_id": assignment_id, "logical_identity": _OPERATOR_ROLE,
+                "role": _OPERATOR_ROLE, "run_id": run_id,
+                "schema_path": "scripts/schemas/hmasd_agent_result.schema.json",
+                "state_refs": [manifest_locator],
+                "verification_refs": [manifest_locator, stdout_ref, stderr_ref],
+                "work_id": work_id,
+            },
+            "task_name": f"native_ll_{task_suffix}_{task_digest}",
         }
         marker = manifest.get("parameters", {}).get("expected_stdout_marker")
-        if isinstance(marker, str) and marker:
-            assignment["expected_stdout_marker"] = marker
+        assignment.update({"expected_stdout_marker": marker} if isinstance(marker, str) and marker else {})
         return assignment
 
     @staticmethod
@@ -1609,11 +1624,12 @@ class AppServerClient:
             return cls._operator_evidence_error("OPERATOR_CHILD_NOT_TERMINAL")
         frozen = observation["assignment"]
         bound = ("assignment_id", "agent_role", "command", "cwd", "logical_identity",
-                 "manifest", "output_root", "parent_identity", "protocol", "run_id", "run_owner")
+                 "manifest", "output_root", "parent_identity", "protocol", "result_contract",
+                 "run_id", "run_owner")
         if any(frozen.get(key) != assignment.get(key) for key in bound):
             return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
         results = [document for document in cls._json_documents(turns[-1].get("items", []))
-                   if document.get("payload", {}).get("kind") == "run"]
+                   if document.get("schema_version") == 1 and "payload" in document]
         if len(results) != 1:
             return cls._operator_evidence_error("OPERATOR_RESULT_MISSING_OR_AMBIGUOUS")
         result = results[0]
@@ -1669,7 +1685,12 @@ class AppServerClient:
         marker = assignment.get("expected_stdout_marker")
         if isinstance(marker, str) and stdout_path.read_text(encoding="utf-8").count(marker) != 1:
             return cls._operator_evidence_error("OPERATOR_STDOUT_MARKER_MISMATCH")
-        return {"status": "VALID", "thread_id": observation["thread_id"]}
+        stderr_path = manifest_path.parent / str(manifest.get("outputs", {}).get("stderr", ""))
+        by_path = {reference["path"]: reference for reference in refs}
+        expected_refs = [manifest_ref, by_path.get(stdout_rel), by_path.get(stderr_path.relative_to(repo).as_posix())]
+        if any(reference is None for reference in expected_refs):
+            return cls._operator_evidence_error("OPERATOR_REQUIRED_REF_MISSING")
+        return {"status": "VALID", "thread_id": observation["thread_id"], "refs": expected_refs}
 
     @classmethod
     def _completed_operator_return(
@@ -1690,6 +1711,13 @@ class AppServerClient:
         )
         if evidence.get("status") != "VALID":
             return evidence
+        result = return_fact["return_witness"]["agent_result"]
+        manifest_ref, stdout_ref, stderr_ref = evidence["refs"]
+        if (result.get("state_refs") != [manifest_ref]
+                or result.get("artifact_refs") != [stdout_ref, stderr_ref]
+                or result.get("payload", {}).get("verification_refs")
+                != [manifest_ref, stdout_ref, stderr_ref]):
+            return cls._operator_evidence_error("CM_OPERATOR_REFS_MISMATCH")
         return {
             **return_fact,
             "operator_child": {
@@ -2491,11 +2519,14 @@ class AppServerClient:
                     )
                     if child.get("status") != "RESUME_EXACT":
                         return stopped("EXECUTE_PLAN_STOP", result=child)
-                    evidence = self._validate_operator_evidence(
-                        repo=repo, observation=child, assignment=assignment
+                    completed = self._completed_operator_return(
+                        repo=repo,
+                        return_fact={"return_witness": witness},
+                        observation=child,
+                        assignment=assignment,
                     )
-                    if evidence.get("status") != "VALID":
-                        return stopped("EXECUTE_PLAN_STOP", result=evidence)
+                    if "return_witness" not in completed:
+                        return stopped("EXECUTE_PLAN_STOP", result=completed)
                 return stopped("TERMINAL_NO_NEXT", return_witness=witness)
 
             if verb == "CONFLICT":
