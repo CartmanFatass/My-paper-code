@@ -31,7 +31,6 @@ EXPECTED_ROLE_RUNTIME = {
     "hmasd-research-scout": ("gpt-5.6-sol", "high", "read-only", "never"),
     "hmasd-reviewer": ("gpt-5.6-sol", "xhigh", "read-only", "never"),
     "hmasd-verifier": ("gpt-5.6-luna", "high", "read-only", "never"),
-    "hmasd-workflow-recovery-manager": ("gpt-5.6-terra", "high", "workspace-write", "never"),
 }
 
 
@@ -68,6 +67,8 @@ def test_project_config_retains_depth_value_and_references_existing_roles() -> N
             role["approval_policy"],
         ) == EXPECTED_ROLE_RUNTIME[name]
     assert {path.stem for path in files} == set(EXPECTED_ROLE_RUNTIME)
+    assert "HMASDWorkflowRecoveryManager" not in agents
+    assert not (CODEX / "agents" / "hmasd-workflow-recovery-manager.toml").exists()
 
 
 def test_native_mcp_commands_do_not_use_wsl_executable_paths() -> None:

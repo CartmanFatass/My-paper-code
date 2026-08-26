@@ -188,7 +188,6 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
         "hmasd-research-artifact-writer",
         "hmasd-external-pro-transport",
         "hmasd-external-gemini-transport",
-        "hmasd-workflow-recovery-manager",
         "librarian",
     )
     active_agents = [
@@ -209,6 +208,36 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
         result = _validate(kind, path)
         assert result.returncode == 0, (kind, result.stdout, result.stderr)
         assert path.read_bytes() == before
+
+
+def test_retired_recovery_manager_cannot_publish_a_new_result(tmp_path: Path) -> None:
+    """Recovery is mechanical; the retired runtime role cannot own new results."""
+
+    result_document = _load(PHASE0_FIXTURES / "agent_result.json")
+    result_document.update(
+        {
+            "assignment_id": "retired-recovery-role",
+            "logical_identity": "hmasd-workflow-recovery-manager",
+            "materiality": "LOCAL",
+            "payload": {
+                "kind": "recovery",
+                "failure_class": "terminal_without_return",
+                "observed_refs": [],
+                "attempts": [],
+                "outcome": "resume_same_identity",
+                "resume_condition": None,
+            },
+            "role": "hmasd-workflow-recovery-manager",
+            "summary": "A retired runtime role attempted to publish a result.",
+        }
+    )
+    path = tmp_path / "retired-recovery-result.json"
+    path.write_text(json.dumps(result_document, sort_keys=True), encoding="utf-8")
+
+    observed = _validate("agent_result", path)
+
+    assert observed.returncode != 0
+    assert "retired" in (observed.stdout + observed.stderr).lower()
 
 
 def test_running_reconcile_observes_once_and_duplicate_execute_is_refused(

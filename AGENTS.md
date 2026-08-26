@@ -8,7 +8,10 @@ Authority+CAS, exact Work Packets, typed Effect/ref domain observers, and
 bounded `reconcile --once` with its native adapter. Return witnesses,
 resource comparison, and the short dispatch lock are internal representations
 or mechanisms, not new primitives.
-Workflow-Clerk is only a program-generated exception path.
+Workflow-Clerk is the normal top-level coordinator: its dedicated intake calls
+the existing scripts and `run-chain`; it is not a Work Packet participant or a
+second workflow engine. Program-generated protocol defects use the same Clerk
+task's exact exception-reporting path.
 
 Stage A-C are implemented: the deterministic protocol
 planner processes one explicit `work_id`, binds a typed agent result with
@@ -20,7 +23,7 @@ the real no-model list/read/resume probe, read-only no-network Luna-low
 `CONFORMANCE_OK`, `LOCAL_FAKE_TRANSPORT_GOLDEN` (including a real short
 `hmasd_run`), and one real unique Experiment Operator leaf run to
 `SUCCEEDED/exit0/group_quiescent/stdout marker`. Full real-native
-EM→CM→Operator→Root unattended chaining remains unproven.
+Clerk→EM→CM→Operator→Clerk unattended chaining remains unproven.
 
 The [workflow design rationale](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md) is non-authoritative and adds no workflow primitive, authority, or gate.
 
@@ -50,14 +53,16 @@ See `docs/agents/domain.md`.
   authority as `Decision owner: Root` (or the actual owner). Root is not the
   only user entry point.
 - **Workflow-Clerk** is the unique Luna xhigh, event-driven, normally parked
-  exception documentation and legacy-compatibility task. It receives only one
-  exact program-generated typed-field/ref/schema/identity defect or
-  legacy-unroutable input, documents that defect, and returns it to the
-  program-named owner. Authority/path/Effect identity conflicts go to Root;
-  material decisions go to the domain owner/user; Root override is direct.
-  It does not handle the normal path, scan topology, infer routing from prose,
-  publish/dispatch/create, wait/retry, own an Effect, keep private state, or act
-  as a gate.
+  top-level coordinator. Through its dedicated intake it invokes the existing
+  scripts and `run-chain` for topology observation, task create/reuse, routing,
+  messaging, bounded waiting/recovery, and terminal result collection. It sees
+  the global workface but does not infer an FSM from prose, invent a gate, own
+  an Effect, or keep private workflow state. Normal Work Packets still target
+  Portfolio/EM/CM rather than Clerk. The same task documents an exact
+  program-generated typed-field/ref/schema/identity defect or legacy-unroutable
+  input and returns it to the program-named owner. Authority/path/Effect
+  identity conflicts go to Root; material decisions go to the domain
+  owner/user; Root override is direct.
 - **Portfolio** is a `gpt-5.6-sol` max top-level task. It owns cross-direction
   selection, priority, lifecycle, and whether to invest CM/resources. It is
   created only when a direction needs it, then may park and recover independently.
@@ -77,9 +82,11 @@ provenance, not durable authority. A material decision must be written through
 the existing file/CAS contract before another task relies on it; the decision
 owner and runtime actor may differ. Existing JSON `writer` values remain domain
 writers; Work Packet sender/session provenance identifies the runtime actor.
-Root automatically creates or reuses a needed parked manager task, but reports
-an identity conflict rather than making a duplicate. Task creation lineage does
-not confer authority.
+On the normal path Clerk calls `run-chain`, whose mechanical adapter creates or
+reuses a needed parked manager task and reports an identity conflict rather
+than making a duplicate. Root may intervene directly but is not the routine
+creator, sender, dispatcher, waiter, recovery loop, or direction Git actor.
+Task creation lineage does not confer authority.
 
 The former control-plane skills are retired pending redesign. Do not load,
 resolve, or recreate them from historical references.
@@ -123,11 +130,11 @@ and is used only for useful parallelism or context separation.
     propagate a bare `BLOCKED` label across tasks or use it to close unrelated work.
 11. Dashboard v1 is a read-only projection. Do not add a daemon, SQLite control
     plane, generic recovery engine, or a second durable workflow schema.
-12. `CREATE_TASK` is a repeatable intent, not a creation receipt. Root alone
-    single-flights a canonical manager identity: observe the Codex task list and
-    task cache freshly before one create, observe errors or unknown outcomes
-    before any retry, CAS only an observed identity, and re-observe a CAS
-    conflict rather than create again.
+12. `CREATE_TASK` is a repeatable intent, not a creation receipt. The
+    `run-chain` caller (normally Clerk) single-flights a canonical manager
+    identity: observe the Codex task list and task cache freshly before one
+    create, observe errors or unknown outcomes before any retry, CAS only an
+    observed identity, and re-observe a CAS conflict rather than create again.
 13. Normal cross-session input is one exact validated Work Packet. Its
     `target_identity` must not be `Workflow-Clerk`; the dedicated Clerk
     top-level intake is not a normal packet. The receiving session writes only
@@ -140,9 +147,11 @@ and is used only for useful parallelism or context separation.
     freshness belongs to a dedicated domain contract. All common file evidence
     uses path+sha file refs; legacy string file refs are schema-invalid. The protocol planner
     never guesses a path from a string or chooses a route from natural language.
-14. Ordinary packets/results never wake Workflow-Clerk. Task identity conflict
-    goes directly to Root; `UNKNOWN` Effect handling is programmatic
-    observe-only; Root/user exact override needs no Clerk acknowledgment.
+14. Ordinary packets/results are never delivered to Workflow-Clerk as
+    participant input. Clerk's dedicated top-level turn invokes `run-chain` and
+    reports its terminal facts. Task identity conflict goes directly to Root;
+    `UNKNOWN` Effect handling is programmatic observe-only; Root/user exact
+    override needs no Clerk acknowledgment.
 15. Pre-kernel authority retains its material goals, caps, paths, Effects, and
     decision owner. Legacy routing text is not executed or reinterpreted by a
     model; the program reports an exact legacy-unroutable defect. A Protocol
@@ -174,7 +183,10 @@ and is used only for useful parallelism or context separation.
   assignment.
 - Direction engineering state: `CM-<id>`.
 - `temp/directions/<id>/exp/<run-id>/`: `Operator-<run-id>` through the run CLI.
-- Runtime task/worktree references: Root, under ignored `.codex/runtime/`.
+- Runtime task/worktree references: schema writer `Root`, under ignored
+  `.codex/runtime/`. This is an existing responsibility label, not proof that a
+  Root session performed the write; normal Clerk coordination may invoke the
+  existing task CLI without a routine Root action.
 - External commitment: Agentify only. Exact archive validation and final Git
   integration: Root.
 
@@ -259,13 +271,14 @@ declared by `.gitattributes`; do not normalize bytes inside hash validation.
   Never globally scan ready work or infer a missing snapshot from cache.
   Distinct explicit work IDs may proceed in parallel when their paths and
   Effects are disjoint.
-- Normal dispatch is Root exact reconcile followed by a short native-dispatch
-  critical section: fresh identity/active peers/resource comparison, then
-  create-or-reuse and send. The receiver first performs exact return lookup,
-  completes its slice, publishes the return witness, and only then sends a
-  message. Lost messages are rebuilt from the witness. A terminal packet with
-  no return resumes from native history for the same work_id at most three
-  times; UNKNOWN send/create is observe-only. Full real-native unattended
-  chaining remains unproven despite the completed probes and fake golden path.
+- Normal dispatch is one Clerk `run-chain` call. The script performs exact
+  reconcile followed by a short native-dispatch critical section: fresh
+  identity/active peers/resource comparison, then create-or-reuse and send.
+  The receiver first performs exact return lookup, completes its slice,
+  publishes the return witness, and only then sends a message. Lost messages
+  are rebuilt from the witness. Same-identity recovery uses the one history
+  budget defined by the goals; UNKNOWN send/create is observe-only. Full
+  real-native Clerk-coordinated chaining remains unproven despite the completed
+  probes and lower-layer fake golden path.
 - Use the documented CLIs rather than private helper functions or duplicate
   state writers.

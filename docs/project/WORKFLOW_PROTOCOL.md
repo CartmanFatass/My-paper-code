@@ -8,7 +8,8 @@ v1 基础是 existing durable Authority+CAS、exact Work Packet、typed Effect/r
 observer，以及 bounded `reconcile --once` + native adapter。Return witness 是
 canonical typed `agent_result` 与可选 draft 的 ignored runtime 表示，不是独立
 completion ledger；resource comparator 与 short dispatch lock 是 reconcile/adapter
-内部纯机制，不升格为原语。Workflow-Clerk 仅接收程序生成的异常。
+内部纯机制，不升格为原语。Workflow-Clerk 的专用 top-level intake 是
+正常入口：它调用既有 scripts 与 `run-chain`，不自己实现第二控制面。
 
 ## 1. 参与者与边界
 
@@ -20,10 +21,12 @@ completion ledger；resource comparator 与 short dispatch lock 是 reconcile/ad
   生产者负责 domain judgment，不负责跨 session transport。
 - **运行时适配层**：执行内核已经闭合的发送、创建意图、Effect 观察或等待
   操作，并返回可观察事实。它不改变 packet 或 authority 的语义。
-- **Workflow-Clerk**：低介入的异常文书席。只处理程序生成的 exact
-  typed-field/ref/schema/identity 缺陷，或无法机械路由的 legacy 输入；不处理
-  authority/path/Effect identity conflict、材料决定或 Root override，不
-  publish、dispatch、create、wait、retry 或写 authority。
+- **Workflow-Clerk**：低介入的正常 top-level 协调席。它从专用 intake 为一个
+  exact 起始 `work_id` 调用 `run-chain`，由程序完成 task create/reuse、
+  publish/dispatch、wait、有界恢复和 result collection。Clerk 不解释 FSM、
+  不从 prose 猜路由、不发明 gate、不写 authority 且不持有 Effect。同一任务
+  的异常路径只记录程序生成的 exact typed-field/ref/schema/identity 缺陷
+  或 legacy-unroutable input，并返回 program-named owner。
 - **Root / 用户**：最高能力，可对 exact scope 直接 override，不需要 Clerk
   ack；危险操作只须发出警告并保留记录，不得用额外 gate 制造逻辑死锁。
 
@@ -78,8 +81,9 @@ direction、feature 或 effect）和 `failure_ref`；没有范围的 blocked 结
   reconcile。
 - `DISPATCH_EXISTING`：向已观测存在且身份匹配的 receiver 发送既有 packet
   locator；重复 delivery 由 `work_id` 幂等处理。
-- `CREATE_TASK_INTENT`：输出 canonical manager identity 的创建意图；Root
-  重新观察 task list 后至多执行一次 create，未知结果先观察再决定。
+- `CREATE_TASK_INTENT`：输出 canonical manager identity 的创建意图；`run-chain` 调用者
+  （正常为 Clerk）重新观察 task list 后至多执行一次 create，未知结果
+  先观察，不盲目重试。
 - `OBSERVE_EFFECT_ONLY`：对 `UNKNOWN_EFFECT` 只做观察，不 retry、不重发。
 - `WAIT_FOR_REF`：等待指定 task/effect/ref 的外部完成事实，不轮询模型、不
   创建新 packet。
@@ -94,7 +98,8 @@ owner 决策。
 ## 4. Normal flow
 
 1. domain owner 冻结 authority；sender 从该 authority 生成并使用既有 publish
-   CLI 原子发布一个完整 Work Packet。
+   CLI 原子发布一个完整 Work Packet。Clerk 的专用 top-level turn 以该
+   exact `work_id` 调用 `run-chain`；Clerk 本身不成为 packet receiver。
 2. receiver 接收该 packet，完成其 bounded work，写入 owned facts；随后才
    产生对应 machine-valid `agent_result`，必要时附带 next-packet draft。
 3. 适配层调用 `reconcile --once --work-id X`，内核只读取 X 和 fresh
@@ -114,10 +119,9 @@ owner 决策。
    UNKNOWN send/create 只观察，不重放；不因 session 更换创建语义相同的新 packet。
 
 Native dispatch 的关键区仅包括 fresh identity、active peers 和 resource
-comparison，然后 create-or-reuse 与 send；它不是新的持久控制层。
-
-普通路径不唤醒 Clerk。Clerk 通过专用 top-level intake 只接 exact
-program-generated defect/legacy ref，转交程序指定责任方；它本身不执行决定。
+comparison，然后 create-or-reuse 与 send；它由 Clerk 调用的 `run-chain` 机械
+组合，不是新的持久控制层。普通 packet/result 仍只投递给真实 participant；
+Clerk 收集 run-chain 的 terminal fact 并向用户报告。
 
 ## 5. Exception predicates
 
@@ -134,11 +138,12 @@ program-generated defect/legacy ref，转交程序指定责任方；它本身不
 recovery 的 `responsible_owner` 固定为 `Root`；模型不得从 target 或 prose
 猜测责任。
 
-以下情况不进入 Clerk：普通 dispatch、create、wait、fan-in、恢复、重试、
-`UNKNOWN_EFFECT`、已有 terminal 结果、authority/path/Effect identity conflict、
-材料决定和 Root override。`UNKNOWN_EFFECT` 固定走 `OBSERVE_EFFECT_ONLY`；
-identity conflict 固定交 Root。Clerk 不把异常扩大为项目级阻塞，也不把
-`BLOCKED` 当 session 终止词。
+以下情况不进入 Clerk 的异常文书路径：普通 dispatch、create、wait、
+fan-in、同 identity 恢复、`UNKNOWN_EFFECT`、已有 terminal 结果、authority/path/
+Effect identity conflict、材料决定和 Root override。这些仍是 normal `run-chain` 的
+机械 fact。`UNKNOWN_EFFECT` 固定走 `OBSERVE_EFFECT_ONLY`；identity conflict 固定
+交 Root；`RECOVERY_EXHAUSTED` 由 Clerk 以 exact scope/ref/evidence 向用户报告。
+Clerk 不把异常扩大为项目级阻塞，也不把 `BLOCKED` 当 session 终止词。
 
 ## 6. Concurrency and idempotency
 
@@ -146,8 +151,8 @@ identity conflict 固定交 Root。Clerk 不把异常扩大为项目级阻塞，
   direction 且 write set/effect 不相交时可并行。
 - packet delivery 是 at-least-once；`work_id` 是幂等键，重复输入只能得到
   相同事实/动作，不得派生新 packet。
-- task creation 是 repeatable intent，不是 receipt；Root 对 canonical identity
-  单飞，unknown commitment 只观察不重试。
+- task creation 是 repeatable intent，不是 receipt；`run-chain` 调用者（正常为
+  Clerk）对 canonical identity 单飞，unknown commitment 只观察不重试。
 - 内核无 queue、lease、cursor、ack、completion ledger、daemon、global scan
   或 generic handler；不存在第二个 selector。
 
@@ -161,11 +166,12 @@ native history；不能伪装 UNKNOWN send/create，也不能绕过 hard effect 
 本地协议合同已闭合；live evidence 分层如下：
 
 - `LOCAL_FAKE_TRANSPORT_GOLDEN` 已通过，包含真实短命令 `hmasd_run`；
+  它只是底层 fake transport 证据，不是 zero-Clerk 或 full-workflow acceptance；
 - real no-model probe（list/read/resume）已通过；
 - ephemeral Luna-low read-only no-network conformance 已返回 `CONFORMANCE_OK`；
 - 真实唯一 Experiment Operator leaf 已在 OMP worktree 一次执行至
   `SUCCEEDED/exit0/group_quiescent/stdout marker`；
-- 完整 real-native EM→CM→Operator→Root unattended chain 仍未证明。
+- 完整 real-native Clerk→EM→CM→Operator→Clerk unattended chain 仍未证明。
 
 `done_criteria` 只是 hash-bound 描述；terminal proof 来自 typed owner result
 与 domain refs，程序不声称理解自然语言。Effect 必须有 typed
@@ -207,7 +213,7 @@ freshness、explicit task snapshot 与 dispatchable locator、payload/envelope p
    不得产生 publish intent；完整且 revision 匹配时只输出一个
    `PUBLISH_PACKET_INTENT`，发布后必须使用新 `work_id` 再 reconcile。
 4. **Same-scope slice**：CM 的 review→repair→test→verify 在同一 packet/
-   work_id 内完成，不产生 EM/CM 链式 packet 或 Clerk wake。
+   work_id 内完成，不产生 EM/CM 链式 packet 或 Clerk exception intake。
 5. **Unknown effect**：Effect commitment unknown 时只输出
    `OBSERVE_EFFECT_ONLY`，重复观察不产生 retry 或新 command。
 6. **Identity conflict**：目标 task identity 冲突时只输出 `CONFLICT` 并路由
@@ -238,10 +244,11 @@ are not used as a Codex task API.
   复杂度也说明不要把基础设施整体引入本项目。见
   [Ray architecture](https://docs.ray.io/en/latest/ray-core/key-concepts.html)。
 
-## 10. Deletion standard
+## 10. Cutover standard
 
-当 native runtime adapter 能在相同八项验收测试中完成 exact-key dispatch、
-typed return、异常转交和可恢复观察，且连续运行不需要 Clerk 解释语义时，
-删除 Workflow-Clerk 的普通入口；若异常也可由闭合 schema/ref 程序化归类，
-删除 Clerk 整体。删除不得新增替代 queue、lease、daemon 或第二套 durable
+Workflow-Clerk 的 normal top-level intake 与 terminal reporting 是用户确认的目标，不因
+adapter 自动化程度提高而删除。退役的是独立 Workflow Recovery Manager 与历史
+control-plane skills；恢复只组合 `run-chain`、`execute-plan`、`hmasd_run.py
+reconcile`、`hmasd_direction_git.py observe-push` 和既有 Effect observers。
+切换不得新增替代 queue、lease、daemon、recovery role/skill 或第二套 durable
 workflow schema。

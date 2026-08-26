@@ -6,8 +6,9 @@ description: Use when an HMASD MARL direction must choose or bound an experiment
 # HMASD MARL Experiment Design
 
 Use this method inside one exact Root or EM scientific slice. It is not a task,
-gate, packet, authority, or execution workflow. Existing HMASD ownership,
-`hmasd-slice-interface`, and `hmasd-result-run` remain the whole control path.
+gate, packet, authority, or execution workflow. Cross-session work uses the
+public Work Packet and `run-chain` seams; an exact result command uses the
+existing `hmasd_run.py` capability. This skill does not restate that workflow.
 
 ## Plan contract
 
@@ -46,8 +47,8 @@ Return seven short items:
 | Implementation correctness | One focused reproducer for the disputed semantic path |
 | Vectorization benefit | Measured serial and small-vector throughput on a justified representative workload |
 | Precision sensitivity | Probe after a named mismatch, observed instability, or bound requirement; preference alone triggers no probe |
-| Missing implementation | One bounded engineering request through the existing slice interface |
-| Scientific comparison | A frozen design; CM assigns each exact result command to one Operator under `hmasd-result-run` |
+| Missing implementation | One bounded engineering request through an exact Work Packet |
+| Scientific comparison | A frozen design; CM assigns each exact result command to one Operator through `hmasd_run.py` |
 
 Do not turn a probe into an all-algorithm/all-topology qualification matrix.
 Expand coverage only when the preceding observation changes the named decision.

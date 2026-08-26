@@ -45,10 +45,6 @@ config_file = "./agents/hmasd-verifier.toml"
 description = "Operator for one actual train/evaluate/analyze command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
-[agents.HMASDWorkflowRecoveryManager]
-description = "Recovery owner for one repeated workflow failure."
-config_file = "./agents/hmasd-workflow-recovery-manager.toml"
-
 [agents.HMASDCPMAgentifyTransport]
 description = "Transport for one engineering consultation."
 config_file = "./agents/hmasd-cpm-agentify-transport.toml"

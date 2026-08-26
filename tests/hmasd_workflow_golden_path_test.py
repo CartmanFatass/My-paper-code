@@ -1,7 +1,9 @@
-"""Local zero-Clerk workflow conformance with a fake App Server transport.
+"""Lower-layer workflow conformance with a fake App Server transport.
 
 This module proves ``LOCAL_FAKE_TRANSPORT_GOLDEN`` only. It deliberately does
-not claim that a real Codex desktop task was created, resumed, or observed.
+not exercise canonical Workflow-Clerk provenance and does not claim that a real
+Codex desktop task was created, resumed, or observed. It is neither zero-Clerk
+nor full-workflow acceptance.
 """
 
 from __future__ import annotations
