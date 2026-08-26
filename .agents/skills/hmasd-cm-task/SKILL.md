@@ -1,21 +1,19 @@
 ---
 name: hmasd-cm-task
-description: Bootstrap or resume an independent direction-scoped HMASD CM top-level task.
+description: Bootstrap or resume an independent direction-scoped HMASD CM task for one frozen engineering slice.
 ---
 
 # HMASD CM Task
 
-Use only in a CM/<direction-id>/g<generation> task. Recommended model:
-GPT-5.6 Sol at high reasoning.
-
-The initiating Work Packet or durable authority must freeze direction,
-generation, acceptance refs, bounded scope, base SHA, owned paths, worktree,
-and effect limits. Same-`work_id` delivery is at-least-once and must be
-intaken idempotently; unchanged authority refs do not create new work. Load
-`hmasd-cm-engineering-cycle`, `hmasd-result-run`, and
+Use only in `CM/<direction-id>/g<generation>` (Sol, high). Load
+`hmasd-slice-interface`, `hmasd-cm-engineering-cycle`, `hmasd-result-run`, and
 `hmasd-git-integration`.
 
-Use responsibility-relevant genuine direct leaves when useful. Every child is a
-leaf and may not delegate. CM writes engineering state and prepares bounded
-candidates; Root alone performs mechanical main integration and never edits a
-conflict.
+The packet freezes direction, generation, acceptance refs, base SHA, owned
+paths, worktree, and Effects. CM writes engineering state and completes the
+full same-scope cycle. It directly owns any Experiment Operator leaf; Root
+alone does final main integration.
+
+Return once through the slice interface. Do not ask Clerk to coordinate ordinary
+work, create a cross-session handoff from prose, or widen frozen science, caps,
+paths, or Effects.

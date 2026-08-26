@@ -52,7 +52,11 @@ DIRECTION_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{1,63}$")
 TIMESTAMP_RE = re.compile(
     r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,9})?Z$"
 )
-PATH_RE = re.compile(r"^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\.\.(?:/|$))(?!.*\\)[^\x00]+$")
+PATH_RE = re.compile(
+    r"^(?!/)(?![A-Za-z]:)(?!.*\\)(?!.*[\x00-\x1f\x7f-\x9f])(?!.*:)"
+    r"(?!\.{1,2}(?:/|$))(?!.*//)(?!.*(?:^|/)\.{1,2}(?:/|$))"
+    r"(?![^/]*[. ](?:/|$))(?!.*\/[^/]*[. ](?:/|$))[^/]+(?:/[^/]+)*$"
+)
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SECRET_NAME_RE = re.compile(r"(?:secret|token|password|credential|private[_-]?key)", re.I)
 
@@ -609,8 +613,11 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
         if role != "hmasd-git-integration" or identity != "Root":
             raise OwnershipError("Git integration result must be owned by Root")
     elif payload_kind == "portfolio":
-        if role != "root" or identity != "Root":
-            raise OwnershipError("portfolio result must be owned by Root")
+        if (role, identity) not in {
+            ("root", "Root"),
+            ("hmasd-portfolio", "Portfolio"),
+        }:
+            raise OwnershipError("portfolio result must be owned by Root or Portfolio")
     elif payload_kind == "em":
         if role != "hmasd-em" or identity != f"EM-{payload['direction_id']}":
             raise OwnershipError("EM result does not match its direction manager")
@@ -649,6 +656,15 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
             raise OwnershipError("specialist result does not match its logical identity")
     if document["decision_requests"] and document["materiality"] != "USER":
         raise OwnershipError("decision requests are reserved for USER materiality")
+    failure_scope = document.get("failure_scope")
+    failure_ref = document.get("failure_ref")
+    if document["status"] == "BLOCKED":
+        if failure_scope is None:
+            raise ValidationError("BLOCKED agent result requires failure_scope")
+        if failure_ref is None:
+            raise ValidationError("BLOCKED agent result requires failure_ref")
+    elif failure_scope is not None or failure_ref is not None:
+        raise ValidationError("non-BLOCKED agent result cannot carry failure scope or ref")
     if "event_id" in document:
         raise ValidationError("ordinary event_id is forbidden")
 

@@ -16,6 +16,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -108,7 +110,150 @@ def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> 
     document["logical_identity"] = "Portfolio"
     path.write_text(json.dumps(document), encoding="utf-8")
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize("collection", ["state_refs", "artifact_refs"])
+def test_agent_result_top_level_file_evidence_rejects_opaque_strings(
+    tmp_path: Path, collection: str
+) -> None:
+    document = fixture("agent_result")
+    document[collection] = [
+        {
+            "path": "docs/research/candidates/example-direction/DIRECTION.md",
+            "sha256": "d" * 64,
+        }
+    ]
+    path = tmp_path / f"{collection}.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
+
+    document[collection] = ["opaque-file-evidence"]
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
     assert result.returncode == 2
+
+
+def test_agent_result_file_paths_reject_windows_alias_spellings() -> None:
+    from scripts import hmasd_state
+
+    valid_path = "docs/research/candidates/example direction/result file.md"
+    valid = fixture("agent_result")
+    valid["changed_paths"] = [valid_path]
+    valid["state_refs"] = [{"path": valid_path, "sha256": "d" * 64}]
+    assert hmasd_state.PATH_RE.fullmatch(valid_path) is not None
+    assert hmasd_state.validate_document("agent_result", valid) == valid
+
+    invalid_paths = (
+        "/absolute/file.md",
+        "docs//file.md",
+        "./file.md",
+        "docs/./file.md",
+        "../file.md",
+        "docs/../file.md",
+        "docs/file.md:stream",
+        "docs\\file.md",
+        "docs/\x01file.md",
+        "docs/\x7ffile.md",
+        "docs./file.md",
+        "docs /file.md",
+        "docs/file.md.",
+        "docs/file.md ",
+    )
+    for invalid_path in invalid_paths:
+        assert hmasd_state.PATH_RE.fullmatch(invalid_path) is None, invalid_path
+
+        changed_path = fixture("agent_result")
+        changed_path["changed_paths"] = [invalid_path]
+        with pytest.raises(hmasd_state.ValidationError):
+            hmasd_state.validate_document("agent_result", changed_path)
+
+        file_ref = fixture("agent_result")
+        file_ref["state_refs"] = [{"path": invalid_path, "sha256": "d" * 64}]
+        with pytest.raises(hmasd_state.ValidationError):
+            hmasd_state.validate_document("agent_result", file_ref)
+
+
+def test_artifact_payload_atomically_binds_each_path_to_its_digest(tmp_path: Path) -> None:
+    document = fixture("agent_result")
+    document.update(
+        {
+            "role": "hmasd-research-artifact-writer",
+            "logical_identity": "hmasd-research-artifact-writer",
+            "materiality": "LOCAL",
+            "payload": {
+                "kind": "artifact",
+                "artifact_refs": [
+                    {
+                        "path": "docs/research/candidates/example-direction/results/evidence.md",
+                        "sha256": "e" * 64,
+                    }
+                ],
+            },
+        }
+    )
+    path = tmp_path / "artifact-result.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
+
+    document["payload"] = {
+        "kind": "artifact",
+        "paths": ["evidence-a.md", "evidence-b.md"],
+        "sha256_by_path": {"evidence-a.md": "e" * 64},
+    }
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+
+def test_transport_operation_identifier_remains_opaque(tmp_path: Path) -> None:
+    document = fixture("agent_result")
+    document["payload"] = {
+        "kind": "transport",
+        "provider": "external-review-provider",
+        "mode": "MONITOR",
+        "round_id": "a" * 20,
+        "operation_ref": "provider:operation:123",
+        "archive_ref": None,
+        "handoff_ref": None,
+    }
+    path = tmp_path / "transport-result.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+
+def test_agent_result_blocked_failure_scope_and_ref_are_coherent(tmp_path: Path) -> None:
+    document = fixture("agent_result")
+    document["next_action"] = {"kind": "WAIT_FOR_REF", "input_refs": ["missing-ref"]}
+
+    blocked = copy.deepcopy(document)
+    blocked["status"] = "BLOCKED"
+    blocked["failure_scope"] = "direction"
+    blocked["failure_ref"] = "docs/research/candidates/example-direction/DIRECTION.md"
+    path = tmp_path / "blocked.json"
+    path.write_text(json.dumps(blocked), encoding="utf-8")
+    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
+
+    for field in ("failure_scope", "failure_ref"):
+        missing = copy.deepcopy(blocked)
+        missing.pop(field)
+        path.write_text(json.dumps(missing), encoding="utf-8")
+        result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+        assert result.returncode == 2
+
+    nonblocked = copy.deepcopy(document)
+    nonblocked["failure_scope"] = "feature"
+    nonblocked["failure_ref"] = "feature-1"
+    path.write_text(json.dumps(nonblocked), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    nullable = copy.deepcopy(document)
+    nullable["failure_scope"] = None
+    nullable["failure_ref"] = None
+    path.write_text(json.dumps(nullable), encoding="utf-8")
+    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
 
 
 def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(

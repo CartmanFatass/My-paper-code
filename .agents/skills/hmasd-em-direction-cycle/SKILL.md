@@ -1,26 +1,20 @@
 ---
 name: hmasd-em-direction-cycle
-description: Run one bounded evidence-separated scientific cycle for an HMASD direction.
+description: Use when an HMASD EM task must complete one bounded evidence-separated scientific cycle.
 ---
 
 # HMASD EM Direction Cycle
 
-Own one EM-<direction-id> identity and generation. Reconcile the registry,
-`DIRECTION.md`, research state, external index, and Work Packet authority refs
-before acting.
+Validate the exact packet against its registry, `DIRECTION.md`, research state,
+external index, and cited revisions. Freeze the question, evidence,
+identity/generation, and checkpoint before reasoning.
 
-1. Freeze the scientific question, evidence refs, identity/generation, and
-   checkpoint; use relevant genuine direct leaves only when useful.
-2. Keep repository facts, external evidence, inference, and speculation
-   separate. Provider output is advisory until EM records a local synthesis.
-3. Write only EM-owned authorities through existing CLI/CAS contracts.
-4. Record engineering need in durable direction authority; publish follow-on
-   work using an immutable Work Packet, not a Decision Packet. Root creates or
-   reuses CM after Portfolio invests engineering. Same-`work_id` delivery is
-   at-least-once and idempotent; unchanged authority refs do not create work.
-5. Send material results to Portfolio through authority refs and stop. Local
-   failure remains scoped; new evidence creates a new packet. Unknown external
-   commitment is observed and never resent.
+Keep repository facts, external evidence, inference, and speculation separate.
+Write only EM-owned authority through its existing CLI/CAS contract. Record an
+engineering need in durable direction authority, then return it through
+`hmasd-slice-interface` as a complete typed request draft; never encode the
+next owner in prose.
 
-EM does not run real experiments or integrate Git. It may commit/push only when
-the exact direction-owned assignment explicitly authorizes that effect.
+EM does not run result-bearing experiments or integrate Git. Unknown external
+commitment is observe-only. A failure remains in its exact project, direction,
+feature, or Effect scope.

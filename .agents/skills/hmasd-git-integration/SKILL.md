@@ -1,33 +1,28 @@
 ---
 name: hmasd-git-integration
-description: Provision, verify, and mechanically integrate one assignment-owned HMASD candidate on main.
+description: Use when provisioning, verifying, committing, pushing, or mechanically integrating one exact HMASD candidate.
 ---
 
 # HMASD Git Integration
 
-Use native Windows Git only. Sibling worktrees live in
-`C:/Projects/HMASD-worktrees`, use `<direction>-<kind>-<assignment>`, and keep
-the branch namespace `omp/<direction>/<kind>/<assignment>`; target is `main`.
+Use native Windows Git. Worktrees are
+`C:/Projects/HMASD-worktrees/<direction>-<kind>-<assignment>` on
+`omp/<direction>/<kind>/<assignment>`; integration target is `main`.
 
-Every operation includes exact base SHA, direction/CM identity, assignment, and
-allowed paths. Resolve all paths canonically and refuse reparse aliases, dirty
-state, stale base, conflicts, multiple candidate commits, namespace violations,
-or changed paths outside the assignment.
+Freeze base SHA, CM/direction identity, assignment, paths, and requested Git
+Effects. Resolve paths canonically; refuse aliases, dirty/stale/conflicted
+state, multiple candidates, and out-of-scope changes. Direction-owned work may
+modify, test, commit, and push inside its assignment.
 
-Direction-owned assignments may modify, test, commit, and push if the exact
-assignment authorizes it. Shared-core changes require one user confirmation
-bound to the exact action, enforced by Root. Path tier policy only classifies
-and records; it is additive, never widens `allowed_paths`, and does not create
-an approval service. The existing Markdown confirmation records Action digest,
-Base SHA, sorted exact paths, objective/non-goals, and allowed Git effects.
-Root canonicalizes those fields as JSON and verifies its SHA-256 before the
-effect and before commit; once available, it appends the candidate SHA result
-ref. An implementation folder name may differ from direction ID: ownership is
-the Work Packet's exact `owned_paths` plus authority refs, while path policy
-only classifies paths.
-
-Root mechanically applies one verified candidate once with
-`scripts/hmasd_worktree.py`, rechecks target status and commit identity, and
-does not edit conflicts. A push is at-most-once: unknown outcome is observed by
-fetch/compare, never blindly resent. Never stage unrelated user or runtime
-output.
+Before any shared-core change, run Work Packet `shared-core-record --packet …`.
+Place its exact fence only in the v1 exact-authority allowlist: `AGENTS.md`,
+`docs/project/WORKFLOW_PROTOCOL.md`, `docs/research/portfolio/PORTFOLIO.md`,
+or the matching direction's `DIRECTION.md`; obtain the user's exact
+confirmation there. It binds Action digest, Base SHA, sorted paths,
+objective/non-goals, and real typed operations such as
+`WORKTREE_APPLY_INTEGRATION` and `WORKTREE_PUSH`. Warn for danger but do not
+create a permission service. Root verifies
+the record/current base before the Effect, records the candidate SHA afterward,
+and mechanically applies one verified candidate. A push with unknown outcome
+is fetch/compare observation only, never a resend. Never stage unrelated files
+or manually resolve integration conflicts.

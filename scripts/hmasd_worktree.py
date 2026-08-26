@@ -569,6 +569,48 @@ def classify_path(path: str, policy: Mapping[str, Any]) -> str:
     return str(policy["default_classification"])
 
 
+def observe_path_classifications(
+    repo: os.PathLike[str] | str, paths: Sequence[str]
+) -> dict[str, Any]:
+    """Return the existing path-policy facts without granting ownership."""
+
+    repository = Path(repo).absolute()
+    return _path_policy_facts(repository, paths)
+
+
+def observe_current_head(repo: os.PathLike[str] | str) -> str:
+    """Observe the repository's exact current commit without mutating Git."""
+
+    repository = Path(repo).absolute()
+    value = _git_value(repository, "rev-parse", "HEAD").lower()
+    if _FULL_SHA.fullmatch(value) is None:
+        raise WorktreeError("current Git HEAD is not a full commit id")
+    return value
+
+
+def path_is_tracked_at_commit(
+    repo: os.PathLike[str] | str, commit: str, path: str
+) -> bool:
+    """Return whether one exact repository path exists in one commit tree."""
+
+    repository = Path(repo).absolute()
+    frozen_commit = _validate_commit(commit, label="commit")
+    relative = _validate_relative(path, label="tracked path")
+    result = _run_git(
+        repository,
+        "cat-file",
+        "-e",
+        f"{frozen_commit}:{relative}",
+        check=False,
+    )
+    if result.returncode == 0:
+        return True
+    if result.returncode in {1, 128}:
+        return False
+    detail = result.stderr.strip() or result.stdout.strip() or f"exit {result.returncode}"
+    raise WorktreeError(f"cannot observe tracked path at commit: {detail}")
+
+
 def _path_policy_facts(repo: Path, paths: Sequence[str]) -> dict[str, Any]:
     policy, digest = _load_path_policy(repo)
     return {

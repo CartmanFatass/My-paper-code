@@ -25,7 +25,7 @@
     "schema_version": { "type": "integer", "const": 1 },
     "role": {
       "type": "string",
-      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager))$"
+      "pattern": "^(?:root|librarian|hmasd-(?:portfolio|em|cm|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager))$"
     },
     "logical_identity": { "$ref": "#/$defs/logical_identity" },
     "generation": { "type": "integer", "minimum": 1 },
@@ -34,8 +34,8 @@
     "materiality": { "type": "string", "enum": ["NONE", "LOCAL", "DIRECTION", "PORTFOLIO", "USER"] },
     "summary": { "type": "string", "minLength": 1, "maxLength": 4096 },
     "changed_paths": { "type": "array", "items": { "$ref": "#/$defs/path" } },
-    "state_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-    "artifact_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+    "state_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } },
+    "artifact_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } },
     "checkpoint_sha": {
       "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
     },
@@ -46,6 +46,13 @@
     "next_action": {
       "anyOf": [{ "$ref": "#/$defs/next_action" }, { "type": "null" }]
     },
+    "failure_scope": {
+      "anyOf": [
+        { "type": "string", "enum": ["project", "direction", "feature", "effect"] },
+        { "type": "null" }
+      ]
+    },
+    "failure_ref": { "$ref": "#/$defs/nullable_ref" },
     "payload": {
       "oneOf": [
         { "$ref": "#/$defs/root_payload" },
@@ -66,14 +73,14 @@
   "$defs": {
     "logical_identity": {
       "type": "string",
-      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$"
+      "pattern": "^(?:Root|Portfolio|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$"
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },
     "path": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+$"
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*[\\u0000-\\u001F\\u007F-\\u009F])(?!.*:)(?!\\.{1,2}(?:/|$))(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?![^/]*[. ](?:/|$))(?!.*\\/[^/]*[. ](?:/|$))[^/]+(?:/[^/]+)*$"
     },
     "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
     "ref": {
@@ -90,8 +97,20 @@
         { "type": "string", "minLength": 1, "maxLength": 512 }
       ]
     },
+    "file_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
     "nullable_ref": {
       "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
+    },
+    "nullable_file_ref": {
+      "anyOf": [{ "$ref": "#/$defs/file_ref" }, { "type": "null" }]
     },
     "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
     "decision_request": {
@@ -159,7 +178,7 @@
       "properties": {
         "kind": { "const": "portfolio" },
         "direction_actions": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
-        "portfolio_ref": { "$ref": "#/$defs/ref" },
+        "portfolio_ref": { "$ref": "#/$defs/file_ref" },
         "registry_revision": { "type": "integer", "minimum": 1 }
       }
     },
@@ -172,8 +191,8 @@
         "direction_id": { "$ref": "#/$defs/direction_id" },
         "question_sha256": { "$ref": "#/$defs/sha256" },
         "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
-        "conclusion_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-        "engineering_request_ref": { "$ref": "#/$defs/nullable_ref" }
+        "conclusion_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } },
+        "engineering_request_ref": { "$ref": "#/$defs/nullable_file_ref" }
       }
     },
     "cm_payload": {
@@ -183,10 +202,10 @@
       "properties": {
         "kind": { "const": "cm" },
         "direction_id": { "$ref": "#/$defs/direction_id" },
-        "scope_ref": { "$ref": "#/$defs/ref" },
+        "scope_ref": { "$ref": "#/$defs/file_ref" },
         "base_sha": { "$ref": "#/$defs/git_sha" },
         "candidate_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
-        "verification_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+        "verification_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } },
         "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] }
       }
     },
@@ -198,7 +217,7 @@
         "kind": { "const": "implementation" },
         "changed_paths": { "type": "array", "items": { "$ref": "#/$defs/path" } },
         "preserved_invariants": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "lsp_evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
+        "lsp_evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } }
       }
     },
     "review_payload": {
@@ -208,7 +227,7 @@
       "properties": {
         "kind": { "const": "review" },
         "findings": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
-        "evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
+        "evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } }
       }
     },
     "verification_payload": {
@@ -218,8 +237,8 @@
       "properties": {
         "kind": { "const": "verification" },
         "checks": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "behavioral_evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-        "benchmark_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
+        "behavioral_evidence_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } },
+        "benchmark_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } }
       }
     },
     "run_payload": {
@@ -229,7 +248,7 @@
       "properties": {
         "kind": { "const": "run" },
         "run_id": { "$ref": "#/$defs/id" },
-        "manifest_ref": { "$ref": "#/$defs/ref" },
+        "manifest_ref": { "$ref": "#/$defs/file_ref" },
         "terminal_status": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
         "exit_code": { "anyOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }] }
       }
@@ -244,21 +263,17 @@
         "mode": { "type": "string", "enum": ["DIVERGENT", "CONVERGENCE", "MONITOR"] },
         "round_id": { "type": "string", "pattern": "^[0-9a-f]{20}$" },
         "operation_ref": { "$ref": "#/$defs/ref" },
-        "archive_ref": { "$ref": "#/$defs/nullable_ref" },
-        "handoff_ref": { "$ref": "#/$defs/nullable_ref" }
+        "archive_ref": { "$ref": "#/$defs/nullable_file_ref" },
+        "handoff_ref": { "$ref": "#/$defs/nullable_file_ref" }
       }
     },
     "artifact_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "paths", "sha256_by_path"],
+      "required": ["kind", "artifact_refs"],
       "properties": {
         "kind": { "const": "artifact" },
-        "paths": { "type": "array", "items": { "$ref": "#/$defs/path" } },
-        "sha256_by_path": {
-          "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/sha256" }
-        }
+        "artifact_refs": { "type": "array", "items": { "$ref": "#/$defs/file_ref" } }
       }
     },
     "recovery_payload": {

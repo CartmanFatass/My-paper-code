@@ -51,6 +51,21 @@ def _operation_with_archive_bytes(operation: dict[str, object], raw: bytes) -> d
     return bound
 
 
+def test_public_operation_ref_validator_is_read_only_and_preserves_private_shape() -> None:
+    operation = _operation()
+
+    validated = external_review.validate_operation_ref(operation)
+
+    assert validated == external_review._validate_operation_ref(operation)
+    assert validated is not operation
+    assert validated["commitment_state"] == "COMMITTED"
+
+    unknown = dict(operation)
+    unknown["commitment_state"] = "UNKNOWN"
+    with pytest.raises(CommitmentUnknown):
+        external_review.validate_operation_ref(unknown)
+
+
 def test_round_id_is_stable_and_uses_all_frozen_inputs() -> None:
     question = "1" * 64
     evidence = "2" * 64

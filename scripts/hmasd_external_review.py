@@ -289,6 +289,12 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
     return result
 
 
+def validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
+    """Validate and return a detached operation-reference copy without side effects."""
+
+    return dict(_validate_operation_ref(operation_ref))
+
+
 def _validate_archive_data(archive: Any) -> dict[str, Any]:
     if not isinstance(archive, Mapping):
         raise ExternalReviewError("archive must be a JSON object")

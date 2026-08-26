@@ -1,17 +1,13 @@
 """Focused contract tests for the v1 runtime-only Work Packet helper.
 
-These tests use its public Python API.  Packets are intentionally runtime
-transport: durable authority remains ordinary repository files, while the
-ignored ``.codex/runtime/work`` tree only carries an immutable delivery copy.
+Packets are immutable runtime transport. Reconcile is an exact-work-id,
+event-local, stateless planner; it never scans or executes the resulting plan.
 """
 
 from __future__ import annotations
 
 import copy
 import json
-import os
-import subprocess
-import sys
 import threading
 import time
 from pathlib import Path
@@ -21,9 +17,6 @@ import pytest
 from jsonschema import Draft202012Validator
 
 from scripts import hmasd_work_packet as packets
-
-
-ROOT = Path(__file__).resolve().parents[1]
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -37,11 +30,17 @@ def _packet_input(repo: Path, direction: str = "alpha") -> dict[str, Any]:
     _write_json(root / "DIRECTION.json", {"revision": 3, "direction": direction})
     return {
         "schema_version": 1,
-        "scope_ref": {"path": f"docs/research/candidates/{direction}/STATE.json", "revision": 7},
+        "scope_ref": {
+            "path": f"docs/research/candidates/{direction}/STATE.json",
+            "revision": 7,
+        },
         "sender_identity": "Portfolio",
         "target_identity": f"EM-{direction}",
         "authority_refs": [
-            {"path": f"docs/research/candidates/{direction}/DIRECTION.json", "revision": 3}
+            {
+                "path": f"docs/research/candidates/{direction}/DIRECTION.json",
+                "revision": 3,
+            }
         ],
         "objective": "advance one bounded discriminator",
         "non_goals": ["do not run an external send", "do not change shared core"],
@@ -51,7 +50,36 @@ def _packet_input(repo: Path, direction: str = "alpha") -> dict[str, Any]:
     }
 
 
-def test_canonical_packet_identity_is_order_stable_but_changes_for_material_content(tmp_path: Path) -> None:
+def _publish(repo: Path, source: dict[str, Any]) -> dict[str, Any]:
+    packet = packets.build_packet(source, repo=repo)
+    packets.publish_packet(packet, repo=repo)
+    return packet
+
+
+def _existing_em(direction: str = "alpha") -> list[dict[str, Any]]:
+    return [
+        {
+            "logical_identity": f"EM-{direction}",
+            "kind": "em",
+            "direction_id": direction,
+            "generation": 1,
+            "lifecycle": "RUNNING",
+            "thread_id": f"thread-{direction}",
+        }
+    ]
+
+
+def _plan(repo: Path, packet: dict[str, Any], observed_tasks: Any = ()) -> dict[str, Any]:
+    return packets.reconcile_once(
+        repo=repo,
+        work_id=packet["work_id"],
+        observed_tasks=observed_tasks,
+    )["plan"]
+
+
+def test_canonical_packet_identity_is_order_stable_but_changes_for_material_content(
+    tmp_path: Path,
+) -> None:
     source = _packet_input(tmp_path)
     reordered = copy.deepcopy(source)
     reordered["non_goals"].reverse()
@@ -74,7 +102,13 @@ def test_canonical_packet_identity_is_order_stable_but_changes_for_material_cont
         lambda value: value.update({"unexpected": True}),
         lambda value: value.update({"owned_paths": ["../outside"]}),
         lambda value: value.update({"owned_paths": ["experiments\\alias"]}),
-        lambda value: value.update({"authority_refs": [{"path": "docs/research/x.json", "revision": 1, "extra": True}]}),
+        lambda value: value.update(
+            {
+                "authority_refs": [
+                    {"path": "docs/research/x.json", "revision": 1, "extra": True}
+                ]
+            }
+        ),
     ],
 )
 def test_packet_schema_and_path_contract_reject_invalid_or_extra_values(
@@ -86,6 +120,64 @@ def test_packet_schema_and_path_contract_reject_invalid_or_extra_values(
         packets.build_packet(value, repo=tmp_path)
 
 
+def test_ordinary_work_packet_cannot_target_workflow_clerk_in_schema_or_python_api(
+    tmp_path: Path,
+) -> None:
+    source = _packet_input(tmp_path)
+    source["target_identity"] = "Workflow-Clerk"
+
+    with pytest.raises(
+        packets.InvalidPacket,
+        match="ordinary Work Packet.*Workflow-Clerk",
+    ):
+        packets.build_packet(source, repo=tmp_path)
+
+    valid = packets.build_packet(_packet_input(tmp_path), repo=tmp_path)
+    clerk_packet = {**valid, "target_identity": "Workflow-Clerk"}
+    clerk_content = {key: value for key, value in clerk_packet.items() if key != "work_id"}
+    clerk_packet["work_id"] = packets.hmasd_state.sha256_bytes(
+        packets.hmasd_state.canonical_bytes(clerk_content)
+    )
+    schema = json.loads(packets.SCHEMA_PATH.read_text(encoding="utf-8"))
+    assert list(Draft202012Validator(schema).iter_errors(clerk_packet))
+    with pytest.raises(
+        packets.InvalidPacket,
+        match="ordinary Work Packet.*Workflow-Clerk",
+    ):
+        packets.validate_packet(clerk_packet, repo=tmp_path)
+
+
+def test_reconcile_rejects_ready_ordinary_work_packet_targeting_workflow_clerk(
+    tmp_path: Path,
+) -> None:
+    valid = packets.build_packet(_packet_input(tmp_path), repo=tmp_path)
+    clerk_packet = {**valid, "target_identity": "Workflow-Clerk"}
+    clerk_content = {key: value for key, value in clerk_packet.items() if key != "work_id"}
+    clerk_packet["work_id"] = packets.hmasd_state.sha256_bytes(
+        packets.hmasd_state.canonical_bytes(clerk_content)
+    )
+    ready_path = (
+        tmp_path
+        / ".codex"
+        / "runtime"
+        / "work"
+        / "ready"
+        / clerk_packet["work_id"]
+        / "packet.json"
+    )
+    _write_json(ready_path, clerk_packet)
+
+    with pytest.raises(
+        packets.InvalidPacket,
+        match="ordinary Work Packet.*Workflow-Clerk",
+    ):
+        packets.reconcile_once(
+            repo=tmp_path,
+            work_id=clerk_packet["work_id"],
+            observed_tasks=[],
+        )
+
+
 def test_partial_staging_is_not_runnable_or_replaced_silently(tmp_path: Path) -> None:
     source = _packet_input(tmp_path)
     packet = packets.build_packet(source, repo=tmp_path)
@@ -93,11 +185,8 @@ def test_partial_staging_is_not_runnable_or_replaced_silently(tmp_path: Path) ->
     partial.mkdir(parents=True)
     (partial / "packet.json").write_text('{"work_id":', encoding="utf-8")
 
-    observed = packets.reconcile_once(repo=tmp_path)
-    assert observed["actions"] == []
-    assert observed["errors"] == []
-    # A staging residue is never runnable.  It may be safely rebuilt because
-    # this exact directory is ignored, digest-scoped runtime transport.
+    with pytest.raises(packets.InvalidPacket, match="ready packet is missing"):
+        packets.reconcile_once(repo=tmp_path, work_id=packet["work_id"], observed_tasks=[])
     rebuilt = packets.publish_packet(packet, repo=tmp_path)
     assert rebuilt["published"] is True
     assert Path(rebuilt["path"]).read_bytes() == packets.hmasd_state.canonical_bytes(packet)
@@ -118,263 +207,238 @@ def test_publish_is_immutable_and_rebuilt_same_packet_is_idempotent(tmp_path: Pa
     assert Path(repeated["path"]).read_bytes() == packets.hmasd_state.canonical_bytes(first)
 
 
-def test_reconcile_same_key_is_serial_across_concurrent_wakes(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
+def test_reconcile_is_exact_and_ignores_a_corrupt_unrelated_ready_packet(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    selected = _publish(tmp_path, _packet_input(tmp_path, "alpha"))
+    unrelated = _publish(tmp_path, _packet_input(tmp_path, "beta"))
+    unrelated_path = (
+        tmp_path / ".codex" / "runtime" / "work" / "ready" / unrelated["work_id"] / "packet.json"
+    )
+    unrelated_path.write_text('{"broken":', encoding="utf-8")
+    before = unrelated_path.read_bytes()
+
+    def forbid_iterdir(_: Path) -> Any:
+        raise AssertionError("event-local reconcile must not scan ready")
+
+    monkeypatch.setattr(Path, "iterdir", forbid_iterdir)
+    plan = _plan(tmp_path, selected, _existing_em())
+
+    assert plan["verb"] == "DISPATCH_EXISTING"
+    assert plan["work_id"] == selected["work_id"]
+    assert unrelated_path.read_bytes() == before
+
+
+def test_invalid_work_id_is_rejected_before_any_runtime_lookup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def fail_runtime_lookup(_: Path) -> Path:
+        raise AssertionError("runtime lookup occurred")
+
+    monkeypatch.setattr(packets, "_work_root", fail_runtime_lookup)
+    with pytest.raises(packets.InvalidPacket, match="lowercase SHA256"):
+        packets.reconcile_once(repo=tmp_path, work_id="not-a-work-id")
+
+
+def test_missing_exact_ready_packet_is_an_error(tmp_path: Path) -> None:
+    work_id = "a" * 64
+    with pytest.raises(packets.InvalidPacket, match=work_id):
+        packets.reconcile_once(repo=tmp_path, work_id=work_id, observed_tasks=[])
+
+
+def test_reconcile_reuses_one_compatible_observed_identity(tmp_path: Path) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
+    plan = _plan(tmp_path, packet, _existing_em())
+    assert plan == {
+        "verb": "DISPATCH_EXISTING",
+        "delivery_key": packet["work_id"],
+        "delivery_semantics": "AT_LEAST_ONCE_IDEMPOTENT_INTAKE",
+        "requested_target_identity": "EM-alpha",
+        "target_identity": "EM-alpha",
+        "task_resolution": {
+            "status": "REUSE",
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "generation": 1,
+            "lifecycle": "RUNNING",
+            "thread_id": "thread-alpha",
+        },
+        "unknown_effect_refs": [],
+        "work_id": packet["work_id"],
+    }
+
+
+def test_reconcile_emits_create_task_intent_without_mutating_snapshot(tmp_path: Path) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
+    snapshot = tmp_path / ".codex" / "runtime" / "tasks.json"
+    _write_json(snapshot, {"tasks": []})
+    before = snapshot.read_bytes()
+
+    plan = _plan(tmp_path, packet, ".codex/runtime/tasks.json")
+
+    assert plan["verb"] == "CREATE_TASK_INTENT"
+    assert plan["task_resolution"] == {
+        "status": "CREATE_TASK",
+        "logical_identity": "EM-alpha",
+        "kind": "em",
+        "direction_id": "alpha",
+        "generation": 1,
+    }
+    assert snapshot.read_bytes() == before
+
+
+def test_reconcile_maps_task_identity_conflict_to_closed_conflict_verb(tmp_path: Path) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
+    duplicate = [*_existing_em(), {**_existing_em()[0], "lifecycle": "WAITING"}]
+    plan = _plan(tmp_path, packet, duplicate)
+    assert plan["verb"] == "CONFLICT"
+    assert plan["conflict_type"] == "TASK_IDENTITY_CONFLICT"
+    assert plan["task_resolution"]["status"] == "TASK_IDENTITY_CONFLICT"
+
+
+@pytest.mark.parametrize("reference_kind", ["revision", "sha256"])
+def test_reconcile_maps_stale_authority_to_closed_conflict_verb(
+    tmp_path: Path, reference_kind: str
+) -> None:
+    source = _packet_input(tmp_path)
+    scope_path = tmp_path / source["scope_ref"]["path"]
+    if reference_kind == "sha256":
+        source["scope_ref"] = {
+            "path": source["scope_ref"]["path"],
+            "sha256": packets.hmasd_state.sha256_bytes(scope_path.read_bytes()),
+        }
+    packet = _publish(tmp_path, source)
+    _write_json(scope_path, {"revision": 8, "changed": True})
+
+    plan = _plan(tmp_path, packet, _existing_em())
+    assert plan["verb"] == "CONFLICT"
+    assert plan["conflict_type"] == "STALE_AUTHORITY"
+    assert plan["work_id"] == packet["work_id"]
+
+
+def test_unknown_effect_maps_to_observe_only_without_mutation(tmp_path: Path) -> None:
+    source = _packet_input(tmp_path)
+    effect_path = "temp/directions/example-direction/exp/example-run/manifest.json"
+    manifest = json.loads(
+        (Path(__file__).parent / "fixtures/hmasd_phase0/run_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    manifest["status"] = "UNKNOWN"
+    _write_json(tmp_path / effect_path, manifest)
+    source["effect_refs"] = [
+        {
+            "kind": "run_manifest",
+            "path": effect_path,
+            "resource_id": "example-direction/example-run",
+        }
+    ]
+    packet = _publish(tmp_path, source)
+    before = (tmp_path / effect_path).read_bytes()
+
+    plan = _plan(tmp_path, packet, _existing_em())
+
+    assert plan["verb"] == "OBSERVE_EFFECT_ONLY"
+    assert plan["unknown_effect_refs"] == [effect_path]
+    assert (tmp_path / effect_path).read_bytes() == before
+
+
+def test_same_work_id_concurrent_planners_do_not_overlap_inside_exact_lock(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
     active = 0
     peak = 0
     guard = threading.Lock()
     entered = threading.Event()
+    real_plan = packets._plan_packet
 
-    def handler(_: dict[str, Any], __: dict[str, Any]) -> None:
+    def observed_plan(*args: Any, **kwargs: Any) -> dict[str, Any]:
         nonlocal active, peak
         with guard:
             active += 1
             peak = max(peak, active)
             entered.set()
         time.sleep(0.08)
-        with guard:
-            active -= 1
+        try:
+            return real_plan(*args, **kwargs)
+        finally:
+            with guard:
+                active -= 1
 
-    threads = [threading.Thread(target=packets.reconcile_once, kwargs={"repo": tmp_path, "handler": handler}) for _ in range(2)]
+    monkeypatch.setattr(packets, "_plan_packet", observed_plan)
+    results: list[dict[str, Any]] = []
+
+    def wake() -> None:
+        results.append(_plan(tmp_path, packet, _existing_em()))
+
+    threads = [threading.Thread(target=wake), threading.Thread(target=wake)]
     for thread in threads:
         thread.start()
     assert entered.wait(timeout=2)
     for thread in threads:
         thread.join(timeout=5)
         assert not thread.is_alive()
+
     assert peak == 1
+    assert results[0] == results[1]
 
 
-def test_reconcile_advances_independent_directions_and_isolates_local_failure(tmp_path: Path) -> None:
-    alpha = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    beta = packets.build_packet(_packet_input(tmp_path, "beta"), repo=tmp_path)
-    packets.publish_packet(alpha, repo=tmp_path)
-    packets.publish_packet(beta, repo=tmp_path)
-    called: list[str] = []
-
-    def handler(packet: dict[str, Any], _: dict[str, Any]) -> str:
-        direction = packet["target_identity"].removeprefix("EM-")
-        called.append(direction)
-        if direction == "alpha":
-            raise RuntimeError("alpha local failure")
-        return "beta advanced"
-
-    result = packets.reconcile_once(repo=tmp_path, handler=handler)
-    assert sorted(called) == ["alpha", "beta"]
-    assert [item["target_identity"] for item in result["actions"]] == ["EM-beta"]
-    assert len(result["errors"]) == 1
-    assert result["errors"][0]["work_id"] == alpha["work_id"]
-
-
-def test_superseded_authority_is_not_runnable(tmp_path: Path) -> None:
-    source = _packet_input(tmp_path)
-    packet = packets.build_packet(source, repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    _write_json(tmp_path / source["scope_ref"]["path"], {"revision": 8})
-
-    result = packets.reconcile_once(repo=tmp_path)
-    assert result["actions"] == []
-    assert len(result["stale"]) == 1
-    assert result["stale"][0]["work_id"] == packet["work_id"]
-
-
-def test_sha256_authority_advance_is_not_runnable(tmp_path: Path) -> None:
-    source = _packet_input(tmp_path)
-    scope_path = tmp_path / source["scope_ref"]["path"]
-    source["scope_ref"] = {
-        "path": source["scope_ref"]["path"],
-        "sha256": packets.hmasd_state.sha256_bytes(scope_path.read_bytes()),
-    }
-    packet = packets.build_packet(source, repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    _write_json(scope_path, {"revision": 7, "changed": True})
-
-    result = packets.reconcile_once(repo=tmp_path)
-    assert result["actions"] == []
-    assert result["stale"] == [{"work_id": packet["work_id"], "reason": "scope_ref sha256 advanced"}]
-
-
-def test_unknown_effect_is_observed_without_dispatching_new_effect(tmp_path: Path) -> None:
-    source = _packet_input(tmp_path)
-    effect_path = "temp/directions/alpha/exp/run-1/effect.json"
-    _write_json(tmp_path / effect_path, {"status": "UNKNOWN", "send_count": 1})
-    source["effect_refs"] = [{"path": effect_path}]
-    packet = packets.build_packet(source, repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    observed: list[dict[str, Any]] = []
-
-    def handler(_: dict[str, Any], action: dict[str, Any]) -> None:
-        observed.append(action)
-
-    result = packets.reconcile_once(repo=tmp_path, handler=handler)
-    assert result["errors"] == []
-    # UNKNOWN is a pure observation boundary: the generic dispatcher is not
-    # invoked, but reconcile reports the observable action for a caller that
-    # owns an effect-specific observer.
-    assert observed == []
-    assert result["actions"][0]["action"] == "OBSERVE_EFFECT"
-    assert result["actions"][0]["observe_only"] is True
-    assert result["actions"][0]["unknown_effect_refs"] == [effect_path]
-    assert json.loads((tmp_path / effect_path).read_text(encoding="utf-8"))["send_count"] == 1
-
-
-def test_lazy_manager_resolution_reuses_one_compatible_observed_identity(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    observed = [
-        {
-            "logical_identity": "EM-alpha",
-            "kind": "em",
-            "direction_id": "alpha",
-            "generation": 1,
-            "lifecycle": "RUNNING",
-            "thread_id": "thread-existing",
-        }
-    ]
-
-    result = packets.reconcile_once(repo=tmp_path, observed_tasks=observed)
-    action = result["actions"][0]
-    assert action["action"] == "DISPATCH"
-    assert action["task_resolution"] == {
-        "status": "REUSE",
-        "logical_identity": "EM-alpha",
-        "kind": "em",
-        "generation": 1,
-        "lifecycle": "RUNNING",
-        "thread_id": "thread-existing",
-    }
-
-
-def test_lazy_manager_resolution_emits_create_intent_when_absent(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-
-    result = packets.reconcile_once(repo=tmp_path, observed_tasks=[])
-    action = result["actions"][0]
-    assert action["action"] == "CREATE_TASK"
-    assert action["task_resolution"] == {
-        "status": "CREATE_TASK",
-        "logical_identity": "EM-alpha",
-        "kind": "em",
-        "direction_id": "alpha",
-        "generation": 1,
-    }
-
-
-def test_lazy_manager_resolution_reports_duplicate_identity_conflict(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    duplicate = [
-        {"logical_identity": "EM-alpha", "kind": "em", "direction_id": "alpha", "generation": 1, "lifecycle": "RUNNING"},
-        {"logical_identity": "EM-alpha", "kind": "em", "direction_id": "alpha", "generation": 1, "lifecycle": "WAITING"},
-    ]
-
-    result = packets.reconcile_once(repo=tmp_path, observed_tasks=duplicate)
-    action = result["actions"][0]
-    assert action["action"] == "TASK_IDENTITY_CONFLICT"
-    assert action["task_resolution"]["status"] == "TASK_IDENTITY_CONFLICT"
-    assert "multiple observed tasks" in action["task_resolution"]["reason"]
-
-
-def test_two_concurrent_reconciles_reload_task_snapshot_under_key_lock(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
+def test_reconcile_cli_requires_work_id_and_is_byte_identical_for_same_snapshot(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
     snapshot = tmp_path / ".codex" / "runtime" / "tasks.json"
-    initial = {
-        "schema_version": 1,
-        "revision": 1,
-        "updated_at": "2026-08-25T00:00:00Z",
-        "writer": "Root",
-        "tasks": [],
-    }
-    packets.hmasd_state.atomic_write(snapshot, packets.hmasd_state.canonical_bytes(initial))
-    create_count = 0
-    guard = threading.Lock()
-    results: list[dict[str, Any]] = []
+    _write_json(snapshot, {"tasks": _existing_em()})
+    argv = [
+        "reconcile",
+        "--once",
+        "--repo",
+        str(tmp_path),
+        "--work-id",
+        packet["work_id"],
+        "--observed-tasks",
+        ".codex/runtime/tasks.json",
+    ]
 
-    def handler(_: dict[str, Any], action: dict[str, Any]) -> None:
-        nonlocal create_count
-        if action["action"] != "CREATE_TASK":
-            return
-        with guard:
-            create_count += 1
-        created = {
-            "schema_version": 1,
-            "revision": 2,
-            "updated_at": "2026-08-25T00:00:01Z",
-            "writer": "Root",
-            "tasks": [
-                {
-                    "logical_identity": action["task_resolution"]["logical_identity"],
-                    "kind": "em",
-                    "direction_id": "alpha",
-                    "generation": 1,
-                    "task_title": "Alpha EM",
-                    "lifecycle": "ACTIVE",
-                }
-            ],
-        }
-        packets.hmasd_state.atomic_write(snapshot, packets.hmasd_state.canonical_bytes(created))
+    assert packets.main(argv) == 0
+    first = capsys.readouterr().out.encode("utf-8")
+    assert packets.main(argv) == 0
+    second = capsys.readouterr().out.encode("utf-8")
 
-    def wake() -> None:
-        results.append(
-            packets.reconcile_once(
-                repo=tmp_path,
-                observed_tasks=".codex/runtime/tasks.json",
-                handler=handler,
-            )
+    assert first == second
+    assert str(tmp_path).encode() not in first
+    assert json.loads(first)["plan"]["verb"] == "DISPATCH_EXISTING"
+    with pytest.raises(SystemExit) as missing_snapshot:
+        packets.main(
+            [
+                "reconcile",
+                "--once",
+                "--repo",
+                str(tmp_path),
+                "--work-id",
+                packet["work_id"],
+            ]
         )
-
-    threads = [threading.Thread(target=wake), threading.Thread(target=wake)]
-    for thread in threads:
-        thread.start()
-    for thread in threads:
-        thread.join(timeout=5)
-        assert not thread.is_alive()
-
-    assert create_count == 1
-    actions = [result["actions"][0] for result in results]
-    assert {action["action"] for action in actions} == {"CREATE_TASK", "DISPATCH"}
-    assert {result["task_observation_semantics"] for result in results} == {"RELOAD_PATH_UNDER_KEY_LOCK"}
+    assert missing_snapshot.value.code == 2
+    with pytest.raises(SystemExit) as missing:
+        packets.main(["reconcile", "--once", "--repo", str(tmp_path)])
+    assert missing.value.code == 2
 
 
-def test_slash_generation_target_creates_and_reuses_runtime_task_identity(tmp_path: Path) -> None:
-    source = _packet_input(tmp_path, "alpha")
+def test_slash_generation_target_creates_and_reuses_runtime_identity(tmp_path: Path) -> None:
+    source = _packet_input(tmp_path)
     source["target_identity"] = "EM/alpha/g2"
-    packet = packets.build_packet(source, repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    created = packets.reconcile_once(repo=tmp_path, observed_tasks=[])["actions"][0]
-    assert created["action"] == "CREATE_TASK"
+    packet = _publish(tmp_path, source)
+    created = _plan(tmp_path, packet, [])
+    assert created["verb"] == "CREATE_TASK_INTENT"
     assert created["requested_target_identity"] == "EM/alpha/g2"
-    assert created["task_resolution"] == {
-        "status": "CREATE_TASK",
-        "logical_identity": "EM-alpha",
-        "kind": "em",
-        "direction_id": "alpha",
-        "generation": 2,
-    }
-    runtime = {
-        "schema_version": 1,
-        "revision": 1,
-        "updated_at": "2026-08-25T00:00:00Z",
-        "writer": "Root",
-        "tasks": [
-            {
-                "logical_identity": "EM-alpha",
-                "kind": "em",
-                "direction_id": "alpha",
-                "generation": 2,
-                "task_title": "Alpha EM generation 2",
-                "lifecycle": "ACTIVE",
-            }
-        ],
-    }
-    packets.hmasd_state.validate_document("runtime_tasks", runtime)
-    reused = packets.reconcile_once(repo=tmp_path, observed_tasks=runtime["tasks"])["actions"][0]
-    assert reused["action"] == "DISPATCH"
-    assert reused["task_resolution"]["status"] == "REUSE"
-    assert reused["task_resolution"]["logical_identity"] == "EM-alpha"
+    assert created["task_resolution"]["logical_identity"] == "EM-alpha"
+    assert created["task_resolution"]["generation"] == 2
+
+    observed = [{**_existing_em()[0], "generation": 2}]
+    reused = _plan(tmp_path, packet, observed)
+    assert reused["verb"] == "DISPATCH_EXISTING"
     assert reused["task_resolution"]["generation"] == 2
 
 
@@ -385,8 +449,10 @@ def test_slash_generation_target_creates_and_reuses_runtime_task_identity(tmp_pa
         lambda value: value.update({"owned_paths": ["temp/directions/gamma/test"]}),
     ],
 )
-def test_direction_inconsistent_target_or_owned_path_is_refused(tmp_path: Path, mutate: Any) -> None:
-    source = _packet_input(tmp_path, "alpha")
+def test_direction_inconsistent_target_or_owned_path_is_refused(
+    tmp_path: Path, mutate: Any
+) -> None:
+    source = _packet_input(tmp_path)
     mutate(source)
     with pytest.raises(packets.InvalidPacket, match="direction"):
         packets.build_packet(source, repo=tmp_path)
@@ -404,60 +470,32 @@ def test_build_cli_refuses_absolute_and_alias_output_paths(tmp_path: Path, outpu
     assert not (tmp_path.parent / "escaped.json").exists()
 
 
-def test_repeated_reconcile_preserves_at_least_once_delivery_key(tmp_path: Path) -> None:
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    first = packets.reconcile_once(repo=tmp_path, observed_tasks=[])["actions"][0]
-    second = packets.reconcile_once(repo=tmp_path, observed_tasks=[])["actions"][0]
+def test_repeated_exact_plan_preserves_at_least_once_delivery_key(tmp_path: Path) -> None:
+    packet = _publish(tmp_path, _packet_input(tmp_path))
+    first = _plan(tmp_path, packet, [])
+    second = _plan(tmp_path, packet, [])
+    assert first == second
     assert first["delivery_semantics"] == "AT_LEAST_ONCE_IDEMPOTENT_INTAKE"
-    assert second["delivery_semantics"] == "AT_LEAST_ONCE_IDEMPOTENT_INTAKE"
-    assert first["delivery_key"] == second["delivery_key"] == packet["work_id"]
-
-
-def test_same_reconcile_key_with_distinct_packet_content_conflicts_before_handlers(tmp_path: Path) -> None:
-    first_input = _packet_input(tmp_path, "alpha")
-    second_input = copy.deepcopy(first_input)
-    second_input["objective"] = "same authority but a different bounded objective"
-    first = packets.build_packet(first_input, repo=tmp_path)
-    second = packets.build_packet(second_input, repo=tmp_path)
-    assert first["work_id"] != second["work_id"]
-    packets.publish_packet(first, repo=tmp_path)
-    packets.publish_packet(second, repo=tmp_path)
-    invoked: list[str] = []
-
-    result = packets.reconcile_once(
-        repo=tmp_path,
-        observed_tasks=[],
-        handler=lambda packet, _: invoked.append(packet["work_id"]),
-    )
-    assert result["actions"] == []
-    assert invoked == []
-    assert result["errors"] == [
-        {
-            "code": "PACKET_KEY_CONFLICT",
-            "error": "one reconcile key has multiple Work Packets",
-            "key": packets._reconcile_key(first),
-            "type": "PacketConflict",
-            "work_id": min(first["work_id"], second["work_id"]),
-            "work_ids": sorted([first["work_id"], second["work_id"]]),
-        }
-    ]
+    assert first["delivery_key"] == packet["work_id"]
 
 
 def test_canonical_manager_with_other_nonterminal_scope_alias_conflicts(tmp_path: Path) -> None:
-    source = _packet_input(tmp_path, "alpha")
+    source = _packet_input(tmp_path)
     source["target_identity"] = "EM/alpha/g1"
-    packet = packets.build_packet(source, repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
+    packet = _publish(tmp_path, source)
     observed = [
-        {"logical_identity": "EM-alpha", "kind": "em", "direction_id": "alpha", "generation": 1, "lifecycle": "ACTIVE"},
-        {"logical_identity": "EM-alpha-shadow", "kind": "em", "direction_id": "alpha", "generation": 1, "lifecycle": "PARKED"},
+        *_existing_em(),
+        {
+            "logical_identity": "EM-alpha-shadow",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 1,
+            "lifecycle": "PARKED",
+        },
     ]
-    result = packets.reconcile_once(repo=tmp_path, observed_tasks=observed)
-    action = result["actions"][0]
-    assert action["action"] == "TASK_IDENTITY_CONFLICT"
-    assert action["task_resolution"]["logical_identity"] == "EM-alpha"
-    assert "multiple observed tasks represent the same non-terminal manager scope" in action["task_resolution"]["reason"]
+    plan = _plan(tmp_path, packet, observed)
+    assert plan["verb"] == "CONFLICT"
+    assert "multiple observed tasks represent" in plan["task_resolution"]["reason"]
 
 
 @pytest.mark.parametrize(
@@ -470,7 +508,7 @@ def test_canonical_manager_with_other_nonterminal_scope_alias_conflicts(tmp_path
     ],
 )
 def test_owned_paths_reject_bare_direction_roots(tmp_path: Path, owned_root: str) -> None:
-    source = _packet_input(tmp_path, "alpha")
+    source = _packet_input(tmp_path)
     source["owned_paths"] = [owned_root]
     with pytest.raises(packets.WorkPacketError, match="bare direction roots"):
         packets.build_packet(source, repo=tmp_path)
@@ -478,10 +516,17 @@ def test_owned_paths_reject_bare_direction_roots(tmp_path: Path, owned_root: str
 
 @pytest.mark.parametrize(
     "path",
-    ["temp/directions/alpha/file.txt:stream", "temp/directions/alpha/file.", "temp/directions/alpha/file ", "temp/directions/alpha/\x01file"],
+    [
+        "temp/directions/alpha/file.txt:stream",
+        "temp/directions/alpha/file.",
+        "temp/directions/alpha/file ",
+        "temp/directions/alpha/\x01file",
+    ],
 )
-def test_windows_ambiguous_ads_trailing_and_control_paths_are_refused(tmp_path: Path, path: str) -> None:
-    source = _packet_input(tmp_path, "alpha")
+def test_windows_ambiguous_ads_trailing_and_control_paths_are_refused(
+    tmp_path: Path, path: str
+) -> None:
+    source = _packet_input(tmp_path)
     source["owned_paths"] = [path]
     with pytest.raises(packets.PathRefusal):
         packets.build_packet(source, repo=tmp_path)
@@ -499,10 +544,12 @@ def test_windows_ambiguous_ads_trailing_and_control_paths_are_refused(tmp_path: 
         lambda value: value.update({"done_criteria": ["\t"]}),
     ],
 )
-def test_schema_and_normalizer_reject_the_same_boundary_inputs(tmp_path: Path, mutate: Any) -> None:
+def test_schema_and_normalizer_reject_the_same_boundary_inputs(
+    tmp_path: Path, mutate: Any
+) -> None:
     schema = json.loads(packets.SCHEMA_PATH.read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema)
-    valid = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
+    valid = packets.build_packet(_packet_input(tmp_path), repo=tmp_path)
     assert list(validator.iter_errors(valid)) == []
     assert packets.build_packet(valid, repo=tmp_path) == valid
 
@@ -511,41 +558,3 @@ def test_schema_and_normalizer_reject_the_same_boundary_inputs(tmp_path: Path, m
     assert list(validator.iter_errors(invalid)), invalid
     with pytest.raises(packets.WorkPacketError):
         packets.build_packet(invalid, repo=tmp_path)
-
-
-def test_windows_subprocesses_do_not_overlap_one_reconcile_key_handler(tmp_path: Path) -> None:
-    if os.name != "nt":
-        pytest.skip("cross-process lock regression is specific to the Windows host contract")
-    packet = packets.build_packet(_packet_input(tmp_path, "alpha"), repo=tmp_path)
-    packets.publish_packet(packet, repo=tmp_path)
-    marker = tmp_path / "handler-active.marker"
-    overlap = tmp_path / "handler-overlap.marker"
-    started = tmp_path / "handler-started.marker"
-    code = "\n".join(
-        [
-            "import sys, time",
-            "from pathlib import Path",
-            "from scripts import hmasd_work_packet as packets",
-            "repo = Path(sys.argv[1])",
-            "marker, overlap, started = (Path(value) for value in sys.argv[2:5])",
-            "def handler(packet, action):",
-            "    if marker.exists(): overlap.write_text('overlap', encoding='utf-8')",
-            "    marker.write_text('active', encoding='utf-8')",
-            "    started.write_text('started', encoding='utf-8')",
-            "    time.sleep(0.35)",
-            "    marker.unlink(missing_ok=True)",
-            "packets.reconcile_once(repo=repo, observed_tasks=[], handler=handler)",
-        ]
-    )
-    arguments = [sys.executable, "-c", code, str(tmp_path), str(marker), str(overlap), str(started)]
-    first = subprocess.Popen(arguments, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    deadline = time.monotonic() + 5
-    while not started.exists() and time.monotonic() < deadline:
-        time.sleep(0.01)
-    assert started.exists(), first.communicate(timeout=5)
-    second = subprocess.Popen(arguments, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    first_out, first_err = first.communicate(timeout=10)
-    second_out, second_err = second.communicate(timeout=10)
-    assert first.returncode == 0, (first_out, first_err)
-    assert second.returncode == 0, (second_out, second_err)
-    assert not overlap.exists()

@@ -22,7 +22,12 @@
     "work_id": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "scope_ref": { "$ref": "#/$defs/authority_ref" },
     "sender_identity": { "$ref": "#/$defs/identity" },
-    "target_identity": { "$ref": "#/$defs/identity" },
+    "target_identity": {
+      "allOf": [
+        { "$ref": "#/$defs/identity" },
+        { "not": { "const": "Workflow-Clerk" } }
+      ]
+    },
     "authority_refs": {
       "type": "array",
       "items": { "$ref": "#/$defs/authority_ref" },
@@ -100,12 +105,73 @@
       ]
     },
     "effect_ref": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["path"],
-      "properties": {
-        "path": { "$ref": "#/$defs/path" }
-      }
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path"],
+          "properties": {
+            "path": { "$ref": "#/$defs/path" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path", "resource_id"],
+          "properties": {
+            "kind": { "const": "run_manifest" },
+            "path": { "$ref": "#/$defs/path" },
+            "operation": {
+              "type": "string",
+              "enum": ["OBSERVE", "EXECUTE", "CANCEL", "PROMOTE"]
+            },
+            "resource_id": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]{1,63}/[a-z0-9][a-z0-9_-]{1,63}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path", "resource_id"],
+          "properties": {
+            "kind": { "const": "worktree" },
+            "path": { "$ref": "#/$defs/path" },
+            "operation": {
+              "type": "string",
+              "enum": [
+                "OBSERVE",
+                "PROVISION",
+                "RECORD_CANDIDATE",
+                "PREPARE_INTEGRATION",
+                "APPLY_INTEGRATION",
+                "PUSH",
+                "RELEASE",
+                "RETAIN"
+              ]
+            },
+            "resource_id": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]{1,63}/[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path", "resource_id"],
+          "properties": {
+            "kind": { "const": "external_operation" },
+            "path": { "$ref": "#/$defs/path" },
+            "operation": {
+              "type": "string",
+              "enum": ["OBSERVE", "SEND", "ARCHIVE"]
+            },
+            "resource_id": { "type": "string", "minLength": 1, "maxLength": 512 }
+          }
+        }
+      ]
     }
   }
 }
