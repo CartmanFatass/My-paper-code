@@ -679,3 +679,265 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         "authority.json",
     }
     assert LOCAL_FAKE_TRANSPORT_GOLDEN == "LOCAL_FAKE_TRANSPORT_GOLDEN"
+
+
+def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
+    tmp_path: Path,
+) -> None:
+    repo, code_sha = _native_worktree(tmp_path)
+    direction = repo / "docs" / "research" / "candidates" / "alpha"
+    _canonical_write(direction / "STATE.json", {"direction": "alpha", "revision": 1})
+    _canonical_write(direction / "DIRECTION.json", {"direction": "alpha", "revision": 1})
+    _canonical_write(
+        direction / "em" / "ENGINEERING_REQUEST.json",
+        {"owner": "CM-alpha", "run_id": "golden-run"},
+    )
+    request_ref = _file_ref(
+        repo, "docs/research/candidates/alpha/em/ENGINEERING_REQUEST.json"
+    )
+    manifest = _prepare_run(repo, code_sha)
+    manifest_locator = "temp/directions/alpha/exp/golden-run/manifest.json"
+    run_effect = {
+        "kind": "run_manifest",
+        "operation": "EXECUTE",
+        "path": manifest_locator,
+        "resource_id": "alpha/golden-run",
+    }
+    cm_packet = packets.build_packet(
+        _packet_source(
+            repo,
+            direction="alpha",
+            sender="EM-alpha",
+            target="CM-alpha",
+            objective="Run the one frozen golden command and return its terminal refs.",
+            owned_paths=[
+                "experiments/candidates/alpha/golden",
+                "temp/directions/alpha/exp/golden-run",
+            ],
+            authority_refs=[request_ref],
+            effect_refs=[run_effect],
+        ),
+        repo=repo,
+    )
+    packets.publish_packet(cm_packet, repo=repo)
+    cm_task = _task("CM-alpha", "thread-cm-alpha", direction="alpha")
+    projection = repo / ".codex" / "runtime" / "tasks.json"
+    projection.parent.mkdir(parents=True, exist_ok=True)
+    _canonical_write(projection, {"tasks": [{**cm_task, "lifecycle": "PARKED"}]})
+
+    marker = "HMASD_LOCAL_GOLDEN_OPERATOR_OK"
+    cm_return_count = 0
+    operator_create_count = 0
+    execute_count = 0
+    first_turn_inputs: list[dict[str, Any]] = []
+
+    class InterruptedCmPeer:
+        def __init__(self) -> None:
+            self.threads: dict[str, dict[str, Any]] = {
+                "thread-cm-alpha": {
+                    "id": "thread-cm-alpha",
+                    "name": "CM-alpha",
+                    "cwd": str(repo),
+                    "threadSource": "hmasd-manager:CM-alpha:g1",
+                    "status": {"type": "idle"},
+                    "turns": [],
+                }
+            }
+            self.transport = _LocalFakeAppServer(repo)
+            self.transport.threads = self.threads
+            self.transport.requests = []
+
+        def write_line(self, data: bytes) -> None:
+            nonlocal cm_return_count, operator_create_count, execute_count
+            request = json.loads(data)
+            self.transport.requests.append(request)
+            request_id = request.get("id")
+            if request_id is None:
+                return
+            method = request.get("method")
+            params = request.get("params", {})
+            if method == "initialize":
+                self.transport._emit(
+                    request_id,
+                    {"serverInfo": {"name": "local-fake", "version": "1"}},
+                )
+                return
+            if method == "thread/list":
+                self.transport._emit(
+                    request_id,
+                    {"data": list(self.threads.values()), "nextCursor": None},
+                )
+                return
+            thread_id = params.get("threadId")
+            if method == "thread/read":
+                self.transport._emit(request_id, {"thread": self.threads[thread_id]})
+                return
+            if method == "thread/resume":
+                self.transport._emit(request_id, {"thread": self.threads[thread_id]})
+                return
+            if method != "turn/start":
+                raise AssertionError(f"unexpected fake App Server method: {method!r}")
+            assert thread_id == "thread-cm-alpha"
+            attempt = len(self.threads[thread_id]["turns"]) + 1
+            turn = {
+                "id": f"turn-cm-{attempt}",
+                "status": "interrupted" if attempt == 1 else "completed",
+                "items": [{"type": "userMessage", "content": params["input"]}],
+            }
+            self.threads[thread_id]["turns"].append(turn)
+            if attempt == 1:
+                first_turn_inputs.extend(params["input"])
+                operator_create_count += 1
+                operator_thread = {
+                    "id": "thread-operator-golden-run",
+                    "name": "native_ll_golden-run",
+                    "parentThreadId": "thread-cm-alpha",
+                    "agentRole": "hmasd-experiment-operator",
+                    "cwd": str(repo),
+                    "status": {"type": "idle"},
+                    "turns": [
+                        {
+                            "id": "turn-operator-golden-run",
+                            "status": "completed",
+                            "items": [
+                                {
+                                    "type": "userMessage",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": json.dumps(
+                                                {
+                                                    "logical_identity": "hmasd-experiment-operator",
+                                                    "run_id": "golden-run",
+                                                }
+                                            ),
+                                        }
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+                self.threads[operator_thread["id"]] = operator_thread
+                execute_count += 1
+                completed = _run(
+                    [sys.executable, str(RUN_SCRIPT), "execute", "--manifest", str(manifest)],
+                    cwd=repo,
+                )
+                assert completed.returncode == 0
+            else:
+                manifest_ref = _file_ref(repo, manifest_locator)
+                stdout_ref = _file_ref(
+                    repo, "temp/directions/alpha/exp/golden-run/stdout.log"
+                )
+                stderr_ref = _file_ref(
+                    repo, "temp/directions/alpha/exp/golden-run/stderr.log"
+                )
+                cm_result = {
+                    "schema_version": 1,
+                    "role": "hmasd-cm",
+                    "logical_identity": "CM-alpha",
+                    "generation": 1,
+                    "assignment_id": cm_packet["work_id"],
+                    "status": "COMPLETED",
+                    "materiality": "DIRECTION",
+                    "summary": "The frozen Operator run reached one terminal result.",
+                    "changed_paths": [manifest_ref["path"]],
+                    "state_refs": [manifest_ref],
+                    "artifact_refs": [stdout_ref, stderr_ref],
+                    "checkpoint_sha": None,
+                    "decision_requests": [],
+                    "next_action": {"kind": "NONE", "input_refs": []},
+                    "payload": {
+                        "kind": "cm",
+                        "direction_id": "alpha",
+                        "scope_ref": request_ref,
+                        "base_sha": code_sha,
+                        "candidate_sha": None,
+                        "verification_refs": [manifest_ref, stdout_ref, stderr_ref],
+                        "integrated_sha": None,
+                    },
+                }
+                packets.publish_return(
+                    repo=repo,
+                    work_id=cm_packet["work_id"],
+                    observed_tasks=[cm_task],
+                    agent_result=cm_result,
+                )
+                cm_return_count += 1
+            self.transport._emit(
+                request_id,
+                {"turn": {"id": turn["id"], "status": "inProgress", "items": []}},
+            )
+            self.transport.pending.append(
+                (
+                    json.dumps(
+                        {
+                            "method": "turn/completed",
+                            "params": {"threadId": thread_id, "turn": turn},
+                        }
+                    )
+                    + "\n"
+                ).encode("utf-8")
+            )
+
+        def read_line(self, timeout: float) -> bytes | None:
+            return self.transport.read_line(timeout)
+
+        def close(self) -> None:
+            self.transport.close()
+
+    peer = InterruptedCmPeer()
+    with native.AppServerClient(transport=peer, timeout=0.2) as client:
+        first = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
+        repeated = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
+
+    assert first["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
+        _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
+        _file_ref(repo, "temp/directions/alpha/exp/golden-run/stderr.log"),
+    ]
+    assert repeated["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    operator_contracts = [
+        json.loads(item["text"])
+        for item in first_turn_inputs
+        if item.get("type") == "text"
+        and item.get("text", "").startswith('{"assignment_id"')
+    ]
+    assert operator_contracts == [
+        {
+            "assignment_id": "cm-owned-operator-golden",
+            "command": [sys.executable, "-c", f"print('{marker}')"],
+            "cwd": str(repo),
+            "execute_argv": [
+                sys.executable,
+                str(RUN_SCRIPT),
+                "execute",
+                "--manifest",
+                str(manifest),
+            ],
+            "logical_identity": "hmasd-experiment-operator",
+            "manifest": manifest_locator,
+            "output_root": str(manifest.parent),
+            "parent_identity": "CM-alpha",
+            "protocol": "hmasd.experiment-operator.assignment.v1",
+            "run_id": "golden-run",
+            "run_owner": "Operator-golden-run",
+            "task_name": "native_ll_golden-run",
+        }
+    ]
+    manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
+    assert manifest_document["status"] == "SUCCEEDED"
+    assert manifest_document["process"]["exit_code"] == 0
+    assert manifest_document["process"]["group_quiescent"] is True
+    assert (manifest.parent / "stdout.log").read_text(encoding="utf-8").count(marker) == 1
+    assert operator_create_count == 1
+    assert execute_count == 1
+    assert cm_return_count == 1
+    assert len(peer.threads["thread-cm-alpha"]["turns"]) == 2
+    assert [
+        thread["id"]
+        for thread in peer.threads.values()
+        if thread.get("parentThreadId") == "thread-cm-alpha"
+        and thread.get("agentRole") == "hmasd-experiment-operator"
+    ] == ["thread-operator-golden-run"]
