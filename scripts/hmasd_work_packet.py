@@ -1491,6 +1491,8 @@ def _bind_agent_result(
     base_plan: Mapping[str, Any],
     agent_result: Mapping[str, Any],
     next_packet_draft: Mapping[str, Any] | None,
+    *,
+    allow_retired_runtime_result: bool = False,
 ) -> dict[str, Any]:
     if base_plan.get("task_resolution", {}).get("status") != "REUSE":
         return _protocol_defect(
@@ -1509,6 +1511,17 @@ def _bind_agent_result(
             field_path=_state_error_field(exc),
             expected="valid agent_result",
             actual=str(exc),
+        )
+    if (
+        not allow_retired_runtime_result
+        and agent_result["logical_identity"] == "hmasd-workflow-recovery-manager"
+    ):
+        return _protocol_defect(
+            base_plan,
+            code="RETIRED_RUNTIME_ROLE",
+            field_path="logical_identity",
+            expected="an active runtime role",
+            actual=agent_result["logical_identity"],
         )
 
     resolution = base_plan["task_resolution"]
@@ -1908,6 +1921,7 @@ def _reconstruct_return_plan(
         base_plan,
         witness["agent_result"],
         witness.get("next_packet_draft"),
+        allow_retired_runtime_result=True,
     )
     if plan["verb"] != "CONFLICT":
         plan["task_resolution"] = {

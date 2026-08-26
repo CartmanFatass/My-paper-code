@@ -123,6 +123,99 @@ def _result(packet: dict[str, Any], direction: str = "alpha") -> dict[str, Any]:
     }
 
 
+def _legacy_recovery_result(packet: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "role": "hmasd-workflow-recovery-manager",
+        "logical_identity": "hmasd-workflow-recovery-manager",
+        "generation": 1,
+        "assignment_id": packet["work_id"],
+        "status": "COMPLETED",
+        "materiality": "LOCAL",
+        "summary": "Recorded one historical recovery observation.",
+        "changed_paths": [],
+        "state_refs": [],
+        "artifact_refs": [],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "recovery",
+            "failure_class": "terminal_without_return",
+            "observed_refs": [],
+            "attempts": [],
+            "outcome": "resume_same_identity",
+            "resume_condition": None,
+        },
+    }
+
+
+def test_retired_recovery_role_rejects_new_return_and_reconstructs_legacy_witness(
+    tmp_path: Path,
+) -> None:
+    source = _packet_input(tmp_path)
+    source["sender_identity"] = "Root"
+    source["target_identity"] = "hmasd-workflow-recovery-manager"
+    packet = packets.build_packet(source, repo=tmp_path)
+    packets.publish_packet(packet, repo=tmp_path)
+    observed = [
+        {
+            "logical_identity": "hmasd-workflow-recovery-manager",
+            "generation": 1,
+            "lifecycle": "RUNNING",
+            "thread_id": "thread-legacy-recovery",
+        }
+    ]
+    result = _legacy_recovery_result(packet)
+
+    rejected = packets.reconcile_once(
+        repo=tmp_path,
+        work_id=packet["work_id"],
+        observed_tasks=observed,
+        agent_result=result,
+    )["plan"]
+    assert rejected["verb"] == "CONFLICT"
+    assert rejected["defect"]["code"] == "RETIRED_RUNTIME_ROLE"
+    assert rejected["defect"]["field_path"] == "logical_identity"
+    with pytest.raises(packets.InvalidPacket, match="RETIRED_RUNTIME_ROLE"):
+        packets.publish_return(
+            repo=tmp_path,
+            work_id=packet["work_id"],
+            observed_tasks=observed,
+            agent_result=result,
+        )
+
+    witness = {
+        "schema_version": 1,
+        "work_id": packet["work_id"],
+        "receiver": {
+            "logical_identity": "hmasd-workflow-recovery-manager",
+            "generation": 1,
+        },
+        "agent_result": result,
+    }
+    locator = (
+        tmp_path
+        / ".codex/runtime/work/returns"
+        / packet["work_id"]
+        / "return.json"
+    )
+    locator.parent.mkdir(parents=True)
+    locator.write_bytes(packets.hmasd_state.canonical_bytes(witness))
+
+    reconstructed = packets.reconcile_once(
+        repo=tmp_path,
+        work_id=packet["work_id"],
+        observed_tasks=[],
+    )["plan"]
+    assert reconstructed["verb"] == "NOOP_TERMINAL"
+    assert reconstructed["task_resolution"] == {
+        "status": "RETURN_WITNESS",
+        "logical_identity": "hmasd-workflow-recovery-manager",
+        "generation": 1,
+    }
+
+
 def test_publish_return_is_one_immutable_entity_under_concurrency(tmp_path: Path) -> None:
     packet, observed = _setup(tmp_path)
     result = _result(packet)

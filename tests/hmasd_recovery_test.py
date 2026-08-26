@@ -210,8 +210,8 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
         assert path.read_bytes() == before
 
 
-def test_retired_recovery_manager_cannot_publish_a_new_result(tmp_path: Path) -> None:
-    """Recovery is mechanical; the retired runtime role cannot own new results."""
+def test_legacy_recovery_manager_result_remains_schema_valid(tmp_path: Path) -> None:
+    """Historical recovery evidence remains readable after the runtime role retires."""
 
     result_document = _load(PHASE0_FIXTURES / "agent_result.json")
     result_document.update(
@@ -228,16 +228,17 @@ def test_retired_recovery_manager_cannot_publish_a_new_result(tmp_path: Path) ->
                 "resume_condition": None,
             },
             "role": "hmasd-workflow-recovery-manager",
-            "summary": "A retired runtime role attempted to publish a result.",
+            "summary": "Historical recovery evidence retained for reconstruction.",
         }
     )
     path = tmp_path / "retired-recovery-result.json"
     path.write_text(json.dumps(result_document, sort_keys=True), encoding="utf-8")
 
+    before = path.read_bytes()
     observed = _validate("agent_result", path)
 
-    assert observed.returncode != 0
-    assert "retired" in (observed.stdout + observed.stderr).lower()
+    assert observed.returncode == 0, (observed.stdout, observed.stderr)
+    assert path.read_bytes() == before
 
 
 def test_running_reconcile_observes_once_and_duplicate_execute_is_refused(

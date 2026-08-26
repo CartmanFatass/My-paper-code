@@ -625,10 +625,6 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
         if role != "hmasd-cm" or identity != f"CM-{payload['direction_id']}":
             raise OwnershipError("CM result does not match its direction manager")
     else:
-        if payload_kind == "recovery":
-            raise OwnershipError(
-                "recovery result runtime owner is retired; use run-chain and effect observers"
-            )
         permitted_roles = {
             "implementation": {"hmasd-implementer", "hmasd-implementer-terra"},
             "review": {
@@ -649,6 +645,7 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
                 "hmasd-external-gemini-transport",
             },
             "artifact": {"hmasd-research-artifact-writer"},
+            "recovery": {"hmasd-workflow-recovery-manager"},
         }
         if role not in permitted_roles[payload_kind]:
             raise OwnershipError("agent result role does not own payload")
