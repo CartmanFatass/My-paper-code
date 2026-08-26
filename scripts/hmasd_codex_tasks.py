@@ -54,6 +54,11 @@ _CONFORMANCE_SCHEMA = {
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]{0,127}\Z")
 _DISPATCH_VERBS = {"CREATE_TASK_INTENT", "DISPATCH_EXISTING"}
+_CAPACITY_ERRORS = {
+    "usageLimitExceeded",
+    "sessionBudgetExceeded",
+    "serverOverloaded",
+}
 _PARTICIPANT_SLICE_INSTRUCTION = (
     "Complete only the exact Work Packet slice above. First reuse any existing exact "
     "return; otherwise read the packet, complete its bounded assignment, publish its "
@@ -973,12 +978,19 @@ class AppServerClient:
     @staticmethod
     def _terminal_fact(thread_id: str, turn: Mapping[str, Any]) -> dict[str, Any]:
         status = turn.get("status")
-        return {
+        fact = {
             "status": "COMPLETED" if status == "completed" else "TERMINAL",
             "thread_id": thread_id,
             "turn_id": turn.get("id"),
             "turn_status": status,
         }
+        error = turn.get("error")
+        capacity_error = (
+            error.get("codexErrorInfo") if isinstance(error, Mapping) else None
+        )
+        if status == "failed" and capacity_error in _CAPACITY_ERRORS:
+            fact["capacity_error"] = capacity_error
+        return fact
 
     def observe(self, thread_id: str, turn_id: str | None = None) -> dict[str, Any]:
         read = self.read_thread(thread_id)
@@ -2277,6 +2289,15 @@ class AppServerClient:
             )
             if terminal.get("status") not in {"COMPLETED", "TERMINAL"}:
                 return terminal
+            if terminal.get("capacity_error") in _CAPACITY_ERRORS:
+                return {
+                    "status": "CAPACITY_PAUSE",
+                    "work_id": work_id,
+                    "thread_id": terminal.get("thread_id"),
+                    "turn_id": terminal.get("turn_id"),
+                    "turn_status": terminal.get("turn_status"),
+                    "capacity_error": terminal["capacity_error"],
+                }
             fresh = self._list_all_threads(cwd=cwd)
             if fresh.get("status") != "OK":
                 return fresh
@@ -2623,6 +2644,28 @@ class AppServerClient:
                 )
                 if result.get("status") == "UNKNOWN":
                     return stopped("UNKNOWN_COMMITMENT", result=result)
+                if result.get("status") == "CAPACITY_PAUSE":
+                    manager = self._canonical_manager(
+                        str(plan.get("target_identity", ""))
+                    )
+                    direction_id = (
+                        None if manager is None else manager["direction_id"]
+                    )
+                    scope = "direction" if direction_id is not None else "project"
+                    error = result["capacity_error"]
+                    thread_id = result.get("thread_id")
+                    turn_id = result.get("turn_id")
+                    return stopped(
+                        "CAPACITY_PAUSE",
+                        failure_scope=scope,
+                        failure_ref=f"native_turn:{thread_id}:{turn_id}:{error}",
+                        evidence={
+                            "thread_id": thread_id,
+                            "turn_id": turn_id,
+                            "turn_status": result.get("turn_status"),
+                            "codex_error_info": error,
+                        },
+                    )
                 if result.get("status") == "RETURN_WITNESS_MISSING_AFTER_ATTEMPTS":
                     resolution = plan.get("task_resolution", {})
                     direction_id = (
