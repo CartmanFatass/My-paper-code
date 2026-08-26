@@ -28,6 +28,7 @@ _WORK_ID = re.compile(r"[0-9a-f]{64}\Z")
 _FULL_SHA = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
 _TRANSACTION_TIMEOUT_SECONDS = 5
 _POST_SEND_OBSERVE_RESERVE_SECONDS = 1
+_NEW_PATH_CLEANUP_RESERVE_SECONDS = 1
 _TRANSACTION_DEADLINE: ContextVar[float | None] = ContextVar(
     "hmasd_direction_git_transaction_deadline", default=None
 )
@@ -625,7 +626,29 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
         )
         try:
             if new_paths:
-                _run_git(repo, "add", "--intent-to-add", "--", *new_paths)
+                remaining = _remaining_timeout()
+                assert remaining is not None
+                if remaining <= _NEW_PATH_CLEANUP_RESERVE_SECONDS:
+                    raise DirectionGitError(
+                        "transaction deadline cannot preserve new-path cleanup budget"
+                    )
+                _run_git(
+                    repo,
+                    "add",
+                    "--intent-to-add",
+                    "--",
+                    *new_paths,
+                    timeout=remaining - _NEW_PATH_CLEANUP_RESERVE_SECONDS,
+                )
+            commit_timeout = None
+            if new_paths:
+                remaining = _remaining_timeout()
+                assert remaining is not None
+                if remaining <= _NEW_PATH_CLEANUP_RESERVE_SECONDS:
+                    raise DirectionGitError(
+                        "transaction deadline cannot preserve new-path cleanup budget"
+                    )
+                commit_timeout = remaining - _NEW_PATH_CLEANUP_RESERVE_SECONDS
             _run_git(
                 repo,
                 "-c",
@@ -638,6 +661,7 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                 message,
                 "--",
                 *requested,
+                timeout=commit_timeout,
             )
         except DirectionGitError:
             if new_paths:

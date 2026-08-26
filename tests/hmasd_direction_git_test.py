@@ -123,6 +123,28 @@ def _cli(repo: Path, *args: str) -> tuple[subprocess.CompletedProcess[str], dict
     return completed, json.loads(completed.stdout)
 
 
+def _git_path_state(repo: Path, paths: list[str]) -> tuple[str, str]:
+    status = _git(
+        repo,
+        "status",
+        "--porcelain=v2",
+        "-z",
+        "--untracked-files=all",
+        "--",
+        *paths,
+    ).stdout
+    entries = _git(
+        repo,
+        "ls-files",
+        "--stage",
+        "-v",
+        "-z",
+        "--",
+        *paths,
+    ).stdout
+    return status, entries
+
+
 def test_commit_push_isolates_exact_path_and_preserves_unrelated_staged_change(
     tmp_path: Path,
 ) -> None:
@@ -205,7 +227,7 @@ def test_commit_push_adds_exact_owned_untracked_file_and_preserves_unrelated_sta
     )
 
 
-def test_commit_identity_failure_leaves_head_and_index_byte_identical(
+def test_commit_identity_failure_restores_public_git_path_state(
     tmp_path: Path,
     monkeypatch: Any,
 ) -> None:
@@ -222,7 +244,7 @@ def test_commit_identity_failure_leaves_head_and_index_byte_identical(
     _write(repo / "intent.py", "intent to add\n")
     _git(repo, "add", "--intent-to-add", "intent.py")
     before_head = _git(repo, "rev-parse", "HEAD").stdout.strip()
-    before_index = (repo / ".git/index").read_bytes()
+    observed_paths = [assigned, partial, "notes.txt", "intent.py"]
     _git(repo, "config", "--unset-all", "user.name")
     _git(repo, "config", "--unset-all", "user.email")
     _git(repo, "config", "user.useConfigOnly", "true")
@@ -237,6 +259,7 @@ def test_commit_identity_failure_leaves_head_and_index_byte_identical(
         "GIT_COMMITTER_EMAIL",
     ):
         monkeypatch.delenv(name, raising=False)
+    before_state = _git_path_state(repo, observed_paths)
 
     completed, result = _cli(
         repo,
@@ -253,7 +276,68 @@ def test_commit_identity_failure_leaves_head_and_index_byte_identical(
     assert result["status"] == "REFUSED"
     assert result["push_attempted"] is False
     assert _git(repo, "rev-parse", "HEAD").stdout.strip() == before_head
-    assert (repo / ".git/index").read_bytes() == before_index
+    assert _git_path_state(repo, observed_paths) == before_state
+
+
+def test_new_path_commit_timeout_uses_bounded_cleanup_without_state_leak(
+    tmp_path: Path,
+    monkeypatch: Any,
+    capsys: Any,
+) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/new_timeout.py"
+    _write(repo / assigned, "VALUE = 'new request'\n")
+    partial = "experiments/candidates/alpha/change.py"
+    _write(repo / partial, "VALUE = 2  # staged\n")
+    _git(repo, "add", partial)
+    _write(repo / partial, "VALUE = 3  # working tree\n")
+    _write(repo / "notes.txt", "unrelated staged content\n")
+    _git(repo, "add", "notes.txt")
+    _write(repo / "intent.py", "intent to add\n")
+    _git(repo, "add", "--intent-to-add", "intent.py")
+    observed_paths = [assigned, partial, "notes.txt", "intent.py"]
+    before_head = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    before_state = _git_path_state(repo, observed_paths)
+    real_run = subprocess.run
+    commit_calls = 0
+    push_calls = 0
+
+    def exhaust_commit_timeout(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal commit_calls, push_calls
+        command = args[0]
+        if command[0] == "git" and "commit" in command:
+            commit_calls += 1
+            time.sleep(float(kwargs["timeout"]) + 0.05)
+            raise subprocess.TimeoutExpired(command, timeout=kwargs["timeout"])
+        if command[:2] == ["git", "push"]:
+            push_calls += 1
+        return real_run(*args, **kwargs)
+
+    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", exhaust_commit_timeout)
+    returncode = hmasd_direction_git.main(
+        [
+            "commit-push",
+            "--repo",
+            str(repo),
+            "--work-id",
+            packet["work_id"],
+            "--path",
+            assigned,
+        ]
+    )
+    result = json.loads(capsys.readouterr().out)
+    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", real_run)
+
+    assert returncode == 2, result
+    assert result["status"] == "REFUSED"
+    assert result["candidate_sha"] is None
+    assert result["push_attempted"] is False
+    assert _git(repo, "rev-parse", "HEAD").stdout.strip() == before_head
+    assert _git_path_state(repo, observed_paths) == before_state
+    assert _git(repo, "log", "--format=%H", f"--grep={packet['work_id']}").stdout == ""
+    assert commit_calls == 1
+    assert push_calls == 0
 
 
 def test_installed_commit_hook_is_not_executed(tmp_path: Path) -> None:
