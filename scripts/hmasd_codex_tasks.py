@@ -499,9 +499,21 @@ class AppServerClient:
             "thread": self._safe_thread_fact(full["thread"], include_turns=True),
         }
 
-    def create_thread(self, *, cwd: str, target_identity: str) -> dict[str, Any]:
+    def create_thread(
+        self,
+        *,
+        cwd: str,
+        target_identity: str,
+        generation: int | None = None,
+    ) -> dict[str, Any]:
         if _IDENTITY.fullmatch(target_identity) is None:
             raise ValueError("target identity is invalid")
+        if generation is not None and (
+            not isinstance(generation, int)
+            or isinstance(generation, bool)
+            or generation < 1
+        ):
+            raise ValueError("generation must be a positive integer")
         initialized = self._ensure_initialized()
         if initialized["status"] != "OK":
             return initialized
@@ -511,6 +523,10 @@ class AppServerClient:
             "cwd": cwd,
             "sandbox": "danger-full-access",
         }
+        if generation is not None:
+            params["threadSource"] = self._manager_thread_source(
+                target_identity, generation
+            )
         if runtime is not None:
             params.update(
                 {
@@ -707,6 +723,10 @@ class AppServerClient:
         if target_identity.startswith("CM-"):
             return {"model": "gpt-5.6-sol", "effort": "high"}
         return None
+
+    @staticmethod
+    def _manager_thread_source(target_identity: str, generation: int) -> str:
+        return f"hmasd-manager:{target_identity}:g{generation}"
 
     def send(
         self,
@@ -1328,7 +1348,6 @@ class AppServerClient:
             initial_task_rows = self._native_task_snapshot(
                 rows, self._task_rows(observed_tasks)
             )
-            reconcile_seed_tasks = list(initial_task_rows)
             exact = [row for row in rows if row.get("name") == target]
             exact_thread_ids: list[str] = []
             for row in exact:
@@ -1353,6 +1372,65 @@ class AppServerClient:
             thread_full: dict[str, Any] | None = None
             needs_create = False
             resolution = plan.get("task_resolution", {})
+            tagged_thread: Mapping[str, Any] | None = None
+            tagged_generation = (
+                resolution.get("generation")
+                if isinstance(resolution, Mapping)
+                and resolution.get("status") in {"CREATE_TASK", "REUSE"}
+                else None
+            )
+            if (
+                isinstance(tagged_generation, int)
+                and not isinstance(tagged_generation, bool)
+                and tagged_generation >= 1
+            ):
+                expected_source = self._manager_thread_source(
+                    str(target), tagged_generation
+                )
+                tagged = [
+                    row for row in rows if row.get("threadSource") == expected_source
+                ]
+                if len(tagged) > 1:
+                    return {
+                        "status": "TASK_IDENTITY_CONFLICT",
+                        "target_identity": target,
+                        "reason": "MULTIPLE_TARGET_TAGGED_NATIVE_TASKS",
+                        "thread_ids": sorted(
+                            str(row.get("id")) for row in tagged
+                        ),
+                    }
+                if tagged:
+                    tagged_thread = tagged[0]
+                    tagged_thread_id = tagged_thread.get("id")
+                    tagged_lifecycle = self._native_lifecycle(
+                        tagged_thread.get("status")
+                    )
+                    if (
+                        not isinstance(tagged_thread_id, str)
+                        or not tagged_thread_id
+                        or tagged_lifecycle is None
+                    ):
+                        return {
+                            "status": "TASK_IDENTITY_CONFLICT",
+                            "target_identity": target,
+                            "reason": "TARGET_TAGGED_NATIVE_TASK_INVALID",
+                        }
+                    initial_task_rows = [
+                        row
+                        for row in initial_task_rows
+                        if row.get("thread_id") != tagged_thread_id
+                    ]
+                    initial_task_rows.append(
+                        {
+                            "logical_identity": str(target),
+                            "kind": resolution.get("kind"),
+                            "direction_id": resolution.get("direction_id"),
+                            "generation": tagged_generation,
+                            "lifecycle": tagged_lifecycle,
+                            "thread_id": tagged_thread_id,
+                        }
+                    )
+            reconcile_seed_tasks = list(initial_task_rows)
             known_thread_ids = {
                 value
                 for value in (
@@ -1365,6 +1443,75 @@ class AppServerClient:
             task_resolution = hmasd_work_packet.resolve_target_task(
                 str(target), initial_task_rows
             )
+            if (
+                isinstance(resolution, Mapping)
+                and resolution.get("status") in {"CREATE_TASK", "REUSE"}
+                and task_resolution.get("status") in {"CREATE_TASK", "REUSE"}
+            ):
+                fresh_thread_id = task_resolution.get("thread_id")
+                fresh_row = next(
+                    (
+                        row
+                        for row in initial_task_rows
+                        if row.get("thread_id") == fresh_thread_id
+                    ),
+                    {},
+                )
+                expected_binding = {
+                    "logical_identity": str(target),
+                    "kind": resolution.get("kind"),
+                    "direction_id": resolution.get("direction_id"),
+                    "generation": resolution.get("generation"),
+                    "thread_id": resolution.get("thread_id"),
+                }
+                observed_binding = {
+                    "logical_identity": task_resolution.get("logical_identity"),
+                    "kind": task_resolution.get("kind"),
+                    "direction_id": task_resolution.get(
+                        "direction_id", fresh_row.get("direction_id")
+                    ),
+                    "generation": task_resolution.get("generation"),
+                    "thread_id": task_resolution.get("thread_id"),
+                }
+                target_text = str(target)
+                if target_text == "Portfolio":
+                    expected_binding["kind"] = "portfolio"
+                    manager_fields = {"kind", "direction_id"}
+                elif target_text.startswith(("EM-", "CM-")):
+                    expected_binding["kind"] = target_text[:2].lower()
+                    expected_binding["direction_id"] = target_text[3:]
+                    manager_fields = {"kind", "direction_id"}
+                else:
+                    manager_fields = set()
+                bound_fields = {"logical_identity", *manager_fields}
+                bound_fields.update(
+                    field
+                    for field in (
+                        "kind",
+                        "direction_id",
+                        "generation",
+                        "thread_id",
+                    )
+                    if resolution.get(field) is not None
+                )
+                expected_fact = {
+                    field: expected_binding[field]
+                    for field in expected_binding
+                    if field in bound_fields
+                }
+                observed_fact = {
+                    field: observed_binding[field]
+                    for field in observed_binding
+                    if field in bound_fields
+                }
+                if expected_fact != observed_fact:
+                    return {
+                        "status": "TASK_IDENTITY_CONFLICT",
+                        "target_identity": target,
+                        "reason": "PLAN_BOUND_TASK_MISMATCH",
+                        "expected": expected_fact,
+                        "observed": observed_fact,
+                    }
             if task_resolution.get("status") == "REUSE":
                 cached_thread_id = task_resolution.get("thread_id")
                 if isinstance(cached_thread_id, str) and cached_thread_id:
@@ -1384,29 +1531,51 @@ class AppServerClient:
             if verb == "CREATE_TASK_INTENT":
                 if known_thread_ids:
                     thread_id = next(iter(known_thread_ids))
-                    if not exact:
+                    if tagged_thread is not None and not exact:
+                        thread_full = self._read_thread_full(thread_id)
+                        observed_thread = thread_full.get("thread", {})
+                        observed_name = (
+                            observed_thread.get("name")
+                            if isinstance(observed_thread, Mapping)
+                            else None
+                        )
+                        expected_source = self._manager_thread_source(
+                            str(target), int(tagged_generation)
+                        )
+                        if (
+                            thread_full.get("status") != "OK"
+                            or observed_thread.get("threadSource") != expected_source
+                            or not self._same_cwd(observed_thread.get("cwd"), cwd)
+                        ):
+                            return {
+                                "status": "TASK_IDENTITY_CONFLICT",
+                                "target_identity": target,
+                                "thread_id": thread_id,
+                                "reason": "TARGET_TAGGED_NATIVE_TASK_CHANGED",
+                            }
+                        if observed_name in {None, ""}:
+                            return {
+                                "status": "UNKNOWN",
+                                "reason": "THREAD_CREATED_NAME_UNKNOWN",
+                                "target_identity": target,
+                                "thread_id": thread_id,
+                                "observed_name": observed_name,
+                                "observed_status": observed_thread.get("status"),
+                            }
+                        if observed_name != target:
+                            return {
+                                "status": "TASK_IDENTITY_CONFLICT",
+                                "target_identity": target,
+                                "thread_id": thread_id,
+                                "observed_name": observed_name,
+                            }
+                    elif not exact:
                         thread_full = self._read_known_identity(
                             thread_id, target_identity=str(target), cwd=cwd
                         )
                         if thread_full.get("status") != "OK":
                             return thread_full
                 else:
-                    unnamed_thread_ids = sorted(
-                        str(row["id"])
-                        for row in rows
-                        if (
-                            row.get("name") in {None, ""}
-                            and isinstance(row.get("id"), str)
-                            and row.get("id")
-                        )
-                    )
-                    if unnamed_thread_ids:
-                        return {
-                            "status": "TASK_IDENTITY_CONFLICT",
-                            "target_identity": target,
-                            "thread_ids": unnamed_thread_ids,
-                            "reason": "UNBOUND_UNNAMED_NATIVE_TASK",
-                        }
                     needs_create = True
             else:
                 thread_id = resolution.get("thread_id") or plan.get("thread_id")
@@ -1479,7 +1648,11 @@ class AppServerClient:
                     and compare.get("outcome") != "DISJOINT"
                 )
             if needs_create:
-                created = self.create_thread(cwd=cwd, target_identity=target)
+                created = self.create_thread(
+                    cwd=cwd,
+                    target_identity=target,
+                    generation=task_resolution["generation"],
+                )
                 if created["status"] != "CREATED":
                     return created
                 thread_id = created["thread_id"]

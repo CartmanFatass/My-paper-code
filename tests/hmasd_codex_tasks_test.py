@@ -73,6 +73,110 @@ class FakeTransport:
         self.closed = True
 
 
+class StatefulParticipantPeer:
+    """Native participant lifecycle peer with one scenario-specific turn hook."""
+
+    def __init__(
+        self,
+        cwd: Path,
+        *,
+        turn_hook: Callable[
+            [dict[str, Any], dict[str, Any]], dict[str, Any]
+        ],
+        start_status: str = "idle",
+        instruction_sources: list[str] | None = None,
+    ) -> None:
+        self.cwd = cwd
+        self.turn_hook = turn_hook
+        self.start_status = start_status
+        self.instruction_sources = instruction_sources or []
+        self.thread: dict[str, Any] | None = None
+        self.transport = FakeTransport(self._respond)
+
+    @property
+    def requests(self) -> list[dict[str, Any]]:
+        return self.transport.requests
+
+    def _respond(self, request: dict[str, Any], peer: FakeTransport) -> None:
+        request_id = request.get("id")
+        if request_id is None:
+            return
+        method = request.get("method")
+        if method == "initialize":
+            result: dict[str, Any] = {
+                "serverInfo": {"name": "fake", "version": "1"}
+            }
+        elif method == "thread/list":
+            result = {
+                "data": [] if self.thread is None else [self.thread],
+                "nextCursor": None,
+            }
+        elif method == "thread/start":
+            self.thread = {
+                "id": "thread-em-alpha",
+                "name": None,
+                "cwd": request["params"]["cwd"],
+                "threadSource": request["params"].get("threadSource"),
+                "status": {"type": self.start_status},
+                "turns": [],
+            }
+            result = {
+                "thread": self.thread,
+                "model": "fake",
+                "modelProvider": "fake",
+                "cwd": request["params"]["cwd"],
+                "approvalPolicy": "never",
+                "sandbox": {"type": "dangerFullAccess"},
+                "instructionSources": self.instruction_sources,
+            }
+        elif method == "thread/name/set":
+            assert self.thread is not None
+            self.thread["name"] = request["params"]["name"]
+            result = {}
+        elif method == "thread/read":
+            assert self.thread is not None
+            result = {"thread": self.thread}
+        elif method == "thread/resume":
+            assert self.thread is not None
+            result = {
+                "thread": self.thread,
+                "model": "fake",
+                "modelProvider": "fake",
+                "cwd": str(self.cwd),
+                "approvalPolicy": "never",
+                "sandbox": {"type": "dangerFullAccess"},
+            }
+        elif method == "turn/start":
+            assert self.thread is not None
+            terminal_turn = self.turn_hook(request, self.thread)
+            self.thread["turns"] = [terminal_turn]
+            peer.emit(
+                {
+                    "id": request_id,
+                    "result": {
+                        "turn": {
+                            "id": terminal_turn["id"],
+                            "status": "inProgress",
+                            "items": [],
+                        }
+                    },
+                }
+            )
+            peer.emit(
+                {
+                    "method": "turn/completed",
+                    "params": {
+                        "threadId": self.thread["id"],
+                        "turn": terminal_turn,
+                    },
+                }
+            )
+            return
+        else:
+            raise AssertionError(f"unexpected method: {method}")
+        peer.emit({"id": request_id, "result": result})
+
+
 def response_peer(
     *,
     history_text: str | None = None,
@@ -393,6 +497,7 @@ def test_execute_plan_never_recreates_an_unnamed_thread_after_name_unknown(
                 "id": f"thread-{len(native_threads) + 1}",
                 "name": None,
                 "cwd": request["params"]["cwd"],
+                "threadSource": request["params"]["threadSource"],
                 "status": {"type": "idle"},
                 "turns": [],
             }
@@ -421,6 +526,13 @@ def test_execute_plan_never_recreates_an_unnamed_thread_after_name_unknown(
         "verb": "CREATE_TASK_INTENT",
         "work_id": WORK_ID,
         "target_identity": "EM-alpha",
+        "task_resolution": {
+            "status": "CREATE_TASK",
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 1,
+        },
     }
     with tasks.AppServerClient(transport=peer, timeout=0.01) as client:
         first = client.execute_plan(
@@ -442,15 +554,68 @@ def test_execute_plan_never_recreates_an_unnamed_thread_after_name_unknown(
     assert first["target_identity"] == "EM-alpha"
     assert first["observed_name"] is None
     assert second == {
-        "status": "TASK_IDENTITY_CONFLICT",
+        "status": "UNKNOWN",
+        "reason": "THREAD_CREATED_NAME_UNKNOWN",
         "target_identity": "EM-alpha",
-        "thread_ids": ["thread-1"],
-        "reason": "UNBOUND_UNNAMED_NATIVE_TASK",
+        "thread_id": "thread-1",
+        "observed_name": None,
+        "observed_status": {"type": "idle"},
     }
     methods = [request.get("method") for request in peer.requests]
     assert methods.count("thread/start") == 1
     assert methods.count("thread/name/set") == 1
-    assert methods.count("thread/read") == 1
+    assert methods.count("thread/read") == 2
+    start = next(
+        request for request in peer.requests if request.get("method") == "thread/start"
+    )
+    assert start["params"]["threadSource"] == "hmasd-manager:EM-alpha:g1"
+
+
+@pytest.mark.parametrize(
+    "unrelated_thread",
+    [
+        {
+            "id": "thread-ephemeral",
+            "name": None,
+            "status": {"type": "idle"},
+            "ephemeral": True,
+            "source": "appServer",
+        },
+        {
+            "id": "thread-leaf",
+            "name": None,
+            "status": {"type": "idle"},
+            "ephemeral": False,
+            "source": "subAgent",
+            "agentRole": "hmasd-code-scout",
+        },
+    ],
+    ids=["ephemeral", "non-manager-leaf"],
+)
+def test_unrelated_unnamed_thread_does_not_block_manager_creation(
+    tmp_path: Path, unrelated_thread: dict[str, Any]
+) -> None:
+    peer = response_peer(
+        listed_threads=[{**unrelated_thread, "cwd": tmp_path.as_posix()}]
+    )
+    plan = {
+        "verb": "CREATE_TASK_INTENT",
+        "work_id": WORK_ID,
+        "target_identity": "EM-alpha",
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=[],
+        )
+
+    assert result["status"] == "DELIVERED"
+    assert result["thread_id"] == "thread-new"
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("turn/start") == 1
 
 
 def test_send_suppresses_duplicate_work_id_in_full_thread_history() -> None:
@@ -998,105 +1163,39 @@ def test_execute_plan_reports_one_typed_return_and_redelivery_is_idempotent(
             "engineering_request_ref": None,
         },
     }
-    native_thread: dict[str, Any] | None = None
     witness_publish_count = 0
 
-    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
-        nonlocal native_thread, witness_publish_count
-        request_id = request.get("id")
-        if request_id is None:
-            return
-        method = request.get("method")
-        if method == "initialize":
-            result: dict[str, Any] = {
-                "serverInfo": {"name": "fake", "version": "1"}
-            }
-        elif method == "thread/list":
-            result = {
-                "data": [] if native_thread is None else [native_thread],
-                "nextCursor": None,
-            }
-        elif method == "thread/start":
-            native_thread = {
-                "id": "thread-em-alpha",
-                "name": None,
-                "cwd": request["params"]["cwd"],
-                "status": {"type": "idle"},
-                "turns": [],
-            }
-            result = {
-                "thread": native_thread,
-                "model": "fake",
-                "modelProvider": "fake",
-                "cwd": request["params"]["cwd"],
-                "approvalPolicy": "never",
-                "sandbox": {"type": "dangerFullAccess"},
-                "instructionSources": [str(tmp_path / "AGENTS.md")],
-            }
-        elif method == "thread/name/set":
-            assert native_thread is not None
-            native_thread["name"] = request["params"]["name"]
-            result = {}
-        elif method == "thread/read":
-            assert native_thread is not None
-            result = {"thread": native_thread}
-        elif method == "thread/resume":
-            assert native_thread is not None
-            result = {
-                "thread": native_thread,
-                "model": "fake",
-                "modelProvider": "fake",
-                "cwd": str(tmp_path),
-                "approvalPolicy": "never",
-                "sandbox": {"type": "dangerFullAccess"},
-            }
-        elif method == "turn/start":
-            assert native_thread is not None
-            witness_publish_count += 1
-            tasks.hmasd_work_packet.publish_return(
-                repo=tmp_path,
-                work_id=work_id,
-                observed_tasks=[participant_task],
-                agent_result=agent_result,
-            )
-            terminal_turn = {
-                "id": "turn-em-alpha",
-                "status": "completed",
-                "items": [
-                    {
-                        "type": "userMessage",
-                        "content": request["params"]["input"],
-                    }
-                ],
-            }
-            native_thread["turns"] = [terminal_turn]
-            result = {
-                "turn": {
-                    "id": "turn-em-alpha",
-                    "status": "inProgress",
-                    "items": [],
-                }
-            }
-            peer.emit({"id": request_id, "result": result})
-            peer.emit(
+    def publish_return(
+        request: dict[str, Any], _: dict[str, Any]
+    ) -> dict[str, Any]:
+        nonlocal witness_publish_count
+        witness_publish_count += 1
+        tasks.hmasd_work_packet.publish_return(
+            repo=tmp_path,
+            work_id=work_id,
+            observed_tasks=[participant_task],
+            agent_result=agent_result,
+        )
+        return {
+            "id": "turn-em-alpha",
+            "status": "completed",
+            "items": [
                 {
-                    "method": "turn/completed",
-                    "params": {
-                        "threadId": "thread-em-alpha",
-                        "turn": terminal_turn,
-                    },
+                    "type": "userMessage",
+                    "content": request["params"]["input"],
                 }
-            )
-            return
-        else:
-            raise AssertionError(f"unexpected method: {method}")
-        peer.emit({"id": request_id, "result": result})
+            ],
+        }
 
-    peer = FakeTransport(respond)
+    scenario = StatefulParticipantPeer(
+        tmp_path,
+        turn_hook=publish_return,
+        instruction_sources=[str(tmp_path / "AGENTS.md")],
+    )
     plan = tasks.hmasd_work_packet.reconcile_once(
         repo=tmp_path, work_id=work_id, observed_tasks=[]
     )["plan"]
-    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+    with tasks.AppServerClient(transport=scenario.transport, timeout=0.1) as client:
         first = client.execute_plan(
             plan,
             packet_locator=locator,
@@ -1116,7 +1215,7 @@ def test_execute_plan_reports_one_typed_return_and_redelivery_is_idempotent(
         assert result["status"] == "COMPLETED"
         assert result["work_id"] == work_id
         assert result["return_witness"]["agent_result"] == agent_result
-    methods = [request.get("method") for request in peer.requests]
+    methods = [request.get("method") for request in scenario.requests]
     assert methods.count("thread/start") == 1
     assert methods.count("thread/name/set") == 1
     assert methods.count("turn/start") == 1
@@ -1130,104 +1229,38 @@ def test_execute_plan_reports_one_typed_return_and_redelivery_is_idempotent(
     assert list(return_path.parent.iterdir()) == [return_path]
     named_targets = [
         request["params"]["name"]
-        for request in peer.requests
+        for request in scenario.requests
         if request.get("method") == "thread/name/set"
     ]
     assert named_targets == ["EM-alpha"]
-    assert "Root" not in json.dumps(peer.requests)
+    assert "Root" not in json.dumps(scenario.requests)
 
 
 def test_execute_plan_refreshes_native_identity_and_lifecycle_after_wait(
     tmp_path: Path,
 ) -> None:
-    native_thread: dict[str, Any] | None = None
+    def rename_after_dispatch(
+        _: dict[str, Any], thread: dict[str, Any]
+    ) -> dict[str, Any]:
+        thread["name"] = "EM-renamed"
+        thread["status"] = {"type": "idle"}
+        return {
+            "id": "turn-em-alpha",
+            "status": "completed",
+            "items": [],
+        }
 
-    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
-        nonlocal native_thread
-        request_id = request.get("id")
-        if request_id is None:
-            return
-        method = request.get("method")
-        if method == "initialize":
-            result: dict[str, Any] = {
-                "serverInfo": {"name": "fake", "version": "1"}
-            }
-        elif method == "thread/list":
-            result = {
-                "data": [] if native_thread is None else [native_thread],
-                "nextCursor": None,
-            }
-        elif method == "thread/start":
-            native_thread = {
-                "id": "thread-em-alpha",
-                "name": None,
-                "cwd": request["params"]["cwd"],
-                "status": {"type": "active"},
-                "turns": [],
-            }
-            result = {
-                "thread": native_thread,
-                "model": "fake",
-                "modelProvider": "fake",
-                "cwd": request["params"]["cwd"],
-                "approvalPolicy": "never",
-                "sandbox": {"type": "dangerFullAccess"},
-                "instructionSources": [],
-            }
-        elif method == "thread/name/set":
-            assert native_thread is not None
-            native_thread["name"] = request["params"]["name"]
-            result = {}
-        elif method == "thread/read":
-            assert native_thread is not None
-            result = {"thread": native_thread}
-        elif method == "thread/resume":
-            assert native_thread is not None
-            result = {
-                "thread": native_thread,
-                "model": "fake",
-                "modelProvider": "fake",
-                "cwd": str(tmp_path),
-                "approvalPolicy": "never",
-                "sandbox": {"type": "dangerFullAccess"},
-            }
-        elif method == "turn/start":
-            assert native_thread is not None
-            result = {
-                "turn": {
-                    "id": "turn-em-alpha",
-                    "status": "inProgress",
-                    "items": [],
-                }
-            }
-            peer.emit({"id": request_id, "result": result})
-            native_thread["name"] = "EM-renamed"
-            native_thread["status"] = {"type": "idle"}
-            peer.emit(
-                {
-                    "method": "turn/completed",
-                    "params": {
-                        "threadId": "thread-em-alpha",
-                        "turn": {
-                            "id": "turn-em-alpha",
-                            "status": "completed",
-                            "items": [],
-                        },
-                    },
-                }
-            )
-            return
-        else:
-            raise AssertionError(f"unexpected method: {method}")
-        peer.emit({"id": request_id, "result": result})
-
-    peer = FakeTransport(respond)
+    scenario = StatefulParticipantPeer(
+        tmp_path,
+        turn_hook=rename_after_dispatch,
+        start_status="active",
+    )
     plan = {
         "verb": "CREATE_TASK_INTENT",
         "work_id": WORK_ID,
         "target_identity": "EM-alpha",
     }
-    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+    with tasks.AppServerClient(transport=scenario.transport, timeout=0.1) as client:
         result = client.execute_plan(
             plan,
             packet_locator=LOCATOR,
@@ -1244,7 +1277,7 @@ def test_execute_plan_refreshes_native_identity_and_lifecycle_after_wait(
         "observed_status": {"type": "idle"},
     }
     assert sum(
-        request.get("method") == "thread/list" for request in peer.requests
+        request.get("method") == "thread/list" for request in scenario.requests
     ) == 2
 
 
@@ -2135,7 +2168,7 @@ def test_execute_plan_reuses_exact_cached_identity_when_cwd_list_omits_it(
     assert "thread/name/set" not in methods
 
 
-def test_execute_plan_uses_plan_thread_id_when_cwd_list_omits_existing_target(
+def test_execute_plan_rejects_plan_thread_id_when_fresh_snapshot_omits_target(
     tmp_path: Path,
 ) -> None:
     peer = response_peer(
@@ -2157,9 +2190,88 @@ def test_execute_plan_uses_plan_thread_id_when_cwd_list_omits_existing_target(
             observed_tasks=[],
         )
 
-    assert result["status"] == "DELIVERED"
-    assert result["thread_id"] == "thread-planned"
-    assert "thread/start" not in [request.get("method") for request in peer.requests]
+    assert result == {
+        "status": "TASK_IDENTITY_CONFLICT",
+        "target_identity": "EM-alpha",
+        "reason": "PLAN_BOUND_TASK_MISMATCH",
+        "expected": {
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "thread_id": "thread-planned",
+        },
+        "observed": {
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "thread_id": None,
+        },
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
+    assert "turn/start" not in methods
+
+
+def test_execute_plan_rejects_fresh_generation_that_differs_from_plan(
+    tmp_path: Path,
+) -> None:
+    peer = response_peer(
+        listed_threads=[
+            {
+                "id": "thread-existing",
+                "name": "EM-alpha",
+                "cwd": tmp_path.as_posix(),
+                "status": {"type": "idle"},
+            }
+        ],
+        read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
+        read_thread_status={"type": "idle"},
+    )
+    plan = {
+        "verb": "DISPATCH_EXISTING",
+        "work_id": WORK_ID,
+        "target_identity": "EM-alpha",
+        "task_resolution": {
+            "status": "REUSE",
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 2,
+            "lifecycle": "PARKED",
+            "thread_id": "thread-existing",
+        },
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em("thread-existing"),
+        )
+
+    assert result == {
+        "status": "TASK_IDENTITY_CONFLICT",
+        "target_identity": "EM-alpha",
+        "reason": "PLAN_BOUND_TASK_MISMATCH",
+        "expected": {
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 2,
+            "thread_id": "thread-existing",
+        },
+        "observed": {
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 1,
+            "thread_id": "thread-existing",
+        },
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
+    assert "turn/start" not in methods
 
 
 def test_dispatch_existing_fails_closed_on_fresh_cache_identity_conflict(
