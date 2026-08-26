@@ -694,6 +694,7 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("valid", None),
         ("wrong_identity", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
         ("wrong_role", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
+        ("malformed_payload", "OPERATOR_RESULT_SCHEMA_INVALID"),
         ("child_nonterminal", "OPERATOR_CHILD_NOT_TERMINAL"),
         ("wrong_manifest_ref", "OPERATOR_MANIFEST_REF_MISMATCH"),
         ("wrong_manifest_owner", "TYPED_CONFLICT"),
@@ -704,6 +705,8 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("manifest_nonquiescent", "OPERATOR_MANIFEST_TERMINAL_MISMATCH"),
         ("stdout_marker_wrong", "OPERATOR_STDOUT_MARKER_MISMATCH"),
         ("cm_early_return", "OPERATOR_CHILD_NOT_TERMINAL"),
+        ("cm_refs_empty", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_wrong_fresh", "CM_OPERATOR_REFS_MISMATCH"),
         ("candidate_read_unknown", "NATIVE_OBSERVATION_STOP"),
         ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("candidate_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
@@ -768,7 +771,11 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         }
         return {
             "id": thread_id,
-            "name": "native_ll_golden_run",
+            "name": (
+                "native_ll_golden_run_68428496c0"
+                if run_id == "golden_run"
+                else "native_ll_golden_run_493d823df1"
+            ),
             "parentThreadId": "thread-cm-alpha",
             "agentRole": "hmasd-experiment-operator",
             "cwd": str(repo),
@@ -874,7 +881,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 )
                 operator_thread = {
                     "id": "thread-operator-golden-run",
-                    "name": "native_ll_golden_run",
+                    "name": spawn_assignment["task_name"],
                     "parentThreadId": "thread-cm-alpha",
                     "agentRole": "hmasd-experiment-operator",
                     "cwd": str(repo),
@@ -959,6 +966,8 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 }
                 if case == "wrong_manifest_ref":
                     operator_result["payload"]["manifest_ref"] = stdout_ref
+                elif case == "malformed_payload":
+                    operator_result["payload"] = "bad"
                 if case in {"child_nonterminal", "cm_early_return"}:
                     operator_thread["turns"][0]["status"] = "inProgress"
                 else:
@@ -1003,6 +1012,14 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         "integrated_sha": None,
                     },
                 }
+                if case == "cm_refs_empty":
+                    cm_result["state_refs"] = []
+                    cm_result["artifact_refs"] = []
+                    cm_result["payload"]["verification_refs"] = []
+                elif case == "cm_refs_wrong_fresh":
+                    cm_result["state_refs"] = [request_ref]
+                    cm_result["artifact_refs"] = [request_ref]
+                    cm_result["payload"]["verification_refs"] = [request_ref]
                 packets.publish_return(
                     repo=repo,
                     work_id=cm_packet["work_id"],
@@ -1078,8 +1095,27 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         "protocol": "hmasd.experiment-operator.assignment.v1",
         "run_id": "golden-run",
         "run_owner": "Operator-golden-run",
-        "task_name": "native_ll_golden_run",
+        "result_contract": {
+            "artifact_refs": [
+                "temp/directions/alpha/exp/golden-run/stdout.log",
+                "temp/directions/alpha/exp/golden-run/stderr.log",
+            ],
+            "assignment_id": "cm-owned-operator-golden",
+            "logical_identity": "hmasd-experiment-operator",
+            "role": "hmasd-experiment-operator",
+            "run_id": "golden-run",
+            "schema_path": "scripts/schemas/hmasd_agent_result.schema.json",
+            "state_refs": [manifest_locator],
+            "verification_refs": [
+                manifest_locator,
+                "temp/directions/alpha/exp/golden-run/stdout.log",
+                "temp/directions/alpha/exp/golden-run/stderr.log",
+            ],
+            "work_id": cm_packet["work_id"],
+        },
+        "task_name": "native_ll_golden_run_493d823df1",
     }
+    assert contract_base["task_name"] != "native_ll_golden_run_68428496c0"
     assert operator_contracts == [
         {**contract_base, "action": "CREATE_EXACT"},
         {
