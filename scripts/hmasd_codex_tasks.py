@@ -2623,6 +2623,42 @@ class AppServerClient:
                 )
                 if result.get("status") == "UNKNOWN":
                     return stopped("UNKNOWN_COMMITMENT", result=result)
+                if result.get("status") == "RETURN_WITNESS_MISSING_AFTER_ATTEMPTS":
+                    resolution = plan.get("task_resolution", {})
+                    direction_id = (
+                        resolution.get("direction_id")
+                        if isinstance(resolution, Mapping)
+                        else None
+                    )
+                    manager = self._canonical_manager(
+                        str(plan.get("target_identity", ""))
+                    )
+                    if direction_id is None and manager is not None:
+                        direction_id = manager["direction_id"]
+                    failure_scope = (
+                        "direction" if isinstance(direction_id, str) else "project"
+                    )
+                    failure_ref = (
+                        direction_id
+                        if isinstance(direction_id, str)
+                        else current_work_id
+                    )
+                    return stopped(
+                        "RECOVERY_EXHAUSTED",
+                        failure_scope=failure_scope,
+                        failure_ref=failure_ref,
+                        evidence={
+                            "target_identity": plan.get("target_identity"),
+                            "thread_id": result.get("thread_id"),
+                            "packet_locator": (
+                                f".codex/runtime/work/ready/{current_work_id}/packet.json"
+                            ),
+                            "max_attempts": result.get(
+                                "resume_condition", {}
+                            ).get("max_attempts"),
+                            "attempt_statuses": result.get("attempt_statuses", []),
+                        },
+                    )
                 if (
                     result.get("status") == "RETURN_WITNESS_MISSING"
                     and result.get("recoverable") is True
