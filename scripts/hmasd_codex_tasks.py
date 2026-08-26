@@ -51,11 +51,11 @@ _CONFORMANCE_SCHEMA = {
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]{0,127}\Z")
 _DISPATCH_VERBS = {"CREATE_TASK_INTENT", "DISPATCH_EXISTING"}
-_BOOTSTRAP_SKILLS = {
-    "Portfolio": "hmasd-portfolio-task",
-    "EM": "hmasd-em-task",
-    "CM": "hmasd-cm-task",
-}
+_PARTICIPANT_SLICE_INSTRUCTION = (
+    "Complete only the exact Work Packet slice above. First reuse any existing exact "
+    "return; otherwise read the packet, complete its bounded assignment, publish its "
+    "typed result, and return that immutable witness."
+)
 _SOURCE_KINDS = [
     "cli",
     "vscode",
@@ -681,20 +681,6 @@ class AppServerClient:
             return {"model": "gpt-5.6-sol", "effort": "high"}
         return None
 
-    @staticmethod
-    def _bootstrap_input(target_identity: str, repo: Path) -> dict[str, str] | None:
-        if target_identity == "Portfolio":
-            kind = "Portfolio"
-        elif target_identity.startswith("EM-"):
-            kind = "EM"
-        elif target_identity.startswith("CM-"):
-            kind = "CM"
-        else:
-            return None
-        name = _BOOTSTRAP_SKILLS[kind]
-        path = (repo.resolve() / ".agents" / "skills" / name / "SKILL.md").as_posix()
-        return {"type": "skill", "name": name, "path": path}
-
     def send(
         self,
         thread_id: str,
@@ -800,10 +786,7 @@ class AppServerClient:
             return resumed
         inputs: list[dict[str, Any]] = [{"type": "text", "text": envelope}]
         if attempt == 1:
-            skill = self._bootstrap_input(target_identity, repo or Path.cwd())
-            if skill is not None:
-                inputs.append({"type": "text", "text": f"${skill['name']}"})
-                inputs.append(skill)
+            inputs.append({"type": "text", "text": _PARTICIPANT_SLICE_INSTRUCTION})
         turn_params: dict[str, Any] = {
             "threadId": thread_id,
             "input": inputs,

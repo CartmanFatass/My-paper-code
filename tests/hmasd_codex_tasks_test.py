@@ -16,6 +16,11 @@ from scripts import hmasd_codex_tasks as tasks
 
 WORK_ID = "a" * 64
 LOCATOR = f".codex/runtime/work/ready/{WORK_ID}/packet.json"
+PARTICIPANT_SLICE_INSTRUCTION = (
+    "Complete only the exact Work Packet slice above. First reuse any existing exact "
+    "return; otherwise read the packet, complete its bounded assignment, publish its "
+    "typed result, and return that immutable witness."
+)
 
 
 class FakeTransport:
@@ -396,12 +401,7 @@ def test_send_starts_one_turn_with_the_exact_envelope() -> None:
             },
             {
                 "type": "text",
-                "text": "$hmasd-em-task",
-            },
-            {
-                "type": "skill",
-                "name": "hmasd-em-task",
-                "path": "C:/Projects/HMASD/.agents/skills/hmasd-em-task/SKILL.md",
+                "text": PARTICIPANT_SLICE_INSTRUCTION,
             },
         ],
         "effort": "max",
@@ -1044,6 +1044,40 @@ def test_execute_plan_create_then_dispatches_without_a_daemon() -> None:
     assert [request.get("method") for request in peer.requests].count("thread/start") == 1
     assert [request.get("method") for request in peer.requests].count("thread/name/set") == 1
     assert [request.get("method") for request in peer.requests].count("turn/start") == 1
+
+
+def test_execute_plan_first_turn_exposes_only_exact_slice_and_return_contract() -> None:
+    peer = response_peer()
+    plan = {
+        "verb": "CREATE_TASK_INTENT",
+        "work_id": WORK_ID,
+        "target_identity": "EM-alpha",
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd="C:/Projects/HMASD",
+            observed_tasks=[],
+        )
+
+    assert result["status"] == "DELIVERED"
+    turn = next(request for request in peer.requests if request.get("method") == "turn/start")
+    assert turn["params"]["input"] == [
+        {
+            "type": "text",
+            "text": tasks.dispatch_envelope_bytes(
+                WORK_ID, LOCATOR, "EM-alpha"
+            ).decode(),
+        },
+        {
+            "type": "text",
+            "text": PARTICIPANT_SLICE_INSTRUCTION,
+        },
+    ]
+    rendered = json.dumps(turn["params"]["input"])
+    assert "$hmasd-" not in rendered
+    assert '"type": "skill"' not in rendered
 
 
 def test_execute_plan_new_first_dispatch_does_not_probe_return_witness(
@@ -1991,16 +2025,9 @@ def test_root_override_cannot_bypass_effect_authority_or_observation_defects(
     assert "turn/start" not in [request.get("method") for request in peer.requests]
 
 
-@pytest.mark.parametrize(
-    ("target", "skill"),
-    [
-        ("Portfolio", "hmasd-portfolio-task"),
-        ("EM-alpha", "hmasd-em-task"),
-        ("CM-alpha", "hmasd-cm-task"),
-    ],
-)
-def test_first_turn_bootstrap_skill_is_a_mechanical_target_kind_mapping(
-    target: str, skill: str
+@pytest.mark.parametrize("target", ["Portfolio", "EM-alpha", "CM-alpha"])
+def test_first_turn_contract_is_the_same_for_canonical_participant_kinds(
+    target: str,
 ) -> None:
     peer = response_peer()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
@@ -2009,12 +2036,14 @@ def test_first_turn_bootstrap_skill_is_a_mechanical_target_kind_mapping(
         )
     assert result["status"] == "DELIVERED"
     turn = next(request for request in peer.requests if request.get("method") == "turn/start")
-    assert turn["params"]["input"][1] == {"type": "text", "text": f"${skill}"}
-    assert turn["params"]["input"][2] == {
-        "type": "skill",
-        "name": skill,
-        "path": f"C:/Projects/HMASD/.agents/skills/{skill}/SKILL.md",
-    }
+    assert turn["params"]["input"] == [
+        {
+            "type": "text",
+            "text": tasks.dispatch_envelope_bytes(WORK_ID, LOCATOR, target).decode(),
+        },
+        {"type": "text", "text": PARTICIPANT_SLICE_INSTRUCTION},
+    ]
+    assert "$hmasd-" not in json.dumps(turn["params"]["input"])
 
 
 def test_execute_plan_uses_canonical_target_identity_not_requested_alias() -> None:
@@ -2035,7 +2064,12 @@ def test_execute_plan_uses_canonical_target_identity_not_requested_alias() -> No
     )
     assert naming["params"]["name"] == "EM-alpha"
     turn = next(request for request in peer.requests if request.get("method") == "turn/start")
-    assert turn["params"]["input"][1]["text"] == "$hmasd-em-task"
+    envelope = json.loads(turn["params"]["input"][0]["text"])
+    assert envelope["target_identity"] == "EM-alpha"
+    assert turn["params"]["input"][1] == {
+        "type": "text",
+        "text": PARTICIPANT_SLICE_INSTRUCTION,
+    }
 
 
 def test_cm_create_and_first_turn_use_sol_high() -> None:
