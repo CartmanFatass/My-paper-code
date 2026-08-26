@@ -24,6 +24,11 @@ EM→CM→Operator→Root unattended chaining remains unproven.
 
 The [workflow design rationale](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md) is non-authoritative and adds no workflow primitive, authority, or gate.
 
+The user-confirmed [workflow goals and acceptance criteria](docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md)
+are the controlling target for workflow redesign. A conflicting historical
+instruction or implementation is migration work, not permission to reinterpret
+those goals.
+
 ## Agent skills
 
 ### Issue tracker
