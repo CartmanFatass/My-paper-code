@@ -4,10 +4,15 @@ from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
+import threading
+import time
 from typing import Any
+
+import pytest
 
 from scripts import hmasd_direction_git
 from scripts import hmasd_work_packet
@@ -159,6 +164,80 @@ def test_commit_push_isolates_exact_path_and_preserves_unrelated_staged_change(
     assert "HMASD-Assignment: CM-alpha" in message.splitlines()
 
 
+def test_commit_identity_failure_leaves_head_and_index_byte_identical(
+    tmp_path: Path,
+    monkeypatch: Any,
+) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/change.py"
+    _write(repo / assigned, "VALUE = 2  # staged\n")
+    _git(repo, "add", assigned)
+    _write(repo / assigned, "VALUE = 3  # working tree\n")
+    _write(repo / "notes.txt", "unrelated staged content\n")
+    _git(repo, "add", "notes.txt")
+    _write(repo / "intent.py", "intent to add\n")
+    _git(repo, "add", "--intent-to-add", "intent.py")
+    before_head = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    before_index = (repo / ".git/index").read_bytes()
+    _git(repo, "config", "--unset-all", "user.name")
+    _git(repo, "config", "--unset-all", "user.email")
+    _git(repo, "config", "user.useConfigOnly", "true")
+    empty_global = repo / ".git/empty-global-config"
+    _write(empty_global, "")
+    monkeypatch.setenv("GIT_CONFIG_NOSYSTEM", "1")
+    monkeypatch.setenv("GIT_CONFIG_GLOBAL", str(empty_global))
+    for name in (
+        "GIT_AUTHOR_NAME",
+        "GIT_AUTHOR_EMAIL",
+        "GIT_COMMITTER_NAME",
+        "GIT_COMMITTER_EMAIL",
+    ):
+        monkeypatch.delenv(name, raising=False)
+
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+
+    assert completed.returncode == 2, result
+    assert result["status"] == "REFUSED"
+    assert result["push_attempted"] is False
+    assert _git(repo, "rev-parse", "HEAD").stdout.strip() == before_head
+    assert (repo / ".git/index").read_bytes() == before_index
+
+
+def test_installed_commit_hook_is_not_executed(tmp_path: Path) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/change.py"
+    _write(repo / assigned, "VALUE = 2\n")
+    hook = repo / ".git/hooks/pre-commit"
+    _write(hook, "#!/bin/sh\necho ran > hook-ran.txt\nexit 1\n")
+    hook.chmod(0o755)
+
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+
+    assert completed.returncode == 0, result
+    assert result["status"] == "SUCCEEDED"
+    assert not (repo / "hook-ran.txt").exists()
+
+
 def test_commit_push_recovers_exact_work_id_candidate_below_later_head_without_push(
     tmp_path: Path,
 ) -> None:
@@ -217,6 +296,56 @@ def test_commit_push_recovers_exact_work_id_candidate_below_later_head_without_p
     assert len(matching_commits) == 1
 
 
+def test_existing_candidate_remote_divergence_is_conflict_without_push(
+    tmp_path: Path,
+) -> None:
+    repo, origin = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/change.py"
+    base = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    _write(repo / assigned, "VALUE = 2\n")
+    message = (
+        "candidate for divergence check\n\n"
+        f"HMASD-Work-ID: {packet['work_id']}\n"
+        f"HMASD-Base-SHA: {base}\n"
+        "HMASD-Assignment: CM-alpha\n"
+    )
+    _git(repo, "commit", "--only", "-m", message, "--", assigned)
+    candidate = _git(repo, "rev-parse", "HEAD").stdout.strip()
+
+    peer = tmp_path / "diverged-peer"
+    subprocess.run(
+        ["git", "clone", "--branch", "main", str(origin), str(peer)],
+        check=True,
+        capture_output=True,
+    )
+    _git(peer, "config", "user.name", "HMASD Peer")
+    _git(peer, "config", "user.email", "hmasd-peer@example.invalid")
+    _write(peer / "remote-only.txt", "diverged remote\n")
+    _git(peer, "add", "remote-only.txt")
+    _git(peer, "commit", "-m", "diverge origin main")
+    remote = _git(peer, "rev-parse", "HEAD").stdout.strip()
+    _git(peer, "push", "origin", "main")
+
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+
+    assert completed.returncode == 6, result
+    assert result["status"] == "CONFLICT"
+    assert result["candidate_sha"] == candidate
+    assert result["remote_sha"] == remote
+    assert result["relation"] == "DIVERGED"
+    assert result["push_attempted"] is False
+
+
 def test_ambiguous_push_is_sent_once_and_resolved_only_by_observe_push(
     tmp_path: Path,
     monkeypatch: Any,
@@ -256,6 +385,8 @@ def test_ambiguous_push_is_sent_once_and_resolved_only_by_observe_push(
     assert unknown["push_attempted"] is True
     assert unknown["integrated_sha"] is None
     assert unknown["relation"] == "ANCESTOR"
+    assert unknown["failure_scope"] == "feature"
+    assert unknown["failure_ref"] == "git_push"
     assert push_calls == 1
     candidate = unknown["candidate_sha"]
 
@@ -280,98 +411,86 @@ def test_ambiguous_push_is_sent_once_and_resolved_only_by_observe_push(
     assert observed["push_attempted"] is False
     assert push_calls == 1
 
-
-def test_timed_out_push_that_landed_uses_one_post_error_observation(
-    tmp_path: Path,
-    monkeypatch: Any,
-    capsys: Any,
-) -> None:
-    repo, _ = _repository(tmp_path)
-    packet = _publish(repo)
-    assigned = "experiments/candidates/alpha/change.py"
-    _write(repo / assigned, "VALUE = 2\n")
-    real_run = subprocess.run
-    push_calls = 0
-    fetch_calls = 0
-
-    def landed_but_timed_out(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
-        nonlocal push_calls, fetch_calls
-        command = args[0]
-        if command[:2] == ["git", "fetch"]:
-            fetch_calls += 1
-        if command[:2] == ["git", "push"]:
-            push_calls += 1
-            landed = real_run(*args, **kwargs)
-            assert landed.returncode == 0, landed.stderr
-            raise subprocess.TimeoutExpired(command, timeout=60)
-        return real_run(*args, **kwargs)
-
-    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", landed_but_timed_out)
-    returncode = hmasd_direction_git.main(
-        [
-            "commit-push",
-            "--repo",
-            str(repo),
-            "--work-id",
-            packet["work_id"],
-            "--path",
-            assigned,
-        ]
+    repeated, reused = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
     )
-    result = json.loads(capsys.readouterr().out)
-
-    assert returncode == 0, result
-    assert result["status"] == "SUCCEEDED"
-    assert result["relation"] == "EQUAL"
-    assert result["push_attempted"] is True
+    assert repeated.returncode == 0, reused
+    assert reused["status"] == "SUCCEEDED"
+    assert reused["candidate_sha"] == candidate
+    assert reused["integrated_sha"] == reused["remote_sha"] == candidate
+    assert reused["relation"] == "EQUAL"
+    assert reused["push_attempted"] is False
     assert push_calls == 1
-    assert fetch_calls == 2  # one pre-push and exactly one post-error observation
 
 
-def test_failed_pre_push_observation_preserves_candidate_for_observe_only_recovery(
+def test_unresolved_unknown_candidate_blocks_a_second_direction_commit_and_push(
     tmp_path: Path,
     monkeypatch: Any,
     capsys: Any,
 ) -> None:
     repo, _ = _repository(tmp_path)
-    packet = _publish(repo)
-    assigned = "experiments/candidates/alpha/change.py"
-    _write(repo / assigned, "VALUE = 2\n")
+    alpha = _publish(repo, direction="alpha")
+    beta = _publish(repo, direction="beta")
+    alpha_path = "experiments/candidates/alpha/change.py"
+    beta_path = "experiments/candidates/beta/change.py"
+    _write(repo / alpha_path, "VALUE = 2\n")
+    _write(repo / beta_path, "VALUE = 2\n")
     real_run = subprocess.run
     push_calls = 0
 
-    def failed_fetch(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
+    def ambiguous_push(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
         nonlocal push_calls
         command = args[0]
-        if command[:2] == ["git", "fetch"]:
-            raise subprocess.TimeoutExpired(command, timeout=60)
         if command[:2] == ["git", "push"]:
             push_calls += 1
+            raise subprocess.TimeoutExpired(command, timeout=60)
         return real_run(*args, **kwargs)
 
-    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", failed_fetch)
-    returncode = hmasd_direction_git.main(
+    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", ambiguous_push)
+    alpha_code = hmasd_direction_git.main(
         [
             "commit-push",
             "--repo",
             str(repo),
             "--work-id",
-            packet["work_id"],
+            alpha["work_id"],
             "--path",
-            assigned,
+            alpha_path,
         ]
     )
-    result = json.loads(capsys.readouterr().out)
+    alpha_unknown = json.loads(capsys.readouterr().out)
+    alpha_candidate = alpha_unknown["candidate_sha"]
+    assert alpha_code == 7
 
-    assert returncode == 3, result
-    assert result["status"] == "OBSERVE_REQUIRED"
-    assert result["candidate_sha"] == _git(repo, "rev-parse", "HEAD").stdout.strip()
-    assert result["changed_paths"] == [assigned]
-    assert result["integrated_sha"] is None
-    assert result["remote_sha"] is None
-    assert result["relation"] == "OBSERVATION_FAILED"
-    assert result["push_attempted"] is False
-    assert push_calls == 0
+    beta_code = hmasd_direction_git.main(
+        [
+            "commit-push",
+            "--repo",
+            str(repo),
+            "--work-id",
+            beta["work_id"],
+            "--path",
+            beta_path,
+        ]
+    )
+    blocked = json.loads(capsys.readouterr().out)
+
+    assert beta_code == 3, blocked
+    assert blocked["status"] == "OBSERVE_REQUIRED"
+    assert blocked["candidate_sha"] is None
+    assert blocked["changed_paths"] == [beta_path]
+    assert blocked["relation"] == "ANCESTOR"
+    assert blocked["push_attempted"] is False
+    assert _git(repo, "rev-parse", "HEAD").stdout.strip() == alpha_candidate
+    assert _git(repo, "log", "--format=%H", f"--grep={beta['work_id']}").stdout == ""
+    assert push_calls == 1
 
 
 def test_shared_core_request_is_refused_before_any_git_mutation(tmp_path: Path) -> None:
@@ -400,6 +519,51 @@ def test_shared_core_request_is_refused_before_any_git_mutation(tmp_path: Path) 
     assert _git(repo, "rev-parse", "HEAD").stdout.strip() == before_head
     assert _git(repo, "status", "--porcelain=v1").stdout == before_status
     assert _git(repo, "rev-parse", "refs/remotes/origin/main").stdout.strip() == before_remote
+
+
+@pytest.mark.parametrize("mismatch", ["assignment", "base", "path"])
+def test_recovered_candidate_mismatch_is_always_a_conflict(
+    tmp_path: Path, mismatch: str
+) -> None:
+    repo, _ = _repository(tmp_path)
+    shared_assignment = mismatch == "assignment"
+    packet = _publish(
+        repo, owned_paths=["shared/core.py"] if shared_assignment else None
+    )
+    assigned = "shared/core.py" if shared_assignment else "experiments/candidates/alpha/change.py"
+    committed = (
+        "experiments/candidates/beta/change.py" if mismatch == "path" else assigned
+    )
+    base = _git(repo, "rev-parse", "HEAD").stdout.strip()
+    _write(repo / assigned, "VALUE = 2\n")
+    _write(repo / committed, "VALUE = 2\n")
+    _git(repo, "add", committed)
+    message = (
+        "mismatched recovered candidate\n\n"
+        f"HMASD-Work-ID: {packet['work_id']}\n"
+        f"HMASD-Base-SHA: {'0' * 40 if mismatch == 'base' else base}\n"
+        f"HMASD-Assignment: {'CM-beta' if shared_assignment else 'CM-alpha'}\n"
+    )
+    _git(repo, "commit", "--only", "-m", message, "--", committed)
+    candidate = _git(repo, "rev-parse", "HEAD").stdout.strip()
+
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+
+    assert completed.returncode == 6, result
+    assert result["status"] == "CONFLICT"
+    assert mismatch in result["reason"] or "changed paths" in result["reason"]
+    assert result["push_attempted"] is False
+    assert _git(repo, "rev-parse", "HEAD").stdout.strip() == candidate
+    assert _git(repo, "rev-parse", "refs/remotes/origin/main").stdout.strip() == base
 
 
 def test_observe_push_accepts_remote_descendant_that_contains_candidate(tmp_path: Path) -> None:
@@ -449,6 +613,23 @@ def test_observe_push_accepts_remote_descendant_that_contains_candidate(tmp_path
     assert result["relation"] == "DESCENDANT"
     assert result["push_attempted"] is False
 
+    repeated, reused = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+    assert repeated.returncode == 0, reused
+    assert reused["status"] == "SUCCEEDED"
+    assert reused["candidate_sha"] == candidate
+    assert reused["integrated_sha"] == reused["remote_sha"] == descendant
+    assert reused["relation"] == "DESCENDANT"
+    assert reused["push_attempted"] is False
+
 
 def test_disjoint_commit_push_calls_serialize_only_the_git_transaction(
     tmp_path: Path,
@@ -494,3 +675,62 @@ def test_disjoint_commit_push_calls_serialize_only_the_git_transaction(
     remote = _git(repo, "rev-parse", "refs/remotes/origin/main").stdout.strip()
     assert head == remote
     assert _git(repo, "status", "--porcelain=v1").stdout == ""
+
+
+def test_lock_contention_is_bounded_and_leaves_git_unmodified(tmp_path: Path) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/change.py"
+    _write(repo / assigned, "VALUE = 2\n")
+    lock_path = repo / ".git/hmasd-direction-git.lock"
+    locked = threading.Event()
+
+    def hold_lock() -> None:
+        descriptor = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o600)
+        try:
+            if os.fstat(descriptor).st_size == 0:
+                os.write(descriptor, b"\0")
+                os.fsync(descriptor)
+            os.lseek(descriptor, 0, os.SEEK_SET)
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(descriptor, fcntl.LOCK_EX)
+            locked.set()
+            time.sleep(6)
+            os.lseek(descriptor, 0, os.SEEK_SET)
+            if os.name == "nt":
+                msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+
+    holder = threading.Thread(target=hold_lock)
+    holder.start()
+    assert locked.wait(timeout=2)
+    started = time.monotonic()
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+    elapsed = time.monotonic() - started
+    holder.join(timeout=2)
+
+    assert completed.returncode == 2, result
+    assert result["status"] == "REFUSED"
+    assert "timed out" in result["reason"]
+    assert result["candidate_sha"] is None
+    assert result["push_attempted"] is False
+    assert elapsed < 5.8
+    assert _git(repo, "diff", "--cached", "--name-only").stdout == ""

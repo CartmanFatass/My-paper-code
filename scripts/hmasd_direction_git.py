@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+from contextvars import ContextVar, Token
+import errno
 import json
 import os
 from pathlib import Path
@@ -11,20 +13,23 @@ import re
 import stat
 import subprocess
 import sys
+import tempfile
+import time
 from typing import Any, Iterable, Mapping, Sequence
 
 try:
-    from scripts import hmasd_platform, hmasd_work_packet, hmasd_worktree
+    from scripts import hmasd_work_packet, hmasd_worktree
 except ImportError:
-    import hmasd_platform
     import hmasd_work_packet
     import hmasd_worktree
 
 
 _WORK_ID = re.compile(r"[0-9a-f]{64}\Z")
 _FULL_SHA = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
-_FETCH_TIMEOUT_SECONDS = 60
-_PUSH_TIMEOUT_SECONDS = 60
+_TRANSACTION_TIMEOUT_SECONDS = 5
+_TRANSACTION_DEADLINE: ContextVar[float | None] = ContextVar(
+    "hmasd_direction_git_transaction_deadline", default=None
+)
 
 
 class DirectionGitError(RuntimeError):
@@ -50,23 +55,58 @@ class PushUnknown(DirectionGitError):
     code = 7
     status = "PUSH_OUTCOME_UNKNOWN"
 
+    def __init__(self, message: str, *, facts: Mapping[str, Any] | None = None):
+        scoped = dict(facts or {})
+        scoped["failure_scope"] = "feature"
+        scoped["failure_ref"] = "git_push"
+        super().__init__(message, facts=scoped)
+
+
+def _remaining_timeout(requested: float | None = None) -> float | None:
+    deadline = _TRANSACTION_DEADLINE.get()
+    if deadline is None:
+        return requested
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise DirectionGitError("direction Git transaction deadline expired")
+    if requested is None:
+        return remaining
+    return min(float(requested), remaining)
+
 
 def _run_git(
     repo: Path,
     *args: str,
     check: bool = True,
-    timeout: int | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    result = subprocess.run(
-        ["git", *args],
-        cwd=repo,
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=timeout,
-    )
+    effective_timeout = _remaining_timeout()
+    command = ["git", *args]
+    with (
+        tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as stdout_file,
+        tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as stderr_file,
+    ):
+        try:
+            completed = subprocess.run(
+                command,
+                cwd=repo,
+                check=False,
+                stdout=stdout_file,
+                stderr=stderr_file,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=effective_timeout,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise DirectionGitError(f"git {args[0]} timed out") from exc
+        stdout_file.seek(0)
+        stderr_file.seek(0)
+        result = subprocess.CompletedProcess(
+            command,
+            completed.returncode,
+            stdout=stdout_file.read(),
+            stderr=stderr_file.read(),
+        )
     if check and result.returncode:
         detail = result.stderr.strip() or result.stdout.strip() or f"exit {result.returncode}"
         raise DirectionGitError(f"git {' '.join(args)} failed: {detail}")
@@ -137,8 +177,12 @@ def _normalize_paths(repo: Path, packet: Mapping[str, Any], paths: Sequence[str]
         folded = path.casefold()
         if not any(folded == root or folded.startswith(root + "/") for root in owned):
             raise DirectionGitError(f"requested path is not packet-owned: {path}")
+    return normalized
+
+
+def _require_direction_owned(repo: Path, paths: Sequence[str]) -> None:
     try:
-        classifications = hmasd_worktree.observe_path_classifications(repo, normalized)
+        classifications = hmasd_worktree.observe_path_classifications(repo, paths)
     except hmasd_worktree.WorktreeError as exc:
         raise DirectionGitError(f"cannot classify requested paths: {exc}") from exc
     shared = sorted(
@@ -151,7 +195,6 @@ def _normalize_paths(repo: Path, packet: Mapping[str, Any], paths: Sequence[str]
             "shared-core action requires the existing exact Root/user confirmation path",
             facts={"changed_paths": shared},
         )
-    return normalized
 
 
 def _working_changes(repo: Path, paths: Sequence[str]) -> list[str]:
@@ -211,6 +254,25 @@ def _head(repo: Path) -> str:
     return value
 
 
+def _candidate_changed_paths(repo: Path, base: str, candidate: str) -> list[str]:
+    result = _run_git(
+        repo,
+        "diff",
+        "--name-only",
+        "--no-renames",
+        "-z",
+        base,
+        candidate,
+    )
+    changed = sorted({path for path in result.stdout.split("\0") if path}, key=str.casefold)
+    for path in changed:
+        tree = _run_git(repo, "ls-tree", "-r", "-z", candidate, "--", path)
+        for entry in tree.stdout.split("\0"):
+            if entry and entry.split("\t", 1)[0].split()[0] == "120000":
+                raise GitConflict(f"work-ID candidate contains a tracked symlink: {path}")
+    return changed
+
+
 def _verify_candidate(
     repo: Path,
     packet: Mapping[str, Any],
@@ -242,11 +304,18 @@ def _verify_candidate(
     parents = _git_value(repo, "rev-list", "--parents", "-n", "1", candidate).split()
     if len(parents) != 2 or parents[1].lower() != base:
         raise GitConflict("work-ID candidate base SHA does not match its sole parent")
+    changed = _candidate_changed_paths(repo, base, candidate)
     try:
-        changed = hmasd_worktree._changed_paths(repo, base, candidate)
-    except hmasd_worktree.WorktreeError as exc:
-        raise GitConflict(f"cannot verify work-ID candidate changed paths: {exc}") from exc
-    normalized = _normalize_paths(repo, packet, changed)
+        normalized = _normalize_paths(repo, packet, changed)
+    except DirectionGitError as exc:
+        raise GitConflict(
+            f"work-ID candidate changed paths do not match packet ownership: {exc}",
+            facts={
+                "base_sha": base,
+                "candidate_sha": candidate,
+                "changed_paths": changed,
+            },
+        ) from exc
     if normalized != changed:
         raise GitConflict("work-ID candidate changed paths are not canonical")
     if requested is not None and list(requested) != changed:
@@ -258,21 +327,28 @@ def _verify_candidate(
                 "changed_paths": changed,
             },
         )
+    try:
+        _require_direction_owned(repo, changed)
+    except SharedCoreRequired as exc:
+        raise GitConflict(
+            "work-ID candidate contains a non-direction-owned path",
+            facts={
+                "base_sha": base,
+                "candidate_sha": candidate,
+                "changed_paths": changed,
+            },
+        ) from exc
     return base, changed
 
 
 def _fetch_remote(repo: Path) -> str:
-    try:
-        _run_git(
-            repo,
-            "fetch",
-            "--no-tags",
-            "origin",
-            "+refs/heads/main:refs/remotes/origin/main",
-            timeout=_FETCH_TIMEOUT_SECONDS,
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise DirectionGitError("origin/main observation timed out") from exc
+    _run_git(
+        repo,
+        "fetch",
+        "--no-tags",
+        "origin",
+        "+refs/heads/main:refs/remotes/origin/main",
+    )
     value = _git_value(repo, "rev-parse", "refs/remotes/origin/main").lower()
     if _FULL_SHA.fullmatch(value) is None:
         raise DirectionGitError("origin/main is not a full commit SHA")
@@ -311,8 +387,10 @@ def _result(
     remote_sha: str | None = None,
     relation: str | None = None,
     push_attempted: bool = False,
+    failure_scope: str | None = None,
+    failure_ref: str | None = None,
 ) -> dict[str, Any]:
-    return {
+    result = {
         "status": status,
         "reason": reason,
         "work_id": work_id,
@@ -324,13 +402,61 @@ def _result(
         "relation": relation,
         "push_attempted": push_attempted,
     }
+    if failure_scope is not None:
+        result["failure_scope"] = failure_scope
+    if failure_ref is not None:
+        result["failure_ref"] = failure_ref
+    return result
 
 
 class _GitLock:
     def __init__(self, common: Path):
         self.path = common / "hmasd-direction-git.lock"
         self.stream = None
-        self.lock = None
+        self.locked = False
+        self.deadline = time.monotonic() + _TRANSACTION_TIMEOUT_SECONDS
+        self.deadline_token: Token[float | None] | None = None
+
+    def _acquire(self) -> None:
+        assert self.stream is not None
+        descriptor = self.stream.fileno()
+        while True:
+            os.lseek(descriptor, 0, os.SEEK_SET)
+            try:
+                if os.name == "nt":
+                    import msvcrt
+
+                    msvcrt.locking(descriptor, msvcrt.LK_NBLCK, 1)
+                else:
+                    import fcntl
+
+                    fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                self.locked = True
+                return
+            except OSError as exc:
+                if exc.errno not in {errno.EACCES, errno.EAGAIN, errno.EDEADLK}:
+                    raise
+                remaining = self.deadline - time.monotonic()
+                if remaining <= 0:
+                    raise DirectionGitError(
+                        "direction Git transaction timed out acquiring the repository lock"
+                    ) from exc
+                time.sleep(min(0.05, remaining))
+
+    def _release(self) -> None:
+        if not self.locked or self.stream is None:
+            return
+        descriptor = self.stream.fileno()
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(descriptor, msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        self.locked = False
 
     def __enter__(self) -> None:
         descriptor = os.open(
@@ -342,31 +468,38 @@ class _GitLock:
         if not stat.S_ISREG(info.st_mode):
             os.close(descriptor)
             raise DirectionGitError("Git transaction lock is not a regular file")
+        if info.st_size == 0:
+            os.write(descriptor, b"\0")
+            os.fsync(descriptor)
         self.stream = os.fdopen(descriptor, "r+b", buffering=0)
         try:
             hmasd_work_packet._verify_lock_identity(self.path, self.stream.fileno())
         except hmasd_work_packet.WorkPacketError as exc:
             self.stream.close()
             raise DirectionGitError(f"Git transaction lock identity is unsafe: {exc}") from exc
-        self.lock = hmasd_platform.exclusive_file_lock(self.stream.fileno())
         try:
-            self.lock.__enter__()
+            self._acquire()
         except Exception:
             self.stream.close()
             raise
         try:
             hmasd_work_packet._verify_lock_identity(self.path, self.stream.fileno())
         except hmasd_work_packet.WorkPacketError as exc:
-            self.lock.__exit__(None, None, None)
+            self._release()
             self.stream.close()
             raise DirectionGitError(f"Git transaction lock identity changed: {exc}") from exc
+        self.deadline_token = _TRANSACTION_DEADLINE.set(self.deadline)
 
     def __exit__(self, exc_type: Any, exc: Any, traceback: Any) -> None:
-        assert self.lock is not None and self.stream is not None
+        assert self.stream is not None
         try:
-            self.lock.__exit__(exc_type, exc, traceback)
+            self._release()
         finally:
-            self.stream.close()
+            try:
+                if self.deadline_token is not None:
+                    _TRANSACTION_DEADLINE.reset(self.deadline_token)
+            finally:
+                self.stream.close()
 
 
 def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, Any]:
@@ -403,16 +536,73 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                     relation="OBSERVATION_FAILED",
                 )
             relation = _relation(repo, candidate, remote)
+            if relation in {"EQUAL", "DESCENDANT"}:
+                return _result(
+                    status="SUCCEEDED",
+                    reason="candidate is contained by origin/main",
+                    work_id=work_id,
+                    base_sha=base,
+                    candidate_sha=candidate,
+                    integrated_sha=remote,
+                    changed_paths=changed,
+                    remote_sha=remote,
+                    relation=relation,
+                )
+            if relation == "DIVERGED":
+                raise GitConflict(
+                    "origin/main diverged from the existing candidate",
+                    facts={
+                        "base_sha": base,
+                        "candidate_sha": candidate,
+                        "changed_paths": changed,
+                        "remote_sha": remote,
+                        "relation": relation,
+                    },
+                )
             return _result(
                 status="OBSERVE_REQUIRED",
                 reason="candidate already exists; run observe-push",
                 work_id=work_id,
                 base_sha=base,
                 candidate_sha=candidate,
-                integrated_sha=remote if relation in {"EQUAL", "DESCENDANT"} else None,
                 changed_paths=changed,
                 remote_sha=remote,
                 relation=relation,
+            )
+        _require_direction_owned(repo, requested)
+        local_head = _head(repo)
+        try:
+            remote_before_commit = _fetch_remote(repo)
+        except DirectionGitError:
+            return _result(
+                status="OBSERVE_REQUIRED",
+                reason="origin/main could not be observed before commit",
+                work_id=work_id,
+                base_sha=local_head,
+                changed_paths=requested,
+                relation="OBSERVATION_FAILED",
+            )
+        head_relation = _relation(repo, local_head, remote_before_commit)
+        if head_relation == "DIVERGED":
+            raise GitConflict(
+                "local main diverged from origin/main before commit",
+                facts={
+                    "base_sha": local_head,
+                    "changed_paths": requested,
+                    "remote_sha": remote_before_commit,
+                    "relation": head_relation,
+                },
+            )
+        if head_relation != "EQUAL":
+            return _result(
+                status="OBSERVE_REQUIRED",
+                reason="local main does not equal observed origin/main; "
+                "resolve existing Git state first",
+                work_id=work_id,
+                base_sha=local_head,
+                changed_paths=requested,
+                remote_sha=remote_before_commit,
+                relation=head_relation,
             )
         changed = _working_changes(repo, requested)
         if changed != requested:
@@ -427,8 +617,19 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
             f"HMASD-Base-SHA: {base}\n"
             f"HMASD-Assignment: {packet['target_identity']}\n"
         )
-        _run_git(repo, "add", "--", *requested)
-        _run_git(repo, "commit", "--only", "-m", message, "--", *requested)
+        _run_git(
+            repo,
+            "-c",
+            "core.hooksPath=",
+            "-c",
+            "commit.gpgSign=false",
+            "commit",
+            "--only",
+            "-m",
+            message,
+            "--",
+            *requested,
+        )
         candidate = _head(repo)
         verified_base, verified_paths = _verify_candidate(
             repo, packet, candidate, requested
@@ -472,6 +673,19 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                     "relation": relation,
                 },
             )
+        try:
+            _remaining_timeout()
+        except DirectionGitError:
+            return _result(
+                status="OBSERVE_REQUIRED",
+                reason="transaction deadline expired before push; run observe-push",
+                work_id=work_id,
+                base_sha=base,
+                candidate_sha=candidate,
+                changed_paths=requested,
+                remote_sha=remote,
+                relation=relation,
+            )
         push_attempted = True
         try:
             _run_git(
@@ -479,9 +693,8 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                 "push",
                 "origin",
                 f"{candidate}:refs/heads/main",
-                timeout=_PUSH_TIMEOUT_SECONDS,
             )
-        except (DirectionGitError, subprocess.TimeoutExpired):
+        except DirectionGitError:
             pass
         try:
             remote = _fetch_remote(repo)
