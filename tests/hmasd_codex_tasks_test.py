@@ -2449,6 +2449,52 @@ def test_execute_plan_rejects_ordinary_clerk_target_before_any_native_effect() -
     assert peer.requests == []
 
 
+def test_execute_plan_rejects_retired_recovery_task_before_any_native_effect() -> None:
+    peer = response_peer()
+    retired_identity = "hmasd-workflow-recovery-manager"
+    plan = {
+        "verb": "DISPATCH_EXISTING",
+        "work_id": WORK_ID,
+        "target_identity": retired_identity,
+        "task_resolution": {
+            "status": "REUSE",
+            "logical_identity": retired_identity,
+            "kind": "recovery",
+            "generation": 1,
+            "lifecycle": "PARKED",
+            "thread_id": "thread-retired-recovery",
+        },
+    }
+    observed = [
+        {
+            "logical_identity": retired_identity,
+            "generation": 1,
+            "lifecycle": "PARKED",
+            "thread_id": "thread-retired-recovery",
+        }
+    ]
+
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd="C:/Projects/HMASD",
+            observed_tasks=observed,
+        )
+
+    assert result == {
+        "status": "PROTOCOL_DEFECT",
+        "reason": "RETIRED_RUNTIME_ROLE",
+        "work_id": WORK_ID,
+        "target_identity": retired_identity,
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/start") == 0
+    assert methods.count("thread/resume") == 0
+    assert methods.count("turn/start") == 0
+    assert peer.requests == []
+
+
 def test_execute_plan_dispatch_requires_explicit_observed_task_snapshot() -> None:
     peer = response_peer()
     plan = {

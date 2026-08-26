@@ -54,6 +54,7 @@ _CONFORMANCE_SCHEMA = {
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]{0,127}\Z")
 _DISPATCH_VERBS = {"CREATE_TASK_INTENT", "DISPATCH_EXISTING"}
+_RETIRED_RECOVERY_IDENTITY = "hmasd-workflow-recovery-manager"
 _CAPACITY_ERRORS = {
     "usageLimitExceeded",
     "sessionBudgetExceeded",
@@ -1755,11 +1756,22 @@ class AppServerClient:
             return {"status": "NO_EFFECT", "verb": verb}
         work_id = plan.get("work_id")
         target = plan.get("target_identity") or plan.get("requested_target_identity")
+        resolution = plan.get("task_resolution")
         if target == "Workflow-Clerk":
             return {
                 "status": "PROTOCOL_DEFECT",
                 "reason": "ORDINARY_PACKET_CANNOT_TARGET_CLERK",
                 "work_id": work_id,
+            }
+        if target == _RETIRED_RECOVERY_IDENTITY or (
+            isinstance(resolution, Mapping)
+            and resolution.get("logical_identity") == _RETIRED_RECOVERY_IDENTITY
+        ):
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "RETIRED_RUNTIME_ROLE",
+                "work_id": work_id,
+                "target_identity": _RETIRED_RECOVERY_IDENTITY,
             }
         if not isinstance(packet_locator, str):
             raise ValueError("dispatch plan requires packet_locator")
@@ -1775,7 +1787,6 @@ class AppServerClient:
             not isinstance(root_override_reason, str) or not root_override_reason.strip()
         ):
             raise ValueError("root override reason must be non-empty")
-        resolution = plan.get("task_resolution")
         expected_resolution_status = (
             "CREATE_TASK" if verb == "CREATE_TASK_INTENT" else "REUSE"
         )
