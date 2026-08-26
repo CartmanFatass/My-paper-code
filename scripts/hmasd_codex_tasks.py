@@ -1137,6 +1137,17 @@ class AppServerClient:
                 task.setdefault("kind", manager["kind"])
                 if manager["direction_id"] is not None:
                     task.setdefault("direction_id", manager["direction_id"])
+                thread_source = row.get("threadSource")
+                source_match = (
+                    re.fullmatch(
+                        rf"hmasd-manager:{re.escape(identity)}:g([1-9][0-9]*)",
+                        thread_source,
+                    )
+                    if isinstance(thread_source, str)
+                    else None
+                )
+                if source_match is not None:
+                    task.setdefault("generation", int(source_match.group(1)))
             snapshot_by_thread[thread_id] = task
         return [snapshot_by_thread[key] for key in sorted(snapshot_by_thread)]
 
@@ -1913,6 +1924,227 @@ class AppServerClient:
             }
         return sent
 
+    def run_chain(
+        self,
+        *,
+        start_work_id: str,
+        cwd: str,
+        max_transitions: int = 16,
+        peer_work_ids: Sequence[str] = (),
+        root_override_reason: str | None = None,
+    ) -> dict[str, Any]:
+        """Boundedly compose validated one-work-id operations in memory.
+
+        Durable workflow facts remain the ready packets, immutable returns,
+        native task history, and Effect observations.  This method retains only
+        an ordered trace and the current explicit work identity for this call.
+        """
+
+        if _SHA256.fullmatch(start_work_id) is None:
+            raise ValueError("start_work_id must be a lowercase SHA256")
+        if not isinstance(cwd, str) or not cwd:
+            raise ValueError("run-chain requires cwd")
+        if (
+            not isinstance(max_transitions, int)
+            or isinstance(max_transitions, bool)
+            or max_transitions < 0
+        ):
+            raise ValueError("max_transitions must be a non-negative integer")
+        repo = Path(cwd).absolute()
+        current_tasks: list[dict[str, Any]] = []
+        current_work_id = start_work_id
+        transition_count = 0
+        events: list[dict[str, Any]] = []
+        current_override_reason = root_override_reason
+
+        def stopped(reason: str, **fact: Any) -> dict[str, Any]:
+            return {
+                "status": "STOPPED",
+                "start_work_id": start_work_id,
+                "transition_count": transition_count,
+                "events": events,
+                "stop": {
+                    "reason": reason,
+                    "work_id": current_work_id,
+                    **fact,
+                },
+            }
+
+        def refresh_tasks() -> list[dict[str, Any]] | dict[str, Any]:
+            try:
+                projected_tasks = hmasd_work_packet.load_observed_tasks(
+                    None, repo=repo
+                )
+            except hmasd_work_packet.WorkPacketError as exc:
+                return {
+                    "status": "RUNTIME_TASK_PROJECTION_INVALID",
+                    "conflict": {"type": type(exc).__name__, "detail": str(exc)},
+                }
+            listed = self._list_all_threads(cwd=cwd)
+            if listed.get("status") != "OK":
+                return listed
+            rows: list[Mapping[str, Any]] = []
+            for listed_row in listed["threads"]:
+                thread_id = listed_row.get("id")
+                if not isinstance(thread_id, str) or not thread_id:
+                    return {
+                        "status": "TASK_LIST_IDENTITY_DEFECT",
+                        "reason": "LISTED_THREAD_ID_INVALID",
+                    }
+                read = self._read_thread_full(thread_id)
+                if read.get("status") != "OK":
+                    return read
+                thread = read.get("thread")
+                if not isinstance(thread, Mapping) or thread.get("id") != thread_id:
+                    return {
+                        "status": "TASK_IDENTITY_CONFLICT",
+                        "reason": "FRESH_THREAD_READ_INVALID",
+                        "thread_id": thread_id,
+                    }
+                if self._same_cwd(thread.get("cwd"), cwd):
+                    rows.append(thread)
+            return self._native_task_snapshot(
+                rows, projected_tasks, include_unlisted=False
+            )
+
+        initial_snapshot = refresh_tasks()
+        if isinstance(initial_snapshot, Mapping):
+            return stopped("NATIVE_OBSERVATION_STOP", observation=initial_snapshot)
+        current_tasks = initial_snapshot
+
+        while True:
+            try:
+                plan = hmasd_work_packet.reconcile_once(
+                    repo=repo,
+                    work_id=current_work_id,
+                    observed_tasks=current_tasks,
+                )["plan"]
+            except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict) as exc:
+                return stopped(
+                    "TYPED_CONFLICT",
+                    conflict={"type": type(exc).__name__, "detail": str(exc)},
+                )
+            events.append(
+                {"kind": "PLAN", "work_id": current_work_id, "plan": plan}
+            )
+            verb = plan.get("verb")
+
+            if verb == "NOOP_TERMINAL":
+                try:
+                    witness = hmasd_work_packet.read_return(
+                        repo=repo, work_id=current_work_id
+                    )
+                except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict) as exc:
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": type(exc).__name__, "detail": str(exc)},
+                    )
+                return stopped("TERMINAL_NO_NEXT", return_witness=witness)
+
+            if verb == "CONFLICT":
+                return stopped("TYPED_CONFLICT", conflict=plan)
+
+            if verb == "OBSERVE_EFFECT_ONLY":
+                return stopped(
+                    "UNKNOWN_COMMITMENT",
+                    unknown_effect_refs=plan.get("unknown_effect_refs", []),
+                )
+
+            if verb == "PUBLISH_PACKET_INTENT":
+                try:
+                    witness = hmasd_work_packet.read_return(
+                        repo=repo, work_id=current_work_id
+                    )
+                except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict) as exc:
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": type(exc).__name__, "detail": str(exc)},
+                    )
+                if witness is None:
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": "MISSING_RETURN_WITNESS"},
+                    )
+                next_action = witness["agent_result"]["next_action"]
+                next_work_id = plan.get("next_work_id")
+                if next_action.get("kind") != "REQUEST_CM_ENGINEERING":
+                    return stopped(
+                        "DOMAIN_DECISION_REQUIRED",
+                        next_action=next_action,
+                        return_witness=witness,
+                    )
+                if (
+                    not isinstance(next_work_id, str)
+                    or next_action.get("input_refs") != [next_work_id]
+                    or witness.get("next_packet_draft") != plan.get("packet")
+                ):
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": "FOLLOW_ON_BINDING_MISMATCH"},
+                    )
+                if transition_count >= max_transitions:
+                    return stopped(
+                        "MAX_TRANSITIONS",
+                        max_transitions=max_transitions,
+                        next_work_id=next_work_id,
+                    )
+                try:
+                    published = hmasd_work_packet.publish_packet(
+                        plan["packet"], repo=repo
+                    )
+                except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict) as exc:
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"type": type(exc).__name__, "detail": str(exc)},
+                    )
+                events.append(
+                    {
+                        "kind": "PACKET_PUBLISH",
+                        "work_id": current_work_id,
+                        "next_work_id": next_work_id,
+                        "published": published["published"],
+                    }
+                )
+                transition_count += 1
+                current_work_id = next_work_id
+                current_override_reason = None
+                refreshed = refresh_tasks()
+                if isinstance(refreshed, Mapping):
+                    return stopped("NATIVE_OBSERVATION_STOP", observation=refreshed)
+                current_tasks = refreshed
+                continue
+
+            if verb in _DISPATCH_VERBS:
+                result = self.execute_plan(
+                    plan,
+                    packet_locator=(
+                        f".codex/runtime/work/ready/{current_work_id}/packet.json"
+                    ),
+                    cwd=cwd,
+                    wait_for_terminal=True,
+                    observed_tasks=current_tasks,
+                    peer_work_ids=peer_work_ids,
+                    root_override_reason=current_override_reason,
+                )
+                events.append(
+                    {
+                        "kind": "EXECUTE_PLAN",
+                        "work_id": current_work_id,
+                        "result": result,
+                    }
+                )
+                if result.get("status") == "UNKNOWN":
+                    return stopped("UNKNOWN_COMMITMENT", result=result)
+                if "return_witness" not in result:
+                    return stopped("EXECUTE_PLAN_STOP", result=result)
+                refreshed = refresh_tasks()
+                if isinstance(refreshed, Mapping):
+                    return stopped("NATIVE_OBSERVATION_STOP", observation=refreshed)
+                current_tasks = refreshed
+                continue
+
+            return stopped("PLAN_STOP", plan=plan)
+
     @staticmethod
     def _conformance_failure(
         reason: str,
@@ -2141,6 +2373,12 @@ def _parser() -> argparse.ArgumentParser:
     execute.add_argument("--observed-tasks")
     execute.add_argument("--peer-work-id", action="append", default=[])
     execute.add_argument("--root-override-reason")
+    chain = commands.add_parser("run-chain")
+    chain.add_argument("--work-id", required=True)
+    chain.add_argument("--cwd", required=True)
+    chain.add_argument("--peer-work-id", action="append", default=[])
+    chain.add_argument("--root-override-reason")
+    chain.add_argument("--max-transitions", type=int, default=16)
     conformance = commands.add_parser("conformance")
     conformance.add_argument("--source-thread-id", required=True)
     conformance.add_argument("--wait-timeout", type=float, required=True)
@@ -2195,6 +2433,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             elif args.command == "conformance":
                 result = client.conformance(
                     args.source_thread_id, wait_timeout=args.wait_timeout
+                )
+            elif args.command == "run-chain":
+                result = client.run_chain(
+                    start_work_id=args.work_id,
+                    cwd=args.cwd,
+                    peer_work_ids=args.peer_work_id,
+                    root_override_reason=args.root_override_reason,
+                    max_transitions=args.max_transitions,
                 )
             else:
                 plan = json.loads(Path(args.plan).read_text(encoding="utf-8"))

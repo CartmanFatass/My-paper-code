@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -1289,6 +1290,367 @@ def test_execute_plan_reports_one_typed_return_and_redelivery_is_idempotent(
         if request.get("method") == "thread/name/set"
     ]
     assert named_targets == ["EM-alpha"]
+    assert "Root" not in json.dumps(scenario.requests)
+
+
+def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    direction_root = tmp_path / "docs/research/candidates/alpha"
+    state_path = direction_root / "STATE.json"
+    direction_path = direction_root / "DIRECTION.json"
+    engineering_request_path = direction_root / "em/ENGINEERING_REQUEST.json"
+    for path, document in (
+        (state_path, {"direction": "alpha", "revision": 7}),
+        (direction_path, {"direction": "alpha", "revision": 3}),
+        (
+            engineering_request_path,
+            {
+                "decision_owner": "EM-alpha",
+                "objective": "implement only the frozen alpha engineering slice",
+            },
+        ),
+    ):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    request_ref = {
+        "path": "docs/research/candidates/alpha/em/ENGINEERING_REQUEST.json",
+        "sha256": hashlib.sha256(engineering_request_path.read_bytes()).hexdigest(),
+    }
+    em_packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [
+                {
+                    "path": "docs/research/candidates/alpha/DIRECTION.json",
+                    "revision": 3,
+                }
+            ],
+            "objective": "decide whether alpha needs one bounded engineering slice",
+            "non_goals": ["do not coordinate participant transport"],
+            "owned_paths": ["docs/research/candidates/alpha/em"],
+            "done_criteria": ["bind one exact CM draft or finish without one"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(em_packet, repo=tmp_path)
+    cm_draft = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "EM-alpha",
+            "target_identity": "CM-alpha",
+            "authority_refs": [request_ref],
+            "objective": "implement only the frozen alpha engineering slice",
+            "non_goals": [
+                "do not reinterpret the scientific decision",
+                "do not coordinate another participant",
+            ],
+            "owned_paths": ["experiments/candidates/alpha/t02"],
+            "done_criteria": ["publish one immutable typed CM return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    em_task = {
+        "logical_identity": "EM-alpha",
+        "kind": "em",
+        "direction_id": "alpha",
+        "generation": 1,
+        "lifecycle": "PARKED",
+        "thread_id": "thread-em-alpha",
+    }
+    em_result = {
+        "schema_version": 1,
+        "role": "hmasd-em",
+        "logical_identity": "EM-alpha",
+        "generation": 1,
+        "assignment_id": em_packet["work_id"],
+        "status": "COMPLETED",
+        "materiality": "DIRECTION",
+        "summary": "The frozen scientific result requests one bounded CM slice.",
+        "changed_paths": [request_ref["path"]],
+        "state_refs": [],
+        "artifact_refs": [request_ref],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {
+            "kind": "REQUEST_CM_ENGINEERING",
+            "input_refs": [cm_draft["work_id"]],
+        },
+        "payload": {
+            "kind": "em",
+            "direction_id": "alpha",
+            "question_sha256": "a" * 64,
+            "evidence_set_sha256": "b" * 64,
+            "conclusion_refs": [],
+            "engineering_request_ref": request_ref,
+        },
+    }
+    tasks.hmasd_work_packet.publish_return(
+        repo=tmp_path,
+        work_id=em_packet["work_id"],
+        observed_tasks=[em_task],
+        agent_result=em_result,
+        next_packet_draft=cm_draft,
+    )
+
+    cm_task = {
+        "logical_identity": "CM-alpha",
+        "kind": "cm",
+        "direction_id": "alpha",
+        "generation": 1,
+        "lifecycle": "PARKED",
+        "thread_id": "thread-cm-alpha",
+    }
+    cm_result = {
+        "schema_version": 1,
+        "role": "hmasd-cm",
+        "logical_identity": "CM-alpha",
+        "generation": 1,
+        "assignment_id": cm_draft["work_id"],
+        "status": "COMPLETED",
+        "materiality": "DIRECTION",
+        "summary": "Completed only the exact bounded engineering slice.",
+        "changed_paths": [],
+        "state_refs": [],
+        "artifact_refs": [],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "cm",
+            "direction_id": "alpha",
+            "scope_ref": request_ref,
+            "base_sha": "c" * 40,
+            "candidate_sha": None,
+            "verification_refs": [],
+            "integrated_sha": None,
+        },
+    }
+    cm_return_count = 0
+    em_locator = f".codex/runtime/work/ready/{em_packet['work_id']}/packet.json"
+    cm_locator = f".codex/runtime/work/ready/{cm_draft['work_id']}/packet.json"
+
+    class ChainPeer:
+        def __init__(self) -> None:
+            self.threads: dict[str, dict[str, Any]] = {
+                "thread-em-alpha": {
+                    "id": "thread-em-alpha",
+                    "name": "EM-alpha",
+                    "cwd": str(tmp_path),
+                    "threadSource": "hmasd-manager:EM-alpha:g1",
+                    "status": {"type": "idle"},
+                    "turns": [
+                        {
+                            "id": "turn-em-alpha",
+                            "status": "completed",
+                            "items": [
+                                {
+                                    "type": "userMessage",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": tasks.dispatch_envelope_bytes(
+                                                em_packet["work_id"],
+                                                em_locator,
+                                                "EM-alpha",
+                                            ).decode(),
+                                        }
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            }
+            self.transport = FakeTransport(self.respond)
+
+        @property
+        def requests(self) -> list[dict[str, Any]]:
+            return self.transport.requests
+
+        def respond(self, request: dict[str, Any], peer: FakeTransport) -> None:
+            nonlocal cm_return_count
+            request_id = request.get("id")
+            if request_id is None:
+                return
+            method = request.get("method")
+            if method == "initialize":
+                result: dict[str, Any] = {
+                    "serverInfo": {"name": "fake", "version": "1"}
+                }
+            elif method == "thread/list":
+                result = {"data": list(self.threads.values()), "nextCursor": None}
+            elif method == "thread/read":
+                result = {"thread": self.threads[request["params"]["threadId"]]}
+            elif method == "thread/start":
+                assert request["params"]["threadSource"] == "hmasd-manager:CM-alpha:g1"
+                thread = {
+                    "id": "thread-cm-alpha",
+                    "name": None,
+                    "cwd": request["params"]["cwd"],
+                    "threadSource": request["params"]["threadSource"],
+                    "status": {"type": "idle"},
+                    "turns": [],
+                }
+                self.threads[thread["id"]] = thread
+                result = {
+                    "thread": thread,
+                    "model": "fake",
+                    "modelProvider": "fake",
+                    "cwd": request["params"]["cwd"],
+                    "approvalPolicy": "never",
+                    "sandbox": {"type": "dangerFullAccess"},
+                    "instructionSources": [],
+                }
+            elif method == "thread/name/set":
+                self.threads[request["params"]["threadId"]]["name"] = request[
+                    "params"
+                ]["name"]
+                result = {}
+            elif method == "thread/resume":
+                thread = self.threads[request["params"]["threadId"]]
+                result = {
+                    "thread": thread,
+                    "model": "fake",
+                    "modelProvider": "fake",
+                    "cwd": thread["cwd"],
+                    "approvalPolicy": "never",
+                    "sandbox": {"type": "dangerFullAccess"},
+                }
+            elif method == "turn/start":
+                assert request["params"]["threadId"] == "thread-cm-alpha"
+                cm_return_count += 1
+                tasks.hmasd_work_packet.publish_return(
+                    repo=tmp_path,
+                    work_id=cm_draft["work_id"],
+                    observed_tasks=[cm_task],
+                    agent_result=cm_result,
+                )
+                turn = {
+                    "id": "turn-cm-alpha",
+                    "status": "completed",
+                    "items": [
+                        {
+                            "type": "userMessage",
+                            "content": request["params"]["input"],
+                        }
+                    ],
+                }
+                self.threads["thread-cm-alpha"]["turns"] = [turn]
+                peer.emit(
+                    {
+                        "id": request_id,
+                        "result": {
+                            "turn": {
+                                "id": turn["id"],
+                                "status": "inProgress",
+                                "items": [],
+                            }
+                        },
+                    }
+                )
+                peer.emit(
+                    {
+                        "method": "turn/completed",
+                        "params": {"threadId": "thread-cm-alpha", "turn": turn},
+                    }
+                )
+                return
+            else:
+                raise AssertionError(f"unexpected method: {method}")
+            peer.emit({"id": request_id, "result": result})
+
+    scenario = ChainPeer()
+    monkeypatch.setattr(tasks, "JsonlProcessTransport", lambda _: scenario.transport)
+    command = [
+        "--server-command",
+        "fake",
+        "run-chain",
+        "--work-id",
+        em_packet["work_id"],
+        "--cwd",
+        str(tmp_path),
+        "--max-transitions",
+        "4",
+    ]
+    assert tasks.main(command) == 0
+    first = json.loads(capsys.readouterr().out)
+    assert tasks.main(command) == 0
+    repeated = json.loads(capsys.readouterr().out)
+
+    assert first["status"] == "STOPPED"
+    assert first["stop"] == {
+        "reason": "TERMINAL_NO_NEXT",
+        "work_id": cm_draft["work_id"],
+        "return_witness": tasks.hmasd_work_packet.read_return(
+            repo=tmp_path, work_id=cm_draft["work_id"]
+        ),
+    }
+    assert [event["kind"] for event in first["events"]] == [
+        "PLAN",
+        "PACKET_PUBLISH",
+        "PLAN",
+        "EXECUTE_PLAN",
+        "PLAN",
+    ]
+    assert first["events"][0]["plan"]["packet"] == cm_draft
+    assert first["events"][1] == {
+        "kind": "PACKET_PUBLISH",
+        "work_id": em_packet["work_id"],
+        "next_work_id": cm_draft["work_id"],
+        "published": True,
+    }
+    assert first["events"][2]["plan"]["target_identity"] == "CM-alpha"
+    assert first["events"][3]["result"]["return_witness"]["agent_result"] == cm_result
+    assert repeated["status"] == "STOPPED"
+    assert repeated["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    assert repeated["stop"]["work_id"] == cm_draft["work_id"]
+    assert [event["kind"] for event in repeated["events"]] == [
+        "PLAN",
+        "PACKET_PUBLISH",
+        "PLAN",
+    ]
+    assert repeated["events"][1]["published"] is False
+    ready_cm_path = (
+        tmp_path
+        / ".codex/runtime/work/ready"
+        / cm_draft["work_id"]
+        / "packet.json"
+    )
+    assert json.loads(ready_cm_path.read_text(encoding="utf-8")) == cm_draft
+    methods = [request.get("method") for request in scenario.requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("thread/name/set") == 1
+    assert methods.count("turn/start") == 1
+    assert cm_return_count == 1
+    cm_turn = next(
+        request for request in scenario.requests if request.get("method") == "turn/start"
+    )
+    assert cm_turn["params"]["input"] == [
+        {
+            "type": "text",
+            "text": tasks.dispatch_envelope_bytes(
+                cm_draft["work_id"], cm_locator, "CM-alpha"
+            ).decode(),
+        },
+        {"type": "text", "text": PARTICIPANT_SLICE_INSTRUCTION},
+    ]
     assert "Root" not in json.dumps(scenario.requests)
 
 
