@@ -55,6 +55,29 @@ skill、测试夹具或运行记录不得改变这些目标。若当前实现与
 10. skill 只有在无 skill 基线确实失败、且内容是可重复单一能力时才创建；否则
     保持不存在。
 
+## 已确认的执行与测试 seam
+
+Decision owner: User  
+确认日期：2026-08-26
+
+- `scripts/hmasd_codex_tasks.py execute-plan` 是保留的原子内核 seam。一次调用只
+  执行一个明确 `work_id` 的闭合 plan，负责确定性的 task create/reuse、投递、
+  等待、fresh observation 和 typed return 验证。它不得替 planner 补字段或决定
+  后续工作。
+- `scripts/hmasd_codex_tasks.py run-chain` 是完整无人工作流的唯一外部验收 seam。
+  它从一个明确的起始 `work_id` 出发，只依据 machine-validated return、draft 和
+  `next_action` refs，有界组合现有 build、publish、`reconcile --once` 和
+  `execute-plan` 操作。
+- `run-chain` 不得引入 durable queue、第二 registry、daemon、数据库、新 workflow
+  schema 或第二状态机。所有 durable facts 仍来自既有 authority、Work Packet、
+  return witness、Effect observer 和 native task history。
+- `run-chain` 遇到 terminal completion、用户/领域决定、typed conflict、UNKNOWN
+  commitment 或转换上限时停止并返回精确事实。模型或 session 不得在每个 hop
+  之间解释状态并自行选择下一次调用。
+- 原子 transport/identity 测试使用 `execute-plan`；无人多 hop、bounded recovery、
+  四方向并发和 real-native 验收使用 `run-chain`。单独通过前者不得宣称工作流
+  完成。
+
 ## 当前完成状态
 
 真实全链验收仍未通过，因此不得声称工作流已经完成。局部协议测试、fake
