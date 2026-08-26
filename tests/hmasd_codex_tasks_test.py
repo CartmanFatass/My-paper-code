@@ -236,6 +236,7 @@ def response_peer(
     listed_threads: list[dict[str, Any]] | None = None,
     read_thread_name: str | None = None,
     read_thread_cwd: str | None = None,
+    read_thread_source: str | None = None,
 ) -> FakeTransport:
     created_thread: dict[str, Any] | None = None
 
@@ -341,6 +342,11 @@ def response_peer(
                     **({"status": read_thread_status} if read_thread_status is not None else {}),
                     **({"name": read_thread_name} if read_thread_name is not None else {}),
                     **({"cwd": read_thread_cwd} if read_thread_cwd is not None else {}),
+                    **(
+                        {"threadSource": read_thread_source}
+                        if read_thread_source is not None
+                        else {}
+                    ),
                     "turns": [
                         {"id": read_turn_id, "status": read_turn_status, "items": items}
                     ],
@@ -1652,6 +1658,121 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
         {"type": "text", "text": PARTICIPANT_SLICE_INSTRUCTION},
     ]
     assert "Root" not in json.dumps(scenario.requests)
+
+
+def test_run_chain_rejects_projected_native_generation_conflict_before_plan(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps({"direction": "alpha", "revision": 7}, indent=2, sort_keys=True)
+        + "\n",
+        encoding="utf-8",
+    )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "EM-alpha",
+            "target_identity": "CM-alpha",
+            "authority_refs": [],
+            "objective": "complete one exact alpha engineering slice",
+            "non_goals": ["do not use a stale projected generation"],
+            "owned_paths": ["experiments/candidates/alpha/t02-conflict"],
+            "done_criteria": ["return one typed CM result"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    projection_path = tmp_path / ".codex/runtime/tasks.json"
+    projection_path.parent.mkdir(parents=True, exist_ok=True)
+    projection_path.write_text(
+        json.dumps(
+            {
+                "tasks": [
+                    {
+                        "logical_identity": "CM-alpha",
+                        "kind": "cm",
+                        "direction_id": "alpha",
+                        "generation": 1,
+                        "lifecycle": "PARKED",
+                        "thread_id": "thread-cm-alpha",
+                    }
+                ]
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    native_source = "hmasd-manager:CM-alpha:g2"
+    peer = response_peer(
+        listed_threads=[
+            {
+                "id": "thread-cm-alpha",
+                "name": "CM-alpha",
+                "cwd": str(tmp_path),
+                "threadSource": native_source,
+                "status": {"type": "idle"},
+            }
+        ],
+        read_thread_name="CM-alpha",
+        read_thread_cwd=str(tmp_path),
+        read_thread_source=native_source,
+        read_thread_status={"type": "idle"},
+    )
+    monkeypatch.setattr(tasks, "JsonlProcessTransport", lambda _: peer)
+
+    assert tasks.main(
+        [
+            "--server-command",
+            "fake",
+            "run-chain",
+            "--work-id",
+            packet["work_id"],
+            "--cwd",
+            str(tmp_path),
+        ]
+    ) == 0
+    result = json.loads(capsys.readouterr().out)
+
+    assert result == {
+        "status": "STOPPED",
+        "start_work_id": packet["work_id"],
+        "transition_count": 0,
+        "events": [],
+        "stop": {
+            "reason": "TYPED_CONFLICT",
+            "work_id": packet["work_id"],
+            "conflict": {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
+                "conflicts": [
+                    {
+                        "logical_identity": "CM-alpha",
+                        "thread_id": "thread-cm-alpha",
+                        "projected_generation": 1,
+                        "native_generation": 2,
+                        "thread_source": native_source,
+                    }
+                ],
+            },
+        },
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/list") == 1
+    assert methods.count("thread/read") == 1
+    assert "thread/start" not in methods
+    assert "thread/name/set" not in methods
+    assert "turn/start" not in methods
 
 
 def test_execute_plan_refreshes_native_identity_and_lifecycle_after_wait(

@@ -1147,9 +1147,36 @@ class AppServerClient:
                     else None
                 )
                 if source_match is not None:
-                    task.setdefault("generation", int(source_match.group(1)))
+                    native_generation = int(source_match.group(1))
+                    projected_generation = task.get("generation")
+                    if projected_generation is not None and (
+                        not isinstance(projected_generation, int)
+                        or isinstance(projected_generation, bool)
+                        or projected_generation != native_generation
+                    ):
+                        task.pop("generation", None)
+                        task["generation_conflict"] = {
+                            "logical_identity": identity,
+                            "thread_id": thread_id,
+                            "projected_generation": projected_generation,
+                            "native_generation": native_generation,
+                            "thread_source": thread_source,
+                        }
+                        task["lifecycle"] = "CONFLICT"
+                    else:
+                        task["generation"] = native_generation
             snapshot_by_thread[thread_id] = task
         return [snapshot_by_thread[key] for key in sorted(snapshot_by_thread)]
+
+    @staticmethod
+    def _generation_conflicts(
+        tasks: Sequence[Mapping[str, Any]],
+    ) -> list[dict[str, Any]]:
+        return [
+            dict(task["generation_conflict"])
+            for task in tasks
+            if isinstance(task.get("generation_conflict"), Mapping)
+        ]
 
     def _read_known_identity(
         self,
@@ -1505,6 +1532,13 @@ class AppServerClient:
             initial_task_rows = self._native_task_snapshot(
                 rows, self._task_rows(observed_tasks)
             )
+            generation_conflicts = self._generation_conflicts(initial_task_rows)
+            if generation_conflicts:
+                return {
+                    "status": "TASK_IDENTITY_CONFLICT",
+                    "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
+                    "conflicts": generation_conflicts,
+                }
             exact = [row for row in rows if row.get("name") == target]
             exact_thread_ids: list[str] = []
             for row in exact:
@@ -1970,6 +2004,11 @@ class AppServerClient:
                 },
             }
 
+        def observation_stop(observation: Mapping[str, Any]) -> dict[str, Any]:
+            if observation.get("status") == "TASK_IDENTITY_CONFLICT":
+                return stopped("TYPED_CONFLICT", conflict=dict(observation))
+            return stopped("NATIVE_OBSERVATION_STOP", observation=dict(observation))
+
         def refresh_tasks() -> list[dict[str, Any]] | dict[str, Any]:
             try:
                 projected_tasks = hmasd_work_packet.load_observed_tasks(
@@ -2003,13 +2042,21 @@ class AppServerClient:
                     }
                 if self._same_cwd(thread.get("cwd"), cwd):
                     rows.append(thread)
-            return self._native_task_snapshot(
+            snapshot = self._native_task_snapshot(
                 rows, projected_tasks, include_unlisted=False
             )
+            generation_conflicts = self._generation_conflicts(snapshot)
+            if generation_conflicts:
+                return {
+                    "status": "TASK_IDENTITY_CONFLICT",
+                    "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
+                    "conflicts": generation_conflicts,
+                }
+            return snapshot
 
         initial_snapshot = refresh_tasks()
         if isinstance(initial_snapshot, Mapping):
-            return stopped("NATIVE_OBSERVATION_STOP", observation=initial_snapshot)
+            return observation_stop(initial_snapshot)
         current_tasks = initial_snapshot
 
         while True:
@@ -2110,7 +2157,7 @@ class AppServerClient:
                 current_override_reason = None
                 refreshed = refresh_tasks()
                 if isinstance(refreshed, Mapping):
-                    return stopped("NATIVE_OBSERVATION_STOP", observation=refreshed)
+                    return observation_stop(refreshed)
                 current_tasks = refreshed
                 continue
 
@@ -2139,7 +2186,7 @@ class AppServerClient:
                     return stopped("EXECUTE_PLAN_STOP", result=result)
                 refreshed = refresh_tasks()
                 if isinstance(refreshed, Mapping):
-                    return stopped("NATIVE_OBSERVATION_STOP", observation=refreshed)
+                    return observation_stop(refreshed)
                 current_tasks = refreshed
                 continue
 
