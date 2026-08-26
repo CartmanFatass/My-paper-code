@@ -1171,11 +1171,15 @@ class AppServerClient:
     @staticmethod
     def _generation_conflicts(
         tasks: Sequence[Mapping[str, Any]],
+        *,
+        target_identity: str,
     ) -> list[dict[str, Any]]:
         return [
             dict(task["generation_conflict"])
             for task in tasks
             if isinstance(task.get("generation_conflict"), Mapping)
+            and task["generation_conflict"].get("logical_identity")
+            == target_identity
         ]
 
     def _read_known_identity(
@@ -1532,7 +1536,9 @@ class AppServerClient:
             initial_task_rows = self._native_task_snapshot(
                 rows, self._task_rows(observed_tasks)
             )
-            generation_conflicts = self._generation_conflicts(initial_task_rows)
+            generation_conflicts = self._generation_conflicts(
+                initial_task_rows, target_identity=str(target)
+            )
             if generation_conflicts:
                 return {
                     "status": "TASK_IDENTITY_CONFLICT",
@@ -2045,13 +2051,6 @@ class AppServerClient:
             snapshot = self._native_task_snapshot(
                 rows, projected_tasks, include_unlisted=False
             )
-            generation_conflicts = self._generation_conflicts(snapshot)
-            if generation_conflicts:
-                return {
-                    "status": "TASK_IDENTITY_CONFLICT",
-                    "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
-                    "conflicts": generation_conflicts,
-                }
             return snapshot
 
         initial_snapshot = refresh_tasks()
@@ -2070,6 +2069,27 @@ class AppServerClient:
                 return stopped(
                     "TYPED_CONFLICT",
                     conflict={"type": type(exc).__name__, "detail": str(exc)},
+                )
+            plan_target = (
+                plan.get("target_identity")
+                or plan.get("requested_target_identity")
+                or plan.get("task_resolution", {}).get("logical_identity")
+            )
+            generation_conflicts = (
+                self._generation_conflicts(
+                    current_tasks, target_identity=plan_target
+                )
+                if isinstance(plan_target, str)
+                else []
+            )
+            if generation_conflicts:
+                return stopped(
+                    "TYPED_CONFLICT",
+                    conflict={
+                        "status": "TASK_IDENTITY_CONFLICT",
+                        "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
+                        "conflicts": generation_conflicts,
+                    },
                 )
             events.append(
                 {"kind": "PLAN", "work_id": current_work_id, "plan": plan}

@@ -1308,9 +1308,11 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
     state_path = direction_root / "STATE.json"
     direction_path = direction_root / "DIRECTION.json"
     engineering_request_path = direction_root / "em/ENGINEERING_REQUEST.json"
+    beta_state_path = tmp_path / "docs/research/candidates/beta/STATE.json"
     for path, document in (
         (state_path, {"direction": "alpha", "revision": 7}),
         (direction_path, {"direction": "alpha", "revision": 3}),
+        (beta_state_path, {"direction": "beta", "revision": 1}),
         (
             engineering_request_path,
             {
@@ -1371,6 +1373,47 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
             "effect_refs": [],
         },
         repo=tmp_path,
+    )
+    beta_packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/beta/STATE.json",
+                "revision": 1,
+            },
+            "sender_identity": "EM-beta",
+            "target_identity": "CM-beta",
+            "authority_refs": [],
+            "objective": "complete one exact beta engineering slice",
+            "non_goals": ["do not affect the independent alpha chain"],
+            "owned_paths": ["experiments/candidates/beta/t02"],
+            "done_criteria": ["return one typed CM result"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(beta_packet, repo=tmp_path)
+    projection_path = tmp_path / ".codex/runtime/tasks.json"
+    projection_path.parent.mkdir(parents=True, exist_ok=True)
+    projection_path.write_text(
+        json.dumps(
+            {
+                "tasks": [
+                    {
+                        "logical_identity": "CM-beta",
+                        "kind": "cm",
+                        "direction_id": "beta",
+                        "generation": 1,
+                        "lifecycle": "PARKED",
+                        "thread_id": "thread-cm-beta",
+                    }
+                ]
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
     )
     em_task = {
         "logical_identity": "EM-alpha",
@@ -1454,6 +1497,7 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
 
     class ChainPeer:
         def __init__(self) -> None:
+            beta_source = "hmasd-manager:CM-beta:g2"
             self.threads: dict[str, dict[str, Any]] = {
                 "thread-em-alpha": {
                     "id": "thread-em-alpha",
@@ -1482,7 +1526,15 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
                             ],
                         }
                     ],
-                }
+                },
+                "thread-cm-beta": {
+                    "id": "thread-cm-beta",
+                    "name": "CM-beta",
+                    "cwd": str(tmp_path),
+                    "threadSource": beta_source,
+                    "status": {"type": "idle"},
+                    "turns": [],
+                },
             }
             self.transport = FakeTransport(self.respond)
 
@@ -1599,6 +1651,17 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
     first = json.loads(capsys.readouterr().out)
     assert tasks.main(command) == 0
     repeated = json.loads(capsys.readouterr().out)
+    beta_command = [
+        "--server-command",
+        "fake",
+        "run-chain",
+        "--work-id",
+        beta_packet["work_id"],
+        "--cwd",
+        str(tmp_path),
+    ]
+    assert tasks.main(beta_command) == 0
+    beta = json.loads(capsys.readouterr().out)
 
     assert first["status"] == "STOPPED"
     assert first["stop"] == {
@@ -1633,6 +1696,24 @@ def test_run_chain_routes_one_immutable_em_engineering_request_to_cm(
         "PLAN",
     ]
     assert repeated["events"][1]["published"] is False
+    assert beta["events"] == []
+    assert beta["stop"] == {
+        "reason": "TYPED_CONFLICT",
+        "work_id": beta_packet["work_id"],
+        "conflict": {
+            "status": "TASK_IDENTITY_CONFLICT",
+            "reason": "PROJECTED_NATIVE_GENERATION_CONFLICT",
+            "conflicts": [
+                {
+                    "logical_identity": "CM-beta",
+                    "thread_id": "thread-cm-beta",
+                    "projected_generation": 1,
+                    "native_generation": 2,
+                    "thread_source": "hmasd-manager:CM-beta:g2",
+                }
+            ],
+        },
+    }
     ready_cm_path = (
         tmp_path
         / ".codex/runtime/work/ready"
