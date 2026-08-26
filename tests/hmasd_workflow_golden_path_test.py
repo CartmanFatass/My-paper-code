@@ -729,7 +729,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     cm_return_count = 0
     operator_create_count = 0
     execute_count = 0
-    first_turn_inputs: list[dict[str, Any]] = []
+    cm_turn_inputs: list[list[dict[str, Any]]] = []
 
     class InterruptedCmPeer:
         def __init__(self) -> None:
@@ -741,7 +741,38 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     "threadSource": "hmasd-manager:CM-alpha:g1",
                     "status": {"type": "idle"},
                     "turns": [],
-                }
+                },
+                "thread-operator-collision": {
+                    "id": "thread-operator-collision",
+                    "name": "native_ll_golden_run",
+                    "parentThreadId": "thread-cm-alpha",
+                    "agentRole": "hmasd-experiment-operator",
+                    "cwd": str(repo),
+                    "status": {"type": "idle"},
+                    "turns": [
+                        {
+                            "id": "turn-operator-collision",
+                            "status": "completed",
+                            "items": [
+                                {
+                                    "type": "userMessage",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": json.dumps(
+                                                {
+                                                    "protocol": "hmasd.experiment-operator.assignment.v1",
+                                                    "logical_identity": "hmasd-experiment-operator",
+                                                    "run_id": "golden_run",
+                                                }
+                                            ),
+                                        }
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                },
             }
             self.transport = _LocalFakeAppServer(repo)
             self.transport.threads = self.threads
@@ -778,6 +809,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             if method != "turn/start":
                 raise AssertionError(f"unexpected fake App Server method: {method!r}")
             assert thread_id == "thread-cm-alpha"
+            cm_turn_inputs.append(params["input"])
             attempt = len(self.threads[thread_id]["turns"]) + 1
             turn = {
                 "id": f"turn-cm-{attempt}",
@@ -786,7 +818,6 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             }
             self.threads[thread_id]["turns"].append(turn)
             if attempt == 1:
-                first_turn_inputs.extend(params["input"])
                 operator_create_count += 1
                 operator_thread = {
                     "id": "thread-operator-golden-run",
@@ -807,6 +838,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                             "type": "text",
                                             "text": json.dumps(
                                                 {
+                                                    "protocol": "hmasd.experiment-operator.assignment.v1",
                                                     "logical_identity": "hmasd-experiment-operator",
                                                     "run_id": "golden-run",
                                                 }
@@ -899,34 +931,40 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     assert repeated["stop"]["reason"] == "TERMINAL_NO_NEXT"
     operator_contracts = [
         json.loads(item["text"])
-        for item in first_turn_inputs
+        for turn_inputs in cm_turn_inputs
+        for item in turn_inputs
         if item.get("type") == "text"
         and '"protocol":"hmasd.experiment-operator.assignment.v1"'
         in item.get("text", "")
     ]
+    contract_base = {
+        "agent_role": "hmasd-experiment-operator",
+        "assignment_id": "cm-owned-operator-golden",
+        "command": [sys.executable, "-c", f"print('{marker}')"],
+        "cwd": str(repo),
+        "execute_argv": [
+            sys.executable,
+            str(RUN_SCRIPT),
+            "execute",
+            "--manifest",
+            str(manifest),
+        ],
+        "logical_identity": "hmasd-experiment-operator",
+        "manifest": manifest_locator,
+        "output_root": str(manifest.parent),
+        "parent_identity": "CM-alpha",
+        "protocol": "hmasd.experiment-operator.assignment.v1",
+        "run_id": "golden-run",
+        "run_owner": "Operator-golden-run",
+        "task_name": "native_ll_golden_run",
+    }
     assert operator_contracts == [
+        {**contract_base, "action": "CREATE_EXACT"},
         {
-            "action": "create_or_reuse_one_native_child_then_wait",
-            "agent_role": "hmasd-experiment-operator",
-            "assignment_id": "cm-owned-operator-golden",
-            "command": [sys.executable, "-c", f"print('{marker}')"],
-            "cwd": str(repo),
-            "execute_argv": [
-                sys.executable,
-                str(RUN_SCRIPT),
-                "execute",
-                "--manifest",
-                str(manifest),
-            ],
-            "logical_identity": "hmasd-experiment-operator",
-            "manifest": manifest_locator,
-            "output_root": str(manifest.parent),
-            "parent_identity": "CM-alpha",
-            "protocol": "hmasd.experiment-operator.assignment.v1",
-            "run_id": "golden-run",
-            "run_owner": "Operator-golden-run",
-            "task_name": "native_ll_golden_run",
-        }
+            **contract_base,
+            "action": "RESUME_EXACT",
+            "observed_child_thread_id": "thread-operator-golden-run",
+        },
     ]
     manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
     assert manifest_document["status"] == "SUCCEEDED"
@@ -942,4 +980,10 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         for thread in peer.threads.values()
         if thread.get("parentThreadId") == "thread-cm-alpha"
         and thread.get("agentRole") == "hmasd-experiment-operator"
+        and any(
+            '"run_id": "golden-run"' in item.get("text", "")
+            for turn in thread.get("turns", [])
+            for entry in turn.get("items", [])
+            for item in entry.get("content", [])
+        )
     ] == ["thread-operator-golden-run"]
