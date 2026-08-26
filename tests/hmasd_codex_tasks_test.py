@@ -1890,6 +1890,11 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
     locator = f".codex/runtime/work/ready/{work_id}/packet.json"
     thread: dict[str, Any] | None = None
     all_requests: list[dict[str, Any]] = []
+    attempt_outcomes = (
+        ("interrupted", "TERMINAL_WITHOUT_RETURN"),
+        ("completed", "RESUME_SAME_SLICE"),
+        ("failed", "SAME_SCOPE_REPAIR"),
+    )
 
     def transport_factory(_command: Any) -> FakeTransport:
         fail_next_list = False
@@ -1951,14 +1956,21 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
                 }
             elif method == "turn/start":
                 assert thread is not None
+                status, recovery_kind = attempt_outcomes[len(thread["turns"])]
                 turn = {
                     "id": f"turn-{len(thread['turns']) + 1}",
-                    "status": "interrupted",
+                    "status": status,
                     "items": [
                         {
                             "type": "userMessage",
                             "content": request["params"]["input"],
-                        }
+                        },
+                        {
+                            "type": "agentMessage",
+                            "content": [
+                                {"type": "text", "text": recovery_kind}
+                            ],
+                        },
                     ],
                 }
                 thread["turns"].append(turn)
@@ -2018,8 +2030,8 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
             "max_attempts": 3,
             "attempt_statuses": [
                 {"attempt": 1, "turn_id": "turn-1", "turn_status": "interrupted"},
-                {"attempt": 2, "turn_id": "turn-2", "turn_status": "interrupted"},
-                {"attempt": 3, "turn_id": "turn-3", "turn_status": "interrupted"},
+                {"attempt": 2, "turn_id": "turn-2", "turn_status": "completed"},
+                {"attempt": 3, "turn_id": "turn-3", "turn_status": "failed"},
             ],
         },
     }
@@ -2483,7 +2495,7 @@ def test_execute_plan_terminal_history_with_tasks_mapping_return_never_resumes(
     assert "turn/start" not in methods
 
 
-def test_execute_plan_propagates_valid_return_with_unknown_effect_as_observe_only(
+def test_run_chain_repeated_unknown_effect_observation_never_resends(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
@@ -2590,24 +2602,24 @@ def test_execute_plan_propagates_valid_return_with_unknown_effect_as_observe_onl
             }
         ],
     )
-    plan = reuse_em_plan(work_id=work_id)
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
-        result = client.execute_plan(
-            plan,
-            packet_locator=locator,
+        first = client.run_chain(
+            start_work_id=work_id,
             cwd=str(tmp_path),
-            observed_tasks=[participant_task],
+        )
+        repeated = client.run_chain(
+            start_work_id=work_id,
+            cwd=str(tmp_path),
         )
 
-    witness = tasks.hmasd_work_packet.read_return(repo=tmp_path, work_id=work_id)
-    assert result == {
-        "status": "NO_EFFECT",
-        "verb": "OBSERVE_EFFECT_ONLY",
+    expected_stop = {
+        "reason": "UNKNOWN_COMMITMENT",
         "work_id": work_id,
-        "thread_id": "thread-1",
         "unknown_effect_refs": [effect_path],
-        "return_witness": witness,
     }
+    assert first["stop"] == expected_stop
+    assert repeated["stop"] == expected_stop
+    assert first["events"] == repeated["events"]
     methods = [request.get("method") for request in peer.requests]
     assert "thread/start" not in methods
     assert "thread/resume" not in methods

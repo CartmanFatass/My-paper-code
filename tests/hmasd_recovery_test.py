@@ -1,9 +1,8 @@
-"""Phase 7 pressure evidence for the public HMASD recovery contracts.
+"""Black-box evidence for the retained HMASD recovery seams.
 
-The recovery manager has no private Python API.  These tests therefore use the
-state, run, and worktree command-line contracts and inspect only the published
-recovery Skill for the manager-only decisions (generation rotation, late-result
-handling, and bounded route selection).
+Bounded participant recovery is exercised through ``run-chain`` in the native
+adapter tests.  This module verifies the existing state, run, Git-adjacent, and
+external-commitment observers without relying on a recovery Skill or manager.
 """
 
 from __future__ import annotations
@@ -26,7 +25,6 @@ STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
 RUN_SCRIPT = ROOT / "scripts" / "hmasd_run.py"
 WORKTREE_SCRIPT = ROOT / "scripts" / "hmasd_worktree.py"
 EXTERNAL_SCRIPT = ROOT / "scripts" / "hmasd_external_review.py"
-RECOVERY_SKILL = ROOT / ".agents" / "skills" / "hmasd-workflow-recovery" / "SKILL.md"
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -45,62 +43,6 @@ def _run(script: Path, *args: str, cwd: Path = ROOT) -> subprocess.CompletedProc
 
 def _validate(kind: str, path: Path) -> subprocess.CompletedProcess[str]:
     return _run(STATE_SCRIPT, "validate", "--kind", kind, "--path", str(path))
-
-
-def _recovery_skill() -> str:
-    assert RECOVERY_SKILL.is_file(), f"missing recovery Skill: {RECOVERY_SKILL}"
-    return RECOVERY_SKILL.read_text(encoding="utf-8").lower()
-
-
-def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
-    """The Skill must carry the complete matrix, not only the happy path."""
-
-    scenario = _load(RECOVERY_FIXTURES / "recovery_matrix.json")
-    skill = _recovery_skill()
-
-    # These are intentionally broad row anchors: the exact procedure belongs
-    # to the Skill, while the pressure test must fail if a whole failure class
-    # disappears during a topology migration.
-    row_anchors = {
-        "pure research": ("pure research", "research"),
-        "manager": ("manager",),
-        "partial code": ("partial code", "worktree"),
-        "running": ("running",),
-        "memory": ("memory",),
-        "git": ("git",),
-        "push": ("push",),
-        "external": ("external",),
-        "late": ("late",),
-        "dashboard": ("dashboard",),
-    }
-    for label, alternatives in row_anchors.items():
-        assert any(anchor in skill for anchor in alternatives), (
-            f"recovery matrix row is missing: {label}"
-        )
-
-    for row in scenario["matrix"]:
-        failure_words = row["failure"].lower().replace("/", " ").split()
-        assert any(word in skill for word in failure_words if len(word) > 3), row
-
-    required_boundaries = (
-        ("generation",),
-        ("checkpoint",),
-        ("compaction",),
-        ("runtime",),
-        ("reconstruct",),
-        ("materially distinct",),
-        ("three",),
-        ("user-visible blocker", "user blocker"),
-        ("never relaunch", "never replay", "no blind relaunch"),
-        ("never resend", "no resend", "do not resend"),
-        ("never overwrite", "do not overwrite", "superseded"),
-    )
-    missing = [
-        " / ".join(alternatives)
-        for alternatives in required_boundaries
-        if not any(term in skill for term in alternatives)
-    ]
-    assert not missing, f"recovery Skill omits pressure boundary terms: {missing}"
 
 
 def test_authoritative_state_remains_reconstructible_when_runtime_maps_are_missing(
@@ -185,11 +127,6 @@ def test_generation_mismatch_and_late_result_are_read_only_until_reconciled(
     result = _validate("agent_result", target)
     assert result.returncode == 0, (result.stdout, result.stderr)
     assert target.read_bytes() == before
-
-    skill = _recovery_skill()
-    for term in ("generation", "late", "checkpoint", "superseded", "newer", "reconcile"):
-        assert term in skill
-
 
 def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
     tmp_path: Path,
@@ -405,33 +342,6 @@ def test_external_unknown_commitment_is_not_resent_and_archive_import_is_idempot
     repeated = external_review.create_archive_if_absent(operation, archive, destination)
     assert repeated["status"] == "IDEMPOTENT"
     assert destination.read_bytes() == first_bytes
-
-
-
-def test_recovery_attempt_deduplication_and_exhaustion_emit_one_precise_blocker() -> None:
-    """Identical routes consume one slot; only exhaustion reaches the user."""
-
-    scenario = _load(RECOVERY_FIXTURES / "recovery_matrix.json")
-    attempts = scenario["repeated_attempts"]
-    route_keys = {
-        (attempt["effect_class"], attempt["assignment_id"], attempt["route"])
-        for attempt in attempts
-    }
-    assert len(attempts) == 4
-    assert len(route_keys) == 3
-    assert scenario["attempt_budget"] == len(route_keys)
-
-    blocker = scenario["exhausted_blocker"]
-    assert blocker == {
-        "code": "RECOVERY_EXHAUSTED",
-        "failure_class": "external_commitment_unknown",
-        "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
-        "user_visible": True,
-    }
-    skill = _recovery_skill()
-    for term in ("duplicate", "distinct", "budget", "exhaust", "blocker", "resume"):
-        assert term in skill
-
 
 def _load_json_text(text: str) -> dict[str, Any]:
     payload = json.loads(text)
