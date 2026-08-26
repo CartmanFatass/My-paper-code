@@ -131,11 +131,13 @@ class StatefulParticipantPeer:
         ],
         start_status: str = "idle",
         instruction_sources: list[str] | None = None,
+        preserve_history: bool = False,
     ) -> None:
         self.cwd = cwd
         self.turn_hook = turn_hook
         self.start_status = start_status
         self.instruction_sources = instruction_sources or []
+        self.preserve_history = preserve_history
         self.thread: dict[str, Any] | None = None
         self.transport = FakeTransport(self._respond)
 
@@ -195,7 +197,10 @@ class StatefulParticipantPeer:
         elif method == "turn/start":
             assert self.thread is not None
             terminal_turn = self.turn_hook(request, self.thread)
-            self.thread["turns"] = [terminal_turn]
+            if self.preserve_history:
+                self.thread["turns"].append(terminal_turn)
+            else:
+                self.thread["turns"] = [terminal_turn]
             peer.emit(
                 {
                     "id": request_id,
@@ -2038,6 +2043,101 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
     assert tasks.main(command) == 0
     assert json.loads(capsys.readouterr().out)["stop"] == exhausted["stop"]
     methods = [request.get("method") for request in all_requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("turn/start") == 3
+
+
+@pytest.mark.parametrize(
+    "codex_error_info",
+    ["usageLimitExceeded", "sessionBudgetExceeded", "serverOverloaded"],
+)
+def test_run_chain_capacity_pause_is_scoped_and_resumes_same_identity(
+    tmp_path: Path,
+    codex_error_info: str,
+) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps({"direction": "alpha", "revision": 7}) + "\n",
+        encoding="utf-8",
+    )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [],
+            "objective": "complete one exact alpha research slice",
+            "non_goals": ["do not pause another direction"],
+            "owned_paths": ["docs/research/candidates/alpha/em"],
+            "done_criteria": ["publish one immutable typed return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+
+    def terminal_turn(
+        request: dict[str, Any], thread: dict[str, Any]
+    ) -> dict[str, Any]:
+        attempt = len(thread["turns"]) + 1
+        items = [
+            {
+                "type": "userMessage",
+                "content": request["params"]["input"],
+            }
+        ]
+        if attempt == 1:
+            return {
+                "id": "turn-capacity",
+                "status": "failed",
+                "items": items,
+                "error": {
+                    "message": "must not enter evidence",
+                    "additionalDetails": "must not enter evidence",
+                    "codexErrorInfo": codex_error_info,
+                },
+            }
+        return {
+            "id": f"turn-recovery-{attempt}",
+            "status": "interrupted",
+            "items": items,
+        }
+
+    scenario = StatefulParticipantPeer(
+        tmp_path,
+        turn_hook=terminal_turn,
+        preserve_history=True,
+    )
+    with tasks.AppServerClient(transport=scenario.transport, timeout=0.1) as client:
+        paused = client.run_chain(
+            start_work_id=packet["work_id"], cwd=str(tmp_path)
+        )
+        exhausted = client.run_chain(
+            start_work_id=packet["work_id"], cwd=str(tmp_path)
+        )
+
+    assert paused["stop"] == {
+        "reason": "CAPACITY_PAUSE",
+        "work_id": packet["work_id"],
+        "failure_scope": "direction",
+        "failure_ref": (
+            f"native_turn:thread-em-alpha:turn-capacity:{codex_error_info}"
+        ),
+        "evidence": {
+            "thread_id": "thread-em-alpha",
+            "turn_id": "turn-capacity",
+            "turn_status": "failed",
+            "codex_error_info": codex_error_info,
+        },
+    }
+    assert exhausted["stop"]["reason"] == "RECOVERY_EXHAUSTED"
+    assert exhausted["stop"]["failure_ref"] == "alpha"
+    methods = [request.get("method") for request in scenario.requests]
     assert methods.count("thread/start") == 1
     assert methods.count("turn/start") == 3
 
