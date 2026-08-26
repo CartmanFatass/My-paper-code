@@ -1856,6 +1856,180 @@ def test_run_chain_rejects_projected_native_generation_conflict_before_plan(
     assert "turn/start" not in methods
 
 
+def test_run_chain_recovery_budget_is_shared_across_process_calls(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps({"direction": "alpha", "revision": 7}) + "\n",
+        encoding="utf-8",
+    )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [],
+            "objective": "complete one exact alpha research slice",
+            "non_goals": ["do not create a replacement packet or task"],
+            "owned_paths": ["docs/research/candidates/alpha/em"],
+            "done_criteria": ["publish one immutable typed return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    work_id = packet["work_id"]
+    locator = f".codex/runtime/work/ready/{work_id}/packet.json"
+    thread: dict[str, Any] | None = None
+    all_requests: list[dict[str, Any]] = []
+
+    def transport_factory(_command: Any) -> FakeTransport:
+        fail_next_list = False
+
+        def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+            nonlocal fail_next_list, thread
+            all_requests.append(request)
+            request_id = request.get("id")
+            if request_id is None:
+                return
+            method = request.get("method")
+            if method == "initialize":
+                result: dict[str, Any] = {
+                    "serverInfo": {"name": "fake", "version": "1"}
+                }
+            elif method == "thread/list":
+                if fail_next_list:
+                    peer.emit({"id": request_id, "error": {"code": -32001}})
+                    fail_next_list = False
+                    return
+                result = {
+                    "data": [] if thread is None else [thread],
+                    "nextCursor": None,
+                }
+            elif method == "thread/start":
+                thread = {
+                    "id": "thread-em-alpha",
+                    "name": None,
+                    "cwd": request["params"]["cwd"],
+                    "threadSource": request["params"]["threadSource"],
+                    "status": {"type": "idle"},
+                    "turns": [],
+                }
+                result = {
+                    "thread": thread,
+                    "model": "fake",
+                    "modelProvider": "fake",
+                    "cwd": request["params"]["cwd"],
+                    "approvalPolicy": "never",
+                    "sandbox": {"type": "dangerFullAccess"},
+                    "instructionSources": [],
+                }
+            elif method == "thread/name/set":
+                assert thread is not None
+                thread["name"] = request["params"]["name"]
+                result = {}
+            elif method == "thread/read":
+                assert thread is not None
+                result = {"thread": thread}
+            elif method == "thread/resume":
+                assert thread is not None
+                result = {
+                    "thread": thread,
+                    "model": "fake",
+                    "modelProvider": "fake",
+                    "cwd": str(tmp_path),
+                    "approvalPolicy": "never",
+                    "sandbox": {"type": "dangerFullAccess"},
+                }
+            elif method == "turn/start":
+                assert thread is not None
+                turn = {
+                    "id": f"turn-{len(thread['turns']) + 1}",
+                    "status": "interrupted",
+                    "items": [
+                        {
+                            "type": "userMessage",
+                            "content": request["params"]["input"],
+                        }
+                    ],
+                }
+                thread["turns"].append(turn)
+                fail_next_list = True
+                peer.emit(
+                    {
+                        "id": request_id,
+                        "result": {
+                            "turn": {
+                                "id": turn["id"],
+                                "status": "inProgress",
+                                "items": [],
+                            }
+                        },
+                    }
+                )
+                peer.emit(
+                    {
+                        "method": "turn/completed",
+                        "params": {"threadId": thread["id"], "turn": turn},
+                    }
+                )
+                return
+            else:
+                raise AssertionError(f"unexpected method: {method}")
+            peer.emit({"id": request_id, "result": result})
+
+        return FakeTransport(respond)
+
+    monkeypatch.setattr(tasks, "JsonlProcessTransport", transport_factory)
+    command = [
+        "--server-command",
+        "fake",
+        "run-chain",
+        "--work-id",
+        work_id,
+        "--cwd",
+        str(tmp_path),
+    ]
+    for _ in range(3):
+        assert tasks.main(command) == 0
+        interrupted = json.loads(capsys.readouterr().out)
+        assert interrupted["stop"]["reason"] == "EXECUTE_PLAN_STOP"
+        assert interrupted["stop"]["result"]["status"] == "ERROR"
+
+    assert tasks.main(command) == 0
+    exhausted = json.loads(capsys.readouterr().out)
+    assert exhausted["stop"] == {
+        "reason": "RECOVERY_EXHAUSTED",
+        "work_id": work_id,
+        "failure_scope": "direction",
+        "failure_ref": "alpha",
+        "evidence": {
+            "target_identity": "EM-alpha",
+            "thread_id": "thread-em-alpha",
+            "packet_locator": locator,
+            "max_attempts": 3,
+            "attempt_statuses": [
+                {"attempt": 1, "turn_id": "turn-1", "turn_status": "interrupted"},
+                {"attempt": 2, "turn_id": "turn-2", "turn_status": "interrupted"},
+                {"attempt": 3, "turn_id": "turn-3", "turn_status": "interrupted"},
+            ],
+        },
+    }
+    assert tasks.main(command) == 0
+    assert json.loads(capsys.readouterr().out)["stop"] == exhausted["stop"]
+    methods = [request.get("method") for request in all_requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("turn/start") == 3
+
+
 def test_execute_plan_refreshes_native_identity_and_lifecycle_after_wait(
     tmp_path: Path,
 ) -> None:
