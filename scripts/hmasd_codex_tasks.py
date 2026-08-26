@@ -1034,17 +1034,17 @@ class AppServerClient:
                 continue
             identity = str(task["logical_identity"])
             task["thread_id"] = thread_id
-            generation = task.get("generation")
-            if not isinstance(generation, int) or isinstance(generation, bool) or generation < 1:
-                task["generation"] = 1
             lifecycle = cls._native_lifecycle(row.get("status"))
-            if lifecycle is not None and task.get("lifecycle") not in {
-                "COMPLETED",
-                "RETIRED",
-            }:
-                task["lifecycle"] = lifecycle
-            elif not isinstance(task.get("lifecycle"), str):
-                task["lifecycle"] = "PARKED"
+            prior_lifecycle = task.get("lifecycle")
+            if lifecycle is not None:
+                if (
+                    isinstance(prior_lifecycle, str)
+                    and prior_lifecycle != lifecycle
+                    and prior_lifecycle != "CREATED"
+                ):
+                    task["lifecycle"] = "CONFLICT"
+                else:
+                    task["lifecycle"] = lifecycle
             if identity == "Portfolio":
                 task.setdefault("kind", "portfolio")
             elif identity.startswith("EM-"):
@@ -1204,6 +1204,28 @@ class AppServerClient:
                 "work_id": work_id,
                 "thread_id": thread_id,
             }
+        if return_plan.get("verb") == "OBSERVE_EFFECT_ONLY":
+            try:
+                witness = hmasd_work_packet.read_return(repo=repo, work_id=work_id)
+            except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict):
+                witness = None
+            result: dict[str, Any] = {
+                "status": "NO_EFFECT",
+                "verb": "OBSERVE_EFFECT_ONLY",
+                "work_id": work_id,
+                "thread_id": thread_id,
+                "unknown_effect_refs": return_plan.get("unknown_effect_refs", []),
+            }
+            if witness is not None:
+                result["return_witness"] = witness
+            if terminal is not None:
+                result.update(
+                    {
+                        "turn_id": terminal.get("turn_id"),
+                        "turn_status": terminal.get("turn_status"),
+                    }
+                )
+            return result
         return_resolution = return_plan.get("task_resolution", {})
         if return_resolution.get("status") != "RETURN_WITNESS":
             if return_plan.get("verb") in _DISPATCH_VERBS:
@@ -1306,6 +1328,7 @@ class AppServerClient:
             initial_task_rows = self._native_task_snapshot(
                 rows, self._task_rows(observed_tasks)
             )
+            reconcile_seed_tasks = list(initial_task_rows)
             exact = [row for row in rows if row.get("name") == target]
             exact_thread_ids: list[str] = []
             for row in exact:
@@ -1368,6 +1391,22 @@ class AppServerClient:
                         if thread_full.get("status") != "OK":
                             return thread_full
                 else:
+                    unnamed_thread_ids = sorted(
+                        str(row["id"])
+                        for row in rows
+                        if (
+                            row.get("name") in {None, ""}
+                            and isinstance(row.get("id"), str)
+                            and row.get("id")
+                        )
+                    )
+                    if unnamed_thread_ids:
+                        return {
+                            "status": "TASK_IDENTITY_CONFLICT",
+                            "target_identity": target,
+                            "thread_ids": unnamed_thread_ids,
+                            "reason": "UNBOUND_UNNAMED_NATIVE_TASK",
+                        }
                     needs_create = True
             else:
                 thread_id = resolution.get("thread_id") or plan.get("thread_id")
@@ -1444,6 +1483,15 @@ class AppServerClient:
                 if created["status"] != "CREATED":
                     return created
                 thread_id = created["thread_id"]
+                reconcile_seed_tasks.append(
+                    {
+                        "logical_identity": task_resolution["logical_identity"],
+                        "kind": task_resolution.get("kind"),
+                        "direction_id": task_resolution.get("direction_id"),
+                        "generation": task_resolution["generation"],
+                        "thread_id": thread_id,
+                    }
+                )
             elif thread_full is None:
                 thread_full = self._read_thread_full(thread_id)
                 if thread_full.get("status") != "OK":
@@ -1520,7 +1568,7 @@ class AppServerClient:
                 fresh_rows.append(full["thread"])
             fresh_task_rows = self._native_task_snapshot(
                 fresh_rows,
-                self._task_rows(observed_tasks),
+                reconcile_seed_tasks,
                 include_unlisted=False,
             )
             return_fact = self._validated_return_fact(

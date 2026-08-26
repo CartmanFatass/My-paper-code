@@ -29,6 +29,19 @@ VALIDATED_RETURN_STUB = {
 }
 
 
+def observed_em(thread_id: str = "thread-1") -> list[dict[str, Any]]:
+    return [
+        {
+            "logical_identity": "EM-alpha",
+            "kind": "em",
+            "direction_id": "alpha",
+            "generation": 1,
+            "lifecycle": "PARKED",
+            "thread_id": thread_id,
+        }
+    ]
+
+
 class FakeTransport:
     """In-memory JSONL peer which exercises the real client state machine."""
 
@@ -420,16 +433,7 @@ def test_execute_plan_never_recreates_an_unnamed_thread_after_name_unknown(
             plan,
             packet_locator=LOCATOR,
             cwd=str(tmp_path),
-            observed_tasks=[
-                {
-                    "logical_identity": "EM-alpha",
-                    "kind": "em",
-                    "direction_id": "alpha",
-                    "generation": 1,
-                    "lifecycle": "CREATED",
-                    "thread_id": first["thread_id"],
-                }
-            ],
+            observed_tasks=[],
         )
 
     assert first["status"] == "UNKNOWN"
@@ -440,13 +444,13 @@ def test_execute_plan_never_recreates_an_unnamed_thread_after_name_unknown(
     assert second == {
         "status": "TASK_IDENTITY_CONFLICT",
         "target_identity": "EM-alpha",
-        "thread_id": "thread-1",
-        "observed_name": None,
+        "thread_ids": ["thread-1"],
+        "reason": "UNBOUND_UNNAMED_NATIVE_TASK",
     }
     methods = [request.get("method") for request in peer.requests]
     assert methods.count("thread/start") == 1
     assert methods.count("thread/name/set") == 1
-    assert methods.count("thread/read") == 2
+    assert methods.count("thread/read") == 1
 
 
 def test_send_suppresses_duplicate_work_id_in_full_thread_history() -> None:
@@ -894,6 +898,7 @@ def test_execute_plan_waits_for_its_started_turn_without_redundant_resume(
         listed_threads=[],
         read_thread_name="EM-alpha",
         read_thread_cwd=str(tmp_path),
+        read_thread_status={"type": "idle"},
     )
     plan = {
         "verb": "CREATE_TASK_INTENT",
@@ -1654,7 +1659,7 @@ def test_execute_plan_terminal_history_with_tasks_mapping_return_never_resumes(
             plan,
             packet_locator=LOCATOR,
             cwd=str(tmp_path),
-            observed_tasks={"tasks": []},
+            observed_tasks={"tasks": observed_em()},
         )
     assert result == {
         "status": "COMPLETED",
@@ -1680,6 +1685,142 @@ def test_execute_plan_terminal_history_with_tasks_mapping_return_never_resumes(
         )
     ]
     methods = [request.get("method") for request in peer.requests]
+    assert "thread/resume" not in methods
+    assert "turn/start" not in methods
+
+
+def test_execute_plan_propagates_valid_return_with_unknown_effect_as_observe_only(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    state_path = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps({"direction": "alpha", "revision": 7}, indent=2, sort_keys=True)
+        + "\n",
+        encoding="utf-8",
+    )
+    effect_path = "temp/directions/alpha/exp/run-unknown/manifest.json"
+    effect_state = "IN_PROGRESS"
+
+    def observe_effect(_: Path, reference: dict[str, Any]) -> Any:
+        return tasks.hmasd_work_packet.hmasd_protocol_contracts.EffectObservation(
+            reference["kind"],
+            reference["resource_id"],
+            effect_state,
+            reference["path"],
+        )
+
+    monkeypatch.setattr(
+        tasks.hmasd_work_packet.hmasd_protocol_contracts,
+        "observe_effect_ref",
+        observe_effect,
+    )
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/alpha/STATE.json",
+                "revision": 7,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [],
+            "objective": "observe one exact uncertain effect",
+            "non_goals": ["do not replay the effect"],
+            "owned_paths": ["experiments/candidates/alpha"],
+            "done_criteria": ["return one typed envelope"],
+            "effect_refs": [
+                {
+                    "kind": "run_manifest",
+                    "path": effect_path,
+                    "resource_id": "alpha/run-unknown",
+                }
+            ],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    work_id = packet["work_id"]
+    participant_task = {
+        "logical_identity": "EM-alpha",
+        "kind": "em",
+        "direction_id": "alpha",
+        "generation": 1,
+        "lifecycle": "PARKED",
+        "thread_id": "thread-1",
+    }
+    agent_result = {
+        "schema_version": 1,
+        "role": "hmasd-em",
+        "logical_identity": "EM-alpha",
+        "generation": 1,
+        "assignment_id": work_id,
+        "status": "COMPLETED",
+        "materiality": "DIRECTION",
+        "summary": "Returned the bounded local result before effect uncertainty.",
+        "changed_paths": [],
+        "state_refs": [],
+        "artifact_refs": [],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "em",
+            "direction_id": "alpha",
+            "question_sha256": "a" * 64,
+            "evidence_set_sha256": "b" * 64,
+            "conclusion_refs": [],
+            "engineering_request_ref": None,
+        },
+    }
+    tasks.hmasd_work_packet.publish_return(
+        repo=tmp_path,
+        work_id=work_id,
+        observed_tasks=[participant_task],
+        agent_result=agent_result,
+    )
+    effect_state = "UNKNOWN"
+    locator = f".codex/runtime/work/ready/{work_id}/packet.json"
+    envelope = tasks.dispatch_envelope_bytes(work_id, locator, "EM-alpha").decode()
+    peer = response_peer(
+        history_text=envelope,
+        read_turn_status="completed",
+        read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
+        listed_threads=[
+            {
+                "id": "thread-1",
+                "name": "EM-alpha",
+                "cwd": tmp_path.as_posix(),
+                "status": {"type": "idle"},
+            }
+        ],
+    )
+    plan = {
+        "verb": "DISPATCH_EXISTING",
+        "work_id": work_id,
+        "target_identity": "EM-alpha",
+        "task_resolution": {"thread_id": "thread-1"},
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=locator,
+            cwd=str(tmp_path),
+            observed_tasks=[participant_task],
+        )
+
+    witness = tasks.hmasd_work_packet.read_return(repo=tmp_path, work_id=work_id)
+    assert result == {
+        "status": "NO_EFFECT",
+        "verb": "OBSERVE_EFFECT_ONLY",
+        "work_id": work_id,
+        "thread_id": "thread-1",
+        "unknown_effect_refs": [effect_path],
+        "return_witness": witness,
+    }
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
     assert "thread/resume" not in methods
     assert "turn/start" not in methods
 
@@ -1727,7 +1868,10 @@ def test_damaged_return_reconstruction_is_not_treated_as_closed(
 
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
-            plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em(),
         )
 
     assert result == {
@@ -1800,7 +1944,10 @@ def test_execute_plan_attempt_three_still_observes_present_return_before_exhaust
         )
         monkeypatch.setattr(client, "send", lambda *_, **__: pytest.fail("must not exhaust before return observation"))
         result = client.execute_plan(
-            plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em(),
         )
     assert result == {
         "status": "COMPLETED",
@@ -1848,7 +1995,10 @@ def test_execute_plan_terminal_history_with_invalid_return_never_resumes(
     }
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
-            plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em(),
         )
     assert result == {
         "status": "PROTOCOL_DEFECT",
@@ -1882,13 +2032,69 @@ def test_execute_plan_create_reuses_one_fresh_exact_native_identity(tmp_path: Pa
     }
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
-            plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em("thread-existing"),
         )
     assert result["status"] == "DELIVERED"
     assert result["thread_id"] == "thread-existing"
     methods = [request.get("method") for request in peer.requests]
     assert "thread/start" not in methods
     assert "thread/name/set" not in methods
+
+
+@pytest.mark.parametrize(
+    "observed_tasks",
+    [
+        [],
+        [
+            {
+                "logical_identity": "EM-alpha",
+                "kind": "em",
+                "direction_id": "alpha",
+                "generation": 1,
+                "lifecycle": "ACTIVE",
+                "thread_id": "thread-existing",
+            }
+        ],
+    ],
+    ids=["missing-generation-and-lifecycle", "contradictory-lifecycle"],
+)
+def test_execute_plan_rejects_missing_or_contradictory_native_task_facts(
+    tmp_path: Path, observed_tasks: list[dict[str, Any]]
+) -> None:
+    peer = response_peer(
+        listed_threads=[
+            {
+                "id": "thread-existing",
+                "name": "EM-alpha",
+                "cwd": tmp_path.as_posix(),
+                "status": {"type": "idle"},
+            }
+        ],
+        read_thread_name="EM-alpha",
+        read_thread_cwd=str(tmp_path),
+        read_thread_status={"type": "idle"},
+    )
+    plan = {
+        "verb": "CREATE_TASK_INTENT",
+        "work_id": WORK_ID,
+        "target_identity": "EM-alpha",
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_tasks,
+        )
+
+    assert result["status"] == "TASK_IDENTITY_CONFLICT"
+    assert result["target_identity"] == "EM-alpha"
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
+    assert "turn/start" not in methods
 
 
 def test_execute_plan_reuses_exact_cached_identity_when_cwd_list_omits_it(
@@ -2141,7 +2347,10 @@ def test_execute_plan_scans_all_native_list_pages_before_reusing_identity(
     plan = {"verb": "CREATE_TASK_INTENT", "work_id": WORK_ID, "target_identity": "EM-alpha"}
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
         result = client.execute_plan(
-            plan, packet_locator=LOCATOR, cwd=str(tmp_path), observed_tasks=[]
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em("thread-existing"),
         )
     assert result["status"] == "DELIVERED"
     assert result["thread_id"] == "thread-existing"
@@ -2325,7 +2534,7 @@ def test_execute_plan_compare_conflict_prevents_dispatch(
             packet_locator=LOCATOR,
             cwd=str(tmp_path),
             peer_work_ids=[peer_work],
-            observed_tasks=[],
+            observed_tasks=observed_em(),
         )
     assert result["status"] == "WORK_OVERLAP_CONFLICT"
     assert result["compare_outcome"] == "CONFLICT"
@@ -2448,7 +2657,7 @@ def test_root_override_bypasses_compare_but_is_bound_in_native_envelope(
             cwd=str(tmp_path),
             peer_work_ids=["b" * 64],
             root_override_reason="user authorized exact overlap",
-            observed_tasks=[],
+            observed_tasks=observed_em(),
         )
     assert result["status"] == "DELIVERED"
     assert result["warning"] == "ROOT_OVERRIDE_ACTIVE"
@@ -2503,7 +2712,7 @@ def test_root_override_cannot_bypass_effect_authority_or_observation_defects(
             plan,
             packet_locator=LOCATOR,
             cwd=str(tmp_path),
-            observed_tasks=[],
+            observed_tasks=observed_em(),
             peer_work_ids=["b" * 64],
             root_override_reason="user authorized only a known write overlap",
         )
