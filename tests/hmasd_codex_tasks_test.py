@@ -2355,6 +2355,99 @@ def test_execute_plan_revalidates_native_identity_on_final_read(
     assert "turn/start" not in methods
 
 
+@pytest.mark.parametrize(
+    "final_thread_source",
+    [None, "hmasd-manager:EM-beta:g1"],
+    ids=["missing", "changed"],
+)
+def test_new_manager_requires_exact_tag_on_final_read(
+    tmp_path: Path, final_thread_source: str | None
+) -> None:
+    def completed_turn(
+        _: dict[str, Any], __: dict[str, Any]
+    ) -> dict[str, Any]:
+        return {"id": "turn-em-alpha", "status": "completed", "items": []}
+
+    scenario = StatefulParticipantPeer(tmp_path, turn_hook=completed_turn)
+    read_count = 0
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        nonlocal read_count
+        if request.get("method") != "thread/read":
+            scenario.transport.responder(request, peer)
+            return
+        read_count += 1
+        assert scenario.thread is not None
+        observed = dict(scenario.thread)
+        if read_count == 1:
+            if final_thread_source is None:
+                observed.pop("threadSource", None)
+            else:
+                observed["threadSource"] = final_thread_source
+        peer.emit({"id": request["id"], "result": {"thread": observed}})
+
+    peer = FakeTransport(respond)
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            create_em_plan(),
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=[],
+        )
+
+    assert result["status"] == "TASK_IDENTITY_CONFLICT"
+    assert result["reason"] == "FINAL_THREAD_IDENTITY_CHANGED"
+    methods = [request.get("method") for request in peer.requests]
+    assert methods.count("thread/start") == 1
+    assert methods.count("thread/read") == 1
+    assert "turn/start" not in methods
+
+
+@pytest.mark.parametrize(
+    ("thread_source", "expected_status"),
+    [
+        (None, "DELIVERED"),
+        ("hmasd-manager:EM-beta:g1", "TASK_IDENTITY_CONFLICT"),
+    ],
+    ids=["legacy-no-tag", "conflicting-manager-tag"],
+)
+def test_legacy_named_manager_rejects_only_conflicting_present_tag(
+    tmp_path: Path,
+    thread_source: str | None,
+    expected_status: str,
+) -> None:
+    thread = {
+        "id": "thread-1",
+        "name": "EM-alpha",
+        "cwd": tmp_path.as_posix(),
+        "status": {"type": "idle"},
+        "turns": [],
+    }
+    if thread_source is not None:
+        thread["threadSource"] = thread_source
+    base = response_peer(listed_threads=[thread])
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        if request.get("method") == "thread/read":
+            peer.emit({"id": request["id"], "result": {"thread": thread}})
+            return
+        base.responder(request, peer)
+
+    peer = FakeTransport(respond)
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            reuse_em_plan(),
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em(),
+        )
+
+    assert result["status"] == expected_status
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
+    assert ("turn/start" in methods) is (expected_status == "DELIVERED")
+
+
 def test_dispatch_existing_fails_closed_on_fresh_cache_identity_conflict(
     tmp_path: Path,
 ) -> None:

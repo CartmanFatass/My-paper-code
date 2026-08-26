@@ -524,9 +524,10 @@ class AppServerClient:
             "sandbox": "danger-full-access",
         }
         if generation is not None:
-            params["threadSource"] = self._manager_thread_source(
-                target_identity, generation
-            )
+            manager = self._canonical_manager(target_identity, generation)
+            if manager is None:
+                raise ValueError("target identity is not a canonical manager")
+            params["threadSource"] = manager["thread_source"]
         if runtime is not None:
             params.update(
                 {
@@ -718,15 +719,44 @@ class AppServerClient:
 
     @staticmethod
     def _target_runtime(target_identity: str) -> dict[str, str] | None:
-        if target_identity == "Portfolio" or target_identity.startswith("EM-"):
+        manager = AppServerClient._canonical_manager(target_identity)
+        if manager is not None and manager["kind"] in {"portfolio", "em"}:
             return {"model": "gpt-5.6-sol", "effort": "max"}
-        if target_identity.startswith("CM-"):
+        if manager is not None and manager["kind"] == "cm":
             return {"model": "gpt-5.6-sol", "effort": "high"}
         return None
 
     @staticmethod
-    def _manager_thread_source(target_identity: str, generation: int) -> str:
-        return f"hmasd-manager:{target_identity}:g{generation}"
+    def _canonical_manager(
+        identity: Any, generation: int | None = None
+    ) -> dict[str, Any] | None:
+        if identity == "Portfolio":
+            kind, direction_id = "portfolio", None
+        elif isinstance(identity, str):
+            matched = re.fullmatch(
+                r"(EM|CM)-([a-z0-9][a-z0-9_-]{1,63})", identity
+            )
+            if matched is None:
+                return None
+            kind, direction_id = matched.group(1).lower(), matched.group(2)
+        else:
+            return None
+        if generation is not None and (
+            not isinstance(generation, int)
+            or isinstance(generation, bool)
+            or generation < 1
+        ):
+            return None
+        return {
+            "logical_identity": identity,
+            "kind": kind,
+            "direction_id": direction_id,
+            "thread_source": (
+                None
+                if generation is None
+                else f"hmasd-manager:{identity}:g{generation}"
+            ),
+        }
 
     def send(
         self,
@@ -739,6 +769,7 @@ class AppServerClient:
         root_override_reason: str | None = None,
         expected_cwd: str | None = None,
         expected_thread_source: str | None = None,
+        require_thread_source: bool = False,
     ) -> dict[str, Any]:
         if max_attempts < 1:
             raise ValueError("max_attempts must be positive")
@@ -746,14 +777,24 @@ class AppServerClient:
         if read["status"] != "OK":
             return read
         thread = read["thread"]
+        observed_thread_source = thread.get("threadSource")
+        thread_source_changed = (
+            expected_thread_source is not None
+            and (
+                observed_thread_source != expected_thread_source
+                if require_thread_source
+                else (
+                    isinstance(observed_thread_source, str)
+                    and observed_thread_source.startswith("hmasd-manager:")
+                    and observed_thread_source != expected_thread_source
+                )
+            )
+        )
         if expected_cwd is not None and (
             thread.get("id") != thread_id
             or thread.get("name") != target_identity
             or not self._same_cwd(thread.get("cwd"), expected_cwd)
-            or (
-                expected_thread_source is not None
-                and thread.get("threadSource") != expected_thread_source
-            )
+            or thread_source_changed
         ):
             return {
                 "status": "TASK_IDENTITY_CONFLICT",
@@ -763,7 +804,7 @@ class AppServerClient:
                 "observed_thread_id": thread.get("id"),
                 "observed_name": thread.get("name"),
                 "observed_cwd": thread.get("cwd"),
-                "observed_thread_source": thread.get("threadSource"),
+                "observed_thread_source": observed_thread_source,
             }
         history = thread.get("turns", [])
         records = self._attempt_records(history, work_id)
@@ -1087,14 +1128,11 @@ class AppServerClient:
                     task["lifecycle"] = "CONFLICT"
                 else:
                     task["lifecycle"] = lifecycle
-            if identity == "Portfolio":
-                task.setdefault("kind", "portfolio")
-            elif identity.startswith("EM-"):
-                task.setdefault("kind", "em")
-                task.setdefault("direction_id", identity[3:])
-            elif identity.startswith("CM-"):
-                task.setdefault("kind", "cm")
-                task.setdefault("direction_id", identity[3:])
+            manager = cls._canonical_manager(identity)
+            if manager is not None:
+                task.setdefault("kind", manager["kind"])
+                if manager["direction_id"] is not None:
+                    task.setdefault("direction_id", manager["direction_id"])
             snapshot_by_thread[thread_id] = task
         return [snapshot_by_thread[key] for key in sorted(snapshot_by_thread)]
 
@@ -1386,15 +1424,13 @@ class AppServerClient:
             }
         generation = resolution.get("generation")
         target_text = str(target)
-        if target_text == "Portfolio":
-            expected_kind = "portfolio"
-            expected_direction: str | None = None
-        elif target_text.startswith(("EM-", "CM-")):
-            expected_kind = target_text[:2].lower()
-            expected_direction = target_text[3:]
-        else:
-            expected_kind = None
-            expected_direction = None
+        target_manager = self._canonical_manager(target_text)
+        expected_kind = (
+            None if target_manager is None else target_manager["kind"]
+        )
+        expected_direction = (
+            None if target_manager is None else target_manager["direction_id"]
+        )
         thread_locator_valid = (
             expected_resolution_status != "REUSE"
             or (
@@ -1425,6 +1461,14 @@ class AppServerClient:
                 "reason": "INVALID_TASK_RESOLUTION",
                 "work_id": work_id,
             }
+        closed_manager = self._canonical_manager(target_text, generation)
+        if closed_manager is None:
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "INVALID_TASK_RESOLUTION",
+                "work_id": work_id,
+            }
+        closed_thread_source = str(closed_manager["thread_source"])
         repo = Path(cwd).absolute()
         with self._dispatch_lock(repo):
             listed = self._list_all_threads(cwd=cwd)
@@ -1473,9 +1517,7 @@ class AppServerClient:
                 and not isinstance(tagged_generation, bool)
                 and tagged_generation >= 1
             ):
-                expected_source = self._manager_thread_source(
-                    str(target), tagged_generation
-                )
+                expected_source = closed_thread_source
                 tagged = [
                     row for row in rows if row.get("threadSource") == expected_source
                 ]
@@ -1577,16 +1619,9 @@ class AppServerClient:
                     "generation": fresh_resolution.get("generation"),
                     "thread_id": fresh_resolution.get("thread_id"),
                 }
-                target_text = str(target)
-                if target_text == "Portfolio":
-                    expected_binding["kind"] = "portfolio"
-                    manager_fields = {"kind", "direction_id"}
-                elif target_text.startswith(("EM-", "CM-")):
-                    expected_binding["kind"] = target_text[:2].lower()
-                    expected_binding["direction_id"] = target_text[3:]
-                    manager_fields = {"kind", "direction_id"}
-                else:
-                    manager_fields = set()
+                expected_binding["kind"] = closed_manager["kind"]
+                expected_binding["direction_id"] = closed_manager["direction_id"]
+                manager_fields = {"kind", "direction_id"}
                 bound_fields = {"logical_identity", *manager_fields}
                 bound_fields.update(
                     field
@@ -1633,9 +1668,7 @@ class AppServerClient:
                             if isinstance(observed_thread, Mapping)
                             else None
                         )
-                        expected_source = self._manager_thread_source(
-                            str(target), int(tagged_generation)
-                        )
+                        expected_source = closed_thread_source
                         if (
                             thread_full.get("status") != "OK"
                             or observed_thread.get("threadSource") != expected_source
@@ -1789,11 +1822,8 @@ class AppServerClient:
                 target,
                 root_override_reason=root_override_reason,
                 expected_cwd=cwd,
-                expected_thread_source=(
-                    self._manager_thread_source(str(target), int(tagged_generation))
-                    if tagged_thread is not None
-                    else None
-                ),
+                expected_thread_source=closed_thread_source,
+                require_thread_source=(needs_create or tagged_thread is not None),
             )
             if warning:
                 sent = {**sent, "warning": "ROOT_OVERRIDE_ACTIVE"}
