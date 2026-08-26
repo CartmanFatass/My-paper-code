@@ -24,6 +24,18 @@ EM→CM→Operator→Root unattended chaining remains unproven.
 
 The [workflow design rationale](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md) is non-authoritative and adds no workflow primitive, authority, or gate.
 
+## Agent skills
+
+### Issue tracker
+
+Planning specs and implementation tickets use local Markdown under `.scratch/`.
+See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+This is a single-context repository: use `CONTEXT.md` and root `docs/adr/`.
+See `docs/agents/domain.md`.
+
 ## Task plane
 
 - **Root** is the permanent highest-capability project orchestrator. It may use

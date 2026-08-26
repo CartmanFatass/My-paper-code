@@ -51,6 +51,8 @@ data/
 # Stable project and research documentation.
 !memory/*.md
 !docs/project/*.md
+!docs/agents/
+!docs/agents/*.md
 !docs/report/*.md
 !docs/plans/*.md
 !docs/migration/
@@ -76,6 +78,7 @@ data/
 !/.agents/skills/
 !/.agents/skills/**/
 !/.agents/skills/**/SKILL.md
+!/.agents/skills/**/*.md
 /.codex/runtime/**
 /.omp/runtime/**
 /.claude/
