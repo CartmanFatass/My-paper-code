@@ -12,6 +12,8 @@ import subprocess
 import sys
 from typing import Any
 
+import pytest
+
 from scripts import hmasd_codex_tasks as native
 from scripts import hmasd_work_packet as packets
 
@@ -681,8 +683,15 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
     assert LOCAL_FAKE_TRANSPORT_GOLDEN == "LOCAL_FAKE_TRANSPORT_GOLDEN"
 
 
+@pytest.mark.parametrize(
+    ("operator_role", "terminal_expected"),
+    [
+        ("hmasd-experiment-operator", True),
+        ("hmasd-verifier", False),
+    ],
+)
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
-    tmp_path: Path,
+    tmp_path: Path, operator_role: str, terminal_expected: bool
 ) -> None:
     repo, code_sha = _native_worktree(tmp_path)
     direction = repo / "docs" / "research" / "candidates" / "alpha"
@@ -762,6 +771,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                             "text": json.dumps(
                                                 {
                                                     "protocol": "hmasd.experiment-operator.assignment.v1",
+                                                    "agent_role": "hmasd-experiment-operator",
                                                     "logical_identity": "hmasd-experiment-operator",
                                                     "run_id": "golden_run",
                                                 }
@@ -839,6 +849,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                             "text": json.dumps(
                                                 {
                                                     "protocol": "hmasd.experiment-operator.assignment.v1",
+                                                    "agent_role": "hmasd-experiment-operator",
                                                     "logical_identity": "hmasd-experiment-operator",
                                                     "run_id": "golden-run",
                                                 }
@@ -857,6 +868,44 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     cwd=repo,
                 )
                 assert completed.returncode == 0
+                manifest_ref = _file_ref(repo, manifest_locator)
+                stdout_ref = _file_ref(
+                    repo, "temp/directions/alpha/exp/golden-run/stdout.log"
+                )
+                stderr_ref = _file_ref(
+                    repo, "temp/directions/alpha/exp/golden-run/stderr.log"
+                )
+                operator_result = {
+                    "schema_version": 1,
+                    "role": operator_role,
+                    "logical_identity": "hmasd-experiment-operator",
+                    "generation": 1,
+                    "assignment_id": "cm-owned-operator-golden",
+                    "status": "COMPLETED",
+                    "materiality": "LOCAL",
+                    "summary": "The exact frozen run reached terminal success.",
+                    "changed_paths": [manifest_ref["path"]],
+                    "state_refs": [manifest_ref],
+                    "artifact_refs": [stdout_ref, stderr_ref],
+                    "checkpoint_sha": None,
+                    "decision_requests": [],
+                    "next_action": {"kind": "NONE", "input_refs": []},
+                    "payload": {
+                        "kind": "run",
+                        "run_id": "golden-run",
+                        "manifest_ref": manifest_ref,
+                        "terminal_status": "SUCCEEDED",
+                        "exit_code": 0,
+                    },
+                }
+                operator_thread["turns"][0]["items"].append(
+                    {
+                        "type": "agentMessage",
+                        "content": [
+                            {"type": "text", "text": json.dumps(operator_result)}
+                        ],
+                    }
+                )
             else:
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
@@ -923,6 +972,15 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     with native.AppServerClient(transport=peer, timeout=0.2) as client:
         first = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
         repeated = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
+    if not terminal_expected:
+        for result in (first, repeated):
+            assert result["stop"]["reason"] == "EXECUTE_PLAN_STOP"
+            assert result["stop"]["result"]["status"] == "OPERATOR_EVIDENCE_INVALID"
+            assert result["stop"]["result"]["reason"] == "OPERATOR_RESULT_IDENTITY_MISMATCH"
+        assert operator_create_count == 1
+        assert execute_count == 1
+        assert cm_return_count == 1
+        return
     assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
     assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
