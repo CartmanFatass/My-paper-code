@@ -164,16 +164,59 @@ def test_commit_push_isolates_exact_path_and_preserves_unrelated_staged_change(
     assert "HMASD-Assignment: CM-alpha" in message.splitlines()
 
 
+def test_commit_push_adds_exact_owned_untracked_file_and_preserves_unrelated_state(
+    tmp_path: Path,
+) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/new_feature.py"
+    _write(repo / assigned, "VALUE = 'new'\n")
+    _write(repo / "notes.txt", "unrelated staged content\n")
+    _git(repo, "add", "notes.txt")
+    _write(repo / "dirty.txt", "unrelated dirty content\n")
+    _write(repo / "user-untracked.txt", "unrelated untracked content\n")
+
+    completed, result = _cli(
+        repo,
+        "commit-push",
+        "--repo",
+        str(repo),
+        "--work-id",
+        packet["work_id"],
+        "--path",
+        assigned,
+    )
+
+    assert completed.returncode == 0, result
+    assert result["status"] == "SUCCEEDED"
+    assert result["changed_paths"] == [assigned]
+    candidate = result["candidate_sha"]
+    candidate_paths = _git(
+        repo, "diff-tree", "--no-commit-id", "--name-only", "-r", candidate
+    ).stdout.splitlines()
+    assert candidate_paths == [assigned]
+    assert _git(repo, "status", "--porcelain=v1", "--", assigned).stdout == ""
+    assert _git(repo, "diff", "--cached", "--name-only").stdout.splitlines() == [
+        "notes.txt"
+    ]
+    assert _git(repo, "diff", "--name-only").stdout.splitlines() == ["dirty.txt"]
+    assert (repo / "user-untracked.txt").read_text(encoding="utf-8") == (
+        "unrelated untracked content\n"
+    )
+
+
 def test_commit_identity_failure_leaves_head_and_index_byte_identical(
     tmp_path: Path,
     monkeypatch: Any,
 ) -> None:
     repo, _ = _repository(tmp_path)
     packet = _publish(repo)
-    assigned = "experiments/candidates/alpha/change.py"
-    _write(repo / assigned, "VALUE = 2  # staged\n")
-    _git(repo, "add", assigned)
-    _write(repo / assigned, "VALUE = 3  # working tree\n")
+    assigned = "experiments/candidates/alpha/new_failure.py"
+    _write(repo / assigned, "VALUE = 'new request'\n")
+    partial = "experiments/candidates/alpha/change.py"
+    _write(repo / partial, "VALUE = 2  # staged\n")
+    _git(repo, "add", partial)
+    _write(repo / partial, "VALUE = 3  # working tree\n")
     _write(repo / "notes.txt", "unrelated staged content\n")
     _git(repo, "add", "notes.txt")
     _write(repo / "intent.py", "intent to add\n")
@@ -428,6 +471,57 @@ def test_ambiguous_push_is_sent_once_and_resolved_only_by_observe_push(
     assert reused["relation"] == "EQUAL"
     assert reused["push_attempted"] is False
     assert push_calls == 1
+
+
+def test_landed_ambiguous_push_uses_reserved_post_send_observation(
+    tmp_path: Path,
+    monkeypatch: Any,
+    capsys: Any,
+) -> None:
+    repo, _ = _repository(tmp_path)
+    packet = _publish(repo)
+    assigned = "experiments/candidates/alpha/change.py"
+    _write(repo / assigned, "VALUE = 2\n")
+    real_run = subprocess.run
+    push_calls = 0
+    post_push_fetches = 0
+    push_started = False
+
+    def landed_then_ambiguous(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal push_calls, post_push_fetches, push_started
+        command = args[0]
+        if command[:2] == ["git", "fetch"] and push_started:
+            post_push_fetches += 1
+        if command[:2] == ["git", "push"]:
+            push_calls += 1
+            push_started = True
+            landed = real_run(*args, **kwargs)
+            assert landed.returncode == 0
+            time.sleep(float(kwargs["timeout"]) + 0.05)
+            raise subprocess.TimeoutExpired(command, timeout=kwargs["timeout"])
+        return real_run(*args, **kwargs)
+
+    monkeypatch.setattr(hmasd_direction_git.subprocess, "run", landed_then_ambiguous)
+    returncode = hmasd_direction_git.main(
+        [
+            "commit-push",
+            "--repo",
+            str(repo),
+            "--work-id",
+            packet["work_id"],
+            "--path",
+            assigned,
+        ]
+    )
+    result = json.loads(capsys.readouterr().out)
+
+    assert returncode == 0, result
+    assert result["status"] == "SUCCEEDED"
+    assert result["candidate_sha"] == result["integrated_sha"]
+    assert result["relation"] == "EQUAL"
+    assert result["push_attempted"] is True
+    assert push_calls == 1
+    assert post_push_fetches == 1
 
 
 def test_unresolved_unknown_candidate_blocks_a_second_direction_commit_and_push(

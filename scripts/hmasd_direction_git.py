@@ -27,6 +27,7 @@ except ImportError:
 _WORK_ID = re.compile(r"[0-9a-f]{64}\Z")
 _FULL_SHA = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
 _TRANSACTION_TIMEOUT_SECONDS = 5
+_POST_SEND_OBSERVE_RESERVE_SECONDS = 1
 _TRANSACTION_DEADLINE: ContextVar[float | None] = ContextVar(
     "hmasd_direction_git_transaction_deadline", default=None
 )
@@ -78,8 +79,9 @@ def _run_git(
     repo: Path,
     *args: str,
     check: bool = True,
+    timeout: float | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    effective_timeout = _remaining_timeout()
+    effective_timeout = _remaining_timeout(timeout)
     command = ["git", *args]
     with (
         tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as stdout_file,
@@ -197,7 +199,7 @@ def _require_direction_owned(repo: Path, paths: Sequence[str]) -> None:
         )
 
 
-def _working_changes(repo: Path, paths: Sequence[str]) -> list[str]:
+def _working_changes(repo: Path, paths: Sequence[str]) -> tuple[list[str], list[str]]:
     tracked = _run_git(
         repo,
         "diff",
@@ -217,7 +219,11 @@ def _working_changes(repo: Path, paths: Sequence[str]) -> list[str]:
         "--",
         *paths,
     ).stdout.split("\0")
-    return sorted({path for path in [*tracked, *untracked] if path}, key=str.casefold)
+    new_paths = sorted({path for path in untracked if path}, key=str.casefold)
+    changed = sorted(
+        {path for path in [*tracked, *new_paths] if path}, key=str.casefold
+    )
+    return changed, new_paths
 
 
 def _commit_message(repo: Path, commit: str) -> str:
@@ -604,7 +610,7 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                 remote_sha=remote_before_commit,
                 relation=head_relation,
             )
-        changed = _working_changes(repo, requested)
+        changed, new_paths = _working_changes(repo, requested)
         if changed != requested:
             raise DirectionGitError(
                 "requested paths must be the exact changed paths",
@@ -617,19 +623,26 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
             f"HMASD-Base-SHA: {base}\n"
             f"HMASD-Assignment: {packet['target_identity']}\n"
         )
-        _run_git(
-            repo,
-            "-c",
-            "core.hooksPath=",
-            "-c",
-            "commit.gpgSign=false",
-            "commit",
-            "--only",
-            "-m",
-            message,
-            "--",
-            *requested,
-        )
+        try:
+            if new_paths:
+                _run_git(repo, "add", "--intent-to-add", "--", *new_paths)
+            _run_git(
+                repo,
+                "-c",
+                "core.hooksPath=",
+                "-c",
+                "commit.gpgSign=false",
+                "commit",
+                "--only",
+                "-m",
+                message,
+                "--",
+                *requested,
+            )
+        except DirectionGitError:
+            if new_paths:
+                _run_git(repo, "reset", "--quiet", "HEAD", "--", *new_paths)
+            raise
         candidate = _head(repo)
         verified_base, verified_paths = _verify_candidate(
             repo, packet, candidate, requested
@@ -673,9 +686,9 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                     "relation": relation,
                 },
             )
-        try:
-            _remaining_timeout()
-        except DirectionGitError:
+        remaining = _remaining_timeout()
+        assert remaining is not None
+        if remaining <= _POST_SEND_OBSERVE_RESERVE_SECONDS:
             return _result(
                 status="OBSERVE_REQUIRED",
                 reason="transaction deadline expired before push; run observe-push",
@@ -686,6 +699,7 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                 remote_sha=remote,
                 relation=relation,
             )
+        push_timeout = remaining - _POST_SEND_OBSERVE_RESERVE_SECONDS
         push_attempted = True
         try:
             _run_git(
@@ -693,6 +707,7 @@ def commit_push(repo_raw: str, work_id: str, paths: Sequence[str]) -> dict[str, 
                 "push",
                 "origin",
                 f"{candidate}:refs/heads/main",
+                timeout=push_timeout,
             )
         except DirectionGitError:
             pass
