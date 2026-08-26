@@ -2086,6 +2086,88 @@ def test_run_chain_capacity_pause_is_scoped_and_resumes_same_identity(
     )
     tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
 
+    beta_state = tmp_path / "docs/research/candidates/beta/STATE.json"
+    beta_state.parent.mkdir(parents=True, exist_ok=True)
+    beta_state.write_text(
+        json.dumps({"direction": "beta", "revision": 1}) + "\n",
+        encoding="utf-8",
+    )
+    beta_packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {
+                "path": "docs/research/candidates/beta/STATE.json",
+                "revision": 1,
+            },
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-beta",
+            "authority_refs": [],
+            "objective": "complete one independent beta research slice",
+            "non_goals": ["do not depend on alpha capacity"],
+            "owned_paths": ["docs/research/candidates/beta/em"],
+            "done_criteria": ["publish one immutable typed return"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(beta_packet, repo=tmp_path)
+    beta_task = {
+        "logical_identity": "EM-beta",
+        "kind": "em",
+        "direction_id": "beta",
+        "generation": 1,
+        "lifecycle": "PARKED",
+        "thread_id": "thread-em-beta",
+    }
+    tasks.hmasd_work_packet.publish_return(
+        repo=tmp_path,
+        work_id=beta_packet["work_id"],
+        observed_tasks=[beta_task],
+        agent_result={
+            "schema_version": 1,
+            "role": "hmasd-em",
+            "logical_identity": "EM-beta",
+            "generation": 1,
+            "assignment_id": beta_packet["work_id"],
+            "status": "COMPLETED",
+            "materiality": "DIRECTION",
+            "summary": "Completed the independent beta slice.",
+            "changed_paths": [],
+            "state_refs": [],
+            "artifact_refs": [],
+            "checkpoint_sha": None,
+            "decision_requests": [],
+            "next_action": {"kind": "NONE", "input_refs": []},
+            "payload": {
+                "kind": "em",
+                "direction_id": "beta",
+                "question_sha256": "a" * 64,
+                "evidence_set_sha256": "b" * 64,
+                "conclusion_refs": [],
+                "engineering_request_ref": None,
+            },
+        },
+    )
+    beta_locator = f".codex/runtime/work/ready/{beta_packet['work_id']}/packet.json"
+    beta_peer = response_peer(
+        history_text=tasks.dispatch_envelope_bytes(
+            beta_packet["work_id"], beta_locator, "EM-beta"
+        ).decode(),
+        read_turn_status="completed",
+        read_thread_name="EM-beta",
+        read_thread_cwd=str(tmp_path),
+        read_thread_source="hmasd-manager:EM-beta:g1",
+        listed_threads=[
+            {
+                "id": "thread-em-beta",
+                "name": "EM-beta",
+                "cwd": str(tmp_path),
+                "threadSource": "hmasd-manager:EM-beta:g1",
+                "status": {"type": "idle"},
+            }
+        ],
+    )
+
     def terminal_turn(
         request: dict[str, Any], thread: dict[str, Any]
     ) -> dict[str, Any]:
@@ -2122,6 +2204,10 @@ def test_run_chain_capacity_pause_is_scoped_and_resumes_same_identity(
         paused = client.run_chain(
             start_work_id=packet["work_id"], cwd=str(tmp_path)
         )
+        with tasks.AppServerClient(transport=beta_peer, timeout=0.1) as beta_client:
+            beta = beta_client.run_chain(
+                start_work_id=beta_packet["work_id"], cwd=str(tmp_path)
+            )
         exhausted = client.run_chain(
             start_work_id=packet["work_id"], cwd=str(tmp_path)
         )
@@ -2142,6 +2228,8 @@ def test_run_chain_capacity_pause_is_scoped_and_resumes_same_identity(
     }
     assert exhausted["stop"]["reason"] == "RECOVERY_EXHAUSTED"
     assert exhausted["stop"]["failure_ref"] == "alpha"
+    assert beta["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    assert beta["stop"]["work_id"] == beta_packet["work_id"]
     methods = [request.get("method") for request in scenario.requests]
     assert methods.count("thread/start") == 1
     assert methods.count("turn/start") == 3
