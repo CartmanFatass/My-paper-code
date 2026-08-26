@@ -64,13 +64,8 @@ Root automatically creates or reuses a needed parked manager task, but reports
 an identity conflict rather than making a duplicate. Task creation lineage does
 not confer authority.
 
-Use the matching project skill to bootstrap a top-level task:
-`hmasd-root-task`, `hmasd-workflow-clerk-task`, `hmasd-portfolio-task`,
-`hmasd-em-task`, or `hmasd-cm-task`. Clerk loads
-`hmasd-operations-manual`; Root/Portfolio/EM/CM tasks use
-`hmasd-slice-interface` for exact Work Packet intake and common result output.
-Workflow-Clerk, Portfolio, EM, and CM are never
-spawned from `.codex/agents`.
+The former control-plane skills are retired pending redesign. Do not load,
+resolve, or recreate them from historical references.
 
 The Watcher Advisor may run alongside a top-level task when useful. Its output
 is traceability and course-correction input, not a gate; reversible in-scope
@@ -257,56 +252,3 @@ declared by `.gitattributes`; do not normalize bytes inside hash validation.
   chaining remains unproven despite the completed probes and fake golden path.
 - Use the documented CLIs rather than private helper functions or duplicate
   state writers.
-
-## Current Root shared-core action — native adapter integration 2026-08-26
-
-Decision owner: Root. User authorizations: `请将改动合并回main分支并push`; exact 25-path candidate confirmation: `确认`.
-
-```hmasd-shared-core-action-v1
-{
-  "action_digest": "7b1b743db31ac5ffc4fc80ad37eab13d4e3ece7bce68a5764993443631b1c3ba",
-  "allowed_effects": [
-    "MODIFY_PATHS",
-    "WORKTREE_APPLY_INTEGRATION",
-    "WORKTREE_PUSH"
-  ],
-  "base_sha": "ee06a078c3c5ff904e00c727475c467a25ada1ff",
-  "decision_owner": "Root",
-  "kind": "shared_core_action",
-  "non_goals": [
-    "do not change scientific, numerical, Effect identity, permission, or workflow semantics beyond the already verified candidate bytes",
-    "do not force push, rewrite published history, create a second candidate, or manually resolve an integration conflict",
-    "do not include UCOPE, Portfolio, Matt, workflow-design report, README, CONTEXT, gitignore, or other main-worktree-only changes",
-    "do not stage, commit, overwrite, stash, or otherwise alter any path outside the exact path set"
-  ],
-  "objective": "Commit the complete verified 25-path native control-plane and adapter candidate from wt-controlplane-engineering-native-adapter-repair-20260826-a, mechanically integrate that one candidate into main, and push the resulting fast-forward main to origin.",
-  "paths": [
-    ".agents/skills/hmasd-cm-engineering-cycle/SKILL.md",
-    ".agents/skills/hmasd-cm-task/SKILL.md",
-    ".agents/skills/hmasd-em-direction-cycle/SKILL.md",
-    ".agents/skills/hmasd-em-task/SKILL.md",
-    ".agents/skills/hmasd-git-integration/SKILL.md",
-    ".agents/skills/hmasd-result-run/SKILL.md",
-    ".agents/skills/hmasd-slice-interface/SKILL.md",
-    "AGENTS.md",
-    "docs/project/WORKFLOW_PROTOCOL.md",
-    "scripts/hmasd_codex_tasks.py",
-    "scripts/hmasd_external_review.py",
-    "scripts/hmasd_protocol_contracts.py",
-    "scripts/hmasd_state.py",
-    "scripts/hmasd_work_packet.py",
-    "scripts/hmasd_worktree.py",
-    "scripts/schemas/hmasd_agent_result.schema.json",
-    "scripts/schemas/hmasd_work_packet.schema.json",
-    "tests/hmasd_codex_tasks_test.py",
-    "tests/hmasd_external_review_phase5_test.py",
-    "tests/hmasd_protocol_contracts_test.py",
-    "tests/hmasd_state_phase0_test.py",
-    "tests/hmasd_work_packet_test.py",
-    "tests/hmasd_work_return_overlap_test.py",
-    "tests/hmasd_workflow_golden_path_test.py",
-    "tests/hmasd_workflow_protocol_test.py"
-  ],
-  "schema_version": 1
-}
-```
