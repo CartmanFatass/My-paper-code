@@ -790,7 +790,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 operator_create_count += 1
                 operator_thread = {
                     "id": "thread-operator-golden-run",
-                    "name": "native_ll_golden-run",
+                    "name": "native_ll_golden_run",
                     "parentThreadId": "thread-cm-alpha",
                     "agentRole": "hmasd-experiment-operator",
                     "cwd": str(repo),
@@ -891,8 +891,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     with native.AppServerClient(transport=peer, timeout=0.2) as client:
         first = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
         repeated = client.run_chain(start_work_id=cm_packet["work_id"], cwd=str(repo))
-
-    assert first["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
     assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stderr.log"),
@@ -902,10 +901,13 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         json.loads(item["text"])
         for item in first_turn_inputs
         if item.get("type") == "text"
-        and item.get("text", "").startswith('{"assignment_id"')
+        and '"protocol":"hmasd.experiment-operator.assignment.v1"'
+        in item.get("text", "")
     ]
     assert operator_contracts == [
         {
+            "action": "create_or_reuse_one_native_child_then_wait",
+            "agent_role": "hmasd-experiment-operator",
             "assignment_id": "cm-owned-operator-golden",
             "command": [sys.executable, "-c", f"print('{marker}')"],
             "cwd": str(repo),
@@ -923,7 +925,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             "protocol": "hmasd.experiment-operator.assignment.v1",
             "run_id": "golden-run",
             "run_owner": "Operator-golden-run",
-            "task_name": "native_ll_golden-run",
+            "task_name": "native_ll_golden_run",
         }
     ]
     manifest_document = json.loads(manifest.read_text(encoding="utf-8"))

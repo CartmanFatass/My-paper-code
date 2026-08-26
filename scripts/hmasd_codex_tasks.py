@@ -32,6 +32,8 @@ except ImportError:
 
 
 PROTOCOL_MARKER = "hmasd.work-packet.dispatch.v2"
+OPERATOR_ASSIGNMENT_MARKER = "hmasd.experiment-operator.assignment.v1"
+_OPERATOR_ROLE = "hmasd-experiment-operator"
 _CONFORMANCE_RESPONSE = '{"status":"HMASD_NATIVE_ADAPTER_CONFORMANCE_OK"}'
 _CONFORMANCE_PROMPT = (
     "HMASD native adapter conformance probe. Do not call tools. "
@@ -770,6 +772,7 @@ class AppServerClient:
         expected_cwd: str | None = None,
         expected_thread_source: str | None = None,
         require_thread_source: bool = False,
+        participant_contract: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         if max_attempts < 1:
             raise ValueError("max_attempts must be positive")
@@ -900,6 +903,18 @@ class AppServerClient:
         inputs: list[dict[str, Any]] = [{"type": "text", "text": envelope}]
         if attempt == 1:
             inputs.append({"type": "text", "text": _PARTICIPANT_SLICE_INSTRUCTION})
+            if participant_contract is not None:
+                inputs.append(
+                    {
+                        "type": "text",
+                        "text": json.dumps(
+                            participant_contract,
+                            ensure_ascii=False,
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        ),
+                    }
+                )
         turn_params: dict[str, Any] = {
             "threadId": thread_id,
             "input": inputs,
@@ -1404,6 +1419,175 @@ class AppServerClient:
             reason.get("type") == "OWNED_PATH_OVERLAP" for reason in reasons
         ) and not compare.get("packet_conflicts")
 
+    @staticmethod
+    def _cm_operator_assignment(
+        *, repo: Path, work_id: str, packet_locator: str, target_identity: str
+    ) -> dict[str, Any] | None:
+        """Freeze one existing run manifest into the CM's leaf assignment."""
+
+        if not target_identity.startswith("CM-"):
+            return None
+        relative = _relative_posix_path(packet_locator)
+        packet_path = (repo / Path(*relative.split("/"))).resolve()
+        try:
+            packet_path.relative_to(repo.resolve())
+            packet_document = json.loads(packet_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            raise ValueError(f"CM packet is unreadable: {exc}") from exc
+        packet = hmasd_work_packet.validate_packet(packet_document, repo=repo)
+        if packet.get("work_id") != work_id or packet.get("target_identity") != target_identity:
+            raise ValueError("CM packet identity does not match the closed plan")
+        run_effects = [
+            effect
+            for effect in packet.get("effect_refs", [])
+            if isinstance(effect, Mapping)
+            and effect.get("kind") == "run_manifest"
+            and effect.get("operation") == "EXECUTE"
+        ]
+        if not run_effects:
+            return None
+        if len(run_effects) != 1:
+            raise ValueError("CM assignment must bind exactly one executable run manifest")
+        manifest_locator = _relative_posix_path(str(run_effects[0].get("path", "")))
+        manifest_path = (repo / Path(*manifest_locator.split("/"))).resolve()
+        try:
+            manifest_path.relative_to(repo.resolve())
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            raise ValueError(f"run manifest is unreadable: {exc}") from exc
+        run_id = manifest.get("run_id")
+        assignment_id = manifest.get("assignment_id")
+        command = manifest.get("command")
+        run_cwd = manifest.get("cwd")
+        run_owner = f"Operator-{run_id}"
+        if (
+            not isinstance(run_id, str)
+            or _IDENTITY.fullmatch(run_id) is None
+            or not isinstance(assignment_id, str)
+            or not assignment_id
+            or not isinstance(command, list)
+            or not command
+            or not all(isinstance(part, str) for part in command)
+            or not isinstance(run_cwd, str)
+            or not Path(run_cwd).is_absolute()
+            or manifest.get("writer") != run_owner
+            or manifest.get("operator_identity") != run_owner
+            or manifest.get("status")
+            not in {"PREPARED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"}
+        ):
+            raise ValueError("run manifest does not freeze a valid Operator assignment")
+        run_script = Path(__file__).with_name("hmasd_run.py").resolve()
+        task_suffix = re.sub(r"[^a-z0-9]+", "_", run_id.lower()).strip("_")
+        return {
+            "action": "create_or_reuse_one_native_child_then_wait",
+            "assignment_id": assignment_id,
+            "command": command,
+            "cwd": run_cwd,
+            "execute_argv": [
+                sys.executable,
+                str(run_script),
+                "execute",
+                "--manifest",
+                str(manifest_path),
+            ],
+            "logical_identity": _OPERATOR_ROLE,
+            "agent_role": _OPERATOR_ROLE,
+            "manifest": manifest_locator,
+            "output_root": str(manifest_path.parent),
+            "parent_identity": target_identity,
+            "protocol": OPERATOR_ASSIGNMENT_MARKER,
+            "run_id": run_id,
+            "run_owner": run_owner,
+            "task_name": f"native_ll_{task_suffix}",
+        }
+
+    @staticmethod
+    def _operator_child_fact(
+        rows: Sequence[Mapping[str, Any]],
+        *,
+        parent_thread_id: str,
+        assignment: Mapping[str, Any],
+    ) -> dict[str, Any] | None:
+        expected_name = str(assignment["task_name"])
+
+        def binds_run(row: Mapping[str, Any]) -> bool:
+            if row.get("name") == expected_name:
+                return True
+            source = row.get("source")
+            spawn = (
+                source.get("subAgent", {}).get("thread_spawn", {})
+                if isinstance(source, Mapping)
+                and isinstance(source.get("subAgent"), Mapping)
+                else {}
+            )
+            if isinstance(spawn, Mapping) and str(spawn.get("agent_path", "")).endswith(
+                "/" + expected_name
+            ):
+                return True
+            for document in AppServerClient._protocol_documents_for_role(
+                row.get("turns", []), _OPERATOR_ROLE
+            ):
+                if document.get("run_id") == assignment["run_id"]:
+                    return True
+            return False
+
+        exact = [
+            row
+            for row in rows
+            if row.get("parentThreadId") == parent_thread_id
+            and row.get("agentRole") == _OPERATOR_ROLE
+            and binds_run(row)
+        ]
+        if len(exact) > 1:
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN",
+                "run_id": assignment["run_id"],
+                "thread_ids": sorted(str(row.get("id")) for row in exact),
+            }
+        if not exact:
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "OPERATOR_CHILD_NOT_OBSERVED",
+                "run_id": assignment["run_id"],
+            }
+        thread_id = exact[0].get("id")
+        if not isinstance(thread_id, str) or not thread_id:
+            return {
+                "status": "TASK_IDENTITY_CONFLICT",
+                "reason": "OPERATOR_CHILD_ID_INVALID",
+                "run_id": assignment["run_id"],
+            }
+        return {
+            "status": "OBSERVED",
+            "thread_id": thread_id,
+            "parent_thread_id": parent_thread_id,
+            "agent_role": _OPERATOR_ROLE,
+            "run_id": assignment["run_id"],
+        }
+
+    @staticmethod
+    def _protocol_documents_for_role(value: Any, role: str) -> list[dict[str, Any]]:
+        found: list[dict[str, Any]] = []
+        if isinstance(value, Mapping):
+            text_value = value.get("text")
+            if value.get("type") == "text" and isinstance(text_value, str):
+                try:
+                    document = json.loads(text_value)
+                except json.JSONDecodeError:
+                    document = None
+                if isinstance(document, Mapping) and (
+                    document.get("logical_identity") == role
+                    or document.get("agent_role") == role
+                ):
+                    found.append(dict(document))
+            for item in value.values():
+                found.extend(AppServerClient._protocol_documents_for_role(item, role))
+        elif isinstance(value, list):
+            for item in value:
+                found.extend(AppServerClient._protocol_documents_for_role(item, role))
+        return found
+
     def execute_plan(
         self,
         plan: Mapping[str, Any],
@@ -1524,6 +1708,20 @@ class AppServerClient:
             None if closed_manager is None else str(closed_manager["thread_source"])
         )
         repo = Path(cwd).absolute()
+        try:
+            operator_assignment = self._cm_operator_assignment(
+                repo=repo,
+                work_id=str(work_id),
+                packet_locator=packet_locator,
+                target_identity=str(target),
+            )
+        except (ValueError, hmasd_work_packet.WorkPacketError) as exc:
+            return {
+                "status": "PROTOCOL_DEFECT",
+                "reason": "INVALID_CM_OPERATOR_ASSIGNMENT",
+                "work_id": work_id,
+                "detail": str(exc),
+            }
         with self._dispatch_lock(repo):
             listed = self._list_all_threads(cwd=cwd)
             if listed.get("status") != "OK":
@@ -1619,7 +1817,11 @@ class AppServerClient:
                         {
                             "logical_identity": str(target),
                             "kind": resolution.get("kind"),
-                            "direction_id": resolution.get("direction_id"),
+                            "direction_id": (
+                                resolution.get("direction_id")
+                                if closed_manager is None
+                                else closed_manager["direction_id"]
+                            ),
                             "generation": tagged_generation,
                             "lifecycle": tagged_lifecycle,
                             "thread_id": tagged_thread_id,
@@ -1881,7 +2083,16 @@ class AppServerClient:
                     thread_id=thread_id,
                 )
                 if return_fact is not None:
-                    return return_fact
+                    if operator_assignment is None:
+                        return return_fact
+                    child = self._operator_child_fact(
+                        reconcile_rows,
+                        parent_thread_id=str(thread_id),
+                        assignment=operator_assignment,
+                    )
+                    if child is not None and child.get("status") != "OBSERVED":
+                        return child
+                    return {**return_fact, "operator_child": child}
             sent = self.send(
                 thread_id,
                 work_id,
@@ -1894,6 +2105,7 @@ class AppServerClient:
                     closed_thread_source is not None
                     and (needs_create or tagged_thread is not None)
                 ),
+                participant_contract=operator_assignment,
             )
             if warning:
                 sent = {**sent, "warning": "ROOT_OVERRIDE_ACTIVE"}
@@ -1952,7 +2164,16 @@ class AppServerClient:
                 terminal=terminal,
             )
             if return_fact is not None:
-                return return_fact
+                if operator_assignment is None:
+                    return return_fact
+                child = self._operator_child_fact(
+                    fresh_rows,
+                    parent_thread_id=str(thread_id),
+                    assignment=operator_assignment,
+                )
+                if child is not None and child.get("status") != "OBSERVED":
+                    return child
+                return {**return_fact, "operator_child": child}
             return {
                 "status": "RETURN_WITNESS_MISSING",
                 "reason": "NATIVE_TURN_TERMINAL_WITHOUT_RETURN_WITNESS",
@@ -2202,6 +2423,15 @@ class AppServerClient:
                 )
                 if result.get("status") == "UNKNOWN":
                     return stopped("UNKNOWN_COMMITMENT", result=result)
+                if (
+                    result.get("status") == "RETURN_WITNESS_MISSING"
+                    and result.get("recoverable") is True
+                ):
+                    refreshed = refresh_tasks()
+                    if isinstance(refreshed, Mapping):
+                        return observation_stop(refreshed)
+                    current_tasks = refreshed
+                    continue
                 if "return_witness" not in result:
                     return stopped("EXECUTE_PLAN_STOP", result=result)
                 refreshed = refresh_tasks()
