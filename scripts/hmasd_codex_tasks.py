@@ -1579,42 +1579,39 @@ class AppServerClient:
             if thread_id not in candidate_ids:
                 candidate_ids.append(thread_id)
 
-        if not candidate_ids:
-            parent_read = self._read_thread_full(parent_thread_id)
-            if parent_read.get("status") != "OK":
-                return stopped("UNKNOWN", "OPERATOR_PARENT_READ_UNKNOWN", parent_thread_id)
-            parent = parent_read["thread"]
-            if parent.get("id") != parent_thread_id:
-                return stopped(
-                    "TASK_IDENTITY_CONFLICT", "OPERATOR_PARENT_IDENTITY_CHANGED",
-                    parent_thread_id,
-                )
-            turns = parent.get("turns")
-            if not isinstance(turns, list):
-                return stopped("UNKNOWN", "OPERATOR_PARENT_HISTORY_UNKNOWN", parent_thread_id)
-            for turn in turns:
-                if not isinstance(turn, Mapping):
+        parent_read = self._read_thread_full(parent_thread_id)
+        if parent_read.get("status") != "OK":
+            return stopped("UNKNOWN", "OPERATOR_PARENT_READ_UNKNOWN", parent_thread_id)
+        parent = parent_read["thread"]
+        if parent.get("id") != parent_thread_id:
+            return stopped(
+                "TASK_IDENTITY_CONFLICT", "OPERATOR_PARENT_IDENTITY_CHANGED",
+                parent_thread_id,
+            )
+        turns = parent.get("turns")
+        if not isinstance(turns, list):
+            return stopped("UNKNOWN", "OPERATOR_PARENT_HISTORY_UNKNOWN", parent_thread_id)
+        for turn in turns:
+            if not isinstance(turn, Mapping) or "items" not in turn:
+                return stopped("UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id)
+            items = turn["items"]
+            if not isinstance(items, list):
+                return stopped("UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id)
+            for item in items:
+                if not isinstance(item, Mapping) or (
+                    item.get("type") != "subAgentActivity"
+                    or item.get("kind") != "started"
+                ):
                     continue
-                items = turn.get("items", [])
-                if not isinstance(items, list):
+                child_id = item.get("agentThreadId")
+                agent_path = item.get("agentPath")
+                if (
+                    not isinstance(child_id, str) or not child_id
+                    or not isinstance(agent_path, str) or not agent_path
+                ):
                     return stopped("UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id)
-                for item in items:
-                    if not isinstance(item, Mapping) or (
-                        item.get("type") != "subAgentActivity"
-                        or item.get("kind") != "started"
-                    ):
-                        continue
-                    child_id = item.get("agentThreadId")
-                    agent_path = item.get("agentPath")
-                    if (
-                        not isinstance(child_id, str) or not child_id
-                        or not isinstance(agent_path, str) or not agent_path
-                    ):
-                        return stopped(
-                            "UNKNOWN", "OPERATOR_PARENT_ACTIVITY_INVALID", parent_thread_id
-                        )
-                    if child_id not in candidate_ids:
-                        candidate_ids.append(child_id)
+                if child_id not in candidate_ids:
+                    candidate_ids.append(child_id)
 
         for thread_id in candidate_ids:
             read = self._read_thread_full(thread_id)

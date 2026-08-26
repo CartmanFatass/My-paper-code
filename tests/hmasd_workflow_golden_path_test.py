@@ -694,6 +694,7 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
     ("case", "expected_reason"),
     [
         ("valid", None),
+        ("valid_list_nonexact_parent_exact", None),
         ("wrong_identity", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
         ("wrong_role", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
         ("malformed_payload", "OPERATOR_RESULT_SCHEMA_INVALID"),
@@ -712,7 +713,11 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("candidate_read_unknown", "OPERATOR_CHILD_READ_UNKNOWN"),
         ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("candidate_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
+        ("candidate_split_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
         ("parent_activity_malformed", "OPERATOR_PARENT_ACTIVITY_INVALID"),
+        ("parent_turn_nonmapping", "OPERATOR_PARENT_ACTIVITY_INVALID"),
+        ("parent_turn_items_missing", "OPERATOR_PARENT_ACTIVITY_INVALID"),
+        ("parent_turn_items_nonlist", "OPERATOR_PARENT_ACTIVITY_INVALID"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -821,7 +826,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 },
                 collision["id"]: collision,
             }
-            if case == "candidate_ambiguous":
+            if case in {"candidate_ambiguous", "candidate_split_ambiguous"}:
                 for suffix in ("a", "b"):
                     child = child_stub(f"thread-operator-exact-{suffix}", "golden-run")
                     self.threads[child["id"]] = child
@@ -830,6 +835,8 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 discovered = [self.collision_id]
             elif case == "candidate_ambiguous":
                 discovered = ["thread-operator-exact-a", "thread-operator-exact-b"]
+            elif case == "candidate_split_ambiguous":
+                discovered = ["thread-operator-exact-b"]
             if discovered or case == "parent_activity_malformed":
                 activities = [
                     {
@@ -851,6 +858,16 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 self.threads["thread-cm-alpha"]["turns"].append(
                     {"id": "turn-parent-activity", "status": "interrupted", "items": activities}
                 )
+            if case == "parent_turn_nonmapping":
+                self.threads["thread-cm-alpha"]["turns"].append("malformed-turn")
+            elif case == "parent_turn_items_missing":
+                self.threads["thread-cm-alpha"]["turns"].append(
+                    {"id": "turn-items-missing", "status": "interrupted"}
+                )
+            elif case == "parent_turn_items_nonlist":
+                self.threads["thread-cm-alpha"]["turns"].append(
+                    {"id": "turn-items-nonlist", "status": "interrupted", "items": {}}
+                )
             self.transport = _LocalFakeAppServer(repo)
             self.transport.threads = self.threads
             self.transport.requests = []
@@ -871,16 +888,18 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 )
                 return
             if method == "thread/list":
+                listed = [
+                    thread
+                    for thread in self.threads.values()
+                    if thread.get("parentThreadId") is None
+                ]
+                if case == "valid_list_nonexact_parent_exact":
+                    listed.append(self.threads[self.collision_id])
+                elif case == "candidate_split_ambiguous":
+                    listed.append(self.threads["thread-operator-exact-a"])
                 self.transport._emit(
                     request_id,
-                    {
-                        "data": [
-                            thread
-                            for thread in self.threads.values()
-                            if thread.get("parentThreadId") is None
-                        ],
-                        "nextCursor": None,
-                    },
+                    {"data": listed, "nextCursor": None},
                 )
                 return
             thread_id = params.get("threadId")
