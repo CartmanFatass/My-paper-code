@@ -1,40 +1,40 @@
 ---
 name: hmasd-workflow-recovery
-description: Recover one scoped HMASD failure from durable facts without replaying unknown effects.
+description: Use when recovering one scoped HMASD project, direction, feature, or Effect failure from observed durable facts.
 ---
 
 # HMASD Workflow Recovery
 
-Use for one observed scope only: pure research, manager task, partial
-code/worktree, running run/process, memory refusal, Git/push, external send,
-late output, Dashboard projection, runtime mapping, or local evidence failure.
-Read its existing authority revision, effect/run/worktree facts, and Work Packet
-refs before any action.
+Classify and return one failure as `project`, `direction`, `feature`, or
+`effect`, with its exact ref and `resume_condition`; never propagate bare
+`BLOCKED`. Before an Effect, read the cited authority revision, packet/return,
+runtime observation, and receipt. Runtime maps are reconstructable local
+handles, not authority: after compaction reconstruct once from durable sources.
 
-1. Classify the observed failure and scope; never use bare `BLOCKED` as a
-   workflow control signal.
-2. Reconstruct missing runtime references once from durable facts after
-   compaction. Reuse a matching manager identity; report duplicate or ambiguous
-   identity rather than creating another one.
-3. For an actual effect, observe its receipt, any running process, remote, or
-   operation first.
-   `UNKNOWN` run, push, and external-send outcomes are observe-only: never replay
-   and never resend.
-4. Repair one bounded local cause when evidence supports it. A new authority
-   revision or material evidence may create a new immutable Work Packet; do not
-   repeat the same packet against unchanged facts.
-5. Record only in the existing authority/result contract, reconcile once, and
-   return a precise resume condition. Unrelated scopes continue.
+| Failure class | Bounded recovery |
+| --- | --- |
+| Pure research task failed | Preserve partial prose as unaccepted; make a new attempt only with a materially distinct assignment. |
+| Manager missing after resume | Read durable logical identity/generation; revive that matching generation or reconstruct once, never blindly duplicate a manager. |
+| Partial code work / worktree | Inspect the existing receipt/worktree; resume or retain it for recovery, never apply the patch or provision twice. |
+| Running result | Reconcile the manifest once. If process identity is unproven, mark/retain `UNKNOWN`; never relaunch or execute the command again. |
+| Memory refusal | Reduce, batch, or shard; never request approval for overcommit. |
+| Git conflict or stale base | Preserve bytes and return to Root for a new integration plan; never auto-resolve a semantic conflict. |
+| Push outcome unknown | Fetch the remote tip and compare; never resend the push. |
+| External commitment unknown | Observe/verify the existing operation and import an exact archive idempotently; never resend. |
+| Late specialist result | Compare generation, checkpoint, revision, and compaction facts read-only; reconcile before effectful work. A lower-generation or mismatched-checkpoint result is superseded evidence under newer state, never overwrite it. |
+| Dashboard failure | Restart the read-only projection or run without Dashboard; it never blocks workflow. |
 
-Pure research is also a scoped failure. A late output whose generation or
-checkpoint does not match is superseded evidence; newer authority always wins.
-Work Packet delivery is at-least-once for the same `work_id`, so intake must be
-idempotent. Actual effects remain at-most-once.
+Typed Effect observation uses the existing kind/resource/operation contract.
+`UNKNOWN` send, creation, run, push, and external commitment are observe-only;
+never replay, resend, or create a semantic replacement. Clerk handles only an
+exact program defect or legacy incompatibility, never ordinary recovery.
 
-Do not create a recovery FSM, global route budget, duplicate recovery ledger,
-or new durable authority. Preserve bytes on revision, generation, checkpoint,
-or schema conflict and report the exact affected scope.
+For a terminal task without return, use the same `work_id` and fresh native
+history. Deduplicate `(effect_class, assignment_id, route)`: an identical route
+does not consume budget; only a materially distinct route does. At most three
+distinct routes are allowed. On exhaustion emit one scope-specific
+`RECOVERY_EXHAUSTED` user-visible blocker with `failure_class` and
+`resume_condition`, then request the user decision; unrelated scopes continue.
 
-Do not count materially distinct routes or keep a three-route budget; duplicate
-attempts, budget exhaustion, and a generic user-visible blocker are retired
-controls.
+Do not add a recovery FSM, queue, ledger, gate, daemon, or new durable
+authority.

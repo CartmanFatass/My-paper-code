@@ -69,14 +69,15 @@ data/
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 
-# Codex project skills are durable workflow definitions. Other retired
-# assistant layouts must not reappear as hidden local state.
-!/.agents/
+# Project-scoped Codex skills are versioned under the repository skill root.
+/.agents/*
 !/.agents/skills/
-!/.agents/skills/**/
-!/.agents/skills/**/SKILL.md
+!/.agents/skills/**
+# Runtime registries, transient locks, and legacy migration residue remain
+# local-only.
 /.codex/runtime/**
 /.omp/runtime/**
+# Retired non-native assistant layouts must not reappear as hidden local state.
 /.claude/
 # Generated from the account-visible Codex model cache; never commit account
 # catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.

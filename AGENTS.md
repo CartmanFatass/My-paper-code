@@ -3,9 +3,26 @@
 This repository preserves the OMP domain and effect contracts while using
 Codex top-level tasks for durable interaction and direct leaf subagents for
 bounded parallel work. Roles describe decision responsibility; they are not
-permission gates. The v1 control plane has four primitives only: existing
-durable authorities, runtime-only Work Packets, independently observed Effects,
-and one bounded `reconcile --once` action.
+permission gates. The v1 control plane is based on existing durable
+Authority+CAS, exact Work Packets, typed Effect/ref domain observers, and
+bounded `reconcile --once` with its native adapter. Return witnesses,
+resource comparison, and the short dispatch lock are internal representations
+or mechanisms, not new primitives.
+Workflow-Clerk is only a program-generated exception path.
+
+Stage A-C are implemented: the deterministic protocol
+planner processes one explicit `work_id`, binds a typed agent result with
+`assignment_id=work_id`, validates a canonical next-packet draft, binds a
+`REQUEST_*` result uniquely through `next_action.input_refs=[draft.work_id]`,
+and emits one program-constrained action from an explicit observed task
+snapshot. Stage D closes the local protocol contracts. Live evidence now includes
+the real no-model list/read/resume probe, read-only no-network Luna-low
+`CONFORMANCE_OK`, `LOCAL_FAKE_TRANSPORT_GOLDEN` (including a real short
+`hmasd_run`), and one real unique Experiment Operator leaf run to
+`SUCCEEDED/exit0/group_quiescent/stdout marker`. Full real-native
+EM→CM→Operator→Root unattended chaining remains unproven.
+
+The [workflow design rationale](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md) is non-authoritative and adds no workflow primitive, authority, or gate.
 
 ## Task plane
 
@@ -15,6 +32,15 @@ and one bounded `reconcile --once` action.
   each conclusion under the referenced heading of the correct existing Markdown
   authority as `Decision owner: Root` (or the actual owner). Root is not the
   only user entry point.
+- **Workflow-Clerk** is the unique Luna xhigh, event-driven, normally parked
+  exception documentation and legacy-compatibility task. It receives only one
+  exact program-generated typed-field/ref/schema/identity defect or
+  legacy-unroutable input, documents that defect, and returns it to the
+  program-named owner. Authority/path/Effect identity conflicts go to Root;
+  material decisions go to the domain owner/user; Root override is direct.
+  It does not handle the normal path, scan topology, infer routing from prose,
+  publish/dispatch/create, wait/retry, own an Effect, keep private state, or act
+  as a gate.
 - **Portfolio** is a `gpt-5.6-sol` max top-level task. It owns cross-direction
   selection, priority, lifecycle, and whether to invest CM/resources. It is
   created only when a direction needs it, then may park and recover independently.
@@ -39,8 +65,12 @@ an identity conflict rather than making a duplicate. Task creation lineage does
 not confer authority.
 
 Use the matching project skill to bootstrap a top-level task:
-`hmasd-root-task`, `hmasd-portfolio-task`, `hmasd-em-task`, or `hmasd-cm-task`.
-Portfolio, EM, and CM are never spawned from `.codex/agents`.
+`hmasd-root-task`, `hmasd-workflow-clerk-task`, `hmasd-portfolio-task`,
+`hmasd-em-task`, or `hmasd-cm-task`. Clerk loads
+`hmasd-operations-manual`; Root/Portfolio/EM/CM tasks use
+`hmasd-slice-interface` for exact Work Packet intake and common result output.
+Workflow-Clerk, Portfolio, EM, and CM are never
+spawned from `.codex/agents`.
 
 The Watcher Advisor may run alongside a top-level task when useful. Its output
 is traceability and course-correction input, not a gate; reversible in-scope
@@ -49,8 +79,8 @@ recommendations may be applied immediately without acknowledgment or approval.
 ## One leaf layer
 
 `.codex/agents/` contains the role configurations registered by the project
-config. The four long-lived Root/Portfolio/EM/CM identities are top-level tasks,
-not custom agents from this directory. Root may spawn every genuine leaf role;
+config. Root, Workflow-Clerk, Portfolio, EM, and CM identities are top-level
+tasks, not custom agents from this directory. Root may spawn every genuine leaf role;
 other top-level tasks use their matching bootstrap contract. Every spawned
 project agent is a leaf and must not spawn or delegate another agent. Project config sets
 `agents.max_depth = 1`; Codex must be restarted after changing project config
@@ -81,6 +111,46 @@ and is used only for useful parallelism or context separation.
     propagate a bare `BLOCKED` label across tasks or use it to close unrelated work.
 11. Dashboard v1 is a read-only projection. Do not add a daemon, SQLite control
     plane, generic recovery engine, or a second durable workflow schema.
+12. `CREATE_TASK` is a repeatable intent, not a creation receipt. Root alone
+    single-flights a canonical manager identity: observe the Codex task list and
+    task cache freshly before one create, observe errors or unknown outcomes
+    before any retry, CAS only an observed identity, and re-observe a CAS
+    conflict rather than create again.
+13. Normal cross-session input is one exact validated Work Packet. Its
+    `target_identity` must not be `Workflow-Clerk`; the dedicated Clerk
+    top-level intake is not a normal packet. The receiving session writes only
+    its existing authority/result/evidence and emits the
+    machine-validated common agent result with `assignment_id=work_id`. It may
+    request follow-on work only after the Work Packet `build` command emits a
+    canonical draft; its `REQUEST_*` result then sets `next_action.input_refs`
+    to exactly `[draft.work_id]`. Structured path+SHA256 state/artifact refs must
+    be fresh. Opaque string payload refs receive schema validation only; their
+    freshness belongs to a dedicated domain contract. All common file evidence
+    uses path+sha file refs; legacy string file refs are schema-invalid. The protocol planner
+    never guesses a path from a string or chooses a route from natural language.
+14. Ordinary packets/results never wake Workflow-Clerk. Task identity conflict
+    goes directly to Root; `UNKNOWN` Effect handling is programmatic
+    observe-only; Root/user exact override needs no Clerk acknowledgment.
+15. Pre-kernel authority retains its material goals, caps, paths, Effects, and
+    decision owner. Legacy routing text is not executed or reinterpreted by a
+    model; the program reports an exact legacy-unroutable defect. A Protocol
+    Defect envelope includes `field_path`, `ref` (null or typed), `actual`,
+    `expected`, `failure_scope`, `producing_command`, and
+    `responsible_owner`; v1 protocol recovery always names `Root`, never a
+    model-inferred target.
+16. Every planner call supplies an explicit freshly observed task snapshot.
+    Omission is a protocol defect; never fall back implicitly to a missing or
+    stale task cache. Shared-core actions use the exact fenced
+    `hmasd-shared-core-action-v1` record and byte-match proof; this proves the
+    bound record, not that a conversation contained genuine consent. Effects
+    use typed kind/resource_id/optional operation; legacy path-only Effects are
+    read-only compatibility inputs and exact conflicts. Opaque file refs are
+    structured; true operation IDs remain opaque and are never interpreted as
+    paths. `file_ref` and `changed_paths` use Windows-safe canonical
+    repo-relative paths, reject absolute/`..`/backslash/symlink-reparse aliases,
+    normalize slashes, and casefold for deduplication. Root may use `--root-override-reason` for a known overlap or active
+    unknown, recording the warning in native history; it cannot disguise an
+    UNKNOWN send/create or bypass effect identity.
 
 ## Durable authorities and writers
 
@@ -135,9 +205,19 @@ and pushed autonomously within its assignment. Shared-core changes require one
 user confirmation bound to the exact change, recorded by the user or Root under
 the relevant Markdown authority heading. That heading records at least an
 `Action digest`, `Base SHA`, sorted exact path set, objective/non-goals, and
-allowed Git effects. The Action digest is the SHA256 of the project's canonical
-JSON representation of those bound fields. A candidate SHA is appended only as
-a result ref after implementation; approval never requires an unknown candidate.
+allowed Git effects. The record must come from a base-tracked existing durable
+Markdown authority and use the top-level `hmasd-shared-core-action-v1` fence;
+the exact authority allowlist is `AGENTS.md`,
+`docs/project/WORKFLOW_PROTOCOL.md`, `docs/research/portfolio/PORTFOLIO.md`,
+and the matching `docs/research/candidates/<id>/DIRECTION.md`; other Markdown,
+including `WORKFLOW_DESIGN_PHILOSOPHY.md`, is not authority. Portfolio registry
+JSON is only a writer-path exemption and never carries the fence. Root rechecks
+the same bytes and hash. EM, Portfolio, and ordinary leaves
+carrying non-writer-owned shared-core paths are rejected; Portfolio's two
+existing authority writer paths are the only authority exception. The Action
+digest is the SHA256 of the project's canonical JSON representation of those
+bound fields. A candidate SHA is appended only as a result ref after
+implementation; approval never requires an unknown candidate.
 Before execution or commit, Root compares the record with the current base,
 paths, and requested effects. The path policy only classifies paths; unmatched
 paths are shared-core and the policy is not an approval service. Root integrates
@@ -155,10 +235,109 @@ declared by `.gitattributes`; do not normalize bytes inside hash validation.
   rebuildable from existing durable authorities, and never replace those authorities.
   Their locator delivery is at-least-once; receivers handle a repeated `work_id`
   idempotently and never generate a new packet for that redelivery.
+- A normal participant accepts one exact Work Packet and produces its existing
+  authority/result/evidence plus the machine-validated common result using
+  fresh structured path+SHA256 state/artifact refs. For `REQUEST_*`, first build the
+  canonical draft and bind only its `work_id` in `next_action.input_refs`. One
+  CM assignment covers ordinary review, same-scope repair,
+  tests, verification/SANCheck, and terminal engineering return.
 - Reviews and tests are proportional evidence, not authorization layers.
-- One `reconcile --once` advances at most one bounded action for a runnable
-  direction; serialize the same scope/target/revision and allow distinct
-  directions to proceed in parallel. Wait on task/process completion instead
-  of model polling.
+- One planner/reconcile call processes exactly one explicit `work_id` with one
+  explicit freshly observed task snapshot and emits at most one bounded action.
+  Never globally scan ready work or infer a missing snapshot from cache.
+  Distinct explicit work IDs may proceed in parallel when their paths and
+  Effects are disjoint.
+- Normal dispatch is Root exact reconcile followed by a short native-dispatch
+  critical section: fresh identity/active peers/resource comparison, then
+  create-or-reuse and send. The receiver first performs exact return lookup,
+  completes its slice, publishes the return witness, and only then sends a
+  message. Lost messages are rebuilt from the witness. A terminal packet with
+  no return resumes from native history for the same work_id at most three
+  times; UNKNOWN send/create is observe-only. Full real-native unattended
+  chaining remains unproven despite the completed probes and fake golden path.
 - Use the documented CLIs rather than private helper functions or duplicate
   state writers.
+
+## Current Root shared-core action — native adapter integration 2026-08-26
+
+Decision owner: Root. User authorizations: `请将改动合并回main分支并push`; exact 25-path candidate confirmation: `确认`.
+
+```hmasd-shared-core-action-v1
+{
+  "action_digest": "7b1b743db31ac5ffc4fc80ad37eab13d4e3ece7bce68a5764993443631b1c3ba",
+  "allowed_effects": [
+    "MODIFY_PATHS",
+    "WORKTREE_APPLY_INTEGRATION",
+    "WORKTREE_PUSH"
+  ],
+  "base_sha": "ee06a078c3c5ff904e00c727475c467a25ada1ff",
+  "decision_owner": "Root",
+  "kind": "shared_core_action",
+  "non_goals": [
+    "do not change scientific, numerical, Effect identity, permission, or workflow semantics beyond the already verified candidate bytes",
+    "do not force push, rewrite published history, create a second candidate, or manually resolve an integration conflict",
+    "do not include UCOPE, Portfolio, Matt, workflow-design report, README, CONTEXT, gitignore, or other main-worktree-only changes",
+    "do not stage, commit, overwrite, stash, or otherwise alter any path outside the exact path set"
+  ],
+  "objective": "Commit the complete verified 25-path native control-plane and adapter candidate from wt-controlplane-engineering-native-adapter-repair-20260826-a, mechanically integrate that one candidate into main, and push the resulting fast-forward main to origin.",
+  "paths": [
+    ".agents/skills/hmasd-cm-engineering-cycle/SKILL.md",
+    ".agents/skills/hmasd-cm-task/SKILL.md",
+    ".agents/skills/hmasd-em-direction-cycle/SKILL.md",
+    ".agents/skills/hmasd-em-task/SKILL.md",
+    ".agents/skills/hmasd-git-integration/SKILL.md",
+    ".agents/skills/hmasd-result-run/SKILL.md",
+    ".agents/skills/hmasd-slice-interface/SKILL.md",
+    "AGENTS.md",
+    "docs/project/WORKFLOW_PROTOCOL.md",
+    "scripts/hmasd_codex_tasks.py",
+    "scripts/hmasd_external_review.py",
+    "scripts/hmasd_protocol_contracts.py",
+    "scripts/hmasd_state.py",
+    "scripts/hmasd_work_packet.py",
+    "scripts/hmasd_worktree.py",
+    "scripts/schemas/hmasd_agent_result.schema.json",
+    "scripts/schemas/hmasd_work_packet.schema.json",
+    "tests/hmasd_codex_tasks_test.py",
+    "tests/hmasd_external_review_phase5_test.py",
+    "tests/hmasd_protocol_contracts_test.py",
+    "tests/hmasd_state_phase0_test.py",
+    "tests/hmasd_work_packet_test.py",
+    "tests/hmasd_work_return_overlap_test.py",
+    "tests/hmasd_workflow_golden_path_test.py",
+    "tests/hmasd_workflow_protocol_test.py"
+  ],
+  "schema_version": 1
+}
+```
+
+## Current Root shared-core action — MARL experiment design skill installation 2026-08-26
+
+Decision owner: Root. User authorization: `当前似乎不在main上 我们要将改动push到main上`.
+
+```hmasd-shared-core-action-v1
+{
+  "action_digest": "2dd27752cfe85c50393cce5f15e30ae4bf0cd11edc1df8214950017ac76d8b22",
+  "allowed_effects": [
+    "MODIFY_PATHS",
+    "WORKTREE_APPLY_INTEGRATION",
+    "WORKTREE_PUSH"
+  ],
+  "base_sha": "375cf7298abedcf7dcb4b9d4b6ef65b5f472dd6b",
+  "decision_owner": "Root",
+  "kind": "shared_core_action",
+  "non_goals": [
+    "do not change scientific, numerical, Effect identity, permission, or workflow semantics beyond the verified candidate bytes",
+    "do not force push, rewrite published history, create a second candidate, or manually resolve an integration conflict",
+    "do not stage, commit, overwrite, stash, or otherwise alter any path outside the exact path set"
+  ],
+  "objective": "Commit the verified two-path HMASD MARL experiment design skill installation candidate, mechanically integrate that one candidate into main, and push the resulting fast-forward main to origin.",
+  "paths": [
+    ".agents/skills/hmasd-marl-experiment-design/SKILL.md",
+    ".agents/skills/hmasd-marl-experiment-design/agents/openai.yaml"
+  ],
+  "schema_version": 1
+}
+```
+
+Result ref: candidate SHA `08b0fa58f78cd60b72d5b09674d18a8b3792503b`; parent `375cf7298abedcf7dcb4b9d4b6ef65b5f472dd6b`; exact changed path set and candidate byte hashes verified before integration. Clean native `--ff-only` integration completed, the single push returned success, and fresh remote observation confirmed `refs/heads/main` at the candidate SHA.

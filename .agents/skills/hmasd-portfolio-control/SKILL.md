@@ -1,26 +1,19 @@
 ---
 name: hmasd-portfolio-control
-description: Make one bounded cross-direction HMASD Portfolio decision and publish its authority references.
+description: Use when Portfolio must make and return one bounded HMASD cross-direction decision.
 ---
 
 # HMASD Portfolio Control
 
-Portfolio owns cross-direction priority, lifecycle, and engineering investment.
-It is an independent recoverable top-level responsibility identity, not a
-runtime dispatcher.
+Validate the inbound packet and cited `PORTFOLIO.md`, registry revision, and
+direction results. Portfolio owns only cross-direction priority, lifecycle, and
+engineering investment.
 
-## One decision wake
+Write the decision/reasoning in existing Portfolio authority and apply registry
+changes through `scripts/hmasd_state.py` with writer `Portfolio` and
+expected-revision CAS. Then return via `hmasd-slice-interface`, using fresh
+typed refs. A follow-on direction must be explicit in the complete draft.
 
-1. Reconcile `PORTFOLIO.md`, registry revision, and cited direction results.
-2. Use a responsibility-relevant direct leaf wave only when it adds evidence;
-   every child is a leaf.
-3. Record the decision and its reasoning in existing Portfolio authorities.
-   Apply registry changes with `scripts/hmasd_state.py`, writer Portfolio, and
-   expected-revision CAS.
-4. Publish any follow-on work as one immutable Work Packet containing the
-   objective, non-goals, authority refs/revisions, owned paths, done criteria,
-   and effect refs. Delivery is at-least-once for its same `work_id`; receivers
-   intake idempotently and no new packet is generated for unchanged authority
-   refs. Root uses the authority facts to create/reuse EM or CM.
-5. Stop after the bounded decision. A failed local scope does not change
-   unrelated directions; unknown effects are observed rather than resent.
+Do not dispatch/create/wait native tasks, infer a direction from prose, or wake
+Clerk for normal continuation. Observe unknown Effects and report their exact
+scope.

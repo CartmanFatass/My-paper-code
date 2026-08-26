@@ -10,17 +10,120 @@
   },
   "engineering_request": null,
   "evidence_set_sha256": "724ce24ab8548807ca400aa8179a05b5e103a023bb61f8f639c9a16b5aeeebee",
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "1d5c421bb4de84fc1662b1daedda1c2ed6c7d18e39a9b4547fb8bf14a4f7b98b",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+    "input_refs": [
+      {
+        "path": ".codex/runtime/work/ready/cae7373be25ad3843f1e1fa7b07f899d240f12db8355b51ebf91597e2c1afc28/packet.json",
+        "sha256": "e2cb1f2ed25a5c203acf09b19c570f649ae84ea17aad8442357a15240c453c2f"
+      },
+      {
+        "path": ".codex/runtime/work/ready/b9230ea48ba273c43b37d3cbc1d5b3e562732155eb9ad06698007fe228001b0a/packet.json",
+        "sha256": "00eb7cddc267b22f495c2a4df6f46364fa98a33a0cbc9ebd73296ce560579951"
+      },
+      {
+        "path": ".codex/runtime/worktrees.json",
+        "sha256": "d21cf1c19283d77eaf371289471e4cd2c6c343428f60a90727f5076026c0b755"
+      },
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "37248491759e616b772dac89076dd6ba3d7457bfa8f4cb61dc01f5560ce43dc9"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "95e3dd2aaf0c54b589b6f29ed51aadd0871300ba6ec528f64e12509550e03941"
+      },
+      {
+        "path": "docs/research/candidates/ucope/DIRECTION.md",
+        "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S1_TECHNICAL_ACCEPTANCE_R06_20260826.md",
+        "sha256": "86e6e08bf8269a3da1fa6aadd0eacdbf20a3c437c24be51a2184222c33d5ce81"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S2_ENGINEERING_REQUEST_20260826.md",
+        "sha256": "d0858ad1e19c8b0dd1308bfaf4f55485c9d8bf5fbd0e39f78fc9099caf0d3fef"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION_20260826.md",
+        "sha256": "e8d4ca0b855166cf7b7ebf7ebeaa9f1acdf1d1d94d67e32ac737d42609fefecd"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md",
+        "sha256": "1d5c421bb4de84fc1662b1daedda1c2ed6c7d18e39a9b4547fb8bf14a4f7b98b"
+      },
+      "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md#bounded-s2-technical-disposition",
+      "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md#remaining-unknowns",
+      "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md#portfolio-decision-request",
+      "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md#explicit-non-scope",
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md",
+        "sha256": "94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c"
+      },
+      {
+        "path": "docs/research/candidates/ucope/workflow/engineering/state.json",
+        "sha256": "c93cc8e29172f501742396b5f73282114d1e7bb518d332c9ab7570ee97fe78da"
+      },
+      {
+        "path": "docs/research/candidates/ucope/workflow/external-review/index.json",
+        "sha256": "ce294036d6f75b08d5096a37eceeb19969e3e148b911816fca75584eb05037ad"
+      },
+      {
+        "path": "temp/directions/ucope/test/s1/r6/R06_S1_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "eb346b006c271892b4419c3f9a24290474107299d589d23c6062104fde89c4fb"
+      },
+      {
+        "path": "temp/directions/ucope/test/s2/c1/S2_COHERENT_CANDIDATE_READY_FOR_REVIEW.json",
+        "sha256": "99297c9eb89d5e10e7f2df8e5162d2e8e3fdb41d9f41816933428ff9efe287aa"
+      },
+      {
+        "path": "temp/directions/ucope/test/s2/c1/S2_INDEPENDENT_REVIEW_RETURN.json",
+        "sha256": "fbaa7c639b0db0aa013fbcc68f1170decd5b09c59fd85215d47ca33feed842aa"
+      },
+      {
+        "path": "temp/directions/ucope/test/s2/c1/repair1/S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION.json",
+        "sha256": "316e503afdba45de521294bc836ea35edf8a13798558b8191c81d2902a57cab2"
+      },
+      {
+        "path": "temp/directions/ucope/test/s2/c1/sancheck1/HMASD_MARL_SANCHECK_V1_RECEIPT.json",
+        "sha256": "1a2178e05c5fb1178049ac623c3fb27f68a61a82a3d0456c10e74cd15795d4cd"
+      },
+      {
+        "path": "temp/runtime/receipts/wt-ucope-engineering-s2c1.json",
+        "sha256": "b0e09d489003e5269fff596eda057e30c472b8b7c38ff4afb4e54c8e74f22725"
+      },
+      {
+        "path": "scripts/hmasd_state.py",
+        "sha256": "8e7b6c43d8d70ae3e5769084c7e2fec19e8626404d154c68639a2f83632bd653"
+      },
+      {
+        "path": "scripts/hmasd_work_packet.py",
+        "sha256": "a3a7f7b7a62b74fba3ac335e8ffc1897cd9435bcbc41a4549fad1571d3b4d9fb"
+      }
+    ],
+    "kind": "ROOT_RECONCILE_PORTFOLIO_UCOPE_S2_TECHNICAL_ACCEPTANCE"
   },
-  "phase": "IDLE",
+  "phase": "WAITING",
   "question_sha256": "0c608c5f791d055f58fd51a308065b2c4024f1e1b4eeb8ef6b3995bb90eaad58",
-  "registry_revision_seen": 1,
-  "revision": 1,
+  "registry_revision_seen": 9,
+  "revision": 15,
   "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
-  "waiting_on": [],
+  "updated_at": "2026-08-26T04:49:29Z",
+  "waiting_on": [
+    {
+      "expected_terminal_states": [
+        "INVEST_SEPARATE_NEXT_AUTHORITY",
+        "DEFER_ACTIVE",
+        "PARK",
+        "CLOSE"
+      ],
+      "kind": "PORTFOLIO_POST_S2_TECHNICAL_ACCEPTANCE_DECISION",
+      "ref": {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md",
+        "sha256": "1d5c421bb4de84fc1662b1daedda1c2ed6c7d18e39a9b4547fb8bf14a4f7b98b"
+      }
+    }
+  ],
   "writer": "EM-ucope"
 }

@@ -1,23 +1,20 @@
 ---
 name: hmasd-portfolio-task
-description: Bootstrap or resume the independent HMASD Portfolio top-level task for cross-direction decisions.
+description: Bootstrap or resume an independent HMASD Portfolio task for one bounded cross-direction decision.
 ---
 
 # HMASD Portfolio Task
 
-Use only in a user-facing Portfolio task. Recommended model: GPT-5.6 Sol at
-max reasoning for material decisions.
+Use only for the Portfolio identity (Sol, max). Load `hmasd-slice-interface`
+and `hmasd-portfolio-control`. Intake and return exactly one packet through the
+slice interface; same `work_id` is idempotent.
 
-At start or resume:
+Portfolio decides cross-direction priority, lifecycle, and engineering
+investment. It writes only the existing Portfolio authorities and registry CAS,
+uses direct leaves only for bounded evidence, and stops after one decision. A
+follow-on request must be a complete canonical draft that explicitly identifies
+the receiving direction and owner; prose does not route work.
 
-1. Set logical identity Portfolio, load `hmasd-portfolio-control`, and
-   reconcile once.
-2. Use responsibility-relevant genuine direct leaves when useful; every child
-   is a leaf and may not delegate.
-3. Write Portfolio authorities through their existing CAS contract. Send
-   follow-on work as an immutable Work Packet with authority refs, not a
-   separate Decision Packet protocol. Delivery may repeat the same `work_id`;
-   receivers intake it idempotently.
-4. Portfolio does not own task runtime. Root creates or reuses EM/CM when the
-   durable Portfolio decision requires it.
-5. Stop after one bounded decision; do not poll.
+Portfolio neither creates/wakes native tasks nor uses Clerk for normal
+coordination. Scope an observed failure precisely and return it through the
+typed contract.

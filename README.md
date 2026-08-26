@@ -3,11 +3,19 @@
 > This root README documents the original HMASD/legacy entry. For the stable
 > code architecture and directory standards, see the
 > [project map / codemap](docs/project/PROJECT_MAP.md); for
+> workflow design rationale (informational only; it adds no authority or gate),
+> see [WORKFLOW_DESIGN_PHILOSOPHY.md](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md);
+> for
 > the 33 research directions and their source directories, see the
 > [research map](docs/research/RESEARCH_MAP.md);
 > and for the standalone process-core route, see
 > [ha_ctse_process/README.md](ha_ctse_process/README.md). Local generated files
 > and linked worktrees follow the [workspace layout](temp/README.md).
+
+For the concise operational contract, see
+[WORKFLOW_PROTOCOL.md](docs/project/WORKFLOW_PROTOCOL.md); migration history and
+current live-proof boundaries are recorded in
+[CODEX_MIGRATION_RECOMMENDATION.md](docs/migration/CODEX_MIGRATION_RECOMMENDATION.md).
 
 这个项目是论文《Hierarchical Multi-Agent Skill Discovery》(Yang 等，2023) 中提出的 HMASD 算法的 PyTorch 实现，并将其应用于多无人机基站服务场景。HMASD 是一个用于多智能体强化学习的层次化技能发现方法，能够同时学习团队技能和个体技能，并有效地应用于稀疏奖励环境。
 

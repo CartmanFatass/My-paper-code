@@ -556,3 +556,263 @@ The generation-3 parking decision above is superseded for current lifecycle purp
 No available evidence supplies a command-level absolute resource estimate for that successor. A relative factor without an absolute baseline is not a scheduling fact, and a missing projection is a work item rather than a stopping condition. Portfolio therefore reactivates MGTAP for a fresh generation-2 EM evidence cycle that must freeze the exact workload/command boundary and request an estimate of peak memory, wall time, storage, and devices without running the command. An estimate at or below 7,200 seconds and within safe workstation capacity may later be scheduled without user approval; an estimate above 7,200 seconds requires a performance-reasonableness review attempt and explicit user approval, while an unsafe memory plan must be reduced, batched, or sharded.
 
 This reactivation authorizes no science-card or `DIRECTION.md` mutation, external provider turn, source change, CM dispatch, identity, lease, Operator, result-bearing command, result or partial-value access, Git operation, deployment, or flight. Its exact next boundary is one local identifiability audit plus one source-grounded command/workload and resource-estimation handoff.
+
+## v1 golden-path direction selection — 2026-08-25T21:20:00Z
+
+Decision owner: Portfolio
+
+### Reconciled evidence boundary
+
+This bounded decision is based on `main@ee06a078c3c5ff904e00c727475c467a25ada1ff`, registry revision 4 at SHA-256 `677aa70951b8f1df244a6dd112e8bd142cbe8c8ddd75a9d0bac65d25d306c15d`, and the prior Portfolio authority at SHA-256 `646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23`. The exact UCOPE evidence boundary is:
+
+- `docs/research/candidates/ucope/DIRECTION.md` at SHA-256 `ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d`;
+- research state revision 1 at SHA-256 `ac53f9312209eb3a872a896ba356ad06c779aecc40082914cb6bcf895c3614e2`;
+- engineering state revision 1 at SHA-256 `6096e171ffb09d5113ec94bf1fe42057e8674d89731ffb7967819206601d7c98`;
+- external-review index revision 1 at SHA-256 `ce294036d6f75b08d5096a37eceeb19969e3e148b911816fca75584eb05037ad`;
+- the finite staged construction selection at SHA-256 `7818c4b353037243993590a5d4968d429a92433b38ffbea99271789febc18aec`; and
+- the accepted S0 technical-intake authority at SHA-256 `f7d5522506c3bd96d84c222dc6474cc40b6f4dfbb0aed12b7be68c1bda63b7ae`.
+
+### Bounded lifecycle, priority, and investment decision
+
+Select `ucope` as the sole priority direction for the real v1 Portfolio→EM→CM→Operator→EM→Portfolio local Git golden path and change its registry lifecycle from `REGISTERED` to `ACTIVE`. Keep its canonical manager identity `EM-ucope`, generation 1, and `runtime_ref=null`; this decision creates no task.
+
+This selection applies, without enlarging, the existing R03 finite staged construction decision and the accepted S0-to-S1 continuation. The scientific object remains exact revision `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`, with its existing Pro `CLOSED` disposition, branch map, claim ceiling, non-replenishable construction caps, and result firewall. S2 and empirical execution are not authorized by this wake.
+
+UCOPE is selected from the current evidence rather than from its historical label. It is the only direction with a Pro-closed current object, an accepted current-byte S0 gate, a specific next engineering stage, and a measured CPU-only complete-transaction projection already below the 7,200-second approval boundary: 525.829 conservative seconds, 0.1461 CPU-hours, at most eight measured cores, 260,558,848 peak RSS bytes, and no accelerator. The remaining S1/S2 semantics-critical construction is still material and remains bounded at 12 managed / 13 hard engineer-days; this decision does not describe that labor as free or authorize exceeding it.
+
+The other live candidates do not provide the same path-complete low-execution-cost boundary. `finite_semantic_boundary_support` is waiting on a missing variable-axis cooperative/UAV science authority. `semigroup_consistent_duration_model_policy` is complete and reports an unresolved fusion-authority gap rather than an engineering request. `metric_ground_transport_allocation` has a definable terminal successor but its production object is not construction-actionable and its wall-time and total peak-RSS estimates remain unknown. The remaining registered directions have no evidence-backed current object that improves this bounded golden-path choice. Their lifecycle and priority are unchanged by this decision.
+
+### Follow-on authority boundary
+
+Send one immutable Work Packet to `EM-ucope`. Its only owned durable paths are `docs/research/candidates/ucope/DIRECTION.md` and `docs/research/candidates/ucope/workflow/research/state.json`. The EM must reconcile the unchanged R03/S0 evidence into the current v1 authority contract, decide whether the exact S1 continuation is still scientifically and operationally coherent on the frozen base, and, only if coherent, record one exact S1 engineering request and publish one bounded follow-on Work Packet for `CM-ucope` through Root orchestration.
+
+The EM packet authorizes no source or test change, CM/task creation, result-bearing command, identity or coordinate materialization, external provider operation, lease, Git effect, result or partial-value inspection, S2 release, deployment, or flight. A conflicting authority revision, material science change, failed cost/cap reconciliation, or duplicate canonical manager identity is a precise return condition, not permission to improvise a replacement direction.
+
+## v1 golden-path selection authority-conflict correction — 2026-08-25T21:24:13Z
+
+Decision owner: Portfolio
+
+The immediately preceding same-wake UCOPE selection is superseded before Work Packet publication because its exact evidence binding does not reconcile. `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_CURRENT_OBJECT_PORTFOLIO_SELECTION_20260823.md`, currently at SHA-256 `b5789c78a3505eef553bbbf69e03bc8b6a7f4b432bee8b08d421cec5faf8ceed`, records the selected science-card SHA-256 as `94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c`, while the current exact bytes of `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md` hash to `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`.
+
+The same selection records the Pro-closed intake SHA-256 as `0e7908ad5001085b8861470286233fd2008f657545d260fd92877ecf14acec19`, while the current exact bytes of `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_CHATGPT_PRO_CLOSED_INTAKE_20260823.md` hash to `03af3ca2011e0d8c41a680faca5fd8aeecbb4724d4de28c37204a8de85ca6944`. Exact-byte authority cannot infer semantic identity across either mismatch.
+
+Restore UCOPE to `REGISTERED`, make no alternative golden-path selection in this bounded wake, and publish no Work Packet. The stop is an evidence-authority conflict, not a Portfolio conclusion about UCOPE's scientific value. No direction authority, source, test, task, CM, Operator, result command, external operation, or Git effect is authorized. A later wake requires an owner-authored reconciliation that establishes the intended exact UCOPE science-card and Pro-intake bytes before Portfolio may compare or select it again.
+
+## v1 golden-path exact-byte reassessment — 2026-08-25T21:33:44Z
+
+Decision owner: Portfolio
+
+### Fresh authority boundary
+
+This is a new bounded reassessment from the conflict-corrected current state, not a revival of the superseded provisional selection above. Its pre-decision boundary is `main@ee06a078c3c5ff904e00c727475c467a25ada1ff`, registry revision 7 at SHA-256 `00a2e5db880a936a4b76209426132caf85e3cfa0dc4e5b8d0e3ac17eb73c5a71`, and `PORTFOLIO.md` at SHA-256 `f6ea56e05e95765d7e98a035b309271d41ed9db9b038dde665f2760a9983c3d5`.
+
+The prior conflict's exact resume condition is now satisfied on current raw bytes. `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_CURRENT_OBJECT_PORTFOLIO_SELECTION_20260823.md`, at SHA-256 `b5789c78a3505eef553bbbf69e03bc8b6a7f4b432bee8b08d421cec5faf8ceed`, binds the R03 science card to SHA-256 `94fa0ddb4ef4c686a60a1d9386f8b1b6184184f75df6c51a6fb61cedd8185e1c` and the Pro-closed intake to SHA-256 `0e7908ad5001085b8861470286233fd2008f657545d260fd92877ecf14acec19`; the current exact bytes of those two referenced files now have those respective hashes. No semantic equivalence is inferred across a mismatch because no mismatch remains.
+
+The remaining exact UCOPE authority set is `DIRECTION.md` at SHA-256 `ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d`, research state revision 1 at SHA-256 `ac53f9312209eb3a872a896ba356ad06c779aecc40082914cb6bcf895c3614e2`, engineering state revision 1 at SHA-256 `6096e171ffb09d5113ec94bf1fe42057e8674d89731ffb7967819206601d7c98`, external-review index revision 1 at SHA-256 `ce294036d6f75b08d5096a37eceeb19969e3e148b911816fca75584eb05037ad`, static-feasibility intake at SHA-256 `7586f4624111974dc993c328c7ae47b21adcd7801b38fd7a31e1b6c380112554`, finite staged construction selection at SHA-256 `7818c4b353037243993590a5d4968d429a92433b38ffbea99271789febc18aec`, and accepted S0 technical intake at SHA-256 `f7d5522506c3bd96d84c222dc6474cc40b6f4dfbb0aed12b7be68c1bda63b7ae`.
+
+### Bounded lifecycle, priority, and investment decision
+
+Select `ucope` as the sole priority direction for the real v1 Portfolio→EM→CM→Operator→EM→Portfolio local Git golden path and change its registry lifecycle from `REGISTERED` to `ACTIVE`. Preserve canonical manager identity `EM-ucope`, generation 1, `runtime_ref=null`, and dependencies `[]`. This decision creates no task and changes no unrelated direction lifecycle.
+
+The evidence supports this choice independently of the old historical map label. R03 is one exact Pro-closed, branch-complete paid-information and COUNT-versus-equal-information-RAW discriminator. The accepted current-byte S0 intake records every S0-to-S1 predicate as satisfied, no question-relevant output, unchanged science, and a specific S1 semantic-core continuation. Its conservative complete-transaction projection is 525.829 seconds and 0.1461 CPU-hours, with at most eight measured cores, 260,558,848 peak RSS bytes, and no accelerator, below the 7,200-second approval boundary. The remaining S1/S2 semantics-critical construction remains material and is not described as free: 12 managed / 13 hard engineer-days remain inside the existing non-replenishable 15 managed / 18 hard total envelope.
+
+The other current active directions do not improve this path-complete low-execution-cost choice. `finite_semantic_boundary_support` is waiting for a variable-axis cooperative/UAV science authority; `semigroup_consistent_duration_model_policy` is complete with an unresolved fusion-authority gap rather than a current engineering request; and `metric_ground_transport_allocation` still lacks a construction-actionable production object plus grounded wall-time and total peak-RSS estimates. Their scientific standing and lifecycle remain unchanged.
+
+This Portfolio decision applies the already-authorized staged investment without enlarging it, but releases only the next EM reconciliation. It does not directly authorize S1 implementation, S2, empirical identity or coordinates, a lease, an Operator, result or partial-value access, an external provider operation, or any Git effect.
+
+### Follow-on Work Packet boundary
+
+Publish one immutable Work Packet to canonical `EM-ucope`. Its only owned durable paths are `docs/research/candidates/ucope/DIRECTION.md` and `docs/research/candidates/ucope/workflow/research/state.json`. The EM must validate every frozen authority ref; reconcile the unchanged R03 and accepted S0 facts into the current v1 authority contract; make one bounded scientific handoff decision; and, only if the exact S1 continuation remains coherent, record `Decision owner: EM-ucope` under the existing `Engineering request` heading, advance the research state through its CAS contract, and publish one immutable follow-on Work Packet to `CM-ucope` for S1 only. A changed authority ref, science-bearing difference, cap incompatibility, or duplicate canonical manager identity requires an exact scoped return rather than substitution or authority expansion.
+
+The EM packet owns no source, test, engineering-state, result, external-review, task-runtime, worktree, or Git path. It authorizes no implementation, test command, result-bearing command, provider send, identity or coordinate materialization, lease, S2 release, deployment, or flight.
+
+## UCOPE S1 writer-coherence reassessment — 2026-08-25T22:07:22Z
+
+Decision owner: Portfolio
+
+### Reconciled owner boundary
+
+This reassessment changes only the durable write shape of the already-selected UCOPE S1 handoff. It does not make or replace an EM scientific judgment. Its pre-decision boundary is `main@ee06a078c3c5ff904e00c727475c467a25ada1ff`, registry revision 8 at SHA-256 `115b136f9615054aad230232cea637a866eb8a771384faabb6562c9157b1f510`, and `PORTFOLIO.md` at SHA-256 `4b75146854ff0a2dd43df31a67460a5f64ea137a13a6ec2c728b4a822837e8e3`.
+
+UCOPE has returned to the exact pre-handoff durable state: `docs/research/candidates/ucope/DIRECTION.md` is unchanged at SHA-256 `ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d`; research state remains revision 1, `IDLE`, at SHA-256 `ac53f9312209eb3a872a896ba356ad06c779aecc40082914cb6bcf895c3614e2`; engineering state remains revision 1 at SHA-256 `6096e171ffb09d5113ec94bf1fe42057e8674d89731ffb7967819206601d7c98`; and external-review index remains revision 1 at SHA-256 `ce294036d6f75b08d5096a37eceeb19969e3e148b911816fca75584eb05037ad`. No CM packet, Effect, implementation, or scientific result is adopted by this decision.
+
+The writer-coherence question is answered by the existing v1 contract. `scripts/schemas/hmasd_research_state.schema.json`, at SHA-256 `15b60120c6f5fc0d778c5c0eb6a301472b443917c33492210644b91b76447b74`, permits an `engineering_request` whose scope and acceptance refs are direction-owned `artifact.md#heading` strings. The current MGTAP research-state production instance, revision 3 at SHA-256 `05e809ea7f6b447af4aeb67d8f6a301220b8f82f52bb9f9c4fb300c84d606a61`, uses that form against `MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md`, currently at SHA-256 `6114654ca1735cde6b3a25fda62dec25ca36738444c4302ab629965073a8df49`, while preserving its whole-file `DIRECTION.md` reference. The existing state transition contract freezes the direction-ref path and writer identity; it does not require a DIRECTION whole-file SHA rotation for an independent request artifact.
+
+### Bounded writer-shape decision
+
+The independent direction-owned request-artifact pattern satisfies the original UCOPE selection intent. Preserve UCOPE lifecycle `ACTIVE`, canonical identity `EM-ucope`, generation 1, `runtime_ref=null`, dependencies `[]`, the exact R03 scientific object, accepted S0 facts, S1-only scope, every construction/resource cap, result firewall, and all non-goals from the preceding selection.
+
+Authorize `EM-ucope` to create exactly one new immutable artifact at `docs/research/candidates/ucope/UCOPE_R03_S1_ENGINEERING_REQUEST_20260825.md` if and only if that path is absent. The artifact is the EM-owned durable surface for its own scientific handoff judgment and must contain `Decision owner: EM-ucope`, one `Engineering request — S1 only` heading, exact acceptance criteria, explicit non-scope, the unchanged R03/S0 authority refs, and the unchanged caps and stop conditions. Portfolio does not supply or pre-decide the artifact's scientific conclusion.
+
+After the artifact exists, authorize only the existing single-file research-state CAS: writer `EM-ucope`, expected revision 1, with `direction_ref` remaining byte-for-byte bound to `DIRECTION.md` SHA-256 `ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d`. If the EM accepts S1 continuation, the state may become `ENGINEERING_REQUESTED` and actionable at registry revision 9, with `engineering_request.scope_ref` pointing to `UCOPE_R03_S1_ENGINEERING_REQUEST_20260825.md#engineering-request--s1-only` and acceptance refs pointing to that artifact's `#acceptance-criteria` and `#explicit-non-scope` headings. `DIRECTION.md` is an authority ref only and must not change.
+
+### Immutable Work Packet supersession
+
+Runtime provenance only: prior work ID `ab3b939b9ecf8d348f079fac4d59a2c07fb02770fb5d38a1cf9a24e681501009`, packet SHA-256 `32ac2f4d8c2850accf823b9c183eca0a1883472c3377f09a5680cd6d1b6e0003`, is superseded solely for its write shape and owned-path set. Its scientific objective, R03/S0 evidence, S1-only boundary, caps, fences, target identity, and empty Effect set remain unchanged. The old packet remains immutable; advancing this Portfolio authority makes its old scope SHA stale and it must not be edited, deleted, or regenerated under the same work ID.
+
+Publish one new immutable Work Packet to canonical `EM-ucope`. Its exact owned paths are only `docs/research/candidates/ucope/UCOPE_R03_S1_ENGINEERING_REQUEST_20260825.md` and `docs/research/candidates/ucope/workflow/research/state.json`. `DIRECTION.md` and all code, test, engineering-state, external-review, result, runtime-task, worktree, and Git paths are authority refs or non-goals, never owned paths. After a successful artifact creation and research-state CAS, EM may publish one exact follow-on packet to `CM-ucope` for S1 only; it may not create a manager task.
+
+The new packet authorizes no shared-core change, source or test change, implementation, validation benchmark, result-bearing command, provider send, empirical identity or coordinate materialization, lease, Operator, result or partial-value access, S2 release, Git effect, deployment, or flight. A pre-existing artifact path, changed authority ref, scientific difference, cap incompatibility, CAS conflict, or duplicate canonical manager identity requires an exact scoped return and resume condition.
+
+## UCOPE R03 S2 investment disposition — 2026-08-26T01:11:04Z
+
+Decision owner: Portfolio
+
+### Idempotent decision-material intake
+
+Runtime provenance only: inbound work ID `dfbff7ba40fe074fe06cc18f622bb7a3c318f4ed355ed63642f23ca8f17f47aa`, packet SHA-256 `af931caf282d183dd94123b2b9b442984d0e9b4eba681234148c9ee3736d5a0e`, is intaken once for this disposition. Its scope is `docs/research/candidates/ucope/UCOPE_R03_S1_TECHNICAL_ACCEPTANCE_R06_20260826.md` at SHA-256 `86e6e08bf8269a3da1fa6aadd0eacdbf20a3c437c24be51a2184222c33d5ce81`. The packet schema, work ID, scope, every authority SHA/revision, repository containment, non-reparse identity, and empty Effect set matched current facts before this write.
+
+The pre-decision Portfolio authority is SHA-256 `922c20cf071f03a710f9e1597fda8ee826cd32bc10b89fd74331daaf7c82caaf`. Registry revision 9 remains SHA-256 `95e3dd2aaf0c54b589b6f29ed51aadd0871300ba6ec528f64e12509550e03941`, with UCOPE `ACTIVE`, generation 1, dependencies `[]`, and no reactivation condition. Research state revision 10 at SHA-256 `95419a6dccc96a875e326853833bbf4b632bccdb641a65895ceaf2f62bfa076a` is `WAITING` only for this exact Portfolio decision. Engineering state revision 7 at SHA-256 `c48cd254cae5d913e44c45e22780c8cc0ccbb93cfcbf7732416706170a691437` is `COMPLETE` with disposition `S1_TECHNICALLY_ACCEPTED`, candidate and integrated SHA both null.
+
+### Bounded disposition — invest in EM-only S2 reconciliation
+
+Invest the remaining UCOPE S2 engineering forecast, but release only one new bounded `EM-ucope` reconciliation. This is not direct S2 authorization. Preserve the exact R03 object, Pro closure, S0 and S1 evidence, non-replenishable `15` managed / `18` hard total construction envelope, and every scientific, resource, activity-boundary, result-firewall, external-effect, and Git fence. The only remaining allocation is `6` managed / `6` hard S2 engineer-days; it is not replenished or enlarged.
+
+S1 is accepted only as finite technical readiness. The accepted run `ucope-s1-r6` is revision 4 `SUCCEEDED`, `CHILD_EXIT_0`, exit `0`, and group-quiescent. Exactly `42` focused tests passed and all thirteen result-blind gates are true. The maximum conservative pending path is `186` against limit `240`, leaving `54` characters of headroom. Measured concurrency is `0.8328877055612846`, overhead `0.20064204732869495`, throughput `147.57733033688447x`, cold wall `7.667973400006304` seconds, benchmark CPU `109.1875` seconds, peak RSS `2,062,090,240` bytes, and aggregate I/O `1,239,292,553` bytes. The complete projection is `380.2810449061144` seconds, `0.10563362358503178` CPU-hours, `515,145,728` peak-RSS bytes, and `2,312,507,074` aggregate-I/O bytes.
+
+None of those facts is a complete R03 package, partial or question-relevant result, registered seed, empirical identity, S2 access, scientific conclusion, or permission to inspect one. Runs 01–03 and R06, their claims, Operators, manifests, logs, evidence, and worktrees remain immutable. Source/test diff remains empty, no candidate exists, and `effect_refs=[]`.
+
+### Four S2 unknowns evaluated
+
+1. **Complete finite evaluator and diagnostics:** absent and unmeasured. This is the primary bounded S2 construction object that EM must define completely before any CM handoff. It supports investing in contract reconciliation because S1 established the native substrate and retained budget; it supplies no result or execution authority.
+2. **Complete-only output and activity firewall:** absent and unimplemented. EM must freeze fail-closed complete-only publication, mandatory diagnostics, atomic completeness, and the exact activity boundary as acceptance predicates. Missing or partial output must remain non-scientific and inaccessible; no registered materialization is authorized now.
+3. **Reviewer and SANCheck timing:** both remain prohibited until one coherent S2 candidate exists. This investment releases no Reviewer, SANCheck, Verifier, CM, or worker. Any later request must keep those gates after coherent construction and before technical acceptance, never as present authority.
+4. **Projection quality:** the `380.2810449061144`-second projection is counts-only proxy evidence with no unmeasured cross-phase or worker speedup applied. It is sufficient for bounded EM planning inside the existing resource envelope, not an observed S2 performance fact or command approval. EM must retain the proxy label, freeze an auditable command/resource boundary, refuse unsafe memory through reduction/batching/sharding, and preserve the project's separate over-7,200-second review and user-approval rule for any later exact result command.
+
+These four unknowns are exact S2 reconciliation requirements, not defects, negative findings, bare `BLOCKED` scope, or grounds to infer S2 success. They make direct execution impermissible while making one bounded EM contract-freezing cycle proportionate.
+
+### Registry and next-owner boundary
+
+This disposition changes no lifecycle, dependency, generation, runtime-ref, or reactivation fact. Registry revision 9 therefore remains byte-for-byte unchanged at SHA-256 `95e3dd2aaf0c54b589b6f29ed51aadd0871300ba6ec528f64e12509550e03941` as required. UCOPE remains `ACTIVE`; no registry CAS is performed.
+
+The exact next responsible owner is `EM-ucope`. Publish one immutable Work Packet to that identity, owning only `docs/research/candidates/ucope/UCOPE_R03_S2_ENGINEERING_REQUEST_20260826.md` and `docs/research/candidates/ucope/workflow/research/state.json`. EM must independently reconcile the four unknowns, record `Decision owner: EM-ucope` in the new create-once S2 request artifact, freeze exact acceptance and explicit non-scope, and use the existing single-file research-state CAS from expected revision 10. `DIRECTION.md`, all R03–R06 artifacts, engineering state, source, tests, runs, worktrees, external review, Portfolio, registry, and Git are authority refs or non-goals, not EM-owned writes.
+
+Only after a coherent S2 request artifact and successful research-state CAS may EM publish a later exact S2-construction packet to canonical `CM-ucope`; this Portfolio disposition and its EM packet do not create, dispatch, or directly authorize that CM or any S2 execution. Root alone owns later reconcile and delivery.
+
+No task creation or dispatch, CM/run packet, implementation, test, benchmark, result command, registered-panel access, Reviewer, SANCheck, provider send, lease, Operator, Effect, Git action, deployment, or flight occurs in this Portfolio wake.
+
+## UCOPE R03 post-S2 result-blind technical-acceptance disposition — 2026-08-26T05:04:56Z
+
+Decision owner: Portfolio
+
+### Idempotent intake and exact authority boundary
+
+Runtime provenance only: inbound work ID and delivery key `a5fe340302d0f7223f4e5d4d2532b6dd890eba1c5e543b9826ec8cddf56e7fd9`, packet SHA-256 `e50f393aab773ce446f77cc47b2849cf0f38dc892516b289f418cf2479d4d0ee`, is intaken once for this disposition. Its scope is `docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md` at SHA-256 `1d5c421bb4de84fc1662b1daedda1c2ed6c7d18e39a9b4547fb8bf14a4f7b98b`. Before this write, the public Work Packet validator accepted the packet and all `24` scope/authority refs matched their raw SHA-256 or revision. Every referenced path was repository-relative POSIX syntax, inside the repository, present, and free of a symlink/reparse traversal. `effect_refs=[]`.
+
+The pre-decision Portfolio authority is SHA-256 `37248491759e616b772dac89076dd6ba3d7457bfa8f4cb61dc01f5560ce43dc9`. Registry revision `9` remains SHA-256 `95e3dd2aaf0c54b589b6f29ed51aadd0871300ba6ec528f64e12509550e03941`, with UCOPE `ACTIVE`, generation `1`, dependencies `[]`, `runtime_ref=null`, and no reactivation condition. Research state revision `15` is `WAITING` at SHA-256 `3a41ccf9a002d073e434d81791fc70ee7111b99e7d35d803cf627603182221fa`; engineering state revision `11` is `COMPLETE` at SHA-256 `c93cc8e29172f501742396b5f73282114d1e7bb518d332c9ab7570ee97fe78da` with candidate and integrated SHA both null.
+
+The fresh read-only current-byte observation also matched worktree journal revision `11`, SHA-256 `d21cf1c19283d77eaf371289471e4cd2c6c343428f60a90727f5076026c0b755`, and receipt SHA-256 `b0e09d489003e5269fff596eda057e30c472b8b7c38ff4afb4e54c8e74f22725`. Assignment `s2c1` remains singly represented, `PROVISIONED`, on branch `omp/ucope/engineering/s2c1` at base/head `ee06a078c3c5ff904e00c727475c467a25ada1ff`, with no tracked or staged diff and exactly two nonignored authorized untracked paths:
+
+| Assignment-relative path | Current SHA-256 |
+| --- | --- |
+| `experiments/candidates/ucope/variable_k_paid_probe_r01_r03/s2_construction.py` | `99847de2913c8aa34cbc889683849d6387ef3c430172d87d316c503fce34569b` |
+| `tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_s2.py` | `96ba6d6bb2f6949ddacf62953a6eeda0fe63adaa1e8213a1801aa783f4a40c24` |
+
+### Result-blind acceptance and exact passing evidence
+
+Adopt only EM-ucope's bounded disposition `S2_TECHNICALLY_ACCEPTED_RESULT_BLIND`. The create-once SANCheck receipt at SHA-256 `1a2178e05c5fb1178049ac623c3fb27f68a61a82a3d0456c10e74cd15795d4cd` records `PASS`, class `S2_SANCHECK_PASS_READY_FOR_TECHNICAL_ACCEPTANCE_DECISION`, five of five evidence groups passing, zero failed predicates, and zero unexplained deviations. The five accepted groups are, exactly: source-bound native artifact and positive R06 preflight; guarded native lifecycle and complete-only publication; batching, parallel efficiency, and phase profiling; ordinary-FP32 hot path with repaired M01/M05 semantics; and positive complete toy-plan projection. This wake does not replay Reviewer, SANCheck, AST, tests, build, benchmark, proxy, or any evidence command.
+
+The exact passing arithmetic remains:
+
+| Quantity | Accepted comparison |
+| --- | --- |
+| effective concurrency | `0.8328877055612846 >= 0.75` |
+| recomputed parallel overhead `1 / concurrency - 1` | `0.20064204732869495 <= 0.30` |
+| native/reference throughput | `147.57733033688447 >= 1.25` |
+| R06 cold load | `7.667973400006304 <= 360` seconds |
+| current proxy cold load | `1.379940400016494 <= 360` seconds |
+| complete projection wall | `387.12828390456707 <= 1800` seconds |
+| complete projection CPU | `0.10769525552947623 <= 12` CPU-hours |
+| projected cores | `1 <= 24` |
+| projected peak RSS | `515145728 <= 10737418240` bytes |
+| projected I/O | `2312507074 <= 6442450944` bytes |
+
+The exact repair accounting remains `0.5 <= 0.75` engineer-days, `0.8 <= 1.0` TEST CPU-hours, `8 <= 8` cores, `3758096384 <= 4294967296` RSS bytes, `268435456 <= 536870912` scratch bytes, `2884004 <= 53687091` durable bytes, and `2087713000 <= 2147483648` incremental I/O bytes, with GPU false. No cap is replenished. The original S2 `6` managed / `6` hard engineer-day allocation, total `15` managed / `18` hard construction envelope, cumulative S2 TEST `6` managed / `12` hard CPU-hours, and largest-command `30` managed / `60` hard minute bounds remain the same authority; this disposition adds zero budget and transfers none from S0 or S1. The projection remains counts-only proxy evidence with no unmeasured speedup.
+
+Technical acceptance does not establish registered cold checkpoint loading, complete registered-panel execution, atomic registered complete-only publication, any empirical or question-relevant value, scientific attribution, claim class, successor eligibility, R03 scientific disposition, candidate SHA, commit, push, integration, or Git authorization. It is not permission to import or execute either current-byte path or to inspect registered, partial, result, or question-relevant bytes.
+
+### Bounded disposition — invest one separately frozen candidate/Git authority first
+
+Invest exactly one separately frozen next authority: a Root-owned current-byte candidate/Git materialization decision. The accepted code/test bytes have complete result-blind technical evidence and remain within the non-replenished envelope, so deferring, parking, or closing would add no missing technical discriminator and would leave the accepted object without a durable executable identity. Conversely, registered/result reconciliation cannot lawfully precede candidate/Git materialization because `candidate_sha=null`, `integrated_sha=null`, and the accepted bytes are still untracked. A registered Effect must bind a durable candidate and integrated current-byte identity, not a mutable worktree observation.
+
+The chosen order is strict:
+
+1. `Root` first freezes a separate current-byte candidate/Git action authority for exactly assignment `s2c1`, base/head `ee06a078c3c5ff904e00c727475c467a25ada1ff`, and the two path/digest pairs above. That authority must name the exact candidate, local Git, record-candidate, prepare/apply, integration, retention/release, and push boundaries; preserve immutable evidence; and include a precise return/resume condition for byte, status, base, path, candidate, integration, or unknown-effect drift.
+2. Only after a candidate SHA and integrated SHA are independently observed and bound to the same accepted bytes may a new, separate packet go to `EM-ucope` for registered/result reconciliation. That later EM authority must independently decide registered cold loading, complete registered execution, atomic publication, result inspection, scientific value/attribution, claim class, successor eligibility, and the R03 disposition. It may not be inferred from this investment or from Git success.
+
+Publish only one new decision-only immutable Work Packet to exact next owner `Root`. Its sole writable path is `docs/research/portfolio/PORTFOLIO.md`; it may append one create-once Root action-freeze heading with `Decision owner: Root`, exact current-byte prerequisites, sorted path set, objective/non-goals, allowed and forbidden Git effects, and an action digest. Under that decision-only packet Root must not clean, stage, commit, push, record a candidate, prepare/apply integration, mutate the worktree journal/receipt, release/retain the assignment, or perform registered/result activity. If the Root freeze is coherent, any actual candidate/Git materialization must use a later distinct immutable action packet; candidate/Git and registered/result packets are never combined.
+
+The exact next responsible owner is therefore `Root`, not CM, EM, an Implementer, Operator, Reviewer, SANCheck, or Git leaf. Root remains responsible for canonical task orchestration and final Git integration, but this wake creates or dispatches no task and performs no Git action.
+
+### Remaining unknowns, registry, and return scope
+
+The remaining unknowns are exact and non-negative: no candidate/commit/push/integration identity exists; registered cold loading is unobserved; complete registered-panel execution has not occurred; registered atomic complete-only publication is unobserved; and empirical values, attribution, claim class, successor eligibility, and R03 scientific disposition remain unknown. Any future conflict must name the changed scope/ref and the condition for a new exact-current-byte freeze. It is not a direction-wide or bare `BLOCKED` condition.
+
+This disposition changes no lifecycle, dependency, generation, runtime-ref, or reactivation fact. Registry revision `9` therefore remains byte-for-byte unchanged at SHA-256 `95e3dd2aaf0c54b589b6f29ed51aadd0871300ba6ec528f64e12509550e03941`; no registry CAS is performed. No direction artifact or state, source, test, worktree/evidence, task cache, provider, deployment, flight, or Effect is modified in this Portfolio wake, and `effect_refs=[]`.
+
+## Root candidate/Git action freeze — UCOPE s2c1 current bytes
+
+Decision owner: Root
+
+This create-once freeze intakes Work Packet `2b6e2b2b3f11f5c25f752253dc257fc69c3ae1074c8b20bf2384a7b45a890018` at packet SHA-256 `8f628060e7fe819ee1ee5d7cf766ed395b651b7af8196cc66b18f4538f01674a`, against Portfolio preimage SHA-256 `5f348b7d4e3a0fc7328b5d63f4fe7a42d1483cc143c1030228b8b2160e0090c0`. It freezes one later, separately packetized candidate/Git action owned by `Root`; this heading itself performs no Git effect.
+
+### Action digest and canonical fields
+
+Action digest: `95ff3346ddb473bcb36ec5c75c6aaf8dc7fc4625cbe5982b5a3c8f8ccb5ded35`
+
+The digest is SHA-256 over the following UTF-8 canonical JSON using `ensure_ascii=false`, `indent=2`, recursively sorted keys, and one terminal LF:
+
+```json
+{
+  "allowed_git_effects": [
+    "stage_exact_paths_in_assignment",
+    "commit_one_single_parent_candidate_on_omp/ucope/engineering/s2c1",
+    "record_candidate_with_scripts/hmasd_worktree.py",
+    "prepare_integration_to_local_main_with_scripts/hmasd_worktree.py",
+    "apply_ff_only_integration_as_root",
+    "observe_and_record_candidate_sha_and_integrated_sha",
+    "retain_assignment_for_recovery_on_exact_precondition_conflict_or_unknown_git_outcome"
+  ],
+  "base_sha": "ee06a078c3c5ff904e00c727475c467a25ada1ff",
+  "exact_paths": [
+    {
+      "path": "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/s2_construction.py",
+      "sha256": "99847de2913c8aa34cbc889683849d6387ef3c430172d87d316c503fce34569b"
+    },
+    {
+      "path": "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_s2.py",
+      "sha256": "96ba6d6bb2f6949ddacf62953a6eeda0fe63adaa1e8213a1801aa783f4a40c24"
+    }
+  ],
+  "non_goals": [
+    "Do not change or stage any path outside exact_paths.",
+    "Do not push.",
+    "Do not release or delete assignment s2c1 before terminal integrated facts and a separate cleanup authority.",
+    "Do not clean, stash, commit, stage, or otherwise mutate pre-existing dirty paths in the local main checkout.",
+    "Do not combine candidate/Git materialization with registered/result reconciliation or inspect registered, partial, question-relevant, or result bytes.",
+    "Do not modify scientific authority, direction state, evidence, registry, scripts, shared core, or user-owned workspace changes."
+  ],
+  "objective": "Materialize exactly one candidate commit from the frozen s2c1 current bytes, record it, and, only if the local main checkout is still at the frozen base and clean, prepare and apply one ff-only local integration; otherwise retain the assignment and return the exact stop/resume condition. Execute no push or registered/result action."
+}
+```
+
+### Frozen assignment, target, and evidence prerequisites
+
+- Direction/assignment: `ucope` / `s2c1`; worktree ref `wt-ucope-engineering-s2c1`; canonical path `C:/Projects/HMASD-worktrees/ucope-engineering-s2c1`; branch `omp/ucope/engineering/s2c1`.
+- Assignment lifecycle is `PROVISIONED`; registry revision is `11`; exact registration is true; base, branch head, and recorded head are all `ee06a078c3c5ff904e00c727475c467a25ada1ff`; `candidate_sha=null`, `integrated_sha=null`, and `unknown_outcome=null`.
+- Assignment tracked diff is empty. Its non-ignored untracked set is exactly the two sorted path/digest pairs in the canonical action fields. All other assignment-local entries are ignored TEST evidence and are preserved.
+- Worktree receipt `temp/runtime/receipts/wt-ucope-engineering-s2c1.json` remains SHA-256 `b0e09d489003e5269fff596eda057e30c472b8b7c38ff4afb4e54c8e74f22725`.
+- Result-blind S2 technical acceptance is bound by `docs/research/candidates/ucope/UCOPE_R03_S2_SANCHECK_PASS_TECHNICAL_ACCEPTANCE_DECISION_20260826.md` at SHA-256 `1d5c421bb4de84fc1662b1daedda1c2ed6c7d18e39a9b4547fb8bf14a4f7b98b`. SANCheck receipt `temp/directions/ucope/test/s2/c1/sancheck1/HMASD_MARL_SANCHECK_V1_RECEIPT.json` remains PASS at SHA-256 `1a2178e05c5fb1178049ac623c3fb27f68a61a82a3d0456c10e74cd15795d4cd`.
+- Repair evidence `temp/directions/ucope/test/s2/c1/repair1/S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION.json` remains SHA-256 `316e503afdba45de521294bc836ea35edf8a13798558b8191c81d2902a57cab2`; engineering state remains revision `11` at SHA-256 `c93cc8e29172f501742396b5f73282114d1e7bb518d332c9ab7570ee97fe78da`; research state remains revision `15` at SHA-256 `3a41ccf9a002d073e434d81791fc70ee7111b99e7d35d803cf627603182221fa`.
+- Local integration target is branch `main` at current SHA `ee06a078c3c5ff904e00c727475c467a25ada1ff`. At freeze time its checkout contains pre-existing user, control-plane, Portfolio, and direction-authority changes. Those bytes are outside this action and must not be cleaned, stashed, staged, committed, normalized, or otherwise mutated by the later candidate action.
+- No candidate, integration, push, registered/result, provider, or other Git/external Effect is known or unknown at freeze time; `effect_refs=[]`.
+
+### Later action boundaries and exact returns
+
+A later immutable action packet may authorize `Root` to stage exactly the two assignment paths, create exactly one single-parent candidate commit whose parent is the frozen base, record that observed commit with `scripts/hmasd_worktree.py record-candidate`, and then freshly observe local `main`. It may call `prepare-integration` and Root-only `apply --ff-only` only if the target checkout is clean and still at the frozen base. Push is forbidden. Manual conflict resolution, amend, rebase, extra commits, shared-core changes, registered/result work, and mutation of any pre-existing main checkout change are forbidden.
+
+If source/test bytes, the exact untracked set, branch/head/base, evidence, receipt, registry identity, candidate identity, or action digest changes before the candidate commit, return `S2_GIT_CURRENT_BYTES_OR_AUTHORITY_CHANGED` with the exact changed ref and do not write. If candidate commit or `record-candidate` has an unknown outcome, observe branch HEAD, candidate ancestry, registry, and receipt before any retry; never create a second commit.
+
+The local main checkout is already dirty at freeze time. The later action may still materialize and record the exact candidate, but it must not prepare or apply integration while the target is dirty or advanced. It instead retains `s2c1` for recovery and returns `S2_GIT_TARGET_NOT_AT_CLEAN_FROZEN_BASE` with the target SHA/status and this resume condition: either restore a clean local `main` at the frozen base without changing user-owned bytes, or create a new exact-current-main authority and freshly rebase/revalidate a new assignment under separate authorization. An integration conflict is retained and returned without manual resolution. An unknown prepare/apply outcome is observed from target ref, candidate ref, registry, and receipt and is never replayed blindly.
+
+After independently observed terminal integration, the heading may receive only the candidate SHA and integrated SHA as result refs. Assignment release or deletion requires separate cleanup authority; until then it is retained with all ignored evidence. Registered/result reconciliation remains a later EM-owned packet and cannot begin until candidate and integrated SHAs are both terminally bound to these accepted bytes.

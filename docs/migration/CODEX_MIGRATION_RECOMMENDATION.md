@@ -9,18 +9,24 @@
 
 ### 仅有四个控制原语
 
-1. **Authority**：既有 tracked 科学、工程、Portfolio、run、worktree 和 external
-   authority 是唯一 durable 事实来源，继续使用现有 writer/CAS 合同。
-2. **Work Packet**：不可变、带内容摘要的 ignored runtime 传递物，引用 scope、
+1. **Existing Authority+CAS**：既有 tracked 科学、工程、Portfolio、run、worktree
+   和 external authority 是 durable 事实来源，继续使用既有 writer/CAS 合同。
+2. **Exact Work Packet**：不可变、带内容摘要的 ignored runtime 传递物，引用 scope、
    authority revision、目标、边界和 Effect refs；它可从 durable facts 重建，不保存
    独立状态、claim、result 或 checkpoint。其 locator delivery 是 at-least-once；接收端
-   对同一 `work_id` 幂等处理重投递，不生成新 packet。
-3. **Effect**：只有实际外部发送、命令启动或 Git apply/push 等副作用拥有独立 ID
+   先 exact lookup、完成 slice、发布 canonical typed `agent_result` 与可选 draft 的
+   ignored runtime return witness，再发送消息；丢失消息由 witness 重建，terminal 无
+   return 按 native history 对同一 work_id resume 最多三次。
+3. **Typed Effect/ref observer**：只有实际外部发送、命令启动或 Git apply/push 等副作用拥有独立 ID
    和 receipt。提交结果为 `UNKNOWN` 时只观察和核对，绝不重放；actual Effect 仍是
-   at-most-once。
-4. **`reconcile --once`**：一次调用只依据当前事实为每个可运行方向推进一个有界
-   动作后退出。同一 scope/target/revision 串行，不同方向可受容量限制并行；没有
-   daemon、SQLite、全局 DAG 或全局状态机。
+   at-most-once。Effect typed kind/resource_id/optional operation；legacy path-only 只读兼容。
+4. **Bounded `reconcile --once` + native adapter**：确定性 planner 一次只处理一个显式
+   `work_id`，读取该 Work Packet 与 fresh observed task snapshot，绑定 machine-valid
+   typed result；它最多输出一个受程序约束的闭合动作后退出。不得 global ready scan、
+   per-direction fair cursor、隐式 handler 或 capacity scheduler；并行性由调用者以不相交
+   的显式 `work_id` 自行安排。同一 `work_id` 的重复投递保持幂等。resource comparator
+   与 short dispatch lock 是内部纯机制，不升格为控制原语；native adapter 依据
+   [Codex App Server](https://learn.chatgpt.com/docs/app-server)。
 
 ### 任务、决定与恢复
 
@@ -30,7 +36,11 @@ Root 可以直接形成 Portfolio、科学或工程决定，但必须在正确�
 `writer` 继续只表示 domain writer；runtime actor 由 Work Packet sender/session
 provenance 记录，不能暗示存在新的 JSON `decision_owner` 字段。Portfolio 在活动方向
 需要时创建，EM 在方向科学工作需要时创建，CM 在 Portfolio 投入工程时创建。Root
-自动复用匹配的 parked identity；若发现重复或身份冲突，只报告而不创建。
+自动复用匹配的 parked identity；若发现重复或身份冲突，只报告而不创建。`CREATE_TASK`
+只是不带 receipt 的可重复 intent：唯一 Root global single-flight 在同批按 canonical
+identity 合并，每 wake 至多一次真实 create；先 fresh 观察 Codex task list 和 `tasks.json`，
+错误/unknown 先观察再决定是否重试，成功后仅将 observed identity CAS 写入 cache；CAS
+冲突重新观察而不再创建。
 
 会话或进程不可用时可有界重启或恢复；Effect 失败按其 receipt 重试或观察 UNKNOWN；
 科学、工程或实现失败由责任人依据新证据形成新的 Work Packet。不存在裸 `BLOCKED`
@@ -60,11 +70,46 @@ Code Index、文档 registry 或其他新的长期权威；机械任务由脚本
 
 ### v1 实施与验证边界
 
-实施顺序为：先完成 Work Packet、`reconcile --once`、两层路径规则和 focused tests；
-再用半写入、重复投递、会话中断、同 key 串行/跨方向并行、UNKNOWN Effect 和局部失败
-夹具验证；最后由 Portfolio 选择一个真实低成本方向，完成一次
-Portfolio→EM→CM→Operator→EM→Portfolio 的本地 Git 黄金路径。v1 完成不要求 remote
-push、Dashboard 写入、全方向预建 task、MCP、`llms.txt`、Code Index 或通用恢复引擎。
+Stage A--D 当前本地合同边界是：对一个显式 `work_id` 做 deterministic planner，读取
+explicit observed task snapshot，校验 typed `agent_result` 与
+`assignment_id == work_id`，校验完整的 next-packet draft；凡 `REQUEST`，先 build
+完整 draft，再由 result 的 `input_refs` 绑定该 draft 的 `work_id`。planner 只从以下
+七个闭合 verb 中输出至多一个：
+`PUBLISH_PACKET_INTENT`、`DISPATCH_EXISTING`、`CREATE_TASK_INTENT`、
+`OBSERVE_EFFECT_ONLY`、`WAIT_FOR_REF`、`NOOP_TERMINAL`、`CONFLICT`。普通路径
+不唤醒 Clerk，也不依赖 LLM handler、全局扫描、cursor 或 capacity 控制。
+normal path 是 Root exact reconcile 后进入短 native-dispatch critical section：fresh
+identity/active peers/resource compare，再 create-or-reuse/send；Root 的
+`--root-override-reason` 可绕过 known overlap/active-unknown 并把 warning 写入 native
+history，但不能伪装 UNKNOWN send/create 或绕过 hard effect identity。`done_criteria`
+只是 hash-bound 描述，terminal proof 来自 typed owner result/domain refs。
+
+Live evidence 分层记录为：`LOCAL_FAKE_TRANSPORT_GOLDEN` 已通过（含真实短命令
+`hmasd_run`）；real no-model probe/list/read/resume 已通过；ephemeral Luna-low
+read-only no-network conformance 返回 `CONFORMANCE_OK`；真实唯一 Experiment
+Operator leaf 已在 OMP worktree 一次执行至 `SUCCEEDED/exit0/group_quiescent/
+stdout marker`。完整 real-native EM→CM→Operator→Root unattended chain 仍未证明。
+shared-core 仅 CM/Root code/Git action 可写；EM、Portfolio 和 ordinary leaf 携带非
+writer-owned shared-core path 时拒绝，Portfolio 仅其两条 existing authority writer
+path 豁免。exact v1 authority allowlist 仅为 `AGENTS.md`、
+`docs/project/WORKFLOW_PROTOCOL.md`、`docs/research/portfolio/PORTFOLIO.md` 和
+对应的 `docs/research/candidates/<id>/DIRECTION.md`；其他 Markdown（包括
+`WORKFLOW_DESIGN_PHILOSOPHY.md`）不是 authority。Portfolio registry JSON 仅 writer-path
+豁免，不承载 fence。record 必须来自 base 已跟踪的 existing durable Markdown authority，
+使用顶层 fenced `hmasd-shared-core-action-v1`，同 bytes 重验 hash，并绑定 current
+base/all paths/objective/non-goals/allowed effects；程序证明 byte match，不证明对话中
+真实同意。direction-owned 与 Portfolio/EM authority 不新增 gate。
+所有 common file evidence 使用 path+sha `file_ref`；legacy string file refs 为
+schema-invalid。`file_ref` 与 `changed_paths` 使用 Windows-safe canonical repo-relative
+规则，拒绝 absolute/`..`/backslash/symlink-reparse alias，统一 slash 并 casefold 去重。
+Protocol Defect envelope 必须含 `field_path`、`ref`（null 或 typed）、`actual`、
+`expected`、`failure_scope`、`producing_command`、`responsible_owner`；v1 protocol
+recovery owner 固定 Root，不从 target/prose 猜测。
+
+Codex 原生接口的唯一当前官方依据是 [Codex App Server](https://learn.chatgpt.com/docs/app-server)，
+其公开说明覆盖 stdio JSONL 传输以及 thread/turn 方法；不以 ChatKit 或 Assistants
+threads 作为 Codex task API。除该适配器外不新增 queue、ack、lease、claim、completion
+ledger、daemon、global scan 或 generic Effect executor。
 
 ## 1. 决策状态
 

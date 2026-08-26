@@ -1,33 +1,119 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "base_sha": "ee06a078c3c5ff904e00c727475c467a25ada1ff",
   "blockers": [],
   "candidate_sha": null,
-  "changed_paths": [],
+  "changed_paths": [
+    "docs/research/candidates/ucope/workflow/engineering/state.json",
+    "temp/directions/ucope/test/s2/c1/sancheck1/HMASD_MARL_SANCHECK_V1_RECEIPT.json",
+    "temp/directions/ucope/test/s2/c1/sancheck1/engineering_state_r11_input.json"
+  ],
   "direction_id": "ucope",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "ee06a078c3c5ff904e00c727475c467a25ada1ff"
   },
   "last_checkpoint_sha": null,
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_R03_S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION_20260826.md",
+        "sha256": "e8d4ca0b855166cf7b7ebf7ebeaa9f1acdf1d1d94d67e32ac737d42609fefecd"
+      },
+      "docs/research/candidates/ucope/UCOPE_R03_S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION_20260826.md#hmasd-marl-sancheck-v1-receipt-contract",
+      {
+        "path": "temp/directions/ucope/test/s2/c1/sancheck1/HMASD_MARL_SANCHECK_V1_RECEIPT.json",
+        "sha256": "1a2178e05c5fb1178049ac623c3fb27f68a61a82a3d0456c10e74cd15795d4cd"
+      }
+    ],
+    "kind": "EM_INTAKE_S2_SANCHECK_PASS"
   },
-  "phase": "UNREQUESTED",
-  "revision": 1,
-  "run_refs": [],
+  "phase": "COMPLETE",
+  "revision": 11,
+  "run_refs": [
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/manifest.json",
+      "sha256": "ecd08ec68a6057bf5ea69defae50ee4a5dce4081024bd0e210e84432244abec6"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/preflight.json",
+      "sha256": "d1144e88b2431046aec8f4b89df05f9544e77d44ea0b18ef9c75f89423ca4d73"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/execute-preflight.json",
+      "sha256": "09532ef4c2574251b4e9780b5e7249558345eb4277726af7e5b9b93aa5443063"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/runner-spec.json",
+      "sha256": "20f8c80c43ea0a9a85bf425229d4d1951ded4875c1ec707bfb315293844a1a21"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/stdout.log",
+      "sha256": "179447a944acf72a0e2bbec0d2aa410b93718a4fa46ad5d2291f15dc8ce876c3"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-s1-r6/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temp/directions/ucope/.run-claims/0adc316e593a168f3fd35dc3465db120e4b117f922942044d38b12c490f4afd4.json",
+      "sha256": "df8548d19eb29a1d457a47c48f2c973efca8fc16b29dcf7f6893efd16cb03a2f"
+    },
+    {
+      "path": "temp/directions/ucope/test/s1/r6/b.json",
+      "sha256": "67a8beae7418a6f691e26f8b1e537ba18e9e1cc00bf35968c6595d85c33b0e4a"
+    }
+  ],
   "schema_version": 1,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-26T04:42:23.978095Z",
+  "verification_refs": [
+    ".codex/runtime/work/ready/b9230ea48ba273c43b37d3cbc1d5b3e562732155eb9ad06698007fe228001b0a/packet.json",
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_R03_S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION_20260826.md",
+      "sha256": "e8d4ca0b855166cf7b7ebf7ebeaa9f1acdf1d1d94d67e32ac737d42609fefecd"
+    },
+    {
+      "path": "docs/research/candidates/ucope/UCOPE_R03_S1_TECHNICAL_ACCEPTANCE_R06_20260826.md",
+      "sha256": "86e6e08bf8269a3da1fa6aadd0eacdbf20a3c437c24be51a2184222c33d5ce81"
+    },
+    {
+      "path": "docs/research/candidates/ucope/workflow/research/state.json",
+      "sha256": "0d2be57362cfcd6a58b20733200781c9b0b4c57fa39dbb2882a85c273efb3dd7"
+    },
+    ".codex/runtime/worktrees.json#wt-ucope-engineering-s2c1",
+    {
+      "path": "temp/runtime/receipts/wt-ucope-engineering-s2c1.json",
+      "sha256": "b0e09d489003e5269fff596eda057e30c472b8b7c38ff4afb4e54c8e74f22725"
+    },
+    {
+      "path": "temp/directions/ucope/test/s1/r6/R06_S1_TECHNICAL_ACCEPTANCE.json",
+      "sha256": "eb346b006c271892b4419c3f9a24290474107299d589d23c6062104fde89c4fb"
+    },
+    {
+      "path": "temp/directions/ucope/test/s2/c1/S2_COHERENT_CANDIDATE_READY_FOR_REVIEW.json",
+      "sha256": "99297c9eb89d5e10e7f2df8e5162d2e8e3fdb41d9f41816933428ff9efe287aa"
+    },
+    {
+      "path": "temp/directions/ucope/test/s2/c1/S2_INDEPENDENT_REVIEW_RETURN.json",
+      "sha256": "fbaa7c639b0db0aa013fbcc68f1170decd5b09c59fd85215d47ca33feed842aa"
+    },
+    {
+      "path": "temp/directions/ucope/test/s2/c1/repair1/S2_MATERIAL_DEFECT_REPAIR_READY_FOR_SANCHECK_DECISION.json",
+      "sha256": "316e503afdba45de521294bc836ea35edf8a13798558b8191c81d2902a57cab2"
+    },
+    {
+      "path": "temp/directions/ucope/test/s2/c1/sancheck1/HMASD_MARL_SANCHECK_V1_RECEIPT.json",
+      "sha256": "1a2178e05c5fb1178049ac623c3fb27f68a61a82a3d0456c10e74cd15795d4cd"
+    }
+  ],
   "waiting_on": [],
-  "worktree_ref": null,
+  "worktree_ref": "wt-ucope-engineering-s2c1",
   "writer": "CM-ucope"
 }

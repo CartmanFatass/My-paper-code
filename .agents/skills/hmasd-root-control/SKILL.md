@@ -1,54 +1,34 @@
 ---
 name: hmasd-root-control
-description: Reconcile HMASD work from the permanent Root task, including user-authorized material decisions.
+description: Use when Root must reconcile one exact HMASD work item, dispatch its closed plan, or record a user-authorized decision.
 ---
 
 # HMASD Root Control
 
-Root has the highest operational capability. It reconciles, creates or resumes
-manager tasks when their durable scope requires it, validates archives, and
-integrates Git. Within user authorization Root may form a material Portfolio,
-scientific, or engineering decision, but records it in the correct existing
-Markdown authority heading as `Decision owner: <identity>`, using existing
-heading/path/hash refs. JSON writers remain domain writers; the runtime actor
-comes from sender/session. Writer ownership is not a runtime role.
+For one exact `work_id`, first freshly observe native tasks and the relevant
+authority/Effect facts. Preserve Root's runtime task mapping with its existing
+`tasks.json` CAS.
 
-## One bounded wake
+1. Run Work Packet `reconcile --once` with the explicit observed-task snapshot
+   and any typed return/draft. Do not scan ready work or infer a target.
+2. Execute only its closed plan through `hmasd_codex_tasks execute-plan`, with
+   the exact packet locator, cwd, fresh observations, and known peer work IDs.
+   The adapter's short lock and comparator permit disjoint work; overlap is a
+   conflict unless Root supplies `--root-override-reason` for an exact
+   owned-path comparator conflict or `ACTIVE_PEER_OBSERVATION_UNKNOWN`. The
+   adapter records its reason/warning in native history; this is not a
+   pre-dispatch acknowledgment or gate.
+3. If the override itself is a material decision, its owner records it in the
+   appropriate existing authority after the fact. Freshly observe every
+   send/create/wait result. Hard Effect identity/schema conflicts, same-Effect
+   ownership, and an `UNKNOWN` send/create/Effect commitment cannot be
+   overridden; they are observe-only and never replayed.
+4. A canonical manager creation is single-flight: freshly list native tasks and
+   task cache, create at most once, observe unknown outcomes before any later
+   attempt, and CAS only an observed identity.
 
-1. Read durable authorities, referenced Work Packets, effect/run/worktree facts,
-   Git, and reconstructable runtime task references.
-2. Run `reconcile --once`: at most one bounded action for each runnable
-   direction. Serialize the same scope/target/authority revision; unrelated
-   directions may proceed in parallel within capacity.
-3. Use or create the matching independent Portfolio, EM, or CM task only when
-   its defined condition holds; reuse a parked identity and report duplicates.
-4. Transfer cross-task work only by an immutable Work Packet with authority
-   refs and revisions. Delivery is at-least-once for the same `work_id` and the
-   receiver must intake it idempotently. Do not generate a new packet for the
-   same authority revision. Completion, waiting, and failure update the
-   referenced existing authority or result; they are not packet states.
-5. Perform only Root-owned runtime, archive, and mechanical Git effects. Root
-   never edits an integration conflict.
-
-## Effects and failures
-
-An unknown run, send, or push is observed, never replayed. A local failure is
-limited to its scope: new evidence may form a new Work Packet, while unrelated
-directions continue. Do not use bare `BLOCKED` as control state or apply a
-global recovery budget. Runtime maps are reconstructable caches, not identity
-authority.
-
-Path tier policy only classifies and records paths; it does not create an
-approval service or widen `allowed_paths`. Root requires the one user
-confirmation bound to an exact shared-core action before that effect. The
-existing Markdown confirmation records Action digest, Base SHA, sorted exact
-paths, objective/non-goals, and allowed Git effects. Root canonicalizes those
-fields as JSON and checks its SHA-256 before execution and again before commit;
-after the candidate SHA exists, append its result ref to that confirmation.
-
-An implementation folder name may differ from its direction ID. Ownership comes
-from the Work Packet's exact `owned_paths` and authority refs, not folder names;
-path policy only classifies those paths.
-
-Use every genuine registered leaf only when it materially helps; all are direct
-leaves and may not delegate.
+Use history-derived attempts only: a terminal task without return may resume the
+same `work_id` at most three observed deliveries. After the cap, request a
+user decision with its exact scope; do not emit bare `BLOCKED`. Root alone
+performs runtime/archive/mechanical integration Effects and never resolves an
+integration conflict manually.

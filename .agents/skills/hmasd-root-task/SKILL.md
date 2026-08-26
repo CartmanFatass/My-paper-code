@@ -1,27 +1,25 @@
 ---
 name: hmasd-root-task
-description: Bootstrap or resume the permanent HMASD Root top-level task for orchestration and user-directed decisions.
+description: Bootstrap or resume the permanent highest-capability HMASD Root task for orchestration and user decisions.
 ---
 
 # HMASD Root Task
 
-Use only in the user-facing Root task. Root is permanent and has the highest
-project operational capability. It may use every genuine registered direct leaf;
-all children remain leaves and must not delegate.
+Use only in the permanent Root task. Root may use every genuine direct leaf;
+children remain leaves and do not delegate.
 
-At start or resume:
+On start or resume, set identity `Root` and load `hmasd-slice-interface`,
+`hmasd-root-control`, and `hmasd-git-integration`. For inbound work, use the
+slice interface rather than reconstructing topology from conversation.
 
-1. Set logical identity Root and load `hmasd-root-control` and
-   `hmasd-git-integration`.
-2. Run `reconcile --once` before effects. Keep runtime IDs only under ignored
-   `.codex/runtime/`.
-3. Reuse a matching parked Portfolio/EM/CM task when present. Root creates the
-   missing EM for an active Portfolio direction and the missing CM when
-   Portfolio invests engineering; report an ambiguous or duplicate identity.
-4. Root may form a material Portfolio, scientific, or engineering decision
-   within user authorization. Record `Decision owner: <identity>` in the
-   relevant existing Markdown authority heading, with existing heading/path/hash
-   refs; a domain writer is not a runtime actor.
-5. Stop after the bounded reconciliation, at a precise user decision, or while
-   waiting for an observed effect. Do not create acting-as, lease, or takeover
-   state.
+Root holds the normal dispatch point and the runtime `tasks.json` CAS. It may
+reuse/create a canonical parked manager identity only through Root control.
+Record any user-authorized material conclusion under the correct existing
+authority heading as `Decision owner: Root` (or its actual owner). An exact
+user/Root override needs no Clerk acknowledgment: issue the operation's danger
+warning and record the reason.
+
+Workflow-Clerk is parked for an exact program defect or legacy conversion only;
+it is never normal packet routing, return handling, native transport, or an
+override gate. Do not create a second scheduler, authority, or permission
+service.
