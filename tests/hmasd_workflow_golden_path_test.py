@@ -172,7 +172,13 @@ class _LocalFakeAppServer:
         }
         self.cwd = str(cwd)
         self.threads: dict[str, dict[str, Any]] = {
-            thread_id: {"id": thread_id, "name": name, "turns": []}
+            thread_id: {
+                "id": thread_id,
+                "name": name,
+                "status": {"type": "active"},
+                "cwd": self.cwd,
+                "turns": [],
+            }
             for thread_id, name in identities.items()
         }
         self.requests: list[dict[str, Any]] = []
@@ -202,8 +208,8 @@ class _LocalFakeAppServer:
                     "id": thread["id"],
                     "sessionId": thread["id"],
                     "name": thread["name"],
-                    "status": {"type": "idle"},
-                    "cwd": self.cwd,
+                    "status": thread["status"],
+                    "cwd": thread["cwd"],
                     "source": "appServer",
                     "modelProvider": "fake",
                     "ephemeral": False,

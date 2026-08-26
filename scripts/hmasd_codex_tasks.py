@@ -779,6 +779,10 @@ class AppServerClient:
         thread = read["thread"]
         observed_thread_source = thread.get("threadSource")
         thread_source_changed = (
+            isinstance(observed_thread_source, str)
+            and observed_thread_source.startswith("hmasd-manager:")
+            and expected_thread_source is None
+        ) or (
             expected_thread_source is not None
             and (
                 observed_thread_source != expected_thread_source
@@ -1426,7 +1430,9 @@ class AppServerClient:
         target_text = str(target)
         target_manager = self._canonical_manager(target_text)
         expected_kind = (
-            None if target_manager is None else target_manager["kind"]
+            resolution.get("kind")
+            if target_manager is None
+            else target_manager["kind"]
         )
         expected_direction = (
             None if target_manager is None else target_manager["direction_id"]
@@ -1448,6 +1454,10 @@ class AppServerClient:
             or not thread_locator_valid
             or (
                 expected_resolution_status == "CREATE_TASK"
+                and target_manager is None
+            )
+            or (
+                expected_resolution_status == "CREATE_TASK"
                 and resolution.get("direction_id") != expected_direction
             )
             or (
@@ -1462,13 +1472,15 @@ class AppServerClient:
                 "work_id": work_id,
             }
         closed_manager = self._canonical_manager(target_text, generation)
-        if closed_manager is None:
+        if expected_resolution_status == "CREATE_TASK" and closed_manager is None:
             return {
                 "status": "PROTOCOL_DEFECT",
                 "reason": "INVALID_TASK_RESOLUTION",
                 "work_id": work_id,
             }
-        closed_thread_source = str(closed_manager["thread_source"])
+        closed_thread_source = (
+            None if closed_manager is None else str(closed_manager["thread_source"])
+        )
         repo = Path(cwd).absolute()
         with self._dispatch_lock(repo):
             listed = self._list_all_threads(cwd=cwd)
@@ -1513,7 +1525,8 @@ class AppServerClient:
                 else None
             )
             if (
-                isinstance(tagged_generation, int)
+                closed_thread_source is not None
+                and isinstance(tagged_generation, int)
                 and not isinstance(tagged_generation, bool)
                 and tagged_generation >= 1
             ):
@@ -1619,9 +1632,12 @@ class AppServerClient:
                     "generation": fresh_resolution.get("generation"),
                     "thread_id": fresh_resolution.get("thread_id"),
                 }
-                expected_binding["kind"] = closed_manager["kind"]
-                expected_binding["direction_id"] = closed_manager["direction_id"]
-                manager_fields = {"kind", "direction_id"}
+                if closed_manager is not None:
+                    expected_binding["kind"] = closed_manager["kind"]
+                    expected_binding["direction_id"] = closed_manager["direction_id"]
+                    manager_fields = {"kind", "direction_id"}
+                else:
+                    manager_fields = set()
                 bound_fields = {"logical_identity", *manager_fields}
                 bound_fields.update(
                     field
@@ -1631,7 +1647,7 @@ class AppServerClient:
                         "generation",
                         "thread_id",
                     )
-                    if resolution.get(field) is not None
+                    if field in resolution
                 )
                 expected_fact = {
                     field: expected_binding[field]
@@ -1823,7 +1839,10 @@ class AppServerClient:
                 root_override_reason=root_override_reason,
                 expected_cwd=cwd,
                 expected_thread_source=closed_thread_source,
-                require_thread_source=(needs_create or tagged_thread is not None),
+                require_thread_source=(
+                    closed_thread_source is not None
+                    and (needs_create or tagged_thread is not None)
+                ),
             )
             if warning:
                 sent = {**sent, "warning": "ROOT_OVERRIDE_ACTIVE"}

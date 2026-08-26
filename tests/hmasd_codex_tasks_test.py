@@ -3004,6 +3004,56 @@ def test_execute_plan_uses_canonical_target_identity_not_requested_alias() -> No
     }
 
 
+def test_execute_plan_preserves_existing_root_receiver_dispatch(
+    tmp_path: Path,
+) -> None:
+    root_task = {
+        "logical_identity": "Root",
+        "generation": 1,
+        "lifecycle": "ACTIVE",
+        "thread_id": "thread-root",
+    }
+    peer = response_peer(
+        listed_threads=[
+            {
+                "id": "thread-root",
+                "name": "Root",
+                "cwd": tmp_path.as_posix(),
+                "status": {"type": "active"},
+            }
+        ],
+        read_thread_name="Root",
+        read_thread_cwd=str(tmp_path),
+        read_thread_status={"type": "active"},
+    )
+    plan = {
+        "verb": "DISPATCH_EXISTING",
+        "work_id": WORK_ID,
+        "target_identity": "Root",
+        "task_resolution": {
+            "status": "REUSE",
+            "logical_identity": "Root",
+            "kind": None,
+            "generation": 1,
+            "lifecycle": "ACTIVE",
+            "thread_id": "thread-root",
+        },
+    }
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        result = client.execute_plan(
+            plan,
+            packet_locator=LOCATOR,
+            cwd=str(tmp_path),
+            observed_tasks=[root_task],
+        )
+
+    assert result["status"] == "DELIVERED"
+    assert result["thread_id"] == "thread-root"
+    methods = [request.get("method") for request in peer.requests]
+    assert "thread/start" not in methods
+    assert methods.count("turn/start") == 1
+
+
 def test_cm_create_and_first_turn_use_sol_high() -> None:
     peer = response_peer()
     with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
