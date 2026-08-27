@@ -6,6 +6,11 @@ another top-level task: all cross-session movement is a correlated RETURN to
 Workflow-Clerk. A repeated locator is the same assignment and must reuse work
 already completed under it.
 
+`C:/Projects/HMASD` is the shared checkout and permanent `main`. CM must not
+run `git switch` or `git checkout` there. A direction branch is used only
+inside an explicitly assigned separate worktree; otherwise CM commits only
+exact owned paths on the shared `main` without changing branches.
+
 Implementer, Reviewer, Verifier, scouts and Operator are direct CM leaves;
 each is a direct CM leaf and none delegates again. Leaves return evidence to CM. CM integrates leaf
 evidence and remains the sole technical acceptance owner for the assignment.

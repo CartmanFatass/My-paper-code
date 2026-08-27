@@ -214,3 +214,36 @@ def test_root_is_not_normal_direction_git_or_manifest_owner() -> None:
     assert "root 是 manifest preparation 的正常 owner" not in protocol
     for text in (agents, goals, protocol):
         assert "shared-core" in text
+
+
+def test_shared_checkout_is_permanent_main_for_every_manager() -> None:
+    prompts = [
+        _prompt("hmasd-portfolio.md"),
+        _prompt("hmasd-em.md"),
+        _prompt("hmasd-cm.md"),
+        _prompt("hmasd-workflow-clerk.md"),
+    ]
+    for text in prompts:
+        assert "shared checkout" in text
+        assert "permanent `main`" in text
+        assert "must not run `git switch` or `git checkout`" in text
+        assert "explicitly assigned separate worktree" in text
+
+    authorities = [
+        " ".join((ROOT / "AGENTS.md").read_text(encoding="utf-8").split()).casefold(),
+        " ".join(
+            (ROOT / "docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md")
+            .read_text(encoding="utf-8")
+            .split()
+        ).casefold(),
+        " ".join(
+            (ROOT / "docs/project/WORKFLOW_PROTOCOL.md")
+            .read_text(encoding="utf-8")
+            .split()
+        ).casefold(),
+    ]
+    for text in authorities:
+        assert "c:/projects/hmasd" in text
+        assert "permanent `main`" in text
+        assert "git switch" in text
+        assert "separate worktree" in text

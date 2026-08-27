@@ -148,6 +148,13 @@ decision 写入所属 Markdown/JSON authority；conversation 只提供 provenanc
 
 ## Direction workspace and Git
 
+`C:/Projects/HMASD` is the shared checkout and permanent `main`. Root, Clerk,
+Portfolio, EM and CM must not run `git switch` or `git checkout` there. A
+direction branch is allowed only inside an explicitly assigned separate
+worktree. Without that exact worktree assignment, the owner works and commits
+only exact owned paths on shared `main` without changing branches. One session
+must never change the branch observed by the other sessions.
+
 方向运行产物只位于：
 
     temp/directions/<direction-id>/exp/

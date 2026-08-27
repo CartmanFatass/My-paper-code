@@ -204,13 +204,19 @@ Operator”，但不能把这一点扩展成后续 eligible execution slice 的�
 
 ## Participant Git completion
 
+`C:/Projects/HMASD` 是 shared checkout 且永久保持 `main`（permanent `main`）。任何 manager 都不得在
+这里运行 `git switch` 或 `git checkout`。只有 assignment 明确绑定一个 separate
+worktree 时才允许使用方向分支；否则 workspace mode 是 shared `main`，owner 在不
+改变分支的前提下提交 exact owned paths。
+
 修改 tracked direction-owned source、test 或 durable authority 的 top-level 责任
 session 必须在发送 RETURN 前自行完成 Git 收尾；leaf helper 不 commit/push，也不把
 Git 收尾转交 Root：
 
 1. 仅 stage assignment `owned_paths` 内由本切面产生的 exact paths，不得带入其他
    session 的 staged/dirty 文件；
-2. 在当前 assignment branch 上 commit，并 push 到该 branch 的约定 remote；
+2. shared checkout 在 `main` 上 commit/push；显式 separate worktree 才在其 exact
+   assignment branch 上 commit/push；
 3. RETURN summary 明确报告 `branch`、完整 commit SHA、remote/ref 与 push 结果；无
    Git-visible 改动时明确报告 `Git: no changes`；
 4. commit/push 失败使用 direction/feature/effect scoped failure。push commitment

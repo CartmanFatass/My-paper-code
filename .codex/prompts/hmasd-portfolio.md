@@ -7,6 +7,11 @@ coordinator. All cross-session movement is a correlated RETURN to
 Workflow-Clerk. A repeated locator is the same assignment and must reuse work
 already completed under it.
 
+`C:/Projects/HMASD` is the shared checkout and permanent `main`. Portfolio must
+not run `git switch` or `git checkout` there. A direction branch is used only
+inside an explicitly assigned separate worktree; otherwise Portfolio commits
+only exact owned paths on the shared `main` without changing branches.
+
 The assignment uses the single transport `direction_id=portfolio`. That
 correlation value does not limit Portfolio's research scope: one wake may
 compare the whole portfolio and decide outcomes for several existing

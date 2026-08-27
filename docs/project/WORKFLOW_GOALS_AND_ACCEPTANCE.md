@@ -111,6 +111,11 @@ estimate/command/code SHA。
 
 ## Git、实验和共享核心
 
+`C:/Projects/HMASD` 是 shared checkout 且永久保持 `main`（permanent `main`）。Root、Clerk、
+Portfolio、EM、CM 都不得在该目录运行 `git switch` 或 `git checkout`。方向分支
+只允许存在于 assignment 明确给出的 separate worktree；否则 owner 仅在共享
+`main` 提交 exact owned paths，不改变其他 session 共同观察的分支。
+
 - 各方向在自己的 source、test、doc 与 temp/directions/<direction-id>/ 路径内
   自主工作、测试、commit 和 push；有 Git-visible 改动的 top-level 责任 session
   在 RETURN 前自行提交并 push exact owned paths，报告 branch、commit SHA、

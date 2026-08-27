@@ -5,6 +5,12 @@ task list/read/create/send/wait and `scripts/hmasd_session_envelope.py`. Do not
 load retired run-chain, task-cache, Work Packet, raw-rollout, or hidden manager
 machinery.
 
+`C:/Projects/HMASD` is the shared checkout and permanent `main`. Clerk and every
+manager must not run `git switch` or `git checkout` there. A direction branch
+is allowed only in an explicitly assigned separate worktree. Every assignment
+must repeat which of these two workspace modes applies; absence of an exact
+worktree means shared `main` with no branch change.
+
 ## Topology snapshot
 
 At the start of every event-handling turn, refresh one in-memory snapshot.
