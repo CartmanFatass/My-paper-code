@@ -1241,6 +1241,7 @@ def _validate_portfolio_decision(
         "expected_registry_revision",
         "expected_registry_sha256",
         "snapshot_digest",
+        "proposed_candidates",
         "considered",
         "transitions",
         "capacity",
@@ -1284,6 +1285,41 @@ def _validate_portfolio_decision(
     snapshot_digest = decision["snapshot_digest"]
     if not isinstance(snapshot_digest, str) or SHA256_RE.fullmatch(snapshot_digest) is None:
         raise ValidationError("snapshot_digest must be a lowercase SHA-256 provenance digest")
+
+    current_by_id = {item["id"]: item for item in current["directions"]}
+    proposed_value = decision["proposed_candidates"]
+    if not isinstance(proposed_value, list):
+        raise ValidationError("proposed_candidates must be an array")
+    proposed_ids: list[str] = []
+    for index, item in enumerate(proposed_value):
+        if not isinstance(item, dict) or set(item) != {"direction_id"}:
+            raise ValidationError(
+                f"proposed_candidates[{index}] must contain exactly direction_id"
+            )
+        direction_id = item["direction_id"]
+        if not isinstance(direction_id, str) or DIRECTION_RE.fullmatch(direction_id) is None:
+            raise ValidationError(f"proposed_candidates[{index}].direction_id is invalid")
+        proposed_ids.append(direction_id)
+    proposed = set(proposed_ids)
+    if len(proposed) != len(proposed_ids):
+        raise ValidationError("proposed_candidates contains duplicate direction_id")
+    existing_proposals = proposed & set(current_by_id)
+    if existing_proposals:
+        raise ValidationError(
+            f"proposed_candidates contains existing directions: {sorted(existing_proposals)}"
+        )
+    snapshot = {
+        "registry_sha256": observed_registry_sha256,
+        "proposed_candidates": [
+            {"direction_id": direction_id} for direction_id in sorted(proposed)
+        ],
+    }
+    observed_snapshot_digest = sha256_bytes(_canonical_bytes(snapshot))
+    if snapshot_digest != observed_snapshot_digest:
+        raise RevisionConflictError(
+            "snapshot_digest mismatch for current registry and proposed candidates: "
+            f"expected {snapshot_digest}, observed {observed_snapshot_digest}"
+        )
 
     considered_value = decision["considered"]
     if not isinstance(considered_value, list):
@@ -1331,19 +1367,21 @@ def _validate_portfolio_decision(
     considered = set(considered_ids)
     if len(considered) != len(considered_ids):
         raise ValidationError("considered contains duplicate direction_id")
-    current_by_id = {item["id"]: item for item in current["directions"]}
-    missing_considered = set(current_by_id) - considered
+    snapshot_direction_ids = set(current_by_id) | proposed
+    missing_considered = snapshot_direction_ids - considered
     if missing_considered:
         raise ValidationError(
             f"considered does not cover snapshot directions: {sorted(missing_considered)}"
         )
+    unknown_considered = considered - snapshot_direction_ids
+    if unknown_considered:
+        raise ValidationError(f"considered contains undefined directions: {sorted(unknown_considered)}")
 
     transitions_value = decision["transitions"]
     if not isinstance(transitions_value, list):
         raise ValidationError("transitions must be an array")
     transitions: list[Mapping[str, Any]] = []
     transition_ids: set[str] = set()
-    new_ids: set[str] = set()
     allowed_lifecycles = {"REGISTERED", "ACTIVE", "PARKED", "CLOSED"}
     transition_keys = {
         "direction_id",
@@ -1407,6 +1445,8 @@ def _validate_portfolio_decision(
         new_direction = value.get("new_direction")
         current_direction = current_by_id.get(direction_id)
         if current_direction is None:
+            if direction_id not in proposed:
+                raise ValidationError(f"new direction {direction_id} is not a proposed candidate")
             new_direction_keys = {
                 "title",
                 "abbreviation",
@@ -1419,7 +1459,6 @@ def _validate_portfolio_decision(
                     f"new direction {direction_id} new_direction must contain exactly "
                     f"{sorted(new_direction_keys)}"
                 )
-            new_ids.add(direction_id)
             if not isinstance(new_direction["title"], str) or not new_direction["title"].strip():
                 raise ValidationError(f"new direction {direction_id} title is required")
             abbreviation = new_direction["abbreviation"]
@@ -1445,10 +1484,6 @@ def _validate_portfolio_decision(
             if new_direction is not None:
                 raise ValidationError(f"existing direction {direction_id} cannot redefine new_direction")
         transitions.append(value)
-
-    unknown_considered = considered - set(current_by_id) - new_ids
-    if unknown_considered:
-        raise ValidationError(f"considered contains undefined directions: {sorted(unknown_considered)}")
 
     lifecycle_by_id = {item["id"]: item["lifecycle"] for item in current["directions"]}
     for transition in transitions:

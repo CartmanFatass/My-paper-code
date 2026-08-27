@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from contextvars import ContextVar, Token
 import errno
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -15,17 +16,23 @@ import subprocess
 import sys
 import tempfile
 import time
+import uuid
 from typing import Any, Iterable, Mapping, Sequence
 
 try:
-    from scripts import hmasd_path_policy, hmasd_platform, hmasd_session_envelope
+    from scripts import hmasd_path_policy, hmasd_platform
 except ImportError:
     import hmasd_path_policy
     import hmasd_platform
-    import hmasd_session_envelope
 
 
 _FULL_SHA = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
+_DIRECTION = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
+_MANAGER = re.compile(r"(EM|CM)/([a-z0-9][a-z0-9_-]{1,63})/g[1-9][0-9]*\Z")
+_GIT_INPUT_FIELDS = {
+    "schema_version", "assignment_message_id", "assignment_locator", "direction_id",
+    "recipient_identity", "workspace_mode", "owned_paths", "commit_subject",
+}
 _TRANSACTION_TIMEOUT_SECONDS = 5
 _POST_SEND_OBSERVE_RESERVE_SECONDS = 1
 _NEW_PATH_CLEANUP_RESERVE_SECONDS = 1
@@ -129,23 +136,79 @@ def _repository(raw: str) -> tuple[Path, Path]:
     return repo, common
 
 
-def _load_assignment(repo: Path, locator: str) -> tuple[str, dict[str, Any]]:
+def _load_git_input(repo: Path, raw_path: str) -> tuple[str, dict[str, Any]]:
     try:
-        relative, assignment = hmasd_session_envelope.read_assignment(repo, locator)
-    except hmasd_session_envelope.EnvelopeError as exc:
-        raise DirectionGitError(f"Session Envelope v2 assignment is invalid: {exc}") from exc
-    normalized_locator = relative.as_posix()
-    if not normalized_locator.endswith(".assignment.json"):
-        raise DirectionGitError("assignment locator must end with .assignment.json")
-    workspace_mode = assignment["body"]["workspace_mode"]
+        value = json.loads(Path(raw_path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise DirectionGitError(f"frozen Git input is not readable JSON: {exc}") from exc
+    if not isinstance(value, Mapping) or set(value) != _GIT_INPUT_FIELDS:
+        raise DirectionGitError("frozen Git input has an invalid exact shape")
+    if value["schema_version"] != 1 or isinstance(value["schema_version"], bool):
+        raise DirectionGitError("frozen Git input schema_version must be 1")
+    try:
+        message_id = str(uuid.UUID(str(value["assignment_message_id"])))
+    except (TypeError, ValueError) as exc:
+        raise DirectionGitError("frozen Git input assignment_message_id is invalid") from exc
+    locator = value["assignment_locator"]
+    if not isinstance(locator, str) or not locator or "\n" in locator or "\r" in locator:
+        raise DirectionGitError("frozen Git input assignment_locator must be one non-empty line")
+    direction = value["direction_id"]
+    if not isinstance(direction, str) or _DIRECTION.fullmatch(direction) is None:
+        raise DirectionGitError("frozen Git input direction_id is invalid")
+    recipient = value["recipient_identity"]
+    match = _MANAGER.fullmatch(recipient) if isinstance(recipient, str) else None
+    if match is None or match.group(2) != direction:
+        raise DirectionGitError("frozen Git input recipient_identity is invalid")
+    workspace_mode = value["workspace_mode"]
     if workspace_mode != "shared-main":
         raise DirectionGitError(
             "direction Git shared-checkout action requires workspace_mode shared-main",
             facts={"workspace_mode": workspace_mode},
         )
+    if not isinstance(value["owned_paths"], list) or not value["owned_paths"]:
+        raise DirectionGitError("frozen Git input owned_paths must be a non-empty list")
+    owned_paths: list[str] = []
+    for index, path in enumerate(value["owned_paths"]):
+        if not isinstance(path, str):
+            raise DirectionGitError(f"owned_paths[{index}] must be a path")
+        is_prefix = path.endswith("/")
+        raw = path[:-1] if is_prefix else path
+        try:
+            normalized = hmasd_path_policy.normalize_repo_path(
+                raw, label=f"owned_paths[{index}]",
+            )
+        except hmasd_path_policy.PathPolicyError as exc:
+            raise DirectionGitError(str(exc)) from exc
+        if normalized != raw:
+            raise DirectionGitError(f"owned_paths[{index}] is not canonical")
+        owned_paths.append(normalized + ("/" if is_prefix else ""))
+    subject = value["commit_subject"]
+    if not isinstance(subject, str) or not subject.strip() or "\n" in subject or "\r" in subject:
+        raise DirectionGitError("frozen Git input commit_subject must be one non-empty line")
     if _git_value(repo, "symbolic-ref", "--quiet", "--short", "HEAD") != "main":
         raise DirectionGitError("shared-main direction Git requires checked-out main")
-    return normalized_locator, assignment
+    normalized_input = {
+        "schema_version": 1, "assignment_message_id": message_id,
+        "assignment_locator": locator, "direction_id": direction,
+        "recipient_identity": recipient, "workspace_mode": workspace_mode,
+        "owned_paths": owned_paths, "commit_subject": subject.strip(),
+    }
+    assignment = {
+        "message_id": message_id,
+        "direction_id": direction,
+        "recipient": {"identity": recipient},
+        "body": {
+            "workspace_mode": workspace_mode,
+            "owned_paths": owned_paths,
+            "objective": subject.strip(),
+        },
+        "_git_input_sha256": hashlib.sha256(
+            json.dumps(
+                normalized_input, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest(),
+    }
+    return locator, assignment
 
 
 def _normalize_paths(
@@ -266,10 +329,13 @@ def _verify_candidate(
     trailers = lines[trailer_start:]
     assignment_trailer = f"HMASD-Assignment-ID: {assignment['message_id']}"
     recipient_trailer = f"HMASD-Assignment-Recipient: {assignment['recipient']['identity']}"
+    input_trailer = f"HMASD-Git-Input-SHA256: {assignment['_git_input_sha256']}"
     if trailers.count(assignment_trailer) != 1:
         raise GitConflict("candidate has a non-canonical assignment-ID trailer")
     if trailers.count(recipient_trailer) != 1:
         raise GitConflict("candidate recipient does not match the assignment")
+    if trailers.count(input_trailer) != 1:
+        raise GitConflict("candidate does not match the frozen Git input")
     bases = [
         line.removeprefix("HMASD-Base-SHA: ")
         for line in trailers
@@ -345,6 +411,15 @@ def _result(
         "remote_sha": remote_sha, "relation": relation,
         "push_attempted": push_attempted,
     }
+    if status == "SUCCEEDED" and not changed_paths:
+        result["git_closure"] = {"kind": "NO_CHANGES"}
+    elif status == "SUCCEEDED" and candidate_sha is not None:
+        result["git_closure"] = {
+            "kind": "PUBLISHED", "branch": "main", "commit_sha": candidate_sha,
+            "remote": "origin", "ref": "refs/heads/main", "push_outcome": "SUCCEEDED",
+        }
+    else:
+        result["git_closure"] = None
     if failure_scope is not None:
         result["failure_scope"] = failure_scope
     if failure_ref is not None:
@@ -443,16 +518,16 @@ def _identity(assignment: Mapping[str, Any]) -> tuple[str, str]:
     return str(assignment["message_id"]), str(assignment["body"]["workspace_mode"])
 
 
-def commit_push(repo_raw: str, locator: str, paths: Sequence[str]) -> dict[str, Any]:
+def commit_push(repo_raw: str, git_input: str, paths: Sequence[str]) -> dict[str, Any]:
     repo, common = _repository(repo_raw)
-    assignment_locator, assignment = _load_assignment(repo, locator)
+    assignment_locator, assignment = _load_git_input(repo, git_input)
     message_id, workspace_mode = _identity(assignment)
     requested = _normalize_paths(repo, assignment, paths)
     _require_direction_owned(repo, requested)
     with _GitLock(common):
         if _git_value(repo, "symbolic-ref", "--quiet", "--short", "HEAD") != "main":
             raise DirectionGitError("checked-out branch changed before Git transaction")
-        locked_locator, locked_assignment = _load_assignment(repo, locator)
+        locked_locator, locked_assignment = _load_git_input(repo, git_input)
         if locked_locator != assignment_locator or locked_assignment != assignment:
             raise GitConflict("assignment changed before Git transaction")
         candidates = _assignment_candidates(repo, message_id)
@@ -520,6 +595,7 @@ def commit_push(repo_raw: str, locator: str, paths: Sequence[str]) -> dict[str, 
             f"HMASD-Assignment-ID: {message_id}\n"
             f"HMASD-Base-SHA: {base}\n"
             f"HMASD-Assignment-Recipient: {assignment['recipient']['identity']}\n"
+            f"HMASD-Git-Input-SHA256: {assignment['_git_input_sha256']}\n"
         )
         try:
             if new_paths:
@@ -614,9 +690,9 @@ def commit_push(repo_raw: str, locator: str, paths: Sequence[str]) -> dict[str, 
         )
 
 
-def observe_push(repo_raw: str, locator: str) -> dict[str, Any]:
+def observe_push(repo_raw: str, git_input: str) -> dict[str, Any]:
     repo, common = _repository(repo_raw)
-    assignment_locator, assignment = _load_assignment(repo, locator)
+    assignment_locator, assignment = _load_git_input(repo, git_input)
     message_id, workspace_mode = _identity(assignment)
     with _GitLock(common):
         candidates = _assignment_candidates(repo, message_id)
@@ -654,27 +730,54 @@ def observe_push(repo_raw: str, locator: str) -> dict[str, Any]:
         )
 
 
+def no_changes(repo_raw: str, git_input: str) -> dict[str, Any]:
+    repo, common = _repository(repo_raw)
+    assignment_locator, assignment = _load_git_input(repo, git_input)
+    message_id, workspace_mode = _identity(assignment)
+    with _GitLock(common):
+        locked_locator, locked_assignment = _load_git_input(repo, git_input)
+        if locked_locator != assignment_locator or locked_assignment != assignment:
+            raise GitConflict("frozen Git input changed before no-changes observation")
+        owned = assignment["body"]["owned_paths"]
+        changed, _ = _working_changes(repo, owned)
+        if changed:
+            raise DirectionGitError(
+                "NO_CHANGES closure requires all frozen owned paths to be unchanged",
+                facts={"changed_paths": changed},
+            )
+        return _result(
+            status="SUCCEEDED", reason="frozen owned paths have no Git-visible changes",
+            assignment_locator=assignment_locator, message_id=message_id,
+            workspace_mode=workspace_mode,
+        )
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="operation", required=True)
     commit = subparsers.add_parser("commit-push")
     commit.add_argument("--repo", required=True)
-    commit.add_argument("--assignment", required=True)
+    commit.add_argument("--git-input", required=True)
     commit.add_argument("--path", action="append", required=True)
     observe = subparsers.add_parser("observe-push")
     observe.add_argument("--repo", required=True)
-    observe.add_argument("--assignment", required=True)
+    observe.add_argument("--git-input", required=True)
+    unchanged = subparsers.add_parser("no-changes")
+    unchanged.add_argument("--repo", required=True)
+    unchanged.add_argument("--git-input", required=True)
     return parser
 
 
 def main(argv: Iterable[str] | None = None) -> int:
     args = _parser().parse_args(list(argv) if argv is not None else None)
-    locator = args.assignment
+    git_input = args.git_input
     try:
         if args.operation == "commit-push":
-            result = commit_push(args.repo, locator, args.path)
+            result = commit_push(args.repo, git_input, args.path)
+        elif args.operation == "observe-push":
+            result = observe_push(args.repo, git_input)
         else:
-            result = observe_push(args.repo, locator)
+            result = no_changes(args.repo, git_input)
     except DirectionGitError as exc:
         facts: dict[str, Any] = {
             "workspace_mode": None, "base_sha": None, "candidate_sha": None,
@@ -683,15 +786,16 @@ def main(argv: Iterable[str] | None = None) -> int:
         }
         facts.update(exc.facts)
         message_id = ""
+        assignment_locator = git_input
         try:
             repo = Path(args.repo).absolute()
-            _, assignment = _load_assignment(repo, locator)
+            assignment_locator, assignment = _load_git_input(repo, git_input)
             message_id, workspace_mode = _identity(assignment)
             facts["workspace_mode"] = workspace_mode
         except DirectionGitError:
             pass
         result = _result(
-            status=exc.status, reason=str(exc), assignment_locator=locator,
+            status=exc.status, reason=str(exc), assignment_locator=assignment_locator,
             message_id=message_id, **facts,
         )
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))

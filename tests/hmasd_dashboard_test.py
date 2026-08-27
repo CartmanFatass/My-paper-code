@@ -236,7 +236,7 @@ def test_clerk_v2_projection_keeps_provenance_and_never_infers_transport(tmp_pat
     row = clerk["data"]["directions"][0]
 
     assert row["lifecycle"] == "REGISTERED"
-    assert row["owner_stage"] == "TERMINAL"
+    assert row["owner_stage"] == "UNKNOWN"
     assert row["native_task_id"] == "UNKNOWN"
     assert row["native_task_status"] == "UNOBSERVED"
     assert row["observed_at"] == "UNOBSERVED"
@@ -248,6 +248,53 @@ def test_clerk_v2_projection_keeps_provenance_and_never_infers_transport(tmp_pat
     assert row["research_state_revision"] == 1
     assert row["engineering_state_revision"] == 1
     assert row["projection_age_seconds"] == "UNOBSERVED"
+    assert row["defect"] is None
+
+
+def test_clerk_active_without_native_observation_remains_unknown(tmp_path: Path) -> None:
+    root = fixture_root(tmp_path)
+    registry_path = root / dashboard.REGISTRY_REL
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["directions"][0]["lifecycle"] = "ACTIVE"
+    registry_path.write_bytes(dashboard._json_bytes(registry))
+    liveness_path = root / dashboard.CLERK_LIVENESS_REL
+    liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
+    liveness["directions"] = []
+    liveness_path.write_bytes(dashboard._json_bytes(liveness))
+
+    row = dashboard.build_projection(root, "clerk")["data"]["directions"][0]
+
+    assert row["lifecycle"] == "ACTIVE"
+    assert row["owner_stage"] == "UNKNOWN"
+    assert row["native_task_id"] == "UNKNOWN"
+    assert row["native_task_status"] == "UNOBSERVED"
+    assert row["delivery_state"] == "UNOBSERVED"
+    assert row["observed_at"] == "UNOBSERVED"
+    assert row["defect"] is None
+
+
+@pytest.mark.parametrize("lifecycle", ["PARKED", "CLOSED"])
+def test_clerk_inactive_lifecycle_remains_unknown_without_observed_owner(
+    tmp_path: Path,
+    lifecycle: str,
+) -> None:
+    root = fixture_root(tmp_path)
+    registry_path = root / dashboard.REGISTRY_REL
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["directions"][0]["lifecycle"] = lifecycle
+    registry_path.write_bytes(dashboard._json_bytes(registry))
+    liveness_path = root / dashboard.CLERK_LIVENESS_REL
+    liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
+    liveness["directions"] = []
+    liveness_path.write_bytes(dashboard._json_bytes(liveness))
+
+    row = dashboard.build_projection(root, "clerk")["data"]["directions"][0]
+
+    assert row["lifecycle"] == lifecycle
+    assert row["owner_stage"] == "UNKNOWN"
+    assert row["native_task_id"] == "UNKNOWN"
+    assert row["native_task_status"] == "UNOBSERVED"
+    assert row["delivery_state"] == "UNOBSERVED"
     assert row["defect"] is None
 
 

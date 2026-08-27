@@ -5,12 +5,13 @@ description: Use when the HMASD Workflow-Clerk handles an incoming task message,
 
 # HMASD Operations Manual
 
-Read `.codex/prompts/hmasd-workflow-clerk.md` completely. That prompt is the
-topology, routing, and recovery authority.
+`docs/project/WORKFLOW_PROTOCOL.md` is the sole topology, routing, state, and
+recovery authority. Read sections 1.1, 2, 3.1-3.3, 4.2-4.5, 5-7, and 12, plus
+`.codex/prompts/hmasd-workflow-clerk.md`.
 
-At ingress, run `scripts/hmasd_session_envelope.py read-message --help`, then
-classify every exact native one-line input separately. For a validated
-`REANCHOR`, run `scripts/hmasd_control_release.py verify --help` and verify the
-expected release. Execute the prompt-selected operation. Before each outbound
-subcommand, run its `--help`, prepare only the body JSON, and send exactly
-`output.message` to `output.recipient_thread_id`.
+Run `scripts/hmasd_session_envelope.py --help` and the applicable subcommand
+`--help`. Use `read-message` for each exact native line. For retry handling,
+run `failure-history --help` and use ordered validated RETURN locators to check
+cumulative same-fingerprint history and eligibility. Use the applicable
+`scripts/hmasd_control_release.py inspect/verify --help` for release control.
+Perform the protocol section 6 bounded final drain before yielding.

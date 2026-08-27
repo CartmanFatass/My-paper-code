@@ -5,10 +5,7 @@ description: Use when the top-level HMASD Portfolio task receives a bounded cros
 
 # HMASD Portfolio Task
 
-Read `.codex/prompts/hmasd-portfolio.md` completely before acting. Use
-`hmasd-slice-interface` for the exact v2 intake.
-
-After writing the accepted Portfolio state, run
-`scripts/hmasd_session_envelope.py portfolio-return --help`. Prepare only the
-body JSON, run the CLI, then call `send_message_to_thread` once with
-`output.recipient_thread_id` and exactly the one line in `output.message`.
+Read `.codex/prompts/hmasd-portfolio.md` completely before acting. It identifies
+the Portfolio-owned decision, required `WORKFLOW_PROTOCOL.md` sections, and CLI
+help for this turn. Use `hmasd-slice-interface` for the exact v2 intake and
+correlated Portfolio return.

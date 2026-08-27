@@ -67,7 +67,9 @@ def test_inspect_includes_dashboard_portfolio_and_real_schema_but_not_scientific
     run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
     run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
     expected = [
+        ".agents/skills/code-review/SKILL.md",
         "scripts/schemas/hmasd_portfolio_registry.schema.json",
+        "tests/hmasd_code_review_scope_test.py",
         "tests/hmasd_dashboard_test.py",
         "tests/hmasd_portfolio_decision_v2_test.py",
     ]

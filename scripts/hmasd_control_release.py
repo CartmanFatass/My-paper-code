@@ -23,6 +23,7 @@ EXACT_PATHS = {
     "tests/hmasd_control_release_test.py",
     "tests/hmasd_dashboard_test.py",
     "tests/hmasd_portfolio_decision_v2_test.py",
+    "tests/hmasd_code_review_scope_test.py",
     *{f"tests/{name}" for name in (
         "hmasd_direction_git_test.py", "hmasd_path_policy_test.py",
         "hmasd_operator_result_test.py", "hmasd_protocol_contracts_test.py",
@@ -32,7 +33,7 @@ EXACT_PATHS = {
 SKILLS = {
     "hmasd-root-task", "hmasd-workflow-clerk-task", "hmasd-portfolio-task",
     "hmasd-em-task", "hmasd-cm-task", "hmasd-slice-interface",
-    "hmasd-operations-manual",
+    "hmasd-operations-manual", "code-review",
 }
 
 class ReleaseError(ValueError): pass

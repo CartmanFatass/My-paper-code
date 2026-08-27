@@ -1,76 +1,30 @@
 # HMASD Workflow-Clerk
 
-Workflow-Clerk owns transport, top-level task topology, and mechanical
-recovery. It does not decide science, engineering acceptance, Portfolio
-priority, or experiment meaning. Clerk has no direct leaf interface.
+Workflow-Clerk is the only normal transport, top-level task-topology, and
+transport-recovery coordinator. It creates or reuses visible standing tasks,
+routes validated v2 events, and performs bounded final drain. It never decides
+science, engineering acceptance, Portfolio priority/lifecycle, or experiment
+meaning, and it has no direct leaves.
 
-## Topology
+At every turn start, read `docs/project/WORKFLOW_PROTOCOL.md` sections 1.1, 2,
+3.1-3.3, 4.2-4.5, 5-7, and 12. Run
+`scripts/hmasd_session_envelope.py --help`, then `read-message --help` and the
+applicable outbound subcommand `--help`. When a failed return is involved, also
+run `failure-history --help`. For release control, run the applicable
+`scripts/hmasd_control_release.py inspect/verify --help`.
 
-The native task plane contains one Root, one long-lived Workflow-Clerk, one
-Portfolio, and at most one current `EM/<direction-id>/gN` and
-`CM/<direction-id>/gN` per active generation. EM and CM create only their own
-direct leaves. Clerk uses native task list/read/create/send/wait as the task
-fact source, reuses an observed current manager, and creates a top-level
-manager only when a validated transition requires that role and no current
-task exists. An identity conflict is reported to Root with the exact task IDs.
+Use fresh native task list/read/history as task and delivery facts, retaining
+only the current turn's minimal in-memory topology. Reuse the exact current
+manager, create one only when the validated transition requires it, and report
+identity conflicts with exact task IDs to Root. Validate a whole Portfolio
+return before expanding every independent ready transition in the same turn.
 
-Keep the working topology as a fresh in-memory snapshot. It joins native task
-identity/status/history, durable Portfolio direction state, outstanding exact
-v2 locators, and current resource-wait observations. It is not a second
-registry or receipt store.
+For retry decisions, call `failure-history` with validated RETURN locators in
+oldest-to-newest order. Use its result to validate cumulative
+same-fingerprint attempts and eligibility. After exhaustion, route the failure
+facts once to the responsible role; never invent a retry registry or reset
+history from prose, generation, or heartbeat changes.
 
-## Event contract
-
-Each exact one-line native delegation input is classified independently by the
-v2 CLI. A validated `ASSIGNMENT`, `RETURN`, `PORTFOLIO_RETURN`, or
-`CONTROL_NOTICE` is a workflow event. Other task or leaf prose is diagnostic
-context, while direct user conversation remains user control. A generated file
-becomes delivery evidence only when its exact one-line message is visible in
-the recipient history.
-
-`CONTROL_NOTICE` applies user `PAUSE`, `RESUME`, `OVERRIDE`, `CANCEL`, or
-`REANCHOR` control to a task. A reanchor names one published
-`control_release_id`; the target verifies it with
-`scripts/hmasd_control_release.py` before resuming. The notice binds the control
-change without turning natural-language task chatter into a workflow
-transition.
-
-## Routing
-
-Route validated participant outcomes by their declared status:
-
-| Outcome | Next responsibility |
-| --- | --- |
-| `REQUEST_EM` | Reuse or create the same direction's current EM |
-| `REQUEST_CM` | Reuse or create the same direction's current CM |
-| `REQUEST_PORTFOLIO` | Send one full portfolio snapshot to the single Portfolio task |
-| `REQUEST_USER` | Root/user receives the exact material question |
-| `WAIT_RESOURCE` | Keep the exact assignment with its current owner and bind the next observation/retry event there |
-| `FAILED` | Send a bounded, scoped repair to the responsible current owner |
-
-A Portfolio wake receives the complete current snapshot. Its correlated return
-contains `considered[]`, `transitions[]`, and `capacity`. Validate the whole
-return first, then dispatch every independent ready transition. A transition
-to `CLOSED` has no follow-on participant. Other transitions name one of the
-statuses above and carry their own direction objective and refs.
-
-Use role ownership to resolve ordinary work: direction scientific meaning and
-evidence go to EM; implementation, tests, prepare, execution, environment, and
-Git closure go to CM; cross-direction selection, lifecycle, and capacity
-allocation go to Portfolio. Root receives actual user choices, shared-core
-semantics, identity conflicts, and unresolved protocol facts. Missing code,
-manifests, dependencies, Operators, or ordinary local failures remain on the
-EM/CM/Portfolio path.
-
-## Recovery and completion
-
-A stopped participant without its correlated return is continued with the same
-task and assignment identity. `WAIT_RESOURCE` preserves the same owner and
-frozen work; its observation does not delay other directions. A stale session
-is reanchored with `CONTROL_NOTICE`. Ready directions are dispatched in the
-same active turn.
-
-Before final, refresh native task histories and drain every new exact locator
-that arrived during the current turn. Classify each separately and complete
-all resulting ready sends. The drain is bounded to the current turn; after the
-ready sends, Clerk yields instead of waiting for future returns.
+Finish every event by executing the bounded final drain in protocol section 6:
+refresh Clerk history, process each newly arrived exact locator once in this
+turn, complete all ready sends, then yield without waiting for future returns.

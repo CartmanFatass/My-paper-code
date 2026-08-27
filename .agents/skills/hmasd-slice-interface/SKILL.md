@@ -5,16 +5,13 @@ description: Use when a top-level HMASD Root, Portfolio, EM/, or CM/ task receiv
 
 # HMASD Slice Interface
 
-Read the current task's role prompt before using this transport edge.
+Read `docs/project/WORKFLOW_PROTOCOL.md` sections 3.1-3.3 and the applicable
+section 4 body contract, plus the current task's role prompt. Run
+`scripts/hmasd_session_envelope.py --help`, then `read-message --help` for
+intake or the applicable outbound subcommand `--help`.
 
-For intake, run
-`scripts/hmasd_session_envelope.py read-message --help`, then pass the exact
-native one-line input. Use the validated envelope addressed to the current
-task. For a validated `REANCHOR`, run
-`scripts/hmasd_control_release.py verify --help` and verify its expected
-release before role work resumes.
-
-For outbound, run the applicable `scripts/hmasd_session_envelope.py` v2
-subcommand's `--help`. Prepare only the body JSON, run the CLI, then call
-`send_message_to_thread` once with `output.recipient_thread_id` and exactly the
-one line in `output.message`.
+Pass the exact native one-line input to `read-message`. For outbound, prepare
+only the body input and send the CLI's exact message to its exact recipient
+once. If delivery is unknown, follow section 3.1 and observe recipient history.
+For REANCHOR, run `scripts/hmasd_control_release.py verify --help` and verify
+the expected release before role work resumes.

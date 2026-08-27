@@ -120,18 +120,25 @@ canonical envelope 固定包含并由 script 生成/复制：
 - sender/recipient identity 与 native thread ID
 - `kind`
 - `reply_to`
-- `git_facts`
 - body 与 body SHA-256
 
-`control_release_id` 是当前 committed control-path blob set 的 content digest；metadata
-同时记录 HEAD、origin/main、branch、dirty control paths 与 `publishable`。只有 shared
+`control_release` 不是 envelope script 的 Git observation。调用者必须先用
+`scripts/hmasd_control_release.py inspect` 生成 exact JSON record，再把该 record 显式交给
+envelope CLI；envelope 只校验/复制该 record，不运行 Git，也不调用 release inspector。
+record 固定且仅含 `control_release_id, protocol_epoch, head, origin_main, branch,
+control_paths, dirty_control_paths, publishable, observed_at`。`control_release_id` 是当前
+committed control-path blob set 的 content digest；metadata 同时记录 HEAD、origin/main、
+branch、dirty control paths 与 `publishable`。只有 shared
 `main` 的 HEAD 已发布到 origin/main 且 control paths clean 时，该 release 才可用于新
-assignment/re-anchor；dirty working tree 或单独一个 Git commit ID 都不能冒充 release。
+ASSIGNMENT、initiating CONTROL_NOTICE 或 REANCHOR；dirty working tree 或单独一个 Git
+commit ID 都不能冒充 release。
 `scripts/hmasd_control_release.py inspect/verify` 是该事实的唯一机械生成/校验 seam；它
 不批准用户行为，也不决定 lifecycle/owner。
 RETURN 与 PORTFOLIO_RETURN 必须把 `reply_to` 绑定到触发它的 ASSIGNMENT；
-CONTROL_NOTICE 绑定被控制的 message/notice（没有时显式 null）。script 校验 direction、
-反向 endpoints、reply chain、body hash 与 changed-path containment；不验证 Codex 本身。
+CONTROL_NOTICE 绑定被控制的 message/notice（没有时显式 null）。RETURN 与
+PORTFOLIO_RETURN byte-semantically 复制 triggering ASSIGNMENT 的 release；Clerk relay 的
+CONTROL_NOTICE 同样复制 initiating notice 的 release。script 校验 direction、反向
+endpoints、reply chain、body hash 与 changed-path containment；不验证 Codex 本身。
 
 header 的 `next` 由 kind/body 机械派生，LLM 不填写：
 
@@ -192,6 +199,8 @@ RETURN body 固定包含：
 - `artifact_refs`
 - `next_objective`
 - `failure`
+- `wait_resource`
+- `git_closure`
 
 `status` 只能是以下六个 exact token：
 
@@ -206,11 +215,15 @@ RETURN body 固定包含：
 `next_objective`；`failure` 必须为空。`REQUEST_USER` 必须提供 exact material
 question/Effect，而不是模糊批准请求。
 
-`WAIT_RESOURCE` 保持 sender 为 standing owner，必须提供 frozen resource fingerprint、
-exact retry operation/command、retry condition、最早 retry time、run/direction identity
-和唯一 heartbeat binding。这些 facts 由 `next_objective`、summary 与 hash-bound
-`artifact_refs` 指向的 retry authority 完整表达；它不创建 next manager 或 Operator，
-且 `failure` 必须为空。
+`WAIT_RESOURCE` 保持 sender 为 standing owner，且 `wait_resource` 固定且仅含
+`resource_fingerprint, frozen_command_or_operation, immutable_refs, retry_condition,
+earliest_retry_at, direction_id, run_id, heartbeat`。frozen value 必须是 exact argv command
+或 immutable operation identity；`immutable_refs` 是 path+SHA refs；heartbeat 固定含唯一
+`binding_id` 和返回同一 manager native task 的 `target_thread_id`。这些字段机械表达
+resource fingerprint、retry condition、最早 retry time、run/direction identity 与唯一
+heartbeat binding；它不创建 next manager 或 Operator，且 `failure` 必须为空。
+`REQUEST_*`、`FAILED` 或其他非 wait return 的 `wait_resource` 必须为 null，不能把 wait
+facts 藏进 summary/next_objective。
 
 `FAILED` 必须提供 failure；当 `responsible_role` 可路由时，`next_objective` 给出 bounded
 recovery outcome。failure 固定且仅含以下字段：
@@ -234,9 +247,18 @@ attempt；不得通过改写 prose 规避计数。相同 fingerprint 只有在 `
 defect。外部 Effect 的 UNKNOWN code 必须
 `retryable=false`、observe-only，任何 retry budget 都不授权 resend。
 
-script 检查 `changed_paths` 全部位于原 ASSIGNMENT `owned_paths`。有 Git-visible 改动的
-正常责任 session 还必须在 summary 报告 branch、full SHA、remote/ref 与 push result；
-无改动明确 `Git: no changes`。
+script 检查 `changed_paths` 全部位于原 ASSIGNMENT `owned_paths`，并只校验调用者提供的
+structured `git_closure`，不运行 Git、不解析 summary。`changed_paths=[]` 时 closure 必须
+exact 为 `{kind: NO_CHANGES}`；非空时必须 exact 为 `{kind: PUBLISHED, branch,
+commit_sha, remote, ref, push_outcome: SUCCEEDED}`，其中 commit SHA 是 full Git SHA。
+closure 由 `scripts/hmasd_direction_git.py` 在 envelope 外生成。
+
+direction Git CLI 不读取或解析 session envelope；调用者给它一个冻结的 Git-specific
+input JSON，固定且仅含 `schema_version, assignment_message_id, assignment_locator,
+direction_id, recipient_identity, workspace_mode, owned_paths, commit_subject`。它仍只 stage
+exact requested owned paths；push 穿过 external Effect boundary 后，失败或未知只允许
+`observe-push`，不得 resend。`no-changes` 对全部 frozen owned paths 作 observation 并仅在
+确实没有 Git-visible change 时产生 exact `NO_CHANGES` closure。
 
 ### 4.3 PORTFOLIO_RETURN
 
@@ -300,8 +322,10 @@ python scripts/hmasd_state.py portfolio-apply ...
 ```
 
 `portfolio-apply` decision 固定携带 `expected_registry_revision`、
-`expected_registry_sha256`（CAS 当前 registry bytes）与 `snapshot_digest`（全局 snapshot
-provenance），并在一个 logical transaction 中：
+`expected_registry_sha256`（CAS 当前 registry bytes）、`proposed_candidates`（exact
+`[{direction_id}]`）与 `snapshot_digest`（全局 snapshot provenance）。snapshot digest
+绑定 sorted proposed direction identities，因此 declined proposal 即使没有 transition，
+也仍是本次 considered input 的可验证部分。decision 在一个 logical transaction 中：
 
 1. 校验 direction ID、path、abbreviation、logical identity、依赖与 capacity 唯一性；
 2. 写 decision authority；
@@ -327,7 +351,11 @@ direction 创建 task 或 send；`REGISTERED -> ACTIVE` 成功后必须在同一
 - `REANCHOR`
 
 body 固定包含 `action`、`reason`、`target_identity` 与 `scope`；`scope` 标明
-direction、authoritative provenance 和被控制的 message/assignment。REANCHOR 的 scope
+direction、authoritative provenance 和被控制的 message/assignment；至少包含 exact
+`direction_id` 与 `affected_locator`（没有 affected message 时显式 null）。envelope 的
+`reply_to` 必须等于 affected locator 中的 message ID。initiating notice 只能由 participant
+发给 Clerk；Clerk relay 必须 reply to 该 initiating notice、复制 action/target/release，并
+发给 exact target。任何 direct participant peer edge 非法。REANCHOR 的 scope
 必须给 `expected_control_release_id`。PAUSE/CANCEL 立即停止新的 launch/send，但不能假装取消已经发生的
 外部 Effect；未知 commitment 继续 observe 到可判定状态。OVERRIDE 必须给 exact replacement
 objective/Effect boundary。RESUME 必须关联原 pause/cancel facts。
@@ -414,6 +442,12 @@ recovery 只修 transport/topology，不重做 domain decision：
 - 同 failure fingerprint 只能沿 validated native correlation 把 attempt 增到
   `max_attempts<=3`。新 prose、task generation 或 heartbeat 不重置计数；material inputs
   真正改变才形成新 fingerprint。
+
+Clerk 可把本次从 native history 观察到的、按 oldest-to-newest 排列的 correlated FAILED
+RETURN locators 交给纯函数式 `hmasd_session_envelope.py failure-history --return ...`。
+validator 要求 attempt 恰为 `1..N`、每个 locator/message 恰出现一次、fingerprint 的
+immutable facts 与 `max_attempts` 稳定，并报告 retry eligibility/exhaustion；它不持久化
+registry、cursor 或第二状态机。
 
 scripts 可以纯函数式生成 schema/correlation/recovery action，但不得创建、等待、归档
 task，不得解释 direction prose，不得维护 retry FSM 或权限状态。
@@ -524,7 +558,8 @@ protocol epoch 变化是 session identity boundary，不是普通 release update
 3. 创建新的 clean Workflow-Clerk 与 Portfolio top-level tasks；不得 fork 旧 task，因为
    fork 会复制 conflicting mandate/history。
 4. EM/CM 在下一次成为 owner 时创建新 epoch/new generation。只迁移 durable direction
-   authority、artifact/effect refs、failure fingerprint/attempt 和 Git facts；不迁移本地
+   authority、artifact/effect refs、failure fingerprint/attempt 和 structured Git closure
+   facts；不迁移本地
    task cache、raw history reconstruction 或旧 outstanding locator。
 5. 新 Clerk 从 native list/read 建 topology，Portfolio 用 `portfolio-apply` 对 current
    registry 作一次 global reconciliation，并为每个 ACTIVE direction产生明确 next event。

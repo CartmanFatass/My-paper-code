@@ -107,6 +107,10 @@ FAILED`。科研、工程或实验 interpretation 完成后必须明确下一责
   `next_role` 与 `next_objective`；
 - `capacity`：本次决策前后预算、分配、保留量与 opportunity-cost 解释。
 
+Portfolio apply decision 另固定携带 `proposed_candidates:[{direction_id}]`；
+`snapshot_digest` 绑定 sorted proposed identities，使 declined proposal 即使没有 transition
+也不会从本次 global input provenance 中消失。
+
 Clerk 校验完整 global result 后逐项执行 transport，不压缩、不重做比较，也不把
 一个方向的 failure 删除其他 ready transitions。v1 的 direction-local action list
 不再是正常路径。Portfolio/apply failure 仍用 PORTFOLIO_RETURN，并在完整三块之外携带
@@ -125,11 +129,16 @@ max_attempts, summary`。同一 immutable fingerprint 从 attempt 1 开始，
 `max_attempts` 不得超过 3；达到上限后不得靠改写 prose 或 fingerprint 继续重试。
 外部 commitment 为 UNKNOWN 时仍只 observe，绝不因重试预算而 resend。
 
-`WAIT_RESOURCE` 保持原 manager 为 owner，冻结 estimate、parameters、command、code
-SHA 与 retry condition；同一 direction/run 只有一个 heartbeat，且 heartbeat 回到该
-manager。资源恢复前不得创建 Operator。
+`WAIT_RESOURCE` 保持原 manager 为 owner，并在 RETURN 的 exact structured
+`wait_resource` 中冻结 resource fingerprint、command/operation、hash-bound immutable
+refs、retry condition、最早 retry time、direction/run identity 与唯一 heartbeat binding；
+同一 direction/run 只有一个 heartbeat，且 heartbeat 回到该 manager。非 wait return 的
+该字段必须为 null。资源恢复前不得创建 Operator。
 
-每个 envelope 固定携带 `protocol_epoch` 与 `control_release`。同一 protocol epoch 内
+每个 envelope 固定携带 `protocol_epoch` 与 external control-release inspector 生成的
+exact `control_release` record；envelope 不运行 Git。新 ASSIGNMENT/initiating
+CONTROL_NOTICE 必须使用 publishable release，RETURN/PORTFOLIO_RETURN 必须复制 triggering
+assignment release。同一 protocol epoch 内
 的新 release 只能在 turn boundary 通过 `CONTROL_NOTICE REANCHOR` 更新 task 的 expected
 release；这不改变 lifecycle。protocol epoch 改变时不得 re-anchor 或 fork 旧 manager，
 必须创建新的 clean manager generation，并只迁移 durable authority/evidence。
@@ -140,6 +149,15 @@ release；这不改变 lifecycle。protocol epoch 改变时不得 re-anchor 或 
 assignment 明确指定 separate worktree 时才使用方向 branch。方向 owner 只 stage/
 commit/push exact owned paths，不能带入其他 session 的 dirty files；共享 index 的
 mutation 必须串行，不能保证时使用明确 worktree。
+
+RETURN 的 `git_closure` 是 envelope 外部 Git seam 生成的 structured record：空
+`changed_paths` 只接受 exact `NO_CHANGES`；非空只接受 branch、full SHA、remote/ref 与
+successful push outcome 完整的 `PUBLISHED`。direction Git 只接受冻结的 Git-specific
+input，不读取 session envelope；unknown push 仍只 observe，绝不 resend。
+
+同 fingerprint 的 retry history 由 Clerk 提供 native history 中 oldest-to-newest 的
+correlated RETURN locators，stateless validator 机械要求 attempts `1..N` exactly once、
+stable max_attempts，并报告 eligibility/exhaustion；不得为此创建 registry 或第二 FSM。
 
 有 Git-visible 修改的正常 top-level owner 在 RETURN 前完成自己的 Git 收尾并报告
 branch、完整 SHA、remote/ref 与 push 结果；leaf 和 Root 不代做普通方向收尾。

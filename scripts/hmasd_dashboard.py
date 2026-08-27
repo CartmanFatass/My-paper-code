@@ -1068,11 +1068,8 @@ def _observation_stage(item: Mapping[str, Any], lifecycle: str) -> tuple[str, st
             if not isinstance(defect, str) and stage == "TRANSPORT_GAP":
                 defect = "TRANSPORT_GAP"
             return normalized, defect if isinstance(defect, str) else None
-    if lifecycle in {"CLOSED", "REGISTERED"}:
-        return "TERMINAL", None
-    # An absent observation is a provenance gap, not evidence of an undelivered
-    # message.  In particular, do not manufacture TRANSPORT_GAP here.
-    return "PROVISIONING", "PROVISIONING_GAP"
+    # An absent observation is a provenance gap, not an owner or delivery fact.
+    return "UNKNOWN", None
 
 
 def _state_revision(
@@ -1181,7 +1178,11 @@ def _build_clerk(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str,
         registry_seen = (research or {}).get("registry_revision_seen")
         if isinstance(registry_seen, int) and registry_doc.revision is not None and registry_seen > registry_doc.revision:
             stage, defect = "DEFECT", "STATE_AHEAD_OF_RETURN"
-        observed_inflight = stage != "TERMINAL" or assignment_id != "UNOBSERVED" or return_id != "UNOBSERVED"
+        observed_inflight = bool(item) and (
+            stage not in {"TERMINAL", "UNKNOWN"}
+            or assignment_id not in {"UNKNOWN", "UNOBSERVED"}
+            or return_id not in {"UNKNOWN", "UNOBSERVED"}
+        )
         if lifecycle == "CLOSED" and observed_inflight:
             stage, defect = "DEFECT", "CLOSED_WITH_INFLIGHT"
         row_observed_at = _observation_text(

@@ -21,6 +21,17 @@ def _write(path: Path, value: dict) -> None:
     path.write_bytes(_bytes(value))
 
 
+def _snapshot_digest(registry_bytes: bytes, proposed_direction_ids: list[str]) -> str:
+    snapshot = {
+        "registry_sha256": hashlib.sha256(registry_bytes).hexdigest(),
+        "proposed_candidates": [
+            {"direction_id": direction_id}
+            for direction_id in sorted(proposed_direction_ids)
+        ],
+    }
+    return hashlib.sha256(_bytes(snapshot)).hexdigest()
+
+
 def _run(repo_root: Path, registry: Path, decision: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [
@@ -91,7 +102,8 @@ def _decision(registry_bytes: bytes, evidence_sha256: str) -> dict:
         "summary": "Keep alpha active and activate beta for scientific definition.",
         "expected_registry_revision": 7,
         "expected_registry_sha256": hashlib.sha256(registry_bytes).hexdigest(),
-        "snapshot_digest": "a" * 64,
+        "snapshot_digest": _snapshot_digest(registry_bytes, ["beta"]),
+        "proposed_candidates": [{"direction_id": "beta"}],
         "considered": [
             {
                 "direction_id": "alpha",
@@ -145,6 +157,67 @@ def _decision(registry_bytes: bytes, evidence_sha256: str) -> dict:
     }
 
 
+def test_portfolio_apply_records_a_declined_proposal_without_registering_it(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    portfolio = repo_root / "docs/research/portfolio/PORTFOLIO.md"
+    portfolio.parent.mkdir(parents=True)
+    portfolio.write_text("# Test portfolio\n", encoding="utf-8", newline="\n")
+    registry = repo_root / "docs/research/portfolio/workflow/registry.json"
+    initial = _registry(hashlib.sha256(portfolio.read_bytes()).hexdigest())
+    _write(registry, initial)
+    registry_before = registry.read_bytes()
+    evidence = repo_root / "docs/research/evidence/snapshot-source.md"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("# Stable snapshot evidence\n", encoding="utf-8", newline="\n")
+    evidence_ref = {
+        "path": "docs/research/evidence/snapshot-source.md",
+        "sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(),
+    }
+    decision = _decision(registry_before, evidence_ref["sha256"])
+    decision.update(
+        decision_id="decline-gamma-20260827",
+        summary="Keep alpha active and decline the proposed gamma candidate.",
+        snapshot_digest=_snapshot_digest(registry_before, ["gamma"]),
+        proposed_candidates=[{"direction_id": "gamma"}],
+        considered=[
+            decision["considered"][0],
+            {
+                "direction_id": "gamma",
+                "disposition": "DECLINE",
+                "priority": 2,
+                "summary": "Gamma does not justify scarce scientific capacity.",
+                "evidence_refs": [evidence_ref],
+            },
+        ],
+        transitions=[],
+        capacity={
+            "active_limit": 1,
+            "active_before": 1,
+            "active_after": 1,
+            "active_direction_ids": ["alpha"],
+            "resource_constraints": ["No capacity remains for gamma."],
+            "unused_capacity_reason": None,
+        },
+    )
+    decision_path = tmp_path / "declined.json"
+    _write(decision_path, decision)
+
+    result = _run(repo_root, registry, decision_path)
+
+    assert result.returncode == 0, result.stderr
+    updated = json.loads(registry.read_text(encoding="utf-8"))
+    assert updated["revision"] == 8
+    assert [item["id"] for item in updated["directions"]] == ["alpha"]
+    assert not (repo_root / "docs/research/candidates/gamma").exists()
+    authority = repo_root / "docs/research/portfolio/decisions/decline-gamma-20260827.json"
+    assert authority.read_bytes() == _bytes(decision)
+    portfolio_text = portfolio.read_text(encoding="utf-8")
+    assert "Considered `gamma` — priority `2`, disposition `DECLINE`" in portfolio_text
+    assert "- No lifecycle transition." in portfolio_text
+
+
 def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) -> None:
     repo_root = tmp_path / "repo"
     portfolio = repo_root / "docs/research/portfolio/PORTFOLIO.md"
@@ -174,8 +247,34 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
     incomplete["considered"] = [valid["considered"][1]]
     invalid_cases.append(("coverage", incomplete, "does not cover snapshot directions"))
     outside = copy.deepcopy(valid)
-    outside["considered"] = [valid["considered"][0]]
+    outside["transitions"][0]["direction_id"] = "gamma"
     invalid_cases.append(("subset", outside, "transition direction is not considered"))
+    undefined = copy.deepcopy(valid)
+    undefined["considered"].append(
+        {
+            "direction_id": "alpah",
+            "disposition": "KEEP_ACTIVE",
+            "priority": 3,
+            "summary": "A typo must not become an implicit proposal.",
+            "evidence_refs": valid["considered"][0]["evidence_refs"],
+        }
+    )
+    invalid_cases.append(("undefined-typo", undefined, "considered contains undefined directions"))
+    changed_snapshot_cohort = copy.deepcopy(valid)
+    changed_snapshot_cohort["proposed_candidates"].append({"direction_id": "gamma"})
+    changed_snapshot_cohort["considered"].append(
+        {
+            "direction_id": "gamma",
+            "disposition": "DECLINE",
+            "priority": 3,
+            "summary": "Gamma is part of a different frozen cohort.",
+            "evidence_refs": valid["considered"][0]["evidence_refs"],
+        }
+    )
+    invalid_cases.append(("snapshot-cohort", changed_snapshot_cohort, "snapshot_digest mismatch"))
+    nonexact_proposal = copy.deepcopy(valid)
+    nonexact_proposal["proposed_candidates"][0]["extra"] = "not in the contract"
+    invalid_cases.append(("proposal-shape", nonexact_proposal, "must contain exactly direction_id"))
     bad_evidence = copy.deepcopy(valid)
     bad_evidence["considered"][0]["evidence_refs"][0]["sha256"] = "f" * 64
     invalid_cases.append(("evidence", bad_evidence, "evidence_refs[0].sha256 does not match"))
