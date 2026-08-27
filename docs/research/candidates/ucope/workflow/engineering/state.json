@@ -1,16 +1,25 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "5496c88f5a35736e8d660da92caa1e603a534815",
-  "blockers": [],
-  "candidate_sha": "37909a5e948af3831c7b3969de8d96d73cd5f14d",
+  "base_sha": "dabddba7c0baec104c5c4bc90e4a9ce931cd9135",
+  "blockers": [
+    {
+      "code": "PREPARE_CODE_SHA_HEAD_MISMATCH",
+      "observed_refs": [
+        {
+          "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_HEAD_REFUSAL_19267f74.json",
+          "sha256": "7ee9aff3e2aef97722ff2976472d10e4a836569beba0158a5e79ea5e5c04f350"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_HEAD_REFUSAL_19267f74.json",
+        "sha256": "7ee9aff3e2aef97722ff2976472d10e4a836569beba0158a5e79ea5e5c04f350"
+      }
+    }
+  ],
+  "candidate_sha": "dabddba7c0baec104c5c4bc90e4a9ce931cd9135",
   "changed_paths": [
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/empirical_transaction.py",
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_contract.py",
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_engine.py",
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_manifest.py",
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_validation.py",
-    "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_production.py"
+    "docs/research/candidates/ucope/workflow/engineering/state.json"
   ],
   "direction_id": "ucope",
   "integration": {
@@ -18,18 +27,18 @@
     "target_branch": "main",
     "target_sha_seen": "b4da70b2f8636c855cebac23c9865bab6cffbb8e"
   },
-  "last_checkpoint_sha": "94e2922abef8d700c787ef5e05d87a5318237aee0e2dc214cdf768d03785cbf7",
+  "last_checkpoint_sha": "7ee9aff3e2aef97722ff2976472d10e4a836569beba0158a5e79ea5e5c04f350",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_RUN_ID_PARAMETERIZATION_TECHNICAL_ACCEPTANCE_a2d42cef.json",
-        "sha256": "94e2922abef8d700c787ef5e05d87a5318237aee0e2dc214cdf768d03785cbf7"
+        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_HEAD_REFUSAL_19267f74.json",
+        "sha256": "7ee9aff3e2aef97722ff2976472d10e4a836569beba0158a5e79ea5e5c04f350"
       }
     ],
-    "kind": "RETURN_CLERK_REQUEST_REPLACEMENT_PREPARE"
+    "kind": "RETURN_CLERK_PREPARE_HEAD_REFUSED"
   },
-  "phase": "COMPLETE",
-  "revision": 11,
+  "phase": "FAILED",
+  "revision": 12,
   "run_refs": [
     {
       "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-01/manifest.json",
@@ -50,27 +59,11 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-27T15:39:34.163438Z",
+  "updated_at": "2026-08-27T15:45:11.364474Z",
   "verification_refs": [
     {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_RUN_ID_PARAMETERIZATION_TECHNICAL_ACCEPTANCE_a2d42cef.json",
-      "sha256": "94e2922abef8d700c787ef5e05d87a5318237aee0e2dc214cdf768d03785cbf7"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_RUN_ID_PARAMETERIZATION_REVIEW_a2d42cef.json",
-      "sha256": "f93728ea3e2495dd56de3c0c64ea3d6c78cfd7d2d5fb13cdc35403708ef3e832"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_RUN_ID_PARAMETERIZATION_SANCHECK_a2d42cef.json",
-      "sha256": "e7edef3a426fa4485b863ee639e475dd56d73d2cceb677d03e2f218cc7961b07"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/a2-runbinding-production-final2-junit.xml",
-      "sha256": "3e897c871bdb065e5bb3484bda8c0051259566097fafdd9b93823d3d57ca8821"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/a2-runbinding-executor-final2-junit.xml",
-      "sha256": "db944a0773eb52442556391a752df4d0b0860a56c27204a015adbecf5d48a23b"
+      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_HEAD_REFUSAL_19267f74.json",
+      "sha256": "7ee9aff3e2aef97722ff2976472d10e4a836569beba0158a5e79ea5e5c04f350"
     }
   ],
   "waiting_on": [],
