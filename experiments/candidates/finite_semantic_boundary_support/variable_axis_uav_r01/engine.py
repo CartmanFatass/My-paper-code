@@ -557,135 +557,219 @@ def _world(
     }
 
 
-def _host_activity_proof(
-    *,
-    seed: int,
-    phase: str,
-    M: int,
-    episode: int,
-    window: int,
-    pair_index: int,
-    pairs: Sequence[tuple[int, int]],
-    world: Mapping[str, int],
-) -> dict[str, Any]:
-    publisher, subscriber = pairs[pair_index]
-    active_sets = _active_lineages(seed, phase, M, episode)
-    active = active_sets[window]
-    state_before = sum(subscriber in active_sets[index] for index in range(window))
-    joining = window == 0 or subscriber not in active_sets[window - 1]
-    join_epoch = sum(
-        index == 0 or subscriber not in active_sets[index - 1]
-        for index in range(window + 1)
-        if subscriber in active_sets[index]
-    ) - 1
-    token = hashlib.sha256(
-        address(
-            seed,
-            "churn",
-            (phase, M, episode, subscriber, "slot-token", join_epoch),
-            0,
-        )
-    ).hexdigest()
-    previous_token = None
-    if join_epoch > 0:
-        previous_token = hashlib.sha256(
+class SharedHostReceiptBoundary:
+    """Shared per-episode host state, registry, and resource receipt boundary."""
+
+    def __init__(self, *, seed: int, phase: str, M: int, episode: int) -> None:
+        self.seed = seed
+        self.phase = phase
+        self.M = M
+        self.episode = episode
+        self._active_sets = _active_lineages(seed, phase, M, episode)
+        self._state = {lineage: 0 for lineage in range(M)}
+        self._tokens: dict[int, str] = {}
+        self._join_epochs = {lineage: -1 for lineage in range(M)}
+        self._previous_active: set[int] = set()
+        self._previous_partners: dict[int, int] = {}
+        self._registry: dict[str, str] = {}
+        self._contexts: dict[tuple[int, int], dict[str, Any]] = {}
+        self._opened_windows: list[int] = []
+        self._lookup_count = 0
+
+    @property
+    def next_window(self) -> int:
+        return len(self._opened_windows)
+
+    def _serial(self, window: int, pair_index: int) -> str:
+        return hashlib.sha256(
             address(
-                seed,
-                "churn",
-                (phase, M, episode, subscriber, "slot-token", join_epoch - 1),
+                self.seed,
+                "world",
+                (
+                    self.phase,
+                    self.M,
+                    self.episode,
+                    window,
+                    pair_index,
+                    "carrier-serial",
+                ),
                 0,
             )
         ).hexdigest()
-    previous_partner = None
-    if window > 0 and subscriber in active_sets[window - 1]:
-        for left, right in _window_pairs(seed, phase, M, episode, window - 1):
-            if subscriber in (left, right):
-                previous_partner = right if left == subscriber else left
-                break
-    current_partner = publisher
-    serial = hashlib.sha256(
-        address(
-            seed,
-            "world",
-            (phase, M, episode, window, pair_index, "carrier-serial"),
-            0,
+
+    def _provenance(
+        self, window: int, pair_index: int, world: Mapping[str, int]
+    ) -> str:
+        return hashlib.sha256(
+            json.dumps(
+                {
+                    "phase": self.phase,
+                    "M": self.M,
+                    "episode": self.episode,
+                    "window": window,
+                    "pair_index": pair_index,
+                    "semantic_bit": world["semantic_bit"],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+
+    def open_window(
+        self, window: int, worlds: Sequence[Mapping[str, int]]
+    ) -> None:
+        if window != len(self._opened_windows):
+            raise ValueError("shared host windows must be consumed exactly once in order")
+        pairs = _window_pairs(self.seed, self.phase, self.M, self.episode, window)
+        if len(worlds) != len(pairs):
+            raise ValueError("shared host world panel does not match active pairs")
+        active = set(self._active_sets[window])
+        prior_tokens = dict(self._tokens)
+        for lineage in active - self._previous_active:
+            self._join_epochs[lineage] += 1
+            self._tokens[lineage] = hashlib.sha256(
+                address(
+                    self.seed,
+                    "churn",
+                    (
+                        self.phase,
+                        self.M,
+                        self.episode,
+                        lineage,
+                        "slot-token",
+                        self._join_epochs[lineage],
+                    ),
+                    0,
+                )
+            ).hexdigest()
+        state_before = {lineage: self._state[lineage] for lineage in active}
+        for lineage in active:
+            self._state[lineage] += 1
+        current_partners: dict[int, int] = {}
+        for pair_index, ((publisher, subscriber), world) in enumerate(
+            zip(pairs, worlds)
+        ):
+            current_partners[publisher] = subscriber
+            current_partners[subscriber] = publisher
+            serial = self._serial(window, pair_index)
+            provenance = self._provenance(window, pair_index, world)
+            self._registry[serial] = provenance
+            joining = subscriber not in self._previous_active
+            previous_token = prior_tokens.get(subscriber)
+            self._contexts[(window, pair_index)] = {
+                "publisher": publisher,
+                "subscriber": subscriber,
+                "serial": serial,
+                "provenance": provenance,
+                "state_before": state_before[subscriber],
+                "state_after": self._state[subscriber],
+                "joining": joining,
+                "token": self._tokens[subscriber],
+                "fresh_token": (
+                    not joining
+                    or previous_token is None
+                    or previous_token != self._tokens[subscriber]
+                ),
+                "previous_partner": self._previous_partners.get(subscriber),
+                "current_partner": publisher,
+                "active": active,
+                "decoy_publisher": pairs[(pair_index + 1) % len(pairs)][0],
+                "decoy_next_publisher_match": (
+                    world["decoy_reservation"]
+                    == worlds[(pair_index + 1) % len(worlds)]["relevant_reservation"]
+                ),
+            }
+        self._previous_active = active
+        self._previous_partners = current_partners
+        self._opened_windows.append(window)
+
+    def receipt(
+        self,
+        *,
+        window: int,
+        pair_index: int,
+        world: Mapping[str, int],
+        records: Mapping[int, int],
+        open_slot: int,
+        lane_action: int,
+    ) -> dict[str, Any]:
+        context = self._contexts.get((window, pair_index))
+        if context is None:
+            raise ValueError("shared host window was not opened before service")
+        resource = accepted_receipt(records, open_slot, lane_action)
+        lookup_count_before = self._lookup_count
+        observed_provenance = self._registry.get(str(context["serial"]))
+        self._lookup_count += 1
+        registry_lookup_count = self._lookup_count - lookup_count_before
+        serial_match = observed_provenance == self._provenance(
+            window, pair_index, world
         )
-    ).hexdigest()
-    provenance = hashlib.sha256(
-        json.dumps(
-            {
-                "phase": phase,
-                "M": M,
-                "episode": episode,
-                "window": window,
-                "pair_index": pair_index,
-                "semantic_bit": world["semantic_bit"],
-            },
-            sort_keys=True,
-            separators=(",", ":"),
-        ).encode("utf-8")
-    ).hexdigest()
-    registry = {serial: provenance}
-    observed_provenance = registry.get(serial)
-    decoy_publisher = pairs[(pair_index + 1) % len(pairs)][0]
-    return {
-        "registry_lookup_count": 1,
-        "registry_serial_match": observed_provenance == provenance,
-        "registry_provenance_sha256": str(observed_provenance),
-        "auth_ok": 1,
-        "record_issuance_count": 2,
-        "payload_read_count": 1,
-        "reservation_service_count": 1,
-        "lineage_state_before": state_before,
-        "lineage_state_after": state_before + 1,
-        "state_continuity": True,
-        "joining_or_rejoining": joining,
-        "slot_token_sha256": token,
-        "fresh_slot_token": previous_token is None or token != previous_token,
-        "previous_partner": previous_partner,
-        "current_partner": current_partner,
-        "peer_change_observed": (
-            None if previous_partner is None else previous_partner != current_partner
-        ),
-        "active_mask_sha256": hashlib.sha256(
-            bytes(int(lineage in active) for lineage in range(M))
-        ).hexdigest(),
-        "decoy_publisher": decoy_publisher,
-        "decoy_next_publisher_match": (
-            world["decoy_reservation"]
-            == _world(
-                "AUTHENTIC",
-                seed=seed,
-                phase=phase,
-                M=M,
-                episode=episode,
-                window=window,
-                pair_index=(pair_index + 1) % len(pairs),
-            )["relevant_reservation"]
-        ),
-    }
+        cap = resource["resource_receipt"]
+        return {
+            "registry_lookup_count": registry_lookup_count,
+            "registry_serial_match": serial_match,
+            "registry_provenance_sha256": observed_provenance,
+            "auth_ok": int(resource["accepted"] and serial_match),
+            "record_issuance_count": len(records),
+            "payload_read_count": int(cap["payload_reads"]),
+            "reservation_service_count": int(cap["reservation_services"]),
+            "lineage_state_before": context["state_before"],
+            "lineage_state_after": context["state_after"],
+            "state_continuity": (
+                context["state_after"] == context["state_before"] + 1
+            ),
+            "joining_or_rejoining": context["joining"],
+            "slot_token_sha256": context["token"],
+            "fresh_slot_token": context["fresh_token"],
+            "previous_partner": context["previous_partner"],
+            "current_partner": context["current_partner"],
+            "peer_change_observed": (
+                None
+                if context["previous_partner"] is None
+                else context["previous_partner"] != context["current_partner"]
+            ),
+            "active_mask_sha256": hashlib.sha256(
+                bytes(int(lineage in context["active"]) for lineage in range(self.M))
+            ).hexdigest(),
+            "decoy_publisher": context["decoy_publisher"],
+            "decoy_next_publisher_match": context["decoy_next_publisher_match"],
+            "resource_receipt": resource,
+            "world_semantic_bit": world["semantic_bit"],
+        }
 
 
-def result_blind_host_observability_mirror() -> list[dict[str, Any]]:
+def result_blind_host_observability_mirror(
+    *, host_boundary_factory: Any = SharedHostReceiptBoundary
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for episode in range(8):
+        boundary = host_boundary_factory(
+            seed=1_000_003, phase="RESULT_BLIND", M=6, episode=episode
+        )
         for window in range(5):
             pairs = _window_pairs(1_000_003, "RESULT_BLIND", 6, episode, window)
-            for pair_index in range(len(pairs)):
-                world = _world(
+            worlds = [
+                _world(
                     "AUTHENTIC", seed=1_000_003, phase="RESULT_BLIND", M=6,
                     episode=episode, window=window, pair_index=pair_index,
                 )
+                for pair_index in range(len(pairs))
+            ]
+            boundary.open_window(window, worlds)
+            for pair_index in range(len(pairs)):
+                world = worlds[pair_index]
+                records = {
+                    world["relevant_slot"]: world["relevant_reservation"],
+                    1 - world["relevant_slot"]: world["decoy_reservation"],
+                }
                 rows.append(
-                    _host_activity_proof(
-                        seed=1_000_003,
-                        phase="RESULT_BLIND",
-                        M=6,
-                        episode=episode,
+                    boundary.receipt(
                         window=window,
                         pair_index=pair_index,
-                        pairs=pairs,
                         world=world,
+                        records=records,
+                        open_slot=world["relevant_slot"],
+                        lane_action=world["relevant_reservation"],
                     )
                 )
     return rows
@@ -743,22 +827,37 @@ def _sample_window(
     episode: int,
     window: int,
     branch: str | None,
+    host_boundary: SharedHostReceiptBoundary,
 ) -> tuple[list[ProductionDecision], list[ProductionDecision], list[dict[str, Any]], float]:
     presentation = _PRESENTATION[learner.seed]
     selector_rows: list[ProductionDecision] = []
     controller_rows: list[ProductionDecision] = []
     observations: list[dict[str, Any]] = []
     pairs = _window_pairs(learner.seed, phase, M, episode, window)
-    for pair_index, (publisher, subscriber) in enumerate(pairs):
-        world = _world(
+    worlds = [
+        _world(
             learner.arm,
             seed=learner.seed,
             phase=phase,
             M=M,
             episode=episode,
-            window=window,
+            window=window_index,
             pair_index=pair_index,
         )
+        for window_index in range(host_boundary.next_window, window + 1)
+        for pair_index in range(
+            len(_window_pairs(learner.seed, phase, M, episode, window_index))
+        )
+    ]
+    offset = 0
+    for window_index in range(host_boundary.next_window, window + 1):
+        prior_pairs = _window_pairs(learner.seed, phase, M, episode, window_index)
+        panel = worlds[offset : offset + len(prior_pairs)]
+        host_boundary.open_window(window_index, panel)
+        offset += len(prior_pairs)
+    current_worlds = worlds[-len(pairs) :]
+    for pair_index, (publisher, subscriber) in enumerate(pairs):
+        world = current_worlds[pair_index]
         semantic = world["semantic_bit"]
         if branch == "MASKED":
             semantic = world["evaluation_mask_bit"]
@@ -795,21 +894,19 @@ def _sample_window(
             world["relevant_slot"]: world["relevant_reservation"] ^ presentation["mu"],
             1 - world["relevant_slot"]: world["decoy_reservation"] ^ presentation["mu"],
         }
-        receipt = accepted_receipt(records, open_slot, lane_action)
+        host_proof = host_boundary.receipt(
+            window=window,
+            pair_index=pair_index,
+            world=world,
+            records=records,
+            open_slot=open_slot,
+            lane_action=lane_action,
+        )
+        receipt = host_proof["resource_receipt"]
         if receipt["resource_receipt"] != {"payload_reads": 1, "reservation_services": 1}:
             raise ValueError("registered accepted transaction resource law drifted")
         physical_lane = lane_action ^ presentation["lambda"]
         score = 1 if physical_lane != world["relevant_reservation"] else -1
-        host_proof = _host_activity_proof(
-            seed=learner.seed,
-            phase=phase,
-            M=M,
-            episode=episode,
-            window=window,
-            pair_index=pair_index,
-            pairs=pairs,
-            world=world,
-        )
         selector_rows.append(
             ProductionDecision(open_slot, selector_features, selector_score)
         )
@@ -1014,11 +1111,24 @@ def _train_seed_pair(
             for arm in HOST_ARMS
         }
     schedule = _training_schedule(seed)
+    host_boundaries: dict[tuple[str, int, int], SharedHostReceiptBoundary] = {}
     for schedule_index in range(cursor, len(schedule)):
         M, episode, window = schedule[schedule_index]
+        for arm in HOST_ARMS:
+            key = (arm, M, episode)
+            if key not in host_boundaries:
+                host_boundaries[key] = SharedHostReceiptBoundary(
+                    seed=seed, phase="TRAIN", M=M, episode=episode
+                )
         sampled = {
             arm: _sample_window(
-                learners[arm], phase="TRAIN", M=M, episode=episode, window=window, branch=None
+                learners[arm],
+                phase="TRAIN",
+                M=M,
+                episode=episode,
+                window=window,
+                branch=None,
+                host_boundary=host_boundaries[(arm, M, episode)],
             )
             for arm in HOST_ARMS
         }
@@ -1098,6 +1208,9 @@ def _aggregate_evaluation(
             for branch in _EVALUATION_BRANCHES:
                 for M in _EVALUATION_ENVELOPES:
                     for episode in range(32):
+                        host_boundary = SharedHostReceiptBoundary(
+                            seed=seed, phase="EVALUATION", M=M, episode=episode
+                        )
                         for window in range(5):
                             _selector, _controller, observations, team_return = _sample_window(
                                 learner,
@@ -1106,6 +1219,7 @@ def _aggregate_evaluation(
                                 episode=episode,
                                 window=window,
                                 branch=branch,
+                                host_boundary=host_boundary,
                             )
                             if learner.snapshot_digest() != frozen:
                                 raise ValueError("frozen evaluation changed learner state")
@@ -1358,7 +1472,7 @@ def _first_true_outcome(rows: Sequence[Mapping[str, Any]], controls: Mapping[str
             controller_ok &= weighted(forced_seed_rows, "pair_safe_rate") >= 0.90
     if not controller_ok:
         return "INVALID_OR_INCONCLUSIVE"
-    forced_effect_ok = all(
+    forced_effects = [
         weighted(
             [row for row in rows if row["M"] == M and row["branch"] == "FORCE_RELEVANT"],
             "common_team_return",
@@ -1367,9 +1481,10 @@ def _first_true_outcome(rows: Sequence[Mapping[str, Any]], controls: Mapping[str
             [row for row in rows if row["M"] == M and row["branch"] == "FORCE_DECOY"],
             "common_team_return",
         )
-        >= 0.40
         for M in _EVALUATION_ENVELOPES
-    )
+    ]
+    forced_effect_positive = all(effect > 0 for effect in forced_effects)
+    forced_effect_ok = all(effect >= 0.40 for effect in forced_effects)
     in_support = all(effects[(seed, M)][0] > 0 and effects[(seed, M)][1] > 0 for seed in REGISTERED_SEEDS for M in (6, 8))
     heldout = all(effects[(seed, 10)][0] > 0 and effects[(seed, 10)][1] > 0 for seed in REGISTERED_SEEDS)
     polarity_pass = all(
@@ -1427,6 +1542,7 @@ def _first_true_outcome(rows: Sequence[Mapping[str, Any]], controls: Mapping[str
             ),
             "in_support_both_positive": in_support,
             "heldout_both_positive": heldout,
+            "forced_contrast_positive": forced_effect_positive,
             "forced_contrast_pass": forced_effect_ok,
             "bounded_null": within_bounded_null(mean_effects),
             "positive_thresholds_pass": (
@@ -1448,28 +1564,35 @@ def interpret_first_true(facts: Mapping[str, bool]) -> str:
 
     if not facts["valid"] or not facts["controller_competent"]:
         return "INVALID_OR_INCONCLUSIVE"
-    if (
-        facts["positive_thresholds_pass"]
+    positive_predicates = (
+        facts["primary_selection_all_positive"]
+        and facts["primary_return_all_positive"]
+        and facts["in_support_both_positive"]
+        and facts["heldout_both_positive"]
+        and facts["forced_contrast_pass"]
+        and facts["positive_thresholds_pass"]
         and facts["natural_masked_pass"]
+    )
+    if (
+        positive_predicates
         and (not facts["polarity_geometry_pass"] or not facts["membership_geometry_pass"])
     ):
         return "OPTIMIZATION_GEOMETRY_FALSIFIER"
+    if facts["bounded_null"]:
+        return "BOUNDED_NULL"
     if not facts["primary_selection_all_positive"]:
         return "CARRIER_CREDIT_UNSUPPORTED"
     if not facts["primary_return_all_positive"]:
-        return "SELECTION_TO_COORDINATION_UNSUPPORTED"
+        return (
+            "SELECTION_TO_COORDINATION_UNSUPPORTED"
+            if facts["forced_contrast_positive"]
+            else "RESERVATION_INFORMATION_EDGE_ABSENT"
+        )
     if facts["in_support_both_positive"] and not facts["heldout_both_positive"]:
         return "HELDOUT_ROSTER_TRANSFER_FAILED"
-    if not facts["forced_contrast_pass"]:
+    if not facts["forced_contrast_positive"]:
         return "RESERVATION_INFORMATION_EDGE_ABSENT"
-    if facts["bounded_null"]:
-        return "BOUNDED_NULL"
-    if (
-        facts["positive_thresholds_pass"]
-        and facts["natural_masked_pass"]
-        and facts["polarity_geometry_pass"]
-        and facts["membership_geometry_pass"]
-    ):
+    if positive_predicates and facts["polarity_geometry_pass"] and facts["membership_geometry_pass"]:
         return "POSITIVE_EDGE"
     return "INCONCLUSIVE_REMAINDER"
 

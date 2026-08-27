@@ -27,7 +27,10 @@ def _canonical(value: object) -> bytes:
 def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
+        observe_candidate_blob_hashes,
+        observe_candidate_worktree_blob_oids,
         validate_candidate_source_binding,
+        validate_candidate_worktree_binding,
         validate_operator_runtime_files,
         validate_release_manifest,
     )
@@ -68,13 +71,7 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     assert contract["parameters"]["registered_total_transactions"] == 157_696
     assert contract["resource_estimate"]["workers"] == 1
     assert contract["resource_estimate"]["threads_per_worker"] == 1
-    assert all(
-        ref["sha256"] == hashlib.sha256((REPO / ref["path"]).read_bytes()).hexdigest()
-        for ref in contract["source_test_manifest"]["refs"]
-    )
-    blob_hashes = {
-        ref["path"]: ref["sha256"] for ref in contract["source_test_manifest"]["refs"]
-    }
+    blob_hashes = observe_candidate_blob_hashes(REPO, candidate, contract)
     assert validate_candidate_source_binding(contract, blob_hashes) == {
         "source_test_bytes_equal_candidate": True,
         "ref_count": len(blob_hashes),
@@ -83,6 +80,26 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     with pytest.raises(PermissionError, match="candidate blob"):
         validate_candidate_source_binding(
             contract, {**blob_hashes, changed_path: "0" * 64}
+        )
+    host_ref = next(
+        ref
+        for ref in contract["source_test_manifest"]["refs"]
+        if ref["path"].endswith("/host.py")
+    )
+    host_only_contract = {
+        **contract,
+        "source_test_manifest": {
+            **contract["source_test_manifest"],
+            "refs": [host_ref],
+        },
+    }
+    checkout_oids = observe_candidate_worktree_blob_oids(REPO, host_only_contract)
+    assert validate_candidate_worktree_binding(
+        host_only_contract, checkout_oids
+    ) == {"source_test_checkout_clean": True, "ref_count": 1}
+    with pytest.raises(PermissionError, match="source/test drift"):
+        validate_candidate_worktree_binding(
+            host_only_contract, {host_ref["path"]: "0" * 40}
         )
 
     command = contract["payload_argv"]
@@ -518,7 +535,14 @@ def test_nonregistered_paired_progress_and_terminal_checkpoint_mirror() -> None:
             {"heldout_both_positive": False, "positive_thresholds_pass": False},
             "HELDOUT_ROSTER_TRANSFER_FAILED",
         ),
-        ({"forced_contrast_pass": False, "positive_thresholds_pass": False}, "RESERVATION_INFORMATION_EDGE_ABSENT"),
+        (
+            {
+                "forced_contrast_positive": False,
+                "forced_contrast_pass": False,
+                "positive_thresholds_pass": False,
+            },
+            "RESERVATION_INFORMATION_EDGE_ABSENT",
+        ),
         ({"bounded_null": True, "positive_thresholds_pass": False}, "BOUNDED_NULL"),
         ({}, "POSITIVE_EDGE"),
         ({"positive_thresholds_pass": False}, "INCONCLUSIVE_REMAINDER"),
@@ -538,6 +562,90 @@ def test_first_true_interpretation_worked_fixtures(
         "primary_return_all_positive": True,
         "in_support_both_positive": True,
         "heldout_both_positive": True,
+        "forced_contrast_positive": True,
+        "forced_contrast_pass": True,
+        "bounded_null": False,
+        "positive_thresholds_pass": True,
+        "natural_masked_pass": True,
+        "polarity_geometry_pass": True,
+        "membership_geometry_pass": True,
+    }
+    assert interpret_first_true({**passing, **changes}) == expected
+
+
+@pytest.mark.parametrize(
+    ("changes", "expected"),
+    [
+        (
+            {
+                "primary_return_all_positive": False,
+                "forced_contrast_positive": False,
+                "forced_contrast_pass": False,
+                "positive_thresholds_pass": False,
+            },
+            "RESERVATION_INFORMATION_EDGE_ABSENT",
+        ),
+        (
+            {
+                "primary_return_all_positive": False,
+                "forced_contrast_pass": False,
+                "positive_thresholds_pass": False,
+            },
+            "SELECTION_TO_COORDINATION_UNSUPPORTED",
+        ),
+        (
+            {
+                "primary_selection_all_positive": False,
+                "primary_return_all_positive": False,
+                "forced_contrast_positive": False,
+                "forced_contrast_pass": False,
+                "bounded_null": True,
+                "positive_thresholds_pass": False,
+            },
+            "BOUNDED_NULL",
+        ),
+        (
+            {
+                "primary_selection_all_positive": False,
+                "forced_contrast_positive": False,
+                "forced_contrast_pass": False,
+                "positive_thresholds_pass": False,
+            },
+            "CARRIER_CREDIT_UNSUPPORTED",
+        ),
+        (
+            {
+                "primary_selection_all_positive": False,
+                "in_support_both_positive": False,
+                "polarity_geometry_pass": False,
+            },
+            "CARRIER_CREDIT_UNSUPPORTED",
+        ),
+        (
+            {
+                "primary_return_all_positive": False,
+                "in_support_both_positive": False,
+                "polarity_geometry_pass": False,
+            },
+            "SELECTION_TO_COORDINATION_UNSUPPORTED",
+        ),
+    ],
+)
+def test_first_true_overlaps_localize_the_earliest_supported_mechanism(
+    changes: dict[str, bool], expected: str
+) -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.engine import (
+        interpret_first_true,
+    )
+
+    passing = {
+        "valid": True,
+        "controller_competent": True,
+        "primary_selection_all_positive": True,
+        "primary_return_all_positive": True,
+        "in_support_both_positive": True,
+        "heldout_both_positive": True,
+        "forced_contrast_positive": True,
         "forced_contrast_pass": True,
         "bounded_null": False,
         "positive_thresholds_pass": True,
@@ -668,6 +776,7 @@ def test_activity_marker_requires_complete_paired_window_after_failure_injection
 
 def test_result_blind_host_activity_log_is_observed_not_hardcoded() -> None:
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.engine import (
+        SharedHostReceiptBoundary,
         result_blind_host_observability_mirror,
         validate_host_activity_log_mirror,
     )
@@ -677,10 +786,26 @@ def test_result_blind_host_activity_log_is_observed_not_hardcoded() -> None:
     assert proof["complete"] is True
     assert proof["row_count"] == 104
     assert all(proof["predicates"].values())
-    tampered = [dict(row) for row in rows]
-    tampered[0]["registry_serial_match"] = False
-    with pytest.raises(ValueError, match="activity log"):
-        validate_host_activity_log_mirror(tampered)
+    for fault in (
+        {"registry_serial_match": False, "auth_ok": 0},
+        {"state_continuity": False},
+        {"payload_read_count": 2},
+    ):
+        class FaultBoundary:
+            def __init__(self, **coordinates: object) -> None:
+                self._actual = SharedHostReceiptBoundary(**coordinates)
+
+            def open_window(self, window: int, worlds: object) -> None:
+                self._actual.open_window(window, worlds)
+
+            def receipt(self, **request: object) -> dict[str, object]:
+                return {**self._actual.receipt(**request), **fault}
+
+        fault_rows = result_blind_host_observability_mirror(
+            host_boundary_factory=FaultBoundary
+        )
+        with pytest.raises(ValueError, match="activity log"):
+            validate_host_activity_log_mirror(fault_rows)
     assert not RESERVED_ROOT.exists()
 
 
@@ -901,6 +1026,8 @@ def test_atomic_s3_prelaunch_acceptance_records_actual_technical_costs(
     tmp_path: Path,
 ) -> None:
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
+        observe_candidate_blob_hashes,
+        validate_candidate_source_binding,
         write_runtime_prelaunch_acceptance,
     )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_validation import (
@@ -960,10 +1087,13 @@ def test_atomic_s3_prelaunch_acceptance_records_actual_technical_costs(
     tampered["runtime_contract"]["parameters"]["resource_caps"]["scratch_bytes"] = 1
     with pytest.raises(PermissionError, match="caps"):
         validate_runtime_prelaunch_acceptance(tampered, REPO)
-    assert all(
-        ref["sha256"] == hashlib.sha256((REPO / ref["path"]).read_bytes()).hexdigest()
-        for ref in acceptance["runtime_contract"]["source_test_manifest"]["refs"]
+    runtime_contract = acceptance["runtime_contract"]
+    observed_blobs = observe_candidate_blob_hashes(
+        REPO, runtime_contract["candidate_head"], runtime_contract
     )
+    assert validate_candidate_source_binding(runtime_contract, observed_blobs)[
+        "source_test_bytes_equal_candidate"
+    ] is True
     assert acceptance["deterministic_core_sha256"] == hashlib.sha256(
         _canonical(
             {

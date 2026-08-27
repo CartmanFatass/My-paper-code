@@ -114,10 +114,15 @@ def validate_runtime_prelaunch_acceptance(
         for field in expected_caps
     ):
         raise PermissionError("runtime V2 estimate does not equal full frozen caps")
-    for ref in contract.get("source_test_manifest", {}).get("refs", ()):
-        path = repo / ref["path"]
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != ref["sha256"]:
-            raise ValueError(f"runtime V2 source/test bytes drifted: {ref['path']}")
+    from .empirical_manifest import (
+        observe_candidate_blob_hashes,
+        validate_candidate_source_binding,
+    )
+
+    validate_candidate_source_binding(
+        contract,
+        observe_candidate_blob_hashes(repo, str(contract["candidate_head"]), contract),
+    )
     reserved = acceptance.get("reserved_output_effect")
     if (
         reserved != {**effect, "reserved_not_created": True}

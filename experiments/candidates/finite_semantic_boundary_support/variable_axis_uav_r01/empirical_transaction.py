@@ -11,7 +11,9 @@ from .empirical_contract import OUTPUT_ROOT
 from .empirical_manifest import (
     build_runtime_contract,
     observe_candidate_blob_hashes,
+    observe_candidate_worktree_blob_oids,
     validate_candidate_source_binding,
+    validate_candidate_worktree_binding,
     validate_operator_runtime_files,
     validate_release_manifest,
 )
@@ -69,6 +71,9 @@ def main(argv: list[str] | None = None) -> int:
         )
         validate_candidate_source_binding(
             contract, observe_candidate_blob_hashes(repo, head, contract)
+        )
+        validate_candidate_worktree_binding(
+            contract, observe_candidate_worktree_blob_oids(repo, contract)
         )
         receipt = run_registered_transaction(output_root, release=release)
         result = build_registered_complete_result(receipt, release=release)

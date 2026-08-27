@@ -95,15 +95,55 @@ def _file_ref(repo: Path, relative: str) -> dict[str, str]:
     return {"path": relative, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
 
 
-def source_test_manifest(repo: Path) -> dict[str, Any]:
+def _git_text(repo: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(repo), *arguments],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode:
+        raise PermissionError("candidate Git identity cannot be observed")
+    return completed.stdout.strip()
+
+
+def _candidate_blob_ref(repo: Path, candidate_head: str, relative: str) -> dict[str, str]:
+    blob_oid = _git_text(repo, "rev-parse", f"{candidate_head}:{relative}")
+    completed = subprocess.run(
+        ["git", "-C", str(repo), "show", f"{candidate_head}:{relative}"],
+        check=False,
+        capture_output=True,
+    )
+    if completed.returncode:
+        raise PermissionError(f"candidate blob cannot be observed: {relative}")
+    return {
+        "path": relative,
+        "git_blob_oid": blob_oid,
+        "sha256": hashlib.sha256(completed.stdout).hexdigest(),
+    }
+
+
+def source_test_manifest(
+    repo: Path, *, candidate_head: str | None = None
+) -> dict[str, Any]:
     source_paths = sorted(
         path.relative_to(repo).as_posix()
         for path in (repo / SOURCE_ROOT).glob("*.py")
         if path.is_file()
     )
-    refs = [_file_ref(repo, path) for path in sorted((*source_paths, *TEST_PATHS))]
+    paths = sorted((*source_paths, *TEST_PATHS))
+    refs = (
+        [_file_ref(repo, path) for path in paths]
+        if candidate_head is None
+        else [_candidate_blob_ref(repo, candidate_head, path) for path in paths]
+    )
     return {
         "schema": "FSBS_R01_S3_SOURCE_TEST_MANIFEST_V1",
+        "binding": (
+            "WORKTREE_RAW_BYTES"
+            if candidate_head is None
+            else "GIT_CANDIDATE_BLOB_BYTES"
+        ),
         "refs": refs,
         "sha256": hashlib.sha256(_canonical(refs)).hexdigest(),
     }
@@ -121,6 +161,7 @@ def build_runtime_contract(repo: Path, *, candidate_branch: str) -> dict[str, An
     required_branch = git_prerequisites("")["required_branch"]
     if candidate_branch != required_branch:
         raise ValueError("candidate_branch does not match the replacement contract")
+    candidate_head = _git_text(repo, "rev-parse", "--verify", "HEAD")
     boundary = empirical_boundary()
     return {
         "schema": "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2",
@@ -129,6 +170,7 @@ def build_runtime_contract(repo: Path, *, candidate_branch: str) -> dict[str, An
         "legacy_terminal_replay_permitted": False,
         "direction_id": "finite_semantic_boundary_support",
         "candidate_branch": required_branch,
+        "candidate_head": candidate_head,
         "payload_argv": boundary["payload_argv"],
         "effect": {
             "kind": "LOCAL_RESULT_ROOT",
@@ -139,7 +181,9 @@ def build_runtime_contract(repo: Path, *, candidate_branch: str) -> dict[str, An
         "authority_refs": [dict(ref) for ref in AUTHORITY_REFS],
         "resource_estimate": canonical_resource_estimate(),
         "checkpoint_identities": checkpoint_identities(),
-        "source_test_manifest": source_test_manifest(repo),
+        "source_test_manifest": source_test_manifest(
+            repo, candidate_head=candidate_head
+        ),
         "complete_only_publication": True,
         "workers": 1,
         "threads_per_worker": 1,
@@ -174,6 +218,34 @@ def observe_candidate_blob_hashes(
             raise PermissionError(f"candidate blob cannot be observed: {path}")
         observed[path] = hashlib.sha256(completed.stdout).hexdigest()
     return observed
+
+
+def observe_candidate_worktree_blob_oids(
+    repo: Path, contract: Mapping[str, Any]
+) -> dict[str, str]:
+    observed: dict[str, str] = {}
+    for ref in contract["source_test_manifest"]["refs"]:
+        path = str(ref["path"])
+        completed = subprocess.run(
+            ["git", "-C", str(repo), "hash-object", f"--path={path}", "--", path],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode:
+            raise PermissionError(f"candidate checkout blob cannot be observed: {path}")
+        observed[path] = completed.stdout.strip()
+    return observed
+
+
+def validate_candidate_worktree_binding(
+    contract: Mapping[str, Any], observed_blob_oids: Mapping[str, str]
+) -> dict[str, Any]:
+    refs = contract.get("source_test_manifest", {}).get("refs", ())
+    expected = {str(ref["path"]): str(ref["git_blob_oid"]) for ref in refs}
+    if not expected or dict(observed_blob_oids) != expected:
+        raise PermissionError("candidate checkout has source/test drift")
+    return {"source_test_checkout_clean": True, "ref_count": len(expected)}
 
 
 def validate_operator_runtime_files(
@@ -337,7 +409,11 @@ def validate_release_manifest(
     if observed_branch != required_branch:
         raise PermissionError("release branch does not match required_branch")
     code_sha = manifest.get("code_sha")
-    if not isinstance(code_sha, str) or code_sha != observed_candidate_head:
+    if (
+        not isinstance(code_sha, str)
+        or code_sha != observed_candidate_head
+        or contract.get("candidate_head") != observed_candidate_head
+    ):
         raise PermissionError("release code_sha does not equal observed candidate head")
     claim = hashlib.sha256(
         _canonical(
