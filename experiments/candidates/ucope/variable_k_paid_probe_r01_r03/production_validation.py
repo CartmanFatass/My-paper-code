@@ -138,10 +138,11 @@ def validate_source_manifest(
     if seen != set(DIRECTION_GIT_PATHS):
         raise PrelaunchRefusal("source manifest path set differs")
     observed_binding = manifest.get("run_binding")
-    if binding == DEFAULT_RUN_BINDING:
+    expected_binding = binding.optional_reference_document()
+    if expected_binding is None:
         if "run_binding" in manifest:
             raise PrelaunchRefusal("source run binding differs")
-    elif observed_binding != binding.reference_document():
+    elif observed_binding != expected_binding:
         raise PrelaunchRefusal("source run binding or authority differs")
 
 
@@ -166,10 +167,11 @@ def validate_prelaunch_manifest(
     if manifest.get("run_id") != binding.run_id:
         raise PrelaunchRefusal("run-id override is forbidden")
     source_run_binding = source_manifest.get("run_binding")
-    if binding == DEFAULT_RUN_BINDING:
+    expected_source_binding = binding.optional_reference_document()
+    if expected_source_binding is None:
         if "run_binding" in source_manifest:
             raise PrelaunchRefusal("source run binding differs")
-    elif source_run_binding != binding.reference_document():
+    elif source_run_binding != expected_source_binding:
         raise PrelaunchRefusal("source run binding or authority differs")
     if manifest.get("payload_argv") != list(payload_argv(binding)):
         raise PrelaunchRefusal("payload argv differs")
@@ -195,21 +197,17 @@ def validate_prelaunch_manifest(
     if manifest.get("rerun_permitted") is not False or manifest.get("effect_refs") != []:
         raise PrelaunchRefusal("rerun/effect contract differs")
     if (
-        manifest.get("output_effect")
-        != {
-            "kind": "DIRECTORY_CREATE_ONLY",
-            "resource_id": binding.output_root,
-            "operation": "create_and_populate_once",
-        }
+        manifest.get("output_effect") != binding.output_effect()
         or manifest.get("output_precondition") != "ABSENT_OR_EMPTY_BEFORE_PREPARE"
         or manifest.get("publication") != "ONE_ATOMIC_COMPLETE_PACKAGE_ONLY"
         or manifest.get("operator_now") is not False
     ):
         raise PrelaunchRefusal("output/publication firewall differs")
-    if binding == DEFAULT_RUN_BINDING:
+    expected_authority = binding.optional_authority_document()
+    if expected_authority is None:
         if "authority_refs" in manifest:
             raise PrelaunchRefusal("authority references differ")
-    elif manifest.get("authority_refs") != binding.authority_document():
+    elif manifest.get("authority_refs") != expected_authority:
         raise PrelaunchRefusal("authority references differ")
     git = manifest.get("git")
     if not isinstance(git, Mapping):

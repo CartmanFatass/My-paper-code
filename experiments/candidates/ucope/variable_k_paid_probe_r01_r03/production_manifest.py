@@ -45,10 +45,11 @@ def _require_source_run_binding(
     source_manifest: Mapping[str, object], binding: RunBinding
 ) -> None:
     observed = source_manifest.get("run_binding")
-    if binding == DEFAULT_RUN_BINDING:
+    expected = binding.optional_reference_document()
+    if expected is None:
         if "run_binding" in source_manifest:
             raise ManifestError("source manifest is bound to another run")
-    elif observed != binding.reference_document():
+    elif observed != expected:
         raise ManifestError("source manifest run/authority binding differs")
 
 
@@ -158,8 +159,9 @@ def build_source_manifest(
     }
     # The historical -01 bytes remain exact.  The replacement source reference
     # additionally binds the purchased identity and its authority.
-    if binding != DEFAULT_RUN_BINDING:
-        document["run_binding"] = binding.reference_document()
+    run_reference = binding.optional_reference_document()
+    if run_reference is not None:
+        document["run_binding"] = run_reference
     return document
 
 
@@ -225,8 +227,9 @@ def build_prelaunch_manifest(
         "operator_now": False,
         "effect_refs": [],
     }
-    if binding != DEFAULT_RUN_BINDING:
-        document["authority_refs"] = binding.authority_document()
+    authority_reference = binding.optional_authority_document()
+    if authority_reference is not None:
+        document["authority_refs"] = authority_reference
     return document
 
 

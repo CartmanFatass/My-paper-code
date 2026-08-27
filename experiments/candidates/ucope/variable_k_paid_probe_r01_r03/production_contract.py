@@ -38,6 +38,10 @@ class RunBinding:
 
     run_id: str
     output_root: str
+    effect_kind: str
+    effect_operation: str
+    effect_resource_id: str
+    emit_reference_metadata: bool
     authority_refs: tuple[tuple[str, str], ...] = ()
     authority_commit: str | None = None
 
@@ -86,21 +90,35 @@ class RunBinding:
             "authority_refs": self.authority_document(),
         }
 
+    def optional_reference_document(self) -> dict[str, object] | None:
+        return self.reference_document() if self.emit_reference_metadata else None
+
+    def optional_authority_document(self) -> list[dict[str, str]] | None:
+        return self.authority_document() if self.emit_reference_metadata else None
+
     def output_effect(self) -> dict[str, str]:
         return {
-            "kind": "DIRECTORY_CREATE_ONLY",
-            "resource_id": self.output_root,
-            "operation": "create_and_populate_once",
+            "kind": self.effect_kind,
+            "resource_id": self.effect_resource_id,
+            "operation": self.effect_operation,
         }
 
 
 DEFAULT_RUN_BINDING: Final[RunBinding] = RunBinding(
     run_id="ucope-r03-complete-20260827-01",
     output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
+    effect_kind="DIRECTORY_CREATE_ONLY",
+    effect_operation="create_and_populate_once",
+    effect_resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
+    emit_reference_metadata=False,
 )
 REPLACEMENT_RUN_BINDING: Final[RunBinding] = RunBinding(
     run_id="ucope-r03-complete-20260827-02",
     output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-02",
+    effect_kind="LOCAL_RESULT_ROOT",
+    effect_operation="CREATE_ONLY",
+    effect_resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
+    emit_reference_metadata=True,
     authority_refs=(
         (
             "docs/research/portfolio/PORTFOLIO.md",

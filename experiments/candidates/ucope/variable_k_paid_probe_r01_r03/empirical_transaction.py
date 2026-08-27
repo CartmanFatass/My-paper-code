@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import Sequence
 
 from .production_contract import (
-    DEFAULT_RUN_BINDING,
     RunBinding,
     canonical_run_binding,
     require_canonical_run_binding,
@@ -32,15 +31,6 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--output-root", required=True)
     value.add_argument("--hmasd-manifest", required=True)
     return value
-
-
-def resolve_run_binding(argv: Sequence[str]) -> RunBinding:
-    reject_forbidden_options(argv)
-    args = parser().parse_args(list(argv))
-    try:
-        return canonical_run_binding(args.run_id, args.output_root)
-    except ValueError as exc:
-        raise PrelaunchRefusal("run/output override is forbidden") from exc
 
 
 def validate_launch(

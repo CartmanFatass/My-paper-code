@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -20,7 +21,6 @@ from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_contr
     RNG_NAMESPACES,
     RUN_ID,
     REPLACEMENT_RUN_BINDING,
-    RunBinding,
     TERMINAL_RESULT_MAP,
     checkpoint_slots,
     conservative_estimate_document,
@@ -266,6 +266,11 @@ def test_replacement_binding_reaches_all_nonregistered_prelaunch_layers(
     )
     assert parameters["run_id"] == binding.run_id
     assert estimate["run_id"] == binding.run_id
+    assert binding.output_effect() == {
+        "kind": "LOCAL_RESULT_ROOT",
+        "operation": "CREATE_ONLY",
+        "resource_id": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
+    }
     assert prelaunch["output_effect"] == binding.output_effect()
     assert prelaunch["authority_refs"] == binding.authority_document()
     assert prelaunch["effect_refs"] == []
@@ -317,15 +322,20 @@ def test_cross_bound_identity_source_effect_and_authority_are_refused() -> None:
             release_required=False,
             binding=binding,
         )
-    wrong_effect = copy.deepcopy(prelaunch)
-    wrong_effect["output_effect"]["resource_id"] = OUTPUT_ROOT
-    with pytest.raises(PrelaunchRefusal, match="firewall"):
-        validate_prelaunch_manifest(
-            wrong_effect,
-            source_manifest=source,
-            release_required=False,
-            binding=binding,
-        )
+    for field, wrong_value in (
+        ("kind", "DIRECTORY_CREATE_ONLY"),
+        ("operation", "create_and_populate_once"),
+        ("resource_id", binding.output_root),
+    ):
+        wrong_effect = copy.deepcopy(prelaunch)
+        wrong_effect["output_effect"][field] = wrong_value
+        with pytest.raises(PrelaunchRefusal, match="firewall"):
+            validate_prelaunch_manifest(
+                wrong_effect,
+                source_manifest=source,
+                release_required=False,
+                binding=binding,
+            )
     wrong_authority = copy.deepcopy(prelaunch)
     wrong_authority["authority_refs"][0]["sha256"] = "0" * 64
     with pytest.raises(PrelaunchRefusal, match="authority"):
@@ -335,7 +345,7 @@ def test_cross_bound_identity_source_effect_and_authority_are_refused() -> None:
             release_required=False,
             binding=binding,
         )
-    noncanonical = RunBinding(binding.run_id, binding.output_root, ())
+    noncanonical = replace(binding, effect_operation="create_and_populate_once")
     with pytest.raises(ValueError, match="canonical"):
         parameters_document(noncanonical)
 
@@ -344,7 +354,6 @@ def test_payload_and_engine_consume_the_same_explicit_replacement_binding(
     tmp_path: Path,
 ) -> None:
     binding = REPLACEMENT_RUN_BINDING
-    assert empirical_transaction.resolve_run_binding(payload_argv(binding)[3:]) is binding
     precondition_root = tmp_path / "precondition"
     assert validate_output_precondition(precondition_root, binding=binding) == "ABSENT"
     with pytest.raises(PrelaunchRefusal, match="output-root"):
