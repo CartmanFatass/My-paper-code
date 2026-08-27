@@ -557,6 +557,14 @@ def _world(
     }
 
 
+def _canonical_host_read(
+    serial: str, open_slot: int, payload_bit: int, lookup_count: int
+) -> bytes:
+    return json.dumps(
+        [serial, open_slot, payload_bit, lookup_count], separators=(",", ":")
+    ).encode("utf-8")
+
+
 class SharedHostReceiptBoundary:
     """Shared per-episode host state, registry, and resource receipt boundary."""
 
@@ -575,6 +583,8 @@ class SharedHostReceiptBoundary:
         self._contexts: dict[tuple[int, int], dict[str, Any]] = {}
         self._opened_windows: list[int] = []
         self._lookup_count = 0
+        self._pending_reads: dict[str, dict[str, Any]] = {}
+        self._serviced_pairs: set[tuple[int, int]] = set()
 
     @property
     def next_window(self) -> int:
@@ -683,7 +693,7 @@ class SharedHostReceiptBoundary:
         self._previous_partners = current_partners
         self._opened_windows.append(window)
 
-    def receipt(
+    def read_record(
         self,
         *,
         window: int,
@@ -691,12 +701,17 @@ class SharedHostReceiptBoundary:
         world: Mapping[str, int],
         records: Mapping[int, int],
         open_slot: int,
-        lane_action: int,
     ) -> dict[str, Any]:
         context = self._contexts.get((window, pair_index))
         if context is None:
-            raise ValueError("shared host window was not opened before service")
-        resource = accepted_receipt(records, open_slot, lane_action)
+            raise ValueError("shared host window was not opened before read")
+        pair_key = (window, pair_index)
+        if pair_key in self._serviced_pairs or any(
+            pending["pair_key"] == pair_key for pending in self._pending_reads.values()
+        ):
+            raise ValueError("shared host record can be read only once")
+        if open_slot not in (0, 1) or set(records) != {0, 1} or set(records.values()) - {0, 1}:
+            raise ValueError("shared host read requires one of two binary records")
         lookup_count_before = self._lookup_count
         observed_provenance = self._registry.get(str(context["serial"]))
         self._lookup_count += 1
@@ -704,13 +719,53 @@ class SharedHostReceiptBoundary:
         serial_match = observed_provenance == self._provenance(
             window, pair_index, world
         )
+        payload_bit = int(records[open_slot])
+        read_token = hashlib.sha256(
+            _canonical_host_read(
+                context["serial"], open_slot, payload_bit, self._lookup_count
+            )
+        ).hexdigest()
+        self._pending_reads[read_token] = {
+            "pair_key": pair_key,
+            "context": context,
+            "records": dict(records),
+            "open_slot": open_slot,
+            "payload_bit": payload_bit,
+            "registry_lookup_count": registry_lookup_count,
+            "observed_provenance": observed_provenance,
+            "serial_match": serial_match,
+            "world_semantic_bit": world["semantic_bit"],
+        }
+        return {"read_token": read_token, "payload_bit": payload_bit}
+
+    def receipt(
+        self,
+        *,
+        read_receipt: Mapping[str, Any],
+        lane_action: int,
+    ) -> dict[str, Any]:
+        read_token = str(read_receipt.get("read_token", ""))
+        pending = self._pending_reads.pop(read_token, None)
+        if (
+            pending is None
+            or set(read_receipt) != {"read_token", "payload_bit"}
+            or read_receipt.get("payload_bit") != pending["payload_bit"]
+        ):
+            raise ValueError("shared host chosen payload receipt is invalid")
+        self._serviced_pairs.add(pending["pair_key"])
+        context = pending["context"]
+        resource = accepted_receipt(
+            pending["records"], pending["open_slot"], lane_action
+        )
+        if resource["payload_bit"] != pending["payload_bit"]:
+            raise ValueError("shared host chosen payload changed before service")
         cap = resource["resource_receipt"]
         return {
-            "registry_lookup_count": registry_lookup_count,
-            "registry_serial_match": serial_match,
-            "registry_provenance_sha256": observed_provenance,
-            "auth_ok": int(resource["accepted"] and serial_match),
-            "record_issuance_count": len(records),
+            "registry_lookup_count": pending["registry_lookup_count"],
+            "registry_serial_match": pending["serial_match"],
+            "registry_provenance_sha256": pending["observed_provenance"],
+            "auth_ok": int(resource["accepted"] and pending["serial_match"]),
+            "record_issuance_count": len(pending["records"]),
             "payload_read_count": int(cap["payload_reads"]),
             "reservation_service_count": int(cap["reservation_services"]),
             "lineage_state_before": context["state_before"],
@@ -734,7 +789,7 @@ class SharedHostReceiptBoundary:
             "decoy_publisher": context["decoy_publisher"],
             "decoy_next_publisher_match": context["decoy_next_publisher_match"],
             "resource_receipt": resource,
-            "world_semantic_bit": world["semantic_bit"],
+            "world_semantic_bit": pending["world_semantic_bit"],
         }
 
 
@@ -762,15 +817,26 @@ def result_blind_host_observability_mirror(
                     world["relevant_slot"]: world["relevant_reservation"],
                     1 - world["relevant_slot"]: world["decoy_reservation"],
                 }
+                read_receipt = boundary.read_record(
+                    window=window,
+                    pair_index=pair_index,
+                    world=world,
+                    records=records,
+                    open_slot=world["relevant_slot"],
+                )
+                lane_action = 1 - int(read_receipt["payload_bit"])
+                host_receipt = boundary.receipt(
+                    read_receipt=read_receipt, lane_action=lane_action
+                )
+                pair_score = (
+                    1 if lane_action != world["relevant_reservation"] else -1
+                )
                 rows.append(
-                    boundary.receipt(
-                        window=window,
-                        pair_index=pair_index,
-                        world=world,
-                        records=records,
-                        open_slot=world["relevant_slot"],
-                        lane_action=world["relevant_reservation"],
-                    )
+                    {
+                        **host_receipt,
+                        "controller_action": lane_action,
+                        "pair_score": pair_score,
+                    }
                 )
     return rows
 
@@ -875,12 +941,18 @@ def _sample_window(
             open_slot, selector_score = learner.choose_greedy_action(
                 "selector", selector_features
             )
-        chosen_reservation = (
-            world["relevant_reservation"]
-            if open_slot == world["relevant_slot"]
-            else world["decoy_reservation"]
+        records = {
+            world["relevant_slot"]: world["relevant_reservation"] ^ presentation["mu"],
+            1 - world["relevant_slot"]: world["decoy_reservation"] ^ presentation["mu"],
+        }
+        read_receipt = host_boundary.read_record(
+            window=window,
+            pair_index=pair_index,
+            world=world,
+            records=records,
+            open_slot=open_slot,
         )
-        payload = chosen_reservation ^ presentation["mu"]
+        payload = int(read_receipt["payload_bit"])
         controller_features = learner.features(payload, world["i"], world["r"])
         if phase == "TRAIN":
             lane_action, controller_score = learner.choose_training_action(
@@ -890,16 +962,8 @@ def _sample_window(
             lane_action, controller_score = learner.choose_greedy_action(
                 "controller", controller_features
             )
-        records = {
-            world["relevant_slot"]: world["relevant_reservation"] ^ presentation["mu"],
-            1 - world["relevant_slot"]: world["decoy_reservation"] ^ presentation["mu"],
-        }
         host_proof = host_boundary.receipt(
-            window=window,
-            pair_index=pair_index,
-            world=world,
-            records=records,
-            open_slot=open_slot,
+            read_receipt=read_receipt,
             lane_action=lane_action,
         )
         receipt = host_proof["resource_receipt"]

@@ -123,15 +123,57 @@ def _candidate_blob_ref(repo: Path, candidate_head: str, relative: str) -> dict[
     }
 
 
+def _candidate_source_test_inventory(repo: Path, candidate_head: str) -> list[str]:
+    completed = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "ls-tree",
+            "-r",
+            "--name-only",
+            candidate_head,
+            "--",
+            SOURCE_ROOT.as_posix(),
+            "tests/experiments/candidates/finite_semantic_boundary_support",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode:
+        raise PermissionError("candidate source/test inventory cannot be observed")
+    source_prefix = f"{SOURCE_ROOT.as_posix()}/"
+    paths = sorted(
+        path
+        for path in completed.stdout.splitlines()
+        if path.endswith(".py")
+        and (
+            path.startswith(source_prefix)
+            or (
+                Path(path).parent.as_posix()
+                == "tests/experiments/candidates/finite_semantic_boundary_support"
+                and Path(path).name.startswith("test_variable_axis_uav_r01_")
+            )
+        )
+    )
+    if not paths or not set(TEST_PATHS).issubset(paths):
+        raise PermissionError("candidate source/test tracked inventory is incomplete")
+    return paths
+
+
 def source_test_manifest(
     repo: Path, *, candidate_head: str | None = None
 ) -> dict[str, Any]:
-    source_paths = sorted(
-        path.relative_to(repo).as_posix()
-        for path in (repo / SOURCE_ROOT).glob("*.py")
-        if path.is_file()
-    )
-    paths = sorted((*source_paths, *TEST_PATHS))
+    if candidate_head is None:
+        source_paths = sorted(
+            path.relative_to(repo).as_posix()
+            for path in (repo / SOURCE_ROOT).glob("*.py")
+            if path.is_file()
+        )
+        paths = sorted((*source_paths, *TEST_PATHS))
+    else:
+        paths = _candidate_source_test_inventory(repo, candidate_head)
     refs = (
         [_file_ref(repo, path) for path in paths]
         if candidate_head is None
@@ -221,13 +263,28 @@ def observe_candidate_blob_hashes(
 
 
 def observe_candidate_worktree_blob_oids(
-    repo: Path, contract: Mapping[str, Any]
+    repo: Path,
+    contract: Mapping[str, Any],
+    *,
+    checkout_root: Path | None = None,
 ) -> dict[str, str]:
+    checkout = repo if checkout_root is None else checkout_root
     observed: dict[str, str] = {}
     for ref in contract["source_test_manifest"]["refs"]:
         path = str(ref["path"])
+        target = checkout / path
+        if not target.is_file():
+            raise PermissionError(f"candidate checkout tracked source/test is absent: {path}")
         completed = subprocess.run(
-            ["git", "-C", str(repo), "hash-object", f"--path={path}", "--", path],
+            [
+                "git",
+                "-C",
+                str(repo),
+                "hash-object",
+                f"--path={path}",
+                "--",
+                str(target),
+            ],
             check=False,
             capture_output=True,
             text=True,

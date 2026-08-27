@@ -368,6 +368,85 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     assert not RESERVED_ROOT.exists()
 
 
+def test_candidate_head_inventory_fails_closed_when_tracked_source_is_absent(
+    tmp_path: Path,
+) -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
+        build_runtime_contract,
+        observe_candidate_worktree_blob_oids,
+        validate_candidate_worktree_binding,
+    )
+
+    branch = subprocess.run(
+        ["git", "-C", str(REPO), "branch", "--show-current"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    contract = build_runtime_contract(REPO, candidate_branch=branch)
+    candidate = contract["candidate_head"]
+    tracked = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(REPO),
+            "ls-tree",
+            "-r",
+            "--name-only",
+            candidate,
+            "--",
+            "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01",
+            "tests/experiments/candidates/finite_semantic_boundary_support",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
+    expected_inventory = sorted(
+        path
+        for path in tracked
+        if path.endswith(".py")
+        and (
+            "/variable_axis_uav_r01/" in path
+            or Path(path).name.startswith("test_variable_axis_uav_r01_")
+        )
+    )
+    assert [
+        ref["path"] for ref in contract["source_test_manifest"]["refs"]
+    ] == expected_inventory
+
+    checkout = (
+        REPO
+        / "temp/directions/finite_semantic_boundary_support/test/"
+        "candidate-head-inventory-fixture"
+    )
+    for ref in contract["source_test_manifest"]["refs"]:
+        target = checkout / ref["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        blob = subprocess.run(
+            ["git", "-C", str(REPO), "show", f"{candidate}:{ref['path']}"],
+            check=True,
+            capture_output=True,
+        ).stdout
+        target.write_bytes(blob)
+    observed = observe_candidate_worktree_blob_oids(
+        REPO, contract, checkout_root=checkout
+    )
+    assert validate_candidate_worktree_binding(contract, observed)[
+        "source_test_checkout_clean"
+    ] is True
+    (checkout / next(
+        ref["path"]
+        for ref in contract["source_test_manifest"]["refs"]
+        if ref["path"].endswith("/host.py")
+    )).unlink()
+    with pytest.raises(PermissionError, match="absent"):
+        observe_candidate_worktree_blob_oids(
+            REPO, contract, checkout_root=checkout
+        )
+    assert not RESERVED_ROOT.exists()
+
+
 def test_result_blind_production_learner_mirror_preserves_update_and_isolation() -> None:
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.learner import (
         ProductionDecision,
@@ -798,6 +877,9 @@ def test_result_blind_host_activity_log_is_observed_not_hardcoded() -> None:
             def open_window(self, window: int, worlds: object) -> None:
                 self._actual.open_window(window, worlds)
 
+            def read_record(self, **request: object) -> dict[str, object]:
+                return self._actual.read_record(**request)
+
             def receipt(self, **request: object) -> dict[str, object]:
                 return {**self._actual.receipt(**request), **fault}
 
@@ -806,6 +888,40 @@ def test_result_blind_host_activity_log_is_observed_not_hardcoded() -> None:
         )
         with pytest.raises(ValueError, match="activity log"):
             validate_host_activity_log_mirror(fault_rows)
+
+    class PayloadFaultBoundary:
+        def __init__(self, **coordinates: object) -> None:
+            self._actual = SharedHostReceiptBoundary(**coordinates)
+            self._actual_reads: dict[str, dict[str, object]] = {}
+
+        def open_window(self, window: int, worlds: object) -> None:
+            self._actual.open_window(window, worlds)
+
+        def read_record(self, **request: object) -> dict[str, object]:
+            actual = self._actual.read_record(**request)
+            self._actual_reads[str(actual["read_token"])] = actual
+            return {**actual, "payload_bit": 1 - int(actual["payload_bit"])}
+
+        def receipt(self, **request: object) -> dict[str, object]:
+            observed = request["read_receipt"]
+            return self._actual.receipt(
+                **{
+                    **request,
+                    "read_receipt": self._actual_reads[
+                        str(observed["read_token"])
+                    ],
+                }
+            )
+
+    payload_fault_rows = result_blind_host_observability_mirror(
+        host_boundary_factory=PayloadFaultBoundary
+    )
+    assert sum(row["pair_score"] for row in rows) == 104
+    assert sum(row["pair_score"] for row in payload_fault_rows) == -104
+    assert [row["controller_action"] for row in rows] != [
+        row["controller_action"] for row in payload_fault_rows
+    ]
+    assert validate_host_activity_log_mirror(payload_fault_rows)["complete"] is True
     assert not RESERVED_ROOT.exists()
 
 
