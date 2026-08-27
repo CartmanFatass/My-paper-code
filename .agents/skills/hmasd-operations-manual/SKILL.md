@@ -22,15 +22,6 @@ work. If the participant owes a return, redeliver its existing assignment
 locator to the same top-level task; never ask or accept a leaf to repair the
 handoff. Direct user conversation and user override remain valid user input.
 
-After ingress and once again before final, provide `hmasd_session_envelope.py
-liveness` with fresh native task/history observations. Include only locators
-visible in recipient history; envelope files are not delivery receipts. The program emits the
-complete direction table and zero or more recovery actions and refreshes
-`.codex/runtime/clerk-liveness.json` for the read-only Dashboard. Process every
-emitted action in that pass. Never replace the machine result with a prose
-classification; a second pass is the bounded drain for a locator injected
-while another event was being handled.
-
 ## Direction-neutral routing
 
 | Validated tag | Action |

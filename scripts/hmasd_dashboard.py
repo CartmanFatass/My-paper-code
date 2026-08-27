@@ -10,7 +10,6 @@ serves a path selected by a request.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -28,7 +27,6 @@ SCHEMA_VERSION = 1
 SERVICE_VERSION = "hmasd-dashboard-v1"
 BIND_HOST = "127.0.0.1"
 MAX_SNAPSHOT_ATTEMPTS = 3
-CLERK_FRESHNESS_SECONDS = 24 * 60 * 60
 EPOCH = "1970-01-01T00:00:00Z"
 
 REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
@@ -38,7 +36,6 @@ REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
 RUNTIME_AGENTS_REL = ".codex/runtime/agents.json"
 RUNTIME_WORKTREES_REL = ".codex/runtime/worktrees.json"
 RUNTIME_TASKS_REL = ".codex/runtime/tasks.json"
-CLERK_LIVENESS_REL = ".codex/runtime/clerk-liveness.json"
 LEGACY_RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
 LEGACY_RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
 LEGACY_RUNTIME_TASKS_REL = ".omp/runtime/tasks.json"
@@ -56,7 +53,6 @@ API_NAMES = {
     "/api/runs",
     "/api/external-reviews",
     "/api/worktrees",
-    "/api/clerk",
 }
 
 _STATUS_RANK = {"ok": 0, "missing": 1, "stale": 2, "invalid": 3}
@@ -335,12 +331,6 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
     }
     if kind == "external_archive":
         return value.get("schema") == "agentify_review_natural_completion_archive_v1"
-    if kind == "clerk_liveness":
-        return (
-            value.get("schema_version") == 1
-            and isinstance(value.get("observed_at"), str)
-            and isinstance(value.get("directions"), list)
-        )
     if kind == "agent_result":
         return value.get("schema_version") == 1 and isinstance(value.get("role"), str)
     keys = required.get(kind)
@@ -418,30 +408,6 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
         ):
             return False
         return len(identities) == len(set(identities))
-    if kind == "clerk_liveness":
-        rows = value.get("directions")
-        if not isinstance(rows, list):
-            return False
-        allowed_stages = {
-            "PORTFOLIO",
-            "EM",
-            "CM",
-            "EXP",
-            "WAITING_RESOURCE",
-            "USER_PAUSE",
-            "TRANSPORT_GAP",
-            "TERMINAL",
-        }
-        identifiers: list[str] = []
-        for row in rows:
-            if (
-                not isinstance(row, Mapping)
-                or not isinstance(row.get("direction_id"), str)
-                or row.get("stage") not in allowed_stages
-            ):
-                return False
-            identifiers.append(str(row["direction_id"]))
-        return len(identifiers) == len(set(identifiers))
     return True
 
 
@@ -1421,57 +1387,6 @@ def _build_worktrees(registry_doc: Document, sources: _SnapshotAttempt) -> dict[
     )
 
 
-def _build_clerk(sources: _SnapshotAttempt) -> dict[str, Any]:
-    document = sources.read_document(CLERK_LIVENESS_REL, "clerk_liveness")
-    if document.status != "ok" or document.value is None:
-        return _projection(
-            status=document.status,
-            generated_at=EPOCH,
-            revision_refs={},
-            data={"directions": []},
-            warnings=[document.warning or "missing:clerk_liveness"],
-        )
-    rows: list[dict[str, Any]] = []
-    for item in sorted(
-        (row for row in document.value.get("directions", []) if isinstance(row, Mapping)),
-        key=lambda row: str(row.get("direction_id", "")),
-    ):
-        output = {
-            key: item[key]
-            for key in (
-                "direction_id",
-                "lifecycle",
-                "stage",
-                "reason",
-                "owner_identity",
-                "task_status",
-                "next_owner",
-                "assignment_locator",
-                "return_locator",
-            )
-            if key in item and (isinstance(item[key], str) or item[key] is None)
-        }
-        if isinstance(item.get("recovery_kind"), str):
-            output["recovery_kind"] = item["recovery_kind"]
-        rows.append(output)
-    observed_at = document.value.get("observed_at")
-    stale = True
-    if isinstance(observed_at, str) and _TIMESTAMP_RE.match(observed_at):
-        try:
-            instant = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
-            age = (datetime.now(timezone.utc) - instant).total_seconds()
-            stale = age > CLERK_FRESHNESS_SECONDS
-        except ValueError:
-            stale = True
-    return _projection(
-        status="stale" if stale else "ok",
-        generated_at=observed_at if isinstance(observed_at, str) else EPOCH,
-        revision_refs={},
-        data={"directions": rows},
-        warnings=["stale:clerk_liveness_age"] if stale else [],
-    )
-
-
 
 
 def _unstable_snapshot(
@@ -1514,7 +1429,6 @@ def build_snapshot(root: Root | Path | str) -> dict[str, Any]:
             "runs": _build_runs(root_path, registry, sources),
             "external_reviews": _build_external(root_path, registry, sources),
             "worktrees": _build_worktrees(registry, sources),
-            "clerk": _build_clerk(sources),
         }
         last_changed = sources.changed_sources()
         if last_changed:
@@ -1540,7 +1454,7 @@ def build_projection(root: Root | Path | str, name: str) -> dict[str, Any]:
     snapshot = build_snapshot(root)
     if name == "snapshot":
         return snapshot
-    key = {"portfolio": "portfolio", "agents": "agents", "runs": "runs", "external-reviews": "external_reviews", "worktrees": "worktrees", "clerk": "clerk"}.get(name)
+    key = {"portfolio": "portfolio", "agents": "agents", "runs": "runs", "external-reviews": "external_reviews", "worktrees": "worktrees"}.get(name)
     if key is None:
         raise KeyError(name)
     return snapshot["data"][key]

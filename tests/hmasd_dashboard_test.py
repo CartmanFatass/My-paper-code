@@ -59,36 +59,6 @@ def fixture_root(tmp_path: Path) -> Path:
         "accepted_result.json",
         root / "docs/research/candidates/example-direction/results/example-result.json",
     )
-    (root / ".codex/runtime/clerk-liveness.json").write_bytes(
-        dashboard._json_bytes(
-            {
-                "schema_version": 1,
-                "observed_at": "2026-08-27T14:30:00Z",
-                "actions": [
-                    {
-                        "kind": "REDELIVER_ASSIGNMENT",
-                        "locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
-                        "message": "secret transport message",
-                        "recipient_thread_id": "secret-thread",
-                    }
-                ],
-                "directions": [
-                    {
-                        "direction_id": "example-direction",
-                        "lifecycle": "ACTIVE",
-                        "stage": "CM",
-                        "reason": "OWNED_WORK",
-                        "owner_identity": "CM/example-direction/g1",
-                        "task_status": "active",
-                        "next_owner": None,
-                        "assignment_locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
-                        "return_locator": None,
-                        "recovery_kind": "REDELIVER_ASSIGNMENT",
-                    }
-                ],
-            }
-        )
-    )
     return root
 
 
@@ -172,30 +142,17 @@ class _Cp1252Stdout:
         self.buffer.flush()
 
 
-def test_all_six_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
+def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     first = dashboard.build_snapshot(root)
     second = dashboard.build_snapshot(root)
     assert dashboard._json_text(first) == dashboard._json_text(second)
-    assert set(first["data"]) == {"portfolio", "agents", "runs", "external_reviews", "worktrees", "clerk"}
+    assert set(first["data"]) == {"portfolio", "agents", "runs", "external_reviews", "worktrees"}
     assert first["data"]["portfolio"]["data"]["directions"][0]["id"] == "example-direction"
     assert first["data"]["agents"]["data"]["agents"][0]["logical_identity"]
     assert first["data"]["runs"]["data"]["runs"][0]["run_id"] == "example-run"
     assert first["data"]["external_reviews"]["data"]["rounds"][0]["round_id"]
     assert first["data"]["worktrees"]["data"]["worktrees"][0]["worktree_ref"] == "wt-example"
-    clerk_row = first["data"]["clerk"]["data"]["directions"][0]
-    assert clerk_row == {
-        "direction_id": "example-direction",
-        "lifecycle": "ACTIVE",
-        "stage": "CM",
-        "reason": "OWNED_WORK",
-        "owner_identity": "CM/example-direction/g1",
-        "task_status": "active",
-        "next_owner": None,
-        "assignment_locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
-        "return_locator": None,
-        "recovery_kind": "REDELIVER_ASSIGNMENT",
-    }
 
     forbidden = {
         "command",
@@ -207,8 +164,6 @@ def test_all_six_projections_are_deterministic_and_field_allowlisted(tmp_path: P
         "pid",
         "execution_token",
         "canonical_absolute_path",
-        "recipient_thread_id",
-        "message",
     }
 
     def walk(value: Any) -> list[str]:
@@ -237,9 +192,6 @@ def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) ->
             assert status == 200
             assert body
             assert headers["content-length"] == str(len(body))
-        status, _, body = _request(server, "GET", "/api/clerk")
-        assert status == 200
-        assert json.loads(body)["data"]["directions"][0]["stage"] == "CM"
         status, _, _ = _request(server, "GET", "/../scripts/hmasd_dashboard.py")
         assert status == 404
         status, _, _ = _request(server, "GET", "/%2e%2e/scripts/hmasd_dashboard.py")
@@ -254,19 +206,6 @@ def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) ->
         server.shutdown()
         server.server_close()
         thread.join(timeout=2)
-
-
-def test_clerk_projection_age_is_visible_as_stale(tmp_path: Path) -> None:
-    root = fixture_root(tmp_path)
-    path = root / dashboard.CLERK_LIVENESS_REL
-    value = json.loads(path.read_text(encoding="utf-8"))
-    value["observed_at"] = "2020-01-01T00:00:00Z"
-    path.write_bytes(dashboard._json_bytes(value))
-
-    clerk = dashboard.build_snapshot(root)["data"]["clerk"]
-
-    assert clerk["status"] == "stale"
-    assert clerk["warnings"] == ["stale:clerk_liveness_age"]
 
 
 def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:

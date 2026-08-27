@@ -74,9 +74,6 @@ result-bearing command，但不得用“禁止 subagent”整体抹掉 manager �
    ASSIGNMENT，或向用户发送 terminal summary。
 6. task 已停止但没有匹配 RETURN 时，Clerk 继续同一个 task 并重投同一关联
    assignment；不创建重复 session。
-7. Clerk 在 ingress 后和 final 前各运行一次程序化 liveness；输入只接受 native
-   recipient history 中实际投递的 locator，不把生成文件当 delivery receipt；同一 active turn 内
-   合并到达的 locator 由第二次 bounded drain 处理，不依赖模型记住未完成消息。
 
 科研或工程工作完成但没有完成第 4 步，只表示局部工作停止，**不表示自动交接
 完成**。下一责任角色已经收到消息，才算本 hop 完成。
@@ -99,16 +96,15 @@ assignment 与唯一 heartbeat 位于同一 owner 是资源等待；否则 owner
 | Codex task plane | task 身份、历史、create/send/read/wait、同 task 继续、用户控制 | HMASD 方向语义 |
 | Clerk LLM | 全局拓扑、读取 RETURN、选择并联系下一责任角色 | 方向内科研或工程判断 |
 | EM/CM LLM | assignment 内的局部判断、填写并发送 RETURN | 其他方向、全局调度、恢复状态机 |
-| scripts | envelope schema、关联 ID、方向/路径 containment、由 registry/native-delivery/task facts 生成 liveness 与恢复动作、简单日志、实验命令事实 | 创建/等待 task、把文件存在当投递、解释方向 prose、模拟 Codex 会话 |
+| scripts | envelope schema、关联 ID、方向/路径 containment、简单日志、实验命令事实 | 创建/等待 task、解释 prose、选择下一 hop、模拟 Codex 会话 |
 
 script 校验失败只报告机械输入问题，不授予或否定用户权限，也不生成新 gate。
 
 Clerk 使用 `.codex/prompts/hmasd-workflow-clerk.md` 中唯一的方向无关语义表。每个
 事件 turn 先从 Codex task list/read 建立临时拓扑快照；快照不落盘为第二 registry。
 同一批正交方向必须完成全部 ready assignment 的原生 send 后结束事件 turn；普通
-事件 turn 不调用 wait；final 前的第二次 liveness pass 回收 active turn 内合并到达
-的 locator，之后的新 RETURN 再由原生消息/责任 session heartbeat 唤醒。一个方向的
-科学名词、证据、失败或等待不得出现在另一方向的 envelope 中。
+事件 turn 不调用 wait，RETURN 由新原生消息再次唤醒。一个方向的科学名词、证据、
+失败或等待不得出现在另一方向的 envelope 中。
 
 内存 admission 失败是 result launch 前的可恢复资源等待：run CLI 不创建 reserved
 output root；仅对旧版本留下的、无 manifest/日志/结果且目录为空的精确 partial
@@ -185,12 +181,8 @@ Portfolio、EM、CM 都不得在该目录运行 `git switch` 或 `git checkout`�
     action，不把比较拆成多个 Portfolio session。一个方向的 scoped failure 与其他
     ready actions 可共存；`CLOSED/DONE` 必须与当前 registry lifecycle 匹配。
 15. `http://127.0.0.1:8765` 的只读 Dashboard 可访问并显示 Portfolio lifecycle 与
-    各方向 research/engineering state；独立 Clerk tab 显示 EM/CM/EXP/Portfolio/
-    资源等待/用户暂停/脱环/终止阶段与最新 locator。陈旧 task projection 有显式
-    警告，Dashboard 不写 authority、不路由工作，停止服务也不改变 liveness。
-16. Clerk 责任 session 的 liveness heartbeat 周期性刷新同一个程序化投影并执行
-    machine-emitted recovery action；该五分钟 heartbeat 固定附着在 Clerk task，缺失时
-    由 Clerk 在 bootstrap 恢复，绝不附着 Root；没有 action 时不发消息、不创建 task、不唤醒 Root。
+    各方向 research/engineering state；陈旧 task projection 有显式警告，Dashboard
+    不写 authority、不路由工作，停止服务也不改变 liveness。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。
