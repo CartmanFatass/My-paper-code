@@ -11,10 +11,12 @@ from typing import Final, Mapping
 from .barriers import StageBarrier
 from .foundation_activity_resource_estimate import (
     ESTIMATE_PATH,
+    REPAIR_ESTIMATE_PATH,
     SOURCE_PATHS,
     S4_OUTPUT_ROOT,
     WORKLOAD,
 )
+from .foundation_activity_production import production_entrypoint_contract
 from .foundation_run_manifest import (
     PROSPECTIVE_OUTPUT_ROOT,
     S4_RUN_MANIFEST_PATH,
@@ -39,6 +41,11 @@ ESTIMATOR_HELP_COMMAND: Final[str] = (
 ESTIMATOR_OUTPUT_COMMAND: Final[str] = (
     "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m "
     f"{ESTIMATOR_MODULE} --output {ESTIMATE_PATH}"
+)
+S4_REPAIR_OUTPUT_ROOT: Final[str] = f"{S4_OUTPUT_ROOT}/executor-repair"
+REPAIR_ESTIMATOR_OUTPUT_COMMAND: Final[str] = (
+    "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m "
+    f"{ESTIMATOR_MODULE} --output {REPAIR_ESTIMATE_PATH}"
 )
 ACCEPTED_CHAIN_REFS: Final[tuple[dict[str, str], ...]] = (
     {
@@ -408,6 +415,65 @@ def build_s4_acceptance(
         "operator_now": False,
         "effect_refs": [],
     }
+    StageBarrier.s0().validate_payload(acceptance)
+    return acceptance
+
+
+def build_executor_repair_acceptance(
+    *,
+    repository_root: Path,
+    source_manifest: Mapping[str, object],
+    estimate: Mapping[str, object],
+    prelaunch_manifest: Mapping[str, object],
+    evidence: Mapping[str, object],
+    command_measurements: Mapping[str, object],
+    command_ref_sha256: Mapping[str, str],
+) -> dict[str, object]:
+    """Bind the fresh executor repair without authorizing the later activity."""
+
+    acceptance = build_s4_acceptance(
+        repository_root=repository_root,
+        source_manifest=source_manifest,
+        estimate=estimate,
+        prelaunch_manifest=prelaunch_manifest,
+        evidence=evidence,
+        command_measurements=command_measurements,
+        command_ref_sha256=command_ref_sha256,
+    )
+    acceptance["schema"] = (
+        "SCDMP_NATIVE_FUSION_R01_S4_EXECUTOR_REPAIR_TECHNICAL_ACCEPTANCE_V1"
+    )
+    acceptance["stage"] = "S4_FOUNDATION_ACTIVITY_EXECUTOR_REPAIR"
+    acceptance["artifact_refs"] = [
+        {
+            "path": f"{S4_REPAIR_OUTPUT_ROOT}/S4_EXECUTOR_REPAIR_SOURCE_MANIFEST.json",
+            "sha256": manifest_digest(source_manifest),
+        },
+        {
+            "path": REPAIR_ESTIMATE_PATH,
+            "sha256": manifest_digest(estimate),
+        },
+        {
+            "path": f"{S4_REPAIR_OUTPUT_ROOT}/S4_EXECUTOR_REPAIR_PRELAUNCH_MANIFEST.json",
+            "sha256": manifest_digest(prelaunch_manifest),
+        },
+        {
+            "path": f"{S4_REPAIR_OUTPUT_ROOT}/S4_EXECUTOR_REPAIR_COMPLETE_EVIDENCE.json",
+            "sha256": manifest_digest(evidence),
+        },
+    ]
+    acceptance["technical_commands"]["estimator_output"] = (
+        REPAIR_ESTIMATOR_OUTPUT_COMMAND
+    )
+    for label in ("focused_pytest", "estimator_help", "estimator_output"):
+        acceptance["technical_command_refs"][label]["path"] = (
+            f"{S4_REPAIR_OUTPUT_ROOT}/{label.replace('_', '-')}-verification.json"
+        )
+    acceptance["production_entrypoint"] = production_entrypoint_contract()
+    acceptance["later_activity_boundary"] = acceptance.pop("next_portfolio_boundary")
+    acceptance["later_activity_boundary"]["kind"] = (
+        "PORTFOLIO_RECONCILE_REPAIRED_FOUNDATION_ACTIVITY"
+    )
     StageBarrier.s0().validate_payload(acceptance)
     return acceptance
 

@@ -8,7 +8,11 @@ import hashlib
 import json
 from pathlib import Path
 import sys
-from typing import NoReturn
+
+from .foundation_activity_executor import (
+    TransactionOutcome,
+    execute_registered_foundation_activity,
+)
 
 from .foundation_run_manifest import (
     HMAC_DOMAINS,
@@ -37,6 +41,7 @@ class ProductionPlan:
     output_root: str
     workload: Mapping[str, object]
     output_effect: Mapping[str, object]
+    run_manifest: Mapping[str, object]
 
 
 def _valid_sha(value: object) -> bool:
@@ -187,26 +192,61 @@ class FoundationActivityProduction:
                 inputs.output_root,
                 manifest["workload"],
                 expected_effect,
+                manifest,
             )
         )
 
 
-def _prelaunch_only_executor(_plan: ProductionPlan) -> NoReturn:
-    raise PrelaunchRefusal("S4 prelaunch cannot self-release activity")
+def production_entrypoint_contract() -> dict[str, object]:
+    return {
+        "executor": (
+            "experiments.candidates.scdmp_variable_k.native_fusion_r01."
+            "foundation_activity_executor.execute_registered_foundation_activity"
+        ),
+        "result_bearing": True,
+        "replicates": 24,
+        "updates_per_foundation": 192,
+        "master_draw": "INSIDE_OPERATOR_PROCESS_ONCE",
+        "resume": "SAME_MANIFEST_ONLY",
+        "publication": "ONE_ATOMIC_COMPLETE_PACKAGE_ONLY",
+        "rerun_permitted": False,
+        "question_relevant_value_visible": False,
+    }
+
+
+def _result_bearing_executor(plan: ProductionPlan) -> TransactionOutcome:
+    return execute_registered_foundation_activity(
+        manifest_sha256=plan.manifest_sha256,
+        output_root=Path(plan.output_root),
+        run_manifest=plan.run_manifest,
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     inputs = parse_production_inputs(tuple(sys.argv[1:] if argv is None else argv))
     manifest, observed_sha = read_strict_manifest(Path(inputs.run_manifest))
-    FoundationActivityProduction().launch(
+    outcome = FoundationActivityProduction().launch(
         inputs=inputs,
         manifest=manifest,
         observed_manifest_sha256=observed_sha,
         expected_manifest_sha256=observed_sha,
         output_root_exists=Path(inputs.output_root).exists(),
-        activity_executor=_prelaunch_only_executor,
+        activity_executor=_result_bearing_executor,
     )
-    return 2
+    if not isinstance(outcome, TransactionOutcome) or not outcome.complete:
+        raise RuntimeError("foundation activity did not publish one complete package")
+    print(
+        json.dumps(
+            {
+                "checkpoint_count": outcome.checkpoint_count,
+                "output_root": outcome.output_root,
+                "status": outcome.status,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+    )
+    return 0
 
 
 if __name__ == "__main__":

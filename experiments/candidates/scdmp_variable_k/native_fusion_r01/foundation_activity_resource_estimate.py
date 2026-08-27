@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from dataclasses import asdict, dataclass
 import hashlib
 import json
@@ -17,6 +18,11 @@ from typing import Final, Mapping, Sequence
 
 import torch
 
+from .foundation_activity_executor import (
+    AddressBook,
+    ExecutionProfile,
+    FoundationActivityExecutor,
+)
 from .foundation_network import build_technical_foundation
 from .foundation_optimizer import build_adamw, clip_global_gradients
 from .foundation_run_manifest import canonical_json_bytes
@@ -27,6 +33,10 @@ S4_OUTPUT_ROOT: Final[str] = (
     "native_fusion_r01/s4/g1"
 )
 ESTIMATE_PATH: Final[str] = f"{S4_OUTPUT_ROOT}/S4_ACTIVITY_RESOURCE_ESTIMATE.json"
+REPAIR_ESTIMATE_PATH: Final[str] = (
+    f"{S4_OUTPUT_ROOT}/executor-repair/"
+    "S4_EXECUTOR_REPAIR_ACTIVITY_RESOURCE_ESTIMATE.json"
+)
 WORKLOAD: Final[dict[str, int]] = {
     "replicates": 24,
     "updates_per_foundation": 192,
@@ -43,6 +53,7 @@ UNCERTAINTY_FACTORS: Final[dict[str, float]] = {
     "high": 4.0,
 }
 SOURCE_PATHS: Final[tuple[str, ...]] = (
+    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_executor.py",
     "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
     "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
     "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
@@ -102,6 +113,36 @@ class ActivityPrimitiveMeasurements:
         ):
             if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
                 raise ValueError("resource byte measurement is incomplete")
+
+
+@dataclass(frozen=True)
+class ExecutorPrimitiveMeasurement:
+    initialization_wall_seconds: float
+    initialization_cpu_seconds: float
+    update_wall_seconds: float
+    update_cpu_seconds: float
+    peak_rss_bytes: int
+
+    def __post_init__(self) -> None:
+        for value in (
+            self.initialization_wall_seconds,
+            self.initialization_cpu_seconds,
+            self.update_wall_seconds,
+            self.update_cpu_seconds,
+        ):
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(value)
+                or value <= 0
+            ):
+                raise ValueError("executor primitive timing is incomplete")
+        if (
+            isinstance(self.peak_rss_bytes, bool)
+            or not isinstance(self.peak_rss_bytes, int)
+            or self.peak_rss_bytes <= 0
+        ):
+            raise ValueError("executor peak RSS is incomplete")
 
 
 def project_activity_estimate(
@@ -208,6 +249,65 @@ def project_activity_estimate(
         "operator_now": False,
         "effect_refs": [],
     }
+
+
+def apply_executor_projection(
+    base_estimate: Mapping[str, object],
+    measured: ExecutorPrimitiveMeasurement,
+) -> dict[str, object]:
+    estimate = copy.deepcopy(dict(base_estimate))
+    estimates = estimate.get("estimates")
+    if not isinstance(estimates, dict) or set(estimates) != {
+        "low",
+        "central",
+        "high",
+    }:
+        raise ValueError("base estimate has no low/central/high rows")
+    raw_wall = (
+        24 * measured.initialization_wall_seconds
+        + 4_608 * measured.update_wall_seconds
+    )
+    raw_cpu = (
+        24 * measured.initialization_cpu_seconds
+        + 4_608 * measured.update_cpu_seconds
+    )
+    memory_factors = {"low": 1.0, "central": 1.5, "high": 2.0}
+    for label, factor in UNCERTAINTY_FACTORS.items():
+        row = estimates[label]
+        if not isinstance(row, dict):
+            raise ValueError("base estimate resource row differs")
+        row["wall_seconds"] = max(float(row["wall_seconds"]), raw_wall * factor)
+        row["cpu_core_seconds"] = max(
+            float(row["cpu_core_seconds"]), raw_cpu * factor
+        )
+        row["cpu_core_hours"] = float(row["cpu_core_seconds"]) / 3_600.0
+        row["peak_memory_bytes"] = max(
+            int(row["peak_memory_bytes"]),
+            math.ceil(measured.peak_rss_bytes * memory_factors[label]),
+        )
+    measured_primitives = estimate.get("measured_primitives")
+    if not isinstance(measured_primitives, dict):
+        raise ValueError("base measured primitives differ")
+    measured_primitives["foundation_executor"] = asdict(measured)
+    estimate["executor_scaling_formulas"] = {
+        "wall_seconds": "initialization_wall_seconds*24 + update_wall_seconds*4608",
+        "cpu_core_seconds": "initialization_cpu_seconds*24 + update_cpu_seconds*4608",
+        "uncertainty": "low*1, central*2, high*4",
+    }
+    high_wall = float(estimates["high"]["wall_seconds"])
+    classification = "<=7200" if high_wall <= 7_200 else ">7200"
+    estimate["runtime_classification"] = classification
+    estimate["classification_basis"] = (
+        "maximum of primitive and executor high one-worker projected wall seconds "
+        "versus 7200"
+    )
+    estimate["performance_reasonableness_review_required"] = (
+        classification == ">7200"
+    )
+    estimate["explicit_user_approval_required_before_activity"] = (
+        classification == ">7200"
+    )
+    return estimate
 
 
 def _median_timing(
@@ -349,6 +449,32 @@ def measure_nonregistered_primitives() -> ActivityPrimitiveMeasurements:
     )
 
 
+def measure_nonregistered_executor() -> ExecutorPrimitiveMeasurement:
+    executor = FoundationActivityExecutor(
+        address_book=AddressBook(master=bytes(range(32)), registered=False),
+        profile=ExecutionProfile.technical_single_foundation(),
+    )
+    wall_started = time.perf_counter()
+    cpu_started = time.process_time()
+    runtime = executor.new_runtime(replicate_index=0)
+    initialization_cpu = time.process_time() - cpu_started
+    initialization_wall = time.perf_counter() - wall_started
+    wall_started = time.perf_counter()
+    cpu_started = time.process_time()
+    evidence = executor.run_next_update(runtime)
+    update_cpu = time.process_time() - cpu_started
+    update_wall = time.perf_counter() - wall_started
+    if evidence.episodes != 16 or evidence.adamw_steps != 16:
+        raise RuntimeError("executor measurement workload differs")
+    return ExecutorPrimitiveMeasurement(
+        initialization_wall_seconds=initialization_wall,
+        initialization_cpu_seconds=initialization_cpu,
+        update_wall_seconds=update_wall,
+        update_cpu_seconds=update_cpu,
+        peak_rss_bytes=_peak_rss_bytes(),
+    )
+
+
 def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -361,7 +487,10 @@ def build_estimate_document(repository_root: Path) -> dict[str, object]:
         if not target.is_file():
             raise RuntimeError(f"S4 source is absent: {relative}")
         refs.append({"path": relative, "sha256": _sha(target)})
-    estimate = project_activity_estimate(measure_nonregistered_primitives())
+    estimate = apply_executor_projection(
+        project_activity_estimate(measure_nonregistered_primitives()),
+        measure_nonregistered_executor(),
+    )
     return {
         **estimate,
         "implementation_refs": refs,
@@ -387,8 +516,11 @@ def build_estimate_document(repository_root: Path) -> dict[str, object]:
 
 def _emit_create_only(path: Path, value: Mapping[str, object]) -> None:
     target = Path(path)
-    expected = (Path.cwd().resolve() / ESTIMATE_PATH).resolve(strict=False)
-    if target.resolve(strict=False) != expected:
+    expected = {
+        (Path.cwd().resolve() / ESTIMATE_PATH).resolve(strict=False),
+        (Path.cwd().resolve() / REPAIR_ESTIMATE_PATH).resolve(strict=False),
+    }
+    if target.resolve(strict=False) not in expected:
         raise RuntimeError("estimator output path differs from the exact S4 path")
     target.parent.mkdir(parents=True, exist_ok=True)
     temporary_name: str | None = None
