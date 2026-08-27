@@ -1590,3 +1590,73 @@ This Portfolio slice releases no activity and creates no Operator, master, HMAC 
 ### Registry decision
 
 Advance registry revision `27` to revision `28` through the Portfolio CAS writer. Keep SCDMP `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## FSBS zero-activity terminal replacement purchase and registered-runtime CM investment — 2026-08-27T11:55:01Z
+
+- Decision owner: Portfolio
+- Observed authority before this decision: Portfolio SHA-256 `11209c6197ddbccf09a83ec82b45fa44b48bd8f7ff45399059dffd1f9bd2173a`; registry revision `28`, SHA-256 `c79452485ed3dea5fd3b373f2436da9b1d6d5f65b663d2fdf57099fbacc64038`.
+- Controlling Clerk assignment: `7d2e999e-7bfc-4ff2-b734-84475456383f`.
+- Exact CM diagnosis return: `c7795af1-da4e-4419-8fa2-14a42cdf237c:return`.
+- Exact evidence: preactivity release-gap diagnosis SHA-256 `f3eaeb4957fcaee8a831df2d56942a9f7d1abd19ed594ab3eae36ca9c9497b91`; Operator terminal audit SHA-256 `92ee7871fd61e2389a0fa5959c9058172001d6b172c8f3d5ca31829fda701400`; terminal old-manifest SHA-256 attested as `2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479`.
+- Exact unchanged science refs: `DIRECTION.md` SHA-256 `e2f2ecd3a0593c080cc3d7cfe0eec27f026cca5a010d1b132449a1aebfac033e`; R01 authority SHA-256 `9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb`.
+
+### Terminal old-run disposition
+
+Treat `fsbs-r01-complete-20260827-01` as permanently terminal `FAILED`. Its one Operator-owned invocation ended with exit `7`, `CHILD_EXIT`, feature-scoped `PREACTIVITY_RELEASE_FIREWALL`; execution count is `1`, retry count is `0`, group quiescence is true and retry is forbidden. The exact old run ID, output root, manifest, assignment, `Operator-fsbs-r01-complete-20260827-01` identity and at-most-once history are tombstoned and must never be mutated, relaunched, copied as a new manifest, or reused as an execution/evidence identity.
+
+The terminal audit proves zero scientific activity: the activity marker, temporary sibling, checkpoints, metrics and scientific result are absent; stdout is empty; no question-relevant output exists; `empirical_activity_started=false` and `effect_refs=[]`. The failure occurred before the authority-defined first complete paired team window and therefore did not consume or answer the unchanged R01 scientific question. It is not positive, null, failure or inconclusive scientific evidence.
+
+The static diagnosis is exact and direction-local. The current no-option entrypoint always refuses after observing the manifest; its release validator is disconnected and depends on ignored prelaunch artifacts; the accepted technical learner/orchestrator/checkpoint/result surfaces intentionally reject registered identities; and the complete sixteen arm-seed registered runtime, candidate-local immutable release contract, production checkpoint/resume family and atomic complete result/evidence writer do not yet exist. The required existing files and test surface are known, and neither shared-core nor science-semantic change is required.
+
+### Replacement scientific purchase
+
+Retain FSBS `ACTIVE/g1` and preserve the exact unchanged R01 science object, parameters, arms, gates, controls, thresholds, claim ceiling and no-result-based-rerun law. Purchase exactly one replacement execution opportunity because the prior attempt ended before scientific activity. This is a new Portfolio purchase with a disjoint run/effect identity, not a retry or reuse of the terminal run:
+
+```text
+replacement_purchase=ONE_UNCHANGED_COMPLETE_FSBS_R01_TRANSACTION
+run_id=fsbs-r01-complete-20260827-02
+output_root=temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/
+future_operator_identity=Operator-fsbs-r01-complete-20260827-02
+activity_authorized=false
+operator_now=false
+effect_refs=[]
+```
+
+The replacement preserves the frozen complete scientific envelope: `157696` registered boundary transactions, one CPU worker, one thread, high wall cap `600` seconds, peak-memory cap `1073741824` bytes, scratch cap `536870912` bytes and durable-result cap `268435456` bytes. These are unchanged R01 caps and prior result-blind planning facts, not permission to execute. The implementation slice must produce a new candidate-specific result-blind estimate before any prepare; it may not enlarge a cap, shrink the scientific object, change a seed/arm, or use the old run's measured terminal behavior as a scientific tuning signal.
+
+### Exact next responsibility
+
+Return `REQUEST_CM` for exactly one same-CM slice, `FSBS-R01-REGISTERED-RUNTIME-RELEASE-CONTRACT-V2`. Workflow-Clerk must route it to the existing `CM/finite_semantic_boundary_support/g1`; Portfolio does not dispatch it. The exact owned paths are:
+
+```text
+docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_transaction.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_contract.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_manifest.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_validation.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/learner.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/engine.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/checkpoint.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/result.py
+tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py
+temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/
+```
+
+The CM objective is one complete result-blind implementation and technical acceptance before any new prepare or Operator:
+
+1. keep every accepted technical-only class and registered-identity rejection intact, adding separate production-only paths within the exact existing files;
+2. make the no-option entrypoint validate a candidate-local immutable release contract without runtime dependence on ignored `temp/` acceptance inputs, binding exact direction/run/assignment/writer/operator/command/parameters/code/candidate/cwd and the single create-only Effect;
+3. implement the complete registered sixteen arm-seed transaction with unchanged `M={6,8}` training, `M={6,8,10}` four-branch evaluation, `157696` transactions, one worker/thread and all frozen address, support, control and resource laws;
+4. implement sixteen content-addressed production checkpoints, cold resume without repeated update, arm/seed isolation and terminal no-rerun enforcement;
+5. implement one atomic complete-only registered result/evidence-tree writer, with no partial or question-relevant output and the activity marker only at the R01 irreversible boundary;
+6. extend only the existing empirical-prelaunch test surface with nonregistered result-blind mirrors covering release validation, source binding, orchestration shape, checkpoint/resume and complete-only publication; no registered probe is allowed; and
+7. produce a fresh technically accepted source/test manifest and candidate-specific resource estimate, close Git for only the exact owned paths on one clean pushed direction candidate, update engineering state by CAS, and return the candidate full SHA/remote ref and static evidence.
+
+Done means the replacement `-02` output root remains absent, no real run manifest or Operator exists, all frozen caps and semantics match, the full result-blind direction tests pass, `activity_authorized=false`, `operator_now=false`, `effect_refs=[]`, and CM returns either `REQUEST_CM` for exact prepare against the accepted pushed candidate or one direction-scoped `REQUEST_USER`/failure reason. No payload, `hmasd_run`, registered seed/arm, provider, shared-core change, deployment or flight is authorized in this repair slice.
+
+### Registry decision
+
+Advance registry revision `28` to revision `29` through the Portfolio CAS writer. Keep FSBS `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
