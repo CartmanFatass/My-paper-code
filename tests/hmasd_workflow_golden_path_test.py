@@ -796,8 +796,8 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         {
                             "type": "userMessage",
                             "content": [
-                                {
-                                    "type": "text",
+                                            {
+                                                "type": "input_text",
                                     "text": json.dumps(document if bound else {"run_id": run_id}),
                                 }
                             ],
@@ -950,7 +950,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                     "type": "userMessage",
                                     "content": [
                                         {
-                                            "type": "text",
+                                                "type": "input_text",
                                             "text": json.dumps(spawn_assignment),
                                         }
                                     ],
@@ -1042,7 +1042,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         {
                             "type": "agentMessage",
                             "content": [
-                                {"type": "text", "text": json.dumps(operator_result)}
+                                {"type": "output_text", "text": json.dumps(operator_result)}
                             ],
                         }
                     )

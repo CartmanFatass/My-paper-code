@@ -1538,7 +1538,10 @@ class AppServerClient:
         found: list[dict[str, Any]] = []
         if isinstance(value, Mapping):
             text_value = value.get("text")
-            if value.get("type") == "text" and isinstance(text_value, str):
+            if (
+                value.get("type") in {"text", "input_text", "output_text"}
+                and isinstance(text_value, str)
+            ):
                 try:
                     document = json.loads(text_value)
                 except json.JSONDecodeError:
