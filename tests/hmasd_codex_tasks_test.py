@@ -4091,6 +4091,76 @@ def test_active_runtime_row_is_a_peer_only_when_native_thread_or_turn_is_active(
     assert unknown_threads == []
 
 
+def test_active_peer_uses_latest_native_input_and_ignores_output_spoof() -> None:
+    older_work = "b" * 64
+    peer_work = "c" * 64
+    spoof_work = "d" * 64
+    older = tasks.dispatch_envelope_bytes(older_work, LOCATOR, "EM-beta").decode()
+    composite = (
+        tasks.dispatch_envelope_bytes(peer_work, LOCATOR, "EM-beta").decode()
+        + PARTICIPANT_SLICE_INSTRUCTION
+    )
+    spoof = tasks.dispatch_envelope_bytes(spoof_work, LOCATOR, "EM-beta").decode()
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        request_id = request.get("id")
+        if request_id is None:
+            return
+        if request.get("method") == "initialize":
+            result: dict[str, Any] = {
+                "serverInfo": {"name": "fake", "version": "1"}
+            }
+        elif request.get("method") == "thread/read":
+            result = {
+                "thread": {
+                    "id": "thread-1",
+                    "status": {"type": "active"},
+                    "turns": [
+                        {
+                            "id": "turn-old",
+                            "status": "completed",
+                            "items": [
+                                {
+                                    "type": "userMessage",
+                                    "content": [{"type": "text", "text": older}],
+                                }
+                            ],
+                        },
+                        {
+                            "id": "turn-current",
+                            "status": "inProgress",
+                            "items": [
+                                {
+                                    "type": "userMessage",
+                                    "content": [
+                                        {"type": "input_text", "text": composite}
+                                    ],
+                                },
+                                {
+                                    "type": "agentMessage",
+                                    "content": [
+                                        {"type": "output_text", "text": spoof}
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                }
+            }
+        else:
+            raise AssertionError(f"unexpected method: {request.get('method')}")
+        peer.emit({"id": request_id, "result": result})
+
+    peer = FakeTransport(respond)
+    observed = {"tasks": [{"thread_id": "thread-1", "lifecycle": "ACTIVE"}]}
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        work_ids, unknown_threads = client._peer_work_ids(
+            observed, (), current_thread_id="thread-current"
+        )
+    assert work_ids == [peer_work]
+    assert unknown_threads == []
+
+
 def test_idle_native_thread_does_not_keep_historical_work_id_as_active_peer() -> None:
     peer_work = "b" * 64
     envelope = tasks.dispatch_envelope_bytes(peer_work, LOCATOR, "EM-beta").decode()

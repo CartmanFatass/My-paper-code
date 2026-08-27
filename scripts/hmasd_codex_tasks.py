@@ -627,26 +627,6 @@ class AppServerClient:
         return {"status": "FORKED", "thread_id": new_id, "ephemeral": ephemeral}
 
     @staticmethod
-    def _history_has_text(value: Any, exact_text: str) -> bool:
-        if isinstance(value, Mapping):
-            if value.get("type") == "text" and value.get("text") == exact_text:
-                return True
-            return any(AppServerClient._history_has_text(item, exact_text) for item in value.values())
-        if isinstance(value, list):
-            return any(AppServerClient._history_has_text(item, exact_text) for item in value)
-        return False
-
-    @staticmethod
-    def _history_has_protocol(value: Any) -> bool:
-        if isinstance(value, Mapping):
-            if value.get("type") == "text" and isinstance(value.get("text"), str):
-                return f'"protocol": "{PROTOCOL_MARKER}"' in value["text"]
-            return any(AppServerClient._history_has_protocol(item) for item in value.values())
-        if isinstance(value, list):
-            return any(AppServerClient._history_has_protocol(item) for item in value)
-        return False
-
-    @staticmethod
     def _strict_text_documents(
         text: str, *, include_composite_suffix: bool
     ) -> list[dict[str, Any]]:
@@ -676,7 +656,9 @@ class AppServerClient:
         return [dict(prefix), dict(suffix)]
 
     @staticmethod
-    def _protocol_documents(value: Any, work_id: str) -> list[dict[str, Any]]:
+    def _protocol_documents(
+        value: Any, work_id: str | None
+    ) -> list[dict[str, Any]]:
         found: list[dict[str, Any]] = []
         if isinstance(value, Mapping):
             text = value.get("text")
@@ -684,9 +666,15 @@ class AppServerClient:
                 for document in AppServerClient._strict_text_documents(
                     text, include_composite_suffix=False
                 ):
+                    observed_work_id = document.get("work_id")
                     if (
                         document.get("protocol") == PROTOCOL_MARKER
-                        and document.get("work_id") == work_id
+                        and (
+                            observed_work_id == work_id
+                            if work_id is not None
+                            else isinstance(observed_work_id, str)
+                            and _SHA256.fullmatch(observed_work_id) is not None
+                        )
                     ):
                         found.append(document)
             for item in value.values():
@@ -725,32 +713,9 @@ class AppServerClient:
         for turn in reversed(turns):
             if not isinstance(turn, Mapping):
                 continue
-            values: list[str] = []
-
-            def visit(value: Any) -> None:
-                if isinstance(value, Mapping):
-                    text = value.get("text")
-                    if value.get("type") == "text" and isinstance(text, str):
-                        try:
-                            document = json.loads(text)
-                        except json.JSONDecodeError:
-                            document = None
-                        if (
-                            isinstance(document, Mapping)
-                            and document.get("protocol") == PROTOCOL_MARKER
-                            and isinstance(document.get("work_id"), str)
-                            and _SHA256.fullmatch(document["work_id"]) is not None
-                        ):
-                            values.append(document["work_id"])
-                    for item in value.values():
-                        visit(item)
-                elif isinstance(value, list):
-                    for item in value:
-                        visit(item)
-
-            visit(turn.get("items", []))
-            if values:
-                return values[-1]
+            documents = cls._protocol_documents(turn.get("items", []), None)
+            if documents:
+                return str(documents[-1]["work_id"])
         return None
 
     @staticmethod
