@@ -9,14 +9,6 @@ max_threads = 40
 max_depth = 1
 interrupt_message = true
 
-[agents.HMASDCodeProjectManager]
-description = "Engineering manager for one bounded code scope."
-config_file = "./agents/hmasd-code-project-manager.toml"
-
-[agents.HMASDIndependentResearchExplorer]
-description = "Research manager for one bounded scientific scope."
-config_file = "./agents/hmasd-independent-research-explorer.toml"
-
 [agents.HMASDProjectScout]
 description = "Read-only repository scout."
 config_file = "./agents/hmasd-project-scout.toml"
@@ -50,7 +42,7 @@ description = "Transport for one engineering consultation."
 config_file = "./agents/hmasd-cpm-agentify-transport.toml"
 
 [agents.HMASDExplorerAgentifyTransport]
-description = "Transport for one research consultation."
+description = "Transport for one GPT-5.6 Pro research review."
 config_file = "./agents/hmasd-explorer-agentify-transport.toml"
 
 [agents.HMASDExternalGeminiTransport]

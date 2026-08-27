@@ -111,6 +111,21 @@ input and resumes the normal topology with a new Clerk-generated assignment.
 4. envelope 文件存在不等于消息已发送。Codex task history 中可见的原生消息才是
    hop 已交接的事实。
 
+## Direction liveness invariant
+
+每个 selected direction 在任一时刻按以下优先级分类，命中第一项后停止：
+
+1. registry lifecycle 为 `CLOSED`：正式结束且没有 next slice；
+2. registry lifecycle 为 `PARKED`、exact material question 已送达 Root/user，且
+   reactivation condition 是该用户答案：正式暂停；
+3. 资源等待，retry assignment 与唯一 heartbeat 位于同一 owner，成功后 heartbeat
+   自动取消；
+4. owner session 持有 current assignment，next event 是 correlated RETURN。
+
+不满足上述任一项的 idle 是 transport/workflow defect。Clerk 必须重投 existing
+locator 或按已验证 RETURN 发送下一 assignment；不能用 PARKED、local DONE 或裸
+BLOCKED 掩盖。未持有当前切面的其他 manager idle 不构成缺陷。
+
 ## Portfolio routing contract
 
 Portfolio 是低频的跨方向选择、优先级、资源投入与 lifecycle 决策者，不是普通
@@ -126,8 +141,8 @@ Portfolio 对一个仍在投资范围内的方向必须在 RETURN 中选择下�
    运行入口缺失：返回 `REQUEST_CM`。
 3. 工程入口和实验定义均已准备：返回 `REQUEST_CM` 及精确实验准备目标；CM 决定
    是否创建唯一 Experiment Operator。
-4. 需要用户材料决定：返回 `REQUEST_USER`。只有 durable lifecycle 已明确变为非
-   ACTIVE 且无下一切面时才返回 terminal `DONE`。
+4. 需要用户材料决定：返回 `REQUEST_USER`。只有 durable lifecycle 已明确变为
+   `CLOSED` 且无下一切面时才返回 terminal `DONE`。
 
 Clerk 读取 Portfolio RETURN 后才创建并发送下一 ASSIGNMENT。Portfolio 的决定与
 Clerk 的 transport 动作必须保持为两个不同责任。
@@ -154,6 +169,21 @@ list/read 获取当前 Portfolio、EM、CM 的 exact task ID/generation/status�
 方向的 ready send。跨方向汇总只能发给 Root/user，不能作为 participant 的
 assignment。
 
+Clerk 在考虑 Root 前使用唯一责任案例映射：方向科研语义与 Pro external review
+归现有 EM，其中 Pro 由 `hmasd-explorer-agentify-transport` 调用 GPT-5.6 Pro；方向
+实现、依赖、路径、Git、candidate、dossier、manifest、prepare 与 Operator 归现有
+CM；跨方向 priority/investment/lifecycle 归 Portfolio。缺少代码、依赖、candidate、
+manifest、activity release 或 future Operator identity 都不是 Root 切面。Root 只接收
+真实用户材料选择、user-owned irreversible Effect、shared-core 语义修改、task
+identity conflict，或无法由协议机械解释的矛盾；最后一种只上报事实，不把方向切面
+转交 Root。
+
+Clerk 构造 EM assignment 时必须把 `.codex/prompts/hmasd-em.md` 放入 context refs；
+构造 CM assignment 时必须同样引用 `.codex/prompts/hmasd-cm.md`。slice 可以冻结路径、
+Effect 并禁止当前 result-bearing command，但不能 blanket-ban subagent 而删除 EM/CM
+的 direct-leaf 接口。静态 CM slice 可以明确“不需要 Operator”，但不能把这一点扩展
+成后续 eligible execution slice 的全局禁令。
+
 ## Participant Git completion
 
 修改 tracked direction-owned source、test 或 durable authority 的 top-level 责任
@@ -173,6 +203,15 @@ Git 收尾转交 Root：
 
 共享 main 可以同时包含其他方向的 unstaged 修改；这不是跳过本方向 Git 收尾的
 理由。worktree 仍是显式例外而非默认流程。
+
+Direction-owned candidate 和 manifest preparation 属于同方向 CM 的普通工程切面。
+其中 static prelaunch dossier 是 CM artifact、不得调用 run CLI；runtime prepare
+由 CM 调用 `hmasd_run.py prepare` 并持有资源 heartbeat；payload/result execution
+只由唯一 Operator 执行。Root 不是 manifest
+preparation 的正常 owner；只有 shared-core、明确 user-owned decision/effect、task
+identity conflict、cross-direction Git integration，或无法机械解释的 protocol
+question 才路由 Root；protocol question 只上报事实，不把方向工作转给 Root。历史 authority
+中旧的 runtime actor 名称不改变材料决定，但由当前协议重新映射实际 actor。
 
 ## Memory-admission fallback
 

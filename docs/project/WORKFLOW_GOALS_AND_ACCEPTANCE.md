@@ -25,12 +25,29 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
   原生 task 工具创建或复用 task、发送消息、接收返回、路由下一切面并向用户汇总。
 - **Portfolio**：只负责低频的跨方向选择、优先级、资源投入和 lifecycle 判断；它
   把决定 RETURN 给 Clerk，不创建或派发 Root、EM、CM task。
-- **EM/<direction-id>/g<generation>**：只负责一个方向的科研语义。
-- **CM/<direction-id>/g<generation>**：只负责一个方向的工程语义。
+- **EM/<direction-id>/g<generation>**：只负责一个方向的科研语义；Research Scout、
+  Research Innovator、Research Principles Analyst、Research Critic 与 Agentify
+  external transport 是它的 direct leaves。材料方向变更或结论对象先经 constructive
+  case 与 GPT-5.6 Pro constructive review，EM 修订后再经独立 adversarial Pro review，
+  最终由 EM 综合；Pro 通过 `hmasd-explorer-agentify-transport` 调用。
+- **CM/<direction-id>/g<generation>**：只负责一个方向的工程语义；Implementer、
+  Reviewer、Verifier 与 Operator 是它的 direct leaves。非机械实现使用 Implementer，
+  高影响代码接受前使用独立 Reviewer，真实结果命令使用唯一 Operator。
 - **Experiment Operator**：CM 的单层执行 child，只运行一个冻结的结果命令。
 
 角色是责任边界，不是用户权限 gate。EM/CM 不需要了解全局拓扑，只需要知道自己
 可接收和必须返回的 envelope 格式。
+
+Clerk 先按责任案例表处理：方向科研问题交 EM；方向代码、依赖、路径、Git、candidate、
+dossier、manifest、prepare、缺失实现或 Operator 交 CM；Pro external review 交 EM 的
+Agentify leaf；跨方向投资/lifecycle 交 Portfolio。只有真实用户材料选择、user-owned
+irreversible Effect、shared-core 语义修改、task identity conflict，或无法机械解释的
+协议矛盾才通知 Root；协议问题只发送事实，不把方向责任转给 Root。
+
+每个 EM assignment 必须引用 `.codex/prompts/hmasd-em.md`，每个 CM assignment 必须
+引用 `.codex/prompts/hmasd-cm.md`。assignment 可以限制路径、Effect 和是否允许当前
+result-bearing command，但不得用“禁止 subagent”整体抹掉 manager 的 direct-leaf
+接口；静态切面无需 Operator 不等于后续 eligible 切面没有 Operator。
 
 ## 唯一正常流程
 
@@ -51,6 +68,12 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 `REQUEST_EM` 或 `REQUEST_CM` 明确普通下一责任；只有跨方向选择、优先级、资源投入
 或 lifecycle 判断才使用 `REQUEST_PORTFOLIO`。Portfolio 把决定 RETURN 给 Clerk，
 由 Clerk 路由 EM/CM。缺少现成实现本身不是 PARK 理由。
+
+每个已选择方向按互斥优先级具有一个完整 liveness fact：registry `CLOSED` 是正式
+结束；registry `PARKED` 且 exact material question 已送达用户是正式暂停；资源 retry
+assignment 与唯一 heartbeat 位于同一 owner 是资源等待；否则 owner session 必须
+持有 current assignment 和 next event。没有这些事实的 idle 是工作流故障；未持有
+当前切面的其他 EM/CM idle 正常。
 
 ## Codex、LLM 与 script 的分工
 
@@ -84,12 +107,18 @@ estimate/command/code SHA。
   在 RETURN 前自行提交并 push exact owned paths，报告 branch、commit SHA、
   remote/ref 与 push 结果。leaf helper 和 Root 不代为做普通方向 Git 收尾；
   worktree 可选，不是默认。
+- Direction-owned candidate 与 manifest preparation 是 CM 的普通工程责任，不因
+  Git 或 prepare 机械动作转给 Root。Root 只处理 shared-core、明确用户材料决定、
+  task identity conflict、cross-direction Git integration，以及无法机械解释的
+  protocol question；最后一种只上报事实，不把方向工作转给 Root。
 - 路径归属来自 assignment 的 owned_paths。机械检查只检测越界，不判断科研
   意义。
 - 共享 C++ backend、神经网络基座和跨方向核心修改需要用户确认 exact paths 与
   语义影响。危险操作警告并记录，但确认后不得形成权限死锁。
 - 实验命令 owner、进程终态和 stdout/stderr 继续由 hmasd_run.py 记录；session
   协调不重复实现实验运行器。
+- CM 的 static prelaunch dossier 不调用 run CLI；CM 的 runtime prepare 只生成
+  manifest/preflight 并处理资源等待；唯一 Operator 才执行 payload/result command。
 - authority 已覆盖、memory-safe、无新 external/shared-core 语义且预计不超过
   7200 秒的本地 PREPARED result command 直接进入 CM→唯一 Operator；不能仅因
   “是真实科学执行”或 future Operator 尚未创建而增加用户批准 gate。

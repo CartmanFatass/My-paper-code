@@ -7,19 +7,46 @@ machinery.
 
 ## Topology snapshot
 
-At the start of every event-handling turn, refresh one in-memory snapshot from
-Codex task list/read. Codex task list/read is the only topology fact source.
-The snapshot contains only:
+At the start of every event-handling turn, refresh one in-memory snapshot.
+Use three read-only sources: Codex task list/read for task topology and native
+message delivery, Portfolio registry/authority for direction lifecycle, and
+native automation state for resource heartbeats. Do not persist their join.
+The snapshot combines only these facts:
 
 - your own exact thread ID and the single Portfolio task ID;
+- every Portfolio registry direction whose lifecycle is `ACTIVE`, `PARKED`, or
+  `CLOSED`; `REGISTERED` is not yet in the live set;
 - for each `direction_id`, the exact EM and CM task IDs and generations;
 - each task's visible active/idle/notLoaded state;
 - the last assignment locator sent to that task and whether its correlated
-  RETURN has been received in visible task history.
+  RETURN has been received in visible task history;
+- any `ACTIVE` configured heartbeat with a next trigger whose prompt binds an
+  exact direction/run and owner task. Do not create a heartbeat merely to
+  complete this snapshot;
+- the native message proving an exact material question was delivered to
+  Root/user when lifecycle is `PARKED`.
 
 Never persist this snapshot as a registry, JSON state machine, cache, receipt,
 or authority. Never infer a missing task identity from prose. Reuse an observed
 manager; report an identity conflict to Root instead of creating a duplicate.
+
+## Direction liveness invariant
+
+For every selected direction, apply this classification priority and stop at
+the first matching complete fact:
+
+- **terminal**: Portfolio registry lifecycle is `CLOSED`, with no next slice;
+- **user pause**: lifecycle is `PARKED`, an exact material question has reached
+  Root/user, and reactivation is that user answer;
+- **resource wait**: the same owner session holds the retry assignment and the
+  one configured heartbeat for the exact direction/run; its next event is
+  PREPARED or another admission refusal, and success deletes the heartbeat;
+- **owned work**: one exact current assignment is held by an owner session and
+  its next event is the correlated RETURN.
+
+Idle without one of these facts is a workflow defect. Redeliver the existing
+locator or create the one status-directed assignment before ending the event
+turn. An idle manager that is not the current owner is normal.
 
 ## Direction-neutral semantic table
 
@@ -34,7 +61,7 @@ claims, implementation details, and failure prose never change the route.
 | `RETURN status=REQUEST_PORTFOLIO` | A low-frequency cross-direction investment/lifecycle decision is required | Send one bounded decision assignment to the single existing Portfolio task; Portfolio must RETURN the decision to Clerk and never dispatch another participant |
 | `RETURN status=REQUEST_USER` | A material user decision is required | Root/user |
 | `RETURN status=FAILED` | A scoped project/direction/feature/effect failure occurred | Apply only the matching generic failure row below |
-| `RETURN status=DONE` | The assignment has no requested next responsibility | Accept as terminal only when durable lifecycle is non-ACTIVE or the Root request was explicitly bounded; for an ACTIVE direction send one corrective ASSIGNMENT to the same participant task requiring an explicit `REQUEST_EM`, `REQUEST_CM`, `REQUEST_PORTFOLIO`, or `REQUEST_USER` RETURN instead of waking Portfolio by default |
+| `RETURN status=DONE` | The assignment has no requested next responsibility | Accept a direction as terminal only when durable lifecycle is `CLOSED`; accept a bounded Root coordination assignment as locally done without closing the direction. Otherwise send one corrective ASSIGNMENT to the same participant requiring an explicit `REQUEST_EM`, `REQUEST_CM`, `REQUEST_PORTFOLIO`, or `REQUEST_USER` RETURN |
 | Stopped participant without correlated RETURN | Transport handoff is incomplete | Continue the same task and redeliver the same assignment locator |
 
 Never copy one direction's objective, evidence, failure, or lifecycle into another direction's envelope.
@@ -43,6 +70,42 @@ same `direction_id`, the requested generic objective class, and that
 direction's own refs/owned paths. Never summarize multiple directions into a
 single assignment. Unknown or contradictory routing semantics go to Root as a
 protocol question; do not invent a new status, gate, or role.
+
+## Responsibility case manual
+
+Use this table before considering Root. It maps the defect class, not the prose
+used by one direction.
+
+| Observed need | Responsible recipient/action |
+| --- | --- |
+| Direction scientific meaning, estimand, comparator, evidence interpretation, claim or discriminator | Existing EM for that direction |
+| Direction code, dependency, path, Git, candidate, dossier, manifest, or prepare | Existing CM for that direction |
+| Missing implementation or Operator | Existing CM; it owns its Implementer/Reviewer/Operator direct leaves |
+| Pro external review | Existing EM; it uses the Agentify external transport leaf for GPT-5.6 Pro |
+| Cross-direction priority, investment, or lifecycle | Portfolio |
+| Resource admission before prepare | Same owner CM plus the one exact heartbeat; no Root send |
+| Authority-covered local command at or below 7200 seconds, memory-safe and no new shared/external semantics | Existing CM and its unique Operator; no approval request |
+| Malformed envelope, path-ownership defect, or correlated RETURN defect | Same sender/participant correction using the existing task |
+| True user material choice, user-owned irreversible Effect, or shared-core semantic change | Root/user with the exact question/effect/paths |
+| Task identity conflict or unresolved mechanical protocol question | Root receives facts only; it does not inherit the direction slice |
+| Unknown external commitment | Observe only; never resend or ask Root to guess |
+
+Do not notify Root merely because a direction lacks code, dependencies, an
+owned path, a candidate, a manifest, a future Operator, or an activity-release
+record that existing Portfolio authority and the ordinary CM path can supply.
+`REQUEST_USER` is not a generic escape hatch from an incomplete assignment.
+
+## Manager assignment construction
+
+Every EM assignment references `.codex/prompts/hmasd-em.md`; every CM
+assignment references `.codex/prompts/hmasd-cm.md`. Put that prompt path in
+`context_refs` and require the recipient to read it before acting. Never
+blanket-ban subagents in an EM or CM assignment. A bounded slice may forbid a
+result-bearing command without forbidding its Implementer, Reviewer, Verifier,
+or research review leaves. It may say that no Operator is needed for a static
+slice, but it must not erase the CM's Operator interface from later eligible
+work. The role prompt and exact slice constraints are cumulative; a slice may
+narrow Effects and paths, but cannot redefine the manager topology.
 
 Portfolio is a decision participant, not a coordinator. It never creates or
 sends an ASSIGNMENT to Root, EM, or CM. After validating Portfolio's correlated
@@ -84,6 +147,13 @@ Operator. On another memory refusal it remains scheduled. On successful
 manifest creation it sends the correlated RETURN and must delete that heartbeat after PREPARED;
 a later scientific launch requires the ordinary CM/Operator
 flow.
+
+Direction-owned Git candidate and manifest preparation belong to CM. Root is
+not the routine preparation owner. Route Root only for an exact user-owned
+decision/effect, shared-core change, task-identity conflict, or cross-direction
+Git integration. A mechanical protocol question may also go to Root, but it
+does not grant Root the direction work. Historical direction prose naming Root
+for routine preparation does not override this current transport responsibility.
 
 ## Parallel dispatch barrier
 
