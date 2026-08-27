@@ -92,8 +92,13 @@ HMASD_SESSION_ENVELOPE_V2 kind=<kind> direction=<id> from=<role> to=<role> next=
 `id` 是 message UUID；`sha256` 是 locator envelope 内 `body` 对象按 UTF-8、sorted-key、
 compact JSON canonicalization 得到的 lowercase SHA-256；`locator` 是 gitignored、
 repository-relative POSIX path。script 先写 immutable envelope、再输出该 exact line；
-LLM 只填写 body。相同 message ID 只有 byte-identical body 可以复用，任何冲突都必须在
-文件或 send 前拒绝。
+Root 与 Clerk 用唯一 `assignment-from-brief` 入口，只提供 bounded objective 与
+slice-specific semantic flags。Root→Clerk 使用 `--current-control-release` 由 script 观察当前
+publishable release；Clerk→participant 用 `--control-release-envelope` 指向 validated ingress
+并复制 release。script 读取固定 role/direction context、计算当前 SHA、补齐固定 return
+boundary 与 workspace default，并直接生成完整 body 和 envelope。两者都不创建 ASSIGNMENT
+body 或 control-release JSON；旧 `assignment --body --control-release` 不存在。
+相同 message ID 只有 byte-identical body 可以复用，任何冲突都必须在文件或 send 前拒绝。
 
 recipient 把 Codex delegation 的 exact `input` 交给 v2 `read-message`。只有整行
 full-match、hash/body/schema/endpoint/control metadata 均通过才是工作流事件。裸 locator、
@@ -187,6 +192,12 @@ ASSIGNMENT body 固定包含：
 - `constraints`：resource、Git、review、result-command 与非目标；
 - `done_when`：何时必须产生 RETURN，而不是方向 terminal 条件。
 - `workspace_mode`：只能是 `shared-main` 或显式 `separate-worktree`。
+
+这些字段的 JSON shape、固定 role context、当前 SHA、默认 RETURN effect/完成条件和
+`shared-main` default 由 `assignment-from-brief` 生成。Root/Clerk 只通过 CLI flags 提供
+bounded objective、额外 context path、owned path、Effect 与真正 slice-specific 的约束/
+完成条件；release 由 script 当前观察或从 validated ingress 复制；不手写完整 body、
+control-release 或 SHA。
 
 Portfolio assignment 必须引用 `.codex/prompts/hmasd-portfolio.md`，EM assignment 引用
 `.codex/prompts/hmasd-em.md`，CM assignment 引用 `.codex/prompts/hmasd-cm.md`。slice

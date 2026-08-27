@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import uuid
 
 import pytest
 
@@ -434,31 +435,50 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
     validated = hmasd_state.validate_portfolio_return(repo_root, portfolio_return)
     assert validated["decision_id"] == valid["decision_id"]
 
-    assignment_body = {
-        "objective": "return the already committed global Portfolio decision",
-        "context_refs": [{
-            "path": "docs/research/portfolio/PORTFOLIO.md",
-            "sha256": hashlib.sha256(portfolio.read_bytes()).hexdigest(),
-        }],
-        "owned_paths": ["docs/research/portfolio/"], "effects": [],
-        "constraints": ["do not repeat portfolio-apply"],
-        "done_when": ["send one validated PORTFOLIO_RETURN"],
-        "workspace_mode": "shared-main",
-    }
-    assignment_body_path = tmp_path / "portfolio-assignment-body.json"
-    _write(assignment_body_path, assignment_body)
-    release_path = tmp_path / "control-release.json"
-    _write(release_path, {
+    for path, text in (
+        ("docs/project/WORKFLOW_PROTOCOL.md", "protocol\n"),
+        (".codex/prompts/hmasd-portfolio.md", "portfolio prompt\n"),
+    ):
+        target = repo_root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
+    release = {
         "control_release_id": "a" * 64, "protocol_epoch": 2,
         "head": "1" * 40, "origin_main": "1" * 40, "branch": "main",
         "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
         "publishable": True, "observed_at": "2026-08-27T20:10:00Z",
-    })
+    }
+    ingress_body = {
+        "objective": "route one bounded Portfolio slice", "context_refs": [],
+        "owned_paths": [], "effects": ["native_message_send:Portfolio"],
+        "constraints": ["preserve semantics"], "done_when": ["route once"],
+        "workspace_mode": "shared-main",
+    }
+    message_id = str(uuid.uuid4())
+    body_digest = hashlib.sha256(json.dumps(
+        ingress_body, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
+    ).encode()).hexdigest()
+    ingress = {
+        "schema_version": 2, "protocol_epoch": 2, "message_id": message_id,
+        "direction_id": "portfolio", "sender": {"identity": "Root", "thread_id": "root"},
+        "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
+        "kind": "ASSIGNMENT", "reply_to": None, "body_sha256": body_digest,
+        "control_release": release, "body": ingress_body,
+    }
+    ingress_path = (
+        repo_root / ".codex/runtime/session-envelopes/portfolio"
+        / f"{message_id}.assignment.json"
+    )
+    _write(ingress_path, ingress)
     assigned = _run_envelope(
-        "assignment", "--repo", str(repo_root), "--direction-id", "portfolio",
+        "assignment-from-brief", "--repo", str(repo_root), "--direction-id", "portfolio",
         "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
         "--recipient-identity", "Portfolio", "--recipient-thread-id", "portfolio",
-        "--body", str(assignment_body_path), "--control-release", str(release_path),
+        "--objective", "return the already committed global Portfolio decision",
+        "--owned-path", "docs/research/portfolio/",
+        "--constraint", "do not repeat portfolio-apply",
+        "--done-when", "send one validated PORTFOLIO_RETURN",
+        "--control-release-envelope", ingress_path.relative_to(repo_root).as_posix(),
     )
     assert assigned.returncode == 0, assigned.stderr
     assignment_output = json.loads(assigned.stdout)

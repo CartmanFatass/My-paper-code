@@ -11,5 +11,9 @@ applicable outbound subcommand `--help`; for a failed RETURN, also run
 `failure-history --help`. For release control, run the applicable
 `scripts/hmasd_control_release.py inspect/verify --help`.
 
+For every outbound ASSIGNMENT, follow the loaded Clerk skill's
+`assignment-from-brief` interface; assignment body and control-release JSON
+files are not dispatch inputs.
+
 Route the validated event under the cited protocol sections, perform section 6
 bounded final drain, and yield without taking domain ownership.

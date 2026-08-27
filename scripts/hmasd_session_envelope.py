@@ -14,10 +14,9 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 try:
-    from scripts import hmasd_path_policy, hmasd_state
+    from scripts import hmasd_control_release, hmasd_path_policy, hmasd_state
 except ImportError:
-    import hmasd_path_policy
-    import hmasd_state
+    import hmasd_control_release, hmasd_path_policy, hmasd_state
 
 
 EPOCH = 2
@@ -255,6 +254,50 @@ def assignment_body(value: Mapping[str, Any], repo: Path) -> dict[str, Any]:
         "done_when": strings(value["done_when"], "assignment done_when"),
         "workspace_mode": value["workspace_mode"],
     }
+
+
+def current_ref(repo: Path, path: str, label: str) -> dict[str, str]:
+    canonical = normalized_path(path, label)
+    try:
+        payload = resolved_path(repo, canonical, label, require_file=True).read_bytes()
+    except OSError as exc:
+        raise EnvelopeError(f"{label} is not readable") from exc
+    return {"path": canonical, "sha256": hashlib.sha256(payload).hexdigest()}
+
+
+def brief_defaults(direction: str, recipient_identity: str) -> tuple[list[str], list[str]]:
+    recipient_role = role(recipient_identity)
+    prompt = {
+        "Root": ".codex/prompts/hmasd-root.md",
+        "Workflow-Clerk": ".codex/prompts/hmasd-workflow-clerk.md",
+        "Portfolio": ".codex/prompts/hmasd-portfolio.md",
+        "EM": ".codex/prompts/hmasd-em.md",
+        "CM": ".codex/prompts/hmasd-cm.md",
+    }.get(recipient_role)
+    if prompt is None:
+        raise EnvelopeError("assignment-from-brief recipient role is invalid")
+    context_paths = ["docs/project/WORKFLOW_PROTOCOL.md", prompt]
+    if recipient_role in {"EM", "CM"}:
+        base = f"docs/research/candidates/{direction}"
+        context_paths.extend([
+            f"{base}/DIRECTION.md",
+            f"{base}/workflow/research/state.json",
+            f"{base}/workflow/engineering/state.json",
+        ])
+    elif recipient_role == "Portfolio":
+        context_paths.extend([
+            "docs/research/portfolio/PORTFOLIO.md",
+            "docs/research/portfolio/workflow/registry.json",
+        ])
+    constraints = [
+        f"Work only inside this bounded {recipient_role}"
+        + (" direction slice." if recipient_role in {"EM", "CM"} else " slice."),
+    ]
+    if recipient_role != "Workflow-Clerk":
+        constraints.append(
+            "Return to Workflow-Clerk; do not contact another top-level manager."
+        )
+    return context_paths, constraints
 
 
 def is_unknown_effect_failure(value: Mapping[str, Any]) -> bool:
@@ -699,19 +742,94 @@ def read_assignment(repo: Path, locator: str) -> tuple[Path, dict[str, Any]]:
     return relative, env
 
 
-def create_assignment(args: argparse.Namespace) -> dict[str, Any]:
+def assignment_endpoints(
+    args: argparse.Namespace, direction: str,
+) -> tuple[dict[str, str], dict[str, str]]:
+    sender = endpoint(
+        {"identity": args.sender_identity, "thread_id": args.sender_thread_id},
+        direction, "sender",
+    )
+    recipient = endpoint(
+        {"identity": args.recipient_identity, "thread_id": args.recipient_thread_id},
+        direction, "recipient",
+    )
+    assignment_route(sender["identity"], recipient["identity"], direction)
+    return sender, recipient
+
+
+def emit_assignment(
+    repo: Path,
+    direction: str,
+    sender: dict[str, str],
+    recipient: dict[str, str],
+    body: dict[str, Any],
+    release: Mapping[str, Any],
+) -> dict[str, Any]:
+    env = make("ASSIGNMENT", direction, sender, recipient, body, release, None)
+    relative = (
+        Path(".codex/runtime/session-envelopes")
+        / direction
+        / f"{env['message_id']}.assignment.json"
+    )
+    write_new(repo / relative, env)
+    return output(env, relative.as_posix())
+
+
+def create_assignment_from_brief(args: argparse.Namespace) -> dict[str, Any]:
     repo, direction = Path(args.repo).resolve(), args.direction_id
     if DIRECTION.fullmatch(direction) is None:
         raise EnvelopeError("direction_id is invalid")
-    sender = endpoint({"identity": args.sender_identity, "thread_id": args.sender_thread_id}, direction, "sender")
-    recipient = endpoint({"identity": args.recipient_identity, "thread_id": args.recipient_thread_id}, direction, "recipient")
-    assignment_route(sender["identity"], recipient["identity"], direction)
-    body = assignment_body(load(Path(args.body), "assignment body"), repo)
-    release = release_record(load(Path(args.control_release), "control release"), require_publishable=True)
-    env = make("ASSIGNMENT", direction, sender, recipient, body, release, None)
-    relative = Path(".codex/runtime/session-envelopes") / direction / f"{env['message_id']}.assignment.json"
-    write_new(repo / relative, env)
-    return output(env, relative.as_posix())
+    sender, recipient = assignment_endpoints(args, direction)
+    default_paths, default_constraints = brief_defaults(direction, recipient["identity"])
+    recipient_identity = recipient["identity"]
+    context_paths: list[str] = []
+    seen: set[str] = set()
+    for index, path in enumerate([*default_paths, *args.context_path]):
+        canonical = normalized_path(path, f"context_path[{index}]")
+        if canonical.casefold() not in seen:
+            seen.add(canonical.casefold())
+            context_paths.append(canonical)
+    generated = {
+        "objective": args.objective,
+        "context_refs": [
+            current_ref(repo, path, f"context_path[{index}]")
+            for index, path in enumerate(context_paths)
+        ],
+        "owned_paths": list(args.owned_path),
+        "effects": (
+            list(args.effect) if recipient_identity == "Workflow-Clerk"
+            else ["native_message_send:Workflow-Clerk", *args.effect]
+        ),
+        "constraints": [*default_constraints, *args.constraint],
+        "done_when": ([
+            "Before final, complete every ready native send and the bounded final drain."
+        ] if recipient_identity == "Workflow-Clerk" else [
+            "Before final, send exactly one correlated v2 "
+            + ("PORTFOLIO_RETURN" if recipient_identity == "Portfolio" else "RETURN")
+            + " to Workflow-Clerk."
+        ]) + list(args.done_when),
+        "workspace_mode": args.workspace_mode,
+    }
+    body = assignment_body(generated, repo)
+    if sender["identity"] == "Root":
+        if recipient_identity != "Workflow-Clerk" or not args.current_control_release:
+            raise EnvelopeError(
+                "Root assignment-from-brief requires Workflow-Clerk and current control release"
+            )
+        release_value = hmasd_control_release.inspect_repo(repo)
+    elif sender["identity"] == "Workflow-Clerk":
+        if not args.control_release_envelope:
+            raise EnvelopeError(
+                "Workflow-Clerk assignment-from-brief requires an ingress envelope"
+            )
+        _, source = _validated(repo, args.control_release_envelope)
+        if source["recipient"]["identity"] != "Workflow-Clerk":
+            raise EnvelopeError("control release source recipient must be Workflow-Clerk")
+        release_value = source["control_release"]
+    else:
+        raise EnvelopeError("assignment-from-brief sender is invalid")
+    release = release_record(release_value, require_publishable=True)
+    return emit_assignment(repo, direction, sender, recipient, body, release)
 
 
 def create_return(args: argparse.Namespace, portfolio: bool = False) -> dict[str, Any]:
@@ -839,13 +957,30 @@ def failure_history(args: argparse.Namespace) -> dict[str, Any]:
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser()
     commands = result.add_subparsers(dest="command", required=True)
-    for name in ("assignment", "control-notice"):
-        command = commands.add_parser(name)
-        for flag in (
-            "repo", "direction-id", "sender-identity", "sender-thread-id",
-            "recipient-identity", "recipient-thread-id", "body", "control-release",
-        ):
-            command.add_argument(f"--{flag}", required=True)
+    command = commands.add_parser("control-notice")
+    for flag in (
+        "repo", "direction-id", "sender-identity", "sender-thread-id",
+        "recipient-identity", "recipient-thread-id", "body", "control-release",
+    ):
+        command.add_argument(f"--{flag}", required=True)
+    command = commands.add_parser("assignment-from-brief")
+    for flag in (
+        "repo", "direction-id", "sender-identity", "sender-thread-id",
+        "recipient-identity", "recipient-thread-id", "objective",
+    ):
+        command.add_argument(f"--{flag}", required=True)
+    release_source = command.add_mutually_exclusive_group(required=True)
+    release_source.add_argument("--control-release-envelope")
+    release_source.add_argument("--current-control-release", action="store_true")
+    command.add_argument("--context-path", action="append", default=[])
+    command.add_argument("--owned-path", action="append", default=[])
+    command.add_argument("--effect", action="append", default=[])
+    command.add_argument("--constraint", action="append", default=[])
+    command.add_argument("--done-when", action="append", default=[])
+    command.add_argument(
+        "--workspace-mode", choices=("shared-main", "separate-worktree"),
+        default="shared-main",
+    )
     for name in ("return", "portfolio-return"):
         command = commands.add_parser(name)
         command.add_argument("--repo", required=True)
@@ -864,8 +999,8 @@ def parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
-        if args.command == "assignment":
-            result = create_assignment(args)
+        if args.command == "assignment-from-brief":
+            result = create_assignment_from_brief(args)
         elif args.command == "return":
             result = create_return(args)
         elif args.command == "portfolio-return":

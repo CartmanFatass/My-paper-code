@@ -56,18 +56,80 @@ def assign(
     repo: Path, *, recipient: str = "EM/ucope/g1", direction: str = "ucope",
     release: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    token = uuid.uuid4()
-    body_path, release_path = repo / f"body-{token}.json", repo / f"release-{token}.json"
-    write_json(body_path, assignment_body(repo, direction))
-    write_json(release_path, release or release_record())
+    ingress = root_ingress(repo, direction, release=release)
+    recipient_role = recipient.split("/", 1)[0]
+    fixed = [
+        ("docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n"),
+        (f".codex/prompts/hmasd-{recipient_role.lower()}.md", b"role prompt\n"),
+    ]
+    if recipient_role in {"EM", "CM"}:
+        base = f"docs/research/candidates/{direction}"
+        fixed.extend([
+            (f"{base}/DIRECTION.md", b"authority\n"),
+            (f"{base}/workflow/research/state.json", b"{}\n"),
+            (f"{base}/workflow/engineering/state.json", b"{}\n"),
+        ])
+    elif recipient_role == "Portfolio":
+        fixed.extend([
+            ("docs/research/portfolio/PORTFOLIO.md", b"portfolio\n"),
+            ("docs/research/portfolio/workflow/registry.json", b"{}\n"),
+        ])
+    for path, content in fixed:
+        target = repo / path
+        if not target.exists():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
     result = run_cli(
-        "assignment", "--repo", str(repo), "--direction-id", direction,
+        "assignment-from-brief", "--repo", str(repo), "--direction-id", direction,
         "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
         "--recipient-identity", recipient, "--recipient-thread-id", "participant",
-        "--body", str(body_path), "--control-release", str(release_path),
+        "--objective", "close one bounded slice",
+        "--owned-path", f"docs/research/candidates/{direction}/",
+        "--constraint", "preserve semantics",
+        "--done-when", "return once",
+        "--control-release-envelope", ingress["locator"],
     )
     assert result.returncode == 0, result.stderr
     return json.loads(result.stdout)
+
+
+def root_ingress(
+    repo: Path, direction: str = "ucope", *, release: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    message_id = str(uuid.uuid4())
+    body = {
+        "objective": "route one bounded slice",
+        "context_refs": [ref(repo, f"authority/{direction}.md", b"authority\n")],
+        "owned_paths": [],
+        "effects": ["native_message_send:participant"],
+        "constraints": ["preserve semantics"],
+        "done_when": ["route once"],
+        "workspace_mode": "shared-main",
+    }
+    digest = hashlib.sha256(
+        json.dumps(body, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
+    ).hexdigest()
+    envelope = {
+        "schema_version": 2,
+        "protocol_epoch": 2,
+        "message_id": message_id,
+        "direction_id": direction,
+        "sender": {"identity": "Root", "thread_id": "root"},
+        "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
+        "kind": "ASSIGNMENT",
+        "reply_to": None,
+        "body_sha256": digest,
+        "control_release": release or release_record(),
+        "body": body,
+    }
+    locator = f".codex/runtime/session-envelopes/{direction}/{message_id}.assignment.json"
+    write_json(repo / locator, envelope)
+    message = (
+        f"HMASD_SESSION_ENVELOPE_V2 kind=ASSIGNMENT direction={direction} "
+        f"from=Root to=Workflow-Clerk next=NONE id={message_id} sha256={digest} "
+        f"locator={locator}"
+    )
+    return {"locator": locator, "message": message, "recipient_thread_id": "clerk"}
 
 
 def git_closure(*, changed: bool) -> dict[str, Any]:
@@ -135,21 +197,191 @@ def test_assignment_uses_explicit_publishable_release_without_git_facts(tmp_path
     )
 
 
+def test_assignment_from_brief_generates_mechanical_body_fields(tmp_path: Path) -> None:
+    direction = "ucope"
+    ingress = root_ingress(tmp_path, direction)
+    protocol = ref(tmp_path, "docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n")
+    prompt = ref(tmp_path, ".codex/prompts/hmasd-em.md", b"em prompt\n")
+    authority = ref(
+        tmp_path, f"docs/research/candidates/{direction}/DIRECTION.md", b"direction\n",
+    )
+    research = ref(
+        tmp_path,
+        f"docs/research/candidates/{direction}/workflow/research/state.json",
+        b"{}\n",
+    )
+    engineering = ref(
+        tmp_path,
+        f"docs/research/candidates/{direction}/workflow/engineering/state.json",
+        b"{}\n",
+    )
+    evidence = ref(tmp_path, f"docs/research/candidates/{direction}/RESULT.md", b"result\n")
+    result = run_cli(
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", direction,
+        "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
+        "--recipient-identity", "EM/ucope/g2", "--recipient-thread-id", "em",
+        "--objective", "Interpret the bounded result and choose the next scientific slice.",
+        "--context-path", evidence["path"],
+        "--constraint", "Preserve the accepted result firewall.",
+        "--owned-path", f"docs/research/candidates/{direction}/",
+        "--control-release-envelope", ingress["locator"],
+    )
+
+    assert result.returncode == 0, result.stderr
+    output = json.loads(result.stdout)
+    envelope = json.loads((tmp_path / output["locator"]).read_text())
+    assert envelope["body"] == {
+        "objective": "Interpret the bounded result and choose the next scientific slice.",
+        "context_refs": [protocol, prompt, authority, research, engineering, evidence],
+        "owned_paths": [f"docs/research/candidates/{direction}/"],
+        "effects": ["native_message_send:Workflow-Clerk"],
+        "constraints": [
+            "Work only inside this bounded EM direction slice.",
+            "Return to Workflow-Clerk; do not contact another top-level manager.",
+            "Preserve the accepted result firewall.",
+        ],
+        "done_when": [
+            "Before final, send exactly one correlated v2 RETURN to Workflow-Clerk."
+        ],
+        "workspace_mode": "shared-main",
+    }
+    assert not list(tmp_path.rglob("*.body.json"))
+
+
+def test_assignment_from_brief_uses_portfolio_return_boundary(tmp_path: Path) -> None:
+    ingress = root_ingress(tmp_path, "portfolio")
+    ref(tmp_path, "docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n")
+    ref(tmp_path, ".codex/prompts/hmasd-portfolio.md", b"portfolio prompt\n")
+    ref(tmp_path, "docs/research/portfolio/PORTFOLIO.md", b"portfolio\n")
+    ref(tmp_path, "docs/research/portfolio/workflow/registry.json", b"{}\n")
+    result = run_cli(
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", "portfolio",
+        "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
+        "--recipient-identity", "Portfolio", "--recipient-thread-id", "portfolio",
+        "--objective", "Choose the next bounded portfolio transition.",
+        "--control-release-envelope", ingress["locator"],
+    )
+
+    assert result.returncode == 0, result.stderr
+    envelope = json.loads((tmp_path / json.loads(result.stdout)["locator"]).read_text())
+    assert envelope["body"]["done_when"] == [
+        "Before final, send exactly one correlated v2 PORTFOLIO_RETURN to Workflow-Clerk."
+    ]
+
+
+def test_assignment_from_brief_copies_release_from_ingress_envelope(tmp_path: Path) -> None:
+    ingress = root_ingress(tmp_path)
+    ref(tmp_path, "docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n")
+    ref(tmp_path, ".codex/prompts/hmasd-em.md", b"em prompt\n")
+    ref(tmp_path, "docs/research/candidates/ucope/DIRECTION.md", b"direction\n")
+    ref(tmp_path, "docs/research/candidates/ucope/workflow/research/state.json", b"{}\n")
+    ref(tmp_path, "docs/research/candidates/ucope/workflow/engineering/state.json", b"{}\n")
+
+    result = run_cli(
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", "ucope",
+        "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
+        "--recipient-identity", "EM/ucope/g2", "--recipient-thread-id", "em",
+        "--objective", "Continue the bounded scientific slice.",
+        "--control-release-envelope", ingress["locator"],
+    )
+
+    assert result.returncode == 0, result.stderr
+    generated = json.loads((tmp_path / json.loads(result.stdout)["locator"]).read_text())
+    source = json.loads((tmp_path / ingress["locator"]).read_text())
+    assert generated["control_release"] == source["control_release"]
+
+
+def test_assignment_from_brief_rejects_non_ingress_release_source(tmp_path: Path) -> None:
+    outbound = assign(tmp_path)
+    ref(tmp_path, "docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n")
+    ref(tmp_path, ".codex/prompts/hmasd-em.md", b"em prompt\n")
+    ref(tmp_path, "docs/research/candidates/ucope/workflow/research/state.json", b"{}\n")
+    ref(tmp_path, "docs/research/candidates/ucope/workflow/engineering/state.json", b"{}\n")
+
+    result = run_cli(
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", "ucope",
+        "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
+        "--recipient-identity", "EM/ucope/g2", "--recipient-thread-id", "em",
+        "--objective", "Continue the bounded scientific slice.",
+        "--control-release-envelope", outbound["locator"],
+    )
+
+    assert result.returncode == 2
+    assert "recipient must be Workflow-Clerk" in result.stderr
+
+
+def test_assignment_from_brief_builds_root_to_clerk_from_current_release(
+    tmp_path: Path,
+) -> None:
+    for path, content in (
+        ("AGENTS.md", b"instructions\n"),
+        ("docs/project/WORKFLOW_PROTOCOL.md", b"protocol\n"),
+        (".codex/prompts/hmasd-workflow-clerk.md", b"clerk prompt\n"),
+    ):
+        target = tmp_path / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content)
+    for command in (
+        ("git", "init", "-b", "main"),
+        ("git", "config", "user.email", "test@example.invalid"),
+        ("git", "config", "user.name", "HMASD Test"),
+        ("git", "add", "."),
+        ("git", "commit", "-m", "published control"),
+        ("git", "remote", "add", "origin", str(tmp_path)),
+        ("git", "update-ref", "refs/remotes/origin/main", "HEAD"),
+    ):
+        completed = subprocess.run(command, cwd=tmp_path, capture_output=True, text=True)
+        assert completed.returncode == 0, completed.stderr
+
+    result = run_cli(
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", "portfolio",
+        "--sender-identity", "Root", "--sender-thread-id", "root",
+        "--recipient-identity", "Workflow-Clerk", "--recipient-thread-id", "clerk",
+        "--objective", "Route one bounded coordination slice.",
+        "--effect", "native_message_send:Portfolio",
+        "--current-control-release",
+    )
+
+    assert result.returncode == 0, result.stderr
+    envelope = json.loads((tmp_path / json.loads(result.stdout)["locator"]).read_text())
+    assert envelope["sender"]["identity"] == "Root"
+    assert envelope["recipient"]["identity"] == "Workflow-Clerk"
+    assert envelope["control_release"]["publishable"] is True
+    assert envelope["body"]["effects"] == ["native_message_send:Portfolio"]
+    assert envelope["body"]["done_when"] == [
+        "Before final, complete every ready native send and the bounded final drain."
+    ]
+
+
+def test_legacy_assignment_command_is_removed() -> None:
+    result = run_cli("assignment", "--help")
+    assert result.returncode == 2
+    assert "invalid choice" in result.stderr
+
+
 def test_assignment_rejects_malformed_or_unpublishable_control_release(tmp_path: Path) -> None:
-    body_path, release_path = tmp_path / "body.json", tmp_path / "release.json"
-    write_json(body_path, assignment_body(tmp_path))
+    for path in (
+        "docs/project/WORKFLOW_PROTOCOL.md",
+        ".codex/prompts/hmasd-em.md",
+        "docs/research/candidates/ucope/DIRECTION.md",
+        "docs/research/candidates/ucope/workflow/research/state.json",
+        "docs/research/candidates/ucope/workflow/engineering/state.json",
+    ):
+        target = tmp_path / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b"{}\n" if path.endswith(".json") else b"context\n")
     common = [
-        "assignment", "--repo", str(tmp_path), "--direction-id", "ucope",
+        "assignment-from-brief", "--repo", str(tmp_path), "--direction-id", "ucope",
         "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "c",
         "--recipient-identity", "EM/ucope/g1", "--recipient-thread-id", "e",
-        "--body", str(body_path), "--control-release", str(release_path),
+        "--objective", "close one bounded slice",
     ]
     malformed = release_record(); malformed["extra"] = True
-    write_json(release_path, malformed)
-    result = run_cli(*common)
+    malformed_ingress = root_ingress(tmp_path, release=malformed)
+    result = run_cli(*common, "--control-release-envelope", malformed_ingress["locator"])
     assert result.returncode == 2 and "control release" in result.stderr
-    write_json(release_path, release_record(publishable=False))
-    result = run_cli(*common)
+    unpublished_ingress = root_ingress(tmp_path, release=release_record(publishable=False))
+    result = run_cli(*common, "--control-release-envelope", unpublished_ingress["locator"])
     assert result.returncode == 2 and "publishable" in result.stderr
 
 

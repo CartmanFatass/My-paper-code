@@ -80,33 +80,51 @@ def _git_input(
 
 def _session_assignment(repo: Path) -> dict[str, Any]:
     policy = repo / "docs/project/git-path-policy-v1.json"
-    body = {
-        "objective": "publish the exact alpha direction change once",
-        "context_refs": [{
-            "path": "docs/project/git-path-policy-v1.json",
-            "sha256": hashlib.sha256(policy.read_bytes()).hexdigest(),
-        }],
-        "owned_paths": ["experiments/candidates/alpha/"],
-        "effects": ["push the exact candidate once; UNKNOWN is observe-only"],
-        "constraints": ["never resend an unknown push"],
-        "done_when": ["return typed failure or published closure"],
-        "workspace_mode": "shared-main",
-    }
+    for path, content in (
+        ("docs/project/WORKFLOW_PROTOCOL.md", "protocol\n"),
+        (".codex/prompts/hmasd-cm.md", "cm prompt\n"),
+        ("docs/research/candidates/alpha/DIRECTION.md", "direction\n"),
+        ("docs/research/candidates/alpha/workflow/research/state.json", "{}\n"),
+        ("docs/research/candidates/alpha/workflow/engineering/state.json", "{}\n"),
+    ):
+        _write(repo / path, content)
     release = {
         "control_release_id": "a" * 64, "protocol_epoch": 2,
         "head": "1" * 40, "origin_main": "1" * 40, "branch": "main",
         "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
         "publishable": True, "observed_at": "2026-08-27T00:00:00Z",
     }
-    body_path = repo / ".codex/runtime/session-assignment-body.json"
-    release_path = repo / ".codex/runtime/session-control-release.json"
-    _write(body_path, json.dumps(body)); _write(release_path, json.dumps(release))
+    ingress_body = {
+        "objective": "route one bounded slice", "context_refs": [],
+        "owned_paths": [], "effects": ["native_message_send:CM"],
+        "constraints": ["preserve semantics"], "done_when": ["route once"],
+        "workspace_mode": "shared-main",
+    }
+    message_id = str(uuid.uuid4())
+    digest = hashlib.sha256(json.dumps(
+        ingress_body, separators=(",", ":"), sort_keys=True,
+    ).encode()).hexdigest()
+    ingress = {
+        "schema_version": 2, "protocol_epoch": 2, "message_id": message_id,
+        "direction_id": "alpha", "sender": {"identity": "Root", "thread_id": "root"},
+        "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
+        "kind": "ASSIGNMENT", "reply_to": None, "body_sha256": digest,
+        "control_release": release, "body": ingress_body,
+    }
+    ingress_path = repo / ".codex/runtime/session-envelopes/alpha" / f"{message_id}.assignment.json"
+    _write(ingress_path, json.dumps(ingress))
     completed = subprocess.run(
-        [str(PYTHON), str(ENVELOPE_SCRIPT), "assignment", "--repo", str(repo),
+        [str(PYTHON), str(ENVELOPE_SCRIPT), "assignment-from-brief", "--repo", str(repo),
          "--direction-id", "alpha", "--sender-identity", "Workflow-Clerk",
          "--sender-thread-id", "clerk", "--recipient-identity", "CM/alpha/g1",
-         "--recipient-thread-id", "cm-alpha", "--body", str(body_path),
-         "--control-release", str(release_path)],
+         "--recipient-thread-id", "cm-alpha",
+         "--objective", "publish the exact alpha direction change once",
+         "--context-path", policy.relative_to(repo).as_posix(),
+         "--owned-path", "experiments/candidates/alpha/",
+         "--effect", "push the exact candidate once; UNKNOWN is observe-only",
+         "--constraint", "never resend an unknown push",
+         "--done-when", "return typed failure or published closure",
+         "--control-release-envelope", ingress_path.relative_to(repo).as_posix()],
         cwd=repo, check=False, capture_output=True, text=True,
     )
     assert completed.returncode == 0, completed.stderr

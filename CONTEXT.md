@@ -36,8 +36,9 @@ _Avoid_: runtime actor, permission check
 _Avoid_: domain writer, decision owner
 
 **Session Envelope**:
-Clerk 与可见 manager task 之间的标准 ASSIGNMENT/RETURN 载体。script 生成固定
-header 与 runtime locator，LLM 只填写局部 body；Codex 原生消息完成实际投递。
+Clerk 与可见 manager task 之间的标准 ASSIGNMENT/RETURN 载体。Clerk 只向
+`assignment-from-brief` 提供局部语义 flags；script 生成完整 body、固定 metadata、当前
+context SHA 与 runtime locator，Codex 原生消息完成实际投递。
 _Avoid_: decision authority, task cache, workflow state machine
 
 **Effect**:

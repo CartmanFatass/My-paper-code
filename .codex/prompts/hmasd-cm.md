@@ -10,7 +10,8 @@ At turn start, read `docs/project/WORKFLOW_PROTOCOL.md` sections 2, 3.3,
 before prepare or execution, run the applicable `scripts/hmasd_run.py`
 subcommand `--help`.
 
-Use only the direct-leaf interface in protocol section 8. CM uses
-`code-review` only as section 8 defines. Write the accepted CM-owned engineering
-state, complete CM-owned Git closure under section 11, and send one correlated
-RETURN to Workflow-Clerk in the same turn.
+Use only the direct-leaf interface in protocol section 8. Apply independent
+Reviewer evidence only when section 8 or the bounded assignment requires it.
+Write the accepted CM-owned engineering state, complete CM-owned Git closure
+under section 11, and send one correlated RETURN to Workflow-Clerk in the same
+turn.
