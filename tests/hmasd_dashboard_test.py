@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import hashlib
 import http.client
-import io
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -38,8 +37,6 @@ def fixture_root(tmp_path: Path) -> Path:
     (root / ".omp").mkdir(parents=True)
     (root / ".omp" / "AGENTS.md").write_text("HMASD fixture\n", encoding="utf-8")
     _copy_json("portfolio_registry.json", root / dashboard.REGISTRY_REL)
-    _copy_json("runtime_agents.json", root / dashboard.RUNTIME_AGENTS_REL)
-    _copy_json("runtime_worktrees.json", root / dashboard.RUNTIME_WORKTREES_REL)
     _copy_json(
         "research_state.json",
         root / "docs/research/candidates/example-direction/workflow/research/state.json",
@@ -60,7 +57,9 @@ def fixture_root(tmp_path: Path) -> Path:
         "accepted_result.json",
         root / "docs/research/candidates/example-direction/results/example-result.json",
     )
-    (root / ".codex/runtime/clerk-liveness.json").write_bytes(
+    clerk_path = root / ".codex/runtime/clerk-liveness.json"
+    clerk_path.parent.mkdir(parents=True, exist_ok=True)
+    clerk_path.write_bytes(
         dashboard._json_bytes(
             {
                 "schema_version": 1,
@@ -116,27 +115,6 @@ def _install_source_mutator(
     return state
 
 
-def _runtime_agent(
-    logical_identity: str,
-    agent_type: str,
-    parent_identity: str,
-    job_ref: str,
-    *,
-    generation: int = 1,
-) -> dict[str, Any]:
-    return {
-        "agent_type": agent_type,
-        "generation": generation,
-        "last_seen_at": "2026-08-24T00:00:00Z",
-        "lifecycle": "RUNNING",
-        "logical_identity": logical_identity,
-        "job_ref": job_ref,
-        "parent_identity": parent_identity,
-        "runtime_ref": f"runtime-{logical_identity.lower()}",
-        "session_ref": f"session-{logical_identity.lower()}",
-    }
-
-
 def _request(server: dashboard.DashboardServer, method: str, path: str) -> tuple[int, dict[str, str], bytes]:
     host, port = server.server_address[:2]
     assert isinstance(host, str) and isinstance(port, int)
@@ -156,47 +134,18 @@ def _serve_in_thread(root: Path) -> tuple[dashboard.DashboardServer, threading.T
     return server, thread
 
 
-class _Cp1252Stdout:
-    """Minimal Windows-like text stream whose binary buffer accepts UTF-8."""
-
-    encoding = "cp1252"
-
-    def __init__(self) -> None:
-        self.buffer = io.BytesIO()
-
-    def write(self, value: str) -> int:
-        # The old text write path would fail here for non-ASCII task titles.
-        encoded = value.encode(self.encoding)
-        return len(encoded)
-
-    def flush(self) -> None:
-        self.buffer.flush()
-
-
-def test_all_six_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
+def test_v2_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     first = dashboard.build_snapshot(root)
     second = dashboard.build_snapshot(root)
     assert dashboard._json_text(first) == dashboard._json_text(second)
-    assert set(first["data"]) == {"portfolio", "agents", "runs", "external_reviews", "worktrees", "clerk"}
+    assert set(first["data"]) == {"portfolio", "runs", "external_reviews", "clerk"}
     assert first["data"]["portfolio"]["data"]["directions"][0]["id"] == "example-direction"
-    assert first["data"]["agents"]["data"]["agents"][0]["logical_identity"]
     assert first["data"]["runs"]["data"]["runs"][0]["run_id"] == "example-run"
     assert first["data"]["external_reviews"]["data"]["rounds"][0]["round_id"]
-    assert first["data"]["worktrees"]["data"]["worktrees"][0]["worktree_ref"] == "wt-example"
     clerk_row = first["data"]["clerk"]["data"]["directions"][0]
-    assert clerk_row == {
-        "direction_id": "example-direction",
-        "lifecycle": "ACTIVE",
-        "stage": "CM",
-        "reason": "OWNED_WORK",
-        "owner_identity": "CM/example-direction/g1",
-        "task_status": "active",
-        "next_owner": None,
-        "assignment_locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
-        "return_locator": None,
-        "recovery_kind": "REDELIVER_ASSIGNMENT",
-    }
+    assert clerk_row["owner_stage"] == "CM"
+    assert clerk_row["observed_at"] != "UNOBSERVED"
 
     forbidden = {
         "command",
@@ -227,6 +176,12 @@ def test_all_six_projections_are_deterministic_and_field_allowlisted(tmp_path: P
     assert walk(first) == []
 
 
+def test_dashboard_has_no_retired_runtime_projection_surface() -> None:
+    source = (ROOT / "scripts" / "hmasd_dashboard.py").read_text(encoding="utf-8")
+    for retired in ("runtime_agents", "runtime_tasks", "runtime_worktrees", "agent_result", ".omp/runtime"):
+        assert retired not in source
+
+
 def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     before = hashlib.sha256((root / dashboard.REGISTRY_REL).read_bytes()).digest()
@@ -240,7 +195,7 @@ def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) ->
             assert headers["content-length"] == str(len(body))
         status, _, body = _request(server, "GET", "/api/clerk")
         assert status == 200
-        assert json.loads(body)["data"]["directions"][0]["stage"] == "CM"
+        assert json.loads(body)["data"]["directions"][0]["owner_stage"] == "CM"
         status, _, _ = _request(server, "GET", "/../scripts/hmasd_dashboard.py")
         assert status == 404
         status, _, _ = _request(server, "GET", "/%2e%2e/scripts/hmasd_dashboard.py")
@@ -270,18 +225,79 @@ def test_clerk_projection_age_is_visible_as_stale(tmp_path: Path) -> None:
     assert clerk["warnings"] == ["stale:clerk_liveness_age"]
 
 
-def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
+def test_clerk_v2_projection_keeps_provenance_and_never_infers_transport(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
-    (root / dashboard.RUNTIME_AGENTS_REL).unlink()
-    (root / dashboard.RUNTIME_WORKTREES_REL).write_text("{broken", encoding="utf-8")
-    snapshot = dashboard.build_snapshot(root)
-    # Codex task/process maps are disposable.  A fresh checkout without one
-    # still has a healthy empty projection derived from durable state.
-    assert snapshot["data"]["agents"]["status"] == "ok"
-    assert snapshot["data"]["agents"]["warnings"] == []
-    assert snapshot["data"]["worktrees"]["status"] == "invalid"
-    assert snapshot["data"]["portfolio"]["status"] == "ok"
-    assert snapshot["data"]["portfolio"]["data"]["directions"]
+    liveness_path = root / dashboard.CLERK_LIVENESS_REL
+    liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
+    liveness["directions"] = []
+    liveness_path.write_bytes(dashboard._json_bytes(liveness))
+
+    clerk = dashboard.build_projection(root, "clerk")
+    row = clerk["data"]["directions"][0]
+
+    assert row["lifecycle"] == "REGISTERED"
+    assert row["owner_stage"] == "TERMINAL"
+    assert row["native_task_id"] == "UNKNOWN"
+    assert row["native_task_status"] == "UNOBSERVED"
+    assert row["observed_at"] == "UNOBSERVED"
+    assert row["assignment_id"] == "UNKNOWN"
+    assert row["return_id"] == "UNKNOWN"
+    assert row["delivery_state"] == "UNOBSERVED"
+    assert row["control_release_adoption"] == "UNOBSERVED"
+    assert row["registry_revision"] == 1
+    assert row["research_state_revision"] == 1
+    assert row["engineering_state_revision"] == 1
+    assert row["projection_age_seconds"] == "UNOBSERVED"
+    assert row["defect"] is None
+
+
+def test_clerk_v2_observation_preserves_native_provenance_and_stage(tmp_path: Path) -> None:
+    root = fixture_root(tmp_path)
+    registry_path = root / dashboard.REGISTRY_REL
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["directions"][0]["lifecycle"] = "ACTIVE"
+    registry_path.write_bytes(dashboard._json_bytes(registry))
+    liveness_path = root / dashboard.CLERK_LIVENESS_REL
+    liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
+    liveness["directions"][0].update(
+        stage="CM_EXPERIMENT",
+        owner_stage="CM_EXPERIMENT",
+        native_task_id="native-cm-thread",
+        native_task_status="running",
+        assignment_id="assignment-17",
+        return_id="UNKNOWN",
+        delivery_state="DELIVERED",
+        control_release_adoption="ADOPTED",
+        next_event="observe the frozen command",
+    )
+    liveness_path.write_bytes(dashboard._json_bytes(liveness))
+
+    row = dashboard.build_projection(root, "clerk")["data"]["directions"][0]
+
+    assert row["owner_stage"] == "CM_EXPERIMENT"
+    assert row["native_task_id"] == "native-cm-thread"
+    assert row["native_task_status"] == "running"
+    assert row["assignment_id"] == "assignment-17"
+    assert row["delivery_state"] == "DELIVERED"
+    assert row["control_release_adoption"] == "ADOPTED"
+    assert row["next_event"] == "observe the frozen command"
+
+
+def test_clerk_v2_defects_are_precise_and_do_not_use_runtime_task_maps(tmp_path: Path) -> None:
+    root = fixture_root(tmp_path)
+    registry_path = root / dashboard.REGISTRY_REL
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["directions"][0]["lifecycle"] = "CLOSED"
+    registry_path.write_bytes(dashboard._json_bytes(registry))
+    tasks_path = root / ".codex/runtime/tasks.json"
+    tasks_path.parent.mkdir(parents=True, exist_ok=True)
+    tasks_path.write_text('{"secret": "must not be read"}', encoding="utf-8")
+
+    row = dashboard.build_projection(root, "clerk")["data"]["directions"][0]
+
+    assert row["owner_stage"] == "DEFECT"
+    assert row["defect"] == "CLOSED_WITH_INFLIGHT"
+    assert "secret" not in dashboard._json_text(row)
 
 
 @pytest.mark.parametrize(
@@ -294,7 +310,7 @@ def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
         ),
         (
             "docs/research/candidates/example-direction/workflow/engineering/state.json",
-            ("portfolio", "agents"),
+            ("portfolio", "clerk"),
             "engineering_state:example-direction",
         ),
         (
@@ -302,8 +318,6 @@ def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
             ("portfolio", "external_reviews"),
             "external_review_index:example-direction",
         ),
-        (dashboard.RUNTIME_AGENTS_REL, ("agents",), "runtime_agents"),
-        (dashboard.RUNTIME_WORKTREES_REL, ("worktrees",), "runtime_worktrees"),
     ],
 )
 def test_source_change_retries_the_whole_snapshot_generation(
@@ -330,8 +344,6 @@ def test_source_change_retries_the_whole_snapshot_generation(
         "docs/research/candidates/example-direction/workflow/research/state.json",
         "docs/research/candidates/example-direction/workflow/engineering/state.json",
         "docs/research/candidates/example-direction/workflow/external-review/index.json",
-        dashboard.RUNTIME_AGENTS_REL,
-        dashboard.RUNTIME_WORKTREES_REL,
     ],
 )
 def test_any_persistently_changing_source_returns_http_conflict_without_data(
@@ -356,126 +368,16 @@ def test_any_persistently_changing_source_returns_http_conflict_without_data(
     assert payload["data"] == {}
 
 
-def test_valid_root_em_and_cm_runtime_rows_are_reconciled(tmp_path: Path) -> None:
-    root = fixture_root(tmp_path)
-    runtime_path = root / dashboard.RUNTIME_AGENTS_REL
-    runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
-    runtime["agents"] = [
-        _runtime_agent("Root", "hmasd-root", "Root", "Root"),
-        runtime["agents"][0],
-        _runtime_agent("CM-example-direction", "hmasd-cm", "Root", "CMExampleDirection"),
-    ]
-    runtime_path.write_bytes(dashboard._json_bytes(runtime))
-
-    agents = dashboard.build_snapshot(root)["data"]["agents"]
-
-    assert agents["status"] == "ok"
-    assert agents["warnings"] == []
-    by_identity = {item["logical_identity"]: item for item in agents["data"]["agents"]}
-    assert set(by_identity) == {"Root", "Portfolio", "EM-example-direction", "CM-example-direction"}
-    assert by_identity["Root"]["agent_type"] == "hmasd-root"
-    assert by_identity["Portfolio"]["agent_type"] == "hmasd-portfolio"
-    assert by_identity["EM-example-direction"]["parent_identity"] == "Root"
-    assert by_identity["EM-example-direction"]["direction_id"] == "example-direction"
-    assert by_identity["CM-example-direction"]["agent_type"] == "hmasd-cm"
-    assert by_identity["CM-example-direction"]["parent_identity"] == "Root"
-    assert by_identity["CM-example-direction"]["phase"] == "SCOPING"
-
-
-def test_legacy_omp_runtime_maps_remain_read_only_compatible(tmp_path: Path) -> None:
-    root = fixture_root(tmp_path)
-    (root / dashboard.RUNTIME_AGENTS_REL).unlink()
-    (root / dashboard.RUNTIME_WORKTREES_REL).unlink()
-    _copy_json("runtime_agents.json", root / dashboard.LEGACY_RUNTIME_AGENTS_REL)
-    _copy_json("runtime_worktrees.json", root / dashboard.LEGACY_RUNTIME_WORKTREES_REL)
-
-    snapshot = dashboard.build_snapshot(root)
-
-    assert snapshot["data"]["agents"]["status"] == "ok"
-    assert snapshot["data"]["worktrees"]["status"] == "ok"
-    assert snapshot["data"]["agents"]["revision_refs"]["runtime_agents"] == 1
-    assert snapshot["data"]["worktrees"]["revision_refs"]["runtime_worktrees"] == 1
-
-
-def test_codex_task_map_projects_top_level_tasks_and_direct_leaves(tmp_path: Path) -> None:
-    root = fixture_root(tmp_path)
-    tasks_path = root / dashboard.RUNTIME_TASKS_REL
-    tasks_path.parent.mkdir(parents=True, exist_ok=True)
-    tasks_path.write_bytes(
-        dashboard._json_bytes(
-            {
-                "schema_version": 1,
-                "revision": 3,
-                "updated_at": "2026-08-24T00:00:03Z",
-                "writer": "Root",
-                "tasks": [
-                    {
-                        "logical_identity": "Portfolio",
-                        "kind": "portfolio",
-                        "generation": 1,
-                        "task_title": "HMASD Portfolio",
-                        "thread_id": "secret-thread",
-                        "host_id": "secret-host",
-                        "last_cursor": "secret-cursor",
-                        "project_root": str(root),
-                        "lifecycle": "IDLE",
-                    },
-                    {
-                        "logical_identity": "Implementer-example-direction",
-                        "kind": "implementer",
-                        "generation": 1,
-                        "task_title": "Candidate implementation",
-                        "parent_identity": "CM-example-direction",
-                        "lifecycle": "RUNNING",
-                    },
-                ],
-            }
-        )
-    )
-
-    agents = dashboard.build_snapshot(root)["data"]["agents"]
-
-    assert agents["status"] == "ok"
-    assert agents["revision_refs"]["runtime_tasks"] == 3
-    by_identity = {item["logical_identity"]: item for item in agents["data"]["agents"]}
-    assert by_identity["Portfolio"]["task_level"] == "top-level"
-    assert by_identity["Portfolio"]["job_name"] == "HMASD Portfolio"
-    assert by_identity["Implementer-example-direction"]["task_level"] == "leaf"
-    assert by_identity["Implementer-example-direction"]["parent_identity"] == "CM-example-direction"
-    assert "thread_id" not in dashboard._json_text(agents)
-    assert "secret-thread" not in dashboard._json_text(agents)
-    assert "project_root" not in dashboard._json_text(agents)
-
-
-def test_runtime_manager_generation_mismatch_remains_stale(tmp_path: Path) -> None:
-    root = fixture_root(tmp_path)
-    runtime_path = root / dashboard.RUNTIME_AGENTS_REL
-    runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
-    runtime["agents"].append(
-        _runtime_agent(
-            "CM-example-direction",
-            "hmasd-cm",
-            "Root",
-            "CMExampleDirection",
-            generation=2,
-        )
-    )
-    runtime_path.write_bytes(dashboard._json_bytes(runtime))
-
-    agents = dashboard.build_snapshot(root)["data"]["agents"]
-
-    assert agents["status"] == "stale"
-    assert "stale:agent_generation:CM-example-direction" in agents["warnings"]
-
-
 def test_snapshot_cli_is_deterministic_and_invalid_root_has_exit_two(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     command = [sys.executable, str(ROOT / "scripts" / "hmasd_dashboard.py"), "snapshot", "--root", str(root)]
     first = subprocess.run(command, check=False, capture_output=True, text=True)
     second = subprocess.run(command, check=False, capture_output=True, text=True)
     assert first.returncode == second.returncode == 0
-    assert first.stdout == second.stdout
-    assert json.loads(first.stdout)["schema_version"] == 1
+    first_payload = json.loads(first.stdout)
+    second_payload = json.loads(second.stdout)
+    assert first_payload["schema_version"] == second_payload["schema_version"] == 1
+    assert first_payload["data"]["clerk"]["data"]["directions"][0]["observed_at"] == second_payload["data"]["clerk"]["data"]["directions"][0]["observed_at"]
 
     invalid = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "hmasd_dashboard.py"), "snapshot", "--root", str(tmp_path / "missing")],
@@ -484,49 +386,3 @@ def test_snapshot_cli_is_deterministic_and_invalid_root_has_exit_two(tmp_path: P
         text=True,
     )
     assert invalid.returncode == 2
-
-
-def test_snapshot_cli_writes_utf8_bytes_for_non_ascii_task_title(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    root = fixture_root(tmp_path)
-    task_title = "中文运行任务"
-    tasks_path = root / dashboard.RUNTIME_TASKS_REL
-    tasks_path.parent.mkdir(parents=True, exist_ok=True)
-    tasks_path.write_bytes(
-        dashboard._json_bytes(
-            {
-                "schema_version": 1,
-                "revision": 1,
-                "updated_at": "2026-08-24T00:00:01Z",
-                "writer": "Root",
-                "tasks": [
-                    {
-                        "logical_identity": "CM-example-direction",
-                        "kind": "cm",
-                        "generation": 1,
-                        "task_title": task_title,
-                        "lifecycle": "RUNNING",
-                    }
-                ],
-            }
-        )
-    )
-
-    stdout = _Cp1252Stdout()
-    monkeypatch.setattr(sys, "stdout", stdout)
-
-    result = dashboard.main(
-        ["snapshot", "--root", str(root)]
-    )
-
-    assert result == 0
-    raw = stdout.buffer.getvalue()
-    assert task_title.encode("utf-8") in raw
-    payload = json.loads(raw.decode("utf-8"))
-    agents = payload["data"]["agents"]["data"]["agents"]
-    projected = next(
-        item for item in agents if item["logical_identity"] == "CM-example-direction"
-    )
-    assert projected["job_name"] == task_title

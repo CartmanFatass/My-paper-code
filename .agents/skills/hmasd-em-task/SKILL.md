@@ -5,30 +5,13 @@ description: Use when a top-level HMASD EM direction task receives a bounded sci
 
 # HMASD EM Task
 
-Read the validated assignment, then load `.codex/prompts/hmasd-em.md`. Own only
-the named direction's scientific outcome, authority, accepted interpretation,
-and research-state writes. Internal scientific leaves return evidence to EM;
-EM alone integrates and accepts it.
+Read `.codex/prompts/hmasd-em.md` completely before acting. Use
+`hmasd-slice-interface` for the exact v2 intake.
 
-EM scientific review must never invoke `code-review`. Use Research Critic for
-the independent scientific challenge and Agentify external transport for the
-required Pro review of a material scientific object. Those leaves return only
-to EM and never delegate.
+EM scientific review must never invoke `code-review`; use Research Critic and
+Agentify instead.
 
-Use `hmasd-slice-interface` for intake and return. Choose one RETURN status:
-
-- `REQUEST_CM` when the science card is complete and implementation,
-  instrumentation, prepare, or execution is next.
-- `REQUEST_EM` for another exact scientific question in the same direction.
-- `REQUEST_PORTFOLIO` for a genuine cross-direction decision.
-- `REQUEST_USER` for an exact material user choice.
-- scoped `FAILED` for a scientific failure that preserves unaffected work.
-- `DONE` only when this bounded assignment has no next responsibility.
-
-`next_objective` states the next bounded outcome and evidence need; it does not
-choose or contact the next task.
-
-Run `scripts/hmasd_session_envelope.py return`, then use
-`send_message_to_thread` with exactly `output.recipient_thread_id` and
-`output.message`. Research leaves and provider transports return only to EM;
-they never receive a Workflow-Clerk task ID or send across sessions.
+After writing the accepted scientific state, run
+`scripts/hmasd_session_envelope.py return --help`. Prepare only the body JSON,
+run the CLI, then call `send_message_to_thread` once with
+`output.recipient_thread_id` and exactly the one line in `output.message`.

@@ -33,11 +33,11 @@ if os.name == "nt":
 
 try:
     from scripts import hmasd_resource_preflight as resource_preflight
-    from scripts import hmasd_platform, hmasd_state
+    from scripts import hmasd_operator_result, hmasd_platform
 except ImportError:
     import hmasd_resource_preflight as resource_preflight
+    import hmasd_operator_result
     import hmasd_platform
-    import hmasd_state
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
@@ -264,39 +264,21 @@ def _operator_result_document(
 ) -> dict[str, Any]:
     stdout_path = manifest_path.parent / str(manifest["outputs"]["stdout"])
     stderr_path = manifest_path.parent / str(manifest["outputs"]["stderr"])
-    result_path = manifest_path.parent / OPERATOR_RESULT_NAME
     manifest_ref = _repo_file_ref(repo, manifest_path)
     stdout_ref = _repo_file_ref(repo, stdout_path)
     stderr_ref = _repo_file_ref(repo, stderr_path)
     result = {
-        "schema_version": 1,
-        "role": "hmasd-experiment-operator",
-        "logical_identity": "hmasd-experiment-operator",
-        "generation": 1,
-        "assignment_id": manifest["assignment_id"],
-        "status": "COMPLETED",
-        "materiality": "LOCAL",
-        "summary": "The exact frozen run reached terminal success.",
-        "changed_paths": [
-            manifest_ref["path"],
-            stdout_ref["path"],
-            stderr_ref["path"],
-            result_path.relative_to(repo).as_posix(),
-        ],
-        "state_refs": [manifest_ref],
-        "artifact_refs": [stdout_ref, stderr_ref],
-        "checkpoint_sha": None,
-        "decision_requests": [],
-        "next_action": {"kind": "NONE", "input_refs": []},
-        "payload": {
-            "kind": "run",
-            "run_id": manifest["run_id"],
-            "manifest_ref": manifest_ref,
-            "terminal_status": "SUCCEEDED",
-            "exit_code": 0,
-        },
+        "schema_version": 2,
+        "assignment_message_id": manifest["assignment_id"],
+        "run_id": manifest["run_id"],
+        "operator_identity": manifest["operator_identity"],
+        "manifest_ref": manifest_ref,
+        "stdout_ref": stdout_ref,
+        "stderr_ref": stderr_ref,
+        "terminal_status": manifest["status"],
+        "exit_code": manifest["process"]["exit_code"],
     }
-    hmasd_state.validate_document("agent_result", result)
+    hmasd_operator_result.validate_document(result)
     return result
 
 
@@ -2203,13 +2185,13 @@ def _execute(args: argparse.Namespace) -> int:
                     manifest_path,
                     terminal,
                 )
-                hmasd_state.initialize(
-                    "agent_result",
-                    result_path,
-                    str(terminal["writer"]),
-                    result,
-                )
-            except (hmasd_state.StateError, OSError, ValueError, TypeError) as exc:
+                hmasd_operator_result.publish_document(result_path, result)
+            except (
+                hmasd_operator_result.OperatorResultError,
+                OSError,
+                ValueError,
+                TypeError,
+            ) as exc:
                 raise RunRefusal(1, "OPERATOR_RESULT_PUBLISH_FAILED") from exc
         return wrapper_code
     finally:

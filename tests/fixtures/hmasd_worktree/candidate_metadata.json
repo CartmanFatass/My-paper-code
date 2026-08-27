@@ -1,8 +1,0 @@
-{
-  "allowed_paths": [
-    "src/owned.py"
-  ],
-  "assignment": "assignment-one",
-  "direction": "example-direction",
-  "kind": "engineering"
-}

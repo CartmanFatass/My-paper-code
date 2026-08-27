@@ -31,9 +31,6 @@ KINDS = (
     "run_manifest",
     "accepted_result",
     "external_archive",
-    "agent_result",
-    "runtime_agents",
-    "runtime_worktrees",
 )
 
 
@@ -51,7 +48,7 @@ def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     )
 
 
-def test_all_ten_schema_contracts_are_present_and_strict() -> None:
+def test_retained_schema_contracts_are_present_and_strict() -> None:
     schema_dir = ROOT / "scripts" / "schemas"
     for kind in KINDS:
         schema = json.loads(
@@ -69,6 +66,17 @@ def test_valid_phase0_fixtures_validate() -> None:
         assert result.returncode == 0, (kind, result.stderr)
 
 
+@pytest.mark.parametrize(
+    "kind",
+    ["agent_result", "runtime_agents", "runtime_tasks", "runtime_worktrees"],
+)
+def test_retired_runtime_state_kinds_are_rejected(kind: str) -> None:
+    from scripts import hmasd_state
+
+    with pytest.raises(hmasd_state.ValidationError, match="unknown state kind"):
+        hmasd_state.normalize_kind(kind)
+
+
 def test_state_lock_key_is_stable_for_relative_and_absolute_spellings() -> None:
     """Relative CLI paths must not bypass a lock held for their absolute form."""
 
@@ -80,181 +88,6 @@ def test_state_lock_key_is_stable_for_relative_and_absolute_spellings() -> None:
     assert lock_path == hmasd_state._lock_path(absolute)
     assert lock_path.parts[-4:-1] == (".codex", "runtime", "locks")
     assert ".omp" not in lock_path.parts
-
-def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:
-    document = fixture("agent_result")
-    document.update(
-        {
-            "assignment_id": "root-portfolio-wake",
-            "logical_identity": "Root",
-            "materiality": "PORTFOLIO",
-            "payload": {
-                "kind": "portfolio",
-                "direction_actions": [],
-                "portfolio_ref": {
-                    "path": "docs/research/portfolio/PORTFOLIO.md",
-                    "sha256": "a" * 64,
-                },
-                "registry_revision": 1,
-            },
-            "role": "root",
-            "summary": "Root reconciled portfolio lifecycle.",
-        }
-    )
-    path = tmp_path / "root-portfolio.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-    document["role"] = "hmasd-portfolio"
-    document["logical_identity"] = "Portfolio"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-
-@pytest.mark.parametrize("collection", ["state_refs", "artifact_refs"])
-def test_agent_result_top_level_file_evidence_rejects_opaque_strings(
-    tmp_path: Path, collection: str
-) -> None:
-    document = fixture("agent_result")
-    document[collection] = [
-        {
-            "path": "docs/research/candidates/example-direction/DIRECTION.md",
-            "sha256": "d" * 64,
-        }
-    ]
-    path = tmp_path / f"{collection}.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
-
-    document[collection] = ["opaque-file-evidence"]
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 2
-
-
-def test_agent_result_file_paths_reject_windows_alias_spellings() -> None:
-    from scripts import hmasd_state
-
-    valid_path = "docs/research/candidates/example direction/result file.md"
-    valid = fixture("agent_result")
-    valid["changed_paths"] = [valid_path]
-    valid["state_refs"] = [{"path": valid_path, "sha256": "d" * 64}]
-    assert hmasd_state.PATH_RE.fullmatch(valid_path) is not None
-    assert hmasd_state.validate_document("agent_result", valid) == valid
-
-    invalid_paths = (
-        "/absolute/file.md",
-        "docs//file.md",
-        "./file.md",
-        "docs/./file.md",
-        "../file.md",
-        "docs/../file.md",
-        "docs/file.md:stream",
-        "docs\\file.md",
-        "docs/\x01file.md",
-        "docs/\x7ffile.md",
-        "docs./file.md",
-        "docs /file.md",
-        "docs/file.md.",
-        "docs/file.md ",
-    )
-    for invalid_path in invalid_paths:
-        assert hmasd_state.PATH_RE.fullmatch(invalid_path) is None, invalid_path
-
-        changed_path = fixture("agent_result")
-        changed_path["changed_paths"] = [invalid_path]
-        with pytest.raises(hmasd_state.ValidationError):
-            hmasd_state.validate_document("agent_result", changed_path)
-
-        file_ref = fixture("agent_result")
-        file_ref["state_refs"] = [{"path": invalid_path, "sha256": "d" * 64}]
-        with pytest.raises(hmasd_state.ValidationError):
-            hmasd_state.validate_document("agent_result", file_ref)
-
-
-def test_artifact_payload_atomically_binds_each_path_to_its_digest(tmp_path: Path) -> None:
-    document = fixture("agent_result")
-    document.update(
-        {
-            "role": "hmasd-research-artifact-writer",
-            "logical_identity": "hmasd-research-artifact-writer",
-            "materiality": "LOCAL",
-            "payload": {
-                "kind": "artifact",
-                "artifact_refs": [
-                    {
-                        "path": "docs/research/candidates/example-direction/results/evidence.md",
-                        "sha256": "e" * 64,
-                    }
-                ],
-            },
-        }
-    )
-    path = tmp_path / "artifact-result.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
-
-    document["payload"] = {
-        "kind": "artifact",
-        "paths": ["evidence-a.md", "evidence-b.md"],
-        "sha256_by_path": {"evidence-a.md": "e" * 64},
-    }
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 2
-
-
-def test_transport_operation_identifier_remains_opaque(tmp_path: Path) -> None:
-    document = fixture("agent_result")
-    document["payload"] = {
-        "kind": "transport",
-        "provider": "external-review-provider",
-        "mode": "MONITOR",
-        "round_id": "a" * 20,
-        "operation_ref": "provider:operation:123",
-        "archive_ref": None,
-        "handoff_ref": None,
-    }
-    path = tmp_path / "transport-result.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-
-def test_agent_result_blocked_failure_scope_and_ref_are_coherent(tmp_path: Path) -> None:
-    document = fixture("agent_result")
-    document["next_action"] = {"kind": "WAIT_FOR_REF", "input_refs": ["missing-ref"]}
-
-    blocked = copy.deepcopy(document)
-    blocked["status"] = "BLOCKED"
-    blocked["failure_scope"] = "direction"
-    blocked["failure_ref"] = "docs/research/candidates/example-direction/DIRECTION.md"
-    path = tmp_path / "blocked.json"
-    path.write_text(json.dumps(blocked), encoding="utf-8")
-    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
-
-    for field in ("failure_scope", "failure_ref"):
-        missing = copy.deepcopy(blocked)
-        missing.pop(field)
-        path.write_text(json.dumps(missing), encoding="utf-8")
-        result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-        assert result.returncode == 2
-
-    nonblocked = copy.deepcopy(document)
-    nonblocked["failure_scope"] = "feature"
-    nonblocked["failure_ref"] = "feature-1"
-    path.write_text(json.dumps(nonblocked), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 2
-
-    nullable = copy.deepcopy(document)
-    nullable["failure_scope"] = None
-    nullable["failure_ref"] = None
-    path.write_text(json.dumps(nullable), encoding="utf-8")
-    assert run_cli("validate", "--kind", "agent_result", "--path", str(path)).returncode == 0
-
 
 def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(
     tmp_path: Path,
@@ -499,45 +332,6 @@ def test_replace_refuses_cross_writer_and_immutable_record_rewrites(tmp_path: Pa
         6,
     )
 
-    worktree_current = fixture("runtime_worktrees")
-    worktree_replacement = copy.deepcopy(worktree_current)
-    worktree_replacement["revision"] = 2
-    worktree_replacement["worktrees"][0]["canonical_absolute_path"] = "/tmp/other-worktree"
-    assert_refused(
-        "worktree-target",
-        "runtime_worktrees",
-        worktree_current,
-        worktree_replacement,
-        "Root",
-        6,
-    )
-
-    worktree_ref_replacement = copy.deepcopy(worktree_current)
-    worktree_ref_replacement["revision"] = 2
-    worktree_ref_replacement["worktrees"][0]["worktree_ref"] = "wt-other"
-    assert_refused(
-        "worktree-ref",
-        "runtime_worktrees",
-        worktree_current,
-        worktree_ref_replacement,
-        "Root",
-        6,
-    )
-
-    runtime_agents_current = fixture("runtime_agents")
-    runtime_agents_replacement = copy.deepcopy(runtime_agents_current)
-    runtime_agents_replacement["revision"] = 2
-    runtime_agents_replacement["agents"][0]["runtime_ref"] = "runtime-other-em"
-    assert_refused(
-        "runtime-agent-ref",
-        "runtime_agents",
-        runtime_agents_current,
-        runtime_agents_replacement,
-        "Root",
-        6,
-    )
-
-
 def test_registry_enforces_uniqueness_dependencies_and_active_limit(tmp_path: Path) -> None:
     registry = fixture("portfolio_registry")
     registry["directions"] = registry["directions"] * 9
@@ -678,9 +472,6 @@ def test_ignore_query_exposes_tracked_contracts_and_keeps_runtime_ignored() -> N
         "docs/external-review/directions/example/round/GEMINI_DIVERGENT_PROMPT.md",
     )
     ignored = (
-        ".codex/runtime/tasks.json",
-        ".codex/runtime/worktrees.json",
-        ".omp/runtime/agents.json",
         "temp/directions/example/manifest.json",
     )
     for path in tracked:

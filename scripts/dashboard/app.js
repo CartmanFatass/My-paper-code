@@ -142,37 +142,19 @@
     const directions = Array.isArray(current.data?.directions) ? current.data.directions : [];
     const rows = directions.map((direction) => [
       cell(direction.direction_id, "strong"),
-      badge(String(direction.stage || "unknown").toLowerCase()),
-      direction.owner_identity || direction.next_owner || "—",
-      direction.task_status || "—",
-      direction.reason || "—",
-      direction.recovery_kind || "—",
-      direction.assignment_locator || direction.return_locator || "—",
+      badge(String(direction.lifecycle || "unknown").toLowerCase()),
+      badge(String(direction.owner_stage || "unknown").toLowerCase()),
+      direction.next_event || "—",
+      `${direction.native_task_id || "UNKNOWN"} / ${direction.native_task_status || "UNOBSERVED"}`,
+      direction.observed_at || "UNOBSERVED",
+      direction.delivery_state || "UNOBSERVED",
+      direction.control_release_adoption || "UNOBSERVED",
+      direction.assignment_id || direction.return_id || "UNKNOWN",
+      direction.defect || "—",
     ]);
     const node = document.createDocumentFragment();
-    node.appendChild(heading("Workflow Clerk", "Current owner stage and transport liveness for every selected direction", current.status));
-    node.appendChild(table(["Direction", "Stage", "Owner / next", "Task", "Reason", "Recovery", "Locator"], rows, "No selected directions are visible."));
-    view.replaceChildren(node);
-  }
-
-  function renderAgents() {
-    const current = section("agents");
-    const agents = Array.isArray(current.data?.agents) ? current.data.agents : [];
-    const rows = agents.map((agent) => [
-      cell(agent.logical_identity, "strong"),
-      agent.agent_type,
-      agent.task_level || "—",
-      agent.parent_identity || "—",
-      agent.direction_id || "—",
-      agent.job_name,
-      badge(String(agent.lifecycle || "unknown").toLowerCase()),
-      agent.phase || "—",
-      agent.generation,
-      agent.last_seen_at || "—",
-    ]);
-    const node = document.createDocumentFragment();
-    node.appendChild(heading("Tasks", "Top-level Root / Portfolio / EM / CM tasks and direct leaf runtime observations", current.status));
-    node.appendChild(table(["Logical identity", "Type", "Task level", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No tasks are currently visible."));
+    node.appendChild(heading("Workflow Clerk", "Latest native observation and durable-state provenance; refreshing this view does not refresh task observations", current.status));
+    node.appendChild(table(["Direction", "Lifecycle", "Owner stage", "Next event", "Native task", "Observed", "Delivery", "Release", "Assignment / RETURN", "Defect"], rows, "No directions are visible."));
     view.replaceChildren(node);
   }
 
@@ -222,32 +204,12 @@
     view.replaceChildren(node);
   }
 
-  function renderWorktrees() {
-    const current = section("worktrees");
-    const worktrees = Array.isArray(current.data?.worktrees) ? current.data.worktrees : [];
-    const rows = worktrees.map((worktree) => [
-      cell(worktree.worktree_ref, "strong mono"),
-      worktree.direction_id,
-      worktree.kind,
-      worktree.path_name || "—",
-      badge(String(worktree.lifecycle || "unknown").toLowerCase()),
-      worktree.branch || "—",
-      worktree.integrated_sha ? String(worktree.integrated_sha).slice(0, 12) : "—",
-    ]);
-    const node = document.createDocumentFragment();
-    node.appendChild(heading("Worktrees", "Direction workspaces and integration checkpoints", current.status));
-    node.appendChild(table(["Ref", "Direction", "Kind", "Folder", "Lifecycle", "Branch", "Integrated SHA"], rows, "No worktree registry is visible."));
-    view.replaceChildren(node);
-  }
-
   function render() {
     const renderers = {
       portfolio: renderPortfolio,
       clerk: renderClerk,
-      agents: renderAgents,
       runs: renderRuns,
       external_reviews: renderExternal,
-      worktrees: renderWorktrees,
     };
     (renderers[state.view] || renderPortfolio)();
     document.querySelectorAll(".tab").forEach((tab) => {

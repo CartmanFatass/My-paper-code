@@ -1,26 +1,13 @@
 #!/usr/bin/env python3
-"""Pure HMASD protocol contract validation.
-
-This module observes existing effect documents and validates exact shared-core
-authority records.  It does not execute an effect, mutate workflow state, or
-model workflow lifecycle.
-"""
+"""Pure validation for exact HMASD shared-core authority records."""
 
 from __future__ import annotations
 
 import hashlib
 import json
 import re
-from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
-from typing import Any, Literal, Mapping, Sequence
-
-if __package__:
-    from scripts import hmasd_external_review, hmasd_platform, hmasd_state
-else:  # Direct script imports place this module beside its sibling modules.
-    import hmasd_external_review
-    import hmasd_platform
-    import hmasd_state
+from pathlib import PurePosixPath
+from typing import Any, Mapping, Sequence
 
 
 FENCE_INFO = "hmasd-shared-core-action-v1"
@@ -29,25 +16,6 @@ _FENCE_OPEN_RE = re.compile(r"^(?: {0,3})(?P<marker>`{3,}|~{3,})(?P<info>.*)$")
 _FENCE_CLOSE_RE = re.compile(r"^(?: {0,3})(?P<marker>`{3,}|~{3,})[ \t]*$")
 _SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 _GIT_SHA_RE = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
-_DIRECTION_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
-_ID_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}\Z")
-_RUN_ID_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
-_EFFECT_OPERATIONS = {
-    "run_manifest": frozenset({"OBSERVE", "EXECUTE", "CANCEL", "PROMOTE"}),
-    "worktree": frozenset(
-        {
-            "OBSERVE",
-            "PROVISION",
-            "RECORD_CANDIDATE",
-            "PREPARE_INTEGRATION",
-            "APPLY_INTEGRATION",
-            "PUSH",
-            "RELEASE",
-            "RETAIN",
-        }
-    ),
-    "external_operation": frozenset({"OBSERVE", "SEND", "ARCHIVE"}),
-}
 _SHARED_CORE_KEYS = frozenset(
     {
         "schema_version",
@@ -70,20 +38,6 @@ class ProtocolContractError(ValueError):
         self.code = code
         self.detail = detail
         super().__init__(f"{code}: {detail}")
-
-
-@dataclass(frozen=True)
-class EffectObservation:
-    """Closed observation returned for one exact Effect reference."""
-
-    kind: Literal["legacy", "run_manifest", "worktree", "external_operation"]
-    resource_id: str
-    state: Literal[
-        "LEGACY_UNTYPED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "UNKNOWN", "COMMITTED"
-    ]
-    path: str
-    operation: str = "OBSERVE"
-
 
 def _canonical_json(value: Mapping[str, Any]) -> bytes:
     return json.dumps(
@@ -110,173 +64,6 @@ def _validate_relative_path(value: Any, *, field: str) -> str:
     if any(part.endswith((".", " ")) for part in pure.parts):
         raise ProtocolContractError("INVALID_PATH", f"{field} contains a Windows-ambiguous component")
     return value
-
-
-def _read_json(repo_root: Path, relative_path: str) -> dict[str, Any]:
-    root = repo_root.resolve()
-    candidate = root.joinpath(*PurePosixPath(relative_path).parts)
-    current = root
-    for part in PurePosixPath(relative_path).parts:
-        current /= part
-        try:
-            info = current.lstat()
-        except (FileNotFoundError, OSError) as exc:
-            raise ProtocolContractError(
-                "EFFECT_DOCUMENT_UNAVAILABLE",
-                f"cannot read in-repository effect document {relative_path!r}",
-            ) from exc
-        if hmasd_platform.is_reparse_or_symlink(current, info):
-            raise ProtocolContractError(
-                "EFFECT_PATH_ALIAS",
-                f"effect document path {relative_path!r} contains a symlink or reparse point",
-            )
-    try:
-        resolved = candidate.resolve(strict=True)
-        resolved.relative_to(root)
-    except (FileNotFoundError, OSError, ValueError) as exc:
-        raise ProtocolContractError(
-            "EFFECT_DOCUMENT_UNAVAILABLE", f"cannot read in-repository effect document {relative_path!r}"
-        ) from exc
-    try:
-        value = json.loads(resolved.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise ProtocolContractError(
-            "INVALID_EFFECT_DOCUMENT", f"effect document {relative_path!r} is not valid UTF-8 JSON"
-        ) from exc
-    if not isinstance(value, dict):
-        raise ProtocolContractError("INVALID_EFFECT_DOCUMENT", "effect document must be a JSON object")
-    return value
-
-
-def _require_typed_effect_ref(effect_ref: Mapping[str, Any]) -> tuple[str, str, str, str]:
-    if set(effect_ref) == {"path"}:
-        path = _validate_relative_path(effect_ref["path"], field="effect_ref.path")
-        return "legacy", path, "", "OBSERVE"
-    required = {"kind", "path", "resource_id"}
-    allowed = required | {"operation"}
-    if not required.issubset(effect_ref) or not set(effect_ref).issubset(allowed):
-        raise ProtocolContractError(
-            "INVALID_EFFECT_REF",
-            "typed Effect ref must contain kind, path, and resource_id with optional operation",
-        )
-    kind = effect_ref["kind"]
-    resource_id = effect_ref["resource_id"]
-    if kind not in {"run_manifest", "worktree", "external_operation"}:
-        raise ProtocolContractError("UNKNOWN_EFFECT_KIND", f"unsupported Effect kind {kind!r}")
-    if not isinstance(resource_id, str) or not resource_id:
-        raise ProtocolContractError("INVALID_EFFECT_REF", "resource_id must be a non-empty string")
-    operation = effect_ref.get("operation", "OBSERVE")
-    if operation not in _EFFECT_OPERATIONS[kind]:
-        raise ProtocolContractError(
-            "INVALID_EFFECT_OPERATION", f"operation {operation!r} is not valid for Effect kind {kind!r}"
-        )
-    if kind in {"run_manifest", "worktree"}:
-        parts = resource_id.split("/")
-        tail_pattern = _RUN_ID_RE if kind == "run_manifest" else _ID_RE
-        if (
-            len(parts) != 2
-            or _DIRECTION_RE.fullmatch(parts[0]) is None
-            or tail_pattern.fullmatch(parts[1]) is None
-        ):
-            raise ProtocolContractError(
-                "INVALID_EFFECT_REF", f"{kind} resource_id has invalid direction/resource syntax"
-            )
-    path = _validate_relative_path(effect_ref["path"], field="effect_ref.path")
-    return kind, path, resource_id, operation
-
-
-def _observe_run_manifest(
-    path: str, resource_id: str, operation: str, document: dict[str, Any]
-) -> EffectObservation:
-    try:
-        hmasd_state.validate_document("run_manifest", document)
-    except Exception as exc:
-        raise ProtocolContractError("INVALID_EFFECT_DOCUMENT", str(exc)) from exc
-    expected = f"{document['direction_id']}/{document['run_id']}"
-    if resource_id != expected:
-        raise ProtocolContractError(
-            "EFFECT_IDENTITY_MISMATCH", f"run manifest identity is {expected!r}, not {resource_id!r}"
-        )
-    states = {
-        "PREPARED": "IN_PROGRESS",
-        "RUNNING": "IN_PROGRESS",
-        "SUCCEEDED": "SUCCEEDED",
-        "FAILED": "FAILED",
-        "CANCELLED": "FAILED",
-        "UNKNOWN": "UNKNOWN",
-    }
-    return EffectObservation("run_manifest", resource_id, states[document["status"]], path, operation)
-
-
-def _observe_worktree(
-    path: str, resource_id: str, operation: str, document: dict[str, Any]
-) -> EffectObservation:
-    try:
-        hmasd_state.validate_document("runtime_worktrees", document)
-    except Exception as exc:
-        raise ProtocolContractError("INVALID_EFFECT_DOCUMENT", str(exc)) from exc
-    matches = [
-        row
-        for row in document["worktrees"]
-        if f"{row['direction_id']}/{row['assignment_id']}" == resource_id
-    ]
-    if not matches:
-        raise ProtocolContractError(
-            "EFFECT_IDENTITY_MISMATCH", f"worktree registry has no resource {resource_id!r}"
-        )
-    if len(matches) != 1:
-        raise ProtocolContractError(
-            "EFFECT_IDENTITY_NOT_UNIQUE", f"worktree registry has {len(matches)} rows for {resource_id!r}"
-        )
-    row = matches[0]
-    lifecycle = row["lifecycle"]
-    if row.get("unknown_outcome") is not None or lifecycle.endswith("_OUTCOME_UNKNOWN"):
-        state = "UNKNOWN"
-    elif lifecycle in {"INTEGRATED", "RELEASED"}:
-        state = "SUCCEEDED"
-    elif lifecycle == "RETAINED_FOR_RECOVERY":
-        state = "FAILED"
-    else:
-        state = "IN_PROGRESS"
-    return EffectObservation("worktree", resource_id, state, path, operation)
-
-
-def _observe_external_operation(
-    path: str, resource_id: str, operation: str, document: dict[str, Any]
-) -> EffectObservation:
-    commitment = document.get("commitment_state")
-    if commitment not in {"UNKNOWN", "COMMITTED"}:
-        raise ProtocolContractError(
-            "INVALID_EFFECT_DOCUMENT", "external operation commitment_state must be UNKNOWN or COMMITTED"
-        )
-    validation_copy = dict(document)
-    validation_copy["commitment_state"] = "COMMITTED"
-    try:
-        validated = hmasd_external_review.validate_operation_ref(validation_copy)
-    except Exception as exc:
-        raise ProtocolContractError("INVALID_EFFECT_DOCUMENT", str(exc)) from exc
-    if resource_id != validated["operation_id"]:
-        raise ProtocolContractError(
-            "EFFECT_IDENTITY_MISMATCH",
-            f"external operation identity is {validated['operation_id']!r}, not {resource_id!r}",
-        )
-    return EffectObservation("external_operation", resource_id, commitment, path, operation)
-
-
-def observe_effect_ref(repo_root: Path | str, effect_ref: Mapping[str, Any]) -> EffectObservation:
-    """Validate and observe one exact typed Effect reference without mutation."""
-
-    if not isinstance(effect_ref, Mapping):
-        raise ProtocolContractError("INVALID_EFFECT_REF", "Effect ref must be an object")
-    kind, path, resource_id, operation = _require_typed_effect_ref(effect_ref)
-    if kind == "legacy":
-        return EffectObservation("legacy", "", "LEGACY_UNTYPED", path)
-    document = _read_json(Path(repo_root), path)
-    if kind == "run_manifest":
-        return _observe_run_manifest(path, resource_id, operation, document)
-    if kind == "worktree":
-        return _observe_worktree(path, resource_id, operation, document)
-    return _observe_external_operation(path, resource_id, operation, document)
 
 
 def _sorted_unique_text(values: Sequence[str], *, field: str, require_sorted: bool) -> list[str]:
@@ -478,11 +265,9 @@ def validate_shared_core_action_record(
 
 
 __all__ = [
-    "EffectObservation",
     "FENCE_INFO",
     "ProtocolContractError",
     "build_shared_core_action_record",
-    "observe_effect_ref",
     "parse_shared_core_action_records",
     "render_shared_core_action_record",
     "validate_shared_core_action_record",

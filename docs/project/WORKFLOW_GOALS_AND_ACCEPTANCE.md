@@ -1,206 +1,209 @@
-# HMASD 工作流设计目标与验收标准
+# HMASD 原生 Session 控制面 v2：目标与验收
 
 状态：用户确认的工作流权威目标
 Decision owner: User
 确认日期：2026-08-27
 
-本文档定义工作流必须达到的结果。冲突的历史协议、skill、测试夹具与实现属于
-迁移对象，不能改变本目标。
+本文定义 v2 必须达到的结果。`docs/project/WORKFLOW_PROTOCOL.md` 是实现这些结果的
+唯一正常跨 session 协议。冲突的历史协议、prompt、skill、fixture 与实现属于迁移
+对象，不能反向修改本目标。
 
-## 核心边界
+## 1. 产品边界
 
-Codex 的独立 top-level task/session 是可信任务平面。项目直接使用 Codex 已提供的
-可见 task 身份、会话历史、上下文隔离，以及原生 create、send、read、wait 和同
-task 继续能力。
+Codex 的可见 top-level task/session 是可信任务平面。HMASD 直接使用其 task 身份、
+历史、上下文隔离、create/send/read/wait 和同 task 继续能力，只补充 Codex 不知道的
+方向、角色、局部目标、路径、Effect、结果与证据语义。
 
-HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Codex 不知道的领域语义：
-方向、角色、局部目标、允许路径、结果类型和必要证据。
+长期同级工作必须是 top-level task；subagent 只做一个 manager 内部的 bounded leaf。
+项目不得用本地 task cache、raw rollout、SQLite、receipt、隐藏 app-server 或另一个
+scheduler 重新证明或模拟 Codex 产品事实。native task tools 不可用时，控制面停止并
+报告能力缺口，不得降级到这些历史替代物。
 
-> 信任 Codex task plane；只机械验证项目语义边界。
+> 信任 native task plane；只机械验证项目语义。
 
-Root、Clerk、Portfolio、EM、CM 各有一个自动发现的窄 task skill。participant
-skill 只暴露本角色工作切面、RETURN 类型与 `next_objective`；全局 topology、路由
-和异常转递只存在于 Clerk 的 operations manual。skill 不复制 authority 或建立
-新的 gate。跨 task 的自然语言和 leaf 直发不构成工作流事件。
+## 2. 五维状态必须分离
 
-## 角色
-
-- **Root**：最高能力的用户入口，可介入任何角色，但不做普通流程的例行转递。
-- **Workflow-Clerk**：唯一可见的长期协调 session。它持有全局拓扑，使用 Codex
-  原生 task 工具创建或复用 task、发送消息、接收返回、路由下一切面并向用户汇总。
-- **Portfolio**：只负责低频的跨方向选择、优先级、资源投入和 lifecycle 判断；它
-  使用 `.codex/prompts/hmasd-portfolio.md` 完成一次 bounded global decision wake。
-  单一 transport `direction_id=portfolio` 不限制全局比较；一个
-  `PORTFOLIO_RETURN.actions[]` 可表达多个既有/新方向决定，再由 Clerk 展开。它不
-  创建或派发 Root、EM、CM task。
-- **EM/<direction-id>/g<generation>**：只负责一个方向的科研语义；Research Scout、
-  Research Innovator、Research Principles Analyst、Research Critic 与 Agentify
-  external transport 是它的 direct leaves。材料方向变更或结论对象先经 constructive
-  case 与 GPT-5.6 Pro constructive review，EM 修订后再经独立 adversarial Pro review，
-  最终由 EM 综合；Pro 通过 `hmasd-explorer-agentify-transport` 调用。
-- **CM/<direction-id>/g<generation>**：只负责一个方向的工程语义；Implementer、
-  Reviewer、Verifier 与 Operator 是它的 direct leaves。非机械实现使用 Implementer，
-  高影响代码接受前使用独立 Reviewer，真实结果命令使用唯一 Operator。
-- **Experiment Operator**：CM 的单层执行 child，只运行一个冻结的结果命令。
-
-角色是责任边界，不是用户权限 gate。EM/CM 不需要了解全局拓扑，只需要知道自己
-可接收和必须返回的 envelope 格式。
-
-`.codex/prompts/hmasd-portfolio.md`、`.codex/prompts/hmasd-em.md` 与
-`.codex/prompts/hmasd-cm.md` 是三个 manager 唯一的 role-internal orchestration
-入口。Clerk does not choose or sequence their leaves；Clerk 只投递完整切面并根据
-RETURN 路由下一责任角色。
-
-Clerk 先按责任案例表处理：方向科研问题交 EM；方向代码、依赖、路径、Git、candidate、
-dossier、manifest、prepare、缺失实现或 Operator 交 CM；Pro external review 交 EM 的
-Agentify leaf；跨方向投资/lifecycle 交 Portfolio。只有真实用户材料选择、user-owned
-irreversible Effect、shared-core 语义修改、task identity conflict，或无法机械解释的
-协议矛盾才通知 Root；协议问题只发送事实，不把方向责任转给 Root。
-
-每个 Portfolio assignment 必须引用 `.codex/prompts/hmasd-portfolio.md`，每个 EM
-assignment 必须引用 `.codex/prompts/hmasd-em.md`，每个 CM assignment 必须引用
-`.codex/prompts/hmasd-cm.md`。assignment 可以限制路径、Effect 和是否允许当前
-result-bearing command，但不得用“禁止 subagent”整体抹掉 manager 的 direct-leaf
-接口；静态切面无需 Operator 不等于后续 eligible 切面没有 Operator。
-
-## 唯一正常流程
-
-1. Clerk 使用 Codex 原生项目 task 接口创建或复用一个可见 session。
-2. Clerk 向该 session 发送一个标准 ASSIGNMENT envelope。
-3. 接收 session 只在 envelope 的方向、目标和路径内工作。
-4. 接收 session 在结束当前 turn 前，使用 Codex 原生消息能力向 assignment 指定的
-   Clerk thread 发送一个标准 RETURN envelope。
-5. Clerk 收到并核对 RETURN 后，在结束处理前向下一责任 session 发送新的
-   ASSIGNMENT，或向用户发送 terminal summary。
-6. task 已停止但没有匹配 RETURN 时，Clerk 继续同一个 task 并重投同一关联
-   assignment；不创建重复 session。
-7. Clerk 在 ingress 后和 final 前各运行一次程序化 liveness；输入只接受 native
-   recipient history 中实际投递的 locator，不把生成文件当 delivery receipt；同一 active turn 内
-   合并到达的 locator 由第二次 bounded drain 处理，不依赖模型记住未完成消息。
-
-科研或工程工作完成但没有完成第 4 步，只表示局部工作停止，**不表示自动交接
-完成**。下一责任角色已经收到消息，才算本 hop 完成。
-
-对仍为 ACTIVE 的方向，当前切面完成也不等于方向完成。participant 应用
-`REQUEST_EM` 或 `REQUEST_CM` 明确普通下一责任；只有跨方向选择、优先级、资源投入
-或 lifecycle 判断才使用 `REQUEST_PORTFOLIO`。Portfolio 把决定 RETURN 给 Clerk，
-由 Clerk 路由 EM/CM。缺少现成实现本身不是 PARK 理由。
-
-每个已选择方向按互斥优先级具有一个完整 liveness fact：registry `CLOSED` 是正式
-结束；registry `PARKED` 且 exact material question 已送达用户是正式暂停；资源 retry
-assignment 与唯一 heartbeat 位于同一 owner 是资源等待；否则 owner session 必须
-持有 current assignment 和 next event。没有这些事实的 idle 是工作流故障；未持有
-当前切面的其他 EM/CM idle 正常。
-
-## Codex、LLM 与 script 的分工
-
-| 层 | 负责 | 不负责 |
+| 维度 | 唯一事实源 | 含义 |
 | --- | --- | --- |
-| Codex task plane | task 身份、历史、create/send/read/wait、同 task 继续、用户控制 | HMASD 方向语义 |
-| Clerk LLM | 全局拓扑、读取 RETURN、选择并联系下一责任角色 | 方向内科研或工程判断 |
-| EM/CM LLM | assignment 内的局部判断、填写并发送 RETURN | 其他方向、全局调度、恢复状态机 |
-| scripts | envelope schema、关联 ID、方向/路径 containment、由 registry/native-delivery/task facts 生成 liveness 与恢复动作、简单日志、实验命令事实 | 创建/等待 task、把文件存在当投递、解释方向 prose、模拟 Codex 会话 |
+| `lifecycle` | Portfolio registry | `REGISTERED / ACTIVE / PARKED / CLOSED` 的 durable 投资决定 |
+| `owner_stage` | Clerk 的短期只读投影 | 当前由谁持有 next event；不是 registry 或权限 gate |
+| `native_task_status` | Codex task list/read | task 当前产品状态；不能推导方向完成或 ownership |
+| `research_phase / engineering_phase` | 对应方向 state | 科研与工程领域进度；不能充当 transport receipt |
+| `delivery_state` | native task history | envelope 是否真实投递及其 correlation；文件存在或 mtime 不算 delivery |
 
-script 校验失败只报告机械输入问题，不授予或否定用户权限，也不生成新 gate。
+这些维度不得互相覆盖。research `COMPLETE` 不等于方向 `CLOSED`；task `idle` 不等于
+无 owner；Dashboard 显示的新 phase 不等于 Clerk 已收到 RETURN。
 
-Clerk 使用 `.codex/prompts/hmasd-workflow-clerk.md` 中唯一的方向无关语义表。每个
-事件 turn 先从 Codex task list/read 建立临时拓扑快照；快照不落盘为第二 registry。
-同一批正交方向必须完成全部 ready assignment 的原生 send 后结束事件 turn；普通
-事件 turn 不调用 wait；final 前的第二次 liveness pass 回收 active turn 内合并到达
-的 locator，之后的新 RETURN 再由原生消息/责任 session heartbeat 唤醒。一个方向的
-科学名词、证据、失败或等待不得出现在另一方向的 envelope 中。
+生命周期结果必须满足：
 
-内存 admission 失败是 result launch 前的可恢复资源等待：run CLI 不创建 reserved
-output root；仅对旧版本留下的、无 manifest/日志/结果且目录为空的精确 partial
-root 执行机械回收。Clerk 为 exact direction/run_id 保持至多一个 heartbeat，并把
-它绑定到 retry assignment 的 exact recipient session；prepare 的责任 session 默认
-是同方向 CM，而不是 Root/Clerk。责任 session 收到 assignment 后重试冻结 prepare，
-PREPARED 后发送 RETURN 并取消自身，不得创建 Operator 或改变
-estimate/command/code SHA。
+- `REGISTERED` 是已知候选，不是终态；未被投资时可以没有 manager task。
+- `ACTIVE` 必须有一个可解释的 next event：现有 top-level owner、同 owner 的
+  `WAIT_RESOURCE`，或正在同一 Clerk turn 内完成的 validated handoff。不能因缺代码、
+  当前 slice 完成、task idle 或 future Operator 尚未创建而静默失去 owner。
+- `PARKED` 必须有 durable material reason、明确 reactivation condition 和已送达的
+  用户/外部等待端点；普通资源重试或缺失实现不得伪装成 PARKED。
+- `CLOSED` 必须有 durable terminal reason 与 evidence，且没有 next objective、
+  assignment、heartbeat 或活跃实验。关闭不是局部 participant 的决定。
 
-## Git、实验和共享核心
+## 3. 角色与 standing authority
 
-`C:/Projects/HMASD` 是 shared checkout 且永久保持 `main`（permanent `main`）。Root、Clerk、
-Portfolio、EM、CM 都不得在该目录运行 `git switch` 或 `git checkout`。方向分支
-只允许存在于 assignment 明确给出的 separate worktree；否则 owner 仅在共享
-`main` 提交 exact owned paths，不改变其他 session 共同观察的分支。
+- **Root** 是永久用户入口与最高控制点，只保留用户材料决定、shared-core、identity
+  conflict、不可机械解释的 protocol question 和最终跨方向 Git integration。
+- **Workflow-Clerk** 是唯一长期协调 task，只负责 native topology、v2 transport、
+  on-demand task creation/reuse、recovery 与 final drain。它不重做 Portfolio、科研或
+  工程判断。
+- **Portfolio** 是长期 global top-level task，负责完整 considered cohort、跨方向
+  priority/lifecycle/capacity 与新方向选择。它不创建或直接派发其他 manager。
+- **EM/<direction>/gN** 与 **CM/<direction>/gN** 是按需创建、之后复用的长期可见
+  top-level task。EM 持有一个方向的科研语义；CM 持有该方向的工程与执行语义。
+- EM 的 direct leaves 是 Research Scout、Research Innovator、Research Principles
+  Analyst、Research Critic 与 Agentify external transport。CM 的 direct leaves 是
+  Implementer、Reviewer、Verifier 与 Experiment Operator。
+- **Experiment Operator** 始终是 CM 的单层 child，只运行一个冻结命令并把 terminal
+  result 返回 CM；CM 解释结果后才向 Clerk RETURN。
 
-- 各方向在自己的 source、test、doc 与 temp/directions/<direction-id>/ 路径内
-  自主工作、测试、commit 和 push；有 Git-visible 改动的 top-level 责任 session
-  在 RETURN 前自行提交并 push exact owned paths，报告 branch、commit SHA、
-  remote/ref 与 push 结果。leaf helper 和 Root 不代为做普通方向 Git 收尾；
-  worktree 可选，不是默认。
-- Direction-owned candidate 与 manifest preparation 是 CM 的普通工程责任，不因
-  Git 或 prepare 机械动作转给 Root。Root 只处理 shared-core、明确用户材料决定、
-  task identity conflict、cross-direction Git integration，以及无法机械解释的
-  protocol question；最后一种只上报事实，不把方向工作转给 Root。
-- 路径归属来自 assignment 的 owned_paths。机械检查只检测越界，不判断科研
-  意义。
-- 共享 C++ backend、神经网络基座和跨方向核心修改需要用户确认 exact paths 与
-  语义影响。危险操作警告并记录，但确认后不得形成权限死锁。
-- 实验命令 owner、进程终态和 stdout/stderr 继续由 hmasd_run.py 记录；session
-  协调不重复实现实验运行器。
-- CM 的 static prelaunch dossier 不调用 run CLI；CM 的 runtime prepare 只生成
-  manifest/preflight 并处理资源等待；唯一 Operator 才执行 payload/result command。
-- authority 已覆盖、memory-safe、无新 external/shared-core 语义且预计不超过
-  7200 秒的本地 PREPARED result command 直接进入 CM→唯一 Operator；不能仅因
-  “是真实科学执行”或 future Operator 尚未创建而增加用户批准 gate。
-- MARL 实验遵循真实科学与资源价值，不因 toy case 追求无意义 float64 精度或
-  逐路径穷举。
+Clerk 在某角色首次成为 next owner 时创建真实可见 task，而不是 custom subagent 或
+本地记录；以后继续同一 identity/generation。非当前 owner 的长期 EM/CM idle 正常。
+同一方向同一角色同一 epoch 不得出现两个 standing manager。资源 heartbeat 固定返回
+持有 retry responsibility 的 task，不得漂移到 Root 或 Clerk。
 
-## 可观察验收
+角色与工具不是批准层。用户可以直接进入任何可见 task；该 task 必须把 PAUSE、
+RESUME、OVERRIDE、CANCEL 或 REANCHOR 作为 v2 control fact 传播，使其他 session 不会
+静默继续旧 mandate。
 
-1. Portfolio、EM、CM 与 Clerk 均为 Codex 项目任务列表中的可见 top-level task；
-   同方向同角色没有重复 task。
-2. 每次跨 session 投递都是标准 envelope；EM/CM 的 identity、direction_id 和
-   路径属于同一方向。
-3. participant 在 final 前原生发送 RETURN；Clerk 收到后原生发送下一
-   ASSIGNMENT 或 terminal summary。
-4. 缺失或 malformed RETURN 在同一个 task 中补发，不重做已完成工作、不复制
-   manager。
-5. 一个方向的失败、等待或用户问题不停止其他方向；故障明确限定为 project、
-   direction、feature 或 effect。
-6. ACTIVE 方向的切面完成会收到下一责任角色 assignment；实现缺失会进入 CM，
-   不会无理由停在 idle/PARKED。
-7. 四个真实方向可同时经历上述转递，用户可以观察并随时介入。
-8. 机械测试只覆盖 envelope 格式、关联、方向 identity 和路径 containment；不重复
-   测试 Codex 是否能 create、send、wait、保存历史或恢复 session。
-9. 四方向事件同时到达时，Clerk 在结束事件 turn 前已发送所有独立 ready
-   assignment，且普通事件 turn 不调用 wait；task list/read 中的方向拓扑与 exact
-   task ID 足以解释每一次 send。
-10. 内存不足的 prepare 不留下 reserved root；同一 direction/run_id 只有一个可见
-    heartbeat，且它位于 retry assignment 的责任 session；PREPARED 后该 heartbeat
-    被取消，且未提前创建 Operator。
-11. Portfolio 只通过 correlated RETURN 给 Clerk 提供低频材料决定；任何新建的
-    `Portfolio -> Root/EM/CM ASSIGNMENT` 都被 envelope CLI 拒绝。切换前已在途的
-    legacy assignment 只允许完成一次 RETURN；原 sender 只把同一 locator 一次性
-    转发给 Clerk，不得派生新的直连边。
-12. 有 Git-visible 改动的责任 session 在 RETURN 前已 commit/push exact owned
-    paths 并报告 Git 信息；其他方向的 dirty files 未被带入 commit。worktree 要么
-    已由 owner 精确回收，要么带 exact branch/HEAD/reason 明确保留。
-13. 不超过 7200 秒且满足既有 direction authority/resource/Effect 边界的本地
-    PREPARED command 不触发 `REQUEST_USER`；Clerk 直接路由 CM 的唯一 Operator。
-14. Portfolio 的一次 global wake 可在一个 `PORTFOLIO_RETURN` 中产生多个方向
-    action；Clerk 在任何 send 前校验完整列表，并在同一事件 turn 投递所有独立 ready
-    action，不把比较拆成多个 Portfolio session。一个方向的 scoped failure 与其他
-    ready actions 可共存；`CLOSED/DONE` 必须与当前 registry lifecycle 匹配。
-15. `http://127.0.0.1:8765` 的只读 Dashboard 可访问并显示 Portfolio lifecycle 与
-    各方向 research/engineering state；独立 Clerk tab 显示 EM/CM/EXP/Portfolio/
-    资源等待/用户暂停/脱环/终止阶段与最新 locator。陈旧 task projection 有显式
-    警告，Dashboard 不写 authority、不路由工作，停止服务也不改变 liveness。
-16. Clerk 责任 session 的 liveness heartbeat 周期性刷新同一个程序化投影并执行
-    machine-emitted recovery action；该五分钟 heartbeat 固定附着在 Clerk task，缺失时
-    由 Clerk 在 bootstrap 恢复，绝不附着 Root；没有 action 时不发消息、不创建 task、不唤醒 Root。
+## 4. v2 正常流
 
-真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
-app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。
+所有跨 session 工作只使用 v2 的 `ASSIGNMENT`、`RETURN`、`PORTFOLIO_RETURN` 和
+`CONTROL_NOTICE`。native 消息是固定单行 header；canonical body 位于 header 绑定且
+hash 校验的 gitignored locator。消息前后不得附加自然语言或第二行。
 
-## 退出正常路径的历史机制
+participant RETURN 没有局部 terminal status。exact status 只有
+`REQUEST_EM / REQUEST_CM / REQUEST_PORTFOLIO / REQUEST_USER / WAIT_RESOURCE /
+FAILED`。科研、工程或实验 interpretation 完成后必须明确下一责任；方向真正 PARKED
+或 CLOSED 只能来自 Portfolio durable transition。
 
-hmasd_codex_tasks.py run-chain/execute-plan、本地 task cache、raw thread parser、
-Work Packet planner、return witness 及其恢复状态机，不再是正常工作流或验收 seam。
-完成调用依赖核查前代码可以暂留，但 Root、Clerk、Portfolio、EM、CM 不得自动
-加载或调用。
+正常 hop 的结果是：
 
-删除旧实现前必须先检查是否仍被实验、Git 或领域工具调用，并保留用户与其他
-session 的在途修改。
+1. Clerk 从 native list/read 建立本 turn 的 topology snapshot，并创建或复用 next
+   owner 的 standing task。
+2. Clerk 原生发送一个 v2 ASSIGNMENT；接收者只在 direction/objective/owned paths/
+   Effect 内工作。
+3. participant 在结束当前 turn 前原生发送 correlated RETURN；文件生成但未 native
+   send 不算交接。
+4. Clerk 只按 typed status/transition 路由。多个正交方向 ready 时，在同一事件 turn
+   发送全部 ready assignments；一个方向失败或等待不阻塞其他方向。
+5. Clerk final 前执行 bounded drain，读取本 active turn 内新到达而尚未消费的 v2
+   消息并完成 ready sends。随后到达的消息由责任 task/Clerk heartbeat 再次唤醒。
+6. stopped task 缺 RETURN 时继续同一 task 并重用同一 assignment；不复制 manager，
+   不重做已经有 durable evidence 的工作。
+
+## 5. Portfolio 必须是全局研究与容量 hub
+
+每次 Portfolio global wake 的 body 固定包含以下三个语义决策区块：
+
+- `considered[]`：完整说明本次全局 cohort 中每个既有或 proposed direction 是否被
+  选择、继续、延后、暂停或关闭，以及依据；
+- `transitions[]`：每个 material lifecycle/next-owner 变化及其 reason、evidence、
+  `next_role` 与 `next_objective`；
+- `capacity`：本次决策前后预算、分配、保留量与 opportunity-cost 解释。
+
+Clerk 校验完整 global result 后逐项执行 transport，不压缩、不重做比较，也不把
+一个方向的 failure 删除其他 ready transitions。v1 的 direction-local action list
+不再是正常路径。Portfolio/apply failure 仍用 PORTFOLIO_RETURN，并在完整三块之外携带
+同一 typed `failure`；只有已 durable 持久化的 transition 才能出现在返回中。
+
+新方向由 Portfolio 提出，并在任何 task creation/native send 前通过一个 CAS-bound
+脚本原子 scaffold：direction ID、DIRECTION authority、research/engineering state、
+external-review index 与 registry entry 要么全部形成并通过 postcondition，要么保持
+原状且没有 partial direction。只有 scaffold 成功后才能发生 `REGISTERED -> ACTIVE`
+并按需创建 EM。
+
+## 6. Failure、resource wait 与控制版本
+
+`FAILED` 必须携带 `scope, code, fingerprint, responsible_role, retryable, attempt,
+max_attempts, summary`。同一 immutable fingerprint 从 attempt 1 开始，
+`max_attempts` 不得超过 3；达到上限后不得靠改写 prose 或 fingerprint 继续重试。
+外部 commitment 为 UNKNOWN 时仍只 observe，绝不因重试预算而 resend。
+
+`WAIT_RESOURCE` 保持原 manager 为 owner，冻结 estimate、parameters、command、code
+SHA 与 retry condition；同一 direction/run 只有一个 heartbeat，且 heartbeat 回到该
+manager。资源恢复前不得创建 Operator。
+
+每个 envelope 固定携带 `protocol_epoch` 与 `control_release`。同一 protocol epoch 内
+的新 release 只能在 turn boundary 通过 `CONTROL_NOTICE REANCHOR` 更新 task 的 expected
+release；这不改变 lifecycle。protocol epoch 改变时不得 re-anchor 或 fork 旧 manager，
+必须创建新的 clean manager generation，并只迁移 durable authority/evidence。
+
+## 7. Git、实验与 shared core
+
+`C:/Projects/HMASD` 永久保持 shared `main`。manager 不得在这里 switch/checkout；只有
+assignment 明确指定 separate worktree 时才使用方向 branch。方向 owner 只 stage/
+commit/push exact owned paths，不能带入其他 session 的 dirty files；共享 index 的
+mutation 必须串行，不能保证时使用明确 worktree。
+
+有 Git-visible 修改的正常 top-level owner 在 RETURN 前完成自己的 Git 收尾并报告
+branch、完整 SHA、remote/ref 与 push 结果；leaf 和 Root 不代做普通方向收尾。
+shared C++ backend、神经网络基座或跨方向核心修改必须先向用户说明 exact paths、
+目标、非目标与语义影响并取得确认。
+
+CM 的 static dossier 不调用 run CLI；CM 的 runtime prepare 负责 manifest/preflight
+和资源等待；唯一 Operator 才执行 payload/result command。memory-unsafe prepare 不
+创建 reserved root。满足既有 authority/resource/Effect 边界且预计不超过 7200 秒的
+本地 PREPARED command 不因“真实科学执行”再请求批准；超过 7200 秒的 exact command
+需要性能审阅和用户批准。
+
+## 8. Dashboard 与可观察性
+
+Dashboard 只能是 `127.0.0.1` 的只读 projection。它必须逐字段显示 source/provenance、
+protocol epoch、control release、native observation time 和 stale/unknown；重新加载页面
+不能只改 `observed_at` 来伪造 freshness。它可以显示五维状态，但不能写 registry/state、
+创建 task、发送消息、触发 recovery 或决定 owner。关闭 Dashboard 不改变工作流。
+
+## 9. 可观察验收
+
+1. 新 epoch 的 Clerk、Portfolio 与按需 EM/CM 都出现在 Codex 项目 task list；没有用
+   fork 复制旧 conflicting mandate，也没有同 identity/generation 的重复 manager。
+2. 每个 native handoff 是一行 exact v2 header，四类 kind 之外全部拒绝；body hash、
+   correlation、identity、direction 和 owned-path containment 可机械验证。
+3. 五维状态分别可追溯到自己的事实源；`native_task_status` 或 phase 的变化不会静默
+   改写 lifecycle/delivery。
+4. 每个 ACTIVE 方向在 final drain 后都有唯一 next event；缺实现进入 CM，研究缺口
+   进入 EM，lifecycle/capacity 进入 Portfolio，用户材料问题进入 Root/user。
+5. PARKED 与 CLOSED 均有 durable reason/evidence，并满足无错误 owner/heartbeat/
+   experiment 的不变量；REGISTERED 不被误显示为 CLOSED。
+6. participant 只产生六个 exact status；局部完成不会终止方向。Operator terminal
+   result 回到 CM，CM 再提供下一责任。
+7. 同一 failure fingerprint 的 attempt 不超过三次；到达上限后有显式 responsible
+   role。外部 UNKNOWN 没有重复 send。
+8. Portfolio 一次 global wake 同时提供完整 `considered[] / transitions[] / capacity`；
+   多个 ready transition 在同一 Clerk turn 全部 native send。新方向 scaffold 的故障
+   注入证明 all-or-nothing，且 partial direction 不可见；关闭释放的 capacity 要么选出
+   replacement，要么留下非空且可审计的 unused-capacity reason。
+9. Portfolio authority/registry 已写但 RETURN 尚未发送、participant final 缺 RETURN、
+   Operator terminal、消息在另一个 active turn 中到达等静默点，都能在原 task 中恢复
+   并完成 handoff，不重复 material work。
+10. 用户直接 PAUSE/RESUME/OVERRIDE/CANCEL 可传播为 CONTROL_NOTICE；旧 assignment
+    不会在控制变化后被静默重投。
+11. 同 epoch release 更新经 REANCHOR 后才继续；epoch 改变会创建 clean generation，
+    旧 session history 不被 fork 到新 session。
+12. memory refusal 不留下 reserved root；heartbeat 位于 exact responsible manager；
+    PREPARED 后取消 heartbeat，且此前没有 Operator。
+13. 四个真实方向可并行完成 EM -> CM -> Operator -> CM -> Clerk/Portfolio 链；一个
+    方向的 waiting/failure 不延迟其他方向，shared Git index 没有交叉污染。
+14. Dashboard 关闭、陈旧或 projection 删除不改变任何 owner/recovery；每个显示值有
+    provenance，无法证明时显示 UNKNOWN 而不是猜测 transport gap。
+15. 真实验收使用 native visible tasks、真实方向与原生 task history。synthetic
+    transport、`run-chain`、hidden app-server、raw rollout 或 task cache 不得代替。
+
+## 10. v2 epoch 迁移与退休路径
+
+v2 控制面形成一个新的 protocol epoch。先把 authority、scripts、prompts、skills 与
+tests 集成为一个 committed `control_release`，停止创建新的 v1 工作；对既有外部
+commitment/Operator 只观察到安全边界。随后创建 clean Clerk 与 Portfolio，不 fork
+旧 task；EM/CM 在下一次成为 owner 时创建新 generation，只从 durable authority 和
+evidence rehydrate。新 epoch 可见且无 outstanding old Effect 后，再归档旧 task。
+
+v1 locator、participant-to-participant forwarding、`DONE`、Portfolio `actions[]`、
+Work Packet planner、`hmasd_codex_tasks.py run-chain/execute-plan`、本地 task cache、
+return witness、raw rollout parser 和隐藏 app-server manager 不再是正常协议或验收
+seam。代码可在完成调用依赖核查前暂留，但任何 v2 top-level task 都不得加载或调用。

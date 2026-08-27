@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts import hmasd_run, hmasd_state
+from scripts import hmasd_operator_result, hmasd_run, hmasd_state
 
 
 SAFE_SNAPSHOT = {
@@ -336,7 +336,7 @@ def test_execute_can_emit_one_schema_valid_operator_result(
 
     result_path = manifest_path.parent / "operator-result.json"
     result = json.loads(result_path.read_text(encoding="utf-8"))
-    hmasd_state.validate_document("agent_result", result)
+    hmasd_operator_result.validate_document(result)
     manifest_ref = {
         "path": "temp/directions/direction/exp/run/manifest.json",
         "sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
@@ -350,32 +350,15 @@ def test_execute_can_emit_one_schema_valid_operator_result(
         "sha256": hashlib.sha256((manifest_path.parent / "stderr.log").read_bytes()).hexdigest(),
     }
     assert result == {
-        "schema_version": 1,
-        "role": "hmasd-experiment-operator",
-        "logical_identity": "hmasd-experiment-operator",
-        "generation": 1,
-        "assignment_id": "assignment",
-        "status": "COMPLETED",
-        "materiality": "LOCAL",
-        "summary": "The exact frozen run reached terminal success.",
-        "changed_paths": [
-            manifest_ref["path"],
-            stdout_ref["path"],
-            stderr_ref["path"],
-            "temp/directions/direction/exp/run/operator-result.json",
-        ],
-        "state_refs": [manifest_ref],
-        "artifact_refs": [stdout_ref, stderr_ref],
-        "checkpoint_sha": None,
-        "decision_requests": [],
-        "next_action": {"kind": "NONE", "input_refs": []},
-        "payload": {
-            "kind": "run",
-            "run_id": "run",
-            "manifest_ref": manifest_ref,
-            "terminal_status": "SUCCEEDED",
-            "exit_code": 0,
-        },
+        "schema_version": 2,
+        "assignment_message_id": "assignment",
+        "run_id": "run",
+        "operator_identity": "Operator-run",
+        "manifest_ref": manifest_ref,
+        "stdout_ref": stdout_ref,
+        "stderr_ref": stderr_ref,
+        "terminal_status": "SUCCEEDED",
+        "exit_code": 0,
     }
     assert "work_id" not in result
 
@@ -528,9 +511,9 @@ def test_operator_result_publish_fault_preserves_success_without_retry(
         moved = manifest_path.parent / "stdout.closed"
         stdout_path.rename(moved)
         moved.rename(stdout_path)
-        raise hmasd_state.StateError("injected publish fault")
+        raise hmasd_operator_result.PublicationError("injected publish fault")
 
-    monkeypatch.setattr(hmasd_run.hmasd_state, "initialize", fail_publish)
+    monkeypatch.setattr(hmasd_run.hmasd_operator_result, "publish_document", fail_publish)
     assert hmasd_run.main(execute_argv) == 1
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))

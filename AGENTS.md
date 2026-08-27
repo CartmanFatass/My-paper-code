@@ -1,212 +1,107 @@
-# HMASD native Codex workflow
+# HMASD native Codex workflow v2
 
-HMASD 使用 Codex 可见 top-level tasks 作为可信 session/task plane。Codex 原生提供
-task 身份、历史、上下文隔离、create/send/read/wait 和同 task 继续；本项目不得
-通过 task cache、raw rollout parser、return witness 或隐藏 app-server manager
-重复实现这些能力。
+HMASD 直接信任 Codex 可见的 top-level task/session plane：task 身份、历史、上下文
+隔离、create/send/read/wait 与同 task 继续都由 Codex 原生提供。项目只机械约束方向、
+角色、路径、Effect、结果与证据，不重建 task registry、inbox、receipt 或隐藏 manager。
 
-用户确认的 docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md 是控制目标，
-docs/project/WORKFLOW_PROTOCOL.md 是唯一正常跨 session 协议。冲突的历史说明、
-skill 与实现属于迁移对象，不得重新解释目标。
+## 权威索引
 
-## Project references
+- 用户确认的控制目标与真实验收：
+  `docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md`。
+- 唯一正常跨 session 协议、状态转换与恢复规则：
+  `docs/project/WORKFLOW_PROTOCOL.md`。
+- 规划与 ticket：`.scratch/`、`docs/agents/issue-tracker.md`；项目与领域背景：
+  `CONTEXT.md`、`docs/adr/`、`docs/agents/domain.md`。
+- `.codex/prompts/` 和 task skills 只是角色入口；不得复制 authority、topology、
+  scheduler 或权限 gate。与上述两份权威文档冲突的 prompt、skill、fixture、历史说明
+  和实现都是迁移对象。
 
-- 规划 spec 与 ticket：.scratch/ 和 docs/agents/issue-tracker.md。
-- 项目上下文：CONTEXT.md、docs/adr/ 与 docs/agents/domain.md。
-- 历史 control-plane skills 已退休；不要从历史引用加载或恢复。当前唯一 session
-  skill 层是 `hmasd-root-task`、`hmasd-workflow-clerk-task`、
-  `hmasd-portfolio-task`、`hmasd-em-task`、`hmasd-cm-task`、
-  `hmasd-slice-interface` 与 `hmasd-operations-manual`。这些 skill 只是自动触发的
-  role/slice 入口，不是 authority、scheduler、registry 或第二控制面。
+v2 的 session skill 层仅为 `hmasd-root-task`、
+`hmasd-workflow-clerk-task`、`hmasd-portfolio-task`、`hmasd-em-task`、
+`hmasd-cm-task`、`hmasd-slice-interface` 与 `hmasd-operations-manual`。
 
-每个 top-level session 在处理对应工作时加载自己的 task skill。Root、Portfolio、
-EM、CM 的共同交接边界由 `hmasd-slice-interface` 给出；Clerk 额外加载
-`hmasd-operations-manual` 并独占 topology 与 routing。专业内部流程仍以各自
-`.codex/prompts/` role prompt 为准，skill 不复制整个拓扑。
+## Task plane 与角色切面
 
-## Task plane
+长期同级协作必须使用真实可见的 top-level task；subagent 只用于一个 manager 内部的
+bounded direct leaf。leaf 不再 delegate、不持有其他 top-level task ID，只 final
+return 给 spawning parent。任何 heartbeat 都回到当前责任 task。
 
-- Root 是永久最高能力的用户入口，可查看、介入和覆盖任何角色，但不承担普通
-  路径的例行转递，也不代替 CM 完成 direction-owned candidate 或 manifest
-  preparation。Root 只保留 shared-core、用户材料决定、身份冲突、cross-direction
-  Git integration，以及无法机械解释的 protocol question 等明确切面；protocol
-  question 只上报事实，不把方向工作转给 Root。
-- Workflow-Clerk 是唯一 Luna xhigh、可见、长期协调 task。它使用 Codex 原生项目
-  task 工具维护拓扑、发送 envelope、等待 RETURN、联系下一责任角色并汇总用户。
-  每次处理事件必须遵循 `.codex/prompts/hmasd-workflow-clerk.md` 的方向无关语义表、
-  临时拓扑快照、程序生成的 `liveness` 恢复动作和 parallel dispatch barrier；进入
-  final 前必须做一次 bounded drain，不得把一个方向的等待或语义复制到另一个方向。
-- Portfolio 是 gpt-5.6-sol max top-level task，只负责低频的跨方向选择、优先级、
-  资源投入和 lifecycle 判断。一个 wake 使用 transport
-  `direction_id=portfolio`，但可比较全局并通过一个 `PORTFOLIO_RETURN.actions[]`
-  表达多个既有或新方向的决定；Clerk 校验完整列表后逐项投递。Portfolio 不得创建、
-  派发、等待或直接联系 Root、EM、CM。它使用
-  `.codex/prompts/hmasd-portfolio.md` 完成一次 bounded decision wake。
-  普通 EM/CM 下一责任由 participant status 声明并由 Clerk 执行，不能仅因实现不
-  存在而 PARK。
-- EM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol max 科研 task，使用
-  `.codex/prompts/hmasd-em.md`。Research Scout、Research Innovator、Research
-  Principles Analyst、Research Critic 与 Agentify external transport 都是 EM 的
-  direct leaves。材料科学结论写入 authority 前，EM 先组合 constructive case；
-  direction-changing 或 conclusion-bearing 对象再经
-  `hmasd-explorer-agentify-transport` 调用 GPT-5.6 Pro 做 constructive review，EM
-  吸收或明确拒绝修正后，再对 revised object 做独立 adversarial Pro review，最终由
-  EM 综合。纯路由、记账和机械 RETURN 不创建这种 review 链。
-- CM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol high 工程 task，使用
-  `.codex/prompts/hmasd-cm.md`。Implementer、Reviewer、Verifier 与 Operator 都是 CM
-  的 direct leaves。非机械实现交给 bounded Implementer；production/protocol/
-  scientific/numerical/RNG/checkpoint 代码接受前使用一个 independent Reviewer；
-  真实 result-bearing command 始终交给唯一 Operator。只读诊断、记账、Git 收尾和
-  RETURN 修正不强制 leaf。
-- Experiment Operator 是 CM 的单层执行 child，只持有一个冻结的结果命令。
-- Watcher Advisor 是可选只读观察者，没有执行或批准权。
+- **Root**：永久用户入口；处理用户材料决定、shared-core、task identity conflict、
+  无法机械解释的协议矛盾和最终 cross-direction Git integration。它不做普通方向转递，
+  不代 EM/CM 完成方向工作。
+- **Workflow-Clerk**：唯一长期协调 task；只做 native topology、v2 transport、
+  on-demand task creation/reuse、bounded final drain 和 recovery。它不做方向科研、
+  工程或 Portfolio 判断，也不维护第二状态机。
+- **Portfolio**：长期 global top-level task；负责跨方向 considered set、lifecycle、
+  priority、capacity 与新方向决定。它把决定 RETURN 给 Clerk，不创建或直接联系
+  Root/EM/CM。
+- **EM/<direction-id>/g<generation>**：一个方向的长期科研 task。Research Scout、
+  Research Innovator、Research Principles Analyst、Research Critic 与 Agentify
+  external transport 是其 direct leaves。结论性或 direction-changing 对象保持
+  constructive case、constructive Pro review、修订后独立 adversarial Pro review。
+- **CM/<direction-id>/g<generation>**：一个方向的长期工程 task。Implementer、
+  Reviewer、Verifier 与 Experiment Operator 是其 direct leaves。非机械实现交
+  Implementer；高影响 production/protocol/scientific/numerical/RNG/checkpoint
+  代码接受前交 independent Reviewer。
+- **Experiment Operator**：CM 的单层 child，只持有一个冻结的 result-bearing
+  command；terminal result 固定回 CM，绝不直达 Clerk。
 
-`.codex/prompts/hmasd-portfolio.md`、`.codex/prompts/hmasd-em.md` 与
-`.codex/prompts/hmasd-cm.md` 是三个 manager 唯一的 role-internal orchestration
-入口；它们组织各自 direct leaves，但不增加跨 session 路由、权限 gate 或 durable
-状态。Clerk does not choose or sequence their leaves.
+角色是责任边界，不是用户权限 gate。用户可直接进入任何可见 task；被直接控制的
+participant 必须按 v2 `CONTROL_NOTICE` 让 Clerk 看见 transport 变化。
 
-用户可直接进入任何可见 task。角色描述责任，不是权限 gate；Root 与用户直接
-介入不需要 Clerk acknowledgment。
+## Durable writers
 
-Root、Clerk、Portfolio、EM、CM 是 top-level tasks，不是 custom subagents。
-manager 间协作使用可见 task 与 session envelope。可选 leaf 只做 bounded work，
-不得再次 delegate。每个 leaf 只通过自己的 final return only to the spawning
-parent；leaf 永不调用 `send_message_to_thread`，也不直接联系 Workflow-Clerk 或
-其他 top-level task。
+- Portfolio：`docs/research/portfolio/PORTFOLIO.md`、registry 与 lifecycle。
+- 对应 EM：`docs/research/candidates/<id>/DIRECTION.md`、research state、external
+  review index 与科研结果。
+- 对应 CM：engineering state、direction-owned source/test、static dossier 与
+  `hmasd_run.py prepare` 生成的 manifest/preflight。
+- 唯一 Operator：payload/result、stdout/stderr、checkpoint 与 terminal observation。
+- Root：明确授权的 shared-core 和最终 cross-direction integration。
 
-## Session envelope
-
-正常跨 session 消息只有 ASSIGNMENT、RETURN 与 Portfolio 专用的
-PORTFOLIO_RETURN。固定 header 与 runtime 文件由
-scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
-
-- 只有 Root 可以向 Clerk 创建协调 ASSIGNMENT；只有 Clerk 可以向
-  Root/Portfolio/EM/CM 创建正常 ASSIGNMENT。Portfolio、EM、CM 只 RETURN 给
-  Clerk，不能互相派发。
-- Clerk 使用 assignment 命令生成局部任务，再原生 send 固定 locator 消息。
-- 每个 Portfolio assignment 引用 `.codex/prompts/hmasd-portfolio.md`，每个 EM
-  assignment 引用 `.codex/prompts/hmasd-em.md`，每个 CM assignment 引用
-  `.codex/prompts/hmasd-cm.md`。slice 可限制路径、Effect 和当前 result command，
-  但不得用 blanket `no subagent` 删除 manager 的 direct-leaf 接口。
-- participant 使用 return 命令自动复制 direction、翻转 endpoints、绑定 reply_to
-  并检查 changed_paths，然后在 final 前原生 send 给 Clerk。
-- Portfolio 的新全局 wake 使用 `portfolio-return` 命令；一个 transport
-  `direction_id=portfolio` 不限制其研究范围，每个 material direction outcome
-  必须成为一个独立 action。一个方向的 scoped failure 使用该方向的
-  `ACTIVE/FAILED` action，不能删除其他 ready actions。CLI 将 action lifecycle 与
-  当前 Portfolio registry 匹配；Clerk 在任何 send 前校验完整 action list。
-- receiver 使用 read 命令获得校验后的 envelope 与固定 recipient thread ID。
-- receiver 对 Codex 原生 delegation 的 exact `input` 使用 `read-message`；裸自然
-  语言、raw JSON、带前后说明的 locator 或 leaf report 都是 `NON_ENVELOPE`，不得
-  触发路由、完成或 lifecycle 变化。用户在可见 task 中的直接对话不受此限制。
-- Clerk 把新鲜 native task/history 的最小 `id/name/status`、recipient history 中
-  实际可见且尚未由 correlated RETURN、next ASSIGNMENT 或 terminal/user summary
-  清除的每方向唯一 locator，以及精确 pause/heartbeat/experiment 观察交给
-  `hmasd_session_envelope.py liveness`。envelope 文件存在不是 delivery receipt。该
-  纯投影命令只从这些已观察事实生成全部方向 stage 和恢复动作，并刷新 ignored
-  `.codex/runtime/clerk-liveness.json`；LLM 不手写分类或 Dashboard row。
-- task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
-- 切换前已在途的 participant-to-participant v1 assignment 可向原 sender 完成一次
-  RETURN，避免丢失现有工作；原 sender 只把同一 legacy RETURN locator 一次性
-  转发给唯一 Clerk，不创建新 assignment，随后由 Clerk 恢复正常拓扑。
-
-scripts 不创建或等待 task，不解释方向 prose，也不维护 task lifecycle 或恢复 FSM；
-`liveness` 只把已观察 delivery/status/task facts 映射成固定恢复动作，动作仍由 Clerk
-通过 Codex 原生 send 执行。
-
-每个 selected direction 按互斥优先级分类：registry `CLOSED` 为正式结束；registry
-`PARKED` 且 exact material question 已送达用户为正式暂停；资源 retry assignment 与
-唯一 heartbeat 位于同一 owner 为资源等待；否则必须由 owner session 持有 exact
-assignment 与 next event。除此之外的 idle 是 workflow defect；非当前 owner 的
-EM/CM idle 是正常现象。
-
-hmasd_codex_tasks.py run-chain/execute-plan、Work Packet planner、本地 task cache、
-return witness 与 raw thread parser 已退出正常路径。完成依赖核查前代码可以暂留，
-但 Root、Clerk、Portfolio、EM、CM 不得自动调用。
+writer 表示领域责任，不是额外批准层。material decision 写入所属 durable authority；
+conversation 和 Dashboard 只保留 provenance。
 
 ## Hard boundaries
 
-1. 破坏性操作前解析 exact target，并保持在用户授权范围内。
-2. 不在 prompt、state、log、API 或 Git 中暴露 secret。
-3. 外部 provider send 每个 operation 至多一次；未知结果只观察，不盲目重发。
-4. 一个 Experiment Operator 从 launch 到 terminal observation 只持有一个 exact
-   result-bearing command。
-5. 不安全的内存计划必须缩小、batch 或 shard，不能提交用户批准。
-6. 预计超过 7200 秒的本地结果命令需要一次性能合理性审阅，并取得绑定 exact
-   command 的用户批准。
-7. 科学、数值、RNG、checkpoint、bit identity 与外部 Effect 语义不得静默改变。
-8. 用户始终拥有最高权限；危险行为警告并记录，但不得制造权限死锁。
-9. 故障必须限定为 project、direction、feature 或 effect；不得跨 task 传播裸
-   BLOCKED。
-10. Dashboard 只能是 `127.0.0.1` 上的只读投影；Clerk 维持现有服务可用，但不得
-     增加 daemon、数据库、路由写入或第二工作流引擎。Dashboard 陈旧或失败不改变
-     owner/liveness；Clerk tab 只显示程序生成的 ignored liveness 投影，原生 task
-     list/read 与 correlated assignment/RETURN 才是依据。
-11. 删除旧控制面前先做调用依赖与真实路径核查，并保留用户及其他 session 的
-    在途修改。
-12. 内存 admission 不足发生在 manifest 创建前时，reserved output root 必须保持
-    不存在；旧版本遗留的 partial root 仅能由 run CLI 对精确安全形状机械回收。
-    资源 retry 使用每个 direction/run_id 至多一个 heartbeat，绑定 exact retry
-    assignment 的责任 session（prepare 默认是同方向 CM），并在 PREPARED 后取消。
-13. authority 已覆盖、memory-safe、无新 external/shared-core 语义且预计不超过
-    7200 秒的本地 PREPARED result command 不需要仅因“是真实科学执行”再次请求
-    用户批准；Clerk 直接路由同方向 CM，由 CM 创建唯一 Operator。
+1. 破坏性操作前解析 exact target；不得越过用户授权范围，不得暴露 secret。
+2. 外部 provider 的一个 operation 至多 send 一次；结果未知时只 observe，不盲目重发。
+3. 一个 Operator 从 launch 到 terminal observation 只运行一个 exact command。
+4. 不安全内存计划必须缩小、batch 或 shard。prepare 的 memory refusal 在 manifest
+   前发生时 reserved output root 必须不存在；旧 partial root 仅由 run CLI 对精确
+   安全形状机械回收。
+5. 预计超过 7200 秒的本地 result command 必须经过一次性能合理性审阅，并取得绑定
+   exact command 的用户批准。authority 已覆盖、memory-safe、无新 external/shared-core
+   语义且不超过 7200 秒的 PREPARED command 不增加批准 gate。
+6. 科学、数值、RNG、checkpoint、bit identity 和 external Effect 语义不得静默改变。
+7. failure 必须限定为 project、direction、feature 或 effect，并按 v2 fingerprint
+   计数；同一 fingerprint 最多三次。该上限不放宽外部 at-most-once。
+8. 用户始终拥有最高权限。危险行为应说明并记录；工具或校验不能变成新的批准层。
+9. Dashboard 只允许 `127.0.0.1` 上的只读 provenance projection。它不得写 authority、
+   创建 task、路由、恢复或刷新伪造的 freshness；失败或陈旧不改变 liveness。
+10. `hmasd_codex_tasks.py run-chain/execute-plan`、Work Packet planner、本地 task
+    cache、return witness、raw rollout parser 与隐藏 app-server manager 均已退出正常
+    路径和验收。删除前先核查真实依赖并保留在途修改。
 
-## Durable authorities and writers
+## Shared workspace 与 Git
 
-- docs/research/portfolio/PORTFOLIO.md 与 lifecycle：Portfolio。
-- docs/research/portfolio/workflow/registry.json：Portfolio，通过
-  scripts/hmasd_state.py CAS 更新。
-- docs/research/candidates/<id>/DIRECTION.md、research state、external index 和
-  科研结果：对应 EM 或 exact Artifact Writer。
-- direction engineering state：对应 CM。
-- 静态 prelaunch dossier：CM 的方向工程 artifact writer，不调用 hmasd_run.py。
-- temp/directions/<id>/exp/<run-id>/ 下的 PREPARED manifest/preflight：CM 通过
-  hmasd_run.py prepare；payload/result 及 terminal observation：唯一 Operator。
-- 外部 commitment：Agentify。最终跨方向 Git integration：Root。
+`C:/Projects/HMASD` 是 shared checkout 且永久保持 `main`。Root、Clerk、Portfolio、
+EM、CM 不得在这里运行 `git switch` 或 `git checkout`。只有 assignment 明确给出
+separate worktree 时才允许方向分支；否则 owner 在 shared `main` 上只处理 exact
+`owned_paths`，不得 stage 或回退其他 session 的修改。
 
-writer 表示领域责任，不是运行时权限 gate。需要跨 task 长期依赖的 material
-decision 写入所属 Markdown/JSON authority；conversation 只提供 provenance。
+方向 source 位于 `experiments/candidates/`，tests 位于
+`tests/experiments/candidates/`，durable science 位于
+`docs/research/candidates/<direction-id>/`，运行产物仅位于
+`temp/directions/<direction-id>/{exp,test}/`。正常 top-level owner 在 RETURN 前完成
+自身 exact paths 的 Git 收尾并报告 branch、完整 SHA、remote/ref 与 push 结果；leaf
+和 Root 不代做普通方向收尾。共享 index 不允许并发 mutation；不能保证时使用显式
+separate worktree。
 
-## Direction workspace and Git
+共享 C++ backend、神经网络基座或跨方向核心修改前，必须向用户说明 exact paths、
+目标、非目标与语义影响并取得确认。使用 native Windows Git/Python；项目 Python
+优先 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`；tracked paths 使用
+repository-relative POSIX syntax，durable text 遵循 `.gitattributes` 的 LF。
 
-`C:/Projects/HMASD` is the shared checkout and permanent `main`. Root, Clerk,
-Portfolio, EM and CM must not run `git switch` or `git checkout` there. A
-direction branch is allowed only inside an explicitly assigned separate
-worktree. Without that exact worktree assignment, the owner works and commits
-only exact owned paths on shared `main` without changing branches. One session
-must never change the branch observed by the other sessions.
-
-方向运行产物只位于：
-
-    temp/directions/<direction-id>/exp/
-    temp/directions/<direction-id>/test/
-
-source 位于 experiments/candidates/，tests 位于 tests/experiments/candidates/，
-durable scientific artifacts 位于对应 docs/research/candidates/<direction-id>/。
-
-路径归属由 assignment body 的 owned_paths 声明。方向 top-level actor 在自己的
-路径内自主修改和测试；有 Git-visible 改动时，它必须在 RETURN 前自行 commit/push
-exact owned paths，并在 summary 报告 branch、完整 SHA、remote/ref 与 push 结果。
-leaf helper 和 Root 不代做普通方向 Git 收尾。共享 main 在多方向工作期间可以暂时
-含有其他方向的 unstaged 修改，但本方向的 owned paths 在 RETURN 时必须 clean。
-worktree 可选，不是默认要求；owner 必须回收 exact clean worktree，或在 RETURN 中
-报告 retained path/branch/HEAD/reason。
-
-共享 C++ backend、神经网络基座和跨方向核心修改必须先向用户说明 exact paths、
-目标、非目标及语义影响并取得确认。方向自主权不能扩张到共享核心。
-
-使用 native Windows Git/Python，项目 Python 优先使用
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe。tracked path 使用
-repository-relative POSIX syntax，durable text 遵循 .gitattributes 的 LF。
-
-## Working style
-
-- 保留用户和其他 session 的修改，只处理 assignment 声明的方向与路径。
-- Clerk 持有全局拓扑；participant 不协调其他 manager session。
-- EM/CM 只加载 assignment/return envelope 与各自 role prompt，不加载全局控制面。
-- Codex task list/history 是 session 事实源；不得建立平行 registry 证明同一事实。
-- reviews 与 tests 是风险相称的 evidence，不是授权层。
-- 机械检查失败只返回 exact 字段或越界路径；LLM 不据此发明新 gate。
-- 实验执行继续使用 hmasd_run.py；不要把 session 协调塞进实验或 Git 工具。
+保留用户与其他 session 的修改；reviews/tests 是风险相称的 evidence，不是 authority。
+session 协调不得进入实验运行器或 Git 工具。

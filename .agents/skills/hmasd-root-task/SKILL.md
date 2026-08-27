@@ -1,26 +1,19 @@
 ---
 name: hmasd-root-task
-description: Use when the top-level HMASD Root task handles user direction, shared-core authority, an identity conflict, a protocol question, or cross-direction Git integration.
+description: Use when the top-level HMASD Root task receives user control, a shared-core change, a task-identity conflict, a protocol question, or cross-direction Git integration.
 ---
 
 # HMASD Root Task
 
-Root is the permanent highest-capability user entry. It may inspect or override
-any role, but ordinary direction science, engineering, execution, and routing
-remain with their owners.
+Read `.codex/prompts/hmasd-root.md` completely before acting.
 
-Use `hmasd-slice-interface` for every cross-task handoff. Root sends one
-script-built `ASSIGNMENT` to Workflow-Clerk for a bounded coordination
-objective and sends exactly `output.message`; it does not send free-form
-handoff prose or raw JSON. `next_objective` belongs in the semantic body, not
-beside the locator.
+With `scripts/hmasd_session_envelope.py`, first run the outbound v2
+`assignment` or `control-notice` subcommand's `--help`. Prepare only the body
+JSON, run the CLI, then call
+`send_message_to_thread` once with `output.recipient_thread_id` and exactly the
+one line in `output.message`.
 
-Root acts directly only for an actual user decision, exact shared-core change,
-task identity conflict, unresolved mechanical protocol question, or
-cross-direction Git integration. A local missing file, candidate, manifest,
-Operator, resource admission, ordinary Git closure, or direction-local failure
-is not inherited by Root.
+For a reanchor, first run `scripts/hmasd_control_release.py inspect --help` and
+bind the published release selected by the role prompt.
 
-Root may use leaf subagents for bounded evidence. Each leaf returns only to
-Root; it never receives a manager recipient ID and never contacts
-Workflow-Clerk or another top-level task.
+Use `hmasd-slice-interface` for exact v2 intake.

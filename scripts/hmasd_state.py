@@ -18,6 +18,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import sys
 import tempfile
 from typing import Any, Callable, Iterator, Mapping, NoReturn
@@ -40,10 +41,6 @@ KIND_ALIASES = {
     "run_manifest": "run_manifest",
     "accepted_result": "accepted_result",
     "external_archive": "external_archive",
-    "agent_result": "agent_result",
-    "runtime_agents": "runtime_agents",
-    "runtime_worktrees": "runtime_worktrees",
-    "runtime_tasks": "runtime_tasks",
 }
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -59,6 +56,7 @@ PATH_RE = re.compile(
 )
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SECRET_NAME_RE = re.compile(r"(?:secret|token|password|credential|private[_-]?key)", re.I)
+PORTFOLIO_DECISION_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{1,63}$")
 
 
 class StateError(Exception):
@@ -284,28 +282,6 @@ def _ensure_path(value: Any, name: str, *, absolute: bool = False) -> None:
         raise ValidationError(f"{name} is not a repository-relative POSIX path")
 
 
-def _ensure_absolute_runtime_path(value: Any, name: str) -> None:
-    """Validate a reconstructable runtime path without resolving aliases."""
-
-    _ensure_path(value, name, absolute=True)
-    path = Path(value)
-    if any(part in {".", ".."} for part in path.parts):
-        raise OwnershipError(f"{name} contains an alias component")
-
-
-def _reject_runtime_alias_chain(path: Path, name: str) -> None:
-    """Reject an existing symlink/reparse component in an absolute path."""
-
-    current = path
-    while True:
-        if _is_alias(current):
-            raise OwnershipError(f"{name} traverses symlink or reparse point: {current}")
-        parent = current.parent
-        if parent == current:
-            break
-        current = parent
-
-
 def _ensure_sha(value: Any, name: str, *, git: bool = False) -> None:
     expression = GIT_SHA_RE if git else SHA256_RE
     if not isinstance(value, str) or expression.fullmatch(value) is None:
@@ -338,30 +314,6 @@ def _is_alias(path: Path) -> bool:
 
     return hmasd_platform.is_reparse_or_symlink(path)
 
-
-def _validate_runtime_tasks_path(path: str | os.PathLike[str]) -> Path:
-    """Require the task cache's canonical ``.codex/runtime/tasks.json`` path.
-
-    The helper accepts a relative spelling for CLI callers and an equivalent
-    absolute spelling for tests/embedding.  It deliberately checks lexical
-    components rather than resolving the path: resolving would allow a
-    junction or symlink to become the runtime authority before it is rejected.
-    """
-
-    target = Path(path)
-    if target.parts[-3:] != (".codex", "runtime", "tasks.json"):
-        raise _owner_error("runtime_tasks path must be .codex/runtime/tasks.json")
-    if any(part in {".", ".."} for part in target.parts):
-        raise _owner_error("runtime_tasks path contains an alias component")
-    current = target
-    while True:
-        if _is_alias(current):
-            raise _owner_error(f"runtime_tasks path traverses symlink or reparse point: {current}")
-        parent = current.parent
-        if parent == current:
-            break
-        current = parent
-    return target
 
 def _immutable_conflict(name: str) -> NoReturn:
     raise ObservedConflictError(f"{name} is immutable across replacement")
@@ -452,11 +404,26 @@ def _validate_registry(document: Mapping[str, Any]) -> None:
             if actual in state_paths:
                 raise ValidationError(f"duplicate state path: {actual}")
             state_paths.add(actual)
-        if direction["lifecycle_decision_ref"]["path"] != "docs/research/portfolio/PORTFOLIO.md":
+        decision_path = direction["lifecycle_decision_ref"]["path"]
+        if not (
+            decision_path == "docs/research/portfolio/PORTFOLIO.md"
+            or (
+                decision_path.startswith("docs/research/portfolio/decisions/")
+                and decision_path.endswith(".json")
+            )
+        ):
             raise _owner_error(f"{prefix}.lifecycle_decision_ref path is not Portfolio-owned")
         condition = direction["reactivation_condition_ref"]
-        if condition is not None and condition["path"] != "docs/research/portfolio/PORTFOLIO.md":
-            raise _owner_error(f"{prefix}.reactivation_condition_ref path is not Portfolio-owned")
+        if condition is not None:
+            condition_path = condition["path"]
+            if not (
+                condition_path == "docs/research/portfolio/PORTFOLIO.md"
+                or (
+                    condition_path.startswith("docs/research/portfolio/decisions/")
+                    and condition_path.endswith(".json")
+                )
+            ):
+                raise _owner_error(f"{prefix}.reactivation_condition_ref path is not Portfolio-owned")
         for dependency in direction["dependencies"]:
             if dependency not in ids and dependency not in {item["id"] for item in directions}:
                 raise ValidationError(f"unknown dependency {dependency}")
@@ -610,138 +577,6 @@ def _validate_accepted_result(document: Mapping[str, Any]) -> None:
         raise _owner_error("accepted source manifest path is not direction-owned")
 
 
-def _validate_agent_result(document: Mapping[str, Any]) -> None:
-    payload = document["payload"]
-    payload_kind = payload["kind"]
-    role = document["role"]
-    identity = document["logical_identity"]
-    if payload_kind == "root":
-        if role != "root" or identity != "Root":
-            raise OwnershipError("Root result must be owned by Root")
-    elif payload_kind == "git":
-        if role != "hmasd-git-integration" or identity != "Root":
-            raise OwnershipError("Git integration result must be owned by Root")
-    elif payload_kind == "portfolio":
-        if (role, identity) not in {
-            ("root", "Root"),
-            ("hmasd-portfolio", "Portfolio"),
-        }:
-            raise OwnershipError("portfolio result must be owned by Root or Portfolio")
-    elif payload_kind == "em":
-        if role != "hmasd-em" or identity != f"EM-{payload['direction_id']}":
-            raise OwnershipError("EM result does not match its direction manager")
-    elif payload_kind == "cm":
-        if role != "hmasd-cm" or identity != f"CM-{payload['direction_id']}":
-            raise OwnershipError("CM result does not match its direction manager")
-    else:
-        permitted_roles = {
-            "implementation": {"hmasd-implementer", "hmasd-implementer-terra"},
-            "review": {
-                "librarian",
-                "hmasd-project-scout",
-                "hmasd-code-scout",
-                "hmasd-research-scout",
-                "hmasd-research-innovator",
-                "hmasd-research-critic",
-                "hmasd-research-principles-analyst",
-                "hmasd-reviewer",
-            },
-            "verification": {"hmasd-verifier"},
-            "run": {"hmasd-experiment-operator"},
-            "transport": {
-                "hmasd-em",
-                "hmasd-external-pro-transport",
-                "hmasd-external-gemini-transport",
-            },
-            "artifact": {"hmasd-research-artifact-writer"},
-            "recovery": {"hmasd-workflow-recovery-manager"},
-        }
-        if role not in permitted_roles[payload_kind]:
-            raise OwnershipError("agent result role does not own payload")
-        if role == "hmasd-em":
-            if not identity.startswith("EM-"):
-                raise OwnershipError("EM transport result must use an EM identity")
-        elif identity != role:
-            raise OwnershipError("specialist result does not match its logical identity")
-    if document["decision_requests"] and document["materiality"] != "USER":
-        raise OwnershipError("decision requests are reserved for USER materiality")
-    failure_scope = document.get("failure_scope")
-    failure_ref = document.get("failure_ref")
-    if document["status"] == "BLOCKED":
-        if failure_scope is None:
-            raise ValidationError("BLOCKED agent result requires failure_scope")
-        if failure_ref is None:
-            raise ValidationError("BLOCKED agent result requires failure_ref")
-    elif failure_scope is not None or failure_ref is not None:
-        raise ValidationError("non-BLOCKED agent result cannot carry failure scope or ref")
-    if "event_id" in document:
-        raise ValidationError("ordinary event_id is forbidden")
-
-
-def _validate_runtime_agents(document: Mapping[str, Any]) -> None:
-    identities: set[str] = set()
-    for agent in document["agents"]:
-        identity = agent["logical_identity"]
-        if identity in identities:
-            raise ValidationError(f"duplicate runtime logical identity: {identity}")
-        identities.add(identity)
-        if identity == "Root" and agent["parent_identity"] != "Root":
-            raise OwnershipError("Root runtime agent must be self-parented")
-
-
-def _validate_runtime_worktrees(document: Mapping[str, Any]) -> None:
-    seen_refs: set[str] = set()
-    seen_paths: set[str] = set()
-    for worktree in document["worktrees"]:
-        ref = worktree["worktree_ref"]
-        path = worktree["canonical_absolute_path"]
-        if ref in seen_refs or path in seen_paths:
-            raise ValidationError("runtime worktree refs and paths must be unique")
-        seen_refs.add(ref)
-        seen_paths.add(path)
-        if worktree["lifecycle"] == "PROVISIONING" and worktree["operation_token"] is None:
-            raise ObservedConflictError("PROVISIONING worktree requires operation_token")
-        expected_branch = f"omp/{worktree['direction_id']}/{worktree['kind']}/{worktree['assignment_id']}"
-        if worktree["branch"] != expected_branch:
-            raise OwnershipError("runtime worktree branch is not assignment-owned")
-        candidate = Path(path)
-        if candidate.exists() and _is_alias(candidate):
-            raise OwnershipError("runtime worktree canonical path is a symlink or reparse point")
-
-
-def _validate_runtime_tasks(document: Mapping[str, Any]) -> None:
-    """Validate the reconstructable Codex task reference rows."""
-
-    identities: set[str] = set()
-    for task in document["tasks"]:
-        identity = task["logical_identity"]
-        if identity in identities:
-            raise ValidationError(f"duplicate runtime task logical identity: {identity}")
-        identities.add(identity)
-
-        # These fields are intentionally optional in the cache: a task row can
-        # be rebuilt from native task listing before its volatile handles are
-        # observed.  When present, the schema validates their shape and the
-        # checks below validate host/path/timestamp semantics.
-        project_root = task.get("project_root")
-        if project_root is not None:
-            _ensure_absolute_runtime_path(project_root, f"task {identity}.project_root")
-            project_path = Path(project_root)
-            _reject_runtime_alias_chain(project_path, f"task {identity}.project_root")
-        last_seen = task.get("last_seen_at")
-        if last_seen is not None:
-            _ensure_timestamp(last_seen, f"task {identity}.last_seen_at")
-
-        # A checkpoint is a content identity, while worktree/thread/host/cursor
-        # values are opaque runtime handles.  Their exact values are checked by
-        # the schema but are never interpreted as authority here.
-        checkpoint = task.get("checkpoint_sha")
-        if checkpoint is not None:
-            _ensure_sha(checkpoint, f"task {identity}.checkpoint_sha")
-
-
-
-
 def _validate_archive(document: Mapping[str, Any]) -> None:
     if document["terminalState"] != "NATURAL_COMPLETION_VERIFIED":
         raise ValidationError("archive is not a natural completion")
@@ -772,14 +607,6 @@ def _validate_custom(
         _validate_run_manifest(document)
     elif kind == "accepted_result":
         _validate_accepted_result(document)
-    elif kind == "agent_result":
-        _validate_agent_result(document)
-    elif kind == "runtime_agents":
-        _validate_runtime_agents(document)
-    elif kind == "runtime_worktrees":
-        _validate_runtime_worktrees(document)
-    elif kind == "runtime_tasks":
-        _validate_runtime_tasks(document)
     elif kind == "external_archive":
         _validate_archive(document)
 
@@ -812,9 +639,6 @@ def _precheck_writer_ownership(kind: str, document: Mapping[str, Any]) -> None:
             expected = f"EM-{direction_id}"
             if document["writer"] != expected:
                 raise _owner_error(f"accepted_result writer must be {expected}")
-    elif kind in {"runtime_agents", "runtime_worktrees", "runtime_tasks"} and "writer" in document:
-        if document["writer"] != "Root":
-            raise _owner_error(f"{kind} writer must be Root")
 
 
 def _reject_symlink_components(value: str, name: str) -> None:
@@ -868,7 +692,7 @@ def validate_document(
     except _SchemaFailure as exc:
         raise ValidationError(str(exc)) from exc
     _check_document_paths(document)
-    if normalized not in {"external_archive", "agent_result"}:
+    if normalized != "external_archive":
         _ensure_timestamp(document["updated_at"], "updated_at")
         if writer is not None and document["writer"] != writer:
             raise _owner_error(f"writer {document['writer']!r} does not match requested writer {writer!r}")
@@ -904,8 +728,6 @@ def _read_document(path: Path) -> tuple[bytes, dict[str, Any]]:
 
 def read_state(kind: str, path: str | os.PathLike[str]) -> dict[str, Any]:
     target = Path(path)
-    if normalize_kind(kind) == "runtime_tasks":
-        _validate_runtime_tasks_path(target)
     _, document = _read_document(target)
     return validate_document(kind, document)
 
@@ -1059,8 +881,6 @@ def initialize(
     input: Mapping[str, Any] | str | os.PathLike[str],
 ) -> dict[str, Any]:
     target = Path(path)
-    if normalize_kind(kind) == "runtime_tasks":
-        _validate_runtime_tasks_path(target)
     document, input_bytes = _input_document_and_bytes(input)
     with state_lock(target):
         return _initialize_unlocked(kind, target, writer, document, input_bytes)
@@ -1074,11 +894,9 @@ def replace(
     input: Mapping[str, Any] | str | os.PathLike[str],
 ) -> dict[str, Any]:
     normalized = normalize_kind(kind)
-    if normalized in {"agent_result", "external_archive"}:
+    if normalized == "external_archive":
         raise ObservedConflictError(f"{normalized} is an immutable record")
     target = Path(path)
-    if normalized == "runtime_tasks":
-        _validate_runtime_tasks_path(target)
     document = _input_document(input)
     validate_document(normalized, document, writer=writer)
     if not isinstance(expected_revision, int) or isinstance(expected_revision, bool) or expected_revision < 1:
@@ -1328,108 +1146,6 @@ def _validate_accepted_result_transition(
     )
 
 
-def _validate_runtime_agents_transition(
-    current: Mapping[str, Any], next_document: Mapping[str, Any]
-) -> None:
-    for identity, current_agent, next_agent in _matching_records(
-        current["agents"],
-        next_document["agents"],
-        key="logical_identity",
-        label="runtime agent",
-    ):
-        label = f"runtime agent {identity!r}"
-        _require_unchanged_fields(
-            current_agent,
-            next_agent,
-            ("agent_type", "parent_identity"),
-            label,
-        )
-        if next_agent["generation"] < current_agent["generation"]:
-            _immutable_conflict(f"{label}.generation")
-        if next_agent["generation"] == current_agent["generation"]:
-            _require_unchanged(
-                current_agent["runtime_ref"],
-                next_agent["runtime_ref"],
-                f"{label}.runtime_ref",
-            )
-
-
-def _validate_runtime_worktrees_transition(
-    current: Mapping[str, Any], next_document: Mapping[str, Any]
-) -> None:
-    for worktree_ref, current_worktree, next_worktree in _matching_records(
-        current["worktrees"],
-        next_document["worktrees"],
-        key="worktree_ref",
-        label="runtime worktree",
-    ):
-        label = f"runtime worktree {worktree_ref!r}"
-        _require_unchanged_fields(
-            current_worktree,
-            next_worktree,
-            (
-                "direction_id",
-                "kind",
-                "assignment_id",
-                "canonical_absolute_path",
-                "branch",
-                "base_sha",
-                "receipt_path",
-            ),
-            label,
-        )
-        _require_append_only(
-            current_worktree["operation_token"],
-            next_worktree["operation_token"],
-            f"{label}.operation_token",
-        )
-        _require_append_only(
-            current_worktree["candidate_sha"],
-            next_worktree["candidate_sha"],
-            f"{label}.candidate_sha",
-        )
-        _require_append_only(
-            current_worktree["integrated_sha"],
-            next_worktree["integrated_sha"],
-            f"{label}.integrated_sha",
-        )
-        if current_worktree["lifecycle"] in {"RELEASED", "RETAINED_FOR_RECOVERY"}:
-            _require_unchanged(
-                current_worktree,
-                next_worktree,
-                f"{label} terminal provenance",
-            )
-
-
-def _validate_runtime_tasks_transition(
-    current: Mapping[str, Any], next_document: Mapping[str, Any]
-) -> None:
-    """Keep task identity stable while allowing cache rows to be rebuilt.
-
-    Unlike durable records, rows may be added or removed as native Codex tasks
-    appear/disappear.  A row that survives a replacement is matched by its
-    logical identity; its kind and generation are the only immutable identity
-    coordinates.  Handles and lifecycle/timestamp observations remain freely
-    replaceable runtime facts.
-    """
-
-    next_by_identity = {
-        task["logical_identity"]: task for task in next_document["tasks"]
-    }
-    for current_task in current["tasks"]:
-        identity = current_task["logical_identity"]
-        next_task = next_by_identity.get(identity)
-        if next_task is None:
-            continue
-        label = f"runtime task {identity!r}"
-        _require_unchanged_fields(
-            current_task,
-            next_task,
-            ("kind", "generation"),
-            label,
-        )
-
-
 def _validate_transition(kind: str, current: Mapping[str, Any], next_document: Mapping[str, Any]) -> None:
     if kind == "portfolio_registry":
         _validate_portfolio_registry_transition(current, next_document)
@@ -1441,12 +1157,6 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_run_manifest_transition(current, next_document)
     elif kind == "accepted_result":
         _validate_accepted_result_transition(current, next_document)
-    elif kind == "runtime_agents":
-        _validate_runtime_agents_transition(current, next_document)
-    elif kind == "runtime_worktrees":
-        _validate_runtime_worktrees_transition(current, next_document)
-    elif kind == "runtime_tasks":
-        _validate_runtime_tasks_transition(current, next_document)
 
 
 def register_migration(kind: str, from_version: int, function: Migration) -> None:
@@ -1466,11 +1176,9 @@ def migrate(
     to_version: int,
 ) -> dict[str, Any]:
     normalized = normalize_kind(kind)
-    if normalized in {"agent_result", "external_archive"}:
+    if normalized == "external_archive":
         raise ObservedConflictError(f"{normalized} is an immutable record")
     target = Path(path)
-    if normalized == "runtime_tasks":
-        _validate_runtime_tasks_path(target)
     with state_lock(target):
         current_bytes, current = _read_document(target)
         validate_document(normalized, current, writer=writer)
@@ -1505,6 +1213,616 @@ def migrate(
     return transformed
 
 
+def _portfolio_decision_ref(
+    decision: Mapping[str, Any], decision_path: str, decision_sha256: str
+) -> dict[str, str]:
+    return {
+        "path": decision_path,
+        "heading": str(decision["summary"]),
+        "sha256": decision_sha256,
+    }
+
+
+def _portfolio_job_name(direction_id: str) -> str:
+    return "EM" + "".join(component.capitalize() for component in re.split(r"[_-]", direction_id))
+
+
+def _validate_portfolio_decision(
+    decision: Mapping[str, Any],
+    current: Mapping[str, Any],
+    current_bytes: bytes,
+    repo_root: Path,
+) -> tuple[list[Mapping[str, Any]], set[str]]:
+    required = {
+        "schema_version",
+        "decision_id",
+        "decided_at",
+        "summary",
+        "expected_registry_revision",
+        "expected_registry_sha256",
+        "snapshot_digest",
+        "considered",
+        "transitions",
+        "capacity",
+    }
+    missing = sorted(required - decision.keys())
+    if missing:
+        raise ValidationError(f"portfolio decision missing required keys: {missing}")
+    if decision["schema_version"] != 1:
+        raise UnsupportedVersionError("portfolio decision schema_version must be 1")
+    if "snapshot_sha256" in decision:
+        raise ValidationError(
+            "snapshot_sha256 is ambiguous; use expected_registry_sha256 and snapshot_digest"
+        )
+    decision_id = decision["decision_id"]
+    if not isinstance(decision_id, str) or PORTFOLIO_DECISION_ID_RE.fullmatch(decision_id) is None:
+        raise ValidationError("decision_id must be a lowercase path-safe identifier")
+    _ensure_timestamp(decision["decided_at"], "decided_at")
+    summary = decision["summary"]
+    if not isinstance(summary, str) or not summary.strip() or len(summary) > 256:
+        raise ValidationError("summary must contain 1..256 characters")
+
+    expected_revision = decision["expected_registry_revision"]
+    if not isinstance(expected_revision, int) or isinstance(expected_revision, bool):
+        raise RevisionConflictError("expected_registry_revision must be an integer")
+    if expected_revision != current["revision"]:
+        raise RevisionConflictError(
+            f"expected revision {expected_revision}, observed {current['revision']}"
+        )
+    expected_registry_sha256 = decision["expected_registry_sha256"]
+    observed_registry_sha256 = sha256_bytes(current_bytes)
+    if (
+        not isinstance(expected_registry_sha256, str)
+        or SHA256_RE.fullmatch(expected_registry_sha256) is None
+    ):
+        raise ValidationError("expected_registry_sha256 must be a lowercase SHA-256")
+    if expected_registry_sha256 != observed_registry_sha256:
+        raise RevisionConflictError(
+            "expected_registry_sha256 mismatch: "
+            f"expected {expected_registry_sha256}, observed {observed_registry_sha256}"
+        )
+    snapshot_digest = decision["snapshot_digest"]
+    if not isinstance(snapshot_digest, str) or SHA256_RE.fullmatch(snapshot_digest) is None:
+        raise ValidationError("snapshot_digest must be a lowercase SHA-256 provenance digest")
+
+    considered_value = decision["considered"]
+    if not isinstance(considered_value, list):
+        raise ValidationError("considered must be an array")
+    considered_ids: list[str] = []
+    considered_keys = {"direction_id", "disposition", "priority", "summary", "evidence_refs"}
+    for index, item in enumerate(considered_value):
+        if not isinstance(item, dict) or set(item) != considered_keys:
+            raise ValidationError(f"considered[{index}] must contain exactly {sorted(considered_keys)}")
+        direction_id = item["direction_id"]
+        if not isinstance(direction_id, str) or DIRECTION_RE.fullmatch(direction_id) is None:
+            raise ValidationError(f"considered[{index}].direction_id is invalid")
+        considered_ids.append(direction_id)
+        disposition = item["disposition"]
+        if not isinstance(disposition, str) or re.fullmatch(r"[A-Z][A-Z0-9_-]{0,63}", disposition) is None:
+            raise ValidationError(f"considered[{index}].disposition is invalid")
+        priority = item["priority"]
+        if not isinstance(priority, int) or isinstance(priority, bool) or priority < 1:
+            raise ValidationError(f"considered[{index}].priority must be a positive integer")
+        considered_summary = item["summary"]
+        if not isinstance(considered_summary, str) or not considered_summary.strip():
+            raise ValidationError(f"considered[{index}].summary is required")
+        evidence_refs = item["evidence_refs"]
+        if not isinstance(evidence_refs, list) or not evidence_refs:
+            raise ValidationError(f"considered[{index}].evidence_refs must be a non-empty array")
+        for ref_index, ref in enumerate(evidence_refs):
+            prefix = f"considered[{index}].evidence_refs[{ref_index}]"
+            if not isinstance(ref, dict) or set(ref) != {"path", "sha256"}:
+                raise ValidationError(f"{prefix} must contain exactly path and sha256")
+            ref_path = ref["path"]
+            _ensure_path(ref_path, f"{prefix}.path")
+            lexical_target = repo_root / Path(ref_path)
+            current_component = repo_root
+            for component in Path(ref_path).parts:
+                current_component /= component
+                if _is_alias(current_component):
+                    raise OwnershipError(f"{prefix}.path traverses a symlink or reparse point")
+            if not lexical_target.is_file():
+                raise ValidationError(f"{prefix}.path does not reference an existing file")
+            ref_sha = ref["sha256"]
+            if not isinstance(ref_sha, str) or SHA256_RE.fullmatch(ref_sha) is None:
+                raise ValidationError(f"{prefix}.sha256 must be a lowercase SHA-256")
+            if sha256_file(lexical_target) != ref_sha:
+                raise ValidationError(f"{prefix}.sha256 does not match existing file bytes")
+    considered = set(considered_ids)
+    if len(considered) != len(considered_ids):
+        raise ValidationError("considered contains duplicate direction_id")
+    current_by_id = {item["id"]: item for item in current["directions"]}
+    missing_considered = set(current_by_id) - considered
+    if missing_considered:
+        raise ValidationError(
+            f"considered does not cover snapshot directions: {sorted(missing_considered)}"
+        )
+
+    transitions_value = decision["transitions"]
+    if not isinstance(transitions_value, list):
+        raise ValidationError("transitions must be an array")
+    transitions: list[Mapping[str, Any]] = []
+    transition_ids: set[str] = set()
+    new_ids: set[str] = set()
+    allowed_lifecycles = {"REGISTERED", "ACTIVE", "PARKED", "CLOSED"}
+    transition_keys = {
+        "direction_id",
+        "lifecycle",
+        "summary",
+        "next_role",
+        "next_objective",
+        "reactivation_condition",
+        "new_direction",
+    }
+    for index, value in enumerate(transitions_value):
+        if not isinstance(value, dict) or set(value) != transition_keys:
+            raise ValidationError(f"transitions[{index}] must contain exactly {sorted(transition_keys)}")
+        direction_id = value.get("direction_id")
+        if not isinstance(direction_id, str) or DIRECTION_RE.fullmatch(direction_id) is None:
+            raise ValidationError(f"transitions[{index}].direction_id is invalid")
+        if direction_id in transition_ids:
+            raise ValidationError(f"duplicate transition direction_id: {direction_id}")
+        transition_ids.add(direction_id)
+        if direction_id not in considered:
+            raise ValidationError(f"transition direction is not considered: {direction_id}")
+        lifecycle = value.get("lifecycle")
+        if lifecycle not in allowed_lifecycles:
+            raise ValidationError(f"transitions[{index}].lifecycle is invalid")
+        transition_summary = value.get("summary")
+        if not isinstance(transition_summary, str) or not transition_summary.strip():
+            raise ValidationError(f"transitions[{index}].summary is required")
+        next_role = value.get("next_role")
+        next_objective = value.get("next_objective")
+        reactivation_condition = value.get("reactivation_condition")
+        if lifecycle == "ACTIVE":
+            if next_role not in {"EM", "CM"}:
+                raise ValidationError(f"transitions[{index}] ACTIVE next_role must be EM or CM")
+            if not isinstance(next_objective, str) or not next_objective.strip():
+                raise ValidationError(f"transitions[{index}] ACTIVE next_objective is required")
+            if reactivation_condition is not None:
+                raise ValidationError(
+                    f"transitions[{index}] ACTIVE reactivation_condition must be null"
+                )
+        elif lifecycle == "PARKED":
+            if next_role != "Root":
+                raise ValidationError(f"transitions[{index}] PARKED next_role must be Root")
+            if (
+                not isinstance(next_objective, str)
+                or not next_objective.strip()
+            ):
+                raise ValidationError(
+                    f"transitions[{index}] PARKED next_objective must be an exact user question"
+                )
+            if not isinstance(reactivation_condition, str) or not reactivation_condition.strip():
+                raise ValidationError(
+                    f"transitions[{index}] PARKED reactivation_condition is required"
+                )
+        elif any(
+            item is not None for item in (next_role, next_objective, reactivation_condition)
+        ):
+            raise ValidationError(
+                f"transitions[{index}] {lifecycle} next fields must be null"
+            )
+
+        new_direction = value.get("new_direction")
+        current_direction = current_by_id.get(direction_id)
+        if current_direction is None:
+            new_direction_keys = {
+                "title",
+                "abbreviation",
+                "scientific_question",
+                "dependencies",
+                "base_sha",
+            }
+            if not isinstance(new_direction, dict) or set(new_direction) != new_direction_keys:
+                raise ValidationError(
+                    f"new direction {direction_id} new_direction must contain exactly "
+                    f"{sorted(new_direction_keys)}"
+                )
+            new_ids.add(direction_id)
+            if not isinstance(new_direction["title"], str) or not new_direction["title"].strip():
+                raise ValidationError(f"new direction {direction_id} title is required")
+            abbreviation = new_direction["abbreviation"]
+            if not isinstance(abbreviation, str) or re.fullmatch(r"[A-Z][A-Z0-9]{1,15}", abbreviation) is None:
+                raise ValidationError(f"new direction {direction_id} abbreviation is invalid")
+            question = new_direction["scientific_question"]
+            if not isinstance(question, str) or not question.strip():
+                raise ValidationError(f"new direction {direction_id} scientific_question is required")
+            dependencies = new_direction["dependencies"]
+            if not isinstance(dependencies, list) or not all(
+                isinstance(item, str) and DIRECTION_RE.fullmatch(item) is not None
+                for item in dependencies
+            ):
+                raise ValidationError(f"new direction {direction_id} dependencies are invalid")
+            if len(set(dependencies)) != len(dependencies):
+                raise ValidationError(f"new direction {direction_id} dependencies contain duplicates")
+            base_sha = new_direction["base_sha"]
+            if not isinstance(base_sha, str) or GIT_SHA_RE.fullmatch(base_sha) is None:
+                raise ValidationError(f"new direction {direction_id} base_sha is invalid")
+            if lifecycle == "ACTIVE" and next_role != "EM":
+                raise ValidationError(f"new ACTIVE direction {direction_id} next_role must be EM")
+        else:
+            if new_direction is not None:
+                raise ValidationError(f"existing direction {direction_id} cannot redefine new_direction")
+        transitions.append(value)
+
+    unknown_considered = considered - set(current_by_id) - new_ids
+    if unknown_considered:
+        raise ValidationError(f"considered contains undefined directions: {sorted(unknown_considered)}")
+
+    lifecycle_by_id = {item["id"]: item["lifecycle"] for item in current["directions"]}
+    for transition in transitions:
+        lifecycle_by_id[str(transition["direction_id"])] = str(transition["lifecycle"])
+    resulting_active = {
+        direction_id for direction_id, lifecycle in lifecycle_by_id.items() if lifecycle == "ACTIVE"
+    }
+    capacity = decision["capacity"]
+    capacity_keys = {
+        "active_limit",
+        "active_before",
+        "active_after",
+        "active_direction_ids",
+        "resource_constraints",
+        "unused_capacity_reason",
+    }
+    if not isinstance(capacity, dict) or set(capacity) != capacity_keys:
+        raise ValidationError(f"capacity must contain exactly {sorted(capacity_keys)}")
+    active_limit = capacity["active_limit"]
+    active_before = capacity["active_before"]
+    active_after = capacity["active_after"]
+    active_ids = capacity["active_direction_ids"]
+    if (
+        not isinstance(active_limit, int)
+        or isinstance(active_limit, bool)
+        or active_limit < 0
+        or active_limit > 8
+    ):
+        raise ValidationError("capacity active_limit must be an integer in 0..8")
+    observed_active_before = sum(
+        item["lifecycle"] == "ACTIVE" for item in current["directions"]
+    )
+    if (
+        not isinstance(active_before, int)
+        or isinstance(active_before, bool)
+        or active_before != observed_active_before
+    ):
+        raise ValidationError(
+            f"capacity active_before must equal observed registry count {observed_active_before}"
+        )
+    if (
+        not isinstance(active_after, int)
+        or isinstance(active_after, bool)
+        or active_after != len(resulting_active)
+    ):
+        raise ValidationError(
+            f"capacity active_after must equal resulting registry count {len(resulting_active)}"
+        )
+    if not isinstance(active_ids, list) or not all(isinstance(item, str) for item in active_ids):
+        raise ValidationError("capacity active_direction_ids must be an array")
+    if len(set(active_ids)) != len(active_ids):
+        raise ValidationError("capacity active_direction_ids contains duplicates")
+    if len(active_ids) != active_after or set(active_ids) != resulting_active:
+        raise ValidationError("capacity active_direction_ids do not match resulting registry")
+    if active_after > active_limit:
+        raise ValidationError("capacity active_after exceeds active_limit")
+    resource_constraints = capacity["resource_constraints"]
+    if not isinstance(resource_constraints, list) or not all(
+        isinstance(item, str) and bool(item.strip()) for item in resource_constraints
+    ):
+        raise ValidationError("capacity resource_constraints must be a string array")
+    unused_capacity_reason = capacity["unused_capacity_reason"]
+    if active_after < active_limit and (
+        not isinstance(unused_capacity_reason, str) or not unused_capacity_reason.strip()
+    ):
+        raise ValidationError(
+            "capacity unused_capacity_reason is required when active_after is below active_limit"
+        )
+    if unused_capacity_reason is not None and (
+        not isinstance(unused_capacity_reason, str) or not unused_capacity_reason.strip()
+    ):
+        raise ValidationError("capacity unused_capacity_reason must be null or a non-empty string")
+    return transitions, resulting_active
+
+
+def _new_direction_documents(
+    transition: Mapping[str, Any],
+    decision: Mapping[str, Any],
+    decision_ref: Mapping[str, str],
+    next_registry_revision: int,
+) -> tuple[bytes, dict[str, Any], dict[str, Any], dict[str, Any]]:
+    direction_id = str(transition["direction_id"])
+    definition = transition["new_direction"]
+    assert isinstance(definition, Mapping)
+    dependencies = list(definition["dependencies"])
+    dependency_text = ", ".join(f"`{item}`" for item in dependencies) or "None"
+    direction_text = (
+        f"# Direction {direction_id}: {definition['title']}\n\n"
+        "## Authority\n\n"
+        f"- Stable direction ID: `{direction_id}`\n"
+        f"- Registry abbreviation: `{definition['abbreviation']}`\n"
+        f"- Initial registry lifecycle: `{transition['lifecycle']}`\n"
+        f"- Portfolio decision: `{decision_ref['path']}`\n"
+        f"- Dependencies: {dependency_text}\n\n"
+        "## Scientific question\n\n"
+        f"{definition['scientific_question'].strip()}\n\n"
+        "## Initial objective\n\n"
+        f"- Next role: `{transition['next_role']}`\n"
+        f"- Next objective: {transition['next_objective']}\n\n"
+        "## Provenance boundary\n\n"
+        "This bootstrap records a Portfolio definition and routing objective. It records no "
+        "scientific result, engineering acceptance, provider operation, checkpoint, or experiment.\n"
+    )
+    direction_bytes = direction_text.encode("utf-8")
+    direction_sha = sha256_bytes(direction_bytes)
+    question_sha = sha256_bytes(str(definition["scientific_question"]).strip().encode("utf-8"))
+    active = transition["lifecycle"] == "ACTIVE"
+    research = {
+        "schema_version": 1,
+        "revision": 1,
+        "updated_at": decision["decided_at"],
+        "writer": f"EM-{direction_id}",
+        "direction_id": direction_id,
+        "registry_revision_seen": next_registry_revision,
+        "phase": "SCOPING" if active else "IDLE",
+        "actionable": active,
+        "blockers": [],
+        "waiting_on": [],
+        "direction_ref": {
+            "path": f"docs/research/candidates/{direction_id}/DIRECTION.md",
+            "sha256": direction_sha,
+        },
+        "question_sha256": question_sha,
+        "evidence_set_sha256": decision_ref["sha256"],
+        "active_round_id": None,
+        "active_agents": [],
+        "engineering_request": None,
+        "last_checkpoint_sha": None,
+        "next_action": {
+            "kind": "PORTFOLIO_ASSIGNMENT" if active else "IDLE",
+            "input_refs": (
+                [{"path": decision_ref["path"], "sha256": decision_ref["sha256"]}]
+                if active
+                else []
+            ),
+        },
+    }
+    base_sha = str(definition["base_sha"])
+    engineering = {
+        "schema_version": 1,
+        "revision": 1,
+        "updated_at": decision["decided_at"],
+        "writer": f"CM-{direction_id}",
+        "direction_id": direction_id,
+        "phase": "UNREQUESTED",
+        "actionable": False,
+        "blockers": [],
+        "waiting_on": [],
+        "scope_ref": {
+            "path": f"docs/research/candidates/{direction_id}/DIRECTION.md",
+            "heading": "Engineering request",
+            "sha256": direction_sha,
+        },
+        "base_sha": base_sha,
+        "worktree_ref": None,
+        "candidate_sha": None,
+        "changed_paths": [],
+        "verification_refs": [],
+        "run_refs": [],
+        "integration": {
+            "target_branch": "main",
+            "target_sha_seen": base_sha,
+            "integrated_sha": None,
+        },
+        "active_agents": [],
+        "last_checkpoint_sha": None,
+        "next_action": {"kind": "UNREQUESTED", "input_refs": []},
+    }
+    external = {
+        "schema_version": 1,
+        "revision": 1,
+        "updated_at": decision["decided_at"],
+        "writer": f"EM-{direction_id}",
+        "direction_id": direction_id,
+        "workflow_version": "hmasd-external-review-v1",
+        "rounds": [],
+    }
+    validate_document("research_state", research, writer=f"EM-{direction_id}")
+    validate_document("engineering_state", engineering, writer=f"CM-{direction_id}")
+    validate_document("external_review_index", external, writer=f"EM-{direction_id}")
+    return direction_bytes, research, engineering, external
+
+
+@contextlib.contextmanager
+def _portfolio_apply_lock(repo_root: Path, registry: Path) -> Iterator[None]:
+    lock_key = os.path.normcase(os.path.abspath(os.fspath(registry)))
+    lock_path = repo_root / ".codex" / "runtime" / "locks" / f"{sha256_bytes(os.fsencode(lock_key))}.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with lock_path.open("a+b") as handle:
+            with hmasd_platform.exclusive_file_lock(handle.fileno()):
+                yield
+    except OSError as exc:
+        raise StateError(f"cannot acquire portfolio apply lock {lock_path}: {exc}") from exc
+
+
+def portfolio_apply(
+    repo_root: str | os.PathLike[str],
+    registry_path: str | os.PathLike[str],
+    input: Mapping[str, Any] | str | os.PathLike[str],
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve()
+    registry = Path(registry_path).resolve()
+    expected_registry = (root / "docs/research/portfolio/workflow/registry.json").resolve()
+    if registry != expected_registry:
+        raise OwnershipError("portfolio-apply registry must be the standard path under repo-root")
+    decision = _input_document(input)
+    portfolio_path = root / "docs/research/portfolio/PORTFOLIO.md"
+    if not portfolio_path.is_file() or _is_alias(portfolio_path):
+        raise OwnershipError("portfolio-apply requires a regular PORTFOLIO.md")
+
+    with _portfolio_apply_lock(root, registry):
+        current_bytes, current = _read_document(registry)
+        validate_document("portfolio_registry", current, writer="Portfolio")
+        transitions, _ = _validate_portfolio_decision(decision, current, current_bytes, root)
+        decision_bytes = _canonical_bytes(decision)
+        decision_sha = sha256_bytes(decision_bytes)
+        decision_relative = f"docs/research/portfolio/decisions/{decision['decision_id']}.json"
+        decision_target = root / Path(decision_relative)
+        if decision_target.exists():
+            raise RevisionConflictError(f"decision authority already exists: {decision_relative}")
+        decision_ref = _portfolio_decision_ref(decision, decision_relative, decision_sha)
+        current_by_id = {item["id"]: item for item in current["directions"]}
+        next_revision = current["revision"] + 1
+        next_registry = copy.deepcopy(current)
+        next_registry["revision"] = next_revision
+        next_registry["updated_at"] = decision["decided_at"]
+        next_directions = {item["id"]: item for item in next_registry["directions"]}
+        new_documents: dict[str, tuple[bytes, dict[str, Any], dict[str, Any], dict[str, Any]]] = {}
+
+        for transition in transitions:
+            direction_id = str(transition["direction_id"])
+            if direction_id in current_by_id:
+                entry = next_directions[direction_id]
+                entry["lifecycle"] = transition["lifecycle"]
+                entry["lifecycle_decision_ref"] = copy.deepcopy(decision_ref)
+                entry["reactivation_condition_ref"] = (
+                    copy.deepcopy(decision_ref) if transition["lifecycle"] == "PARKED" else None
+                )
+                continue
+            definition = transition["new_direction"]
+            assert isinstance(definition, Mapping)
+            direction_root = f"docs/research/candidates/{direction_id}"
+            entry = {
+                "id": direction_id,
+                "abbreviation": definition["abbreviation"],
+                "path": direction_root,
+                "lifecycle": transition["lifecycle"],
+                "dependencies": list(definition["dependencies"]),
+                "lifecycle_decision_ref": copy.deepcopy(decision_ref),
+                "reactivation_condition_ref": (
+                    copy.deepcopy(decision_ref) if transition["lifecycle"] == "PARKED" else None
+                ),
+                "agent": {
+                    "logical_identity": f"EM-{direction_id}",
+                    "job_name": _portfolio_job_name(direction_id),
+                    "generation": 1,
+                    "runtime_ref": None,
+                },
+                "research_state_path": f"{direction_root}/workflow/research/state.json",
+                "engineering_state_path": f"{direction_root}/workflow/engineering/state.json",
+                "external_review_index_path": f"{direction_root}/workflow/external-review/index.json",
+            }
+            next_registry["directions"].append(entry)
+            next_directions[direction_id] = entry
+            new_documents[direction_id] = _new_direction_documents(
+                transition, decision, decision_ref, next_revision
+            )
+
+        next_registry["directions"].sort(key=lambda item: item["id"])
+        portfolio_before = portfolio_path.read_bytes()
+        try:
+            portfolio_text = portfolio_before.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValidationError(f"PORTFOLIO.md is not UTF-8: {exc}") from exc
+        transition_lines = "\n".join(
+            f"- `{item['direction_id']}` -> `{item['lifecycle']}`: {item['summary']}"
+            for item in transitions
+        ) or "- No lifecycle transition."
+        considered_lines = []
+        for item in decision["considered"]:
+            evidence = ", ".join(
+                f"`{ref['path']}` @ `{ref['sha256']}`" for ref in item["evidence_refs"]
+            )
+            considered_lines.append(
+                f"- Considered `{item['direction_id']}` — priority `{item['priority']}`, "
+                f"disposition `{item['disposition']}`: {item['summary']} Evidence: {evidence}"
+            )
+        considered_text = "\n".join(considered_lines)
+        capacity = decision["capacity"]
+        resources = "; ".join(capacity["resource_constraints"]) or "None recorded."
+        unused = capacity["unused_capacity_reason"] or "None; active capacity is fully allocated."
+        portfolio_append = (
+            f"\n## Decision {decision['decision_id']} — {decision['decided_at']}\n\n"
+            f"{decision['summary']}\n\n"
+            f"Snapshot provenance: `{decision['snapshot_digest']}`\n\n"
+            f"### Considered\n\n{considered_text}\n\n"
+            f"### Transitions\n\n{transition_lines}\n\n"
+            f"### Capacity\n\n"
+            f"- Active capacity: `{capacity['active_before']} -> {capacity['active_after']} / "
+            f"{capacity['active_limit']}`\n"
+            f"- Resource constraints: {resources}\n"
+            f"- Unused capacity reason: {unused}\n\n"
+            f"Authority: `{decision_relative}`\n"
+        )
+        portfolio_bytes = (portfolio_text.rstrip() + "\n" + portfolio_append).encode("utf-8")
+        next_registry["goal"]["sha256"] = sha256_bytes(portfolio_bytes)
+        validate_document("portfolio_registry", next_registry, writer="Portfolio")
+        _validate_transition("portfolio_registry", current, next_registry)
+        next_registry_bytes = _canonical_bytes(next_registry)
+
+        stage = Path(tempfile.mkdtemp(prefix=".portfolio-apply-", dir=str(root)))
+        published_directions: list[Path] = []
+        decision_published = False
+        portfolio_published = False
+        committed = False
+        try:
+            staged_decision = stage / "decision.json"
+            staged_decision.write_bytes(decision_bytes)
+            staged_directions: dict[str, Path] = {}
+            for direction_id, documents in new_documents.items():
+                direction_bytes, research, engineering, external = documents
+                staged_root = stage / "directions" / direction_id
+                (staged_root / "workflow/research").mkdir(parents=True)
+                (staged_root / "workflow/engineering").mkdir(parents=True)
+                (staged_root / "workflow/external-review").mkdir(parents=True)
+                (staged_root / "DIRECTION.md").write_bytes(direction_bytes)
+                (staged_root / "workflow/research/state.json").write_bytes(_canonical_bytes(research))
+                (staged_root / "workflow/engineering/state.json").write_bytes(_canonical_bytes(engineering))
+                (staged_root / "workflow/external-review/index.json").write_bytes(_canonical_bytes(external))
+                staged_directions[direction_id] = staged_root
+
+            decision_target.parent.mkdir(parents=True, exist_ok=True)
+            os.replace(staged_decision, decision_target)
+            decision_published = True
+            candidates_root = root / "docs/research/candidates"
+            candidates_root.mkdir(parents=True, exist_ok=True)
+            for direction_id, staged_root in staged_directions.items():
+                target = candidates_root / direction_id
+                if target.exists():
+                    raise RevisionConflictError(f"new direction path already exists: {target}")
+                os.replace(staged_root, target)
+                published_directions.append(target)
+            try:
+                atomic_write(portfolio_path, portfolio_bytes)
+                portfolio_published = True
+            except Exception:
+                if portfolio_path.is_file() and portfolio_path.read_bytes() == portfolio_bytes:
+                    portfolio_published = True
+                raise
+            try:
+                atomic_write(registry, next_registry_bytes)
+                committed = True
+            except Exception:
+                if registry.is_file() and registry.read_bytes() == next_registry_bytes:
+                    committed = True
+                else:
+                    raise
+        except Exception:
+            if not committed:
+                if portfolio_published:
+                    atomic_write(portfolio_path, portfolio_before)
+                for target in reversed(published_directions):
+                    shutil.rmtree(target)
+                if decision_published:
+                    decision_target.unlink()
+                    with contextlib.suppress(OSError):
+                        decision_target.parent.rmdir()
+            raise
+        finally:
+            shutil.rmtree(stage, ignore_errors=True)
+        return next_registry
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -1532,6 +1850,11 @@ def _parser() -> argparse.ArgumentParser:
     migrate_parser.add_argument("--writer", required=True)
     migrate_parser.add_argument("--expected-revision", required=True, type=int)
     migrate_parser.add_argument("--to-version", required=True, type=int)
+
+    portfolio_apply_parser = subparsers.add_parser("portfolio-apply")
+    portfolio_apply_parser.add_argument("--repo-root", required=True)
+    portfolio_apply_parser.add_argument("--registry", required=True)
+    portfolio_apply_parser.add_argument("--input", required=True)
     return parser
 
 
@@ -1542,8 +1865,6 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "validate":
             target = Path(args.path)
             normalized = normalize_kind(args.kind)
-            if normalized == "runtime_tasks":
-                _validate_runtime_tasks_path(target)
             validate_document(normalized, _read_document(target)[1])
         elif args.command == "initialize":
             initialize(args.kind, args.path, args.writer, args.input)
@@ -1551,6 +1872,8 @@ def main(argv: list[str] | None = None) -> int:
             replace(args.kind, args.path, args.writer, args.expected_revision, args.input)
         elif args.command == "migrate":
             migrate(args.kind, args.path, args.writer, args.expected_revision, args.to_version)
+        elif args.command == "portfolio-apply":
+            portfolio_apply(args.repo_root, args.registry, args.input)
         else:
             raise ValidationError(f"unknown command {args.command}")
     except StateError as exc:

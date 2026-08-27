@@ -32,16 +32,7 @@ CLERK_FRESHNESS_SECONDS = 15 * 60
 EPOCH = "1970-01-01T00:00:00Z"
 
 REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
-# Codex runtime references are disposable observations.  Keep the old OMP
-# locations as a read-only fallback so a historical checkout remains visible
-# during cutover, but do not make their absence an error condition.
-RUNTIME_AGENTS_REL = ".codex/runtime/agents.json"
-RUNTIME_WORKTREES_REL = ".codex/runtime/worktrees.json"
-RUNTIME_TASKS_REL = ".codex/runtime/tasks.json"
 CLERK_LIVENESS_REL = ".codex/runtime/clerk-liveness.json"
-LEGACY_RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
-LEGACY_RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
-LEGACY_RUNTIME_TASKS_REL = ".omp/runtime/tasks.json"
 
 ASSET_NAMES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -52,10 +43,8 @@ API_NAMES = {
     "/api/health",
     "/api/snapshot",
     "/api/portfolio",
-    "/api/agents",
     "/api/runs",
     "/api/external-reviews",
-    "/api/worktrees",
     "/api/clerk",
 }
 
@@ -329,9 +318,6 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
         "external_review_index": ("schema_version", "revision", "updated_at", "writer", "direction_id", "rounds"),
         "run_manifest": ("schema_version", "revision", "updated_at", "writer", "run_id", "direction_id", "status"),
         "accepted_result": ("schema_version", "revision", "updated_at", "writer", "result_id", "direction_id"),
-        "runtime_agents": ("schema_version", "revision", "updated_at", "writer", "agents"),
-        "runtime_worktrees": ("schema_version", "revision", "updated_at", "writer", "worktrees"),
-        "runtime_tasks": ("schema_version", "revision", "updated_at", "writer", "tasks"),
     }
     if kind == "external_archive":
         return value.get("schema") == "agentify_review_natural_completion_archive_v1"
@@ -341,8 +327,6 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
             and isinstance(value.get("observed_at"), str)
             and isinstance(value.get("directions"), list)
         )
-    if kind == "agent_result":
-        return value.get("schema_version") == 1 and isinstance(value.get("role"), str)
     keys = required.get(kind)
     if keys is None or any(key not in value for key in keys):
         return False
@@ -395,42 +379,24 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
             return True
 
         return all(visit(identifier) for identifier in graph)
-    if kind in {"runtime_agents", "runtime_worktrees"}:
-        values = value.get("agents" if kind == "runtime_agents" else "worktrees")
-        if not isinstance(values, list):
-            return False
-        key = "logical_identity" if kind == "runtime_agents" else "worktree_ref"
-        ids = [item.get(key) for item in values if isinstance(item, dict)]
-        if len(ids) != len(values) or any(not isinstance(identifier, str) for identifier in ids):
-            return False
-        return len(ids) == len(set(ids))
-    if kind == "runtime_tasks":
-        values = value.get("tasks")
-        if not isinstance(values, list):
-            return False
-        identities = [
-            item.get("logical_identity")
-            for item in values
-            if isinstance(item, Mapping)
-        ]
-        if len(identities) != len(values) or any(
-            not isinstance(identity, str) for identity in identities
-        ):
-            return False
-        return len(identities) == len(set(identities))
     if kind == "clerk_liveness":
         rows = value.get("directions")
         if not isinstance(rows, list):
             return False
         allowed_stages = {
+            "PROVISIONING",
             "PORTFOLIO",
             "EM",
             "CM",
             "EXP",
+            "CM_EXPERIMENT",
             "WAITING_RESOURCE",
+            "WAIT_RESOURCE",
             "USER_PAUSE",
+            "WAIT_USER",
             "TRANSPORT_GAP",
             "TERMINAL",
+            "DEFECT",
         }
         identifiers: list[str] = []
         for row in rows:
@@ -540,31 +506,6 @@ class _SnapshotAttempt:
             self._file_digests[path] = document.digest
             self._file_labels[path] = relative
         return document
-
-    def read_runtime_document(
-        self,
-        relative: str,
-        legacy_relative: str,
-        kind: str,
-        empty_value: Mapping[str, Any],
-    ) -> Document:
-        """Read the active runtime map, falling back to the OMP map.
-
-        Runtime maps are disposable task/process observations rather than
-        workflow authorities.  A fresh Codex checkout normally has neither
-        map, so both missing paths intentionally collapse to an empty, healthy
-        projection.  Malformed or otherwise unreadable data is still surfaced
-        when a map exists; that keeps real runtime corruption observable while
-        avoiding noisy ``cannot open file`` failures during normal startup.
-        """
-
-        active = self.read_document(relative, kind)
-        if active.status != "missing":
-            return active
-        legacy = self.read_document(legacy_relative, kind)
-        if legacy.status != "missing":
-            return legacy
-        return Document("ok", dict(empty_value), None, None, None)
 
     def read_digest(self, relative: str) -> str | None:
         path = _safe_relative_path(self.root, relative, must_exist=False)
@@ -803,273 +744,6 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
         generated_at=_max_timestamp(generated_values),
         revision_refs=refs,
         data={"goal": goal, "directions": directions},
-        warnings=warnings,
-    )
-
-
-def _agent_type(logical_identity: str) -> str:
-    if logical_identity == "Root":
-        return "hmasd-root"
-    if logical_identity == "Portfolio":
-        return "hmasd-portfolio"
-    if logical_identity.startswith("EM-"):
-        return "hmasd-em"
-    if logical_identity.startswith("CM-"):
-        return "hmasd-cm"
-    return "hmasd-agent"
-
-
-def _manager_job_name(prefix: str, direction_id: str) -> str:
-    return prefix + "".join(part[:1].upper() + part[1:] for part in re.split(r"[-_]+", direction_id) if part)
-
-
-def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:
-    warnings: list[str] = []
-    statuses: list[str] = []
-    refs: dict[str, int] = {}
-    generated_values: list[str | None] = [registry_doc.updated_at]
-    logical: dict[str, dict[str, Any]] = {
-        "Root": {
-            "logical_identity": "Root",
-            "agent_type": "hmasd-root",
-            "task_level": "top-level",
-            "generation": 1,
-            "lifecycle": "ACTIVE",
-            "job_name": "Root",
-            "parent_identity": "Root",
-        },
-        # Portfolio is a user-facing top-level task in Codex.  It is not
-        # derived from a direction registry entry and therefore remains
-        # visible even when no disposable runtime map has been created.
-        "Portfolio": {
-            "logical_identity": "Portfolio",
-            "agent_type": "hmasd-portfolio",
-            "task_level": "top-level",
-            "generation": 1,
-            "lifecycle": "ACTIVE",
-            "job_name": "Portfolio",
-        },
-    }
-    if registry_doc.status == "ok" and registry_doc.value is not None:
-        refs["registry"] = registry_doc.revision or 1
-        for item in _registry_direction(registry_doc.value):
-            identifier = item.get("id")
-            agent = item.get("agent")
-            if not isinstance(identifier, str) or not isinstance(agent, Mapping):
-                continue
-            identity = agent.get("logical_identity")
-            generation = agent.get("generation", 1)
-            if isinstance(identity, str):
-                logical[identity] = {
-                    "logical_identity": identity,
-                    "agent_type": _agent_type(identity),
-                    "task_level": "top-level",
-                    "generation": generation,
-                    "lifecycle": item.get("lifecycle", "UNKNOWN"),
-                    "job_name": agent.get("job_name", identity),
-                    "parent_identity": "Root",
-                    "direction_id": identifier,
-                }
-
-            engineering_ref = item.get("engineering_state_path")
-            if not isinstance(engineering_ref, str):
-                statuses.append("invalid")
-                _warning_add(warnings, f"invalid:{identifier}:engineering_state_path")
-                continue
-            engineering = sources.read_document(engineering_ref, "engineering_state")
-            generated_values.append(engineering.updated_at)
-            if engineering.revision is not None:
-                refs[f"engineering_state:{identifier}"] = engineering.revision
-            if engineering.status != "ok" or engineering.value is None:
-                statuses.append(engineering.status)
-                _warning_add(warnings, engineering.warning)
-                continue
-            phase = engineering.value.get("phase")
-            active_agents = engineering.value.get("active_agents")
-            cm_expected = (
-                phase != "UNREQUESTED"
-                or engineering.value.get("actionable") is True
-                or isinstance(active_agents, list) and bool(active_agents)
-            )
-            if cm_expected:
-                cm_identity = f"CM-{identifier}"
-                logical[cm_identity] = {
-                    "logical_identity": cm_identity,
-                    "agent_type": "hmasd-cm",
-                    "task_level": "top-level",
-                    "generation": generation,
-                    "lifecycle": phase if isinstance(phase, str) else "UNKNOWN",
-                    "job_name": _manager_job_name("CM", identifier),
-                    "parent_identity": "Root",
-                    "direction_id": identifier,
-                    "phase": phase if isinstance(phase, str) else "UNKNOWN",
-                }
-    else:
-        statuses.append(registry_doc.status)
-        _warning_add(warnings, registry_doc.warning)
-
-    runtime = sources.read_runtime_document(
-        RUNTIME_AGENTS_REL,
-        LEGACY_RUNTIME_AGENTS_REL,
-        "runtime_agents",
-        {"schema_version": 1, "revision": 0, "agents": []},
-    )
-    generated_values.append(runtime.updated_at)
-    if runtime.revision is not None:
-        refs["runtime_agents"] = runtime.revision
-    if runtime.status != "ok" or runtime.value is None:
-        statuses.append(runtime.status)
-        _warning_add(warnings, runtime.warning)
-    else:
-        expected_identities = set(logical)
-        runtime_items = runtime.value.get("agents", [])
-        if not isinstance(runtime_items, list):
-            statuses.append("invalid")
-            _warning_add(warnings, "invalid:runtime_agents")
-            runtime_items = []
-        for item in sorted(
-            (entry for entry in runtime_items if isinstance(entry, Mapping)),
-            key=lambda entry: str(entry.get("logical_identity", "")),
-        ):
-            identity = item.get("logical_identity")
-            if not isinstance(identity, str):
-                statuses.append("invalid")
-                _warning_add(warnings, "invalid:runtime_agents_identity")
-                continue
-            runtime_only = identity not in expected_identities
-            entry = logical.setdefault(
-                identity,
-                {
-                    "logical_identity": identity,
-                    "agent_type": item.get("agent_type", _agent_type(identity)),
-                    "task_level": "leaf",
-                    "generation": item.get("generation", 1),
-                    "lifecycle": "UNKNOWN",
-                    "job_name": item.get("job_ref", identity),
-                },
-            )
-            expected_generation = entry.get("generation")
-            observed_generation = item.get("generation")
-            if runtime_only:
-                statuses.append("stale")
-                _warning_add(warnings, f"stale:unknown_agent:{identity}")
-            elif expected_generation != observed_generation:
-                statuses.append("stale")
-                _warning_add(warnings, f"stale:agent_generation:{identity}")
-            expected_parent = entry.get("parent_identity")
-            observed_parent = item.get("parent_identity")
-            if not runtime_only and expected_parent != observed_parent:
-                statuses.append("stale")
-                _warning_add(warnings, f"stale:agent_parent:{identity}")
-            for source, target in (
-                ("agent_type", "agent_type"),
-                ("generation", "generation"),
-                ("lifecycle", "lifecycle"),
-                ("job_ref", "job_name"),
-                ("parent_identity", "parent_identity"),
-                ("last_seen_at", "last_seen_at"),
-            ):
-                if source in item and isinstance(item[source], (str, int)):
-                    entry[target] = item[source]
-
-    # The Codex task map carries live task/thread references in ignored
-    # runtime state.  Project only the non-sensitive identity/lifecycle fields;
-    # missing maps are quiet, while malformed maps remain visible as invalid.
-    tasks = sources.read_runtime_document(
-        RUNTIME_TASKS_REL,
-        LEGACY_RUNTIME_TASKS_REL,
-        "runtime_tasks",
-        {"schema_version": 1, "revision": 0, "tasks": []},
-    )
-    generated_values.append(tasks.updated_at)
-    if tasks.revision is not None:
-        refs["runtime_tasks"] = tasks.revision
-    if tasks.status != "ok" or tasks.value is None:
-        statuses.append(tasks.status)
-        _warning_add(warnings, tasks.warning)
-    else:
-        task_items = tasks.value.get("tasks", [])
-        if not isinstance(task_items, list):
-            statuses.append("invalid")
-            _warning_add(warnings, "invalid:runtime_tasks")
-            task_items = []
-        kind_types = {
-            "root": "hmasd-root",
-            "portfolio": "hmasd-portfolio",
-            "em": "hmasd-em",
-            "cm": "hmasd-cm",
-        }
-        top_level_kinds = set(kind_types)
-        for item in sorted(
-            (entry for entry in task_items if isinstance(entry, Mapping)),
-            key=lambda entry: str(entry.get("logical_identity", "")),
-        ):
-            identity = item.get("logical_identity")
-            if not isinstance(identity, str):
-                statuses.append("invalid")
-                _warning_add(warnings, "invalid:runtime_tasks_identity")
-                continue
-            kind = item.get("kind")
-            task_type = item.get("agent_type")
-            if not isinstance(task_type, str):
-                task_type = kind_types.get(kind, _agent_type(identity))
-            task_level = "top-level" if kind in top_level_kinds else "leaf"
-            entry = logical.setdefault(
-                identity,
-                {
-                    "logical_identity": identity,
-                    "agent_type": task_type,
-                    "task_level": task_level,
-                    "generation": item.get("generation", 1),
-                    "lifecycle": "UNKNOWN",
-                    "job_name": item.get("task_title", identity),
-                },
-            )
-            expected_generation = entry.get("generation")
-            observed_generation = item.get("generation")
-            if isinstance(observed_generation, int) and expected_generation != observed_generation:
-                statuses.append("stale")
-                _warning_add(warnings, f"stale:task_generation:{identity}")
-            for source, target in (
-                ("agent_type", "agent_type"),
-                ("generation", "generation"),
-                ("task_title", "job_name"),
-                ("direction_id", "direction_id"),
-                ("lifecycle", "lifecycle"),
-                ("parent_identity", "parent_identity"),
-                ("last_seen_at", "last_seen_at"),
-            ):
-                if source in item and isinstance(item[source], (str, int)):
-                    entry[target] = item[source]
-            entry["task_level"] = task_level
-
-    agents: list[dict[str, Any]] = []
-    for identity in sorted(logical):
-        entry = logical[identity]
-        output = {
-            key: entry[key]
-            for key in (
-                "logical_identity",
-                "agent_type",
-                "task_level",
-                "parent_identity",
-                "direction_id",
-                "generation",
-                "lifecycle",
-                "phase",
-                "job_name",
-                "last_seen_at",
-            )
-            if key in entry and isinstance(entry[key], (str, int))
-        }
-        agents.append(output)
-    if not statuses:
-        statuses = ["ok"]
-    return _projection(
-        status=_status_join(statuses),
-        generated_at=_max_timestamp(generated_values),
-        revision_refs=refs,
-        data={"agents": agents},
         warnings=warnings,
     )
 
@@ -1362,113 +1036,190 @@ def _build_external(root: Path, registry_doc: Document, sources: _SnapshotAttemp
     )
 
 
-def _build_worktrees(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:
+
+_V2_STAGES = {
+    "PROVISIONING", "PORTFOLIO", "EM", "CM", "CM_EXPERIMENT",
+    "WAIT_RESOURCE", "WAIT_USER", "TERMINAL", "DEFECT",
+}
+_LEGACY_STAGE_MAP = {
+    "EXP": "CM_EXPERIMENT",
+    "WAITING_RESOURCE": "WAIT_RESOURCE",
+    "USER_PAUSE": "WAIT_USER",
+    "TRANSPORT_GAP": "DEFECT",
+}
+
+
+def _observation_text(item: Mapping[str, Any], *keys: str, default: str = "UNOBSERVED") -> str:
+    for key in keys:
+        value = item.get(key)
+        if isinstance(value, str) and value:
+            return value
+    return default
+
+
+def _observation_stage(item: Mapping[str, Any], lifecycle: str) -> tuple[str, str | None]:
+    """Translate an observed Clerk row without inventing missing transport facts."""
+
+    stage = item.get("owner_stage", item.get("stage"))
+    if isinstance(stage, str):
+        normalized = _LEGACY_STAGE_MAP.get(stage, stage)
+        if normalized in _V2_STAGES:
+            defect = item.get("defect")
+            if not isinstance(defect, str) and stage == "TRANSPORT_GAP":
+                defect = "TRANSPORT_GAP"
+            return normalized, defect if isinstance(defect, str) else None
+    if lifecycle in {"CLOSED", "REGISTERED"}:
+        return "TERMINAL", None
+    # An absent observation is a provenance gap, not evidence of an undelivered
+    # message.  In particular, do not manufacture TRANSPORT_GAP here.
+    return "PROVISIONING", "PROVISIONING_GAP"
+
+
+def _state_revision(
+    sources: _SnapshotAttempt,
+    direction: Mapping[str, Any],
+    key: str,
+    kind: str,
+) -> tuple[int | None, Mapping[str, Any] | None, str | None]:
+    reference = direction.get(key)
+    if not isinstance(reference, str):
+        return None, None, f"invalid:{direction.get('id')}:{key}"
+    document = sources.read_document(reference, kind)
+    if document.status != "ok" or document.value is None:
+        return document.revision, None, document.warning
+    return document.revision, document.value, None
+
+
+def _projection_age(observed_at: str) -> int | None:
+    if not _TIMESTAMP_RE.match(observed_at):
+        return None
+    try:
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(observed_at.replace("Z", "+00:00"))).total_seconds()
+    except ValueError:
+        return None
+    return max(0, int(age))
+
+
+def _build_clerk(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:
+    """Project the latest *observed* Clerk facts alongside durable direction state.
+
+    This is deliberately not a liveness engine.  It never treats an envelope on
+    disk as delivered and never reuses historical runtime task maps.  The
+    liveness file records the time that Codex task/history facts were collected;
+    refreshes of this HTTP endpoint keep that original time intact.
+    """
+
     warnings: list[str] = []
     statuses: list[str] = []
     refs: dict[str, int] = {}
-    generated_values: list[str | None] = [registry_doc.updated_at]
-    if registry_doc.status != "ok":
-        statuses.append(registry_doc.status)
-    doc = sources.read_runtime_document(
-        RUNTIME_WORKTREES_REL,
-        LEGACY_RUNTIME_WORKTREES_REL,
-        "runtime_worktrees",
-        {"schema_version": 1, "revision": 0, "worktrees": []},
-    )
-    generated_values.append(doc.updated_at)
-    if doc.revision is not None:
-        refs["runtime_worktrees"] = doc.revision
-    if doc.status != "ok" or doc.value is None:
-        statuses.append(doc.status)
-        _warning_add(warnings, doc.warning)
+    if registry_doc.status != "ok" or registry_doc.value is None:
         return _projection(
-            status=_status_join(statuses),
-            generated_at=_max_timestamp(generated_values),
+            status=registry_doc.status,
+            generated_at=registry_doc.updated_at or EPOCH,
             revision_refs=refs,
-            data={"worktrees": []},
-            warnings=warnings,
+            data={"directions": []},
+            warnings=[registry_doc.warning or "missing:registry"],
         )
-    known = {
-        item.get("id")
-        for item in _registry_direction(registry_doc.value)
-        if isinstance(item.get("id"), str)
-    } if registry_doc.value else set()
-    entries: list[dict[str, Any]] = []
-    source = doc.value.get("worktrees", [])
-    for item in sorted((entry for entry in source if isinstance(entry, Mapping)), key=lambda entry: str(entry.get("worktree_ref", ""))):
-        direction = item.get("direction_id")
-        if isinstance(direction, str) and direction not in known:
-            statuses.append("stale")
-            _warning_add(warnings, f"stale:worktree_direction:{direction}")
-        output: dict[str, Any] = {
-            key: item[key]
-            for key in ("worktree_ref", "direction_id", "kind", "assignment_id", "branch", "base_sha", "candidate_sha", "integrated_sha", "lifecycle", "receipt_path")
-            if key in item and (isinstance(item[key], str) or item[key] is None)
+    refs["registry"] = registry_doc.revision or 1
+    observation = sources.read_document(CLERK_LIVENESS_REL, "clerk_liveness")
+    observed_rows: dict[str, Mapping[str, Any]] = {}
+    observed_at = "UNOBSERVED"
+    if observation.status == "ok" and observation.value is not None:
+        candidate_time = observation.value.get("observed_at")
+        if isinstance(candidate_time, str) and _TIMESTAMP_RE.match(candidate_time):
+            observed_at = candidate_time
+        else:
+            statuses.append("invalid")
+            _warning_add(warnings, "invalid:clerk_observation_time")
+        for item in observation.value.get("directions", []):
+            if isinstance(item, Mapping) and isinstance(item.get("direction_id"), str):
+                observed_rows[str(item["direction_id"])] = item
+    else:
+        statuses.append("stale" if observation.status == "missing" else observation.status)
+        _warning_add(warnings, observation.warning or "missing:clerk_liveness")
+
+    age = _projection_age(observed_at)
+    if age is not None and age > CLERK_FRESHNESS_SECONDS:
+        statuses.append("stale")
+        _warning_add(warnings, "stale:clerk_liveness_age")
+    elif observed_at == "UNOBSERVED":
+        _warning_add(warnings, "stale:clerk_observation_unobserved")
+
+    rows: list[dict[str, Any]] = []
+    for direction in _registry_direction(registry_doc.value):
+        direction_id = direction.get("id")
+        lifecycle = direction.get("lifecycle")
+        if not isinstance(direction_id, str) or not isinstance(lifecycle, str):
+            statuses.append("invalid")
+            _warning_add(warnings, "invalid:registry_direction")
+            continue
+        research_revision, research, research_warning = _state_revision(
+            sources, direction, "research_state_path", "research_state"
+        )
+        engineering_revision, engineering, engineering_warning = _state_revision(
+            sources, direction, "engineering_state_path", "engineering_state"
+        )
+        if research_revision is not None:
+            refs[f"research_state:{direction_id}"] = research_revision
+        if engineering_revision is not None:
+            refs[f"engineering_state:{direction_id}"] = engineering_revision
+        _warning_add(warnings, research_warning)
+        _warning_add(warnings, engineering_warning)
+        item = observed_rows.get(direction_id, {})
+        stage, defect = _observation_stage(item, lifecycle)
+        assignment_id = _observation_text(item, "assignment_id", "assignment_message_id", default="UNKNOWN")
+        return_id = _observation_text(item, "return_id", "return_message_id", default="UNKNOWN")
+        delivery_state = _observation_text(item, "delivery_state")
+        next_event = _observation_text(
+            item, "next_event", "reason",
+            default=(
+                str((research or engineering or {}).get("next_action", {}).get("kind"))
+                if isinstance((research or engineering or {}).get("next_action"), Mapping)
+                else "UNOBSERVED"
+            ),
+        )
+        registry_seen = (research or {}).get("registry_revision_seen")
+        if isinstance(registry_seen, int) and registry_doc.revision is not None and registry_seen > registry_doc.revision:
+            stage, defect = "DEFECT", "STATE_AHEAD_OF_RETURN"
+        observed_inflight = stage != "TERMINAL" or assignment_id != "UNOBSERVED" or return_id != "UNOBSERVED"
+        if lifecycle == "CLOSED" and observed_inflight:
+            stage, defect = "DEFECT", "CLOSED_WITH_INFLIGHT"
+        row_observed_at = _observation_text(
+            item,
+            "observed_at",
+            default=observed_at if item else "UNOBSERVED",
+        )
+        row: dict[str, Any] = {
+            "direction_id": direction_id,
+            "lifecycle": lifecycle,
+            "owner_stage": stage,
+            "next_event": next_event,
+            "native_task_id": _observation_text(item, "native_task_id", "task_id", "owner_thread_id", default="UNKNOWN"),
+            "native_task_status": _observation_text(item, "native_task_status", "task_status"),
+            "observed_at": row_observed_at,
+            "assignment_id": assignment_id,
+            "return_id": return_id,
+            "delivery_state": delivery_state,
+            "control_release_adoption": _observation_text(item, "control_release_adoption"),
+            "registry_revision": registry_doc.revision,
+            "research_state_revision": research_revision,
+            "engineering_state_revision": engineering_revision,
+            "projection_age_seconds": _projection_age(row_observed_at) if row_observed_at != "UNOBSERVED" else "UNOBSERVED",
+            "defect": defect,
         }
-        absolute = item.get("canonical_absolute_path")
-        if isinstance(absolute, str):
-            # A basename is useful in the view without disclosing machine paths.
-            output["path_name"] = Path(absolute).name
-        entries.append(output)
+        for key in ("assignment_locator", "return_locator", "owner_identity", "next_owner"):
+            value = item.get(key)
+            if isinstance(value, str) or value is None and key in item:
+                row[key] = value
+        rows.append(row)
     if not statuses:
         statuses = ["ok"]
     return _projection(
         status=_status_join(statuses),
-        generated_at=_max_timestamp(generated_values),
+        generated_at=observed_at if observed_at != "UNOBSERVED" else registry_doc.updated_at or EPOCH,
         revision_refs=refs,
-        data={"worktrees": entries},
-        warnings=warnings,
-    )
-
-
-def _build_clerk(sources: _SnapshotAttempt) -> dict[str, Any]:
-    document = sources.read_document(CLERK_LIVENESS_REL, "clerk_liveness")
-    if document.status != "ok" or document.value is None:
-        return _projection(
-            status=document.status,
-            generated_at=EPOCH,
-            revision_refs={},
-            data={"directions": []},
-            warnings=[document.warning or "missing:clerk_liveness"],
-        )
-    rows: list[dict[str, Any]] = []
-    for item in sorted(
-        (row for row in document.value.get("directions", []) if isinstance(row, Mapping)),
-        key=lambda row: str(row.get("direction_id", "")),
-    ):
-        output = {
-            key: item[key]
-            for key in (
-                "direction_id",
-                "lifecycle",
-                "stage",
-                "reason",
-                "owner_identity",
-                "task_status",
-                "next_owner",
-                "assignment_locator",
-                "return_locator",
-            )
-            if key in item and (isinstance(item[key], str) or item[key] is None)
-        }
-        if isinstance(item.get("recovery_kind"), str):
-            output["recovery_kind"] = item["recovery_kind"]
-        rows.append(output)
-    observed_at = document.value.get("observed_at")
-    stale = True
-    if isinstance(observed_at, str) and _TIMESTAMP_RE.match(observed_at):
-        try:
-            instant = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
-            age = (datetime.now(timezone.utc) - instant).total_seconds()
-            stale = age > CLERK_FRESHNESS_SECONDS
-        except ValueError:
-            stale = True
-    return _projection(
-        status="stale" if stale else "ok",
-        generated_at=observed_at if isinstance(observed_at, str) else EPOCH,
-        revision_refs={},
         data={"directions": rows},
-        warnings=["stale:clerk_liveness_age"] if stale else [],
+        warnings=warnings,
     )
 
 
@@ -1510,11 +1261,9 @@ def build_snapshot(root: Root | Path | str) -> dict[str, Any]:
         last_registry = registry
         sections = {
             "portfolio": _build_portfolio(root_path, registry, sources),
-            "agents": _build_agents(registry, sources),
             "runs": _build_runs(root_path, registry, sources),
             "external_reviews": _build_external(root_path, registry, sources),
-            "worktrees": _build_worktrees(registry, sources),
-            "clerk": _build_clerk(sources),
+            "clerk": _build_clerk(registry, sources),
         }
         last_changed = sources.changed_sources()
         if last_changed:
@@ -1540,7 +1289,7 @@ def build_projection(root: Root | Path | str, name: str) -> dict[str, Any]:
     snapshot = build_snapshot(root)
     if name == "snapshot":
         return snapshot
-    key = {"portfolio": "portfolio", "agents": "agents", "runs": "runs", "external-reviews": "external_reviews", "worktrees": "worktrees", "clerk": "clerk"}.get(name)
+    key = {"portfolio": "portfolio", "runs": "runs", "external-reviews": "external_reviews", "clerk": "clerk"}.get(name)
     if key is None:
         raise KeyError(name)
     return snapshot["data"][key]

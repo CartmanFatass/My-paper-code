@@ -14,7 +14,6 @@ ROOT = Path(__file__).resolve().parents[1]
 CODEX = ROOT / ".codex"
 
 EXPECTED_ROLE_RUNTIME = {
-    "hmasd-code-project-manager": ("gpt-5.6-sol", "high", "workspace-write", "never"),
     "hmasd-code-scout": ("gpt-5.6-luna", "medium", "read-only", "never"),
     "hmasd-cpm-agentify-transport": ("gpt-5.6-luna", "medium", "workspace-write", "never"),
     "hmasd-experiment-operator": ("gpt-5.6-luna", "low", "workspace-write", "never"),
@@ -22,7 +21,6 @@ EXPECTED_ROLE_RUNTIME = {
     "hmasd-external-gemini-transport": ("gpt-5.6-luna", "high", "workspace-write", "never"),
     "hmasd-implementer-terra": ("gpt-5.6-terra", "high", "workspace-write", "never"),
     "hmasd-implementer": ("gpt-5.6-sol", "high", "workspace-write", "never"),
-    "hmasd-independent-research-explorer": ("gpt-5.6-sol", "max", "workspace-write", "never"),
     "hmasd-project-scout": ("gpt-5.6-luna", "medium", "read-only", "never"),
     "hmasd-research-artifact-writer": ("gpt-5.6-luna", "medium", "workspace-write", "never"),
     "hmasd-research-critic": ("gpt-5.6-sol", "max", "read-only", "never"),
