@@ -1,32 +1,117 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "base_sha": "24da86d7427dd6d21669498782b357568d540d49",
   "blockers": [],
   "candidate_sha": null,
-  "changed_paths": [],
+  "changed_paths": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
+    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
+    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
+    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
+    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_run_manifest.py",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_ACTIVITY_RESOURCE_ESTIMATE.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_COMPLETE_PRELAUNCH_EVIDENCE.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_PRELAUNCH_MANIFEST.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_SOURCE_MANIFEST.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_TECHNICAL_ACCEPTANCE.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/estimator-help-verification.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/estimator-output-verification.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/pytest-verification.json",
+    "tests/experiments/candidates/scdmp_variable_k/test_native_fusion_r01_foundation_activity_prelaunch.py"
+  ],
   "direction_id": "semigroup_consistent_duration_model_policy",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "24da86d7427dd6d21669498782b357568d540d49"
   },
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "8bf3756ebe453a4b39f129fdae01217827b1911004ac9124d195fdcece5074dd",
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED"
+    "input_refs": [
+      {
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "8bf3756ebe453a4b39f129fdae01217827b1911004ac9124d195fdcece5074dd"
+      },
+      {
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_ACTIVITY_RESOURCE_ESTIMATE.json",
+        "sha256": "28cf11405733540545608a58c9b54f9426b58b819c70656a402f298e14f32e4b"
+      },
+      {
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_COMPLETE_PRELAUNCH_EVIDENCE.json",
+        "sha256": "59afffda9773c990b8ad7756485ef1060e5d82575b14ac00534db68ea7774125"
+      },
+      {
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/pytest-verification.json",
+        "sha256": "0aa018211ec5f10d14152fcf5161d2538c0b68d6e15f162e930cccb1152f93c8"
+      }
+    ],
+    "kind": "RETURN_PORTFOLIO_S4_TECHNICAL_ACCEPTANCE"
   },
-  "phase": "UNREQUESTED",
-  "revision": 1,
+  "phase": "COMPLETE",
+  "revision": 6,
   "run_refs": [],
   "schema_version": 1,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-    "sha256": "52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3"
+    "sha256": "6fd74882c83601fc95d33c2787fb200cf8149fbee564b69572146a70e69d4797"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-27T10:42:38.374694Z",
+  "verification_refs": [
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
+      "sha256": "b6540b4711a66b2ed4631814a0fffb63559f6aa036047a643700e6b0da30c74e"
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
+      "sha256": "ff7d4ed472ce93cdef07b7bc1a25a97a463aadb2ed36b04ecb9d68f71d86de2a"
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
+      "sha256": "9579975c9ff73c1cc8b311d715e7218c9e8c2cee6a2328df4d30f669ab341c4b"
+    },
+    {
+      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_run_manifest.py",
+      "sha256": "7bd5b102276ece985c836be193b63101999a1bb19c45dfcead8328274e10e56f"
+    },
+    {
+      "path": "tests/experiments/candidates/scdmp_variable_k/test_native_fusion_r01_foundation_activity_prelaunch.py",
+      "sha256": "4dd69d2a0f8f9d96c57557176bd00195da7a3396bedfafa5349455d7539cb643"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_SOURCE_MANIFEST.json",
+      "sha256": "f1dece8d5ab7721eac18e6fc6a0ec241ca9604a0b3ce5fadea6b4defa3467994"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_ACTIVITY_RESOURCE_ESTIMATE.json",
+      "sha256": "28cf11405733540545608a58c9b54f9426b58b819c70656a402f298e14f32e4b"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_PRELAUNCH_MANIFEST.json",
+      "sha256": "a53ef640a60dd8fb3c6163abf42010f189b8b5746fd869e1c62336f133152ae2"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_COMPLETE_PRELAUNCH_EVIDENCE.json",
+      "sha256": "59afffda9773c990b8ad7756485ef1060e5d82575b14ac00534db68ea7774125"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/S4_TECHNICAL_ACCEPTANCE.json",
+      "sha256": "8bf3756ebe453a4b39f129fdae01217827b1911004ac9124d195fdcece5074dd"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/pytest-verification.json",
+      "sha256": "0aa018211ec5f10d14152fcf5161d2538c0b68d6e15f162e930cccb1152f93c8"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/estimator-help-verification.json",
+      "sha256": "a8e094d723947461ac230db5fefbfde1b9614d0845a630430587f83e8a8db5dc"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/estimator-output-verification.json",
+      "sha256": "a76ec39aaee7dbe405b62f2baa9ec784034364a9d6d803fa1503cfb9d2f50ca4"
+    }
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-semigroup_consistent_duration_model_policy"
