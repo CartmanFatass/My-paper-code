@@ -41,3 +41,5 @@ def test_clerk_instruction_keeps_resource_retry_out_of_direction_routing() -> No
     assert "never root or workflow-clerk by default" in normalized
     assert "delete that heartbeat after prepared" in normalized
     assert "must not create an operator" in normalized
+    assert "does not require user approval merely because" in normalized
+    assert "estimated at no more than 7200 seconds" in normalized

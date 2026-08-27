@@ -62,6 +62,18 @@ terminal `DONE`; Clerk never receives or routes a Portfolio self-request.
 | task identity conflict or ambiguous duplicate | Report exact IDs to Root; do not create another task |
 | external commitment unknown | Observe only; never resend |
 
+## User-decision boundary
+
+A PREPARED local result command does not require user approval merely because
+it is a real scientific execution. When the exact command is already within the
+direction authority, has no new external commitment or shared-core semantic
+change, is memory-safe, and is estimated at no more than 7200 seconds, route it
+to the existing CM for the ordinary one-Operator execution path. `REQUEST_USER`
+is reserved for an actual material choice required by authority, an exact
+command above the 7200-second threshold, or another explicit user-owned effect;
+never invent an approval gate from `PREPARED`, `READY`, or a missing future
+Operator identity.
+
 The memory heartbeat is attached to the exact recipient task of the retry
 assignment, never Root or Workflow-Clerk by default. The memory heartbeat may
 call the frozen prepare command only after that task receives the exact retry

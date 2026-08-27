@@ -90,6 +90,9 @@ estimate/command/code SHA。
   语义影响。危险操作警告并记录，但确认后不得形成权限死锁。
 - 实验命令 owner、进程终态和 stdout/stderr 继续由 hmasd_run.py 记录；session
   协调不重复实现实验运行器。
+- authority 已覆盖、memory-safe、无新 external/shared-core 语义且预计不超过
+  7200 秒的本地 PREPARED result command 直接进入 CM→唯一 Operator；不能仅因
+  “是真实科学执行”或 future Operator 尚未创建而增加用户批准 gate。
 - MARL 实验遵循真实科学与资源价值，不因 toy case 追求无意义 float64 精度或
   逐路径穷举。
 
@@ -123,6 +126,8 @@ estimate/command/code SHA。
 12. 有 Git-visible 改动的责任 session 在 RETURN 前已 commit/push exact owned
     paths 并报告 Git 信息；其他方向的 dirty files 未被带入 commit。worktree 要么
     已由 owner 精确回收，要么带 exact branch/HEAD/reason 明确保留。
+13. 不超过 7200 秒且满足既有 direction authority/resource/Effect 边界的本地
+    PREPARED command 不触发 `REQUEST_USER`；Clerk 直接路由 CM 的唯一 Operator。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。

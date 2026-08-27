@@ -85,6 +85,9 @@ return witness 与 raw thread parser 已退出正常路径。完成依赖核查�
     不存在；旧版本遗留的 partial root 仅能由 run CLI 对精确安全形状机械回收。
     资源 retry 使用每个 direction/run_id 至多一个 heartbeat，绑定 exact retry
     assignment 的责任 session（prepare 默认是同方向 CM），并在 PREPARED 后取消。
+13. authority 已覆盖、memory-safe、无新 external/shared-core 语义且预计不超过
+    7200 秒的本地 PREPARED result command 不需要仅因“是真实科学执行”再次请求
+    用户批准；Clerk 直接路由同方向 CM，由 CM 创建唯一 Operator。
 
 ## Durable authorities and writers
 

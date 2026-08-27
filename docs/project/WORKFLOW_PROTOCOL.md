@@ -200,3 +200,10 @@ registry，也不使用 hash/receipt 重复证明 Codex 消息存在。
 
 实验命令与进程事实仍由 hmasd_run.py 负责；Git 与 durable authority 仍使用各自
 现有工具。session envelope 不取代这些领域边界。
+
+一个已在方向 authority 内、memory-safe、无新 external commitment/shared-core
+语义变更且预计不超过 7200 秒的本地 PREPARED result command 不需要仅因“是真实
+科学执行”再次请求用户批准；Clerk 直接路由同方向 CM，由 CM 创建唯一 Operator。
+`REQUEST_USER` 只用于 authority 确实保留给用户的材料选择、超过 7200 秒的 exact
+command，或另一个明确的 user-owned Effect。缺少尚未创建的 future Operator identity
+不是阻塞或批准理由。
