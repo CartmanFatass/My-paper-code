@@ -168,7 +168,8 @@ estimate/command/code SHA。
     PREPARED command 不触发 `REQUEST_USER`；Clerk 直接路由 CM 的唯一 Operator。
 14. Portfolio 的一次 global wake 可在一个 `PORTFOLIO_RETURN` 中产生多个方向
     action；Clerk 在任何 send 前校验完整列表，并在同一事件 turn 投递所有独立 ready
-    action，不把比较拆成多个 Portfolio session。
+    action，不把比较拆成多个 Portfolio session。一个方向的 scoped failure 与其他
+    ready actions 可共存；`CLOSED/DONE` 必须与当前 registry lifecycle 匹配。
 15. `http://127.0.0.1:8765` 的只读 Dashboard 可访问并显示 Portfolio lifecycle 与
     各方向 research/engineering state；陈旧 task projection 有显式警告，Dashboard
     不写 authority、不路由工作，停止服务也不改变 liveness。

@@ -85,7 +85,10 @@ The Portfolio assignment uses the single transport direction_id `portfolio`;
 this is correlation, not a limit on Portfolio authority. For a validated
 `PORTFOLIO_RETURN`, route `REQUEST_EM` to that action's EM, `REQUEST_CM` to that
 action's CM, `REQUEST_USER` to Root/user, and closed/done to no participant.
-Validate the complete actions list before sending any action. Dispatch every
+Apply a scoped `FAILED` action through the matching generic failure row without
+delaying the other actions. The envelope CLI must first match every action's
+lifecycle to the current Portfolio registry; do not accept a body-only
+closed/done claim. Validate the complete actions list before sending any action. Dispatch every
 independent ready action in the same event turn. Do not reinterpret
 Portfolio's comparison, priority, lifecycle, or new-direction decision, and do
 not split the comparison into one Portfolio assignment per direction.
@@ -137,11 +140,12 @@ and paths, but cannot redefine the manager topology.
 
 Portfolio is a decision participant, not a coordinator. It never creates or
 sends an ASSIGNMENT to Root, EM, or CM. After validating Portfolio's correlated
-RETURN, you alone create and send the next assignment named by its status.
-The envelope CLI rejects `REQUEST_PORTFOLIO` from Portfolio before a RETURN
-file is created. Portfolio corrects the body under the same assignment and
-reruns `return` with `REQUEST_EM`, `REQUEST_CM`, `REQUEST_USER`, or a valid
-terminal `DONE`; Clerk never receives or routes a Portfolio self-request.
+return, you alone create and send the next assignment named by each action.
+Global Portfolio correction uses `portfolio-return`; ordinary `return` is
+legacy-only for an already-issued direction-specific Portfolio assignment.
+The CLI rejects a global ordinary return and any Portfolio self-request before
+creating a file. Correct the body under the same assignment and rerun the
+command required by that assignment mode.
 
 ## Generic failure rows
 
@@ -150,6 +154,7 @@ terminal `DONE`; Clerk never receives or routes a Portfolio self-request.
 | `RESOURCE_MEMORY_ADMISSION` before manifest creation | Keep the direction local; request or reuse one retry assignment for the exact responsible participant (normally the same direction CM for prepare), then ensure one active heartbeat per direction/run_id on that participant task |
 | malformed envelope or endpoint/direction mismatch | Return the exact mechanical defect to the sender for same-task correction |
 | participant implementation/test failure | Continue the same EM/CM task for a bounded repair slice |
+| Portfolio action status=`FAILED` | Send one bounded registry/authority repair assignment to the same existing Portfolio task; this does not delay or resend the other actions |
 | task identity conflict or ambiguous duplicate | Report exact IDs to Root; do not create another task |
 | external commitment unknown | Observe only; never resend |
 

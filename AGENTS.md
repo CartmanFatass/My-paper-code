@@ -82,7 +82,9 @@ scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
   并检查 changed_paths，然后在 final 前原生 send 给 Clerk。
 - Portfolio 的新全局 wake 使用 `portfolio-return` 命令；一个 transport
   `direction_id=portfolio` 不限制其研究范围，每个 material direction outcome
-  必须成为一个独立 action。Clerk 在任何 send 前校验完整 action list。
+  必须成为一个独立 action。一个方向的 scoped failure 使用该方向的
+  `ACTIVE/FAILED` action，不能删除其他 ready actions。CLI 将 action lifecycle 与
+  当前 Portfolio registry 匹配；Clerk 在任何 send 前校验完整 action list。
 - receiver 使用 read 命令获得校验后的 envelope 与固定 recipient thread ID。
 - task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
 - 切换前已在途的 participant-to-participant v1 assignment 可向原 sender 完成一次

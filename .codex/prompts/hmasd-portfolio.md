@@ -71,6 +71,9 @@ Use one bounded decision wake:
    Workflow-Clerk expands all validated actions without redoing the comparison.
    In other words, send the correlated RETURN to Workflow-Clerk; the
    `portfolio-return` locator is that correlated return for a global wake.
+   The CLI reads the current Portfolio registry and rejects any action whose
+   lifecycle does not match it; write the durable CAS decision before building
+   this return.
 
 ## Portfolio-return action boundary
 
@@ -83,10 +86,13 @@ Use one bounded decision wake:
   the exact question and reactivation condition.
 - `DONE`: the action's direction is durably `CLOSED` with no next slice.
 - `FAILED`: a precise Portfolio/registry defect; unaffected directions and
-  their owners remain live.
+  their owners remain live. Use one `ACTIVE`/`FAILED` action with a scoped
+  failure and exact repair objective; do not replace the independent actions
+  that are still ready.
 
 The action/lifecycle pairs are fixed: `ACTIVE` with `REQUEST_EM` or
-`REQUEST_CM`; `PARKED` with `REQUEST_USER`; and `CLOSED` with `DONE`. The
+`REQUEST_CM` or scoped `FAILED`; `PARKED` with `REQUEST_USER`; and `CLOSED`
+with `DONE`. The
 portfolio-level summary is not a substitute for these direction actions. Use
 the ordinary `return` command only to complete an already-issued legacy
 assignment that explicitly requires it; new global wakes use

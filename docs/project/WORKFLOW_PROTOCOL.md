@@ -150,14 +150,17 @@ Clerk 在发送任何下一 ASSIGNMENT 前先原子校验完整 actions 列表�
 turn 展开所有独立 ready action。每个 action 只携带自己的 direction ID、refs、
 lifecycle、status 与 next objective；Clerk 不重做 Portfolio 比较。Portfolio 的决定
 与 Clerk 的 transport 动作必须保持为两个不同责任。
-Portfolio 的 `REQUEST_PORTFOLIO` body 会在 RETURN 文件创建前被 envelope CLI
-拒绝。Portfolio 在同一 assignment 下修正 body，并重新运行 `return`，选择
-`REQUEST_EM`、`REQUEST_CM`、`REQUEST_USER` 或合法 terminal `DONE`；Clerk 不会
-收到或路由 Portfolio self-request。
+新 global Portfolio assignment 不能使用普通 `return`；CLI 在文件创建前拒绝该
+绕行，Portfolio 必须修正完整 actions body 并重新运行 `portfolio-return`。切换前
+明确要求旧格式的 direction-specific Portfolio assignment 才可用普通 `return`；
+其中 `REQUEST_PORTFOLIO` 仍被拒绝。
 
 新 global wake 的 action/lifecycle 对固定为：`ACTIVE` + `REQUEST_EM` 或
-`REQUEST_CM`，`PARKED` + `REQUEST_USER`，`CLOSED` + `DONE`。普通 `return`
-仅用于完成已经在途、明确要求旧格式的 Portfolio assignment。
+`REQUEST_CM`，或 `ACTIVE` + scoped `FAILED`；`PARKED` + `REQUEST_USER`；
+`CLOSED` + `DONE`。一个失败 action 不删除其他 ready actions。CLI 在创建与读取
+时把每个 action lifecycle 与当前 Portfolio registry 匹配，body-only terminal
+声明不能路由。普通 `return` 仅用于完成已经在途、明确要求旧格式的 Portfolio
+assignment。
 
 只有明确的科学否决、资源否决、用户决定，或已经证明该方向没有任何可执行的
 科研/工程切面时，Portfolio 才能 PARK/CLOSE。缺少现成实现、测试或 CLI 本身必须

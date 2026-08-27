@@ -157,3 +157,16 @@ def test_clerk_keeps_the_existing_local_dashboard_available_without_owning_state
         "stale runtime task projection",
     ):
         assert required in normalized
+
+
+def test_clerk_repairs_portfolio_protocol_without_using_legacy_return() -> None:
+    text = (ROOT / ".codex/prompts/hmasd-workflow-clerk.md").read_text(
+        encoding="utf-8"
+    )
+    normalized = " ".join(text.split()).casefold()
+
+    assert "global portfolio correction uses `portfolio-return`" in normalized
+    assert "ordinary `return` is legacy-only" in normalized
+    assert "portfolio action status=`failed`" in normalized
+    assert "same existing portfolio task" in normalized
+    assert "does not delay or resend the other actions" in normalized

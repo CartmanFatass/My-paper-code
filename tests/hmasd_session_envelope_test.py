@@ -408,7 +408,7 @@ def test_legacy_participant_assignment_can_finish_but_cannot_be_created(
     assert json.loads(returned.stdout)["recipient_thread_id"] == "portfolio-thread"
 
 
-def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
+def test_global_portfolio_assignment_cannot_use_ordinary_return(tmp_path: Path) -> None:
     assignment_body = tmp_path / "portfolio-assignment-body.json"
     write_json(
         assignment_body,
@@ -444,11 +444,11 @@ def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
     write_json(
         return_body,
         {
-            "status": "REQUEST_PORTFOLIO",
-            "summary": "ask Portfolio to decide again",
+            "status": "REQUEST_EM",
+            "summary": "attempt to bypass the global action list",
             "changed_paths": [],
             "artifact_refs": [],
-            "next_objective": "repeat the same Portfolio decision",
+            "next_objective": "continue one direction outside the action list",
             "failure": None,
         },
     )
@@ -463,7 +463,7 @@ def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
     )
 
     assert returned.returncode == 2
-    assert "Portfolio cannot return REQUEST_PORTFOLIO" in returned.stderr
+    assert "global Portfolio assignment requires portfolio-return" in returned.stderr
     assert not (tmp_path / assignment_locator.replace(".assignment.json", ".return.json")).exists()
 
 
@@ -582,6 +582,16 @@ def test_portfolio_return_carries_multiple_direction_actions_from_one_global_wak
     }
     body_path = tmp_path / "portfolio-return-body.json"
     write_json(body_path, body)
+    registry_path = tmp_path / "docs/research/portfolio/workflow/registry.json"
+    write_json(
+        registry_path,
+        {
+            "directions": [
+                {"id": action["direction_id"], "lifecycle": action["lifecycle"]}
+                for action in body["actions"]
+            ]
+        },
+    )
 
     returned = run_cli(
         "portfolio-return",
@@ -627,6 +637,176 @@ def test_portfolio_return_carries_multiple_direction_actions_from_one_global_wak
     )
     assert read_back.returncode == 0, read_back.stderr
     assert json.loads(read_back.stdout)["envelope"] == envelope
+
+
+def test_portfolio_return_keeps_scoped_failure_beside_independent_action(
+    tmp_path: Path,
+) -> None:
+    assignment_body = tmp_path / "assignment-body.json"
+    write_json(
+        assignment_body,
+        {
+            "objective": "decide two independent direction outcomes",
+            "context_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+            "owned_paths": ["docs/research/portfolio/"],
+            "constraints": ["keep direction failures isolated"],
+            "done_when": ["send one complete action list"],
+        },
+    )
+    assigned = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "portfolio",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(assignment_body),
+    )
+    assert assigned.returncode == 0, assigned.stderr
+    locator = json.loads(assigned.stdout)["locator"]
+    actions = [
+        {
+            "direction_id": "failed_direction",
+            "lifecycle": "ACTIVE",
+            "status": "FAILED",
+            "summary": "registry CAS failed for this direction only",
+            "artifact_refs": ["docs/research/portfolio/workflow/registry.json"],
+            "next_objective": "repair the exact registry CAS conflict",
+            "failure": {"scope": "direction", "summary": "revision conflict"},
+        },
+        {
+            "direction_id": "ready_direction",
+            "lifecycle": "ACTIVE",
+            "status": "REQUEST_EM",
+            "summary": "continue independent science",
+            "artifact_refs": ["docs/research/portfolio/workflow/registry.json"],
+            "next_objective": "run the accepted scientific slice",
+            "failure": None,
+        },
+    ]
+    write_json(
+        tmp_path / "docs/research/portfolio/workflow/registry.json",
+        {
+            "directions": [
+                {"id": action["direction_id"], "lifecycle": action["lifecycle"]}
+                for action in actions
+            ]
+        },
+    )
+    body = tmp_path / "portfolio-return-body.json"
+    write_json(
+        body,
+        {
+            "summary": "one direction failed without delaying the other",
+            "changed_paths": [],
+            "artifact_refs": ["docs/research/portfolio/workflow/registry.json"],
+            "actions": actions,
+            "failure": None,
+        },
+    )
+
+    result = run_cli(
+        "portfolio-return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        locator,
+        "--body",
+        str(body),
+    )
+
+    assert result.returncode == 0, result.stderr
+    envelope = json.loads((tmp_path / json.loads(result.stdout)["locator"]).read_text())
+    by_direction = {
+        action["direction_id"]: action for action in envelope["body"]["actions"]
+    }
+    assert by_direction["failed_direction"]["failure"] == {
+        "scope": "direction",
+        "summary": "revision conflict",
+    }
+    assert by_direction["ready_direction"]["status"] == "REQUEST_EM"
+
+
+def test_portfolio_terminal_action_requires_current_registry_closed(
+    tmp_path: Path,
+) -> None:
+    assignment_body = tmp_path / "assignment-body.json"
+    write_json(
+        assignment_body,
+        {
+            "objective": "close one direction",
+            "context_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+            "owned_paths": ["docs/research/portfolio/"],
+            "constraints": ["bind terminal status to registry"],
+            "done_when": ["send one complete action list"],
+        },
+    )
+    assigned = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "portfolio",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(assignment_body),
+    )
+    locator = json.loads(assigned.stdout)["locator"]
+    write_json(
+        tmp_path / "docs/research/portfolio/workflow/registry.json",
+        {"directions": [{"id": "still_active", "lifecycle": "ACTIVE"}]},
+    )
+    body = tmp_path / "portfolio-return-body.json"
+    write_json(
+        body,
+        {
+            "summary": "incorrectly claim terminal",
+            "changed_paths": [],
+            "artifact_refs": ["docs/research/portfolio/workflow/registry.json"],
+            "actions": [
+                {
+                    "direction_id": "still_active",
+                    "lifecycle": "CLOSED",
+                    "status": "DONE",
+                    "summary": "claim closed",
+                    "artifact_refs": [
+                        "docs/research/portfolio/workflow/registry.json"
+                    ],
+                    "next_objective": None,
+                    "failure": None,
+                }
+            ],
+            "failure": None,
+        },
+    )
+
+    result = run_cli(
+        "portfolio-return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        locator,
+        "--body",
+        str(body),
+    )
+
+    assert result.returncode == 2
+    assert "does not match current Portfolio registry lifecycle" in result.stderr
 
 
 @pytest.mark.parametrize(
