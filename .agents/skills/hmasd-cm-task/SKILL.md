@@ -10,6 +10,11 @@ the named direction's engineering outcome, exact paths, technical evidence,
 engineering-state writes, and eligible result command. Implementer, Reviewer,
 Verifier, Scout, and Operator return to CM; CM alone integrates their evidence.
 
+For a full bounded acceptance review of a code diff, the top-level CM may invoke
+`code-review`: it runs the Standards and Spec axes through two direct
+`hmasd-reviewer` leaves. For one named material risk, use one Reviewer directly
+instead. Reviewer leaves never invoke the skill or delegate again.
+
 Use `hmasd-slice-interface` for intake and return. Choose one RETURN status:
 
 - `REQUEST_EM` for a genuine scientific semantic question or interpretation.

@@ -32,10 +32,14 @@ evidence and remains the sole technical acceptance owner for the assignment.
    result interpretation, protocol or already-observed compatibility can
    change.
 4. Integrate the Implementer's returned bytes and run proportional tests.
-   Before accepting high-impact production, protocol, scientific, numerical,
-   RNG, or checkpoint code, assign one independent Reviewer a named read-only
-   risk; do the same for a material integration risk. Actionable findings
-   return to the same Implementer for bounded repair;
+   For full bounded diff acceptance, the top-level CM may invoke `code-review`;
+   it runs independent Standards and Spec axes through two direct
+   `hmasd-reviewer` leaves. Each leaf performs its axis directly, never invokes
+   the skill and never delegates. For one named risk in high-impact
+   production, protocol, scientific, numerical, RNG, or checkpoint code, or
+   for one material integration risk, use one independent Reviewer directly
+   instead. Actionable findings return to
+   the same Implementer for bounded repair;
    review again only when the repair introduces a new material risk or the
    named finding needs focused closure.
 5. Reviewer and Verifier are separate, non-overlapping evidence tools. Use a

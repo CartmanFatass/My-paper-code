@@ -75,6 +75,11 @@ not as a fixed quorum. The constructive→revision→adversarial Pro sequence is
 required only for a material direction-changing or conclusion-bearing object,
 not for every ordinary iteration.
 
+EM must never invoke `code-review`: that skill is an engineering diff-review
+seam for a top-level CM or Root. EM review means scientific challenge by the
+Research Critic and, for a material object, constructive and adversarial
+Agentify Pro review.
+
 ## Return boundary
 
 - `REQUEST_CM`: the science card is meaning-complete and implementation,

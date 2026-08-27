@@ -10,6 +10,11 @@ the named direction's scientific outcome, authority, accepted interpretation,
 and research-state writes. Internal scientific leaves return evidence to EM;
 EM alone integrates and accepts it.
 
+EM scientific review must never invoke `code-review`. Use Research Critic for
+the independent scientific challenge and Agentify external transport for the
+required Pro review of a material scientific object. Those leaves return only
+to EM and never delegate.
+
 Use `hmasd-slice-interface` for intake and return. Choose one RETURN status:
 
 - `REQUEST_CM` when the science card is complete and implementation,
