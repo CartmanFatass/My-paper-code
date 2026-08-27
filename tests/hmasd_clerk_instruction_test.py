@@ -33,5 +33,7 @@ def test_clerk_instruction_keeps_resource_retry_out_of_direction_routing() -> No
 
     assert "resource_memory_admission" in normalized
     assert "one active heartbeat per direction/run_id" in normalized
+    assert "attached to the exact recipient task" in normalized
+    assert "never root or workflow-clerk by default" in normalized
     assert "delete that heartbeat after prepared" in normalized
     assert "must not create an operator" in normalized

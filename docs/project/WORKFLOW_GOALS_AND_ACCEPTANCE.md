@@ -68,9 +68,11 @@ Clerk 使用 `.codex/prompts/hmasd-workflow-clerk.md` 中唯一的方向无关�
 
 内存 admission 失败是 result launch 前的可恢复资源等待：run CLI 不创建 reserved
 output root；仅对旧版本留下的、无 manifest/日志/结果且目录为空的精确 partial
-root 执行机械回收。Clerk 为 exact direction/run_id 保持至多一个 heartbeat；它只在
-收到 retry assignment 后重试冻结 prepare，PREPARED 后发送 RETURN 并取消自身，
-不得创建 Operator 或改变 estimate/command/code SHA。
+root 执行机械回收。Clerk 为 exact direction/run_id 保持至多一个 heartbeat，并把
+它绑定到 retry assignment 的 exact recipient session；prepare 的责任 session 默认
+是同方向 CM，而不是 Root/Clerk。责任 session 收到 assignment 后重试冻结 prepare，
+PREPARED 后发送 RETURN 并取消自身，不得创建 Operator 或改变
+estimate/command/code SHA。
 
 ## Git、实验和共享核心
 
@@ -105,7 +107,8 @@ root 执行机械回收。Clerk 为 exact direction/run_id 保持至多一个 he
 9. 四方向事件同时到达时，Clerk 在第一次 wait 前已发送所有独立 ready assignment；
    task list/read 中的方向拓扑与 exact task ID 足以解释每一次 send。
 10. 内存不足的 prepare 不留下 reserved root；同一 direction/run_id 只有一个可见
-    heartbeat，PREPARED 后该 heartbeat 被取消，且未提前创建 Operator。
+    heartbeat，且它位于 retry assignment 的责任 session；PREPARED 后该 heartbeat
+    被取消，且未提前创建 Operator。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。

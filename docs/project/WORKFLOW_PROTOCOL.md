@@ -139,10 +139,12 @@ assignment。
 - preflight 的 direction/run 匹配且 `memory_safe=false`。
 
 任何额外文件、非空目录、symlink 或 identity mismatch 都拒绝回收。Clerk 对每个
-direction/run_id 只允许一个 Codex heartbeat；heartbeat 必须绑定 retry assignment，
-不能修改 estimate、parameters、command 或 code SHA，不能创建 Operator。manifest
-进入 `PREPARED` 后先发送 correlated RETURN，再删除该 heartbeat。正式执行仍通过
-普通 CM→唯一 Operator 流程。
+direction/run_id 只允许一个 Codex heartbeat；heartbeat 必须建立在 retry
+assignment 的 exact recipient task 上。prepare/memory admission 默认由同方向 CM
+负责，不能把 timer 建在 Root 或 Clerk 上，除非 exact assignment 明确把该责任交给
+它们。heartbeat 不能修改 estimate、parameters、command 或 code SHA，不能创建
+Operator。manifest 进入 `PREPARED` 后先发送 correlated RETURN，再删除该
+heartbeat。正式执行仍通过普通 CM→唯一 Operator 流程。
 
 ## 明确非职责
 

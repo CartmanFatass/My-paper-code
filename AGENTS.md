@@ -75,7 +75,8 @@ return witness 与 raw thread parser 已退出正常路径。完成依赖核查�
     在途修改。
 12. 内存 admission 不足发生在 manifest 创建前时，reserved output root 必须保持
     不存在；旧版本遗留的 partial root 仅能由 run CLI 对精确安全形状机械回收。
-    资源 retry 使用每个 direction/run_id 至多一个 heartbeat，并在 PREPARED 后取消。
+    资源 retry 使用每个 direction/run_id 至多一个 heartbeat，绑定 exact retry
+    assignment 的责任 session（prepare 默认是同方向 CM），并在 PREPARED 后取消。
 
 ## Durable authorities and writers
 

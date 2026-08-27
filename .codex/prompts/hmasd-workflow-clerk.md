@@ -48,14 +48,16 @@ protocol question; do not invent a new status, gate, or role.
 
 | Failure class | Action |
 | --- | --- |
-| `RESOURCE_MEMORY_ADMISSION` before manifest creation | Keep the direction local; request or reuse one Root retry assignment, then ensure one active heartbeat per direction/run_id |
+| `RESOURCE_MEMORY_ADMISSION` before manifest creation | Keep the direction local; request or reuse one retry assignment for the exact responsible participant (normally the same direction CM for prepare), then ensure one active heartbeat per direction/run_id on that participant task |
 | malformed envelope or endpoint/direction mismatch | Return the exact mechanical defect to the sender for same-task correction |
 | participant implementation/test failure | Continue the same EM/CM task for a bounded repair slice |
 | task identity conflict or ambiguous duplicate | Report exact IDs to Root; do not create another task |
 | external commitment unknown | Observe only; never resend |
 
-The memory heartbeat may call the frozen prepare command only after it receives
-the exact retry assignment. It may observe memory and use the run CLI's narrow
+The memory heartbeat is attached to the exact recipient task of the retry
+assignment, never Root or Workflow-Clerk by default. The memory heartbeat may
+call the frozen prepare command only after that task receives the exact retry
+assignment. It may observe memory and use the run CLI's narrow
 legacy-partial-root reclamation. It must not change estimates, command,
 parameters, code SHA, direction authority, or paths; it must not create an
 Operator. On another memory refusal it remains scheduled. On successful
