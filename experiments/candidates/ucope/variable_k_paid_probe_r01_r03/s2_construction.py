@@ -1098,6 +1098,15 @@ def _tail_agreement(
     left: Callable[[int], int],
     right: Callable[[int], int],
 ) -> np.float32:
+    _, total = _tail_agreement_totals(panel, left, right)
+    return total
+
+
+def _tail_agreement_totals(
+    panel: int,
+    left: Callable[[int], int],
+    right: Callable[[int], int],
+) -> tuple[np.float32, np.float32]:
     cases = tuple(finite_cases(panel))
     weights = np.asarray([case.weight for case in cases], dtype=np.float32)
     matched = np.asarray(
@@ -1111,13 +1120,20 @@ def _tail_agreement(
     )
     weight_total = fixed_fp32_tree(weights)
     total = fixed_fp32_tree(matched)
+    if abs(float(weight_total) - 1.0) > float(INVARIANT_TOLERANCE):
+        raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
+    return weight_total, total
+
+
+def _descriptive_tail_agreement(
+    panel: int,
+    left: Callable[[int], int],
+    right: Callable[[int], int],
+) -> np.float32:
+    weight_total, total = _tail_agreement_totals(panel, left, right)
     if (
         not math.isfinite(float(weight_total))
-        or abs(float(weight_total) - 1.0) > float(INVARIANT_TOLERANCE)
-    ):
-        raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
-    if (
-        not math.isfinite(float(total))
+        or not math.isfinite(float(total))
         or float(total) < -float(INVARIANT_TOLERANCE)
         or float(total) > float(weight_total) + float(INVARIANT_TOLERANCE)
     ):
@@ -1454,9 +1470,13 @@ def evaluate_complete_private(
         count_tail = tail_functions[(int(LearnedArm.COUNT), K_TEST, int(Panel.PERSISTENT), seed)]
         agreements.append(
             {
-                "count": float(_tail_agreement(int(Panel.PERSISTENT), raw_tail, count_tail)),
+                "count": float(
+                    _descriptive_tail_agreement(
+                        int(Panel.PERSISTENT), raw_tail, count_tail
+                    )
+                ),
                 "belief": float(
-                    _tail_agreement(
+                    _descriptive_tail_agreement(
                         int(Panel.PERSISTENT),
                         raw_tail,
                         lambda displayed: belief_dp_tail(displayed, int(Panel.PERSISTENT), K_TEST),
@@ -2051,14 +2071,14 @@ def validate_complete_package(package: Mapping[str, object]) -> tuple[str, ...]:
         count_actions = value_sections["k_test_values"][count_key]["tail_actions"]  # type: ignore[index]
         belief_actions = comparator_records[int(Panel.PERSISTENT)]["BELIEF_DP"]["tail_actions"]  # type: ignore[index]
         observed_count = float(
-            _tail_agreement(
+            _descriptive_tail_agreement(
                 int(Panel.PERSISTENT),
                 lambda history, actions=raw_actions: actions[history],
                 lambda history, actions=count_actions: actions[history],
             )
         )
         observed_belief = float(
-            _tail_agreement(
+            _descriptive_tail_agreement(
                 int(Panel.PERSISTENT),
                 lambda history, actions=raw_actions: actions[history],
                 lambda history, actions=belief_actions: actions[history],

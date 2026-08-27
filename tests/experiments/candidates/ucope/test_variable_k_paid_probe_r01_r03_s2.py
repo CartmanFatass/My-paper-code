@@ -8,12 +8,14 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
 import torch
 
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03 import reference_oracle
+from experiments.candidates.ucope.variable_k_paid_probe_r01_r03 import s2_construction
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.model import ActionScorer
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.training import fixed_fp32_tree
 
@@ -75,6 +77,7 @@ from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.s2_construction 
     _posterior,
     _package_provenance,
     _load_action_scorer_payload,
+    _descriptive_tail_agreement,
     _tail_agreement,
     _tail_components,
 )
@@ -431,18 +434,50 @@ def test_all_raw_history_encodings_match_declared_y1_through_y6_order() -> None:
 
 
 @pytest.mark.parametrize("panel", tuple(Panel))
-def test_tail_agreement_normalizes_fp32_tree_roundoff(panel: Panel) -> None:
+def test_descriptive_tail_agreement_normalizes_fp32_tree_roundoff(
+    panel: Panel,
+) -> None:
     cases = tuple(finite_cases(int(panel)))
     weights = np.asarray([case.weight for case in cases], dtype=np.float32)
     assert fixed_fp32_tree(weights) > np.float32(1.0)
 
-    identical = _tail_agreement(int(panel), lambda _: 0, lambda _: 0)
-    disjoint = _tail_agreement(int(panel), lambda _: 0, lambda _: 1)
+    competence_identical = _tail_agreement(int(panel), lambda _: 0, lambda _: 0)
+    identical = _descriptive_tail_agreement(int(panel), lambda _: 0, lambda _: 0)
+    disjoint = _descriptive_tail_agreement(int(panel), lambda _: 0, lambda _: 1)
 
+    assert competence_identical.tobytes() == fixed_fp32_tree(weights).tobytes()
     assert identical.tobytes() == np.float32(1.0).tobytes()
     assert disjoint.tobytes() == np.float32(0.0).tobytes()
     assert 0.0 <= float(identical) <= 1.0
     assert 0.0 <= float(disjoint) <= 1.0
+
+
+@pytest.mark.parametrize(
+    ("weights", "matched_history"),
+    (
+        ((np.float32(np.nan), np.float32(1.0)), 0),
+        ((np.float32(-0.1), np.float32(1.1)), 0),
+        ((np.float32(1.1), np.float32(-0.1)), 0),
+    ),
+    ids=("nonfinite", "negative-total", "above-total"),
+)
+def test_descriptive_tail_agreement_rejects_invalid_aggregates(
+    monkeypatch: pytest.MonkeyPatch,
+    weights: tuple[np.float32, np.float32],
+    matched_history: int,
+) -> None:
+    cases = tuple(
+        SimpleNamespace(weight=weight, displayed_history=history)
+        for history, weight in enumerate(weights)
+    )
+    monkeypatch.setattr(s2_construction, "finite_cases", lambda _: cases)
+
+    with pytest.raises(S2Refusal, match=S2Code.NORMALIZATION_FAILURE.value):
+        _descriptive_tail_agreement(
+            int(Panel.PERSISTENT),
+            lambda _: 0,
+            lambda history: 0 if history == matched_history else 1,
+        )
 
 
 def test_learned_root_and_tail_use_exact_fp32_near_tie_rule(tmp_path: Path) -> None:
@@ -836,6 +871,18 @@ def test_full_90_slot_private_evaluator_is_structurally_complete(tmp_path: Path)
     )
     with pytest.raises(S2Refusal, match=S2Code.INCOMPLETE_OUTPUT.value):
         validate_complete_package(derived_agreement)
+
+    for invalid, code in (
+        (float("nan"), S2Code.NONFINITE_OUTPUT),
+        (float("inf"), S2Code.NONFINITE_OUTPUT),
+        (-0.001, S2Code.MALFORMED_INPUT),
+        (1.001, S2Code.MALFORMED_INPUT),
+    ):
+        invalid_agreement = copy.deepcopy(package)
+        first = next(iter(invalid_agreement["descriptive_agreements"].values()))
+        first["belief"] = invalid
+        with pytest.raises(S2Refusal, match=code.value):
+            validate_complete_package(invalid_agreement)
 
     derived_headroom = copy.deepcopy(package)
     derived_headroom["headroom"]["persistent_information"] += 0.001
