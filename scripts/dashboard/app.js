@@ -137,6 +137,24 @@
     view.replaceChildren(node);
   }
 
+  function renderClerk() {
+    const current = section("clerk");
+    const directions = Array.isArray(current.data?.directions) ? current.data.directions : [];
+    const rows = directions.map((direction) => [
+      cell(direction.direction_id, "strong"),
+      badge(String(direction.stage || "unknown").toLowerCase()),
+      direction.owner_identity || direction.next_owner || "—",
+      direction.task_status || "—",
+      direction.reason || "—",
+      direction.recovery_kind || "—",
+      direction.assignment_locator || direction.return_locator || "—",
+    ]);
+    const node = document.createDocumentFragment();
+    node.appendChild(heading("Workflow Clerk", "Current owner stage and transport liveness for every selected direction", current.status));
+    node.appendChild(table(["Direction", "Stage", "Owner / next", "Task", "Reason", "Recovery", "Locator"], rows, "No selected directions are visible."));
+    view.replaceChildren(node);
+  }
+
   function renderAgents() {
     const current = section("agents");
     const agents = Array.isArray(current.data?.agents) ? current.data.agents : [];
@@ -225,6 +243,7 @@
   function render() {
     const renderers = {
       portfolio: renderPortfolio,
+      clerk: renderClerk,
       agents: renderAgents,
       runs: renderRuns,
       external_reviews: renderExternal,

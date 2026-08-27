@@ -34,8 +34,8 @@ EM、CM 的共同交接边界由 `hmasd-slice-interface` 给出；Clerk 额外�
 - Workflow-Clerk 是唯一 Luna xhigh、可见、长期协调 task。它使用 Codex 原生项目
   task 工具维护拓扑、发送 envelope、等待 RETURN、联系下一责任角色并汇总用户。
   每次处理事件必须遵循 `.codex/prompts/hmasd-workflow-clerk.md` 的方向无关语义表、
-  临时拓扑快照和 parallel dispatch barrier；不得把一个方向的等待或语义复制到
-  另一个方向。
+  临时拓扑快照、程序生成的 `liveness` 恢复动作和 parallel dispatch barrier；进入
+  final 前必须做一次 bounded drain，不得把一个方向的等待或语义复制到另一个方向。
 - Portfolio 是 gpt-5.6-sol max top-level task，只负责低频的跨方向选择、优先级、
   资源投入和 lifecycle 判断。一个 wake 使用 transport
   `direction_id=portfolio`，但可比较全局并通过一个 `PORTFOLIO_RETURN.actions[]`
@@ -100,12 +100,19 @@ scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
 - receiver 对 Codex 原生 delegation 的 exact `input` 使用 `read-message`；裸自然
   语言、raw JSON、带前后说明的 locator 或 leaf report 都是 `NON_ENVELOPE`，不得
   触发路由、完成或 lifecycle 变化。用户在可见 task 中的直接对话不受此限制。
+- Clerk 把新鲜 native task/history 的最小 `id/name/status`、recipient history 中
+  实际可见的 locator，以及精确 pause/heartbeat/experiment 观察交给
+  `hmasd_session_envelope.py liveness`。envelope 文件存在不是 delivery receipt。该
+  纯投影命令只从这些已观察事实生成全部方向 stage 和恢复动作，并刷新 ignored
+  `.codex/runtime/clerk-liveness.json`；LLM 不手写分类或 Dashboard row。
 - task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
 - 切换前已在途的 participant-to-participant v1 assignment 可向原 sender 完成一次
   RETURN，避免丢失现有工作；原 sender 只把同一 legacy RETURN locator 一次性
   转发给唯一 Clerk，不创建新 assignment，随后由 Clerk 恢复正常拓扑。
 
-scripts 不创建或等待 task，不选择下一 hop，不维护 task lifecycle 或恢复 FSM。
+scripts 不创建或等待 task，不解释方向 prose，也不维护 task lifecycle 或恢复 FSM；
+`liveness` 只把已观察 delivery/status/task facts 映射成固定恢复动作，动作仍由 Clerk
+通过 Codex 原生 send 执行。
 
 每个 selected direction 按互斥优先级分类：registry `CLOSED` 为正式结束；registry
 `PARKED` 且 exact material question 已送达用户为正式暂停；资源 retry assignment 与
@@ -132,8 +139,9 @@ return witness 与 raw thread parser 已退出正常路径。完成依赖核查�
 9. 故障必须限定为 project、direction、feature 或 effect；不得跨 task 传播裸
    BLOCKED。
 10. Dashboard 只能是 `127.0.0.1` 上的只读投影；Clerk 维持现有服务可用，但不得
-    增加 daemon、数据库、路由写入或第二工作流引擎。Dashboard 陈旧或失败不改变
-    owner/liveness；原生 task list/read 与 correlated assignment/RETURN 才是依据。
+     增加 daemon、数据库、路由写入或第二工作流引擎。Dashboard 陈旧或失败不改变
+     owner/liveness；Clerk tab 只显示程序生成的 ignored liveness 投影，原生 task
+     list/read 与 correlated assignment/RETURN 才是依据。
 11. 删除旧控制面前先做调用依赖与真实路径核查，并保留用户及其他 session 的
     在途修改。
 12. 内存 admission 不足发生在 manifest 创建前时，reserved output root 必须保持

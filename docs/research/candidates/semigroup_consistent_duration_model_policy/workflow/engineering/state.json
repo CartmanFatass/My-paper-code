@@ -1,23 +1,57 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
-  "blockers": [],
+  "base_sha": "b8e77b8d3b1191344f0e1b4277462310f129686b",
+  "blockers": [
+    {
+      "code": "CNATIVE_AUTHORITY_PATH_MISMATCH",
+      "observed_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "9a20ea36263b0ef10203b7501cf0beb95eb54105d9ea2af27df45d51b5a4b42a"
+        },
+        {
+          "path": ".codex/runtime/session-envelopes/semigroup_consistent_duration_model_policy/d2bd66ec-6bb4-44d2-a4ea-5eed8a60a148.assignment.json",
+          "sha256": "aadcdade43b465b752333526abf8388a6693590099c1a4eca722c682fea35bf3"
+        }
+      ],
+      "resume_condition_ref": "CLERK_REISSUE_WITH_PORTFOLIO_EXACT_TEST_ROOT_C_NATIVE_G1"
+    },
+    {
+      "code": "CNATIVE_FOUNDATION_SOURCE_INPUTS_ABSENT_ON_MAIN",
+      "observed_refs": [
+        "main@b8e77b8d3b1191344f0e1b4277462310f129686b",
+        "foundation-source-candidate@bdd5e1f359df8569474f148c4f837ae5363da328"
+      ],
+      "resume_condition_ref": "READ_ONLY_FOUNDATION_SOURCE_INPUTS_PRESENT_ON_MAIN_WITHOUT_SCOPE_EXPANSION"
+    }
+  ],
   "candidate_sha": null,
-  "changed_paths": [],
+  "changed_paths": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json"
+  ],
   "direction_id": "semigroup_consistent_duration_model_policy",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "b8e77b8d3b1191344f0e1b4277462310f129686b"
   },
   "last_checkpoint_sha": null,
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED"
+    "input_refs": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "9a20ea36263b0ef10203b7501cf0beb95eb54105d9ea2af27df45d51b5a4b42a"
+      },
+      {
+        "path": ".codex/runtime/session-envelopes/semigroup_consistent_duration_model_policy/d2bd66ec-6bb4-44d2-a4ea-5eed8a60a148.assignment.json",
+        "sha256": "aadcdade43b465b752333526abf8388a6693590099c1a4eca722c682fea35bf3"
+      }
+    ],
+    "kind": "RETURN_CLERK_CNATIVE_SCOPE_CONFLICT"
   },
-  "phase": "UNREQUESTED",
-  "revision": 1,
+  "phase": "FAILED",
+  "revision": 2,
   "run_refs": [],
   "schema_version": 1,
   "scope_ref": {
@@ -25,8 +59,17 @@
     "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
     "sha256": "52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-27T15:31:19.939629Z",
+  "verification_refs": [
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "sha256": "9a20ea36263b0ef10203b7501cf0beb95eb54105d9ea2af27df45d51b5a4b42a"
+    },
+    {
+      "path": ".codex/runtime/session-envelopes/semigroup_consistent_duration_model_policy/d2bd66ec-6bb4-44d2-a4ea-5eed8a60a148.assignment.json",
+      "sha256": "aadcdade43b465b752333526abf8388a6693590099c1a4eca722c682fea35bf3"
+    }
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-semigroup_consistent_duration_model_policy"

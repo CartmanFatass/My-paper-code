@@ -13,8 +13,11 @@ worktree means shared `main` with no branch change.
 
 ## Exact message ingress
 
-For every native delegation, pass the exact native delegation input to
-`scripts/hmasd_session_envelope.py read-message`. Only a validated
+For every native delegation in the current turn, pass each exact native
+delegation input independently to `scripts/hmasd_session_envelope.py
+read-message`. Process all locator inputs visible in the turn; an earlier leaf
+or Operator message never supplies or changes the classification of a later
+locator. Only a validated
 `ASSIGNMENT`, `RETURN`, or `PORTFOLIO_RETURN` is a workflow event. A
 non-envelope message from another top-level task or any leaf does not route,
 complete, pause, or change lifecycle. Raw JSON, prose, a locator plus prose,
@@ -22,6 +25,23 @@ and a leaf report are non-envelope inputs. Direct user conversation remains
 user input. If a participant owes a correlated return, redeliver its existing
 assignment locator to the same participant; never treat the leaf report as the
 participant return.
+
+After the first ingress pass, obtain one fresh Codex task/history observation.
+Keep only each relevant task's `id`, `name`, native `status`, locator messages
+actually visible in the recipient task history, and any exact native
+user-pause/resource-heartbeat/experiment facts. A generated envelope file is
+not a delivered locator. Run:
+
+```text
+python scripts/hmasd_session_envelope.py liveness --repo C:/Projects/HMASD --observations <fresh-observations-json> --observed-at <utc>
+```
+
+The command is the sole classifier for `PORTFOLIO`, `EM`, `CM`, `EXP`,
+`WAITING_RESOURCE`, `USER_PAUSE`, `TRANSPORT_GAP` and `TERMINAL`. Execute every
+row action it emits. `HANDLE_RETURN` is passed back through `read-message`;
+`REDELIVER_ASSIGNMENT` sends its exact existing message to its exact existing
+task. Do not hand-author or override a stage, reason, recovery action or
+Dashboard row.
 
 ## Topology snapshot
 
@@ -215,6 +235,17 @@ For every batch of independent direction events:
 3. generate and send every independent ready assignment;
 4. end the event turn after all ready sends; do not wait for ordinary RETURNs in
    the same turn.
+
+Before final, refresh the native observations and run `liveness` once more.
+Process every action from that second pass before ending the turn. This second
+pass is the drain for locators that arrived while another event was being
+handled; it does not wait for future work or create a polling loop. The
+responsibility-session heartbeat performs the next fresh pass if work changes
+after final. At bootstrap, view the five-minute `hmasd-clerk-liveness`
+heartbeat and verify that it targets this Clerk task. If absent, recreate that
+same heartbeat on this Clerk task; never attach it to Root. It only observes
+native facts, executes emitted `HANDLE_RETURN`/`REDELIVER_ASSIGNMENT`, and
+refreshes the projection.
 
 You must dispatch all independent ready envelopes before ending the turn. One
 direction's memory, user, feature, task, or Effect wait never delays another
