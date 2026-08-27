@@ -1,23 +1,36 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "base_sha": "50052d1e41c045dece13b09db622d3dd06f499b3",
   "blockers": [],
-  "candidate_sha": null,
-  "changed_paths": [],
+  "candidate_sha": "7582b9f6a396fb9066f225e6713a13acf9c16695",
+  "changed_paths": [
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/empirical_transaction.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_contract.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_checkpoint.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_engine.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_learner.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_result.py",
+    "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_executor.py"
+  ],
   "direction_id": "ucope",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "b4da70b2f8636c855cebac23c9865bab6cffbb8e"
   },
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "964e54101861a8092fbcfac63f457d9b7bc5882ec900a4336da8b8cd1315ba79",
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED"
+    "input_refs": [
+      {
+        "path": "temp/directions/ucope/test/s3/g1/S3_EXECUTOR_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "964e54101861a8092fbcfac63f457d9b7bc5882ec900a4336da8b8cd1315ba79"
+      }
+    ],
+    "kind": "RETURN_ROOT_REPREPARE_COMPLETE_EXECUTOR_CANDIDATE"
   },
-  "phase": "UNREQUESTED",
-  "revision": 1,
+  "phase": "COMPLETE",
+  "revision": 7,
   "run_refs": [],
   "schema_version": 1,
   "scope_ref": {
@@ -25,8 +38,29 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-27T12:18:23.446032Z",
+  "verification_refs": [
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_EXECUTOR_TECHNICAL_ACCEPTANCE.json",
+      "sha256": "964e54101861a8092fbcfac63f457d9b7bc5882ec900a4336da8b8cd1315ba79"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_EXECUTOR_REVIEW.json",
+      "sha256": "9bda5918709694f16c73a1ed02c6ab8d251075b82bcd70b1f87380fccbb28ae4"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_EXECUTOR_SANCHECK.json",
+      "sha256": "31309b895d16225f75414abb546bcdc559e320ece080d8988e1180eab28d002d"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/executor-nons2-final-junit.xml",
+      "sha256": "30b466af956643a643a789dd6bd711e6bd43d851778a7b984e365d25245a360f"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/executor-s2-final-junit.xml",
+      "sha256": "681e587529b1ebe6c1b9cb978cf5cedeae6df00850837b66b45a6bbcd83bbc03"
+    }
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-ucope"
