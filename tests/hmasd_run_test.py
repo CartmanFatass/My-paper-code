@@ -369,6 +369,7 @@ def test_failed_run_does_not_emit_or_retry_operator_result(
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
     assert hmasd_run.main(execute_argv) == 6
+    assert json.loads(manifest_path.read_text(encoding="utf-8")) == manifest
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
 
@@ -379,8 +380,10 @@ def test_unknown_run_does_not_emit_or_retry_operator_result(
 ) -> None:
     count_path = tmp_path / "unknown-count.txt"
     command = (
-        "from pathlib import Path; "
-        f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
+        "import subprocess, sys, time; from pathlib import Path; "
+        f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x'); "
+        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)']); "
+        "time.sleep(0.25)"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
     execute_argv = [
@@ -389,24 +392,24 @@ def test_unknown_run_does_not_emit_or_retry_operator_result(
         str(manifest_path),
         "--emit-operator-result",
     ]
-    release_gate = hmasd_run._release_gate
+    terminate_owned_group = hmasd_run._terminate_owned_group
 
-    def release_but_report_unknown(gate):
-        release_gate(gate)
-        return False
+    def cleanup_then_observation_fault(manifest, descendant_identities):
+        terminate_owned_group(manifest, descendant_identities)
+        raise hmasd_run.RunRefusal(1, "injected terminal observation fault")
 
-    monkeypatch.setattr(hmasd_run, "_release_gate", release_but_report_unknown)
+    monkeypatch.setattr(
+        hmasd_run, "_terminate_owned_group", cleanup_then_observation_fault
+    )
     assert hmasd_run.main(execute_argv) == 1
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["status"] == "UNKNOWN"
-    if count_path.exists():
-        assert count_path.read_text(encoding="utf-8") == "x"
+    assert count_path.read_text(encoding="utf-8") == "x"
+    assert hmasd_run._group_pids(manifest["process"]["process_group_id"]) == []
     assert not (manifest_path.parent / "operator-result.json").exists()
-    observed_count = count_path.read_text(encoding="utf-8") if count_path.exists() else None
     assert hmasd_run.main(execute_argv) == 6
-    assert (
-        count_path.read_text(encoding="utf-8") if count_path.exists() else None
-    ) == observed_count
+    assert json.loads(manifest_path.read_text(encoding="utf-8")) == manifest
+    assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
 
 
@@ -443,6 +446,7 @@ def test_operator_result_publish_fault_preserves_success_without_retry(
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
     assert hmasd_run.main(execute_argv) == 6
+    assert json.loads(manifest_path.read_text(encoding="utf-8")) == manifest
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
     assert "OPERATOR_RESULT_PUBLISH_FAILED" in capsys.readouterr().err
