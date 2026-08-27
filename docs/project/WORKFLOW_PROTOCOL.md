@@ -140,6 +140,11 @@ PORTFOLIO_RETURN byte-semantically 复制 triggering ASSIGNMENT 的 release；Cl
 CONTROL_NOTICE 同样复制 initiating notice 的 release。script 校验 direction、反向
 endpoints、reply chain、body hash 与 changed-path containment；不验证 Codex 本身。
 
+ASSIGNMENT 的 `context_refs` 是 point-in-time 定位信息，不是 freshness gate；recipient 按 path
+读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用旧 context SHA 否定合法
+mutation 或恢复重读。本地 envelope 文件属于可信协作输入；v2 不建立 tamper archive、
+不可变消息账本或二次摘要层。RETURN/Portfolio 新产生的 artifact refs 仍按当前 bytes 检查。
+
 header 的 `next` 由 kind/body 机械派生，LLM 不填写：
 
 | kind/body | header `next` |

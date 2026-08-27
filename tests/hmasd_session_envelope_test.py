@@ -383,6 +383,30 @@ def test_read_message_rejects_v1_and_detects_body_tampering(tmp_path: Path) -> N
     assert read.returncode == 2 and "body_sha256" in read.stderr
 
 
+def test_correlated_return_accepts_owned_context_mutation_after_intake(
+    tmp_path: Path,
+) -> None:
+    assigned = assign(tmp_path)
+    intake = run_cli(
+        "read-message", "--repo", str(tmp_path), "--message", assigned["message"],
+    )
+    assert intake.returncode == 0, intake.stderr
+
+    context_path = "docs/research/candidates/ucope/DIRECTION.md"
+    changed_content = b"participant-owned research authority after the slice\n"
+    (tmp_path / context_path).write_bytes(changed_content)
+    body = return_body(changed_paths=[context_path])
+    body["artifact_refs"] = [{
+        "path": context_path, "sha256": hashlib.sha256(changed_content).hexdigest(),
+    }]
+
+    returned = make_return(tmp_path, assigned, body)
+    returned_message = run_cli(
+        "read-message", "--repo", str(tmp_path), "--message", returned["message"],
+    )
+    assert returned_message.returncode == 0, returned_message.stderr
+
+
 def test_failure_history_requires_exact_order_and_reports_eligibility(tmp_path: Path) -> None:
     fingerprint, locators = "immutable-oom-fingerprint", []
     for attempt in (1, 2):

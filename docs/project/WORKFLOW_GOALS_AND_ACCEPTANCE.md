@@ -82,6 +82,11 @@ RESUME、OVERRIDE、CANCEL 或 REANCHOR 作为 v2 control fact 传播，使其�
 `CONTROL_NOTICE`。native 消息是固定单行 header；canonical body 位于 header 绑定且
 hash 校验的 gitignored locator。消息前后不得附加自然语言或第二行。
 
+ASSIGNMENT context refs 是 point-in-time 定位信息，不是 freshness gate；recipient 按 path
+读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用旧 context SHA 否定合法
+mutation 或恢复重读。本地 envelope 文件视为可信协作输入，不增加 tamper archive、不可变
+消息账本或二次摘要层。
+
 participant RETURN 没有局部 terminal status。exact status 只有
 `REQUEST_EM / REQUEST_CM / REQUEST_PORTFOLIO / REQUEST_USER / WAIT_RESOURCE /
 FAILED`。科研、工程或实验 interpretation 完成后必须明确下一责任；方向真正 PARKED

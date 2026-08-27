@@ -246,7 +246,9 @@ def assignment_body(value: Mapping[str, Any], repo: Path) -> dict[str, Any]:
     ]
     return {
         "objective": value["objective"],
-        "context_refs": refs(value["context_refs"], "assignment context_refs", repo),
+        "context_refs": refs(
+            value["context_refs"], "assignment context_refs", repo, verify=False,
+        ),
         "owned_paths": owned,
         "effects": strings(value["effects"], "assignment effects"),
         "constraints": strings(value["constraints"], "assignment constraints"),
