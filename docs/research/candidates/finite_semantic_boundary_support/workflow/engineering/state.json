@@ -1,58 +1,44 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "24da86d7427dd6d21669498782b357568d540d49",
-  "blockers": [
-    {
-      "code": "PREACTIVITY_RELEASE_FIREWALL",
-      "observed_refs": [
-        {
-          "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_OPERATOR_TERMINAL_AUDIT.json",
-          "sha256": "92ee7871fd61e2389a0fa5959c9058172001d6b172c8f3d5ca31829fda701400"
-        },
-        {
-          "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
-          "sha256": "2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479"
-        },
-        {
-          "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/stderr.log",
-          "sha256": "0696484b5582bb77fdee45543b2b7f8b63e0fb1736906a17b7d1a3f677df447d"
-        }
-      ],
-      "resume_condition_ref": null
-    }
-  ],
-  "candidate_sha": "35e658f550843aaa336d4b40bc64b8c58871c129",
+  "base_sha": "bb2c547b61c6ab323da66be4b9cacb4a09508f2d",
+  "blockers": [],
+  "candidate_sha": "180e37e038552357b8622aeb92bc480dffdfec7e",
   "changed_paths": [
     "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/execute-preflight.json",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/stderr.log",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/stdout.log",
-    "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_OPERATOR_TERMINAL_AUDIT.json"
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/checkpoint.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_contract.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_manifest.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_transaction.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_validation.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/engine.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/learner.py",
+    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/result.py",
+    "tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py"
   ],
   "direction_id": "finite_semantic_boundary_support",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "24da86d7427dd6d21669498782b357568d540d49"
+    "target_sha_seen": "bb2c547b61c6ab323da66be4b9cacb4a09508f2d"
   },
-  "last_checkpoint_sha": "2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479",
+  "last_checkpoint_sha": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_OPERATOR_TERMINAL_AUDIT.json",
-        "sha256": "92ee7871fd61e2389a0fa5959c9058172001d6b172c8f3d5ca31829fda701400"
+        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
+        "sha256": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0"
       },
       {
-        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
-        "sha256": "2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479"
-      }
+        "path": "docs/research/candidates/finite_semantic_boundary_support/FSBS_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY_R01_20260827.md",
+        "sha256": "9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb"
+      },
+      "git:origin/omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2@180e37e038552357b8622aeb92bc480dffdfec7e"
     ],
-    "kind": "RETURN_CLERK_PREACTIVITY_RELEASE_FIREWALL"
+    "kind": "REQUEST_CM_FSBS_R01_02_PREPARE"
   },
-  "phase": "FAILED",
-  "revision": 8,
+  "phase": "RUN_READY",
+  "revision": 9,
   "run_refs": [
     {
       "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
@@ -65,42 +51,20 @@
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
     "sha256": "e2f2ecd3a0593c080cc3d7cfe0eec27f026cca5a010d1b132449a1aebfac033e"
   },
-  "updated_at": "2026-08-27T11:39:27.145318Z",
+  "updated_at": "2026-08-27T15:26:37.727088Z",
   "verification_refs": [
     {
-      "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_S3_EMPIRICAL_PRELAUNCH_ACCEPTANCE.json",
-      "sha256": "9b107b7103fc3bfa02e15b5f9ad42480e2b6ae61cb6d8f8e554ef0ed3a08c97c"
+      "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
+      "sha256": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0"
     },
     {
       "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_OPERATOR_TERMINAL_AUDIT.json",
       "sha256": "92ee7871fd61e2389a0fa5959c9058172001d6b172c8f3d5ca31829fda701400"
     },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
-      "sha256": "2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/execute-preflight.json",
-      "sha256": "efb7f2c6c9808d5c0662381480c6c6e25c4638d1f57f9ee538e4214a3e13735e"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/preflight.json",
-      "sha256": "4713c7ca8b593df8d5696b1e812eb01036b6a0c8c2d4310e2226b5ff32736541"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/runner-spec.json",
-      "sha256": "394b4adf2b71c4ffb34838c7f32d994d84b710179eacf5e644b34e9d24dddf2a"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/stdout.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/stderr.log",
-      "sha256": "0696484b5582bb77fdee45543b2b7f8b63e0fb1736906a17b7d1a3f677df447d"
-    }
+    "pytest:tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py:30-passed-twice",
+    "reviewer:fsbs_runtime_v2_review:ACCEPT"
   ],
   "waiting_on": [],
-  "worktree_ref": "bc2db89b-8d64-4f7e-abac-5f1b0a58b4c9",
+  "worktree_ref": "fsbs-a394-runtime-v2",
   "writer": "CM-finite_semantic_boundary_support"
 }
