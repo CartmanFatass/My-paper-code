@@ -11,6 +11,7 @@ from experiments.candidates.ucope.variable_k_paid_probe_r01_r03 import empirical
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_contract import (
     DEFAULT_RUN_BINDING,
     DIRECTION_GIT_PATHS,
+    EffectBinding,
     OUTPUT_ROOT,
     PANELS,
     LEARNED_ARMS,
@@ -271,6 +272,11 @@ def test_replacement_binding_reaches_all_nonregistered_prelaunch_layers(
         "operation": "CREATE_ONLY",
         "resource_id": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
     }
+    assert binding.effect == EffectBinding(
+        kind="LOCAL_RESULT_ROOT",
+        operation="CREATE_ONLY",
+        resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
+    )
     assert prelaunch["output_effect"] == binding.output_effect()
     assert prelaunch["authority_refs"] == binding.authority_document()
     assert prelaunch["effect_refs"] == []
@@ -345,7 +351,14 @@ def test_cross_bound_identity_source_effect_and_authority_are_refused() -> None:
             release_required=False,
             binding=binding,
         )
-    noncanonical = replace(binding, effect_operation="create_and_populate_once")
+    noncanonical = replace(
+        binding,
+        effect=EffectBinding(
+            kind="LOCAL_RESULT_ROOT",
+            operation="create_and_populate_once",
+            resource_id=binding.effect.resource_id,
+        ),
+    )
     with pytest.raises(ValueError, match="canonical"):
         parameters_document(noncanonical)
 

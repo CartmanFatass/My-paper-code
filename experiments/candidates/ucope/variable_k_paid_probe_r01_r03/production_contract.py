@@ -33,14 +33,28 @@ PYTHON_EXECUTABLE: Final[str] = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python
 
 
 @dataclass(frozen=True)
+class EffectBinding:
+    """One exact prospective external-effect identity."""
+
+    kind: str
+    operation: str
+    resource_id: str
+
+    def document(self) -> dict[str, str]:
+        return {
+            "kind": self.kind,
+            "resource_id": self.resource_id,
+            "operation": self.operation,
+        }
+
+
+@dataclass(frozen=True)
 class RunBinding:
-    """One complete immutable run identity, including its purchasing authority."""
+    """One complete immutable run identity, including authority and Effect."""
 
     run_id: str
     output_root: str
-    effect_kind: str
-    effect_operation: str
-    effect_resource_id: str
+    effect: EffectBinding
     emit_reference_metadata: bool
     authority_refs: tuple[tuple[str, str], ...] = ()
     authority_commit: str | None = None
@@ -97,27 +111,27 @@ class RunBinding:
         return self.authority_document() if self.emit_reference_metadata else None
 
     def output_effect(self) -> dict[str, str]:
-        return {
-            "kind": self.effect_kind,
-            "resource_id": self.effect_resource_id,
-            "operation": self.effect_operation,
-        }
+        return self.effect.document()
 
 
 DEFAULT_RUN_BINDING: Final[RunBinding] = RunBinding(
     run_id="ucope-r03-complete-20260827-01",
     output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
-    effect_kind="DIRECTORY_CREATE_ONLY",
-    effect_operation="create_and_populate_once",
-    effect_resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
+    effect=EffectBinding(
+        kind="DIRECTORY_CREATE_ONLY",
+        operation="create_and_populate_once",
+        resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
+    ),
     emit_reference_metadata=False,
 )
 REPLACEMENT_RUN_BINDING: Final[RunBinding] = RunBinding(
     run_id="ucope-r03-complete-20260827-02",
     output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-02",
-    effect_kind="LOCAL_RESULT_ROOT",
-    effect_operation="CREATE_ONLY",
-    effect_resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
+    effect=EffectBinding(
+        kind="LOCAL_RESULT_ROOT",
+        operation="CREATE_ONLY",
+        resource_id="temp/directions/ucope/exp/ucope-r03-complete-20260827-02/",
+    ),
     emit_reference_metadata=True,
     authority_refs=(
         (
