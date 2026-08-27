@@ -65,7 +65,11 @@ DIRECTION_GIT_PATHS: Final[tuple[str, ...]] = (
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/native/ucope_r01_r03_backend.cpp",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/native_backend.py",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_contract.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_checkpoint.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_engine.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_learner.py",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_manifest.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_result.py",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_validation.py",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/reference_oracle.py",
     "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/s2_construction.py",
@@ -74,6 +78,7 @@ DIRECTION_GIT_PATHS: Final[tuple[str, ...]] = (
     "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_s1.py",
     "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_s2.py",
     "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_production.py",
+    "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_executor.py",
 )
 
 

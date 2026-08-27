@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .production_contract import OUTPUT_ROOT, RUN_ID
+from .production_engine import execute_registered_transaction
 from .production_validation import (
     PrelaunchRefusal,
     read_json,
@@ -62,10 +63,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         import sys
 
         arguments = tuple(sys.argv[1:])
-    validate_launch(arguments, repository_root=repository_root)
-    # S3 has no empirical release.  The validated launch plan is deliberately
-    # not consumed here: exactly one later release owns the scientific engine.
-    raise PrelaunchRefusal("S3 prelaunch bytes do not release empirical execution")
+    launch = validate_launch(arguments, repository_root=repository_root)
+    execute_registered_transaction(launch, repository_root=repository_root)
+    return 0
 
 
 if __name__ == "__main__":
