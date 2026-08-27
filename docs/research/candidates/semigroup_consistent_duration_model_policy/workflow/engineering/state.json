@@ -1,24 +1,47 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "1447bf480b897d627ea33b8f0d4dcde5685a75c0",
+  "base_sha": "bdd5e1f359df8569474f148c4f837ae5363da328",
   "blockers": [],
-  "candidate_sha": null,
+  "candidate_sha": "bdd5e1f359df8569474f148c4f837ae5363da328",
   "changed_paths": [
     "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
-    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_executor.py",
-    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
-    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
-    "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_ACTIVITY_RESOURCE_ESTIMATE.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_COMPLETE_EVIDENCE.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_PRELAUNCH_MANIFEST.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_SOURCE_MANIFEST.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_TECHNICAL_ACCEPTANCE.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/estimator-help-verification.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/estimator-output-verification.json",
-    "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/focused-pytest-verification.json",
-    "tests/experiments/candidates/scdmp_variable_k/test_native_fusion_r01_foundation_activity_prelaunch.py"
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-activity-technical-evidence.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-run-manifest.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoint-manifest.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000000.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000001.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000002.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000003.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000004.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000005.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000006.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000007.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000008.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000009.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000010.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000011.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000012.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000013.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000014.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000015.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000016.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000017.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000018.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000019.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000020.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000021.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000022.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/foundation-00000023.pt",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/evidence.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/run-manifest.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/terminal.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/execute-preflight.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/manifest.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/preflight.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/runner-spec.json",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/stderr.log",
+    "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/stdout.log"
   ],
   "direction_id": "semigroup_consistent_duration_model_policy",
   "integration": {
@@ -26,94 +49,99 @@
     "target_branch": "main",
     "target_sha_seen": "24da86d7427dd6d21669498782b357568d540d49"
   },
-  "last_checkpoint_sha": "cfaa05c91fbb45984042a09e42eba8c2d149e1026721bea93a609ed897f23415",
+  "last_checkpoint_sha": "c6bd98c9cda87c1e7cb3c5f92f05f4457df546814908f0e579e08ecc36ae3d31",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_TECHNICAL_ACCEPTANCE.json",
-        "sha256": "cfaa05c91fbb45984042a09e42eba8c2d149e1026721bea93a609ed897f23415"
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-activity-technical-evidence.json",
+        "sha256": "c6bd98c9cda87c1e7cb3c5f92f05f4457df546814908f0e579e08ecc36ae3d31"
       },
       {
-        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_ACTIVITY_RESOURCE_ESTIMATE.json",
-        "sha256": "a5da4f192c5f41030cd445b09893dbb5691f9001739395a6b366df31c0582536"
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/manifest.json",
+        "sha256": "af78146941d03d55db46baa5c8b87c3bf3ce836f33f03d0b451c401859ab57da"
       },
       {
-        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_COMPLETE_EVIDENCE.json",
-        "sha256": "cfdc7c6ef6d82dc6c19d2b802c49aa7823773aedd3551b22183f4f76776da376"
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/terminal.json",
+        "sha256": "e65f1b523fea1ff9c2ea2b198bb01832d09916768f84e8c5ebf8113707d7a3e9"
       },
       {
-        "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/focused-pytest-verification.json",
-        "sha256": "1cea29a286ab78796c33cf18b7f625b8bbb7c5cb39d50383267d4b0ac60c9de1"
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoint-manifest.json",
+        "sha256": "72c4445236c41eff6a4a52e2c6eec1712bf32abf93383317e86966d005a90f41"
+      },
+      {
+        "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/evidence.json",
+        "sha256": "3cdcd5684b460699b17aa8dd8bc1113658e364e274af0b27b2bceb2b6fe7116d"
       }
     ],
-    "kind": "RETURN_CLERK_EXECUTOR_REPAIR_TECHNICAL_ACCEPTANCE"
+    "kind": "RETURN_CLERK_FOUNDATION_ACTIVITY_TECHNICAL_ACCEPTANCE"
   },
   "phase": "COMPLETE",
-  "revision": 8,
-  "run_refs": [],
+  "revision": 9,
+  "run_refs": [
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/manifest.json",
+      "sha256": "af78146941d03d55db46baa5c8b87c3bf3ce836f33f03d0b451c401859ab57da"
+    },
+    {
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/terminal.json",
+      "sha256": "e65f1b523fea1ff9c2ea2b198bb01832d09916768f84e8c5ebf8113707d7a3e9"
+    }
+  ],
   "schema_version": 1,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
     "sha256": "6fd74882c83601fc95d33c2787fb200cf8149fbee564b69572146a70e69d4797"
   },
-  "updated_at": "2026-08-27T12:36:04.175067Z",
+  "updated_at": "2026-08-27T13:47:45.429832Z",
   "verification_refs": [
     {
-      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_executor.py",
-      "sha256": "22e086effc9e66a2d1bbf5907d6840b6e94ccfb600080f2ed29c27f5d9ce022e"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-run-manifest.json",
+      "sha256": "b26ae3283576199c36ce835be40b875c8635577402a0eb3a4b7047021e2f50ab"
     },
     {
-      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_production.py",
-      "sha256": "179677ac095fec8d1bde79619fb36bd7b0a04c90b7dc9a29af2a4c9aac40c698"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-activity-technical-evidence.json",
+      "sha256": "c6bd98c9cda87c1e7cb3c5f92f05f4457df546814908f0e579e08ecc36ae3d31"
     },
     {
-      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_resource_estimate.py",
-      "sha256": "eb36d3ac0284512056ee69eae8e9b50a6a9f150a616b428f28eff14fcc74b210"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/manifest.json",
+      "sha256": "af78146941d03d55db46baa5c8b87c3bf3ce836f33f03d0b451c401859ab57da"
     },
     {
-      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_activity_validation.py",
-      "sha256": "bf7c890d960d8709d979a1e1af7dbf3322f4b171f6d2695f137e658cc99dc4af"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/preflight.json",
+      "sha256": "c83b91a342b0dff6406424ee6ebddd7bbe6eebe7df785dea9f3b14d9ab69fb64"
     },
     {
-      "path": "experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_run_manifest.py",
-      "sha256": "7bd5b102276ece985c836be193b63101999a1bb19c45dfcead8328274e10e56f"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/execute-preflight.json",
+      "sha256": "747d95bda23fa8256c3251b1cced9d8f27af27b7b6bdd41bd39299cb17f82863"
     },
     {
-      "path": "tests/experiments/candidates/scdmp_variable_k/test_native_fusion_r01_foundation_activity_prelaunch.py",
-      "sha256": "4464568cc7e8e6634c03c84f08ff445bc301e63b5c0ff5ec33031a1235aa3e88"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/runner-spec.json",
+      "sha256": "7da56739254539d0062719d3589a1a54e1ef7f5d148a0a7393100864e2d63d6d"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_SOURCE_MANIFEST.json",
-      "sha256": "a4a5e2f58239d52041e474ff9e7ce60c9fa33996b17237290b16bd65396f22ba"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/stdout.log",
+      "sha256": "74230764b2c74fa7436bc8f4ccf559fcc403e401641a43c7b3c9419517f05331"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_ACTIVITY_RESOURCE_ESTIMATE.json",
-      "sha256": "a5da4f192c5f41030cd445b09893dbb5691f9001739395a6b366df31c0582536"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_PRELAUNCH_MANIFEST.json",
-      "sha256": "cce221923019ce5687e9c2ef67f5f5a6798e9697f11e16b650b1d11e892eae3c"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/terminal.json",
+      "sha256": "e65f1b523fea1ff9c2ea2b198bb01832d09916768f84e8c5ebf8113707d7a3e9"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_COMPLETE_EVIDENCE.json",
-      "sha256": "cfdc7c6ef6d82dc6c19d2b802c49aa7823773aedd3551b22183f4f76776da376"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/evidence.json",
+      "sha256": "3cdcd5684b460699b17aa8dd8bc1113658e364e274af0b27b2bceb2b6fe7116d"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/S4_EXECUTOR_REPAIR_TECHNICAL_ACCEPTANCE.json",
-      "sha256": "cfaa05c91fbb45984042a09e42eba8c2d149e1026721bea93a609ed897f23415"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoint-manifest.json",
+      "sha256": "72c4445236c41eff6a4a52e2c6eec1712bf32abf93383317e86966d005a90f41"
     },
     {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/focused-pytest-verification.json",
-      "sha256": "1cea29a286ab78796c33cf18b7f625b8bbb7c5cb39d50383267d4b0ac60c9de1"
-    },
-    {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/estimator-help-verification.json",
-      "sha256": "70b526c4dcaf4e3c65826b27541763ea6d746b426ed238a52cfc11d5363ae926"
-    },
-    {
-      "path": "temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/s4/g1/executor-repair/estimator-output-verification.json",
-      "sha256": "6d81789eaf9b5df20a03b5998c993f76330e687580b72b7060c5e64d596e7dd7"
+      "path": "temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/run-manifest.json",
+      "sha256": "b26ae3283576199c36ce835be40b875c8635577402a0eb3a4b7047021e2f50ab"
     }
   ],
   "waiting_on": [],
