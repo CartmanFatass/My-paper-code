@@ -713,6 +713,8 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("cm_refs_wrong_fresh", "CM_OPERATOR_REFS_MISMATCH"),
         ("candidate_read_unknown", "OPERATOR_CHILD_READ_UNKNOWN"),
         ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("assignment_final_spoof", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("assignment_output_spoof", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("candidate_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
         ("candidate_split_ambiguous", "MULTIPLE_OPERATOR_CHILDREN_FOR_RUN"),
         ("parent_activity_malformed", "OPERATOR_PARENT_ACTIVITY_INVALID"),
@@ -736,6 +738,12 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("typed_final_result_ambiguous", None),
         ("typed_result_ambiguous", None),
         ("wrong_generation", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("result_changed_paths_tampered", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("result_materiality_tampered", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("result_next_action_tampered", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("result_summary_tampered", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("execute_argv_assignment_changed", "OPERATOR_ASSIGNMENT_CHANGED"),
+        ("extra_assignment_field", "OPERATOR_ASSIGNMENT_CHANGED"),
         ("result_locator_assignment_changed", "OPERATOR_ASSIGNMENT_CHANGED"),
     ],
 )
@@ -984,6 +992,44 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     history_assignment["result_locator"] = (
                         "temp/directions/alpha/exp/golden-run/other-result.json"
                     )
+                elif case == "execute_argv_assignment_changed":
+                    history_assignment["execute_argv"] = spawn_assignment["execute_argv"][:-1]
+                elif case == "extra_assignment_field":
+                    history_assignment["execute_twice"] = True
+                if case == "assignment_output_spoof":
+                    inherited_items = [
+                        {
+                            "type": "agentMessage",
+                            "content": [
+                                {
+                                    "type": "output_text",
+                                    "text": json.dumps(history_assignment),
+                                }
+                            ],
+                        }
+                    ]
+                elif case == "assignment_final_spoof":
+                    inherited_items = [
+                        {
+                            "type": "agentMessage",
+                            "phase": "final_answer",
+                            "text": json.dumps(history_assignment),
+                        }
+                    ]
+                else:
+                    inherited_items = [
+                        {
+                            "type": "userMessage",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": composite_input(
+                                        history_assignment, variant=case
+                                    ),
+                                }
+                            ],
+                        }
+                    ]
                 operator_thread = {
                     "id": "thread-operator-golden-run",
                     "name": spawn_assignment["task_name"],
@@ -995,19 +1041,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         {
                             "id": "turn-operator-inherited",
                             "status": "interrupted",
-                            "items": [
-                                {
-                                    "type": "userMessage",
-                                    "content": [
-                                            {
-                                                "type": "text",
-                                                "text": composite_input(
-                                                    history_assignment, variant=case
-                                                ),
-                                            }
-                                        ],
-                                    }
-                            ],
+                            "items": inherited_items,
                         },
                         {
                             "id": "turn-operator-golden-run",
@@ -1078,6 +1112,17 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     operator_result["payload"] = "bad"
                 if case == "result_artifact_order_changed":
                     operator_result["artifact_refs"].reverse()
+                elif case == "result_changed_paths_tampered":
+                    operator_result["changed_paths"] = [manifest_locator]
+                elif case == "result_materiality_tampered":
+                    operator_result["materiality"] = "NONE"
+                elif case == "result_next_action_tampered":
+                    operator_result["next_action"] = {
+                        "kind": "OBSERVE",
+                        "input_refs": [],
+                    }
+                elif case == "result_summary_tampered":
+                    operator_result["summary"] = "A schema-valid tampered summary."
                 if case == "result_missing":
                     result_path.unlink()
                 elif case == "result_malformed":

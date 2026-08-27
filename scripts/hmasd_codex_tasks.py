@@ -25,9 +25,10 @@ import time
 from typing import Any, Mapping, Protocol, Sequence
 
 try:
-    from scripts import hmasd_platform, hmasd_state, hmasd_work_packet
+    from scripts import hmasd_platform, hmasd_run, hmasd_state, hmasd_work_packet
 except ImportError:
     import hmasd_platform
+    import hmasd_run
     import hmasd_state
     import hmasd_work_packet
 
@@ -1582,31 +1583,32 @@ class AppServerClient:
         assignment.update({"expected_stdout_marker": marker} if isinstance(marker, str) and marker else {})
         return assignment
 
-    @staticmethod
-    def _json_documents(value: Any) -> list[dict[str, Any]]:
+    @classmethod
+    def _incoming_assignment_documents(cls, turns: Any) -> list[dict[str, Any]]:
         found: list[dict[str, Any]] = []
-        if isinstance(value, Mapping):
-            text_value = value.get("text")
-            if (
-                (
-                    value.get("type") in {"text", "input_text", "output_text"}
-                    or (
-                        value.get("type") == "agentMessage"
-                        and value.get("phase") == "final_answer"
-                    )
-                )
-                and isinstance(text_value, str)
-            ):
-                found.extend(
-                    AppServerClient._strict_text_documents(
-                        text_value, include_composite_suffix=True
-                    )
-                )
-            for item in value.values():
-                found.extend(AppServerClient._json_documents(item))
-        elif isinstance(value, list):
-            for item in value:
-                found.extend(AppServerClient._json_documents(item))
+        if not isinstance(turns, list):
+            return found
+        for turn in turns:
+            if not isinstance(turn, Mapping) or not isinstance(turn.get("items"), list):
+                continue
+            for item in turn["items"]:
+                if (
+                    not isinstance(item, Mapping)
+                    or item.get("type") != "userMessage"
+                    or not isinstance(item.get("content"), list)
+                ):
+                    continue
+                for node in item["content"]:
+                    if (
+                        isinstance(node, Mapping)
+                        and node.get("type") in {"text", "input_text"}
+                        and isinstance(node.get("text"), str)
+                    ):
+                        found.extend(
+                            cls._strict_text_documents(
+                                node["text"], include_composite_suffix=True
+                            )
+                        )
         return found
 
     def _observe_operator_child(
@@ -1686,7 +1688,9 @@ class AppServerClient:
                 continue
             documents = [
                 document
-                for document in self._json_documents(thread.get("turns", []))
+                for document in self._incoming_assignment_documents(
+                    thread.get("turns", [])
+                )
                 if document.get("protocol") == OPERATOR_ASSIGNMENT_MARKER
                 and document.get("agent_role") == _OPERATOR_ROLE
             ]
@@ -1709,7 +1713,9 @@ class AppServerClient:
             "thread": exact[0],
             "assignment": next(
                 document
-                for document in self._json_documents(exact[0].get("turns", []))
+                for document in self._incoming_assignment_documents(
+                    exact[0].get("turns", [])
+                )
                 if document.get("protocol") == OPERATOR_ASSIGNMENT_MARKER
                 and document.get("agent_role") == _OPERATOR_ROLE
                 and document.get("run_id") == assignment["run_id"]
@@ -1733,10 +1739,8 @@ class AppServerClient:
         if not isinstance(turns, list) or not turns or turns[-1].get("status") != "completed":
             return cls._operator_evidence_error("OPERATOR_CHILD_NOT_TERMINAL")
         frozen = observation["assignment"]
-        bound = ("assignment_id", "agent_role", "command", "cwd", "logical_identity",
-                 "manifest", "output_root", "parent_identity", "protocol", "result_contract",
-                 "result_locator", "run_id", "run_owner")
-        if any(frozen.get(key) != assignment.get(key) for key in bound):
+        expected_frozen = {**assignment, "action": "CREATE_EXACT"}
+        if not isinstance(frozen, Mapping) or dict(frozen) != expected_frozen:
             return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
         try:
             result_locator = _relative_posix_path(str(assignment["result_locator"]))
@@ -1820,6 +1824,14 @@ class AppServerClient:
         expected_refs = [manifest_ref, by_path.get(stdout_rel), by_path.get(stderr_rel)]
         if any(reference is None for reference in expected_refs):
             return cls._operator_evidence_error("OPERATOR_REQUIRED_REF_MISSING")
+        try:
+            expected_result = hmasd_run._operator_result_document(
+                repo, manifest_path, manifest
+            )
+        except (hmasd_run.RunRefusal, hmasd_state.StateError, OSError, ValueError, TypeError):
+            return cls._operator_evidence_error("OPERATOR_RESULT_BINDING_MISMATCH")
+        if dict(result) != expected_result:
+            return cls._operator_evidence_error("OPERATOR_RESULT_BINDING_MISMATCH")
         return {"status": "VALID", "thread_id": observation["thread_id"], "refs": expected_refs}
 
     @classmethod

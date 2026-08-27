@@ -355,13 +355,20 @@ def test_failed_run_does_not_emit_or_retry_operator_result(
         "raise SystemExit(7)"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+    execute_argv = [
+        "execute",
+        "--manifest",
+        str(manifest_path),
+        "--emit-operator-result",
+    ]
 
-    assert hmasd_run.main(
-        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
-    ) == 1
+    assert hmasd_run.main(execute_argv) == 1
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["status"] == "FAILED"
     assert manifest["process"]["exit_code"] == 7
+    assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+    assert hmasd_run.main(execute_argv) == 6
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
 
@@ -376,6 +383,12 @@ def test_unknown_run_does_not_emit_or_retry_operator_result(
         f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+    execute_argv = [
+        "execute",
+        "--manifest",
+        str(manifest_path),
+        "--emit-operator-result",
+    ]
     release_gate = hmasd_run._release_gate
 
     def release_but_report_unknown(gate):
@@ -383,13 +396,17 @@ def test_unknown_run_does_not_emit_or_retry_operator_result(
         return False
 
     monkeypatch.setattr(hmasd_run, "_release_gate", release_but_report_unknown)
-    assert hmasd_run.main(
-        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
-    ) == 1
+    assert hmasd_run.main(execute_argv) == 1
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["status"] == "UNKNOWN"
     if count_path.exists():
         assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+    observed_count = count_path.read_text(encoding="utf-8") if count_path.exists() else None
+    assert hmasd_run.main(execute_argv) == 6
+    assert (
+        count_path.read_text(encoding="utf-8") if count_path.exists() else None
+    ) == observed_count
     assert not (manifest_path.parent / "operator-result.json").exists()
 
 
@@ -402,6 +419,12 @@ def test_operator_result_publish_fault_preserves_success_without_retry(
         f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+    execute_argv = [
+        "execute",
+        "--manifest",
+        str(manifest_path),
+        "--emit-operator-result",
+    ]
 
     def fail_publish(*_args, **_kwargs):
         stdout_path = manifest_path.parent / "stdout.log"
@@ -411,14 +434,15 @@ def test_operator_result_publish_fault_preserves_success_without_retry(
         raise hmasd_state.StateError("injected publish fault")
 
     monkeypatch.setattr(hmasd_run.hmasd_state, "initialize", fail_publish)
-    assert hmasd_run.main(
-        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
-    ) == 1
+    assert hmasd_run.main(execute_argv) == 1
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["status"] == "SUCCEEDED"
     assert manifest["process"]["exit_code"] == 0
     assert manifest["process"]["group_quiescent"] is True
+    assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+    assert hmasd_run.main(execute_argv) == 6
     assert count_path.read_text(encoding="utf-8") == "x"
     assert not (manifest_path.parent / "operator-result.json").exists()
     assert "OPERATOR_RESULT_PUBLISH_FAILED" in capsys.readouterr().err
