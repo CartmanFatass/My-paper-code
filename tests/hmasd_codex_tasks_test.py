@@ -895,6 +895,200 @@ def test_three_terminal_attempts_exhaust_without_a_fourth_turn() -> None:
     assert "turn/start" not in [request.get("method") for request in peer.requests]
 
 
+def completed_manager_row(
+    *,
+    work_id: str = WORK_ID,
+    locator: str = LOCATOR,
+    target: str = "EM-alpha",
+    thread_id: str = "thread-1",
+    cwd: str = "C:/Projects/HMASD",
+    source: str | None = "hmasd-manager:EM-alpha:g1",
+    attempts: tuple[int, ...] = (1,),
+) -> dict[str, Any]:
+    turns = []
+    for attempt in attempts:
+        text = tasks.dispatch_envelope_bytes(
+            work_id,
+            locator,
+            target,
+            attempt=attempt,
+            mode="DISPATCH" if attempt == 1 else "RESUME",
+        ).decode()
+        turns.append(
+            {
+                "id": f"turn-{attempt}",
+                "status": "completed",
+                "items": [
+                    {
+                        "type": "userMessage",
+                        "content": [{"type": "text", "text": text}],
+                    }
+                ],
+            }
+        )
+    row: dict[str, Any] = {
+        "id": thread_id,
+        "name": target,
+        "cwd": cwd,
+        "status": {"type": "completed"},
+        "turns": turns,
+    }
+    if source is not None:
+        row["threadSource"] = source
+    return row
+
+
+def test_completed_manager_history_binding_accepts_exact_native_fact_without_cache(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(tasks.hmasd_work_packet, "read_return", lambda **_: None)
+    parent = completed_manager_row(attempts=(1, 2, 3))
+    child = {
+        **parent,
+        "id": "thread-child",
+        "name": "hmasd-experiment-operator",
+        "threadSource": None,
+    }
+    binding = tasks.AppServerClient._history_recovery_binding(
+        work_id=WORK_ID,
+        canonical_locator=LOCATOR,
+        cwd="C:/Projects/HMASD",
+        full_native_rows=[parent, child],
+        raw_projected_tasks=[],
+    )
+    assert binding == {
+        "work_id": WORK_ID,
+        "packet_locator": LOCATOR,
+        "target_identity": "EM-alpha",
+        "thread_id": "thread-1",
+        "generation": 1,
+        "thread_source": "hmasd-manager:EM-alpha:g1",
+        "attempt_count": 3,
+        "attempt_statuses": [
+            {"attempt": 1, "turn_id": "turn-1", "turn_status": "completed"},
+            {"attempt": 2, "turn_id": "turn-2", "turn_status": "completed"},
+            {"attempt": 3, "turn_id": "turn-3", "turn_status": "completed"},
+        ],
+    }
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "no_history",
+        "other_work",
+        "wrong_locator",
+        "wrong_target",
+        "wrong_source",
+        "wrong_cwd",
+        "gap",
+        "duplicate",
+        "multiple",
+        "cache_retired",
+        "cache_generation",
+        "cache_identity",
+        "cache_kind",
+        "cache_direction",
+        "cache_generation_conflict",
+    ],
+)
+def test_completed_manager_history_binding_fails_closed(
+    monkeypatch: pytest.MonkeyPatch, case: str
+) -> None:
+    monkeypatch.setattr(tasks.hmasd_work_packet, "read_return", lambda **_: None)
+    row = completed_manager_row()
+    rows = [row]
+    raw = observed_em()
+    if case == "no_history":
+        row["turns"] = []
+    elif case == "other_work":
+        rows = [completed_manager_row(work_id="b" * 64)]
+    elif case == "wrong_locator":
+        rows = [completed_manager_row(locator=".codex/runtime/work/ready/other/packet.json")]
+    elif case == "wrong_target":
+        row["name"] = "EM-beta"
+    elif case == "wrong_source":
+        row["threadSource"] = "hmasd-manager:EM-beta:g1"
+    elif case == "wrong_cwd":
+        row["cwd"] = "C:/Projects/other"
+    elif case == "gap":
+        rows = [completed_manager_row(attempts=(1, 3))]
+    elif case == "duplicate":
+        row["turns"].append(dict(row["turns"][0]))
+    elif case == "multiple":
+        rows.append(completed_manager_row(thread_id="thread-2"))
+    elif case == "cache_retired":
+        raw[0]["lifecycle"] = "RETIRED"
+    elif case == "cache_generation":
+        raw[0]["generation"] = 2
+    elif case == "cache_identity":
+        raw[0]["logical_identity"] = "EM-beta"
+    elif case == "cache_kind":
+        raw[0]["kind"] = "cm"
+    elif case == "cache_direction":
+        raw[0]["direction_id"] = "beta"
+    elif case == "cache_generation_conflict":
+        raw[0]["generation_conflict"] = {"native_generation": 2}
+    observation = tasks.AppServerClient._history_recovery_binding(
+        work_id=WORK_ID,
+        canonical_locator=LOCATOR,
+        cwd="C:/Projects/HMASD",
+        full_native_rows=rows,
+        raw_projected_tasks=raw,
+    )
+    if case == "cache_retired":
+        assert observation is not None
+        assert observation["status"] == "TASK_IDENTITY_CONFLICT"
+    else:
+        assert observation is None or observation.get("status") == "TASK_IDENTITY_CONFLICT"
+
+
+@pytest.mark.parametrize("status", ["active", "idle"])
+def test_noncompleted_manager_history_is_not_recovery_eligible(
+    monkeypatch: pytest.MonkeyPatch, status: str
+) -> None:
+    monkeypatch.setattr(tasks.hmasd_work_packet, "read_return", lambda **_: None)
+    row = completed_manager_row()
+    row["status"] = {"type": status}
+    assert tasks.AppServerClient._history_recovery_binding(
+        work_id=WORK_ID,
+        canonical_locator=LOCATOR,
+        cwd="C:/Projects/HMASD",
+        full_native_rows=[row],
+        raw_projected_tasks=[],
+    ) is None
+
+
+def test_run_chain_return_race_consumes_witness_without_resume(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    row = completed_manager_row()
+    returns = iter((None, VALIDATED_RETURN_STUB))
+    monkeypatch.setattr(tasks.hmasd_work_packet, "load_observed_tasks", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(tasks.hmasd_work_packet, "read_return", lambda **_: next(returns))
+    monkeypatch.setattr(
+        tasks.hmasd_work_packet,
+        "reconcile_once",
+        lambda **_: {"plan": {"verb": "NOOP_TERMINAL", "task_resolution": {"status": "RETURN_WITNESS"}}},
+    )
+    peer = response_peer()
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        monkeypatch.setattr(
+            client, "_list_all_threads", lambda **_: {"status": "OK", "threads": [row]}
+        )
+        monkeypatch.setattr(client, "_read_thread_full", lambda _: {"status": "OK", "thread": row})
+        monkeypatch.setattr(client, "_cm_operator_assignment", lambda **_: None)
+        monkeypatch.setattr(client, "execute_plan", lambda *_args, **_kwargs: pytest.fail("must not dispatch"))
+        result = client.run_chain(
+            start_work_id=WORK_ID, cwd="C:/Projects/HMASD"
+        )
+    assert result["stop"]["reason"] == "TERMINAL_NO_NEXT"
+    assert result["stop"]["return_witness"] == VALIDATED_RETURN_STUB
+    assert not {"thread/start", "thread/resume", "turn/start"} & {
+        request.get("method") for request in peer.requests
+    }
+
+
 def test_unexpected_server_request_after_send_requires_observation_not_a_response() -> None:
     def respond(request: dict[str, Any], peer: FakeTransport) -> None:
         if request.get("method") == "turn/start":
@@ -1984,6 +2178,7 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
                         "codexErrorInfo": "internalServerError",
                     }
                 thread["turns"].append(turn)
+                thread["status"] = {"type": "completed"}
                 fail_next_list = True
                 peer.emit(
                     {

@@ -1337,6 +1337,57 @@ class AppServerClient:
             latest.get("turn_status") in {"completed", "failed", "interrupted"}
         )
 
+    @classmethod
+    def _history_recovery_binding(
+        cls,
+        *,
+        work_id: str,
+        canonical_locator: str,
+        cwd: str,
+        full_native_rows: Sequence[Mapping[str, Any]],
+        raw_projected_tasks: Sequence[Mapping[str, Any]],
+    ) -> dict[str, Any] | None:
+        conflict = {"status": "TASK_IDENTITY_CONFLICT",
+                    "reason": "HISTORY_RECOVERY_BINDING_CONFLICT", "work_id": work_id}
+        candidates = [(row, manager, records) for row in full_native_rows
+                      if cls._same_cwd(row.get("cwd"), cwd)
+                      and cls._native_lifecycle(row.get("status")) == "COMPLETED"
+                      and (manager := cls._canonical_manager(row.get("name"))) is not None
+                      and (records := cls._attempt_records(row.get("turns", []), work_id))]
+        if not candidates:
+            return None
+        if len(candidates) != 1:
+            return conflict
+        row, manager, records = candidates[0]
+        target = row.get("name")
+        thread_id = row.get("id")
+        source = row.get("threadSource")
+        source_match = (re.fullmatch(
+            rf"hmasd-manager:{re.escape(str(target))}:g([1-9][0-9]*)", source
+        ) if isinstance(source, str) else None)
+        if (not isinstance(thread_id, str) or not thread_id or source_match is None
+                or not cls._terminal_attempt_needs_return_observation(
+                    row, work_id, canonical_locator, str(target))):
+            return conflict
+        generation = int(source_match.group(1))
+        ordered = sorted(records, key=lambda item: item["attempt"])
+        cached = [task for task in raw_projected_tasks
+                  if task.get("thread_id") == thread_id]
+        expected = (target, manager["kind"], manager["direction_id"], generation)
+        if (len(cached) > 1 or cached and (
+                tuple(cached[0].get(key) for key in
+                      ("logical_identity", "kind", "direction_id", "generation")) != expected
+                or cached[0].get("lifecycle") == "RETIRED"
+                or isinstance(cached[0].get("generation_conflict"), Mapping))):
+            return conflict
+        return {"work_id": work_id, "packet_locator": canonical_locator,
+            "target_identity": target, "thread_id": thread_id,
+            "generation": generation, "thread_source": source,
+            "attempt_count": len(ordered),
+            "attempt_statuses": [{"attempt": item["attempt"],
+                "turn_id": item.get("turn_id"), "turn_status": item.get("turn_status")}
+                for item in ordered]}
+
     @staticmethod
     def _validated_return_fact(
         *,
@@ -1954,6 +2005,27 @@ class AppServerClient:
                 for row in listed["threads"]
                 if self._same_cwd(row.get("cwd"), cwd)
             ]
+            full_completed_rows: list[Mapping[str, Any]] = []
+            for row in rows:
+                if self._native_lifecycle(row.get("status")) != "COMPLETED":
+                    continue
+                fresh = self._read_thread_full(str(row.get("id", "")))
+                if fresh.get("status") != "OK":
+                    return fresh
+                full_completed_rows.append(fresh["thread"])
+            recovery_observation = self._history_recovery_binding(
+                work_id=str(work_id),
+                canonical_locator=packet_locator,
+                cwd=cwd,
+                full_native_rows=full_completed_rows,
+                raw_projected_tasks=self._task_rows(observed_tasks),
+            )
+            if isinstance(recovery_observation, Mapping) and "status" in recovery_observation:
+                return dict(recovery_observation)
+            if recovery_observation is not None:
+                rows = [({**row, "status": {"type": "idle"}}
+                         if row.get("id") == recovery_observation["thread_id"] else row)
+                        for row in rows]
             initial_task_rows = self._native_task_snapshot(
                 rows, self._task_rows(observed_tasks)
             )
@@ -2468,6 +2540,7 @@ class AppServerClient:
         transition_count = 0
         events: list[dict[str, Any]] = []
         current_override_reason = root_override_reason
+        recovery_binding: dict[str, Any] | None = None
 
         def stopped(reason: str, **fact: Any) -> dict[str, Any]:
             return {
@@ -2487,7 +2560,8 @@ class AppServerClient:
                 return stopped("TYPED_CONFLICT", conflict=dict(observation))
             return stopped("NATIVE_OBSERVATION_STOP", observation=dict(observation))
 
-        def refresh_tasks() -> list[dict[str, Any]] | dict[str, Any]:
+        def refresh_tasks(work_id: str) -> list[dict[str, Any]] | dict[str, Any]:
+            nonlocal recovery_binding
             try:
                 projected_tasks = hmasd_work_packet.load_observed_tasks(
                     None, repo=repo
@@ -2501,6 +2575,7 @@ class AppServerClient:
             if listed.get("status") != "OK":
                 return listed
             rows: list[Mapping[str, Any]] = []
+            full_rows: list[Mapping[str, Any]] = []
             for listed_row in listed["threads"]:
                 thread_id = listed_row.get("id")
                 if not isinstance(thread_id, str) or not thread_id:
@@ -2518,14 +2593,35 @@ class AppServerClient:
                         "reason": "FRESH_THREAD_READ_INVALID",
                         "thread_id": thread_id,
                     }
+                full_rows.append(thread)
                 if self._same_cwd(thread.get("cwd"), cwd):
                     rows.append(thread)
-            snapshot = self._native_task_snapshot(
+            locator = f".codex/runtime/work/ready/{work_id}/packet.json"
+            try:
+                witness = hmasd_work_packet.read_return(repo=repo, work_id=work_id)
+            except (hmasd_work_packet.InvalidPacket, hmasd_work_packet.PacketConflict):
+                return {"status": "TASK_IDENTITY_CONFLICT", "reason": "RETURN_WITNESS_INVALID"}
+            recovery_binding = None
+            if witness is None:
+                observed = self._history_recovery_binding(
+                    work_id=work_id,
+                    canonical_locator=locator,
+                    cwd=cwd,
+                    full_native_rows=full_rows,
+                    raw_projected_tasks=projected_tasks,
+                )
+                if isinstance(observed, Mapping) and "status" in observed:
+                    return dict(observed)
+                recovery_binding = observed
+            if recovery_binding is not None:
+                rows = [({**row, "status": {"type": "idle"}}
+                         if row.get("id") == recovery_binding["thread_id"] else row)
+                        for row in rows]
+            return self._native_task_snapshot(
                 rows, projected_tasks, include_unlisted=False
             )
-            return snapshot
 
-        initial_snapshot = refresh_tasks()
+        initial_snapshot = refresh_tasks(current_work_id)
         if isinstance(initial_snapshot, Mapping):
             return observation_stop(initial_snapshot)
         current_tasks = initial_snapshot
@@ -2567,6 +2663,19 @@ class AppServerClient:
                 {"kind": "PLAN", "work_id": current_work_id, "plan": plan}
             )
             verb = plan.get("verb")
+
+            if recovery_binding is not None and verb in _DISPATCH_VERBS:
+                resolution = plan.get("task_resolution", {})
+                if (
+                    resolution.get("status") != "REUSE"
+                    or resolution.get("logical_identity") != recovery_binding["target_identity"]
+                    or resolution.get("thread_id") != recovery_binding["thread_id"]
+                    or resolution.get("generation") != recovery_binding["generation"]
+                ):
+                    return stopped(
+                        "TYPED_CONFLICT",
+                        conflict={"status": "TASK_IDENTITY_CONFLICT", "reason": "HISTORY_RECOVERY_PLAN_MISMATCH"},
+                    )
 
             if verb == "NOOP_TERMINAL":
                 try:
@@ -2690,7 +2799,7 @@ class AppServerClient:
                 transition_count += 1
                 current_work_id = next_work_id
                 current_override_reason = None
-                refreshed = refresh_tasks()
+                refreshed = refresh_tasks(current_work_id)
                 if isinstance(refreshed, Mapping):
                     return observation_stop(refreshed)
                 current_tasks = refreshed
@@ -2779,14 +2888,14 @@ class AppServerClient:
                     result.get("status") == "RETURN_WITNESS_MISSING"
                     and result.get("recoverable") is True
                 ):
-                    refreshed = refresh_tasks()
+                    refreshed = refresh_tasks(current_work_id)
                     if isinstance(refreshed, Mapping):
                         return observation_stop(refreshed)
                     current_tasks = refreshed
                     continue
                 if "return_witness" not in result:
                     return stopped("EXECUTE_PLAN_STOP", result=result)
-                refreshed = refresh_tasks()
+                refreshed = refresh_tasks(current_work_id)
                 if isinstance(refreshed, Mapping):
                     return observation_stop(refreshed)
                 current_tasks = refreshed
