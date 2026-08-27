@@ -1774,3 +1774,79 @@ No source/test/science change, new candidate, alternate run/manifest/output iden
 ### Registry decision
 
 Advance registry revision `30` to revision `31` through the Portfolio CAS writer. Keep SCDMP `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## UCOPE terminal-failure reconciliation and one fresh R03 replacement purchase — 2026-08-27T13:33:15Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `c13f9b1b61d2988684ab375efcc5906da6c3e04c7790d80265506d7938ae8846`; registry revision `31`, SHA-256 `021e212549b827455a372557fe92242aa3a15db94a81b51163866650c59ed592`.
+- Controlling Clerk assignment: `6dd16cbc-1211-4da0-a582-147ddeda97ca`.
+- Exact CM repair return: `f49bbbc8-a821-486c-8578-690186ce333c:return`.
+- Exact unchanged science refs: `DIRECTION.md` SHA-256 `ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d`; R03 science card SHA-256 `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`.
+- Exact repair refs: engineering-state revision `8` SHA-256 `8825684c6c40df5c8c110a512319eae745e1139c4c65af80f82f5bb8775ddb81`; technical acceptance SHA-256 `e1c7858e0dd37d0314b1d0aa2bd594b6f4d2ffd003da716c8fd68e392a19dda7`; review SHA-256 `8c0f59de99b0d9b7565a7152bbab4a8eac56d97b76a6e8f69c45ee8a8f816ca5`; SANCheck SHA-256 `2714fbc2a0d09286c350dce88fa6b0a2018fe82deb288d8761b68123a99a63f8`; S2 JUnit SHA-256 `3f0b77b7a9ef944bc70c9d21e36e5174134032d34e2878ee64de89f17b2bfac1`; non-S2 JUnit SHA-256 `43ccfcc749da4dc00b15a127dd0026e6cd76e6d0a338ebaeb16f2023a18732ea`.
+- Exact terminal-run refs: manifest SHA-256 `ff7a185da5ea3381e2d0db03755882da7e108059ce38be0bc5f21154cae8a17c`; checkpoint manifest SHA-256 `1e3e884a041d2fabf0285a943f09ea848bbe52cf3e0feaf06579b7c8f59faeea`; stderr SHA-256 `76b0a360b3198e51aef0122ee75757e09f83c990daf4476ecdf4069b969f1b9c`; Operator terminal audit SHA-256 `39bd628780681da46281e17101062c155237e481868baa73a661734100db439e`; terminal SANCheck SHA-256 `8c7d0a02ea74300530270550d91cb4c4cf1fe492c73e93d8f8cd5d7fd424756f`.
+
+### Technical evidence and terminal old-run disposition
+
+Accept the `descriptive_agreements` repair as fresh direction-owned technical evidence only. On the repaired bytes, descriptive agreement is the matched FP32 weight divided by the same FP32 total weight, competence retains the original raw FP32 total bit-for-bit, and nonfinite, negative, above-total or normalized-out-of-range aggregates fail closed. Focused S2 verification passes `32/32`, unchanged non-S2 verification passes `56/56`, and the independent Standards/Spec review has zero final findings. This establishes only implementation correctness for the repaired reporting boundary; it establishes no registered seed, complete scientific result, S2 scientific claim, deployment, flight or external Effect.
+
+The accepted repair is on clean pushed branch `omp/ucope/engineering/f49bbbc8-a821-486c-8578-690186ce333c`. The exact repair source/test commit is `23412b25032ae5a690a295f78abd6b031c949c2c`; the final branch HEAD, including the direction-owned engineering-state acceptance, is `ecdee2459804cf9cc3d074753b42869595373d6b`; `origin/refs/heads/omp/ucope/engineering/f49bbbc8-a821-486c-8578-690186ce333c` equals that final HEAD on remote `https://github.com/CartmanFatass/My-paper-code.git`, and the retained candidate worktree is tracked-clean. The repaired source/test hashes are `622ce664d0ad86f854a82c18689c81c3c07a53dd21b7977d6e87c477c7a403bc` for `s2_construction.py` and `f0501d12ecbbb0d78887de54110242a4e52a0448d48587a8935d0e503bf00d8b` for its S2 test.
+
+Keep `ucope-r03-complete-20260827-01` permanently terminal `FAILED`. Its sole Operator-owned invocation has launch count `1`, exit code `1`, terminal reason `CHILD_EXIT`, group quiescence true and rerun forbidden. It produced a complete ninety-checkpoint inventory before the descriptive-agreement validator refused `S2_MALFORMED_INPUT`, but the result firewall published no complete result, metrics or artifact files and stdout is empty. The old run therefore consumed its run, output, manifest, checkpoint and Operator identities but supplied no admissible efficacy, null or failure result. The technical diagnosis is not scientific counterevidence, and no outcome statistic is available for result-conditioned adaptation.
+
+The exact old run ID, `temp/directions/ucope/exp/ucope-r03-complete-20260827-01/` output root, manifest, checkpoint inventory, stderr and `Operator-ucope-r03-complete-20260827-01` are immutable tombstones. They must never be edited, relaunched, copied as a new manifest, reused as an execution/evidence identity or treated as permission for an automatic retry.
+
+### Proportional replacement investment and fresh authority
+
+Retain UCOPE `ACTIVE/g1`. The Pro-closed R03 question and its frozen populations, panels, arms, counters, FP32 law, ten registered masters, batch `320`, ninety-checkpoint transaction, controls, complete-only publication and claim ceiling remain scientifically worthwhile. The failure is independently localized to a repaired descriptive reporting transform, the firewall exposed no scientific outcome, and the prior result-blind cost basis is only `388.0782459051625` wall seconds, one CPU core, `0.10810758191836511` CPU hours, `515145728` peak-memory bytes and `2312507074` I/O bytes. One replacement is therefore proportionate; parking would discard a mature bounded question for a corrected, low-cost technical failure.
+
+Create the following distinct Portfolio activity authority and purchase exactly one fresh complete transaction. This is a new investment with a disjoint run/Effect identity, not a rerun or mutation of `-01`:
+
+```text
+activity_authority_id=UCOPE-R03-COMPLETE-REPLACEMENT-ACTIVITY-AUTHORITY-20260827-02
+scientific_purchase=ONE_UNCHANGED_COMPLETE_UCOPE_R03_TRANSACTION
+run_id=ucope-r03-complete-20260827-02
+candidate_branch=omp/ucope/engineering/f49bbbc8-a821-486c-8578-690186ce333c
+candidate_head=ecdee2459804cf9cc3d074753b42869595373d6b
+accepted_repair_commit=23412b25032ae5a690a295f78abd6b031c949c2c
+runner_root=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/
+run_manifest_path=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/manifest.json
+source_manifest_path=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/source-manifest.json
+prelaunch_manifest_path=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/prelaunch-manifest.json
+checkpoint_manifest_path=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/checkpoint-manifest.json
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/ucope/exp/ucope-r03-complete-20260827-02/
+future_operator_identity=Operator-ucope-r03-complete-20260827-02
+activity_authorized=false
+operator_now=false
+effect_refs=[]
+```
+
+The frozen prospective payload is exactly:
+
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.ucope.variable_k_paid_probe_r01_r03.empirical_transaction --run-id ucope-r03-complete-20260827-02 --output-root temp/directions/ucope/exp/ucope-r03-complete-20260827-02 --hmasd-manifest temp/directions/ucope/exp/ucope-r03-complete-20260827-02/manifest.json
+```
+
+The new output root and identity are currently absent. Before any activity, one fresh strict UTF-8 source manifest must enumerate the accepted repaired source/test bytes, including the two repair hashes above; one fresh result-blind estimate must bind `-02` and the exact candidate; and one fresh immutable `hmasd_run` manifest and prelaunch authority must bind this Portfolio heading/current SHA, the exact branch/full HEAD, repair acceptance, unchanged scientific envelope, payload argv, run/output identities, complete-only firewall, no-rerun law and exactly one `LOCAL_RESULT_ROOT/CREATE_ONLY` Effect. The prior `-01` source, prelaunch or run manifest is provenance only and may not be copied or cited as current authority. A material workload/cost change, unsafe memory plan or projected runtime above `7,200` seconds returns for the contract-required review/user decision; it does not silently shrink or tune the science object.
+
+### Exact next responsibility
+
+Return `REQUEST_CM` for exactly one existing-CM slice, `UCOPE-R03-REPLACEMENT-ACTIVITY-IMMUTABLE-PREPARE-V1`. Workflow-Clerk must route it to the existing `CM/ucope/g1`; Portfolio does not dispatch or create a manager. Its exact owned paths are:
+
+```text
+docs/research/candidates/ucope/workflow/engineering/state.json
+temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_SOURCE_MANIFEST_20260827_02.json
+temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_ESTIMATE_20260827_02.json
+temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_ACCEPTANCE_20260827_02.json
+temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_SANCHECK_20260827_02.json
+temp/directions/ucope/exp/ucope-r03-complete-20260827-02/
+```
+
+CM must verify the exact candidate branch is tracked-clean and its remote ref still equals `ecdee2459804cf9cc3d074753b42869595373d6b`; generate and cross-validate the fresh source, estimate and prelaunch records without changing source, tests or science; prove the new root and every temporary/result sibling are absent; issue only the one byte-matched immutable manifest and result-blind `hmasd_run prepare` records; bind the sole prospective Effect; and update engineering state by CAS. Done means a strict PREPARED package with fresh path+SHA refs and exact Git facts is returned, while the payload has not executed, no Operator exists, no registered seed/checkpoint/result is newly produced, `activity_authorized=false`, `operator_now=false` and `effect_refs=[]` remain exact. If these predicates do not hold, CM must return the exact direction-scoped reason without creating an Operator.
+
+Only a later Clerk-routed continuation after that PREPARED return may establish at most one `Operator-ucope-r03-complete-20260827-02` holding only the frozen command through terminal observation. This Portfolio slice authorizes no payload execution, `hmasd_run execute`, automatic third purchase, provider, shared-core/main integration, deployment or flight.
+
+### Registry decision
+
+Advance registry revision `31` to revision `32` through the Portfolio CAS writer. Keep UCOPE `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
