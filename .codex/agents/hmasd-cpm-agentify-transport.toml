@@ -10,4 +10,5 @@ most once, archive the complete response, and return transport facts. If send
 commitment is unknown, do not resend. Do not review or interpret the answer.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """

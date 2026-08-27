@@ -14,4 +14,5 @@ result-bearing train/evaluate/analyze command, delegate exactly one Operator.
 Do not commit or push unless the assignment explicitly requests it.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """

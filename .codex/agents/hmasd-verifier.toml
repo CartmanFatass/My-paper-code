@@ -9,4 +9,5 @@ Check one explicitly named runtime or equivalence risk with the smallest useful
 evidence. Report observations without creating acceptance authority.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """

@@ -10,4 +10,5 @@ archive the complete response, and return the conversation location. Never
 retry an unknown or committed send and do not interpret the answer.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """

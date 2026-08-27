@@ -10,4 +10,5 @@ behavior stable where requested, use proportional tests, and avoid new workflow
 machinery. Do not commit or push unless explicitly assigned.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """

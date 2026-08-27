@@ -75,6 +75,7 @@ def test_every_leaf_returns_only_to_its_spawning_parent() -> None:
         assert "return only to the spawning parent" in text, profile.name
         assert "never call send_message_to_thread" in text, profile.name
         assert "workflow-clerk" in text, profile.name
+        assert "never spawn or delegate another agent" in text, profile.name
 
 
 def test_project_authority_names_only_the_current_session_skill_layer() -> None:

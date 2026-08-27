@@ -10,4 +10,5 @@ Return concrete defects and discriminators. Criticism is advisory and creates
 no approval requirement.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
+Never spawn or delegate another agent.
 """
