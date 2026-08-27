@@ -1,7 +1,7 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "2f55364866a6de23095e8941b0216449ea8d5422",
+  "base_sha": "d03124ba124681cae3934a24592574f5ff9d2d95",
   "blockers": [],
   "candidate_sha": "2f55364866a6de23095e8941b0216449ea8d5422",
   "changed_paths": [
@@ -13,26 +13,30 @@
     "target_branch": "main",
     "target_sha_seen": "b4da70b2f8636c855cebac23c9865bab6cffbb8e"
   },
-  "last_checkpoint_sha": "077684446d2d4ada53711fdcc2061d0ee5c982325d1158ebdc74152a789d384d",
+  "last_checkpoint_sha": "1bc9c3dfe7b9d1b585656a86e5fdfbf95bb29b40b53a8ec941c393f6063e9a9f",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_ACCEPTANCE_20260827_02.json",
-        "sha256": "077684446d2d4ada53711fdcc2061d0ee5c982325d1158ebdc74152a789d384d"
-      },
-      {
         "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/manifest.json",
-        "sha256": "f64e64935a0a49836b548b26c0407c33934e89525b1c1906f76c07fdb4542762"
+        "sha256": "a00095dda8ac8fcc1b6969746cd891eb725bfdbbcdf38033d5baff38dee6ec84"
       },
       {
-        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_SANCHECK_20260827_02.json",
-        "sha256": "253b2692e3b3c36e557082958206a290e8dab801e6a9390b419770985c881953"
+        "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/operator-result.json",
+        "sha256": "1bc9c3dfe7b9d1b585656a86e5fdfbf95bb29b40b53a8ec941c393f6063e9a9f"
+      },
+      {
+        "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/artifacts/complete-r03.sealed",
+        "sha256": "45fc68a9365b0c2cc3914de6faf5eba7ae701ea9a96e3dc16b8fd00c2ce3b98c"
+      },
+      {
+        "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/metrics/complete-evidence.json",
+        "sha256": "33203e4392b7b707231a895e95398c57216f2ea80e981448f8a39ed16e9b78ce"
       }
     ],
-    "kind": "RETURN_CLERK_REQUEST_UNIQUE_OPERATOR_EXECUTION"
+    "kind": "RETURN_CLERK_REQUEST_SCIENTIFIC_INTERPRETATION"
   },
-  "phase": "RUN_READY",
-  "revision": 13,
+  "phase": "COMPLETE",
+  "revision": 14,
   "run_refs": [
     {
       "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-01/manifest.json",
@@ -48,15 +52,39 @@
     },
     {
       "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/manifest.json",
-      "sha256": "f64e64935a0a49836b548b26c0407c33934e89525b1c1906f76c07fdb4542762"
+      "sha256": "a00095dda8ac8fcc1b6969746cd891eb725bfdbbcdf38033d5baff38dee6ec84"
     },
     {
-      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/preflight.json",
-      "sha256": "b716cdec5ecc0b4a7302805db1afb8b32dcf99d1f5676df48b749d15ea5768d3"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/operator-result.json",
+      "sha256": "1bc9c3dfe7b9d1b585656a86e5fdfbf95bb29b40b53a8ec941c393f6063e9a9f"
     },
     {
-      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/runner-spec.json",
-      "sha256": "8e99603efbd2ed7b3d4123be16fdd2c4cd6cf2164e194cba6f5da75f98668a3d"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/execute-preflight.json",
+      "sha256": "8d9fa591ecec6d769170e511d3d1ae7ec1bb8824553c647f51ae3d847c6abd55"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/checkpoint-manifest.json",
+      "sha256": "1e3e884a041d2fabf0285a943f09ea848bbe52cf3e0feaf06579b7c8f59faeea"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/artifacts/complete-r03.sealed",
+      "sha256": "45fc68a9365b0c2cc3914de6faf5eba7ae701ea9a96e3dc16b8fd00c2ce3b98c"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/metrics/complete-evidence.json",
+      "sha256": "33203e4392b7b707231a895e95398c57216f2ea80e981448f8a39ed16e9b78ce"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temp/directions/ucope/.run-claims/dbd38fc374b3e0f26a54c5a7c2de4fac71d0de2c3a4cbfe26c92370ee07cffb6.json",
+      "sha256": "5da21bbebb46e8f459f7ebebc15e1f80d96db66f300331ed919b2a8a8c8272aa"
     }
   ],
   "schema_version": 1,
@@ -65,35 +93,31 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-27T15:53:34.695936Z",
+  "updated_at": "2026-08-27T16:06:15.199495Z",
   "verification_refs": [
     {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_SOURCE_MANIFEST_20260827_02.json",
-      "sha256": "5f0d384c68d1bd5a547716e28c7e103ff3f06d3d2c0eadd53893c62fe540da6f"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/manifest.json",
+      "sha256": "a00095dda8ac8fcc1b6969746cd891eb725bfdbbcdf38033d5baff38dee6ec84"
     },
     {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_ESTIMATE_20260827_02.json",
-      "sha256": "7213cf7bca664392880a21329bd28aaf7debfa98b1342e97b835185d48411000"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/operator-result.json",
+      "sha256": "1bc9c3dfe7b9d1b585656a86e5fdfbf95bb29b40b53a8ec941c393f6063e9a9f"
     },
     {
-      "path": "temp/directions/ucope/test/s3/g1/ucope-r03-replacement-02-dossier-4ce62ad7/S3_PARAMETERS.json",
-      "sha256": "1def000fb5b3017fcdbe643de8a8d86ea7a7dfc21217bd509296255b58ffc47b"
+      "path": "temp/directions/ucope/.run-claims/dbd38fc374b3e0f26a54c5a7c2de4fac71d0de2c3a4cbfe26c92370ee07cffb6.json",
+      "sha256": "5da21bbebb46e8f459f7ebebc15e1f80d96db66f300331ed919b2a8a8c8272aa"
     },
     {
-      "path": "temp/directions/ucope/test/s3/g1/ucope-r03-replacement-02-dossier-4ce62ad7/S3_CHECKPOINT_MANIFEST_CONTRACT.json",
-      "sha256": "cb1d6621afdbb4456d8b6fca4a9eb65d8e1a86390c1d8de67ad64a2d9a4f41f2"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/checkpoint-manifest.json",
+      "sha256": "1e3e884a041d2fabf0285a943f09ea848bbe52cf3e0feaf06579b7c8f59faeea"
     },
     {
-      "path": "temp/directions/ucope/test/s3/g1/ucope-r03-replacement-02-dossier-4ce62ad7/S3_PRELAUNCH_MANIFEST.json",
-      "sha256": "09e3499401bdab93d4cb82da4437a8abc69cf06853fda9cddbe4c82b643951d7"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/artifacts/complete-r03.sealed",
+      "sha256": "45fc68a9365b0c2cc3914de6faf5eba7ae701ea9a96e3dc16b8fd00c2ce3b98c"
     },
     {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_ACCEPTANCE_20260827_02.json",
-      "sha256": "077684446d2d4ada53711fdcc2061d0ee5c982325d1158ebdc74152a789d384d"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_SANCHECK_20260827_02.json",
-      "sha256": "253b2692e3b3c36e557082958206a290e8dab801e6a9390b419770985c881953"
+      "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-02/metrics/complete-evidence.json",
+      "sha256": "33203e4392b7b707231a895e95398c57216f2ea80e981448f8a39ed16e9b78ce"
     }
   ],
   "waiting_on": [],
