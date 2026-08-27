@@ -50,6 +50,125 @@ def test_cm_uses_leaf_roles_at_proportional_engineering_seams() -> None:
     assert "verifier" in text
 
 
+def test_cm_prompt_defines_one_complete_internal_orchestration_loop() -> None:
+    text = _prompt("hmasd-cm.md")
+
+    for required in (
+        "## engineering orchestration loop",
+        "map files and interfaces before decomposition",
+        "one bounded implementer",
+        "same implementer",
+        "reviewer and verifier are separate, non-overlapping evidence tools",
+        "operator returns terminal execution facts to cm",
+        "cm integrates leaf evidence",
+        "sole technical acceptance owner",
+        "git closure before return",
+        "send the correlated return to workflow-clerk",
+    ):
+        assert required in text
+
+    for retired in (
+        "operational root",
+        "compute lease",
+        "work packet",
+        "run-chain",
+        "decision packet",
+    ):
+        assert retired not in text
+
+
+def test_em_prompt_defines_one_complete_internal_orchestration_loop() -> None:
+    text = _prompt("hmasd-em.md")
+
+    for required in (
+        "## scientific orchestration loop",
+        "science card",
+        "question, treatment, comparator, observable",
+        "strongest alternative explanation",
+        "claim ceiling",
+        "construct-first",
+        "parallel-first",
+        "em forms the local synthesis",
+        "constructive pro review",
+        "revised object",
+        "adversarial pro review",
+        "same-direction technical result",
+        "em integrates leaf evidence",
+        "sole scientific acceptance owner",
+        "git closure before return",
+        "send the correlated return to workflow-clerk",
+    ):
+        assert required in text
+
+    assert "missing implementation is cm work" in text
+    assert "no question-relevant data" in text
+    for retired in (
+        "operational root",
+        "compute lease",
+        "work packet",
+        "run-chain",
+        "decision packet",
+    ):
+        assert retired not in text
+
+
+def test_portfolio_prompt_defines_one_low_frequency_decision_wake() -> None:
+    text = _prompt("hmasd-portfolio.md")
+
+    for required in (
+        "## portfolio decision orchestration",
+        "one bounded decision wake",
+        "reconcile portfolio.md, registry revision",
+        "cross-direction priority",
+        "engineering investment",
+        "portfolio is a decision participant, not a coordinator",
+        "one direct read-only leaf wave",
+        "missing implementation routes to cm",
+        "expected-revision cas",
+        "git closure before return",
+        "send the correlated return to workflow-clerk",
+        "does not create, dispatch, wait for or contact em, cm or root directly",
+        "stage only changed portfolio authority paths that are included in this assignment's `owned_paths`",
+        "single transport `direction_id=portfolio`",
+        "does not limit portfolio's research scope",
+        "portfolio-return",
+        "one action per material direction outcome",
+        "open a new direction",
+        "workflow-clerk expands all validated actions",
+    ):
+        assert required in text
+
+    for retired in (
+        "operational root",
+        "compute lease",
+        "work packet",
+        "run-chain",
+        "decision packet",
+    ):
+        assert retired not in text
+
+
+def test_authority_points_each_manager_to_one_internal_orchestration_prompt() -> None:
+    agents = " ".join((ROOT / "AGENTS.md").read_text(encoding="utf-8").split()).casefold()
+    goals = " ".join(
+        (ROOT / "docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md")
+        .read_text(encoding="utf-8")
+        .split()
+    ).casefold()
+    protocol = " ".join(
+        (ROOT / "docs/project/WORKFLOW_PROTOCOL.md").read_text(encoding="utf-8").split()
+    ).casefold()
+
+    for text in (agents, goals, protocol):
+        assert ".codex/prompts/hmasd-portfolio.md" in text
+        assert ".codex/prompts/hmasd-em.md" in text
+        assert ".codex/prompts/hmasd-cm.md" in text
+        assert "clerk does not choose or sequence their leaves" in text
+
+    assert "role-internal orchestration" in agents
+    assert "role-internal orchestration" in goals
+
+
 def test_required_em_cm_leaf_profiles_are_registered() -> None:
     config = (ROOT / ".codex/config.toml").read_text(encoding="utf-8")
     for registered in (

@@ -38,6 +38,27 @@ _RETURN_STATUSES = {
     "REQUEST_USER",
     "FAILED",
 }
+_PORTFOLIO_RETURN_BODY_FIELDS = {
+    "summary",
+    "changed_paths",
+    "artifact_refs",
+    "actions",
+    "failure",
+}
+_PORTFOLIO_ACTION_FIELDS = {
+    "direction_id",
+    "lifecycle",
+    "status",
+    "summary",
+    "artifact_refs",
+    "next_objective",
+    "failure",
+}
+_PORTFOLIO_LIFECYCLE_STATUSES = {
+    "ACTIVE": {"REQUEST_EM", "REQUEST_CM"},
+    "PARKED": {"REQUEST_USER"},
+    "CLOSED": {"DONE"},
+}
 
 
 class EnvelopeError(ValueError):
@@ -71,7 +92,11 @@ def _validate_assignment_route(
         return
     if sender_identity != "Workflow-Clerk":
         raise EnvelopeError("only Workflow-Clerk may assign a participant")
-    if recipient_identity in {"Root", "Portfolio"}:
+    if recipient_identity == "Portfolio":
+        if direction_id != "portfolio":
+            raise EnvelopeError("Portfolio assignment direction_id must be portfolio")
+        return
+    if recipient_identity == "Root":
         return
     manager = _MANAGER.fullmatch(recipient_identity)
     if manager is None or manager.group(2) != direction_id:
@@ -249,6 +274,109 @@ def _validate_return_body(
     }
 
 
+def _validate_portfolio_failure(value: Any) -> dict[str, str] | None:
+    if value is None:
+        return None
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != {"scope", "summary"}
+        or value.get("scope") not in {"project", "direction", "feature", "effect"}
+        or not isinstance(value.get("summary"), str)
+        or not value.get("summary")
+    ):
+        raise EnvelopeError("portfolio return failure is invalid")
+    return {"scope": str(value["scope"]), "summary": str(value["summary"])}
+
+
+def _validate_portfolio_action(value: Any, index: int) -> dict[str, Any]:
+    label = f"portfolio return actions[{index}]"
+    if not isinstance(value, Mapping) or set(value) != _PORTFOLIO_ACTION_FIELDS:
+        raise EnvelopeError(f"{label} fields are invalid")
+    direction_id = value["direction_id"]
+    lifecycle = value["lifecycle"]
+    status = value["status"]
+    summary = value["summary"]
+    next_objective = value["next_objective"]
+    if not isinstance(direction_id, str) or _DIRECTION.fullmatch(direction_id) is None:
+        raise EnvelopeError(f"{label} direction_id is invalid")
+    if lifecycle not in _PORTFOLIO_LIFECYCLE_STATUSES:
+        raise EnvelopeError(f"{label} lifecycle is invalid")
+    if status not in _PORTFOLIO_LIFECYCLE_STATUSES[lifecycle]:
+        raise EnvelopeError(f"{label} lifecycle/status combination is invalid")
+    if not isinstance(summary, str) or not summary:
+        raise EnvelopeError(f"{label} summary must be non-empty")
+    if status.startswith("REQUEST_"):
+        if not isinstance(next_objective, str) or not next_objective:
+            raise EnvelopeError(f"{label} request requires next_objective")
+    elif next_objective is not None:
+        raise EnvelopeError(f"{label} terminal action requires null next_objective")
+    if value["failure"] is not None:
+        raise EnvelopeError(f"{label} failure must be null")
+    artifact_refs = _validate_string_list(value["artifact_refs"], f"{label} artifact_refs")
+    for ref_index, path in enumerate(artifact_refs):
+        _validate_path(path, f"{label} artifact_refs[{ref_index}]")
+    return {
+        "direction_id": direction_id,
+        "lifecycle": lifecycle,
+        "status": status,
+        "summary": summary,
+        "artifact_refs": artifact_refs,
+        "next_objective": next_objective,
+        "failure": None,
+    }
+
+
+def _validate_portfolio_return_body(
+    value: Mapping[str, Any], *, owned_paths: list[str]
+) -> dict[str, Any]:
+    if set(value) != _PORTFOLIO_RETURN_BODY_FIELDS:
+        raise EnvelopeError("portfolio return body fields are invalid")
+    summary = value["summary"]
+    if not isinstance(summary, str) or not summary:
+        raise EnvelopeError("portfolio return summary must be non-empty")
+    changed_paths = _validate_string_list(
+        value["changed_paths"], "portfolio return changed_paths"
+    )
+    artifact_refs = _validate_string_list(
+        value["artifact_refs"], "portfolio return artifact_refs"
+    )
+    for index, path in enumerate(changed_paths):
+        _validate_path(path, f"portfolio return changed_paths[{index}]")
+        folded = path.casefold()
+        if not any(
+            folded.startswith(owned.casefold())
+            if owned.endswith("/")
+            else folded == owned.casefold()
+            for owned in owned_paths
+        ):
+            raise EnvelopeError(
+                f"portfolio return changed_paths[{index}] is outside assignment owned_paths"
+            )
+    for index, path in enumerate(artifact_refs):
+        _validate_path(path, f"portfolio return artifact_refs[{index}]")
+    actions_value = value["actions"]
+    if not isinstance(actions_value, list):
+        raise EnvelopeError("portfolio return actions must be a list")
+    actions = [
+        _validate_portfolio_action(action, index)
+        for index, action in enumerate(actions_value)
+    ]
+    direction_keys = [action["direction_id"].casefold() for action in actions]
+    if len(direction_keys) != len(set(direction_keys)):
+        raise EnvelopeError("portfolio return actions contain duplicate direction_id")
+    failure = _validate_portfolio_failure(value["failure"])
+    if failure is not None and actions:
+        raise EnvelopeError("failed portfolio return cannot contain direction actions")
+    actions.sort(key=lambda action: action["direction_id"].casefold())
+    return {
+        "summary": summary,
+        "changed_paths": changed_paths,
+        "artifact_refs": artifact_refs,
+        "actions": actions,
+        "failure": failure,
+    }
+
+
 def _validate_return_envelope(
     value: Mapping[str, Any], assignment: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -293,6 +421,55 @@ def _validate_return_envelope(
             body,
             owned_paths=assignment["body"]["owned_paths"],
             sender_identity=sender["identity"],
+        ),
+    }
+
+
+def _validate_portfolio_return_envelope(
+    value: Mapping[str, Any], assignment: Mapping[str, Any]
+) -> dict[str, Any]:
+    fields = {
+        "schema_version",
+        "message_id",
+        "direction_id",
+        "sender",
+        "recipient",
+        "kind",
+        "reply_to",
+        "body",
+    }
+    if set(value) != fields or value.get("schema_version") != 1:
+        raise EnvelopeError("portfolio return envelope fields are invalid")
+    if assignment["recipient"]["identity"] != "Portfolio":
+        raise EnvelopeError("portfolio return requires a Portfolio assignment")
+    if (
+        value.get("kind") != "PORTFOLIO_RETURN"
+        or value.get("direction_id") != assignment["direction_id"]
+        or value.get("reply_to") != assignment["message_id"]
+        or value.get("message_id")
+        != f"{assignment['message_id']}:portfolio-return"
+    ):
+        raise EnvelopeError("portfolio return correlation is invalid")
+    direction_id = assignment["direction_id"]
+    sender = _validate_endpoint(value["sender"], "portfolio return sender", direction_id)
+    recipient = _validate_endpoint(
+        value["recipient"], "portfolio return recipient", direction_id
+    )
+    if sender != assignment["recipient"] or recipient != assignment["sender"]:
+        raise EnvelopeError("portfolio return endpoints do not reverse assignment")
+    body = value.get("body")
+    if not isinstance(body, Mapping):
+        raise EnvelopeError("portfolio return body must be an object")
+    return {
+        "schema_version": 1,
+        "message_id": str(value["message_id"]),
+        "direction_id": direction_id,
+        "sender": sender,
+        "recipient": recipient,
+        "kind": "PORTFOLIO_RETURN",
+        "reply_to": assignment["message_id"],
+        "body": _validate_portfolio_return_body(
+            body, owned_paths=assignment["body"]["owned_paths"]
         ),
     }
 
@@ -401,6 +578,44 @@ def create_return(args: argparse.Namespace) -> dict[str, str]:
     }
 
 
+def create_portfolio_return(args: argparse.Namespace) -> dict[str, str]:
+    repo = Path(args.repo).resolve()
+    locator_path = Path(args.assignment)
+    _validate_path(locator_path.as_posix(), "assignment locator")
+    assignment = _validate_assignment_envelope(
+        _load_object(repo / locator_path, "assignment envelope")
+    )
+    if assignment["recipient"]["identity"] != "Portfolio":
+        raise EnvelopeError("portfolio-return requires a Portfolio assignment")
+    body = _validate_portfolio_return_body(
+        _load_object(Path(args.body), "portfolio return body"),
+        owned_paths=assignment["body"]["owned_paths"],
+    )
+    envelope = {
+        "schema_version": 1,
+        "message_id": f"{assignment['message_id']}:portfolio-return",
+        "direction_id": assignment["direction_id"],
+        "sender": assignment["recipient"],
+        "recipient": assignment["sender"],
+        "kind": "PORTFOLIO_RETURN",
+        "reply_to": assignment["message_id"],
+        "body": body,
+    }
+    relative = locator_path.with_name(
+        locator_path.name.removesuffix(".assignment.json")
+        + ".portfolio-return.json"
+    )
+    if relative == locator_path:
+        raise EnvelopeError("assignment locator must end with .assignment.json")
+    _write_new(repo / relative, envelope)
+    locator = relative.as_posix()
+    return {
+        "locator": locator,
+        "message": f"HMASD_SESSION_ENVELOPE_V1 {locator}",
+        "recipient_thread_id": assignment["sender"]["thread_id"],
+    }
+
+
 def read_envelope(args: argparse.Namespace) -> dict[str, Any]:
     repo = Path(args.repo).resolve()
     locator_path = Path(args.envelope)
@@ -418,6 +633,19 @@ def read_envelope(args: argparse.Namespace) -> dict[str, Any]:
             _load_object(repo / assignment_path, "paired assignment envelope")
         )
         envelope = _validate_return_envelope(raw, assignment)
+    elif raw.get("kind") == "PORTFOLIO_RETURN":
+        if not locator_path.name.endswith(".portfolio-return.json"):
+            raise EnvelopeError(
+                "portfolio return locator must end with .portfolio-return.json"
+            )
+        assignment_path = locator_path.with_name(
+            locator_path.name.removesuffix(".portfolio-return.json")
+            + ".assignment.json"
+        )
+        assignment = _validate_assignment_envelope(
+            _load_object(repo / assignment_path, "paired assignment envelope")
+        )
+        envelope = _validate_portfolio_return_envelope(raw, assignment)
     else:
         raise EnvelopeError("session envelope kind is invalid")
     locator = locator_path.as_posix()
@@ -446,6 +674,10 @@ def _parser() -> argparse.ArgumentParser:
     returned.add_argument("--repo", required=True)
     returned.add_argument("--assignment", required=True)
     returned.add_argument("--body", required=True)
+    portfolio_return = commands.add_parser("portfolio-return")
+    portfolio_return.add_argument("--repo", required=True)
+    portfolio_return.add_argument("--assignment", required=True)
+    portfolio_return.add_argument("--body", required=True)
     read = commands.add_parser("read")
     read.add_argument("--repo", required=True)
     read.add_argument("--envelope", required=True)
@@ -459,6 +691,8 @@ def main(argv: list[str] | None = None) -> int:
             result = create_assignment(args)
         elif args.command == "return":
             result = create_return(args)
+        elif args.command == "portfolio-return":
+            result = create_portfolio_return(args)
         elif args.command == "read":
             result = read_envelope(args)
         else:  # pragma: no cover

@@ -24,7 +24,10 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 - **Workflow-Clerk**：唯一可见的长期协调 session。它持有全局拓扑，使用 Codex
   原生 task 工具创建或复用 task、发送消息、接收返回、路由下一切面并向用户汇总。
 - **Portfolio**：只负责低频的跨方向选择、优先级、资源投入和 lifecycle 判断；它
-  把决定 RETURN 给 Clerk，不创建或派发 Root、EM、CM task。
+  使用 `.codex/prompts/hmasd-portfolio.md` 完成一次 bounded global decision wake。
+  单一 transport `direction_id=portfolio` 不限制全局比较；一个
+  `PORTFOLIO_RETURN.actions[]` 可表达多个既有/新方向决定，再由 Clerk 展开。它不
+  创建或派发 Root、EM、CM task。
 - **EM/<direction-id>/g<generation>**：只负责一个方向的科研语义；Research Scout、
   Research Innovator、Research Principles Analyst、Research Critic 与 Agentify
   external transport 是它的 direct leaves。材料方向变更或结论对象先经 constructive
@@ -38,14 +41,20 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 角色是责任边界，不是用户权限 gate。EM/CM 不需要了解全局拓扑，只需要知道自己
 可接收和必须返回的 envelope 格式。
 
+`.codex/prompts/hmasd-portfolio.md`、`.codex/prompts/hmasd-em.md` 与
+`.codex/prompts/hmasd-cm.md` 是三个 manager 唯一的 role-internal orchestration
+入口。Clerk does not choose or sequence their leaves；Clerk 只投递完整切面并根据
+RETURN 路由下一责任角色。
+
 Clerk 先按责任案例表处理：方向科研问题交 EM；方向代码、依赖、路径、Git、candidate、
 dossier、manifest、prepare、缺失实现或 Operator 交 CM；Pro external review 交 EM 的
 Agentify leaf；跨方向投资/lifecycle 交 Portfolio。只有真实用户材料选择、user-owned
 irreversible Effect、shared-core 语义修改、task identity conflict，或无法机械解释的
 协议矛盾才通知 Root；协议问题只发送事实，不把方向责任转给 Root。
 
-每个 EM assignment 必须引用 `.codex/prompts/hmasd-em.md`，每个 CM assignment 必须
-引用 `.codex/prompts/hmasd-cm.md`。assignment 可以限制路径、Effect 和是否允许当前
+每个 Portfolio assignment 必须引用 `.codex/prompts/hmasd-portfolio.md`，每个 EM
+assignment 必须引用 `.codex/prompts/hmasd-em.md`，每个 CM assignment 必须引用
+`.codex/prompts/hmasd-cm.md`。assignment 可以限制路径、Effect 和是否允许当前
 result-bearing command，但不得用“禁止 subagent”整体抹掉 manager 的 direct-leaf
 接口；静态切面无需 Operator 不等于后续 eligible 切面没有 Operator。
 
@@ -157,6 +166,12 @@ estimate/command/code SHA。
     已由 owner 精确回收，要么带 exact branch/HEAD/reason 明确保留。
 13. 不超过 7200 秒且满足既有 direction authority/resource/Effect 边界的本地
     PREPARED command 不触发 `REQUEST_USER`；Clerk 直接路由 CM 的唯一 Operator。
+14. Portfolio 的一次 global wake 可在一个 `PORTFOLIO_RETURN` 中产生多个方向
+    action；Clerk 在任何 send 前校验完整列表，并在同一事件 turn 投递所有独立 ready
+    action，不把比较拆成多个 Portfolio session。
+15. `http://127.0.0.1:8765` 的只读 Dashboard 可访问并显示 Portfolio lifecycle 与
+    各方向 research/engineering state；陈旧 task projection 有显式警告，Dashboard
+    不写 authority、不路由工作，停止服务也不改变 liveness。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。

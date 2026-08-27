@@ -30,6 +30,22 @@ Never persist this snapshot as a registry, JSON state machine, cache, receipt,
 or authority. Never infer a missing task identity from prose. Reuse an observed
 manager; report an identity conflict to Root instead of creating a duplicate.
 
+## Read-only local dashboard
+
+Keep the existing dashboard available at `http://127.0.0.1:8765`. At the start
+of an event turn, make one health request. If it is unavailable, start
+`scripts/hmasd_dashboard.py serve --root C:/Projects/HMASD --port 8765` as one
+hidden local process, then verify `/api/health` once. Do not start a second
+listener when the port is already healthy, and do not continuously poll it.
+
+The server reads Portfolio registry and direction state on each request. It is
+a read-only user projection: it does not write authority or route work, and
+Dashboard failure never changes direction liveness or blocks a ready send. A
+stale runtime task projection must remain visibly stale; do not turn it into a
+claim that a participant owns work. Native task list/read plus the correlated
+assignment/RETURN remains the liveness source. Dashboard logs and process IDs
+stay ignored runtime data.
+
 ## Direction liveness invariant
 
 For every selected direction, apply this classification priority and stop at
@@ -59,10 +75,20 @@ claims, implementation details, and failure prose never change the route.
 | `RETURN status=REQUEST_EM` | The same direction needs scientific responsibility | Existing `EM/<direction_id>/gN` |
 | `RETURN status=REQUEST_CM` | The same direction needs engineering responsibility | Existing `CM/<direction_id>/gN` |
 | `RETURN status=REQUEST_PORTFOLIO` | A low-frequency cross-direction investment/lifecycle decision is required | Send one bounded decision assignment to the single existing Portfolio task; Portfolio must RETURN the decision to Clerk and never dispatch another participant |
+| `PORTFOLIO_RETURN` from the single Portfolio task | One global Portfolio wake produced a complete set of direction actions | Validate the complete actions list before any send, then expand each action exactly as written |
 | `RETURN status=REQUEST_USER` | A material user decision is required | Root/user |
 | `RETURN status=FAILED` | A scoped project/direction/feature/effect failure occurred | Apply only the matching generic failure row below |
 | `RETURN status=DONE` | The assignment has no requested next responsibility | Accept a direction as terminal only when durable lifecycle is `CLOSED`; accept a bounded Root coordination assignment as locally done without closing the direction. Otherwise send one corrective ASSIGNMENT to the same participant requiring an explicit `REQUEST_EM`, `REQUEST_CM`, `REQUEST_PORTFOLIO`, or `REQUEST_USER` RETURN |
 | Stopped participant without correlated RETURN | Transport handoff is incomplete | Continue the same task and redeliver the same assignment locator |
+
+The Portfolio assignment uses the single transport direction_id `portfolio`;
+this is correlation, not a limit on Portfolio authority. For a validated
+`PORTFOLIO_RETURN`, route `REQUEST_EM` to that action's EM, `REQUEST_CM` to that
+action's CM, `REQUEST_USER` to Root/user, and closed/done to no participant.
+Validate the complete actions list before sending any action. Dispatch every
+independent ready action in the same event turn. Do not reinterpret
+Portfolio's comparison, priority, lifecycle, or new-direction decision, and do
+not split the comparison into one Portfolio assignment per direction.
 
 Never copy one direction's objective, evidence, failure, or lifecycle into another direction's envelope.
 When creating the next envelope, copy only the
@@ -98,14 +124,16 @@ record that existing Portfolio authority and the ordinary CM path can supply.
 ## Manager assignment construction
 
 Every EM assignment references `.codex/prompts/hmasd-em.md`; every CM
-assignment references `.codex/prompts/hmasd-cm.md`. Put that prompt path in
+assignment references `.codex/prompts/hmasd-cm.md`; every Portfolio assignment
+references `.codex/prompts/hmasd-portfolio.md`. Put that prompt path in
 `context_refs` and require the recipient to read it before acting. Never
-blanket-ban subagents in an EM or CM assignment. A bounded slice may forbid a
-result-bearing command without forbidding its Implementer, Reviewer, Verifier,
-or research review leaves. It may say that no Operator is needed for a static
-slice, but it must not erase the CM's Operator interface from later eligible
-work. The role prompt and exact slice constraints are cumulative; a slice may
-narrow Effects and paths, but cannot redefine the manager topology.
+blanket-ban subagents in an EM or CM assignment, and never erase Portfolio's
+bounded read-only leaf interface. A bounded slice may forbid a result-bearing
+command without forbidding its Implementer, Reviewer, Verifier, or research
+review leaves. It may say that no Operator is needed for a static slice, but it
+must not erase the CM's Operator interface from later eligible work. The role
+prompt and exact slice constraints are cumulative; a slice may narrow Effects
+and paths, but cannot redefine the manager topology.
 
 Portfolio is a decision participant, not a coordinator. It never creates or
 sends an ASSIGNMENT to Root, EM, or CM. After validating Portfolio's correlated

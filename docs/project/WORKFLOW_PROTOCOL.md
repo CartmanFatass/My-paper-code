@@ -129,9 +129,11 @@ BLOCKED 掩盖。未持有当前切面的其他 manager idle 不构成缺陷。
 ## Portfolio routing contract
 
 Portfolio 是低频的跨方向选择、优先级、资源投入与 lifecycle 决策者，不是普通
-EM/CM 调度者。它只在 Clerk 发送 `REQUEST_PORTFOLIO` 切面时形成决定，并把决定
-作为 correlated RETURN 发回 Clerk；Portfolio 不创建 task，不向 Root、EM 或 CM
-发送 ASSIGNMENT，也不等待这些角色。
+EM/CM 调度者。Clerk 使用单一 transport `direction_id=portfolio` 唤醒一次全局
+判断；该相关 ID 不限制 Portfolio 的研究范围。Portfolio 可在同一 wake 比较多个
+方向、打开新方向，并用 `portfolio-return` 生成一个
+`PORTFOLIO_RETURN.actions[]`；Portfolio 不创建 task，不向 Root、EM 或 CM 发送
+ASSIGNMENT，也不等待这些角色。
 
 Portfolio 对一个仍在投资范围内的方向必须在 RETURN 中选择下一责任类型，不能把
 “当前切面完成”或“实现尚不存在”自动解释为方向终止：
@@ -144,12 +146,18 @@ Portfolio 对一个仍在投资范围内的方向必须在 RETURN 中选择下�
 4. 需要用户材料决定：返回 `REQUEST_USER`。只有 durable lifecycle 已明确变为
    `CLOSED` 且无下一切面时才返回 terminal `DONE`。
 
-Clerk 读取 Portfolio RETURN 后才创建并发送下一 ASSIGNMENT。Portfolio 的决定与
-Clerk 的 transport 动作必须保持为两个不同责任。
+Clerk 在发送任何下一 ASSIGNMENT 前先原子校验完整 actions 列表，再在同一事件
+turn 展开所有独立 ready action。每个 action 只携带自己的 direction ID、refs、
+lifecycle、status 与 next objective；Clerk 不重做 Portfolio 比较。Portfolio 的决定
+与 Clerk 的 transport 动作必须保持为两个不同责任。
 Portfolio 的 `REQUEST_PORTFOLIO` body 会在 RETURN 文件创建前被 envelope CLI
 拒绝。Portfolio 在同一 assignment 下修正 body，并重新运行 `return`，选择
 `REQUEST_EM`、`REQUEST_CM`、`REQUEST_USER` 或合法 terminal `DONE`；Clerk 不会
 收到或路由 Portfolio self-request。
+
+新 global wake 的 action/lifecycle 对固定为：`ACTIVE` + `REQUEST_EM` 或
+`REQUEST_CM`，`PARKED` + `REQUEST_USER`，`CLOSED` + `DONE`。普通 `return`
+仅用于完成已经在途、明确要求旧格式的 Portfolio assignment。
 
 只有明确的科学否决、资源否决、用户决定，或已经证明该方向没有任何可执行的
 科研/工程切面时，Portfolio 才能 PARK/CLOSE。缺少现成实现、测试或 CLI 本身必须
@@ -162,6 +170,11 @@ Workflow-Clerk 的完整运行说明是
 scope 路由，不能从方向 prose 推导全局状态。每次处理新事件先由 Codex task
 list/read 获取当前 Portfolio、EM、CM 的 exact task ID/generation/status，形成仅存在
 于当前 turn 的 topology snapshot；不得写入第二 registry 或 task cache。
+
+Clerk 同时维持现有 `scripts/hmasd_dashboard.py` 在
+`http://127.0.0.1:8765` 可用。Dashboard 每次请求只读 Portfolio registry 与方向
+state；它不写 authority、不路由工作，陈旧 task projection 必须显示为陈旧，且
+服务故障不改变任何方向 liveness。
 
 多个正交方向 ready 时，Clerk 必须在本 turn 生成并发送全部独立 assignment，然后
 结束事件 turn；普通事件 turn 不调用 wait，RETURN 的原生消息会再次唤醒 Clerk。
@@ -179,10 +192,12 @@ identity conflict，或无法由协议机械解释的矛盾；最后一种只上
 转交 Root。
 
 Clerk 构造 EM assignment 时必须把 `.codex/prompts/hmasd-em.md` 放入 context refs；
-构造 CM assignment 时必须同样引用 `.codex/prompts/hmasd-cm.md`。slice 可以冻结路径、
-Effect 并禁止当前 result-bearing command，但不能 blanket-ban subagent 而删除 EM/CM
-的 direct-leaf 接口。静态 CM slice 可以明确“不需要 Operator”，但不能把这一点扩展
-成后续 eligible execution slice 的全局禁令。
+构造 CM assignment 时必须同样引用 `.codex/prompts/hmasd-cm.md`；构造 Portfolio
+assignment 时引用 `.codex/prompts/hmasd-portfolio.md`。三个 prompt 是各 manager 的
+role-internal orchestration 入口。Clerk does not choose or sequence their leaves。
+slice 可以冻结路径、Effect 并禁止当前 result-bearing command，但不能 blanket-ban
+subagent 而删除 EM/CM 的 direct-leaf 接口。静态 CM slice 可以明确“不需要
+Operator”，但不能把这一点扩展成后续 eligible execution slice 的全局禁令。
 
 ## Participant Git completion
 

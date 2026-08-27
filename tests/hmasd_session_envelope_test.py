@@ -6,6 +6,8 @@ import sys
 import uuid
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "hmasd_session_envelope.py"
@@ -423,7 +425,7 @@ def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
         "--repo",
         str(tmp_path),
         "--direction-id",
-        "ucope",
+        "portfolio",
         "--sender-identity",
         "Workflow-Clerk",
         "--sender-thread-id",
@@ -463,3 +465,271 @@ def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
     assert returned.returncode == 2
     assert "Portfolio cannot return REQUEST_PORTFOLIO" in returned.stderr
     assert not (tmp_path / assignment_locator.replace(".assignment.json", ".return.json")).exists()
+
+
+def test_new_portfolio_assignment_requires_global_transport_direction(
+    tmp_path: Path,
+) -> None:
+    body = tmp_path / "portfolio-assignment-body.json"
+    write_json(
+        body,
+        {
+            "objective": "compare the global portfolio",
+            "context_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+            "owned_paths": ["docs/research/portfolio/"],
+            "constraints": ["do not split this wake by direction"],
+            "done_when": ["send one portfolio return"],
+        },
+    )
+
+    result = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "ucope",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(body),
+    )
+
+    assert result.returncode == 2
+    assert "Portfolio assignment direction_id must be portfolio" in result.stderr
+    assert not (tmp_path / ".codex/runtime/session-envelopes").exists()
+
+
+def test_portfolio_return_carries_multiple_direction_actions_from_one_global_wake(
+    tmp_path: Path,
+) -> None:
+    assignment_body_path = tmp_path / "portfolio-assignment-body.json"
+    write_json(
+        assignment_body_path,
+        {
+            "objective": "compare the portfolio and choose all material next actions",
+            "context_refs": [
+                "docs/research/portfolio/PORTFOLIO.md",
+                "docs/research/portfolio/workflow/registry.json",
+            ],
+            "owned_paths": ["docs/research/portfolio/"],
+            "constraints": ["maintain the total research picture"],
+            "done_when": ["return every material direction action to Clerk"],
+        },
+    )
+    assigned = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "portfolio",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(assignment_body_path),
+    )
+    assert assigned.returncode == 0, assigned.stderr
+    assignment_locator = json.loads(assigned.stdout)["locator"]
+    assignment = json.loads((tmp_path / assignment_locator).read_text(encoding="utf-8"))
+
+    body = {
+        "summary": "one global wake selected three independent actions",
+        "changed_paths": ["docs/research/portfolio/PORTFOLIO.md"],
+        "artifact_refs": ["docs/research/portfolio/workflow/registry.json"],
+        "actions": [
+            {
+                "direction_id": "new_uav_direction",
+                "lifecycle": "ACTIVE",
+                "status": "REQUEST_EM",
+                "summary": "open the new direction with a scientific definition slice",
+                "artifact_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+                "next_objective": "freeze the new direction science card",
+                "failure": None,
+            },
+            {
+                "direction_id": "metric_ground_transport_allocation",
+                "lifecycle": "ACTIVE",
+                "status": "REQUEST_CM",
+                "summary": "continue the accepted engineering investment",
+                "artifact_refs": [
+                    "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md"
+                ],
+                "next_objective": "complete the accepted implementation slice",
+                "failure": None,
+            },
+            {
+                "direction_id": "retired_direction",
+                "lifecycle": "CLOSED",
+                "status": "DONE",
+                "summary": "close the direction with its durable portfolio reason",
+                "artifact_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+                "next_objective": None,
+                "failure": None,
+            },
+        ],
+        "failure": None,
+    }
+    body_path = tmp_path / "portfolio-return-body.json"
+    write_json(body_path, body)
+
+    returned = run_cli(
+        "portfolio-return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        assignment_locator,
+        "--body",
+        str(body_path),
+    )
+
+    assert returned.returncode == 0, returned.stderr
+    output = json.loads(returned.stdout)
+    expected_locator = assignment_locator.replace(
+        ".assignment.json", ".portfolio-return.json"
+    )
+    assert output == {
+        "locator": expected_locator,
+        "message": f"HMASD_SESSION_ENVELOPE_V1 {expected_locator}",
+        "recipient_thread_id": "clerk-thread",
+    }
+    envelope = json.loads((tmp_path / expected_locator).read_text(encoding="utf-8"))
+    assert envelope == {
+        "schema_version": 1,
+        "message_id": f"{assignment['message_id']}:portfolio-return",
+        "direction_id": "portfolio",
+        "sender": assignment["recipient"],
+        "recipient": assignment["sender"],
+        "kind": "PORTFOLIO_RETURN",
+        "reply_to": assignment["message_id"],
+        "body": {
+            **body,
+            "actions": sorted(body["actions"], key=lambda action: action["direction_id"]),
+        },
+    }
+
+    read_back = run_cli(
+        "read",
+        "--repo",
+        str(tmp_path),
+        "--envelope",
+        expected_locator,
+    )
+    assert read_back.returncode == 0, read_back.stderr
+    assert json.loads(read_back.stdout)["envelope"] == envelope
+
+
+@pytest.mark.parametrize(
+    ("actions", "expected_error"),
+    [
+        (
+            [
+                {
+                    "direction_id": "ucope",
+                    "lifecycle": "ACTIVE",
+                    "status": "DONE",
+                    "summary": "invalid terminal action",
+                    "artifact_refs": [],
+                    "next_objective": None,
+                    "failure": None,
+                }
+            ],
+            "lifecycle/status combination is invalid",
+        ),
+        (
+            [
+                {
+                    "direction_id": "ucope",
+                    "lifecycle": "ACTIVE",
+                    "status": "REQUEST_EM",
+                    "summary": "first route",
+                    "artifact_refs": [],
+                    "next_objective": "continue science",
+                    "failure": None,
+                },
+                {
+                    "direction_id": "ucope",
+                    "lifecycle": "ACTIVE",
+                    "status": "REQUEST_CM",
+                    "summary": "conflicting route",
+                    "artifact_refs": [],
+                    "next_objective": "continue engineering",
+                    "failure": None,
+                },
+            ],
+            "duplicate direction_id",
+        ),
+    ],
+)
+def test_portfolio_return_rejects_invalid_or_duplicate_direction_actions(
+    tmp_path: Path,
+    actions: list[dict[str, object]],
+    expected_error: str,
+) -> None:
+    assignment_body = tmp_path / "assignment-body.json"
+    write_json(
+        assignment_body,
+        {
+            "objective": "make one global portfolio decision",
+            "context_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+            "owned_paths": ["docs/research/portfolio/"],
+            "constraints": ["return one complete action list"],
+            "done_when": ["send the portfolio return to Clerk"],
+        },
+    )
+    assigned = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "portfolio",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(assignment_body),
+    )
+    assert assigned.returncode == 0, assigned.stderr
+    locator = json.loads(assigned.stdout)["locator"]
+    body_path = tmp_path / "portfolio-return-body.json"
+    write_json(
+        body_path,
+        {
+            "summary": "invalid action list",
+            "changed_paths": [],
+            "artifact_refs": [],
+            "actions": actions,
+            "failure": None,
+        },
+    )
+
+    returned = run_cli(
+        "portfolio-return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        locator,
+        "--body",
+        str(body_path),
+    )
+
+    assert returned.returncode == 2
+    assert expected_error in returned.stderr
+    assert not (
+        tmp_path / locator.replace(".assignment.json", ".portfolio-return.json")
+    ).exists()

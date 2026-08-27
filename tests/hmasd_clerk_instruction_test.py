@@ -117,6 +117,43 @@ def test_clerk_assignments_preserve_manager_leaf_interfaces() -> None:
 
     assert "every em assignment references `.codex/prompts/hmasd-em.md`" in normalized
     assert "every cm assignment references `.codex/prompts/hmasd-cm.md`" in normalized
+    assert "every portfolio assignment references `.codex/prompts/hmasd-portfolio.md`" in normalized
     assert "never blanket-ban subagents in an em or cm assignment" in normalized
+    assert "never erase portfolio's bounded read-only leaf interface" in normalized
     assert "may forbid a result-bearing command without forbidding" in normalized
     assert "implementer, reviewer, verifier, or research review leaves" in normalized
+
+
+def test_clerk_expands_one_global_portfolio_return_without_reinterpreting_it() -> None:
+    text = (ROOT / ".codex/prompts/hmasd-workflow-clerk.md").read_text(
+        encoding="utf-8"
+    )
+    normalized = " ".join(text.split()).casefold()
+
+    assert "portfolio_return" in normalized
+    assert "single transport direction_id `portfolio`" in normalized
+    assert "validate the complete actions list before sending any action" in normalized
+    assert "request_em" in normalized
+    assert "request_cm" in normalized
+    assert "request_user" in normalized
+    assert "closed/done" in normalized
+    assert "dispatch every independent ready action in the same event turn" in normalized
+    assert "do not reinterpret portfolio's comparison, priority, lifecycle, or new-direction decision" in normalized
+
+
+def test_clerk_keeps_the_existing_local_dashboard_available_without_owning_state() -> None:
+    text = (ROOT / ".codex/prompts/hmasd-workflow-clerk.md").read_text(
+        encoding="utf-8"
+    )
+    normalized = " ".join(text.split()).casefold()
+
+    for required in (
+        "## read-only local dashboard",
+        "http://127.0.0.1:8765",
+        "scripts/hmasd_dashboard.py serve",
+        "reads portfolio registry and direction state on each request",
+        "does not write authority or route work",
+        "dashboard failure never changes direction liveness",
+        "stale runtime task projection",
+    ):
+        assert required in normalized
