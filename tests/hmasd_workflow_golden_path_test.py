@@ -710,7 +710,17 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("stdout_marker_wrong", "OPERATOR_STDOUT_MARKER_MISMATCH"),
         ("cm_early_return", "OPERATOR_CHILD_NOT_TERMINAL"),
         ("cm_refs_empty", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_legacy_without_result", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_result_duplicate", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_result_extra", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_result_reordered", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_refs_result_wrong_path", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_state_wrong", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_verification_includes_result", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_verification_missing", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_verification_reordered", "CM_OPERATOR_REFS_MISMATCH"),
         ("cm_refs_wrong_fresh", "CM_OPERATOR_REFS_MISMATCH"),
+        ("cm_changed_paths_owned", None),
         ("candidate_read_unknown", "OPERATOR_CHILD_READ_UNKNOWN"),
         ("candidate_binding_unknown", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("assignment_final_spoof", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
@@ -868,6 +878,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 bound=case != "candidate_binding_unknown",
             )
             self.collision_id = str(collision["id"])
+            self.operator_result_ref: dict[str, str] | None = None
             self.threads: dict[str, dict[str, Any]] = {
                 "thread-cm-alpha": {
                     "id": "thread-cm-alpha",
@@ -1068,6 +1079,10 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 assert completed.returncode == 0
                 result_path = manifest.parent / "operator-result.json"
                 operator_result = json.loads(result_path.read_text(encoding="utf-8"))
+                self.operator_result_ref = _file_ref(
+                    repo,
+                    "temp/directions/alpha/exp/golden-run/operator-result.json",
+                )
                 manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
                 if case == "wrong_manifest_owner":
                     manifest_document["writer"] = "Operator-other"
@@ -1123,11 +1138,9 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     }
                 elif case == "result_summary_tampered":
                     operator_result["summary"] = "A schema-valid tampered summary."
-                if case == "result_missing":
-                    result_path.unlink()
-                elif case == "result_malformed":
+                if case == "result_malformed":
                     result_path.write_text("not-json", encoding="utf-8")
-                else:
+                elif case != "result_missing":
                     _canonical_write(result_path, operator_result)
                 if case in {"child_nonterminal", "cm_early_return"}:
                     operator_thread["turns"][-1]["status"] = "inProgress"
@@ -1216,6 +1229,15 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     )
             if attempt != 1 or case == "cm_early_return":
                 manifest_ref = _file_ref(repo, manifest_locator)
+                result_ref = (
+                    _file_ref(
+                        repo,
+                        "temp/directions/alpha/exp/golden-run/operator-result.json",
+                    )
+                    if (manifest.parent / "operator-result.json").is_file()
+                    else self.operator_result_ref
+                )
+                assert result_ref is not None
                 stdout_ref = _file_ref(
                     repo, "temp/directions/alpha/exp/golden-run/stdout.log"
                 )
@@ -1233,7 +1255,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     "summary": "The frozen Operator run reached one terminal result.",
                     "changed_paths": [manifest_ref["path"]],
                     "state_refs": [manifest_ref],
-                    "artifact_refs": [stdout_ref, stderr_ref],
+                    "artifact_refs": [result_ref, stdout_ref, stderr_ref],
                     "checkpoint_sha": None,
                     "decision_requests": [],
                     "next_action": {"kind": "NONE", "input_refs": []},
@@ -1251,16 +1273,55 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     cm_result["state_refs"] = []
                     cm_result["artifact_refs"] = []
                     cm_result["payload"]["verification_refs"] = []
+                elif case == "cm_refs_legacy_without_result":
+                    cm_result["artifact_refs"] = [stdout_ref, stderr_ref]
+                elif case == "cm_refs_result_duplicate":
+                    cm_result["artifact_refs"] = [
+                        result_ref,
+                        result_ref,
+                        stdout_ref,
+                        stderr_ref,
+                    ]
+                elif case == "cm_refs_result_extra":
+                    cm_result["artifact_refs"].append(request_ref)
+                elif case == "cm_refs_result_reordered":
+                    cm_result["artifact_refs"] = [stdout_ref, result_ref, stderr_ref]
+                elif case == "cm_refs_result_wrong_path":
+                    cm_result["artifact_refs"][0] = request_ref
+                elif case == "cm_state_wrong":
+                    cm_result["state_refs"] = [request_ref]
+                elif case == "cm_verification_includes_result":
+                    cm_result["payload"]["verification_refs"] = [
+                        manifest_ref,
+                        result_ref,
+                        stdout_ref,
+                        stderr_ref,
+                    ]
+                elif case == "cm_verification_missing":
+                    cm_result["payload"]["verification_refs"] = [
+                        manifest_ref,
+                        stdout_ref,
+                    ]
+                elif case == "cm_verification_reordered":
+                    cm_result["payload"]["verification_refs"] = [
+                        stdout_ref,
+                        manifest_ref,
+                        stderr_ref,
+                    ]
                 elif case == "cm_refs_wrong_fresh":
                     cm_result["state_refs"] = [request_ref]
                     cm_result["artifact_refs"] = [request_ref]
                     cm_result["payload"]["verification_refs"] = [request_ref]
+                elif case == "cm_changed_paths_owned":
+                    cm_result["changed_paths"] = [result_ref["path"]]
                 packets.publish_return(
                     repo=repo,
                     work_id=cm_packet["work_id"],
                     observed_tasks=[cm_task],
                     agent_result=cm_result,
                 )
+                if case == "result_missing":
+                    (manifest.parent / "operator-result.json").unlink()
                 cm_return_count += 1
             self.transport._emit(
                 request_id,
@@ -1306,6 +1367,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
     assert "RETURN_WITNESS_PRESENT" in json.dumps(first["events"], sort_keys=True)
     assert first["stop"]["return_witness"]["agent_result"]["artifact_refs"] == [
+        _file_ref(repo, "temp/directions/alpha/exp/golden-run/operator-result.json"),
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
         _file_ref(repo, "temp/directions/alpha/exp/golden-run/stderr.log"),
     ]
@@ -1338,6 +1400,19 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         "parent_identity": "CM-alpha",
         "protocol": "hmasd.experiment-operator.assignment.v1",
         "result_locator": "temp/directions/alpha/exp/golden-run/operator-result.json",
+        "cm_return_contract": {
+            "artifact_refs": [
+                "temp/directions/alpha/exp/golden-run/operator-result.json",
+                "temp/directions/alpha/exp/golden-run/stdout.log",
+                "temp/directions/alpha/exp/golden-run/stderr.log",
+            ],
+            "state_refs": [manifest_locator],
+            "verification_refs": [
+                manifest_locator,
+                "temp/directions/alpha/exp/golden-run/stdout.log",
+                "temp/directions/alpha/exp/golden-run/stderr.log",
+            ],
+        },
         "run_id": "golden-run",
         "run_owner": "Operator-golden-run",
         "result_contract": {
@@ -1375,6 +1450,21 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     assert manifest_document["process"]["exit_code"] == 0
     assert manifest_document["process"]["group_quiescent"] is True
     assert (manifest.parent / "stdout.log").read_text(encoding="utf-8").count(marker) == 1
+    operator_result_document = json.loads(
+        (manifest.parent / "operator-result.json").read_text(encoding="utf-8")
+    )
+    operator_result_ref = _file_ref(
+        repo, "temp/directions/alpha/exp/golden-run/operator-result.json"
+    )
+    assert operator_result_document["state_refs"] == [_file_ref(repo, manifest_locator)]
+    assert operator_result_document["artifact_refs"] == [
+        _file_ref(repo, "temp/directions/alpha/exp/golden-run/stdout.log"),
+        _file_ref(repo, "temp/directions/alpha/exp/golden-run/stderr.log"),
+    ]
+    assert operator_result_ref not in [
+        *operator_result_document["state_refs"],
+        *operator_result_document["artifact_refs"],
+    ]
     assert operator_create_count == 1
     assert execute_count == 1
     assert cm_return_count == 1

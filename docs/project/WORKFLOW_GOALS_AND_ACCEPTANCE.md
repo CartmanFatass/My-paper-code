@@ -21,6 +21,8 @@ skill、测试夹具或运行记录不得改变这些目标。若当前实现与
 - Portfolio、EM、CM、Operator 只接收自己的工作切面，完成局部工作并返回；
   不协调其他 session。
 - 机械动作由 scripts 和统一协议完成，LLM 不自行解释状态机、不发明 gate。
+- 实验成功由 script 机械发布 `operator-result.json`（R）；R 精确引用 manifest
+  （M）与 stdout/stderr（S/E），CM return 精确携带 M、R、S、E 的约定 refs。
 - 研究→代码→实验→结果能够无人值守连续运行；故障按
   project/direction/feature/Effect 精确限定，有限修复后才请求用户。
 - 多方向并行时路径和 Effect 正交；方向可在自有目录直接 Git，worktree 不是

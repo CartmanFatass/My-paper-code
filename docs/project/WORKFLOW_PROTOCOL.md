@@ -67,6 +67,14 @@ top-level task intake，不走普通 packet 合同。
   refs/revisions、exact owned paths、done criteria、Effect refs 和 receiver
   identity；draft 是候选输入，不是 authority，也不自动发布。
 
+成功实验由 `hmasd_run.py` 机械发布固定 `operator-result.json`（R）。令 M 为
+manifest、S/E 为 stdout/stderr：R 自身精确保持 `state_refs=[M]`、
+`artifact_refs=[S,E]`，不 self-reference；CM typed return 精确保持
+`state_refs=[M]`、`artifact_refs=[R,S,E]`、
+`payload.verification_refs=[M,S,E]`，顺序固定且无额外或重复 ref。R 是既有 run
+evidence 的机械文件表示，不是新的 workflow primitive、authority、receipt 或
+completion ledger。
+
 不得使用裸 `BLOCKED` 传播故障。结果必须给出 `failure_scope`（project、
 direction、feature 或 effect）和 `failure_ref`；没有范围的 blocked 结果为
 `CONFLICT`。

@@ -1565,6 +1565,11 @@ class AppServerClient:
             "parent_identity": target_identity,
             "protocol": OPERATOR_ASSIGNMENT_MARKER,
             "result_locator": result_locator,
+            "cm_return_contract": {
+                "state_refs": [manifest_locator],
+                "artifact_refs": [result_locator, stdout_ref, stderr_ref],
+                "verification_refs": [manifest_locator, stdout_ref, stderr_ref],
+            },
             "run_id": run_id,
             "run_owner": run_owner,
             "result_contract": {
@@ -1753,7 +1758,8 @@ class AppServerClient:
         ):
             return cls._operator_evidence_error("OPERATOR_RESULT_MISSING")
         try:
-            result = json.loads(result_path.read_text(encoding="utf-8"))
+            result_bytes = result_path.read_bytes()
+            result = json.loads(result_bytes.decode("utf-8"))
         except (OSError, UnicodeDecodeError, json.JSONDecodeError):
             return cls._operator_evidence_error("OPERATOR_RESULT_MALFORMED")
         if not isinstance(result, Mapping):
@@ -1832,7 +1838,39 @@ class AppServerClient:
             return cls._operator_evidence_error("OPERATOR_RESULT_BINDING_MISMATCH")
         if dict(result) != expected_result:
             return cls._operator_evidence_error("OPERATOR_RESULT_BINDING_MISMATCH")
-        return {"status": "VALID", "thread_id": observation["thread_id"], "refs": expected_refs}
+        try:
+            observed_result_bytes = result_path.read_bytes()
+        except OSError:
+            return cls._operator_evidence_error("OPERATOR_RESULT_REF_STALE")
+        if observed_result_bytes != result_bytes:
+            return cls._operator_evidence_error("OPERATOR_RESULT_REF_STALE")
+        result_ref = {
+            "path": result_locator,
+            "sha256": hmasd_state.sha256_bytes(observed_result_bytes),
+        }
+        contract = assignment.get("cm_return_contract")
+        ref_by_path = {
+            reference["path"]: reference
+            for reference in [manifest_ref, result_ref, expected_refs[1], expected_refs[2]]
+        }
+        if not isinstance(contract, Mapping) or set(contract) != {
+            "state_refs",
+            "artifact_refs",
+            "verification_refs",
+        }:
+            return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
+        try:
+            cm_return_refs = {
+                key: [ref_by_path[path] for path in contract[key]]
+                for key in ("state_refs", "artifact_refs", "verification_refs")
+            }
+        except (KeyError, TypeError):
+            return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
+        return {
+            "status": "VALID",
+            "thread_id": observation["thread_id"],
+            "cm_return_refs": cm_return_refs,
+        }
 
     @classmethod
     def _completed_operator_return(
@@ -1854,11 +1892,13 @@ class AppServerClient:
         if evidence.get("status") != "VALID":
             return evidence
         result = return_fact["return_witness"]["agent_result"]
-        manifest_ref, stdout_ref, stderr_ref = evidence["refs"]
-        if (result.get("state_refs") != [manifest_ref]
-                or result.get("artifact_refs") != [stdout_ref, stderr_ref]
-                or result.get("payload", {}).get("verification_refs")
-                != [manifest_ref, stdout_ref, stderr_ref]):
+        expected = evidence["cm_return_refs"]
+        if (
+            result.get("state_refs") != expected["state_refs"]
+            or result.get("artifact_refs") != expected["artifact_refs"]
+            or result.get("payload", {}).get("verification_refs")
+            != expected["verification_refs"]
+        ):
             return cls._operator_evidence_error("CM_OPERATOR_REFS_MISMATCH")
         return {
             **return_fact,
