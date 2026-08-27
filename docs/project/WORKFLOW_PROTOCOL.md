@@ -124,6 +124,15 @@ input and resumes the normal topology with a new Clerk-generated assignment.
    task，并重用原 assignment locator；不得创建重复 manager。
 4. envelope 文件存在不等于消息已发送。Codex task history 中可见的原生消息才是
    hop 已交接的事实。
+5. Clerk 在 ingress 后和 final 前各运行一次纯 `liveness` 投影。第二次是 bounded
+   drain：同一 active turn 中新注入的 locator 必须在结束前处理；若 task 已停止且
+   无 RETURN，程序只重投同一 assignment locator。
+6. `liveness` 输入只含 native task `id/name/status`、recipient history 中实际可见的
+   每方向唯一 outstanding current locator，以及 native owner 的 exact
+   pause/heartbeat/experiment 观察。ASSIGNMENT 在 correlated RETURN 可见后清除；
+   RETURN 在 next ASSIGNMENT 或 terminal/user summary 可见后清除。它不扫描
+   envelope 目录来猜 delivery，也不按文件 mtime 猜当前事件；assignment 的
+   `context_refs` 与 RETURN `reply_to` 是因果关联。
 
 ## Direction liveness invariant
 
@@ -190,11 +199,15 @@ list/read 获取当前 Portfolio、EM、CM 的 exact task ID/generation/status�
 
 Clerk 同时维持现有 `scripts/hmasd_dashboard.py` 在
 `http://127.0.0.1:8765` 可用。Dashboard 每次请求只读 Portfolio registry 与方向
-state；它不写 authority、不路由工作，陈旧 task projection 必须显示为陈旧，且
-服务故障不改变任何方向 liveness。
+state，并在独立 Clerk tab 显示 ignored `.codex/runtime/clerk-liveness.json`；它不写
+authority、不路由工作，陈旧 task projection 必须显示为陈旧，且服务故障不改变
+任何方向 liveness。
 
 多个正交方向 ready 时，Clerk 必须在本 turn 生成并发送全部独立 assignment，然后
-结束事件 turn；普通事件 turn 不调用 wait，RETURN 的原生消息会再次唤醒 Clerk。
+在 final 前用新鲜 native task/history observations 再运行一次
+`hmasd_session_envelope.py liveness` 并执行
+所有 machine-emitted action。普通事件 turn 不调用 wait；新的原生消息通常会再次
+唤醒 Clerk，而 active turn 内合并到达的消息由这次 bounded drain 回收。
 某方向的 memory refusal、REQUEST_USER 或 feature failure 不得延迟其他
 方向的 ready send。跨方向汇总只能发给 Root/user，不能作为 participant 的
 assignment。

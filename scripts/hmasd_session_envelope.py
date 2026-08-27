@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -60,6 +61,9 @@ _PORTFOLIO_LIFECYCLE_STATUSES = {
     "CLOSED": {"DONE"},
 }
 _TRANSPORT_MESSAGE = re.compile(r"HMASD_SESSION_ENVELOPE_V1 ([^\s]+)")
+_TIMESTAMP_RE = re.compile(
+    r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?Z"
+)
 
 
 class EnvelopeError(ValueError):
@@ -725,6 +729,395 @@ def read_message(args: argparse.Namespace) -> dict[str, Any]:
     )
 
 
+def _task_facts(value: Mapping[str, Any]) -> dict[str, dict[str, str]]:
+    threads = value.get("threads")
+    if not isinstance(threads, list):
+        raise EnvelopeError("liveness observations threads must be a list")
+    facts: dict[str, dict[str, str]] = {}
+    manager_scopes: dict[tuple[str, str], str] = {}
+    for index, thread in enumerate(threads):
+        status = thread.get("status") if isinstance(thread, Mapping) else None
+        thread_id = thread.get("id") if isinstance(thread, Mapping) else None
+        name = thread.get("name") if isinstance(thread, Mapping) else None
+        if (
+            not isinstance(thread_id, str) or not thread_id
+            or not isinstance(name, str) or not name
+            or not isinstance(status, Mapping)
+            or not isinstance(status.get("type"), str)
+        ):
+            raise EnvelopeError(f"liveness observations threads[{index}] is invalid")
+        if thread_id in facts:
+            raise EnvelopeError("liveness observations contain duplicate task id")
+        manager = _MANAGER.fullmatch(name)
+        scope = (manager.group(1), manager.group(2)) if manager else (name, "")
+        if name in {"Root", "Workflow-Clerk", "Portfolio"} or manager:
+            if scope in manager_scopes:
+                raise EnvelopeError("liveness observations contain duplicate manager identity")
+            manager_scopes[scope] = thread_id
+        fact = {"name": name, "status": str(status["type"])}
+        for source, target in (("agent_role", "agent_role"), ("parent_thread_id", "parent_thread_id")):
+            if isinstance(thread.get(source), str):
+                fact[target] = str(thread[source])
+        facts[thread_id] = fact
+    return facts
+
+
+def _current_messages(
+    repo: Path, value: Mapping[str, Any], tasks: Mapping[str, Mapping[str, str]]
+) -> dict[str, dict[str, Any]]:
+    rows = value.get("directions")
+    if not isinstance(rows, list):
+        raise EnvelopeError("liveness observations directions must be a list")
+    current: dict[str, dict[str, Any]] = {}
+    for index, item in enumerate(rows):
+        direction_id = item.get("direction_id") if isinstance(item, Mapping) else None
+        locator = item.get("locator") if isinstance(item, Mapping) else None
+        recipient_thread_id = item.get("recipient_thread_id") if isinstance(item, Mapping) else None
+        if (
+            not isinstance(direction_id, str) or _DIRECTION.fullmatch(direction_id) is None
+            or not isinstance(locator, str) or not isinstance(recipient_thread_id, str)
+        ):
+            raise EnvelopeError(f"liveness observations directions[{index}] is invalid")
+        if direction_id in current:
+            raise EnvelopeError("liveness observations contain duplicate direction")
+        result = read_envelope(argparse.Namespace(repo=str(repo), envelope=locator))
+        envelope = result["envelope"]
+        task = tasks.get(recipient_thread_id)
+        if (
+            result["recipient_thread_id"] != recipient_thread_id
+            or task is None or task["name"] != envelope["recipient"]["identity"]
+        ):
+            raise EnvelopeError("current locator recipient task identity does not match")
+        relevant = envelope["direction_id"] == direction_id
+        if envelope["direction_id"] == "portfolio":
+            relevant = (
+                True
+                if envelope["kind"] == "ASSIGNMENT"
+                else any(action["direction_id"] == direction_id for action in envelope["body"]["actions"])
+            )
+        if not relevant:
+            raise EnvelopeError("current locator does not match direction")
+        current[direction_id] = {"envelope": envelope, "locator": locator}
+    return current
+
+
+def _identity_role(identity: str | None) -> str | None:
+    if not isinstance(identity, str):
+        return None
+    if identity.startswith("EM/"):
+        return "EM"
+    if identity.startswith("CM/"):
+        return "CM"
+    if identity == "Portfolio":
+        return "PORTFOLIO"
+    if identity == "Root":
+        return "ROOT"
+    return None
+
+
+def _indexed_observations(value: Mapping[str, Any], field: str) -> dict[str, Mapping[str, Any]]:
+    rows = value.get(field)
+    if not isinstance(rows, list):
+        raise EnvelopeError(f"liveness observations {field} must be a list")
+    indexed: dict[str, Mapping[str, Any]] = {}
+    for index, row in enumerate(rows):
+        direction_id = row.get("direction_id") if isinstance(row, Mapping) else None
+        if not isinstance(direction_id, str) or _DIRECTION.fullmatch(direction_id) is None:
+            raise EnvelopeError(f"liveness observations {field}[{index}] is invalid")
+        if direction_id in indexed:
+            raise EnvelopeError(f"liveness observations {field} contain duplicate direction")
+        indexed[direction_id] = row
+    return indexed
+
+
+def _validate_assignment_observation(
+    direction_id: str,
+    observation: Mapping[str, Any],
+    current: Mapping[str, Mapping[str, Any]],
+    tasks: Mapping[str, Mapping[str, str]],
+) -> Mapping[str, Any]:
+    locator = observation.get("assignment_locator")
+    event = current.get(direction_id)
+    if not isinstance(locator, str) or event is None or event["locator"] != locator:
+        raise EnvelopeError("liveness observation assignment is not the current delivered locator")
+    envelope = event["envelope"]
+    if envelope["kind"] != "ASSIGNMENT" or envelope["direction_id"] != direction_id:
+        raise EnvelopeError("liveness observation assignment does not match direction")
+    owner_thread_id = observation.get("owner_thread_id")
+    if owner_thread_id is not None and (
+        owner_thread_id != envelope["recipient"]["thread_id"] or owner_thread_id not in tasks
+    ):
+        raise EnvelopeError("liveness observation owner does not match assignment")
+    return envelope
+
+
+def _liveness_row(
+    repo: Path,
+    direction: Mapping[str, Any],
+    tasks: Mapping[str, Mapping[str, str]],
+    current: Mapping[str, Mapping[str, Any]],
+    pauses: Mapping[str, Mapping[str, Any]],
+    heartbeats: Mapping[str, Mapping[str, Any]],
+    experiments: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    direction_id = direction.get("id")
+    lifecycle = direction.get("lifecycle")
+    if not isinstance(direction_id, str) or _DIRECTION.fullmatch(direction_id) is None:
+        raise EnvelopeError("Portfolio registry direction id is invalid")
+    if lifecycle not in {"ACTIVE", "PARKED", "CLOSED", "REGISTERED"}:
+        raise EnvelopeError("Portfolio registry direction lifecycle is invalid")
+    base: dict[str, Any] = {
+        "direction_id": direction_id,
+        "lifecycle": lifecycle,
+        "stage": None,
+        "reason": None,
+        "owner_identity": None,
+        "task_status": None,
+        "next_owner": None,
+        "assignment_locator": None,
+        "return_locator": None,
+        "recovery_kind": None,
+    }
+    event = current.get(direction_id)
+    if event is not None and event["envelope"]["kind"] != "ASSIGNMENT":
+        envelope = event["envelope"]
+        status = envelope["body"].get("status")
+        if envelope["kind"] == "PORTFOLIO_RETURN":
+            action = next(
+                item for item in envelope["body"]["actions"]
+                if item["direction_id"] == direction_id
+            )
+            status = action["status"]
+        next_owner = {
+            "REQUEST_EM": "EM", "REQUEST_CM": "CM",
+            "REQUEST_PORTFOLIO": "PORTFOLIO", "REQUEST_USER": "ROOT",
+            "FAILED": "PORTFOLIO" if envelope["kind"] == "PORTFOLIO_RETURN" else _identity_role(envelope["sender"]["identity"]),
+            "DONE": None,
+        }.get(status)
+        base.update(
+            stage="TRANSPORT_GAP", reason="RETURN_NOT_ROUTED",
+            owner_identity=envelope["sender"]["identity"],
+            task_status=tasks.get(envelope["sender"]["thread_id"], {}).get("status", "unknown"),
+            next_owner=next_owner, return_locator=event["locator"],
+            recovery_kind="HANDLE_RETURN",
+        )
+        return base
+    if lifecycle == "CLOSED":
+        base.update(stage="TERMINAL", reason="LIFECYCLE_CLOSED")
+        return base
+    if lifecycle == "PARKED":
+        pause = pauses.get(direction_id)
+        if pause is None:
+            base.update(stage="TRANSPORT_GAP", reason="PARKED_WITHOUT_DELIVERED_USER_PAUSE")
+            return base
+        envelope = _validate_assignment_observation(direction_id, pause, current, tasks)
+        reactivation_ref = direction.get("reactivation_condition_ref")
+        if envelope["recipient"]["identity"] != "Root":
+            raise EnvelopeError("user pause assignment must be delivered to Root")
+        if (
+            not isinstance(reactivation_ref, Mapping)
+            or set(reactivation_ref) != {"path", "heading", "sha256"}
+            or pause.get("reactivation_condition_ref") != reactivation_ref
+            or reactivation_ref.get("path") not in envelope["body"]["context_refs"]
+        ):
+            raise EnvelopeError("user pause is not bound to the registry reactivation condition")
+        decision_path = repo / str(reactivation_ref["path"])
+        try:
+            decision_sha = hashlib.sha256(decision_path.read_bytes()).hexdigest()
+        except OSError as exc:
+            raise EnvelopeError("user pause reactivation decision is unreadable") from exc
+        if decision_sha != reactivation_ref["sha256"]:
+            raise EnvelopeError("user pause reactivation decision digest is stale")
+        base.update(stage="USER_PAUSE", reason="DELIVERED_USER_QUESTION")
+        return base
+    if lifecycle == "REGISTERED":
+        base.update(stage="TERMINAL", reason="NOT_SELECTED")
+        return base
+
+    heartbeat = heartbeats.get(direction_id)
+    if heartbeat is not None:
+        envelope = _validate_assignment_observation(direction_id, heartbeat, current, tasks)
+        if (
+            heartbeat.get("status") != "ACTIVE"
+            or not isinstance(heartbeat.get("automation_id"), str)
+            or not isinstance(heartbeat.get("run_id"), str) or not heartbeat["run_id"]
+            or heartbeat.get("target_thread_id") != envelope["recipient"]["thread_id"]
+            or heartbeat.get("prompt_assignment_locator") != heartbeat.get("assignment_locator")
+            or not isinstance(heartbeat.get("next_trigger_at"), str)
+            or _TIMESTAMP_RE.fullmatch(str(heartbeat["next_trigger_at"])) is None
+        ):
+            raise EnvelopeError("resource heartbeat must be an observed active automation")
+        base.update(
+            stage="WAITING_RESOURCE", reason="ACTIVE_OWNER_HEARTBEAT",
+            owner_identity=envelope["recipient"]["identity"],
+            task_status=tasks[envelope["recipient"]["thread_id"]]["status"],
+            assignment_locator=heartbeat["assignment_locator"],
+        )
+        return base
+    experiment = experiments.get(direction_id)
+    if experiment is not None:
+        envelope = _validate_assignment_observation(direction_id, experiment, current, tasks)
+        manifest_locator = experiment.get("manifest_locator")
+        if not isinstance(manifest_locator, str):
+            raise EnvelopeError("experiment observation manifest locator is invalid")
+        _validate_path(manifest_locator, "experiment manifest locator")
+        manifest = _load_object(repo / manifest_locator, "experiment manifest")
+        try:
+            import jsonschema
+        except ImportError as exc:
+            raise EnvelopeError("jsonschema is required to validate an experiment manifest") from exc
+        schema = _load_object(
+            repo / "scripts/schemas/hmasd_run_manifest.schema.json",
+            "run manifest schema",
+        )
+        try:
+            jsonschema.Draft202012Validator(schema).validate(manifest)
+        except jsonschema.ValidationError as exc:
+            raise EnvelopeError(f"experiment manifest is not canonical: {exc}") from exc
+        run_id = manifest.get("run_id")
+        expected_locator = f"temp/directions/{direction_id}/exp/{run_id}/manifest.json"
+        if (
+            manifest.get("direction_id") != direction_id
+            or manifest.get("assignment_id") != envelope["message_id"]
+            or manifest_locator != expected_locator
+            or manifest.get("status") not in {"PREPARED", "RUNNING"}
+        ):
+            raise EnvelopeError("experiment observation does not match an active manifest")
+        owner_thread_id = envelope["recipient"]["thread_id"]
+        if tasks[owner_thread_id]["status"].casefold() not in {"active", "running"}:
+            raise EnvelopeError("experiment observation CM owner is not active")
+        if manifest["status"] == "RUNNING":
+            operator_identity = manifest.get("operator_identity")
+            operator_thread_id = experiment.get("operator_thread_id")
+            operator = tasks.get(operator_thread_id) if isinstance(operator_thread_id, str) else None
+            if (
+                not isinstance(operator_identity, str) or not operator_identity
+                or experiment.get("operator_identity") != operator_identity
+                or operator is None
+                or operator.get("agent_role") != "hmasd-experiment-operator"
+                or operator.get("parent_thread_id") != owner_thread_id
+                or operator["status"].casefold() not in {"active", "running"}
+            ):
+                raise EnvelopeError("active experiment has no unique observed Operator owner")
+            active_operators = [
+                task_id for task_id, fact in tasks.items()
+                if fact.get("agent_role") == "hmasd-experiment-operator"
+                and fact.get("parent_thread_id") == owner_thread_id
+                and fact["status"].casefold() in {"active", "running"}
+            ]
+            if active_operators != [operator_thread_id]:
+                raise EnvelopeError("active experiment Operator ownership is not unique")
+        base.update(
+            stage="EXP", reason=str(manifest["status"]),
+            owner_identity=envelope["recipient"]["identity"],
+            task_status=tasks[owner_thread_id]["status"],
+            assignment_locator=experiment["assignment_locator"],
+        )
+        return base
+
+    if event is None:
+        base.update(
+            stage="TRANSPORT_GAP",
+            reason="NO_DELIVERED_ASSIGNMENT",
+        )
+        return base
+    envelope = event["envelope"]
+    locator = event["locator"]
+    message = f"HMASD_SESSION_ENVELOPE_V1 {locator}"
+    if envelope["kind"] == "ASSIGNMENT":
+        recipient = envelope["recipient"]
+        role = _identity_role(recipient["identity"])
+        task = tasks.get(recipient["thread_id"])
+        if task is None or task["name"] != recipient["identity"]:
+            raise EnvelopeError("current assignment recipient task identity does not match")
+        status = task["status"]
+        base.update(
+            owner_identity=recipient["identity"],
+            task_status=status,
+            assignment_locator=locator,
+        )
+        if status.casefold() in {"active", "running"}:
+            base.update(stage=role or "TRANSPORT_GAP", reason="OWNED_WORK")
+            return base
+        base.update(
+            stage="TRANSPORT_GAP",
+            reason="OWNER_STOPPED_WITHOUT_RETURN",
+            next_owner=role,
+            recovery_kind="REDELIVER_ASSIGNMENT",
+        )
+        return base
+
+    raise EnvelopeError("current direction envelope kind is invalid")
+
+
+def _write_projection(path: Path, value: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = (
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    try:
+        with temporary.open("xb") as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def liveness(args: argparse.Namespace) -> dict[str, Any]:
+    repo = Path(args.repo).resolve()
+    observations = _load_object(Path(args.observations), "liveness observations")
+    tasks = _task_facts(observations)
+    current = _current_messages(repo, observations, tasks)
+    pauses = _indexed_observations(observations, "user_pauses")
+    heartbeats = _indexed_observations(observations, "resource_heartbeats")
+    experiments = _indexed_observations(observations, "experiments")
+    registry = _load_object(
+        repo / "docs/research/portfolio/workflow/registry.json",
+        "Portfolio registry",
+    )
+    directions = registry.get("directions")
+    if not isinstance(directions, list):
+        raise EnvelopeError("Portfolio registry directions must be a list")
+    rows = sorted(
+        (
+            _liveness_row(
+                repo, direction, tasks, current,
+                pauses, heartbeats, experiments,
+            )
+            for direction in directions
+            if isinstance(direction, Mapping) and direction.get("lifecycle") != "REGISTERED"
+        ),
+        key=lambda row: row["direction_id"],
+    )
+    actions: list[dict[str, str]] = []
+    action_locators: set[str] = set()
+    for row in rows:
+        kind = row.get("recovery_kind")
+        locator = row.get("return_locator") or row.get("assignment_locator")
+        if kind not in {"HANDLE_RETURN", "REDELIVER_ASSIGNMENT"} or not isinstance(locator, str):
+            continue
+        action = {
+            "kind": str(kind), "locator": locator,
+            "message": f"HMASD_SESSION_ENVELOPE_V1 {locator}",
+        }
+        if kind == "REDELIVER_ASSIGNMENT":
+            action["recipient_thread_id"] = current[row["direction_id"]]["envelope"]["recipient"]["thread_id"]
+        if locator not in action_locators:
+            actions.append(action)
+            action_locators.add(locator)
+    result = {
+        "schema_version": 1,
+        "observed_at": args.observed_at,
+        "directions": rows,
+        "actions": actions,
+    }
+    _write_projection(repo / ".codex/runtime/clerk-liveness.json", result)
+    return result
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Build fixed session envelopes around semantic JSON bodies."
@@ -752,6 +1145,10 @@ def _parser() -> argparse.ArgumentParser:
     read_message_parser = commands.add_parser("read-message")
     read_message_parser.add_argument("--repo", required=True)
     read_message_parser.add_argument("--message", required=True)
+    liveness_parser = commands.add_parser("liveness")
+    liveness_parser.add_argument("--repo", required=True)
+    liveness_parser.add_argument("--observations", required=True)
+    liveness_parser.add_argument("--observed-at", required=True)
     return parser
 
 
@@ -768,6 +1165,8 @@ def main(argv: list[str] | None = None) -> int:
             result = read_envelope(args)
         elif args.command == "read-message":
             result = read_message(args)
+        elif args.command == "liveness":
+            result = liveness(args)
         else:  # pragma: no cover
             raise EnvelopeError("unknown command")
     except EnvelopeError as exc:
