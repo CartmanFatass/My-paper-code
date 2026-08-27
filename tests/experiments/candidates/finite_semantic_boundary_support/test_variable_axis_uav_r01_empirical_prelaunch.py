@@ -28,7 +28,6 @@ def test_disjoint_identity_v3_public_contract_is_exact() -> None:
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
         canonical_parameters,
         empirical_boundary,
-        git_prerequisites,
     )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
@@ -45,9 +44,19 @@ def test_disjoint_identity_v3_public_contract_is_exact() -> None:
         "fsbs-r01-complete-20260827-02",
     ]
     boundary = empirical_boundary()
+    observed_branch = subprocess.run(
+        ["git", "-C", str(REPO), "rev-parse", "--abbrev-ref", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    assert observed_branch == (
+        "omp/finite_semantic_boundary_support/engineering/"
+        "c520049b-identity-v3"
+    )
     contract = build_runtime_contract(
         REPO,
-        candidate_branch=git_prerequisites("")["required_branch"],
+        candidate_branch=observed_branch,
     )
     assert boundary["run_id"] == run_id
     assert boundary["output_root"] == output_root
@@ -55,6 +64,7 @@ def test_disjoint_identity_v3_public_contract_is_exact() -> None:
     assert boundary["terminal_run_ids"] == tombstones
     assert contract["run_id"] == run_id
     assert contract["operator_identity"] == operator
+    assert contract["candidate_branch"] == observed_branch
     assert contract["terminal_run_ids"] == tombstones
     assert contract["effect"] == {
         "kind": "LOCAL_RESULT_ROOT",
@@ -62,6 +72,14 @@ def test_disjoint_identity_v3_public_contract_is_exact() -> None:
         "operation": "CREATE_ONLY",
     }
     assert canonical_parameters()["effect_refs"] == [contract["effect"]]
+    with pytest.raises(ValueError, match="candidate_branch"):
+        build_runtime_contract(
+            REPO,
+            candidate_branch=(
+                "omp/finite_semantic_boundary_support/engineering/"
+                "a394938d-runtime-v2"
+            ),
+        )
 
 
 def test_identity_v3_preserves_the_base_non_identity_projection() -> None:
@@ -70,16 +88,18 @@ def test_identity_v3_preserves_the_base_non_identity_projection() -> None:
         canonical_resource_estimate,
         checkpoint_identities,
         empirical_boundary,
-        git_prerequisites,
     )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
     )
 
-    contract = build_runtime_contract(
-        REPO,
-        candidate_branch=git_prerequisites("")["required_branch"],
-    )
+    observed_branch = subprocess.run(
+        ["git", "-C", str(REPO), "rev-parse", "--abbrev-ref", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    contract = build_runtime_contract(REPO, candidate_branch=observed_branch)
     boundary = empirical_boundary()
     parameters = canonical_parameters()
     projection = {
@@ -114,19 +134,17 @@ def test_identity_v3_preserves_the_base_non_identity_projection() -> None:
                 "effect",
                 "parameters",
                 "candidate_head",
+                "candidate_branch",
                 "source_test_manifest",
             }
         },
     }
     assert hashlib.sha256(_canonical(projection)).hexdigest() == (
-        "8c7d99ae4f52db5e79dc2db98a6bb1df682c4d9ab97a2cc5b86ffec83d3a4a0c"
+        "c7a0e326ed58306b8d217dcd149f2c1ee89b3cd1014541160611b5e5fdb41231"
     )
 
 
 def test_candidate_local_release_contract_v2_is_self_contained() -> None:
-    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
-        git_prerequisites,
-    )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
         observe_candidate_blob_hashes,
@@ -144,7 +162,12 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
         text=True,
     ).stdout.strip()
     assert len(candidate) == 40
-    branch = git_prerequisites("")["required_branch"]
+    branch = subprocess.run(
+        ["git", "-C", str(REPO), "rev-parse", "--abbrev-ref", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     contract = build_runtime_contract(REPO, candidate_branch=branch)
     assert contract["schema"] == "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2"
     assert contract["run_id"] == "fsbs-r01-complete-20260827-03"
@@ -501,16 +524,18 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
 def test_candidate_head_inventory_fails_closed_when_tracked_source_is_absent(
     tmp_path: Path,
 ) -> None:
-    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
-        git_prerequisites,
-    )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
         observe_candidate_worktree_blob_oids,
         validate_candidate_worktree_binding,
     )
 
-    branch = git_prerequisites("")["required_branch"]
+    branch = subprocess.run(
+        ["git", "-C", str(REPO), "rev-parse", "--abbrev-ref", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     contract = build_runtime_contract(REPO, candidate_branch=branch)
     candidate = contract["candidate_head"]
     tracked = subprocess.run(
@@ -1201,7 +1226,7 @@ def test_canonical_empirical_contract_payload_checkpoints_and_git_prerequisites(
     git = git_prerequisites("a5fb767b7be3ef4c5bc0e92cc22ed13fe77fe3c5")
     assert git["required_branch"] == (
         "omp/finite_semantic_boundary_support/engineering/"
-        "a394938d-runtime-v2"
+        "c520049b-identity-v3"
     )
     assert git["observed_shared_checkout_head"] == "a5fb767b7be3ef4c5bc0e92cc22ed13fe77fe3c5"
     assert git["observed_shared_checkout_eligible"] is False
@@ -1291,7 +1316,7 @@ def test_atomic_s3_prelaunch_acceptance_records_actual_technical_costs(
         REPO,
         candidate_branch=(
             "omp/finite_semantic_boundary_support/engineering/"
-            "a394938d-runtime-v2"
+            "c520049b-identity-v3"
         ),
         scratch_root=acceptance_root / "technical-fixture",
     )
@@ -1327,7 +1352,7 @@ def test_atomic_s3_prelaunch_acceptance_records_actual_technical_costs(
     assert measurements["io"]["technical_checkpoint_bytes"] > 0
     assert measurements["io"]["atomic_acceptance_replace_count"] == 1
     assert acceptance["runtime_contract"]["candidate_branch"].endswith(
-        "a394938d-runtime-v2"
+        "c520049b-identity-v3"
     )
     assert acceptance["empirical_activity_released"] is False
     assert acceptance["operator_now"] is False

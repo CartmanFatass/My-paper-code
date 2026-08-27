@@ -229,7 +229,7 @@ def git_prerequisites(observed_shared_head: str) -> dict[str, Any]:
     return {
         "required_branch": (
             "omp/finite_semantic_boundary_support/engineering/"
-            "a394938d-runtime-v2"
+            "c520049b-identity-v3"
         ),
         "observed_shared_checkout_head": observed_shared_head,
         "observed_shared_checkout_eligible": False,
