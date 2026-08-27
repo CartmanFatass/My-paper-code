@@ -34,17 +34,19 @@ _Avoid_: runtime actor, permission check
 实际发送、接收或执行一次有界工作的会话身份；它与 Domain Writer 分离，并为运行时可追溯性服务。
 _Avoid_: domain writer, decision owner
 
-**Work Packet**:
-一次有界跨会话工作传递的不可变运行时载体，引用已有权威的精确版本且可至少一次投递；同一标识的重复接收不改变其语义。
-_Avoid_: decision authority, workflow state machine
+**Session Envelope**:
+Clerk 与可见 manager task 之间的标准 ASSIGNMENT/RETURN 载体。script 生成固定
+header 与 runtime locator，LLM 只填写局部 body；Codex 原生消息完成实际投递。
+_Avoid_: decision authority, task cache, workflow state machine
 
 **Effect**:
 会改变外部或持久状态的精确操作；它以独立身份和回执核对，未知提交只观察而不重放。
 _Avoid_: ordinary reasoning step
 
-**Reconciliation**:
-基于当前权威和 Effect 事实推进一个有界可运行动作的过程；它不推断全局流程状态。
-_Avoid_: daemon, global recovery engine
+**Handoff**:
+participant 在 final 前把 RETURN 原生发送给 Clerk，Clerk 再把 ASSIGNMENT 发给
+下一责任 session；下一责任角色收到消息后，本 hop 才完成。
+_Avoid_: local completion without send, daemon, global recovery engine
 
 **Direction-owned Code**:
 某一研究方向可以自主修改、测试和提交的代码范围。

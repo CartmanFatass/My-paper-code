@@ -1,284 +1,117 @@
 # HMASD native Codex workflow
 
-This repository preserves the OMP domain and effect contracts while using
-Codex top-level tasks for durable interaction and direct leaf subagents for
-bounded parallel work. Roles describe decision responsibility; they are not
-permission gates. The v1 control plane is based on existing durable
-Authority+CAS, exact Work Packets, typed Effect/ref domain observers, and
-bounded `reconcile --once` with its native adapter. Return witnesses,
-resource comparison, and the short dispatch lock are internal representations
-or mechanisms, not new primitives.
-Workflow-Clerk is the normal top-level coordinator: its dedicated intake calls
-the existing scripts and `run-chain`; it is not a Work Packet participant or a
-second workflow engine. Program-generated protocol defects use the same Clerk
-task's exact exception-reporting path.
+HMASD 使用 Codex 可见 top-level tasks 作为可信 session/task plane。Codex 原生提供
+task 身份、历史、上下文隔离、create/send/read/wait 和同 task 继续；本项目不得
+通过 task cache、raw rollout parser、return witness 或隐藏 app-server manager
+重复实现这些能力。
 
-Stage A-C are implemented: the deterministic protocol
-planner processes one explicit `work_id`, binds a typed agent result with
-`assignment_id=work_id`, validates a canonical next-packet draft, binds a
-`REQUEST_*` result uniquely through `next_action.input_refs=[draft.work_id]`,
-and emits one program-constrained action from an explicit observed task
-snapshot. Stage D closes the local protocol contracts. Live evidence now includes
-the real no-model list/read/resume probe, read-only no-network Luna-low
-`CONFORMANCE_OK`, `LOCAL_FAKE_TRANSPORT_GOLDEN` (including a real short
-`hmasd_run`), and one real unique Experiment Operator leaf run to
-`SUCCEEDED/exit0/group_quiescent/stdout marker`. Full real-native
-Clerk→EM→CM→Operator→Clerk unattended chaining remains unproven.
+用户确认的 docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md 是控制目标，
+docs/project/WORKFLOW_PROTOCOL.md 是唯一正常跨 session 协议。冲突的历史说明、
+skill 与实现属于迁移对象，不得重新解释目标。
 
-The [workflow design rationale](docs/project/WORKFLOW_DESIGN_PHILOSOPHY.md) is non-authoritative and adds no workflow primitive, authority, or gate.
+## Project references
 
-The user-confirmed [workflow goals and acceptance criteria](docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md)
-are the controlling target for workflow redesign. A conflicting historical
-instruction or implementation is migration work, not permission to reinterpret
-those goals.
-
-## Agent skills
-
-### Issue tracker
-
-Planning specs and implementation tickets use local Markdown under `.scratch/`.
-See `docs/agents/issue-tracker.md`.
-
-### Domain docs
-
-This is a single-context repository: use `CONTEXT.md` and root `docs/adr/`.
-See `docs/agents/domain.md`.
+- 规划 spec 与 ticket：.scratch/ 和 docs/agents/issue-tracker.md。
+- 项目上下文：CONTEXT.md、docs/adr/ 与 docs/agents/domain.md。
+- 以前的 control-plane skills 已退休；不要从历史引用加载或恢复。
 
 ## Task plane
 
-- **Root** is the permanent highest-capability project orchestrator. It may use
-  every genuine leaf capability and, when the user has authorized the decision,
-  may form Portfolio, scientific, or engineering conclusions; it must record
-  each conclusion under the referenced heading of the correct existing Markdown
-  authority as `Decision owner: Root` (or the actual owner). Root is not the
-  only user entry point.
-- **Workflow-Clerk** is the unique Luna xhigh, event-driven, normally parked
-  top-level coordinator. Through its dedicated intake it invokes the existing
-  scripts and `run-chain` for topology observation, task create/reuse, routing,
-  messaging, bounded waiting/recovery, and terminal result collection. It sees
-  the global workface but does not infer an FSM from prose, invent a gate, own
-  an Effect, or keep private workflow state. Normal Work Packets still target
-  Portfolio/EM/CM rather than Clerk. The same task documents an exact
-  program-generated typed-field/ref/schema/identity defect or legacy-unroutable
-  input and returns it to the program-named owner. Authority/path/Effect
-  identity conflicts go to Root; material decisions go to the domain
-  owner/user; Root override is direct.
-- **Portfolio** is a `gpt-5.6-sol` max top-level task. It owns cross-direction
-  selection, priority, lifecycle, and whether to invest CM/resources. It is
-  created only when a direction needs it, then may park and recover independently.
-- **EM/<direction-id>/g<generation>** is a top-level scientific task for one
-  direction. It is created lazily for active science work, then may park and
-  recover independently.
-- **CM/<direction-id>/g<generation>** is a top-level engineering task for one
-  direction. It is created lazily when Portfolio invests engineering, then may
-  park and recover independently.
-- **Watcher Advisor** is an optional read-only observer for proxy capture,
-  verification recursion, and workflow tail chasing. It uses
-  `.codex/prompts/hmasd-anti-tail-chasing-watcher.md`, emits non-blocking
-  advice, and has no execution or approval authority.
+- Root 是永久最高能力的用户入口，可查看、介入和覆盖任何角色，但不承担普通
+  路径的例行转递。
+- Workflow-Clerk 是唯一 Luna xhigh、可见、长期协调 task。它使用 Codex 原生项目
+  task 工具维护拓扑、发送 envelope、等待 RETURN、联系下一责任角色并汇总用户。
+- Portfolio 是 gpt-5.6-sol max top-level task，负责方向选择、优先级、投资判断和
+  下一责任角色。科学定义缺失时路由 EM；科学目标已接受但实现/test/CLI 缺失时
+  必须路由 CM，不能仅因实现不存在而 PARK。
+- EM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol max 科研 task。
+- CM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol high 工程 task。
+- Experiment Operator 是 CM 的单层执行 child，只持有一个冻结的结果命令。
+- Watcher Advisor 是可选只读观察者，没有执行或批准权。
 
-Users may interact directly with any of these tasks. Conversation history is
-provenance, not durable authority. A material decision must be written through
-the existing file/CAS contract before another task relies on it; the decision
-owner and runtime actor may differ. Existing JSON `writer` values remain domain
-writers; Work Packet sender/session provenance identifies the runtime actor.
-On the normal path Clerk calls `run-chain`, whose mechanical adapter creates or
-reuses a needed parked manager task and reports an identity conflict rather
-than making a duplicate. Root may intervene directly but is not the routine
-creator, sender, dispatcher, waiter, recovery loop, or direction Git actor.
-Task creation lineage does not confer authority.
+用户可直接进入任何可见 task。角色描述责任，不是权限 gate；Root 与用户直接
+介入不需要 Clerk acknowledgment。
 
-The former control-plane skills are retired pending redesign. Do not load,
-resolve, or recreate them from historical references.
+Root、Clerk、Portfolio、EM、CM 是 top-level tasks，不是 custom subagents。
+manager 间协作使用可见 task 与 session envelope。可选 leaf 只做 bounded work，
+不得再次 delegate。
 
-The Watcher Advisor may run alongside a top-level task when useful. Its output
-is traceability and course-correction input, not a gate; reversible in-scope
-recommendations may be applied immediately without acknowledgment or approval.
+## Session envelope
 
-## One leaf layer
+正常跨 session 消息只有 ASSIGNMENT 与 RETURN。固定 header 与 runtime 文件由
+scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
 
-`.codex/agents/` contains the role configurations registered by the project
-config. Root, Workflow-Clerk, Portfolio, EM, and CM identities are top-level
-tasks, not custom agents from this directory. Root may spawn every genuine leaf role;
-other top-level tasks use their matching bootstrap contract. Every spawned
-project agent is a leaf and must not spawn or delegate another agent. Project config sets
-`agents.max_depth = 1`; Codex must be restarted after changing project config
-before its runtime enforcement is tested. Never ask a direct leaf to spawn
-another child even before that fresh-host smoke passes. Delegation is optional
-and is used only for useful parallelism or context separation.
+- Clerk 使用 assignment 命令生成局部任务，再原生 send 固定 locator 消息。
+- participant 使用 return 命令自动复制 direction、翻转 endpoints、绑定 reply_to
+  并检查 changed_paths，然后在 final 前原生 send 给 Clerk。
+- receiver 使用 read 命令获得校验后的 envelope 与固定 recipient thread ID。
+- task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
+
+scripts 不创建或等待 task，不选择下一 hop，不维护 task lifecycle 或恢复 FSM。
+
+hmasd_codex_tasks.py run-chain/execute-plan、Work Packet planner、本地 task cache、
+return witness 与 raw thread parser 已退出正常路径。完成依赖核查前代码可以暂留，
+但 Root、Clerk、Portfolio、EM、CM 不得自动调用。
 
 ## Hard boundaries
 
-1. Resolve destructive targets canonically and keep them inside user scope.
-2. Never expose secrets in prompts, state, logs, Dashboard APIs, or Git.
-3. External provider sends are at-most-once per operation. Unknown commitment
-   is observed and never resent.
-4. Exactly one Experiment Operator owns one exact result-bearing command from
-   launch through terminal observation.
-5. Unsafe memory plans are reduced, batched, or sharded; they are not offered
-   for approval.
-6. A local result command estimated over 7200 seconds requires one performance
-   reasonableness review attempt and explicit user approval bound to the frozen
-   command and evidence.
-7. Scientific, numerical, RNG, checkpoint, bit-identity, and external-effect
-   semantics are never changed silently.
-8. A role, task, subagent, review, test, Dashboard, lease, hash, or historical
-   document never grants or denies ordinary authorized reversible work.
-9. OMP and Codex must not simultaneously own the same direction, run, external
-   operation, or Git integration after cutover.
-10. Failure scope is explicit: project, direction, feature, or Effect. Never
-    propagate a bare `BLOCKED` label across tasks or use it to close unrelated work.
-11. Dashboard v1 is a read-only projection. Do not add a daemon, SQLite control
-    plane, generic recovery engine, or a second durable workflow schema.
-12. `CREATE_TASK` is a repeatable intent, not a creation receipt. The
-    `run-chain` caller (normally Clerk) single-flights a canonical manager
-    identity: observe the Codex task list and task cache freshly before one
-    create, observe errors or unknown outcomes before any retry, CAS only an
-    observed identity, and re-observe a CAS conflict rather than create again.
-13. Normal cross-session input is one exact validated Work Packet. Its
-    `target_identity` must not be `Workflow-Clerk`; the dedicated Clerk
-    top-level intake is not a normal packet. The receiving session writes only
-    its existing authority/result/evidence and emits the
-    machine-validated common agent result with `assignment_id=work_id`. It may
-    request follow-on work only after the Work Packet `build` command emits a
-    canonical draft; its `REQUEST_*` result then sets `next_action.input_refs`
-    to exactly `[draft.work_id]`. Structured path+SHA256 state/artifact refs must
-    be fresh. Opaque string payload refs receive schema validation only; their
-    freshness belongs to a dedicated domain contract. All common file evidence
-    uses path+sha file refs; legacy string file refs are schema-invalid. The protocol planner
-    never guesses a path from a string or chooses a route from natural language.
-14. Ordinary packets/results are never delivered to Workflow-Clerk as
-    participant input. Clerk's dedicated top-level turn invokes `run-chain` and
-    reports its terminal facts. Task identity conflict goes directly to Root;
-    `UNKNOWN` Effect handling is programmatic observe-only; Root/user exact
-    override needs no Clerk acknowledgment.
-15. Pre-kernel authority retains its material goals, caps, paths, Effects, and
-    decision owner. Legacy routing text is not executed or reinterpreted by a
-    model; the program reports an exact legacy-unroutable defect. A Protocol
-    Defect envelope includes `field_path`, `ref` (null or typed), `actual`,
-    `expected`, `failure_scope`, `producing_command`, and
-    `responsible_owner`; v1 protocol recovery always names `Root`, never a
-    model-inferred target.
-16. Every planner call supplies an explicit freshly observed task snapshot.
-    Omission is a protocol defect; never fall back implicitly to a missing or
-    stale task cache. Shared-core actions use the exact fenced
-    `hmasd-shared-core-action-v1` record and byte-match proof; this proves the
-    bound record, not that a conversation contained genuine consent. Effects
-    use typed kind/resource_id/optional operation; legacy path-only Effects are
-    read-only compatibility inputs and exact conflicts. Opaque file refs are
-    structured; true operation IDs remain opaque and are never interpreted as
-    paths. `file_ref` and `changed_paths` use Windows-safe canonical
-    repo-relative paths, reject absolute/`..`/backslash/symlink-reparse aliases,
-    normalize slashes, and casefold for deduplication. Root may use `--root-override-reason` for a known overlap or active
-    unknown, recording the warning in native history; it cannot disguise an
-    UNKNOWN send/create or bypass effect identity.
+1. 破坏性操作前解析 exact target，并保持在用户授权范围内。
+2. 不在 prompt、state、log、API 或 Git 中暴露 secret。
+3. 外部 provider send 每个 operation 至多一次；未知结果只观察，不盲目重发。
+4. 一个 Experiment Operator 从 launch 到 terminal observation 只持有一个 exact
+   result-bearing command。
+5. 不安全的内存计划必须缩小、batch 或 shard，不能提交用户批准。
+6. 预计超过 7200 秒的本地结果命令需要一次性能合理性审阅，并取得绑定 exact
+   command 的用户批准。
+7. 科学、数值、RNG、checkpoint、bit identity 与外部 Effect 语义不得静默改变。
+8. 用户始终拥有最高权限；危险行为警告并记录，但不得制造权限死锁。
+9. 故障必须限定为 project、direction、feature 或 effect；不得跨 task 传播裸
+   BLOCKED。
+10. Dashboard 只能是只读投影；不得增加 daemon、数据库或第二工作流引擎。
+11. 删除旧控制面前先做调用依赖与真实路径核查，并保留用户及其他 session 的
+    在途修改。
 
 ## Durable authorities and writers
 
-- `docs/research/portfolio/PORTFOLIO.md` and lifecycle reasons: Portfolio.
-- `docs/research/portfolio/workflow/registry.json`: writer `Portfolio`, through
-  `scripts/hmasd_state.py` with expected-revision CAS.
-- `docs/research/candidates/<id>/DIRECTION.md`, research state, external index,
-  and accepted scientific results: `EM-<id>` or an exact Artifact Writer
-  assignment.
-- Direction engineering state: `CM-<id>`.
-- `temp/directions/<id>/exp/<run-id>/`: `Operator-<run-id>` through the run CLI.
-- Runtime task/worktree references: schema writer `Root`, under ignored
-  `.codex/runtime/`. This is an existing responsibility label, not proof that a
-  Root session performed the write; normal Clerk coordination may invoke the
-  existing task CLI without a routine Root action.
-- External commitment: Agentify only. Exact archive validation and final Git
-  integration: Root.
+- docs/research/portfolio/PORTFOLIO.md 与 lifecycle：Portfolio。
+- docs/research/portfolio/workflow/registry.json：Portfolio，通过
+  scripts/hmasd_state.py CAS 更新。
+- docs/research/candidates/<id>/DIRECTION.md、research state、external index 和
+  科研结果：对应 EM 或 exact Artifact Writer。
+- direction engineering state：对应 CM。
+- temp/directions/<id>/exp/<run-id>/：对应 Operator，通过 hmasd_run.py。
+- 外部 commitment：Agentify。最终跨方向 Git integration：Root。
 
-These writers identify the responsible domain, not a runtime permission gate.
-Existing JSON `writer` fields remain domain-writer fields. An authorized Root
-decision records `Decision owner: Root` (or the actual owner) under the
-referenced heading in the appropriate existing Markdown authority; its runtime
-actor is established by Work Packet sender/session provenance, not by a new
-JSON field or parallel authority.
-
-Tracked paths and durable references use repository-relative POSIX syntax,
-without `..`, backslashes, symlink/reparse aliases, or absolute prefixes.
-Concrete task IDs, host IDs, cursors, PIDs, and absolute worktree paths remain
-ignored runtime data.
+writer 表示领域责任，不是运行时权限 gate。需要跨 task 长期依赖的 material
+decision 写入所属 Markdown/JSON authority；conversation 只提供 provenance。
 
 ## Direction workspace and Git
 
-Direction output lives only under:
+方向运行产物只位于：
 
-```text
-temp/directions/<direction-id>/exp/
-temp/directions/<direction-id>/test/
-```
+    temp/directions/<direction-id>/exp/
+    temp/directions/<direction-id>/test/
 
-Source lives in `experiments/candidates/`; tests live in
-`tests/experiments/candidates/`; durable scientific artifacts live under the
-matching `docs/research/candidates/` directory. Everything below
-`temp/directions/` is disposable and never workflow authority.
+source 位于 experiments/candidates/，tests 位于 tests/experiments/candidates/，
+durable scientific artifacts 位于对应 docs/research/candidates/<direction-id>/。
 
-A source or test implementation folder name need not equal a direction ID.
-Direction ownership comes only from the Work Packet's exact `owned_paths` and
-authority refs; the path policy classifies a path but never maps it to a direction.
+路径归属由 assignment body 的 owned_paths 声明。方向 actor 可在自己的路径内
+自主修改、测试、commit 和 push。共享 main 在多方向工作期间可以暂时 dirty；
+quiescent 时由各 owner 清理为 clean main。worktree 可选，不是默认要求。
 
-Use native Windows Git and Python for this checkout. Sibling assignment
-worktrees live under `C:/Projects/HMASD-worktrees` and use
-`<direction>-<kind>-<assignment>` with branch
-`omp/<direction>/<kind>/<assignment>`. Do not operate a Windows-created
-worktree with WSL Git. Direction-owned code may be modified, tested, committed,
-and pushed autonomously within its assignment. Shared-core changes require one
-user confirmation bound to the exact change, recorded by the user or Root under
-the relevant Markdown authority heading. That heading records at least an
-`Action digest`, `Base SHA`, sorted exact path set, objective/non-goals, and
-allowed Git effects. The record must come from a base-tracked existing durable
-Markdown authority and use the top-level `hmasd-shared-core-action-v1` fence;
-the exact authority allowlist is `AGENTS.md`,
-`docs/project/WORKFLOW_PROTOCOL.md`, `docs/research/portfolio/PORTFOLIO.md`,
-and the matching `docs/research/candidates/<id>/DIRECTION.md`; other Markdown,
-including `WORKFLOW_DESIGN_PHILOSOPHY.md`, is not authority. Portfolio registry
-JSON is only a writer-path exemption and never carries the fence. Root rechecks
-the same bytes and hash. EM, Portfolio, and ordinary leaves
-carrying non-writer-owned shared-core paths are rejected; Portfolio's two
-existing authority writer paths are the only authority exception. The Action
-digest is the SHA256 of the project's canonical JSON representation of those
-bound fields. A candidate SHA is appended only as a result ref after
-implementation; approval never requires an unknown candidate.
-Before execution or commit, Root compares the record with the current base,
-paths, and requested effects. The path policy only classifies paths; unmatched
-paths are shared-core and the policy is not an approval service. Root integrates
-verified candidates mechanically and does not manually resolve candidate conflicts.
+共享 C++ backend、神经网络基座和跨方向核心修改必须先向用户说明 exact paths、
+目标、非目标及语义影响并取得确认。方向自主权不能扩张到共享核心。
 
-Prefer `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` for project Python
-commands. Durable Markdown, JSON, TOML, YAML, Python, and shell files use LF as
-declared by `.gitattributes`; do not normalize bytes inside hash validation.
+使用 native Windows Git/Python，项目 Python 优先使用
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe。tracked path 使用
+repository-relative POSIX syntax，durable text 遵循 .gitattributes 的 LF。
 
 ## Working style
 
-- Preserve user changes and use the smallest useful decomposition.
-- Freeze goals, non-goals, authority refs, owned paths, revisions, and effect
-  refs in every material Work Packet. Work Packets are ignored runtime transport,
-  rebuildable from existing durable authorities, and never replace those authorities.
-  Their locator delivery is at-least-once; receivers handle a repeated `work_id`
-  idempotently and never generate a new packet for that redelivery.
-- A normal participant accepts one exact Work Packet and produces its existing
-  authority/result/evidence plus the machine-validated common result using
-  fresh structured path+SHA256 state/artifact refs. For `REQUEST_*`, first build the
-  canonical draft and bind only its `work_id` in `next_action.input_refs`. One
-  CM assignment covers ordinary review, same-scope repair,
-  tests, verification/SANCheck, and terminal engineering return.
-- Reviews and tests are proportional evidence, not authorization layers.
-- One planner/reconcile call processes exactly one explicit `work_id` with one
-  explicit freshly observed task snapshot and emits at most one bounded action.
-  Never globally scan ready work or infer a missing snapshot from cache.
-  Distinct explicit work IDs may proceed in parallel when their paths and
-  Effects are disjoint.
-- Normal dispatch is one Clerk `run-chain` call. The script performs exact
-  reconcile followed by a short native-dispatch critical section: fresh
-  identity/active peers/resource comparison, then create-or-reuse and send.
-  The receiver first performs exact return lookup, completes its slice,
-  publishes the return witness, and only then sends a message. Lost messages
-  are rebuilt from the witness. Same-identity recovery uses the one history
-  budget defined by the goals; UNKNOWN send/create is observe-only. Full
-  real-native Clerk-coordinated chaining remains unproven despite the completed
-  probes and lower-layer fake golden path.
-- Use the documented CLIs rather than private helper functions or duplicate
-  state writers.
+- 保留用户和其他 session 的修改，只处理 assignment 声明的方向与路径。
+- Clerk 持有全局拓扑；participant 不协调其他 manager session。
+- EM/CM 只加载 assignment/return 格式，不加载全局控制面。
+- Codex task list/history 是 session 事实源；不得建立平行 registry 证明同一事实。
+- reviews 与 tests 是风险相称的 evidence，不是授权层。
+- 机械检查失败只返回 exact 字段或越界路径；LLM 不据此发明新 gate。
+- 实验执行继续使用 hmasd_run.py；不要把 session 协调塞进实验或 Git 工具。

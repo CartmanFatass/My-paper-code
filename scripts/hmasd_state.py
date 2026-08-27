@@ -490,7 +490,9 @@ def _validate_registry(document: Mapping[str, Any]) -> None:
         visit(node)
 
 
-def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
+def _reconcile_research_direction_ref(
+    document: Mapping[str, Any], *, allow_stale_sha: bool = False
+) -> None:
     """Check a research ref against the on-disk registry when available."""
 
     registry_path = ROOT / "docs" / "research" / "portfolio" / "workflow" / "registry.json"
@@ -523,11 +525,16 @@ def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
     target = ROOT / Path(expected_path)
     if not target.is_file() or _is_alias(target):
         raise ValidationError("research direction_ref target is missing or symlinked")
-    if sha256_file(target) != reference["sha256"]:
+    if sha256_file(target) != reference["sha256"] and not allow_stale_sha:
         raise ValidationError("research direction_ref SHA does not match exact file bytes")
 
 
-def _validate_direction_state(document: Mapping[str, Any], kind: str) -> str:
+def _validate_direction_state(
+    document: Mapping[str, Any],
+    kind: str,
+    *,
+    allow_stale_research_direction_sha: bool = False,
+) -> str:
     direction_id = document["direction_id"]
     expected_prefix = "EM-" if kind in {"research_state", "external_review_index"} else "CM-"
     expected_writer = expected_prefix + direction_id
@@ -537,7 +544,9 @@ def _validate_direction_state(document: Mapping[str, Any], kind: str) -> str:
     if kind == "research_state":
         if document["direction_ref"]["path"] != expected_direction_path:
             raise _owner_error("research direction_ref path is not direction-owned")
-        _reconcile_research_direction_ref(document)
+        _reconcile_research_direction_ref(
+            document, allow_stale_sha=allow_stale_research_direction_sha
+        )
     elif kind == "engineering_state":
         if document["scope_ref"]["path"] != expected_direction_path:
             raise _owner_error("engineering scope_ref path is not direction-owned")
@@ -743,11 +752,20 @@ def _validate_archive(document: Mapping[str, Any]) -> None:
         raise ValidationError("archive responseSha256 does not match responseText UTF-8 bytes")
 
 
-def _validate_custom(kind: str, document: Mapping[str, Any]) -> None:
+def _validate_custom(
+    kind: str,
+    document: Mapping[str, Any],
+    *,
+    allow_stale_research_direction_sha: bool = False,
+) -> None:
     if kind == "portfolio_registry":
         _validate_registry(document)
     elif kind in {"research_state", "engineering_state"}:
-        _validate_direction_state(document, kind)
+        _validate_direction_state(
+            document,
+            kind,
+            allow_stale_research_direction_sha=allow_stale_research_direction_sha,
+        )
     elif kind == "external_review_index":
         _validate_external_index(document)
     elif kind == "run_manifest":
@@ -829,6 +847,7 @@ def validate_document(
     document: Mapping[str, Any],
     *,
     writer: str | None = None,
+    allow_stale_research_direction_sha: bool = False,
 ) -> dict[str, Any]:
     """Validate and return a JSON object without mutating it."""
 
@@ -853,7 +872,11 @@ def validate_document(
         _ensure_timestamp(document["updated_at"], "updated_at")
         if writer is not None and document["writer"] != writer:
             raise _owner_error(f"writer {document['writer']!r} does not match requested writer {writer!r}")
-    _validate_custom(normalized, document)
+    _validate_custom(
+        normalized,
+        document,
+        allow_stale_research_direction_sha=allow_stale_research_direction_sha,
+    )
     return document
 
 
@@ -1062,7 +1085,12 @@ def replace(
         raise RevisionConflictError("expected_revision must be a positive integer")
     with state_lock(target):
         current_bytes, current = _read_document(target)
-        validate_document(normalized, current, writer=writer)
+        validate_document(
+            normalized,
+            current,
+            writer=writer,
+            allow_stale_research_direction_sha=normalized == "research_state",
+        )
         current_revision = current["revision"]
         if current_revision != expected_revision:
             raise RevisionConflictError(
@@ -1071,6 +1099,7 @@ def replace(
         if document["revision"] != current_revision + 1:
             raise RevisionConflictError("replacement revision must increment exactly once")
         _validate_transition(normalized, current, document)
+        validate_document(normalized, document, writer=writer)
         next_bytes = _canonical_bytes(document)
         if next_bytes == current_bytes:
             raise RevisionConflictError("replacement must change the revision/document")
