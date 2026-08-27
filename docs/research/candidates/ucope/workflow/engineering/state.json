@@ -1,12 +1,25 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ceab4ae03b1d1c49c9c3dc78dba2e336c43797c7",
-  "blockers": [],
-  "candidate_sha": "23412b25032ae5a690a295f78abd6b031c949c2c",
+  "base_sha": "ecdee2459804cf9cc3d074753b42869595373d6b",
+  "blockers": [
+    {
+      "code": "REPLACEMENT_RUN_ID_UNSUPPORTED",
+      "observed_refs": [
+        {
+          "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_REFUSAL_f1808271.json",
+          "sha256": "0f708606bfd1213eff191bd28323cf5fe64935a2095af18d9b6f579a5d7c73f9"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_REFUSAL_f1808271.json",
+        "sha256": "0f708606bfd1213eff191bd28323cf5fe64935a2095af18d9b6f579a5d7c73f9"
+      }
+    }
+  ],
+  "candidate_sha": "ecdee2459804cf9cc3d074753b42869595373d6b",
   "changed_paths": [
-    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/s2_construction.py",
-    "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_s2.py"
+    "docs/research/candidates/ucope/workflow/engineering/state.json"
   ],
   "direction_id": "ucope",
   "integration": {
@@ -14,18 +27,18 @@
     "target_branch": "main",
     "target_sha_seen": "b4da70b2f8636c855cebac23c9865bab6cffbb8e"
   },
-  "last_checkpoint_sha": "e1c7858e0dd37d0314b1d0aa2bd594b6f4d2ffd003da716c8fd68e392a19dda7",
+  "last_checkpoint_sha": "0f708606bfd1213eff191bd28323cf5fe64935a2095af18d9b6f579a5d7c73f9",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_AGREEMENT_REPAIR_TECHNICAL_ACCEPTANCE_f49bbbc8.json",
-        "sha256": "e1c7858e0dd37d0314b1d0aa2bd594b6f4d2ffd003da716c8fd68e392a19dda7"
+        "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_REFUSAL_f1808271.json",
+        "sha256": "0f708606bfd1213eff191bd28323cf5fe64935a2095af18d9b6f579a5d7c73f9"
       }
     ],
-    "kind": "RETURN_CLERK_AGREEMENT_REPAIR_ACCEPTED"
+    "kind": "RETURN_CLERK_REPLACEMENT_PREPARE_REFUSED"
   },
-  "phase": "COMPLETE",
-  "revision": 8,
+  "phase": "FAILED",
+  "revision": 9,
   "run_refs": [
     {
       "path": "temp/directions/ucope/exp/ucope-r03-complete-20260827-01/manifest.json",
@@ -46,27 +59,11 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-27T13:25:29.614143Z",
+  "updated_at": "2026-08-27T13:44:01.179162Z",
   "verification_refs": [
     {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_AGREEMENT_REPAIR_TECHNICAL_ACCEPTANCE_f49bbbc8.json",
-      "sha256": "e1c7858e0dd37d0314b1d0aa2bd594b6f4d2ffd003da716c8fd68e392a19dda7"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_AGREEMENT_REPAIR_REVIEW_f49bbbc8.json",
-      "sha256": "8c0f59de99b0d9b7565a7152bbab4a8eac56d97b76a6e8f69c45ee8a8f816ca5"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_AGREEMENT_REPAIR_SANCHECK_f49bbbc8.json",
-      "sha256": "2714fbc2a0d09286c350dce88fa6b0a2018fe82deb288d8761b68123a99a63f8"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/repair-f49-s2-accepted-junit.xml",
-      "sha256": "3f0b77b7a9ef944bc70c9d21e36e5174134032d34e2878ee64de89f17b2bfac1"
-    },
-    {
-      "path": "temp/directions/ucope/test/s3/g1/repair-f49-nons2-accepted-junit.xml",
-      "sha256": "43ccfcc749da4dc00b15a127dd0026e6cd76e6d0a338ebaeb16f2023a18732ea"
+      "path": "temp/directions/ucope/test/s3/g1/UCOPE_R03_REPLACEMENT_PREPARE_REFUSAL_f1808271.json",
+      "sha256": "0f708606bfd1213eff191bd28323cf5fe64935a2095af18d9b6f579a5d7c73f9"
     }
   ],
   "waiting_on": [],
