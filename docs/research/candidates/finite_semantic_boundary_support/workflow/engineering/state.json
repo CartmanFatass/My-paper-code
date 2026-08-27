@@ -6,15 +6,10 @@
   "candidate_sha": "180e37e038552357b8622aeb92bc480dffdfec7e",
   "changed_paths": [
     "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/checkpoint.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_contract.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_manifest.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_transaction.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_validation.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/engine.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/learner.py",
-    "experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/result.py",
-    "tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py"
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/manifest.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/preflight.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/runner-spec.json",
+    "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json"
   ],
   "direction_id": "finite_semantic_boundary_support",
   "integration": {
@@ -22,27 +17,38 @@
     "target_branch": "main",
     "target_sha_seen": "bb2c547b61c6ab323da66be4b9cacb4a09508f2d"
   },
-  "last_checkpoint_sha": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0",
+  "last_checkpoint_sha": "2d319b7379448aab2fbbcd71d9b3780b254b7f62d77b3d8e95279cab3b624d58",
   "next_action": {
     "input_refs": [
       {
-        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
-        "sha256": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0"
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/manifest.json",
+        "sha256": "2d319b7379448aab2fbbcd71d9b3780b254b7f62d77b3d8e95279cab3b624d58"
       },
       {
-        "path": "docs/research/candidates/finite_semantic_boundary_support/FSBS_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY_R01_20260827.md",
-        "sha256": "9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb"
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/preflight.json",
+        "sha256": "819aa684a4b8d26c6fa21d2e638f217639be872afffabd482cae93a9ab0a1721"
       },
-      "git:origin/omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2@180e37e038552357b8622aeb92bc480dffdfec7e"
+      {
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/runner-spec.json",
+        "sha256": "3997e00c36ad1f24afa8ba3432843ce3173f7bd147e20994734052a24bfc5002"
+      },
+      {
+        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
+        "sha256": "1cf9d932e60db61adc0770b1e9e421aab79597f0b99348c7bc5dbf85b8dd895a"
+      }
     ],
-    "kind": "REQUEST_CM_FSBS_R01_02_PREPARE"
+    "kind": "REQUEST_CM_FSBS_R01_02_OPERATOR_EXECUTE"
   },
   "phase": "RUN_READY",
-  "revision": 9,
+  "revision": 10,
   "run_refs": [
     {
       "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
       "sha256": "2b6d8447b859aef0f10005dcfaeaf9dc4ec5bdffd1fc75e7d3dccf8a97f93479"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/manifest.json",
+      "sha256": "2d319b7379448aab2fbbcd71d9b3780b254b7f62d77b3d8e95279cab3b624d58"
     }
   ],
   "schema_version": 1,
@@ -51,17 +57,25 @@
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
     "sha256": "e2f2ecd3a0593c080cc3d7cfe0eec27f026cca5a010d1b132449a1aebfac033e"
   },
-  "updated_at": "2026-08-27T15:26:37.727088Z",
+  "updated_at": "2026-08-27T15:34:53.993214Z",
   "verification_refs": [
     {
       "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
-      "sha256": "a70c06690a8a2188cb479d2751b1843b4f0b50bc8345ecf093686fd79381f3c0"
+      "sha256": "1cf9d932e60db61adc0770b1e9e421aab79597f0b99348c7bc5dbf85b8dd895a"
     },
     {
-      "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s3/g1/FSBS_R01_OPERATOR_TERMINAL_AUDIT.json",
-      "sha256": "92ee7871fd61e2389a0fa5959c9058172001d6b172c8f3d5ca31829fda701400"
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/preflight.json",
+      "sha256": "819aa684a4b8d26c6fa21d2e638f217639be872afffabd482cae93a9ab0a1721"
     },
-    "pytest:tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py:30-passed-twice",
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/runner-spec.json",
+      "sha256": "3997e00c36ad1f24afa8ba3432843ce3173f7bd147e20994734052a24bfc5002"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/manifest.json",
+      "sha256": "2d319b7379448aab2fbbcd71d9b3780b254b7f62d77b3d8e95279cab3b624d58"
+    },
+    "resource-admission:memory-safe:usable-3.136431-gib:adjusted-peak-1.25-gib",
     "reviewer:fsbs_runtime_v2_review:ACCEPT"
   ],
   "waiting_on": [],
