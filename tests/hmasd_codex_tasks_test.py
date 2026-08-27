@@ -1089,6 +1089,78 @@ def test_run_chain_return_race_consumes_witness_without_resume(
     }
 
 
+def test_execute_plan_reads_only_exact_completed_manager_for_history_recovery(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    state = tmp_path / "docs/research/candidates/alpha/STATE.json"
+    state.parent.mkdir(parents=True, exist_ok=True)
+    state.write_text(json.dumps({"direction": "alpha", "revision": 7}) + "\n")
+    packet = tasks.hmasd_work_packet.build_packet(
+        {
+            "schema_version": 1,
+            "scope_ref": {"path": "docs/research/candidates/alpha/STATE.json", "revision": 7},
+            "sender_identity": "Workflow-Clerk",
+            "target_identity": "EM-alpha",
+            "authority_refs": [],
+            "objective": "resume only the exact completed alpha manager",
+            "non_goals": ["do not read unrelated completed tasks"],
+            "owned_paths": ["docs/research/candidates/alpha/em"],
+            "done_criteria": ["preserve the bounded recovery budget"],
+            "effect_refs": [],
+        },
+        repo=tmp_path,
+    )
+    tasks.hmasd_work_packet.publish_packet(packet, repo=tmp_path)
+    work_id = packet["work_id"]
+    locator = f".codex/runtime/work/ready/{work_id}/packet.json"
+    exact = completed_manager_row(
+        work_id=work_id, locator=locator, cwd=str(tmp_path), attempts=(1, 2, 3)
+    )
+    listed = [
+        exact,
+        *[
+            {
+                "id": f"thread-other-{index}",
+                "name": name,
+                "cwd": str(tmp_path),
+                "status": {"type": "completed"},
+            }
+            for index, name in enumerate(
+                ("Root", "Workflow-Clerk", "EM-beta", "hmasd-experiment-operator")
+            )
+        ],
+    ]
+    base = response_peer(listed_threads=listed)
+
+    def respond(request: dict[str, Any], peer: FakeTransport) -> None:
+        if request.get("method") == "thread/read":
+            assert request["params"]["threadId"] == exact["id"]
+            peer.emit({"id": request["id"], "result": {"thread": exact}})
+            return
+        base.responder(request, peer)
+
+    peer = FakeTransport(respond)
+    plan = reuse_em_plan(thread_id=exact["id"], work_id=work_id)
+    with tasks.AppServerClient(transport=peer, timeout=0.1) as client:
+        monkeypatch.setattr(client, "_cm_operator_assignment", lambda **_: None)
+        result = client.execute_plan(
+            plan,
+            packet_locator=locator,
+            cwd=str(tmp_path),
+            observed_tasks=observed_em(exact["id"]),
+        )
+    assert result["status"] == "RETURN_WITNESS_MISSING_AFTER_ATTEMPTS"
+    methods = [request.get("method") for request in peer.requests]
+    read_ids = [
+        request["params"]["threadId"]
+        for request in peer.requests
+        if request.get("method") == "thread/read"
+    ]
+    assert read_ids == [exact["id"]] * 3
+    assert "thread/start" not in methods
+    assert "turn/start" not in methods
+
+
 def test_unexpected_server_request_after_send_requires_observation_not_a_response() -> None:
     def respond(request: dict[str, Any], peer: FakeTransport) -> None:
         if request.get("method") == "turn/start":
@@ -2156,18 +2228,28 @@ def test_run_chain_recovery_budget_is_shared_across_process_calls(
             elif method == "turn/start":
                 assert thread is not None
                 status, recovery_kind = attempt_outcomes[len(thread["turns"])]
+                native_input = "".join(
+                    item["text"] for item in request["params"]["input"]
+                    if item.get("type") == "text"
+                )
                 turn = {
                     "id": f"turn-{len(thread['turns']) + 1}",
                     "status": status,
                     "items": [
                         {
                             "type": "userMessage",
-                            "content": request["params"]["input"],
+                            "content": [
+                                {"type": "input_text", "text": native_input}
+                            ],
                         },
                         {
                             "type": "agentMessage",
                             "content": [
-                                {"type": "text", "text": recovery_kind}
+                                {
+                                    "type": "output_text",
+                                    "text": request["params"]["input"][0]["text"],
+                                },
+                                {"type": "text", "text": recovery_kind},
                             ],
                         },
                     ],

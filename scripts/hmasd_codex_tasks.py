@@ -647,21 +647,48 @@ class AppServerClient:
         return False
 
     @staticmethod
+    def _strict_text_documents(
+        text: str, *, include_composite_suffix: bool
+    ) -> list[dict[str, Any]]:
+        try:
+            document = json.loads(text)
+        except json.JSONDecodeError:
+            document = None
+        if isinstance(document, Mapping):
+            return [dict(document)]
+        if text.count(_PARTICIPANT_SLICE_INSTRUCTION) != 1:
+            return []
+        prefix_text, suffix_text = text.split(_PARTICIPANT_SLICE_INSTRUCTION)
+        try:
+            prefix = json.loads(prefix_text)
+        except json.JSONDecodeError:
+            return []
+        if not isinstance(prefix, Mapping) or prefix.get("protocol") != PROTOCOL_MARKER:
+            return []
+        if not include_composite_suffix:
+            return [dict(prefix)]
+        try:
+            suffix = json.loads(suffix_text)
+        except json.JSONDecodeError:
+            return []
+        if not isinstance(suffix, Mapping):
+            return []
+        return [dict(prefix), dict(suffix)]
+
+    @staticmethod
     def _protocol_documents(value: Any, work_id: str) -> list[dict[str, Any]]:
         found: list[dict[str, Any]] = []
         if isinstance(value, Mapping):
             text = value.get("text")
-            if value.get("type") == "text" and isinstance(text, str):
-                try:
-                    document = json.loads(text)
-                except json.JSONDecodeError:
-                    document = None
-                if (
-                    isinstance(document, Mapping)
-                    and document.get("protocol") == PROTOCOL_MARKER
-                    and document.get("work_id") == work_id
+            if value.get("type") in {"text", "input_text"} and isinstance(text, str):
+                for document in AppServerClient._strict_text_documents(
+                    text, include_composite_suffix=False
                 ):
-                    found.append(dict(document))
+                    if (
+                        document.get("protocol") == PROTOCOL_MARKER
+                        and document.get("work_id") == work_id
+                    ):
+                        found.append(document)
             for item in value.values():
                 found.extend(AppServerClient._protocol_documents(item, work_id))
         elif isinstance(value, list):
@@ -1594,27 +1621,11 @@ class AppServerClient:
                 value.get("type") in {"text", "input_text", "output_text"}
                 and isinstance(text_value, str)
             ):
-                try:
-                    document = json.loads(text_value)
-                except json.JSONDecodeError:
-                    document = None
-                if isinstance(document, Mapping):
-                    found.append(dict(document))
-                elif text_value.count(_PARTICIPANT_SLICE_INSTRUCTION) == 1:
-                    prefix_text, suffix_text = text_value.split(
-                        _PARTICIPANT_SLICE_INSTRUCTION
+                found.extend(
+                    AppServerClient._strict_text_documents(
+                        text_value, include_composite_suffix=True
                     )
-                    try:
-                        prefix = json.loads(prefix_text)
-                        suffix = json.loads(suffix_text)
-                    except json.JSONDecodeError:
-                        prefix = suffix = None
-                    if (
-                        isinstance(prefix, Mapping)
-                        and prefix.get("protocol") == PROTOCOL_MARKER
-                        and isinstance(suffix, Mapping)
-                    ):
-                        found.extend((dict(prefix), dict(suffix)))
+                )
             for item in value.values():
                 found.extend(AppServerClient._json_documents(item))
         elif isinstance(value, list):
@@ -2007,7 +2018,15 @@ class AppServerClient:
             ]
             full_completed_rows: list[Mapping[str, Any]] = []
             for row in rows:
-                if self._native_lifecycle(row.get("status")) != "COMPLETED":
+                if (
+                    self._native_lifecycle(row.get("status")) != "COMPLETED"
+                    or row.get("name") != target
+                    or self._canonical_manager(row.get("name")) is None
+                    or (
+                        expected_resolution_status == "REUSE"
+                        and row.get("id") != resolution.get("thread_id")
+                    )
+                ):
                     continue
                 fresh = self._read_thread_full(str(row.get("id", "")))
                 if fresh.get("status") != "OK":
