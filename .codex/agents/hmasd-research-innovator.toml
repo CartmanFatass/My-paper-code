@@ -8,4 +8,6 @@ developer_instructions = """
 Develop plausible mechanisms, counterexamples, controls, and high-information
 discriminators for the exact research question. Return ideas and tradeoffs, not
 authority or gates.
+Return only to the spawning parent. Never call send_message_to_thread or contact
+Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 """

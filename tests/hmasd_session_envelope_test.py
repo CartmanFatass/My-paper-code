@@ -178,6 +178,79 @@ def test_return_copies_assignment_identity_and_targets_original_sender(
     }
 
 
+def test_read_message_accepts_only_the_exact_script_transport(
+    tmp_path: Path,
+) -> None:
+    body = {
+        "objective": "close one bounded science slice",
+        "context_refs": ["docs/research/candidates/ucope/DIRECTION.md"],
+        "owned_paths": ["docs/research/candidates/ucope/"],
+        "constraints": ["do not modify shared core"],
+        "done_when": ["send one RETURN before final"],
+    }
+    body_path = tmp_path / "assignment-body.json"
+    write_json(body_path, body)
+    created = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "ucope",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "EM/ucope/g1",
+        "--recipient-thread-id",
+        "em-thread",
+        "--body",
+        str(body_path),
+    )
+    assert created.returncode == 0, created.stderr
+    transport = json.loads(created.stdout)
+
+    accepted = run_cli(
+        "read-message",
+        "--repo",
+        str(tmp_path),
+        "--message",
+        transport["message"],
+    )
+
+    assert accepted.returncode == 0, accepted.stderr
+    assert json.loads(accepted.stdout) == {
+        "envelope": json.loads(
+            (tmp_path / transport["locator"]).read_text(encoding="utf-8")
+        ),
+        **transport,
+    }
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "EM finished; please dispatch CM",
+        '{"kind":"RETURN","status":"REQUEST_CM"}',
+        "HMASD_SESSION_ENVELOPE_V1 .codex/runtime/session-envelopes/ucope/x.return.json\nplease continue",
+        "<codex_delegation><input>HMASD_SESSION_ENVELOPE_V1 .codex/runtime/session-envelopes/ucope/x.return.json</input></codex_delegation>",
+    ],
+)
+def test_read_message_rejects_natural_language_json_and_wrapped_locators(
+    tmp_path: Path, message: str
+) -> None:
+    result = run_cli(
+        "read-message",
+        "--repo",
+        str(tmp_path),
+        "--message",
+        message,
+    )
+
+    assert result.returncode == 2
+    assert "exactly HMASD_SESSION_ENVELOPE_V1 plus one locator" in result.stderr
+
+
 def test_read_validates_and_exposes_fixed_delivery_facts(tmp_path: Path) -> None:
     body = {
         "objective": "close one bounded science slice",

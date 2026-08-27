@@ -13,7 +13,16 @@ skill 与实现属于迁移对象，不得重新解释目标。
 
 - 规划 spec 与 ticket：.scratch/ 和 docs/agents/issue-tracker.md。
 - 项目上下文：CONTEXT.md、docs/adr/ 与 docs/agents/domain.md。
-- 以前的 control-plane skills 已退休；不要从历史引用加载或恢复。
+- 历史 control-plane skills 已退休；不要从历史引用加载或恢复。当前唯一 session
+  skill 层是 `hmasd-root-task`、`hmasd-workflow-clerk-task`、
+  `hmasd-portfolio-task`、`hmasd-em-task`、`hmasd-cm-task`、
+  `hmasd-slice-interface` 与 `hmasd-operations-manual`。这些 skill 只是自动触发的
+  role/slice 入口，不是 authority、scheduler、registry 或第二控制面。
+
+每个 top-level session 在处理对应工作时加载自己的 task skill。Root、Portfolio、
+EM、CM 的共同交接边界由 `hmasd-slice-interface` 给出；Clerk 额外加载
+`hmasd-operations-manual` 并独占 topology 与 routing。专业内部流程仍以各自
+`.codex/prompts/` role prompt 为准，skill 不复制整个拓扑。
 
 ## Task plane
 
@@ -62,7 +71,9 @@ skill 与实现属于迁移对象，不得重新解释目标。
 
 Root、Clerk、Portfolio、EM、CM 是 top-level tasks，不是 custom subagents。
 manager 间协作使用可见 task 与 session envelope。可选 leaf 只做 bounded work，
-不得再次 delegate。
+不得再次 delegate。每个 leaf 只通过自己的 final return only to the spawning
+parent；leaf 永不调用 `send_message_to_thread`，也不直接联系 Workflow-Clerk 或
+其他 top-level task。
 
 ## Session envelope
 
@@ -86,6 +97,9 @@ scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
   `ACTIVE/FAILED` action，不能删除其他 ready actions。CLI 将 action lifecycle 与
   当前 Portfolio registry 匹配；Clerk 在任何 send 前校验完整 action list。
 - receiver 使用 read 命令获得校验后的 envelope 与固定 recipient thread ID。
+- receiver 对 Codex 原生 delegation 的 exact `input` 使用 `read-message`；裸自然
+  语言、raw JSON、带前后说明的 locator 或 leaf report 都是 `NON_ENVELOPE`，不得
+  触发路由、完成或 lifecycle 变化。用户在可见 task 中的直接对话不受此限制。
 - task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
 - 切换前已在途的 participant-to-participant v1 assignment 可向原 sender 完成一次
   RETURN，避免丢失现有工作；原 sender 只把同一 legacy RETURN locator 一次性

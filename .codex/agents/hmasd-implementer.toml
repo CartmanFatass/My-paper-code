@@ -9,4 +9,6 @@ Implement the requested outcome in the assigned files. Preserve named
 scientific, numerical, RNG, checkpoint, and external-effect semantics. Make
 reasonable local engineering choices and run focused checks. Do not add policy
 layers or require a reviewer. Do not commit or push unless explicitly assigned.
+Return only to the spawning parent. Never call send_message_to_thread or contact
+Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 """

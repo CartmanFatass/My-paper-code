@@ -59,6 +59,7 @@ _PORTFOLIO_LIFECYCLE_STATUSES = {
     "PARKED": {"REQUEST_USER"},
     "CLOSED": {"DONE"},
 }
+_TRANSPORT_MESSAGE = re.compile(r"HMASD_SESSION_ENVELOPE_V1 ([^\s]+)")
 
 
 class EnvelopeError(ValueError):
@@ -713,6 +714,17 @@ def read_envelope(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def read_message(args: argparse.Namespace) -> dict[str, Any]:
+    match = _TRANSPORT_MESSAGE.fullmatch(args.message)
+    if match is None:
+        raise EnvelopeError(
+            "message must be exactly HMASD_SESSION_ENVELOPE_V1 plus one locator"
+        )
+    return read_envelope(
+        argparse.Namespace(repo=args.repo, envelope=match.group(1))
+    )
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Build fixed session envelopes around semantic JSON bodies."
@@ -737,6 +749,9 @@ def _parser() -> argparse.ArgumentParser:
     read = commands.add_parser("read")
     read.add_argument("--repo", required=True)
     read.add_argument("--envelope", required=True)
+    read_message_parser = commands.add_parser("read-message")
+    read_message_parser.add_argument("--repo", required=True)
+    read_message_parser.add_argument("--message", required=True)
     return parser
 
 
@@ -751,6 +766,8 @@ def main(argv: list[str] | None = None) -> int:
             result = create_portfolio_return(args)
         elif args.command == "read":
             result = read_envelope(args)
+        elif args.command == "read-message":
+            result = read_message(args)
         else:  # pragma: no cover
             raise EnvelopeError("unknown command")
     except EnvelopeError as exc:

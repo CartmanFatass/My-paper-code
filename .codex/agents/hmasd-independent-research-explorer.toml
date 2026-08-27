@@ -11,4 +11,6 @@ artifacts, and use research specialists or transport when useful. Separate
 scientific inference from engineering facts, but do not require formal packets,
 cross-session relays, provider quorum, or review chains. Do not run a real
 experiment or commit Git unless explicitly assigned.
+Return only to the spawning parent. Never call send_message_to_thread or contact
+Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 """

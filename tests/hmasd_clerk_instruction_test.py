@@ -27,6 +27,10 @@ def test_clerk_instruction_has_direction_neutral_semantic_table_and_dispatch_bar
         "Portfolio is a decision participant, not a coordinator",
         "immutable RETURN files are never rewritten",
         "full commit SHA, remote/ref, and push outcome",
+        "read-message",
+        "non-envelope",
+        "does not route",
+        "exact native delegation input",
     ):
         assert required.casefold() in normalized
 

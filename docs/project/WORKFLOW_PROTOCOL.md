@@ -8,6 +8,12 @@ create、send、read、wait 和同 task 继续；本协议不复制这些能力�
 跨 session 的固定信息由 scripts/hmasd_session_envelope.py 生成，写入已 gitignore
 的 .codex/runtime/session-envelopes/<direction-id>/。
 
+当前 session skill 层只有 `hmasd-root-task`、`hmasd-workflow-clerk-task`、
+`hmasd-portfolio-task`、`hmasd-em-task`、`hmasd-cm-task`、
+`hmasd-slice-interface` 和 `hmasd-operations-manual`。它们让对应 top-level task 在
+相关工作开始时自动加载自己的切面；它们不新增协议状态。Root/Portfolio/EM/CM
+使用 slice interface，Clerk 使用 operations manual 独占 topology/routing。
+
 每个 envelope 固定包含：
 
 - schema_version
@@ -44,6 +50,10 @@ script 生成 UUID message_id、固定 header、canonical runtime 文件，并�
 
 Clerk 只把该固定 locator 消息通过 Codex 原生 send 发送给目标 task。
 
+receiver 将 Codex delegation 的 exact input 交给 `read-message`。非 exact locator
+的自然语言、raw JSON、附带说明的 locator 与 leaf report 均为 `NON_ENVELOPE`，
+不触发路由。用户直接对话仍是用户输入。
+
 ## Return body
 
 RETURN body 的字段固定为：
@@ -58,6 +68,10 @@ RETURN body 的字段固定为：
 status 只能是 DONE、REQUEST_EM、REQUEST_CM、REQUEST_PORTFOLIO、
 REQUEST_USER 或 FAILED。FAILED 必须给出 project、direction、feature 或 effect
 范围的 failure。REQUEST_* 必须给出 next_objective。
+
+`send_message_to_thread` 只由 top-level sender 调用，并且参数只能使用 CLI 的
+`output.recipient_thread_id` 与 `output.message`。所有 leaf return only to the
+spawning parent；leaf 不持有跨 session recipient，也不直接联系 Clerk。
 
 participant 调用：
 

@@ -18,6 +18,11 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 
 > 信任 Codex task plane；只机械验证项目语义边界。
 
+Root、Clerk、Portfolio、EM、CM 各有一个自动发现的窄 task skill。participant
+skill 只暴露本角色工作切面、RETURN 类型与 `next_objective`；全局 topology、路由
+和异常转递只存在于 Clerk 的 operations manual。skill 不复制 authority 或建立
+新的 gate。跨 task 的自然语言和 leaf 直发不构成工作流事件。
+
 ## 角色
 
 - **Root**：最高能力的用户入口，可介入任何角色，但不做普通流程的例行转递。

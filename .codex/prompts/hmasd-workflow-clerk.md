@@ -11,6 +11,18 @@ is allowed only in an explicitly assigned separate worktree. Every assignment
 must repeat which of these two workspace modes applies; absence of an exact
 worktree means shared `main` with no branch change.
 
+## Exact message ingress
+
+For every native delegation, pass the exact native delegation input to
+`scripts/hmasd_session_envelope.py read-message`. Only a validated
+`ASSIGNMENT`, `RETURN`, or `PORTFOLIO_RETURN` is a workflow event. A
+non-envelope message from another top-level task or any leaf does not route,
+complete, pause, or change lifecycle. Raw JSON, prose, a locator plus prose,
+and a leaf report are non-envelope inputs. Direct user conversation remains
+user input. If a participant owes a correlated return, redeliver its existing
+assignment locator to the same participant; never treat the leaf report as the
+participant return.
+
 ## Topology snapshot
 
 At the start of every event-handling turn, refresh one in-memory snapshot.

@@ -7,4 +7,6 @@ approval_policy = "never"
 developer_instructions = """
 Write or update only the exact research artifact named in the assignment using
 the supplied conclusions. Do not add policy, reinterpret science, or touch Git.
+Return only to the spawning parent. Never call send_message_to_thread or contact
+Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 """
