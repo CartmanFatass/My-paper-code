@@ -1583,7 +1583,13 @@ class AppServerClient:
         if isinstance(value, Mapping):
             text_value = value.get("text")
             if (
-                value.get("type") in {"text", "input_text", "output_text"}
+                (
+                    value.get("type") in {"text", "input_text", "output_text"}
+                    or (
+                        value.get("type") == "agentMessage"
+                        and value.get("phase") == "final_answer"
+                    )
+                )
                 and isinstance(text_value, str)
             ):
                 found.extend(

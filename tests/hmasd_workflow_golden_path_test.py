@@ -694,6 +694,7 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
     ("case", "expected_reason"),
     [
         ("valid", None),
+        ("valid_final_answer", None),
         ("valid_list_nonexact_parent_exact", None),
         ("wrong_identity", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
         ("wrong_role", "OPERATOR_RESULT_IDENTITY_MISMATCH"),
@@ -723,7 +724,10 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("composite_prefix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_prefix_protocol_wrong", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_suffix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("commentary_agent_message", "OPERATOR_RESULT_MISSING"),
+        ("final_natural_language_only", "OPERATOR_RESULT_MISSING"),
         ("natural_language_only", "OPERATOR_RESULT_MISSING"),
+        ("typed_final_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
         ("typed_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
         ("wrong_generation", "OPERATOR_RESULT_BINDING_MISMATCH"),
     ],
@@ -1080,6 +1084,45 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     operator_result["payload"] = "bad"
                 if case in {"child_nonterminal", "cm_early_return"}:
                     operator_thread["turns"][-1]["status"] = "inProgress"
+                elif case == "valid_final_answer":
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "phase": "final_answer",
+                            "text": json.dumps(operator_result),
+                        }
+                    )
+                elif case == "commentary_agent_message":
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "phase": "commentary",
+                            "text": json.dumps(operator_result),
+                        }
+                    )
+                elif case == "final_natural_language_only":
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "phase": "final_answer",
+                            "text": "Run succeeded; manifest and logs are available.",
+                        }
+                    )
+                elif case == "typed_final_result_ambiguous":
+                    second_result = {
+                        **operator_result,
+                        "summary": "A second typed final result.",
+                    }
+                    operator_thread["turns"][-1]["items"].extend(
+                        [
+                            {
+                                "type": "agentMessage",
+                                "phase": "final_answer",
+                                "text": json.dumps(result),
+                            }
+                            for result in (operator_result, second_result)
+                        ]
+                    )
                 elif case == "natural_language_only":
                     operator_thread["turns"][-1]["items"].append(
                         {
@@ -1195,7 +1238,13 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         assert operator_create_count <= 1
         assert execute_count <= 1
         assert cm_return_count <= 1
-        if case in {"natural_language_only", "typed_result_ambiguous"}:
+        if case in {
+            "commentary_agent_message",
+            "final_natural_language_only",
+            "natural_language_only",
+            "typed_final_result_ambiguous",
+            "typed_result_ambiguous",
+        }:
             assert operator_create_count == execute_count == cm_return_count == 1
             assert len(peer.threads["thread-cm-alpha"]["turns"]) == 2
         return
@@ -1278,10 +1327,10 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         for thread in peer.threads.values()
         if thread.get("parentThreadId") == "thread-cm-alpha"
         and thread.get("agentRole") == "hmasd-experiment-operator"
-        and any(
-            '"run_id": "golden-run"' in item.get("text", "")
-            for turn in thread.get("turns", [])
-            for entry in turn.get("items", [])
-            for item in entry.get("content", [])
-        )
-    ] == ["thread-operator-golden-run"]
+            and any(
+                '"run_id": "golden-run"' in item.get("text", "")
+                for turn in thread.get("turns", [])
+                for entry in turn.get("items", [])
+                for item in [entry, *entry.get("content", [])]
+            )
+        ] == ["thread-operator-golden-run"]
