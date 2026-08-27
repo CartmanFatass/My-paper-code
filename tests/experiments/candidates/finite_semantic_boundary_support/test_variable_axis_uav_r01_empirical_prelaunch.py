@@ -17,14 +17,116 @@ TEST_ROOT = (
 )
 TEST_ROOT.mkdir(parents=True, exist_ok=True)
 os.environ["PYTEST_DEBUG_TEMPROOT"] = str(TEST_ROOT)
-RESERVED_ROOT = REPO / "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02"
+RESERVED_ROOT = REPO / "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03"
 
 
 def _canonical(value: object) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
+def test_disjoint_identity_v3_public_contract_is_exact() -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
+        canonical_parameters,
+        empirical_boundary,
+        git_prerequisites,
+    )
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
+        build_runtime_contract,
+    )
+
+    run_id = "fsbs-r01-complete-20260827-03"
+    output_root = (
+        "temp/directions/finite_semantic_boundary_support/exp/"
+        "fsbs-r01-complete-20260827-03/"
+    )
+    operator = "Operator-fsbs-r01-complete-20260827-03"
+    tombstones = [
+        "fsbs-r01-complete-20260827-01",
+        "fsbs-r01-complete-20260827-02",
+    ]
+    boundary = empirical_boundary()
+    contract = build_runtime_contract(
+        REPO,
+        candidate_branch=git_prerequisites("")["required_branch"],
+    )
+    assert boundary["run_id"] == run_id
+    assert boundary["output_root"] == output_root
+    assert boundary["operator_identity"] == operator
+    assert boundary["terminal_run_ids"] == tombstones
+    assert contract["run_id"] == run_id
+    assert contract["operator_identity"] == operator
+    assert contract["terminal_run_ids"] == tombstones
+    assert contract["effect"] == {
+        "kind": "LOCAL_RESULT_ROOT",
+        "resource_id": output_root,
+        "operation": "CREATE_ONLY",
+    }
+    assert canonical_parameters()["effect_refs"] == [contract["effect"]]
+
+
+def test_identity_v3_preserves_the_base_non_identity_projection() -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
+        canonical_parameters,
+        canonical_resource_estimate,
+        checkpoint_identities,
+        empirical_boundary,
+        git_prerequisites,
+    )
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
+        build_runtime_contract,
+    )
+
+    contract = build_runtime_contract(
+        REPO,
+        candidate_branch=git_prerequisites("")["required_branch"],
+    )
+    boundary = empirical_boundary()
+    parameters = canonical_parameters()
+    projection = {
+        "boundary": {
+            key: value
+            for key, value in boundary.items()
+            if key
+            not in {
+                "run_id",
+                "output_root",
+                "operator_identity",
+                "legacy_terminal_run_id",
+                "terminal_run_ids",
+            }
+        },
+        "parameters": {
+            key: value
+            for key, value in parameters.items()
+            if key not in {"effect_refs", "sha256"}
+        },
+        "resource_estimate": canonical_resource_estimate(),
+        "checkpoint_identities": checkpoint_identities(),
+        "contract": {
+            key: value
+            for key, value in contract.items()
+            if key
+            not in {
+                "run_id",
+                "operator_identity",
+                "legacy_terminal_run_id",
+                "terminal_run_ids",
+                "effect",
+                "parameters",
+                "candidate_head",
+                "source_test_manifest",
+            }
+        },
+    }
+    assert hashlib.sha256(_canonical(projection)).hexdigest() == (
+        "8c7d99ae4f52db5e79dc2db98a6bb1df682c4d9ab97a2cc5b86ffec83d3a4a0c"
+    )
+
+
 def test_candidate_local_release_contract_v2_is_self_contained() -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
+        git_prerequisites,
+    )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
         observe_candidate_blob_hashes,
@@ -42,18 +144,10 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
         text=True,
     ).stdout.strip()
     assert len(candidate) == 40
-    branch = subprocess.run(
-        ["git", "-C", str(REPO), "branch", "--show-current"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-    assert branch == (
-        "omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2"
-    )
+    branch = git_prerequisites("")["required_branch"]
     contract = build_runtime_contract(REPO, candidate_branch=branch)
     assert contract["schema"] == "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2"
-    assert contract["run_id"] == "fsbs-r01-complete-20260827-02"
+    assert contract["run_id"] == "fsbs-r01-complete-20260827-03"
     assert contract["authority_refs"][0] == {
         "path": "docs/research/candidates/finite_semantic_boundary_support/FSBS_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY_R01_20260827.md",
         "sha256": "9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb",
@@ -64,7 +158,7 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
         "kind": "LOCAL_RESULT_ROOT",
         "resource_id": (
             "temp/directions/finite_semantic_boundary_support/exp/"
-            "fsbs-r01-complete-20260827-02/"
+            "fsbs-r01-complete-20260827-03/"
         ),
         "operation": "CREATE_ONLY",
     }
@@ -117,11 +211,11 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     manifest = {
         "schema_version": 1,
         "revision": 2,
-        "writer": "Operator-fsbs-r01-complete-20260827-02",
-        "operator_identity": "Operator-fsbs-r01-complete-20260827-02",
-        "run_id": "fsbs-r01-complete-20260827-02",
+        "writer": "Operator-fsbs-r01-complete-20260827-03",
+        "operator_identity": "Operator-fsbs-r01-complete-20260827-03",
+        "run_id": "fsbs-r01-complete-20260827-03",
         "direction_id": "finite_semantic_boundary_support",
-        "assignment_id": "fsbs-r01-complete-20260827-02",
+        "assignment_id": "fsbs-r01-complete-20260827-03",
         "status": "RUNNING",
         "command": command,
         "command_sha256": command_sha,
@@ -191,11 +285,29 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
     )
     assert released == {
         "released": True,
-        "run_id": "fsbs-r01-complete-20260827-02",
+        "run_id": "fsbs-r01-complete-20260827-03",
         "code_sha": candidate,
         "authority_refs": contract["authority_refs"],
         "source_test_manifest": contract["source_test_manifest"],
     }
+    for tampered_contract in (
+        {**contract, "run_id": "fsbs-r01-complete-20260827-04"},
+        {
+            **contract,
+            "operator_identity": "Operator-fsbs-r01-complete-20260827-02",
+        },
+    ):
+        with pytest.raises(PermissionError, match="contract identity"):
+            validate_release_manifest(
+                manifest,
+                tampered_contract,
+                manifest_path=manifest_path,
+                observed_cwd=REPO.resolve(),
+                observed_branch=branch,
+                observed_candidate_head=candidate,
+                observed_payload_pid=os.getpid(),
+                operator_runtime_files=runtime_file_evidence,
+            )
     with pytest.raises(PermissionError, match="process RUNNING identity"):
         validate_release_manifest(
             {**manifest, "process": {**manifest["process"], "pid": os.getpid() - 1}},
@@ -265,9 +377,27 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
             observed_payload_pid=os.getpid(),
             operator_runtime_files=runtime_file_evidence,
         )
-    with pytest.raises(PermissionError, match="legacy terminal"):
+    for terminal_run_id in (
+        "fsbs-r01-complete-20260827-01",
+        "fsbs-r01-complete-20260827-02",
+    ):
+        with pytest.raises(PermissionError, match="terminal run"):
+            validate_release_manifest(
+                {**manifest, "run_id": terminal_run_id},
+                contract,
+                manifest_path=manifest_path,
+                observed_cwd=REPO.resolve(),
+                observed_branch=branch,
+                observed_candidate_head=candidate,
+                observed_payload_pid=os.getpid(),
+                operator_runtime_files=runtime_file_evidence,
+            )
+    with pytest.raises(PermissionError, match="assignment_id"):
         validate_release_manifest(
-            {**manifest, "run_id": "fsbs-r01-complete-20260827-01"},
+            {
+                **manifest,
+                "assignment_id": "fsbs-r01-complete-20260827-02",
+            },
             contract,
             manifest_path=manifest_path,
             observed_cwd=REPO.resolve(),
@@ -371,18 +501,16 @@ def test_candidate_local_release_contract_v2_is_self_contained() -> None:
 def test_candidate_head_inventory_fails_closed_when_tracked_source_is_absent(
     tmp_path: Path,
 ) -> None:
+    from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_contract import (
+        git_prerequisites,
+    )
     from experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_manifest import (
         build_runtime_contract,
         observe_candidate_worktree_blob_oids,
         validate_candidate_worktree_binding,
     )
 
-    branch = subprocess.run(
-        ["git", "-C", str(REPO), "branch", "--show-current"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
+    branch = git_prerequisites("")["required_branch"]
     contract = build_runtime_contract(REPO, candidate_branch=branch)
     candidate = contract["candidate_head"]
     tracked = subprocess.run(
@@ -971,9 +1099,14 @@ def test_canonical_empirical_contract_payload_checkpoints_and_git_prerequisites(
     boundary = empirical_boundary()
     assert boundary == {
         "schema": "FSBS_R01_REGISTERED_RUNTIME_BOUNDARY_V2",
-        "run_id": "fsbs-r01-complete-20260827-02",
-        "output_root": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-02/",
+        "run_id": "fsbs-r01-complete-20260827-03",
+        "output_root": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/",
+        "operator_identity": "Operator-fsbs-r01-complete-20260827-03",
         "legacy_terminal_run_id": "fsbs-r01-complete-20260827-01",
+        "terminal_run_ids": [
+            "fsbs-r01-complete-20260827-01",
+            "fsbs-r01-complete-20260827-02",
+        ],
         "legacy_terminal_replay_permitted": False,
         "module": "experiments.candidates.finite_semantic_boundary_support.variable_axis_uav_r01.empirical_transaction",
         "payload_argv": [
@@ -1017,7 +1150,7 @@ def test_canonical_empirical_contract_payload_checkpoints_and_git_prerequisites(
             "kind": "LOCAL_RESULT_ROOT",
             "resource_id": (
                 "temp/directions/finite_semantic_boundary_support/exp/"
-                "fsbs-r01-complete-20260827-02/"
+                "fsbs-r01-complete-20260827-03/"
             ),
             "operation": "CREATE_ONLY",
         }
@@ -1177,7 +1310,7 @@ def test_atomic_s3_prelaunch_acceptance_records_actual_technical_costs(
         "kind": "LOCAL_RESULT_ROOT",
         "resource_id": (
             "temp/directions/finite_semantic_boundary_support/exp/"
-            "fsbs-r01-complete-20260827-02/"
+            "fsbs-r01-complete-20260827-03/"
         ),
         "operation": "CREATE_ONLY",
         "reserved_not_created": True,

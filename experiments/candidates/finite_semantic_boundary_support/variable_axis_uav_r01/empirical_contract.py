@@ -7,10 +7,15 @@ from typing import Any
 
 
 LEGACY_TERMINAL_RUN_ID = "fsbs-r01-complete-20260827-01"
-RUN_ID = "fsbs-r01-complete-20260827-02"
+TERMINAL_RUN_IDS = (
+    "fsbs-r01-complete-20260827-01",
+    "fsbs-r01-complete-20260827-02",
+)
+RUN_ID = "fsbs-r01-complete-20260827-03"
+OPERATOR_IDENTITY = f"Operator-{RUN_ID}"
 OUTPUT_ROOT = (
     "temp/directions/finite_semantic_boundary_support/exp/"
-    "fsbs-r01-complete-20260827-02/"
+    "fsbs-r01-complete-20260827-03/"
 )
 MODULE = (
     "experiments.candidates.finite_semantic_boundary_support."
@@ -49,7 +54,9 @@ def empirical_boundary() -> dict[str, Any]:
         "schema": "FSBS_R01_REGISTERED_RUNTIME_BOUNDARY_V2",
         "run_id": RUN_ID,
         "output_root": OUTPUT_ROOT,
+        "operator_identity": OPERATOR_IDENTITY,
         "legacy_terminal_run_id": LEGACY_TERMINAL_RUN_ID,
+        "terminal_run_ids": list(TERMINAL_RUN_IDS),
         "legacy_terminal_replay_permitted": False,
         "module": MODULE,
         "payload_argv": [PYTHON, "-m", MODULE],

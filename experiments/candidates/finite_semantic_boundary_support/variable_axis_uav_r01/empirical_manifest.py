@@ -14,9 +14,11 @@ from typing import Any, Mapping
 
 from .empirical_contract import (
     LEGACY_TERMINAL_RUN_ID,
+    OPERATOR_IDENTITY,
     AUTHORITY_REFS,
     OUTPUT_ROOT,
     RUN_ID,
+    TERMINAL_RUN_IDS,
     canonical_parameters,
     canonical_resource_estimate,
     checkpoint_identities,
@@ -208,7 +210,9 @@ def build_runtime_contract(repo: Path, *, candidate_branch: str) -> dict[str, An
     return {
         "schema": "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2",
         "run_id": RUN_ID,
+        "operator_identity": OPERATOR_IDENTITY,
         "legacy_terminal_run_id": LEGACY_TERMINAL_RUN_ID,
+        "terminal_run_ids": list(TERMINAL_RUN_IDS),
         "legacy_terminal_replay_permitted": False,
         "direction_id": "finite_semantic_boundary_support",
         "candidate_branch": required_branch,
@@ -356,8 +360,8 @@ def build_prelaunch_dossier(repo: Path, *, observed_shared_head: str) -> dict[st
     prerequisites = git_prerequisites(observed_shared_head)
     run_template = {
         "schema_version": 1,
-        "writer": "Operator-fsbs-r01-complete-20260827-01",
-        "operator_identity": "Operator-fsbs-r01-complete-20260827-01",
+        "writer": OPERATOR_IDENTITY,
+        "operator_identity": OPERATOR_IDENTITY,
         "run_id": boundary["run_id"],
         "direction_id": "finite_semantic_boundary_support",
         "assignment_id": boundary["run_id"],
@@ -413,11 +417,22 @@ def validate_release_manifest(
     observed_payload_pid: int,
     operator_runtime_files: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    if manifest.get("run_id") == LEGACY_TERMINAL_RUN_ID:
-        raise PermissionError("legacy terminal run cannot be replayed")
+    if manifest.get("run_id") in TERMINAL_RUN_IDS:
+        raise PermissionError("terminal run tombstone cannot be replayed")
     if contract.get("schema") != "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2":
         raise PermissionError("candidate-local runtime contract schema is invalid")
-    operator = f"Operator-{RUN_ID}"
+    if (
+        contract.get("run_id") != RUN_ID
+        or contract.get("operator_identity") != OPERATOR_IDENTITY
+    ):
+        raise PermissionError("candidate-local contract identity is invalid")
+    if (
+        contract.get("terminal_run_ids") != list(TERMINAL_RUN_IDS)
+        or contract.get("legacy_terminal_run_id") != LEGACY_TERMINAL_RUN_ID
+        or contract.get("run_id") in TERMINAL_RUN_IDS
+    ):
+        raise PermissionError("candidate-local terminal tombstones are invalid")
+    operator = OPERATOR_IDENTITY
     parameters = canonical_parameters()
     observed_parameters = manifest.get("parameters")
     if not isinstance(observed_parameters, Mapping):
