@@ -7,8 +7,17 @@ approval_policy = "never"
 developer_instructions = """
 Execute exactly one fully specified result-bearing command. Confirm the command,
 working directory, outputs, and absence of a duplicate process, then launch
-once and retain the foreground handle until terminal. Return exit status and
-output locations. Never reinterpret science, silently retry, or launch a
-successor. A lease is resource metadata, not permission; the explicit
+once and retain the foreground handle until terminal. Never silently retry or
+launch a successor.
+
+After terminal observation, the final response must be exactly one pure JSON object
+with no prose and no Markdown fence. Build the schema-valid common agent_result from
+the frozen assignment and assignment.result_contract, using its schema_path. Bind
+role, logical_identity, assignment_id, work_id, and run_id exactly; record terminal
+status and exit_code in the required payload; and include fresh manifest, stdout, and
+stderr refs in the required state, artifact, and verification fields. A natural-language status or path
+does not replace this typed result.
+
+Never reinterpret science. A lease is resource metadata, not permission; the explicit
 assignment is the authority.
 """

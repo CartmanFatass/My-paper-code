@@ -83,3 +83,31 @@ def test_native_mcp_commands_do_not_use_wsl_executable_paths() -> None:
     ).lower()
     for forbidden in ("/mnt/", "/home/", "/usr/", "/opt/", "python3", "hub start", "hub logs", "hub wait"):
         assert forbidden not in active_text
+
+
+def test_experiment_operator_requires_one_typed_terminal_json_result() -> None:
+    role = tomllib.loads(
+        (CODEX / "agents" / "hmasd-experiment-operator.toml").read_text(
+            encoding="utf-8"
+        )
+    )
+    instructions = " ".join(role["developer_instructions"].lower().split())
+    for required in (
+        "exactly one pure json object",
+        "result_contract",
+        "schema_path",
+        "role",
+        "logical_identity",
+        "assignment_id",
+        "work_id",
+        "run_id",
+        "terminal status",
+        "exit_code",
+        "manifest",
+        "stdout",
+        "stderr",
+        "no prose",
+        "no markdown fence",
+        "never silently retry",
+    ):
+        assert required in instructions

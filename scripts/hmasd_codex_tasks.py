@@ -1701,8 +1701,10 @@ class AppServerClient:
             return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
         results = [document for document in cls._json_documents(turns[-1].get("items", []))
                    if document.get("schema_version") == 1 and "payload" in document]
-        if len(results) != 1:
-            return cls._operator_evidence_error("OPERATOR_RESULT_MISSING_OR_AMBIGUOUS")
+        if not results:
+            return cls._operator_evidence_error("OPERATOR_RESULT_MISSING")
+        if len(results) > 1:
+            return cls._operator_evidence_error("OPERATOR_RESULT_AMBIGUOUS")
         result = results[0]
         if result.get("role") != _OPERATOR_ROLE or result.get("logical_identity") != _OPERATOR_ROLE:
             return cls._operator_evidence_error("OPERATOR_RESULT_IDENTITY_MISMATCH")

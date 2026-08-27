@@ -723,6 +723,8 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("composite_prefix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_prefix_protocol_wrong", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_suffix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("natural_language_only", "OPERATOR_RESULT_MISSING"),
+        ("typed_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -1075,6 +1077,18 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     operator_result["payload"] = "bad"
                 if case in {"child_nonterminal", "cm_early_return"}:
                     operator_thread["turns"][-1]["status"] = "inProgress"
+                elif case == "natural_language_only":
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "content": [
+                                {
+                                    "type": "output_text",
+                                    "text": "Run succeeded; manifest and logs are available.",
+                                }
+                            ],
+                        }
+                    )
                 else:
                     operator_thread["turns"][-1]["items"].append(
                         {
@@ -1084,6 +1098,19 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                             ],
                         }
                     )
+                    if case == "typed_result_ambiguous":
+                        second_result = {**operator_result, "summary": "A second typed result."}
+                        operator_thread["turns"][-1]["items"].append(
+                            {
+                                "type": "agentMessage",
+                                "content": [
+                                    {
+                                        "type": "output_text",
+                                        "text": json.dumps(second_result),
+                                    }
+                                ],
+                            }
+                        )
             if attempt != 1 or case == "cm_early_return":
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
@@ -1165,6 +1192,9 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         assert operator_create_count <= 1
         assert execute_count <= 1
         assert cm_return_count <= 1
+        if case in {"natural_language_only", "typed_result_ambiguous"}:
+            assert operator_create_count == execute_count == cm_return_count == 1
+            assert len(peer.threads["thread-cm-alpha"]["turns"]) == 2
         return
     assert first["stop"]["reason"] == "TERMINAL_NO_NEXT", first
     assert "RETURN_WITNESS_PRESENT" in json.dumps(first["events"], sort_keys=True)
