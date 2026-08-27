@@ -6,10 +6,15 @@
   "candidate_sha": "27adce9afdef8d0d107aca19f2d26e8714f30808",
   "changed_paths": [
     "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
-    "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/FSBS_R01_REPLACEMENT_03_RESOURCE_RETRY_ASSESSMENT.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/.manifest.json.lock",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/activity.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/checkpoints",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/execute-preflight.json",
     "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/manifest.json",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/preflight.json",
-    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/runner-spec.json"
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/operator-result.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/result.json",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/stderr.log",
+    "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/stdout.log"
   ],
   "direction_id": "finite_semantic_boundary_support",
   "integration": {
@@ -17,34 +22,30 @@
     "target_branch": "main",
     "target_sha_seen": "4be672376baf0f8159a9cd7d6abed6f7a801a9dc"
   },
-  "last_checkpoint_sha": "49f1bbcbbb44466a98f88b158c9e65f817087b3ba6a660294e9df83943c883b5",
+  "last_checkpoint_sha": "75f9098de6dc8aeaeee82a22d4d0f06a5b19f41b48823d8f080a90ec26104807",
   "next_action": {
     "input_refs": [
       {
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/result.json",
+        "sha256": "34c34725aa0b795a95bd2b8cd859cd0825bd063eb10839b8841e27168a6f494a"
+      },
+      {
         "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/manifest.json",
-        "sha256": "49f1bbcbbb44466a98f88b158c9e65f817087b3ba6a660294e9df83943c883b5"
+        "sha256": "75f9098de6dc8aeaeee82a22d4d0f06a5b19f41b48823d8f080a90ec26104807"
       },
       {
-        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/preflight.json",
-        "sha256": "6763aeac760c4499cdec7301dfdab687c4d191d62adfdf8300a31dbfa34b174e"
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/operator-result.json",
+        "sha256": "3f183441233e94fa4104eab8f2218a9d0147999bb8dc7fef63119748d08b88a2"
       },
       {
-        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/runner-spec.json",
-        "sha256": "b386a67e63c5d175df0eeaff9d84829946f431cd56e6917dee1c7f4e51e1f52f"
-      },
-      {
-        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/FSBS_R01_REPLACEMENT_03_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
-        "sha256": "352f4b2e13aead41fc7f117236f1415813e2b767f5f31981feb65aac97134638"
-      },
-      {
-        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/FSBS_R01_REPLACEMENT_03_RESOURCE_RETRY_ASSESSMENT.json",
-        "sha256": "b7da31fb94503d3a0f830c86f678092dc380c15be328b08bc86703e86d39d511"
+        "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/activity.json",
+        "sha256": "b8355c04e8ca099e459b63e46016a8190b8f235476b24a301a91d1d83fb1085e"
       }
     ],
-    "kind": "REQUEST_CM_FSBS_R01_03_OPERATOR_EXECUTE"
+    "kind": "REQUEST_EM_FSBS_R01_03_SCIENTIFIC_ANALYSIS"
   },
-  "phase": "RUN_READY",
-  "revision": 13,
+  "phase": "COMPLETE",
+  "revision": 14,
   "run_refs": [
     {
       "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-01/manifest.json",
@@ -56,7 +57,7 @@
     },
     {
       "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/manifest.json",
-      "sha256": "49f1bbcbbb44466a98f88b158c9e65f817087b3ba6a660294e9df83943c883b5"
+      "sha256": "75f9098de6dc8aeaeee82a22d4d0f06a5b19f41b48823d8f080a90ec26104807"
     }
   ],
   "schema_version": 1,
@@ -65,30 +66,39 @@
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
     "sha256": "e2f2ecd3a0593c080cc3d7cfe0eec27f026cca5a010d1b132449a1aebfac033e"
   },
-  "updated_at": "2026-08-27T16:30:50.142581Z",
+  "updated_at": "2026-08-27T16:39:21.530231Z",
   "verification_refs": [
     {
-      "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/FSBS_R01_REPLACEMENT_03_RUNTIME_V2_PRELAUNCH_ACCEPTANCE.json",
-      "sha256": "352f4b2e13aead41fc7f117236f1415813e2b767f5f31981feb65aac97134638"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/FSBS_R01_REPLACEMENT_03_RESOURCE_RETRY_ASSESSMENT.json",
-      "sha256": "b7da31fb94503d3a0f830c86f678092dc380c15be328b08bc86703e86d39d511"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/preflight.json",
-      "sha256": "6763aeac760c4499cdec7301dfdab687c4d191d62adfdf8300a31dbfa34b174e"
-    },
-    {
-      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/runner-spec.json",
-      "sha256": "b386a67e63c5d175df0eeaff9d84829946f431cd56e6917dee1c7f4e51e1f52f"
-    },
-    {
       "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/manifest.json",
-      "sha256": "49f1bbcbbb44466a98f88b158c9e65f817087b3ba6a660294e9df83943c883b5"
+      "sha256": "75f9098de6dc8aeaeee82a22d4d0f06a5b19f41b48823d8f080a90ec26104807"
     },
-    "resource-retry:single:admitted:usable-1.919886-gib:adjusted-peak-1.25-gib",
-    "firewall:prepared:no-process:no-metrics:no-checkpoints:no-payload:no-result"
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/operator-result.json",
+      "sha256": "3f183441233e94fa4104eab8f2218a9d0147999bb8dc7fef63119748d08b88a2"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/result.json",
+      "sha256": "34c34725aa0b795a95bd2b8cd859cd0825bd063eb10839b8841e27168a6f494a"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/activity.json",
+      "sha256": "b8355c04e8ca099e459b63e46016a8190b8f235476b24a301a91d1d83fb1085e"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/execute-preflight.json",
+      "sha256": "3788e1301b3bd8d43b032746e3bec190d50b7c7ae362a43173207c662debbe2a"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/stdout.log",
+      "sha256": "4fc510aff97c2196ddc4fd8ba8d6043024649dd1ab2d7aedf4448d31b42953ef"
+    },
+    {
+      "path": "temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "operator:fsbs-r01-complete-20260827-03:single-invocation:outer-exit-0:child-exit-0:group-quiescent",
+    "checkpoints:16:content-addressed:hashes-observed",
+    "firewall:complete-only-result-and-operator-result-present:no-scientific-interpretation"
   ],
   "waiting_on": [],
   "worktree_ref": "fsbs-c520-identity-v3",
