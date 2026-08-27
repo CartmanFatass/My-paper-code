@@ -1975,3 +1975,72 @@ The closure preserves all MGTAP documents, code and terminal evidence as provena
 ### Registry decision
 
 Advance registry revision `33` to revision `34` through the Portfolio CAS writer. Change MGTAP from `ACTIVE/g3` to `CLOSED/g3`; retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `CLOSED + DONE` with no next objective.
+
+## FSBS `-02` zero-activity terminal reconciliation and disjoint `-03` purchase — 2026-08-27T15:50:01Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `883a97d1ea1aa55e4987059c5ad28b23ba19ac30623bf35488cfbe8bc4d51619`; registry revision `34`, SHA-256 `a542cf71f5480a74a064245850a846a3eb171644d77d3d6a7a4f0b631f5d424f`.
+- Controlling global assignment: `6d7bf64d-5e9b-47b9-8c55-bf9a5fce88fb`.
+- Exact CM terminal return: `a69f4dbd-d539-480f-9978-f5c0278abcd2:return`; engineering-state revision `11`, committed and pushed at `aba6513bed9f3c96984168d8c28e229f99ffb30b` on `origin/omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2-state`.
+- Exact terminal refs: manifest SHA-256 `26eb4c2e7ab3740a860f2b4705f0e3da811075a5d3699fe01c1ba3871272a066`; prepare preflight `819aa684a4b8d26c6fa21d2e638f217639be872afffabd482cae93a9ab0a1721`; runner spec `3997e00c36ad1f24afa8ba3432843ce3173f7bd147e20994734052a24bfc5002`; execute preflight `10277c273a8da0464ea9f1c47ea62e156efbb7ab76c22cce6937b3510e88adfc`; stderr `aebf6bda669f5c6ba02af694360df058ae251604f42ca17556b76a9f60aeca30`; empty stdout `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+- Exact unchanged code candidate: clean local and remote `omp/finite_semantic_boundary_support/engineering/a394938d-runtime-v2` at `180e37e038552357b8622aeb92bc480dffdfec7e`.
+- Exact unchanged science refs: `DIRECTION.md` SHA-256 `e2f2ecd3a0593c080cc3d7cfe0eec27f026cca5a010d1b132449a1aebfac033e`; R01 current shared-checkout SHA-256 `13e23be0640744fb37846b7aee668fccf10b69a7a4533ffccbf08ac62aa9e10d`, canonical LF SHA-256 `9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb`; scientific text unchanged.
+
+### Immutable terminal fact and claim boundary
+
+Treat `fsbs-r01-complete-20260827-02` as permanently terminal `FAILED`. Its unique Operator invoked the frozen execute command exactly once, with no retry; the outer command exited `1`, the registered child exited `7`, the manifest reached terminal revision `4` with `terminal_reason=CHILD_EXIT`, and process-group quiescence is true. The exact preactivity cause is `release manifest assignment_id does not match frozen contract`: prepare recorded `fe0d7b66-c2ec-45c1-a638-33c8354d0cb6`, while the candidate runtime requires assignment identity equal to frozen run identity `fsbs-r01-complete-20260827-02`.
+
+This terminal is zero-activity technical evidence only. There is no activity marker, claim, payload, scientific result, evidence, observed metric, checkpoint or Operator result; artifact, checkpoint and metric directories are empty; stdout is empty; no scientific value was inspected. The failure precedes the R01 irreversible boundary and does not answer or consume any arm, seed, gate, comparator, endpoint or first-true branch. It is neither positive, null, failed nor inconclusive scientific evidence.
+
+Both `fsbs-r01-complete-20260827-01` and `fsbs-r01-complete-20260827-02`, their output roots, manifests, assignments, Operator identities and at-most-once histories are immutable tombstones. Neither may be retried, replayed, mutated, copied as a replacement manifest, opened as a scientific evidence source or reused as an execution, Effect or result identity.
+
+### Lifecycle and proportional investment decision
+
+Retain FSBS `ACTIVE/g1` and preserve the exact unchanged R01 object, authentic-versus-reassociated comparator, finite `M={6,8,10}` support, sixteen arm-seed identities, `157696` registered transactions, gates, controls, thresholds, resource caps, first-true map, no-result-based-rerun law and finite-toy claim ceiling.
+
+Purchase exactly one new disjoint replacement opportunity. This is proportionate because two prior identities terminated before scientific activity, while the currently accepted runtime candidate is clean, pushed and technically complete and the remaining defect is confined to a known prepare-time identity mismatch. The full prospective information value of the accepted R01 discriminator is therefore unspent, and the incremental remedy is a bounded result-blind identity/prepare contract rather than new science or runtime construction. Parking or closing now would convert a control-plane preparation mistake into a scientific lifecycle judgment. This decision does not authorize an automatic fourth identity: any terminal outcome of `-03`, including another zero-activity outcome, returns separately to Portfolio.
+
+The new purchase is exact:
+
+```text
+replacement_purchase=ONE_UNCHANGED_COMPLETE_FSBS_R01_TRANSACTION
+run_id=fsbs-r01-complete-20260827-03
+prepare_assignment_id=fsbs-r01-complete-20260827-03
+runner_root=temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/
+output_root=temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/
+future_operator_identity=Operator-fsbs-r01-complete-20260827-03
+candidate_base_sha=180e37e038552357b8622aeb92bc480dffdfec7e
+activity_authorized=false
+operator_now=false
+effect_refs=[]
+```
+
+The frozen resource envelope remains one CPU worker/thread, `600` CPU seconds, `600` wall seconds, `1073741824` peak-memory bytes, `536870912` scratch bytes and `268435456` durable-result bytes. These are unchanged result-blind caps, not execution permission. The new root and Effect must be absent before prepare and disjoint from both tombstones.
+
+### Exact next direction-owned scope
+
+Select one `REQUEST_CM` action for `FSBS-R01-DISJOINT-IDENTITY-AND-PREPARE-V3`. Its exact mutable paths are:
+
+```text
+docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_contract.py
+experiments/candidates/finite_semantic_boundary_support/variable_axis_uav_r01/empirical_manifest.py
+tests/experiments/candidates/finite_semantic_boundary_support/test_variable_axis_uav_r01_empirical_prelaunch.py
+temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/replacement_03/g1/
+temp/directions/finite_semantic_boundary_support/exp/fsbs-r01-complete-20260827-03/
+```
+
+CM must derive one direction-owned candidate from exact clean base `180e37e038552357b8622aeb92bc480dffdfec7e`; change only the registered run/output/Operator identity contract needed for `-03`; encode both `-01` and `-02` as forbidden terminal identities; preserve every scientific parameter and all non-identity runtime semantics; extend the existing nonregistered result-blind tests for the two tombstones, exact `-03` binding and `assignment_id == run_id`; and produce a clean pushed candidate with current source/test manifest and unchanged result-blind resource estimate.
+
+Only after those static predicates pass may CM perform one result-blind `hmasd_run prepare` for the new runner root. Prepare must bind `run_id`, manifest `assignment_id`, writer/Operator identity, command, parameters, candidate/code SHA, cwd and the sole prospective Effect exactly as declared above; specifically, the preparation command must supply `assignment_id=fsbs-r01-complete-20260827-03`, never the Clerk/CM envelope message ID. Before prepare, CM must prove the `-03` root and temporary/result siblings absent and both tombstone roots untouched. It must update engineering state by CAS and return fresh path+SHA and exact branch/full-SHA/remote-ref facts.
+
+Done means one strict `PREPARED` package for `-03` exists and validates byte-for-byte, while no payload or registered arm/seed has run, no activity marker/checkpoint/metric/result exists, no Operator task has been created, and `activity_authorized=false`, `operator_now=false`, `effect_refs=[]` remain exact. Any identity, byte, Git, root-absence or resource predicate failure must return one direction-scoped reason without prepare retry or Operator creation.
+
+No change to the R01 science authority, learner, engine, checkpoint or result semantics; no old-run mutation; no `hmasd_run execute`, payload, scientific command, automatic Operator, provider, shared-core/main integration, deployment or flight is authorized. Only a later Clerk-routed continuation after a conforming PREPARED return may consider one `Operator-fsbs-r01-complete-20260827-03` holding only the frozen command through terminal observation.
+
+### Registry decision
+
+Advance registry revision `34` to revision `35` through the Portfolio CAS writer. Keep FSBS `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `ACTIVE + REQUEST_CM` with the exact scope above.
