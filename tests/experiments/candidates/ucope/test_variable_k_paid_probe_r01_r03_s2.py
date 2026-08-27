@@ -456,10 +456,18 @@ def test_descriptive_tail_agreement_normalizes_fp32_tree_roundoff(
     ("weights", "matched_history"),
     (
         ((np.float32(np.nan), np.float32(1.0)), 0),
+        ((np.float32(-1.0e-6), np.float32(1.000001)), 0),
+        ((np.float32(1.000001), np.float32(-1.0e-6)), 0),
         ((np.float32(-0.1), np.float32(1.1)), 0),
         ((np.float32(1.1), np.float32(-0.1)), 0),
     ),
-    ids=("nonfinite", "negative-total", "above-total"),
+    ids=(
+        "nonfinite",
+        "near-negative-total",
+        "near-above-total",
+        "negative-total",
+        "above-total",
+    ),
 )
 def test_descriptive_tail_agreement_rejects_invalid_aggregates(
     monkeypatch: pytest.MonkeyPatch,

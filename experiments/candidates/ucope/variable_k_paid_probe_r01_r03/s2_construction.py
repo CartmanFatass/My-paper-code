@@ -1134,21 +1134,17 @@ def _descriptive_tail_agreement(
     if (
         not math.isfinite(float(weight_total))
         or not math.isfinite(float(total))
-        or float(total) < -float(INVARIANT_TOLERANCE)
-        or float(total) > float(weight_total) + float(INVARIANT_TOLERANCE)
+        or total < np.float32(0.0)
+        or total > weight_total
     ):
         raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
     normalized = np.float32(total / weight_total)
     if (
         not math.isfinite(float(normalized))
-        or float(normalized) < -float(INVARIANT_TOLERANCE)
-        or float(normalized) > 1.0 + float(INVARIANT_TOLERANCE)
+        or normalized < np.float32(0.0)
+        or normalized > np.float32(1.0)
     ):
         raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
-    if normalized < np.float32(0.0):
-        return np.float32(0.0)
-    if normalized > np.float32(1.0):
-        return np.float32(1.0)
     return normalized
 
 
