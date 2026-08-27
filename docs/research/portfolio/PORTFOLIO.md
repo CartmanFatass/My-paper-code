@@ -2071,3 +2071,61 @@ This pause authorizes no science/code edit, dependency copy or integration, sour
 ### Registry decision
 
 Advance registry revision `35` to revision `36` through the Portfolio CAS writer. Change SCDMP from `ACTIVE/g1` to `PARKED/g1`; retain its identity, generation, dependencies and state paths; point both its lifecycle-decision ref and its non-null reactivation-condition ref to this heading. Refresh every registry lifecycle-reference SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `PARKED + REQUEST_USER` with the exact question above.
+
+## Post-MGTAP registered-candidate selection and APFI activation — 2026-08-27T16:11:50Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `32e97729b5fc8b6f4a0841e8dba14bd9b3ab4006b2a0f9a2dfece2828f0a1878`; registry revision `36`, SHA-256 `42f39430b48157fcfa85117c80bd7c4cbe4f8dcc9ce4bf0ba0778f1b80c78afb`.
+- Controlling global assignment: `f5b34e82-f3a6-4e6f-ab9c-f968e829dbf8`, SHA-256 `6adf1b1c2c59afce48357177d84e0f2dbc26d02194dd86fce1b30bf3db1cf3f6`; source global request `204a60e6-a8e3-4165-80b9-0516b5982138`, SHA-256 `c198983215af4dcf399046e07a871d6e31a491ec33c718d1d597f406e3b35c5e`.
+- Terminal boundary: `metric_ground_transport_allocation` remains `CLOSED/g3`; current `DIRECTION.md` SHA-256 `363c6568e9c4b7846eeaf1fbddbc191bc05e44f3e8a00252d7307195de0c66b9`. No third support extension, seed family, threshold change or reinterpretation is selected.
+- Current independent owners remain unchanged: FSBS and UCOPE are `ACTIVE/g1`; SCDMP is `PARKED/g1` under its exact user-authority reactivation condition.
+
+### Comparison boundary and ranked result
+
+The fresh selection compares scientific potential, proximity to a meaning-complete cooperative-UAV/MARL experiment, prospective information gain, current uncertainty and proportionate definition cost. Scientific nonduplication means a different mechanism, estimand and falsifier; code paths and experiment Effects are later execution constraints and are not selection evidence.
+
+The ranked current result is:
+
+| Rank | Exact direction ID | Decision | Evidence-grounded boundary |
+| --- | --- | --- | --- |
+| `1` | `active_post_churn_population_flow_identification` | activate `ACTIVE/g1`; `REQUEST_EM` | The existing zero-training envelope already limits the search to four natural UAV host families and freezes the decisive identifiability clauses, safe-probe controls, containing-RNN alternative and stop law. R02 is not accepted because known witnesses collapse to `SIMPLE-EVENT`; that exact failure creates a bounded, high-information EM definition question rather than an engineering or resource wait. |
+| `2` | `field_slot_coordination` | retain `REGISTERED/g1` | It is scientifically nonduplicative and potentially useful for anonymous variable-`N` coordination, but remains a preliminary representation sketch with no registered host, probability law, train/held-out rosters, thresholds, budget or UAV bridge. It is less mature than APFI's finite host registry and pass/stop contract. |
+| `3` | `covariance_calibrated_information_clock` | retain `REGISTERED/g1` | Revision 08 has a mature result-blind resource envelope, but the current scientific proposal remains reducible to scalar ESS until an equal-ESS/opposite-action witness exists; its authority explicitly licenses no UAV claim. |
+| `4` | `degraded_incumbent_shadow_handover` | retain `REGISTERED/g1` | It remains the strongest direct-UAV retained object, but its durable no-current disposition requires a complete five-part named-substrate/scaling/CM-cost/preservation/rejudgment packet. MGTAP closure or idle hardware is explicitly insufficient, and no such packet is present. |
+| `5` | `roster_consistent_latent_exploration` | retain `REGISTERED/g1` | Its Pro-closed panel is mature, but the current gap is an expired/immutable lease-lineage and technical supersession problem with a dormant CM/Root continuation, not a fresh EM scientific definition cycle. |
+| `6` | `variable_n_fleet_churn`, `semantic_graphon_shared_policy`, `voronoi_quadrature_field_policy` | retain each `REGISTERED/g1` | Their closed scientific objects remain valuable, but current evidence preserves explicit construction/resource fences: disproportionate bounded-controller construction for VNFC, an impractical SGSP safe-window/hardgate, and a VQFP high case outside every non-GPU ceiling with repeat stage forbidden. |
+
+The remaining registered directions are unchanged. Retained-result objects `acvc`, `dual_epoch_receipt_survival`, `event_triggered_budgeted_cooperative_renewal`, `expressibility_gated_renewal_credit_relay`, `opportunity_normalized_lease_gated_rebinding`, `optimizer_entropy_exposure_boundary_relay`, `recct_lite` and `vsp_02` have no accepted fresh successor question. `commitment_residual_triggered_options`, `eociv_lite`, `renewal_indexed_score_plasticity`, `roster_smf`, `scope_1s`, `vap_folr_core`, `vsp_03`, `vsp_04`, `vsp_05`, `vsp_06_mssr` and `vsp_c1` remain no-current, dormant, reducible, incomplete or already contained by a cleaner active direction. `ec4g_r1` and `orbit_shadow_read` remain covered by DEARS evidence rather than forming independent current objects. None receives a lifecycle, dependency, generation or owner change.
+
+### Fresh selection: `active_post_churn_population_flow_identification`
+
+Activate APFI at generation `1`. Exact current refs are:
+
+- `docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md`, SHA-256 `1dc60801d81b47d33e8be3aae62e2b3096026e5c1788c8953ca5a93f21d3b34b`.
+- `docs/research/candidates/active_post_churn_population_flow_identification/APFI_TLD_BRP_R02_SCIENCE_CARD_20260823.md`, SHA-256 `aeb3b66e698cd53f9a2799a74cc3dc72dce9bab8ca857c3df2570682a74f9fc4`.
+- `docs/research/candidates/active_post_churn_population_flow_identification/APFI_R01_PORTFOLIO_RESEARCH_ENVELOPE_20260823.md`, SHA-256 `a59bea867668de098761843bd0687d3a89a34f5e5f8e0645e2bd6cdfda385f28`.
+
+APFI is scientifically distinct from the current cohort. FSBS tests authentic carrier-to-record association and cooperative deconfliction under a fully specified finite semantic interface. UCOPE tests the value and containment of paid acquisition under variable `k`. SCDMP's parked object tests foundation-conditioned order opportunity. APFI instead asks whether two policy-visible-identical post-churn histories carry different persistent future population source/sink laws that reverse the task-optimal downstream legal action, and whether one safe non-actuating matched query identifies that law. Any generic probe benefit, direct physical work, or history feature solvable by `SIMPLE-EVENT` or the exact-containing RNN is a fatal alternative rather than APFI evidence.
+
+### Exact initial EM objective
+
+Select one `REQUEST_EM` action, `APFI-NONREDUCIBLE-CENSORED-FLOW-UAV-DEFINITION-R01`. The EM owns only:
+
+```text
+docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md
+docs/research/candidates/active_post_churn_population_flow_identification/APFI_NONREDUCIBLE_CENSORED_FLOW_UAV_SCIENCE_AUTHORITY_R01_20260827.md
+docs/research/candidates/active_post_churn_population_flow_identification/workflow/research/state.json
+```
+
+Using only the four host families already frozen by the APFI Portfolio envelope—persistent wildfire/plume monitoring, aerial relay coverage, disaster search-and-rescue coverage, and persistent infrastructure inspection—the EM must return exactly one of two complete outcomes:
+
+1. a meaning-complete prospective finite host in which two histories are identical in current roster, physical state, legal actions and all passive policy-visible information, but have different persistent future population-flow laws and different task-value-maximizing downstream legal actions; one safe physically responsive non-actuating query and matched sham distinguish the laws without leakage; real/sham, history-swap, response-swap and action-clamp controls are frozen; a full-history RNN with identical observations and query access strictly contains the APFI representation; finite support, workload, resource/activity gates, evaluation, first-true branches and the narrow named-host/UAV claim ceiling are complete; or
+2. a complete no-host conclusion naming which clause fails in each of the four families, with a durable revisit condition and no successor invention.
+
+Done requires the new authority (or no-host closure) plus exact `DIRECTION.md` and research-state path+SHA refs. The EM must explicitly falsify `SIMPLE-EVENT`, passive sufficient-belief inference by the containing RNN, and direct-work/state-displacement explanations. A pass supports only named-host constructibility, passive-information insufficiency and existence of a legal information-bearing query; it does not support APFI efficacy, representation necessity, policy-class superiority, general dynamic `N`, UAV performance, safety, deployment or flight.
+
+No source/test/build/probe command, provider operation, CM scope, implementation, scientific activity, identity, coordinate, checkpoint, result, partial value, Operator, deployment or flight is purchased. A meaning-complete positive authority returns separately for Portfolio investment judgment; it does not automatically release engineering.
+
+### Registry decision
+
+Advance registry revision `36` to revision `37` through the Portfolio CAS writer. Change only APFI from `REGISTERED/g1` to `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA to the final Portfolio bytes. Preserve MGTAP `CLOSED/g3`, SCDMP `PARKED/g1`, FSBS and UCOPE `ACTIVE/g1`, and every non-selected direction exactly. The corresponding sole fresh action is `active_post_churn_population_flow_identification: ACTIVE + REQUEST_EM`.
