@@ -6,10 +6,11 @@ from itertools import product
 from typing import Any
 
 
-RUN_ID = "fsbs-r01-complete-20260827-01"
+LEGACY_TERMINAL_RUN_ID = "fsbs-r01-complete-20260827-01"
+RUN_ID = "fsbs-r01-complete-20260827-02"
 OUTPUT_ROOT = (
     "temp/directions/finite_semantic_boundary_support/exp/"
-    "fsbs-r01-complete-20260827-01/"
+    "fsbs-r01-complete-20260827-02/"
 )
 MODULE = (
     "experiments.candidates.finite_semantic_boundary_support."
@@ -19,6 +20,24 @@ PYTHON = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
 REGISTERED_SEEDS = (11, 23, 37, 53, 71, 89, 107, 127)
 ARMS = ("AUTHENTIC", "REASSOCIATED")
 BRANCHES = ("NATURAL", "MASKED", "FORCE_RELEVANT", "FORCE_DECOY")
+AUTHORITY_REFS = (
+    {
+        "path": "docs/research/candidates/finite_semantic_boundary_support/FSBS_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY_R01_20260827.md",
+        "sha256": "9e302f2ff32316c7e992a531fe49b112f4dc07397209055b320d4e4d98ed42fb",
+    },
+    {
+        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s0/g1/FSBS_R01_S0_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "778cbe7c8c90279b0787e6a651ca537cb72e94b0b786a453a2e62b297dd571de",
+    },
+    {
+        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s1/g1/FSBS_R01_S1_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "dec17c340970bb5aa3c46cf1a15cf40c814cda708ec9950f721a3f134df990b0",
+    },
+    {
+        "path": "temp/directions/finite_semantic_boundary_support/test/variable_axis_uav_r01/s2/g1/FSBS_R01_S2_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "dafa687110a6e9af331f3328b0eb4943536bdfc4af6c458d0c214d67266d7cfd",
+    },
+)
 
 
 def _canonical(value: object) -> bytes:
@@ -27,9 +46,11 @@ def _canonical(value: object) -> bytes:
 
 def empirical_boundary() -> dict[str, Any]:
     return {
-        "schema": "FSBS_R01_S3_EMPIRICAL_BOUNDARY_V1",
+        "schema": "FSBS_R01_REGISTERED_RUNTIME_BOUNDARY_V2",
         "run_id": RUN_ID,
         "output_root": OUTPUT_ROOT,
+        "legacy_terminal_run_id": LEGACY_TERMINAL_RUN_ID,
+        "legacy_terminal_replay_permitted": False,
         "module": MODULE,
         "payload_argv": [PYTHON, "-m", MODULE],
         "destination_preconditions": {
@@ -52,6 +73,7 @@ def checkpoint_identities() -> list[dict[str, Any]]:
             "seed": seed,
             "relative_path": f"checkpoints/{arm.lower()}-seed-{seed}.json",
             "materialized": False,
+            "content_addressed": True,
         }
         for arm, seed in product(ARMS, REGISTERED_SEEDS)
     ]
@@ -63,6 +85,23 @@ def canonical_parameters() -> dict[str, Any]:
         "namespace": "FSBS-VN1-R01",
         "registered_seeds": list(REGISTERED_SEEDS),
         "arms": list(ARMS),
+        "authority_refs": [dict(ref) for ref in AUTHORITY_REFS],
+        "effect_refs": [
+            {
+                "kind": "LOCAL_RESULT_ROOT",
+                "resource_id": OUTPUT_ROOT,
+                "operation": "CREATE_ONLY",
+            }
+        ],
+        "resource_caps": {
+            "wall_seconds": 600,
+            "cpu_seconds": 600,
+            "peak_memory_bytes": 1_073_741_824,
+            "scratch_bytes": 536_870_912,
+            "durable_result_bytes": 268_435_456,
+            "workers": 1,
+            "threads_per_worker": 1,
+        },
         "architecture": {
             "selector_shape": [2, 4],
             "selector_features": [
@@ -183,7 +222,7 @@ def git_prerequisites(observed_shared_head: str) -> dict[str, Any]:
     return {
         "required_branch": (
             "omp/finite_semantic_boundary_support/engineering/"
-            "bc2db89b-8d64-4f7e-abac-5f1b0a58b4c9"
+            "a394938d-runtime-v2"
         ),
         "observed_shared_checkout_head": observed_shared_head,
         "observed_shared_checkout_eligible": False,

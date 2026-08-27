@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -80,3 +81,77 @@ def assert_no_terminal_rerun(root: Path) -> None:
         "COMPLETED",
     }:
         raise PermissionError("complete terminal forbids registered rerun")
+
+
+def validate_runtime_prelaunch_acceptance(
+    acceptance: Mapping[str, Any], repo: Path
+) -> dict[str, Any]:
+    if acceptance.get("schema") != "FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE":
+        raise ValueError("runtime V2 acceptance schema is invalid")
+    if acceptance.get("terminal_status") != "RUNTIME_V2_TECHNICALLY_ACCEPTED":
+        raise ValueError("runtime V2 acceptance is not technically complete")
+    contract = acceptance.get("runtime_contract")
+    if not isinstance(contract, Mapping) or contract.get("schema") != "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2":
+        raise ValueError("runtime V2 candidate-local contract is invalid")
+    parameters = contract.get("parameters")
+    estimate = contract.get("resource_estimate")
+    effect = contract.get("effect")
+    if not isinstance(parameters, Mapping) or parameters.get("effect_refs") != [effect]:
+        raise PermissionError("runtime V2 acceptance Effect binding is invalid")
+    expected_caps = {
+        "wall_seconds": 600,
+        "cpu_seconds": 600,
+        "peak_memory_bytes": 1_073_741_824,
+        "scratch_bytes": 536_870_912,
+        "durable_result_bytes": 268_435_456,
+        "workers": 1,
+        "threads_per_worker": 1,
+    }
+    if parameters.get("resource_caps") != expected_caps:
+        raise PermissionError("runtime V2 acceptance resource caps are invalid")
+    if not isinstance(estimate, Mapping) or any(
+        estimate.get(field) != expected_caps[field]
+        for field in expected_caps
+    ):
+        raise PermissionError("runtime V2 estimate does not equal full frozen caps")
+    for ref in contract.get("source_test_manifest", {}).get("refs", ()):
+        path = repo / ref["path"]
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != ref["sha256"]:
+            raise ValueError(f"runtime V2 source/test bytes drifted: {ref['path']}")
+    reserved = acceptance.get("reserved_output_effect")
+    if (
+        reserved != {**effect, "reserved_not_created": True}
+        or (repo / str(effect["resource_id"])).exists()
+    ):
+        raise PermissionError("runtime V2 reserved CREATE_ONLY root boundary is invalid")
+    technical = acceptance.get("technical_fixture_validation")
+    if not isinstance(technical, Mapping) or (
+        technical.get("cold_resume_equal") is not True
+        or technical.get("repeated_update") is not False
+        or technical.get("cross_arm_or_seed_state") is not False
+        or technical.get("registered_seed_or_arm_used") is not False
+    ):
+        raise ValueError("runtime V2 technical mirror validation is incomplete")
+    if (
+        acceptance.get("empirical_activity_released") is not False
+        or acceptance.get("operator_now") is not False
+        or acceptance.get("effect_refs") != []
+        or any(acceptance.get("firewall", {}).values())
+    ):
+        raise PermissionError("runtime V2 prelaunch firewall is open")
+    deterministic = {
+        key: value
+        for key, value in acceptance.items()
+        if key not in {"actual_technical_measurements", "deterministic_core_sha256"}
+    }
+    digest = hashlib.sha256(
+        json.dumps(deterministic, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if acceptance.get("deterministic_core_sha256") != digest:
+        raise ValueError("runtime V2 deterministic core digest is invalid")
+    return {
+        "accepted": True,
+        "source_test_ref_count": len(contract["source_test_manifest"]["refs"]),
+        "full_caps_equal": True,
+        "single_create_only_effect": True,
+    }

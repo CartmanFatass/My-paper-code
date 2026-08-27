@@ -7,10 +7,16 @@ import os
 import tempfile
 import time
 import tracemalloc
+import subprocess
+import re
 from pathlib import Path
 from typing import Any, Mapping
 
 from .empirical_contract import (
+    LEGACY_TERMINAL_RUN_ID,
+    AUTHORITY_REFS,
+    OUTPUT_ROOT,
+    RUN_ID,
     canonical_parameters,
     canonical_resource_estimate,
     checkpoint_identities,
@@ -62,6 +68,26 @@ def _canonical(value: object) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
+def observe_positive_process_cpu_ns(started_cpu_ns: int | None = None) -> int:
+    """Return an observed positive process-CPU delta or fail explicitly."""
+    started = time.process_time_ns() if started_cpu_ns is None else started_cpu_ns
+    deadline = time.perf_counter_ns() + 1_000_000_000
+    state = b"FSBS-R01-RESULT-BLIND-CPU-CLOCK"
+    attempt = 0
+    while time.perf_counter_ns() < deadline:
+        observed = time.process_time_ns() - started
+        if observed > 0:
+            return observed
+        for _ in range(256):
+            state = hashlib.sha256(
+                state + attempt.to_bytes(8, "big", signed=False)
+            ).digest()
+            attempt += 1
+    raise RuntimeError(
+        "process CPU clock did not advance during bounded technical work"
+    )
+
+
 def _file_ref(repo: Path, relative: str) -> dict[str, str]:
     path = repo / relative
     if not path.is_file():
@@ -80,6 +106,111 @@ def source_test_manifest(repo: Path) -> dict[str, Any]:
         "schema": "FSBS_R01_S3_SOURCE_TEST_MANIFEST_V1",
         "refs": refs,
         "sha256": hashlib.sha256(_canonical(refs)).hexdigest(),
+    }
+
+
+def build_runtime_contract(repo: Path, *, candidate_branch: str) -> dict[str, Any]:
+    """Build the tracked-code-only release contract used by the payload.
+
+    Unlike the historical S3 dossier, this contract has no dependency on ignored
+    acceptance artifacts.  Git HEAD binds the exact candidate bytes at prepare
+    and launch time; the fresh source/test manifest remains useful prelaunch
+    evidence and a diagnostic inventory.
+    """
+
+    required_branch = git_prerequisites("")["required_branch"]
+    if candidate_branch != required_branch:
+        raise ValueError("candidate_branch does not match the replacement contract")
+    boundary = empirical_boundary()
+    return {
+        "schema": "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2",
+        "run_id": RUN_ID,
+        "legacy_terminal_run_id": LEGACY_TERMINAL_RUN_ID,
+        "legacy_terminal_replay_permitted": False,
+        "direction_id": "finite_semantic_boundary_support",
+        "candidate_branch": required_branch,
+        "payload_argv": boundary["payload_argv"],
+        "effect": {
+            "kind": "LOCAL_RESULT_ROOT",
+            "resource_id": OUTPUT_ROOT,
+            "operation": "CREATE_ONLY",
+        },
+        "parameters": canonical_parameters(),
+        "authority_refs": [dict(ref) for ref in AUTHORITY_REFS],
+        "resource_estimate": canonical_resource_estimate(),
+        "checkpoint_identities": checkpoint_identities(),
+        "source_test_manifest": source_test_manifest(repo),
+        "complete_only_publication": True,
+        "workers": 1,
+        "threads_per_worker": 1,
+    }
+
+
+def validate_candidate_source_binding(
+    contract: Mapping[str, Any], observed_blob_hashes: Mapping[str, str]
+) -> dict[str, Any]:
+    refs = contract.get("source_test_manifest", {}).get("refs", ())
+    expected = {str(ref["path"]): str(ref["sha256"]) for ref in refs}
+    if not expected or dict(observed_blob_hashes) != expected:
+        raise PermissionError("candidate blob bytes do not match source/test manifest")
+    return {
+        "source_test_bytes_equal_candidate": True,
+        "ref_count": len(expected),
+    }
+
+
+def observe_candidate_blob_hashes(
+    repo: Path, candidate_head: str, contract: Mapping[str, Any]
+) -> dict[str, str]:
+    observed: dict[str, str] = {}
+    for ref in contract["source_test_manifest"]["refs"]:
+        path = str(ref["path"])
+        completed = subprocess.run(
+            ["git", "-C", str(repo), "show", f"{candidate_head}:{path}"],
+            check=False,
+            capture_output=True,
+        )
+        if completed.returncode:
+            raise PermissionError(f"candidate blob cannot be observed: {path}")
+        observed[path] = hashlib.sha256(completed.stdout).hexdigest()
+    return observed
+
+
+def validate_operator_runtime_files(
+    manifest: Mapping[str, Any], manifest_path: Path, *, observed_branch: str
+) -> dict[str, Any]:
+    root = manifest_path.resolve().parent
+    resources = manifest["resources"]
+    preflight_path = root / str(resources["preflight_ref"])
+    runner_path = root / "runner-spec.json"
+    if not preflight_path.is_file() or not runner_path.is_file():
+        raise PermissionError("Operator preflight/runner files are absent")
+    preflight_bytes = preflight_path.read_bytes()
+    runner_bytes = runner_path.read_bytes()
+    if hashlib.sha256(preflight_bytes).hexdigest() != resources["preflight_sha256"]:
+        raise PermissionError("Operator preflight hash does not match manifest")
+    if hashlib.sha256(runner_bytes).hexdigest() != resources["runner_spec_sha256"]:
+        raise PermissionError("Operator runner hash does not match manifest")
+    preflight = json.loads(preflight_bytes)
+    runner = json.loads(runner_bytes)
+    if preflight.get("memory_safe") is not True:
+        raise PermissionError("Operator preflight is not memory safe")
+    expected_runner = {
+        "schema_version": 1,
+        "command": manifest["command"],
+        "command_sha256": manifest["command_sha256"],
+        "cwd": manifest["cwd"],
+        "git_branch": observed_branch,
+        "output_root": str(root),
+        "outputs": manifest["outputs"],
+        "preflight_sha256": resources["preflight_sha256"],
+    }
+    if runner != expected_runner:
+        raise PermissionError("Operator runner specification does not match manifest")
+    return {
+        "operator_runtime_files_valid": True,
+        "preflight_sha256": resources["preflight_sha256"],
+        "runner_spec_sha256": resources["runner_spec_sha256"],
     }
 
 
@@ -144,33 +275,172 @@ def build_prelaunch_dossier(repo: Path, *, observed_shared_head: str) -> dict[st
 
 def validate_release_manifest(
     manifest: Mapping[str, Any],
-    dossier: Mapping[str, Any],
+    contract: Mapping[str, Any],
     *,
+    manifest_path: Path,
+    observed_cwd: Path,
     observed_branch: str,
     observed_candidate_head: str,
-) -> dict[str, bool]:
-    template = dossier["run_manifest_template"]
+    observed_payload_pid: int,
+    operator_runtime_files: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    if manifest.get("run_id") == LEGACY_TERMINAL_RUN_ID:
+        raise PermissionError("legacy terminal run cannot be replayed")
+    if contract.get("schema") != "FSBS_R01_CANDIDATE_RUNTIME_CONTRACT_V2":
+        raise PermissionError("candidate-local runtime contract schema is invalid")
+    operator = f"Operator-{RUN_ID}"
+    parameters = canonical_parameters()
+    observed_parameters = manifest.get("parameters")
+    if not isinstance(observed_parameters, Mapping):
+        raise PermissionError("release manifest parameters are absent")
+    if observed_parameters.get("effect_refs") != [contract.get("effect")]:
+        raise PermissionError("release manifest Effect is not the single frozen CREATE_ONLY Effect")
+    expected_caps = {
+        "wall_seconds": 600,
+        "cpu_seconds": 600,
+        "peak_memory_bytes": 1_073_741_824,
+        "scratch_bytes": 536_870_912,
+        "durable_result_bytes": 268_435_456,
+        "workers": 1,
+        "threads_per_worker": 1,
+    }
+    if observed_parameters.get("resource_caps") != expected_caps:
+        raise PermissionError("release manifest full resource caps do not match frozen contract")
+    if observed_parameters.get("authority_refs") != contract.get("authority_refs"):
+        raise PermissionError("release manifest R01 authority refs do not match frozen contract")
+    command = empirical_boundary()["payload_argv"]
     exact = {
-        "schema_version": template["schema_version"],
-        "writer": template["writer"],
-        "operator_identity": template["operator_identity"],
-        "run_id": template["run_id"],
-        "direction_id": template["direction_id"],
-        "assignment_id": template["assignment_id"],
+        "schema_version": 1,
+        "writer": operator,
+        "operator_identity": operator,
+        "run_id": RUN_ID,
+        "direction_id": "finite_semantic_boundary_support",
+        "assignment_id": RUN_ID,
         "status": "RUNNING",
-        "command": template["command"],
-        "parameters_sha256": template["parameters_sha256"],
+        "command": command,
+        "command_sha256": hashlib.sha256(
+            b"\0".join(os.fsencode(part) for part in command)
+        ).hexdigest(),
+        "parameters": parameters,
+        "parameters_sha256": hashlib.sha256(_canonical(parameters)).hexdigest(),
     }
     for field, expected in exact.items():
         if manifest.get(field) != expected:
             raise PermissionError(f"release manifest {field} does not match frozen contract")
-    required_branch = dossier["git_prerequisites"]["required_branch"]
+    observed_cwd = observed_cwd.resolve()
+    if Path(str(manifest.get("cwd", ""))).resolve() != observed_cwd:
+        raise PermissionError("release manifest cwd does not match observed cwd")
+    expected_manifest = (observed_cwd / OUTPUT_ROOT / "manifest.json").resolve()
+    if manifest_path.resolve() != expected_manifest:
+        raise PermissionError("release manifest path does not match create-only Effect")
+    required_branch = str(contract["candidate_branch"])
     if observed_branch != required_branch:
         raise PermissionError("release branch does not match required_branch")
     code_sha = manifest.get("code_sha")
     if not isinstance(code_sha, str) or code_sha != observed_candidate_head:
         raise PermissionError("release code_sha does not equal observed candidate head")
-    return {"released": True}
+    claim = hashlib.sha256(
+        _canonical(
+            {
+                "direction_id": "finite_semantic_boundary_support",
+                "code_sha": code_sha,
+                "command_sha256": exact["command_sha256"],
+            }
+        )
+    ).hexdigest()
+    if manifest.get("claim_sha256") != claim:
+        raise PermissionError("release manifest claim_sha256 is invalid")
+    estimate = manifest.get("estimate")
+    expected_estimate = {
+        "wall_seconds": 600.0,
+        "basis": "ACCEPTED_S2_HIGH_RESULT_BLIND_PROJECTION",
+        "peak_memory_gib": 1.0,
+    }
+    if estimate != expected_estimate:
+        raise PermissionError("release manifest estimate does not match frozen caps")
+    environment = manifest.get("environment")
+    if (
+        not isinstance(environment, Mapping)
+        or set(environment) != {"python", "platform", "hostname", "captured_variables"}
+        or not all(
+            isinstance(environment.get(field), str) and environment.get(field)
+            for field in ("python", "platform", "hostname")
+        )
+        or environment.get("captured_variables") != {}
+    ):
+        raise PermissionError("release manifest environment provenance is invalid")
+    outputs = manifest.get("outputs")
+    if outputs != {
+        "stdout": "stdout.log",
+        "stderr": "stderr.log",
+        "checkpoints": "checkpoints",
+        "metrics": "metrics",
+        "artifacts": "artifacts",
+    }:
+        raise PermissionError("release manifest outputs do not match the frozen output layout")
+    process = manifest.get("process")
+    required_process_keys = {
+        "execution_token", "pid", "process_group_id", "linux_boot_id",
+        "proc_start_ticks", "identity_persisted_at", "group_quiescent",
+        "started_at", "ended_at", "exit_code", "terminal_reason",
+    }
+    if (
+        not isinstance(process, Mapping)
+        or set(process) != required_process_keys
+        or not isinstance(process.get("execution_token"), str)
+        or not process.get("execution_token")
+        or not isinstance(process.get("pid"), int)
+        or process.get("pid") != observed_payload_pid
+        or not isinstance(process.get("process_group_id"), int)
+        or not isinstance(process.get("proc_start_ticks"), int)
+        or not isinstance(process.get("linux_boot_id"), str)
+        or not isinstance(process.get("identity_persisted_at"), str)
+        or not isinstance(process.get("started_at"), str)
+        or process.get("group_quiescent") is not None
+        or process.get("ended_at") is not None
+        or process.get("exit_code") is not None
+        or process.get("terminal_reason") is not None
+    ):
+        raise PermissionError("release manifest process RUNNING identity is invalid")
+    resources = manifest.get("resources")
+    sha256_pattern = re.compile(r"[0-9a-f]{64}\Z")
+    if (
+        not isinstance(resources, Mapping)
+        or set(resources) != {
+            "preflight_ref", "preflight_sha256", "runner_spec_sha256",
+            "workers", "threads_per_worker", "memory_safe",
+        }
+        or resources.get("preflight_ref") != "preflight.json"
+        or not isinstance(resources.get("preflight_sha256"), str)
+        or not sha256_pattern.fullmatch(str(resources.get("preflight_sha256")))
+        or not isinstance(resources.get("runner_spec_sha256"), str)
+        or not sha256_pattern.fullmatch(str(resources.get("runner_spec_sha256")))
+        or resources.get("workers") != 1
+        or resources.get("threads_per_worker") != 1
+        or resources.get("memory_safe") is not True
+    ):
+        raise PermissionError("release manifest resources/preflight/runner provenance is invalid")
+    if operator_runtime_files != {
+        "operator_runtime_files_valid": True,
+        "preflight_sha256": resources["preflight_sha256"],
+        "runner_spec_sha256": resources["runner_spec_sha256"],
+    }:
+        raise PermissionError("release manifest lacks validated Operator runtime file provenance")
+    if (
+        not isinstance(manifest.get("revision"), int)
+        or manifest["revision"] < 2
+        or not isinstance(manifest.get("created_at"), str)
+        or not isinstance(manifest.get("updated_at"), str)
+        or manifest.get("observed_metrics") != {}
+    ):
+        raise PermissionError("release manifest RUNNING revision/timestamps are invalid")
+    return {
+        "released": True,
+        "run_id": RUN_ID,
+        "code_sha": code_sha,
+        "authority_refs": contract["authority_refs"],
+        "source_test_manifest": contract["source_test_manifest"],
+    }
 
 
 def _atomic_write(path: Path, value: Mapping[str, Any]) -> None:
@@ -263,7 +533,7 @@ def write_prelaunch_acceptance(
         "deterministic_core_sha256": deterministic_core_sha256,
         "actual_technical_measurements": {
             "scope": "S3-nonregistered-prelaunch-build-validate-atomic-write",
-            "cpu_ns": time.process_time_ns() - started_cpu,
+            "cpu_ns": observe_positive_process_cpu_ns(started_cpu),
             "wall_ns": time.perf_counter_ns() - started_wall,
             "peak_memory_bytes": peak_memory,
             "peak_memory_method": "tracemalloc-python-allocations",
@@ -289,18 +559,105 @@ def write_prelaunch_acceptance(
     _atomic_write(output, acceptance)
 
 
+def write_runtime_prelaunch_acceptance(
+    output: Path,
+    repo: Path,
+    *,
+    candidate_branch: str,
+    scratch_root: Path,
+) -> None:
+    """Atomically record result-blind V2 acceptance from candidate-local bytes."""
+
+    from .empirical_validation import (
+        validate_cold_resume_fixture,
+        validate_runtime_prelaunch_acceptance,
+    )
+
+    output = output.resolve()
+    scratch_root = scratch_root.resolve()
+    scratch_root.mkdir(parents=True, exist_ok=True)
+    tracemalloc.start()
+    started_cpu = time.process_time_ns()
+    started_wall = time.perf_counter_ns()
+    contract = build_runtime_contract(repo, candidate_branch=candidate_branch)
+    technical = validate_cold_resume_fixture(scratch_root)
+    checkpoint_bytes = sum(
+        path.stat().st_size for path in scratch_root.glob("*.json") if path.is_file()
+    )
+    _current, peak_memory = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    core: dict[str, Any] = {
+        "schema": "FSBS_R01_RUNTIME_V2_PRELAUNCH_ACCEPTANCE",
+        "terminal_status": "RUNTIME_V2_TECHNICALLY_ACCEPTED",
+        "run_id": RUN_ID,
+        "runtime_contract": contract,
+        "payload_argv": contract["payload_argv"],
+        "reserved_output_effect": {
+            **contract["effect"],
+            "reserved_not_created": not (repo / OUTPUT_ROOT).exists(),
+        },
+        "technical_fixture_validation": technical,
+        "firewall": {
+            "registered_seed_execution": False,
+            "registered_arm_execution": False,
+            "scientific_training_or_evaluation": False,
+            "question_relevant_values": False,
+            "scientific_first_true_outcome": False,
+            "hmasd_run_operation": False,
+            "experiment_operator_requested": False,
+            "provider_or_external_effect": False,
+        },
+        "empirical_activity_released": False,
+        "operator_now": False,
+        "effect_refs": [],
+    }
+    if core["reserved_output_effect"]["reserved_not_created"] is not True:
+        raise PermissionError("replacement output root must remain absent in prelaunch")
+    deterministic_core_sha256 = hashlib.sha256(_canonical(core)).hexdigest()
+    acceptance = {
+        **core,
+        "deterministic_core_sha256": deterministic_core_sha256,
+        "actual_technical_measurements": {
+            "scope": "runtime-v2-candidate-local-build-validate-atomic-write",
+            "cpu_ns": observe_positive_process_cpu_ns(started_cpu),
+            "wall_ns": time.perf_counter_ns() - started_wall,
+            "peak_memory_bytes": peak_memory,
+            "peak_memory_method": "tracemalloc-python-allocations",
+            "scratch_peak_bytes": checkpoint_bytes,
+            "storage_bytes": 0,
+            "io": {
+                "output_bytes": 0,
+                "technical_checkpoint_bytes": checkpoint_bytes,
+                "atomic_acceptance_replace_count": 1,
+            },
+        },
+    }
+    while True:
+        payload_bytes = len(_canonical(acceptance) + b"\n")
+        measurements = acceptance["actual_technical_measurements"]
+        if (
+            measurements["storage_bytes"] == payload_bytes
+            and measurements["io"]["output_bytes"] == payload_bytes
+        ):
+            break
+        measurements["storage_bytes"] = payload_bytes
+        measurements["io"]["output_bytes"] = payload_bytes
+    validate_runtime_prelaunch_acceptance(acceptance, repo)
+    _atomic_write(output, acceptance)
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        description="Build the result-blind FSBS R01 S3 prelaunch acceptance."
+        description="Build the result-blind FSBS R01 runtime V2 prelaunch acceptance."
     )
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--scratch-root", required=True, type=Path)
-    parser.add_argument("--observed-shared-head", required=True)
+    parser.add_argument("--candidate-branch", required=True)
     arguments = parser.parse_args(argv)
-    write_prelaunch_acceptance(
+    write_runtime_prelaunch_acceptance(
         arguments.output,
         Path(__file__).resolve().parents[4],
-        observed_shared_head=arguments.observed_shared_head,
+        candidate_branch=arguments.candidate_branch,
         scratch_root=arguments.scratch_root,
     )
 
