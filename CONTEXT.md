@@ -12,7 +12,8 @@ _Avoid_: sole entry point, permission gate
 
 **Portfolio**:
 负责跨方向选择、排序、生命周期和工程投入判断的责任域；它按需存在且可独立恢复。
-_Avoid_: audit, read-only reviewer
+它只把材料决定 RETURN 给 Clerk，不直接派发或等待 Root、EM、CM。
+_Avoid_: coordinator, dispatcher, audit, read-only reviewer
 
 **EM**:
 负责一个方向科学判断、证据综合和下一步研究需求的责任域；它按需存在且可独立恢复。
@@ -49,7 +50,8 @@ participant 在 final 前把 RETURN 原生发送给 Clerk，Clerk 再把 ASSIGNM
 _Avoid_: local completion without send, daemon, global recovery engine
 
 **Direction-owned Code**:
-某一研究方向可以自主修改、测试和提交的代码范围。
+某一研究方向可以自主修改、测试、提交和 push 的代码范围；有 Git-visible 改动时，
+top-level 责任 session 在 RETURN 前自行收尾并报告 Git 信息。
 _Avoid_: shared-core
 
 **Shared-core**:

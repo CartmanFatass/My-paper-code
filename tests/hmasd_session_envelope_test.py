@@ -289,3 +289,177 @@ def test_same_return_can_be_recovered_without_creating_a_second_envelope(
         (tmp_path / ".codex/runtime/session-envelopes/ucope").glob("*.return.json")
     )
     assert len(return_files) == 1
+
+
+def test_participant_cannot_create_assignment_for_another_participant(
+    tmp_path: Path,
+) -> None:
+    body_path = tmp_path / "assignment-body.json"
+    write_json(
+        body_path,
+        {
+            "objective": "perform one bounded engineering slice",
+            "context_refs": ["docs/research/candidates/ucope/DIRECTION.md"],
+            "owned_paths": ["experiments/candidates/ucope/"],
+            "constraints": ["return the decision to Workflow-Clerk"],
+            "done_when": ["send one RETURN before final"],
+        },
+    )
+
+    for recipient_identity, recipient_thread in (
+        ("CM/ucope/g1", "cm-thread"),
+        ("Root", "root-thread"),
+    ):
+        result = run_cli(
+            "assignment",
+            "--repo",
+            str(tmp_path),
+            "--direction-id",
+            "ucope",
+            "--sender-identity",
+            "Portfolio",
+            "--sender-thread-id",
+            "portfolio-thread",
+            "--recipient-identity",
+            recipient_identity,
+            "--recipient-thread-id",
+            recipient_thread,
+            "--body",
+            str(body_path),
+        )
+
+        assert result.returncode == 2
+        assert result.stdout == ""
+        assert "only Workflow-Clerk may assign a participant" in result.stderr
+    assert not (tmp_path / ".codex/runtime/session-envelopes").exists()
+
+
+def test_legacy_participant_assignment_can_finish_but_cannot_be_created(
+    tmp_path: Path,
+) -> None:
+    message_id = str(uuid.uuid4())
+    relative = Path(
+        f".codex/runtime/session-envelopes/ucope/{message_id}.assignment.json"
+    )
+    write_json(
+        tmp_path / relative,
+        {
+            "schema_version": 1,
+            "message_id": message_id,
+            "direction_id": "ucope",
+            "sender": {
+                "identity": "Portfolio",
+                "thread_id": "portfolio-thread",
+            },
+            "recipient": {
+                "identity": "CM/ucope/g1",
+                "thread_id": "cm-thread",
+            },
+            "kind": "ASSIGNMENT",
+            "reply_to": None,
+            "body": {
+                "objective": "finish one in-flight legacy slice",
+                "context_refs": [
+                    "docs/research/candidates/ucope/DIRECTION.md"
+                ],
+                "owned_paths": ["experiments/candidates/ucope/"],
+                "constraints": ["do not create another assignment"],
+                "done_when": ["send one RETURN to the original sender"],
+            },
+        },
+    )
+
+    read_result = run_cli(
+        "read",
+        "--repo",
+        str(tmp_path),
+        "--envelope",
+        relative.as_posix(),
+    )
+
+    assert read_result.returncode == 0, read_result.stderr
+    assert json.loads(read_result.stdout)["recipient_thread_id"] == "cm-thread"
+
+    return_body = tmp_path / "legacy-return-body.json"
+    write_json(
+        return_body,
+        {
+            "status": "REQUEST_CM",
+            "summary": "legacy slice finished without creating a new direct edge",
+            "changed_paths": [],
+            "artifact_refs": [],
+            "next_objective": "continue through a Clerk-generated CM assignment",
+            "failure": None,
+        },
+    )
+    returned = run_cli(
+        "return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        relative.as_posix(),
+        "--body",
+        str(return_body),
+    )
+
+    assert returned.returncode == 0, returned.stderr
+    assert json.loads(returned.stdout)["recipient_thread_id"] == "portfolio-thread"
+
+
+def test_portfolio_cannot_request_itself_again(tmp_path: Path) -> None:
+    assignment_body = tmp_path / "portfolio-assignment-body.json"
+    write_json(
+        assignment_body,
+        {
+            "objective": "choose one low-frequency investment disposition",
+            "context_refs": ["docs/research/portfolio/PORTFOLIO.md"],
+            "owned_paths": ["docs/research/portfolio/PORTFOLIO.md"],
+            "constraints": ["return the decision to Workflow-Clerk"],
+            "done_when": ["return REQUEST_EM, REQUEST_CM, REQUEST_USER, or DONE"],
+        },
+    )
+    assigned = run_cli(
+        "assignment",
+        "--repo",
+        str(tmp_path),
+        "--direction-id",
+        "ucope",
+        "--sender-identity",
+        "Workflow-Clerk",
+        "--sender-thread-id",
+        "clerk-thread",
+        "--recipient-identity",
+        "Portfolio",
+        "--recipient-thread-id",
+        "portfolio-thread",
+        "--body",
+        str(assignment_body),
+    )
+    assert assigned.returncode == 0, assigned.stderr
+    assignment_locator = json.loads(assigned.stdout)["locator"]
+
+    return_body = tmp_path / "portfolio-return-body.json"
+    write_json(
+        return_body,
+        {
+            "status": "REQUEST_PORTFOLIO",
+            "summary": "ask Portfolio to decide again",
+            "changed_paths": [],
+            "artifact_refs": [],
+            "next_objective": "repeat the same Portfolio decision",
+            "failure": None,
+        },
+    )
+    returned = run_cli(
+        "return",
+        "--repo",
+        str(tmp_path),
+        "--assignment",
+        assignment_locator,
+        "--body",
+        str(return_body),
+    )
+
+    assert returned.returncode == 2
+    assert "Portfolio cannot return REQUEST_PORTFOLIO" in returned.stderr
+    assert not (tmp_path / assignment_locator.replace(".assignment.json", ".return.json")).exists()

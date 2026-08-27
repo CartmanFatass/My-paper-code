@@ -88,6 +88,20 @@ recipient_thread_id 和固定 locator 消息。
 
 ## Session completion contract
 
+Only two ASSIGNMENT edges are valid: `Root -> Workflow-Clerk` for an exact
+coordination request, and `Workflow-Clerk -> Root/Portfolio/EM/CM` for one
+bounded responsibility slice. Portfolio, EM, and CM never create an ASSIGNMENT
+for another participant. They return a decision to Clerk; Clerk performs the
+next native send.
+
+This route restriction applies to newly generated assignments. A legacy v1
+participant-to-participant assignment already in flight may be read and return
+to its original sender exactly once so existing work is not stranded; neither
+side may create another legacy edge from it. The original sender forwards that
+same legacy RETURN locator once to the single observed Workflow-Clerk task
+without wrapping it in another assignment. Clerk reads it as transition-only
+input and resumes the normal topology with a new Clerk-generated assignment.
+
 1. participant 在 final 前使用 Codex 原生 send_message_to_thread，把 script 输出的
    固定 locator 消息发送给 envelope recipient_thread_id。
 2. Clerk 收到 RETURN 后，先 read，再向下一责任 session 创建 ASSIGNMENT，或向
@@ -99,17 +113,28 @@ recipient_thread_id 和固定 locator 消息。
 
 ## Portfolio routing contract
 
-Portfolio 对一个仍在投资范围内的方向必须选择下一责任角色，不能把“当前切面
-完成”或“实现尚不存在”自动解释为方向终止：
+Portfolio 是低频的跨方向选择、优先级、资源投入与 lifecycle 决策者，不是普通
+EM/CM 调度者。它只在 Clerk 发送 `REQUEST_PORTFOLIO` 切面时形成决定，并把决定
+作为 correlated RETURN 发回 Clerk；Portfolio 不创建 task，不向 Root、EM 或 CM
+发送 ASSIGNMENT，也不等待这些角色。
 
-1. 科学对象、可证伪判据、比较对象或证据解释仍缺失：向同方向 EM 发送下一
-   ASSIGNMENT。
+Portfolio 对一个仍在投资范围内的方向必须在 RETURN 中选择下一责任类型，不能把
+“当前切面完成”或“实现尚不存在”自动解释为方向终止：
+
+1. 科学对象、可证伪判据、比较对象或证据解释仍缺失：返回 `REQUEST_EM`。
 2. 科学对象与判据已经接受，但 source、test、CLI、instrumentation、batching 或
-   运行入口缺失：向同方向 CM 发送实现 ASSIGNMENT。
-3. 工程入口和实验定义均已准备：向同方向 CM 发送实验准备 ASSIGNMENT；CM 决定
+   运行入口缺失：返回 `REQUEST_CM`。
+3. 工程入口和实验定义均已准备：返回 `REQUEST_CM` 及精确实验准备目标；CM 决定
    是否创建唯一 Experiment Operator。
-4. 需要跨方向排序、资源投入或继续/停止判断：Portfolio 自己形成决定，然后仍须
-   发送下一 ASSIGNMENT 或 terminal RETURN。
+4. 需要用户材料决定：返回 `REQUEST_USER`。只有 durable lifecycle 已明确变为非
+   ACTIVE 且无下一切面时才返回 terminal `DONE`。
+
+Clerk 读取 Portfolio RETURN 后才创建并发送下一 ASSIGNMENT。Portfolio 的决定与
+Clerk 的 transport 动作必须保持为两个不同责任。
+Portfolio 的 `REQUEST_PORTFOLIO` body 会在 RETURN 文件创建前被 envelope CLI
+拒绝。Portfolio 在同一 assignment 下修正 body，并重新运行 `return`，选择
+`REQUEST_EM`、`REQUEST_CM`、`REQUEST_USER` 或合法 terminal `DONE`；Clerk 不会
+收到或路由 Portfolio self-request。
 
 只有明确的科学否决、资源否决、用户决定，或已经证明该方向没有任何可执行的
 科研/工程切面时，Portfolio 才能 PARK/CLOSE。缺少现成实现、测试或 CLI 本身必须
@@ -123,10 +148,31 @@ scope 路由，不能从方向 prose 推导全局状态。每次处理新事件�
 list/read 获取当前 Portfolio、EM、CM 的 exact task ID/generation/status，形成仅存在
 于当前 turn 的 topology snapshot；不得写入第二 registry 或 task cache。
 
-多个正交方向 ready 时，Clerk 必须先生成并发送全部独立 assignment，再执行第一
-次 wait。某方向的 wait、memory refusal、REQUEST_USER 或 feature failure 不得延迟
-其他方向的 ready send。跨方向汇总只能发给 Root/user，不能作为 participant 的
+多个正交方向 ready 时，Clerk 必须在本 turn 生成并发送全部独立 assignment，然后
+结束事件 turn；普通事件 turn 不调用 wait，RETURN 的原生消息会再次唤醒 Clerk。
+某方向的 memory refusal、REQUEST_USER 或 feature failure 不得延迟其他
+方向的 ready send。跨方向汇总只能发给 Root/user，不能作为 participant 的
 assignment。
+
+## Participant Git completion
+
+修改 tracked direction-owned source、test 或 durable authority 的 top-level 责任
+session 必须在发送 RETURN 前自行完成 Git 收尾；leaf helper 不 commit/push，也不把
+Git 收尾转交 Root：
+
+1. 仅 stage assignment `owned_paths` 内由本切面产生的 exact paths，不得带入其他
+   session 的 staged/dirty 文件；
+2. 在当前 assignment branch 上 commit，并 push 到该 branch 的约定 remote；
+3. RETURN summary 明确报告 `branch`、完整 commit SHA、remote/ref 与 push 结果；无
+   Git-visible 改动时明确报告 `Git: no changes`；
+4. commit/push 失败使用 direction/feature/effect scoped failure。push commitment
+   unknown 时只 observe remote，不盲目重发；
+5. 使用 worktree 的责任 session 必须在 branch 已 push 后回收 exact clean worktree，
+   或在 RETURN 中明确报告 retained worktree、branch、HEAD 和不能回收的原因。不得
+   无说明遗留 dirty worktree。
+
+共享 main 可以同时包含其他方向的 unstaged 修改；这不是跳过本方向 Git 收尾的
+理由。worktree 仍是显式例外而非默认流程。
 
 ## Memory-admission fallback
 

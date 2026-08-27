@@ -24,9 +24,11 @@ skill 与实现属于迁移对象，不得重新解释目标。
   每次处理事件必须遵循 `.codex/prompts/hmasd-workflow-clerk.md` 的方向无关语义表、
   临时拓扑快照和 parallel dispatch barrier；不得把一个方向的等待或语义复制到
   另一个方向。
-- Portfolio 是 gpt-5.6-sol max top-level task，负责方向选择、优先级、投资判断和
-  下一责任角色。科学定义缺失时路由 EM；科学目标已接受但实现/test/CLI 缺失时
-  必须路由 CM，不能仅因实现不存在而 PARK。
+- Portfolio 是 gpt-5.6-sol max top-level task，只负责低频的跨方向选择、优先级、
+  资源投入和 lifecycle 判断。它把 `REQUEST_EM`、`REQUEST_CM`、`REQUEST_USER` 或
+  terminal decision RETURN 给 Clerk；不得创建、派发、等待或直接联系 Root、EM、
+  CM。普通 EM/CM 下一责任由 participant status 声明并由 Clerk 执行，不能仅因
+  实现不存在而 PARK。
 - EM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol max 科研 task。
 - CM/<direction-id>/g<generation> 是一个方向的 gpt-5.6-sol high 工程 task。
 - Experiment Operator 是 CM 的单层执行 child，只持有一个冻结的结果命令。
@@ -44,11 +46,17 @@ manager 间协作使用可见 task 与 session envelope。可选 leaf 只做 bou
 正常跨 session 消息只有 ASSIGNMENT 与 RETURN。固定 header 与 runtime 文件由
 scripts/hmasd_session_envelope.py 生成；LLM 只填写 body。
 
+- 只有 Root 可以向 Clerk 创建协调 ASSIGNMENT；只有 Clerk 可以向
+  Root/Portfolio/EM/CM 创建正常 ASSIGNMENT。Portfolio、EM、CM 只 RETURN 给
+  Clerk，不能互相派发。
 - Clerk 使用 assignment 命令生成局部任务，再原生 send 固定 locator 消息。
 - participant 使用 return 命令自动复制 direction、翻转 endpoints、绑定 reply_to
   并检查 changed_paths，然后在 final 前原生 send 给 Clerk。
 - receiver 使用 read 命令获得校验后的 envelope 与固定 recipient thread ID。
 - task 已停止但缺少 RETURN 时，Clerk 继续同一个 task 并重用原 assignment。
+- 切换前已在途的 participant-to-participant v1 assignment 可向原 sender 完成一次
+  RETURN，避免丢失现有工作；原 sender 只把同一 legacy RETURN locator 一次性
+  转发给唯一 Clerk，不创建新 assignment，随后由 Clerk 恢复正常拓扑。
 
 scripts 不创建或等待 task，不选择下一 hop，不维护 task lifecycle 或恢复 FSM。
 
@@ -102,9 +110,13 @@ decision 写入所属 Markdown/JSON authority；conversation 只提供 provenanc
 source 位于 experiments/candidates/，tests 位于 tests/experiments/candidates/，
 durable scientific artifacts 位于对应 docs/research/candidates/<direction-id>/。
 
-路径归属由 assignment body 的 owned_paths 声明。方向 actor 可在自己的路径内
-自主修改、测试、commit 和 push。共享 main 在多方向工作期间可以暂时 dirty；
-quiescent 时由各 owner 清理为 clean main。worktree 可选，不是默认要求。
+路径归属由 assignment body 的 owned_paths 声明。方向 top-level actor 在自己的
+路径内自主修改和测试；有 Git-visible 改动时，它必须在 RETURN 前自行 commit/push
+exact owned paths，并在 summary 报告 branch、完整 SHA、remote/ref 与 push 结果。
+leaf helper 和 Root 不代做普通方向 Git 收尾。共享 main 在多方向工作期间可以暂时
+含有其他方向的 unstaged 修改，但本方向的 owned paths 在 RETURN 时必须 clean。
+worktree 可选，不是默认要求；owner 必须回收 exact clean worktree，或在 RETURN 中
+报告 retained path/branch/HEAD/reason。
 
 共享 C++ backend、神经网络基座和跨方向核心修改必须先向用户说明 exact paths、
 目标、非目标及语义影响并取得确认。方向自主权不能扩张到共享核心。

@@ -22,8 +22,9 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 
 - **Root**：最高能力的用户入口，可介入任何角色，但不做普通流程的例行转递。
 - **Workflow-Clerk**：唯一可见的长期协调 session。它持有全局拓扑，使用 Codex
-  原生 task 工具创建或复用 task、发送消息、等待返回、路由下一切面并向用户汇总。
-- **Portfolio**：只负责方向选择、优先级和投资判断。
+  原生 task 工具创建或复用 task、发送消息、接收返回、路由下一切面并向用户汇总。
+- **Portfolio**：只负责低频的跨方向选择、优先级、资源投入和 lifecycle 判断；它
+  把决定 RETURN 给 Clerk，不创建或派发 Root、EM、CM task。
 - **EM/<direction-id>/g<generation>**：只负责一个方向的科研语义。
 - **CM/<direction-id>/g<generation>**：只负责一个方向的工程语义。
 - **Experiment Operator**：CM 的单层执行 child，只运行一个冻结的结果命令。
@@ -46,9 +47,10 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 科研或工程工作完成但没有完成第 4 步，只表示局部工作停止，**不表示自动交接
 完成**。下一责任角色已经收到消息，才算本 hop 完成。
 
-对仍为 ACTIVE 的方向，当前切面完成也不等于方向完成。科学定义缺失时 Portfolio
-路由 EM；科学目标已接受但实现、test、CLI 或 instrumentation 缺失时路由 CM。
-缺少现成实现本身不是 PARK 理由。
+对仍为 ACTIVE 的方向，当前切面完成也不等于方向完成。participant 应用
+`REQUEST_EM` 或 `REQUEST_CM` 明确普通下一责任；只有跨方向选择、优先级、资源投入
+或 lifecycle 判断才使用 `REQUEST_PORTFOLIO`。Portfolio 把决定 RETURN 给 Clerk，
+由 Clerk 路由 EM/CM。缺少现成实现本身不是 PARK 理由。
 
 ## Codex、LLM 与 script 的分工
 
@@ -63,8 +65,9 @@ script 校验失败只报告机械输入问题，不授予或否定用户权限�
 
 Clerk 使用 `.codex/prompts/hmasd-workflow-clerk.md` 中唯一的方向无关语义表。每个
 事件 turn 先从 Codex task list/read 建立临时拓扑快照；快照不落盘为第二 registry。
-同一批正交方向必须先完成全部 ready assignment 的原生 send，再开始任何 wait。
-一个方向的科学名词、证据、失败或等待不得出现在另一方向的 envelope 中。
+同一批正交方向必须完成全部 ready assignment 的原生 send 后结束事件 turn；普通
+事件 turn 不调用 wait，RETURN 由新原生消息再次唤醒。一个方向的科学名词、证据、
+失败或等待不得出现在另一方向的 envelope 中。
 
 内存 admission 失败是 result launch 前的可恢复资源等待：run CLI 不创建 reserved
 output root；仅对旧版本留下的、无 manifest/日志/结果且目录为空的精确 partial
@@ -77,7 +80,10 @@ estimate/command/code SHA。
 ## Git、实验和共享核心
 
 - 各方向在自己的 source、test、doc 与 temp/directions/<direction-id>/ 路径内
-  自主工作、测试、commit 和 push；worktree 可选，不是默认。
+  自主工作、测试、commit 和 push；有 Git-visible 改动的 top-level 责任 session
+  在 RETURN 前自行提交并 push exact owned paths，报告 branch、commit SHA、
+  remote/ref 与 push 结果。leaf helper 和 Root 不代为做普通方向 Git 收尾；
+  worktree 可选，不是默认。
 - 路径归属来自 assignment 的 owned_paths。机械检查只检测越界，不判断科研
   意义。
 - 共享 C++ backend、神经网络基座和跨方向核心修改需要用户确认 exact paths 与
@@ -104,11 +110,19 @@ estimate/command/code SHA。
 7. 四个真实方向可同时经历上述转递，用户可以观察并随时介入。
 8. 机械测试只覆盖 envelope 格式、关联、方向 identity 和路径 containment；不重复
    测试 Codex 是否能 create、send、wait、保存历史或恢复 session。
-9. 四方向事件同时到达时，Clerk 在第一次 wait 前已发送所有独立 ready assignment；
-   task list/read 中的方向拓扑与 exact task ID 足以解释每一次 send。
+9. 四方向事件同时到达时，Clerk 在结束事件 turn 前已发送所有独立 ready
+   assignment，且普通事件 turn 不调用 wait；task list/read 中的方向拓扑与 exact
+   task ID 足以解释每一次 send。
 10. 内存不足的 prepare 不留下 reserved root；同一 direction/run_id 只有一个可见
     heartbeat，且它位于 retry assignment 的责任 session；PREPARED 后该 heartbeat
     被取消，且未提前创建 Operator。
+11. Portfolio 只通过 correlated RETURN 给 Clerk 提供低频材料决定；任何新建的
+    `Portfolio -> Root/EM/CM ASSIGNMENT` 都被 envelope CLI 拒绝。切换前已在途的
+    legacy assignment 只允许完成一次 RETURN；原 sender 只把同一 locator 一次性
+    转发给 Clerk，不得派生新的直连边。
+12. 有 Git-visible 改动的责任 session 在 RETURN 前已 commit/push exact owned
+    paths 并报告 Git 信息；其他方向的 dirty files 未被带入 commit。worktree 要么
+    已由 owner 精确回收，要么带 exact branch/HEAD/reason 明确保留。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。

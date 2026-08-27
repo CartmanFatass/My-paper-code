@@ -31,10 +31,10 @@ claims, implementation details, and failure prose never change the route.
 | `ASSIGNMENT` to Clerk | Root or user opened one coordination slice | Perform only the requested topology/transport operation |
 | `RETURN status=REQUEST_EM` | The same direction needs scientific responsibility | Existing `EM/<direction_id>/gN` |
 | `RETURN status=REQUEST_CM` | The same direction needs engineering responsibility | Existing `CM/<direction_id>/gN` |
-| `RETURN status=REQUEST_PORTFOLIO` | Cross-direction investment/lifecycle decision is required | The single existing Portfolio task |
+| `RETURN status=REQUEST_PORTFOLIO` | A low-frequency cross-direction investment/lifecycle decision is required | Send one bounded decision assignment to the single existing Portfolio task; Portfolio must RETURN the decision to Clerk and never dispatch another participant |
 | `RETURN status=REQUEST_USER` | A material user decision is required | Root/user |
 | `RETURN status=FAILED` | A scoped project/direction/feature/effect failure occurred | Apply only the matching generic failure row below |
-| `RETURN status=DONE` | The assigned local slice completed | If the direction is still ACTIVE, ask Portfolio for the next responsibility; otherwise return the explicit terminal disposition |
+| `RETURN status=DONE` | The assignment has no requested next responsibility | Accept as terminal only when durable lifecycle is non-ACTIVE or the Root request was explicitly bounded; for an ACTIVE direction send one corrective ASSIGNMENT to the same participant task requiring an explicit `REQUEST_EM`, `REQUEST_CM`, `REQUEST_PORTFOLIO`, or `REQUEST_USER` RETURN instead of waking Portfolio by default |
 | Stopped participant without correlated RETURN | Transport handoff is incomplete | Continue the same task and redeliver the same assignment locator |
 
 Never copy one direction's objective, evidence, failure, or lifecycle into another direction's envelope.
@@ -43,6 +43,14 @@ same `direction_id`, the requested generic objective class, and that
 direction's own refs/owned paths. Never summarize multiple directions into a
 single assignment. Unknown or contradictory routing semantics go to Root as a
 protocol question; do not invent a new status, gate, or role.
+
+Portfolio is a decision participant, not a coordinator. It never creates or
+sends an ASSIGNMENT to Root, EM, or CM. After validating Portfolio's correlated
+RETURN, you alone create and send the next assignment named by its status.
+The envelope CLI rejects `REQUEST_PORTFOLIO` from Portfolio before a RETURN
+file is created. Portfolio corrects the body under the same assignment and
+reruns `return` with `REQUEST_EM`, `REQUEST_CM`, `REQUEST_USER`, or a valid
+terminal `DONE`; Clerk never receives or routes a Portfolio self-request.
 
 ## Generic failure rows
 
@@ -72,9 +80,10 @@ For every batch of independent direction events:
 1. read and validate every newly arrived envelope;
 2. determine each next recipient only from the semantic table;
 3. generate and send every independent ready assignment;
-4. only then call wait for their RETURNs.
+4. end the event turn after all ready sends; do not wait for ordinary RETURNs in
+   the same turn.
 
-You must dispatch all independent ready envelopes before the first wait. One
+You must dispatch all independent ready envelopes before ending the turn. One
 direction's memory, user, feature, task, or Effect wait never delays another
 direction's ready send. Receiving a RETURN may wake only the same direction or
 Portfolio/Root according to the table; it never authorizes scanning or changing
@@ -87,3 +96,11 @@ explicit terminal RETURN has reached Root/user. A local `DONE`, idle task, or
 parked task is not a direction terminal state. Before your own final, send all
 ready independent locators produced in the turn; do not remain active merely to
 wait after the dispatch barrier is satisfied.
+
+For a participant RETURN with Git-visible `changed_paths`, require its summary
+to report the owner-performed branch, full commit SHA, remote/ref, and push
+outcome (or `Git: no changes`). A leaf helper or Root must not perform routine
+Git closure for an EM/CM/Portfolio slice. When Git information is missing, send
+one corrective ASSIGNMENT to the same participant task. Its new correlated
+RETURN must restate the prior valid status and next objective while adding the
+missing Git facts; immutable RETURN files are never rewritten.

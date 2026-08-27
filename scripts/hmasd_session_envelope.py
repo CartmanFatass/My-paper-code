@@ -62,6 +62,24 @@ def _validate_identity(identity: str, direction_id: str) -> None:
         raise EnvelopeError("manager identity direction does not match direction_id")
 
 
+def _validate_assignment_route(
+    sender_identity: str, recipient_identity: str, direction_id: str
+) -> None:
+    if sender_identity == "Root":
+        if recipient_identity != "Workflow-Clerk":
+            raise EnvelopeError("Root coordination assignments must target Workflow-Clerk")
+        return
+    if sender_identity != "Workflow-Clerk":
+        raise EnvelopeError("only Workflow-Clerk may assign a participant")
+    if recipient_identity in {"Root", "Portfolio"}:
+        return
+    manager = _MANAGER.fullmatch(recipient_identity)
+    if manager is None or manager.group(2) != direction_id:
+        raise EnvelopeError(
+            "Workflow-Clerk assignment recipient must be Root, Portfolio, or a matching EM/CM"
+        )
+
+
 def _validate_path(path: str, label: str) -> None:
     normalized = path[:-1] if path.endswith("/") else path
     if (
@@ -146,14 +164,16 @@ def _validate_assignment_envelope(value: Mapping[str, Any]) -> dict[str, Any]:
     body = value.get("body")
     if not isinstance(body, Mapping):
         raise EnvelopeError("assignment body must be an object")
+    sender = _validate_endpoint(value["sender"], "assignment sender", direction_id)
+    recipient = _validate_endpoint(
+        value["recipient"], "assignment recipient", direction_id
+    )
     return {
         "schema_version": 1,
         "message_id": str(message_id),
         "direction_id": direction_id,
-        "sender": _validate_endpoint(value["sender"], "assignment sender", direction_id),
-        "recipient": _validate_endpoint(
-            value["recipient"], "assignment recipient", direction_id
-        ),
+        "sender": sender,
+        "recipient": recipient,
         "kind": "ASSIGNMENT",
         "reply_to": None,
         "body": _validate_assignment_body(body),
@@ -161,7 +181,7 @@ def _validate_assignment_envelope(value: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def _validate_return_body(
-    value: Mapping[str, Any], *, owned_paths: list[str]
+    value: Mapping[str, Any], *, owned_paths: list[str], sender_identity: str
 ) -> dict[str, Any]:
     if set(value) != _RETURN_BODY_FIELDS:
         raise EnvelopeError("return body fields are invalid")
@@ -171,6 +191,8 @@ def _validate_return_body(
     failure = value["failure"]
     if status not in _RETURN_STATUSES:
         raise EnvelopeError("return body status is invalid")
+    if sender_identity == "Portfolio" and status == "REQUEST_PORTFOLIO":
+        raise EnvelopeError("Portfolio cannot return REQUEST_PORTFOLIO")
     if not isinstance(summary, str) or not summary:
         raise EnvelopeError("return body summary must be non-empty")
     if next_objective is not None and (
@@ -268,7 +290,9 @@ def _validate_return_envelope(
         "kind": "RETURN",
         "reply_to": assignment["message_id"],
         "body": _validate_return_body(
-            body, owned_paths=assignment["body"]["owned_paths"]
+            body,
+            owned_paths=assignment["body"]["owned_paths"],
+            sender_identity=sender["identity"],
         ),
     }
 
@@ -305,6 +329,9 @@ def create_assignment(args: argparse.Namespace) -> dict[str, str]:
         raise EnvelopeError("direction_id is invalid")
     _validate_identity(args.sender_identity, direction_id)
     _validate_identity(args.recipient_identity, direction_id)
+    _validate_assignment_route(
+        args.sender_identity, args.recipient_identity, direction_id
+    )
     if not args.sender_thread_id or not args.recipient_thread_id:
         raise EnvelopeError("thread IDs must be non-empty")
     body = _validate_assignment_body(_load_object(Path(args.body), "assignment body"))
@@ -345,7 +372,9 @@ def create_return(args: argparse.Namespace) -> dict[str, str]:
     )
     body_value = _load_object(Path(args.body), "return body")
     body = _validate_return_body(
-        body_value, owned_paths=assignment["body"]["owned_paths"]
+        body_value,
+        owned_paths=assignment["body"]["owned_paths"],
+        sender_identity=assignment["recipient"]["identity"],
     )
     message_id = f"{assignment['message_id']}:return"
     envelope = {
