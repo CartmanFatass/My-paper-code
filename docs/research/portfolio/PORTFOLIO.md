@@ -1942,3 +1942,36 @@ No foundation rerun, checkpoint mutation or selection, consumed-Effect reuse, `O
 ### Registry decision
 
 Advance registry revision `32` to revision `33` through the Portfolio CAS writer. Keep SCDMP `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## MGTAP terminal R01 direction closure — 2026-08-27T15:30:18Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `9a20ea36263b0ef10203b7501cf0beb95eb54105d9ea2af27df45d51b5a4b42a`; registry revision `33`, SHA-256 `2c2c7b807d76708f8767288c75a80c0732cf740aae9832578b32b1988e1c3c03`.
+- Controlling global assignment: `a8529047-b565-478b-a4b5-7700530bb594`.
+- Exact EM interpretation return: `702b3c7e-2e5c-48f9-83b0-3428e9b1911f:return`.
+- Exact current direction refs: `DIRECTION.md` SHA-256 `363c6568e9c4b7846eeaf1fbddbc191bc05e44f3e8a00252d7307195de0c66b9`; research-state revision `8` SHA-256 `f7eacd3b06a454b5efd86742b3e887d8913c143983ff50a9ea15eff13ee44384`; engineering-state revision `13` SHA-256 `4c0027cd99344714cf1af2deefa22720763e925a04d94412af48aad65ca2c7b9`.
+- Exact R01 science authority: current shared-checkout SHA-256 `fc0fbca6005845ec476922d82a7454f6c8ed14c2b7f4097342e853c20b6edf87`; canonical LF SHA-256 `a5cfc6705191b17dd3da129e34a63dd424874da7e5fa654ffaf1cf1321957ae4`; scientific text unchanged.
+- Exact CM terminal return: `bb12d1b2-aeab-4a85-818a-a7d6ad747115:return`; retained evidence branch `omp/metric_ground_transport_allocation/git/b92ac060-97a5-4d8c-adff-7f633b97b721`, clean local/remote HEAD `3a373cf2144bf6b5a8f6fc48e467b5903b09d417`.
+- Exact terminal refs: runner manifest SHA-256 `b0f3d4cb9d5bef96cf07a6c9f44f42cbbf98487fa0c1ccf5e8b3403d1b9928b8`; preflight `49b0d9bb9fe2e25e62b0685c5dafcf253edd63fafd28d319ad52f84c2d6b1769`; runner spec `bddea93fbbad15f143939e532f9b7a456227182617325d53d551caf611687688`; execute preflight `bb4e86adc8cab12d46d528e14c71e5fae54e03294d5114d0c92db6de7dfb4b9d`; payload manifest `eb24ac8f534e54b4cff8f110c1c6b0808e0d10ab61997aeb2065416903286614`; summary `a48151cf0a6ab94950ea3ed471d643f2caacea4e750ea244e652006944a6d283`; tables `93f5446735638a948b38fdd1d26664be953ff765d9811d452825378cb8cf7b3a`; terminal claim `87adfb0700b8869852d4a6e27a64d2712cbe662d838ba667d9cf6789781ff9d1`.
+
+### Terminal scientific fact and claim ceiling
+
+Accept the exact Section 8 first-true result `BOUNDED_NONIDENTIFICATION_STRUCTURAL`. All four prospectively selected arm/binding cells failed the inclusive `abs(V256-V224)<=0.005` gate, with exact differences `0.011467827690972154`, `0.011041259765624978`, `0.01181369357638884` and `0.01181369357638884`. The gate-only work matches its frozen counts, and the complete tree contains only `manifest.json`, `summary.json` and `tables.npz`.
+
+No final-seed packet, checkpoint-512 fit, efficacy estimand, interval, causal predicate, robustness relation or efficacy branch exists. The result says only that aggregate calibration-panel motion remained above the registered operational tolerance in every selected cell. It is not evidence of metric benefit, harm, equivalence, deletion, retention, generic effect, optimization superiority, convergence, warehouse efficacy or UAV efficacy. Calibration values remain terminal provenance and may not be reused as confirmatory evidence, pilot data, priors or pooled observations for another object.
+
+The single `mgtap-r01-complete-20260827-01` Operator invocation terminated `SUCCEEDED`, exit `0`, group quiescent, with no retry. Its runner identity and `LOCAL_RESULT_ROOT/CREATE_ONLY` Effect at `temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result` are permanently consumed. The run, claim, manifest, logs, payload tree, calibration seed family, reserved final-seed metadata and all output identities are immutable/no-rerun.
+
+### Lifecycle decision
+
+Close `metric_ground_transport_allocation`. The direction's historical boundary retained one optional terminal discriminator after revision 04's structural nonidentification. R01 was that discriminator: it prospectively increased matched update-time support, preserved equal classes and matched work, and still terminated at the fail-closed answerability gate before any efficacy question existed. The exact R01 authority itself forbids a retry, third support extension, replacement seed family, threshold change or automatic successor, and the EM intake confirms no same-question scientific action remains.
+
+Closure is not based on task idleness, missing implementation or a single local engineering failure. It follows from the completed scientific sequence: revision 04 and its sole authorized matched-support successor both ended in structural nonidentification, the terminal discriminator is exhausted, and the cited evidence supplies no separate meaning-complete prospective question with a new estimand, comparator and discriminator. Keeping the direction `ACTIVE` would therefore invent an ownerless slice; parking would manufacture a generic user preference question rather than preserve a concrete material decision.
+
+No user choice is presently required. There is no exact substrate, intervention or evidence-backed alternative awaiting selection. If future independent evidence motivates a genuinely different metric-allocation question, it must enter a later Portfolio wake as a separately identified prospective direction/object with fresh authority, stochastic identity, evidence and claim ceiling. That hypothetical possibility is not a reactivation condition, continuation or next slice for this closed direction.
+
+The closure preserves all MGTAP documents, code and terminal evidence as provenance. It deletes nothing and licenses no interpretation beyond structural nonidentification. It authorizes no R01 rerun, successor implementation, EM/CM slice, Operator, new seed/checkpoint/payload, provider, warehouse activity, UAV experiment, deployment or flight.
+
+### Registry decision
+
+Advance registry revision `33` to revision `34` through the Portfolio CAS writer. Change MGTAP from `ACTIVE/g3` to `CLOSED/g3`; retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `CLOSED + DONE` with no next objective.
