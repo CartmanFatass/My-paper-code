@@ -8,6 +8,7 @@ import pytest
 
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03 import empirical_transaction
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_contract import (
+    DEFAULT_RUN_BINDING,
     DIRECTION_GIT_PATHS,
     OUTPUT_ROOT,
     PANELS,
@@ -18,12 +19,19 @@ from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_contr
     REQUIRED_DIAGNOSTICS,
     RNG_NAMESPACES,
     RUN_ID,
+    REPLACEMENT_RUN_BINDING,
+    RunBinding,
     TERMINAL_RESULT_MAP,
     checkpoint_slots,
     conservative_estimate_document,
     document_sha256,
     parameters_document,
     payload_argv,
+)
+from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_engine import (
+    ProductionExecutionRefusal,
+    RuntimePaths,
+    _require_launch,
 )
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.production_manifest import (
     ManifestError,
@@ -198,3 +206,189 @@ def test_five_prelaunch_artifacts_are_atomic_single_canonical_json_values(tmp_pa
     target.write_bytes(target.read_bytes() + b"\\n")
     with pytest.raises(PrelaunchRefusal, match="canonical"):
         read_canonical_json(target)
+
+
+def test_default_binding_preserves_exact_legacy_contract_bytes() -> None:
+    assert parameters_document() == parameters_document(DEFAULT_RUN_BINDING)
+    assert conservative_estimate_document() == conservative_estimate_document(
+        DEFAULT_RUN_BINDING
+    )
+    assert payload_argv() == payload_argv(DEFAULT_RUN_BINDING)
+    assert document_sha256(parameters_document()) == (
+        "53dec90df4c1ecb66701e18b42283f455fda01a874dec0ebc20c2d556afddea3"
+    )
+    assert document_sha256(conservative_estimate_document()) == (
+        "21610e3f71e992e01341eba7ee21001702e65eea68196ef7c345c2b6edb9676d"
+    )
+    assert document_sha256(build_checkpoint_manifest_contract()) == (
+        "cb1d6621afdbb4456d8b6fca4a9eb65d8e1a86390c1d8de67ad64a2d9a4f41f2"
+    )
+    source = build_source_manifest(ROOT)
+    implicit = build_prelaunch_manifest(
+        source_manifest=source, code_sha=None, branch="main"
+    )
+    explicit = build_prelaunch_manifest(
+        source_manifest=source,
+        code_sha=None,
+        branch="main",
+        binding=DEFAULT_RUN_BINDING,
+    )
+    assert implicit == explicit
+    assert "authority_refs" not in implicit
+    assert "run_binding" not in source
+
+
+def test_replacement_binding_reaches_all_nonregistered_prelaunch_layers(
+    tmp_path: Path,
+) -> None:
+    binding = REPLACEMENT_RUN_BINDING
+    source = build_source_manifest(ROOT, binding=binding)
+    parameters = parameters_document(binding)
+    estimate = conservative_estimate_document(binding)
+    prelaunch = build_prelaunch_manifest(
+        source_manifest=source,
+        code_sha=None,
+        branch="main",
+        empirical_activity_released=False,
+        binding=binding,
+    )
+
+    validate_exact_documents(parameters, estimate, binding=binding)
+    validate_source_manifest(ROOT, source, binding=binding)
+    validate_checkpoint_manifest_contract(
+        build_checkpoint_manifest_contract(binding), binding=binding
+    )
+    validate_prelaunch_manifest(
+        prelaunch,
+        source_manifest=source,
+        release_required=False,
+        binding=binding,
+    )
+    assert parameters["run_id"] == binding.run_id
+    assert estimate["run_id"] == binding.run_id
+    assert prelaunch["output_effect"] == binding.output_effect()
+    assert prelaunch["authority_refs"] == binding.authority_document()
+    assert prelaunch["effect_refs"] == []
+    assert prelaunch["empirical_activity_released"] is False
+    assert prelaunch["operator_now"] is False
+    refs = emit_prelaunch_artifacts(
+        ROOT,
+        tmp_path,
+        observed_branch="main",
+        code_sha=None,
+        binding=binding,
+    )
+    emitted = read_canonical_json(tmp_path / "S3_PRELAUNCH_MANIFEST.json")
+    assert len(refs) == 5
+    validate_prelaunch_manifest(
+        emitted,
+        source_manifest=read_canonical_json(tmp_path / "S3_SOURCE_MANIFEST.json"),
+        release_required=False,
+        binding=binding,
+    )
+
+
+def test_cross_bound_identity_source_effect_and_authority_are_refused() -> None:
+    binding = REPLACEMENT_RUN_BINDING
+    source = build_source_manifest(ROOT, binding=binding)
+    prelaunch = build_prelaunch_manifest(
+        source_manifest=source, code_sha=None, branch="main", binding=binding
+    )
+
+    with pytest.raises(PrelaunchRefusal, match="run-id"):
+        validate_prelaunch_manifest(
+            prelaunch,
+            source_manifest=source,
+            release_required=False,
+            binding=DEFAULT_RUN_BINDING,
+        )
+    default_source = build_source_manifest(ROOT)
+    with pytest.raises(ManifestError, match="source manifest"):
+        build_prelaunch_manifest(
+            source_manifest=default_source,
+            code_sha=None,
+            branch="main",
+            binding=binding,
+        )
+    with pytest.raises(PrelaunchRefusal, match="source"):
+        validate_prelaunch_manifest(
+            prelaunch,
+            source_manifest=default_source,
+            release_required=False,
+            binding=binding,
+        )
+    wrong_effect = copy.deepcopy(prelaunch)
+    wrong_effect["output_effect"]["resource_id"] = OUTPUT_ROOT
+    with pytest.raises(PrelaunchRefusal, match="firewall"):
+        validate_prelaunch_manifest(
+            wrong_effect,
+            source_manifest=source,
+            release_required=False,
+            binding=binding,
+        )
+    wrong_authority = copy.deepcopy(prelaunch)
+    wrong_authority["authority_refs"][0]["sha256"] = "0" * 64
+    with pytest.raises(PrelaunchRefusal, match="authority"):
+        validate_prelaunch_manifest(
+            wrong_authority,
+            source_manifest=source,
+            release_required=False,
+            binding=binding,
+        )
+    noncanonical = RunBinding(binding.run_id, binding.output_root, ())
+    with pytest.raises(ValueError, match="canonical"):
+        parameters_document(noncanonical)
+
+
+def test_payload_and_engine_consume_the_same_explicit_replacement_binding(
+    tmp_path: Path,
+) -> None:
+    binding = REPLACEMENT_RUN_BINDING
+    assert empirical_transaction.resolve_run_binding(payload_argv(binding)[3:]) is binding
+    precondition_root = tmp_path / "precondition"
+    assert validate_output_precondition(precondition_root, binding=binding) == "ABSENT"
+    with pytest.raises(PrelaunchRefusal, match="output-root"):
+        validate_output_precondition(
+            precondition_root, OUTPUT_ROOT, binding=binding
+        )
+    output = tmp_path / Path(*binding.output_root.split("/"))
+    for name in ("checkpoints", "artifacts", "metrics"):
+        (output / name).mkdir(parents=True, exist_ok=True)
+    code_sha = "1" * 40
+    hmasd = {
+        "run_id": binding.run_id,
+        "direction_id": "ucope",
+        "code_sha": code_sha,
+        "cwd": str(tmp_path.resolve()),
+        "command": list(payload_argv(binding)),
+        "status": "RUNNING",
+        "parameters": parameters_document(binding),
+        "estimate": {
+            key: conservative_estimate_document(binding)[key]
+            for key in ("wall_seconds", "basis", "peak_memory_gib")
+        },
+    }
+    manifest_path = output / "manifest.json"
+    manifest_path.write_text(json.dumps(hmasd), encoding="utf-8")
+    argv = (
+        "--run-id",
+        binding.run_id,
+        "--output-root",
+        binding.output_root,
+        "--hmasd-manifest",
+        str(manifest_path),
+    )
+    launch = empirical_transaction.validate_launch(
+        argv, repository_root=tmp_path, binding=binding
+    )
+    paths = RuntimePaths.from_repository(tmp_path, binding)
+    assert paths.binding is binding
+    assert paths.output_root == output.resolve()
+    assert _require_launch(launch, paths, binding) == (binding.run_id, code_sha)
+
+    with pytest.raises(PrelaunchRefusal, match="override"):
+        empirical_transaction.validate_launch(
+            argv, repository_root=tmp_path, binding=DEFAULT_RUN_BINDING
+        )
+    with pytest.raises(ProductionExecutionRefusal, match="immutable"):
+        _require_launch(launch, paths, DEFAULT_RUN_BINDING)

@@ -18,7 +18,13 @@ from .production_checkpoint import (
     save_frontier_atomic,
     write_final_checkpoint_atomic,
 )
-from .production_contract import OUTPUT_ROOT, RUN_ID, checkpoint_slots
+from .production_contract import (
+    DEFAULT_RUN_BINDING,
+    RunBinding,
+    canonical_run_binding,
+    checkpoint_slots,
+    require_canonical_run_binding,
+)
 from .production_learner import LearningBoundary, prepare_production_batch, support_for_arm
 from .production_manifest import complete_checkpoint_manifest, write_canonical_json_atomic
 from .production_result import evaluate_publish_complete
@@ -36,12 +42,28 @@ class RuntimePaths:
     checkpoints: Path
     artifacts: Path
     metrics: Path
+    binding: RunBinding
 
     @classmethod
-    def from_repository(cls, repository_root: Path) -> "RuntimePaths":
+    def from_repository(
+        cls,
+        repository_root: Path,
+        binding: RunBinding = DEFAULT_RUN_BINDING,
+    ) -> "RuntimePaths":
+        try:
+            binding = require_canonical_run_binding(binding)
+        except ValueError as exc:
+            raise ProductionExecutionRefusal("run binding is not canonical") from exc
         root = Path(repository_root).resolve(strict=True)
-        output = (root / Path(*OUTPUT_ROOT.split("/"))).resolve(strict=True)
-        return cls(root, output, output / "checkpoints", output / "artifacts", output / "metrics")
+        output = (root / Path(*binding.output_root.split("/"))).resolve(strict=True)
+        return cls(
+            root,
+            output,
+            output / "checkpoints",
+            output / "artifacts",
+            output / "metrics",
+            binding,
+        )
 
     def require_fresh_prepared_outputs(self) -> None:
         for path in (self.checkpoints, self.artifacts, self.metrics):
@@ -52,7 +74,18 @@ class RuntimePaths:
                 raise ProductionExecutionRefusal("transaction evidence already exists; rerun is forbidden")
 
 
-def _require_launch(launch: Mapping[str, object], paths: RuntimePaths) -> tuple[str, str]:
+def _require_launch(
+    launch: Mapping[str, object],
+    paths: RuntimePaths,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> tuple[str, str]:
+    try:
+        binding = require_canonical_run_binding(binding)
+    except ValueError as exc:
+        raise ProductionExecutionRefusal("run binding is not canonical") from exc
+    expected_output = (
+        paths.repository_root / Path(*binding.output_root.split("/"))
+    ).resolve(strict=False)
     if set(launch) != {
         "run_id", "output_root", "code_sha", "validated", "complete_only", "rerun_permitted"
     }:
@@ -63,8 +96,10 @@ def _require_launch(launch: Mapping[str, object], paths: RuntimePaths) -> tuple[
         launch.get("validated") is not True
         or launch.get("complete_only") is not True
         or launch.get("rerun_permitted") is not False
-        or launch.get("output_root") != OUTPUT_ROOT
-        or run_id != RUN_ID
+        or launch.get("output_root") != binding.output_root
+        or run_id != binding.run_id
+        or paths.binding != binding
+        or paths.output_root != expected_output
         or not isinstance(run_id, str)
         or not isinstance(code_sha, str)
         or len(code_sha) != 40
@@ -81,12 +116,24 @@ def _require_launch(launch: Mapping[str, object], paths: RuntimePaths) -> tuple[
 
 
 def execute_registered_transaction(
-    launch: Mapping[str, object], *, repository_root: Path
+    launch: Mapping[str, object],
+    *,
+    repository_root: Path,
+    binding: RunBinding | None = None,
 ) -> Mapping[str, object]:
     """Execute once; only the final sealed package/evidence exposes completion."""
 
-    paths = RuntimePaths.from_repository(repository_root)
-    run_id, code_sha = _require_launch(launch, paths)
+    if binding is None:
+        run_id = launch.get("run_id")
+        output_root = launch.get("output_root")
+        if not isinstance(run_id, str) or not isinstance(output_root, str):
+            raise ProductionExecutionRefusal("launch run binding is absent")
+        try:
+            binding = canonical_run_binding(run_id, output_root)
+        except ValueError as exc:
+            raise ProductionExecutionRefusal("launch run binding is not canonical") from exc
+    paths = RuntimePaths.from_repository(repository_root, binding)
+    run_id, code_sha = _require_launch(launch, paths, binding)
     paths.require_fresh_prepared_outputs()
     boundary = LearningBoundary.registered_runtime()
     torch.set_num_threads(1)

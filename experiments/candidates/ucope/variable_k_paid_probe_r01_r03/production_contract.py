@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Final, Mapping
 
@@ -25,18 +26,124 @@ from .s2_construction import OBJECT_DIGEST, REQUIRED_TOP_LEVEL_FIELDS
 
 
 S3_SCOPE: Final[str] = "UCOPE-R03-S3-EMPIRICAL-PRELAUNCH-V2"
-RUN_ID: Final[str] = "ucope-r03-complete-20260827-01"
-OUTPUT_ROOT: Final[str] = "temp/directions/ucope/exp/ucope-r03-complete-20260827-01"
 PAYLOAD_MODULE: Final[str] = (
     "experiments.candidates.ucope.variable_k_paid_probe_r01_r03.empirical_transaction"
 )
 PYTHON_EXECUTABLE: Final[str] = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
-PARAMETERS_PATH: Final[str] = f"{OUTPUT_ROOT}/parameters.json"
-ESTIMATE_PATH: Final[str] = f"{OUTPUT_ROOT}/estimate.json"
-SOURCE_MANIFEST_PATH: Final[str] = f"{OUTPUT_ROOT}/source-manifest.json"
-CHECKPOINT_MANIFEST_PATH: Final[str] = f"{OUTPUT_ROOT}/checkpoint-manifest.json"
-HMASD_MANIFEST_PATH: Final[str] = f"{OUTPUT_ROOT}/manifest.json"
-PRELAUNCH_MANIFEST_PATH: Final[str] = f"{OUTPUT_ROOT}/prelaunch-manifest.json"
+
+
+@dataclass(frozen=True)
+class RunBinding:
+    """One complete immutable run identity, including its purchasing authority."""
+
+    run_id: str
+    output_root: str
+    authority_refs: tuple[tuple[str, str], ...] = ()
+    authority_commit: str | None = None
+
+    @property
+    def parameters_path(self) -> str:
+        return f"{self.output_root}/parameters.json"
+
+    @property
+    def estimate_path(self) -> str:
+        return f"{self.output_root}/estimate.json"
+
+    @property
+    def source_manifest_path(self) -> str:
+        return f"{self.output_root}/source-manifest.json"
+
+    @property
+    def checkpoint_manifest_path(self) -> str:
+        return f"{self.output_root}/checkpoint-manifest.json"
+
+    @property
+    def hmasd_manifest_path(self) -> str:
+        return f"{self.output_root}/manifest.json"
+
+    @property
+    def prelaunch_manifest_path(self) -> str:
+        return f"{self.output_root}/prelaunch-manifest.json"
+
+    def authority_document(self) -> list[dict[str, str]]:
+        return [
+            {
+                "path": path,
+                "sha256": sha256,
+                **(
+                    {"git_commit": self.authority_commit}
+                    if self.authority_commit is not None
+                    else {}
+                ),
+            }
+            for path, sha256 in self.authority_refs
+        ]
+
+    def reference_document(self) -> dict[str, object]:
+        return {
+            "run_id": self.run_id,
+            "output_root": self.output_root,
+            "authority_refs": self.authority_document(),
+        }
+
+    def output_effect(self) -> dict[str, str]:
+        return {
+            "kind": "DIRECTORY_CREATE_ONLY",
+            "resource_id": self.output_root,
+            "operation": "create_and_populate_once",
+        }
+
+
+DEFAULT_RUN_BINDING: Final[RunBinding] = RunBinding(
+    run_id="ucope-r03-complete-20260827-01",
+    output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-01",
+)
+REPLACEMENT_RUN_BINDING: Final[RunBinding] = RunBinding(
+    run_id="ucope-r03-complete-20260827-02",
+    output_root="temp/directions/ucope/exp/ucope-r03-complete-20260827-02",
+    authority_refs=(
+        (
+            "docs/research/portfolio/PORTFOLIO.md",
+            "b0011cbf74f0226d0963960ac4721b5d38376c3d7f05b704028c43ac21cd06a5",
+        ),
+        (
+            "docs/research/portfolio/workflow/registry.json",
+            "b663741df8367cf16c96629f91541d1e69983edab6b13fb7abdf2a5c4afad8c8",
+        ),
+    ),
+    authority_commit="3ace7bbe67ac6ded4c8b6bf37e3e60b3de50ce23",
+)
+CANONICAL_RUN_BINDINGS: Final[tuple[RunBinding, ...]] = (
+    DEFAULT_RUN_BINDING,
+    REPLACEMENT_RUN_BINDING,
+)
+
+
+def require_canonical_run_binding(binding: RunBinding) -> RunBinding:
+    if not isinstance(binding, RunBinding):
+        raise ValueError("run binding is absent or malformed")
+    for canonical in CANONICAL_RUN_BINDINGS:
+        if binding == canonical:
+            return canonical
+    raise ValueError("run binding is not a canonical purchased identity")
+
+
+def canonical_run_binding(run_id: str, output_root: str) -> RunBinding:
+    for binding in CANONICAL_RUN_BINDINGS:
+        if binding.run_id == run_id and binding.output_root == output_root:
+            return binding
+    raise ValueError("run/output pair is not a canonical purchased identity")
+
+
+# Public compatibility aliases remain the exact failed -01 transaction identity.
+RUN_ID: Final[str] = DEFAULT_RUN_BINDING.run_id
+OUTPUT_ROOT: Final[str] = DEFAULT_RUN_BINDING.output_root
+PARAMETERS_PATH: Final[str] = DEFAULT_RUN_BINDING.parameters_path
+ESTIMATE_PATH: Final[str] = DEFAULT_RUN_BINDING.estimate_path
+SOURCE_MANIFEST_PATH: Final[str] = DEFAULT_RUN_BINDING.source_manifest_path
+CHECKPOINT_MANIFEST_PATH: Final[str] = DEFAULT_RUN_BINDING.checkpoint_manifest_path
+HMASD_MANIFEST_PATH: Final[str] = DEFAULT_RUN_BINDING.hmasd_manifest_path
+PRELAUNCH_MANIFEST_PATH: Final[str] = DEFAULT_RUN_BINDING.prelaunch_manifest_path
 
 REGISTERED_SEEDS: Final[tuple[int, ...]] = tuple(sorted(REGISTERED_MASTER_SEEDS))
 PANELS: Final[tuple[str, ...]] = tuple(panel.name for panel in Panel)
@@ -111,13 +218,14 @@ def checkpoint_slots() -> tuple[dict[str, object], ...]:
     return rows
 
 
-def parameters_document() -> dict[str, object]:
+def parameters_document(binding: RunBinding = DEFAULT_RUN_BINDING) -> dict[str, object]:
     """Return the one canonical, result-independent registered parameter object."""
 
+    binding = require_canonical_run_binding(binding)
     return {
         "schema": "UCOPE_R01_R03_EMPIRICAL_PARAMETERS_V1",
         "scope": S3_SCOPE,
-        "run_id": RUN_ID,
+        "run_id": binding.run_id,
         "object_revision": OBJECT_REVISION,
         "object_digest": OBJECT_DIGEST,
         "registered_master_seeds": list(REGISTERED_SEEDS),
@@ -153,13 +261,16 @@ def parameters_document() -> dict[str, object]:
     }
 
 
-def conservative_estimate_document() -> dict[str, object]:
+def conservative_estimate_document(
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> dict[str, object]:
     """Freeze the accepted no-unmeasured-speedup S2 projection."""
 
+    binding = require_canonical_run_binding(binding)
     return {
         "schema": "HMASD_RESOURCE_ESTIMATE_V1",
         "direction_id": "ucope",
-        "run_id": RUN_ID,
+        "run_id": binding.run_id,
         "cpu_cores": 1,
         "cpu_hours": 0.10810758191836511,
         "wall_seconds": 388.0782459051625,
@@ -175,19 +286,20 @@ def conservative_estimate_document() -> dict[str, object]:
     }
 
 
-def payload_argv() -> tuple[str, ...]:
+def payload_argv(binding: RunBinding = DEFAULT_RUN_BINDING) -> tuple[str, ...]:
     """Exact future child argv; it contains no responsive/partial selector."""
 
+    binding = require_canonical_run_binding(binding)
     return (
         PYTHON_EXECUTABLE,
         "-m",
         PAYLOAD_MODULE,
         "--run-id",
-        RUN_ID,
+        binding.run_id,
         "--output-root",
-        OUTPUT_ROOT,
+        binding.output_root,
         "--hmasd-manifest",
-        HMASD_MANIFEST_PATH,
+        binding.hmasd_manifest_path,
     )
 
 

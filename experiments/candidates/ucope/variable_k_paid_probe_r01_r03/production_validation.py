@@ -8,21 +8,29 @@ from pathlib import Path
 from typing import Mapping, Sequence
 
 from .production_contract import (
+    DEFAULT_RUN_BINDING,
     DIRECTION_GIT_PATHS,
-    OUTPUT_ROOT,
     PAYLOAD_MODULE,
-    RUN_ID,
+    RunBinding,
     canonical_json_bytes,
     conservative_estimate_document,
     document_sha256,
     parameters_document,
     payload_argv,
+    require_canonical_run_binding,
 )
 from .production_manifest import build_checkpoint_manifest_contract
 
 
 class PrelaunchRefusal(PermissionError):
     pass
+
+
+def _canonical_binding(binding: RunBinding) -> RunBinding:
+    try:
+        return require_canonical_run_binding(binding)
+    except ValueError as exc:
+        raise PrelaunchRefusal("run binding is not canonical") from exc
 
 
 def read_json(path: Path) -> Mapping[str, object]:
@@ -64,16 +72,28 @@ def _require_sha(value: object, label: str, lengths: tuple[int, ...] = (64,)) ->
 
 
 def validate_exact_documents(
-    parameters: Mapping[str, object], estimate: Mapping[str, object]
+    parameters: Mapping[str, object],
+    estimate: Mapping[str, object],
+    *,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
 ) -> None:
-    if dict(parameters) != parameters_document():
+    binding = _canonical_binding(binding)
+    if dict(parameters) != parameters_document(binding):
         raise PrelaunchRefusal("parameter override is forbidden")
-    if dict(estimate) != conservative_estimate_document():
+    if dict(estimate) != conservative_estimate_document(binding):
         raise PrelaunchRefusal("resource estimate override is forbidden")
 
 
-def validate_output_precondition(repository_root: Path, output_root: str = OUTPUT_ROOT) -> str:
-    if output_root != OUTPUT_ROOT:
+def validate_output_precondition(
+    repository_root: Path,
+    output_root: str | None = None,
+    *,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> str:
+    binding = _canonical_binding(binding)
+    expected_output_root = binding.output_root
+    output_root = expected_output_root if output_root is None else output_root
+    if output_root != expected_output_root:
         raise PrelaunchRefusal("output-root override is forbidden")
     root = Path(repository_root).resolve()
     destination = (root / Path(*output_root.split("/"))).resolve(strict=False)
@@ -88,7 +108,13 @@ def validate_output_precondition(repository_root: Path, output_root: str = OUTPU
     return "ABSENT"
 
 
-def validate_source_manifest(repository_root: Path, manifest: Mapping[str, object]) -> None:
+def validate_source_manifest(
+    repository_root: Path,
+    manifest: Mapping[str, object],
+    *,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> None:
+    binding = _canonical_binding(binding)
     rows = manifest.get("files")
     if manifest.get("complete") is not True or not isinstance(rows, list) or not rows:
         raise PrelaunchRefusal("source manifest is incomplete")
@@ -111,10 +137,21 @@ def validate_source_manifest(repository_root: Path, manifest: Mapping[str, objec
             raise PrelaunchRefusal("source hash differs")
     if seen != set(DIRECTION_GIT_PATHS):
         raise PrelaunchRefusal("source manifest path set differs")
+    observed_binding = manifest.get("run_binding")
+    if binding == DEFAULT_RUN_BINDING:
+        if "run_binding" in manifest:
+            raise PrelaunchRefusal("source run binding differs")
+    elif observed_binding != binding.reference_document():
+        raise PrelaunchRefusal("source run binding or authority differs")
 
 
-def validate_checkpoint_manifest_contract(manifest: Mapping[str, object]) -> None:
-    if dict(manifest) != build_checkpoint_manifest_contract():
+def validate_checkpoint_manifest_contract(
+    manifest: Mapping[str, object],
+    *,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> None:
+    binding = _canonical_binding(binding)
+    if dict(manifest) != build_checkpoint_manifest_contract(binding):
         raise PrelaunchRefusal("checkpoint manifest contract differs or lacks hashes")
 
 
@@ -123,26 +160,45 @@ def validate_prelaunch_manifest(
     *,
     source_manifest: Mapping[str, object],
     release_required: bool,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
 ) -> None:
-    if manifest.get("run_id") != RUN_ID:
+    binding = _canonical_binding(binding)
+    if manifest.get("run_id") != binding.run_id:
         raise PrelaunchRefusal("run-id override is forbidden")
-    if manifest.get("payload_argv") != list(payload_argv()):
+    source_run_binding = source_manifest.get("run_binding")
+    if binding == DEFAULT_RUN_BINDING:
+        if "run_binding" in source_manifest:
+            raise PrelaunchRefusal("source run binding differs")
+    elif source_run_binding != binding.reference_document():
+        raise PrelaunchRefusal("source run binding or authority differs")
+    if manifest.get("payload_argv") != list(payload_argv(binding)):
         raise PrelaunchRefusal("payload argv differs")
-    if manifest.get("parameters_sha256") != document_sha256(parameters_document()):
+    if manifest.get("parameters_sha256") != document_sha256(parameters_document(binding)):
         raise PrelaunchRefusal("parameter hash differs")
-    if manifest.get("estimate_sha256") != document_sha256(conservative_estimate_document()):
+    if manifest.get("estimate_sha256") != document_sha256(
+        conservative_estimate_document(binding)
+    ):
         raise PrelaunchRefusal("estimate hash differs")
     if manifest.get("source_manifest_sha256") != document_sha256(source_manifest):
         raise PrelaunchRefusal("source-manifest hash differs")
-    if manifest.get("checkpoint_manifest_sha256") != document_sha256(build_checkpoint_manifest_contract()):
+    if manifest.get("checkpoint_manifest_sha256") != document_sha256(
+        build_checkpoint_manifest_contract(binding)
+    ):
         raise PrelaunchRefusal("checkpoint-manifest hash differs")
+    if (
+        manifest.get("source_manifest_path") != binding.source_manifest_path
+        or manifest.get("checkpoint_manifest_path") != binding.checkpoint_manifest_path
+        or manifest.get("hmasd_manifest_path") != binding.hmasd_manifest_path
+        or manifest.get("prelaunch_manifest_path") != binding.prelaunch_manifest_path
+    ):
+        raise PrelaunchRefusal("run-bound manifest path differs")
     if manifest.get("rerun_permitted") is not False or manifest.get("effect_refs") != []:
         raise PrelaunchRefusal("rerun/effect contract differs")
     if (
         manifest.get("output_effect")
         != {
             "kind": "DIRECTORY_CREATE_ONLY",
-            "resource_id": OUTPUT_ROOT,
+            "resource_id": binding.output_root,
             "operation": "create_and_populate_once",
         }
         or manifest.get("output_precondition") != "ABSENT_OR_EMPTY_BEFORE_PREPARE"
@@ -150,6 +206,11 @@ def validate_prelaunch_manifest(
         or manifest.get("operator_now") is not False
     ):
         raise PrelaunchRefusal("output/publication firewall differs")
+    if binding == DEFAULT_RUN_BINDING:
+        if "authority_refs" in manifest:
+            raise PrelaunchRefusal("authority references differ")
+    elif manifest.get("authority_refs") != binding.authority_document():
+        raise PrelaunchRefusal("authority references differ")
     git = manifest.get("git")
     if not isinstance(git, Mapping):
         raise PrelaunchRefusal("Git/code-SHA prerequisites are missing")
@@ -174,25 +235,29 @@ def validate_prelaunch_manifest(
 
 
 def validate_live_hmasd_manifest(
-    manifest: Mapping[str, object], *, code_sha: str
+    manifest: Mapping[str, object],
+    *,
+    code_sha: str,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
 ) -> None:
     """Validate the later hmasd_run-owned manifest without creating it."""
 
+    binding = _canonical_binding(binding)
     expected_code = _require_sha(code_sha, "code", (40,))
     command = manifest.get("command")
-    estimate = conservative_estimate_document()
+    estimate = conservative_estimate_document(binding)
     expected_hmasd_estimate = {
         "wall_seconds": estimate["wall_seconds"],
         "basis": estimate["basis"],
         "peak_memory_gib": estimate["peak_memory_gib"],
     }
     if (
-        manifest.get("run_id") != RUN_ID
+        manifest.get("run_id") != binding.run_id
         or manifest.get("direction_id") != "ucope"
         or manifest.get("code_sha") != expected_code
-        or command != list(payload_argv())
+        or command != list(payload_argv(binding))
         or manifest.get("status") != "RUNNING"
-        or manifest.get("parameters") != parameters_document()
+        or manifest.get("parameters") != parameters_document(binding)
         or manifest.get("estimate") != expected_hmasd_estimate
     ):
         raise PrelaunchRefusal("hmasd_run manifest does not byte-bind the frozen launch")

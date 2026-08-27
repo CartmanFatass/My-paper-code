@@ -10,15 +10,9 @@ from pathlib import Path
 from typing import Mapping, Sequence
 
 from .production_contract import (
-    CHECKPOINT_MANIFEST_PATH,
+    DEFAULT_RUN_BINDING,
     DIRECTION_GIT_PATHS,
-    ESTIMATE_PATH,
-    HMASD_MANIFEST_PATH,
-    OUTPUT_ROOT,
-    PARAMETERS_PATH,
-    PRELAUNCH_MANIFEST_PATH,
-    RUN_ID,
-    SOURCE_MANIFEST_PATH,
+    RunBinding,
     checkpoint_slots,
     canonical_json_bytes,
     conservative_estimate_document,
@@ -26,6 +20,7 @@ from .production_contract import (
     parameters_document,
     payload_argv,
     repo_path,
+    require_canonical_run_binding,
 )
 
 
@@ -44,6 +39,17 @@ S3_ARTIFACT_NAMES = (
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _require_source_run_binding(
+    source_manifest: Mapping[str, object], binding: RunBinding
+) -> None:
+    observed = source_manifest.get("run_binding")
+    if binding == DEFAULT_RUN_BINDING:
+        if "run_binding" in source_manifest:
+            raise ManifestError("source manifest is bound to another run")
+    elif observed != binding.reference_document():
+        raise ManifestError("source manifest run/authority binding differs")
 
 
 def write_canonical_json_atomic(path: Path, value: Mapping[str, object]) -> dict[str, str]:
@@ -93,21 +99,26 @@ def emit_prelaunch_artifacts(
     *,
     observed_branch: str,
     code_sha: str | None,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
 ) -> dict[str, dict[str, str]]:
     """Atomically regenerate the five cross-bound S3 prelaunch artifacts."""
 
+    binding = require_canonical_run_binding(binding)
     root = Path(repository_root).resolve()
     destination = Path(artifact_directory).resolve()
     try:
         destination.relative_to(root)
     except ValueError as exc:
         raise ManifestError("prelaunch artifact directory escapes repository") from exc
-    source = build_source_manifest(root)
+    source = build_source_manifest(root, binding=binding)
     documents: tuple[tuple[str, Mapping[str, object]], ...] = (
-        ("S3_PARAMETERS.json", parameters_document()),
-        ("S3_CONSERVATIVE_ESTIMATE.json", conservative_estimate_document()),
+        ("S3_PARAMETERS.json", parameters_document(binding)),
+        ("S3_CONSERVATIVE_ESTIMATE.json", conservative_estimate_document(binding)),
         ("S3_SOURCE_MANIFEST.json", source),
-        ("S3_CHECKPOINT_MANIFEST_CONTRACT.json", build_checkpoint_manifest_contract()),
+        (
+            "S3_CHECKPOINT_MANIFEST_CONTRACT.json",
+            build_checkpoint_manifest_contract(binding),
+        ),
         (
             "S3_PRELAUNCH_MANIFEST.json",
             build_prelaunch_manifest(
@@ -115,6 +126,7 @@ def emit_prelaunch_artifacts(
                 code_sha=code_sha,
                 branch=observed_branch,
                 empirical_activity_released=False,
+                binding=binding,
             ),
         ),
     )
@@ -128,7 +140,10 @@ def emit_prelaunch_artifacts(
     return refs
 
 
-def build_source_manifest(repository_root: Path) -> dict[str, object]:
+def build_source_manifest(
+    repository_root: Path, binding: RunBinding = DEFAULT_RUN_BINDING
+) -> dict[str, object]:
+    binding = require_canonical_run_binding(binding)
     root = Path(repository_root).resolve()
     files: list[dict[str, str]] = []
     for relative in DIRECTION_GIT_PATHS:
@@ -136,16 +151,24 @@ def build_source_manifest(repository_root: Path) -> dict[str, object]:
         if not target.is_file() or target.is_symlink():
             raise ManifestError(f"required source/test path absent: {relative}")
         files.append({"path": relative, "sha256": _sha256(target)})
-    return {
+    document: dict[str, object] = {
         "schema": "UCOPE_R01_R03_EMPIRICAL_SOURCE_MANIFEST_V1",
         "complete": True,
         "files": files,
     }
+    # The historical -01 bytes remain exact.  The replacement source reference
+    # additionally binds the purchased identity and its authority.
+    if binding != DEFAULT_RUN_BINDING:
+        document["run_binding"] = binding.reference_document()
+    return document
 
 
-def build_checkpoint_manifest_contract() -> dict[str, object]:
+def build_checkpoint_manifest_contract(
+    binding: RunBinding = DEFAULT_RUN_BINDING,
+) -> dict[str, object]:
     """Describe the final inventory and its mandatory future content hashes."""
 
+    require_canonical_run_binding(binding)
     return {
         "schema": "UCOPE_R01_R03_EMPIRICAL_CHECKPOINT_MANIFEST_CONTRACT_V1",
         "complete": True,
@@ -165,29 +188,28 @@ def build_prelaunch_manifest(
     code_sha: str | None,
     branch: str | None,
     empirical_activity_released: bool = False,
+    binding: RunBinding = DEFAULT_RUN_BINDING,
 ) -> dict[str, object]:
-    parameters = parameters_document()
-    estimate = conservative_estimate_document()
-    checkpoints = build_checkpoint_manifest_contract()
-    return {
+    binding = require_canonical_run_binding(binding)
+    _require_source_run_binding(source_manifest, binding)
+    parameters = parameters_document(binding)
+    estimate = conservative_estimate_document(binding)
+    checkpoints = build_checkpoint_manifest_contract(binding)
+    document: dict[str, object] = {
         "schema": "UCOPE_R01_R03_EMPIRICAL_PRELAUNCH_MANIFEST_V1",
-        "run_id": RUN_ID,
+        "run_id": binding.run_id,
         "parameters_location": "hmasd_run.manifest.parameters",
         "parameters_sha256": document_sha256(parameters),
         "estimate_location": "hmasd_run.manifest.estimate",
         "estimate_sha256": document_sha256(estimate),
-        "source_manifest_path": SOURCE_MANIFEST_PATH,
+        "source_manifest_path": binding.source_manifest_path,
         "source_manifest_sha256": document_sha256(source_manifest),
-        "checkpoint_manifest_path": CHECKPOINT_MANIFEST_PATH,
+        "checkpoint_manifest_path": binding.checkpoint_manifest_path,
         "checkpoint_manifest_sha256": document_sha256(checkpoints),
-        "hmasd_manifest_path": HMASD_MANIFEST_PATH,
-        "prelaunch_manifest_path": PRELAUNCH_MANIFEST_PATH,
-        "payload_argv": list(payload_argv()),
-        "output_effect": {
-            "kind": "DIRECTORY_CREATE_ONLY",
-            "resource_id": OUTPUT_ROOT,
-            "operation": "create_and_populate_once",
-        },
+        "hmasd_manifest_path": binding.hmasd_manifest_path,
+        "prelaunch_manifest_path": binding.prelaunch_manifest_path,
+        "payload_argv": list(payload_argv(binding)),
+        "output_effect": binding.output_effect(),
         "output_precondition": "ABSENT_OR_EMPTY_BEFORE_PREPARE",
         "publication": "ONE_ATOMIC_COMPLETE_PACKAGE_ONLY",
         "rerun_permitted": False,
@@ -203,6 +225,9 @@ def build_prelaunch_manifest(
         "operator_now": False,
         "effect_refs": [],
     }
+    if binding != DEFAULT_RUN_BINDING:
+        document["authority_refs"] = binding.authority_document()
+    return document
 
 
 def complete_checkpoint_manifest(
