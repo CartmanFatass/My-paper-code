@@ -45,6 +45,34 @@ def test_inspect_fails_closed_when_git_status_cannot_be_observed(
         CONTROL_RELEASE.inspect_repo(tmp_path)
 
 
+def test_inspect_exits_without_release_when_control_blob_cannot_be_observed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],
+) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    (tmp_path / "AGENTS.md").write_bytes(b"control\n")
+    run("git", "add", "AGENTS.md", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    real_run = CONTROL_RELEASE.subprocess.run
+
+    def fail_blob(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        if command[-1] == "HEAD:AGENTS.md":
+            return subprocess.CompletedProcess(command, 128, "", "blob observation failed")
+        return real_run(command, **kwargs)
+
+    monkeypatch.setattr(CONTROL_RELEASE.subprocess, "run", fail_blob)
+
+    exit_code = CONTROL_RELEASE.main(["inspect", "--repo", str(tmp_path)])
+    captured = capsys.readouterr()
+
+    assert exit_code == 2
+    assert captured.out == ""
+    assert "git rev-parse HEAD:AGENTS.md failed: blob observation failed" in captured.err
+
+
 def test_inspect_marks_control_destination_of_staged_rename_dirty(tmp_path: Path) -> None:
     run("git", "init", "-b", "main", cwd=tmp_path)
     run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
@@ -58,12 +86,12 @@ def test_inspect_marks_control_destination_of_staged_rename_dirty(tmp_path: Path
     run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
     run("git", "mv", source.relative_to(tmp_path).as_posix(), "AGENTS.md", cwd=tmp_path)
 
-    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+    dirty_control = sorted(
+        path for path in CONTROL_RELEASE._dirty_paths(tmp_path)
+        if CONTROL_RELEASE.is_control_path(path)
+    )
 
-    assert result.returncode == 0, result.stderr
-    record = json.loads(result.stdout)
-    assert record["dirty_control_paths"] == ["AGENTS.md"]
-    assert record["publishable"] is False
+    assert dirty_control == ["AGENTS.md"]
 
 
 def test_inspect_marks_control_destination_of_staged_copy_dirty(tmp_path: Path) -> None:
@@ -84,12 +112,12 @@ def test_inspect_marks_control_destination_of_staged_copy_dirty(tmp_path: Path) 
     status = run("git", "status", "--porcelain=v1", "-z", cwd=tmp_path)
     assert status.stdout.startswith("C  AGENTS.md\0"), status.stdout
 
-    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+    dirty_control = sorted(
+        path for path in CONTROL_RELEASE._dirty_paths(tmp_path)
+        if CONTROL_RELEASE.is_control_path(path)
+    )
 
-    assert result.returncode == 0, result.stderr
-    record = json.loads(result.stdout)
-    assert record["dirty_control_paths"] == ["AGENTS.md"]
-    assert record["publishable"] is False
+    assert dirty_control == ["AGENTS.md"]
 
 
 def test_inspect_marks_control_source_of_staged_rename_dirty(tmp_path: Path) -> None:

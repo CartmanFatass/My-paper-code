@@ -87,8 +87,9 @@ def inspect_repo(repo: Path) -> dict[str, Any]:
     control_paths = sorted(path.replace("\\", "/") for path in tracked if is_control_path(path))
     release_rows: list[str] = []
     for path in control_paths:
-        blob = _git(repo, "rev-parse", f"HEAD:{path}", allow_missing=True)
-        if blob: release_rows.append(f"{path}\0{blob}\n")
+        blob = _git(repo, "rev-parse", f"HEAD:{path}")
+        if blob is None: raise ReleaseError(f"cannot observe HEAD blob for {path}")
+        release_rows.append(f"{path}\0{blob}\n")
     release_id = hashlib.sha256("".join(release_rows).encode("utf-8")).hexdigest()
     dirty_control = sorted(path for path in (_dirty_paths(repo) if exact_repo else []) if is_control_path(path))
     return {

@@ -66,7 +66,7 @@ class PushUnknown(DirectionGitError):
 
     def __init__(self, message: str, *, facts: Mapping[str, Any] | None = None):
         scoped = dict(facts or {})
-        scoped["failure_scope"] = "feature"
+        scoped["failure_scope"] = "effect"
         scoped["failure_ref"] = "git_push"
         super().__init__(message, facts=scoped)
 

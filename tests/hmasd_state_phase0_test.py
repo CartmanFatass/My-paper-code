@@ -176,7 +176,7 @@ def test_state_absolute_runtime_path_rules_remain_caller_specific() -> None:
 def test_state_document_paths_keep_the_shared_platform_alias_seam(monkeypatch) -> None:
     from scripts import hmasd_state
 
-    alias = ROOT / "docs" / "research" / "candidates" / "example-direction"
+    alias = ROOT / "docs" / "research" / "candidates"
     observed: list[Path] = []
 
     def reports_alias(path: Path, *_args: object) -> bool:
@@ -192,6 +192,38 @@ def test_state_document_paths_keep_the_shared_platform_alias_seam(monkeypatch) -
     with pytest.raises(hmasd_state.OwnershipError, match="symlink or reparse"):
         hmasd_state.validate_document("research_state", fixture("research_state"))
     assert alias in observed
+
+
+def test_state_authority_path_resolution_preserves_error_classification(
+    tmp_path: Path, monkeypatch,
+) -> None:
+    from scripts import hmasd_state
+
+    repo = tmp_path / "repo"
+    evidence = repo / "docs" / "evidence.md"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("evidence\n", encoding="utf-8")
+
+    assert hmasd_state._resolve_authority_path(
+        repo, "docs/evidence.md", "evidence", require_file=True
+    ) == evidence
+    with pytest.raises(hmasd_state.ValidationError, match="not an existing regular file"):
+        hmasd_state._resolve_authority_path(
+            repo, "docs/missing.md", "evidence", require_file=True
+        )
+    with pytest.raises(hmasd_state.ValidationError, match="alias component"):
+        hmasd_state._resolve_authority_path(repo, "docs/../outside.md", "evidence")
+
+    alias = repo / "docs"
+    monkeypatch.setattr(
+        hmasd_state.hmasd_platform,
+        "is_reparse_or_symlink",
+        lambda path, *_args: Path(path) == alias,
+    )
+    with pytest.raises(
+        hmasd_state.OwnershipError, match="traverses a symlink or reparse point"
+    ):
+        hmasd_state._resolve_authority_path(repo, "docs/evidence.md", "evidence")
 
 
 def test_writer_and_path_ownership_are_enforced(tmp_path: Path) -> None:

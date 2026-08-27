@@ -642,13 +642,38 @@ def _precheck_writer_ownership(kind: str, document: Mapping[str, Any]) -> None:
 def _reject_symlink_components(value: str, name: str) -> None:
     """Reject an existing symlink anywhere in a repository-relative path."""
 
-    candidate = ROOT
-    for component in value.split("/"):
-        if component in {"", "."}:
-            continue
-        candidate /= component
-        if _is_alias(candidate):
-            raise _owner_error(f"{name} traverses symlink or reparse component {candidate}")
+    _resolve_authority_path(ROOT, value, name)
+
+
+def _resolve_authority_path(
+    repo_root: str | os.PathLike[str],
+    value: Any,
+    name: str,
+    *,
+    require_file: bool = False,
+) -> Path:
+    """Resolve a state authority path with stable validation/ownership errors."""
+
+    _ensure_path(value, name)
+    try:
+        candidate = hmasd_path_policy.resolve_repo_path(
+            repo_root,
+            value,
+            label=name,
+        )
+    except hmasd_path_policy.PathPolicyError as exc:
+        raise _owner_error(str(exc)) from exc
+    if not require_file:
+        return candidate
+    try:
+        return hmasd_path_policy.resolve_repo_path(
+            repo_root,
+            value,
+            label=name,
+            require_file=True,
+        )
+    except hmasd_path_policy.PathPolicyError as exc:
+        raise ValidationError(str(exc)) from exc
 
 
 def _check_document_paths(value: Any, prefix: str = "$") -> None:
@@ -656,7 +681,6 @@ def _check_document_paths(value: Any, prefix: str = "$") -> None:
         for key, item in value.items():
             child = f"{prefix}.{key}"
             if key == "path" and isinstance(item, str):
-                _ensure_path(item, child)
                 _reject_symlink_components(item, child)
             else:
                 _check_document_paths(item, child)
@@ -1360,15 +1384,12 @@ def _validate_portfolio_decision(
             if not isinstance(ref, dict) or set(ref) != {"path", "sha256"}:
                 raise ValidationError(f"{prefix} must contain exactly path and sha256")
             ref_path = ref["path"]
-            _ensure_path(ref_path, f"{prefix}.path")
-            lexical_target = repo_root / Path(ref_path)
-            current_component = repo_root
-            for component in Path(ref_path).parts:
-                current_component /= component
-                if _is_alias(current_component):
-                    raise OwnershipError(f"{prefix}.path traverses a symlink or reparse point")
-            if not lexical_target.is_file():
-                raise ValidationError(f"{prefix}.path does not reference an existing file")
+            lexical_target = _resolve_authority_path(
+                repo_root,
+                ref_path,
+                f"{prefix}.path",
+                require_file=True,
+            )
             ref_sha = ref["sha256"]
             if not isinstance(ref_sha, str) or SHA256_RE.fullmatch(ref_sha) is None:
                 raise ValidationError(f"{prefix}.sha256 must be a lowercase SHA-256")
@@ -1732,15 +1753,12 @@ def validate_portfolio_return(
     if not isinstance(decision_ref, Mapping) or set(decision_ref) != {"path", "sha256"}:
         raise ValidationError("portfolio return decision_ref must contain exactly path and sha256")
     decision_path = decision_ref["path"]
-    _ensure_path(decision_path, "portfolio return decision_ref.path")
-    target = root / Path(decision_path)
-    current_component = root
-    for component in Path(decision_path).parts:
-        current_component /= component
-        if _is_alias(current_component):
-            raise OwnershipError("portfolio return decision_ref.path traverses a symlink or reparse point")
-    if not target.is_file():
-        raise ValidationError("portfolio return decision_ref.path is not an existing file")
+    target = _resolve_authority_path(
+        root,
+        decision_path,
+        "portfolio return decision_ref.path",
+        require_file=True,
+    )
     decision_sha = decision_ref["sha256"]
     if not isinstance(decision_sha, str) or SHA256_RE.fullmatch(decision_sha) is None:
         raise ValidationError("portfolio return decision_ref.sha256 must be a lowercase SHA-256")
