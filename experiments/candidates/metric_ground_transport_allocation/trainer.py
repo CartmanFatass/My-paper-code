@@ -14,7 +14,7 @@ from .actor import Actor
 from .config import (
     CALIBRATION_UPDATES, CHECKPOINTS, ENTROPY_COEFFICIENT, FINAL_UPDATES,
     GRAD_CLIP, LOADS, ORDERED_PAIRS, TRAIN_SIZES, VALIDATION_TAPES,
-    HyperParameters, demand,
+    REVISION, STOCHASTIC_NAMESPACE, HyperParameters, demand,
 )
 from .decoder import decode
 from .environment import canonical_roles, canonicalize_task_values, reward
@@ -40,7 +40,8 @@ def _mark_registered_activity() -> None:
         path = Path(marker)
         temporary = path.with_suffix(path.suffix + ".tmp")
         temporary.write_text(json.dumps({
-            "revision": "MGTAP-B1-SCIENCE-20260813-04",
+            "revision": REVISION,
+            "stochastic_namespace": STOCHASTIC_NAMESPACE,
             "scientific_activity_started": True,
             "criterion_observation": "registered stochastic episode order materialized",
         }, separators=(",", ":")) + "\n", encoding="utf-8")
@@ -54,9 +55,9 @@ def _features(n: int, demands: np.ndarray, epochs: np.ndarray) -> np.ndarray:
 
 def _training_group(phase: str, seed: int, update: int, n: int) -> dict[str, np.ndarray]:
     episodes = [(pair, load) for pair in ORDERED_PAIRS for load in LOADS]
+    _mark_registered_activity()
     order_rng = generator(f"{phase}_episode_order", seed, update)
     full_order = order_rng.permutation(len(TRAIN_SIZES) * len(episodes))
-    _mark_registered_activity()
     indexed = [(nn, pair, load) for nn in TRAIN_SIZES for pair, load in episodes]
     selected = [indexed[i] for i in full_order if indexed[i][0] == n]
     pairs: list[tuple[int, int]] = []
