@@ -1548,6 +1548,21 @@ class AppServerClient:
                     document = None
                 if isinstance(document, Mapping):
                     found.append(dict(document))
+                elif text_value.count(_PARTICIPANT_SLICE_INSTRUCTION) == 1:
+                    prefix_text, suffix_text = text_value.split(
+                        _PARTICIPANT_SLICE_INSTRUCTION
+                    )
+                    try:
+                        prefix = json.loads(prefix_text)
+                        suffix = json.loads(suffix_text)
+                    except json.JSONDecodeError:
+                        prefix = suffix = None
+                    if (
+                        isinstance(prefix, Mapping)
+                        and prefix.get("protocol") == PROTOCOL_MARKER
+                        and isinstance(suffix, Mapping)
+                    ):
+                        found.extend((dict(prefix), dict(suffix)))
             for item in value.values():
                 found.extend(AppServerClient._json_documents(item))
         elif isinstance(value, list):

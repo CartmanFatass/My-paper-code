@@ -718,6 +718,11 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("parent_turn_nonmapping", "OPERATOR_PARENT_ACTIVITY_INVALID"),
         ("parent_turn_items_missing", "OPERATOR_PARENT_ACTIVITY_INVALID"),
         ("parent_turn_items_nonlist", "OPERATOR_PARENT_ACTIVITY_INVALID"),
+        ("composite_instruction_missing", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("composite_instruction_multiple", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("composite_prefix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("composite_prefix_protocol_wrong", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
+        ("composite_suffix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -769,6 +774,30 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
     operator_create_count = 0
     execute_count = 0
     cm_turn_inputs: list[list[dict[str, Any]]] = []
+    participant_instruction = (
+        "Complete only the exact Work Packet slice above. First reuse any existing exact "
+        "return; otherwise read the packet, complete its bounded assignment, publish its "
+        "typed result, and return that immutable witness."
+    )
+
+    def composite_input(document: dict[str, Any], *, variant: str = "valid") -> str:
+        prefix = native.dispatch_envelope_bytes(
+            cm_packet["work_id"], _locator(cm_packet["work_id"]), "CM-alpha"
+        ).decode()
+        suffix = json.dumps(document, separators=(",", ":"), sort_keys=True)
+        if variant == "composite_instruction_missing":
+            return prefix + suffix
+        if variant == "composite_instruction_multiple":
+            return prefix + participant_instruction * 2 + suffix
+        if variant == "composite_prefix_malformed":
+            return "not-json\n" + participant_instruction + suffix
+        if variant == "composite_prefix_protocol_wrong":
+            wrong = json.loads(prefix)
+            wrong["protocol"] = "wrong.protocol"
+            return json.dumps(wrong) + "\n" + participant_instruction + suffix
+        if variant == "composite_suffix_malformed":
+            return prefix + participant_instruction + "not-json"
+        return prefix + participant_instruction + suffix
 
     def child_stub(thread_id: str, run_id: str, *, bound: bool = True) -> dict[str, Any]:
         document = {
@@ -796,9 +825,11 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         {
                             "type": "userMessage",
                             "content": [
-                                            {
-                                                "type": "input_text",
-                                    "text": json.dumps(document if bound else {"run_id": run_id}),
+                                {
+                                    "type": "text",
+                                    "text": composite_input(
+                                        document if bound else {"run_id": run_id}
+                                    ),
                                 }
                             ],
                         }
@@ -943,20 +974,27 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     "status": {"type": "idle"},
                     "turns": [
                         {
-                            "id": "turn-operator-golden-run",
-                            "status": "completed",
+                            "id": "turn-operator-inherited",
+                            "status": "interrupted",
                             "items": [
                                 {
                                     "type": "userMessage",
                                     "content": [
-                                        {
-                                                "type": "input_text",
-                                            "text": json.dumps(spawn_assignment),
-                                        }
-                                    ],
-                                }
+                                            {
+                                                "type": "text",
+                                                "text": composite_input(
+                                                    spawn_assignment, variant=case
+                                                ),
+                                            }
+                                        ],
+                                    }
                             ],
-                        }
+                        },
+                        {
+                            "id": "turn-operator-golden-run",
+                            "status": "completed",
+                            "items": [],
+                        },
                     ],
                 }
                 self.threads[operator_thread["id"]] = operator_thread
@@ -1036,9 +1074,9 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 elif case == "malformed_payload":
                     operator_result["payload"] = "bad"
                 if case in {"child_nonterminal", "cm_early_return"}:
-                    operator_thread["turns"][0]["status"] = "inProgress"
+                    operator_thread["turns"][-1]["status"] = "inProgress"
                 else:
-                    operator_thread["turns"][0]["items"].append(
+                    operator_thread["turns"][-1]["items"].append(
                         {
                             "type": "agentMessage",
                             "content": [
