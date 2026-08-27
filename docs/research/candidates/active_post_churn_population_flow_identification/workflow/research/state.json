@@ -1,26 +1,43 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
   "active_round_id": null,
   "blockers": [],
   "direction_id": "active_post_churn_population_flow_identification",
   "direction_ref": {
     "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
-    "sha256": "1dc60801d81b47d33e8be3aae62e2b3096026e5c1788c8953ca5a93f21d3b34b"
+    "sha256": "b4b335c5e9fc17821a67d5b4b29cc44ac5c1f2fca0bc051ad97fef41369ffaed"
   },
   "engineering_request": null,
-  "evidence_set_sha256": "57fc3c7fa266daa565ce0c9547bcc83099b16a36d54ae7c9e084a15e2920cdf6",
-  "last_checkpoint_sha": null,
+  "evidence_set_sha256": "ec8ac9f06bfc19fe83f92728cb44b451b99845b0e07984f49d4a5462607d2aa5",
+  "last_checkpoint_sha": "225c613627c9b43b085e5c32431bb6080a2ea3981f71e53975704182f03e238a",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
+        "sha256": "b4b335c5e9fc17821a67d5b4b29cc44ac5c1f2fca0bc051ad97fef41369ffaed"
+      },
+      {
+        "path": "docs/research/candidates/active_post_churn_population_flow_identification/APFI_CCF_R01_CENSORED_FLOW_ORDER_SCIENCE_AUTHORITY_20260827.md",
+        "sha256": "225c613627c9b43b085e5c32431bb6080a2ea3981f71e53975704182f03e238a"
+      },
+      {
+        "path": "docs/research/candidates/active_post_churn_population_flow_identification/APFI_TLD_BRP_R02_SCIENCE_CARD_20260823.md",
+        "sha256": "aeb3b66e698cd53f9a2799a74cc3dc72dce9bab8ca857c3df2570682a74f9fc4"
+      },
+      {
+        "path": "docs/research/RESEARCH_MAP.md",
+        "sha256": "8c2db819f73999775aaee740c0868790a8aef9b058154601f731db5e78829cbf"
+      }
+    ],
+    "kind": "CONSTRUCTIVE_CASE_REVIEW"
   },
-  "phase": "IDLE",
-  "question_sha256": "e675e2fe23aa8fb9788717c331872285762732fd21bc83a7062350412ba9174a",
+  "phase": "SCOPING",
+  "question_sha256": "c37167ddb97852ab6afac87a3c18472045cd60b2ccbadcc11eaee25a77fff8f8",
   "registry_revision_seen": 1,
-  "revision": 1,
+  "revision": 2,
   "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-27T21:59:35Z",
   "waiting_on": [],
   "writer": "EM-active_post_churn_population_flow_identification"
 }

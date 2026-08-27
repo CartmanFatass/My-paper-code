@@ -22,11 +22,24 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > Two known witnesses collapse to a simple two-rule controller; reopen for a genuinely non-reducible censored-flow case.
 
+## Prospective revisit (unaccepted)
+
+The definition-only candidate
+`APFI_CCF_R01_CENSORED_FLOW_ORDER_SCIENCE_AUTHORITY_20260827.md` records one
+constructive attempt at the requested genuinely non-reducible case. It uses a
+hidden-offer/capacity-censoring generator and a four-event order language whose
+single-event and count marginals are matched while a later opposite action
+depends on the cumulative ordered history. This candidate does not replace the
+source-grounded current position, authorize activity, or establish APFI value;
+it remains pending constructive review, revision, and independent adversarial
+review.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/active_post_churn_population_flow_identification/APFI_TLD_BRP_R02_SCIENCE_CARD_20260823.md`
+- `docs/research/candidates/active_post_churn_population_flow_identification/APFI_CCF_R01_CENSORED_FLOW_ORDER_SCIENCE_AUTHORITY_20260827.md`
 
 ## Engineering request
 
