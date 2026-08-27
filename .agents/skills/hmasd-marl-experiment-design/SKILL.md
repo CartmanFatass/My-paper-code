@@ -5,16 +5,16 @@ description: Use when an HMASD MARL direction must choose or bound an experiment
 
 # HMASD MARL Experiment Design
 
-Use this method inside one exact Root or EM scientific slice. It is not a task,
-gate, packet, authority, or execution workflow. Cross-session work uses the
-public Work Packet and `run-chain` seams; an exact result command uses the
-existing `hmasd_run.py` capability. This skill does not restate that workflow.
+Produce a direction-local design note inside one scientific assignment. Use
+only supplied evidence and allowed direction paths; workflow documents are not
+scientific evidence, and missing facts stay unbound. Do not execute, route,
+create tasks, define envelope fields, or choose sessions.
 
-## Plan contract
+## Design note contract
 
-Return seven short items:
+Write seven short sections:
 
-1. **Bound question** — cite the frozen question/authority. Mark any metric,
+1. **Bound question** — cite the supplied direction-level scientific authority. Mark any metric,
    baseline, threshold, seed count, or claim choice that is not yet bound; do
    not silently choose it.
 2. **Evidence class** — name one primary class for each proposed command:
@@ -23,10 +23,10 @@ Return seven short items:
 3. **Discriminator** — state the observation and the different next action for
    each possible outcome. If an observation cannot change the next action, omit
    that probe.
-4. **Independent unit** — identify the randomized/replicated unit and the
-   pairing or blocking structure. Episodes, timesteps, vector lanes, agents,
-   and checkpoints are not independent repetitions unless the design actually
-   randomizes at that level.
+4. **Independent unit and estimand** — identify the repeated unit, pairing or
+   blocking, metric, aggregation, population, common-random-number scope, and
+   incomplete-unit handling. Usually the unit is a seed/configuration; episodes,
+   timesteps, vector lanes, agents, and checkpoints are nested observations.
 5. **Numerical semantics** — preserve the project dtype and algorithm semantics
    unless frozen authority or observed instability supports a change. Every
    tolerance needs a cited existing contract, measurement-derived rationale, or
@@ -47,19 +47,14 @@ Return seven short items:
 | Implementation correctness | One focused reproducer for the disputed semantic path |
 | Vectorization benefit | Measured serial and small-vector throughput on a justified representative workload |
 | Precision sensitivity | Probe after a named mismatch, observed instability, or bound requirement; preference alone triggers no probe |
-| Missing implementation | One bounded engineering request through an exact Work Packet |
-| Scientific comparison | A frozen design; CM assigns each exact result command to one Operator through `hmasd_run.py` |
+| Missing implementation | A bounded description of the missing source, test, CLI, or instrumentation surface |
+| Scientific comparison | A frozen design with exact inputs and an analysis population; execution is outside this skill |
 
 Do not turn a probe into an all-algorithm/all-topology qualification matrix.
 Expand coverage only when the preceding observation changes the named decision.
 
 ## Common mistakes
 
-- Inventing `1e-5`, five percentage points, or another plausible threshold.
-- Treating a passed toy environment as throughput evidence.
-- Counting evaluation episodes or vector lanes as training replicates.
-- Verifying every code path before the actual discriminator is known.
-- Emitting placeholder or imagined CLI flags as an exact command.
-
-Example: “vector width 8 because 12× is expected” is unbound; measure the
-existing runner before choosing.
+- Inventing a threshold, tolerance, flag, speedup, or runner mode.
+- Treating a toy pass as throughput evidence or nested observations as seeds.
+- Verifying every path before naming the discriminator.
