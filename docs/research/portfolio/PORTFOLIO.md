@@ -1850,3 +1850,95 @@ Only a later Clerk-routed continuation after that PREPARED return may establish 
 ### Registry decision
 
 Advance registry revision `31` to revision `32` through the Portfolio CAS writer. Keep UCOPE `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## SCDMP foundation-competence evaluation investment — 2026-08-27T15:18:45Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `b0011cbf74f0226d0963960ac4721b5d38376c3d7f05b704028c43ac21cd06a5`; registry revision `32`, SHA-256 `b663741df8367cf16c96629f91541d1e69983edab6b13fb7abdf2a5c4afad8c8`.
+- Controlling global assignment: `ce9a3c79-1e0c-4715-a066-c59777ad7187`.
+- Exact EM intake return: `6b856c57-5bb5-49e2-b040-6a0e8efc8270:return`; direction authority commit `103e7dce0fb056bebc849ae3fa91b2eb8ab8e600`, pushed at `origin/refs/heads/omp/semigroup_consistent_duration_model_policy/research/6b856c57-5bb5-49e2-b040-6a0e8efc8270`.
+- Exact unchanged science refs: `DIRECTION.md` SHA-256 `cd76fd79b9fce86e18d145d2e7c1a952e6b90305f241e5f72602e66f3b6e86eb`; CLOSED R01 science authority SHA-256 `c8091b15293f2cdeae4fc00a42bdfc1a0ae165d930fc152bca86610979e0c47c`; research-state revision `7` SHA-256 `2c62f6003d289d384a0070e81550082b58b1e19dd4087d4c536b60b4c19a557b`.
+- Exact CM terminal return: `dcc5b073-7724-4ad4-961a-e46bed2f18e3:return`; engineering-state revision `9` SHA-256 `fe9d44b138ce0c036599b392c09b0c9aecd0ec6e6a94cc716255028133af34bd`; metadata commit `db3de3fa1882993b1ba32c7545c860e1569964c3`, pushed at `origin/refs/heads/omp/semigroup_consistent_duration_model_policy/engineering/1c6c15c9-2781-49f1-993c-202b2295b9f9`.
+- Exact consumed-foundation refs: activity manifest SHA-256 `b26ae3283576199c36ce835be40b875c8635577402a0eb3a4b7047021e2f50ab`; technical evidence SHA-256 `c6bd98c9cda87c1e7cb3c5f92f05f4457df546814908f0e579e08ecc36ae3d31`; terminal SHA-256 `e65f1b523fea1ff9c2ea2b198bb01832d09916768f84e8c5ebf8113707d7a3e9`; evidence SHA-256 `3cdcd5684b460699b17aa8dd8bc1113658e364e274af0b27b2bceb2b6fe7116d`; checkpoint-manifest SHA-256 `72c4445236c41eff6a4a52e2c6eec1712bf32abf93383317e86966d005a90f41`.
+
+### Technical intake and scientific boundary
+
+Accept only the complete technical fact that the one authorized foundation transaction terminated `SUCCEEDED` after one launch and produced exactly twenty-four technically accepted final checkpoints, `4,608` updates, `73,728` episodes and `73,728` AdamW steps. The sole foundation `LOCAL_RESULT_ROOT/CREATE_ONLY` Effect is consumed, the execution is no-rerun, and its run, manifest, checkpoint and Operator identities are immutable.
+
+Those counters and checkpoint presence are not foundation competence. `question_relevant_value_visible=false`; no reward, partial result key, replicate value, confidence bound or efficacy conclusion was inspected. The CLOSED R01 definition, source conformance, task law, stochastic namespace, prerequisite order, stage atomicity, result firewall and claim ceiling remain unchanged. `C_native`, `O_native`, every adapter identity, final evaluation and fusion are still unobserved.
+
+### Investment decision and proportionality
+
+Retain SCDMP `ACTIVE/g1` and invest in exactly one evaluation-only `C_native` foundation-competence panel. Parking or closing before this panel would discard a completed immutable foundation asset without opening the R01 object's first necessary scientific discriminator. The marginal panel is sharply bounded: it reuses the twenty-four accepted final checkpoints read-only, performs no training or optimizer update, and evaluates `24 * 6 * 120 = 17,280` fresh episodes. Its result is maximally decision-relevant: a nonpass terminates the exact R01 object before the much larger opportunity and adapter workloads, while a pass establishes only the prerequisite needed for a later, separate `O_native` investment decision.
+
+This purchase is not justified by completion order or sunk cost alone. It is justified by the panel's high prospective information gain, its mandatory position in the accepted first-true map, its low incremental workload relative to the already consumed foundation stage, and the absence of any scientific or technical evidence that the frozen checkpoints are invalid. No material user choice is needed before result-blind construction and estimation; unsafe memory or an exact local result command projected above `7,200` seconds remains subject to the existing review and user-approval rule.
+
+### Frozen C_native panel authority
+
+Authorize the following distinct evaluation object. It reads the completed foundation artifacts but neither reopens nor writes their consumed Effect:
+
+```text
+investment_id=SCDMP-R01-CNATIVE-COMPETENCE-PANEL-20260827-01
+panel_identity=scdmp-native-fusion-r01-cnative-20260827-01
+science_revision=SCDMP-NATIVE-FUSION-SCIENCE-20260827-01
+science_authority_sha256=c8091b15293f2cdeae4fc00a42bdfc1a0ae165d930fc152bca86610979e0c47c
+foundation_activity_identity=scdmp-native-fusion-r01-foundation-20260827-01
+foundation_effect_status=CONSUMED_SUCCEEDED_NO_RERUN
+foundation_checkpoint_root=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoints/
+foundation_checkpoint_manifest=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation/checkpoint-manifest.json
+foundation_checkpoint_manifest_sha256=72c4445236c41eff6a4a52e2c6eec1712bf32abf93383317e86966d005a90f41
+foundation_checkpoint_count=24
+foundation_inputs=READ_ONLY_BYTE_EXACT
+foundation_rerun_permitted=false
+second_foundation_master_permitted=false
+evaluation_randomness=UNCHANGED_R01_FOUNDATION_COMPETENCE_DOMAIN
+runner_root=temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-cnative-20260827-01/
+output_root=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-competence/
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-competence/
+future_operator_identity=Operator-scdmp-native-fusion-r01-cnative-20260827-01
+activity_authorized=false
+operator_now=false
+effect_refs=[]
+```
+
+The panel is exactly the unchanged R01 `C_native` family:
+
+1. evaluate every final foundation by deterministic lexicographic argmax on `120` fresh episodes in each of `fixed 4`, `fixed 10`, `fixed 6`, `fixed 14`, `6->14` and `14->6`;
+2. in every regime use exactly `60 RG` and `60 GR` episodes per replicate, with switch time balanced where applicable, and use only the original R01 `foundation/competence` identity domain without drawing a second foundation master;
+3. apply no update, fine-tune, checkpoint selection, temperature, sampling, reward gate or result-responsive option;
+4. across twenty-four replicate summaries compute one one-sided Bonferroni Student-t family at family error `0.05`: twelve order-by-regime safe-delivery lower bounds, one pooled safe-delivery lower bound, and four worst-regime upper bounds for total physical failure and `O`, `G`, `F`;
+5. pass only when every cell lower bound is strictly above `2/3`, the pooled lower bound is strictly above `3/4`, and all four worst-regime upper bounds are strictly below `1/8`; boundary contact does not pass; and
+6. publish one atomic complete panel only after every checkpoint, replicate, regime, order cell and bound is present and conforming. Partial seed, checkpoint, replicate, regime, order, reward, endpoint or interval inspection is forbidden.
+
+A complete valid nonpass installs only `COMMON-UAV-FOUNDATION-COMPETENCE-NOT-ESTABLISHED`, proves neither impossibility nor treatment failure, and forbids `O_native` and all adapter identities. A pass establishes only `C_native`; it does not establish `O_native`, adapter competence/value, final fusion, transfer, safety, deployment or flight, and it releases no downstream stage automatically.
+
+### Exact next direction-owned scope
+
+Select one `REQUEST_CM` action for `SCDMP-R01-CNATIVE-EVALUATION-PANEL-V1`. Its exact mutable paths are:
+
+```text
+docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_contract.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_evaluation.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_inference.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_manifest.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_validation.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_resource_estimate.py
+experiments/candidates/scdmp_variable_k/native_fusion_r01/foundation_competence_production.py
+tests/experiments/candidates/scdmp_variable_k/test_native_fusion_r01_foundation_competence.py
+temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/c_native/g1/
+temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-cnative-20260827-01/
+temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-competence/
+```
+
+The existing foundation source, run manifests, technical evidence, checkpoint manifest and all twenty-four checkpoint files are read-only conformance inputs and are not owned by this scope. The scope must independently validate their exact hashes and immutable/no-rerun status; prove exact workload, balance, deterministic action, 17-member inference, strict thresholds, stage barriers and complete-only result writing; run only nonregistered result-blind technical tests before activity; produce a source/test manifest and exact CPU, wall, memory, storage, device and command estimate; and preserve every R01 semantic without opening any value during construction.
+
+After a clean direction-owned candidate and technically accepted immutable panel manifest exist, a memory-safe exact command at or below `7,200` seconds may be prepared against only the new runner root and new single Effect. At most one future Operator may execute that frozen command once. It must read the foundation inputs without mutation, create only the new competence output, and return one complete result for scientific interpretation. If identity continuity cannot be established without a second master, any checkpoint hash differs, the output root is pre-existing, the plan is unsafe, or exact command/Effect binding fails, no Operator may be created and the exact direction-scoped failure must be returned.
+
+No foundation rerun, checkpoint mutation or selection, consumed-Effect reuse, `O_native`, forced-first-hold assay, adapter construction/training, final panel, provider, shared-core change, deployment or flight is authorized. A terminal `C_native` result returns for a separate scientific interpretation and later Portfolio lifecycle/investment decision; no branch automatically purchases the next stage.
+
+### Registry decision
+
+Advance registry revision `32` to revision `33` through the Portfolio CAS writer. Keep SCDMP `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
