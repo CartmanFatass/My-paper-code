@@ -1,0 +1,456 @@
+{
+  "capacity": {
+    "active_after": 3,
+    "active_before": 3,
+    "active_direction_ids": [
+      "active_post_churn_population_flow_identification",
+      "finite_semantic_boundary_support",
+      "ucope"
+    ],
+    "active_limit": 4,
+    "resource_constraints": [
+      "Only committed, hash-bound authority is used for this global decision; uncommitted direction work is not treated as Portfolio evidence.",
+      "Current ACTIVE work already spans APFI definition and the distinct FSBS and UCOPE bounded empirical or engineering programs."
+    ],
+    "unused_capacity_reason": "One slot remains intentionally unused. Field-slot coordination is the strongest open candidate but lacks a finite algorithm, registered host law, rosters, thresholds, budget, and UAV bridge; CCIC remains reducible, DISH lacks its required five-part rejudgment packet, and the remaining cohort is no-current, retained-result-only, or construction/resource-fenced. Empty capacity is therefore more informative and proportionate than premature activation."
+  },
+  "considered": [
+    {
+      "direction_id": "active_post_churn_population_flow_identification",
+      "disposition": "RETAIN_ACTIVE",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
+          "sha256": "1dc60801d81b47d33e8be3aae62e2b3096026e5c1788c8953ca5a93f21d3b34b"
+        }
+      ],
+      "priority": 1,
+      "summary": "Retain ACTIVE/g1. APFI already owns the highest-information bounded definition cycle across four natural UAV host families; no new owner or lifecycle transition is warranted before that cycle returns."
+    },
+    {
+      "direction_id": "acvc",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 12,
+      "summary": "Retain REGISTERED/g1. The negative retained result supplies protocol lessons but no accepted fresh successor question competitive for the fourth slot."
+    },
+    {
+      "direction_id": "commitment_residual_triggered_options",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 13,
+      "summary": "Retain REGISTERED/g1. The representation-competence gate failed before learned activity and no accepted successor discriminator is ready."
+    },
+    {
+      "direction_id": "covariance_calibrated_information_clock",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md",
+          "sha256": "317c8a50ff4a8a94da0f8954ef4587fc6efa60c961583fad39698770be89098a"
+        }
+      ],
+      "priority": 5,
+      "summary": "Retain REGISTERED/g1. The resource envelope is mature, but the proposal remains reducible to scalar ESS until an equal-ESS opposite-action witness exists and its authority licenses no UAV claim."
+    },
+    {
+      "direction_id": "degraded_incumbent_shadow_handover",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+          "sha256": "45435b8e9e0018eb3da50a304e71b472632e701122f67c35fa0a1d3f242f55a0"
+        }
+      ],
+      "priority": 6,
+      "summary": "Retain REGISTERED/g1. Its Pro-closed direct-UAV science is strong, but the required named-substrate, scaling, CM-cost, preservation, and rejudgment packet is absent."
+    },
+    {
+      "direction_id": "dual_epoch_receipt_survival",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 14,
+      "summary": "Retain REGISTERED/g1. Positive lineage evidence and the negative successor are retained, with no accepted fresh successor question for present capacity."
+    },
+    {
+      "direction_id": "ec4g_r1",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 15,
+      "summary": "Retain REGISTERED/g1. Its remaining question is covered by DEARS evidence and does not form a nonduplicative current object."
+    },
+    {
+      "direction_id": "eociv_lite",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 16,
+      "summary": "Retain REGISTERED/g1. Fidelity-valid episodes remain unidentified and no complete opportunity-gated variable-axis object is accepted."
+    },
+    {
+      "direction_id": "event_triggered_budgeted_cooperative_renewal",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 17,
+      "summary": "Retain REGISTERED/g1. The retained result does not support the bundled mechanism and supplies no accepted fresh successor question."
+    },
+    {
+      "direction_id": "expressibility_gated_renewal_credit_relay",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 18,
+      "summary": "Retain REGISTERED/g1. Expressibility passed but utility and allocation improvement were zero, with no accepted fresh successor question."
+    },
+    {
+      "direction_id": "field_slot_coordination",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/field_slot_coordination/DIRECTION.md",
+          "sha256": "3d0c32b1135d1208daf852e10a4228be9b2f8965e8d079644896b62b2fc7ab17"
+        }
+      ],
+      "priority": 4,
+      "summary": "Retain REGISTERED/g1 as the leading open fourth-slot candidate. It remains a preliminary compression idea with no finite registered algorithm, host probability law, train or held-out rosters, thresholds, budget, or UAV bridge."
+    },
+    {
+      "direction_id": "finite_semantic_boundary_support",
+      "disposition": "RETAIN_ACTIVE",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 2,
+      "summary": "Retain ACTIVE/g1 under its existing owner and purchased transaction boundary; this global wake does not reinterpret in-flight direction evidence or create a new transition."
+    },
+    {
+      "direction_id": "metric_ground_transport_allocation",
+      "disposition": "RETAIN_CLOSED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 33,
+      "summary": "Retain CLOSED/g3. The terminal result and no-third-extension boundary remain authoritative; uncommitted working-tree material is not a reopening decision."
+    },
+    {
+      "direction_id": "opportunity_normalized_lease_gated_rebinding",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 19,
+      "summary": "Retain REGISTERED/g1. Its completed result is retained but does not supply an accepted fresh successor question."
+    },
+    {
+      "direction_id": "optimizer_entropy_exposure_boundary_relay",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 20,
+      "summary": "Retain REGISTERED/g1. The complete negative relay result is retained and amplification remains unexposed, without a current successor object."
+    },
+    {
+      "direction_id": "orbit_shadow_read",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 21,
+      "summary": "Retain REGISTERED/g1. Its useful owner-role binding remains covered by DEARS and lacks independent current utility."
+    },
+    {
+      "direction_id": "recct_lite",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 22,
+      "summary": "Retain REGISTERED/g1. Pointer exposure is retained, but target gaps and target effect remain zero with no accepted successor."
+    },
+    {
+      "direction_id": "renewal_indexed_score_plasticity",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 23,
+      "summary": "Retain REGISTERED/g1. The Pro-closed object is retained, while the current measurement component is not a practical continuation."
+    },
+    {
+      "direction_id": "roster_consistent_latent_exploration",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+          "sha256": "f98b477bfb15f286f1b6a4fd798cb949713986f19911adb676b031829e0f71f2"
+        }
+      ],
+      "priority": 7,
+      "summary": "Retain REGISTERED/g1. Its Pro-closed panel is mature, but the present gap is lease-lineage and technical supersession rather than a fresh EM definition cycle."
+    },
+    {
+      "direction_id": "roster_smf",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 24,
+      "summary": "Retain REGISTERED/g1. The direction remains preliminary and does not provide a current meaning-complete UAV experiment object."
+    },
+    {
+      "direction_id": "scope_1s",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 25,
+      "summary": "Retain REGISTERED/g1. The direction remains incomplete and does not provide a current meaning-complete UAV experiment object."
+    },
+    {
+      "direction_id": "semantic_graphon_shared_policy",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
+          "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
+        }
+      ],
+      "priority": 9,
+      "summary": "Retain REGISTERED/g1. The Pro-closed object remains valuable, but the current safe-window and hard-gate package is too expensive for a practical short run."
+    },
+    {
+      "direction_id": "semigroup_consistent_duration_model_policy",
+      "disposition": "RETAIN_PARKED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 11,
+      "summary": "Retain PARKED/g1 under the existing exact user-authority reactivation condition; no CONTROL_NOTICE or durable user answer is present in this assignment."
+    },
+    {
+      "direction_id": "ucope",
+      "disposition": "RETAIN_ACTIVE",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 3,
+      "summary": "Retain ACTIVE/g1 under its existing owner and purchased replacement boundary; this global wake does not reinterpret in-flight direction evidence or create a new transition."
+    },
+    {
+      "direction_id": "vap_folr_core",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 26,
+      "summary": "Retain REGISTERED/g1. It is no-current or contained by cleaner active directions and does not justify present capacity."
+    },
+    {
+      "direction_id": "variable_n_fleet_churn",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+          "sha256": "1694607aa22670221facfbb13b0f15b70fdc8ad69e96de743368a31618c8c0f9"
+        }
+      ],
+      "priority": 8,
+      "summary": "Retain REGISTERED/g1. The science is closed and bindable, but the current architecture-only bounded-controller construction cost is disproportionate."
+    },
+    {
+      "direction_id": "voronoi_quadrature_field_policy",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        },
+        {
+          "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
+          "sha256": "86de56bf32be7d3a26bac477071dd186eee73684a251f42c535e0f81a6d31ecc"
+        }
+      ],
+      "priority": 10,
+      "summary": "Retain REGISTERED/g1. Its science and analytic containment are closed, but full construction exceeds practical non-GPU ceilings and repeat stage is forbidden."
+    },
+    {
+      "direction_id": "vsp_02",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 27,
+      "summary": "Retain REGISTERED/g1. Its retained result does not provide an accepted fresh successor question competitive for current capacity."
+    },
+    {
+      "direction_id": "vsp_03",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 28,
+      "summary": "Retain REGISTERED/g1. The direction remains no-current or contained and does not provide a fourth-slot object."
+    },
+    {
+      "direction_id": "vsp_04",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 29,
+      "summary": "Retain REGISTERED/g1. The direction remains no-current or contained and does not provide a fourth-slot object."
+    },
+    {
+      "direction_id": "vsp_05",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 30,
+      "summary": "Retain REGISTERED/g1. The direction remains no-current or contained and does not provide a fourth-slot object."
+    },
+    {
+      "direction_id": "vsp_06_mssr",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 31,
+      "summary": "Retain REGISTERED/g1. The direction remains no-current or contained and does not provide a fourth-slot object."
+    },
+    {
+      "direction_id": "vsp_c1",
+      "disposition": "RETAIN_REGISTERED",
+      "evidence_refs": [
+        {
+          "path": "docs/research/portfolio/PORTFOLIO.md",
+          "sha256": "1d94e67be2f7c55a53087a083cd60cf8f7a5f84ecc29bb562e5b2bbfb0e79cd9"
+        }
+      ],
+      "priority": 32,
+      "summary": "Retain REGISTERED/g1. The direction remains no-current or contained and does not provide a fourth-slot object."
+    }
+  ],
+  "decided_at": "2026-08-27T20:00:04Z",
+  "decision_id": "portfolio-r38-fourth-slot-discipline-20260827",
+  "expected_registry_revision": 37,
+  "expected_registry_sha256": "e307447dd615d6ebdd15321eedd4e80ff7204fea755507fb95ecd18290d2ab65",
+  "proposed_candidates": [],
+  "schema_version": 1,
+  "snapshot_digest": "1e66c6142aede9ec1ce4833cc4a4554244e85dcf57c78a2af5751b112d7f8469",
+  "summary": "Retain three active directions and leave the fourth slot unused; no registered candidate clears the current meaning-complete UAV-definition gate.",
+  "transitions": []
+}

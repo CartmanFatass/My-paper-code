@@ -733,11 +733,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "883a97d1ea1aa55e4987059c5ad28b23ba19ac30623bf35488cfbe8bc4d51619"
+    "sha256": "aed8c3e4aa8b029ae4d6a8fda97ee4d1c037caa5df60a054e35e0d9dfe8e286c"
   },
-  "revision": 37,
+  "revision": 38,
   "schema_version": 1,
-  "updated_at": "2026-08-27T16:11:50Z",
+  "updated_at": "2026-08-27T20:00:04Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }
