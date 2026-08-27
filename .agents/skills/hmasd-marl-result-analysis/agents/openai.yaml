@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD MARL Result Analysis"
-  short_description: "Analyze MARL results at the seed level"
-  default_prompt: "Use $hmasd-marl-result-analysis to analyze this HMASD MARL result without pseudoreplication."
-policy:
-  allow_implicit_invocation: false
