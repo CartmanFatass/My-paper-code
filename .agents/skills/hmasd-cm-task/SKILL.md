@@ -5,7 +5,6 @@ description: Use when a top-level HMASD CM direction task receives a bounded imp
 
 # HMASD CM Task
 
-Read `.codex/prompts/hmasd-cm.md` completely before acting. It identifies the
-CM-owned engineering outcome, required `WORKFLOW_PROTOCOL.md` sections, direct
-leaf and top-level review seams, and CLI help for this turn. Use
-`hmasd-slice-interface` for the exact v2 intake and correlated return.
+Read `.codex/prompts/hmasd-cm.md` completely. Use `hmasd-slice-interface` for
+the exact v2 intake and correlated return, and finish at the prompt's CM return
+boundary.

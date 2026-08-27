@@ -122,6 +122,78 @@ def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(
     assert result.returncode == 2
 
 
+@pytest.mark.parametrize(
+    ("path", "detail"),
+    [
+        ("scripts/a.py:stream", "contains a colon or Windows ADS component"),
+        ("scripts/a.py.", "contains a Windows-ambiguous trailing dot or space"),
+        ("scripts/a.py ", "contains a Windows-ambiguous trailing dot or space"),
+        ("scripts/a\x1f.py", "contains a control character"),
+        ("scripts\\a.py", "must be a repository-relative POSIX path"),
+        ("/absolute.py", "must be a repository-relative POSIX path"),
+        ("C:/absolute.py", "must not have an absolute drive prefix"),
+        ("scripts//a.py", "contains an alias component"),
+        ("./scripts/a.py", "contains an alias component"),
+        ("scripts/../a.py", "contains an alias component"),
+    ],
+)
+def test_state_relative_paths_translate_canonical_path_policy_failures(
+    path: str, detail: str,
+) -> None:
+    from scripts import hmasd_path_policy, hmasd_state
+
+    with pytest.raises(hmasd_path_policy.PathPolicyError, match=detail):
+        hmasd_path_policy.normalize_repo_path(path, label="state path")
+    with pytest.raises(hmasd_state.ValidationError, match=detail):
+        hmasd_state._ensure_path(path, "state path")
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "scripts/a.py",
+        "docs/research/candidates/ucope/DIRECTION.md",
+    ],
+)
+def test_state_relative_paths_accept_canonical_policy_paths(path: str) -> None:
+    from scripts import hmasd_path_policy, hmasd_state
+
+    assert hmasd_path_policy.normalize_repo_path(path, label="state path") == path
+    hmasd_state._ensure_path(path, "state path")
+
+
+def test_state_absolute_runtime_path_rules_remain_caller_specific() -> None:
+    from scripts import hmasd_state
+
+    hmasd_state._ensure_path("C:\\temp\\run.log", "runtime path", absolute=True)
+    hmasd_state._ensure_path("/tmp/run.log", "runtime path", absolute=True)
+    with pytest.raises(hmasd_state.ValidationError, match="must be absolute"):
+        hmasd_state._ensure_path("temp/run.log", "runtime path", absolute=True)
+    with pytest.raises(hmasd_state.ValidationError, match="contains NUL"):
+        hmasd_state._ensure_path("C:\\temp\\run\x00.log", "runtime path", absolute=True)
+
+
+def test_state_document_paths_keep_the_shared_platform_alias_seam(monkeypatch) -> None:
+    from scripts import hmasd_state
+
+    alias = ROOT / "docs" / "research" / "candidates" / "example-direction"
+    observed: list[Path] = []
+
+    def reports_alias(path: Path, *_args: object) -> bool:
+        candidate = Path(path)
+        observed.append(candidate)
+        return candidate == alias
+
+    monkeypatch.setattr(
+        hmasd_state.hmasd_platform,
+        "is_reparse_or_symlink",
+        reports_alias,
+    )
+    with pytest.raises(hmasd_state.OwnershipError, match="symlink or reparse"):
+        hmasd_state.validate_document("research_state", fixture("research_state"))
+    assert alias in observed
+
+
 def test_writer_and_path_ownership_are_enforced(tmp_path: Path) -> None:
     state = fixture("research_state")
     wrong_writer = tmp_path / "wrong-writer.json"

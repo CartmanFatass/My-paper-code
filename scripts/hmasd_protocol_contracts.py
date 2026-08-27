@@ -6,8 +6,12 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from pathlib import PurePosixPath
 from typing import Any, Mapping, Sequence
+
+try:
+    from scripts import hmasd_path_policy
+except ImportError:
+    import hmasd_path_policy
 
 
 FENCE_INFO = "hmasd-shared-core-action-v1"
@@ -49,21 +53,10 @@ def _canonical_json(value: Mapping[str, Any]) -> bytes:
 
 
 def _validate_relative_path(value: Any, *, field: str) -> str:
-    if not isinstance(value, str) or not value:
-        raise ProtocolContractError("INVALID_PATH", f"{field} must be a non-empty repository-relative path")
-    if "\\" in value or ":" in value or any(ord(char) < 32 or 127 <= ord(char) <= 159 for char in value):
-        raise ProtocolContractError("INVALID_PATH", f"{field} contains a forbidden path spelling")
-    raw_parts = value.split("/")
-    pure = PurePosixPath(value)
-    if (
-        pure.is_absolute()
-        or any(part in {"", ".", ".."} for part in raw_parts)
-        or pure.as_posix() != value
-    ):
-        raise ProtocolContractError("INVALID_PATH", f"{field} must be canonical repository-relative POSIX syntax")
-    if any(part.endswith((".", " ")) for part in pure.parts):
-        raise ProtocolContractError("INVALID_PATH", f"{field} contains a Windows-ambiguous component")
-    return value
+    try:
+        return hmasd_path_policy.normalize_repo_path(value, label=field)
+    except hmasd_path_policy.PathPolicyError as exc:
+        raise ProtocolContractError("INVALID_PATH", str(exc)) from exc
 
 
 def _sorted_unique_text(values: Sequence[str], *, field: str, require_sorted: bool) -> list[str]:

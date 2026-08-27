@@ -7,9 +7,14 @@ from pathlib import Path
 import subprocess
 import sys
 
+import pytest
+
+from scripts import hmasd_state
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CLI = ROOT / "scripts" / "hmasd_state.py"
+ENVELOPE_CLI = ROOT / "scripts" / "hmasd_session_envelope.py"
 
 
 def _bytes(value: dict) -> bytes:
@@ -49,6 +54,13 @@ def _run(repo_root: Path, registry: Path, decision: Path) -> subprocess.Complete
         text=True,
         capture_output=True,
         check=False,
+    )
+
+
+def _run_envelope(*args: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(ENVELOPE_CLI), *args], cwd=ROOT, text=True,
+        capture_output=True, check=False,
     )
 
 
@@ -404,3 +416,131 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
     assert "Active capacity: `1 -> 2 / 2`" in portfolio_text
     assert "Considered `alpha` — priority `1`, disposition `KEEP_ACTIVE`" in portfolio_text
     assert "Only one new scientific definition can be opened." in portfolio_text
+
+    portfolio_return = {
+        "registry_revision": 8,
+        "snapshot_digest": valid["snapshot_digest"],
+        "considered": valid["considered"],
+        "transitions": valid["transitions"],
+        "capacity": valid["capacity"],
+        "summary": valid["summary"],
+        "decision_ref": {
+            "path": "docs/research/portfolio/decisions/activate-beta-20260827.json",
+            "sha256": decision_sha,
+        },
+        "artifact_refs": [],
+        "failure": None,
+    }
+    validated = hmasd_state.validate_portfolio_return(repo_root, portfolio_return)
+    assert validated["decision_id"] == valid["decision_id"]
+
+    assignment_body = {
+        "objective": "return the already committed global Portfolio decision",
+        "context_refs": [{
+            "path": "docs/research/portfolio/PORTFOLIO.md",
+            "sha256": hashlib.sha256(portfolio.read_bytes()).hexdigest(),
+        }],
+        "owned_paths": ["docs/research/portfolio/"], "effects": [],
+        "constraints": ["do not repeat portfolio-apply"],
+        "done_when": ["send one validated PORTFOLIO_RETURN"],
+        "workspace_mode": "shared-main",
+    }
+    assignment_body_path = tmp_path / "portfolio-assignment-body.json"
+    _write(assignment_body_path, assignment_body)
+    release_path = tmp_path / "control-release.json"
+    _write(release_path, {
+        "control_release_id": "a" * 64, "protocol_epoch": 2,
+        "head": "1" * 40, "origin_main": "1" * 40, "branch": "main",
+        "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
+        "publishable": True, "observed_at": "2026-08-27T20:10:00Z",
+    })
+    assigned = _run_envelope(
+        "assignment", "--repo", str(repo_root), "--direction-id", "portfolio",
+        "--sender-identity", "Workflow-Clerk", "--sender-thread-id", "clerk",
+        "--recipient-identity", "Portfolio", "--recipient-thread-id", "portfolio",
+        "--body", str(assignment_body_path), "--control-release", str(release_path),
+    )
+    assert assigned.returncode == 0, assigned.stderr
+    assignment_output = json.loads(assigned.stdout)
+    return_path = tmp_path / "portfolio-return.json"
+    _write(return_path, portfolio_return)
+    returned = _run_envelope(
+        "portfolio-return", "--repo", str(repo_root),
+        "--assignment", assignment_output["locator"], "--body", str(return_path),
+    )
+    assert returned.returncode == 0, returned.stderr
+    return_output = json.loads(returned.stdout)
+    read = _run_envelope(
+        "read", "--repo", str(repo_root), "--envelope", return_output["locator"],
+    )
+    assert read.returncode == 0, read.stderr
+    assert json.loads(read.stdout)["envelope"]["body"]["decision_ref"] == portfolio_return["decision_ref"]
+
+    envelope_path = repo_root / return_output["locator"]
+    tampered_envelope = json.loads(envelope_path.read_text(encoding="utf-8"))
+    tampered_envelope["body"]["considered"][0]["extra"] = "invalid on read"
+    tampered_envelope["body_sha256"] = hashlib.sha256(
+        json.dumps(
+            tampered_envelope["body"], ensure_ascii=False,
+            separators=(",", ":"), sort_keys=True,
+        ).encode("utf-8")
+    ).hexdigest()
+    _write(envelope_path, tampered_envelope)
+    rejected_read = _run_envelope(
+        "read", "--repo", str(repo_root), "--envelope", return_output["locator"],
+    )
+    assert rejected_read.returncode == 2
+    assert "considered[0]" in rejected_read.stderr
+
+    malformed = copy.deepcopy(portfolio_return)
+    malformed["considered"][0]["extra"] = "not exact"
+    with pytest.raises(hmasd_state.ValidationError, match=r"considered\[0\].*exactly"):
+        hmasd_state.validate_portfolio_return(repo_root, malformed)
+
+
+def test_failed_portfolio_return_binds_attempt_but_reports_current_committed_state(
+    tmp_path: Path,
+) -> None:
+    repo_root = tmp_path / "repo"
+    portfolio = repo_root / "docs/research/portfolio/PORTFOLIO.md"
+    portfolio.parent.mkdir(parents=True)
+    portfolio.write_text("# Test portfolio\n", encoding="utf-8", newline="\n")
+    registry = repo_root / "docs/research/portfolio/workflow/registry.json"
+    initial = _registry(hashlib.sha256(portfolio.read_bytes()).hexdigest())
+    _write(registry, initial)
+    registry_bytes = registry.read_bytes()
+    evidence = repo_root / "docs/research/evidence/snapshot-source.md"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("# Stable snapshot evidence\n", encoding="utf-8", newline="\n")
+    attempted = _decision(registry_bytes, hashlib.sha256(evidence.read_bytes()).hexdigest())
+    attempt_path = repo_root / ".codex/runtime/attempted-portfolio-decision.json"
+    _write(attempt_path, attempted)
+    failed_return = {
+        "registry_revision": 7,
+        "snapshot_digest": attempted["snapshot_digest"],
+        "considered": attempted["considered"],
+        "transitions": [],
+        "capacity": {
+            "active_limit": 2, "active_before": 1, "active_after": 1,
+            "active_direction_ids": ["alpha"],
+            "resource_constraints": ["The attempted atomic apply did not commit."],
+            "unused_capacity_reason": "Beta remains only proposed after the failed apply.",
+        },
+        "summary": "The attempted apply failed and the committed registry remains unchanged.",
+        "decision_ref": {
+            "path": ".codex/runtime/attempted-portfolio-decision.json",
+            "sha256": hashlib.sha256(attempt_path.read_bytes()).hexdigest(),
+        },
+        "artifact_refs": [],
+        "failure": {"typed": "validated by the envelope"},
+    }
+
+    validated = hmasd_state.validate_portfolio_return(repo_root, failed_return)
+    assert validated["decision_id"] == attempted["decision_id"]
+    assert registry.read_bytes() == registry_bytes
+    assert not (repo_root / "docs/research/portfolio/decisions").exists()
+
+    pretended_commit = copy.deepcopy(failed_return)
+    pretended_commit["transitions"] = attempted["transitions"]
+    with pytest.raises(hmasd_state.ValidationError, match="must not report committed transitions"):
+        hmasd_state.validate_portfolio_return(repo_root, pretended_commit)

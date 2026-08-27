@@ -5,7 +5,6 @@ description: Use when the top-level HMASD Portfolio task receives a bounded cros
 
 # HMASD Portfolio Task
 
-Read `.codex/prompts/hmasd-portfolio.md` completely before acting. It identifies
-the Portfolio-owned decision, required `WORKFLOW_PROTOCOL.md` sections, and CLI
-help for this turn. Use `hmasd-slice-interface` for the exact v2 intake and
-correlated Portfolio return.
+Read `.codex/prompts/hmasd-portfolio.md` completely. Use
+`hmasd-slice-interface` for the exact v2 intake and correlated return, and
+finish at the prompt's Portfolio return boundary.

@@ -105,6 +105,22 @@ def make_return(repo: Path, assignment: dict[str, Any], body: dict[str, Any]) ->
     return json.loads(result.stdout)
 
 
+def run_notice(
+    repo: Path, body: dict[str, Any], *, sender: str = "Root",
+    sender_thread: str = "root", recipient: str = "Workflow-Clerk",
+    recipient_thread: str = "clerk", release: dict[str, Any] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    token = uuid.uuid4()
+    body_path, release_path = repo / f"notice-{token}.json", repo / f"notice-release-{token}.json"
+    write_json(body_path, body); write_json(release_path, release or release_record())
+    return run_cli(
+        "control-notice", "--repo", str(repo), "--direction-id", "ucope",
+        "--sender-identity", sender, "--sender-thread-id", sender_thread,
+        "--recipient-identity", recipient, "--recipient-thread-id", recipient_thread,
+        "--body", str(body_path), "--control-release", str(release_path),
+    )
+
+
 def test_assignment_uses_explicit_publishable_release_without_git_facts(tmp_path: Path) -> None:
     expected_release = release_record()
     output = assign(tmp_path, release=expected_release)
@@ -250,6 +266,78 @@ def test_control_notice_flows_participant_to_clerk_then_clerk_to_target(tmp_path
     assert reread.returncode == 2 and "recipient" in reread.stderr
 
 
+def test_control_notice_actions_require_exact_correlations_and_replacement(tmp_path: Path) -> None:
+    assigned = assign(tmp_path)
+    for action in ("PAUSE", "CANCEL"):
+        missing = {
+            "action": action, "reason": "control this exact assignment",
+            "target_identity": "EM/ucope/g1",
+            "scope": {"direction_id": "ucope", "affected_locator": None},
+        }
+        rejected = run_notice(tmp_path, missing)
+        assert rejected.returncode == 2
+        assert f"{action} requires an affected locator" in rejected.stderr
+
+    override = {
+        "action": "OVERRIDE", "reason": "replace the bounded slice",
+        "target_identity": "EM/ucope/g1",
+        "scope": {"direction_id": "ucope", "affected_locator": assigned["locator"]},
+    }
+    missing_replacement = run_notice(tmp_path, override)
+    assert missing_replacement.returncode == 2
+    assert "OVERRIDE requires exact scope.replacement" in missing_replacement.stderr
+    override["scope"]["replacement"] = {"objective": "new bounded objective", "effects": "none"}
+    malformed_replacement = run_notice(tmp_path, override)
+    assert malformed_replacement.returncode == 2
+    assert "replacement.effects" in malformed_replacement.stderr
+
+    pause = {
+        "action": "PAUSE", "reason": "pause the current bounded work",
+        "target_identity": "EM/ucope/g1",
+        "scope": {"direction_id": "ucope", "affected_locator": assigned["locator"]},
+    }
+    paused = run_notice(tmp_path, pause)
+    assert paused.returncode == 0, paused.stderr
+    paused_locator = json.loads(paused.stdout)["locator"]
+    resume = {
+        "action": "RESUME", "reason": "the named pause condition is cleared",
+        "target_identity": "EM/ucope/g1",
+        "scope": {"direction_id": "ucope", "affected_locator": paused_locator},
+    }
+    resumed = run_notice(tmp_path, resume)
+    assert resumed.returncode == 0, resumed.stderr
+    resume["scope"]["affected_locator"] = assigned["locator"]
+    invalid_resume = run_notice(tmp_path, resume)
+    assert invalid_resume.returncode == 2
+    assert "RESUME must correlate to PAUSE or CANCEL" in invalid_resume.stderr
+
+
+def test_clerk_relay_cannot_weaken_override_semantics(tmp_path: Path) -> None:
+    assigned = assign(tmp_path)
+    initiating = {
+        "action": "OVERRIDE", "reason": "replace this bounded objective and Effect fence",
+        "target_identity": "EM/ucope/g1",
+        "scope": {
+            "direction_id": "ucope", "affected_locator": assigned["locator"],
+            "replacement": {
+                "objective": "evaluate only the replacement discriminator",
+                "effects": ["no external send", "write only direction authority"],
+            },
+        },
+    }
+    initiated = run_notice(tmp_path, initiating)
+    assert initiated.returncode == 0, initiated.stderr
+    relay = json.loads(json.dumps(initiating))
+    relay["scope"]["affected_locator"] = json.loads(initiated.stdout)["locator"]
+    relay["scope"]["replacement"]["effects"] = ["external send is now allowed"]
+    weakened = run_notice(
+        tmp_path, relay, sender="Workflow-Clerk", sender_thread="clerk",
+        recipient="EM/ucope/g1", recipient_thread="participant",
+    )
+    assert weakened.returncode == 2
+    assert "relay must copy initiating body semantics" in weakened.stderr
+
+
 def test_reanchor_requires_matching_new_publishable_release(tmp_path: Path) -> None:
     assigned = assign(tmp_path)
     new_release = release_record(release_id="b" * 64)
@@ -336,7 +424,37 @@ def test_failure_history_requires_exact_order_and_reports_eligibility(tmp_path: 
     assert json.loads(exhausted.stdout)["exhausted"] is True
 
 
-def test_portfolio_return_copies_release_and_has_legal_global_edge(tmp_path: Path) -> None:
+def test_external_effect_unknown_is_never_retryable_or_history_eligible(tmp_path: Path) -> None:
+    assigned = assign(tmp_path, recipient="CM/ucope/g1")
+    failure = {
+        "scope": "effect", "code": "PUSH_OUTCOME_UNKNOWN",
+        "fingerprint": "unknown-push-effect", "responsible_role": "CM",
+        "retryable": True, "attempt": 1, "max_attempts": 3,
+        "summary": "the external push commitment cannot yet be determined",
+    }
+    body_path = tmp_path / "retryable-unknown.json"
+    write_json(body_path, return_body(status="FAILED", failure=failure))
+    rejected = run_cli(
+        "return", "--repo", str(tmp_path), "--assignment", assigned["locator"],
+        "--body", str(body_path),
+    )
+    assert rejected.returncode == 2
+    assert "UNKNOWN external Effect" in rejected.stderr
+
+    failure["retryable"] = False
+    output = make_return(tmp_path, assigned, return_body(status="FAILED", failure=failure))
+    history = run_cli(
+        "failure-history", "--repo", str(tmp_path),
+        "--fingerprint", failure["fingerprint"], "--return", output["locator"],
+    )
+    assert history.returncode == 0, history.stderr
+    observed = json.loads(history.stdout)
+    assert observed["retry_eligible"] is False
+    assert observed["exhausted"] is True
+    assert observed["next_attempt"] is None
+
+
+def test_portfolio_return_rejects_unbound_unvalidated_decision(tmp_path: Path) -> None:
     assigned = assign(tmp_path, recipient="Portfolio", direction="portfolio")
     artifact = ref(tmp_path, "docs/research/portfolio/PORTFOLIO.md", b"portfolio\n")
     body = {
@@ -347,16 +465,5 @@ def test_portfolio_return_copies_release_and_has_legal_global_edge(tmp_path: Pat
     }
     body_path = tmp_path / "portfolio.json"; write_json(body_path, body)
     result = run_cli("portfolio-return", "--repo", str(tmp_path), "--assignment", assigned["locator"], "--body", str(body_path))
-    assert result.returncode == 0, result.stderr
-    output = json.loads(result.stdout)
-    envelope = json.loads((tmp_path / output["locator"]).read_text())
-    assignment = json.loads((tmp_path / assigned["locator"]).read_text())
-    assert envelope["control_release"] == assignment["control_release"]
-    assert envelope["sender"]["identity"] == "Portfolio"
-    assert envelope["recipient"]["identity"] == "Workflow-Clerk"
-    assert " next=NONE " in output["message"]
-    document = json.loads((tmp_path / output["locator"]).read_text())
-    document["sender"] = {"identity": "Root", "thread_id": "root"}
-    write_json(tmp_path / output["locator"], document)
-    reread = run_cli("read", "--repo", str(tmp_path), "--envelope", output["locator"])
-    assert reread.returncode == 2 and "endpoints" in reread.stderr
+    assert result.returncode == 2
+    assert "decision_ref" in result.stderr

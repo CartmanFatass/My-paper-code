@@ -60,7 +60,7 @@ def _dirty_paths(repo: Path) -> list[str]:
         capture_output=True, text=True, check=False,
     )
     if run.returncode:
-        return []
+        raise ReleaseError(f"git status failed: {run.stderr.strip()}")
     raw = run.stdout
     entries = raw.split("\0"); result: list[str] = []
     index = 0
@@ -68,10 +68,12 @@ def _dirty_paths(repo: Path) -> list[str]:
         entry = entries[index]
         if not entry: break
         status, path = entry[:2], entry[3:].replace("\\", "/")
-        if status[0] in {"R", "C"}:
+        result.append(path)
+        if any(code in {"R", "C"} for code in status):
             index += 1
-            if index < len(entries): path = entries[index].replace("\\", "/")
-        result.append(path); index += 1
+            if index < len(entries) and entries[index]:
+                result.append(entries[index].replace("\\", "/"))
+        index += 1
     return sorted(set(result))
 
 def inspect_repo(repo: Path) -> dict[str, Any]:

@@ -24,8 +24,9 @@ import tempfile
 from typing import Any, Callable, Iterator, Mapping, NoReturn
 
 try:
-    from scripts import hmasd_platform
+    from scripts import hmasd_path_policy, hmasd_platform
 except ImportError:
+    import hmasd_path_policy
     import hmasd_platform
 
 
@@ -48,11 +49,6 @@ GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
 DIRECTION_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{1,63}$")
 TIMESTAMP_RE = re.compile(
     r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,9})?Z$"
-)
-PATH_RE = re.compile(
-    r"^(?!/)(?![A-Za-z]:)(?!.*\\)(?!.*[\x00-\x1f\x7f-\x9f])(?!.*:)"
-    r"(?!\.{1,2}(?:/|$))(?!.*//)(?!.*(?:^|/)\.{1,2}(?:/|$))"
-    r"(?![^/]*[. ](?:/|$))(?!.*\/[^/]*[. ](?:/|$))[^/]+(?:/[^/]+)*$"
 )
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SECRET_NAME_RE = re.compile(r"(?:secret|token|password|credential|private[_-]?key)", re.I)
@@ -278,8 +274,10 @@ def _ensure_path(value: Any, name: str, *, absolute: bool = False) -> None:
         if "\x00" in value:
             raise ValidationError(f"{name} contains NUL")
         return
-    if PATH_RE.fullmatch(value) is None:
-        raise ValidationError(f"{name} is not a repository-relative POSIX path")
+    try:
+        hmasd_path_policy.normalize_repo_path(value, label=name)
+    except hmasd_path_policy.PathPolicyError as exc:
+        raise ValidationError(str(exc)) from exc
 
 
 def _ensure_sha(value: Any, name: str, *, git: bool = False) -> None:
@@ -657,7 +655,8 @@ def _check_document_paths(value: Any, prefix: str = "$") -> None:
     if isinstance(value, dict):
         for key, item in value.items():
             child = f"{prefix}.{key}"
-            if key == "path" and isinstance(item, str) and PATH_RE.fullmatch(item):
+            if key == "path" and isinstance(item, str):
+                _ensure_path(item, child)
                 _reject_symlink_components(item, child)
             else:
                 _check_document_paths(item, child)
@@ -1232,6 +1231,8 @@ def _validate_portfolio_decision(
     current: Mapping[str, Any],
     current_bytes: bytes,
     repo_root: Path,
+    *,
+    committed: bool = False,
 ) -> tuple[list[Mapping[str, Any]], set[str]]:
     required = {
         "schema_version",
@@ -1246,9 +1247,13 @@ def _validate_portfolio_decision(
         "transitions",
         "capacity",
     }
-    missing = sorted(required - decision.keys())
-    if missing:
-        raise ValidationError(f"portfolio decision missing required keys: {missing}")
+    if set(decision) != required:
+        missing = sorted(required - decision.keys())
+        extra = sorted(decision.keys() - required)
+        raise ValidationError(
+            f"portfolio decision must contain exactly {sorted(required)}; "
+            f"missing={missing}, extra={extra}"
+        )
     if decision["schema_version"] != 1:
         raise UnsupportedVersionError("portfolio decision schema_version must be 1")
     if "snapshot_sha256" in decision:
@@ -1266,9 +1271,10 @@ def _validate_portfolio_decision(
     expected_revision = decision["expected_registry_revision"]
     if not isinstance(expected_revision, int) or isinstance(expected_revision, bool):
         raise RevisionConflictError("expected_registry_revision must be an integer")
-    if expected_revision != current["revision"]:
+    observed_expected_revision = current["revision"] - 1 if committed else current["revision"]
+    if expected_revision != observed_expected_revision:
         raise RevisionConflictError(
-            f"expected revision {expected_revision}, observed {current['revision']}"
+            f"expected revision {expected_revision}, observed {observed_expected_revision}"
         )
     expected_registry_sha256 = decision["expected_registry_sha256"]
     observed_registry_sha256 = sha256_bytes(current_bytes)
@@ -1277,7 +1283,7 @@ def _validate_portfolio_decision(
         or SHA256_RE.fullmatch(expected_registry_sha256) is None
     ):
         raise ValidationError("expected_registry_sha256 must be a lowercase SHA-256")
-    if expected_registry_sha256 != observed_registry_sha256:
+    if not committed and expected_registry_sha256 != observed_registry_sha256:
         raise RevisionConflictError(
             "expected_registry_sha256 mismatch: "
             f"expected {expected_registry_sha256}, observed {observed_registry_sha256}"
@@ -1286,7 +1292,7 @@ def _validate_portfolio_decision(
     if not isinstance(snapshot_digest, str) or SHA256_RE.fullmatch(snapshot_digest) is None:
         raise ValidationError("snapshot_digest must be a lowercase SHA-256 provenance digest")
 
-    current_by_id = {item["id"]: item for item in current["directions"]}
+    current_all_by_id = {item["id"]: item for item in current["directions"]}
     proposed_value = decision["proposed_candidates"]
     if not isinstance(proposed_value, list):
         raise ValidationError("proposed_candidates must be an array")
@@ -1303,6 +1309,10 @@ def _validate_portfolio_decision(
     proposed = set(proposed_ids)
     if len(proposed) != len(proposed_ids):
         raise ValidationError("proposed_candidates contains duplicate direction_id")
+    current_by_id = {
+        direction_id: item for direction_id, item in current_all_by_id.items()
+        if not committed or direction_id not in proposed
+    }
     existing_proposals = proposed & set(current_by_id)
     if existing_proposals:
         raise ValidationError(
@@ -1315,7 +1325,7 @@ def _validate_portfolio_decision(
         ],
     }
     observed_snapshot_digest = sha256_bytes(_canonical_bytes(snapshot))
-    if snapshot_digest != observed_snapshot_digest:
+    if not committed and snapshot_digest != observed_snapshot_digest:
         raise RevisionConflictError(
             "snapshot_digest mismatch for current registry and proposed candidates: "
             f"expected {snapshot_digest}, observed {observed_snapshot_digest}"
@@ -1513,10 +1523,11 @@ def _validate_portfolio_decision(
         or active_limit > 8
     ):
         raise ValidationError("capacity active_limit must be an integer in 0..8")
-    observed_active_before = sum(
-        item["lifecycle"] == "ACTIVE" for item in current["directions"]
-    )
-    if (
+    observed_active_before = sum(item["lifecycle"] == "ACTIVE" for item in current["directions"])
+    if committed:
+        if not isinstance(active_before, int) or isinstance(active_before, bool) or active_before < 0:
+            raise ValidationError("capacity active_before must be a non-negative integer")
+    elif (
         not isinstance(active_before, int)
         or isinstance(active_before, bool)
         or active_before != observed_active_before
@@ -1556,6 +1567,22 @@ def _validate_portfolio_decision(
         not isinstance(unused_capacity_reason, str) or not unused_capacity_reason.strip()
     ):
         raise ValidationError("capacity unused_capacity_reason must be null or a non-empty string")
+    if committed:
+        if current["revision"] != expected_revision + 1:
+            raise RevisionConflictError("committed portfolio decision registry revision is invalid")
+        current_active = {
+            direction_id for direction_id, item in current_all_by_id.items()
+            if item["lifecycle"] == "ACTIVE"
+        }
+        if current_active != resulting_active:
+            raise ValidationError("committed decision ACTIVE set does not match current registry")
+        for transition in transitions:
+            direction_id = str(transition["direction_id"])
+            current_item = current_all_by_id.get(direction_id)
+            if current_item is None or current_item["lifecycle"] != transition["lifecycle"]:
+                raise ValidationError(
+                    f"committed transition {direction_id} does not match current registry"
+                )
     return transitions, resulting_active
 
 
@@ -1678,6 +1705,90 @@ def _portfolio_apply_lock(repo_root: Path, registry: Path) -> Iterator[None]:
                 yield
     except OSError as exc:
         raise StateError(f"cannot acquire portfolio apply lock {lock_path}: {exc}") from exc
+
+
+def validate_portfolio_return(
+    repo_root: str | os.PathLike[str], body: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Read-only validation of one complete PORTFOLIO_RETURN against durable state."""
+
+    required = {
+        "registry_revision", "snapshot_digest", "considered", "transitions", "capacity",
+        "summary", "decision_ref", "artifact_refs", "failure",
+    }
+    if not isinstance(body, Mapping) or set(body) != required:
+        raise ValidationError(f"portfolio return must contain exactly {sorted(required)}")
+    root = Path(repo_root).resolve()
+    registry_path = root / "docs/research/portfolio/workflow/registry.json"
+    current_bytes, current = _read_document(registry_path)
+    validate_document("portfolio_registry", current, writer="Portfolio")
+    revision = body["registry_revision"]
+    if not isinstance(revision, int) or isinstance(revision, bool) or revision != current["revision"]:
+        raise RevisionConflictError(
+            f"portfolio return registry_revision must equal committed revision {current['revision']}"
+        )
+
+    decision_ref = body["decision_ref"]
+    if not isinstance(decision_ref, Mapping) or set(decision_ref) != {"path", "sha256"}:
+        raise ValidationError("portfolio return decision_ref must contain exactly path and sha256")
+    decision_path = decision_ref["path"]
+    _ensure_path(decision_path, "portfolio return decision_ref.path")
+    target = root / Path(decision_path)
+    current_component = root
+    for component in Path(decision_path).parts:
+        current_component /= component
+        if _is_alias(current_component):
+            raise OwnershipError("portfolio return decision_ref.path traverses a symlink or reparse point")
+    if not target.is_file():
+        raise ValidationError("portfolio return decision_ref.path is not an existing file")
+    decision_sha = decision_ref["sha256"]
+    if not isinstance(decision_sha, str) or SHA256_RE.fullmatch(decision_sha) is None:
+        raise ValidationError("portfolio return decision_ref.sha256 must be a lowercase SHA-256")
+    decision_bytes, decision = _read_document(target)
+    if sha256_bytes(decision_bytes) != decision_sha:
+        raise ValidationError("portfolio return decision_ref.sha256 does not match file bytes")
+
+    committed = body["failure"] is None
+    if committed:
+        decision_id = decision.get("decision_id")
+        canonical_path = f"docs/research/portfolio/decisions/{decision_id}.json"
+        if decision_path != canonical_path:
+            raise ValidationError("successful portfolio return must bind canonical decision authority")
+        validation_view = copy.deepcopy(decision)
+        for key in ("snapshot_digest", "considered", "transitions", "capacity", "summary"):
+            validation_view[key] = copy.deepcopy(body[key])
+        transitions, _ = _validate_portfolio_decision(
+            validation_view, current, current_bytes, root, committed=True
+        )
+        for key in ("snapshot_digest", "considered", "transitions", "capacity", "summary"):
+            if body[key] != decision.get(key):
+                raise ValidationError(f"successful portfolio return {key} must match decision authority")
+        current_by_id = {item["id"]: item for item in current["directions"]}
+        for transition in transitions:
+            direction_id = str(transition["direction_id"])
+            lifecycle_ref = current_by_id[direction_id]["lifecycle_decision_ref"]
+            if (
+                lifecycle_ref["path"] != decision_path
+                or lifecycle_ref["sha256"] != decision_sha
+            ):
+                raise ValidationError(
+                    f"committed transition {direction_id} is not bound to decision authority"
+                )
+    else:
+        if body["transitions"]:
+            raise ValidationError("failed atomic portfolio apply must not report committed transitions")
+        validation_view = copy.deepcopy(decision)
+        validation_view.update(
+            expected_registry_revision=current["revision"],
+            expected_registry_sha256=sha256_bytes(current_bytes),
+            snapshot_digest=body["snapshot_digest"],
+            considered=copy.deepcopy(body["considered"]),
+            transitions=copy.deepcopy(body["transitions"]),
+            capacity=copy.deepcopy(body["capacity"]),
+            summary=body["summary"],
+        )
+        _validate_portfolio_decision(validation_view, current, current_bytes, root)
+    return dict(decision)
 
 
 def portfolio_apply(

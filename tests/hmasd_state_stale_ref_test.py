@@ -25,6 +25,7 @@ def test_replace_rebinds_a_stale_research_direction_ref_with_revision_cas(
     scripts.mkdir(parents=True)
     shutil.copy2(ROOT / "scripts/hmasd_state.py", scripts / "hmasd_state.py")
     shutil.copy2(ROOT / "scripts/hmasd_platform.py", scripts / "hmasd_platform.py")
+    shutil.copy2(ROOT / "scripts/hmasd_path_policy.py", scripts / "hmasd_path_policy.py")
     shutil.copytree(ROOT / "scripts/schemas", scripts / "schemas")
 
     direction_id = "alpha"

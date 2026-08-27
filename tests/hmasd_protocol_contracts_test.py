@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from scripts import hmasd_protocol_contracts as contracts
+from scripts import hmasd_path_policy
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -112,24 +113,41 @@ def test_shared_core_record_rejects_every_bound_field_drift(
 
 
 @pytest.mark.parametrize(
-    "path",
+    ("path", "detail"),
     [
-        "/absolute.py",
-        "C:/absolute.py",
-        "scripts\\a.py",
-        "scripts//a.py",
-        "./scripts/a.py",
-        "scripts/../a.py",
-        "scripts/a.py:stream",
-        "scripts/a.py.",
-        "scripts/a.py ",
+        ("scripts/a.py:stream", "contains a colon or Windows ADS component"),
+        ("scripts/a.py.", "contains a Windows-ambiguous trailing dot or space"),
+        ("scripts/a.py ", "contains a Windows-ambiguous trailing dot or space"),
+        ("scripts/a\x1f.py", "contains a control character"),
+        ("scripts\\a.py", "must be a repository-relative POSIX path"),
+        ("/absolute.py", "must be a repository-relative POSIX path"),
+        ("C:/absolute.py", "must not have an absolute drive prefix"),
+        ("scripts//a.py", "contains an alias component"),
+        ("./scripts/a.py", "contains an alias component"),
+        ("scripts/../a.py", "contains an alias component"),
     ],
 )
-def test_shared_core_paths_reject_noncanonical_or_windows_ambiguous_spellings(
-    path: str,
+def test_shared_core_paths_translate_canonical_path_policy_failures(
+    path: str, detail: str,
 ) -> None:
-    with pytest.raises(contracts.ProtocolContractError, match="INVALID_PATH"):
+    with pytest.raises(hmasd_path_policy.PathPolicyError, match=detail):
+        hmasd_path_policy.normalize_repo_path(path, label="paths[]")
+    with pytest.raises(contracts.ProtocolContractError) as observed:
         _base_action(paths=[path])
+    assert observed.value.code == "INVALID_PATH"
+    assert detail in observed.value.detail
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "scripts/a.py",
+        "docs/research/candidates/ucope/DIRECTION.md",
+    ],
+)
+def test_shared_core_paths_accept_canonical_policy_paths(path: str) -> None:
+    assert hmasd_path_policy.normalize_repo_path(path, label="paths[]") == path
+    assert _base_action(paths=[path])["paths"] == [path]
 
 
 def test_shared_core_record_rejects_ambiguous_invalid_or_noncanonical_fences() -> None:

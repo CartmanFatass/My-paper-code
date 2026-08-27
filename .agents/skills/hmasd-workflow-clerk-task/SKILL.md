@@ -6,6 +6,5 @@ description: Use when the top-level HMASD Workflow-Clerk task receives a delegat
 # HMASD Workflow-Clerk Task
 
 Read `.codex/prompts/hmasd-workflow-clerk.md` and
-`hmasd-operations-manual` completely before handling the event. They identify
-the authoritative protocol sections and current CLI help for ingress,
-topology, retry/recovery, routing, outbound edges, and bounded final drain.
+`hmasd-operations-manual` completely, then finish at the prompt's Clerk return
+boundary.

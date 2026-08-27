@@ -245,7 +245,10 @@ attempt；不得通过改写 prose 规避计数。相同 fingerprint 只有在 `
 `responsible_role` 路由一次明确处理。合法 responsible role 是 `Root`、
 `Workflow-Clerk`、`Portfolio`、`EM` 或 `CM`；其他值令 header `next=NONE` 并成为机械
 defect。外部 Effect 的 UNKNOWN code 必须
-`retryable=false`、observe-only，任何 retry budget 都不授权 resend。
+`retryable=false`、observe-only，任何 retry budget 都不授权 resend。code 经大小写与
+separator canonicalization 后只要包含 exact `UNKNOWN` token（包括
+`COMMITMENT_UNKNOWN`、`UNKNOWN_COMMITMENT` 与 `PUSH_OUTCOME_UNKNOWN`）就受此约束；
+failure-history 永远不得把它报告为 retry eligible。
 
 script 检查 `changed_paths` 全部位于原 ASSIGNMENT `owned_paths`，并只校验调用者提供的
 structured `git_closure`，不运行 Git、不解析 summary。`changed_paths=[]` 时 closure 必须
@@ -266,7 +269,7 @@ Portfolio global ASSIGNMENT 与 PORTFOLIO_RETURN 的 header 固定使用
 `direction=portfolio`；这个 transport correlation 不缩小其全局 considered scope。
 
 Portfolio global wake 的 body 固定包含 `registry_revision`、`snapshot_digest`、`summary`、
-`artifact_refs`、`failure`，以及恰好三个语义决策区块：
+`decision_ref`、`artifact_refs`、`failure`，以及恰好三个语义决策区块：
 
 - `considered[]`
 - `transitions[]`
@@ -275,6 +278,12 @@ Portfolio global wake 的 body 固定包含 `registry_revision`、`snapshot_dige
 `registry_revision` 是本 wake 成功持久化后的 exact registry revision；
 `snapshot_digest` 绑定 Portfolio 实际比较的完整 global input，而不是单方向 registry
 bytes（后者由 decision 的 `expected_registry_sha256` 单独绑定）。
+`decision_ref` exact 为 `{path, sha256}`。成功 RETURN 必须指向
+`docs/research/portfolio/decisions/<decision_id>.json` 的 committed apply authority；body 的
+summary/snapshot/considered/transitions/capacity 必须与 authority 完全一致，registry revision、
+transition lifecycle、ACTIVE set 与 lifecycle decision refs 必须与当前 committed registry
+一致。envelope 不复制 Portfolio 规则，而调用 `hmasd_state.validate_portfolio_return` 的
+read-only seam。
 
 `considered[]` 覆盖 assignment snapshot 的全部方向及本 wake 的 proposed candidate。
 每项 exact 为 `{direction_id, disposition, priority, summary, evidence_refs}`；direction ID
@@ -307,6 +316,9 @@ resource_constraints, unused_capacity_reason}`。before/after 与 apply 前后 r
 PORTFOLIO_RETURN，不能绕到普通 RETURN。此时必须填写同一八字段 typed failure，仍提供
 完整 `considered[]`，`transitions[]` 只列已成功 durable 持久化的变化，`capacity` 反映
 失败后 registry 的真实 committed 状态。未提交或已回滚的 proposed transition 不得写入。
+atomic `portfolio-apply` 失败时 transitions 因而必须为空；`decision_ref` 可以指向原
+attempted decision input 而不能冒充 committed authority。validator 仍以 current registry
+和 decision 中的 proposed cohort 校验完整 considered、evidence、capacity 与 snapshot。
 Clerk 只按 `failure.responsible_role` 路由，header `next` 仍为 `NONE`。
 
 Clerk 在任何 native send 前先校验完整 `considered/transitions/capacity` 和 registry
@@ -355,7 +367,12 @@ direction、authoritative provenance 和被控制的 message/assignment；至少
 `direction_id` 与 `affected_locator`（没有 affected message 时显式 null）。envelope 的
 `reply_to` 必须等于 affected locator 中的 message ID。initiating notice 只能由 participant
 发给 Clerk；Clerk relay 必须 reply to 该 initiating notice、复制 action/target/release，并
-发给 exact target。任何 direct participant peer edge 非法。REANCHOR 的 scope
+发给 exact target。除 hop-local `affected_locator` 外，relay 必须 byte-semantically 复制
+initiating action、reason、target 与全部 scope semantics。任何 direct participant peer edge
+非法。PAUSE/CANCEL 必须有 affected locator；RESUME 必须关联同 direction/target 的 validated
+PAUSE 或 CANCEL notice；OVERRIDE scope 必须包含 exact
+`replacement:{objective,effects[]}`，同时冻结 replacement objective 与 Effect boundary。
+REANCHOR 的 scope
 必须给 `expected_control_release_id`。PAUSE/CANCEL 立即停止新的 launch/send，但不能假装取消已经发生的
 外部 Effect；未知 commitment 继续 observe 到可判定状态。OVERRIDE 必须给 exact replacement
 objective/Effect boundary。RESUME 必须关联原 pause/cancel facts。
@@ -453,6 +470,44 @@ scripts 可以纯函数式生成 schema/correlation/recovery action，但不得�
 task，不得解释 direction prose，不得维护 retry FSM 或权限状态。
 
 ## 8. EM、CM 与 Operator completion
+
+EM 与 CM 只在各自 standing task 内创建一层 bounded direct leaf；leaf 不再 delegate，
+不持有或联系其他 top-level task，只把 typed result final return 给 spawning manager。
+manager 仍是 durable writer、判断者和对 Clerk 的唯一 RETURN sender。
+
+EM 的 role-local leaf interfaces 固定为：
+
+- **Research Scout**：检索一个冻结问题的 primary evidence、方法与反证边界，返回可核对
+  refs/facts，不作最终方向判断；
+- **Research Innovator**：提出 bounded mechanism、comparator 与 discriminator，显式列出
+  可区分预测和失败条件；
+- **Research Principles Analyst**：审查学习动力学、因果归因、数值/优化原则与跨任务可迁移
+  约束；
+- **Research Critic**：对一个冻结 claim/object 作独立 constructive 或 adversarial Pro
+  review，不能同时充当被审对象作者；
+- **Agentify external transport**：只传输一次 bounded external research consultation，
+  保留 provider/effect provenance 与 at-most-once/UNKNOWN 语义，不成为 durable writer。
+
+结论性或 direction-changing scientific object 的接受顺序固定为：先形成 constructive
+case；再做 constructive Pro review；EM 根据 review 修订冻结对象；最后由未参与该对象构造
+或第一次 review 的独立 Research Critic 做 adversarial Pro review。只有修订后对象通过该
+独立 adversarial review，EM 才能把结论写入 authority 或请求 material lifecycle/engineering
+变化。普通事实检索或不改变结论的机械更新不伪装成这条 review sequence。
+
+CM 的 role-local leaf interfaces 固定为：
+
+- **Implementer**：拥有一个 exact path/contract 的非机械实现与相应 focused tests；不改
+  assignment 外路径，不回退其他 session work；
+- **Reviewer**：在 fixed diff/base 上独立检查 repository Standards 与 accepted Spec；高影响
+  production/protocol/scientific/numerical/RNG/checkpoint 代码在 CM 接受前必须经过 Reviewer；
+- **Verifier**：对一个冻结行为或 result command 做 focused runtime verification，报告
+  command、环境、observations 与 limits，不顺带取得实现 ownership；
+- **Experiment Operator**：从 launch 到 terminal observation 只运行一个 exact frozen
+  result-bearing command，保存 payload/result/stdout/stderr/checkpoint，terminal result 只回 CM。
+
+非机械 implementation 必须交 Implementer；纯格式、已完全机械的生成或 manager 自身小型
+transport edit 不强制创建 leaf。Reviewer/Verifier evidence 是 risk-proportionate acceptance
+evidence，不是新的 authority 或用户 approval gate。
 
 EM 写入 research authority 后，在同一 turn 生成并 native send RETURN。若科研 object 已
 接受但实现不存在，返回 `REQUEST_CM`；若 evidence 需要新科研解释，返回 `REQUEST_EM`；

@@ -42,22 +42,15 @@ def test_reviewer_leaf_cannot_reenter_code_review_or_delegate() -> None:
     assert "never spawn or delegate another agent" in text
 
 
-def test_cm_owns_two_axis_code_review_but_em_science_does_not() -> None:
+def test_role_bootstraps_keep_only_the_code_review_boundary() -> None:
     cm_skill = _read(".agents/skills/hmasd-cm-task/SKILL.md")
     cm_prompt = _read(".codex/prompts/hmasd-cm.md")
     em_skill = _read(".agents/skills/hmasd-em-task/SKILL.md")
     em_prompt = _read(".codex/prompts/hmasd-em.md")
 
     assert "`code-review`" in cm_prompt
-    assert "standards" in cm_prompt
-    assert "spec" in cm_prompt
-    assert "two direct" in cm_prompt
-    assert "hmasd-reviewer" in cm_prompt
+    assert "only as section 8 defines" in cm_prompt
     assert ".codex/prompts/hmasd-cm.md" in cm_skill
-    assert "top-level review seams" in cm_skill
 
     assert "never invokes `code-review`" in em_prompt
-    assert "research critic" in em_prompt
-    assert "agentify" in em_prompt
     assert ".codex/prompts/hmasd-em.md" in em_skill
-    assert "direct leaf interfaces" in em_skill

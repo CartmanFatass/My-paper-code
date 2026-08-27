@@ -1,17 +1,143 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "hmasd_control_release.py"
+SPEC = importlib.util.spec_from_file_location("hmasd_control_release", SCRIPT)
+assert SPEC and SPEC.loader
+CONTROL_RELEASE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(CONTROL_RELEASE)
 
 
 def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=cwd, check=False, capture_output=True, text=True)
+
+
+def test_inspect_fails_closed_when_git_status_cannot_be_observed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    (tmp_path / "AGENTS.md").write_bytes(b"control\n")
+    run("git", "add", "AGENTS.md", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    real_run = CONTROL_RELEASE.subprocess.run
+
+    def fail_status(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        if "status" in command:
+            return subprocess.CompletedProcess(command, 128, "", "status observation failed")
+        return real_run(command, **kwargs)
+
+    monkeypatch.setattr(CONTROL_RELEASE.subprocess, "run", fail_status)
+
+    with pytest.raises(CONTROL_RELEASE.ReleaseError, match="git status.*status observation failed"):
+        CONTROL_RELEASE.inspect_repo(tmp_path)
+
+
+def test_inspect_marks_control_destination_of_staged_rename_dirty(tmp_path: Path) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    source = tmp_path / "docs/research/candidates/ucope/notes.md"
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b"same content\n")
+    run("git", "add", ".", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    run("git", "mv", source.relative_to(tmp_path).as_posix(), "AGENTS.md", cwd=tmp_path)
+
+    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+
+    assert result.returncode == 0, result.stderr
+    record = json.loads(result.stdout)
+    assert record["dirty_control_paths"] == ["AGENTS.md"]
+    assert record["publishable"] is False
+
+
+def test_inspect_marks_control_destination_of_staged_copy_dirty(tmp_path: Path) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    run("git", "config", "status.renames", "copies", cwd=tmp_path)
+    source = tmp_path / "docs/research/candidates/ucope/notes.md"
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b"same content line\n" * 20)
+    run("git", "add", ".", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    source.write_bytes(source.read_bytes() + b"one changed line\n")
+    (tmp_path / "AGENTS.md").write_bytes(source.read_bytes())
+    run("git", "add", source.relative_to(tmp_path).as_posix(), "AGENTS.md", cwd=tmp_path)
+    status = run("git", "status", "--porcelain=v1", "-z", cwd=tmp_path)
+    assert status.stdout.startswith("C  AGENTS.md\0"), status.stdout
+
+    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+
+    assert result.returncode == 0, result.stderr
+    record = json.loads(result.stdout)
+    assert record["dirty_control_paths"] == ["AGENTS.md"]
+    assert record["publishable"] is False
+
+
+def test_inspect_marks_control_source_of_staged_rename_dirty(tmp_path: Path) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    (tmp_path / "AGENTS.md").write_bytes(b"control\n")
+    run("git", "add", ".", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    destination = "docs/research/candidates/ucope/notes.md"
+    (tmp_path / destination).parent.mkdir(parents=True)
+    run("git", "mv", "AGENTS.md", destination, cwd=tmp_path)
+
+    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+
+    assert result.returncode == 0, result.stderr
+    record = json.loads(result.stdout)
+    assert record["dirty_control_paths"] == ["AGENTS.md"]
+    assert record["publishable"] is False
+
+
+def test_inspect_marks_control_source_of_staged_copy_dirty(tmp_path: Path) -> None:
+    run("git", "init", "-b", "main", cwd=tmp_path)
+    run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
+    run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
+    run("git", "config", "status.renames", "copies", cwd=tmp_path)
+    source = tmp_path / "AGENTS.md"
+    source.write_bytes(b"same control line\n" * 20)
+    run("git", "add", ".", cwd=tmp_path)
+    run("git", "commit", "-m", "base", cwd=tmp_path)
+    run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
+    run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
+    source.write_bytes(source.read_bytes() + b"one changed line\n")
+    destination = tmp_path / "docs/research/candidates/ucope/notes.md"
+    destination.parent.mkdir(parents=True)
+    destination.write_bytes(source.read_bytes())
+    run("git", "add", "AGENTS.md", destination.relative_to(tmp_path).as_posix(), cwd=tmp_path)
+    status = run("git", "status", "--porcelain=v1", "-z", cwd=tmp_path)
+    assert f"C  {destination.relative_to(tmp_path).as_posix()}\0AGENTS.md\0" in status.stdout
+
+    result = run(sys.executable, str(SCRIPT), "inspect", "--repo", str(tmp_path), cwd=ROOT)
+
+    assert result.returncode == 0, result.stderr
+    record = json.loads(result.stdout)
+    assert record["dirty_control_paths"] == ["AGENTS.md"]
+    assert record["publishable"] is False
 
 
 def test_inspect_reports_publishable_release_and_ignores_direction_dirty(tmp_path: Path) -> None:

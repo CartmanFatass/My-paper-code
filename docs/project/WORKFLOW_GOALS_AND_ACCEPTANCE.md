@@ -59,6 +59,11 @@ scheduler 重新证明或模拟 Codex 产品事实。native task tools 不可用
 - EM 的 direct leaves 是 Research Scout、Research Innovator、Research Principles
   Analyst、Research Critic 与 Agentify external transport。CM 的 direct leaves 是
   Implementer、Reviewer、Verifier 与 Experiment Operator。
+- leaf 只做一个 bounded role-local slice，不再 delegate，只 final return 给 spawning
+  manager。结论性/direction-changing EM object 必须依次经历 constructive case、
+  constructive Pro review、revision、独立 adversarial Pro review。非机械实现交
+  Implementer；高影响 production/protocol/scientific/numerical/RNG/checkpoint 修改接受前
+  必须有 independent Reviewer，Verifier 提供独立 focused runtime evidence。
 - **Experiment Operator** 始终是 CM 的单层 child，只运行一个冻结命令并把 terminal
   result 返回 CM；CM 解释结果后才向 Clerk RETURN。
 
@@ -111,6 +116,11 @@ Portfolio apply decision 另固定携带 `proposed_candidates:[{direction_id}]`�
 `snapshot_digest` 绑定 sorted proposed identities，使 declined proposal 即使没有 transition
 也不会从本次 global input provenance 中消失。
 
+PORTFOLIO_RETURN 固定携带 hash-bound `decision_ref`。成功时它绑定 canonical committed
+apply authority，body 三个区块、summary/snapshot、registry revision、transition lifecycle
+与 ACTIVE set 全部匹配 authority/current registry；失败时可以绑定 attempted input，但
+transitions 不得冒充 commit，完整 body 必须描述并通过 current committed state 校验。
+
 Clerk 校验完整 global result 后逐项执行 transport，不压缩、不重做比较，也不把
 一个方向的 failure 删除其他 ready transitions。v1 的 direction-local action list
 不再是正常路径。Portfolio/apply failure 仍用 PORTFOLIO_RETURN，并在完整三块之外携带
@@ -127,7 +137,14 @@ external-review index 与 registry entry 要么全部形成并通过 postconditi
 `FAILED` 必须携带 `scope, code, fingerprint, responsible_role, retryable, attempt,
 max_attempts, summary`。同一 immutable fingerprint 从 attempt 1 开始，
 `max_attempts` 不得超过 3；达到上限后不得靠改写 prose 或 fingerprint 继续重试。
-外部 commitment 为 UNKNOWN 时仍只 observe，绝不因重试预算而 resend。
+外部 commitment 为 UNKNOWN 时仍只 observe，绝不因重试预算而 resend。effect-scope code
+canonicalization 后包含 `UNKNOWN` token 时必须 `retryable=false`，failure history 永远
+报告 non-eligible/exhausted。
+
+CONTROL_NOTICE 有 action-local contract：PAUSE/CANCEL 绑定 affected message；RESUME 绑定
+同 direction/target 的 validated PAUSE/CANCEL；OVERRIDE 给 exact replacement objective 与
+Effect boundary；REANCHOR 给 matching new published release。Clerk relay 除 hop-local
+correlation locator 外完整复制 initiating body semantics。
 
 `WAIT_RESOURCE` 保持原 manager 为 owner，并在 RETURN 的 exact structured
 `wait_resource` 中冻结 resource fingerprint、command/operation、hash-bound immutable
@@ -196,12 +213,13 @@ protocol epoch、control release、native observation time 和 stale/unknown；�
 8. Portfolio 一次 global wake 同时提供完整 `considered[] / transitions[] / capacity`；
    多个 ready transition 在同一 Clerk turn 全部 native send。新方向 scaffold 的故障
    注入证明 all-or-nothing，且 partial direction 不可见；关闭释放的 capacity 要么选出
-   replacement，要么留下非空且可审计的 unused-capacity reason。
+   replacement，要么留下非空且可审计的 unused-capacity reason；PORTFOLIO_RETURN 的
+   decision ref、完整 body 与 current committed registry 可被同一 state validator 复核。
 9. Portfolio authority/registry 已写但 RETURN 尚未发送、participant final 缺 RETURN、
    Operator terminal、消息在另一个 active turn 中到达等静默点，都能在原 task 中恢复
    并完成 handoff，不重复 material work。
 10. 用户直接 PAUSE/RESUME/OVERRIDE/CANCEL 可传播为 CONTROL_NOTICE；旧 assignment
-    不会在控制变化后被静默重投。
+    不会在控制变化后被静默重投，relay 不能削弱 replacement/Effect/correlation semantics。
 11. 同 epoch release 更新经 REANCHOR 后才继续；epoch 改变会创建 clean generation，
     旧 session history 不被 fork 到新 session。
 12. memory refusal 不留下 reserved root；heartbeat 位于 exact responsible manager；

@@ -14,9 +14,10 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 try:
-    from scripts import hmasd_path_policy
+    from scripts import hmasd_path_policy, hmasd_state
 except ImportError:
     import hmasd_path_policy
+    import hmasd_state
 
 
 EPOCH = 2
@@ -47,7 +48,7 @@ WAIT_FIELDS = {
 }
 PORT_FIELDS = {
     "registry_revision", "snapshot_digest", "considered", "transitions", "capacity",
-    "summary", "artifact_refs", "failure",
+    "summary", "decision_ref", "artifact_refs", "failure",
 }
 NOTICE_FIELDS = {"action", "reason", "target_identity", "scope"}
 RELEASE_FIELDS = {
@@ -254,6 +255,11 @@ def assignment_body(value: Mapping[str, Any], repo: Path) -> dict[str, Any]:
     }
 
 
+def is_unknown_effect_failure(value: Mapping[str, Any]) -> bool:
+    canonical_code = re.sub(r"[^A-Z0-9]+", "_", str(value.get("code", "")).upper())
+    return value.get("scope") == "effect" and "UNKNOWN" in canonical_code.split("_")
+
+
 def failure(value: Any) -> dict[str, Any] | None:
     if value is None:
         return None
@@ -266,6 +272,8 @@ def failure(value: Any) -> dict[str, Any] | None:
             raise EnvelopeError(f"failure {key} must be non-empty")
     if not isinstance(value["retryable"], bool):
         raise EnvelopeError("failure retryable must be boolean")
+    if is_unknown_effect_failure(value) and value["retryable"]:
+        raise EnvelopeError("UNKNOWN external Effect failure must set retryable=false")
     attempt, maximum = value["attempt"], value["max_attempts"]
     if (
         not isinstance(attempt, int) or isinstance(attempt, bool)
@@ -401,25 +409,22 @@ def return_body(
 
 def portfolio_body(value: Mapping[str, Any], repo: Path) -> dict[str, Any]:
     if set(value) != PORT_FIELDS:
-        raise EnvelopeError("portfolio return body fields are invalid")
-    if not isinstance(value["summary"], str) or not value["summary"]:
-        raise EnvelopeError("portfolio return summary must be non-empty")
-    if not isinstance(value["snapshot_digest"], str) or SHA256.fullmatch(value["snapshot_digest"]) is None:
-        raise EnvelopeError("portfolio return snapshot_digest is invalid")
-    if (
-        not isinstance(value["considered"], list)
-        or not isinstance(value["transitions"], list)
-        or not isinstance(value["capacity"], Mapping)
-    ):
-        raise EnvelopeError("portfolio return considered/transitions/capacity are invalid")
-    return {
+        raise EnvelopeError("portfolio return body fields are invalid; decision_ref is required")
+    normalized = {
         "registry_revision": value["registry_revision"],
         "snapshot_digest": value["snapshot_digest"], "considered": value["considered"],
-        "transitions": value["transitions"], "capacity": dict(value["capacity"]),
+        "transitions": value["transitions"],
+        "capacity": dict(value["capacity"]) if isinstance(value["capacity"], Mapping) else value["capacity"],
         "summary": value["summary"],
+        "decision_ref": dict(value["decision_ref"]) if isinstance(value["decision_ref"], Mapping) else value["decision_ref"],
         "artifact_refs": refs(value["artifact_refs"], "portfolio artifact_refs", repo),
         "failure": failure(value["failure"]),
     }
+    try:
+        hmasd_state.validate_portfolio_return(repo, normalized)
+    except hmasd_state.StateError as exc:
+        raise EnvelopeError(f"portfolio return validation failed: {exc}") from exc
+    return normalized
 
 
 def notice_body(value: Mapping[str, Any], direction: str) -> dict[str, Any]:
@@ -440,10 +445,36 @@ def notice_body(value: Mapping[str, Any], direction: str) -> dict[str, Any]:
     affected = scope.get("affected_locator")
     if affected is not None:
         scope["affected_locator"] = normalized_path(affected, "CONTROL_NOTICE affected_locator")
-    if value["action"] == "REANCHOR":
+    action = value["action"]
+    if action in {"PAUSE", "CANCEL"} and affected is None:
+        raise EnvelopeError(f"{action} requires an affected locator")
+    if action == "OVERRIDE":
+        replacement = scope.get("replacement")
+        if not isinstance(replacement, Mapping) or set(replacement) != {"objective", "effects"}:
+            raise EnvelopeError("OVERRIDE requires exact scope.replacement objective/effects")
+        if not isinstance(replacement["objective"], str) or not replacement["objective"].strip():
+            raise EnvelopeError("OVERRIDE replacement.objective must be non-empty")
+        replacement_effects = replacement["effects"]
+        if not isinstance(replacement_effects, list) or not all(
+            isinstance(item, str) and bool(item.strip()) for item in replacement_effects
+        ):
+            raise EnvelopeError("OVERRIDE replacement.effects must be a string array")
+        scope["replacement"] = {
+            "objective": replacement["objective"], "effects": list(replacement_effects),
+        }
+    if action == "REANCHOR":
         expected = scope.get("expected_control_release_id")
         if not isinstance(expected, str) or SHA256.fullmatch(expected) is None:
             raise EnvelopeError("REANCHOR requires scope.expected_control_release_id")
+    return {
+        "action": action, "reason": value["reason"],
+        "target_identity": value["target_identity"], "scope": scope,
+    }
+
+
+def notice_semantics(value: Mapping[str, Any]) -> dict[str, Any]:
+    scope = dict(value["scope"])
+    scope.pop("affected_locator", None)
     return {
         "action": value["action"], "reason": value["reason"],
         "target_identity": value["target_identity"], "scope": scope,
@@ -617,13 +648,32 @@ def _validated(repo: Path, locator: str, seen: set[str] | None = None) -> tuple[
                 raise EnvelopeError("Clerk CONTROL_NOTICE must reply to a participant-to-Clerk notice")
             if affected["body"]["target_identity"] != target_identity or affected["body"]["action"] != env["body"]["action"]:
                 raise EnvelopeError("relayed CONTROL_NOTICE action or target does not match initiation")
+            if canonical_bytes(notice_semantics(env["body"])) != canonical_bytes(
+                notice_semantics(affected["body"])
+            ):
+                raise EnvelopeError("CONTROL_NOTICE relay must copy initiating body semantics")
             if canonical_bytes(env["control_release"]) != canonical_bytes(affected["control_release"]):
                 raise EnvelopeError("relayed CONTROL_NOTICE must copy initiating control release")
         elif is_participant(sender_identity) and recipient_identity == "Workflow-Clerk":
-            if affected is not None and target_identity not in {
-                affected["sender"]["identity"], affected["recipient"]["identity"],
-            }:
-                raise EnvelopeError("CONTROL_NOTICE target is not an endpoint of the affected message")
+            if env["body"]["action"] == "RESUME":
+                if (
+                    affected is None or affected["kind"] != "CONTROL_NOTICE"
+                    or affected["body"]["action"] not in {"PAUSE", "CANCEL"}
+                    or affected["body"]["target_identity"] != target_identity
+                ):
+                    raise EnvelopeError(
+                        "RESUME must correlate to PAUSE or CANCEL for the same target"
+                    )
+            elif affected is not None:
+                affected_targets = {
+                    affected["sender"]["identity"], affected["recipient"]["identity"],
+                }
+                if affected["kind"] == "CONTROL_NOTICE":
+                    affected_targets.add(affected["body"]["target_identity"])
+                if target_identity not in affected_targets:
+                    raise EnvelopeError(
+                        "CONTROL_NOTICE target is not an endpoint of the affected message"
+                    )
             release_record(env["control_release"], require_publishable=True)
         else:
             raise EnvelopeError("CONTROL_NOTICE edge must be participant to Clerk or Clerk to target")
@@ -772,7 +822,9 @@ def failure_history(args: argparse.Namespace) -> dict[str, Any]:
             raise EnvelopeError("failure history must contain attempts 1..N exactly once")
     observed = len(failures)
     maximum = first["max_attempts"]
-    retry_eligible = bool(first["retryable"] and observed < maximum)
+    retry_eligible = bool(
+        first["retryable"] and not is_unknown_effect_failure(first) and observed < maximum
+    )
     return {
         "fingerprint": args.fingerprint, "observed_attempts": observed,
         "max_attempts": maximum, "retry_eligible": retry_eligible,
