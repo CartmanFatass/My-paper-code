@@ -1660,3 +1660,55 @@ Done means the replacement `-02` output root remains absent, no real run manifes
 ### Registry decision
 
 Advance registry revision `28` to revision `29` through the Portfolio CAS writer. Keep FSBS `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## MGTAP prelaunch runner/payload result-root separation correction — 2026-08-27T12:03:16Z
+
+- Decision owner: Portfolio
+- Observed authority before this decision: Portfolio SHA-256 `c15d69d251593f2df24cb4288c973d9cb734cac53ef831b03efe20e078eb9118`; registry revision `29`, SHA-256 `cff2b42416ab762d050f8856a5a125c0e3ba65a98cc517a3fbdaa60225e355a6`.
+- Controlling Clerk assignment: `13c67e6c-3a87-4ef0-9496-d1b550e0aacf`.
+- Exact CM path-contract return: `a03325af-84f6-4c7a-bb0a-8d4157e1afe7:return`.
+- Exact unchanged direction refs: `DIRECTION.md` SHA-256 `dadf0b5fef84e3664d0541bf3451a450b37612be6621c62fbc7fb632c6a492d2`; R01 science authority SHA-256 `a5cfc6705191b17dd3da129e34a63dd424874da7e5fa654ffaf1cf1321957ae4`; research state SHA-256 `df1bd4ef7ae88da12d688f73e8fb780b0828a22bcaaeb8036c776c3c9a37d2ee`; engineering state SHA-256 `4c0027cd99344714cf1af2deefa22720763e925a04d94412af48aad65ca2c7b9`.
+- Exact accepted prelaunch refs: construction verification SHA-256 `efc569ebffeeafee737921c6e27bf4e2483393f05be06b8d6621a749efd16243`; resource estimate SHA-256 `d3769e51faf3b84895613c87358d974836c59a7b55cbd5deccc370151713096b`; candidate/local/remote SHA `3a373cf2144bf6b5a8f6fc48e467b5903b09d417` on `origin/refs/heads/omp/metric_ground_transport_allocation/git/b92ac060-97a5-4d8c-adff-7f633b97b721`.
+
+### Materiality decision
+
+The output-path correction is transport/Effect binding only and is not scientifically material. The payload's task law, stochastic namespace, gates, first-true terminal tree, workload, result schemas, atomic complete publication and no-rerun behavior do not depend on whether its create-only result directory is denoted by the old shared-checkout absolute lexeme or by a candidate-local repo-relative child path. `run.py` resolves `--output` and `artifacts.create_temp_root` requires only that the selected final payload root and its `.tmp` sibling do not already exist. No user choice is required.
+
+The old payload binding is mechanically invalid and is superseded: the absolute shared-checkout path lies outside the clean candidate cwd required by `hmasd_run`, while aliasing payload output to the runner root also fails because prepare creates that root before payload launch. This correction changes the payload `--output` lexeme and typed Effect resource identity together. It changes no candidate byte, run ID, scientific output content or interpretation.
+
+### Corrected frozen identities
+
+Preserve the exact scientific purchase, run ID, candidate SHA, resource estimate and no-rerun law. Freeze the two distinct repo-relative identities below the retained clean candidate cwd:
+
+```text
+scientific_purchase=ONE_UNCHANGED_COMPLETE_MGTAP_R01_TRANSACTION
+run_id=mgtap-r01-complete-20260827-01
+candidate_sha=3a373cf2144bf6b5a8f6fc48e467b5903b09d417
+runner_root=temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01
+payload_result_child=payload-result
+payload_result_root=temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result
+payload_result_tmp=temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result.tmp
+payload_activity_marker=temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result_activity_started.json
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result
+empirical_activity_released=NO
+operator_now=NO
+effect_refs=[]
+```
+
+The corrected frozen payload argv is exactly:
+
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.metric_ground_transport_allocation --output temp/directions/metric_ground_transport_allocation/exp/mgtap-r01-complete-20260827-01/payload-result
+```
+
+`hmasd_run prepare` owns and may create only the distinct runner root and its standard runner artifacts. Before prepare, the runner root must be absent. Before payload launch, `payload-result`, `payload-result.tmp` and `payload-result_activity_started.json` must all be absent. Prepare must not create any of those three payload paths. The immutable manifest command and its sole typed `LOCAL_RESULT_ROOT/CREATE_ONLY` Effect must byte-match the corrected payload root above; absolute-path substitution, runner-root aliasing, another child name or a second Effect is invalid.
+
+The correction requires no new candidate, CM, EM, run identity, resource estimate, science authority or user decision. It releases no manifest, output root, Operator or activity. Workflow-Clerk may reissue the already planned bounded Root prelaunch-preparation slice using this fresh decision ref, the retained candidate SHA/remote ref and the corrected argv/Effect. That preparation must remain result-blind, verify both path identities and absence predicates from the clean candidate cwd, and return its own standard envelope before any later Operator decision.
+
+No `hmasd_run` command, scientific payload, provider, Git integration, shared-core/main mutation, deployment or flight is authorized by this Portfolio correction.
+
+### Registry decision
+
+Advance registry revision `29` to revision `30` through the Portfolio CAS writer. Keep MGTAP `ACTIVE/g3`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
