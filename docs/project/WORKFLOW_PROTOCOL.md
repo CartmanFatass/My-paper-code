@@ -115,6 +115,35 @@ Portfolio 对一个仍在投资范围内的方向必须选择下一责任角色�
 科研/工程切面时，Portfolio 才能 PARK/CLOSE。缺少现成实现、测试或 CLI 本身必须
 路由给 CM，不能作为 PARK 理由。
 
+## Clerk semantic routing and topology
+
+Workflow-Clerk 的完整运行说明是
+`.codex/prompts/hmasd-workflow-clerk.md`。它只使用标准 RETURN status 与 failure
+scope 路由，不能从方向 prose 推导全局状态。每次处理新事件先由 Codex task
+list/read 获取当前 Portfolio、EM、CM 的 exact task ID/generation/status，形成仅存在
+于当前 turn 的 topology snapshot；不得写入第二 registry 或 task cache。
+
+多个正交方向 ready 时，Clerk 必须先生成并发送全部独立 assignment，再执行第一
+次 wait。某方向的 wait、memory refusal、REQUEST_USER 或 feature failure 不得延迟
+其他方向的 ready send。跨方向汇总只能发给 Root/user，不能作为 participant 的
+assignment。
+
+## Memory-admission fallback
+
+`hmasd_run.py prepare` 在创建 reserved output root 前执行资源评估。若
+`memory_safe=false`，它返回 exit 6、输出完整评估且保持 root 不存在；下一 heartbeat
+可安全重试同一冻结命令。为兼容旧调用，它只会机械回收以下精确 partial shape：
+
+- 没有 `manifest.json`、stdout/stderr、checkpoint 或 artifact 内容；
+- 只有 `preflight.json` 与空的 `artifacts/`、`checkpoints/`、`metrics/`；
+- preflight 的 direction/run 匹配且 `memory_safe=false`。
+
+任何额外文件、非空目录、symlink 或 identity mismatch 都拒绝回收。Clerk 对每个
+direction/run_id 只允许一个 Codex heartbeat；heartbeat 必须绑定 retry assignment，
+不能修改 estimate、parameters、command 或 code SHA，不能创建 Operator。manifest
+进入 `PREPARED` 后先发送 correlated RETURN，再删除该 heartbeat。正式执行仍通过
+普通 CM→唯一 Operator 流程。
+
 ## 明确非职责
 
 hmasd_session_envelope.py 不得创建、命名、等待、恢复或关闭 Codex task，不解析

@@ -100,9 +100,12 @@ def _prepare(
     output_root: Path | None = None,
     review_evidence: dict[str, object] | bool = True,
     expected_code: int | None = None,
+    snapshot: dict[str, object] | None = None,
 ) -> Path:
     monkeypatch.chdir(tmp_path)
-    monkeypatch.setattr(hmasd_run, "capture_snapshot", lambda: SAFE_SNAPSHOT)
+    monkeypatch.setattr(
+        hmasd_run, "capture_snapshot", lambda: snapshot or SAFE_SNAPSHOT
+    )
     monkeypatch.setattr(hmasd_run, "_require_omp_branch", lambda _cwd: "omp/test")
     monkeypatch.setattr(hmasd_run, "_git_head", lambda _cwd: observed_head or code_sha)
     assignment_id = "assignment"
@@ -156,6 +159,97 @@ def _prepare(
     expected = expected_code if expected_code is not None else (8 if wall_seconds > 7200 else 0)
     assert hmasd_run.main(arguments) == expected
     return output_root / "manifest.json"
+
+
+def test_prepare_unsafe_memory_leaves_reserved_root_absent(
+    monkeypatch, tmp_path: Path
+) -> None:
+    unsafe_snapshot = {
+        **SAFE_SNAPSHOT,
+        "memory": {
+            **SAFE_SNAPSHOT["memory"],
+            "available_bytes": 6 * 1024**3,
+        },
+    }
+
+    manifest_path = _prepare(
+        monkeypatch,
+        tmp_path,
+        sys.executable,
+        "-c",
+        "raise AssertionError('must not launch')",
+        peak_memory_gib=1.0,
+        snapshot=unsafe_snapshot,
+        expected_code=6,
+    )
+
+    assert not manifest_path.parent.exists()
+
+
+def test_prepare_reclaims_only_exact_legacy_unsafe_partial_root(
+    monkeypatch, tmp_path: Path
+) -> None:
+    root = tmp_path / "temp" / "directions" / "direction" / "exp" / "run"
+    root.mkdir(parents=True)
+    for name in ("artifacts", "checkpoints", "metrics"):
+        (root / name).mkdir()
+    (root / "preflight.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "direction_id": "direction",
+                "run_id": "run",
+                "memory_safe": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    manifest_path = _prepare(
+        monkeypatch,
+        tmp_path,
+        sys.executable,
+        "-c",
+        "print('prepared only')",
+        output_root=root,
+    )
+
+    assert manifest_path.is_file()
+    assert json.loads(manifest_path.read_text(encoding="utf-8"))["status"] == "PREPARED"
+
+
+def test_prepare_does_not_reclaim_partial_root_with_any_extra_file(
+    monkeypatch, tmp_path: Path
+) -> None:
+    root = tmp_path / "temp" / "directions" / "direction" / "exp" / "run"
+    root.mkdir(parents=True)
+    for name in ("artifacts", "checkpoints", "metrics"):
+        (root / name).mkdir()
+    (root / "preflight.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "direction_id": "direction",
+                "run_id": "run",
+                "memory_safe": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    sentinel = root / "stdout.log"
+    sentinel.write_text("must remain", encoding="utf-8")
+
+    _prepare(
+        monkeypatch,
+        tmp_path,
+        sys.executable,
+        "-c",
+        "raise AssertionError('must not launch')",
+        output_root=root,
+        expected_code=6,
+    )
+
+    assert sentinel.read_text(encoding="utf-8") == "must remain"
 def _execute_process(manifest_path: str, results) -> None:
     results.put(hmasd_run.main(["execute", "--manifest", manifest_path]))
 

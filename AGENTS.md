@@ -21,6 +21,9 @@ skill 与实现属于迁移对象，不得重新解释目标。
   路径的例行转递。
 - Workflow-Clerk 是唯一 Luna xhigh、可见、长期协调 task。它使用 Codex 原生项目
   task 工具维护拓扑、发送 envelope、等待 RETURN、联系下一责任角色并汇总用户。
+  每次处理事件必须遵循 `.codex/prompts/hmasd-workflow-clerk.md` 的方向无关语义表、
+  临时拓扑快照和 parallel dispatch barrier；不得把一个方向的等待或语义复制到
+  另一个方向。
 - Portfolio 是 gpt-5.6-sol max top-level task，负责方向选择、优先级、投资判断和
   下一责任角色。科学定义缺失时路由 EM；科学目标已接受但实现/test/CLI 缺失时
   必须路由 CM，不能仅因实现不存在而 PARK。
@@ -70,6 +73,9 @@ return witness 与 raw thread parser 已退出正常路径。完成依赖核查�
 10. Dashboard 只能是只读投影；不得增加 daemon、数据库或第二工作流引擎。
 11. 删除旧控制面前先做调用依赖与真实路径核查，并保留用户及其他 session 的
     在途修改。
+12. 内存 admission 不足发生在 manifest 创建前时，reserved output root 必须保持
+    不存在；旧版本遗留的 partial root 仅能由 run CLI 对精确安全形状机械回收。
+    资源 retry 使用每个 direction/run_id 至多一个 heartbeat，并在 PREPARED 后取消。
 
 ## Durable authorities and writers
 

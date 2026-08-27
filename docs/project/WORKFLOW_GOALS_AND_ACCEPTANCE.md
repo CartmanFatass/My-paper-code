@@ -61,6 +61,17 @@ HMASD 不重新验证、缓存或模拟这些产品能力。项目只补充 Code
 
 script 校验失败只报告机械输入问题，不授予或否定用户权限，也不生成新 gate。
 
+Clerk 使用 `.codex/prompts/hmasd-workflow-clerk.md` 中唯一的方向无关语义表。每个
+事件 turn 先从 Codex task list/read 建立临时拓扑快照；快照不落盘为第二 registry。
+同一批正交方向必须先完成全部 ready assignment 的原生 send，再开始任何 wait。
+一个方向的科学名词、证据、失败或等待不得出现在另一方向的 envelope 中。
+
+内存 admission 失败是 result launch 前的可恢复资源等待：run CLI 不创建 reserved
+output root；仅对旧版本留下的、无 manifest/日志/结果且目录为空的精确 partial
+root 执行机械回收。Clerk 为 exact direction/run_id 保持至多一个 heartbeat；它只在
+收到 retry assignment 后重试冻结 prepare，PREPARED 后发送 RETURN 并取消自身，
+不得创建 Operator 或改变 estimate/command/code SHA。
+
 ## Git、实验和共享核心
 
 - 各方向在自己的 source、test、doc 与 temp/directions/<direction-id>/ 路径内
@@ -91,6 +102,10 @@ script 校验失败只报告机械输入问题，不授予或否定用户权限�
 7. 四个真实方向可同时经历上述转递，用户可以观察并随时介入。
 8. 机械测试只覆盖 envelope 格式、关联、方向 identity 和路径 containment；不重复
    测试 Codex 是否能 create、send、wait、保存历史或恢复 session。
+9. 四方向事件同时到达时，Clerk 在第一次 wait 前已发送所有独立 ready assignment；
+   task list/read 中的方向拓扑与 exact task ID 足以解释每一次 send。
+10. 内存不足的 prepare 不留下 reserved root；同一 direction/run_id 只有一个可见
+    heartbeat，PREPARED 后该 heartbeat 被取消，且未提前创建 Operator。
 
 真实验收使用 Codex 原生可见 task 与真实方向。synthetic transport、隐藏
 app-server manager、raw rollout 重建或对 Codex 产品能力的重复证明不得代替。

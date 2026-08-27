@@ -489,6 +489,59 @@ def _validate_output_root(
     return output_root
 
 
+def _reclaim_legacy_unsafe_prepare_root(
+    output_root: Path, *, direction_id: str, run_id: str
+) -> bool:
+    """Remove only the exact partial tree left by the legacy prepare order.
+
+    Older prepare calls created the three artifact directories and wrote an
+    unsafe preflight before returning exit 6.  Such a tree contains no launch
+    identity and no user/result bytes.  Any extra entry, symlink, non-empty
+    directory, valid manifest, or different identity makes reclamation refuse.
+    """
+
+    if not output_root.exists():
+        return False
+    if output_root.is_symlink() or not output_root.is_dir():
+        return False
+    expected_names = {"preflight.json", "artifacts", "checkpoints", "metrics"}
+    try:
+        children = {child.name: child for child in output_root.iterdir()}
+    except OSError:
+        return False
+    if set(children) != expected_names:
+        return False
+    preflight_path = children["preflight.json"]
+    if preflight_path.is_symlink() or not preflight_path.is_file():
+        return False
+    try:
+        preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return False
+    if (
+        not isinstance(preflight, Mapping)
+        or preflight.get("schema_version") != SCHEMA_VERSION
+        or preflight.get("direction_id") != direction_id
+        or preflight.get("run_id") != run_id
+        or preflight.get("memory_safe") is not False
+    ):
+        return False
+    directories = [children[name] for name in ("artifacts", "checkpoints", "metrics")]
+    for directory in directories:
+        if directory.is_symlink() or not directory.is_dir():
+            return False
+        try:
+            if any(directory.iterdir()):
+                return False
+        except OSError:
+            return False
+    preflight_path.unlink()
+    for directory in directories:
+        directory.rmdir()
+    output_root.rmdir()
+    return True
+
+
 def _manifest_direction_root(
     manifest_path: Path, manifest: Mapping[str, Any]
 ) -> Path:
@@ -1612,22 +1665,31 @@ def _prepare(args: argparse.Namespace) -> int:
         direction_id=direction_id,
         run_id=run_id,
     )
+    if _reclaim_legacy_unsafe_prepare_root(
+        output_root, direction_id=direction_id, run_id=run_id
+    ):
+        print("reclaimed legacy unsafe prepare root", file=sys.stderr)
     if output_root.exists() and any(output_root.iterdir()):
         raise RunRefusal(6, f"output root is not empty: {output_root}")
-    output_root.mkdir(parents=True, exist_ok=True)
-    outputs = _make_outputs(output_root)
 
     snapshot = capture_snapshot()
     try:
         assessment = _assess(snapshot, direction_id=direction_id, run_id=run_id, estimate=estimate)
     except ValueError as exc:
         raise RunRefusal(6, str(exc)) from exc
+    if not assessment["memory_safe"]:
+        print(
+            "resource preflight refused: unsafe memory plan "
+            + _canonical_json(assessment).decode("utf-8"),
+            file=sys.stderr,
+        )
+        return 6
+
+    output_root.mkdir(parents=True, exist_ok=True)
+    outputs = _make_outputs(output_root)
     preflight_path = output_root / "preflight.json"
     _atomic_write_json(preflight_path, assessment)
     preflight_sha = _sha256_file(preflight_path)
-    if not assessment["memory_safe"]:
-        print("resource preflight refused: unsafe memory plan", file=sys.stderr)
-        return 6
 
     command_sha = _command_digest(command)
     writer = f"Operator-{run_id}"
