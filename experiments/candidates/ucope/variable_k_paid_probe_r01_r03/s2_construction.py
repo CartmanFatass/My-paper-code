@@ -1111,9 +1111,29 @@ def _tail_agreement(
     )
     weight_total = fixed_fp32_tree(weights)
     total = fixed_fp32_tree(matched)
-    if abs(float(weight_total) - 1.0) > float(INVARIANT_TOLERANCE):
+    if (
+        not math.isfinite(float(weight_total))
+        or abs(float(weight_total) - 1.0) > float(INVARIANT_TOLERANCE)
+    ):
         raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
-    return total
+    if (
+        not math.isfinite(float(total))
+        or float(total) < -float(INVARIANT_TOLERANCE)
+        or float(total) > float(weight_total) + float(INVARIANT_TOLERANCE)
+    ):
+        raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
+    normalized = np.float32(total / weight_total)
+    if (
+        not math.isfinite(float(normalized))
+        or float(normalized) < -float(INVARIANT_TOLERANCE)
+        or float(normalized) > 1.0 + float(INVARIANT_TOLERANCE)
+    ):
+        raise S2Refusal(S2Code.NORMALIZATION_FAILURE)
+    if normalized < np.float32(0.0):
+        return np.float32(0.0)
+    if normalized > np.float32(1.0):
+        return np.float32(1.0)
+    return normalized
 
 
 def _private_key(slot: ValidatedCheckpointSlot) -> str:

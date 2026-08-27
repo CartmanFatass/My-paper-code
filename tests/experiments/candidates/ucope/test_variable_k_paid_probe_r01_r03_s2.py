@@ -75,6 +75,7 @@ from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.s2_construction 
     _posterior,
     _package_provenance,
     _load_action_scorer_payload,
+    _tail_agreement,
     _tail_components,
 )
 
@@ -427,6 +428,21 @@ def test_all_raw_history_encodings_match_declared_y1_through_y6_order() -> None:
             int(LearnedArm.RAW), int(Panel.PERSISTENT), history
         )
         assert np.array_equal(observed, expected)
+
+
+@pytest.mark.parametrize("panel", tuple(Panel))
+def test_tail_agreement_normalizes_fp32_tree_roundoff(panel: Panel) -> None:
+    cases = tuple(finite_cases(int(panel)))
+    weights = np.asarray([case.weight for case in cases], dtype=np.float32)
+    assert fixed_fp32_tree(weights) > np.float32(1.0)
+
+    identical = _tail_agreement(int(panel), lambda _: 0, lambda _: 0)
+    disjoint = _tail_agreement(int(panel), lambda _: 0, lambda _: 1)
+
+    assert identical.tobytes() == np.float32(1.0).tobytes()
+    assert disjoint.tobytes() == np.float32(0.0).tobytes()
+    assert 0.0 <= float(identical) <= 1.0
+    assert 0.0 <= float(disjoint) <= 1.0
 
 
 def test_learned_root_and_tail_use_exact_fp32_near_tie_rule(tmp_path: Path) -> None:
