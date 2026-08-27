@@ -2044,3 +2044,30 @@ No change to the R01 science authority, learner, engine, checkpoint or result se
 ### Registry decision
 
 Advance registry revision `34` to revision `35` through the Portfolio CAS writer. Keep FSBS `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `ACTIVE + REQUEST_CM` with the exact scope above.
+
+## SCDMP exact foundation-dependency user-authority pause — 2026-08-27T16:02:44Z
+
+- Decision owner: Portfolio.
+- Observed authority before this decision: Portfolio SHA-256 `66c25225ada7a25373584ed6dff52d2cd2b55f7addaaab275ac1d3a9ea105b27`; registry revision `35`, SHA-256 `0a68266998f065dfed2e5847e6f613e6ef022ae6d611a3d19ccec799401585b2`.
+- Controlling corrected global assignment: `62b9f780-b007-4e07-b3c9-1e60291437d7`, SHA-256 `61548d948d8eb4b3a711b940fcc2a40ff378990d0619c4a0ea84cd9d840468c1`.
+- Superseded ownership-defective Portfolio return: `552e391e-cc86-4cd7-80df-1f46ea333f46:portfolio-return`, SHA-256 `235cc4fe457e29450ecd1c4afacc346df3545e9242de46a3d5444d1b1deaa4be`; its `ACTIVE + FAILED` action requested this corrected assignment and made no authority change.
+- Exact Root user-authority return: `87aeec66-d031-4b59-be7d-a1b9ed0f917e:return`, SHA-256 `c5aa0473e8426325bb072ac3c03496ac26ab298cfc63bf4f033626e6ff05be5f`.
+- Current direction authority: `docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md`, SHA-256 `52b09660980589d83e7683b5d28667be147fc90ec9c651b5a61a0e429f89e2e3`.
+
+### Lifecycle decision
+
+Change `semigroup_consistent_duration_model_policy` from `ACTIVE/g1` to `PARKED/g1`. This is a user-authority pause, not a scientific rejection, engineering failure, loss of priority or closure. The accepted R01 science and claim ceiling, the completed immutable foundation transaction and its twenty-four checkpoints, and the separately purchased evaluation-only `C_native` panel remain unchanged provenance. The panel cannot proceed because its accepted foundation dependency modules are absent from current shared main and exist only in historical candidate `bdd5e1f359df8569474f148c4f837ae5363da328`; copying or integrating those bytes is a shared-main dependency mutation that Portfolio may not infer from implementation convenience.
+
+The exact material user question is:
+
+> Do you authorize one byte-preserving shared-main integration of the accepted SCDMP foundation dependency paths from historical candidate `bdd5e1f359df8569474f148c4f837ae5363da328`, subject to Root first recording the current base SHA, the sorted exact path set, the byte-preservation objective and non-goals, the action digest, and the permitted commit/push effects; or do you decline that integration and leave SCDMP paused?
+
+The reactivation condition is exact and non-null: SCDMP may leave `PARKED` only after the user explicitly authorizes that byte-preserving integration choice and the required Root authority record binds all listed provenance and effect fields. Authorization does not itself integrate bytes, release `C_native`, prepare a command or create an Operator; those remain later separately routed responsibilities. If the user declines or has not answered, SCDMP remains `PARKED/g1` with no active EM/CM slice.
+
+Any later corrected `C_native` scope must use the Portfolio-authoritative technical-evidence root `temp/directions/semigroup_consistent_duration_model_policy/test/native_fusion_r01/c_native/g1/`. `cnative/g1/` is not an alias and must not be reused. The historical candidate is a byte source only after authorization; it is not current-main science or empirical evidence and does not change any result or claim.
+
+This pause authorizes no science/code edit, dependency copy or integration, source/test command, prepare, payload, scientific execution, Operator, provider, deployment or flight. Portfolio does not contact Root again or repeat the already-bound question.
+
+### Registry decision
+
+Advance registry revision `35` to revision `36` through the Portfolio CAS writer. Change SCDMP from `ACTIVE/g1` to `PARKED/g1`; retain its identity, generation, dependencies and state paths; point both its lifecycle-decision ref and its non-null reactivation-condition ref to this heading. Refresh every registry lifecycle-reference SHA to the final Portfolio bytes. All unrelated direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged. The corresponding global action is `PARKED + REQUEST_USER` with the exact question above.
