@@ -1712,3 +1712,65 @@ No `hmasd_run` command, scientific payload, provider, Git integration, shared-co
 ### Registry decision
 
 Advance registry revision `29` to revision `30` through the Portfolio CAS writer. Keep MGTAP `ACTIVE/g3`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
+
+## SCDMP repaired-executor acceptance and separate foundation activity authority — 2026-08-27T12:53:42Z
+
+- Decision owner: Portfolio
+- Observed authority before this decision: Portfolio SHA-256 `cc94e7832c45f545b7912501f415a172eb02e43dc46cdc3e4c3af32fb0755f35`; registry revision `30`, SHA-256 `7c890c17d86434e3e60ff1aac9e9687daf7cc5620acaf476c0292d5ba77d4013`.
+- Controlling Clerk assignment: `caa7dc59-a825-4a53-be8c-eda6ab9dc9e4`.
+- Exact CM executor-repair return: `1c6c15c9-2781-49f1-993c-202b2295b9f9:return`.
+- Exact unchanged science refs: `DIRECTION.md` SHA-256 `6fd74882c83601fc95d33c2787fb200cf8149fbee564b69572146a70e69d4797`; CLOSED R01 authority SHA-256 `c8091b15293f2cdeae4fc00a42bdfc1a0ae165d930fc152bca86610979e0c47c`; research state SHA-256 `2c8c7be1804433300209c62bdcec9befd1b6275c0d6e2f472152e909ffc2f8ea`.
+- Exact repair refs: engineering-state revision `8` SHA-256 `72f4dcc515be4b958665bb49490557c41b6baf626c1e4eba7b0bb64e81e857bc`; repair source manifest `a4a5e2f58239d52041e474ff9e7ce60c9fa33996b17237290b16bd65396f22ba`; resource estimate `a5da4f192c5f41030cd445b09893dbb5691f9001739395a6b366df31c0582536`; prelaunch manifest `cce221923019ce5687e9c2ef67f5f5a6798e9697f11e16b650b1d11e892eae3c`; complete evidence `cfdc7c6ef6d82dc6c19d2b802c49aa7823773aedd3551b22183f4f76776da376`; technical acceptance `cfaa05c91fbb45984042a09e42eba8c2d149e1026721bea93a609ed897f23415`.
+- Exact candidate: branch `omp/semigroup_consistent_duration_model_policy/engineering/1c6c15c9-2781-49f1-993c-202b2295b9f9`, local/remote full SHA `bdd5e1f359df8569474f148c4f837ae5363da328`, remote ref `origin/refs/heads/omp/semigroup_consistent_duration_model_policy/engineering/1c6c15c9-2781-49f1-993c-202b2295b9f9`.
+
+### Executor and investment decision
+
+Accept the repaired executor as fresh result-blind technical evidence for the exact unchanged CLOSED R01 foundation stage. It now implements the complete `24`-foundation by `192`-update result-bearing transaction, one operating-system master drawn only inside the eventual Operator process, all fourteen HMAC domains, duration-correct PPO/AdamW, same-manifest cold resume including the checkpoint-written/progress-not-yet-committed boundary, twenty-four terminal checkpoints and one atomic complete package. Focused verification passes `11/11`; adjacent regression passes `25/25`. No real manifest, output root, master, registered activity, result or Operator exists.
+
+Retain SCDMP `ACTIVE/g1` and retain exactly the previously purchased one unchanged complete foundation-stage activity. The repaired high one-worker projection is `654.6005373392254` wall seconds, `871.5` CPU core-seconds, `515865472` peak-memory bytes, `3536640` scratch bytes, `10350336` retained bytes and `20700672` I/O bytes. Runtime classification is `<=7200`, `unsafe_memory_plan=false`, `performance_reasonableness_review_required=false` and `explicit_user_approval_required_before_activity=false`; no material user choice is required. These are cost and executability facts, not foundation competence, `C_native`, `O_native`, adapter or fusion evidence.
+
+### Separate activity authority and frozen Effect
+
+Create the following distinct low-frequency Portfolio authority. It is separate from all S3/S4 technical artifacts and is the only authority that a later immutable run manifest may cite:
+
+```text
+activity_authority_id=SCDMP-NATIVE-FUSION-R01-FOUNDATION-ACTIVITY-AUTHORITY-20260827-01
+scientific_purchase=ONE_UNCHANGED_COMPLETE_SCDMP_R01_FOUNDATION_STAGE
+run_id=scdmp-native-fusion-r01-foundation-20260827-01
+runner_root=temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01
+run_manifest_identity=scdmp-native-fusion-r01-foundation-20260827-01
+run_manifest_path=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-run-manifest.json
+run_manifest_schema=SCDMP_NATIVE_FUSION_R01_FOUNDATION_ACTIVITY_RUN_MANIFEST_V1
+run_manifest_required_status=AUTHORIZED_IMMUTABLE
+candidate_sha=bdd5e1f359df8569474f148c4f837ae5363da328
+payload_source_manifest_sha256=a4a5e2f58239d52041e474ff9e7ce60c9fa33996b17237290b16bd65396f22ba
+activity_estimate_sha256=a5da4f192c5f41030cd445b09893dbb5691f9001739395a6b366df31c0582536
+output_root=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation
+prospective_effect_kind=LOCAL_RESULT_ROOT
+prospective_effect_operation=CREATE_ONLY
+prospective_effect_resource_id=temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation
+future_operator_identity=Operator-scdmp-native-fusion-r01-foundation-20260827-01
+activity_authorized=false
+operator_now=false
+effect_refs=[]
+```
+
+The exact prospective payload is:
+
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.scdmp_variable_k.native_fusion_r01.foundation_activity_production --run-manifest temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation-run-manifest.json --code-sha256 a4a5e2f58239d52041e474ff9e7ce60c9fa33996b17237290b16bd65396f22ba --output-root temp/directions/semigroup_consistent_duration_model_policy/exp/native_fusion_r01/foundation
+```
+
+A later issued manifest must be strict canonical UTF-8 JSON and immutable. It must byte-bind the exact schema/status, run-manifest identity/path, repair source and estimate hashes, candidate branch/full SHA, payload argv, complete frozen workload, all fourteen HMAC domains, immutable old-state law, complete-only publication, no rerun, and exactly one `LOCAL_RESULT_ROOT/CREATE_ONLY` Effect above. It must carry the exact accepted S0--S3 refs `52bd81aed310a81791c441dd9253d1704f3e28efa295fe42a635d78776645cce`, `8dfcb06ca4b37d297a624323ef7f178009f1a84724f7797d6de7268a00dc3195`, `bacfbfe0da703b1bef4bb93a93fff92c4f5ce0c39c6f800617d255a6e7fdb825` and `1217e4f3474e1f1e0472581d32fc21ba7d0f434a3f19d74e705bfecf29791d10`, plus an `activity_authority_ref` to this exact Portfolio path/current SHA. Candidate HEAD is the outer execution code identity; repair source-manifest SHA is separately the payload `--code-sha256` value.
+
+Only the future immutable manifest may set `activity_authorized=true`, `operator_now=true` and `effect_refs=[the exact Effect]`, and only when the existing CM has established one unique Operator child identity. This Portfolio slice does not create that manifest or Operator and therefore retains the false/empty current fields above. The output root, its `.tmp` sibling, its manifest-bound resume sibling and every question-relevant artifact must remain absent before the later CM prepare/launch boundary.
+
+### Exact next responsibility
+
+Return `REQUEST_CM` for one existing-CM slice, `SCDMP-R01-FOUNDATION-ACTIVITY-IMMUTABLE-PREPARE-V1`. Workflow-Clerk must route it to the existing `CM/semigroup_consistent_duration_model_policy/g1` with the exact candidate and fresh repair refs. CM may create only the strict immutable run manifest and result-blind `hmasd_run prepare` records at runner root `temp/directions/semigroup_consistent_duration_model_policy/exp/scdmp-native-fusion-r01-foundation-20260827-01`, verify the outer candidate code SHA and inner repair source SHA remain distinct and exact, bind the single Effect, prove that distinct runner root and every payload output/activity/resume path were absent before prepare, prove prepare did not create the payload output root, and update engineering state by CAS without scientific value. After a safe byte-matched PREPARED state, CM decides whether to create at most one `Operator-scdmp-native-fusion-r01-foundation-20260827-01` child holding only the frozen command through terminal observation; otherwise it returns one direction-scoped `REQUEST_USER` or failure reason.
+
+No source/test/science change, new candidate, alternate run/manifest/output identity, payload execution, registered master/address, provider, shared-core integration, deployment or flight is authorized by this Portfolio decision.
+
+### Registry decision
+
+Advance registry revision `30` to revision `31` through the Portfolio CAS writer. Keep SCDMP `ACTIVE/g1`, retain its identity, dependencies, paths and null reactivation condition, and point its lifecycle-decision ref to this heading. Refresh every registry lifecycle-reference SHA and the goal SHA to the final Portfolio bytes. All other direction lifecycles, headings, generations, dependencies, reactivation conditions, identities and state paths remain unchanged.
