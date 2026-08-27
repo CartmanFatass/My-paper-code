@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts import hmasd_run
+from scripts import hmasd_run, hmasd_state
 
 
 SAFE_SNAPSHOT = {
@@ -222,6 +222,206 @@ def test_short_real_subprocess_records_complete_manifest_and_output(
     assert hmasd_run._group_pids(manifest["process"]["process_group_id"]) == []
     assert "stdout sentinel" in (manifest_path.parent / "stdout.log").read_text(encoding="utf-8")
     assert "stderr sentinel" in (manifest_path.parent / "stderr.log").read_text(encoding="utf-8")
+    assert not (manifest_path.parent / "operator-result.json").exists()
+
+
+def test_execute_can_emit_one_schema_valid_operator_result(
+    monkeypatch, tmp_path: Path
+) -> None:
+    manifest_path = _prepare(
+        monkeypatch,
+        tmp_path,
+        sys.executable,
+        "-c",
+        "import sys; print('stdout sentinel'); print('stderr sentinel', file=sys.stderr)",
+    )
+
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 0
+
+    result_path = manifest_path.parent / "operator-result.json"
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    hmasd_state.validate_document("agent_result", result)
+    manifest_ref = {
+        "path": "temp/directions/direction/exp/run/manifest.json",
+        "sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+    }
+    stdout_ref = {
+        "path": "temp/directions/direction/exp/run/stdout.log",
+        "sha256": hashlib.sha256((manifest_path.parent / "stdout.log").read_bytes()).hexdigest(),
+    }
+    stderr_ref = {
+        "path": "temp/directions/direction/exp/run/stderr.log",
+        "sha256": hashlib.sha256((manifest_path.parent / "stderr.log").read_bytes()).hexdigest(),
+    }
+    assert result == {
+        "schema_version": 1,
+        "role": "hmasd-experiment-operator",
+        "logical_identity": "hmasd-experiment-operator",
+        "generation": 1,
+        "assignment_id": "assignment",
+        "status": "COMPLETED",
+        "materiality": "LOCAL",
+        "summary": "The exact frozen run reached terminal success.",
+        "changed_paths": [
+            manifest_ref["path"],
+            stdout_ref["path"],
+            stderr_ref["path"],
+            "temp/directions/direction/exp/run/operator-result.json",
+        ],
+        "state_refs": [manifest_ref],
+        "artifact_refs": [stdout_ref, stderr_ref],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "run",
+            "run_id": "run",
+            "manifest_ref": manifest_ref,
+            "terminal_status": "SUCCEEDED",
+            "exit_code": 0,
+        },
+    }
+    assert "work_id" not in result
+
+
+def test_emit_operator_result_refuses_preexisting_path_before_launch(
+    monkeypatch, tmp_path: Path
+) -> None:
+    executed = tmp_path / "executed.txt"
+    manifest_path = _prepare(
+        monkeypatch,
+        tmp_path,
+        sys.executable,
+        "-c",
+        f"from pathlib import Path; Path({str(executed)!r}).write_text('ran')",
+    )
+    result_path = manifest_path.parent / "operator-result.json"
+    result_path.write_text("preserve", encoding="utf-8")
+
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 6
+    assert result_path.read_text(encoding="utf-8") == "preserve"
+    assert not executed.exists()
+    assert json.loads(manifest_path.read_text(encoding="utf-8"))["status"] == "PREPARED"
+
+
+def test_emit_operator_result_rejects_alias_risk_before_launch(
+    monkeypatch, tmp_path: Path
+) -> None:
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", "pass")
+    result_path = manifest_path.parent / "operator-result.json"
+    original = hmasd_run.hmasd_platform.is_reparse_or_symlink
+    monkeypatch.setattr(
+        hmasd_run.hmasd_platform,
+        "is_reparse_or_symlink",
+        lambda path, info=None: Path(path) == result_path or original(Path(path), info),
+    )
+
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 6
+    assert json.loads(manifest_path.read_text(encoding="utf-8"))["status"] == "PREPARED"
+
+
+def test_emit_operator_result_refuses_preexisting_symlink_before_launch(
+    monkeypatch, tmp_path: Path
+) -> None:
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", "pass")
+    target = tmp_path / "alias-target.json"
+    target.write_text("preserve", encoding="utf-8")
+    result_path = manifest_path.parent / "operator-result.json"
+    try:
+        result_path.symlink_to(target)
+    except OSError as exc:
+        pytest.skip(f"host cannot create test symlink: {exc}")
+
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 6
+    assert target.read_text(encoding="utf-8") == "preserve"
+    assert json.loads(manifest_path.read_text(encoding="utf-8"))["status"] == "PREPARED"
+
+
+def test_failed_run_does_not_emit_or_retry_operator_result(
+    monkeypatch, tmp_path: Path
+) -> None:
+    count_path = tmp_path / "count.txt"
+    command = (
+        "from pathlib import Path; "
+        f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x'); "
+        "raise SystemExit(7)"
+    )
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 1
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["status"] == "FAILED"
+    assert manifest["process"]["exit_code"] == 7
+    assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+
+
+@pytest.mark.skipif(os.name != "nt", reason="native Windows gate observation contract")
+def test_unknown_run_does_not_emit_or_retry_operator_result(
+    monkeypatch, tmp_path: Path
+) -> None:
+    count_path = tmp_path / "unknown-count.txt"
+    command = (
+        "from pathlib import Path; "
+        f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
+    )
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+    release_gate = hmasd_run._release_gate
+
+    def release_but_report_unknown(gate):
+        release_gate(gate)
+        return False
+
+    monkeypatch.setattr(hmasd_run, "_release_gate", release_but_report_unknown)
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 1
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["status"] == "UNKNOWN"
+    if count_path.exists():
+        assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+
+
+def test_operator_result_publish_fault_preserves_success_without_retry(
+    monkeypatch, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    count_path = tmp_path / "count.txt"
+    command = (
+        "from pathlib import Path; "
+        f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x')"
+    )
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
+
+    def fail_publish(*_args, **_kwargs):
+        stdout_path = manifest_path.parent / "stdout.log"
+        moved = manifest_path.parent / "stdout.closed"
+        stdout_path.rename(moved)
+        moved.rename(stdout_path)
+        raise hmasd_state.StateError("injected publish fault")
+
+    monkeypatch.setattr(hmasd_run.hmasd_state, "initialize", fail_publish)
+    assert hmasd_run.main(
+        ["execute", "--manifest", str(manifest_path), "--emit-operator-result"]
+    ) == 1
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["status"] == "SUCCEEDED"
+    assert manifest["process"]["exit_code"] == 0
+    assert manifest["process"]["group_quiescent"] is True
+    assert count_path.read_text(encoding="utf-8") == "x"
+    assert not (manifest_path.parent / "operator-result.json").exists()
+    assert "OPERATOR_RESULT_PUBLISH_FAILED" in capsys.readouterr().err
 
 
 def test_success_waits_for_and_proves_process_group_quiescence(

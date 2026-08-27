@@ -724,12 +724,19 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("composite_prefix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_prefix_protocol_wrong", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("composite_suffix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
-        ("commentary_agent_message", "OPERATOR_RESULT_MISSING"),
-        ("final_natural_language_only", "OPERATOR_RESULT_MISSING"),
-        ("natural_language_only", "OPERATOR_RESULT_MISSING"),
-        ("typed_final_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
-        ("typed_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
+        ("result_missing", "OPERATOR_RESULT_MISSING"),
+        ("result_malformed", "OPERATOR_RESULT_MALFORMED"),
+        ("result_artifact_order_changed", "OPERATOR_REQUIRED_REF_MISSING"),
+        ("result_stale", "OPERATOR_RESULT_REF_STALE"),
+        ("commentary_agent_message", None),
+        ("contradictory_final_agent_message", None),
+        ("final_natural_language_only", None),
+        ("malformed_final_agent_message", None),
+        ("natural_language_only", None),
+        ("typed_final_result_ambiguous", None),
+        ("typed_result_ambiguous", None),
         ("wrong_generation", "OPERATOR_RESULT_BINDING_MISMATCH"),
+        ("result_locator_assignment_changed", "OPERATOR_ASSIGNMENT_CHANGED"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -972,6 +979,11 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     and '"protocol":"hmasd.experiment-operator.assignment.v1"'
                     in item.get("text", "")
                 )
+                history_assignment = dict(spawn_assignment)
+                if case == "result_locator_assignment_changed":
+                    history_assignment["result_locator"] = (
+                        "temp/directions/alpha/exp/golden-run/other-result.json"
+                    )
                 operator_thread = {
                     "id": "thread-operator-golden-run",
                     "name": spawn_assignment["task_name"],
@@ -990,7 +1002,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                                             {
                                                 "type": "text",
                                                 "text": composite_input(
-                                                    spawn_assignment, variant=case
+                                                    history_assignment, variant=case
                                                 ),
                                             }
                                         ],
@@ -1018,11 +1030,10 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 # are harmless.
                 turn["items"].append(dict(turn["items"][-1]))
                 execute_count += 1
-                completed = _run(
-                    [sys.executable, str(RUN_SCRIPT), "execute", "--manifest", str(manifest)],
-                    cwd=repo,
-                )
+                completed = _run(spawn_assignment["execute_argv"], cwd=repo)
                 assert completed.returncode == 0
+                result_path = manifest.parent / "operator-result.json"
+                operator_result = json.loads(result_path.read_text(encoding="utf-8"))
                 manifest_document = json.loads(manifest.read_text(encoding="utf-8"))
                 if case == "wrong_manifest_owner":
                     manifest_document["writer"] = "Operator-other"
@@ -1038,8 +1049,16 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                     manifest_document["process"]["group_quiescent"] = False
                 if case.startswith("wrong_manifest") or case.startswith("manifest_"):
                     _canonical_write(manifest, manifest_document)
+                    refreshed_manifest_ref = _file_ref(repo, manifest_locator)
+                    operator_result["state_refs"] = [refreshed_manifest_ref]
+                    operator_result["payload"]["manifest_ref"] = refreshed_manifest_ref
                 if case == "stdout_marker_wrong":
                     (manifest.parent / "stdout.log").write_text("WRONG_MARKER\n", encoding="utf-8")
+                    operator_result["artifact_refs"][0] = _file_ref(
+                        repo, "temp/directions/alpha/exp/golden-run/stdout.log"
+                    )
+                elif case == "result_stale":
+                    (manifest.parent / "stdout.log").write_text("STALE_AFTER_RESULT\n", encoding="utf-8")
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
                     repo, "temp/directions/alpha/exp/golden-run/stdout.log"
@@ -1047,41 +1066,24 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 stderr_ref = _file_ref(
                     repo, "temp/directions/alpha/exp/golden-run/stderr.log"
                 )
-                operator_result = {
-                    "schema_version": 1,
-                    "role": (
-                        "hmasd-verifier" if case == "wrong_role" else "hmasd-experiment-operator"
-                    ),
-                    "logical_identity": (
-                        "hmasd-verifier"
-                        if case == "wrong_identity"
-                        else "hmasd-experiment-operator"
-                    ),
-                    "generation": 1,
-                    "assignment_id": "cm-owned-operator-golden",
-                    "status": "COMPLETED",
-                    "materiality": "LOCAL",
-                    "summary": "The exact frozen run reached terminal success.",
-                    "changed_paths": [manifest_ref["path"]],
-                    "state_refs": [manifest_ref],
-                    "artifact_refs": [stdout_ref, stderr_ref],
-                    "checkpoint_sha": None,
-                    "decision_requests": [],
-                    "next_action": {"kind": "NONE", "input_refs": []},
-                    "payload": {
-                        "kind": "run",
-                        "run_id": "golden-run",
-                        "manifest_ref": manifest_ref,
-                        "terminal_status": "SUCCEEDED",
-                        "exit_code": 0,
-                    },
-                }
+                if case == "wrong_role":
+                    operator_result["role"] = "hmasd-verifier"
+                elif case == "wrong_identity":
+                    operator_result["logical_identity"] = "hmasd-verifier"
                 if case == "wrong_generation":
                     operator_result["generation"] = 2
                 if case == "wrong_manifest_ref":
                     operator_result["payload"]["manifest_ref"] = stdout_ref
                 elif case == "malformed_payload":
                     operator_result["payload"] = "bad"
+                if case == "result_artifact_order_changed":
+                    operator_result["artifact_refs"].reverse()
+                if case == "result_missing":
+                    result_path.unlink()
+                elif case == "result_malformed":
+                    result_path.write_text("not-json", encoding="utf-8")
+                else:
+                    _canonical_write(result_path, operator_result)
                 if case in {"child_nonterminal", "cm_early_return"}:
                     operator_thread["turns"][-1]["status"] = "inProgress"
                 elif case == "valid_final_answer":
@@ -1100,12 +1102,33 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                             "text": json.dumps(operator_result),
                         }
                     )
+                elif case == "contradictory_final_agent_message":
+                    contradictory = {
+                        **operator_result,
+                        "logical_identity": "hmasd-verifier",
+                        "status": "FAILED",
+                    }
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "phase": "final_answer",
+                            "text": json.dumps(contradictory),
+                        }
+                    )
                 elif case == "final_natural_language_only":
                     operator_thread["turns"][-1]["items"].append(
                         {
                             "type": "agentMessage",
                             "phase": "final_answer",
                             "text": "Run succeeded; manifest and logs are available.",
+                        }
+                    )
+                elif case == "malformed_final_agent_message":
+                    operator_thread["turns"][-1]["items"].append(
+                        {
+                            "type": "agentMessage",
+                            "phase": "final_answer",
+                            "text": "{not-json",
                         }
                     )
                 elif case == "typed_final_result_ambiguous":
@@ -1135,28 +1158,17 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                             ],
                         }
                     )
-                else:
+                elif case == "typed_result_ambiguous":
+                    second_result = {**operator_result, "summary": "A second typed result."}
                     operator_thread["turns"][-1]["items"].append(
                         {
                             "type": "agentMessage",
                             "content": [
-                                {"type": "output_text", "text": json.dumps(operator_result)}
+                                {"type": "output_text", "text": json.dumps(operator_result)},
+                                {"type": "output_text", "text": json.dumps(second_result)},
                             ],
                         }
                     )
-                    if case == "typed_result_ambiguous":
-                        second_result = {**operator_result, "summary": "A second typed result."}
-                        operator_thread["turns"][-1]["items"].append(
-                            {
-                                "type": "agentMessage",
-                                "content": [
-                                    {
-                                        "type": "output_text",
-                                        "text": json.dumps(second_result),
-                                    }
-                                ],
-                            }
-                        )
             if attempt != 1 or case == "cm_early_return":
                 manifest_ref = _file_ref(repo, manifest_locator)
                 stdout_ref = _file_ref(
@@ -1239,11 +1251,9 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         assert execute_count <= 1
         assert cm_return_count <= 1
         if case in {
-            "commentary_agent_message",
-            "final_natural_language_only",
-            "natural_language_only",
-            "typed_final_result_ambiguous",
-            "typed_result_ambiguous",
+            "result_missing",
+            "result_malformed",
+            "result_stale",
         }:
             assert operator_create_count == execute_count == cm_return_count == 1
             assert len(peer.threads["thread-cm-alpha"]["turns"]) == 2
@@ -1275,12 +1285,14 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
             "execute",
             "--manifest",
             str(manifest),
+            "--emit-operator-result",
         ],
         "logical_identity": "hmasd-experiment-operator",
         "manifest": manifest_locator,
         "output_root": str(manifest.parent),
         "parent_identity": "CM-alpha",
         "protocol": "hmasd.experiment-operator.assignment.v1",
+        "result_locator": "temp/directions/alpha/exp/golden-run/operator-result.json",
         "run_id": "golden-run",
         "run_owner": "Operator-golden-run",
         "result_contract": {
@@ -1327,9 +1339,15 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
         for thread in peer.threads.values()
         if thread.get("parentThreadId") == "thread-cm-alpha"
         and thread.get("agentRole") == "hmasd-experiment-operator"
-            and any(
-                '"run_id": "golden-run"' in item.get("text", "")
-                for turn in thread.get("turns", [])
+                and any(
+                    any(
+                        marker in item.get("text", "")
+                        for marker in (
+                            '"run_id": "golden-run"',
+                            '"run_id":"golden-run"',
+                        )
+                    )
+                    for turn in thread.get("turns", [])
                 for entry in turn.get("items", [])
                 for item in [entry, *entry.get("content", [])]
             )

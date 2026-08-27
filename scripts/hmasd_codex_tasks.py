@@ -1540,6 +1540,9 @@ class AppServerClient:
         try:
             stdout_ref = (manifest_path.parent / outputs["stdout"]).relative_to(repo).as_posix()
             stderr_ref = (manifest_path.parent / outputs["stderr"]).relative_to(repo).as_posix()
+            result_locator = (manifest_path.parent / "operator-result.json").relative_to(
+                repo
+            ).as_posix()
         except (KeyError, TypeError, ValueError) as exc:
             raise ValueError("run manifest output refs are invalid") from exc
         assignment = {
@@ -1552,6 +1555,7 @@ class AppServerClient:
                 "execute",
                 "--manifest",
                 str(manifest_path),
+                "--emit-operator-result",
             ],
             "logical_identity": _OPERATOR_ROLE,
             "agent_role": _OPERATOR_ROLE,
@@ -1559,6 +1563,7 @@ class AppServerClient:
             "output_root": str(manifest_path.parent),
             "parent_identity": target_identity,
             "protocol": OPERATOR_ASSIGNMENT_MARKER,
+            "result_locator": result_locator,
             "run_id": run_id,
             "run_owner": run_owner,
             "result_contract": {
@@ -1730,16 +1735,25 @@ class AppServerClient:
         frozen = observation["assignment"]
         bound = ("assignment_id", "agent_role", "command", "cwd", "logical_identity",
                  "manifest", "output_root", "parent_identity", "protocol", "result_contract",
-                 "run_id", "run_owner")
+                 "result_locator", "run_id", "run_owner")
         if any(frozen.get(key) != assignment.get(key) for key in bound):
             return cls._operator_evidence_error("OPERATOR_ASSIGNMENT_CHANGED")
-        results = [document for document in cls._json_documents(turns[-1].get("items", []))
-                   if document.get("schema_version") == 1 and "payload" in document]
-        if not results:
+        try:
+            result_locator = _relative_posix_path(str(assignment["result_locator"]))
+        except (KeyError, TypeError, ValueError):
+            return cls._operator_evidence_error("OPERATOR_RESULT_LOCATOR_INVALID")
+        result_path = repo / Path(*result_locator.split("/"))
+        if (
+            not result_path.is_file()
+            or hmasd_platform.is_reparse_or_symlink(result_path)
+        ):
             return cls._operator_evidence_error("OPERATOR_RESULT_MISSING")
-        if len(results) > 1:
-            return cls._operator_evidence_error("OPERATOR_RESULT_AMBIGUOUS")
-        result = results[0]
+        try:
+            result = json.loads(result_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            return cls._operator_evidence_error("OPERATOR_RESULT_MALFORMED")
+        if not isinstance(result, Mapping):
+            return cls._operator_evidence_error("OPERATOR_RESULT_MALFORMED")
         if result.get("role") != _OPERATOR_ROLE or result.get("logical_identity") != _OPERATOR_ROLE:
             return cls._operator_evidence_error("OPERATOR_RESULT_IDENTITY_MISMATCH")
         try:
@@ -1772,6 +1786,8 @@ class AppServerClient:
         manifest_path = repo / Path(*str(assignment["manifest"]).split("/"))
         if manifest_ref not in refs or hmasd_state.sha256_file(manifest_path) != manifest_ref["sha256"]:
             return cls._operator_evidence_error("OPERATOR_MANIFEST_REF_STALE")
+        if result.get("state_refs") != [manifest_ref]:
+            return cls._operator_evidence_error("OPERATOR_REQUIRED_REF_MISSING")
         try:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
@@ -1794,8 +1810,14 @@ class AppServerClient:
         if isinstance(marker, str) and stdout_path.read_text(encoding="utf-8").count(marker) != 1:
             return cls._operator_evidence_error("OPERATOR_STDOUT_MARKER_MISMATCH")
         stderr_path = manifest_path.parent / str(manifest.get("outputs", {}).get("stderr", ""))
+        stderr_rel = stderr_path.relative_to(repo).as_posix()
+        if [reference.get("path") for reference in result["artifact_refs"]] != [
+            stdout_rel,
+            stderr_rel,
+        ]:
+            return cls._operator_evidence_error("OPERATOR_REQUIRED_REF_MISSING")
         by_path = {reference["path"]: reference for reference in refs}
-        expected_refs = [manifest_ref, by_path.get(stdout_rel), by_path.get(stderr_path.relative_to(repo).as_posix())]
+        expected_refs = [manifest_ref, by_path.get(stdout_rel), by_path.get(stderr_rel)]
         if any(reference is None for reference in expected_refs):
             return cls._operator_evidence_error("OPERATOR_REQUIRED_REF_MISSING")
         return {"status": "VALID", "thread_id": observation["thread_id"], "refs": expected_refs}

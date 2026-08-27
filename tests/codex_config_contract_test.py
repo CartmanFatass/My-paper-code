@@ -85,7 +85,7 @@ def test_native_mcp_commands_do_not_use_wsl_executable_paths() -> None:
         assert forbidden not in active_text
 
 
-def test_experiment_operator_requires_one_typed_terminal_json_result() -> None:
+def test_experiment_operator_uses_the_mechanical_result_file_contract() -> None:
     role = tomllib.loads(
         (CODEX / "agents" / "hmasd-experiment-operator.toml").read_text(
             encoding="utf-8"
@@ -93,18 +93,10 @@ def test_experiment_operator_requires_one_typed_terminal_json_result() -> None:
     )
     instructions = " ".join(role["developer_instructions"].lower().split())
     for required in (
-        "exactly one pure json object",
-        "copy role, logical_identity, generation, and assignment_id",
-        "work_id is assignment provenance only",
-        "work_id must not appear as an agent_result field",
-        "verification_refs is an input checklist and path set only",
-        "verification_refs must not appear as an agent_result field",
-        "state_refs and artifact_refs",
-        "fresh path+sha256",
-        "payload contains exactly kind, run_id, manifest_ref, terminal_status, and exit_code",
-        "all other schema-required common fields",
-        "no prose",
-        "no markdown fence",
+        "execute exactly assignment.execute_argv",
+        "operator-result.json is the authoritative result witness",
+        "do not construct, rewrite, or replace that result file",
+        "final response is not result evidence",
         "never silently retry",
     ):
         assert required in instructions

@@ -5,28 +5,15 @@ model_reasoning_effort = "low"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """
-Execute exactly one fully specified result-bearing command. Confirm the command,
-working directory, outputs, and absence of a duplicate process, then launch
-once and retain the foreground handle until terminal. Never silently retry or
-launch a successor.
+Execute exactly assignment.execute_argv once in assignment.cwd and retain the
+foreground handle until terminal. Confirm the exact command, working directory,
+outputs, and absence of a duplicate process. Never silently retry or launch a
+successor.
 
-After terminal observation, the final response must be exactly one pure JSON object
-with no prose and no Markdown fence. Build the schema-valid common agent_result using
-assignment.result_contract.schema_path. Copy role, logical_identity, generation, and
-assignment_id from result_contract. result_contract.work_id is assignment provenance
-only: work_id must not appear as an agent_result field. result_contract.verification_refs
-is an input checklist and path set only: verification_refs must not appear as an
-agent_result field.
-
-The object contains only the schema-allowed top-level fields: schema_version, role,
-logical_identity, generation, assignment_id, status, materiality, summary,
-changed_paths, state_refs, artifact_refs, checkpoint_sha, decision_requests,
-next_action, and payload. Compute a fresh path+sha256 file ref for every path in
-result_contract.state_refs and result_contract.artifact_refs, and place them in
-state_refs and artifact_refs respectively. The payload contains exactly kind, run_id,
-manifest_ref, terminal_status, and exit_code. Fill all other schema-required common
-fields according to the schema. A natural-language status or path does not replace
-this typed result.
+operator-result.json is the authoritative result witness produced by that command.
+Do not construct, rewrite, or replace that result file. The final response is
+not result evidence and may only summarize the already observed command outcome; it
+must never substitute for the fixed result witness.
 
 Never reinterpret science. A lease is resource metadata, not permission; the explicit
 assignment is the authority.

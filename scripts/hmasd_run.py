@@ -33,10 +33,11 @@ if os.name == "nt":
 
 try:
     from scripts import hmasd_resource_preflight as resource_preflight
-    from scripts import hmasd_platform
+    from scripts import hmasd_platform, hmasd_state
 except ImportError:
     import hmasd_resource_preflight as resource_preflight
     import hmasd_platform
+    import hmasd_state
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
@@ -51,6 +52,7 @@ OUTPUT_NAMES = {
     "artifacts": "artifacts",
 }
 CLAIM_DIRECTORY = ".run-claims"
+OPERATOR_RESULT_NAME = "operator-result.json"
 TIMESTAMP_RE = re.compile(
     r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?Z\Z"
 )
@@ -247,6 +249,55 @@ def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
         json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     ).encode("utf-8")
     _atomic_write_bytes(path, rendered)
+
+
+def _repo_file_ref(repo: Path, path: Path) -> dict[str, str]:
+    try:
+        relative = path.relative_to(repo).as_posix()
+    except ValueError as exc:
+        raise RunRefusal(5, f"operator result ref escapes cwd: {path}") from exc
+    return {"path": relative, "sha256": _sha256_file(path)}
+
+
+def _operator_result_document(
+    repo: Path, manifest_path: Path, manifest: Mapping[str, Any]
+) -> dict[str, Any]:
+    stdout_path = manifest_path.parent / str(manifest["outputs"]["stdout"])
+    stderr_path = manifest_path.parent / str(manifest["outputs"]["stderr"])
+    result_path = manifest_path.parent / OPERATOR_RESULT_NAME
+    manifest_ref = _repo_file_ref(repo, manifest_path)
+    stdout_ref = _repo_file_ref(repo, stdout_path)
+    stderr_ref = _repo_file_ref(repo, stderr_path)
+    result = {
+        "schema_version": 1,
+        "role": "hmasd-experiment-operator",
+        "logical_identity": "hmasd-experiment-operator",
+        "generation": 1,
+        "assignment_id": manifest["assignment_id"],
+        "status": "COMPLETED",
+        "materiality": "LOCAL",
+        "summary": "The exact frozen run reached terminal success.",
+        "changed_paths": [
+            manifest_ref["path"],
+            stdout_ref["path"],
+            stderr_ref["path"],
+            result_path.relative_to(repo).as_posix(),
+        ],
+        "state_refs": [manifest_ref],
+        "artifact_refs": [stdout_ref, stderr_ref],
+        "checkpoint_sha": None,
+        "decision_requests": [],
+        "next_action": {"kind": "NONE", "input_refs": []},
+        "payload": {
+            "kind": "run",
+            "run_id": manifest["run_id"],
+            "manifest_ref": manifest_ref,
+            "terminal_status": "SUCCEEDED",
+            "exit_code": 0,
+        },
+    }
+    hmasd_state.validate_document("agent_result", result)
+    return result
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -1642,6 +1693,7 @@ def _execute(args: argparse.Namespace) -> int:
     manifest_path, root, initial = _load_manifest(args.manifest)
     _verify_manifest_provenance(manifest_path, root, initial)
     claim_path = _claim_path(manifest_path, initial)
+    result_path = root / OPERATOR_RESULT_NAME
     approval_path = _safe_resolve(Path(args.approval)) if args.approval else None
     stdout: Any = None
     stderr: Any = None
@@ -1703,6 +1755,11 @@ def _execute(args: argparse.Namespace) -> int:
                 status = manifest.get("status")
                 if status != "PREPARED":
                     raise RunRefusal(6, f"manifest is not launchable from status {status!r}")
+                if args.emit_operator_result and (
+                    os.path.lexists(result_path)
+                    or hmasd_platform.is_reparse_or_symlink(result_path)
+                ):
+                    raise RunRefusal(6, "operator result path already exists")
                 existing_claim = _read_bound_claim(claim_path, manifest)
                 if existing_claim is not None:
                     claim_status = existing_claim.get("status")
@@ -2066,6 +2123,32 @@ def _execute(args: argparse.Namespace) -> int:
                     execution_token=token,
                 )
                 terminal_recorded = True
+        if stdout is not None:
+            stdout.close()
+            stdout = None
+        if stderr is not None:
+            stderr.close()
+            stderr = None
+        if (
+            args.emit_operator_result
+            and terminal.get("status") == "SUCCEEDED"
+            and terminal.get("process", {}).get("exit_code") == 0
+            and terminal.get("process", {}).get("group_quiescent") is True
+        ):
+            try:
+                result = _operator_result_document(
+                    _safe_resolve(Path(str(terminal["cwd"]))),
+                    manifest_path,
+                    terminal,
+                )
+                hmasd_state.initialize(
+                    "agent_result",
+                    result_path,
+                    str(terminal["writer"]),
+                    result,
+                )
+            except (hmasd_state.StateError, OSError, ValueError, TypeError) as exc:
+                raise RunRefusal(1, "OPERATOR_RESULT_PUBLISH_FAILED") from exc
         return wrapper_code
     finally:
         if gate_write_fd is not None:
@@ -2387,6 +2470,7 @@ def _parser() -> argparse.ArgumentParser:
     execute = modes.add_parser("execute")
     execute.add_argument("--manifest", required=True)
     execute.add_argument("--approval")
+    execute.add_argument("--emit-operator-result", action="store_true")
     reconcile = modes.add_parser("reconcile")
     reconcile.add_argument("--manifest", required=True)
     cancel = modes.add_parser("cancel")
