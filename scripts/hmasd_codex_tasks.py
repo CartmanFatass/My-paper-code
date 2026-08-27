@@ -1520,7 +1520,8 @@ class AppServerClient:
             "run_owner": run_owner,
             "result_contract": {
                 "artifact_refs": [stdout_ref, stderr_ref],
-                "assignment_id": assignment_id, "logical_identity": _OPERATOR_ROLE,
+                "assignment_id": assignment_id, "generation": 1,
+                "logical_identity": _OPERATOR_ROLE,
                 "role": _OPERATOR_ROLE, "run_id": run_id,
                 "schema_path": "scripts/schemas/hmasd_agent_result.schema.json",
                 "state_refs": [manifest_locator],
@@ -1715,6 +1716,7 @@ class AppServerClient:
         payload = result["payload"]
         if (
             result.get("assignment_id") != assignment["assignment_id"]
+            or result.get("generation") != assignment["result_contract"]["generation"]
             or result.get("status") != "COMPLETED"
             or payload.get("run_id") != assignment["run_id"]
             or payload.get("terminal_status") != "SUCCEEDED"

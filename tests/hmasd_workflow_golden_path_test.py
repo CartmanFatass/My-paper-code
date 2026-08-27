@@ -725,6 +725,7 @@ def test_em_cm_operator_root_local_fake_transport_golden(tmp_path: Path) -> None
         ("composite_suffix_malformed", "OPERATOR_CHILD_RUN_BINDING_UNKNOWN"),
         ("natural_language_only", "OPERATOR_RESULT_MISSING"),
         ("typed_result_ambiguous", "OPERATOR_RESULT_AMBIGUOUS"),
+        ("wrong_generation", "OPERATOR_RESULT_BINDING_MISMATCH"),
     ],
 )
 def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_refs(
@@ -1071,6 +1072,8 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                         "exit_code": 0,
                     },
                 }
+                if case == "wrong_generation":
+                    operator_result["generation"] = 2
                 if case == "wrong_manifest_ref":
                     operator_result["payload"]["manifest_ref"] = stdout_ref
                 elif case == "malformed_payload":
@@ -1237,6 +1240,7 @@ def test_run_chain_reuses_one_operator_after_cm_interrupt_and_returns_terminal_r
                 "temp/directions/alpha/exp/golden-run/stderr.log",
             ],
             "assignment_id": "cm-owned-operator-golden",
+            "generation": 1,
             "logical_identity": "hmasd-experiment-operator",
             "role": "hmasd-experiment-operator",
             "run_id": "golden-run",
