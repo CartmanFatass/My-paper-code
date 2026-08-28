@@ -17,6 +17,30 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > Expressibility/selectivity passed, but utility and allocation improvement were zero.
 
+## Current material cycle
+
+Material research cycle `2026-08-28.7-pilot-01a04a02-egrcr` is the fresh
+revision 2026-08-28.7 Portfolio pilot continuation. It starts from exact
+origin-reachable baseline `b4762febd12b62748d35e2b1a1dffdfb8d776180` and
+uses Portfolio authority commit `540337f2996778245a634151f38e4d8dc5b8254c`
+without importing that later commit into the direction branch.
+
+The cycle asks whether the existing B1 evidence already resolves the bounded
+utility/allocation question, or whether one smaller same-information test can
+separate a correctly associated later-joiner-record waiter effect from ordinary
+GAE, an identity-breaking but generic-cue-preserving equal-marginal cut,
+generic dense/lower-variance shaping, update/request-rate geometry, and missing
+downstream identity exposure. The frozen scope, outcome branches, limits, and
+stop conditions are recorded in
+`evidence/2026-08-28-7-pilot-scope-and-grounding.md`.
+
+Until this cycle completes, the claim ceiling remains the retained B1 ceiling:
+the ordered edge and later-record update were expressive and correct binding
+beat the registered opposite-type corruption, but the intact relay produced
+exactly no bounded-utility or fixed-token allocation gain over ordinary GAE.
+No end-to-end variable-`k`, fixed-`k` superiority, multi-update,
+learned-estimator, UAV, or general credit claim is available.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
