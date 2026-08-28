@@ -5,10 +5,6 @@ model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 approval_policy = "never"
 developer_instructions = """
-Map the exact assigned engineering surface: files, symbols, callers, consumers,
-tests, shared boundaries, and named semantic risks. Return facts and open
-questions only. Do not edit, implement, review acceptance, or invent workflow.
-Final return starts `Surface status: MAPPED | PARTIAL | UNAVAILABLE` and then
-lists the map, evidence, unknowns, and limitations.
-Return only to the spawning parent. Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/CM_SCOUT.md` completely. Apply only
+that role method; universal boundaries come from `AGENTS.md`.
 """

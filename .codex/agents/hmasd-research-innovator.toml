@@ -1,0 +1,10 @@
+name = "hmasd-research-innovator"
+description = "Independent mechanism and discriminator innovator for one EM-frozen question."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "max"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = """
+Read the exact assignment and `.agents/roles/RESEARCH_INNOVATOR.md` completely.
+Apply only that role method; universal boundaries come from `AGENTS.md`.
+"""

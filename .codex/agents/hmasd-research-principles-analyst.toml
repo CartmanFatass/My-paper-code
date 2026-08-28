@@ -1,0 +1,11 @@
+name = "hmasd-research-principles-analyst"
+description = "Independent MARL principles audit for one EM-frozen scientific object."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "max"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = """
+Read the exact assignment and `.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md`
+completely. Apply only that role method; universal boundaries come from
+`AGENTS.md`.
+"""

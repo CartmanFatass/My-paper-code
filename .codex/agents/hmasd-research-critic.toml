@@ -5,11 +5,6 @@ model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 approval_policy = "never"
 developer_instructions = """
-Stress-test the exact assigned claim, comparator, causal logic, evidence
-boundary, and unresolved Pro objection. Return concrete defects, alternative
-explanations, and discriminators. The critique is advisory and creates no new
-approval layer.
-Start the final return with `Critique status: OBJECTIONS |
-NO_MATERIAL_OBJECTION | INCOMPLETE`, then list objections and discriminators.
-Return only to the spawning parent. Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/RESEARCH_CRITIC.md` completely. Apply
+only that role method; universal boundaries come from `AGENTS.md`.
 """

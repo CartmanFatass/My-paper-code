@@ -17,9 +17,16 @@ from typing import Any, Mapping, Sequence
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTION_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,127}\Z")
 SNAPSHOT_STATES = {"WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"}
+TERMINAL_SNAPSHOT_STATES = {"TERMINAL_GAP", "COMPLETE"}
+UNRESOLVED_PRO_STATUSES = {"COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"}
+LIVE_OR_UNWITNESSED_RUN_STATUSES = {"RUNNING", "UNKNOWN"}
 MILESTONES = {
     "research": {"SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"},
     "engineering": {"SCOPE_FROZEN", "CANDIDATE_READY", "REVIEW_RESOLVED", "RUN_OR_HANDOFF_READY"},
+}
+FINAL_MILESTONES = {
+    "research": "HANDOFF_READY",
+    "engineering": "RUN_OR_HANDOFF_READY",
 }
 ROLES = {"research": "EM", "engineering": "CM"}
 COMMON_FIELDS = {
@@ -36,6 +43,7 @@ PRO_STATUSES = {
     "COMMITMENT_UNKNOWN",
     "SENT_WAITING",
     "COMPLETE",
+    "SENT_INPUT_MISMATCH",
     "SENT_UNREADABLE",
     "WAIVED",
 }
@@ -98,8 +106,6 @@ def _validate_pro_review(value: Any, label: str) -> None:
 
 
 def _validate_cycle(value: Any) -> None:
-    if value is None:
-        return
     required = {"label", "opened_at", "reason", "pro_innovator", "pro_convergence"}
     if not isinstance(value, dict) or set(value) != required:
         raise StateError("research_cycle fields are invalid")
@@ -158,26 +164,40 @@ def validate_document(kind: str, document: Mapping[str, Any]) -> dict[str, Any]:
         raise StateError(f"{document['snapshot_state']} requires null reentry_condition")
     if document["snapshot_state"] in {"WORKING", "COMPLETE"} and document["blockers"]:
         raise StateError(f"{document['snapshot_state']} requires empty blockers")
+    if (
+        document["snapshot_state"] == "COMPLETE"
+        and document["milestone"] != FINAL_MILESTONES[kind]
+    ):
+        raise StateError(f"COMPLETE requires the {kind} final milestone")
     if kind == "research":
         _text(document["claim_ceiling"], "claim_ceiling")
         _nullable_text(document["next_discriminator"], "next_discriminator")
         _validate_cycle(document["research_cycle"])
         cycle = document["research_cycle"]
-        if cycle is not None:
-            innovator = cycle["pro_innovator"]["status"]
-            convergence = cycle["pro_convergence"]["status"]
-            if document["milestone"] == "SCOPE_FROZEN" and convergence != "PENDING":
-                raise StateError("Pro Convergence cannot start before SYNTHESIS_READY")
-            if document["milestone"] in {"SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"} and innovator not in {"COMPLETE", "WAIVED"}:
-                raise StateError(f"{document['milestone']} requires resolved Pro Innovator")
-            if document["milestone"] in {"REVIEW_RESOLVED", "HANDOFF_READY"} and convergence not in {"COMPLETE", "WAIVED"}:
-                raise StateError(f"{document['milestone']} requires resolved Pro Convergence")
+        innovator = cycle["pro_innovator"]["status"]
+        convergence = cycle["pro_convergence"]["status"]
+        if document["snapshot_state"] in TERMINAL_SNAPSHOT_STATES and any(
+            status in UNRESOLVED_PRO_STATUSES for status in (innovator, convergence)
+        ):
+            raise StateError("a terminal snapshot cannot retain an unresolved Pro operation")
+        if document["milestone"] == "SCOPE_FROZEN" and convergence != "PENDING":
+            raise StateError("Pro Convergence cannot start before SYNTHESIS_READY")
+        if document["milestone"] in {"SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"} and innovator not in {"COMPLETE", "WAIVED"}:
+            raise StateError(f"{document['milestone']} requires resolved Pro Innovator")
+        if document["milestone"] in {"REVIEW_RESOLVED", "HANDOFF_READY"} and convergence not in {"COMPLETE", "WAIVED"}:
+            raise StateError(f"{document['milestone']} requires resolved Pro Convergence")
     else:
         _nullable_text(document["worktree"], "worktree")
         _nullable_text(document["branch"], "branch")
         _text_list(document["changed_paths"], "changed_paths")
         _text(document["verification_summary"], "verification_summary", empty=True)
         _validate_run(document["run"])
+        if (
+            document["snapshot_state"] in TERMINAL_SNAPSHOT_STATES
+            and document["run"] is not None
+            and document["run"]["status"] in LIVE_OR_UNWITNESSED_RUN_STATUSES
+        ):
+            raise StateError("a terminal snapshot requires a terminal run witness")
     return dict(document)
 
 
@@ -209,23 +229,27 @@ def _pro_transition(current: Mapping[str, Any], next_value: Mapping[str, Any], l
     allowed = {
         "PENDING": {
             "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
-            "COMPLETE", "SENT_UNREADABLE", "WAIVED",
+            "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
         },
         "ZERO_SEND_FAILED": {
             "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE",
-            "SENT_UNREADABLE", "WAIVED",
+            "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
         },
         "COMMITMENT_UNKNOWN": {
-            "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_UNREADABLE",
+            "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH",
+            "SENT_UNREADABLE",
         },
-        "SENT_WAITING": {"SENT_WAITING", "COMPLETE", "SENT_UNREADABLE"},
-        "SENT_UNREADABLE": {"SENT_UNREADABLE", "COMPLETE"},
+        "SENT_WAITING": {
+            "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE",
+        },
+        "SENT_UNREADABLE": {"SENT_UNREADABLE", "COMPLETE", "SENT_INPUT_MISMATCH"},
+        "SENT_INPUT_MISMATCH": {"SENT_INPUT_MISMATCH"},
         "COMPLETE": {"COMPLETE"},
         "WAIVED": {"WAIVED"},
     }
     if new not in allowed[old]:
         raise StateError(f"{label} cannot regress from {old} to {new}")
-    if old in {"COMPLETE", "WAIVED"} and dict(current) != dict(next_value):
+    if old in {"COMPLETE", "SENT_INPUT_MISMATCH", "WAIVED"} and dict(current) != dict(next_value):
         raise StateError(f"resolved {label} cannot change")
 
 
@@ -235,27 +259,27 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
     if kind == "research":
         old_cycle = current["research_cycle"]
         new_cycle = next_document["research_cycle"]
-        if old_cycle is not None and new_cycle is None:
-            raise StateError("current research_cycle cannot be removed")
-        is_new_cycle = old_cycle is None and new_cycle is not None
-        if old_cycle is not None and new_cycle is not None:
-            is_new_cycle = old_cycle["label"] != new_cycle["label"]
-            if not is_new_cycle:
-                for field in ("label", "opened_at", "reason"):
-                    if old_cycle[field] != new_cycle[field]:
-                        raise StateError(f"research_cycle.{field} cannot change within a cycle")
-                _pro_transition(old_cycle["pro_innovator"], new_cycle["pro_innovator"], "Pro Innovator")
-                _pro_transition(old_cycle["pro_convergence"], new_cycle["pro_convergence"], "Pro Convergence")
+        is_new_cycle = old_cycle["label"] != new_cycle["label"]
+        if (
+            current["snapshot_state"] in TERMINAL_SNAPSHOT_STATES
+            and next_document["snapshot_state"] not in TERMINAL_SNAPSHOT_STATES
+            and not is_new_cycle
+        ):
+            raise StateError("a terminal snapshot can only reopen as a fresh research cycle")
+        if not is_new_cycle:
+            for field in ("label", "opened_at", "reason"):
+                if old_cycle[field] != new_cycle[field]:
+                    raise StateError(f"research_cycle.{field} cannot change within a cycle")
+            _pro_transition(old_cycle["pro_innovator"], new_cycle["pro_innovator"], "Pro Innovator")
+            _pro_transition(old_cycle["pro_convergence"], new_cycle["pro_convergence"], "Pro Convergence")
         if is_new_cycle:
-            if old_cycle is not None:
-                unresolved = {"COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"}
-                if any(
-                    old_cycle[field]["status"] in unresolved
-                    for field in ("pro_innovator", "pro_convergence")
-                ):
-                    raise StateError(
-                        "a new research cycle cannot discard an unresolved external operation"
-                    )
+            if any(
+                old_cycle[field]["status"] in UNRESOLVED_PRO_STATUSES
+                for field in ("pro_innovator", "pro_convergence")
+            ):
+                raise StateError(
+                    "a new research cycle cannot discard an unresolved external operation"
+                )
             if next_document["milestone"] != "SCOPE_FROZEN":
                 raise StateError("a new research cycle must start at SCOPE_FROZEN")
             for field in ("pro_innovator", "pro_convergence"):
@@ -263,10 +287,17 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
                     raise StateError(f"a new research cycle requires pending {field}")
         elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
             raise StateError("research milestone cannot regress within a cycle")
-    elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
-        if not (
-            current["snapshot_state"] in {"COMPLETE", "TERMINAL_GAP"}
-            and next_document["milestone"] == "SCOPE_FROZEN"
+    else:
+        reopening_terminal = (
+            current["snapshot_state"] in TERMINAL_SNAPSHOT_STATES
+            and next_document["snapshot_state"] not in TERMINAL_SNAPSHOT_STATES
+        )
+        if reopening_terminal and next_document["milestone"] != "SCOPE_FROZEN":
+            raise StateError("a terminal snapshot can only reopen at a fresh engineering scope")
+        if (
+            MILESTONE_ORDER[kind][next_document["milestone"]]
+            < MILESTONE_ORDER[kind][current["milestone"]]
+            and not (reopening_terminal and next_document["milestone"] == "SCOPE_FROZEN")
         ):
             raise StateError("engineering milestone cannot regress within a work slice")
 

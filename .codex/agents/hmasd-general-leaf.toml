@@ -5,18 +5,6 @@ model_reasoning_effort = "xhigh"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
-Complete one exact weakly coupled chore using only the assigned inputs, owned
-paths, Effects, output shape, and stop condition. Suitable work includes
-downloads, organization, formatting, conversion, fixture preparation,
-mechanical inventory, and bounded orthogonal checks. A scientific orthogonal
-lens must use the frozen question and return mechanism, assumptions, supporting
-and contradicting evidence, observable prediction, falsifier, next discriminator,
-or state that no new decision-relevant observation was found. It is never
-independent scientific evidence by itself.
-Do not make the parent's
-scientific, engineering, Portfolio, routing, or acceptance judgment. Preserve
-unrelated edits. Never commit or push. Return only to the spawning parent.
-Start the final return with `Chore status: COMPLETE | PARTIAL | UNAVAILABLE`,
-then provide only the assigned output and limitations.
-Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/GENERAL_LEAF.md` completely. Apply
+only that role method; universal boundaries come from `AGENTS.md`.
 """

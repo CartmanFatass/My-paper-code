@@ -18,6 +18,10 @@ def _read(relative: str) -> str:
     return (ROOT / relative).read_text(encoding="utf-8")
 
 
+def _flat(text: str) -> str:
+    return " ".join(text.split())
+
+
 def test_only_current_session_skills_are_discoverable() -> None:
     expected = {
         "hmasd-root-task",
@@ -29,41 +33,43 @@ def test_only_current_session_skills_are_discoverable() -> None:
         path.parent.name
         for path in (ROOT / ".agents" / "skills").glob("hmasd-*/SKILL.md")
     }
-    assert actual == expected
+    assert actual == expected | {"hmasd-agentify-transport"}
+    transport_policy = _read(
+        ".agents/skills/hmasd-agentify-transport/agents/openai.yaml"
+    )
+    assert "allow_implicit_invocation: false" in transport_policy
     assert not list((ROOT / ".codex" / "prompts").glob("hmasd-*.md"))
 
 
-def test_protocol_is_the_single_readable_workflow_authority() -> None:
+def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    protocol_flat = _flat(protocol)
     agents = _read("AGENTS.md")
     context = _read("CONTEXT.md")
     assert protocol.startswith("# HMASD native Codex workflow\n\nWorkflow revision: ")
     for marker in ("[WORK]", "[RESULT]", "[CONTROL]"):
         assert marker in protocol
-    assert "Return task: <native task id of the requester>" in protocol
-    assert "用户直接进入某 participant 时不制造 Return task" in protocol
+    assert "Return task: <native task id of requester>" in protocol_flat
+    assert "用户直接进入某 participant 时，不制造 `Return task`" in protocol
     assert "Portfolio → EM → CM → EM → Portfolio" in protocol
     assert "Action: PAUSE | RESUME | CANCEL" in protocol
     assert "Action: PAUSE | RESUME | CANCEL | REPLACE | RELOAD" not in protocol
-    assert "同时最多持有一个 unfinished inbound WORK" in protocol
-    assert "所有已发送 EM 必须自然 terminal" in protocol
-    assert "initial prompt 本身就是完整 `[WORK]`" in protocol
-    assert "同一 direction 同时只有一个 Git-visible writer phase" in protocol
-    assert "Codex 原生 `environment: worktree`" in protocol
-    assert "方向目录不需要另存为 Desktop" in protocol
-    assert "branch fast-forward 到该 commit" in protocol
-    assert "不得 cherry-pick、rebase 或重写历史" in protocol
-    assert "native-worktree 交接只使用本地 exact" in protocol
-    assert "不需要 push" in protocol
-    assert "向当前 `Return task` 返回" in protocol
-    assert "不得越过 requester 直接联系 Root" in protocol
-    assert "hmasd-explorer-agentify-transport" in protocol
-    assert "不设固定配额" in protocol
-    assert "0–2 个 leaves" not in protocol
-    assert "不得生成数值 VOI" in protocol
-    assert "仍由\ncallee 持有" in protocol
-    assert "successor 都先返回 terminal RESULT" in protocol
-    assert "CANCELLED RESULT 并释放 target" in protocol
+    for marker in (
+        "同时最多持有一个 unfinished inbound WORK",
+        "所有已投递 EM 自然 terminal",
+        "initial prompt 本身就是完整 `[WORK]`",
+        "同一 direction 同时只有一个 Git-visible writer phase",
+        "Codex 原生 `environment: worktree`",
+        "方向目录不需要另存为 Desktop",
+        "branch 必须 fast-forward 到该 commit",
+        "不得 cherry-pick、rebase 或重写历史",
+        "native-worktree 交接只使用本地 exact commit",
+        "不需要 push",
+        "向当前 `Return task` 返回",
+        "不得越过 requester 直接联系 Root",
+        "一个 successor 必须等当前 WORK terminal",
+    ):
+        assert marker in protocol_flat
     assert "Clerk" not in protocol
     assert "Next: EM | CM | PORTFOLIO | ROOT | SAME | NONE" not in protocol
     for legacy in (
@@ -77,7 +83,16 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
         "SHA256",
     ):
         assert legacy not in protocol
-    assert "唯一控制 authority" in agents
+    assert "universal semantic kernel" in agents
+    assert "sole cross-task transport authority" in agents
+    assert "公共字段含义、caller" in protocol_flat
+    assert "这里不复制这些内容" in protocol_flat
+    for local_recipe in (
+        "agentify_review_query", "Experiment Operator", "current snapshot",
+        "## 8. External and result Effects", "## 9. Milestone memory and recovery",
+        "## 10. Cutover",
+    ):
+        assert local_recipe not in protocol
     active_role_surfaces = "\n".join(
         [agents, protocol, context]
         + [
@@ -120,12 +135,24 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
         "HMASDResearchScout",
         "HMASDResearchCritic",
         "HMASDGeneralLeaf",
+        "HMASDResearchInnovator",
+        "HMASDResearchPrinciplesAnalyst",
+        "HMASDImplementer",
+        "HMASDRoutineImplementer",
     }
     general_path = ROOT / ".codex" / entries["HMASDGeneralLeaf"]["config_file"]
     general = tomllib.loads(general_path.read_text(encoding="utf-8"))
     assert general["model"] == "gpt-5.6-luna"
     assert general["model_reasoning_effort"] == "xhigh"
-    assert "Never spawn" in general["developer_instructions"]
+    assert "Never spawn" not in general["developer_instructions"]
+    agents = _read("AGENTS.md")
+    assert "never delegate" in agents
+    assert "`ri` | `hmasd-research-innovator`" in agents
+    assert "`rp` | `hmasd-research-principles-analyst`" in agents
+    assert "`im` | `hmasd-implementer`" in agents
+    assert "`rt` | `hmasd-routine-implementer`" in agents
+    assert "scientific scope, evidence synthesis" in agents
+    assert "engineering contract, implementer selection" in agents
 
 
 def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
@@ -145,17 +172,15 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
     }
     for field in ("Outcome:",) + tuple(field for fields in owned.values() for field in fields):
         assert field in agents
-        assert field in protocol
-    assert "`Outcome:` 只表示当前 `[WORK]` 的存活/完成事实" in agents
-    assert "transport failure 不得推导 Portfolio action" in agents
+    assert "`Outcome:` describes" in agents
+    assert "Transport failure cannot imply `PARK`" in agents
+    assert "Root status:" not in protocol
+    assert "Portfolio action:" not in protocol
+    assert "Scientific status:" not in protocol
+    assert "Engineering status:" not in protocol
     for role, skill in skills.items():
-        for field in owned[role]:
-            assert field in skill
-        for other_role, fields in owned.items():
-            if other_role == role:
-                continue
-            for field in fields:
-                assert field not in skill
+        assert all(field not in skill for fields in owned.values() for field in fields)
+        assert "Outcome:" not in skill
         for leaked_routing in ("exact idle EM", "direction CM", "Return task", "top-level requester"):
             assert leaked_routing not in skill
 
@@ -169,18 +194,28 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
         "CM | `gpt-5.6-sol` | `high`",
     ):
         assert text in agents
-        assert text in protocol
-    assert "create_thread` 必须显式传入" in protocol
+        assert text not in protocol
+    assert "显式传入 `AGENTS.md` 的 model/thinking" in protocol
     assert "`<alias>_<model>_<effort>_<task>`" in agents
     for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`pt_l_m_pro`"):
         assert example in agents
-    assert "只用于 `spawn_agent.task_name`" in agents
+    assert "Direct-leaf `spawn_agent.task_name` uses" in agents
     assert "`[a-z0-9_]+`" in agents
-    assert "实际 selected profile" in agents
+    assert "actual selected profile" in _flat(agents)
     for skill_name in ("hmasd-root-task", "hmasd-portfolio-task", "hmasd-em-task", "hmasd-cm-task"):
         skill = _read(f".agents/skills/{skill_name}/SKILL.md")
         assert "gpt-5.6-" not in skill
         assert "<alias>_<model>_<effort>_<task>" not in skill
+
+
+def test_external_pro_prompt_is_natural_language_not_control_serialization() -> None:
+    em = _read(".agents/roles/EM.md")
+    transport = _read("docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md")
+    normalized = _flat(f"{em}\n{transport}")
+    assert "cohesive natural-language `INNOVATOR` prompt" in normalized
+    assert "must not paste a `[WORK]`, `[RESULT]`" in normalized
+    assert "EM owns the complete Pro prompt" in normalized
+    assert "must not compose, summarize, append, truncate" in normalized
 
     for profile in (ROOT / ".codex/agents").glob("*.toml"):
         assert "<alias>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
@@ -190,14 +225,61 @@ def test_transport_facts_cannot_cancel_or_park_a_direction() -> None:
     agents = _read("AGENTS.md")
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
     for text in (
-        "CANCELLED 只能来自 `[CONTROL] Action: CANCEL`",
-        "transport failure 不得推导 Portfolio action",
-        "纯 transport failure 时保持同一 WORK 为 WAITING",
-        "不得仅为释放 Portfolio join 而 CANCEL",
+        "only a received `[CONTROL] Action: CANCEL`",
+        "Transport failure cannot imply `PARK`",
+        "不得为了释放 join 自行取消子 WORK",
     ):
         assert text in agents or text in protocol
     assert "Portfolio 逐一 CANCEL" not in protocol
     assert "由 Portfolio 逐一 CANCEL" not in protocol
+
+
+def test_nonterminal_work_cannot_leave_the_owner_loop() -> None:
+    agents = _flat(_read("AGENTS.md"))
+    portfolio = _flat(_read(".agents/roles/PORTFOLIO.md"))
+    em = _flat(_read(".agents/roles/EM.md"))
+    cm = _flat(_read(".agents/roles/CM.md"))
+    operator = _flat(_read(".agents/roles/EXPERIMENT_OPERATOR.md"))
+
+    for marker in (
+        "`WORKING`: the same inbound WORK is actively advancing",
+        "`WAITING_REENTRY`: the same WORK remains live",
+        "`TERMINAL_GAP`: the current WORK ended before the role's final milestone",
+        "`COMPLETE`: the current WORK reached the role's final milestone",
+        "A wait timeout, stale status, clipped/unreadable response, or lost process observation is not completion",
+        "cannot produce `DONE`, `FAILED`, or `CANCELLED` or release the target",
+    ):
+        assert marker in agents
+    assert "still-running EM keeps the existing join live" in portfolio
+    assert "running research leaf or CM" in em
+    assert "Do not return a terminal Outcome" in em
+    assert "running engineering leaf" in cm
+    assert "Do not return a terminal Outcome" in cm
+    assert "A wait timeout is not a terminal witness" in operator
+
+
+def test_work_and_leaf_returns_are_meaning_first() -> None:
+    agents = _read("AGENTS.md")
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    normalized = _flat(f"{agents}\n{protocol}")
+    for text in (
+        "self-contained natural-language task model",
+        "factual anchors after meaning",
+        "cannot substitute for the parent's judgment",
+        "conclusion-first",
+        "fork_turns=1",
+    ):
+        assert text in normalized
+    assert protocol.index("Summary: <conclusion and direct consequence>") < protocol.index(
+        "<only this role's fixed fields from AGENTS.md>"
+    )
+
+
+def test_portfolio_authority_uses_native_worktrees_not_saved_direction_projects() -> None:
+    portfolio = _read("docs/research/portfolio/PORTFOLIO.md")
+    assert "saved permanent direction project" not in portfolio
+    assert "sibling permanent worktree saved as a Codex local project" not in portfolio
+    assert "native `environment: worktree`" in _flat(portfolio)
 
 
 def test_legacy_control_programs_and_portfolio_registry_are_absent() -> None:
@@ -208,6 +290,8 @@ def test_legacy_control_programs_and_portfolio_registry_are_absent() -> None:
         "scripts/hmasd_protocol_contracts.py",
         "scripts/hmasd_external_review.py",
         "scripts/hmasd_path_policy.py",
+        "scripts/hmasd_host_compat.py",
+        "tests/hmasd_host_compat_test.py",
         "docs/project/git-path-policy-v1.json",
         "docs/research/portfolio/workflow/registry.json",
     ):
@@ -277,27 +361,27 @@ def test_research_navigation_does_not_duplicate_portfolio_state() -> None:
 
 def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
-    cycle = protocol.split("## 6. Material research cycle and External Pro", 1)[1].split(
-        "## 7. Portfolio", 1
-    )[0]
-    assert cycle.index("Mode: INNOVATOR") < cycle.index("EM → CM → EM")
-    assert cycle.index("EM → CM → EM") < cycle.index("`SYNTHESIS_READY`")
-    assert cycle.index("`SYNTHESIS_READY`") < cycle.index("Mode: CONVERGENCE")
-    assert cycle.index("Mode: CONVERGENCE") < cycle.index("`REVIEW_RESOLVED`")
-    assert "纯理论/静态证据对象可以不调用 CM" in cycle
-    assert "两个独立的 fresh transport" in cycle
-    assert "Unknown commitment 只观察不重发" in cycle
+    cycle = _flat(_read(".agents/roles/EM.md"))
+    assert cycle.index("`INNOVATOR`") < cycle.index("send a meaning-complete WORK to CM")
+    assert cycle.index("send a meaning-complete WORK to CM") < cycle.index("`SYNTHESIS_READY`")
+    assert cycle.index("`SYNTHESIS_READY`") < cycle.index("`CONVERGENCE`")
+    assert cycle.index("`CONVERGENCE`") < cycle.index("`REVIEW_RESOLVED`")
+    assert "may omit CM" in cycle
+    assert "writes one cohesive natural-language `INNOVATOR` prompt" in cycle
+    assert cycle.count("user explicitly waived that exact unsent operation") == 2
+    assert "leaf follows the explicit Agentify transport skill and sends it once" in cycle
+    assert "sent or unknown request never resends" in cycle
 
-    fanout = protocol.split("Portfolio 可以在一个当前比较性 WORK", 1)[1].split(
-        "Participant 可以为完成当前 acceptance", 1
-    )[0]
-    assert "所有已发送 EM 必须自然 terminal" in fanout
-    assert "转达该 CONTROL" in fanout
-    assert "不得自行 CANCEL" in fanout
+    fanout = _flat(protocol.split("## 5. Portfolio fan-out and join", 1)[1].split(
+        "## 6. Adjacent scientific content", 1
+    )[0])
+    assert "所有已投递 EM 自然 terminal" in fanout
+    assert "逐一转达" in fanout
+    assert "不得为了释放 join 自行取消" in fanout
     assert "不写本地 batch、queue 或 task registry" in fanout
 
     em_skill = _read(".agents/skills/hmasd-em-task/SKILL.md")
-    assert "protocol section 6" in em_skill
+    assert ".agents/roles/EM.md" in em_skill
     for global_cycle_detail in (
         "Mode: INNOVATOR", "Mode: CONVERGENCE", "SYNTHESIS_READY", "REVIEW_RESOLVED",
     ):
@@ -377,6 +461,7 @@ def test_minimal_state_schemas_define_milestones_without_hashes() -> None:
         "COMMITMENT_UNKNOWN",
         "SENT_WAITING",
         "COMPLETE",
+        "SENT_INPUT_MISMATCH",
         "SENT_UNREADABLE",
         "WAIVED",
     ]

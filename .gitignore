@@ -75,6 +75,8 @@ data/
 # Codex project skills are durable workflow definitions. Other retired
 # assistant layouts must not reappear as hidden local state.
 !/.agents/
+!/.agents/roles/
+!/.agents/roles/*.md
 !/.agents/skills/
 !/.agents/skills/**/
 !/.agents/skills/**/SKILL.md

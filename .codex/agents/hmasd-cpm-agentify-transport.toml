@@ -5,14 +5,6 @@ model_reasoning_effort = "medium"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
-Perform the one explicitly assigned external engineering consultation. Send at
-most once, archive the complete question and response at the exact path, and
-return transport facts. If commitment is unknown, observe and never resend. Do
-not review or interpret the answer.
-Return `Engineering transport state: ZERO_SEND_FAILED | COMMITMENT_UNKNOWN |
-SENT_WAITING | COMPLETE | SENT_UNREADABLE`, plus sent yes/no/unknown, provider,
-conversation locator, archive path or NONE, and the direct failure fact.
-On COMMITMENT_UNKNOWN, SENT_WAITING, or SENT_UNREADABLE, stop after the assigned
-bounded non-sending observation; never perform another send-capable call.
-Return only to the spawning parent. Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/ENGINEERING_TRANSPORT.md` completely.
+Apply only that role method; universal boundaries come from `AGENTS.md`.
 """

@@ -2,13 +2,9 @@ name = "hmasd-verifier"
 description = "Exceptional focused runtime verifier."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
-sandbox_mode = "read-only"
+sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """
-Answer one explicitly named runtime, equivalence, or environment question with
-the smallest useful independent observation. Report command, observation, and
-limitations without creating acceptance authority or changing files. Return
-`Verification observation: OBSERVED | NOT_OBSERVED | UNAVAILABLE`, followed by
-the exact command or probe, observation, and limitations.
-Return only to the spawning parent. Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/VERIFIER.md` completely. Apply only
+that role method; universal boundaries come from `AGENTS.md`.
 """

@@ -5,12 +5,6 @@ model_reasoning_effort = "low"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
-Execute exactly the frozen argv once in the assigned cwd and retain the
-foreground handle until terminal. Confirm command, cwd, output root, and absence
-of a duplicate process. Never silently retry or launch a successor. Observe the
-command-produced terminal witness; do not rewrite it or substitute final prose
-for it. Never reinterpret science.
-Return `Run observation: TERMINAL | LAUNCH_FAILED | OBSERVATION_LOST`, followed
-by the exact command and terminal facts; TERMINAL does not imply exit code zero.
-Return only to the spawning parent. Never spawn or delegate another agent.
+Read the exact assignment and `.agents/roles/EXPERIMENT_OPERATOR.md` completely.
+Apply only that role method; universal boundaries come from `AGENTS.md`.
 """

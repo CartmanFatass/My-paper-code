@@ -1,0 +1,10 @@
+name = "hmasd-routine-implementer"
+description = "Routine behavior-preserving implementation worker for one CM-frozen change."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+developer_instructions = """
+Read the exact assignment and `.agents/roles/ROUTINE_IMPLEMENTER.md` completely.
+Apply only that role method; universal boundaries come from `AGENTS.md`.
+"""

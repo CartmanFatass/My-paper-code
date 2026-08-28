@@ -42,5 +42,43 @@
       ]
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "WAITING_REENTRY"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {"properties": {"reentry_condition": {"$ref": "#/$defs/text"}}},
+      "else": {"properties": {"reentry_condition": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "COMPLETE"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {
+        "properties": {"milestone": {"const": "RUN_OR_HANDOFF_READY"}}
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "snapshot_state": {"enum": ["TERMINAL_GAP", "COMPLETE"]}
+        },
+        "required": ["snapshot_state"]
+      },
+      "then": {
+        "properties": {
+          "run": {
+            "not": {
+              "type": "object",
+              "properties": {"status": {"enum": ["RUNNING", "UNKNOWN"]}},
+              "required": ["status"]
+            }
+          }
+        }
+      }
+    }
+  ],
   "$defs": {"text": {"type": "string", "minLength": 1}}
 }

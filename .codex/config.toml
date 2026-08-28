@@ -48,6 +48,22 @@ config_file = "./agents/hmasd-research-critic.toml"
 description = "General Luna-xhigh leaf for bounded non-mainline chores."
 config_file = "./agents/hmasd-general-leaf.toml"
 
+[agents.HMASDResearchInnovator]
+description = "Independent mechanism and discriminator innovator for one EM-frozen question."
+config_file = "./agents/hmasd-research-innovator.toml"
+
+[agents.HMASDResearchPrinciplesAnalyst]
+description = "Independent MARL principles audit for one EM-frozen scientific object."
+config_file = "./agents/hmasd-research-principles-analyst.toml"
+
+[agents.HMASDImplementer]
+description = "Semantic implementation worker for one CM-frozen bounded change."
+config_file = "./agents/hmasd-implementer.toml"
+
+[agents.HMASDRoutineImplementer]
+description = "Routine behavior-preserving implementation worker for one CM-frozen change."
+config_file = "./agents/hmasd-routine-implementer.toml"
+
 [mcp_servers.agentify-desktop]
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
