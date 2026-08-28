@@ -1,23 +1,25 @@
 {
   "blockers": [
-    "Root PAUSE received at 2026-08-28T20:46:00Z while auditing and restoring omitted Agentify transport Skill/manual/role functionality.",
-    "The already-sent Innovator was still naturally generating at its 30-minute observation bound and has no complete archive yet; its exact state is SENT_WAITING."
+    "The exact already-sent Innovator tab remains present, but its legacy provider session is unavailable. Provider-visible prompt fidelity and the full natural-completion response cannot currently be recovered, so the exact transport state is SENT_UNREADABLE and the same WORK remains live.",
+    "The 2026-08-28T23:08:31.420Z RESUME permits only no-send observation of this operation. It forbids the still-PENDING Convergence operation, CM, and any other child for this retired-contract pilot."
   ],
   "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget statement about the named B1 ONLGR-versus-RAW deterministic and RAND-IID contrasts, further limited by timing-only, fixed/global-rate, operational-support, resource, and direct-value evidence. No RAW impossibility, literal hazard, causal lease or REBIND value, arbitrary k, UAV performance, variable N, or general PPO superiority claim is available.",
-  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. One Innovator operation was sent exactly once and remained in confirmed active generation at the 30-minute bound, so its transport state is SENT_WAITING with tab 0753c965-c685-452f-8287-ca42c62df095 and assignment key 2026-08-28.7-pilot-01a04a02-onlgr-innovator; no complete archive exists. Root then PAUSED the unfinished WORK. Convergence remains PENDING and no CM task or experiment was launched.",
+  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. The restored liveness and transport boundaries were read from exact origin/main commit 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81 without merging, rebasing, or changing the pilot baseline. The one Innovator operation remains the only sent operation. Strict-ledger observation found no record because it was launched under the retired legacy contract; legacy no-send observation confirms the exact tab is present but its provider session is unavailable after a runtime timeout. Exact provider-visible prompt fidelity and the full naturally completed response are unavailable, so Pro Innovator is SENT_UNREADABLE. Convergence remains PENDING and no CM task or other child was launched.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Hold this same inbound WORK. After exact Root RESUME, use only non-sending observation of the same Innovator tab/key; never resend. Do not send Convergence until Innovator is COMPLETE and synthesis is frozen, and then use cohesive natural-language research prose. Launch no CM unless a later frozen executable discriminator satisfies the original WORK.",
+  "next_action": "Continue bounded native no-send observation of only tab 0753c965-c685-452f-8287-ca42c62df095 and assignment key 2026-08-28.7-pilot-01a04a02-onlgr-innovator. Never resend, replace, continue, create or navigate a conversation, or invoke any send-capable call. Do not send Convergence or launch CM or any other child. Terminalize only after this exact operation becomes COMPLETE or SENT_INPUT_MISMATCH and no live Effect remains.",
   "next_discriminator": "Unchanged-checkpoint history-independent RAND-IID future-cadence and task-content separation, reconciled with operational marked-partition support, fixed/global-rate and degenerate/oracle headroom, marked voluntary activity, service-versus-action-cost decomposition, B2 rate-flexibility, and ROAD-versus-NEVER/SHAM direct value.",
-  "reentry_condition": "Root sends RESUME after reviewed transport restoration and exact current-operation disposition; resume only no-send observation of tab 0753c965-c685-452f-8287-ca42c62df095 with assignment key 2026-08-28.7-pilot-01a04a02-onlgr-innovator.",
+  "reentry_condition": "The exact already-sent Innovator operation becomes readable through native no-send observation and resolves COMPLETE or SENT_INPUT_MISMATCH with provider-visible prompt fidelity and the full natural-completion response disposition established.",
   "refs": [
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-scope-and-grounding.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-paused-transport-fact.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator-prompt.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B1_RESULT.json",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_RESULT.json",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_TBVUUS_R03_RESULT_V2_SCIENTIFIC_INTAKE_20260821.md",
+    "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "540337f2996778245a634151f38e4d8dc5b8254c",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180"
   ],
@@ -30,12 +32,12 @@
     },
     "pro_innovator": {
       "response": null,
-      "status": "SENT_WAITING"
+      "status": "SENT_UNREADABLE"
     },
     "reason": "Portfolio requested a fresh material reassessment of whether the marked lease-censored exposure-offset boundary link has decision-relevant value beyond RAW, fixed/never/sham-like regularization, timing-only behavior, and deterministic cadence leakage while retaining the completed ROAD result without inflated claims."
   },
-  "revision": 2,
+  "revision": 3,
   "role": "EM",
   "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-28T21:02:11.269617Z"
+  "updated_at": "2026-08-28T23:18:30.750886Z"
 }
