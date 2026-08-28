@@ -5,69 +5,45 @@ multi_agent_v2 = true
 hooks = false
 
 [agents]
-max_threads = 40
+max_threads = 8
 max_depth = 1
 interrupt_message = true
 
-[agents.HMASDProjectScout]
-description = "Read-only repository scout."
-config_file = "./agents/hmasd-project-scout.toml"
-
-[agents.HMASDCodeScout]
-description = "Read-only code/interface scout."
-config_file = "./agents/hmasd-code-scout.toml"
-
-[agents.HMASDImplementer]
-description = "Implementation worker for semantics-sensitive code."
-config_file = "./agents/hmasd-implementer.toml"
-
-[agents.HMASDRoutineImplementer]
-description = "Implementation worker for routine engineering."
-config_file = "./agents/hmasd-implementer-terra.toml"
+[agents.HMASDCMScout]
+description = "Read-only map of an unfamiliar engineering surface."
+config_file = "./agents/hmasd-cm-scout.toml"
 
 [agents.HMASDReviewer]
-description = "Optional independent code reviewer."
+description = "Independent high-impact code and protocol reviewer."
 config_file = "./agents/hmasd-reviewer.toml"
 
 [agents.HMASDVerifier]
-description = "Optional focused runtime verifier."
+description = "Exceptional focused runtime verifier."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDExperimentOperator]
-description = "Operator for one actual train/evaluate/analyze command."
+description = "Operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDCPMAgentifyTransport]
 description = "Transport for one engineering consultation."
 config_file = "./agents/hmasd-cpm-agentify-transport.toml"
 
-[agents.HMASDExplorerAgentifyTransport]
-description = "Transport for one GPT-5.6 Pro research review."
-config_file = "./agents/hmasd-explorer-agentify-transport.toml"
-
-[agents.HMASDExternalGeminiTransport]
-description = "Transport for one Gemini research consultation."
-config_file = "./agents/hmasd-external-gemini-transport.toml"
+[agents.HMASDExternalProTransport]
+description = "Transport for one Pro Innovator or Convergence review."
+config_file = "./agents/hmasd-external-pro-transport.toml"
 
 [agents.HMASDResearchScout]
-description = "Research evidence scout."
+description = "Primary and multi-source research evidence scout."
 config_file = "./agents/hmasd-research-scout.toml"
 
-[agents.HMASDResearchInnovator]
-description = "Research mechanism and discriminator innovator."
-config_file = "./agents/hmasd-research-innovator.toml"
-
 [agents.HMASDResearchCritic]
-description = "Research claim critic."
+description = "Exceptional independent research critic."
 config_file = "./agents/hmasd-research-critic.toml"
 
-[agents.HMASDResearchPrinciplesAnalyst]
-description = "Learning-dynamics and principles analyst."
-config_file = "./agents/hmasd-research-principles-analyst.toml"
-
-[agents.HMASDResearchArtifactWriter]
-description = "Writer for an exact research artifact."
-config_file = "./agents/hmasd-research-artifact-writer.toml"
+[agents.HMASDGeneralLeaf]
+description = "General Luna-xhigh leaf for bounded non-mainline chores."
+config_file = "./agents/hmasd-general-leaf.toml"
 
 [mcp_servers.agentify-desktop]
 command = "node"

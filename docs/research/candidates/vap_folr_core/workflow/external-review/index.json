@@ -1,9 +1,0 @@
-{
-  "direction_id": "vap_folr_core",
-  "revision": 1,
-  "rounds": [],
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
-  "workflow_version": "hmasd-external-review-v1",
-  "writer": "EM-vap_folr_core"
-}

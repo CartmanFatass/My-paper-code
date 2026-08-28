@@ -1,165 +1,55 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "hmasd_research_state",
-  "title": "HMASD research state",
+  "title": "HMASD current EM milestone snapshot",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "schema_version",
-    "revision",
-    "updated_at",
-    "writer",
-    "direction_id",
-    "registry_revision_seen",
-    "phase",
-    "actionable",
-    "blockers",
-    "waiting_on",
-    "direction_ref",
-    "question_sha256",
-    "evidence_set_sha256",
-    "active_round_id",
-    "active_agents",
-    "engineering_request",
-    "last_checkpoint_sha",
-    "next_action"
+    "direction", "role", "revision", "updated_at", "milestone", "status",
+    "completed_summary", "refs", "blockers", "reentry_condition", "next_action",
+    "claim_ceiling", "next_discriminator", "research_cycle"
   ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
-    "revision": { "type": "integer", "minimum": 1 },
-    "updated_at": { "$ref": "#/$defs/timestamp" },
-    "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
-    "direction_id": { "$ref": "#/$defs/direction_id" },
-    "registry_revision_seen": { "type": "integer", "minimum": 1 },
-    "phase": {
-      "type": "string",
-      "enum": [
-        "SCOPING",
-        "DIVERGENT_REVIEW",
-        "LOCAL_RESEARCH",
-        "SYNTHESIS",
-        "CONVERGENCE",
-        "ENGINEERING_REQUESTED",
-        "WAITING",
-        "IDLE",
-        "COMPLETE"
+    "direction": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,127}$"},
+    "role": {"const": "EM"},
+    "revision": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "milestone": {"enum": ["SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"]},
+    "status": {"enum": ["ACTIVE", "WAITING", "FAILED", "COMPLETE"]},
+    "completed_summary": {"type": "string", "minLength": 1},
+    "refs": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "blockers": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "reentry_condition": {"type": ["string", "null"]},
+    "next_action": {"type": "string", "minLength": 1},
+    "claim_ceiling": {"type": "string", "minLength": 1},
+    "next_discriminator": {"type": ["string", "null"]},
+    "research_cycle": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "opened_at", "reason", "pro_innovator", "pro_convergence"],
+          "properties": {
+            "label": {"$ref": "#/$defs/text"},
+            "opened_at": {"type": "string", "format": "date-time"},
+            "reason": {"$ref": "#/$defs/text"},
+            "pro_innovator": {"$ref": "#/$defs/pro_review"},
+            "pro_convergence": {"$ref": "#/$defs/pro_review"}
+          }
+        }
       ]
-    },
-    "actionable": { "type": "boolean" },
-    "blockers": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/blocker" }
-    },
-    "waiting_on": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/waiting" }
-    },
-    "direction_ref": { "$ref": "#/$defs/content_ref" },
-    "question_sha256": { "$ref": "#/$defs/sha256" },
-    "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
-    "active_round_id": {
-      "anyOf": [
-        { "type": "string", "pattern": "^[0-9a-f]{20}$" },
-        { "type": "null" }
-      ]
-    },
-    "active_agents": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/active_agent" }
-    },
-    "engineering_request": {
-      "anyOf": [{ "$ref": "#/$defs/engineering_request" }, { "type": "null" }]
-    },
-    "last_checkpoint_sha": {
-      "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
-    },
-    "next_action": { "$ref": "#/$defs/next_action" }
+    }
   },
   "$defs": {
-    "timestamp": {
-      "type": "string",
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
-    },
-    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-    "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
-    "path": {
-      "type": "string",
-      "minLength": 1,
-      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+$"
-    },
-    "content_ref": {
+    "text": {"type": "string", "minLength": 1},
+    "pro_review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["path", "sha256"],
+      "required": ["status", "response"],
       "properties": {
-        "path": { "$ref": "#/$defs/path" },
-        "sha256": { "$ref": "#/$defs/sha256" }
-      }
-    },
-    "ref": {
-      "anyOf": [
-        { "$ref": "#/$defs/content_ref" },
-        { "type": "string", "minLength": 1, "maxLength": 512 }
-      ]
-    },
-    "blocker": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["code", "observed_refs", "resume_condition_ref"],
-      "properties": {
-        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
-        "observed_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-        "resume_condition_ref": {
-          "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
-        }
-      }
-    },
-    "waiting": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "ref", "expected_terminal_states"],
-      "properties": {
-        "kind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
-        "ref": { "$ref": "#/$defs/ref" },
-        "expected_terminal_states": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" }
-        }
-      }
-    },
-    "active_agent": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["logical_identity", "generation", "assignment_id", "runtime_ref"],
-      "properties": {
-        "logical_identity": { "type": "string", "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$" },
-        "generation": { "type": "integer", "minimum": 1 },
-        "assignment_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
-        "runtime_ref": {
-          "anyOf": [
-            { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
-            { "type": "null" }
-          ]
-        }
-      }
-    },
-    "engineering_request": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["scope_ref", "acceptance_refs"],
-      "properties": {
-        "scope_ref": { "$ref": "#/$defs/ref" },
-        "acceptance_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
-      }
-    },
-    "next_action": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "input_refs"],
-      "properties": {
-        "kind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
-        "input_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
+        "status": {"enum": ["PENDING", "COMPLETE", "WAITING", "WAIVED"]},
+        "response": {"type": ["string", "null"]}
       }
     }
   }

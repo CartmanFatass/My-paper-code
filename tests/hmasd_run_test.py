@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import multiprocessing
@@ -11,7 +12,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts import hmasd_operator_result, hmasd_run, hmasd_state
+from scripts import hmasd_operator_result, hmasd_run
 
 
 SAFE_SNAPSHOT = {
@@ -337,30 +338,45 @@ def test_execute_can_emit_one_schema_valid_operator_result(
     result_path = manifest_path.parent / "operator-result.json"
     result = json.loads(result_path.read_text(encoding="utf-8"))
     hmasd_operator_result.validate_document(result)
-    manifest_ref = {
-        "path": "temp/directions/direction/exp/run/manifest.json",
-        "sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
-    }
-    stdout_ref = {
-        "path": "temp/directions/direction/exp/run/stdout.log",
-        "sha256": hashlib.sha256((manifest_path.parent / "stdout.log").read_bytes()).hexdigest(),
-    }
-    stderr_ref = {
-        "path": "temp/directions/direction/exp/run/stderr.log",
-        "sha256": hashlib.sha256((manifest_path.parent / "stderr.log").read_bytes()).hexdigest(),
-    }
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert result == {
-        "schema_version": 2,
-        "assignment_message_id": "assignment",
+        "schema_version": 1,
         "run_id": "run",
-        "operator_identity": "Operator-run",
-        "manifest_ref": manifest_ref,
-        "stdout_ref": stdout_ref,
-        "stderr_ref": stderr_ref,
+        "manifest_path": "temp/directions/direction/exp/run/manifest.json",
+        "stdout_path": "temp/directions/direction/exp/run/stdout.log",
+        "stderr_path": "temp/directions/direction/exp/run/stderr.log",
         "terminal_status": "SUCCEEDED",
         "exit_code": 0,
+        "observed_at": manifest["updated_at"],
     }
     assert "work_id" not in result
+
+
+def test_manifest_replacement_preserves_immutable_run_identity(
+    monkeypatch, tmp_path: Path
+) -> None:
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "--version")
+    current = json.loads(manifest_path.read_text(encoding="utf-8"))
+    replacement = copy.deepcopy(current)
+    replacement["revision"] += 1
+    replacement["updated_at"] = hmasd_run._utc_now()
+    replacement["cwd"] = str(tmp_path / "different-cwd")
+    with pytest.raises(hmasd_run.RunRefusal, match="immutable"):
+        hmasd_run._replace_manifest(manifest_path, replacement, current["revision"])
+
+
+def test_terminal_manifest_status_cannot_return_to_running(
+    monkeypatch, tmp_path: Path
+) -> None:
+    manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "--version")
+    assert hmasd_run.main(["execute", "--manifest", str(manifest_path)]) == 0
+    current = json.loads(manifest_path.read_text(encoding="utf-8"))
+    replacement = copy.deepcopy(current)
+    replacement["revision"] += 1
+    replacement["updated_at"] = hmasd_run._utc_now()
+    replacement["status"] = "RUNNING"
+    with pytest.raises(hmasd_run.RunRefusal, match="illegal run status transition"):
+        hmasd_run._replace_manifest(manifest_path, replacement, current["revision"])
 
 
 def test_emit_operator_result_refuses_preexisting_path_before_launch(
@@ -897,7 +913,6 @@ def test_absent_leader_with_untied_reused_pgid_is_never_signalled(
 
 def _write_promotable_pair(monkeypatch, tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     monkeypatch.setattr(hmasd_run, "ROOT", tmp_path)
-    monkeypatch.setattr(hmasd_run, "_state_validate", lambda **_kwargs: None)
     direction_id = "direction"
     run_id = "run"
     command = [sys.executable, "-c", "print('complete')"]

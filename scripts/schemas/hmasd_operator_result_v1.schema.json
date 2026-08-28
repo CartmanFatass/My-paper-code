@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_operator_result_v1",
+  "title": "HMASD Experiment Operator terminal observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "manifest_path", "stdout_path", "stderr_path",
+    "terminal_status", "exit_code", "observed_at"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"},
+    "manifest_path": {"$ref": "#/$defs/path"},
+    "stdout_path": {"$ref": "#/$defs/path"},
+    "stderr_path": {"$ref": "#/$defs/path"},
+    "terminal_status": {"enum": ["SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"]},
+    "exit_code": {"type": ["integer", "null"], "minimum": 0},
+    "observed_at": {"type": "string", "format": "date-time"}
+  },
+  "$defs": {
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.{1,2}(?:/|$))[^:]+$"
+    }
+  }
+}

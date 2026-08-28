@@ -28,6 +28,8 @@ from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Any, Iterator, Mapping, Sequence
 
+from jsonschema import Draft202012Validator
+
 if os.name == "nt":
     from ctypes import wintypes
 
@@ -40,7 +42,8 @@ except ImportError:
     import hmasd_platform
 
 ROOT = Path(__file__).resolve().parents[1]
-STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
+RUN_MANIFEST_SCHEMA = ROOT / "scripts" / "schemas" / "hmasd_run_manifest.schema.json"
+ACCEPTED_RESULT_SCHEMA = ROOT / "scripts" / "schemas" / "hmasd_accepted_result.schema.json"
 SCHEMA_VERSION = 1
 RUN_ID_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
 SHA_RE = re.compile(r"[0-9a-fA-F]{40,64}\Z")
@@ -251,12 +254,12 @@ def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
     _atomic_write_bytes(path, rendered)
 
 
-def _repo_file_ref(repo: Path, path: Path) -> dict[str, str]:
+def _repo_file_path(repo: Path, path: Path) -> str:
     try:
         relative = path.relative_to(repo).as_posix()
     except ValueError as exc:
         raise RunRefusal(5, f"operator result ref escapes cwd: {path}") from exc
-    return {"path": relative, "sha256": _sha256_file(path)}
+    return relative
 
 
 def _operator_result_document(
@@ -264,19 +267,18 @@ def _operator_result_document(
 ) -> dict[str, Any]:
     stdout_path = manifest_path.parent / str(manifest["outputs"]["stdout"])
     stderr_path = manifest_path.parent / str(manifest["outputs"]["stderr"])
-    manifest_ref = _repo_file_ref(repo, manifest_path)
-    stdout_ref = _repo_file_ref(repo, stdout_path)
-    stderr_ref = _repo_file_ref(repo, stderr_path)
+    manifest_ref = _repo_file_path(repo, manifest_path)
+    stdout_ref = _repo_file_path(repo, stdout_path)
+    stderr_ref = _repo_file_path(repo, stderr_path)
     result = {
-        "schema_version": 2,
-        "assignment_message_id": manifest["assignment_id"],
+        "schema_version": 1,
         "run_id": manifest["run_id"],
-        "operator_identity": manifest["operator_identity"],
-        "manifest_ref": manifest_ref,
-        "stdout_ref": stdout_ref,
-        "stderr_ref": stderr_ref,
+        "manifest_path": manifest_ref,
+        "stdout_path": stdout_ref,
+        "stderr_path": stderr_ref,
         "terminal_status": manifest["status"],
         "exit_code": manifest["process"]["exit_code"],
+        "observed_at": manifest["updated_at"],
     }
     hmasd_operator_result.validate_document(result)
     return result
@@ -290,6 +292,23 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise RunInputError(f"JSON object required at {path}")
     return value
+
+
+def _validate_json_schema(
+    document: Mapping[str, Any], schema_path: Path, label: str
+) -> None:
+    try:
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RunRefusal(1, f"cannot read {label} schema: {exc}") from exc
+    errors = sorted(
+        Draft202012Validator(schema).iter_errors(document),
+        key=lambda error: tuple(str(part) for part in error.absolute_path),
+    )
+    if errors:
+        error = errors[0]
+        location = ".".join(str(part) for part in error.absolute_path) or "$"
+        raise RunRefusal(4, f"{label} schema violation at {location}: {error.message}")
 
 
 def _safe_resolve(path: Path) -> Path:
@@ -643,73 +662,93 @@ def _write_claim(
         },
     )
 
-def _state_input(path: Path, document: Mapping[str, Any]) -> Path:
-    descriptor, raw_path = tempfile.mkstemp(prefix=f".{path.name}.input.", suffix=".json", dir=path.parent)
-    os.close(descriptor)
-    input_path = Path(raw_path)
-    _atomic_write_json(input_path, document)
-    return input_path
-
-
-def _state_call(
-    operation: str,
-    *,
-    kind: str,
-    path: Path,
-    writer: str,
-    document: Mapping[str, Any],
-    expected_revision: int | None = None,
-) -> None:
-    if not STATE_SCRIPT.exists():
-        raise RunRefusal(1, f"state helper is unavailable: {STATE_SCRIPT}")
-    input_path = _state_input(path, document)
-    try:
-        command = [
-            sys.executable,
-            str(STATE_SCRIPT),
-            operation,
-            "--kind",
-            kind,
-            "--path",
-            str(path),
-            "--writer",
-            writer,
-            "--input",
-            str(input_path),
-        ]
-        if expected_revision is not None:
-            command.extend(["--expected-revision", str(expected_revision)])
-        completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True, text=True)
-    finally:
-        try:
-            input_path.unlink()
-        except FileNotFoundError:
-            pass
-    if completed.returncode != 0:
-        code = completed.returncode if completed.returncode in {1, 2, 3, 4, 5, 6, 7, 8} else 1
-        message = completed.stderr.strip() or completed.stdout.strip() or f"state helper exited {code}"
-        raise RunRefusal(code, message)
-
-
 def _initialize_manifest(path: Path, document: Mapping[str, Any]) -> None:
-    _state_call(
-        "initialize",
-        kind="run_manifest",
-        path=path,
-        writer=str(document["writer"]),
-        document=document,
-    )
+    _validate_json_schema(document, RUN_MANIFEST_SCHEMA, "run manifest")
+    if path.exists():
+        raise RunRefusal(3, f"run manifest already exists: {path}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = (json.dumps(document, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    descriptor = -1
+    temporary: Path | None = None
+    try:
+        descriptor, raw = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".init", dir=path.parent)
+        temporary = Path(raw)
+        with os.fdopen(descriptor, "wb") as stream:
+            descriptor = -1
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        try:
+            os.link(temporary, path)
+        except FileExistsError as exc:
+            raise RunRefusal(3, f"run manifest already exists: {path}") from exc
+        hmasd_platform.fsync_directory(path.parent)
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        if temporary is not None:
+            try:
+                temporary.unlink()
+            except FileNotFoundError:
+                pass
+
+
+def _validate_manifest_transition(
+    current: Mapping[str, Any], next_document: Mapping[str, Any]
+) -> None:
+    mutable_fields = {
+        "revision", "updated_at", "status", "process", "resources", "observed_metrics",
+    }
+    for field, current_value in current.items():
+        if field not in mutable_fields and next_document.get(field) != current_value:
+            raise RunRefusal(4, f"run manifest.{field} is immutable")
+    for field, current_value in current["resources"].items():
+        if field != "memory_safe" and next_document["resources"].get(field) != current_value:
+            raise RunRefusal(4, f"run manifest.resources.{field} is immutable")
+    if current["resources"]["memory_safe"] is False and next_document["resources"]["memory_safe"] is not False:
+        raise RunRefusal(4, "run manifest.resources.memory_safe cannot return to true")
+
+    old_status = current["status"]
+    new_status = next_document["status"]
+    allowed = {
+        "PREPARED": {"PREPARED", "RUNNING"},
+        "RUNNING": {"RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"},
+        "SUCCEEDED": {"SUCCEEDED"},
+        "FAILED": {"FAILED"},
+        "CANCELLED": {"CANCELLED"},
+        "UNKNOWN": {"UNKNOWN"},
+    }
+    if new_status not in allowed[old_status]:
+        raise RunRefusal(4, f"illegal run status transition {old_status} -> {new_status}")
+
+    current_process = current["process"]
+    next_process = next_document["process"]
+    if old_status in {"SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"}:
+        if next_process != current_process:
+            raise RunRefusal(4, "terminal run process provenance is immutable")
+        return
+    for field, current_value in current_process.items():
+        next_value = next_process[field]
+        if field == "group_quiescent":
+            if current_value is True and next_value is not True:
+                raise RunRefusal(4, "run process.group_quiescent cannot regress")
+            continue
+        if current_value is not None and next_value != current_value:
+            raise RunRefusal(4, f"run process.{field} is append-only")
 
 
 def _replace_manifest(path: Path, document: Mapping[str, Any], expected_revision: int) -> None:
-    _state_call(
-        "replace",
-        kind="run_manifest",
-        path=path,
-        writer=str(document["writer"]),
-        document=document,
-        expected_revision=expected_revision,
-    )
+    _validate_json_schema(document, RUN_MANIFEST_SCHEMA, "run manifest")
+    current = _read_json(path)
+    _validate_json_schema(current, RUN_MANIFEST_SCHEMA, "run manifest")
+    if current.get("revision") != expected_revision:
+        raise RunRefusal(3, "run manifest revision changed")
+    if document.get("revision") != expected_revision + 1:
+        raise RunRefusal(3, "run manifest replacement revision is invalid")
+    if document.get("writer") != current.get("writer"):
+        raise RunRefusal(5, "run manifest writer changed")
+    _validate_manifest_transition(current, document)
+    _atomic_write_json(path, document)
 
 
 
@@ -2399,30 +2438,6 @@ def _tracked_result_path(raw: str, *, direction_id: str, root: Path) -> Path:
     return resolved
 
 
-def _state_validate(*, kind: str, path: Path) -> None:
-    if not STATE_SCRIPT.exists():
-        raise RunRefusal(1, f"state helper is unavailable: {STATE_SCRIPT}")
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(STATE_SCRIPT),
-            "validate",
-            "--kind",
-            kind,
-            "--path",
-            str(path),
-        ],
-        cwd=ROOT,
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if completed.returncode != 0:
-        code = completed.returncode if completed.returncode in {1, 2, 3, 4, 5, 6, 7, 8} else 1
-        message = completed.stderr.strip() or completed.stdout.strip() or f"state helper exited {code}"
-        raise RunRefusal(code, message)
-
-
 def _promote(args: argparse.Namespace) -> int:
     manifest_path, root, manifest = _load_manifest(args.manifest)
     _verify_manifest_provenance(manifest_path, root, manifest)
@@ -2441,6 +2456,7 @@ def _promote(args: argparse.Namespace) -> int:
     if not result_json_path.is_file() or not result_markdown_path.is_file():
         raise RunInputError("promote requires existing EM-authored result files")
     result = _read_json(result_json_path)
+    _validate_json_schema(result, ACCEPTED_RESULT_SCHEMA, "accepted result")
     if result.get("direction_id") != direction_id:
         raise RunRefusal(4, "result direction does not match manifest")
     result_id = _validate_identifier(result.get("result_id"), "result_id")
@@ -2494,7 +2510,6 @@ def _promote(args: argparse.Namespace) -> int:
         raise RunInputError(f"result Markdown is unreadable: {exc}") from exc
     if not result.get("metrics") or not conclusion.strip():
         raise RunInputError("result requires selected metric provenance and a conclusion")
-    _state_validate(kind="accepted_result", path=result_json_path)
     return 0
 
 
