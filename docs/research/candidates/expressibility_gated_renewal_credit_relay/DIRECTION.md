@@ -41,6 +41,23 @@ exactly no bounded-utility or fixed-token allocation gain over ordinary GAE.
 No end-to-end variable-`k`, fixed-`k` superiority, multi-update,
 learned-estimator, UAV, or general credit claim is available.
 
+At `SYNTHESIS_READY`, the fresh cycle's evidence-grounded preliminary judgment
+is that no new executable observation is warranted. B1 already exposed the
+deployment-relevant intact-versus-GAE allocation and bounded-utility contrast,
+which was exactly zero at every root. Its positive intact-versus-cut contrast
+does not identify waiter identity because the registered cut swaps type and
+generic cue supervision; a cue-preserving within-type cut is numerically inert
+because the retained interaction depends only on type and lag. A meaningful
+identity-only test therefore needs a genuinely different, prospectively
+motivated host with multiple consequence-distinct waiters in the same generic
+pre-action context and independent oracle headroom over ordinary GAE.
+
+The preliminary Portfolio recommendation is `PARK`, with reentry only after
+those two host prerequisites are established independently of relay-credit
+outcomes. The traceable evidence packet is
+`evidence/2026-08-28-7-pilot-evidence-packet.md`; this judgment remains subject
+to the cycle's fresh independent Convergence review.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
