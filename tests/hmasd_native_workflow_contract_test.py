@@ -46,7 +46,7 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
     assert "Action: PAUSE | RESUME | CANCEL" in protocol
     assert "Action: PAUSE | RESUME | CANCEL | REPLACE | RELOAD" not in protocol
     assert "同时最多持有一个 unfinished inbound WORK" in protocol
-    assert "所有已发送 EM 必须 terminal" in protocol
+    assert "所有已发送 EM 必须自然 terminal" in protocol
     assert "initial prompt 本身就是完整 `[WORK]`" in protocol
     assert "同一 direction 同时只有一个 Git-visible writer phase" in protocol
     assert "Codex 原生 `environment: worktree`" in protocol
@@ -126,6 +126,78 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
     assert general["model"] == "gpt-5.6-luna"
     assert general["model_reasoning_effort"] == "xhigh"
     assert "Never spawn" in general["developer_instructions"]
+
+
+def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
+    agents = _read("AGENTS.md")
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    skills = {
+        "Root": _read(".agents/skills/hmasd-root-task/SKILL.md"),
+        "Portfolio": _read(".agents/skills/hmasd-portfolio-task/SKILL.md"),
+        "EM": _read(".agents/skills/hmasd-em-task/SKILL.md"),
+        "CM": _read(".agents/skills/hmasd-cm-task/SKILL.md"),
+    }
+    owned = {
+        "Root": ("Root status:", "Integration status:"),
+        "Portfolio": ("Portfolio action:", "Capacity action:"),
+        "EM": ("Scientific status:", "Decision impact:", "Recommendation:", "Pro Innovator:", "Pro Convergence:"),
+        "CM": ("Engineering status:", "Observation status:", "Verification status:", "Commit:"),
+    }
+    for field in ("Outcome:",) + tuple(field for fields in owned.values() for field in fields):
+        assert field in agents
+        assert field in protocol
+    assert "`Outcome:` 只表示当前 `[WORK]` 的存活/完成事实" in agents
+    assert "transport failure 不得推导 Portfolio action" in agents
+    for role, skill in skills.items():
+        for field in owned[role]:
+            assert field in skill
+        for other_role, fields in owned.items():
+            if other_role == role:
+                continue
+            for field in fields:
+                assert field not in skill
+        for leaked_routing in ("exact idle EM", "direction CM", "Return task", "top-level requester"):
+            assert leaked_routing not in skill
+
+
+def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
+    agents = _read("AGENTS.md")
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    for text in (
+        "Portfolio | `gpt-5.6-sol` | `max`",
+        "EM | `gpt-5.6-sol` | `max`",
+        "CM | `gpt-5.6-sol` | `high`",
+    ):
+        assert text in agents
+        assert text in protocol
+    assert "create_thread` 必须显式传入" in protocol
+    assert "`<alias>_<model>_<effort>_<task>`" in agents
+    for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`pt_l_m_pro`"):
+        assert example in agents
+    assert "只用于 `spawn_agent.task_name`" in agents
+    assert "`[a-z0-9_]+`" in agents
+    assert "实际 selected profile" in agents
+    for skill_name in ("hmasd-root-task", "hmasd-portfolio-task", "hmasd-em-task", "hmasd-cm-task"):
+        skill = _read(f".agents/skills/{skill_name}/SKILL.md")
+        assert "gpt-5.6-" not in skill
+        assert "<alias>_<model>_<effort>_<task>" not in skill
+
+    for profile in (ROOT / ".codex/agents").glob("*.toml"):
+        assert "<alias>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
+
+
+def test_transport_facts_cannot_cancel_or_park_a_direction() -> None:
+    agents = _read("AGENTS.md")
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    for text in (
+        "CANCELLED 只能来自 `[CONTROL] Action: CANCEL`",
+        "transport failure 不得推导 Portfolio action",
+        "纯 transport failure 时保持同一 WORK 为 WAITING",
+        "不得仅为释放 Portfolio join 而 CANCEL",
+    ):
+        assert text in agents or text in protocol
+    assert "Portfolio 逐一 CANCEL" not in protocol
+    assert "由 Portfolio 逐一 CANCEL" not in protocol
 
 
 def test_legacy_control_programs_and_portfolio_registry_are_absent() -> None:
@@ -219,15 +291,17 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     fanout = protocol.split("Portfolio 可以在一个当前比较性 WORK", 1)[1].split(
         "Participant 可以为完成当前 acceptance", 1
     )[0]
-    assert "所有已发送 EM 必须 terminal" in fanout
-    assert "逐一 CANCEL 并收到" in fanout
+    assert "所有已发送 EM 必须自然 terminal" in fanout
+    assert "转达该 CONTROL" in fanout
+    assert "不得自行 CANCEL" in fanout
     assert "不写本地 batch、queue 或 task registry" in fanout
 
     em_skill = _read(".agents/skills/hmasd-em-task/SKILL.md")
-    assert em_skill.index("Mode: INNOVATOR") < em_skill.index("direction CM")
-    assert em_skill.index("direction CM") < em_skill.index("`SYNTHESIS_READY`")
-    assert em_skill.index("`SYNTHESIS_READY`") < em_skill.index("Mode: CONVERGENCE")
-    assert em_skill.index("Mode: CONVERGENCE") < em_skill.index("`REVIEW_RESOLVED`")
+    assert "protocol section 6" in em_skill
+    for global_cycle_detail in (
+        "Mode: INNOVATOR", "Mode: CONVERGENCE", "SYNTHESIS_READY", "REVIEW_RESOLVED",
+    ):
+        assert global_cycle_detail not in em_skill
 
 
 def test_sensitive_direction_science_boundaries_survive_metadata_cleanup() -> None:
@@ -292,9 +366,20 @@ def test_minimal_state_schemas_define_milestones_without_hashes() -> None:
         rendered = json.dumps(schema)
         assert "sha256" not in rendered.lower()
         assert schema["additionalProperties"] is False
-        assert schema["properties"]["status"]["enum"] == [
-            "ACTIVE", "WAITING", "FAILED", "CANCELLED", "COMPLETE"
+        assert "status" not in schema["properties"]
+        assert schema["properties"]["snapshot_state"]["enum"] == [
+            "WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"
         ]
+    pro_states = research["$defs"]["pro_review"]["properties"]["status"]["enum"]
+    assert pro_states == [
+        "PENDING",
+        "ZERO_SEND_FAILED",
+        "COMMITMENT_UNKNOWN",
+        "SENT_WAITING",
+        "COMPLETE",
+        "SENT_UNREADABLE",
+        "WAIVED",
+    ]
 
 
 def test_science_cli_is_observation_only() -> None:

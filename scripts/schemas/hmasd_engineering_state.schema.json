@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "direction", "role", "revision", "updated_at", "milestone", "status",
+    "direction", "role", "revision", "updated_at", "milestone", "snapshot_state",
     "completed_summary", "refs", "blockers", "reentry_condition", "next_action",
     "worktree", "branch", "changed_paths", "verification_summary", "run"
   ],
@@ -15,7 +15,7 @@
     "revision": {"type": "integer", "minimum": 1},
     "updated_at": {"type": "string", "format": "date-time"},
     "milestone": {"enum": ["SCOPE_FROZEN", "CANDIDATE_READY", "REVIEW_RESOLVED", "RUN_OR_HANDOFF_READY"]},
-    "status": {"enum": ["ACTIVE", "WAITING", "FAILED", "CANCELLED", "COMPLETE"]},
+    "snapshot_state": {"enum": ["WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"]},
     "completed_summary": {"type": "string", "minLength": 1},
     "refs": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
     "blockers": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},

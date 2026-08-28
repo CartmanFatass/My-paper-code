@@ -16,21 +16,29 @@ from typing import Any, Mapping, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTION_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,127}\Z")
-STATUSES = {"ACTIVE", "WAITING", "FAILED", "CANCELLED", "COMPLETE"}
+SNAPSHOT_STATES = {"WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"}
 MILESTONES = {
     "research": {"SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"},
     "engineering": {"SCOPE_FROZEN", "CANDIDATE_READY", "REVIEW_RESOLVED", "RUN_OR_HANDOFF_READY"},
 }
 ROLES = {"research": "EM", "engineering": "CM"}
 COMMON_FIELDS = {
-    "direction", "role", "revision", "updated_at", "milestone", "status",
+    "direction", "role", "revision", "updated_at", "milestone", "snapshot_state",
     "completed_summary", "refs", "blockers", "reentry_condition", "next_action",
 }
 FIELDS = {
     "research": COMMON_FIELDS | {"claim_ceiling", "next_discriminator", "research_cycle"},
     "engineering": COMMON_FIELDS | {"worktree", "branch", "changed_paths", "verification_summary", "run"},
 }
-PRO_STATUSES = {"PENDING", "COMPLETE", "WAITING", "WAIVED"}
+PRO_STATUSES = {
+    "PENDING",
+    "ZERO_SEND_FAILED",
+    "COMMITMENT_UNKNOWN",
+    "SENT_WAITING",
+    "COMPLETE",
+    "SENT_UNREADABLE",
+    "WAIVED",
+}
 RUN_STATUSES = {"PREPARED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"}
 MILESTONE_ORDER = {
     kind: {milestone: index for index, milestone in enumerate(order)}
@@ -85,6 +93,8 @@ def _validate_pro_review(value: Any, label: str) -> None:
     _nullable_text(value["response"], f"{label}.response")
     if value["status"] == "COMPLETE" and value["response"] is None:
         raise StateError(f"{label}.response is required when COMPLETE")
+    if value["status"] != "COMPLETE" and value["response"] is not None:
+        raise StateError(f"{label}.response is only allowed when COMPLETE")
 
 
 def _validate_cycle(value: Any) -> None:
@@ -100,7 +110,7 @@ def _validate_cycle(value: Any) -> None:
     _validate_pro_review(value["pro_convergence"], "research_cycle.pro_convergence")
     innovator = value["pro_innovator"]["status"]
     convergence = value["pro_convergence"]["status"]
-    if convergence in {"COMPLETE", "WAIVED", "WAITING"} and innovator not in {"COMPLETE", "WAIVED"}:
+    if convergence != "PENDING" and innovator not in {"COMPLETE", "WAIVED"}:
         raise StateError("Pro Convergence cannot start before Pro Innovator is resolved")
 
 
@@ -135,19 +145,19 @@ def validate_document(kind: str, document: Mapping[str, Any]) -> dict[str, Any]:
     _timestamp(document["updated_at"], "updated_at")
     if document["milestone"] not in MILESTONES[kind]:
         raise StateError("milestone is invalid")
-    if document["status"] not in STATUSES:
-        raise StateError("status is invalid")
+    if document["snapshot_state"] not in SNAPSHOT_STATES:
+        raise StateError("snapshot_state is invalid")
     _text(document["completed_summary"], "completed_summary")
     _text_list(document["refs"], "refs")
     _text_list(document["blockers"], "blockers")
     _nullable_text(document["reentry_condition"], "reentry_condition")
     _text(document["next_action"], "next_action")
-    if document["status"] == "WAITING" and document["reentry_condition"] is None:
-        raise StateError("WAITING requires reentry_condition")
-    if document["status"] != "WAITING" and document["reentry_condition"] is not None:
-        raise StateError(f"{document['status']} requires null reentry_condition")
-    if document["status"] in {"ACTIVE", "CANCELLED", "COMPLETE"} and document["blockers"]:
-        raise StateError(f"{document['status']} requires empty blockers")
+    if document["snapshot_state"] == "WAITING_REENTRY" and document["reentry_condition"] is None:
+        raise StateError("WAITING_REENTRY requires reentry_condition")
+    if document["snapshot_state"] != "WAITING_REENTRY" and document["reentry_condition"] is not None:
+        raise StateError(f"{document['snapshot_state']} requires null reentry_condition")
+    if document["snapshot_state"] in {"WORKING", "COMPLETE"} and document["blockers"]:
+        raise StateError(f"{document['snapshot_state']} requires empty blockers")
     if kind == "research":
         _text(document["claim_ceiling"], "claim_ceiling")
         _nullable_text(document["next_discriminator"], "next_discriminator")
@@ -197,8 +207,19 @@ def _pro_transition(current: Mapping[str, Any], next_value: Mapping[str, Any], l
     old = current["status"]
     new = next_value["status"]
     allowed = {
-        "PENDING": {"PENDING", "WAITING", "COMPLETE", "WAIVED"},
-        "WAITING": {"WAITING", "COMPLETE", "WAIVED"},
+        "PENDING": {
+            "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
+            "COMPLETE", "SENT_UNREADABLE", "WAIVED",
+        },
+        "ZERO_SEND_FAILED": {
+            "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE",
+            "SENT_UNREADABLE", "WAIVED",
+        },
+        "COMMITMENT_UNKNOWN": {
+            "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_UNREADABLE",
+        },
+        "SENT_WAITING": {"SENT_WAITING", "COMPLETE", "SENT_UNREADABLE"},
+        "SENT_UNREADABLE": {"SENT_UNREADABLE", "COMPLETE"},
         "COMPLETE": {"COMPLETE"},
         "WAIVED": {"WAIVED"},
     }
@@ -226,6 +247,15 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
                 _pro_transition(old_cycle["pro_innovator"], new_cycle["pro_innovator"], "Pro Innovator")
                 _pro_transition(old_cycle["pro_convergence"], new_cycle["pro_convergence"], "Pro Convergence")
         if is_new_cycle:
+            if old_cycle is not None:
+                unresolved = {"COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"}
+                if any(
+                    old_cycle[field]["status"] in unresolved
+                    for field in ("pro_innovator", "pro_convergence")
+                ):
+                    raise StateError(
+                        "a new research cycle cannot discard an unresolved external operation"
+                    )
             if next_document["milestone"] != "SCOPE_FROZEN":
                 raise StateError("a new research cycle must start at SCOPE_FROZEN")
             for field in ("pro_innovator", "pro_convergence"):
@@ -235,7 +265,7 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
             raise StateError("research milestone cannot regress within a cycle")
     elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
         if not (
-            current["status"] in {"COMPLETE", "FAILED", "CANCELLED"}
+            current["snapshot_state"] in {"COMPLETE", "TERMINAL_GAP"}
             and next_document["milestone"] == "SCOPE_FROZEN"
         ):
             raise StateError("engineering milestone cannot regress within a work slice")

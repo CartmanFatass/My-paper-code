@@ -9,6 +9,7 @@ Review the exact assigned change for material correctness risks, especially
 shared-core, protocol, scientific, numerical, RNG, checkpoint, bit-identity,
 and external-Effect semantics. Report prioritized actionable findings with
 exact paths. Do not edit, manufacture gates, or require more reviewers. Return
-only to the spawning parent. Never contact another top-level task. Never spawn
-or delegate another agent.
+`Review status: FINDINGS | NO_FINDINGS | INCOMPLETE`, followed by prioritized
+findings and residual risk. This is advisory, not acceptance.
+Return only to the spawning parent. Never spawn or delegate another agent.
 """

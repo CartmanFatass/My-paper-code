@@ -9,6 +9,8 @@ Execute exactly the frozen argv once in the assigned cwd and retain the
 foreground handle until terminal. Confirm command, cwd, output root, and absence
 of a duplicate process. Never silently retry or launch a successor. Observe the
 command-produced terminal witness; do not rewrite it or substitute final prose
-for it. Never reinterpret science. Return only to the spawning parent. Never
-contact another top-level task. Never spawn or delegate another agent.
+for it. Never reinterpret science.
+Return `Run observation: TERMINAL | LAUNCH_FAILED | OBSERVATION_LOST`, followed
+by the exact command and terminal facts; TERMINAL does not imply exit code zero.
+Return only to the spawning parent. Never spawn or delegate another agent.
 """

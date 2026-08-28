@@ -5,41 +5,26 @@ description: Use when a top-level HMASD CM direction task receives a bounded imp
 
 # HMASD CM Task
 
-Read `docs/project/WORKFLOW_PROTOCOL.md`, native WORK/CONTROL history, direction authority, and current engineering state if it exists. CM implements and verifies ordinary work in its main session.
+Read `docs/project/WORKFLOW_PROTOCOL.md`, native WORK/CONTROL history, direction authority, and the
+current engineering snapshot. CM owns direction implementation, focused tests, ordinary runtime
+checks, engineering interpretation, milestone state, and Git closure. It does not make scientific
+or Portfolio judgments.
 
-## Surface first
+For a nontrivial unfamiliar surface, use CM Scout unless the current milestone already contains a
+trustworthy map. Implement directly in this main session; there is no Implementer leaf. Use General
+leaf only for weakly coupled chores, Reviewer for the high-impact semantic boundaries defined by
+the protocol, Verifier for one exceptional independent runtime question, and Operator for one exact
+result-bearing command. Preserve unrelated work and the protocol's single-writer Git boundary.
 
-For a nontrivial unfamiliar code change, call `hmasd-cm-scout` before implementation unless the current milestone/state already has a trustworthy surface map. Freeze affected files, symbols, callers, consumers, tests, shared boundaries, semantics, Effects, and owned paths. Reuse a current map; do not respawn Scout mechanically.
+CM's RESULT slice is exactly:
 
-## Direct implementation
+- `Engineering status: IN_PROGRESS | IMPLEMENTED | UNCHANGED | BLOCKED | NOT_REACHED`
+- `Observation status: IN_PROGRESS | OBSERVED | NOT_OBSERVED | NOT_REQUIRED`
+- `Verification status: IN_PROGRESS | SATISFIED | UNSATISFIED | NOT_RUN`
+- `Commit: <sha or NONE>`
 
-CM directly edits code, writes focused tests, diagnoses failures, performs ordinary runtime checks, interprets engineering evidence, updates state, and closes Git. Do not create an Implementer leaf.
-
-CM is the sole Git-visible writer for the direction from acceptance of the EM WORK until terminal
-RESULT. Fast-forward CM's native task branch to the exact EM handoff commit before editing. If that
-is not a fast-forward, stop and return a terminal blocker to the current `Return task`; never bypass
-the requester, cherry-pick, rebase, or rewrite history. Modify and commit only owned paths, then
-return the known commit and diff. Do not
-create per-leaf worktrees or worker branches. When CM returns terminal, writer ownership returns to
-EM only after EM fast-forwards to the CM terminal commit.
-
-Use `hmasd-general-leaf` for weakly coupled chores: fixture generation, formatting, file conversion, dependency download, mechanical inventory, isolated documentation cleanup, or a bounded orthogonal check. Give exact inputs, owned paths, allowed Effects, output shape, and stop condition. CM remains responsible for reviewing and integrating the result.
-
-## Specialist leaves
-
-- Reviewer is mandatory for shared-core or scientific/numerical/RNG/checkpoint/bit-identity/external-Effect semantic change; optional for ordinary direction-local code.
-- Verifier is exceptional and answers one independent runtime/equivalence question that CM tests and review cannot answer sufficiently.
-- Experiment Operator receives one exact frozen result-bearing argv/cwd/output/stop condition and runs it once.
-- External engineering transport performs one explicitly authorized send-once consultation.
-
-## Milestone and return
-
-Use `SCOPE_FROZEN`, `CANDIDATE_READY`, `REVIEW_RESOLVED`, and `RUN_OR_HANDOFF_READY`. Update state only when context loss would repeat costly work or change a material judgment; individual tests, leaf returns, and tool success are not milestones.
-
-Preserve unrelated edits. Do not silently change scientific, numerical, RNG, checkpoint,
-bit-identity, or Effect semantics. Return `[RESULT]` directly to the `Return task` that issued the
-current WORK; normally this is the direction EM. Operator terminal facts always return to CM first.
-Return direct observation, exact commands/tests, artifacts, limitations, and technical failure facts;
-never convert test success into scientific acceptance. A negative scientific observation is still a
-completed WORK when the frozen engineering contract was satisfied.
-For user-direct input, answer the user in the current task without inventing a return ID.
+Apply the shared `Outcome:` semantics from the protocol without redefining them here. Test success
+is engineering evidence, never scientific acceptance. Update the one milestone snapshot only when
+context loss would repeat costly work or alter a material engineering judgment. Complete the
+current interaction through the protocol-defined return transport or answer a user-direct request
+here.

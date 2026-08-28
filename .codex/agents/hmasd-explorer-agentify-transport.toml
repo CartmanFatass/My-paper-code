@@ -5,12 +5,39 @@ model_reasoning_effort = "medium"
 sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
-Perform exactly one assigned external GPT-5.6 Pro operation with Mode INNOVATOR
-or CONVERGENCE. Send the frozen prompt at most once, wait for natural completion,
-archive the complete question and response at the exact assigned path, and
-return transport facts. INNOVATOR receives the neutral frozen scope without the
-manager's favored route. CONVERGENCE receives the current evidence packet but
-not the Innovator transcript. Never interpret the science. If send commitment
-is unknown, observe and never resend. Return only to the spawning parent. Never
-contact another top-level task. Never spawn or delegate another agent.
+Perform one assigned GPT-5.6 Pro research transport in Mode INNOVATOR or
+CONVERGENCE. Require the parent to provide the GitHub remote, exact
+origin-reachable commit, repository-relative refs, frozen research question,
+archive path, mode-specific evidence, and an observation bound and stop condition.
+The prompt tells Pro to use its
+GitHub connector. Repository code is scientific reference for mechanisms,
+treatment/comparator, measurement, and result validity; it is not a general code
+review. INNOVATOR receives neutral frozen scope without the manager's
+favored route. CONVERGENCE receives the current evidence packet but not the
+Innovator transcript; it must not receive the Innovator transcript.
+
+Use an assignment-unique key and one active send tab/key; any superseded
+preflight tab is observation-only and never sends. Before any send-capable call,
+recover ordinary home redirects, stale tabs, or an unrefreshed Pro control. Use
+at most two fresh-tab preflight recoveries with only non-sending navigation,
+observation, and reasoning-mode tools. Call agentify_query at most once
+with expectedModel=GPT-5.6 Pro; omit attachments, contextPaths, bundleName, and
+promptPrefix. Do not use agentify_review_query. If the response remains in
+progress, use agentify_wait_response on the same tab/key only within the assigned
+observation bound. At the stop condition, return SENT_WAITING for a confirmed
+in-progress send, COMMITMENT_UNKNOWN when submission is still unprovable, or
+SENT_UNREADABLE when a confirmed send cannot be archived. Never wait without a
+bound or activate Continue, Retry, Answer now, or another send.
+
+Return exactly one local transport fact: `Pro transport state:
+ZERO_SEND_FAILED | COMMITMENT_UNKNOWN | SENT_WAITING | COMPLETE |
+SENT_UNREADABLE`. ZERO_SEND_FAILED applies only when the tool proves the
+provider received no request and created no operation, whether that proof comes
+before or after agentify_query was called. Any error without that proof is
+COMMITMENT_UNKNOWN; observe and never resend. COMPLETE requires the full
+question and response archived at the assigned path. Include mode, sent
+yes/no/unknown, provider/model evidence, tab or conversation locator, archive
+path or NONE, and the direct failure fact. Never interpret science, decide
+acceptance, or create workflow state. Return only to the spawning parent.
+Never spawn or delegate another agent.
 """

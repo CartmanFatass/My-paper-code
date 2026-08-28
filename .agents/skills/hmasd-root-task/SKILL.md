@@ -5,41 +5,21 @@ description: Use when the top-level HMASD Root task receives user control, a sha
 
 # HMASD Root Task
 
-Read `docs/project/WORKFLOW_PROTOCOL.md` completely before acting. Root is the user and shared-core owner; it does not absorb ordinary direction science or engineering.
+Read `docs/project/WORKFLOW_PROTOCOL.md` completely before acting. Root owns user control,
+shared-core changes, task conflicts, protocol repair, and cross-direction Git integration. It does
+not absorb ordinary Portfolio, scientific, or direction-engineering judgment.
 
-## Turn contract
+Inspect the exact native task/history and Git facts and complete authorized Root work directly.
+Freeze Root-owned outbound content and perform outbound/return transport only as defined by the
+protocol. Use a general leaf
+only for a weakly coupled chore and an independent Reviewer for high-impact shared-core or protocol
+changes. Preserve unrelated work and close only Root-owned Git paths.
 
-1. Inspect native task/history facts and the exact repository paths in scope.
-2. Separate Root work from direction work. Dispatch a complete `[WORK]` directly to the exact
-   Portfolio, EM, or CM task that owns it, using native task ID/history facts.
-3. Complete authorized shared-core changes directly, preserving unrelated edits and scientific semantics.
-4. Offload bounded, weakly coupled chores—downloads, inventories, formatting, fixture preparation, or isolated checks—to `hmasd-general-leaf` with exact inputs, owned paths, Effects, output shape, and stop condition.
-5. Use a Reviewer for high-impact shared-core, protocol, scientific/numerical/RNG/checkpoint/bit-identity, or external-Effect changes.
-6. Before final, run proportional checks, close the requested Git boundary, and return `[RESULT]`
-   directly to the `Return task` when this work came from another top-level task.
+Root's RESULT slice is exactly:
 
-## Boundaries
+- `Root status: IN_PROGRESS | CHANGED | UNCHANGED | BLOCKED`
+- `Integration status: IN_PROGRESS | INTEGRATED | NOT_INTEGRATED | NOT_APPLICABLE`
 
-- Trust Codex task IDs and history; do not create authentication, envelope, receipt, registry, retry, or release machinery.
-- Do not make Portfolio lifecycle judgments or EM/CM domain judgments.
-- A general leaf never replaces the specialist Scout, Reviewer, Verifier, Operator, Research Scout, or transport role.
-- Never reset, checkout, delete, stage, commit, or push another task's work.
-- `C:/Projects/HMASD` remains Root's primary `main` checkout. Create Portfolio, EM, and CM as
-  native Codex top-level worktree tasks from the saved HMASD project and an exact existing branch;
-  never require a direction to be saved as another project, create a local mapping registry, or
-  give a leaf its own worktree.
-- When a current-protocol participant does not exist, the `create_thread` initial prompt is the
-  complete `[WORK]`. Never create an empty task and send the same WORK again; never reuse archived
-  participants or address a setup-only client ID.
-
-## Quick reference
-
-| Situation | Action |
-| --- | --- |
-| Shared-core/user material | Root handles directly |
-| Lifecycle/priority/capacity | Direct `[WORK]` to Portfolio |
-| Direction science | Direct `[WORK]` to the direction EM |
-| Direction engineering | Direct `[WORK]` to the direction CM |
-| Weakly coupled chore | General Luna-xhigh leaf |
-| High-impact shared-core change | Independent Reviewer |
-| Native task capability absent | Stop and report |
+Apply the shared `Outcome:` semantics from the protocol without redefining them here. Complete the
+current interaction through the protocol-defined return transport or answer a user-direct request
+in this task.
