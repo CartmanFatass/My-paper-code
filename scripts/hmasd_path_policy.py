@@ -82,7 +82,7 @@ def resolve_repo_path(
 
 
 def path_is_owned(path: str, owned_paths: Sequence[str]) -> bool:
-    """Apply Session Envelope v2 exact-path / trailing-slash-prefix ownership."""
+    """Apply Session Envelope v3 exact-path / trailing-slash-prefix ownership."""
 
     normalized = normalize_repo_path(path, label="requested path").casefold()
     for index, raw in enumerate(owned_paths):

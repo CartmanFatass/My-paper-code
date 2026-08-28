@@ -6,7 +6,7 @@ import argparse, datetime, hashlib, json, subprocess, sys
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-PROTOCOL_EPOCH = 2
+PROTOCOL_EPOCH = 3
 EXACT_PATHS = {
     ".gitattributes",
     "AGENTS.md",

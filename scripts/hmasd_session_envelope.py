@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify HMASD v2 session-envelope transport artifacts."""
+"""Build and verify HMASD v3 session-envelope transport artifacts."""
 from __future__ import annotations
 
 import argparse
@@ -19,7 +19,7 @@ except ImportError:
     import hmasd_control_release, hmasd_path_policy, hmasd_state
 
 
-EPOCH = 2
+EPOCH = 3
 DIRECTION = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}")
 MANAGER = re.compile(r"(EM|CM)/([a-z0-9][a-z0-9_-]{1,63})/g[1-9][0-9]*")
 SHA256 = re.compile(r"[0-9a-f]{64}")
@@ -56,11 +56,11 @@ RELEASE_FIELDS = {
 }
 ACTIONS = {"PAUSE", "RESUME", "OVERRIDE", "CANCEL", "REANCHOR"}
 LINE = re.compile(
-    r"HMASD_SESSION_ENVELOPE_V2 "
+    r"HMASD_SESSION_ENVELOPE_V3 "
     r"kind=(?P<kind>ASSIGNMENT|RETURN|PORTFOLIO_RETURN|CONTROL_NOTICE) "
     r"direction=(?P<direction>\S+) from=(?P<sender>\S+) to=(?P<recipient>\S+) "
     r"next=(?P<next>\S+) id=(?P<id>[0-9a-f-]{36}) "
-    r"sha256=(?P<sha>[0-9a-f]{64}) locator=(?P<locator>\S+)"
+    r"locator=(?P<locator>\S+)"
 )
 
 
@@ -82,10 +82,6 @@ def canonical_bytes(value: Mapping[str, Any]) -> bytes:
     return json.dumps(
         value, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
     ).encode("utf-8")
-
-
-def body_sha(value: Mapping[str, Any]) -> str:
-    return hashlib.sha256(canonical_bytes(value)).hexdigest()
 
 
 def normalized_path(value: Any, label: str, *, prefix: bool = False) -> str:
@@ -194,7 +190,7 @@ def release_record(value: Any, *, require_publishable: bool = False) -> dict[str
     if not isinstance(release_id, str) or SHA256.fullmatch(release_id) is None:
         raise EnvelopeError("control release control_release_id must be 64 lowercase hex")
     if value["protocol_epoch"] != EPOCH or isinstance(value["protocol_epoch"], bool):
-        raise EnvelopeError("control release protocol_epoch must be 2")
+        raise EnvelopeError(f"control release protocol_epoch must be {EPOCH}")
     for key in ("head", "origin_main"):
         item = value[key]
         if item is not None and (not isinstance(item, str) or GIT_SHA.fullmatch(item) is None):
@@ -544,9 +540,9 @@ def make(
     body: dict[str, Any], release: Mapping[str, Any], reply: str | None,
 ) -> dict[str, Any]:
     return {
-        "schema_version": 2, "protocol_epoch": 2, "message_id": str(uuid.uuid4()),
+        "schema_version": 3, "protocol_epoch": EPOCH, "message_id": str(uuid.uuid4()),
         "direction_id": direction, "sender": sender, "recipient": recipient,
-        "kind": kind, "reply_to": reply, "body_sha256": body_sha(body),
+        "kind": kind, "reply_to": reply,
         "control_release": dict(release), "body": body,
     }
 
@@ -569,9 +565,9 @@ def next_role(env: Mapping[str, Any]) -> str:
 
 def message(env: Mapping[str, Any], locator: str) -> str:
     return (
-        f"HMASD_SESSION_ENVELOPE_V2 kind={env['kind']} direction={env['direction_id']} "
+        f"HMASD_SESSION_ENVELOPE_V3 kind={env['kind']} direction={env['direction_id']} "
         f"from={env['sender']['identity']} to={env['recipient']['identity']} "
-        f"next={next_role(env)} id={env['message_id']} sha256={env['body_sha256']} "
+        f"next={next_role(env)} id={env['message_id']} "
         f"locator={locator}"
     )
 
@@ -595,11 +591,11 @@ def raw(repo: Path, locator: str) -> tuple[Path, dict[str, Any]]:
 def common(value: Mapping[str, Any], kind: str) -> dict[str, Any]:
     fields = {
         "schema_version", "protocol_epoch", "message_id", "direction_id", "sender",
-        "recipient", "kind", "reply_to", "body_sha256", "control_release", "body",
+        "recipient", "kind", "reply_to", "control_release", "body",
     }
     if (
-        set(value) != fields or value.get("schema_version") != 2
-        or value.get("protocol_epoch") != 2 or value.get("kind") != kind
+        set(value) != fields or value.get("schema_version") != 3
+        or value.get("protocol_epoch") != EPOCH or value.get("kind") != kind
     ):
         raise EnvelopeError("envelope header is invalid")
     try:
@@ -615,8 +611,8 @@ def common(value: Mapping[str, Any], kind: str) -> dict[str, Any]:
     direction = value["direction_id"]
     if not isinstance(direction, str) or DIRECTION.fullmatch(direction) is None:
         raise EnvelopeError("direction_id is invalid")
-    if not isinstance(value["body"], Mapping) or value["body_sha256"] != body_sha(value["body"]):
-        raise EnvelopeError("body_sha256 does not match body")
+    if not isinstance(value["body"], Mapping):
+        raise EnvelopeError("envelope body must be an object")
     result = dict(value)
     result["sender"] = endpoint(value["sender"], direction, "sender")
     result["recipient"] = endpoint(value["recipient"], direction, "recipient")
@@ -804,7 +800,7 @@ def create_assignment_from_brief(args: argparse.Namespace) -> dict[str, Any]:
         "done_when": ([
             "Before final, complete every ready native send and the bounded final drain."
         ] if recipient_identity == "Workflow-Clerk" else [
-            "Before final, send exactly one correlated v2 "
+            "Before final, send exactly one correlated v3 "
             + ("PORTFOLIO_RETURN" if recipient_identity == "Portfolio" else "RETURN")
             + " to Workflow-Clerk."
         ]) + list(args.done_when),
@@ -906,7 +902,7 @@ def read_envelope(args: argparse.Namespace) -> dict[str, Any]:
 def read_message(args: argparse.Namespace) -> dict[str, Any]:
     match = LINE.fullmatch(args.message)
     if not match:
-        raise EnvelopeError("message must be exactly one HMASD_SESSION_ENVELOPE_V2 locator line")
+        raise EnvelopeError("message must be exactly one HMASD_SESSION_ENVELOPE_V3 locator line")
     result = read_envelope(argparse.Namespace(repo=args.repo, envelope=match.group("locator")))
     if result["message"] != args.message:
         raise EnvelopeError("message metadata does not match envelope")

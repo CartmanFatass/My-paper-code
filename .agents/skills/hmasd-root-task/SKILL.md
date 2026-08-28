@@ -6,5 +6,5 @@ description: Use when the top-level HMASD Root task receives user control, a sha
 # HMASD Root Task
 
 Read `.codex/prompts/hmasd-root.md` completely. Use `hmasd-slice-interface`
-for an exact v2 intake or outbound edge, and finish at the prompt's Root return
+for an exact v3 intake or outbound edge, and finish at the prompt's Root return
 boundary.

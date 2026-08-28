@@ -1,4 +1,4 @@
-# HMASD native Codex workflow v2
+# HMASD native Codex workflow v3
 
 HMASD 直接信任 Codex 可见的 top-level task/session plane：task 身份、历史、上下文
 隔离、create/send/read/wait 与同 task 继续都由 Codex 原生提供。项目只机械约束方向、
@@ -16,7 +16,7 @@ HMASD 直接信任 Codex 可见的 top-level task/session plane：task 身份、
   scheduler 或权限 gate。与上述两份权威文档冲突的 prompt、skill、fixture、历史说明
   和实现都是迁移对象。
 
-v2 的 session skill 层仅为 `hmasd-root-task`、
+v3 的 session skill 层仅为 `hmasd-root-task`、
 `hmasd-workflow-clerk-task`、`hmasd-portfolio-task`、`hmasd-em-task`、
 `hmasd-cm-task`、`hmasd-slice-interface` 与 `hmasd-operations-manual`。
 
@@ -29,7 +29,7 @@ return 给 spawning parent。任何 heartbeat 都回到当前责任 task。
 - **Root**：永久用户入口；处理用户材料决定、shared-core、task identity conflict、
   无法机械解释的协议矛盾和最终 cross-direction Git integration。它不做普通方向转递，
   不代 EM/CM 完成方向工作。
-- **Workflow-Clerk**：唯一长期协调 task；只做 native topology、v2 transport、
+- **Workflow-Clerk**：唯一长期协调 task；只做 native topology、v3 transport、
   on-demand task creation/reuse、bounded final drain 和 recovery。它不做方向科研、
   工程或 Portfolio 判断，也不维护第二状态机。
 - **Portfolio**：长期 global top-level task；负责跨方向 considered set、lifecycle、
@@ -47,7 +47,7 @@ return 给 spawning parent。任何 heartbeat 都回到当前责任 task。
   command；terminal result 固定回 CM，绝不直达 Clerk。
 
 角色是责任边界，不是用户权限 gate。用户可直接进入任何可见 task；被直接控制的
-participant 必须按 v2 `CONTROL_NOTICE` 让 Clerk 看见 transport 变化。
+participant 必须按 v3 `CONTROL_NOTICE` 让 Clerk 看见 transport 变化。
 
 ## Durable writers
 
@@ -78,7 +78,7 @@ conversation 和 Dashboard 只保留 provenance。
    exact command 的用户批准。authority 已覆盖、memory-safe、无新 external/shared-core
    语义且不超过 7200 秒的 PREPARED command 不增加批准 gate。
 6. 科学、数值、RNG、checkpoint、bit identity 和 external Effect 语义不得静默改变。
-7. failure 必须限定为 project、direction、feature 或 effect，并按 v2 fingerprint
+7. failure 必须限定为 project、direction、feature 或 effect，并按 v3 fingerprint
    计数；同一 fingerprint 最多三次。该上限不放宽外部 at-most-once。
 8. 用户始终拥有最高权限。危险行为应说明并记录；工具或校验不能变成新的批准层。
 9. Dashboard 只允许 `127.0.0.1` 上的只读 provenance projection。它不得写 authority、

@@ -1,12 +1,12 @@
-# HMASD Session Envelope Protocol v2
+# HMASD Session Envelope Protocol v3
 
 本协议是 HMASD 正常跨 Codex session 的唯一协议。Codex 原生负责 task 身份、历史、
-create/send/read/wait 与同 task 继续；v2 只定义 HMASD 的状态语义、消息 body、角色
+create/send/read/wait 与同 task 继续；v3 只定义 HMASD 的状态语义、消息 body、角色
 转移、恢复和项目边界。本文中的 MUST/必须均为规范要求。
 
 ## 1. 权威与五维状态
 
-v2 不允许一个字段同时表示“方向是否继续”“谁应行动”“task 是否运行”“领域工作到
+v3 不允许一个字段同时表示“方向是否继续”“谁应行动”“task 是否运行”“领域工作到
 哪一步”和“消息是否送达”。五个维度严格分离：
 
 | 维度 | 唯一事实源 | 允许的解释 |
@@ -15,7 +15,7 @@ v2 不允许一个字段同时表示“方向是否继续”“谁应行动”�
 | `owner_stage` | Clerk 基于本 turn 新鲜事实生成的短期只读投影 | 当前 next event 的责任角色或阶段；不写回 authority |
 | `native_task_status` | Codex native task list/read | task 的产品状态；原值保留，不归一化成 lifecycle |
 | `research_phase / engineering_phase` | 对应 direction state | 领域进度；不能充当 delivery 或 owner |
-| `delivery_state` | recipient 的 native task history | exact v2 message 与 correlation 是否可见；locator 文件存在、mtime 或 Dashboard 不算送达 |
+| `delivery_state` | recipient 的 native task history | exact v3 message 与 correlation 是否可见；locator 文件存在、mtime 或 Dashboard 不算送达 |
 
 任何 script、prompt 或 Dashboard 都不得把一个维度的值写成另一个维度的事实。尤其：
 
@@ -72,14 +72,14 @@ manager 的 direct leaves 可以并行，但 leaf 不能再次 delegate、不能
 Experiment Operator 固定是 CM direct leaf；即使 Dashboard 显示 `owner_stage=OPERATOR`，
 方向的 top-level standing authority 仍在 CM，Operator terminal result 只回 CM。
 
-## 3. Session Envelope v2
+## 3. Session Envelope v3
 
 ### 3.1 唯一 native line
 
 每次跨 session send 的完整 native message 必须恰好是一行，字段顺序固定为：
 
 ```text
-HMASD_SESSION_ENVELOPE_V2 kind=<kind> direction=<id> from=<role> to=<role> next=<role|NONE> id=<uuid> sha256=<body-sha> locator=<repo-relative-path>
+HMASD_SESSION_ENVELOPE_V3 kind=<kind> direction=<id> from=<role> to=<role> next=<role|NONE> id=<uuid> locator=<repo-relative-path>
 ```
 
 不得在此前、此后或第二行添加 JSON、摘要、称呼或解释。`kind` 只能是：
@@ -89,27 +89,28 @@ HMASD_SESSION_ENVELOPE_V2 kind=<kind> direction=<id> from=<role> to=<role> next=
 - `PORTFOLIO_RETURN`
 - `CONTROL_NOTICE`
 
-`id` 是 message UUID；`sha256` 是 locator envelope 内 `body` 对象按 UTF-8、sorted-key、
-compact JSON canonicalization 得到的 lowercase SHA-256；`locator` 是 gitignored、
-repository-relative POSIX path。script 先写 immutable envelope、再输出该 exact line；
+`id` 是 message UUID；`locator` 是 gitignored、repository-relative POSIX path。session
+transport 不做 authentication，也不为本地 envelope body 生成或校验 digest。script 使用
+exclusive create 先写 envelope；同一 locator 只有 canonical JSON bytes 完全相同时才可复用，
+任何冲突都在 send 前拒绝；随后输出该 exact line。
 Root 与 Clerk 用唯一 `assignment-from-brief` 入口，只提供 bounded objective 与
 slice-specific semantic flags。Root→Clerk 使用 `--current-control-release` 由 script 观察当前
 publishable release；Clerk→participant 用 `--control-release-envelope` 指向 validated ingress
-并复制 release。script 读取固定 role/direction context、计算当前 SHA、补齐固定 return
-boundary 与 workspace default，并直接生成完整 body 和 envelope。两者都不创建 ASSIGNMENT
+并复制 release。script 读取固定 role/direction context、为这些外部内容生成 content refs、
+补齐固定 return boundary 与 workspace default，并直接生成完整 body 和 envelope。两者都不创建 ASSIGNMENT
 body 或 control-release JSON；旧 `assignment --body --control-release` 不存在。
-相同 message ID 只有 byte-identical body 可以复用，任何冲突都必须在文件或 send 前拒绝。
+message ID 与 locator 共同承担本地幂等相关性；它们不是认证凭据。
 
-recipient 把 Codex delegation 的 exact `input` 交给 v2 `read-message`。只有整行
-full-match、hash/body/schema/endpoint/control metadata 均通过才是工作流事件。裸 locator、
-raw JSON、自然语言、v1 header、附带说明的 line 和 leaf report 都是 `NON_ENVELOPE`。
+recipient 把 Codex delegation 的 exact `input` 交给 v3 `read-message`。只有整行
+full-match、body/schema/endpoint/control metadata 均通过才是工作流事件。裸 locator、
+raw JSON、自然语言、v1/v2 header、附带说明的 line 和 leaf report 都是 `NON_ENVELOPE`。
 用户在可见 task 中的直接对话仍是用户输入，但其跨 task 控制影响必须转成
 `CONTROL_NOTICE`。
 
-locator 文件只是 immutable transport body，不是 delivery receipt、inbox、ack 或
+locator 文件只是 write-once transport body，不是 delivery receipt、inbox、ack 或
 lifecycle state。只有 recipient native history 中可见的 exact line 才改变
 `delivery_state`。send 结果 unknown 时，sender 先观察 recipient native history；不得
-盲目再 send。显式 separate worktree 的 assignment 必须在 send 前把相同 immutable body
+盲目再 send。显式 separate worktree 的 assignment 必须在 send 前把相同 write-once body
 materialize 到 recipient workspace 的对应 repo-relative locator；recipient 不依赖 shared
 checkout 的隐藏 runtime 文件。
 
@@ -117,7 +118,7 @@ checkout 的隐藏 runtime 文件。
 
 canonical envelope 固定包含并由 script 生成/复制：
 
-- `schema_version=2`
+- `schema_version=3`
 - `protocol_epoch`
 - `control_release` object（含 `control_release_id` 与 publishability facts）
 - `message_id`
@@ -125,7 +126,7 @@ canonical envelope 固定包含并由 script 生成/复制：
 - sender/recipient identity 与 native thread ID
 - `kind`
 - `reply_to`
-- body 与 body SHA-256
+- body
 
 `control_release` 不是 envelope script 的 Git observation。调用者必须先用
 `scripts/hmasd_control_release.py inspect` 生成 exact JSON record，再把该 record 显式交给
@@ -143,12 +144,13 @@ RETURN 与 PORTFOLIO_RETURN 必须把 `reply_to` 绑定到触发它的 ASSIGNMEN
 CONTROL_NOTICE 绑定被控制的 message/notice（没有时显式 null）。RETURN 与
 PORTFOLIO_RETURN byte-semantically 复制 triggering ASSIGNMENT 的 release；Clerk relay 的
 CONTROL_NOTICE 同样复制 initiating notice 的 release。script 校验 direction、反向
-endpoints、reply chain、body hash 与 changed-path containment；不验证 Codex 本身。
+endpoints、reply chain、body contract 与 changed-path containment；不验证 Codex 本身。
 
 ASSIGNMENT 的 `context_refs` 是 point-in-time 定位信息，不是 freshness gate；recipient 按 path
 读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用旧 context SHA 否定合法
-mutation 或恢复重读。本地 envelope 文件属于可信协作输入；v2 不建立 tamper archive、
-不可变消息账本或二次摘要层。RETURN/Portfolio 新产生的 artifact refs 仍按当前 bytes 检查。
+mutation 或恢复重读。本地 envelope 文件属于可信协作输入；v3 不建立 body digest、
+authentication、tamper archive、不可变消息账本或二次摘要层。RETURN/Portfolio 新产生的
+artifact refs 仍按当前 bytes 检查。
 
 header 的 `next` 由 kind/body 机械派生，LLM 不填写：
 
@@ -166,7 +168,7 @@ header 的 `next` 由 kind/body 机械派生，LLM 不填写：
 
 ### 3.3 合法 edges
 
-新 v2 ASSIGNMENT 只有 `Root -> Workflow-Clerk` 的 bounded coordination objective，和
+新 v3 ASSIGNMENT 只有 `Root -> Workflow-Clerk` 的 bounded coordination objective，和
 `Workflow-Clerk -> Root/Portfolio/EM/CM` 的 bounded responsibility slice。Portfolio、
 EM、CM 不给另一个 participant 创建 ASSIGNMENT。
 
@@ -176,7 +178,7 @@ PORTFOLIO_RETURN 给 Clerk。CONTROL_NOTICE 由观察到 authoritative user/cont
 peer edge。所有跨 session send 只使用 CLI 输出的 exact recipient thread ID 与 exact
 one-line message。
 
-v1 participant-to-participant forwarding、legacy RETURN 转发和 mixed-epoch edge 在 v2
+v1/v2 participant-to-participant forwarding、legacy RETURN 转发和 mixed-epoch edge 在 v3
 均非法；迁移必须按第 13 节建立 clean generation。
 
 ## 4. Body contracts
@@ -339,7 +341,7 @@ Clerk 只按 `failure.responsible_role` 路由，header `next` 仍为 `NONE`。
 
 Clerk 在任何 native send 前先校验完整 `considered/transitions/capacity` 和 registry
 revision，再在同一事件 turn 展开所有独立 ready transition。一个 transition 的 FAILED
-不删除、延迟或改写其他 ready transition。v1 `actions[]` 不得被读取为正常 v2 body。
+不删除、延迟或改写其他 ready transition。v1 `actions[]` 不得被读取为正常 v3 body。
 
 ### 4.4 新方向 atomic apply
 
@@ -399,7 +401,7 @@ CONTROL_NOTICE 只改变 transport/control expectation，不直接写 lifecycle 
 每个 envelope 的 `control_release` 是固定 metadata，不是一种 kind/body action。同一
 `protocol_epoch` 内 release 更新时，Clerk 只在 recipient turn boundary 发送
 `REANCHOR`，带新 committed release 和必须重读的 authority refs；recipient 的下一条
-v2 message 必须携带新 release，才算 adoption 可见。REANCHOR 不改变 lifecycle。
+v3 message 必须携带新 release，才算 adoption 可见。REANCHOR 不改变 lifecycle。
 protocol epoch 变化不得 REANCHOR，必须按第 13 节创建新 manager generation。
 
 ## 5. 唯一转换表
@@ -432,10 +434,10 @@ interpretation 是 EM objective；跨方向 priority/investment/lifecycle/capaci
 
 每个 Clerk event turn 必须按以下顺序执行：
 
-1. **Ingress**：对 exact native delegation input 执行 v2 `read-message`；不把 leaf prose、
+1. **Ingress**：对 exact native delegation input 执行 v3 `read-message`；不把 leaf prose、
    locator 文件或历史 cache 当事件。
 2. **Topology**：用 fresh native task list/read 构造只存在于本 turn 的最小 snapshot：
-   exact task IDs、identity/generation/epoch/status，以及 native history 中的 current v2
+   exact task IDs、identity/generation/epoch/status，以及 native history 中的 current v3
    correlations。不得落盘为第二 registry。
 3. **Validate**：校验 protocol epoch/control release、reply chain、direction、role、
    owned paths、failure attempt、Portfolio revision/capacity。机械错误只报告 exact field；
@@ -445,7 +447,7 @@ interpretation 是 EM objective；跨方向 priority/investment/lifecycle/capaci
 5. **Project**：可把本次 fresh observations 写入 ignored、只读
    `owner_stage`/Dashboard projection；它不是 authority 或 delivery receipt。
 6. **Bounded final drain**：final 前重新 native read 当前 Clerk history，以本 turn 内存
-   set 排除已处理 message IDs，读取所有新到达 exact v2 lines并完成其 ready sends。重复
+   set 排除已处理 message IDs，读取所有新到达 exact v3 lines并完成其 ready sends。重复
    fresh pass 直到一次没有新 message，或到达 control release 规定的小固定上限；若到达
    上限仍有输入，继续同一 Clerk task/heartbeat，不把未处理输入静默留在 completed turn。
 
@@ -668,7 +670,7 @@ protocol epoch 变化是 session identity boundary，不是普通 release update
 
 1. Root 先把 goals/protocol、scripts、prompts、skills 与 tests 集成为一个 committed
    `control_release`；dirty main 不是 release。
-2. 停止创建新的 v1 assignments。已有外部 at-most-once operation/Operator 必须观察到
+2. 停止创建新的 v2 assignments。已有外部 at-most-once operation/Operator 必须观察到
    terminal 或明确安全 pause，并把 material evidence 写入 durable authority。
 3. 创建新的 clean Workflow-Clerk 与 Portfolio top-level tasks；不得 fork 旧 task，因为
    fork 会复制 conflicting mandate/history。
@@ -678,16 +680,16 @@ protocol epoch 变化是 session identity boundary，不是普通 release update
    task cache、raw history reconstruction 或旧 outstanding locator。
 5. 新 Clerk 从 native list/read 建 topology，Portfolio 用 `portfolio-apply` 对 current
    registry 作一次 global reconciliation，并为每个 ACTIVE direction产生明确 next event。
-6. v2 real-native acceptance 通过且没有 old-epoch outstanding Effect 后，才取消旧
+6. v3 real-native acceptance 通过且没有 old-epoch outstanding Effect 后，才取消旧
    heartbeats、归档旧 Clerk/Portfolio/manager；Dashboard 把旧 epoch 标为 historical。
 
 同 epoch 的 non-semantic control change 用 REANCHOR；epoch change 一律 new generation。
-不得建立 v1 forwarding bridge、翻译 legacy DONE/actions 或让旧 session 给新 epoch
+不得建立 v1/v2 forwarding bridge、翻译 legacy DONE/actions 或让旧 session 给新 epoch
 participant 直接发消息。
 
 ## 14. 明确非职责与退休机制
 
-`hmasd_session_envelope.py` 只负责 v2 canonical body/header、hash、correlation、endpoint、
+`hmasd_session_envelope.py` 只负责 v3 canonical body/header、correlation、endpoint、
 status、failure attempt 和 path containment；它不创建/等待 task、不决定 next role、不
 维护 lifecycle/task cache/inbox/ack/retry FSM，也不解析 raw rollout。
 

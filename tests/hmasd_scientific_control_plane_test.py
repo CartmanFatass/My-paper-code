@@ -14,7 +14,7 @@ def _read(relative: str) -> str:
     return " ".join((ROOT / relative).read_text(encoding="utf-8").lower().split())
 
 
-def test_protocol_defines_role_local_instrument_request_result_without_transport_change() -> None:
+def test_protocol_keeps_role_local_instruments_outside_v3_transport() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
 
     for required in (
@@ -100,7 +100,7 @@ def test_control_release_includes_contract_but_excludes_evolving_tool_surface() 
         ".agents/skills/hmasd-scientific-critical-thinking/SKILL.md",
     }
 
-    assert hmasd_control_release.PROTOCOL_EPOCH == 2
+    assert hmasd_control_release.PROTOCOL_EPOCH == 3
     assert all(hmasd_control_release.is_control_path(path) for path in included)
     assert not any(hmasd_control_release.is_control_path(path) for path in excluded)
 

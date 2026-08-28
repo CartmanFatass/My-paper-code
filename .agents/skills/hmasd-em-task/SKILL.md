@@ -6,5 +6,5 @@ description: Use when a top-level HMASD EM direction task receives a bounded sci
 # HMASD EM Task
 
 Read `.codex/prompts/hmasd-em.md` completely. Use `hmasd-slice-interface` for
-the exact v2 intake and correlated return, and finish at the prompt's EM return
+the exact v3 intake and correlated return, and finish at the prompt's EM return
 boundary.

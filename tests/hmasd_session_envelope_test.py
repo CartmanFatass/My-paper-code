@@ -35,7 +35,7 @@ def ref(repo: Path, path: str, content: bytes) -> dict[str, str]:
 def release_record(*, release_id: str = "a" * 64, publishable: bool = True) -> dict[str, Any]:
     head = "1" * 40
     return {
-        "control_release_id": release_id, "protocol_epoch": 2, "head": head,
+        "control_release_id": release_id, "protocol_epoch": 3, "head": head,
         "origin_main": head if publishable else "2" * 40, "branch": "main",
         "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
         "publishable": publishable, "observed_at": "2026-08-27T00:00:00Z",
@@ -106,27 +106,23 @@ def root_ingress(
         "done_when": ["route once"],
         "workspace_mode": "shared-main",
     }
-    digest = hashlib.sha256(
-        json.dumps(body, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
-    ).hexdigest()
     envelope = {
-        "schema_version": 2,
-        "protocol_epoch": 2,
+        "schema_version": 3,
+        "protocol_epoch": 3,
         "message_id": message_id,
         "direction_id": direction,
         "sender": {"identity": "Root", "thread_id": "root"},
         "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
         "kind": "ASSIGNMENT",
         "reply_to": None,
-        "body_sha256": digest,
         "control_release": release or release_record(),
         "body": body,
     }
     locator = f".codex/runtime/session-envelopes/{direction}/{message_id}.assignment.json"
     write_json(repo / locator, envelope)
     message = (
-        f"HMASD_SESSION_ENVELOPE_V2 kind=ASSIGNMENT direction={direction} "
-        f"from=Root to=Workflow-Clerk next=NONE id={message_id} sha256={digest} "
+        f"HMASD_SESSION_ENVELOPE_V3 kind=ASSIGNMENT direction={direction} "
+        f"from=Root to=Workflow-Clerk next=NONE id={message_id} "
         f"locator={locator}"
     )
     return {"locator": locator, "message": message, "recipient_thread_id": "clerk"}
@@ -188,13 +184,15 @@ def test_assignment_uses_explicit_publishable_release_without_git_facts(tmp_path
     output = assign(tmp_path, release=expected_release)
     envelope = json.loads((tmp_path / output["locator"]).read_text())
     uuid.UUID(envelope["message_id"])
-    assert envelope["schema_version"] == envelope["protocol_epoch"] == 2
+    assert envelope["schema_version"] == envelope["protocol_epoch"] == 3
+    assert "body_sha256" not in envelope
     assert envelope["control_release"] == expected_release
     assert "git_facts" not in envelope
     assert output["message"].startswith(
-        "HMASD_SESSION_ENVELOPE_V2 kind=ASSIGNMENT direction=ucope "
+        "HMASD_SESSION_ENVELOPE_V3 kind=ASSIGNMENT direction=ucope "
         "from=Workflow-Clerk to=EM/ucope/g1 next=NONE"
     )
+    assert " sha256=" not in output["message"]
 
 
 def test_assignment_from_brief_generates_mechanical_body_fields(tmp_path: Path) -> None:
@@ -241,7 +239,7 @@ def test_assignment_from_brief_generates_mechanical_body_fields(tmp_path: Path) 
             "Preserve the accepted result firewall.",
         ],
         "done_when": [
-            "Before final, send exactly one correlated v2 RETURN to Workflow-Clerk."
+            "Before final, send exactly one correlated v3 RETURN to Workflow-Clerk."
         ],
         "workspace_mode": "shared-main",
     }
@@ -265,7 +263,7 @@ def test_assignment_from_brief_uses_portfolio_return_boundary(tmp_path: Path) ->
     assert result.returncode == 0, result.stderr
     envelope = json.loads((tmp_path / json.loads(result.stdout)["locator"]).read_text())
     assert envelope["body"]["done_when"] == [
-        "Before final, send exactly one correlated v2 PORTFOLIO_RETURN to Workflow-Clerk."
+        "Before final, send exactly one correlated v3 PORTFOLIO_RETURN to Workflow-Clerk."
     ]
 
 
@@ -603,16 +601,26 @@ def test_reanchor_requires_matching_new_publishable_release(tmp_path: Path) -> N
     assert unchanged.returncode == 2 and "new control release" in unchanged.stderr
 
 
-def test_read_message_rejects_v1_and_detects_body_tampering(tmp_path: Path) -> None:
+def test_read_message_rejects_legacy_lines_and_reads_trusted_local_body(
+    tmp_path: Path,
+) -> None:
     assigned = assign(tmp_path)
     old = run_cli("read-message", "--repo", str(tmp_path), "--message", f"HMASD_SESSION_ENVELOPE_V1 {assigned['locator']}")
     assert old.returncode == 2
+    v2 = assigned["message"].replace("HMASD_SESSION_ENVELOPE_V3", "HMASD_SESSION_ENVELOPE_V2")
+    assert run_cli(
+        "read-message", "--repo", str(tmp_path), "--message", v2,
+    ).returncode == 2
     wrapped = run_cli("read-message", "--repo", str(tmp_path), "--message", assigned["message"] + " please")
     assert wrapped.returncode == 2
     envelope = json.loads((tmp_path / assigned["locator"]).read_text())
-    envelope["body"]["objective"] = "tampered"; write_json(tmp_path / assigned["locator"], envelope)
+    envelope["body"]["objective"] = "trusted local update"
+    write_json(tmp_path / assigned["locator"], envelope)
     read = run_cli("read", "--repo", str(tmp_path), "--envelope", assigned["locator"])
-    assert read.returncode == 2 and "body_sha256" in read.stderr
+    assert read.returncode == 0, read.stderr
+    observed = json.loads(read.stdout)
+    assert observed["envelope"]["body"]["objective"] == "trusted local update"
+    assert "body_sha256" not in observed["envelope"]
 
 
 def test_correlated_return_accepts_owned_context_mutation_after_intake(

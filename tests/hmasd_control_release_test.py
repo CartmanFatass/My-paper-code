@@ -187,7 +187,7 @@ def test_inspect_reports_publishable_release_and_ignores_direction_dirty(tmp_pat
 
     assert result.returncode == 0, result.stderr
     record = json.loads(result.stdout)
-    assert record["protocol_epoch"] == 2
+    assert record["protocol_epoch"] == 3
     assert record["branch"] == "main"
     assert record["head"] == record["origin_main"]
     assert record["control_paths"] == ["AGENTS.md"]
@@ -257,7 +257,7 @@ def test_inspect_includes_capability_contract_but_not_evolving_tool_surface(tmp_
     assert not set(excluded) & set(record["control_paths"])
 
 
-def test_inspect_includes_current_v2_mechanical_surface_but_not_direction_science(tmp_path: Path) -> None:
+def test_inspect_includes_current_v3_mechanical_surface_but_not_direction_science(tmp_path: Path) -> None:
     run("git", "init", "-b", "main", cwd=tmp_path)
     run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
     run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
@@ -281,7 +281,7 @@ def test_inspect_includes_current_v2_mechanical_surface_but_not_direction_scienc
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(f"{path}\n".encode())
     run("git", "add", ".", cwd=tmp_path)
-    run("git", "commit", "-m", "current v2 mechanics", cwd=tmp_path)
+    run("git", "commit", "-m", "current v3 mechanics", cwd=tmp_path)
     run("git", "remote", "add", "origin", str(tmp_path), cwd=tmp_path)
     run("git", "update-ref", "refs/remotes/origin/main", "HEAD", cwd=tmp_path)
 

@@ -6,5 +6,5 @@ description: Use when the top-level HMASD Portfolio task receives a bounded cros
 # HMASD Portfolio Task
 
 Read `.codex/prompts/hmasd-portfolio.md` completely. Use
-`hmasd-slice-interface` for the exact v2 intake and correlated return, and
+`hmasd-slice-interface` for the exact v3 intake and correlated return, and
 finish at the prompt's Portfolio return boundary.

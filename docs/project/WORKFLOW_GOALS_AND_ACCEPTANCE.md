@@ -1,10 +1,10 @@
-# HMASD 原生 Session 控制面 v2：目标与验收
+# HMASD 原生 Session 控制面 v3：目标与验收
 
 状态：用户确认的工作流权威目标
 Decision owner: User
-确认日期：2026-08-27
+确认日期：2026-08-28
 
-本文定义 v2 必须达到的结果。`docs/project/WORKFLOW_PROTOCOL.md` 是实现这些结果的
+本文定义 v3 必须达到的结果。`docs/project/WORKFLOW_PROTOCOL.md` 是实现这些结果的
 唯一正常跨 session 协议。冲突的历史协议、prompt、skill、fixture 与实现属于迁移
 对象，不能反向修改本目标。
 
@@ -49,7 +49,7 @@ scheduler 重新证明或模拟 Codex 产品事实。native task tools 不可用
 
 - **Root** 是永久用户入口与最高控制点，只保留用户材料决定、shared-core、identity
   conflict、不可机械解释的 protocol question 和最终跨方向 Git integration。
-- **Workflow-Clerk** 是唯一长期协调 task，只负责 native topology、v2 transport、
+- **Workflow-Clerk** 是唯一长期协调 task，只负责 native topology、v3 transport、
   on-demand task creation/reuse、recovery 与 final drain。它不重做 Portfolio、科研或
   工程判断。
 - **Portfolio** 是长期 global top-level task，负责完整 considered cohort、跨方向
@@ -73,14 +73,15 @@ Clerk 在某角色首次成为 next owner 时创建真实可见 task，而不是
 持有 retry responsibility 的 task，不得漂移到 Root 或 Clerk。
 
 角色与工具不是批准层。用户可以直接进入任何可见 task；该 task 必须把 PAUSE、
-RESUME、OVERRIDE、CANCEL 或 REANCHOR 作为 v2 control fact 传播，使其他 session 不会
+RESUME、OVERRIDE、CANCEL 或 REANCHOR 作为 v3 control fact 传播，使其他 session 不会
 静默继续旧 mandate。
 
-## 4. v2 正常流
+## 4. v3 正常流
 
-所有跨 session 工作只使用 v2 的 `ASSIGNMENT`、`RETURN`、`PORTFOLIO_RETURN` 和
-`CONTROL_NOTICE`。native 消息是固定单行 header；canonical body 位于 header 绑定且
-hash 校验的 gitignored locator。消息前后不得附加自然语言或第二行。
+所有跨 session 工作只使用 v3 的 `ASSIGNMENT`、`RETURN`、`PORTFOLIO_RETURN` 和
+`CONTROL_NOTICE`。native 消息是固定单行 header；canonical body 位于 header 绑定的
+gitignored locator。session transport 不做 authentication 或 body digest 校验。消息前后
+不得附加自然语言或第二行。
 
 ASSIGNMENT context refs 是 point-in-time 定位信息，不是 freshness gate；recipient 按 path
 读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用旧 context SHA 否定合法
@@ -96,13 +97,13 @@ FAILED`。科研、工程或实验 interpretation 完成后必须明确下一责
 
 1. Clerk 从 native list/read 建立本 turn 的 topology snapshot，并创建或复用 next
    owner 的 standing task。
-2. Clerk 原生发送一个 v2 ASSIGNMENT；接收者只在 direction/objective/owned paths/
+2. Clerk 原生发送一个 v3 ASSIGNMENT；接收者只在 direction/objective/owned paths/
    Effect 内工作。
 3. participant 在结束当前 turn 前原生发送 correlated RETURN；文件生成但未 native
    send 不算交接。
 4. Clerk 只按 typed status/transition 路由。多个正交方向 ready 时，在同一事件 turn
    发送全部 ready assignments；一个方向失败或等待不阻塞其他方向。
-5. Clerk final 前执行 bounded drain，读取本 active turn 内新到达而尚未消费的 v2
+5. Clerk final 前执行 bounded drain，读取本 active turn 内新到达而尚未消费的 v3
    消息并完成 ready sends。随后到达的消息由责任 task/Clerk heartbeat 再次唤醒。
 6. stopped task 缺 RETURN 时继续同一 task 并重用同一 assignment；不复制 manager，
    不重做已经有 durable evidence 的工作。
@@ -203,8 +204,9 @@ protocol epoch、control release、native observation time 和 stale/unknown；�
 
 1. 新 epoch 的 Clerk、Portfolio 与按需 EM/CM 都出现在 Codex 项目 task list；没有用
    fork 复制旧 conflicting mandate，也没有同 identity/generation 的重复 manager。
-2. 每个 native handoff 是一行 exact v2 header，四类 kind 之外全部拒绝；body hash、
-   correlation、identity、direction 和 owned-path containment 可机械验证。
+2. 每个 native handoff 是一行 exact v3 header，四类 kind 之外全部拒绝；body contract、
+   correlation、identity、direction 和 owned-path containment 可机械验证，且 transport
+   header/envelope 不包含 body digest。
 3. 五维状态分别可追溯到自己的事实源；`native_task_status` 或 phase 的变化不会静默
    改写 lifecycle/delivery。
 4. 每个 ACTIVE 方向在 final drain 后都有唯一 next event；缺实现进入 CM，研究缺口
@@ -236,15 +238,15 @@ protocol epoch、control release、native observation time 和 stale/unknown；�
 15. 真实验收使用 native visible tasks、真实方向与原生 task history。synthetic
     transport、`run-chain`、hidden app-server、raw rollout 或 task cache 不得代替。
 
-## 10. v2 epoch 迁移与退休路径
+## 10. v3 epoch 迁移与退休路径
 
-v2 控制面形成一个新的 protocol epoch。先把 authority、scripts、prompts、skills 与
-tests 集成为一个 committed `control_release`，停止创建新的 v1 工作；对既有外部
+v3 控制面形成一个新的 protocol epoch。先把 authority、scripts、prompts、skills 与
+tests 集成为一个 committed `control_release`，停止创建新的 v2 工作；对既有外部
 commitment/Operator 只观察到安全边界。随后创建 clean Clerk 与 Portfolio，不 fork
 旧 task；EM/CM 在下一次成为 owner 时创建新 generation，只从 durable authority 和
 evidence rehydrate。新 epoch 可见且无 outstanding old Effect 后，再归档旧 task。
 
-v1 locator、participant-to-participant forwarding、`DONE`、Portfolio `actions[]`、
+v1/v2 locator、participant-to-participant forwarding、`DONE`、Portfolio `actions[]`、
 Work Packet planner、`hmasd_codex_tasks.py run-chain/execute-plan`、本地 task cache、
 return witness、raw rollout parser 和隐藏 app-server manager 不再是正常协议或验收
-seam。代码可在完成调用依赖核查前暂留，但任何 v2 top-level task 都不得加载或调用。
+seam。代码可在完成调用依赖核查前暂留，但任何 v3 top-level task 都不得加载或调用。

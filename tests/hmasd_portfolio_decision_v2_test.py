@@ -443,7 +443,7 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(text, encoding="utf-8")
     release = {
-        "control_release_id": "a" * 64, "protocol_epoch": 2,
+        "control_release_id": "a" * 64, "protocol_epoch": 3,
         "head": "1" * 40, "origin_main": "1" * 40, "branch": "main",
         "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
         "publishable": True, "observed_at": "2026-08-27T20:10:00Z",
@@ -455,14 +455,11 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
         "workspace_mode": "shared-main",
     }
     message_id = str(uuid.uuid4())
-    body_digest = hashlib.sha256(json.dumps(
-        ingress_body, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
-    ).encode()).hexdigest()
     ingress = {
-        "schema_version": 2, "protocol_epoch": 2, "message_id": message_id,
+        "schema_version": 3, "protocol_epoch": 3, "message_id": message_id,
         "direction_id": "portfolio", "sender": {"identity": "Root", "thread_id": "root"},
         "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
-        "kind": "ASSIGNMENT", "reply_to": None, "body_sha256": body_digest,
+        "kind": "ASSIGNMENT", "reply_to": None,
         "control_release": release, "body": ingress_body,
     }
     ingress_path = (
@@ -499,12 +496,6 @@ def test_portfolio_apply_is_one_atomic_public_decision_boundary(tmp_path: Path) 
     envelope_path = repo_root / return_output["locator"]
     tampered_envelope = json.loads(envelope_path.read_text(encoding="utf-8"))
     tampered_envelope["body"]["considered"][0]["extra"] = "invalid on read"
-    tampered_envelope["body_sha256"] = hashlib.sha256(
-        json.dumps(
-            tampered_envelope["body"], ensure_ascii=False,
-            separators=(",", ":"), sort_keys=True,
-        ).encode("utf-8")
-    ).hexdigest()
     _write(envelope_path, tampered_envelope)
     rejected_read = _run_envelope(
         "read", "--repo", str(repo_root), "--envelope", return_output["locator"],

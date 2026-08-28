@@ -1,6 +1,6 @@
 ---
 name: hmasd-slice-interface
-description: Use when a top-level HMASD Root, Portfolio, EM/, or CM/ task receives an exact v2 message or completes a bounded session slice.
+description: Use when a top-level HMASD Root, Portfolio, EM/, or CM/ task receives an exact v3 message or completes a bounded session slice.
 ---
 
 # HMASD Slice Interface

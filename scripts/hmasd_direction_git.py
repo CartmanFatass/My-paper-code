@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Commit, push, or observe exact paths from one Session Envelope v2 assignment."""
+"""Commit, push, or observe exact paths from one Session Envelope v3 assignment."""
 
 from __future__ import annotations
 

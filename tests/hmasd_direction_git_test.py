@@ -1,8 +1,7 @@
-"""Observable repository/remote tests for the Session Envelope v2 Git seam."""
+"""Observable repository/remote tests for the Session Envelope v3 Git seam."""
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
-import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -89,7 +88,7 @@ def _session_assignment(repo: Path) -> dict[str, Any]:
     ):
         _write(repo / path, content)
     release = {
-        "control_release_id": "a" * 64, "protocol_epoch": 2,
+        "control_release_id": "a" * 64, "protocol_epoch": 3,
         "head": "1" * 40, "origin_main": "1" * 40, "branch": "main",
         "control_paths": ["AGENTS.md"], "dirty_control_paths": [],
         "publishable": True, "observed_at": "2026-08-27T00:00:00Z",
@@ -101,14 +100,11 @@ def _session_assignment(repo: Path) -> dict[str, Any]:
         "workspace_mode": "shared-main",
     }
     message_id = str(uuid.uuid4())
-    digest = hashlib.sha256(json.dumps(
-        ingress_body, separators=(",", ":"), sort_keys=True,
-    ).encode()).hexdigest()
     ingress = {
-        "schema_version": 2, "protocol_epoch": 2, "message_id": message_id,
+        "schema_version": 3, "protocol_epoch": 3, "message_id": message_id,
         "direction_id": "alpha", "sender": {"identity": "Root", "thread_id": "root"},
         "recipient": {"identity": "Workflow-Clerk", "thread_id": "clerk"},
-        "kind": "ASSIGNMENT", "reply_to": None, "body_sha256": digest,
+        "kind": "ASSIGNMENT", "reply_to": None,
         "control_release": release, "body": ingress_body,
     }
     ingress_path = repo / ".codex/runtime/session-envelopes/alpha" / f"{message_id}.assignment.json"
