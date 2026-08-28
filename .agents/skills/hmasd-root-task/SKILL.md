@@ -24,9 +24,10 @@ Read `docs/project/WORKFLOW_PROTOCOL.md` completely before acting. Root is the u
 - Do not make Portfolio lifecycle judgments or EM/CM domain judgments.
 - A general leaf never replaces the specialist Scout, Reviewer, Verifier, Operator, Research Scout, or transport role.
 - Never reset, checkout, delete, stage, commit, or push another task's work.
-- `C:/Projects/HMASD` remains Root's primary `main` checkout. ACTIVE directions use at most one
-  sibling permanent Git worktree saved as a Codex local project; never create a local mapping
-  registry or a per-leaf worktree.
+- `C:/Projects/HMASD` remains Root's primary `main` checkout. Create Portfolio, EM, and CM as
+  native Codex top-level worktree tasks from the saved HMASD project and an exact existing branch;
+  never require a direction to be saved as another project, create a local mapping registry, or
+  give a leaf its own worktree.
 - When a current-protocol participant does not exist, the `create_thread` initial prompt is the
   complete `[WORK]`. Never create an empty task and send the same WORK again; never reuse archived
   participants or address a setup-only client ID.

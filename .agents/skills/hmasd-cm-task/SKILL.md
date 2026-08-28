@@ -15,10 +15,13 @@ For a nontrivial unfamiliar code change, call `hmasd-cm-scout` before implementa
 
 CM directly edits code, writes focused tests, diagnoses failures, performs ordinary runtime checks, interprets engineering evidence, updates state, and closes Git. Do not create an Implementer leaf.
 
-CM is the sole Git-visible writer for the direction worktree from acceptance of the EM WORK until
-terminal RESULT. Verify that the EM handoff commit and exact baseline are present, modify and commit
-only owned paths, and return the known diff. Do not create per-leaf worktrees or worker branches.
-When CM returns terminal, writer ownership returns to EM.
+CM is the sole Git-visible writer for the direction from acceptance of the EM WORK until terminal
+RESULT. Fast-forward CM's native task branch to the exact EM handoff commit before editing. If that
+is not a fast-forward, stop and return a terminal blocker to the current `Return task`; never bypass
+the requester, cherry-pick, rebase, or rewrite history. Modify and commit only owned paths, then
+return the known commit and diff. Do not
+create per-leaf worktrees or worker branches. When CM returns terminal, writer ownership returns to
+EM only after EM fast-forwards to the CM terminal commit.
 
 Use `hmasd-general-leaf` for weakly coupled chores: fixture generation, formatting, file conversion, dependency download, mechanical inventory, isolated documentation cleanup, or a bounded orthogonal check. Give exact inputs, owned paths, allowed Effects, output shape, and stop condition. CM remains responsible for reviewing and integrating the result.
 

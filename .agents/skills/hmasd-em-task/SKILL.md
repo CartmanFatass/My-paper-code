@@ -33,8 +33,13 @@ Open a new cycle only for a new direction/mechanism/comparator/discriminator, po
    expose the favored route across these paths before the join.
 4. Select the smallest discriminator likely to change the claim or Portfolio decision. When an
    executable observation is needed, commit EM's Git-visible refs, send a complete WORK to the
-   direction CM, and remain read-only in the direction worktree until CM's terminal RESULT.
-5. Interpret each CM observation. A further CM round requires a new discriminator; stop on the
+   direction CM with the exact commit, and do not write or mutate EM's native task branch until
+   CM's terminal RESULT.
+5. Fast-forward EM's task branch to the exact CM terminal commit before resuming writer ownership.
+   If this is not a fast-forward, stop and return a terminal blocker to the current `Return task`;
+   never bypass the requester, cherry-pick, rebase, or rewrite history. Then interpret the CM
+   observation. A further CM round requires a new
+   discriminator; stop on the
    frozen resource/round bound, repeated non-informative work, or no decision-changing test.
 6. Form the evidence packet and write `SYNTHESIS_READY`. A theoretical/static cycle may omit CM
    only with an explicit reason and an appropriately bounded claim.

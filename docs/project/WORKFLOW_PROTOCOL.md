@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.5
+Workflow revision: 2026-08-28.6
 
 本文是 HMASD 唯一控制 authority。HMASD 直接信任 Codex Desktop 提供的可见 task ID、
 history、status、parent/child relation、create/send/read/wait、同 task 继续、archive 与
@@ -305,24 +305,31 @@ checkpoint/result/stdout/stderr 与 terminal facts。科学 reproducibility 或 
 
 ## 10. Git closure and control
 
-`C:/Projects/HMASD` 是 Root 的 primary `main` checkout，不在其中 switch/checkout。只有 ACTIVE
-direction 按需拥有至多一个 sibling Git worktree，位于 `C:/Projects/HMASD-worktrees/<name>`，
-并由用户或 Root 一次性保存为 Codex Desktop local project。EM 与 CM 都在该 saved project 中
-以 local environment 创建 top-level task；不得用 per-chat managed worktree 假装共享方向目录，
-也不得建立 project/worktree mapping registry。缺少 saved project 时显式 WAITING。
+`C:/Projects/HMASD` 是 Root 的 primary `main` checkout，不在其中 switch/checkout。Portfolio、
+EM、CM 都从已保存的 HMASD project 使用 Codex 原生 `environment: worktree` 创建 top-level task；
+需要特定基线时，`startingState` 指向 requester 已核对的 exact existing branch。Codex 原生持有
+每个 task 的 worktree、branch、history 与 ready thread ID；方向目录不需要另存为 Desktop
+project，也不建立 project/worktree mapping registry。Native worktree 创建失败时才显式 WAITING。
 
 新建 top-level participant 时，`create_thread` 的 initial prompt 本身就是完整 `[WORK]`；不得
 先创建空 task 再二次发送。Setup 只返回 client ID 时等待 ready thread ID，不得重建或把 client
-ID 当 recipient。旧 archived tasks 不复用。
+ID 当 recipient。旧 archived tasks 不复用。Native worktree 属于该 top-level participant；leaf
+不创建 worktree，也不把自己的临时执行面提升为长期 participant。
 
-同一 direction worktree 同时只有一个 Git-visible writer phase。EM 向 CM 发送 WORK 前提交自身
-owned refs；CM terminal RESULT 前 EM 对整个 direction worktree 只读且不得 stage/commit；CM
-只提交 exact owned paths并返回 known diff，随后 writer phase 回到 EM。Leaf 不 commit/push，
-也不创建 worker worktree。不同 direction worktrees 可以并行；每个新 cycle 以 WORK 指定的
-exact committed direction-worktree baseline/HEAD 为起点，无法安全同步或涉及 shared-core 时交 Root。
+同一 direction 同时只有一个 Git-visible writer phase，即使 EM 与 CM 位于不同 native task
+worktree。EM 向 CM 发送 WORK 前提交自身 owned refs并给出 exact commit；已有 CM task 先将
+自己的 branch fast-forward 到该 commit，新建 CM task 则以包含该 commit 的 exact branch 为
+starting state。CM terminal RESULT 前 EM 不得 stage/commit；CM 只提交 exact owned paths并返回
+known commit/diff，随后 EM 将自己的 branch fast-forward 到 exact CM commit，writer phase 才
+回到 EM。任一方向不能 fast-forward 时，当前 participant 停止并向当前 `Return task` 返回
+terminal blocker，不得越过 requester 直接联系 Root，也不得 cherry-pick、rebase 或重写历史。
+Requester 按既有链路关闭 inbound；Root 只在收到独立 bounded repair WORK 后处理。Leaf 不
+commit/push，也不创建 worktree。不同 directions 可以并行；每个新 cycle 以 WORK 指定的 exact
+committed baseline 为起点；shared-core 需求也先按当前 Return task 链路关闭再交 Root。
 
 Owner 只修改/stage owned paths并保留其他修改。跨 top-level role handoff 且 refs 有 Git-visible
-内容时必须 commit；push 在用户要求远端同步、跨 worktree 集成或正式方向交付时强制。
+内容时必须 commit；同一 saved HMASD repository 内的 native-worktree 交接只使用本地 exact
+commit，不需要 push。Push 只在用户要求远端同步、跨主机交付或正式方向交付时强制。
 
 用户直接控制 participant 时，该输入已经是 authority，不需要 CONTROL 转发。Root 或 requester
 需要影响另一 task 时，直接向 affected participant 发送 CONTROL，并遵守第 3 节对应动作语义。

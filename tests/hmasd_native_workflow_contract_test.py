@@ -48,7 +48,15 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
     assert "同时最多持有一个 unfinished inbound WORK" in protocol
     assert "所有已发送 EM 必须 terminal" in protocol
     assert "initial prompt 本身就是完整 `[WORK]`" in protocol
-    assert "同一 direction worktree 同时只有一个 Git-visible writer phase" in protocol
+    assert "同一 direction 同时只有一个 Git-visible writer phase" in protocol
+    assert "Codex 原生 `environment: worktree`" in protocol
+    assert "方向目录不需要另存为 Desktop" in protocol
+    assert "branch fast-forward 到该 commit" in protocol
+    assert "不得 cherry-pick、rebase 或重写历史" in protocol
+    assert "native-worktree 交接只使用本地 exact" in protocol
+    assert "不需要 push" in protocol
+    assert "向当前 `Return task` 返回" in protocol
+    assert "不得越过 requester 直接联系 Root" in protocol
     assert "hmasd-explorer-agentify-transport" in protocol
     assert "不设固定配额" in protocol
     assert "0–2 个 leaves" not in protocol
@@ -248,8 +256,8 @@ def test_retired_control_notebooks_are_not_active_docs() -> None:
     requirements = _read("docs/SCIENTIFIC_CAPABILITY_LAYER_REQUIREMENTS.md")
     assert "Workflow-Clerk" not in requirements
     temp_readme = _read("temp/README.md")
-    assert "at most one sibling permanent Git worktree" in temp_readme
-    assert "saved once as a Codex Desktop local project" in temp_readme
+    assert "Codex native" in temp_readme
+    assert "does not need to be saved as a separate" in temp_readme
 
 
 def test_state_cli_only_exposes_validate_and_update() -> None:

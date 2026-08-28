@@ -40,20 +40,25 @@ milestone、科学证据和实验结果，不重建身份认证、消息账本�
 ## Workspace and Git
 
 `C:/Projects/HMASD` 是 Root 的 primary checkout 且保持 `main`，不得在其中运行 `git switch`
-或 `git checkout`。ACTIVE direction 按需使用 `C:/Projects/HMASD-worktrees/<name>` 下至多一个
-sibling Git worktree，并由用户或 Root 保存为 Codex Desktop local project；EM/CM 在该 project
-中以 local environment 建立不同 top-level task。REGISTERED、PARKED、CLOSED 不预建 worktree，
-也不建立本地 project/worktree registry。
+或 `git checkout`。Portfolio、EM、CM 从已保存的 HMASD project 使用 Codex 原生
+`environment: worktree` 创建 top-level task；需要特定基线时指定 exact existing branch。
+Codex 持有 task worktree、branch 与 ready thread ID，不要求把方向目录另存为 Desktop project，
+也不建立本地 project/worktree registry。REGISTERED、PARKED、CLOSED 不预建 task worktree。
 
-同一 direction worktree 同时只有一个 Git-visible writer phase：EM 向 CM 交付前提交自身
-owned refs并转为只读；CM terminal RESULT 前 EM 不 stage/commit；CM 只提交 exact owned paths，
-返回 known diff 后 writer phase 才回到 EM。Leaf 不 commit/push、不创建 worker worktree。
-Owner 保留其他 task 与用户的修改；shared index mutation 串行进行。
+同一 direction 同时只有一个 Git-visible writer phase，即使 EM 与 CM 位于不同 native task
+worktree：EM 向 CM 交付前提交自身 owned refs并转为只读；CM branch 必须 fast-forward 到 exact
+EM commit 后再工作。CM 只提交 exact owned paths并返回 known commit/diff，随后 EM branch 必须
+fast-forward 到 exact CM commit，writer phase 才回到 EM。任一方向非 fast-forward 时，当前
+participant 停止并向当前 `Return task` 返回 terminal blocker，不得越过 requester 直接联系
+Root，也不得 cherry-pick、rebase 或重写历史。Root 只在既有链路关闭后收到独立 bounded repair
+WORK 时处理。Leaf 不 commit/push、不创建 worktree。Owner 保留其他 task 与用户的修改；shared
+Git mutation 串行进行。
 
 方向 source 在 `experiments/candidates/`，tests 在 `tests/experiments/candidates/`，durable
 science 在 `docs/research/candidates/<direction>/`，运行产物只在
 `temp/directions/<direction>/{exp,test}/`。跨 top-level role handoff 且 refs 包含 Git-visible
-内容时必须 commit；push 只在用户要求远端同步、跨 worktree 集成或正式交付时强制。
+内容时必须 commit；同一 saved HMASD repository 内的 native-worktree 交接不需要 push。Push
+只在用户要求远端同步、跨主机交付或正式交付时强制。
 
 新建 Portfolio/EM/CM task 时，initial prompt 本身就是完整 `[WORK]`；不得创建空 task 后重复
 发送。旧 archived task 不复用。只有 ready thread ID 可作为 recipient；setup client ID 只等待。
