@@ -38,11 +38,6 @@ def test_public_contract_is_only_the_shared_core_fence_seam() -> None:
     ]
 
 
-def test_legacy_work_packet_and_worktree_modules_are_absent() -> None:
-    for relative in ("scripts/hmasd_work_packet.py", "scripts/hmasd_worktree.py"):
-        assert not (ROOT / relative).exists(), relative
-
-
 def test_shared_core_record_round_trip_and_exact_binding() -> None:
     record = _base_action(
         paths=["tests/a_test.py", "scripts/a.py"],

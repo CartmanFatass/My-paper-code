@@ -351,12 +351,6 @@ def test_assignment_from_brief_builds_root_to_clerk_from_current_release(
     ]
 
 
-def test_legacy_assignment_command_is_removed() -> None:
-    result = run_cli("assignment", "--help")
-    assert result.returncode == 2
-    assert "invalid choice" in result.stderr
-
-
 def test_assignment_rejects_malformed_or_unpublishable_control_release(tmp_path: Path) -> None:
     for path in (
         "docs/project/WORKFLOW_PROTOCOL.md",
@@ -601,15 +595,15 @@ def test_reanchor_requires_matching_new_publishable_release(tmp_path: Path) -> N
     assert unchanged.returncode == 2 and "new control release" in unchanged.stderr
 
 
-def test_read_message_rejects_legacy_lines_and_reads_trusted_local_body(
+def test_read_message_requires_exact_v3_line_and_reads_trusted_local_body(
     tmp_path: Path,
 ) -> None:
     assigned = assign(tmp_path)
-    old = run_cli("read-message", "--repo", str(tmp_path), "--message", f"HMASD_SESSION_ENVELOPE_V1 {assigned['locator']}")
-    assert old.returncode == 2
-    v2 = assigned["message"].replace("HMASD_SESSION_ENVELOPE_V3", "HMASD_SESSION_ENVELOPE_V2")
+    wrong_header = assigned["message"].replace(
+        "HMASD_SESSION_ENVELOPE_V3", "HMASD_SESSION_ENVELOPE"
+    )
     assert run_cli(
-        "read-message", "--repo", str(tmp_path), "--message", v2,
+        "read-message", "--repo", str(tmp_path), "--message", wrong_header,
     ).returncode == 2
     wrapped = run_cli("read-message", "--repo", str(tmp_path), "--message", assigned["message"] + " please")
     assert wrapped.returncode == 2

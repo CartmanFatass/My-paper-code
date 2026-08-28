@@ -49,7 +49,7 @@ PARKED 没有 current assignment、resource heartbeat 或 active Operator。普�
 `next_role=NONE`、无 next objective、无 current assignment/heartbeat/active experiment。
 participant 局部完成不能产生 CLOSED。CLOSED 在当前 protocol epoch 内是 terminal；若
 新证据要求重开，Portfolio 必须作显式新 decision，并由 Clerk 创建新的 manager
-generation，而不能恢复旧 assignment。
+generation，而不能恢复已终止的 assignment。
 
 ## 2. Codex task plane 与 standing authority
 
@@ -58,7 +58,7 @@ Clerk 与 Portfolio 是 global long-lived tasks；EM/CM 在第一次成为某 di
 owner 时按需创建，之后在相同 `protocol_epoch / direction / role / generation` 下复用。
 
 Clerk 每次创建前必须从 native task list/read 查找 exact identity；它不得依据本地
-task cache、runtime JSON、thread title 猜 task。已存在的同 identity task 即使 idle 也
+registry、runtime JSON 或 thread title 猜 task。已存在的同 identity task 即使 idle 也
 继续使用；出现两个候选或 identity/history 冲突时停止该 direction 的 send，并把 exact
 facts 交 Root。task 缺失时才使用 Codex 原生 create 创建真实可见 top-level task。
 
@@ -98,12 +98,12 @@ slice-specific semantic flags。Root→Clerk 使用 `--current-control-release` 
 publishable release；Clerk→participant 用 `--control-release-envelope` 指向 validated ingress
 并复制 release。script 读取固定 role/direction context、为这些外部内容生成 content refs、
 补齐固定 return boundary 与 workspace default，并直接生成完整 body 和 envelope。两者都不创建 ASSIGNMENT
-body 或 control-release JSON；旧 `assignment --body --control-release` 不存在。
+body 或 control-release JSON。
 message ID 与 locator 共同承担本地幂等相关性；它们不是认证凭据。
 
 recipient 把 Codex delegation 的 exact `input` 交给 v3 `read-message`。只有整行
 full-match、body/schema/endpoint/control metadata 均通过才是工作流事件。裸 locator、
-raw JSON、自然语言、v1/v2 header、附带说明的 line 和 leaf report 都是 `NON_ENVELOPE`。
+raw JSON、自然语言、非 V3 header、附带说明的 line 和 leaf report 都是 `NON_ENVELOPE`。
 用户在可见 task 中的直接对话仍是用户输入，但其跨 task 控制影响必须转成
 `CONTROL_NOTICE`。
 
@@ -147,7 +147,7 @@ CONTROL_NOTICE 同样复制 initiating notice 的 release。script 校验 direct
 endpoints、reply chain、body contract 与 changed-path containment；不验证 Codex 本身。
 
 ASSIGNMENT 的 `context_refs` 是 point-in-time 定位信息，不是 freshness gate；recipient 按 path
-读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用旧 context SHA 否定合法
+读取当前 authority。RETURN/PORTFOLIO_RETURN/CONTROL_NOTICE 不用 assignment-time context SHA 否定合法
 mutation 或恢复重读。本地 envelope 文件属于可信协作输入；v3 不建立 body digest、
 authentication、tamper archive、不可变消息账本或二次摘要层。RETURN/Portfolio 新产生的
 artifact refs 仍按当前 bytes 检查。
@@ -178,8 +178,7 @@ PORTFOLIO_RETURN 给 Clerk。CONTROL_NOTICE 由观察到 authoritative user/cont
 peer edge。所有跨 session send 只使用 CLI 输出的 exact recipient thread ID 与 exact
 one-line message。
 
-v1/v2 participant-to-participant forwarding、legacy RETURN 转发和 mixed-epoch edge 在 v3
-均非法；迁移必须按第 13 节建立 clean generation。
+除以上 V3 edges 外的 participant-to-participant forwarding 和 RETURN 转发均非法。
 
 ## 4. Body contracts
 
@@ -229,7 +228,7 @@ RETURN body 固定包含：
 - `WAIT_RESOURCE`
 - `FAILED`
 
-不存在 participant terminal/DONE status。四个 `REQUEST_*` 必须提供一个非空、bounded
+不存在 participant terminal status。四个 `REQUEST_*` 必须提供一个非空、bounded
 `next_objective`；`failure` 必须为空。`REQUEST_USER` 必须提供 exact material
 question/Effect，而不是模糊批准请求。
 
@@ -341,7 +340,7 @@ Clerk 只按 `failure.responsible_role` 路由，header `next` 仍为 `NONE`。
 
 Clerk 在任何 native send 前先校验完整 `considered/transitions/capacity` 和 registry
 revision，再在同一事件 turn 展开所有独立 ready transition。一个 transition 的 FAILED
-不删除、延迟或改写其他 ready transition。v1 `actions[]` 不得被读取为正常 v3 body。
+不删除、延迟或改写其他 ready transition。
 
 ### 4.4 新方向 atomic apply
 
@@ -402,7 +401,7 @@ CONTROL_NOTICE 只改变 transport/control expectation，不直接写 lifecycle 
 `protocol_epoch` 内 release 更新时，Clerk 只在 recipient turn boundary 发送
 `REANCHOR`，带新 committed release 和必须重读的 authority refs；recipient 的下一条
 v3 message 必须携带新 release，才算 adoption 可见。REANCHOR 不改变 lifecycle。
-protocol epoch 变化不得 REANCHOR，必须按第 13 节创建新 manager generation。
+`protocol_epoch` 固定为 `3`；其他 epoch 均为无效输入。
 
 ## 5. 唯一转换表
 
@@ -456,8 +455,7 @@ final drain 不创建 durable inbox、ack、cursor、receipt 或消费 registry�
 transport-recovery heartbeat 唤醒；方向 resource heartbeat 永远回到其 manager。
 
 若 exact native list/read/send/create 能力不可用，Clerk 必须停止受影响动作并向用户报告
-capability gap。它不得读取 raw rollout、state SQLite、本地 task cache 或 hidden
-app-server 来冒充 native topology。
+capability gap。它不得从本地文件、数据库或私有 history parser 推导 native topology。
 
 ## 7. Recovery 与 retry
 
@@ -616,7 +614,7 @@ Dashboard 只监听 `127.0.0.1`，所有 mutation method 返回 read-only failur
 每个 displayed control fact 必须带 source path 或 native thread/message ID、
 `protocol_epoch`、`control_release`、真实 observed time 与 stale/unknown flag。仅重新请求
 页面不能刷新 observation time。缺 correlation 时显示 `UNKNOWN/UNOBSERVED`，不得从
-idle、文件存在或旧 runtime task map猜 transport gap。
+idle、文件存在或 runtime task map 猜 transport gap。
 
 Dashboard 不写 authority、不 native send/create/wait、不执行 recovery、不持有 owner，
 也不生成第二 task registry。Dashboard 停止、projection 删除或陈旧不改变 lifecycle、
@@ -655,49 +653,24 @@ identity/Effect 影响并取得确认。
 4. valid message 在 Clerk 处理另一个 event 时到达：bounded final drain 必须消费。
 5. 同 direction 两个 assignments 将要发送：Clerk 在 send 前按 native correlation
    serialize；不得交给 CM/EM 自行猜 stale。
-6. user 直接 PAUSE/OVERRIDE/CANCEL participant：该 task 发 CONTROL_NOTICE，Clerk 停止旧
-   redelivery；已启动 Effect 仍按 at-most-once observe。
+6. user 直接 PAUSE/OVERRIDE/CANCEL participant：该 task 发 CONTROL_NOTICE，Clerk 停止
+   被控制 assignment 的 redelivery；已启动 Effect 仍按 at-most-once observe。
 7. Operator terminal：typed result 先回 CM；CM interpretation/RETURN 不能由 Clerk 或
    run manifest 自动替代。
-8. control release 变化：同 epoch 先 REANCHOR；新 epoch 新 generation。旧 task 不能因
-   cwd 指向新 main 就假装已经采用新协议。
-9. Dashboard 复用旧 observation：显示 stale，不得只改时间。
-10. native task API 不可用：显式 capability failure；禁止 raw/cache fallback。
+8. control release 变化：在 V3 内先 REANCHOR；task 不能因 cwd 指向新 main 就假装已经
+   采用新 release。
+9. Dashboard 复用 stale observation：保持 stale，不得只改时间。
+10. native task API 不可用：显式 capability failure；不得启用本地替代 task plane。
 
-## 13. 新 protocol epoch 迁移
-
-protocol epoch 变化是 session identity boundary，不是普通 release update：
-
-1. Root 先把 goals/protocol、scripts、prompts、skills 与 tests 集成为一个 committed
-   `control_release`；dirty main 不是 release。
-2. 停止创建新的 v2 assignments。已有外部 at-most-once operation/Operator 必须观察到
-   terminal 或明确安全 pause，并把 material evidence 写入 durable authority。
-3. 创建新的 clean Workflow-Clerk 与 Portfolio top-level tasks；不得 fork 旧 task，因为
-   fork 会复制 conflicting mandate/history。
-4. EM/CM 在下一次成为 owner 时创建新 epoch/new generation。只迁移 durable direction
-   authority、artifact/effect refs、failure fingerprint/attempt 和 structured Git closure
-   facts；不迁移本地
-   task cache、raw history reconstruction 或旧 outstanding locator。
-5. 新 Clerk 从 native list/read 建 topology，Portfolio 用 `portfolio-apply` 对 current
-   registry 作一次 global reconciliation，并为每个 ACTIVE direction产生明确 next event。
-6. v3 real-native acceptance 通过且没有 old-epoch outstanding Effect 后，才取消旧
-   heartbeats、归档旧 Clerk/Portfolio/manager；Dashboard 把旧 epoch 标为 historical。
-
-同 epoch 的 non-semantic control change 用 REANCHOR；epoch change 一律 new generation。
-不得建立 v1/v2 forwarding bridge、翻译 legacy DONE/actions 或让旧 session 给新 epoch
-participant 直接发消息。
-
-## 14. 明确非职责与退休机制
+## 13. 明确非职责
 
 `hmasd_session_envelope.py` 只负责 v3 canonical body/header、correlation、endpoint、
 status、failure attempt 和 path containment；它不创建/等待 task、不决定 next role、不
-维护 lifecycle/task cache/inbox/ack/retry FSM，也不解析 raw rollout。
+维护 lifecycle、task registry、inbox、receipt 或 retry FSM，也不解析 native task history。
 
 `hmasd_state.py portfolio-apply` 只机械应用 Portfolio 已决定的 authority/scaffold/
 registry CAS；它不作 Portfolio 判断或派发 task。`hmasd_run.py` 继续独占实验 command/
 process/manifest 事实；session protocol 不重写实验运行器。
 
-`hmasd_codex_tasks.py run-chain/execute-plan`、Work Packet planner、本地 task cache、
-return witness、raw thread/rollout parser、hidden app-server manager、v1 legacy forwarding
-与 Portfolio `actions[]` 全部退出正常路径和真实验收。完成调用依赖核查前文件可暂留，
-但 Root、Clerk、Portfolio、EM、CM 不得自动加载或调用。
+除本文列出的 native task plane、V3 envelope、state、run、Operator 和 Dashboard projection
+seams 外，不得增加第二 task plane、隐藏 manager、私有 inbox/receipt 或替代调度器。

@@ -230,7 +230,7 @@ def test_inspect_includes_capability_contract_but_not_evolving_tool_surface(tmp_
         "tests/codex_config_contract_test.py",
         "tests/fixtures/hmasd_science/case.json",
         "tests/hmasd_dashboard_test.py",
-        "tests/hmasd_portfolio_decision_v2_test.py",
+        "tests/hmasd_portfolio_decision_test.py",
         "tests/hmasd_science_capabilities_test.py",
         "tests/hmasd_scientific_control_plane_test.py",
     ]

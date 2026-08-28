@@ -13,8 +13,8 @@ HMASD 直接信任 Codex 可见的 top-level task/session plane：task 身份、
 - 规划与 ticket：`.scratch/`、`docs/agents/issue-tracker.md`；项目与领域背景：
   `CONTEXT.md`、`docs/adr/`、`docs/agents/domain.md`。
 - `.codex/prompts/` 和 task skills 只是角色入口；不得复制 authority、topology、
-  scheduler 或权限 gate。与上述两份权威文档冲突的 prompt、skill、fixture、历史说明
-  和实现都是迁移对象。
+  scheduler 或权限 gate。控制面只支持 v3；与上述两份权威文档冲突的 prompt、skill、
+  fixture 或实现均为无效输入，不得加载或调用。
 
 v3 的 session skill 层仅为 `hmasd-root-task`、
 `hmasd-workflow-clerk-task`、`hmasd-portfolio-task`、`hmasd-em-task`、
@@ -83,9 +83,8 @@ conversation 和 Dashboard 只保留 provenance。
 8. 用户始终拥有最高权限。危险行为应说明并记录；工具或校验不能变成新的批准层。
 9. Dashboard 只允许 `127.0.0.1` 上的只读 provenance projection。它不得写 authority、
    创建 task、路由、恢复或刷新伪造的 freshness；失败或陈旧不改变 liveness。
-10. `hmasd_codex_tasks.py run-chain/execute-plan`、Work Packet planner、本地 task
-    cache、return witness、raw rollout parser 与隐藏 app-server manager 均已退出正常
-    路径和验收。删除前先核查真实依赖并保留在途修改。
+10. 不得新增本地 task registry、inbox、receipt、raw task-history parser、隐藏 manager
+    或第二 scheduler；native task plane 不可用时必须显式停止。
 
 ## Shared workspace 与 Git
 

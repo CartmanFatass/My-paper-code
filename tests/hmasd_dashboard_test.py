@@ -62,28 +62,23 @@ def fixture_root(tmp_path: Path) -> Path:
     clerk_path.write_bytes(
         dashboard._json_bytes(
             {
-                "schema_version": 1,
+                "schema_version": 3,
                 "observed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                "actions": [
-                    {
-                        "kind": "REDELIVER_ASSIGNMENT",
-                        "locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
-                        "message": "secret transport message",
-                        "recipient_thread_id": "secret-thread",
-                    }
-                ],
                 "directions": [
                     {
                         "direction_id": "example-direction",
-                        "lifecycle": "ACTIVE",
-                        "stage": "CM",
-                        "reason": "OWNED_WORK",
+                        "owner_stage": "CM",
                         "owner_identity": "CM/example-direction/g1",
-                        "task_status": "active",
+                        "native_task_id": "native-cm-thread",
+                        "native_task_status": "active",
                         "next_owner": None,
+                        "next_event": "OWNED_WORK",
+                        "assignment_id": "assignment-1",
+                        "return_id": "UNKNOWN",
+                        "delivery_state": "DELIVERED",
+                        "control_release_adoption": "ADOPTED",
                         "assignment_locator": ".codex/runtime/session-envelopes/example-direction/example.assignment.json",
                         "return_locator": None,
-                        "recovery_kind": "REDELIVER_ASSIGNMENT",
                     }
                 ],
             }
@@ -134,7 +129,7 @@ def _serve_in_thread(root: Path) -> tuple[dashboard.DashboardServer, threading.T
     return server, thread
 
 
-def test_v2_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
+def test_v3_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     first = dashboard.build_snapshot(root)
     second = dashboard.build_snapshot(root)
@@ -225,7 +220,7 @@ def test_clerk_projection_age_is_visible_as_stale(tmp_path: Path) -> None:
     assert clerk["warnings"] == ["stale:clerk_liveness_age"]
 
 
-def test_clerk_v2_projection_keeps_provenance_and_never_infers_transport(tmp_path: Path) -> None:
+def test_clerk_v3_projection_keeps_provenance_and_never_infers_transport(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     liveness_path = root / dashboard.CLERK_LIVENESS_REL
     liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
@@ -298,7 +293,7 @@ def test_clerk_inactive_lifecycle_remains_unknown_without_observed_owner(
     assert row["defect"] is None
 
 
-def test_clerk_v2_observation_preserves_native_provenance_and_stage(tmp_path: Path) -> None:
+def test_clerk_v3_observation_preserves_native_provenance_and_stage(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     registry_path = root / dashboard.REGISTRY_REL
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
@@ -307,7 +302,6 @@ def test_clerk_v2_observation_preserves_native_provenance_and_stage(tmp_path: Pa
     liveness_path = root / dashboard.CLERK_LIVENESS_REL
     liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
     liveness["directions"][0].update(
-        stage="CM_EXPERIMENT",
         owner_stage="CM_EXPERIMENT",
         native_task_id="native-cm-thread",
         native_task_status="running",
@@ -330,7 +324,7 @@ def test_clerk_v2_observation_preserves_native_provenance_and_stage(tmp_path: Pa
     assert row["next_event"] == "observe the frozen command"
 
 
-def test_clerk_v2_defects_are_precise_and_do_not_use_runtime_task_maps(tmp_path: Path) -> None:
+def test_clerk_v3_defects_are_precise_and_do_not_use_runtime_task_maps(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     registry_path = root / dashboard.REGISTRY_REL
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
@@ -345,6 +339,33 @@ def test_clerk_v2_defects_are_precise_and_do_not_use_runtime_task_maps(tmp_path:
     assert row["owner_stage"] == "DEFECT"
     assert row["defect"] == "CLOSED_WITH_INFLIGHT"
     assert "secret" not in dashboard._json_text(row)
+
+
+@pytest.mark.parametrize(
+    "mutate",
+    [
+        lambda value: value.update(schema_version=2),
+        lambda value: value["directions"][0].update(
+            stage=value["directions"][0].pop("owner_stage")
+        ),
+        lambda value: value["directions"][0].update(owner_stage="EXP"),
+    ],
+    ids=["wrong-schema", "stage-alias", "retired-stage"],
+)
+def test_clerk_liveness_accepts_only_the_v3_contract(
+    tmp_path: Path,
+    mutate: Any,
+) -> None:
+    root = fixture_root(tmp_path)
+    liveness_path = root / dashboard.CLERK_LIVENESS_REL
+    liveness = json.loads(liveness_path.read_text(encoding="utf-8"))
+    mutate(liveness)
+    liveness_path.write_bytes(dashboard._json_bytes(liveness))
+
+    clerk = dashboard.build_projection(root, "clerk")
+
+    assert clerk["status"] == "invalid"
+    assert clerk["data"]["directions"][0]["owner_stage"] == "UNKNOWN"
 
 
 @pytest.mark.parametrize(

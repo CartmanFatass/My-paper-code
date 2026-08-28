@@ -24,7 +24,7 @@ EXACT_PATHS = {
     "tests/hmasd_session_envelope_test.py",
     "tests/hmasd_control_release_test.py",
     "tests/hmasd_dashboard_test.py",
-    "tests/hmasd_portfolio_decision_v2_test.py",
+    "tests/hmasd_portfolio_decision_test.py",
     "tests/codex_config_contract_test.py",
     "tests/hmasd_science_capabilities_test.py",
     "tests/hmasd_scientific_control_plane_test.py",

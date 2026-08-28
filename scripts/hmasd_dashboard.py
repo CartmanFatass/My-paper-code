@@ -323,7 +323,8 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
         return value.get("schema") == "agentify_review_natural_completion_archive_v1"
     if kind == "clerk_liveness":
         return (
-            value.get("schema_version") == 1
+            set(value) == {"schema_version", "observed_at", "directions"}
+            and value.get("schema_version") == 3
             and isinstance(value.get("observed_at"), str)
             and isinstance(value.get("directions"), list)
         )
@@ -388,22 +389,39 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
             "PORTFOLIO",
             "EM",
             "CM",
-            "EXP",
             "CM_EXPERIMENT",
-            "WAITING_RESOURCE",
             "WAIT_RESOURCE",
-            "USER_PAUSE",
             "WAIT_USER",
-            "TRANSPORT_GAP",
             "TERMINAL",
             "DEFECT",
+        }
+        required_fields = {
+            "direction_id",
+            "owner_stage",
+            "native_task_id",
+            "native_task_status",
+            "assignment_id",
+            "return_id",
+            "delivery_state",
+            "control_release_adoption",
+            "next_event",
+        }
+        optional_fields = {
+            "observed_at",
+            "defect",
+            "assignment_locator",
+            "return_locator",
+            "owner_identity",
+            "next_owner",
         }
         identifiers: list[str] = []
         for row in rows:
             if (
                 not isinstance(row, Mapping)
+                or not required_fields.issubset(row)
+                or not set(row).issubset(required_fields | optional_fields)
                 or not isinstance(row.get("direction_id"), str)
-                or row.get("stage") not in allowed_stages
+                or row.get("owner_stage") not in allowed_stages
             ):
                 return False
             identifiers.append(str(row["direction_id"]))
@@ -1037,15 +1055,9 @@ def _build_external(root: Path, registry_doc: Document, sources: _SnapshotAttemp
 
 
 
-_V2_STAGES = {
+_V3_STAGES = {
     "PROVISIONING", "PORTFOLIO", "EM", "CM", "CM_EXPERIMENT",
     "WAIT_RESOURCE", "WAIT_USER", "TERMINAL", "DEFECT",
-}
-_LEGACY_STAGE_MAP = {
-    "EXP": "CM_EXPERIMENT",
-    "WAITING_RESOURCE": "WAIT_RESOURCE",
-    "USER_PAUSE": "WAIT_USER",
-    "TRANSPORT_GAP": "DEFECT",
 }
 
 
@@ -1057,17 +1069,13 @@ def _observation_text(item: Mapping[str, Any], *keys: str, default: str = "UNOBS
     return default
 
 
-def _observation_stage(item: Mapping[str, Any], lifecycle: str) -> tuple[str, str | None]:
+def _observation_stage(item: Mapping[str, Any]) -> tuple[str, str | None]:
     """Translate an observed Clerk row without inventing missing transport facts."""
 
-    stage = item.get("owner_stage", item.get("stage"))
-    if isinstance(stage, str):
-        normalized = _LEGACY_STAGE_MAP.get(stage, stage)
-        if normalized in _V2_STAGES:
-            defect = item.get("defect")
-            if not isinstance(defect, str) and stage == "TRANSPORT_GAP":
-                defect = "TRANSPORT_GAP"
-            return normalized, defect if isinstance(defect, str) else None
+    stage = item.get("owner_stage")
+    if isinstance(stage, str) and stage in _V3_STAGES:
+        defect = item.get("defect")
+        return stage, defect if isinstance(defect, str) else None
     # An absent observation is a provenance gap, not an owner or delivery fact.
     return "UNKNOWN", None
 
@@ -1101,7 +1109,7 @@ def _build_clerk(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str,
     """Project the latest *observed* Clerk facts alongside durable direction state.
 
     This is deliberately not a liveness engine.  It never treats an envelope on
-    disk as delivered and never reuses historical runtime task maps.  The
+    disk as delivered and never reuses runtime task maps.  The
     liveness file records the time that Codex task/history facts were collected;
     refreshes of this HTTP endpoint keep that original time intact.
     """
@@ -1163,12 +1171,12 @@ def _build_clerk(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str,
         _warning_add(warnings, research_warning)
         _warning_add(warnings, engineering_warning)
         item = observed_rows.get(direction_id, {})
-        stage, defect = _observation_stage(item, lifecycle)
-        assignment_id = _observation_text(item, "assignment_id", "assignment_message_id", default="UNKNOWN")
-        return_id = _observation_text(item, "return_id", "return_message_id", default="UNKNOWN")
+        stage, defect = _observation_stage(item)
+        assignment_id = _observation_text(item, "assignment_id", default="UNKNOWN")
+        return_id = _observation_text(item, "return_id", default="UNKNOWN")
         delivery_state = _observation_text(item, "delivery_state")
         next_event = _observation_text(
-            item, "next_event", "reason",
+            item, "next_event",
             default=(
                 str((research or engineering or {}).get("next_action", {}).get("kind"))
                 if isinstance((research or engineering or {}).get("next_action"), Mapping)
@@ -1195,8 +1203,8 @@ def _build_clerk(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str,
             "lifecycle": lifecycle,
             "owner_stage": stage,
             "next_event": next_event,
-            "native_task_id": _observation_text(item, "native_task_id", "task_id", "owner_thread_id", default="UNKNOWN"),
-            "native_task_status": _observation_text(item, "native_task_status", "task_status"),
+            "native_task_id": _observation_text(item, "native_task_id", default="UNKNOWN"),
+            "native_task_status": _observation_text(item, "native_task_status"),
             "observed_at": row_observed_at,
             "assignment_id": assignment_id,
             "return_id": return_id,
