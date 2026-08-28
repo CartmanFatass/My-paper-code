@@ -1,4 +1,4 @@
-"""Validation and atomic persistence for HMASD Phase 0 state contracts.
+"""Validation and atomic persistence for current HMASD v3 state contracts.
 
 The module deliberately stays small and standard-library-only. JSON schemas are
 loaded from ``scripts/schemas`` and provide the structural contract; the
@@ -21,7 +21,7 @@ import re
 import shutil
 import sys
 import tempfile
-from typing import Any, Callable, Iterator, Mapping, NoReturn
+from typing import Any, Iterator, Mapping, NoReturn
 
 try:
     from scripts import hmasd_path_policy, hmasd_platform
@@ -83,12 +83,6 @@ class ObservedConflictError(StateError):
 
 class _SchemaFailure(Exception):
     pass
-
-
-# Public registry for one-way migrations. A migration must register N -> N+1;
-# no downgrade or implicit rewrite is ever performed.
-Migration = Callable[[dict[str, Any]], dict[str, Any]]
-MIGRATIONS: dict[str, dict[int, Migration]] = {kind: {} for kind in KIND_ALIASES}
 
 
 def normalize_kind(kind: str) -> str:
@@ -513,6 +507,9 @@ def _validate_direction_state(
             document, allow_stale_sha=allow_stale_research_direction_sha
         )
     elif kind == "engineering_state":
+        # scope_ref is immutable assignment-time provenance, not a freshness
+        # pointer. Its SHA remains bound to the authority bytes accepted by CM;
+        # only its direction-owned path is reconciled here.
         if document["scope_ref"]["path"] != expected_direction_path:
             raise _owner_error("engineering scope_ref path is not direction-owned")
     return direction_id
@@ -1180,60 +1177,6 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_run_manifest_transition(current, next_document)
     elif kind == "accepted_result":
         _validate_accepted_result_transition(current, next_document)
-
-
-def register_migration(kind: str, from_version: int, function: Migration) -> None:
-    normalized = normalize_kind(kind)
-    if not isinstance(from_version, int) or from_version < 1:
-        raise ValueError("migration source version must be positive")
-    if not callable(function):
-        raise TypeError("migration must be callable")
-    MIGRATIONS.setdefault(normalized, {})[from_version] = function
-
-
-def migrate(
-    kind: str,
-    path: str | os.PathLike[str],
-    writer: str,
-    expected_revision: int,
-    to_version: int,
-) -> dict[str, Any]:
-    normalized = normalize_kind(kind)
-    if normalized == "external_archive":
-        raise ObservedConflictError(f"{normalized} is an immutable record")
-    target = Path(path)
-    with state_lock(target):
-        current_bytes, current = _read_document(target)
-        validate_document(normalized, current, writer=writer)
-        if current["revision"] != expected_revision:
-            raise RevisionConflictError(
-                f"expected revision {expected_revision}, observed {current['revision']}"
-            )
-        current_version = current["schema_version"]
-        if to_version <= current_version:
-            raise UnsupportedVersionError("migrations are one-way and cannot downgrade")
-        transformed = copy.deepcopy(current)
-        version = current_version
-        while version < to_version:
-            function = MIGRATIONS.get(normalized, {}).get(version)
-            if function is None:
-                raise UnsupportedVersionError(f"no migration registered for {normalized} {version} -> {version + 1}")
-            transformed = function(copy.deepcopy(transformed))
-            if not isinstance(transformed, dict):
-                raise ValidationError("migration did not return an object")
-            version += 1
-            if transformed.get("schema_version") != version:
-                raise ValidationError("migration must set schema_version to exactly the next version")
-        transformed["revision"] = current["revision"] + 1
-        transformed["writer"] = writer
-        validate_document(normalized, transformed, writer=writer)
-        _validate_transition(normalized, current, transformed)
-        backup_dir = ROOT / "temp" / "runtime" / "migrations"
-        backup_dir.mkdir(parents=True, exist_ok=True)
-        backup_name = f"{sha256_bytes(os.fsencode(str(target.absolute())))[:16]}-r{current['revision']}.json"
-        atomic_write(backup_dir / backup_name, current_bytes)
-        atomic_write(target, _canonical_bytes(transformed))
-    return transformed
 
 
 def _portfolio_decision_ref(
@@ -2008,13 +1951,6 @@ def _parser() -> argparse.ArgumentParser:
     replace_parser.add_argument("--expected-revision", required=True, type=int)
     replace_parser.add_argument("--input", required=True)
 
-    migrate_parser = subparsers.add_parser("migrate")
-    migrate_parser.add_argument("--kind", required=True)
-    migrate_parser.add_argument("--path", required=True)
-    migrate_parser.add_argument("--writer", required=True)
-    migrate_parser.add_argument("--expected-revision", required=True, type=int)
-    migrate_parser.add_argument("--to-version", required=True, type=int)
-
     portfolio_apply_parser = subparsers.add_parser("portfolio-apply")
     portfolio_apply_parser.add_argument("--repo-root", required=True)
     portfolio_apply_parser.add_argument("--registry", required=True)
@@ -2034,8 +1970,6 @@ def main(argv: list[str] | None = None) -> int:
             initialize(args.kind, args.path, args.writer, args.input)
         elif args.command == "replace":
             replace(args.kind, args.path, args.writer, args.expected_revision, args.input)
-        elif args.command == "migrate":
-            migrate(args.kind, args.path, args.writer, args.expected_revision, args.to_version)
         elif args.command == "portfolio-apply":
             portfolio_apply(args.repo_root, args.registry, args.input)
         else:

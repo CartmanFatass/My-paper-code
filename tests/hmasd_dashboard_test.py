@@ -24,12 +24,12 @@ import scripts.hmasd_dashboard as dashboard
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PHASE0 = ROOT / "tests" / "fixtures" / "hmasd_phase0"
+STATE_FIXTURES = ROOT / "tests" / "fixtures" / "hmasd_state"
 
 
 def _copy_json(source: str, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(PHASE0 / source, target)
+    shutil.copyfile(STATE_FIXTURES / source, target)
 
 
 def fixture_root(tmp_path: Path) -> Path:

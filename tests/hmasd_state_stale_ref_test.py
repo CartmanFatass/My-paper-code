@@ -10,7 +10,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURE = ROOT / "tests/fixtures/hmasd_phase0/research_state.json"
+FIXTURE = ROOT / "tests/fixtures/hmasd_state/research_state.json"
+ENGINEERING_FIXTURE = ROOT / "tests/fixtures/hmasd_state/engineering_state.json"
 
 
 def sha256(path: Path) -> str:
@@ -97,3 +98,26 @@ def test_replace_rebinds_a_stale_research_direction_ref_with_revision_cas(
 
     assert result.returncode == 0, result.stderr
     assert json.loads(state_path.read_text(encoding="utf-8")) == replacement
+
+
+def test_engineering_scope_ref_is_frozen_assignment_provenance(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    from scripts import hmasd_state
+
+    document = json.loads(ENGINEERING_FIXTURE.read_text(encoding="utf-8"))
+    direction_id = "alpha"
+    direction_path = tmp_path / "docs/research/candidates/alpha/DIRECTION.md"
+    direction_path.parent.mkdir(parents=True)
+    direction_path.write_text("# Current Alpha authority\n", encoding="utf-8")
+    document["direction_id"] = direction_id
+    document["writer"] = f"CM-{direction_id}"
+    document["scope_ref"]["path"] = "docs/research/candidates/alpha/DIRECTION.md"
+    frozen_sha = document["scope_ref"]["sha256"]
+    assert frozen_sha != sha256(direction_path)
+    monkeypatch.setattr(hmasd_state, "ROOT", tmp_path)
+
+    observed = hmasd_state.validate_document("engineering_state", document)
+
+    assert observed["scope_ref"]["sha256"] == frozen_sha

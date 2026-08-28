@@ -30,7 +30,7 @@ DEFAULT_PREFIXES = (
     "docs/research/candidates/",
     "docs/external-review/directions/",
     "tests/fixtures/hmasd_external_review/",
-    "tests/fixtures/hmasd_phase0/",
+    "tests/fixtures/hmasd_state/",
 )
 TEXT_SUFFIXES = {".md", ".json"}
 

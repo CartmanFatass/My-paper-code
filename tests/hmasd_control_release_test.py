@@ -216,7 +216,7 @@ def test_verify_rejects_dirty_control_path_and_wrong_release_id(tmp_path: Path) 
     assert dirty.returncode == 2 and "not publishable" in dirty.stderr
 
 
-def test_inspect_includes_capability_contract_but_not_evolving_tool_surface(tmp_path: Path) -> None:
+def test_inspect_includes_capability_and_state_contracts_but_not_evolving_tool_surface(tmp_path: Path) -> None:
     run("git", "init", "-b", "main", cwd=tmp_path)
     run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
     run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
@@ -228,11 +228,16 @@ def test_inspect_includes_capability_contract_but_not_evolving_tool_surface(tmp_
         "scripts/schemas/hmasd_instrument_observation_v1.schema.json",
         "scripts/schemas/hmasd_portfolio_registry.schema.json",
         "tests/codex_config_contract_test.py",
+        "tests/fixtures/hmasd_portfolio/portfolio_registry.json",
         "tests/fixtures/hmasd_science/case.json",
+        "tests/fixtures/hmasd_state/research_state.json",
         "tests/hmasd_dashboard_test.py",
+        "tests/hmasd_portfolio_contract_test.py",
         "tests/hmasd_portfolio_decision_test.py",
         "tests/hmasd_science_capabilities_test.py",
         "tests/hmasd_scientific_control_plane_test.py",
+        "tests/hmasd_state_contract_test.py",
+        "tests/hmasd_state_stale_ref_test.py",
     ]
     excluded = [
         ".agents/skills/hmasd-scientific-critical-thinking/SKILL.md",
@@ -264,12 +269,14 @@ def test_inspect_includes_current_v3_mechanical_surface_but_not_direction_scienc
     expected = sorted([
         "docs/project/git-path-policy-v1.json",
         "scripts/hmasd_direction_git.py",
+        "scripts/hmasd_host_compat.py",
         "scripts/hmasd_path_policy.py",
         "scripts/hmasd_operator_result.py",
         "scripts/hmasd_protocol_contracts.py",
         "scripts/hmasd_run.py",
         "scripts/schemas/hmasd_operator_result_v2.schema.json",
         "tests/hmasd_direction_git_test.py",
+        "tests/hmasd_host_compat_test.py",
         "tests/hmasd_path_policy_test.py",
         "tests/hmasd_operator_result_test.py",
         "tests/hmasd_protocol_contracts_test.py",

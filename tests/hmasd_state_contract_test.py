@@ -1,9 +1,4 @@
-"""Phase 0 RED tests for HMASD durable state contracts.
-
-These tests intentionally describe the contract before the implementation exists.
-They are kept narrow so later phases can reuse the fixtures without importing
-workflow behavior.
-"""
+"""Current HMASD durable state contract tests."""
 
 from __future__ import annotations
 
@@ -22,7 +17,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "hmasd_state.py"
-FIXTURES = Path(__file__).resolve().parent / "fixtures" / "hmasd_phase0"
+FIXTURES = Path(__file__).resolve().parent / "fixtures" / "hmasd_state"
 KINDS = (
     "portfolio_registry",
     "research_state",
@@ -59,7 +54,7 @@ def test_retained_schema_contracts_are_present_and_strict() -> None:
         assert schema["required"]
 
 
-def test_valid_phase0_fixtures_validate() -> None:
+def test_current_state_fixtures_validate() -> None:
     for kind in KINDS:
         path = FIXTURES / f"{kind}.json"
         result = run_cli("validate", "--kind", kind, "--path", str(path))
@@ -482,7 +477,7 @@ def test_foreign_archive_has_native_schema_and_exact_completion_hash(tmp_path: P
     assert result.returncode == 2
 
 
-def test_initialize_replace_and_migrate_are_revision_cas_and_byte_preserving(
+def test_initialize_and_replace_are_revision_cas_and_byte_preserving(
     tmp_path: Path,
 ) -> None:
     source = FIXTURES / "research_state.json"
@@ -522,25 +517,24 @@ def test_initialize_replace_and_migrate_are_revision_cas_and_byte_preserving(
     assert stale.returncode == 4
     assert target.read_bytes() == original
 
-    unsupported = fixture("research_state")
-    unsupported["schema_version"] = 2
-    unsupported_path = tmp_path / "unsupported.json"
-    unsupported_path.write_text(json.dumps(unsupported), encoding="utf-8")
-    migrate = run_cli(
-        "migrate",
-        "--kind",
-        "research_state",
-        "--path",
-        str(unsupported_path),
-        "--writer",
-        "EM-example-direction",
-        "--expected-revision",
-        "1",
-        "--to-version",
-        "3",
+
+
+def test_state_cli_exposes_only_current_v3_operations() -> None:
+    from scripts import hmasd_state
+
+    parser = hmasd_state._parser()
+    subparsers = next(
+        action
+        for action in parser._actions
+        if action.__class__.__name__ == "_SubParsersAction"
     )
-    assert migrate.returncode == 3
-    assert unsupported_path.read_text(encoding="utf-8") == unsupported_path.read_text(encoding="utf-8")
+
+    assert set(subparsers.choices) == {
+        "validate",
+        "initialize",
+        "replace",
+        "portfolio-apply",
+    }
 
 
 def test_concurrent_initialize_has_one_winner_and_losers_preserve_bytes(tmp_path: Path) -> None:

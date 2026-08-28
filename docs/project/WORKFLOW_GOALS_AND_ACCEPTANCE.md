@@ -88,6 +88,12 @@ ASSIGNMENT context refs 是 point-in-time 定位信息，不是 freshness gate�
 mutation 或恢复重读。本地 envelope 文件视为可信协作输入，不增加 tamper archive、不可变
 消息账本或二次摘要层。
 
+Research state 的 `direction_ref` 是当前-authority ref，EM 更新 `DIRECTION.md` 时必须同步
+更新。Engineering state 的 `scope_ref` 是 CM slice 的冻结输入 ref；其 path 必须属于同一
+direction，但 SHA 不随之后的 EM authority 演化而改写。跨方向回归只在相关 paths 位于
+committed boundary 时比较 current-authority refs，不把 shared-main 中其他 owner 的中间态
+判成 durable defect。
+
 participant RETURN 没有局部 terminal status。exact status 只有
 `REQUEST_EM / REQUEST_CM / REQUEST_PORTFOLIO / REQUEST_USER / WAIT_RESOURCE /
 FAILED`。科研、工程或实验 interpretation 完成后必须明确下一责任；方向真正 PARKED
@@ -237,3 +243,6 @@ protocol epoch、control release、native observation time 和 stale/unknown；�
     provenance，无法证明时显示 UNKNOWN 而不是猜测 transport gap。
 15. 真实验收使用 native visible tasks、真实方向与原生 task history；任何本地替代
     task plane 都不能充当验收证据。
+16. State CLI 只公开当前版本的 validate/initialize/replace/portfolio-apply；不存在 schema
+    translation 或 migration 执行面。Research current ref 与 engineering frozen scope ref
+    分别按其语义验证。

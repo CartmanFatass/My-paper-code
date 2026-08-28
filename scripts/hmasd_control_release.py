@@ -20,18 +20,22 @@ EXACT_PATHS = {
     *{f"scripts/{name}" for name in (
         "hmasd_direction_git.py", "hmasd_path_policy.py", "hmasd_operator_result.py",
         "hmasd_protocol_contracts.py", "hmasd_run.py", "hmasd_science_capabilities.py",
+        "hmasd_host_compat.py",
     )},
     "tests/hmasd_session_envelope_test.py",
     "tests/hmasd_control_release_test.py",
     "tests/hmasd_dashboard_test.py",
     "tests/hmasd_portfolio_decision_test.py",
+    "tests/hmasd_portfolio_contract_test.py",
+    "tests/hmasd_state_contract_test.py",
+    "tests/hmasd_state_stale_ref_test.py",
     "tests/codex_config_contract_test.py",
     "tests/hmasd_science_capabilities_test.py",
     "tests/hmasd_scientific_control_plane_test.py",
     *{f"tests/{name}" for name in (
         "hmasd_direction_git_test.py", "hmasd_path_policy_test.py",
         "hmasd_operator_result_test.py", "hmasd_protocol_contracts_test.py",
-        "hmasd_run_test.py",
+        "hmasd_run_test.py", "hmasd_host_compat_test.py",
     )},
 }
 EVOLVING_SCIENCE_TOOL_PATHS = {
@@ -61,7 +65,11 @@ def is_control_path(path: str) -> bool:
     path = path.replace("\\", "/")
     if path in EVOLVING_SCIENCE_TOOL_PATHS or path.startswith(EVOLVING_SCIENCE_TOOL_PREFIXES): return False
     if path in EXACT_PATHS or path.startswith("scripts/dashboard/"): return True
-    if path.startswith("tests/fixtures/hmasd_science/"): return True
+    if path.startswith((
+        "tests/fixtures/hmasd_science/",
+        "tests/fixtures/hmasd_state/",
+        "tests/fixtures/hmasd_portfolio/",
+    )): return True
     if path.startswith(".codex/agents/") and PurePosixPath(path).name.startswith("hmasd-") and path.endswith(".toml"): return True
     parts = PurePosixPath(path).parts
     if len(parts) >= 3 and parts[:2] == (".agents", "skills") and parts[2] in SKILLS: return True

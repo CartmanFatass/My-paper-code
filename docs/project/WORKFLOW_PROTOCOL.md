@@ -152,6 +152,12 @@ mutation 或恢复重读。本地 envelope 文件属于可信协作输入；v3 �
 authentication、tamper archive、不可变消息账本或二次摘要层。RETURN/Portfolio 新产生的
 artifact refs 仍按当前 bytes 检查。
 
+Direction state 中两类 ref 不得混淆：research `direction_ref` 是 EM-owned current-authority
+ref，必须匹配当前 `DIRECTION.md` bytes；engineering `scope_ref` 是 CM-owned、冻结于 slice
+intake 的 assignment-time provenance，只要求同 direction path 和合法 content hash。EM 后续
+演化 authority 不得静默改写已接受工程 scope。shared-main 回归遇到其他 owner 正在修改的
+exact state/authority paths 时，不把跨文件瞬时不一致升级为 committed defect。
+
 header 的 `next` 由 kind/body 机械派生，LLM 不填写：
 
 | kind/body | header `next` |
@@ -671,6 +677,9 @@ status、failure attempt 和 path containment；它不创建/等待 task、不�
 `hmasd_state.py portfolio-apply` 只机械应用 Portfolio 已决定的 authority/scaffold/
 registry CAS；它不作 Portfolio 判断或派发 task。`hmasd_run.py` 继续独占实验 command/
 process/manifest 事实；session protocol 不重写实验运行器。
+
+`hmasd_state.py` 只公开 `validate`、`initialize`、`replace` 与 `portfolio-apply`。它拒绝未知
+schema version，不提供 schema translation、migration registry 或 migration command。
 
 除本文列出的 native task plane、V3 envelope、state、run、Operator 和 Dashboard projection
 seams 外，不得增加第二 task plane、隐藏 manager、私有 inbox/receipt 或替代调度器。

@@ -63,6 +63,10 @@ participant 必须按 v3 `CONTROL_NOTICE` 让 Clerk 看见 transport 变化。
 typed observation；EM/CM 校验并写 sidecar，raw instrument output 只留在对应 direction
 的 `temp/` 路径。工具成功不是 scientific acceptance、routing 或 lifecycle authority。
 
+Research state 的 `direction_ref` 指向当前 direction authority；engineering state 的
+`scope_ref` 固定绑定 CM 接受 slice 时的 authority bytes，是 assignment-time provenance，
+不得因 EM 后续修改 `DIRECTION.md` 而静默 rebind。
+
 writer 表示领域责任，不是额外批准层。material decision 写入所属 durable authority；
 conversation 和 Dashboard 只保留 provenance。
 
