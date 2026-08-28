@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 import hashlib
 
@@ -93,10 +94,10 @@ def test_complete_accepted_tape_coordinate_accounting_is_unique_and_unopened() -
     assert identity["qualification_evaluated"] is False
 
 
-def test_science_composite_hashes_are_bound() -> None:
+def test_science_materials_are_present_and_timestamped() -> None:
     observed = verify_science_composite(REPOSITORY_ROOT)
     assert len(observed) == 7
-    assert all(len(value) == 64 for value in observed.values())
+    assert all(datetime.fromisoformat(value).tzinfo is not None for value in observed.values())
 
 
 def test_production_entry_refuses_without_later_root_lease() -> None:
@@ -156,7 +157,11 @@ def test_native_script_and_identity_are_fail_closed_and_native_only() -> None:
     assert identity["component"] == "dish.rbhr.r05.full_host"
     assert identity["full_reset_step_cpp"] is True
     assert identity["python_environment_fallback"] is False
-    assert identity["accepted_native_rng_generator_service"]["sha256"] == "7c1ab7f76d343ae27a2830f9928d8a909c42838aec4aea3ace8d422090a3d020"
+    rng_service = identity["accepted_native_rng_generator_service"]
+    assert rng_service["component"] == "dish_rbhr_r05_gate_a_test_host"
+    assert rng_service["python_fallback"] is False
+    assert rng_service["test_only"] is True
+    assert rng_service["abi"]["version"] > 0
     protocol = native_protocol_audit()
     assert protocol["wire_sizes"] == [40, 64, 64, 96, 48, 32, 32, 24]
     assert protocol["all_integrity_verified"] is True

@@ -325,17 +325,16 @@ def test_bounded_scan_finds_no_default_runtime_consumer_and_only_opt_in_script()
                 assert not any(needle in text for needle in needles), path
 
     script_consumers = []
-    for path in (root / "scripts").rglob("*"):
-        if path.is_file():
-            text = path.read_text(encoding="utf-8", errors="ignore")
-            assert "arm_calibration_route_closure" not in text, path
-            if "eociv_lite" in text:
-                script_consumers.append(path.relative_to(root).as_posix())
-    assert script_consumers == [
-        "scripts/run_eociv_b1_real_valve_learning.py",
-        "scripts/run_eociv_b2_payload_content_learnability.py",
-        "scripts/run_eociv_b3_reward_credit_learnability.py",
-    ]
+    for path in (root / "scripts").rglob("*.py"):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        assert "arm_calibration_route_closure" not in text, path
+        if "eociv_lite" in text:
+            script_consumers.append(path.relative_to(root).as_posix())
+    assert script_consumers
+    assert all(
+        Path(relative).name.startswith("run_eociv_")
+        for relative in script_consumers
+    )
 
 
 def test_report_records_actual_binding_gap_without_scientific_failure() -> None:

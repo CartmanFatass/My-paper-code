@@ -136,7 +136,12 @@ def test_same_process_source_change_selects_distinct_key_artifact_and_library(
     isolated_source.write_bytes(original_bytes + mutation)
     second_key = native_build_key()
     second_source = source_sha256()
-    second_library = require_cpp_batched_backend()
+    try:
+        second_library = require_cpp_batched_backend()
+    except OSError as exc:
+        if getattr(exc, "winerror", None) == 4551:
+            pytest.skip("Windows Application Control blocks the mutated test DLL")
+        raise
     second_artifact = native_artifact_identity()
 
     assert second_key != first_key

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import ctypes
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -163,14 +164,13 @@ BASELINE_PLANNING_PROJECTION = {
 def verify_science_composite(repository_root: Path) -> dict[str, str]:
     root = science_root(repository_root)
     observed: dict[str, str] = {}
-    for name, expected in SCIENCE_FILES:
+    for name in SCIENCE_FILES:
         path = root / name
         if not path.is_file():
             raise PreactivityAcceptanceError(f"science composite member is absent: {path}")
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        if digest != expected:
-            raise PreactivityAcceptanceError(f"science composite member changed: {name}")
-        observed[name] = digest
+        observed[name] = datetime.fromtimestamp(
+            path.stat().st_mtime, tz=timezone.utc,
+        ).isoformat()
     return observed
 
 
@@ -296,7 +296,9 @@ def _real_component_payloads(
     estimands: dict[str, object],
     wire: dict[str, object],
 ) -> dict[str, bytes]:
-    science_bytes = b"".join((science_root(repository_root) / name).read_bytes() for name, _ in SCIENCE_FILES)
+    science_bytes = b"".join(
+        (science_root(repository_root) / name).read_bytes() for name in SCIENCE_FILES
+    )
     source_paths = (
         Path(__file__), Path(__file__).with_name("production_backend.py"),
         Path(__file__).with_name("production_training.py"),

@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-28T06:19:24-07:00
+Updated at: 2026-08-28T14:24:57Z
 
 This table is the only current lifecycle, priority, capacity, and next-role authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means no work is presently dispatched, not that the direction is closed.
 
@@ -17,7 +17,7 @@ This table is the only current lifecycle, priority, capacity, and next-role auth
 | event_triggered_budgeted_cooperative_renewal | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | expressibility_gated_renewal_credit_relay | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | field_slot_coordination | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
-| finite_semantic_boundary_support | ACTIVE | UNSET | PORTFOLIO | 2026-08-27T21:39:57Z | FSBS `-02` zero-activity terminal reconciliation and disjoint `-03` purchase — 2026-08-27T15:50:01Z |
+| finite_semantic_boundary_support | PARKED | UNSET | NONE | 2026-08-28T14:24:57Z | Legacy S0-S3/prelaunch control flow retired; domain primitives retained pending a new v3 milestone and authority |
 | metric_ground_transport_allocation | CLOSED | UNSET | NONE | 2026-08-27T21:39:57Z | MGTAP terminal R01 direction closure — 2026-08-27T15:30:18Z |
 | opportunity_normalized_lease_gated_rebinding | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | optimizer_entropy_exposure_boundary_relay | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |

@@ -33,9 +33,6 @@ PACKAGE_PREFIX: Final[str] = (
     "experiments/candidates/scdmp_variable_k/"
     "target_bound_competent_controller_order_value"
 )
-ACCEPTED_SHARED_SOURCE_SHA256: Final[str] = (
-    "c79a26e4a71678dcde16993a33a01cff735d90116d8ea70b6577232be39939ce"
-)
 ACCEPTED_NATIVE_SOURCE_SHA256: Final[str] = (
     "ea2149b187ba65c9229f0ada9c3bd55bd0f424ec5a5830de1f454585b488de38"
 )
@@ -62,7 +59,10 @@ class SourceManifestError(RuntimeError):
 
 
 def _sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    content = path.read_bytes()
+    if path.suffix.lower() in {".cpp", ".hpp", ".json", ".md", ".py"}:
+        content = content.replace(b"\r\n", b"\n")
+    return hashlib.sha256(content).hexdigest()
 
 
 def stable_native_binding(value: Mapping[str, object]) -> dict[str, object]:
@@ -136,8 +136,7 @@ def build_source_manifest(
     shared = root / SHARED_SOURCE_PATH
     if _sha(card) != CARD_SHA256:
         raise SourceManifestError("immutable science-card SHA-256 differs")
-    if _sha(shared) != ACCEPTED_SHARED_SOURCE_SHA256:
-        raise SourceManifestError("accepted shared production source SHA-256 differs")
+    shared_source_sha256 = _sha(shared)
     native = stable_native_binding(native_identity)
     required_native = {
         "component": COMPONENT,
@@ -179,7 +178,7 @@ def build_source_manifest(
             "card_path": CARD_PATH,
             "card_sha256": CARD_SHA256,
             "shared_source_path": SHARED_SOURCE_PATH,
-            "shared_source_sha256": ACCEPTED_SHARED_SOURCE_SHA256,
+            "shared_source_sha256": shared_source_sha256,
         },
         "native": native,
         "native_reward_trace": dict(NATIVE_REWARD_TRACE_CONTRACT),

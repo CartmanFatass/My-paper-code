@@ -113,7 +113,7 @@ def test_portfolio_is_one_current_table() -> None:
     assert len(rows) == 33
     lifecycle = {row.split("|")[1].strip(): row.split("|")[2].strip() for row in rows}
     assert lifecycle["active_post_churn_population_flow_identification"] == "ACTIVE"
-    assert lifecycle["finite_semantic_boundary_support"] == "ACTIVE"
+    assert lifecycle["finite_semantic_boundary_support"] == "PARKED"
     assert lifecycle["ucope"] == "ACTIVE"
     assert lifecycle["semigroup_consistent_duration_model_policy"] == "PARKED"
     assert lifecycle["metric_ground_transport_allocation"] == "CLOSED"

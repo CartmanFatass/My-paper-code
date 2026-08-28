@@ -44,8 +44,14 @@ def _contract() -> dict[str, object]:
     return value
 
 
+def _binding_bytes() -> bytes:
+    # Working-tree text may be CRLF-smudged; the frozen binding object is LF.
+    raw = (REPOSITORY_ROOT / BINDING_PATH).read_bytes()
+    return raw.replace(b"\r\n", b"\n")
+
+
 def _binding() -> dict[str, object]:
-    value = parse_strict_json((REPOSITORY_ROOT / BINDING_PATH).read_bytes(), require_canonical=True)
+    value = parse_strict_json(_binding_bytes(), require_canonical=True)
     assert isinstance(value, dict)
     return value
 
@@ -83,7 +89,7 @@ def test_c0_worktree_materialization_normalizes_to_the_exact_read_only_blob_iden
 
     assert hashlib.sha256(content).hexdigest() == C0_CONTRACT_SHA256
     assert git_blob_oid(content) == C0_CONTRACT_BLOB_OID
-    assert derive_binding_record_bytes(_contract()) == (REPOSITORY_ROOT / BINDING_PATH).read_bytes()
+    assert derive_binding_record_bytes(_contract()) == _binding_bytes()
 
 
 def test_binding_record_is_exact_canonical_deterministic_fourteen_row_derivation():

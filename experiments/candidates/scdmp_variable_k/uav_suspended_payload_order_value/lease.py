@@ -44,6 +44,15 @@ EMPIRICAL_SOURCE_MANIFEST_NAME: Final[str] = "empirical_source_manifest.json"
 _CANDIDATE_SOURCE_PREFIX: Final[str] = (
     "experiments/candidates/scdmp_variable_k/uav_suspended_payload_order_value/"
 )
+
+
+def _source_digest(path: Path) -> str:
+    content = path.read_bytes()
+    if path.suffix.lower() in {".cpp", ".hpp", ".json", ".md", ".py"}:
+        content = content.replace(b"\r\n", b"\n")
+    return hashlib.sha256(content).hexdigest()
+
+
 EMPIRICAL_SOURCE_PATHS: Final[tuple[str, ...]] = (
     "envs/native/production_backend.py",
     *(
@@ -182,7 +191,6 @@ def empirical_source_manifest_identity(
     if not path.is_file():
         raise LeaseValidationError("empirical source manifest is missing")
     raw = path.read_bytes()
-    manifest_sha256 = hashlib.sha256(raw).hexdigest()
     try:
         value = json.loads(raw.decode("ascii"))
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
@@ -197,8 +205,9 @@ def empirical_source_manifest_identity(
     if require_final and status != "FINAL":
         raise LeaseValidationError("empirical source manifest is not final")
     canonical = canonical_json_bytes(dict(value)) + b"\n"
-    if raw != canonical:
+    if raw.replace(b"\r\n", b"\n") != canonical:
         raise LeaseValidationError("empirical source manifest bytes are not canonical")
+    manifest_sha256 = hashlib.sha256(canonical).hexdigest()
     files = value.get("files")
     if not isinstance(files, list) or len(files) != len(EMPIRICAL_SOURCE_PATHS):
         raise LeaseValidationError("empirical source manifest inventory count differs")
@@ -224,7 +233,7 @@ def empirical_source_manifest_identity(
                 raise LeaseValidationError("empirical source path escapes repository root") from error
             if not source.is_file():
                 raise LeaseValidationError(f"empirical production source is missing: {relative}")
-            actual = hashlib.sha256(source.read_bytes()).hexdigest()
+            actual = _source_digest(source)
             if actual != expected:
                 raise LeaseValidationError(f"empirical production source digest changed: {relative}")
         observed[relative] = expected
@@ -523,7 +532,7 @@ def validate_current_construction_sources(package_root: Path) -> None:
         path = package_root / relative
         if not path.is_file():
             raise LeaseValidationError(f"accepted construction source is missing: {relative}")
-        actual[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+        actual[relative] = _source_digest(path)
     if actual != ACCEPTED_CONSTRUCTION_SOURCE_MAP:
         raise LeaseValidationError("accepted construction source map changed")
     if construction_source_map_digest(actual) != ACCEPTED_CONSTRUCTION_SOURCE_MAP_DIGEST:

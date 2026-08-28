@@ -141,15 +141,16 @@ def atomic_write_once(path: Path, value: object, *, authorized_root: Path) -> Pa
 
 def read_canonical_json(path: Path) -> dict[str, object]:
     encoded = Path(path).read_bytes()
+    normalized = encoded.replace(b"\r\n", b"\n")
     try:
-        value = json.loads(encoded)
+        value = json.loads(normalized)
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise LifecycleError(f"artifact is not valid UTF-8 JSON: {path}") from exc
     try:
         canonical = canonical_json_bytes(value)
     except ValueError as exc:
-        raise LifecycleError(f"{label} is not finite canonical JSON") from exc
-    if not isinstance(value, dict) or canonical != encoded:
+        raise LifecycleError(f"artifact is not finite canonical JSON: {path}") from exc
+    if not isinstance(value, dict) or canonical != normalized:
         raise LifecycleError(f"artifact is not canonical JSON plus LF: {path}")
     return value
 

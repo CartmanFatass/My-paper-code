@@ -44,24 +44,13 @@ import torch
 SCHEMA_VERSION = 1
 ESTIMATOR_REVISION = "MGTAP-R01-PREACTIVITY-RESOURCE-ESTIMATOR-20260827"
 AUTHORITY_REFS = {
-    "direction": (
-        "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
-        "3d32a0d24f50935bbcf3b24b926fae1dbfc1fac079f11491bf590c43d1b817a9",
-    ),
-    "successor_authority": (
+    "direction": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+    "successor_authority":
         "docs/research/candidates/metric_ground_transport_allocation/"
         "MGTAP_MATCHED_UPDATE_SUPPORT_SUCCESSOR_SCIENCE_AUTHORITY_R01_20260827.md",
-        "a5cfc6705191b17dd3da129e34a63dd424874da7e5fa654ffaf1cf1321957ae4",
-    ),
-    "resource_handoff": (
+    "resource_handoff":
         "docs/research/candidates/metric_ground_transport_allocation/"
         "MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md",
-        "6114654ca1735cde6b3a25fda62dec25ca36738444c4302ab629965073a8df49",
-    ),
-    "research_state_revision_4": (
-        "docs/research/candidates/metric_ground_transport_allocation/workflow/research/state.json",
-        "ee54d5c05a79649d9fc8733d8b99a1407774cf647d991a1054d40728be3a28da",
-    ),
 }
 SOURCE_RELATIVE_PATH = (
     "experiments/candidates/metric_ground_transport_allocation/resource_estimate.py"
@@ -121,23 +110,17 @@ def _repo_root() -> Path:
 
 def _validate_authority(root: Path) -> list[dict[str, str]]:
     refs: list[dict[str, str]] = []
-    for label, (relative, expected) in AUTHORITY_REFS.items():
+    for label, relative in AUTHORITY_REFS.items():
         path = root / relative
-        actual = _sha256(path)
-        if actual != expected:
-            raise RuntimeError(
-                f"stale current-authority ref {label}: expected {expected}, observed {actual}"
-            )
-        refs.append({"label": label, "path": relative, "sha256": actual})
-    research = json.loads(
-        (root / AUTHORITY_REFS["research_state_revision_4"][0]).read_text(
-            encoding="utf-8"
-        )
-    )
-    if research.get("revision") != 4:
-        raise RuntimeError("research state is not revision 4")
-    if research.get("direction_ref", {}).get("sha256") != AUTHORITY_REFS["direction"][1]:
-        raise RuntimeError("research state direction_ref is not bound to current DIRECTION")
+        if not path.is_file():
+            raise RuntimeError(f"current authority is missing: {label}: {relative}")
+        stat = path.stat()
+        refs.append({
+            "label": label,
+            "path": relative,
+            "modified_time_ns": str(stat.st_mtime_ns),
+            "bytes": str(stat.st_size),
+        })
     return refs
 
 

@@ -55,7 +55,9 @@ def static_conformance() -> dict[str, object]:
         "docs/research/candidates/semigroup_consistent_duration_model_policy/"
         "SCDMP_TARGET_BOUND_ORDER_TO_VALUE_SCIENCE_CARD_REVISION_07.md"
     )
-    actual_card_sha256 = hashlib.sha256(card_path.read_bytes()).hexdigest()
+    actual_card_sha256 = hashlib.sha256(
+        card_path.read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()
     checks = {
         "candidate_exact": CANDIDATE == "SCDMP-TARGET-BOUND-ORDER-TO-VALUE",
         "revision_exact": REVISION == "SCDMP-TBOV-SCIENCE-20260815-07",

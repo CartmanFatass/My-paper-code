@@ -188,10 +188,14 @@ def _sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_source(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def science_card_identity() -> dict[str, object]:
     if not SCIENCE_CARD_PATH.is_file():
         raise NativeBackendError(f"immutable SCDMP science card is missing: {SCIENCE_CARD_PATH}")
-    digest = _sha256_file(SCIENCE_CARD_PATH)
+    digest = _sha256_source(SCIENCE_CARD_PATH)
     if digest != SCIENCE_CARD_SHA256:
         raise NativeBackendError("immutable SCDMP science card SHA-256 differs from revision 02")
     return {
@@ -202,7 +206,7 @@ def science_card_identity() -> dict[str, object]:
 
 
 def native_source_sha256() -> str:
-    return _sha256_file(_SOURCE)
+    return _sha256_source(_SOURCE)
 
 
 def source_sha256() -> str:

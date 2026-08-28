@@ -96,9 +96,15 @@ def static_conformance() -> dict[str, object]:
     pro_closed_path = owner_root / (
         "SCDMP_TBOV_SRF_CHECKPOINT_R03_CHATGPT_PRO_CLOSED_INTAKE_20260820.md"
     )
-    actual_card_sha256 = hashlib.sha256(card_path.read_bytes()).hexdigest()
-    actual_correction_sha256 = hashlib.sha256(correction_path.read_bytes()).hexdigest()
-    actual_pro_closed_sha256 = hashlib.sha256(pro_closed_path.read_bytes()).hexdigest()
+    actual_card_sha256 = hashlib.sha256(
+        card_path.read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()
+    actual_correction_sha256 = hashlib.sha256(
+        correction_path.read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()
+    actual_pro_closed_sha256 = hashlib.sha256(
+        pro_closed_path.read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()
     required_labels = {
         "train/S0/state", "train/S0/word_cells", "train/S0/action",
         "train/S1/word_action", "eval/fit_support/state",

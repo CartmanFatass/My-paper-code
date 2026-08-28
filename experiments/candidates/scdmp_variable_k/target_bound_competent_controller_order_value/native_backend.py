@@ -136,8 +136,12 @@ def _sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_source(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def native_source_sha256() -> str:
-    return _sha256_file(_SOURCE)
+    return _sha256_source(_SOURCE)
 
 
 def _vs_installation() -> Path:

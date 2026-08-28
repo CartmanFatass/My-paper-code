@@ -281,6 +281,8 @@ def build_source_manifest(
         except ValueError as exc:
             raise PreactivityError("source-manifest path escapes its package") from exc
         payload = path.read_bytes()
+        if path.suffix.lower() in {".cpp", ".hpp", ".json", ".md", ".py"}:
+            payload = payload.replace(b"\r\n", b"\n")
         files[logical.as_posix()] = {
             "bytes": len(payload),
             "sha256": hashlib.sha256(payload).hexdigest(),
