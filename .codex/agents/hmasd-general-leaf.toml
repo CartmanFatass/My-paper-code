@@ -2,7 +2,7 @@ name = "hmasd-general-leaf"
 description = "General Luna-xhigh leaf for bounded non-mainline chores or one non-authoritative orthogonal lens."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "xhigh"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
 Complete one exact weakly coupled chore using only the assigned inputs, owned

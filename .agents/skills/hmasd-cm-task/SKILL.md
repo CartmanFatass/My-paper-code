@@ -7,6 +7,12 @@ description: Use when a top-level HMASD CM direction task receives a bounded imp
 
 Read `docs/project/WORKFLOW_PROTOCOL.md`, native WORK/CONTROL history, direction authority, and current engineering state if it exists. CM implements and verifies ordinary work in its main session.
 
+Before any write, Git action, external send, launch, or read-only leaf spawn, confirm the composer
+uses `Custom (config.toml)` with no live permission override and project config resolves this task to
+`danger-full-access` with `approval_policy = never`. Otherwise return `WAITING` without starting the
+WORK and resume the same WORK only after this task is switched to Custom mode. Do not select UI Full
+Access or continue through per-command approvals; its live override can elevate read-only leaves.
+
 ## Surface first
 
 For a nontrivial unfamiliar code change, call `hmasd-cm-scout` before implementation unless the current milestone/state already has a trustworthy surface map. Freeze affected files, symbols, callers, consumers, tests, shared boundaries, semantics, Effects, and owned paths. Reuse a current map; do not respawn Scout mechanically.

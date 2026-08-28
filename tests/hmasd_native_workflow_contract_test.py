@@ -49,6 +49,13 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
     assert "所有已发送 EM 必须 terminal" in protocol
     assert "initial prompt 本身就是完整 `[WORK]`" in protocol
     assert "同一 direction worktree 同时只有一个 Git-visible writer phase" in protocol
+    assert '`sandbox_mode = "danger-full-access"`' in protocol
+    assert '`approval_policy = "never"`' in protocol
+    assert "Custom (config.toml)" in protocol
+    assert "live permission override" in protocol
+    assert "Full Access parent 不得直接 spawn 只读 leaf" in protocol
+    assert "不得假定继承 requester 的权限" in " ".join(protocol.split())
+    assert "不得用逐条批准" in protocol
     assert "hmasd-explorer-agentify-transport" in protocol
     assert "不设固定配额" in protocol
     assert "0–2 个 leaves" not in protocol
@@ -156,11 +163,15 @@ def test_portfolio_is_one_current_table() -> None:
             assert owner[direction] in {"PORTFOLIO", "EM"}
         else:
             assert owner[direction] == "NONE"
-    assert lifecycle["active_post_churn_population_flow_identification"] == "ACTIVE"
-    assert owner["active_post_churn_population_flow_identification"] == "EM"
+    assert lifecycle["active_post_churn_population_flow_identification"] == "PARKED"
+    assert owner["active_post_churn_population_flow_identification"] == "NONE"
+    assert lifecycle["expressibility_gated_renewal_credit_relay"] == "ACTIVE"
+    assert owner["expressibility_gated_renewal_credit_relay"] == "PORTFOLIO"
+    assert lifecycle["opportunity_normalized_lease_gated_rebinding"] == "ACTIVE"
+    assert owner["opportunity_normalized_lease_gated_rebinding"] == "PORTFOLIO"
     assert lifecycle["finite_semantic_boundary_support"] == "PARKED"
-    assert lifecycle["ucope"] == "ACTIVE"
-    assert owner["ucope"] == "PORTFOLIO"
+    assert lifecycle["ucope"] == "PARKED"
+    assert owner["ucope"] == "NONE"
     assert lifecycle["semigroup_consistent_duration_model_policy"] == "PARKED"
     assert lifecycle["metric_ground_transport_allocation"] == "CLOSED"
 

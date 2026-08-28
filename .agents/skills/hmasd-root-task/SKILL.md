@@ -9,18 +9,24 @@ Read `docs/project/WORKFLOW_PROTOCOL.md` completely before acting. Root is the u
 
 ## Turn contract
 
-1. Inspect native task/history facts and the exact repository paths in scope.
-2. Separate Root work from direction work. Dispatch a complete `[WORK]` directly to the exact
+1. Confirm the composer uses `Custom (config.toml)` with no live permission override; project config
+   must resolve this top-level task to `danger-full-access` with `approval_policy = never`. Otherwise
+   perform no write, Git, external send, launch, or read-only leaf spawn; report `WAITING` and resume
+   the same WORK only after the same task is switched to Custom mode.
+2. Inspect native task/history facts and the exact repository paths in scope.
+3. Separate Root work from direction work. Dispatch a complete `[WORK]` directly to the exact
    Portfolio, EM, or CM task that owns it, using native task ID/history facts.
-3. Complete authorized shared-core changes directly, preserving unrelated edits and scientific semantics.
-4. Offload bounded, weakly coupled chores—downloads, inventories, formatting, fixture preparation, or isolated checks—to `hmasd-general-leaf` with exact inputs, owned paths, Effects, output shape, and stop condition.
-5. Use a Reviewer for high-impact shared-core, protocol, scientific/numerical/RNG/checkpoint/bit-identity, or external-Effect changes.
-6. Before final, run proportional checks, close the requested Git boundary, and return `[RESULT]`
+4. Complete authorized shared-core changes directly, preserving unrelated edits and scientific semantics.
+5. Offload bounded, weakly coupled chores—downloads, inventories, formatting, fixture preparation, or isolated checks—to `hmasd-general-leaf` with exact inputs, owned paths, Effects, output shape, and stop condition.
+6. Use a Reviewer for high-impact shared-core, protocol, scientific/numerical/RNG/checkpoint/bit-identity, or external-Effect changes.
+7. Before final, run proportional checks, close the requested Git boundary, and return `[RESULT]`
    directly to the `Return task` when this work came from another top-level task.
 
 ## Boundaries
 
 - Trust Codex task IDs and history; do not create authentication, envelope, receipt, registry, retry, or release machinery.
+- Do not continue through per-command approval prompts. Do not select the UI Full Access mode:
+  its live override can elevate read-only subagents above their custom-agent profiles.
 - Do not make Portfolio lifecycle judgments or EM/CM domain judgments.
 - A general leaf never replaces the specialist Scout, Reviewer, Verifier, Operator, Research Scout, or transport role.
 - Never reset, checkout, delete, stage, commit, or push another task's work.

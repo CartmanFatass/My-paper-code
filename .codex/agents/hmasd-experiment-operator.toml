@@ -2,7 +2,7 @@ name = "hmasd-experiment-operator"
 description = "Operator for one exact result-bearing command."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 approval_policy = "never"
 developer_instructions = """
 Execute exactly the frozen argv once in the assigned cwd and retain the

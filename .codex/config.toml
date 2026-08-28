@@ -1,5 +1,8 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
 [features]
 multi_agent_v2 = true
 hooks = false

@@ -13,17 +13,19 @@ EXPECTED = {
     "hmasd-cm-scout": ("gpt-5.6-luna", "medium", "read-only"),
     "hmasd-reviewer": ("gpt-5.6-sol", "xhigh", "read-only"),
     "hmasd-verifier": ("gpt-5.6-luna", "high", "read-only"),
-    "hmasd-experiment-operator": ("gpt-5.6-luna", "low", "workspace-write"),
-    "hmasd-cpm-agentify-transport": ("gpt-5.6-luna", "medium", "workspace-write"),
-    "hmasd-explorer-agentify-transport": ("gpt-5.6-luna", "medium", "workspace-write"),
+    "hmasd-experiment-operator": ("gpt-5.6-luna", "low", "danger-full-access"),
+    "hmasd-cpm-agentify-transport": ("gpt-5.6-luna", "medium", "danger-full-access"),
+    "hmasd-explorer-agentify-transport": ("gpt-5.6-luna", "medium", "danger-full-access"),
     "hmasd-research-scout": ("gpt-5.6-sol", "high", "read-only"),
     "hmasd-research-critic": ("gpt-5.6-sol", "max", "read-only"),
-    "hmasd-general-leaf": ("gpt-5.6-luna", "xhigh", "workspace-write"),
+    "hmasd-general-leaf": ("gpt-5.6-luna", "xhigh", "danger-full-access"),
 }
 
 
 def test_registered_agent_profiles_are_exact_and_nonspawning() -> None:
     config = tomllib.loads((ROOT / ".codex/config.toml").read_text(encoding="utf-8"))
+    assert config["sandbox_mode"] == "danger-full-access"
+    assert config["approval_policy"] == "never"
     assert config["agents"]["max_threads"] == 8
     assert config["agents"]["max_depth"] == 1
     profiles = {
