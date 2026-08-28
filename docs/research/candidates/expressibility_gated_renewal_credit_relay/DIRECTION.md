@@ -71,6 +71,33 @@ identity-only comparison inside B1. The `PARK` recommendation and reentry
 condition remain unchanged. Full dispositions are in
 `evidence/2026-08-28-7-pilot-convergence-disposition.md`.
 
+## Revision 2026-08-28.7 terminal synthesis
+
+Cycle `2026-08-28.7-pilot-01a04a02-egrcr` reached `HANDOFF_READY` with
+`Scientific status: SYNTHESIZED` and EM `Recommendation: PARK`. This is a
+scientific recommendation to Portfolio, not a lifecycle mutation.
+
+The strongest observation remains exact root-wise equality between INTACT and
+ordinary GAE on bounded utility and fixed-token scarce allocation despite an
+expressive ordered edge and a small probability/selectivity change. The
+registered opposite-type cut is harmful but does not isolate waiter identity.
+Static inspection further shows that B1 has no consequence-distinct waiter
+identities within a generic pre-action context, so no identity-only
+discriminator can be executed without defining a genuinely different host.
+
+Reentry requires independent evidence of both a generic-context-matched,
+consequence-distinct waiter host and same-information oracle allocation/utility
+headroom over ordinary GAE. Only then may a new material cycle freeze one
+cue/sign-preserving wrong-waiter key-derangement test. B1 must not be repeated,
+reseeded, or repaired only for attribution.
+
+The terminal claim ceiling is unchanged: no association-specific algorithm
+value, end-to-end variable-`k`, fixed-`k` superiority, multi-update,
+learned-estimator, UAV, safety, or general source-to-target credit claim is
+supported; the bounded negative result is not a general impossibility theorem.
+The complete handoff is in
+`evidence/2026-08-28-7-pilot-handoff.md`.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
