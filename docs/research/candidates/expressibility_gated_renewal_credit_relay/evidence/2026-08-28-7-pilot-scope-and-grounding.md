@@ -1,9 +1,12 @@
 # EGRCR revision 2026-08-28.7 pilot scope and neutral grounding
 
-Cycle: `2026-08-28.7-pilot-01a04a02-egrcr`  
-Milestone: `SCOPE_FROZEN`  
-Frozen at: 2026-08-28T20:23:09Z  
-Role: EM  
+Cycle: `2026-08-28.7-pilot-01a04a02-egrcr`
+
+Milestone: `SCOPE_FROZEN`
+
+Frozen at: 2026-08-28T20:23:09Z
+
+Role: EM
 
 ## Authority and shared baseline
 
