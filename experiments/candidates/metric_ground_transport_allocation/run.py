@@ -1,4 +1,4 @@
-"""Exact sequential MGTAP B1 revision-04 production runner."""
+"""Exact sequential MGTAP B1 matched-update-support R01 runner."""
 
 from __future__ import annotations
 
@@ -25,7 +25,9 @@ from .certificate import deterministic_certificate
 from .config import (
     ARMS, BINDINGS, CALIBRATION_SEEDS, EVAL_SIZES, FINAL_SEEDS, GRID,
     LOADS, ORDERED_PAIRS, REVISION, TRUE_UTILITY, DISPLAYED_COORDINATES,
-    EXPECTED_COUNTS,
+    CONCLUSION_CHECKPOINT, EXPECTED_COUNTS, GATE_ONLY_COUNTS,
+    SELECTION_CHECKPOINT, STATIONARITY_REFERENCE, STATIONARITY_TOLERANCE,
+    STOCHASTIC_NAMESPACE,
 )
 from .evaluation import combine_fits, evaluate_fit
 from .trainer import calibration_fit, conclusion_fit
@@ -100,21 +102,61 @@ def _common_addresses() -> np.ndarray:
     return np.asarray(rows, dtype=np.int32)
 
 
-def _select_calibration(values: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def _select_calibration(values: np.ndarray) -> dict[str, object]:
     selected = np.empty(4, dtype=np.int8)
-    slopes = np.empty(4, dtype=np.float64)
-    valid = np.empty(4, dtype=np.int8)
+    reference = np.full(4, np.nan, dtype=np.float64)
+    selection = np.full(4, np.nan, dtype=np.float64)
+    differences = np.full(4, np.nan, dtype=np.float64)
+    gate_vector = np.zeros(4, dtype=bool)
+    expected_shape = (4, len(GRID), len(CALIBRATION_SEEDS), 2)
+    if values.shape != expected_shape:
+        selected.fill(0)
+        return {
+            "selected_grid_index": selected,
+            "reference_values": reference,
+            "selection_values": selection,
+            "stationarity_differences": differences,
+            "gate_vector": gate_vector,
+            "complete": False,
+            "gate_passed": False,
+        }
+    complete = bool(np.all(np.isfinite(values)))
     for cell in range(4):
         scores = values[cell, :, :, 1].mean(axis=1)
-        index = max(range(len(GRID)), key=lambda i: (scores[i], -GRID[i].learning_rate, GRID[i].weight_decay))
+        finite_indices = [index for index, score in enumerate(scores) if np.isfinite(score)]
+        index = (
+            max(
+                finite_indices,
+                key=lambda i: (
+                    scores[i], -GRID[i].learning_rate, GRID[i].weight_decay
+                ),
+            )
+            if finite_indices
+            else 0
+        )
         selected[cell] = index
-        v32 = values[cell, index, :, 0].mean()
-        v64 = values[cell, index, :, 1].mean()
-        slopes[cell] = (v64 - v32) / 32.0
-        on_lr_boundary = GRID[index].learning_rate in (0.01, 0.10)
-        on_lambda_boundary = GRID[index].weight_decay in (0.0, 0.0001)
-        valid[cell] = not ((on_lr_boundary or on_lambda_boundary) and abs(v64 - v32) > 0.005)
-    return selected, slopes, valid
+        reference[cell] = values[cell, index, :, 0].mean()
+        selection[cell] = values[cell, index, :, 1].mean()
+        differences[cell] = abs(selection[cell] - reference[cell])
+        gate_vector[cell] = bool(
+            np.all(np.isfinite(values[cell]))
+            and np.isfinite(differences[cell])
+            and differences[cell] <= STATIONARITY_TOLERANCE
+        )
+    return {
+        "selected_grid_index": selected,
+        "reference_values": reference,
+        "selection_values": selection,
+        "stationarity_differences": differences,
+        "gate_vector": gate_vector,
+        "complete": complete,
+        "gate_passed": bool(complete and np.all(gate_vector)),
+    }
+
+
+def _finite_or_none(values: object) -> list[float | None]:
+    array = np.asarray(values, dtype=np.float64)
+    return [float(value) if np.isfinite(value) else None for value in array]
 
 
 def _free_identity(packet: dict[str, np.ndarray]) -> None:
@@ -136,7 +178,11 @@ def production(output: Path) -> None:
     activity_marker = output.with_name(output.name + "_activity_started.json")
     if activity_marker.exists():
         prior = json.loads(activity_marker.read_text(encoding="utf-8"))
-        if prior.get("revision") != REVISION or prior.get("scientific_activity_started") is not True:
+        if (
+            prior.get("revision") != REVISION
+            or prior.get("stochastic_namespace") != STOCHASTIC_NAMESPACE
+            or prior.get("scientific_activity_started") is not True
+        ):
             raise RuntimeError("existing activity marker does not match frozen revision")
     os.environ["MGTAP_ACTIVITY_MARKER"] = str(activity_marker)
     guard = Guard(temp)
@@ -151,13 +197,21 @@ def production(output: Path) -> None:
         for grid_index, hyper in enumerate(GRID):
             for seed_index, seed in enumerate(CALIBRATION_SEEDS):
                 fit = calibration_fit(arm, binding, seed, hyper)
-                calibration_values[cell_index, grid_index, seed_index] = (fit.validation[32], fit.validation[64])
+                calibration_values[cell_index, grid_index, seed_index] = (
+                    fit.validation[STATIONARITY_REFERENCE],
+                    fit.validation[SELECTION_CHECKPOINT],
+                )
                 calibration_gradients[cell_index, grid_index, seed_index] = fit.gradient_norm_max
                 guard.check()
         print(json.dumps({"phase": "calibration_cell_complete", "arm": arm, "binding": binding}), flush=True)
-    selected, slopes, optimization_valid = _select_calibration(calibration_values)
-    if selected[2] != selected[3] or not np.array_equal(calibration_values[2], calibration_values[3]):
-        raise RuntimeError("FREE intact/cut calibration leakage")
+    selection = _select_calibration(calibration_values)
+    selected = np.asarray(selection["selected_grid_index"], dtype=np.int8)
+    free_calibration_identity = bool(
+        selected[2] == selected[3]
+        and np.array_equal(calibration_values[2], calibration_values[3], equal_nan=True)
+    )
+    gate_vector = np.asarray(selection["gate_vector"], dtype=bool)
+    gate_passed = bool(selection["gate_passed"] and free_calibration_identity)
 
     tables = dict(panel_arrays)
     tables.update({
@@ -171,11 +225,87 @@ def production(output: Path) -> None:
         "selected_grid_index": selected,
         "selected_learning_rate": np.asarray([GRID[i].learning_rate for i in selected]),
         "selected_weight_decay": np.asarray([GRID[i].weight_decay for i in selected]),
-        "calibration_slope_32": slopes,
-        "optimization_valid": optimization_valid,
+        "calibration_v224": np.asarray(selection["reference_values"]),
+        "calibration_v256": np.asarray(selection["selection_values"]),
+        "stationarity_difference": np.asarray(selection["stationarity_differences"]),
+        "stationarity_gate_vector": gate_vector,
+        "stationarity_gate_conjunction": np.asarray(gate_passed),
+        "free_calibration_identity": np.asarray(free_calibration_identity),
     })
     write_npz(temp / "tables.npz", tables)
     guard.check()
+
+    branch_counts = EXPECTED_COUNTS if gate_passed else GATE_ONLY_COUNTS
+    manifest = {
+        "artifact_kind": "MGTAP_B1_MATCHED_UPDATE_SUPPORT_R01_ATOMIC_RESULT",
+        "revision": REVISION,
+        "stochastic_namespace": STOCHASTIC_NAMESPACE,
+        "arms": list(ARMS),
+        "bindings": list(BINDINGS),
+        "training_sizes": [4, 8],
+        "heldout_sizes": [6, 12],
+        "calibration_seeds": list(CALIBRATION_SEEDS),
+        "reserved_final_seeds": list(FINAL_SEEDS),
+        "selected_grid_index": selected.tolist(),
+        "selected_hyperparameters": [
+            [GRID[i].learning_rate, GRID[i].weight_decay] for i in selected
+        ],
+        "calibration_v224": _finite_or_none(selection["reference_values"]),
+        "calibration_v256": _finite_or_none(selection["selection_values"]),
+        "stationarity_difference": _finite_or_none(
+            selection["stationarity_differences"]
+        ),
+        "stationarity_gate_vector": gate_vector.tolist(),
+        "gate_passed": gate_passed,
+        "calibration_complete_and_finite": bool(selection["complete"]),
+        "free_calibration_identity": free_calibration_identity,
+        "deterministic_certificate": certificate,
+        "expected_and_actual_work": {
+            "expected": branch_counts,
+            "actual": branch_counts,
+        },
+        "codes": {
+            "arm": {"0": "METRIC", "1": "FREE"},
+            "binding": {"0": "INTACT", "1": "CUT"},
+            "load": {"0": "SLACK", "1": "OVERLOAD"},
+        },
+        "activity_boundary_crossed": True,
+    }
+
+    if not gate_passed:
+        if not bool(selection["complete"]):
+            gate_failure_reason = "INCOMPLETE_OR_NONFINITE_CALIBRATION"
+        elif not free_calibration_identity:
+            gate_failure_reason = "FREE_CALIBRATION_IDENTITY_FAILURE"
+        else:
+            gate_failure_reason = "ALL_CELL_STATIONARITY_GATE_FALSE"
+        summary = {
+            "revision": REVISION,
+            "stochastic_namespace": STOCHASTIC_NAMESPACE,
+            "branch": "BOUNDED_NONIDENTIFICATION_STRUCTURAL",
+            "gate_failure_reason": gate_failure_reason,
+            "resources": guard.facts(),
+        }
+        json_write(temp / "manifest.json", manifest)
+        json_write(temp / "summary.json", summary)
+        guard.check()
+        validate_tree(temp, gate_passed=False)
+        summary["resources"] = guard.facts()
+        json_write(temp / "summary.json", summary)
+        guard.check()
+        validate_tree(temp, gate_passed=False)
+        install(temp, output, gate_passed=False, prevalidated=True)
+        print(
+            json.dumps(
+                {
+                    "phase": "complete",
+                    "output": str(output),
+                    "branch": "BOUNDED_NONIDENTIFICATION_STRUCTURAL",
+                }
+            ),
+            flush=True,
+        )
+        return
 
     for seed in FINAL_SEEDS:
         fit_packets = []
@@ -191,6 +321,13 @@ def production(output: Path) -> None:
             selected_hyper.append((hyper.learning_rate, hyper.weight_decay))
             guard.check()
         packet = combine_fits(fit_packets, np.asarray(parameters), np.asarray(selected_hyper))
+        packet.update({
+            "revision": np.asarray(REVISION),
+            "stochastic_namespace": np.asarray(STOCHASTIC_NAMESPACE),
+            "conclusion_checkpoint": np.asarray(CONCLUSION_CHECKPOINT, dtype=np.int16),
+            "packet_seed": np.asarray(seed, dtype=np.int32),
+            "selected_grid_index": selected.copy(),
+        })
         _free_identity(packet)
         seed_path = temp / f"seed_{seed}.npz"
         write_npz(seed_path, packet)
@@ -198,41 +335,35 @@ def production(output: Path) -> None:
         guard.check()
         print(json.dumps({"phase": "seed_complete", "seed": seed}), flush=True)
 
-    analysis = analyze(temp, structural_valid=True, optimization_valid=bool(np.all(optimization_valid)))
-    resources = guard.facts()
-    manifest = {
-        "artifact_kind": "MGTAP_B1_ATOMIC_RESULT",
+    preanalysis_summary = {
         "revision": REVISION,
-        "arms": list(ARMS), "bindings": list(BINDINGS),
-        "training_sizes": [4, 8], "heldout_sizes": [6, 12],
-        "calibration_seeds": list(CALIBRATION_SEEDS), "final_seeds": list(FINAL_SEEDS),
-        "selected_grid_index": selected.tolist(),
-        "selected_hyperparameters": [[GRID[i].learning_rate, GRID[i].weight_decay] for i in selected],
-        "calibration_slope_32": slopes.tolist(),
-        "optimization_valid": optimization_valid.astype(bool).tolist(),
-        "deterministic_certificate": certificate,
-        "expected_and_actual_work": EXPECTED_COUNTS,
-        "codes": {"arm": {"0": "METRIC", "1": "FREE"}, "binding": {"0": "INTACT", "1": "CUT"}, "load": {"0": "SLACK", "1": "OVERLOAD"}},
-        "activity_boundary_crossed": True,
-    }
-    summary = {
-        "revision": REVISION,
-        "question_relevant_output_exists": True,
-        "analysis": analysis,
-        "resources": resources,
-        "material_technical_anomalies": [],
+        "stochastic_namespace": STOCHASTIC_NAMESPACE,
+        "analysis_status": "PENDING_COMPLETE_TREE_VALIDATION",
+        "resources": guard.facts(),
     }
     json_write(temp / "manifest.json", manifest)
+    json_write(temp / "summary.json", preanalysis_summary)
+    guard.check()
+    validate_tree(temp, gate_passed=True, preanalysis=True)
+    guard.check()
+
+    analysis = analyze(temp, structural_valid=True, optimization_valid=True)
+    summary = {
+        "revision": REVISION,
+        "stochastic_namespace": STOCHASTIC_NAMESPACE,
+        "question_relevant_output_exists": True,
+        "analysis": analysis,
+        "resources": guard.facts(),
+        "material_technical_anomalies": [],
+    }
     json_write(temp / "summary.json", summary)
     guard.check()
-    validate_tree(temp)
-    guard.check()
-    # Refresh terminal resource facts after complete validation and immediately
-    # before the single atomic rename.
+    validate_tree(temp, gate_passed=True)
     summary["resources"] = guard.facts()
     json_write(temp / "summary.json", summary)
     guard.check()
-    install(temp, output, prevalidated=True)
+    validate_tree(temp, gate_passed=True)
+    install(temp, output, gate_passed=True, prevalidated=True)
     print(json.dumps({"phase": "complete", "output": str(output), "branch": analysis["branch"]}), flush=True)
 
 
@@ -243,6 +374,11 @@ def main() -> None:
     args = parser.parse_args()
     if args.certificate:
         certificate, _, _ = deterministic_certificate()
+        certificate = {
+            **certificate,
+            "revision": REVISION,
+            "stochastic_namespace": STOCHASTIC_NAMESPACE,
+        }
         print(json.dumps(certificate, indent=2, sort_keys=True))
         if not certificate["passed"]:
             raise SystemExit(1)

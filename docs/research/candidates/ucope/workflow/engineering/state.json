@@ -1,23 +1,32 @@
 {
   "actionable": false,
   "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "base_sha": "a5fb767b7be3ef4c5bc0e92cc22ed13fe77fe3c5",
   "blockers": [],
   "candidate_sha": null,
-  "changed_paths": [],
+  "changed_paths": [
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_manifest.py",
+    "experiments/candidates/ucope/variable_k_paid_probe_r01_r03/production_validation.py",
+    "tests/experiments/candidates/ucope/test_variable_k_paid_probe_r01_r03_production.py"
+  ],
   "direction_id": "ucope",
   "integration": {
     "integrated_sha": null,
     "target_branch": "main",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "a5fb767b7be3ef4c5bc0e92cc22ed13fe77fe3c5"
   },
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "cd4202a64eb7274ca9e9b2d2e55800ec698324366e6953bf215aebba79148c9e",
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED"
+    "input_refs": [
+      {
+        "path": "temp/directions/ucope/test/s3/g1/S3_TECHNICAL_ACCEPTANCE.json",
+        "sha256": "cd4202a64eb7274ca9e9b2d2e55800ec698324366e6953bf215aebba79148c9e"
+      }
+    ],
+    "kind": "RETURN_PORTFOLIO_S3_V3_ARTIFACT_INTEGRITY_ACCEPTED"
   },
-  "phase": "UNREQUESTED",
-  "revision": 1,
+  "phase": "COMPLETE",
+  "revision": 6,
   "run_refs": [],
   "schema_version": 1,
   "scope_ref": {
@@ -25,8 +34,25 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-27T10:33:20.243264Z",
+  "verification_refs": [
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_TECHNICAL_ACCEPTANCE.json",
+      "sha256": "cd4202a64eb7274ca9e9b2d2e55800ec698324366e6953bf215aebba79148c9e"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_REVIEW_AND_FINAL_VERIFICATION.json",
+      "sha256": "377f16e54eb69ec12de717d7912e3e5b451a6a6a8cd34d83b186faa38454518c"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/S3_SANCHECK_RECEIPT.json",
+      "sha256": "91f511168133131c7093fd6150986e373ccf889af1577c941901732219614ef7"
+    },
+    {
+      "path": "temp/directions/ucope/test/s3/g1/v3-final-junit.xml",
+      "sha256": "e3bed69d3060dd2f614a612ea66138207963236824a8ea676fc80ce2450379d6"
+    }
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-ucope"
