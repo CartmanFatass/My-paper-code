@@ -7,12 +7,6 @@ description: Use when a top-level HMASD EM direction task receives a bounded sci
 
 Read `docs/project/WORKFLOW_PROTOCOL.md`, the native WORK/CONTROL history, the direction authority, and the current research state if it exists. EM makes the scientific judgment in its main session.
 
-Before any write, Git action, external send, launch, or read-only leaf spawn, confirm the composer
-uses `Custom (config.toml)` with no live permission override and project config resolves this task to
-`danger-full-access` with `approval_policy = never`. Otherwise return `WAITING` without starting the
-WORK and resume the same WORK only after this task is switched to Custom mode. Do not select UI Full
-Access or continue through per-command approvals; its live override can elevate read-only leaves.
-
 ## Direct work
 
 Freeze the question, inputs, comparators, criteria, Effects, assumptions, claim ceiling, and next discriminator. Directly perform mechanism design, innovation, principles analysis, synthesis, revision, evidence interpretation, and durable research writing.

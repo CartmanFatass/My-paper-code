@@ -1,24 +1,10 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.4
+Workflow revision: 2026-08-28.5
 
 本文是 HMASD 唯一控制 authority。HMASD 直接信任 Codex Desktop 提供的可见 task ID、
 history、status、parent/child relation、create/send/read/wait、同 task 继续、archive 与
 worktree。项目不对这些产品事实再做身份认证，也不建立恶意参与者或本地篡改 threat model。
-
-HMASD task 的 composer 固定选择 `Custom (config.toml)`，不选择 UI 的 `Full Access` live
-override。项目 `.codex/config.toml` 为 top-level task 提供
-`sandbox_mode = "danger-full-access"` 与 `approval_policy = "never"`；需要写入、运行或外部传输
-的 direct leaf 在自己的 profile 中显式使用同一组合。Scout、Reviewer、Verifier 与 Critic
-在自己的 profile 中保持 `read-only` + `never`，不请求 elevation；超出只读边界时返回事实或
-unavailable。这样 top-level 与执行型 leaf 不产生逐条 approval，同时只读 leaf 不被提升。
-
-Codex 会把 composer 中选择的 live permission override 重新应用到 subagent，即使 custom-agent
-profile 声明了不同 sandbox。因此 Full Access parent 不得直接 spawn 只读 leaf；发现 parent
-存在 live override 或无法确认 `Custom (config.toml)` 时，不执行写入、Git、外部发送、launch
-或只读 leaf spawn，只以 `WAITING` 报告。用户把同一 task 切换为 `Custom (config.toml)` 后再
-`RESUME` 同一 WORK。新建 top-level task 不得假定继承 requester 的权限；不得用逐条批准或
-替代 task 绕过该前置条件。角色、owned paths、Effect 与 destructive-action 规则继续约束行为。
 
 ## 1. Topology and roles
 

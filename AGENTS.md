@@ -24,23 +24,17 @@ milestone、科学证据和实验结果，不重建身份认证、消息账本�
    投递，callee 把结果返回同一个 requester。
 2. Long-lived participant 使用 top-level task。Subagent 只是一个 manager 内的 bounded direct
    leaf，只 final return 给 spawning parent，不再 delegate，也不联系其他 top-level task。
-3. HMASD task 的 composer 固定选择 `Custom (config.toml)`，不得选择 UI `Full Access` live
-   override。项目 config 让 top-level 与执行型 leaf 使用 `danger-full-access` + `never`；明确
-   只读的 Scout、Reviewer、Verifier 与 Critic 由各自 profile 保持 `read-only` + `never`。
-   Codex 会把 parent live override 重放给 subagent，因此存在 live override 或无法确认 Custom
-   mode 时，在写入、Git、外部发送、launch 或只读 leaf spawn 前返回 `WAITING`；切换同一 task
-   到 Custom 后再 `RESUME`，不使用逐条批准。
-4. Manager 应把与主判断弱耦合的下载、整理、机械检查和杂务交给通用 Luna-xhigh leaf；
+3. Manager 应把与主判断弱耦合的下载、整理、机械检查和杂务交给通用 Luna-xhigh leaf；
    专门工作仍分别使用 CM Scout、Research Scout、Reviewer、Verifier、Operator 或 external
    transport。Leaf 数由独立信息缺口决定，不设固定配额；多份同模型回答不是独立证据。
-5. EM/CM 只在 material milestone 跨越时覆盖各自 current state；state 不是日志数据库。
-6. 外部 provider 的一个授权 operation 至多 send 一次；commitment 未知时只观察，不重发。
-7. Experiment Operator 从 launch 到 terminal observation 只运行一个 exact command。
-8. 不安全内存计划必须缩小、batch 或 shard。预计超过 7200 秒的本地 result command 需要
+4. EM/CM 只在 material milestone 跨越时覆盖各自 current state；state 不是日志数据库。
+5. 外部 provider 的一个授权 operation 至多 send 一次；commitment 未知时只观察，不重发。
+6. Experiment Operator 从 launch 到 terminal observation 只运行一个 exact command。
+7. 不安全内存计划必须缩小、batch 或 shard。预计超过 7200 秒的本地 result command 需要
    一次性能合理性审阅和绑定 exact command 的用户批准。
-9. 科学、数值、RNG、checkpoint、bit identity 和 external Effect 语义不得静默改变。
-10. 用户始终拥有最高权限。工具与验证是 evidence，不是新的批准层。
-11. Native task 能力不可用时显式停止；不得启用中转协调 task、本地 task plane、inbox、
+8. 科学、数值、RNG、checkpoint、bit identity 和 external Effect 语义不得静默改变。
+9. 用户始终拥有最高权限。工具与验证是 evidence，不是新的批准层。
+10. Native task 能力不可用时显式停止；不得启用中转协调 task、本地 task plane、inbox、
     history parser、registry、receipt 或 scheduler 替代品。
 
 ## Workspace and Git

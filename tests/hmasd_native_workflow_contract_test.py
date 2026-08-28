@@ -49,13 +49,6 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
     assert "所有已发送 EM 必须 terminal" in protocol
     assert "initial prompt 本身就是完整 `[WORK]`" in protocol
     assert "同一 direction worktree 同时只有一个 Git-visible writer phase" in protocol
-    assert '`sandbox_mode = "danger-full-access"`' in protocol
-    assert '`approval_policy = "never"`' in protocol
-    assert "Custom (config.toml)" in protocol
-    assert "live permission override" in protocol
-    assert "Full Access parent 不得直接 spawn 只读 leaf" in protocol
-    assert "不得假定继承 requester 的权限" in " ".join(protocol.split())
-    assert "不得用逐条批准" in protocol
     assert "hmasd-explorer-agentify-transport" in protocol
     assert "不设固定配额" in protocol
     assert "0–2 个 leaves" not in protocol
