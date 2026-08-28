@@ -3,8 +3,7 @@
 状态：需求基线，尚未授权任何具体 skill、依赖安装或工具调用。
 
 本文件定义 HMASD 第三层“能力与仪器层”需要提供什么，不定义 Codex task
-拓扑、跨 session 路由、Workflow-Clerk 状态转换或新的批准机制。系统分层背景见
-`docs/DISTRIBUTED_RESEARCH_COGNITION_WORKING_NOTES.md`。
+拓扑、跨 session 路由、Portfolio/EM/CM 状态转换或新的批准机制。
 
 ## 1. 目标
 
@@ -111,7 +110,7 @@ registry、provider router 或由启发式脚本生成的自动 verified/quality
 - CM 冻结可执行 contract、adapter、数值/批处理语义和工程证据。
 - leaf 完成一次 bounded instrument operation，返回观测，不再 delegate。
 - Portfolio 只请求和消费会改变投资决策的证据摘要，不直接操作工具。
-- Workflow-Clerk 只转递既有 assignment/return，不解释工具内部语义。
+- requester 使用 Codex native task plane 将完整 WORK 直接投递给相邻角色；没有中转角色。
 - Experiment Operator 仍只运行 CM 冻结的 result-bearing command；普通检索、静态
   数学检查或分析 probe 不因属于第三层而自动变成 Operator 工作。
 

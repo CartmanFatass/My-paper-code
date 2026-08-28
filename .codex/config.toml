@@ -29,9 +29,9 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 description = "Transport for one engineering consultation."
 config_file = "./agents/hmasd-cpm-agentify-transport.toml"
 
-[agents.HMASDExternalProTransport]
-description = "Transport for one Pro Innovator or Convergence review."
-config_file = "./agents/hmasd-external-pro-transport.toml"
+[agents.HMASDExplorerAgentifyTransport]
+description = "Transport for one fresh GPT-5.6 Pro Innovator or Convergence review."
+config_file = "./agents/hmasd-explorer-agentify-transport.toml"
 
 [agents.HMASDResearchScout]
 description = "Primary and multi-source research evidence scout."

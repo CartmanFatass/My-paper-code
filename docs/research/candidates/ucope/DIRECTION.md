@@ -1,17 +1,13 @@
 # Direction ucope: UCOPE
 
 This is the durable direction-science authority for UCOPE. It records the
-accepted interpretation of the exact Pro-closed R03 object; lifecycle and
-cross-direction investment remain Portfolio-owned.
+accepted interpretation of the exact Pro-closed R03 object and its scientific
+provenance.
 
 ## Authority
 
 - Stable direction ID: `ucope`
-- Portfolio label and registry abbreviation: `UCOPE`
-- Current registry observation: revision `37`, lifecycle `ACTIVE`, manager
-  identity `EM-ucope`, generation `1`
-- Dependencies: `[]`
-- Reactivation condition: `null`
+- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
 - Exact science object:
   `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`
 - Science-card current-byte SHA-256:
@@ -34,8 +30,6 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current position
-
-Decision owner: EM-ucope.
 
 The unique complete replacement transaction
 `ucope-r03-complete-20260827-02` is technically valid, complete and terminal.
@@ -169,22 +163,15 @@ terminal and forbids a same-question rerun, added episodes, dropped seeds,
 threshold changes, checkpoint changes, new panels or tuning. No S1/S2/empirical
 command, CM repair, Operator, provider or successor is requested here.
 
+The complete result is immutable: no technical repair can convert its frozen
+support failure into an identifying result. This intake applies the already
+Pro-closed R03 support gate and exhaustive result-to-action map; it does not
+create or revise a scientific object.
+
 The next responsibility is `REQUEST_PORTFOLIO`: reconcile this terminal
 non-identifying result and decide UCOPE lifecycle/resource attention. Portfolio
 may retain the result as provenance, park the direction, or close the exhausted
 R03 direction boundary; EM does not make that cross-direction lifecycle choice.
-
-## Engineering request
-
-No engineering request is active. The complete result is immutable and no
-technical repair can convert the frozen support failure into an identifying
-result.
-
-## External review
-
-No new provider operation is active or authorized. This intake applies the
-already Pro-closed R03 support gate and exhaustive result-to-action map; it does
-not create or revise a scientific object.
 
 ## Provenance boundary
 

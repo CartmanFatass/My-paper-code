@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.2
+Workflow revision: 2026-08-28.3
 
 本文是 HMASD 唯一控制 authority。HMASD 直接信任 Codex Desktop 提供的可见 task ID、
 history、status、parent/child relation、create/send/read/wait、同 task 继续、archive 与
@@ -66,6 +66,24 @@ task 回答用户。不得把 Summary、Refs 或 Portfolio 表格行交给第三
 联系 EM/CM。CONTROL 直接投递给 affected participant。CM 的 leaves 只回 CM；EM 的 leaves
 只回 EM。跨 top-level handoff 由作出该需求判断的 requester 编写并发送完整 WORK。
 
+### 2.1 Role-local scientific content
+
+上述 `[WORK]` / `[RESULT]` 是唯一 transport shape；以下内容只是相邻角色必须写入其中的
+领域语义，不是新 envelope、validator 或状态机。
+
+- Portfolio → EM：要支持的组合决定、方向问题、共同背景、该方向独有 lens、decisive
+  uncertainty、预期 discriminator、资源边界以及要求返回的决策影响。
+- EM → CM：cycle question、竞争解释、各结果分支的不同预测、discriminator、baseline
+  commit/config/data/RNG、exact paths、资源/Effect、运行计划以及 observation 要求。
+- CM → EM：实际 command/tests、直接 observation、artifact、适用限制、失败位置和未取得
+  observation 的原因。代码或测试成功不得表述为 scientific acceptance。
+- EM → Portfolio：decision impact、当前 claim ceiling、最强 observation、正反证据、仍存
+  替代解释、共享依赖、下一 discriminator、粗粒度成本/时间以及建议的继续、收窄、暂停、
+  关闭、融合或派生动作。
+
+负科学结果在 assignment 已按合同完成时使用 `Outcome: DONE`；`FAILED` 只表示该 WORK 没有
+完成。上述动作是 RESULT 中的判断文字，不增加 lifecycle 或 RETURN outcome。
+
 ## 3. Native dispatch and liveness
 
 每个 top-level requester：
@@ -87,6 +105,12 @@ callee 持有；条件满足后由同一 task 继续同一 WORK，不得用新 W
 用 RESUME 唤醒，或在用户要求自动复查时使用 Codex 原生 heartbeat。`FAILED` 不自动 retry。
 Stopped/idle 且当前 WORK 尚未完成时继续同一 task，不创建替代者。
 
+Portfolio 可以在一个当前比较性 WORK 内向多个不同、idle 的 direction EM 并行发送
+direction-specific WORK。所有已发送 EM 必须 terminal，或由 Portfolio 逐一 CANCEL 并收到
+terminal RESULT 后，Portfolio 才能向自己的 Return task 返回 terminal RESULT。忙碌 EM 不得
+被覆盖或用替代 task 绕过；其 unavailable/WAITING 事实必须保留在比较结果中。该 fan-out 和
+join 由 native task history/status 承担，不写本地 batch、queue 或 task registry。
+
 Participant 可以为完成当前 acceptance 向另一个 idle 相邻角色发送 bounded downstream WORK，
 但不得在自己的 inbound WORK 终结前向当前 Return task 反向发送新 WORK。任何由本轮决定产生的
 successor 都先返回 terminal RESULT，再确认 target 已释放，最后以独立完整 WORK 发送。
@@ -105,9 +129,11 @@ release adoption 或本地路由表，也不常驻轮询。Native list/read/crea
 正常完整链路为 `Portfolio → EM → CM → EM → Portfolio`：
 
 1. Portfolio 作出 ACTIVE/投资决定、更新 current table，并直接向 direction EM 发送科研 WORK；
-2. EM 完成 material cycle，冻结工程语义与判据；需要实现时直接向同方向 CM 发送工程 WORK；
+2. EM 在 material cycle 内冻结科学问题与 discriminator；需要可执行观测时直接向同方向 CM
+   发送工程 WORK；
 3. CM 实现、验证并将 RESULT 返回该 EM，不直接作科研或 Portfolio 判断；
-4. EM 解释工程结果，必要时继续向 CM 发新 WORK；科研对象完成后将 RESULT 返回 Portfolio；
+4. EM 解释 observation，必要时以新的 discriminator 继续向 CM 发新 WORK；完成 evidence-grounded
+   synthesis 与 adversarial convergence 后将 RESULT 返回 Portfolio；
 5. Portfolio 依据 EM 的 durable refs 更新 lifecycle、priority、capacity 或 Direction owner。
 
 每一次箭头的左侧 participant 都是 WORK 内容和投递动作的来源。中间没有 router、隐藏 manager
@@ -141,8 +167,9 @@ REGISTERED/CLOSED direction 不预建空 state。
 
 ## 5. Manager-direct work and leaves
 
-Manager 默认直接完成本职工作。正常 slice 预期 0–2 个 leaves；agent tree 固定
-`max_depth = 1`、`max_threads = 8`。
+Manager 默认直接完成本职工作。Leaf 数量由彼此独立的信息缺口决定，不设固定配额；
+`max_depth = 1`、`max_threads = 8` 只是技术上限。强顺序依赖、共享可变状态、单一慢操作或
+manager 已能可靠完成的工作不为并行而 delegate。
 
 ### 5.1 General chore leaf
 
@@ -152,6 +179,11 @@ Root、Portfolio、EM、CM 都应主动把这类工作卸载给它，以减轻�
 压力。Parent 必须给 exact objective、inputs、owned paths、Effects、output shape 和 stop
 condition；leaf 不得作 owner judgment、扩大 scope、commit/push、联系 top-level task 或再
 delegate。
+
+EM 也可给 general leaf 一个冻结、非权威的正交 lens，例如 competing explanation、falsifier、
+measurement boundary 或 unused-evidence question。此类 leaf 必须返回 mechanism、assumptions、
+supporting/contradicting evidence、observable prediction、falsifier、next discriminator，或明确
+`NO_MATERIAL_INSIGHT`。相同模型、prompt 或来源的一致只算搜索覆盖，不算独立科学证据。
 
 通用 leaf 不替代以下专业边界：
 
@@ -174,17 +206,26 @@ delegate。
 推翻核心假设或 Portfolio 要求重估时，EM 开启新的 material cycle。事实补充、措辞修订、
 claim 收窄、工程结果录入或同一问题继续不新开 cycle。
 
-每个 material cycle 的固定顺序：
+每个 material cycle 的顺序：
 
 1. EM 写 `SCOPE_FROZEN`；
-2. 必要的 Scout evidence 完成；
-3. `hmasd-external-pro-transport` 以 `Mode: INNOVATOR` send-once；
-4. EM 综合并写 `SYNTHESIS_READY`；
-5. 同一 transport 以 `Mode: CONVERGENCE` send-once，要求独立、adversarial convergence；
-6. EM 处理意见并写 `REVIEW_RESOLVED`；
-7. 决定是否直接向 CM 或 Portfolio 发送一条新的完整 WORK，或返回当前 requester。
+2. 完成必要的 neutral grounding；EM、彼此独立的 bounded lenses 和一个 fresh
+   `hmasd-explorer-agentify-transport` `Mode: INNOVATOR` 可以从同一 frozen scope 并行探索，
+   不向彼此暴露 favored route；
+3. EM 比较机制、assumptions、反证与 unused evidence，选择最可能改变判断的最小 discriminator；
+4. 需要可执行 observation 时，进行一轮或多轮 `EM → CM → EM`；每轮必须有新的 discriminator，
+   不能用重复运行制造进展；
+5. EM 解释 observation、竞争解释、limitations 和 claim ceiling，形成 evidence packet 并写
+   `SYNTHESIS_READY`；纯理论/静态证据对象可以不调用 CM，但必须说明为何无需或无法取得新的
+   executable observation；
+6. 启动另一个 fresh `hmasd-explorer-agentify-transport`，以 `Mode: CONVERGENCE` send-once；
+   它只接收当前 evidence packet，不接收 Innovator transcript，并作独立 adversarial review；
+7. EM 逐项 disposition objection；必要时按既有条件调用 Research Critic，随后写
+   `REVIEW_RESOLVED`；
+8. EM 写 `HANDOFF_READY`，返回 Portfolio 或发送已冻结的下一条完整 WORK。
 
-每个 cycle 最多一次 Innovator 和一次 Convergence；修订不自动重审。State 的 current
+每个 cycle 最多一次 Innovator 和一次 Convergence；二者是两个独立的 fresh transport
+instances，修订不自动重审。State 的 current
 `research_cycle` 只保存 `label, opened_at, reason, pro_innovator, pro_convergence`，两项 status
 为 `PENDING | COMPLETE | WAITING | WAIVED`，不保存历史 ledger。
 
@@ -192,6 +233,12 @@ claim 收窄、工程结果录入或同一问题继续不新开 cycle。
 secret/个人数据、provider/账号/付费方式变化、超出两次、unknown send 后考虑新发送、用户暂停
 外部 Effect。Unknown commitment 只观察不重发；明确未发送失败则 EM 进入 WAITING。用户可以
 对 exact cycle 明确 waiver。不得用本地 Critic 或其他 provider 静默替代。
+
+若 observation 或 objection 推翻 frozen scope，EM 结束当前 cycle 并开启新 cycle，不在原
+cycle 中重发 Pro。`SCOPE_FROZEN` 同时冻结可能结果及其 claim/Portfolio 含义、共享 baseline、
+最大 observation rounds 或资源上限、提前停止条件和 scope-invalidated 条件。没有新的可检验
+机制、没有能改变决定的 discriminator、资源边界耗尽或只有重复失败时，EM 必须降低 claim、
+返回 `NO_MATERIAL_INSIGHT`/精确 gap，或建议 PARK/CLOSE，而不是无限追加实验。
 
 完整问答保存为：
 
@@ -215,6 +262,16 @@ Lifecycle 只允许 `REGISTERED | ACTIVE | PARKED | CLOSED`，且只有 Portfoli
 `NONE`。Portfolio 先原子更新该表，再直接发送必要的 EM WORK 或向当前 Return task 返回 RESULT。
 重大投资或关闭决定可写独立 Markdown decision note；普通 priority 更新只改表。历史 decision
 note 必须清楚标为 historical，不能作为 current workflow state。
+
+Portfolio 先判断最低科学质量：问题与非目标清楚、evidence 可追溯、存在可解释的
+discriminator、负结果能区分理论与执行失败、claim 不超过证据。通过后再定性比较：方向间的
+互补/替代/信息相关、共享假设与共同失败风险、下一 observation 是否会改变组合动作、成本/
+时间/可逆性以及长期 option value。没有明确概率、效用和成本模型时不得生成数值 VOI、综合
+分数、Elo 或投票裁决。
+
+继续、收窄、暂停、关闭、融合或派生是一次性 Portfolio action，不新增 lifecycle。融合先形成
+新的科学 synthesis question，并明确源方向继续/PARK/CLOSE；代码或 shared-core 集成仍由 Root
+处理。派生先在 Portfolio 登记新 direction，再由新的 EM 建立 direction science。
 
 ## 8. Scientific capabilities and evidence
 
@@ -248,9 +305,24 @@ checkpoint/result/stdout/stderr 与 terminal facts。科学 reproducibility 或 
 
 ## 10. Git closure and control
 
-Shared checkout 保持 `main`；不在其中 switch/checkout。Owner 只修改/stage owned paths，保留
-其他修改，shared index mutation 串行。跨 top-level role handoff 且 refs 有 Git-visible 内容
-时必须 commit；push 在用户要求远端同步、跨 worktree 集成或正式方向交付时强制。
+`C:/Projects/HMASD` 是 Root 的 primary `main` checkout，不在其中 switch/checkout。只有 ACTIVE
+direction 按需拥有至多一个 sibling Git worktree，位于 `C:/Projects/HMASD-worktrees/<name>`，
+并由用户或 Root 一次性保存为 Codex Desktop local project。EM 与 CM 都在该 saved project 中
+以 local environment 创建 top-level task；不得用 per-chat managed worktree 假装共享方向目录，
+也不得建立 project/worktree mapping registry。缺少 saved project 时显式 WAITING。
+
+新建 top-level participant 时，`create_thread` 的 initial prompt 本身就是完整 `[WORK]`；不得
+先创建空 task 再二次发送。Setup 只返回 client ID 时等待 ready thread ID，不得重建或把 client
+ID 当 recipient。旧 archived tasks 不复用。
+
+同一 direction worktree 同时只有一个 Git-visible writer phase。EM 向 CM 发送 WORK 前提交自身
+owned refs；CM terminal RESULT 前 EM 对整个 direction worktree 只读且不得 stage/commit；CM
+只提交 exact owned paths并返回 known diff，随后 writer phase 回到 EM。Leaf 不 commit/push，
+也不创建 worker worktree。不同 direction worktrees 可以并行；每个新 cycle 以 WORK 指定的
+exact committed direction-worktree baseline/HEAD 为起点，无法安全同步或涉及 shared-core 时交 Root。
+
+Owner 只修改/stage owned paths并保留其他修改。跨 top-level role handoff 且 refs 有 Git-visible
+内容时必须 commit；push 在用户要求远端同步、跨 worktree 集成或正式方向交付时强制。
 
 用户直接控制 participant 时，该输入已经是 authority，不需要 CONTROL 转发。Root 或 requester
 需要影响另一 task 时，直接向 affected participant 发送 CONTROL，并遵守第 3 节对应动作语义。

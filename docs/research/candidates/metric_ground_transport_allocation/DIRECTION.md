@@ -1,16 +1,11 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
-This authority is the direction-science surface for HMASD. It preserves source-grounded question and evidence references; workflow JSON points here and never copies scientific prose.
+This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
 
 - Stable direction ID: `metric_ground_transport_allocation`
-- Portfolio label: `metric ground transport allocation`
-- Historical map state: `DORMANT_REVISIT`
-- Initial registry lifecycle: `REGISTERED`
-- Registry abbreviation: `MGTAP`
-- Lifecycle, ranking, and dependency decisions are held only by `docs/research/portfolio/PORTFOLIO.md` and its registry.
-- The initial lifecycle is deliberately neutral: registration does not qualify, activate, park, or close the direction.
+- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
 
 ## Scientific question
 
@@ -24,8 +19,6 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Accepted result and corrected current boundary — 2026-08-27
 
-Decision owner: EM-metric_ground_transport_allocation
-
 The accepted revision-04 result is `BOUNDED_NONIDENTIFICATION_STRUCTURAL`, not
 an efficacy result. All four selected `(arm,binding)` cells failed the frozen
 optimization-validity gate, with
@@ -37,25 +30,17 @@ generic-effect, practical-equivalence, retention, deletion, warehouse, or UAV
 claim. It establishes only that revision 04 did not identify the comparison
 under its frozen update-time support.
 
-For lifecycle purposes, the Portfolio decision under
-`MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z`
-supersedes the earlier generation-3 parking entry. The correction does not
-change the accepted revision-04 result. It recognizes one still-live,
-same-direction question: whether a terminal, prospectively frozen increase in
-matched update-time support makes the equal-class comparison answerable under
-a fail-closed stationarity gate. The later Portfolio heading
-`Four-direction activation confirmation and fourth-direction completion —
-2026-08-27T07:02:59Z` retains the direction as `ACTIVE` and authorizes exactly
-this successor-definition slice. Lifecycle authority remains exclusively in
-`docs/research/portfolio/PORTFOLIO.md` and its registry.
+The dated Portfolio records cited in the Evidence set are provenance for this
+successor-definition slice. They do not change the accepted revision-04 result.
+They identify one same-direction question: whether a terminal, prospectively
+frozen increase in matched update-time support makes the equal-class comparison
+answerable under a fail-closed stationarity gate.
 
 No matched-support successor result currently exists. Revision-04 values may
 inform prospective design priority only and are not pilot data, priors, pooled
 observations, or efficacy evidence for the successor.
 
 ## Matched update-time-support estimand closure — 2026-08-27
-
-Decision owner: EM-metric_ground_transport_allocation
 
 ### Material scientific conclusion
 
@@ -175,28 +160,12 @@ values remain subordinated to the failed structural gate.
 - `docs/research/portfolio/PORTFOLIO.md`, heading
   `Four-direction activation confirmation and fourth-direction completion — 2026-08-27T07:02:59Z`
 
-## Engineering request
-
-No engineering request is active at bootstrap. An engineering scope may be created only by a later evidence-backed EM/Portfolio decision and must point to this authority rather than duplicate its science.
-
-## External review
-
-No external-review round is active at bootstrap. Provider operations and archive references are created only through the external-review workflow; this document records no provider result.
-
-## Operational neutral fields
-
-- `registry.dependencies` is `[]` because the cited sources do not establish a Portfolio dependency graph.
-- `registry.reactivation_condition_ref` is `null` because no reactivation condition is authored by the source set.
-- Research and engineering workflow states begin idle/unrequested with no active agents, rounds, blockers, or runtime references.
-- These neutral values are workflow facts, not scientific conclusions.
-
 ## Provenance boundary
 
-The historical map and candidate source documents remain provenance. This authority is the stable direction reference for new workflow state; it does not rewrite historical source files or claim results that they do not state.
+The historical map and candidate source documents remain provenance. This file
+does not rewrite historical source files or claim results that they do not state.
 
 ## MGTAP R01 closure-only mathematical and causal adjudication — 2026-08-27
-
-Decision owner: EM-metric_ground_transport_allocation
 
 ```text
 reviewed_revision=MGTAP-B1-MATCHED-UPDATE-SUPPORT-20260827-R01
@@ -317,8 +286,6 @@ deployment, or flight. Those remain separate later decisions and Effects.
 
 ## MGTAP R01 verified construction intake — 2026-08-27
 
-Decision owner: EM-metric_ground_transport_allocation
-
 This intake binds the same-direction CM-owned verified construction as
 preactivity technical evidence only. It accepts neither a scientific result
 nor an efficacy claim and changes none of the closed R01 estimand, gate,
@@ -376,8 +343,6 @@ this intake. Any later scientific activity requires a separate prospective
 authority and its own exact Effect boundary.
 
 ## MGTAP R01 terminal result intake and first-true interpretation — 2026-08-27
-
-Decision owner: EM-metric_ground_transport_allocation
 
 This section accepts exactly one complete terminal result for
 `MGTAP-B1-MATCHED-UPDATE-SUPPORT-20260827-R01` and applies the already-frozen

@@ -28,8 +28,12 @@ directory should use the standard `tempfile` API and clean up its context.
 Git worktrees are not temporary files and must not be nested in this checkout.
 New HMASD worktrees belong under the single sibling root
 `C:/Projects/HMASD-worktrees/<name>`. The primary checkout remains
-`C:/Projects/HMASD`. Use `scripts/new_hmasd_worktree.ps1` for new linked
-worktrees so they do not spread across `C:/Projects`, OneDrive, or the checkout.
+`C:/Projects/HMASD` and is reserved for Root's `main` integration. An ACTIVE
+direction may have at most one sibling permanent Git worktree, created on demand
+and saved once as a Codex Desktop local project so its EM and CM tasks share the
+same direction workspace. REGISTERED, PARKED, and CLOSED directions do not get
+empty worktrees. Use `scripts/new_hmasd_worktree.ps1` only for the Git checkout
+step; it does not create a Codex project or a project registry.
 
 Durable source, research decisions, and results that must survive cleanup do
 not belong here; move them to their documented project or research directory

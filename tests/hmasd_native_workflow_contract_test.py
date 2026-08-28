@@ -46,6 +46,13 @@ def test_protocol_is_the_single_readable_workflow_authority() -> None:
     assert "Action: PAUSE | RESUME | CANCEL" in protocol
     assert "Action: PAUSE | RESUME | CANCEL | REPLACE | RELOAD" not in protocol
     assert "同时最多持有一个 unfinished inbound WORK" in protocol
+    assert "所有已发送 EM 必须 terminal" in protocol
+    assert "initial prompt 本身就是完整 `[WORK]`" in protocol
+    assert "同一 direction worktree 同时只有一个 Git-visible writer phase" in protocol
+    assert "hmasd-explorer-agentify-transport" in protocol
+    assert "不设固定配额" in protocol
+    assert "0–2 个 leaves" not in protocol
+    assert "不得生成数值 VOI" in protocol
     assert "仍由\ncallee 持有" in protocol
     assert "successor 都先返回 terminal RESULT" in protocol
     assert "CANCELLED RESULT 并释放 target" in protocol
@@ -101,7 +108,7 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
         "HMASDVerifier",
         "HMASDExperimentOperator",
         "HMASDCPMAgentifyTransport",
-        "HMASDExternalProTransport",
+        "HMASDExplorerAgentifyTransport",
         "HMASDResearchScout",
         "HMASDResearchCritic",
         "HMASDGeneralLeaf",
@@ -156,6 +163,89 @@ def test_portfolio_is_one_current_table() -> None:
     assert owner["ucope"] == "PORTFOLIO"
     assert lifecycle["semigroup_consistent_duration_model_policy"] == "PARKED"
     assert lifecycle["metric_ground_transport_allocation"] == "CLOSED"
+
+
+def test_research_navigation_does_not_duplicate_portfolio_state() -> None:
+    research_map = _read("docs/research/RESEARCH_MAP.md")
+    assert "Current lifecycle, priority, capacity, and direction owner exist only" in research_map
+    assert "Status snapshot:" not in research_map
+    assert "| Direction | State |" not in research_map
+    assert "ACTIVE_ENGINEERING" not in research_map
+    assert "SCIENTIFIC_NO_CURRENT" not in research_map
+
+    directions = sorted((ROOT / "docs/research/candidates").glob("*/DIRECTION.md"))
+    assert len(directions) == 33
+    for path in directions:
+        text = path.read_text(encoding="utf-8")
+        lowered = text.lower()
+        assert "docs/research/portfolio/portfolio.md" in lowered
+        for stale in (
+            "workflow json points here",
+            "initial registry lifecycle",
+            "and its registry",
+            "current registry observation",
+            "no engineering request is active",
+            "no external-review round is active",
+            "external-review workflow",
+        ):
+            assert stale not in lowered, path
+
+
+def test_research_cycle_and_fanout_relations_are_ordered() -> None:
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    cycle = protocol.split("## 6. Material research cycle and External Pro", 1)[1].split(
+        "## 7. Portfolio", 1
+    )[0]
+    assert cycle.index("Mode: INNOVATOR") < cycle.index("EM → CM → EM")
+    assert cycle.index("EM → CM → EM") < cycle.index("`SYNTHESIS_READY`")
+    assert cycle.index("`SYNTHESIS_READY`") < cycle.index("Mode: CONVERGENCE")
+    assert cycle.index("Mode: CONVERGENCE") < cycle.index("`REVIEW_RESOLVED`")
+    assert "纯理论/静态证据对象可以不调用 CM" in cycle
+    assert "两个独立的 fresh transport" in cycle
+    assert "Unknown commitment 只观察不重发" in cycle
+
+    fanout = protocol.split("Portfolio 可以在一个当前比较性 WORK", 1)[1].split(
+        "Participant 可以为完成当前 acceptance", 1
+    )[0]
+    assert "所有已发送 EM 必须 terminal" in fanout
+    assert "逐一 CANCEL 并收到" in fanout
+    assert "不写本地 batch、queue 或 task registry" in fanout
+
+    em_skill = _read(".agents/skills/hmasd-em-task/SKILL.md")
+    assert em_skill.index("Mode: INNOVATOR") < em_skill.index("direction CM")
+    assert em_skill.index("direction CM") < em_skill.index("`SYNTHESIS_READY`")
+    assert em_skill.index("`SYNTHESIS_READY`") < em_skill.index("Mode: CONVERGENCE")
+    assert em_skill.index("Mode: CONVERGENCE") < em_skill.index("`REVIEW_RESOLVED`")
+
+
+def test_sensitive_direction_science_boundaries_survive_metadata_cleanup() -> None:
+    fsbs = _read("docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md")
+    assert "Equivalent implementation paths may not change its" in fsbs
+    for boundary in ("host, arms, matched resources, learner", "workload, thresholds", "claim map"):
+        assert boundary in fsbs
+
+    mgtap = _read("docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md")
+    assert "The accepted revision-04 result is `BOUNDED_NONIDENTIFICATION_STRUCTURAL`" in mgtap
+    assert "FIRST_TRUE_BRANCH=BOUNDED_NONIDENTIFICATION_STRUCTURAL" in mgtap
+
+    ucope = _read("docs/research/candidates/ucope/DIRECTION.md")
+    assert "The complete result is immutable: no technical repair can convert its frozen" in ucope
+    assert "support failure into an identifying result" in ucope
+
+
+def test_retired_control_notebooks_are_not_active_docs() -> None:
+    for relative in (
+        "docs/research/workflow/WORKFLOW_IMPROVEMENTS.md",
+        "docs/DISTRIBUTED_RESEARCH_COGNITION_WORKING_NOTES.md",
+        "docs/plans/2026-07-22-controller-direct-external-review-design.md",
+        "docs/plans/2026-07-22-controller-direct-external-review-implementation.md",
+    ):
+        assert not (ROOT / relative).exists()
+    requirements = _read("docs/SCIENTIFIC_CAPABILITY_LAYER_REQUIREMENTS.md")
+    assert "Workflow-Clerk" not in requirements
+    temp_readme = _read("temp/README.md")
+    assert "at most one sibling permanent Git worktree" in temp_readme
+    assert "saved once as a Codex Desktop local project" in temp_readme
 
 
 def test_state_cli_only_exposes_validate_and_update() -> None:

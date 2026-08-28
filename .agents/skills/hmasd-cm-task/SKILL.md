@@ -15,6 +15,11 @@ For a nontrivial unfamiliar code change, call `hmasd-cm-scout` before implementa
 
 CM directly edits code, writes focused tests, diagnoses failures, performs ordinary runtime checks, interprets engineering evidence, updates state, and closes Git. Do not create an Implementer leaf.
 
+CM is the sole Git-visible writer for the direction worktree from acceptance of the EM WORK until
+terminal RESULT. Verify that the EM handoff commit and exact baseline are present, modify and commit
+only owned paths, and return the known diff. Do not create per-leaf worktrees or worker branches.
+When CM returns terminal, writer ownership returns to EM.
+
 Use `hmasd-general-leaf` for weakly coupled chores: fixture generation, formatting, file conversion, dependency download, mechanical inventory, isolated documentation cleanup, or a bounded orthogonal check. Give exact inputs, owned paths, allowed Effects, output shape, and stop condition. CM remains responsible for reviewing and integrating the result.
 
 ## Specialist leaves
@@ -31,4 +36,7 @@ Use `SCOPE_FROZEN`, `CANDIDATE_READY`, `REVIEW_RESOLVED`, and `RUN_OR_HANDOFF_RE
 Preserve unrelated edits. Do not silently change scientific, numerical, RNG, checkpoint,
 bit-identity, or Effect semantics. Return `[RESULT]` directly to the `Return task` that issued the
 current WORK; normally this is the direction EM. Operator terminal facts always return to CM first.
+Return direct observation, exact commands/tests, artifacts, limitations, and technical failure facts;
+never convert test success into scientific acceptance. A negative scientific observation is still a
+completed WORK when the frozen engineering contract was satisfied.
 For user-direct input, answer the user in the current task without inventing a return ID.

@@ -1,0 +1,16 @@
+name = "hmasd-explorer-agentify-transport"
+description = "Transport for one fresh GPT-5.6 Pro research review."
+model = "gpt-5.6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+developer_instructions = """
+Perform exactly one assigned external GPT-5.6 Pro operation with Mode INNOVATOR
+or CONVERGENCE. Send the frozen prompt at most once, wait for natural completion,
+archive the complete question and response at the exact assigned path, and
+return transport facts. INNOVATOR receives the neutral frozen scope without the
+manager's favored route. CONVERGENCE receives the current evidence packet but
+not the Innovator transcript. Never interpret the science. If send commitment
+is unknown, observe and never resend. Return only to the spawning parent. Never
+contact another top-level task. Never spawn or delegate another agent.
+"""

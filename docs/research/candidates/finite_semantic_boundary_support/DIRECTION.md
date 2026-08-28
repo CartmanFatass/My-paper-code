@@ -1,17 +1,11 @@
 # Direction finite_semantic_boundary_support: finite semantic boundary support
 
-This authority is the direction-science surface for HMASD. It preserves source-grounded question and evidence references; workflow JSON points here and never copies scientific prose.
+This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
 
 - Stable direction ID: `finite_semantic_boundary_support`
-- Portfolio label: `finite semantic boundary support`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Initial registry lifecycle: `REGISTERED`
-- Registry abbreviation: `FSBS`
-- Current observed registry lifecycle: `ACTIVE` at revision `6`
-- Lifecycle, ranking, and dependency decisions are held only by `docs/research/portfolio/PORTFOLIO.md` and its registry.
-- The initial lifecycle is deliberately neutral: registration does not qualify, activate, park, or close the direction.
+- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
 
 ## Scientific question
 
@@ -68,7 +62,6 @@ the current direction ref separately.
 
 ## Latest material scientific decision — 2026-08-27
 
-- Decision owner: `EM-finite_semantic_boundary_support`
 - Decision: adopt R01 as the meaning-complete prospective variable-axis
   cooperative/UAV edge authority for this direction.
 - Fixed discriminator: `AUTHENTIC` versus matched
@@ -83,32 +76,11 @@ the current direction ref separately.
 - Preactivity disposition: science authority complete; CM and Operator not
   requested.
 
-## Engineering request
-
-No engineering request is active. The controlling Portfolio slice records
-`CM now: No` and `Operator now: No`. A later Portfolio investment may
-authorize an exact direction-owned CM scope against R01. Equivalent
-implementation paths may not change its host, arms, matched resources, learner,
-gates, controls, workload, thresholds, or claim map.
-
-## External review
-
-No external-review round is active. Provider operations and archive references
-are created only through the external-review workflow; this document records
-no provider result.
-
-## Operational neutral fields
-
-- `registry.dependencies` remains `[]`; no cross-direction dependency is
-  inferred by R01.
-- `registry.reactivation_condition_ref` remains `null` while the direction
-  is `ACTIVE`.
-- Engineering remains unrequested and the external-review index has no rounds.
-- These are workflow facts, not scientific conclusions.
-
 ## Provenance boundary
 
 The historical map, fixed B1 card, addendum, and reconciliation remain
-provenance. This authority is the stable direction reference for workflow
-state. R01 changes the prospective definition, not any historical result, and
-no unrun effect is represented as evidence.
+provenance. This file does not rewrite any historical result. R01 changes the
+prospective definition, not any historical result, and no unrun effect is
+represented as evidence. Equivalent implementation paths may not change its
+host, arms, matched resources, learner, gates, controls, workload, thresholds,
+or claim map.

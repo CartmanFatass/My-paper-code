@@ -4,6 +4,13 @@ Updated at: 2026-08-28T14:24:57Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means Portfolio has not assigned an active direction owner; lifecycle remains authoritative independently.
 
+Portfolio first applies a scientific quality floor: a clear question and non-goals, traceable
+evidence, an interpretable discriminator, distinguishable scientific versus execution failure, and a
+claim no stronger than the evidence. Directions above that floor are compared by decision relevance,
+complementarity or substitution, shared assumptions and common failure risk, cost/time/reversibility,
+and whether the next observation can change an investment action. These are qualitative judgments;
+this file does not contain a numeric VOI, aggregate score, Elo, or vote.
+
 | Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | ACTIVE | UNSET | EM | 2026-08-27T21:39:57Z | Post-MGTAP registered-candidate selection and APFI activation — 2026-08-27T16:11:50Z |
@@ -40,4 +47,8 @@ This table is the only current lifecycle, priority, capacity, and direction-owne
 | vsp_06_mssr | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | vsp_c1 | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 
-Capacity note: all pre-cutover direction tasks are retired. New current-protocol tasks are created or reused directly by the requester that owns each bounded WORK: Portfolio normally dispatches EM, and EM normally dispatches CM.
+Capacity note: all pre-cutover direction tasks are retired and are not reused. New current-protocol
+tasks are created or reused directly by the requester that owns each bounded WORK: Portfolio normally
+dispatches EM, and EM normally dispatches CM. New task creation uses the complete WORK as its initial
+prompt. Only ACTIVE directions receive a sibling permanent worktree saved as a Codex local project,
+and only when work actually begins; no local task or worktree registry is maintained.
