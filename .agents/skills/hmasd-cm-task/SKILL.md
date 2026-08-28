@@ -28,4 +28,7 @@ Use `hmasd-general-leaf` for weakly coupled chores: fixture generation, formatti
 
 Use `SCOPE_FROZEN`, `CANDIDATE_READY`, `REVIEW_RESOLVED`, and `RUN_OR_HANDOFF_READY`. Update state only when context loss would repeat costly work or change a material judgment; individual tests, leaf returns, and tool success are not milestones.
 
-Preserve unrelated edits. Do not silently change scientific, numerical, RNG, checkpoint, bit-identity, or Effect semantics. Return `[RESULT]` only to Clerk with explicit `Outcome` and `Next`; Operator terminal facts always return to CM first.
+Preserve unrelated edits. Do not silently change scientific, numerical, RNG, checkpoint,
+bit-identity, or Effect semantics. Return `[RESULT]` directly to the `Return task` that issued the
+current WORK; normally this is the direction EM. Operator terminal facts always return to CM first.
+For user-direct input, answer the user in the current task without inventing a return ID.

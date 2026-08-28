@@ -56,6 +56,17 @@ def test_waiting_requires_reentry_condition() -> None:
         hmasd_state.validate_document("research", document)
 
 
+@pytest.mark.parametrize("kind,factory", [("research", research_state), ("engineering", engineering_state)])
+def test_cancelled_is_terminal_without_reentry(kind: str, factory) -> None:
+    document = factory()
+    document["status"] = "CANCELLED"
+    document["completed_summary"] = "Cancelled by direct CONTROL after Effects became terminal."
+    assert hmasd_state.validate_document(kind, document) == document
+    document["reentry_condition"] = "A replacement arrives"
+    with pytest.raises(hmasd_state.StateError, match="null reentry_condition"):
+        hmasd_state.validate_document(kind, document)
+
+
 def test_update_creates_then_increments_one_current_snapshot(tmp_path: Path) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     first = hmasd_state.update_state(
@@ -66,6 +77,20 @@ def test_update_creates_then_increments_one_current_snapshot(tmp_path: Path) -> 
         "research", path, "EM", research_state(), root=tmp_path
     )
     assert second["revision"] == 2
+
+
+def test_cancelled_engineering_slice_can_start_fresh_scope(tmp_path: Path) -> None:
+    path = tmp_path / "docs/research/candidates/example_direction/workflow/engineering/state.json"
+    cancelled = engineering_state()
+    cancelled["status"] = "CANCELLED"
+    cancelled["completed_summary"] = "Cancelled after Effects became terminal."
+    hmasd_state.update_state("engineering", path, "CM", cancelled, root=tmp_path)
+    restarted = engineering_state()
+    restarted["milestone"] = "SCOPE_FROZEN"
+    restarted["completed_summary"] = "A distinct replacement WORK was frozen."
+    updated = hmasd_state.update_state("engineering", path, "CM", restarted, root=tmp_path)
+    assert updated["revision"] == 2
+    assert updated["milestone"] == "SCOPE_FROZEN"
 
 
 def test_cli_refuses_shadow_state_outside_repository_root(tmp_path: Path) -> None:

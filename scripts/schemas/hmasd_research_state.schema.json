@@ -15,7 +15,7 @@
     "revision": {"type": "integer", "minimum": 1},
     "updated_at": {"type": "string", "format": "date-time"},
     "milestone": {"enum": ["SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"]},
-    "status": {"enum": ["ACTIVE", "WAITING", "FAILED", "COMPLETE"]},
+    "status": {"enum": ["ACTIVE", "WAITING", "FAILED", "CANCELLED", "COMPLETE"]},
     "completed_summary": {"type": "string", "minLength": 1},
     "refs": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
     "blockers": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},

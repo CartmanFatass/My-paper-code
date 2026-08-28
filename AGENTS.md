@@ -11,16 +11,17 @@ milestone、科学证据和实验结果，不重建身份认证、消息账本�
 - 当前组合 authority：`docs/research/portfolio/PORTFOLIO.md`。
 - 规划与 ticket：`.scratch/`、`docs/agents/issue-tracker.md`；背景：`CONTEXT.md`、
   `docs/adr/`、`docs/agents/domain.md`。
-- Session skills 仅为 `hmasd-root-task`、`hmasd-workflow-clerk-task`、
-  `hmasd-portfolio-task`、`hmasd-em-task`、`hmasd-cm-task`。
+- Session skills 仅为 `hmasd-root-task`、`hmasd-portfolio-task`、
+  `hmasd-em-task`、`hmasd-cm-task`。
 
 与唯一协议冲突的历史文档、fixture、prompt、旧 task 消息或脚本均不是当前输入。旧 task
 已经退役；需要方向工作时创建当前协议的新 EM/CM task。
 
 ## Hard boundaries
 
-1. Root 是用户与 shared-core 入口；Clerk 只路由和观察 liveness；Portfolio 只作跨方向
-   lifecycle/priority/capacity 判断；EM 直接负责科研；CM 直接负责工程。
+1. Root 是用户与 shared-core 入口；Portfolio 只作跨方向 lifecycle/priority/capacity 判断；
+   EM 直接负责科研；CM 直接负责工程。正常链路由 requester 使用 Codex 原生 task ID 直接
+   投递，callee 把结果返回同一个 requester。
 2. Long-lived participant 使用 top-level task。Subagent 只是一个 manager 内的 bounded direct
    leaf，只 final return 给 spawning parent，不再 delegate，也不联系其他 top-level task。
 3. Manager 应把与主判断弱耦合的下载、整理、机械检查和杂务交给通用 Luna-xhigh leaf；
@@ -33,8 +34,8 @@ milestone、科学证据和实验结果，不重建身份认证、消息账本�
    一次性能合理性审阅和绑定 exact command 的用户批准。
 8. 科学、数值、RNG、checkpoint、bit identity 和 external Effect 语义不得静默改变。
 9. 用户始终拥有最高权限。工具与验证是 evidence，不是新的批准层。
-10. Native task 能力不可用时显式停止；不得启用本地 task plane、inbox、history parser、
-    registry、receipt 或 scheduler 替代品。
+10. Native task 能力不可用时显式停止；不得启用中转协调 task、本地 task plane、inbox、
+    history parser、registry、receipt 或 scheduler 替代品。
 
 ## Workspace and Git
 

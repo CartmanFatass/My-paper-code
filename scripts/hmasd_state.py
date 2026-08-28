@@ -16,7 +16,7 @@ from typing import Any, Mapping, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTION_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,127}\Z")
-STATUSES = {"ACTIVE", "WAITING", "FAILED", "COMPLETE"}
+STATUSES = {"ACTIVE", "WAITING", "FAILED", "CANCELLED", "COMPLETE"}
 MILESTONES = {
     "research": {"SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"},
     "engineering": {"SCOPE_FROZEN", "CANDIDATE_READY", "REVIEW_RESOLVED", "RUN_OR_HANDOFF_READY"},
@@ -144,7 +144,9 @@ def validate_document(kind: str, document: Mapping[str, Any]) -> dict[str, Any]:
     _text(document["next_action"], "next_action")
     if document["status"] == "WAITING" and document["reentry_condition"] is None:
         raise StateError("WAITING requires reentry_condition")
-    if document["status"] in {"ACTIVE", "COMPLETE"} and document["blockers"]:
+    if document["status"] != "WAITING" and document["reentry_condition"] is not None:
+        raise StateError(f"{document['status']} requires null reentry_condition")
+    if document["status"] in {"ACTIVE", "CANCELLED", "COMPLETE"} and document["blockers"]:
         raise StateError(f"{document['status']} requires empty blockers")
     if kind == "research":
         _text(document["claim_ceiling"], "claim_ceiling")
@@ -232,7 +234,10 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
             raise StateError("research milestone cannot regress within a cycle")
     elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
-        if not (current["status"] == "COMPLETE" and next_document["milestone"] == "SCOPE_FROZEN"):
+        if not (
+            current["status"] in {"COMPLETE", "FAILED", "CANCELLED"}
+            and next_document["milestone"] == "SCOPE_FROZEN"
+        ):
             raise StateError("engineering milestone cannot regress within a work slice")
 
 

@@ -23,7 +23,7 @@ Open a new cycle only for a new direction/mechanism/comparator/discriminator, po
 4. Synthesize and write `SYNTHESIS_READY`.
 5. Call the same transport once with `Mode: CONVERGENCE`; require independent adversarial review.
 6. Resolve objections and write `REVIEW_RESOLVED`.
-7. Write `HANDOFF_READY` when the next responsibility is frozen.
+7. Write `HANDOFF_READY` when the next responsibility and complete outbound WORK are frozen.
 
 No automatic re-review within the same cycle. Unknown external send commitment is observed, never resent. A local Research Critic is exceptional: material Pro objection, EM rejection of a core Pro recommendation, shared scientific core, or explicit user request.
 
@@ -31,4 +31,10 @@ No automatic re-review within the same cycle. Unknown external send commitment i
 
 Update state only when losing context would repeat costly work or change a material judgment. A leaf result, lookup, tool success, or file write is not a milestone. Material tool evidence is a concise Markdown note written by EM, not a typed sidecar pipeline.
 
-Return `[RESULT]` to Clerk with explicit `Outcome` and `Next`. EM never directly sends to CM or Portfolio and never delegates durable scientific judgment.
+When engineering is required, EM writes and directly sends the complete bounded `[WORK]` to the
+direction CM. CM returns its result to this EM; EM interprets the engineering evidence before any
+scientific or Portfolio conclusion. When Portfolio judgment is required and Portfolio is the current
+Return task, EM returns the result rather than sending a reentrant WORK; otherwise it may send a
+bounded WORK directly to an idle Portfolio task. Return `[RESULT]` directly to the current `Return task`. EM never delegates
+durable scientific judgment. For user-direct input, answer the user in the current task without
+inventing a return ID.

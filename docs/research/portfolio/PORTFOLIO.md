@@ -2,9 +2,9 @@
 
 Updated at: 2026-08-28T14:24:57Z
 
-This table is the only current lifecycle, priority, capacity, and next-role authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means no work is presently dispatched, not that the direction is closed.
+This table is the only current lifecycle, priority, capacity, and direction-owner authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means Portfolio has not assigned an active direction owner; lifecycle remains authoritative independently.
 
-| Direction | Lifecycle | Priority | Next role | Updated at | Reason/condition |
+| Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | ACTIVE | UNSET | EM | 2026-08-27T21:39:57Z | Post-MGTAP registered-candidate selection and APFI activation — 2026-08-27T16:11:50Z |
 | acvc | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
@@ -40,4 +40,4 @@ This table is the only current lifecycle, priority, capacity, and next-role auth
 | vsp_06_mssr | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | vsp_c1 | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 
-Capacity note: all pre-cutover direction tasks are retired. New current-protocol EM/CM tasks are created only when Portfolio or the user dispatches work.
+Capacity note: all pre-cutover direction tasks are retired. New current-protocol tasks are created or reused directly by the requester that owns each bounded WORK: Portfolio normally dispatches EM, and EM normally dispatches CM.

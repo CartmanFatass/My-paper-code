@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.1
+Workflow revision: 2026-08-28.2
 
 本文是 HMASD 唯一控制 authority。HMASD 直接信任 Codex Desktop 提供的可见 task ID、
 history、status、parent/child relation、create/send/read/wait、同 task 继续、archive 与
@@ -8,14 +8,12 @@ worktree。项目不对这些产品事实再做身份认证，也不建立恶意
 
 ## 1. Topology and roles
 
-长期同级 task 只有 Root、Workflow-Clerk、Portfolio、`EM/<direction>` 与
-`CM/<direction>`。不使用 generation。Task ID 是真实身份，title 只是人类标签；出现两个
-候选时停止发送并请用户选择。
+长期同级 task 只有 Root、Portfolio、`EM/<direction>` 与 `CM/<direction>`。不使用中转协调
+task 或 generation。Task ID 是真实身份，title 只是人类标签；出现两个候选时停止发送并请
+用户选择。
 
 - **Root**：永久用户入口；处理 shared-core、用户材料、task 冲突、协议矛盾和最终跨方向
   Git 集成。
-- **Workflow-Clerk**：唯一长期协调 task；使用 native list/read/create/send 查找、创建、
-  继续和路由 task。它不解释科研/工程结果，不维护第二状态机。
 - **Portfolio**：维护 considered set、lifecycle、priority、capacity 和跨方向投资判断。
 - **EM**：直接冻结问题、创新、原则分析、综合、修订、设置 claim ceiling/discriminator，
   并写方向科研 authority 与 research state。
@@ -38,13 +36,13 @@ Owned paths: <exact paths or none>
 Effects: <none or exact effects>
 Acceptance: <observable checks>
 Refs: <current authority and evidence>
+Return task: <native task id of the requester>
 ```
 
 ```text
 [RESULT]
 Direction: <id or shared>
-Outcome: DONE | WAITING | FAILED
-Next: EM | CM | PORTFOLIO | ROOT | SAME | NONE
+Outcome: DONE | WAITING | FAILED | CANCELLED
 Summary: <decision or completed outcome>
 Refs: <durable refs and Git facts>
 Blocker: <required for WAITING/FAILED, otherwise none>
@@ -53,34 +51,67 @@ Reentry: <required for WAITING, otherwise none>
 
 ```text
 [CONTROL]
-Action: PAUSE | RESUME | CANCEL | REPLACE | RELOAD
+Action: PAUSE | RESUME | CANCEL
 Direction: <id or shared>
 Reason: <why>
 Updated at: <timestamp>
-Replacement: <required only for REPLACE; objective and Effects>
 ```
 
-`Outcome` 与 `Next` 正交。Clerk 只按显式 `Next` 路由，不从 Summary 猜责任。ACTIVE direction
-不能 `Next: NONE`；只有 Portfolio 已关闭的方向可以 NONE。
+`Return task` 只是当前请求的 native routing locator，不是身份认证、reply ledger、receipt 或
+durable state。Callee 必须把 RESULT 直接发送回该 task；requester 收到结果后自行决定是否产生
+下一条完整 WORK。用户直接进入某 participant 时不制造 Return task；该 participant 直接在当前
+task 回答用户。不得把 Summary、Refs 或 Portfolio 表格行交给第三方推断成新任务。
 
-固定 top-level edges：Root → Clerk；Clerk → Root/Portfolio/EM/CM；Root/Portfolio/EM/CM →
-Clerk；participant → Clerk → affected participant 的 CONTROL。EM、CM、Portfolio 不直接互发。
+固定正常 edges：Root ↔ Portfolio、Portfolio ↔ EM、EM ↔ CM。Root 也可按用户明确要求直接
+联系 EM/CM。CONTROL 直接投递给 affected participant。CM 的 leaves 只回 CM；EM 的 leaves
+只回 EM。跨 top-level handoff 由作出该需求判断的 requester 编写并发送完整 WORK。
 
-## 3. Clerk routing and liveness
+## 3. Native dispatch and liveness
 
-Clerk 每个 event turn：
+每个 top-level requester：
 
-1. 从 native task list/history 确认当前 task 与输入；
-2. 按 `Next` 找到或创建当前协议 task；
-3. 发送一个 bounded WORK 或 CONTROL；
-4. 在 final 前对本 turn 新到达输入做一次 bounded drain。
+1. 从 native task list/history 确认自身、目标 task 与当前 authority；
+2. 复用一个 exact current-protocol target；仅在不存在时创建，出现两个候选时停止并请用户选择；
+3. 自己冻结并发送一条完整 bounded WORK，包括 objective、paths、Effects、acceptance、refs 与
+   自己的 Return task ID；
+4. callee 在同一 task 完成、等待、失败或取消，并把 RESULT 直接返回 requester；
+5. requester 解释结果并决定停止、继续同一 callee，或向相邻角色发送一条新的完整 WORK。
 
-Clerk 不验证身份、不维护 attempt/retry ledger、owner cache、cursor、receipt 或 release
-adoption，不常驻轮询，也不自动 retry。WAITING 默认无 heartbeat；只有存在明确可观察条件且
-用户希望自动复查时，才为当前责任 task 使用 Codex 原生 heartbeat。
+每个 top-level target 同时最多持有一个 unfinished inbound WORK。该 WORK 的 Return task 在
+终结前不可改变；target 为 ACTIVE、WAITING 或被 PAUSE 时，任何 requester 都不得发送新 WORK。
+只有 terminal `DONE | FAILED | CANCELLED` RESULT 释放 target。用户需要替换目标时也先 CANCEL，
+待 external commitment 可判定且收到 CANCELLED RESULT 后，再发送一条完整的新 WORK。
 
-Stopped/idle 且当前 WORK 尚未完成时继续同一个当前协议 task。Native task 能力不可用时停止
-受影响动作并报告，不从本地文件或数据库重建 topology。
+`DONE` 只表示当前 WORK 完成，不自动产生 successor。`WAITING` 必须给出具体 Reentry，并仍由
+callee 持有；条件满足后由同一 task 继续同一 WORK，不得用新 WORK 恢复。Requester 或用户可以
+用 RESUME 唤醒，或在用户要求自动复查时使用 Codex 原生 heartbeat。`FAILED` 不自动 retry。
+Stopped/idle 且当前 WORK 尚未完成时继续同一 task，不创建替代者。
+
+Participant 可以为完成当前 acceptance 向另一个 idle 相邻角色发送 bounded downstream WORK，
+但不得在自己的 inbound WORK 终结前向当前 Return task 反向发送新 WORK。任何由本轮决定产生的
+successor 都先返回 terminal RESULT，再确认 target 已释放，最后以独立完整 WORK 发送。
+
+CONTROL 动作只有以下语义：PAUSE 保留当前 WORK 并停止新的 launch/send；RESUME 只继续同一个
+PAUSED 或 WAITING WORK；CANCEL 停止新的 Effect，已提交或 commitment unknown 的 Effect 继续
+观察到终态，然后写必要的 CANCELLED milestone snapshot、返回 CANCELLED RESULT 并释放 target。
+CONTROL 不携带替代 objective；新目标一律使用释放后的完整 WORK。
+
+所有 participant 都不验证身份、不维护 attempt/retry ledger、owner cache、cursor、receipt、
+release adoption 或本地路由表，也不常驻轮询。Native list/read/create/send 不可用时停止受影响
+动作并报告，不从本地文件或数据库重建 topology。
+
+### 3.1 Complete direction loop
+
+正常完整链路为 `Portfolio → EM → CM → EM → Portfolio`：
+
+1. Portfolio 作出 ACTIVE/投资决定、更新 current table，并直接向 direction EM 发送科研 WORK；
+2. EM 完成 material cycle，冻结工程语义与判据；需要实现时直接向同方向 CM 发送工程 WORK；
+3. CM 实现、验证并将 RESULT 返回该 EM，不直接作科研或 Portfolio 判断；
+4. EM 解释工程结果，必要时继续向 CM 发新 WORK；科研对象完成后将 RESULT 返回 Portfolio；
+5. Portfolio 依据 EM 的 durable refs 更新 lifecycle、priority、capacity 或 Direction owner。
+
+每一次箭头的左侧 participant 都是 WORK 内容和投递动作的来源。中间没有 router、隐藏 manager
+或从 prose 合成任务的角色。
 
 ## 4. Milestone memory
 
@@ -95,7 +126,7 @@ research_cycle`；CM 另有 `worktree, branch, changed_paths, verification_summa
 
 EM milestones：`SCOPE_FROZEN`、`SYNTHESIS_READY`、`REVIEW_RESOLVED`、`HANDOFF_READY`。
 CM milestones：`SCOPE_FROZEN`、`CANDIDATE_READY`、`REVIEW_RESOLVED`、
-`RUN_OR_HANDOFF_READY`。Status：`ACTIVE | WAITING | FAILED | COMPLETE`。
+`RUN_OR_HANDOFF_READY`。Status：`ACTIVE | WAITING | FAILED | CANCELLED | COMPLETE`。
 
 只有上下文消失会导致重做有实质成本的工作，或可能重新作出不同 material judgment 时，才
 跨越 milestone。跨越后立即用 `hmasd_state.py update` 原子覆盖 snapshot；revision 加一并更新
@@ -151,7 +182,7 @@ claim 收窄、工程结果录入或同一问题继续不新开 cycle。
 4. EM 综合并写 `SYNTHESIS_READY`；
 5. 同一 transport 以 `Mode: CONVERGENCE` send-once，要求独立、adversarial convergence；
 6. EM 处理意见并写 `REVIEW_RESOLVED`；
-7. 决定 CM、Portfolio 或 handoff。
+7. 决定是否直接向 CM 或 Portfolio 发送一条新的完整 WORK，或返回当前 requester。
 
 每个 cycle 最多一次 Innovator 和一次 Convergence；修订不自动重审。State 的 current
 `research_cycle` 只保存 `label, opened_at, reason, pro_innovator, pro_convergence`，两项 status
@@ -176,12 +207,14 @@ Transport 只负责一次发送、自然完成和完整归档，不解释科研�
 ## 7. Portfolio
 
 `docs/research/portfolio/PORTFOLIO.md` 是唯一 current lifecycle/priority/capacity authority，
-固定表格字段为 Direction、Lifecycle、Priority、Next role、Updated at、Reason/condition。
+固定表格字段为 Direction、Lifecycle、Priority、Direction owner、Updated at、Reason/condition。
 Lifecycle 只允许 `REGISTERED | ACTIVE | PARKED | CLOSED`，且只有 Portfolio 可以改变。
 
-Portfolio 先原子更新该表，再向 Clerk 返回 RESULT。重大投资或关闭决定可写独立 Markdown
-decision note；普通 priority 更新只改表。历史 decision note 必须清楚标为 historical，不能
-作为 current workflow state。
+`Direction owner` 是稳定的 Portfolio 责任投影，不是每一次 task send 的日志。ACTIVE direction
+由 `PORTFOLIO` 或 `EM` 持有；短暂 CM slice 不改变该字段。REGISTERED、PARKED、CLOSED 使用
+`NONE`。Portfolio 先原子更新该表，再直接发送必要的 EM WORK 或向当前 Return task 返回 RESULT。
+重大投资或关闭决定可写独立 Markdown decision note；普通 priority 更新只改表。历史 decision
+note 必须清楚标为 historical，不能作为 current workflow state。
 
 ## 8. Scientific capabilities and evidence
 
@@ -219,9 +252,9 @@ Shared checkout 保持 `main`；不在其中 switch/checkout。Owner 只修改/s
 其他修改，shared index mutation 串行。跨 top-level role handoff 且 refs 有 Git-visible 内容
 时必须 commit；push 在用户要求远端同步、跨 worktree 集成或正式方向交付时强制。
 
-用户直接控制 participant 时，该 task 向 Clerk 发送 CONTROL；Clerk 转发并停止新的相关
-launch/send。已经发生或 commitment 未知的外部 Effect 继续观察到可判定状态。PAUSE/CANCEL
-不等于 Portfolio lifecycle 变化。
+用户直接控制 participant 时，该输入已经是 authority，不需要 CONTROL 转发。Root 或 requester
+需要影响另一 task 时，直接向 affected participant 发送 CONTROL，并遵守第 3 节对应动作语义。
+PAUSE/CANCEL 不等于 Portfolio lifecycle 变化。
 
 不兼容任何旧控制层。旧 task、messages、state、scripts、schemas、prompts 或 fixtures 不读取、
 不迁移、不翻译；问题一律 fix-forward。
