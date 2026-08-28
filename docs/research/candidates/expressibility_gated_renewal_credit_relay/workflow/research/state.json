@@ -1,29 +1,22 @@
 {
-  "blockers": [],
-  "claim_ceiling": "In the registered two-agent versioned-handoff host, the ordered joiner-to-waiter execution/consequence edge and later-record update were expressive. Correct generic source-label alignment outperformed the registered opposite-type corruption, but correctly associated intact credit produced exactly no bounded-utility or fixed-token allocation gain over ordinary GAE across twelve roots. The host and cut do not identify a distinct waiter-identity contribution. No end-to-end variable-k, fixed-k superiority, multi-update, learned-estimator, UAV, safety, or general credit claim is supported; the bounded null is not a general impossibility theorem.",
-  "completed_summary": "Completed material cycle 2026-08-28.7-pilot-01a04a02-egrcr. Existing B1 evidence is decision-complete for the registered mechanism: all action/consequence/expression gates passed, yet INTACT and GAE have exact root-wise allocation/utility equality. Static audit shows no consequence-distinct waiter identity and a generic-supervision-confounded cut, so no new executable B1 discriminator exists. Both fresh Pro transports are COMPLETE, all known objections are resolved, no CM task/run occurred, and the terminal recommendation is PARK with a two-part host/oracle reentry prerequisite.",
+  "blockers": [
+    "[CONTROL] PAUSE received at 2026-08-28T20:46:00Z: requester directed this exact inbound WORK, direction, cycle, and task to remain unfinished after detecting a material transport-contract regression.",
+    "Exact preserved transport facts only: the already-sent Innovator provider turn ended immediately after 'and only these repository-relative refs:'; the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE'. Neither fact is scientific evidence or lifecycle input, and neither operation may be resent, modified, replaced, or reinterpreted."
+  ],
+  "claim_ceiling": "The retained repository evidence supports only the bounded B1 statement that the ordered joiner-to-waiter edge and later-record update were expressive but intact produced exactly no bounded-utility or fixed-token allocation gain over ordinary GAE in the registered two-agent one-update host. No provider-turn fact changes this ceiling. No association-specific algorithm value, end-to-end variable-k, fixed-k superiority, multi-update, learned-estimator, UAV, safety, or general credit claim is supported; the bounded null is not a general impossibility theorem.",
+  "completed_summary": "Preserved the current cycle's committed scope, repository evidence packet, static audit, objection dispositions, handoff draft, and linear EM commit chain. After the requester detected that the already-sent Innovator provider turn ended after the refs-introduction phrase and the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE', [CONTROL] PAUSE superseded terminal progression and directed this same inbound WORK to remain unfinished. These are transport-contract facts only and are not mapped to scientific status, recommendation, Portfolio action, or lifecycle.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "HANDOFF_READY",
-  "next_action": "Return the terminal EM RESULT directly to Portfolio task 01a04a02-842d-7771-8322-742c9a5cf9b6. Portfolio alone decides lifecycle/capacity; do not send a successor WORK from this EM cycle.",
-  "next_discriminator": "Independently establish at least two consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign stratum and prospective same-information oracle scarce-allocation and bounded-utility headroom over ordinary GAE; only then open a new material cycle for one cue/sign-preserving wrong-waiter key-derangement test.",
-  "reentry_condition": null,
+  "next_action": "Hold this exact inbound WORK. Perform no new launch, send, resend, continuation, replacement, provider fallback, CM creation, experiment, or terminal RESULT until an explicit [CONTROL] RESUME supplies the reentry direction while preserving both already-sent operations exactly.",
+  "next_discriminator": "Scientific discriminator remains unchanged and inactive during PAUSE: independently establish consequence-distinct waiter identities in one generic pre-action/cue/sign stratum and prospective same-information oracle scarce-allocation and bounded-utility headroom over ordinary GAE before any future identity-only test.",
+  "reentry_condition": "Receive explicit [CONTROL] Action: RESUME for this exact WORK with instructions that preserve, do not resend, do not modify, do not replace, and do not reinterpret either already-sent Pro operation.",
   "refs": [
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-scope-and-grounding.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-discriminator-selection.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-evidence-packet.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-convergence-disposition.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-handoff.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-innovator.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-convergence.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_RESULT.json",
-    "540337f2996778245a634151f38e4d8dc5b8254c:docs/research/portfolio/PORTFOLIO.md",
-    "b4762febd12b62748d35e2b1a1dffdfb8d776180",
-    "9c92d95519ba5ee22e531d7fd798fc0749fd7e5d",
-    "ca729e75dc41a139fcac2e5c808698cbc0e9da7f",
-    "a4994bcbad7b464611912e863e8b4eb00c129985",
-    "99c85b230058d7d691d27ceca5ee9c446caa5133"
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-handoff.md",
+    "2a56a187516460a2a3ba4c786e2fe572b5d8913e",
+    "[CONTROL] PAUSE from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-28T20:46:00Z"
   ],
   "research_cycle": {
     "label": "2026-08-28.7-pilot-01a04a02-egrcr",
@@ -38,8 +31,8 @@
     },
     "reason": "Fresh revision 2026-08-28.7 Portfolio enabling-discriminator cycle to decide whether retained B1 evidence already resolves ordered waiter-credit utility/allocation or whether one smaller identity-preserving test remains decision-changing."
   },
-  "revision": 4,
+  "revision": 5,
   "role": "EM",
-  "snapshot_state": "COMPLETE",
-  "updated_at": "2026-08-28T20:45:16.200088Z"
+  "snapshot_state": "WAITING_REENTRY",
+  "updated_at": "2026-08-28T20:47:44.041614Z"
 }
