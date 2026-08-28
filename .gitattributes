@@ -8,6 +8,7 @@
 /tests/fixtures/hmasd_external_review/*.json text eol=lf
 /tests/fixtures/hmasd_external_review/prompts/*.md text eol=lf
 /tests/fixtures/hmasd_phase0/*.json text eol=lf
+/tests/fixtures/hmasd_science/** text eol=lf
 /.codex/** text eol=lf
 /.agents/** text eol=lf
 /AGENTS.md text eol=lf

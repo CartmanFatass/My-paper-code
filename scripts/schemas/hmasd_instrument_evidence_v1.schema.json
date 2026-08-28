@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_instrument_evidence_v1",
+  "title": "HMASD instrument evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "direction_id",
+    "sidecar_path",
+    "owner_role",
+    "producer_leaf",
+    "capability",
+    "frozen_operation",
+    "invocation",
+    "platform",
+    "artifacts",
+    "outcome",
+    "assumptions",
+    "limitations",
+    "manager_interpretation"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "evidence_id": { "$ref": "#/$defs/id" },
+    "direction_id": { "$ref": "#/$defs/direction_id" },
+    "sidecar_path": { "$ref": "#/$defs/path" },
+    "owner_role": { "type": "string", "enum": ["EM", "CM"] },
+    "producer_leaf": { "type": "string", "minLength": 1 },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_id", "skill_ref", "tool", "tool_version", "environment_ref", "effect_class"],
+      "properties": {
+        "capability_id": { "$ref": "#/$defs/id" },
+        "skill_ref": { "anyOf": [{ "$ref": "#/$defs/content_ref" }, { "type": "null" }] },
+        "tool": { "type": "string", "minLength": 1 },
+        "tool_version": { "type": "string", "minLength": 1 },
+        "environment_ref": { "anyOf": [{ "$ref": "#/$defs/content_ref" }, { "type": "null" }] },
+        "effect_class": {
+          "type": "string",
+          "enum": ["local_read_only", "external_read_only", "external_provider"]
+        }
+      }
+    },
+    "frozen_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objective", "input_refs", "judgment_criteria", "constraints"],
+      "properties": {
+        "objective": { "type": "string", "minLength": 1 },
+        "input_refs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/content_ref" } },
+        "judgment_criteria": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "constraints": { "type": "object" }
+      }
+    },
+    "invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "argv", "cwd", "entrypoint_ref"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["command", "api", "manual"] },
+        "argv": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "cwd": { "$ref": "#/$defs/path" },
+        "entrypoint_ref": {
+          "anyOf": [{ "$ref": "#/$defs/content_ref" }, { "type": "null" }]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "command" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "argv": { "minItems": 1 },
+              "entrypoint_ref": { "type": "object" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "kind": { "const": "api" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "argv": { "minItems": 1 },
+              "entrypoint_ref": { "type": "object" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "kind": { "const": "manual" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "argv": { "maxItems": 0 },
+              "entrypoint_ref": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "architecture", "python"],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "type": "string", "minLength": 1 },
+        "python": { "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "retention"],
+        "properties": {
+          "path": { "$ref": "#/$defs/path" },
+          "sha256": { "$ref": "#/$defs/sha256" },
+          "retention": { "type": "string", "enum": ["ephemeral", "durable"] }
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "core_observations", "failure"],
+      "properties": {
+        "status": { "type": "string", "enum": ["OBSERVED", "FAILED", "UNAVAILABLE"] },
+        "core_observations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "failure": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "summary"],
+              "properties": {
+                "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
+                "summary": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "OBSERVED" } },
+            "required": ["status"]
+          },
+          "then": { "properties": { "failure": { "type": "null" } } }
+        },
+        {
+          "if": {
+            "properties": { "status": { "enum": ["FAILED", "UNAVAILABLE"] } },
+            "required": ["status"]
+          },
+          "then": { "properties": { "failure": { "type": "object" } } }
+        }
+      ]
+    },
+    "assumptions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "manager_interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_ref", "impact_summary", "claim_ceiling"],
+      "properties": {
+        "target_ref": { "$ref": "#/$defs/content_ref" },
+        "impact_summary": { "type": "string", "minLength": 1 },
+        "claim_ceiling": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,127}$" },
+    "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?:\\.|(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+)$"
+    },
+    "content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

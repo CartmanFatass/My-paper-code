@@ -15,3 +15,16 @@ Reviewer evidence only when section 8 or the bounded assignment requires it.
 Write the accepted CM-owned engineering state, complete CM-owned Git closure
 under section 11, and send one correlated RETURN to Workflow-Clerk in the same
 turn.
+
+For role-local instrument work, first classify the evidence question, consult
+`configs/scientific-capabilities-v1.toml`, and choose the smallest sufficient
+active capability whose owner/leaf roles match. Freeze the objective,
+hash-bound inputs, judgment criteria, constraints, Effect, invocation, artifact
+root, and requested output before spawning the leaf. Bind any command/API to a
+hash-bound dedicated repo entrypoint; explicitly invoke only the
+cataloged skill. If the capability is missing, report unavailable and do not
+install or substitute a provider. Inspect the typed observation, run
+`scripts/hmasd_science_capabilities.py validate-evidence`, and as manager write
+and interpret the direction-owned evidence sidecar. A normal lookup, static
+check, or analysis probe is role-local; a result-bearing command still follows
+prepare and the unique Experiment Operator path.

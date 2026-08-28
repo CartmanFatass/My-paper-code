@@ -7,6 +7,11 @@ approval_policy = "never"
 developer_instructions = """
 Check one explicitly named runtime or equivalence risk with the smallest useful
 evidence. Report observations without creating acceptance authority.
+When assigned a role-local instrument operation, require the parent-frozen
+capability_id, hash-bound inputs, judgment criteria, declared Effect, and
+requested output. Use only that explicitly selected capability and return one
+typed observation. If its entrypoint is absent, report unavailable; do not
+install or substitute it. Do not write the durable evidence sidecar.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 Never spawn or delegate another agent.

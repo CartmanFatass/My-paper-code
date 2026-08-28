@@ -1,0 +1,5 @@
+interface:
+  display_name: "HMASD Scientific Critical Thinking"
+  short_description: "Bound scientific claims against frozen evidence"
+policy:
+  allow_implicit_invocation: false

@@ -8,27 +8,40 @@ from typing import Any
 
 PROTOCOL_EPOCH = 2
 EXACT_PATHS = {
+    ".gitattributes",
     "AGENTS.md",
     ".codex/config.toml",
     "docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md",
     "docs/project/WORKFLOW_PROTOCOL.md",
     "docs/project/git-path-policy-v1.json",
+    "docs/SCIENTIFIC_CAPABILITY_LAYER_REQUIREMENTS.md",
     *{f".codex/prompts/hmasd-{name}.md" for name in ("root", "workflow-clerk", "portfolio", "em", "cm")},
     *{f"scripts/{name}" for name in ("hmasd_session_envelope.py", "hmasd_control_release.py", "hmasd_state.py", "hmasd_dashboard.py")},
     *{f"scripts/{name}" for name in (
         "hmasd_direction_git.py", "hmasd_path_policy.py", "hmasd_operator_result.py",
-        "hmasd_protocol_contracts.py", "hmasd_run.py",
+        "hmasd_protocol_contracts.py", "hmasd_run.py", "hmasd_science_capabilities.py",
     )},
     "tests/hmasd_session_envelope_test.py",
     "tests/hmasd_control_release_test.py",
     "tests/hmasd_dashboard_test.py",
     "tests/hmasd_portfolio_decision_v2_test.py",
+    "tests/codex_config_contract_test.py",
+    "tests/hmasd_science_capabilities_test.py",
+    "tests/hmasd_scientific_control_plane_test.py",
     *{f"tests/{name}" for name in (
         "hmasd_direction_git_test.py", "hmasd_path_policy_test.py",
         "hmasd_operator_result_test.py", "hmasd_protocol_contracts_test.py",
         "hmasd_run_test.py",
     )},
 }
+EVOLVING_SCIENCE_TOOL_PATHS = {
+    "configs/scientific-capabilities-v1.toml",
+    "configs/scientific-capability-sources-v1.json",
+}
+EVOLVING_SCIENCE_TOOL_PREFIXES = (
+    "environments/hmasd-science-tools/",
+    ".agents/skills/hmasd-scientific-",
+)
 SKILLS = {
     "hmasd-root-task", "hmasd-workflow-clerk-task", "hmasd-portfolio-task",
     "hmasd-em-task", "hmasd-cm-task", "hmasd-slice-interface",
@@ -46,7 +59,9 @@ def _git(repo: Path, *args: str, allow_missing: bool = False) -> str | None:
 
 def is_control_path(path: str) -> bool:
     path = path.replace("\\", "/")
+    if path in EVOLVING_SCIENCE_TOOL_PATHS or path.startswith(EVOLVING_SCIENCE_TOOL_PREFIXES): return False
     if path in EXACT_PATHS or path.startswith("scripts/dashboard/"): return True
+    if path.startswith("tests/fixtures/hmasd_science/"): return True
     if path.startswith(".codex/agents/") and PurePosixPath(path).name.startswith("hmasd-") and path.endswith(".toml"): return True
     parts = PurePosixPath(path).parts
     if len(parts) >= 3 and parts[:2] == (".agents", "skills") and parts[2] in SKILLS: return True

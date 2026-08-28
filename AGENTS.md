@@ -59,6 +59,10 @@ participant 必须按 v2 `CONTROL_NOTICE` 让 Clerk 看见 transport 变化。
 - 唯一 Operator：payload/result、stdout/stderr、checkpoint 与 terminal observation。
 - Root：明确授权的 shared-core 和最终 cross-direction integration。
 
+对应 EM/CM 也是各自 `instrument evidence sidecar` 的 durable writer。leaf 只返回
+typed observation；EM/CM 校验并写 sidecar，raw instrument output 只留在对应 direction
+的 `temp/` 路径。工具成功不是 scientific acceptance、routing 或 lifecycle authority。
+
 writer 表示领域责任，不是额外批准层。material decision 写入所属 durable authority；
 conversation 和 Dashboard 只保留 provenance。
 

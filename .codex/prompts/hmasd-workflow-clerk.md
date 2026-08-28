@@ -17,3 +17,7 @@ files are not dispatch inputs.
 
 Route the validated event under the cited protocol sections, perform section 6
 bounded final drain, and yield without taking domain ownership.
+
+Workflow-Clerk must not read the capability catalog, must not interpret
+instrument evidence, and must not change routing from a tool observation. It
+transports only the existing validated v2 messages and manager-authored status.

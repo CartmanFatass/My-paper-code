@@ -31,6 +31,16 @@ EXPECTED_ROLE_RUNTIME = {
     "hmasd-verifier": ("gpt-5.6-luna", "high", "read-only", "never"),
 }
 
+INSTRUMENT_LEAF_ROLES = {
+    "hmasd-research-scout",
+    "hmasd-research-critic",
+    "hmasd-research-principles-analyst",
+    "hmasd-research-innovator",
+    "hmasd-implementer",
+    "hmasd-implementer-terra",
+    "hmasd-verifier",
+}
+
 
 def _config() -> dict:
     return tomllib.loads((CODEX / "config.toml").read_text(encoding="utf-8"))
@@ -98,3 +108,34 @@ def test_experiment_operator_uses_the_mechanical_result_file_contract() -> None:
         "never silently retry",
     ):
         assert required in instructions
+
+
+def test_instrument_capable_leaves_require_one_frozen_explicit_operation() -> None:
+    for role_name in INSTRUMENT_LEAF_ROLES:
+        role = tomllib.loads(
+            (CODEX / "agents" / f"{role_name}.toml").read_text(encoding="utf-8")
+        )
+        instructions = " ".join(role["developer_instructions"].lower().split())
+        for required in (
+            "capability_id",
+            "hash-bound inputs",
+            "judgment criteria",
+            "requested output",
+            "typed observation",
+            "report unavailable",
+            "do not install",
+            "do not write the durable evidence sidecar",
+        ):
+            assert required in instructions, (role_name, required)
+
+
+def test_experiment_operator_does_not_receive_the_instrument_contract() -> None:
+    role = tomllib.loads(
+        (CODEX / "agents" / "hmasd-experiment-operator.toml").read_text(
+            encoding="utf-8"
+        )
+    )
+    instructions = role["developer_instructions"].lower()
+
+    for forbidden in ("capability_id", "instrument evidence", "validate-evidence"):
+        assert forbidden not in instructions

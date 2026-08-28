@@ -491,6 +491,50 @@ EM 与 CM 只在各自 standing task 内创建一层 bounded direct leaf；leaf 
 不持有或联系其他 top-level task，只把 typed result final return 给 spawning manager。
 manager 仍是 durable writer、判断者和对 Clerk 的唯一 RETURN sender。
 
+### Role-local instrument request/result v1
+
+instrument request/result 是 EM 或 CM 与其 direct leaf 之间的 role-local contract，
+不是新的 envelope kind，也不进入 Clerk transport、Portfolio lifecycle 或 research/
+engineering state schema。manager 先按证据问题类型读取
+`configs/scientific-capabilities-v1.toml`，只选择 owner/leaf role 匹配的最小充分
+`active` capability；skill 必须由 manager 显式调用，不能依赖隐式触发。
+
+manager 派 leaf 前冻结一个 bounded request，至少绑定：`direction_id`、`evidence_id`、
+owner/producer role、capability/skill/tool/environment 的版本与 hash ref、objective、
+hash-bound input refs、judgment criteria、适用 constraints、Effect、argv 数组、cwd、
+platform、raw artifact root 和 requested output。command/API 还必须绑定 catalog 中
+repo-contained dedicated entrypoint 的 content ref；manual invocation 的 entrypoint ref
+为 null。shell 字符串不是 argv，未声明的
+external Effect 不得发生。能力不可用时报告 `UNAVAILABLE`，不得安装、替换 provider
+或扩大 Effect。
+
+leaf 只执行这一项冻结操作并 final return typed observation。结果必须绑定 request
+identity，报告 `OBSERVED | FAILED | UNAVAILABLE`、实际 invocation/platform、artifact
+locator 与 SHA、core observations、assumptions、limitations 和 failure information；
+typed observation 必须符合
+`scripts/schemas/hmasd_instrument_observation_v1.schema.json`；
+不得用 `PASS` 表示 scientific acceptance，也不得写 direction authority、sidecar 或
+lifecycle。raw output 只留在
+`temp/directions/<direction_id>/{exp,test}/instruments/<evidence_id>/`。
+
+manager 是唯一 durable writer：EM/CM 检查 typed observation，先在对应 instrument
+temp root 序列化 sidecar candidate；candidate 内的 `sidecar_path` 必须是
+`docs/research/candidates/<direction_id>/evidence/<evidence_id>.json`。manager 用
+`scripts/hmasd_science_capabilities.py validate-evidence --path ... --direction-id ...`
+fail closed 校验 repo-contained input/target/artifact SHA、capability/Effect/invocation/tool
+binding、dedicated entrypoint content ref、typed observation identity，以及 candidate、raw
+artifact 与 intended sidecar parent 的 resolved exact root。CLI 只读并返回 candidate
+`content_sha256`；校验成功后 manager 在写入前再次确认 exact sidecar parent，才把
+完全相同的 bytes 原子写入 `sidecar_path`，并核对最终 SHA。sidecar 必须
+解释该观测如何改变或约束具体 scientific claim 或 engineering judgment；长期 authority
+只引用并解释 sidecar，不复制 raw output。leaf 工具成功本身没有 acceptance、routing
+或 approval 语义。
+
+Portfolio 只消费足以改变 investment/lifecycle 判断的 manager-authored evidence 摘要，
+不直接调用 capability。Clerk 不读 catalog、不解释 evidence，也不因工具结果改变路由。
+普通检索、静态数学验证和分析 probe 不自动成为 Operator 工作；任何 result-bearing
+command 仍须遵守 CM prepare/唯一 Experiment Operator 路径。
+
 EM 的 role-local leaf interfaces 固定为：
 
 - **Research Scout**：检索一个冻结问题的 primary evidence、方法与反证边界，返回可核对

@@ -1,0 +1,302 @@
+schema_version = 1
+catalog_id = "hmasd-scientific-capabilities-v1"
+
+[[capabilities]]
+capability_id = "scientific-critical-thinking"
+status = "active"
+question_types = ["claim_critique", "claim_ceiling", "alternative_explanation"]
+owner_roles = ["EM"]
+leaf_roles = ["hmasd-research-critic", "hmasd-research-principles-analyst"]
+skill_name = "hmasd-scientific-critical-thinking"
+skill_path = ".agents/skills/hmasd-scientific-critical-thinking/SKILL.md"
+environment_id = "none"
+manifest_ref = ""
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["manual"]
+tool_name = "reasoned-claim-audit"
+tool_version = "1"
+source_id = "scientific-critical-thinking"
+source_sha256 = "ccf23e401b0b7f681f73d3ce25181c9dd7ccc1d78a42b968ba79d6dec8e28ae6"
+limitations = ["Does not create scientific acceptance or direction authority."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "networkx"
+status = "candidate"
+question_types = ["graph_structure", "graph_invariant", "graph_counterexample"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-innovator", "hmasd-research-principles-analyst", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-networkx"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "networkx"
+tool_version = "3.6.1"
+source_id = "networkx"
+source_sha256 = "482722b8d5c8a8fa4988eba1c1c9b3d777fb1993f2dcdc143f6e44acc2ec2d11"
+limitations = ["Graph probes are observations, not proofs about unmodeled system behavior."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "paper-lookup"
+status = "candidate"
+question_types = ["paper_metadata", "doi_resolution", "publication_provenance"]
+owner_roles = ["EM"]
+leaf_roles = ["hmasd-research-scout"]
+skill_name = "hmasd-paper-lookup"
+skill_path = ""
+environment_id = "none"
+manifest_ref = ""
+entrypoints = []
+effect_class = "external_read_only"
+invocation_kinds = ["api"]
+tool_name = "paper-metadata-lookup"
+tool_version = "unactivated"
+source_id = "paper-lookup"
+source_sha256 = "23360ec76ef8129305548e9ce90fb46858b5cc00b6771ae5a731cb2c1dbe78a2"
+limitations = ["Metadata lookup does not establish access to or validate the content of a paper."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "experimental-design"
+status = "candidate"
+question_types = ["marl_experimental_design", "ablation_design", "discriminator_design"]
+owner_roles = ["EM"]
+leaf_roles = ["hmasd-research-innovator", "hmasd-research-principles-analyst", "hmasd-research-critic"]
+skill_name = "hmasd-marl-experimental-design"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["manual"]
+tool_name = "marl-experimental-design"
+tool_version = "unactivated"
+source_id = "experimental-design"
+source_sha256 = "d98f7bd34d06c99b247840927238ea2a68e3966a9559eccf11cf66045e4aee20"
+limitations = ["Design advice cannot authorize or launch a result-bearing experiment."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "statistical-analysis"
+status = "candidate"
+question_types = ["marl_statistical_analysis", "uncertainty_analysis", "effect_estimation"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-critic", "hmasd-research-principles-analyst", "hmasd-verifier"]
+skill_name = "hmasd-marl-statistical-analysis"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "statsmodels"
+tool_version = "0.14.6"
+source_id = "statistical-analysis"
+source_sha256 = "49dbd70e3b172f210c205429443266fc7f1887ff952d2cf9728fbb7dcada0d1a"
+limitations = ["Analysis is bounded by the frozen data, estimand, and sampling assumptions."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "scientific-visualization"
+status = "candidate"
+question_types = ["scientific_visualization", "diagnostic_plot", "comparison_plot"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-scout", "hmasd-research-innovator", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-scientific-visualization"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "matplotlib-seaborn"
+tool_version = "3.11.0+0.13.2"
+source_id = "scientific-visualization"
+source_sha256 = "f213ec96be2dc833fee5b30ca695e23a8963cb310223a2dd3ab7c13231792ee2"
+limitations = ["A plot exposes patterns but cannot substitute for a frozen quantitative criterion."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "stable-baselines3-reference"
+status = "candidate"
+question_types = ["sb3_reference_probe", "rl_reference_behavior", "rl_api_comparison"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-scout", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-sb3-reference-probe"
+skill_path = ""
+environment_id = "hmasd-sb3-adapter"
+manifest_ref = "environments/hmasd-sb3-adapter/manifest.json"
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "stable-baselines3"
+tool_version = "unactivated"
+source_id = "stable-baselines3"
+source_sha256 = "6a6cf909590afda0f28b8c66aac0de8c6cb1f78ae4632229ba629408d4ec32ec"
+limitations = ["Adapter environment is created only when this capability is activated."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "torch-geometric-mechanism"
+status = "candidate"
+question_types = ["pyg_mechanism_probe", "message_passing_probe", "graph_learning_reference"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-principles-analyst", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-pyg-mechanism-probe"
+skill_path = ""
+environment_id = "hmasd-pyg-adapter"
+manifest_ref = "environments/hmasd-pyg-adapter/manifest.json"
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "torch-geometric"
+tool_version = "unactivated"
+source_id = "torch-geometric"
+source_sha256 = "f5c83305281164150ac326fc1af8fc6ce621b3e505785df461675cd0c3edb8a0"
+limitations = ["Adapter environment is created only when this capability is activated."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "pufferlib-marl"
+status = "candidate"
+question_types = ["pufferlib_reference_probe", "marl_runtime_reference", "vectorization_probe"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-scout", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-pufferlib-marl-probe"
+skill_path = ""
+environment_id = "hmasd-pufferlib-adapter"
+manifest_ref = "environments/hmasd-pufferlib-adapter/manifest.json"
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "pufferlib"
+tool_version = "unactivated"
+source_id = "pufferlib"
+source_sha256 = "4b961f12c068c29522dfb7d5fa83f8916b61c69597c7e7001a76fba6f4190047"
+limitations = ["Adapter environment is created only when this capability is activated."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "symbolic-math"
+status = "candidate"
+question_types = ["symbolic_verification", "algebraic_equivalence", "closed_form_probe"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-principles-analyst", "hmasd-verifier"]
+skill_name = "hmasd-symbolic-verification"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "sympy"
+tool_version = "1.14.0"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["Symbolic equality is conditioned on explicitly declared domains and assumptions."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "numerical-verification"
+status = "candidate"
+question_types = ["differential_verification", "numerical_sanity_check", "implementation_comparison"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-principles-analyst", "hmasd-verifier"]
+skill_name = "hmasd-numerical-verification"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "numpy-scipy"
+tool_version = "2.4.6+1.17.1"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["Numerical agreement is scoped to frozen inputs, tolerances, dtype, and platform."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "local-reference-implementation"
+status = "candidate"
+question_types = ["local_reference_lookup", "implementation_provenance", "behavioral_comparison"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-scout", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-reference-implementation"
+skill_path = ""
+environment_id = "none"
+manifest_ref = ""
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["manual"]
+tool_name = "local-reference-lookup"
+tool_version = "unactivated"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["Reference lookup reports provenance and behavior; it does not import authority."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "profiling"
+status = "candidate"
+question_types = ["performance_profile", "memory_profile", "bottleneck_probe"]
+owner_roles = ["CM"]
+leaf_roles = ["hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-profiling"
+skill_path = ""
+environment_id = "hmasd-science-tools"
+manifest_ref = "environments/hmasd-science-tools/manifest.json"
+entrypoints = ["C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"]
+effect_class = "local_read_only"
+invocation_kinds = ["command"]
+tool_name = "psutil"
+tool_version = "7.2.2"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["Profiles are platform- and workload-specific and cannot authorize a long run."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "uav-runtime-provenance"
+status = "candidate"
+question_types = ["uav_runtime_provenance", "runtime_bridge_audit", "deployment_assumption_audit"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-scout", "hmasd-research-principles-analyst", "hmasd-implementer", "hmasd-verifier"]
+skill_name = "hmasd-uav-runtime-provenance"
+skill_path = ""
+environment_id = "none"
+manifest_ref = ""
+entrypoints = []
+effect_class = "local_read_only"
+invocation_kinds = ["manual"]
+tool_name = "uav-runtime-provenance"
+tool_version = "unactivated"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["Provenance review cannot infer a missing host law or UAV bridge."]
+unavailable_reason = ""
+
+[[capabilities]]
+capability_id = "wolfram-symbolic-verification"
+status = "unavailable"
+question_types = ["symbolic_verification"]
+owner_roles = ["EM", "CM"]
+leaf_roles = ["hmasd-research-principles-analyst", "hmasd-verifier"]
+skill_name = ""
+skill_path = ""
+environment_id = "none"
+manifest_ref = ""
+entrypoints = ["wolframscript", "math"]
+effect_class = "external_provider"
+invocation_kinds = ["command"]
+tool_name = "wolfram"
+tool_version = "unavailable"
+source_id = "requirements-baseline"
+source_sha256 = "4c2e84d531da274e052f0ed715c29af6ff94758688f306a07afb07c56c76c3b9"
+limitations = ["No local Wolfram or Mathematica executable is available."]
+unavailable_reason = "Wolfram/Mathematica is not installed and no plugin use is authorized."

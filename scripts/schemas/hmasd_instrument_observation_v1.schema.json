@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_instrument_observation_v1",
+  "title": "HMASD instrument observation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["instrument_observation"],
+  "properties": {
+    "instrument_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "evidence_id",
+        "capability_id",
+        "outcome",
+        "core_observations",
+        "assumptions",
+        "limitations",
+        "failure"
+      ],
+      "properties": {
+        "schema_version": { "type": "integer", "const": 1 },
+        "evidence_id": { "$ref": "#/$defs/id" },
+        "capability_id": { "$ref": "#/$defs/id" },
+        "outcome": { "type": "string", "enum": ["OBSERVED", "FAILED", "UNAVAILABLE"] },
+        "core_observations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "failure": { "$ref": "#/$defs/failure" },
+        "claim_classification": {
+          "anyOf": [
+            { "type": "string", "enum": ["supported", "refuted", "underdetermined"] },
+            { "type": "null" }
+          ]
+        },
+        "source_facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["locator", "observation"],
+            "properties": {
+              "locator": { "type": "string", "minLength": 1 },
+              "observation": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "locator", "impact"],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "contrary_evidence",
+                  "missing_evidence",
+                  "scope_mismatch",
+                  "unsupported_assumption"
+                ]
+              },
+              "locator": { "type": "string", "minLength": 1 },
+              "impact": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "strongest_alternative": {
+          "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+        },
+        "decisive_missing_evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "supported_claim": {
+          "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+        },
+        "claim_ceiling": {
+          "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "outcome": { "const": "OBSERVED" } },
+            "required": ["outcome"]
+          },
+          "then": { "properties": { "failure": { "type": "null" } } }
+        },
+        {
+          "if": {
+            "properties": { "outcome": { "enum": ["FAILED", "UNAVAILABLE"] } },
+            "required": ["outcome"]
+          },
+          "then": { "properties": { "failure": { "type": "object" } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "capability_id": { "const": "scientific-critical-thinking" }
+            },
+            "required": ["capability_id"]
+          },
+          "then": {
+            "required": [
+              "claim_classification",
+              "source_facts",
+              "inferences",
+              "threats",
+              "strongest_alternative",
+              "decisive_missing_evidence",
+              "supported_claim",
+              "claim_ceiling"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "capability_id": { "const": "scientific-critical-thinking" },
+              "outcome": { "const": "OBSERVED" }
+            },
+            "required": ["capability_id", "outcome"]
+          },
+          "then": {
+            "properties": {
+              "claim_classification": {
+                "type": "string",
+                "enum": ["supported", "refuted", "underdetermined"]
+              },
+              "source_facts": { "minItems": 1 },
+              "threats": { "minItems": 1 },
+              "strongest_alternative": { "type": "string", "minLength": 1 },
+              "decisive_missing_evidence": { "minItems": 1 },
+              "supported_claim": { "type": "string", "minLength": 1 },
+              "claim_ceiling": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,127}$" },
+    "failure": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "summary"],
+          "properties": {
+            "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
+            "summary": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    }
+  }
+}

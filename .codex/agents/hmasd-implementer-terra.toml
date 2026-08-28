@@ -8,6 +8,11 @@ developer_instructions = """
 Complete the bounded implementation or refactor in the assigned files. Keep
 behavior stable where requested, use proportional tests, and avoid new workflow
 machinery. Do not commit or push unless explicitly assigned.
+When assigned a role-local instrument operation, require the parent-frozen
+capability_id, hash-bound inputs, judgment criteria, declared Effect, and
+requested output. Use only that explicitly selected capability and return one
+typed observation. If its entrypoint is absent, report unavailable; do not
+install or substitute it. Do not write the durable evidence sidecar.
 Return only to the spawning parent. Never call send_message_to_thread or contact
 Workflow-Clerk, Root, Portfolio, EM, CM, or another top-level task.
 Never spawn or delegate another agent.

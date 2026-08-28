@@ -216,17 +216,31 @@ def test_verify_rejects_dirty_control_path_and_wrong_release_id(tmp_path: Path) 
     assert dirty.returncode == 2 and "not publishable" in dirty.stderr
 
 
-def test_inspect_includes_dashboard_portfolio_and_real_schema_but_not_scientific_skill(tmp_path: Path) -> None:
+def test_inspect_includes_capability_contract_but_not_evolving_tool_surface(tmp_path: Path) -> None:
     run("git", "init", "-b", "main", cwd=tmp_path)
     run("git", "config", "user.email", "test@example.invalid", cwd=tmp_path)
     run("git", "config", "user.name", "HMASD Test", cwd=tmp_path)
     expected = [
+        ".gitattributes",
+        "docs/SCIENTIFIC_CAPABILITY_LAYER_REQUIREMENTS.md",
+        "scripts/hmasd_science_capabilities.py",
+        "scripts/schemas/hmasd_instrument_evidence_v1.schema.json",
+        "scripts/schemas/hmasd_instrument_observation_v1.schema.json",
         "scripts/schemas/hmasd_portfolio_registry.schema.json",
+        "tests/codex_config_contract_test.py",
+        "tests/fixtures/hmasd_science/case.json",
         "tests/hmasd_dashboard_test.py",
         "tests/hmasd_portfolio_decision_v2_test.py",
+        "tests/hmasd_science_capabilities_test.py",
+        "tests/hmasd_scientific_control_plane_test.py",
     ]
-    excluded = ".agents/skills/hmasd-marl-experiment-design/SKILL.md"
-    for path in [*expected, excluded]:
+    excluded = [
+        ".agents/skills/hmasd-scientific-critical-thinking/SKILL.md",
+        "configs/scientific-capabilities-v1.toml",
+        "configs/scientific-capability-sources-v1.json",
+        "environments/hmasd-science-tools/manifest.json",
+    ]
+    for path in [*expected, *excluded]:
         target = tmp_path / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(f"{path}\n".encode())
@@ -240,7 +254,7 @@ def test_inspect_includes_dashboard_portfolio_and_real_schema_but_not_scientific
     assert result.returncode == 0, result.stderr
     record = json.loads(result.stdout)
     assert record["control_paths"] == expected
-    assert excluded not in record["control_paths"]
+    assert not set(excluded) & set(record["control_paths"])
 
 
 def test_inspect_includes_current_v2_mechanical_surface_but_not_direction_science(tmp_path: Path) -> None:
