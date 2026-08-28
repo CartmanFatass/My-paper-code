@@ -1,15 +1,15 @@
 {
   "blockers": [
-    "The exact already-sent Innovator tab remains present, but its legacy provider session is unavailable. Provider-visible prompt fidelity and the full natural-completion response cannot currently be recovered, so the exact transport state is SENT_UNREADABLE and the same WORK remains live.",
-    "The 2026-08-28T23:08:31.420Z RESUME permits only no-send observation of this operation. It forbids the still-PENDING Convergence operation, CM, and any other child for this retired-contract pilot."
+    "Root PAUSE received at 2026-08-28T23:25:24.209Z while resolving the shared distinction between temporarily unreadable/live and irrecoverably lost/no-live-Effect. No further observation is authorized until a later Root CONTROL resolves that boundary.",
+    "The immutable already-sent Innovator remains SENT_UNREADABLE: the exact tab/key are present, activeQuery is null, the legacy runtime records Response timed out, and the provider-visible prompt and full natural-completion response remain unavailable."
   ],
   "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget statement about the named B1 ONLGR-versus-RAW deterministic and RAND-IID contrasts, further limited by timing-only, fixed/global-rate, operational-support, resource, and direct-value evidence. No RAW impossibility, literal hazard, causal lease or REBIND value, arbitrary k, UAV performance, variable N, or general PPO superiority claim is available.",
-  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. The restored liveness and transport boundaries were read from exact origin/main commit 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81 without merging, rebasing, or changing the pilot baseline. The one Innovator operation remains the only sent operation. Strict-ledger observation found no record because it was launched under the retired legacy contract; legacy no-send observation confirms the exact tab is present but its provider session is unavailable after a runtime timeout. Exact provider-visible prompt fidelity and the full naturally completed response are unavailable, so Pro Innovator is SENT_UNREADABLE. Convergence remains PENDING and no CM task or other child was launched.",
+  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. The restored liveness and transport boundaries were read from exact origin/main commit 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81 without merging, rebasing, or changing the pilot baseline. The one Innovator operation remains the only sent operation. Its exact tab/key are present; native no-send observation established activeQuery null and the legacy runtime terminal record Response timed out, but the provider-visible prompt, exact prompt fidelity, and full naturally completed response remain unavailable. Pro Innovator therefore remains SENT_UNREADABLE. Root PAUSED at 2026-08-28T23:25:24.209Z before the next requested observation began, pending a shared terminal-disposition boundary. Convergence remains PENDING and no CM, successor work, or other child was launched.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Continue bounded native no-send observation of only tab 0753c965-c685-452f-8287-ca42c62df095 and assignment key 2026-08-28.7-pilot-01a04a02-onlgr-innovator. Never resend, replace, continue, create or navigate a conversation, or invoke any send-capable call. Do not send Convergence or launch CM or any other child. Terminalize only after this exact operation becomes COMPLETE or SENT_INPUT_MISMATCH and no live Effect remains.",
+  "next_action": "Hold this same inbound WORK and exact Innovator operation without further polling, provider-capable calls, sends, launches, Pro archive mutation, or successor work. Do not send Convergence, launch CM, cancel, fail, infer science or lifecycle, or release capacity. Await only a later Root CONTROL resolving the shared terminal-disposition boundary.",
   "next_discriminator": "Unchanged-checkpoint history-independent RAND-IID future-cadence and task-content separation, reconciled with operational marked-partition support, fixed/global-rate and degenerate/oracle headroom, marked voluntary activity, service-versus-action-cost decomposition, B2 rate-flexibility, and ROAD-versus-NEVER/SHAM direct value.",
-  "reentry_condition": "The exact already-sent Innovator operation becomes readable through native no-send observation and resolves COMPLETE or SENT_INPUT_MISMATCH with provider-visible prompt fidelity and the full natural-completion response disposition established.",
+  "reentry_condition": "A later Root CONTROL resolves the shared terminal-disposition boundary between temporarily unreadable/live and irrecoverably lost/no-live-Effect for this exact Innovator operation.",
   "refs": [
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-scope-and-grounding.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-paused-transport-fact.md",
@@ -36,8 +36,8 @@
     },
     "reason": "Portfolio requested a fresh material reassessment of whether the marked lease-censored exposure-offset boundary link has decision-relevant value beyond RAW, fixed/never/sham-like regularization, timing-only behavior, and deterministic cadence leakage while retaining the completed ROAD result without inflated claims."
   },
-  "revision": 3,
+  "revision": 4,
   "role": "EM",
   "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-28T23:18:30.750886Z"
+  "updated_at": "2026-08-28T23:26:46.734669Z"
 }
