@@ -39,6 +39,7 @@ KIND_ALIASES = {
     "agent_result": "agent_result",
     "runtime_agents": "runtime_agents",
     "runtime_worktrees": "runtime_worktrees",
+    "runtime_browser_assignments": "runtime_browser_assignments",
 }
 
 CURRENT_WRITE_SCHEMA_VERSIONS = {
@@ -389,6 +390,8 @@ def _validate_registry(document: Mapping[str, Any]) -> None:
         condition = direction["reactivation_condition_ref"]
         if condition is not None and condition["path"] != "docs/research/portfolio/PORTFOLIO.md":
             raise _owner_error(f"{prefix}.reactivation_condition_ref path is not Portfolio-owned")
+        if direction["lifecycle"] == "PARKED" and condition is None:
+            raise ValidationError(f"{prefix}.reactivation_condition_ref is required for PARKED")
         for dependency in direction["dependencies"]:
             if dependency not in ids and dependency not in {item["id"] for item in directions}:
                 raise ValidationError(f"unknown dependency {dependency}")
@@ -549,8 +552,18 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
         if role != "root" or identity != "Root":
             raise OwnershipError("Root result must be owned by Root")
     elif payload_kind == "git":
-        if role != "hmasd-git-integration" or identity != "Root":
-            raise OwnershipError("Git integration result must be owned by Root")
+        if role != "hmasd-git-integration":
+            raise OwnershipError("Git integration result must use hmasd-git-integration role")
+        actor = payload["actor"]
+        if actor == "root":
+            expected_identity = "Root"
+        else:
+            actor_role, actor_direction = actor.split(":", 1)
+            if actor_direction != payload["direction_id"]:
+                raise OwnershipError("Git integration actor does not match its direction")
+            expected_identity = f"{actor_role.upper()}-{actor_direction}"
+        if identity != expected_identity:
+            raise OwnershipError("Git integration result does not match its actor")
     elif payload_kind == "portfolio":
         if role != "root" or identity != "Root":
             raise OwnershipError("portfolio result must be owned by Root")
@@ -575,19 +588,15 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
             },
             "verification": {"hmasd-verifier"},
             "run": {"hmasd-experiment-operator"},
-            "transport": {
-                "hmasd-em",
-                "hmasd-external-pro-transport",
-                "hmasd-external-gemini-transport",
-            },
+            "transport": {"hmasd-browser-transport"},
             "artifact": {"hmasd-research-artifact-writer"},
             "recovery": {"hmasd-workflow-recovery-manager"},
         }
         if role not in permitted_roles[payload_kind]:
             raise OwnershipError("agent result role does not own payload")
-        if role == "hmasd-em":
-            if not identity.startswith("EM-"):
-                raise OwnershipError("EM transport result must use an EM identity")
+        if role == "hmasd-browser-transport":
+            if identity != "BrowserTransport":
+                raise OwnershipError("BrowserTransport result must use BrowserTransport identity")
         elif identity != role:
             raise OwnershipError("specialist result does not match its logical identity")
     if document["decision_requests"] and document["materiality"] != "USER":
@@ -605,7 +614,27 @@ def _validate_runtime_agents(document: Mapping[str, Any]) -> None:
         identities.add(identity)
         if identity == "Root" and agent["parent_identity"] != "Root":
             raise OwnershipError("Root runtime agent must be self-parented")
+        if agent["agent_type"] in {
+            "hmasd-external-pro-transport",
+            "hmasd-external-gemini-transport",
+        }:
+            raise ValidationError("retired external provider transport agent is not active")
+        if identity == "BrowserTransport":
+            if agent["agent_type"] != "hmasd-browser-transport":
+                raise OwnershipError("BrowserTransport runtime agent type mismatch")
+            if agent["parent_identity"] != "Root":
+                raise OwnershipError("BrowserTransport runtime agent must be a Root child")
+        elif agent["agent_type"] == "hmasd-browser-transport":
+            raise OwnershipError("hmasd-browser-transport type is reserved for BrowserTransport")
 
+
+def _validate_runtime_browser_assignments(document: Mapping[str, Any]) -> None:
+    assignment_ids: set[str] = set()
+    for assignment in document["assignments"]:
+        assignment_id = assignment["assignment_id"]
+        if assignment_id in assignment_ids:
+            raise ValidationError(f"duplicate BrowserTransport assignment id: {assignment_id}")
+        assignment_ids.add(assignment_id)
 
 def _validate_runtime_worktrees(document: Mapping[str, Any]) -> None:
     seen_refs: set[str] = set()
@@ -661,6 +690,8 @@ def _validate_custom(
         _validate_agent_result(document)
     elif kind == "runtime_agents":
         _validate_runtime_agents(document)
+    elif kind == "runtime_browser_assignments":
+        _validate_runtime_browser_assignments(document)
     elif kind == "runtime_worktrees":
         _validate_runtime_worktrees(document)
     elif kind == "external_archive":
@@ -695,7 +726,11 @@ def _precheck_writer_ownership(kind: str, document: Mapping[str, Any]) -> None:
             expected = f"EM-{direction_id}"
             if document["writer"] != expected:
                 raise _owner_error(f"accepted_result writer must be {expected}")
-    elif kind in {"runtime_agents", "runtime_worktrees"} and "writer" in document:
+    elif kind in {
+        "runtime_agents",
+        "runtime_worktrees",
+        "runtime_browser_assignments",
+    } and "writer" in document:
         if document["writer"] != "Root":
             raise _owner_error(f"{kind} writer must be Root")
 
@@ -1266,6 +1301,54 @@ def _validate_runtime_agents_transition(
             )
 
 
+def _validate_runtime_browser_assignments_transition(
+    current: Mapping[str, Any], next_document: Mapping[str, Any]
+) -> None:
+    for assignment_id, current_assignment, next_assignment in _matching_records(
+        current["assignments"],
+        next_document["assignments"],
+        key="assignment_id",
+        label="BrowserTransport assignment",
+    ):
+        label = f"BrowserTransport assignment {assignment_id!r}"
+        _require_unchanged_fields(
+            current_assignment,
+            next_assignment,
+            (
+                "browser_identity",
+                "requester_identity",
+                "request_ref",
+                "direction_id",
+                "provider",
+                "mode",
+            ),
+            label,
+        )
+        for field in (
+            "effect_ref",
+            "operation_ref",
+            "provider_conversation_ref",
+            "archive_ref",
+        ):
+            _require_append_only(
+                current_assignment[field],
+                next_assignment[field],
+                f"{label}.{field}",
+            )
+        if current_assignment["transport_state"] in {
+            "COMPLETE",
+            "SENT_INPUT_MISMATCH",
+            "SENT_MODEL_MISMATCH",
+            "CONVERSATION_LOST",
+            "WAIVED",
+        }:
+            _require_unchanged(
+                current_assignment,
+                next_assignment,
+                f"{label} terminal provenance",
+            )
+
+
 def _validate_runtime_worktrees_transition(
     current: Mapping[str, Any], next_document: Mapping[str, Any]
 ) -> None:
@@ -1326,6 +1409,8 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_accepted_result_transition(current, next_document)
     elif kind == "runtime_agents":
         _validate_runtime_agents_transition(current, next_document)
+    elif kind == "runtime_browser_assignments":
+        _validate_runtime_browser_assignments_transition(current, next_document)
     elif kind == "runtime_worktrees":
         _validate_runtime_worktrees_transition(current, next_document)
 

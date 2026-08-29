@@ -2,18 +2,23 @@
 
 This repository uses one user-facing Root OMP session and a bounded,
 non-blocking two-level task tree. Roles divide context and capability; they
-never grant or deny ordinary authorized reversible work. The exact active
-project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
+never grant or deny ordinary authorized reversible work. The authoritative
+project inventory is the current `hmasd-*` definitions under `.omp/agents/`;
+the target transport inventory contains the singleton
+`hmasd-browser-transport`, not provider-specific transport agents.
 
 ## Authority and startup
 
 - `.omp/RULES.md` contains the only sticky hard boundaries. Skills and agent
   contracts contain bounded-cycle details.
-- Root is authoritative for user scope, cross-direction Portfolio ranking and
-  lifecycle, direct EM/CM dispatch, recovery, worktree allocation, external
-  archive validation, Git integration, and final delivery. `PORTFOLIO.md`
-  remains Root's durable scientific goal and lifecycle-reason authority; the
-  registry remains the lifecycle/dependency authority.
+- Root is authoritative for user scope, the explicit cross-direction Portfolio
+  subflow, lifecycle/capacity adoption, routing and runtime reconciliation,
+  direct EM/CM dispatch, Root-mediated BrowserTransport serialization,
+  recovery, worktree allocation, external archive validation, shared Git
+  integration, and final delivery. There is no Portfolio agent.
+  `PORTFOLIO.md` remains Root's durable scientific goal, allocation, and
+  lifecycle-reason authority; the registry remains lifecycle/dependency
+  authority.
 - At `START_OR_RESUME`, Root loads `hmasd-root-control` and
   `hmasd-git-integration`, reads `PORTFOLIO.md`, and reconciles registry,
   direction states, runtime mappings, Hub jobs, worktrees, run manifests,
@@ -35,9 +40,10 @@ project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
 - Use only the exact project role names in `.omp/agents/`; do not invent aliases,
   compatibility names, or generated per-direction definitions.
 - `hmasd-em` and `hmasd-cm` are the only project spawn-capable managers. All
-  other project roles are non-blocking leaves; there is no Portfolio agent.
+  other project roles are non-blocking leaves or services. Root executes
+  Portfolio work directly; it never creates an intermediate Portfolio agent.
 - Root directly invokes EM and CM managers and may directly invoke every project
-  leaf.
+  leaf. There are no workflow-designer or design-reviewer project roles.
 - The bundled `task` agent is Root-only and may be used only when no project
   role fits. The bundled `librarian` is available to Root, EM, and CM. Only Root
   may dispatch `hmasd-workflow-recovery-manager`; managers do not spawn it.
@@ -57,6 +63,32 @@ project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
   role is configured at or below `high`. Session-init evidence, not config
   intent, is the effective-effort authority.
 
+
+## OMP communication and Portfolio semantics
+
+- Every cross-role dispatch uses an OMP `task` or Hub carrier with identity,
+  generation, and assignment fields plus meaning-complete sections for
+  objective/decision relevance; authorities, inputs, and evidence boundary;
+  scope, protected non-goals, and preserved semantics; requested role work;
+  authorized Effects; acceptance/stop; and return route, durable references,
+  and reentry. Results use the common v1 result envelope and role payload.
+- Literal Codex `[WORK]`, `[RESULT]`, and `[BROWSER WORK]` headings are semantic
+  source material only. They are not OMP routing authority, identity, receipts,
+  or a substitute for the required meaning sections.
+- Root's Portfolio subflow adopts one explicit action for every direction in the
+  user-fixed considered set. It consumes each terminal EM, CM, Transport, or
+  Run fact immediately and actively refills authorized capacity when not
+  `PAUSED`; it does not wait for an all-terminal join. `PAUSE` retains current
+  work and safe observation of committed Effects but blocks refill, fresh
+  dispatch, sends, launches, and all other new Effects.
+- Portfolio actions are `NONE`, `ACTIVATE`, `CONTINUE`, `NARROW`, `PARK`,
+  `CLOSE`, `FUSE`, and `SPINOFF`. An EM recommendation is evidence, not an
+  adopted Portfolio action. Engineering, transport, Run, runtime, and Git facts
+  do not imply science or lifecycle.
+- Registry lifecycle is exactly `REGISTERED`, `ACTIVE`, `PARKED`, or `CLOSED`.
+  `ACTIVE` requires live scientific work or one exact operational reentry.
+  `PARKED` has no live direction work, requires
+  `reactivation_condition_ref`, and is not `CLOSED`.
 
 ## Hub lifecycle
 
@@ -135,18 +167,26 @@ mutation, selects the model.
   WSL mount, so Agentify opens the user's configured, visible Windows Chrome
   profile. Do not replace it with a Linux browser or Linux Node runtime unless
   the user changes this runtime choice.
-- Unknown commitment never resends; Root validates exact returned archive bytes
-  without rewriting the foreign archive schema. After restart, Root recovers an
-  exact operation only through `verifyExisting`/`agentify_review_observe`.
-- Pro and Gemini transports share the strict `agentify_review_query` ledger tool
-  but bind it respectively to `provider: chatgpt` and `provider: gemini`;
-  cross-provider submission and generic send/browser/write/shell paths remain
-  forbidden.
+- `BrowserTransport` is the singleton logical service, implemented by agent type
+  `hmasd-browser-transport`, for both `chatgpt` and `gemini`. EM and CM author
+  frozen durable request references and return `next_action.owner=TRANSPORT` to
+  Root; they never invoke a provider-specific transport directly. Root validates
+  requester, provider, mode, exact operation, model, authorization, commitment,
+  and response path, serializes the request through the singleton, validates
+  returned archive bytes, and routes the transport fact to the exact requester.
+- Unknown commitment never resends. BrowserTransport performs transport only:
+  provider conversation, operation, tab, direction, OMP assignment, archive,
+  scientific conclusion, engineering acceptance, and lifecycle are distinct
+  objects and meanings.
 
 ## Direction workspace
 
-Direction work uses `temp/directions/<direction-id>/exp/` and `test/` for
-disposable output, with durable definitions and accepted result pairs under
-`docs/research/candidates/<direction-id>/`. Raw runs, generated manifests,
-profiles, checkpoints, and captured logs remain ignored. A Dashboard is a
-read-only derived view and never an authority or control surface.
+Durable direction authority is layered under
+`docs/research/candidates/<direction-id>/`: `DIRECTION.md`, accepted
+cycle-scoped material in `evidence/`, exact external material in `external/`,
+EM state and durable CM requests in `workflow/research/`, and contract-first CM
+artifacts in `workflow/engineering/`. Role skills name the standard artifacts,
+which are required only after their phase is reached. Disposable output stays
+under `temp/directions/<direction-id>/exp/` and `test/`. Raw runs, generated
+manifests, profiles, checkpoints, and captured logs remain ignored. A Dashboard
+is a read-only derived view and never authority or control surface.

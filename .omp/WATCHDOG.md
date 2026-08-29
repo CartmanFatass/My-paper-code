@@ -19,10 +19,11 @@ all other roles              -> no Advisor
 
 Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
 `task.agentAdvisor` entries opt in the two Implementer leaves with
-`opencode-go/glm-5.3:high`. Root, EM, CM, Reviewer, Verifier,
+`opencode-go/glm-5.3:high`; therefore only `hmasd-implementer` and
+`hmasd-implementer-terra` retain an engineering Advisor. Root, EM, CM,
+BrowserTransport (`hmasd-browser-transport`), Reviewer, Verifier,
 Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment
-Operator, both transports, Artifact Writer, and Recovery Manager receive no
-continuous Advisor.
+Operator, Artifact Writer, and Recovery Manager receive no continuous Advisor.
 
 
 ## Engineering route

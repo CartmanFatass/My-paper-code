@@ -23,8 +23,6 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
             "hmasd-research-principles-analyst",
             "hmasd-research-artifact-writer",
             "hmasd-code-scout",
-            "hmasd-external-pro-transport",
-            "hmasd-external-gemini-transport",
             "librarian",
         ],
         "autoloadSkills": [
@@ -114,35 +112,35 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "spawns": [],
         "autoloadSkills": ["hmasd-workflow-recovery"],
     },
-    "hmasd-external-pro-transport": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking-level": "medium",
-        "tools": [
-            "read",
-            "grep",
-            "glob",
-            "mcp__agentify-desktop__agentify_review_prompt_sha256_preflight",
-            "mcp__agentify-desktop__agentify_review_reasoning_mode_preflight",
-            "mcp__agentify-desktop__agentify_review_query",
-            "mcp__agentify-desktop__agentify_review_observe",
-        ],
-        "spawns": [],
-        "autoloadSkills": ["hmasd-scientific-external-review"],
-    },
-    "hmasd-external-gemini-transport": {
+    "hmasd-browser-transport": {
         "model": "openai-codex/gpt-5.6-luna",
         "thinking-level": "high",
         "tools": [
             "read",
             "grep",
             "glob",
-            "mcp__agentify-desktop__agentify_review_prompt_sha256_preflight",
+            "bash",
+            "hub",
+            "mcp__agentify-desktop__agentify_ensure_ready",
+            "mcp__agentify-desktop__agentify_tabs",
+            "mcp__agentify-desktop__agentify_status",
+            "mcp__agentify-desktop__agentify_tab_create",
+            "mcp__agentify-desktop__agentify_open_conversation",
+            "mcp__agentify-desktop__agentify_new_conversation",
+            "mcp__agentify-desktop__agentify_operator_observe",
+            "mcp__agentify-desktop__agentify_operator_wait",
+            "mcp__agentify-desktop__agentify_operator_act",
+            "mcp__agentify-desktop__agentify_review_chatgpt_profile_snapshot",
             "mcp__agentify-desktop__agentify_review_preflight",
+            "mcp__agentify-desktop__agentify_review_reasoning_mode_preflight",
             "mcp__agentify-desktop__agentify_review_query",
             "mcp__agentify-desktop__agentify_review_observe",
+            "mcp__agentify-desktop__agentify_wait_response",
+            "mcp__agentify-desktop__agentify_read_page",
+            "mcp__agentify-desktop__agentify_tab_close",
         ],
         "spawns": [],
-        "autoloadSkills": ["hmasd-scientific-external-review"],
+        "autoloadSkills": ["hmasd-browser-transport"],
     },
     "hmasd-research-scout": {
         "model": "openai-codex/gpt-5.6-sol",
@@ -237,7 +235,7 @@ def _list_field(metadata: dict[str, FrontmatterValue], key: str) -> list[str]:
 def test_exact_project_agent_inventory_and_frontmatter() -> None:
     paths = sorted(AGENT_ROOT.glob("*.md"))
     assert {path.stem for path in paths} == set(EXPECTED_AGENTS)
-    assert len(paths) == 17
+    assert len(paths) == 16
     for path in paths:
         metadata = _parse_frontmatter(path)
         expected = EXPECTED_AGENTS[path.stem]
@@ -267,6 +265,10 @@ def test_depth_two_graph_and_leaf_specialists() -> None:
     }
     assert "hmasd-project-scout" in _list_field(parsed["hmasd-cm"], "spawns")
     assert _list_field(parsed["hmasd-em"], "spawns")
+    for manager in ("hmasd-em", "hmasd-cm"):
+        assert "hmasd-browser-transport" not in _list_field(
+            parsed[manager], "spawns"
+        )
     for name, metadata in parsed.items():
         spawns = _list_field(metadata, "spawns")
         if name not in {"hmasd-em", "hmasd-cm"}:
@@ -305,13 +307,13 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     assert "bundled `scout`" not in instructions
     assert "task.enableEffort` remains disabled" in instructions
     assert "highest supported tier" in instructions
-    assert "session-init evidence" in instructions
+    assert "session-init evidence" in instructions.lower()
     for manager in ("hmasd-em.md", "hmasd-cm.md"):
         body = (AGENT_ROOT / manager).read_text(encoding="utf-8")
         assert "must omit the `effort` field" in body
 
 
-def test_seven_complete_skills_and_authority_files() -> None:
+def test_eight_complete_skills_and_authority_files() -> None:
     expected_anchors = {
         "hmasd-root-control": (
             "portfolio.md",
@@ -333,18 +335,31 @@ def test_seven_complete_skills_and_authority_files() -> None:
             "durable reference",
         ),
         "hmasd-cm-engineering-cycle": (
-            "two specialists",
-            "at most six",
-            "lsp",
-            "provisioned engineering worktree",
-            "scientific ambiguity",
+            "contract-first gate",
+            "exactly one implementer",
+            "evidence roles",
+            "status axes",
+            "singleton `browsertransport` service",
         ),
         "hmasd-result-run": (
             "7200",
             "memory",
-            "exit code `8`",
+            "`8` for the user decision boundary",
             "one operator",
             "never start a successor",
+        ),
+        "hmasd-browser-transport": (
+            "browsertransport",
+            "observe -> interpret -> act -> verify",
+            "strict operation",
+            "agentify operation",
+            "provider conversation",
+            "browser tab",
+            "prompt file",
+            "archive file",
+            "unknown commitment",
+            "zero_send_failed",
+            "sent_unreadable",
         ),
         "hmasd-scientific-external-review": (
             "mutually blind",
@@ -354,34 +369,34 @@ def test_seven_complete_skills_and_authority_files() -> None:
             "unknown commitment",
         ),
         "hmasd-workflow-recovery": (
-            "pure research",
-            "manager missing",
-            "partial code",
-            "run says",
+            "pure research task failed",
+            "manager missing after resume",
+            "partial code work",
+            "run or result says running",
             "memory refusal",
-            "git conflict",
-            "push outcome",
-            "external commitment",
-            "late specialist",
+            "git writer conflict",
+            "push outcome unknown",
+            "external commitment unknown",
+            "late transport or specialist result",
             "dashboard failure",
-            "compaction",
+            "compaction boundary",
             "reconstruct",
-            "three",
-            "superseded",
+            "at most three",
+            "superseded evidence",
             "user-visible blocker",
         ),
         "hmasd-git-integration": (
             "canonical",
             "omp/workflow",
             "one candidate commit",
-            "stale bases",
+            "stale base",
             "em:<direction>",
             "cm:<direction>",
         ),
     }
     skill_paths = sorted((REPO_ROOT / ".omp" / "skills").glob("*/SKILL.md"))
     assert {path.parent.name for path in skill_paths} == set(expected_anchors)
-    assert len(skill_paths) == 7
+    assert len(skill_paths) == 8
     for path in skill_paths:
         metadata = _parse_frontmatter(path)
         assert _string_field(metadata, "name") == path.parent.name

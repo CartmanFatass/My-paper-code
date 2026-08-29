@@ -8,74 +8,116 @@ description: Prepare and execute one observed result-bearing local command.
 ## Purpose
 
 Make one exact local train, evaluate, or analyze command observable and
-reproducible without turning run metadata into approval authority. One
-Experiment Operator owns one command from launch through terminal return.
+reproducible without turning run metadata, terminal success, or metrics into
+approval or scientific authority. Exactly one Experiment Operator owns exactly
+one command from launch through its terminal witness. No CM, Reviewer,
+Verifier, or second Operator shares that command ownership.
 
 ## Inputs
 
-- Direction and run IDs, assignment ID, exact argv, canonical cwd, code SHA,
-  parameters, output paths, and scientific activity predicate.
-- Estimated duration and peak memory, frozen question/evidence SHAs, and the
-  current run-manifest/revision state.
-- CM's bounded assignment and any previous terminal observation.
+Before dispatch, CM supplies:
+
+- direction, cycle, run, and assignment IDs;
+- shell-free exact argv and canonical cwd;
+- exact code/baseline, config, data, RNG, parameter, and environment
+  identities;
+- canonical input and output paths plus every filesystem, process, network, and
+  result Effect;
+- duration, peak-memory, worker/thread/device and other resource bounds;
+- scientific activity predicate, completion checks, and stop condition;
+- frozen question/evidence/engineering-contract refs; and
+- current manifest revision plus any previous terminal-witness ref.
+
+The Operator may execute only these frozen bytes. Missing, contradictory,
+noncanonical, unsafe, or changed fields return a refusal before launch. A
+convenient shell wrapper, different seed, reduced comparator, alternate output
+root, or relaxed stop condition is a different command and requires a new CM
+contract; it is not local recovery.
 
 ## Bounded cycle
 
-1. Validate the exact command, canonical paths, code identity, parameters,
-   output targets, duration estimate, memory estimate, and activity predicate.
-2. Run memory/resource preflight before any approval logic. Refuse an unsafe plan;
-   reduce, batch, or shard it rather than asking for permission to overcommit.
-3. For estimates over 7200 seconds, attempt one `hmasd-reviewer` performance
-   review from frozen evidence. Record unavailability as an evidence gap, then
-   return exit code `8` with a frozen decision request binding all command and
-   evidence fields. Approval resumes exactly that request.
-4. For estimates at or below 7200 seconds, inspect duplicate manifests and PID
-   identity, dispatch exactly one Operator, and use Hub to own one
-   `hmasd_run.py execute` process.
-5. Observe that one process to terminal completion, write the exact manifest
-   lifecycle, and return. Never start a successor or reinterpret metrics.
+1. Validate exact argv, canonical paths, code and input identity, Effects,
+   output targets, resource bounds, activity predicate, completion checks, and
+   stop condition. Bind them to one prepared `runner-spec.json` and manifest
+   identity.
+2. Run `scripts/hmasd_resource_preflight.py` before any approval logic. Refuse
+   unsafe memory or resource plans mechanically; reduce, batch, or shard them
+   through a replacement CM contract rather than asking permission to
+   overcommit.
+3. For an estimated duration over 7200 seconds, attempt one
+   `hmasd-reviewer` performance-reasonableness review from the frozen evidence.
+   Reviewer unavailability is an evidence gap, not approval. Return exit code
+   `8` with one user decision request that binds the exact command, evidence,
+   resources, Effects, and stop condition. Approval resumes only those same
+   bytes.
+4. At or below 7200 seconds, or after approval of the exact long-run request,
+   inspect duplicate manifests and live PID/process identity, then dispatch
+   exactly one `hmasd-experiment-operator`. That Operator uses Hub to own one
+   `scripts/hmasd_run.py execute` process.
+5. Observe the same process until a terminal fact. Publish one immutable
+   `scripts/hmasd_operator_result.py` witness containing the run ID, manifest,
+   stdout/stderr paths, terminal status, exit code, and observation timestamp.
+   Reconcile the manifest terminal lifecycle and return those exact refs.
 
-The cycle has one prepared manifest and at most one owned process. A decision
-response or terminal observation is the only wake-up for continuation.
+The bounded cycle has one prepared manifest, one Operator, one process, and one
+terminal witness. A user response to the frozen decision request or an
+observation of that exact process is the only continuation. Never poll through
+a successor assignment, relaunch an unknown or partially observed process, or
+reinterpret metrics.
 
 ## State writes
 
-- The single Operator writes the local manifest, stdout/stderr, exit code, and
-  observed artifact references through the run CLI in the ignored direction
-  `temp/` tree.
-- The Skill records no scientific conclusion, Portfolio/EM/CM state, approval
-  token, or Agentify ledger state.
-- Accepted result Markdown/JSON is authored by EM through Artifact Writer.
+- The single Experiment Operator writes `manifest.json`, `runner-spec.json`,
+  stdout/stderr, exit-code data, produced artifact refs, and its immutable
+  terminal witness in the ignored
+  `temp/directions/<direction-id>/exp/<run-id>/` tree through the run and
+  terminal-witness CLIs.
+- CM coordinates but does not execute the process or write its manifest.
+  Reviewer and Verifier observe their separately frozen questions and never
+  acquire command ownership.
+- This Skill records no scientific conclusion, acceptance token,
+  Portfolio/EM/CM state, lifecycle action, provider ledger, or Agentify state.
+  Accepted scientific result Markdown/JSON remains EM-authored through the
+  Artifact Writer.
+- Process exit zero and terminal `SUCCEEDED` mean only that the frozen command
+  completed as observed. They do not establish scientific acceptance.
 
 ## Returned result envelope
 
 Return the common v1 envelope with `role: "hmasd-experiment-operator"` for the
-terminal worker and payload:
+terminal worker. Include the terminal-witness path in `artifact_refs` and use:
 
 ```json
 {
   "kind": "run",
   "run_id": "<run-id>",
   "manifest_ref": "temp/directions/<direction-id>/exp/<run-id>/manifest.json",
-  "terminal_status": "COMPLETED",
+  "terminal_status": "SUCCEEDED",
   "exit_code": 0
 }
 ```
 
 For a long-run boundary, use `status: "BLOCKED"`, `materiality: "USER"`, and
 one exact `decision_requests[]` entry. Advisor or Reviewer output is never an
-approval token.
+approval token. On any terminal status, return observed paths and limitations
+without a scientific interpretation.
 
 ## Failure handling
 
-Refuse invalid argv, paths, identity, duplicate ownership, unsafe memory plans,
-PID mismatch, and manifest CAS conflicts. Preserve the original request and
-never relaunch an unknown or partially observed process. Record the observed
-terminal state and return exit code `6` for observed resource conflict, `8` for
-user decision, or `1` for another directly observed failure.
+Refuse invalid or mutable argv, noncanonical paths, identity mismatch, duplicate
+ownership, unsafe resources, unbounded workers, undeclared Effects, PID
+mismatch, manifest CAS conflict, or a conflicting terminal witness. Preserve
+the original request and inspect the exact manifest/process before classifying
+an unknown outcome. Never start a successor for a partially observed command.
+
+Record the observed terminal state and return exit code `6` for an observed
+resource conflict, `8` for the user decision boundary, or `1` for another
+directly observed failure. If terminal observation is lost, retain the same run
+identity and exact re-observation condition; do not manufacture an exit code or
+claim completion.
 
 ## Deletion condition
 
-Delete this Skill when an approved run helper provides exact command identity,
-one-process ownership, resource refusal, user-boundary continuation, and
-terminal observation with no duplicate state writer.
+Delete this Skill when an approved run helper enforces the same frozen command,
+canonical paths, one-process ownership, resource refusal, exact long-run
+decision boundary, immutable terminal witness, and no duplicate state writer.

@@ -31,11 +31,13 @@ blocking: false
 Own one bounded engineering scope frozen from exact direction and acceptance
 references. Map files and interfaces before decomposition, give disjoint path
 ownership to specialists, and require native LSP evidence for exported-symbol
-work. Verification is focused; review and Advisor output are advisory. Delegate
-Every nested `task` item must omit the `effort` field; role frontmatter alone
-selects specialist effort.
-an actual result-bearing command to exactly one Experiment Operator. Return
-scientific ambiguity to Root and EM without reinterpretation. At cycle
+work. Verification is focused; review and Advisor output are advisory. Every
+nested `task` item must omit the `effort` field; role frontmatter alone selects
+specialist effort. Delegate an actual result-bearing command to exactly one
+Experiment Operator. Return any frozen external consultation request as
+`next_action.owner=TRANSPORT` through Root when needed; never spawn or contact
+BrowserTransport directly. Return scientific ambiguity to Root and EM without
+reinterpretation. At cycle
 completion, commit, apply, and push only the exact assignment-owned engineering
 paths from the provisioned worktree; report any stale base, mixed ownership, or
 conflict to Root without resolving it.

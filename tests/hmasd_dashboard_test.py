@@ -185,6 +185,13 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
         "pid",
         "execution_token",
         "canonical_absolute_path",
+        "prompt",
+        "prompt_body",
+        "prompt_path",
+        "provider_prompt",
+        "secret",
+        "session_ref",
+        "runtime_ref",
     }
 
     def walk(value: Any) -> list[str]:
@@ -236,6 +243,45 @@ def test_portfolio_semantics_accept_more_than_eight_active_queues() -> None:
         for index in range(9)
     ]
     assert dashboard._semantic_valid("portfolio_registry", {"directions": directions})
+
+def test_parked_direction_requires_and_projects_reactivation_condition(
+    tmp_path: Path,
+) -> None:
+    root = fixture_root(tmp_path)
+    registry_path = root / dashboard.REGISTRY_REL
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    direction = registry["directions"][0]
+    direction["lifecycle"] = "PARKED"
+    direction["reactivation_condition_ref"] = {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "heading": "Reactivation condition for example-direction",
+        "sha256": "c" * 64,
+    }
+    registry_path.write_bytes(dashboard._json_bytes(registry))
+
+    portfolio = dashboard.build_snapshot(root)["data"]["portfolio"]
+
+    assert portfolio["status"] == "ok"
+    assert portfolio["data"]["summary"]["lifecycle_counts"] == {"PARKED": 1}
+    parked = portfolio["data"]["directions"][0]
+    assert parked["lifecycle"] == "PARKED"
+    assert parked["reactivation_condition_ref"] == direction["reactivation_condition_ref"]
+
+
+def test_parked_direction_without_reactivation_condition_is_semantically_invalid() -> None:
+    assert not dashboard._semantic_valid(
+        "portfolio_registry",
+        {
+            "directions": [
+                {
+                    "id": "parked-direction",
+                    "lifecycle": "PARKED",
+                    "dependencies": [],
+                    "reactivation_condition_ref": None,
+                }
+            ]
+        },
+    )
 
 
 def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
@@ -344,6 +390,44 @@ def test_valid_root_em_and_cm_runtime_rows_are_reconciled(tmp_path: Path) -> Non
     assert by_identity["CM-example-direction"]["agent_type"] == "hmasd-cm"
     assert by_identity["CM-example-direction"]["parent_identity"] == "Root"
     assert by_identity["CM-example-direction"]["phase"] == "SCOPING"
+
+def test_browser_transport_runtime_row_is_reconciled_without_sensitive_fields(
+    tmp_path: Path,
+) -> None:
+    root = fixture_root(tmp_path)
+    runtime_path = root / dashboard.RUNTIME_AGENTS_REL
+    runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
+    runtime["agents"].append(
+        _runtime_agent(
+            "BrowserTransport",
+            "hmasd-browser-transport",
+            "Root",
+            "BrowserTransport",
+        )
+    )
+    runtime_path.write_bytes(dashboard._json_bytes(runtime))
+
+    agents = dashboard.build_snapshot(root)["data"]["agents"]
+
+    assert agents["status"] == "ok"
+    assert agents["warnings"] == []
+    browser = next(
+        item
+        for item in agents["data"]["agents"]
+        if item["logical_identity"] == "BrowserTransport"
+    )
+    assert browser["agent_type"] == "hmasd-browser-transport"
+    assert browser["parent_identity"] == "Root"
+    assert browser["lifecycle"] == "RUNNING"
+    assert {
+        "prompt",
+        "prompt_body",
+        "prompt_path",
+        "provider_prompt",
+        "secret",
+        "session_ref",
+        "runtime_ref",
+    }.isdisjoint(browser)
 
 
 def test_runtime_manager_generation_mismatch_remains_stale(tmp_path: Path) -> None:

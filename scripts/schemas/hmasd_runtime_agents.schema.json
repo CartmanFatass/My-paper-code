@@ -25,7 +25,7 @@
     },
     "identity": {
       "type": "string",
-      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
+      "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
     },
     "agent": {
       "type": "object",

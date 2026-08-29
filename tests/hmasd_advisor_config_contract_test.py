@@ -22,7 +22,7 @@ launch:
 task:
   maxConcurrency: 32
   maxRecursionDepth: 2
-  enableEffort: true
+  enableEffort: false
   enableLsp: true
   agentAdvisor:
     hmasd-implementer: opencode-go/glm-5.3:high
@@ -50,8 +50,7 @@ EXPECTED_NO_ADVISOR = {
     "hmasd-verifier",
     "hmasd-experiment-operator",
     "hmasd-workflow-recovery-manager",
-    "hmasd-external-pro-transport",
-    "hmasd-external-gemini-transport",
+    "hmasd-browser-transport",
     "hmasd-research-scout",
     "hmasd-research-innovator",
     "hmasd-research-critic",

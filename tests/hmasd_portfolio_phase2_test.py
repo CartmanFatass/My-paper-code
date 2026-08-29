@@ -53,6 +53,17 @@ EXPECTED_IDS = (
     "vsp_c1",
 )
 
+EXPECTED_PARKED_IDS = {
+    "active_post_churn_population_flow_identification",
+    "commitment_residual_triggered_options",
+    "covariance_calibrated_information_clock",
+    "eociv_lite",
+    "expressibility_gated_renewal_credit_relay",
+    "finite_semantic_boundary_support",
+    "roster_consistent_latent_exploration",
+    "ucope",
+}
+
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -81,9 +92,18 @@ def test_registry_preserves_stable_ids_and_validates_live_contract() -> None:
     assert tuple(direction["id"] for direction in registry["directions"]) == EXPECTED_IDS
     assert len(registry["directions"]) == len(EXPECTED_IDS)
     assert {direction["lifecycle"] for direction in registry["directions"]} <= {
-        "REGISTERED", "ACTIVE", "CLOSED"
+        "REGISTERED", "ACTIVE", "PARKED", "CLOSED"
     }
-    assert all(direction["lifecycle"] != "PARKED" for direction in registry["directions"])
+    assert {
+        direction["id"]
+        for direction in registry["directions"]
+        if direction["lifecycle"] == "PARKED"
+    } == EXPECTED_PARKED_IDS
+    assert all(
+        direction["reactivation_condition_ref"] is not None
+        for direction in registry["directions"]
+        if direction["lifecycle"] == "PARKED"
+    )
     assert all(direction["dependencies"] == [] for direction in registry["directions"])
 
     result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(REGISTRY_PATH))
@@ -100,6 +120,10 @@ def test_each_direction_authority_and_three_states_reconcile_to_registry() -> No
         authority = candidate / "DIRECTION.md"
         assert authority.is_file()
         assert direction["lifecycle_decision_ref"]["sha256"] == sha256(PORTFOLIO / "PORTFOLIO.md")
+        if direction["reactivation_condition_ref"] is not None:
+            assert direction["reactivation_condition_ref"]["sha256"] == sha256(
+                PORTFOLIO / "PORTFOLIO.md"
+            )
         authority_text = authority.read_text(encoding="utf-8")
         assert "## Scientific question" in authority_text
         assert "## Evidence set" in authority_text

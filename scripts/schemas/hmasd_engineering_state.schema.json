@@ -51,6 +51,7 @@
     "blockers": { "type": "array", "items": { "$ref": "#/$defs/blocker" } },
     "waiting_on": { "type": "array", "items": { "$ref": "#/$defs/waiting" } },
     "scope_ref": { "$ref": "#/$defs/decision_ref" },
+    "contract_ref": { "$ref": "#/$defs/ref" },
     "base_sha": { "$ref": "#/$defs/git_sha" },
     "worktree_ref": {
       "anyOf": [
@@ -67,6 +68,18 @@
     },
     "verification_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
     "run_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+    "engineering_status": {
+      "type": "string",
+      "enum": ["IN_PROGRESS", "IMPLEMENTED", "UNCHANGED", "BLOCKED", "NOT_REACHED"]
+    },
+    "observation_status": {
+      "type": "string",
+      "enum": ["IN_PROGRESS", "OBSERVED", "NOT_OBSERVED", "NOT_REQUIRED"]
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": ["IN_PROGRESS", "SATISFIED", "UNSATISFIED", "NOT_RUN"]
+    },
     "integration": {
       "type": "object",
       "additionalProperties": false,
@@ -154,7 +167,7 @@
       "additionalProperties": false,
       "required": ["logical_identity", "generation", "assignment_id", "runtime_ref"],
       "properties": {
-        "logical_identity": { "type": "string", "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$" },
+        "logical_identity": { "type": "string", "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$" },
         "generation": { "type": "integer", "minimum": 1 },
         "assignment_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
         "runtime_ref": {

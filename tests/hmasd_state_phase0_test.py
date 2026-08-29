@@ -36,6 +36,8 @@ KINDS = (
     "runtime_worktrees",
 )
 
+SCHEMA_KINDS = (*KINDS, "runtime_browser_assignments")
+
 
 def fixture(kind: str) -> dict[str, Any]:
     return json.loads((FIXTURES / f"{kind}.json").read_text(encoding="utf-8"))
@@ -51,9 +53,9 @@ def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     )
 
 
-def test_all_ten_schema_contracts_are_present_and_strict() -> None:
+def test_all_eleven_schema_contracts_are_present_and_strict() -> None:
     schema_dir = ROOT / "scripts" / "schemas"
-    for kind in KINDS:
+    for kind in SCHEMA_KINDS:
         schema = json.loads(
             (schema_dir / f"hmasd_{kind}.schema.json").read_text(encoding="utf-8")
         )
@@ -78,6 +80,11 @@ def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> 
             "payload": {
                 "kind": "portfolio",
                 "direction_actions": [],
+                "capacity_action": {
+                    "action": "NONE",
+                    "direction_id": None,
+                    "decision_ref": None,
+                },
                 "portfolio_ref": {
                     "path": "docs/research/portfolio/PORTFOLIO.md",
                     "sha256": "a" * 64,

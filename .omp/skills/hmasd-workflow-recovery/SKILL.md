@@ -7,36 +7,43 @@ description: Classify and repair one observed HMASD workflow failure safely.
 
 ## Purpose
 
-Give Root one bounded, materially distinct recovery route for a repeated
-workflow failure while preserving each authoritative source. Recovery repairs
-causal breaks; it does not replay unknown effects, reinterpret science, or
-become a generic approval layer.
+Give Root's recovery manager one bounded, materially distinct recovery route
+for a repeated workflow failure while preserving each authoritative source.
+Only Root invokes and owns this recovery manager; EM, CM, BrowserTransport,
+Dashboard, and helpers neither acquire recovery authority nor form a second
+control plane. Recovery repairs causal breaks; it does not replay unknown
+effects, reinterpret science, or become a generic approval layer.
 
 ## Inputs
 
 - Root's exact effect classification and observed failure: pure research,
-  manager lifecycle, partial code/worktree, running or unknown run, memory,
-  Git conflict/stale base, push outcome, external send, late result, runtime
-  mapping, or Dashboard.
-- The authoritative state path, revision/checkpoint/base SHA, logical identity,
-  durable generation, process or Agentify operation reference, and compaction
-  boundary when relevant.
-- Ignored runtime-agent/worktree maps when present, the durable references from
-  which they can be reconstructed, and all prior recovery attempts.
-- The original assignment, affected direction/run/round identity, and safe route
-  candidates.
+  manager lifecycle, partial code/worktree, running or unknown run/result,
+  memory, Git writer conflict/stale base, push outcome, external send,
+  BrowserTransport runtime mapping, late transport or specialist result,
+  invalid PARKED lifecycle, or Dashboard.
+- The authoritative state path, expected revision/checkpoint/base SHA, logical
+  identity, durable requester generation, process identity or exact Agentify
+  operation reference, provider conversation reference, and compaction boundary
+  when relevant.
+- Current OMP runtime agent/worktree maps, including a missing
+  `BrowserTransport` row when observed, and the durable references from which
+  an ignored row can be reconstructed.
+- The original assignment, affected direction/run/round/transport identity,
+  current requester generation, and all prior recovery attempts.
 
 ## Bounded cycle
 
-1. At startup, resume, or a compaction boundary, reconcile durable state and
-   revisions before effectful work. Revive a matching manager generation; if its
-   ignored runtime mapping is missing, reconstruct that mapping once from the
-   registry, worktree, Hub, and other authoritative references. Rotate generation
-   only when durable state proves the current session untrustworthy.
-2. Classify the effect before acting, read the authoritative source, and observe
-   the newest checkpoint, process, remote SHA, or Agentify operation. Preserve
-   original bytes. Reproduce a pure failure once only when doing so cannot repeat
-   an unknown external effect.
+1. At startup, resume, or a compaction boundary, reconcile durable state,
+   expected revisions, OMP runtime maps, and generations before effectful work.
+   Revive a matching manager generation; if its ignored runtime mapping is
+   missing, reconstruct that mapping once from the registry, worktree, Hub, and
+   other authoritative references. Rotate generation only when durable state
+   proves the current session untrustworthy.
+2. Classify the effect before acting, read the authoritative source, and
+   observe the newest checkpoint, process identity, remote SHA, OMP runtime
+   mapping, or exact Agentify operation. Preserve original bytes. Reproduce a
+   pure failure once only when doing so cannot repeat an unknown run, result, or
+   external effect.
 3. Deduplicate prior attempts by failure identity, effect class, route, and
    authoritative revision/checkpoint. Choose the smallest safe materially
    distinct route and attempt it once. The budget is at most three materially
@@ -48,23 +55,44 @@ become a generic approval layer.
    - **Manager missing after resume:** revive the matching logical identity and
      generation or reconstruct its runtime map once; never create a blind
      duplicate manager.
-   - **Partial code work:** inspect patch and worktree state, then resume or retain
-     it for recovery; never apply a patch twice.
-   - **Run says RUNNING or has unknown outcome:** inspect PID identity, output,
-     and manifest, observe or mark `UNKNOWN`, and never relaunch or start a
-     successor blindly.
+   - **BrowserTransport runtime row missing:** recover the singleton logical
+     identity `BrowserTransport` with agent type `hmasd-browser-transport` once
+     from current OMP runtime maps, exact Agentify operation refs, and the bound
+     provider conversation. Reconcile the reconstructed row before use; never
+     create a second transport, invent a provider binding, or send during this
+     repair.
+   - **Partial code work:** inspect patch and worktree state, then resume or
+     retain it for recovery; never apply a patch twice.
+   - **Run or result says RUNNING or has unknown outcome:** inspect the exact
+     process identity, output, manifest, and accepted-result refs, then observe
+     or mark `UNKNOWN`; never relaunch the command, start a successor, or
+     recreate a result while run/result state is unknown.
    - **Memory refusal:** reduce, batch, or shard; never ask the user to approve
      overcommit.
-   - **Git conflict or stale base:** preserve the conflict and return to Root for
-     a new integration plan; never auto-resolve scientific or semantic conflict.
-   - **Push outcome unknown:** fetch and compare the remote tip before any push;
-     never push again from an unknown outcome.
-   - **External commitment unknown:** trust and observe the existing Agentify
-     operation; never resend.
-   - **Late specialist output:** compare generation and checkpoint, archive it as
-     superseded evidence, and never overwrite newer accepted state.
+   - **Git writer conflict or stale base:** freeze both writer phases, preserve
+     the exact allowlist/base/conflict evidence, and return to Root for a new
+     integration plan. Fail closed without applying or pushing; never
+     auto-resolve scientific/semantic conflict, rebase, or transfer writer
+     authority across the stale handoff.
+   - **Push outcome unknown:** fetch and compare the exact `omp/workflow` remote
+     tip before any push; never push again from an unknown outcome.
+   - **External commitment unknown:** observe the same exact Agentify operation
+     and bound provider conversation; never resend, create another operation,
+     or substitute a fresh conversation.
+   - **Transport state `SENT_WAITING`:** use `OBSERVE_ONLY` on that same
+     operation and conversation. It never authorizes a send, prompt change, or
+     replacement operation.
+   - **Late transport or specialist output:** compare requester generation and
+     checkpoint. A transport result for a stale requester generation is
+     superseded evidence: retain its exact refs read-only and never overwrite
+     the newer requester's state.
+   - **Invalid PARKED direction:** `PARKED` without a non-null
+     `reactivation_condition_ref` is invalid. Preserve bytes and return the
+     exact registry/revision conflict to Root; never reinterpret it as
+     `CLOSED`, reactivate it, or refill its capacity.
    - **Dashboard failure:** restart the read-only derived service or continue
-     without it; never block the workflow.
+     without it; never block the workflow or treat Dashboard output as
+     authority.
 5. Reconcile the authoritative source after the one route. Return one precise
    resume condition, or, only after the deduplicated three-route budget has no
    safe route left, one precise exhausted user-visible blocker.
@@ -78,12 +106,14 @@ loop exists.
 - Write only the state owned by the repaired helper through its documented CLI
   and expected-revision CAS.
 - Reconstruct ignored runtime maps from durable references without changing
-  Portfolio, direction, run, external, or Git authorities.
-- Record deduplicated materially distinct attempts in the relevant authoritative
-  source; do not create a duplicate recovery ledger.
+  Portfolio, direction, run, external, provider-conversation, or Git
+  authorities. A BrowserTransport row repair records runtime liveness only.
+- Record deduplicated materially distinct attempts in the relevant
+  authoritative source; do not create a duplicate recovery ledger.
 - Never mutate Agentify send state, scientific claims, accepted checkpoints,
-  Portfolio lifecycle, or Dashboard snapshots. Runtime ownership may change only
-  when runtime mapping is the explicit repair target.
+  Portfolio lifecycle, PARKED reactivation conditions, or Dashboard snapshots.
+  Runtime ownership may change only when runtime mapping is the explicit repair
+  target.
 
 ## Returned result envelope
 
@@ -109,11 +139,13 @@ work.
 
 ## Failure handling
 
-Preserve bytes on schema, version, revision, generation, or checkpoint conflict
-and stop rather than guessing. A late result is read-only superseded evidence
-until Root reconciles it. Unknown run state returns an observation condition
-without relaunch; unknown external commitment returns an observation condition
-without resend. A missing Reviewer, test, Dashboard, or Advisor result is an
+Preserve bytes on schema, version, revision, generation, requester generation,
+checkpoint, PARKED reactivation, writer-phase, or base conflict and stop rather
+than guessing. A stale-generation result is read-only superseded evidence until
+Root reconciles it. Unknown run or result state returns an observation
+condition with no relaunch. Unknown external commitment returns an observation
+condition for the same operation with no resend, and `SENT_WAITING` remains
+observe-only. A missing Reviewer, test, Dashboard, or Advisor result is an
 evidence gap, not a recovery trigger by itself.
 
 ## Deletion condition

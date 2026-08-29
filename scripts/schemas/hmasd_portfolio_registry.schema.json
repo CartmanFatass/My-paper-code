@@ -76,7 +76,7 @@
         "id": { "$ref": "#/$defs/direction_id" },
         "abbreviation": { "type": "string", "pattern": "^[A-Z][A-Z0-9]{1,15}$" },
         "path": { "$ref": "#/$defs/path" },
-        "lifecycle": { "type": "string", "enum": ["REGISTERED", "ACTIVE", "CLOSED"] },
+        "lifecycle": { "type": "string", "enum": ["REGISTERED", "ACTIVE", "PARKED", "CLOSED"] },
         "dependencies": {
           "type": "array",
           "items": { "$ref": "#/$defs/direction_id" }
@@ -104,7 +104,20 @@
         "research_state_path": { "$ref": "#/$defs/path" },
         "engineering_state_path": { "$ref": "#/$defs/path" },
         "external_review_index_path": { "$ref": "#/$defs/path" }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "lifecycle": { "const": "PARKED" } },
+            "required": ["lifecycle"]
+          },
+          "then": {
+            "properties": {
+              "reactivation_condition_ref": { "$ref": "#/$defs/decision_ref" }
+            }
+          }
+        }
+      ]
     }
   }
 }

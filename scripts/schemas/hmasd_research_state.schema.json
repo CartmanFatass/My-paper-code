@@ -31,6 +31,16 @@
     "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
     "direction_id": { "$ref": "#/$defs/direction_id" },
     "registry_revision_seen": { "type": "integer", "minimum": 1 },
+    "cycle_id": {
+      "anyOf": [
+        { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+        { "type": "null" }
+      ]
+    },
+    "cycle_boundary": {
+      "type": "string",
+      "enum": ["FRESH_MATERIAL_CYCLE", "CONTINUATION", "CM_RESULT_INTERPRETATION", "EVIDENCE_INTAKE", "TERMINAL_GAP_DISPOSITION"]
+    },
     "phase": {
       "type": "string",
       "enum": [
@@ -68,7 +78,11 @@
       "items": { "$ref": "#/$defs/active_agent" }
     },
     "engineering_request": {
-      "anyOf": [{ "$ref": "#/$defs/engineering_request" }, { "type": "null" }]
+      "anyOf": [
+        { "$ref": "#/$defs/engineering_request" },
+        { "$ref": "#/$defs/ref" },
+        { "type": "null" }
+      ]
     },
     "last_checkpoint_sha": {
       "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
@@ -133,7 +147,7 @@
       "additionalProperties": false,
       "required": ["logical_identity", "generation", "assignment_id", "runtime_ref"],
       "properties": {
-        "logical_identity": { "type": "string", "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$" },
+        "logical_identity": { "type": "string", "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$" },
         "generation": { "type": "integer", "minimum": 1 },
         "assignment_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
         "runtime_ref": {

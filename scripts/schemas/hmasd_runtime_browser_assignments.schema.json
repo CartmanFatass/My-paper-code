@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_runtime_browser_assignments",
+  "title": "HMASD runtime BrowserTransport assignment map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "revision", "updated_at", "writer", "assignments"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "writer": { "type": "string", "const": "Root" },
+    "assignments": { "type": "array", "items": { "$ref": "#/$defs/assignment" } }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
+    },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\u0000]+$"
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "ref": {
+      "anyOf": [
+        { "$ref": "#/$defs/content_ref" },
+        { "type": "string", "minLength": 1, "maxLength": 512 }
+      ]
+    },
+    "nullable_ref": {
+      "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
+    },
+    "requester_identity": {
+      "type": "string",
+      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
+    },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assignment_id",
+        "browser_identity",
+        "requester_identity",
+        "request_ref",
+        "direction_id",
+        "provider",
+        "mode",
+        "effect_ref",
+        "operation_ref",
+        "transport_state",
+        "provider_conversation_ref",
+        "archive_ref",
+        "paused",
+        "updated_at"
+      ],
+      "properties": {
+        "assignment_id": { "$ref": "#/$defs/id" },
+        "browser_identity": { "type": "string", "const": "BrowserTransport" },
+        "requester_identity": { "$ref": "#/$defs/requester_identity" },
+        "request_ref": { "$ref": "#/$defs/ref" },
+        "direction_id": {
+          "anyOf": [{ "$ref": "#/$defs/direction_id" }, { "type": "null" }]
+        },
+        "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "mode": {
+          "type": "string",
+          "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
+        },
+        "effect_ref": { "$ref": "#/$defs/nullable_ref" },
+        "operation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "transport_state": {
+          "type": "string",
+          "enum": ["PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST", "WAIVED"]
+        },
+        "provider_conversation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "archive_ref": { "$ref": "#/$defs/nullable_ref" },
+        "paused": { "type": "boolean" },
+        "updated_at": { "$ref": "#/$defs/timestamp" }
+      }
+    }
+  }
+}

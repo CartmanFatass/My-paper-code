@@ -23,8 +23,10 @@ The controlling user state at this boundary is `PAUSE`:
   mutation, or capacity refill is authorized while PAUSE remains active.
 - `PAUSE` is not cancellation, scientific failure, parking, closure, or permission to interrupt a
   committed Effect.
-- Source `PARKED` rows are represented in the OMP registry as `REGISTERED` with preserved reentry
-  conditions because OMP registry v1 has no `PARKED` lifecycle value.
+- Representation migration note: this restores the `PARKED` schema representation only for the
+  eight source-known parked rows. It does not activate, close, cancel, launch, send, refill capacity,
+  or reinterpret science; `PAUSE` remains controlling. Every preserved reactivation condition and
+  every other lifecycle, capacity, and scientific fact is unchanged.
 
 Safe-boundary facts consumed from
 `docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md`:

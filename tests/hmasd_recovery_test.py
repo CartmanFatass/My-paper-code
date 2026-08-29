@@ -94,6 +94,11 @@ def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
         ("never relaunch", "never replay", "no blind relaunch"),
         ("never resend", "no resend", "do not resend"),
         ("never overwrite", "do not overwrite", "superseded"),
+        ("browsertransport",),
+        ("sent_waiting",),
+        ("observe_only", "observe-only"),
+        ("reactivation_condition_ref",),
+        ("fail closed",),
     )
     missing = [
         " / ".join(alternatives)
@@ -101,6 +106,28 @@ def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
         if not any(term in skill for term in alternatives)
     ]
     assert not missing, f"recovery Skill omits pressure boundary terms: {missing}"
+
+def test_recovery_skill_preserves_browser_parked_and_writer_fail_closed_contracts() -> None:
+    skill = " ".join(_recovery_skill().split())
+    required = (
+        "only root invokes and owns this recovery manager",
+        "browsertransport runtime row missing",
+        "logical identity `browsertransport`",
+        "agent type `hmasd-browser-transport`",
+        "exact agentify operation",
+        "bound provider conversation",
+        "never resend",
+        "transport state `sent_waiting`",
+        "use `observe_only` on that same operation and conversation",
+        "stale requester generation is superseded evidence",
+        "`parked` without a non-null `reactivation_condition_ref` is invalid",
+        "git writer conflict or stale base",
+        "fail closed",
+        "never relaunch the command",
+        "while run/result state is unknown",
+    )
+    missing = [term for term in required if term not in skill]
+    assert not missing, f"recovery Skill omits target recovery contracts: {missing}"
 
 
 def test_authoritative_state_remains_reconstructible_when_runtime_maps_are_missing(
@@ -219,6 +246,7 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
                 "candidate_sha": "2" * 40,
                 "integrated_sha": "3" * 40,
                 "changed_paths": [],
+                "actor": "root",
             },
             "role": "hmasd-git-integration",
             "summary": "Root integrated the exact candidate.",
@@ -249,8 +277,7 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
         "hmasd-research-critic",
         "hmasd-research-principles-analyst",
         "hmasd-research-artifact-writer",
-        "hmasd-external-pro-transport",
-        "hmasd-external-gemini-transport",
+        "BrowserTransport",
         "hmasd-workflow-recovery-manager",
         "librarian",
     )

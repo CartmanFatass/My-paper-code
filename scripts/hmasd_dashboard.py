@@ -32,6 +32,9 @@ EPOCH = "1970-01-01T00:00:00Z"
 REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
 RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
 RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
+BROWSER_TRANSPORT_IDENTITY = "BrowserTransport"
+BROWSER_TRANSPORT_AGENT_TYPE = "hmasd-browser-transport"
+
 
 ASSET_NAMES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -333,9 +336,15 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
             if not isinstance(item, dict):
                 return False
             identifier = item.get("id")
+            lifecycle = item.get("lifecycle")
+            reactivation_ref = item.get("reactivation_condition_ref")
             deps = item.get("dependencies", [])
-            if not isinstance(identifier, str) or not isinstance(deps, list) or any(
-                not isinstance(dep, str) or dep not in known for dep in deps
+            if (
+                not isinstance(identifier, str)
+                or lifecycle not in {"REGISTERED", "ACTIVE", "PARKED", "CLOSED"}
+                or (lifecycle == "PARKED" and not isinstance(reactivation_ref, Mapping))
+                or not isinstance(deps, list)
+                or any(not isinstance(dep, str) or dep not in known for dep in deps)
             ):
                 return False
             graph[identifier] = deps
@@ -557,6 +566,14 @@ def _sha_ref(value: Any) -> dict[str, str] | None:
     return {"path": path, "sha256": sha}
 
 
+def _decision_ref(value: Any) -> dict[str, str] | None:
+    content = _sha_ref(value)
+    heading = value.get("heading") if isinstance(value, Mapping) else None
+    if content is None or not isinstance(heading, str) or not heading:
+        return None
+    return {**content, "heading": heading}
+
+
 def _safe_metric(value: Any) -> dict[str, Any] | None:
     if not isinstance(value, Mapping):
         return None
@@ -691,6 +708,13 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
                 for key in ("logical_identity", "job_name", "generation")
                 if key in agent and isinstance(agent[key], (str, int))
             }
+        reactivation_ref = _decision_ref(item.get("reactivation_condition_ref"))
+        if reactivation_ref is not None:
+            if _safe_relative_path(root, reactivation_ref["path"], must_exist=False) is None:
+                statuses.append("invalid")
+                _warning_add(warnings, f"invalid:{identifier}:reactivation_condition_ref")
+            else:
+                output["reactivation_condition_ref"] = reactivation_ref
         for state_key, kind, safe_fn in (
             ("research_state_path", "research_state", _safe_research),
             ("engineering_state_path", "engineering_state", _safe_engineering),
@@ -792,6 +816,8 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
 def _agent_type(logical_identity: str) -> str:
     if logical_identity == "Root":
         return "hmasd-root"
+    if logical_identity == BROWSER_TRANSPORT_IDENTITY:
+        return BROWSER_TRANSPORT_AGENT_TYPE
     if logical_identity.startswith("EM-"):
         return "hmasd-em"
     if logical_identity.startswith("CM-"):
@@ -939,6 +965,17 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 statuses.append("invalid")
                 _warning_add(warnings, "invalid:runtime_agents_identity")
                 continue
+            if identity == BROWSER_TRANSPORT_IDENTITY and identity not in expected_identities:
+                observed_generation = item.get("generation")
+                logical[identity] = {
+                    "logical_identity": identity,
+                    "agent_type": BROWSER_TRANSPORT_AGENT_TYPE,
+                    "generation": observed_generation,
+                    "lifecycle": "UNKNOWN",
+                    "job_name": item.get("job_ref", identity),
+                    "parent_identity": "Root",
+                }
+                expected_identities.add(identity)
             runtime_only = identity not in expected_identities
             entry = logical.setdefault(
                 identity,
@@ -958,6 +995,11 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             elif expected_generation != observed_generation:
                 statuses.append("stale")
                 _warning_add(warnings, f"stale:agent_generation:{identity}")
+            expected_type = entry.get("agent_type")
+            observed_type = item.get("agent_type")
+            if not runtime_only and expected_type != observed_type:
+                statuses.append("stale")
+                _warning_add(warnings, f"stale:agent_type:{identity}")
             expected_parent = entry.get("parent_identity")
             observed_parent = item.get("parent_identity")
             if not runtime_only and expected_parent != observed_parent:

@@ -25,7 +25,7 @@
     "schema_version": { "type": "integer", "const": 1 },
     "role": {
       "type": "string",
-      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager))$"
+      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|browser-transport|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager))$"
     },
     "logical_identity": { "$ref": "#/$defs/logical_identity" },
     "generation": { "type": "integer", "minimum": 1 },
@@ -66,7 +66,7 @@
   "$defs": {
     "logical_identity": {
       "type": "string",
-      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|external-(?:pro|gemini)-transport|workflow-recovery-manager)|librarian)$"
+      "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$"
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },
@@ -94,6 +94,10 @@
       "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
     },
     "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "requester_identity": {
+      "type": "string",
+      "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
+    },
     "decision_request": {
       "type": "object",
       "additionalProperties": false,
@@ -106,9 +110,13 @@
     "next_action": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "input_refs"],
+      "required": ["kind", "owner", "input_refs"],
       "properties": {
         "kind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
+        "owner": {
+          "type": "string",
+          "enum": ["ROOT", "EM", "CM", "TRANSPORT", "EXPERIMENT_OPERATOR", "USER"]
+        },
         "input_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
       }
     },
@@ -134,6 +142,7 @@
       "required": [
         "kind",
         "direction_id",
+        "actor",
         "base_sha",
         "candidate_sha",
         "integrated_sha",
@@ -142,6 +151,10 @@
       "properties": {
         "kind": { "const": "git" },
         "direction_id": { "$ref": "#/$defs/direction_id" },
+        "actor": {
+          "type": "string",
+          "pattern": "^(?:root|em:[a-z0-9][a-z0-9_-]{1,63}|cm:[a-z0-9][a-z0-9_-]{1,63})$"
+        },
         "base_sha": { "$ref": "#/$defs/git_sha" },
         "candidate_sha": {
           "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }]
@@ -155,12 +168,41 @@
     "portfolio_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "direction_actions", "portfolio_ref", "registry_revision"],
+      "required": ["kind", "direction_actions", "capacity_action", "portfolio_ref", "registry_revision"],
       "properties": {
         "kind": { "const": "portfolio" },
-        "direction_actions": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "direction_actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/direction_action" }
+        },
+        "capacity_action": { "$ref": "#/$defs/capacity_action" },
         "portfolio_ref": { "$ref": "#/$defs/ref" },
         "registry_revision": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "direction_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direction_id", "action", "decision_ref"],
+      "properties": {
+        "direction_id": { "$ref": "#/$defs/direction_id" },
+        "action": {
+          "type": "string",
+          "enum": ["NONE", "ACTIVATE", "CONTINUE", "NARROW", "PARK", "CLOSE", "FUSE", "SPINOFF"]
+        },
+        "decision_ref": { "$ref": "#/$defs/ref" }
+      }
+    },
+    "capacity_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "direction_id", "decision_ref"],
+      "properties": {
+        "action": { "type": "string", "enum": ["NONE", "REFILL"] },
+        "direction_id": {
+          "anyOf": [{ "$ref": "#/$defs/direction_id" }, { "type": "null" }]
+        },
+        "decision_ref": { "$ref": "#/$defs/nullable_ref" }
       }
     },
     "em_payload": {
@@ -170,8 +212,18 @@
       "properties": {
         "kind": { "const": "em" },
         "direction_id": { "$ref": "#/$defs/direction_id" },
+        "cycle_id": { "$ref": "#/$defs/id" },
+        "cycle_boundary": {
+          "type": "string",
+          "enum": ["FRESH_MATERIAL_CYCLE", "CONTINUATION", "CM_RESULT_INTERPRETATION", "EVIDENCE_INTAKE", "TERMINAL_GAP_DISPOSITION"]
+        },
         "question_sha256": { "$ref": "#/$defs/sha256" },
         "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
+        "scope_ref": { "$ref": "#/$defs/nullable_ref" },
+        "synthesis_ref": { "$ref": "#/$defs/nullable_ref" },
+        "claim_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+        "recommendation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "transport_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
         "conclusion_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
         "engineering_request_ref": { "$ref": "#/$defs/nullable_ref" }
       }
@@ -179,13 +231,38 @@
     "cm_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "direction_id", "scope_ref", "base_sha", "candidate_sha", "verification_refs", "integrated_sha"],
+      "required": [
+        "kind",
+        "direction_id",
+        "contract_ref",
+        "scope_ref",
+        "base_sha",
+        "candidate_sha",
+        "engineering_status",
+        "observation_status",
+        "verification_status",
+        "verification_refs",
+        "integrated_sha"
+      ],
       "properties": {
         "kind": { "const": "cm" },
         "direction_id": { "$ref": "#/$defs/direction_id" },
+        "contract_ref": { "$ref": "#/$defs/ref" },
         "scope_ref": { "$ref": "#/$defs/ref" },
         "base_sha": { "$ref": "#/$defs/git_sha" },
         "candidate_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "engineering_status": {
+          "type": "string",
+          "enum": ["IN_PROGRESS", "IMPLEMENTED", "UNCHANGED", "BLOCKED", "NOT_REACHED"]
+        },
+        "observation_status": {
+          "type": "string",
+          "enum": ["IN_PROGRESS", "OBSERVED", "NOT_OBSERVED", "NOT_REQUIRED"]
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": ["IN_PROGRESS", "SATISFIED", "UNSATISFIED", "NOT_RUN"]
+        },
         "verification_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
         "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] }
       }
@@ -237,13 +314,37 @@
     "transport_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "provider", "mode", "round_id", "operation_ref", "archive_ref", "handoff_ref"],
+      "required": [
+        "kind",
+        "browser_identity",
+        "transport_assignment",
+        "requester",
+        "provider",
+        "mode",
+        "effect_ref",
+        "transport_state",
+        "provider_conversation_ref",
+        "operation_ref",
+        "archive_ref",
+        "handoff_ref"
+      ],
       "properties": {
         "kind": { "const": "transport" },
-        "provider": { "type": "string", "minLength": 1 },
-        "mode": { "type": "string", "enum": ["DIVERGENT", "CONVERGENCE", "MONITOR"] },
-        "round_id": { "type": "string", "pattern": "^[0-9a-f]{20}$" },
-        "operation_ref": { "$ref": "#/$defs/ref" },
+        "browser_identity": { "const": "BrowserTransport" },
+        "transport_assignment": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "requester": { "$ref": "#/$defs/requester_identity" },
+        "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "mode": {
+          "type": "string",
+          "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
+        },
+        "effect_ref": { "$ref": "#/$defs/nullable_ref" },
+        "transport_state": {
+          "type": "string",
+          "enum": ["PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST", "WAIVED"]
+        },
+        "provider_conversation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "operation_ref": { "$ref": "#/$defs/nullable_ref" },
         "archive_ref": { "$ref": "#/$defs/nullable_ref" },
         "handoff_ref": { "$ref": "#/$defs/nullable_ref" }
       }
