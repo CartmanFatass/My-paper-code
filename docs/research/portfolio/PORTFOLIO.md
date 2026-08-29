@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T11:12:00Z
+Updated at: 2026-08-29T14:59:27Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means Portfolio has not assigned an active direction owner; lifecycle remains authoritative independently.
 
@@ -31,7 +31,7 @@ this file does not contain a numeric VOI, aggregate score, Elo, or vote.
 | orbit_shadow_read | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | recct_lite | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | renewal_indexed_score_plasticity | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
-| roster_consistent_latent_exploration | ACTIVE | INDEPENDENT-VALIDATION | PORTFOLIO | 2026-08-29T11:12:00Z | Continue with a genuinely new host rather than repair or rerun the terminal assay. The prior Stage-A package was technically valid but failed prospective bidirectional sensitivity because the 5-to-10 recovery censor left insufficient headroom; its Convergence transport gap supplies no lifecycle conclusion. The successor must first analytically certify coherent public assignments, every scaffold threshold, and recovery headroom strictly exceeding the positive-control margin in both churn directions, then run only a fresh physical assay and cloned-state CARRY/REPLAN opportunity gate; stop before learning if any prerequisite fails |
+| roster_consistent_latent_exploration | ACTIVE | INDEPENDENT-VALIDATION | PORTFOLIO | 2026-08-29T14:59:27Z | Portfolio independently CONTINUES RCLE after the target-phase successor ended FAILED at a transport-contaminated terminal gap: no accepted synthesis or lifecycle evidence was produced. Do not rerun its forced canonical rekey. The next fresh WORK must construct a public churn host that genuinely requires nonzero reassignment, exactly enumerate the endpoint-optimal policy set under matched information, and test whether a competent public replan can select CARRY or the same maximum-overlap repair. Stop before CM or learning unless a concrete counterexample survives; transport supplied no direction disposition |
 | roster_smf | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | scope_1s | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | semantic_graphon_shared_policy | ACTIVE | DIVERSIFYING-STRUCTURAL | PORTFOLIO | 2026-08-29T11:12:00Z | Activated to replace the scientifically exhausted EGRCR slot. Prior Pro-closed RSCF evidence preserves a valuable role-sampled counterfactual object, while the existing package is too expensive for a practical short run. The first WORK must identify a meaning-preserving minimal role-sampled graphon counterfactual gate with prospective support, direct-value, competence, and cost ceilings; static or exact analysis is preferred, and failure to find a short-budget object is itself a valid negative investment result. Historical prompts and expensive launch packages are evidence only and are not reused |
