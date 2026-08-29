@@ -72,6 +72,26 @@ scientific branch is a bounded support-only result with no authorization for a
 relay comparison; its investment disposition remains subject to the mandatory
 fresh independent Convergence review and objection resolution.
 
+At `REVIEW_RESOLVED`, the fresh strict Convergence operation is `COMPLETE`:
+one send in a new conversation, exact owner-authored prompt fidelity, visible
+`Pro`, natural completion, and a full archived response. The independent
+review classified T3 as valid positive ordered-relation support but negative
+decision-relevant headroom over competent GAE. It agreed that the tiny positive
+probability shift is real yet scientifically negligible, common-uniform
+allocation is not hiding a material effect, the source-localized panel proves
+host causality but no algorithmic advantage, and no relay run is justified.
+
+Every material objection is dispositioned in
+`evidence/2026-08-28-10-clean-successor-02-convergence-disposition.md`.
+Connector non-auditability, the idealized exact-value comparator, direct pair
+representation, physical rather than intrinsic identity, single-update scope,
+and fixed-object localization all remain explicit claim limits. The positive
+probability interval is retained as contradicting literal proximal equality,
+but actual allocation and normalized utility remain exactly equal at every
+root. The exact T3 object is operationally exhausted and retained as a
+positive support fixture. The EM investment recommendation is `PARK` pending
+genuinely new evidence; this advice does not mutate Portfolio lifecycle.
+
 ## Predecessor revision 2026-08-28.10 cycle
 
 Successor material research cycle
