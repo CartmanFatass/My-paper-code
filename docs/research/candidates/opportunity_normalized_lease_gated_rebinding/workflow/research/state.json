@@ -1,58 +1,41 @@
 {
-  "blockers": [
-    "Mandatory independent Convergence acceptance is unreachable. Original operation 67aa9e40-e640-423d-afc6-1e9ea1fcaa9a and the sole replacement 4745c83a-f4f0-4523-82f7-40366172ca23 are isolated terminal SENT_INPUT_MISMATCH facts with no certified response archive, replacement_used is true, and no third send is authorized. The cycle reached SYNTHESIS_READY but not REVIEW_RESOLVED or HANDOFF_READY; no live Effect remains."
-  ],
-  "claim_ceiling": "At most, on the registered constructed two-agent host, frozen checkpoints, paired coordinates, and finite PPO budget, the complete ONLGR package improved the registered worst-schedule normalized return and post-action IID normalized return and service over the matched RAW learner while failing to improve the registered seven-schedule mean. The IID advantage did not require current binding or mismatch content on the registered materiality margin, and B2 did not demonstrate material timing or tenure value beyond one learned global rate. No RAW representational impossibility, literal hazard, causal lease or REBIND value, arbitrary or continuous callback periods, variable population size, UAV performance or transfer, safety certification, or general PPO superiority is established.",
-  "completed_summary": "Successor cycle 2026-08-28.10-pilot-01a04a02-onlgr-successor-01 reached a bounded SYNTHESIS_READY interpretation. Authoritative transport evidence establishes exact Innovator operation 672afd22-ec25-490e-8b61-7d2db0991078 as COMPLETE / NATURAL_COMPLETION_VERIFIED after exactly one send and one send action, with persisted user and assistant identities bound, prior error and failureStage cleared, visible Pro, exact prompt fidelity, and immutable response certification under terminal_lf_v1. Repository and Innovator evidence synthesize to a local finite-budget package result: post-action IID persistence rules out deterministic next-cadence prediction and pure cost-only inaction as complete explanations of the ONLGR-over-RAW gap, but TIMING-ONLY, the fixed-rate diagnostic, B2, unavailable operational partition, and ROAD competent-null warning do not support material task-content or timing-flexible lease/rebinding value. No current-scope CM observation was decision-changing, so no CM task or experiment existed. Mandatory Convergence acceptance is nevertheless exhausted: both the original and sole replacement operations are isolated SENT_INPUT_MISMATCH facts with no archive, and no third send is authorized. With no live Effect remaining, this WORK ends FAILED at TERMINAL_GAP before REVIEW_RESOLVED or HANDOFF_READY. Scientific status actually reached is SYNTHESIZED; Decision impact narrows the mechanism interpretation to a host- and budget-specific global exposure-linked regularization hypothesis; Recommendation is NONE.",
+  "blockers": [],
+  "claim_ceiling": "At most this cycle can establish a prospective finite-host, finite-checkpoint, finite-seed, finite-budget direct-return contrast among explicitly matched policies, or a bounded null within a frozen margin. It cannot establish RAW representational impossibility, a literal hazard, causal lease or REBIND value, arbitrary or continuous callback periods, arbitrary k, variable population size, UAV performance or transfer, safety certification, or general PPO superiority. Even positive headroom and heterogeneity justify only the matched second-stage comparison, not its conclusion.",
+  "completed_summary": "Fresh successor cycle 2026-08-28.10-clean-01a04a02-onlgr-successor-02 is scope-frozen from exact terminal direction head d4cab98752869a1229dbc80c834f2753a860a0df without reopening either predecessor cycle. Neutral repository grounding preserves the mixed B1, B2, and ROAD/RAW/NEVER/SHAM evidence and finds that it constrains but does not directly answer the prospective direct-return headroom and physical-time heterogeneity gates. Both fresh Pro stages are PENDING and neither replacement boundary has been used. No CM task or experiment exists.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
-  "milestone": "SYNTHESIS_READY",
-  "next_action": "No further action is authorized under this terminal WORK. Portfolio may join this FAILED result and, only afterward, separately dispatch a fresh WORK if it chooses; this EM does not create successor work or perform a lifecycle or capacity action.",
-  "next_discriminator": "Only prospectively, after result-blind evidence establishes material direct-return headroom over both a competent global exposure-linked rate and a competent no-action or matched-shell comparator plus materially different best event probabilities across predeclared equal-physical-time exposure or tenure strata, compare one learned global exposure-linked rate with one learned global per-opportunity probability under matched initial marginal behavior, PPO work, shell, post-action IID coordinates, and direct-value controls.",
+  "milestone": "SCOPE_FROZEN",
+  "next_action": "Dispatch exactly one fresh strict Innovator operation in a new provider conversation using the frozen natural-language prompt, visible GPT-5.6 Pro reasoning mode, exact prompt fidelity, one send at most, and natural-completion archival acceptance.",
+  "next_discriminator": "A result-blind prospective screen must first test direct-return headroom over a learned global exposure-linked rate, genuine no-voluntary-action policy, and matched shell, then supported material differences in optimal voluntary-event probability across predeclared equal-width physical-time exposure or tenure strata. Only if both pass may lambda-linked and per-opportunity global learners be compared.",
   "reentry_condition": null,
   "refs": [
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-scope-and-grounding.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-synthesis-packet.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-em-synthesis.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-terminal-gap.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-pro-innovator-prompt.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-pro-innovator.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-pro-convergence-prompt.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-scope-and-grounding.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator-prompt.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B1_RESULT.json",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_STATE_BLIND_EVENT_RATE_FLEXIBILITY_SCIENCE_CARD.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_RESULT.json",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_TBVUUS_R03_RESULT_V2_SCIENTIFIC_INTAKE_20260821.md",
-    "Direction head at cycle open acf788037d8215142f8f03e72dab1d78ac0e5e3a",
-    "Portfolio-authority parent c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_STATE_BLIND_EVENT_RATE_FLEXIBILITY_SCIENCE_CARD.md",
+    "Direction head at cycle open d4cab98752869a1229dbc80c834f2753a860a0df",
+    "Read-only Portfolio authority 8812e5ed26e57310c7f9deb3d96697be4233c54f",
     "Public scientific anchor 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
-    "Retained scientific baseline b4762febd12b62748d35e2b1a1dffdfb8d776180",
-    "Pre-terminal snapshot head e553d6e0bf6db3527d0bd4aebef80c717e07bffd",
-    "Top-level EM task 01a04a08-33a3-7292-8c21-95d17715ea2f; native model gpt-5.6-sol; effort max",
-    "Innovator transport task 01a04b62-3e4a-7bc3-b17c-b8ec723b9e12; native model gpt-5.6-luna; effort medium",
-    "Innovator operation 672afd22-ec25-490e-8b61-7d2db0991078; key 2026-08-28.10-pilot-01a04a02-onlgr-successor-01-innovator; request fingerprint a511ebaaaf82da4f150ef10ddb616e9bff93e7063c8115ba4f17f60fe82eac92; provider conversation 6a9246d7-53b4-83e8-9d3a-4894aa023af3; visible Pro; exactly one send and one send action; COMPLETE / NATURAL_COMPLETION_VERIFIED",
-    "Innovator prompt 6,851 bytes; SHA-256 b832edf15df1757d08bcea6f0d0572129c5e6f0fe8293152a0c5e15ef8b3f982",
-    "Innovator responseArchiveProjection terminal_lf_v1; rendered causal assistant 23,545 bytes; immutable archive 23,546 bytes; SHA-256 36b72e2a0508a2a4d9418517323a296ef562ad77f4ba583644638234184a9ff5",
-    "Original Convergence operation 67aa9e40-e640-423d-afc6-1e9ea1fcaa9a; key 2026-08-28.10-pilot-01a04a02-onlgr-successor-01-convergence; request fingerprint 694207968f560527c48caa56974029a4f8f236df3e289e8d2c34ec69494a5eb3; tab 789bc49f-01f0-487b-a2f1-5c55f89f0425; visible Pro; exactly one send; SENT_INPUT_MISMATCH; review_user_message_content_mismatch; response archive NONE",
-    "Replacement Convergence operation 4745c83a-f4f0-4523-82f7-40366172ca23; key 2026-08-28.10-pilot-01a04a02-onlgr-successor-01-convergence-replacement-1; request fingerprint a94c9abba4d3bb93c7e149282cbf3dfdf6c390390f1a4b92624d3d64bcb1dcf3; tab 1b469e6d-7a90-40c9-a792-9450c91c3d0d; visible Pro; exactly one send; SENT_INPUT_MISMATCH; review_user_message_content_mismatch; response archive NONE; replacement boundary consumed"
+    "Top-level EM task 01a04a08-33a3-7292-8c21-95d17715ea2f; native model gpt-5.6-sol; effort max"
   ],
   "research_cycle": {
-    "label": "2026-08-28.10-pilot-01a04a02-onlgr-successor-01",
-    "opened_at": "2026-08-29T02:34:06Z",
+    "label": "2026-08-28.10-clean-01a04a02-onlgr-successor-02",
+    "opened_at": "2026-08-29T04:37:53.4802735Z",
     "pro_convergence": {
-      "replacement_used": true,
+      "replacement_used": false,
       "response": null,
-      "status": "SENT_INPUT_MISMATCH"
+      "status": "PENDING"
     },
     "pro_innovator": {
       "replacement_used": false,
-      "response": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-pro-innovator.md",
-      "status": "COMPLETE"
+      "response": null,
+      "status": "PENDING"
     },
-    "reason": "Portfolio requested one clean current-protocol successor cycle to determine whether ONLGR carries decision-relevant task-content or future-cadence information beyond RAW, timing-only behavior, fixed/global-rate or NEVER/SHAM-like regularization, deterministic cadence leakage, and generic exposure reduction."
+    "reason": "Portfolio requested a clean current-protocol prospective screen of direct-return headroom and physical-time heterogeneity before any matched global exposure-link versus per-opportunity comparison."
   },
-  "revision": 12,
+  "revision": 13,
   "role": "EM",
-  "snapshot_state": "TERMINAL_GAP",
-  "updated_at": "2026-08-29T04:26:50.641089Z"
+  "snapshot_state": "WORKING",
+  "updated_at": "2026-08-29T04:37:53.4802735Z"
 }

@@ -17,6 +17,23 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
+## Active clean successor question
+
+Material cycle `2026-08-28.10-clean-01a04a02-onlgr-successor-02` is a fresh
+prospective screen and does not reopen the terminal predecessor. It first asks
+whether direct-return headroom survives competent learned-global-exposure,
+no-voluntary-action, and matched-shell controls and whether direct-return-optimal
+event probabilities differ materially across result-blind physical-time exposure
+or tenure strata. Only if both gates pass may the cycle compare one learned
+global exposure-linked rate with one learned global per-opportunity probability
+under matched initialization, work, shell, IID coordinates, and direct-value
+controls. Failure of either gate ends the executable branch as a bounded result.
+
+The frozen neutral scope and external Innovator question are recorded at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator-prompt.md`
+
 ## Current bounded successor-cycle synthesis
 
 Successor cycle `2026-08-28.10-pilot-01a04a02-onlgr-successor-01` reached a
