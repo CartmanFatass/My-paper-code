@@ -43,6 +43,17 @@ No scientific branch is selected at `SCOPE_FROZEN`. The predecessor cycle's
 provider prompts, operations, conversations, incomplete Convergence, and
 preliminary recommendation remain historical and are not reused or adopted.
 
+The fresh strict Innovator operation then completed with exact prompt/model
+fidelity, natural completion, and a full archive. Its substantive proposal was
+independently checked rather than adopted from transport. The smallest
+decision-changing observation is one staged three-agent directed-cycle
+support, comparator-competence, oracle-headroom, and source-localized-control
+test. It contains no relay arm and stops at the first failed prerequisite.
+The exact host, data, RNG, roots, policy/value controls, thresholds, command,
+artifacts, resource ceiling, predictions, and interpretation branches are
+frozen in `EGRCR_T3_PREREQUISITE_SCIENCE_CARD.md`. A fresh CM is required to
+produce this one observation; no experiment command is authorized to EM.
+
 ## Predecessor revision 2026-08-28.10 cycle
 
 Successor material research cycle
