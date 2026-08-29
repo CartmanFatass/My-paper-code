@@ -1,0 +1,79 @@
+"""Frozen constants for the EGRCR-T3 prerequisite.
+
+The values in this module are the EM-owned experiment contract.  Runtime code
+may report them, but must not infer replacements from observations.
+"""
+
+from __future__ import annotations
+
+TREATMENT = "EGRCR-T3-DIRECTED-CYCLE-SUPPORT-ORACLE-HEADROOM-v1"
+ARTIFACT_KIND = "egrcr_t3_prerequisite_result"
+ARTIFACT_SCHEMA_VERSION = 1
+STARTING_COMMIT = "650e8029a0ea2c28d7b73056378dd3556101057d"
+
+AGENTS = (0, 1, 2)
+BLOCK_TICKS = 10
+WAITER_REQUEST_TICK = 2
+JOINER_SOURCE_TICK = 3
+JOINER_FALLBACK_TICK = 4
+WAITER_EXPIRY_TICK = 6
+OUTCOME_BOUNDARY_TICK = 8
+TERMINAL_PADDING_TICK = 9
+SERVICE_TICKS = (4, 5, 6, 7, 8)
+SLOTS_PER_SERVICE_TICK = 2
+SERVICE_PROBABILITY = 0.8
+DEPLOYMENT_COST = 0.01
+DEPLOYMENTS_PER_WORLD = 2
+STORED_BEHAVIOR_PROBABILITY = 0.5
+
+# Joiner-major ordering makes each favorable/reverse comparison adjacent.  The
+# scientific result never uses this ordering to determine compatibility.
+ORDERED_PAIRS = ((2, 0), (1, 0), (0, 1), (2, 1), (1, 2), (0, 2))
+PAIR_TO_INDEX = {pair: index for index, pair in enumerate(ORDERED_PAIRS)}
+FAVORABLE_PAIRS = ((2, 0), (0, 1), (1, 2))
+UNFAVORABLE_PAIRS = ((1, 0), (2, 1), (0, 2))
+
+CALIBRATION_ROOTS = (223, 227, 229, 233, 239, 241)
+CONFIRMATION_ROOTS = (251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313)
+GAE_LAMBDAS = (0.0, 0.5, 0.95, 1.0)
+GAMMA = 1.0
+
+TRAINING_REPETITIONS_PER_ACTION_CELL = 16
+ELIGIBLE_SOURCE_RECORDS_PER_ROOT = 192
+COMPLETE_TRACE_RECORDS_PER_ROOT = ELIGIBLE_SOURCE_RECORDS_PER_ROOT * len(AGENTS) * BLOCK_TICKS
+EVALUATION_DYADS_PER_JOINER = 32
+EVALUATION_TOKENS_PER_ROOT = EVALUATION_DYADS_PER_JOINER * len(AGENTS)
+EVALUATION_OPPORTUNITIES_PER_ROOT = 2 * EVALUATION_TOKENS_PER_ROOT
+
+# These four strings are part of the frozen counter-key identity.
+TRAINING_SERVICE_NAMESPACE = "training-service-v1"
+EVALUATION_SERVICE_NAMESPACE = "evaluation-service-v1"
+EVALUATION_TOKEN_NAMESPACE = "evaluation-token-choice-v1"
+CALIBRATION_NAMESPACE = "calibration-panel-v1"
+NAMESPACES = {
+    "training_service": TRAINING_SERVICE_NAMESPACE,
+    "evaluation_service": EVALUATION_SERVICE_NAMESPACE,
+    "evaluation_token_choice": EVALUATION_TOKEN_NAMESPACE,
+    "calibration": CALIBRATION_NAMESPACE,
+}
+
+KL_MAX = 0.02
+SUPPORT_CONTRAST_MIN = 0.50
+BALANCE_TOLERANCE = 1e-12
+BELLMAN_RESIDUAL_MAX = 1e-12
+COMPETENCE_COSINE_MIN = 0.999
+COMPETENCE_ALLOCATION_DIFFERENCE_MAX = 1e-6
+HEADROOM_MEAN_MIN = 0.10
+GAE_ABOVE_CHANCE_MIN = 0.50
+NATIVE_EXCESS_MEAN_MIN = 0.05
+TCRIT_11 = 2.2009851600916396
+
+MAX_CPU_WORKERS = 1
+MAX_WALL_SECONDS = 15 * 60
+MAX_RSS_BYTES = 2 * 1024**3
+MAX_THREE_AGENT_PHYSICAL_TICKS = 1_500_000
+
+CLAIM_CEILING = (
+    "one fixed three-agent finite-horizon bounded single-update "
+    "support/headroom prerequisite"
+)
