@@ -166,6 +166,14 @@ engineering-cost veto.
 This audit creates no shared-core merge, code movement, experiment authorization, provider operation,
 or direction cancellation. It records Portfolio's scientific allocation judgment only.
 
+The two released slots were filled from Portfolio authority
+`b3915fbc59d8fe3171fd1e70f72acad9be9c2acf`: FSBS EM
+`01a04e22-2f64-7153-bcfc-d4b5d916179b` owns cycle
+`2026-08-29.8-portfolio-fsbs-carrier-mediation-01`, and VQFP EM
+`01a04e22-2f5a-7423-8b60-95d35d150109` owns cycle
+`2026-08-29.8-portfolio-vqfp-proof-gate-01`. Both are native HMASD worktree tasks configured
+`gpt-5.6-sol` / `max`; neither is an archived-task reuse.
+
 The eighteen standalone closures are summarized for provenance and noninterference in
 `docs/research/portfolio/legacy/2026-08-29-standalone-direction-closure-report.md`. That legacy report
 is historical evidence only; it is not current authority or a future workflow dependency.
