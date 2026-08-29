@@ -17,7 +17,7 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
-## Active clean successor question
+## Clean successor 02 question and terminal disposition
 
 Material cycle `2026-08-28.10-clean-01a04a02-onlgr-successor-02` is a fresh
 prospective screen and does not reopen the terminal predecessor. It first asks
@@ -42,6 +42,18 @@ EM-to-CM contract are frozen at:
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator-and-discriminator-freeze.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-em-to-cm-work.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator.md`
+
+The sole authorized B3 result process terminated, but its package did not
+satisfy the frozen hard resource-observation contract: peak RSS was recorded as
+zero, `psutil` was unavailable, and the launcher supplied no alternative RSS
+witness. The package's internal `BOUNDED_NO_HEADROOM` branch is therefore
+quarantined from scientific inference. No valid new observation or synthesis
+was reached, and no Convergence request was sent. The cycle ends
+`Outcome: FAILED`, `Scientific status: NOT_REACHED`, `Decision impact: NONE`,
+`Recommendation: NONE`, and snapshot state `TERMINAL_GAP`. Its exact technical,
+transport, Git, quarantine, and claim-ceiling facts are recorded at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-terminal-gap.md`
 
 ## Current bounded successor-cycle synthesis
 
