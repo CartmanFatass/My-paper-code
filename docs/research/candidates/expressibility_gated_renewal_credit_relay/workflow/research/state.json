@@ -1,15 +1,12 @@
 {
-  "blockers": [
-    "The sole fresh Innovator operation cb925390-c77e-4f2d-bfcb-1963f316ca3e remains SENT_UNREADABLE after the authorized resumed no-send observation: one send and one user turn are recorded, but Agentify still exposes no concrete provider message/conversation identity, so exact prompt fidelity, visible Pro mode, natural completion, and a full response cannot be established.",
-    "The missing binding is not strict zero-send proof or positive conversation-loss evidence. Current protocol forbids resend or replacement and leaves Convergence, CM, experiments, scientific synthesis, and recommendation unavailable."
-  ],
+  "blockers": [],
   "claim_ceiling": "At most a finite-host, two-agent, one-update statement about whether same-information ordered waiter association changes the named bounded utility and fixed-token allocation contrasts. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; an exhausted host would be a bounded negative result, not a general impossibility theorem.",
-  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. The sole fresh Innovator primary operation cb925390-c77e-4f2d-bfcb-1963f316ca3e made exactly one send-capable call in a new ChatGPT conversation with requested visible model Pro and frozen prompt blob b7a71ab0e4fdddb2bdd5ded13048b454c0e8ec8f. Root RESUME at 2026-08-29T02:12:00Z authorized only bounded same-operation no-send recovery. The current transport leaf observed the durable fact again: one sent user turn remains recorded, but no concrete provider message/conversation identity is available. Pro remains SENT_UNREADABLE with no response archive and no authorized replacement; no CM, experiment, synthesis, Convergence, or recommendation was reached.",
+  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. The sole fresh Innovator primary operation cb925390-c77e-4f2d-bfcb-1963f316ca3e made exactly one send-capable call with requested visible model Pro and frozen prompt blob b7a71ab0e4fdddb2bdd5ded13048b454c0e8ec8f. Root now establishes after reviewed observer restoration and clean runtime restart that the exact naturally completed provider conversation is https://chatgpt.com/c/6a9243b9-7d88-83e8-83a2-c6f013ed45d0 and is reopened in Agentify tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3. This RESUME authorizes only no-send archival recovery through the same current transport leaf and immutable operation/keys. Pro remains SENT_UNREADABLE until exact prompt, visible Pro evidence, full response, and archive are verified; no replacement, CM, experiment, synthesis, Convergence, or recommendation has been reached.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Hold this exact successor WORK and Innovator operation without any new send, conversation, replacement, CM task, experiment, synthesis, or Convergence launch. On reentry, use only same-operation non-sending observation against cb925390-c77e-4f2d-bfcb-1963f316ca3e.",
-  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this remains scientifically inactive until the mandatory Innovator operation is validly resolved.",
-  "reentry_condition": "Agentify exposes a concrete provider conversation and user-message binding for operation cb925390-c77e-4f2d-bfcb-1963f316ca3e that can be reopened and observed without sending.",
+  "next_action": "Use the repaired current transport observer on exact operation cb925390-c77e-4f2d-bfcb-1963f316ca3e, idempotency key egrcr-successor-2026-08-28-10-innovator-primary-29fdf436, stable key egrcr-successor-2026-08-28-10-innovator, concrete conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0, and reopened tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3 for bounded no-send archival recovery only.",
+  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this becomes scientifically active only after the mandatory Innovator archive is validly complete.",
+  "reentry_condition": null,
   "refs": [
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-scope-and-grounding.md",
@@ -25,12 +22,16 @@
     "1598b5b08a4e8fb02de87ffd3acd09215e0eb94a",
     "0fce37093e5611415fe51304ebcf914bbc83602e",
     "d260366541da097d31f91118778ab78faa072701",
+    "7b0697b8772b07758efe042a99884cf314a420e7",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180",
     "Agentify operation cb925390-c77e-4f2d-bfcb-1963f316ca3e",
+    "Agentify idempotency key egrcr-successor-2026-08-28-10-innovator-primary-29fdf436",
     "Agentify stable key egrcr-successor-2026-08-28-10-innovator",
-    "[CONTROL] RESUME from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-29T02:12:00Z"
+    "Provider conversation https://chatgpt.com/c/6a9243b9-7d88-83e8-83a2-c6f013ed45d0",
+    "Agentify reopened tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3",
+    "[CONTROL] RESUME observer restoration from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-29T02:12:00Z"
   ],
   "research_cycle": {
     "label": "2026-08-28.10-pilot-01a04a02-egrcr-successor-01",
@@ -47,8 +48,8 @@
     },
     "reason": "Fresh current-protocol successor cycle to decide whether a bounded same-information association discriminator exists beyond ordinary GAE or whether the retained exact utility/allocation null and absent consequence-distinct identity support exhaust the current host."
   },
-  "revision": 5,
+  "revision": 6,
   "role": "EM",
-  "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-29T02:43:26.792568Z"
+  "snapshot_state": "WORKING",
+  "updated_at": "2026-08-29T03:03:16.630309Z"
 }
