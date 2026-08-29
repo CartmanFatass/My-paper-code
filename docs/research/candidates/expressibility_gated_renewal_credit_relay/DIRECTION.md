@@ -54,6 +54,24 @@ artifacts, resource ceiling, predictions, and interpretation branches are
 frozen in `EGRCR_T3_PREREQUISITE_SCIENCE_CARD.md`. A fresh CM is required to
 produce this one observation; no experiment command is authorized to EM.
 
+Fresh top-level CM task `01a04be9-9a99-7002-9730-f1ae88dd117a` was created
+from exact EM commit `650e8029a0ea2c28d7b73056378dd3556101057d`
+with explicit `gpt-5.6-sol` / `high`. Its one result command terminated
+successfully, and its exact return commit
+`e861269dbf6425d9dffcf1e0734dcba13f39e479` was accepted only by
+fast-forward. The current `SYNTHESIS_READY` observation passed balanced
+identity support and competent-GAE controls but did not pass oracle headroom:
+native oracle-minus-GAE actual allocation and normalized bounded utility were
+both exactly zero at every root despite a small positive probability shift.
+The path-severed support contrast collapsed to zero as required, while the
+source-localized panel supplied no positive native-specific headroom.
+
+The traceable conclusion-blind packet is
+`evidence/2026-08-28-10-clean-successor-02-evidence-packet.md`. The preliminary
+scientific branch is a bounded support-only result with no authorization for a
+relay comparison; its investment disposition remains subject to the mandatory
+fresh independent Convergence review and objection resolution.
+
 ## Predecessor revision 2026-08-28.10 cycle
 
 Successor material research cycle
