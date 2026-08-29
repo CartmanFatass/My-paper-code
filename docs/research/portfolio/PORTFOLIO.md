@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T18:32:37Z
+Updated at: 2026-08-29T18:35:33Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -27,7 +27,7 @@ how to stage a valuable question, not whether that question has value.
 | commitment_residual_triggered_options | PARKED | MEDIUM | NONE | 2026-08-29T18:32:37Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal cycle `2026-08-29.8-portfolio-crto-probe-cut-01` at `HANDOFF_READY`: only scalar update-1,000 probe results persisted, while the exact probe parameters and Adam continuation state were discarded. The update-10,000 endpoint is therefore unobserved rather than failed, and no representation-versus-optimization polarity follows. PARK releases an operationally nonexecutable slot while preserving the scientific question. Re-open only on a provenance-linked process/VM snapshot or an exact full-state equality witness for the original update-1,000 continuation state; a canonical replay is a materially different object requiring a new Portfolio decision. |
 | covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
 | degraded_incumbent_shadow_handover | REGISTERED | HIGH | NONE | 2026-08-29T16:57:57Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal preactivity-certificate WORK `2026-08-29.8-portfolio-dish-preactivity-certificate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Its mandatory Pro stage was `ZERO_SEND_FAILED` and supplies no scientific polarity. Two local audits found no proper subset, symmetry, static timing, containment-only or monotone-envelope certificate sufficient for the full R06 branch family; they did not synthesize direct-handover value. Preserve the unanswered high-value full object. Reentry requires eligible independent consultation (or exact waiver), a named <=8-core substrate/process design with result-blind concurrency/overhead evidence, a current-byte engineering map and fresh proportionality judgment. Cost and transport change staging only; neither PARKS or CLOSES DISH. |
-| dual_epoch_receipt_survival | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T18:32:37Z | Readiness `DISPATCH-PENDING`. Portfolio activates fresh cycle `2026-08-29.8-portfolio-dears-semantic-currentness-02`, not R01. In one matched live-versus-broken lineage pair the old retained bit is held fixed, while the current bit remains equal when live and becomes conditionally fresh after the selected lineage break. Exact support and native-action headroom must precede any learning. Compare semantic-currentness-gated retention, equal-content ungated old-bit use, the unrestricted exact raw-history optimum and the competent bit-deleted reset. Stop unless the gated rule matches the raw optimum in both cells, beats reset live and beats ungated old-bit use broken. Any positive claim is deterministic currentness/protocol value only; exact raw containment, no learned-abstraction claim and all R01 nonclaims remain protected. |
+| dual_epoch_receipt_survival | ACTIVE | ADVANCING | EM | 2026-08-29T18:35:33Z | Readiness `LIVE`. Sol/max EM `01a04e94-b3e0-77e2-ae27-6b29df5dad1a` owns fresh cycle `2026-08-29.8-portfolio-dears-semantic-currentness-02`, not R01. In one matched OWNER-lineage live-versus-broken pair the old retained bit is held fixed, while the current bit remains equal when live and becomes conditionally fresh after the break. Exact support and native-action headroom must precede any learning. Compare semantic-currentness-gated retention, equal-content ungated old-bit use, the unrestricted exact raw-history optimum and the competent bit-deleted reset. Stop unless the gated rule matches the raw optimum in both cells, beats reset live and beats ungated old-bit use broken. Any positive claim is deterministic currentness/protocol value only; exact raw containment, no learned-abstraction claim and all R01 nonclaims remain protected. |
 | ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
 | eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
 | event_triggered_budgeted_cooperative_renewal | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Coordinated learned renewal and the stage oracle both lost to fixed-4. Fixed-k and common-rate controls are retained inside ONLGR/SCDMP; the same EBCR object is exhausted. |
@@ -63,7 +63,7 @@ lifecycle inference. Portfolio immediately refills the released slot with DEARS'
 semantic-currentness object. SCDMP, VQFP and ONLGR retain their exact WORKs. The allocated advancing
 set is:
 
-- `dual_epoch_receipt_survival`, dispatch pending this Portfolio authority, cycle
+- `dual_epoch_receipt_survival`, EM `01a04e94-b3e0-77e2-ae27-6b29df5dad1a`, cycle
   `2026-08-29.8-portfolio-dears-semantic-currentness-02`: does a selected owner or lease-lineage
   break make equal retained content semantically stale in a way that changes the exact return-optimal
   native action, rather than merely triggering a hand-written verifier? Exact static support, the
@@ -80,10 +80,10 @@ set is:
   on the frozen non-divisible clock cell, does any link-specific return survive common executed-rate
   and age-conditioned ceilings?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T18:32:37Z`, CRTO
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T18:35:33Z`, CRTO
 EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` is terminal and its slot is released. SCDMP EM
-`01a04ec6-0cd2-74f3-b589-09083ae7670c` is natively active. DEARS is selected but is not counted as
-live until the exact successor WORK is sent after this authority commit. ONLGR's EM is idle but its
+`01a04ec6-0cd2-74f3-b589-09083ae7670c` and DEARS EM
+`01a04e94-b3e0-77e2-ae27-6b29df5dad1a` are natively active. ONLGR's EM is idle but its
 already-sent Convergence operation
 `5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
 `SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
