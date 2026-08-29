@@ -1,38 +1,43 @@
 {
-  "blockers": [
-    "[CONTROL] PAUSE received at 2026-08-28T20:46:00Z: requester directed this exact inbound WORK, direction, cycle, and task to remain unfinished after detecting a material transport-contract regression.",
-    "Exact preserved transport facts only: the already-sent Innovator provider turn ended immediately after 'and only these repository-relative refs:'; the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE'. Neither fact is scientific evidence or lifecycle input, and neither operation may be resent, modified, replaced, or reinterpreted."
-  ],
-  "claim_ceiling": "The retained repository evidence supports only the bounded B1 statement that the ordered joiner-to-waiter edge and later-record update were expressive but intact produced exactly no bounded-utility or fixed-token allocation gain over ordinary GAE in the registered two-agent one-update host. No provider-turn fact changes this ceiling. No association-specific algorithm value, end-to-end variable-k, fixed-k superiority, multi-update, learned-estimator, UAV, safety, or general credit claim is supported; the bounded null is not a general impossibility theorem.",
-  "completed_summary": "Preserved the current cycle's committed scope, repository evidence packet, static audit, objection dispositions, handoff draft, and linear EM commit chain. After the requester detected that the already-sent Innovator provider turn ended after the refs-introduction phrase and the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE', [CONTROL] PAUSE superseded terminal progression and directed this same inbound WORK to remain unfinished. These are transport-contract facts only and are not mapped to scientific status, recommendation, Portfolio action, or lifecycle.",
+  "blockers": [],
+  "claim_ceiling": "At most a finite-host, two-agent, one-update statement about whether same-information ordered waiter association changes the named bounded utility and fixed-token allocation contrasts. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; an exhausted host would be a bounded negative result, not a general impossibility theorem.",
+  "completed_summary": "Opened the fresh revision 2026-08-28.10 successor cycle after fast-forwarding the clean EM worktree from integrated head d8f02e378c1253462a22cdceb0a8b3537ff617c2 to Portfolio authority c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11. Froze the neutral question, scientific object, alternatives, support-and-headroom discriminator, decision branches, one-round resource ceiling, early stops, scope invalidators, and claim ceiling. The old cycle and its contaminated provider operations remain terminal historical evidence only. Both successor Pro stages are fresh and PENDING; no CM or experiment was launched.",
   "direction": "expressibility_gated_renewal_credit_relay",
-  "milestone": "HANDOFF_READY",
-  "next_action": "Hold this exact inbound WORK. Perform no new launch, send, resend, continuation, replacement, provider fallback, CM creation, experiment, or terminal RESULT until an explicit [CONTROL] RESUME supplies the reentry direction while preserving both already-sent operations exactly.",
-  "next_discriminator": "Scientific discriminator remains unchanged and inactive during PAUSE: independently establish consequence-distinct waiter identities in one generic pre-action/cue/sign stratum and prospective same-information oracle scarce-allocation and bounded-utility headroom over ordinary GAE before any future identity-only test.",
-  "reentry_condition": "Receive explicit [CONTROL] Action: RESUME for this exact WORK with instructions that preserve, do not resend, do not modify, do not replace, and do not reinterpret either already-sent Pro operation.",
+  "milestone": "SCOPE_FROZEN",
+  "next_action": "Commit the frozen scope and exact natural-language Innovator prompt, then launch exactly one fresh strict Innovator transport operation with provider-visible Pro model evidence, exact prompt fidelity, and a normal 45-minute observation window.",
+  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; only if both pass may one association-only key derangement become executable.",
+  "reentry_condition": null,
   "refs": [
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-innovator.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-convergence.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-handoff.md",
-    "2a56a187516460a2a3ba4c786e2fe572b5d8913e",
-    "[CONTROL] PAUSE from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-28T20:46:00Z"
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-scope-and-grounding.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-pilot-01a04a02-egrcr-successor-01-pro-innovator-prompt.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_SCIENCE_CARD.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_RESULT.json",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_TECHNICAL_RESULT_INTAKE.md",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/config.py",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/experiment.py",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/run.py",
+    "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
+    "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
+    "b4762febd12b62748d35e2b1a1dffdfb8d776180"
   ],
   "research_cycle": {
-    "label": "2026-08-28.7-pilot-01a04a02-egrcr",
-    "opened_at": "2026-08-28T20:23:09Z",
+    "label": "2026-08-28.10-pilot-01a04a02-egrcr-successor-01",
+    "opened_at": "2026-08-29T02:22:00.945Z",
     "pro_convergence": {
-      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-convergence.md",
-      "status": "COMPLETE"
+      "replacement_used": false,
+      "response": null,
+      "status": "PENDING"
     },
     "pro_innovator": {
-      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-innovator.md",
-      "status": "COMPLETE"
+      "replacement_used": false,
+      "response": null,
+      "status": "PENDING"
     },
-    "reason": "Fresh revision 2026-08-28.7 Portfolio enabling-discriminator cycle to decide whether retained B1 evidence already resolves ordered waiter-credit utility/allocation or whether one smaller identity-preserving test remains decision-changing."
+    "reason": "Fresh current-protocol successor cycle to decide whether a bounded same-information association discriminator exists beyond ordinary GAE or whether the retained exact utility/allocation null and absent consequence-distinct identity support exhaust the current host."
   },
-  "revision": 5,
+  "revision": 1,
   "role": "EM",
-  "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-28T20:47:44.041614Z"
+  "snapshot_state": "WORKING",
+  "updated_at": "2026-08-29T02:22:00.945Z"
 }

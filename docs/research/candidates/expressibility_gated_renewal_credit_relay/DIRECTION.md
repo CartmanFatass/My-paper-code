@@ -19,6 +19,37 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Current material cycle
 
+Successor material research cycle
+`2026-08-28.10-pilot-01a04a02-egrcr-successor-01` is the current revision
+2026-08-28.10 Portfolio reassessment. It is based on integrated local authority
+commit `c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11` and grounds public scientific
+inspection at exact origin-reachable commit
+`2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81`, while retaining
+`b4762febd12b62748d35e2b1a1dffdfb8d776180` as the original B1 scientific
+baseline.
+
+The successor independently asks whether one bounded, same-information
+discriminator can expose association-specific ordered waiter credit beyond
+ordinary GAE, or whether the exact intact-versus-GAE utility/allocation null
+and the host's absence of consequence-distinct waiter identities exhaust the
+current scientific object. A new executable observation is eligible only if
+both consequence-distinct waiter identities exist within one generic
+pre-action/cue/sign stratum and a prospective same-information oracle shows
+scarce-allocation or bounded-utility headroom over ordinary GAE. The frozen
+question, neutral alternatives, decision branches, and Effect bounds are in
+`evidence/2026-08-28-10-successor-scope-and-grounding.md`.
+
+Until this successor reaches its own synthesis, no current scientific
+recommendation is recorded here. The claim ceiling remains bounded to B1: the
+ordered edge and later-record update were expressive and correct binding beat
+the registered opposite-type corruption, but intact produced exactly no
+bounded-utility or fixed-token allocation gain over ordinary GAE. No
+association-specific algorithm value, end-to-end variable-`k`, fixed-`k`
+superiority, multi-update, learned-estimator, UAV, safety, or general credit
+claim is available.
+
+## Historical revision 2026-08-28.7 cycle
+
 Material research cycle `2026-08-28.7-pilot-01a04a02-egrcr` is the fresh
 revision 2026-08-28.7 Portfolio pilot continuation. It starts from exact
 origin-reachable baseline `b4762febd12b62748d35e2b1a1dffdfb8d776180` and
@@ -97,6 +128,15 @@ learned-estimator, UAV, safety, or general source-to-target credit claim is
 supported; the bounded negative result is not a general impossibility theorem.
 The complete handoff is in
 `evidence/2026-08-28-7-pilot-handoff.md`.
+
+That prior WORK and cycle are terminal historical evidence. Both mandatory
+provider operations were subsequently found transport-contaminated: the
+Innovator request was truncated and the Convergence exchange did not contain
+a substantive review. Their provider content is quarantined from scientific
+use, their conversations and operations are not reusable, and the historical
+`PARK` recommendation is not current authority. The successor may inspect the
+local repository-grounded scientific artifacts, but it does not reopen or
+continue the old cycle.
 
 ## Evidence set
 
