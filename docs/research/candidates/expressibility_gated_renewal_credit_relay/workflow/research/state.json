@@ -1,15 +1,12 @@
 {
-  "blockers": [
-    "The sole fresh Innovator operation cb925390-c77e-4f2d-bfcb-1963f316ca3e remains SENT_UNREADABLE. Root supplied the concrete naturally completed conversation and reopened tab, but same-operation verifyExisting archival recovery failed closed with review_idempotency_conflict and made no send.",
-    "The current transport leaf's callable agentify_review_observe schema accepts only idempotencyKey and optional operationId; it exposes no conversation URL/ID, tab, or causal-message projection inputs. The reviewed repaired observer/archive-recovery entry point is therefore unavailable to this leaf runtime, and the only callable accepting those fields is the already-conflicting query path."
-  ],
+  "blockers": [],
   "claim_ceiling": "At most a finite-host, two-agent, one-update statement about whether same-information ordered waiter association changes the named bounded utility and fixed-token allocation contrasts. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; an exhausted host would be a bounded negative result, not a general impossibility theorem.",
-  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. Strict operation cb925390-c77e-4f2d-bfcb-1963f316ca3e retains exactly one send. Root supplied exact conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0, reopened tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3, and immutable operation keys after reviewed observer restoration. The current leaf's no-send verifyExisting archival recovery returned review_idempotency_conflict. Its callable observer schema exposes no conversation/tab/projection recovery fields, so the reviewed repaired archive path cannot be invoked from that runtime. Pro remains SENT_UNREADABLE with no archive and no replacement; no CM, experiment, synthesis, Convergence, recommendation, lifecycle, or capacity change occurred.",
+  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. Strict operation cb925390-c77e-4f2d-bfcb-1963f316ca3e retains exactly one send. Root now establishes that the exact no-send causal archive recovery path is implemented, real-contract tested, independently reviewed with NO_FINDINGS, live after Agentify restart, and passes the 52/52 strict transport suite. This RESUME authorizes the same current transport leaf to use only repaired verifyExisting recovery on exact persisted conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0 and current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc with immutable operation and keys. Pro remains SENT_UNREADABLE until prompt/model/full-response/archive proof is complete; no replacement, CM, experiment, synthesis, Convergence, or recommendation has been reached.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Hold this exact successor WORK and Innovator operation without any new send, query retry, key mutation, conversation, replacement, CM task, experiment, synthesis, or Convergence launch. Resume only when the current transport leaf runtime exposes the reviewed non-sending causal-projection observer/archive-recovery entry point for the exact operation and concrete conversation/tab.",
-  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this remains scientifically inactive until the mandatory Innovator archive is validly complete.",
-  "reentry_condition": "The current pt runtime exposes the reviewed repaired non-sending observer/archive-recovery callable for operation cb925390-c77e-4f2d-bfcb-1963f316ca3e with concrete conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0 and reopened tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3 inputs.",
+  "next_action": "Use repaired agentify_review_query verifyExisting only on operation cb925390-c77e-4f2d-bfcb-1963f316ca3e, idempotency key egrcr-successor-2026-08-28-10-innovator-primary-29fdf436, stable key egrcr-successor-2026-08-28-10-innovator, persisted conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0, and current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc for no-send archival recovery; omit responsePath only if the current schema omits it because the immutable ledger path is reused.",
+  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this becomes scientifically active only after the mandatory Innovator archive is validly complete.",
+  "reentry_condition": null,
   "refs": [
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-scope-and-grounding.md",
@@ -27,6 +24,7 @@
     "d260366541da097d31f91118778ab78faa072701",
     "7b0697b8772b07758efe042a99884cf314a420e7",
     "e6bd81c22f565893aa4610a8791a2e51992938c3",
+    "92e710dedadc79ce70d3d2698d9ceba476d56638",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180",
@@ -34,9 +32,8 @@
     "Agentify idempotency key egrcr-successor-2026-08-28-10-innovator-primary-29fdf436",
     "Agentify stable key egrcr-successor-2026-08-28-10-innovator",
     "Provider conversation https://chatgpt.com/c/6a9243b9-7d88-83e8-83a2-c6f013ed45d0",
-    "Agentify reopened tab 9ff7ce7e-1f79-408e-a366-cf81bca1a8b3",
-    "Agentify recovery error review_idempotency_conflict",
-    "[CONTROL] RESUME observer restoration from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-29T02:12:00Z"
+    "Agentify current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc",
+    "[CONTROL] RESUME causal archive recovery from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-29T02:12:00Z"
   ],
   "research_cycle": {
     "label": "2026-08-28.10-pilot-01a04a02-egrcr-successor-01",
@@ -53,8 +50,8 @@
     },
     "reason": "Fresh current-protocol successor cycle to decide whether a bounded same-information association discriminator exists beyond ordinary GAE or whether the retained exact utility/allocation null and absent consequence-distinct identity support exhaust the current host."
   },
-  "revision": 7,
+  "revision": 8,
   "role": "EM",
-  "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-29T03:06:02.821467Z"
+  "snapshot_state": "WORKING",
+  "updated_at": "2026-08-29T03:22:22.078231Z"
 }
