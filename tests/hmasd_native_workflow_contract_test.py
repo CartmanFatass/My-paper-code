@@ -33,9 +33,9 @@ def test_only_current_session_skills_are_discoverable() -> None:
         path.parent.name
         for path in (ROOT / ".agents" / "skills").glob("hmasd-*/SKILL.md")
     }
-    assert actual == expected | {"hmasd-agentify-transport"}
+    assert actual == expected | {"hmasd-browser-conversation"}
     transport_policy = _read(
-        ".agents/skills/hmasd-agentify-transport/agents/openai.yaml"
+        ".agents/skills/hmasd-browser-conversation/agents/openai.yaml"
     )
     assert "allow_implicit_invocation: false" in transport_policy
     assert not list((ROOT / ".codex" / "prompts").glob("hmasd-*.md"))
@@ -153,8 +153,7 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
         "HMASDReviewer",
         "HMASDVerifier",
         "HMASDExperimentOperator",
-        "HMASDCPMAgentifyTransport",
-        "HMASDExplorerAgentifyTransport",
+        "HMASDBrowserConversation",
         "HMASDResearchScout",
         "HMASDResearchCritic",
         "HMASDGeneralLeaf",
@@ -234,10 +233,10 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         assert detail not in protocol
         assert detail not in em
         assert detail not in cm
-    assert "`hmasd-agentify-transport` skill" in protocol
-    assert "仅记录当前工具参数面" in protocol
-    assert "existing `pt` transport assignment" in em
-    assert "existing `et` assignment" in cm
+    assert "`hmasd-browser-conversation` skill" in protocol
+    assert "理解页面与对话阶段" in protocol
+    assert "existing `bc` browser-conversation assignment" in _flat(em)
+    assert "existing `bc` assignment" in _flat(cm)
 
 
 def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
@@ -252,7 +251,7 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
         assert text not in protocol
     assert "显式传入 `AGENTS.md` 的 model/thinking" in protocol
     assert "`<code>_<model>_<effort>_<task>`" in agents
-    for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`pt_l_m_pro`"):
+    for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`bc_l_xh_pro`"):
         assert example in agents
     assert "Direct-leaf `spawn_agent.task_name` uses" in agents
     assert "`[a-z0-9_]+`" in agents
@@ -265,12 +264,12 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
 
 def test_external_pro_prompt_is_natural_language_not_control_serialization() -> None:
     em = _read(".agents/skills/hmasd-em-task/SKILL.md")
-    transport = _read(".agents/skills/hmasd-agentify-transport/SKILL.md")
+    transport = _read(".agents/skills/hmasd-browser-conversation/SKILL.md")
     normalized = _flat(f"{em}\n{transport}")
     assert "cohesive natural-language `INNOVATOR` prompt" in normalized
-    assert "Do not add a WORK/RESULT packet" in normalized
+    assert "Never emit a top-level result field" in normalized
     assert "EM owns the complete Pro prompt" in normalized
-    assert "must not compose, shorten, summarize, append, truncate" in normalized
+    assert "Never compose, shorten, summarize, append, translate, wrap" in normalized
 
     for profile in (ROOT / ".codex/agents").glob("*.toml"):
         assert "<code>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
@@ -433,7 +432,7 @@ def test_research_navigation_does_not_duplicate_portfolio_state() -> None:
 def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
     cycle = _flat(_read(".agents/skills/hmasd-em-task/SKILL.md"))
-    transport = _flat(_read(".agents/skills/hmasd-agentify-transport/SKILL.md"))
+    transport = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
     assert cycle.index("`INNOVATOR`") < cycle.index("send a meaning-complete WORK to CM")
     assert cycle.index("send a meaning-complete WORK to CM") < cycle.index("`SYNTHESIS_READY`")
     assert cycle.index("`SYNTHESIS_READY`") < cycle.index("`CONVERGENCE`")
@@ -441,9 +440,9 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     assert "may omit CM" in cycle
     assert "writes one cohesive natural-language `INNOVATOR` prompt" in cycle
     assert cycle.count("user explicitly waived that exact unsent operation") == 2
-    assert "leaf follows the explicit Agentify transport skill and sends it once" in cycle
-    assert "cannot authorize a replacement" in transport
-    assert "Never make a second send-capable call for the same operation" in transport
+    assert "browser-conversation agent sends it once" in cycle
+    assert "does not invent extra statuses" in transport
+    assert "Invoke that strict operation once for one operation" in transport
     fanout = _flat(protocol.split("## 5. Portfolio fan-out and join", 1)[1].split(
         "## 6. Adjacent scientific content", 1
     )[0])

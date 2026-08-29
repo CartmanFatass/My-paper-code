@@ -1,5 +1,0 @@
-interface:
-  display_name: "HMASD Agentify Transport"
-  short_description: "Send one owner-frozen external review exactly once"
-policy:
-  allow_implicit_invocation: false

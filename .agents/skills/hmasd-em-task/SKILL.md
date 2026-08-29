@@ -52,9 +52,9 @@ before repeating or overwriting work.
    exploration driver, passive noise, capacity and partner co-adaptation.
 5. In parallel with independent local routes, unless the user explicitly waived that exact unsent
    operation, EM writes one cohesive natural-language `INNOVATOR` prompt from the neutral frozen scope.
-   Give a fresh `pt` assignment the exact owner-authored prompt file, required provider/model,
+   Give a fresh `bc` assignment the exact owner-authored prompt file, required provider/model,
    operation binding, archive path, observation bound and stop condition. The leaf follows the
-   explicit Agentify transport skill and sends it once. The provider may use an origin-reachable
+   explicit browser-conversation skill and sends it once. The provider may use an origin-reachable
    GitHub repository through its GitHub connector, at the exact commit and repository-relative
    references supplied by EM, as scientific reference and never as a general code-review assignment.
 6. At the synthesis barrier, compare causal families against evidence, preserve a material outlier,
@@ -85,7 +85,7 @@ before repeating or overwriting work.
 10. After all necessary observations and interpretations, write `SYNTHESIS_READY`. Unless the user
     explicitly waived that exact unsent operation, write a separate cohesive natural-language
     `CONVERGENCE` prompt from the current evidence packet without copying the Innovator transcript;
-    a fresh `pt` transport sends it once.
+    a fresh `bc` browser-conversation agent sends it once.
 11. Disposition every Convergence objection against evidence. Use a Research Critic only for one
     named unresolved material issue. Before `HANDOFF_READY`, update the direction's durable
     scientific authority: write the accepted mechanism-level conclusion, bounded claim ceiling,
@@ -106,20 +106,21 @@ the exact scientific gap/`NO_MATERIAL_INSIGHT`. Transport failure is excluded fr
 
 When a source, tool or transport step fails, preserve the scientific question and classify the
 missing evidence. Try one role-appropriate recovery tied to a new hypothesis: an alternate primary
-source, a smaller discriminator, or continuation of the existing `pt` transport assignment. EM
+source, a smaller discriminator, or continuation of the existing `bc` browser-conversation
+assignment. EM
 never performs transport mechanics itself.
 
-For a strict `ZERO_SEND_FAILED` fact, the existing `pt` assignment owns ordinary page-local recovery
+For a strict `ZERO_SEND_FAILED` fact, the existing `bc` assignment owns ordinary page-local recovery
 and may make a fresh strict operation after a concrete non-sending repair changes the recorded
 failure premise. EM preserves the frozen request and does not perform or micromanage browser
 actions. This is not a sent-operation replacement and has no fixed attempt count; the same unchanged
 failure stops rather than loops.
 
-A running research leaf or CM, or a nonterminal Pro fact returned by `pt`, keeps the same WORK live:
+A running research leaf or CM, or a nonterminal Pro fact returned by `bc`, keeps the same WORK live:
 continue native wait or the same assignment, or return a nonterminal reentry. Do not return a
 terminal Outcome while any such operation remains live. An isolated terminal transport fact keeps
 the material cycle unchanged and permits only the shared single-replacement boundary, again through
-`pt`. If that boundary is exhausted, wait only when one concrete user decision or waiver can still
+`bc`. If that boundary is exhausted, wait only when one concrete user decision or waiver can still
 satisfy the assignment. Otherwise, after every committed Effect has a terminal fact, preserve the
 scientific stage actually reached: before any valid synthesis, end with the unsynthesized gap; after
 `SYNTHESIS_READY`, retain the bounded synthesis and its decision impact in a direction-owned

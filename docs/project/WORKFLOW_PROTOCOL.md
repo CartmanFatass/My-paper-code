@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-29.5
+Workflow revision: 2026-08-29.6
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -95,10 +95,9 @@ history；看到完整消息即视为已投递，确认不存在才允许发送�
 - `FAILED` 不自动 retry。需要修复后重做时，由 requester 在旧 WORK terminal 后创建新的
   WORK。新 WORK 本身不是 retry authority。
 - 任何 nonterminal Effect 都留在同一个 WORK 并由既有 owner/assignment 继续；观察困难或等待
-  超时不结束 WORK、不释放 target。External transport 的完整角色方法只由显式
-  `hmasd-agentify-transport` skill 定义；`docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md`
-  仅记录当前工具参数面。
-- Ordinary provider-page recovery stays inside the existing transport leaf assignment. A wait
+  超时不结束 WORK、不释放 target。External browser conversation 的完整方法只由显式
+  `hmasd-browser-conversation` skill 定义；该 leaf 理解页面与对话阶段，但不解释 owner 内容。
+- Ordinary provider-page recovery stays inside the existing browser-conversation assignment. A wait
   bound or tool-local failure predicate does not create a Root/shared repair or a Portfolio
   decision. Only a demonstrated implementation defect outside page-local recovery may later become
   a separately framed shared repair through the normal requester chain.

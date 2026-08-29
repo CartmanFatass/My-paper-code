@@ -176,13 +176,12 @@ Leaf observations are also separate namespaces:
 | `rp` | `hmasd-research-principles-analyst` | `Principles status: DEFECTS | NO_MATERIAL_DEFECT | INCOMPLETE` |
 | `rs` | `hmasd-research-scout` | `Evidence status: FOUND | CONFLICTED | NOT_FOUND | UNAVAILABLE` |
 | `rc` | `hmasd-research-critic` | `Critique status: OBJECTIONS | NO_MATERIAL_OBJECTION | INCOMPLETE` |
-| `pt` | `hmasd-explorer-agentify-transport` | `Pro transport state: <transport state>` |
+| `bc` | `hmasd-browser-conversation` | `Browser conversation state: <transport state>` |
 | `im` | `hmasd-implementer` | `Implementation observation: IMPLEMENTED | PARTIAL | BLOCKED` |
 | `rt` | `hmasd-routine-implementer` | `Routine implementation observation: IMPLEMENTED | PARTIAL | BLOCKED` |
 | `rv` | `hmasd-reviewer` | `Review status: FINDINGS | NO_FINDINGS | INCOMPLETE` |
 | `vf` | `hmasd-verifier` | `Verification observation: OBSERVED | NOT_OBSERVED | UNAVAILABLE` |
 | `op` | `hmasd-experiment-operator` | `Run observation: TERMINAL | LAUNCH_FAILED | OBSERVATION_LOST` |
-| `et` | `hmasd-cpm-agentify-transport` | `Engineering transport state: <transport state>` |
 
 A leaf result is evidence for its parent. It cannot substitute for the parent's judgment or emit a
 top-level `[RESULT]` field.
@@ -206,7 +205,7 @@ Leaf value meanings are local to that observation:
   and `UNAVAILABLE` could not run the probe.
 - `op`: `TERMINAL` retains the exact process through a terminal witness, `LAUNCH_FAILED` proves no
   process was launched, and `OBSERVATION_LOST` means the launched process lacks a terminal witness.
-  `pt` and `et` use exactly the shared transport-state meanings above.
+  `bc` uses exactly the shared transport-state meanings above.
 
 ## Caller matrix and task configuration
 
@@ -214,8 +213,8 @@ Leaf value meanings are local to that observation:
 | --- | --- | --- |
 | Root | `gl`, `rv` | user intent, shared-core contract, workflow repair, task conflict, cross-direction Git integration |
 | Portfolio | `gl` | quality floor, lifecycle, priority, capacity, fusion/separation, dispatch and join |
-| EM | `gl`, `rs`, `ri`, `rp`, `rc`, `pt` | scientific scope, evidence synthesis, claim ceiling, discriminator, Pro prompt authorship, direction authority |
-| CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op`, `et` | engineering contract, implementer selection, integration, validation interpretation, technical acceptance and Git closure |
+| EM | `gl`, `rs`, `ri`, `rp`, `rc`, `bc` | scientific scope, evidence synthesis, claim ceiling, discriminator, Pro prompt authorship, direction authority |
+| CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op`, `bc` | engineering contract, implementer selection, integration, validation interpretation, technical acceptance and Git closure |
 
 Root sends bounded shared engineering to a dedicated top-level `CM/shared`; it does not borrow a
 direction CM or call engineering leaves directly. EM never calls engineering leaves. CM never calls
@@ -249,7 +248,7 @@ the configured native agent identifiers remain the `[agents.*]` entries in `.cod
 the `hmasd-*` profile names above. Direct-leaf `spawn_agent.task_name` uses
 `<code>_<model>_<effort>_<task>`. The model code is
 `l | t | s`; effort is `l | m | h | xh | mx | u`; task is `[a-z0-9_]+`. Codes must match the actual
-selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`, `pt_l_m_pro`. This is a short display
+selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`, `bc_l_xh_pro`. This is a short display
 name only and is never an identity, receipt, or route.
 
 ## Universal leaf and Effect boundaries

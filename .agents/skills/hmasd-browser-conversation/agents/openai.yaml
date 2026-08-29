@@ -1,0 +1,5 @@
+interface:
+  display_name: "HMASD Browser Conversation"
+  short_description: "Understand and own one external browser conversation"
+policy:
+  allow_implicit_invocation: false

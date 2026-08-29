@@ -58,13 +58,9 @@ ROLE_MARKERS = {
     "GENERAL_LEAF.md": (
         "weakly coupled", "owner judgment", "safe alternative", "assigned output",
     ),
-    "PRO_TRANSPORT.md": (
-        "one exact frozen prompt file", "hmasd-agentify-transport", "scientific judgment",
-        "complete transport skill", "optional tool-argument reference", "Do not invent another UI",
-    ),
-    "ENGINEERING_TRANSPORT.md": (
-        "parent-frozen question", "hmasd-agentify-transport", "technical acceptance",
-        "complete transport skill", "optional tool-argument reference", "Do not invent another UI",
+    "BROWSER_CONVERSATION.md": (
+        "one external browser conversation assignment", "hmasd-browser-conversation",
+        "understands the page", "ordinary page-local problems", "causal response",
     ),
     "RESEARCH_INNOVATOR.md": (
         "mechanism family", "strongest simple null", "observable prediction",
@@ -149,35 +145,26 @@ def test_top_level_skills_are_self_contained_role_methods() -> None:
     assert "Dispatch and task creation" not in cm_skill
 
 
-def test_agentify_skill_owns_strict_mechanics_not_scientific_prompt_authoring() -> None:
-    skill = _read(".agents/skills/hmasd-agentify-transport/SKILL.md")
-    manual = _read("docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md")
+def test_browser_conversation_skill_owns_semantic_browser_use_not_owner_judgment() -> None:
+    skill = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
     agents = _read("AGENTS.md")
     for marker in (
-        "agentify_review_query", "promptPath", "verifyExisting",
-        "agentify_review_observe", "input-mismatch state", "natural completion",
-        "provider-visible user turn", "exact frozen prompt file", "responsePath",
-        "tab is not a conversation", "new provider conversation",
-        "cannot authorize a replacement", "separately authorized strict operation",
+        "Agentify strict operation", "exact frozen prompt path", "exact response path",
+        "full naturally completed response", "provider-visible user turn",
+        "exclusive writer ownership", "causally associated assistant turn",
+        "tab is a replaceable view", "explicitly requests a new conversation",
+        "screenshots and Computer Use", "ordinary page-local recovery",
     ):
         assert marker in skill
-    assert "../../../docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md" in skill
-    skill_dir = ROOT / ".agents" / "skills" / "hmasd-agentify-transport"
-    manual_ref = skill_dir / "../../../docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md"
-    assert manual_ref.resolve().is_file()
-    assert "agentify_query` as the Send path" not in skill
-    assert "transport must not compose" in skill
+    assert "ordinary query calls as a substitute" in skill
+    assert "Never compose" in skill
     assert "tool-local" in skill
     assert "task identity" in skill
-    assert "This file is a compact reference for the current Agentify call surface" in manual
-    assert "complete HMASD transport method" in manual
-    assert "caller normally omits `promptSha256`" in manual
     for leaked_owner_term in (
-        "top-level WORK", "material cycle", "Portfolio action", "Scientific status",
-        "Engineering status", "replacement strict operation",
+        "Portfolio action:", "Scientific status:", "Engineering status:",
+        "Recommendation:", "Capacity action:",
     ):
         assert leaked_owner_term not in skill
-        assert leaked_owner_term not in manual
     assert "at most one automatic replacement" in agents
     assert "same top-level WORK" in agents
 
@@ -196,27 +183,32 @@ def test_em_transport_exhaustion_preserves_the_scientific_stage_reached() -> Non
 def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
     agents = _flat(_read("AGENTS.md"))
     em = _flat(_read(".agents/skills/hmasd-em-task/SKILL.md"))
-    transport = _flat(_read(".agents/skills/hmasd-agentify-transport/SKILL.md"))
+    transport = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
     assert "concrete non-sending repair changes the proven failure premise" in agents
     assert "There is no fixed attempt counter" in agents
     assert "same failure without a new fact stops" in agents
     assert "original assignment authorizes ordinary page-local recovery" in agents
     assert "does not create a Root or Portfolio decision" in agents
-    assert "observable page and provider facts" in transport
-    assert "tool failure predicate is diagnostic" in transport
-    assert "owns ordinary page-local recovery" in transport
-    assert "without returning to EM for each action" in transport
-    assert "A clear failure predicate proves only that the automation path reported failure" in transport
-    assert "current rendered content" in transport
-    assert "decides whether to continue Send preparation" in transport
-    assert "failed clear action proves only that the chosen action did not mutate" not in transport
+    assert "actual page and current conversation stage" in transport
+    assert "tool predicate reports one automation path" in transport
+    assert "ordinary page-local recovery" in transport
+    assert "not escalation to the parent" in transport
+    assert "failed clear call is not proof that content remains" in transport
+    assert "rendered composer fact decides the next step" in transport
     assert "elapsed time alone" in transport
-    assert "does not impose an attempt count" in transport
-    assert "same unchanged failure returns `ZERO_SEND_FAILED` again without a Send" in transport
+    assert "Do not loop an unchanged failure" in transport
+    assert "after an evidence-changing non-sending repair" in transport
     assert "has no fixed attempt count" in em
     assert "does not perform or micromanage browser actions" in em
     assert "parent supplies a concrete evidence-changing non-sending repair" not in transport
     assert "permits one bounded repair" not in agents
+
+
+def test_transport_separates_model_identity_from_optional_reasoning_controls() -> None:
+    transport = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
+    assert "separate reasoning control matters only when the owner explicitly froze it" in transport
+    assert "visible `GPT-5.6 Pro` is not invalid" in transport
+    assert "Exact existing prompt content may be retained and sent in place" in transport
 
 
 def test_portfolio_is_an_active_allocator_and_refills_terminal_legs() -> None:
