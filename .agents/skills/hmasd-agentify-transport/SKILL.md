@@ -10,6 +10,11 @@ judgment. This skill is the complete transport-method authority. Consult
 `../../../docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md` only when the current Agentify tool
 argument surface is needed; that reference defines no workflow decision.
 
+Work from observable page and provider facts. A tool failure predicate is diagnostic evidence about
+one automation path, not proof that the page, browser, provider, or assignment failed. When direct
+observation conflicts with a tool's label, preserve both facts and choose the next action from the
+observable page state.
+
 ## Freeze the operation
 
 Require one exact frozen prompt file and its `promptPath`, purpose, provider, required visible model,
@@ -28,18 +33,27 @@ conversation ID persist after that tab closes. Open the exact existing conversat
 tab, or open the provider root for a new provider conversation and let Agentify record the concrete
 conversation ID after first binding.
 
-Resolve login, CAPTCHA, blank/loading view, or stale-tab readiness without touching the composer.
-Use an evidence-changing no-send recovery when necessary; do not loop through a fixed UI ritual or
-repeat the same failed action without a new observable premise.
+The transport leaf owns ordinary page-local recovery. Inspect the current rendered state and solve
+readiness, focus, composer, navigation, and tab problems in its own session without returning to EM
+for each action. Use whichever non-sending browser control is supported by the observed page; do not
+loop through a fixed UI ritual or repeat the same failed action without a new observable premise.
+
+Before Send, compare any existing composer content with the exact frozen prompt. Exact content may
+be retained only when the strict Send path can verify and bind it; different or partial content must
+be cleared or moved to a clean composer and then re-observed. A clear failure predicate proves only
+that the automation path reported failure. Re-observe the composer: its current rendered content,
+not that predicate, decides whether to continue Send preparation or choose another non-sending
+recovery. The predicate does not prove that the page is unavailable.
 Verify the actual visible reasoning control and required model, not arbitrary page text, account
 badges, or an old tab's selection.
 
 ## Send exactly once
 
 When the view and model are ready and no waiver applies, call `agentify_review_query` exactly once
-with the exact `promptPath`, `responsePath`, provider/model, conversation binding, keys, and
-first-binding flag when applicable. Use a natural completion window of up to 45 minutes; this is an
-ordinary Pro reasoning window, not a global deadline or retry budget. Never call ordinary
+for that strict operation with the exact `promptPath`, `responsePath`, provider/model, conversation
+binding, keys, and first-binding flag when applicable. Use a natural completion window of up to 45
+minutes; this is an observation window, not a global deadline, page-health test, or retry budget.
+Never call ordinary
 `agentify_query` for Send and never activate Retry, Continue, Answer-now, Stop-and-resend,
 Regenerate, or another response-producing control.
 
@@ -57,9 +71,11 @@ After Send, every action is non-sending:
 
 If generation is still live after an observation window, retain the waiting transport fact and
 continue the same operation later. A timeout, clipped display, prefix, loading view, or unreadable
-page is not natural completion. Mark COMPLETE only after the naturally completed full assistant
-turn is written atomically to the exact `responsePath` and reread successfully. Return the archive
-path and compact metadata; never substitute a truncated tool preview for the archive.
+page is not natural completion. Current generation, rendered-content, conversation, and control
+observations decide liveness; elapsed time alone cannot establish provider completion, page failure,
+or an unresponsive browser. Mark COMPLETE only after the naturally completed full assistant turn is
+written atomically to the exact `responsePath` and reread successfully. Return the archive path and
+compact metadata; never substitute a truncated tool preview for the archive.
 
 ## Release and recover browser views
 
@@ -83,10 +99,13 @@ the parent later supplies a separately authorized strict operation, treat it onl
 assignment supplied. Late content from an isolated conversation stays quarantined and cannot be
 used for another operation. Renaming a key, operation, leaf, task, or tab creates no send authority.
 
-For `ZERO_SEND_FAILED`, return the exact no-send evidence and failure premise. A later assignment is
-eligible only after its parent supplies a concrete evidence-changing non-sending repair; this leaf
-does not impose an attempt count or invent that repair. The same unchanged failure returns
-`ZERO_SEND_FAILED` again without a Send. This rule never applies to an unknown or possible Send.
+For `ZERO_SEND_FAILED`, retain the exact no-send evidence and failure premise. Under the original
+assignment, this leaf owns ordinary page-local recovery and may start a fresh strict operation for
+the same frozen request after its own concrete non-sending repair changes that premise, without
+returning to EM for each action. This leaf does not impose an attempt count or repeat an unchanged
+action: the same unchanged failure returns `ZERO_SEND_FAILED` again without a Send. This rule never
+applies to an unknown or possible Send. Changing owner-authored content, provider, model, archive
+destination, or scientific purpose still requires a new owner assignment.
 
 ## Return
 

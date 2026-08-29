@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-29.3
+Workflow revision: 2026-08-29.4
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -98,6 +98,10 @@ history；看到完整消息即视为已投递，确认不存在才允许发送�
   超时不结束 WORK、不释放 target。External transport 的完整角色方法只由显式
   `hmasd-agentify-transport` skill 定义；`docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md`
   仅记录当前工具参数面。
+- Ordinary provider-page recovery stays inside the existing transport leaf assignment. A wait
+  bound or tool-local failure predicate does not create a Root/shared repair or a Portfolio
+  decision. Only a demonstrated implementation defect outside page-local recovery may later become
+  a separately framed shared repair through the normal requester chain.
 - Fresh external operation 只允许出现在 `AGENTS.md` 已定义的共享边界内；它不构成 successor
   WORK、retry message 或 lifecycle event。
 - `PAUSE` 保留当前 WORK，禁止新的 launch/send。

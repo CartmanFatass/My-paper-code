@@ -200,9 +200,22 @@ def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
     assert "concrete non-sending repair changes the proven failure premise" in agents
     assert "There is no fixed attempt counter" in agents
     assert "same failure without a new fact stops" in agents
+    assert "original assignment authorizes ordinary page-local recovery" in agents
+    assert "does not create a Root or Portfolio decision" in agents
+    assert "observable page and provider facts" in transport
+    assert "tool failure predicate is diagnostic" in transport
+    assert "owns ordinary page-local recovery" in transport
+    assert "without returning to EM for each action" in transport
+    assert "A clear failure predicate proves only that the automation path reported failure" in transport
+    assert "current rendered content" in transport
+    assert "decides whether to continue Send preparation" in transport
+    assert "failed clear action proves only that the chosen action did not mutate" not in transport
+    assert "elapsed time alone" in transport
     assert "does not impose an attempt count" in transport
     assert "same unchanged failure returns `ZERO_SEND_FAILED` again without a Send" in transport
     assert "has no fixed attempt count" in em
+    assert "does not perform or micromanage browser actions" in em
+    assert "parent supplies a concrete evidence-changing non-sending repair" not in transport
     assert "permits one bounded repair" not in agents
 
 

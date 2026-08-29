@@ -109,9 +109,11 @@ missing evidence. Try one role-appropriate recovery tied to a new hypothesis: an
 source, a smaller discriminator, or continuation of the existing `pt` transport assignment. EM
 never performs transport mechanics itself.
 
-For a strict `ZERO_SEND_FAILED` fact, EM may assign another fresh `pt` operation only after a
-concrete non-sending repair changes the recorded failure premise. This is not a sent-operation
-replacement and has no fixed attempt count; the same unchanged failure stops rather than loops.
+For a strict `ZERO_SEND_FAILED` fact, the existing `pt` assignment owns ordinary page-local recovery
+and may make a fresh strict operation after a concrete non-sending repair changes the recorded
+failure premise. EM preserves the frozen request and does not perform or micromanage browser
+actions. This is not a sent-operation replacement and has no fixed attempt count; the same unchanged
+failure stops rather than loops.
 
 A running research leaf or CM, or a nonterminal Pro fact returned by `pt`, keeps the same WORK live:
 continue native wait or the same assignment, or return a nonterminal reentry. Do not return a
