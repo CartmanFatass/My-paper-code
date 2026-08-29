@@ -1,10 +1,10 @@
 {
   "blockers": [],
   "claim_ceiling": "At most this cycle can establish a prospective finite-host, finite-checkpoint, finite-seed, finite-budget direct-return contrast among explicitly matched policies, or a bounded null within a frozen margin. It cannot establish RAW representational impossibility, a literal hazard, causal lease or REBIND value, arbitrary or continuous callback periods, arbitrary k, variable population size, UAV performance or transfer, safety certification, or general PPO superiority. Even positive headroom and heterogeneity justify only the matched second-stage comparison, not its conclusion.",
-  "completed_summary": "Fresh successor cycle 2026-08-28.10-clean-01a04a02-onlgr-successor-02 is scope-frozen from exact terminal direction head d4cab98752869a1229dbc80c834f2753a860a0df without reopening either predecessor cycle. Neutral repository grounding preserves the mixed B1, B2, and ROAD/RAW/NEVER/SHAM evidence and finds that it constrains but does not directly answer the prospective direct-return headroom and physical-time heterogeneity gates. Both fresh Pro stages are PENDING and neither replacement boundary has been used. No CM task or experiment exists.",
+  "completed_summary": "Fresh successor cycle 2026-08-28.10-clean-01a04a02-onlgr-successor-02 is scope-frozen from exact terminal direction head d4cab98752869a1229dbc80c834f2753a860a0df without reopening either predecessor cycle. Neutral repository grounding preserves the mixed B1, B2, and ROAD/RAW/NEVER/SHAM evidence and finds that it constrains but does not directly answer the prospective direct-return headroom and physical-time heterogeneity gates. Exact Innovator operation 5fcd1802-a82e-436e-b9fd-0fe85bc99636 sent the frozen prompt once with exact fidelity and visible Pro to fresh provider conversation 6a926397-6514-83e8-95b4-bed8e73ff069; natural generation remains SENT_WAITING and no response archive exists yet. Convergence remains PENDING, neither replacement boundary has been used, and no CM task or experiment exists.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Dispatch exactly one fresh strict Innovator operation in a new provider conversation using the frozen natural-language prompt, visible GPT-5.6 Pro reasoning mode, exact prompt fidelity, one send at most, and natural-completion archival acceptance.",
+  "next_action": "Observe only exact Innovator operation 5fcd1802-a82e-436e-b9fd-0fe85bc99636 in provider conversation 6a926397-6514-83e8-95b4-bed8e73ff069 through the same leaf's current no-send path until natural completion and full archive acceptance; do not resend, continue, or replace.",
   "next_discriminator": "A result-blind prospective screen must first test direct-return headroom over a learned global exposure-linked rate, genuine no-voluntary-action policy, and matched shell, then supported material differences in optimal voluntary-event probability across predeclared equal-width physical-time exposure or tenure strata. Only if both pass may lambda-linked and per-opportunity global learners be compared.",
   "reentry_condition": null,
   "refs": [
@@ -17,7 +17,9 @@
     "Direction head at cycle open d4cab98752869a1229dbc80c834f2753a860a0df",
     "Read-only Portfolio authority 8812e5ed26e57310c7f9deb3d96697be4233c54f",
     "Public scientific anchor 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
-    "Top-level EM task 01a04a08-33a3-7292-8c21-95d17715ea2f; native model gpt-5.6-sol; effort max"
+    "Top-level EM task 01a04a08-33a3-7292-8c21-95d17715ea2f; native model gpt-5.6-sol; effort max",
+    "Innovator transport task /root/pt_l_m_onlgr_clean02_innovator; native profile hmasd-explorer-agentify-transport; model gpt-5.6-luna; effort medium",
+    "Innovator operation 5fcd1802-a82e-436e-b9fd-0fe85bc99636; key 2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator; conversation 6a926397-6514-83e8-95b4-bed8e73ff069; tab 90b0120e-4715-436f-8dda-04bb0bc91565; visible Pro; one insert, one send action, one bound user message; exact prompt SHA-256 865df2c6a8643f7a41bf4bb2e02d5166bac182d3602ac23c27dc397e42146470; SENT_WAITING; response archive absent"
   ],
   "research_cycle": {
     "label": "2026-08-28.10-clean-01a04a02-onlgr-successor-02",
@@ -30,12 +32,12 @@
     "pro_innovator": {
       "replacement_used": false,
       "response": null,
-      "status": "PENDING"
+      "status": "SENT_WAITING"
     },
     "reason": "Portfolio requested a clean current-protocol prospective screen of direct-return headroom and physical-time heterogeneity before any matched global exposure-link versus per-opportunity comparison."
   },
   "revision": 13,
   "role": "EM",
   "snapshot_state": "WORKING",
-  "updated_at": "2026-08-29T04:37:53.4802735Z"
+  "updated_at": "2026-08-29T04:50:49.2531615Z"
 }
