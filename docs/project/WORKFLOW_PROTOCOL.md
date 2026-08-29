@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-29.6
+Workflow revision: 2026-08-29.7
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -12,21 +12,27 @@ HMASD 直接使用 Codex Desktop 可见的 task ID、history、status、create/s
 
 ## 1. Top-level participants and edges
 
-长期 participant 只有四类：Root、Portfolio、`EM/<direction>` 和
-`CM/<direction-or-shared>`。正常相邻链路是：
+长期 participant 只有五类：Root、Portfolio、`EM/<direction>`、
+`CM/<direction-or-shared>` 和唯一 current Browser Transport。正常相邻链路是：
 
 `Root ↔ Portfolio ↔ EM/<direction> ↔ CM/<direction>`
 
+`EM/<direction> ↔ Browser Transport`
+
+`CM/<direction-or-shared> ↔ Browser Transport`
+
 由产生需求的 requester 编写并直接投递完整消息；callee 只向该 requester 返回结果。Root
-可按用户明确要求直接联系一个 EM/CM。Portfolio 不直接联系 CM。一个 leaf 不是 top-level
-participant，不持有 recipient，也不参与本协议。
+可按用户明确要求直接联系一个 EM/CM。Portfolio 不直接联系 CM 或 Browser Transport。EM/CM
+只把 owner-authored external consultation 直接投递给 Browser Transport；Browser Transport 只向
+exact requester 返回 transport fact。一个 leaf 不是 top-level participant，不持有 recipient，也
+不参与本协议。
 
 完整研究链路为 `Portfolio → EM → CM → EM → Portfolio`。纯静态或理论对象可以没有 CM
 阶段，但这是 EM 自身方法中的科学判断，不改变相邻 edge。
 
 ## 2. Native messages
 
-跨 top-level participant 只使用以下三种可读 Markdown 消息。它们不是本地 envelope 或需要
+Root、Portfolio、EM 和 CM 使用以下三种可读 Markdown 消息。它们不是本地 envelope 或需要
 机器验证的 packet。
 
 ```text
@@ -60,12 +66,56 @@ Reason: <why>
 Updated at: <timestamp>
 ```
 
+Browser Transport 使用以下 assignment-local 消息，不使用 top-level `Outcome`：
+
+```text
+[BROWSER WORK]
+Transport assignment: <owner-authored human-readable assignment name>
+Direction: <direction id or shared>
+Owner stage: <Pro Innovator | Pro Convergence | engineering consultation | exact other stage>
+Purpose: <why this exact external response is needed>
+Provider: <ChatGPT or Gemini>
+Provider conversation: <NEW or exact provider URL and conversation ID>
+Requested model: <exact owner product term>
+Prompt path: <exact absolute UTF-8 path>
+Response path: <exact absolute archive path>
+Effect: STRICT_SEND | OBSERVE_ONLY
+Acceptance: <transport completion evidence and stop/reentry condition>
+Return task: <native task id of owner>
+```
+
+```text
+[BROWSER RESULT]
+Transport assignment: <exact inbound value>
+Direction: <exact inbound value>
+Owner stage: <exact inbound value>
+Summary: <current page/conversation consequence and whether a send occurred>
+Browser transport state: <AGENTS-defined transport state>
+Provider conversation: <exact provider URL and conversation ID or NONE>
+Response archive: <exact path or NONE>
+Refs: <direct provider/Agentify facts; tool-local operation locator when needed>
+Reentry: <exact condition when nonterminal; otherwise none>
+Return task: <exact inbound native task id>
+```
+
+```text
+[BROWSER CONTROL]
+Action: PAUSE | RESUME | CANCEL
+Transport assignment: <exact inbound value>
+Direction: <exact inbound value>
+Owner stage: <exact inbound value>
+Reason: <why>
+Updated at: <timestamp>
+Return task: <exact owner task id>
+```
+
 The conclusion comes before compact fields. A message is a self-contained natural-language task
 model; IDs, paths, fields, and commits are factual anchors after meaning and cannot substitute for
 role judgment. `Return task` is a native routing locator for this one assignment, not authentication
 or a durable message ledger.
 
-用户直接进入某 participant 时，不制造 `Return task`；该 participant 在当前 task 回答用户。
+用户直接进入 Root、Portfolio、EM 或 CM 时，不制造 `Return task`；该 participant 在当前 task
+回答用户。Browser Transport 只接受含 exact `Return task` 的 assignment。
 
 ## 3. Dispatch and task creation
 
@@ -77,7 +127,8 @@ Requester 执行下列最小动作：
    Desktop project。
 3. 新 task 的 initial prompt 本身就是完整 `[WORK]`；不得先建空 task 再重复发送。setup
    client ID 只用于等待，只有 ready thread ID 可以接收后续消息。
-4. 复用 current task 时，确认其没有 unfinished inbound WORK，再直接发送一条完整 WORK。
+4. 复用 current Root/Portfolio/EM/CM task 时，确认其没有 unfinished inbound WORK，再直接发送
+   一条完整 WORK。
 5. 旧 archived task 不复用。若出现两个 current 候选，停止投递并让用户选择；不从本地文件
    重建 target identity。
 
@@ -85,8 +136,35 @@ Requester 执行下列最小动作：
 history；看到完整消息即视为已投递，确认不存在才允许发送一次。不得因 API 超时、UI 未刷新或
 本地未知状态盲目重复 WORK/CONTROL。
 
-每个 target 同时最多持有一个 unfinished inbound WORK，且其 `Return task` 在 terminal 前不变。
+每个 Root/Portfolio/EM/CM target 同时最多持有一个 unfinished inbound WORK，且其 `Return task`
+在 terminal 前不变。
 一个 successor 必须等当前 WORK terminal 并释放 target 后，才作为新的完整 WORK 投递。
+
+## 3.1 Browser Transport dispatch and multiplexing
+
+Browser Transport 是唯一 current、长期复用的 Luna/xhigh top-level task。第一次创建使用保存的
+HMASD project 与原生 `environment: local`；initial prompt 要求完整读取
+`hmasd-browser-conversation` skill、确认 READY，并在收到 `[BROWSER WORK]` 前不打开或改变页面。
+旧 archived Browser task 不复用；若 native list 出现两个 current 候选，停止并让用户选择，不建
+本地 registry 来消歧。
+
+EM/CM 直接发送 `[BROWSER WORK]`。人类可读 locator 是 exact
+`Return task + Direction + Owner stage + Transport assignment`；同一 locator 是同一 assignment 的
+continuation，任何字段不同都是另一 assignment，Browser Transport 不合并或猜测。Browser
+Transport 在每条 `[BROWSER RESULT]` 中逐字回显这四项并只投递给 `Return task`。
+
+该 task 可同时保留 multiple unfinished browser assignments，这是 §3 单 inbound 规则的唯一例外。
+并发到达按 native history order 逐条消费，不合并消息；一次只执行一个 send-capable 或 browser
+mutation action。一个 strict operation 返回 `SENT_WAITING` 后，Browser Transport 立即向 owner
+发送当前 RESULT 并 yield，不用一个约 45 分钟的 Pro generation 占住 task。下一条 native message
+可服务另一个 assignment。后来 `OBSERVE_ONLY` 必须使用同一 locator，并绑定同一 strict operation
+和 provider conversation；绝不发送、换 prompt 或把当前 tab 当作 continuation 证据。
+
+Agentify 只在 first binding 前串行同一 provider/account 的 unbound-root writer。获得 concrete
+provider conversation 后，各 assignment 可独立等待和观察。Tab ID 与 operation key 留在 Browser
+Transport/Agentify 内部；跨 task 只返回 provider conversation URL/ID 和 owner-supplied archive path。
+Native history 与 Agentify operation fact 已足够；不得添加 queue、registry、receipt、scheduler 或
+额外认证。一个 assignment WAITING 不阻塞其他 independent assignment。
 
 ## 4. Liveness and CONTROL
 
@@ -96,18 +174,27 @@ history；看到完整消息即视为已投递，确认不存在才允许发送�
   WORK。新 WORK 本身不是 retry authority。
 - 任何 nonterminal Effect 都留在同一个 WORK 并由既有 owner/assignment 继续；观察困难或等待
   超时不结束 WORK、不释放 target。External browser conversation 的完整方法只由显式
-  `hmasd-browser-conversation` skill 定义；该 leaf 理解页面与对话阶段，但不解释 owner 内容。
+  `hmasd-browser-conversation` skill 定义；该 top-level task 理解页面与对话阶段，但不解释 owner
+  内容。
 - Ordinary provider-page recovery stays inside the existing browser-conversation assignment. A wait
   bound or tool-local failure predicate does not create a Root/shared repair or a Portfolio
   decision. Only a demonstrated implementation defect outside page-local recovery may later become
   a separately framed shared repair through the normal requester chain.
 - Fresh external operation 只允许出现在 `AGENTS.md` 已定义的共享边界内；它不构成 successor
   WORK、retry message 或 lifecycle event。
-- `PAUSE` 保留当前 WORK，禁止新的 launch/send。
-- `RESUME` 只继续同一个 paused 或 waiting WORK。
-- `CANCEL` 只来自用户或用户明确授权的 requester。Callee 停止尚未提交的 Effect；已经提交
-  或 commitment unknown 的 Effect 只观察到可说明的安全终态，然后按 `AGENTS.md` 返回
-  `CANCELLED`。CONTROL 不携带替代 objective。
+- `PAUSE` 保留当前 WORK，禁止新的 launch/send。Browser assignment 使用 exact `[BROWSER
+  CONTROL]`，不能用一个方向或当前 tab 暂停其他 assignment。
+- `RESUME` 只继续同一个 paused 或 waiting WORK；Browser assignment 仍使用同一 locator、operation
+  或已授权的 fresh zero-send operation。
+- `CANCEL` 只来自用户或用户明确授权的 requester。对 Root、Portfolio、EM、CM，callee 停止
+  尚未提交的 Effect；已经提交或 commitment unknown 的 Effect 只观察到可说明的安全终态，
+  然后按 `AGENTS.md` 返回 `CANCELLED`。CONTROL 不携带替代 objective。
+- `[BROWSER CONTROL] Action: CANCEL` 只作用于 exact locator，Browser Transport 从不输出
+  top-level `CANCELLED`。若尚无 send-capable call，该 assignment 变为 `WAIVED` 并立即返回
+  `[BROWSER RESULT]`；若 send 已提交或 commitment unknown，则禁止新 send，只在 owner 后续
+  `OBSERVE_ONLY` 或 `[BROWSER CONTROL] RESUME` 下观察同一 operation/conversation，并返回其
+  实际 transport fact。只有 EM/CM owner 在 committed Effect 达到安全事实后，才可为自己的
+  top-level WORK 返回 `CANCELLED`。
 
 Native task 进入 idle、stopped、completed 或 not-loaded 等产品状态，但其 inbound WORK 没有
 terminal RESULT 时，requester 恢复或继续该 exact task，并先读取已有 history/artifacts；不得重做

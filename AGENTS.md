@@ -8,9 +8,10 @@ task identity, authentication, message receipts, retry ledgers, registries, rout
 
 - This file is the universal semantic kernel injected into every HMASD task.
 - `docs/project/WORKFLOW_PROTOCOL.md` is the sole cross-task transport authority.
-- The four session skills contain the complete role-local method for `hmasd-root-task`,
-  `hmasd-portfolio-task`, `hmasd-em-task`, and `hmasd-cm-task`. A top-level participant uses its one
-  skill and does not load another top-level role method merely to understand the topology.
+- The five session skills contain the complete role-local method for `hmasd-root-task`,
+  `hmasd-portfolio-task`, `hmasd-em-task`, `hmasd-cm-task`, and
+  `hmasd-browser-conversation`. A top-level participant uses its one skill and does not load another
+  top-level role method merely to understand the topology.
 - `.agents/roles/` contains only custom-subagent methods. Each leaf reads only its configured role
   document and returns its local observation to its parent.
 - Direction science lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
@@ -38,11 +39,12 @@ positive, implementation succeeded, a provider request completed, or a direction
 
 | Owner | Fixed fields and exhaustive values |
 | --- | --- |
-| Any top-level task | `Outcome: DONE | WAITING | FAILED | CANCELLED` |
+| Root, Portfolio, EM, or CM | `Outcome: DONE | WAITING | FAILED | CANCELLED` |
 | Root | `Root status: IN_PROGRESS | CHANGED | UNCHANGED | BLOCKED`; `Integration status: IN_PROGRESS | INTEGRATED | NOT_INTEGRATED | NOT_APPLICABLE` |
 | Portfolio | `Direction actions: <direction_id>=<action>; ...`, where each action is `NONE | ACTIVATE | CONTINUE | NARROW | PARK | CLOSE | FUSE | SPINOFF`; `Capacity action: KEEP | SET <n>` |
 | EM | `Scientific status: IN_PROGRESS | SYNTHESIZED | NO_MATERIAL_INSIGHT | NOT_REACHED`; `Decision impact: <text or NONE>`; `Recommendation: NONE | CONTINUE | NARROW | PARK | CLOSE | FUSE | SPINOFF`; `Pro Innovator: <transport state>`; `Pro Convergence: <transport state>` |
 | CM | `Engineering status: IN_PROGRESS | IMPLEMENTED | UNCHANGED | BLOCKED | NOT_REACHED`; `Observation status: IN_PROGRESS | OBSERVED | NOT_OBSERVED | NOT_REQUIRED`; `Verification status: IN_PROGRESS | SATISFIED | UNSATISFIED | NOT_RUN`; `Commit: <git commit or NONE>` |
+| Browser Transport | `Browser transport state: <transport state>`; `Provider conversation: <exact URL and ID or NONE>`; `Response archive: <exact path or NONE>` |
 
 Top-level outcome meanings are exhaustive:
 
@@ -51,6 +53,11 @@ Top-level outcome meanings are exhaustive:
 - `FAILED`: the assignment ended without satisfying its acceptance.
 - `CANCELLED`: only a received `[CONTROL] Action: CANCEL` can produce this value, after committed
   Effects reach an observable safe terminal fact.
+
+Browser Transport does not emit `Outcome`; it remains a reusable task and reports one assignment's
+transport facts through `[BROWSER RESULT]`. `Provider conversation` is the directly observed remote
+locator, not a tab or Codex task. `Response archive` is the owner-supplied path only after exact
+write and reread, otherwise `NONE`.
 
 Role-owned field values are equally independent:
 
@@ -166,6 +173,20 @@ boundary, no live Effect remains, and no waiver applies, the current assignment 
 the owner's actually reached role fields and no lifecycle recommendation; it never becomes
 `CANCELLED`. Transport failure cannot imply `PARK`, `CLOSE`, or any other Portfolio action.
 
+Browser transport objects have one shared vocabulary:
+
+| Object | Meaning |
+| --- | --- |
+| Browser Transport task | One long-lived Luna/xhigh Codex task that can cooperatively carry multiple independent assignments. |
+| Browser assignment | The human-readable tuple `Return task + Direction + Owner stage + Transport assignment`; the same tuple is continuation of the same owner request. |
+| Strict operation | One tool-local send-capable attempt inside one assignment; it sends at most once. |
+| Provider conversation | A durable remote ChatGPT/Gemini conversation identified by provider URL/ID. |
+| Browser tab | A replaceable local view of one provider conversation; closing it neither deletes nor stops that conversation. |
+
+Direction is scientific context, the Return task is the native delivery route, and neither is a
+provider conversation. An operation ID, tab ID, Agentify key, or content hash is never a direction,
+task identity, receipt, or cross-task route.
+
 Leaf observations are also separate namespaces:
 
 | HMASD task-name code | Configured custom subagent | Own final field |
@@ -176,7 +197,6 @@ Leaf observations are also separate namespaces:
 | `rp` | `hmasd-research-principles-analyst` | `Principles status: DEFECTS | NO_MATERIAL_DEFECT | INCOMPLETE` |
 | `rs` | `hmasd-research-scout` | `Evidence status: FOUND | CONFLICTED | NOT_FOUND | UNAVAILABLE` |
 | `rc` | `hmasd-research-critic` | `Critique status: OBJECTIONS | NO_MATERIAL_OBJECTION | INCOMPLETE` |
-| `bc` | `hmasd-browser-conversation` | `Browser conversation state: <transport state>` |
 | `im` | `hmasd-implementer` | `Implementation observation: IMPLEMENTED | PARTIAL | BLOCKED` |
 | `rt` | `hmasd-routine-implementer` | `Routine implementation observation: IMPLEMENTED | PARTIAL | BLOCKED` |
 | `rv` | `hmasd-reviewer` | `Review status: FINDINGS | NO_FINDINGS | INCOMPLETE` |
@@ -205,7 +225,6 @@ Leaf value meanings are local to that observation:
   and `UNAVAILABLE` could not run the probe.
 - `op`: `TERMINAL` retains the exact process through a terminal witness, `LAUNCH_FAILED` proves no
   process was launched, and `OBSERVATION_LOST` means the launched process lacks a terminal witness.
-  `bc` uses exactly the shared transport-state meanings above.
 
 ## Caller matrix and task configuration
 
@@ -213,13 +232,17 @@ Leaf value meanings are local to that observation:
 | --- | --- | --- |
 | Root | `gl`, `rv` | user intent, shared-core contract, workflow repair, task conflict, cross-direction Git integration |
 | Portfolio | `gl` | quality floor, lifecycle, priority, capacity, fusion/separation, dispatch and join |
-| EM | `gl`, `rs`, `ri`, `rp`, `rc`, `bc` | scientific scope, evidence synthesis, claim ceiling, discriminator, Pro prompt authorship, direction authority |
-| CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op`, `bc` | engineering contract, implementer selection, integration, validation interpretation, technical acceptance and Git closure |
+| EM | `gl`, `rs`, `ri`, `rp`, `rc` | scientific scope, evidence synthesis, claim ceiling, discriminator, Pro prompt authorship, direction authority |
+| CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op` | engineering contract, implementer selection, integration, validation interpretation, technical acceptance and Git closure |
 
 Root sends bounded shared engineering to a dedicated top-level `CM/shared`; it does not borrow a
 direction CM or call engineering leaves directly. EM never calls engineering leaves. CM never calls
 research leaves. Portfolio never calls either specialist family. Leaves normally return only to
 their spawning parent and never contact another top-level participant.
+
+External browser consultation is not a leaf. EM or CM sends a complete `[BROWSER WORK]` directly to
+the one current Browser Transport task and consumes only its `[BROWSER RESULT]`. Browser Transport
+never contacts Portfolio and never interprets owner content.
 
 A role-local fact check is the sole depth-2 exception. A judgment leaf may spawn only the Scout or
 Verifier types named by its own role method, one child at a time. Each child receives one frozen
@@ -241,6 +264,7 @@ New top-level tasks use explicit native configuration:
 | Portfolio | `gpt-5.6-sol` | `max` |
 | EM | `gpt-5.6-sol` | `max` |
 | CM | `gpt-5.6-sol` | `high` |
+| Browser Transport | `gpt-5.6-luna` | `xhigh` |
 | Root | user-selected | user-selected |
 
 Codex has no native alias field for these codes. They are only an HMASD display-name convention;
@@ -248,7 +272,7 @@ the configured native agent identifiers remain the `[agents.*]` entries in `.cod
 the `hmasd-*` profile names above. Direct-leaf `spawn_agent.task_name` uses
 `<code>_<model>_<effort>_<task>`. The model code is
 `l | t | s`; effort is `l | m | h | xh | mx | u`; task is `[a-z0-9_]+`. Codes must match the actual
-selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`, `bc_l_xh_pro`. This is a short display
+selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`. This is a short display
 name only and is never an identity, receipt, or route.
 
 ## Universal leaf and Effect boundaries
@@ -291,6 +315,10 @@ it. Portfolio, EM, and CM are created from the saved HMASD project using Codex n
 `environment: worktree`, with an exact existing branch only when a specific baseline is required.
 No direction directory must be saved as a separate Desktop project, and no local worktree mapping
 or registry is created.
+
+The Browser Transport task uses the saved HMASD project directly with native `environment: local`.
+It is not a Git-visible direction writer; Agentify may write only the exact response path supplied by
+the owner assignment.
 
 For one direction, only one top-level participant is a Git-visible writer at a time. Exact
 top-level writer transfer and handoff behavior is defined only by

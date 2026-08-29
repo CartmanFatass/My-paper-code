@@ -14,7 +14,6 @@ EXPECTED = {
     "hmasd-reviewer": ("gpt-5.6-sol", "xhigh", "read-only"),
     "hmasd-verifier": ("gpt-5.6-luna", "high", "workspace-write"),
     "hmasd-experiment-operator": ("gpt-5.6-luna", "low", "danger-full-access"),
-    "hmasd-browser-conversation": ("gpt-5.6-luna", "xhigh", "danger-full-access"),
     "hmasd-research-scout": ("gpt-5.6-sol", "high", "read-only"),
     "hmasd-research-critic": ("gpt-5.6-sol", "max", "read-only"),
     "hmasd-general-leaf": ("gpt-5.6-luna", "xhigh", "danger-full-access"),
@@ -28,7 +27,6 @@ TASK_NAME_CODES = {
     "rv": "hmasd-reviewer",
     "vf": "hmasd-verifier",
     "op": "hmasd-experiment-operator",
-    "bc": "hmasd-browser-conversation",
     "rs": "hmasd-research-scout",
     "rc": "hmasd-research-critic",
     "gl": "hmasd-general-leaf",
@@ -77,7 +75,7 @@ def test_short_task_name_codes_cover_the_exact_registered_roster() -> None:
         assert f"| `{code}` | `{profile}` |" in agents
     assert "Codex has no native alias field for these codes" in agents
     assert "<code>_<model>_<effort>_<task>" in agents
-    for example in ("rv_s_xh_plan", "gl_l_xh_pdf", "bc_l_xh_pro"):
+    for example in ("rv_s_xh_plan", "gl_l_xh_pdf"):
         assert example in agents
 
 
@@ -87,7 +85,6 @@ def test_each_leaf_profile_points_to_only_its_own_observation_role() -> None:
         "hmasd-reviewer": "Review status:",
         "hmasd-verifier": "Verification observation:",
         "hmasd-experiment-operator": "Run observation:",
-        "hmasd-browser-conversation": "Browser conversation state:",
         "hmasd-research-scout": "Evidence status:",
         "hmasd-research-critic": "Critique status:",
         "hmasd-general-leaf": "Chore status:",
@@ -151,7 +148,7 @@ def test_depth_two_is_only_for_role_local_fact_check_and_parent_convergence() ->
             assert fact_checker in role
     for filename in (
         "CM_SCOUT.md", "RESEARCH_SCOUT.md", "VERIFIER.md", "GENERAL_LEAF.md",
-        "BROWSER_CONVERSATION.md", "EXPERIMENT_OPERATOR.md",
+        "EXPERIMENT_OPERATOR.md",
     ):
         role = (ROOT / ".agents/roles" / filename).read_text(encoding="utf-8")
         assert "## Fact check and parent convergence" not in role
@@ -159,21 +156,15 @@ def test_depth_two_is_only_for_role_local_fact_check_and_parent_convergence() ->
 
 def test_browser_conversation_uses_semantic_page_reasoning_and_one_strict_send() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    profile = tomllib.loads(
-        (ROOT / ".codex/agents/hmasd-browser-conversation.toml").read_text(
-            encoding="utf-8"
-        )
-    )["developer_instructions"]
-    role = (ROOT / ".agents/roles/BROWSER_CONVERSATION.md").read_text(encoding="utf-8")
     skill = (ROOT / ".agents/skills/hmasd-browser-conversation/SKILL.md").read_text(
         encoding="utf-8"
     )
     em = (ROOT / ".agents/skills/hmasd-em-task/SKILL.md").read_text(encoding="utf-8")
-    instructions = " ".join("\n".join((role, skill)).split())
+    instructions = " ".join(skill.split())
     for required in (
-        "Agentify strict operation", "GPT-5.6 Pro", "frozen prompt path",
+        "Agentify strict review", "GPT-5.6 Pro", "frozen prompt path",
         "observe → interpret → act → verify", "Computer Use",
-        "conditional observation", "full naturally completed response",
+        "full response is written to the exact response path",
     ):
         assert required in instructions
     for owner_prompt_requirement in (
@@ -188,24 +179,25 @@ def test_browser_conversation_uses_semantic_page_reasoning_and_one_strict_send()
     ):
         assert state in agents
     assert "Never compose, shorten" in instructions
-    assert "Invoke that strict operation once" in instructions
+    assert "Invoke it once for one operation" in instructions
     assert "exclusive send-capable actuator" in instructions
     assert "Computer Use must not click Send" in instructions
     assert "Do not loop an unchanged failure" in instructions
-    assert "ordinary query calls" in instructions
+    assert "ordinary query" in instructions
     assert "stop or reentry condition" in instructions
     for conversation_fact in (
-        "tab is a replaceable view",
+        "browser tab is a replaceable local view",
         "45-minute window",
-        "new conversation",
-        "causally associated assistant turn",
+        "New conversation",
+        "causal assistant turn",
         "close the replaceable tab",
-        "scientific or engineering interpretation remains with the parent",
+        "scientific or engineering judgment",
     ):
         assert conversation_fact in instructions
     assert "same material cycle" not in instructions
-    assert "hmasd-browser-conversation" in role
-    assert ".agents/roles/BROWSER_CONVERSATION.md" in profile
+    assert "one long-lived Luna/xhigh Browser Transport task" in instructions
+    assert not (ROOT / ".agents/roles/BROWSER_CONVERSATION.md").exists()
+    assert not (ROOT / ".codex/agents/hmasd-browser-conversation.toml").exists()
 
 
 def test_profiles_are_thin_role_pointers_with_bounded_context() -> None:
@@ -214,7 +206,6 @@ def test_profiles_are_thin_role_pointers_with_bounded_context() -> None:
         "hmasd-reviewer": "REVIEWER.md",
         "hmasd-verifier": "VERIFIER.md",
         "hmasd-experiment-operator": "EXPERIMENT_OPERATOR.md",
-        "hmasd-browser-conversation": "BROWSER_CONVERSATION.md",
         "hmasd-research-scout": "RESEARCH_SCOUT.md",
         "hmasd-research-critic": "RESEARCH_CRITIC.md",
         "hmasd-general-leaf": "GENERAL_LEAF.md",
@@ -253,7 +244,7 @@ def test_agents_is_the_only_human_readable_shared_field_glossary() -> None:
     )
     for relative in (
         "docs/project/WORKFLOW_PROTOCOL.md",
-        ".agents/roles/BROWSER_CONVERSATION.md",
+        ".agents/skills/hmasd-browser-conversation/SKILL.md",
         ".agents/roles/RESEARCH_INNOVATOR.md",
         ".agents/roles/IMPLEMENTER.md",
     ):
@@ -265,5 +256,6 @@ def test_legacy_agent_profiles_are_absent() -> None:
         "hmasd-research-artifact-writer",
         "hmasd-external-pro-transport", "hmasd-external-gemini-transport",
         "hmasd-cpm-agentify-transport", "hmasd-explorer-agentify-transport",
+        "hmasd-browser-conversation",
     }
     assert not any((ROOT / ".codex/agents" / f"{name}.toml").exists() for name in forbidden)

@@ -19,52 +19,60 @@ def _flat(relative: str) -> str:
     return " ".join(_read(relative).split())
 
 
-def test_browser_conversation_is_one_luna_xhigh_session_role() -> None:
+def test_browser_transport_is_one_top_level_luna_xhigh_task_not_a_leaf() -> None:
     config = tomllib.loads(_read(".codex/config.toml"))
-    entry = config["agents"]["HMASDBrowserConversation"]
-    assert entry["config_file"] == "./agents/hmasd-browser-conversation.toml"
+    assert "HMASDBrowserConversation" not in config["agents"]
+    assert not (ROOT / ".codex/agents/hmasd-browser-conversation.toml").exists()
+    assert not (ROOT / ".agents/roles/BROWSER_CONVERSATION.md").exists()
 
-    profile = tomllib.loads(_read(".codex/agents/hmasd-browser-conversation.toml"))
-    assert profile["model"] == "gpt-5.6-luna"
-    assert profile["model_reasoning_effort"] == "xhigh"
-    assert profile["sandbox_mode"] == "danger-full-access"
-    assert profile["approval_policy"] == "never"
-    instructions = " ".join(profile["developer_instructions"].split())
-    assert ".agents/roles/BROWSER_CONVERSATION.md" in instructions
-    assert "universal boundaries come from `AGENTS.md`" in instructions
-
-
-def test_browser_conversation_skill_has_a_semantic_closed_loop() -> None:
+    agents = _flat("AGENTS.md")
     skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
-    role = _flat(".agents/roles/BROWSER_CONVERSATION.md")
+    openai_yaml = _read(
+        ".agents/skills/hmasd-browser-conversation/agents/openai.yaml"
+    )
+    assert "five session skills" in agents
+    assert "Browser Transport | `gpt-5.6-luna` | `xhigh`" in agents
+    assert "one long-lived Luna/xhigh Browser Transport task" in skill
+    assert 'display_name: "HMASD Browser Transport"' in openai_yaml
+    assert "allow_implicit_invocation: false" in openai_yaml
 
+
+def test_browser_transport_skill_has_a_semantic_closed_loop() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
     for marker in (
-        "local browser task model",
-        "agent session, browser tab, and provider conversation",
+        "assignment-local task model",
         "observe → interpret → act → verify",
-        "DOM, accessibility, URL, and provider conversation facts first",
-        "screenshots and Computer Use",
-        "only when semantic page evidence is insufficient",
-        "one external conversation assignment until",
+        "DOM, accessibility, URL",
+        "screenshots and the installed `computer-use:computer-use` skill",
+        "only when DOM/accessibility evidence is insufficient",
         "ordinary page-local recovery",
-        "conditional observation",
         "elapsed time alone",
         "close the replaceable tab",
     ):
         assert marker in skill
+    assert "do not behave like a fixed UI macro" in skill
 
-    assert "understands the page, conversation stage, and browser-task progress" in role
-    assert "scientific or engineering interpretation remains with the parent" in role
-    assert "Portfolio" not in role
+
+def test_current_chatgpt_product_name_maps_only_to_the_real_pro_control() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    for marker in (
+        "owner terms `GPT-5.6 Pro` and `GPT-5.6 Sol Pro`",
+        "composer/model-picker control visibly labelled `Pro`",
+        "Preserve the owner term and the visible label as separate facts",
+        "account-plan/profile label",
+        "never proves model selection",
+        "https://help.openai.com/en/articles/20001354-gpt-56-in-chatgpt/",
+    ):
+        assert marker in skill
 
 
 def test_computer_use_cannot_cross_the_send_boundary() -> None:
     skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
-    assert "Agentify strict operation is the exclusive send-capable actuator" in skill
+    assert "Agentify strict review is the exclusive send-capable actuator" in skill
     assert "Computer Use must not click Send, press Enter in the composer" in skill
     for forbidden in ("Retry", "Continue", "Regenerate", "Answer now"):
         assert forbidden in skill
-    assert "After any ambiguous send-capable event, observe only" in skill
+    assert "After an ambiguous send-capable event, observe the same operation only" in skill
 
 
 def test_complete_is_bound_to_one_prompt_and_its_causal_response() -> None:
@@ -72,35 +80,103 @@ def test_complete_is_bound_to_one_prompt_and_its_causal_response() -> None:
     for marker in (
         "exclusive writer ownership",
         "exact baseline turn identity",
-        "exactly one provider-visible user turn equal to the frozen prompt",
-        "causally associated assistant turn",
+        "exactly one provider-visible user turn equals the frozen prompt",
+        "causal assistant turn",
         "Unexpected turn drift",
         "observe-only ambiguity",
-        "full naturally completed response",
-        "written to the exact response path and reread",
+        "full response is written to the exact response path and reread",
     ):
         assert marker in skill
 
 
-def test_unbound_provider_root_is_not_treated_as_an_isolated_new_conversation() -> None:
+def test_unbound_provider_root_is_not_treated_as_an_isolated_conversation() -> None:
     skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
     for marker in (
-        "root URL or a New conversation action is intent, not proof",
-        "unbound root composer can be shared across tabs",
-        "serialize first-binding preparation and its strict send",
-        "concrete provider conversation ID",
-        "tool-local ephemeral root-writer mutex",
-        "must not type, paste, clear, select, or delete composer content",
+        "root URL or New conversation action is intent, not proof",
+        "unbound root composer may be shared across tabs",
+        "strict first-binding operation alone owns composer preparation",
+        "root-writer mutex",
+        "must not type, paste, clear, select, delete, or send composer content",
     ):
         assert marker in skill
+
+
+def test_direction_task_assignment_operation_conversation_and_tab_are_distinct() -> None:
+    agents = _flat("AGENTS.md")
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    for marker in (
+        "Browser Transport Codex task",
+        "scientific direction is owner context, not transport identity",
+        "(Return task, Direction, Owner stage, Transport assignment)",
+        "strict operation is one send-capable attempt",
+        "provider conversation is the durable remote conversation",
+        "browser tab is a replaceable local view",
+    ):
+        assert marker in skill
+    assert "Return task + Direction + Owner stage + Transport assignment" in agents
+    assert "operation ID, tab ID, Agentify key, or content hash is never a direction" in agents
+
+
+def test_multiplex_contract_handles_a_waiting_b_then_a_observe_without_crossing() -> None:
+    protocol = _flat("docs/project/WORKFLOW_PROTOCOL.md")
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    for marker in (
+        "multiple unfinished browser assignments",
+        "native history order",
+        "不合并消息",
+        "一次只执行一个 send-capable 或 browser mutation action",
+        "strict operation 返回 `SENT_WAITING`",
+        "立即向 owner 发送当前 RESULT 并 yield",
+        "后来 `OBSERVE_ONLY` 必须使用同一 locator",
+        "绑定同一 strict operation 和 provider conversation",
+    ):
+        assert marker in protocol
+    for marker in (
+        "do not let one long Pro generation block unrelated eligible work",
+        "service another assignment only when its native `[BROWSER WORK]` or",
+        "observe a long-running conversation again only after an authorized `OBSERVE_ONLY`",
+        "There is no self-wakeup, background polling loop, or implicit scheduler",
+        "Never reuse a tab, key, current page, or direction name",
+    ):
+        assert marker in skill
+    for text in (protocol, skill):
+        assert "local queue" not in text
+        assert "local registry" not in text
+
+
+def test_browser_cancel_stays_in_the_transport_namespace() -> None:
+    protocol = _flat("docs/project/WORKFLOW_PROTOCOL.md")
+    agents = _flat("AGENTS.md")
+    for marker in (
+        "Browser Transport 从不输出 top-level `CANCELLED`",
+        "若尚无 send-capable call，该 assignment 变为 `WAIVED`",
+        "只有 EM/CM owner 在 committed Effect 达到安全事实后",
+    ):
+        assert marker in protocol
+    assert "Browser Transport does not emit `Outcome`" in agents
+
+
+def test_em_and_cm_send_direct_browser_work_and_consume_transport_facts() -> None:
+    agents = _flat("AGENTS.md")
+    em = _flat(".agents/skills/hmasd-em-task/SKILL.md")
+    cm = _flat(".agents/skills/hmasd-cm-task/SKILL.md")
+    assert "External browser consultation is not a leaf" in agents
+    assert "EM or CM sends a complete `[BROWSER WORK]` directly" in agents
+    assert "Send one complete `[BROWSER WORK]` directly" in em
+    assert "nonterminal `[BROWSER RESULT]`" in em
+    assert "sends one complete `[BROWSER WORK]` directly" in cm
+    assert "OBSERVE_ONLY" in cm
+    assert "`bc`" not in "\n".join((agents, em, cm))
 
 
 def test_old_blind_transport_roles_are_absent_from_the_active_surface() -> None:
     for relative in (
         ".codex/agents/hmasd-cpm-agentify-transport.toml",
         ".codex/agents/hmasd-explorer-agentify-transport.toml",
+        ".codex/agents/hmasd-browser-conversation.toml",
         ".agents/roles/PRO_TRANSPORT.md",
         ".agents/roles/ENGINEERING_TRANSPORT.md",
+        ".agents/roles/BROWSER_CONVERSATION.md",
         ".agents/skills/hmasd-agentify-transport/SKILL.md",
         "docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md",
     ):
@@ -126,21 +202,19 @@ def test_old_blind_transport_roles_are_absent_from_the_active_surface() -> None:
         "existing `et`",
     ):
         assert stale not in active
-    assert "`bc`" in active
     assert "hmasd-browser-conversation" in active
 
 
-def test_browser_conversation_returns_only_its_local_fact_namespace() -> None:
+def test_browser_transport_returns_only_its_local_fact_namespace() -> None:
     agents = _flat("AGENTS.md")
-    role = _flat(".agents/roles/BROWSER_CONVERSATION.md")
-    assert "| `bc` | `hmasd-browser-conversation` | `Browser conversation state: <transport state>` |" in agents
-    assert "EM | `gl`, `rs`, `ri`, `rp`, `rc`, `bc`" in agents
-    assert "CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op`, `bc`" in agents
-    assert "Browser conversation state" in role
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "Browser Transport | `Browser transport state: <transport state>`" in agents
+    assert "Do not emit top-level `Outcome`" in skill
     for leaked in (
         "Scientific status:",
         "Engineering status:",
-        "Portfolio action:",
+        "Direction actions:",
         "Recommendation:",
+        "Capacity action:",
     ):
-        assert leaked not in role
+        assert leaked not in skill

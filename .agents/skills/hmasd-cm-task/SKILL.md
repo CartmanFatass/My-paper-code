@@ -62,10 +62,10 @@ history, owned-path diff and Git facts before repeating work.
    equivalence observation that CM's focused tests and static inspection cannot answer; CM still
    interprets that observation.
 8. If an external engineering consultation is necessary, CM writes the complete natural-language
-   question and assigns `bc` the exact owner-authored file, required provider/model, binding,
-   archive path, observation bound and stop condition. The browser-conversation agent follows its
-   explicit semantic browser skill; it neither authors the question nor decides technical
-   acceptance.
+   question and sends one complete `[BROWSER WORK]` directly to the current Browser Transport task,
+   with this CM task as `Return task`, exact shared/direction stage and assignment, owner-authored
+   file, required provider/model, new or exact conversation, archive path, observation bound and
+   stop condition. Browser Transport neither authors the question nor decides technical acceptance.
 9. Overwrite the current engineering snapshot only at a material milestone or when losing the
    conclusion, refs, blocker, reentry and next action would cause costly repetition. It is the last
    accepted milestone, never an event log or substitute for later in-flight work.
@@ -85,9 +85,10 @@ relaunch a result command or broaden semantics to make a test pass.
 A running engineering leaf, unresolved external consultation, or launched process without a
 terminal witness keeps the same WORK live: continue native wait or same-operation observation. Do
 not return a terminal Outcome while any such operation remains live. CM never performs transport
-mechanics itself; continue the existing `bc` assignment for a nonterminal transport fact. If `bc`
+mechanics itself; send an `OBSERVE_ONLY` continuation with the same Browser assignment locator for a
+nonterminal transport fact. If Browser Transport
 returns an isolated terminal fact, preserve engineering scope and use only the shared
-single-replacement boundary, again through `bc`. When a required consultation remains unavailable
+single-replacement boundary, again through Browser Transport. When a required consultation remains unavailable
 after that bound, wait only for a concrete user decision that can satisfy the assignment;
 otherwise end after every committed Effect has a terminal fact, without implying acceptance.
 

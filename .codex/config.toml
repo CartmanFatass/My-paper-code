@@ -27,10 +27,6 @@ config_file = "./agents/hmasd-verifier.toml"
 description = "Operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
-[agents.HMASDBrowserConversation]
-description = "Semantic browser conversation agent for one owner-frozen external consultation."
-config_file = "./agents/hmasd-browser-conversation.toml"
-
 [agents.HMASDResearchScout]
 description = "Primary and multi-source research evidence scout."
 config_file = "./agents/hmasd-research-scout.toml"

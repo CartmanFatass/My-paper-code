@@ -58,9 +58,9 @@ ROLE_MARKERS = {
     "GENERAL_LEAF.md": (
         "weakly coupled", "owner judgment", "safe alternative", "assigned output",
     ),
-    "BROWSER_CONVERSATION.md": (
-        "one external browser conversation assignment", "hmasd-browser-conversation",
-        "understands the page", "ordinary page-local problems", "causal response",
+    "BROWSER_TRANSPORT.md": (
+        "one long-lived Luna/xhigh Browser Transport task", "multiple EM or CM owners",
+        "observe → interpret → act → verify", "ordinary page problems", "causal assistant turn",
     ),
     "RESEARCH_INNOVATOR.md": (
         "mechanism family", "strongest simple null", "observable prediction",
@@ -84,6 +84,7 @@ TOP_LEVEL_SKILLS = {
     "PORTFOLIO.md": "hmasd-portfolio-task",
     "EM.md": "hmasd-em-task",
     "CM.md": "hmasd-cm-task",
+    "BROWSER_TRANSPORT.md": "hmasd-browser-conversation",
 }
 
 
@@ -149,14 +150,14 @@ def test_browser_conversation_skill_owns_semantic_browser_use_not_owner_judgment
     skill = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
     agents = _read("AGENTS.md")
     for marker in (
-        "Agentify strict operation", "exact frozen prompt path", "exact response path",
-        "full naturally completed response", "provider-visible user turn",
-        "exclusive writer ownership", "causally associated assistant turn",
-        "tab is a replaceable view", "explicitly requests a new conversation",
-        "screenshots and Computer Use", "ordinary page-local recovery",
+        "Agentify strict review", "exact frozen prompt path", "exact response path",
+        "full response is written", "provider-visible user turn",
+        "exclusive writer ownership", "causal assistant turn",
+        "browser tab is a replaceable local view", "New conversation action",
+        "screenshots and the installed", "ordinary page-local recovery",
     ):
         assert marker in skill
-    assert "ordinary query calls as a substitute" in skill
+    assert "ordinary query as a substitute" in skill
     assert "Never compose" in skill
     assert "tool-local" in skill
     assert "task identity" in skill
@@ -190,9 +191,9 @@ def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
     assert "original assignment authorizes ordinary page-local recovery" in agents
     assert "does not create a Root or Portfolio decision" in agents
     assert "actual page and current conversation stage" in transport
-    assert "tool predicate reports one automation path" in transport
+    assert "tool predicate is evidence about one automation path" in transport
     assert "ordinary page-local recovery" in transport
-    assert "not escalation to the parent" in transport
+    assert "not escalation to the owner" in transport
     assert "failed clear call is not proof that content remains" in transport
     assert "rendered composer fact decides the next step" in transport
     assert "elapsed time alone" in transport
@@ -207,7 +208,8 @@ def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
 def test_transport_separates_model_identity_from_optional_reasoning_controls() -> None:
     transport = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
     assert "separate reasoning control matters only when the owner explicitly froze it" in transport
-    assert "visible `GPT-5.6 Pro` is not invalid" in transport
+    assert "owner terms `GPT-5.6 Pro` and `GPT-5.6 Sol Pro`" in transport
+    assert "account-plan/profile label" in transport
     assert "Exact existing prompt content may be retained and sent in place" in transport
 
 

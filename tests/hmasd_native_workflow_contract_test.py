@@ -28,12 +28,13 @@ def test_only_current_session_skills_are_discoverable() -> None:
         "hmasd-portfolio-task",
         "hmasd-em-task",
         "hmasd-cm-task",
+        "hmasd-browser-conversation",
     }
     actual = {
         path.parent.name
         for path in (ROOT / ".agents" / "skills").glob("hmasd-*/SKILL.md")
     }
-    assert actual == expected | {"hmasd-browser-conversation"}
+    assert actual == expected
     transport_policy = _read(
         ".agents/skills/hmasd-browser-conversation/agents/openai.yaml"
     )
@@ -47,10 +48,13 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
     agents = _read("AGENTS.md")
     principles = _read("docs/project/ALGORITHM_PRINCIPLES.md")
     assert protocol.startswith("# HMASD native Codex workflow\n\nWorkflow revision: ")
-    for marker in ("[WORK]", "[RESULT]", "[CONTROL]"):
+    for marker in (
+        "[WORK]", "[RESULT]", "[CONTROL]",
+        "[BROWSER WORK]", "[BROWSER RESULT]", "[BROWSER CONTROL]",
+    ):
         assert marker in protocol
     assert "Return task: <native task id of requester>" in protocol_flat
-    assert "用户直接进入某 participant 时，不制造 `Return task`" in protocol
+    assert "用户直接进入 Root、Portfolio、EM 或 CM 时，不制造 `Return task`" in protocol
     assert "Portfolio → EM → CM → EM → Portfolio" in protocol
     assert "Action: PAUSE | RESUME | CANCEL" in protocol
     assert "Action: PAUSE | RESUME | CANCEL | REPLACE | RELOAD" not in protocol
@@ -153,7 +157,6 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
         "HMASDReviewer",
         "HMASDVerifier",
         "HMASDExperimentOperator",
-        "HMASDBrowserConversation",
         "HMASDResearchScout",
         "HMASDResearchCritic",
         "HMASDGeneralLeaf",
@@ -222,7 +225,6 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         assert "Outcome:" not in skill
 
     mechanical = (
-        "browser tab",
         "CAPTCHA",
         "responsePath",
         "agentify_review_query",
@@ -235,8 +237,8 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         assert detail not in cm
     assert "`hmasd-browser-conversation` skill" in protocol
     assert "理解页面与对话阶段" in protocol
-    assert "existing `bc` browser-conversation assignment" in _flat(em)
-    assert "existing `bc` assignment" in _flat(cm)
+    assert "one complete `[BROWSER WORK]` directly" in _flat(em)
+    assert "one complete `[BROWSER WORK]` directly" in _flat(cm)
 
 
 def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
@@ -246,17 +248,21 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
         "Portfolio | `gpt-5.6-sol` | `max`",
         "EM | `gpt-5.6-sol` | `max`",
         "CM | `gpt-5.6-sol` | `high`",
+        "Browser Transport | `gpt-5.6-luna` | `xhigh`",
     ):
         assert text in agents
         assert text not in protocol
     assert "显式传入 `AGENTS.md` 的 model/thinking" in protocol
     assert "`<code>_<model>_<effort>_<task>`" in agents
-    for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`bc_l_xh_pro`"):
+    for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`"):
         assert example in agents
     assert "Direct-leaf `spawn_agent.task_name` uses" in agents
     assert "`[a-z0-9_]+`" in agents
     assert "actual selected profile" in _flat(agents)
-    for skill_name in ("hmasd-root-task", "hmasd-portfolio-task", "hmasd-em-task", "hmasd-cm-task"):
+    for skill_name in (
+        "hmasd-root-task", "hmasd-portfolio-task", "hmasd-em-task", "hmasd-cm-task",
+        "hmasd-browser-conversation",
+    ):
         skill = _read(f".agents/skills/{skill_name}/SKILL.md")
         assert "gpt-5.6-" not in skill
         assert "<code>_<model>_<effort>_<task>" not in skill
@@ -267,7 +273,7 @@ def test_external_pro_prompt_is_natural_language_not_control_serialization() -> 
     transport = _read(".agents/skills/hmasd-browser-conversation/SKILL.md")
     normalized = _flat(f"{em}\n{transport}")
     assert "cohesive natural-language `INNOVATOR` prompt" in normalized
-    assert "Never emit a top-level result field" in normalized
+    assert "Do not emit top-level `Outcome`" in normalized
     assert "EM owns the complete Pro prompt" in normalized
     assert "Never compose, shorten, summarize, append, translate, wrap" in normalized
 
@@ -440,9 +446,9 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     assert "may omit CM" in cycle
     assert "writes one cohesive natural-language `INNOVATOR` prompt" in cycle
     assert cycle.count("user explicitly waived that exact unsent operation") == 2
-    assert "browser-conversation agent sends it once" in cycle
-    assert "does not invent extra statuses" in transport
-    assert "Invoke that strict operation once for one operation" in transport
+    assert "Browser Transport, which sends it once" in cycle
+    assert "does not create shared repair work" in transport
+    assert "Invoke it once for one operation" in transport
     fanout = _flat(protocol.split("## 5. Portfolio fan-out and join", 1)[1].split(
         "## 6. Adjacent scientific content", 1
     )[0])
