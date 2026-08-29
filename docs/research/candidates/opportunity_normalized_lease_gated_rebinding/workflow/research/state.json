@@ -1,31 +1,29 @@
 {
-  "blockers": [
-    "The required clean current-protocol Innovator scientific analysis was not reached: the recovered old provider prompt leaked a retired transport-only instruction, and the completed response contains only that transport fact. Convergence remains PENDING and was not sent."
-  ],
-  "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget statement about the named B1 ONLGR-versus-RAW deterministic and RAND-IID contrasts, further limited by timing-only, fixed/global-rate, operational-support, resource, and direct-value evidence. No RAW impossibility, literal hazard, causal lease or REBIND value, arbitrary k, UAV performance, variable N, or general PPO superiority claim is available.",
-  "completed_summary": "This original material cycle ended at SCOPE_FROZEN without a valid scientific synthesis. Native read_thread recovered exact provider conversation 6a91f12d-d36c-83e8-b843-87b5dc6f7e7d with one completed user/assistant turn. The provider-visible prompt includes the retired leaked transport instruction, and the naturally completed response contains only a transport fact. The old Innovator transport is COMPLETE, replacement_used is false, and the response is quarantined from scientific use. No clean Innovator analysis, Convergence, CM task, or experiment was reached. No live Effect remains, so the WORK ends FAILED with Scientific status NOT_REACHED, Decision impact NONE, and Recommendation NONE.",
+  "blockers": [],
+  "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget interpretation of the named B1 deterministic and history-independent RAND-IID ONLGR-versus-RAW contrasts, explicitly qualified by TIMING-ONLY, fixed/global-rate, operational-partition support, voluntary marked activity, service/action-cost, B2, ROAD direct-value, and resource evidence. No RAW representational impossibility, literal hazard, causal lease or REBIND value, arbitrary or continuous k, UAV performance, variable N, transfer, safety certification, or general PPO superiority claim is available.",
+  "completed_summary": "Opened fresh successor cycle 2026-08-28.10-pilot-01a04a02-onlgr-successor-01 from clean exact direction head acf788037d8215142f8f03e72dab1d78ac0e5e3a. Frozen the scientific object, competing explanations and predictions, unchanged-checkpoint discriminator, outcome-to-claim and Portfolio branches, one-CM-round resource ceiling, early-stop and scope-invalidated conditions, and a cohesive neutral Innovator prompt. Both successor Pro stages are fresh and PENDING with replacement_used false. The old provider conversation remains quarantined and is not evidence for this cycle.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "No further action belongs to this terminal WORK or material cycle. Preserve the recovered provider archive and quarantine. Do not reinject the prompt into the recovered conversation, send Convergence, launch CM, create replacement work, cancel, or change lifecycle or capacity. Portfolio may dispatch a successor WORK only after receiving this terminal result.",
-  "next_discriminator": "Unchanged-checkpoint history-independent RAND-IID future-cadence and task-content separation, reconciled with operational marked-partition support, fixed/global-rate and degenerate/oracle headroom, marked voluntary activity, service-versus-action-cost decomposition, B2 rate-flexibility, and ROAD-versus-NEVER/SHAM direct value.",
+  "next_action": "Commit the fresh scope, milestone snapshot, and exact Innovator prompt, then give one fresh current transport leaf a new-conversation strict operation using visible Pro mode, one send-capable call, exact prompt fidelity, a 45-minute observation window, and the declared archive path.",
+  "next_discriminator": "Joint unchanged-checkpoint history-independent RAND-IID interpretation of ONLGR versus RAW and TIMING-ONLY, reconciled with service versus action cost, operational marked-partition availability, voluntary marked activity, fixed/global-rate performance, B2 rate flexibility, and ROAD versus NEVER/SHAM direct value; first determine whether this existing object is sufficient or exposes one answer-changing missing observation.",
   "reentry_condition": null,
   "refs": [
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-scope-and-grounding.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.7-pilot-01a04a02-onlgr-terminal-disposition.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator-prompt.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-scope-and-grounding.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-pro-innovator-prompt.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B1_RESULT.json",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_STATE_BLIND_EVENT_RATE_FLEXIBILITY_SCIENCE_CARD.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_RESULT.json",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_TBVUUS_R03_RESULT_V2_SCIENTIFIC_INTAKE_20260821.md",
+    "acf788037d8215142f8f03e72dab1d78ac0e5e3a",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180"
   ],
   "research_cycle": {
-    "label": "2026-08-28.7-pilot-01a04a02-onlgr",
-    "opened_at": "2026-08-28T20:27:27Z",
+    "label": "2026-08-28.10-pilot-01a04a02-onlgr-successor-01",
+    "opened_at": "2026-08-29T02:34:06Z",
     "pro_convergence": {
       "replacement_used": false,
       "response": null,
@@ -33,13 +31,13 @@
     },
     "pro_innovator": {
       "replacement_used": false,
-      "response": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator.md",
-      "status": "COMPLETE"
+      "response": null,
+      "status": "PENDING"
     },
-    "reason": "Portfolio requested a fresh material reassessment of whether the marked lease-censored exposure-offset boundary link has decision-relevant value beyond RAW, fixed/never/sham-like regularization, timing-only behavior, and deterministic cadence leakage while retaining the completed ROAD result without inflated claims."
+    "reason": "Portfolio requested one clean current-protocol successor cycle to determine whether ONLGR carries decision-relevant task-content or future-cadence information beyond RAW, timing-only behavior, fixed/global-rate or NEVER/SHAM-like regularization, deterministic cadence leakage, and generic exposure reduction."
   },
-  "revision": 5,
+  "revision": 1,
   "role": "EM",
-  "snapshot_state": "TERMINAL_GAP",
-  "updated_at": "2026-08-29T02:21:28.216673Z"
+  "snapshot_state": "WORKING",
+  "updated_at": "2026-08-29T02:34:06Z"
 }
