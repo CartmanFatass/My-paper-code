@@ -82,6 +82,19 @@ def test_complete_is_bound_to_one_prompt_and_its_causal_response() -> None:
         assert marker in skill
 
 
+def test_unbound_provider_root_is_not_treated_as_an_isolated_new_conversation() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    for marker in (
+        "root URL or a New conversation action is intent, not proof",
+        "unbound root composer can be shared across tabs",
+        "serialize first-binding preparation and its strict send",
+        "concrete provider conversation ID",
+        "tool-local ephemeral root-writer mutex",
+        "must not type, paste, clear, select, or delete composer content",
+    ):
+        assert marker in skill
+
+
 def test_old_blind_transport_roles_are_absent_from_the_active_surface() -> None:
     for relative in (
         ".codex/agents/hmasd-cpm-agentify-transport.toml",

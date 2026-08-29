@@ -75,6 +75,20 @@ A tab is a replaceable view, not a provider conversation. Reuse or open any usab
 known conversation, or open a clean provider root when the assignment explicitly requests a new
 conversation. A closed tab does not stop generation or delete the provider conversation.
 
+A root URL or a New conversation action is intent, not proof of a clean, isolated new conversation.
+Within one signed-in browser profile, the unbound root composer can be shared across tabs and may
+rehydrate another tab's draft. Re-observe turns, draft, attachments, and provider state. Until a
+concrete provider conversation ID exists, treat that account's root composer as one shared writer
+surface: serialize first-binding preparation and its strict send against another unbound-root
+writer. Distinct assignments may proceed independently after each has its own concrete provider
+conversation ID.
+
+The strict first-binding operation owns composer preparation while Agentify holds its tool-local
+ephemeral root-writer mutex. On an unbound provider root, operator actions and Computer Use must not
+type, paste, clear, select, or delete composer content; they may only establish semantic page facts
+or repair non-composer UI. This keeps every allowed root-composer mutation inside the mutex and the
+strict exact-prompt receipt.
+
 Recover sign-in, loading, overlays, focus, navigation, model menus, and composer state through
 ordinary page-local recovery. Select and verify the exact owner-required visible model on its real
 provider control. A separate reasoning control matters only when the owner explicitly froze it;
