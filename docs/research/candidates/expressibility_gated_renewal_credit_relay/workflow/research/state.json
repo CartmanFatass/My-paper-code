@@ -1,38 +1,63 @@
 {
-  "blockers": [
-    "[CONTROL] PAUSE received at 2026-08-28T20:46:00Z: requester directed this exact inbound WORK, direction, cycle, and task to remain unfinished after detecting a material transport-contract regression.",
-    "Exact preserved transport facts only: the already-sent Innovator provider turn ended immediately after 'and only these repository-relative refs:'; the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE'. Neither fact is scientific evidence or lifecycle input, and neither operation may be resent, modified, replaced, or reinterpreted."
-  ],
-  "claim_ceiling": "The retained repository evidence supports only the bounded B1 statement that the ordered joiner-to-waiter edge and later-record update were expressive but intact produced exactly no bounded-utility or fixed-token allocation gain over ordinary GAE in the registered two-agent one-update host. No provider-turn fact changes this ceiling. No association-specific algorithm value, end-to-end variable-k, fixed-k superiority, multi-update, learned-estimator, UAV, safety, or general credit claim is supported; the bounded null is not a general impossibility theorem.",
-  "completed_summary": "Preserved the current cycle's committed scope, repository evidence packet, static audit, objection dispositions, handoff draft, and linear EM commit chain. After the requester detected that the already-sent Innovator provider turn ended after the refs-introduction phrase and the already-sent Convergence provider turn contained only 'Mode: CONVERGENCE', [CONTROL] PAUSE superseded terminal progression and directed this same inbound WORK to remain unfinished. These are transport-contract facts only and are not mapped to scientific status, recommendation, Portfolio action, or lifecycle.",
+  "blockers": [],
+  "claim_ceiling": "In one prospectively frozen fixed-population exactly three-agent finite-horizon bounded single-update microhost, balanced path-dependent ordered waiter identity support passed, but the same-information prospective pair-Q oracle produced exactly no actual fixed-token allocation or normalized bounded-utility gain over competent pair-aware GAE at any confirmation root. This does not establish relay value or impossibility, learned-estimator behavior, multiple updates, variable populations, fixed-k superiority, transfer, UAV or continuous-control relevance, safety, deployment, or general credit.",
+  "completed_summary": "This fresh current-protocol cycle is complete. Both strict Pro operations are COMPLETE with one send, exact visible Pro/model and prompt fidelity, natural completion, and full archives. Fresh Sol/high CM task 01a04be9-9a99-7002-9730-f1ae88dd117a returned direct-child commit e861269dbf6425d9dffcf1e0734dcba13f39e479, accepted only by fast-forward. T3 establishes balanced source-localized ordered waiter-relation support but no decision-relevant same-information oracle headroom: actual fixed-token allocation and normalized bounded utility are exactly equal to competent GAE at every root. Independent Convergence confirms the valid support-only null and no relay. Scientific status is SYNTHESIZED; recommendation is PARK pending a genuinely new prospective exact-enumeration certificate. No live Effect remains.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "HANDOFF_READY",
-  "next_action": "Hold this exact inbound WORK. Perform no new launch, send, resend, continuation, replacement, provider fallback, CM creation, experiment, or terminal RESULT until an explicit [CONTROL] RESUME supplies the reentry direction while preserving both already-sent operations exactly.",
-  "next_discriminator": "Scientific discriminator remains unchanged and inactive during PAUSE: independently establish consequence-distinct waiter identities in one generic pre-action/cue/sign stratum and prospective same-information oracle scarce-allocation and bounded-utility headroom over ordinary GAE before any future identity-only test.",
-  "reentry_condition": "Receive explicit [CONTROL] Action: RESUME for this exact WORK with instructions that preserve, do not resend, do not modify, do not replace, and do not reinterpret either already-sent Pro operation.",
+  "next_action": "Return the terminal current-protocol EM result to Portfolio task 01a04a02-842d-7771-8322-742c9a5cf9b6 with the exact closure commit and no lifecycle mutation by EM.",
+  "next_discriminator": "On a genuinely new host, prospectively enumerate the finite state and tape distribution and pass the actual trust map and evaluator for competent exact-value GAE, a generic pair-aware conditional-Q or Rao-Blackwellized estimator, and the proposed oracle under equal information. Require at least 0.10 native favorable-allocation and normalized-utility gains over GAE with positive predeclared-root lower bounds and at least 0.05 source-localized native excess. Stop before sampled tokens or relay if population updates remain collinear, evaluator-level headroom fails, or generic denoising matches the oracle.",
+  "reentry_condition": null,
   "refs": [
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-innovator.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-convergence.md",
-    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-7-pilot-handoff.md",
-    "2a56a187516460a2a3ba4c786e2fe572b5d8913e",
-    "[CONTROL] PAUSE from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-28T20:46:00Z"
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-clean-successor-02-scope-and-grounding.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_T3_PREREQUISITE_SCIENCE_CARD.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_T3_PREREQUISITE_RESULT.json",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-clean-successor-02-evidence-packet.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-clean-successor-02-convergence-disposition.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-clean-successor-02-handoff.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-convergence-prompt.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-convergence-response.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-convergence-transport-fact.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-innovator-prompt.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-innovator-response.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-innovator-transport-fact.md",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/prerequisite_config.py",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/prerequisite_experiment.py",
+    "experiments/candidates/expressibility_gated_renewal_credit_relay/prerequisite_run.py",
+    "tests/experiments/candidates/expressibility_gated_renewal_credit_relay/test_prerequisite.py",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_RESULT.json",
+    "8812e5ed26e57310c7f9deb3d96697be4233c54f",
+    "43c8208b8e1865536766598aa64f53f207df974d",
+    "5f0a3bdf9aa5bf12185ea86ac989ee34082cbe0f",
+    "650e8029a0ea2c28d7b73056378dd3556101057d",
+    "e861269dbf6425d9dffcf1e0734dcba13f39e479",
+    "8ede6627a2c3ad90b716a3b14a8ead71e740aefe",
+    "2e5302e16ceb802853ad606de14cff4fbfcc3cc6",
+    "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
+    "CM task 01a04be9-9a99-7002-9730-f1ae88dd117a model gpt-5.6-sol reasoning high",
+    "CM sole result command exit 0 in 3.7165267 seconds",
+    "Raw result SHA-256 003aa69270ca2cc57dc132b2047cf6708bc3ccaa239c4d1933bae03bd7bfab78",
+    "Durable LF-normalized result SHA-256 4c761ce3844c091fb258a3a5a87a060ddf64120dfbf3493d2f4cb956d5213792",
+    "Pro Innovator operation 93ef48a0-6552-421a-b92c-9ea41f2158a9 visible Pro one send natural completion",
+    "Pro Convergence operation bf62e90b-9430-4d1f-9ff1-6f4e0e423e1e visible Pro one send natural completion"
   ],
   "research_cycle": {
-    "label": "2026-08-28.7-pilot-01a04a02-egrcr",
-    "opened_at": "2026-08-28T20:23:09Z",
+    "label": "2026-08-28.10-clean-01a04a02-egrcr-successor-02",
+    "opened_at": "2026-08-29T04:36:18.968Z",
     "pro_convergence": {
-      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-convergence.md",
+      "replacement_used": false,
+      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-convergence-response.md",
       "status": "COMPLETE"
     },
     "pro_innovator": {
-      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.7-pilot-01a04a02-egrcr-pro-innovator.md",
+      "replacement_used": false,
+      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-clean-01a04a02-egrcr-successor-02-pro-innovator-response.md",
       "status": "COMPLETE"
     },
-    "reason": "Fresh revision 2026-08-28.7 Portfolio enabling-discriminator cycle to decide whether retained B1 evidence already resolves ordered waiter-credit utility/allocation or whether one smaller identity-preserving test remains decision-changing."
+    "reason": "Fresh three-agent prerequisite cycle to decide whether balanced consequence-distinct waiter identity support and prospective same-information oracle allocation or bounded-utility headroom can exist before any identity-only relay comparison."
   },
-  "revision": 5,
+  "revision": 20,
   "role": "EM",
-  "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-28T20:47:44.041614Z"
+  "snapshot_state": "COMPLETE",
+  "updated_at": "2026-08-29T05:55:24.166413Z"
 }

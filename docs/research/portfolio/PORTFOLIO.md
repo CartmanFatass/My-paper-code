@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-28T22:17:07Z
+Updated at: 2026-08-29T02:12:00Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. The control-layer cutover preserved the last accepted lifecycle values without inventing priority. `UNSET` therefore means Portfolio has not made a current priority judgment. `NONE` means Portfolio has not assigned an active direction owner; lifecycle remains authoritative independently.
 
@@ -22,11 +22,11 @@ this file does not contain a numeric VOI, aggregate score, Elo, or vote.
 | ec4g_r1 | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | eociv_lite | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | event_triggered_budgeted_cooperative_renewal | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
-| expressibility_gated_renewal_credit_relay | ACTIVE | ENABLING-DISCRIMINATOR | PORTFOLIO | 2026-08-28T22:17:07Z | Pilot direction 1: explicit answer-changing waiter/joiner interaction discriminator with bounded new-host scope; current pilot is paused pending workflow restoration audit |
+| expressibility_gated_renewal_credit_relay | ACTIVE | ENABLING-DISCRIMINATOR | PORTFOLIO | 2026-08-29T02:12:00Z | Pilot direction 1 retained under revision 2026-08-28.10: the prior EM WORK is terminal but transport-contaminated, its PARK recommendation is not adopted, and one successor material cycle must complete fresh strict Innovator and Convergence operations before joined audit |
 | field_slot_coordination | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | finite_semantic_boundary_support | PARKED | UNSET | NONE | 2026-08-28T14:24:57Z | Legacy S0-S3/prelaunch control flow retired; domain primitives retained pending a new v3 milestone and authority |
 | metric_ground_transport_allocation | CLOSED | UNSET | NONE | 2026-08-27T21:39:57Z | MGTAP terminal R01 direction closure — 2026-08-27T15:30:18Z |
-| opportunity_normalized_lease_gated_rebinding | ACTIVE | PRIMARY-DIRECT | PORTFOLIO | 2026-08-28T22:17:07Z | Pilot direction 2: Pro-closed marked lease-censored variable-k candidate with explicit IID and task-content controls; current pilot is paused pending workflow restoration audit |
+| opportunity_normalized_lease_gated_rebinding | ACTIVE | PRIMARY-DIRECT | PORTFOLIO | 2026-08-29T02:12:00Z | Pilot direction 2 retained under revision 2026-08-28.10: the original EM WORK and material cycle resume through exact-conversation recovery, any single protocol-bounded replacement, and the remaining mandatory scientific stages before joined audit |
 | optimizer_entropy_exposure_boundary_relay | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | orbit_shadow_read | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | recct_lite | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
@@ -47,7 +47,7 @@ this file does not contain a numeric VOI, aggregate score, Elo, or vote.
 | vsp_06_mssr | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 | vsp_c1 | REGISTERED | UNSET | NONE | 2026-08-27T21:39:57Z | Startup registration; no current work dispatched |
 
-Capacity note: exactly two directions are selected for the current pilot: `expressibility_gated_renewal_credit_relay` and `opportunity_normalized_lease_gated_rebinding`. They are complementary (credit-association versus physical-time policy link) while sharing a finite-renewal/ordinary-GAE failure risk; no numeric score or VOI is assigned. All pre-cutover direction tasks are retired and are not reused. New current-protocol
+Capacity note: exactly two directions remain selected for the resumed current-protocol pilot: `expressibility_gated_renewal_credit_relay` and `opportunity_normalized_lease_gated_rebinding`. They are complementary (credit-association versus physical-time policy link) while sharing a finite-renewal/ordinary-GAE failure risk; no numeric score or VOI is assigned. Capacity remains below four until both mandatory rounds return terminal results and the joined audit is clean. All pre-cutover direction tasks are retired and are not reused. New current-protocol
 tasks are created or reused directly by the requester that owns each bounded WORK: Portfolio normally
 dispatches EM, and EM normally dispatches CM. New task creation uses the complete WORK as its initial
 prompt. Portfolio, EM, and CM tasks use the saved HMASD project with Codex native
