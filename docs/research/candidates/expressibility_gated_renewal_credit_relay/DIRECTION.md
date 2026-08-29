@@ -39,14 +39,38 @@ scarce-allocation or bounded-utility headroom over ordinary GAE. The frozen
 question, neutral alternatives, decision branches, and Effect bounds are in
 `evidence/2026-08-28-10-successor-scope-and-grounding.md`.
 
-Until this successor reaches its own synthesis, no current scientific
-recommendation is recorded here. The claim ceiling remains bounded to B1: the
-ordered edge and later-record update were expressive and correct binding beat
-the registered opposite-type corruption, but intact produced exactly no
+At `SYNTHESIS_READY`, the successor's source audit, retained B1 result, and
+fresh complete Innovator consultation support a static stop before CM. The
+four-world consequence is invariant to physical waiter identity at fixed type
+and lag, and in the two-agent topology a fixed later joiner has no alternative
+waiter. The registered cut preserves `older_id` while swapping JOINT and SOLO,
+so its positive intact contrast is not an identity-only comparison. The
+fixed-token evaluator also places GAE and INTACT in the same cue-ranking class,
+matching their exact root-wise allocation and bounded-utility equality.
+
+Both prospectively frozen executable prerequisites therefore fail:
+consequence-distinct identity support is absent, and a same-information
+identity oracle has no allocation or bounded-utility headroom in this host. No
+new execution, CM task, writer transfer, or experiment is warranted. The
+traceable packet is
+`evidence/2026-08-28-10-successor-evidence-packet.md`.
+
+The independently derived preliminary recommendation is `PARK`, subject to a
+fresh conclusion-blind Convergence review. Reentry requires a scientifically
+different fixed-population host, minimally three agents, that prospectively
+establishes both balanced pair-specific consequence variation and
+same-information oracle scarce-allocation or bounded-utility headroom before
+any relay comparison. This does not adopt the quarantined prior cycle's
+recommendation or provider content.
+
+The claim ceiling remains bounded to B1: the ordered edge and later-record
+update were expressive; intact modestly improved type-cue selectivity and beat
+the registered opposite-type corruption, but it produced exactly no
 bounded-utility or fixed-token allocation gain over ordinary GAE. No
 association-specific algorithm value, end-to-end variable-`k`, fixed-`k`
 superiority, multi-update, learned-estimator, UAV, safety, or general credit
-claim is available.
+claim is available; exhaustion of this host is not a general impossibility
+theorem.
 
 ## Historical revision 2026-08-28.7 cycle
 
