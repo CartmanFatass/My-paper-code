@@ -51,7 +51,9 @@ Before touching the page, build an assignment-local task model from the complete
 Reject missing or unreadable owner inputs before a send-capable action. Never compose, shorten,
 summarize, append, translate, wrap, or interpret the prompt. Compute any content hash required by
 Agentify locally from the exact file; hashes and stable keys are tool-local arguments, not HMASD
-task identity, authentication, cross-task fields, or approval ceremonies.
+task identity, authentication, cross-task fields, or approval ceremonies. The `[BROWSER WORK]`
+contract remains path-based: do not add Prompt SHA, Prompt size, Response SHA, or other fingerprint
+fields to that message.
 
 ## Normal path
 
@@ -142,6 +144,21 @@ is not proof that content remains; the rendered composer fact decides the next s
 
 ### Keep one exclusive Send boundary
 
+Before any `STRICT_SEND`, run `python scripts/hmasd_file_fingerprint.py --path "<Prompt path>" --require-utf8`
+against the exact local prompt path. Accept only the JSON emitted by that helper as prompt file
+identity evidence; prose, metadata, or LLM-copied hashes are not evidence. The
+helper must establish the absolute path, byte `sha256`, `size_bytes`, and `file.utf8.valid` fact.
+If the helper exits nonzero, do not call `agentify_review_query`; return `ZERO_SEND_FAILED`,
+`Provider conversation: NONE` for a new conversation or the unchanged exact existing locator,
+`Response archive: NONE`, and a reentry that names the local prompt path and the read, UTF-8, or
+check failure. If the helper succeeds, pass its absolute path, `sha256`, `size_bytes`, and UTF-8
+fact into the strict review tool's local/stable prompt-identity guard using the live callable
+schema. The guard must reread the exact path and match those facts before provider send. If strict
+review cannot enforce that reread-and-match guard before provider send, stop with
+`ZERO_SEND_FAILED`, the same conversation/archive facts, and reentry naming the unavailable
+strict-review prompt identity guard. If strict reread mismatches the helper preflight, abort before
+provider send; do not self-authorize another operation.
+
 Agentify strict review is the exclusive send-capable actuator. Invoke it once for one operation with
 the exact prompt path, provider/model, conversation binding, stable tool inputs, and first-binding
 flag when applicable. Do not use an ordinary query as a substitute.
@@ -162,9 +179,19 @@ or delete the conversation; reopen it in any fresh tab. Judge progress from page
 turn growth, generation controls, stable full response, or an explicit provider error. A 45-minute
 window is ordinary for Pro and elapsed time alone proves neither completion nor failure.
 
+After the causal assistant turn completes, write the full response to the exact response path; then
+rerun `python scripts/hmasd_file_fingerprint.py --path "<Response path>" --require-utf8` and
+require its JSON output to be valid, and ensure the exact file is reread before declaring `COMPLETE`. When
+an optional expected archive hash or size check is supplied by the live assignment or tool schema,
+rerun with `--expect-sha256` and/or `--expect-size-bytes` and require that check to pass; these
+checks do not become `[BROWSER WORK]` fields. If archive write, helper read/UTF-8/check, reread,
+or optional expected hash/size verification fails, return `SENT_UNREADABLE` with the exact provider conversation,
+`Response archive: NONE`, and an archive-only reentry for the same operation; never resend. A
+clipped preview, visible prefix, or uncertified file is insufficient.
+
 Mark `COMPLETE` only when the provider-visible prompt and requested model match, natural generation
-ended, the full response is written to the exact response path and reread, and the archive is bound
-to the causal assistant turn. A clipped preview, visible prefix, or uncertified file is insufficient.
+ended, the full response is written to the exact response path and reread, helper output is ok,
+the exact archive reread succeeded, and the archive is bound to the causal assistant turn.
 Then send `[BROWSER RESULT]` immediately and close the replaceable tab. For a concrete nonterminal
 reentry, send the current fact and close the tab after recording the conversation URL/ID; later
 observation reopens that conversation. A close failure is only a cleanup limitation.

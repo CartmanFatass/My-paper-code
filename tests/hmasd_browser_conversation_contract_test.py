@@ -66,6 +66,70 @@ def test_current_chatgpt_product_name_maps_only_to_the_real_pro_control() -> Non
         assert marker in skill
 
 
+def test_strict_send_runs_script_fingerprint_before_agentify() -> None:
+    skill = _read(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    flat_skill = " ".join(skill.split())
+    send_boundary = skill.index("### Keep one exclusive Send boundary")
+    strict_section = skill[send_boundary:]
+    helper_at = strict_section.index("scripts/hmasd_file_fingerprint.py")
+    review_at = strict_section.index("agentify_review_query")
+    assert helper_at < review_at
+    assert '--path "<Prompt path>" --require-utf8' in skill
+    assert "Accept only the JSON emitted by that helper as prompt file identity evidence" in flat_skill
+
+
+def test_prompt_identity_rejects_prose_and_llm_copied_hashes() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "prose, metadata, or LLM-copied hashes are not evidence" in skill
+    assert "strict review tool's local/stable prompt-identity guard" in skill
+    assert "reread the exact path and match those facts before provider send" in skill
+
+
+def test_prompt_preflight_or_guard_failure_is_zero_send_failed() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "If the helper exits nonzero, do not call `agentify_review_query`" in skill
+    assert "return `ZERO_SEND_FAILED`" in skill
+    assert "`Provider conversation: NONE` for a new conversation or the unchanged exact existing locator" in skill
+    assert "`Response archive: NONE`" in skill
+    assert "strict-review prompt identity guard" in skill
+
+
+def test_response_archive_requires_helper_reread_before_complete() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    helper_at = skill.index("rerun `python scripts/hmasd_file_fingerprint.py")
+    complete_at = skill.index("Mark `COMPLETE` only when")
+    assert helper_at < complete_at
+    assert "exact file is reread" in skill
+    assert "optional expected archive hash or size check" in skill
+
+
+def test_archive_helper_failure_is_sent_unreadable_without_resend() -> None:
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "If archive write, helper read/UTF-8/check, reread, or optional expected hash/size verification fails" in skill
+    assert "return `SENT_UNREADABLE`" in skill
+    assert "`Response archive: NONE`" in skill
+    assert "archive-only reentry for the same operation" in skill
+    assert "never resend" in skill
+
+
+def test_browser_work_remains_path_based_without_fingerprint_fields() -> None:
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    browser_work = protocol.split("[BROWSER WORK]", 1)[1].split("[BROWSER RESULT]", 1)[0]
+    for field in ("Prompt SHA", "Prompt size", "Response SHA", "sha256", "SHA-256"):
+        assert field not in browser_work
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "contract remains path-based" in skill
+
+
+def test_browser_fingerprints_are_local_file_evidence_only() -> None:
+    agents = _flat("AGENTS.md")
+    assert (
+        "Browser prompt/response fingerprints are local file evidence only when produced by "
+        "scripts/hmasd_file_fingerprint.py or equivalent tool output at point of use"
+    ) in agents
+    assert "not task identity, route, receipt, approval, lifecycle, or provider-commitment facts" in agents
+
+
 def test_computer_use_cannot_cross_the_send_boundary() -> None:
     skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
     assert "Agentify strict review is the exclusive send-capable actuator" in skill

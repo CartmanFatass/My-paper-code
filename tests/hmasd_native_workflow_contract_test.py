@@ -428,8 +428,8 @@ def test_portfolio_is_one_current_table() -> None:
     assert owner["opportunity_normalized_lease_gated_rebinding"] == "PORTFOLIO"
     assert lifecycle["ucope"] == "PARKED"
     assert owner["ucope"] == "NONE"
-    assert lifecycle["semigroup_consistent_duration_model_policy"] == "ACTIVE"
-    assert owner["semigroup_consistent_duration_model_policy"] == "PORTFOLIO"
+    assert lifecycle["semigroup_consistent_duration_model_policy"] == "REGISTERED"
+    assert owner["semigroup_consistent_duration_model_policy"] == "NONE"
     assert lifecycle["metric_ground_transport_allocation"] == "CLOSED"
 
 

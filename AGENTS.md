@@ -317,6 +317,9 @@ above. Changing the WORK, leaf, label, key, tab, or task is never sufficient. Th
 native history and the provider conversation, not from a local workflow ledger. Tool-local stable
 keys or content hashes stay inside that tool operation; they do not become HMASD identity or
 durable control state.
+Browser prompt/response fingerprints are local file evidence only when produced by
+scripts/hmasd_file_fingerprint.py or equivalent tool output at point of use; they are not task
+identity, route, receipt, approval, lifecycle, or provider-commitment facts.
 
 Unsafe memory plans must be reduced, batched, or sharded. A local result command expected to exceed
 7200 seconds requires one performance-reasonableness review and user approval bound to the exact
