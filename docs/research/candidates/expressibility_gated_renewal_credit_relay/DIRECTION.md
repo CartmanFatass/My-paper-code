@@ -104,6 +104,16 @@ that action. A future finite-data, finite-compute relational-factorization
 question may merit a separately authorized `SPINOFF`, but it cannot continue
 or repair this EGRCR relay cycle.
 
+At `HANDOFF_READY`, cycle
+`2026-08-28.10-four-01a04a02-egrcr-successor-03` is terminal with
+`Scientific status: SYNTHESIZED`, both mandatory Pro stages `COMPLETE`, and no
+live Effect. The terminal recommendation is `PARK`. No CM was created because
+all three families failed the exact generic-comparator equality and
+noncollinearity gate before an executable observation could change the
+decision. The terminal scientific judgment, claim ceiling, Pro operation
+facts, cost, alternatives, next discriminator, and linear Git closure are in
+`evidence/2026-08-29-four-successor-03-handoff.md`.
+
 ## Predecessor clean successor-02 cycle
 
 Clean successor material cycle
