@@ -92,6 +92,23 @@ root. The exact T3 object is operationally exhausted and retained as a
 positive support fixture. The EM investment recommendation is `PARK` pending
 genuinely new evidence; this advice does not mutate Portfolio lifecycle.
 
+At `HANDOFF_READY`, cycle
+`2026-08-28.10-clean-01a04a02-egrcr-successor-02` is terminal with
+`Scientific status: SYNTHESIZED`, both mandatory Pro stages `COMPLETE`, and no
+live Effect. The strongest observation is the conjunction of clean balanced
+ordered-relation support with competent-GAE saturation: the pair-Q oracle
+changes favorable-allocation probability by only about `2.22e-05` and changes
+neither actual fixed-token allocation nor normalized bounded utility at any
+root. No relay comparison is warranted.
+
+The EM recommendation to Portfolio is `PARK` pending a genuinely new
+exact-enumeration headroom certificate. Reentry must analytically show at least
+`0.10` native allocation and utility gains over competent exact-value GAE and
+at least `0.05` source-localized native excess, while also exceeding a generic
+pair-aware expected-Q denoiser, before sampled tokens or relay. The terminal
+handoff, operation facts, writer chain, cost, objections, and claim ceiling are
+in `evidence/2026-08-28-10-clean-successor-02-handoff.md`.
+
 ## Predecessor revision 2026-08-28.10 cycle
 
 Successor material research cycle
