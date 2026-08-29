@@ -25,3 +25,28 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
+
+## Current-protocol cycle boundary — 2026-08-29
+
+Cycle `2026-08-29.8-portfolio-dish-preactivity-certificate-01` ended at
+`SCOPE_FROZEN / TERMINAL_GAP` before a valid EM synthesis. Its required fresh
+GPT-5.6 Pro Innovator operation was a strict `ZERO_SEND_FAILED` before prompt
+injection, and bounded non-sending recovery did not establish eligible model
+evidence. No provider conversation, response, empirical Effect, Convergence
+operation, CM task, lifecycle recommendation or accepted current-cycle science
+exists.
+
+Direction-owned notes preserve two local pre-synthesis observations without
+elevating them to accepted science: audited proper certificate families admit
+branch-pivotal conforming completions, while exact current source hashes bind
+to the latest consumed P1 technical evidence whose concurrency and overhead
+gates fail. These facts may ground a future fresh cycle after mandatory
+consultation availability, but they do not alter the historical current
+position or imply opportunity, absence, FLEX absorption, simple-rule value,
+CONTINUE, NARROW, PARK or CLOSE.
+
+Refs:
+
+- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-terminal-gap.md`
+- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-local-certificate-audits.md`
+- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-current-substrate-static-audit.md`

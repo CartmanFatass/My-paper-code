@@ -17,6 +17,81 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
+## Active successor 04 seven-tick robustness question
+
+Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04` is a
+fresh exact robustness cell. It changes only the predecessor's physical service
+lifetime from eight to seven ticks while retaining opportunity spacings one
+and four, action cost two, equal physical-time weighting, the exact renewal
+ordering, state-blind memoryless policies, and the base-only `1/16` grid. Shared
+raw probability, exact exponential survival linking, and common executed rate
+are registered from the outset, together with KEEP, a charge-matched
+payload-null shell, unrestricted grid optima, and an age-conditioned competence
+ceiling.
+
+The frozen result-blind scope requires strictly more than `1/32` exact
+exponential-over-common-rate direct return, with direct headroom, before a
+link-specific interpretation. A common-rate ceiling match, common-rate win, or
+smaller gap supports only generic physical-rate regularization. Exact scope and
+neutral Innovator question are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-innovator-prompt.md`
+
+The direction writer remains on terminal predecessor commit
+`84dede555997109065dfc18ebba6ba0340519b68`. Current shared authority
+`e3dfd2d48ddb02c6442d45dbddc30f36ac9f3ded` and Portfolio authority
+`2ecc84edb1bfee06c04e3157eb20bb3d3368c09e` are separate read-only lines, so
+their current semantics and investment question are consumed without merging
+histories. The B3 package remains quarantined non-input.
+
+## Terminal successor 03 structural question
+
+Material cycle `2026-08-28.10-four-01a04a02-onlgr-successor-03` is a fresh
+structural-identifiability study opened from Portfolio authority
+`2cd404b6e35753ba7bb2decabf19e4aabd700038`. It asks whether equal total
+physical exposure under different opportunity partitions creates a
+direct-return reason to parameterize one global event rule per opportunity or
+per unit physical exposure. It begins with an exact single-unit regenerative
+renewal object and stops before learning if the policy families collapse,
+useful renewal lacks headroom over KEEP and a payload-null real-action shell,
+or robust stratum-specific probability heterogeneity is absent.
+
+The frozen neutral scope and owner-authored Innovator question are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-innovator-prompt.md`
+
+This cycle is not a B3 repair. The B3 raw package and every internal branch,
+selected policy, contrast, threshold, coordinate, and derived value remain
+quarantined non-evidence.
+
+The accepted fresh Innovator, EM's independent exact derivation, and the fresh
+conclusion-blind Convergence review reach `REVIEW_RESOLVED` without CM. The
+per-opportunity and exponential families are structurally distinct, useful
+renewal has direct headroom, and the exact exposure transform materially beats
+one shared raw per-opportunity probability. Those raw boundary-probability
+optima, however, are exactly one common executed physical event rate on the
+frozen grid. A simpler linear common-rate family reaches the unrestricted grid
+ceiling and is not materially separated from the exponential link. The final
+interpretation stops before learning and narrows the surviving question to
+generic global physical-rate regularization rather than a distinct exponential,
+opportunity-normalized, lease, or rebinding mechanism. Exact derivation,
+conclusion-blind packet, review, and objection disposition are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-innovator-and-structural-derivation.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-em-synthesis.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-synthesis-packet.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-convergence-prompt.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-convergence-response.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-convergence-disposition.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-handoff-ready.md`
+
+The cycle is terminal at `HANDOFF_READY`: `Outcome: DONE`, `Scientific status:
+SYNTHESIZED`, `Decision impact` narrows the surviving object to generic global
+physical-rate regularization, `Recommendation: NARROW`, and both mandatory Pro
+stages are `COMPLETE`. No live Effect remains.
+
 ## Clean successor 02 question and terminal disposition
 
 Material cycle `2026-08-28.10-clean-01a04a02-onlgr-successor-02` is a fresh

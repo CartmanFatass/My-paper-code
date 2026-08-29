@@ -19,6 +19,103 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Current material cycle
 
+Four-direction successor material cycle
+`2026-08-28.10-four-01a04a02-egrcr-successor-03` opens from exact Portfolio
+authority `2cd404b6e35753ba7bb2decabf19e4aabd700038` after terminal predecessor
+commit `62c24e0d451aaf2f6dd1fd3aa550b22d124e672b`. It is a bounded search across
+exactly three fixed multi-waiter, multi-step causal topologies: overlapping
+many-to-one contention, serial two-hop complementarity, and censored
+substitution. It is not a T3 rerun.
+
+Before any science-bearing consultation, the cycle freezes one canonical
+analytic audit per family, fixed-order first-survivor selection, equal
+information and useful work, competent ordinary GAE and generic pair-aware
+conditional-Q/Rao-Blackwellized comparators, and the existing material gates:
+at least `0.10` native scarce-allocation and normalized-utility gains, positive
+exact lower bounds across balanced panels, at least `0.05` source-localized
+excess, and a material noncollinear update that changes an actual scarce
+decision. Generic-estimator equality, evaluator failure, or missing
+localization stops before relay and sampled training. Full neutral scope and
+branch rules are in
+`evidence/2026-08-29-four-successor-03-scope-and-grounding.md`.
+
+At `SCOPE_FROZEN`, no family or investment branch was favored. The clean T3
+support pass and exact allocation/utility null remain valid terminal evidence
+and an immutable failure-mode boundary. This cycle could freeze at most one
+new survivor; a bounded no-survivor result was scientifically admissible.
+
+At `SYNTHESIS_READY`, the fresh strict Innovator is `COMPLETE`: one exact
+owner-authored prompt was sent in a new visible-Pro conversation, natural
+completion and prompt fidelity were verified, the full response was archived,
+and no replacement was used. Its content was independently audited rather
+than adopted.
+
+The three fixed canonical topologies all exhibit real, large, physically
+ordered source-to-waiter effects. They nevertheless fail the same earliest
+gate. Under the frozen equal-information and useful-work contract, a competent
+generic arm can condition or Rao-Blackwellize the exact scalar produced by the
+association operator from the same histories, edge keys, downstream objects,
+transformations, and routing rule. The policy-score tower property therefore
+makes candidate and generic population updates equal record by record. Their
+preconditioned updates, trust-map parameters, scarce decisions, allocation,
+utility, and native-minus-severed advantage are consequently identical.
+
+For the strongest minimal constructions, overlapping contention and serial
+two-hop complementarity each give candidate and generic source update
+`(0,1/4)` despite unit favorable/harmful physical effects; censored
+substitution gives both `(0,1/6)` while the pathwise carrier persists,
+expires, or changes identity. Every normalized orthogonal residual,
+association-minus-generic allocation/utility margin, and localized excess is
+exactly zero. All three families therefore stop before CM, relay, or sampled
+training. The complete EM audit is
+`evidence/2026-08-29-four-successor-03-family-audit.md`; the conclusion-blind
+review packet is
+`evidence/2026-08-29-four-successor-03-evidence-packet.md`.
+
+The preliminary bounded synthesis is no full survivor and no answer-changing
+executable observation. The preliminary recommendation is `PARK`, subject to
+the still-required fresh independent Convergence review. A distinct future
+finite-data, finite-compute factorization test could examine approximation
+efficiency, but it cannot repair this exact-population cycle or support relay.
+
+At `REVIEW_RESOLVED`, the fresh strict Convergence is `COMPLETE`: one exact
+owner-authored conclusion-blind prompt was sent in a new visible-Pro
+conversation, natural completion and prompt fidelity were verified, the full
+response was archived, and no replacement was used. The reviewer independently
+classified overlapping contention and serial complementarity as support-only
+nulls and censored substitution as a generic-denoising or variance-only null.
+It found no full survivor, no invalid comparison under the frozen parity
+contract, and no answer-changing executable observation.
+
+Every material objection is dispositioned in
+`evidence/2026-08-29-four-successor-03-convergence-disposition.md`.
+Comparator absorption is the intended narrow containment test once relation
+representation is common; biased finite-step coordination becomes generic
+surrogate or optimizer geometry; larger hosts violate the smallest-instance
+search law and create new objects; exact-critic strength leaves finite-data
+approximation as a distinct future question; shared parameters do not break
+record-wise equality; and censoring plus source severing prove physical
+causality without specialized decision value.
+
+The exact-population search is closed scientifically. The direction-level EM
+recommendation remains `PARK` under the prospectively frozen no-survivor branch
+rather than the reviewer's broader lifecycle wording; Portfolio alone owns
+that action. A future finite-data, finite-compute relational-factorization
+question may merit a separately authorized `SPINOFF`, but it cannot continue
+or repair this EGRCR relay cycle.
+
+At `HANDOFF_READY`, cycle
+`2026-08-28.10-four-01a04a02-egrcr-successor-03` is terminal with
+`Scientific status: SYNTHESIZED`, both mandatory Pro stages `COMPLETE`, and no
+live Effect. The terminal recommendation is `PARK`. No CM was created because
+all three families failed the exact generic-comparator equality and
+noncollinearity gate before an executable observation could change the
+decision. The terminal scientific judgment, claim ceiling, Pro operation
+facts, cost, alternatives, next discriminator, and linear Git closure are in
+`evidence/2026-08-29-four-successor-03-handoff.md`.
+
+## Predecessor clean successor-02 cycle
+
 Clean successor material cycle
 `2026-08-28.10-clean-01a04a02-egrcr-successor-02` is the current revision
 2026-08-28.10 scientific round. It continues from terminal direction HEAD
