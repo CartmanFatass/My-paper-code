@@ -57,6 +57,8 @@ roster family more strongly.
 
 ## Capacity consequence
 
-DISH's terminal WORK releases one slot. SCDMP occupies it only after a fresh native Sol/max EM WORK
-is actually dispatched from the committed Portfolio authority. VQFP, ONLGR and SGSP retain their
-exact WORKs and transport reentries. Capacity remains exactly four.
+DISH's terminal WORK releases one slot. Fresh native Sol/max EM
+`01a04e78-82ba-7823-b012-c5ff34821aae`, cycle
+`2026-08-29.8-portfolio-scdmp-native-ico-gate-01`, now occupies it from committed Portfolio
+authority `00a7ff2a5ea6d5b6f5c47f5e9c526daa0c609033`. VQFP, ONLGR and SGSP retain their exact WORKs
+and transport reentries. Capacity remains exactly four.
