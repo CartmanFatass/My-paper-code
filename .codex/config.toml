@@ -8,7 +8,7 @@ multi_agent_v2 = true
 hooks = false
 
 [agents]
-max_concurrent_threads_per_session = 8
+max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDCMScout]

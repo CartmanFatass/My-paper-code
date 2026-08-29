@@ -45,7 +45,7 @@ def test_registered_agent_profiles_are_exact_and_semantically_thin() -> None:
     config = tomllib.loads((ROOT / ".codex/config.toml").read_text(encoding="utf-8"))
     assert config["sandbox_mode"] == "danger-full-access"
     assert config["approval_policy"] == "never"
-    assert config["agents"]["max_concurrent_threads_per_session"] == 8
+    assert config["agents"]["max_concurrent_threads_per_session"] == 40
     assert "max_depth" not in config["agents"]
     assert "max_threads" not in config["agents"]
     profiles = {
