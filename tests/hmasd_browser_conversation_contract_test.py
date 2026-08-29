@@ -156,6 +156,17 @@ def test_browser_cancel_stays_in_the_transport_namespace() -> None:
     assert "Browser Transport does not emit `Outcome`" in agents
 
 
+def test_owner_acceptance_is_the_strict_operation_budget() -> None:
+    agents = _flat("AGENTS.md")
+    protocol = _flat("docs/project/WORKFLOW_PROTOCOL.md")
+    skill = _flat(".agents/skills/hmasd-browser-conversation/SKILL.md")
+    assert "the shared zero-send rule never expands an owner-frozen operation budget" in agents
+    assert "`Acceptance` 是该 assignment 唯一的 operation budget" in protocol
+    assert "`ZERO_SEND_FAILED` 本身不授权 operation two" in protocol
+    assert "Treat the exact inbound `Acceptance` as the complete operation budget" in skill
+    assert "do not create operation two" in skill
+
+
 def test_em_and_cm_send_direct_browser_work_and_consume_transport_facts() -> None:
     agents = _flat("AGENTS.md")
     em = _flat(".agents/skills/hmasd-em-task/SKILL.md")

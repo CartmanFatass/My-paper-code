@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-29.7
+Workflow revision: 2026-08-29.8
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -152,6 +152,12 @@ EM/CM 直接发送 `[BROWSER WORK]`。人类可读 locator 是 exact
 `Return task + Direction + Owner stage + Transport assignment`；同一 locator 是同一 assignment 的
 continuation，任何字段不同都是另一 assignment，Browser Transport 不合并或猜测。Browser
 Transport 在每条 `[BROWSER RESULT]` 中逐字回显这四项并只投递给 `Return task`。
+
+`Acceptance` 是该 assignment 唯一的 operation budget。Page-local observation and repair 不消耗
+新的 strict operation，但 `ZERO_SEND_FAILED` 本身不授权 operation two。若 owner 只授权一个
+strict operation，Browser Transport 返回该 zero-send fact 并 yield；只有 later exact owner
+message 可在修复事实成立后授权新的 operation。共享说明、task history、换 tab/key 或 Browser
+Transport 自身判断都不能放宽 owner budget。
 
 该 task 可同时保留 multiple unfinished browser assignments，这是 §3 单 inbound 规则的唯一例外。
 并发到达按 native history order 逐条消费，不合并消息；一次只执行一个 send-capable 或 browser

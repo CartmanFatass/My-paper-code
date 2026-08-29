@@ -111,10 +111,12 @@ source, a smaller discriminator, or an `OBSERVE_ONLY` continuation of the same B
 assignment locator. EM
 never performs transport mechanics itself.
 
-For a strict `ZERO_SEND_FAILED` fact, Browser Transport owns ordinary page-local recovery
-and may make a fresh strict operation after a concrete non-sending repair changes the recorded
-failure premise. EM preserves the frozen request and does not perform or micromanage browser
-actions. This is not a sent-operation replacement and has no fixed attempt count; the same unchanged
+For a strict `ZERO_SEND_FAILED` fact, Browser Transport owns ordinary page-local non-sending
+recovery. It may make a fresh strict operation only when the exact inbound `[BROWSER WORK]
+Acceptance` still has unused operation authority. Otherwise Browser returns the zero-send fact and
+yields; after a concrete repair, EM may authorize a new operation only with a later exact owner
+message for the same assignment locator. EM preserves the frozen request and does not perform or
+micromanage browser actions. This is not a sent-operation replacement, and the same unchanged
 failure stops rather than loops.
 
 A running research leaf or CM, or a nonterminal `[BROWSER RESULT]`, keeps the same WORK live:

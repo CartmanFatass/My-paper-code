@@ -181,15 +181,14 @@ def test_em_transport_exhaustion_preserves_the_scientific_stage_reached() -> Non
     assert "owner's actually reached role fields and no lifecycle recommendation" in agents
 
 
-def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
+def test_zero_send_recovery_is_causal_and_owner_budgeted() -> None:
     agents = _flat(_read("AGENTS.md"))
     em = _flat(_read(".agents/skills/hmasd-em-task/SKILL.md"))
     transport = _flat(_read(".agents/skills/hmasd-browser-conversation/SKILL.md"))
-    assert "concrete non-sending repair changes the proven failure premise" in agents
-    assert "There is no fixed attempt counter" in agents
-    assert "same failure without a new fact stops" in agents
-    assert "original assignment authorizes ordinary page-local recovery" in agents
-    assert "does not create a Root or Portfolio decision" in agents
+    assert "permits ordinary page-local non-sending repair" in agents
+    assert "shared zero-send rule never expands an owner-frozen operation budget" in agents
+    assert "The same failure without a new fact always stops" in agents
+    assert "later exact owner message after repair" in agents
     assert "actual page and current conversation stage" in transport
     assert "tool predicate is evidence about one automation path" in transport
     assert "ordinary page-local recovery" in transport
@@ -198,8 +197,9 @@ def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
     assert "rendered composer fact decides the next step" in transport
     assert "elapsed time alone" in transport
     assert "Do not loop an unchanged failure" in transport
-    assert "after an evidence-changing non-sending repair" in transport
-    assert "has no fixed attempt count" in em
+    assert "Treat the exact inbound `Acceptance` as the complete operation budget" in transport
+    assert "exact inbound `[BROWSER WORK] Acceptance` still has unused operation authority" in em
+    assert "later exact owner message for the same assignment locator" in em
     assert "does not perform or micromanage browser actions" in em
     assert "parent supplies a concrete evidence-changing non-sending repair" not in transport
     assert "permits one bounded repair" not in agents

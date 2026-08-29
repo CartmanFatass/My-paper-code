@@ -177,9 +177,12 @@ screenshot-assisted understanding, direct conversation reopening, or a clean vie
 scientific, engineering, Portfolio, lifecycle, or capacity conclusion.
 
 Do not loop an unchanged failure or repeat an unchanged action. `ZERO_SEND_FAILED` proves no
-provider request or conversation
-advance for that operation; after an evidence-changing non-sending repair, the same assignment may
-start a fresh strict operation. If commitment may exist, retain and observe the same operation.
+provider request or conversation advance for that operation and permits local non-sending repair.
+It does not grant another strict operation. Treat the exact inbound `Acceptance` as the complete
+operation budget: when it says one operation, return the zero-send fact and yield after repair; do
+not create operation two. A fresh strict operation after an evidence-changing repair requires a
+later exact owner message or unused authority already stated explicitly in that Acceptance. If
+commitment may exist, retain and observe the same operation.
 Input/model mismatch isolates the old operation and conversation. Positive conversation loss
 requires the provider to report the exact known conversation permanently unavailable after
 same-account reopening and bounded recovery; a missing tab or timeout is insufficient.

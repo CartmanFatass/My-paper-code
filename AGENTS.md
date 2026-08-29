@@ -152,12 +152,13 @@ that conversation; neither tab nor operation is an EM material cycle or a top-le
 
 `COMMITMENT_UNKNOWN`, `SENT_WAITING`, and `SENT_UNREADABLE` retain the same operation and provider
 conversation; observation may move to another tab but cannot send. `ZERO_SEND_FAILED` proves that
-operation created no provider Effect. The owner's original assignment authorizes ordinary
-page-local recovery by the same transport leaf and a fresh strict operation after a concrete
-non-sending repair changes the proven failure premise; it does not create a Root or Portfolio
-decision or require a parent round trip for each local action. There is no fixed attempt counter:
-the same failure without a new fact stops, while each fresh operation still has exactly one Send
-boundary. This cannot be used when commitment is unknown or any provider injection may exist.
+operation created no provider Effect and permits ordinary page-local non-sending repair. A fresh
+strict operation exists only when the exact `[BROWSER WORK] Acceptance` still authorizes one; the
+shared zero-send rule never expands an owner-frozen operation budget. If Acceptance authorizes
+exactly one operation, Browser Transport returns the zero-send fact and waits for a later exact
+owner message after repair rather than creating operation two. The same failure without a new fact
+always stops. None of this can be used when commitment is unknown or any provider injection may
+exist.
 
 `SENT_INPUT_MISMATCH`, `SENT_MODEL_MISMATCH`, and `CONVERSATION_LOST` isolate the old operation and
 conversation and supply no scientific, engineering, Portfolio, or lifecycle conclusion. When the
