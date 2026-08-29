@@ -219,6 +219,26 @@ def test_zero_send_recovery_is_causal_not_a_fixed_retry_gate() -> None:
     assert "permits one bounded repair" not in agents
 
 
+def test_portfolio_is_an_active_allocator_and_refills_terminal_legs() -> None:
+    portfolio = _flat(_read(".agents/skills/hmasd-portfolio-task/SKILL.md")).lower()
+    protocol = _flat(_read("docs/project/WORKFLOW_PROTOCOL.md")).lower()
+
+    for marker in (
+        "active allocator, not a passive join waiter",
+        "consume each terminal em result immediately",
+        "recommendation is evidence, not the action",
+        "one terminal leg releases its advancing slot",
+        "update portfolio authority before dispatch",
+        "recompute the live advancing count",
+        "screen the strongest authorized candidates",
+        "all authorized slots already have live work",
+        "no admissible candidate remains after comparison",
+    ):
+        assert marker in portfolio
+    assert "return barrier, not a refill barrier" in protocol
+    assert "其他 join legs 仍 nonterminal" in protocol
+
+
 def test_cm_observer_gate_depends_on_proof_not_implementation_novelty() -> None:
     cm = _flat(_read(".agents/skills/hmasd-cm-task/SKILL.md"))
     assert "acceptance materially depends on a runtime observer/enforcer" in cm

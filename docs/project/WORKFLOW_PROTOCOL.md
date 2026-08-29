@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-29.4
+Workflow revision: 2026-08-29.5
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -129,6 +129,11 @@ RESULT。它不得为了释放 join 自行取消子 WORK，不得为 busy EM 创
 transport failure 解释成该方向 lifecycle 结论。若收到用户的 CANCEL，Portfolio 逐一转达并
 等待所有受影响 EM terminal。Fan-out/join 只存在于 native history/status，不写本地 batch、queue
 或 task registry。
+
+这个 all-terminal join 是 Portfolio terminal RESULT 的 return barrier, not a refill barrier。
+Portfolio 立即消费每个 terminal leg；完成自身投资处置后，它可以在其他 join legs 仍
+nonterminal 时向已释放的 exact idle target 投递 successor，或按授权 considered set 选择替代方向。
+不得用尚未完成的 join 掩盖未处置 RESULT、未完成筛选或低于授权 advancing capacity 的空槽。
 
 一个 terminal EM RESULT 已结束该 join leg，即使它只报告 technical 或 measurement gap。任何
 后续 repair、discriminator 或 observation 都是 Portfolio 比较投资替代方案后主动决定的

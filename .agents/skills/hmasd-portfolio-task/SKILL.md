@@ -38,6 +38,25 @@ frame in native history:
 Do not turn this frame into a new file, ledger or score. Portfolio draft edits are outputs, not
 authority for the decision that produced them.
 
+## Active allocation loop
+
+Portfolio is an active allocator, not a passive join waiter. While its inbound decision remains
+live, it repeats this short loop from native task facts rather than storing a scheduler:
+
+1. Consume each terminal EM RESULT immediately. Make the Portfolio action from current comparative
+   evidence; an EM recommendation is evidence, not the action.
+2. For `CONTINUE` or `NARROW`, define a current executable successor question. For `PARK`, `CLOSE`,
+   `FUSE`, or `SPINOFF`, release or redirect the investment according to that action. In every case,
+   update Portfolio authority before dispatch.
+3. One terminal leg releases its advancing slot even while the other legs are still running.
+   Recompute the live advancing count. When it is below authorized capacity, screen the strongest
+   authorized candidates and dispatch the best qualified successor or replacement to an exact idle
+   EM without waiting for another Root prompt.
+4. Portfolio may wait only when all authorized slots already have live WORK, or no admissible
+   candidate remains after comparison. In the latter case, name the candidates considered, the
+   evidence that excludes them, and the concrete reentry; an unconsumed result or unfinished
+   screening is not a waiting condition.
+
 ## Normal path
 
 1. Apply the scientific quality floor to the frame above: clear question and non-goals, traceable evidence, an
@@ -61,10 +80,10 @@ authority for the decision that produced them.
    investment question, direction-specific lens, material uncertainty, discriminator, protected
    non-goals, stop rule, and which investment action each answer could change. Portfolio owns this
    framing; do not ask Root or EM to choose the investment question.
-6. Retain every dispatched join until the exact EM returns terminally. Interpret each terminal EM
-   result as evidence: an EM recommendation is advice, not an automatic action. Update current
-   Portfolio authority and capacity only from Portfolio's own counterfactual judgment. Record one
-   direction action and rationale for every direction in the fixed set, including unchanged ones.
+6. Retain every nonterminal EM and consume every terminal EM through the active allocation loop.
+   Update current Portfolio authority and capacity only from Portfolio's own counterfactual
+   judgment. Record one direction action and rationale for every direction in the fixed set,
+   including unchanged ones.
 7. For `FUSE`, define a new synthesis question, explain source complementarity, give every source
    direction its own lifecycle disposition, and send shared-core integration to Root; never merge
    source code or silently collapse scientific authorities. For `SPINOFF`, define and register the
