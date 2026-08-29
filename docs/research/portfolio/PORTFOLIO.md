@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T16:46:13Z
+Updated at: 2026-08-29T17:02:17Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -26,7 +26,7 @@ how to stage a valuable question, not whether that question has value.
 | acvc | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. The learned joint veto lost to deterministic exact matching. Retain authenticated binding as a control in DEARS/RCLE; no independent adaptive-algorithm question remains. |
 | commitment_residual_triggered_options | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Preserve the sharp representation-versus-optimization question. The only admissible next step is the frozen 1,000-to-10,000-update residual probe under unchanged data/order/optimizer/thresholds; no policy run before both representation gates pass. |
 | covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
-| degraded_incumbent_shadow_handover | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:34:02Z | Readiness `LIVE`. Fresh Sol/max EM `01a04e5d-3523-7190-8493-6254346fb401` owns cycle `2026-08-29.8-portfolio-dish-preactivity-certificate-01`. Portfolio activated DISH to refill the terminal FSBS R02 slot because direct atomic first-handover service and tail value remain high-priority and scientifically unanswered. EM must adversarially audit the complete R06 definition and select the smallest action-changing preactivity certificate for opportunity/headroom, containing-rule competence and substrate bindability before any master, coordinate, tape, training or result command. Historical R05/R06 identities and empirical activity are not reused; engineering scale controls staging, not value. |
+| degraded_incumbent_shadow_handover | REGISTERED | HIGH | NONE | 2026-08-29T16:57:57Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal preactivity-certificate WORK `2026-08-29.8-portfolio-dish-preactivity-certificate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Its mandatory Pro stage was `ZERO_SEND_FAILED` and supplies no scientific polarity. Two local audits found no proper subset, symmetry, static timing, containment-only or monotone-envelope certificate sufficient for the full R06 branch family; they did not synthesize direct-handover value. Preserve the unanswered high-value full object. Reentry requires eligible independent consultation (or exact waiver), a named <=8-core substrate/process design with result-blind concurrency/overhead evidence, a current-byte engineering map and fresh proportionality judgment. Cost and transport change staging only; neither PARKS or CLOSES DISH. |
 | dual_epoch_receipt_survival | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Retain DEARS as the deterministic authenticated-lineage/liveness umbrella. Its B1 carrier result is reusable, while online adaptive separation was not established. Orbit, EC4G, VAP/FOLR and VSP lifecycle primitives are consolidated here as controls, not new claims. |
 | ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
 | eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
@@ -44,7 +44,7 @@ how to stage a valuable question, not whether that question has value.
 | roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
 | semantic_graphon_shared_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:17:40Z | Readiness `WAITING-REENTRY`. Retain the exact short-gate WORK and its frozen conclusion-blind Convergence prompt. Innovator is COMPLETE and Convergence is `ZERO_SEND_FAILED`. Direct page evidence now establishes the eligible composer-adjacent visible `Pro` product control while excluding the profile label; the strict Agentify backend nevertheless applies the withdrawn model-evidence gate before Send. This transport defect changes no provisional science, lifecycle, priority or capacity. Reentry is an independently reviewed backend repair plus exact operation-budget authority for this same assignment. |
-| semigroup_consistent_duration_model_policy | PARKED | HIGH | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Preserve the direct external-k/order mission-value question as high potential. PARK reflects the absence of one host containing both order opportunity and a competent order-erased foundation, not engineering scale; that object must exist before constructing an adapter. |
+| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:02:17Z | Readiness `LIVE`. Fresh Sol/max EM `01a04e78-82ba-7823-b012-c5ff34821aae` owns cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01`. Historical evidence places UAV order opportunity and a competent order-erased foundation in separate objects, so neither may satisfy the other's gate. The fresh EM must determine whether one meaning-complete native task can prospectively bind `I_native`, establish a competent order-erased foundation `C_native`, and expose direct foundation-conditioned order opportunity `O_native` before any adapter, source, identity, training or result Effect. Absence of such a coherent object is a valid bounded scientific answer; engineering scale cannot erase a surviving object. |
 | ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
@@ -56,16 +56,16 @@ how to stage a valuable question, not whether that question has value.
 | vsp_06_mssr | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Equal-information generic compilation reproduced admissible histories. Portfolio closes standalone VSP-06 and retains the dependency DAG and compiler null as DEARS/RCLE controls. |
 | vsp_c1 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The fourth-corner statistic is a clean local gate, but its authenticated four-clone production host is absent. Portfolio closes standalone VSP-C1 and retains the statistic and negative census for FSBS. |
 
-Capacity is exactly four by direct user authorization. FSBS R02 is terminal and no longer occupies a
-slot. Portfolio PARKS its exhausted equal-information carrier-access interface and activates DISH as
-the strongest qualified refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated
-advancing set is:
+Capacity is exactly four by direct user authorization. DISH's preactivity-certificate WORK is
+terminal and no longer occupies a slot. Portfolio retains DISH as a high-priority unanswered
+direction with an exact reentry, and activates SCDMP as the strongest qualified complementary
+refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated advancing set is:
 
-- `degraded_incumbent_shadow_handover`, EM `01a04e5d-3523-7190-8493-6254346fb401`, cycle
-  `2026-08-29.8-portfolio-dish-preactivity-certificate-01`:
-  can the complete direct-UAV atomic first-handover object demonstrate action-changing opportunity,
-  direct service/tail headroom and competent containing-rule separation through the smallest
-  preactivity certificate, without reusing R05/R06 identity or authorizing the full empirical panel?
+- `semigroup_consistent_duration_model_policy`, EM `01a04e78-82ba-7823-b012-c5ff34821aae`, cycle
+  `2026-08-29.8-portfolio-scdmp-native-ico-gate-01`: can one prospectively complete native target bind its own task law, competent
+  order-erased foundation and direct foundation-conditioned order opportunity before any
+  order-aware adapter or empirical activity, without importing either historical object's identity,
+  gate or result?
 - `voronoi_quadrature_field_policy`, EM `01a04e22-2f5a-7423-8b60-95d35d150109`, cycle
   `2026-08-29.8-portfolio-vqfp-proof-gate-01`:
   can a proof-sized exact variable-N field object retain native allocation/return headroom over
@@ -77,9 +77,9 @@ advancing set is:
   is there a bounded meaning-preserving role-sampled counterfactual with direct value beyond
   competent EDGE?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T16:46:13Z`, only
-DISH is natively `active/inProgress`, completing bounded local audits after an Innovator
-`ZERO_SEND_FAILED` fact. ONLGR's EM is idle but its already-sent Convergence operation
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:02:17Z`, SCDMP
+EM `01a04e78-82ba-7823-b012-c5ff34821aae` is natively active. ONLGR's EM is idle but its
+already-sent Convergence operation
 `5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
 `SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
 certification. VQFP and SGSP are idle `WAITING_REENTRY` tasks with zero-send transport facts and no
@@ -88,8 +88,9 @@ actively advancing until their reviewed transport reentries are satisfied. Root 
 repair; Portfolio has escalated the combined model-evidence and tab-independent certification
 incident. No transport fact changes lifecycle or scientific priority.
 
-The scientific reserve order after these activations is `semigroup_consistent_duration_model_policy`,
-`commitment_residual_triggered_options`, then `dual_epoch_receipt_survival`. This is
+The scientific reserve order after these activations is `commitment_residual_triggered_options`,
+then `dual_epoch_receipt_survival`; DISH retains a separate high-priority exact reentry rather than
+becoming a cheaper substitute. This is
 an opportunity order, not a command to start the largest package: Portfolio must author the smallest
 result-blind gate that can change investment while preserving the high-value question. VQFP and DISH
 remain ahead scientifically even while their execution substrates are less ready.
