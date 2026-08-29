@@ -203,6 +203,8 @@ Leaf observations are also separate namespaces:
 | `rv` | `hmasd-reviewer` | `Review status: FINDINGS | NO_FINDINGS | INCOMPLETE` |
 | `vf` | `hmasd-verifier` | `Verification observation: OBSERVED | NOT_OBSERVED | UNAVAILABLE` |
 | `op` | `hmasd-experiment-operator` | `Run observation: TERMINAL | LAUNCH_FAILED | OBSERVATION_LOST` |
+| `wd` | `hmasd-workflow-designer` | `Workflow design status: PROPOSED | INCOMPLETE` |
+| `dr` | `hmasd-design-reviewer` | `Design review disposition: APPROVED | REJECTED | UNDERSPECIFIED` |
 
 A leaf result is evidence for its parent. It cannot substitute for the parent's judgment or emit a
 top-level `[RESULT]` field.
@@ -226,12 +228,17 @@ Leaf value meanings are local to that observation:
   and `UNAVAILABLE` could not run the probe.
 - `op`: `TERMINAL` retains the exact process through a terminal witness, `LAUNCH_FAILED` proves no
   process was launched, and `OBSERVATION_LOST` means the launched process lacks a terminal witness.
+- `wd`: `PROPOSED` returns one complete, executable design rather than alternatives; `INCOMPLETE`
+  means the available facts and scope do not support a complete design. `dr`: `APPROVED` means the
+  frozen design satisfies its full acceptance, `REJECTED` means a material violation or direct RED
+  conflicts with it, and `UNDERSPECIFIED` means a decisive fact, witness, or exact behavior is
+  missing and cannot be guessed.
 
 ## Caller matrix and task configuration
 
 | Caller | Allowed direct leaves | Work retained by the manager |
 | --- | --- | --- |
-| Root | `gl`, `rv` | user intent, shared-core contract, workflow repair, task conflict, cross-direction Git integration |
+| Root | `gl`, `wd`, `dr` | user framing, exact scope/invariants, native-task conflicts, approved-design implementation and integration |
 | Portfolio | `gl` | quality floor, lifecycle, priority, capacity, fusion/separation, dispatch and join |
 | EM | `gl`, `rs`, `ri`, `rp`, `rc` | scientific scope, evidence synthesis, claim ceiling, discriminator, Pro prompt authorship, direction authority |
 | CM | `gl`, `cs`, `im`, `rt`, `rv`, `vf`, `op` | engineering contract, implementer selection, integration, validation interpretation, technical acceptance and Git closure |
@@ -240,6 +247,12 @@ Root sends bounded shared engineering to a dedicated top-level `CM/shared`; it d
 direction CM or call engineering leaves directly. EM never calls engineering leaves. CM never calls
 research leaves. Portfolio never calls either specialist family. Leaves normally return only to
 their spawning parent and never contact another top-level participant.
+
+Root has no authority to design workflow, control-plane, protocol, role, or skill topology. Every
+future workflow-control-plane design transaction is delegated to `wd`; the exact frozen `wd` design
+has one and only one design review by `dr`. `rv` cannot satisfy this design-review role. Root may
+implement or integrate only the exact approved design and may not invent, broaden, reinterpret,
+amend, or self-certify it.
 
 External browser consultation is not a leaf. EM or CM sends a complete `[BROWSER WORK]` directly to
 the one current Browser Transport task and consumes only its `[BROWSER RESULT]`. Browser Transport
@@ -273,7 +286,8 @@ the configured native agent identifiers remain the `[agents.*]` entries in `.cod
 the `hmasd-*` profile names above. Direct-leaf `spawn_agent.task_name` uses
 `<code>_<model>_<effort>_<task>`. The model code is
 `l | t | s`; effort is `l | m | h | xh | mx | u`; task is `[a-z0-9_]+`. Codes must match the actual
-selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`. This is a short display
+selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`, `wd_l_xh_design`,
+`dr_l_mx_review`. This is a short display
 name only and is never an identity, receipt, or route.
 
 ## Universal leaf and Effect boundaries

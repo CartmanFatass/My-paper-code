@@ -164,6 +164,8 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
         "HMASDResearchPrinciplesAnalyst",
         "HMASDImplementer",
         "HMASDRoutineImplementer",
+        "HMASDWorkflowDesigner",
+        "HMASDDesignReviewer",
     }
     general_path = ROOT / ".codex" / entries["HMASDGeneralLeaf"]["config_file"]
     general = tomllib.loads(general_path.read_text(encoding="utf-8"))
@@ -179,6 +181,28 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
     assert "`rt` | `hmasd-routine-implementer`" in agents
     assert "scientific scope, evidence synthesis" in agents
     assert "engineering contract, implementer selection" in agents
+    assert "`wd` | `hmasd-workflow-designer`" in agents
+    assert "`dr` | `hmasd-design-reviewer`" in agents
+
+
+def test_workflow_design_leaves_do_not_expand_the_native_protocol() -> None:
+    agents = _flat(_read("AGENTS.md"))
+    protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
+    root = _flat(_read(".agents/skills/hmasd-root-task/SKILL.md"))
+    design_reviewer = _flat(_read(".agents/roles/DESIGN_REVIEWER.md"))
+
+    for leaf in ("HMASDWorkflowDesigner", "HMASDDesignReviewer"):
+        assert leaf not in protocol
+    assert "| Root | `gl`, `wd`, `dr` |" in _read("AGENTS.md")
+    assert "same Root WORK and the same design-review assignment" in root
+    assert "another design reviewer" in root
+    assert "rereview loop" in root
+    assert "before_send_click" in design_reviewer
+    assert "review_model_mismatch" in design_reviewer
+    assert "zero-send" in design_reviewer
+    assert "does not claim that the Browser runtime is fixed" in design_reviewer
+    for forbidden in ("registry", "receipt", "retry ledger", "scheduler", "authentication gate"):
+        assert f"new {forbidden}" not in agents
 
 
 def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:

@@ -1,5 +1,5 @@
 name = "hmasd-reviewer"
-description = "Independent high-impact code and protocol reviewer."
+description = "Independent high-impact CM-owned engineering reviewer."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"

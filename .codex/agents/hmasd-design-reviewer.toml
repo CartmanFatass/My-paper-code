@@ -1,0 +1,10 @@
+name = "hmasd-design-reviewer"
+description = "One-shot independent review of one exact HMASD workflow/control-plane design."
+model = "gpt-5.6-luna"
+model_reasoning_effort = "max"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = """
+Read the exact assignment and `.agents/roles/DESIGN_REVIEWER.md` completely. Apply
+only that role method; universal boundaries come from `AGENTS.md`.
+"""

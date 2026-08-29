@@ -21,6 +21,8 @@ EXPECTED = {
     "hmasd-research-principles-analyst": ("gpt-5.6-sol", "max", "read-only"),
     "hmasd-implementer": ("gpt-5.6-sol", "high", "workspace-write"),
     "hmasd-routine-implementer": ("gpt-5.6-terra", "high", "workspace-write"),
+    "hmasd-workflow-designer": ("gpt-5.6-luna", "xhigh", "read-only"),
+    "hmasd-design-reviewer": ("gpt-5.6-luna", "max", "read-only"),
 }
 TASK_NAME_CODES = {
     "cs": "hmasd-cm-scout",
@@ -34,6 +36,8 @@ TASK_NAME_CODES = {
     "rp": "hmasd-research-principles-analyst",
     "im": "hmasd-implementer",
     "rt": "hmasd-routine-implementer",
+    "wd": "hmasd-workflow-designer",
+    "dr": "hmasd-design-reviewer",
 }
 
 
@@ -75,7 +79,7 @@ def test_short_task_name_codes_cover_the_exact_registered_roster() -> None:
         assert f"| `{code}` | `{profile}` |" in agents
     assert "Codex has no native alias field for these codes" in agents
     assert "<code>_<model>_<effort>_<task>" in agents
-    for example in ("rv_s_xh_plan", "gl_l_xh_pdf"):
+    for example in ("rv_s_xh_plan", "gl_l_xh_pdf", "wd_l_xh_design", "dr_l_mx_review"):
         assert example in agents
 
 
@@ -92,6 +96,8 @@ def test_each_leaf_profile_points_to_only_its_own_observation_role() -> None:
         "hmasd-research-principles-analyst": "Principles status:",
         "hmasd-implementer": "Implementation observation:",
         "hmasd-routine-implementer": "Routine implementation observation:",
+        "hmasd-workflow-designer": "Workflow design status:",
+        "hmasd-design-reviewer": "Design review disposition:",
     }
     for name, own_marker in markers.items():
         instructions = tomllib.loads(
@@ -213,6 +219,8 @@ def test_profiles_are_thin_role_pointers_with_bounded_context() -> None:
         "hmasd-research-principles-analyst": "RESEARCH_PRINCIPLES_ANALYST.md",
         "hmasd-implementer": "IMPLEMENTER.md",
         "hmasd-routine-implementer": "ROUTINE_IMPLEMENTER.md",
+        "hmasd-workflow-designer": "WORKFLOW_DESIGNER.md",
+        "hmasd-design-reviewer": "DESIGN_REVIEWER.md",
     }
     for name, role_file in role_files.items():
         instructions = tomllib.loads(
@@ -224,6 +232,26 @@ def test_profiles_are_thin_role_pointers_with_bounded_context() -> None:
         assert "universal boundaries come from `AGENTS.md`" in normalized
         assert "docs/project/WORKFLOW_PROTOCOL.md" not in instructions
         assert len(instructions) < 250
+
+
+def test_workflow_design_profiles_are_read_only_and_root_cannot_self_approve() -> None:
+    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    root_skill = (ROOT / ".agents/skills/hmasd-root-task/SKILL.md").read_text(encoding="utf-8")
+    reviewer = (ROOT / ".agents/roles/REVIEWER.md").read_text(encoding="utf-8")
+    root_flat = " ".join(root_skill.split())
+
+    assert "| Root | `gl`, `wd`, `dr` |" in agents
+    assert "Root has no authority to design workflow, control-plane, protocol, role, or skill topology" in agents
+    assert "`rv` cannot satisfy this design-review role" in agents
+    assert "APPROVED_WITH_AMENDMENTS" not in agents
+    assert "hmasd-workflow-designer" in root_skill
+    assert "hmasd-design-reviewer" in root_skill
+    assert "There is no second reviewer, amendment disposition, quorum, or rereview loop" in root_flat
+    assert "shared workflow repair" not in root_skill
+    assert "review the same object twice" not in root_skill
+    assert "after repair, review only the affected delta" not in root_skill
+    assert "workflow, control-plane, protocol, role, or skill topology design" in reviewer.lower()
+    assert "Review status: INCOMPLETE" in reviewer
 
 
 def test_agents_is_the_only_human_readable_shared_field_glossary() -> None:

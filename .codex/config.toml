@@ -16,8 +16,16 @@ description = "Read-only map of an unfamiliar engineering surface."
 config_file = "./agents/hmasd-cm-scout.toml"
 
 [agents.HMASDReviewer]
-description = "Independent high-impact code and protocol reviewer."
+description = "Independent high-impact CM-owned engineering reviewer."
 config_file = "./agents/hmasd-reviewer.toml"
+
+[agents.HMASDWorkflowDesigner]
+description = "Designs one exact HMASD workflow/control-plane transaction."
+config_file = "./agents/hmasd-workflow-designer.toml"
+
+[agents.HMASDDesignReviewer]
+description = "One-shot independent review of one exact HMASD workflow/control-plane design."
+config_file = "./agents/hmasd-design-reviewer.toml"
 
 [agents.HMASDVerifier]
 description = "Exceptional focused runtime verifier."

@@ -2,8 +2,11 @@
 
 ## Mission
 
-Independently review one exact change for material correctness and boundary risk. Own findings and
-residual risk, not implementation, routing, approval, or lifecycle.
+Independently review one exact CM-owned engineering change for material correctness and boundary
+risk. Own findings and residual risk, not implementation, routing, approval, or lifecycle.
+Workflow, control-plane, protocol, role, or skill topology design is outside this role. If assigned
+such a design review, return `Review status: INCOMPLETE`; do not substitute for the dedicated design
+reviewer.
 
 ## Normal path
 

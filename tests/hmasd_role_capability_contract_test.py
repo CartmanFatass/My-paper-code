@@ -10,8 +10,9 @@ ROLE_MARKERS = {
     "ROOT.md": (
         "original observable outcome", "protected invariants", "safe reproduction",
         "discriminating hypothesis", "end-to-end acceptance", "existing obligation",
-        "authority classification", "conflicting propositions", "fixed diff/base",
-        "material finding", "same unfinished WORK", "unconsumed result",
+        "authority classification", "conflicting propositions", "same unfinished WORK",
+        "unconsumed result", "no authority to design", "workflow-control-plane",
+        "hmasd-workflow-designer", "hmasd-design-reviewer", "exact approved design",
     ),
     "PORTFOLIO.md": (
         "scientific quality floor", "complementarity", "common failure risk",
@@ -75,6 +76,15 @@ ROLE_MARKERS = {
     ),
     "ROUTINE_IMPLEMENTER.md": (
         "behavior-preserving", "reversible", "focused tests", "owned paths",
+    ),
+    "WORKFLOW_DESIGNER.md": (
+        "one future HMASD workflow", "exact scope", "protected invariants",
+        "real-page usability", "INCOMPLETE",
+    ),
+    "DESIGN_REVIEWER.md": (
+        "one frozen workflow", "independent", "named existing end-to-end witness",
+        "must never send", "composer-adjacent Pro", "review_model_mismatch",
+        "zero-send", "APPROVED", "REJECTED", "UNDERSPECIFIED", "rereview",
     ),
 }
 
@@ -282,3 +292,25 @@ def test_external_research_mechanisms_have_current_role_owners() -> None:
         "premature homogenization", "Do not manufacture numeric VOI", "Elo", "vote",
     ):
         assert marker in _flat(portfolio)
+
+
+def test_workflow_design_and_review_are_pure_local_slices() -> None:
+    agents = _flat(_read("AGENTS.md"))
+    root = _flat(_read(".agents/skills/hmasd-root-task/SKILL.md"))
+    designer = _flat(_read(".agents/roles/WORKFLOW_DESIGNER.md"))
+    design_reviewer = _flat(_read(".agents/roles/DESIGN_REVIEWER.md"))
+    reviewer = _flat(_read(".agents/roles/REVIEWER.md"))
+
+    assert "Root has no authority to design workflow" in agents
+    assert "Root must not author the design" in root
+    assert "APPROVED_WITH_AMENDMENTS" not in f"{agents} {root} {design_reviewer}"
+    assert "one minimal meaning-complete design" in designer
+    assert "must never send a provider request" in design_reviewer
+    sequence = (
+        "observe → recognize unique visible actionable composer-adjacent Pro while excluding profile Pro "
+        "→ stage exact owner prompt → send once → wait natural completion → archive full reply "
+        "→ close/reopen by conversation ID"
+    )
+    assert sequence in design_reviewer
+    assert "Schema, unit tests, or same-source narrative cannot substitute" in design_reviewer
+    assert "workflow, control-plane, protocol, role, or skill topology design" in reviewer.lower()
