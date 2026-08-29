@@ -77,7 +77,32 @@ executable observation. The preliminary recommendation is `PARK`, subject to
 the still-required fresh independent Convergence review. A distinct future
 finite-data, finite-compute factorization test could examine approximation
 efficiency, but it cannot repair this exact-population cycle or support relay.
-The fresh Convergence operation remains `PENDING`.
+
+At `REVIEW_RESOLVED`, the fresh strict Convergence is `COMPLETE`: one exact
+owner-authored conclusion-blind prompt was sent in a new visible-Pro
+conversation, natural completion and prompt fidelity were verified, the full
+response was archived, and no replacement was used. The reviewer independently
+classified overlapping contention and serial complementarity as support-only
+nulls and censored substitution as a generic-denoising or variance-only null.
+It found no full survivor, no invalid comparison under the frozen parity
+contract, and no answer-changing executable observation.
+
+Every material objection is dispositioned in
+`evidence/2026-08-29-four-successor-03-convergence-disposition.md`.
+Comparator absorption is the intended narrow containment test once relation
+representation is common; biased finite-step coordination becomes generic
+surrogate or optimizer geometry; larger hosts violate the smallest-instance
+search law and create new objects; exact-critic strength leaves finite-data
+approximation as a distinct future question; shared parameters do not break
+record-wise equality; and censoring plus source severing prove physical
+causality without specialized decision value.
+
+The exact-population search is closed scientifically. The direction-level EM
+recommendation remains `PARK` under the prospectively frozen no-survivor branch
+rather than the reviewer's broader lifecycle wording; Portfolio alone owns
+that action. A future finite-data, finite-compute relational-factorization
+question may merit a separately authorized `SPINOFF`, but it cannot continue
+or repair this EGRCR relay cycle.
 
 ## Predecessor clean successor-02 cycle
 
