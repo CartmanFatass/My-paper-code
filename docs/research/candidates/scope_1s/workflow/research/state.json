@@ -6,7 +6,7 @@
   "direction_id": "scope_1s",
   "direction_ref": {
     "path": "docs/research/candidates/scope_1s/DIRECTION.md",
-    "sha256": "a6dfc112db5833336560367c7464ec19b148a868caf83037f8c05c55a40d4a67"
+    "sha256": "cd823aafcce30b2f3c4d11417dd2b2299847e5d7345a0bff0a7b8f75a85ee2ce"
   },
   "engineering_request": null,
   "evidence_set_sha256": "ca98ecfceabf6a4aa5fb065cb126833fc659a82b73ac652bc7b8845af60ce8c5",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "da577bd358cc10bbf1a9d80e8e1274beab2d29a607e78ab0d2d688f317f3a5e8",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-scope_1s"
 }

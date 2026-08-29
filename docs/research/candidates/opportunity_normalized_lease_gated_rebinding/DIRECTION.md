@@ -1,16 +1,11 @@
 # Direction opportunity_normalized_lease_gated_rebinding: opportunity-normalized lease-gated rebinding
 
-This authority is the direction-science surface for HMASD. It preserves source-grounded question and evidence references; workflow JSON points here and never copies scientific prose.
+This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
 
 - Stable direction ID: `opportunity_normalized_lease_gated_rebinding`
-- Portfolio label: `opportunity-normalized lease-gated rebinding`
-- Historical map state: `RETAINED_RESULT`
-- Initial registry lifecycle: `REGISTERED`
-- Registry abbreviation: `ONLGR`
-- Lifecycle, ranking, and dependency decisions are held only by `docs/research/portfolio/PORTFOLIO.md` and its registry.
-- The initial lifecycle is deliberately neutral: registration does not qualify, activate, park, or close the direction.
+- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
 
 ## Scientific question
 
@@ -22,27 +17,154 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
+## Active successor 04 seven-tick robustness question
+
+Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04` is a
+fresh exact robustness cell. It changes only the predecessor's physical service
+lifetime from eight to seven ticks while retaining opportunity spacings one
+and four, action cost two, equal physical-time weighting, the exact renewal
+ordering, state-blind memoryless policies, and the base-only `1/16` grid. Shared
+raw probability, exact exponential survival linking, and common executed rate
+are registered from the outset, together with KEEP, a charge-matched
+payload-null shell, unrestricted grid optima, and an age-conditioned competence
+ceiling.
+
+The frozen result-blind scope requires strictly more than `1/32` exact
+exponential-over-common-rate direct return, with direct headroom, before a
+link-specific interpretation. A common-rate ceiling match, common-rate win, or
+smaller gap supports only generic physical-rate regularization. Exact scope and
+neutral Innovator question are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-innovator-prompt.md`
+
+The direction writer remains on terminal predecessor commit
+`84dede555997109065dfc18ebba6ba0340519b68`. Current shared authority
+`e3dfd2d48ddb02c6442d45dbddc30f36ac9f3ded` and Portfolio authority
+`2ecc84edb1bfee06c04e3157eb20bb3d3368c09e` are separate read-only lines, so
+their current semantics and investment question are consumed without merging
+histories. The B3 package remains quarantined non-input.
+
+## Terminal successor 03 structural question
+
+Material cycle `2026-08-28.10-four-01a04a02-onlgr-successor-03` is a fresh
+structural-identifiability study opened from Portfolio authority
+`2cd404b6e35753ba7bb2decabf19e4aabd700038`. It asks whether equal total
+physical exposure under different opportunity partitions creates a
+direct-return reason to parameterize one global event rule per opportunity or
+per unit physical exposure. It begins with an exact single-unit regenerative
+renewal object and stops before learning if the policy families collapse,
+useful renewal lacks headroom over KEEP and a payload-null real-action shell,
+or robust stratum-specific probability heterogeneity is absent.
+
+The frozen neutral scope and owner-authored Innovator question are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-innovator-prompt.md`
+
+This cycle is not a B3 repair. The B3 raw package and every internal branch,
+selected policy, contrast, threshold, coordinate, and derived value remain
+quarantined non-evidence.
+
+The accepted fresh Innovator, EM's independent exact derivation, and the fresh
+conclusion-blind Convergence review reach `REVIEW_RESOLVED` without CM. The
+per-opportunity and exponential families are structurally distinct, useful
+renewal has direct headroom, and the exact exposure transform materially beats
+one shared raw per-opportunity probability. Those raw boundary-probability
+optima, however, are exactly one common executed physical event rate on the
+frozen grid. A simpler linear common-rate family reaches the unrestricted grid
+ceiling and is not materially separated from the exponential link. The final
+interpretation stops before learning and narrows the surviving question to
+generic global physical-rate regularization rather than a distinct exponential,
+opportunity-normalized, lease, or rebinding mechanism. Exact derivation,
+conclusion-blind packet, review, and objection disposition are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-innovator-and-structural-derivation.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-em-synthesis.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-synthesis-packet.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-convergence-prompt.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-pro-convergence-response.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-convergence-disposition.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-four-01a04a02-onlgr-successor-03-handoff-ready.md`
+
+The cycle is terminal at `HANDOFF_READY`: `Outcome: DONE`, `Scientific status:
+SYNTHESIZED`, `Decision impact` narrows the surviving object to generic global
+physical-rate regularization, `Recommendation: NARROW`, and both mandatory Pro
+stages are `COMPLETE`. No live Effect remains.
+
+## Clean successor 02 question and terminal disposition
+
+Material cycle `2026-08-28.10-clean-01a04a02-onlgr-successor-02` is a fresh
+prospective screen and does not reopen the terminal predecessor. It first asks
+whether direct-return headroom survives competent learned-global-exposure,
+no-voluntary-action, and matched-shell controls and whether direct-return-optimal
+event probabilities differ materially across result-blind physical-time exposure
+or tenure strata. Only if both gates pass may the cycle compare one learned
+global exposure-linked rate with one learned global per-opportunity probability
+under matched initialization, work, shell, IID coordinates, and direct-value
+controls. Failure of either gate ends the executable branch as a bounded result.
+
+The frozen neutral scope and external Innovator question are recorded at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-scope-and-grounding.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator-prompt.md`
+
+The accepted Innovator and EM independently identify one evaluation-only,
+finite-grid headroom-and-exposure-heterogeneity screen as answer-changing before
+any new learned-link comparison. The exact result-blind discriminator and bounded
+EM-to-CM contract are frozen at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator-and-discriminator-freeze.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-em-to-cm-work.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator.md`
+
+The sole authorized B3 result process terminated, but its package did not
+satisfy the frozen hard resource-observation contract: peak RSS was recorded as
+zero, `psutil` was unavailable, and the launcher supplied no alternative RSS
+witness. The package's internal `BOUNDED_NO_HEADROOM` branch is therefore
+quarantined from scientific inference. No valid new observation or synthesis
+was reached, and no Convergence request was sent. The cycle ends
+`Outcome: FAILED`, `Scientific status: NOT_REACHED`, `Decision impact: NONE`,
+`Recommendation: NONE`, and snapshot state `TERMINAL_GAP`. Its exact technical,
+transport, Git, quarantine, and claim-ceiling facts are recorded at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-terminal-gap.md`
+
+## Current bounded successor-cycle synthesis
+
+Successor cycle `2026-08-28.10-pilot-01a04a02-onlgr-successor-01` reached a
+bounded `SYNTHESIS_READY` interpretation but ended in `TERMINAL_GAP` before a
+valid independent Convergence review. Its top-level Outcome is `FAILED`, its
+Scientific status is `SYNTHESIZED`, and it returns no lifecycle recommendation.
+
+The strongest retained support is the unchanged-checkpoint post-action IID
+ONLGR-over-RAW return and service advantage, which shows that deterministic
+next-cadence prediction and lower action cost are not complete explanations of
+that finite-budget package contrast. The strongest contradiction is that the
+same checkpoints show no registered-material advantage over task-content-blind
+TIMING-ONLY; the state-blind fixed-rate diagnostic is descriptively stronger;
+and B2 does not demonstrate material timing-flexible value over one learned
+global rate. ROAD remains a separate direct-utility object and supplies only a
+competent-null and matched-shell warning.
+
+The maximum surviving interpretation is therefore a host- and budget-specific
+global exposure-linked operating-point or regularization hypothesis entangled
+with initialization, optimizer geometry, and the action shell. It is not a
+causal lease, `REBIND`, task-content, or future-cadence result. The complete
+terminal disposition and transport audit are recorded in the successor-cycle
+terminal-gap evidence note and current research snapshot.
+
 ## Evidence set
 
-The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
+The evidence set includes the original navigation provenance and the bounded
+successor-cycle synthesis below. The bootstrap sources alone imply no
+conclusion beyond the preserved historical position; the successor refs support
+only the finite-host claim ceiling stated above.
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md`
-
-## Engineering request
-
-No engineering request is active at bootstrap. An engineering scope may be created only by a later evidence-backed EM/Portfolio decision and must point to this authority rather than duplicate its science.
-
-## External review
-
-No external-review round is active at bootstrap. Provider operations and archive references are created only through the external-review workflow; this document records no provider result.
-
-## Operational neutral fields
-
-- `registry.dependencies` is `[]` because the cited sources do not establish a Portfolio dependency graph.
-- `registry.reactivation_condition_ref` is `null` because no reactivation condition is authored by the source set.
-- Research and engineering workflow states begin idle/unrequested with no active agents, rounds, blockers, or runtime references.
-- These neutral values are workflow facts, not scientific conclusions.
-
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-synthesis-packet.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-em-synthesis.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-pilot-01a04a02-onlgr-successor-01-terminal-gap.md`
 ## Provenance boundary
 
-The historical map and candidate source documents remain provenance. This authority is the stable direction reference for new workflow state; it does not rewrite historical source files or claim results that they do not state.
+The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.

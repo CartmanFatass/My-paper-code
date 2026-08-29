@@ -39,22 +39,22 @@
       },
       {
         "path": "docs/research/candidates/ucope/workflow/research/state.json",
-        "sha256": "5eb8264740ad4553651fdb4e1b8729cd9602654eba5c730273f40b1bc12bba24"
+        "sha256": "021621e126511e83e7bffe7d9f4c5e13f41442dc11a2f0844be1ca71b9aa4eb9"
       }
     ],
     "kind": "COMPLETE_UCOPE_S1_CURRENT_BYTE_REPAIR",
     "owner": "CM"
   },
   "phase": "IMPLEMENTING",
-  "revision": 3,
+  "revision": 5,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/ucope/DIRECTION.md",
-    "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+    "sha256": "829252ba0da68b9b566e6dd55194e1dfb51aef2b5548799533c88aeb7f1e5403"
   },
-  "updated_at": "2026-08-25T12:40:50Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/DIRECTION.md",
-    "sha256": "fc025ed5491676164b6f589412f4817cffd991356ade656cbdcc2d1e318059a6"
+    "sha256": "41d5765af94c646f9d13546d1bd87a3b7f2e3f86e28102236f44ad3b8bb3b469"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

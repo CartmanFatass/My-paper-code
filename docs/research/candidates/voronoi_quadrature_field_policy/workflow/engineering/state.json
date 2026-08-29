@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-    "sha256": "86de56bf32be7d3a26bac477071dd186eee73684a251f42c535e0f81a6d31ecc"
+    "sha256": "fed008e19c7e5febb41c74b73857b929d57eff3b51cc1d9e986dcd09183529af"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

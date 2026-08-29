@@ -6,7 +6,7 @@
   "direction_id": "optimizer_entropy_exposure_boundary_relay",
   "direction_ref": {
     "path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/DIRECTION.md",
-    "sha256": "affae67caff4a87f63ff41c60397ec61320deee09e96362f78dd9d164d9ef087"
+    "sha256": "d9857c85770b3d9f23b50f8304a6deee232fd7a59f5bc4e126ce2f164d936bd0"
   },
   "engineering_request": null,
   "evidence_set_sha256": "b20695d84c152aa6d8c1dd22d3c06fdba0c1393616ee8a82569eb52d464b697d",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "99bee1671a31b4d18258ab209dd513ef9d59e6b64c2b0456065f0d5c270b510d",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-optimizer_entropy_exposure_boundary_relay"
 }

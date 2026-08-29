@@ -1,746 +1,179 @@
 # HMASD Research Portfolio
 
-## Persistent scientific goal
-
-Maintain an auditable, source-grounded portfolio of research directions while preserving the distinction between scientific authority, workflow state, observed runs, external-review archives, and Git integration. The portfolio may select and sequence work only from evidence recorded in the direction authorities; it must not manufacture qualification, ranking, dependencies, or conclusions.
-
-## Phase 2 bootstrap boundary
-
-This bootstrap registers the 33 stable direction IDs from `docs/research/RESEARCH_MAP.md` and creates one direction authority plus three neutral workflow-state files for each. `RESEARCH_MAP.md` remains historical navigation/provenance; it is not parsed as lifecycle state.
-
-Every registry entry starts at `REGISTERED`. The map labels below are preserved as historical context and are not translated into target lifecycle values. No direction is scientifically qualified by this migration, so the initial active count is zero; the target permits zero qualified directions and an IDLE portfolio. Future activation requires a new evidence-backed Portfolio decision in this file and a registry replacement.
-
-Dependencies are empty for every initial entry because the cited source set does not establish a formal dependency DAG. Parking, closure, or future reactivation must preserve these authorities and historical sources.
-
-## Registered directions
-
-| Stable ID | Portfolio label | Historical map state | Registry abbreviation | Logical identity | OMP job name | Initial lifecycle |
-| --- | --- | --- | --- | --- | --- | --- |
-| `active_post_churn_population_flow_identification` | active post-churn population-flow identification | `SCIENTIFIC_NO_CURRENT` | `APFI` | `EM-active_post_churn_population_flow_identification` | `EMActivePostChurnPopulationFlowIdentification` | `REGISTERED` |
-| `acvc` | ACVC | `RETAINED_RESULT` | `ACVC` | `EM-acvc` | `EMAcvc` | `REGISTERED` |
-| `commitment_residual_triggered_options` | commitment residual-triggered options | `SCIENTIFIC_NO_CURRENT` | `CRTO` | `EM-commitment_residual_triggered_options` | `EMCommitmentResidualTriggeredOptions` | `REGISTERED` |
-| `covariance_calibrated_information_clock` | covariance-calibrated information clock | `SCIENTIFIC_NO_CURRENT` | `CCIC` | `EM-covariance_calibrated_information_clock` | `EMCovarianceCalibratedInformationClock` | `REGISTERED` |
-| `degraded_incumbent_shadow_handover` | degraded incumbent shadow handover | `RESOURCE_WAIT` | `DISH` | `EM-degraded_incumbent_shadow_handover` | `EMDegradedIncumbentShadowHandover` | `REGISTERED` |
-| `dual_epoch_receipt_survival` | dual epoch receipt survival | `RETAINED_RESULT` | `DEARS` | `EM-dual_epoch_receipt_survival` | `EMDualEpochReceiptSurvival` | `REGISTERED` |
-| `ec4g_r1` | EC4G | `SCIENTIFIC_NO_CURRENT` | `EC4G` | `EM-ec4g_r1` | `EMEc4gR1` | `REGISTERED` |
-| `eociv_lite` | EOCIV-lite | `SCIENTIFIC_NO_CURRENT` | `EOCIVLITE` | `EM-eociv_lite` | `EMEocivLite` | `REGISTERED` |
-| `event_triggered_budgeted_cooperative_renewal` | event-triggered budgeted cooperative renewal | `RETAINED_RESULT` | `EBCR` | `EM-event_triggered_budgeted_cooperative_renewal` | `EMEventTriggeredBudgetedCooperativeRenewal` | `REGISTERED` |
-| `expressibility_gated_renewal_credit_relay` | expressibility-gated renewal credit relay | `RETAINED_RESULT` | `EGRR` | `EM-expressibility_gated_renewal_credit_relay` | `EMExpressibilityGatedRenewalCreditRelay` | `REGISTERED` |
-| `field_slot_coordination` | Field-slot coordination | `SCIENTIFIC_NO_CURRENT` | `FIELDSLOT` | `EM-field_slot_coordination` | `EMFieldSlotCoordination` | `REGISTERED` |
-| `finite_semantic_boundary_support` | finite semantic boundary support | `SCIENTIFIC_NO_CURRENT` | `FSBS` | `EM-finite_semantic_boundary_support` | `EMFiniteSemanticBoundarySupport` | `REGISTERED` |
-| `metric_ground_transport_allocation` | metric ground transport allocation | `DORMANT_REVISIT` | `MGTAP` | `EM-metric_ground_transport_allocation` | `EMMetricGroundTransportAllocation` | `REGISTERED` |
-| `opportunity_normalized_lease_gated_rebinding` | opportunity-normalized lease-gated rebinding | `RETAINED_RESULT` | `ONLGR` | `EM-opportunity_normalized_lease_gated_rebinding` | `EMOpportunityNormalizedLeaseGatedRebinding` | `REGISTERED` |
-| `optimizer_entropy_exposure_boundary_relay` | optimizer entropy exposure boundary relay | `RETAINED_RESULT` | `OEER` | `EM-optimizer_entropy_exposure_boundary_relay` | `EMOptimizerEntropyExposureBoundaryRelay` | `REGISTERED` |
-| `orbit_shadow_read` | Orbit shadow read | `SCIENTIFIC_NO_CURRENT` | `ORBITSHADOW` | `EM-orbit_shadow_read` | `EMOrbitShadowRead` | `REGISTERED` |
-| `recct_lite` | RECCT-lite | `RETAINED_RESULT` | `RECCTLITE` | `EM-recct_lite` | `EMRecctLite` | `REGISTERED` |
-| `renewal_indexed_score_plasticity` | renewal-indexed score plasticity | `DORMANT_REVISIT` | `RISP` | `EM-renewal_indexed_score_plasticity` | `EMRenewalIndexedScorePlasticity` | `REGISTERED` |
-| `roster_consistent_latent_exploration` | roster-consistent latent exploration | `DORMANT_REVISIT` | `RCLE` | `EM-roster_consistent_latent_exploration` | `EMRosterConsistentLatentExploration` | `REGISTERED` |
-| `roster_smf` | Roster SMF | `SCIENTIFIC_NO_CURRENT` | `ROSTERSMF` | `EM-roster_smf` | `EMRosterSmf` | `REGISTERED` |
-| `scope_1s` | Scope-1s | `SCIENTIFIC_NO_CURRENT` | `SCOPE1S` | `EM-scope_1s` | `EMScope1s` | `REGISTERED` |
-| `semantic_graphon_shared_policy` | semantic graphon shared policy | `RESOURCE_WAIT` | `SGSP` | `EM-semantic_graphon_shared_policy` | `EMSemanticGraphonSharedPolicy` | `REGISTERED` |
-| `semigroup_consistent_duration_model_policy` | semigroup-consistent duration model policy | `RETAINED_RESULT` | `SCDMP` | `EM-semigroup_consistent_duration_model_policy` | `EMSemigroupConsistentDurationModelPolicy` | `REGISTERED` |
-| `ucope` | UCOPE | `ACTIVE_ENGINEERING` | `UCOPE` | `EM-ucope` | `EMUcope` | `REGISTERED` |
-| `vap_folr_core` | VAP/FOLR core | `SCIENTIFIC_NO_CURRENT` | `VAPFOLR` | `EM-vap_folr_core` | `EMVapFolrCore` | `REGISTERED` |
-| `variable_n_fleet_churn` | variable-N fleet churn | `RESOURCE_WAIT` | `VNFC` | `EM-variable_n_fleet_churn` | `EMVariableNFleetChurn` | `REGISTERED` |
-| `voronoi_quadrature_field_policy` | Voronoi quadrature field policy | `RESOURCE_WAIT` | `VQFP` | `EM-voronoi_quadrature_field_policy` | `EMVoronoiQuadratureFieldPolicy` | `REGISTERED` |
-| `vsp_02` | VSP-02 | `RETAINED_RESULT` | `VSP02` | `EM-vsp_02` | `EMVsp02` | `REGISTERED` |
-| `vsp_03` | VSP-03 | `SCIENTIFIC_NO_CURRENT` | `VSP03` | `EM-vsp_03` | `EMVsp03` | `REGISTERED` |
-| `vsp_04` | VSP-04 | `SCIENTIFIC_NO_CURRENT` | `VSP04` | `EM-vsp_04` | `EMVsp04` | `REGISTERED` |
-| `vsp_05` | VSP-05 | `SCIENTIFIC_NO_CURRENT` | `VSP05` | `EM-vsp_05` | `EMVsp05` | `REGISTERED` |
-| `vsp_06_mssr` | VSP-06 MSSR | `SCIENTIFIC_NO_CURRENT` | `VSP06MSSR` | `EM-vsp_06_mssr` | `EMVsp06Mssr` | `REGISTERED` |
-| `vsp_c1` | VSP-C1 | `SCIENTIFIC_NO_CURRENT` | `VSPC1` | `EM-vsp_c1` | `EMVspC1` | `REGISTERED` |
-
-## Direction records
-
-## Direction active_post_churn_population_flow_identification
-
-- Portfolio label: `active post-churn population-flow identification`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Two known witnesses collapse to a simple two-rule controller; reopen for a genuinely non-reducible censored-flow case.
-- Direction authority: `docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/active_post_churn_population_flow_identification/APFI_TLD_BRP_R02_SCIENCE_CARD_20260823.md`
-
-## Direction acvc
-
-- Portfolio label: `ACVC`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Adaptive learner lost to the deterministic comparator; retain the negative-evidence protocol lesson.
-- Direction authority: `docs/research/candidates/acvc/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/acvc/ACVC_COUNTEREVIDENCE_VETO_SCIENCE_CARD.md`
-
-## Direction commitment_residual_triggered_options
-
-- Portfolio label: `commitment residual-triggered options`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): The representation-competence gate failed before learned activity; a better representation/optimization discriminator is needed.
-- Direction authority: `docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
-
-## Direction covariance_calibrated_information_clock
-
-- Portfolio label: `covariance-calibrated information clock`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Current proposal is reducible to scalar ESS; revisit with equal-ESS states requiring opposite actions.
-- Direction authority: `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`
-
-## Direction degraded_incumbent_shadow_handover
-
-- Portfolio label: `degraded incumbent shadow handover`
-- Historical map state: `RESOURCE_WAIT`
-- Current position (preserved from the map): Pro-closed direct-UAV science is retained; the present substrate does not meet practical concurrency/overhead needs.
-- Direction authority: `docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RBHR_R06_SCIENCE_COMPOSITE_20260822.md`
-
-## Direction dual_epoch_receipt_survival
-
-- Portfolio label: `dual epoch receipt survival`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Positive owner/skill-lineage evidence is retained; the typed/reset/raw successor was negative.
-- Direction authority: `docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/dual_epoch_receipt_survival/DUAL_EPOCH_AUTHENTICATED_RECEIPT_SURVIVAL_SCIENCE_CARD.md`
-
-## Direction ec4g_r1
-
-- Portfolio label: `EC4G`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Content, physical, and selectivity tests failed and the remaining question is covered by DEARS.
-- Direction authority: `docs/research/candidates/ec4g_r1/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/ec4g_r1/CODE_SCIENCE_INDEX.md`
-
-## Direction eociv_lite
-
-- Portfolio label: `EOCIV-lite`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Fidelity-valid episodes remained unidentified; a new opportunity-gated variable-axis object is required.
-- Direction authority: `docs/research/candidates/eociv_lite/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/eociv_lite/CODE_SCIENCE_INDEX.md`
-
-## Direction event_triggered_budgeted_cooperative_renewal
-
-- Portfolio label: `event-triggered budgeted cooperative renewal`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Coordination beat local behavior but lost to fixed-4; the bundled mechanism is unsupported.
-- Direction authority: `docs/research/candidates/event_triggered_budgeted_cooperative_renewal/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/event_triggered_budgeted_cooperative_renewal/EBCR_VARIABLE_K_SCIENCE_CARD.md`
-
-## Direction expressibility_gated_renewal_credit_relay
-
-- Portfolio label: `expressibility-gated renewal credit relay`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Expressibility/selectivity passed, but utility and allocation improvement were zero.
-- Direction authority: `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_SCIENCE_CARD.md`
-
-## Direction field_slot_coordination
-
-- Portfolio label: `Field-slot coordination`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Preliminary compression idea only; no finite registered algorithm object yet.
-- Direction authority: `docs/research/candidates/field_slot_coordination/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/field_slot_coordination/FIELD_SLOT_COORDINATION_PRELIMINARY_NO_CURRENT_PORTFOLIO_DISPOSITION_20260823.md`
-
-## Direction finite_semantic_boundary_support
-
-- Portfolio label: `finite semantic boundary support`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): The fixed-cardinality contract is complete but lacks a variable-axis cooperative/UAV edge.
-- Direction authority: `docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md`
-
-## Direction metric_ground_transport_allocation
-
-- Portfolio label: `metric ground transport allocation`
-- Historical map state: `DORMANT_REVISIT`
-- Current position (preserved from the map): Structural checks passed, but all arms failed stationarity; one optional terminal discriminator remains.
-- Direction authority: `docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/metric_ground_transport_allocation/MGTAP_B1_SCIENCE_CARD.md`
-
-## Direction opportunity_normalized_lease_gated_rebinding
-
-- Portfolio label: `opportunity-normalized lease-gated rebinding`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
-- Direction authority: `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md`
-
-## Direction optimizer_entropy_exposure_boundary_relay
-
-- Portfolio label: `optimizer entropy exposure boundary relay`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Complete result retained; the primary entropy relay is unsupported and amplification remains unexposed.
-- Direction authority: `docs/research/candidates/optimizer_entropy_exposure_boundary_relay/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/optimizer_entropy_exposure_boundary_relay/OEER_BOUNDARY_RELAY_SCIENCE_CARD.md`
-
-## Direction orbit_shadow_read
-
-- Portfolio label: `Orbit shadow read`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Typed owner-role binding is useful, but no independent utility beyond DEARS is established.
-- Direction authority: `docs/research/candidates/orbit_shadow_read/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/orbit_shadow_read/CODE_SCIENCE_INDEX.md`
-
-## Direction recct_lite
-
-- Portfolio label: `RECCT-lite`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Pointer exposure exists, but target gaps and target effect are zero.
-- Direction authority: `docs/research/candidates/recct_lite/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/recct_lite/RECCT_SOURCE_TARGET_ASSOCIATION_CUT_SCIENCE_CARD.md`
-
-## Direction renewal_indexed_score_plasticity
-
-- Portfolio label: `renewal-indexed score plasticity`
-- Historical map state: `DORMANT_REVISIT`
-- Current position (preserved from the map): Pro-closed object and blinded frontier are retained; the current measurement component is not a practical continuation.
-- Direction authority: `docs/research/candidates/renewal_indexed_score_plasticity/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md`
-  - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_DORMANT_FALLBACK_PORTFOLIO_DISPOSITION_20260823.md`
-
-## Direction roster_consistent_latent_exploration
-
-- Portfolio label: `roster-consistent latent exploration`
-- Historical map state: `DORMANT_REVISIT`
-- Current position (preserved from the map): Pro-closed panel retained. The old index-3 record did not launch and is historical metadata, not a continuing gate.
-- Direction authority: `docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md`
-  - `docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_IMMEDIATE_SUPERSEDING_LEASE_PORTFOLIO_EM_INTAKE_20260824.md`
-
-## Direction roster_smf
-
-- Portfolio label: `Roster SMF`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Exact census dominates sampled-mass compression under the current access law.
-- Direction authority: `docs/research/candidates/roster_smf/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/roster_smf/CODE_SCIENCE_INDEX.md`
-
-## Direction scope_1s
-
-- Portfolio label: `Scope-1s`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Synthetic carrier separation exists, but no real variable-axis object is identified.
-- Direction authority: `docs/research/candidates/scope_1s/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/scope_1s/CODE_SCIENCE_INDEX.md`
-
-## Direction semantic_graphon_shared_policy
-
-- Portfolio label: `semantic graphon shared policy`
-- Historical map state: `RESOURCE_WAIT`
-- Current position (preserved from the map): Pro-closed RSCF remains valuable; the current package is too expensive for a practical short run.
-- Direction authority: `docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md`
-
-## Direction semigroup_consistent_duration_model_policy
-
-- Portfolio label: `semigroup-consistent duration model policy`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): UAV order opportunity and competent order-erased foundation exist in separate objects; fusion is not established.
-- Direction authority: `docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_UAV_SUSPENDED_PAYLOAD_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260820.md`
-  - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md`
-
-## Direction ucope
-
-- Portfolio label: `UCOPE`
-- Historical map state: `ACTIVE_ENGINEERING`
-- Current position (preserved from the map): The variable-k paid-probe object is Pro-closed and S0 is complete; S1 implementation is the current engineering continuation.
-- Direction authority: `docs/research/candidates/ucope/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md`
-  - `docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_CURRENT_OBJECT_PORTFOLIO_SELECTION_20260823.md`
-
-## Direction vap_folr_core
-
-- Portfolio label: `VAP/FOLR core`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Early typed-state evidence is retained, but later objects are non-identifying and DEARS is cleaner.
-- Direction authority: `docs/research/candidates/vap_folr_core/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vap_folr_core/FOLR_B3_CALIBRATED_PARTNER_WRITER_STALE_LOAD_ROUTING_CODE_SCIENCE_INDEX.md`
-
-## Direction variable_n_fleet_churn
-
-- Portfolio label: `variable-N fleet churn`
-- Historical map state: `RESOURCE_WAIT`
-- Current position (preserved from the map): PCPI science is closed and bindable; current architecture-only construction cost is disproportionate.
-- Direction authority: `docs/research/candidates/variable_n_fleet_churn/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_SCIENCE_CARD_20260822.md`
-
-## Direction voronoi_quadrature_field_policy
-
-- Portfolio label: `Voronoi quadrature field policy`
-- Historical map state: `RESOURCE_WAIT`
-- Current position (preserved from the map): VNPA science is closed and analytic G is proved; current full construction exceeds practical ceilings.
-- Direction authority: `docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_SCIENCE_CARD_20260823.md`
-
-## Direction vsp_02
-
-- Portfolio label: `VSP-02`
-- Historical map state: `RETAINED_RESULT`
-- Current position (preserved from the map): Adam carry/reset exact-success sets match, although continuous paths may differ.
-- Direction authority: `docs/research/candidates/vsp_02/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_02/CODE_SCIENCE_INDEX.md`
-
-## Direction vsp_03
-
-- Portfolio label: `VSP-03`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Truth-table divergence is coherent, but the source/host is incomplete and RECCT covers the route.
-- Direction authority: `docs/research/candidates/vsp_03/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_03/CODE_SCIENCE_INDEX.md`
-
-## Direction vsp_04
-
-- Portfolio label: `VSP-04`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): The declared-table separator is circular in ancestry; FSBS contains the remaining question.
-- Direction authority: `docs/research/candidates/vsp_04/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_04/CODE_SCIENCE_INDEX.md`
-
-## Direction vsp_05
-
-- Portfolio label: `VSP-05`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Handoff conformance exists, but no eligible prospective proposal truth is authenticated.
-- Direction authority: `docs/research/candidates/vsp_05/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_05/CODE_SCIENCE_INDEX.md`
-
-## Direction vsp_06_mssr
-
-- Portfolio label: `VSP-06 MSSR`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): Partner-specific state changes policy, but a generic compiler reproduces histories and host semantics remain incomplete.
-- Direction authority: `docs/research/candidates/vsp_06_mssr/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_06_mssr/CODE_SCIENCE_INDEX.md`
-
-## Direction vsp_c1
-
-- Portfolio label: `VSP-C1`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current position (preserved from the map): The fourth-corner design is clean, but no real four-clone host or value beyond FSBS is established.
-- Direction authority: `docs/research/candidates/vsp_c1/DIRECTION.md`
-- Initial lifecycle decision: register only; no scientific qualification or activation is inferred.
-- Dependencies: none recorded; this is an operationally neutral empty set.
-- Source citations:
-  - `docs/research/RESEARCH_MAP.md`
-  - `docs/research/candidates/vsp_c1/CODE_SCIENCE_INDEX.md`
-
-## Operational identifier notes
-
-Abbreviations and OMP job names are new mechanical identifiers required by the workflow contract, not scientific facts. They are unique within this registry. Schema-safe uppercase abbreviations preserve the direction labels while removing display punctuation where necessary (for example, `EOCIV-lite` → `EOCIVLITE`, `RECCT-lite` → `RECCTLITE`, and `VSP-06 MSSR` → `VSP06MSSR`). Stable direction IDs themselves are unchanged, including every underscore-bearing ID.
-
-The registry is the sole lifecycle authority. The `lifecycle` field is the active flag; there is no separate stored `active` boolean. Workflow JSON stores references and operational hashes only, and never duplicates the scientific position or conclusion.
-
-## Bootstrap deliberate operational neutral state
-
-- Initial lifecycle: `REGISTERED` for all 33 directions; historical map states remain provenance.
-- Active directions: zero; no qualification is asserted by bootstrap.
-- Dependencies: `[]` for every direction; no source-grounded DAG was found.
-- Reactivation conditions: `null`; no source-grounded condition was found.
-- Runtime references and active agents: `null`/empty in initial state files; concrete handles remain machine-local.
-- External rounds, blockers, engineering requests, and checkpoints: empty or `null` until observed workflow evidence exists.
-
-These neutral values are explicitly operational and do not imply a scientific negative result.
-
-## Provenance boundary
-
-Historical research files, result records, code-science indexes, and `RESEARCH_MAP.md` remain unchanged. They provide citations and provenance; this portfolio and the direction authorities are the new workflow-facing references.
-
-## Startup wake cycle — 2026-08-25T03:33:31Z
-
-### Evidence and qualification boundary
-
-The user's explicit startup request is the wake event for this bounded Portfolio cycle; it is not scientific evidence. Before ranking, registry revision 1 passed the state CLI schema and ownership checks. Its goal and all 33 lifecycle-decision references matched the exact prior `PORTFOLIO.md` SHA-256, every registered candidate path resolved to one nonsymlink `DIRECTION.md`, and every recorded direction-content SHA in the 33 research and 33 engineering states matched exact authority bytes. All 33 research states were `IDLE`, all 33 engineering states were `UNREQUESTED`, all external-review indexes had zero rounds, and Root's reconciled runtime agent and worktree registries were empty.
-
-Qualification uses only the direction authorities and their cited evidence: expected discriminative information, specificity of the unresolved question, leverage across the portfolio, and whether useful local evidence work can begin without a result command, external provider send, engineering continuation, or unresolved resource dependency. Historical map labels are provenance, not lifecycle values.
-
-Three directions qualify. The remaining 30 are deliberately left `REGISTERED`, rather than being converted to `PARKED`: their evidence supports deferral in this cycle, but does not uniformly establish a durable reactivation condition. This preserves the neutral distinction instead of manufacturing lifecycle semantics. Dependencies remain `[]`; no direction authority establishes a formal dependency edge.
-
-### Lifecycle decisions
-
-| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
-| --- | --- | --- | --- |
-| `active_post_churn_population_flow_identification` | unchanged | `REGISTERED` | Both recorded witnesses reduce to a two-rule controller; no genuinely non-reducible censored-flow case is recorded. |
-| `acvc` | unchanged | `REGISTERED` | The adaptive learner lost to the deterministic comparator; the retained protocol lesson does not supply a new prospective object. |
-| `commitment_residual_triggered_options` | unchanged | `REGISTERED` | The competence gate failed before learned activity, and no replacement representation/optimization discriminator is yet recorded. |
-| `covariance_calibrated_information_clock` | unchanged | `REGISTERED` | The current proposal is reducible to scalar ESS; no equal-ESS, opposite-action witness is recorded. |
-| `degraded_incumbent_shadow_handover` | unchanged | `REGISTERED` | Direct-UAV science is retained, while the present concurrency and overhead substrate is a resource boundary rather than new research evidence. |
-| `dual_epoch_receipt_survival` | unchanged | `REGISTERED` | Positive owner/skill-lineage evidence and the negative typed/reset/raw successor are retained; no new discriminator is recorded. |
-| `ec4g_r1` | unchanged | `REGISTERED` | Content, physical, and selectivity tests failed, and the remaining question is already covered by DEARS. |
-| `eociv_lite` | unchanged | `REGISTERED` | Fidelity-valid episodes remained unidentified; no new opportunity-gated variable-axis object is recorded. |
-| `event_triggered_budgeted_cooperative_renewal` | unchanged | `REGISTERED` | Coordination beat local behavior but lost to fixed-4, leaving the bundled mechanism unsupported without a successor object. |
-| `expressibility_gated_renewal_credit_relay` | unchanged | `REGISTERED` | Expressibility and selectivity passed, but utility and allocation improvement were zero; no successor mechanism is recorded. |
-| `field_slot_coordination` | unchanged | `REGISTERED` | The evidence contains only a preliminary compression idea and no finite registered algorithm object. |
-| `finite_semantic_boundary_support` | activate | `ACTIVE` | The fixed-cardinality contract is complete, while the missing variable-axis cooperative/UAV edge is specific and has cross-direction leverage because the remaining VSP-04 and VSP-C1 questions are recorded as contained by FSBS. A local definition and discriminator synthesis can begin without scientific execution. |
-| `metric_ground_transport_allocation` | activate | `ACTIVE` | Structural checks passed and the evidence records one remaining terminal discriminator after the stationarity failure. A bounded result-blind evidence audit can determine whether that discriminator is identifying and proportionate before any command is owned. |
-| `opportunity_normalized_lease_gated_rebinding` | unchanged | `REGISTERED` | ROAD beat RAW but lost to NEVER and barely beat SHAM; the completed result is retained without a new prospective question. |
-| `optimizer_entropy_exposure_boundary_relay` | unchanged | `REGISTERED` | The completed result is retained, the primary relay is unsupported, and no exposed amplification successor is recorded. |
-| `orbit_shadow_read` | unchanged | `REGISTERED` | Typed owner-role binding is useful, but no independent utility beyond DEARS is established. |
-| `recct_lite` | unchanged | `REGISTERED` | Pointer exposure exists, while target gaps and target effect are both zero; no new target is recorded. |
-| `renewal_indexed_score_plasticity` | unchanged | `REGISTERED` | The Pro-closed object and blinded frontier are retained, but the current measurement component is not a practical continuation. |
-| `roster_consistent_latent_exploration` | unchanged | `REGISTERED` | The panel is Pro-closed and the cited immediate-window intake identifies a technical lease-authority gap, no immediate Operator activity, and a dormant Root/CM continuation rather than a new research cycle. |
-| `roster_smf` | unchanged | `REGISTERED` | Exact census dominates sampled-mass compression under the current access law. |
-| `scope_1s` | unchanged | `REGISTERED` | Synthetic carrier separation exists, but no real variable-axis object is identified. |
-| `semantic_graphon_shared_policy` | unchanged | `REGISTERED` | The closed RSCF object remains valuable, but the current package is too expensive for a practical short run. |
-| `semigroup_consistent_duration_model_policy` | activate | `ACTIVE` | The evidence contains a UAV order opportunity and a competent order-erased foundation in separate mature objects; their unresolved fusion is a specific, high-leverage cooperative/UAV discriminator that can first be tested by local evidence synthesis. |
-| `ucope` | unchanged | `REGISTERED` | The object is Pro-closed and S0 is complete; S1 implementation is an engineering continuation outside this Portfolio assignment. |
-| `vap_folr_core` | unchanged | `REGISTERED` | Early typed-state evidence is retained, while later objects are non-identifying and DEARS is the cleaner route. |
-| `variable_n_fleet_churn` | unchanged | `REGISTERED` | PCPI science is closed and bindable, but current construction cost is disproportionate. |
-| `voronoi_quadrature_field_policy` | unchanged | `REGISTERED` | VNPA science is closed and analytic G is proved, but the full construction exceeds practical ceilings. |
-| `vsp_02` | unchanged | `REGISTERED` | Adam carry/reset exact-success sets match; no separate high-value continuation is recorded. |
-| `vsp_03` | unchanged | `REGISTERED` | The truth-table divergence is coherent, but the host is incomplete and RECCT covers the route. |
-| `vsp_04` | unchanged | `REGISTERED` | The declared-table separator is circular in ancestry, and FSBS contains the remaining question; activating both would duplicate attention. |
-| `vsp_05` | unchanged | `REGISTERED` | Handoff conformance exists, but no eligible prospective proposal truth is authenticated. |
-| `vsp_06_mssr` | unchanged | `REGISTERED` | A generic compiler reproduces the histories and the host semantics remain incomplete. |
-| `vsp_c1` | unchanged | `REGISTERED` | The fourth-corner design is clean, but no real four-clone host or value beyond FSBS is established; FSBS receives the nonduplicative attention. |
-
-### Bounded dispatch boundary
-
-Revive generation 1 of `EM-finite_semantic_boundary_support`, `EM-metric_ground_transport_allocation`, and `EM-semigroup_consistent_duration_model_policy` against the exact revision-2 registry and their frozen direction, research-state, and external-index references. This startup turn is limited to repository evidence reconciliation, disjoint local specialist work, and one evidence-separated synthesis per direction. It authorizes no scientific result command, external provider send, engineering implementation or CM dispatch, Root runtime mutation, or Git operation. A later observed material handoff is the next wake event.
-
-## Generation-3 resume reassessment — 2026-08-25T05:24:40Z
-
-### Reconciled active evidence
-
-The revision-2 Portfolio, registry, and direction-scoped research authorities remain the frozen evidence boundary for this resume cycle. This is a reassessment of the three previously active directions, not a new ranking of the other 30 registered directions. Dependencies remain `[]`; the evidence establishes no new formal dependency edge.
-
-`finite_semantic_boundary_support` remains qualified because its unresolved variable-axis cooperative/UAV edge is specific, locally investigable without scientific execution, and nonduplicatively contains the recorded residual VSP-04 and VSP-C1 questions. `semigroup_consistent_duration_model_policy` remains qualified because the recorded order-aware UAV opportunity and competent order-erased foundation still leave a specific unresolved fusion discriminator that is actionable through local evidence synthesis.
-
-`metric_ground_transport_allocation` is now complete and non-actionable under its current authority. Its accepted result is bounded structural nonidentification: all other registered checks passed, but every matched arm/binding calibration selection failed the prospectively registered optimization-validity gate. This supports no positive, negative, generic-effect, practical-equivalence, retention, deletion, warehouse, or UAV conclusion. The evidence justifies at most one terminal prospective optimization-closure successor, but that successor requires a new complete science-bearing revision and fresh mathematical closure before construction or scientific activity. Neither prerequisite exists in the current authority, so another local evidence-only EM cycle would duplicate the completed reconciliation rather than answer a live question.
-
-### Lifecycle decisions
-
-| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
-| --- | --- | --- | --- |
-| `finite_semantic_boundary_support` | resume with a fresh generation-2 EM | `ACTIVE` | The variable-axis cooperative/UAV edge remains unresolved, specific, cross-directionally useful, and locally actionable without scientific execution. |
-| `metric_ground_transport_allocation` | park | `PARKED` | The current object is complete and structurally nonidentified, and its only supported continuation requires a new prospectively closed science-bearing successor that is not presently authoritative. |
-| `semigroup_consistent_duration_model_policy` | resume with a fresh generation-2 EM | `ACTIVE` | The unresolved fusion between the mature order-aware and order-erased objects remains a specific locally actionable discriminator. |
-
-MGTAP may be reconsidered only after a new prospective optimization-closure revision has the required mathematical closure and establishes a live direction-scoped question. The present result remains retained evidence; parking is a resource-attention decision, not scientific deletion.
-
-### Bounded dispatch boundary
-
-Dispatch fresh generation 2 of `EM-finite_semantic_boundary_support` and `EM-semigroup_consistent_duration_model_policy` against the reconciled registry and exact direction, research-state, and external-index references. Do not dispatch MGTAP while its research authority is `COMPLETE` and non-actionable. Each EM turn is limited to repository evidence reconciliation, justified disjoint local specialist work, and one evidence-separated synthesis. It authorizes no scientific result command, external provider send, direction-authority mutation, engineering implementation or CM dispatch, Root runtime mutation, or Git operation.
-
-## MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z
-
-The generation-3 parking decision above is superseded for current lifecycle purposes. The accepted MGTAP result establishes bounded structural nonidentification on the completed revision-04 object, but its same-direction result intake and accepted convergence intake already isolate one terminal prospective optimization-closure successor: preserve the scientific object and change only matched update-time support under a fail-closed stationarity gate. That is a definable scientific discriminator. The required new authority and mathematical closure are preparation work before activity; their absence does not make the question scientifically unactionable.
-
-No available evidence supplies a command-level absolute resource estimate for that successor. A relative factor without an absolute baseline is not a scheduling fact, and a missing projection is a work item rather than a stopping condition. Portfolio therefore reactivates MGTAP for a fresh generation-2 EM evidence cycle that must freeze the exact workload/command boundary and request an estimate of peak memory, wall time, storage, and devices without running the command. An estimate at or below 7,200 seconds and within safe workstation capacity may later be scheduled without user approval; an estimate above 7,200 seconds requires a performance-reasonableness review attempt and explicit user approval, while an unsafe memory plan must be reduced, batched, or sharded.
-
-This reactivation authorizes no science-card or `DIRECTION.md` mutation, external provider turn, source change, CM dispatch, identity, lease, Operator, result-bearing command, result or partial-value access, Git operation, deployment, or flight. Its exact next boundary is one local identifiability audit plus one source-grounded command/workload and resource-estimation handoff.
-
-## Post-evidence manager continuation — 2026-08-25T11:40:48Z
-
-### Reconciled manager evidence
-
-The generation-2 FSBS cycle completed its fixed-authority audit and found no
-meaning-complete variable-axis cooperative/UAV edge. Its research state is
-revision 3, `WAITING`, non-actionable, with no engineering request and the
-exact resume condition recorded in
-`FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md`.
-The fixed-cardinality B1 evidence remains retained; this is an authority gap,
-not a negative scientific result.
-
-The generation-2 SCDMP cycle completed the fusion identity crosswalk. Its
-research state is revision 3, `COMPLETE`, non-actionable, with no engineering
-request. The two mature objects share role-level concepts but do not establish
-one task-native identity satisfying the competent order-erased foundation and
-the foundation-conditioned direct order-opportunity gate.
-
-MGTAP research state revision 3 contains one explicit engineering request for
-a nonregistered, non-scientific preactivity resource estimator. CM generation 1
-implemented that bounded estimator and advanced engineering state to revision
-2, `VERIFYING`. The user's continuation wake resumes only that validation and
-environment work. It does not authorize production successor construction or a
-scientific result command.
-
-UCOPE remains the clearest registered engineering-continuation candidate. Its
-direction authority records that the variable-k paid-probe object is Pro-closed,
-S0 is complete, and S1 implementation is the current continuation. Bootstrap
-state deliberately created no durable engineering request, so the next action
-is one bounded EM reconciliation of the exact S1 scope, acceptance, source, and
-resource boundary before any CM dispatch.
-
-### Lifecycle decisions
-
-| Direction | Cycle action | Registry lifecycle | Evidence-grounded reason |
-| --- | --- | --- | --- |
-| `finite_semantic_boundary_support` | park | `PARKED` | The current fixed authority cannot define the required variable-axis cooperative/UAV object or an engineering scope. Reactivation requires a new direction-science authority that fixes the varied quantity/support, host roles, isolating intervention/comparator, matched resource/activity/inference gates, and allowed conclusion. |
-| `metric_ground_transport_allocation` | continue CM verification | `ACTIVE` | One exact preactivity resource-estimator request is durable and implemented; focused validation remains actionable without scientific execution. |
-| `semigroup_consistent_duration_model_policy` | park | `PARKED` | The bounded fusion crosswalk is complete and the frozen objects do not establish same-target native identity. Reactivation requires a new meaning-complete same-target authority satisfying identity, foundation competence, and foundation-conditioned opportunity. |
-| `ucope` | activate for bounded EM reconciliation | `ACTIVE` | The retained Pro-closed object and completed S0 identify S1 as the current continuation, but a revision-4-aware durable engineering request must be authored before CM work. |
-
-Formal dependencies remain `[]`; the decisions change resource attention and
-do not manufacture a dependency graph or reinterpret retained results.
-
-### Bounded dispatch boundary
-
-Resume `CM-metric_ground_transport_allocation` generation 1 against the exact
-MGTAP estimator handoff and engineering-state revision 2. Its scope is limited
-to resolving environment/diagnostic defects, running the focused estimator
-contract checks, and returning an auditable non-scientific estimate boundary.
-The real estimate command, if required after source verification, remains owned
-by exactly one Experiment Operator.
-
-Dispatch `EM-ucope` generation 1 against registry revision 5, the exact UCOPE
-direction authority, its two cited source documents, research-state revision 1,
-and external-index revision 1. The cycle may create a durable S1 engineering
-request only if exact implementation scope, acceptance, preserved invariants,
-source paths, and resource boundary are evidence-backed. It authorizes no CM
-dispatch by EM, source mutation, external provider turn, result command,
-Operator, or Git integration.
-
-## Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z
-
-### Screening correction
-
-The user's continuation wake identifies that two active directions are too few
-for the available bounded evidence work. The fresh screen treats historical
-`RESOURCE_WAIT`, `DORMANT_REVISIT`, `RETAINED_RESULT`,
-`SCIENTIFIC_NO_CURRENT`, and `ACTIVE_ENGINEERING` labels only as provenance.
-They are neither current lifecycle values nor reasons to suppress a direction.
-Missing resource estimates, mathematical closure, or technical acceptance are
-preparation work when the underlying authority names an exact next action.
-
-The screen preserves the two evidence-based parks. FSBS lacks the actual
-variable-axis cooperative/UAV science authority, and SCDMP lacks same-target
-native fusion identity. Those are present authority gaps with exact
-reactivation conditions, not inherited labels. The remaining registered
-directions are not implicitly parked or discarded; they remain eligible for a
-later wake when a prospective object, witness, host, or independent value is
-recorded.
-
-### Newly activated directions
-
-| Direction | Registry lifecycle | Evidence-backed bounded next action |
-| --- | --- | --- |
-| `degraded_incumbent_shadow_handover` | `ACTIVE` | R06 is a complete definition but explicitly has `mathematical_closure=false`. Its exact next boundary is one same-direction External-Pro mathematical/causal disposition. EM must first freeze the prompt and evidence identity; no provider send is authorized merely by activation. |
-| `roster_consistent_latent_exploration` | `ACTIVE` | The Pro-closed panel and accepted production bytes are retained. The immediate-window intake names one exact bounded technical question: whether a distinct current-authority lease can supersede the immutable PRESTART record while preserving the index-3 cap, history bytes, and all frozen science/resource fields. EM must turn that into a durable engineering request before CM. |
-| `semantic_graphon_shared_policy` | `ACTIVE` | The RSCF definition has same-conversation Pro closure and explicitly requires a CM static full-cost assessment before Portfolio can decide construction. EM must freeze the non-scientific cost-estimation scope and acceptance; construction remains unauthorized. |
-| `variable_n_fleet_churn` | `ACTIVE` | PCPI r05 is a complete prospective object but explicitly requires mathematical/causal closure in the existing same-direction Pro conversation and EM intake before construction. EM first prepares the exact closure boundary; no provider send or construction is implied. |
-| `voronoi_quadrature_field_policy` | `ACTIVE` | R03 is definition-frozen, `portfolio_selection_recommended=true`, `pro_closed=false`, and names same-direction Pro intake/revision as the continuation. EM first reconciles the exact reclosure prompt/evidence boundary; no CM or empirical activity follows without a later bridge. |
-
-MGTAP and UCOPE remain `ACTIVE`, producing seven active directions in total.
-Formal dependencies remain `[]`; parallel attention does not manufacture a
-dependency graph.
-
-### Bounded dispatch boundary
-
-Dispatch generation 1 of the five matching EM logical identities against
-registry revision 6 and their exact direction/research/external authorities.
-Each cycle is limited to one local evidence reconciliation and one durable next
-boundary:
-
-- DISH, VNFC, and VQFP may prepare an exact deterministic external-review round
-  identity and prompt/evidence bundle, but activation alone authorizes no
-  provider send;
-- RCLE may author a technical-reacceptance engineering request only if the
-  immutable accepted bytes, index cap, history preservation, lineage, and
-  fail-closed supersession acceptance are exact;
-- SGSP may author a static full-cost engineering request only for resource and
-  construction feasibility measurement, never construction itself.
-
-No new EM may run a scientific command, inspect partial values, mutate source,
-dispatch CM, commit Git, issue a lease, or reinterpret retained results.
-
-## PARKED lifecycle retirement — 2026-08-25T11:56:36Z
-
-The generic Portfolio lifecycle `PARKED` is retired by clean cutover. Historical
-uses remain provenance, but no current or future registry entry may use it.
-The state was ambiguous: it conflated absence of scientific value with missing
-EM scope work, unavailable CM capacity, missing resource estimates, compute
-capacity, transport readiness, and exact science-authority gaps. That ambiguity
-could remove valuable directions from attention without placing their next
-work in an owned queue.
-
-Current Portfolio lifecycle is:
-
-```text
-REGISTERED | ACTIVE | CLOSED
-```
-
-- `REGISTERED` means the direction is preserved, eligible, and screened at each
-  material Portfolio ranking wake, but no current bounded owner is assigned.
-  It is not parked, rejected, dormant, or valueless.
-- `ACTIVE` means Root has selected at least one bounded current owner or wait
-  queue. It includes EM research, CM implementation or verification, strict
-  external transport preparation/observation, resource estimation, safe
-  compute-capacity waiting, and explicit user-decision waiting.
-- `CLOSED` means the current authority supports no continuation and records an
-  exact scientific lifecycle decision. Closure preserves all evidence.
-
-Waiting requirements live in the owning direction state rather than a vague
-Portfolio label. A wait records `phase=WAITING` where applicable,
-`actionable`, exact `blockers`, `waiting_on.kind`, the responsible reference
-and expected terminal states, and a concrete `next_action` with input refs.
-Missing CM creation, cost estimates, worktree capacity, safe compute slots, or
-transport availability keeps a selected direction `ACTIVE`; it creates queued
-preparation work and never deactivates the direction. Unsafe memory still
-requires reduction, batching, or sharding.
-
-FSBS and SCDMP return to `REGISTERED`. Their exact research states and evidence
-artifacts continue to express respectively the missing variable-axis
-cooperative/UAV science authority and the missing same-target native fusion
-authority. They are not discarded and will be screened on later Portfolio
-wakes. This section supersedes their prior `PARKED` lifecycle decisions without
-rewriting those historical records.
-
-## Deterministic cross-role pipeline routing — 2026-08-25T12:06:26Z
-
-Portfolio lifecycle is not an execution-slot counter. `ACTIVE` now includes
-every evidence-backed runnable direction and every selected direction with an
-exact dependency or resource queue. There is no fixed active-direction cap.
-Worker count, local CPU/RAM, strict transport availability, and the 7200-second
-approval boundary limit concurrent execution without erasing queued work.
-
-Every material checkpoint records one next responsible role:
-
-| Work exposed by the checkpoint | `next_action.owner` |
-|---|---|
-| scientific question, principle derivation, evidence synthesis, result interpretation | `EM` |
-| implementation, code repair, code verification, resource-estimator construction | `CM` |
-| frozen external scientific critique | `TRANSPORT` |
-| one exact result-bearing command | `EXPERIMENT_OPERATOR` |
-| Portfolio lifecycle, Git integration, checkpoint reconciliation | `ROOT` |
-| genuine approval or scientific choice unavailable from authority | `USER` |
-
-The owner is the role responsible for the next work, not the role that noticed
-the gap. CM therefore returns an unresolved scientific principle to Root with
-owner `EM`; EM returns a frozen implementation request with owner `CM`.
-Runnable handoffs dispatch in the same Root wake. Capacity or dependency waits
-retain the same owner and gain exact `waiting_on` references rather than
-cross-role silence.
-
-FSBS and SCDMP are reactivated into the EM queue. Their schema-v2 research
-states now name owner `EM` for the exact variable-axis cooperative/UAV science
-authority and same-target fusion-authority work respectively. This activation
-supersedes their immediately prior no-owner `REGISTERED` transition; neither
-direction is discarded or sent to CM before its scientific authority exists.
+Updated at: 2026-08-29T20:15:00Z
+
+## OMP non-control migration boundary
+
+This OMP portfolio consumes the non-control scientific and direction-state facts from
+`../hmasd-main` at commit `d9e4d50be691334b1120b29cbaebd2ee4a713b1f`. The imported source
+Portfolio table was updated at `2026-08-29T18:35:33Z`; the later Portfolio-wide PAUSE handoff was
+updated at `2026-08-29T20:15:00Z`.
+
+This file is the OMP durable scientific authority after this migration. Codex-native task IDs,
+model labels, Windows/Codex worktree details, Browser tab identities, and `.codex`/`.agents`
+routing rules recorded in source handoffs are provenance only. OMP execution continues to be
+controlled by `.omp/AGENTS.md`, `.omp/RULES.md`, `.omp/WATCHDOG.md`, `.omp/agents/`, and
+`.omp/skills/`. Scientific findings, claim ceilings, direction evidence, retained Effects, archive
+hashes, and user PAUSE/RESUME boundaries are migrated as non-control facts.
+
+The controlling user state at this boundary is `PAUSE`:
+
+- The authorized advancing capacity remains exactly four.
+- No successor, replacement direction, new provider operation, CM task, experiment, lifecycle
+  mutation, or capacity refill is authorized while PAUSE remains active.
+- `PAUSE` is not cancellation, scientific failure, parking, closure, or permission to interrupt a
+  committed Effect.
+- Source `PARKED` rows are represented in the OMP registry as `REGISTERED` with preserved reentry
+  conditions because OMP registry v1 has no `PARKED` lifecycle value.
+
+Safe-boundary facts consumed from
+`docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md`:
+
+- `dual_epoch_receipt_survival` / DEARS reached terminal R02 science before the PAUSE boundary;
+  there is no live Effect. On RESUME, do not reopen R02; Portfolio must consume the terminal result
+  and any continuation is fresh WORK.
+- `semigroup_consistent_duration_model_policy` / SCDMP is retained at
+  `SYNTHESIS_READY / WAITING_REENTRY`. Convergence operation
+  `499b71d6-ca35-42d6-9aee-4c1202a7a82d` in conversation
+  `https://chatgpt.com/c/6a93307b-6410-83e8-b9e5-1ab428de2fc6` is `SENT_WAITING`; on RESUME it is
+  observe-only for the same operation/conversation, never resend or replace.
+- `voronoi_quadrature_field_policy` / VQFP is retained at `SCOPE_FROZEN / WAITING_REENTRY`.
+  Innovator operation `be82f31d-a7cc-4757-9dcb-1393653250fb` in conversation
+  `https://chatgpt.com/c/6a933040-034c-83e8-9e8c-9e83eed1c1fa` is `SENT_WAITING`; on RESUME it is
+  observe-only for the same operation/conversation, never resend or replace.
+- `opportunity_normalized_lease_gated_rebinding` / ONLGR is retained at
+  `SYNTHESIS_READY / WAITING_REENTRY`. Its Convergence response archive is certified as 16,185
+  bytes with SHA-256 `33143f2857ddc9a4504098c51964093d609b44177f3a1c08a90783be60fb58e3`, but EM
+  had not read/dispositioned it after PAUSE. On RESUME, only local archive revalidation and EM
+  objection disposition are authorized; no provider operation is permitted.
+
+## Imported 33-direction scientific portfolio
+
+The table below is the current OMP scientific lifecycle, priority, capacity, and direction-owner
+authority after consuming the non-control hmasd-main migration evidence. The source Portfolio had
+reviewed the complete 33-direction set. Scientific priority and execution readiness are
+deliberately separate: engineering effort, missing substrate, or transport availability can change
+sequencing and the size of the next discriminator, but cannot by itself lower scientific priority or
+produce `PARKED`/`CLOSED` lifecycle.
+
+Scientific priority is globally qualitative: `ADVANCING`, `HIGH`, `MEDIUM`, `LOW`, or `TERMINAL`.
+Execution readiness is independently qualitative: `LIVE`, `REVIEW-READY`, `GATE-READY`,
+`OBJECT-REQUIRED`, `SUBSTRATE-REQUIRED`, `REENTRY-REQUIRED`, `NO-STANDALONE-WORK`, or
+`TERMINAL`. These are not scores, probabilities, or a claim that cheaper science is more valuable.
+
+Portfolio first applies a scientific quality floor: a clear question and non-goals, traceable
+evidence, an interpretable discriminator, distinguishable scientific versus execution failure, and a
+claim no stronger than the evidence. Directions above that floor are compared by decision relevance,
+complementarity or substitution, shared assumptions and common failure risk, reversibility, stop
+rule, and whether the next observation can change an investment action. Cost and readiness decide
+how to stage a valuable question, not whether that question has value.
+
+| Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
+| --- | --- | --- | --- | --- | --- |
+| active_post_churn_population_flow_identification | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The censored-flow draft remains unaccepted and containing public recurrence may absorb the hand-built order code. Re-open only after constructive and adversarial review identifies value beyond both generic and containing recurrence. |
+| acvc | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. The learned joint veto lost to deterministic exact matching. Retain authenticated binding as a control in DEARS/RCLE; no independent adaptive-algorithm question remains. |
+| commitment_residual_triggered_options | PARKED | MEDIUM | NONE | 2026-08-29T18:32:37Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal cycle `2026-08-29.8-portfolio-crto-probe-cut-01` at `HANDOFF_READY`: only scalar update-1,000 probe results persisted, while the exact probe parameters and Adam continuation state were discarded. The update-10,000 endpoint is therefore unobserved rather than failed, and no representation-versus-optimization polarity follows. PARK releases an operationally nonexecutable slot while preserving the scientific question. Re-open only on a provenance-linked process/VM snapshot or an exact full-state equality witness for the original update-1,000 continuation state; a canonical replay is a materially different object requiring a new Portfolio decision. |
+| covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
+| degraded_incumbent_shadow_handover | REGISTERED | HIGH | NONE | 2026-08-29T16:57:57Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal preactivity-certificate WORK `2026-08-29.8-portfolio-dish-preactivity-certificate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Its mandatory Pro stage was `ZERO_SEND_FAILED` and supplies no scientific polarity. Two local audits found no proper subset, symmetry, static timing, containment-only or monotone-envelope certificate sufficient for the full R06 branch family; they did not synthesize direct-handover value. Preserve the unanswered high-value full object. Reentry requires eligible independent consultation (or exact waiver), a named <=8-core substrate/process design with result-blind concurrency/overhead evidence, a current-byte engineering map and fresh proportionality judgment. Cost and transport change staging only; neither PARKS or CLOSES DISH. |
+| dual_epoch_receipt_survival | ACTIVE | ADVANCING | EM | 2026-08-29T18:35:33Z | Readiness `LIVE`. Sol/max EM `01a04e94-b3e0-77e2-ae27-6b29df5dad1a` owns fresh cycle `2026-08-29.8-portfolio-dears-semantic-currentness-02`, not R01. In one matched OWNER-lineage live-versus-broken pair the old retained bit is held fixed, while the current bit remains equal when live and becomes conditionally fresh after the break. Exact support and native-action headroom must precede any learning. Compare semantic-currentness-gated retention, equal-content ungated old-bit use, the unrestricted exact raw-history optimum and the competent bit-deleted reset. Stop unless the gated rule matches the raw optimum in both cells, beats reset live and beats ungated old-bit use broken. Any positive claim is deterministic currentness/protocol value only; exact raw containment, no learned-abstraction claim and all R01 nonclaims remain protected. |
+| ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
+| eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
+| event_triggered_budgeted_cooperative_renewal | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Coordinated learned renewal and the stage oracle both lost to fixed-4. Fixed-k and common-rate controls are retained inside ONLGR/SCDMP; the same EBCR object is exhausted. |
+| expressibility_gated_renewal_credit_relay | PARKED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. Repeated clean exact-population families had authentic severable association yet competent same-information generic estimation produced exactly zero different scarce decisions, allocation gain, normalized-utility gain and source-localized excess. Re-open only as a distinct finite-resource approximation/denoising question with matched information, work, parameters, optimization and native endpoints; do not rerun the exhausted relay objects. |
+| field_slot_coordination | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The slot-plus-critical-member residual is a promising representation primitive but lacks a finite independent scientific object. Portfolio closes the standalone label and retains the primitive as a future SGSP gate; no scientific polarity transfers. |
+| finite_semantic_boundary_support | PARKED | MEDIUM | NONE | 2026-08-29T16:26:22Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal R02 at `SCOPE_FROZEN / TERMINAL_GAP`. Its zero-send Pro gap supplies no polarity, but two independent local routes find the normalized AUTHENTIC and PREDICTIVE_INDEX processes pathwise identical and the proposed REASSOCIATED matching tuple internally inconsistent because it conditions on the emitted hint. Stop investing in the same equal-information carrier-access interface. Re-open only with consultation availability and a genuinely new causal edge in which binding changes permitted accessibility, authorization outcome, failure behavior or acquisition cost beyond an ordinary index; do not repair or rerun R01/R02. |
+| metric_ground_transport_allocation | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Two matched-support extensions remained nonstationary at the frozen inference boundary, so efficacy was not identifiable. Reusable sample-split and fail-closed infrastructure may transfer, but the direction does not reopen. |
+| opportunity_normalized_lease_gated_rebinding | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:00:05Z | Readiness `WAITING-REENTRY`. Retain the exact seven-tick robustness WORK at `SYNTHESIS_READY`: Innovator is COMPLETE and the sole Convergence operation is `SENT_WAITING`. A readable page extraction is quarantined until same-operation causal archive certification succeeds. Earlier exact evidence narrowed the object from exponential/lease/rebinding specificity to a generic physical-rate hypothesis; the transport gap changes no science, lifecycle, priority or capacity. |
+| optimizer_entropy_exposure_boundary_relay | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Optimizer-history carry changes later learning, but entropy exposure was not independently exposed. Portfolio closes standalone OEER and retains CARRY/FRESH optimizer history as a CRTO/RISP/SCDMP control; no scientific polarity transfers. |
+| orbit_shadow_read | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Owner-role binding reached the kernel but has no independent return-bearing value. Portfolio closes standalone Orbit and retains the primitive as DEARS provenance. |
+| recct_lite | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Authentication was exposed but left/right target interventions were identical and target effect was zero. Portfolio closes standalone RECCT and retains the target-expressibility cut as FSBS/EGRCR evidence; no positive credit claim transfers. |
+| renewal_indexed_score_plasticity | REGISTERED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `OBJECT-REQUIRED`. The structured recurrence remains scientifically sharp; incompetent containment and failed measurement do not justify PARK. Retain it as a registered option requiring both a technically accepted grouped-EVAL/FP32 object and a prospective native decision endpoint that can change investment before any learned run. |
+| roster_consistent_latent_exploration | PARKED | MEDIUM | NONE | 2026-08-29T15:22:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal public-containment WORK `2026-08-29.8-successor-01a04a02-rcle-public-containment-03`. Its transport failure supplies no science, but valid prior CPC/containing-controller evidence already leaves no independent public physical-persistence value when complete stochastic CARRY is a member of competent REPLAN. Re-open only as a materially distinct finite-budget, private-state, partial-observation, changed-objective or decentralized-control question with direct recovery value; do not build another public containing host. |
+| roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
+| scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
+| semantic_graphon_shared_policy | REGISTERED | HIGH | NONE | 2026-08-29T17:25:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal short-gate WORK `SGSP-RG2Z-RSCF-SHORT-GATE-20260829-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Innovator completed, but mandatory Convergence exhausted its replacement boundary with `SENT_INPUT_MISMATCH`; this supplies no scientific polarity. The strongest provisional observation is that no identified meaning-preserving discriminator fits the complete short-gate ceiling, while the smallest outcome-bearing learned projection-contact arm remains roughly 60-250 CPU core-hours. Preserve SGSP's high-value relational question without purchasing or closing it. Reentry requires the explicit user waiver/override named by the terminal result or a materially new Portfolio question; cost and transport alone cannot PARK or CLOSE it. |
+| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | EM | 2026-08-29T18:32:37Z | Readiness `LIVE`. Fresh Sol/max EM `01a04ec6-0cd2-74f3-b589-09083ae7670c` owns cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02`. One prospective law must jointly define the 16-state opportunity draw as a single-valued distribution and separate candidate-action selection from held-out expected-value estimation. It must preserve the noncommuting event/action semantics, require the order-erased foundation competence gate first, and stop before adapter, training or empirical activity if no coherent one-correction law survives. The exhausted native-I/C/O prompt and operations are not reused. |
+| ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
+| vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
+| variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
+| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:21:12Z | Readiness `WAITING-REENTRY`. Retain EM `01a04e22-2f5a-7423-8b60-95d35d150109` and cycle `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Three independent routes preserve a proof-sized K1={3/4} candidate with exact held-out headroom and reassociation-loss witnesses, while proving uniform-only geometry is absorbed by MASS; aggregate margins and the selected competent FREE comparison remain unobserved. The user-visible `Pro` premise is resolved, but the fresh authorized Innovator operation also ended `ZERO_SEND_FAILED`: the new-chat composer contained an unknown 6,747-character stale draft that ordinary navigation did not clear, so Browser Transport correctly refused destructive mutation. Both operations have zero sends, no conversation/archive and no live Effect. Resume only after the unknown draft is independently preserved or safely cleared on a newly verified empty root and one later exact owner control authorizes a fresh operation, or on explicit waiver. No third operation is currently authorized; this transport gap changes no science, lifecycle, priority or capacity. |
+| vsp_02 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Carry/reset paths differ but exact success sets match. Portfolio closes standalone VSP-02 and retains lifecycle/optimizer-history controls for CRTO/RISP/SCDMP. |
+| vsp_03 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. No authenticated causal deployment-event seam or runtime activity exists. Its negative interface census remains provenance; no independent mechanism is actionable. |
+| vsp_04 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The finite-cell certificate is useful only after rows are generated from an authenticated host; declared-row ancestry was circular. Portfolio closes standalone VSP-04 and retains the solver/certificate control for FSBS. |
+| vsp_05 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exactly-once handoff conformance is reusable infrastructure, but no eligible two-sided proposal truth or value claim exists. Portfolio closes standalone VSP-05 and retains the FSM as DEARS/RCLE/DISH infrastructure. |
+| vsp_06_mssr | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Equal-information generic compilation reproduced admissible histories. Portfolio closes standalone VSP-06 and retains the dependency DAG and compiler null as DEARS/RCLE controls. |
+| vsp_c1 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The fourth-corner statistic is a clean local gate, but its authenticated four-clone production host is absent. Portfolio closes standalone VSP-C1 and retains the statistic and negative census for FSBS. |
+
+Capacity is exactly four by direct user authorization. CRTO probe-cut R01 is terminal and is
+independently PARKED because its exact continuation state is unidentified and no executable
+decision-changing discriminator remains; this is neither a representation null nor a technical
+lifecycle inference. Portfolio immediately refills the released slot with DEARS's materially new
+semantic-currentness object. SCDMP, VQFP and ONLGR retain their exact WORKs. The allocated advancing
+set is:
+
+- `dual_epoch_receipt_survival`, EM `01a04e94-b3e0-77e2-ae27-6b29df5dad1a`, cycle
+  `2026-08-29.8-portfolio-dears-semantic-currentness-02`: does a selected owner or lease-lineage
+  break make equal retained content semantically stale in a way that changes the exact return-optimal
+  native action, rather than merely triggering a hand-written verifier? Exact static support, the
+  unrestricted raw optimum and reset/ungated controls decide whether any learned comparison exists.
+- `semigroup_consistent_duration_model_policy`, EM `01a04ec6-0cd2-74f3-b589-09083ae7670c`, cycle
+  `2026-08-29.8-portfolio-scdmp-opportunity-law-02`: can one prospective opportunity law, within
+  the single-correction bound, both define the aliased opportunity-state draw unambiguously and
+  eliminate same-tape action-selection/evaluation bias before any order-aware adapter or training?
+- `voronoi_quadrature_field_policy`, EM `01a04e22-2f5a-7423-8b60-95d35d150109`, cycle
+  `2026-08-29.8-portfolio-vqfp-proof-gate-01`:
+  can a proof-sized exact variable-N field object retain native allocation/return headroom over
+  competent FREE and lose value under physical-measure reassociation?
+- `opportunity_normalized_lease_gated_rebinding`, EM `01a04a08-33a3-7292-8c21-95d17715ea2f`:
+  on the frozen non-divisible clock cell, does any link-specific return survive common executed-rate
+  and age-conditioned ceilings?
+
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T18:35:33Z`, CRTO
+EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` is terminal and its slot is released. SCDMP EM
+`01a04ec6-0cd2-74f3-b589-09083ae7670c` and DEARS EM
+`01a04e94-b3e0-77e2-ae27-6b29df5dad1a` are natively active. ONLGR's EM is idle but its
+already-sent Convergence operation
+`5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
+`SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
+certification. VQFP is idle `WAITING_REENTRY` with zero-send transport facts and no live Effect; its
+current reentry is safe preservation/clearance of an unattributed stale composer draft. SGSP has
+terminalized and does not occupy capacity. Root owns shared transport repair; no transport fact
+changes lifecycle or scientific priority.
+
+The scientific reserve order after these activations keeps DISH as the highest raw-value reserve,
+but not as a currently dispatchable refill: no materially new bounded EM question can change its
+investment before the named substrate/scaling/current-byte premises exist, and repeating its failed
+certificate search would not preserve value. SGSP is likewise high-value but presently has no new
+meaning-preserving short discriminator. RISP remains object-required. DEARS is selected ahead of
+these not because it is cheaper, but because its semantic-currentness counterexample yields a fresh,
+exact and reversible decision gate now. Cost stages valuable science; it does not determine its
+priority or polarity.
+
+Five consolidated mechanism families now replace 33 independent labels:
+
+1. authenticated semantic carrier and lineage: active DEARS with parked FSBS evidence and exact raw/index controls;
+2. roster continuity and relational execution: registered high-value SGSP and DISH, with parked RCLE evidence and VNFC/field-slot/VSP-05 gates;
+3. renewal, duration and opportunity: ONLGR, SCDMP, CRTO, RISP and the parked UCOPE alternative;
+4. information and optimizer geometry: CCIC, with OEER/VSP-02 retained only as controls; and
+5. spatial physical allocation: active VQFP, with MGTAP retained only as terminal methodology evidence.
+
+Cross-family fusions are prospective scientific tests, not code merges or automatic claims. The
+highest-value candidates are `CCIC × RCLE` (minimal relational information versus plan persistence),
+`SGSP × RCLE` (role structure versus public-plan continuity), and a future requalified `FSBS × ONLGR`
+(semantic content versus physical opportunity rate). Each requires a factorial design with both marginal gates and a
+competent same-information containing null; neither component may borrow the other's positive claim.
+Avoid `CCIC × MGTAP`, current `EGRCR × SGSP`, and ungated `ONLGR × UCOPE` because they duplicate the
+same optimizer/representation/support failure or confound information with opportunity.
+
+Shared risks across the advancing set remain bespoke finite hosts, work/information mismatch,
+competent generic estimators absorbing proposed structure, evaluator saturation, and spending learned
+budget before exact support and headroom. Transport, implementation and measurement facts affect
+only evidence availability. They cannot create a lifecycle action, release a slot, or cancel a WORK.
+A terminal WORK stops occupying advancing capacity at its terminal fact. Portfolio must consume it,
+adopt an independent action, update authority and refill promptly; it cannot keep the old WORK
+retroactively live while making that decision.
+
+All source Codex task IDs, model/effort labels, worktree labels, and native-task liveness facts in
+this file are provenance after OMP migration. Future execution uses the current OMP authorities in
+`.omp/AGENTS.md`, `.omp/agents/`, and `.omp/skills/`; every direction retains separate scientific
+ownership, writer history, provider conversations, Effects and terminal return.

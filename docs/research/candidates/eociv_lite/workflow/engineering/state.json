@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/eociv_lite/DIRECTION.md",
-    "sha256": "aa2e90a6ca0cc052e05cc2e28243cc903eb667fbaf6d6b73304e3a8e6e9468b3"
+    "sha256": "c2bb460e26070f4c1dcf5420aa9de7c35e715645f78f1f6b8b48cfa9f4713737"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

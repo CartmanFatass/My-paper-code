@@ -6,7 +6,7 @@
   "direction_id": "semantic_graphon_shared_policy",
   "direction_ref": {
     "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
-    "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
+    "sha256": "59c6e601e5a6afc66e04577ccc1a047042c6b3ff45872016a27fb2a30d1bec9c"
   },
   "engineering_request": {
     "acceptance_refs": [
@@ -21,15 +21,15 @@
     "input_refs": [
       {
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       {
         "path": "docs/research/portfolio/workflow/registry.json",
-        "sha256": "d02edd6b91c1fb103964f1f5b5a72c5f4d1fb0c0a651ba7b792bb2d1f2d685ee"
+        "sha256": "b6cfa3d295be115afb57f8da2090c3993b044fbf6f0be7f867f1c4e60a639079"
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
-        "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
+        "sha256": "59c6e601e5a6afc66e04577ccc1a047042c6b3ff45872016a27fb2a30d1bec9c"
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md",
@@ -45,7 +45,7 @@
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json",
-        "sha256": "24fe82913c1c159b443a3a5ca1be28d049d36e582d82d9e05b759075c580229f"
+        "sha256": "ec36d299a427fbb88bacb31e2aad6958ca968dcd5f995d0dcd71a451b2f963f6"
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md",
@@ -57,10 +57,10 @@
   },
   "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "70b2ed242ca4fcee5c54c00e814d336cbccc945a45252278093e4955f98d52cf",
-  "registry_revision_seen": 9,
-  "revision": 4,
+  "registry_revision_seen": 10,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:10:58Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-semantic_graphon_shared_policy"
 }

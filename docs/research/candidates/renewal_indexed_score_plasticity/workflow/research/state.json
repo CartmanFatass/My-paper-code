@@ -6,7 +6,7 @@
   "direction_id": "renewal_indexed_score_plasticity",
   "direction_ref": {
     "path": "docs/research/candidates/renewal_indexed_score_plasticity/DIRECTION.md",
-    "sha256": "ceb569a3c713221955d9da5c6b8295dc243d0cf0487b34f92625cf41b15bcade"
+    "sha256": "f27b8ab667424579f3e95497c3c406f1ed034bb1249c7328ee799b3b61d84efd"
   },
   "engineering_request": null,
   "evidence_set_sha256": "d41bd1107e9afb7b5dd719d3a2b1750a06615cbdbab9a98523c310569f369aeb",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "a978567a9a209d98b20370453d36daba0a60194c1509373b714d1907f530876a",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-renewal_indexed_score_plasticity"
 }

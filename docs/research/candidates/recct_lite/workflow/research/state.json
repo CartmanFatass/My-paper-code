@@ -6,7 +6,7 @@
   "direction_id": "recct_lite",
   "direction_ref": {
     "path": "docs/research/candidates/recct_lite/DIRECTION.md",
-    "sha256": "47c424522e0de5b5241a4433026b1f8e5d9f0a0accee2658f9ea3f81b76c21f7"
+    "sha256": "ea2913bb3b12c3920c252eaaa82350cebab4d6ba46c0f4cabf0d96051c8069e0"
   },
   "engineering_request": null,
   "evidence_set_sha256": "0ceb175548e0165c214e2be67d83d56a481ac3320fc6d64ebc8d4db264e08e78",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "bbc95be4b8cfbd0fd5dd0c0a9a036a82946952b2e360b0b292ec1d8dfff334bc",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-recct_lite"
 }

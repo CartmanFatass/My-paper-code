@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/ec4g_r1/DIRECTION.md",
-    "sha256": "aec521304d7727b365cecd4e534f29ff55391fd5abde9d3f24d860065c2c28ac"
+    "sha256": "cf6dd6f64134673c8953d7147f1b8fb95ecdf4108618be41b8ae3473d4408a24"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

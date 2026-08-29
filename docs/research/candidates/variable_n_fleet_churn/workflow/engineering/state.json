@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
-    "sha256": "1694607aa22670221facfbb13b0f15b70fdc8ad69e96de743368a31618c8c0f9"
+    "sha256": "f54eee3ecfb13d59071277177e3cac8bf38ed8e152942b5d38fbcc012ff00394"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

@@ -36,7 +36,7 @@
     "owner": "EM"
   },
   "phase": "COMPLETE",
-  "revision": 7,
+  "revision": 8,
   "run_refs": [
     {
       "path": "temp/directions/metric_ground_transport_allocation/exp/mgtap-preactivity-resource-estimate-20260825/manifest.json",
@@ -47,9 +47,9 @@
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
-    "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
+    "sha256": "bcd7cd340188de0c104d54a565b1b790aaaca01ea583524e3a5a1f9d642938f8"
   },
-  "updated_at": "2026-08-25T12:41:31Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [
     "agent://MGTAPEstimatorVerifyCMG2.MGTAPEstimatorImplementerG2",
     "checkpoint 8aa98fe: temp/mgtap-verify-venv/bin/python -m pytest -q tests/experiments/candidates/metric_ground_transport_allocation/test_resource_estimate.py => 6 passed",

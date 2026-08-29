@@ -6,7 +6,7 @@
   "direction_id": "active_post_churn_population_flow_identification",
   "direction_ref": {
     "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
-    "sha256": "1dc60801d81b47d33e8be3aae62e2b3096026e5c1788c8953ca5a93f21d3b34b"
+    "sha256": "7ee855da14e9f39492f0af3a670999bad977a3b448bddeaa44cff332f2fa0b96"
   },
   "engineering_request": null,
   "evidence_set_sha256": "57fc3c7fa266daa565ce0c9547bcc83099b16a36d54ae7c9e084a15e2920cdf6",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "e675e2fe23aa8fb9788717c331872285762732fd21bc83a7062350412ba9174a",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-active_post_churn_population_flow_identification"
 }

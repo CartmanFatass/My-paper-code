@@ -28,7 +28,7 @@
   "direction_id": "degraded_incumbent_shadow_handover",
   "direction_ref": {
     "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
-    "sha256": "45435b8e9e0018eb3da50a304e71b472632e701122f67c35fa0a1d3f242f55a0"
+    "sha256": "47190d24f0f39498deb57ee2a121f755aa102b112523161c55169183b5c32e30"
   },
   "engineering_request": null,
   "evidence_set_sha256": "a2e8ee16c4badf6f828f34daae741af776b945a868b301d026ff201403758ebc",
@@ -37,7 +37,7 @@
     "input_refs": [
       {
         "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
-        "sha256": "45435b8e9e0018eb3da50a304e71b472632e701122f67c35fa0a1d3f242f55a0"
+        "sha256": "47190d24f0f39498deb57ee2a121f755aa102b112523161c55169183b5c32e30"
       },
       {
         "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RBHR_R06_SCIENCE_COMPOSITE_20260822.md",
@@ -73,10 +73,10 @@
   },
   "phase": "WAITING",
   "question_sha256": "c8fa6d1594304a6467f9c5d66adb78b343ecb0760eee3343a608b6def04eb92b",
-  "registry_revision_seen": 7,
-  "revision": 3,
+  "registry_revision_seen": 10,
+  "revision": 4,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:09:59Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [
     {
       "expected_terminal_states": [

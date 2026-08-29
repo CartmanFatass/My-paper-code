@@ -6,7 +6,7 @@
   "direction_id": "eociv_lite",
   "direction_ref": {
     "path": "docs/research/candidates/eociv_lite/DIRECTION.md",
-    "sha256": "aa2e90a6ca0cc052e05cc2e28243cc903eb667fbaf6d6b73304e3a8e6e9468b3"
+    "sha256": "c2bb460e26070f4c1dcf5420aa9de7c35e715645f78f1f6b8b48cfa9f4713737"
   },
   "engineering_request": null,
   "evidence_set_sha256": "2c2c3c9e0eac9c55b15f27cee9c8b96f0ddb20720b87d510a5e0ed2c720401d6",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "b5965c93263dc75ab5e530598ce0357191ec713eba359052040d402315965a10",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-eociv_lite"
 }

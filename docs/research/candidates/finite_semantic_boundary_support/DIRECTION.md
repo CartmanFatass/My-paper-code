@@ -1,99 +1,108 @@
 # Direction finite_semantic_boundary_support: finite semantic boundary support
 
-This is the direction-science authority for HMASD. It freezes the current
-prospective question and evidence references; workflow state points here and
-does not duplicate the science.
+This authority preserves the direction's source-grounded scientific question, current direction-local
+evidence, and provenance. Lifecycle, priority, and owner remain solely Portfolio authority.
 
 ## Authority
 
-- Stable direction ID: `finite_semantic_boundary_support`
-- Portfolio label: `finite semantic boundary support`
-- Registry abbreviation: `FSBS`
-- Historical map state: `SCIENTIFIC_NO_CURRENT`
-- Current Portfolio lifecycle: `ACTIVE` at registry revision 9
-- Logical owner: `EM-finite_semantic_boundary_support`, generation 2
-- Lifecycle, ranking, dependencies, dispatch, runtime, and Git remain Portfolio
-  or Root authorities; this document holds only direction science.
+- Stable direction ID: `finite_semantic_boundary_support`.
+- Current lifecycle, priority, and owner are held only by
+  `docs/research/portfolio/PORTFOLIO.md`; this file records no Portfolio action.
+- Current direction writer line continues from R01 terminal commit
+  `d50f30ec882821e4518908e992a5d523c6bc99ec` without merging or transplanting the later read-only
+  Portfolio line.
+- Read-only Portfolio authority for R02 is
+  `0fcffa0b31e474469ef2d22e6269a405a5af5d10`; shared main at dispatch was
+  `e174703f8a61830915a7b48602b84fa3974566ab`.
 
 ## Scientific question
 
-The current prospective question is:
+Portfolio authorized the fresh R02 cycle
+`2026-08-29.8-portfolio-fsbs-neutral-acquisition-02`:
 
-> On the exact finite cooperative route-consensus host, can one shared permutation-invariant two-stage policy trained at roster sizes N=3 and N=5 learn to use an actor-visible valid carrier-mission association to select one mission-relevant sealed peer record per UAV under a one-read/one-service cap, and does that association improve correct selection and common team return when the frozen policy is evaluated at the unseen actual roster size N=7 relative to a conditionally exchangeable whole-carrier reassociation?
+> After eliminating zero-state tie-policy leakage and independently binding publisher truth, record
+> identity, carrier association, and event order, does authentic carrier-to-record association
+> produce learned correct-record selection and held-out native team-return value beyond a competent
+> ordinary predictive-record-index contextual-bandit null under a held-fixed controller?
 
-Question SHA-256 is
-`df05afacc7ae21ef9809bd0adb022f5bdef38f0b74a13c2df05adddfd4646aa5`,
-computed from the exact UTF-8 question bytes followed by one LF.
+This is materially different from R01. R01 is terminal evidence only and was not reopened, rerun,
+repaired, relabeled, or reused as current identity or empirical result.
 
 ## Current position
 
-The historical source position remains:
+R02 is a terminal consultation gap, not a scientific result. Its exact scope was frozen at
+`ed41e91c1a4f2fd8f89cfd11966163401abf7114`. The mandatory fresh Pro Innovator operation ended
+`ZERO_SEND_FAILED` before send because exact visible `GPT-5.6 Pro` evidence was unavailable. The
+composer remained empty; there was no provider request, conversation, message, archive, or live
+Effect. This transport fact supplies no scientific or lifecycle polarity.
 
-> The fixed-cardinality contract is complete but lacks a variable-axis cooperative/UAV edge.
+Two independent read-only local reviews converged on bounded evidence: within the frozen normalized
+interface, AUTHENTIC and the equally informed PREDICTIVE_INDEX null are pathwise identical, and the
+prospective REASSOCIATED matching tuple is internally inconsistent if it conditions on the emitted
+hint. The reward/credit clock and donor lookup also need more definition. Because mandatory Pro
+Innovator was not obtained, EM did not promote those observations to synthesis or lifecycle advice.
+No Convergence prompt was authored, no CM task was created, and no material command ran.
 
-The result-blind B2 authority now closes that definition gap prospectively. It
-freezes a finite variable roster axis with training at `N={3,5}` and held-out
-evaluation at actual `N=7`; an anonymous-peer two-channel route-consensus host;
-actor-visible topic/query carrier semantics with sealed signed payloads; a
-one-read/one-service per-UAV cap; exact whole-token twin reassociation; one
-shared permutation-invariant selector/pool/route learner; a paired
-training-by-evaluation factorial; controlled selected-payload interventions;
-resource and activity gates; numerical acceptance; and a narrow toy-only claim
-ceiling.
+The current role facts are therefore:
 
-No B2 result exists. The fixed-cardinality B1 card remains valid only for its
-own narrower one-agent question and is neither evidence of B2 efficacy nor a
-substitute B2 result.
+- Outcome: `FAILED`.
+- Scientific status: `NOT_REACHED`.
+- Decision impact: `NONE`.
+- Recommendation: `NONE`.
+- Pro Innovator: `ZERO_SEND_FAILED`.
+- Pro Convergence: `PENDING` and not authored.
 
 ## Evidence set
 
-The exact B2 evidence-set identity is
-`e924ace51c1ee3bc0de90411266286fef13f19a5e53ddb5ed646df2c4aecccfb`,
-the SHA-256 of:
-
-- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_EVIDENCE_SET.json`
-
-That manifest binds these exact references:
+Current evidence set:
 
 - `docs/research/RESEARCH_MAP.md`
-- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md`
-- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_PROJECT_ALIGNMENT_ADDENDUM.md`
-- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md`
-- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_COOPERATIVE_UAV_SCIENCE_CARD.md`
+- `docs/research/candidates/finite_semantic_boundary_support/evidence/2026-08-29-fsbs-neutral-acquisition-cycle-02.md`
+  is the current R02 scientific snapshot and terminal transport/evidence record.
+- `docs/research/candidates/finite_semantic_boundary_support/external/2026-08-29-fsbs-neutral-acquisition-02-pro-innovator-prompt.md`
+  is the fresh frozen R02 question. It was verified but never injected or sent.
+- `docs/research/candidates/finite_semantic_boundary_support/evidence/2026-08-29-fsbs-carrier-mediation-cycle-01.md`
+  is terminal R01 evidence only.
+- `docs/research/candidates/finite_semantic_boundary_support/FSBS_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY_R01_20260827.md`
+  is historical prospective R01 authority only.
+- `docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_SCIENCE_CARD.md`,
+  `FINITE_SEMANTIC_BOUNDARY_SUPPORT_PROJECT_ALIGNMENT_ADDENDUM.md`, and
+  `FINITE_SEMANTIC_BOUNDARY_SUPPORT_VARIABLE_AXIS_COOPERATIVE_UAV_EDGE_RECONCILIATION_20260825.md`
+  retain the fixed-host provenance and missing-edge history.
+- `docs/project/ALGORITHM_PRINCIPLES.md` remains the shared scientific-principles authority.
 
-The B2 card SHA-256 is
-`59421efea8e770cb727dcc76331e16299fb831ff93555f3d455093305d4887b2`.
+None of the historical artifacts or unrun packages is current empirical evidence. Closed source
+directions contribute controls and provenance only; they transfer no scientific polarity.
 
-## Engineering request
+## Bounded local observation and claim ceiling
 
-One B2 construction request is scientifically ready for Root routing to
-`CM-finite_semantic_boundary_support`. Its authoritative scope and scientific
-acceptance are the B2 card sections `Exact finite cooperative host` through
-`Exact run envelope and CM-buildable request`. CM may construct the isolated
-host, token registry and reassociator, paired scheduler, exact learner, gate,
-runner, analyzer, deterministic contract tests, and static resource projection.
+The strongest unadopted local observation is exact finite-host containment. Coupled AUTHENTIC and
+PREDICTIVE_INDEX rows expose the same normalized `hint=T`, initial learner state, optimizer state,
+frozen controller, reward, and randomness. Induction therefore gives equal actions, updates,
+checkpoints, selection, and held-out return at every transaction. A nonzero residual would first
+witness a violated equality contract.
 
-Construction must remain preactivity. It authorizes no scientific full, reduced
-run, probe, result access, provider operation, lease, deployment, flight, or
-change to a host law, learner, threshold, control, count, or claim. A
-science-bearing ambiguity returns to EM rather than being chosen by CM.
+That observation is limited to the exact finite normalized interface with fixed information, work,
+controller, optimizer, validation, and reward geometry. It establishes no general impossibility and
+no claim about authentication necessity, cryptographic security, roster adaptation, nonseparable
+coordination, variable-population MARL, UAV transfer, safety, deployment, or semantic-memory
+superiority. The actual terminal EM ceiling is lower because no valid synthesis was reached.
 
-## External review
+## Reentry boundary
 
-No external-review round is active and no provider evidence is used. No
-pre-result external review is required as permission. A later frozen critique,
-if explicitly selected, must use the external-review workflow and cannot mutate
-this card silently.
+This terminal snapshot cannot reopen R02. A future successor cycle requires explicit Portfolio WORK,
+a concrete eligible exact Pro product fact, and a genuinely valid prospective object. At minimum it
+must match REASSOCIATED on pretreatment strata rather than the emitted hint, define donor
+cardinality/lookup and the exact native reward/credit clock, and preserve the competent ordinary
+predictive-index null. If carrier binding is to have a residual beyond that null, it must create a
+permitted learner-visible, intervention-relevant, or reward-bearing edge—such as distinct access,
+authorization, failure, or acquisition-cost behavior—without hiding an information or work mismatch.
+That would be a new question, not an R02 rerun.
 
-## Claim and provenance boundary
+## Provenance boundary
 
-The B2 host is an abstract finite common-payoff route-fork toy. Even a clean
-positive can support only acquisition and held-out-`N=7` transfer of the exact
-carrier-selection-to-common-return path for the frozen learner and budget. It
-cannot support open-ended semantics, general scaling, a causal roster-size
-effect, arbitrary MARL, physical UAV validity, safety, deployment, prevalence,
-or operational value.
-
-Historical navigation, B1, the project-alignment addendum, and the prior
-reconciliation remain provenance. This authority makes no empirical claim,
-rewrites no historical result, and preserves result blindness.
+The historical map, B1 card, addendum, reconciliation, R01 authority, R01 package, prompts, and
+operations remain provenance. They are never executable current instructions or inherited results.
+This direction file does not rewrite any historical outcome or represent an unrun Effect as evidence.
+Equivalent implementation paths may not change its host, arms, matched resources, learner, gates,
+controls, workload, thresholds, or claim map.

@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/recct_lite/DIRECTION.md",
-    "sha256": "47c424522e0de5b5241a4433026b1f8e5d9f0a0accee2658f9ea3f81b76c21f7"
+    "sha256": "ea2913bb3b12c3920c252eaaa82350cebab4d6ba46c0f4cabf0d96051c8069e0"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

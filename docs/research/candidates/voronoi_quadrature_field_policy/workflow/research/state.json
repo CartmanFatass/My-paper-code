@@ -4,63 +4,70 @@
   "active_round_id": null,
   "blockers": [
     {
-      "code": "EXTERNAL_PRO_COMMITMENT_UNKNOWN_NO_RESEND",
+      "code": "PAUSE",
       "observed_refs": [
-        "agent://VQFPCommitmentObserve",
         {
-          "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_CHATGPT_PRO_RECLOSURE_EM_INTAKE_20260823.md",
-          "sha256": "a019bc43550bfd8e9ba8c3f96767f32b19cd70d8528e993421743726c2204aae"
-        },
-        {
-          "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
-          "sha256": "b2629c4826b0d592f613ea0396332e04b63c587b805f2ac8d1980fdc5bd6516c"
+          "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+          "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
         }
       ],
-      "resume_condition_ref": "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
+      "resume_condition_ref": {
+        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      }
     }
   ],
   "direction_id": "voronoi_quadrature_field_policy",
   "direction_ref": {
     "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-    "sha256": "86de56bf32be7d3a26bac477071dd186eee73684a251f42c535e0f81a6d31ecc"
+    "sha256": "fed008e19c7e5febb41c74b73857b929d57eff3b51cc1d9e986dcd09183529af"
   },
   "engineering_request": null,
   "evidence_set_sha256": "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9",
-  "last_checkpoint_sha": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174",
+  "last_checkpoint_sha": "b158f49584eeccb890a43c7e60ef97554b6a6aebfaf6252f5a645a5f40f0bb11",
   "next_action": {
     "input_refs": [
-      "agent://VQFPCommitmentObserve",
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_PRO_RECLOSURE_READINESS_20260825.md",
-        "sha256": "6c8e636e003da8d8c153e035db2bb3cc6d364b1b9446cf3d95b5740bacbbb174"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
+        "sha256": "fed008e19c7e5febb41c74b73857b929d57eff3b51cc1d9e986dcd09183529af"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_CHATGPT_PRO_RECLOSURE_EM_INTAKE_20260823.md",
-        "sha256": "a019bc43550bfd8e9ba8c3f96767f32b19cd70d8528e993421743726c2204aae"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_SCIENCE_CARD_20260829.md",
+        "sha256": "65e11fd28a04d75e7173899f3150bdaf3682a2f8850ae6086c25d78cbf97ecbe"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
-        "sha256": "b2629c4826b0d592f613ea0396332e04b63c587b805f2ac8d1980fdc5bd6516c"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_QUESTION_20260829.md",
+        "sha256": "4c9e2df6b994a532892bb0877c2f7be6aee77fc06c6666bb5fa9eb415dc04833"
       },
-      "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
+      {
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PAUSE_HANDOFF_20260829.md",
+        "sha256": "b158f49584eeccb890a43c7e60ef97554b6a6aebfaf6252f5a645a5f40f0bb11"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      }
     ],
-    "kind": "RECOVER_HISTORICAL_EXTERNAL_PRO_IDENTITY",
-    "owner": "ROOT"
+    "kind": "AWAIT_USER_RESUME_FOR_OBSERVE_ONLY",
+    "owner": "USER"
   },
   "phase": "WAITING",
   "question_sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9",
-  "registry_revision_seen": 9,
-  "revision": 4,
+  "registry_revision_seen": 10,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:35:25.100715Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "EXACT_OPERATION_IDENTITY_RECOVERED",
-        "RECOVERY_EXHAUSTED"
+        "COMPLETE",
+        "SENT_UNREADABLE",
+        "CONVERSATION_LOST",
+        "SENT_INPUT_MISMATCH",
+        "SENT_MODEL_MISMATCH"
       ],
-      "kind": "HISTORICAL_EXTERNAL_PRO_IDENTITY_RECOVERY",
-      "ref": "required_fields:operation_ref_or_operation_id|idempotency_key|request_fingerprint|archive_ref_or_durable_archive_evidence|same_vqfp_conversation_url|conversation_id|stable_key|exact_visible_pro_model_label|adopted_tab_or_binding_identity|exact_transport_authorization"
+      "kind": "PRO_INNOVATOR_SENT_WAITING",
+      "ref": "agentify:chatgpt:operation=be82f31d-a7cc-4757-9dcb-1393653250fb;conversation=https://chatgpt.com/c/6a933040-034c-83e8-9e8c-9e83eed1c1fa"
     }
   ],
   "writer": "EM-voronoi_quadrature_field_policy"

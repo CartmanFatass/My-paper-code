@@ -6,7 +6,7 @@
   "direction_id": "acvc",
   "direction_ref": {
     "path": "docs/research/candidates/acvc/DIRECTION.md",
-    "sha256": "0dd08b4e142a993b5fe4ad402781da6d26766d671c2a138e178f31b9cf38908d"
+    "sha256": "9f53c4f65d1d78194306331c3ceb742b27abdc6a8eadfe9017134d9985a76692"
   },
   "engineering_request": null,
   "evidence_set_sha256": "f31c6678612ff4308e02045fbd3d55e9d0934718b838a740d54750070af94c53",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "b40a8ca085889c326ac0cbe09001b5ab230ea39b389c960a36dcfb0877ccd4f2",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-acvc"
 }

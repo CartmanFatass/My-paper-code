@@ -6,7 +6,7 @@
   "direction_id": "vsp_06_mssr",
   "direction_ref": {
     "path": "docs/research/candidates/vsp_06_mssr/DIRECTION.md",
-    "sha256": "3f44678edc57d441f2d66804e322f7542b0716ab5daba00004d124ce2263f6b9"
+    "sha256": "03f669ba6de7fae6727b8d53bbf51c16a13702258b25f42b0762b6914cb81ade"
   },
   "engineering_request": null,
   "evidence_set_sha256": "803b7bd8224235904ffa195c490fddb36b8f434143fe2dfd61d6c141386ead97",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "41ee8a394c9285054c15eadff2cb58a9716d44f451f7d3179920d79dc0dbdec0",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-vsp_06_mssr"
 }

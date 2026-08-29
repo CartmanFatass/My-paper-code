@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
-    "sha256": "f05f35e0e51a80892218fcfa1c7c32effb9ffc4d176135b6bcede5c81aa45e2e"
+    "sha256": "ecca3eb2d6d9fb6405ef7af5f7ad44ed2e3cf06d218bfc6955728572a53d5b52"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

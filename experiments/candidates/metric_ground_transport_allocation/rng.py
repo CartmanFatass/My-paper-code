@@ -11,12 +11,21 @@ from typing import Iterable
 
 import numpy as np
 
-from .config import REVISION
+from .config import STOCHASTIC_NAMESPACE
+
+
+def _address_payload(address: Iterable[object]) -> bytes:
+    return json.dumps(
+        [STOCHASTIC_NAMESPACE, *address],
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode()
 
 
 def _seed(address: Iterable[object]) -> int:
-    payload = json.dumps([REVISION, *address], separators=(",", ":"), ensure_ascii=True).encode()
-    return int.from_bytes(hashlib.blake2b(payload, digest_size=16).digest(), "little")
+    return int.from_bytes(
+        hashlib.blake2b(_address_payload(address), digest_size=16).digest(), "little"
+    )
 
 
 def generator(*address: object) -> np.random.Generator:

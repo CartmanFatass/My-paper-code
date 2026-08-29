@@ -1,0 +1,239 @@
+{
+  "accelerator": "cpu",
+  "channels": [
+    "defaults"
+  ],
+  "compatibility_matrix": {
+    "pufferlib": {
+      "compatible_platform": "win-64 CPU-only subject to native-extension support",
+      "compatible_python": "3.11 (adapter release must be checked separately)",
+      "installed": false,
+      "reason": "Optional MARL environment/performance probe; native adapter dependencies are deliberately isolated from the reproducible analysis layer.",
+      "status": "not_installed"
+    },
+    "stable-baselines3": {
+      "compatible_platform": "win-64 CPU-only with a separately matched PyTorch runtime",
+      "compatible_python": "3.11",
+      "installed": false,
+      "reason": "Optional single-agent reference adapter; intentionally excluded so this environment remains a neutral scientific-tools layer. Install and lock it only in a separate adapter environment.",
+      "status": "not_installed"
+    },
+    "torch-geometric": {
+      "compatible_platform": "win-64 CPU-only subject to the selected PyTorch wheel and extension ABI",
+      "compatible_python": "3.11",
+      "installed": false,
+      "reason": "Optional graph-learning probe; compiled PyG extensions are deliberately not coupled to this environment.",
+      "status": "not_installed"
+    }
+  },
+  "conda": {
+    "executable": "C:/ProgramData/anaconda3/Scripts/conda.exe",
+    "solver": "libmamba",
+    "version": "25.11.1"
+  },
+  "cpu_only": true,
+  "environment_name": "hmasd-science-tools",
+  "existing_environment_snapshot": {
+    "after_sha256": "1360eb186ff8a5002f25934c938719aa7fa207a6a370a792eb1908a89f7f20d0",
+    "after_snapshot_path": "temp/hmasd_science_environment/amd-after.json",
+    "before_sha256": "1360eb186ff8a5002f25934c938719aa7fa207a6a370a792eb1908a89f7f20d0",
+    "before_snapshot_path": "temp/hmasd_science_environment/amd-before.json",
+    "comparison_command": "C:/ProgramData/anaconda3/Scripts/conda.exe list -n hmasd-amd-cpu --json (canonical sorted JSON SHA-256 before and after)",
+    "environment_prefix": "C:/Users/fires/.conda/envs/hmasd-amd-cpu",
+    "package_count_after": 106,
+    "package_count_before": 106,
+    "unchanged": true
+  },
+  "lock_file": "conda-win-64.lock.txt",
+  "lock_sha256": "fb9188014291a1684b5465116a92b72fce26d8b2221d6ede5350d6aa0038e873",
+  "packages": {
+    "aom": "3.13.2",
+    "attrs": "26.1.0",
+    "blas": "1.0",
+    "bzip2": "1.0.8",
+    "ca-certificates": "2026.8.13",
+    "cairo": "1.18.4",
+    "colorama": "0.4.6",
+    "contourpy": "1.3.3",
+    "cycler": "0.12.1",
+    "dav1d": "1.5.3",
+    "expat": "2.8.2",
+    "fontconfig": "2.15.0",
+    "fonttools": "4.63.0",
+    "freeglut": "3.8.0",
+    "freetype": "2.14.1",
+    "gmp": "6.3.0",
+    "gmpy2": "2.3.1",
+    "graphite2": "1.3.15",
+    "harfbuzz": "12.3.0",
+    "icu": "78.3",
+    "iniconfig": "2.3.0",
+    "intel-openmp": "2025.0.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "kiwisolver": "1.5.0",
+    "lcms2": "2.19.1",
+    "lerc": "4.1.0",
+    "libavif": "1.3.0",
+    "libdeflate": "1.22",
+    "libexpat": "2.8.2",
+    "libffi": "3.4.8",
+    "libglib": "2.88.3",
+    "libhwloc": "2.12.1",
+    "libiconv": "1.18",
+    "libjpeg-turbo": "3.1.3",
+    "libkrb5": "1.22.2",
+    "libopenjpeg": "2.5.4",
+    "libpng": "1.6.56",
+    "libpq": "18.4",
+    "libtiff": "4.7.2",
+    "libwebp-base": "1.6.0",
+    "libxml2": "2.13.9",
+    "libzlib": "1.3.2",
+    "lz4-c": "1.9.4",
+    "matplotlib": "3.11.0",
+    "matplotlib-base": "3.11.0",
+    "mkl": "2025.0.0",
+    "mkl-service": "2.7.2",
+    "mkl_fft": "2.2.0",
+    "mkl_random": "1.4.1",
+    "mpc": "1.3.1",
+    "mpfr": "4.2.1",
+    "mpmath": "1.3.0",
+    "mysql-common": "9.7.0",
+    "mysql-libs": "9.7.0",
+    "networkx": "3.6.1",
+    "numpy": "2.4.6",
+    "numpy-base": "2.4.6",
+    "openssl": "3.5.7",
+    "packaging": "26.3",
+    "pandas": "3.0.5",
+    "patsy": "1.0.2",
+    "pcre2": "10.46",
+    "pillow": "12.3.0",
+    "pip": "26.1.2",
+    "pixman": "0.46.4",
+    "pluggy": "1.6.0",
+    "psutil": "7.2.2",
+    "pygments": "2.20.0",
+    "pyparsing": "3.3.2",
+    "pyqt": "6.11.0",
+    "pyqt6-sip": "13.11.1",
+    "pytest": "9.0.3",
+    "python": "3.11.16",
+    "python-dateutil": "2.9.0post0",
+    "python-tzdata": "2026.2",
+    "qtbase": "6.11.0",
+    "qtdeclarative": "6.11.0",
+    "qtsvg": "6.11.0",
+    "qttools": "6.11.0",
+    "qtwebchannel": "6.11.0",
+    "qtwebsockets": "6.11.0",
+    "referencing": "0.37.0",
+    "rpds-py": "0.28.0",
+    "scipy": "1.17.1",
+    "seaborn": "0.13.2",
+    "setuptools": "83.0.0",
+    "sip": "6.15.1",
+    "six": "1.17.0",
+    "sqlite": "3.53.2",
+    "statsmodels": "0.14.6",
+    "sympy": "1.14.0",
+    "tbb": "2022.3.0",
+    "tbb-devel": "2022.3.0",
+    "tk": "8.6.15",
+    "tornado": "6.5.7",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026c",
+    "ucrt": "10.0.22621.0",
+    "vc": "14.42",
+    "vc14_runtime": "14.44.35208",
+    "vs2015_runtime": "14.44.35208",
+    "wheel": "0.47.0",
+    "xz": "5.8.2",
+    "zlib": "1.3.2",
+    "zstd": "1.5.7"
+  },
+  "platform": "win-64",
+  "python": {
+    "fallback": null,
+    "fallback_reason": null,
+    "requested": "3.11",
+    "selection": "newest solvable Python 3.11 patch on win-64",
+    "version": "3.11.16"
+  },
+  "recreate_command": "C:/ProgramData/anaconda3/Scripts/conda.exe create --prefix C:/Users/fires/.codex/worktrees/0cda/HMASD/temp/hmasd_science_environment/recreated-prefix --file environments/hmasd-science-tools/conda-win-64.lock.txt --solver libmamba --yes --quiet",
+  "requested_packages": [
+    "sympy",
+    "numpy",
+    "scipy",
+    "pandas",
+    "networkx",
+    "statsmodels",
+    "matplotlib",
+    "seaborn",
+    "jsonschema",
+    "psutil",
+    "pytest"
+  ],
+  "schema_version": "hmasd-science-tools-manifest-v1",
+  "solver_evidence": {
+    "python_3_10": {
+      "reason": "3.11 solved and passed the public-import smoke test; no fallback was needed",
+      "status": "not_attempted"
+    },
+    "python_3_11": {
+      "channel": "defaults",
+      "status": "solved",
+      "version": "3.11.16"
+    }
+  },
+  "verification": {
+    "fresh_prefix": "C:/Users/fires/.codex/worktrees/0cda/HMASD/temp/hmasd_science_environment/recreated-prefix",
+    "recreate_exit_code": 0,
+    "recreated_from_lock": true,
+    "smoke_test": {
+      "command": "C:/Users/fires/.codex/worktrees/0cda/HMASD/temp/hmasd_science_environment/recreated-prefix/python.exe -c \"import sympy,numpy,scipy,pandas,networkx,statsmodels,matplotlib,seaborn,jsonschema,psutil,pytest; print public versions via importlib.metadata\"",
+      "imports": {
+        "jsonschema": {
+          "version": "4.26.0"
+        },
+        "matplotlib": {
+          "version": "3.11.0"
+        },
+        "networkx": {
+          "version": "3.6.1"
+        },
+        "numpy": {
+          "version": "2.4.6"
+        },
+        "pandas": {
+          "version": "3.0.5"
+        },
+        "psutil": {
+          "version": "7.2.2"
+        },
+        "pytest": {
+          "version": "9.0.3"
+        },
+        "scipy": {
+          "version": "1.17.1"
+        },
+        "seaborn": {
+          "version": "0.13.2"
+        },
+        "statsmodels": {
+          "version": "0.14.6"
+        },
+        "sympy": {
+          "version": "1.14.0"
+        }
+      },
+      "interpreter": "C:/Users/fires/.codex/worktrees/0cda/HMASD/temp/hmasd_science_environment/recreated-prefix/python.exe",
+      "passed": true,
+      "platform": "Windows-10-10.0.26200-SP0",
+      "python": "3.11.16",
+      "stderr": ""
+    }
+  }
+}

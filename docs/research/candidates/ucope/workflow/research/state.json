@@ -6,7 +6,7 @@
   "direction_id": "ucope",
   "direction_ref": {
     "path": "docs/research/candidates/ucope/DIRECTION.md",
-    "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+    "sha256": "829252ba0da68b9b566e6dd55194e1dfb51aef2b5548799533c88aeb7f1e5403"
   },
   "engineering_request": {
     "acceptance_refs": [
@@ -22,15 +22,15 @@
     "input_refs": [
       {
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       {
         "path": "docs/research/portfolio/workflow/registry.json",
-        "sha256": "37cb52e953ceb5244a15bf9433cd2956e5410094522dc7769aa226df6ea948c8"
+        "sha256": "b6cfa3d295be115afb57f8da2090c3993b044fbf6f0be7f867f1c4e60a639079"
       },
       {
         "path": "docs/research/candidates/ucope/DIRECTION.md",
-        "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+        "sha256": "829252ba0da68b9b566e6dd55194e1dfb51aef2b5548799533c88aeb7f1e5403"
       },
       {
         "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md",
@@ -66,10 +66,10 @@
   },
   "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "0c608c5f791d055f58fd51a308065b2c4024f1e1b4eeb8ef6b3995bb90eaad58",
-  "registry_revision_seen": 8,
-  "revision": 4,
+  "registry_revision_seen": 10,
+  "revision": 6,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:06:26Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-ucope"
 }

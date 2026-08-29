@@ -2,26 +2,75 @@
   "actionable": false,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [],
+  "blockers": [
+    {
+      "code": "PAUSE",
+      "observed_refs": [
+        {
+          "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+          "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      }
+    }
+  ],
   "direction_id": "opportunity_normalized_lease_gated_rebinding",
   "direction_ref": {
     "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-    "sha256": "80e545b0369e937da24c282c5c0d9d53ad75ff24169c8e209b4d5b0728ade3ce"
+    "sha256": "37e131c1f628a4dae392d227b5399863dff5cd9f2db3b6904f6811b137433711"
   },
   "engineering_request": null,
   "evidence_set_sha256": "fb6d4f3f28e6653fa649de81e96e500e427ad074ed90e8ddae4fbec76989623b",
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "9c07f2de8d48c830bd35a20e4c1260dd521728d9eaf97cd37ede65fc2490f84a",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE",
-    "owner": "ROOT"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
+        "sha256": "37e131c1f628a4dae392d227b5399863dff5cd9f2db3b6904f6811b137433711"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-em-synthesis.md",
+        "sha256": "a22740fa52141f2d7491d6b8cd4b0aa4fcb7a5d0ec372e134fc5e83c0c5ae5fc"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-convergence-packet.md",
+        "sha256": "3ee60604d054e85e7f31cbabd07e5c29c78e8613eb0b5066d2b52ae452d184d2"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pause-handoff.md",
+        "sha256": "9c07f2de8d48c830bd35a20e4c1260dd521728d9eaf97cd37ede65fc2490f84a"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-convergence-response.md",
+        "sha256": "33143f2857ddc9a4504098c51964093d609b44177f3a1c08a90783be60fb58e3"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      }
+    ],
+    "kind": "AWAIT_USER_RESUME_FOR_LOCAL_ARCHIVE_REVIEW",
+    "owner": "USER"
   },
-  "phase": "IDLE",
+  "phase": "WAITING",
   "question_sha256": "d220e8f525298a41c2763789b90871c5c253379b483d824e29b35c8ec4d02154",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
-  "waiting_on": [],
+  "updated_at": "2026-08-29T20:15:00Z",
+  "waiting_on": [
+    {
+      "expected_terminal_states": [
+        "REVIEW_RESOLVED",
+        "HANDOFF_READY",
+        "OBJECTION_UNRESOLVED"
+      ],
+      "kind": "LOCAL_ARCHIVE_REVIEW_AFTER_RESUME",
+      "ref": "sha256:33143f2857ddc9a4504098c51964093d609b44177f3a1c08a90783be60fb58e3;bytes=16185;path=docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-convergence-response.md"
+    }
+  ],
   "writer": "EM-opportunity_normalized_lease_gated_rebinding"
 }

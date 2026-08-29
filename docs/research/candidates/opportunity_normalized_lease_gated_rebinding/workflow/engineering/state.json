@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-    "sha256": "80e545b0369e937da24c282c5c0d9d53ad75ff24169c8e209b4d5b0728ade3ce"
+    "sha256": "37e131c1f628a4dae392d227b5399863dff5cd9f2db3b6904f6811b137433711"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

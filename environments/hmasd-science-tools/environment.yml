@@ -1,0 +1,19 @@
+name: hmasd-science-tools
+# Target platform: win-64 (the explicit lock below is platform-specific).
+channels:
+  - defaults
+dependencies:
+  # The Python 3.11 line is intentional: it is the newest solvable patch on
+  # win-64 for this tool set at the time this lock was generated.
+  - python=3.11.16
+  - sympy=1.14.0
+  - numpy=2.4.6
+  - scipy=1.17.1
+  - pandas=3.0.5
+  - networkx=3.6.1
+  - statsmodels=0.14.6
+  - matplotlib=3.11.0
+  - seaborn=0.13.2
+  - jsonschema=4.26.0
+  - psutil=7.2.2
+  - pytest=9.0.3

@@ -6,7 +6,7 @@
   "direction_id": "field_slot_coordination",
   "direction_ref": {
     "path": "docs/research/candidates/field_slot_coordination/DIRECTION.md",
-    "sha256": "3d0c32b1135d1208daf852e10a4228be9b2f8965e8d079644896b62b2fc7ab17"
+    "sha256": "f5f116260ed75aa88be8e1520f6158405399b6b51b81739ce345465b3c149bc0"
   },
   "engineering_request": null,
   "evidence_set_sha256": "226247ed77440e41c509f6beb5fa2c78531b94a1fe93594e30d1504f7e3099d8",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "84c7596d668cee211f06cdf655882f11bdceadb5d6350835567a4802c75da618",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-field_slot_coordination"
 }

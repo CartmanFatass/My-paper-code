@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
-    "sha256": "61e996964def861e2de132b1004f398bf5ac60cebc590fe354594beea6f4ae8a"
+    "sha256": "1ebe57a080ac79eae5339af1f1ab8e9e4eef85c618f0e68b61462ec2d3b3fbc5"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

@@ -6,7 +6,7 @@
   "direction_id": "roster_smf",
   "direction_ref": {
     "path": "docs/research/candidates/roster_smf/DIRECTION.md",
-    "sha256": "31208b64a45c9d8f163f2179ef3d9de2ad1a4f5fdc9b38b50358ce65dc6a6cf9"
+    "sha256": "b8ce0f041608862ea56ea827b4625f1037cfb7a242f8712870495c2226c046ec"
   },
   "engineering_request": null,
   "evidence_set_sha256": "d73c8787b7e49f221b8da80de4232d699eaf4381cef0869d1e7a3d6a7f5dfab0",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "65e509abeef2d781f5cb8791cae7b49468ace326138001a50c394d0bf54a0bac",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-roster_smf"
 }

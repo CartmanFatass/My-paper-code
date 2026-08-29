@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 6,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-    "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
+    "sha256": "473b56df3550af6fcce7f79a25bc3979c1210610f0e7395fc599b9b6654ce5f1"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

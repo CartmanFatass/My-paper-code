@@ -14,12 +14,16 @@
       "id": "active_post_churn_population_flow_identification",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/active_post_churn_population_flow_identification",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/active_post_churn_population_flow_identification/workflow/research/state.json"
     },
     {
@@ -34,11 +38,11 @@
       "engineering_state_path": "docs/research/candidates/acvc/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/acvc/workflow/external-review/index.json",
       "id": "acvc",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/acvc",
       "reactivation_condition_ref": null,
@@ -58,12 +62,16 @@
       "id": "commitment_residual_triggered_options",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/commitment_residual_triggered_options",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/commitment_residual_triggered_options/workflow/research/state.json"
     },
     {
@@ -80,12 +88,16 @@
       "id": "covariance_calibrated_information_clock",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/covariance_calibrated_information_clock",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/covariance_calibrated_information_clock/workflow/research/state.json"
     },
     {
@@ -100,14 +112,18 @@
       "engineering_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/external-review/index.json",
       "id": "degraded_incumbent_shadow_handover",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/degraded_incumbent_shadow_handover",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/research/state.json"
     },
     {
@@ -122,11 +138,11 @@
       "engineering_state_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/external-review/index.json",
       "id": "dual_epoch_receipt_survival",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/dual_epoch_receipt_survival",
       "reactivation_condition_ref": null,
@@ -144,11 +160,11 @@
       "engineering_state_path": "docs/research/candidates/ec4g_r1/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/ec4g_r1/workflow/external-review/index.json",
       "id": "ec4g_r1",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/ec4g_r1",
       "reactivation_condition_ref": null,
@@ -168,12 +184,16 @@
       "id": "eociv_lite",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/eociv_lite",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/eociv_lite/workflow/research/state.json"
     },
     {
@@ -188,11 +208,11 @@
       "engineering_state_path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal/workflow/external-review/index.json",
       "id": "event_triggered_budgeted_cooperative_renewal",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal",
       "reactivation_condition_ref": null,
@@ -212,12 +232,16 @@
       "id": "expressibility_gated_renewal_credit_relay",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json"
     },
     {
@@ -232,11 +256,11 @@
       "engineering_state_path": "docs/research/candidates/field_slot_coordination/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/field_slot_coordination/workflow/external-review/index.json",
       "id": "field_slot_coordination",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/field_slot_coordination",
       "reactivation_condition_ref": null,
@@ -254,14 +278,18 @@
       "engineering_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/external-review/index.json",
       "id": "finite_semantic_boundary_support",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Deterministic cross-role pipeline routing — 2026-08-25T12:06:26Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/finite_semantic_boundary_support",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/research/state.json"
     },
     {
@@ -276,11 +304,11 @@
       "engineering_state_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/metric_ground_transport_allocation/workflow/external-review/index.json",
       "id": "metric_ground_transport_allocation",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "MGTAP resource and identifiability correction — 2026-08-25T05:37:47Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/metric_ground_transport_allocation",
       "reactivation_condition_ref": null,
@@ -298,11 +326,11 @@
       "engineering_state_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/external-review/index.json",
       "id": "opportunity_normalized_lease_gated_rebinding",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding",
       "reactivation_condition_ref": null,
@@ -320,11 +348,11 @@
       "engineering_state_path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay/workflow/external-review/index.json",
       "id": "optimizer_entropy_exposure_boundary_relay",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay",
       "reactivation_condition_ref": null,
@@ -342,11 +370,11 @@
       "engineering_state_path": "docs/research/candidates/orbit_shadow_read/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/orbit_shadow_read/workflow/external-review/index.json",
       "id": "orbit_shadow_read",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/orbit_shadow_read",
       "reactivation_condition_ref": null,
@@ -364,11 +392,11 @@
       "engineering_state_path": "docs/research/candidates/recct_lite/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/recct_lite/workflow/external-review/index.json",
       "id": "recct_lite",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/recct_lite",
       "reactivation_condition_ref": null,
@@ -388,12 +416,16 @@
       "id": "renewal_indexed_score_plasticity",
       "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/renewal_indexed_score_plasticity",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/renewal_indexed_score_plasticity/workflow/research/state.json"
     },
     {
@@ -408,14 +440,18 @@
       "engineering_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/external-review/index.json",
       "id": "roster_consistent_latent_exploration",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/roster_consistent_latent_exploration",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/research/state.json"
     },
     {
@@ -430,11 +466,11 @@
       "engineering_state_path": "docs/research/candidates/roster_smf/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/roster_smf/workflow/external-review/index.json",
       "id": "roster_smf",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/roster_smf",
       "reactivation_condition_ref": null,
@@ -452,11 +488,11 @@
       "engineering_state_path": "docs/research/candidates/scope_1s/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/scope_1s/workflow/external-review/index.json",
       "id": "scope_1s",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/scope_1s",
       "reactivation_condition_ref": null,
@@ -474,14 +510,18 @@
       "engineering_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/external-review/index.json",
       "id": "semantic_graphon_shared_policy",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/semantic_graphon_shared_policy",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/research/state.json"
     },
     {
@@ -498,9 +538,9 @@
       "id": "semigroup_consistent_duration_model_policy",
       "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Deterministic cross-role pipeline routing — 2026-08-25T12:06:26Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/semigroup_consistent_duration_model_policy",
       "reactivation_condition_ref": null,
@@ -518,14 +558,18 @@
       "engineering_state_path": "docs/research/candidates/ucope/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/ucope/workflow/external-review/index.json",
       "id": "ucope",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "REGISTERED",
       "lifecycle_decision_ref": {
-        "heading": "Post-evidence manager continuation — 2026-08-25T11:40:48Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/ucope",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "OMP non-control migration boundary",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
+      },
       "research_state_path": "docs/research/candidates/ucope/workflow/research/state.json"
     },
     {
@@ -540,11 +584,11 @@
       "engineering_state_path": "docs/research/candidates/vap_folr_core/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vap_folr_core/workflow/external-review/index.json",
       "id": "vap_folr_core",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vap_folr_core",
       "reactivation_condition_ref": null,
@@ -562,11 +606,11 @@
       "engineering_state_path": "docs/research/candidates/variable_n_fleet_churn/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
       "id": "variable_n_fleet_churn",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/variable_n_fleet_churn",
       "reactivation_condition_ref": null,
@@ -586,9 +630,9 @@
       "id": "voronoi_quadrature_field_policy",
       "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/voronoi_quadrature_field_policy",
       "reactivation_condition_ref": null,
@@ -606,11 +650,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_02/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_02/workflow/external-review/index.json",
       "id": "vsp_02",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_02",
       "reactivation_condition_ref": null,
@@ -628,11 +672,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_03/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_03/workflow/external-review/index.json",
       "id": "vsp_03",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_03",
       "reactivation_condition_ref": null,
@@ -650,11 +694,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_04/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_04/workflow/external-review/index.json",
       "id": "vsp_04",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_04",
       "reactivation_condition_ref": null,
@@ -672,11 +716,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_05/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_05/workflow/external-review/index.json",
       "id": "vsp_05",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_05",
       "reactivation_condition_ref": null,
@@ -694,11 +738,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_06_mssr/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_06_mssr/workflow/external-review/index.json",
       "id": "vsp_06_mssr",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_06_mssr",
       "reactivation_condition_ref": null,
@@ -716,11 +760,11 @@
       "engineering_state_path": "docs/research/candidates/vsp_c1/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/vsp_c1/workflow/external-review/index.json",
       "id": "vsp_c1",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "CLOSED",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       "path": "docs/research/candidates/vsp_c1",
       "reactivation_condition_ref": null,
@@ -729,11 +773,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+    "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
   },
-  "revision": 9,
+  "revision": 10,
   "schema_version": 1,
-  "updated_at": "2026-08-25T12:06:26Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }

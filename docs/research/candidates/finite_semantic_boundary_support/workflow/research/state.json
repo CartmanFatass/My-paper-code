@@ -6,7 +6,7 @@
   "direction_id": "finite_semantic_boundary_support",
   "direction_ref": {
     "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-    "sha256": "d2cd484ac41829a27d3f4e0649bbc889693dfac39eb4e5e1a91f94237cafb1dd"
+    "sha256": "473b56df3550af6fcce7f79a25bc3979c1210610f0e7395fc599b9b6654ce5f1"
   },
   "engineering_request": {
     "acceptance_refs": [
@@ -21,15 +21,15 @@
     "input_refs": [
       {
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       {
         "path": "docs/research/portfolio/workflow/registry.json",
-        "sha256": "d02edd6b91c1fb103964f1f5b5a72c5f4d1fb0c0a651ba7b792bb2d1f2d685ee"
+        "sha256": "b6cfa3d295be115afb57f8da2090c3993b044fbf6f0be7f867f1c4e60a639079"
       },
       {
         "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
-        "sha256": "d2cd484ac41829a27d3f4e0649bbc889693dfac39eb4e5e1a91f94237cafb1dd"
+        "sha256": "473b56df3550af6fcce7f79a25bc3979c1210610f0e7395fc599b9b6654ce5f1"
       },
       {
         "path": "docs/research/candidates/finite_semantic_boundary_support/FINITE_SEMANTIC_BOUNDARY_SUPPORT_B2_VARIABLE_N_EVIDENCE_SET.json",
@@ -49,7 +49,7 @@
       },
       {
         "path": "docs/research/candidates/finite_semantic_boundary_support/workflow/engineering/state.json",
-        "sha256": "c84745f7e9e132697fe570080949f078b25ef5a0b6ec5a0b6415db318bbdd531"
+        "sha256": "8361a4595ce92523480775e50b7782ce76ab4005a69842e21e5f2deaf441200e"
       }
     ],
     "kind": "ROOT_ROUTE_CM_FSBS_B2_CONSTRUCTION",
@@ -57,10 +57,10 @@
   },
   "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "df05afacc7ae21ef9809bd0adb022f5bdef38f0b74a13c2df05adddfd4646aa5",
-  "registry_revision_seen": 9,
-  "revision": 5,
+  "registry_revision_seen": 10,
+  "revision": 9,
   "schema_version": 2,
-  "updated_at": "2026-08-25T13:10:58Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-finite_semantic_boundary_support"
 }

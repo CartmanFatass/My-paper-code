@@ -33,7 +33,7 @@
   "direction_id": "variable_n_fleet_churn",
   "direction_ref": {
     "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
-    "sha256": "20ceb1fb1e485abee32ff8ee0af8ad5afa3fd9a05731d9efae14260bf3692ad1"
+    "sha256": "f54eee3ecfb13d59071277177e3cac8bf38ed8e152942b5d38fbcc012ff00394"
   },
   "engineering_request": null,
   "evidence_set_sha256": "164a5c60213850cf7652917443eb65208d232f7abf9d950680d258503f87bc48",
@@ -63,10 +63,10 @@
   },
   "phase": "WAITING",
   "question_sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037",
-  "registry_revision_seen": 9,
-  "revision": 4,
+  "registry_revision_seen": 10,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:35:19Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [
     {
       "expected_terminal_states": [

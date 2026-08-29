@@ -6,22 +6,39 @@
   "direction_id": "dual_epoch_receipt_survival",
   "direction_ref": {
     "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
-    "sha256": "1d73a0633a2de69a2e310dfc4bd9dd03b2f8f5ffa4722f2d8080fbde438e5307"
+    "sha256": "1013d0462a57cd7c8eae32649d7f5cde2d627f1c006b26b5ddbd965057e0022b"
   },
   "engineering_request": null,
   "evidence_set_sha256": "4fd1a7c2b4e54e100412121c7288759b120b4631fdfaf8946e21622a7e0eceb2",
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "57a25d1b21bc369dfd5b65d2defc6c55ca20f45c5b0f3c30673a4c7c44314161",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE",
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
+        "sha256": "1013d0462a57cd7c8eae32649d7f5cde2d627f1c006b26b5ddbd965057e0022b"
+      },
+      {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/DEARS_SEMANTIC_CURRENTNESS_GATE_R02.md",
+        "sha256": "a62c123a28c83ca2aa79bfac6107e9d4635cefc4dedb2c576ab5081365ce2ecf"
+      },
+      {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/DEARS_SEMANTIC_CURRENTNESS_R02_PAUSE_HANDOFF.md",
+        "sha256": "57a25d1b21bc369dfd5b65d2defc6c55ca20f45c5b0f3c30673a4c7c44314161"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
+        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      }
+    ],
+    "kind": "PORTFOLIO_CONSUME_TERMINAL_RESULT",
     "owner": "ROOT"
   },
-  "phase": "IDLE",
+  "phase": "COMPLETE",
   "question_sha256": "a1826149ef4f35cd430b56ba2955ea868e0f8aea8051972d5c995378de4df89f",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 5,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-dual_epoch_receipt_survival"
 }

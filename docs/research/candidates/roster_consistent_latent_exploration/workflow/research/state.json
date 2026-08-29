@@ -27,7 +27,7 @@
   "direction_id": "roster_consistent_latent_exploration",
   "direction_ref": {
     "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
-    "sha256": "f98b477bfb15f286f1b6a4fd798cb949713986f19911adb676b031829e0f71f2"
+    "sha256": "5154a9c9219e3bca6825590e9ad7e02c99d57eb812d783c00e3e1ab5ef024268"
   },
   "engineering_request": null,
   "evidence_set_sha256": "03e131b71d63db78ca5c13ffe497fa778a9ae23a6cc53e301bb0350797543ce0",
@@ -36,15 +36,15 @@
     "input_refs": [
       {
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "a3da214941f3163f21033991f6d5f2338e2d3b59f32c3ef32cb4dfcc1998f65a"
+        "sha256": "8125efeeb57a682e94cf8a5a47a4c0be570eebbc2a7162f060f93f4fd91b1bd2"
       },
       {
         "path": "docs/research/portfolio/workflow/registry.json",
-        "sha256": "fb1c32ce91d10625f7e1117c4fe3cff9f031c9ce66a1b540880d38ce075d3089"
+        "sha256": "b6cfa3d295be115afb57f8da2090c3993b044fbf6f0be7f867f1c4e60a639079"
       },
       {
         "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
-        "sha256": "f98b477bfb15f286f1b6a4fd798cb949713986f19911adb676b031829e0f71f2"
+        "sha256": "5154a9c9219e3bca6825590e9ad7e02c99d57eb812d783c00e3e1ab5ef024268"
       },
       {
         "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
@@ -68,10 +68,10 @@
   },
   "phase": "WAITING",
   "question_sha256": "b02a61943ad67c19a55ebe4ca841d92917dd38825246be39ca78d5bd187e8e2b",
-  "registry_revision_seen": 7,
-  "revision": 3,
+  "registry_revision_seen": 10,
+  "revision": 6,
   "schema_version": 2,
-  "updated_at": "2026-08-25T11:56:36Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [
     {
       "expected_terminal_states": [

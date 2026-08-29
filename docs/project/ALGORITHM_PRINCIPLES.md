@@ -4,14 +4,14 @@ This file is the durable scientific contract for HMASD algorithm exploration.
 It contains cross-experiment principles, not the active route, implementation
 specification, experiment dashboard, or research history.
 
-Current ownership and the scheduled action belong in
-`docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
-counterexamples, idea status and evidence notes live under
-`docs/research/cdc/`. Canonical role authority for scientific decisions,
-adoption, realization and acceptance is defined only in root `AGENTS.md` and
-the applicable `.agents/roles/*.md` contracts; this file does not restate it.
-Formal experiment contracts and dispositions belong in
-`docs/project/ExpRecord.md`. Git history preserves removed research history.
+Current direction science belongs in
+`docs/research/candidates/<direction>/DIRECTION.md` and its cited evidence;
+current cross-direction investment belongs in
+`docs/research/portfolio/PORTFOLIO.md`. Shared meanings are defined only in
+root `AGENTS.md`, and each top-level role's method is defined only in its
+`hmasd-*-task` skill. This file does not restate workflow authority. Formal
+experiment contracts and dispositions belong in `docs/project/ExpRecord.md`.
+Git history preserves removed research history.
 
 ## 1. Research Mission
 
@@ -99,11 +99,10 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 
 Use the default loop `Conjecture -> minimum necessary derivation or
 counterexample -> real algorithm implementation -> environment experiment ->
-interpretation -> revision or retirement`. Operate it under the canonical role
-contracts: Explorer may interpret A/B observations only inside its advisory
-research state; External Pro owns scoped scientific acceptance and
-conclusion-bearing decisions when invoked; Project Manager owns code
-realization, runtime execution and technical acceptance. A useful next action
+interpretation -> revision or retirement`. EM owns scientific interpretation,
+claim ceiling and acceptance; an independent Pro consultation supplies bounded
+scientific challenge but does not own the conclusion. CM owns code realization,
+runtime observation and technical acceptance. A useful next action
 is not delayed until every possible interpretation is frozen. Once a mechanism is implementable, has a
 differentiating prediction and a simple matched comparator, has no
 meaning-changing internal contradiction, and can use a real toy path or an
@@ -292,10 +291,11 @@ counterexample, a corrected definition, a retained lemma, a benchmark
 identification result or a portfolio update. Documentation and workflow status
 alone are support work.
 
-Role-specific responsibilities for scientific review, adoption, implementation,
+Shared responsibilities for scientific review, adoption, implementation,
 acceptance, provenance, resources and communication are defined only in root
-`AGENTS.md` and `.agents/roles/*.md`. This principles file specifies the
-scientific result and evidence semantics those roles must preserve.
+`AGENTS.md`; each top-level role's method is defined in its own session skill.
+This principles file specifies the scientific result and evidence semantics
+those roles must preserve.
 
 Review output never authorizes code or compute by itself.
 

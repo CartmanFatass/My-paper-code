@@ -6,7 +6,7 @@
   "direction_id": "metric_ground_transport_allocation",
   "direction_ref": {
     "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
-    "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
+    "sha256": "bcd7cd340188de0c104d54a565b1b790aaaca01ea583524e3a5a1f9d642938f8"
   },
   "engineering_request": null,
   "evidence_set_sha256": "0138ac6e69329ea5864065a0aa42a6630de31825f9da297267efabc66f6d78b7",
@@ -15,7 +15,7 @@
     "input_refs": [
       {
         "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
-        "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
+        "sha256": "bcd7cd340188de0c104d54a565b1b790aaaca01ea583524e3a5a1f9d642938f8"
       },
       {
         "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md",
@@ -44,10 +44,10 @@
   },
   "phase": "SCOPING",
   "question_sha256": "f9bd1122f7fa3daca8b9631ce908b9499ceb7eb8f70caece39ee6482b85e0935",
-  "registry_revision_seen": 4,
-  "revision": 5,
+  "registry_revision_seen": 10,
+  "revision": 6,
   "schema_version": 2,
-  "updated_at": "2026-08-25T12:41:31Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-metric_ground_transport_allocation"
 }

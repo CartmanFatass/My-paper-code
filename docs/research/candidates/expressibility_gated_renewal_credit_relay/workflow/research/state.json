@@ -6,7 +6,7 @@
   "direction_id": "expressibility_gated_renewal_credit_relay",
   "direction_ref": {
     "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
-    "sha256": "f05f35e0e51a80892218fcfa1c7c32effb9ffc4d176135b6bcede5c81aa45e2e"
+    "sha256": "ecca3eb2d6d9fb6405ef7af5f7ad44ed2e3cf06d218bfc6955728572a53d5b52"
   },
   "engineering_request": null,
   "evidence_set_sha256": "be6c8bb1b9a49560b4e37b6b1d9ab3f2036c62ce63fd07f8e2947aa71aaa8360",
@@ -18,10 +18,10 @@
   },
   "phase": "IDLE",
   "question_sha256": "c06c53a5f6b96ba4de794d9ee7ff4a1740ee8e36599cea060aee636c216aded2",
-  "registry_revision_seen": 1,
-  "revision": 2,
+  "registry_revision_seen": 10,
+  "revision": 3,
   "schema_version": 2,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "waiting_on": [],
   "writer": "EM-expressibility_gated_renewal_credit_relay"
 }

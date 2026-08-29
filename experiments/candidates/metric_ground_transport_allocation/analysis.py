@@ -6,7 +6,22 @@ import math
 from pathlib import Path
 
 import numpy as np
-from scipy.stats import t as student_t
+_T_QUANTILES: dict[tuple[float, int], float] = {
+    (0.9979166666666667, 15): 3.374933202443401,
+}
+
+
+def _student_t_ppf(probability: float, degrees_of_freedom: int) -> float:
+    for (known_probability, known_degrees), quantile in _T_QUANTILES.items():
+        if (
+            degrees_of_freedom == known_degrees
+            and math.isclose(probability, known_probability, rel_tol=0.0, abs_tol=1e-15)
+        ):
+            return quantile
+    raise RuntimeError(
+        "scipy is not installed and this frozen analysis only carries the registered "
+        f"t quantile for p={probability!r}, df={degrees_of_freedom!r}"
+    )
 
 from .config import (
     BINDING_ACTION_MARGIN, BINDING_VALUE_MARGIN, FINAL_SEEDS,
@@ -54,7 +69,7 @@ def seed_estimands(path: Path) -> dict[str, float]:
 def _interval(values: np.ndarray) -> dict[str, float]:
     mean = float(values.mean())
     sd = float(values.std(ddof=1))
-    quantile = float(student_t.ppf(1.0 - 0.05 / (2.0 * 12.0), 15))
+    quantile = _student_t_ppf(1.0 - 0.05 / (2.0 * 12.0), 15)
     half = quantile * sd / math.sqrt(16.0)
     return {"mean": mean, "sd": sd, "lower": mean - half, "upper": mean + half, "quantile": quantile}
 

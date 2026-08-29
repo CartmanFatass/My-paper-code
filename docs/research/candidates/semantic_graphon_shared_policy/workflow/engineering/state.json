@@ -23,7 +23,7 @@
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/research/state.json",
-        "sha256": "1449770b5ad305eef8154b2dca37ec1cb770f19fc665d686ff438a8b0e287166"
+        "sha256": "48524dcdba0ae526d5058362dd493295074598a260dc9e856f59a9c086b30bcc"
       },
       {
         "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_20260825.md",
@@ -34,15 +34,15 @@
     "owner": "ROOT"
   },
   "phase": "COMPLETE",
-  "revision": 3,
+  "revision": 4,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
-    "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
+    "sha256": "59c6e601e5a6afc66e04577ccc1a047042c6b3ff45872016a27fb2a30d1bec9c"
   },
-  "updated_at": "2026-08-25T12:49:21Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [
     {
       "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_20260825.md",

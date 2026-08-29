@@ -1,0 +1,17 @@
+# HMASD OMP cross-host text authorities.
+# Keep durable scientific records, OMP control files, and Python/JSON
+# helpers byte-stable across Windows-origin and WSL checkouts.
+/docs/research/portfolio/** text eol=lf
+/docs/research/candidates/**/DIRECTION.md text eol=lf
+/docs/research/candidates/**/workflow/**/*.json text eol=lf
+/docs/external-review/directions/** text eol=lf
+/tests/fixtures/hmasd_external_review/*.json text eol=lf
+/tests/fixtures/hmasd_external_review/prompts/*.md text eol=lf
+/tests/fixtures/hmasd_phase0/*.json text eol=lf
+/tests/fixtures/hmasd_phase2/*.json text eol=lf
+/tests/fixtures/hmasd_science/** text eol=lf
+/.omp/** text eol=lf
+/scripts/hmasd_*.py text eol=lf
+/scripts/schemas/hmasd_*.schema.json text eol=lf
+/tests/hmasd_*.py text eol=lf
+/docs/migration/*.md text eol=lf

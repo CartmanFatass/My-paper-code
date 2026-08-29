@@ -18,15 +18,15 @@
     "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 2,
+  "revision": 5,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
-    "sha256": "1d73a0633a2de69a2e310dfc4bd9dd03b2f8f5ffa4722f2d8080fbde438e5307"
+    "sha256": "1013d0462a57cd7c8eae32649d7f5cde2d627f1c006b26b5ddbd965057e0022b"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-29T20:15:00Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

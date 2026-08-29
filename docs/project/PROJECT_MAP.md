@@ -30,7 +30,7 @@ a navigation convention, not workflow state.
 | Local test output | `temp/directions/<direction-id>/test/` | Ignored pytest bases, fixtures, test databases, and compiler probes. |
 
 `RESEARCH_MAP.md` is the per-direction inventory: it records all 33 direction
-keys and their current primary implementation and test paths. `.omp/AGENTS.md`
+keys and their current primary implementation and test paths. `AGENTS.md`
 defines how agents must create and use the local directories. `temp/README.md`
 defines cleanup and worktree layout. Do not duplicate the 33-row inventory in
 another document.
@@ -116,14 +116,12 @@ output owners. Python adapters may call native kernels. Production routes do
 not import isolated candidates. Research documents describe meaning but do not
 control execution.
 
-## OMP collaboration layer
+## Optional Codex collaboration layer
 
-The active collaboration control plane is rooted at `.omp/`:
-`.omp/AGENTS.md` is the canonical project instruction file,
-`.omp/config.yml` defines OMP task limits and registrations,
-`.omp/agents/*.md` contains native task-agent definitions, and
-`.omp/mcp.json` defines MCP transport configuration. These files select
-collaborators only; they do not sit in the application import graph.
+The `main` branch may include `AGENTS.md` and `.codex/agents/*.toml` for native
+Codex delegation. Those files select collaborators only; they do not sit in
+the application import graph. The `codex/control-plane-free-20260824` branch
+omits that layer while keeping the same product and research tree.
 
 Update this map when a stable executable route, dependency direction, or the
 codemap layout contract changes. Update `RESEARCH_MAP.md` when an individual
