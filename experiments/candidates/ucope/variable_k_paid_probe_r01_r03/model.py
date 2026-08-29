@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+from pathlib import Path
 from typing import Iterable
 
 import numpy as np
@@ -55,12 +56,16 @@ class LearnerBundle:
         return tuple(self.scorer.parameters()) + tuple(self.baseline.parameters())
 
 
-def _initialize_network(module: nn.Module, *, seed: int, panel: int, network: int) -> None:
+def _initialize_network(
+    module: nn.Module, *, seed: int, panel: int, network: int,
+    build_root: Path | None,
+) -> None:
     draw_count = sum(
         layer.weight.numel() for layer in module.modules() if isinstance(layer, nn.Linear)
     )
     draws = native_backend.init_uniforms(
-        seed=seed, panel=panel, network=network, count=draw_count
+        seed=seed, panel=panel, network=network, count=draw_count,
+        build_root=build_root,
     )
     coordinate = 0
     with torch.no_grad():
@@ -77,11 +82,20 @@ def _initialize_network(module: nn.Module, *, seed: int, panel: int, network: in
             layer.bias.zero_()
 
 
-def make_paired_bundles(*, seed: int, panel: int, arm_count: int = 3) -> list[LearnerBundle]:
+def make_paired_bundles(
+    *, seed: int, panel: int, arm_count: int = 3,
+    build_root: Path | None = None,
+) -> list[LearnerBundle]:
     scorer_template = ActionScorer().to(dtype=torch.float32)
     baseline_template = StateBaseline().to(dtype=torch.float32)
-    _initialize_network(scorer_template, seed=seed, panel=panel, network=0)
-    _initialize_network(baseline_template, seed=seed, panel=panel, network=1)
+    _initialize_network(
+        scorer_template, seed=seed, panel=panel, network=0,
+        build_root=build_root,
+    )
+    _initialize_network(
+        baseline_template, seed=seed, panel=panel, network=1,
+        build_root=build_root,
+    )
     if sum(parameter.numel() for parameter in scorer_template.parameters()) != 5121:
         raise RuntimeError("scorer parameter shape drift")
     if sum(parameter.numel() for parameter in baseline_template.parameters()) != 353:

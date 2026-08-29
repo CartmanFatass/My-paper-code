@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import ctypes
+import json
+
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -12,13 +15,17 @@ from envs.native.production_backend import (
     require_cpp_batched_production,
 )
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03 import (
+    benchmark,
     checkpoint,
     native_backend,
     reference_oracle,
 )
 from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.contract import (
+    BASELINE_FEATURES,
     COMPONENT,
     REGISTERED_MASTER_SEEDS,
+    ROOT_ACTION_COUNT,
+    SCORER_FEATURES,
     SUPPORTED_BATCH_WIDTHS,
     TEST_NAMESPACE,
     TEST_SEEDS,
@@ -99,6 +106,80 @@ def test_native_reset_probe_tail_terminal_matches_test_oracle(panel: int) -> Non
         batch.close()
 
 
+def test_native_reset_later_invalid_arm_is_failure_atomic() -> None:
+    width = 8
+    valid_arms = np.arange(width, dtype=np.int32) % 3
+    before = native_backend.reset_batch(
+        seed=TEST_SEEDS[0], panel=0, batch_index=5, arms=valid_arms
+    )
+    after: native_backend.NativeBatch | None = None
+    try:
+        invalid_arms = valid_arms.copy()
+        invalid_arms[-1] = 3
+        handles = np.full(width, np.uint64(0xA5A5A5A5A5A5A5A5), dtype=np.uint64)
+        episodes = np.full(width, np.int64(-101), dtype=np.int64)
+        regimes = np.full((width, 3), np.int32(-102), dtype=np.int32)
+        root_features = np.full(
+            (width, ROOT_ACTION_COUNT, SCORER_FEATURES),
+            np.float32(-103.5),
+            dtype=np.float32,
+        )
+        root_baselines = np.full(
+            (width, BASELINE_FEATURES), np.float32(-104.5), dtype=np.float32
+        )
+        outputs = (handles, episodes, regimes, root_features, root_baselines)
+        sentinels = tuple(output.copy() for output in outputs)
+        library = before.library
+        code = int(
+            library.ucope_r01_r03_reset_batch(
+                TEST_SEEDS[0],
+                0,
+                6,
+                width,
+                invalid_arms.ctypes.data_as(ctypes.POINTER(ctypes.c_int32)),
+                handles.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+                episodes.ctypes.data_as(ctypes.POINTER(ctypes.c_int64)),
+                regimes.ctypes.data_as(ctypes.POINTER(ctypes.c_int32)),
+                root_features.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),
+                root_baselines.ctypes.data_as(ctypes.POINTER(ctypes.c_float)),
+            )
+        )
+
+        first_possible_partial_handle = int(before.handles[-1]) + 1
+        partial_close_codes = []
+        for handle in range(
+            first_possible_partial_handle, first_possible_partial_handle + width
+        ):
+            repeated_handle = np.full(width, np.uint64(handle), dtype=np.uint64)
+            partial_close_codes.append(
+                int(
+                    library.ucope_r01_r03_close_batch(
+                        repeated_handle.ctypes.data_as(
+                            ctypes.POINTER(ctypes.c_uint64)
+                        ),
+                        width,
+                    )
+                )
+            )
+
+        after = native_backend.reset_batch(
+            seed=TEST_SEEDS[0], panel=0, batch_index=7, arms=valid_arms
+        )
+        assert code == -2
+        assert all(
+            np.array_equal(output, sentinel)
+            for output, sentinel in zip(outputs, sentinels, strict=True)
+        )
+        assert partial_close_codes == [-20] * width
+        assert np.array_equal(
+            after.handles, before.handles + np.uint64(width)
+        )
+    finally:
+        before.close()
+        if after is not None:
+            after.close()
+
+
 def test_native_lifecycle_rejects_duplicate_and_malformed_steps() -> None:
     arms = np.zeros(8, dtype=np.int32)
     batch = native_backend.reset_batch(
@@ -173,6 +254,37 @@ def test_counter_and_action_order_are_parallel_byte_equal() -> None:
     assert np.array_equal(native_actions, oracle_actions)
 
 
+@pytest.mark.parametrize(
+    "name", ("counter_frontier", "source_sha256", "native_artifact_sha256")
+)
+@pytest.mark.parametrize(
+    "invalid_digest",
+    (
+        pytest.param(None, id="not-a-string"),
+        pytest.param("0" * 63, id="wrong-length"),
+        pytest.param("A" * 64, id="uppercase"),
+        pytest.param("g" * 64, id="non-hex"),
+    ),
+)
+def test_s0_checkpoint_metadata_requires_lowercase_sha256(
+    name: str, invalid_digest: object
+) -> None:
+    metadata: dict[str, object] = {
+        "completed_batch": 0,
+        "next_batch": 1,
+        "counter_frontier": "0" * 64,
+        "batch_width": 768,
+        "worker_count": 1,
+        "torch_threads": 1,
+        "source_sha256": "1" * 64,
+        "native_artifact_sha256": "2" * 64,
+    }
+    checkpoint._validate_metadata(metadata)
+    metadata[name] = invalid_digest
+    with pytest.raises(ValueError):
+        checkpoint._validate_metadata(metadata)
+
+
 def test_exact_shape_fp32_update_atomic_cold_resume_and_permutation_coupon(tmp_path: Path) -> None:
     record = run_retained_coupon(
         namespace=TEST_NAMESPACE,
@@ -193,6 +305,135 @@ def test_exact_shape_fp32_update_atomic_cold_resume_and_permutation_coupon(tmp_p
     checkpoint_path = tmp_path / "ucope_r01_r03_s0.TEST_ONLY.pt"
     assert checkpoint_path.is_file()
     assert checkpoint_path.stat().st_size == record["checkpoint"]["bytes"]
+
+
+@pytest.mark.parametrize(("gates_pass", "expected_exit"), ((True, 0), (False, 2)))
+def test_benchmark_main_s0_dispatch_schema_provenance_and_exit(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    gates_pass: bool,
+    expected_exit: int,
+) -> None:
+    command: dict[str, object] = {
+        "interpreter": "fixture-python",
+        "module": benchmark.__name__,
+    }
+    record: dict[str, object] = {
+        "schema": benchmark.SCHEMA,
+        "command": command,
+        "all_s0_gates_pass": gates_pass,
+        "measured_resources": {"fixture_only": True},
+        "complete_plan_projection": {"fixture_only": True},
+    }
+    dispatched_workspaces: list[Path] = []
+
+    def run_s0(workspace: Path) -> dict[str, object]:
+        dispatched_workspaces.append(workspace)
+        return record
+
+    def reject_s1(_workspace: Path) -> dict[str, object]:
+        pytest.fail("the retained S0 CLI dispatched the S1 benchmark")
+
+    passed_argv = ["--stage", "s0", "--work-root", str(tmp_path)]
+    monkeypatch.setattr(benchmark, "_benchmark", run_s0)
+    monkeypatch.setattr(benchmark, "_benchmark_s1", reject_s1)
+    monkeypatch.setattr(
+        benchmark.sys, "argv", ["ambient-program", "--stage", "s1"]
+    )
+
+    assert benchmark.main(passed_argv) == expected_exit
+    summary = json.loads(capsys.readouterr().out)
+    assert dispatched_workspaces == [tmp_path.resolve()]
+    assert record["schema"] == benchmark.SCHEMA
+    assert record["stage"] == "s0"
+    recorded_command = record["command"]
+    assert isinstance(recorded_command, dict)
+    assert recorded_command["program"] == "ambient-program"
+    assert recorded_command["module"] == benchmark.__name__
+    assert recorded_command["stage"] == "s0"
+    assert recorded_command["argv"] == ["ambient-program", *passed_argv]
+    assert summary["stage"] == "s0"
+    assert summary["schema"] == benchmark.SCHEMA
+    assert summary["command"] == recorded_command
+    assert summary["all_s0_gates_pass"] is gates_pass
+
+
+@pytest.mark.parametrize("path_kind", ("work_root", "output"))
+@pytest.mark.parametrize("symlink_location", ("final", "ancestor"))
+def test_benchmark_main_s0_rejects_symlinked_assigned_paths_before_runner(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    path_kind: str,
+    symlink_location: str,
+) -> None:
+    outside = tmp_path / "outside"
+    assigned = tmp_path / "assigned"
+    outside.mkdir()
+    assigned.mkdir()
+    leaf_name = "workspace" if path_kind == "work_root" else "evidence.json"
+
+    if symlink_location == "final":
+        redirected = outside / leaf_name
+        if path_kind == "work_root":
+            redirected.mkdir()
+            sentinel = redirected / "sentinel.bin"
+        else:
+            sentinel = redirected
+        link = assigned / leaf_name
+        supplied_path = link
+        link_target = redirected
+        link_is_directory = path_kind == "work_root"
+    else:
+        redirected_parent = outside / "redirected-parent"
+        redirected_parent.mkdir()
+        redirected = redirected_parent / leaf_name
+        if path_kind == "work_root":
+            redirected.mkdir()
+            sentinel = redirected / "sentinel.bin"
+        else:
+            sentinel = redirected
+        link = assigned / "linked-parent"
+        supplied_path = link / leaf_name
+        link_target = redirected_parent
+        link_is_directory = True
+
+    sentinel_bytes = b"outside-sentinel-must-not-change\n"
+    sentinel.write_bytes(sentinel_bytes)
+    try:
+        link.symlink_to(link_target, target_is_directory=link_is_directory)
+    except OSError as error:
+        pytest.skip(f"symlink creation unavailable: {error}")
+
+    runner_invocations: list[Path] = []
+
+    def run_s0(workspace: Path) -> dict[str, object]:
+        runner_invocations.append(workspace)
+        if path_kind == "work_root":
+            (workspace / "sentinel.bin").write_bytes(b"runner-followed-symlink\n")
+        return {
+            "schema": benchmark.SCHEMA,
+            "command": {},
+            "all_s0_gates_pass": True,
+            "measured_resources": {"fixture_only": True},
+            "complete_plan_projection": {"fixture_only": True},
+        }
+
+    safe_work_root = tmp_path / "safe-workspace"
+    work_root = supplied_path if path_kind == "work_root" else safe_work_root
+    passed_argv = ["--stage", "s0", "--work-root", str(work_root)]
+    if path_kind == "output":
+        passed_argv.extend(("--output", str(supplied_path)))
+    monkeypatch.setattr(benchmark, "_benchmark", run_s0)
+
+    label = "work root" if path_kind == "work_root" else "output"
+    with pytest.raises(
+        ValueError,
+        match=rf"^{label} path must not contain symlink components$",
+    ):
+        benchmark.main(passed_argv)
+    assert runner_invocations == []
+    assert sentinel.read_bytes() == sentinel_bytes
 
 
 def test_hot_path_contains_no_wider_or_proof_grade_numeric_surface() -> None:

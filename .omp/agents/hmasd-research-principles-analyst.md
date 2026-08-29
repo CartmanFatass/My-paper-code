@@ -2,7 +2,7 @@
 name: hmasd-research-principles-analyst
 description: Read-only learning-dynamics and scientific-principles analyst.
 model: openai-codex/gpt-5.6-sol
-thinking-level: max
+thinking-level: high
 tools:
   - read
   - grep

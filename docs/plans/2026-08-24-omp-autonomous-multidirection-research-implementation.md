@@ -685,7 +685,7 @@ launch:
 task:
   maxConcurrency: 32
   maxRecursionDepth: 2
-  enableEffort: true
+  enableEffort: false
   enableLsp: true
   agentAdvisor:
     hmasd-implementer: opencode-go/glm-5.3:high
@@ -754,7 +754,7 @@ All 17 project definitions declare concrete model selectors, thinking level,
 
 | Agent | Model / effort | Direct tools | Spawns | Autoload Skills |
 | --- | --- | --- | --- | --- |
-| `hmasd-em` | Sol max | read/write/edit/grep/glob/task/hub | research specialists, artifact writer, code scout, both transports, librarian | em-direction-cycle, scientific-external-review |
+| `hmasd-em` | Sol high | read/write/edit/grep/glob/task/hub | research specialists, artifact writer, code scout, both transports, librarian | em-direction-cycle, scientific-external-review |
 | `hmasd-cm` | Sol high | read/write/edit/grep/glob/bash/task/hub | engineering specialists, experiment operator, research scout, librarian | cm-engineering-cycle, result-run, git-integration |
 | `hmasd-project-scout` | Luna medium | read/grep/glob | none | none |
 | `hmasd-code-scout` | Luna medium | read/grep/glob | none | none |
@@ -767,9 +767,9 @@ All 17 project definitions declare concrete model selectors, thinking level,
 | `hmasd-external-pro-transport` | Luna medium | read/grep/glob plus allowlisted Agentify MCP review tools | none | scientific-external-review |
 | `hmasd-external-gemini-transport` | Luna high | read/grep/glob plus allowlisted Agentify MCP review tools | none | scientific-external-review |
 | `hmasd-research-scout` | Sol high | read/grep/glob/web_search | none | none |
-| `hmasd-research-innovator` | Sol max | read/grep/glob/web_search | none | none |
-| `hmasd-research-critic` | Sol max | read/grep/glob/web_search | none | none |
-| `hmasd-research-principles-analyst` | Sol max | read/grep/glob/web_search | none | none |
+| `hmasd-research-innovator` | Sol high | read/grep/glob/web_search | none | none |
+| `hmasd-research-critic` | Sol high | read/grep/glob/web_search | none | none |
+| `hmasd-research-principles-analyst` | Sol high | read/grep/glob/web_search | none | none |
 | `hmasd-research-artifact-writer` | Luna medium | read/write/edit/grep/glob | none | none |
 
 Project/code scouts, Reviewer, Verifier, research Scout/Innovator/Critic/
@@ -782,12 +782,12 @@ never edits source. Transports receive only the exact Agentify MCP tools exposed
 by the migrated server; they never receive direct browser, write, or shell
 access.
 
-Task-item effort overrides are disabled. With OMP effort hints enabled, coarse
-`hi` means the selected model's highest supported tier and therefore maps to
-`max` on GPT-5.6; it does not preserve a role's configured `high`. The audited
-`thinking-level` in each project agent definition is authoritative so Operator,
-Transport, Scout, CM, EM, and scientific specialist cost/quality tiers remain
-distinct.
+Task-item effort overrides are disabled in configuration. Coarse `hi` means the
+selected model's highest supported tier and maps to `max` on GPT-5.6. The
+current runtime nevertheless accepts an explicitly emitted nested effort field,
+so Root, EM, and CM contracts require omission rather than relying on the
+setting as an enforcement boundary. Every project role is configured at or
+below `high`; session-init evidence determines the effective launch level.
 
 Root loads `hmasd-root-control` and `hmasd-git-integration` through mandatory
 instructions in `.omp/AGENTS.md`, because Root is the main session rather than a

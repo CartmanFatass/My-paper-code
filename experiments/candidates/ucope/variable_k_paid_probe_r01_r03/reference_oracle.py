@@ -1,4 +1,4 @@
-"""Scalar TEST-only oracle for native UCOPE r03 S0 fixture conformance.
+"""Scalar TEST-only oracle for native UCOPE r03 S0/S1 fixture conformance.
 
 This module is forbidden as an environment or rollout backend.  It exists only
 to compare nonregistered fixture bytes against the retained C++ lifecycle.
@@ -11,10 +11,18 @@ import math
 
 import numpy as np
 
-from .contract import K_TRAIN, TEST_NAMESPACE, require_test_namespace
+from .contract import (
+    K_TRAIN,
+    TEST_NAMESPACE,
+    require_s1_test_request,
+    require_test_namespace,
+)
 
 
 _MASK = (1 << 32) - 1
+S1_SCALAR_ORACLE_BRIDGE_ID = (
+    "UCOPE_R01_R03_S1_TEST_TO_RETAINED_S0_SCALAR_MECHANISM_V1"
+)
 
 
 def _philox_words(
@@ -147,11 +155,10 @@ class OracleEpisode:
     total: np.float32
 
 
-def run_episode(
-    *, namespace: str = TEST_NAMESPACE, seed: int, panel: int, batch_index: int,
-    slot: int, arm: int, root_action: int, tail_action: int = 0,
+def _run_episode(
+    *, seed: int, panel: int, batch_index: int, slot: int, arm: int,
+    root_action: int, tail_action: int,
 ) -> OracleEpisode:
-    require_test_namespace(namespace, seed)
     if panel not in (0, 1, 2) or arm not in (0, 1, 2) or not 0 <= slot < 256:
         raise ValueError("invalid TEST oracle coordinate")
     if not 0 <= root_action <= 5 or not 0 <= tail_action < 5:
@@ -168,11 +175,17 @@ def run_episode(
     if root_action == 0:
         actual = _marks(seed, 2, panel, episode, int(regimes[0]))
         displayed = (
-            _marks(seed, 3, panel, episode, int(regimes[2])) if panel == 2 else actual.copy()
+            _marks(seed, 3, panel, episode, int(regimes[2]))
+            if panel == 2
+            else actual.copy()
         )
         count = int(actual.sum())
         probe = np.asarray(
-            [np.float32(0.08) * (np.float32(count) / np.float32(6.0)), np.float32(-0.03), np.float32(-0.03)],
+            [
+                np.float32(0.08) * (np.float32(count) / np.float32(6.0)),
+                np.float32(-0.03),
+                np.float32(-0.03),
+            ],
             dtype=np.float32,
         )
         channel = _tail_channel(panel, arm, displayed)
@@ -180,10 +193,14 @@ def run_episode(
             [_candidate(channel, root=False, probe=False, k=k) for k in K_TRAIN]
         )
         tail_baseline = _baseline(channel, root=False)
-        components[:3] = _tail_components(seed, panel, episode, int(regimes[1]), K_TRAIN[tail_action])
+        components[:3] = _tail_components(
+            seed, panel, episode, int(regimes[1]), K_TRAIN[tail_action],
+        )
         components[3:] = probe
     else:
-        components[:3] = _tail_components(seed, panel, episode, int(regimes[1]), K_TRAIN[root_action - 1])
+        components[:3] = _tail_components(
+            seed, panel, episode, int(regimes[1]), K_TRAIN[root_action - 1],
+        )
     total = np.float32(0.0)
     for value in components:
         total = np.float32(total + value)
@@ -192,6 +209,41 @@ def run_episode(
         tail_candidates, tail_baseline, components, total,
     )
 
+
+def run_episode(
+    *, namespace: str = TEST_NAMESPACE, seed: int, panel: int, batch_index: int,
+    slot: int, arm: int, root_action: int, tail_action: int = 0,
+) -> OracleEpisode:
+    """Run the preserved S0 TEST entrypoint."""
+
+    require_test_namespace(namespace, seed)
+    return _run_episode(
+        seed=seed,
+        panel=panel,
+        batch_index=batch_index,
+        slot=slot,
+        arm=arm,
+        root_action=root_action,
+        tail_action=tail_action,
+    )
+
+
+def run_s1_test_episode(
+    *, namespace: str, request: str, seed: int, panel: int, batch_index: int,
+    slot: int, arm: int, root_action: int, tail_action: int = 0,
+) -> OracleEpisode:
+    """Bridge an admitted S1 TEST fixture to the retained scalar mechanism."""
+
+    require_s1_test_request(namespace, seed, request)
+    return _run_episode(
+        seed=seed,
+        panel=panel,
+        batch_index=batch_index,
+        slot=slot,
+        arm=arm,
+        root_action=root_action,
+        tail_action=tail_action,
+    )
 
 def sample_action(
     probabilities: np.ndarray, *, seed: int, panel: int, batch_index: int,

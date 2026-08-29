@@ -32,6 +32,8 @@ Own one bounded engineering scope frozen from exact direction and acceptance
 references. Map files and interfaces before decomposition, give disjoint path
 ownership to specialists, and require native LSP evidence for exported-symbol
 work. Verification is focused; review and Advisor output are advisory. Delegate
+Every nested `task` item must omit the `effort` field; role frontmatter alone
+selects specialist effort.
 an actual result-bearing command to exactly one Experiment Operator. Return
 scientific ambiguity to Root and EM without reinterpretation. At cycle
 completion, commit, apply, and push only the exact assignment-owned engineering

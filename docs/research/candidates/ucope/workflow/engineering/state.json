@@ -1,7 +1,26 @@
 {
-  "actionable": false,
-  "active_agents": [],
-  "base_sha": "ddc027d845b1161cca7210fb8aa040c8e391a190",
+  "actionable": true,
+  "active_agents": [
+    {
+      "assignment_id": "UCOPEBenchmarkRepair-g1",
+      "generation": 1,
+      "logical_identity": "hmasd-implementer-terra",
+      "runtime_ref": "UCOPES1RepairCM.UCOPEBenchmarkRepair"
+    },
+    {
+      "assignment_id": "UCOPESemanticPersistence-g1",
+      "generation": 1,
+      "logical_identity": "hmasd-implementer",
+      "runtime_ref": "UCOPES1RepairCM.UCOPESemanticPersistence"
+    },
+    {
+      "assignment_id": "UCOPENativeAtomicity-g1",
+      "generation": 1,
+      "logical_identity": "hmasd-implementer",
+      "runtime_ref": "UCOPES1RepairCM.UCOPENativeAtomicity"
+    }
+  ],
+  "base_sha": "f890479fdec42fdc11376059a248e31b8c1ab134",
   "blockers": [],
   "candidate_sha": null,
   "changed_paths": [],
@@ -9,16 +28,25 @@
   "integration": {
     "integrated_sha": null,
     "target_branch": "omp/workflow",
-    "target_sha_seen": "ddc027d845b1161cca7210fb8aa040c8e391a190"
+    "target_sha_seen": "f890479fdec42fdc11376059a248e31b8c1ab134"
   },
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "974c5c0400bf10e3bd5044c96d7e8ffea4e0ccaefef4eec2a8241c0977c1d864",
   "next_action": {
-    "input_refs": [],
-    "kind": "UNREQUESTED",
-    "owner": "ROOT"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md",
+        "sha256": "974c5c0400bf10e3bd5044c96d7e8ffea4e0ccaefef4eec2a8241c0977c1d864"
+      },
+      {
+        "path": "docs/research/candidates/ucope/workflow/research/state.json",
+        "sha256": "5eb8264740ad4553651fdb4e1b8729cd9602654eba5c730273f40b1bc12bba24"
+      }
+    ],
+    "kind": "COMPLETE_UCOPE_S1_CURRENT_BYTE_REPAIR",
+    "owner": "CM"
   },
-  "phase": "UNREQUESTED",
-  "revision": 2,
+  "phase": "IMPLEMENTING",
+  "revision": 3,
   "run_refs": [],
   "schema_version": 2,
   "scope_ref": {
@@ -26,7 +54,7 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "updated_at": "2026-08-24T00:00:00Z",
+  "updated_at": "2026-08-25T12:40:50Z",
   "verification_refs": [],
   "waiting_on": [],
   "worktree_ref": null,

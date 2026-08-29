@@ -2,7 +2,7 @@
 name: hmasd-research-critic
 description: Read-only critic of one frozen scientific claim and evidence set.
 model: openai-codex/gpt-5.6-sol
-thinking-level: max
+thinking-level: high
 tools:
   - read
   - grep

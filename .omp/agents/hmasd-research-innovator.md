@@ -2,7 +2,7 @@
 name: hmasd-research-innovator
 description: Read-only scientific mechanism and discriminator innovator.
 model: openai-codex/gpt-5.6-sol
-thinking-level: max
+thinking-level: high
 tools:
   - read
   - grep

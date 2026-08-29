@@ -14,7 +14,7 @@ FrontmatterValue = str | list[str]
 EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     "hmasd-em": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "max",
+        "thinking-level": "high",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "task", "hub"],
         "spawns": [
             "hmasd-research-scout",
@@ -154,7 +154,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-innovator": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "max",
+        "thinking-level": "high",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
@@ -162,7 +162,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-critic": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "max",
+        "thinking-level": "high",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
@@ -170,7 +170,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-principles-analyst": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "max",
+        "thinking-level": "high",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
@@ -305,6 +305,10 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     assert "bundled `scout`" not in instructions
     assert "task.enableEffort` remains disabled" in instructions
     assert "highest supported tier" in instructions
+    assert "session-init evidence" in instructions
+    for manager in ("hmasd-em.md", "hmasd-cm.md"):
+        body = (AGENT_ROOT / manager).read_text(encoding="utf-8")
+        assert "must omit the `effort` field" in body
 
 
 def test_seven_complete_skills_and_authority_files() -> None:

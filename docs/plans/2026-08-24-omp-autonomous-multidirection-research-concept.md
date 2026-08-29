@@ -550,16 +550,16 @@ Reviewer receives no LSP. Its direct tools are read/grep/glob plus read-only Git
 and existing-evidence query surfaces. It reads code/diff, code-scout mappings,
 Verifier evidence, benchmarks, and profiles. It does not run tests or commands.
 
-Reviewer uses `openai-codex/gpt-5.6-sol` at high effort by default; task-specific
-effort may raise it to xhigh.
+Reviewer uses `openai-codex/gpt-5.6-sol` at high effort. Task-specific effort
+escalation is forbidden; callers omit the task-item field.
 
 ## Model and context policy
 
 Every project agent declares a concrete OpenAI-Codex selector rather than a
 project role alias. Existing Sol/Luna/Terra assignments are preserved.
 
-Reviewer remains Sol high with optional per-task escalation. Root and manager
-Advisors are disabled; only the two Implementer mappings opt in explicitly.
+Reviewer remains Sol high. Root and manager Advisors are disabled; only the two
+Implementer mappings opt in explicitly.
 
 At user scope, every current OpenAI-Codex model receives a `contextWindow`
 override of 372,000 tokens. New catalog models require the same override when

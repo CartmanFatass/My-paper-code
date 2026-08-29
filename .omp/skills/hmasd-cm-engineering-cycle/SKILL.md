@@ -23,8 +23,8 @@ integrates outside its provisioned engineering worktree.
 
 1. Freeze scope and acceptance references from `DIRECTION.md`; map files,
    interfaces, exported symbols, and ownership before decomposing work.
-2. Dispatch two specialists by default and at most six when contracts are
-   disjoint, ownership is explicit, and each result is independently useful.
+2. Every nested `task` item omits `effort`. Dispatch two specialists by default
+   and at most six when contracts are
 3. Require Implementer LSP references before exported-symbol edits and LSP rename
    for cross-file renames. Keep Reviewer and Verifier advisory and focused.
 4. Request observed runs only through the Result Run Skill. Collect exact

@@ -215,11 +215,13 @@ UCOPE_EXPORT int ucope_r01_r03_reset_batch(
     if (!supported_width(width) || panel < 0 || panel > 2 || batch < 0 || arms == nullptr ||
         handles == nullptr || episodes == nullptr || regimes == nullptr || root_features == nullptr ||
         root_baselines == nullptr) return -1;
+    for (int lane_index = 0; lane_index < width; ++lane_index) {
+        if (arms[lane_index] < 0 || arms[lane_index] > 2) return -2;
+    }
     const std::vector<RegimeTriple> roster = regime_roster(seed, panel, batch);
     const float empty[6] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
     std::lock_guard<std::mutex> guard(lane_mutex);
     for (int lane_index = 0; lane_index < width; ++lane_index) {
-        if (arms[lane_index] < 0 || arms[lane_index] > 2) return -2;
         const int slot = lane_index % 256;
         const std::uint64_t episode = static_cast<std::uint64_t>(batch) * 256u + static_cast<std::uint64_t>(slot);
         const RegimeTriple value = roster[slot];

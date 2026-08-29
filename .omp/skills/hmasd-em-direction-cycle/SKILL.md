@@ -25,9 +25,9 @@ engineering through durable references rather than spawning CM directly.
 
 1. Reconcile registry, direction science, research state, and external index;
    reject stale or cross-direction identity before dispatch.
-2. Freeze question/evidence references and deterministic round identity. Dispatch
-   two specialists by default, up to four only when the exact question justifies
-   disjoint evidence work.
+2. Freeze question/evidence references and deterministic round identity. Every
+   nested `task` item omits `effort`; dispatch two specialists by default, up to
+   four only when the exact question justifies disjoint evidence work.
 3. Collect local evidence, then run divergent Gemini and Pro review in parallel
    through the external-review Skill when requested. Keep provider results blind
    until local EM synthesis is complete.
