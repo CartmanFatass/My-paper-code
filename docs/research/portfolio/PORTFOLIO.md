@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T17:25:41Z
+Updated at: 2026-08-29T17:30:06Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -24,10 +24,10 @@ how to stage a valuable question, not whether that question has value.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The censored-flow draft remains unaccepted and containing public recurrence may absorb the hand-built order code. Re-open only after constructive and adversarial review identifies value beyond both generic and containing recurrence. |
 | acvc | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. The learned joint veto lost to deterministic exact matching. Retain authenticated binding as a control in DEARS/RCLE; no independent adaptive-algorithm question remains. |
-| commitment_residual_triggered_options | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:25:41Z | Readiness `DISPATCH-PENDING`. Portfolio consumes the terminal SCDMP slot and selects CRTO as the strongest complementary refill. The fresh question extends a copy of the exact seed-2101 probe checkpoint from 1,000 to 10,000 updates on one continuous optimizer trajectory under unchanged fit rows, split, model, order, optimizer and thresholds. The fixed 10,000 endpoint must meet NMSE `<=0.01` and sign accuracy `>=0.95`; failure stops before policy activity. Passing only identifies an optimization-horizon explanation and requires a later new all-seed confirmation object. A later task ID makes this `LIVE`. |
+| commitment_residual_triggered_options | ACTIVE | ADVANCING | EM | 2026-08-29T17:30:06Z | Readiness `LIVE`. Fresh Sol/max EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` owns cycle `2026-08-29.8-portfolio-crto-probe-cut-01`. It extends a copy of the exact seed-2101 probe checkpoint from 1,000 to 10,000 updates on one continuous optimizer trajectory under unchanged fit rows, split, model, order, optimizer and thresholds. The fixed 10,000 endpoint must meet NMSE `<=0.01` and sign accuracy `>=0.95`; failure stops before policy activity. Passing only identifies an optimization-horizon explanation and requires a later new all-seed confirmation object. |
 | covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
 | degraded_incumbent_shadow_handover | REGISTERED | HIGH | NONE | 2026-08-29T16:57:57Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal preactivity-certificate WORK `2026-08-29.8-portfolio-dish-preactivity-certificate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Its mandatory Pro stage was `ZERO_SEND_FAILED` and supplies no scientific polarity. Two local audits found no proper subset, symmetry, static timing, containment-only or monotone-envelope certificate sufficient for the full R06 branch family; they did not synthesize direct-handover value. Preserve the unanswered high-value full object. Reentry requires eligible independent consultation (or exact waiver), a named <=8-core substrate/process design with result-blind concurrency/overhead evidence, a current-byte engineering map and fresh proportionality judgment. Cost and transport change staging only; neither PARKS or CLOSES DISH. |
-| dual_epoch_receipt_survival | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:25:41Z | Readiness `DISPATCH-PENDING`. Portfolio consumes the terminal SGSP slot and selects the authenticated-lineage/liveness family as the second complementary refill. Positive B1 verifier evidence is reusable, while the typed/reset/raw online successor was negative; the fresh EM must therefore freeze a decision-bearing question that distinguishes deterministic fail-closed lineage sufficiency from finite-budget adaptive value against a competent same-information containing null. Closed Orbit/EC4G/VAP-FOLR/VSP labels contribute controls only, never positive claims. A later task ID makes this `LIVE`. |
+| dual_epoch_receipt_survival | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:30:06Z | Readiness `DISPATCH-PENDING`. Portfolio consumes the terminal SGSP slot and selects the authenticated-lineage/liveness family as the second complementary refill. Positive B1 verifier evidence is reusable, while the typed/reset/raw online successor was negative. The fresh EM must freeze a genuinely new online carrier-value gate: first prove direct action/return headroom for authenticated retention over reset with competent reacquisition; then compare against an exact same-information raw-history containing controller. A carrier-over-reset result with raw containment supports deterministic protocol value, not learned abstraction value. Closed Orbit/EC4G/VAP-FOLR/VSP labels contribute controls only, never positive claims. A later task ID makes this `LIVE`. |
 | ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
 | eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
 | event_triggered_budgeted_cooperative_renewal | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Coordinated learned renewal and the stage oracle both lost to fixed-4. Fixed-k and common-rate controls are retained inside ONLGR/SCDMP; the same EBCR object is exhausted. |
@@ -61,17 +61,18 @@ their slots immediately. Portfolio retains both as high-priority unanswered dire
 reentries, and independently selects CRTO and DEARS as complementary refills; VQFP and ONLGR retain
 their exact WORKs. The allocated advancing set is:
 
-- `commitment_residual_triggered_options`, fresh Sol/max EM dispatch pending, cycle
+- `commitment_residual_triggered_options`, EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39`, cycle
   `2026-08-29.8-portfolio-crto-probe-cut-01`: does the exact residual representation fail even after
   continuing a copy of seed 2101's exact optimizer trajectory from 1,000 to 10,000 updates, or was
   the prior gate only optimization-horizon limited? Every fixed 1,000-update boundary is diagnostic;
   the unchanged thresholds apply to the fixed 10,000 endpoint. This probe cannot certify v4 or
   authorize policy activity; a passing endpoint only chooses a later fresh all-seed confirmation.
 - `dual_epoch_receipt_survival`, fresh Sol/max EM dispatch pending, cycle
-  `2026-08-29.8-portfolio-dears-lineage-value-gate-01`: can deterministic authenticated-lineage
-  sufficiency be separated from finite-budget adaptive value on a genuinely decision-bearing
-  online object against a competent same-information containing null, without importing positive
-  claims from consolidated lifecycle labels?
+  `2026-08-29.8-portfolio-dears-lineage-value-gate-01`: on a genuinely new online host with
+  competent reacquisition, does authenticated fail-closed retention change direct action and return
+  over reset, and is any apparent abstraction increment absorbed by an exact same-information
+  raw-history containing controller? This separates protocol persistence value from learned
+  representation value without importing claims from consolidated lifecycle labels.
 - `voronoi_quadrature_field_policy`, EM `01a04e22-2f5a-7423-8b60-95d35d150109`, cycle
   `2026-08-29.8-portfolio-vqfp-proof-gate-01`:
   can a proof-sized exact variable-N field object retain native allocation/return headroom over
@@ -80,8 +81,9 @@ their exact WORKs. The allocated advancing set is:
   on the frozen non-divisible clock cell, does any link-specific return survive common executed-rate
   and age-conditioned ceilings?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:25:41Z`, CRTO
-and DEARS are selected but not yet natively dispatched and therefore are not counted as live.
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:30:06Z`, CRTO
+EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` is natively active; DEARS is selected but not yet
+natively dispatched and therefore is not counted as live.
 ONLGR's EM is idle but its
 already-sent Convergence operation
 `5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at

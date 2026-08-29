@@ -40,9 +40,12 @@ cannot certify v4 or authorize policy activity.
 
 DEARS is selected as the authenticated-lineage/liveness family. B1 established a reusable
 deterministic verifier abstraction, while the later typed/reset/raw online package was negative.
-The fresh EM must therefore ask for decision-bearing adaptive value beyond a competent
-same-information containing null, rather than relabel deterministic protocol sufficiency as learned
-value. Closed Orbit, EC4G, VAP/FOLR and VSP labels supply controls and provenance only.
+The fresh EM must therefore freeze a genuinely new online carrier-value gate: a direct
+action-and-return contrast of authenticated retention versus reset under competent reacquisition,
+followed by an exact same-information raw-history containing controller. Carrier-over-reset with
+raw containment supports deterministic protocol persistence value only; an adaptive abstraction
+claim requires a prospectively matched finite-budget separation beyond the containing null. Closed
+Orbit, EC4G, VAP/FOLR and VSP labels supply controls and provenance only.
 
 ## Protected boundaries
 
