@@ -49,6 +49,8 @@ of those lifecycle actions.
 
 ## Capacity consequence
 
-FSBS R02 releases one advancing slot. DISH occupies that slot only after a fresh native Sol/max EM
-WORK is actually dispatched from the committed Portfolio authority. VQFP, ONLGR and SGSP retain their
-existing exact WORKs and reentries. Capacity remains exactly four.
+FSBS R02 releases one advancing slot. DISH now occupies that slot through fresh native Sol/max EM
+`01a04e5d-3523-7190-8493-6254346fb401`, cycle
+`2026-08-29.8-portfolio-dish-preactivity-certificate-01`, dispatched from committed Portfolio
+authority `a23b89372b9131096cf3b1a924b151bc19d62141`. VQFP, ONLGR and SGSP retain their existing exact
+WORKs and reentries. Capacity remains exactly four.

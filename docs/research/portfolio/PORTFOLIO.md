@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T15:22:41Z
+Updated at: 2026-08-29T16:34:02Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -26,7 +26,7 @@ how to stage a valuable question, not whether that question has value.
 | acvc | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. The learned joint veto lost to deterministic exact matching. Retain authenticated binding as a control in DEARS/RCLE; no independent adaptive-algorithm question remains. |
 | commitment_residual_triggered_options | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Preserve the sharp representation-versus-optimization question. The only admissible next step is the frozen 1,000-to-10,000-update residual probe under unchanged data/order/optimizer/thresholds; no policy run before both representation gates pass. |
 | covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
-| degraded_incumbent_shadow_handover | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:26:22Z | Readiness `GATE-READY`. Portfolio activates DISH to refill the terminal FSBS R02 slot because direct atomic first-handover service and tail value remain high-priority and scientifically unanswered. The fresh EM must adversarially audit the complete R06 definition and select the smallest action-changing preactivity certificate for opportunity/headroom, containing-rule competence and substrate bindability before any master, coordinate, tape, training or result command. Historical R05/R06 identities and empirical activity are not reused; engineering scale controls staging, not value. |
+| degraded_incumbent_shadow_handover | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:34:02Z | Readiness `LIVE`. Fresh Sol/max EM `01a04e5d-3523-7190-8493-6254346fb401` owns cycle `2026-08-29.8-portfolio-dish-preactivity-certificate-01`. Portfolio activated DISH to refill the terminal FSBS R02 slot because direct atomic first-handover service and tail value remain high-priority and scientifically unanswered. EM must adversarially audit the complete R06 definition and select the smallest action-changing preactivity certificate for opportunity/headroom, containing-rule competence and substrate bindability before any master, coordinate, tape, training or result command. Historical R05/R06 identities and empirical activity are not reused; engineering scale controls staging, not value. |
 | dual_epoch_receipt_survival | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Retain DEARS as the deterministic authenticated-lineage/liveness umbrella. Its B1 carrier result is reusable, while online adaptive separation was not established. Orbit, EC4G, VAP/FOLR and VSP lifecycle primitives are consolidated here as controls, not new claims. |
 | ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
 | eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
@@ -60,7 +60,8 @@ Capacity is exactly four by direct user authorization. FSBS R02 is terminal and 
 slot. Portfolio PARKS its exhausted equal-information carrier-access interface and activates DISH as
 the strongest qualified refill; VQFP, ONLGR and SGSP retain their exact WORKs. The advancing set is:
 
-- `degraded_incumbent_shadow_handover`, fresh EM task pending native creation from this authority:
+- `degraded_incumbent_shadow_handover`, EM `01a04e5d-3523-7190-8493-6254346fb401`, cycle
+  `2026-08-29.8-portfolio-dish-preactivity-certificate-01`:
   can the complete direct-UAV atomic first-handover object demonstrate action-changing opportunity,
   direct service/tail headroom and competent containing-rule separation through the smallest
   preactivity certificate, without reusing R05/R06 identity or authorizing the full empirical panel?
