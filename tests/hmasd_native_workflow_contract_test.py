@@ -424,12 +424,16 @@ def test_portfolio_is_one_current_table() -> None:
     assert owner["active_post_churn_population_flow_identification"] == "NONE"
     assert lifecycle["expressibility_gated_renewal_credit_relay"] == "PARKED"
     assert owner["expressibility_gated_renewal_credit_relay"] == "NONE"
+    assert lifecycle["commitment_residual_triggered_options"] == "PARKED"
+    assert owner["commitment_residual_triggered_options"] == "NONE"
+    assert lifecycle["dual_epoch_receipt_survival"] == "ACTIVE"
+    assert owner["dual_epoch_receipt_survival"] == "EM"
     assert lifecycle["opportunity_normalized_lease_gated_rebinding"] == "ACTIVE"
     assert owner["opportunity_normalized_lease_gated_rebinding"] == "PORTFOLIO"
     assert lifecycle["ucope"] == "PARKED"
     assert owner["ucope"] == "NONE"
     assert lifecycle["semigroup_consistent_duration_model_policy"] == "ACTIVE"
-    assert owner["semigroup_consistent_duration_model_policy"] == "PORTFOLIO"
+    assert owner["semigroup_consistent_duration_model_policy"] == "EM"
     assert lifecycle["metric_ground_transport_allocation"] == "CLOSED"
 
 
