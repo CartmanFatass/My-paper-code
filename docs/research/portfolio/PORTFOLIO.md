@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T16:34:02Z
+Updated at: 2026-08-29T16:46:13Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -58,7 +58,8 @@ how to stage a valuable question, not whether that question has value.
 
 Capacity is exactly four by direct user authorization. FSBS R02 is terminal and no longer occupies a
 slot. Portfolio PARKS its exhausted equal-information carrier-access interface and activates DISH as
-the strongest qualified refill; VQFP, ONLGR and SGSP retain their exact WORKs. The advancing set is:
+the strongest qualified refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated
+advancing set is:
 
 - `degraded_incumbent_shadow_handover`, EM `01a04e5d-3523-7190-8493-6254346fb401`, cycle
   `2026-08-29.8-portfolio-dish-preactivity-certificate-01`:
@@ -75,6 +76,17 @@ the strongest qualified refill; VQFP, ONLGR and SGSP retain their exact WORKs. T
 - `semantic_graphon_shared_policy`, EM `01a04d3a-4753-72c1-84e8-859b728f4d5c`:
   is there a bounded meaning-preserving role-sampled counterfactual with direct value beyond
   competent EDGE?
+
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T16:46:13Z`, only
+DISH is natively `active/inProgress`, completing bounded local audits after an Innovator
+`ZERO_SEND_FAILED` fact. ONLGR's EM is idle but its already-sent Convergence operation
+`5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
+`SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
+certification. VQFP and SGSP are idle `WAITING_REENTRY` tasks with zero-send transport facts and no
+live Effect. They retain their exact WORKs and allocated slots, but they are not described as
+actively advancing until their reviewed transport reentries are satisfied. Root owns the shared
+repair; Portfolio has escalated the combined model-evidence and tab-independent certification
+incident. No transport fact changes lifecycle or scientific priority.
 
 The scientific reserve order after these activations is `semigroup_consistent_duration_model_policy`,
 `commitment_residual_triggered_options`, then `dual_epoch_receipt_survival`. This is
