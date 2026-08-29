@@ -19,7 +19,18 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Current-protocol cycle status
 
-Cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01` froze a fresh result-blind audit of whether
+Cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02` is the current retained WORK. It froze one
+candidate population-and-cross-fit law, completed four result-blind research leaves and the
+mandatory fresh Pro Innovator, reached a provisional `SYNTHESIS_READY` negative, and sent the fresh
+conclusion-blind Pro Convergence exactly once. Portfolio then issued `PAUSE` while that Convergence
+operation remained `SENT_WAITING`. The current snapshot is therefore `WAITING_REENTRY`: no
+Convergence response archive or assistant identity exists, review is not resolved, and no terminal
+scientific result or lifecycle recommendation has been made. Exact science, transport Effects,
+writer state, prohibitions and reentry are preserved in
+`SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`.
+
+Historical cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01` remains terminal evidence only.
+It froze a fresh result-blind audit of whether
 one new task-local pallet/gantry authority could bind native identity, a treatment-independent
 competent order-erased foundation and direct foundation-conditioned order opportunity before any
 adapter. The cycle ended at `SCOPE_FROZEN / TERMINAL_GAP`: the mandatory Innovator transport first
@@ -43,6 +54,9 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_ICO_GATE_CYCLE_FREEZE_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_ICO_GATE_TERMINAL_GAP_20260829.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CYCLE_FREEZE_20260829.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`
 
 ## Provenance boundary
 
