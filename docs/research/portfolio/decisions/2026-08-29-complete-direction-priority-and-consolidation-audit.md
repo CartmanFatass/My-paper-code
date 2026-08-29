@@ -174,6 +174,16 @@ The two released slots were filled from Portfolio authority
 `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Both are native HMASD worktree tasks configured
 `gpt-5.6-sol` / `max`; neither is an archived-task reuse.
 
+FSBS R01 later ended `FAILED / NOT_REACHED` after a strict zero-send Pro failure. Portfolio does not
+convert that transport fact into lifecycle. The result-blind local objections nevertheless define a
+materially different next object rather than a retry: remove feature-context tie leakage with an
+exact neutral initial policy; bind record and carrier truth independently; require forced-record
+competence in both arms; hold the controller fixed; and compare authentic association against a
+competent ordinary predictive-record-index contextual-bandit null on selector and held-out team
+return. Portfolio therefore retains FSBS as ACTIVE and authorizes cycle
+`2026-08-29.8-portfolio-fsbs-neutral-acquisition-02` in the same now-idle current EM. This is a
+narrowed acquisition question, not R01 relabeling or a transport replacement.
+
 The eighteen standalone closures are summarized for provenance and noninterference in
 `docs/research/portfolio/legacy/2026-08-29-standalone-direction-closure-report.md`. That legacy report
 is historical evidence only; it is not current authority or a future workflow dependency.
