@@ -1,43 +1,57 @@
 {
   "blockers": [
-    "Root PAUSE received at 2026-08-28T23:25:24.209Z while resolving the shared distinction between temporarily unreadable/live and irrecoverably lost/no-live-Effect. No further observation is authorized until a later Root CONTROL resolves that boundary.",
-    "The immutable already-sent Innovator remains SENT_UNREADABLE: the exact tab/key are present, activeQuery is null, the legacy runtime records Response timed out, and the provider-visible prompt and full natural-completion response remain unavailable."
+    "The sole authorized B3 result process terminated, but peak RSS was recorded as zero, psutil was absent, and the launcher captured no alternative RSS metric; the frozen 4 GiB hard ceiling was neither observed nor enforced.",
+    "The one-shot result authority is consumed and the raw BOUNDED_NO_HEADROOM package is quarantined. Root directed terminal closure without Convergence, so current-cycle scientific acceptance cannot be completed."
   ],
-  "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget statement about the named B1 ONLGR-versus-RAW deterministic and RAND-IID contrasts, further limited by timing-only, fixed/global-rate, operational-support, resource, and direct-value evidence. No RAW impossibility, literal hazard, causal lease or REBIND value, arbitrary k, UAV performance, variable N, or general PPO superiority claim is available.",
-  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. The restored liveness and transport boundaries were read from exact origin/main commit 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81 without merging, rebasing, or changing the pilot baseline. The one Innovator operation remains the only sent operation. Its exact tab/key are present; native no-send observation established activeQuery null and the legacy runtime terminal record Response timed out, but the provider-visible prompt, exact prompt fidelity, and full naturally completed response remain unavailable. Pro Innovator therefore remains SENT_UNREADABLE. Root PAUSED at 2026-08-28T23:25:24.209Z before the next requested observation began, pending a shared terminal-disposition boundary. Convergence remains PENDING and no CM, successor work, or other child was launched.",
+  "claim_ceiling": "This cycle establishes only that a bounded B3 implementation and one raw terminal package exist; because the frozen 4 GiB hard ceiling was neither observed nor enforced, it establishes no valid new direct-return headroom, bounded null, exposure or tenure heterogeneity, global exposure-link advantage, or per-opportunity comparison. It cannot establish RAW representational impossibility, a literal hazard, causal lease or REBIND value, arbitrary or continuous callback periods, arbitrary k, variable population size, UAV performance or transfer, safety certification, or general PPO superiority.",
+  "completed_summary": "Fresh successor cycle 2026-08-28.10-clean-01a04a02-onlgr-successor-02 opened from exact terminal direction head d4cab98752869a1229dbc80c834f2753a860a0df without reopening either predecessor. Exact Innovator operation 5fcd1802-a82e-436e-b9fd-0fe85bc99636 is COMPLETE with one send, exact prompt fidelity, visible Pro, natural completion, and a certified 27,276-byte response archive. EM froze one evaluation-only B3 screen and transferred the exact writer contract at 9a68ebecc5dfdf2dbc45011f793f9ec05cbe5042 to CM task 01a04c00-dd35-7bc3-becd-e99f322eb217 configured gpt-5.6-sol/high. CM implemented and verified B3 at 8c876d3ceeda263363419bc4b4a25bbaff21ce46; EM accepted the returned commit only by fast-forward. The exact result command ran once to exit 0 and wrote a complete raw package, but peak_rss_bytes was zero, psutil was absent, and the launcher supplied no independent RSS metric, so the frozen 4 GiB ceiling was not observed or enforced. The raw BOUNDED_NO_HEADROOM branch is quarantined, no valid scientific observation or synthesis was reached, and Root directed no Convergence. The terminal fields are Outcome FAILED, Scientific status NOT_REACHED, Decision impact NONE, Recommendation NONE, Pro Innovator COMPLETE, and Pro Convergence PENDING; no live Effect remains.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Hold this same inbound WORK and exact Innovator operation without further polling, provider-capable calls, sends, launches, Pro archive mutation, or successor work. Do not send Convergence, launch CM, cancel, fail, infer science or lifecycle, or release capacity. Await only a later Root CONTROL resolving the shared terminal-disposition boundary.",
-  "next_discriminator": "Unchanged-checkpoint history-independent RAND-IID future-cadence and task-content separation, reconciled with operational marked-partition support, fixed/global-rate and degenerate/oracle headroom, marked voluntary activity, service-versus-action-cost decomposition, B2 rate-flexibility, and ROAD-versus-NEVER/SHAM direct value.",
-  "reentry_condition": "A later Root CONTROL resolves the shared terminal-disposition boundary between temporarily unreadable/live and irrecoverably lost/no-live-Effect for this exact Innovator operation.",
+  "next_action": "None is authorized within this terminal WORK. Portfolio may separately decide whether to dispatch fresh successor work; EM does not create or infer that action.",
+  "next_discriminator": "Only under a separately authorized fresh WORK: first prove that the launcher observes and enforces the hard peak-RSS ceiling before granting a new one-shot result Effect, then prospectively freeze a fresh headroom-and-heterogeneity screen. Do not relaunch, reuse, or calibrate from the quarantined B3 package.",
+  "reentry_condition": null,
   "refs": [
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-scope-and-grounding.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-paused-transport-fact.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator-prompt.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-scope-and-grounding.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator-prompt.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator-and-discriminator-freeze.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-em-to-cm-work.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-terminal-gap.md",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B1_RESULT.json",
     "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_RESULT.json",
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_TBVUUS_R03_RESULT_V2_SCIENTIFIC_INTAKE_20260821.md",
-    "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
-    "540337f2996778245a634151f38e4d8dc5b8254c",
-    "b4762febd12b62748d35e2b1a1dffdfb8d776180"
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_STATE_BLIND_EVENT_RATE_FLEXIBILITY_SCIENCE_CARD.md",
+    "Direction head at cycle open d4cab98752869a1229dbc80c834f2753a860a0df",
+    "Read-only Portfolio authority 8812e5ed26e57310c7f9deb3d96697be4233c54f",
+    "Public scientific anchor 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
+    "Top-level EM task 01a04a08-33a3-7292-8c21-95d17715ea2f; native model gpt-5.6-sol; effort max",
+    "Innovator transport task /root/pt_l_m_onlgr_clean02_innovator; native profile hmasd-explorer-agentify-transport; model gpt-5.6-luna; effort medium",
+    "Innovator operation 5fcd1802-a82e-436e-b9fd-0fe85bc99636; key 2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator; conversation 6a926397-6514-83e8-95b4-bed8e73ff069; tab 90b0120e-4715-436f-8dda-04bb0bc91565; visible Pro through composer_reasoning_control; exactly one send and one send action; exact prompt SHA-256 865df2c6a8643f7a41bf4bb2e02d5166bac182d3602ac23c27dc397e42146470; assistant b63e46d7-99d1-4411-bb03-075aca4e007a; NATURAL_COMPLETION_VERIFIED",
+    "Innovator response exact projection; 27,276 bytes; SHA-256 7e72a488be9287ac64dc0c380f9ee08115028a07d06dde5e7793632890761ac2; operation created/completed 1787978646076/1787980928626",
+    "CM task 01a04c00-dd35-7bc3-becd-e99f322eb217; requested and configured gpt-5.6-sol/high; terminal fields FAILED/IMPLEMENTED/NOT_OBSERVED/UNSATISFIED; exact returned commit 8c876d3ceeda263363419bc4b4a25bbaff21ce46",
+    "CM leaves: /root/cs_l_m_b3_surface hmasd-cm-scout gpt-5.6-luna/medium; /root/im_s_h_b3_screen hmasd-implementer gpt-5.6-sol/high; /root/op_l_l_b3_screen hmasd-experiment-operator gpt-5.6-luna/low",
+    "Exact acceptance suite passed 59 tests and 8 subtests; one result process SUCCEEDED exit 0 with PID/group 12156, CHILD_EXIT_0, group_quiescent true, and 38.93474160000915 seconds internal elapsed time",
+    "Raw result C:/Users/fires/.codex/worktrees/d39e/HMASD/temp/directions/opportunity_normalized_lease_gated_rebinding/exp/clean_successor_02/ONLGR_B3_PROSPECTIVE_SCREEN_RESULT.json; 527,839 bytes; SHA-256 79a24a8ddf03878ba06dba8c6df7f9cb55d2f5a3e112b5f1886a088fe8e923a5; peak_rss_bytes 0; quarantined from scientific inference",
+    "Manifest C:/Users/fires/.codex/worktrees/d39e/HMASD/temp/directions/opportunity_normalized_lease_gated_rebinding/exp/clean_successor_02/manifest.json; 2,689 bytes; SHA-256 2255243999df3045fb169041954ccce513909126616c4d80d5b3fde05f7d3f18; launcher observed_metrics empty",
+    "Forward-only writer chain d4cab98752869a1229dbc80c834f2753a860a0df -> e7955888eac2bc662f694a90f6cf3e6b14685508 -> 986f4f39a94e9cdab37797a9fc757192e750721b -> 9a68ebecc5dfdf2dbc45011f793f9ec05cbe5042 -> 335d9408d74b3a52db90022e1989d2032eed9ba6 -> 8c876d3ceeda263363419bc4b4a25bbaff21ce46; CM return accepted by fast-forward only"
   ],
   "research_cycle": {
-    "label": "2026-08-28.7-pilot-01a04a02-onlgr",
-    "opened_at": "2026-08-28T20:27:27Z",
+    "label": "2026-08-28.10-clean-01a04a02-onlgr-successor-02",
+    "opened_at": "2026-08-29T04:37:53.480273Z",
     "pro_convergence": {
+      "replacement_used": false,
       "response": null,
       "status": "PENDING"
     },
     "pro_innovator": {
-      "response": null,
-      "status": "SENT_UNREADABLE"
+      "replacement_used": false,
+      "response": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator.md",
+      "status": "COMPLETE"
     },
-    "reason": "Portfolio requested a fresh material reassessment of whether the marked lease-censored exposure-offset boundary link has decision-relevant value beyond RAW, fixed/never/sham-like regularization, timing-only behavior, and deterministic cadence leakage while retaining the completed ROAD result without inflated claims."
+    "reason": "Portfolio requested a clean current-protocol prospective screen of direct-return headroom and physical-time heterogeneity before any matched global exposure-link versus per-opportunity comparison."
   },
-  "revision": 4,
+  "revision": 14,
   "role": "EM",
-  "snapshot_state": "WAITING_REENTRY",
-  "updated_at": "2026-08-28T23:26:46.734669Z"
+  "snapshot_state": "TERMINAL_GAP",
+  "updated_at": "2026-08-29T06:14:25.218943Z"
 }
