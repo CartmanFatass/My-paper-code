@@ -1,16 +1,21 @@
 {
   "blockers": [],
-  "claim_ceiling": "This cycle can show only whether one of three prospectively frozen abstract multi-waiter, multi-step host families admits a pre-relay certificate under the stated equal-information, useful-work, competent-comparator, trust-map, scarce-evaluator, noncollinearity, allocation, utility, and source-localization contracts. A no-survivor result means only that these three canonical families did not justify association-aware relay investment; it is not a theorem over every host or credit method. A survivor would justify only one bounded exact pre-relay observation, not relay value, algorithm superiority, integration, learned-estimator or multi-update behavior, variable-population value, transfer, UAV relevance, safety, deployment, or general credit.",
-  "completed_summary": "The terminal predecessor at 62c24e0d451aaf2f6dd1fd3aa550b22d124e672b was verified COMPLETE/HANDOFF_READY with a clean worktree, and this branch fast-forwarded exactly to Portfolio authority 2cd404b6e35753ba7bb2decabf19e4aabd700038. The fresh successor-03 scope is frozen before science-bearing consultation. Exactly three causal topologies will receive one canonical analytic audit each in fixed order: overlapping contention, serial two-hop complementarity, and censored substitution. Equal information/useful work and competent GAE plus generic conditional-Q/Rao-Blackwellized comparators are mandatory. The association candidate must pass material noncollinearity, 0.10 allocation and utility, positive exact lower bounds, and 0.05 source-localized excess. No family or decision branch is favored; both fresh Pro stages are PENDING.",
+  "claim_ceiling": "This cycle can show only that the three prospectively fixed smallest balanced multi-waiter and multi-step finite topologies do or do not admit a pre-relay certificate under exact population enumeration, equal information and useful work, a competent generic conditional-Q or Rao-Blackwellized comparator, common preconditioning and trust, and the registered decision and localization margins. A no-survivor result is not a general impossibility theorem and makes no claim about learned or capacity-limited critics, finite-sample or multi-update behavior, variable populations, relay value, fixed-k superiority, transfer, UAV or continuous-control relevance, safety, deployment, or general credit.",
+  "completed_summary": "The fresh Innovator strict operation completed with one exact visible-Pro send, natural completion, and a full reread archive. The EM independently audited the fixed overlapping-contention, serial-complementarity, and censored-substitution constructions. Each has a real large ordered physical effect, but a competent generic arm given the same edge, event, transformation, routing, and work can Rao-Blackwellize the association scalar record by record. Candidate and generic population updates are exactly equal: (0,1/4) in the first two constructions and (0,1/6) in the third. Every orthogonal residual, different scarce decision, allocation/utility gain, and native-minus-severed excess is zero. No family survives and no CM or result-bearing observation is answer-changing. The preliminary bounded recommendation is PARK, subject to independent Convergence.",
   "direction": "expressibility_gated_renewal_credit_relay",
-  "milestone": "SCOPE_FROZEN",
-  "next_action": "Commit the frozen scope, direction authority, current snapshot, and owner-authored neutral Innovator prompt, then create exactly one fresh current pt leaf for a one-send visible-Pro operation in a new provider conversation and interpret its complete archive independently.",
-  "next_discriminator": "Audit the three fixed family topologies in order by exact finite enumeration or a family-wide equality/counterexample. Freeze only the first family that passes balanced support, competent comparator and work parity, at least 0.10 normalized orthogonal update residual with an actual scarce decision change, at least 0.10 native allocation and utility gains over both baselines with positive exact panel lower bounds, and at least 0.05 source-localized excess. Stop before relay and sampled training if generic conditional value matches the association target or any material gate fails.",
+  "milestone": "SYNTHESIS_READY",
+  "next_action": "Commit the complete Innovator archive, independent three-family audit, conclusion-blind evidence packet, and owner-authored Convergence prompt; then create exactly one fresh current pt leaf for one strict visible-Pro Convergence operation in a new conversation.",
+  "next_discriminator": "A scientifically distinct reentry would be a prospectively budgeted finite-data, finite-compute approximation test comparing an association-factorized critic with a competent generic critic that can represent the same solution under equal parameters, data, optimizer state, FLOPs, memory, event-key access, updates, trust geometry, and native allocation/utility evaluation. It would test approximation efficiency, not information absent from conditional Q, and requires a new Portfolio decision before execution.",
   "reentry_condition": null,
   "refs": [
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-29-four-successor-03-scope-and-grounding.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-29-four-successor-03-family-audit.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-29-four-successor-03-evidence-packet.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-29-2026-08-28.10-four-01a04a02-egrcr-successor-03-pro-innovator-prompt.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-29-2026-08-28.10-four-01a04a02-egrcr-successor-03-pro-innovator-response.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-29-2026-08-28.10-four-01a04a02-egrcr-successor-03-pro-innovator-transport-fact.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-29-2026-08-28.10-four-01a04a02-egrcr-successor-03-pro-convergence-prompt.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-clean-successor-02-handoff.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_T3_PREREQUISITE_SCIENCE_CARD.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_T3_PREREQUISITE_RESULT.json",
@@ -18,8 +23,7 @@
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_B1_RESULT.json",
     "docs/research/portfolio/PORTFOLIO.md",
     "docs/research/portfolio/decisions/2026-08-29-user-authorized-four-direction-expansion.md",
-    "62c24e0d451aaf2f6dd1fd3aa550b22d124e672b",
-    "004596e4d9b33b98ae6ff82dc49186e3b88bdcba",
+    "9b0b2648707670173c528227fc92f7ff624a3542",
     "2cd404b6e35753ba7bb2decabf19e4aabd700038",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81"
   ],
@@ -33,13 +37,13 @@
     },
     "pro_innovator": {
       "replacement_used": false,
-      "response": null,
-      "status": "PENDING"
+      "response": "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-29-2026-08-28.10-four-01a04a02-egrcr-successor-03-pro-innovator-response.md",
+      "status": "COMPLETE"
     },
     "reason": "Bounded fixed-order search across three genuinely different multi-waiter, multi-step host topologies for material association-specific decision headroom beyond competent ordinary and generic conditional-value credit before any relay or sampled training."
   },
-  "revision": 21,
+  "revision": 22,
   "role": "EM",
   "snapshot_state": "WORKING",
-  "updated_at": "2026-08-29T08:47:15.231586Z"
+  "updated_at": "2026-08-29T09:13:42.481987Z"
 }

@@ -39,11 +39,45 @@ localization stops before relay and sampled training. Full neutral scope and
 branch rules are in
 `evidence/2026-08-29-four-successor-03-scope-and-grounding.md`.
 
-At `SCOPE_FROZEN`, no family or investment branch is favored. The clean T3
+At `SCOPE_FROZEN`, no family or investment branch was favored. The clean T3
 support pass and exact allocation/utility null remain valid terminal evidence
-and an immutable failure-mode boundary. This cycle may freeze at most one new
-survivor; a bounded no-survivor result is scientifically admissible. The fresh
-strict Innovator and later conclusion-blind Convergence are both `PENDING`.
+and an immutable failure-mode boundary. This cycle could freeze at most one
+new survivor; a bounded no-survivor result was scientifically admissible.
+
+At `SYNTHESIS_READY`, the fresh strict Innovator is `COMPLETE`: one exact
+owner-authored prompt was sent in a new visible-Pro conversation, natural
+completion and prompt fidelity were verified, the full response was archived,
+and no replacement was used. Its content was independently audited rather
+than adopted.
+
+The three fixed canonical topologies all exhibit real, large, physically
+ordered source-to-waiter effects. They nevertheless fail the same earliest
+gate. Under the frozen equal-information and useful-work contract, a competent
+generic arm can condition or Rao-Blackwellize the exact scalar produced by the
+association operator from the same histories, edge keys, downstream objects,
+transformations, and routing rule. The policy-score tower property therefore
+makes candidate and generic population updates equal record by record. Their
+preconditioned updates, trust-map parameters, scarce decisions, allocation,
+utility, and native-minus-severed advantage are consequently identical.
+
+For the strongest minimal constructions, overlapping contention and serial
+two-hop complementarity each give candidate and generic source update
+`(0,1/4)` despite unit favorable/harmful physical effects; censored
+substitution gives both `(0,1/6)` while the pathwise carrier persists,
+expires, or changes identity. Every normalized orthogonal residual,
+association-minus-generic allocation/utility margin, and localized excess is
+exactly zero. All three families therefore stop before CM, relay, or sampled
+training. The complete EM audit is
+`evidence/2026-08-29-four-successor-03-family-audit.md`; the conclusion-blind
+review packet is
+`evidence/2026-08-29-four-successor-03-evidence-packet.md`.
+
+The preliminary bounded synthesis is no full survivor and no answer-changing
+executable observation. The preliminary recommendation is `PARK`, subject to
+the still-required fresh independent Convergence review. A distinct future
+finite-data, finite-compute factorization test could examine approximation
+efficiency, but it cannot repair this exact-population cycle or support relay.
+The fresh Convergence operation remains `PENDING`.
 
 ## Predecessor clean successor-02 cycle
 
