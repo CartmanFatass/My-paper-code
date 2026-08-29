@@ -57,6 +57,15 @@ Orbit, EC4G, VAP/FOLR and VSP labels supply controls and provenance only.
   correctness as adaptive value.
 - Exact native EM task IDs and live readiness are recorded only after successful dispatch.
 
+## Dispatch facts
+
+- CRTO EM: `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39`, configured
+  `gpt-5.6-sol/max`, native worktree, cycle
+  `2026-08-29.8-portfolio-crto-probe-cut-01`.
+- DEARS EM: `01a04e94-b3e0-77e2-ae27-6b29df5dad1a`, configured
+  `gpt-5.6-sol/max`, native worktree, cycle
+  `2026-08-29.8-portfolio-dears-lineage-value-gate-01`.
+
 ## Provenance
 
 - SCDMP terminal chain:
