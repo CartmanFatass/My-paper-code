@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T17:21:12Z
+Updated at: 2026-08-29T17:25:41Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -24,10 +24,10 @@ how to stage a valuable question, not whether that question has value.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The censored-flow draft remains unaccepted and containing public recurrence may absorb the hand-built order code. Re-open only after constructive and adversarial review identifies value beyond both generic and containing recurrence. |
 | acvc | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. The learned joint veto lost to deterministic exact matching. Retain authenticated binding as a control in DEARS/RCLE; no independent adaptive-algorithm question remains. |
-| commitment_residual_triggered_options | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Preserve the sharp representation-versus-optimization question. The only admissible next step is the frozen 1,000-to-10,000-update residual probe under unchanged data/order/optimizer/thresholds; no policy run before both representation gates pass. |
+| commitment_residual_triggered_options | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:25:41Z | Readiness `DISPATCH-PENDING`. Portfolio consumes the terminal SCDMP slot and selects CRTO as the strongest complementary refill. The fresh question extends a copy of the exact seed-2101 probe checkpoint from 1,000 to 10,000 updates on one continuous optimizer trajectory under unchanged fit rows, split, model, order, optimizer and thresholds. The fixed 10,000 endpoint must meet NMSE `<=0.01` and sign accuracy `>=0.95`; failure stops before policy activity. Passing only identifies an optimization-horizon explanation and requires a later new all-seed confirmation object. A later task ID makes this `LIVE`. |
 | covariance_calibrated_information_clock | PARKED | MEDIUM | NONE | 2026-08-29T15:19:56Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal WORK `2026-08-28.10-four-01a04a02-ccic-successor-02`: valid bounded synthesis found that a legal arity-three typed-wedge statistic exactly absorbs the apparent covariance information, while mandatory Convergence failed only at transport. PARK is a comparative scientific allocation: re-open only with a new host where the legal wedge fails but covariance changes the native action, or as a separately frozen finite-work inductive-efficiency question against an arity-three-capable invariant learner. |
 | degraded_incumbent_shadow_handover | REGISTERED | HIGH | NONE | 2026-08-29T16:57:57Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal preactivity-certificate WORK `2026-08-29.8-portfolio-dish-preactivity-certificate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Its mandatory Pro stage was `ZERO_SEND_FAILED` and supplies no scientific polarity. Two local audits found no proper subset, symmetry, static timing, containment-only or monotone-envelope certificate sufficient for the full R06 branch family; they did not synthesize direct-handover value. Preserve the unanswered high-value full object. Reentry requires eligible independent consultation (or exact waiver), a named <=8-core substrate/process design with result-blind concurrency/overhead evidence, a current-byte engineering map and fresh proportionality judgment. Cost and transport change staging only; neither PARKS or CLOSES DISH. |
-| dual_epoch_receipt_survival | REGISTERED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `GATE-READY`. Retain DEARS as the deterministic authenticated-lineage/liveness umbrella. Its B1 carrier result is reusable, while online adaptive separation was not established. Orbit, EC4G, VAP/FOLR and VSP lifecycle primitives are consolidated here as controls, not new claims. |
+| dual_epoch_receipt_survival | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:25:41Z | Readiness `DISPATCH-PENDING`. Portfolio consumes the terminal SGSP slot and selects the authenticated-lineage/liveness family as the second complementary refill. Positive B1 verifier evidence is reusable, while the typed/reset/raw online successor was negative; the fresh EM must therefore freeze a decision-bearing question that distinguishes deterministic fail-closed lineage sufficiency from finite-budget adaptive value against a competent same-information containing null. Closed Orbit/EC4G/VAP-FOLR/VSP labels contribute controls only, never positive claims. A later task ID makes this `LIVE`. |
 | ec4g_r1 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Content, physical-calibration and selectivity gates failed. Portfolio closes standalone EC4G and retains its receipt-content controls as DEARS provenance; no scientific polarity transfers. |
 | eociv_lite | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `OBJECT-REQUIRED`. Payload value at a real receiver opportunity remains scientifically distinct, but no fidelity-valid active episode population is identified. Re-open only with a support-neutral host proving nonzero opportunity prevalence, two-sided action-value headroom and payload sensitivity before learning. |
 | event_triggered_budgeted_cooperative_renewal | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Coordinated learned renewal and the stage oracle both lost to fixed-4. Fixed-k and common-rate controls are retained inside ONLGR/SCDMP; the same EBCR object is exhausted. |
@@ -43,8 +43,8 @@ how to stage a valuable question, not whether that question has value.
 | roster_consistent_latent_exploration | PARKED | MEDIUM | NONE | 2026-08-29T15:22:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal public-containment WORK `2026-08-29.8-successor-01a04a02-rcle-public-containment-03`. Its transport failure supplies no science, but valid prior CPC/containing-controller evidence already leaves no independent public physical-persistence value when complete stochastic CARRY is a member of competent REPLAN. Re-open only as a materially distinct finite-budget, private-state, partial-observation, changed-objective or decentralized-control question with direct recovery value; do not build another public containing host. |
 | roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
-| semantic_graphon_shared_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:17:40Z | Readiness `WAITING-REENTRY`. Retain the exact short-gate WORK and its frozen conclusion-blind Convergence prompt. Innovator is COMPLETE and Convergence is `ZERO_SEND_FAILED`. Direct page evidence now establishes the eligible composer-adjacent visible `Pro` product control while excluding the profile label; the strict Agentify backend nevertheless applies the withdrawn model-evidence gate before Send. This transport defect changes no provisional science, lifecycle, priority or capacity. Reentry is an independently reviewed backend repair plus exact operation-budget authority for this same assignment. |
-| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:02:17Z | Readiness `LIVE`. Fresh Sol/max EM `01a04e78-82ba-7823-b012-c5ff34821aae` owns cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01`. Historical evidence places UAV order opportunity and a competent order-erased foundation in separate objects, so neither may satisfy the other's gate. The fresh EM must determine whether one meaning-complete native task can prospectively bind `I_native`, establish a competent order-erased foundation `C_native`, and expose direct foundation-conditioned order opportunity `O_native` before any adapter, source, identity, training or result Effect. Absence of such a coherent object is a valid bounded scientific answer; engineering scale cannot erase a surviving object. |
+| semantic_graphon_shared_policy | REGISTERED | HIGH | NONE | 2026-08-29T17:25:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal short-gate WORK `SGSP-RG2Z-RSCF-SHORT-GATE-20260829-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Innovator completed, but mandatory Convergence exhausted its replacement boundary with `SENT_INPUT_MISMATCH`; this supplies no scientific polarity. The strongest provisional observation is that no identified meaning-preserving discriminator fits the complete short-gate ceiling, while the smallest outcome-bearing learned projection-contact arm remains roughly 60-250 CPU core-hours. Preserve SGSP's high-value relational question without purchasing or closing it. Reentry requires the explicit user waiver/override named by the terminal result or a materially new Portfolio question; cost and transport alone cannot PARK or CLOSE it. |
+| semigroup_consistent_duration_model_policy | REGISTERED | HIGH | NONE | 2026-08-29T17:25:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal native-I/C/O WORK `2026-08-29.8-portfolio-scdmp-native-ico-gate-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Innovator primary and sole replacement were isolated `SENT_INPUT_MISMATCH`; no accepted synthesis or lifecycle polarity exists. Preserve the preliminary order-sensitive candidate and the decisive local objection that the same-tape select-and-evaluate opportunity estimator can appear positive when true expected order-conditioned action value is zero. A future materially revised question must prospectively specify one sampling/estimation law that resolves both opportunity-state ambiguity and selection bias within the one-correction bound, after eligible consultation or exact waiver; do not reuse the exhausted prompt or operations. |
 | ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
@@ -56,16 +56,22 @@ how to stage a valuable question, not whether that question has value.
 | vsp_06_mssr | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Equal-information generic compilation reproduced admissible histories. Portfolio closes standalone VSP-06 and retains the dependency DAG and compiler null as DEARS/RCLE controls. |
 | vsp_c1 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The fourth-corner statistic is a clean local gate, but its authenticated four-clone production host is absent. Portfolio closes standalone VSP-C1 and retains the statistic and negative census for FSBS. |
 
-Capacity is exactly four by direct user authorization. DISH's preactivity-certificate WORK is
-terminal and no longer occupies a slot. Portfolio retains DISH as a high-priority unanswered
-direction with an exact reentry, and activates SCDMP as the strongest qualified complementary
-refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated advancing set is:
+Capacity is exactly four by direct user authorization. SCDMP and SGSP are now terminal and release
+their slots immediately. Portfolio retains both as high-priority unanswered directions with exact
+reentries, and independently selects CRTO and DEARS as complementary refills; VQFP and ONLGR retain
+their exact WORKs. The allocated advancing set is:
 
-- `semigroup_consistent_duration_model_policy`, EM `01a04e78-82ba-7823-b012-c5ff34821aae`, cycle
-  `2026-08-29.8-portfolio-scdmp-native-ico-gate-01`: can one prospectively complete native target bind its own task law, competent
-  order-erased foundation and direct foundation-conditioned order opportunity before any
-  order-aware adapter or empirical activity, without importing either historical object's identity,
-  gate or result?
+- `commitment_residual_triggered_options`, fresh Sol/max EM dispatch pending, cycle
+  `2026-08-29.8-portfolio-crto-probe-cut-01`: does the exact residual representation fail even after
+  continuing a copy of seed 2101's exact optimizer trajectory from 1,000 to 10,000 updates, or was
+  the prior gate only optimization-horizon limited? Every fixed 1,000-update boundary is diagnostic;
+  the unchanged thresholds apply to the fixed 10,000 endpoint. This probe cannot certify v4 or
+  authorize policy activity; a passing endpoint only chooses a later fresh all-seed confirmation.
+- `dual_epoch_receipt_survival`, fresh Sol/max EM dispatch pending, cycle
+  `2026-08-29.8-portfolio-dears-lineage-value-gate-01`: can deterministic authenticated-lineage
+  sufficiency be separated from finite-budget adaptive value on a genuinely decision-bearing
+  online object against a competent same-information containing null, without importing positive
+  claims from consolidated lifecycle labels?
 - `voronoi_quadrature_field_policy`, EM `01a04e22-2f5a-7423-8b60-95d35d150109`, cycle
   `2026-08-29.8-portfolio-vqfp-proof-gate-01`:
   can a proof-sized exact variable-N field object retain native allocation/return headroom over
@@ -73,25 +79,22 @@ refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated advancing s
 - `opportunity_normalized_lease_gated_rebinding`, EM `01a04a08-33a3-7292-8c21-95d17715ea2f`:
   on the frozen non-divisible clock cell, does any link-specific return survive common executed-rate
   and age-conditioned ceilings?
-- `semantic_graphon_shared_policy`, EM `01a04d3a-4753-72c1-84e8-859b728f4d5c`:
-  is there a bounded meaning-preserving role-sampled counterfactual with direct value beyond
-  competent EDGE?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:21:12Z`, SCDMP
-EM `01a04e78-82ba-7823-b012-c5ff34821aae` is natively active. ONLGR's EM is idle but its
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:25:41Z`, CRTO
+and DEARS are selected but not yet natively dispatched and therefore are not counted as live.
+ONLGR's EM is idle but its
 already-sent Convergence operation
 `5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
 `SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
-certification. VQFP and SGSP are idle `WAITING_REENTRY` tasks with zero-send transport facts and no
-live Effect; VQFP's current reentry is safe preservation/clearance of an unattributed stale composer
-draft, while SGSP awaits the reviewed model-evidence backend repair. They retain their exact WORKs and allocated slots, but they are not described as
-actively advancing until their reviewed transport reentries are satisfied. Root owns the shared
-repair; Portfolio has escalated the combined model-evidence and tab-independent certification
-incident. No transport fact changes lifecycle or scientific priority.
+certification. VQFP is idle `WAITING_REENTRY` with zero-send transport facts and no live Effect; its
+current reentry is safe preservation/clearance of an unattributed stale composer draft. SCDMP and
+SGSP have terminalized and no longer occupy capacity. Root owns the shared repair; Portfolio has
+escalated the combined model-evidence and tab-independent certification incident. No transport fact
+changes lifecycle or scientific priority.
 
-The scientific reserve order after these activations is `commitment_residual_triggered_options`,
-then `dual_epoch_receipt_survival`; DISH retains a separate high-priority exact reentry rather than
-becoming a cheaper substitute. This is
+The scientific reserve order after these activations begins with DISH's separate high-priority exact
+reentry, then the strongest admissible materially new direction identified by the next comparison;
+SCDMP and SGSP retain high-priority reentries rather than becoming cheaper substitutes. This is
 an opportunity order, not a command to start the largest package: Portfolio must author the smallest
 result-blind gate that can change investment while preserving the high-value question. VQFP and DISH
 remain ahead scientifically even while their execution substrates are less ready.
