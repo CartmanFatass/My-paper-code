@@ -19,7 +19,7 @@ all other roles              -> no Advisor
 
 Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
 `task.agentAdvisor` entries opt in the two Implementer leaves with
-`opencode-go/glm-5.3:high`; therefore only `hmasd-implementer` and
+`xai-oauth/grok-4.6:high`; therefore only `hmasd-implementer` and
 `hmasd-implementer-terra` retain an engineering Advisor. Root, EM, CM,
 BrowserTransport (`hmasd-browser-transport`), Reviewer, Verifier,
 Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment

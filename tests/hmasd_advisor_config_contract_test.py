@@ -6,7 +6,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_CONFIG = """modelRoles:
-  advisor: opencode-go/glm-5.3:high
+  advisor: xai-oauth/grok-4.6:high
 
 advisor:
   enabled: false
@@ -25,8 +25,8 @@ task:
   enableEffort: false
   enableLsp: true
   agentAdvisor:
-    hmasd-implementer: opencode-go/glm-5.3:high
-    hmasd-implementer-terra: opencode-go/glm-5.3:high
+    hmasd-implementer: xai-oauth/grok-4.6:high
+    hmasd-implementer-terra: xai-oauth/grok-4.6:high
   disabledAgents:
     - scout
     - reviewer
@@ -36,8 +36,8 @@ task:
 """
 
 EXPECTED_ADVISORS = {
-    "hmasd-implementer": "opencode-go/glm-5.3:high",
-    "hmasd-implementer-terra": "opencode-go/glm-5.3:high",
+    "hmasd-implementer": "xai-oauth/grok-4.6:high",
+    "hmasd-implementer-terra": "xai-oauth/grok-4.6:high",
 }
 
 

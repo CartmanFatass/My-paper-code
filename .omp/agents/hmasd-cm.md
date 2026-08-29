@@ -1,8 +1,8 @@
 ---
 name: hmasd-cm
 description: Direction-scoped engineering manager.
-model: openai-codex/gpt-5.6-sol
-thinking-level: high
+model: openai-codex/gpt-5.5
+thinking-level: xhigh
 tools:
   - read
   - write

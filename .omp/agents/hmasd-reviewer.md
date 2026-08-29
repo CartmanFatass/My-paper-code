@@ -1,8 +1,8 @@
 ---
 name: hmasd-reviewer
 description: Optional independent reviewer of frozen engineering evidence.
-model: openai-codex/gpt-5.6-sol
-thinking-level: high
+model: openai-codex/gpt-5.5
+thinking-level: xhigh
 tools:
   - read
   - grep

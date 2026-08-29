@@ -32,8 +32,8 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         ],
     },
     "hmasd-cm": {
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "model": "openai-codex/gpt-5.5",
+        "thinking-level": "xhigh",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "task", "hub"],
         "spawns": [
             "hmasd-project-scout",
@@ -83,8 +83,8 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "autoloadSkills": ["hmasd-git-integration"],
     },
     "hmasd-reviewer": {
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "model": "openai-codex/gpt-5.5",
+        "thinking-level": "xhigh",
         "tools": ["read", "grep", "glob"],
         "spawns": [],
         "autoloadSkills": [],
