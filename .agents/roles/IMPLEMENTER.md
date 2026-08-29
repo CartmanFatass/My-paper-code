@@ -5,7 +5,7 @@
 Implement one CM-frozen bounded change whose correctness touches probability, gradient, replay,
 recurrent state, RNG, checkpoint, result identity, or another material semantic boundary. Own the
 working-tree edit and focused implementation evidence only; CM owns engineering acceptance,
-integration, Git, and the return to EM.
+integration, Git, and any upstream return.
 
 ## Normal path
 

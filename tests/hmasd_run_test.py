@@ -732,7 +732,24 @@ def test_prepare_refuses_output_root_not_owned_by_direction_and_run(
 def test_direction_digest_claim_blocks_duplicate_launch_across_run_roots(
     monkeypatch, tmp_path: Path
 ) -> None:
-    command = [sys.executable, "-c", "import time; time.sleep(1.0)"]
+    started = tmp_path / "first-process-started"
+    release = tmp_path / "release-first-process"
+    command = [
+        sys.executable,
+        "-c",
+        (
+            "import pathlib, sys, time\n"
+            "started = pathlib.Path(sys.argv[1])\n"
+            "release = pathlib.Path(sys.argv[2])\n"
+            "started.write_text('started', encoding='utf-8')\n"
+            "deadline = time.monotonic() + 5.0\n"
+            "while not release.exists() and time.monotonic() < deadline:\n"
+            "    time.sleep(0.01)\n"
+            "raise SystemExit(0 if release.exists() else 2)\n"
+        ),
+        str(started),
+        str(release),
+    ]
     first = _prepare(monkeypatch, tmp_path, *command, run_id="run-one")
     second = _prepare(monkeypatch, tmp_path, *command, run_id="run-two")
     context = multiprocessing.get_context("spawn" if os.name == "nt" else "fork")
@@ -741,18 +758,29 @@ def test_direction_digest_claim_blocks_duplicate_launch_across_run_roots(
     process.start()
     deadline = time.monotonic() + 5.0
     while time.monotonic() < deadline:
-        observed = json.loads(first.read_text(encoding="utf-8"))
-        if observed["status"] == "RUNNING" and observed["process"]["pid"] is not None:
+        # The launch gate releases the target only after process identity is
+        # durable. A target-owned sentinel therefore synchronizes this test
+        # without opening manifest.json while the writer atomically replaces it.
+        if started.exists():
             break
         time.sleep(0.01)
     else:
-        process.terminate()
+        release.write_text("release", encoding="utf-8")
         process.join(timeout=5)
+        if process.is_alive():
+            process.terminate()
+            process.join(timeout=5)
         raise AssertionError("first run never persisted its process identity")
 
-    assert hmasd_run.main(["execute", "--manifest", str(second)]) == 6
-    assert json.loads(second.read_text(encoding="utf-8"))["status"] == "PREPARED"
-    process.join(timeout=10)
+    try:
+        assert hmasd_run.main(["execute", "--manifest", str(second)]) == 6
+        assert json.loads(second.read_text(encoding="utf-8"))["status"] == "PREPARED"
+    finally:
+        release.write_text("release", encoding="utf-8")
+        process.join(timeout=10)
+        if process.is_alive():
+            process.terminate()
+            process.join(timeout=5)
     assert not process.is_alive()
     assert results.get(timeout=1) == 0
 

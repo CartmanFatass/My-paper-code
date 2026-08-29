@@ -174,13 +174,18 @@ def test_pro_transport_uses_exact_file_backed_strict_review() -> None:
     manual = (ROOT / "docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md").read_text(
         encoding="utf-8"
     )
+    em = (ROOT / ".agents/skills/hmasd-em-task/SKILL.md").read_text(encoding="utf-8")
     instructions = " ".join("\n".join((role, skill, manual)).split())
     for required in (
-        "agentify_review_query", "GPT-5.6 Pro", "GitHub connector",
-        "origin-reachable commit", "scientific reference", "not a request for general code review",
+        "agentify_review_query", "GPT-5.6 Pro",
         "promptPath", "verifyExisting", "natural completion",
     ):
         assert required in instructions
+    for owner_prompt_requirement in (
+        "GitHub connector", "origin-reachable", "exact commit",
+        "scientific reference", "never as a general code-review assignment",
+    ):
+        assert owner_prompt_requirement in em
     for state in (
         "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
         "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE",
@@ -190,23 +195,23 @@ def test_pro_transport_uses_exact_file_backed_strict_review() -> None:
     assert "exact frozen prompt file" in instructions
     assert "must not compose" in instructions
     assert "call `agentify_review_query` exactly once" in instructions
-    assert "valid unwaived assignment is not silently left unsent" in instructions
+    assert "When the view and model are ready and no waiver applies" in instructions
     assert "Never make a second send-capable call" in instructions
-    assert "Do not block on the first stale view" in instructions
-    assert "do not loop or follow a fixed UI checklist" in instructions
+    assert "do not loop through a fixed UI ritual" in instructions
     assert "ordinary `agentify_query`" in instructions
     assert "observation bound" in instructions
     assert "stop condition" in instructions
     for conversation_fact in (
         "tab is not a conversation",
-        "exact visible label `Pro`",
+        "reasoning-control label is exactly `Pro`",
         "up to 45 minutes",
         "responsePath",
         "new provider conversation",
-        "same material cycle",
-        "late content",
+        "Late content",
+        "cannot authorize a replacement",
     ):
         assert conversation_fact in instructions
+    assert "same material cycle" not in instructions
     assert ".agents/skills/hmasd-agentify-transport/SKILL.md" in role
     assert ".agents/roles/PRO_TRANSPORT.md" in profile
 

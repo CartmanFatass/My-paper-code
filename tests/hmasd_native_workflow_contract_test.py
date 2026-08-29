@@ -45,7 +45,7 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
     protocol_flat = _flat(protocol)
     agents = _read("AGENTS.md")
-    context = _read("CONTEXT.md")
+    principles = _read("docs/project/ALGORITHM_PRINCIPLES.md")
     assert protocol.startswith("# HMASD native Codex workflow\n\nWorkflow revision: ")
     for marker in ("[WORK]", "[RESULT]", "[CONTROL]"):
         assert marker in protocol
@@ -64,10 +64,22 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
         "branch 必须 fast-forward 到该 commit",
         "不得 cherry-pick、rebase 或重写历史",
         "native-worktree 交接只使用本地 exact commit",
+        "`CM/shared → Root` 使用同样的单 writer、fast-forward 交接",
+        "terminal Reviewer observation",
+        "intended target 仍可 fast-forward",
+        "创建替代 CM",
         "不需要 push",
         "向当前 `Return task` 返回",
         "不得越过 requester 直接联系 Root",
         "一个 successor 必须等当前 WORK terminal",
+        "先读取同一 recipient history",
+        "不得因 API 超时、UI 未刷新",
+        "本地未知状态盲目重复 WORK/CONTROL",
+        "idle、stopped、completed 或 not-loaded",
+        "只补同一 assignment 的 RESULT",
+        "requester 直接消费，不要求第二份",
+        "explicit non-goals",
+        "intended remote ref",
     ):
         assert marker in protocol_flat
     assert "Clerk" not in protocol
@@ -87,6 +99,7 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
     assert "sole cross-task transport authority" in agents
     assert "公共字段含义、caller" in protocol_flat
     assert "这里不复制这些内容" in protocol_flat
+    assert "top-level session skill" in protocol_flat
     for local_recipe in (
         "agentify_review_query", "Experiment Operator", "current snapshot",
         "## 8. External and result Effects", "## 9. Milestone memory and recovery",
@@ -94,7 +107,7 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
     ):
         assert local_recipe not in protocol
     active_role_surfaces = "\n".join(
-        [agents, protocol, context]
+        [agents, protocol]
         + [
             _read(f".agents/skills/{name}/SKILL.md")
             for name in (
@@ -110,6 +123,15 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
     assert "assignment-from-brief" not in active_role_surfaces
     assert "context SHA" not in active_role_surfaces
     assert "Return task" in active_role_surfaces
+    assert not (ROOT / "CONTEXT.md").exists()
+    for stale in (
+        "docs/project/CURRENT_WORK.md",
+        ".agents/roles/*.md",
+        "External Pro owns",
+        "Project Manager owns",
+    ):
+        assert stale not in principles
+    assert "hmasd-*-task" in principles
     assert not (ROOT / "docs/project/WORKFLOW_GOALS_AND_ACCEPTANCE.md").exists()
     assert not (
         ROOT / "docs/project/EM_CM_MILESTONE_AND_LEAF_SIMPLIFICATION_WORKING_DRAFT.md"
@@ -168,7 +190,7 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
     }
     owned = {
         "Root": ("Root status:", "Integration status:"),
-        "Portfolio": ("Portfolio action:", "Capacity action:"),
+        "Portfolio": ("Direction actions:", "Capacity action:"),
         "EM": ("Scientific status:", "Decision impact:", "Recommendation:", "Pro Innovator:", "Pro Convergence:"),
         "CM": ("Engineering status:", "Observation status:", "Verification status:", "Commit:"),
     }
@@ -181,20 +203,24 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         "`NO_MATERIAL_INSIGHT` means the scientific acceptance was completed",
         "`NOT_REACHED` means no valid scientific synthesis was reached",
         "`BLOCKED` means the engineering acceptance was not satisfied",
-        "`NOT_OBSERVED` means no valid observation was obtained",
+        "`NOT_OBSERVED` means the current bounded acquisition ended without one",
+        "`UNSATISFIED` means the current bounded verification concluded against the candidate",
         "`PARK` retains the direction without active investment",
+        "`ACTIVE` requires a current executable scientific question",
+        "`PARKED` has no live direction WORK",
+        "`CLOSED` has a terminal investment reason",
         "`INCOMPLETE` lacks a premise required for judgment",
+        "current assignment stage, not merely the last failed attempt",
     ):
         assert meaning in agents_flat
     assert "Root status:" not in protocol
-    assert "Portfolio action:" not in protocol
+    assert "Direction actions:" not in protocol
+    assert "Portfolio action:" not in agents
     assert "Scientific status:" not in protocol
     assert "Engineering status:" not in protocol
     for role, skill in skills.items():
         assert all(field not in skill for fields in owned.values() for field in fields)
         assert "Outcome:" not in skill
-        for leaked_routing in ("exact idle EM", "direction CM", "Return task", "top-level requester"):
-            assert leaked_routing not in skill
 
     mechanical = (
         "browser tab",
@@ -202,13 +228,14 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         "responsePath",
         "agentify_review_query",
     )
-    em = _read(".agents/roles/EM.md")
-    cm = _read(".agents/roles/CM.md")
+    em = _read(".agents/skills/hmasd-em-task/SKILL.md")
+    cm = _read(".agents/skills/hmasd-cm-task/SKILL.md")
     for detail in mechanical:
         assert detail not in protocol
         assert detail not in em
         assert detail not in cm
-    assert "AGENTIFY_TRANSPORT_INSTRUCTIONS.md" in protocol
+    assert "`hmasd-agentify-transport` skill" in protocol
+    assert "仅记录当前工具参数面" in protocol
     assert "existing `pt` transport assignment" in em
     assert "existing `et` assignment" in cm
 
@@ -237,13 +264,13 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
 
 
 def test_external_pro_prompt_is_natural_language_not_control_serialization() -> None:
-    em = _read(".agents/roles/EM.md")
-    transport = _read("docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md")
+    em = _read(".agents/skills/hmasd-em-task/SKILL.md")
+    transport = _read(".agents/skills/hmasd-agentify-transport/SKILL.md")
     normalized = _flat(f"{em}\n{transport}")
     assert "cohesive natural-language `INNOVATOR` prompt" in normalized
-    assert "must not paste a `[WORK]`, `[RESULT]`" in normalized
+    assert "Do not add a WORK/RESULT packet" in normalized
     assert "EM owns the complete Pro prompt" in normalized
-    assert "must not compose, summarize, append, truncate" in normalized
+    assert "must not compose, shorten, summarize, append, truncate" in normalized
 
     for profile in (ROOT / ".codex/agents").glob("*.toml"):
         assert "<code>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
@@ -264,9 +291,9 @@ def test_transport_facts_cannot_cancel_or_park_a_direction() -> None:
 
 def test_nonterminal_work_cannot_leave_the_owner_loop() -> None:
     agents = _flat(_read("AGENTS.md"))
-    portfolio = _flat(_read(".agents/roles/PORTFOLIO.md"))
-    em = _flat(_read(".agents/roles/EM.md"))
-    cm = _flat(_read(".agents/roles/CM.md"))
+    portfolio = _flat(_read(".agents/skills/hmasd-portfolio-task/SKILL.md"))
+    em = _flat(_read(".agents/skills/hmasd-em-task/SKILL.md"))
+    cm = _flat(_read(".agents/skills/hmasd-cm-task/SKILL.md"))
     operator = _flat(_read(".agents/roles/EXPERIMENT_OPERATOR.md"))
 
     for marker in (
@@ -405,8 +432,8 @@ def test_research_navigation_does_not_duplicate_portfolio_state() -> None:
 
 def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
-    cycle = _flat(_read(".agents/roles/EM.md"))
-    transport = _flat(_read("docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md"))
+    cycle = _flat(_read(".agents/skills/hmasd-em-task/SKILL.md"))
+    transport = _flat(_read(".agents/skills/hmasd-agentify-transport/SKILL.md"))
     assert cycle.index("`INNOVATOR`") < cycle.index("send a meaning-complete WORK to CM")
     assert cycle.index("send a meaning-complete WORK to CM") < cycle.index("`SYNTHESIS_READY`")
     assert cycle.index("`SYNTHESIS_READY`") < cycle.index("`CONVERGENCE`")
@@ -415,9 +442,8 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     assert "writes one cohesive natural-language `INNOVATOR` prompt" in cycle
     assert cycle.count("user explicitly waived that exact unsent operation") == 2
     assert "leaf follows the explicit Agentify transport skill and sends it once" in cycle
-    assert "never authorizes another Send" in transport
-    assert "same frozen prompt may then receive at most one replacement" in transport
-
+    assert "cannot authorize a replacement" in transport
+    assert "Never make a second send-capable call for the same operation" in transport
     fanout = _flat(protocol.split("## 5. Portfolio fan-out and join", 1)[1].split(
         "## 6. Adjacent scientific content", 1
     )[0])
@@ -425,13 +451,54 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     assert "逐一转达" in fanout
     assert "不得为了释放 join 自行取消" in fanout
     assert "不写本地 batch、queue 或 task registry" in fanout
+    assert "terminal EM RESULT 已结束该 join leg" in fanout
+    assert "下游建议不得自动继承" in fanout
+
+    portfolio_role = _flat(_read(".agents/skills/hmasd-portfolio-task/SKILL.md"))
+    for required in (
+        "technical or measurement gap",
+        "A downstream repair proposal is a candidate, not an inherited reentry",
+        "current executable decision question",
+        "exact user-controlled reentry",
+        "never leave live science operationally starved",
+        "Portfolio draft edits are outputs, not authority",
+    ):
+        assert required in portfolio_role
+
+    portfolio_skill = _flat(_read(".agents/skills/hmasd-portfolio-task/SKILL.md")).lower()
+    for required in (
+        "decision frame",
+        "user decision and fixed set",
+        "live investments",
+        "evidence boundary",
+        "counterfactual allocation",
+        "next observation",
+        "terminal technical or measurement gap",
+        "repair proposal is a candidate, not an inherited reentry",
+        "draft edits are outputs, not authority",
+    ):
+        assert required in portfolio_skill
 
     em_skill = _read(".agents/skills/hmasd-em-task/SKILL.md")
-    assert ".agents/roles/EM.md" in em_skill
-    for global_cycle_detail in (
-        "Mode: INNOVATOR", "Mode: CONVERGENCE", "SYNTHESIS_READY", "REVIEW_RESOLVED",
+    assert ".agents/roles/EM.md" not in em_skill
+    for role_local_cycle_detail in (
+        "`INNOVATOR`", "`CONVERGENCE`", "`SYNTHESIS_READY`", "`REVIEW_RESOLVED`",
     ):
-        assert global_cycle_detail not in em_skill
+        assert role_local_cycle_detail in em_skill
+
+
+def test_historical_evidence_cannot_supply_current_workflow_instructions() -> None:
+    agents = _flat(_read("AGENTS.md"))
+    direction = _read(
+        "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md"
+    )
+    packet = _read(
+        "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/"
+        "2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-em-to-cm-work.md"
+    )
+    assert "inside cited historical evidence are provenance only" in agents
+    assert ".agents/roles/CM.md" not in direction
+    assert ".agents/roles/CM.md" in packet
 
 
 def test_sensitive_direction_science_boundaries_survive_metadata_cleanup() -> None:

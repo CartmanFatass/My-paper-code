@@ -10,14 +10,15 @@ scientific interpretation remains with EM.
 
 1. Confirm the assignment supplies one exact frozen prompt file and the inputs required by the
    explicit Agentify transport skill.
-2. Apply that skill and its single mechanics reference exactly. Do not add, remove, or reinterpret
+2. Apply that complete transport skill exactly. Consult its optional tool-argument reference only
+   for the current callable surface. Do not add, remove, or reinterpret
    any prompt content or convert the consultation into general code review.
 3. Return only the transport facts produced by that procedure; EM retains every scientific
    judgment.
 
 ## Bounded recovery
 
-Use only the mechanics reference's bounded recovery and return mapping. Do not invent another UI or
+Use only the transport skill's bounded recovery and return mapping. Do not invent another UI or
 readiness procedure, local retry count, or resend path.
 
 ## Stop and return

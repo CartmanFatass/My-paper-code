@@ -1,10 +1,10 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.10
+Workflow revision: 2026-08-29.3
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
-`.agents/roles/<ROLE>.md` 定义。这里不复制这些内容。
+top-level session skill 定义。这里不复制这些内容。
 
 HMASD 直接使用 Codex Desktop 可见的 task ID、history、status、create/send/read/wait、archive
 和 native worktree。项目不为这些产品事实创建第二套身份、收件箱、注册表、回执、重试器或
@@ -81,6 +81,10 @@ Requester 执行下列最小动作：
 5. 旧 archived task 不复用。若出现两个 current 候选，停止投递并让用户选择；不从本地文件
    重建 target identity。
 
+若 native send 的返回不能证明消息是否进入 recipient history，requester 先读取同一 recipient
+history；看到完整消息即视为已投递，确认不存在才允许发送一次。不得因 API 超时、UI 未刷新或
+本地未知状态盲目重复 WORK/CONTROL。
+
 每个 target 同时最多持有一个 unfinished inbound WORK，且其 `Return task` 在 terminal 前不变。
 一个 successor 必须等当前 WORK terminal 并释放 target 后，才作为新的完整 WORK 投递。
 
@@ -91,8 +95,9 @@ Requester 执行下列最小动作：
 - `FAILED` 不自动 retry。需要修复后重做时，由 requester 在旧 WORK terminal 后创建新的
   WORK。新 WORK 本身不是 retry authority。
 - 任何 nonterminal Effect 都留在同一个 WORK 并由既有 owner/assignment 继续；观察困难或等待
-  超时不结束 WORK、不释放 target。External transport 的具体恢复和观察动作只由
-  `docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md` 定义。
+  超时不结束 WORK、不释放 target。External transport 的完整角色方法只由显式
+  `hmasd-agentify-transport` skill 定义；`docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md`
+  仅记录当前工具参数面。
 - Fresh external operation 只允许出现在 `AGENTS.md` 已定义的共享边界内；它不构成 successor
   WORK、retry message 或 lifecycle event。
 - `PAUSE` 保留当前 WORK，禁止新的 launch/send。
@@ -100,6 +105,11 @@ Requester 执行下列最小动作：
 - `CANCEL` 只来自用户或用户明确授权的 requester。Callee 停止尚未提交的 Effect；已经提交
   或 commitment unknown 的 Effect 只观察到可说明的安全终态，然后按 `AGENTS.md` 返回
   `CANCELLED`。CONTROL 不携带替代 objective。
+
+Native task 进入 idle、stopped、completed 或 not-loaded 等产品状态，但其 inbound WORK 没有
+terminal RESULT 时，requester 恢复或继续该 exact task，并先读取已有 history/artifacts；不得重做
+material work 或以新 task 伪造 successor。若 callee 已写完 authority/commit 但尚未返回，只补同一
+assignment 的 RESULT；若 RESULT 已在 requester history 中，则 requester 直接消费，不要求第二份。
 
 Native task 能力不可用时，停止受影响动作并报告。不得创建中转协调 task、本地 task plane、
 inbox、history parser、registry、receipt 或 scheduler 作为替代。
@@ -116,6 +126,10 @@ transport failure 解释成该方向 lifecycle 结论。若收到用户的 CANCE
 等待所有受影响 EM terminal。Fan-out/join 只存在于 native history/status，不写本地 batch、queue
 或 task registry。
 
+一个 terminal EM RESULT 已结束该 join leg，即使它只报告 technical 或 measurement gap。任何
+后续 repair、discriminator 或 observation 都是 Portfolio 比较投资替代方案后主动决定的
+successor WORK；下游建议不得自动继承为旧 WORK 的 reentry 或 Portfolio 前置条件。
+
 ## 6. Adjacent scientific content
 
 所有相邻 WORK/RESULT 仍使用 §2 的一种形状；以下只是 meaning-complete 内容要求，不是新的字段
@@ -130,13 +144,17 @@ schema。
 
 ### 6.2 EM ↔ CM
 
-- EM → CM：当前 cycle question、竞争解释、不同预测、discriminator、baseline commit、
+- EM → CM：当前 cycle question、竞争解释、不同预测、discriminator、acceptance、explicit
+  non-goals、受保护的 scientific/numerical/RNG/checkpoint/Effect semantics、baseline commit、
   config/data/RNG、exact paths、资源与 Effect、运行计划、观察分支、artifacts 和 limitations。
 - CM → EM：实际 command/tests、直接 observation、artifact、工程适用范围、失败位置，以及未
   取得 observation 的具体原因。代码、测试或 command 成功不得表述为 scientific acceptance。
 
 负或歧义 scientific observation 在 CM 按工程合同完成时仍可使 CM `Outcome: DONE`。EM 负责其
 科学解释，Portfolio 负责其投资解释；任何一方都不得让下游状态代替自己的字段。
+
+若 acceptance、non-goals、受保护语义与直接技术事实不可同时满足，CM 保持 scope 不变，在任何
+write/launch 前向 requester 返回 exact conflict；不得自行缩小 acceptance 或改写科学合同。
 
 ## 7. Git-visible writer transfer
 
@@ -151,6 +169,18 @@ schema。
 requester 直接联系 Root，不得 cherry-pick、rebase 或重写历史。既有链路 terminal 后，如需
 shared repair，由 requester 创建单独的 Root 或 `CM/shared` WORK。
 
+`CM/shared → Root` 使用同样的单 writer、fast-forward 交接：
+
+1. Root 在 dispatch 前冻结并提交 intended target 的 exact baseline、owned paths、acceptance 与
+   protected semantics，并停止写这些 shared paths。
+2. `CM/shared` 的 native branch fast-forward 到该 baseline 后才开始；它只提交 exact owned paths，
+   以 terminal RESULT 返回 reviewed commit/diff，然后停止写入。
+3. Root 消费该 exact RESULT 和针对同一 base/diff 的 terminal Reviewer observation。只有 intended
+   target 仍可 fast-forward 到该 commit 时，Root 才执行 fast-forward 并恢复 shared-path writer。
+4. 无法 fast-forward、review object 改变或 owned-path 外出现修改时，Root 冻结集成并报告冲突；
+   不 cherry-pick、rebase、重建 diff、创建替代 CM，或用绿测绕过 exact handoff。
+
 跨 top-level handoff 的 refs 含 Git-visible 内容时必须 commit。同一 saved HMASD repository 内
 的 native-worktree 交接只使用本地 exact commit，不需要 push。Push 只在用户要求远端同步、
-跨主机交付或正式交付时强制。
+跨主机交付或正式交付时强制。若 required push 的返回未知，先观察 intended remote ref；确认
+目标提交不存在才允许再次 push，不能在未知时重推或宣称已交付。

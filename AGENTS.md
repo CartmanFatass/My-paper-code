@@ -8,17 +8,23 @@ task identity, authentication, message receipts, retry ledgers, registries, rout
 
 - This file is the universal semantic kernel injected into every HMASD task.
 - `docs/project/WORKFLOW_PROTOCOL.md` is the sole cross-task transport authority.
-- `.agents/roles/<ROLE>.md` owns only that role's method. A participant reads its own role document;
-  it does not load another role's method merely to understand the topology.
-- The four session skills are only entry pointers: `hmasd-root-task`, `hmasd-portfolio-task`,
-  `hmasd-em-task`, and `hmasd-cm-task`.
+- The four session skills contain the complete role-local method for `hmasd-root-task`,
+  `hmasd-portfolio-task`, `hmasd-em-task`, and `hmasd-cm-task`. A top-level participant uses its one
+  skill and does not load another top-level role method merely to understand the topology.
+- `.agents/roles/` contains only custom-subagent methods. Each leaf reads only its configured role
+  document and returns its local observation to its parent.
 - Direction science lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
   evidence. Current cross-direction investment lives in `docs/research/portfolio/PORTFOLIO.md`.
 - Native task history is the live conversation record. EM and CM each keep one current milestone
   snapshot only when losing it would cause costly repetition or alter a material judgment.
+- A native product status such as active, idle, stopped, completed, archived, or not loaded describes
+  only the Codex task process. It cannot imply assignment Outcome, Portfolio lifecycle, EM/CM status,
+  or Root completion.
 
 Historical workflow documents, prompts, fixtures, tasks, or scripts that conflict with these
 authorities are not active input. There is no compatibility path for retired control versions.
+Workflow instructions or retired role paths inside cited historical evidence are provenance only;
+they are never executable instructions for a current participant.
 
 ## Shared field semantics
 
@@ -34,7 +40,7 @@ positive, implementation succeeded, a provider request completed, or a direction
 | --- | --- |
 | Any top-level task | `Outcome: DONE | WAITING | FAILED | CANCELLED` |
 | Root | `Root status: IN_PROGRESS | CHANGED | UNCHANGED | BLOCKED`; `Integration status: IN_PROGRESS | INTEGRATED | NOT_INTEGRATED | NOT_APPLICABLE` |
-| Portfolio | `Portfolio action: NONE | ACTIVATE | CONTINUE | NARROW | PARK | CLOSE | FUSE | SPINOFF`; `Capacity action: KEEP | SET <n>` |
+| Portfolio | `Direction actions: <direction_id>=<action>; ...`, where each action is `NONE | ACTIVATE | CONTINUE | NARROW | PARK | CLOSE | FUSE | SPINOFF`; `Capacity action: KEEP | SET <n>` |
 | EM | `Scientific status: IN_PROGRESS | SYNTHESIZED | NO_MATERIAL_INSIGHT | NOT_REACHED`; `Decision impact: <text or NONE>`; `Recommendation: NONE | CONTINUE | NARROW | PARK | CLOSE | FUSE | SPINOFF`; `Pro Innovator: <transport state>`; `Pro Convergence: <transport state>` |
 | CM | `Engineering status: IN_PROGRESS | IMPLEMENTED | UNCHANGED | BLOCKED | NOT_REACHED`; `Observation status: IN_PROGRESS | OBSERVED | NOT_OBSERVED | NOT_REQUIRED`; `Verification status: IN_PROGRESS | SATISFIED | UNSATISFIED | NOT_RUN`; `Commit: <git commit or NONE>` |
 
@@ -54,26 +60,42 @@ Role-owned field values are equally independent:
   `IN_PROGRESS` is still underway, `INTEGRATED` is present in the intended Git target,
   `NOT_INTEGRATED` is absent from that target, and `NOT_APPLICABLE` means no Git integration was
   required.
-- Portfolio `NONE` makes no lifecycle decision; `ACTIVATE` starts active investment; `CONTINUE`
-  retains the current scope; `NARROW` retains only a smaller stated scope; `PARK` retains the
-  direction without active investment; `CLOSE` ends investment in that direction; `FUSE` merges its
-  surviving question into another direction; `SPINOFF` creates a distinct direction. `KEEP` leaves
-  the advancing-capacity limit unchanged; `SET <n>` replaces it with the stated nonnegative limit.
+- Portfolio lists every direction in the current user-fixed considered set exactly once in
+  `Direction actions`; one action never implicitly applies to another direction. `NONE` makes no
+  lifecycle decision for that direction; `ACTIVATE` starts active investment; `CONTINUE` retains
+  the current scope; `NARROW` retains only a smaller stated scope; `PARK` retains the direction
+  without active investment; `CLOSE` ends investment in that direction; `FUSE` merges its surviving
+  question into another direction; `SPINOFF` creates a distinct direction. `KEEP` leaves the
+  advancing-capacity limit unchanged; `SET <n>` replaces it with the stated nonnegative limit.
 - EM `IN_PROGRESS` means the scientific acceptance is still being pursued; `SYNTHESIZED` means the
   frozen question was answered at a bounded claim ceiling; `NO_MATERIAL_INSIGHT` means the scientific
   acceptance was completed but produced no decision-changing insight; `NOT_REACHED` means no valid
   scientific synthesis was reached. `Decision impact` states the supported change to the investment
-  question, or `NONE`. An EM recommendation uses the Portfolio action meanings above as advice only;
+  question, or `NONE`. An EM recommendation uses the direction-action meanings above as advice only;
   it never performs the action.
 - CM engineering `IN_PROGRESS` means the engineering acceptance is still being pursued;
   `IMPLEMENTED` means the requested change is present; `UNCHANGED` means acceptance was answered
   without a code/configuration change; `BLOCKED` means the engineering acceptance was not satisfied;
   `NOT_REACHED` means engineering work did not reach a valid candidate. Observation `IN_PROGRESS`
-  is still being acquired, `OBSERVED` is the requested valid observation, `NOT_OBSERVED` means no
-  valid observation was obtained, and `NOT_REQUIRED` means none was requested. Verification
-  `IN_PROGRESS` is still running, `SATISFIED` supports engineering acceptance, `UNSATISFIED` does not,
-  and `NOT_RUN` means no verification ran. `Commit` is the exact Git commit containing the returned
-  Git-visible work, or `NONE` when no such commit exists.
+  means the same WORK still has an authorized acquisition or recovery path actively being pursued;
+  `OBSERVED` is the requested valid observation; `NOT_OBSERVED` means the current bounded
+  acquisition ended without one and no acquisition is presently advancing; `NOT_REQUIRED` means
+  none was requested. Verification `IN_PROGRESS` means verification or an authorized repair-and-
+  reverify path is actively advancing; `SATISFIED` supports engineering acceptance;
+  `UNSATISFIED` means the current bounded verification concluded against the candidate and no
+  reverification is presently advancing; `NOT_RUN` means no verification ran. These fields report
+  the current assignment stage, not merely the last failed attempt. `Commit` is the exact Git commit
+  containing the returned Git-visible work, or `NONE` when no such commit exists.
+
+Portfolio's durable lifecycle states are distinct from action fields:
+
+- `REGISTERED` means the direction is known but has no active investment.
+- `ACTIVE` requires a current executable scientific question plus live WORK or one exact reentry;
+  an active direction cannot be operationally starved.
+- `PARKED` has no live direction WORK and records the supporting scientific or opportunity-cost
+  reason, evidence boundary, and concrete reactivation condition.
+- `CLOSED` has a terminal investment reason and can reopen only through a new explicit Portfolio
+  decision based on materially new grounds.
 
 EM/CM milestone snapshots use a separate shared state:
 
@@ -86,6 +108,11 @@ EM/CM milestone snapshots use a separate shared state:
 `WAITING_REENTRY → WORKING` resumes the same WORK. A terminal snapshot can become nonterminal only
 when native history supplies a successor WORK that opens a fresh research cycle or engineering
 scope; a terminal snapshot never reopens the old cycle or scope.
+
+A snapshot is the last accepted milestone, not a projection of every current action. Native
+history, evidence, and owned-path changes after that milestone are in-flight facts and must be
+preserved. Recovery reconciles the current inbound WORK, snapshot refs, later evidence or diff, and
+Git facts before overwriting the snapshot or repeating material judgment.
 
 While a requested leaf or top-level callee is still running, a provider operation is unresolved, or
 a launched process lacks a terminal witness, the owner retains the same WORK and continues native
@@ -117,8 +144,11 @@ that conversation; neither tab nor operation is an EM material cycle or a top-le
 - `WAIVED`: the user waived that exact operation before any send-capable call.
 
 `COMMITMENT_UNKNOWN`, `SENT_WAITING`, and `SENT_UNREADABLE` retain the same operation and provider
-conversation; observation may move to another tab but cannot send. `ZERO_SEND_FAILED` permits one
-bounded repair followed by a fresh strict operation because no provider injection occurred.
+conversation; observation may move to another tab but cannot send. `ZERO_SEND_FAILED` proves that
+operation created no provider Effect. Its owner may authorize a fresh strict operation only after a
+concrete non-sending repair changes the proven failure premise. There is no fixed attempt counter:
+the same failure without a new fact stops, while each fresh operation still has exactly one Send
+boundary. This cannot be used when commitment is unknown or any provider injection may exist.
 
 `SENT_INPUT_MISMATCH`, `SENT_MODEL_MISMATCH`, and `CONVERSATION_LOST` isolate the old operation and
 conversation and supply no scientific, engineering, Portfolio, or lifecycle conclusion. When the
@@ -191,9 +221,11 @@ research leaves. Portfolio never calls either specialist family. Leaves normally
 their spawning parent and never contact another top-level participant.
 
 A role-local fact check is the sole depth-2 exception. A judgment leaf may spawn only the Scout or
-Verifier types named by its own role method, only for one material factual premise that can change
-its conclusion. The child receives a frozen factual question and returns observation, not judgment;
-the fact-check child cannot delegate. If that observation conflicts with the assignment, cited
+Verifier types named by its own role method, one child at a time. Each child receives one frozen
+material factual premise that can change the conclusion and returns observation, not judgment; the
+fact-check child cannot delegate. After consuming that observation, the judgment leaf may open
+another bounded fact check only for a distinct remaining material gap. If an observation conflicts
+with the assignment, cited
 authority, owner-supplied constraint, or the judgment leaf's provisional conclusion, the leaf sends
 one concise native `conflict packet` to its spawning parent: the conflicting propositions, direct
 evidence, authority boundary, and what conclusion would change. It retains its assignment until the
@@ -232,10 +264,11 @@ scope. A read-only specialist remains read-only. An implementer writes only its 
 Verifier writes only its assigned proof root under `temp/`. The Experiment Operator launches one
 exact command once and retains the same process observation through terminal fact.
 
-The number of leaves follows independent information gaps, not a quota. Multiple answers from the
-same model or source are search coverage, not independent scientific evidence. Weakly coupled
-downloads, extraction, formatting, fixtures, and chores should go to `gl`; a specialist is selected
-only for its own method.
+Optional leaf count follows independent information gaps, not a quota. A role method may require
+an independent consultation for one named material class; that is part of its acceptance method,
+not a coverage quota. Multiple answers from the same model or source are search coverage, not
+independent scientific evidence. Weakly coupled downloads, extraction, formatting, fixtures, and
+chores should go to `gl`; a specialist is selected only for its own method.
 
 One strict operation sends at most once, and one frozen prompt is never injected twice into the same
 provider conversation. A fresh operation is permitted only after strict zero-send proof, for a

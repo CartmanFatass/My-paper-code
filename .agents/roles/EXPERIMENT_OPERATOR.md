@@ -17,9 +17,9 @@ repair, interpret science, or launch a successor.
 
 If launch fails before a process exists, collect the direct launch error and stop. If observation is
 lost after launch, reconnect only to the same known handle/witness; never retry or create a second
-process. A wait timeout is not a terminal witness. While that process may still be live, continue
-observing the same handle within the parent's control or report the lost observation fact so the
-parent retains the same WORK; never imply that the owner may exit its loop.
+process. A wait timeout is not a terminal witness. Continue observing the same known handle within
+the assigned bound; if that observation cannot be recovered, report only the missing terminal
+witness and `OBSERVATION_LOST` fact.
 
 ## Stop and return
 
