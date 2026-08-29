@@ -11,6 +11,18 @@ import jsonschema
 from scripts import hmasd_state
 
 
+def pro_review(
+    status: str = "PENDING",
+    response: str | None = None,
+    replacement_used: bool = False,
+) -> dict[str, object]:
+    return {
+        "status": status,
+        "response": response,
+        "replacement_used": replacement_used,
+    }
+
+
 def research_state() -> dict[str, object]:
     return {
         "direction": "example_direction", "role": "EM", "revision": 1,
@@ -21,8 +33,8 @@ def research_state() -> dict[str, object]:
         "claim_ceiling": "Mechanism hypothesis only.", "next_discriminator": "Matched comparator.",
         "research_cycle": {
             "label": "mechanism-r01", "opened_at": "2026-08-28T00:00:00Z",
-            "reason": "New mechanism", "pro_innovator": {"status": "PENDING", "response": None},
-            "pro_convergence": {"status": "PENDING", "response": None},
+            "reason": "New mechanism", "pro_innovator": pro_review(),
+            "pro_convergence": pro_review(),
         },
     }
 
@@ -45,22 +57,20 @@ def test_research_schema_binds_response_to_complete_status() -> None:
         Path("scripts/schemas/hmasd_research_state.schema.json").read_text(encoding="utf-8")
     )
     complete = research_state()
-    complete["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": "docs/research/pro.md",
-    }
+    complete["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE", "docs/research/pro.md"
+    )
     jsonschema.validate(complete, schema)
 
     missing_response = research_state()
-    missing_response["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": None,
-    }
+    missing_response["research_cycle"]["pro_innovator"] = pro_review("COMPLETE")
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(missing_response, schema)
 
     premature_response = research_state()
-    premature_response["research_cycle"]["pro_innovator"] = {
-        "status": "PENDING", "response": "docs/research/pro.md",
-    }
+    premature_response["research_cycle"]["pro_innovator"] = pro_review(
+        "PENDING", "docs/research/pro.md"
+    )
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(premature_response, schema)
 
@@ -208,10 +218,7 @@ def test_research_terminal_snapshot_rejects_unresolved_transport(
     document["snapshot_state"] = snapshot_state
     if snapshot_state == "COMPLETE":
         document["milestone"] = "HANDOFF_READY"
-    document["research_cycle"]["pro_innovator"] = {
-        "status": transport_state,
-        "response": None,
-    }
+    document["research_cycle"]["pro_innovator"] = pro_review(transport_state)
     with pytest.raises(hmasd_state.StateError, match="unresolved Pro"):
         hmasd_state.validate_document("research", document)
     schema = json.loads(
@@ -282,10 +289,7 @@ def test_complete_snapshot_requires_final_milestone(
     document["milestone"] = final_milestone
     if kind == "research":
         for field in ("pro_innovator", "pro_convergence"):
-            document["research_cycle"][field] = {
-                "status": "WAIVED",
-                "response": None,
-            }
+            document["research_cycle"][field] = pro_review("WAIVED")
     assert hmasd_state.validate_document(kind, document) == document
     jsonschema.validate(document, schema)
 
@@ -308,9 +312,10 @@ def test_research_snapshot_requires_a_material_cycle(milestone: str) -> None:
 
 def test_same_cycle_cannot_regress_pro_status_or_milestone(tmp_path: Path) -> None:
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": "docs/research/candidates/example_direction/external/pro.md"
-    }
+    current["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE",
+        "docs/research/candidates/example_direction/external/pro.md",
+    )
     current["milestone"] = "SYNTHESIS_READY"
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     path.parent.mkdir(parents=True)
@@ -328,7 +333,7 @@ def test_terminal_research_snapshot_can_only_reopen_as_fresh_cycle(
     completed["milestone"] = "HANDOFF_READY"
     completed["snapshot_state"] = "COMPLETE"
     for field in ("pro_innovator", "pro_convergence"):
-        completed["research_cycle"][field] = {"status": "WAIVED", "response": None}
+        completed["research_cycle"][field] = pro_review("WAIVED")
     hmasd_state.update_state("research", path, "EM", completed, root=tmp_path)
 
     reopened = dict(completed)
@@ -341,8 +346,8 @@ def test_terminal_research_snapshot_can_only_reopen_as_fresh_cycle(
         "label": "mechanism-r02",
         "opened_at": "2026-08-28T01:00:00Z",
         "reason": "A successor WORK opened a fresh material cycle.",
-        "pro_innovator": {"status": "PENDING", "response": None},
-        "pro_convergence": {"status": "PENDING", "response": None},
+        "pro_innovator": pro_review(),
+        "pro_convergence": pro_review(),
     }
     updated = hmasd_state.update_state(
         "research", path, "EM", replacement, root=tmp_path
@@ -374,12 +379,12 @@ def test_waiting_reentry_resumes_same_work(kind: str, factory, tmp_path: Path) -
 
 def test_convergence_cannot_start_before_synthesis_ready() -> None:
     document = research_state()
-    document["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": "external/pro-innovator.md"
-    }
-    document["research_cycle"]["pro_convergence"] = {
-        "status": "COMPLETE", "response": "external/pro-convergence.md"
-    }
+    document["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE", "external/pro-innovator.md"
+    )
+    document["research_cycle"]["pro_convergence"] = pro_review(
+        "COMPLETE", "external/pro-convergence.md"
+    )
     with pytest.raises(hmasd_state.StateError, match="before SYNTHESIS_READY"):
         hmasd_state.validate_document("research", document)
 
@@ -388,29 +393,26 @@ def test_convergence_cannot_start_before_synthesis_ready() -> None:
     "status",
     [
         "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
-        "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
+        "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE",
+        "SENT_MODEL_MISMATCH", "CONVERSATION_LOST", "WAIVED",
     ],
 )
 def test_research_state_accepts_every_pro_operation_fact(status: str) -> None:
     document = research_state()
-    document["research_cycle"]["pro_innovator"] = {
-        "status": status,
-        "response": "external/pro-innovator.md" if status == "COMPLETE" else None,
-    }
+    document["research_cycle"]["pro_innovator"] = pro_review(
+        status,
+        "external/pro-innovator.md" if status == "COMPLETE" else None,
+    )
     assert hmasd_state.validate_document("research", document) == document
 
 
 def test_unknown_or_sent_pro_operation_never_regresses_to_zero_send(tmp_path: Path) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {
-        "status": "COMMITMENT_UNKNOWN", "response": None,
-    }
+    current["research_cycle"]["pro_innovator"] = pro_review("COMMITMENT_UNKNOWN")
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     regressed = research_state()
-    regressed["research_cycle"]["pro_innovator"] = {
-        "status": "ZERO_SEND_FAILED", "response": None,
-    }
+    regressed["research_cycle"]["pro_innovator"] = pro_review("ZERO_SEND_FAILED")
     with pytest.raises(hmasd_state.StateError, match="cannot regress"):
         hmasd_state.update_state("research", path, "EM", regressed, root=tmp_path)
 
@@ -418,14 +420,12 @@ def test_unknown_or_sent_pro_operation_never_regresses_to_zero_send(tmp_path: Pa
 def test_sent_unreadable_can_only_remain_or_become_complete(tmp_path: Path) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {
-        "status": "SENT_UNREADABLE", "response": None,
-    }
+    current["research_cycle"]["pro_innovator"] = pro_review("SENT_UNREADABLE")
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     completed = research_state()
-    completed["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": "external/pro-innovator.md",
-    }
+    completed["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE", "external/pro-innovator.md"
+    )
     updated = hmasd_state.update_state("research", path, "EM", completed, root=tmp_path)
     assert updated["research_cycle"]["pro_innovator"]["status"] == "COMPLETE"
 
@@ -438,48 +438,157 @@ def test_confirmed_send_can_resolve_to_terminal_input_mismatch(
 ) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {"status": initial, "response": None}
+    current["research_cycle"]["pro_innovator"] = pro_review(initial)
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     mismatch = research_state()
-    mismatch["research_cycle"]["pro_innovator"] = {
-        "status": "SENT_INPUT_MISMATCH", "response": None,
-    }
+    mismatch["research_cycle"]["pro_innovator"] = pro_review(
+        "SENT_INPUT_MISMATCH"
+    )
     updated = hmasd_state.update_state("research", path, "EM", mismatch, root=tmp_path)
     assert updated["research_cycle"]["pro_innovator"]["status"] == "SENT_INPUT_MISMATCH"
 
 
-def test_terminal_input_mismatch_cannot_change_within_operation(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "isolated", ["SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "CONVERSATION_LOST"]
+)
+def test_isolated_operation_can_start_one_replacement_in_same_material_cycle(
+    tmp_path: Path, isolated: str
+) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {
-        "status": "SENT_INPUT_MISMATCH", "response": None,
-    }
+    current["research_cycle"]["pro_innovator"] = pro_review(isolated)
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
-    completed = research_state()
-    completed["research_cycle"]["pro_innovator"] = {
-        "status": "COMPLETE", "response": "external/pro-innovator.md",
-    }
-    with pytest.raises(hmasd_state.StateError, match="cannot regress"):
-        hmasd_state.update_state("research", path, "EM", completed, root=tmp_path)
+    replacement = research_state()
+    replacement["research_cycle"]["pro_innovator"] = pro_review(
+        replacement_used=True
+    )
+    updated = hmasd_state.update_state(
+        "research", path, "EM", replacement, root=tmp_path
+    )
+    assert updated["research_cycle"]["label"] == current["research_cycle"]["label"]
+    assert updated["research_cycle"]["pro_innovator"]["status"] == "PENDING"
+    assert updated["research_cycle"]["pro_innovator"]["replacement_used"] is True
 
 
-def test_new_cycle_can_replace_terminal_input_mismatch(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "isolated", ["SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "CONVERSATION_LOST"]
+)
+def test_isolated_operation_cannot_start_a_second_replacement(
+    tmp_path: Path, isolated: str
+) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {
-        "status": "SENT_INPUT_MISMATCH", "response": None,
-    }
+    current["research_cycle"]["pro_innovator"] = pro_review(
+        isolated, replacement_used=True
+    )
+    hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
+    second = research_state()
+    second["research_cycle"]["pro_innovator"] = pro_review(
+        replacement_used=True
+    )
+    with pytest.raises(hmasd_state.StateError, match="replacement was already used"):
+        hmasd_state.update_state("research", path, "EM", second, root=tmp_path)
+
+
+@pytest.mark.parametrize(
+    "initial", ["COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"]
+)
+def test_unresolved_transport_can_terminalize_as_conversation_lost(
+    tmp_path: Path, initial: str
+) -> None:
+    path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
+    current = research_state()
+    current["research_cycle"]["pro_innovator"] = pro_review(initial)
+    hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
+
+    lost = research_state()
+    lost["research_cycle"]["pro_innovator"] = pro_review("CONVERSATION_LOST")
+    updated = hmasd_state.update_state("research", path, "EM", lost, root=tmp_path)
+    assert (
+        updated["research_cycle"]["pro_innovator"]["status"]
+        == "CONVERSATION_LOST"
+    )
+
+    recovered = research_state()
+    recovered["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE", "external/late-response.md"
+    )
+    with pytest.raises(hmasd_state.StateError, match="cannot regress"):
+        hmasd_state.update_state("research", path, "EM", recovered, root=tmp_path)
+
+
+@pytest.mark.parametrize("initial", ["PENDING", "ZERO_SEND_FAILED"])
+def test_zero_send_transport_cannot_claim_conversation_loss(
+    tmp_path: Path, initial: str
+) -> None:
+    path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
+    current = research_state()
+    current["research_cycle"]["pro_innovator"] = pro_review(initial)
+    hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
+    invalid = research_state()
+    invalid["research_cycle"]["pro_innovator"] = pro_review("CONVERSATION_LOST")
+    with pytest.raises(hmasd_state.StateError, match="cannot regress"):
+        hmasd_state.update_state("research", path, "EM", invalid, root=tmp_path)
+
+
+def test_terminal_gap_accepts_isolated_conversation_loss() -> None:
+    document = research_state()
+    document["snapshot_state"] = "TERMINAL_GAP"
+    document["research_cycle"]["pro_innovator"] = pro_review("CONVERSATION_LOST")
+    assert hmasd_state.validate_document("research", document) == document
+    schema = json.loads(
+        Path("scripts/schemas/hmasd_research_state.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    jsonschema.validate(document, schema)
+
+
+def test_late_content_cannot_complete_the_isolated_old_operation(tmp_path: Path) -> None:
+    path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
+    current = research_state()
+    current["research_cycle"]["pro_innovator"] = pro_review("CONVERSATION_LOST")
+    hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
+    late = research_state()
+    late["research_cycle"]["pro_innovator"] = pro_review(
+        "COMPLETE", "external/late-old-conversation.md"
+    )
+    with pytest.raises(hmasd_state.StateError, match="cannot regress"):
+        hmasd_state.update_state("research", path, "EM", late, root=tmp_path)
+
+
+@pytest.mark.parametrize(
+    "old_status",
+    [
+        "PENDING",
+        "ZERO_SEND_FAILED",
+        "SENT_INPUT_MISMATCH",
+        "SENT_MODEL_MISMATCH",
+        "CONVERSATION_LOST",
+        "COMPLETE",
+        "WAIVED",
+    ],
+)
+def test_nonterminal_work_cannot_relabel_material_cycle(
+    tmp_path: Path, old_status: str
+) -> None:
+    path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
+    current = research_state()
+    current["research_cycle"]["pro_innovator"] = pro_review(
+        old_status,
+        "external/pro-innovator.md" if old_status == "COMPLETE" else None,
+    )
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     replacement = research_state()
     replacement["research_cycle"] = {
         "label": "mechanism-r02",
         "opened_at": "2026-08-28T01:00:00Z",
         "reason": "Fresh work after terminal transport repair",
-        "pro_innovator": {"status": "PENDING", "response": None},
-        "pro_convergence": {"status": "PENDING", "response": None},
+        "pro_innovator": pro_review(),
+        "pro_convergence": pro_review(),
     }
-    updated = hmasd_state.update_state("research", path, "EM", replacement, root=tmp_path)
-    assert updated["research_cycle"]["label"] == "mechanism-r02"
+    with pytest.raises(hmasd_state.StateError, match="terminal prior WORK"):
+        hmasd_state.update_state("research", path, "EM", replacement, root=tmp_path)
 
 
 @pytest.mark.parametrize("initial", ["PENDING", "ZERO_SEND_FAILED"])
@@ -488,12 +597,10 @@ def test_send_can_be_observed_directly_as_unreadable_without_fake_intermediate_s
 ) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {"status": initial, "response": None}
+    current["research_cycle"]["pro_innovator"] = pro_review(initial)
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     unreadable = research_state()
-    unreadable["research_cycle"]["pro_innovator"] = {
-        "status": "SENT_UNREADABLE", "response": None,
-    }
+    unreadable["research_cycle"]["pro_innovator"] = pro_review("SENT_UNREADABLE")
     updated = hmasd_state.update_state("research", path, "EM", unreadable, root=tmp_path)
     assert updated["research_cycle"]["pro_innovator"]["status"] == "SENT_UNREADABLE"
 
@@ -504,15 +611,15 @@ def test_new_cycle_cannot_discard_an_unresolved_sent_operation(
 ) -> None:
     path = tmp_path / "docs/research/candidates/example_direction/workflow/research/state.json"
     current = research_state()
-    current["research_cycle"]["pro_innovator"] = {"status": unresolved, "response": None}
+    current["research_cycle"]["pro_innovator"] = pro_review(unresolved)
     hmasd_state.update_state("research", path, "EM", current, root=tmp_path)
     replacement = research_state()
     replacement["research_cycle"] = {
         "label": "mechanism-r02",
         "opened_at": "2026-08-28T01:00:00Z",
         "reason": "Replacement mechanism",
-        "pro_innovator": {"status": "PENDING", "response": None},
-        "pro_convergence": {"status": "PENDING", "response": None},
+        "pro_innovator": pro_review(),
+        "pro_convergence": pro_review(),
     }
     with pytest.raises(hmasd_state.StateError, match="unresolved external operation"):
         hmasd_state.update_state("research", path, "EM", replacement, root=tmp_path)

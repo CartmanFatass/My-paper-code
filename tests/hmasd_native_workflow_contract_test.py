@@ -118,8 +118,9 @@ def test_authority_is_split_between_global_semantics_and_cross_task_protocol() -
 
 def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
     config = tomllib.loads(_read(".codex/config.toml"))
-    assert config["agents"]["max_depth"] == 1
-    assert config["agents"]["max_threads"] == 8
+    assert config["agents"]["max_concurrent_threads_per_session"] == 8
+    assert "max_depth" not in config["agents"]
+    assert "max_threads" not in config["agents"]
     entries = {
         key: value
         for key, value in config["agents"].items()
@@ -146,7 +147,8 @@ def test_agent_roster_is_small_and_has_generic_luna_xhigh_leaf() -> None:
     assert general["model_reasoning_effort"] == "xhigh"
     assert "Never spawn" not in general["developer_instructions"]
     agents = _read("AGENTS.md")
-    assert "never delegate" in agents
+    assert "sole depth-2 exception" in agents
+    assert "fact-check child cannot delegate" in agents
     assert "`ri` | `hmasd-research-innovator`" in agents
     assert "`rp` | `hmasd-research-principles-analyst`" in agents
     assert "`im` | `hmasd-implementer`" in agents
@@ -174,6 +176,16 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         assert field in agents
     assert "`Outcome:` describes" in agents
     assert "Transport failure cannot imply `PARK`" in agents
+    agents_flat = _flat(agents)
+    for meaning in (
+        "`NO_MATERIAL_INSIGHT` means the scientific acceptance was completed",
+        "`NOT_REACHED` means no valid scientific synthesis was reached",
+        "`BLOCKED` means the engineering acceptance was not satisfied",
+        "`NOT_OBSERVED` means no valid observation was obtained",
+        "`PARK` retains the direction without active investment",
+        "`INCOMPLETE` lacks a premise required for judgment",
+    ):
+        assert meaning in agents_flat
     assert "Root status:" not in protocol
     assert "Portfolio action:" not in protocol
     assert "Scientific status:" not in protocol
@@ -183,6 +195,22 @@ def test_global_field_semantics_and_local_role_slices_are_distinct() -> None:
         assert "Outcome:" not in skill
         for leaked_routing in ("exact idle EM", "direction CM", "Return task", "top-level requester"):
             assert leaked_routing not in skill
+
+    mechanical = (
+        "browser tab",
+        "CAPTCHA",
+        "responsePath",
+        "agentify_review_query",
+    )
+    em = _read(".agents/roles/EM.md")
+    cm = _read(".agents/roles/CM.md")
+    for detail in mechanical:
+        assert detail not in protocol
+        assert detail not in em
+        assert detail not in cm
+    assert "AGENTIFY_TRANSPORT_INSTRUCTIONS.md" in protocol
+    assert "existing `pt` transport assignment" in em
+    assert "existing `et` assignment" in cm
 
 
 def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
@@ -196,7 +224,7 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
         assert text in agents
         assert text not in protocol
     assert "显式传入 `AGENTS.md` 的 model/thinking" in protocol
-    assert "`<alias>_<model>_<effort>_<task>`" in agents
+    assert "`<code>_<model>_<effort>_<task>`" in agents
     for example in ("`rv_s_xh_plan`", "`gl_l_xh_pdf`", "`pt_l_m_pro`"):
         assert example in agents
     assert "Direct-leaf `spawn_agent.task_name` uses" in agents
@@ -205,7 +233,7 @@ def test_top_level_models_and_leaf_task_names_are_explicit() -> None:
     for skill_name in ("hmasd-root-task", "hmasd-portfolio-task", "hmasd-em-task", "hmasd-cm-task"):
         skill = _read(f".agents/skills/{skill_name}/SKILL.md")
         assert "gpt-5.6-" not in skill
-        assert "<alias>_<model>_<effort>_<task>" not in skill
+        assert "<code>_<model>_<effort>_<task>" not in skill
 
 
 def test_external_pro_prompt_is_natural_language_not_control_serialization() -> None:
@@ -218,7 +246,7 @@ def test_external_pro_prompt_is_natural_language_not_control_serialization() -> 
     assert "must not compose, summarize, append, truncate" in normalized
 
     for profile in (ROOT / ".codex/agents").glob("*.toml"):
-        assert "<alias>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
+        assert "<code>_<model>_<effort>_<task>" not in profile.read_text(encoding="utf-8")
 
 
 def test_transport_facts_cannot_cancel_or_park_a_direction() -> None:
@@ -362,6 +390,7 @@ def test_research_navigation_does_not_duplicate_portfolio_state() -> None:
 def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     protocol = _read("docs/project/WORKFLOW_PROTOCOL.md")
     cycle = _flat(_read(".agents/roles/EM.md"))
+    transport = _flat(_read("docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md"))
     assert cycle.index("`INNOVATOR`") < cycle.index("send a meaning-complete WORK to CM")
     assert cycle.index("send a meaning-complete WORK to CM") < cycle.index("`SYNTHESIS_READY`")
     assert cycle.index("`SYNTHESIS_READY`") < cycle.index("`CONVERGENCE`")
@@ -370,7 +399,8 @@ def test_research_cycle_and_fanout_relations_are_ordered() -> None:
     assert "writes one cohesive natural-language `INNOVATOR` prompt" in cycle
     assert cycle.count("user explicitly waived that exact unsent operation") == 2
     assert "leaf follows the explicit Agentify transport skill and sends it once" in cycle
-    assert "sent or unknown request never resends" in cycle
+    assert "never authorizes another Send" in transport
+    assert "same frozen prompt may then receive at most one replacement" in transport
 
     fanout = _flat(protocol.split("## 5. Portfolio fan-out and join", 1)[1].split(
         "## 6. Adjacent scientific content", 1
@@ -455,6 +485,12 @@ def test_minimal_state_schemas_define_milestones_without_hashes() -> None:
             "WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"
         ]
     pro_states = research["$defs"]["pro_review"]["properties"]["status"]["enum"]
+    assert research["$defs"]["pro_review"]["required"] == [
+        "status", "response", "replacement_used"
+    ]
+    assert research["$defs"]["pro_review"]["properties"]["replacement_used"] == {
+        "type": "boolean"
+    }
     assert pro_states == [
         "PENDING",
         "ZERO_SEND_FAILED",
@@ -463,6 +499,8 @@ def test_minimal_state_schemas_define_milestones_without_hashes() -> None:
         "COMPLETE",
         "SENT_INPUT_MISMATCH",
         "SENT_UNREADABLE",
+        "SENT_MODEL_MISMATCH",
+        "CONVERSATION_LOST",
         "WAIVED",
     ]
 

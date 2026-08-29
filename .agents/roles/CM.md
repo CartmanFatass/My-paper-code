@@ -51,7 +51,13 @@ observable, data or stopping rule to improve the result. Never silently relaunch
 command or broaden semantics to make a test pass. A running engineering leaf, unresolved external
 consultation, or launched process without a terminal witness keeps this WORK live: continue native
 wait or same-operation observation, or return `WAITING` with the exact reentry. Do not return a
-terminal Outcome while any such operation remains live.
+terminal Outcome while any such operation remains live. CM never performs transport mechanics itself;
+it continues the existing `et` assignment for a nonterminal transport fact. If `et` returns an
+isolated terminal fact, keep the engineering scope unchanged and apply only the single replacement
+boundary defined by `AGENTS.md`, again through `et`. If the required consultation remains
+unavailable after that bound, return `WAITING` only for a concrete owner decision that can satisfy
+the assignment; otherwise, after every committed Effect has a terminal fact, return `FAILED` with
+the actually reached CM fields and without implying technical acceptance.
 
 ## Stop and return
 

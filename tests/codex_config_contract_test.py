@@ -24,7 +24,7 @@ EXPECTED = {
     "hmasd-implementer": ("gpt-5.6-sol", "high", "workspace-write"),
     "hmasd-routine-implementer": ("gpt-5.6-terra", "high", "workspace-write"),
 }
-ALIASES = {
+TASK_NAME_CODES = {
     "cs": "hmasd-cm-scout",
     "rv": "hmasd-reviewer",
     "vf": "hmasd-verifier",
@@ -45,8 +45,9 @@ def test_registered_agent_profiles_are_exact_and_semantically_thin() -> None:
     config = tomllib.loads((ROOT / ".codex/config.toml").read_text(encoding="utf-8"))
     assert config["sandbox_mode"] == "danger-full-access"
     assert config["approval_policy"] == "never"
-    assert config["agents"]["max_threads"] == 8
-    assert config["agents"]["max_depth"] == 1
+    assert config["agents"]["max_concurrent_threads_per_session"] == 8
+    assert "max_depth" not in config["agents"]
+    assert "max_threads" not in config["agents"]
     profiles = {
         value["config_file"]
         for value in config["agents"].values()
@@ -71,12 +72,13 @@ def test_registered_agent_profiles_are_exact_and_semantically_thin() -> None:
     assert "assigned output" in general_role
 
 
-def test_short_subagent_aliases_cover_the_exact_registered_roster() -> None:
+def test_short_task_name_codes_cover_the_exact_registered_roster() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    assert set(ALIASES.values()) == set(EXPECTED)
-    for alias, profile in ALIASES.items():
-        assert f"| `{alias}` | `{profile}` |" in agents
-    assert "<alias>_<model>_<effort>_<task>" in agents
+    assert set(TASK_NAME_CODES.values()) == set(EXPECTED)
+    for code, profile in TASK_NAME_CODES.items():
+        assert f"| `{code}` | `{profile}` |" in agents
+    assert "Codex has no native alias field for these codes" in agents
+    assert "<code>_<model>_<effort>_<task>" in agents
     for example in ("rv_s_xh_plan", "gl_l_xh_pdf", "pt_l_m_pro"):
         assert example in agents
 
@@ -107,6 +109,57 @@ def test_each_leaf_profile_points_to_only_its_own_observation_role() -> None:
         assert own_marker.removesuffix(":") in " ".join(role.split())
 
 
+def test_reviewer_fact_checks_premises_instead_of_inventing_requirements() -> None:
+    role = (ROOT / ".agents/roles/REVIEWER.md").read_text(encoding="utf-8")
+    normalized = " ".join(role.split())
+    for required in (
+        "fact-check every premise",
+        "verified fact",
+        "applicable authority",
+        "violated behavior",
+        "owner-supplied constraint",
+        "Review status: INCOMPLETE",
+    ):
+        assert required in normalized
+    assert "must not become a finding" in normalized
+    assert "hmasd-cm-scout" in role
+    assert "hmasd-research-scout" in role
+    assert "hmasd-verifier" in role
+    agents = " ".join((ROOT / "AGENTS.md").read_text(encoding="utf-8").split())
+    assert "native `conflict packet` to its spawning parent" in agents
+
+
+def test_depth_two_is_only_for_role_local_fact_check_and_parent_convergence() -> None:
+    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    normalized = " ".join(agents.split())
+    assert "sole depth-2 exception" in normalized
+    assert "fact-check child cannot delegate" in normalized
+    assert "conflict packet" in normalized
+    assert "spawning parent" in normalized
+    allowed = {
+        "REVIEWER.md": ("hmasd-cm-scout", "hmasd-research-scout", "hmasd-verifier"),
+        "RESEARCH_INNOVATOR.md": ("hmasd-research-scout", "hmasd-cm-scout"),
+        "RESEARCH_PRINCIPLES_ANALYST.md": ("hmasd-research-scout", "hmasd-cm-scout"),
+        "RESEARCH_CRITIC.md": ("hmasd-research-scout", "hmasd-cm-scout"),
+        "IMPLEMENTER.md": ("hmasd-cm-scout", "hmasd-verifier"),
+        "ROUTINE_IMPLEMENTER.md": ("hmasd-cm-scout", "hmasd-verifier"),
+    }
+    for filename, fact_checkers in allowed.items():
+        role = (ROOT / ".agents/roles" / filename).read_text(encoding="utf-8")
+        flat = " ".join(role.split())
+        assert "## Fact check and parent convergence" in role
+        assert "Under the AGENTS fact-check boundary" in flat
+        assert "unresolved conflict returns" in flat
+        for fact_checker in fact_checkers:
+            assert fact_checker in role
+    for filename in (
+        "CM_SCOUT.md", "RESEARCH_SCOUT.md", "VERIFIER.md", "GENERAL_LEAF.md",
+        "PRO_TRANSPORT.md", "ENGINEERING_TRANSPORT.md", "EXPERIMENT_OPERATOR.md",
+    ):
+        role = (ROOT / ".agents/roles" / filename).read_text(encoding="utf-8")
+        assert "## Fact check and parent convergence" not in role
+
+
 def test_pro_transport_uses_exact_file_backed_strict_review() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     profile = tomllib.loads(
@@ -130,7 +183,8 @@ def test_pro_transport_uses_exact_file_backed_strict_review() -> None:
         assert required in instructions
     for state in (
         "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
-        "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
+        "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE",
+        "SENT_MODEL_MISMATCH", "CONVERSATION_LOST", "WAIVED",
     ):
         assert state in agents
     assert "exact frozen prompt file" in instructions
@@ -143,6 +197,16 @@ def test_pro_transport_uses_exact_file_backed_strict_review() -> None:
     assert "ordinary `agentify_query`" in instructions
     assert "observation bound" in instructions
     assert "stop condition" in instructions
+    for conversation_fact in (
+        "tab is not a conversation",
+        "exact visible label `Pro`",
+        "up to 45 minutes",
+        "responsePath",
+        "new provider conversation",
+        "same material cycle",
+        "late content",
+    ):
+        assert conversation_fact in instructions
     assert ".agents/skills/hmasd-agentify-transport/SKILL.md" in role
     assert ".agents/roles/PRO_TRANSPORT.md" in profile
 

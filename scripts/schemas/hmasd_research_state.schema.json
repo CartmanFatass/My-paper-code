@@ -92,7 +92,7 @@
     "pro_review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "response"],
+      "required": ["status", "response", "replacement_used"],
       "properties": {
         "status": {
           "enum": [
@@ -103,10 +103,13 @@
             "COMPLETE",
             "SENT_INPUT_MISMATCH",
             "SENT_UNREADABLE",
+            "SENT_MODEL_MISMATCH",
+            "CONVERSATION_LOST",
             "WAIVED"
           ]
         },
-        "response": {"type": ["string", "null"]}
+        "response": {"type": ["string", "null"]},
+        "replacement_used": {"type": "boolean"}
       },
       "allOf": [
         {

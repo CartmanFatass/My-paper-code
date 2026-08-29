@@ -1,6 +1,6 @@
 # HMASD native Codex workflow
 
-Workflow revision: 2026-08-28.9
+Workflow revision: 2026-08-28.10
 
 本文只规定 top-level task 之间的通信、存活、Effect 与 Git 交接。公共字段含义、caller
 matrix、模型、leaf 与 workspace 边界只由 `AGENTS.md` 定义；每个角色的内部方法只由自己的
@@ -89,9 +89,12 @@ Requester 执行下列最小动作：
 - `WAITING` 仍由同一个 callee 持有，必须给出具体 Reentry。条件满足后继续该 WORK，不发送
   一个伪装成恢复的新 WORK。
 - `FAILED` 不自动 retry。需要修复后重做时，由 requester 在旧 WORK terminal 后创建新的
-  WORK。新 WORK 本身不是 retry authority；若它仍携带同一个已 unknown/sent 的 owner-frozen
-  external request，必须继续只观察该 Effect，不能通过更换 task、leaf、label、key 或 conversation
-  重发。
+  WORK。新 WORK 本身不是 retry authority。
+- 任何 nonterminal Effect 都留在同一个 WORK 并由既有 owner/assignment 继续；观察困难或等待
+  超时不结束 WORK、不释放 target。External transport 的具体恢复和观察动作只由
+  `docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md` 定义。
+- Fresh external operation 只允许出现在 `AGENTS.md` 已定义的共享边界内；它不构成 successor
+  WORK、retry message 或 lifecycle event。
 - `PAUSE` 保留当前 WORK，禁止新的 launch/send。
 - `RESUME` 只继续同一个 paused 或 waiting WORK。
 - `CANCEL` 只来自用户或用户明确授权的 requester。Callee 停止尚未提交的 Effect；已经提交

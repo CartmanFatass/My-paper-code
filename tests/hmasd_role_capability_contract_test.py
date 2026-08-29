@@ -132,14 +132,17 @@ def test_agentify_skill_owns_strict_mechanics_not_scientific_prompt_authoring() 
     for marker in (
         "agentify_review_query", "promptPath", "verifyExisting",
         "agentify_review_observe", "input-mismatch state", "natural completion",
-        "provider-visible user turn", "exact frozen prompt file",
+        "provider-visible user turn", "exact frozen prompt file", "responsePath",
+        "tab is not a conversation", "new provider conversation", "same material cycle",
     ):
         assert marker in combined
     assert "agentify_query` as the Send path" not in combined
     assert "transport must not compose" in combined
     assert "tool-local" in combined
     assert "task identity" in combined
-    assert "Renaming the WORK, assignment, operation, key, conversation, leaf, or task" in manual
+    assert "same frozen prompt may then receive at most one replacement strict operation" in manual
+    assert "Renaming the WORK, assignment, operation, key, leaf, tab, or task" in manual
+    assert "caller normally omits `promptSha256`" in manual
 
 
 def test_role_documents_do_not_import_other_role_methods_or_global_enums() -> None:

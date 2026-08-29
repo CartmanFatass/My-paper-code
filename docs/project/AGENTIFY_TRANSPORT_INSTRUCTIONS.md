@@ -1,89 +1,116 @@
 # HMASD strict Agentify transport
 
 This is the sole current mechanics reference for HMASD external consultations. It assumes the
-trusted local Codex Desktop project. It creates no HMASD authentication, receipt, operation ledger,
-task registry, retry state machine, or UI control checklist.
+trusted local Codex Desktop project. It creates no HMASD authentication, receipt, retry ledger,
+registry, router, or UI checklist. `AGENTS.md` is the only human-readable glossary for shared
+transport states.
 
-## Ownership
+## Objects and ownership
 
-The parent writes the complete exact UTF-8 prompt before dispatch and supplies its path, review
-mode/purpose, required provider and visible model, archive path, one operation label, observation
-bound, and stop condition. For research review, EM owns all scientific prose and includes only the
-needed GitHub remote, origin-reachable commit, repository-relative refs, evidence, question, and
-limits. Repository code is a scientific reference, not a request for general code review.
+A tab is not a conversation. A tab is a replaceable browser view; the provider conversation is the
+persistent ChatGPT/Gemini object named by its URL and conversation ID. A strict operation is one
+attempt to inject one frozen prompt into one provider conversation. None of these is a top-level
+WORK or an EM material cycle.
 
-The transport must not compose, summarize, append, truncate, translate, or rewrite the prompt. It
-must not paste a `[WORK]`, `[RESULT]`, state table, JSON packet, or machine heading into the provider
-conversation. It owns only send, provider-visible fidelity, natural-completion, response-availability,
-and exact-archive facts.
+The parent supplies one exact frozen prompt file, its `promptPath`, the purpose, provider, required
+visible model, conversation binding or new-conversation request, owner-selected `responsePath`,
+observation bound, and stop condition. For research, EM writes cohesive natural language and may
+tell GPT-5.6 Pro to use its GitHub connector against an origin-reachable commit and exact
+repository-relative references. Repository code is a scientific reference, not a request for
+general code review.
 
-## One strict send
+The transport must not compose, summarize, append, truncate, translate, wrap, or rewrite the
+prompt. It must not paste a `[WORK]`, `[RESULT]`, state table, JSON packet, command receipt, or shell
+output around it. It owns only navigation, readiness, provider/model selection, the single Send,
+provider-visible fidelity, natural completion, response availability, and exact archive facts.
 
-1. Read the exact frozen prompt file and reject an empty or unreadable file before any send-capable
-   call.
-2. Derive one immutable `idempotencyKey` and one `stableKey` for this operation. Compute the exact
-   prompt SHA-256 only because `agentify_review_query` requires `promptSha256`. These values remain
-   tool-local and are never copied into HMASD workflow state or used as task identity.
-   A temporary stale view, redirect, or unreadable readiness control receives bounded non-sending
-   recovery while each action has a new evidence-based reason. Do not block on the first stale view,
-   and do not loop or follow a fixed UI checklist when no new information is available.
-3. When the required inputs and provider/model readiness are established and no user waiver applies,
-   call `agentify_review_query` exactly once with `promptPath`, the tool-local `promptSha256`, exact
-   provider/model, exact conversation binding, the two keys, and one bounded `timeoutMs`. A failed
-   precondition stops before any send-capable call; a valid unwaived assignment is not silently left
-   unsent. For a first ChatGPT binding use the provider root, `conversationId=__new__`, and
-   `firstBinding=true` as required by the tool. For an existing binding use only its exact registered
-   conversation.
-4. Never make a second send-capable call. The Send path must not use ordinary `agentify_query`. It
-   must not activate Retry, Continue,
-   Answer-now, Stop-and-resend, or any other response-producing control.
+## Open and verify the provider view
 
-For Pro research, require visible model `GPT-5.6 Pro`. The owner prompt may direct Pro to use its
-GitHub connector. Innovator/Convergence evidence separation is already frozen by EM and must not be
-changed by transport.
+1. Read the exact frozen prompt file once and reject an empty or unreadable file before any
+   send-capable call. Derive `stableKey` and `idempotencyKey` only as tool-local Agentify inputs;
+   they are not task identity or durable HMASD state. The caller normally omits `promptSha256`:
+   Agentify computes its internal content hash. Supply a hash only for tool-local diagnosis.
+2. For an existing conversation, open its exact URL/ID in any usable tab. Replacing or closing a
+   tab does not replace or close the conversation. For a new ChatGPT conversation, use the provider
+   root with `conversationId=__new__` and `firstBinding=true`; Agentify records the concrete
+   conversation URL/ID after the provider creates it.
+3. Resolve login, CAPTCHA, blank/loading page, and stale-tab readiness without touching the
+   composer. Do not block on the first stale view: reopen the same conversation in a usable tab or
+   perform one other evidence-changing no-send recovery. Conversely, do not loop or follow a fixed
+   UI checklist when the next action cannot distinguish a new fact.
+4. Verify the actual reasoning control, not arbitrary page text. On the current ChatGPT surface the
+   required reasoning control has exact visible label `Pro`; use `model="Pro"`. “GPT-5.6 Pro” names
+   the requested review capability in prose but is not an invented UI-label alias. A plan/account
+   badge or unrelated `Pro` menu cannot satisfy preflight. Agentify persists the exact selected
+   label and semantic control route at Send; a replacement tab's current High/Pro selection is only
+   the next-send state and cannot rewrite the model evidence for an already sent turn.
 
-## Non-sending observation and full-response recovery
+## One strict Send
 
-After a send-capable call, every further action is tied to the same exact operation and cannot send:
+When readiness and the exact model are established and no user waiver applies, call
+`agentify_review_query` exactly once with `promptPath`, `responsePath`, exact provider/model,
+conversation binding, keys, first-binding flag when applicable, and a natural-completion timeout
+of up to 45 minutes. Forty-five minutes is an ordinary Pro generation window, not an error budget.
+A valid unwaived assignment is not silently left unsent.
 
-- use `agentify_review_observe` for a durable no-send observation; or
-- call `agentify_review_query` with `verifyExisting=true` and the exact same binding, keys,
-  `promptPath`, `promptSha256`, provider, and model.
+Never make a second send-capable call for that operation. Do not use ordinary `agentify_query` as
+the Send path, and do not activate Retry, Continue, Answer-now, Stop-and-resend, Regenerate, or any
+other response-producing control. The provider-visible user turn must equal the exact frozen prompt
+file; otherwise report the input-mismatch state and isolate that operation.
 
-Observe only until natural completion or the assigned bound. A clipped tool display, response
-prefix, mode label, loading screen, or generated-but-unreadable page is not a complete answer. Use
-the same no-send observation to recover the full assistant turn. Never replace it with a summary and
-never open a fresh operation to obtain missing text.
+## Observe and archive
 
-Renaming the WORK, assignment, operation, key, conversation, leaf, or task never authorizes another
-send of the same owner-frozen request to the same provider. Consult native history and the prompt;
-do not create a local cross-task ledger.
+After Send, further work on that operation is non-sending:
 
-Before mapping any state, collect these strict operation facts when they are available:
+- `agentify_review_observe` reads only the durable operation fact and never touches the page.
+- `agentify_review_query` with `verifyExisting=true` reopens/observes the same provider conversation
+  and exact operation; it never gains Send capability.
 
-- how many requests the provider received;
-- whether the provider-visible user turn equals the exact frozen prompt file;
-- which provider and visible model are evidenced;
-- whether generation reached natural completion; and
-- whether the complete assistant turn, not a truncated prefix, is available and archived with the
-  exact prompt at the owner-supplied path.
+Each page-observation call may wait up to 45 minutes. If Pro is still generating when that window
+ends, retain `SENT_WAITING` and continue the same operation in a later native wait/observation; the
+timeout is not a global generation deadline. A clipped tool display, response prefix, mode label,
+loading view, or currently unreadable page is not completion.
 
-Archive the exchange verbatim enough to preserve the complete owner prompt and complete provider
-response plus provider/model/conversation facts. Do not add scientific or engineering conclusions.
+`COMPLETE` is available only after the naturally completed full assistant turn is written
+atomically to the exact `responsePath` and reread successfully. The MCP result returns compact
+metadata and the archive path, not a potentially truncated copy of the full response. Preserve the
+complete owner prompt, provider/model/conversation facts, and complete provider response without
+adding scientific or engineering conclusions.
 
-## Return mapping
+## Tab recovery, conversation loss, and replacement
 
-`AGENTS.md` is the only human-readable glossary for transport state names and meanings. Select the
-one existing state whose definition matches the strict tool evidence; do not restate the glossary or
-invent a synonym here. Mechanics-specific decisions are limited to these cases:
+Unknown or sent-but-recoverable operations remain bound to the same provider conversation. Open
+that conversation in a replacement tab and use `verifyExisting`; a tab timeout, closed tab, root
+redirect, blank DOM, login/CAPTCHA, missing list entry, or clipped response does not prove that the
+conversation is lost and never authorizes another Send.
 
-- an error without strict proof of zero provider request and zero operation cannot use the
-  zero-send state;
-- a confirmed provider-visible prompt difference uses the input-mismatch state and stops that
-  operation;
-- a clipped or unavailable complete assistant turn cannot use the complete state; and
-- an unknown or sent operation receives only same-operation non-sending observation.
+Classify the conversation as permanently lost only when all of these mechanical facts are present:
 
-Return the leaf's own state field, direct fact, locator, archive path or `NONE`, and limitations. Do
-not map it to scientific status, technical acceptance, Portfolio action, lifecycle, or assignment
+- a possible or confirmed Send exists and the exact concrete conversation URL/ID is known;
+- readiness/account problems have been resolved without sending;
+- the exact URL/ID was directly reopened in a replacement tab; and
+- the provider then gives a stable explicit not-found, deleted, or permanently-unavailable result.
+
+Conversation-list absence may corroborate that result but cannot prove loss by itself. If first
+binding crashed with `COMMITMENT_UNKNOWN` before a concrete conversation ID was recovered, the
+transport cannot infer loss and cannot resend.
+
+An input mismatch, model mismatch, or positively lost conversation isolates the old operation and
+conversation. It supplies no scientific or lifecycle judgment. Under the `AGENTS.md` owner rule,
+the same frozen prompt may then receive at most one replacement strict operation in a new provider
+conversation while retaining the same top-level WORK and, for EM, the same material cycle. This is
+not reinjection into the old conversation. Any late content from the isolated conversation remains
+quarantined and cannot complete or influence the replacement.
+
+Renaming the WORK, assignment, operation, key, leaf, tab, or task never authorizes a duplicate.
+Changing to a new provider conversation is valid only for the explicit isolated-conversation
+replacement above or for a materially different owner-authored question. No local cross-task
+ledger is created; native history and Agentify's strict operation record provide the facts.
+
+## Return
+
+Return only the transport leaf's own state field, direct mechanical fact, concrete conversation
+locator, archive path or `NONE`, and limitations. An error without strict zero-send proof cannot be
+called zero-send; an incomplete archive cannot be called complete. Do not map transport to
+scientific status, technical acceptance, Portfolio action, lifecycle, top-level failure, or
 cancellation.

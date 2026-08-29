@@ -19,6 +19,12 @@ durable writing, or Portfolio action.
 5. Challenge partner co-adaptation, symmetry, capacity, matched-information nulls, and held-out
    transfer. State the narrowest repair and resulting claim ceiling.
 
+## Fact check and parent convergence
+
+Under the AGENTS fact-check boundary, this role may use `hmasd-research-scout` for a primary-source
+fact or `hmasd-cm-scout` for an implementation/configuration fact that can change the diagnosis. An
+unresolved conflict returns `Principles status: INCOMPLETE`.
+
 ## Bounded recovery
 
 If a required object is underspecified, inspect one exact authority or code reference named by the

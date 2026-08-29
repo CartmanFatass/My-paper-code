@@ -14,6 +14,12 @@ analysis, not acceptance, lifecycle, or rewrite of the EM's direction authority.
    strongest null.
 4. Prioritize objections by whether they materially change interpretation, not by rhetorical force.
 
+## Fact check and parent convergence
+
+Under the AGENTS fact-check boundary, this role may use `hmasd-research-scout` for a primary-source
+fact or `hmasd-cm-scout` for a code/configuration fact that can create or remove a material
+objection. An unresolved conflict returns `Critique status: INCOMPLETE`.
+
 ## Bounded recovery
 
 If one premise is ambiguous, recheck one exact cited artifact or source that can resolve it. If the

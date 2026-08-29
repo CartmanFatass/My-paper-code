@@ -46,6 +46,35 @@ Top-level outcome meanings are exhaustive:
 - `CANCELLED`: only a received `[CONTROL] Action: CANCEL` can produce this value, after committed
   Effects reach an observable safe terminal fact.
 
+Role-owned field values are equally independent:
+
+- Root `IN_PROGRESS` means the shared assignment is still advancing; `CHANGED` means its requested
+  shared artifact or contract materially changed; `UNCHANGED` means acceptance was answered without
+  such a change; `BLOCKED` means Root cannot satisfy the shared acceptance. Integration
+  `IN_PROGRESS` is still underway, `INTEGRATED` is present in the intended Git target,
+  `NOT_INTEGRATED` is absent from that target, and `NOT_APPLICABLE` means no Git integration was
+  required.
+- Portfolio `NONE` makes no lifecycle decision; `ACTIVATE` starts active investment; `CONTINUE`
+  retains the current scope; `NARROW` retains only a smaller stated scope; `PARK` retains the
+  direction without active investment; `CLOSE` ends investment in that direction; `FUSE` merges its
+  surviving question into another direction; `SPINOFF` creates a distinct direction. `KEEP` leaves
+  the advancing-capacity limit unchanged; `SET <n>` replaces it with the stated nonnegative limit.
+- EM `IN_PROGRESS` means the scientific acceptance is still being pursued; `SYNTHESIZED` means the
+  frozen question was answered at a bounded claim ceiling; `NO_MATERIAL_INSIGHT` means the scientific
+  acceptance was completed but produced no decision-changing insight; `NOT_REACHED` means no valid
+  scientific synthesis was reached. `Decision impact` states the supported change to the investment
+  question, or `NONE`. An EM recommendation uses the Portfolio action meanings above as advice only;
+  it never performs the action.
+- CM engineering `IN_PROGRESS` means the engineering acceptance is still being pursued;
+  `IMPLEMENTED` means the requested change is present; `UNCHANGED` means acceptance was answered
+  without a code/configuration change; `BLOCKED` means the engineering acceptance was not satisfied;
+  `NOT_REACHED` means engineering work did not reach a valid candidate. Observation `IN_PROGRESS`
+  is still being acquired, `OBSERVED` is the requested valid observation, `NOT_OBSERVED` means no
+  valid observation was obtained, and `NOT_REQUIRED` means none was requested. Verification
+  `IN_PROGRESS` is still running, `SATISFIED` supports engineering acceptance, `UNSATISFIED` does not,
+  and `NOT_RUN` means no verification ran. `Commit` is the exact Git commit containing the returned
+  Git-visible work, or `NONE` when no such commit exists.
+
 EM/CM milestone snapshots use a separate shared state:
 
 - `WORKING`: the same inbound WORK is actively advancing.
@@ -66,30 +95,48 @@ status, clipped/unreadable response, or lost process observation is not completi
 produce `DONE`, `FAILED`, or `CANCELLED` or release the target. `PAUSE` also retains the same WORK;
 `CANCELLED` remains unavailable until every committed Effect has a safe terminal fact.
 
-Transport states are shared facts for both Pro and engineering transport:
+Transport states are shared facts for both Pro and engineering transport. Each value describes one
+strict send operation inside one provider conversation. A browser tab is only a replaceable view of
+that conversation; neither tab nor operation is an EM material cycle or a top-level WORK.
 
 - `PENDING`: no send-capable call occurred.
-- `ZERO_SEND_FAILED`: the provider definitely received no request and no operation was created.
+- `ZERO_SEND_FAILED`: the provider definitely received no request and created or advanced no
+  provider conversation for this operation.
 - `COMMITMENT_UNKNOWN`: whether the provider received the request cannot be proved.
 - `SENT_WAITING`: the exact request was sent and natural generation is still in progress.
 - `COMPLETE`: the provider-visible request matches the frozen prompt and the naturally completed
   full response is archived.
 - `SENT_INPUT_MISMATCH`: a send is confirmed but the provider-visible request differs from the
   frozen prompt.
+- `SENT_MODEL_MISMATCH`: a send is confirmed but the provider-visible model differs from the exact
+  owner-required visible model.
 - `SENT_UNREADABLE`: a send is confirmed but the full response cannot yet be archived.
+- `CONVERSATION_LOST`: after same-account direct reopening and bounded non-sending recovery, the
+  provider positively reports that the exact conversation no longer exists or is permanently
+  unavailable. The old operation is isolated and any late old-conversation content is quarantined.
 - `WAIVED`: the user waived that exact operation before any send-capable call.
 
-Any unknown or sent state is observe-only and never resends. A mismatch is terminal for that
-operation and supplies no scientific, engineering, Portfolio, or lifecycle conclusion. When a Pro
-stage is required for EM acceptance, mismatch makes the current EM `[WORK]` `FAILED`, never
-`CANCELLED`; EM still returns every EM field using its actually reached scientific state and
-`Recommendation: NONE`. Engineering transport mismatch fails the CM assignment only when that
-consultation was required for its acceptance. Transport failure cannot imply `PARK`, `CLOSE`, or any
-other Portfolio action.
+`COMMITMENT_UNKNOWN`, `SENT_WAITING`, and `SENT_UNREADABLE` retain the same operation and provider
+conversation; observation may move to another tab but cannot send. `ZERO_SEND_FAILED` permits one
+bounded repair followed by a fresh strict operation because no provider injection occurred.
+
+`SENT_INPUT_MISMATCH`, `SENT_MODEL_MISMATCH`, and `CONVERSATION_LOST` isolate the old operation and
+conversation and supply no scientific, engineering, Portfolio, or lifecycle conclusion. When the
+same frozen request is still required, its owner may start at most one automatic replacement in a
+new provider conversation while retaining the same top-level WORK and, for EM, the same material
+cycle. The current Pro-stage snapshot records only whether that single replacement was used; it is
+not an attempt ledger. Native history retains the underlying isolation fact. The same prompt is
+never injected twice into one
+provider conversation, and late content from an isolated conversation is never evidence for its
+replacement. If a concrete user decision or waiver can still satisfy the assignment, the owner
+retains `WAITING` for that exact reentry. If a required consultation has exhausted this replacement
+boundary, no live Effect remains, and no waiver applies, the current assignment ends `FAILED` with
+the owner's actually reached role fields and no lifecycle recommendation; it never becomes
+`CANCELLED`. Transport failure cannot imply `PARK`, `CLOSE`, or any other Portfolio action.
 
 Leaf observations are also separate namespaces:
 
-| Alias | Custom subagent | Own final field |
+| HMASD task-name code | Configured custom subagent | Own final field |
 | --- | --- | --- |
 | `gl` | `hmasd-general-leaf` | `Chore status: COMPLETE | PARTIAL | UNAVAILABLE` |
 | `cs` | `hmasd-cm-scout` | `Surface status: MAPPED | PARTIAL | UNAVAILABLE` |
@@ -108,6 +155,27 @@ Leaf observations are also separate namespaces:
 A leaf result is evidence for its parent. It cannot substitute for the parent's judgment or emit a
 top-level `[RESULT]` field.
 
+Leaf value meanings are local to that observation:
+
+- `gl`: `COMPLETE` met the chore acceptance, `PARTIAL` returned a bounded usable subset, and
+  `UNAVAILABLE` could not produce one. `cs`: `MAPPED` answered the frozen surface question,
+  `PARTIAL` mapped only a stated subset, and `UNAVAILABLE` could not establish a trustworthy map.
+- `ri`: `CANDIDATE` returns at least one surviving mechanism candidate,
+  `NO_SURVIVING_CANDIDATE` returns none after the assigned search, and `INCOMPLETE` could not finish
+  that judgment. `rp`: `DEFECTS` found material principle defects, `NO_MATERIAL_DEFECT` found none in
+  scope, and `INCOMPLETE` could not finish. `rs`: `FOUND` found decision-relevant evidence,
+  `CONFLICTED` found unresolved primary-source conflict, `NOT_FOUND` found none within the completed
+  search, and `UNAVAILABLE` could not perform the search. `rc`: `OBJECTIONS` found surviving material
+  objections, `NO_MATERIAL_OBJECTION` found none in scope, and `INCOMPLETE` could not finish.
+- `im` and `rt`: `IMPLEMENTED` produced the assigned implementation observation, `PARTIAL` produced
+  only a stated subset, and `BLOCKED` could not satisfy it. `rv`: `FINDINGS` reports at least one
+  verified material defect, `NO_FINDINGS` reports none in scope, and `INCOMPLETE` lacks a premise
+  required for judgment. `vf`: `OBSERVED` obtained the frozen runtime fact, `NOT_OBSERVED` did not,
+  and `UNAVAILABLE` could not run the probe.
+- `op`: `TERMINAL` retains the exact process through a terminal witness, `LAUNCH_FAILED` proves no
+  process was launched, and `OBSERVATION_LOST` means the launched process lacks a terminal witness.
+  `pt` and `et` use exactly the shared transport-state meanings above.
+
 ## Caller matrix and task configuration
 
 | Caller | Allowed direct leaves | Work retained by the manager |
@@ -119,8 +187,19 @@ top-level `[RESULT]` field.
 
 Root sends bounded shared engineering to a dedicated top-level `CM/shared`; it does not borrow a
 direction CM or call engineering leaves directly. EM never calls engineering leaves. CM never calls
-research leaves. Portfolio never calls either specialist family. Leaves return only to their
-spawning parent, never delegate, and never contact another participant.
+research leaves. Portfolio never calls either specialist family. Leaves normally return only to
+their spawning parent and never contact another top-level participant.
+
+A role-local fact check is the sole depth-2 exception. A judgment leaf may spawn only the Scout or
+Verifier types named by its own role method, only for one material factual premise that can change
+its conclusion. The child receives a frozen factual question and returns observation, not judgment;
+the fact-check child cannot delegate. If that observation conflicts with the assignment, cited
+authority, owner-supplied constraint, or the judgment leaf's provisional conclusion, the leaf sends
+one concise native `conflict packet` to its spawning parent: the conflicting propositions, direct
+evidence, authority boundary, and what conclusion would change. It retains its assignment until the
+parent replies with the converged premise. Without that reply it returns its own incomplete/partial
+value, never a guessed finding. This uses native parent/child history; no receipt, conflict ledger,
+router, or new shared state is created.
 
 New top-level tasks use explicit native configuration:
 
@@ -131,7 +210,10 @@ New top-level tasks use explicit native configuration:
 | CM | `gpt-5.6-sol` | `high` |
 | Root | user-selected | user-selected |
 
-Direct-leaf `spawn_agent.task_name` uses `<alias>_<model>_<effort>_<task>`. The model code is
+Codex has no native alias field for these codes. They are only an HMASD display-name convention;
+the configured native agent identifiers remain the `[agents.*]` entries in `.codex/config.toml` and
+the `hmasd-*` profile names above. Direct-leaf `spawn_agent.task_name` uses
+`<code>_<model>_<effort>_<task>`. The model code is
 `l | t | s`; effort is `l | m | h | xh | mx | u`; task is `[a-z0-9_]+`. Codes must match the actual
 selected profile. Examples: `rv_s_xh_plan`, `gl_l_xh_pdf`, `pt_l_m_pro`. This is a short display
 name only and is never an identity, receipt, or route.
@@ -139,9 +221,10 @@ name only and is never an identity, receipt, or route.
 ## Universal leaf and Effect boundaries
 
 Every leaf receives a self-contained natural-language task model: intended outcome, why it matters,
-concrete objects and relations, protected semantics, exact owned paths and Effects, local judgment,
-completion evidence, and stop condition. IDs, paths, commits, fields, and commands are factual
-anchors after meaning. Use `fork_turns=1`; inherited context is background, not the assignment.
+concrete objects and relations, protected semantics, owner-known domain and runtime facts, exact
+owned paths and Effects, local judgment, completion evidence, and stop condition. IDs, paths,
+commits, fields, and commands are factual anchors after meaning. Use `fork_turns=1`; inherited
+context is background, not the assignment.
 
 Every leaf returns conclusion-first, followed only by its own field, direct evidence, paths, and
 limitations. It does not commit, push, create a worktree, launch an unassigned Effect, or broaden
@@ -154,13 +237,13 @@ same model or source are search coverage, not independent scientific evidence. W
 downloads, extraction, formatting, fixtures, and chores should go to `gl`; a specialist is selected
 only for its own method.
 
-One owner-frozen request to one provider sends at most once. Once commitment is unknown or a send is
-confirmed, changing the WORK, leaf, label, key, conversation, or task does not make the same request
-a fresh Effect; only same-operation non-sending observation is allowed. A new send requires either
-strict proof that the provider received nothing or a materially different owner-authored question.
-This is judged from native history and the prompt itself, not from a local ledger. Tool-local stable
-keys or content hashes required by the strict transport implementation stay inside that tool
-operation; they do not become HMASD workflow identity or durable control state.
+One strict operation sends at most once, and one frozen prompt is never injected twice into the same
+provider conversation. A fresh operation is permitted only after strict zero-send proof, for a
+materially different owner-authored question, or for the one new-conversation replacement defined
+above. Changing the WORK, leaf, label, key, tab, or task is never sufficient. This is judged from
+native history and the provider conversation, not from a local workflow ledger. Tool-local stable
+keys or content hashes stay inside that tool operation; they do not become HMASD identity or
+durable control state.
 
 Unsafe memory plans must be reduced, batched, or sharded. A local result command expected to exceed
 7200 seconds requires one performance-reasonableness review and user approval bound to the exact
@@ -175,18 +258,14 @@ it. Portfolio, EM, and CM are created from the saved HMASD project using Codex n
 No direction directory must be saved as a separate Desktop project, and no local worktree mapping
 or registry is created.
 
-For one direction, only one top-level participant is a Git-visible writer at a time. Before EM hands
-Git-visible work to CM it commits its owned paths and becomes read-only. The CM branch fast-forwards
-to that exact commit, changes and commits only its owned paths, then returns the known commit/diff.
-EM fast-forwards to the exact CM commit before writer ownership returns. A non-fast-forward stops
-the current participant and is reported to its requester; no cherry-pick, rebase, or history rewrite
-is used. Shared Git mutations are serialized and unrelated changes are preserved.
+For one direction, only one top-level participant is a Git-visible writer at a time. Exact
+top-level writer transfer and handoff behavior is defined only by
+`docs/project/WORKFLOW_PROTOCOL.md`; shared Git mutations remain serialized and unrelated changes
+are preserved.
 
 Direction source is under `experiments/candidates/`, tests under
 `tests/experiments/candidates/`, durable science under `docs/research/candidates/<direction>/`, and
-raw run artifacts under `temp/directions/<direction>/{exp,test}/`. A Git-visible top-level handoff
-must commit the referenced changes. A same-repository native-worktree handoff does not require push;
-push is required only for user-requested remote sync, cross-host delivery, or formal delivery.
+raw run artifacts under `temp/directions/<direction>/{exp,test}/`.
 
 Shared C++ backend, neural-network base, or cross-direction core changes require prior user notice
 of exact paths, goal, non-goals, and semantic effect. Use native Windows Git/Python; prefer

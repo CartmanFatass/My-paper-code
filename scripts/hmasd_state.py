@@ -45,6 +45,8 @@ PRO_STATUSES = {
     "COMPLETE",
     "SENT_INPUT_MISMATCH",
     "SENT_UNREADABLE",
+    "SENT_MODEL_MISMATCH",
+    "CONVERSATION_LOST",
     "WAIVED",
 }
 RUN_STATUSES = {"PREPARED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"}
@@ -94,10 +96,16 @@ def _text_list(value: Any, label: str) -> None:
 
 
 def _validate_pro_review(value: Any, label: str) -> None:
-    if not isinstance(value, dict) or set(value) != {"status", "response"}:
-        raise StateError(f"{label} must contain only status and response")
+    if not isinstance(value, dict) or set(value) != {
+        "status", "response", "replacement_used"
+    }:
+        raise StateError(
+            f"{label} must contain only status, response, and replacement_used"
+        )
     if value["status"] not in PRO_STATUSES:
         raise StateError(f"{label}.status is invalid")
+    if not isinstance(value["replacement_used"], bool):
+        raise StateError(f"{label}.replacement_used must be boolean")
     _nullable_text(value["response"], f"{label}.response")
     if value["status"] == "COMPLETE" and value["response"] is None:
         raise StateError(f"{label}.response is required when COMPLETE")
@@ -226,30 +234,53 @@ def _check_path(path: Path, kind: str, direction: str, root: Path) -> Path:
 def _pro_transition(current: Mapping[str, Any], next_value: Mapping[str, Any], label: str) -> None:
     old = current["status"]
     new = next_value["status"]
+    replacement_was_used = current["replacement_used"]
+    replacement_is_used = next_value["replacement_used"]
     allowed = {
         "PENDING": {
             "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
-            "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
+            "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH",
+            "SENT_UNREADABLE", "WAIVED",
         },
         "ZERO_SEND_FAILED": {
-            "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE",
-            "SENT_INPUT_MISMATCH", "SENT_UNREADABLE", "WAIVED",
+            "PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING",
+            "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH",
+            "SENT_UNREADABLE", "WAIVED",
         },
         "COMMITMENT_UNKNOWN": {
             "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH",
-            "SENT_UNREADABLE",
+            "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST",
         },
         "SENT_WAITING": {
-            "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_UNREADABLE",
+            "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH",
+            "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST",
         },
-        "SENT_UNREADABLE": {"SENT_UNREADABLE", "COMPLETE", "SENT_INPUT_MISMATCH"},
-        "SENT_INPUT_MISMATCH": {"SENT_INPUT_MISMATCH"},
+        "SENT_UNREADABLE": {
+            "SENT_UNREADABLE", "COMPLETE", "SENT_INPUT_MISMATCH",
+            "SENT_MODEL_MISMATCH", "CONVERSATION_LOST",
+        },
+        "SENT_INPUT_MISMATCH": {"SENT_INPUT_MISMATCH", "PENDING"},
+        "SENT_MODEL_MISMATCH": {"SENT_MODEL_MISMATCH", "PENDING"},
+        "CONVERSATION_LOST": {"CONVERSATION_LOST", "PENDING"},
         "COMPLETE": {"COMPLETE"},
         "WAIVED": {"WAIVED"},
     }
     if new not in allowed[old]:
         raise StateError(f"{label} cannot regress from {old} to {new}")
-    if old in {"COMPLETE", "SENT_INPUT_MISMATCH", "WAIVED"} and dict(current) != dict(next_value):
+    isolated = {"SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "CONVERSATION_LOST"}
+    starts_replacement = old in isolated and new == "PENDING"
+    if replacement_was_used and not replacement_is_used:
+        raise StateError(f"{label}.replacement_used cannot regress")
+    if replacement_is_used != replacement_was_used and not starts_replacement:
+        raise StateError(
+            f"{label}.replacement_used changes only when starting an isolated replacement"
+        )
+    if starts_replacement:
+        if replacement_was_used:
+            raise StateError(f"{label} replacement was already used")
+        if not replacement_is_used:
+            raise StateError(f"{label} replacement must set replacement_used")
+    if old in {"COMPLETE", "WAIVED"} and dict(current) != dict(next_value):
         raise StateError(f"resolved {label} cannot change")
 
 
@@ -280,10 +311,16 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
                 raise StateError(
                     "a new research cycle cannot discard an unresolved external operation"
                 )
+            if current["snapshot_state"] not in TERMINAL_SNAPSHOT_STATES:
+                raise StateError("a new research cycle requires a terminal prior WORK")
             if next_document["milestone"] != "SCOPE_FROZEN":
                 raise StateError("a new research cycle must start at SCOPE_FROZEN")
             for field in ("pro_innovator", "pro_convergence"):
-                if new_cycle[field] != {"status": "PENDING", "response": None}:
+                if new_cycle[field] != {
+                    "status": "PENDING",
+                    "response": None,
+                    "replacement_used": False,
+                }:
                     raise StateError(f"a new research cycle requires pending {field}")
         elif MILESTONE_ORDER[kind][next_document["milestone"]] < MILESTONE_ORDER[kind][current["milestone"]]:
             raise StateError("research milestone cannot regress within a cycle")

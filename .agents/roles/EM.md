@@ -70,13 +70,18 @@ owns the complete Pro prompt and every scientific interpretation.
 
 When a source, tool, or transport step fails, preserve the scientific question and classify the
 missing evidence. Try one role-appropriate recovery that tests a new hypothesis: alternate primary
-source, smaller discriminator, or non-sending observation of the same operation. A sent or unknown
-request never resends under a new WORK, leaf, label, key, conversation, or task. Provider failure
-alone never changes scientific judgment or lifecycle; a required prompt mismatch ends the current
-WORK as failed with its actual science state and no recommendation. A running research leaf or CM,
-an unresolved Pro operation, or an unreadable response keeps this WORK live: continue native wait
-or same-operation observation, or return `WAITING` with the exact reentry. Do not return a terminal
-Outcome while any such operation remains live.
+source, smaller discriminator, or continuation of the existing `pt` transport assignment. EM never
+performs transport mechanics itself. A running research leaf or CM, or a nonterminal Pro fact returned
+by `pt`, keeps this WORK live: continue native wait or the same transport assignment, or return
+`WAITING` with the exact reentry. Do not return a terminal Outcome while any such operation remains
+live.
+
+When `pt` returns an isolated terminal transport fact, retain this WORK and material cycle and apply
+only the single replacement boundary defined by `AGENTS.md`, again through `pt`. If that boundary is
+exhausted or cannot be justified, return `WAITING` only when one concrete waiver or owner decision
+can still satisfy this assignment. Otherwise, after every committed Effect has a terminal fact,
+return `FAILED` with the actually reached Scientific status and `Recommendation: NONE`. Provider
+availability alone never changes scientific judgment, recommendation, lifecycle, or claim ceiling.
 
 ## Stop and return
 

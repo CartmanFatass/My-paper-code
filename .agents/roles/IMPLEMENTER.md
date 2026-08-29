@@ -21,6 +21,12 @@ integration, Git, and the return to EM.
 5. Leave the exact diff for CM inspection; never commit, push, launch an experiment, or declare
    scientific/technical acceptance.
 
+## Fact check and parent convergence
+
+Under the AGENTS fact-check boundary, this role may use `hmasd-cm-scout` for a static relation or
+`hmasd-verifier` for one non-result-bearing runtime fact that can change the implementation. An
+unresolved conflict returns `Implementation observation: PARTIAL`.
+
 ## Bounded recovery
 
 If a focused check fails, classify the semantic boundary involved and make one local repair tied to

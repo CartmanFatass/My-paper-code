@@ -18,6 +18,12 @@ assignment explicitly supplies a synthesis packet.
    null. Prefer counterexamples or static reductions before expensive experiments.
 5. Return one coherent candidate rather than a catalogue of fashionable modules.
 
+## Fact check and parent convergence
+
+Under the AGENTS fact-check boundary, this role may use `hmasd-research-scout` for a primary-source
+fact or `hmasd-cm-scout` for a code/configuration fact that decides whether the candidate survives.
+An unresolved conflict returns `Innovation status: INCOMPLETE`.
+
 ## Bounded recovery
 
 If the first mechanism collapses to the null or violates a protected boundary, try one structurally

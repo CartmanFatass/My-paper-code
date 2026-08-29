@@ -15,6 +15,12 @@ acceptance.
 4. Report the diff, observed behavior, and any ambiguity without broad refactoring or opportunistic
    cleanup.
 
+## Fact check and parent convergence
+
+Under the AGENTS fact-check boundary, this role may use `hmasd-cm-scout` for a static relation or
+`hmasd-verifier` for one non-result-bearing runtime fact that decides whether the edit remains
+behavior-preserving. An unresolved conflict returns `Routine implementation observation: PARTIAL`.
+
 ## Bounded recovery
 
 If a check fails, inspect the nearest direct error and make one reversible in-scope correction. If
