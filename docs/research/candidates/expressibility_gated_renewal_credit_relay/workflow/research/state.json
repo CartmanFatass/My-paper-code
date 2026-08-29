@@ -1,12 +1,15 @@
 {
-  "blockers": [],
+  "blockers": [
+    "The sole fresh Innovator operation cb925390-c77e-4f2d-bfcb-1963f316ca3e remains SENT_UNREADABLE. The now-live repaired verifyExisting archival recovery reused the exact operation, keys, prompt, persisted conversation, current tab, ledger response path, and user anchor, but failed closed with review_recovery_rendered_identity_unreadable.",
+    "The observer still reports hasObservedUserMessageId true and hasUserMessageId false. It cannot prove the persisted user's exact causal rendered identity, so provider-visible prompt fidelity, visible Pro reasoning evidence, the full naturally completed response, and archive completeness remain unavailable."
+  ],
   "claim_ceiling": "At most a finite-host, two-agent, one-update statement about whether same-information ordered waiter association changes the named bounded utility and fixed-token allocation contrasts. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; an exhausted host would be a bounded negative result, not a general impossibility theorem.",
-  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. Strict operation cb925390-c77e-4f2d-bfcb-1963f316ca3e retains exactly one send. Root now establishes that the exact no-send causal archive recovery path is implemented, real-contract tested, independently reviewed with NO_FINDINGS, live after Agentify restart, and passes the 52/52 strict transport suite. This RESUME authorizes the same current transport leaf to use only repaired verifyExisting recovery on exact persisted conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0 and current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc with immutable operation and keys. Pro remains SENT_UNREADABLE until prompt/model/full-response/archive proof is complete; no replacement, CM, experiment, synthesis, Convergence, or recommendation has been reached.",
+  "completed_summary": "The successor scope and exact Innovator prompt are committed at 29fdf4362b9a345b8c6157c664baa2da65da85e9. Strict operation cb925390-c77e-4f2d-bfcb-1963f316ca3e retains exactly one send. Root established that repaired no-send causal archive recovery is live and supplied exact persisted conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0, current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc, and immutable operation facts. The one authorized repaired verifyExisting call failed closed with review_recovery_rendered_identity_unreadable before proving the persisted user anchor. Pro remains SENT_UNREADABLE with no archive and no replacement; no CM, experiment, synthesis, Convergence, recommendation, lifecycle, or capacity change occurred.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Use repaired agentify_review_query verifyExisting only on operation cb925390-c77e-4f2d-bfcb-1963f316ca3e, idempotency key egrcr-successor-2026-08-28-10-innovator-primary-29fdf436, stable key egrcr-successor-2026-08-28-10-innovator, persisted conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0, and current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc for no-send archival recovery; omit responsePath only if the current schema omits it because the immutable ledger path is reused.",
-  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this becomes scientifically active only after the mandatory Innovator archive is validly complete.",
-  "reentry_condition": null,
+  "next_action": "Hold this exact successor WORK and Innovator operation without any new send, recovery retry, navigation, key mutation, conversation, replacement, CM task, experiment, synthesis, or Convergence launch. Resume only when the repaired observer can prove the persisted user anchor's exact causal rendered identity in the same conversation without sending.",
+  "next_discriminator": "Audit the current host for both consequence-distinct eligible waiter identities inside one generic pre-action/cue/sign/action/lag/propensity stratum and prospective same-information oracle scarce-allocation or bounded-utility headroom over ordinary GAE; this remains scientifically inactive until the mandatory Innovator archive is validly complete.",
+  "reentry_condition": "The repaired no-send observer can prove the exact causal rendered identity of the persisted user anchor for operation cb925390-c77e-4f2d-bfcb-1963f316ca3e in conversation 6a9243b9-7d88-83e8-83a2-c6f013ed45d0.",
   "refs": [
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-scope-and-grounding.md",
@@ -25,6 +28,7 @@
     "7b0697b8772b07758efe042a99884cf314a420e7",
     "e6bd81c22f565893aa4610a8791a2e51992938c3",
     "92e710dedadc79ce70d3d2698d9ceba476d56638",
+    "3baeb3707ddd7cbf7fee20ca2aeb922298d17961",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180",
@@ -33,6 +37,7 @@
     "Agentify stable key egrcr-successor-2026-08-28-10-innovator",
     "Provider conversation https://chatgpt.com/c/6a9243b9-7d88-83e8-83a2-c6f013ed45d0",
     "Agentify current tab 7daf1662-5dec-43b7-9096-b91042e8d9dc",
+    "Agentify recovery error review_recovery_rendered_identity_unreadable",
     "[CONTROL] RESUME causal archive recovery from task 01a04a02-842d-7771-8322-742c9a5cf9b6 at 2026-08-29T02:12:00Z"
   ],
   "research_cycle": {
@@ -50,8 +55,8 @@
     },
     "reason": "Fresh current-protocol successor cycle to decide whether a bounded same-information association discriminator exists beyond ordinary GAE or whether the retained exact utility/allocation null and absent consequence-distinct identity support exhaust the current host."
   },
-  "revision": 8,
+  "revision": 9,
   "role": "EM",
-  "snapshot_state": "WORKING",
-  "updated_at": "2026-08-29T03:22:22.078231Z"
+  "snapshot_state": "WAITING_REENTRY",
+  "updated_at": "2026-08-29T03:24:15.326827Z"
 }
