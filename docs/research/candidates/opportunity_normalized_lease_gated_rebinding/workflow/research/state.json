@@ -1,10 +1,12 @@
 {
-  "blockers": [],
+  "blockers": [
+    "The successor Innovator strict operation has one confirmed send but its concrete provider conversation identity and full response are currently unreadable. The exact operation remains live under no-send observation and cannot be resent, replaced, or treated as complete."
+  ],
   "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget interpretation of the named B1 deterministic and history-independent RAND-IID ONLGR-versus-RAW contrasts, explicitly qualified by TIMING-ONLY, fixed/global-rate, operational-partition support, voluntary marked activity, service/action-cost, B2, ROAD direct-value, and resource evidence. No RAW representational impossibility, literal hazard, causal lease or REBIND value, arbitrary or continuous k, UAV performance, variable N, transfer, safety certification, or general PPO superiority claim is available.",
-  "completed_summary": "Opened fresh successor cycle 2026-08-28.10-pilot-01a04a02-onlgr-successor-01 from clean exact direction head acf788037d8215142f8f03e72dab1d78ac0e5e3a. Frozen the scientific object, competing explanations and predictions, unchanged-checkpoint discriminator, outcome-to-claim and Portfolio branches, one-CM-round resource ceiling, early-stop and scope-invalidated conditions, and a cohesive neutral Innovator prompt. Both successor Pro stages are fresh and PENDING with replacement_used false. The old provider conversation remains quarantined and is not evidence for this cycle.",
+  "completed_summary": "Opened and committed fresh successor cycle 2026-08-28.10-pilot-01a04a02-onlgr-successor-01 from clean exact direction head acf788037d8215142f8f03e72dab1d78ac0e5e3a. Frozen the scientific object, competing explanations and predictions, unchanged-checkpoint discriminator, outcome branches, resource ceiling, early-stop and scope-invalidated conditions, and neutral Innovator prompt at commit aeeae4015ed91a36534646cc31246a3fa22bdd41. One strict Innovator send occurred with visible ChatGPT Pro mode under operation 672afd22-ec25-490e-8b61-7d2db0991078 and request fingerprint a511ebaaaf82da4f150ef10ddb616e9bff93e7063c8115ba4f17f60fe82eac92. The provider conversation identity and full response remain unreadable, so no archive or scientific Innovator evidence exists yet. The old provider conversation remains quarantined and is not evidence for this cycle.",
   "direction": "opportunity_normalized_lease_gated_rebinding",
   "milestone": "SCOPE_FROZEN",
-  "next_action": "Commit the fresh scope, milestone snapshot, and exact Innovator prompt, then give one fresh current transport leaf a new-conversation strict operation using visible Pro mode, one send-capable call, exact prompt fidelity, a 45-minute observation window, and the declared archive path.",
+  "next_action": "Continue only non-sending observation of exact Innovator operation 672afd22-ec25-490e-8b61-7d2db0991078 through its existing transport assignment. Do not resend, replace, create another conversation, begin synthesis, send Convergence, or launch CM until the exact operation reaches a current terminal transport fact with the required full archive.",
   "next_discriminator": "Joint unchanged-checkpoint history-independent RAND-IID interpretation of ONLGR versus RAW and TIMING-ONLY, reconciled with service versus action cost, operational marked-partition availability, voluntary marked activity, fixed/global-rate performance, B2 rate flexibility, and ROAD versus NEVER/SHAM direct value; first determine whether this existing object is sufficient or exposes one answer-changing missing observation.",
   "reentry_condition": null,
   "refs": [
@@ -19,7 +21,10 @@
     "acf788037d8215142f8f03e72dab1d78ac0e5e3a",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
-    "b4762febd12b62748d35e2b1a1dffdfb8d776180"
+    "b4762febd12b62748d35e2b1a1dffdfb8d776180",
+    "Innovator operation 672afd22-ec25-490e-8b61-7d2db0991078",
+    "Innovator assignment key 2026-08-28.10-pilot-01a04a02-onlgr-successor-01-innovator",
+    "Innovator request fingerprint a511ebaaaf82da4f150ef10ddb616e9bff93e7063c8115ba4f17f60fe82eac92"
   ],
   "research_cycle": {
     "label": "2026-08-28.10-pilot-01a04a02-onlgr-successor-01",
@@ -32,12 +37,12 @@
     "pro_innovator": {
       "replacement_used": false,
       "response": null,
-      "status": "PENDING"
+      "status": "SENT_UNREADABLE"
     },
     "reason": "Portfolio requested one clean current-protocol successor cycle to determine whether ONLGR carries decision-relevant task-content or future-cadence information beyond RAW, timing-only behavior, fixed/global-rate or NEVER/SHAM-like regularization, deterministic cadence leakage, and generic exposure reduction."
   },
-  "revision": 1,
+  "revision": 2,
   "role": "EM",
   "snapshot_state": "WORKING",
-  "updated_at": "2026-08-29T02:34:06Z"
+  "updated_at": "2026-08-29T02:42:37.9021732Z"
 }
