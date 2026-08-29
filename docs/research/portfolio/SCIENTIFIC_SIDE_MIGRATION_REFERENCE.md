@@ -334,6 +334,12 @@ Portfolio records an action.
 
 ### 6.2 Exact current files
 
+At shared main `7555d2a0`, DEARS R02 science and its pause handoff are integrated. The SCDMP, VQFP
+and ONLGR safe handoffs below are still direction-local at their named detached writer commits at
+this migration cut. Root must integrate only their owned direction-local deltas after scope and blob
+verification; do not merge or cherry-pick the divergent task histories wholesale, and do not treat
+missing main visibility as missing science.
+
 #### DEARS
 
 - `docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md`
