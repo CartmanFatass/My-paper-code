@@ -34,6 +34,15 @@ The frozen neutral scope and external Innovator question are recorded at:
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-scope-and-grounding.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator-prompt.md`
 
+The accepted Innovator and EM independently identify one evaluation-only,
+finite-grid headroom-and-exposure-heterogeneity screen as answer-changing before
+any new learned-link comparison. The exact result-blind discriminator and bounded
+EM-to-CM contract are frozen at:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-innovator-and-discriminator-freeze.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-em-to-cm-work.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-28.10-clean-01a04a02-onlgr-successor-02-pro-innovator.md`
+
 ## Current bounded successor-cycle synthesis
 
 Successor cycle `2026-08-28.10-pilot-01a04a02-onlgr-successor-01` reached a
