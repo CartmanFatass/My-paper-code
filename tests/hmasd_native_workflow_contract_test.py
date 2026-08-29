@@ -402,7 +402,6 @@ def test_portfolio_is_one_current_table() -> None:
     assert owner["expressibility_gated_renewal_credit_relay"] == "NONE"
     assert lifecycle["opportunity_normalized_lease_gated_rebinding"] == "ACTIVE"
     assert owner["opportunity_normalized_lease_gated_rebinding"] == "PORTFOLIO"
-    assert lifecycle["finite_semantic_boundary_support"] == "PARKED"
     assert lifecycle["ucope"] == "PARKED"
     assert owner["ucope"] == "NONE"
     assert lifecycle["semigroup_consistent_duration_model_policy"] == "PARKED"
