@@ -1,0 +1,43 @@
+{
+  "blockers": [
+    "Root PAUSE received at 2026-08-28T23:25:24.209Z while resolving the shared distinction between temporarily unreadable/live and irrecoverably lost/no-live-Effect. No further observation is authorized until a later Root CONTROL resolves that boundary.",
+    "The immutable already-sent Innovator remains SENT_UNREADABLE: the exact tab/key are present, activeQuery is null, the legacy runtime records Response timed out, and the provider-visible prompt and full natural-completion response remain unavailable."
+  ],
+  "claim_ceiling": "At most a local finite-host, finite-checkpoint, finite-budget statement about the named B1 ONLGR-versus-RAW deterministic and RAND-IID contrasts, further limited by timing-only, fixed/global-rate, operational-support, resource, and direct-value evidence. No RAW impossibility, literal hazard, causal lease or REBIND value, arbitrary k, UAV performance, variable N, or general PPO superiority claim is available.",
+  "completed_summary": "The fresh scope remains frozen at exact baseline b4762febd12b62748d35e2b1a1dffdfb8d776180. The restored liveness and transport boundaries were read from exact origin/main commit 2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81 without merging, rebasing, or changing the pilot baseline. The one Innovator operation remains the only sent operation. Its exact tab/key are present; native no-send observation established activeQuery null and the legacy runtime terminal record Response timed out, but the provider-visible prompt, exact prompt fidelity, and full naturally completed response remain unavailable. Pro Innovator therefore remains SENT_UNREADABLE. Root PAUSED at 2026-08-28T23:25:24.209Z before the next requested observation began, pending a shared terminal-disposition boundary. Convergence remains PENDING and no CM, successor work, or other child was launched.",
+  "direction": "opportunity_normalized_lease_gated_rebinding",
+  "milestone": "SCOPE_FROZEN",
+  "next_action": "Hold this same inbound WORK and exact Innovator operation without further polling, provider-capable calls, sends, launches, Pro archive mutation, or successor work. Do not send Convergence, launch CM, cancel, fail, infer science or lifecycle, or release capacity. Await only a later Root CONTROL resolving the shared terminal-disposition boundary.",
+  "next_discriminator": "Unchanged-checkpoint history-independent RAND-IID future-cadence and task-content separation, reconciled with operational marked-partition support, fixed/global-rate and degenerate/oracle headroom, marked voluntary activity, service-versus-action-cost decomposition, B2 rate-flexibility, and ROAD-versus-NEVER/SHAM direct value.",
+  "reentry_condition": "A later Root CONTROL resolves the shared terminal-disposition boundary between temporarily unreadable/live and irrecoverably lost/no-live-Effect for this exact Innovator operation.",
+  "refs": [
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-scope-and-grounding.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-28.7-pilot-01a04a02-onlgr-paused-transport-fact.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-28-2026-08-28.7-pilot-01a04a02-onlgr-pro-innovator-prompt.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_VARIABLE_K_SCIENCE_CARD.md",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B1_RESULT.json",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_B2_RESULT.json",
+    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/ONLGR_TBVUUS_R03_RESULT_V2_SCIENTIFIC_INTAKE_20260821.md",
+    "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
+    "540337f2996778245a634151f38e4d8dc5b8254c",
+    "b4762febd12b62748d35e2b1a1dffdfb8d776180"
+  ],
+  "research_cycle": {
+    "label": "2026-08-28.7-pilot-01a04a02-onlgr",
+    "opened_at": "2026-08-28T20:27:27Z",
+    "pro_convergence": {
+      "response": null,
+      "status": "PENDING"
+    },
+    "pro_innovator": {
+      "response": null,
+      "status": "SENT_UNREADABLE"
+    },
+    "reason": "Portfolio requested a fresh material reassessment of whether the marked lease-censored exposure-offset boundary link has decision-relevant value beyond RAW, fixed/never/sham-like regularization, timing-only behavior, and deterministic cadence leakage while retaining the completed ROAD result without inflated claims."
+  },
+  "revision": 4,
+  "role": "EM",
+  "snapshot_state": "WAITING_REENTRY",
+  "updated_at": "2026-08-28T23:26:46.734669Z"
+}
