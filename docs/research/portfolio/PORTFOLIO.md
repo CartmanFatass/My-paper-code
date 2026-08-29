@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T17:02:17Z
+Updated at: 2026-08-29T17:21:12Z
 
 This table is the only current lifecycle, priority, capacity, and direction-owner authority. Portfolio
 has now reviewed the complete 33-direction set. Scientific priority and execution readiness are
@@ -48,7 +48,7 @@ how to stage a valuable question, not whether that question has value.
 | ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
-| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:09:27Z | Readiness `WAITING-REENTRY`. Retain EM `01a04e22-2f5a-7423-8b60-95d35d150109` and cycle `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Three independent routes preserve a proof-sized K1={3/4} candidate with exact held-out headroom and reassociation-loss witnesses, while proving uniform-only geometry is absorbed by MASS; aggregate margins and the selected competent FREE comparison remain unobserved. Innovator is `ZERO_SEND_FAILED` with no provider Effect. Resume only on eligible exact GPT-5.6 Pro evidence or explicit waiver; this transport gap changes no science, lifecycle, priority or capacity. |
+| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:21:12Z | Readiness `WAITING-REENTRY`. Retain EM `01a04e22-2f5a-7423-8b60-95d35d150109` and cycle `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Three independent routes preserve a proof-sized K1={3/4} candidate with exact held-out headroom and reassociation-loss witnesses, while proving uniform-only geometry is absorbed by MASS; aggregate margins and the selected competent FREE comparison remain unobserved. The user-visible `Pro` premise is resolved, but the fresh authorized Innovator operation also ended `ZERO_SEND_FAILED`: the new-chat composer contained an unknown 6,747-character stale draft that ordinary navigation did not clear, so Browser Transport correctly refused destructive mutation. Both operations have zero sends, no conversation/archive and no live Effect. Resume only after the unknown draft is independently preserved or safely cleared on a newly verified empty root and one later exact owner control authorizes a fresh operation, or on explicit waiver. No third operation is currently authorized; this transport gap changes no science, lifecycle, priority or capacity. |
 | vsp_02 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Carry/reset paths differ but exact success sets match. Portfolio closes standalone VSP-02 and retains lifecycle/optimizer-history controls for CRTO/RISP/SCDMP. |
 | vsp_03 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. No authenticated causal deployment-event seam or runtime activity exists. Its negative interface census remains provenance; no independent mechanism is actionable. |
 | vsp_04 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The finite-cell certificate is useful only after rows are generated from an authenticated host; declared-row ancestry was circular. Portfolio closes standalone VSP-04 and retains the solver/certificate control for FSBS. |
@@ -77,13 +77,14 @@ refill; VQFP, ONLGR and SGSP retain their exact WORKs. The allocated advancing s
   is there a bounded meaning-preserving role-sampled counterfactual with direct value beyond
   competent EDGE?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:02:17Z`, SCDMP
+Operational liveness is separate from allocation and lifecycle. At `2026-08-29T17:21:12Z`, SCDMP
 EM `01a04e78-82ba-7823-b012-c5ff34821aae` is natively active. ONLGR's EM is idle but its
 already-sent Convergence operation
 `5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
 `SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
 certification. VQFP and SGSP are idle `WAITING_REENTRY` tasks with zero-send transport facts and no
-live Effect. They retain their exact WORKs and allocated slots, but they are not described as
+live Effect; VQFP's current reentry is safe preservation/clearance of an unattributed stale composer
+draft, while SGSP awaits the reviewed model-evidence backend repair. They retain their exact WORKs and allocated slots, but they are not described as
 actively advancing until their reviewed transport reentries are satisfied. Root owns the shared
 repair; Portfolio has escalated the combined model-evidence and tab-independent certification
 incident. No transport fact changes lifecycle or scientific priority.
