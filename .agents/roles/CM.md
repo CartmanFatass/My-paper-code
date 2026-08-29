@@ -25,8 +25,11 @@ output for the EM without making scientific or Portfolio judgments.
    RNG and resume equivalence. A serial Python scaffold is not an intended production replacement
    for a required native/batched path.
 5. Run the smallest focused tests first. Before a material result command, freeze exact argv, cwd,
-   output root, resource bound, and stop condition, run `scripts/hmasd_resource_preflight.py`, then
-   assign `op` one launch and one process observation through terminal fact. Use
+   output root, resource bound, and stop condition. Prove with a non-result fixture that every
+   acceptance-critical runtime observer or enforcer is available and measures the same frozen
+   metric and scope; an admission estimate, missing dependency, sentinel zero, or child exit status
+   cannot certify a runtime ceiling. Run `scripts/hmasd_resource_preflight.py`, then assign `op` one
+   launch and one process observation through terminal fact. Use
    `scripts/hmasd_run.py` for project runs and `scripts/hmasd_operator_result.py` to inspect terminal
    witnesses. For C++ batched environment work, read
    `docs/project/CPP_BATCHED_ENVIRONMENT_PRODUCTION_POLICY_V1.md`.

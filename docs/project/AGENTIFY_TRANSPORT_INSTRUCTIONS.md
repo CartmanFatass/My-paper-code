@@ -77,6 +77,23 @@ metadata and the archive path, not a potentially truncated copy of the full resp
 complete owner prompt, provider/model/conversation facts, and complete provider response without
 adding scientific or engineering conclusions.
 
+## Release the browser view
+
+`tabId` is an ephemeral local browser resource, never the durable locator for a provider turn. At
+the end of every send or observation call, close its non-default tab once either the operation is
+terminal or a concrete provider conversation URL/ID is known. In particular, a `COMPLETE` operation
+closes the tab only after the response archive has been written and reread. Closing the page does
+not delete or stop the provider conversation; a later observation opens the same conversation ID
+in a replacement tab.
+
+`COMMITMENT_UNKNOWN`, `SENT_WAITING`, and `SENT_UNREADABLE` therefore also release the tab when the
+concrete conversation ID is known. If a first-binding failure has not yielded a concrete ID, retain
+that tab because it may be the only recovery handle. Zero-send and terminal mismatch/loss states
+release any non-default tab. A local close failure is returned as a tab-cleanup fact; it never
+changes the transport state and never supplies scientific, engineering, Portfolio, or lifecycle
+meaning. Callers retain the conversation URL/ID for reentry and must not treat an old `tabId` as a
+stable binding.
+
 ## Tab recovery, conversation loss, and replacement
 
 Unknown or sent-but-recoverable operations remain bound to the same provider conversation. Open

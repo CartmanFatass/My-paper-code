@@ -310,7 +310,7 @@ def test_portfolio_authority_uses_native_worktrees_not_saved_direction_projects(
     assert "native `environment: worktree`" in _flat(portfolio)
 
 
-def test_legacy_control_programs_and_portfolio_registry_are_absent() -> None:
+def test_legacy_control_is_absent_and_current_milestone_snapshots_validate() -> None:
     for relative in (
         "scripts/hmasd_session_envelope.py",
         "scripts/hmasd_control_release.py",
@@ -326,8 +326,24 @@ def test_legacy_control_programs_and_portfolio_registry_are_absent() -> None:
         assert not (ROOT / relative).exists()
     assert not list((ROOT / "scripts/dashboard").glob("**/*"))
     candidates = ROOT / "docs/research/candidates"
-    assert not list(candidates.glob("*/workflow/research/state.json"))
-    assert not list(candidates.glob("*/workflow/engineering/state.json"))
+    for kind in ("research", "engineering"):
+        for state_path in candidates.glob(f"*/workflow/{kind}/state.json"):
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "scripts/hmasd_state.py",
+                    "validate",
+                    "--kind",
+                    kind,
+                    "--path",
+                    str(state_path),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            assert result.returncode == 0, result.stderr
     assert not list(candidates.glob("*/workflow/external-review/index.json"))
 
 
@@ -350,8 +366,8 @@ def test_portfolio_is_one_current_table() -> None:
             assert owner[direction] == "NONE"
     assert lifecycle["active_post_churn_population_flow_identification"] == "PARKED"
     assert owner["active_post_churn_population_flow_identification"] == "NONE"
-    assert lifecycle["expressibility_gated_renewal_credit_relay"] == "ACTIVE"
-    assert owner["expressibility_gated_renewal_credit_relay"] == "PORTFOLIO"
+    assert lifecycle["expressibility_gated_renewal_credit_relay"] == "PARKED"
+    assert owner["expressibility_gated_renewal_credit_relay"] == "NONE"
     assert lifecycle["opportunity_normalized_lease_gated_rebinding"] == "ACTIVE"
     assert owner["opportunity_normalized_lease_gated_rebinding"] == "PORTFOLIO"
     assert lifecycle["finite_semantic_boundary_support"] == "PARKED"
