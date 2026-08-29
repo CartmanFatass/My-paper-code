@@ -19,6 +19,32 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Current material cycle
 
+Clean successor material cycle
+`2026-08-28.10-clean-01a04a02-egrcr-successor-02` is the current revision
+2026-08-28.10 scientific round. It continues from terminal direction HEAD
+`43c8208b8e1865536766598aa64f53f207df974d` without reopening that predecessor
+cycle, reads Portfolio authority from sibling commit
+`8812e5ed26e57310c7f9deb3d96697be4233c54f` without integrating it, and fixes
+public scientific inspection at exact origin-reachable commit
+`2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81`.
+
+The fresh question is whether a prospectively defined fixed population of
+exactly three agents can first expose balanced, consequence-distinct eligible
+waiter identities within one generic pre-action/cue/sign stratum and positive
+same-information oracle fixed-token allocation or bounded-utility headroom
+over competent ordinary GAE. This is a support-and-headroom prerequisite test,
+not a relay comparison. If either gate fails, the executable branch stops; if
+both pass, the result can justify only a later separately frozen
+cue-preserving identity-only relay discriminator. The neutral scope,
+alternatives, outcome branches, resource ceiling, and claim ceiling are in
+`evidence/2026-08-28-10-clean-successor-02-scope-and-grounding.md`.
+
+No scientific branch is selected at `SCOPE_FROZEN`. The predecessor cycle's
+provider prompts, operations, conversations, incomplete Convergence, and
+preliminary recommendation remain historical and are not reused or adopted.
+
+## Predecessor revision 2026-08-28.10 cycle
+
 Successor material research cycle
 `2026-08-28.10-pilot-01a04a02-egrcr-successor-01` is the current revision
 2026-08-28.10 Portfolio reassessment. It is based on integrated local authority
