@@ -19,6 +19,34 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 ## Current material cycle
 
+Four-direction successor material cycle
+`2026-08-28.10-four-01a04a02-egrcr-successor-03` opens from exact Portfolio
+authority `2cd404b6e35753ba7bb2decabf19e4aabd700038` after terminal predecessor
+commit `62c24e0d451aaf2f6dd1fd3aa550b22d124e672b`. It is a bounded search across
+exactly three fixed multi-waiter, multi-step causal topologies: overlapping
+many-to-one contention, serial two-hop complementarity, and censored
+substitution. It is not a T3 rerun.
+
+Before any science-bearing consultation, the cycle freezes one canonical
+analytic audit per family, fixed-order first-survivor selection, equal
+information and useful work, competent ordinary GAE and generic pair-aware
+conditional-Q/Rao-Blackwellized comparators, and the existing material gates:
+at least `0.10` native scarce-allocation and normalized-utility gains, positive
+exact lower bounds across balanced panels, at least `0.05` source-localized
+excess, and a material noncollinear update that changes an actual scarce
+decision. Generic-estimator equality, evaluator failure, or missing
+localization stops before relay and sampled training. Full neutral scope and
+branch rules are in
+`evidence/2026-08-29-four-successor-03-scope-and-grounding.md`.
+
+At `SCOPE_FROZEN`, no family or investment branch is favored. The clean T3
+support pass and exact allocation/utility null remain valid terminal evidence
+and an immutable failure-mode boundary. This cycle may freeze at most one new
+survivor; a bounded no-survivor result is scientifically admissible. The fresh
+strict Innovator and later conclusion-blind Convergence are both `PENDING`.
+
+## Predecessor clean successor-02 cycle
+
 Clean successor material cycle
 `2026-08-28.10-clean-01a04a02-egrcr-successor-02` is the current revision
 2026-08-28.10 scientific round. It continues from terminal direction HEAD
