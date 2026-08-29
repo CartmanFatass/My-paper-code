@@ -299,6 +299,93 @@ def test_atomic_result_serialization_and_one_shot_refusal() -> None:
             run.atomic_write_json(path, payload)
 
 
+def _write_launcher_scaffold(cwd: Path, head: str = "a" * 40) -> Path:
+    root = (cwd / run.FROZEN_OUTPUT_RELATIVE).resolve()
+    root.mkdir(parents=True)
+    for name in ("artifacts", "checkpoints", "metrics"):
+        (root / name).mkdir()
+    (root / "stdout.log").touch()
+    (root / "stderr.log").touch()
+    (root / ".manifest.json.lock").touch()
+    preflight = {
+        "schema_version": 1, "direction_id": run._DIRECTION_ID, "run_id": run._RUN_ID,
+        "workers": 1, "threads_per_worker": 1, "memory_safe": True,
+    }
+    execute_preflight = dict(preflight)
+    (root / "preflight.json").write_text(json.dumps(preflight), encoding="utf-8")
+    (root / "execute-preflight.json").write_text(json.dumps(execute_preflight), encoding="utf-8")
+    command = list(run.FROZEN_CHILD_ARGV)
+    command_sha = run._command_digest(command)
+    preflight_sha = run._sha256(root / "preflight.json")
+    runner_spec = {
+        "schema_version": 1, "command": command, "command_sha256": command_sha,
+        "cwd": str(cwd.resolve()), "git_branch": "codex/test",
+        "output_root": str(root), "outputs": run._EXPECTED_LAUNCHER_OUTPUTS,
+        "preflight_sha256": preflight_sha,
+    }
+    (root / "runner-spec.json").write_text(json.dumps(runner_spec), encoding="utf-8")
+    manifest = {
+        "schema_version": 1, "status": "RUNNING", "direction_id": run._DIRECTION_ID,
+        "run_id": run._RUN_ID, "cwd": str(cwd.resolve()), "code_sha": head,
+        "command": command, "command_sha256": command_sha,
+        "outputs": run._EXPECTED_LAUNCHER_OUTPUTS,
+        "resources": {
+            "preflight_ref": "preflight.json", "preflight_sha256": preflight_sha,
+            "runner_spec_sha256": run._sha256(root / "runner-spec.json"),
+            "workers": 1, "threads_per_worker": 1, "memory_safe": True,
+        },
+    }
+    (root / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    return root
+
+
+def test_exact_running_launcher_scaffold_is_accepted_without_mutation(tmp_path: Path, monkeypatch) -> None:
+    head = "a" * 40
+    root = _write_launcher_scaffold(tmp_path, head)
+    before = {path.name: path.read_bytes() for path in root.iterdir() if path.is_file()}
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(run, "_current_git_head", lambda _cwd: head)
+    assert run._prepare_output_root(root) == root
+    assert {path.name: path.read_bytes() for path in root.iterdir() if path.is_file()} == before
+
+
+def test_unexpected_missing_and_malformed_scaffold_are_refused(tmp_path: Path) -> None:
+    root = _write_launcher_scaffold(tmp_path)
+    unexpected = root / "unexpected.txt"
+    unexpected.write_text("not launcher evidence", encoding="utf-8")
+    with pytest.raises(run.OutputStateError):
+        run._validate_launcher_scaffold(root, cwd=tmp_path.resolve(), expected_argv=run.FROZEN_CHILD_ARGV, head="a" * 40)
+    unexpected.unlink()
+    stderr = root / "stderr.log"
+    stderr.unlink()
+    with pytest.raises(run.OutputStateError):
+        run._validate_launcher_scaffold(root, cwd=tmp_path.resolve(), expected_argv=run.FROZEN_CHILD_ARGV, head="a" * 40)
+    stderr.touch()
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["status"] = "PREPARED"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(run.OutputStateError):
+        run._validate_launcher_scaffold(root, cwd=tmp_path.resolve(), expected_argv=run.FROZEN_CHILD_ARGV, head="a" * 40)
+
+
+def test_nonempty_scaffold_directory_is_refused(tmp_path: Path) -> None:
+    root = _write_launcher_scaffold(tmp_path)
+    (root / "metrics" / "partial.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(run.OutputStateError):
+        run._validate_launcher_scaffold(root, cwd=tmp_path.resolve(), expected_argv=run.FROZEN_CHILD_ARGV, head="a" * 40)
+
+
+def test_existing_b3_result_in_scaffold_is_one_shot_refusal(tmp_path: Path) -> None:
+    root = _write_launcher_scaffold(tmp_path)
+    result = root / config.RESULT_FILENAME
+    result.write_text("{}", encoding="utf-8")
+    before = result.read_bytes()
+    with pytest.raises(run.OutputStateError):
+        run._validate_launcher_scaffold(root, cwd=tmp_path.resolve(), expected_argv=run.FROZEN_CHILD_ARGV, head="a" * 40)
+    assert result.read_bytes() == before
+
+
 def test_discovery_confirmation_separation_and_b3_local_production_identity() -> None:
     assert config.DISCOVERY_NAMESPACE != config.CONFIRMATION_NAMESPACE
     identity = run.source_identity()
