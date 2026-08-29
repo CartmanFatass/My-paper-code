@@ -72,6 +72,22 @@ superiority, multi-update, learned-estimator, UAV, safety, or general credit
 claim is available; exhaustion of this host is not a general impossibility
 theorem.
 
+The successor then ended at `TERMINAL_GAP` without reaching
+`REVIEW_RESOLVED` or `HANDOFF_READY`. Its fresh Innovator operation completed,
+but the fresh Convergence primary and the sole authorized replacement each
+ended `SENT_INPUT_MISMATCH` with no exact request binding or response archive.
+Both operations are isolated, the replacement boundary is exhausted, and no
+user waiver exists. These are transport facts only and do not change the
+science or lifecycle.
+
+Because the mandatory independent Convergence review and objection disposition
+do not exist, the preliminary `PARK` branch was not ratified. This terminal
+cycle returns `Scientific status: NOT_REACHED`, `Decision impact: NONE`, and
+`Recommendation: NONE`. Its source-grounded preliminary packet remains
+traceable incomplete-cycle evidence, not current Portfolio advice. Exact
+closure facts are in
+`evidence/2026-08-28-10-successor-terminal-gap.md`.
+
 ## Historical revision 2026-08-28.7 cycle
 
 Material research cycle `2026-08-28.7-pilot-01a04a02-egrcr` is the fresh

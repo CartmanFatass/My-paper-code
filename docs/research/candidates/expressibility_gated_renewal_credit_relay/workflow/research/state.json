@@ -1,16 +1,20 @@
 {
-  "blockers": [],
-  "claim_ceiling": "At most a finite-host, two-agent, one-update statement: exact counterfactual replacement modestly strengthened type-cue selectivity and avoided opposite-type target corruption, but did not improve fixed-token scarce allocation or bounded utility over ordinary GAE; the host has no consequence-distinct physical waiter identities. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; host exhaustion is not a general impossibility theorem.",
-  "completed_summary": "The source-grounded preliminary synthesis remains frozen with no executable discriminator and no CM basis. The fresh Convergence primary operation f8c9bd23-2eeb-43b1-9709-7eef7f25f5ee used one send but reached SENT_INPUT_MISMATCH: Agentify observed one new user message yet could not bind a matching stable user-message identity, the locator remained the provider root/__new__, and no response archive exists. That operation and any late content are isolated and supply no science. The same mandatory frozen request remains required, so the one protocol-authorized new-conversation replacement is available but not yet used. No recommendation, lifecycle, capacity, CM, or experiment change follows from the transport fact.",
+  "blockers": [
+    "The mandatory fresh Convergence stage is neither COMPLETE nor user WAIVED. Primary operation f8c9bd23-2eeb-43b1-9709-7eef7f25f5ee and replacement operation a87a169e-c3ee-4800-8d40-e05767c78487 each ended SENT_INPUT_MISMATCH with no exact provider-visible request binding and no response archive.",
+    "The single automatic new-conversation replacement boundary is exhausted and no live Effect remains. Current protocol forbids a resend, third operation, or promotion of the preliminary packet to REVIEW_RESOLVED or HANDOFF_READY."
+  ],
+  "claim_ceiling": "No new terminal scientific synthesis was reached. The incomplete packet preserves only a bounded finite-host observation for future scrutiny: in the two-agent one-update B1 object, exact counterfactual replacement modestly strengthened type-cue selectivity and avoided opposite-type target corruption but did not improve fixed-token scarce allocation or bounded utility over ordinary GAE, while the host exposes no consequence-distinct physical waiter identities. No association-specific algorithm value, end-to-end variable-k result, fixed-k superiority, multi-update stability, learned estimator or gate, UAV or continuous-control value, safety, or general source-to-target credit claim is available; any host-exhaustion reading is bounded and was not terminally ratified by this failed cycle.",
+  "completed_summary": "The cycle reached SCOPE_FROZEN, completed and archived its fresh Innovator, performed the static support/headroom audit, stopped before CM because both executable prerequisites failed, and froze a traceable preliminary SYNTHESIS_READY packet. The mandatory independent Convergence did not complete: its primary and single authorized replacement each used one send and reached isolated SENT_INPUT_MISMATCH with no response archive. The replacement boundary is exhausted, no live Effect remains, and no waiver exists. REVIEW_RESOLVED and HANDOFF_READY were not reached; the preliminary PARK branch is not a terminal recommendation. No CM task, writer transfer, experiment, Portfolio mutation, lifecycle action, or capacity inference occurred.",
   "direction": "expressibility_gated_renewal_credit_relay",
   "milestone": "SYNTHESIS_READY",
-  "next_action": "Commit the isolated Convergence primary fact, then reuse the same fresh Convergence transport leaf for the single authorized replacement: one distinct strict operation in one clean new ChatGPT conversation, with the identical frozen prompt, visible Pro evidence, one send, natural completion, and the same owner response path. Never reopen, resend into, or use late content from the isolated primary.",
-  "next_discriminator": "Only after reentry, build a scientifically distinct fixed-population host with at least three agents, balance pair-specific identity consequences within one generic stratum, and prospectively certify same-information oracle scarce-allocation or bounded-utility headroom before any correct-versus-identity-cut relay comparison.",
+  "next_action": "No further action is authorized in this terminal cycle. Preserve both isolated Convergence operations and quarantine any late content. Only a new Portfolio WORK may open a fresh successor cycle with new operations; this WORK and material cycle must not reopen.",
+  "next_discriminator": "For a future successor only: use a scientifically distinct fixed-population host with at least three agents, balance pair-specific identity consequences within one generic stratum, and prospectively certify same-information oracle scarce-allocation or bounded-utility headroom before any correct-versus-identity-cut relay comparison.",
   "reentry_condition": null,
   "refs": [
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-scope-and-grounding.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-evidence-packet.md",
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/evidence/2026-08-28-10-successor-terminal-gap.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-pilot-01a04a02-egrcr-successor-01-pro-innovator-prompt.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-pilot-01a04a02-egrcr-successor-01-pro-innovator-response.md",
     "docs/research/candidates/expressibility_gated_renewal_credit_relay/external/2026-08-28-2026-08-28.10-pilot-01a04a02-egrcr-successor-01-pro-innovator-transport-fact.md",
@@ -22,35 +26,29 @@
     "experiments/candidates/expressibility_gated_renewal_credit_relay/config.py",
     "experiments/candidates/expressibility_gated_renewal_credit_relay/experiment.py",
     "experiments/candidates/expressibility_gated_renewal_credit_relay/run.py",
-    "29fdf4362b9a345b8c6157c664baa2da65da85e9",
-    "1598b5b08a4e8fb02de87ffd3acd09215e0eb94a",
-    "0fce37093e5611415fe51304ebcf914bbc83602e",
-    "d260366541da097d31f91118778ab78faa072701",
-    "7b0697b8772b07758efe042a99884cf314a420e7",
-    "e6bd81c22f565893aa4610a8791a2e51992938c3",
-    "92e710dedadc79ce70d3d2698d9ceba476d56638",
-    "3baeb3707ddd7cbf7fee20ca2aeb922298d17961",
     "c3dfe0a7f40dda6ea2eb38e23d18eb4dad462c11",
     "2b8f1ae0ea8c514bd333c45fe11275a2fabfbb81",
     "b4762febd12b62748d35e2b1a1dffdfb8d776180",
-    "8f65ac280d7a5fbf62cf491871b62cdd136966cf",
+    "29fdf4362b9a345b8c6157c664baa2da65da85e9",
     "aae8475505b8fbb9d648699c842ec44a69d1b2ac",
     "01284024260f43b05f9c9499216b4bbf0a1ba2fd",
+    "011ba545e5b5ca9cf0d2651957e3d95c768eb565",
     "Innovator operation cb925390-c77e-4f2d-bfcb-1963f316ca3e COMPLETE",
     "Innovator provider conversation https://chatgpt.com/c/6a9243b9-7d88-83e8-83a2-c6f013ed45d0",
+    "Innovator prompt SHA-256 8ea738d29f17fa8f6cb97d3f39a37e2b3aeb38752c822f20fa141a0ef0265a3d",
     "Innovator response SHA-256 6ade6a6bb4e96daf238f93ee2fd129a73bb1e39e1cab6d3ef8dbbe63762d397d",
-    "Convergence primary operation f8c9bd23-2eeb-43b1-9709-7eef7f25f5ee",
+    "Convergence frozen prompt SHA-256 074d43a236be98b98e44248884fc5c2d25ec2849b2b6e6df87c4a086320aec08",
+    "Convergence primary operation f8c9bd23-2eeb-43b1-9709-7eef7f25f5ee SENT_INPUT_MISMATCH",
     "Convergence primary idempotency key egrcr-successor-2026-08-28-10-convergence-primary-01284024",
-    "Convergence primary stable key egrcr-successor-2026-08-28-10-convergence",
-    "Convergence primary review_user_message_content_mismatch with one send and no archive",
-    "Frozen Convergence prompt Git blob 6120014f76c1700a0d05fac36bd7411225a16d8e",
-    "Frozen Convergence prompt SHA-256 074d43a236be98b98e44248884fc5c2d25ec2849b2b6e6df87c4a086320aec08"
+    "Convergence replacement operation a87a169e-c3ee-4800-8d40-e05767c78487 SENT_INPUT_MISMATCH",
+    "Convergence replacement idempotency key egrcr-successor-2026-08-28-10-convergence-replacement-1-01284024",
+    "Convergence response archive NONE; replacement boundary exhausted"
   ],
   "research_cycle": {
     "label": "2026-08-28.10-pilot-01a04a02-egrcr-successor-01",
     "opened_at": "2026-08-29T02:22:00.945Z",
     "pro_convergence": {
-      "replacement_used": false,
+      "replacement_used": true,
       "response": null,
       "status": "SENT_INPUT_MISMATCH"
     },
@@ -61,8 +59,8 @@
     },
     "reason": "Fresh current-protocol successor cycle to decide whether a bounded same-information association discriminator exists beyond ordinary GAE or whether the retained exact utility/allocation null and absent consequence-distinct identity support exhaust the current host."
   },
-  "revision": 13,
+  "revision": 15,
   "role": "EM",
-  "snapshot_state": "WORKING",
-  "updated_at": "2026-08-29T03:49:55.043400Z"
+  "snapshot_state": "TERMINAL_GAP",
+  "updated_at": "2026-08-29T03:54:27.437087Z"
 }
