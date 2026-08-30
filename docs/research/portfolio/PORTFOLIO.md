@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-30T18:22:01Z
+Updated at: 2026-08-30T19:06:32Z
 
 ## OMP non-control migration boundary
 
@@ -123,11 +123,11 @@ how to stage a valuable question, not whether that question has value.
 | roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
 | semantic_graphon_shared_policy | REGISTERED | HIGH | NONE | 2026-08-29T17:25:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal short-gate WORK `SGSP-RG2Z-RSCF-SHORT-GATE-20260829-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Innovator completed, but mandatory Convergence exhausted its replacement boundary with `SENT_INPUT_MISMATCH`; this supplies no scientific polarity. The strongest provisional observation is that no identified meaning-preserving discriminator fits the complete short-gate ceiling, while the smallest outcome-bearing learned projection-contact arm remains roughly 60-250 CPU core-hours. Preserve SGSP's high-value relational question without purchasing or closing it. Reentry requires the explicit user waiver/override named by the terminal result or a materially new Portfolio question; cost and transport alone cannot PARK or CLOSE it. |
-| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | EM | 2026-08-30T18:22:01Z | Readiness `REENTRY-REQUIRED`. Portfolio retains `CONTINUE` on exactly `SCDMP-G6-JOINT-POPULATION-ORACLE-IDENTIFICATION-01`. The prospective object supplies an explicit product joint mission-initial population and asks for a matched-information oracle-identification theorem; the matched null is zero oracle advantage, equivalently a common optimal action almost everywhere under that population, with future-disturbance expectation before maximization. The finite-selector assay is not blended in because it would still leave the original oracle decision confounded. The g5 mismatch remains: differential selector regret is uncancelled, `Q_cf` is not oracle optimal-set disjointness, and the prior product copula is a second authority. No theorem, numerical plant value, actual-plant result, provider authority, assay, CM, or run is observed. The accepted g6 checkpoint was rematerialized without changing canonical delta `b26b98c6be4e39c6cf5f34f761f199fc19ca3b483e38be3aa41977f0abf9fe8f` and integrated as `80fec4684eafc7d5a27d391c9c647953d893bc01`; the next EM owns the joint-population oracle-identification theorem. |
+| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | EM | 2026-08-30T19:06:32Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes the g6 theorem disposition and adopts `NARROW`. Under the explicit prospective product population and each immutable technically accepted competence-passing foundation, the finite-horizon structural g-formula uniquely defines `V_f` and `Delta_f`; `0<=Delta_f(k,s)<=1/2`, and the cell null is exactly nonempty intersection of the two complete graph-specific argmax sets. Population zero is the corresponding `mu_k`-almost-everywhere condition separately for `k=7,13`; no population-global action is required. This is model-functional identification only: no admitted foundation, numerical value, actual-plant result, empirical estimator, assay, CM fact, or run is observed. The exact next reentry is a bounded current-byte admissibility census: determine whether any immutable order-erased foundation is already technically accepted and passes the frozen competence gate. A present foundation permits a separately authorized value certificate; none returns a terminal operational gap without weakening the theorem. |
 | ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
-| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | EM | 2026-08-30T13:14:50Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes the fresh g4 material-distinctness result and retains `CONTINUE` on `VQFP-AGGREGATE-WITNESS-ALIGNMENT-R01`. Integrated commit `42504df7ff23ac0ea1e90419c51fcf513a1b8648` freezes final round `a486fa196984d912a504`; its source-only Pro Innovator prompt passed the repository validator before immutable registration. Two earlier pre-send rounds are `BLOCKED` with null provider slots and no transport authority. Strict operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` then terminated `ZERO_SEND_FAILED` at `expected_model_unavailable` before click, with zero provider turns and no archive. A separate non-sending diagnostic observed a visible selected `Pro` reasoning control but no directly surfaced `GPT-5.6 Pro` label, so the cause remains indeterminate. The exact reentry is an evidence-changing controller/provider model-binding repair plus a new owner-frozen unused operation; the terminal operation is never retried. No ladder tuple, aggregate, witness satisfaction, rung result, enumeration, CM, run, or claim increase follows. |
+| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | EM | 2026-08-30T19:06:32Z | Readiness `REENTRY-REQUIRED`. Portfolio retains `CONTINUE` on exact round `a486fa196984d912a504` and consumes the g4 zero-send disposition. Terminal operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is sealed `ZERO_SEND_FAILED` before click with zero provider turns, no conversation, and no archive; it is never reused or replaced. The round, science card, evidence set, and prompt remain unchanged. A new non-sending diagnostic observed loaded controller generation `0`: `operator-control.mjs` matches tested candidate `c20adba6dd1130abd2661dec5e13140bf61b3520`, but loaded `chatgpt-controller.mjs` SHA-256 `5051360a7651135e7793bbc027b15cb002c7ba2a6c9cdd86e49beaed24e50fdd` differs from tested `e30422e3b896ce7242e7b1a2b20cb783406cce975ce6b327e41f738c79c2a3b4`. The exact reentry is explicit user approval for Windows deployment/controller refresh, followed by a new zero-send two-axis `GPT-5.6 Sol` / `Pro` preflight. No deployment, refresh, provider message, fresh operation, ladder tuple, aggregate, witness result, CM, run, or claim increase is authorized now. |
 | vsp_02 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Carry/reset paths differ but exact success sets match. Portfolio closes standalone VSP-02 and retains lifecycle/optimizer-history controls for CRTO/RISP/SCDMP. |
 | vsp_03 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. No authenticated causal deployment-event seam or runtime activity exists. Its negative interface census remains provenance; no independent mechanism is actionable. |
 | vsp_04 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The finite-cell certificate is useful only after rows are generated from an authenticated host; declared-row ancestry was circular. Portfolio closes standalone VSP-04 and retains the solver/certificate control for FSBS. |
@@ -144,8 +144,8 @@ compared the full fixed set. Portfolio adopts one action for every direction:
 
 - `PARK`: `dual_epoch_receipt_survival`.
 - `ACTIVATE`: `degraded_incumbent_shadow_handover`.
-- `CONTINUE`: `opportunity_normalized_lease_gated_rebinding`,
-  `semigroup_consistent_duration_model_policy`, and
+- `NARROW`: `semigroup_consistent_duration_model_policy`.
+- `CONTINUE`: `opportunity_normalized_lease_gated_rebinding` and
   `voronoi_quadrature_field_policy`.
 - `NONE`: `active_post_churn_population_flow_identification`, `acvc`,
   `commitment_residual_triggered_options`,
@@ -160,15 +160,17 @@ compared the full fixed set. Portfolio adopts one action for every direction:
   `variable_n_fleet_churn`, `vsp_02`, `vsp_03`, `vsp_04`, `vsp_05`,
   `vsp_06_mssr`, and `vsp_c1`.
 
-The four advancing investments are independent. ONLGR asks whether unretuned
-RATE structure transfers to held-out `Delta_H=2`; SCDMP asks for the
-joint-population oracle-identification theorem; VQFP retains its exact aggregate
-witness-alignment round while any provider-visible Effect remains separate and
-blocked on evidence-changing Windows Agentify model-binding repair; DISH asks
-only whether EM can freeze the consultation/waiver and <=8-core current-byte
-substrate premises needed to make its full R06 object executable. No Git,
-transport, model-availability, engineering, or runtime fact supplies scientific
-polarity or gates an unrelated direction.
+The four advancing investments remain scientifically independent. ONLGR asks
+whether unretuned RATE structure transfers to held-out `Delta_H=2`; SCDMP has
+proved its structural oracle-identification theorem and narrows to the
+current-byte existence of an admitted competence-passing foundation; VQFP
+retains its exact aggregate witness-alignment round but is operationally blocked
+at explicit user approval because the loaded Windows ChatGPT controller differs
+from the tested candidate; DISH asks only whether EM can freeze the
+consultation/waiver and <=8-core current-byte substrate premises needed to make
+its full R06 object executable. No Git, transport, model-availability,
+engineering, or runtime fact supplies scientific polarity or gates an
+unrelated direction.
 
 APFI remains the strongest counterfactual allocation: its four-event
 censored-flow construction review would be bounded and scientifically useful
@@ -182,12 +184,13 @@ returns a terminal gap and releases the slot. SGSP still lacks a new
 meaning-preserving discriminator or required user override; RISP still lacks a
 technically accepted grouped-EVAL/FP32 object and prospective native endpoint.
 
-The common claim ceiling is unchanged. DEARS remains parked; ONLGR is only
-`GENERIC_RATE_SUPPORTED`; SCDMP has no oracle-identification theorem; VQFP has
-no provider result or ladder tuple; DISH has no new direct-handover value
-evidence. The next allocation-changing observations belong to the four EMs:
-held-out ONLGR geometry readiness, SCDMP theorem disposition, VQFP exact-round
-transport reentry readiness without a send, and DISH premise-freeze
-completeness. Each terminal fact is consumed independently; no all-terminal
-join, runtime status, Clerk operation, candidate SHA, or model-availability
-fact may retain or release a scientific slot retroactively.
+The common claim ceiling remains bounded. DEARS is parked; ONLGR is only
+`GENERIC_RATE_SUPPORTED`; SCDMP has a conditional structural theorem but no
+admitted foundation or evaluated value; VQFP has no provider result or ladder
+tuple; DISH has no new direct-handover value evidence. The next
+allocation-changing observations are held-out ONLGR geometry readiness, the
+SCDMP current-foundation admissibility census, explicit user disposition of the
+VQFP Windows deployment/refresh boundary, and DISH premise-freeze completeness.
+Each terminal fact is consumed independently; no all-terminal join, runtime
+status, Clerk operation, candidate SHA, or model-availability fact may retain
+or release a scientific slot retroactively.
