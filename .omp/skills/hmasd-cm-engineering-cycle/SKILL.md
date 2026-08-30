@@ -122,11 +122,15 @@ bounded, or resumable path.
 
 ## Focused evidence, review, and consultation
 
-Run the smallest focused checks that answer the engineering contract. Add an
-independent `hmasd-verifier` only when one exact runtime, equivalence, or
-environment fact can change technical acceptance and CM's focused checks and
-inspection cannot establish it. Review and verification inspect the frozen
-integrated candidate, never sibling partial candidates.
+Use
+`python3 scripts/hmasd_local_check.py --repo <repo> --base <base> --scope <owned-root>`
+as the default cheap structural check, then run only the smallest behavioral
+smoke or focused contract check that answers an uncovered part of the
+engineering contract. Do not repeat the unified suite after routine reversible
+work. Add an independent `hmasd-verifier` only when one exact runtime,
+equivalence, or environment fact can change technical acceptance and CM's
+focused checks and inspection cannot establish it. Review and verification
+inspect the frozen integrated candidate, never sibling partial candidates.
 
 Reserve `hmasd-reviewer` for a genuinely high-risk delta to protected
 scientific, numerical, RNG, checkpoint, bit-identity, concurrency,

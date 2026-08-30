@@ -265,13 +265,17 @@ the target transport inventory contains the singleton
   A fresh Clerk alone executes the exact operation under the declared actor
   `em:<direction>` or `cm:<direction>` and mutation key. The manager resumes
   writing only after terminal Clerk state and a new Root assignment.
-- Root similarly authors Root/shared, cross-direction Portfolio, schema/control-
-  plane, external-archive, and recovery semantics and packets; it does not
-  perform target Git. Clerk never changes actor, writer, allowlist, policy,
-  lifecycle, acceptance, or successor and never rebases, merges, retries, or
-  resolves a conflict. The sole target is `omp/workflow`; only exact
-  `EXACT_HANDOFF` and `ORTHOGONAL_DIRECTION` policies are accepted under the
-  Git integration contract.
+- Root authors Root/shared, cross-direction Portfolio, schema/control-plane, and
+  external-archive semantics. For its own non-overlapping tracked paths, Root
+  may run the local quick check, stage the exact allowlist, and create one local
+  checkpoint directly; this routine reversible path needs no Clerk packet.
+  Remote push still requires an immediate fetch/compare and one known-outcome
+  attempt. Direction-owned candidate integration, state CAS, ambiguous
+  recovery, and any operation with a physical manager lease continue through
+  Clerk. Clerk never changes actor, writer, allowlist, policy, lifecycle,
+  acceptance, or successor and never rebases, merges, retries, or resolves a
+  conflict. The sole target is `omp/workflow`; only exact `EXACT_HANDOFF` and
+  `ORTHOGONAL_DIRECTION` policies are accepted for direction candidates.
 - Every writer uses an exact path allowlist. `git add -A` is forbidden.
   Unrelated user changes remain unstaged; mixed ownership in one path is a
   conflict. Runtime maps, raw runs, generated logs, secrets, and unverified
@@ -279,9 +283,19 @@ the target transport inventory contains the singleton
 - Before pushing, the owning writer fetches and compares the remote tip. An
   unknown push outcome is reconciled by fetching before any retry; it is never
   blindly pushed again or merged into a later checkpoint.
+- Routine reversible local work uses
+  `python3 scripts/hmasd_local_check.py --repo <repo> --base <base> --scope <owned-root>`
+  by default. It validates the cheap core state, changed direction state,
+  changed Python syntax, whitespace, and only directly mapped focused tests.
+  Add a behavioral smoke or focused contract check only when the changed
+  behavior needs evidence the quick check does not provide.
 - Agents skip formatters, linters, project-wide tests, and unrelated
-  validation unless their exact assignment says otherwise. Root performs
-  unified validation after integration.
+  validation unless their exact assignment says otherwise. Root runs the
+  unified/project-wide suite once for a shared control-plane integration or
+  final delivery, never after each routine local operation or direction
+  checkpoint. Quick-check output is evidence, not authority, and never replaces
+  the remote-push, provider, result-command, destructive-path, secret,
+  scientific, numerical, RNG, checkpoint, or bit-identity boundaries.
 
 ## Native Advisor boundary
 

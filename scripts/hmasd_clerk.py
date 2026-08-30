@@ -51,6 +51,18 @@ OPERATIONS = {
     "GIT_PREPARE",
     "GIT_INTEGRATE_PUSH",
 }
+
+OPERATION_MUTATION_CLASS = {
+    "STATE_CAS": "STATE_PATH",
+    "WORKTREE_PROVISION": "WORKTREE_REGISTRY",
+    "WORKTREE_INSPECT": "READ_ONLY",
+    "WORKTREE_RELEASE": "WORKTREE_REGISTRY",
+    "PATCH_APPLY": "WORKTREE_CONTENT",
+    "CANDIDATE_CREATE": "WORKTREE_CONTENT",
+    "GIT_RECORD": "WORKTREE_REGISTRY",
+    "GIT_PREPARE": "WORKTREE_REGISTRY",
+    "GIT_INTEGRATE_PUSH": "GIT_TARGET",
+}
 MUTATING_WORKTREE_OPERATIONS = {
     "WORKTREE_PROVISION",
     "WORKTREE_RELEASE",
@@ -529,6 +541,56 @@ def _authority_actor_or_writer(packet: Mapping[str, Any]) -> str | None:
     return authority.get("git_actor") or authority.get("document_writer")
 
 
+def _expected_operation_resources(
+    operation: str,
+    target: Mapping[str, Any],
+    repo: Path,
+) -> list[dict[str, str]]:
+    runtime_worktrees = {
+        "kind": "RUNTIME_WORKTREES_STATE",
+        "key": str(repo / ".omp" / "runtime" / "worktrees.json"),
+    }
+    if operation == "STATE_CAS":
+        state_path = _repo_path(
+            repo,
+            target["canonical_target_path"],
+            "target.canonical_target_path",
+        )
+        resources = [{"kind": "STATE_PATH", "key": str(state_path)}]
+    elif operation == "WORKTREE_INSPECT":
+        resources = []
+    elif operation == "WORKTREE_PROVISION":
+        resources = [
+            runtime_worktrees,
+            {"kind": "CONTAINER", "key": target["canonical_container_path"]},
+        ]
+    else:
+        resources = [
+            runtime_worktrees,
+            {"kind": "WORKTREE", "key": target["canonical_worktree_path"]},
+        ]
+        if operation == "GIT_INTEGRATE_PUSH":
+            repository = _repository_facts(repo)
+            resources.extend(
+                [
+                    {
+                        "kind": "GIT_TARGET",
+                        "key": repository["target_lock_key"],
+                    },
+                    {
+                        "kind": "REMOTE_TARGET",
+                        "key": (
+                            f"{repository['common_path']}:remote:"
+                            f"{target['remote_name']}:"
+                            f"{target['target_remote_ref']}"
+                        ),
+                    },
+                ]
+            )
+    resources.sort(key=lambda resource: (resource["kind"], resource["key"]))
+    return resources
+
+
 def _validate_operation_binding(packet: Mapping[str, Any], repo: Path) -> None:
     operation = packet.get("operation")
     if operation not in OPERATIONS:
@@ -540,18 +602,7 @@ def _validate_operation_binding(packet: Mapping[str, Any], repo: Path) -> None:
     effect = packet.get("effect")
     if not isinstance(mutation, Mapping) or not isinstance(effect, Mapping):
         raise ClerkRefusal("INVALID_PACKET", "mutation/effect bindings are absent")
-    expected_class = {
-        "STATE_CAS": "STATE_PATH",
-        "WORKTREE_PROVISION": "WORKTREE_REGISTRY",
-        "WORKTREE_INSPECT": "READ_ONLY",
-        "WORKTREE_RELEASE": "WORKTREE_REGISTRY",
-        "PATCH_APPLY": "WORKTREE_CONTENT",
-        "CANDIDATE_CREATE": "WORKTREE_CONTENT",
-        "GIT_RECORD": "WORKTREE_REGISTRY",
-        "GIT_PREPARE": "WORKTREE_REGISTRY",
-        "GIT_INTEGRATE_PUSH": "GIT_TARGET",
-    }[operation]
-    if mutation.get("class") != expected_class:
+    if mutation.get("class") != OPERATION_MUTATION_CLASS[operation]:
         raise ClerkRefusal(
             "MUTATION_DOMAIN_MISMATCH",
             "operation and mutation class span unrelated domains",
@@ -603,62 +654,19 @@ def _validate_operation_binding(packet: Mapping[str, Any], repo: Path) -> None:
             "packet must authorize one attempt and observe-only unknown handling",
         )
     _require_sha(effect.get("attempt_token"), "effect.attempt_token")
-    authorized = effect.get("authorized_effects")
     expected_effects: list[str] = (
         [] if operation == "WORKTREE_INSPECT" else [operation]
     )
-    if authorized != expected_effects:
+    if effect.get("authorized_effects") != expected_effects:
         raise ClerkRefusal(
             "EFFECT_BUDGET_MISMATCH",
             "authorized_effects must name only this packet operation",
         )
-
-    target = packet["target"]
-    runtime_worktrees = {
-        "kind": "RUNTIME_WORKTREES_STATE",
-        "key": str(repo / ".omp" / "runtime" / "worktrees.json"),
-    }
-    if operation == "STATE_CAS":
-        state_path = _repo_path(
-            repo,
-            target["canonical_target_path"],
-            "target.canonical_target_path",
-        )
-        expected_resources = [{"kind": "STATE_PATH", "key": str(state_path)}]
-    elif operation == "WORKTREE_INSPECT":
-        expected_resources = []
-    elif operation == "WORKTREE_PROVISION":
-        expected_resources = [
-            runtime_worktrees,
-            {"kind": "CONTAINER", "key": target["canonical_container_path"]},
-        ]
-    else:
-        expected_resources = [
-            runtime_worktrees,
-            {"kind": "WORKTREE", "key": target["canonical_worktree_path"]},
-        ]
-        if operation == "GIT_INTEGRATE_PUSH":
-            repository = _repository_facts(repo)
-            expected_resources.extend(
-                [
-                    {
-                        "kind": "GIT_TARGET",
-                        "key": repository["target_lock_key"],
-                    },
-                    {
-                        "kind": "REMOTE_TARGET",
-                        "key": (
-                            f"{repository['common_path']}:remote:"
-                            f"{target['remote_name']}:"
-                            f"{target['target_remote_ref']}"
-                        ),
-                    },
-                ]
-            )
-    expected_resources.sort(
-        key=lambda resource: (resource["kind"], resource["key"])
-    )
-    if normalized_resources != expected_resources:
+    if normalized_resources != _expected_operation_resources(
+        operation,
+        packet["target"],
+        repo,
+    ):
         raise ClerkRefusal(
             "MUTATION_DOMAIN_MISMATCH",
             "mutation resources do not expose the complete exact operation footprint",
@@ -2086,6 +2094,139 @@ def _operation_observation(
     return observation
 
 
+def build_packet(repo_raw: str, draft_raw: str, output_raw: str) -> int:
+    repo = _canonical_existing(
+        str(Path(repo_raw).resolve(strict=True)),
+        "repository",
+        directory=True,
+    )
+    draft_path = _canonical_existing(
+        str(Path(draft_raw).resolve(strict=True)),
+        "packet draft",
+    )
+    try:
+        draft = json.loads(draft_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ClerkRefusal("INVALID_PACKET", "packet draft is not valid UTF-8 JSON") from exc
+    if not isinstance(draft, dict):
+        raise ClerkRefusal("INVALID_PACKET", "packet draft must be a JSON object")
+    expected_keys = {
+        "operation_id",
+        "clerk_assignment_id",
+        "authorizer",
+        "authority",
+        "operation",
+        "requires",
+        "target",
+        "acceptance_refs",
+    }
+    if set(draft) != expected_keys:
+        missing = sorted(expected_keys - set(draft))
+        extra = sorted(set(draft) - expected_keys)
+        detail = [
+            *(f"missing {key}" for key in missing),
+            *(f"unexpected {key}" for key in extra),
+        ]
+        raise ClerkRefusal(
+            "INVALID_PACKET",
+            "packet draft has " + ", ".join(detail),
+        )
+    operation = draft["operation"]
+    if operation not in OPERATIONS:
+        raise ClerkRefusal("UNSUPPORTED_OPERATION", "packet draft operation is unsupported")
+    operation_id = _require_id(draft["operation_id"], "operation_id")
+    clerk_assignment_id = _require_id(
+        draft["clerk_assignment_id"],
+        "clerk_assignment_id",
+    )
+    target = draft["target"]
+    if not isinstance(target, Mapping):
+        raise ClerkRefusal("INVALID_PACKET", "packet draft target must be an object")
+    effect_seed = {
+        "operation_id": operation_id,
+        "clerk_assignment_id": clerk_assignment_id,
+        "operation": operation,
+        "target": target,
+    }
+    packet: dict[str, Any] = {
+        "schema_version": 1,
+        "kind": "clerk_operation",
+        "operation_id": operation_id,
+        "clerk_assignment_id": clerk_assignment_id,
+        "executor": {
+            "role": "hmasd-clerk",
+            "logical_identity": f"Clerk-{clerk_assignment_id}",
+            "generation": 1,
+        },
+        "authorizer": draft["authorizer"],
+        "operation": operation,
+        "requires": draft["requires"],
+        "authority": draft["authority"],
+        "mutation": {
+            "class": OPERATION_MUTATION_CLASS[operation],
+            "resources": _expected_operation_resources(operation, target, repo),
+        },
+        "effect": {
+            "attempt": 1,
+            "attempt_token": _sha256(_canonical_bytes(effect_seed)),
+            "authorized_effects": (
+                [] if operation == "WORKTREE_INSPECT" else [operation]
+            ),
+            "unknown_outcome": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
+        },
+        "target": target,
+        "acceptance_refs": draft["acceptance_refs"],
+        "postconditions": {
+            "success": ["exact public primitive postcondition observed"],
+            "refusal": ["no unauthorized effect landed"],
+            "unknown": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
+        },
+        "stop_condition": "Return one terminal Clerk fact without retry.",
+        "return_owner": "ROOT",
+    }
+    packet["packet_sha256"] = _sha256(_canonical_bytes(packet))
+    try:
+        hmasd_state.validate_document("clerk_operation", packet)
+    except hmasd_state.StateError as exc:
+        raise ClerkRefusal("INVALID_PACKET", str(exc)) from exc
+    _validate_operation_binding(packet, repo)
+
+    output_candidate = Path(output_raw)
+    output_path = (
+        output_candidate
+        if output_candidate.is_absolute()
+        else repo / output_candidate
+    )
+    output_path = Path(os.path.normpath(output_path))
+    if not _under(output_path, repo):
+        raise ClerkRefusal("NONCANONICAL_PATH", "packet output escapes repository")
+    data = _canonical_bytes(packet)
+    created = True
+    if output_path.exists():
+        _reject_symlink_chain(output_path, "packet output")
+        if output_path.read_bytes() != data:
+            raise ClerkRefusal(
+                "PACKET_IDENTITY_COLLISION",
+                "packet output already contains different bytes",
+            )
+        created = False
+    else:
+        _atomic_create(output_path, data)
+    result = {
+        "ok": True,
+        "operation": "build",
+        "created": created,
+        "operation_id": operation_id,
+        "packet_ref": {
+            "path": _relative_ref(repo, output_path),
+            "sha256": _sha256(data),
+        },
+        "mutation": packet["mutation"],
+    }
+    print(json.dumps(result, sort_keys=True))
+    return 0
+
+
 def execute(packet_raw: str) -> int:
     packet_path, packet, _, packet_file_sha256 = _load_packet(packet_raw)
     repo = _packet_repo(packet, packet_path)
@@ -2330,6 +2471,10 @@ def _transient_refusal(packet_raw: str, exc: ClerkRefusal) -> int:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
+    build_parser = subparsers.add_parser("build")
+    build_parser.add_argument("--repo", default=".")
+    build_parser.add_argument("--draft", required=True)
+    build_parser.add_argument("--output", required=True)
     execute_parser = subparsers.add_parser("execute")
     execute_parser.add_argument("--packet", required=True)
     return parser
@@ -2338,11 +2483,25 @@ def _parser() -> argparse.ArgumentParser:
 def main(argv: Iterable[str] | None = None) -> int:
     args = _parser().parse_args(list(argv) if argv is not None else None)
     try:
-        if args.command != "execute":
-            raise ClerkRefusal("UNSUPPORTED_COMMAND", "only execute is supported")
-        return execute(args.packet)
+        if args.command == "build":
+            return build_packet(args.repo, args.draft, args.output)
+        if args.command == "execute":
+            return execute(args.packet)
+        raise ClerkRefusal("UNSUPPORTED_COMMAND", "unsupported Clerk command")
     except ClerkRefusal as exc:
-        return _transient_refusal(getattr(args, "packet", ""), exc)
+        if args.command == "execute":
+            return _transient_refusal(args.packet, exc)
+        print(
+            json.dumps(
+                {
+                    "ok": False,
+                    "operation": "build",
+                    "error": {"code": exc.code, "message": str(exc)},
+                },
+                sort_keys=True,
+            )
+        )
+        return 2
 
 
 if __name__ == "__main__":

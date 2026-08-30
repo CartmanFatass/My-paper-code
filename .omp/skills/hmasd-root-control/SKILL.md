@@ -530,15 +530,22 @@ transitions are event-driven, not polling- or timer-driven.
 
 Checkpoint only material milestones: completed research or engineering rounds,
 accepted-result or terminal-run evidence promotion, external prompt/archive
-readiness, Portfolio lifecycle changes, and current-schema cutovers. EM and CM freeze
-semantic products and exact operation packets but perform no target Git. Root
-accepts and admits a fresh per-packet Clerk only after validating the authorizer
-result/hash, packet digest, exact dependency, actor/writer, policy, lock, and
-physical-lease handoff. Clerk performs only the packet's mechanical operation;
-the sole final target is `omp/workflow`. Root retains Root/shared authority,
-cross-direction Portfolio, control-plane/schema, external archive promotion,
-and recovery integration authority but likewise routes target mutation through
-an exact Clerk packet rather than reconstructing or performing it.
+readiness, Portfolio lifecycle changes, and current-schema cutovers. EM and CM
+freeze semantic products and exact operation drafts but perform no target Git.
+Root accepts and admits a fresh per-operation Clerk for direction-owned
+candidates, state CAS, physical manager leases, and ambiguous recovery only
+after validating the authorizer result/hash, built packet digest, exact
+dependency, actor/writer, policy, lock, and handoff. Clerk performs only the
+packet's mechanical operation; the sole final target is `omp/workflow`.
+
+For Root's own non-overlapping Portfolio, shared control-plane/schema, and
+external-archive paths, routine local checkpoint construction is reversible:
+run `hmasd_local_check.py`, stage the exact allowlist, and create one local
+commit directly. Do not manufacture a Clerk chain for those local steps.
+Before the separate remote push, fetch and compare the exact remote tip and
+make one known-outcome attempt. A stale tip, path overlap, dirty unrelated
+state, or unknown outcome stops without retry. Recovery integration remains a
+Clerk operation when provenance or outcome is ambiguous.
 
 On inconsistency, freeze the affected dispatch, Effect, and Git mutation.
 State the conflicting propositions and exact authority/runtime/Git facts.
@@ -556,12 +563,13 @@ and at most one reassessment; a new material event begins the next cycle.
 ## State and return
 
 Write Portfolio allocation only to `PORTFOLIO.md`. Root prepares complete
-Root-owned desired bytes and exact CAS or Git operation packets; it does not
-perform state CAS or target Git directly. Invoke documented worktree, run,
-external-review, and packet interfaces rather than private writers. Root does
-not write direction research/engineering state, Agentify ledgers, or run
-manifests; it may validate exact external archives and admit verified
-Root/shared Clerk operations.
+Root-owned desired bytes; state CAS still uses its documented primitive or
+Clerk packet. Root may checkpoint its own exact shared Git allowlist through
+the quick local path above, but never writes direction research/engineering
+state, Agentify ledgers, or run manifests. Invoke documented worktree, run,
+external-review, packet-builder, and state interfaces rather than private
+writers. Root may validate exact external archives and admit verified
+direction/recovery Clerk operations.
 
 Return the common v2 envelope from `.omp/AGENTS.md` with `role: "root"`,
 `logical_identity: "Root"`, the current generation and assignment, exact

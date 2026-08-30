@@ -547,3 +547,119 @@ def test_release_result_lifecycle_matches_explicit_disposition(repo: Path) -> No
                 "worktree": worktree_fact,
             },
         )
+
+
+def test_build_derives_state_packet_mechanics_and_is_idempotent(
+    repo: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    full_packet, state_path, _input_path = state_packet(repo)
+    draft = {
+        key: copy.deepcopy(full_packet[key])
+        for key in (
+            "operation_id",
+            "clerk_assignment_id",
+            "authorizer",
+            "authority",
+            "operation",
+            "requires",
+            "target",
+            "acceptance_refs",
+        )
+    }
+    draft_path = repo / "packets" / "draft.json"
+    output_path = repo / "packets" / "built.json"
+    write_json(draft_path, draft)
+    state_before = state_path.read_bytes()
+
+    code = clerk.main(
+        [
+            "build",
+            "--repo",
+            str(repo),
+            "--draft",
+            str(draft_path),
+            "--output",
+            "packets/built.json",
+        ]
+    )
+    first = json.loads(capsys.readouterr().out)
+    assert code == 0
+    assert first["ok"] is True
+    assert first["created"] is True
+    assert state_path.read_bytes() == state_before
+
+    packet = json.loads(output_path.read_text(encoding="utf-8"))
+    assert packet["mutation"] == {
+        "class": "STATE_PATH",
+        "resources": [{"kind": "STATE_PATH", "key": str(state_path)}],
+    }
+    assert packet["effect"]["authorized_effects"] == ["STATE_CAS"]
+    assert packet["executor"]["logical_identity"] == "Clerk-state-cas-clerk"
+    unsigned = dict(packet)
+    packet_sha256 = unsigned.pop("packet_sha256")
+    assert packet_sha256 == hashlib.sha256(canonical(unsigned)).hexdigest()
+    hmasd_state.validate_document("clerk_operation", packet)
+
+    code = clerk.main(
+        [
+            "build",
+            "--repo",
+            str(repo),
+            "--draft",
+            str(draft_path),
+            "--output",
+            str(output_path),
+        ]
+    )
+    second = json.loads(capsys.readouterr().out)
+    assert code == 0
+    assert second["created"] is False
+    assert state_path.read_bytes() == state_before
+
+
+def test_build_rejects_invalid_operation_id_without_writing_packet(
+    repo: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    full_packet, _state_path, _input_path = state_packet(repo)
+    draft = {
+        key: copy.deepcopy(full_packet[key])
+        for key in (
+            "operation_id",
+            "clerk_assignment_id",
+            "authorizer",
+            "authority",
+            "operation",
+            "requires",
+            "target",
+            "acceptance_refs",
+        )
+    }
+    draft["operation_id"] = "invalid:timestamp"
+    draft_path = repo / "packets" / "invalid-draft.json"
+    output_path = repo / "packets" / "must-not-exist.json"
+    write_json(draft_path, draft)
+
+    code = clerk.main(
+        [
+            "build",
+            "--repo",
+            str(repo),
+            "--draft",
+            str(draft_path),
+            "--output",
+            str(output_path),
+        ]
+    )
+    result = json.loads(capsys.readouterr().out)
+    assert code == 2
+    assert result == {
+        "ok": False,
+        "operation": "build",
+        "error": {
+            "code": "INVALID_PACKET",
+            "message": "operation_id is not a valid identifier",
+        },
+    }
+    assert not output_path.exists()

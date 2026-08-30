@@ -183,21 +183,28 @@ Refuse or stop before action if any of these appear:
 - a Git operation lacks exact path allowlist, clean-state evidence,
   fetch/compare remote-tip evidence, or sole final target `omp/workflow`.
 
-## Minimal verification commands for startup
+## Verification commands
 
-Use the project-specific environment available in the future session. At this
-handoff boundary these commands were the focused control-plane checks:
+Routine startup and direction-local reversible work use one read-only quick
+check:
 
 ```bash
-python3 scripts/hmasd_state.py validate --kind portfolio_registry --path docs/research/portfolio/workflow/registry.json
-python3 scripts/hmasd_state.py validate --kind runtime_agents --path .omp/runtime/agents.json
-python3 scripts/hmasd_state.py validate --kind runtime_worktrees --path .omp/runtime/worktrees.json
-temp/runtime/venvs/mgtap-estimator/bin/python -m pytest tests/hmasd_topology_contract_test.py tests/hmasd_advisor_config_contract_test.py tests/hmasd_portfolio_phase2_test.py tests/hmasd_state_phase0_test.py tests/hmasd_portfolio_logic_contract_test.py tests/hmasd_em_logic_contract_test.py tests/hmasd_cm_logic_contract_test.py tests/hmasd_browser_transport_contract_test.py tests/hmasd_standard_artifact_contract_test.py tests/hmasd_git_handoff_contract_test.py tests/hmasd_lifecycle_parked_contract_test.py tests/hmasd_recovery_test.py tests/hmasd_dashboard_test.py tests/hmasd_file_fingerprint_test.py
+python3 scripts/hmasd_local_check.py --repo . --base HEAD
 ```
 
-Observed at the control-plane migration boundary: registry validation `ok`,
-runtime map validations `ok`, and the focused control-plane suite `102 passed in
-12.38s`.
+The command validates the cheap core state even on a clean tree, then checks
+only changed state, Python syntax, whitespace, and directly mapped focused
+tests. Use `--scope <owned-root>` in an assignment worktree. This is the
+default local path; do not repeat a project-wide suite after each reconciliation,
+worktree operation, or direction checkpoint.
+
+The migration-boundary suite below is retained as historical evidence, not a
+routine startup gate: registry and runtime maps validated `ok`, and the focused
+control-plane suite observed `102 passed in 12.38s`. Run the current unified
+suite once only after a shared control-plane integration or at final delivery.
+Provider sends, result-bearing commands, remote push, destructive paths,
+secrets, and scientific/numerical/RNG/checkpoint/bit-identity changes retain
+their separate exact boundaries.
 
 ## New-session first action after reading
 

@@ -33,18 +33,24 @@ Before dispatch, Root supplies:
   `assignment_id`, with logical identity `Clerk-<clerk_assignment_id>`; and
 - the exact operation-specific resource admission and physical writer lease.
 
-The packet conforms to
-`scripts/schemas/hmasd_clerk_operation.schema.json`. It fixes the executor and
-authorizer tuples, exact dependencies, authority actor/writer, canonical
-resources array, mutation class, operation target, hashes, one-attempt token,
-effect budget, postconditions, stop condition, and Root return. Resource entries
-are closed `{kind,key}` objects, unique and canonically sorted. Every mutating
-worktree operation declares the shared runtime-worktrees state resource plus its
-exact worktree or container; integration also declares the local Git target and
-remote target resources. Root may bind an accepted result and resolve a declared
-prior-operation receipt binding; it never rewrites packet bytes or chooses a
-semantic field. A prior-operation binding is usable only when its operation ID,
-receipt SHA-256, and named output field all match an accepted receipt.
+Authorizers freeze only the semantic draft fields: fresh operation and Clerk
+assignment IDs, exact authorizer and authority, operation, dependencies,
+operation target, and acceptance refs. They do not hand-author executor,
+mutation class/resources, attempt token/effect budget, standard postconditions,
+or packet hash. Build the immutable packet through:
+
+```bash
+python3 scripts/hmasd_clerk.py build --repo <repo> --draft <draft.json> --output <packet.json>
+```
+
+The builder derives those mechanical fields from the discriminated operation
+and canonical target, validates the closed
+`scripts/schemas/hmasd_clerk_operation.schema.json` contract, writes canonical
+content-addressed bytes once, and is idempotent only for identical output
+bytes. This is packet construction, not authorization or an Effect. Root then
+accepts the exact authorizer result and built packet SHA-256 before dispatch.
+A prior-operation binding is usable only when its operation ID, receipt
+SHA-256, and named output field all match an accepted receipt.
 
 ## Pre-effect gate
 
@@ -73,11 +79,12 @@ Any mismatch refuses before effect. The Clerk never repairs, broadens,
 regenerates, stages different bytes, resolves a conflict, rebases, merges,
 changes a policy, or asks for a decision.
 
-## One-shot execution
+## Build and one-shot execution
 
-Invoke only the documented one-shot `scripts/hmasd_clerk.py execute` surface
-with the exact packet and Root dispatch binding. Do not call raw Git or state
-mutation commands to bypass it. The closed operation set is:
+Use `scripts/hmasd_clerk.py build` for packet mechanics, then invoke only the
+documented one-shot `scripts/hmasd_clerk.py execute` surface with the exact
+built packet and Root dispatch binding. Do not call raw Git or state mutation
+commands to bypass it. The closed operation set is:
 
 - `STATE_CAS`;
 - `WORKTREE_PROVISION`, `WORKTREE_INSPECT`, or `WORKTREE_RELEASE`;
