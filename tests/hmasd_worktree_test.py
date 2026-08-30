@@ -276,6 +276,15 @@ def test_orthogonal_prepared_object_requires_frozen_target_predecessor() -> None
     }
 
 
+def test_candidate_inspection_classifies_absent_commit_as_stale(
+    tmp_path: Path,
+) -> None:
+    repo, base = init_repo(tmp_path)
+
+    with pytest.raises(worktree.StaleFacts):
+        worktree.inspect_candidate(str(repo), "f" * 40, base)
+
+
 def test_patch_is_prospective_and_candidate_ref_does_not_change_checkout(tmp_path: Path) -> None:
     repo, base = init_repo(tmp_path)
     container = tmp_path / "worktrees"

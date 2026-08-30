@@ -461,8 +461,15 @@ def _branch_sha(repo: Path, branch: str) -> str | None:
 
 def _verify_commit(repo: Path, value: str, *, label: str) -> str:
     commit = _validate_commit(value, label=label)
-    actual = _git_value(repo, "rev-parse", "--verify", f"{commit}^{{commit}}").lower()
-    if actual != commit:
+    result = _run_git(
+        repo,
+        "rev-parse",
+        "--verify",
+        f"{commit}^{{commit}}",
+        check=False,
+    )
+    actual = result.stdout.strip().lower()
+    if result.returncode or actual != commit:
         raise StaleFacts(f"{label} is not the exact existing commit")
     return commit
 
