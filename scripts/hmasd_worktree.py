@@ -5,6 +5,10 @@ Git is the source of truth for checkout and ref state;
 ``.omp/runtime/worktrees.json`` is an ignored, CAS-protected journal maintained
 through ``hmasd_state.py``. A receipt captures every fact used by prepare/apply
 so Root or the direction/kind-owning EM/CM never applies a stale plan.
+
+``recover-provision --repo <repo> --worktree-ref <ref>`` retries only an exact
+PROVISIONING journal whose target, registration, and assignment branch are all
+absent and whose receipt still matches the journaled operation identity.
 """
 
 from __future__ import annotations
@@ -845,6 +849,8 @@ def _receipt_skeleton(repo: Path, container: Path, entry: Mapping[str, Any], reg
         "discarded_paths": [],
         "retention_reason": None,
         "unknown_outcome": None,
+        "history": [],
+        "provision_failures": [],
     }
 
 
@@ -1281,13 +1287,226 @@ def _verification(refs: Sequence[str], repo: Path) -> dict[str, Any]:
     return {"status": "PRESENT" if normalized and not missing else "MISSING", "refs": normalized, "missing": missing}
 
 
-def _record_failure(receipt_path: Path, receipt: Mapping[str, Any], message: str) -> None:
+def _safe_provision_observation(repo: Path, entry: Mapping[str, Any]) -> dict[str, Any]:
+    try:
+        return _observation(repo, entry)
+    except Exception as exc:
+        return {
+            "worktree_ref": entry.get("worktree_ref"),
+            "path": entry.get("canonical_absolute_path"),
+            "branch": entry.get("branch"),
+            "observation_error": str(exc),
+        }
+
+
+def _failure_status(
+    observation: Mapping[str, Any],
+    observed_status: Mapping[str, Any] | None,
+) -> dict[str, list[str]]:
+    source = observed_status if observed_status is not None else observation.get("status")
+    if not isinstance(source, Mapping):
+        source = {}
+    result: dict[str, list[str]] = {}
+    for key in ("tracked_dirty", "nonignored_untracked", "ignored_only"):
+        value = source.get(key)
+        result[key] = sorted({str(path) for path in value}) if isinstance(value, list) else []
+    return result
+
+
+def _begin_provision_failure(
+    receipt_path: Path,
+    receipt: Mapping[str, Any],
+    *,
+    operation: str,
+    phase: str,
+    message: str,
+    observation: Mapping[str, Any],
+    observed_status: Mapping[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    at = _now()
+    status = _failure_status(observation, observed_status)
+    failure = {
+        "failure_id": secrets.token_hex(8),
+        "at": at,
+        "operation": operation,
+        "phase": phase,
+        "message": message,
+        **status,
+        "observation": dict(observation),
+        "rollback": {
+            "outcome": "PENDING",
+            "before": dict(observation),
+            "after": None,
+        },
+    }
     updated = dict(receipt)
-    updated["last_failure"] = {"at": _now(), "message": message}
+    failures = list(receipt.get("provision_failures", [])) if isinstance(receipt.get("provision_failures"), list) else []
+    failures.append(failure)
+    history = list(receipt.get("history", [])) if isinstance(receipt.get("history"), list) else []
+    history.append(
+        {
+            "at": at,
+            "event": f"{operation.replace('-', '_').upper()}_FAILED",
+            "failure_id": failure["failure_id"],
+            "phase": phase,
+        }
+    )
+    updated["last_failure"] = failure
+    updated["provision_failures"] = failures
+    updated["history"] = history
     try:
         _atomic_write(receipt_path, updated)
-    except OSError:
+    except Exception as exc:
+        failure["diagnostic_write_error"] = str(exc)
+        failures[-1] = failure
+        updated["last_failure"] = failure
+        updated["provision_failures"] = failures
+    return updated, failure
+
+
+def _complete_provision_failure(
+    receipt_path: Path,
+    receipt: Mapping[str, Any],
+    failure: Mapping[str, Any],
+    rollback: Mapping[str, Any],
+) -> dict[str, Any]:
+    completed = dict(failure)
+    completed["rollback"] = dict(rollback)
+    updated = dict(receipt)
+    failures = list(receipt.get("provision_failures", [])) if isinstance(receipt.get("provision_failures"), list) else []
+    for index in range(len(failures) - 1, -1, -1):
+        candidate = failures[index]
+        if isinstance(candidate, Mapping) and candidate.get("failure_id") == failure.get("failure_id"):
+            failures[index] = completed
+            break
+    updated["last_failure"] = completed
+    updated["provision_failures"] = failures
+    try:
+        _atomic_write(receipt_path, updated)
+    except Exception:
         pass
+    return updated
+
+
+def _rollback_provision_effect(
+    repo: Path,
+    entry: Mapping[str, Any],
+    *,
+    add_attempted: bool,
+    target_identity: Mapping[str, Any] | None,
+    before: Mapping[str, Any],
+) -> dict[str, Any]:
+    target = Path(str(entry["canonical_absolute_path"]))
+    branch = str(entry["branch"])
+    base = str(entry["base_sha"]).lower()
+    rollback: dict[str, Any] = {
+        "attempted": False,
+        "outcome": "NOT_ATTEMPTED",
+        "before": dict(before),
+        "after": None,
+    }
+    if not add_attempted:
+        rollback["after"] = _safe_provision_observation(repo, entry)
+        return rollback
+    all_absent = (
+        not before.get("target_exists")
+        and before.get("registration_count") == 0
+        and before.get("branch_sha") is None
+    )
+    if all_absent:
+        rollback["outcome"] = "NO_EFFECT"
+        rollback["after"] = dict(before)
+        return rollback
+    exact_created = (
+        target_identity is not None
+        and target.is_dir()
+        and not target.is_symlink()
+        and _identity_equal(target, target_identity)
+        and before.get("registration_count") == 1
+        and before.get("registration_branch") == f"refs/heads/{branch}"
+        and str(before.get("registration_head", "")).lower() == base
+        and before.get("branch_sha") == base
+    )
+    if not exact_created:
+        rollback["outcome"] = "REFUSED_CHANGED_FACTS"
+        rollback["after"] = dict(before)
+        return rollback
+    rollback["attempted"] = True
+    try:
+        _run_git(repo, "worktree", "remove", "--force", str(target))
+        after_remove = _safe_provision_observation(repo, entry)
+        if (
+            not after_remove.get("target_exists")
+            and after_remove.get("registration_count") == 0
+            and after_remove.get("branch_sha") == base
+        ):
+            _run_git(repo, "update-ref", "-d", f"refs/heads/{branch}", base)
+        after = _safe_provision_observation(repo, entry)
+        rollback["after"] = after
+        if (
+            not after.get("target_exists")
+            and after.get("registration_count") == 0
+            and after.get("branch_sha") is None
+        ):
+            rollback["outcome"] = "COMPLETE"
+        else:
+            rollback["outcome"] = "INCOMPLETE"
+    except Exception as exc:
+        rollback["outcome"] = "FAILED"
+        rollback["error"] = str(exc)
+        rollback["after"] = _safe_provision_observation(repo, entry)
+    return rollback
+
+
+def _verify_added_worktree(
+    repo: Path,
+    entry: Mapping[str, Any],
+    target_identity: Mapping[str, Any],
+) -> dict[str, list[str] | bool]:
+    target = Path(str(entry["canonical_absolute_path"]))
+    branch = str(entry["branch"])
+    base = str(entry["base_sha"]).lower()
+    if not _identity_equal(target, target_identity):
+        raise UnsafeState("worktree target identity changed after git worktree add")
+    registrations = _registration(repo, target)
+    branch_sha = _branch_sha(repo, branch)
+    if (
+        len(registrations) != 1
+        or registrations[0].get("branch") != f"refs/heads/{branch}"
+        or str(registrations[0].get("head", "")).lower() != base
+        or branch_sha != base
+    ):
+        raise UnsafeState("created worktree registration failed exact identity checks")
+    status = _status(target)
+    if status["tracked_dirty"] or status["nonignored_untracked"]:
+        raise UnsafeState("created worktree is not clean", details={"status": status})
+    return status
+
+
+def _validate_provision_receipt_identity(
+    receipt: Mapping[str, Any],
+    entry: Mapping[str, Any],
+    container: Path,
+) -> None:
+    token = entry.get("operation_token")
+    if not isinstance(token, str) or not token or receipt.get("operation_token") != token:
+        raise StaleFacts("PROVISIONING operation token is absent or changed")
+    expected = {
+        "worktree_ref": entry.get("worktree_ref"),
+        "container": str(container),
+        "direction_id": entry.get("direction_id"),
+        "kind": entry.get("kind"),
+        "assignment_id": entry.get("assignment_id"),
+        "worktree_path": entry.get("canonical_absolute_path"),
+        "branch": entry.get("branch"),
+        "base_sha": entry.get("base_sha"),
+    }
+    changed = [key for key, value in expected.items() if receipt.get(key) != value]
+    if changed:
+        raise StaleFacts(
+            "PROVISIONING receipt identity does not match the locked registry",
+            details={"changed_fields": changed},
+        )
 
 
 def _reconcile_provisioning(state_path: Path, state: dict[str, Any], entry: dict[str, Any], observation: Mapping[str, Any]) -> dict[str, Any]:
@@ -1345,47 +1564,248 @@ def provision(repo_raw: str, container_raw: str | None, direction: str, kind: st
         journal = _replace_registry(state_path, state_with_entry, int(state["revision"]))
         receipt = _receipt_skeleton(repo, container, entry, int(journal["revision"]))
         receipt_path = _write_receipt_for(repo, entry, receipt)
-        created = False
+        add_attempted = False
+        target_identity: Mapping[str, Any] | None = None
+        observed_status: Mapping[str, Any] | None = None
+        phase = "PRE_ADD_VALIDATION"
         try:
             _revalidate_container(container, identities)
             if _lstat(target) is not None or _branch_sha(repo, branch) is not None:
                 raise UnsafeState("worktree namespace changed after PROVISIONING journal")
+            phase = "GIT_WORKTREE_ADD"
+            add_attempted = True
             _run_git(repo, "worktree", "add", "-b", branch, str(target), base)
-            created = True
+            phase = "TARGET_IDENTITY"
             target_identity = _identity(target)
             _revalidate_container(container, identities)
-            if not _identity_equal(target, target_identity):
-                raise UnsafeState("worktree target identity changed after git worktree add")
-            registrations = _registration(repo, target)
-            if len(registrations) != 1 or registrations[0].get("branch") != f"refs/heads/{branch}" or str(registrations[0].get("head", "")).lower() != base:
-                raise UnsafeState("created worktree registration failed exact identity checks")
-            status = _status(target)
-            if status["tracked_dirty"] or status["nonignored_untracked"]:
-                raise UnsafeState("created worktree is not clean")
+            phase = "POST_ADD_VALIDATION"
+            observed_status = _verify_added_worktree(repo, entry, target_identity)
+            phase = "REGISTRY_TRANSITION"
             final_entry = dict(entry)
             final_entry["lifecycle"] = "PROVISIONED"
-            final_state = _replace_registry(state_path, _put_entry(journal, final_entry, ref), int(journal["revision"]))
-            receipt["registry_revision"] = int(final_state["revision"])
-            receipt["lifecycle"] = "PROVISIONED"
-            receipt["provisioned_at"] = _now()
-            _atomic_write(receipt_path, receipt)
-            return {"ok": True, "operation": "provision", "worktree": final_entry, "receipt": str(receipt_path), "registry_revision": final_state["revision"]}
+            final_state = _replace_registry_observed(
+                repo,
+                common,
+                container,
+                identities,
+                state_path,
+                journal,
+                final_entry,
+                ref,
+            )
         except Exception as exc:
-            _record_failure(receipt_path, receipt, str(exc))
-            # Roll back only the exact registration created by this operation.
-            if created:
+            if observed_status is None and isinstance(exc, WorktreeError):
+                detail_status = exc.details.get("status")
+                if isinstance(detail_status, Mapping):
+                    observed_status = detail_status
+            if target_identity is None and target.is_dir() and not target.is_symlink():
                 try:
-                    registrations = _registration(repo, target)
-                    branch_sha = _branch_sha(repo, branch)
-                    if len(registrations) == 1 and registrations[0].get("branch") == f"refs/heads/{branch}" and str(registrations[0].get("head", "")).lower() == base and branch_sha == base and _identity_equal(target, _identity(target)):
-                        _run_git(repo, "worktree", "remove", "--force", str(target))
-                        if _branch_sha(repo, branch) == base:
-                            _run_git(repo, "update-ref", "-d", f"refs/heads/{branch}", base)
-                except Exception:
+                    target_identity = _identity(target)
+                except OSError:
                     pass
+            observation = _safe_provision_observation(repo, entry)
+            if observed_status is not None:
+                observation["status"] = dict(observed_status)
+            failed_receipt, failure = _begin_provision_failure(
+                receipt_path,
+                receipt,
+                operation="provision",
+                phase=phase,
+                message=str(exc),
+                observation=observation,
+                observed_status=observed_status,
+            )
+            rollback = _rollback_provision_effect(
+                repo,
+                entry,
+                add_attempted=add_attempted,
+                target_identity=target_identity,
+                before=observation,
+            )
+            _complete_provision_failure(receipt_path, failed_receipt, failure, rollback)
             if isinstance(exc, WorktreeError):
                 raise
             raise WorktreeError(str(exc)) from exc
+        receipt["registry_revision"] = int(final_state["revision"])
+        receipt["lifecycle"] = "PROVISIONED"
+        receipt["provisioned_at"] = _now()
+        _atomic_write(receipt_path, receipt)
+        return {
+            "ok": True,
+            "operation": "provision",
+            "worktree": final_entry,
+            "receipt": str(receipt_path),
+            "registry_revision": final_state["revision"],
+        }
+
+
+def recover_provision(repo_raw: str, worktree_ref: str) -> dict[str, Any]:
+    """Retry one exact, fully rolled-back PROVISIONING journal entry."""
+
+    repo, common = _repo_context(repo_raw)
+    with _locked_entry(repo, common, worktree_ref) as (
+        state_path,
+        container,
+        state,
+        entry,
+        identities,
+    ):
+        receipt_path, receipt = _load_current_receipt(repo, state, entry)
+        _validate_provision_receipt_identity(receipt, entry, container)
+        if entry.get("lifecycle") != "PROVISIONING":
+            raise UnsafeState("recover-provision requires a PROVISIONING journal entry")
+
+        observation = _safe_provision_observation(repo, entry)
+        refusal_reasons: list[str] = []
+        if entry.get("unknown_outcome") is not None or receipt.get("unknown_outcome") is not None:
+            refusal_reasons.append("unknown outcome is not null")
+        if entry.get("candidate_sha") is not None or entry.get("integrated_sha") is not None:
+            refusal_reasons.append("PROVISIONING candidate or integrated identity is present")
+        if observation.get("target_exists"):
+            refusal_reasons.append("worktree target survives")
+        if observation.get("registration_count") != 0:
+            refusal_reasons.append("Git worktree registration survives")
+        if observation.get("branch_sha") is not None:
+            refusal_reasons.append("assignment branch survives")
+        if observation.get("path_error"):
+            refusal_reasons.append("worktree target path is not canonically absent")
+        if refusal_reasons:
+            failed_receipt, failure = _begin_provision_failure(
+                receipt_path,
+                receipt,
+                operation="recover-provision",
+                phase="PREFLIGHT",
+                message="; ".join(refusal_reasons),
+                observation=observation,
+            )
+            rollback = _rollback_provision_effect(
+                repo,
+                entry,
+                add_attempted=False,
+                target_identity=None,
+                before=observation,
+            )
+            _complete_provision_failure(receipt_path, failed_receipt, failure, rollback)
+            raise UnsafeState(
+                "recover-provision requires an exact all-absent orphan",
+                details={"observation": observation, "refusal_reasons": refusal_reasons},
+            )
+
+        base = str(entry["base_sha"]).lower()
+        target = Path(str(entry["canonical_absolute_path"]))
+        branch = str(entry["branch"])
+        add_attempted = False
+        target_identity: Mapping[str, Any] | None = None
+        observed_status: Mapping[str, Any] | None = None
+        phase = "BASE_VALIDATION"
+        try:
+            base = _verify_commit(repo, base, label="journaled base")
+            phase = "PRE_ADD_VALIDATION"
+            state, entry, receipt = _refresh_locked_documents(
+                repo,
+                common,
+                container,
+                identities,
+                state_path,
+                worktree_ref,
+                state,
+                entry,
+                receipt_path,
+                receipt,
+            )
+            _revalidate_container(container, identities)
+            current_observation = _safe_provision_observation(repo, entry)
+            if (
+                current_observation.get("target_exists")
+                or current_observation.get("registration_count") != 0
+                or current_observation.get("branch_sha") is not None
+            ):
+                raise UnsafeState(
+                    "worktree namespace changed after recovery preflight",
+                    details={"observation": current_observation},
+                )
+            phase = "GIT_WORKTREE_ADD"
+            add_attempted = True
+            _run_git(repo, "worktree", "add", "-b", branch, str(target), base)
+            phase = "TARGET_IDENTITY"
+            target_identity = _identity(target)
+            _revalidate_container(container, identities)
+            phase = "POST_ADD_VALIDATION"
+            observed_status = _verify_added_worktree(repo, entry, target_identity)
+            phase = "REGISTRY_TRANSITION"
+            final_entry = dict(entry)
+            final_entry["lifecycle"] = "PROVISIONED"
+            final_state = _replace_registry_observed(
+                repo,
+                common,
+                container,
+                identities,
+                state_path,
+                state,
+                final_entry,
+                worktree_ref,
+            )
+        except Exception as exc:
+            if observed_status is None and isinstance(exc, WorktreeError):
+                detail_status = exc.details.get("status")
+                if isinstance(detail_status, Mapping):
+                    observed_status = detail_status
+            if target_identity is None and target.is_dir() and not target.is_symlink():
+                try:
+                    target_identity = _identity(target)
+                except OSError:
+                    pass
+            failure_observation = _safe_provision_observation(repo, entry)
+            if observed_status is not None:
+                failure_observation["status"] = dict(observed_status)
+            failed_receipt, failure = _begin_provision_failure(
+                receipt_path,
+                receipt,
+                operation="recover-provision",
+                phase=phase,
+                message=str(exc),
+                observation=failure_observation,
+                observed_status=observed_status,
+            )
+            rollback = _rollback_provision_effect(
+                repo,
+                entry,
+                add_attempted=add_attempted,
+                target_identity=target_identity,
+                before=failure_observation,
+            )
+            _complete_provision_failure(receipt_path, failed_receipt, failure, rollback)
+            if isinstance(exc, WorktreeError):
+                raise
+            raise WorktreeError(str(exc)) from exc
+
+        recovered_at = _now()
+        history = list(receipt.get("history", [])) if isinstance(receipt.get("history"), list) else []
+        history.append(
+            {
+                "at": recovered_at,
+                "event": "PROVISION_RECOVERED",
+                "from": "PROVISIONING",
+                "to": "PROVISIONED",
+                "registry_revision": int(final_state["revision"]),
+            }
+        )
+        receipt["history"] = history
+        receipt["last_failure"] = None
+        receipt["lifecycle"] = "PROVISIONED"
+        receipt["registry_revision"] = int(final_state["revision"])
+        receipt["provisioned_at"] = recovered_at
+        receipt["recovered_at"] = recovered_at
+        _atomic_write(receipt_path, receipt)
+        return {
+            "ok": True,
+            "operation": "recover-provision",
+            "recovered": True,
+            "worktree": final_entry,
+            "receipt": str(receipt_path),
+            "registry_revision": final_state["revision"],
+        }
+
 
 
 def inspect(repo_raw: str, worktree_ref: str) -> dict[str, Any]:
@@ -2342,6 +2762,12 @@ def _parser() -> argparse.ArgumentParser:
     provision_parser.add_argument("--kind", required=True, choices=["research", "engineering"])
     provision_parser.add_argument("--assignment", required=True)
     provision_parser.add_argument("--base", required=True)
+    recover_parser = sub.add_parser(
+        "recover-provision",
+        help="retry one exact all-absent PROVISIONING journal entry",
+    )
+    recover_parser.add_argument("--repo", required=True)
+    recover_parser.add_argument("--worktree-ref", required=True)
     inspect_parser = sub.add_parser("inspect")
     inspect_parser.add_argument("--worktree-ref", required=True)
     inspect_parser.add_argument("--repo", default=".")
@@ -2384,6 +2810,8 @@ def main(argv: Iterable[str] | None = None) -> int:
         args = parser.parse_args(list(argv) if argv is not None else None)
         if args.operation == "provision":
             result = provision(args.repo, args.container, args.direction, args.kind, args.assignment, args.base)
+        elif args.operation == "recover-provision":
+            result = recover_provision(args.repo, args.worktree_ref)
         elif args.operation == "inspect":
             result = inspect(args.repo, args.worktree_ref)
         elif args.operation == "record-candidate":

@@ -114,6 +114,32 @@ def entry(result: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
+def provision_orphan(
+    repo: Path,
+    container: Path,
+    assignment: str,
+) -> tuple[dict[str, Any], Path, Path]:
+    provisioned = provision(repo, container, assignment)
+    worktree = entry(provisioned)
+    target = Path(worktree["canonical_absolute_path"])
+    git(repo, "worktree", "remove", "--force", str(target))
+    git(repo, "update-ref", "-d", f"refs/heads/{worktree['branch']}", worktree["base_sha"])
+
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    row = next(item for item in registry["worktrees"] if item["worktree_ref"] == worktree["worktree_ref"])
+    row["lifecycle"] = "PROVISIONING"
+    registry["revision"] += 1
+    registry_path.write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    receipt_path = Path(provisioned["receipt"])
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["lifecycle"] = "PROVISIONING"
+    receipt["registry_revision"] = registry["revision"]
+    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return dict(row), target, receipt_path
+
+
 def prepared_candidate(
     repo: Path,
     container: Path,
@@ -695,6 +721,181 @@ def test_orphaned_provision_is_reported_exactly_and_not_duplicated(repo_and_cont
         worktree["base_sha"],
     )
     assert duplicate.returncode == 6
+
+
+def test_dirty_provision_records_paths_then_exact_orphan_recovery_succeeds(
+    repo_and_container: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from scripts import hmasd_worktree as worktree_module
+
+    repo, container = repo_and_container
+    base = git(repo, "rev-parse", "HEAD").stdout.strip()
+    original_status = worktree_module._status
+    injected = False
+
+    def dirty_once(path: Path) -> dict[str, list[str] | bool]:
+        nonlocal injected
+        if not injected:
+            injected = True
+            return {
+                "tracked_dirty": ["src/owned.py"],
+                "nonignored_untracked": ["scratch.txt"],
+                "ignored_only": ["cache.ignored"],
+                "clean": False,
+            }
+        return original_status(path)
+
+    monkeypatch.setattr(worktree_module, "_status", dirty_once)
+    with pytest.raises(worktree_module.UnsafeState):
+        worktree_module.provision(
+            str(repo),
+            str(container),
+            "example-direction",
+            "engineering",
+            "recover-dirty",
+            base,
+        )
+
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    assert len(registry["worktrees"]) == 1
+    orphan = registry["worktrees"][0]
+    token = orphan["operation_token"]
+    target = Path(orphan["canonical_absolute_path"])
+    receipt_path = repo / orphan["receipt_path"]
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    failure = receipt["provision_failures"][-1]
+    assert failure["phase"] == "POST_ADD_VALIDATION"
+    assert failure["tracked_dirty"] == ["src/owned.py"]
+    assert failure["nonignored_untracked"] == ["scratch.txt"]
+    assert failure["ignored_only"] == ["cache.ignored"]
+    assert failure["rollback"]["outcome"] == "COMPLETE"
+    assert not target.exists()
+    assert git(repo, "rev-parse", "--verify", "--quiet", f"refs/heads/{orphan['branch']}", check=False).returncode != 0
+
+    recovered = run_cli(
+        repo,
+        "recover-provision",
+        "--repo",
+        str(repo),
+        "--worktree-ref",
+        orphan["worktree_ref"],
+    )
+    assert recovered.returncode == 0, (recovered.stdout, recovered.stderr)
+    recovered_payload = payload(recovered)
+    assert recovered_payload["recovered"] is True
+    assert recovered_payload["worktree"]["operation_token"] == token
+    final_registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    assert len(final_registry["worktrees"]) == 1
+    final_row = final_registry["worktrees"][0]
+    assert final_row["lifecycle"] == "PROVISIONED"
+    assert final_row["operation_token"] == token
+    assert git(target, "status", "--porcelain").stdout == ""
+    assert git(repo, "worktree", "list", "--porcelain").stdout.count(f"worktree {target}\n") == 1
+    final_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert final_receipt["operation_token"] == token
+    assert final_receipt["recovered_at"] == final_receipt["provisioned_at"]
+    assert final_receipt["provision_failures"][-1] == failure
+    assert final_receipt["history"][-1]["event"] == "PROVISION_RECOVERED"
+
+    duplicate = run_cli(
+        repo,
+        "recover-provision",
+        "--repo",
+        str(repo),
+        "--worktree-ref",
+        orphan["worktree_ref"],
+    )
+    assert duplicate.returncode == 6
+    assert git(repo, "worktree", "list", "--porcelain").stdout.count(f"worktree {target}\n") == 1
+
+
+@pytest.mark.parametrize("survivor", ["target", "branch", "registration", "unknown-outcome"])
+def test_recover_provision_refuses_surviving_or_unknown_facts_without_effect(
+    repo_and_container: tuple[Path, Path],
+    survivor: str,
+) -> None:
+    repo, container = repo_and_container
+    worktree, target, receipt_path = provision_orphan(repo, container, f"recover-refuse-{survivor}")
+    if survivor == "target":
+        target.mkdir()
+    elif survivor == "branch":
+        git(repo, "branch", worktree["branch"], worktree["base_sha"])
+    elif survivor == "registration":
+        git(repo, "worktree", "add", "-b", worktree["branch"], str(target), worktree["base_sha"])
+    else:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        receipt["unknown_outcome"] = {"operation": "PROVISION", "outcome": "UNKNOWN"}
+        receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    before_registrations = git(repo, "worktree", "list", "--porcelain").stdout
+    before_branch = git(repo, "rev-parse", "--verify", "--quiet", f"refs/heads/{worktree['branch']}", check=False).stdout
+    before_target = target.exists()
+    refused = run_cli(
+        repo,
+        "recover-provision",
+        "--repo",
+        str(repo),
+        "--worktree-ref",
+        worktree["worktree_ref"],
+    )
+    assert refused.returncode == 6
+    assert git(repo, "worktree", "list", "--porcelain").stdout == before_registrations
+    assert git(repo, "rev-parse", "--verify", "--quiet", f"refs/heads/{worktree['branch']}", check=False).stdout == before_branch
+    assert target.exists() is before_target
+    registry = json.loads((repo / ".omp" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
+    current = next(item for item in registry["worktrees"] if item["worktree_ref"] == worktree["worktree_ref"])
+    assert current["lifecycle"] == "PROVISIONING"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert receipt["last_failure"]["phase"] == "PREFLIGHT"
+    assert receipt["last_failure"]["rollback"]["outcome"] == "NOT_ATTEMPTED"
+
+
+def test_failed_recover_provision_rolls_back_only_its_effect_and_stays_diagnosable(
+    repo_and_container: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from scripts import hmasd_worktree as worktree_module
+
+    repo, container = repo_and_container
+    worktree, target, receipt_path = provision_orphan(repo, container, "recover-fails")
+    original_status = worktree_module._status
+    injected = False
+
+    def dirty_once(path: Path) -> dict[str, list[str] | bool]:
+        nonlocal injected
+        if not injected:
+            injected = True
+            return {
+                "tracked_dirty": ["src/owned.py"],
+                "nonignored_untracked": ["failed-recovery.txt"],
+                "ignored_only": ["failed-recovery.ignored"],
+                "clean": False,
+            }
+        return original_status(path)
+
+    monkeypatch.setattr(worktree_module, "_status", dirty_once)
+    with pytest.raises(worktree_module.UnsafeState):
+        worktree_module.recover_provision(str(repo), worktree["worktree_ref"])
+
+    registry = json.loads((repo / ".omp" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
+    current = next(item for item in registry["worktrees"] if item["worktree_ref"] == worktree["worktree_ref"])
+    assert current["lifecycle"] == "PROVISIONING"
+    assert current["operation_token"] == worktree["operation_token"]
+    assert not target.exists()
+    assert git(repo, "rev-parse", "--verify", "--quiet", f"refs/heads/{worktree['branch']}", check=False).returncode != 0
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    failure = receipt["last_failure"]
+    assert failure["operation"] == "recover-provision"
+    assert failure["phase"] == "POST_ADD_VALIDATION"
+    assert failure["tracked_dirty"] == ["src/owned.py"]
+    assert failure["nonignored_untracked"] == ["failed-recovery.txt"]
+    assert failure["ignored_only"] == ["failed-recovery.ignored"]
+    assert failure["rollback"]["outcome"] == "COMPLETE"
+    inspected = run_cli(repo, "inspect", "--repo", str(repo), "--worktree-ref", worktree["worktree_ref"])
+    assert inspected.returncode == 6
+    assert payload(inspected)["orphan_reason"] == "PROVISIONING_JOURNAL_WITHOUT_GIT_MUTATION"
 
 
 def test_ignored_release_refuse_discard_and_retain(repo_and_container: tuple[Path, Path]) -> None:
