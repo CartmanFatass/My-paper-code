@@ -55,7 +55,6 @@ EXPECTED_NO_ADVISOR = {
     "hmasd-research-innovator",
     "hmasd-research-critic",
     "hmasd-research-principles-analyst",
-    "hmasd-research-artifact-writer",
 }
 
 

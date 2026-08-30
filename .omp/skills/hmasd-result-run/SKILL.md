@@ -77,8 +77,8 @@ reinterpret metrics.
   acquire command ownership.
 - This Skill records no scientific conclusion, acceptance token,
   Portfolio/EM/CM state, lifecycle action, provider ledger, or Agentify state.
-  Accepted scientific result Markdown/JSON remains EM-authored through the
-  Artifact Writer.
+  Accepted scientific result Markdown/JSON remains EM-authored; the Operator
+  never writes it.
 - Process exit zero and terminal `SUCCEEDED` mean only that the frozen command
   completed as observed. They do not establish scientific acceptance.
 

@@ -70,6 +70,101 @@ def test_valid_phase0_fixtures_validate() -> None:
         result = run_cli("validate", "--kind", kind, "--path", str(path))
         assert result.returncode == 0, (kind, result.stderr)
 
+
+def test_external_review_v2_status_transitions_use_the_exact_pro_pair(
+    tmp_path: Path,
+) -> None:
+    current = fixture("external_review_index")
+    assert set(current["rounds"][0]["prompt_refs"]) == {
+        "pro_innovator",
+        "pro_convergence",
+    }
+    assert set(current["rounds"][0]["providers"]) == {
+        "pro_innovator",
+        "pro_convergence",
+    }
+    target = tmp_path / "external-review-index.json"
+    source = tmp_path / "external-review-initial.json"
+    source.write_text(json.dumps(current, sort_keys=True), encoding="utf-8")
+    initialized = run_cli(
+        "initialize",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        current["writer"],
+        "--input",
+        str(source),
+    )
+    assert initialized.returncode == 0, initialized.stderr
+
+    for revision, status in enumerate(
+        (
+            "INNOVATOR_RUNNING",
+            "LOCAL_RESEARCH",
+            "SYNTHESIS_READY",
+            "CONVERGENCE_RUNNING",
+            "COMPLETE",
+        ),
+        start=2,
+    ):
+        replacement = copy.deepcopy(current)
+        replacement["revision"] = revision
+        replacement["rounds"][0]["status"] = status
+        if status == "COMPLETE":
+            replacement["rounds"][0]["completed_at"] = "2026-08-24T00:05:00Z"
+        replacement_path = tmp_path / f"external-review-r{revision}.json"
+        replacement_path.write_text(
+            json.dumps(replacement, sort_keys=True),
+            encoding="utf-8",
+        )
+        result = run_cli(
+            "replace",
+            "--kind",
+            "external_review_index",
+            "--path",
+            str(target),
+            "--writer",
+            current["writer"],
+            "--expected-revision",
+            str(current["revision"]),
+            "--input",
+            str(replacement_path),
+        )
+        assert result.returncode == 0, (status, result.stdout, result.stderr)
+        current = replacement
+
+
+def test_external_review_v2_rejects_old_three_stage_fields(tmp_path: Path) -> None:
+    document = fixture("external_review_index")
+    review_round = document["rounds"][0]
+    innovator_prompt = review_round["prompt_refs"]["pro_innovator"]
+    review_round["prompt_refs"] = {
+        "gemini_divergent": innovator_prompt,
+        "pro_divergent": innovator_prompt,
+        "pro_convergence": None,
+    }
+    review_round["providers"] = {
+        "gemini_divergent": None,
+        "pro_divergent": None,
+        "pro_convergence": None,
+    }
+    review_round["status"] = "DIVERGENT_PENDING"
+    path = tmp_path / "external-review-v1-fields.json"
+    path.write_text(json.dumps(document, sort_keys=True), encoding="utf-8")
+
+    result = run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(path),
+    )
+
+    assert result.returncode == 2
+
+
 def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:
     document = fixture("agent_result")
     document.update(
@@ -269,10 +364,10 @@ def test_replace_refuses_cross_writer_and_immutable_record_rewrites(tmp_path: Pa
         "handoff_ref": None,
         "completed_at": "2026-08-24T00:01:00Z",
     }
-    external_current["rounds"][0]["providers"]["pro_divergent"] = provider
+    external_current["rounds"][0]["providers"]["pro_innovator"] = provider
     external_replacement = copy.deepcopy(external_current)
     external_replacement["revision"] = 2
-    external_replacement["rounds"][0]["providers"]["pro_divergent"]["operation_id"] = "operation-b"
+    external_replacement["rounds"][0]["providers"]["pro_innovator"]["operation_id"] = "operation-b"
     assert_refused(
         "external-operation",
         "external_review_index",
@@ -640,7 +735,7 @@ def test_ignore_query_exposes_tracked_contracts_and_keeps_runtime_ignored() -> N
         ".omp/skills/hmasd-root-control/SKILL.md",
         "docs/research/portfolio/PORTFOLIO.md",
         "docs/research/portfolio/workflow/registry.json",
-        "docs/external-review/directions/example/round/GEMINI_DIVERGENT_PROMPT.md",
+        "docs/external-review/directions/example/round/PRO_INNOVATOR_PROMPT.md",
     )
     ignored = (".omp/runtime/agents.json", "temp/directions/example/manifest.json")
     for path in tracked:

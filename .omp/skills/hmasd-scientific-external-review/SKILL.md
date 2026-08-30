@@ -7,124 +7,94 @@ description: Run one frozen, at-most-once scientific external-review round.
 
 ## Purpose
 
-Coordinate mutually blind Gemini and Pro divergent review, local EM synthesis,
-and optional Pro convergence through the single Root-mediated
-`BrowserTransport` service. Review is evidence, not permission. Provider
-binding, at-most-once send, exact archive bytes, scientific interpretation, and
-tracked handoff authority remain separate.
+Coordinate exactly one Pro Innovator before or alongside neutral local work and
+exactly one Pro Convergence after local EM synthesis for one fresh material
+cycle. Either exact still-unsent stage may be waived only by the user. Review is
+evidence, not permission: provider binding, at-most-once effects, exact archive
+bytes, scientific interpretation, and tracked direction authority remain
+separate.
 
-## Inputs
+All provider work uses the singleton Root-mediated `BrowserTransport`; EM and CM
+never spawn, contact, or invoke it directly. Shared carriers, common v1
+envelopes, hard boundaries, liveness, and transport mechanics are defined by
+`.omp/AGENTS.md`, `.omp/RULES.md`, and `hmasd-browser-transport`.
 
-- Direction ID, deterministic round ID, frozen question SHA, and frozen evidence
-  set SHA.
-- Exact prompt paths/bytes, archive paths, and expected provider/model
-  identities.
-- Existing BrowserTransport/Agentify operation references, transport states,
-  and external-index revision.
-- EM synthesis references for any Convergence prompt.
+## Frozen inputs
 
-Every transport request uses the OMP task/Hub carrier with meaning-complete
-`Objective`, `Inputs`, `Acceptance`, `Non-goals`, and `Return` sections and is
-returned as `next_action.owner=TRANSPORT` through Root. EM and CM never spawn or
-contact BrowserTransport directly.
+Use the direction ID; stable cycle/round ID; frozen question and evidence-set
+SHA-256s; exact prompt and archive refs; required ChatGPT Pro model; existing
+Agentify operation, commitment, and transport facts; observed external-index
+revision; and local synthesis ref before Convergence. Every request returned
+through Root with `next_action.owner=TRANSPORT` remains meaning-complete under
+`.omp/AGENTS.md`.
 
-## Bounded cycle
+## Two-stage round
 
-1. Freeze the question/evidence SHAs and derive the deterministic round ID.
-   Refuse any prompt or evidence mutation after freezing.
-2. Prepare mutually blind Gemini and Pro divergent requests in parallel. Root
-   dispatches both to the one reusable BrowserTransport service; the singleton
-   serializes send-capable page mutations but a `SENT_WAITING` operation does
-   not block initiation of the other eligible request. Both requests use only
-   Agentify strict `agentify_review_query` as the send-capable surface. Pro must
-   bind `provider: chatgpt` and its exact Pro model; Gemini must bind
-   `provider: gemini` and its exact Gemini model. Cross-provider substitution is
-   forbidden in either direction.
-3. BrowserTransport returns common v1 transport envelopes to Root. Root routes
-   the exact transport operation/conversation/archive references back to EM.
-   `MONITOR` or any observation of a committed or uncertain request uses only
-   the same strict operation through `agentify_review_observe` or
-   `agentify_review_query` with `verifyExisting`; it never sends again.
-4. Wait for natural completion without provider quorum, polling, or resend.
-   BrowserTransport performs no scientific interpretation. EM interprets
-   provider content only after the exact archive has passed transport
-   fingerprint and reread checks.
-5. Perform local EM synthesis before authoring a Pro `CONVERGENCE` prompt. That
-   prompt is a new frozen Root-mediated BrowserTransport assignment bound to
-   `provider: chatgpt`; it cannot reuse Gemini or bypass Agentify strict review.
-   Return the exact rendered intake to Artifact Writer when a handoff is needed.
-6. Root alone invokes `hmasd_external_review.py` to validate exact archive bytes
-   and create the tracked archive reference. EM updates the external index once.
+1. Freeze question and evidence identities and create one deterministic round
+   ID. Author the new round's cohesive natural-language Innovator prompt from
+   the neutral scope without EM conclusions, favored answers, local results, or
+   another provider result.
+2. Unless exactly waived, return one `INNOVATOR` request through Root before or
+   alongside mutually blind neutral local work. Bind `provider: chatgpt`, the
+   exact Pro model, prompt hash, operation, conversation, archive target,
+   idempotency key, fingerprint, and commitment state. Only the strict Agentify
+   review surface may send.
+3. Root returns the common v1 transport fact and validated archive ref to EM. A
+   committed or uncertain operation is observe-only through the same strict
+   Agentify operation and is never resent. EM interprets readable content as
+   evidence without transferring scientific authority.
+4. EM completes local synthesis. No Convergence prompt may be authored or
+   requested before its durable ref exists, and Innovator output cannot
+   substitute for synthesis.
+5. Unless exactly waived, author a separate natural-language Convergence prompt
+   from the synthesized evidence packet and return one new `CONVERGENCE`
+   request through Root, bound to ChatGPT Pro and its own exact Agentify
+   operation.
+6. EM dispositions every material Convergence objection against evidence. Root
+   validates and records archive bytes through the external-review CLI; EM
+   performs expected-revision CAS updates of external-index pointers.
 
-One cycle has one frozen round and one divergent wave. A later parent wake-up may
-start the next deterministic round; no second sender, local transport ledger,
-provider substitution, or automatic resend route is introduced.
+One fresh cycle has only these two Pro operations. Continuation, evidence
+intake, wording repair, claim narrowing, and CM-result interpretation reopen
+neither. A later wake observes the same live operation or resumes the same
+frozen round; it never creates a replacement sender or automatic resend.
 
-## State writes
+## External-review index v2
 
-- BrowserTransport writes no tracked scientific state and never reconstructs
-  Agentify ledger/send state. Agentify may write only the assignment's exact
-  response path; BrowserTransport fingerprints and rereads it before returning
-  a non-null archive reference.
-- Root validates and records exact tracked archives through the external-review
-  CLI.
-- EM writes only external-index pointers and handoff references after the
-  transport return; Artifact Writer writes the provider `HANDOFF.md`.
-- Never add OMP schema fields to an immutable Agentify natural-completion
-  archive, and never treat an operation, tab, key, or hash as provider or
-  workflow authority.
+`scripts/schemas/hmasd_external_review_index.schema.json` is the exact field and
+value-shape authority. Under both `prompt_refs` and `providers`, a v2 round has
+exactly `pro_innovator` and `pro_convergence`. The Innovator prompt is required
+for a new round; the Convergence prompt remains null until synthesis and
+prompt authorship. Provider slots are nullable and may contain the exact
+in-flight or terminal operation fact returned through Root. A waiver fabricates
+no provider result.
 
-## Returned result envelope
+The only statuses are `INNOVATOR_PENDING`, `INNOVATOR_RUNNING`,
+`LOCAL_RESEARCH`, `SYNTHESIS_READY`, `CONVERGENCE_RUNNING`, `COMPLETE`, and
+`BLOCKED`. Use the phase actually reached. `COMPLETE` requires disposition of
+every non-waived stage; `BLOCKED` preserves the unresolved stage and reentry.
+Migrate historical empty indexes mechanically; never invent prompt, provider,
+operation, waiver, or synthesis facts for a partial historical round.
 
-BrowserTransport returns the common v1 envelope to Root with
-`role: "hmasd-browser-transport"`, logical identity `BrowserTransport`, and a
-payload of this form:
+## State and failure boundaries
 
-```json
-{
-  "kind": "transport",
-  "browser_identity": "BrowserTransport",
-  "transport_assignment": "<transport-assignment>",
-  "requester": "EM-example-direction",
-  "provider": "gemini",
-  "mode": "DIVERGENT",
-  "effect_ref": null,
-  "transport_state": "COMPLETE",
-  "round_id": "0123456789abcdef0123",
-  "provider_conversation_ref": "<provider-conversation-reference>",
-  "operation_ref": "<Agentify-operation-reference>",
-  "archive_ref": "<fingerprinted-and-reread-path>",
-  "handoff_ref": null
-}
-```
+Agentify is the sole submission ledger. BrowserTransport owns only transport
+facts, fingerprints and rereads the exact assigned response, and writes no
+tracked scientific state. Root validates requester, mode, model, operation,
+commitment, and archive bytes and alone invokes the external-review CLI. EM
+writes only CAS external-index pointers and scientific disposition after Root
+returns. Immutable natural-completion archive bytes gain no workflow fields.
+Operations, tabs, conversations, archives, and hashes are not scientific or
+workflow authority; provider completion is not accepted science.
 
-A completed round also carries frozen question/evidence references in
-`state_refs` and exact operation/archive paths in `artifact_refs`. Root forwards
-those facts to EM without changing their provider binding. A nonterminal same-
-operation observation retains `next_action.owner=TRANSPORT`; scientific
-interpretation returns to EM only after transport completion.
-
-## Failure handling
-
-Unknown commitment is terminal for sending: observe and recover the same exact
-Agentify operation, never resend. `SENT_WAITING`, `COMMITMENT_UNKNOWN`, and
+Unknown commitment is terminal for sending: observe the same exact Agentify
+operation and never resend. `SENT_WAITING`, `COMMITMENT_UNKNOWN`, and
 `SENT_UNREADABLE` are observe-only. `ZERO_SEND_FAILED` proves no send for that
-operation but does not authorize operation two. Reject changed prompt/evidence
-SHAs, non-natural completion, wrong provider or model identity, duplicate round
-IDs, invalid or unreadable archive bytes, stale index revisions, any ordinary
-send surface, and every attempt to substitute Gemini for Pro or ChatGPT for
-Gemini.
+operation but does not itself authorize another operation.
 
-Missing transport or Advisor output is an evidence gap, not an approval failure.
-Transport failure does not change a scientific conclusion, claim ceiling,
-engineering status, Portfolio action, or lifecycle. Root mediates exact
-recovery/redispatch; BrowserTransport handles bounded page-local non-sending
-recovery; EM owns all scientific interpretation.
-
-## Deletion condition
-
-Delete this Skill when a reviewed external-review boundary preserves the
-singleton Root-mediated transport service, Agentify strict-review-only
-at-most-once ledger, exact provider bindings, blind divergent ordering, local
-synthesis, exact archive bytes, and handoff authority without a second sender or
-state writer.
+Reject changed frozen hashes, Convergence without synthesis, wrong provider or
+model, duplicate operation or round, an ordinary send surface, non-natural
+completion, invalid or unreadable archive bytes, and stale index revisions.
+Preserve the scientific stage reached. Missing transport or Advisor output is an
+evidence gap, not an approval failure; transport failure changes no scientific
+conclusion, claim ceiling, engineering status, Portfolio action, or lifecycle.

@@ -8,6 +8,8 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CM_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-cm-engineering-cycle" / "SKILL.md"
+CM_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-cm.md"
+SHARED_AGENTS = REPO_ROOT / ".omp" / "AGENTS.md"
 RESULT_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-result-run" / "SKILL.md"
 TERRA_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-implementer-terra.md"
 ENGINEERING_SCHEMA = REPO_ROOT / "scripts" / "schemas" / "hmasd_engineering_state.schema.json"
@@ -48,54 +50,68 @@ def _assert_all(text: str, fragments: tuple[str, ...]) -> None:
         assert " ".join(fragment.split()) in normalized, fragment
 
 
-def test_cm_contract_gate_precedes_every_effectful_boundary() -> None:
+def test_cm_contract_gate_precedes_effects_and_uses_shared_carrier() -> None:
     skill = _text(CM_SKILL)
     _assert_all(
         skill,
         (
-            "Before **any** source/state/artifact write, leaf assignment",
-            "Root-mediated\nBrowserTransport request, or result launch",
-            "observable acceptance and its expected alternatives",
+            "Before any source, state, or note write; specialist assignment; "
+            "external consultation; or result launch",
+            "observable acceptance and competing expected outcomes",
             "explicit non-goals",
-            "protected semantics and invariants",
-            "authority references and exact Git baseline",
-            "assignment-owned paths and interface boundaries",
-            "resource bounds",
-            "committed filesystem, process, network, provider, result, and Git Effects",
-            "missing, contradictory, technically impossible",
-            "returns a common\nv1 `BLOCKED` conflict result before writing or launching anything",
+            "protected scientific, numerical, RNG, checkpoint, bit-identity",
+            "authority references, exact Git baseline, owned paths, and interface boundaries",
+            "baseline, config, data, and RNG identities",
+            "authorized filesystem, process, network, provider, result, and Git Effects",
+            "completion checks and the stop condition",
+            "missing, contradictory, technically impossible, or outside supplied authority",
+            "common v1 `BLOCKED` conflict",
+            "Never narrow acceptance or change a comparator, metric, seed, data, stop rule",
         ),
     )
+
+    shared = _text(SHARED_AGENTS)
     _assert_all(
-        skill,
+        shared,
         (
-            "`Goal`",
-            "`Non-goals`",
-            "`Owned paths`",
-            "`Effects`",
-            "`Acceptance`",
-            "`Refs`",
-            "`Resources and stop condition`",
-            "`Return identity`",
-            "common v1 result envelope",
+            "Every cross-role dispatch uses an OMP `task` or Hub carrier with identity, "
+            "generation, and assignment fields",
+            "objective/decision relevance",
+            "authorities, inputs, and evidence boundary",
+            "scope, protected non-goals, and preserved semantics",
+            "authorized Effects",
+            "acceptance/stop",
+            "return route, durable references, and reentry",
+            "Results use the common v1 result envelope and role payload",
         ),
     )
 
 
-def test_cm_uses_specialized_scouts_and_one_overlapping_implementer_owner() -> None:
+def test_cm_uses_specialized_scouts_and_one_nonoverlapping_implementer() -> None:
     skill = _text(CM_SKILL)
     _assert_all(
         skill,
         (
-            "trustworthy current map",
-            "`hmasd-project-scout` for repository layout, build and test surfaces",
-            "`hmasd-code-scout` for code, callers, interfaces, state ownership",
-            "Assign exactly one implementer owner to each nontrivial edit boundary",
-            "paths, symbols, or runtime semantics overlap",
-            "Use `hmasd-implementer` for semantic or protected changes",
-            "Use `hmasd-implementer-terra` only for routine, behavior-preserving work",
-            "native LSP references before exported-symbol modification",
-            "native LSP rename for every\ncross-file rename",
+            "unless a trustworthy map already covers the exact base and scope",
+            "`hmasd-project-scout` for current repository, build/test, and path ownership facts",
+            "`hmasd-code-scout` for callers, consumers, interfaces, state ownership",
+            "Select exactly one appropriate implementer for a nontrivial change",
+            "use `hmasd-implementer` when probability, gradients, native execution",
+            "use `hmasd-implementer-terra` only for genuinely behavior-preserving local work",
+            "The implementer owns the exact assignment paths",
+            "never starts a second writer to reinterpret or repair the same live boundary",
+            "Refuse dirty or stale worktrees, conflicts, out-of-scope paths",
+            "duplicate writers or command owners",
+            "missing required symbol-refactor evidence",
+        ),
+    )
+
+    cm_agent = _text(CM_AGENT)
+    _assert_all(
+        cm_agent,
+        (
+            "give disjoint path ownership to specialists",
+            "require native LSP evidence for exported-symbol work",
         ),
     )
 
@@ -144,14 +160,24 @@ def test_high_risk_evidence_roles_have_narrow_non_authoritative_jobs() -> None:
     _assert_all(
         skill,
         (
-            "Attempt `hmasd-reviewer`",
-            "shared core",
-            "scientific, numerical, RNG, checkpoint, bit-identity, external-effect",
-            "concurrency, or resource-critical semantics",
-            "Reviewer unavailability is\n  an explicit evidence gap, not approval or a policy veto",
-            "Use `hmasd-verifier` only when one exact independent\n  runtime/equivalence/environment fact",
-            "Exactly one Experiment\n  Operator owns exactly one frozen result-bearing command",
-            "CM, Reviewer, and Verifier never share or duplicate\n  that command ownership",
+            "Reserve `hmasd-reviewer` for a genuinely high-risk delta",
+            "protected scientific, numerical, RNG, checkpoint, bit-identity, concurrency, "
+            "resource-critical, or external-effect semantics",
+            "Never invoke Reviewer for a simple reversible change",
+            "Reviewer is neither approval nor a required generic step",
+            "Add an independent `hmasd-verifier` only when one exact runtime, equivalence, "
+            "or environment fact can change technical acceptance",
+            "Exactly one Experiment Operator owns that one command",
+            "CM, Reviewer, and Verifier never duplicate or share command ownership",
+        ),
+    )
+
+    shared = _text(SHARED_AGENTS)
+    _assert_all(
+        shared,
+        (
+            "missing reviewer, test, Dashboard, or Advisor output is an evidence gap",
+            "not a permission failure",
         ),
     )
 
@@ -215,10 +241,13 @@ def test_cm_disclaims_science_lifecycle_and_success_inference() -> None:
     _assert_all(
         skill,
         (
-            "CM never decides scientific acceptance, direction\nlifecycle, Portfolio allocation",
-            "Implementation, test, command, or BrowserTransport success is not\nscientific acceptance",
-            "EM alone interprets\nscientific meaning",
-            "Never reinterpret a scientific claim, infer a lifecycle action",
+            "without making scientific, direction-lifecycle, Portfolio-allocation, "
+            "or investment judgments",
+            "Implementation, test, provider, transport, or command success is not "
+            "scientific acceptance",
+            "EM alone interprets scientific meaning",
+            "Never reinterpret a scientific claim, infer a Portfolio or lifecycle action",
+            "provider, transport, test, or command output as scientific authority",
         ),
     )
 

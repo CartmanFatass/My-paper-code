@@ -20,7 +20,6 @@ spawns:
   - hmasd-reviewer
   - hmasd-verifier
   - hmasd-experiment-operator
-  - hmasd-research-scout
   - librarian
 autoloadSkills:
   - hmasd-cm-engineering-cycle

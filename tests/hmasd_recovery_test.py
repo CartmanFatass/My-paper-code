@@ -107,7 +107,7 @@ def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
     ]
     assert not missing, f"recovery Skill omits pressure boundary terms: {missing}"
 
-def test_recovery_skill_preserves_browser_parked_and_writer_fail_closed_contracts() -> None:
+def test_recovery_skill_preserves_browser_parked_and_git_fail_closed_contracts() -> None:
     skill = " ".join(_recovery_skill().split())
     required = (
         "only root invokes and owns this recovery manager",
@@ -276,7 +276,6 @@ def test_recovery_schemas_round_trip_root_git_and_declared_active_identities(
         "hmasd-research-innovator",
         "hmasd-research-critic",
         "hmasd-research-principles-analyst",
-        "hmasd-research-artifact-writer",
         "BrowserTransport",
         "hmasd-workflow-recovery-manager",
         "librarian",

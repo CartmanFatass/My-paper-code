@@ -1,6 +1,6 @@
 from __future__ import annotations
-import unittest
 
+import unittest
 from pathlib import Path
 
 
@@ -9,81 +9,58 @@ EM_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-em-direction-cycle" / "SKILL.m
 CM_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-cm-engineering-cycle" / "SKILL.md"
 DIRECTION_ROOT = "docs/research/candidates/<direction-id>"
 
-EM_ARTIFACT_PATHS = (
-    f"{DIRECTION_ROOT}/evidence/<cycle-id>-scope-freeze.md",
-    f"{DIRECTION_ROOT}/evidence/<cycle-id>-local-route-<route-id>.md",
-    f"{DIRECTION_ROOT}/evidence/<cycle-id>-synthesis.md",
-    f"{DIRECTION_ROOT}/external/<cycle-id>-innovator-prompt.md",
-    f"{DIRECTION_ROOT}/external/<cycle-id>-convergence-prompt.md",
-    f"{DIRECTION_ROOT}/external/<cycle-id>-convergence-disposition.md",
-    f"{DIRECTION_ROOT}/evidence/<cycle-id>-terminal-gap.md",
-    f"{DIRECTION_ROOT}/evidence/<cycle-id>-handoff.md",
-    f"{DIRECTION_ROOT}/workflow/research/engineering-request.md",
-)
-
-CM_ARTIFACT_PATHS = (
-    f"{DIRECTION_ROOT}/workflow/engineering/<cycle-id>-contract.md",
-    "<cycle-id>-implementation.md",
-    "<cycle-id>-review.md",
-    "<cycle-id>-verification.md",
-    "<cycle-id>-result.md",
-)
-
 
 def _text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def test_standard_artifacts_use_the_layered_direction_layout() -> None:
-    em = _text(EM_SKILL)
-    cm = _text(CM_SKILL)
-
-    for directory in (
-        f"{DIRECTION_ROOT}/evidence/",
-        f"{DIRECTION_ROOT}/external/",
-        f"{DIRECTION_ROOT}/workflow/research/",
-    ):
-        assert directory in em, directory
-    assert f"{DIRECTION_ROOT}/workflow/engineering/" in cm
-
-    for path in EM_ARTIFACT_PATHS:
-        assert path in em, path
-    for path in CM_ARTIFACT_PATHS:
-        assert path in cm, path
+def _compact(text: str) -> str:
+    return " ".join(text.lower().split())
 
 
-def test_engineering_contract_has_a_durable_em_request_and_complete_fields() -> None:
-    em = _text(EM_SKILL)
-    cm = _text(CM_SKILL)
+def test_artifacts_are_material_records_not_a_default_document_bundle() -> None:
+    em = _compact(_text(EM_SKILL))
+    cm = _compact(_text(CM_SKILL))
+
+    assert "artifacts only at material milestones" in em
+    assert "no fixed document bundle" in em
+    assert "separate local-route file is optional" in em
+    assert "never a default document tax" in em
+    assert "write a terminal-gap note only when needed" in em
+
+    assert "no mandatory engineering document suite" in cm
+    assert "only at a material milestone" in cm
+    assert (
+        "losing material scope, observation, limitations, or reentry information "
+        "would cause costly repetition"
+    ) in cm
+    assert "do not create a note merely because a phase was reached" in cm
+
+
+def test_durable_records_are_content_addressed_and_state_remains_current() -> None:
+    em = _compact(_text(EM_SKILL))
+    cm = _compact(_text(CM_SKILL))
+
+    assert "every durable ref is `{path, sha256}`" in em
+    assert "content-address every note that is referenced" in cm
+    assert "state is the latest accepted milestone, not an event log" in cm
+    assert "preserve bytes on cas conflict" in cm
+
+
+def test_engineering_request_is_the_durable_scope_reference_without_note_tax() -> None:
+    em = _compact(_text(EM_SKILL))
+    cm = _compact(_text(CM_SKILL))
     request_path = f"{DIRECTION_ROOT}/workflow/research/engineering-request.md"
-    contract_path = f"{DIRECTION_ROOT}/workflow/engineering/<cycle-id>-contract.md"
 
     assert request_path in em
     assert request_path in cm
-    assert contract_path in cm
-    for field in (
-        "exact\nobservable",
-        "expected alternatives",
-        "baseline/config/data/RNG identities",
-        "affected and owned paths",
-        "protected semantics",
-        "Effects",
-        "resource bounds",
-        "completion checks",
-        "stop condition",
-    ):
-        assert field in cm, field
-
-
-def test_artifacts_are_content_addressed_and_phase_conditioned() -> None:
-    em = _text(EM_SKILL)
-    cm = _text(CM_SKILL)
-
-    assert "Use these standard direction-owned artifacts only when their phase is reached" in em
-    assert "Create the remaining standard artifacts only when the cycle reaches their\nphase" in cm
-    assert "Every durable ref is `{path, sha256}`" in em
-    assert '`{"path": "<repo-relative-path>", "sha256": "<sha256>"}`' in cm
-    assert "`state.json` is current CAS-managed workflow state, not an event log" in cm
+    assert "write one meaning-complete direction-owned engineering request" in em
+    assert "hash the request" in em
+    assert "next_action.owner=cm" in em
+    assert (
+        "when no cm note is warranted, the exact durable em request that "
+        "satisfied the gate remains the contract and scope reference"
+    ) in cm
 
 
 def load_tests(

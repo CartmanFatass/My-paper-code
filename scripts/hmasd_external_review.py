@@ -29,8 +29,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _OWNED_ARCHIVE_ROOT = PurePosixPath("docs/external-review/directions")
 _OWNED_ARCHIVE_FILENAME = "NATURAL_COMPLETION_ARCHIVE.json"
 PROMPT_FILES = (
-    "GEMINI_DIVERGENT_PROMPT.md",
-    "PRO_DIVERGENT_PROMPT.md",
+    "PRO_INNOVATOR_PROMPT.md",
     "PRO_CONVERGENCE_PROMPT.md",
 )
 _REQUIRED_ARCHIVE_FIELDS = (
@@ -404,64 +403,76 @@ def _read_prompt(round_dir: Path, filename: str) -> tuple[Path, str]:
 def _reject_prompt_references(text: str, patterns: Sequence[str], *, label: str) -> None:
     for pattern in patterns:
         if re.search(pattern, text, flags=re.IGNORECASE):
-            raise ExternalReviewError(f"{label} contains a forbidden provider reference: {pattern}")
+            raise ExternalReviewError(f"{label} contains a forbidden review reference: {pattern}")
 
 
 def validate_prompts(round_dir: os.PathLike[str] | str) -> dict[str, Any]:
-    """Validate provider separation and the Pro convergence isolation boundary."""
+    """Validate the neutral Pro Innovator and isolated Pro Convergence prompts."""
 
     directory = Path(round_dir)
     if not directory.is_dir() or directory.is_symlink():
         raise ExternalReviewError(f"round directory is not a regular directory: {directory}")
     loaded = {name: _read_prompt(directory, name) for name in PROMPT_FILES}
-    gemini = loaded["GEMINI_DIVERGENT_PROMPT.md"][1]
-    pro = loaded["PRO_DIVERGENT_PROMPT.md"][1]
+    innovator = loaded["PRO_INNOVATOR_PROMPT.md"][1]
     convergence = loaded["PRO_CONVERGENCE_PROMPT.md"][1]
 
-    if _normalise_prompt(gemini) == _normalise_prompt(pro):
-        raise ExternalReviewError("Gemini and Pro divergent prompts must remain separate")
-    _reject_prompt_references(
-        gemini,
-        (
-            r"PRO_DIVERGENT_PROMPT\.md",
-            r"pro[-_ ]divergent",
-            r"PRO_CONVERGENCE_PROMPT\.md",
-            r"pro[-_ ]convergence",
-            r"\bchatgpt\b",
-        ),
-        label="Gemini divergent prompt",
+    innovator_patterns = (
+        r"PRO[-_ ]CONVERGENCE(?:[-_ ](?:PROMPT|RESPONSE|ARCHIVE|HANDOFF))?(?:\.md)?",
+        r"\bconvergence\s+(?:prompt|stage|review|operation|response|archive|conversation|metadata)\b",
+        r"\b(?:em[- ]authored\s+)?local\s+synthesis\b",
+        r"\b(?:em[- ]authored|em|local)\s+(?:scientific\s+)?conclusions?\b",
+        r"\b(?:our|the|accepted|current|final|preliminary)\s+(?:scientific\s+)?conclusion\s+(?:is|was|that)\b",
+        r"(?m)^\s*(?:#{1,6}\s+)?conclusions?\s*:",
+        r"\b(?:we|em)\s+conclude[ds]?\b",
+        r"(?<!do not )\bassume\b.{0,80}\b(?:correct|true|favou?red|wins?)\b",
+        r"\b(?:favou?red|preferred)\s+(?:answer|conclusion|mechanism|outcome)\s*(?:is|:)",
+        r"NATURAL_COMPLETION_ARCHIVE\.json",
+        r"\b(?:conversation|operation|idempotency|stable)[-_ ]?(?:id|key|url|ref|metadata)\b",
+        r"\b(?:response|archive|handoff)[-_ ]?(?:sha256|text|path|ref|id|metadata)\b",
+        r"\b(?:response|archive|conversation|operation)\s+(?:metadata|reference|path|url|transcript|text)\b",
+        r"\b(?:assistant|user)[-_ ]?message[-_ ]?id\b",
+        r"\b(?:provider|model)[-_ ]?(?:identity|metadata|operation|ref)\b",
+        r"\bagentify\b",
+        r"https?://",
     )
     _reject_prompt_references(
-        pro,
-        (
-            r"GEMINI_DIVERGENT_PROMPT\.md",
-            r"gemini[-_ ]divergent",
-            r"\bgemini\b",
-        ),
-        label="Pro divergent prompt",
+        innovator,
+        innovator_patterns,
+        label="Pro Innovator prompt",
     )
 
     convergence_patterns = (
-        r"GEMINI_DIVERGENT_PROMPT\.md",
-        r"PRO_DIVERGENT_PROMPT\.md",
-        r"(?:^|[/\\])gemini(?:[/\\])",
-        r"(?:^|[/\\])pro[-_]divergent(?:[/\\])",
+        r"PRO[-_ ]INNOVATOR(?:[-_ ](?:PROMPT|RESPONSE|ARCHIVE|HANDOFF))?(?:\.md)?",
+        r"(?:^|[/\\])pro[-_]innovator(?:[/\\])",
         r"NATURAL_COMPLETION_ARCHIVE\.json",
-        r"\b(?:conversation(?:id|url)?|operationid|idempotencykey|stablekey)\b",
-        r"\b(?:responseSha256|responseText|assistantMessageId|userMessageId)\b",
+        r"\btranscript\b",
+        r"\binnovator\s+(?:response|archive|handoff|conversation|operation)\b",
+        r"\b(?:conversation|operation|idempotency|stable)[-_ ]?(?:id|key|url|ref|metadata)\b",
+        r"\b(?:response|archive|handoff)[-_ ]?(?:sha256|text|path|ref|id|metadata)\b",
+        r"\b(?:response|archive|conversation|operation)\s+(?:metadata|reference|path|url|transcript|text)\b",
+        r"\b(?:assistant|user)[-_ ]?message[-_ ]?id\b",
+        r"\bagentify\b",
         r"https?://",
-        r"\bgemini\b",
-        r"\bchatgpt\b",
     )
-    _reject_prompt_references(convergence, convergence_patterns, label="Pro convergence prompt")
-    normalised_convergence = _normalise_prompt(convergence)
-    for label, text in (("Gemini divergent prompt", gemini), ("Pro divergent prompt", pro)):
-        if _normalise_prompt(text) in normalised_convergence:
-            raise ExternalReviewError(f"Pro convergence prompt embeds the {label}")
-    if not re.search(r"(?:local\s+(?:em[- ]authored\s+)?synthesis|em[- ]authored\s+local\s+synthesis)", convergence, re.IGNORECASE):
-        raise ExternalReviewError("Pro convergence prompt must name the EM-authored local synthesis")
-    if not re.search(r"(?:repository|repo)[\s_-]+evidence", convergence, re.IGNORECASE):
-        raise ExternalReviewError("Pro convergence prompt must name declared repository evidence")
+    _reject_prompt_references(
+        convergence,
+        convergence_patterns,
+        label="Pro Convergence prompt",
+    )
+    if _normalise_prompt(innovator) in _normalise_prompt(convergence):
+        raise ExternalReviewError("Pro Convergence prompt embeds the Pro Innovator prompt")
+    if not re.search(
+        r"(?:em[- ]authored\s+local\s+synthesis|local\s+synthesis\s+(?:authored|written|prepared)\s+by\s+(?:the\s+)?em)",
+        convergence,
+        re.IGNORECASE,
+    ):
+        raise ExternalReviewError("Pro Convergence prompt must name the EM-authored local synthesis")
+    if not re.search(
+        r"\bdeclared\s+(?:repository|repo)[\s_-]+evidence\b",
+        convergence,
+        re.IGNORECASE,
+    ):
+        raise ExternalReviewError("Pro Convergence prompt must name declared repository evidence")
 
     return {
         "status": "VALID",

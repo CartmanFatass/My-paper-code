@@ -38,6 +38,23 @@ def _archive() -> dict[str, object]:
     return json.loads((FIXTURES / "archive.json").read_text(encoding="utf-8"))
 
 
+def _prompt_round(root: Path) -> Path:
+    round_dir = root / "round"
+    round_dir.mkdir()
+    prompts = {
+        "PRO_INNOVATOR_PROMPT.md": (
+            "Independently explore mechanisms and counterexamples for the neutral frozen "
+            "question using declared repository evidence."
+        ),
+        "PRO_CONVERGENCE_PROMPT.md": (
+            "Assess the EM-authored local synthesis against the declared repository evidence."
+        ),
+    }
+    for filename, text in prompts.items():
+        (round_dir / filename).write_text(text, encoding="utf-8")
+    return round_dir
+
+
 def _archive_destination(root: Path, operation: dict[str, object]) -> Path:
     return root / Path(str(operation["archive_path"]))
 
@@ -62,26 +79,69 @@ def test_round_id_is_stable_and_uses_all_frozen_inputs() -> None:
     assert round_id("example-direction", "3" * 64, evidence, "hmasd-external-review-v1") != expected
 
 
-def test_prompts_are_blind_and_convergence_isolation_is_enforced(tmp_path: Path) -> None:
-    round_dir = tmp_path / "round"
-    round_dir.mkdir()
-    for source in (FIXTURES / "prompts").iterdir():
-        (round_dir / source.name).write_bytes(source.read_bytes())
+def test_valid_pro_pair_prompts_are_accepted(tmp_path: Path) -> None:
+    result = validate_prompts(_prompt_round(tmp_path))
 
-    result = validate_prompts(round_dir)
     assert result["status"] == "VALID"
     assert set(result["prompts"]) == {
-        "gemini_divergent_prompt",
-        "pro_divergent_prompt",
+        "pro_innovator_prompt",
         "pro_convergence_prompt",
     }
 
-    convergence = round_dir / "PRO_CONVERGENCE_PROMPT.md"
-    convergence.write_text(
-        convergence.read_text(encoding="utf-8") + "\nSee GEMINI_DIVERGENT_PROMPT.md.\n",
+
+def test_missing_pro_innovator_prompt_is_refused(tmp_path: Path) -> None:
+    round_dir = _prompt_round(tmp_path)
+    (round_dir / "PRO_INNOVATOR_PROMPT.md").unlink()
+
+    with pytest.raises(ValueError, match="missing prompt file"):
+        validate_prompts(round_dir)
+
+
+@pytest.mark.parametrize(
+    "contamination",
+    (
+        "Use the EM-authored local synthesis as accepted input.",
+        "The local scientific conclusion is that mechanism A wins.",
+        "Assume mechanism A is correct and design around it.",
+        "Continue with PRO_CONVERGENCE_PROMPT.md using operationId operation-a.",
+    ),
+)
+def test_contaminated_pro_innovator_prompt_is_refused(
+    tmp_path: Path,
+    contamination: str,
+) -> None:
+    round_dir = _prompt_round(tmp_path)
+    innovator = round_dir / "PRO_INNOVATOR_PROMPT.md"
+    innovator.write_text(
+        innovator.read_text(encoding="utf-8") + f"\n{contamination}\n",
         encoding="utf-8",
     )
-    with pytest.raises(ValueError, match="forbidden provider reference"):
+
+    with pytest.raises(ValueError, match="Pro Innovator prompt contains a forbidden"):
+        validate_prompts(round_dir)
+
+
+@pytest.mark.parametrize(
+    "contamination",
+    (
+        "Append the Pro Innovator transcript.",
+        "Use responseSha256 abc and conversationId conversation-a.",
+        "Use archivePath review.json and operationId operation-a.",
+        "See https://example.invalid/review.",
+    ),
+)
+def test_contaminated_pro_convergence_prompt_is_refused(
+    tmp_path: Path,
+    contamination: str,
+) -> None:
+    round_dir = _prompt_round(tmp_path)
+    convergence = round_dir / "PRO_CONVERGENCE_PROMPT.md"
+    convergence.write_text(
+        convergence.read_text(encoding="utf-8") + f"\n{contamination}\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="Pro Convergence prompt contains a forbidden"):
         validate_prompts(round_dir)
 
 

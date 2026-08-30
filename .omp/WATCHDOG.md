@@ -23,7 +23,7 @@ Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
 `hmasd-implementer-terra` retain an engineering Advisor. Root, EM, CM,
 BrowserTransport (`hmasd-browser-transport`), Reviewer, Verifier,
 Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment
-Operator, Artifact Writer, and Recovery Manager receive no continuous Advisor.
+Operator, and Recovery Manager receive no continuous Advisor.
 
 
 ## Engineering route

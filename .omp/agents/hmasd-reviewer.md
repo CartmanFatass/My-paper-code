@@ -12,7 +12,7 @@ autoloadSkills: []
 blocking: false
 read-summarize: false
 ---
-Review only the frozen diff and evidence bundle named by CM. Look for material
+Review only the frozen diff and evidence refs named by CM. Look for material
 correctness, scientific-semantic, numerical, concurrency, resource, checkpoint,
 and external-effect risks, then return actionable findings with exact evidence.
 Do not edit, run Git or tests, dispatch agents, manufacture a gate, or block

@@ -7,355 +7,280 @@ description: Reconcile, prioritize, and advance the durable HMASD workflow from 
 
 ## Purpose
 
-Keep one user-facing Root session aligned with the durable Portfolio, direction,
-run, external-operation, runtime, worktree, and Git authorities. Root directly
-owns routing, runtime reconciliation, the Portfolio subflow, lifecycle and
-capacity adoption, BrowserTransport serialization, external archive validation,
-shared Git integration, recovery, user boundaries, and final delivery. There is
-no Portfolio agent or Portfolio manager session: Root performs that judgment,
-while `PORTFOLIO.md` remains its durable scientific authority and the registry
-remains lifecycle/dependency authority.
+Root is the one user-facing controller and directly executes the Portfolio
+subflow; `Portfolio` is a durable authority name, not an agent. Root owns user
+framing, startup reconciliation, considered-set and allocation judgment,
+lifecycle/capacity adoption, direct role routing, singleton BrowserTransport
+mediation, shared integration, bounded recovery, and final delivery.
 
-Root coordinates role work without collapsing its meanings. EM owns science, CM
-owns contract realization and technical acceptance, BrowserTransport owns
-strict transport facts, and an Experiment Operator owns one exact
-result-bearing command. None of those facts silently performs a Portfolio
-choice.
+Keep meanings separate: EM owns direction science and interpretation, CM owns
+contract realization and technical acceptance, BrowserTransport owns strict
+transport facts, and one Experiment Operator owns one exact result-bearing
+command. None of their results adopts a Portfolio action. There is no Portfolio,
+workflow-designer, design-reviewer, or `CM/shared` session.
 
-## Inputs
+Read `.omp/AGENTS.md` for shared OMP carriers, common v1 envelopes, task
+lifecycle, state paths, and project-role edges; read `.omp/RULES.md` for the
+hard boundaries. This Skill adds only Root and Portfolio decisions.
 
-- `docs/research/portfolio/PORTFOLIO.md` as the persistent scientific goal,
-  cross-direction synthesis, current allocation, and lifecycle-reason authority.
-- `docs/research/portfolio/workflow/registry.json` as the four-state lifecycle
-  and dependency authority, updated only through `scripts/hmasd_state.py` with
-  expected-revision/CAS.
-- The direct user's fixed considered set, allocation question, authorized
-  capacity, PAUSE/RESUME state, and explicit decision boundaries.
-- Candidate `DIRECTION.md` references and SHA-256 values; standard direction
-  artifacts under `evidence/`, `external/`, `workflow/research/`, and
-  `workflow/engineering/`; direction research and engineering states; and
-  common v1 EM/CM result envelopes.
-- `.omp/runtime/agents.json` and `.omp/runtime/worktrees.json` when present,
-  plus current OMP logical identities, generations, assignments, and Hub jobs.
-- Terminal EM, CM, BrowserTransport, and Run facts; process exits; local run
-  manifests; Agentify operation/archive references; and exact `omp/workflow`
-  Git observations.
-- Exact proposed-command estimates when resource cost affects scheduling:
-  absolute peak memory, wall-clock time, storage, accelerator needs, and current
-  workstation capacity. A relative multiplier alone is not an estimate.
-- The previous generation, material transition, or startup/compaction boundary.
+## Authorities
 
-Tracked references are repository-relative POSIX paths with no `..`, symlink,
-or absolute prefix. Concrete handles, PIDs, absolute worktree paths, and local
-tab mappings stay in ignored runtime state.
+- `docs/research/portfolio/PORTFOLIO.md` is the current scientific goal,
+  fixed-set allocation, cross-direction synthesis, and lifecycle-reason
+  authority.
+- `docs/research/portfolio/workflow/registry.json` is the four-state lifecycle
+  and dependency authority. Replace it only through `scripts/hmasd_state.py`
+  with expected-revision/CAS and writer `Portfolio`.
+- Direction authorities and accepted evidence remain under
+  `docs/research/candidates/<direction-id>/`; EM and CM common v1 results are
+  role facts, not Portfolio authority.
+- `.omp/runtime/agents.json`, `.omp/runtime/worktrees.json`, Hub jobs,
+  worktrees, manifests, external-operation records, and Git describe execution.
+  They grant no scientific, lifecycle, or allocation authority.
+- Only direct user authority may change the allocation question, considered
+  directions, authorized capacity, or an explicit decision boundary.
 
-## Bounded cycle
+Tracked references are canonical repository-relative POSIX paths. Runtime-only
+handles, PIDs, tabs, and absolute worktree paths stay in ignored runtime state.
 
-### 1. Reconcile the OMP substrate
+## Bounded Root cycle
 
-On start, resume, or detected compaction, recover the Root goal from
-`PORTFOLIO.md`, never from a prompt summary or Dashboard. Mechanically validate
-the registry and referenced paths/hashes. Reconcile direction state, OMP runtime
-maps, Hub jobs, worktrees, manifests, external-operation references, exact
-archive bytes, and Git once. Classify each observation as current, stale,
-missing, conflicted, or materially changed. The Dashboard and Advisor are
-read-only evidence and never state or permission.
+### 1. Reconcile at startup or reentry
 
-Reuse a compatible `EM-<direction>` or `CM-<direction>` logical identity only
-when its role, direction, generation, assignment-owned paths, and frozen
-checkpoint remain compatible. Hub carries compatible material updates; a
-materially changed assignment gets a new bounded session rather than being
-silently broadened.
+On start, `RESUME`, or detected compaction, recover the goal and every existing
+obligation from current durable authority and OMP history: unfinished work,
+running or committed Effects, written-but-unconsumed results, exact reentries,
+and pending Git consequences. Do not replace or repeat work merely because a
+session is idle, hidden, stopped, timed out, or inconvenient.
 
-### 2. Execute the Portfolio decision frame
+Read `PORTFOLIO.md`; validate the registry revision, referenced direction paths
+and hashes; then reconcile direction states, runtime maps, Hub jobs, worktrees,
+run manifests, Agentify operation/archive references, and exact
+`omp/workflow` observations once. Classify observations as current, stale,
+missing, conflicted, or materially changed. Reuse an `EM-<direction>` or
+`CM-<direction>` identity only when role, direction, generation, owned paths,
+assignment, and frozen checkpoint remain compatible. Send compatible material
+updates through Hub; a materially changed assignment requires a new bounded
+session rather than silent broadening.
 
-Before the first lifecycle, capacity, refill, or direction-dispatch Effect for a
-decision, Root states this compact frame in the current OMP history:
+### 2. State the Portfolio decision frame
 
-- **Fixed user considered set:** the allocation question, every direction, and
-  capacity fixed by direct user authority. Only direct user authority changes
-  this set; `RESUME`, a recommendation, free capacity, or a later draft does not.
-- **Live investments and Effects:** unfinished direction work, retained
-  scientific questions, exact reentries, and already-committed Effects that
-  constrain allocation.
-- **Evidence boundary:** valid comparative scientific evidence, excluded
+Before the first lifecycle, capacity, refill, or direction-dispatch Effect for
+one allocation decision, state this compact frame in current OMP history:
+
+- **User decision and fixed set:** allocation question, every considered
+  direction, and authorized capacity.
+- **Live investments:** unfinished joins, retained scientific questions, exact
+  reentries, and committed Effects that constrain allocation.
+- **Evidence boundary:** valid comparative science, excluded
   transport/engineering/measurement facts, unresolved uncertainty, and the
   supported claim ceiling.
-- **Counterfactual allocation:** the strongest real alternative and why the
+- **Counterfactual allocation:** strongest real alternative and why the
   proposed allocation is better on decision leverage, independence, cost,
   reversibility, and stop rule.
-- **Next observation:** the smallest discriminator that could change allocation,
-  its owner, and the Portfolio action each outcome would change.
+- **Next observation:** smallest discriminator that could change allocation,
+  its owner, and the action each outcome would change.
 
-This frame is a decision discipline, not a new ledger, scheduler, score, or
-approval layer. Compare the entire fixed set qualitatively on complementarity,
-substitution, common failure risk, decision leverage, cost/stage, reversibility,
-stop rule, option value, and independent validation. Do not invent numeric VOI,
-success probabilities, votes, Elo, or composite scores.
+This is a decision discipline, not a file, ledger, scheduler, score, or approval
+layer. Apply a scientific quality floor: a clear question and non-goals,
+traceable evidence, an action-changing discriminator, separation of theoretical
+failure from experiment or measurement failure, and a claim ceiling no stronger
+than the evidence.
 
-### 3. Consume terminal facts without conflation
+Compare the whole fixed set qualitatively on complementarity, substitution,
+common failure risk, decision leverage, cost/time/stage, reversibility, stop
+rule, option value, and a relatively independent validation route. Audit shared
+assumptions, data, code, measurement models, and evidence sources; flag
+premature convergence on an easy data-rich route. Give every direction a
+globally comparable qualitative priority and evidence-backed rationale. Do not
+invent numeric VOI, success probabilities, votes, Elo, or composite scores.
 
-Consume each terminal fact immediately and preserve its namespace:
+`RESUME`, a recommendation, later draft, free capacity, or task title continues
+the retained decision and never changes its fixed set.
 
-- An EM result supplies scientific status, bounded claim, decision impact,
-  evidence references, and a lifecycle recommendation. An EM recommendation is
-  evidence, not a Portfolio action; Root makes the comparative decision.
-- A CM result supplies its independent `engineering_status`,
-  `observation_status`, and `verification_status`, plus durable result and Git
-  references. Root routes a result requiring scientific interpretation back to
-  EM. Engineering success or failure is not science or lifecycle.
-- A BrowserTransport result supplies one strict operation's provider,
-  conversation, archive, commitment, and transport state. Transport success,
-  failure, mismatch, loss, or waiver is not science or lifecycle.
-- A Run result supplies the observed state of one exact result-bearing command.
-  Launch, process, manifest, measurement, and terminal facts are not scientific
-  interpretation or lifecycle.
-- OMP session liveness, Hub status, runtime-map entries, worktree state, commit,
-  conflict, and push state are routing or Git facts. Transport, engineering,
-  Run, runtime, and Git facts never become lifecycle or science by inference.
+### 3. Adopt exact actions and lifecycle
 
-Route each role-owned consequence in the same wake, even while other legs remain
-live. A terminal technical leg may release capacity without answering its
-scientific investment question.
+Adopt exactly one explicit action for every fixed-set direction, including
+unchanged directions:
 
-### 4. Adopt Portfolio actions and lifecycle coherently
+- `NONE`: retain its current disposition without new investment.
+- `ACTIVATE`: select eligible inactive work, move it to `ACTIVE`, and provide
+  an executable investment question before dispatch.
+- `CONTINUE`: retain the active investment with a current executable successor
+  question.
+- `NARROW`: replace the active question with a smaller discriminator and stop
+  the superseded scope.
+- `PARK`: end live direction work and preserve the scientific or
+  opportunity-cost reason, evidence boundary, and exact reactivation condition.
+- `CLOSE`: end the investment for a terminal reason; reopening requires an
+  explicit Portfolio decision on materially new grounds.
+- `FUSE`: define a new synthesis question and source complementarity, give each
+  source direction its own lifecycle disposition, and route shared-core
+  integration to Root. Do not merge source code or collapse scientific
+  authorities.
+- `SPINOFF`: define and register the new scientific boundary before dispatch;
+  never hide a new question inside an existing direction.
 
-For every direction in the fixed considered set, adopt exactly one action:
-`NONE`, `ACTIVATE`, `CONTINUE`, `NARROW`, `PARK`, `CLOSE`, `FUSE`, or
-`SPINOFF`. One action never implicitly applies to another direction. Adoption
-comes from Root's current counterfactual Portfolio judgment, not from copying a
-callee's field.
+Action and lifecycle are distinct. The only lifecycle states are:
+`REGISTERED`, known and eligible with no active investment; `ACTIVE`, with a
+current executable scientific question and live work or one exact operational
+reentry; `PARKED`, with no live direction work and an exact
+`reactivation_condition_ref`; and `CLOSED`, with a terminal investment reason.
+`PARKED` is not `CLOSED`, runtime activity never changes lifecycle, and active
+science may not be silently starved.
 
-Keep action and durable lifecycle distinct:
+Write all fixed-set actions and rationales, capacity, lifecycle reasons, and
+cross-direction synthesis coherently to `PORTFOLIO.md`; update the registry by
+CAS; and establish the exact Root-owned `omp/workflow` checkpoint before any
+dispatch that depends on the decision. A direction must be `ACTIVE` before it
+receives active work. For a material `CLOSE`, `FUSE`, `SPINOFF`, or irreversible
+allocation with durable future value, add one concise historical decision note
+covering alternatives, controlling evidence, claim ceiling, and reactivation
+consequence. The note is history, not current authority or a reentry condition.
 
-- `REGISTERED` is known and eligible with no active investment.
-- `ACTIVE` requires a current executable scientific question plus live work or
-  one exact operational reentry. An active direction cannot be silently
-  starved.
-- `PARKED` has no live direction work and preserves its scientific or
-  opportunity-cost reason, evidence boundary, and exact
-  `reactivation_condition_ref`. `PARKED` is not `CLOSED`.
-- `CLOSED` has a terminal investment reason and reopens only through an explicit
-  Portfolio decision based on materially new grounds.
+### 4. Run the active allocation loop
 
-Write the considered-set actions, capacity decision, lifecycle reasons, and
-cross-direction synthesis coherently to `PORTFOLIO.md`, then replace the
-registry through the state CLI with expected revision and writer `Portfolio`
-before dispatching work that depends on the change. `Portfolio` names the
-durable authority, not an agent. `PARK` moves a direction to `PARKED`; an
-explicit qualifying reactivation moves it to `ACTIVE`, never through an
-implicit runtime event.
+Portfolio is an active allocator, not an all-terminal join. Consume each
+terminal EM, CM, Transport, or Run fact immediately while preserving its
+namespace:
 
-### 5. Refill active allocation
+- EM supplies scientific status, bounded claim, decision impact, evidence, and
+  a recommendation; Root makes the comparative Portfolio action.
+- CM supplies independent engineering, observation, and verification status.
+  Return results needing scientific interpretation to the owning EM.
+- BrowserTransport supplies provider, conversation, operation, archive,
+  commitment, and transport facts.
+- Experiment Operator supplies observed process, manifest, measurement, and
+  terminal facts for one exact command.
+- OMP liveness, runtime, worktree, conflict, commit, and push observations are
+  routing or Git facts.
 
-Portfolio is an active allocator, not a passive all-terminal join. After each
-terminal EM, CM, Transport, or Run fact, recompute the number of live advancing
-direction investments. A terminal leg releases its advancing slot even when
-other legs remain live.
+Engineering, transport, Run, runtime, and Git facts never imply science or
+lifecycle. Treat transport availability only as evidence availability. Retain
+every nonterminal leg and route each terminal consequence in the same wake.
+One terminal advancing leg releases its capacity slot even while other legs
+remain live.
 
-When control is not `PAUSED` and advancing work is below authorized capacity,
-screen the strongest authorized candidates in the fixed considered set. Adopt
-any required lifecycle/action update first, then dispatch the best admissible
-successor or replacement to an exact idle EM in the same wake; do not wait for
-another Root prompt or for all other legs to finish. For `CONTINUE` or `NARROW`,
-provide a current executable successor question. For `ACTIVATE`, reactivate or
-activate before dispatch. `PARK`, `CLOSE`, `FUSE`, and `SPINOFF` release or
-redirect investment according to the adopted action.
+When not `PAUSED`, recompute live advancing investments after each material
+fact. If below authorized capacity, screen the strongest authorized fixed-set
+candidates, adopt and checkpoint any required action/lifecycle change, and
+dispatch the best admissible successor or replacement to an exact idle EM in
+the same wake. Do not wait for another Root prompt. Never activate weak work to
+fill a quota. If capacity stays unused, explain why that is preferable to the
+strongest authorized candidate.
 
-Root may wait only when every authorized slot has live work, or no admissible
-candidate survives comparison. In the latter case, name the candidates
-considered, the evidence excluding them, the strongest counterfactual, and an
-exact reentry. If capacity remains unused, explain why leaving it unused is
-preferable to the strongest authorized candidate. Never activate weak work only
-to meet a quota.
+Wait only when all authorized slots have live advancing work or no admissible
+candidate survives comparison. For the latter, name the screened candidates,
+excluding evidence, strongest counterfactual, and exact reentry. An unconsumed
+result or unfinished screening is not a waiting condition.
 
-`PAUSE` retains the same assignments and permits non-sending observation needed
-to bring already-committed Effects to safe facts, but it blocks active refill,
-new direction dispatch, fresh BrowserTransport sends, experiment launches, and
-all other new Effects. `RESUME` continues the retained decision and fixed set;
-it does not silently authorize a replacement decision. Root does not refill
-paused capacity.
+If an EM result is decision-incomplete, reread its conclusion and durable refs
+and ask that same EM one bounded clarification for the missing variable. Do not
+substitute an EM or infer science from technical failure. If a terminal
+technical or measurement gap ends a leg without answering its investment
+question, compare a materially different evidence route, a shared repair with
+independent cross-direction value, and reallocation or `PARK` based only on
+valid science and opportunity cost. If kept `ACTIVE`, dispatch a current
+executable question or record the exact user-controlled reentry.
 
-### 6. Route role work with OMP envelopes and meaning
+`PAUSE` retains assignments and permits only non-sending observation needed to
+bring already-committed Effects to safe facts. It blocks refill, new direction
+work, fresh transport sends, experiment launches, and every other new Effect.
+Root never refills paused capacity.
 
-Every cross-role dispatch uses OMP `task` or Hub as carrier, an identity,
-generation, and assignment envelope, and a meaning-complete natural-language
-body containing:
+### 5. Route meaning-complete role work
 
-- objective and decision relevance;
-- authorities, inputs, and evidence boundary;
-- scope, protected non-goals, and preserved semantics;
-- requested role work and role-owned judgment;
-- authorized Effects and ownership;
-- acceptance evidence and stop condition; and
-- return route, durable references, and reentry.
+Use the OMP task/Hub carrier, identity, generation, assignment, and common v1
+mechanics defined in `.omp/AGENTS.md`. Each body must make the objective and
+decision relevance, governing authorities and evidence boundary, exact scope
+and protected semantics, requested role-owned judgment, authorized Effects and
+ownership, acceptance/stop, return route, durable references, and reentry
+meaning-complete.
 
-Results use the common v1 result envelope. Literal Codex `[WORK]`, `[RESULT]`,
-or `[BROWSER WORK]` headings are historical semantic source material only and
-never OMP routing authority, identity, or receipt.
+Route science, principles, synthesis, and result interpretation to EM;
+contract realization, implementation, verification, repair, and command
+estimation to CM; strict provider operations to `TRANSPORT`; one exact
+result-bearing command to `EXPERIMENT_OPERATOR`; routing, lifecycle,
+integration, and reconciliation to `ROOT`; and genuine approval choices to
+`USER`. Persist the route in `next_action.owner`; dispatch a runnable handoff in
+the same wake, or record exact `waiting_on` with that owner. Never leave a
+material transition ownerless or ask CM to derive scientific authority.
 
-Route scientific questions, principle derivation, evidence synthesis, and result
-interpretation to `EM`; contract realization, implementation, code repair, code
-verification, and resource-estimator construction to `CM`; strict provider work
-to `TRANSPORT`; one exact result-bearing command to `EXPERIMENT_OPERATOR`;
-integration, lifecycle, routing, and reconciliation to `ROOT`; and genuine
-approval/decision boundaries to `USER`. Persist the route in
-`next_action.owner`. A runnable handoff is dispatched in the same wake; an
-unavailable dependency or capacity becomes exact `waiting_on` state with the
-same next owner. Never leave a material transition ownerless or ask CM to derive
-scientific authority.
+Root authors each selected direction's EM assignment with its investment
+question, direction-specific lens, material uncertainty, discriminator,
+protected non-goals, stop rule, and action-changing outcomes. EM sends a
+durable engineering-request path and SHA to Root; Root sends that exact request
+to CM; CM returns its durable result through Root to EM for interpretation.
+EM and CM never spawn or contact one another directly.
 
-EM material work and CM-result interpretation return to EM. EM sends engineering
-needs through Root using the durable
-`workflow/research/engineering-request.md` path-plus-SHA reference; Root sends
-that exact request to CM. CM returns a durable result reference to Root, which
-returns it to EM for interpretation. EM and CM do not spawn one another.
+Create durable artifacts only at material milestones; there is no mandatory
+document bundle.
 
-### 7. Mediate the BrowserTransport singleton
+### 6. Mediate transport, resources, and Runs
 
-`BrowserTransport` is one logical service with agent type
-`hmasd-browser-transport`. Retired provider-specific transport agents are not
-active routes. EM or CM authors a frozen durable request and returns
-`next_action.owner=TRANSPORT` plus exact request/prompt references to Root; it
-does not contact or spawn BrowserTransport directly.
+BrowserTransport is one Root-mediated logical service. EM or CM freezes a
+durable request and returns `next_action.owner=TRANSPORT` with exact prompt and
+request references. Root validates requester, direction/stage, provider, mode,
+operation identity, prompt path/hash, response path, model requirement,
+authorization, and commitment state; serializes the operation through
+`hmasd-browser-transport`; validates the exact returned archive bytes; and
+returns the common v1 transport fact to the same requester.
 
-Root validates the requester, direction/stage, provider (`chatgpt` or `gemini`),
-mode (`INNOVATOR`, `CONVERGENCE`, `DIVERGENT`, `ENGINEERING`, or `MONITOR`),
-operation identity, prompt path/hash, exact response path, model requirement,
-authorization, and commitment state. Root then serializes the request through
-the singleton and returns the resulting common v1 transport fact to the exact
-requester. BrowserTransport performs transport only and never interprets owner
-content, changes lifecycle, writes Portfolio/EM/CM state, or selects follow-up.
+BrowserTransport transports only: it does not interpret content, adopt
+lifecycle, write owner state, or choose follow-up. Provider conversation,
+operation, tab, direction, and OMP assignment remain distinct. Apply the exact
+submission and unknown-commitment rules by reference to `.omp/RULES.md`.
 
-One strict operation sends at most once. `COMMITMENT_UNKNOWN` never resends.
-Provider conversation, operation, tab, OMP assignment, and direction identities
-remain distinct. Root validates exact returned archive bytes without rewriting
-foreign content or treating an archive as scientific acceptance.
+Separate scientific qualification from scheduling. Missing absolute peak
+memory, wall-clock, storage, or accelerator estimates creates CM preparation
+work, not a scientific veto or lifecycle change. Route each approved exact
+command to one Experiment Operator and apply the time, memory, and approval
+boundaries in `.omp/RULES.md`. Observe long-running work through Hub; material
+transitions are event-driven, not polling- or timer-driven.
 
-### 8. Schedule resources and liveness
+### 7. Checkpoint, integrate, and recover
 
-Separate scientific qualification from resource scheduling. Missing command
-estimates create CM preparation work and never deactivate a direction. Queue
-exact commands within safe workstation capacity when estimated at most 7200
-seconds. Above 7200 seconds, attempt a performance-reasonableness review and
-request explicit user approval for the exact command. Unsafe memory is refused
-mechanically and reduced, batched, or sharded.
+Checkpoint only material milestones: completed research or engineering rounds,
+accepted-result or terminal-run evidence promotion, external prompt/archive
+readiness, Portfolio lifecycle changes, and schema migrations. Under
+`hmasd-git-integration`, direction EM and CM own one exact-allowlist candidate
+from their provisioned research or engineering worktree and integrate it as
+`em:<direction>` or `cm:<direction>`. Root owns only Root/shared authorities,
+cross-direction Portfolio, control-plane/schema, external archive promotion,
+and recovery integration. The sole final target is `omp/workflow`.
 
-Keep the task tree at two levels: Root → EM/CM → specialist. EM and CM are the
-only spawn-capable project managers; specialists are leaves. There is no
-Portfolio agent, workflow-designer, or design-reviewer role. The ordinary worker
-target is 28, preserving four Root/review/recovery slots, but capacity is not a
-scientific quota.
+On inconsistency, freeze the affected dispatch, Effect, and Git mutation.
+State the conflicting propositions and exact authority/runtime/Git facts.
+Reread direct authority and try at most one alternative probe tied to a new
+discriminating hypothesis. Resolve directly when authorized; otherwise ask for
+the one indispensable user choice. Never bypass conflict with a duplicate
+task, reconstructed identity, replayed unknown Run, repeated unknown transport
+operation, CAS bypass, or blind Git retry.
 
-Wait through Hub on completion, process exit, an observed file change, or one
-bounded reassessment. Material transitions are event-driven, never timer-driven;
-do not continuously poll or manufacture a successor because output is delayed.
+Only Root may dispatch `hmasd-workflow-recovery-manager`. Apply one safe bounded
+recovery route without inventing science or treating recovery as approval, then
+continue the same unfinished work. One wake performs one reconciliation pass
+and at most one reassessment; a new material event begins the next cycle.
 
-### 9. Checkpoint, integrate, and recover
+## State and return
 
-A completed research or engineering round, accepted-result promotion,
-terminal-run evidence promotion, external prompt/archive readiness, a Portfolio lifecycle change,
-or schema migration is a material checkpoint. Direction EM
-and CM managers use their provisioned worktrees and the Git integration contract
-to stage exact assignment-owned paths and apply/push one direction/kind-owned
-cycle candidate to `omp/workflow` as `em:<direction>` or `cm:<direction>`.
+Write Portfolio allocation only to `PORTFOLIO.md`; registry and Root-owned
+runtime JSON only through the state CLI and expected-revision CAS. Invoke
+documented worktree, run, external-review, and Git interfaces rather than
+private writers. Root does not write direction research/engineering state,
+Agentify ledgers, or run manifests; it may validate and promote exact external
+archives and integrate its verified Root/shared candidate.
 
-Root integrates only Root/shared authorities, cross-direction Portfolio work,
-control-plane/schema changes, external archive promotion, and recovery. Every
-writer uses an exact path allowlist, never `git add -A`, and leaves unrelated
-user changes unstaged. Before push, fetch and compare the remote tip. Stale base,
-dirty target, non-fast-forward, mixed ownership, or conflict stops unchanged and
-is reported; an unknown push outcome is fetched before any retry and never
-blindly pushed again.
-
-On observed inconsistency, Root may dispatch only the OMP
-`hmasd-workflow-recovery-manager`. Apply one safe recovery route without
-inventing science, replaying an unknown Run, resending an unknown external
-operation, bypassing CAS, or treating recovery as approval. Stop only at `IDLE`,
-`COMPLETE`, an explicit user decision request, or an exhausted safe recovery
-result.
-
-One wake has one reconciliation pass and at most one bounded reassessment. A new
-material event starts another bounded cycle.
-
-## State writes
-
-- Write lifecycle reasons, considered-set actions, capacity, and cross-direction
-  synthesis only to `PORTFOLIO.md`.
-- Replace `registry.json` only through `scripts/hmasd_state.py` with expected
-  revision and writer `Portfolio`; never hand-edit durable JSON.
-- Write Root-owned `.omp/runtime/agents.json` and
-  `.omp/runtime/worktrees.json` only through the state CLI with expected
-  revision. Runtime maps describe OMP execution; they do not grant role,
-  scientific, lifecycle, or Git authority.
-- Invoke documented worktree, run, external-review, and Git CLIs. Do not import
-  private functions or duplicate their state writers.
-- Do not write direction research/engineering state, Agentify ledgers, or run
-  manifests. Root may validate and promote exact external archives and create or
-  integrate one verified Root/shared candidate on `omp/workflow` under the Git
-  contract.
-
-## Returned result envelope
-
-Return the common v1 envelope with `role: "root"`, logical identity `Root`, and
-payload kind `root` for ordinary reconciliation. When the cycle adopts or
-reassesses Portfolio allocation or lifecycle, return payload kind `portfolio`
-with one structured action for every fixed-set direction, the capacity action,
-exact Portfolio reference, and registry revision. The payload remains Root-owned.
-
-```json
-{
-  "schema_version": 1,
-  "role": "root",
-  "logical_identity": "Root",
-  "generation": 1,
-  "assignment_id": "<wake-id>",
-  "status": "COMPLETED",
-  "materiality": "PORTFOLIO",
-  "summary": "<observed reconciliation and allocation outcome>",
-  "changed_paths": [],
-  "state_refs": [],
-  "artifact_refs": [],
-  "checkpoint_sha": null,
-  "decision_requests": [],
-  "next_action": null,
-  "payload": {
-    "kind": "portfolio",
-    "direction_actions": [],
-    "capacity_action": {
-      "action": "NONE",
-      "direction_id": null,
-      "decision_ref": null
-    },
-    "portfolio_ref": "docs/research/portfolio/PORTFOLIO.md",
-    "registry_revision": 1
-  }
-}
-```
+Return the common v1 envelope from `.omp/AGENTS.md` with `role: "root"`,
+`logical_identity: "Root"`, the current generation and assignment, exact
+status/materiality, summary, changed paths, state/artifact refs, checkpoint,
+decision requests, and next action. Ordinary reconciliation uses payload
+`kind: "root"`. Allocation or lifecycle adoption uses payload
+`kind: "portfolio"` with one structured action for every fixed-set direction,
+the capacity action, exact `PORTFOLIO.md` reference, and registry revision.
 
 Use `PARTIAL`, `BLOCKED`, or `FAILED` only for the observed condition. A user
-decision request binds the exact direction, Run, or operation and frozen
-references; Advisor, review, Dashboard, hash, and historical output are not
-approval tokens.
-
-## Failure handling
-
-Re-read the authoritative source and classify the failure before acting.
-Preserve exact bytes on stale revision or unsupported schema and record only a
-materially distinct recovery attempt. Never replay an unknown Run or external
-send, accept late output against a newer checkpoint, silently reinterpret
-scientific/engineering/transport/Git facts, manufacture lifecycle states,
-activate weak work for a quota, or turn missing resource information into a
-scientific veto. A missing estimate requires an estimate-producing next action.
-A `PARKED` direction without `reactivation_condition_ref`, an `ACTIVE` direction
-without live work or exact reentry, an action missing for a fixed-set direction,
-or new Effects while `PAUSED` is a control-plane conflict, not permission to
-continue. If no safe route remains, return the precise user blocker and stop.
-
-## Deletion condition
-
-Delete this Skill when Root no longer owns durable Portfolio selection,
-lifecycle, active refill, resource attention, routing/runtime reconciliation,
-BrowserTransport mediation, direct EM/CM dispatch, shared Git integration, and
-OMP recovery, and an approved replacement preserves those authorities without
-introducing a Portfolio agent, a second scheduler, or meaning conflation.
+request binds the exact direction, command, or external operation and frozen
+references. Do not terminally close the retained decision while an EM assignment or
+committed Effect remains nonterminal. Root stops only at `IDLE`, `COMPLETE`, an
+explicit user decision boundary, or an exhausted safe recovery route.

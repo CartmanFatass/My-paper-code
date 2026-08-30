@@ -16,17 +16,26 @@ controlled by `.omp/AGENTS.md`, `.omp/RULES.md`, `.omp/WATCHDOG.md`, `.omp/agent
 `.omp/skills/`. Scientific findings, claim ceilings, direction evidence, retained Effects, archive
 hashes, and user PAUSE/RESUME boundaries are migrated as non-control facts.
 
-The user resumed the retained decision at `2026-08-30T00:30:48Z`. The controlling state is now
-`RESUME`:
+The user resumed the retained decision at `2026-08-30T00:30:48Z`, then paused all
+research and direction integration at `2026-08-30T02:20:25Z` while the
+source-semantic OMP workflow adaptation was inspected and completed. The
+controlling state is now `PAUSE`:
 
-- The authorized advancing capacity remains exactly four.
-- The only newly authorized Effects are the four EM reentries adopted below. SCDMP, VQFP and ONLGR
-  remain local archive-review assignments; `RESUME` does not authorize any provider send, retry,
-  replacement, continuation, CM task or experiment.
-- `RESUME` is not scientific acceptance, lifecycle evidence, or permission to widen any frozen
-  claim.
-- Representation migration restored the `PARKED` schema representation only for the eight
-  source-known parked rows. It did not reinterpret science or change any reactivation condition.
+- The authorized advancing-capacity allocation remains exactly four, but
+  `PAUSE` blocks refill, fresh direction dispatch, sends, launches, and all
+  other new scientific or direction-integration Effects.
+- Preserve the four returned EM assignments, their provisioned worktrees, and
+  committed transport/archive facts without consuming or integrating their
+  scientific conclusions until an explicit user `RESUME`.
+- The user separately authorized the reversible control-plane and external-index
+  representation adaptation in this checkpoint. Completing that adaptation
+  does not resume research.
+- The preceding `RESUME` authorized only the four EM reentries adopted below.
+  It never authorized a provider send, retry, replacement, continuation, CM
+  task, experiment, or claim widening.
+- Representation migration restored the `PARKED` schema representation only
+  for the eight source-known parked rows. It did not reinterpret science or
+  change any reactivation condition.
 
 Safe-boundary facts consumed from
 `docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md`, with

@@ -1,9 +1,9 @@
 {
   "direction_id": "vsp_06_mssr",
-  "revision": 1,
+  "revision": 2,
   "rounds": [],
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "schema_version": 2,
+  "updated_at": "2026-08-30T01:57:56Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-vsp_06_mssr"
 }

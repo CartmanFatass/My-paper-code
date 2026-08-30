@@ -12,8 +12,7 @@ tools:
   - bash
   - lsp
 spawns: []
-autoloadSkills:
-  - hmasd-git-integration
+autoloadSkills: []
 blocking: false
 ---
 Implement the bounded outcome in the assignment-owned files. Treat goals,
@@ -25,4 +24,4 @@ cross-file rename. Preserve named scientific, numerical, RNG, checkpoint,
 bit-identity, and external-effect semantics. Make reasonable local engineering
 choices and run only focused checks. Continuous Advisor output is read-only and
 non-gating. Do not add policy layers, dispatch agents, or require review. Do not
-commit or push unless explicitly assigned that exact Git effect.
+commit or push; CM or Root owns integration.

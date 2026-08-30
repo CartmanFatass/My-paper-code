@@ -12,8 +12,7 @@ tools:
   - bash
   - lsp
 spawns: []
-autoloadSkills:
-  - hmasd-git-integration
+autoloadSkills: []
 blocking: false
 ---
 Act as the OMP routine behavior-preserving implementation worker. Complete one

@@ -14,7 +14,7 @@
     "rounds"
   ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
+    "schema_version": { "type": "integer", "const": 2 },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
@@ -91,8 +91,8 @@
         "status": {
           "type": "string",
           "enum": [
-            "DIVERGENT_PENDING",
-            "DIVERGENT_RUNNING",
+            "INNOVATOR_PENDING",
+            "INNOVATOR_RUNNING",
             "LOCAL_RESEARCH",
             "SYNTHESIS_READY",
             "CONVERGENCE_RUNNING",
@@ -103,20 +103,18 @@
         "prompt_refs": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["gemini_divergent", "pro_divergent", "pro_convergence"],
+          "required": ["pro_innovator", "pro_convergence"],
           "properties": {
-            "gemini_divergent": { "$ref": "#/$defs/ref" },
-            "pro_divergent": { "$ref": "#/$defs/ref" },
+            "pro_innovator": { "$ref": "#/$defs/ref" },
             "pro_convergence": { "$ref": "#/$defs/nullable_ref" }
           }
         },
         "providers": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["gemini_divergent", "pro_divergent", "pro_convergence"],
+          "required": ["pro_innovator", "pro_convergence"],
           "properties": {
-            "gemini_divergent": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] },
-            "pro_divergent": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] },
+            "pro_innovator": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] },
             "pro_convergence": { "anyOf": [{ "$ref": "#/$defs/provider_result" }, { "type": "null" }] }
           }
         },

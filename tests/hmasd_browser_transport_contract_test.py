@@ -51,6 +51,12 @@ def _list(metadata: dict[str, str | list[str]], key: str) -> list[str]:
     return value
 
 
+def _assert_semantics(text: str, fragments: tuple[str, ...]) -> None:
+    normalized = " ".join(text.split())
+    for fragment in fragments:
+        assert " ".join(fragment.split()) in normalized, fragment
+
+
 def test_singleton_agent_inventory_tools_and_manager_routing() -> None:
     assert BROWSER_AGENT.is_file()
     for retired in (
@@ -87,8 +93,13 @@ def test_singleton_agent_inventory_tools_and_manager_routing() -> None:
         assert "hmasd-external-pro-transport" not in spawns
         assert "hmasd-external-gemini-transport" not in spawns
         body = manager_path.read_text(encoding="utf-8")
-        assert "`next_action.owner=TRANSPORT` through Root" in body
-        assert "never spawn or contact\nBrowserTransport directly" in body
+        _assert_semantics(
+            body,
+            (
+                "`next_action.owner=TRANSPORT` through Root",
+                "never spawn or contact BrowserTransport directly",
+            ),
+        )
 
 
 def test_service_keeps_objects_separate_and_closes_the_send_boundary() -> None:
@@ -106,17 +117,20 @@ def test_service_keeps_objects_separate_and_closes_the_send_boundary() -> None:
     ):
         assert object_name in lower
 
-    assert "`observe -> interpret -> act -> verify`" in text
-    assert "It sends at most once" in text
-    assert "Unknown commitment\n   never resends" in text
-    assert "`ZERO_SEND_FAILED` proves only" in text
-    assert "it is not operation-two authority" in text
-    assert (
-        "`SENT_WAITING`, `COMMITMENT_UNKNOWN`, and `SENT_UNREADABLE` as\n"
-        "   observe-only states"
-    ) in text
-    assert "Agentify strict `agentify_review_query`, once" in text
-    assert "never substitute `agentify_query`" in text
+    _assert_semantics(
+        text,
+        (
+            "`observe -> interpret -> act -> verify`",
+            "It sends at most once",
+            "Unknown commitment never resends",
+            "`ZERO_SEND_FAILED` proves only that this Agentify operation did not send",
+            "it is not operation-two authority",
+            "`SENT_WAITING`, `COMMITMENT_UNKNOWN`, and `SENT_UNREADABLE` as "
+            "observe-only states",
+            "Agentify strict `agentify_review_query`, once",
+            "never substitute `agentify_query`",
+        ),
+    )
 
     for state in (
         "PENDING",
@@ -137,31 +151,50 @@ def test_prompt_and_archive_require_helper_fingerprint_and_archive_reread() -> N
     text = BROWSER_SKILL.read_text(encoding="utf-8")
     command = "python scripts/hmasd_file_fingerprint.py --path"
     assert text.count(command) == 2
-    assert "--require-utf8" in text
-    assert "`path.absolute`" in text
-    assert "`file.sha256`" in text
-    assert "`file.size_bytes`" in text
-    assert "`file.utf8.valid`" in text
-    assert "Then reread the exact archive\n   file with `read`" in text
-    assert "Return `COMPLETE` only when the helper reports success" in text
-    assert "hashes and stable keys are never identity" in text
-    assert "A tab\n   ID" in text and "is never conversation" in text
+    _assert_semantics(
+        text,
+        (
+            "--require-utf8",
+            "`path.absolute`",
+            "`file.sha256`",
+            "`file.size_bytes`",
+            "`file.utf8.valid`",
+            "Then reread the exact archive file with `read`",
+            "Return `COMPLETE` only when the helper reports success",
+            "hashes and stable keys are never identity",
+            "A tab ID, current page, or open-tab count is never conversation",
+        ),
+    )
 
 
-def test_external_review_preserves_root_mediation_and_provider_binding() -> None:
-    text = EXTERNAL_REVIEW_SKILL.read_text(encoding="utf-8")
-    assert "single Root-mediated\n`BrowserTransport` service" in text
-    assert "`next_action.owner=TRANSPORT` through Root" in text
-    assert "EM and CM never spawn or\ncontact BrowserTransport directly" in text
-    assert "Pro must\n   bind `provider: chatgpt`" in text
-    assert "Gemini must bind\n   `provider: gemini`" in text
-    assert "Cross-provider substitution is\n   forbidden" in text
-    assert "Agentify strict `agentify_review_query` as the send-capable surface" in text
-    assert "`agentify_review_observe`" in text
-    assert "`verifyExisting`" in text
-    assert "Root alone invokes `hmasd_external_review.py`" in text
-    assert "hmasd-external-pro-transport" not in text
-    assert "hmasd-external-gemini-transport" not in text
+def test_external_review_delegates_transport_mechanics_to_root_and_browser_skill() -> None:
+    review = EXTERNAL_REVIEW_SKILL.read_text(encoding="utf-8")
+    _assert_semantics(
+        review,
+        (
+            "All provider work uses the singleton Root-mediated `BrowserTransport`",
+            "EM and CM never spawn, contact, or invoke it directly",
+            "Every request returned through Root with `next_action.owner=TRANSPORT`",
+            "Bind `provider: chatgpt`, the exact Pro model",
+            "Only the strict Agentify review surface may send",
+            "Root validates and records archive bytes through the external-review CLI",
+            "Agentify is the sole submission ledger",
+        ),
+    )
+    assert "hmasd-external-pro-transport" not in review
+    assert "hmasd-external-gemini-transport" not in review
+
+    transport = BROWSER_SKILL.read_text(encoding="utf-8")
+    _assert_semantics(
+        transport,
+        (
+            "provider (`chatgpt` or `gemini`)",
+            "provider/model-mismatched assignment",
+            "Agentify strict `agentify_review_query`, once",
+            "exact existing Agentify operation for observe-only work",
+            "Agentify alone owns its strict-operation ledger",
+        ),
+    )
 
 
 def test_browser_result_is_common_v1_transport_envelope_to_root() -> None:
@@ -187,8 +220,14 @@ def test_browser_result_is_common_v1_transport_envelope_to_root() -> None:
         "archive_ref": "<verified-archive-path>",
         "handoff_ref": None,
     }
-    assert "Return to Root, and only Root" in text
-    assert "Do not return scientific,\nengineering, Portfolio" in text
+    _assert_semantics(
+        text,
+        (
+            "Return to Root, and only Root",
+            "Do not return scientific, engineering, Portfolio, capacity, approval, "
+            "or lifecycle conclusions",
+        ),
+    )
 
 
 def test_common_schema_admits_the_singleton_transport_contract() -> None:

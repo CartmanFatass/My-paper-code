@@ -14,6 +14,7 @@ SCRIPT = ROOT / "scripts" / "hmasd_state.py"
 FIXTURES = ROOT / "tests" / "fixtures" / "hmasd_phase0"
 REGISTRY_PATH = ROOT / "docs" / "research" / "portfolio" / "workflow" / "registry.json"
 PORTFOLIO_PATH = ROOT / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
+AGENTS_PATH = ROOT / ".omp" / "AGENTS.md"
 
 PARKED_DIRECTION_IDS = {
     "active_post_churn_population_flow_identification",
@@ -207,6 +208,26 @@ def test_root_owned_browser_assignment_map_validates(tmp_path: Path) -> None:
 
 def test_portfolio_records_representation_only_migration_and_pause_boundary() -> None:
     portfolio = " ".join(PORTFOLIO_PATH.read_text(encoding="utf-8").split())
-    assert "restores the `PARKED` schema representation only" in portfolio
-    assert "does not activate, close, cancel, launch, send, refill capacity, or reinterpret science" in portfolio
-    assert "`PAUSE` remains controlling" in portfolio
+    agents = " ".join(AGENTS_PATH.read_text(encoding="utf-8").split())
+
+    for migration_anchor in (
+        "## OMP non-control migration boundary",
+        "This file is the OMP durable scientific authority after this migration",
+        "user PAUSE/RESUME boundaries are migrated as non-control facts",
+        "The controlling state is now `PAUSE`",
+        "Representation migration restored the `PARKED` schema representation only",
+        "for the eight source-known parked rows",
+        "It did not reinterpret science or change any reactivation condition",
+        "paused all research and direction integration",
+        "until an explicit user `RESUME`",
+    ):
+        assert migration_anchor in portfolio
+
+    assert (
+        "`PARKED` has no live direction work, requires "
+        "`reactivation_condition_ref`, and is not `CLOSED`"
+    ) in agents
+    assert (
+        "`PAUSE` retains current work and safe observation of committed Effects but "
+        "blocks refill, fresh dispatch, sends, launches, and all other new Effects"
+    ) in agents

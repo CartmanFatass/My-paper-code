@@ -8,6 +8,7 @@ ROOT_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-root-control" / "SKILL.md"
 PROTOCOL = REPO_ROOT / "docs" / "project" / "HMASD_OMP_CONTROL_PLANE_PROTOCOL.md"
 AGENTS = REPO_ROOT / ".omp" / "AGENTS.md"
 WATCHDOG = REPO_ROOT / ".omp" / "WATCHDOG.md"
+RULES = REPO_ROOT / ".omp" / "RULES.md"
 
 
 def _read(path: Path) -> str:
@@ -77,19 +78,42 @@ def test_human_protocol_covers_the_layered_omp_control_plane() -> None:
 
 def test_root_executes_the_complete_portfolio_decision_frame() -> None:
     skill = _flat(ROOT_SKILL)
+    agents = _flat(AGENTS)
 
-    for required in (
-        "There is no Portfolio agent",
-        "Fixed user considered set",
-        "Live investments and Effects",
-        "Evidence boundary",
-        "Counterfactual allocation",
-        "Next observation",
-        "An EM recommendation is evidence, not a Portfolio action",
+    for role_anchor in (
+        "Root is the one user-facing controller",
+        "`Portfolio` is a durable authority name, not an agent",
+        "### 2. State the Portfolio decision frame",
     ):
-        assert required in skill
+        assert role_anchor in skill
 
-    actions = (
+    for frame_anchor in (
+        "**User decision and fixed set:**",
+        "allocation question",
+        "every considered direction",
+        "authorized capacity",
+        "**Live investments:**",
+        "unfinished joins",
+        "committed Effects",
+        "**Evidence boundary:**",
+        "valid comparative science",
+        "excluded transport/engineering/measurement facts",
+        "supported claim ceiling",
+        "**Counterfactual allocation:**",
+        "strongest real alternative",
+        "decision leverage",
+        "reversibility",
+        "stop rule",
+        "**Next observation:**",
+        "smallest discriminator that could change allocation",
+        "action each outcome would change",
+    ):
+        assert frame_anchor in skill
+
+    assert "EM supplies scientific status, bounded claim, decision impact, evidence" in skill
+    assert "Root makes the comparative Portfolio action" in skill
+
+    for action in (
         "`NONE`",
         "`ACTIVATE`",
         "`CONTINUE`",
@@ -98,63 +122,111 @@ def test_root_executes_the_complete_portfolio_decision_frame() -> None:
         "`CLOSE`",
         "`FUSE`",
         "`SPINOFF`",
-    )
-    action_sentence = skill[skill.index("adopt exactly one action") :]
-    for action in actions:
-        assert action in action_sentence
+    ):
+        assert action in skill
 
-    assert "Registry lifecycle is exactly `REGISTERED`, `ACTIVE`, `PARKED`, or `CLOSED`" in _flat(AGENTS)
+    assert (
+        "Registry lifecycle is exactly `REGISTERED`, `ACTIVE`, `PARKED`, or `CLOSED`"
+        in agents
+    )
     assert "`PARKED` is not `CLOSED`" in skill
     assert "`reactivation_condition_ref`" in skill
     assert (
-        '"capacity_action": { "action": "NONE", "direction_id": null, '
-        '"decision_ref": null }'
+        '`kind: "portfolio"` with one structured action for every fixed-set direction'
+        in skill
+    )
+    assert "the capacity action" in skill
+    assert "exact `PORTFOLIO.md` reference, and registry revision" in skill
+
+    assert (
+        "establish the exact Root-owned `omp/workflow` checkpoint before any dispatch "
+        "that depends on the decision"
     ) in skill
+    assert "Checkpoint only material milestones:" in skill
+    for material_milestone in (
+        "completed research or engineering rounds",
+        "accepted-result or terminal-run evidence promotion",
+        "external prompt/archive readiness",
+        "Portfolio lifecycle changes",
+        "schema migrations",
+    ):
+        assert material_milestone in skill
 
 
 def test_root_actively_refills_unpaused_capacity_and_pause_blocks_effects() -> None:
     skill = _flat(ROOT_SKILL)
 
-    assert "Portfolio is an active allocator, not a passive all-terminal join" in skill
-    assert "recompute the number of live advancing direction investments" in skill
-    assert "When control is not `PAUSED` and advancing work is below authorized capacity" in skill
-    assert "dispatch the best admissible successor or replacement to an exact idle EM in the same wake" in skill
-    assert "do not wait for another Root prompt or for all other legs to finish" in skill
-    assert "blocks active refill, new direction dispatch, fresh BrowserTransport sends, experiment launches, and all other new Effects" in skill
-    assert "Root does not refill paused capacity" in skill
+    for allocation_anchor in (
+        "Portfolio is an active allocator, not an all-terminal join",
+        "One terminal advancing leg releases its capacity slot",
+        "When not `PAUSED`, recompute live advancing investments after each material fact",
+        "If below authorized capacity",
+        "screen the strongest authorized fixed-set candidates",
+        "dispatch the best admissible successor or replacement to an exact idle EM in the same wake",
+        "Do not wait for another Root prompt",
+        "Wait only when all authorized slots have live advancing work or no admissible candidate survives comparison",
+    ):
+        assert allocation_anchor in skill
+
+    for pause_anchor in (
+        "`PAUSE` retains assignments",
+        "non-sending observation needed to bring already-committed Effects to safe facts",
+        "blocks refill, new direction work, fresh transport sends, experiment launches, and every other new Effect",
+        "Root never refills paused capacity",
+    ):
+        assert pause_anchor in skill
 
 
 def test_root_preserves_role_fact_and_lifecycle_boundaries() -> None:
     skill = _flat(ROOT_SKILL)
 
-    for required in (
-        "Engineering success or failure is not science or lifecycle",
-        "Transport success, failure, mismatch, loss, or waiver is not science or lifecycle",
-        "Launch, process, manifest, measurement, and terminal facts are not scientific interpretation or lifecycle",
-        "worktree state, commit, conflict, and push state are routing or Git facts",
-        "Transport, engineering, Run, runtime, and Git facts never become lifecycle or science by inference",
+    for fact_anchor in (
+        "EM supplies scientific status, bounded claim, decision impact, evidence",
+        "CM supplies independent engineering, observation, and verification status",
+        "BrowserTransport supplies provider, conversation, operation, archive, commitment, and transport facts",
+        "Experiment Operator supplies observed process, manifest, measurement, and terminal facts",
+        "OMP liveness, runtime, worktree, conflict, commit, and push observations are routing or Git facts",
+        "Engineering, transport, Run, runtime, and Git facts never imply science or lifecycle",
+        "Treat transport availability only as evidence availability",
     ):
-        assert required in skill
+        assert fact_anchor in skill
 
-    assert "Consume each terminal fact immediately" in skill
-    for terminal_owner in ("An EM result", "A CM result", "A BrowserTransport result", "A Run result"):
-        assert terminal_owner in skill
+    assert "Consume each terminal EM, CM, Transport, or Run fact immediately" in skill
+    assert "Retain every nonterminal leg and route each terminal consequence" in skill
 
 
 def test_root_mediates_the_single_browser_transport_route() -> None:
     skill = _flat(ROOT_SKILL)
     agents = _flat(AGENTS)
+    rules = _flat(RULES)
 
-    for text in (skill, agents):
-        assert "`BrowserTransport`" in text
-        assert "`hmasd-browser-transport`" in text
-        assert "next_action.owner=TRANSPORT" in text
-        assert "hmasd-external-pro-transport" not in text
-        assert "hmasd-external-gemini-transport" not in text
+    for shared_anchor in (
+        "`BrowserTransport` is the singleton logical service",
+        "implemented by agent type `hmasd-browser-transport`",
+        "return `next_action.owner=TRANSPORT` to Root",
+    ):
+        assert shared_anchor in agents
 
-    assert "Root then serializes the request through the singleton" in skill
-    assert "`COMMITMENT_UNKNOWN` never resends" in skill
-    assert "EM and CM do not spawn one another" in skill
+    for root_anchor in (
+        "BrowserTransport is one Root-mediated logical service",
+        "Root validates requester, direction/stage, provider, mode, operation identity",
+        "prompt path/hash, response path, model requirement, authorization, and commitment state",
+        "serializes the operation through `hmasd-browser-transport`",
+        "validates the exact returned archive bytes",
+        "returns the common v1 transport fact to the same requester",
+        "BrowserTransport transports only",
+        "does not interpret content, adopt lifecycle, write owner state, or choose follow-up",
+        "EM and CM never spawn or contact one another directly",
+    ):
+        assert root_anchor in skill
+
+    assert "unknown commitment never resends" in rules
+    for retired_role in (
+        "hmasd-external-pro-transport",
+        "hmasd-external-gemini-transport",
+    ):
+        assert retired_role not in skill
+        assert retired_role not in agents
 
 
 def test_agents_and_watchdog_publish_only_the_omp_native_topology() -> None:

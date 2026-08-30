@@ -14,15 +14,13 @@ FrontmatterValue = str | list[str]
 EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     "hmasd-em": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "thinking-level": "max",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "task", "hub"],
         "spawns": [
             "hmasd-research-scout",
             "hmasd-research-innovator",
             "hmasd-research-critic",
             "hmasd-research-principles-analyst",
-            "hmasd-research-artifact-writer",
-            "hmasd-code-scout",
             "librarian",
         ],
         "autoloadSkills": [
@@ -32,8 +30,8 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         ],
     },
     "hmasd-cm": {
-        "model": "openai-codex/gpt-5.5",
-        "thinking-level": "xhigh",
+        "model": "openai-codex/gpt-5.6-sol",
+        "thinking-level": "high",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "task", "hub"],
         "spawns": [
             "hmasd-project-scout",
@@ -43,7 +41,6 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
             "hmasd-reviewer",
             "hmasd-verifier",
             "hmasd-experiment-operator",
-            "hmasd-research-scout",
             "librarian",
         ],
         "autoloadSkills": [
@@ -73,17 +70,17 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "thinking-level": "high",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "lsp"],
         "spawns": [],
-        "autoloadSkills": ["hmasd-git-integration"],
+        "autoloadSkills": [],
     },
     "hmasd-implementer-terra": {
         "model": "openai-codex/gpt-5.6-terra",
         "thinking-level": "high",
         "tools": ["read", "write", "edit", "grep", "glob", "bash", "lsp"],
         "spawns": [],
-        "autoloadSkills": ["hmasd-git-integration"],
+        "autoloadSkills": [],
     },
     "hmasd-reviewer": {
-        "model": "openai-codex/gpt-5.5",
+        "model": "openai-codex/gpt-5.6-sol",
         "thinking-level": "xhigh",
         "tools": ["read", "grep", "glob"],
         "spawns": [],
@@ -114,7 +111,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-browser-transport": {
         "model": "openai-codex/gpt-5.6-luna",
-        "thinking-level": "high",
+        "thinking-level": "xhigh",
         "tools": [
             "read",
             "grep",
@@ -152,7 +149,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-innovator": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "thinking-level": "max",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
@@ -160,7 +157,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-critic": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "thinking-level": "max",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
@@ -168,18 +165,11 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     },
     "hmasd-research-principles-analyst": {
         "model": "openai-codex/gpt-5.6-sol",
-        "thinking-level": "high",
+        "thinking-level": "max",
         "tools": ["read", "grep", "glob", "web_search"],
         "spawns": [],
         "autoloadSkills": [],
         "read-summarize": "false",
-    },
-    "hmasd-research-artifact-writer": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking-level": "medium",
-        "tools": ["read", "write", "edit", "grep", "glob"],
-        "spawns": [],
-        "autoloadSkills": [],
     },
 }
 
@@ -235,7 +225,8 @@ def _list_field(metadata: dict[str, FrontmatterValue], key: str) -> list[str]:
 def test_exact_project_agent_inventory_and_frontmatter() -> None:
     paths = sorted(AGENT_ROOT.glob("*.md"))
     assert {path.stem for path in paths} == set(EXPECTED_AGENTS)
-    assert len(paths) == 16
+    assert "hmasd-research-artifact-writer" not in {path.stem for path in paths}
+    assert len(paths) == 15
     for path in paths:
         metadata = _parse_frontmatter(path)
         expected = EXPECTED_AGENTS[path.stem]
@@ -277,6 +268,16 @@ def test_depth_two_graph_and_leaf_specialists() -> None:
         assert "hmasd-workflow-recovery-manager" not in spawns, name
     assert _list_field(parsed["hmasd-cm"], "spawns")[-1] == "librarian"
 
+def test_implementers_are_skillless_non_git_leaf_workers() -> None:
+    for name in ("hmasd-implementer", "hmasd-implementer-terra"):
+        metadata = _parse_frontmatter(AGENT_ROOT / f"{name}.md")
+        assert _list_field(metadata, "autoloadSkills") == []
+        body = " ".join(
+            (AGENT_ROOT / f"{name}.md").read_text(encoding="utf-8").lower().split()
+        )
+        assert "do not commit or push" in body
+        assert "unless explicitly assigned" not in body
+
 
 def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
@@ -305,12 +306,14 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     assert "bundled `librarian`" in instructions
     assert "hmasd-project-scout" in instructions
     assert "bundled `scout`" not in instructions
-    assert "task.enableEffort` remains disabled" in instructions
-    assert "highest supported tier" in instructions
     assert "session-init evidence" in instructions.lower()
     for manager in ("hmasd-em.md", "hmasd-cm.md"):
-        body = (AGENT_ROOT / manager).read_text(encoding="utf-8")
-        assert "must omit the `effort` field" in body
+        body = " ".join(
+            (AGENT_ROOT / manager).read_text(encoding="utf-8").lower().split()
+        )
+        assert "task` item" in body
+        assert "`effort`" in body
+        assert "omit" in body
 
 
 def test_eight_complete_skills_and_authority_files() -> None:
@@ -318,28 +321,24 @@ def test_eight_complete_skills_and_authority_files() -> None:
         "hmasd-root-control": (
             "portfolio.md",
             ".omp/runtime",
-            "bounded reassessment",
-            "next_action.owner",
-            "experiment_operator",
-            "ownerless",
-            "28",
-            "four root/review/recovery slots",
-            "idle",
-            "complete",
+            "one user-facing controller",
+            "singleton browsertransport mediation",
+            "bounded recovery",
         ),
         "hmasd-em-direction-cycle": (
-            "two specialists",
-            "up to four",
-            "divergent",
-            "local em synthesis",
-            "durable reference",
+            "material-cycle boundary",
+            "algorithm_principles.md",
+            "no default quota",
+            "exactly one pro innovator",
+            "exactly one pro convergence",
+            "returns frozen requests through root",
+            "common v1 envelope",
         ),
         "hmasd-cm-engineering-cycle": (
             "contract-first gate",
-            "exactly one implementer",
-            "evidence roles",
-            "status axes",
-            "singleton `browsertransport` service",
+            "exactly one appropriate implementer",
+            "singleton `hmasd-browser-transport` service",
+            "no mandatory engineering document suite",
         ),
         "hmasd-result-run": (
             "7200",
@@ -362,11 +361,11 @@ def test_eight_complete_skills_and_authority_files() -> None:
             "sent_unreadable",
         ),
         "hmasd-scientific-external-review": (
-            "mutually blind",
-            "in parallel",
-            "local em synthesis",
-            "root alone",
-            "unknown commitment",
+            "exactly one pro innovator",
+            "exactly one pro convergence",
+            "chatgpt pro",
+            "one fresh cycle has only these two pro operations",
+            "unknown commitment is terminal for sending",
         ),
         "hmasd-workflow-recovery": (
             "pure research task failed",
@@ -402,17 +401,7 @@ def test_eight_complete_skills_and_authority_files() -> None:
         assert _string_field(metadata, "name") == path.parent.name
         assert _string_field(metadata, "description")
         body = path.read_text(encoding="utf-8")
-        for heading in (
-            "## Purpose",
-            "## Inputs",
-            "## Bounded cycle",
-            "## State writes",
-            "## Returned result envelope",
-            "## Failure handling",
-            "## Deletion condition",
-        ):
-            assert heading in body, path
-        lower_body = body.lower()
+        lower_body = " ".join(body.lower().split())
         for anchor in expected_anchors[path.parent.name]:
             assert anchor in lower_body, (path, anchor)
 
@@ -446,27 +435,27 @@ def test_root_material_checkpoints_are_event_driven_scoped_and_pushed() -> None:
     for text in (instructions, root_skill, concept, implementation):
         lowered = text.lower()
         assert "event-driven" in lowered
-        assert "git add -a" in lowered
-        assert "unrelated" in lowered
-        assert "fetch" in lowered
         assert "omp/workflow" in lowered
+
+    instructions_lower = instructions.lower()
+    assert "git add -a" in instructions_lower
+    assert "unrelated" in instructions_lower
+    assert "fetch" in instructions_lower
 
     combined = "\n".join((instructions, root_skill, concept, implementation))
     assert "em:<direction>" in combined
     assert "cm:<direction>" in combined
     assert "unknown push" in combined.lower()
     assert "conflict" in combined.lower()
-    assert "report" in combined.lower()
-
+    root_skill_compact = " ".join(root_skill.lower().split())
     for trigger in (
-        "research or engineering round",
-        "accepted-result promotion",
-        "terminal-run evidence",
+        "completed research or engineering rounds",
+        "accepted-result or terminal-run evidence promotion",
         "external prompt/archive readiness",
-        "portfolio lifecycle change",
-        "schema migration",
+        "portfolio lifecycle changes",
+        "schema migrations",
     ):
-        assert trigger in root_skill.lower()
+        assert trigger in root_skill_compact
 
 
 def test_headless_advisor_boundary_is_deleted() -> None:
