@@ -46,28 +46,34 @@
       {
         "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
         "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      },
+      {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md",
+        "sha256": "b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f"
+      },
+      {
+        "path": "docs/external-review/directions/semigroup_consistent_duration_model_policy/9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
+        "sha256": "299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2"
       }
     ],
-    "kind": "AWAIT_USER_RESUME_FOR_OBSERVE_ONLY",
+    "kind": "AWAIT_USER_RESUME_FOR_LOCAL_ARCHIVE_REVIEW",
     "owner": "USER"
   },
   "phase": "WAITING",
   "question_sha256": "7506749d50500afe5c7108634aaa97e5975854ee8be239a53834be08a4116c55",
   "registry_revision_seen": 10,
-  "revision": 6,
+  "revision": 7,
   "schema_version": 2,
-  "updated_at": "2026-08-29T20:15:00Z",
+  "updated_at": "2026-08-29T23:57:31Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "COMPLETE",
-        "SENT_UNREADABLE",
-        "CONVERSATION_LOST",
-        "SENT_INPUT_MISMATCH",
-        "SENT_MODEL_MISMATCH"
+        "REVIEW_RESOLVED",
+        "HANDOFF_READY",
+        "OBJECTION_UNRESOLVED"
       ],
-      "kind": "PRO_CONVERGENCE_SENT_WAITING",
-      "ref": "agentify:chatgpt:operation=499b71d6-ca35-42d6-9aee-4c1202a7a82d;conversation=https://chatgpt.com/c/6a93307b-6410-83e8-b9e5-1ab428de2fc6"
+      "kind": "LOCAL_ARCHIVE_REVIEW_AFTER_RESUME",
+      "ref": "sha256:b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f;bytes=14118;path=docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md;archive=docs/external-review/directions/semigroup_consistent_duration_model_policy/9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json;archive_sha256=299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2"
     }
   ],
   "writer": "EM-semigroup_consistent_duration_model_policy"

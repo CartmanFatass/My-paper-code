@@ -46,28 +46,34 @@
       {
         "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
         "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+      },
+      {
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_RESPONSE_20260829.md",
+        "sha256": "c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162"
+      },
+      {
+        "path": "docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
+        "sha256": "4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
       }
     ],
-    "kind": "AWAIT_USER_RESUME_FOR_OBSERVE_ONLY",
+    "kind": "AWAIT_USER_RESUME_FOR_LOCAL_ARCHIVE_REVIEW",
     "owner": "USER"
   },
   "phase": "WAITING",
   "question_sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9",
   "registry_revision_seen": 10,
-  "revision": 5,
+  "revision": 6,
   "schema_version": 2,
-  "updated_at": "2026-08-29T20:15:00Z",
+  "updated_at": "2026-08-29T23:57:31Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "COMPLETE",
-        "SENT_UNREADABLE",
-        "CONVERSATION_LOST",
-        "SENT_INPUT_MISMATCH",
-        "SENT_MODEL_MISMATCH"
+        "REVIEW_RESOLVED",
+        "HANDOFF_READY",
+        "OBJECTION_UNRESOLVED"
       ],
-      "kind": "PRO_INNOVATOR_SENT_WAITING",
-      "ref": "agentify:chatgpt:operation=be82f31d-a7cc-4757-9dcb-1393653250fb;conversation=https://chatgpt.com/c/6a933040-034c-83e8-9e8c-9e83eed1c1fa"
+      "kind": "LOCAL_ARCHIVE_REVIEW_AFTER_RESUME",
+      "ref": "sha256:c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162;bytes=20745;path=docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_RESPONSE_20260829.md;archive=docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json;archive_sha256=4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
     }
   ],
   "writer": "EM-voronoi_quadrature_field_policy"

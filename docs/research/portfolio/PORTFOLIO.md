@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-29T20:15:00Z
+Updated at: 2026-08-30T00:03:05Z
 
 ## OMP non-control migration boundary
 
@@ -29,7 +29,8 @@ The controlling user state at this boundary is `PAUSE`:
   every other lifecycle, capacity, and scientific fact is unchanged.
 
 Safe-boundary facts consumed from
-`docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md`:
+`docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md`, with
+non-sending Agentify migration recovery at `2026-08-30T00:03:05Z`:
 
 - `dual_epoch_receipt_survival` / DEARS reached terminal R02 science before the PAUSE boundary;
   there is no live Effect. On RESUME, do not reopen R02; Portfolio must consume the terminal result
@@ -37,17 +38,29 @@ Safe-boundary facts consumed from
 - `semigroup_consistent_duration_model_policy` / SCDMP is retained at
   `SYNTHESIS_READY / WAITING_REENTRY`. Convergence operation
   `499b71d6-ca35-42d6-9aee-4c1202a7a82d` in conversation
-  `https://chatgpt.com/c/6a93307b-6410-83e8-b9e5-1ab428de2fc6` is `SENT_WAITING`; on RESUME it is
-  observe-only for the same operation/conversation, never resend or replace.
+  `https://chatgpt.com/c/6a93307b-6410-83e8-b9e5-1ab428de2fc6` is same-operation Agentify strict
+  `NATURAL_COMPLETION_VERIFIED` after `verifyExisting`, with response text SHA-256
+  `b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f` and imported archive
+  `docs/external-review/directions/semigroup_consistent_duration_model_policy/9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json`
+  SHA-256 `299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2`. On RESUME it is
+  local archive review and EM disposition only; never resend or replace.
 - `voronoi_quadrature_field_policy` / VQFP is retained at `SCOPE_FROZEN / WAITING_REENTRY`.
   Innovator operation `be82f31d-a7cc-4757-9dcb-1393653250fb` in conversation
-  `https://chatgpt.com/c/6a933040-034c-83e8-9e8c-9e83eed1c1fa` is `SENT_WAITING`; on RESUME it is
-  observe-only for the same operation/conversation, never resend or replace.
+  `https://chatgpt.com/c/6a933040-034c-83e8-9e8c-9e83eed1c1fa` is same-operation Agentify strict
+  `NATURAL_COMPLETION_VERIFIED` after `verifyExisting`, with response text SHA-256
+  `c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162` and imported archive
+  `docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json`
+  SHA-256 `4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c`. On RESUME it is local
+  archive review and EM disposition only; never resend or replace.
 - `opportunity_normalized_lease_gated_rebinding` / ONLGR is retained at
-  `SYNTHESIS_READY / WAITING_REENTRY`. Its Convergence response archive is certified as 16,185
-  bytes with SHA-256 `33143f2857ddc9a4504098c51964093d609b44177f3a1c08a90783be60fb58e3`, but EM
-  had not read/dispositioned it after PAUSE. On RESUME, only local archive revalidation and EM
-  objection disposition are authorized; no provider operation is permitted.
+  `SYNTHESIS_READY / WAITING_REENTRY`. Its Convergence operation
+  `5ab3f06b-1660-457a-a0a7-d153559dd667` is same-operation Agentify strict
+  `NATURAL_COMPLETION_VERIFIED` after `verifyExisting`, with response text certified as 16,574 bytes
+  and SHA-256 `26e953e72c914a842b7a1904c39e76efd016b405f69462ea55ef4e5e4189fcf7`; imported archive
+  `docs/external-review/directions/opportunity_normalized_lease_gated_rebinding/80856894e5a297f1c755/chatgpt/NATURAL_COMPLETION_ARCHIVE.json`
+  has SHA-256 `433aa6928f98b47833371a34b25ebf4365066d4646aeb6c02f17bbfd5200f231`. EM had not
+  read/dispositioned it after PAUSE. On RESUME, only local archive revalidation and EM objection
+  disposition are authorized; no provider operation is permitted.
 
 ## Imported 33-direction scientific portfolio
 
@@ -85,7 +98,7 @@ how to stage a valuable question, not whether that question has value.
 | field_slot_coordination | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The slot-plus-critical-member residual is a promising representation primitive but lacks a finite independent scientific object. Portfolio closes the standalone label and retains the primitive as a future SGSP gate; no scientific polarity transfers. |
 | finite_semantic_boundary_support | PARKED | MEDIUM | NONE | 2026-08-29T16:26:22Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal R02 at `SCOPE_FROZEN / TERMINAL_GAP`. Its zero-send Pro gap supplies no polarity, but two independent local routes find the normalized AUTHENTIC and PREDICTIVE_INDEX processes pathwise identical and the proposed REASSOCIATED matching tuple internally inconsistent because it conditions on the emitted hint. Stop investing in the same equal-information carrier-access interface. Re-open only with consultation availability and a genuinely new causal edge in which binding changes permitted accessibility, authorization outcome, failure behavior or acquisition cost beyond an ordinary index; do not repair or rerun R01/R02. |
 | metric_ground_transport_allocation | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Two matched-support extensions remained nonstationary at the frozen inference boundary, so efficacy was not identifiable. Reusable sample-split and fail-closed infrastructure may transfer, but the direction does not reopen. |
-| opportunity_normalized_lease_gated_rebinding | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:00:05Z | Readiness `WAITING-REENTRY`. Retain the exact seven-tick robustness WORK at `SYNTHESIS_READY`: Innovator is COMPLETE and the sole Convergence operation is `SENT_WAITING`. A readable page extraction is quarantined until same-operation causal archive certification succeeds. Earlier exact evidence narrowed the object from exponential/lease/rebinding specificity to a generic physical-rate hypothesis; the transport gap changes no science, lifecycle, priority or capacity. |
+| opportunity_normalized_lease_gated_rebinding | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T16:00:05Z | Readiness `WAITING-REENTRY`. Retain the exact seven-tick robustness WORK at `SYNTHESIS_READY`: Innovator is COMPLETE and the sole Convergence operation `5ab3f06b-1660-457a-a0a7-d153559dd667` is same-operation Agentify strict `NATURAL_COMPLETION_VERIFIED`. The verified response text is 16,574 bytes with SHA-256 `26e953e72c914a842b7a1904c39e76efd016b405f69462ea55ef4e5e4189fcf7`; the imported natural-completion archive is `docs/external-review/directions/opportunity_normalized_lease_gated_rebinding/80856894e5a297f1c755/chatgpt/NATURAL_COMPLETION_ARCHIVE.json` with SHA-256 `433aa6928f98b47833371a34b25ebf4365066d4646aeb6c02f17bbfd5200f231`. Earlier exact evidence narrowed the object from exponential/lease/rebinding specificity to a generic physical-rate hypothesis; transport completion changes no science, lifecycle, priority or capacity. |
 | optimizer_entropy_exposure_boundary_relay | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Optimizer-history carry changes later learning, but entropy exposure was not independently exposed. Portfolio closes standalone OEER and retains CARRY/FRESH optimizer history as a CRTO/RISP/SCDMP control; no scientific polarity transfers. |
 | orbit_shadow_read | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Owner-role binding reached the kernel but has no independent return-bearing value. Portfolio closes standalone Orbit and retains the primitive as DEARS provenance. |
 | recct_lite | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Authentication was exposed but left/right target interventions were identical and target effect was zero. Portfolio closes standalone RECCT and retains the target-expressibility cut as FSBS/EGRCR evidence; no positive credit claim transfers. |
@@ -94,11 +107,11 @@ how to stage a valuable question, not whether that question has value.
 | roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
 | semantic_graphon_shared_policy | REGISTERED | HIGH | NONE | 2026-08-29T17:25:41Z | Readiness `REENTRY-REQUIRED`. Portfolio consumes terminal short-gate WORK `SGSP-RG2Z-RSCF-SHORT-GATE-20260829-01` at `SCOPE_FROZEN / TERMINAL_GAP`. Innovator completed, but mandatory Convergence exhausted its replacement boundary with `SENT_INPUT_MISMATCH`; this supplies no scientific polarity. The strongest provisional observation is that no identified meaning-preserving discriminator fits the complete short-gate ceiling, while the smallest outcome-bearing learned projection-contact arm remains roughly 60-250 CPU core-hours. Preserve SGSP's high-value relational question without purchasing or closing it. Reentry requires the explicit user waiver/override named by the terminal result or a materially new Portfolio question; cost and transport alone cannot PARK or CLOSE it. |
-| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | EM | 2026-08-29T18:32:37Z | Readiness `LIVE`. Fresh Sol/max EM `01a04ec6-0cd2-74f3-b589-09083ae7670c` owns cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02`. One prospective law must jointly define the 16-state opportunity draw as a single-valued distribution and separate candidate-action selection from held-out expected-value estimation. It must preserve the noncommuting event/action semantics, require the order-erased foundation competence gate first, and stop before adapter, training or empirical activity if no coherent one-correction law survives. The exhausted native-I/C/O prompt and operations are not reused. |
+| semigroup_consistent_duration_model_policy | ACTIVE | ADVANCING | EM | 2026-08-29T18:32:37Z | Readiness `LIVE`. Fresh Sol/max EM `01a04ec6-0cd2-74f3-b589-09083ae7670c` owns cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02`. One prospective law must jointly define the 16-state opportunity draw as a single-valued distribution and separate candidate-action selection from held-out expected-value estimation. It must preserve the noncommuting event/action semantics, require the order-erased foundation competence gate first, and stop before adapter, training or empirical activity if no coherent one-correction law survives. Migration recovery verified same-operation Pro Convergence natural completion: response text SHA-256 `b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f`, imported archive `docs/external-review/directions/semigroup_consistent_duration_model_policy/9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json` SHA-256 `299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2`. PAUSE blocks scientific intake until local archive review and EM disposition. The exhausted native-I/C/O prompt and operations are not reused. |
 | ucope | PARKED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `REENTRY-REQUIRED`. The exact R03 fixed-budget object is exhausted after 90/90 learned support failures, but this is nonidentification rather than evidence against acquisition. Re-open only on a genuinely new support-qualified host with prospective acquisition value and adequate learned support. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
-| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:21:12Z | Readiness `WAITING-REENTRY`. Retain EM `01a04e22-2f5a-7423-8b60-95d35d150109` and cycle `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Three independent routes preserve a proof-sized K1={3/4} candidate with exact held-out headroom and reassociation-loss witnesses, while proving uniform-only geometry is absorbed by MASS; aggregate margins and the selected competent FREE comparison remain unobserved. The user-visible `Pro` premise is resolved, but the fresh authorized Innovator operation also ended `ZERO_SEND_FAILED`: the new-chat composer contained an unknown 6,747-character stale draft that ordinary navigation did not clear, so Browser Transport correctly refused destructive mutation. Both operations have zero sends, no conversation/archive and no live Effect. Resume only after the unknown draft is independently preserved or safely cleared on a newly verified empty root and one later exact owner control authorizes a fresh operation, or on explicit waiver. No third operation is currently authorized; this transport gap changes no science, lifecycle, priority or capacity. |
+| voronoi_quadrature_field_policy | ACTIVE | ADVANCING | PORTFOLIO | 2026-08-29T17:21:12Z | Readiness `WAITING-REENTRY`. Retain EM `01a04e22-2f5a-7423-8b60-95d35d150109` and cycle `2026-08-29.8-portfolio-vqfp-proof-gate-01`. Three independent routes preserve a proof-sized K1={3/4} candidate with exact held-out headroom and reassociation-loss witnesses, while proving uniform-only geometry is absorbed by MASS; aggregate margins and the selected competent FREE comparison remain unobserved. Migration recovery verified the authorized Innovator operation `be82f31d-a7cc-4757-9dcb-1393653250fb` as same-operation Agentify strict `NATURAL_COMPLETION_VERIFIED`: response text SHA-256 `c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162`, imported archive `docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json` SHA-256 `4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c`. PAUSE blocks scientific intake until local archive review and EM disposition; this transport completion changes no science, lifecycle, priority or capacity. |
 | vsp_02 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Carry/reset paths differ but exact success sets match. Portfolio closes standalone VSP-02 and retains lifecycle/optimizer-history controls for CRTO/RISP/SCDMP. |
 | vsp_03 | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. No authenticated causal deployment-event seam or runtime activity exists. Its negative interface census remains provenance; no independent mechanism is actionable. |
 | vsp_04 | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. The finite-cell certificate is useful only after rows are generated from an authenticated host; declared-row ancestry was circular. Portfolio closes standalone VSP-04 and retains the solver/certificate control for FSBS. |
@@ -130,17 +143,15 @@ set is:
   on the frozen non-divisible clock cell, does any link-specific return survive common executed-rate
   and age-conditioned ceilings?
 
-Operational liveness is separate from allocation and lifecycle. At `2026-08-29T18:35:33Z`, CRTO
-EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` is terminal and its slot is released. SCDMP EM
-`01a04ec6-0cd2-74f3-b589-09083ae7670c` and DEARS EM
-`01a04e94-b3e0-77e2-ae27-6b29df5dad1a` are natively active. ONLGR's EM is idle but its
-already-sent Convergence operation
-`5ab3f06b-1660-457a-a0a7-d153559dd667` remains the sole unresolved provider Effect at
-`SENT_WAITING`; it requires same-operation, same-conversation `OBSERVE_ONLY` archive
-certification. VQFP is idle `WAITING_REENTRY` with zero-send transport facts and no live Effect; its
-current reentry is safe preservation/clearance of an unattributed stale composer draft. SGSP has
-terminalized and does not occupy capacity. Root owns shared transport repair; no transport fact
-changes lifecycle or scientific priority.
+Operational liveness is separate from allocation and lifecycle. At the `2026-08-29T18:35:33Z`
+source boundary, CRTO EM `01a04e91-e1bf-7791-bc1a-2a69c5b4bf39` was terminal and its slot was
+released; source-native SCDMP and DEARS EM facts remain provenance only after OMP migration. Current
+OMP runtime has no live imported EM/CM session: stale runtime agent rows were retired, and the four
+legacy assignment worktrees were archived before exact release. SCDMP, VQFP and ONLGR provider
+Effects are terminal same-operation Agentify strict `NATURAL_COMPLETION_VERIFIED` results and now
+require only local archive review plus EM disposition after RESUME. DEARS has no retained provider or
+run Effect. SGSP has terminalized and does not occupy capacity. Root owns shared transport repair; no
+transport, runtime or worktree cleanup fact changes lifecycle or scientific priority.
 
 The scientific reserve order after these activations keeps DISH as the highest raw-value reserve,
 but not as a currently dispatchable refill: no materially new bounded EM question can change its
