@@ -384,5 +384,3 @@ def test_recovery_attempt_deduplication_and_exhaustion_emit_one_precise_blocker(
     skill = _recovery_skill()
     for term in ("duplicate", "distinct", "budget", "exhaust", "blocker", "resume"):
         assert term in skill
-
-
