@@ -2,7 +2,7 @@
 name: hmasd-em
 description: Direction-scoped scientific research manager.
 model: openai-codex/gpt-5.6-sol
-thinking-level: high
+thinking-level: max
 tools:
   - read
   - write

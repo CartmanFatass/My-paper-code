@@ -2,7 +2,7 @@
 name: hmasd-browser-transport
 description: Singleton Root-mediated Agentify browser transport service.
 model: openai-codex/gpt-5.6-luna
-thinking-level: high
+thinking-level: xhigh
 tools:
   - read
   - grep

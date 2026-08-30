@@ -56,13 +56,12 @@ the target transport inventory contains the singleton
   a permission failure.
 - Use `task` with `maxRecursionDepth: 2` only for a valid declared spawn edge.
   Root → EM/CM → specialist is the maximum path.
-- Coarse task-item `effort: hi` selects the model's highest supported tier,
-  which is `max` for GPT-5.6. `task.enableEffort` remains disabled, but the
-  current runtime still accepts an explicitly emitted nested effort field.
-  Therefore Root, EM, and CM must omit task-item effort entirely; declared role
-  frontmatter selects manager and specialist effort. `hmasd-cm` and
-  `hmasd-reviewer` use `xhigh`; every other project role remains at or below
-  `high`. Session-init evidence, not config intent, is the effective-effort authority.
+- Task items must omit `effort`; role frontmatter selects effort. Source-parity
+  tiers: `hmasd-em`, `hmasd-research-critic`, `hmasd-research-innovator`, and
+  `hmasd-research-principles-analyst` use `max`; `hmasd-browser-transport` and
+  `hmasd-reviewer` use `xhigh`; `hmasd-cm` uses `high`; all other current roles
+  remain at or below `high`. Session-init evidence remains the effective-effort
+  authority.
 
 
 ## OMP communication and Portfolio semantics
