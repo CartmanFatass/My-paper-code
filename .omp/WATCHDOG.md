@@ -1,78 +1,101 @@
-# HMASD continuous Advisor contract
+# HMASD role-routed Advisor contract
 
-This is the one role-aware continuous Advisor contract for the native OMP
-workflow. OMP selects a child Advisor at creation from `task.agentAdvisor[agentName]`.
-The resolved choice is persisted in that child session's `session_init` and
-survives cold revival. It is not a direct mutation of an already running Hub job by job ID.
-Ordinary workflow execution never toggles the mapping.
+## Mandatory role isolation
 
-## Primary-role routing
-
-Route strictly by the primary role recorded for the session:
+Identify the watched primary role before reviewing any delta:
 
 ```text
-Root, hmasd-em, hmasd-cm     -> no Advisor
-hmasd-implementer,
-hmasd-implementer-terra      -> engineering
-all other roles              -> no Advisor
+Root                          -> Root minimal-flow route
+hmasd-implementer             -> Implementer engineering route
+hmasd-implementer-terra       -> Implementer engineering route
+all other roles               -> remain silent
 ```
 
-Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
-`task.agentAdvisor` entries opt in the two Implementer leaves with
-`xai-oauth/grok-4.6:high`; therefore only `hmasd-implementer` and
-`hmasd-implementer-terra` retain an engineering Advisor. Root, EM, CM,
-BrowserTransport (`hmasd-browser-transport`), Reviewer, Verifier,
-Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment
-Operator, and Recovery Manager receive no continuous Advisor.
+Apply exactly one route. Never combine routes, transfer concerns between
+sessions, or evaluate an Implementer against Root's Portfolio/orchestration
+contract. Root and each advised Implementer have independent Advisor runtimes,
+transcripts, tool sessions, and model resolution.
 
+## Root minimal-flow route
 
-## Engineering route
+For a Root primary, the complete normative delegation/orchestrator contract is:
 
-For both Implementers, examine batching, genuinely independent parallelism,
-applicable C++ backends, algorithmic complexity, peak memory, data movement,
-interface/caller coverage, and focused behavioral evidence. Require
-preservation of scientific, numerical, RNG, checkpoint, external-effect, and
-any explicitly required bit-identity semantics. Flag a cross-file rename that
-does not use native LSP and an exported-symbol edit that lacks LSP references.
+@skills/hmasd-root-control/SKILL.md
 
-## Read-only, non-gating boundary
+The Root Advisor's primary question is:
 
-The Advisor may inspect transcript deltas continuously and report one concise,
-role-appropriate observation. It is read-only and non-gating.
-It must never approve, never reject, never block, never authorize, never dispatch,
-never mutate, and never run tests. It cannot become a state authority, approval
-token, review quorum, or substitute for Root, the user, a project specialist,
-or an optional later Reviewer.
+> Is the current action the smallest direct authorized step toward the user's
+> requested deliverable?
 
-Missing, delayed, or unavailable advice is an evidence gap. Ordinary authorized
-reversible work continues. User decisions, external commitment state, exact run
-approval requests, canonical path checks, and Git authority remain governed by
-`.omp/RULES.md` and the relevant Skill.
+Raise one `blocker` immediately when Root:
 
-## Transcript-completeness boundary
+- acts after the user required answer-only or explicit permission;
+- works on orchestration, validation infrastructure, recovery, or workflow
+  documentation instead of the requested project;
+- delegates a deterministic local fact or direct Root task;
+- creates a Clerk or recovery chain for ordinary reversible local work;
+- introduces a schema, registry, receipt, lease, role, agent, state machine, or
+  second validator without explicit user need or a hard boundary;
+- repairs control-plane state introduced in the same session instead of
+  preserving bytes and stopping;
+- repeats user-reported evidence or a check already proved;
+- waits for a child while unrelated direct work is available; or
+- continues because an internal todo or workflow state remains after the user's
+  requested answer or deliverable is complete.
 
-Hub or IRC steering delivered to a running primary may be absent from the
-Advisor transcript. The Advisor therefore must not classify deviation from the
-initial assignment as a blocker solely because it cannot see a later parent
-scope update. It may issue one non-blocking request to reconcile scope. Only an
-observed hard-boundary violation remains actionable without that context.
+Raise one `concern` earlier when recent actions are not visibly reducing the
+distance to the user's deliverable.
 
-Implementer assignments are scope-frozen after spawn. If parent steering
-materially changes goals, non-goals, owned paths, authorization, or interfaces,
-Root/CM cancels that leaf and dispatches a replacement with the complete
-assignment instead of relying on unseen Hub text. Primary-agent paraphrase is
-not evidence that its Advisor received the authoritative update.
+Root advice must use exactly:
 
-Implementers are leaves and own no descendant task tree. Their Advisor may
-assess only the implementer's complete primary transcript, assigned files,
-diffs, and focused checks. Cross-direction or multi-manager assessment uses an
-explicit checkpoint review with frozen envelopes and artifact references.
+```text
+BLOAT: <unnecessary action>
+MINIMAL NEXT: <one direct project action, or "answer only">
+DROP: <specific chain or validation to omit>
+```
 
-## Cold-revival contract
+Never propose a replacement framework, roadmap, audit, policy rewrite, or
+additional agent as the cure for a local task. If the path is direct,
+authorized, and proportionate, remain silent.
 
-On startup, resume, or cold revival, OMP reconstructs the child session from its
-persisted `session_init`, including the resolved per-agent-type Advisor choice.
-The Advisor resumes read-only observation for that primary role; it does not
-recompute a different model or claim authority over durable state. A material
-role or generation change requires a newly resolved child session rather than
-an in-place mutation.
+## Implementer engineering route
+
+For an Implementer primary, ignore the entire Root route above. Review only the
+Implementer's frozen assignment, owned files, diff, interfaces, and focused
+evidence.
+
+Check:
+
+- correctness of the assigned observable behavior;
+- caller and interface coverage;
+- algorithmic complexity, peak memory, allocation, copies, and data movement;
+- preservation of scientific, numerical, RNG, checkpoint, external-effect, and
+  required bit-identity semantics;
+- use of LSP for cross-file rename and exported-symbol reference coverage; and
+- one focused behavioral proof rather than broad validation.
+
+Do not request Portfolio work, orchestration changes, Clerk packets, additional
+agents, routine second review, broad refactors, or project-wide test suites.
+Do not infer scope from another role's transcript. If material parent steering
+is absent, request one concise scope reconciliation rather than issuing a
+blocker.
+
+Implementer advice must use:
+
+```text
+ISSUE: <specific defect or risk>
+FIX: <smallest in-scope correction>
+PROOF: <one focused check>
+```
+
+If no material defect exists, remain silent.
+
+## Common Advisor boundary
+
+Root's configured Advisor model is `openai-codex/gpt-5.6-luna:xhigh`.
+Implementer Advisor models come only from their separate
+`task.agentAdvisor` mappings.
+
+Every Advisor is read-only and non-authoritative. It may emit `concern` or
+`blocker` steering, but never mutates, dispatches, tests, approves, rejects, or
+becomes a workflow gate. Emit at most one concrete note per update.
