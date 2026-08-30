@@ -1,9 +1,30 @@
 {
   "direction_id": "opportunity_normalized_lease_gated_rebinding",
-  "revision": 3,
-  "rounds": [],
+  "revision": 4,
+  "rounds": [
+    {
+      "completed_at": null,
+      "created_at": "2026-08-30T21:08:31Z",
+      "evidence_set_sha256": "a456a131a3f1def6712909f7226f9748418d41737fa54fbe74464d8e94ad47be",
+      "local_synthesis_ref": null,
+      "prompt_refs": {
+        "pro_convergence": null,
+        "pro_innovator": {
+          "path": "docs/external-review/directions/opportunity_normalized_lease_gated_rebinding/08f0591800eeb4f9b4b0/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+          "sha256": "77731a3862be8c31e1fa0e16e1d01697f24937043cba92b95008ac5fc1455c66"
+        }
+      },
+      "providers": {
+        "pro_convergence": null,
+        "pro_innovator": null
+      },
+      "question_sha256": "2cb6cb88afda93bd778ad253f85a2b19f29bf4e9468667a4c56055c57fbd6f01",
+      "round_id": "08f0591800eeb4f9b4b0",
+      "status": "INNOVATOR_PENDING"
+    }
+  ],
   "schema_version": 4,
-  "updated_at": "2026-08-30T17:19:16Z",
+  "updated_at": "2026-08-30T21:08:31Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-opportunity_normalized_lease_gated_rebinding"
 }

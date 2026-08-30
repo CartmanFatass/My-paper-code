@@ -112,22 +112,54 @@ The meaning-complete but inert engineering request is:
   (SHA-256
   `3bfc9c1142cc9b349a7e304d5434e5b041d9fdff7e67326c3298bf58cc49f58b`).
 
-No Effect is authorized by those bytes. The current external-review index is
-schema v4 revision 3 with no round; the fresh Innovator is not registered or
-waived, and Convergence is not eligible before later local synthesis. After
-Root accepts and integrates this exact semantic product, a new EM assignment
-must resolve the neutral Innovator or an exact user waiver before any
-same-direction CM dispatch. CM additionally waits for the exact accepted EM
-`integrated_sha`; a later result waits for technically accepted CM integration
-and one separately authorized Experiment Operator. EM alone interprets a
-returned tuple, and only then may local synthesis precede Convergence.
+No Effect is authorized by the scope, readiness amendment, or engineering
+request bytes. External-review index v4 revision 4 now registers canonical
+round `08f0591800eeb4f9b4b0` as `INNOVATOR_PENDING`, with source-only prompt
+`docs/external-review/directions/opportunity_normalized_lease_gated_rebinding/08f0591800eeb4f9b4b0/pro_innovator/PRO_INNOVATOR_PROMPT.md`
+(SHA-256
+`77731a3862be8c31e1fa0e16e1d01697f24937043cba92b95008ac5fc1455c66`).
+The index SHA-256 is
+`7794eab12240dd529dcb0b9e9e536dc67a1dfeb31263bb8ffad49ea55e21f9e0`;
+both provider slots, the Convergence prompt, and local synthesis remain null.
 
-The direction-level recommendation to Root is conditional `CONTINUE` through
-that one bounded evidence path. Readiness removes a local identification
-obstacle but is not transfer evidence and does not retain a Portfolio slot by
-outcome. Valid adverse, null, ambiguous, or positive evidence updates only the
-smallest frozen proposition; invalidity, technical failure, review
-availability, runtime, Git, and transport facts supply no scientific polarity.
+The inert Root-return Transport request is
+`docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-pro-innovator-request.md`
+(SHA-256
+`37232d0577a9b430996b3eb658038eb1d49823e07712494d0e3ba6ee9bf3eded`).
+It freezes separate ChatGPT axes `productModel=GPT-5.6 Sol` and
+`reasoningEffort=Pro`, one new stable/idempotency identity, request fingerprint
+`25d7cbc4effc97305aae37f0f1033c2937757eaa4c31835c762e4fc886f2f6b5`,
+stage-owned `response.md` and `operation_ref.json` destinations, a one-operation
+budget, and unknown-commitment no-resend semantics. Authoring and registration
+created no provider action, Agentify operation, held-out access, waiver,
+scientific finding, or claim increase.
+
+Root has separately observed a material-compatible Portfolio `CONTINUE` at
+SHA-256
+`ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d`,
+tracked registry revision 23 at SHA-256
+`cd3f1f7b34a84e8c0747eeb9e9da3a65c165c896812598c9acfb964e2ca66be2`,
+and target `d3c35c8a207f83099f956c5a5df11b7d5b29491e`. These are workflow
+facts only; the assigned base, frozen science, round, request, decision
+function, and claim ceiling do not change.
+
+The exact next owner is `TRANSPORT` through Root. Activation waits for Root to
+accept the candidate integration, validate every content ref and the still-null
+provider slot, and prove the stable and idempotency keys unused in Agentify's
+sole ledger. A changed input, prior operation, held-out access, or unresolved
+commitment stops without replacement or resend. The same-direction CM remains
+blocked until terminal EM disposition of this Innovator and the exact accepted
+EM `integrated_sha`; a later result additionally waits for technically accepted
+CM integration and one separately authorized Experiment Operator. EM alone
+interprets returned evidence, and only then may local synthesis precede the
+still-required Convergence stage.
+
+The direction-level recommendation remains conditional `CONTINUE` through that
+one bounded evidence path. Readiness is not transfer evidence and does not
+retain a Portfolio slot by outcome. Valid adverse, null, ambiguous, or positive
+evidence updates only the smallest frozen proposition; invalidity, technical
+failure, review availability, runtime, Git, and transport facts supply no
+scientific polarity.
 
 ## Resolved successor 04 seven-tick robustness question
 

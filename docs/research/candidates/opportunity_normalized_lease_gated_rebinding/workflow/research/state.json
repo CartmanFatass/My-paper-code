@@ -1,49 +1,84 @@
 {
   "actionable": false,
   "active_agents": [],
-  "active_round_id": null,
+  "active_round_id": "08f0591800eeb4f9b4b0",
   "blockers": [],
-  "cycle_boundary": "FRESH_MATERIAL_CYCLE",
+  "cycle_boundary": "CONTINUATION",
   "cycle_id": "2026-08-30-portfolio-r19-onlgr-heldout-transfer-01",
   "direction_id": "opportunity_normalized_lease_gated_rebinding",
   "direction_ref": {
     "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-    "sha256": "feeb06876b1fd5fd24b678cb8c13ef5cc16292d32f3413a7e20e3d9455b62f7a"
+    "sha256": "0caef0d3915619750dfda0be81b8688ad235905106bf7f915476c524b151bf5b"
   },
-  "engineering_request": null,
-  "evidence_set_sha256": "5c3850e02e6157c5ea5313480ad9f14c874bb6e7459f9d52728f01a51792d731",
-  "last_checkpoint_sha": "c2831053ecd59d37fbe434f88d93dad8beaf0ae6c58eef5153b2efece27ffdd4",
+  "engineering_request": {
+    "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/research/engineering-request.md",
+    "sha256": "3bfc9c1142cc9b349a7e304d5434e5b041d9fdff7e67326c3298bf58cc49f58b"
+  },
+  "evidence_set_sha256": "a456a131a3f1def6712909f7226f9748418d41737fa54fbe74464d8e94ad47be",
+  "last_checkpoint_sha": "0caef0d3915619750dfda0be81b8688ad235905106bf7f915476c524b151bf5b",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/DIRECTION.md",
-        "sha256": "feeb06876b1fd5fd24b678cb8c13ef5cc16292d32f3413a7e20e3d9455b62f7a"
+        "sha256": "0caef0d3915619750dfda0be81b8688ad235905106bf7f915476c524b151bf5b"
+      },
+      {
+        "path": "docs/external-review/directions/opportunity_normalized_lease_gated_rebinding/08f0591800eeb4f9b4b0/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+        "sha256": "77731a3862be8c31e1fa0e16e1d01697f24937043cba92b95008ac5fc1455c66"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-pro-innovator-request.md",
+        "sha256": "37232d0577a9b430996b3eb658038eb1d49823e07712494d0e3ba6ee9bf3eded"
+      },
+      {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/external-review/index.json",
+        "sha256": "7794eab12240dd529dcb0b9e9e536dc67a1dfeb31263bb8ffad49ea55e21f9e0"
       },
       {
         "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-scope-and-grounding.md",
         "sha256": "c2831053ecd59d37fbe434f88d93dad8beaf0ae6c58eef5153b2efece27ffdd4"
       },
       {
-        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-handoff-intake-g3.md",
-        "sha256": "4ea914897384f7c7e8390b988820acf91c4edb398ac9efc980bbef0ad25dccf0"
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-geometry-readiness-g4.md",
+        "sha256": "ae53a9038e534c5b8b3b3238378a8eaad95981fa594d059987756455f3866c6a"
       },
       {
-        "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "376398b580fb153d19a50cb6500f622b05d72af32377cd127314cd1f514faced"
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/research/engineering-request.md",
+        "sha256": "3bfc9c1142cc9b349a7e304d5434e5b041d9fdff7e67326c3298bf58cc49f58b"
       },
-      "base-sha:02ccfd4c023371acbc8f303fe9b7f9c1722528a0",
-      "worktree-ref:wt-opportunity_normalized_lease_gated_rebinding-research-onlgr-transfer-freeze-g4",
-      "integration-barrier:vqfp-current-shared-slot"
+      "assignment-base:ccfd4849378b08af253b92f8a581c95d558d7312",
+      "accepted-scientific-checkpoint:889d226be6584413809784e3b0aff09615d90b02",
+      "root-target:d3c35c8a207f83099f956c5a5df11b7d5b29491e",
+      "root-observed-portfolio-sha256:ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d",
+      "root-observed-registry-revision:23-sha256:cd3f1f7b34a84e8c0747eeb9e9da3a65c165c896812598c9acfb964e2ca66be2"
     ],
-    "kind": "ROOT_INTEGRATE_DIRECTION_SCOPE_CANDIDATE",
-    "owner": "ROOT"
+    "kind": "SUBMIT_FROZEN_PRO_INNOVATOR",
+    "owner": "TRANSPORT"
   },
-  "phase": "SCOPING",
+  "phase": "DIVERGENT_REVIEW",
   "question_sha256": "2cb6cb88afda93bd778ad253f85a2b19f29bf4e9468667a4c56055c57fbd6f01",
-  "registry_revision_seen": 19,
-  "revision": 6,
+  "registry_revision_seen": 23,
+  "revision": 7,
   "schema_version": 2,
-  "updated_at": "2026-08-30T12:34:01Z",
-  "waiting_on": [],
+  "updated_at": "2026-08-30T21:13:03Z",
+  "waiting_on": [
+    {
+      "expected_terminal_states": [
+        "COMPLETE",
+        "ZERO_SEND_FAILED",
+        "COMMITMENT_UNKNOWN",
+        "SENT_WAITING",
+        "SENT_INPUT_MISMATCH",
+        "SENT_MODEL_MISMATCH",
+        "SENT_UNREADABLE",
+        "CONVERSATION_LOST"
+      ],
+      "kind": "PRO_INNOVATOR_TRANSPORT",
+      "ref": {
+        "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-pro-innovator-request.md",
+        "sha256": "37232d0577a9b430996b3eb658038eb1d49823e07712494d0e3ba6ee9bf3eded"
+      }
+    }
+  ],
   "writer": "EM-opportunity_normalized_lease_gated_rebinding"
 }
