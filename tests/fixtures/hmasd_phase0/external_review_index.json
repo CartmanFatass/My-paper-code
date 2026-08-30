@@ -23,7 +23,7 @@
       "status": "INNOVATOR_PENDING"
     }
   ],
-  "schema_version": 2,
+  "schema_version": 4,
   "updated_at": "2026-08-24T00:00:00Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-example-direction"

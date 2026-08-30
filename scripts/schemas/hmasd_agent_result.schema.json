@@ -18,14 +18,14 @@
     "artifact_refs",
     "checkpoint_sha",
     "decision_requests",
-    "next_action",
+    "next_actions",
     "payload"
   ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
+    "schema_version": { "type": "integer", "const": 2 },
     "role": {
       "type": "string",
-      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|browser-transport|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager))$"
+      "pattern": "^(?:root|librarian|hmasd-(?:em|cm|clerk|browser-transport|git-integration|project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager))$"
     },
     "logical_identity": { "$ref": "#/$defs/logical_identity" },
     "generation": { "type": "integer", "minimum": 1 },
@@ -43,8 +43,9 @@
       "type": "array",
       "items": { "$ref": "#/$defs/decision_request" }
     },
-    "next_action": {
-      "anyOf": [{ "$ref": "#/$defs/next_action" }, { "type": "null" }]
+    "next_actions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/action" }
     },
     "payload": {
       "oneOf": [
@@ -59,14 +60,15 @@
         { "$ref": "#/$defs/run_payload" },
         { "$ref": "#/$defs/transport_payload" },
         { "$ref": "#/$defs/artifact_payload" },
-        { "$ref": "#/$defs/recovery_payload" }
+        { "$ref": "#/$defs/recovery_payload" },
+        { "$ref": "#/$defs/clerk_payload" }
       ]
     }
   },
   "$defs": {
     "logical_identity": {
       "type": "string",
-      "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$"
+      "pattern": "^(?:Root|BrowserTransport|Clerk-[a-z0-9][a-z0-9-]{1,127}|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$"
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },
@@ -98,6 +100,32 @@
       "type": "string",
       "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
     },
+    "transport_identity": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$"
+    },
+    "nullable_transport_identity": {
+      "anyOf": [{ "$ref": "#/$defs/transport_identity" }, { "type": "null" }]
+    },
+    "transport_failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locus", "code"],
+      "properties": {
+        "locus": {
+          "type": "string",
+          "enum": ["NONE", "SPEC", "AUTH", "TAB_OWNERSHIP", "PRECOMMIT_UI", "COMMIT_BOUNDARY", "TURN_CONFIRMATION", "RESPONSE", "ARCHIVE"]
+        },
+        "code": { "type": "string", "pattern": "^(?:NONE|[A-Z][A-Z0-9_]{0,127})$" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "locus": { "const": "NONE" } }, "required": ["locus"] },
+          "then": { "properties": { "code": { "const": "NONE" } } },
+          "else": { "properties": { "code": { "not": { "const": "NONE" } } } }
+        }
+      ]
+    },
     "decision_request": {
       "type": "object",
       "additionalProperties": false,
@@ -107,17 +135,85 @@
         "ref": { "$ref": "#/$defs/ref" }
       }
     },
-    "next_action": {
+    "node_key": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "owner", "input_refs"],
+      "required": ["logical_identity", "generation", "assignment_id"],
       "properties": {
+        "logical_identity": { "$ref": "#/$defs/logical_identity" },
+        "generation": { "type": "integer", "minimum": 1 },
+        "assignment_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "producer_dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer", "result_sha256", "required_status", "required_payload_kind", "required_refs"],
+      "properties": {
+        "producer": { "$ref": "#/$defs/node_key" },
+        "result_sha256": { "$ref": "#/$defs/sha256" },
+        "required_status": {
+          "type": "string",
+          "enum": ["COMPLETED", "PARTIAL", "BLOCKED", "FAILED"]
+        },
+        "required_payload_kind": {
+          "type": "string",
+          "enum": ["root", "git", "portfolio", "em", "cm", "implementation", "review", "verification", "run", "transport", "artifact", "recovery", "clerk"]
+        },
+        "required_refs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/content_ref" }
+        }
+      }
+    },
+    "authority_dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_ref", "revision_or_checkpoint"],
+      "properties": {
+        "authority_ref": { "$ref": "#/$defs/content_ref" },
+        "revision_or_checkpoint": {
+          "anyOf": [
+            { "type": "integer", "minimum": 1 },
+            { "$ref": "#/$defs/git_sha" },
+            { "$ref": "#/$defs/sha256" }
+          ]
+        }
+      }
+    },
+    "exact_dependency": {
+      "oneOf": [
+        { "$ref": "#/$defs/producer_dependency" },
+        { "$ref": "#/$defs/authority_dependency" }
+      ]
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_id", "kind", "owner", "input_refs", "dependencies", "authorized_effect_ref", "stop_or_reentry_ref"],
+      "properties": {
+        "action_id": { "$ref": "#/$defs/id" },
         "kind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
         "owner": {
           "type": "string",
-          "enum": ["ROOT", "EM", "CM", "TRANSPORT", "EXPERIMENT_OPERATOR", "USER"]
+          "enum": ["ROOT", "EM", "CM", "CLERK", "TRANSPORT", "EXPERIMENT_OPERATOR", "USER"]
         },
-        "input_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } }
+        "input_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+        "dependencies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/exact_dependency" }
+        },
+        "authorized_effect_ref": { "$ref": "#/$defs/nullable_ref" },
+        "stop_or_reentry_ref": { "$ref": "#/$defs/nullable_ref" }
       }
     },
     "payload_base": {
@@ -208,7 +304,7 @@
     "em_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "direction_id", "question_sha256", "evidence_set_sha256", "conclusion_refs", "engineering_request_ref"],
+      "required": ["kind", "direction_id", "question_sha256", "evidence_set_sha256", "conclusion_refs", "engineering_request_ref", "semantic_product_ref", "persistence_status", "durable_state_ref", "candidate_sha", "integrated_sha"],
       "properties": {
         "kind": { "const": "em" },
         "direction_id": { "$ref": "#/$defs/direction_id" },
@@ -225,7 +321,15 @@
         "recommendation_ref": { "$ref": "#/$defs/nullable_ref" },
         "transport_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
         "conclusion_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-        "engineering_request_ref": { "$ref": "#/$defs/nullable_ref" }
+        "engineering_request_ref": { "$ref": "#/$defs/nullable_ref" },
+        "semantic_product_ref": { "$ref": "#/$defs/ref" },
+        "persistence_status": {
+          "type": "string",
+          "enum": ["PREPARED", "PERSISTED", "INTEGRATED"]
+        },
+        "durable_state_ref": { "$ref": "#/$defs/nullable_ref" },
+        "candidate_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] }
       }
     },
     "cm_payload": {
@@ -242,7 +346,10 @@
         "observation_status",
         "verification_status",
         "verification_refs",
-        "integrated_sha"
+        "integrated_sha",
+        "semantic_product_ref",
+        "persistence_status",
+        "durable_state_ref"
       ],
       "properties": {
         "kind": { "const": "cm" },
@@ -264,7 +371,13 @@
           "enum": ["IN_PROGRESS", "SATISFIED", "UNSATISFIED", "NOT_RUN"]
         },
         "verification_refs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
-        "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] }
+        "integrated_sha": { "anyOf": [{ "$ref": "#/$defs/git_sha" }, { "type": "null" }] },
+        "semantic_product_ref": { "$ref": "#/$defs/ref" },
+        "persistence_status": {
+          "type": "string",
+          "enum": ["PREPARED", "PERSISTED", "INTEGRATED"]
+        },
+        "durable_state_ref": { "$ref": "#/$defs/nullable_ref" }
       }
     },
     "implementation_payload": {
@@ -320,11 +433,26 @@
         "transport_assignment",
         "requester",
         "provider",
+        "product_model",
+        "reasoning_effort",
         "mode",
         "effect_ref",
-        "transport_state",
-        "provider_conversation_ref",
+        "operation_id",
+        "idempotency_key",
         "operation_ref",
+        "provider_conversation_ref",
+        "provider_conversation_id",
+        "browser_tab_ref",
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "failure",
+        "provider_user_message_count",
+        "send_activation_count",
+        "user_message_id",
+        "assistant_message_id",
         "archive_ref",
         "handoff_ref"
       ],
@@ -334,19 +462,144 @@
         "transport_assignment": { "type": "string", "minLength": 1, "maxLength": 256 },
         "requester": { "$ref": "#/$defs/requester_identity" },
         "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "product_model": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "reasoning_effort": {
+          "anyOf": [
+            { "type": "string", "minLength": 1, "maxLength": 64 },
+            { "type": "null" }
+          ]
+        },
         "mode": {
           "type": "string",
           "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
         },
         "effect_ref": { "$ref": "#/$defs/nullable_ref" },
-        "transport_state": {
-          "type": "string",
-          "enum": ["PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST", "WAIVED"]
-        },
+        "operation_id": { "$ref": "#/$defs/transport_identity" },
+        "idempotency_key": { "$ref": "#/$defs/transport_identity" },
+        "operation_ref": { "$ref": "#/$defs/ref" },
         "provider_conversation_ref": { "$ref": "#/$defs/nullable_ref" },
-        "operation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "provider_conversation_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "browser_tab_ref": { "$ref": "#/$defs/nullable_ref" },
+        "phase": {
+          "type": "string",
+          "enum": ["VALIDATE", "PREPARE_UI", "ARMED", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"]
+        },
+        "commitment": {
+          "type": "string",
+          "enum": ["ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"]
+        },
+        "recoverability": {
+          "type": "string",
+          "enum": ["PRECOMMIT_REPAIR", "OBSERVE_ONLY", "POSTCOMMIT_RECOVERY", "HUMAN_INTERLOCK", "NONE"]
+        },
+        "observability": {
+          "type": "string",
+          "enum": ["UNOBSERVED", "FRESH_COMPLETE", "FRESH_PARTIAL", "STALE", "LOST", "CONTRADICTORY"]
+        },
+        "message_capability": {
+          "type": "string",
+          "enum": ["AVAILABLE", "RESERVED", "SEALED"]
+        },
+        "failure": { "$ref": "#/$defs/transport_failure" },
+        "provider_user_message_count": { "type": "integer", "enum": [0, 1] },
+        "send_activation_count": { "type": "integer", "enum": [0, 1] },
+        "user_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "assistant_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
         "archive_ref": { "$ref": "#/$defs/nullable_ref" },
         "handoff_ref": { "$ref": "#/$defs/nullable_ref" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "provider": { "const": "chatgpt" } }, "required": ["provider"] },
+          "then": {
+            "properties": {
+              "product_model": { "const": "GPT-5.6 Sol" },
+              "reasoning_effort": { "const": "Pro" }
+            }
+          },
+          "else": {
+            "properties": {
+              "reasoning_effort": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "clerk_authorizer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "logical_identity", "generation", "assignment_id"],
+      "properties": {
+        "role": { "type": "string", "enum": ["root", "hmasd-em", "hmasd-cm"] },
+        "logical_identity": {
+          "type": "string",
+          "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
+        },
+        "generation": { "type": "integer", "minimum": 1 },
+        "assignment_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "clerk_resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "key"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["STATE_PATH", "RUNTIME_WORKTREES_STATE", "WORKTREE", "CONTAINER", "GIT_TARGET", "REMOTE_TARGET"]
+        },
+        "key": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "clerk_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "operation_id", "packet_ref", "executor_identity", "authorizer", "operation", "authority_actor_or_writer", "resources", "attempt", "outcome", "effect_state", "receipt_refs", "observation_refs"],
+      "properties": {
+        "kind": { "const": "clerk" },
+        "operation_id": { "$ref": "#/$defs/id" },
+        "packet_ref": { "$ref": "#/$defs/content_ref" },
+        "executor_identity": {
+          "type": "string",
+          "pattern": "^Clerk-[a-z0-9][a-z0-9-]{1,127}$"
+        },
+        "authorizer": { "$ref": "#/$defs/clerk_authorizer" },
+        "operation": {
+          "type": "string",
+          "enum": ["STATE_CAS", "WORKTREE_PROVISION", "WORKTREE_INSPECT", "WORKTREE_RELEASE", "PATCH_APPLY", "CANDIDATE_CREATE", "GIT_RECORD", "GIT_PREPARE", "GIT_INTEGRATE_PUSH"]
+        },
+        "authority_actor_or_writer": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:Portfolio|Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|root|em:[a-z0-9][a-z0-9_-]{1,63}|cm:[a-z0-9][a-z0-9_-]{1,63})$"
+            },
+            { "type": "null" }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/clerk_resource" }
+        },
+        "attempt": { "type": "integer", "const": 1 },
+        "outcome": { "type": "string", "enum": ["SUCCEEDED", "REFUSED", "UNKNOWN"] },
+        "effect_state": {
+          "type": "string",
+          "enum": ["NOT_APPLICABLE", "NOT_ATTEMPTED", "LANDED", "NOT_LANDED", "UNKNOWN"]
+        },
+        "receipt_refs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/content_ref" }
+        },
+        "observation_refs": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "$ref": "#/$defs/ref" },
+              { "type": "object" }
+            ]
+          }
+        }
       }
     },
     "artifact_payload": {

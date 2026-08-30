@@ -13,28 +13,14 @@
     "workflow_version",
     "rounds"
   ],
-  "oneOf": [
-    {
-      "properties": { "schema_version": { "const": 2 } },
-      "not": { "required": ["historical_archives"] }
-    },
-    {
-      "properties": { "schema_version": { "const": 3 } },
-      "required": ["historical_archives"]
-    }
-  ],
   "properties": {
-    "schema_version": { "type": "integer", "enum": [2, 3] },
+    "schema_version": { "type": "integer", "const": 4 },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
     "direction_id": { "$ref": "#/$defs/direction_id" },
     "workflow_version": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
-    "rounds": { "type": "array", "items": { "$ref": "#/$defs/round" } },
-    "historical_archives": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/historical_archive" }
-    }
+    "rounds": { "type": "array", "items": { "$ref": "#/$defs/round" } }
   },
   "$defs": {
     "timestamp": {
@@ -62,29 +48,115 @@
     "nullable_ref": {
       "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
     },
+    "nullable_transport_ref": {
+      "anyOf": [
+        { "$ref": "#/$defs/ref" },
+        { "type": "string", "minLength": 1, "maxLength": 512 },
+        { "type": "null" }
+      ]
+    },
+    "nullable_identity": {
+      "anyOf": [{ "$ref": "#/$defs/identity" }, { "type": "null" }]
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locus", "code"],
+      "properties": {
+        "locus": {
+          "type": "string",
+          "enum": ["NONE", "SPEC", "AUTH", "TAB_OWNERSHIP", "PRECOMMIT_UI", "COMMIT_BOUNDARY", "TURN_CONFIRMATION", "RESPONSE", "ARCHIVE"]
+        },
+        "code": { "type": "string", "pattern": "^(?:NONE|[A-Z][A-Z0-9_]{0,127})$" }
+      }
+    },
     "provider_result": {
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "provider",
+        "product_model",
+        "reasoning_effort",
         "operation_id",
         "idempotency_key",
-        "session_ref",
-        "terminal_state",
+        "operation_ref",
+        "provider_conversation_ref",
+        "provider_conversation_id",
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "failure",
+        "provider_user_message_count",
+        "send_activation_count",
+        "user_message_id",
+        "assistant_message_id",
         "archive_ref",
         "handoff_ref",
         "completed_at"
       ],
       "properties": {
+        "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "product_model": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "reasoning_effort": {
+          "anyOf": [
+            { "type": "string", "minLength": 1, "maxLength": 64 },
+            { "type": "null" }
+          ]
+        },
         "operation_id": { "$ref": "#/$defs/identity" },
         "idempotency_key": { "$ref": "#/$defs/identity" },
-        "session_ref": { "$ref": "#/$defs/identity" },
-        "terminal_state": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
+        "operation_ref": { "$ref": "#/$defs/ref" },
+        "provider_conversation_ref": { "$ref": "#/$defs/nullable_transport_ref" },
+        "provider_conversation_id": { "$ref": "#/$defs/nullable_identity" },
+        "phase": {
+          "type": "string",
+          "enum": ["VALIDATE", "PREPARE_UI", "ARMED", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"]
+        },
+        "commitment": {
+          "type": "string",
+          "enum": ["ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"]
+        },
+        "recoverability": {
+          "type": "string",
+          "enum": ["PRECOMMIT_REPAIR", "OBSERVE_ONLY", "POSTCOMMIT_RECOVERY", "HUMAN_INTERLOCK", "NONE"]
+        },
+        "observability": {
+          "type": "string",
+          "enum": ["UNOBSERVED", "FRESH_COMPLETE", "FRESH_PARTIAL", "STALE", "LOST", "CONTRADICTORY"]
+        },
+        "message_capability": {
+          "type": "string",
+          "enum": ["AVAILABLE", "RESERVED", "SEALED"]
+        },
+        "failure": { "$ref": "#/$defs/failure" },
+        "provider_user_message_count": { "type": "integer", "enum": [0, 1] },
+        "send_activation_count": { "type": "integer", "enum": [0, 1] },
+        "user_message_id": { "$ref": "#/$defs/nullable_identity" },
+        "assistant_message_id": { "$ref": "#/$defs/nullable_identity" },
         "archive_ref": { "$ref": "#/$defs/nullable_ref" },
         "handoff_ref": { "$ref": "#/$defs/nullable_ref" },
         "completed_at": {
           "anyOf": [{ "$ref": "#/$defs/timestamp" }, { "type": "null" }]
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "provider": { "const": "chatgpt" } }, "required": ["provider"] },
+          "then": {
+            "properties": {
+              "product_model": { "const": "GPT-5.6 Sol" },
+              "reasoning_effort": { "const": "Pro" }
+            }
+          },
+          "else": {
+            "properties": {
+              "reasoning_effort": { "type": "null" }
+            }
+          }
+        }
+      ]
     },
     "round": {
       "type": "object",
@@ -139,51 +211,6 @@
         "completed_at": {
           "anyOf": [{ "$ref": "#/$defs/timestamp" }, { "type": "null" }]
         }
-      }
-    },
-    "historical_archive": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "classification",
-        "observed_round_id",
-        "canonical_round_id",
-        "question_sha256",
-        "evidence_set_sha256",
-        "review_stage",
-        "provider",
-        "stable_key",
-        "operation_id",
-        "idempotency_key",
-        "request_fingerprint",
-        "prompt_sha256",
-        "session_id",
-        "terminal_state",
-        "completed_at",
-        "legacy_archive_ref",
-        "response_ref"
-      ],
-      "properties": {
-        "classification": { "type": "string", "const": "CROSS_SWAPPED_ROUND_ID" },
-        "observed_round_id": { "$ref": "#/$defs/round_id" },
-        "canonical_round_id": { "$ref": "#/$defs/round_id" },
-        "question_sha256": { "$ref": "#/$defs/sha256" },
-        "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
-        "review_stage": {
-          "type": "string",
-          "enum": ["pro_innovator", "pro_convergence"]
-        },
-        "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
-        "stable_key": { "$ref": "#/$defs/identity" },
-        "operation_id": { "$ref": "#/$defs/identity" },
-        "idempotency_key": { "$ref": "#/$defs/identity" },
-        "request_fingerprint": { "$ref": "#/$defs/sha256" },
-        "prompt_sha256": { "$ref": "#/$defs/sha256" },
-        "session_id": { "$ref": "#/$defs/identity" },
-        "terminal_state": { "type": "string", "const": "NATURAL_COMPLETION_VERIFIED" },
-        "completed_at": { "$ref": "#/$defs/timestamp" },
-        "legacy_archive_ref": { "$ref": "#/$defs/ref" },
-        "response_ref": { "$ref": "#/$defs/ref" }
       }
     }
   }

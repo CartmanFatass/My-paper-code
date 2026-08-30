@@ -44,7 +44,7 @@ def test_durable_records_are_content_addressed_and_state_remains_current() -> No
     assert "every durable ref is `{path, sha256}`" in em
     assert "content-address every note that is referenced" in cm
     assert "state is the latest accepted milestone, not an event log" in cm
-    assert "preserve bytes on cas conflict" in cm
+    assert "stale clerk cas preserves bytes" in cm
 
 
 def test_engineering_request_is_the_durable_scope_reference_without_note_tax() -> None:
@@ -56,7 +56,9 @@ def test_engineering_request_is_the_durable_scope_reference_without_note_tax() -
     assert request_path in cm
     assert "write one meaning-complete direction-owned engineering request" in em
     assert "hash the request" in em
-    assert "next_action.owner=cm" in em
+    assert "required `next_actions`" in em
+    assert "`owner: clerk`" in em
+    assert "packet presence is inert" in em
     assert (
         "when no cm note is warranted, the exact durable em request that "
         "satisfied the gate remains the contract and scope reference"

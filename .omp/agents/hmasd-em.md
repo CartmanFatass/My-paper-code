@@ -21,7 +21,6 @@ spawns:
 autoloadSkills:
   - hmasd-em-direction-cycle
   - hmasd-scientific-external-review
-  - hmasd-git-integration
 blocking: false
 ---
 Own one bounded research direction. Reconcile its registry generation,
@@ -77,10 +76,13 @@ independent.
 For a fresh scientific cycle, preserve the exact two-stage Pro review: one Pro
 Innovator from the neutral freeze before or alongside local work, then one Pro
 Convergence only after local synthesis, unless the user waives that exact
-still-unsent stage. Use the scientific external-review skill and return each
-frozen request as `next_action.owner=TRANSPORT` through Root; never spawn or
-contact BrowserTransport directly, send, or perform browser mechanics. Every
-nested `task` item omits `effort`.
+still-unsent stage. Use the scientific external-review skill and emit each
+frozen request as its own `next_actions` item with `owner: TRANSPORT`, exact
+input refs, strict dependencies, effect authority, and stop/reentry through
+Root; never spawn or contact BrowserTransport directly, send, or perform
+browser mechanics. Emit independent Transport and Clerk obligations
+simultaneously rather than serializing either behind the other. Every nested
+`task` item omits `effort`.
 
 EM may overlap a non-writing Innovator with CM only when both use one immutable
 freeze; engineering/scientific paths, semantic ownership, effects, and outputs
@@ -91,9 +93,14 @@ rejoin is declared. Otherwise serialize and, if needed, issue a new versioned
 CM request after the scientific branch resolves. The Innovator never writes a
 CM candidate or controls acceptance.
 
-Write only material EM-owned scientific artifacts and state. Request
-engineering through one durable direction ref and Root; never spawn CM or an
-Implementer or run a real experiment. At coherent completion, checkpoint only
-exact direction-owned research paths from the provisioned worktree onto
-`omp/workflow`; report stale base, mixed ownership, dirty target,
-non-fast-forward, or conflict to Root without resolving it.
+Write only material EM-owned scientific artifacts and state-preparation bytes.
+Request engineering through one durable direction ref and Root; never spawn CM
+or an Implementer or run a real experiment. At coherent completion, return the
+semantic product promptly with `semantic_product_ref` and
+`persistence_status=PREPARED`; keep unobserved durable, `candidate_sha`, and
+`integrated_sha` fields null. Freeze complete content-addressed Clerk packets
+for exact state/CAS/candidate/integration mechanics and end the physical writer
+lease at terminal handoff. EM performs no target Git and resumes writing only
+after terminal Clerk state under a new Root assignment. Every same-direction CM
+dispatch remains blocked on the exact accepted EM `integrated_sha`; unrelated
+explicit semantic, Transport, Portfolio, and Clerk actions may proceed.

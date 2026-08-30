@@ -20,6 +20,7 @@ PARKED_DIRECTION_IDS = {
     "active_post_churn_population_flow_identification",
     "commitment_residual_triggered_options",
     "covariance_calibrated_information_clock",
+    "dual_epoch_receipt_survival",
     "eociv_lite",
     "expressibility_gated_renewal_credit_relay",
     "finite_semantic_boundary_support",
@@ -145,17 +146,32 @@ def test_browser_transport_owns_the_common_transport_result_payload(tmp_path: Pa
             "logical_identity": "BrowserTransport",
             "payload": {
                 "archive_ref": None,
+                "assistant_message_id": None,
                 "browser_identity": "BrowserTransport",
+                "browser_tab_ref": None,
+                "commitment": "ZERO_PROVEN",
                 "effect_ref": None,
+                "failure": {"code": "NONE", "locus": "NONE"},
                 "handoff_ref": None,
+                "idempotency_key": "cycle-1-innovator",
                 "kind": "transport",
+                "message_capability": "AVAILABLE",
                 "mode": "INNOVATOR",
-                "operation_ref": None,
+                "observability": "UNOBSERVED",
+                "operation_id": "cycle-1-innovator",
+                "operation_ref": "agentify:cycle-1-innovator",
+                "phase": "VALIDATE",
+                "product_model": "GPT-5.6 Sol",
                 "provider": "chatgpt",
+                "provider_conversation_id": None,
                 "provider_conversation_ref": None,
+                "provider_user_message_count": 0,
+                "reasoning_effort": "Pro",
+                "recoverability": "PRECOMMIT_REPAIR",
                 "requester": "EM-example-direction",
+                "send_activation_count": 0,
                 "transport_assignment": "cycle-1-innovator",
-                "transport_state": "PENDING",
+                "user_message_id": None,
             },
             "role": "hmasd-browser-transport",
             "summary": "BrowserTransport retained an unsent assignment.",
@@ -178,23 +194,39 @@ def test_root_owned_browser_assignment_map_validates(tmp_path: Path) -> None:
         "assignments": [
             {
                 "archive_ref": None,
+                "assistant_message_id": None,
                 "assignment_id": "cycle-1-innovator",
                 "browser_identity": "BrowserTransport",
+                "browser_tab_ref": None,
+                "commitment": "ZERO_PROVEN",
                 "direction_id": "example-direction",
                 "effect_ref": None,
+                "failure": {"code": "NONE", "locus": "NONE"},
+                "handoff_ref": None,
+                "idempotency_key": "cycle-1-innovator",
+                "message_capability": "AVAILABLE",
                 "mode": "INNOVATOR",
-                "operation_ref": None,
+                "observability": "UNOBSERVED",
+                "operation_id": "cycle-1-innovator",
+                "operation_ref": "agentify:cycle-1-innovator",
                 "paused": True,
+                "phase": "VALIDATE",
+                "product_model": "GPT-5.6 Sol",
                 "provider": "chatgpt",
+                "provider_conversation_id": None,
                 "provider_conversation_ref": None,
+                "provider_user_message_count": 0,
+                "reasoning_effort": "Pro",
+                "recoverability": "PRECOMMIT_REPAIR",
                 "request_ref": "request:cycle-1-innovator",
                 "requester_identity": "EM-example-direction",
-                "transport_state": "PENDING",
+                "send_activation_count": 0,
                 "updated_at": "2026-08-29T00:00:00Z",
+                "user_message_id": None,
             }
         ],
         "revision": 1,
-        "schema_version": 1,
+        "schema_version": 2,
         "updated_at": "2026-08-29T00:00:00Z",
         "writer": "Root",
     }
@@ -206,7 +238,7 @@ def test_root_owned_browser_assignment_map_validates(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
 
 
-def test_portfolio_records_representation_only_migration_and_pause_boundary() -> None:
+def test_portfolio_records_representation_migration_and_current_resume_boundary() -> None:
     portfolio = " ".join(PORTFOLIO_PATH.read_text(encoding="utf-8").split())
     agents = " ".join(AGENTS_PATH.read_text(encoding="utf-8").split())
 
@@ -214,12 +246,12 @@ def test_portfolio_records_representation_only_migration_and_pause_boundary() ->
         "## OMP non-control migration boundary",
         "This file is the OMP durable scientific authority after this migration",
         "user PAUSE/RESUME boundaries are migrated as non-control facts",
-        "The controlling state is now `PAUSE`",
+        "Root therefore adopts the user's current instruction as `RESUME`",
         "Representation migration restored the `PARKED` schema representation only",
         "for the eight source-known parked rows",
         "It did not reinterpret science or change any reactivation condition",
-        "paused all research and direction integration",
-        "until an explicit user `RESUME`",
+        "`PARK`: `dual_epoch_receipt_survival`",
+        "The fourth authorized slot is intentionally unused",
     ):
         assert migration_anchor in portfolio
 
@@ -228,6 +260,10 @@ def test_portfolio_records_representation_only_migration_and_pause_boundary() ->
         "`reactivation_condition_ref`, and is not `CLOSED`"
     ) in agents
     assert (
-        "`PAUSE` retains current work and safe observation of committed Effects but "
-        "blocks refill, fresh dispatch, sends, launches, and all other new Effects"
+        "`PAUSE` admits no fresh task or Effect, including Clerk, CAS, Git, send, "
+        "Run, refill, or manager revival"
+    ) in agents
+    assert (
+        "may validate deliveries and non-sendingly observe only an already-committed "
+        "Effect through its existing owner"
     ) in agents

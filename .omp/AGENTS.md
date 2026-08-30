@@ -40,14 +40,27 @@ the target transport inventory contains the singleton
 - Use only the exact project role names in `.omp/agents/`; do not invent aliases,
   compatibility names, or generated per-direction definitions.
 - `hmasd-em` and `hmasd-cm` are the only project spawn-capable managers. All
-  other project roles are non-blocking leaves or services. Root executes
-  Portfolio work directly; it never creates an intermediate Portfolio agent.
+  other project roles, including `hmasd-clerk`, are non-blocking leaves or
+  services. Root executes Portfolio work directly; it never creates an
+  intermediate Portfolio agent. A fresh per-packet Clerk executes only one
+  Root-admitted mechanical operation and cannot spawn, schedule, interpret,
+  choose a successor, or gain science, technical, Portfolio, lifecycle,
+  actor, or writer authority.
 - Root directly invokes EM and CM managers. Direction-scoped science always
   goes to the responsible EM; Root never bypasses that EM by invoking a
   scientific leaf. Root may invoke a project leaf directly only for
   Root-owned work that the leaf contract fits, including the bounded
   cross-direction Portfolio analyses below. There are no workflow-designer or
   design-reviewer project roles.
+- Decompose by a coarse vertical outcome, not by consecutive reading, planning,
+  implementation, review, and test-writing steps over the same files. One leaf
+  owns a bounded engineering slice from investigation through code and focused
+  test edits; its parent performs integration review and verification.
+  Parallel children require genuinely disjoint repositories, directions,
+  owned paths plus semantic interfaces, or role-required independent
+  scientific evidence. A separate engineering Reviewer is exceptional: use it
+  only when independence on a frozen high-risk candidate is itself required
+  evidence, never as a routine second reader of the implementer's context.
 - The bundled `task` agent is Root-only and may be used only when no project
   role fits. The bundled `librarian` is available to Root, EM, and CM. Only Root
   may dispatch `hmasd-workflow-recovery-manager`; managers do not spawn it.
@@ -75,7 +88,45 @@ the target transport inventory contains the singleton
   objective/decision relevance; authorities, inputs, and evidence boundary;
   scope, protected non-goals, and preserved semantics; requested role work;
   authorized Effects; acceptance/stop; and return route, durable references,
-  and reentry. Results use the common v1 result envelope and role payload.
+  and reentry. Results use the common v2 result envelope and role payload.
+- If an assignment crosses a material internal boundary before its terminal
+  product—for example investigation to implementation, specialist fan-out, a
+  newly evidenced blocker, or an exact long-running command start—the owner
+  sends Root one concise Hub progress note with **Problem**, **Now**,
+  **Evidence**, and **Next**. At most one note is sent per unchanged phase.
+  It is an observation, not a result, acceptance, authority, successor edge, or
+  state write. Timer heartbeats and per-tool narration are prohibited; Root
+  surfaces the transition in its next visible main-transcript note.
+- The common v2 result carrier requires `next_actions` as an array and has no
+  singular `next_action` alias. Every closed item contains `action_id`, `kind`,
+  `owner` (including `CLERK`), `input_refs`, strict `dependencies`,
+  `authorized_effect_ref`, and `stop_or_reentry_ref`; all fields are present,
+  and an empty array means no successor. Independent simultaneous obligations
+  are separate items and array order creates no dependency.
+- `dependencies` is strict one-of: either an accepted producer
+  `(logical_identity, generation, assignment_id)` plus exact `result_sha256`,
+  required status, required payload kind, and required `{path, sha256}` refs;
+  or an immutable authority `{path, sha256}` plus exact revision/checkpoint.
+  Generic input refs, file or packet presence, job completion, direction,
+  salience, timing, and later Git state never satisfy an edge.
+- `NodeKey=(logical_identity,generation,assignment_id)` has at most one terminal
+  product. Delivery identity is distinct from `NodeKey+result_sha256`, and job
+  settlement is not acceptance. Every manager reentry and Clerk operation uses
+  a new assignment ID; compatible scope may keep the same session, identity,
+  and generation, while material scope change requires a new generation.
+- A manager terminal semantic product names `semantic_product_ref` and
+  `persistence_status=PREPARED`; unobserved durable, candidate, and integrated
+  SHAs remain null. Pending Clerk mechanics do not make the manager's scientific
+  or technical semantic product incomplete. Same-direction EM-to-CM waits for
+  the exact accepted EM `integrated_sha`, and CM-to-EM result interpretation
+  waits for the exact accepted CM `integrated_sha`; explicitly independent
+  semantic, Transport, Portfolio, or Clerk obligations may proceed.
+- Packet presence is inert. Only Root acceptance of the exact authorizer result
+  and packet digest followed by admission authorizes execution. Root dispatches
+  one fresh nonblocking `hmasd-clerk` task per content-addressed packet, batches
+  independent packets, supplies the exact authorizer-result binding, and never
+  reconstructs or rewrites packet fields. Raw watchers, daemons, auto-executing
+  inboxes, and a singleton parked Clerk are forbidden.
 - Literal Codex `[WORK]`, `[RESULT]`, and `[BROWSER WORK]` headings are semantic
   source material only. They are not OMP routing authority, identity, receipts,
   or a substitute for the required meaning sections.
@@ -121,7 +172,7 @@ the target transport inventory contains the singleton
   corrected defect. A valid adverse or null scientific observation and a
   technical failure remain separate from `NO_MATERIAL_INSIGHT`.
 - Analytical products travel in the role-specific payload of the unchanged
-  common v1 result carrier. These rules add no scheduler, authority role,
+  common v2 result carrier. These rules add no scheduler, authority role,
   lifecycle state, result schema, or registry. Each manager consumes a
   terminal analytical product immediately, closes the answered gap, and fans
   out or refills only for an evidenced residual or newly exposed separable
@@ -146,11 +197,20 @@ the target transport inventory contains the singleton
   gain Portfolio or direction authority; Root synthesizes cited mechanisms and
   dependencies, not leaf counts.
 - Root's Portfolio subflow adopts one explicit action for every direction in the
-  user-fixed considered set. It consumes each terminal EM, CM, Transport, or
-  Run fact immediately and actively refills authorized capacity when not
-  `PAUSED`; it does not wait for an all-terminal join. `PAUSE` retains current
-  work and safe observation of committed Effects but blocks refill, fresh
-  dispatch, sends, launches, and all other new Effects.
+  user-fixed considered set. Root projects the runnable graph afresh at each
+  material wake, snapshots and drains the finite queued-delivery set, validates
+  and causally consumes each accepted/refused result digest once, routes every
+  consequence, then dispatches the maximal admissible independent set. It uses
+  separate Portfolio, OMP semaphore, BrowserTransport, Experiment Operator, Git
+  target, worktree lease, and state-path CAS capacity classes; saturation of one
+  does not suppress available work in another.
+- Root actively refills authorized Portfolio capacity when not `PAUSED`; it does
+  not wait for an all-terminal join or a salient/first child. Per-item partial
+  batch registration is reconciled and only items proven not started remain
+  runnable; a batch is never retried wholesale. `PAUSE` admits no fresh task or
+  Effect, including Clerk, CAS, Git, send, Run, refill, or manager revival. It
+  may validate deliveries and non-sendingly observe only an already-committed
+  Effect through its existing owner; with none it returns `PAUSED/IDLE`.
 - Portfolio actions are `NONE`, `ACTIVATE`, `CONTINUE`, `NARROW`, `PARK`,
   `CLOSE`, `FUSE`, and `SPINOFF`. An EM recommendation is evidence, not an
   adopted Portfolio action. Engineering, transport, Run, runtime, and Git facts
@@ -163,8 +223,9 @@ the target transport inventory contains the singleton
 ## Hub lifecycle
 
 - Use Hub lifecycle commands for long-running processes: `hub start` launches,
-  `hub logs` observes, and `hub wait` waits for readiness or terminal
-  completion. Do not substitute a polling loop.
+  `hub logs` observes, and a legal broad coordination `hub wait` races material
+  job/message events. Never narrow wait to a slow child or substitute a polling
+  loop. Timeout or a useless all-running snapshot is not a new wake.
 - The Experiment Operator owns exactly one result-bearing command from
   `hub start` through terminal return and records its observed manifest.
 - A parked EM or CM session is revived by a parent Hub message carrying only
@@ -176,25 +237,41 @@ the target transport inventory contains the singleton
   `hmasd-dashboard`: `python3 scripts/hmasd_dashboard.py serve --root <repo>
   --port <port>`. Reuse an already-ready process; readiness requires both the
   service banner and its `127.0.0.1` TCP port. Stopping it never stops workflow.
-- At each material checkpoint, print a compact terminal summary containing the
-  registry revision, logical manager/job generations, run terminal states,
-  external round references, worktree references, exact blockers, and the
-  Dashboard URL when running. The summary is derived evidence, never state.
+- At `START_OR_RESUME`, each material fan-out/result, verification or
+  integration boundary, and immediately before a legal wait or user boundary,
+  emit concise human-readable text in the main transcript. Use short
+  **Problem**, **Now**, **Evidence**, and **Next** fields, omitting unchanged
+  fields. Tool intents, Todo cards, Dashboard state, Hub events, and task result
+  cards are not substitutes. Do not expose hidden reasoning.
+- The same visible note includes the proof required by R12 in
+  `hmasd-root-control`: Portfolio authorized/live/free capacity; OMP
+  running/queued limits; queued delivery IDs; unconsumed and consumed result
+  keys/digests; runnable and inflight NodeKeys; exact blocked
+  dependency/resource edges; current target-mutating operation ID/lock key;
+  Run, Transport, worktree, and external refs; and Dashboard status
+  (`NOT_CONFIGURED` is valid and non-gating). It is derived evidence, never
+  state.
 - Material checkpoints are event-driven, not timer-driven: completed research
   or engineering rounds, accepted-result promotion, terminal-run evidence
   promotion, external prompt/archive readiness, Portfolio lifecycle changes,
-  and schema migrations.
-- Direction-scoped EM and CM cycles own their orthogonal Git checkpoint. Root
-  provisions a dedicated assignment worktree; the manager stages only its exact
-  assignment paths, creates one cycle-completion commit, applies it with actor
-  `em:<direction>` or `cm:<direction>`, fetches, compares, and pushes
-  `omp/workflow`. A stale base, dirty target, non-fast-forward, mixed ownership,
-  or path/semantic conflict stops unchanged and is reported to Root. Managers
-  never auto-resolve cross-direction or shared-authority conflicts.
-- Root commits only Root/shared authorities, cross-direction Portfolio changes,
-  schemas/control-plane changes, external archive promotion, and recovery
-  integration. It does not recommit settled manager-owned paths or create a Git
-  checkpoint for every manager transition.
+  and schema cutovers.
+- Progress narration is event-driven, not a timer heartbeat or polling loop.
+  Users may press `Alt+A` to inspect OMP Agent Hub for live per-agent tool
+  activity and open a subagent transcript with `Enter`; this complements but
+  does not replace Root's main-transcript explanation.
+- EM and CM own semantic authoring in their exact provisioned worktree until
+  terminal physical-lease handoff. They freeze content-addressed Clerk packets
+  for CAS, candidate, and integration mechanics and then become non-writing.
+  A fresh Clerk alone executes the exact operation under the declared actor
+  `em:<direction>` or `cm:<direction>` and mutation key. The manager resumes
+  writing only after terminal Clerk state and a new Root assignment.
+- Root similarly authors Root/shared, cross-direction Portfolio, schema/control-
+  plane, external-archive, and recovery semantics and packets; it does not
+  perform target Git. Clerk never changes actor, writer, allowlist, policy,
+  lifecycle, acceptance, or successor and never rebases, merges, retries, or
+  resolves a conflict. The sole target is `omp/workflow`; only exact
+  `EXACT_HANDOFF` and `ORTHOGONAL_DIRECTION` policies are accepted under the
+  Git integration contract.
 - Every writer uses an exact path allowlist. `git add -A` is forbidden.
   Unrelated user changes remain unstaged; mixed ownership in one path is a
   conflict. Runtime maps, raw runs, generated logs, secrets, and unverified
@@ -226,12 +303,15 @@ mutation, selects the model.
 - Use repository-relative POSIX tracked references without `..`, symlinks, or
   absolute prefixes. Concrete handles, PIDs, absolute worktree paths, and
   local tab mappings stay under ignored `.omp/runtime/` or `temp/`.
-- All long-lived JSON goes through `scripts/hmasd_state.py` and its schema,
-  revision, expected-revision CAS, and exit-code contract.
-- Root alone owns shared-authority and recovery integration. An EM or CM may
-  apply and push exactly one verified direction/kind-owned candidate from its
-  provisioned worktree to `omp/workflow`; all other children never commit or
-  push unless their exact assignment names a recovery effect.
+- All long-lived JSON mutations use exact `scripts/hmasd_state.py` packets and
+  its schema, revision, expected-revision CAS, and exit-code contract. The
+  authority owner freezes complete desired bytes; only an admitted Clerk invokes
+  the mechanical writer.
+- Root alone owns shared-authority and recovery semantics. EM and CM own exact
+  direction/kind semantic candidates. None performs target Git; each freezes
+  one-operation packets and transfers the physical lease. A fresh Clerk alone
+  executes the exact authorized candidate/integration operation under the
+  original actor. All other children never commit or push.
 - Agentify remains the sole external submission ledger. The configured MCP
   command runs `C:\Projects\agentify-desktop` with Windows `node.exe` from its
   WSL mount, so Agentify opens the user's configured, visible Windows Chrome
@@ -239,10 +319,11 @@ mutation, selects the model.
   the user changes this runtime choice.
 - `BrowserTransport` is the singleton logical service, implemented by agent type
   `hmasd-browser-transport`, for both `chatgpt` and `gemini`. EM and CM author
-  frozen durable request references and return `next_action.owner=TRANSPORT` to
-  Root; they never invoke a provider-specific transport directly. Root validates
-  requester, provider, mode, exact operation, model, authorization, commitment,
-  and response path, serializes the request through the singleton, validates
+  frozen durable request references and emit a `next_actions` item with
+  `owner: TRANSPORT`, exact input refs, and strict dependencies; they never
+  invoke a provider-specific transport directly. Root validates requester,
+  provider, mode, exact operation, model, authorization, commitment, and
+  response path, serializes the request through the singleton, validates
   returned archive bytes, and routes the transport fact to the exact requester.
 - Unknown commitment never resends. BrowserTransport performs transport only:
   provider conversation, operation, tab, direction, OMP assignment, archive,

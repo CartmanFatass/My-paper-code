@@ -8,6 +8,7 @@ handling, and bounded route selection).
 
 from __future__ import annotations
 
+import hashlib
 import copy
 import json
 import shutil
@@ -15,6 +16,8 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Any
+import pytest
+
 
 from scripts import hmasd_external_review as external_review
 
@@ -95,9 +98,9 @@ def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
         ("never resend", "no resend", "do not resend"),
         ("never overwrite", "do not overwrite", "superseded"),
         ("browsertransport",),
-        ("sent_waiting",),
+        ("verify_commitment",),
+        ("unresolved",),
         ("observe_only", "observe-only"),
-        ("reactivation_condition_ref",),
         ("fail closed",),
     )
     missing = [
@@ -117,8 +120,8 @@ def test_recovery_skill_preserves_browser_parked_and_git_fail_closed_contracts()
         "exact agentify operation",
         "bound provider conversation",
         "never resend",
-        "transport state `sent_waiting`",
-        "use `observe_only` on that same operation and conversation",
+        "transport tuple `verify_commitment + unresolved + observe_only + sealed`",
+        "observe that same operation and conversation",
         "stale requester generation is superseded evidence",
         "`parked` without a non-null `reactivation_condition_ref` is invalid",
         "git writer conflict or stale base",
@@ -360,6 +363,25 @@ def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
     runtime_dir.mkdir()
     runtime_path = runtime_dir / "worktrees.json"
     runtime_path.write_text(json.dumps(runtime, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    receipt_path = repo / entry["receipt_path"]
+    receipt_path.parent.mkdir(parents=True)
+    receipt_path.write_text(
+        json.dumps(
+            {
+                "schema": "hmasd.worktree-receipt/v1",
+                "worktree_ref": entry["worktree_ref"],
+                "operation_token": entry["operation_token"],
+                "repo": str(repo),
+                "worktree_path": entry["canonical_absolute_path"],
+                "branch": entry["branch"],
+                "base_sha": entry["base_sha"],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
 
     inspected = _run(WORKTREE_SCRIPT, "inspect", "--worktree-ref", "wt-example", cwd=repo)
     assert inspected.returncode == 6, (inspected.stdout, inspected.stderr)
@@ -367,6 +389,10 @@ def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
     assert observation.get("orphaned") is True, observation
     assert observation.get("orphan_reason"), observation
 
+    handoff_path = repo / "handoffs" / "orphan-provision-clerk.json"
+    handoff_path.parent.mkdir()
+    handoff_path.write_text('{"terminal":true}\n', encoding="utf-8")
+    handoff_sha256 = hashlib.sha256(handoff_path.read_bytes()).hexdigest()
     before = runtime_path.read_bytes()
     provisioned = _run(
         WORKTREE_SCRIPT,
@@ -383,43 +409,54 @@ def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
         "run-example",
         "--base",
         base_sha,
+        "--integration-policy",
+        "EXACT_HANDOFF",
+        "--required-handoff-sha",
+        base_sha,
+        "--manager-assignment-id",
+        "run-example",
+        "--clerk-assignment-id",
+        "orphan-provision-clerk",
+        "--handoff-ref",
+        handoff_path.relative_to(repo).as_posix(),
+        "--handoff-sha256",
+        handoff_sha256,
+        "--lease-token",
+        hashlib.sha256(b"orphan-provision-lease").hexdigest(),
         cwd=repo,
     )
     assert provisioned.returncode == 6, (provisioned.stdout, provisioned.stderr)
     assert runtime_path.read_bytes() == before
     assert not (container / "example-direction-engineering-run-example").exists()
 
-def test_external_unknown_commitment_is_not_resent_and_archive_import_is_idempotent(
+def test_external_unknown_commitment_is_not_published_and_response_is_idempotent(
     tmp_path: Path,
     monkeypatch: Any,
 ) -> None:
-    """Agentify remains authoritative for commitment and exact archive bytes."""
+    """Agentify remains authoritative for commitment and exact response bytes."""
 
-    archive = tmp_path / "archive.json"
-    archive.write_bytes((PHASE0_FIXTURES / "external_archive.json").read_bytes())
+    response = tmp_path / "source-response.md"
+    response.write_bytes(b"hello")
+    unknown_operation = _load(RECOVERY_FIXTURES / "unknown_operation_ref.json")
+    monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
+    with pytest.raises(external_review.CommitmentUnknown):
+        external_review.create_archive_if_absent(
+            unknown_operation,
+            response,
+            tmp_path / "unused.md",
+        )
+    assert not (tmp_path / "docs").exists()
 
-    unknown = _run(
-        EXTERNAL_SCRIPT,
-        "validate-archive",
-        "--operation-ref",
-        str(RECOVERY_FIXTURES / "unknown_operation_ref.json"),
-        "--archive",
-        str(archive),
-    )
-    assert unknown.returncode == 7, (unknown.stdout, unknown.stderr)
-
+    operation = _load(RECOVERY_FIXTURES / "committed_operation_ref.json")
     destination = (
         tmp_path
         / "docs/external-review/directions/example-direction/a2604c701f39adec08f5"
-        / "pro_innovator/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
+        / "pro_innovator/chatgpt/response.md"
     )
-    monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
-    operation = _load(RECOVERY_FIXTURES / "committed_operation_ref.json")
-    committed = external_review.create_archive_if_absent(operation, archive, destination)
+    committed = external_review.create_archive_if_absent(operation, response, destination)
     assert committed["status"] == "CREATED"
     first_bytes = destination.read_bytes()
-
-    repeated = external_review.create_archive_if_absent(operation, archive, destination)
+    repeated = external_review.create_archive_if_absent(operation, response, destination)
     assert repeated["status"] == "IDEMPOTENT"
     assert destination.read_bytes() == first_bytes
 
@@ -441,7 +478,7 @@ def test_recovery_attempt_deduplication_and_exhaustion_emit_one_precise_blocker(
     blocker = scenario["exhausted_blocker"]
     assert blocker == {
         "code": "RECOVERY_EXHAUSTED",
-        "failure_class": "external_commitment_unknown",
+        "failure_class": "external_commitment_unresolved",
         "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
         "user_visible": True,
     }

@@ -1,9 +1,9 @@
 {
   "direction_id": "recct_lite",
-  "revision": 2,
+  "revision": 3,
   "rounds": [],
-  "schema_version": 2,
-  "updated_at": "2026-08-30T01:57:56Z",
+  "schema_version": 4,
+  "updated_at": "2026-08-30T17:19:16Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-recct_lite"
 }

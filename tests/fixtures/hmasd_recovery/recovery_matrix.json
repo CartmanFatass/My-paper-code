@@ -32,7 +32,7 @@
   ],
   "exhausted_blocker": {
     "code": "RECOVERY_EXHAUSTED",
-    "failure_class": "external_commitment_unknown",
+    "failure_class": "external_commitment_unresolved",
     "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
     "user_visible": true
   },

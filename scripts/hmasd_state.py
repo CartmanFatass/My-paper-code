@@ -21,7 +21,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
-from typing import Any, Callable, Iterator, Mapping, NoReturn
+from typing import Any, Iterator, Mapping, NoReturn
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,21 +35,24 @@ KIND_ALIASES = {
     "external_review_index": "external_review_index",
     "run_manifest": "run_manifest",
     "accepted_result": "accepted_result",
-    "external_archive": "external_archive",
     "agent_result": "agent_result",
     "runtime_agents": "runtime_agents",
     "runtime_worktrees": "runtime_worktrees",
     "runtime_browser_assignments": "runtime_browser_assignments",
+    "clerk_operation": "clerk_operation",
 }
 
 CURRENT_WRITE_SCHEMA_VERSIONS = {
     "research_state": 2,
     "engineering_state": 2,
+    "agent_result": 2,
+    "runtime_agents": 2,
+    "runtime_worktrees": 2,
+    "runtime_browser_assignments": 2,
+    "external_review_index": 4,
 }
 
 
-SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
-GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
 DIRECTION_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{1,63}$")
 TIMESTAMP_RE = re.compile(
     r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?Z$"
@@ -57,6 +60,25 @@ TIMESTAMP_RE = re.compile(
 PATH_RE = re.compile(r"^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\.\.(?:/|$))(?!.*\\)[^\x00]+$")
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SECRET_NAME_RE = re.compile(r"(?:secret|token|password|credential|private[_-]?key)", re.I)
+
+TRANSPORT_PHASE_TRANSITIONS = {
+    "VALIDATE": frozenset({"VALIDATE", "PREPARE_UI", "TERMINAL"}),
+    "PREPARE_UI": frozenset({"PREPARE_UI", "ARMED", "TERMINAL"}),
+    "ARMED": frozenset({"PREPARE_UI", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "TERMINAL"}),
+    "VERIFY_COMMITMENT": frozenset(
+        {"VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}
+    ),
+    "WAIT_RESPONSE": frozenset({"WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}),
+    "READ_RESPONSE": frozenset({"READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}),
+    "PUBLISH_ARCHIVE": frozenset({"PUBLISH_ARCHIVE", "TERMINAL"}),
+    "TERMINAL": frozenset({"TERMINAL"}),
+}
+TRANSPORT_COMMITMENT_TRANSITIONS = {
+    "ZERO_PROVEN": frozenset({"ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"}),
+    "UNRESOLVED": frozenset({"UNRESOLVED", "ONE_EXACT", "VIOLATION"}),
+    "ONE_EXACT": frozenset({"ONE_EXACT", "VIOLATION"}),
+    "VIOLATION": frozenset({"VIOLATION"}),
+}
 
 
 class StateError(Exception):
@@ -89,10 +111,6 @@ class _SchemaFailure(Exception):
     pass
 
 
-# Public registry for one-way migrations. A migration must register N -> N+1;
-# no downgrade or implicit rewrite is ever performed.
-Migration = Callable[[dict[str, Any]], dict[str, Any]]
-MIGRATIONS: dict[str, dict[int, Migration]] = {kind: {} for kind in KIND_ALIASES}
 
 
 def normalize_kind(kind: str) -> str:
@@ -281,22 +299,8 @@ def _ensure_path(value: Any, name: str, *, absolute: bool = False) -> None:
         raise ValidationError(f"{name} is not a repository-relative POSIX path")
 
 
-def _ensure_sha(value: Any, name: str, *, git: bool = False) -> None:
-    expression = GIT_SHA_RE if git else SHA256_RE
-    if not isinstance(value, str) or expression.fullmatch(value) is None:
-        raise ValidationError(f"{name} is not a lowercase SHA value")
 
 
-def _ref_path(ref: Any, name: str) -> str | None:
-    if ref is None:
-        return None
-    if isinstance(ref, str):
-        return ref
-    if isinstance(ref, dict):
-        path = ref.get("path")
-        if isinstance(path, str):
-            return path
-    raise ValidationError(f"{name} is not a reference")
 
 
 def _owner_error(message: str) -> OwnershipError:
@@ -495,7 +499,6 @@ def _validate_direction_state(
 def _validate_external_index(document: Mapping[str, Any]) -> None:
     direction_id = _validate_direction_state(document, "external_review_index")
     workflow_version = document["workflow_version"]
-    historical_archives = document.get("historical_archives", [])
 
     seen_rounds: set[str] = set()
     for index, round_document in enumerate(document["rounds"]):
@@ -523,80 +526,17 @@ def _validate_external_index(document: Mapping[str, Any]) -> None:
         for provider in round_document["providers"].values():
             if provider is None:
                 continue
-            for forbidden in ("sendCount", "send_count", "sendActionCount", "commitment"):
-                if forbidden in provider:
-                    raise ValidationError(f"provider result contains forbidden ledger field {forbidden}")
-
-    historical_round_ids: set[str] = set()
-    historical_keys: set[tuple[str, str, str]] = set()
-    operation_ids: set[str] = set()
-    idempotency_keys: set[str] = set()
-    archive_paths: set[str] = set()
-    for index, record in enumerate(historical_archives):
-        expected = sha256_bytes(
-            (
-                direction_id
-                + "\n"
-                + record["question_sha256"]
-                + "\n"
-                + record["evidence_set_sha256"]
-                + "\n"
-                + workflow_version
-            ).encode("utf-8")
-        )[:20]
-        if record["canonical_round_id"] != expected:
-            raise ValidationError(
-                f"historical_archives[{index}].canonical_round_id does not match frozen inputs"
+            _validate_transport_facts(
+                provider,
+                f"rounds[{index}].providers result",
             )
-        if record["observed_round_id"] == record["canonical_round_id"]:
-            raise ValidationError(
-                f"historical_archives[{index}] is not a cross-swapped round identity"
-            )
-        expected_archive_path = (
-            f"docs/external-review/directions/{direction_id}/"
-            f"{record['observed_round_id']}/{record['provider']}/"
-            "NATURAL_COMPLETION_ARCHIVE.json"
-        )
-        if record["legacy_archive_ref"]["path"] != expected_archive_path:
-            raise ValidationError(
-                f"historical_archives[{index}].legacy_archive_ref is not the exact legacy-owned path"
-            )
-        response_base = f"docs/research/candidates/{direction_id}/"
-        if not record["response_ref"]["path"].startswith(response_base):
-            raise _owner_error(
-                f"historical_archives[{index}].response_ref is outside the direction"
-            )
-
-        historical_round_ids.update(
-            (record["observed_round_id"], record["canonical_round_id"])
-        )
-        historical_key = (
-            record["observed_round_id"],
-            record["review_stage"],
-            record["provider"],
-        )
-        if historical_key in historical_keys:
-            raise ValidationError(
-                f"duplicate historical archive identity: {historical_key}"
-            )
-        historical_keys.add(historical_key)
-        for identities, identity, label in (
-            (operation_ids, record["operation_id"], "operation_id"),
-            (idempotency_keys, record["idempotency_key"], "idempotency_key"),
-            (archive_paths, record["legacy_archive_ref"]["path"], "legacy archive path"),
-        ):
-            if identity in identities:
+            if (provider["phase"] == "TERMINAL") != (
+                provider["completed_at"] is not None
+            ):
                 raise ValidationError(
-                    f"duplicate historical archive {label}: {identity}"
+                    f"rounds[{index}].providers completion time must match TERMINAL phase"
                 )
-            identities.add(identity)
 
-    synthetic_rounds = seen_rounds.intersection(historical_round_ids)
-    if synthetic_rounds:
-        raise ValidationError(
-            "historical archive identity must not be represented as an active round: "
-            + ", ".join(sorted(synthetic_rounds))
-        )
 
 def _validate_run_manifest(document: Mapping[str, Any]) -> None:
     if document["writer"] != document["operator_identity"]:
@@ -629,11 +569,209 @@ def _validate_accepted_result(document: Mapping[str, Any]) -> None:
         raise _owner_error("accepted source manifest path is not direction-owned")
 
 
+def _validate_authorizer(authorizer: Mapping[str, Any]) -> None:
+    role = authorizer["role"]
+    identity = authorizer["logical_identity"]
+    if role == "root":
+        expected_identity = "Root"
+    elif role == "hmasd-em":
+        expected_identity = f"EM-{identity.removeprefix('EM-')}"
+        if not identity.startswith("EM-"):
+            raise OwnershipError("EM authorizer must use an EM logical identity")
+    else:
+        expected_identity = f"CM-{identity.removeprefix('CM-')}"
+        if not identity.startswith("CM-"):
+            raise OwnershipError("CM authorizer must use a CM logical identity")
+    if identity != expected_identity:
+        raise OwnershipError("authorizer role does not match its logical identity")
+
+
+def _authorizer_authority_values(authorizer: Mapping[str, Any]) -> set[str]:
+    identity = authorizer["logical_identity"]
+    if identity == "Root":
+        return {"Portfolio", "Root", "root"}
+    role, direction_id = identity.split("-", 1)
+    return {identity, f"{role.lower()}:{direction_id}"}
+
+
+def _validate_clerk_operation(document: Mapping[str, Any]) -> None:
+    clerk_assignment_id = document["clerk_assignment_id"]
+    expected_executor = f"Clerk-{clerk_assignment_id}"
+    if document["executor"]["logical_identity"] != expected_executor:
+        raise OwnershipError("Clerk packet executor identity does not match its assignment")
+    _validate_authorizer(document["authorizer"])
+
+    unhashed = dict(document)
+    packet_sha256 = unhashed.pop("packet_sha256")
+    expected_sha256 = sha256_bytes(canonical_bytes(unhashed))
+    if packet_sha256 != expected_sha256:
+        raise ValidationError("Clerk packet_sha256 does not match canonical packet bytes")
+
+    authority = document["authority"]
+    authorizer = document["authorizer"]
+    authorized_values = _authorizer_authority_values(authorizer)
+    for field in ("document_writer", "git_actor"):
+        value = authority[field]
+        if value is not None and value not in authorized_values:
+            raise OwnershipError(f"Clerk packet {field} is not owned by its authorizer")
+
+    operation = document["operation"]
+    target = document["target"]
+    direction_id = authority["direction_id"]
+    if direction_id is not None:
+        identity = authorizer["logical_identity"]
+        if identity != "Root" and identity.split("-", 1)[1] != direction_id:
+            raise OwnershipError("Clerk packet direction does not match its authorizer")
+        if "direction_id" in target and target["direction_id"] != direction_id:
+            raise OwnershipError("Clerk packet target direction does not match authority")
+    if "worktree_kind" in target and target["worktree_kind"] != authority["worktree_kind"]:
+        raise OwnershipError("Clerk packet target worktree kind does not match authority")
+
+    if operation == "STATE_CAS":
+        if authority["document_writer"] != target["expected_document_writer"]:
+            raise OwnershipError("STATE_CAS writer does not match packet authority")
+    if operation.startswith("GIT_") or operation == "CANDIDATE_CREATE":
+        if authority["git_actor"] is None:
+            raise OwnershipError("Git Clerk operation requires its authority actor")
+    if operation == "GIT_INTEGRATE_PUSH":
+        if target["git_actor"] != authority["git_actor"]:
+            raise OwnershipError("Git integration target actor does not match authority")
+
+    mutation_lease = target.get("mutation_lease")
+    if mutation_lease is not None:
+        if mutation_lease["clerk_assignment_id"] != clerk_assignment_id:
+            raise OwnershipError("mutation lease does not match Clerk assignment")
+
+
+def _validate_transport_facts(facts: Mapping[str, Any], label: str) -> None:
+    """Enforce the shared current BrowserTransport state contract."""
+
+    failure = facts["failure"]
+    failure_is_none = failure["locus"] == "NONE"
+    if failure_is_none != (failure["code"] == "NONE"):
+        raise ValidationError(f"{label}.failure NONE locus and code must be paired")
+    if facts["provider"] == "chatgpt" and (
+        facts["product_model"] != "GPT-5.6 Sol"
+        or facts["reasoning_effort"] != "Pro"
+    ):
+        raise ValidationError(
+            f"{label} ChatGPT target must use product_model GPT-5.6 Sol and reasoning_effort Pro"
+        )
+    if facts["provider"] == "gemini" and facts["reasoning_effort"] is not None:
+        raise ValidationError(f"{label} Gemini target must use reasoning_effort null")
+
+    user_count = facts["provider_user_message_count"]
+    activation_count = facts["send_activation_count"]
+    for field in ("provider_user_message_count", "send_activation_count"):
+        count = facts[field]
+        if (
+            isinstance(count, bool)
+            or not isinstance(count, int)
+            or count not in {0, 1}
+        ):
+            raise ValidationError(f"{label}.{field} must be 0 or 1")
+
+    user_message_id = facts["user_message_id"]
+    assistant_message_id = facts["assistant_message_id"]
+    if (user_count == 0) != (user_message_id is None):
+        raise ValidationError(
+            f"{label}.provider_user_message_count is inconsistent with user_message_id"
+        )
+    if assistant_message_id is not None and user_message_id is None:
+        raise ValidationError(f"{label}.assistant_message_id requires user_message_id")
+    conversation_ref = facts["provider_conversation_ref"]
+    conversation_id = facts["provider_conversation_id"]
+    if (conversation_ref is None) != (conversation_id is None):
+        raise ValidationError(
+            f"{label} provider_conversation_ref and provider_conversation_id must be paired"
+        )
+
+    phase = facts["phase"]
+    commitment = facts["commitment"]
+    recoverability = facts["recoverability"]
+    capability = facts["message_capability"]
+    observability = facts["observability"]
+    archive_ref = facts["archive_ref"]
+
+    if commitment == "ZERO_PROVEN":
+        if phase not in {"VALIDATE", "PREPARE_UI", "ARMED"}:
+            raise ValidationError(f"{label} ZERO_PROVEN is legal only before commitment")
+        if recoverability != "PRECOMMIT_REPAIR":
+            raise ValidationError(f"{label} ZERO_PROVEN requires PRECOMMIT_REPAIR")
+        if capability not in {"AVAILABLE", "RESERVED"}:
+            raise ValidationError(f"{label} ZERO_PROVEN requires AVAILABLE or RESERVED capability")
+        if capability == "RESERVED" and phase != "ARMED":
+            raise ValidationError(f"{label} RESERVED capability is legal only while ARMED")
+        if user_count != 0 or activation_count != 0 or assistant_message_id is not None:
+            raise ValidationError(f"{label} ZERO_PROVEN requires zero messages and activations")
+        if archive_ref is not None:
+            raise ValidationError(f"{label} ZERO_PROVEN cannot have an archive")
+    elif commitment == "UNRESOLVED":
+        if (
+            phase != "VERIFY_COMMITMENT"
+            or recoverability != "OBSERVE_ONLY"
+            or capability != "SEALED"
+        ):
+            raise ValidationError(
+                f"{label} UNRESOLVED requires VERIFY_COMMITMENT, OBSERVE_ONLY, and SEALED"
+            )
+        if observability == "UNOBSERVED":
+            raise ValidationError(f"{label} UNRESOLVED must carry an observation")
+        if (
+            user_count != 0
+            or user_message_id is not None
+            or assistant_message_id is not None
+            or archive_ref is not None
+        ):
+            raise ValidationError(
+                f"{label} UNRESOLVED cannot claim provider message, response, or archive identity"
+            )
+    elif commitment == "ONE_EXACT":
+        if phase not in {"WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}:
+            raise ValidationError(f"{label} ONE_EXACT may only wait, read, archive, or terminate")
+        if capability != "SEALED" or user_count != 1:
+            raise ValidationError(
+                f"{label} ONE_EXACT requires SEALED capability and exactly one provider user message"
+            )
+        expected_recoverability = "NONE" if phase == "TERMINAL" else "POSTCOMMIT_RECOVERY"
+        if recoverability != expected_recoverability:
+            raise ValidationError(
+                f"{label} {phase} ONE_EXACT requires {expected_recoverability}"
+            )
+        if phase in {"READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"} and assistant_message_id is None:
+            raise ValidationError(f"{label} {phase} requires assistant_message_id")
+        if phase in {"WAIT_RESPONSE", "READ_RESPONSE"} and archive_ref is not None:
+            raise ValidationError(f"{label} {phase} cannot claim an archive")
+        if phase == "TERMINAL":
+            if archive_ref is None:
+                raise ValidationError(f"{label} natural completion requires archive_ref")
+            if observability != "FRESH_COMPLETE" or not failure_is_none:
+                raise ValidationError(
+                    f"{label} natural completion requires FRESH_COMPLETE and failure NONE"
+                )
+    else:
+        if (
+            phase != "TERMINAL"
+            or recoverability != "HUMAN_INTERLOCK"
+            or capability != "SEALED"
+            or failure_is_none
+        ):
+            raise ValidationError(
+                f"{label} VIOLATION requires TERMINAL, HUMAN_INTERLOCK, SEALED, and a failure"
+            )
+
+
 def _validate_agent_result(document: Mapping[str, Any]) -> None:
     payload = document["payload"]
     payload_kind = payload["kind"]
     role = document["role"]
     identity = document["logical_identity"]
+    action_ids: set[str] = set()
+    for action in document["next_actions"]:
+        action_id = action["action_id"]
+        if action_id in action_ids:
+            raise ValidationError(f"duplicate next action id: {action_id}")
+        action_ids.add(action_id)
     if payload_kind == "root":
         if role != "root" or identity != "Root":
             raise OwnershipError("Root result must be owned by Root")
@@ -659,6 +797,23 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
     elif payload_kind == "cm":
         if role != "hmasd-cm" or identity != f"CM-{payload['direction_id']}":
             raise OwnershipError("CM result does not match its direction manager")
+    elif payload_kind == "clerk":
+        if role != "hmasd-clerk":
+            raise OwnershipError("Clerk result must use hmasd-clerk role")
+        expected_identity = f"Clerk-{document['assignment_id']}"
+        if identity != expected_identity or payload["executor_identity"] != expected_identity:
+            raise OwnershipError("Clerk result identity does not match its assignment")
+        _validate_authorizer(payload["authorizer"])
+        authority_value = payload["authority_actor_or_writer"]
+        if (
+            authority_value is not None
+            and authority_value not in _authorizer_authority_values(payload["authorizer"])
+        ):
+            raise OwnershipError("Clerk result changed its authority actor or writer")
+        if document["decision_requests"]:
+            raise OwnershipError("Clerk result cannot request a decision")
+        if document["next_actions"]:
+            raise OwnershipError("Clerk result cannot choose a successor")
     else:
         permitted_roles = {
             "implementation": {"hmasd-implementer", "hmasd-implementer-terra"},
@@ -683,6 +838,7 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
         if role == "hmasd-browser-transport":
             if identity != "BrowserTransport":
                 raise OwnershipError("BrowserTransport result must use BrowserTransport identity")
+            _validate_transport_facts(payload, "transport payload")
         elif identity != role:
             raise OwnershipError("specialist result does not match its logical identity")
     if document["decision_requests"] and document["materiality"] != "USER":
@@ -698,13 +854,14 @@ def _validate_runtime_agents(document: Mapping[str, Any]) -> None:
         if identity in identities:
             raise ValidationError(f"duplicate runtime logical identity: {identity}")
         identities.add(identity)
+        if agent["agent_type"] == "hmasd-clerk":
+            assignment_id = agent["assignment_id"]
+            if identity != f"Clerk-{assignment_id}":
+                raise OwnershipError("runtime Clerk identity must match its assignment")
+            if agent["parent_identity"] != "Root":
+                raise OwnershipError("runtime Clerk must be a Root child")
         if identity == "Root" and agent["parent_identity"] != "Root":
             raise OwnershipError("Root runtime agent must be self-parented")
-        if agent["agent_type"] in {
-            "hmasd-external-pro-transport",
-            "hmasd-external-gemini-transport",
-        }:
-            raise ValidationError("retired external provider transport agent is not active")
         if identity == "BrowserTransport":
             if agent["agent_type"] != "hmasd-browser-transport":
                 raise OwnershipError("BrowserTransport runtime agent type mismatch")
@@ -721,6 +878,10 @@ def _validate_runtime_browser_assignments(document: Mapping[str, Any]) -> None:
         if assignment_id in assignment_ids:
             raise ValidationError(f"duplicate BrowserTransport assignment id: {assignment_id}")
         assignment_ids.add(assignment_id)
+        _validate_transport_facts(
+            assignment,
+            f"BrowserTransport assignment {assignment_id!r}",
+        )
 
 def _validate_runtime_worktrees(document: Mapping[str, Any]) -> None:
     seen_refs: set[str] = set()
@@ -742,14 +903,6 @@ def _validate_runtime_worktrees(document: Mapping[str, Any]) -> None:
             raise OwnershipError("runtime worktree canonical path is a symlink")
 
 
-def _validate_archive(document: Mapping[str, Any]) -> None:
-    if document["terminalState"] != "NATURAL_COMPLETION_VERIFIED":
-        raise ValidationError("archive is not a natural completion")
-    if document["sendCount"] > 1 or document["sendActionCount"] > 1:
-        raise ValidationError("archive exceeds Agentify at-most-once counts")
-    expected = sha256_bytes(document["responseText"].encode("utf-8"))
-    if document["responseSha256"] != expected:
-        raise ValidationError("archive responseSha256 does not match responseText UTF-8 bytes")
 
 
 def _validate_custom(
@@ -774,14 +927,14 @@ def _validate_custom(
         _validate_accepted_result(document)
     elif kind == "agent_result":
         _validate_agent_result(document)
+    elif kind == "clerk_operation":
+        _validate_clerk_operation(document)
     elif kind == "runtime_agents":
         _validate_runtime_agents(document)
     elif kind == "runtime_browser_assignments":
         _validate_runtime_browser_assignments(document)
     elif kind == "runtime_worktrees":
         _validate_runtime_worktrees(document)
-    elif kind == "external_archive":
-        _validate_archive(document)
 
 
 def _precheck_writer_ownership(kind: str, document: Mapping[str, Any]) -> None:
@@ -858,22 +1011,18 @@ def _validate_document(
     normalized = normalize_kind(kind)
     if not isinstance(document, dict):
         raise ValidationError("state document must be a JSON object")
-    if normalized == "external_archive":
-        if any(key in document for key in ("schema_version", "revision", "writer")):
-            raise ValidationError("foreign Agentify archive cannot contain HMASD metadata")
-    else:
-        version = document.get("schema_version")
-        supported_version = 3 if normalized == "external_review_index" else SUPPORTED_SCHEMA_VERSION
-        if isinstance(version, int) and not isinstance(version, bool) and version > supported_version:
-            raise UnsupportedVersionError(f"unsupported schema version {version}")
-        _precheck_writer_ownership(normalized, document)
+    version = document.get("schema_version")
+    supported_version = 4 if normalized == "external_review_index" else SUPPORTED_SCHEMA_VERSION
+    if isinstance(version, int) and not isinstance(version, bool) and version > supported_version:
+        raise UnsupportedVersionError(f"unsupported schema version {version}")
+    _precheck_writer_ownership(normalized, document)
     schema = load_schema(normalized)
     try:
         _validate_schema(document, schema, schema, "$")
     except _SchemaFailure as exc:
         raise ValidationError(str(exc)) from exc
     _check_document_paths(document)
-    if normalized not in {"external_archive", "agent_result"}:
+    if normalized not in {"agent_result", "clerk_operation"}:
         _ensure_timestamp(document["updated_at"], "updated_at")
         if writer is not None and document["writer"] != writer:
             raise _owner_error(f"writer {document['writer']!r} does not match requested writer {writer!r}")
@@ -1044,7 +1193,7 @@ def _require_current_write_schema(kind: str, document: Mapping[str, Any]) -> Non
     expected = CURRENT_WRITE_SCHEMA_VERSIONS.get(normalized)
     if expected is not None and document.get("schema_version") != expected:
         raise UnsupportedVersionError(
-            f"{normalized} writes require schema version {expected}; migrate persisted state first"
+            f"{normalized} requires current schema version {expected}"
         )
 
 
@@ -1115,8 +1264,8 @@ def replace(
     input: Mapping[str, Any] | str | os.PathLike[str],
 ) -> dict[str, Any]:
     normalized = normalize_kind(kind)
-    if normalized in {"agent_result", "external_archive"}:
-        raise ObservedConflictError(f"{normalized} is an immutable record")
+    if normalized == "agent_result":
+        raise ObservedConflictError("agent_result is an immutable record")
     target = Path(path)
     document = _input_document(input)
     _require_current_write_schema(normalized, document)
@@ -1126,6 +1275,11 @@ def replace(
     with state_lock(target):
         current_bytes, current = _read_document(target)
         _validate_current_document(normalized, current, writer=writer)
+        if (
+            normalized in CURRENT_WRITE_SCHEMA_VERSIONS
+            and document["schema_version"] != current["schema_version"]
+        ):
+            raise UnsupportedVersionError("schema version is immutable and must already be current")
         current_revision = current["revision"]
         if current_revision != expected_revision:
             raise RevisionConflictError(
@@ -1205,21 +1359,11 @@ def _validate_external_index_transition(
         ("direction_id", "writer", "workflow_version"),
         "external review index",
     )
-    if next_document["schema_version"] < current["schema_version"]:
-        _immutable_conflict("external review index schema_version")
-    current_history = current.get("historical_archives", [])
-    next_history = next_document.get("historical_archives", [])
-    if (
-        current["schema_version"] == 2
-        and next_document["schema_version"] == 3
-        and next_history
-    ):
-        _immutable_conflict("external review index schema migration historical_archives")
-    if (
-        len(next_history) < len(current_history)
-        or next_history[: len(current_history)] != current_history
-    ):
-        _immutable_conflict("external review index historical_archives prefix")
+    _require_unchanged(
+        current["schema_version"],
+        next_document["schema_version"],
+        "external review index.schema_version",
+    )
     for round_id, current_round, next_round in _matching_records(
         current["rounds"],
         next_document["rounds"],
@@ -1256,33 +1400,16 @@ def _validate_external_index_transition(
             provider_label = f"{label}.providers.{provider_name}"
             if next_provider is None:
                 _immutable_conflict(provider_label)
-            _require_unchanged_fields(
+            _validate_transport_transition(
                 current_provider,
                 next_provider,
-                ("operation_id", "idempotency_key", "session_ref"),
                 provider_label,
-            )
-            _require_append_only(
-                current_provider["archive_ref"],
-                next_provider["archive_ref"],
-                f"{provider_label}.archive_ref",
-            )
-            _require_append_only(
-                current_provider["handoff_ref"],
-                next_provider["handoff_ref"],
-                f"{provider_label}.handoff_ref",
             )
             _require_append_only(
                 current_provider["completed_at"],
                 next_provider["completed_at"],
                 f"{provider_label}.completed_at",
             )
-            if current_provider["completed_at"] is not None:
-                _require_unchanged(
-                    current_provider["terminal_state"],
-                    next_provider["terminal_state"],
-                    f"{provider_label}.terminal_state",
-                )
 
 
 def _validate_run_process_transition(
@@ -1393,6 +1520,12 @@ def _validate_runtime_agents_transition(
             ("agent_type", "parent_identity"),
             label,
         )
+        if current_agent["agent_type"] == "hmasd-clerk":
+            _require_unchanged(
+                current_agent["assignment_id"],
+                next_agent["assignment_id"],
+                f"{label}.assignment_id",
+            )
         if next_agent["generation"] < current_agent["generation"]:
             _immutable_conflict(f"{label}.generation")
         if next_agent["generation"] == current_agent["generation"]:
@@ -1401,6 +1534,78 @@ def _validate_runtime_agents_transition(
                 next_agent["runtime_ref"],
                 f"{label}.runtime_ref",
             )
+
+
+def _validate_transport_transition(
+    current: Mapping[str, Any],
+    next_document: Mapping[str, Any],
+    label: str,
+) -> None:
+    if current["phase"] == "TERMINAL":
+        _require_unchanged(current, next_document, f"{label} TERMINAL provenance")
+        return
+
+    _require_unchanged_fields(
+        current,
+        next_document,
+        (
+            "provider",
+            "product_model",
+            "reasoning_effort",
+            "operation_id",
+            "idempotency_key",
+            "operation_ref",
+        ),
+        label,
+    )
+    for field in (
+        "provider_conversation_ref",
+        "provider_conversation_id",
+        "user_message_id",
+        "assistant_message_id",
+        "archive_ref",
+        "handoff_ref",
+    ):
+        _require_append_only(current[field], next_document[field], f"{label}.{field}")
+
+    current_phase = current["phase"]
+    next_phase = next_document["phase"]
+    if next_phase not in TRANSPORT_PHASE_TRANSITIONS[current_phase]:
+        raise ObservedConflictError(
+            f"illegal {label} phase transition {current_phase} -> {next_phase}"
+        )
+    current_commitment = current["commitment"]
+    next_commitment = next_document["commitment"]
+    if next_commitment not in TRANSPORT_COMMITMENT_TRANSITIONS[current_commitment]:
+        raise ObservedConflictError(
+            f"illegal {label} commitment transition {current_commitment} -> {next_commitment}"
+        )
+
+    current_capability = current["message_capability"]
+    next_capability = next_document["message_capability"]
+    if current_capability == "SEALED":
+        if next_capability != "SEALED":
+            _immutable_conflict(f"{label}.message_capability")
+    elif current_capability == "RESERVED" and next_capability == "AVAILABLE":
+        failure = next_document["failure"]
+        if (
+            next_document["phase"] != "PREPARE_UI"
+            or next_document["commitment"] != "ZERO_PROVEN"
+            or next_document["recoverability"] != "PRECOMMIT_REPAIR"
+            or failure["locus"] != "PRECOMMIT_UI"
+            or failure["code"] != "DIRECT_NO_ACTIVATION_RECEIPT"
+        ):
+            raise ObservedConflictError(
+                f"{label} RESERVED may be released only by a direct no-activation receipt"
+            )
+    elif current_capability == "RESERVED" and next_capability != "SEALED":
+        raise ObservedConflictError(
+            f"{label} interrupted RESERVED capability must become SEALED"
+        )
+
+    for field in ("provider_user_message_count", "send_activation_count"):
+        if next_document[field] < current[field]:
+            _immutable_conflict(f"{label}.{field}")
 
 
 def _validate_runtime_browser_assignments_transition(
@@ -1421,34 +1626,16 @@ def _validate_runtime_browser_assignments_transition(
                 "requester_identity",
                 "request_ref",
                 "direction_id",
-                "provider",
                 "mode",
             ),
             label,
         )
-        for field in (
-            "effect_ref",
-            "operation_ref",
-            "provider_conversation_ref",
-            "archive_ref",
-        ):
-            _require_append_only(
-                current_assignment[field],
-                next_assignment[field],
-                f"{label}.{field}",
-            )
-        if current_assignment["transport_state"] in {
-            "COMPLETE",
-            "SENT_INPUT_MISMATCH",
-            "SENT_MODEL_MISMATCH",
-            "CONVERSATION_LOST",
-            "WAIVED",
-        }:
-            _require_unchanged(
-                current_assignment,
-                next_assignment,
-                f"{label} terminal provenance",
-            )
+        _require_append_only(
+            current_assignment["effect_ref"],
+            next_assignment["effect_ref"],
+            f"{label}.effect_ref",
+        )
+        _validate_transport_transition(current_assignment, next_assignment, label)
 
 
 def _validate_runtime_worktrees_transition(
@@ -1517,106 +1704,6 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_runtime_worktrees_transition(current, next_document)
 
 
-_RESEARCH_V1_ROUTE_OWNERS = {
-    "AWAIT_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY": "EM",
-    "DISPATCH_RESEARCH": "EM",
-    "IDLE": "ROOT",
-    "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP": "EM",
-    "ROOT_DISPATCH_PREACTIVITY_RESOURCE_ESTIMATOR": "CM",
-}
-
-_ENGINEERING_V1_ROUTE_OWNERS = {
-    "ROOT_RUN_LINUX_CPU_FOCUSED_ESTIMATOR_VALIDATION": "ROOT",
-    "SCOUT_CODE": "CM",
-    "UNREQUESTED": "ROOT",
-    "WAIT": "ROOT",
-}
-
-
-def _migrate_routed_state_v1(
-    document: dict[str, Any],
-    route_owners: Mapping[str, str],
-) -> dict[str, Any]:
-    action = document["next_action"]
-    kind = action["kind"]
-    owner = route_owners.get(kind)
-    if owner is None:
-        raise ValidationError(f"schema v1 next_action {kind!r} has no deterministic route")
-    action["owner"] = owner
-    document["schema_version"] = 2
-    return document
-
-
-def _migrate_research_state_v1(document: dict[str, Any]) -> dict[str, Any]:
-    return _migrate_routed_state_v1(document, _RESEARCH_V1_ROUTE_OWNERS)
-
-
-def _migrate_engineering_state_v1(document: dict[str, Any]) -> dict[str, Any]:
-    return _migrate_routed_state_v1(document, _ENGINEERING_V1_ROUTE_OWNERS)
-
-
-def _migrate_external_review_index_v2(document: dict[str, Any]) -> dict[str, Any]:
-    document["schema_version"] = 3
-    document["historical_archives"] = []
-    return document
-
-
-def register_migration(kind: str, from_version: int, function: Migration) -> None:
-    normalized = normalize_kind(kind)
-    if not isinstance(from_version, int) or from_version < 1:
-        raise ValueError("migration source version must be positive")
-    if not callable(function):
-        raise TypeError("migration must be callable")
-    MIGRATIONS.setdefault(normalized, {})[from_version] = function
-register_migration("research_state", 1, _migrate_research_state_v1)
-register_migration("engineering_state", 1, _migrate_engineering_state_v1)
-register_migration("external_review_index", 2, _migrate_external_review_index_v2)
-
-
-
-def migrate(
-    kind: str,
-    path: str | os.PathLike[str],
-    writer: str,
-    expected_revision: int,
-    to_version: int,
-) -> dict[str, Any]:
-    normalized = normalize_kind(kind)
-    if normalized in {"agent_result", "external_archive"}:
-        raise ObservedConflictError(f"{normalized} is an immutable record")
-    target = Path(path)
-    with state_lock(target):
-        current_bytes, current = _read_document(target)
-        _validate_current_document(normalized, current, writer=writer)
-        if current["revision"] != expected_revision:
-            raise RevisionConflictError(
-                f"expected revision {expected_revision}, observed {current['revision']}"
-            )
-        current_version = current["schema_version"]
-        if to_version <= current_version:
-            raise UnsupportedVersionError("migrations are one-way and cannot downgrade")
-        transformed = copy.deepcopy(current)
-        version = current_version
-        while version < to_version:
-            function = MIGRATIONS.get(normalized, {}).get(version)
-            if function is None:
-                raise UnsupportedVersionError(f"no migration registered for {normalized} {version} -> {version + 1}")
-            transformed = function(copy.deepcopy(transformed))
-            if not isinstance(transformed, dict):
-                raise ValidationError("migration did not return an object")
-            version += 1
-            if transformed.get("schema_version") != version:
-                raise ValidationError("migration must set schema_version to exactly the next version")
-        transformed["revision"] = current["revision"] + 1
-        transformed["writer"] = writer
-        validate_document(normalized, transformed, writer=writer)
-        _validate_transition(normalized, current, transformed)
-        backup_dir = ROOT / "temp" / "runtime" / "migrations"
-        backup_dir.mkdir(parents=True, exist_ok=True)
-        backup_name = f"{sha256_bytes(os.fsencode(str(target.absolute())))[:16]}-r{current['revision']}.json"
-        atomic_write(backup_dir / backup_name, current_bytes)
-        atomic_write(target, _canonical_bytes(transformed))
-    return transformed
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -1640,12 +1727,6 @@ def _parser() -> argparse.ArgumentParser:
     replace_parser.add_argument("--expected-revision", required=True, type=int)
     replace_parser.add_argument("--input", required=True)
 
-    migrate_parser = subparsers.add_parser("migrate")
-    migrate_parser.add_argument("--kind", required=True)
-    migrate_parser.add_argument("--path", required=True)
-    migrate_parser.add_argument("--writer", required=True)
-    migrate_parser.add_argument("--expected-revision", required=True, type=int)
-    migrate_parser.add_argument("--to-version", required=True, type=int)
     return parser
 
 
@@ -1659,8 +1740,6 @@ def main(argv: list[str] | None = None) -> int:
             initialize(args.kind, args.path, args.writer, args.input)
         elif args.command == "replace":
             replace(args.kind, args.path, args.writer, args.expected_revision, args.input)
-        elif args.command == "migrate":
-            migrate(args.kind, args.path, args.writer, args.expected_revision, args.to_version)
         else:
             raise ValidationError(f"unknown command {args.command}")
     except StateError as exc:

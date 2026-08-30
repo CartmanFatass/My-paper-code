@@ -27,7 +27,7 @@
     "next_action"
   ],
   "properties": {
-    "schema_version": { "type": "integer", "enum": [1, 2] },
+    "schema_version": { "type": "integer", "const": 2 },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "pattern": "^CM-[a-z0-9][a-z0-9_-]{1,63}$" },
@@ -181,7 +181,7 @@
     "next_action": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "input_refs"],
+      "required": ["kind", "owner", "input_refs"],
       "properties": {
         "kind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
         "owner": {

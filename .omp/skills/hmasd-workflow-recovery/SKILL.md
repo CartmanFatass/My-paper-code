@@ -79,9 +79,9 @@ effects, reinterpret science, or become a generic approval layer.
    - **External commitment unknown:** observe the same exact Agentify operation
      and bound provider conversation; never resend, create another operation,
      or substitute a fresh conversation.
-   - **Transport state `SENT_WAITING`:** use `OBSERVE_ONLY` on that same
-     operation and conversation. It never authorizes a send, prompt change, or
-     replacement operation.
+   - **Transport tuple `VERIFY_COMMITMENT + UNRESOLVED + OBSERVE_ONLY +
+     SEALED`:** observe that same operation and conversation. It never
+     authorizes activation, prompt change, or replacement operation.
    - **Late transport or specialist output:** compare requester generation and
      checkpoint. A transport result for a stale requester generation is
      superseded evidence: retain its exact refs read-only and never overwrite
@@ -117,17 +117,32 @@ loop exists.
 
 ## Returned result envelope
 
-Return the common v1 envelope with `role: "hmasd-workflow-recovery-manager"` and
+Return the common v2 envelope with `role: "hmasd-workflow-recovery-manager"` and
 payload:
 
-```json
 {
-  "kind": "recovery",
-  "failure_class": "<research|manager|code-worktree|run|memory|git|push|external-send|late-result|runtime|dashboard>",
-  "observed_refs": [],
-  "attempts": [],
-  "outcome": "RESUMABLE",
-  "resume_condition": "<one exact condition or null>"
+  "schema_version": 2,
+  "role": "hmasd-workflow-recovery-manager",
+  "logical_identity": "hmasd-workflow-recovery-manager",
+  "generation": 1,
+  "assignment_id": "example-recovery-assignment-001",
+  "status": "COMPLETED",
+  "materiality": "LOCAL",
+  "summary": "Observed a resumable recovery condition.",
+  "changed_paths": [],
+  "state_refs": [],
+  "artifact_refs": [],
+  "checkpoint_sha": null,
+  "decision_requests": [],
+  "next_actions": [],
+  "payload": {
+    "kind": "recovery",
+    "failure_class": "runtime",
+    "observed_refs": [],
+    "attempts": [],
+    "outcome": "RESUMABLE",
+    "resume_condition": null
+  }
 }
 ```
 
@@ -143,9 +158,9 @@ Preserve bytes on schema, version, revision, generation, requester generation,
 checkpoint, PARKED reactivation, writer-phase, or base conflict and stop rather
 than guessing. A stale-generation result is read-only superseded evidence until
 Root reconciles it. Unknown run or result state returns an observation
-condition with no relaunch. Unknown external commitment returns an observation
-condition for the same operation with no resend, and `SENT_WAITING` remains
-observe-only. A missing Reviewer, test, Dashboard, or Advisor result is an
+condition with no relaunch. `VERIFY_COMMITMENT + UNRESOLVED + OBSERVE_ONLY +
+SEALED` returns an observation condition for the same operation and never
+activates again. A missing Reviewer, test, Dashboard, or Advisor result is an
 evidence gap, not a recovery trigger by itself.
 
 ## Deletion condition

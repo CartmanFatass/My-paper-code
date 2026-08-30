@@ -20,6 +20,11 @@ launch:
   enabled: true
 
 task:
+  batch: true
+  isolation:
+    mode: auto
+    apply: false
+    merge: patch
   maxConcurrency: 32
   maxRecursionDepth: 2
   enableEffort: false
@@ -44,6 +49,7 @@ EXPECTED_ADVISORS = {
 EXPECTED_NO_ADVISOR = {
     "hmasd-em",
     "hmasd-cm",
+    "hmasd-clerk",
     "hmasd-project-scout",
     "hmasd-code-scout",
     "hmasd-reviewer",
@@ -103,6 +109,8 @@ def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
     assert _agent_advisor_mapping(config) == EXPECTED_ADVISORS
     assert "advisor:\n  enabled: false" in config
+    assert "  batch: true" in config
+    assert "  isolation:\n    mode: auto\n    apply: false\n    merge: patch" in config
 
     agent_dir = REPO_ROOT / ".omp" / "agents"
     project_agents = {path.stem for path in agent_dir.glob("*.md")}
@@ -111,6 +119,9 @@ def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
         metadata = _frontmatter(path)
         assert "\nadvisor:" not in metadata
         assert "agentAdvisor" not in metadata
+        if path.stem == "hmasd-clerk":
+            assert "\nprewalk:" not in metadata
+            assert "\neffort:" not in metadata
 
     instructions = (REPO_ROOT / ".omp" / "AGENTS.md").read_text(encoding="utf-8")
     watchdog = (REPO_ROOT / ".omp" / "WATCHDOG.md").read_text(encoding="utf-8")

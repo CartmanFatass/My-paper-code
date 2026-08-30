@@ -13,6 +13,11 @@ launch:
   enabled: true
 
 task:
+  batch: true
+  isolation:
+    mode: auto
+    apply: false
+    merge: patch
   maxConcurrency: 32
   maxRecursionDepth: 2
   enableEffort: false

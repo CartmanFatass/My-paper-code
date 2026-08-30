@@ -31,6 +31,84 @@ Authority is deliberately split rather than inferred from process status:
   run manifests, external-operation references, and Git. A runtime status never
   silently changes Portfolio lifecycle or role-owned conclusions.
 
+## OMP-native Root event projection
+
+Root applies these exact invariants on every material wake:
+
+1. **R1_SINGLE_CONTROLLER:** Root alone derives runnable nodes and admits work
+   from durable authority, accepted envelopes, runtime jobs/effects/worktrees,
+   and exact receipts. The projection is not a daemon, queue, registry,
+   lifecycle authority, retry engine, watcher, or second scheduler.
+2. **R2_FINITE_EVENT_SNAPSHOT:** Root reconciles once, snapshots the finite set
+   of deliveries queued at the wake cutoff, and drains that set before
+   scheduling. Later arrivals belong to the next material wake.
+3. **R3_EXACTLY_ONCE_CONSUMPTION:** delivery ID and result identity are
+   separate. Root dedupes deliveries by job/message ID and results by
+   `NodeKey+result_sha256`; settlement is not acceptance. Every accepted or
+   refused result receives exactly one causal disposition, and invalid results
+   remain actionable evidence.
+4. **R4_UNIQUE_NODE:** `NodeKey` is
+   `(logical_identity,generation,assignment_id)` and has at most one terminal
+   product. Each Clerk operation and manager reentry has a new assignment ID.
+   Compatible scope may retain session/identity/generation; material scope
+   change increments generation.
+5. **R5_EXACT_EDGE:** an edge is satisfied only by an accepted producer
+   NodeKey, result digest, required status/payload kind and refs, or by an
+   immutable authority ref/SHA/revision or checkpoint. File/job presence,
+   direction, salience, timing, settlement, and later target SHA are not edges.
+6. **R6_ACCEPTANCE_BEFORE_RELEASE:** OMP natively releases its slot on job
+   settlement; Root releases an advancing Portfolio leg only after accepting
+   and routing its terminal fact. Technical failure is not science/lifecycle.
+7. **R7_CAPACITY_SEPARATION:** advancing Portfolio capacity, OMP concurrency,
+   BrowserTransport commitment, one-command Operator ownership, Git target
+   lock, physical worktree lease, and state-path CAS are separate resource
+   classes. A full class cannot hide work using another available class.
+8. **R8_MAXIMAL_DISPATCH:** outside `PAUSE`, Root dispatches the maximal
+   admissible independent set after consumption/screening, preferably in one
+   `task.batch`. A slow child never blocks independent work. Root reconciles
+   partial registration per item, retries no batch wholesale, and admits one
+   canonical target mutator while unrelated packets remain runnable.
+9. **R9_PAUSE:** `PAUSE` admits no new task or Effect—Clerk, CAS, Git, send,
+   Run, refill, or manager revival. Root may validate deliveries and
+   non-sendingly observe only already-committed Effects through their existing
+   owners. With none it returns `PAUSED/IDLE`.
+10. **R10_LOCKS_NOT_AUTHORITY:** canonical locks only exclude overlapping
+    mutation. They do not choose order, retry, actor, scope, or acceptance;
+    waiters are explicit resource-blocked nodes.
+11. **R11_NO_POLL_LOOP:** one material wake performs one reconciliation and one
+    reassessment. A legal Hub wait races broad coordination events, not one
+    salient/first child. Timeout and useless all-running snapshots do not start
+    another wait.
+12. **R12_CHECKPOINT_PROOF:** every checkpoint, wait, and terminal summary names
+    Portfolio authorized/live/free capacity; OMP running/queued limits; queued
+    delivery IDs; unconsumed and consumed result keys/digests; runnable/inflight
+    NodeKeys; exact blocked dependency/resource edges; current target operation
+    ID/lock; Run, Transport, worktree, and external refs; and Dashboard status
+    (`NOT_CONFIGURED` is valid and non-gating).
+
+Wait is legal iff queued deliveries, delivered-but-unconsumed results,
+runnable-after-admission nodes, unfinished screening, and unrouted consequences
+are all empty, and at least one exact reason holds: a nonempty set of
+already-committed Effects needs safe non-sending `PAUSE` observation; all
+Portfolio slots have live advancing work and every non-capacity obligation is
+inflight or exactly blocked; the contemplated action has a nonempty exact live
+dependency set after all unrelated admissible nodes were dispatched; every
+otherwise runnable node is blocked on a named saturated OMP/effect resource
+whose holder is observed live/committed; or no candidate is admissible and the
+screened candidates, excluding evidence, strongest counterfactual, and exact
+reentry are recorded. An invalid/unconsumed result, unfinished screening, free
+admissible refill, runnable non-scientific operation, or unrouted consequence
+makes wait illegal. Wait is broad, never first-child or all-terminal.
+Empty-effect `PAUSE` returns; timeout is not a material wake.
+
+The common result carrier requires `next_actions` and has no `next_action`
+compatibility alias. Every closed item contains `action_id`, `kind`, `owner`
+(including `CLERK`), `input_refs`, strict `dependencies`,
+`authorized_effect_ref`, and `stop_or_reentry_ref`. Independent obligations are
+simultaneous and array order is inert. Dependencies are strict one-of: an
+accepted producer tuple plus result digest, status/payload kind, and refs; or an
+immutable authority path/SHA plus revision/checkpoint.
+
 Durable direction content is layered under
 `docs/research/candidates/<direction-id>/`. Scientific authority is
 `DIRECTION.md`. EM writes `<cycle-id>-scope-freeze.md`, material
@@ -96,9 +174,10 @@ Every accepted analytical return is a common analytical product containing:
   decision; and
 - `DONE_REASON` and an exact reentry trigger.
 
-The product remains inside the role-specific payload of the existing common v1
-result envelope; no new result carrier, schema, role, registry, lifecycle, or
-scheduler is introduced. `NO_MATERIAL_INSIGHT` is a successful terminal,
+The product remains inside the role-specific payload of the common v2 result
+envelope; the clean-cut `next_actions` array carries every explicit successor
+obligation. This adds no alternative carrier, authority, lifecycle registry, or
+scheduler. `NO_MATERIAL_INSIGHT` is a successful terminal,
 negative-complete analytical product: it records the sources inspected,
 methods attempted, why no answer-changing insight follows within the frozen
 scope, and residual uncertainty. It is not `FAILED`, approval, negative
@@ -170,26 +249,25 @@ status, task liveness, and Git state are likewise facts at their own boundaries;
 they cannot be promoted into science or lifecycle decisions.
 
 Portfolio allocation is active, not an all-terminal join. Root consumes each
-terminal EM, CM, Transport, Run, or Portfolio analytical fact as soon as it
-arrives, preserves its role-owned meaning, routes its consequence, recomputes
-live advancing work, and adopts any Portfolio action supported by current
-comparative evidence. A completed Portfolio analysis closes its gap or exposes
-an evidenced residual gap immediately; it does not wait for sibling analyses.
-Root may act on an unrelated direction while other analyses remain live and
-waits only when a live result is a dependency of the contemplated action.
-An unresolved relationship terminates as `UNKNOWN` with an exact reentry
-trigger rather than holding every direction at a global barrier.
+terminal EM, CM, Transport, Run, Clerk, or Portfolio analytical fact from the
+finite delivery snapshot, validates and causally consumes its exact result
+digest, preserves role-owned meaning, routes its consequence, recomputes live
+advancing work, and dispatches the maximal admissible independent set. A
+completed Portfolio analysis closes its gap or exposes an evidenced residual
+gap immediately; it does not wait for sibling analyses. A slow direction never
+blocks independent Transport, Portfolio analysis, or Clerk work. An unresolved
+relationship terminates as `UNKNOWN` with an exact reentry trigger rather than
+holding every direction at a global barrier.
 
 When advancing work is below authorized capacity and control is not `PAUSED`,
-Root screens the strongest authorized candidates and dispatches the best
-admissible successor or replacement to an exact available EM without waiting
-for every other leg. Scientific analytical fan-out or refill follows current
-distinct gaps and fitting methods, never a target leaf count. Unused capacity
-requires an explicit comparison against the strongest candidate and an exact
-reentry condition. `PAUSE` retains the current work and permits safe
-observation of already-committed Effects, but blocks active refill, fresh
-dispatch, provider sends, experiment launches, and every other new Effect
-until `RESUME`.
+Root screens the strongest authorized candidates and includes every admissible
+successor or replacement in the same wake. Scientific analytical fan-out or
+refill follows current distinct gaps and fitting methods, never a target leaf
+count. Unused capacity requires an explicit comparison against the strongest
+candidate and an exact reentry condition. `PAUSE` retains obligations but
+blocks every fresh task and Effect. It permits delivered-result validation and
+safe non-sending observation only for already-committed Effects through their
+existing owners; empty-effect `PAUSE` returns `PAUSED/IDLE`.
 
 The registry lifecycle has four states:
 
@@ -202,9 +280,10 @@ The registry lifecycle has four states:
 - `CLOSED`: terminal investment disposition, reopened only by an explicit new
   Portfolio action on materially new grounds.
 
-Lifecycle/action adoption is written coherently to Portfolio authority and the
-registry through `scripts/hmasd_state.py` with expected revision before new
-direction work is dispatched.
+Root prepares lifecycle/action authority coherently, freezes complete desired
+registry bytes and expected revision in a `STATE_CAS` packet, and waits for the
+exact accepted Clerk receipt before dispatch that depends on the adoption.
+Clerk invokes `scripts/hmasd_state.py`; Root does not perform the CAS.
 
 ## Direction cycles and durable handoffs
 
@@ -212,26 +291,38 @@ An EM material cycle is one bounded scientific question with
 `cycle_boundary` equal to `FRESH_MATERIAL_CYCLE`, `CONTINUATION`,
 `CM_RESULT_INTERPRETATION`, `EVIDENCE_INTAKE`, or
 `TERMINAL_GAP_DISPOSITION`. A fresh material cycle normally includes Pro
-Innovator and Pro Convergence using the required visible Pro model unless the
-user waives the exact unsent operation. Evidence intake, continuation, CM-result
-interpretation, and terminal-gap disposition do not manufacture a fresh cycle
-or external-operation budget. EM separates facts, external evidence,
+Innovator and Pro Convergence through the exact provider product model and
+reasoning-effort axes; the current ChatGPT target is product model
+`GPT-5.6 Sol` with reasoning effort `Pro`. Root authorizes one provider-visible
+user message, not one browser attempt, click, tab, or Agentify operation.
+Evidence intake, continuation, CM-result interpretation, and terminal-gap
+disposition do not manufacture another message authorization. EM separates
+facts, external evidence,
 inference, and speculation, preserves the claim ceiling, and sends engineering
 needs to Root as durable request references.
 
-CM is contract-first. It accepts an exact durable engineering request, freezes
-scope, non-goals, interfaces, protected semantics, acceptance, owned paths, and
-an evidence-role policy before implementation. It reports the independent axes
-`engineering_status`, `observation_status`, and `verification_status` using the
-values defined by the CM contract. Implementer, Reviewer, Verifier, and
-Experiment Operator outputs retain their evidence roles; none is permission or
-scientific judgment. CM returns the resulting durable reference to Root, which
-routes it back to EM when scientific interpretation is required.
+CM is contract-first. It accepts an exact durable engineering request only from
+the exact accepted same-direction EM `integrated_sha`, freezes scope, non-goals,
+interfaces, protected semantics, acceptance, owned paths, and an evidence-role
+policy before implementation. It reports independent `engineering_status`,
+`observation_status`, and `verification_status` axes. Implementer, Reviewer,
+Verifier, and Experiment Operator outputs retain their evidence roles; none is
+permission or scientific judgment.
+
+EM and CM return their semantic facts promptly with `semantic_product_ref` and
+`persistence_status=PREPARED`. Durable state, `candidate_sha`, and
+`integrated_sha` remain null until observed. Each manager freezes complete
+content-addressed Clerk packets and explicit independent `next_actions`.
+Same-direction EM-to-CM waits for accepted EM `integrated_sha`; CM-to-EM result
+interpretation waits for accepted CM `integrated_sha`. A Clerk refusal or
+unknown outcome changes only the mechanical edge, preserves semantic
+acceptance, and permits compatible manager reentry with a new assignment ID.
+Material scope change requires a new generation.
 
 ## OMP communication and BrowserTransport
 
 Every cross-role dispatch uses an OMP `task` or Hub carrier and names the common
-v1 identity/generation/assignment envelope. In addition, its natural-language
+v2 identity/generation/assignment envelope. In addition, its natural-language
 body contains these meaning sections:
 
 - **Objective and decision relevance**
@@ -242,41 +333,83 @@ body contains these meaning sections:
 - **Acceptance evidence and stop condition**
 - **Return route, durable references, and reentry**
 
-Results use the common v1 result envelope and role-specific payload. Literal
+Results use the common v2 result envelope and role-specific payload. Literal
 Codex `[WORK]`, `[RESULT]`, or `[BROWSER WORK]` headings may be historical
 semantic source material, but they are not OMP routing authority, identity, or
 receipts.
+Assignments are vertically coarse. One engineering leaf investigates,
+implements, and authors focused contract tests for one bounded slice; the
+parent reviews and runs verification. Parallel leaves must own disjoint
+repositories, directions, paths and semantic interfaces, or genuinely
+independent evidence roles. Routine scout-to-implementer-to-reviewer chains
+over the same candidate are prohibited because they duplicate context and
+create competing interpretations. Independent engineering review is reserved
+for a frozen high-risk candidate whose acceptance explicitly requires it.
 
-An analytical product uses that same carrier and its role-specific payload;
-the information-gap contract does not alter common v1 identity, status,
-materiality, checkpoint, artifact-reference, decision-request, or next-action
-semantics.
+
+An analytical product uses that same carrier and role-specific payload.
+Required `next_actions` explicitly carries every successor; each independent
+Clerk, Transport, Portfolio, manager, Operator, Root, or User obligation gets
+its own action and strict dependencies. Empty means no successor. No implicit
+edge or action is reconstructed from prose, file presence, or job settlement.
+Root keeps orchestration visible without inventing a second scheduler. At
+startup or resume, material dispatch and result boundaries, verification and
+integration, and immediately before a legal wait or user boundary, it emits a
+short main-transcript note with **Problem**, **Now**, **Evidence**, and
+**Next**. These notes report accepted facts and exact blockers, not hidden
+reasoning. They are driven only by material events; timer heartbeats,
+progress-poll loops, per-tool narration, and Dashboard-only reporting are
+prohibited. OMP Agent Hub (`Alt+A`) remains the detailed live subagent view.
+
 
 EM and CM never send directly to provider-specific transport agents. They
 create a frozen owner-authored request reference and return it to Root. Root
 validates the route, provider (`chatgpt` or `gemini`), mode (`INNOVATOR`,
-`CONVERGENCE`, `DIVERGENT`, `ENGINEERING`, or `MONITOR`), exact operation
-identity, authorization, and current commitment state, then serializes the work
-through the singleton `BrowserTransport`. Root returns the transport fact to
-its exact requester without interpreting the content. Unknown commitment never
-resends, and one provider conversation, operation, tab, direction, or OMP task
-must never be conflated with another.
+`CONVERGENCE`, `DIVERGENT`, `ENGINEERING`, or `MONITOR`), exact product model,
+reasoning effort, operation and idempotency identities, one-message
+authorization, and the orthogonal phase, commitment, recoverability,
+observability, failure, and message-capability facts. It then serializes the
+work through the singleton `BrowserTransport` and returns the resulting fact to
+the exact requester without interpreting the content.
 
-## Liveness, Git, and recovery
+Direct proof that no send-capable activation began preserves the same
+assignment and message authorization for reversible pre-boundary repair. Once
+activation may have begun, capability is sealed and recovery is observe-only;
+unknown commitment never resends. Provider conversation, operation, attempt,
+tab, direction, OMP task, raw response archive, and structured receipt remain
+distinct objects.
+
+## Clerk, liveness, Git, and recovery
 
 Root reuses compatible logical EM/CM sessions through OMP runtime maps and Hub.
-Material transitions wake reconciliation; delayed output does not create a
-poller or successor. One Experiment Operator owns one exact result-bearing
-command through its terminal observation.
+Every manager reentry receives a new assignment ID; material scope change also
+increments generation. Material transitions wake one bounded reconciliation;
+delayed output does not create a poller or successor. One Experiment Operator
+owns one exact result-bearing command through its terminal observation.
 
-Git handoff is layered over `omp/workflow`. EM and CM write only their
-provisioned research or engineering worktrees and checkpoint one exact
-assignment-owned cycle candidate. The matching direction manager applies its
-verified candidate only under the Git integration contract. Root owns shared
-control-plane, cross-direction, external-archive, and recovery integration.
-Exact path allowlists, canonical paths, clean state, exact base, fetch/compare,
-and unchanged-on-refusal semantics apply; no role stages unrelated changes or
-uses `git add -A`.
+Managers own semantic authoring and the physical assignment worktree until
+terminal handoff. They then become non-writing. Packet presence is inert: only
+Root acceptance of the authorizer result and packet hash plus admission
+authorizes one fresh nonblocking `hmasd-clerk` task for one packet/operation.
+Root supplies the exact accepted-authorizer binding and never reconstructs or
+rewrites packet fields. Independent packets fan out; the repo-global target
+lock serializes only target mutations. Watchers, daemons, auto-executing
+inboxes, and a singleton parked Clerk are prohibited.
+
+Clerk is mechanical executor provenance, never the authority actor or writer.
+It cannot interpret science, decide technical acceptance or Portfolio
+lifecycle, choose scope/allowlist/policy/successor, resolve conflicts, rebase,
+merge, retry, or resend. Manager writing resumes only after terminal Clerk
+state and a new Root assignment. Same ID/hash returns the existing receipt;
+same ID/different hash refuses; orphan `STARTED` is observe-only `UNKNOWN`.
+
+Git handoff is layered over `omp/workflow`. `EXACT_HANDOFF` preserves exact
+same-direction integrated-SHA edges. `ORTHOGONAL_DIRECTION` requires frozen
+common-epoch/parallel-set authority and dependency-fresh prospective-tree
+proof. One fresh Clerk executes one exact packet under the manager/Root actor;
+managers and Root do not perform target Git. Exact allowlists, canonical
+identities, clean state, target lock, one-attempt/unknown-outcome receipts, and
+unchanged-on-refusal semantics apply.
 
 Observed inconsistency routes through the OMP
 `hmasd-workflow-recovery-manager`, dispatched only by Root. Recovery reconciles

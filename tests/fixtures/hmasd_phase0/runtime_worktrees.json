@@ -1,6 +1,6 @@
 {
   "revision": 1,
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "worktrees": [
     {
@@ -11,10 +11,15 @@
       "canonical_absolute_path": "/home/fires/hmasd-worktrees/example-direction-engineering-run-example",
       "direction_id": "example-direction",
       "integrated_sha": null,
+      "integration_policy": "EXACT_HANDOFF",
       "kind": "engineering",
-      "lifecycle": "PROVISIONED",
-      "receipt_path": "temp/runtime/receipts/run-example.json",
+      "lifecycle": "READY",
+      "mutation_lease": null,
       "operation_token": null,
+      "parallel_set_authorization": null,
+      "receipt_path": "temp/runtime/receipts/run-example.json",
+      "required_dependency_refs": [],
+      "required_handoff_sha": "1111111111111111111111111111111111111111",
       "worktree_ref": "wt-example"
     }
   ],

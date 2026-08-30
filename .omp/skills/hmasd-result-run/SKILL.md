@@ -94,16 +94,32 @@ process to resolve its terminal fact is not a rerun.
 
 ## Returned result envelope
 
-Return the common v1 envelope with `role: "hmasd-experiment-operator"` for the
+Return the common v2 envelope with `role: "hmasd-experiment-operator"` for the
 terminal worker. Include the terminal-witness path in `artifact_refs` and use:
 
 ```json
 {
-  "kind": "run",
-  "run_id": "<run-id>",
-  "manifest_ref": "temp/directions/<direction-id>/exp/<run-id>/manifest.json",
-  "terminal_status": "SUCCEEDED",
-  "exit_code": 0
+  "schema_version": 2,
+  "role": "hmasd-experiment-operator",
+  "logical_identity": "hmasd-experiment-operator",
+  "generation": 1,
+  "assignment_id": "example-run-assignment-001",
+  "status": "COMPLETED",
+  "materiality": "LOCAL",
+  "summary": "Observed terminal state for the frozen command.",
+  "changed_paths": [],
+  "state_refs": [],
+  "artifact_refs": ["temp/directions/example-direction/exp/example-run-001/terminal-witness.json"],
+  "checkpoint_sha": null,
+  "decision_requests": [],
+  "next_actions": [],
+  "payload": {
+    "kind": "run",
+    "run_id": "example-run-001",
+    "manifest_ref": "temp/directions/example-direction/exp/example-run-001/manifest.json",
+    "terminal_status": "SUCCEEDED",
+    "exit_code": 0
+  }
 }
 ```
 

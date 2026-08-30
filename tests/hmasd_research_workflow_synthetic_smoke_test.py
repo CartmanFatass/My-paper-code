@@ -1,8 +1,9 @@
-"""Hermetic compatibility smoke for the prompt-native HMASD research contract.
+"""Hermetic source-contract and synthetic Root-projection smoke.
 
-This test reads repository authorities and profiles and compares realistic local
-packets/results with their declared contracts. It does not intercept OMP,
-implement a dispatcher, or claim to enforce runtime scheduling behavior.
+This test reads repository authorities/profiles, validates realistic local
+packets/results, and models bounded event snapshots, exact dependencies,
+resource admission, partial batch reconciliation, PAUSE, and legal wait. It
+does not intercept OMP or claim to enforce runtime scheduling behavior.
 """
 
 from __future__ import annotations
@@ -34,8 +35,8 @@ PROFILE_PATHS = {
 RESULT_SCHEMA = REPO_ROOT / "scripts" / "schemas" / "hmasd_agent_result.schema.json"
 
 TEST_BOUNDARY = (
-    "repository source-contract compatibility only; no OMP interception, runtime "
-    "dispatcher, scheduler, or policy enforcement"
+    "repository source-contract compatibility and synthetic projection only; "
+    "no OMP interception or runtime policy enforcement"
 )
 SHA_A = "a" * 64
 SHA_B = "b" * 64
@@ -93,6 +94,112 @@ def _profiles() -> dict[str, str]:
 
 def _ref(path: str, sha256: str) -> dict[str, str]:
     return {"path": path, "sha256": sha256}
+
+
+def _producer_dependency(
+    *,
+    logical_identity: str,
+    assignment_id: str,
+    result_sha256: str,
+    required_ref: dict[str, str],
+) -> dict[str, Any]:
+    return {
+        "producer": {
+            "logical_identity": logical_identity,
+            "generation": 1,
+            "assignment_id": assignment_id,
+        },
+        "result_sha256": result_sha256,
+        "required_status": "COMPLETED",
+        "required_payload_kind": "clerk",
+        "required_refs": [required_ref],
+    }
+
+
+def _dependency_satisfied(
+    dependency: dict[str, Any],
+    accepted_results: list[dict[str, Any]],
+) -> bool:
+    if "producer" in dependency:
+        return any(
+            result["producer"] == dependency["producer"]
+            and result["result_sha256"] == dependency["result_sha256"]
+            and result["status"] == dependency["required_status"]
+            and result["payload_kind"] == dependency["required_payload_kind"]
+            and all(ref in result["refs"] for ref in dependency["required_refs"])
+            for result in accepted_results
+        )
+    authority_ref = dependency["authority_ref"]
+    return any(
+        result.get("authority_ref") == authority_ref
+        and result.get("revision_or_checkpoint")
+        == dependency["revision_or_checkpoint"]
+        for result in accepted_results
+    )
+
+
+def _maximal_admitted(
+    actions: list[dict[str, Any]],
+    accepted_results: list[dict[str, Any]],
+    available: dict[str, int],
+    *,
+    paused: bool = False,
+) -> list[str]:
+    if paused:
+        return []
+
+    remaining = dict(available)
+    admitted: list[str] = []
+    for action in actions:
+        if not all(
+            _dependency_satisfied(dependency, accepted_results)
+            for dependency in action["dependencies"]
+        ):
+            continue
+        resources = ("OMP", *action["resource_classes"])
+        if any(remaining.get(resource, 0) <= 0 for resource in resources):
+            continue
+        admitted.append(action["action_id"])
+        for resource in resources:
+            remaining[resource] -= 1
+    return admitted
+
+
+def _partial_batch_projection(
+    item_receipts: dict[str, str],
+) -> tuple[set[str], set[str], set[str]]:
+    started = {
+        action_id
+        for action_id, receipt in item_receipts.items()
+        if receipt == "STARTED"
+    }
+    runnable = {
+        action_id
+        for action_id, receipt in item_receipts.items()
+        if receipt == "PROVEN_NOT_STARTED"
+    }
+    unresolved = set(item_receipts) - started - runnable
+    return started, runnable, unresolved
+
+
+def _legal_wait(state: dict[str, Any]) -> bool:
+    required_empty = (
+        "queued_deliveries",
+        "delivered_unconsumed_results",
+        "runnable_after_admission",
+        "unfinished_screening",
+        "unrouted_consequences",
+    )
+    legal_reasons = {
+        "PAUSED_COMMITTED_OBSERVATION",
+        "ALL_PORTFOLIO_SLOTS_LIVE",
+        "EXACT_LIVE_DEPENDENCY",
+        "NAMED_SATURATED_RESOURCE",
+        "NO_ADMISSIBLE_CANDIDATE_PROOF",
+    }
+    return all(not state[key] for key in required_empty) and bool(
+        set(state["wait_reasons"]) & legal_reasons
+    )
 
 
 def _first_wave_packet(assignment_id: str, gap_id: str, lens: str) -> dict[str, Any]:
@@ -211,7 +318,7 @@ def _result_fixture(
     artifact_sha = hashlib.sha256(product_bytes).hexdigest()
     return {
         "envelope": {
-            "schema_version": 1,
+            "schema_version": 2,
             "role": "hmasd-research-critic",
             "logical_identity": "hmasd-research-critic",
             "generation": 1,
@@ -224,7 +331,7 @@ def _result_fixture(
             "artifact_refs": [_ref(artifact_path, artifact_sha)],
             "checkpoint_sha": None,
             "decision_requests": [],
-            "next_action": None,
+            "next_actions": [],
             "payload": {
                 "kind": "artifact",
                 "paths": [artifact_path],
@@ -274,7 +381,7 @@ def test_route_fixtures_match_repository_authority_not_a_runtime_dispatcher() ->
     authorities = _authorities()
     profiles = _profiles()
 
-    assert "source-contract compatibility only" in TEST_BOUNDARY
+    assert "source-contract compatibility and synthetic projection only" in TEST_BOUNDARY
     assert "no omp interception" in TEST_BOUNDARY.lower()
     assert DIRECTION_LEAF_BYPASS["expected_contract_compatible"] is False
     assert DIRECTION_LEAF_BYPASS["scope"] == "direction-scoped"
@@ -385,7 +492,229 @@ def test_blind_first_wave_and_material_or_negative_complete_results_are_compatib
     assert no_insight_product["uncertainty"]
     assert no_insight["envelope"]["status"] == "COMPLETED"
     assert "successful, terminal, negative-complete analytical product" in authorities["shared"]
-    assert "no new result carrier, schema, role, registry, lifecycle, or scheduler is introduced" in authorities["protocol"]
+    assert "this adds no alternative carrier, authority, lifecycle registry, or scheduler" in authorities["protocol"]
+
+
+def test_keep4_slow_child_does_not_hide_transport_portfolio_or_clerk() -> None:
+    authorities = _authorities()
+    integrated_ref = _ref(
+        "docs/research/candidates/alpha/workflow/research/integrated.json",
+        SHA_C,
+    )
+    exact_em_dependency = _producer_dependency(
+        logical_identity="EM-alpha",
+        assignment_id="em-alpha-persist-2",
+        result_sha256=SHA_B,
+        required_ref=integrated_ref,
+    )
+    inflight = {"em-alpha-slow"}
+    portfolio_capacity = {"authorized": 4, "live": 4, "free": 0}
+    actions = [
+        {
+            "action_id": "transport-alpha",
+            "dependencies": [],
+            "resource_classes": ("TRANSPORT",),
+        },
+        {
+            "action_id": "portfolio-cross-direction",
+            "dependencies": [],
+            "resource_classes": ("PORTFOLIO_ANALYSIS",),
+        },
+        {
+            "action_id": "clerk-alpha-cas",
+            "dependencies": [],
+            "resource_classes": ("STATE_PATH_ALPHA",),
+        },
+        {
+            "action_id": "cm-alpha",
+            "dependencies": [exact_em_dependency],
+            "resource_classes": ("PORTFOLIO_ADVANCING",),
+        },
+    ]
+
+    admitted = _maximal_admitted(
+        actions,
+        accepted_results=[],
+        available={
+            "OMP": 3,
+            "TRANSPORT": 1,
+            "PORTFOLIO_ANALYSIS": 1,
+            "STATE_PATH_ALPHA": 1,
+            "PORTFOLIO_ADVANCING": 0,
+        },
+    )
+
+    assert admitted == [
+        "transport-alpha",
+        "portfolio-cross-direction",
+        "clerk-alpha-cas",
+    ]
+    assert "cm-alpha" not in admitted
+    assert inflight == {"em-alpha-slow"}
+    assert portfolio_capacity == {"authorized": 4, "live": 4, "free": 0}
+    assert "capacity counts advancing direction investments, not clerk, transport" in authorities["root"]
+    assert "a slow child cannot block an independent node or successor" in authorities["root"]
+    assert "dispatch the maximal admissible independent set in the same wake" in authorities["root"]
+
+
+def test_manager_semantic_return_does_not_wait_for_clerk_persistence() -> None:
+    semantic_product = _ref(
+        "docs/research/candidates/alpha/evidence/cycle-alpha-handoff.md",
+        SHA_A,
+    )
+    manager_result = {
+        "semantic_product_ref": semantic_product,
+        "persistence_status": "PREPARED",
+        "durable_state_ref": None,
+        "candidate_sha": None,
+        "integrated_sha": None,
+        "next_actions": [
+            {
+                "action_id": "clerk-alpha-persist",
+                "dependencies": [],
+                "resource_classes": ("STATE_PATH_ALPHA",),
+            },
+            {
+                "action_id": "transport-alpha-convergence",
+                "dependencies": [],
+                "resource_classes": ("TRANSPORT",),
+            },
+        ],
+    }
+    admitted = _maximal_admitted(
+        manager_result["next_actions"],
+        accepted_results=[],
+        available={"OMP": 2, "STATE_PATH_ALPHA": 1, "TRANSPORT": 1},
+    )
+    clerk_refusal = {
+        "operation_id": "alpha-persist",
+        "outcome": "REFUSED",
+        "semantic_product_ref": manager_result["semantic_product_ref"],
+    }
+
+    assert manager_result["persistence_status"] == "PREPARED"
+    assert manager_result["durable_state_ref"] is None
+    assert manager_result["candidate_sha"] is None
+    assert manager_result["integrated_sha"] is None
+    assert admitted == ["clerk-alpha-persist", "transport-alpha-convergence"]
+    assert clerk_refusal["semantic_product_ref"] == semantic_product
+    assert "same-direction cm action remains blocked on an exact integrated-sha dependency" in _authorities()["root"]
+
+
+def test_exact_dependency_requires_accepted_digest_payload_and_ref() -> None:
+    integrated_ref = _ref(
+        "docs/research/candidates/alpha/workflow/research/integrated.json",
+        SHA_C,
+    )
+    dependency = _producer_dependency(
+        logical_identity="EM-alpha",
+        assignment_id="em-alpha-persist-2",
+        result_sha256=SHA_B,
+        required_ref=integrated_ref,
+    )
+    settled_wrong_digest = {
+        "producer": dependency["producer"],
+        "result_sha256": SHA_A,
+        "status": "COMPLETED",
+        "payload_kind": "clerk",
+        "refs": [integrated_ref],
+    }
+    accepted_exact = {
+        **settled_wrong_digest,
+        "result_sha256": SHA_B,
+    }
+
+    assert not _dependency_satisfied(dependency, [])
+    assert not _dependency_satisfied(dependency, [settled_wrong_digest])
+    assert _dependency_satisfied(dependency, [accepted_exact])
+    assert not _dependency_satisfied(
+        dependency,
+        [{**accepted_exact, "refs": []}],
+    )
+
+
+def test_partial_batch_reconciliation_never_duplicates_started_items() -> None:
+    started, runnable, unresolved = _partial_batch_projection(
+        {
+            "transport-alpha": "STARTED",
+            "portfolio-cross-direction": "PROVEN_NOT_STARTED",
+            "clerk-alpha-cas": "STARTED",
+            "clerk-beta-cas": "REGISTRATION_UNKNOWN",
+        }
+    )
+
+    assert started == {"transport-alpha", "clerk-alpha-cas"}
+    assert runnable == {"portfolio-cross-direction"}
+    assert unresolved == {"clerk-beta-cas"}
+    assert not started & runnable
+    assert "never retry a partially registered batch wholesale" in _authorities()["root"]
+
+
+def test_pause_and_strict_wait_truth_table() -> None:
+    root = _authorities()["root"]
+    runnable_actions = [
+        {
+            "action_id": "clerk-alpha-cas",
+            "dependencies": [],
+            "resource_classes": ("STATE_PATH_ALPHA",),
+        }
+    ]
+    assert (
+        _maximal_admitted(
+            runnable_actions,
+            accepted_results=[],
+            available={"OMP": 1, "STATE_PATH_ALPHA": 1},
+            paused=True,
+        )
+        == []
+    )
+
+    base_state = {
+        "queued_deliveries": [],
+        "delivered_unconsumed_results": [],
+        "runnable_after_admission": [],
+        "unfinished_screening": [],
+        "unrouted_consequences": [],
+        "wait_reasons": [],
+    }
+    assert not _legal_wait(base_state)
+    assert (
+        _maximal_admitted(
+            runnable_actions,
+            accepted_results=[],
+            available={"OMP": 0, "STATE_PATH_ALPHA": 1},
+        )
+        == []
+    )
+    assert _legal_wait(
+        {
+            **base_state,
+            "wait_reasons": ["NAMED_SATURATED_RESOURCE"],
+        }
+    )
+    assert _legal_wait(
+        {
+            **base_state,
+            "wait_reasons": ["PAUSED_COMMITTED_OBSERVATION"],
+        }
+    )
+    assert not _legal_wait(
+        {
+            **base_state,
+            "queued_deliveries": ["delivery-17"],
+            "wait_reasons": ["EXACT_LIVE_DEPENDENCY"],
+        }
+    )
+    assert not _legal_wait(
+        {
+            **base_state,
+            "runnable_after_admission": ["clerk-alpha-cas"],
+            "wait_reasons": ["ALL_PORTFOLIO_SLOTS_LIVE"],
+        }
+    )
+    assert "with no committed observation, return `paused/idle` rather than wait" in root
+    assert "use broad coordination wait" in root
+    assert "a timeout is not a new wake" in root
 
 
 def test_scientific_critic_and_technical_reviewer_fixtures_do_not_collapse() -> None:
@@ -447,12 +776,12 @@ def test_dual_disjoint_writer_plan_is_compatible_but_overlap_is_not() -> None:
             {
                 "identity": "hmasd-implementer",
                 "owned_paths": {"src/alpha/result_writer.py"},
-                "semantic_boundaries": {"common-v1 result envelope"},
+                "semantic_boundaries": {"common-v2 result envelope"},
             },
             {
                 "identity": "hmasd-implementer-terra",
                 "owned_paths": {"tests/alpha_result_contract_test.py"},
-                "semantic_boundaries": {"common-v1 result envelope"},
+                "semantic_boundaries": {"common-v2 result envelope"},
             },
         ],
     }
@@ -467,7 +796,7 @@ def test_dual_disjoint_writer_plan_is_compatible_but_overlap_is_not() -> None:
     assert overlapping_plan["expected_contract_compatible"] is False
     assert first_overlap["owned_paths"].isdisjoint(second_overlap["owned_paths"])
     assert first_overlap["semantic_boundaries"] & second_overlap["semantic_boundaries"] == {
-        "common-v1 result envelope"
+        "common-v2 result envelope"
     }
     assert "both their path ownership and their semantic/interface ownership are disjoint" in authorities["cm"]
     assert "different files are insufficient" in authorities["cm"]
@@ -525,3 +854,37 @@ def test_one_exact_command_has_one_operator_owner() -> None:
     assert "exactly one experiment operator owns exactly one command" in authorities["result"]
     assert "no cm, reviewer, verifier, or second operator shares that command ownership" in authorities["result"]
     assert "cm, reviewer, and verifier never duplicate or share command ownership" in authorities["cm"]
+
+
+def test_root_progress_is_visible_event_driven_and_nonpolling() -> None:
+    authorities = _authorities()
+    root = authorities["root"]
+    shared = authorities["shared"]
+    protocol = authorities["protocol"]
+
+    assert "r13_visible_progress" in root
+    assert "**problem**, **now**, **evidence**, and **next**" in root
+    assert "tool intents, todo state, dashboard state, raw hub events" in root
+    assert "never add a timer heartbeat, poll to manufacture an update" in root
+    assert "emit concise human-readable text in the main transcript" in shared
+    assert "progress narration is event-driven" in shared
+    assert "users may press `alt+a`" in shared
+    assert "subagent transcript with `enter`" in shared
+    assert "at most one note is sent per unchanged phase" in shared
+    assert "short main-transcript note" in protocol
+    assert "omp agent hub (`alt+a`)" in protocol
+
+
+def test_engineering_delegation_uses_one_coarse_vertical_owner() -> None:
+    authorities = _authorities()
+    shared = authorities["shared"]
+    root = authorities["root"]
+    protocol = authorities["protocol"]
+
+    assert "decompose by a coarse vertical outcome" in shared
+    assert "one leaf owns a bounded engineering slice" in shared
+    assert "never as a routine second reader" in shared
+    assert "r14_coarse_vertical_ownership" in root
+    assert "do not fan the same files or interface through sequential" in root
+    assert "assignments are vertically coarse" in protocol
+    assert "routine scout-to-implementer-to-reviewer chains" in protocol

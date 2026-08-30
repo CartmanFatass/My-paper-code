@@ -26,7 +26,6 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "autoloadSkills": [
             "hmasd-em-direction-cycle",
             "hmasd-scientific-external-review",
-            "hmasd-git-integration",
         ],
     },
     "hmasd-cm": {
@@ -46,8 +45,14 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "autoloadSkills": [
             "hmasd-cm-engineering-cycle",
             "hmasd-result-run",
-            "hmasd-git-integration",
         ],
+    },
+    "hmasd-clerk": {
+        "model": "openai-codex/gpt-5.6-luna",
+        "thinking-level": "xhigh",
+        "tools": ["read", "grep", "glob", "bash", "hub"],
+        "spawns": [],
+        "autoloadSkills": ["hmasd-clerk"],
     },
     "hmasd-project-scout": {
         "model": "openai-codex/gpt-5.6-luna",
@@ -129,7 +134,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
             "mcp__agentify-desktop__agentify_operator_act",
             "mcp__agentify-desktop__agentify_review_chatgpt_profile_snapshot",
             "mcp__agentify-desktop__agentify_review_preflight",
-            "mcp__agentify-desktop__agentify_review_reasoning_mode_preflight",
+            "mcp__agentify-desktop__agentify_review_reasoning_effort_preflight",
             "mcp__agentify-desktop__agentify_review_query",
             "mcp__agentify-desktop__agentify_review_observe",
             "mcp__agentify-desktop__agentify_wait_response",
@@ -236,7 +241,7 @@ def test_exact_project_agent_inventory_and_frontmatter() -> None:
     paths = sorted(AGENT_ROOT.glob("*.md"))
     assert {path.stem for path in paths} == set(EXPECTED_AGENTS)
     assert "hmasd-research-artifact-writer" not in {path.stem for path in paths}
-    assert len(paths) == 15
+    assert len(paths) == 16
     for path in paths:
         metadata = _parse_frontmatter(path)
         expected = EXPECTED_AGENTS[path.stem]
@@ -326,7 +331,7 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
         assert "omit" in body
 
 
-def test_fourteen_complete_skills_and_authority_files() -> None:
+def test_fifteen_complete_skills_and_authority_files() -> None:
     expected_anchors = {
         "hmasd-root-control": (
             "portfolio.md",
@@ -342,7 +347,7 @@ def test_fourteen_complete_skills_and_authority_files() -> None:
             "exactly one pro innovator",
             "exactly one pro convergence",
             "returns frozen requests through root",
-            "common v1 envelope",
+            "common v2 envelope",
         ),
         "hmasd-cm-engineering-cycle": (
             "contract-first gate",
@@ -361,22 +366,23 @@ def test_fourteen_complete_skills_and_authority_files() -> None:
         "hmasd-browser-transport": (
             "browsertransport",
             "observe -> interpret -> act -> verify",
-            "strict operation",
             "agentify operation",
             "provider conversation",
             "browser tab",
-            "prompt file",
-            "archive file",
-            "unknown commitment",
-            "zero_send_failed",
-            "sent_unreadable",
+            "raw response",
+            "operation receipt",
+            "zero_proven",
+            "unresolved",
+            "one_exact",
+            "unknown commitment never activates again",
         ),
         "hmasd-scientific-external-review": (
             "exactly one pro innovator",
             "exactly one pro convergence",
-            "chatgpt pro",
+            "gpt-5.6 sol",
+            "reasoning effort `pro`",
             "one fresh cycle has only these two pro operations",
-            "unknown commitment is terminal for sending",
+            "unresolved + observe_only + sealed",
         ),
         "hmasd-workflow-recovery": (
             "pure research task failed",
@@ -399,9 +405,17 @@ def test_fourteen_complete_skills_and_authority_files() -> None:
             "canonical",
             "omp/workflow",
             "one candidate commit",
-            "stale base",
+            "stale or non-handoff bases refuse",
             "em:<direction>",
             "cm:<direction>",
+        ),
+        "hmasd-clerk": (
+            "packet-file presence is inert",
+            "openai-codex/gpt-5.6-luna",
+            "thinking level is exactly `xhigh`",
+            "no watcher, daemon, shared parked clerk",
+            "never automatically retry",
+            "`decision_requests` and `next_actions` are always empty",
         ),
         "hmasd-paper-lookup": ("on-demand", "explicit network boundary"),
         "hmasd-hypothesis-mechanisms": ("only on demand", "not a manager autoload"),
@@ -422,7 +436,7 @@ def test_fourteen_complete_skills_and_authority_files() -> None:
     skills_root = REPO_ROOT / ".omp" / "skills"
     skill_paths = sorted(skills_root.glob("*/SKILL.md"))
     assert {path.parent.name for path in skill_paths} == set(expected_anchors)
-    assert len(skill_paths) == 14
+    assert len(skill_paths) == 15
     assert {
         path.name for path in skills_root.iterdir() if path.is_dir()
     } == set(expected_anchors)
@@ -440,6 +454,16 @@ def test_fourteen_complete_skills_and_authority_files() -> None:
     for agent_path in project_agents:
         autoloaded = _list_field(_parse_frontmatter(agent_path), "autoloadSkills")
         assert not set(autoloaded).intersection(ON_DEMAND_RESEARCH_SKILLS), agent_path
+
+    clerk = _parse_frontmatter(AGENT_ROOT / "hmasd-clerk.md")
+    clerk_body = (AGENT_ROOT / "hmasd-clerk.md").read_text(encoding="utf-8").lower()
+    assert _string_field(clerk, "model") == "openai-codex/gpt-5.6-luna"
+    assert _string_field(clerk, "thinking-level") == "xhigh"
+    assert _string_field(clerk, "blocking") == "false"
+    assert _list_field(clerk, "spawns") == []
+    assert "advisor:" not in clerk_body
+    assert "prewalk" in clerk_body
+    assert "never spawn" in clerk_body
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
     assert "autoload" not in config.lower()
     for skill in ON_DEMAND_RESEARCH_SKILLS:
@@ -500,7 +524,7 @@ def test_root_material_checkpoints_are_event_driven_scoped_and_pushed() -> None:
         "accepted-result or terminal-run evidence promotion",
         "external prompt/archive readiness",
         "portfolio lifecycle changes",
-        "schema migrations",
+        "current-schema cutovers",
     ):
         assert trigger in root_skill_compact
 

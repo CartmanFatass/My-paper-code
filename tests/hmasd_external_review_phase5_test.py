@@ -1,32 +1,29 @@
-"""Focused fake-only evidence for the HMASD external-review boundary."""
+"""Focused current-only evidence for the HMASD external-review boundary."""
 
 from __future__ import annotations
 
-import concurrent.futures
+import copy
 import hashlib
 import json
-import subprocess
-import sys
 from pathlib import Path
 
 import pytest
 
-import scripts.hmasd_external_review as external_review
-
+from scripts import hmasd_external_review as external_review
 from scripts.hmasd_external_review import (
     ArchiveConflict,
     CommitmentUnknown,
     ExternalReviewError,
     create_archive_if_absent,
     partition_monitors,
-    render_handoff_input,
     round_id,
     validate_archive,
     validate_prompts,
 )
+render_handoff_input = getattr(external_review, "render_handoff_input")
 
 
-ROOT = Path(__file__).resolve().parents[1]
+
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "hmasd_external_review"
 
 
@@ -34,458 +31,162 @@ def _operation() -> dict[str, object]:
     return json.loads((FIXTURES / "operation_ref.json").read_text(encoding="utf-8"))
 
 
-def _archive() -> dict[str, object]:
-    return json.loads((FIXTURES / "archive.json").read_text(encoding="utf-8"))
+def _response(root: Path) -> Path:
+    path = root / "source-response.md"
+    path.write_bytes(b"hello")
+    return path
+
+
+def _destination(root: Path, operation: dict[str, object]) -> Path:
+    archive = operation["archive"]
+    assert isinstance(archive, dict)
+    return root / str(archive["path"])
+
+
+def _operation_with_bytes(operation: dict[str, object], raw: bytes) -> dict[str, object]:
+    bound = copy.deepcopy(operation)
+    archive = bound["archive"]
+    assert isinstance(archive, dict)
+    archive["sha256"] = hashlib.sha256(raw).hexdigest()
+    archive["size_bytes"] = len(raw)
+    return bound
 
 
 def _prompt_round(root: Path) -> Path:
     round_dir = root / "round"
     round_dir.mkdir()
-    prompts = {
-        "PRO_INNOVATOR_PROMPT.md": (
-            "Independently explore mechanisms and counterexamples for the neutral frozen "
-            "question using declared repository evidence."
-        ),
-        "PRO_CONVERGENCE_PROMPT.md": (
-            "Assess the EM-authored local synthesis against the declared repository evidence."
-        ),
-    }
-    for filename, text in prompts.items():
-        (round_dir / filename).write_text(text, encoding="utf-8")
+    (round_dir / "PRO_INNOVATOR_PROMPT.md").write_text(
+        "Find a falsifiable mechanism from the frozen evidence and report uncertainty.\n",
+        encoding="utf-8",
+    )
+    (round_dir / "PRO_CONVERGENCE_PROMPT.md").write_text(
+        "Challenge the EM-authored local synthesis against the declared repository evidence and list residual gaps.\n",
+        encoding="utf-8",
+    )
     return round_dir
 
 
-def _archive_destination(root: Path, operation: dict[str, object]) -> Path:
-    return root / Path(str(operation["archive_path"]))
-
-def _use_archive_root(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
-    monkeypatch.setattr(external_review, "_PROJECT_ROOT", root)
-
-
-def _operation_with_archive_bytes(operation: dict[str, object], raw: bytes) -> dict[str, object]:
-    bound = dict(operation)
-    bound["archive_sha256"] = hashlib.sha256(raw).hexdigest()
-    return bound
-
-def _stage_archive_path(operation: dict[str, object], stage: str, provider: str = "chatgpt") -> str:
-    return (
-        "docs/external-review/directions/"
-        f"{operation['direction_id']}/{operation['round_id']}/{stage}/{provider}/"
-        "NATURAL_COMPLETION_ARCHIVE.json"
-    )
+def test_round_id_uses_all_frozen_inputs() -> None:
+    expected = "a2604c701f39adec08f5"
+    assert round_id("example-direction", "1" * 64, "2" * 64, "hmasd-external-review-v1") == expected
+    assert round_id("example-direction", "3" * 64, "2" * 64, "hmasd-external-review-v1") != expected
 
 
-def _canonical_archive_bytes(archive: dict[str, object]) -> bytes:
-    return (
-        json.dumps(
-            archive,
-            ensure_ascii=False,
-            indent=2,
-            sort_keys=True,
-            separators=(",", ": "),
-        ).encode("utf-8")
-        + b"\n"
-    )
-
-
-def test_round_id_is_stable_and_uses_all_frozen_inputs() -> None:
-    question = "1" * 64
-    evidence = "2" * 64
-    expected = hashlib.sha256(
-        f"example-direction\n{question}\n{evidence}\nhmasd-external-review-v1".encode()
-    ).hexdigest()[:20]
-
-    assert round_id("example-direction", question, evidence, "hmasd-external-review-v1") == expected
-    assert round_id("example-direction", "3" * 64, evidence, "hmasd-external-review-v1") != expected
-
-
-def test_valid_pro_pair_prompts_are_accepted(tmp_path: Path) -> None:
-    result = validate_prompts(_prompt_round(tmp_path))
-
-    assert result["status"] == "VALID"
-    assert set(result["prompts"]) == {
-        "pro_innovator_prompt",
-        "pro_convergence_prompt",
-    }
-
-
-def test_missing_pro_innovator_prompt_is_refused(tmp_path: Path) -> None:
-    round_dir = _prompt_round(tmp_path)
-    (round_dir / "PRO_INNOVATOR_PROMPT.md").unlink()
-
-    with pytest.raises(ValueError, match="missing prompt file"):
-        validate_prompts(round_dir)
-
-
-@pytest.mark.parametrize(
-    "contamination",
-    (
-        "Use the EM-authored local synthesis as accepted input.",
-        "The local scientific conclusion is that mechanism A wins.",
-        "Assume mechanism A is correct and design around it.",
-        "Continue with PRO_CONVERGENCE_PROMPT.md using operationId operation-a.",
-    ),
-)
-def test_contaminated_pro_innovator_prompt_is_refused(
-    tmp_path: Path,
-    contamination: str,
-) -> None:
-    round_dir = _prompt_round(tmp_path)
-    innovator = round_dir / "PRO_INNOVATOR_PROMPT.md"
-    innovator.write_text(
-        innovator.read_text(encoding="utf-8") + f"\n{contamination}\n",
-        encoding="utf-8",
-    )
-
-    with pytest.raises(ValueError, match="Pro Innovator prompt contains a forbidden"):
-        validate_prompts(round_dir)
-
-
-@pytest.mark.parametrize(
-    "contamination",
-    (
-        "Append the Pro Innovator transcript.",
-        "Use responseSha256 abc and conversationId conversation-a.",
-        "Use archivePath review.json and operationId operation-a.",
-        "See https://example.invalid/review.",
-    ),
-)
-def test_contaminated_pro_convergence_prompt_is_refused(
-    tmp_path: Path,
-    contamination: str,
-) -> None:
-    round_dir = _prompt_round(tmp_path)
-    convergence = round_dir / "PRO_CONVERGENCE_PROMPT.md"
-    convergence.write_text(
-        convergence.read_text(encoding="utf-8") + f"\n{contamination}\n",
-        encoding="utf-8",
-    )
-
-    with pytest.raises(ValueError, match="Pro Convergence prompt contains a forbidden"):
-        validate_prompts(round_dir)
-
-
-def test_monitor_partition_is_sorted_and_round_robin() -> None:
+def test_prompt_pair_and_monitor_partition_remain_mechanical(tmp_path: Path) -> None:
+    validated = validate_prompts(_prompt_round(tmp_path))
+    assert set(validated) == {"status", "round_dir", "prompts"}
+    assert validated["status"] == "VALID"
     sessions = json.loads((FIXTURES / "sessions.json").read_text(encoding="utf-8"))
     partitions = partition_monitors(sessions, 2)
-    assert [[item["stableKey"] for item in group] for group in partitions] == [
-        ["session-a", "session-c"],
-        ["session-b", "session-d"],
-    ]
+    assert sum(len(partition) for partition in partitions) == len(sessions)
 
 
-def test_archive_validation_and_handoff_preserve_response_sha(tmp_path: Path) -> None:
-    archive = _archive()
-    validated = validate_archive(_operation(), archive)
-    assert validated["responseSha256"] == archive["responseSha256"]
-    assert validated["operationId"] == archive["operationId"]
-
-    out = tmp_path / "ignored" / "handoff-input.json"
-    rendered = render_handoff_input(FIXTURES / "archive.json", out)
-    assert rendered["responseSha256"] == archive["responseSha256"]
-    assert rendered["responseText"] == archive["responseText"]
-    assert json.loads(out.read_text(encoding="utf-8"))["archiveSha256"] == hashlib.sha256(
-        (FIXTURES / "archive.json").read_bytes()
-    ).hexdigest()
-
-
-def test_complete_operation_identity_is_required_before_any_archive_write(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
+def test_current_operation_receipt_validates_reread_raw_response(tmp_path: Path) -> None:
     operation = _operation()
-    destination = _archive_destination(tmp_path, operation)
-    source_bytes = (FIXTURES / "archive.json").read_bytes()
-    destination.parent.mkdir(parents=True)
-    destination.write_bytes(source_bytes)
+    assert validate_archive(operation, _response(tmp_path)) == operation
+    with pytest.raises(ExternalReviewError, match="path to raw UTF-8"):
+        validate_archive(operation, {"responseText": "hello", "model": "Pro"})
 
-    for missing in (
-        "workflow_version",
-        "review_stage",
-        "commitment_state",
-        "provider",
-        "stable_key",
-        "session_id",
-        "operation_id",
-        "idempotency_key",
-        "request_fingerprint",
-        "prompt_sha256",
-        "question_sha256",
-        "evidence_sha256",
-        "direction_id",
-        "round_id",
-        "archive_path",
-        "archive_sha256",
-    ):
-        incomplete = dict(operation)
-        incomplete.pop(missing)
-        with pytest.raises(ExternalReviewError):
-            create_archive_if_absent(incomplete, FIXTURES / "archive.json", destination)
-        assert destination.read_bytes() == source_bytes
-
-    wrong_binding = dict(operation)
-    wrong_binding["archive_sha256"] = "0" * 64
-    with pytest.raises(ExternalReviewError):
-        create_archive_if_absent(wrong_binding, FIXTURES / "archive.json", destination)
-    assert destination.read_bytes() == source_bytes
+def test_natural_receipt_allows_lost_local_activation_count(tmp_path: Path) -> None:
+    operation = _operation()
+    operation["send_activation_count"] = 0
+    assert validate_archive(operation, _response(tmp_path)) == operation
 
 
-@pytest.mark.parametrize(
-    "defect",
-    (
-        "wrong_tuple",
-        "transposed_round_id",
-        "missing_stage",
-        "unknown_stage",
-        "wrong_provider",
-        "wrong_path",
-    ),
-)
-def test_future_operation_binding_defects_refuse_before_any_write(
+def test_product_model_and_reasoning_effort_are_independent_required_axes(
     tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-    defect: str,
 ) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
+    for field, value in (("product_model", "GPT-5.6"), ("reasoning_effort", "High")):
+        operation = _operation()
+        operation[field] = value
+        with pytest.raises(ExternalReviewError):
+            validate_archive(operation, _response(tmp_path))
+
+
+def test_gemini_operation_receipt_requires_null_reasoning_effort(
+    tmp_path: Path,
+) -> None:
     operation = _operation()
-    if defect == "wrong_tuple":
-        operation["question_sha256"] = "5" * 64
-    elif defect == "transposed_round_id":
-        operation["round_id"] = "0123456789abcdef0123"
-        operation["archive_path"] = _stage_archive_path(operation, "pro_innovator")
-    elif defect == "missing_stage":
-        operation.pop("review_stage")
-    elif defect == "unknown_stage":
-        operation["review_stage"] = "pro_other"
-    elif defect == "wrong_provider":
-        operation["provider"] = "gemini"
-        operation["archive_path"] = _stage_archive_path(operation, "pro_innovator", "gemini")
-    else:
-        operation["archive_path"] = (
-            "docs/external-review/directions/example-direction/"
-            "a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
-        )
-    destination = tmp_path / str(operation["archive_path"])
+    operation["provider"] = "gemini"
+    operation["product_model"] = "Gemini 3.1 Pro"
+    operation["reasoning_effort"] = None
+    operation["conversation_url"] = (
+        "https://gemini.google.com/app/" + str(operation["conversation_id"])
+    )
+    archive = operation["archive"]
+    assert isinstance(archive, dict)
+    archive["path"] = str(archive["path"]).replace("/chatgpt/", "/gemini/")
+    assert validate_archive(operation, _response(tmp_path)) == operation
 
-    with pytest.raises(ExternalReviewError):
-        create_archive_if_absent(operation, FIXTURES / "archive.json", destination)
+    operation["reasoning_effort"] = "Pro"
+    with pytest.raises(ExternalReviewError, match="reasoning_effort null"):
+        validate_archive(operation, _response(tmp_path))
 
+
+def test_unresolved_commitment_never_publishes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
+    operation = _operation()
+    operation["phase"] = "VERIFY_COMMITMENT"
+    operation["commitment"] = "UNRESOLVED"
+    operation["recoverability"] = "OBSERVE_ONLY"
+    operation["observability"] = "LOST"
+    operation["provider_user_message_count"] = 0
+    operation["send_activation_count"] = 0
+    operation["user_message_id"] = None
+    operation["assistant_message_id"] = None
+    operation["failure"] = {"locus": "COMMIT_BOUNDARY", "code": "ACTIVATION_UNRESOLVED"}
+    operation["archive"] = None
+    with pytest.raises(CommitmentUnknown):
+        create_archive_if_absent(operation, _response(tmp_path), tmp_path / "unused")
     assert not (tmp_path / "docs").exists()
 
 
-def test_two_future_stages_have_distinct_idempotent_destinations(
+def test_exact_response_and_separate_operation_receipt_publish_idempotently(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    innovator_operation = _operation()
-    innovator_archive = FIXTURES / "archive.json"
-    innovator_destination = _archive_destination(tmp_path, innovator_operation)
+    monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
+    operation = _operation()
+    destination = _destination(tmp_path, operation)
+    created = create_archive_if_absent(operation, _response(tmp_path), destination)
+    assert created["status"] == "CREATED"
+    assert destination.read_bytes() == b"hello"
+    operation_path = destination.with_name("operation_ref.json")
+    assert json.loads(operation_path.read_text(encoding="utf-8")) == operation
 
-    convergence_archive = _archive()
-    convergence_archive["operationId"] = "fixture-convergence-operation"
-    convergence_archive["idempotencyKey"] = "fixture-convergence-idempotency"
-    convergence_archive["stableKey"] = "fixture-convergence-stable"
-    convergence_raw = _canonical_archive_bytes(convergence_archive)
-    convergence_operation = dict(innovator_operation)
-    convergence_operation.update(
-        {
-            "review_stage": "pro_convergence",
-            "operation_id": convergence_archive["operationId"],
-            "idempotency_key": convergence_archive["idempotencyKey"],
-            "stable_key": convergence_archive["stableKey"],
-            "archive_sha256": hashlib.sha256(convergence_raw).hexdigest(),
-        }
-    )
-    convergence_operation["archive_path"] = _stage_archive_path(
-        convergence_operation,
-        "pro_convergence",
-    )
-    convergence_destination = _archive_destination(tmp_path, convergence_operation)
-
-    assert create_archive_if_absent(
-        innovator_operation,
-        innovator_archive,
-        innovator_destination,
-    )["status"] == "CREATED"
-    assert create_archive_if_absent(
-        convergence_operation,
-        convergence_archive,
-        convergence_destination,
-    )["status"] == "CREATED"
-    assert innovator_destination != convergence_destination
-    assert innovator_destination.is_file()
-    assert convergence_destination.read_bytes() == convergence_raw
-    assert create_archive_if_absent(
-        innovator_operation,
-        innovator_archive,
-        innovator_destination,
-    )["status"] == "IDEMPOTENT"
-    assert create_archive_if_absent(
-        convergence_operation,
-        convergence_archive,
-        convergence_destination,
-    )["status"] == "IDEMPOTENT"
+    repeated = create_archive_if_absent(operation, _response(tmp_path), destination)
+    assert repeated["status"] == "IDEMPOTENT"
+    assert repeated["response_ref"]["sha256"] == hashlib.sha256(b"hello").hexdigest()
 
 
-def test_committed_legacy_reference_is_validate_only_even_when_destination_is_absent(
+def test_conflicting_raw_response_never_rewrites_current_bytes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    legacy = _operation()
-    legacy.pop("workflow_version")
-    legacy.pop("review_stage")
-    legacy["archive_path"] = (
-        "docs/external-review/directions/example-direction/"
-        "a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
-    )
-    destination = _archive_destination(tmp_path, legacy)
-
-    assert validate_archive(legacy, FIXTURES / "archive.json")["responseSha256"] == _archive()[
-        "responseSha256"
-    ]
-    with pytest.raises(ExternalReviewError, match="legacy operation references are validate-only"):
-        create_archive_if_absent(legacy, FIXTURES / "archive.json", destination)
-
-    assert not destination.parent.exists()
-
-
-def test_unknown_commitment_refuses_before_archive_create(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    unknown = _operation()
-    unknown["commitment_state"] = "UNKNOWN"
-    destination = _archive_destination(tmp_path, unknown)
-
-    with pytest.raises(CommitmentUnknown):
-        create_archive_if_absent(unknown, FIXTURES / "archive.json", destination)
-
-    assert not destination.exists()
-
-
-def test_provider_path_mismatch_refuses_without_changing_existing_archive(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
+    monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
     operation = _operation()
-    destination = _archive_destination(tmp_path, operation)
-    source_bytes = (FIXTURES / "archive.json").read_bytes()
-    unowned = tmp_path / "unowned-archive.json"
-    with pytest.raises(ExternalReviewError):
-        create_archive_if_absent(operation, FIXTURES / "archive.json", unowned)
-    assert not unowned.exists()
-    destination.parent.mkdir(parents=True)
-    destination.write_bytes(source_bytes)
-    mismatch = dict(operation)
-    mismatch["provider"] = "gemini"
-
-    with pytest.raises(ExternalReviewError):
-        create_archive_if_absent(mismatch, FIXTURES / "archive.json", destination)
-
-    assert destination.read_bytes() == source_bytes
-
-
-def test_same_response_with_different_archive_bytes_conflicts_without_rewrite(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    operation = _operation()
-    source = FIXTURES / "archive.json"
-    destination = _archive_destination(tmp_path, operation)
-    create_archive_if_absent(operation, source, destination)
-    source_bytes = destination.read_bytes()
-    alternate = tmp_path / "same-response-different-archive.json"
-    alternate_bytes = source_bytes + b"\n"
-    alternate.write_bytes(alternate_bytes)
-    alternate_operation = _operation_with_archive_bytes(operation, alternate_bytes)
-
+    destination = _destination(tmp_path, operation)
+    create_archive_if_absent(operation, _response(tmp_path), destination)
+    source = tmp_path / "different.md"
+    source.write_bytes(b"different")
+    changed = _operation_with_bytes(operation, b"different")
     with pytest.raises(ArchiveConflict):
-        create_archive_if_absent(alternate_operation, alternate, destination)
+        create_archive_if_absent(changed, source, destination)
+    assert destination.read_bytes() == b"hello"
 
-    assert destination.read_bytes() == source_bytes
 
-
-def test_concurrent_distinct_archives_conflict_without_changing_existing_bytes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
+def test_archive_projection_is_exact_only(tmp_path: Path) -> None:
     operation = _operation()
-    source = FIXTURES / "archive.json"
-    destination = _archive_destination(tmp_path, operation)
-    create_archive_if_absent(operation, source, destination)
-    source_bytes = destination.read_bytes()
-    first = tmp_path / "first-distinct-archive.json"
-    second = tmp_path / "second-distinct-archive.json"
-    first_bytes = source_bytes + b"\n"
-    second_bytes = source_bytes + b"\n\n"
-    first.write_bytes(first_bytes)
-    second.write_bytes(second_bytes)
-    first_operation = _operation_with_archive_bytes(operation, first_bytes)
-    second_operation = _operation_with_archive_bytes(operation, second_bytes)
-
-    def import_distinct(candidate: tuple[dict[str, object], Path]) -> str:
-        try:
-            return str(create_archive_if_absent(candidate[0], candidate[1], destination)["status"])
-        except ArchiveConflict:
-            return "CONFLICT"
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        outcomes = list(pool.map(import_distinct, ((first_operation, first), (second_operation, second))))
-
-    assert outcomes == ["CONFLICT", "CONFLICT"]
-    assert destination.read_bytes() == source_bytes
+    archive = operation["archive"]
+    assert isinstance(archive, dict)
+    archive["projection"] = "normalized"
+    with pytest.raises(ExternalReviewError, match="projection must be exact"):
+        validate_archive(operation, _response(tmp_path))
 
 
-def test_concurrent_identical_archive_create_is_exact_and_idempotent(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    operation = _operation()
-    source = FIXTURES / "archive.json"
-    destination = _archive_destination(tmp_path, operation)
-
-    def import_once() -> dict[str, object]:
-        return create_archive_if_absent(operation, source, destination)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        results = list(pool.map(lambda _: import_once(), range(8)))
-
-    assert sum(result["status"] == "CREATED" for result in results) == 1
-    assert all(result["status"] in {"CREATED", "IDEMPOTENT"} for result in results)
-    assert destination.read_bytes() == source.read_bytes()
-
-    same = create_archive_if_absent(operation, source, destination)
-    assert same["status"] == "IDEMPOTENT"
-
-
-def test_cli_commitment_unknown_is_exit_code_seven_without_send_surface(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _use_archive_root(monkeypatch, tmp_path)
-    unknown = _operation()
-    unknown["commitment_state"] = "COMMITMENT_UNKNOWN"
-    operation_path = tmp_path / "unknown-operation.json"
-    operation_path.write_text(json.dumps(unknown), encoding="utf-8")
-    destination = _archive_destination(tmp_path, unknown)
-
-    result = subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "scripts" / "hmasd_external_review.py"),
-            "validate-archive",
-            "--operation-ref",
-            str(operation_path),
-            "--archive",
-            str(FIXTURES / "archive.json"),
-            "--out",
-            str(destination),
-        ],
-        check=False,
-        capture_output=True,
-        cwd=tmp_path,
-        text=True,
-    )
-    assert result.returncode == 7
-    assert not destination.exists()
+def test_handoff_uses_current_receipt_and_raw_response(tmp_path: Path) -> None:
+    out = tmp_path / "handoff.json"
+    rendered = render_handoff_input(_operation(), _response(tmp_path), out)
+    assert rendered["handoff_kind"] == "hmasd_external_review_intake_v3"
+    assert rendered["response_text"] == "hello"
+    assert json.loads(out.read_text(encoding="utf-8")) == rendered

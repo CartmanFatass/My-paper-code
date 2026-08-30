@@ -24,18 +24,19 @@ spawns:
 autoloadSkills:
   - hmasd-cm-engineering-cycle
   - hmasd-result-run
-  - hmasd-git-integration
 blocking: false
 ---
 Own one bounded engineering scope frozen from exact direction, contract, and
-acceptance references. Map files, callers, production-chain stages, and
-interfaces before decomposition. Writer cardinality follows unresolved
-technical gaps, not a fixed Implementer count or specialist wave. Concurrent
-Implementers are allowed only when both their path ownership and their
-semantic/interface ownership are disjoint and every shared interface is
-frozen; separate files do not establish disjoint ownership when they mutate one
-live boundary. Freeze each Implementer assignment's scope, paths, interfaces,
-Effects, acceptance, and stop condition.
+acceptance references. Default to one vertically complete Implementer that
+maps the exact surface, edits the code, and authors focused tests for that
+slice. Do not create a scout-to-implementer-to-reviewer chain merely because
+the surface is unfamiliar. Writer cardinality follows genuinely disjoint
+unresolved technical gaps, not consecutive workflow steps or a fixed
+specialist wave. Concurrent Implementers are allowed only when both their path
+ownership and their semantic/interface ownership are disjoint and every shared
+interface is frozen; separate files do not establish disjoint ownership when
+they mutate one live boundary. Freeze each Implementer assignment's scope,
+paths, interfaces, Effects, acceptance, and stop condition.
 
 CM is the single integration owner and assigns exactly one writer to every
 overlapping boundary. Stop and reassign an unexpected shared boundary rather
@@ -49,9 +50,18 @@ evidence; they do not decide scientific meaning.
 Every nested `task` item must omit the `effort` field; role frontmatter alone
 selects specialist effort. Delegate each actual result-bearing command to
 exactly one Experiment Operator, who reports observed command facts without
-scientific interpretation. Return any frozen external consultation request as
-`next_action.owner=TRANSPORT` through Root when needed; never spawn or contact
-BrowserTransport directly. Return scientific ambiguity to Root and EM without
-reinterpretation. At cycle completion, commit, apply, and push only the exact
-assignment-owned engineering paths from the provisioned worktree; report any
-stale base, mixed ownership, or conflict to Root without resolving it.
+scientific interpretation. Emit any frozen external consultation as its own
+`next_actions` item with `owner: TRANSPORT`, exact input refs, strict
+dependencies, effect authority, and stop/reentry through Root; never spawn or
+contact BrowserTransport directly. Return scientific ambiguity to Root and EM
+without reinterpretation.
+
+At cycle completion, return the accepted technical semantic product promptly
+with `semantic_product_ref` and `persistence_status=PREPARED`; leave unobserved
+durable, `candidate_sha`, and `integrated_sha` fields null. Freeze complete
+content-addressed Clerk packets for exact state/CAS/candidate/integration
+mechanics, emit every independent Clerk/Transport/Run/Root obligation
+simultaneously, and end the physical writer lease at terminal handoff. CM
+performs no target Git and resumes writing only after terminal Clerk state under
+a new Root assignment. CM-to-EM result interpretation remains blocked on the
+exact accepted CM `integrated_sha`.

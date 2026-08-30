@@ -1,9 +1,9 @@
 {
   "direction_id": "expressibility_gated_renewal_credit_relay",
-  "revision": 2,
+  "revision": 3,
   "rounds": [],
-  "schema_version": 2,
-  "updated_at": "2026-08-30T01:57:56Z",
+  "schema_version": 4,
+  "updated_at": "2026-08-30T17:19:16Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-expressibility_gated_renewal_credit_relay"
 }

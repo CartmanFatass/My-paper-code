@@ -30,65 +30,21 @@ KINDS = (
     "external_review_index",
     "run_manifest",
     "accepted_result",
-    "external_archive",
     "agent_result",
     "runtime_agents",
     "runtime_worktrees",
 )
 
-SCHEMA_KINDS = (*KINDS, "runtime_browser_assignments")
+SCHEMA_KINDS = (
+    *KINDS,
+    "runtime_browser_assignments",
+    "clerk_operation",
+)
 
 
 def fixture(kind: str) -> dict[str, Any]:
     return json.loads((FIXTURES / f"{kind}.json").read_text(encoding="utf-8"))
 
-def historical_archive(document: dict[str, Any], seed: str) -> dict[str, Any]:
-    question = hashlib.sha256(f"question-{seed}".encode()).hexdigest()
-    evidence = hashlib.sha256(f"evidence-{seed}".encode()).hexdigest()
-    canonical_round_id = hashlib.sha256(
-        (
-            document["direction_id"]
-            + "\n"
-            + question
-            + "\n"
-            + evidence
-            + "\n"
-            + document["workflow_version"]
-        ).encode("utf-8")
-    ).hexdigest()[:20]
-    observed_round_id = hashlib.sha256(f"observed-{seed}".encode()).hexdigest()[:20]
-    provider = "chatgpt"
-    return {
-        "classification": "CROSS_SWAPPED_ROUND_ID",
-        "observed_round_id": observed_round_id,
-        "canonical_round_id": canonical_round_id,
-        "question_sha256": question,
-        "evidence_set_sha256": evidence,
-        "review_stage": "pro_innovator",
-        "provider": provider,
-        "stable_key": f"stable-{seed}",
-        "operation_id": f"operation-{seed}",
-        "idempotency_key": f"idempotency-{seed}",
-        "request_fingerprint": hashlib.sha256(f"request-{seed}".encode()).hexdigest(),
-        "prompt_sha256": hashlib.sha256(f"prompt-{seed}".encode()).hexdigest(),
-        "session_id": f"session-{seed}",
-        "terminal_state": "NATURAL_COMPLETION_VERIFIED",
-        "completed_at": "2026-08-24T00:05:00Z",
-        "legacy_archive_ref": {
-            "path": (
-                f"docs/external-review/directions/{document['direction_id']}/"
-                f"{observed_round_id}/{provider}/NATURAL_COMPLETION_ARCHIVE.json"
-            ),
-            "sha256": hashlib.sha256(f"archive-{seed}".encode()).hexdigest(),
-        },
-        "response_ref": {
-            "path": (
-                f"docs/research/candidates/{document['direction_id']}/"
-                f"RESPONSE_{seed}.md"
-            ),
-            "sha256": hashlib.sha256(f"response-{seed}".encode()).hexdigest(),
-        },
-    }
 
 
 def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
@@ -101,7 +57,190 @@ def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     )
 
 
-def test_all_eleven_schema_contracts_are_present_and_strict() -> None:
+def clerk_packet() -> dict[str, Any]:
+    packet: dict[str, Any] = {
+        "schema_version": 1,
+        "kind": "clerk_operation",
+        "operation_id": "state-cas-operation-001",
+        "clerk_assignment_id": "state-cas-clerk-001",
+        "executor": {
+            "role": "hmasd-clerk",
+            "logical_identity": "Clerk-state-cas-clerk-001",
+            "generation": 1,
+        },
+        "authorizer": {
+            "role": "root",
+            "logical_identity": "Root",
+            "generation": 1,
+            "assignment_id": "root-state-cas-authorizer",
+        },
+        "operation": "STATE_CAS",
+        "requires": [
+            {
+                "authority_ref": {
+                    "path": ".omp/runtime/agents.json",
+                    "sha256": "1" * 64,
+                },
+                "revision_or_checkpoint": 1,
+            }
+        ],
+        "authority": {
+            "direction_id": None,
+            "document_writer": "Root",
+            "git_actor": None,
+            "worktree_kind": None,
+            "assignment_authority": "SHARED",
+        },
+        "mutation": {
+            "class": "STATE_PATH",
+            "resources": [
+                {
+                    "kind": "STATE_PATH",
+                    "key": "/home/fires/hmasd/.omp/runtime/agents.json",
+                }
+            ],
+        },
+        "effect": {
+            "attempt": 1,
+            "attempt_token": "2" * 64,
+            "authorized_effects": ["STATE_CAS"],
+            "unknown_outcome": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
+        },
+        "target": {
+            "state_kind": "runtime_agents",
+            "canonical_target_path": "/home/fires/hmasd/.omp/runtime/agents.json",
+            "expected_revision": 1,
+            "input_ref": {
+                "path": "temp/clerk/state-cas-clerk-001/input.json",
+                "sha256": "3" * 64,
+            },
+            "expected_document_writer": "Root",
+        },
+        "acceptance_refs": [
+            {
+                "path": "temp/clerk/state-cas-clerk-001/acceptance.json",
+                "sha256": "4" * 64,
+            }
+        ],
+        "postconditions": {
+            "success": ["revision is exactly 2 and desired bytes match"],
+            "refusal": ["target bytes and revision remain unchanged"],
+            "unknown": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
+        },
+        "stop_condition": "Return after one terminal claim receipt.",
+        "return_owner": "ROOT",
+    }
+    packet["packet_sha256"] = hashlib.sha256(
+        (json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
+            "utf-8"
+        )
+    ).hexdigest()
+    return packet
+
+
+def rehash_clerk_packet(packet: dict[str, Any]) -> None:
+    packet.pop("packet_sha256", None)
+    packet["packet_sha256"] = hashlib.sha256(
+        (json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
+            "utf-8"
+        )
+    ).hexdigest()
+
+
+def worktree_packet(operation: str) -> dict[str, Any]:
+    assert operation in {"WORKTREE_PROVISION", "WORKTREE_RELEASE"}
+    packet = clerk_packet()
+    clerk_assignment_id = f"{operation.lower().replace('_', '-')}-clerk-001"
+    packet["operation_id"] = f"{operation.lower().replace('_', '-')}-operation-001"
+    packet["clerk_assignment_id"] = clerk_assignment_id
+    packet["executor"]["logical_identity"] = f"Clerk-{clerk_assignment_id}"
+    packet["operation"] = operation
+    packet["authority"] = {
+        "direction_id": "example-direction",
+        "document_writer": None,
+        "git_actor": "root",
+        "worktree_kind": "research",
+        "assignment_authority": "SHARED",
+    }
+    packet["mutation"] = {
+        "class": "WORKTREE_REGISTRY",
+        "resources": [
+            {
+                "kind": (
+                    "CONTAINER"
+                    if operation == "WORKTREE_PROVISION"
+                    else "RUNTIME_WORKTREES_STATE"
+                ),
+                "key": (
+                    "/home/fires/hmasd-worktrees"
+                    if operation == "WORKTREE_PROVISION"
+                    else "/home/fires/hmasd/.omp/runtime/worktrees.json"
+                ),
+            },
+            {
+                "kind": (
+                    "RUNTIME_WORKTREES_STATE"
+                    if operation == "WORKTREE_PROVISION"
+                    else "WORKTREE"
+                ),
+                "key": (
+                    "/home/fires/hmasd/.omp/runtime/worktrees.json"
+                    if operation == "WORKTREE_PROVISION"
+                    else "/home/fires/hmasd-worktrees/example-direction-research-assignment-001"
+                ),
+            },
+        ],
+    }
+    packet["effect"]["authorized_effects"] = [operation]
+    mutation_lease = {
+        "manager_assignment_id": "root-worktree-manager-001",
+        "clerk_assignment_id": clerk_assignment_id,
+        "handoff_ref": {
+            "path": f"temp/clerk/{clerk_assignment_id}/handoff.json",
+            "sha256": "b" * 64,
+        },
+        "lease_token": "c" * 64,
+    }
+    common_target = {
+        "canonical_repo_path": "/home/fires/hmasd",
+        "canonical_container_path": "/home/fires/hmasd-worktrees",
+        "canonical_worktree_path": (
+            "/home/fires/hmasd-worktrees/example-direction-research-assignment-001"
+        ),
+        "worktree_ref": "example-direction-research-assignment-001",
+        "direction_id": "example-direction",
+        "worktree_kind": "research",
+        "base_sha": "a" * 40,
+        "expected_registry_revision": 1,
+        "mutation_lease": mutation_lease,
+    }
+    if operation == "WORKTREE_PROVISION":
+        packet["target"] = {
+            **common_target,
+            "integration_policy": "EXACT_HANDOFF",
+            "parallel_set_manifest_ref": None,
+            "expected_lifecycle": "ABSENT",
+            "expected_receipt_sha256": None,
+            "required_handoff_sha": "a" * 40,
+            "required_dependency_refs": [],
+            "prior_operation_receipt": None,
+        }
+    else:
+        packet["target"] = {
+            **common_target,
+            "expected_lifecycle": "PROVISIONED",
+            "expected_receipt_sha256": "d" * 64,
+            "ignored_artifacts": "refuse",
+            "policy": "EXACT_HANDOFF",
+            "required_handoff_sha": "a" * 40,
+            "required_dependency_refs": [],
+            "prior_operation_receipt": None,
+        }
+    rehash_clerk_packet(packet)
+    return packet
+
+
+def test_all_phase0_schema_contracts_are_present_and_strict() -> None:
     schema_dir = ROOT / "scripts" / "schemas"
     for kind in SCHEMA_KINDS:
         schema = json.loads(
@@ -112,32 +251,17 @@ def test_all_eleven_schema_contracts_are_present_and_strict() -> None:
         assert schema["required"]
 
 
-def test_external_review_schema_encodes_versioned_history_shape() -> None:
-    schema = json.loads(
-        (ROOT / "scripts" / "schemas" / "hmasd_external_review_index.schema.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    assert schema["oneOf"] == [
-        {
-            "properties": {"schema_version": {"const": 2}},
-            "not": {"required": ["historical_archives"]},
-        },
-        {
-            "properties": {"schema_version": {"const": 3}},
-            "required": ["historical_archives"],
-        },
-    ]
 
 
-def test_valid_phase0_fixtures_validate() -> None:
+def test_valid_phase0_fixtures_validate(tmp_path: Path) -> None:
     for kind in KINDS:
-        path = FIXTURES / f"{kind}.json"
+        path = tmp_path / f"{kind}.json"
+        path.write_text(json.dumps(fixture(kind)), encoding="utf-8")
         result = run_cli("validate", "--kind", kind, "--path", str(path))
         assert result.returncode == 0, (kind, result.stderr)
 
 
-def test_external_review_v2_status_transitions_use_the_exact_pro_pair(
+def test_external_review_status_transitions_use_the_exact_pro_pair(
     tmp_path: Path,
 ) -> None:
     current = fixture("external_review_index")
@@ -202,7 +326,7 @@ def test_external_review_v2_status_transitions_use_the_exact_pro_pair(
         current = replacement
 
 
-def test_external_review_v2_rejects_old_three_stage_fields(tmp_path: Path) -> None:
+def test_external_review_rejects_old_three_stage_fields(tmp_path: Path) -> None:
     document = fixture("external_review_index")
     review_round = document["rounds"][0]
     innovator_prompt = review_round["prompt_refs"]["pro_innovator"]
@@ -231,390 +355,10 @@ def test_external_review_v2_rejects_old_three_stage_fields(tmp_path: Path) -> No
     assert result.returncode == 2
 
 
-def test_external_review_v3_recomputes_history_and_rejects_synthetic_rounds(
-    tmp_path: Path,
-) -> None:
-    document = fixture("external_review_index")
-    unexpected_history = copy.deepcopy(document)
-    unexpected_history["historical_archives"] = []
-    unexpected_history_path = tmp_path / "external-review-v2-with-history.json"
-    unexpected_history_path.write_text(json.dumps(unexpected_history), encoding="utf-8")
-    assert run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(unexpected_history_path),
-    ).returncode == 2
-
-    missing_history = copy.deepcopy(document)
-    missing_history["schema_version"] = 3
-    missing_history_path = tmp_path / "external-review-v3-without-history.json"
-    missing_history_path.write_text(json.dumps(missing_history), encoding="utf-8")
-    assert run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(missing_history_path),
-    ).returncode == 2
-
-    document["schema_version"] = 3
-    record = historical_archive(document, "one")
-    document["historical_archives"] = [record]
-    valid = tmp_path / "external-review-v3.json"
-    valid.write_text(json.dumps(document, sort_keys=True), encoding="utf-8")
-    result = run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(valid),
-    )
-    assert result.returncode == 0, result.stderr
-
-    wrong_canonical = copy.deepcopy(document)
-    wrong_canonical["historical_archives"][0]["canonical_round_id"] = "0" * 20
-    wrong_path = tmp_path / "external-review-v3-wrong-canonical.json"
-    wrong_path.write_text(json.dumps(wrong_canonical), encoding="utf-8")
-    assert run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(wrong_path),
-    ).returncode == 2
-
-    duplicate = copy.deepcopy(document)
-    duplicate["historical_archives"].append(copy.deepcopy(record))
-    duplicate_path = tmp_path / "external-review-v3-duplicate.json"
-    duplicate_path.write_text(json.dumps(duplicate), encoding="utf-8")
-    assert run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(duplicate_path),
-    ).returncode == 2
-
-    synthetic = copy.deepcopy(document)
-    synthetic_round = synthetic["rounds"][0]
-    synthetic_round["round_id"] = record["canonical_round_id"]
-    synthetic_round["question_sha256"] = record["question_sha256"]
-    synthetic_round["evidence_set_sha256"] = record["evidence_set_sha256"]
-    synthetic_path = tmp_path / "external-review-v3-synthetic-round.json"
-    synthetic_path.write_text(json.dumps(synthetic), encoding="utf-8")
-    assert run_cli(
-        "validate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(synthetic_path),
-    ).returncode == 2
 
 
-def test_checked_in_external_review_identity_recovery_is_exact_and_reciprocal() -> None:
-    expected_records = {
-        "semigroup_consistent_duration_model_policy": {
-            "canonical_round_id": "211d583818335dd612c7",
-            "classification": "CROSS_SWAPPED_ROUND_ID",
-            "completed_at": "2026-08-29T23:52:48.022Z",
-            "evidence_set_sha256": (
-                "29bccb94957be0a4c87bf919195dc054417337be0f322f337cef3846451c9539"
-            ),
-            "idempotency_key": (
-                "scdmp-opportunity-law-r02-pro-convergence-20260829-strict-01"
-            ),
-            "legacy_archive_ref": {
-                "path": (
-                    "docs/external-review/directions/"
-                    "semigroup_consistent_duration_model_policy/"
-                    "9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
-                ),
-                "sha256": (
-                    "299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2"
-                ),
-            },
-            "observed_round_id": "9f48f4a6bcace75fddeb",
-            "operation_id": "499b71d6-ca35-42d6-9aee-4c1202a7a82d",
-            "prompt_sha256": (
-                "a8dff6d04f5b7f8d2c5d43658773deab7c5b2f3d0ae5df7c29d118b4897de10b"
-            ),
-            "provider": "chatgpt",
-            "question_sha256": (
-                "7506749d50500afe5c7108634aaa97e5975854ee8be239a53834be08a4116c55"
-            ),
-            "request_fingerprint": (
-                "f7ff3f3088493379da96aaf99f9bc7b9a63d8482bb91dd115d209e4edd3fb475"
-            ),
-            "response_ref": {
-                "path": (
-                    "docs/research/candidates/"
-                    "semigroup_consistent_duration_model_policy/"
-                    "SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md"
-                ),
-                "sha256": (
-                    "b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f"
-                ),
-            },
-            "review_stage": "pro_convergence",
-            "session_id": "6a93307b-6410-83e8-b9e5-1ab428de2fc6",
-            "stable_key": "scdmp-opportunity-law-r02-pro-convergence",
-            "terminal_state": "NATURAL_COMPLETION_VERIFIED",
-        },
-        "voronoi_quadrature_field_policy": {
-            "canonical_round_id": "9f48f4a6bcace75fddeb",
-            "classification": "CROSS_SWAPPED_ROUND_ID",
-            "completed_at": "2026-08-29T23:53:06.893Z",
-            "evidence_set_sha256": (
-                "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9"
-            ),
-            "idempotency_key": (
-                "vqfp-proof-sized-association-gate-r01-pro-innovator-"
-                "resume-20260829-strict-03"
-            ),
-            "legacy_archive_ref": {
-                "path": (
-                    "docs/external-review/directions/voronoi_quadrature_field_policy/"
-                    "211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
-                ),
-                "sha256": (
-                    "4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
-                ),
-            },
-            "observed_round_id": "211d583818335dd612c7",
-            "operation_id": "be82f31d-a7cc-4757-9dcb-1393653250fb",
-            "prompt_sha256": (
-                "4c9e2df6b994a532892bb0877c2f7be6aee77fc06c6666bb5fa9eb415dc04833"
-            ),
-            "provider": "chatgpt",
-            "question_sha256": (
-                "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9"
-            ),
-            "request_fingerprint": (
-                "b22a9ae15c03521e5454c42d276e60878d8f3812b83feaa414e67f724f48119e"
-            ),
-            "response_ref": {
-                "path": (
-                    "docs/research/candidates/voronoi_quadrature_field_policy/"
-                    "VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_"
-                    "RESPONSE_20260829.md"
-                ),
-                "sha256": (
-                    "c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162"
-                ),
-            },
-            "review_stage": "pro_innovator",
-            "session_id": "6a933040-034c-83e8-9e8c-9e83eed1c1fa",
-            "stable_key": "vqfp-proof-sized-association-gate-r01-pro-innovator",
-            "terminal_state": "NATURAL_COMPLETION_VERIFIED",
-        },
-    }
-
-    recovered: dict[str, dict[str, Any]] = {}
-    for direction_id, expected_record in expected_records.items():
-        index_path = (
-            ROOT
-            / "docs"
-            / "research"
-            / "candidates"
-            / direction_id
-            / "workflow"
-            / "external-review"
-            / "index.json"
-        )
-        index = json.loads(index_path.read_text(encoding="utf-8"))
-        assert index == {
-            "direction_id": direction_id,
-            "historical_archives": [expected_record],
-            "revision": 3,
-            "rounds": [],
-            "schema_version": 3,
-            "updated_at": "2026-08-30T01:57:56Z",
-            "workflow_version": "hmasd-external-review-v1",
-            "writer": f"EM-{direction_id}",
-        }
-
-        record = index["historical_archives"][0]
-        canonical_material = "\n".join(
-            (
-                direction_id,
-                record["question_sha256"],
-                record["evidence_set_sha256"],
-                index["workflow_version"],
-            )
-        ).encode("utf-8")
-        assert hashlib.sha256(canonical_material).hexdigest()[:20] == record[
-            "canonical_round_id"
-        ]
-
-        archive_path = ROOT / record["legacy_archive_ref"]["path"]
-        response_path = ROOT / record["response_ref"]["path"]
-        archive_bytes = archive_path.read_bytes()
-        response_bytes = response_path.read_bytes()
-        assert hashlib.sha256(archive_bytes).hexdigest() == record["legacy_archive_ref"][
-            "sha256"
-        ]
-        assert hashlib.sha256(response_bytes).hexdigest() == record["response_ref"][
-            "sha256"
-        ]
-
-        archive = json.loads(archive_bytes)
-        assert archive["schema"] == "agentify_review_natural_completion_archive_v1"
-        assert archive["operationId"] == record["operation_id"]
-        assert archive["idempotencyKey"] == record["idempotency_key"]
-        assert archive["stableKey"] == record["stable_key"]
-        assert archive["provider"] == record["provider"]
-        assert archive["model"] == "Pro"
-        assert archive["conversationId"] == record["session_id"]
-        assert archive["conversationUrl"] == (
-            f"https://chatgpt.com/c/{record['session_id']}"
-        )
-        assert archive["terminalState"] == record["terminal_state"]
-        assert archive["sendCount"] == 1
-        assert archive["sendActionCount"] == 1
-        assert archive["userMessageId"]
-        assert archive["assistantMessageId"]
-        assert archive["completedAt"] == record["completed_at"]
-        assert archive["responseSha256"] == record["response_ref"]["sha256"]
-        assert archive["responseText"].encode("utf-8") == response_bytes
-        recovered[direction_id] = record
-
-    scdmp = recovered["semigroup_consistent_duration_model_policy"]
-    vqfp = recovered["voronoi_quadrature_field_policy"]
-    assert scdmp["observed_round_id"] == vqfp["canonical_round_id"]
-    assert vqfp["observed_round_id"] == scdmp["canonical_round_id"]
 
 
-def test_external_review_v2_to_v3_migration_adds_no_facts_and_history_is_append_only(
-    tmp_path: Path,
-) -> None:
-    original = fixture("external_review_index")
-    target = tmp_path / "external-review-index.json"
-    target.write_text(json.dumps(original, sort_keys=True), encoding="utf-8")
-    stale_before = target.read_bytes()
-    stale = run_cli(
-        "migrate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        "99",
-        "--to-version",
-        "3",
-    )
-    assert stale.returncode == 4
-    assert target.read_bytes() == stale_before
-
-    attempted_bump = copy.deepcopy(original)
-    attempted_bump["schema_version"] = 3
-    attempted_bump["revision"] += 1
-    attempted_bump["historical_archives"] = [
-        historical_archive(attempted_bump, "during-schema-bump")
-    ]
-    attempted_bump_path = tmp_path / "external-review-bump-with-history.json"
-    attempted_bump_path.write_text(json.dumps(attempted_bump), encoding="utf-8")
-    no_facts_before = target.read_bytes()
-    refused_bump = run_cli(
-        "replace",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        str(original["revision"]),
-        "--input",
-        str(attempted_bump_path),
-    )
-    assert refused_bump.returncode == 6
-    assert target.read_bytes() == no_facts_before
-
-    migrated_result = run_cli(
-        "migrate",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        str(original["revision"]),
-        "--to-version",
-        "3",
-    )
-    assert migrated_result.returncode == 0, migrated_result.stderr
-    migrated = json.loads(target.read_text(encoding="utf-8"))
-    assert migrated["schema_version"] == 3
-    assert migrated["revision"] == original["revision"] + 1
-    assert migrated["rounds"] == original["rounds"]
-    assert migrated["historical_archives"] == []
-
-    first = copy.deepcopy(migrated)
-    first["revision"] += 1
-    first["historical_archives"].append(historical_archive(first, "first"))
-    first_path = tmp_path / "external-review-first-history.json"
-    first_path.write_text(json.dumps(first), encoding="utf-8")
-    appended = run_cli(
-        "replace",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        str(migrated["revision"]),
-        "--input",
-        str(first_path),
-    )
-    assert appended.returncode == 0, appended.stderr
-
-    second = copy.deepcopy(first)
-    second["revision"] += 1
-    second["historical_archives"].append(historical_archive(second, "second"))
-    second_path = tmp_path / "external-review-second-history.json"
-    second_path.write_text(json.dumps(second), encoding="utf-8")
-    appended_again = run_cli(
-        "replace",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        str(first["revision"]),
-        "--input",
-        str(second_path),
-    )
-    assert appended_again.returncode == 0, appended_again.stderr
-
-    rewritten = copy.deepcopy(second)
-    rewritten["revision"] += 1
-    rewritten["historical_archives"][0]["response_ref"]["sha256"] = "0" * 64
-    rewritten_path = tmp_path / "external-review-rewritten-history.json"
-    rewritten_path.write_text(json.dumps(rewritten), encoding="utf-8")
-    immutable_before = target.read_bytes()
-    refused = run_cli(
-        "replace",
-        "--kind",
-        "external_review_index",
-        "--path",
-        str(target),
-        "--writer",
-        original["writer"],
-        "--expected-revision",
-        str(second["revision"]),
-        "--input",
-        str(rewritten_path),
-    )
-    assert refused.returncode == 6
-    assert target.read_bytes() == immutable_before
 
 
 def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:
@@ -651,6 +395,322 @@ def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> 
     document["logical_identity"] = "Portfolio"
     path.write_text(json.dumps(document), encoding="utf-8")
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+
+def test_common_result_requires_closed_next_actions_and_exact_dependencies(
+    tmp_path: Path,
+) -> None:
+    document = fixture("agent_result")
+    action = {
+        "action_id": "persist-research-state",
+        "kind": "EXECUTE_CLERK_PACKET",
+        "owner": "CLERK",
+        "input_refs": [
+            {
+                "path": "temp/clerk/persist-research-state/packet.json",
+                "sha256": "5" * 64,
+            }
+        ],
+        "dependencies": [
+            {
+                "authority_ref": {
+                    "path": "docs/research/candidates/example-direction/STATE.json",
+                    "sha256": "6" * 64,
+                },
+                "revision_or_checkpoint": 1,
+            }
+        ],
+        "authorized_effect_ref": {
+            "path": "temp/clerk/persist-research-state/effect.json",
+            "sha256": "7" * 64,
+        },
+        "stop_or_reentry_ref": {
+            "path": "temp/clerk/persist-research-state/stop.json",
+            "sha256": "8" * 64,
+        },
+    }
+    document["next_actions"] = [action]
+    path = tmp_path / "agent-result-actions.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    bad_owner = copy.deepcopy(document)
+    bad_owner["next_actions"][0]["owner"] = "PORTFOLIO"
+    path.write_text(json.dumps(bad_owner), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    implicit_dependency = copy.deepcopy(document)
+    implicit_dependency["next_actions"][0]["dependencies"] = [
+        {"authority_ref": action["dependencies"][0]["authority_ref"]}
+    ]
+    path.write_text(json.dumps(implicit_dependency), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    legacy_alias = copy.deepcopy(document)
+    legacy_alias["next_action"] = None
+    path.write_text(json.dumps(legacy_alias), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    duplicate = copy.deepcopy(document)
+    duplicate["next_actions"].append(copy.deepcopy(action))
+    path.write_text(json.dumps(duplicate), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+
+def test_clerk_result_identity_authority_and_no_decision_boundary(
+    tmp_path: Path,
+) -> None:
+    packet = clerk_packet()
+    document = fixture("agent_result")
+    document.update(
+        {
+            "assignment_id": packet["clerk_assignment_id"],
+            "logical_identity": packet["executor"]["logical_identity"],
+            "materiality": "LOCAL",
+            "role": "hmasd-clerk",
+            "summary": "Observed one terminal Clerk operation receipt.",
+            "payload": {
+                "kind": "clerk",
+                "operation_id": packet["operation_id"],
+                "packet_ref": {
+                    "path": "temp/clerk/state-cas-clerk-001/packet.json",
+                    "sha256": packet["packet_sha256"],
+                },
+                "executor_identity": packet["executor"]["logical_identity"],
+                "authorizer": packet["authorizer"],
+                "operation": packet["operation"],
+                "authority_actor_or_writer": "Root",
+                "resources": packet["mutation"]["resources"],
+                "attempt": 1,
+                "outcome": "SUCCEEDED",
+                "effect_state": "LANDED",
+                "receipt_refs": [
+                    {
+                        "path": "temp/clerk/state-cas-clerk-001/receipt.json",
+                        "sha256": "9" * 64,
+                    }
+                ],
+                "observation_refs": [],
+            },
+        }
+    )
+    path = tmp_path / "clerk-result.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    wrong_identity = copy.deepcopy(document)
+    wrong_identity["logical_identity"] = "Clerk-other-clerk-001"
+    path.write_text(json.dumps(wrong_identity), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 5
+    fallback = copy.deepcopy(document)
+    fallback["payload"]["resolved_model_is_fallback"] = True
+    path.write_text(json.dumps(fallback), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    wrong_model = copy.deepcopy(document)
+    wrong_model["payload"]["resolved_model"] = "openai-codex/gpt-5.6-sol"
+    path.write_text(json.dumps(wrong_model), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+    changed_actor = copy.deepcopy(document)
+    changed_actor["payload"]["authority_actor_or_writer"] = "cm:example-direction"
+    path.write_text(json.dumps(changed_actor), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 5
+
+    decision = copy.deepcopy(document)
+    decision["materiality"] = "USER"
+    decision["decision_requests"] = [
+        {
+            "kind": "USER_DECISION",
+            "ref": {
+                "path": "temp/clerk/state-cas-clerk-001/decision.json",
+                "sha256": "a" * 64,
+            },
+        }
+    ]
+    path.write_text(json.dumps(decision), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 5
+
+    extra = copy.deepcopy(document)
+    extra["payload"]["successor"] = "ROOT"
+    path.write_text(json.dumps(extra), encoding="utf-8")
+    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
+    assert result.returncode == 2
+
+
+def test_clerk_operation_packet_is_closed_content_addressed_and_inert(
+    tmp_path: Path,
+) -> None:
+    packet = clerk_packet()
+    path = tmp_path / "clerk-operation.json"
+    path.write_text(json.dumps(packet), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+    provision = worktree_packet("WORKTREE_PROVISION")
+    path.write_text(json.dumps(provision), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    missing_policy = copy.deepcopy(provision)
+    del missing_policy["target"]["integration_policy"]
+    rehash_clerk_packet(missing_policy)
+    path.write_text(json.dumps(missing_policy), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    exact_with_parallel_set = copy.deepcopy(provision)
+    exact_with_parallel_set["target"]["parallel_set_manifest_ref"] = {
+        "path": "docs/project/parallel-sets/example.json",
+        "sha256": "e" * 64,
+    }
+    rehash_clerk_packet(exact_with_parallel_set)
+    path.write_text(json.dumps(exact_with_parallel_set), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    orthogonal = copy.deepcopy(provision)
+    orthogonal["target"]["integration_policy"] = "ORTHOGONAL_DIRECTION"
+    orthogonal["target"]["parallel_set_manifest_ref"] = {
+        "path": "docs/project/parallel-sets/example.json",
+        "sha256": "e" * 64,
+    }
+    orthogonal["target"]["required_handoff_sha"] = None
+    rehash_clerk_packet(orthogonal)
+    path.write_text(json.dumps(orthogonal), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    orthogonal_without_parallel_set = copy.deepcopy(orthogonal)
+    orthogonal_without_parallel_set["target"]["parallel_set_manifest_ref"] = None
+    rehash_clerk_packet(orthogonal_without_parallel_set)
+    path.write_text(json.dumps(orthogonal_without_parallel_set), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    release = worktree_packet("WORKTREE_RELEASE")
+    path.write_text(json.dumps(release), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    implicit_release_disposition = copy.deepcopy(release)
+    del implicit_release_disposition["target"]["ignored_artifacts"]
+    rehash_clerk_packet(implicit_release_disposition)
+    path.write_text(json.dumps(implicit_release_disposition), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    invalid_release_disposition = copy.deepcopy(release)
+    invalid_release_disposition["target"]["ignored_artifacts"] = "default"
+    rehash_clerk_packet(invalid_release_disposition)
+    path.write_text(json.dumps(invalid_release_disposition), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    malformed_identity = copy.deepcopy(packet)
+    malformed_identity["executor"]["logical_identity"] = "Clerk-other-clerk-001"
+    rehash_clerk_packet(malformed_identity)
+    path.write_text(json.dumps(malformed_identity), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 5
+
+    changed_writer = copy.deepcopy(packet)
+    changed_writer["authority"]["document_writer"] = "CM-example-direction"
+    changed_writer["target"]["expected_document_writer"] = "CM-example-direction"
+    rehash_clerk_packet(changed_writer)
+    path.write_text(json.dumps(changed_writer), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 5
+    changed_actor = copy.deepcopy(packet)
+    changed_actor["authority"]["git_actor"] = "cm:example-direction"
+    rehash_clerk_packet(changed_actor)
+    path.write_text(json.dumps(changed_actor), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 5
+
+    wrong_model = copy.deepcopy(packet)
+    wrong_model["executor"]["model"] = "openai-codex/gpt-5.6-sol"
+    rehash_clerk_packet(wrong_model)
+    path.write_text(json.dumps(wrong_model), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    wrong_return = copy.deepcopy(packet)
+    wrong_return["return_owner"] = "CLERK"
+    rehash_clerk_packet(wrong_return)
+    path.write_text(json.dumps(wrong_return), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    extra = copy.deepcopy(packet)
+    extra["decision_request"] = "RETRY"
+    rehash_clerk_packet(extra)
+    path.write_text(json.dumps(extra), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+    wrong_hash = copy.deepcopy(packet)
+    wrong_hash["packet_sha256"] = "0" * 64
+    path.write_text(json.dumps(wrong_hash), encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
+    assert result.returncode == 2
+
+
+def test_runtime_clerks_are_unique_per_assignment_root_children(
+    tmp_path: Path,
+) -> None:
+    document = fixture("runtime_agents")
+    document["agents"].append(
+        {
+            "logical_identity": "Clerk-state-cas-clerk-001",
+            "agent_type": "hmasd-clerk",
+            "generation": 1,
+            "assignment_id": "state-cas-clerk-001",
+            "parent_identity": "Root",
+            "session_ref": "session-clerk-state-cas",
+            "job_ref": "job-clerk-state-cas",
+            "runtime_ref": "runtime-clerk-state-cas",
+            "lifecycle": "RUNNING",
+            "last_seen_at": "2026-08-24T00:00:00Z",
+        }
+    )
+    path = tmp_path / "runtime-agents-clerk.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
+    assert result.returncode == 0, result.stderr
+
+    wrong_assignment = copy.deepcopy(document)
+    wrong_assignment["agents"][-1]["assignment_id"] = "other-clerk-001"
+    path.write_text(json.dumps(wrong_assignment), encoding="utf-8")
+    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
+    assert result.returncode == 5
+
+    wrong_parent = copy.deepcopy(document)
+    wrong_parent["agents"][-1]["parent_identity"] = "EM-example-direction"
+    path.write_text(json.dumps(wrong_parent), encoding="utf-8")
+    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
+    assert result.returncode == 2
+    parked = copy.deepcopy(document)
+    parked["agents"][-1]["lifecycle"] = "PARKED"
+    path.write_text(json.dumps(parked), encoding="utf-8")
+    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
+    assert result.returncode == 2
+
+    extra = copy.deepcopy(document)
+    extra["agents"][-1]["advisor"] = "off"
+    path.write_text(json.dumps(extra), encoding="utf-8")
+    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
     assert result.returncode == 2
 
 
@@ -808,11 +868,31 @@ def test_replace_refuses_cross_writer_and_immutable_record_rewrites(tmp_path: Pa
 
     external_current = fixture("external_review_index")
     provider = {
+        "provider": "chatgpt",
+        "product_model": "GPT-5.6 Sol",
+        "reasoning_effort": "Pro",
         "operation_id": "operation-a",
         "idempotency_key": "idempotency-a",
-        "session_ref": "session-a",
-        "terminal_state": "COMPLETED",
-        "archive_ref": None,
+        "operation_ref": {
+            "path": "docs/external-review/directions/example-direction/038544507c6e759ace8b/pro_innovator/chatgpt/operation_ref.json",
+            "sha256": "1" * 64,
+        },
+        "provider_conversation_ref": "https://chatgpt.com/c/conversation-a",
+        "provider_conversation_id": "conversation-a",
+        "phase": "TERMINAL",
+        "commitment": "ONE_EXACT",
+        "recoverability": "NONE",
+        "observability": "FRESH_COMPLETE",
+        "message_capability": "SEALED",
+        "failure": {"locus": "NONE", "code": "NONE"},
+        "provider_user_message_count": 1,
+        "send_activation_count": 1,
+        "user_message_id": "user-message-a",
+        "assistant_message_id": "assistant-message-a",
+        "archive_ref": {
+            "path": "docs/external-review/directions/example-direction/038544507c6e759ace8b/pro_innovator/chatgpt/response.md",
+            "sha256": "2" * 64,
+        },
         "handoff_ref": None,
         "completed_at": "2026-08-24T00:01:00Z",
     }
@@ -966,120 +1046,58 @@ def test_registry_enforces_uniqueness_dependencies_and_active_limit(tmp_path: Pa
     assert result.returncode == 2
 
 
-def test_foreign_archive_has_native_schema_and_exact_completion_hash(tmp_path: Path) -> None:
-    archive = fixture("external_archive")
-    assert "schema_version" not in archive
-    assert "revision" not in archive
-    assert "writer" not in archive
-    archive_path = tmp_path / "archive.json"
-    archive_path.write_text(json.dumps(archive), encoding="utf-8")
-    result = run_cli("validate", "--kind", "external_archive", "--path", str(archive_path))
-    assert result.returncode == 0, result.stderr
-
-    archive["responseText"] = "tampered"
-    archive_path.write_text(json.dumps(archive), encoding="utf-8")
-    result = run_cli("validate", "--kind", "external_archive", "--path", str(archive_path))
-    assert result.returncode == 2
 
 
-def test_initialize_replace_and_migrate_are_revision_cas_and_byte_preserving(
-    tmp_path: Path,
-) -> None:
-    source = FIXTURES / "research_state.json"
+def test_initialize_and_replace_are_revision_cas_and_current_only(tmp_path: Path) -> None:
+    source = fixture("research_state")
     target = tmp_path / "state.json"
-    result = run_cli(
+    initialized = run_cli(
         "initialize",
         "--kind",
         "research_state",
         "--path",
         str(target),
         "--writer",
-        "EM-example-direction",
+        source["writer"],
         "--input",
-        str(source),
+        str(FIXTURES / "research_state.json"),
     )
-    assert result.returncode == 0, result.stderr
-    original = target.read_bytes()
+    assert initialized.returncode == 0, initialized.stderr
 
-    replacement = fixture("research_state")
-    replacement["revision"] = 2
-    replacement["next_action"] = {"kind": "WAIT", "owner": "ROOT", "input_refs": []}
+    replacement = copy.deepcopy(source)
+    replacement["revision"] += 1
+    replacement["updated_at"] = "2026-08-24T00:01:00Z"
     replacement_path = tmp_path / "replacement.json"
     replacement_path.write_text(json.dumps(replacement), encoding="utf-8")
-    stale = run_cli(
+    replaced = run_cli(
         "replace",
         "--kind",
         "research_state",
         "--path",
         str(target),
         "--writer",
-        "EM-example-direction",
+        source["writer"],
         "--expected-revision",
-        "99",
+        "1",
         "--input",
         str(replacement_path),
     )
-    assert stale.returncode == 4
-    assert target.read_bytes() == original
+    assert replaced.returncode == 0, replaced.stderr
 
-    unsupported = fixture("research_state")
-    unsupported["schema_version"] = 2
-    unsupported_path = tmp_path / "unsupported.json"
-    unsupported_path.write_text(json.dumps(unsupported), encoding="utf-8")
-    migrate = run_cli(
-        "migrate",
+    old_schema = copy.deepcopy(source)
+    old_schema["schema_version"] = 1
+    old_path = tmp_path / "old-schema.json"
+    old_path.write_text(json.dumps(old_schema), encoding="utf-8")
+    assert run_cli(
+        "validate",
         "--kind",
         "research_state",
         "--path",
-        str(unsupported_path),
-        "--writer",
-        "EM-example-direction",
-        "--expected-revision",
-        "1",
-        "--to-version",
-        "3",
-    )
-    assert migrate.returncode == 3
-    assert unsupported_path.read_text(encoding="utf-8") == unsupported_path.read_text(encoding="utf-8")
+        str(old_path),
+    ).returncode == 2
 
-    legacy = fixture("research_state")
-    legacy["schema_version"] = 1
-    legacy["next_action"].pop("owner")
-    legacy_path = tmp_path / "legacy.json"
-    legacy_input = tmp_path / "legacy-input.json"
-    legacy_input.write_text(json.dumps(legacy), encoding="utf-8")
-    initialize_legacy = run_cli(
-        "initialize",
-        "--kind",
-        "research_state",
-        "--path",
-        str(legacy_path),
-        "--writer",
-        "EM-example-direction",
-        "--input",
-        str(legacy_input),
-    )
-    assert initialize_legacy.returncode == 3, initialize_legacy.stderr
-    assert not legacy_path.exists()
-    legacy_path.write_text(json.dumps(legacy), encoding="utf-8")
-    migrate_legacy = run_cli(
-        "migrate",
-        "--kind",
-        "research_state",
-        "--path",
-        str(legacy_path),
-        "--writer",
-        "EM-example-direction",
-        "--expected-revision",
-        "1",
-        "--to-version",
-        "2",
-    )
-    assert migrate_legacy.returncode == 0, migrate_legacy.stderr
-    migrated = json.loads(legacy_path.read_text(encoding="utf-8"))
-    assert migrated["schema_version"] == 2
-    assert migrated["revision"] == 2
-    assert migrated["next_action"]["owner"] == "EM"
+    no_migration = run_cli("--help")
+    assert "migrate" not in no_migration.stdout
 
 
 def test_replace_repairs_only_stale_current_research_direction_ref(

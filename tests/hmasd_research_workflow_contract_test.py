@@ -20,8 +20,11 @@ CRITIC_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-research-critic.md"
 REVIEWER_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-reviewer.md"
 PROTOCOL = REPO_ROOT / "docs" / "project" / "HMASD_OMP_CONTROL_PLANE_PROTOCOL.md"
 RESULT_SCHEMA = REPO_ROOT / "scripts" / "schemas" / "hmasd_agent_result.schema.json"
+CLERK_OPERATION_SCHEMA = (
+    REPO_ROOT / "scripts" / "schemas" / "hmasd_clerk_operation.schema.json"
+)
 
-COMMON_V1_REQUIRED = [
+COMMON_V2_REQUIRED = [
     "schema_version",
     "role",
     "logical_identity",
@@ -35,10 +38,10 @@ COMMON_V1_REQUIRED = [
     "artifact_refs",
     "checkpoint_sha",
     "decision_requests",
-    "next_action",
+    "next_actions",
     "payload",
 ]
-COMMON_V1_PAYLOADS = [
+COMMON_V2_PAYLOADS = [
     "#/$defs/root_payload",
     "#/$defs/git_payload",
     "#/$defs/portfolio_payload",
@@ -51,6 +54,7 @@ COMMON_V1_PAYLOADS = [
     "#/$defs/transport_payload",
     "#/$defs/artifact_payload",
     "#/$defs/recovery_payload",
+    "#/$defs/clerk_payload",
 ]
 
 
@@ -182,8 +186,9 @@ def test_analytical_dispatch_is_gap_driven_blind_and_negative_complete() -> None
         (
             "Analytical work follows an unanswered, decision-relevant information gap, not a staffing template",
             "A fixed leaf quota, wave size, utilization target, vote, majority, or quorum is not evidence",
-            "The product remains inside the role-specific payload of the existing common v1 result envelope",
-            "no new result carrier, schema, role, registry, lifecycle, or scheduler is introduced",
+            "The product remains inside the role-specific payload",
+            "the clean-cut `next_actions` array carries every explicit successor obligation",
+            "no alternative carrier, authority, lifecycle registry, or scheduler",
         ),
     )
 
@@ -231,31 +236,31 @@ def test_scientific_critic_and_technical_reviewer_remain_distinct() -> None:
     )
 
 
-def test_cm_allows_only_dual_disjoint_writers_and_one_overlapping_owner() -> None:
+def test_cm_defaults_to_one_vertical_owner_and_splits_only_disjoint_gaps() -> None:
     skill = _compact(CM_SKILL)
     profile = _compact(CM_AGENT)
 
     _assert_all(
         skill,
         (
-            "Writer cardinality follows those gaps, not a fixed staffing count or wave",
-            "CM may dispatch concurrent implementers only after freezing shared interfaces",
+            "One vertically complete Implementer normally owns the bounded slice's code mapping, caller/interface investigation, implementation, and focused test edits",
+            "Use `hmasd-project-scout` or `hmasd-code-scout` only when the requested product is itself a read-only map reused across multiple independent slices, or when no implementation is authorized",
+            "Never put a separate Scout in front of an Implementer for the same slice merely because the surface is nontrivial or unfamiliar",
+            "Decompose only unresolved technical gaps",
             "both their path ownership and their semantic/interface ownership are disjoint",
-            "Different files are insufficient when they jointly implement or mutate one live protocol",
-            "CM is the one integration owner for the cycle",
             "exactly one writer owns every overlapping boundary",
-            "stop the affected assignment rather than broadening it",
+            "Reserve `hmasd-reviewer` for a genuinely high-risk delta",
         ),
     )
     _assert_all(
         profile,
         (
-            "Writer cardinality follows unresolved technical gaps, not a fixed Implementer count or specialist wave",
-            "Concurrent Implementers are allowed only when both their path ownership and their semantic/interface ownership are disjoint",
+            "Default to one vertically complete Implementer that maps the exact surface, edits the code, and authors focused tests for that slice",
+            "Do not create a scout-to-implementer-to-reviewer chain merely because the surface is unfamiliar",
+            "Writer cardinality follows genuinely disjoint unresolved technical gaps, not consecutive workflow steps or a fixed specialist wave",
             "assigns exactly one writer to every overlapping boundary",
         ),
     )
-    assert "select exactly one appropriate implementer for a nontrivial change" not in skill
 
 
 def test_one_experiment_operator_owns_one_exact_command() -> None:
@@ -304,26 +309,28 @@ def test_exact_pro_pair_and_provider_commitment_mechanics_are_preserved() -> Non
         review,
         (
             "One fresh cycle has only these two Pro operations",
-            "Bind `provider: chatgpt`, the exact Pro model",
-            "idempotency key, fingerprint, and commitment state",
-            "Only the strict Agentify review surface may send",
-            "A committed or uncertain operation is observe-only through the same strict Agentify operation and is never resent",
-            "Unknown commitment is terminal for sending",
-            "never resend",
+            "Bind `provider: chatgpt`",
+            "`review_stage: pro_innovator`, `product_model: GPT-5.6 Sol`",
+            "`reasoning_effort: Pro`",
+            "idempotency key, fingerprint, and current transport tuple",
+            "Only the current strict Agentify review surface may activate",
+            "A committed or uncertain activation is sealed and observe-only through the same Agentify operation",
+            "unknown commitment never activates again",
+            "never creates a replacement sender or automatic resend",
         ),
     )
     assert "unknown commitment never resends" in shared
 
 
-def test_common_v1_result_envelope_and_status_axes_are_unchanged() -> None:
+def test_common_v2_result_envelope_has_closed_multi_action_carrier() -> None:
     schema = _schema()
     properties = schema["properties"]
     definitions = schema["$defs"]
 
     assert schema["$id"] == "hmasd_agent_result"
     assert schema["additionalProperties"] is False
-    assert schema["required"] == COMMON_V1_REQUIRED
-    assert properties["schema_version"] == {"type": "integer", "const": 1}
+    assert schema["required"] == COMMON_V2_REQUIRED
+    assert properties["schema_version"] == {"type": "integer", "const": 2}
     assert properties["status"]["enum"] == ["COMPLETED", "PARTIAL", "BLOCKED", "FAILED"]
     assert properties["materiality"]["enum"] == [
         "NONE",
@@ -332,7 +339,7 @@ def test_common_v1_result_envelope_and_status_axes_are_unchanged() -> None:
         "PORTFOLIO",
         "USER",
     ]
-    assert [entry["$ref"] for entry in properties["payload"]["oneOf"]] == COMMON_V1_PAYLOADS
+    assert [entry["$ref"] for entry in properties["payload"]["oneOf"]] == COMMON_V2_PAYLOADS
     assert "analytical_product" not in properties
     assert "analytical_product" not in definitions
 
@@ -356,23 +363,147 @@ def test_common_v1_result_envelope_and_status_axes_are_unchanged() -> None:
         "UNSATISFIED",
         "NOT_RUN",
     ]
-    assert definitions["next_action"]["properties"]["owner"]["enum"] == [
+    for payload_name in ("em_payload", "cm_payload"):
+        payload = definitions[payload_name]
+        assert {
+            "semantic_product_ref",
+            "persistence_status",
+            "durable_state_ref",
+            "candidate_sha",
+            "integrated_sha",
+        } <= set(payload["required"])
+        assert payload["properties"]["persistence_status"]["enum"] == [
+            "PREPARED",
+            "PERSISTED",
+            "INTEGRATED",
+        ]
+    action = definitions["action"]
+    assert action["additionalProperties"] is False
+    assert action["required"] == [
+        "action_id",
+        "kind",
+        "owner",
+        "input_refs",
+        "dependencies",
+        "authorized_effect_ref",
+        "stop_or_reentry_ref",
+    ]
+    assert action["properties"]["owner"]["enum"] == [
         "ROOT",
         "EM",
         "CM",
+        "CLERK",
         "TRANSPORT",
         "EXPERIMENT_OPERATOR",
         "USER",
     ]
-    assert definitions["transport_payload"]["properties"]["transport_state"]["enum"] == [
-        "PENDING",
-        "ZERO_SEND_FAILED",
-        "COMMITMENT_UNKNOWN",
-        "SENT_WAITING",
-        "COMPLETE",
-        "SENT_INPUT_MISMATCH",
-        "SENT_MODEL_MISMATCH",
-        "SENT_UNREADABLE",
-        "CONVERSATION_LOST",
-        "WAIVED",
+    assert "next_action" not in properties
+    assert properties["next_actions"] == {
+        "type": "array",
+        "items": {"$ref": "#/$defs/action"},
+    }
+    dependency = definitions["exact_dependency"]["oneOf"]
+    assert dependency == [
+        {"$ref": "#/$defs/producer_dependency"},
+        {"$ref": "#/$defs/authority_dependency"},
     ]
+    assert definitions["producer_dependency"]["additionalProperties"] is False
+    assert definitions["authority_dependency"]["additionalProperties"] is False
+    clerk_payload = definitions["clerk_payload"]
+    assert clerk_payload["properties"]["resources"] == {
+        "type": "array",
+        "items": {"$ref": "#/$defs/clerk_resource"},
+    }
+    assert "resolved_model" not in clerk_payload["properties"]
+    transport = definitions["transport_payload"]
+    assert "_".join(("transport", "state")) not in transport["properties"]
+    assert set(transport["properties"]["phase"]["enum"]) == {
+        "VALIDATE",
+        "PREPARE_UI",
+        "ARMED",
+        "VERIFY_COMMITMENT",
+        "WAIT_RESPONSE",
+        "READ_RESPONSE",
+        "PUBLISH_ARCHIVE",
+        "TERMINAL",
+    }
+    assert set(transport["properties"]["commitment"]["enum"]) == {
+        "ZERO_PROVEN",
+        "UNRESOLVED",
+        "ONE_EXACT",
+        "VIOLATION",
+    }
+    assert {"product_model", "reasoning_effort", "message_capability"} <= set(
+        transport["required"]
+    )
+
+
+def test_clerk_packet_schema_is_closed_and_operation_discriminated() -> None:
+    schema = json.loads(CLERK_OPERATION_SCHEMA.read_text(encoding="utf-8"))
+    assert schema["$id"] == "hmasd_clerk_operation"
+    assert schema["additionalProperties"] is False
+    assert schema["properties"]["return_owner"] == {"const": "ROOT"}
+    operations = {
+        branch["properties"]["operation"]["const"] for branch in schema["oneOf"]
+    }
+    assert operations == {
+        "STATE_CAS",
+        "WORKTREE_PROVISION",
+        "WORKTREE_INSPECT",
+        "WORKTREE_RELEASE",
+        "PATCH_APPLY",
+        "CANDIDATE_CREATE",
+        "GIT_RECORD",
+        "GIT_PREPARE",
+        "GIT_INTEGRATE_PUSH",
+    }
+    target_defs: set[str] = set()
+    for branch in schema["oneOf"]:
+        properties = branch["properties"]
+        operation = properties["operation"]["const"]
+        target_name = properties["target"]["$ref"].removeprefix("#/$defs/")
+        mutation_name = properties["mutation"]["$ref"].removeprefix("#/$defs/")
+        effect_name = properties["effect"]["$ref"].removeprefix("#/$defs/")
+        target_defs.add(target_name)
+        assert schema["$defs"][target_name]["additionalProperties"] is False
+        assert schema["$defs"][target_name]["required"]
+        assert schema["$defs"][mutation_name]["additionalProperties"] is False
+        authorized = schema["$defs"][effect_name]["properties"]["authorized_effects"][
+            "const"
+        ]
+        assert authorized == ([] if operation == "WORKTREE_INSPECT" else [operation])
+    assert len(target_defs) == 9
+    provision_target = schema["$defs"]["worktree_provision_target"]
+    assert {"integration_policy", "parallel_set_manifest_ref"} <= set(
+        provision_target["required"]
+    )
+    assert provision_target["oneOf"] == [
+        {
+            "properties": {
+                "integration_policy": {"const": "ORTHOGONAL_DIRECTION"},
+                "parallel_set_manifest_ref": {"$ref": "#/$defs/content_ref"},
+                "required_handoff_sha": {"type": "null"},
+            }
+        },
+        {
+            "properties": {
+                "integration_policy": {"const": "EXACT_HANDOFF"},
+                "parallel_set_manifest_ref": {"type": "null"},
+                "required_handoff_sha": {"$ref": "#/$defs/git_sha"},
+            }
+        },
+    ]
+    release_target = schema["$defs"]["worktree_release_target"]
+    assert "ignored_artifacts" in release_target["required"]
+    assert release_target["properties"]["ignored_artifacts"]["enum"] == [
+        "refuse",
+        "discard",
+        "retain",
+    ]
+    executor = schema["$defs"]["executor"]
+    assert executor["required"] == ["role", "logical_identity", "generation"]
+    assert "model" not in executor["properties"]
+    assert "thinking_level" not in executor["properties"]
+    assert schema["$defs"]["effect"]["properties"]["unknown_outcome"] == {
+        "const": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY"
+    }

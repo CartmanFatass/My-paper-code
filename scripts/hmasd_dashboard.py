@@ -32,6 +32,7 @@ EPOCH = "1970-01-01T00:00:00Z"
 REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
 RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
 RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
+RUNTIME_BROWSER_ASSIGNMENTS_REL = ".omp/runtime/browser_assignments.json"
 BROWSER_TRANSPORT_IDENTITY = "BrowserTransport"
 BROWSER_TRANSPORT_AGENT_TYPE = "hmasd-browser-transport"
 
@@ -301,17 +302,31 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
         "external_review_index": ("schema_version", "revision", "updated_at", "writer", "direction_id", "rounds"),
         "run_manifest": ("schema_version", "revision", "updated_at", "writer", "run_id", "direction_id", "status"),
         "accepted_result": ("schema_version", "revision", "updated_at", "writer", "result_id", "direction_id"),
+        "agent_result": ("schema_version", "role", "logical_identity", "generation", "assignment_id", "status", "payload"),
         "runtime_agents": ("schema_version", "revision", "updated_at", "writer", "agents"),
         "runtime_worktrees": ("schema_version", "revision", "updated_at", "writer", "worktrees"),
+        "runtime_browser_assignments": ("schema_version", "revision", "updated_at", "writer", "assignments"),
     }
-    if kind == "external_archive":
-        return value.get("schema") == "agentify_review_natural_completion_archive_v1"
-    if kind == "agent_result":
-        return value.get("schema_version") == 1 and isinstance(value.get("role"), str)
+    current_versions = {
+        "portfolio_registry": 1,
+        "research_state": 2,
+        "engineering_state": 2,
+        "external_review_index": 4,
+        "run_manifest": 1,
+        "accepted_result": 1,
+        "agent_result": 2,
+        "runtime_agents": 2,
+        "runtime_worktrees": 2,
+        "runtime_browser_assignments": 2,
+    }
     keys = required.get(kind)
-    if keys is None or any(key not in value for key in keys):
-        return False
-    return value.get("schema_version") == 1 and isinstance(value.get("revision"), int)
+    return (
+        keys is not None
+        and all(key in value for key in keys)
+        and value.get("schema_version") == current_versions[kind]
+        and (kind != "agent_result" or isinstance(value.get("role"), str))
+        and (kind == "agent_result" or isinstance(value.get("revision"), int))
+    )
 
 
 def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
@@ -364,12 +379,17 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
             return True
 
         return all(visit(identifier) for identifier in graph)
-    if kind in {"runtime_agents", "runtime_worktrees"}:
-        values = value.get("agents" if kind == "runtime_agents" else "worktrees")
+    runtime_keys = {
+        "runtime_agents": ("agents", "logical_identity"),
+        "runtime_worktrees": ("worktrees", "worktree_ref"),
+        "runtime_browser_assignments": ("assignments", "assignment_id"),
+    }
+    if kind in runtime_keys:
+        collection_key, identity_key = runtime_keys[kind]
+        values = value.get(collection_key)
         if not isinstance(values, list):
             return False
-        key = "logical_identity" if kind == "runtime_agents" else "worktree_ref"
-        ids = [item.get(key) for item in values if isinstance(item, dict)]
+        ids = [item.get(identity_key) for item in values if isinstance(item, dict)]
         if len(ids) != len(values) or any(not isinstance(identifier, str) for identifier in ids):
             return False
         return len(ids) == len(set(ids))
@@ -866,6 +886,54 @@ def _agent_role_configs(sources: _SnapshotAttempt) -> tuple[list[dict[str, str]]
     return sorted(configs, key=lambda item: item["role"]), sorted(set(warnings))
 
 
+def _safe_transport_assignment(value: Mapping[str, Any]) -> dict[str, Any]:
+    output: dict[str, Any] = {}
+    for key in (
+        "assignment_id",
+        "requester_identity",
+        "direction_id",
+        "provider",
+        "product_model",
+        "reasoning_effort",
+        "mode",
+        "operation_id",
+        "idempotency_key",
+        "provider_conversation_id",
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "provider_user_message_count",
+        "send_activation_count",
+        "paused",
+        "updated_at",
+    ):
+        observed = value.get(key)
+        if isinstance(observed, (str, int, bool)) or (
+            key in {"direction_id", "reasoning_effort", "provider_conversation_id"}
+            and observed is None
+        ):
+            output[key] = observed
+    failure = value.get("failure")
+    if isinstance(failure, Mapping):
+        locus = failure.get("locus")
+        code = failure.get("code")
+        if isinstance(locus, str) and isinstance(code, str):
+            output["failure"] = {"locus": locus, "code": code}
+    for key in (
+        "request_ref",
+        "operation_ref",
+        "provider_conversation_ref",
+        "archive_ref",
+        "handoff_ref",
+    ):
+        reference = _sha_ref(value.get(key))
+        if reference is not None:
+            output[key] = reference
+    return output
+
+
 def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:
     warnings: list[str] = []
     statuses: list[str] = []
@@ -1016,6 +1084,31 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 if source in item and isinstance(item[source], (str, int)):
                     entry[target] = item[source]
 
+    transport_assignments: list[dict[str, Any]] = []
+    transport = sources.read_document(
+        RUNTIME_BROWSER_ASSIGNMENTS_REL,
+        "runtime_browser_assignments",
+    )
+    generated_values.append(transport.updated_at)
+    if transport.revision is not None:
+        refs["runtime_browser_assignments"] = transport.revision
+    if transport.status != "ok" or transport.value is None:
+        statuses.append(transport.status)
+        _warning_add(warnings, transport.warning)
+    else:
+        assignments = transport.value.get("assignments", [])
+        if not isinstance(assignments, list):
+            statuses.append("invalid")
+            _warning_add(warnings, "invalid:runtime_browser_assignments")
+        else:
+            transport_assignments = [
+                _safe_transport_assignment(item)
+                for item in sorted(
+                    (entry for entry in assignments if isinstance(entry, Mapping)),
+                    key=lambda entry: str(entry.get("assignment_id", "")),
+                )
+            ]
+
     agents: list[dict[str, Any]] = []
     for identity in sorted(logical):
         entry = logical[identity]
@@ -1046,7 +1139,11 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
         status=_status_join(statuses),
         generated_at=_max_timestamp(generated_values),
         revision_refs=refs,
-        data={"agents": agents, "role_configs": role_configs},
+        data={
+            "agents": agents,
+            "role_configs": role_configs,
+            "transport_assignments": transport_assignments,
+        },
         warnings=warnings,
     )
 
@@ -1211,27 +1308,51 @@ def _safe_provider(
 ) -> dict[str, Any] | None:
     if not isinstance(provider, Mapping):
         return None
-    result: dict[str, Any] = {}
-    for source, target in (
-        ("operation_id", "operation_id"),
-        ("operationId", "operation_id"),
-        ("terminal_state", "terminal_state"),
-        ("terminalState", "terminal_state"),
-        ("completed_at", "completed_at"),
-        ("completedAt", "completed_at"),
-        ("provider", "provider"),
-        ("mode", "mode"),
+    result: dict[str, Any] = {"review_stage": name}
+    for field in (
+        "provider",
+        "product_model",
+        "operation_id",
+        "idempotency_key",
+        "provider_conversation_id",
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "user_message_id",
+        "assistant_message_id",
+        "completed_at",
     ):
-        if source in provider and isinstance(provider[source], str):
-            result[target] = provider[source]
-    for source, target in (("archive_ref", "archive"), ("handoff_ref", "handoff")):
+        value = provider.get(field)
+        if isinstance(value, str):
+            result[field] = value
+    reasoning_effort = provider.get("reasoning_effort")
+    if reasoning_effort is None or isinstance(reasoning_effort, str):
+        result["reasoning_effort"] = reasoning_effort
+    for field in ("provider_user_message_count", "send_activation_count"):
+        value = provider.get(field)
+        if isinstance(value, int) and not isinstance(value, bool):
+            result[field] = value
+    failure = provider.get("failure")
+    if isinstance(failure, Mapping):
+        locus = failure.get("locus")
+        code = failure.get("code")
+        if isinstance(locus, str) and isinstance(code, str):
+            result["failure"] = {"locus": locus, "code": code}
+    conversation_ref = provider.get("provider_conversation_ref")
+    if isinstance(conversation_ref, str):
+        result["provider_conversation_ref"] = conversation_ref
+    else:
+        normalized_conversation_ref = _sha_ref(conversation_ref)
+        if normalized_conversation_ref is not None:
+            result["provider_conversation_ref"] = normalized_conversation_ref
+    for source, target in (
+        ("operation_ref", "operation_receipt"),
+        ("archive_ref", "archive"),
+        ("handoff_ref", "handoff"),
+    ):
         reference = _sha_ref(provider.get(source))
-        if reference is None:
-            # Some providers use the explicit path/SHA pair in the index.
-            prefix = source.removesuffix("_ref")
-            path = provider.get(f"{prefix}_path")
-            sha = provider.get(f"{prefix}_sha256")
-            reference = _sha_ref({"path": path, "sha256": sha})
         if reference is None:
             continue
         result[target] = reference
@@ -1249,7 +1370,7 @@ def _safe_provider(
             continue
         if observed_sha != reference["sha256"]:
             _warning_add(warnings, f"stale:external_sha:{round_id}:{name}:{target}")
-    return result or None
+    return result
 
 
 def _build_external(root: Path, registry_doc: Document, sources: _SnapshotAttempt) -> dict[str, Any]:

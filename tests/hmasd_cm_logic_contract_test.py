@@ -65,7 +65,7 @@ def test_cm_contract_gate_precedes_effects_and_uses_shared_carrier() -> None:
             "authorized filesystem, process, network, provider, result, and Git Effects",
             "completion checks and the stop condition",
             "missing, contradictory, technically impossible, or outside supplied authority",
-            "common v1 `BLOCKED` conflict",
+            "common v2 `BLOCKED` conflict",
             "Never narrow acceptance or change a comparator, metric, seed, data, stop rule",
         ),
     )
@@ -82,7 +82,16 @@ def test_cm_contract_gate_precedes_effects_and_uses_shared_carrier() -> None:
             "authorized Effects",
             "acceptance/stop",
             "return route, durable references, and reentry",
-            "Results use the common v1 result envelope and role payload",
+            "Results use the common v2 result envelope and role payload",
+        ),
+    )
+    _assert_all(
+        shared,
+        (
+            "common v2 result carrier requires `next_actions` as an array",
+            "has no singular `next_action` alias",
+            "`action_id`, `kind`, `owner` (including `CLERK`), `input_refs`, strict `dependencies`",
+            "`authorized_effect_ref`, and `stop_or_reentry_ref`",
         ),
     )
 
@@ -92,9 +101,9 @@ def test_cm_uses_gap_driven_dual_disjoint_writers_and_one_boundary_owner() -> No
     _assert_all(
         skill,
         (
-            "unless a trustworthy map already covers the exact base and scope",
-            "`hmasd-project-scout` for current repository, build/test, and path ownership facts",
-            "`hmasd-code-scout` for callers, consumers, interfaces, state ownership",
+            "One vertically complete Implementer normally owns the bounded slice's code",
+            "Use `hmasd-project-scout` or `hmasd-code-scout` only when the requested",
+            "Never put a separate Scout in front of an Implementer for the same slice",
             "Writer cardinality follows those gaps, not a fixed staffing count or wave",
             "use `hmasd-implementer` when probability, gradients, native execution",
             "use `hmasd-implementer-terra` only for genuinely behavior-preserving local work",
@@ -116,7 +125,9 @@ def test_cm_uses_gap_driven_dual_disjoint_writers_and_one_boundary_owner() -> No
     _assert_all(
         cm_agent,
         (
-            "Writer cardinality follows unresolved technical gaps, not a fixed Implementer count",
+            "Writer cardinality follows genuinely disjoint unresolved technical gaps",
+            "Default to one vertically complete Implementer",
+            "Do not create a scout-to-implementer-to-reviewer chain",
             "Concurrent Implementers are allowed only when both their path ownership and their semantic/interface ownership are disjoint",
             "assigns exactly one writer to every overlapping boundary",
             "Require native LSP evidence for exported-symbol work",
@@ -132,7 +143,7 @@ def test_cm_uses_gap_driven_dual_disjoint_writers_and_one_boundary_owner() -> No
             "replacement by `hmasd-implementer`",
             "Run only focused non-result checks",
             "Never launch a result-bearing\ncommand",
-            "Return a common v1 result envelope as `hmasd-implementer-terra`",
+            "Return a common v2 result envelope as `hmasd-implementer-terra`",
             "Do not\ncommit or push",
         ),
     )
@@ -236,6 +247,14 @@ def test_cm_status_axes_are_distinct_in_skill_and_schemas() -> None:
         "observation_status",
         "verification_status",
     } <= set(cm_payload["required"])
+    assert {
+        "semantic_product_ref",
+        "persistence_status",
+        "durable_state_ref",
+        "candidate_sha",
+        "integrated_sha",
+    } <= set(cm_payload["required"])
+    assert "PREPARED" in cm_payload["properties"]["persistence_status"]["enum"]
     for field, values in (
         ("engineering_status", ENGINEERING_STATUSES),
         ("observation_status", OBSERVATION_STATUSES),
@@ -243,6 +262,45 @@ def test_cm_status_axes_are_distinct_in_skill_and_schemas() -> None:
     ):
         assert set(cm_payload["properties"][field]["enum"]) == values
 
+
+
+def test_cm_semantic_product_is_split_from_clerk_persistence_and_exact_handoffs() -> None:
+    skill = _text(CM_SKILL)
+    agent = _text(CM_AGENT)
+
+    _assert_all(
+        skill,
+        (
+            "exact accepted same-direction EM `integrated_sha` as the `omp/workflow` base",
+            "A semantic-only EM result, packet presence, job settlement, or later target SHA "
+            "cannot satisfy this edge",
+            "Return the semantic product promptly with `semantic_product_ref` and "
+            "`persistence_status=PREPARED`",
+            "leave unobserved durable, `candidate_sha`, and `integrated_sha` fields null",
+            "each mechanical obligation as an independent `next_actions` item with "
+            "`owner: CLERK`",
+            "CM performs no target Git, staging, commit, apply, fetch, or push",
+            "Terminal handoff ends CM's physical writer lease",
+            "CM resumes writing only after every Clerk mutation is terminal",
+            "Root issues a new assignment",
+            "Clerk refusal, stale CAS, conflict, or `UNKNOWN` blocks only the exact "
+            "mechanical edge",
+            "preserves CM's accepted technical semantic product",
+            "Every CM-to-EM result-interpretation dispatch has a strict dependency",
+            "new assignment ID in the same generation",
+            "material scope change increments generation",
+        ),
+    )
+    _assert_all(
+        agent,
+        (
+            "`semantic_product_ref` and `persistence_status=PREPARED`",
+            "emit every independent Clerk/Transport/Run/Root obligation simultaneously",
+            "CM performs no target Git",
+            "CM-to-EM result interpretation remains blocked on the exact accepted CM "
+            "`integrated_sha`",
+        ),
+    )
 
 def test_cm_disclaims_science_lifecycle_and_success_inference() -> None:
     skill = _text(CM_SKILL)

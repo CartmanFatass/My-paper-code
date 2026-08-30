@@ -36,7 +36,7 @@ show the routine edit preserved behavior. Never launch a result-bearing
 command, contact BrowserTransport or a provider, decide technical/scientific
 acceptance or lifecycle, dispatch another agent, or add workflow machinery.
 
-Return a common v1 result envelope as `hmasd-implementer-terra` with an
+Return a common v2 result envelope as `hmasd-implementer-terra` with an
 `implementation` payload containing exact changed paths, preserved invariants,
 and LSP evidence refs. Advisor output is read-only and non-gating. Do not
 commit or push; CM owns integration of the returned assignment-scoped delta.

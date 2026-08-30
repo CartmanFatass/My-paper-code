@@ -73,3 +73,11 @@ questions, one send per operation, fresh provider conversations, natural complet
 and transient tabs that close when safe. Transport and technical facts never imply science,
 lifecycle, capacity, or cancellation. Portfolio joins all four terminal results before its next
 lifecycle audit.
+
+The final sentence above is preserved as historical wording but is
+**nonoperative**. It creates no four-result join, all-terminal barrier, wait
+reason, or successor edge. Current control follows the active Root projection:
+consume each accepted result digest once, route its exact consequence
+immediately, refill or dispatch the maximal admissible independent set, and
+wait only under the strict legal-wait predicate. A slow direction never blocks
+independent Transport, Portfolio, Clerk, or other-direction obligations.

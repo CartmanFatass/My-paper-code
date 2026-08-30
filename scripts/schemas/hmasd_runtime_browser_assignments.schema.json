@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "revision", "updated_at", "writer", "assignments"],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
+    "schema_version": { "type": "integer", "const": 2 },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "const": "Root" },
@@ -43,9 +43,35 @@
     "nullable_ref": {
       "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }]
     },
+    "transport_identity": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$"
+    },
+    "nullable_transport_identity": {
+      "anyOf": [{ "$ref": "#/$defs/transport_identity" }, { "type": "null" }]
+    },
     "requester_identity": {
       "type": "string",
       "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locus", "code"],
+      "properties": {
+        "locus": {
+          "type": "string",
+          "enum": ["NONE", "SPEC", "AUTH", "TAB_OWNERSHIP", "PRECOMMIT_UI", "COMMIT_BOUNDARY", "TURN_CONFIRMATION", "RESPONSE", "ARCHIVE"]
+        },
+        "code": { "type": "string", "pattern": "^(?:NONE|[A-Z][A-Z0-9_]{0,127})$" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "locus": { "const": "NONE" } }, "required": ["locus"] },
+          "then": { "properties": { "code": { "const": "NONE" } } },
+          "else": { "properties": { "code": { "not": { "const": "NONE" } } } }
+        }
+      ]
     },
     "assignment": {
       "type": "object",
@@ -57,12 +83,28 @@
         "request_ref",
         "direction_id",
         "provider",
+        "product_model",
+        "reasoning_effort",
         "mode",
         "effect_ref",
+        "operation_id",
+        "idempotency_key",
         "operation_ref",
-        "transport_state",
         "provider_conversation_ref",
+        "provider_conversation_id",
+        "browser_tab_ref",
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "failure",
+        "provider_user_message_count",
+        "send_activation_count",
+        "user_message_id",
+        "assistant_message_id",
         "archive_ref",
+        "handoff_ref",
         "paused",
         "updated_at"
       ],
@@ -75,21 +117,70 @@
           "anyOf": [{ "$ref": "#/$defs/direction_id" }, { "type": "null" }]
         },
         "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "product_model": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "reasoning_effort": {
+          "anyOf": [
+            { "type": "string", "minLength": 1, "maxLength": 64 },
+            { "type": "null" }
+          ]
+        },
         "mode": {
           "type": "string",
           "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
         },
         "effect_ref": { "$ref": "#/$defs/nullable_ref" },
-        "operation_ref": { "$ref": "#/$defs/nullable_ref" },
-        "transport_state": {
-          "type": "string",
-          "enum": ["PENDING", "ZERO_SEND_FAILED", "COMMITMENT_UNKNOWN", "SENT_WAITING", "COMPLETE", "SENT_INPUT_MISMATCH", "SENT_MODEL_MISMATCH", "SENT_UNREADABLE", "CONVERSATION_LOST", "WAIVED"]
-        },
+        "operation_id": { "$ref": "#/$defs/transport_identity" },
+        "idempotency_key": { "$ref": "#/$defs/transport_identity" },
+        "operation_ref": { "$ref": "#/$defs/ref" },
         "provider_conversation_ref": { "$ref": "#/$defs/nullable_ref" },
+        "provider_conversation_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "browser_tab_ref": { "$ref": "#/$defs/nullable_ref" },
+        "phase": {
+          "type": "string",
+          "enum": ["VALIDATE", "PREPARE_UI", "ARMED", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"]
+        },
+        "commitment": {
+          "type": "string",
+          "enum": ["ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"]
+        },
+        "recoverability": {
+          "type": "string",
+          "enum": ["PRECOMMIT_REPAIR", "OBSERVE_ONLY", "POSTCOMMIT_RECOVERY", "HUMAN_INTERLOCK", "NONE"]
+        },
+        "observability": {
+          "type": "string",
+          "enum": ["UNOBSERVED", "FRESH_COMPLETE", "FRESH_PARTIAL", "STALE", "LOST", "CONTRADICTORY"]
+        },
+        "message_capability": {
+          "type": "string",
+          "enum": ["AVAILABLE", "RESERVED", "SEALED"]
+        },
+        "failure": { "$ref": "#/$defs/failure" },
+        "provider_user_message_count": { "type": "integer", "enum": [0, 1] },
+        "send_activation_count": { "type": "integer", "enum": [0, 1] },
+        "user_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "assistant_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
         "archive_ref": { "$ref": "#/$defs/nullable_ref" },
+        "handoff_ref": { "$ref": "#/$defs/nullable_ref" },
         "paused": { "type": "boolean" },
         "updated_at": { "$ref": "#/$defs/timestamp" }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "provider": { "const": "chatgpt" } }, "required": ["provider"] },
+          "then": {
+            "properties": {
+              "product_model": { "const": "GPT-5.6 Sol" },
+              "reasoning_effort": { "const": "Pro" }
+            }
+          },
+          "else": {
+            "properties": {
+              "reasoning_effort": { "type": "null" }
+            }
+          }
+        }
+      ]
     }
   }
 }

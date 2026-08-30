@@ -1,33 +1,6 @@
 {
   "direction_id": "voronoi_quadrature_field_policy",
-  "historical_archives": [
-    {
-      "canonical_round_id": "9f48f4a6bcace75fddeb",
-      "classification": "CROSS_SWAPPED_ROUND_ID",
-      "completed_at": "2026-08-29T23:53:06.893Z",
-      "evidence_set_sha256": "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9",
-      "idempotency_key": "vqfp-proof-sized-association-gate-r01-pro-innovator-resume-20260829-strict-03",
-      "legacy_archive_ref": {
-        "path": "docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
-        "sha256": "4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
-      },
-      "observed_round_id": "211d583818335dd612c7",
-      "operation_id": "be82f31d-a7cc-4757-9dcb-1393653250fb",
-      "prompt_sha256": "4c9e2df6b994a532892bb0877c2f7be6aee77fc06c6666bb5fa9eb415dc04833",
-      "provider": "chatgpt",
-      "question_sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9",
-      "request_fingerprint": "b22a9ae15c03521e5454c42d276e60878d8f3812b83feaa414e67f724f48119e",
-      "response_ref": {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_RESPONSE_20260829.md",
-        "sha256": "c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162"
-      },
-      "review_stage": "pro_innovator",
-      "session_id": "6a933040-034c-83e8-9e8c-9e83eed1c1fa",
-      "stable_key": "vqfp-proof-sized-association-gate-r01-pro-innovator",
-      "terminal_state": "NATURAL_COMPLETION_VERIFIED"
-    }
-  ],
-  "revision": 6,
+  "revision": 7,
   "rounds": [
     {
       "completed_at": null,
@@ -90,8 +63,8 @@
       "status": "INNOVATOR_PENDING"
     }
   ],
-  "schema_version": 3,
-  "updated_at": "2026-08-30T12:40:21Z",
+  "schema_version": 4,
+  "updated_at": "2026-08-30T17:19:16Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-voronoi_quadrature_field_policy"
 }

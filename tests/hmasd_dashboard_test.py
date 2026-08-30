@@ -48,6 +48,19 @@ def fixture_root(tmp_path: Path) -> Path:
     _copy_json("portfolio_registry.json", root / dashboard.REGISTRY_REL)
     _copy_json("runtime_agents.json", root / dashboard.RUNTIME_AGENTS_REL)
     _copy_json("runtime_worktrees.json", root / dashboard.RUNTIME_WORKTREES_REL)
+    browser_assignments = root / dashboard.RUNTIME_BROWSER_ASSIGNMENTS_REL
+    browser_assignments.parent.mkdir(parents=True, exist_ok=True)
+    browser_assignments.write_bytes(
+        dashboard._json_bytes(
+            {
+                "assignments": [],
+                "revision": 1,
+                "schema_version": 2,
+                "updated_at": "2026-08-24T00:00:00Z",
+                "writer": "Root",
+            }
+        )
+    )
     _copy_json(
         "research_state.json",
         root / "docs/research/candidates/example-direction/workflow/research/state.json",
@@ -164,6 +177,11 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
             "definition_path": ".omp/agents/hmasd-em.md",
         },
     ]
+    assert first["data"]["agents"]["data"]["transport_assignments"] == []
+    assert (
+        first["data"]["agents"]["revision_refs"]["runtime_browser_assignments"]
+        == 1
+    )
     cm_agent = next(
         agent
         for agent in first["data"]["agents"]["data"]["agents"]
@@ -207,6 +225,72 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
         return []
 
     assert walk(first) == []
+
+def test_external_provider_projection_uses_only_current_transport_axes(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "checkout"
+    root.mkdir()
+    operation_path = (
+        "docs/external-review/directions/example-direction/round-one/"
+        "pro_innovator/chatgpt/operation_ref.json"
+    )
+    response_path = (
+        "docs/external-review/directions/example-direction/round-one/"
+        "pro_innovator/chatgpt/response.md"
+    )
+    digests = {operation_path: "a" * 64, response_path: "b" * 64}
+
+    class Sources:
+        @staticmethod
+        def read_digest(path: str) -> str | None:
+            return digests.get(path)
+
+    warnings: list[str] = []
+    projected = dashboard._safe_provider(
+        {
+            "provider": "chatgpt",
+            "product_model": "GPT-5.6 Sol",
+            "reasoning_effort": "Pro",
+            "operation_id": "operation-one",
+            "idempotency_key": "idempotency-one",
+            "operation_ref": {"path": operation_path, "sha256": "a" * 64},
+            "provider_conversation_ref": "https://chatgpt.com/c/conversation-one",
+            "provider_conversation_id": "conversation-one",
+            "phase": "TERMINAL",
+            "commitment": "ONE_EXACT",
+            "recoverability": "NONE",
+            "observability": "FRESH_COMPLETE",
+            "message_capability": "SEALED",
+            "failure": {"locus": "NONE", "code": "NONE"},
+            "provider_user_message_count": 1,
+            "send_activation_count": 0,
+            "user_message_id": "user-one",
+            "assistant_message_id": "assistant-one",
+            "archive_ref": {"path": response_path, "sha256": "b" * 64},
+            "handoff_ref": None,
+            "completed_at": "2026-08-30T00:00:00Z",
+        },
+        root,
+        warnings,
+        "round-one",
+        "pro_innovator",
+        Sources(),
+    )
+
+    assert projected is not None
+    assert projected["review_stage"] == "pro_innovator"
+    assert projected["product_model"] == "GPT-5.6 Sol"
+    assert projected["reasoning_effort"] == "Pro"
+    assert projected["phase"] == "TERMINAL"
+    assert projected["commitment"] == "ONE_EXACT"
+    assert projected["provider_user_message_count"] == 1
+    assert projected["send_activation_count"] == 0
+    assert projected["operation_receipt"]["path"] == operation_path
+    assert projected["archive"]["path"] == response_path
+    assert "terminal_state" not in projected
+    assert "terminalState" not in projected
+    assert warnings == []
 
 
 def test_service_is_loopback_static_allowlisted_and_read_only(tmp_path: Path) -> None:

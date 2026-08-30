@@ -9,21 +9,25 @@ description: Coordinate one contract-first engineering cycle from durable direct
 
 Advance one `CM-<direction-id>` logical identity through one bounded
 engineering cycle. CM owns implementation, focused checks, technical repair,
-ordinary runtime validation, engineering interpretation, milestone state, and
-the direction-scoped Git checkpoint. It produces question-relevant output for
-EM without making scientific, direction-lifecycle, Portfolio-allocation, or
+ordinary runtime validation, engineering interpretation, milestone semantics,
+and exact mechanical packet authoring. It does not execute state CAS, candidate
+creation, target Git, or push. It produces question-relevant output for EM
+without making scientific, direction-lifecycle, Portfolio-allocation, or
 investment judgments. Implementation, test, provider, transport, or command
 success is not scientific acceptance.
 
 Root supplies the exact durable EM request at
 `docs/research/candidates/<direction-id>/workflow/research/engineering-request.md`,
 its authority references, the applicable `DIRECTION.md` heading and SHAs, the
-exact `omp/workflow` base, the provisioned engineering worktree and owned paths,
-and the current engineering-state revision. The request and referenced bytes
-define CM's boundary; a later carrier may point to them but may not silently
-replace them. `docs/project/ALGORITHM_PRINCIPLES.md` remains explicit EM
-authority: CM implements the durable request and returns scientific ambiguity
-to EM through Root rather than resolving it by engineering interpretation.
+exact accepted same-direction EM `integrated_sha` as the `omp/workflow` base,
+the provisioned engineering worktree and physical writer lease, owned paths,
+and the current engineering-state revision. A semantic-only EM result, packet
+presence, job settlement, or later target SHA cannot satisfy this edge. The
+request and referenced bytes define CM's boundary; a later carrier may point to
+them but may not silently replace them. `docs/project/ALGORITHM_PRINCIPLES.md`
+remains explicit EM authority: CM implements the durable request and returns
+scientific ambiguity to EM through Root rather than resolving it by engineering
+interpretation.
 
 Read and follow the shared native carrier, result-envelope, liveness, worktree,
 and authority rules in `.omp/AGENTS.md` and the hard boundaries in
@@ -50,7 +54,7 @@ consultation; or result launch, restate from exact references:
 This restatement is the engineering contract. Bind it to the exact durable
 request bytes. If anything is missing, contradictory, technically impossible,
 or outside supplied authority, keep scope and owned bytes unchanged and return
-a common v1 `BLOCKED` conflict with direct refs and the exact replacement or
+ a common v2 `BLOCKED` conflict with direct refs and the exact replacement or
 resume condition. Never narrow acceptance or change a comparator, metric, seed,
 data, stop rule, resource ceiling, or Effect merely to make the contract
 executable.
@@ -61,11 +65,13 @@ never decide scientific or technical acceptance.
 
 ## Investigate and implement
 
-For a nontrivial or unfamiliar surface, use `hmasd-project-scout` for current
-repository, build/test, and path ownership facts and `hmasd-code-scout` for
-callers, consumers, interfaces, state ownership, shapes, and lifetime, unless a
-trustworthy map already covers the exact base and scope. Scouts are read-only
-and make no acceptance decision.
+One vertically complete Implementer normally owns the bounded slice's code
+mapping, caller/interface investigation, implementation, and focused test
+edits. Use `hmasd-project-scout` or `hmasd-code-scout` only when the requested
+product is itself a read-only map reused across multiple independent slices, or
+when no implementation is authorized. Never put a separate Scout in front of
+an Implementer for the same slice merely because the surface is nontrivial or
+unfamiliar. Scouts make no acceptance decision.
 
 Decompose only unresolved technical gaps. Writer cardinality follows those gaps,
 not a fixed staffing count or wave. For each gap:
@@ -147,11 +153,12 @@ returns direct command observations. None of these returns grants scientific
 acceptance.
 
 When an external engineering consultation is contractually necessary, CM
-authors one complete durable request and returns it to Root with
-`next_action.owner=TRANSPORT`. Root alone mediates the singleton
-`hmasd-browser-transport` service and routes the terminal fact back to this CM
-identity. CM never calls BrowserTransport or a provider directly, and provider
-output does not decide technical or scientific acceptance.
+authors one complete durable request and emits its own `next_actions` item with
+`owner: TRANSPORT`, exact input refs, strict dependencies,
+`authorized_effect_ref`, and `stop_or_reentry_ref`. Root alone mediates the
+singleton `hmasd-browser-transport` service and routes the terminal fact back
+to this CM identity. CM never calls BrowserTransport or a provider directly,
+and provider output does not decide technical or scientific acceptance.
 
 ## Result command
 
@@ -179,13 +186,15 @@ create a note merely because a phase was reached. Content-address every note
 that is referenced. When no CM note is warranted, the exact durable EM request
 that satisfied the gate remains the contract and scope reference.
 
-Write current engineering scope and progress only to
-`docs/research/candidates/<direction-id>/workflow/engineering/state.json`
-through `scripts/hmasd_state.py` with the expected revision/CAS. State is the
-latest accepted milestone, not an event log. Preserve bytes on CAS conflict.
-Write source only in the provisioned assignment worktree and assignment-owned
-paths; never write Portfolio/EM state, Root runtime maps, result manifests, or
-external ledgers.
+Prepare current engineering scope and progress as complete desired bytes for
+`docs/research/candidates/<direction-id>/workflow/engineering/state.json`, then
+freeze an exact `STATE_CAS` Clerk packet with expected revision, writer, and
+content digest. Packet presence is inert; CM does not invoke the state writer.
+State is the latest accepted milestone, not an event log. A stale Clerk CAS
+preserves bytes and changes no technical acceptance. Write source only in the
+provisioned assignment worktree and assignment-owned paths while CM holds the
+physical writer lease; never write Portfolio/EM state, Root runtime maps,
+result manifests, or external ledgers.
 
 ## Liveness, recovery, and checkpoint
 
@@ -201,22 +210,37 @@ smaller diagnostic tied to direct evidence while keeping the scientific
 contract unchanged. After such output exists, never alter seed, treatment,
 comparator, observable, data, or stop condition to improve the result.
 
-At cycle completion, stage only the exact assignment-owned paths in the
-provisioned engineering worktree and use `hmasd-git-integration` for one
-cycle-completion checkpoint as `cm:<direction-id>` onto `omp/workflow`.
-Candidate evidence is not integration; only the returned `integrated_sha` is.
-Report a stale base, dirty target, non-fast-forward, mixed ownership, or
-conflict to Root without rebasing, merging, broad staging, or blind retry.
+At semantic cycle completion, freeze one complete content-addressed packet per
+state, candidate, prepare, or integration operation. Return the semantic
+product promptly with `semantic_product_ref` and
+`persistence_status=PREPARED`; leave unobserved durable, `candidate_sha`, and
+`integrated_sha` fields null. Emit each mechanical obligation as an independent
+`next_actions` item with `owner: CLERK`; explicitly emit any simultaneous
+Transport, Run, or Root obligations rather than serializing them behind Clerk.
+CM performs no target Git, staging, commit, apply, fetch, or push.
+
+Terminal handoff ends CM's physical writer lease, after which the admitted
+Clerk alone may mutate the exact worktree. CM resumes writing only after every
+Clerk mutation is terminal and Root issues a new assignment. Clerk refusal,
+stale CAS, conflict, or `UNKNOWN` blocks only the exact mechanical edge and
+preserves CM's accepted technical semantic product. Root or Clerk never
+reconstructs packet fields, rebases, merges, broad-stages, resolves, or retries.
+Only a directly observed accepted Clerk fact may populate an observed SHA.
 
 ## Status and return
 
-Return the common v1 envelope with `role: "hmasd-cm"`, logical identity
+Return the common v2 envelope with `role: "hmasd-cm"`, logical identity
 `CM-<direction-id>`, conclusion-first summary, exact refs, changed paths,
-focused checks and observations, limitations, blocker/reentry, and the CM
-payload fields required by the shared schema. `scope_ref` and `contract_ref`
-refer to the content-addressed durable EM request unless a necessary later
-contract note supersedes it. Populate `candidate_sha` and `integrated_sha` only
-from observed Git facts.
+focused checks and observations, limitations, blocker/reentry,
+`semantic_product_ref`, `persistence_status=PREPARED`, required
+`next_actions`, and the CM payload fields required by the shared schema.
+`scope_ref` and `contract_ref` refer to the content-addressed durable EM request
+unless a necessary later contract note supersedes it. `candidate_sha` and
+`integrated_sha` remain null until directly observed from accepted Clerk facts.
+Every CM-to-EM result-interpretation dispatch has a strict dependency on the
+exact accepted CM `integrated_sha`, result digest, status/payload kind, and
+required refs. Compatible reconciliation uses a new assignment ID in the same
+generation; material scope change increments generation.
 
 Keep the engineering candidate, run execution, and scientific meaning axes
 independent. Report the existing CM-owned technical axes as:

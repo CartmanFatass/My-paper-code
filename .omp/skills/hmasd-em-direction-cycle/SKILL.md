@@ -22,11 +22,12 @@ and generation, OMP runtime observation, CAS research state, external-review
 index, accepted checkpoint, later evidence, and exact Git facts before
 repeating or overwriting work.
 
-Shared carriers, common v1 envelopes, liveness, CAS, canonical paths, hard
-boundaries, exact worktree ownership, and `omp/workflow` integration are defined
-by `.omp/AGENTS.md`, `.omp/RULES.md`, and `hmasd-git-integration`. Every nested
-`task` item omits `effort`. Reject stale generation, cross-direction identity,
-changed frozen hashes, or work outside exact EM-owned paths.
+Shared carriers, common v2 envelopes, liveness, canonical paths, exact worktree
+ownership, and Root-admitted Clerk packet mechanics are defined by
+`.omp/AGENTS.md`, `.omp/RULES.md`, and the exact Git integration policy. Every
+nested `task` item omits `effort`. Reject stale generation, cross-direction
+identity, changed frozen hashes, or work outside exact EM-owned paths. EM owns
+semantic authoring, not CAS, candidate creation, target Git, or push execution.
 
 ## Material-cycle boundary
 
@@ -66,8 +67,11 @@ external operation, route, or claim-increase opportunity.
    synthesis, unless the user waives that exact still-unsent stage. Innovator
    remains blind to EM conclusions, favored answers, and local results. Follow
    `hmasd-scientific-external-review` for prompts, ordering, v2 index, transport,
-   and disposition. EM returns frozen requests through Root and never sends,
-   performs browser mechanics, contacts, or spawns BrowserTransport.
+   and disposition. EM returns frozen requests through Root as a `next_actions`
+   item with `owner: TRANSPORT`, exact input refs, strict dependencies, effect
+   authority, and stop/reentry; it never sends, performs browser mechanics,
+   contacts, or spawns BrowserTransport. Emit independent Transport and Clerk
+   obligations simultaneously, never as an inferred or array-ordered edge.
 3. Derive bounded local work by the executable gap-to-task method below.
    Distinct named information gaps determine whether any leaf is needed, its
    task family, and the specialist mix; counts, quotas, votes, and quorum never
@@ -239,13 +243,24 @@ rule; run plan without launching it; positive, negative, null, ambiguous,
 invalid, and technical-failure branches; required observations and artifact
 destinations; limitations; and finite claim ceiling.
 
-Hash the request, update `workflow/research/state.json` through the state CLI
-with expected-revision CAS, and return the same ref through Root in
-`engineering_request_ref` and `next_action.input_refs` with
-`next_action.owner=CM`. EM never directly spawns or contacts CM. CM returns
-commands, tests, direct observations, artifacts, scope, and limitations; EM
-alone interprets them. Program or test success is not scientific acceptance,
-and `NOT_OBSERVED` is not scientific rejection.
+Hash the request and freeze its exact desired research-state bytes, expected
+revision, writer, and content digest in a `STATE_CAS` Clerk packet. Return the
+request as `engineering_request_ref` and emit every currently independent
+obligation in required `next_actions`: the state/CAS or persistence packet with
+`owner: CLERK`, and any independent Transport or EM work. Each item has its own
+`action_id`, exact `input_refs`, strict `dependencies`,
+`authorized_effect_ref`, and `stop_or_reentry_ref`; array order is not an edge.
+Packet presence is inert and EM never executes it.
+
+The same-direction CM handoff is not independent of Git authority. After Root
+accepts the exact Clerk result and EM `integrated_sha`, reconcile under a new
+EM assignment ID and emit the CM action with a strict dependency on that
+accepted result digest and integrated-SHA ref. Compatible scope keeps the same
+generation; material scope change requires a new generation. EM never directly
+spawns or contacts CM. CM returns commands, tests, direct observations,
+artifacts, scope, and limitations; EM alone interprets them. Program or test
+success is not scientific acceptance, and `NOT_OBSERVED` is not scientific
+rejection.
 
 ## Material records and state
 
@@ -262,30 +277,41 @@ never a default document tax. Do not create an artifact merely because a route
 or tool ran. Write a terminal-gap note only when needed to preserve reached
 synthesis or the exact unresolved gap. Every durable ref is `{path, sha256}`.
 
-Write scientific authority only to the assigned `DIRECTION.md`; research
-snapshot fields only through expected-revision CAS; and external pointers only
-through the v2 index after Root validation. Do not write Portfolio authority,
-engineering state, run manifests, BrowserTransport state, Agentify ledger or
-archive bytes, or another direction. The research snapshot is the last accepted
-material milestone, not an event log.
+Write scientific authority only in the assigned semantic product bytes for
+`DIRECTION.md`; prepare research snapshot bytes and exact expected-revision CAS
+packets; and prepare external pointers only under the staged external-review
+contract. Do not write Portfolio authority, engineering state, run manifests,
+BrowserTransport state, Agentify ledger or archive bytes, or another direction.
+The research snapshot is the last accepted material milestone, not an event log.
 
 Use OMP runtime maps for liveness; do not poll, infer liveness from tracked
-state, create duplicate roles, or return terminal with live work or committed
-effects. At coherent completion, use the provisioned research worktree and Git
-Integration Skill for only exact assignment-owned paths on `omp/workflow`;
-report stale base, dirty target, non-fast-forward, mixed ownership, or conflict
-to Root unchanged.
+state, create duplicate roles, or return terminal with live semantic work or
+committed EM-owned effects. At coherent semantic completion, return promptly
+with `semantic_product_ref` and `persistence_status=PREPARED`. Fields for durable
+state, `candidate_sha`, and `integrated_sha` remain null until directly observed.
+Freeze one complete content-addressed packet per mechanical state, candidate,
+or Git operation and emit its Clerk action; do not perform target Git.
+
+EM owns the physical research worktree only through terminal handoff. Handoff
+ends EM writing, and the admitted Clerk alone may mutate the exact worktree.
+EM resumes writing only after every Clerk mutation is terminal and Root issues a
+new assignment. Clerk refusal or `UNKNOWN` changes only the mechanical edge,
+preserves the accepted semantic product, and permits compatible reconciliation;
+neither Root nor Clerk may reconstruct packet fields, change science, or retry.
 
 ## Return and failure
 
-Return the common v1 envelope as `hmasd-em` / `EM-<direction-id>` with the EM
+Return the common v2 envelope as `hmasd-em` / `EM-<direction-id>` with the EM
 payload fields defined by `.omp/AGENTS.md`, observed generation and checkpoint,
-changed paths, state/artifact refs, exact next-action refs, and a
-conclusion-first summary. Use owner `EM` for local work or interpretation, `CM`
-for the durable engineering request, `TRANSPORT` for a frozen Pro request,
-`ROOT` for completed reconciliation, or `USER` only for a genuine decision or
-exact waiver boundary. Use materiality `DIRECTION` when judgment or next owner
-changes.
+changed paths, state/artifact refs, `semantic_product_ref`,
+`persistence_status=PREPARED`, and a conclusion-first summary. Include required
+`next_actions`, empty when no successor. Use owner `EM` for local work or
+interpretation, `CM` only after the exact same-direction integrated-SHA edge is
+satisfied, `CLERK` for a frozen mechanical packet, `TRANSPORT` for a frozen Pro
+request, `ROOT` for completed reconciliation, or `USER` only for a genuine
+decision or exact waiver boundary. Emit simultaneous independent obligations
+explicitly with strict dependencies. Use materiality `DIRECTION` when judgment
+or the obligation set changes.
 
 Preserve frozen scope and evidence identity. Never merge a late result into a
 newer checkpoint, reinterpret transport text as fact, resend unknown

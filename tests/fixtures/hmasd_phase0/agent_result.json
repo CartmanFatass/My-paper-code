@@ -7,8 +7,9 @@
   "generation": 1,
   "logical_identity": "EM-example-direction",
   "materiality": "DIRECTION",
-  "next_action": null,
+  "next_actions": [],
   "payload": {
+    "candidate_sha": null,
     "conclusion_refs": [
       {
         "path": "docs/research/candidates/example-direction/DIRECTION.md",
@@ -16,13 +17,20 @@
       }
     ],
     "direction_id": "example-direction",
+    "durable_state_ref": null,
     "engineering_request_ref": null,
     "evidence_set_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "integrated_sha": null,
     "kind": "em",
-    "question_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    "persistence_status": "PREPARED",
+    "question_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "semantic_product_ref": {
+      "path": "docs/research/candidates/example-direction/DIRECTION.md",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
   },
   "role": "hmasd-em",
-  "schema_version": 1,
+  "schema_version": 2,
   "state_refs": [],
   "status": "COMPLETED",
   "summary": "Observed research checkpoint recorded."

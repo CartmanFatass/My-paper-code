@@ -6,11 +6,11 @@
   "additionalProperties": false,
   "required": ["schema_version", "revision", "updated_at", "writer", "agents"],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
+    "schema_version": { "type": "integer", "const": 2 },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "const": "Root" },
-    "agents": { "type": "array", "items": { "$ref": "#/$defs/agent" } }
+    "agents": { "type": "array", "items": { "$ref": "#/$defs/current_agent" } }
   },
   "$defs": {
     "timestamp": {
@@ -27,7 +27,21 @@
       "type": "string",
       "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
     },
-    "agent": {
+    "clerk_identity": {
+      "type": "string",
+      "pattern": "^Clerk-[a-z0-9][a-z0-9-]{1,127}$"
+    },
+    "assignment_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,127}$"
+    },
+    "current_agent": {
+      "oneOf": [
+        { "$ref": "#/$defs/standard_agent" },
+        { "$ref": "#/$defs/clerk_agent" }
+      ]
+    },
+    "standard_agent": {
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -43,7 +57,29 @@
       ],
       "properties": {
         "logical_identity": { "$ref": "#/$defs/identity" },
-        "agent_type": { "type": "string", "pattern": "^(?:hmasd-[a-z0-9-]+|task|librarian)$" },
+        "agent_type": {
+          "type": "string",
+          "enum": [
+            "hmasd-browser-transport",
+            "hmasd-cm",
+            "hmasd-code-scout",
+            "hmasd-em",
+            "hmasd-experiment-operator",
+            "hmasd-implementer",
+            "hmasd-implementer-terra",
+            "hmasd-project-scout",
+            "hmasd-root",
+            "hmasd-research-critic",
+            "hmasd-research-innovator",
+            "hmasd-research-principles-analyst",
+            "hmasd-research-scout",
+            "hmasd-reviewer",
+            "hmasd-verifier",
+            "hmasd-workflow-recovery-manager",
+            "librarian",
+            "task"
+          ]
+        },
         "generation": { "type": "integer", "minimum": 1 },
         "parent_identity": { "$ref": "#/$defs/identity" },
         "session_ref": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }] },
@@ -52,6 +88,37 @@
         "lifecycle": {
           "type": "string",
           "enum": ["CREATED", "RUNNING", "PARKED", "IDLE", "COMPLETED", "FAILED", "RETIRED"]
+        },
+        "last_seen_at": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "clerk_agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logical_identity",
+        "agent_type",
+        "generation",
+        "assignment_id",
+        "parent_identity",
+        "session_ref",
+        "job_ref",
+        "runtime_ref",
+        "lifecycle",
+        "last_seen_at"
+      ],
+      "properties": {
+        "logical_identity": { "$ref": "#/$defs/clerk_identity" },
+        "agent_type": { "const": "hmasd-clerk" },
+        "generation": { "type": "integer", "minimum": 1 },
+        "assignment_id": { "$ref": "#/$defs/assignment_id" },
+        "parent_identity": { "const": "Root" },
+        "session_ref": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }] },
+        "job_ref": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }] },
+        "runtime_ref": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }] },
+        "lifecycle": {
+          "type": "string",
+          "enum": ["CREATED", "RUNNING", "COMPLETED", "FAILED", "RETIRED"]
         },
         "last_seen_at": { "$ref": "#/$defs/timestamp" }
       }
