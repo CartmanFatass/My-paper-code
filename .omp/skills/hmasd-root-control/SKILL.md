@@ -85,6 +85,9 @@ than substituting another role or performing its Effect directly.
   prohibited.
 - A slow child never blocks an unrelated direct Root action or independent
   assignment.
+- A serialized Git target, registry CAS, provider operation, or other physical
+  Effect may delay only that exact shared resource; independent directions and
+  non-conflicting work continue.
 
 ## Assignment contract
 

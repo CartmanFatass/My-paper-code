@@ -1,12 +1,17 @@
 modelRoles:
-  advisor: openai-codex/gpt-5.6-luna:xhigh
+  advisor: xai-oauth/grok-4.6:high
+
 advisor:
-  enabled: true
+  enabled: false
+
 autoResume: true
+
 async:
   enabled: true
+
 launch:
   enabled: true
+
 task:
   batch: true
   isolation:
