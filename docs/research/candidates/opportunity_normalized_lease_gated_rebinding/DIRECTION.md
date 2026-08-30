@@ -17,33 +17,66 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
-## Active successor 04 seven-tick robustness question
+## Resolved successor 04 seven-tick robustness question
 
-Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04` is a
-fresh exact robustness cell. It changes only the predecessor's physical service
-lifetime from eight to seven ticks while retaining opportunity spacings one
-and four, action cost two, equal physical-time weighting, the exact renewal
-ordering, state-blind memoryless policies, and the base-only `1/16` grid. Shared
-raw probability, exact exponential survival linking, and common executed rate
-are registered from the outset, together with KEEP, a charge-matched
-payload-null shell, unrestricted grid optima, and an age-conditioned competence
-ceiling.
+Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04`
+reached `REVIEW_RESOLVED / HANDOFF_READY` through bounded
+`EVIDENCE_INTAKE`. It changes only the predecessor's physical service lifetime
+from eight to seven ticks while retaining opportunity spacings one and four,
+action cost two, equal physical-time weighting, service before the
+ending-boundary action, state-blind memoryless policies, and the base-only
+`1/16` grid.
 
-The frozen result-blind scope requires strictly more than `1/32` exact
-exponential-over-common-rate direct return, with direct headroom, before a
-link-specific interpretation. A common-rate ceiling match, common-rate win, or
-smaller gap supports only generic physical-rate regularization. Exact scope and
-neutral Innovator question are:
+Exact optimization selects RAW `p=1/4`, EXP `r=1/4`, and RATE `h=3/16`.
+RATE beats EXP in direct return by `9753755/536870912` (about `0.018168`),
+beats RAW by `73746587/536870912` (about `0.137364`), and lies only
+`5/2048` (about `0.002441`) below the unrestricted state-blind memoryless
+grid ceiling. EXP and RATE both pass KEEP and charge-matched
+payload-null-shell competence. The resolved branch is therefore
+`GENERIC_RATE_SUPPORTED`, not `EXP_LINK_SPECIFIC`.
+
+The exact strict Pro Convergence response independently reproduces the frozen
+algebra, controls, and registered branch. Its archive and response identity are
+verified, but provider agreement remains external evidence rather than
+scientific authority and does not raise the claim ceiling. The provider's
+private source-use statement is not independently observable and supplies no
+polarity. No material in-scope objection survives EM disposition: EXP and RATE
+are behaviorally different, the unrestricted comparator is only a memoryless
+grid ceiling, and the proposed expiry bit restates the already evaluated
+age-conditioned competence control rather than distinguishing EXP from RATE.
+
+The mechanism-level recommendation to Root is `NARROW`: stop the distinct
+exponential, opportunity-normalized, lease-gated, and rebinding interpretation
+while retaining at most generic physical-rate regularization on this finite
+host. No successor, provider operation, CM request, experiment, or result
+command is live. A fresh link-transfer question may reenter only under new
+Portfolio authority with a prospectively frozen held-out third spacing; no such
+object is created here.
+
+The finite claim ceiling is one single-renewal-unit, seven-tick,
+spacing-`{1,4}`, equal-physical-time, base-`1/16`-grid,
+state-blind-memoryless host with action cost two. The result is not behavioral
+equivalence or global optimality and establishes no continuous or
+arbitrary-lifetime law, learned ONLGR value, RAW impossibility, literal hazard,
+causal lease or `REBIND` value, task-content use, arbitrary periods, variable
+populations, UAV transfer, safety, workload equality, or general PPO
+superiority.
+
+Exact scope, synthesis, conclusion-blind packet, response, and current
+evidence-intake disposition are:
 
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-scope-and-grounding.md`
-- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-innovator-prompt.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-em-synthesis.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-convergence-packet.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/external/2026-08-29-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-pro-convergence-response.md`
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-29.4-robustness-01a04a02-onlgr-successor-04-handoff-intake-g3.md`
 
-The direction writer remains on terminal predecessor commit
-`84dede555997109065dfc18ebba6ba0340519b68`. Current shared authority
-`e3dfd2d48ddb02c6442d45dbddc30f36ac9f3ded` and Portfolio authority
-`2ecc84edb1bfee06c04e3157eb20bb3d3368c09e` are separate read-only lines, so
-their current semantics and investment question are consumed without merging
-histories. The B3 package remains quarantined non-input.
+The resumed writer base
+`74cf91cb6dc6f40e9d59f962691dbeda7c92c355` directly descends P0/P1
+implementation commit `93ffcf04537f46f9f226b5bc0dc9454245d39daf`;
+those are workflow facts and do not alter the frozen scientific object. Shared
+and Portfolio authorities remain separate. The B3 package remains quarantined
+non-input.
 
 ## Terminal successor 03 structural question
 
