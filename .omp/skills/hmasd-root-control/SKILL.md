@@ -54,7 +54,7 @@ acceptance. It never creates an intermediate Portfolio or planning agent.
 | One separable evidence gap | one fitting Scout/Critic/Reviewer | Unanswered, decision-relevant, and method-specific |
 | One bounded mechanical project chore | stable logical `Clerk` | Complete concise intent, actor/writer, targets, allowed paths, Effects, refusal outcomes, and stop are frozen |
 | One exact result-bearing command | one `hmasd-experiment-operator` | Command, resources, output, and stop are frozen |
-| One exact provider operation | singleton `hmasd-browser-transport` | Provider, model, operation, commitment, and response path are exact |
+| One exact provider operation | singleton `hmasd-browser-transport` | Provider, model/effort, target, prompt/response identity, operation, idempotency, and request fingerprint are exact |
 | One genuinely unknown or partial Effect | one `hmasd-workflow-recovery-manager` | Direct read-only reconciliation cannot settle it |
 
 Never delegate:
@@ -185,10 +185,11 @@ or a process has a next state. Pending ceremony is not runnable project work.
 
 ## External operations and runs
 
-- BrowserTransport is the singleton for ChatGPT and Gemini operations.
-- Every send binds exact provider, conversation, model, mode, operation,
-  idempotency, commitment state, and response path.
-- Unknown commitment never resends.
+- BrowserTransport executes an already-authorized exact ChatGPT or Gemini request.
+- Every send binds the exact provider, target conversation, model/effort,
+  operation, idempotency key, request fingerprint, prompt, and response path.
+- Before `send_attempted`, errors retry automatically on that same operation.
+  After `send_attempted`, BrowserTransport only observes and never sends again.
 - Exactly one Experiment Operator owns one exact result-bearing command.
 - A local result-bearing command estimated above 7200 seconds requires a
   performance-reasonableness review attempt and explicit user approval.

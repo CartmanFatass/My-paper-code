@@ -77,26 +77,25 @@ _REQUIRED_OPERATION_FIELDS = (
     "provider",
     "product_model",
     "reasoning_effort",
+    "target_conversation_url",
+    "target_conversation_id",
     "stable_key",
     "operation_id",
     "idempotency_key",
     "request_fingerprint",
+    "prompt_path",
     "prompt_sha256",
-    "question_sha256",
-    "evidence_sha256",
-    "phase",
-    "commitment",
-    "recoverability",
-    "observability",
-    "message_capability",
-    "failure",
-    "provider_user_message_count",
-    "send_activation_count",
-    "conversation_url",
-    "conversation_id",
-    "user_message_id",
-    "assistant_message_id",
+    "response_path",
+    "created_at",
+    "updated_at",
+    "send_attempted",
+    "send_attempted_at",
+    "observed_conversation_url",
+    "observed_conversation_id",
+    "provider_user_message_id",
+    "provider_assistant_message_id",
     "archive",
+    "error",
 )
 _PROVIDER_TARGETS = {
     "chatgpt": ("chatgpt.com", "c"),
@@ -116,8 +115,6 @@ class ArchiveConflict(ExternalReviewError):
     """The immutable destination already contains a different archive."""
 
 
-class CommitmentUnknown(ExternalReviewError):
-    """Agentify did not establish whether a submission committed."""
 
 
 class PathRefusal(ExternalReviewError):
@@ -320,12 +317,8 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
         raise ExternalReviewError(
             "operation reference fields do not match current schema: " + "; ".join(details)
         )
-    if result["schema_version"] != 3:
-        raise ExternalReviewError("operation reference schema_version must be 3")
-    if result["commitment"] == "UNRESOLVED":
-        raise CommitmentUnknown(
-            "Agentify commitment is unresolved; no resend or archive publication is allowed"
-        )
+    if result["schema_version"] != 4:
+        raise ExternalReviewError("operation reference schema_version must be 4")
 
     direction_id = result["direction_id"]
     if not isinstance(direction_id, str) or _DIRECTION_ID.fullmatch(direction_id) is None:
@@ -337,10 +330,7 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
         raise ExternalReviewError(
             f"operation reference round_id must be {ROUND_ID_HEX_LENGTH} lowercase hex characters"
         )
-    workflow_version = _require_text(
-        result["workflow_version"],
-        label="operation reference workflow_version",
-    )
+    _require_text(result["workflow_version"], label="operation reference workflow_version")
     review_stage = _require_text(
         result["review_stage"],
         label="operation reference review_stage",
@@ -350,6 +340,7 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
             "operation reference review_stage must be one of: "
             + ", ".join(sorted(_SUPPORTED_REVIEW_STAGES))
         )
+
     provider = _require_provider(result["provider"], label="operation reference provider")
     product_model = _require_text(
         result["product_model"],
@@ -368,81 +359,123 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
         raise ExternalReviewError(
             "current Gemini operation requires reasoning_effort null"
         )
-    for key in (
-        "stable_key",
-        "operation_id",
-        "idempotency_key",
-        "user_message_id",
-        "assistant_message_id",
-    ):
+
+    for key in ("stable_key", "operation_id", "idempotency_key"):
         _require_text(result[key], label=f"operation reference {key}")
-    for key in (
-        "request_fingerprint",
-        "prompt_sha256",
-        "question_sha256",
-        "evidence_sha256",
-    ):
+    for key in ("request_fingerprint", "prompt_sha256"):
         _require_sha(result[key], label=f"operation reference {key}")
-
-    expected_round_id = round_id(
-        direction_id,
-        result["question_sha256"],
-        result["evidence_sha256"],
-        workflow_version,
+    prompt_path = PurePosixPath(
+        _require_text(result["prompt_path"], label="operation reference prompt_path")
     )
-    if round_id_value != expected_round_id:
-        raise ExternalReviewError(
-            "operation reference round_id does not match its frozen direction, question, evidence, and workflow"
-        )
-    conversation_id = _require_session_id(
-        result["conversation_id"],
-        label="operation reference conversation_id",
+    expected_prompt_path = (
+        _OWNED_ARCHIVE_ROOT
+        / direction_id
+        / round_id_value
+        / review_stage
+        / _PROMPT_FILENAMES[review_stage]
     )
-    _validate_archive_target(provider, conversation_id, result["conversation_url"])
-
-    expected_terminal = {
-        "phase": "TERMINAL",
-        "commitment": "ONE_EXACT",
-        "recoverability": "NONE",
-        "observability": "FRESH_COMPLETE",
-        "message_capability": "SEALED",
-        "provider_user_message_count": 1,
-    }
-    for key, expected in expected_terminal.items():
-        if result[key] != expected:
-            raise ExternalReviewError(
-                f"operation reference {key} must be {expected!r} for natural completion"
-            )
-    activation_count = result["send_activation_count"]
-    if (
-        isinstance(activation_count, bool)
-        or not isinstance(activation_count, int)
-        or activation_count not in {0, 1}
-    ):
+    if prompt_path != expected_prompt_path:
         raise ExternalReviewError(
-            "operation reference send_activation_count must be 0 or 1"
+            "operation reference prompt_path does not match its direction, round, and stage"
         )
-    failure = result["failure"]
-    if not isinstance(failure, Mapping) or set(failure) != {"locus", "code"}:
-        raise ExternalReviewError("operation reference failure must contain exactly locus and code")
-    if failure["locus"] != "NONE" or failure["code"] != "NONE":
-        raise ExternalReviewError("natural completion operation reference failure must be NONE/NONE")
-
-    archive = result["archive"]
-    if not isinstance(archive, Mapping) or set(archive) != set(_REQUIRED_ARCHIVE_RECEIPT_FIELDS):
-        raise ExternalReviewError(
-            "operation reference archive must contain exactly path, sha256, size_bytes, projection, and verified_at"
-        )
-    archive_path = archive["path"]
+    response_path = PurePosixPath(
+        _require_text(result["response_path"], label="operation reference response_path")
+    )
     expected_response_path = _owned_response_path(
         direction_id,
         round_id_value,
         review_stage,
         provider,
-    ).as_posix()
-    if archive_path != expected_response_path:
+    )
+    if response_path != expected_response_path:
         raise ExternalReviewError(
-            "operation reference archive.path does not match its direction, round, stage, and provider"
+            "operation reference response_path does not match its direction, round, stage, and provider"
+        )
+
+    for key in ("created_at", "updated_at"):
+        value = result[key]
+        if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+            raise ExternalReviewError(
+                f"operation reference {key} must be a positive epoch-millisecond integer"
+            )
+
+    for prefix in ("target", "observed"):
+        url_key = f"{prefix}_conversation_url"
+        id_key = f"{prefix}_conversation_id"
+        url = result[url_key]
+        identity = result[id_key]
+        if url is not None:
+            _require_text(url, label=f"operation reference {url_key}")
+        if identity is not None:
+            session_id = _require_session_id(
+                identity,
+                label=f"operation reference {id_key}",
+            )
+            if url is not None:
+                _validate_archive_target(provider, session_id, url)
+
+    send_attempted = result["send_attempted"]
+    if not isinstance(send_attempted, bool):
+        raise ExternalReviewError("operation reference send_attempted must be boolean")
+    send_attempted_at = result["send_attempted_at"]
+    if send_attempted:
+        if (
+            isinstance(send_attempted_at, bool)
+            or not isinstance(send_attempted_at, int)
+            or send_attempted_at < 1
+        ):
+            raise ExternalReviewError(
+                "operation reference send_attempted_at must be a positive epoch-millisecond integer after a send attempt"
+            )
+    elif send_attempted_at is not None:
+        raise ExternalReviewError(
+            "operation reference send_attempted_at must be null before a send attempt"
+        )
+
+    user_message_id = result["provider_user_message_id"]
+    assistant_message_id = result["provider_assistant_message_id"]
+    if user_message_id is not None:
+        _require_text(user_message_id, label="operation reference provider_user_message_id")
+        if not send_attempted:
+            raise ExternalReviewError(
+                "operation reference provider_user_message_id requires send_attempted"
+            )
+    if assistant_message_id is not None:
+        _require_text(
+            assistant_message_id,
+            label="operation reference provider_assistant_message_id",
+        )
+        if user_message_id is None:
+            raise ExternalReviewError(
+                "operation reference provider_assistant_message_id requires provider_user_message_id"
+            )
+
+    error = result["error"]
+    if error is not None:
+        if (
+            not isinstance(error, Mapping)
+            or set(error) != {"code"}
+            or not isinstance(error["code"], str)
+            or re.fullmatch(r"[A-Z][A-Z0-9_]{0,127}", error["code"]) is None
+        ):
+            raise ExternalReviewError(
+                "operation reference error must be null or contain exactly one uppercase code"
+            )
+
+    archive = result["archive"]
+    if archive is None:
+        return result
+    if assistant_message_id is None:
+        raise ExternalReviewError(
+            "operation reference archive requires provider_assistant_message_id"
+        )
+    if not isinstance(archive, Mapping) or set(archive) != set(_REQUIRED_ARCHIVE_RECEIPT_FIELDS):
+        raise ExternalReviewError(
+            "operation reference archive must contain exactly path, sha256, size_bytes, projection, and verified_at"
+        )
+    if archive["path"] != response_path.as_posix():
+        raise ExternalReviewError(
+            "operation reference archive.path must equal response_path"
         )
     _require_sha(archive["sha256"], label="operation reference archive.sha256")
     size_bytes = archive["size_bytes"]
@@ -480,6 +513,18 @@ def _read_raw_archive(archive: Any) -> tuple[bytes, Path]:
 def _archive_record(operation_ref: Any, archive: Any) -> ArchiveRecord:
     operation_value, _, _ = _input_value(operation_ref, label="operation reference")
     operation = _validate_operation_ref(operation_value)
+    if operation["send_attempted"] and operation["provider_user_message_id"] is None:
+        raise ExternalReviewError(
+            "send was attempted but its provider user message is not yet observed; never resend"
+        )
+    if not operation["send_attempted"]:
+        raise ExternalReviewError(
+            "operation reference has no send attempt and remains retryable"
+        )
+    if operation["provider_assistant_message_id"] is None or operation["archive"] is None:
+        raise ExternalReviewError(
+            "operation reference is not complete enough to publish an archive"
+        )
     raw, source_path = _read_raw_archive(archive)
     archive_sha256 = hashlib.sha256(raw).hexdigest()
     receipt = operation["archive"]
@@ -2307,7 +2352,7 @@ def _ensure_parent(path: Path) -> None:
 
 def _owned_destination(operation: Mapping[str, Any], destination: os.PathLike[str] | str) -> Path:
     root = _PROJECT_ROOT.resolve()
-    relative = PurePosixPath(str(operation["archive"]["path"]))
+    relative = PurePosixPath(str(operation["response_path"]))
     expected = root.joinpath(*relative.parts)
     supplied = Path(destination)
     target = supplied if supplied.is_absolute() else root / supplied
@@ -2377,16 +2422,15 @@ def create_archive_if_absent(
 ) -> dict[str, Any]:
     """Publish exact raw response bytes and their immutable current operation receipt."""
 
-    operation_value, _, _ = _input_value(operation_ref, label="operation reference")
-    operation = _validate_operation_ref(operation_value)
-    record = _archive_record(operation, archive)
+    record = _archive_record(operation_ref, archive)
+    operation = record.data
     target = _owned_destination(operation, destination)
     if target.exists() and target.is_dir():
         raise PathRefusal(f"response destination is a directory: {target}")
     target = _owned_destination(operation, target)
     response_status = _publish_exact_file(target, record.raw_bytes, label="response")
 
-    relative_response = PurePosixPath(operation["archive"]["path"])
+    relative_response = PurePosixPath(operation["response_path"])
     operation_relative = _owned_operation_ref_path(relative_response)
     operation_target = _PROJECT_ROOT.resolve().joinpath(*operation_relative.parts)
     operation_raw = _canonical_json(operation)
@@ -2456,7 +2500,7 @@ def render_handoff_input(
 
     record = _archive_record(operation_ref, archive)
     rendered = {
-        "handoff_kind": "hmasd_external_review_intake_v3",
+        "handoff_kind": "hmasd_external_review_intake_v4",
         "operation_ref": record.data,
         "response_sha256": record.archive_sha256,
         "response_size_bytes": len(record.raw_bytes),
@@ -2552,9 +2596,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     except RegistrationUnknown as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 8
-    except CommitmentUnknown as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 7
     except ArchiveConflict as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 6

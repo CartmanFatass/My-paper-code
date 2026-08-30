@@ -892,42 +892,47 @@ def _safe_transport_assignment(value: Mapping[str, Any]) -> dict[str, Any]:
         "assignment_id",
         "requester_identity",
         "direction_id",
+        "mode",
+        "paused",
         "provider",
         "product_model",
         "reasoning_effort",
-        "mode",
+        "target_conversation_url",
+        "target_conversation_id",
+        "response_path",
         "operation_id",
         "idempotency_key",
-        "provider_conversation_id",
-        "phase",
-        "commitment",
-        "recoverability",
-        "observability",
-        "message_capability",
-        "provider_user_message_count",
-        "send_activation_count",
-        "paused",
+        "request_fingerprint",
+        "stable_key",
+        "created_at",
         "updated_at",
+        "send_attempted",
+        "send_attempted_at",
+        "observed_conversation_url",
+        "observed_conversation_id",
+        "provider_user_message_id",
+        "provider_assistant_message_id",
     ):
         observed = value.get(key)
-        if isinstance(observed, (str, int, bool)) or (
-            key in {"direction_id", "reasoning_effort", "provider_conversation_id"}
-            and observed is None
-        ):
+        if isinstance(observed, (str, int, bool)) or observed is None:
             output[key] = observed
-    failure = value.get("failure")
-    if isinstance(failure, Mapping):
-        locus = failure.get("locus")
-        code = failure.get("code")
-        if isinstance(locus, str) and isinstance(code, str):
-            output["failure"] = {"locus": locus, "code": code}
-    for key in (
-        "request_ref",
-        "operation_ref",
-        "provider_conversation_ref",
-        "archive_ref",
-        "handoff_ref",
-    ):
+    error = value.get("error")
+    if isinstance(error, Mapping) and isinstance(error.get("code"), str):
+        output["error"] = {"code": error["code"]}
+    elif error is None:
+        output["error"] = None
+    archive = value.get("archive")
+    if isinstance(archive, Mapping):
+        projected_archive = {
+            key: archive[key]
+            for key in ("path", "sha256", "size_bytes", "projection", "verified_at")
+            if isinstance(archive.get(key), (str, int))
+        }
+        if projected_archive:
+            output["archive"] = projected_archive
+    elif archive is None:
+        output["archive"] = None
+    for key in ("request_ref", "effect_ref", "prompt_ref", "operation_ref"):
         reference = _sha_ref(value.get(key))
         if reference is not None:
             output[key] = reference
@@ -1312,51 +1317,55 @@ def _safe_provider(
     for field in (
         "provider",
         "product_model",
+        "reasoning_effort",
+        "target_conversation_url",
+        "target_conversation_id",
+        "response_path",
         "operation_id",
         "idempotency_key",
-        "provider_conversation_id",
-        "phase",
-        "commitment",
-        "recoverability",
-        "observability",
-        "message_capability",
-        "user_message_id",
-        "assistant_message_id",
-        "completed_at",
+        "request_fingerprint",
+        "stable_key",
+        "created_at",
+        "updated_at",
+        "send_attempted",
+        "send_attempted_at",
+        "observed_conversation_url",
+        "observed_conversation_id",
+        "provider_user_message_id",
+        "provider_assistant_message_id",
     ):
         value = provider.get(field)
-        if isinstance(value, str):
+        if isinstance(value, (str, int, bool)) or value is None:
             result[field] = value
-    reasoning_effort = provider.get("reasoning_effort")
-    if reasoning_effort is None or isinstance(reasoning_effort, str):
-        result["reasoning_effort"] = reasoning_effort
-    for field in ("provider_user_message_count", "send_activation_count"):
-        value = provider.get(field)
-        if isinstance(value, int) and not isinstance(value, bool):
-            result[field] = value
-    failure = provider.get("failure")
-    if isinstance(failure, Mapping):
-        locus = failure.get("locus")
-        code = failure.get("code")
-        if isinstance(locus, str) and isinstance(code, str):
-            result["failure"] = {"locus": locus, "code": code}
-    conversation_ref = provider.get("provider_conversation_ref")
-    if isinstance(conversation_ref, str):
-        result["provider_conversation_ref"] = conversation_ref
-    else:
-        normalized_conversation_ref = _sha_ref(conversation_ref)
-        if normalized_conversation_ref is not None:
-            result["provider_conversation_ref"] = normalized_conversation_ref
-    for source, target in (
-        ("operation_ref", "operation_receipt"),
-        ("archive_ref", "archive"),
-        ("handoff_ref", "handoff"),
-    ):
-        reference = _sha_ref(provider.get(source))
-        if reference is None:
+    error = provider.get("error")
+    if isinstance(error, Mapping) and isinstance(error.get("code"), str):
+        result["error"] = {"code": error["code"]}
+    elif error is None:
+        result["error"] = None
+    operation_ref = _sha_ref(provider.get("operation_ref"))
+    if operation_ref is not None:
+        result["operation_receipt"] = operation_ref
+    prompt_ref = _sha_ref(provider.get("prompt_ref"))
+    if prompt_ref is not None:
+        result["prompt_ref"] = prompt_ref
+    archive = provider.get("archive")
+    if isinstance(archive, Mapping):
+        projected_archive = {
+            key: archive[key]
+            for key in ("path", "sha256", "size_bytes", "projection", "verified_at")
+            if isinstance(archive.get(key), (str, int))
+        }
+        if projected_archive:
+            result["archive"] = projected_archive
+
+    for target in ("operation_receipt", "archive"):
+        reference = result.get(target)
+        if not isinstance(reference, Mapping):
             continue
-        result[target] = reference
-        reference_path = reference["path"]
+        reference_path = reference.get("path")
+        reference_sha = reference.get("sha256")
+        if not isinstance(reference_path, str) or not isinstance(reference_sha, str):
+            continue
         if not reference_path.startswith("docs/external-review/directions/"):
             _warning_add(warnings, f"invalid:external_ref:{round_id}:{name}:{target}")
             continue
@@ -1368,7 +1377,7 @@ def _safe_provider(
         if observed_sha is None:
             _warning_add(warnings, f"stale:external_ref:{round_id}:{name}:{target}")
             continue
-        if observed_sha != reference["sha256"]:
+        if observed_sha != reference_sha:
             _warning_add(warnings, f"stale:external_sha:{round_id}:{name}:{target}")
     return result
 

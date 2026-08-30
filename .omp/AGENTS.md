@@ -336,17 +336,17 @@ invocation profile or a job-ID mutation, selects the model.
   profile. Do not replace it with a Linux browser or Linux Node runtime unless
   the user changes this runtime choice.
 - `BrowserTransport` is the singleton logical service, implemented by agent type
-  `hmasd-browser-transport`, for both `chatgpt` and `gemini`. EM and CM author
-  frozen durable request references and emit a `next_actions` item with
-  `owner: TRANSPORT`, exact input refs, and strict dependencies; they never
-  invoke a provider-specific transport directly. Root validates requester,
-  provider, mode, exact operation, model, authorization, commitment, and
-  response path, serializes the request through the singleton, validates
-  returned archive bytes, and routes the transport fact to the exact requester.
-- Unknown commitment never resends. BrowserTransport performs transport only:
-  provider conversation, operation, tab, direction, OMP assignment, archive,
-  scientific conclusion, engineering acceptance, and lifecycle are distinct
-  objects and meanings.
+  `hmasd-browser-transport`, for both `chatgpt` and `gemini`. EM and CM freeze
+  the exact prompt and request references; Root forwards that request to the
+  singleton and routes its receipt back to the requester. No role, state, or
+  approval step gates an exact request.
+- BrowserTransport follows one line: validate the exact target, operation,
+  idempotency key, fingerprint, model, and response path; insert the prompt;
+  persist `send_attempted`; perform one hit-tested native Send; observe the
+  provider message IDs; archive the response. Failures before `send_attempted`
+  retry directly. Once `send_attempted` is true, the operation only observes
+  and never sends again. BrowserTransport does not interpret scientific or
+  engineering meaning.
 
 ## Direction workspace
 

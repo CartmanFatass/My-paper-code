@@ -12,7 +12,6 @@ import pytest
 from scripts import hmasd_external_review as external_review
 from scripts.hmasd_external_review import (
     ArchiveConflict,
-    CommitmentUnknown,
     ExternalReviewError,
     create_archive_if_absent,
     partition_monitors,
@@ -20,9 +19,8 @@ from scripts.hmasd_external_review import (
     validate_archive,
     validate_prompts,
 )
+
 render_handoff_input = getattr(external_review, "render_handoff_input")
-
-
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "hmasd_external_review"
 
@@ -38,9 +36,7 @@ def _response(root: Path) -> Path:
 
 
 def _destination(root: Path, operation: dict[str, object]) -> Path:
-    archive = operation["archive"]
-    assert isinstance(archive, dict)
-    return root / str(archive["path"])
+    return root / str(operation["response_path"])
 
 
 def _operation_with_bytes(operation: dict[str, object], raw: bytes) -> dict[str, object]:
@@ -81,21 +77,15 @@ def test_prompt_pair_and_monitor_partition_remain_mechanical(tmp_path: Path) -> 
     assert sum(len(partition) for partition in partitions) == len(sessions)
 
 
-def test_current_operation_receipt_validates_reread_raw_response(tmp_path: Path) -> None:
+def test_v4_operation_receipt_validates_exact_reread_response(tmp_path: Path) -> None:
     operation = _operation()
+    assert operation["schema_version"] == 4
     assert validate_archive(operation, _response(tmp_path)) == operation
     with pytest.raises(ExternalReviewError, match="path to raw UTF-8"):
-        validate_archive(operation, {"responseText": "hello", "model": "Pro"})
-
-def test_natural_receipt_allows_lost_local_activation_count(tmp_path: Path) -> None:
-    operation = _operation()
-    operation["send_activation_count"] = 0
-    assert validate_archive(operation, _response(tmp_path)) == operation
+        validate_archive(operation, {"responseText": "hello"})
 
 
-def test_product_model_and_reasoning_effort_are_independent_required_axes(
-    tmp_path: Path,
-) -> None:
+def test_product_model_and_reasoning_effort_remain_exact_target_axes(tmp_path: Path) -> None:
     for field, value in (("product_model", "GPT-5.6"), ("reasoning_effort", "High")):
         operation = _operation()
         operation[field] = value
@@ -103,19 +93,18 @@ def test_product_model_and_reasoning_effort_are_independent_required_axes(
             validate_archive(operation, _response(tmp_path))
 
 
-def test_gemini_operation_receipt_requires_null_reasoning_effort(
-    tmp_path: Path,
-) -> None:
+def test_gemini_operation_receipt_requires_null_reasoning_effort(tmp_path: Path) -> None:
     operation = _operation()
     operation["provider"] = "gemini"
     operation["product_model"] = "Gemini 3.1 Pro"
     operation["reasoning_effort"] = None
-    operation["conversation_url"] = (
-        "https://gemini.google.com/app/" + str(operation["conversation_id"])
+    operation["observed_conversation_url"] = (
+        "https://gemini.google.com/app/" + str(operation["observed_conversation_id"])
     )
+    operation["response_path"] = str(operation["response_path"]).replace("/chatgpt/", "/gemini/")
     archive = operation["archive"]
     assert isinstance(archive, dict)
-    archive["path"] = str(archive["path"]).replace("/chatgpt/", "/gemini/")
+    archive["path"] = operation["response_path"]
     assert validate_archive(operation, _response(tmp_path)) == operation
 
     operation["reasoning_effort"] = "Pro"
@@ -123,22 +112,34 @@ def test_gemini_operation_receipt_requires_null_reasoning_effort(
         validate_archive(operation, _response(tmp_path))
 
 
-def test_unresolved_commitment_never_publishes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_attempted_send_without_observed_user_id_never_publishes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
     operation = _operation()
-    operation["phase"] = "VERIFY_COMMITMENT"
-    operation["commitment"] = "UNRESOLVED"
-    operation["recoverability"] = "OBSERVE_ONLY"
-    operation["observability"] = "LOST"
-    operation["provider_user_message_count"] = 0
-    operation["send_activation_count"] = 0
-    operation["user_message_id"] = None
-    operation["assistant_message_id"] = None
-    operation["failure"] = {"locus": "COMMIT_BOUNDARY", "code": "ACTIVATION_UNRESOLVED"}
+    operation["observed_conversation_url"] = None
+    operation["observed_conversation_id"] = None
+    operation["provider_user_message_id"] = None
+    operation["provider_assistant_message_id"] = None
     operation["archive"] = None
-    with pytest.raises(CommitmentUnknown):
+    operation["error"] = {"code": "USER_MESSAGE_NOT_OBSERVED"}
+    with pytest.raises(ExternalReviewError, match="never resend"):
         create_archive_if_absent(operation, _response(tmp_path), tmp_path / "unused")
     assert not (tmp_path / "docs").exists()
+
+def test_pre_send_error_is_retryable_but_not_archivable(tmp_path: Path) -> None:
+    operation = _operation()
+    operation["send_attempted"] = False
+    operation["send_attempted_at"] = None
+    operation["observed_conversation_url"] = None
+    operation["observed_conversation_id"] = None
+    operation["provider_user_message_id"] = None
+    operation["provider_assistant_message_id"] = None
+    operation["archive"] = None
+    operation["error"] = {"code": "PRE_SEND_UI"}
+    with pytest.raises(ExternalReviewError, match="remains retryable"):
+        validate_archive(operation, _response(tmp_path))
 
 
 def test_exact_response_and_separate_operation_receipt_publish_idempotently(
@@ -184,9 +185,9 @@ def test_archive_projection_is_exact_only(tmp_path: Path) -> None:
         validate_archive(operation, _response(tmp_path))
 
 
-def test_handoff_uses_current_receipt_and_raw_response(tmp_path: Path) -> None:
+def test_handoff_uses_v4_receipt_and_raw_response(tmp_path: Path) -> None:
     out = tmp_path / "handoff.json"
     rendered = render_handoff_input(_operation(), _response(tmp_path), out)
-    assert rendered["handoff_kind"] == "hmasd_external_review_intake_v3"
+    assert rendered["handoff_kind"] == "hmasd_external_review_intake_v4"
     assert rendered["response_text"] == "hello"
     assert json.loads(out.read_text(encoding="utf-8")) == rendered

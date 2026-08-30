@@ -391,10 +391,9 @@ def test_fifteen_complete_skills_and_authority_files() -> None:
             "browser tab",
             "raw response",
             "operation receipt",
-            "zero_proven",
-            "unresolved",
-            "one_exact",
-            "unknown commitment never activates again",
+            "send_attempted",
+            "one hit-tested native pointer activation",
+            "never activate send again",
         ),
         "hmasd-scientific-external-review": (
             "exactly one pro innovator",
@@ -402,7 +401,8 @@ def test_fifteen_complete_skills_and_authority_files() -> None:
             "gpt-5.6 sol",
             "reasoning effort `pro`",
             "one fresh cycle has only these two pro operations",
-            "unresolved + observe_only + sealed",
+            "schema version `4`",
+            "never sends again",
         ),
         "hmasd-workflow-recovery": (
             "pure research task failed",

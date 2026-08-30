@@ -5,6 +5,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-root-control" / "SKILL.md"
+BROWSER_SKILL = REPO_ROOT / ".omp" / "skills" / "hmasd-browser-transport" / "SKILL.md"
 PROTOCOL = REPO_ROOT / "docs" / "project" / "HMASD_OMP_CONTROL_PLANE_PROTOCOL.md"
 AGENTS = REPO_ROOT / ".omp" / "AGENTS.md"
 WATCHDOG = REPO_ROOT / ".omp" / "WATCHDOG.md"
@@ -330,7 +331,7 @@ def test_root_preserves_role_fact_and_lifecycle_boundaries() -> None:
     for fact_anchor in (
         "EM supplies scientific status, bounded claim, decision impact, evidence",
         "CM supplies independent engineering, observation, and verification status",
-        "BrowserTransport supplies provider, conversation, operation, archive, commitment, and transport facts",
+        "A technical, Git, runtime, or transport fact never supplies scientific polarity",
         "Experiment Operator supplies observed process, manifest, measurement, and terminal facts",
         "OMP liveness, runtime, worktree, conflict, commit, and push observations are routing or Git facts",
         "Engineering, transport, Run, runtime, Clerk, and Git facts never imply science or lifecycle",
@@ -342,40 +343,35 @@ def test_root_preserves_role_fact_and_lifecycle_boundaries() -> None:
     assert "Retain every nonterminal leg and route each terminal consequence" in skill
 
 
-def test_root_mediates_the_single_browser_transport_route() -> None:
-    skill = _flat(ROOT_SKILL)
-    agents = _flat(AGENTS)
-    rules = _flat(RULES)
-
-    for shared_anchor in (
-        "`BrowserTransport` is the singleton logical service",
-        "implemented by agent type `hmasd-browser-transport`",
-        "emit a `next_actions` item with `owner: TRANSPORT`",
-        "strict dependencies",
-    ):
-        assert shared_anchor in agents
+def test_root_routes_the_single_linear_browser_transport() -> None:
+    root = _flat(ROOT_SKILL)
+    browser = _flat(BROWSER_SKILL)
 
     for root_anchor in (
-        "BrowserTransport is one Root-mediated logical service",
-        "Root validates requester, direction/stage, provider, mode, immutable operation/idempotency/fingerprint",
-        "prompt path/hash, raw response path, and the separate `product_model` and `reasoning_effort` axes",
-        "serializes the exact operation through `hmasd-browser-transport`",
-        "fingerprints and rereads raw `response.md`",
-        "separately validates immutable current `operation_ref.json`",
-        "returns the common v2 transport fact to the same requester",
-        "BrowserTransport transports only",
-        "does not interpret content, adopt lifecycle, write owner state, or choose follow-up",
-        "EM and CM never spawn or contact one another directly",
+        "BrowserTransport executes an already-authorized exact ChatGPT or Gemini request",
+        "Every send binds the exact provider, target conversation, model/effort",
+        "operation, idempotency key, request fingerprint, prompt, and response path",
+        "Before `send_attempted`, errors retry automatically on that same operation",
+        "After `send_attempted`, BrowserTransport only observes and never sends again",
     ):
-        assert root_anchor in skill
+        assert root_anchor in root
 
-    assert "unknown commitment never resends" in rules
+    for browser_anchor in (
+        "`BrowserTransport` carries one frozen prompt to one exact provider target",
+        "persist `send_attempted: true`",
+        "one hit-tested native pointer activation",
+        "Use zero DOM clicks",
+        "never activate Send again",
+        "The operation receipt is separate from raw `response.md`",
+    ):
+        assert browser_anchor in browser
+
     for retired_role in (
         "hmasd-external-pro-transport",
         "hmasd-external-gemini-transport",
     ):
-        assert retired_role not in skill
-        assert retired_role not in agents
+        assert retired_role not in root
+        assert retired_role not in browser
 
 def test_common_actions_and_clerk_authority_are_closed_and_explicit() -> None:
     agents = _flat(AGENTS)

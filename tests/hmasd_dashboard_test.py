@@ -226,7 +226,7 @@ def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: 
 
     assert walk(first) == []
 
-def test_external_provider_projection_uses_only_current_transport_axes(
+def test_external_provider_projection_uses_only_minimal_receipt_facts(
     tmp_path: Path,
 ) -> None:
     root = tmp_path / "checkout"
@@ -252,24 +252,31 @@ def test_external_provider_projection_uses_only_current_transport_axes(
             "provider": "chatgpt",
             "product_model": "GPT-5.6 Sol",
             "reasoning_effort": "Pro",
+            "target_conversation_url": None,
+            "target_conversation_id": None,
+            "prompt_ref": {"path": "prompt.md", "sha256": "c" * 64},
+            "response_path": response_path,
             "operation_id": "operation-one",
             "idempotency_key": "idempotency-one",
+            "request_fingerprint": "d" * 64,
+            "stable_key": "stable-one",
             "operation_ref": {"path": operation_path, "sha256": "a" * 64},
-            "provider_conversation_ref": "https://chatgpt.com/c/conversation-one",
-            "provider_conversation_id": "conversation-one",
-            "phase": "TERMINAL",
-            "commitment": "ONE_EXACT",
-            "recoverability": "NONE",
-            "observability": "FRESH_COMPLETE",
-            "message_capability": "SEALED",
-            "failure": {"locus": "NONE", "code": "NONE"},
-            "provider_user_message_count": 1,
-            "send_activation_count": 0,
-            "user_message_id": "user-one",
-            "assistant_message_id": "assistant-one",
-            "archive_ref": {"path": response_path, "sha256": "b" * 64},
-            "handoff_ref": None,
-            "completed_at": "2026-08-30T00:00:00Z",
+            "created_at": 1788000000000,
+            "updated_at": 1788000002000,
+            "send_attempted": True,
+            "send_attempted_at": 1788000001000,
+            "observed_conversation_url": "https://chatgpt.com/c/conversation-one",
+            "observed_conversation_id": "conversation-one",
+            "provider_user_message_id": "user-one",
+            "provider_assistant_message_id": "assistant-one",
+            "archive": {
+                "path": response_path,
+                "sha256": "b" * 64,
+                "size_bytes": 5,
+                "projection": "exact",
+                "verified_at": 1788000000000,
+            },
+            "error": None,
         },
         root,
         warnings,
@@ -282,14 +289,13 @@ def test_external_provider_projection_uses_only_current_transport_axes(
     assert projected["review_stage"] == "pro_innovator"
     assert projected["product_model"] == "GPT-5.6 Sol"
     assert projected["reasoning_effort"] == "Pro"
-    assert projected["phase"] == "TERMINAL"
-    assert projected["commitment"] == "ONE_EXACT"
-    assert projected["provider_user_message_count"] == 1
-    assert projected["send_activation_count"] == 0
+    assert projected["send_attempted"] is True
+    assert projected["provider_user_message_id"] == "user-one"
+    assert projected["provider_assistant_message_id"] == "assistant-one"
     assert projected["operation_receipt"]["path"] == operation_path
     assert projected["archive"]["path"] == response_path
-    assert "terminal_state" not in projected
-    assert "terminalState" not in projected
+    assert "phase" not in projected
+    assert "commitment" not in projected
     assert warnings == []
 
 

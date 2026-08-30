@@ -7,8 +7,9 @@ from pathlib import Path
 import pytest
 
 from scripts import hmasd_state
+
 _validate_transport_facts = getattr(hmasd_state, "_validate_transport_facts")
-_validate_transport_transition = getattr(hmasd_state, "_validate_transport_transition")
+_validate_transport_update = getattr(hmasd_state, "_validate_transport_update")
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -24,23 +25,25 @@ def _transport_facts(**changes: object) -> dict[str, object]:
         "provider": "chatgpt",
         "product_model": "GPT-5.6 Sol",
         "reasoning_effort": "Pro",
+        "target_conversation_url": None,
+        "target_conversation_id": None,
+        "prompt_ref": {"path": "prompt.md", "sha256": "1" * 64},
+        "response_path": "response.md",
         "operation_id": "operation-1",
         "idempotency_key": "idempotency:1",
-        "operation_ref": "agentify-operation:operation-1",
-        "provider_conversation_ref": None,
-        "provider_conversation_id": None,
-        "phase": "PREPARE_UI",
-        "commitment": "ZERO_PROVEN",
-        "recoverability": "PRECOMMIT_REPAIR",
-        "observability": "FRESH_COMPLETE",
-        "message_capability": "AVAILABLE",
-        "failure": {"locus": "PRECOMMIT_UI", "code": "DIRECT_NO_ACTIVATION_RECEIPT"},
-        "provider_user_message_count": 0,
-        "send_activation_count": 0,
-        "user_message_id": None,
-        "assistant_message_id": None,
-        "archive_ref": None,
-        "handoff_ref": None,
+        "request_fingerprint": "2" * 64,
+        "stable_key": "stable:1",
+        "operation_ref": {"path": "operation.json", "sha256": "3" * 64},
+        "created_at": 1788000000000,
+        "updated_at": 1788000000000,
+        "send_attempted": False,
+        "send_attempted_at": None,
+        "observed_conversation_url": None,
+        "observed_conversation_id": None,
+        "provider_user_message_id": None,
+        "provider_assistant_message_id": None,
+        "archive": None,
+        "error": {"code": "PRE_SEND_UI"},
     }
     result.update(changes)
     return result
@@ -69,170 +72,145 @@ def _result(payload: dict[str, object]) -> dict[str, object]:
             "requester": "Root",
             "mode": "INNOVATOR",
             "effect_ref": None,
-            "browser_tab_ref": None,
             **payload,
         },
     }
 
 
-def test_current_schemas_expose_only_orthogonal_transport_fields() -> None:
+def test_current_schemas_expose_only_minimal_receipt_facts() -> None:
     result_schema = json.loads(RESULT_SCHEMA.read_text(encoding="utf-8"))
     runtime_schema = json.loads(RUNTIME_SCHEMA.read_text(encoding="utf-8"))
-    assert result_schema["properties"]["schema_version"]["const"] == 2
-    assert runtime_schema["properties"]["schema_version"]["const"] == 2
-    flat_field = "_".join(("transport", "state"))
     contracts = (
         result_schema["$defs"]["transport_payload"],
         runtime_schema["$defs"]["assignment"],
     )
+    deleted = {
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "failure",
+        "provider_user_message_count",
+        "send_activation_count",
+    }
     for contract in contracts:
         required = set(contract["required"])
-        assert flat_field not in required
+        assert not deleted & required
         assert {
-            "product_model",
-            "reasoning_effort",
-            "phase",
-            "commitment",
-            "recoverability",
-            "observability",
-            "message_capability",
-            "failure",
-            "provider_user_message_count",
-            "send_activation_count",
-            "user_message_id",
-            "assistant_message_id",
+            "request_fingerprint",
+            "send_attempted",
+            "send_attempted_at",
+            "provider_user_message_id",
+            "provider_assistant_message_id",
+            "archive",
+            "error",
         } <= required
 
 
-def test_proven_zero_failure_remains_repairable_in_same_assignment() -> None:
-    document = _result(_transport_facts())
-    assert hmasd_state.validate_document("agent_result", document) == document
-    old_flat = copy.deepcopy(document)
-    payload = old_flat["payload"]
-    assert isinstance(payload, dict)
-    payload["_".join(("transport", "state"))] = "_".join(("ZERO", "SEND", "FAILED"))
-    with pytest.raises(hmasd_state.ValidationError):
-        hmasd_state.validate_document("agent_result", old_flat)
+def test_pre_send_error_is_retryable_in_same_operation() -> None:
+    failed = _transport_facts()
+    retrying = _transport_facts(error=None, updated_at=1788000001000)
+    _validate_transport_facts(failed, "failed")
+    _validate_transport_facts(retrying, "retrying")
+    _validate_transport_update(failed, retrying, "operation")
+    assert hmasd_state.validate_document("agent_result", _result(retrying))
 
 
-def test_reserved_crash_becomes_sealed_observe_only() -> None:
-    reserved = _transport_facts(
-        phase="ARMED",
-        message_capability="RESERVED",
-        failure={"locus": "NONE", "code": "NONE"},
+def test_identity_is_immutable_and_send_attempt_is_monotonic() -> None:
+    before = _transport_facts(error=None)
+    attempted = _transport_facts(
+        error=None,
+        send_attempted=True,
+        send_attempted_at=1788000001000,
+        updated_at=1788000001000,
     )
-    unresolved = _transport_facts(
-        phase="VERIFY_COMMITMENT",
-        commitment="UNRESOLVED",
-        recoverability="OBSERVE_ONLY",
-        observability="LOST",
-        message_capability="SEALED",
-        failure={"locus": "COMMIT_BOUNDARY", "code": "NATIVE_ACTIVATION_UNRESOLVED"},
-    )
-    _validate_transport_facts(reserved, "reserved")
-    _validate_transport_facts(unresolved, "unresolved")
-    _validate_transport_transition(reserved, unresolved, "assignment")
+    _validate_transport_update(before, attempted, "operation")
+
+    resend_capable = copy.deepcopy(attempted)
+    resend_capable["send_attempted"] = False
+    resend_capable["send_attempted_at"] = None
     with pytest.raises(hmasd_state.ObservedConflictError):
-        _validate_transport_transition(reserved, copy.deepcopy(reserved), "assignment")
+        _validate_transport_update(attempted, resend_capable, "operation")
 
-
-def test_direct_no_activation_receipt_releases_reservation() -> None:
-    reserved = _transport_facts(
-        phase="ARMED",
-        message_capability="RESERVED",
-        failure={"locus": "NONE", "code": "NONE"},
-    )
-    released = _transport_facts()
-    _validate_transport_transition(reserved, released, "assignment")
-    wrong_receipt = copy.deepcopy(released)
-    wrong_receipt["failure"] = {"locus": "PRECOMMIT_UI", "code": "UI_FAILED"}
+    changed_identity = copy.deepcopy(attempted)
+    changed_identity["idempotency_key"] = "different"
     with pytest.raises(hmasd_state.ObservedConflictError):
-        _validate_transport_transition(reserved, wrong_receipt, "assignment")
+        _validate_transport_update(attempted, changed_identity, "operation")
 
 
-def test_sealed_unresolved_can_advance_by_later_exact_observation() -> None:
-    unresolved = _transport_facts(
-        provider_conversation_ref="https://chatgpt.com/c/conversation-1",
-        provider_conversation_id="conversation-1",
-        phase="VERIFY_COMMITMENT",
-        commitment="UNRESOLVED",
-        recoverability="OBSERVE_ONLY",
-        observability="FRESH_PARTIAL",
-        message_capability="SEALED",
-        failure={"locus": "COMMIT_BOUNDARY", "code": "ACTIVATION_RECEIPT_LOST"},
+def test_ids_and_archive_are_append_only() -> None:
+    attempted = _transport_facts(
+        error=None,
+        send_attempted=True,
+        send_attempted_at=1788000001000,
     )
-    exact = _transport_facts(
-        provider_conversation_ref="https://chatgpt.com/c/conversation-1",
-        provider_conversation_id="conversation-1",
-        phase="WAIT_RESPONSE",
-        commitment="ONE_EXACT",
-        recoverability="POSTCOMMIT_RECOVERY",
-        observability="FRESH_COMPLETE",
-        message_capability="SEALED",
-        failure={"locus": "NONE", "code": "NONE"},
-        provider_user_message_count=1,
-        send_activation_count=0,
-        user_message_id="user-message-1",
+    observed = _transport_facts(
+        error=None,
+        send_attempted=True,
+        send_attempted_at=1788000001000,
+        observed_conversation_url="https://chatgpt.com/c/conversation-1",
+        observed_conversation_id="conversation-1",
+        provider_user_message_id="user-1",
     )
-    _validate_transport_facts(unresolved, "unresolved")
-    _validate_transport_facts(exact, "exact")
-    _validate_transport_transition(unresolved, exact, "assignment")
+    complete = {
+        **observed,
+        "provider_assistant_message_id": "assistant-1",
+        "archive": {
+            "path": "response.md",
+            "sha256": "4" * 64,
+            "size_bytes": 5,
+            "projection": "exact",
+            "verified_at": 1788000000000,
+        },
+    }
+    _validate_transport_update(attempted, observed, "operation")
+    _validate_transport_facts(complete, "complete")
+    _validate_transport_update(observed, complete, "operation")
+
+    removed = copy.deepcopy(complete)
+    removed["provider_user_message_id"] = None
+    with pytest.raises(hmasd_state.ObservedConflictError):
+        _validate_transport_update(complete, removed, "operation")
 
 
-def test_natural_completion_requires_exact_ids_counts_and_archive() -> None:
-    terminal = _transport_facts(
-        provider_conversation_ref="https://chatgpt.com/c/conversation-1",
-        provider_conversation_id="conversation-1",
-        phase="TERMINAL",
-        commitment="ONE_EXACT",
-        recoverability="NONE",
-        observability="FRESH_COMPLETE",
-        message_capability="SEALED",
-        failure={"locus": "NONE", "code": "NONE"},
-        provider_user_message_count=1,
-        send_activation_count=0,
-        user_message_id="user-message-1",
-        assistant_message_id="assistant-message-1",
-        archive_ref={"path": "response.md", "sha256": "a" * 64},
-    )
-    _validate_transport_facts(terminal, "terminal")
-    inconsistent = copy.deepcopy(terminal)
-    inconsistent["provider_user_message_count"] = 0
-    with pytest.raises(hmasd_state.ValidationError):
-        _validate_transport_facts(inconsistent, "terminal")
-
-
-def test_chatgpt_product_model_and_reasoning_effort_are_mandatory() -> None:
-    for field, value in (("product_model", "GPT-5.6"), ("reasoning_effort", "High")):
-        with pytest.raises(hmasd_state.ValidationError):
-            _validate_transport_facts(_transport_facts(**{field: value}), "assignment")
-
-
-def test_gemini_uses_explicit_null_reasoning_effort() -> None:
-    facts = _transport_facts(
-        provider="gemini",
-        product_model="Gemini 3.1 Pro",
-        reasoning_effort=None,
-    )
-    _validate_transport_facts(facts, "assignment")
-    assert hmasd_state.validate_document("agent_result", _result(facts))
-
-    with pytest.raises(hmasd_state.ValidationError):
+def test_minimal_receipt_invariants_reject_impossible_facts() -> None:
+    with pytest.raises(hmasd_state.ValidationError, match="paired"):
         _validate_transport_facts(
-            {**facts, "reasoning_effort": "Pro"},
-            "assignment",
+            _transport_facts(send_attempted=True, send_attempted_at=None),
+            "operation",
+        )
+    with pytest.raises(hmasd_state.ValidationError, match="requires send_attempted"):
+        _validate_transport_facts(
+            _transport_facts(provider_user_message_id="user-1"),
+            "operation",
+        )
+    with pytest.raises(hmasd_state.ValidationError, match="requires provider_user"):
+        _validate_transport_facts(
+            _transport_facts(
+                send_attempted=True,
+                send_attempted_at=1788000001000,
+                provider_assistant_message_id="assistant-1",
+            ),
+            "operation",
         )
 
 
-def test_current_skills_authorize_one_message_and_same_assignment_repair() -> None:
-    text = BROWSER_SKILL.read_text(encoding="utf-8")
+def test_active_contract_is_one_linear_native_send_path() -> None:
+    browser = BROWSER_SKILL.read_text(encoding="utf-8")
     root = ROOT_SKILL.read_text(encoding="utf-8")
     agent = BROWSER_AGENT.read_text(encoding="utf-8")
-    for contract in (text, root, agent):
-        assert "exactly one provider-visible user message" in " ".join(contract.lower().split())
-        assert "GPT-5.6 Sol" in contract
-        assert "reasoning effort" in contract
-    assert "continue automatically" in " ".join(text.split())
-    assert "same assignment" in root
-    assert "fresh operation solely" in root
-    assert "_".join(("transport", "state")) not in root
+    combined = "\n".join((browser, root, agent))
+    assert "persist `send_attempted: true` immediately before" in browser
+    assert "one hit-tested native pointer activation" in browser
+    assert "after `send_attempted`" in browser
+    assert "never activate Send again" in browser
+    for deleted in (
+        "message_capability",
+        "recoverability",
+        "send_activation_count",
+        "provider_user_message_count",
+        "human interlock",
+        "waiver",
+    ):
+        assert deleted not in combined.lower()

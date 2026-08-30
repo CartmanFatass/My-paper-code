@@ -17,6 +17,10 @@
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,6})?Z$"
     },
+    "epoch_milliseconds": {
+      "type": "integer",
+      "minimum": 1
+    },
     "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
     "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
     "path": {
@@ -54,24 +58,25 @@
       "type": "string",
       "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
     },
-    "failure": {
+    "error": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["locus", "code"],
+      "required": ["code"],
       "properties": {
-        "locus": {
-          "type": "string",
-          "enum": ["NONE", "SPEC", "AUTH", "TAB_OWNERSHIP", "PRECOMMIT_UI", "COMMIT_BOUNDARY", "TURN_CONFIRMATION", "RESPONSE", "ARCHIVE"]
-        },
-        "code": { "type": "string", "pattern": "^(?:NONE|[A-Z][A-Z0-9_]{0,127})$" }
-      },
-      "allOf": [
-        {
-          "if": { "properties": { "locus": { "const": "NONE" } }, "required": ["locus"] },
-          "then": { "properties": { "code": { "const": "NONE" } } },
-          "else": { "properties": { "code": { "not": { "const": "NONE" } } } }
-        }
-      ]
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,127}$" }
+      }
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "size_bytes", "projection", "verified_at"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size_bytes": { "type": "integer", "minimum": 1 },
+        "projection": { "const": "exact" },
+        "verified_at": { "type": "integer", "minimum": 1 }
+      }
     },
     "assignment": {
       "type": "object",
@@ -82,31 +87,31 @@
         "requester_identity",
         "request_ref",
         "direction_id",
+        "mode",
+        "effect_ref",
+        "paused",
         "provider",
         "product_model",
         "reasoning_effort",
-        "mode",
-        "effect_ref",
+        "target_conversation_url",
+        "target_conversation_id",
+        "prompt_ref",
+        "response_path",
         "operation_id",
         "idempotency_key",
+        "request_fingerprint",
+        "stable_key",
         "operation_ref",
-        "provider_conversation_ref",
-        "provider_conversation_id",
-        "browser_tab_ref",
-        "phase",
-        "commitment",
-        "recoverability",
-        "observability",
-        "message_capability",
-        "failure",
-        "provider_user_message_count",
-        "send_activation_count",
-        "user_message_id",
-        "assistant_message_id",
-        "archive_ref",
-        "handoff_ref",
-        "paused",
-        "updated_at"
+        "created_at",
+        "updated_at",
+        "send_attempted",
+        "send_attempted_at",
+        "observed_conversation_url",
+        "observed_conversation_id",
+        "provider_user_message_id",
+        "provider_assistant_message_id",
+        "archive",
+        "error"
       ],
       "properties": {
         "assignment_id": { "$ref": "#/$defs/id" },
@@ -116,6 +121,12 @@
         "direction_id": {
           "anyOf": [{ "$ref": "#/$defs/direction_id" }, { "type": "null" }]
         },
+        "mode": {
+          "type": "string",
+          "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
+        },
+        "effect_ref": { "$ref": "#/$defs/nullable_ref" },
+        "paused": { "type": "boolean" },
         "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
         "product_model": { "type": "string", "minLength": 1, "maxLength": 256 },
         "reasoning_effort": {
@@ -124,46 +135,35 @@
             { "type": "null" }
           ]
         },
-        "mode": {
-          "type": "string",
-          "enum": ["INNOVATOR", "CONVERGENCE", "DIVERGENT", "ENGINEERING", "MONITOR"]
+        "target_conversation_url": {
+          "anyOf": [{ "type": "string", "minLength": 1, "maxLength": 2048 }, { "type": "null" }]
         },
-        "effect_ref": { "$ref": "#/$defs/nullable_ref" },
+        "target_conversation_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "prompt_ref": { "$ref": "#/$defs/content_ref" },
+        "response_path": { "$ref": "#/$defs/path" },
         "operation_id": { "$ref": "#/$defs/transport_identity" },
         "idempotency_key": { "$ref": "#/$defs/transport_identity" },
+        "request_fingerprint": { "$ref": "#/$defs/sha256" },
+        "stable_key": { "$ref": "#/$defs/transport_identity" },
         "operation_ref": { "$ref": "#/$defs/ref" },
-        "provider_conversation_ref": { "$ref": "#/$defs/nullable_ref" },
-        "provider_conversation_id": { "$ref": "#/$defs/nullable_transport_identity" },
-        "browser_tab_ref": { "$ref": "#/$defs/nullable_ref" },
-        "phase": {
-          "type": "string",
-          "enum": ["VALIDATE", "PREPARE_UI", "ARMED", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"]
+        "created_at": { "$ref": "#/$defs/epoch_milliseconds" },
+        "updated_at": { "$ref": "#/$defs/epoch_milliseconds" },
+        "send_attempted": { "type": "boolean" },
+        "send_attempted_at": {
+          "anyOf": [{ "$ref": "#/$defs/epoch_milliseconds" }, { "type": "null" }]
         },
-        "commitment": {
-          "type": "string",
-          "enum": ["ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"]
+        "observed_conversation_url": {
+          "anyOf": [{ "type": "string", "minLength": 1, "maxLength": 2048 }, { "type": "null" }]
         },
-        "recoverability": {
-          "type": "string",
-          "enum": ["PRECOMMIT_REPAIR", "OBSERVE_ONLY", "POSTCOMMIT_RECOVERY", "HUMAN_INTERLOCK", "NONE"]
+        "observed_conversation_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "provider_user_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "provider_assistant_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
+        "archive": {
+          "anyOf": [{ "$ref": "#/$defs/archive" }, { "type": "null" }]
         },
-        "observability": {
-          "type": "string",
-          "enum": ["UNOBSERVED", "FRESH_COMPLETE", "FRESH_PARTIAL", "STALE", "LOST", "CONTRADICTORY"]
-        },
-        "message_capability": {
-          "type": "string",
-          "enum": ["AVAILABLE", "RESERVED", "SEALED"]
-        },
-        "failure": { "$ref": "#/$defs/failure" },
-        "provider_user_message_count": { "type": "integer", "enum": [0, 1] },
-        "send_activation_count": { "type": "integer", "enum": [0, 1] },
-        "user_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
-        "assistant_message_id": { "$ref": "#/$defs/nullable_transport_identity" },
-        "archive_ref": { "$ref": "#/$defs/nullable_ref" },
-        "handoff_ref": { "$ref": "#/$defs/nullable_ref" },
-        "paused": { "type": "boolean" },
-        "updated_at": { "$ref": "#/$defs/timestamp" }
+        "error": {
+          "anyOf": [{ "$ref": "#/$defs/error" }, { "type": "null" }]
+        }
       },
       "allOf": [
         {
@@ -174,11 +174,24 @@
               "reasoning_effort": { "const": "Pro" }
             }
           },
-          "else": {
-            "properties": {
-              "reasoning_effort": { "type": "null" }
-            }
-          }
+          "else": { "properties": { "reasoning_effort": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "send_attempted": { "const": false } }, "required": ["send_attempted"] },
+          "then": { "properties": { "send_attempted_at": { "type": "null" } } },
+          "else": { "properties": { "send_attempted_at": { "$ref": "#/$defs/epoch_milliseconds" } } }
+        },
+        {
+          "if": { "properties": { "provider_user_message_id": { "type": "string" } }, "required": ["provider_user_message_id"] },
+          "then": { "properties": { "send_attempted": { "const": true } } }
+        },
+        {
+          "if": { "properties": { "provider_assistant_message_id": { "type": "string" } }, "required": ["provider_assistant_message_id"] },
+          "then": { "properties": { "provider_user_message_id": { "type": "string" } } }
+        },
+        {
+          "if": { "properties": { "archive": { "type": "object" } }, "required": ["archive"] },
+          "then": { "properties": { "provider_assistant_message_id": { "type": "string" } } }
         }
       ]
     }

@@ -60,24 +60,6 @@ PATH_RE = re.compile(r"^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\.\.(?:/|$))(?!.*\\)[^\x00
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 SECRET_NAME_RE = re.compile(r"(?:secret|token|password|credential|private[_-]?key)", re.I)
 
-TRANSPORT_PHASE_TRANSITIONS = {
-    "VALIDATE": frozenset({"VALIDATE", "PREPARE_UI", "TERMINAL"}),
-    "PREPARE_UI": frozenset({"PREPARE_UI", "ARMED", "TERMINAL"}),
-    "ARMED": frozenset({"PREPARE_UI", "VERIFY_COMMITMENT", "WAIT_RESPONSE", "TERMINAL"}),
-    "VERIFY_COMMITMENT": frozenset(
-        {"VERIFY_COMMITMENT", "WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}
-    ),
-    "WAIT_RESPONSE": frozenset({"WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}),
-    "READ_RESPONSE": frozenset({"READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}),
-    "PUBLISH_ARCHIVE": frozenset({"PUBLISH_ARCHIVE", "TERMINAL"}),
-    "TERMINAL": frozenset({"TERMINAL"}),
-}
-TRANSPORT_COMMITMENT_TRANSITIONS = {
-    "ZERO_PROVEN": frozenset({"ZERO_PROVEN", "UNRESOLVED", "ONE_EXACT", "VIOLATION"}),
-    "UNRESOLVED": frozenset({"UNRESOLVED", "ONE_EXACT", "VIOLATION"}),
-    "ONE_EXACT": frozenset({"ONE_EXACT", "VIOLATION"}),
-    "VIOLATION": frozenset({"VIOLATION"}),
-}
 
 
 class StateError(Exception):
@@ -523,17 +505,10 @@ def _validate_external_index(document: Mapping[str, Any]) -> None:
             if ref is not None and not ref["path"].startswith(base):
                 raise _owner_error(f"prompt_refs.{key} is outside the direction archive")
         for provider in round_document["providers"].values():
-            if provider is None:
-                continue
-            _validate_transport_facts(
-                provider,
-                f"rounds[{index}].providers result",
-            )
-            if (provider["phase"] == "TERMINAL") != (
-                provider["completed_at"] is not None
-            ):
-                raise ValidationError(
-                    f"rounds[{index}].providers completion time must match TERMINAL phase"
+            if provider is not None:
+                _validate_transport_facts(
+                    provider,
+                    f"rounds[{index}].providers result",
                 )
 
 
@@ -571,12 +546,8 @@ def _validate_accepted_result(document: Mapping[str, Any]) -> None:
 
 
 def _validate_transport_facts(facts: Mapping[str, Any], label: str) -> None:
-    """Enforce the shared current BrowserTransport state contract."""
+    """Enforce the shared minimal BrowserTransport receipt invariants."""
 
-    failure = facts["failure"]
-    failure_is_none = failure["locus"] == "NONE"
-    if failure_is_none != (failure["code"] == "NONE"):
-        raise ValidationError(f"{label}.failure NONE locus and code must be paired")
     if facts["provider"] == "chatgpt" and (
         facts["product_model"] != "GPT-5.6 Sol"
         or facts["reasoning_effort"] != "Pro"
@@ -587,105 +558,31 @@ def _validate_transport_facts(facts: Mapping[str, Any], label: str) -> None:
     if facts["provider"] == "gemini" and facts["reasoning_effort"] is not None:
         raise ValidationError(f"{label} Gemini target must use reasoning_effort null")
 
-    user_count = facts["provider_user_message_count"]
-    activation_count = facts["send_activation_count"]
-    for field in ("provider_user_message_count", "send_activation_count"):
-        count = facts[field]
-        if (
-            isinstance(count, bool)
-            or not isinstance(count, int)
-            or count not in {0, 1}
-        ):
-            raise ValidationError(f"{label}.{field} must be 0 or 1")
-
-    user_message_id = facts["user_message_id"]
-    assistant_message_id = facts["assistant_message_id"]
-    if (user_count == 0) != (user_message_id is None):
+    send_attempted = facts["send_attempted"]
+    send_attempted_at = facts["send_attempted_at"]
+    if send_attempted != (send_attempted_at is not None):
         raise ValidationError(
-            f"{label}.provider_user_message_count is inconsistent with user_message_id"
+            f"{label}.send_attempted and send_attempted_at must be paired"
+        )
+    user_message_id = facts["provider_user_message_id"]
+    assistant_message_id = facts["provider_assistant_message_id"]
+    archive = facts["archive"]
+    if user_message_id is not None and not send_attempted:
+        raise ValidationError(
+            f"{label}.provider_user_message_id requires send_attempted"
         )
     if assistant_message_id is not None and user_message_id is None:
-        raise ValidationError(f"{label}.assistant_message_id requires user_message_id")
-    conversation_ref = facts["provider_conversation_ref"]
-    conversation_id = facts["provider_conversation_id"]
-    if (conversation_ref is None) != (conversation_id is None):
         raise ValidationError(
-            f"{label} provider_conversation_ref and provider_conversation_id must be paired"
+            f"{label}.provider_assistant_message_id requires provider_user_message_id"
         )
-
-    phase = facts["phase"]
-    commitment = facts["commitment"]
-    recoverability = facts["recoverability"]
-    capability = facts["message_capability"]
-    observability = facts["observability"]
-    archive_ref = facts["archive_ref"]
-
-    if commitment == "ZERO_PROVEN":
-        if phase not in {"VALIDATE", "PREPARE_UI", "ARMED"}:
-            raise ValidationError(f"{label} ZERO_PROVEN is legal only before commitment")
-        if recoverability != "PRECOMMIT_REPAIR":
-            raise ValidationError(f"{label} ZERO_PROVEN requires PRECOMMIT_REPAIR")
-        if capability not in {"AVAILABLE", "RESERVED"}:
-            raise ValidationError(f"{label} ZERO_PROVEN requires AVAILABLE or RESERVED capability")
-        if capability == "RESERVED" and phase != "ARMED":
-            raise ValidationError(f"{label} RESERVED capability is legal only while ARMED")
-        if user_count != 0 or activation_count != 0 or assistant_message_id is not None:
-            raise ValidationError(f"{label} ZERO_PROVEN requires zero messages and activations")
-        if archive_ref is not None:
-            raise ValidationError(f"{label} ZERO_PROVEN cannot have an archive")
-    elif commitment == "UNRESOLVED":
-        if (
-            phase != "VERIFY_COMMITMENT"
-            or recoverability != "OBSERVE_ONLY"
-            or capability != "SEALED"
-        ):
-            raise ValidationError(
-                f"{label} UNRESOLVED requires VERIFY_COMMITMENT, OBSERVE_ONLY, and SEALED"
-            )
-        if observability == "UNOBSERVED":
-            raise ValidationError(f"{label} UNRESOLVED must carry an observation")
-        if (
-            user_count != 0
-            or user_message_id is not None
-            or assistant_message_id is not None
-            or archive_ref is not None
-        ):
-            raise ValidationError(
-                f"{label} UNRESOLVED cannot claim provider message, response, or archive identity"
-            )
-    elif commitment == "ONE_EXACT":
-        if phase not in {"WAIT_RESPONSE", "READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"}:
-            raise ValidationError(f"{label} ONE_EXACT may only wait, read, archive, or terminate")
-        if capability != "SEALED" or user_count != 1:
-            raise ValidationError(
-                f"{label} ONE_EXACT requires SEALED capability and exactly one provider user message"
-            )
-        expected_recoverability = "NONE" if phase == "TERMINAL" else "POSTCOMMIT_RECOVERY"
-        if recoverability != expected_recoverability:
-            raise ValidationError(
-                f"{label} {phase} ONE_EXACT requires {expected_recoverability}"
-            )
-        if phase in {"READ_RESPONSE", "PUBLISH_ARCHIVE", "TERMINAL"} and assistant_message_id is None:
-            raise ValidationError(f"{label} {phase} requires assistant_message_id")
-        if phase in {"WAIT_RESPONSE", "READ_RESPONSE"} and archive_ref is not None:
-            raise ValidationError(f"{label} {phase} cannot claim an archive")
-        if phase == "TERMINAL":
-            if archive_ref is None:
-                raise ValidationError(f"{label} natural completion requires archive_ref")
-            if observability != "FRESH_COMPLETE" or not failure_is_none:
-                raise ValidationError(
-                    f"{label} natural completion requires FRESH_COMPLETE and failure NONE"
-                )
-    else:
-        if (
-            phase != "TERMINAL"
-            or recoverability != "HUMAN_INTERLOCK"
-            or capability != "SEALED"
-            or failure_is_none
-        ):
-            raise ValidationError(
-                f"{label} VIOLATION requires TERMINAL, HUMAN_INTERLOCK, SEALED, and a failure"
-            )
+    if archive is not None and assistant_message_id is None:
+        raise ValidationError(
+            f"{label}.archive requires provider_assistant_message_id"
+        )
+    if archive is not None and archive["path"] != facts["response_path"]:
+        raise ValidationError(
+            f"{label}.archive.path must equal response_path"
+        )
 
 
 def _validate_agent_result(document: Mapping[str, Any]) -> None:
@@ -1318,15 +1215,10 @@ def _validate_external_index_transition(
             provider_label = f"{label}.providers.{provider_name}"
             if next_provider is None:
                 _immutable_conflict(provider_label)
-            _validate_transport_transition(
+            _validate_transport_update(
                 current_provider,
                 next_provider,
                 provider_label,
-            )
-            _require_append_only(
-                current_provider["completed_at"],
-                next_provider["completed_at"],
-                f"{provider_label}.completed_at",
             )
 
 
@@ -1448,15 +1340,11 @@ def _validate_runtime_agents_transition(
             )
 
 
-def _validate_transport_transition(
+def _validate_transport_update(
     current: Mapping[str, Any],
     next_document: Mapping[str, Any],
     label: str,
 ) -> None:
-    if current["phase"] == "TERMINAL":
-        _require_unchanged(current, next_document, f"{label} TERMINAL provenance")
-        return
-
     _require_unchanged_fields(
         current,
         next_document,
@@ -1464,60 +1352,36 @@ def _validate_transport_transition(
             "provider",
             "product_model",
             "reasoning_effort",
+            "target_conversation_url",
+            "target_conversation_id",
+            "prompt_ref",
+            "response_path",
             "operation_id",
             "idempotency_key",
+            "request_fingerprint",
+            "stable_key",
             "operation_ref",
+            "created_at",
         ),
         label,
     )
     for field in (
-        "provider_conversation_ref",
-        "provider_conversation_id",
-        "user_message_id",
-        "assistant_message_id",
-        "archive_ref",
-        "handoff_ref",
+        "observed_conversation_url",
+        "observed_conversation_id",
+        "provider_user_message_id",
+        "provider_assistant_message_id",
+        "archive",
     ):
         _require_append_only(current[field], next_document[field], f"{label}.{field}")
-
-    current_phase = current["phase"]
-    next_phase = next_document["phase"]
-    if next_phase not in TRANSPORT_PHASE_TRANSITIONS[current_phase]:
-        raise ObservedConflictError(
-            f"illegal {label} phase transition {current_phase} -> {next_phase}"
-        )
-    current_commitment = current["commitment"]
-    next_commitment = next_document["commitment"]
-    if next_commitment not in TRANSPORT_COMMITMENT_TRANSITIONS[current_commitment]:
-        raise ObservedConflictError(
-            f"illegal {label} commitment transition {current_commitment} -> {next_commitment}"
-        )
-
-    current_capability = current["message_capability"]
-    next_capability = next_document["message_capability"]
-    if current_capability == "SEALED":
-        if next_capability != "SEALED":
-            _immutable_conflict(f"{label}.message_capability")
-    elif current_capability == "RESERVED" and next_capability == "AVAILABLE":
-        failure = next_document["failure"]
-        if (
-            next_document["phase"] != "PREPARE_UI"
-            or next_document["commitment"] != "ZERO_PROVEN"
-            or next_document["recoverability"] != "PRECOMMIT_REPAIR"
-            or failure["locus"] != "PRECOMMIT_UI"
-            or failure["code"] != "DIRECT_NO_ACTIVATION_RECEIPT"
-        ):
-            raise ObservedConflictError(
-                f"{label} RESERVED may be released only by a direct no-activation receipt"
-            )
-    elif current_capability == "RESERVED" and next_capability != "SEALED":
-        raise ObservedConflictError(
-            f"{label} interrupted RESERVED capability must become SEALED"
-        )
-
-    for field in ("provider_user_message_count", "send_activation_count"):
-        if next_document[field] < current[field]:
-            _immutable_conflict(f"{label}.{field}")
+    if current["send_attempted"] and not next_document["send_attempted"]:
+        _immutable_conflict(f"{label}.send_attempted")
+    _require_append_only(
+        current["send_attempted_at"],
+        next_document["send_attempted_at"],
+        f"{label}.send_attempted_at",
+    )
+    if next_document["updated_at"] < current["updated_at"]:
+        _immutable_conflict(f"{label}.updated_at")
 
 
 def _validate_runtime_browser_assignments_transition(
@@ -1547,7 +1411,7 @@ def _validate_runtime_browser_assignments_transition(
             next_assignment["effect_ref"],
             f"{label}.effect_ref",
         )
-        _validate_transport_transition(current_assignment, next_assignment, label)
+        _validate_transport_update(current_assignment, next_assignment, label)
 
 
 def _validate_runtime_worktrees_transition(

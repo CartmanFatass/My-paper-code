@@ -96,7 +96,7 @@ chore into primitive jobs or manufacture another authorization artifact.
 ## Unchanged external boundary
 
 This skill grants no network/provider submission authority. Agentify remains
-the sole external submission ledger. Existing provider operation identity,
-idempotency, fingerprint, commitment state, and unknown-never-resend semantics
-are unchanged. An external ambiguous outcome remains observe-only and is never
-resent by Clerk.
+the sole external submission ledger. Existing immutable provider target,
+operation, idempotency key, request fingerprint, and unknown-never-resend
+semantics are unchanged. If `send_attempted` is true, Clerk may only preserve or
+observe that exact receipt; it never activates Send.

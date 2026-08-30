@@ -4,7 +4,7 @@ These are the only always-applied workflow rules:
 
 1. A local result-bearing command estimated over 7200 seconds requires a performance-reasonableness review attempt and explicit user approval.
 2. Any operation that affects a branch outside the OMP-owned `omp/*` namespace requires user approval. Temporary assignment branches may affect only their declared scope and may integrate only into `omp/workflow`.
-3. An external submission must have an exact target and Agentify operation, idempotency, fingerprint, and commitment state; unknown commitment never resends.
+3. An external submission must have an exact target, Agentify operation, idempotency key, and request fingerprint. Persist `send_attempted` immediately before one native Send; once true, that operation is observe-only and never sends again.
 4. Exactly one Experiment Operator owns one exact result-bearing command.
 5. Destructive targets and assignment-owned paths must resolve canonically.
 6. Secrets are never exposed in prompts, state, logs, Dashboard APIs, or Git.

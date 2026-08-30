@@ -128,7 +128,6 @@ def test_pro_innovator_and_convergence_are_exactly_ordered() -> None:
         "entry to the same exact registration recovers its journal idempotently",
         "innovator output cannot substitute for synthesis",
         "one fresh cycle has only these two pro operations",
-        "unless exactly waived",
     ):
         assert requirement in review
 
@@ -145,27 +144,27 @@ def test_pro_innovator_and_convergence_are_exactly_ordered() -> None:
         assert requirement in protocol
 
 
-def test_browser_transport_is_root_mediated_and_scientifically_non_authoritative() -> None:
+def test_browser_transport_is_root_routed_and_scientifically_non_authoritative() -> None:
     em = _compact(_skill())
     review = _compact(_external_review())
 
     for requirement in (
-        "em returns frozen requests through root",
+        "em returns each frozen, already-authorized request through root",
         "never sends, performs browser mechanics, contacts, or spawns browsertransport",
         "`next_actions` item with `owner: transport`",
         "independent transport and clerk obligations simultaneously",
     ):
         assert requirement in em
     for requirement in (
-        "singleton root-mediated `browsertransport`",
+        "singleton `browsertransport`",
         "provider: chatgpt",
         "product model `gpt-5.6 sol`",
         "reasoning effort `pro`",
-        "only the current strict agentify review surface may activate",
-        "browsertransport owns only transport facts",
+        "only the current strict agentify review surface may send",
+        "browsertransport owns only the minimal receipt facts",
         "provider completion is not accepted science",
-        "unknown commitment never activates again",
-        "never creates a replacement sender or automatic resend",
+        "persists `send_attempted: true`",
+        "never sends again",
     ):
         assert requirement in review
 
@@ -251,7 +250,7 @@ def test_terminal_gap_preserves_science_without_converting_technical_failure() -
         "never merge a late result into a newer checkpoint",
         "reinterpret transport text as fact",
         "convert speculation into a claim",
-        "never open a fresh cycle for recovery",
+        "never open a fresh cycle merely to recover transport",
         "transport failure is excluded",
         "return `partial` for an evidence or terminal gap",
         "missing review, test, dashboard, advisor, or provider availability is an evidence gap",

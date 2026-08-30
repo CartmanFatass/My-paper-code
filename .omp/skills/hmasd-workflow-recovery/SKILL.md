@@ -76,12 +76,10 @@ effects, reinterpret science, or become a generic approval layer.
      authority across the stale handoff.
    - **Push outcome unknown:** fetch and compare the exact `omp/workflow` remote
      tip before any push; never push again from an unknown outcome.
-   - **External commitment unknown:** observe the same exact Agentify operation
-     and bound provider conversation; never resend, create another operation,
-     or substitute a fresh conversation.
-   - **Transport tuple `VERIFY_COMMITMENT + UNRESOLVED + OBSERVE_ONLY +
-     SEALED`:** observe that same operation and conversation. It never
-     authorizes activation, prompt change, or replacement operation.
+   - **Attempted external send without a provider user ID:** observe the same
+     exact Agentify operation and bound provider target. `send_attempted` is a
+     direct no-resend fact. Never resend it, activate Send, create another
+     operation, or substitute another conversation.
    - **Late transport or specialist output:** compare requester generation and
      checkpoint. A transport result for a stale requester generation is
      superseded evidence: retain its exact refs read-only and never overwrite
@@ -158,10 +156,10 @@ Preserve bytes on schema, version, revision, generation, requester generation,
 checkpoint, PARKED reactivation, writer-phase, or base conflict and stop rather
 than guessing. A stale-generation result is read-only superseded evidence until
 Root reconciles it. Unknown run or result state returns an observation
-condition with no relaunch. `VERIFY_COMMITMENT + UNRESOLVED + OBSERVE_ONLY +
-SEALED` returns an observation condition for the same operation and never
-activates again. A missing Reviewer, test, Dashboard, or Advisor result is an
-evidence gap, not a recovery trigger by itself.
+condition with no relaunch. An external operation with `send_attempted: true`
+is observed in place and never activates Send again. A missing Reviewer, test,
+Dashboard, or Advisor result is an evidence gap, not a recovery trigger by
+itself.
 
 ## Deletion condition
 

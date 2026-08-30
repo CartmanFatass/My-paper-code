@@ -290,10 +290,9 @@ def test_one_experiment_operator_owns_one_exact_command() -> None:
     )
 
 
-def test_exact_pro_pair_and_provider_commitment_mechanics_are_preserved() -> None:
+def test_exact_pro_pair_and_linear_provider_receipt_are_preserved() -> None:
     em = _compact(EM_SKILL)
     review = _compact(EXTERNAL_REVIEW_SKILL)
-    shared = _compact(AGENTS)
 
     _assert_all(
         em,
@@ -309,14 +308,13 @@ def test_exact_pro_pair_and_provider_commitment_mechanics_are_preserved() -> Non
             "Bind `provider: chatgpt`",
             "`review_stage: pro_innovator`, `product_model: GPT-5.6 Sol`",
             "`reasoning_effort: Pro`",
-            "idempotency key, fingerprint, and current transport tuple",
-            "Only the current strict Agentify review surface may activate",
-            "A committed or uncertain activation is sealed and observe-only through the same Agentify operation",
-            "unknown commitment never activates again",
-            "never creates a replacement sender or automatic resend",
+            "immutable operation/idempotency/fingerprint/stable key",
+            "Only the current strict Agentify review surface may send",
+            "Immediately before the one native Send activation it persists `send_attempted: true`",
+            "After that fact is set, it only observes the same provider turn and never sends again",
+            "schema version `4`",
         ),
     )
-    assert "unknown commitment never resends" in shared
 
 
 def test_common_v2_result_envelope_has_closed_multi_action_carrier() -> None:
@@ -423,26 +421,28 @@ def test_common_v2_result_envelope_has_closed_multi_action_carrier() -> None:
     assert "packet_ref" not in clerk_payload["properties"]
     assert "receipt_refs" not in clerk_payload["properties"]
     transport = definitions["transport_payload"]
-    assert "_".join(("transport", "state")) not in transport["properties"]
-    assert set(transport["properties"]["phase"]["enum"]) == {
-        "VALIDATE",
-        "PREPARE_UI",
-        "ARMED",
-        "VERIFY_COMMITMENT",
-        "WAIT_RESPONSE",
-        "READ_RESPONSE",
-        "PUBLISH_ARCHIVE",
-        "TERMINAL",
+    deleted = {
+        "phase",
+        "commitment",
+        "recoverability",
+        "observability",
+        "message_capability",
+        "failure",
+        "provider_user_message_count",
+        "send_activation_count",
     }
-    assert set(transport["properties"]["commitment"]["enum"]) == {
-        "ZERO_PROVEN",
-        "UNRESOLVED",
-        "ONE_EXACT",
-        "VIOLATION",
-    }
-    assert {"product_model", "reasoning_effort", "message_capability"} <= set(
-        transport["required"]
-    )
+    assert not deleted & set(transport["properties"])
+    assert {
+        "product_model",
+        "reasoning_effort",
+        "request_fingerprint",
+        "send_attempted",
+        "send_attempted_at",
+        "provider_user_message_id",
+        "provider_assistant_message_id",
+        "archive",
+        "error",
+    } <= set(transport["required"])
 
 
 def test_obsolete_clerk_operation_schema_is_absent() -> None:

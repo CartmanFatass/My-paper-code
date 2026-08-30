@@ -96,9 +96,9 @@ def test_recovery_skill_covers_every_matrix_row_and_effect_boundary() -> None:
         ("never resend", "no resend", "do not resend"),
         ("never overwrite", "do not overwrite", "superseded"),
         ("browsertransport",),
-        ("verify_commitment",),
-        ("unresolved",),
-        ("observe_only", "observe-only"),
+        ("send_attempted",),
+        ("provider user id", "provider user message"),
+        ("observe the same",),
         ("fail closed",),
     )
     missing = [
@@ -116,10 +116,9 @@ def test_recovery_skill_preserves_browser_parked_and_git_fail_closed_contracts()
         "logical identity `browsertransport`",
         "agent type `hmasd-browser-transport`",
         "exact agentify operation",
-        "bound provider conversation",
-        "never resend",
-        "transport tuple `verify_commitment + unresolved + observe_only + sealed`",
-        "observe that same operation and conversation",
+        "bound provider target",
+        "`send_attempted` is a direct no-resend fact",
+        "never activate send",
         "stale requester generation is superseded evidence",
         "`parked` without a non-null `reactivation_condition_ref` is invalid",
         "git writer conflict or stale base",
@@ -328,17 +327,17 @@ def test_running_reconcile_observes_once_and_duplicate_execute_is_refused(
     assert manifest.read_bytes() == first_bytes
 
 
-def test_external_unknown_commitment_is_not_published_and_response_is_idempotent(
+def test_attempted_send_without_user_id_is_not_published_and_response_is_idempotent(
     tmp_path: Path,
     monkeypatch: Any,
 ) -> None:
-    """Agentify remains authoritative for commitment and exact response bytes."""
+    """An attempted send is never repeated and exact response bytes stay immutable."""
 
     response = tmp_path / "source-response.md"
     response.write_bytes(b"hello")
     unknown_operation = _load(RECOVERY_FIXTURES / "unknown_operation_ref.json")
     monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
-    with pytest.raises(external_review.CommitmentUnknown):
+    with pytest.raises(external_review.ExternalReviewError, match="never resend"):
         external_review.create_archive_if_absent(
             unknown_operation,
             response,
@@ -377,8 +376,8 @@ def test_recovery_attempt_deduplication_and_exhaustion_emit_one_precise_blocker(
     blocker = scenario["exhausted_blocker"]
     assert blocker == {
         "code": "RECOVERY_EXHAUSTED",
-        "failure_class": "external_commitment_unresolved",
-        "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
+        "failure_class": "process_identity_unresolved",
+        "resume_condition": "exact_process_identity_becomes_observable",
         "user_visible": True,
     }
     skill = _recovery_skill()

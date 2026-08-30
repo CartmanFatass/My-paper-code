@@ -65,12 +65,12 @@ external operation, route, or claim-increase opportunity.
    boundary reuses this freeze without silently changing it.
 2. A fresh cycle uses exactly one Pro Innovator from the neutral freeze before
    or alongside local work and exactly one Pro Convergence after local
-   synthesis, unless the user waives that exact still-unsent stage. Innovator
-   remains blind to EM conclusions, favored answers, and local results. Follow
-   `hmasd-scientific-external-review` for prompts, ordering, v2 index, transport,
-   and disposition. EM returns frozen requests through Root as a `next_actions`
-   item with `owner: TRANSPORT`, exact input refs, strict dependencies, effect
-   authority, and stop/reentry; it never sends, performs browser mechanics,
+   synthesis. Innovator remains blind to EM conclusions, favored answers, and
+   local results. Follow `hmasd-scientific-external-review` for prompts,
+   ordering, v4 index, transport, and disposition. EM returns each frozen,
+   already-authorized request through Root as a `next_actions` item with `owner:
+   TRANSPORT`, exact target/operation/prompt/response identities, strict
+   dependencies, and stop/reentry; it never sends, performs browser mechanics,
    contacts, or spawns BrowserTransport. Emit independent Transport and Clerk
    obligations simultaneously, never as an inferred or array-ordered edge.
 3. Derive bounded local work by the executable gap-to-task method below.
@@ -310,17 +310,16 @@ changed paths, state/artifact refs, `semantic_product_ref`,
 interpretation, `CM` only after the exact same-direction integrated-SHA edge is
 satisfied, `CLERK` for concise frozen mechanical intent, `TRANSPORT` for a
 frozen Pro request, `ROOT` for completed reconciliation, or `USER` only for a
-genuine decision or exact waiver boundary. Emit simultaneous independent
-explicitly with strict dependencies. Use materiality `DIRECTION` when judgment
-or the obligation set changes.
+genuine decision. Emit simultaneous independent work explicitly with strict
+dependencies. Use materiality `DIRECTION` when judgment or the obligation set
+changes.
 
 Preserve frozen scope and evidence identity. Never merge a late result into a
-newer checkpoint, reinterpret transport text as fact, resend unknown
-commitment, convert speculation into a claim, or treat provider/engineering
-failure as evidence against a mechanism. Try at most one recovery tied to a new
-information hypothesis: an alternate primary source, a smaller discriminator,
-or observation of the same committed transport operation; never open a fresh
-cycle for recovery.
+newer checkpoint, reinterpret transport text as fact, activate Send after
+`send_attempted`, convert speculation into a claim, or treat provider/
+engineering failure as evidence against a mechanism. Try at most one scientific
+recovery tied to a new information hypothesis: an alternate primary source or
+a smaller discriminator. Never open a fresh cycle merely to recover transport.
 
 If no falsifiable mechanism or decision-changing discriminator survives, the
 observation bound is exhausted, or repeated valid observations add no

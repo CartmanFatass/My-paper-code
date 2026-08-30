@@ -1,142 +1,61 @@
 ---
 name: hmasd-browser-transport
-description: Execute one Root-mediated singleton browser transport assignment safely.
+description: Execute one exact browser transport request and return its receipt.
 ---
 
 # HMASD Browser Transport Service
 
 ## Purpose
 
-Operate the reusable `BrowserTransport` logical service. Root is the only
-dispatcher and return recipient. The service carries one owner-frozen prompt to
-one exact provider-visible user message, observes its causal assistant response,
-and returns mechanical transport facts. It never interprets provider content or
-creates workflow authority.
+`BrowserTransport` carries one frozen prompt to one exact provider target, observes the causal assistant response, and returns mechanical transport facts. It never interprets provider content or creates scientific or workflow authority.
 
-The authorization unit is exactly one provider-visible user message equal to the
-frozen prompt. An OMP assignment, Agentify operation, invocation, attempt,
-activation, click, tab, or browser action is not an additional message budget.
+The authorization unit is one provider-visible user message equal to the frozen prompt. Tabs, invocations, local retries before Send, and observation calls are not additional messages.
 
-## Frozen assignment
+## Frozen request
 
-Accept only a meaning-complete Root assignment derived from one exact
-`next_actions[]` item with `owner: TRANSPORT`. It must freeze:
+Accept one meaning-complete request that fixes:
 
-- assignment ID, direction ID when applicable, requester identity/stage, and Root
-  return route;
-- provider, transport mode, `product_model`, and `reasoning_effort` as separate
-  axes; current ChatGPT requests require `product_model: GPT-5.6 Sol` and
-  `reasoning_effort: Pro`;
-- `NEW` or the exact provider conversation URL and ID;
-- exact prompt path/SHA and exact stage-owned raw response path;
-- one immutable Agentify operation ID, idempotency key, request fingerprint, and
-  operation reference;
-- completion evidence, bounded observation condition, and reentry condition.
+- assignment, requester, direction/stage when applicable, and return route;
+- provider, transport mode, `product_model`, and `reasoning_effort` as separate axes; current ChatGPT requests require `product_model: GPT-5.6 Sol` and `reasoning_effort: Pro`;
+- `NEW` or the exact target conversation URL and ID;
+- exact prompt path/SHA and exact raw response path;
+- immutable Agentify operation ID, idempotency key, request fingerprint, stable key, operation reference, and timestamps.
 
-Reject missing, contradictory, unreadable, non-Root-mediated, wrong-account, or
-wrong-target assignments before any provider activation. Never compose,
-shorten, summarize, translate, wrap, append to, or otherwise change the prompt.
+Reject a missing, contradictory, unreadable, wrong-account, or wrong-target request before Send. Never compose, shorten, wrap, append to, or otherwise change the prompt.
 
-## Object separation
+The provider conversation is the durable external target; a browser tab is only its replaceable view.
 
-Keep these objects distinct:
+## Receipt
 
-1. **Service** — the long-lived `BrowserTransport` OMP identity.
-2. **Assignment** — one frozen requester/return route and one-message
-   authorization.
-3. **Agentify operation** — the immutable operation/idempotency/fingerprint
-   ledger object for that authorization.
-4. **Provider conversation** — the durable provider URL and conversation ID.
-5. **Browser tab** — a replaceable local view; it is never conversation,
-   continuation, routing, or send authority.
-6. **Prompt** — frozen local UTF-8 bytes and SHA, not authorization by itself.
-7. **Raw response** — exact assistant UTF-8 bytes at `response.md`.
-8. **Operation receipt** — separate current JSON at `operation_ref.json`; it
-   freezes the operation, conversation, transport tuple, exact message IDs, and
-   raw-response archive receipt. Raw response bytes are never a JSON transport
-   envelope.
+Persist and return the minimal snake-case receipt facts directly:
 
-## Shared state contract
+- immutable provider and target axes, prompt and response identity, `operation_id`, `idempotency_key`, `request_fingerprint`, `stable_key`, `operation_ref`, and positive epoch-millisecond `created_at` and `updated_at`;
+- `send_attempted` plus nullable positive epoch-millisecond `send_attempted_at`;
+- nullable `observed_conversation_url`, `observed_conversation_id`, `provider_user_message_id`, and `provider_assistant_message_id`;
+- nullable exact `archive` and nullable `error` containing one code.
 
-Return the current snake-case orthogonal fields directly; never bundle them
-under a status alias or use overloaded counter/model fields.
+Only these receipt invariants apply: `send_attempted: false` requires a null timestamp; `send_attempted: true` requires its timestamp; a provider user-message ID requires `send_attempted`; an assistant-message ID requires the user-message ID; an archive requires the assistant-message ID. Immutable identity never changes, `send_attempted` never returns to false, and observed IDs and archive are append-only.
 
-- `phase`: `VALIDATE | PREPARE_UI | ARMED | VERIFY_COMMITMENT | WAIT_RESPONSE |
-  READ_RESPONSE | PUBLISH_ARCHIVE | TERMINAL`
-- `commitment`: `ZERO_PROVEN | UNRESOLVED | ONE_EXACT | VIOLATION`
-- `recoverability`: `PRECOMMIT_REPAIR | OBSERVE_ONLY | POSTCOMMIT_RECOVERY |
-  HUMAN_INTERLOCK | NONE`
-- `observability`: `UNOBSERVED | FRESH_COMPLETE | FRESH_PARTIAL | STALE | LOST |
-  CONTRADICTORY`
-- `message_capability`: `AVAILABLE | RESERVED | SEALED`
-- `failure`: `{locus, code}` where locus is `NONE | SPEC | AUTH | TAB_OWNERSHIP |
-  PRECOMMIT_UI | COMMIT_BOUNDARY | TURN_CONFIRMATION | RESPONSE | ARCHIVE`; only
-  `NONE` pairs with code `NONE`, and other codes are stable uppercase tokens.
-- `provider_user_message_count` and `send_activation_count`: each exactly `0` or
-  `1`.
+The operation receipt is separate from raw `response.md`. Raw provider bytes are never a JSON envelope.
 
-`ZERO_PROVEN + PRECOMMIT_REPAIR + AVAILABLE` is the only send-capable tuple.
-`RESERVED` exists only at the native send boundary. `UNRESOLVED` is exactly
-`VERIFY_COMMITMENT + OBSERVE_ONLY + SEALED`. `ONE_EXACT` is sealed and may only
-wait, read, publish, or terminate. Natural completion is `TERMINAL + ONE_EXACT +
-NONE + FRESH_COMPLETE + SEALED + failure NONE/NONE`, with provider user-message
-count `1`, activation count `0` or `1`, exact conversation/user/assistant
-identities, and an exact archive receipt.
-`TERMINAL` and `SEALED` never become send-capable again.
+## Direct execution
 
-## Closed-loop execution
+Use one short linear path:
 
-For every page mutation use `observe -> interpret -> act -> verify`. Observe the
-current URL, provider/account, conversation, visible `product_model`, visible
-`reasoning_effort`, composer, user/assistant turns, generation controls, errors,
-and overlays. Take one guarded action on one current visible target, then
-re-observe its concrete postcondition. Operator actions are non-sending.
+1. Validate the exact request and reread/fingerprint the prompt bytes.
+2. Open the exact provider target, verify account, product model, reasoning effort, conversation, and visible composer, then insert the exact prompt.
+3. Re-observe the current page and resolve one visible, hit-tested native Send control; persist `send_attempted: true` immediately before one hit-tested native pointer activation and write `send_attempted_at` in the same receipt update. Use zero DOM clicks and never submit with Enter or script execution.
+4. Observe the provider user turn and record its exact message ID and observed conversation URL/ID.
+5. Wait for the causal assistant turn, record its exact message ID, and read the stable response bytes.
+6. Write the exact raw response, fingerprint and reread it, then persist the exact archive receipt.
 
-Before the native send boundary:
+A failure before `send_attempted` remains retryable automatically on the same immutable operation; after `send_attempted`, never activate Send again and only observe the existing provider turn and response. This direct fact guard is the complete unknown-never-resend rule.
 
-1. Fingerprint the prompt with
-   `python scripts/hmasd_file_fingerprint.py --path "<prompt>" --require-utf8`
-   and require exact path, SHA, size, and UTF-8 facts.
-2. Run current Agentify preflight for the exact provider, product model,
-   reasoning effort, conversation, operation, prompt, and response path.
-3. Reversibly repair ordinary pre-boundary sign-in, overlay, selector,
-   navigation, loading, stale-tab, or residual-composer conditions within the
-   same assignment and operation. A proven no-activation result remains
-   `PREPARE_UI + ZERO_PROVEN + PRECOMMIT_REPAIR + AVAILABLE`; continue
-   automatically when the repair makes the frozen target eligible. Do not ask
-   Root for a fresh operation merely because such a browser attempt failed.
-4. Immediately before native activation, reserve capability:
-   `ARMED + ZERO_PROVEN + PRECOMMIT_REPAIR + RESERVED`.
+For every page mutation use `observe -> interpret -> act -> verify`. Pre-Send sign-in, overlay, navigation, loading, stale-tab, selector, or residual-composer errors may be repaired in place while `send_attempted` remains false. A browser tab is only a replaceable view; it is not conversation identity or send authority.
 
-Invoke only the strict current Agentify review query with the same immutable
-operation/idempotency reference. A direct same-invocation receipt with
-`failure.locus: PRECOMMIT_UI`, `failure.code:
-DIRECT_NO_ACTIVATION_RECEIPT`, and both counts zero may release `RESERVED` back
-to `AVAILABLE` and resume `PREPARE_UI`. Any lost or uncertain native activation
-instead seals capability and becomes `VERIFY_COMMITMENT + UNRESOLVED +
-OBSERVE_ONLY + SEALED`. Unknown commitment never activates again.
+## Exact archive
 
-When later observation proves one exact provider user message, record
-`ONE_EXACT + SEALED`, provider user-message count `1`, activation count `0` or
-`1`, and its exact user message ID. A crash after the provider click but before
-the local activation receipt may legitimately leave activation count zero;
-never infer it. Later DOM proof may advance a sealed unresolved observation to
-one exact; this is an observation, not another activation. Wait/read/archive
-only. Any second
-activation, second provider user message, mismatched prompt, inconsistent count
-or ID, wrong product model/effort, or contradictory identity becomes a sealed
-violation; never normalize it away.
-
-## Natural completion and archive
-
-Natural completion requires exact provider, product model, reasoning effort,
-operation, idempotency, request fingerprint, conversation URL/ID, user message
-ID, causal assistant message ID, stable complete response, and exact archive
-receipt. Fingerprint the raw `response.md` with the file-fingerprint helper,
-reread the same path, and require exact SHA and size equality.
-
-The separate current `operation_ref.json` uses snake_case schema version `3`
-and freezes the full terminal tuple plus:
+A complete receipt includes the exact provider, model and effort, operation identities, target and observed conversation identities, prompt identity, user and assistant message IDs, response path, and:
 
 ```json
 {
@@ -150,31 +69,10 @@ and freezes the full terminal tuple plus:
 }
 ```
 
-Do not parse identity from raw response content, synthesize a JSON response
-envelope, accept an overloaded model-only archive, or rewrite provider bytes.
-Return completion only after the raw response and separate operation receipt
-both verify exactly.
+The current external-review `operation_ref.json` uses schema version 4. Never rewrite historical receipts or raw responses, infer identity from response prose, normalize provider bytes, or publish an archive whose reread SHA/size differs.
 
 ## Returned result
 
-Return one common v2 envelope to Root with `role:
-hmasd-browser-transport`, `logical_identity: BrowserTransport`, the inbound
-assignment/generation, and a `kind: transport` payload containing the frozen
-provider target, exact operation/conversation/message/archive refs, and all
-shared state fields above. Nonterminal results may name a later observation of
-the same operation; they never authorize a replacement sender.
+Return the common v2 envelope with `role: hmasd-browser-transport`, `logical_identity: BrowserTransport`, the inbound assignment/generation, and `kind: transport`. Its payload contains the assignment envelope and the minimal receipt facts above. It contains no derived transport status.
 
-## Failure boundary
-
-Before possible activation, repair reversible UI conditions in place while zero
-activation remains proven. After any possible activation, isolate and observe
-the same operation. Never use an ordinary query, composer action, Enter, Retry,
-Continue, Regenerate, or another sending surface. Never change prompt,
-provider, product model, reasoning effort, conversation, operation, or
-idempotency key to escape a failure. A tab may be replaced or closed only as a
-view; its loss is not conversation loss.
-
-The service writes no scientific, engineering, Portfolio, registry, lifecycle,
-external-index, or runtime-map authority. Agentify remains the sole mutable
-submission ledger; Root validates and persists current receipts, and EM/CM
-interpret returned content within their own authority.
+The service writes no scientific, engineering, Portfolio, registry, external-index, or runtime-map authority. Agentify owns the mutable operation ledger; HMASD validates and projects its exact receipt.

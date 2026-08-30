@@ -61,7 +61,7 @@ Root applies these exact invariants on every material wake:
    settlement; Root releases an advancing Portfolio leg only after accepting
    and routing its terminal fact. Technical failure is not science/lifecycle.
 7. **R7_CAPACITY_SEPARATION:** advancing Portfolio capacity, OMP concurrency,
-   BrowserTransport commitment, one-command Operator ownership, exclusive
+   the singleton BrowserTransport, one-command Operator ownership, exclusive
    worktree writing, Git target serialization, and state-path CAS are separate
    resource classes. A full class cannot hide work using another available
    class.
@@ -367,21 +367,30 @@ progress-poll loops, per-tool narration, and Dashboard-only reporting are
 prohibited. OMP Agent Hub (`Alt+A`) remains the detailed live subagent view.
 
 
-EM and CM never send directly to provider-specific transport agents. They
-create a frozen owner-authored request reference and return it to Root. Root
-validates the route, provider (`chatgpt` or `gemini`), mode (`INNOVATOR`,
-`CONVERGENCE`, `DIVERGENT`, `ENGINEERING`, or `MONITOR`), exact product model,
-reasoning effort, operation and idempotency identities, one-message
-authorization, and the orthogonal phase, commitment, recoverability,
-observability, failure, and message-capability facts. It then serializes the
-work through the singleton `BrowserTransport` and returns the resulting fact to
-the exact requester without interpreting the content.
+EM and CM never send directly. They create one frozen, already-authorized
+request reference and return it to Root for routing. The request fixes the
+provider (`chatgpt` or `gemini`), mode (`INNOVATOR`, `CONVERGENCE`, `DIVERGENT`,
+`ENGINEERING`, or `MONITOR`), product model and reasoning effort, target
+conversation, prompt and response identity, operation ID, idempotency key,
+request fingerprint, stable key, and operation reference. Root serializes it
+through the singleton `BrowserTransport` and returns the minimal receipt to the
+exact requester without interpreting provider content.
 
-Direct proof that no send-capable activation began preserves the same
-assignment and message authorization for reversible pre-boundary repair. Once
-activation may have begun, capability is sealed and recovery is observe-only;
-unknown commitment never resends. Provider conversation, operation, attempt,
-tab, direction, OMP task, raw response archive, and structured receipt remain
+BrowserTransport follows one linear sequence: validate the exact request,
+insert the exact prompt, persist `send_attempted: true` immediately before one
+visible hit-tested native pointer activation of Send, observe the provider user
+message ID, wait for the causal assistant message ID, and archive the exact
+response bytes. A failure before `send_attempted` retries automatically on the
+same immutable operation. After `send_attempted`, it only observes and never
+activates Send again.
+
+The shared snake-case receipt contains immutable target/operation/prompt/
+response identities and timestamps; `send_attempted` with its nullable
+timestamp; nullable observed conversation URL/ID and provider user/assistant
+message IDs; nullable exact archive; and nullable one-code error. Only direct
+identity, monotonic send, append-only ID/archive, and ID/archive dependency
+invariants apply. No derived transport status exists. Provider conversation,
+operation, tab, direction, OMP task, raw response archive, and receipt remain
 distinct objects.
 
 ## Clerk, liveness, Git, and recovery

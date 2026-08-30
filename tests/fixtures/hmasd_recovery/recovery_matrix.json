@@ -26,14 +26,14 @@
     },
     {
       "effect": "external",
-      "expected": "verify_existing_operation_never_resend",
+      "expected": "send_attempted_true_observe_only_never_activate_send",
       "operation_id": "11111111-1111-4111-8111-111111111111"
     }
   ],
   "exhausted_blocker": {
     "code": "RECOVERY_EXHAUSTED",
-    "failure_class": "external_commitment_unresolved",
-    "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
+    "failure_class": "process_identity_unresolved",
+    "resume_condition": "exact_process_identity_becomes_observable",
     "user_visible": true
   },
   "generation_mismatch": {
@@ -78,9 +78,9 @@
       "safe": "fetch remote tip and compare"
     },
     {
-      "failure": "external commitment unknown",
-      "forbidden": "resend",
-      "safe": "verify existing/observe"
+      "failure": "send attempted without observed provider user ID",
+      "forbidden": "activating Send again",
+      "safe": "observe the same operation"
     },
     {
       "failure": "late specialist output",
