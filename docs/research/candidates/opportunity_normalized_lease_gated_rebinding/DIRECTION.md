@@ -17,6 +17,79 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
+## Frozen held-out third-spacing transfer question
+
+Fresh material cycle
+`2026-08-30-portfolio-r19-onlgr-heldout-transfer-01` is frozen at
+`SCOPE_FROZEN` under Portfolio revision 19. It changes no accepted result and
+authorizes no provider, CM, enumeration, or run effect. The exact question is
+whether the one-parameter EXP and RATE maps, fitted and locked using only
+spacings one and four, show material out-of-fit value at one prospectively
+held-out third spacing or only a finite two-spacing fit.
+Here transfer means only held-out direct-return performance of the two
+predeclared forms at spacing two. It does not identify semantic physical-rate
+or exponential causality. A result-blind affine interpolation through RATE's
+two fitting probabilities reproduces RATE exactly at spacing two, while an
+analogous log-survival interpolation reproduces EXP. Those simpler finite-fit
+alternatives survive every same-cell control and cap the claim accordingly.
+
+The accepted g3 facts remain intact: on the seven-tick spacing-`{1,4}` host,
+optimized RATE beats EXP by `9753755/536870912`, beats RAW by
+`73746587/536870912`, and lies exactly `5/2048` below the unrestricted
+grid-valued state-blind-memoryless ceiling. That packet remains
+`GENERIC_RATE_SUPPORTED`, not `EXP_LINK_SPECIFIC`, with its original finite
+claim ceiling.
+
+The fresh fitting roster is exactly spacings `{1,4}` at equal physical-time
+weight. Its accepted coordinates are locked as RAW `p*=1/4`, EXP `r*=1/4`,
+and RATE `h*=3/16`. The only held-out roster entry is spacing `Delta_H=2`,
+selected before any held-out return access as the smallest new interior
+positive integer leaving the frozen maps unsaturated and unequal. It yields
+prospective family predictions RAW `q_H=1/4`, EXP `q_H=7/16`, and RATE
+`q_H=3/8`; none may be retuned with the held-out cell.
+
+The primary estimand is the exact held-out direct-return contrast
+`J_2(q_H^EXP)-J_2(q_H^RATE)` under the unchanged `L=7`, cost-two,
+service-before-boundary-action regenerative convention. Required containing
+references are unretuned RAW, the held-out unrestricted `q in Q` memoryless
+ceiling, KEEP, each candidate's matched payload-null shell, and the
+out-of-family age-conditioned competence diagnostic. All deployed families
+receive the same information, physical slots, action shell, and exposure.
+Lower-activity and lower-index tie rules select fitting or unrestricted-grid
+optima only; they never select a family from a cross-family scientific tie.
+The material margin remains exactly `1/32`, with equality on the no-material
+side.
+
+Only a leakage-clean exact tuple containing the two candidate returns, their
+unrestricted-ceiling regrets, RAW value, KEEP/shell headroom, oracle tie
+witness, and service/charge decomposition can close the residual gap. A
+material relative winner that remains more than `1/32` below the held-out
+ceiling is not sufficient for a transfer claim. Invalid identity or leakage
+and technical failure make no scientific update; valid adverse, null, and
+ambiguous outcomes remain distinct.
+
+One bounded adversarial route exposed the finite-interpolant equivalence and
+the need for a total pre-outcome branch function. EM accepts both points. The
+frozen scope closes design admissibility by defining operational form transfer,
+ordering every positive, adverse, null, ambiguous, invalid, and technical
+branch, and recording exact grid containment. Only the held-out value gap
+remains.
+
+The maximum fresh claim is one exact out-of-fit predictive comparison at
+spacing two on the same single-unit, seven-tick, base-`1/16`-grid,
+state-blind-memoryless host. It cannot establish an exponential or
+arbitrary-spacing theorem, learned ONLGR value, causal lease or rebinding,
+population or UAV transfer, safety, deployment, workload, or PPO superiority.
+The earlier terminal provider archive is prior-cycle provenance only and is
+neither reinterpreted nor reopened. No fresh external-review round or request
+is created by this checkpoint.
+
+Exact neutral scope, outcome branches, leakage gates, stop, and reentry are:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-scope-and-grounding.md`
+  (SHA-256
+  `c2831053ecd59d37fbe434f88d93dad8beaf0ae6c58eef5153b2efece27ffdd4`).
+
 ## Resolved successor 04 seven-tick robustness question
 
 Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04`
