@@ -16,47 +16,59 @@ order-erased foundation?
 
 ## Current position
 
-The exact product-population/two-fold composite is rejected as a meaning-preserving one-correction
-law. Cross-fitting identifies the value of actions returned by noisy finite selectors, but
-`D_cf=D_star-0.5*(r_0+r_1)+r_c`; the law supplies no cancellation of differential selector regret,
-and `Q_cf` is not equivalent to disjoint true-optimal action sets. Independently, the antecedent
-source card states three initial marginals but no copula, so its product completion was a second
-population authority. This is a definition-level result only and supplies no actual-plant,
-foundation or adapter result.
+The exact product-population/two-fold composite remains rejected as a meaning-preserving
+one-correction law. Cross-fitting identifies values of actions returned by noisy finite selectors,
+but `D_cf=D_star-0.5*(r_0+r_1)+r_c`; no frozen law cancels differential selector regret, and `Q_cf`
+is not equivalent to disjoint true-optimal action sets. The antecedent source card still supplied
+three initial marginals but no copula.
 
-Fresh g6 WORK selects exactly one successor object: an explicit product joint population plus a
-matched-information oracle-identification theorem. It does not select or blend in a finite-selector
-assay. The new product copula is prospective g6 authority rather than an inherited source fact.
-Future-disturbance expectation must precede action maximization. No theorem or oracle value is
-currently observed.
+The g6 continuation now dispositions the distinct prospective object
+`SCDMP-G6-JOINT-POPULATION-ORACLE-IDENTIFICATION-01` as `PROVED_WITHIN_SCOPE`. Conditional on each
+exact immutable technically accepted competence-passing order-erased foundation, the explicit new
+product population, exact fixed-`k` simulator, complete future-disturbance law and matched
+information, the finite-horizon structural g-formula uniquely defines every `V_f(q,k,s,a)` and
+`Delta_f`. Future-disturbance expectation precedes maximization; finite-selector regret is excluded
+from this new functional by definition, not canceled.
+
+For every paired `(k,s)` cell, `0<=Delta_f(k,s)<=1/2`, with zero exactly when the two complete
+graph-specific argmax sets share an action. Hence population `Delta_f=0` exactly when such an
+intersection exists `mu_k`-almost everywhere for each `k in {7,13}`. The shared action may depend
+measurably on `(k,s)`; no population-global fixed action is implied.
+
+This is structural/model-functional identification only. No competence-passing checkpoint,
+numerical value, strict-positive or null plant result, empirical estimator, actual-plant result,
+adapter result, provider authority, assay, CM fact or run is observed.
 
 ## Current-protocol cycle status
 
-Cycle `2026-08-30.19-portfolio-scdmp-oracle-identification-03` is at
-`SCOPE_FROZEN / OBJECT_SELECTED` with boundary `FRESH_MATERIAL_CYCLE`. Its sole object,
-`SCDMP-G6-JOINT-POPULATION-ORACLE-IDENTIFICATION-01`, is frozen in
-`SCDMP_G6_ORACLE_IDENTIFICATION_SCOPE_AND_DISPOSITION_20260830.md`, SHA-256
-`e61bb585ea9e89e13a7657c46df31704e23288a191ef3d19eb09316a89499677`.
+Cycle `2026-08-30.19-portfolio-scdmp-oracle-identification-03` remains the same fresh material cycle;
+assignment `scdmp-oracle-identification-g6-r1` is its `CONTINUATION`. The prepared milestone is
+`THEOREM_DISPOSITION_COMPLETE / EFFECT_STOP`.
 
-The object explicitly makes `v`, `y` and `phi` mutually independent under their source-card
-marginals, pairs the same public state across the two exact `H/R` graph worlds, conditions on one
-immutable competence-passing foundation, integrates the registered future-disturbance law before
-maximization, and compares graph-specific oracle actions with one common oracle having otherwise
-equal information. Its matched null is zero oracle advantage, equivalently a shared optimal action
-almost everywhere under the explicit population. The future theorem product must be
-`PROVED_WITHIN_SCOPE | CONDITIONAL | REFUTED | OPEN`; identification success would still not
-observe a positive or null numerical-plant value.
+The complete proof is
+`SCDMP_G6_ORACLE_IDENTIFICATION_THEOREM_DISPOSITION_20260830.md`, SHA-256
+`55e5c23f2cfafcfac0bfbee05b58118412c3ef98de49b8d1b220d6ef69b4364b`. It constructs the finite
+disturbance g-formula, establishes single-valuedness, boundedness and Borel measurability, proves
+cell nonnegativity and both directions of the complete-argmax intersection lemma, lifts that lemma
+to the population almost-everywhere null, and checks ties, first-hold absorption, timeout,
+common-random-number coupling, information equality, expectation order and circularity.
 
-The g6 object-choice gap required no specialist leaf because retained evidence already separates
-the decision consequences. The exact residual gap is the frozen oracle-identification proof.
-After this direction candidate is integrated on `omp/workflow`, a fresh-base continuation may open
-that proof route and the mandatory neutral Pro Innovator stage. No fresh prompt, external round,
-provider operation, send, CM request or assay exists at this checkpoint.
+`SCDMP-G6-GAP-ORACLE-ID-PROOF-01` is closed with no residual premise under the frozen assumptions.
+The exact residual scientific question is now value, not identification: after an exact immutable
+foundation has passed the complete competence gate, a separately authorized conformant certificate
+would have to establish strict-positive value, exact zero or valid ambiguity for the true
+expectation-before-max functional. A finite-selector assay cannot substitute.
 
-The v3 external-review index remains revision `3` with no active rounds and one append-only
-historical archive. Its legacy Convergence operation and cross-swapped round identity are
-provenance only: they do not satisfy either Pro stage for this fresh cycle and cannot be resent or
-replaced. Earlier native-I/C/O and opportunity-law cycles remain bounded historical evidence.
+Research state revision `8` remains observed input; no state CAS was authorized. The current
+external-review index is schema/revision `4/4`, SHA-256
+`dbf8335a740b8b8bcff683cd4ef6c53795f02693b73365cde44ccfab2ba9774e`, with no active round. No
+prompt, provider operation, Pro result or review authority was created or used, and no review stage
+is fabricated or treated as complete. No external, engineering, result, lifecycle or target-Git
+Effect opened.
+
+The theorem gap reopens only for a concrete same-input nonuniqueness witness or a changed
+authoritative transition, checkpoint, action, duration, population, comparator-information or
+expectation-order premise. Runtime, Git, lifecycle, provider and index facts alone do not reopen it.
 
 ## Evidence set
 
@@ -67,16 +79,25 @@ replaced. Earlier native-I/C/O and opportunity-law cycles remain bounded histori
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G6_ORACLE_IDENTIFICATION_SCOPE_AND_DISPOSITION_20260830.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G6_ORACLE_IDENTIFICATION_THEOREM_DISPOSITION_20260830.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json`
 - `agent://EMSemigroupConsistentDurationModelPolicyG5`
+- `agent://SCDMPOracleG6R1.OracleProof`
 
-The g6 artifact records exact hashes, locators, epistemic roles, the verified retained g5 refs and
-the canonical evidence-set digest.
+The g6 scope artifact preserves the frozen question/evidence identity and the exact retained g5
+hashes. The theorem disposition records the current authority hashes, exact locators, assumption
+map, dependency chain, epistemic separation, claim ceiling, discriminator, done reason and reentry.
+The local analytical route is method coverage rather than independent evidence or decision
+authority.
 
 ## Provenance boundary
 
-Historical source cards, retained g5 records, the strict response and the v3 historical archive
-remain provenance. The legacy archive is not an active round or resend authority. This direction
-authority adopts only the prospective g6 population-and-theorem object and does not rewrite prior
-bytes, repair the rejected composite, infer an exact-plant result or authorize execution.
+Historical source cards, retained g5 records, the historical strict response and its legacy archive
+remain provenance. The current empty v4 external-review index is an orthogonal workflow fact, not a
+scientific premise, completed review or resend authority.
 
+This direction newly adopts only the prospective g6 product joint population and the proved
+fixed-`k` structural oracle-identification theorem. It does not make the old copula inherited,
+rewrite prior bytes, cancel selector regret, reinterpret `Q_cf`, repair the rejected composite,
+instantiate the alternative finite-selector assay, infer foundation competence, report a numerical
+or actual-plant result, or authorize value execution.
