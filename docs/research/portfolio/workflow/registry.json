@@ -16,13 +16,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/active_post_churn_population_flow_identification",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/active_post_churn_population_flow_identification/workflow/research/state.json"
     },
@@ -42,7 +42,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/acvc",
       "reactivation_condition_ref": null,
@@ -64,13 +64,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/commitment_residual_triggered_options",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/commitment_residual_triggered_options/workflow/research/state.json"
     },
@@ -90,36 +90,40 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/covariance_calibrated_information_clock",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/covariance_calibrated_information_clock/workflow/research/state.json"
     },
     {
       "abbreviation": "DISH",
       "agent": {
-        "generation": 2,
+        "generation": 3,
         "job_name": "EMDegradedIncumbentShadowHandover",
         "logical_identity": "EM-degraded_incumbent_shadow_handover",
-        "runtime_ref": "EMDegradedIncumbentShadowHandoverG2"
+        "runtime_ref": null
       },
       "dependencies": [],
       "engineering_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/external-review/index.json",
       "id": "degraded_incumbent_shadow_handover",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "PARKED",
       "lifecycle_decision_ref": {
         "heading": "User-selected four-slot allocation",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/degraded_incumbent_shadow_handover",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "Imported 33-direction scientific portfolio",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
+      },
       "research_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/research/state.json"
     },
     {
@@ -138,13 +142,13 @@
       "lifecycle_decision_ref": {
         "heading": "User-selected four-slot allocation",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/dual_epoch_receipt_survival",
       "reactivation_condition_ref": {
         "heading": "Imported 33-direction scientific portfolio",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/research/state.json"
     },
@@ -164,7 +168,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/ec4g_r1",
       "reactivation_condition_ref": null,
@@ -186,13 +190,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/eociv_lite",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/eociv_lite/workflow/research/state.json"
     },
@@ -212,7 +216,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/event_triggered_budgeted_cooperative_renewal",
       "reactivation_condition_ref": null,
@@ -234,13 +238,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/workflow/research/state.json"
     },
@@ -260,7 +264,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/field_slot_coordination",
       "reactivation_condition_ref": null,
@@ -282,13 +286,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/finite_semantic_boundary_support",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/finite_semantic_boundary_support/workflow/research/state.json"
     },
@@ -308,7 +312,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/metric_ground_transport_allocation",
       "reactivation_condition_ref": null,
@@ -317,10 +321,10 @@
     {
       "abbreviation": "ONLGR",
       "agent": {
-        "generation": 4,
+        "generation": 6,
         "job_name": "EMOpportunityNormalizedLeaseGatedRebinding",
         "logical_identity": "EM-opportunity_normalized_lease_gated_rebinding",
-        "runtime_ref": "EMOpportunityNormalizedLeaseGatedRebindingG4"
+        "runtime_ref": "ONLGRInnovatorAuthorG6R1"
       },
       "dependencies": [],
       "engineering_state_path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/engineering/state.json",
@@ -330,7 +334,7 @@
       "lifecycle_decision_ref": {
         "heading": "User-selected four-slot allocation",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/opportunity_normalized_lease_gated_rebinding",
       "reactivation_condition_ref": null,
@@ -352,7 +356,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/optimizer_entropy_exposure_boundary_relay",
       "reactivation_condition_ref": null,
@@ -374,7 +378,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/orbit_shadow_read",
       "reactivation_condition_ref": null,
@@ -396,7 +400,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/recct_lite",
       "reactivation_condition_ref": null,
@@ -418,13 +422,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/renewal_indexed_score_plasticity",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/renewal_indexed_score_plasticity/workflow/research/state.json"
     },
@@ -444,13 +448,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/roster_consistent_latent_exploration",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/research/state.json"
     },
@@ -470,7 +474,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/roster_smf",
       "reactivation_condition_ref": null,
@@ -492,7 +496,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/scope_1s",
       "reactivation_condition_ref": null,
@@ -514,36 +518,40 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/semantic_graphon_shared_policy",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/research/state.json"
     },
     {
       "abbreviation": "SCDMP",
       "agent": {
-        "generation": 7,
+        "generation": 8,
         "job_name": "EMSemigroupConsistentDurationModelPolicy",
         "logical_identity": "EM-semigroup_consistent_duration_model_policy",
-        "runtime_ref": "EMSemigroupConsistentDurationModelPolicyG7"
+        "runtime_ref": null
       },
       "dependencies": [],
       "engineering_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json",
       "id": "semigroup_consistent_duration_model_policy",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "PARKED",
       "lifecycle_decision_ref": {
         "heading": "User-selected four-slot allocation",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/semigroup_consistent_duration_model_policy",
-      "reactivation_condition_ref": null,
+      "reactivation_condition_ref": {
+        "heading": "Imported 33-direction scientific portfolio",
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
+      },
       "research_state_path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/research/state.json"
     },
     {
@@ -562,13 +570,13 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/ucope",
       "reactivation_condition_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "research_state_path": "docs/research/candidates/ucope/workflow/research/state.json"
     },
@@ -588,7 +596,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vap_folr_core",
       "reactivation_condition_ref": null,
@@ -610,7 +618,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/variable_n_fleet_churn",
       "reactivation_condition_ref": null,
@@ -619,10 +627,10 @@
     {
       "abbreviation": "VQFP",
       "agent": {
-        "generation": 4,
+        "generation": 5,
         "job_name": "EMVoronoiQuadratureFieldPolicy",
         "logical_identity": "EM-voronoi_quadrature_field_policy",
-        "runtime_ref": "EMVoronoiQuadratureFieldPolicyG4"
+        "runtime_ref": "VQFPCurrentContractG5R2"
       },
       "dependencies": [],
       "engineering_state_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/engineering/state.json",
@@ -632,7 +640,7 @@
       "lifecycle_decision_ref": {
         "heading": "User-selected four-slot allocation",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/voronoi_quadrature_field_policy",
       "reactivation_condition_ref": null,
@@ -654,7 +662,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_02",
       "reactivation_condition_ref": null,
@@ -676,7 +684,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_03",
       "reactivation_condition_ref": null,
@@ -698,7 +706,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_04",
       "reactivation_condition_ref": null,
@@ -720,7 +728,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_05",
       "reactivation_condition_ref": null,
@@ -742,7 +750,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_06_mssr",
       "reactivation_condition_ref": null,
@@ -764,7 +772,7 @@
       "lifecycle_decision_ref": {
         "heading": "OMP non-control migration boundary",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
       },
       "path": "docs/research/candidates/vsp_c1",
       "reactivation_condition_ref": null,
@@ -773,11 +781,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "f331ca845f75f03c6f441fab7816591883f23ba0ad50c6a8aeaf321ca3afd3e9"
+    "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
   },
-  "revision": 22,
+  "revision": 23,
   "schema_version": 1,
-  "updated_at": "2026-08-30T19:06:32Z",
+  "updated_at": "2026-08-30T21:01:59Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }
