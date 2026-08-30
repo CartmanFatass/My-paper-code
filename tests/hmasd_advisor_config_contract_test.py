@@ -6,10 +6,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_CONFIG = """modelRoles:
-  advisor: xai-oauth/grok-4.6:high
+  advisor: openai-codex/gpt-5.6-luna:xhigh
 
 advisor:
-  enabled: false
+  enabled: true
 
 autoResume: true
 
@@ -84,31 +84,40 @@ def _frontmatter(path: Path) -> str:
     return text[: end + 5]
 
 
-def test_project_config_matches_phase_one_exactly() -> None:
+def test_project_config_matches_current_advisor_contract_exactly() -> None:
     assert (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8") == EXPECTED_CONFIG
 
 
-def test_watchdog_routes_by_primary_role_without_authority() -> None:
+def test_watchdog_routes_root_simplicity_without_authority() -> None:
     watchdog = (REPO_ROOT / ".omp" / "WATCHDOG.md").read_text(encoding="utf-8")
-    expected_routes = (
-        "Root, hmasd-em, hmasd-cm     -> no Advisor",
-        "hmasd-implementer,\nhmasd-implementer-terra      -> engineering",
-        "all other roles              -> no Advisor",
-    )
-    for route in expected_routes:
+    for route in (
+        "Root                          -> local-project simplicity",
+        "hmasd-implementer             -> engineering",
+        "hmasd-implementer-terra       -> engineering",
+        "all other roles               -> no Advisor",
+    ):
         assert route in watchdog
-    assert "one role-aware" in watchdog.lower()
-    assert "roster" not in watchdog.lower()
-    assert "read-only" in watchdog.lower()
-    assert "non-gating" in watchdog.lower()
-    for forbidden in ("approve", "reject", "block", "authorize", "dispatch", "mutate", "run tests"):
-        assert f"never {forbidden}" in watchdog.lower()
+    for principle in (
+        "one trusted local repository",
+        "Root hand-writes operation JSON",
+        "one coherent chore is split into per-primitive agents",
+        "content-addressed authorization",
+        "long-lived chore subagent",
+        "**Directness:**",
+        "**Threat:**",
+        "**Generation:**",
+        "**Weight:**",
+    ):
+        assert principle in watchdog
+    assert "read-only and non-authoritative" in watchdog
+    assert "never approves, rejects, blocks, authorizes, mutates, runs" in watchdog
 
 
 def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
     assert _agent_advisor_mapping(config) == EXPECTED_ADVISORS
-    assert "advisor:\n  enabled: false" in config
+    assert "advisor:\n  enabled: true" in config
+    assert "advisor: openai-codex/gpt-5.6-luna:xhigh" in config
     assert "  batch: true" in config
     assert "  isolation:\n    mode: auto\n    apply: false\n    merge: patch" in config
 
@@ -125,13 +134,13 @@ def test_native_advisor_matrix_and_cold_revival_metadata() -> None:
 
     instructions = (REPO_ROOT / ".omp" / "AGENTS.md").read_text(encoding="utf-8")
     watchdog = (REPO_ROOT / ".omp" / "WATCHDOG.md").read_text(encoding="utf-8")
-    assert "task.agentAdvisor[agentName]" in watchdog
+    assert "Root's continuous Advisor uses the dedicated" in instructions
+    assert "`task.agentAdvisor[agentName]`" in watchdog
     assert "`session_init`" in watchdog
-    assert "cold revival" in watchdog.lower()
-    assert "not a direct mutation of an already running Hub job by job ID" in watchdog
-    assert "newly resolved child session rather than\nan in-place mutation" in watchdog
-    assert "no Advisor" in watchdog
-
+    assert "cold-revival contract" in watchdog.lower()
+    assert "cannot mutate it in place" in watchdog
+    assert "material role change creates a new session" in watchdog
+    assert "EM, CM, Clerk, Transport" in instructions
 
 def test_disabled_bundled_agents_and_project_leaf_advisors_are_explicit() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")

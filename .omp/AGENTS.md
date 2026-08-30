@@ -26,11 +26,11 @@ the target transport inventory contains the singleton
 - Root repeats that prompt-driven reconciliation after resume or a detected
   compaction boundary. It uses the persisted goal reference, not a generic
   persistent-goal engine or a post-compaction hook.
-- `autoResume` is enabled and Root's continuous Advisor is disabled in
-  `.omp/config.yml`. `task.agentAdvisor` contains only the two Implementer
-  leaves, enabling engineering advice for `hmasd-implementer` and
-  `hmasd-implementer-terra`. Every other project role runs without a
-  continuous Advisor.
+- `autoResume` is enabled. Root's continuous Advisor uses the dedicated
+  local-project simplicity route in `.omp/WATCHDOG.md`; `task.agentAdvisor`
+  retains separate engineering mappings only for `hmasd-implementer` and
+  `hmasd-implementer-terra`. EM, CM, Clerk, Transport, research leaves, and
+  every other project role run without a continuous Advisor.
 - Root stops only at `IDLE`, `COMPLETE`, an explicit user decision boundary, or
   an exhausted safe recovery route. It never runs a recurring primary-agent
   model poller.
@@ -299,11 +299,12 @@ the target transport inventory contains the singleton
 
 ## Native Advisor boundary
 
-`.omp/WATCHDOG.md` is the single role-aware continuous Advisor contract.
-Advisors inspect transcript deltas read-only and non-gating. They never approve,
-reject, block, authorize, mutate, run tests, dispatch agents, or become a state
-authority. The configured matrix, not an invocation profile or a job-ID
-mutation, selects the model.
+`.omp/WATCHDOG.md` is the single role-aware continuous Advisor contract. Root
+uses its local-project simplicity route; the two Implementers use the separate
+engineering route. Advisors inspect transcript deltas read-only and
+non-gating. They never approve, reject, block, authorize, mutate, run tests,
+dispatch agents, or become a state authority. The configured matrix, not an
+invocation profile or a job-ID mutation, selects the model.
 - Hub steering may be absent from an Advisor transcript. Implementer
   assignments are therefore scope-frozen after spawn: a material change to
   goals, non-goals, owned paths, authorization, or interfaces cancels that leaf

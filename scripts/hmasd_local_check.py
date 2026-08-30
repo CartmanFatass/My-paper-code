@@ -29,6 +29,9 @@ KNOWN_STATE_PATHS = {
     ".omp/runtime/browser_assignments.json": "runtime_browser_assignments",
 }
 FOCUSED_TESTS = {
+    ".omp/AGENTS.md": "tests/hmasd_advisor_config_contract_test.py",
+    ".omp/WATCHDOG.md": "tests/hmasd_advisor_config_contract_test.py",
+    ".omp/config.yml": "tests/hmasd_advisor_config_contract_test.py",
     "scripts/hmasd_clerk.py": "tests/hmasd_clerk_test.py",
     "scripts/hmasd_dashboard.py": "tests/hmasd_dashboard_test.py",
     "scripts/hmasd_external_review.py": "tests/hmasd_external_review_test.py",

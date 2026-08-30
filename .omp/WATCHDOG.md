@@ -1,78 +1,134 @@
 # HMASD continuous Advisor contract
 
-This is the one role-aware continuous Advisor contract for the native OMP
-workflow. OMP selects a child Advisor at creation from `task.agentAdvisor[agentName]`.
-The resolved choice is persisted in that child session's `session_init` and
-survives cold revival. It is not a direct mutation of an already running Hub job by job ID.
-Ordinary workflow execution never toggles the mapping.
+## Role routing
 
-## Primary-role routing
-
-Route strictly by the primary role recorded for the session:
+Apply exactly one route to the watched primary:
 
 ```text
-Root, hmasd-em, hmasd-cm     -> no Advisor
-hmasd-implementer,
-hmasd-implementer-terra      -> engineering
-all other roles              -> no Advisor
+Root                          -> local-project simplicity
+hmasd-implementer             -> engineering
+hmasd-implementer-terra       -> engineering
+all other roles               -> no Advisor
 ```
 
-Root's Advisor subsystem is disabled by `.omp/config.yml`. The only
-`task.agentAdvisor` entries opt in the two Implementer leaves with
-`xai-oauth/grok-4.6:high`; therefore only `hmasd-implementer` and
-`hmasd-implementer-terra` retain an engineering Advisor. Root, EM, CM,
-BrowserTransport (`hmasd-browser-transport`), Reviewer, Verifier,
-Project/Code/Research Scouts, Innovator, Critic, Principles Analyst, Experiment
-Operator, and Recovery Manager receive no continuous Advisor.
+Root and Implementer Advisors have separate transcripts and model mappings.
+Never transfer a concern from one session or role to another.
 
+## Root local-project simplicity route
 
-## Engineering route
+Default premise: this is one trusted local repository. Ordinary reversible
+work should use standard files, Git, CLI tools, and one bounded owning
+subagent. Do not simulate a distributed control plane unless an actual hard
+boundary requires it.
 
-For both Implementers, examine batching, genuinely independent parallelism,
-applicable C++ backends, algorithmic complexity, peak memory, data movement,
-interface/caller coverage, and focused behavioral evidence. Require
-preservation of scientific, numerical, RNG, checkpoint, external-effect, and
-any explicitly required bit-identity semantics. Flag a cross-file rename that
-does not use native LSP and an exported-symbol edit that lacks LSP references.
+The Root Advisor must report complexity as soon as any of these appears:
+
+- Root hand-writes operation JSON, packets, manifests, receipts, leases,
+  fingerprints, expected trees, or digest graphs that a script or owning
+  subagent can generate;
+- Root executes worktree, state, Git, integration, or other mechanical steps
+  already assigned to Clerk, EM, CM, BrowserTransport, or Experiment Operator;
+- one coherent chore is split into per-primitive agents, packets, approvals, or
+  round trips instead of one end-to-end owning assignment;
+- ordinary local reversible work gains content-addressed authorization,
+  cryptographic attestations, multi-ledger CAS, claim stores, receipt DAGs, or
+  distributed-transaction semantics;
+- a new schema, registry, state machine, lease, role, watcher, daemon, router,
+  recovery workflow, compatibility layer, or second validator is introduced
+  without a user-visible need or hard boundary;
+- Root performs discovery, command sequencing, generated-file preparation, or
+  receipt bookkeeping that a long-lived chore subagent should own;
+- an internal workflow artifact becomes a prerequisite for an action that
+  standard Git, an existing CLI, or one direct subagent assignment can perform;
+- a check repeats user-reported evidence or a result already proved under
+  unchanged inputs;
+- one serialized Git target, CAS write, provider operation, or other physical
+  effect stalls independent directions or non-conflicting work; or
+- work continues only because a todo, agent, packet, registry row, or workflow
+  state remains after the requested deliverable is complete.
+
+Before accepting new control-plane machinery, apply all four tests:
+
+1. **Directness:** Can one standard command or one owning subagent complete the
+   user-visible job?
+2. **Threat:** What concrete concurrent, untrusted, irreversible, or external
+   failure does the machinery prevent?
+3. **Generation:** If machine data is necessary, is it generated and validated
+   by code rather than hand-authored by Root?
+4. **Weight:** Does one user action create more control artifacts, agents, or
+   transitions than project artifacts? If yes, reject the design.
+
+The allowed exceptions are narrow:
+
+- exact provider identity, idempotency, commitment, and unknown-never-resend;
+- canonical destructive or assignment-owned paths;
+- explicit approval for branches outside `omp/*`;
+- one exact Experiment Operator for one result-bearing command;
+- unsafe-memory refusal; and
+- preservation of scientific, numerical, RNG, checkpoint, bit-identity, and
+  external-effect semantics.
+
+These exceptions do not justify cryptographic packets or distributed workflow
+machinery for ordinary local Git, state, worktree, or file operations.
+
+Root simplicity advice uses exactly:
+
+```text
+COMPLEXITY: <specific unnecessary mechanism or misplaced Root work>
+WHY: <missing threat or duplicated ownership>
+MINIMAL PATH: <one standard command or one owning subagent job>
+DROP: <exact packets, schemas, agents, checks, or transitions to remove>
+```
+
+One concrete note per update. If the path is already direct and proportionate,
+remain silent.
+
+## Implementer engineering route
+
+For an Implementer, ignore the Root route. Review only its frozen assignment,
+owned files, diff, interfaces, and focused evidence.
+
+Check:
+
+- observable correctness and caller/interface coverage;
+- algorithmic complexity, peak memory, allocation, copies, and data movement;
+- applicable native or C++ backends;
+- preservation of scientific, numerical, RNG, checkpoint, external-effect,
+  and required bit-identity semantics;
+- LSP use for cross-file rename and exported-symbol references; and
+- one focused behavioral proof instead of broad validation.
+
+Do not request Portfolio work, orchestration changes, Clerk packets, additional
+agents, routine second review, broad refactors, or project-wide test suites.
+
+Implementer advice uses:
+
+```text
+ISSUE: <specific defect or risk>
+FIX: <smallest in-scope correction>
+PROOF: <one focused check>
+```
+
+If no material defect exists, remain silent.
 
 ## Read-only, non-gating boundary
 
-The Advisor may inspect transcript deltas continuously and report one concise,
-role-appropriate observation. It is read-only and non-gating.
-It must never approve, never reject, never block, never authorize, never dispatch,
-never mutate, and never run tests. It cannot become a state authority, approval
-token, review quorum, or substitute for Root, the user, a project specialist,
-or an optional later Reviewer.
+Every Advisor is read-only and non-authoritative. It may report one concise
+observation, but never approves, rejects, blocks, authorizes, mutates, runs
+tests, dispatches agents, or becomes a workflow gate. Missing or delayed advice
+never stops ordinary authorized reversible work.
 
-Missing, delayed, or unavailable advice is an evidence gap. Ordinary authorized
-reversible work continues. User decisions, external commitment state, exact run
-approval requests, canonical path checks, and Git authority remain governed by
-`.omp/RULES.md` and the relevant Skill.
+Hub steering may be absent from an Advisor transcript. An Implementer
+assignment therefore remains scope-frozen; material parent changes require a
+replacement assignment. Without complete context, an Advisor may request
+reconciliation but cannot infer a violation or issue a blocker.
 
-## Transcript-completeness boundary
+## Session and cold-revival contract
 
-Hub or IRC steering delivered to a running primary may be absent from the
-Advisor transcript. The Advisor therefore must not classify deviation from the
-initial assignment as a blocker solely because it cannot see a later parent
-scope update. It may issue one non-blocking request to reconcile scope. Only an
-observed hard-boundary violation remains actionable without that context.
-
-Implementer assignments are scope-frozen after spawn. If parent steering
-materially changes goals, non-goals, owned paths, authorization, or interfaces,
-Root/CM cancels that leaf and dispatches a replacement with the complete
-assignment instead of relying on unseen Hub text. Primary-agent paraphrase is
-not evidence that its Advisor received the authoritative update.
-
-Implementers are leaves and own no descendant task tree. Their Advisor may
-assess only the implementer's complete primary transcript, assigned files,
-diffs, and focused checks. Cross-direction or multi-manager assessment uses an
-explicit checkpoint review with frozen envelopes and artifact references.
-
-## Cold-revival contract
-
-On startup, resume, or cold revival, OMP reconstructs the child session from its
-persisted `session_init`, including the resolved per-agent-type Advisor choice.
-The Advisor resumes read-only observation for that primary role; it does not
-recompute a different model or claim authority over durable state. A material
-role or generation change requires a newly resolved child session rather than
-an in-place mutation.
+OMP resolves the Advisor route when the watched session is created and
+persists that choice in `session_init`. Cold revival resumes the same isolated
+Advisor transcript and model; a Hub job ID, workflow state, or child message
+cannot mutate it in place. Root's mapping comes from `modelRoles.advisor` plus
+`advisor.enabled`; Implementer mappings come only from
+`task.agentAdvisor[agentName]`. A material role change creates a new session
+rather than transferring an Advisor between roles.
