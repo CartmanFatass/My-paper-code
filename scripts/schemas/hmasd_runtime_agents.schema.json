@@ -27,10 +27,6 @@
       "type": "string",
       "pattern": "^(?:Root|BrowserTransport|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
     },
-    "clerk_identity": {
-      "type": "string",
-      "pattern": "^Clerk-[a-z0-9][a-z0-9-]{1,127}$"
-    },
     "assignment_id": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9-]{1,127}$"
@@ -108,7 +104,7 @@
         "last_seen_at"
       ],
       "properties": {
-        "logical_identity": { "$ref": "#/$defs/clerk_identity" },
+        "logical_identity": { "const": "Clerk" },
         "agent_type": { "const": "hmasd-clerk" },
         "generation": { "type": "integer", "minimum": 1 },
         "assignment_id": { "$ref": "#/$defs/assignment_id" },
@@ -118,7 +114,7 @@
         "runtime_ref": { "anyOf": [{ "$ref": "#/$defs/ref" }, { "type": "null" }] },
         "lifecycle": {
           "type": "string",
-          "enum": ["CREATED", "RUNNING", "COMPLETED", "FAILED", "RETIRED"]
+          "enum": ["CREATED", "RUNNING", "PARKED", "IDLE", "COMPLETED", "FAILED", "RETIRED"]
         },
         "last_seen_at": { "$ref": "#/$defs/timestamp" }
       }

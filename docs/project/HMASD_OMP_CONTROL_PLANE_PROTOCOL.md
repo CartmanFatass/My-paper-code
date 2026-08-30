@@ -49,9 +49,10 @@ Root applies these exact invariants on every material wake:
    remain actionable evidence.
 4. **R4_UNIQUE_NODE:** `NodeKey` is
    `(logical_identity,generation,assignment_id)` and has at most one terminal
-   product. Each Clerk operation and manager reentry has a new assignment ID.
-   Compatible scope may retain session/identity/generation; material scope
-   change increments generation.
+   product. Every manager reentry receives a new assignment ID. The stable
+   logical `Clerk` keeps its identity and service session while each sequential
+   job receives a new assignment ID; material scope change requires a
+   replacement assignment.
 5. **R5_EXACT_EDGE:** an edge is satisfied only by an accepted producer
    NodeKey, result digest, required status/payload kind and refs, or by an
    immutable authority ref/SHA/revision or checkpoint. File/job presence,
@@ -60,14 +61,15 @@ Root applies these exact invariants on every material wake:
    settlement; Root releases an advancing Portfolio leg only after accepting
    and routing its terminal fact. Technical failure is not science/lifecycle.
 7. **R7_CAPACITY_SEPARATION:** advancing Portfolio capacity, OMP concurrency,
-   BrowserTransport commitment, one-command Operator ownership, Git target
-   lock, physical worktree lease, and state-path CAS are separate resource
-   classes. A full class cannot hide work using another available class.
+   BrowserTransport commitment, one-command Operator ownership, exclusive
+   worktree writing, Git target serialization, and state-path CAS are separate
+   resource classes. A full class cannot hide work using another available
+   class.
 8. **R8_MAXIMAL_DISPATCH:** outside `PAUSE`, Root dispatches the maximal
    admissible independent set after consumption/screening, preferably in one
    `task.batch`. A slow child never blocks independent work. Root reconciles
    partial registration per item, retries no batch wholesale, and admits one
-   canonical target mutator while unrelated packets remain runnable.
+   canonical target mutator while unrelated jobs remain runnable.
 9. **R9_PAUSE:** `PAUSE` admits no new task or Effect—Clerk, CAS, Git, send,
    Run, refill, or manager revival. Root may validate deliveries and
    non-sendingly observe only already-committed Effects through their existing
@@ -280,10 +282,12 @@ The registry lifecycle has four states:
 - `CLOSED`: terminal investment disposition, reopened only by an explicit new
   Portfolio action on materially new grounds.
 
-Root prepares lifecycle/action authority coherently, freezes complete desired
-registry bytes and expected revision in a `STATE_CAS` packet, and waits for the
-exact accepted Clerk receipt before dispatch that depends on the adoption.
-Clerk invokes `scripts/hmasd_state.py`; Root does not perform the CAS.
+Root prepares lifecycle/action authority coherently and freezes the complete
+desired registry bytes, exact state path, writer, and expected revision. Root
+assigns the stable Clerk service one bounded state job. Clerk invokes the
+public `scripts/hmasd_state.py` interface directly with those inputs; Root does
+not perform the CAS. Dependent work waits for the accepted terminal Clerk
+observation and resulting revision.
 
 ## Direction cycles and durable handoffs
 
@@ -311,13 +315,14 @@ permission or scientific judgment.
 
 EM and CM return their semantic facts promptly with `semantic_product_ref` and
 `persistence_status=PREPARED`. Durable state, `candidate_sha`, and
-`integrated_sha` remain null until observed. Each manager freezes complete
-content-addressed Clerk packets and explicit independent `next_actions`.
-Same-direction EM-to-CM waits for accepted EM `integrated_sha`; CM-to-EM result
-interpretation waits for accepted CM `integrated_sha`. A Clerk refusal or
-unknown outcome changes only the mechanical edge, preserves semantic
-acceptance, and permits compatible manager reentry with a new assignment ID.
-Material scope change requires a new generation.
+`integrated_sha` remain null until observed. Each manager hands Root concise,
+complete intent for independent state, candidate, or integration jobs and
+explicit independent `next_actions`. Same-direction EM-to-CM waits for accepted
+EM `integrated_sha`; CM-to-EM result interpretation waits for accepted CM
+`integrated_sha`. A Clerk refusal or unknown outcome changes only the
+mechanical edge, preserves semantic acceptance, and permits compatible manager
+reentry with a new assignment ID. Material scope change requires a new
+generation.
 
 ## OMP communication and BrowserTransport
 
@@ -387,29 +392,31 @@ increments generation. Material transitions wake one bounded reconciliation;
 delayed output does not create a poller or successor. One Experiment Operator
 owns one exact result-bearing command through its terminal observation.
 
-Managers own semantic authoring and the physical assignment worktree until
-terminal handoff. They then become non-writing. Packet presence is inert: only
-Root acceptance of the authorizer result and packet hash plus admission
-authorizes one fresh nonblocking `hmasd-clerk` task for one packet/operation.
-Root supplies the exact accepted-authorizer binding and never reconstructs or
-rewrites packet fields. Independent packets fan out; the repo-global target
-lock serializes only target mutations. Watchers, daemons, auto-executing
-inboxes, and a singleton parked Clerk are prohibited.
+Managers own semantic authoring and the exclusive assignment worktree writing
+window until terminal handoff. They then become non-writing. Root assigns the
+one stable logical `Clerk` a concise, complete frozen mechanical job through
+task or Hub. Clerk runs one active job, returns direct observations, and may
+idle, park, or revive under the same identity for the next sequential job.
+There is no second scheduler, persisted authorization graph, operation draft,
+or per-primitive child fan-out.
 
-Clerk is mechanical executor provenance, never the authority actor or writer.
-It cannot interpret science, decide technical acceptance or Portfolio
-lifecycle, choose scope/allowlist/policy/successor, resolve conflicts, rebase,
-merge, retry, or resend. Manager writing resumes only after terminal Clerk
-state and a new Root assignment. Same ID/hash returns the existing receipt;
-same ID/different hash refuses; orphan `STARTED` is observe-only `UNKNOWN`.
+Clerk is a mechanical service, never the authority actor or writer. It cannot
+interpret science, decide technical acceptance or Portfolio lifecycle, choose
+scope, target, allowlist, successor, or recovery, resolve conflicts, rebase,
+broad-stage, retry, or resend. Root's assignment supplies the exact actor or
+writer, canonical targets, inputs, authorized effects, competing refusal
+outcomes, stop, and return route. Manager writing resumes only after the
+assigned Clerk job is terminal and Root issues a new assignment.
 
-Git handoff is layered over `omp/workflow`. `EXACT_HANDOFF` preserves exact
-same-direction integrated-SHA edges. `ORTHOGONAL_DIRECTION` requires frozen
-common-epoch/parallel-set authority and dependency-fresh prospective-tree
-proof. One fresh Clerk executes one exact packet under the manager/Root actor;
-managers and Root do not perform target Git. Exact allowlists, canonical
-identities, clean state, target lock, one-attempt/unknown-outcome receipts, and
-unchanged-on-refusal semantics apply.
+Git handoff is layered over `omp/*`, with `omp/workflow` the normal shared
+target. One candidate integration requires a clean canonical target, one
+non-merge candidate directly parented by its declared source base, an exact
+nonempty changed-path allowlist, an exact expected remote predecessor, and one
+commit message and actor. Clerk applies the standard Git diff in a temporary
+detached worktree and refuses path drift or conflict. Immediately before its
+only push attempt it fetches and compares the remote predecessor, then uses an
+exact force-with-lease condition. An ambiguous push permits one read-only
+fetch/observation and never a retry. Refusal changes neither target nor remote.
 
 Observed inconsistency routes through the OMP
 `hmasd-workflow-recovery-manager`, dispatched only by Root. Recovery reconciles

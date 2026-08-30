@@ -23,11 +23,12 @@ index, accepted checkpoint, later evidence, and exact Git facts before
 repeating or overwriting work.
 
 Shared carriers, common v2 envelopes, liveness, canonical paths, exact worktree
-ownership, and Root-admitted Clerk packet mechanics are defined by
+ownership, and Root-assigned stable Clerk mechanics are defined by
 `.omp/AGENTS.md`, `.omp/RULES.md`, and the exact Git integration policy. Every
 nested `task` item omits `effort`. Reject stale generation, cross-direction
 identity, changed frozen hashes, or work outside exact EM-owned paths. EM owns
-semantic authoring, not CAS, candidate creation, target Git, or push execution.
+semantic authoring, not CAS, candidate integration, target Git, or push
+execution.
 
 ## Material-cycle boundary
 
@@ -243,14 +244,13 @@ rule; run plan without launching it; positive, negative, null, ambiguous,
 invalid, and technical-failure branches; required observations and artifact
 destinations; limitations; and finite claim ceiling.
 
-Hash the request and freeze its exact desired research-state bytes, expected
-revision, writer, and content digest in a `STATE_CAS` Clerk packet. Return the
-request as `engineering_request_ref` and emit every currently independent
-obligation in required `next_actions`: the state/CAS or persistence packet with
-`owner: CLERK`, and any independent Transport or EM work. Each item has its own
-`action_id`, exact `input_refs`, strict `dependencies`,
-`authorized_effect_ref`, and `stop_or_reentry_ref`; array order is not an edge.
-Packet presence is inert and EM never executes it.
+Freeze the complete desired research-state bytes, expected revision, writer,
+and exact state path. Return the request as `engineering_request_ref` and emit
+every currently independent obligation in required `next_actions`: the concise
+state or integration job with `owner: CLERK`, and any independent Transport or
+EM work. Each item has its own `action_id`, exact `input_refs`, strict
+`dependencies`, `authorized_effect_ref`, and `stop_or_reentry_ref`; array order
+is not an edge. EM never executes the state or target-Git job.
 
 The same-direction CM handoff is not independent of Git authority. After Root
 accepts the exact Clerk result and EM `integrated_sha`, reconcile under a new
@@ -279,7 +279,7 @@ synthesis or the exact unresolved gap. Every durable ref is `{path, sha256}`.
 
 Write scientific authority only in the assigned semantic product bytes for
 `DIRECTION.md`; prepare research snapshot bytes and exact expected-revision CAS
-packets; and prepare external pointers only under the staged external-review
+intent; and prepare external pointers only under the staged external-review
 contract. Do not write Portfolio authority, engineering state, run manifests,
 BrowserTransport state, Agentify ledger or archive bytes, or another direction.
 The research snapshot is the last accepted material milestone, not an event log.
@@ -289,15 +289,16 @@ state, create duplicate roles, or return terminal with live semantic work or
 committed EM-owned effects. At coherent semantic completion, return promptly
 with `semantic_product_ref` and `persistence_status=PREPARED`. Fields for durable
 state, `candidate_sha`, and `integrated_sha` remain null until directly observed.
-Freeze one complete content-addressed packet per mechanical state, candidate,
-or Git operation and emit its Clerk action; do not perform target Git.
+Hand Root one concise complete intent per mechanical state, candidate, or Git
+job and emit its Clerk action; do not perform target Git.
 
-EM owns the physical research worktree only through terminal handoff. Handoff
-ends EM writing, and the admitted Clerk alone may mutate the exact worktree.
-EM resumes writing only after every Clerk mutation is terminal and Root issues a
-new assignment. Clerk refusal or `UNKNOWN` changes only the mechanical edge,
-preserves the accepted semantic product, and permits compatible reconciliation;
-neither Root nor Clerk may reconstruct packet fields, change science, or retry.
+EM owns the research worktree only through terminal handoff. Handoff ends EM
+writing, and the stable Clerk service alone may perform the assigned bounded
+mutation. EM resumes writing only after that Clerk job is terminal and Root
+issues a new assignment. Clerk refusal or `UNKNOWN` changes only the mechanical
+edge, preserves the accepted semantic product, and permits compatible
+reconciliation; neither Root nor Clerk may change science, repair a conflict,
+or retry an ambiguous effect.
 
 ## Return and failure
 
@@ -307,9 +308,9 @@ changed paths, state/artifact refs, `semantic_product_ref`,
 `persistence_status=PREPARED`, and a conclusion-first summary. Include required
 `next_actions`, empty when no successor. Use owner `EM` for local work or
 interpretation, `CM` only after the exact same-direction integrated-SHA edge is
-satisfied, `CLERK` for a frozen mechanical packet, `TRANSPORT` for a frozen Pro
-request, `ROOT` for completed reconciliation, or `USER` only for a genuine
-decision or exact waiver boundary. Emit simultaneous independent obligations
+satisfied, `CLERK` for concise frozen mechanical intent, `TRANSPORT` for a
+frozen Pro request, `ROOT` for completed reconciliation, or `USER` only for a
+genuine decision or exact waiver boundary. Emit simultaneous independent
 explicitly with strict dependencies. Use materiality `DIRECTION` when judgment
 or the obligation set changes.
 

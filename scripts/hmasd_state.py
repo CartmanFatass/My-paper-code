@@ -39,7 +39,6 @@ KIND_ALIASES = {
     "runtime_agents": "runtime_agents",
     "runtime_worktrees": "runtime_worktrees",
     "runtime_browser_assignments": "runtime_browser_assignments",
-    "clerk_operation": "clerk_operation",
 }
 
 CURRENT_WRITE_SCHEMA_VERSIONS = {
@@ -569,78 +568,6 @@ def _validate_accepted_result(document: Mapping[str, Any]) -> None:
         raise _owner_error("accepted source manifest path is not direction-owned")
 
 
-def _validate_authorizer(authorizer: Mapping[str, Any]) -> None:
-    role = authorizer["role"]
-    identity = authorizer["logical_identity"]
-    if role == "root":
-        expected_identity = "Root"
-    elif role == "hmasd-em":
-        expected_identity = f"EM-{identity.removeprefix('EM-')}"
-        if not identity.startswith("EM-"):
-            raise OwnershipError("EM authorizer must use an EM logical identity")
-    else:
-        expected_identity = f"CM-{identity.removeprefix('CM-')}"
-        if not identity.startswith("CM-"):
-            raise OwnershipError("CM authorizer must use a CM logical identity")
-    if identity != expected_identity:
-        raise OwnershipError("authorizer role does not match its logical identity")
-
-
-def _authorizer_authority_values(authorizer: Mapping[str, Any]) -> set[str]:
-    identity = authorizer["logical_identity"]
-    if identity == "Root":
-        return {"Portfolio", "Root", "root"}
-    role, direction_id = identity.split("-", 1)
-    return {identity, f"{role.lower()}:{direction_id}"}
-
-
-def _validate_clerk_operation(document: Mapping[str, Any]) -> None:
-    clerk_assignment_id = document["clerk_assignment_id"]
-    expected_executor = f"Clerk-{clerk_assignment_id}"
-    if document["executor"]["logical_identity"] != expected_executor:
-        raise OwnershipError("Clerk packet executor identity does not match its assignment")
-    _validate_authorizer(document["authorizer"])
-
-    unhashed = dict(document)
-    packet_sha256 = unhashed.pop("packet_sha256")
-    expected_sha256 = sha256_bytes(canonical_bytes(unhashed))
-    if packet_sha256 != expected_sha256:
-        raise ValidationError("Clerk packet_sha256 does not match canonical packet bytes")
-
-    authority = document["authority"]
-    authorizer = document["authorizer"]
-    authorized_values = _authorizer_authority_values(authorizer)
-    for field in ("document_writer", "git_actor"):
-        value = authority[field]
-        if value is not None and value not in authorized_values:
-            raise OwnershipError(f"Clerk packet {field} is not owned by its authorizer")
-
-    operation = document["operation"]
-    target = document["target"]
-    direction_id = authority["direction_id"]
-    if direction_id is not None:
-        identity = authorizer["logical_identity"]
-        if identity != "Root" and identity.split("-", 1)[1] != direction_id:
-            raise OwnershipError("Clerk packet direction does not match its authorizer")
-        if "direction_id" in target and target["direction_id"] != direction_id:
-            raise OwnershipError("Clerk packet target direction does not match authority")
-    if "worktree_kind" in target and target["worktree_kind"] != authority["worktree_kind"]:
-        raise OwnershipError("Clerk packet target worktree kind does not match authority")
-
-    if operation == "STATE_CAS":
-        if authority["document_writer"] != target["expected_document_writer"]:
-            raise OwnershipError("STATE_CAS writer does not match packet authority")
-    if operation.startswith("GIT_") or operation == "CANDIDATE_CREATE":
-        if authority["git_actor"] is None:
-            raise OwnershipError("Git Clerk operation requires its authority actor")
-    if operation == "GIT_INTEGRATE_PUSH":
-        if target["git_actor"] != authority["git_actor"]:
-            raise OwnershipError("Git integration target actor does not match authority")
-
-    mutation_lease = target.get("mutation_lease")
-    if mutation_lease is not None:
-        if mutation_lease["clerk_assignment_id"] != clerk_assignment_id:
-            raise OwnershipError("mutation lease does not match Clerk assignment")
 
 
 def _validate_transport_facts(facts: Mapping[str, Any], label: str) -> None:
@@ -800,16 +727,10 @@ def _validate_agent_result(document: Mapping[str, Any]) -> None:
     elif payload_kind == "clerk":
         if role != "hmasd-clerk":
             raise OwnershipError("Clerk result must use hmasd-clerk role")
-        expected_identity = f"Clerk-{document['assignment_id']}"
-        if identity != expected_identity or payload["executor_identity"] != expected_identity:
-            raise OwnershipError("Clerk result identity does not match its assignment")
-        _validate_authorizer(payload["authorizer"])
-        authority_value = payload["authority_actor_or_writer"]
-        if (
-            authority_value is not None
-            and authority_value not in _authorizer_authority_values(payload["authorizer"])
-        ):
-            raise OwnershipError("Clerk result changed its authority actor or writer")
+        if identity != "Clerk":
+            raise OwnershipError("Clerk result must use the stable Clerk identity")
+        if payload["job_id"] != document["assignment_id"]:
+            raise OwnershipError("Clerk result job_id must match its sequential assignment")
         if document["decision_requests"]:
             raise OwnershipError("Clerk result cannot request a decision")
         if document["next_actions"]:
@@ -855,9 +776,8 @@ def _validate_runtime_agents(document: Mapping[str, Any]) -> None:
             raise ValidationError(f"duplicate runtime logical identity: {identity}")
         identities.add(identity)
         if agent["agent_type"] == "hmasd-clerk":
-            assignment_id = agent["assignment_id"]
-            if identity != f"Clerk-{assignment_id}":
-                raise OwnershipError("runtime Clerk identity must match its assignment")
+            if identity != "Clerk":
+                raise OwnershipError("runtime Clerk must use the stable Clerk identity")
             if agent["parent_identity"] != "Root":
                 raise OwnershipError("runtime Clerk must be a Root child")
         if identity == "Root" and agent["parent_identity"] != "Root":
@@ -927,8 +847,6 @@ def _validate_custom(
         _validate_accepted_result(document)
     elif kind == "agent_result":
         _validate_agent_result(document)
-    elif kind == "clerk_operation":
-        _validate_clerk_operation(document)
     elif kind == "runtime_agents":
         _validate_runtime_agents(document)
     elif kind == "runtime_browser_assignments":
@@ -1022,7 +940,7 @@ def _validate_document(
     except _SchemaFailure as exc:
         raise ValidationError(str(exc)) from exc
     _check_document_paths(document)
-    if normalized not in {"agent_result", "clerk_operation"}:
+    if normalized != "agent_result":
         _ensure_timestamp(document["updated_at"], "updated_at")
         if writer is not None and document["writer"] != writer:
             raise _owner_error(f"writer {document['writer']!r} does not match requested writer {writer!r}")
@@ -1520,12 +1438,6 @@ def _validate_runtime_agents_transition(
             ("agent_type", "parent_identity"),
             label,
         )
-        if current_agent["agent_type"] == "hmasd-clerk":
-            _require_unchanged(
-                current_agent["assignment_id"],
-                next_agent["assignment_id"],
-                f"{label}.assignment_id",
-            )
         if next_agent["generation"] < current_agent["generation"]:
             _immutable_conflict(f"{label}.generation")
         if next_agent["generation"] == current_agent["generation"]:

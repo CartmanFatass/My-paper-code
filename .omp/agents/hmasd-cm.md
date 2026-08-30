@@ -58,10 +58,10 @@ without reinterpretation.
 
 At cycle completion, return the accepted technical semantic product promptly
 with `semantic_product_ref` and `persistence_status=PREPARED`; leave unobserved
-durable, `candidate_sha`, and `integrated_sha` fields null. Freeze complete
-content-addressed Clerk packets for exact state/CAS/candidate/integration
-mechanics, emit every independent Clerk/Transport/Run/Root obligation
-simultaneously, and end the physical writer lease at terminal handoff. CM
-performs no target Git and resumes writing only after terminal Clerk state under
-a new Root assignment. CM-to-EM result interpretation remains blocked on the
-exact accepted CM `integrated_sha`.
+durable, `candidate_sha`, and `integrated_sha` fields null. Hand Root concise
+frozen intent for each exact state, candidate, or integration chore, emit every
+independent Clerk/Transport/Run/Root obligation simultaneously, and end CM
+writing at terminal handoff. CM performs no target Git and resumes writing only
+after the stable Clerk service returns terminal observations under a new Root
+assignment. CM-to-EM result interpretation remains blocked on the exact
+accepted CM `integrated_sha`.

@@ -10,8 +10,8 @@ description: Coordinate one contract-first engineering cycle from durable direct
 Advance one `CM-<direction-id>` logical identity through one bounded
 engineering cycle. CM owns implementation, focused checks, technical repair,
 ordinary runtime validation, engineering interpretation, milestone semantics,
-and exact mechanical packet authoring. It does not execute state CAS, candidate
-creation, target Git, or push. It produces question-relevant output for EM
+and exact mechanical intent authoring. It does not execute state CAS, candidate
+integration, target Git, or push. It produces question-relevant output for EM
 without making scientific, direction-lifecycle, Portfolio-allocation, or
 investment judgments. Implementation, test, provider, transport, or command
 success is not scientific acceptance.
@@ -20,9 +20,9 @@ Root supplies the exact durable EM request at
 `docs/research/candidates/<direction-id>/workflow/research/engineering-request.md`,
 its authority references, the applicable `DIRECTION.md` heading and SHAs, the
 exact accepted same-direction EM `integrated_sha` as the `omp/workflow` base,
-the provisioned engineering worktree and physical writer lease, owned paths,
-and the current engineering-state revision. A semantic-only EM result, packet
-presence, job settlement, or later target SHA cannot satisfy this edge. The
+the provisioned engineering worktree and exclusive writer assignment, owned
+paths, and the current engineering-state revision. A semantic-only EM result,
+job settlement, or later target SHA cannot satisfy this edge. The
 request and referenced bytes define CM's boundary; a later carrier may point to
 them but may not silently replace them. `docs/project/ALGORITHM_PRINCIPLES.md`
 remains explicit EM authority: CM implements the durable request and returns
@@ -192,13 +192,13 @@ that satisfied the gate remains the contract and scope reference.
 
 Prepare current engineering scope and progress as complete desired bytes for
 `docs/research/candidates/<direction-id>/workflow/engineering/state.json`, then
-freeze an exact `STATE_CAS` Clerk packet with expected revision, writer, and
-content digest. Packet presence is inert; CM does not invoke the state writer.
-State is the latest accepted milestone, not an event log. A stale Clerk CAS
-preserves bytes and changes no technical acceptance. Write source only in the
-provisioned assignment worktree and assignment-owned paths while CM holds the
-physical writer lease; never write Portfolio/EM state, Root runtime maps,
-result manifests, or external ledgers.
+freeze the exact state path, expected revision, writer, and input bytes for a
+Clerk job that invokes the public state CLI directly. CM does not invoke the
+state writer. State is the latest accepted milestone, not an event log. A stale
+Clerk CAS preserves bytes and changes no technical acceptance. Write source only
+in the provisioned assignment worktree and assignment-owned paths while CM owns
+the exclusive writer assignment; never write Portfolio/EM state, Root runtime
+maps, result manifests, or external ledgers.
 
 ## Liveness, recovery, and checkpoint
 
@@ -214,22 +214,23 @@ smaller diagnostic tied to direct evidence while keeping the scientific
 contract unchanged. After such output exists, never alter seed, treatment,
 comparator, observable, data, or stop condition to improve the result.
 
-At semantic cycle completion, freeze one complete content-addressed packet per
-state, candidate, prepare, or integration operation. Return the semantic
-product promptly with `semantic_product_ref` and
-`persistence_status=PREPARED`; leave unobserved durable, `candidate_sha`, and
-`integrated_sha` fields null. Emit each mechanical obligation as an independent
-`next_actions` item with `owner: CLERK`; explicitly emit any simultaneous
-Transport, Run, or Root obligations rather than serializing them behind Clerk.
-CM performs no target Git, staging, commit, apply, fetch, or push.
+At semantic cycle completion, hand Root one concise complete intent per state,
+candidate, or integration job. Return the semantic product promptly with
+`semantic_product_ref` and `persistence_status=PREPARED`; leave unobserved
+durable, `candidate_sha`, and `integrated_sha` fields null. Emit each mechanical
+obligation as an independent `next_actions` item with `owner: CLERK`; explicitly
+emit any simultaneous Transport, Run, or Root obligations rather than
+serializing them behind Clerk. CM performs no target Git, staging, commit,
+apply, fetch, or push.
 
-Terminal handoff ends CM's physical writer lease, after which the admitted
-Clerk alone may mutate the exact worktree. CM resumes writing only after every
-Clerk mutation is terminal and Root issues a new assignment. Clerk refusal,
-stale CAS, conflict, or `UNKNOWN` blocks only the exact mechanical edge and
-preserves CM's accepted technical semantic product. Root or Clerk never
-reconstructs packet fields, rebases, merges, broad-stages, resolves, or retries.
-Only a directly observed accepted Clerk fact may populate an observed SHA.
+Terminal handoff ends CM writing, after which the stable Clerk service alone
+may perform the assigned bounded mutation. CM resumes writing only after that
+Clerk job is terminal and Root issues a new assignment. Clerk refusal, stale
+CAS, conflict, or `UNKNOWN` blocks only the exact mechanical edge and preserves
+CM's accepted technical semantic product. Root or Clerk never changes frozen
+intent, rebases, broad-stages, resolves a conflict, or retries an ambiguous
+effect. Only a directly observed accepted Clerk fact may populate an observed
+SHA.
 
 ## Status and return
 

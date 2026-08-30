@@ -272,16 +272,16 @@ def test_cm_semantic_product_is_split_from_clerk_persistence_and_exact_handoffs(
         skill,
         (
             "exact accepted same-direction EM `integrated_sha` as the `omp/workflow` base",
-            "A semantic-only EM result, packet presence, job settlement, or later target SHA "
-            "cannot satisfy this edge",
+            "A semantic-only EM result, job settlement, or later target SHA cannot "
+            "satisfy this edge",
             "Return the semantic product promptly with `semantic_product_ref` and "
             "`persistence_status=PREPARED`",
             "leave unobserved durable, `candidate_sha`, and `integrated_sha` fields null",
             "each mechanical obligation as an independent `next_actions` item with "
             "`owner: CLERK`",
             "CM performs no target Git, staging, commit, apply, fetch, or push",
-            "Terminal handoff ends CM's physical writer lease",
-            "CM resumes writing only after every Clerk mutation is terminal",
+            "Terminal handoff ends CM writing",
+            "CM resumes writing only after that Clerk job is terminal",
             "Root issues a new assignment",
             "Clerk refusal, stale CAS, conflict, or `UNKNOWN` blocks only the exact "
             "mechanical edge",

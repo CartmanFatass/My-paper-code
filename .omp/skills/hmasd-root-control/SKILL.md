@@ -52,7 +52,7 @@ acceptance. It never creates an intermediate Portfolio or planning agent.
 | One accepted engineering contract and implementation cycle | one `hmasd-cm` | Science exposes a concrete engineering need |
 | One bounded vertical code slice | one Implementer chosen by CM | Exact paths, interface, and acceptance are known |
 | One separable evidence gap | one fitting Scout/Critic/Reviewer | Unanswered, decision-relevant, and method-specific |
-| One exact immutable mechanical packet | one fresh `hmasd-clerk` | Existing state or physical-lease boundary requires it |
+| One bounded mechanical project chore | stable logical `Clerk` | Complete concise intent, actor/writer, targets, allowed paths, Effects, refusal outcomes, and stop are frozen |
 | One exact result-bearing command | one `hmasd-experiment-operator` | Command, resources, output, and stop are frozen |
 | One exact provider operation | singleton `hmasd-browser-transport` | Provider, model, operation, commitment, and response path are exact |
 | One genuinely unknown or partial Effect | one `hmasd-workflow-recovery-manager` | Direct read-only reconciliation cannot settle it |
@@ -101,9 +101,9 @@ Every dispatch supplies only:
 6. stop condition; and
 7. return owner and reentry.
 
-Do not add a packet, schema, registry, manifest, receipt, or state file merely
-to restate this carrier. Role-specific schemas are used only when an existing
-hard boundary already requires them.
+Do not add a schema, registry, manifest, state file, or other protocol artifact
+merely to restate this carrier. Role-specific schemas are used only when an
+existing hard boundary already requires them.
 
 ## Terminal result handling
 
@@ -153,18 +153,21 @@ or a process has a next state. Pending ceremony is not runnable project work.
 
 ## Mechanical Effects
 
-- Ordinary Root-owned local changes need no Clerk packet.
+- Ordinary Root-owned local changes need no Clerk.
 - EM and CM author semantic bytes in their assignment worktree.
-- When an existing physical lease or state boundary requires Clerk, the
-  semantic owner freezes the exact operation and becomes non-writing; one fresh
-  Clerk executes that one packet.
+- Root assigns the stable logical `Clerk` one concise frozen mechanical job at
+  a time through task or Hub. The semantic owner becomes non-writing for that
+  job. Clerk returns direct observations, then idles or parks until Root revives
+  the same identity with a new sequential `job_id`.
 - Clerk never interprets, repairs, retries, rebases, resolves conflicts, chooses
-  successors, or acquires actor authority.
+  successors, or acquires actor authority. It never holds two active jobs.
 - Do not manufacture a patch -> candidate -> prepare -> recovery chain to
-  represent an already safe local commit. If the public API cannot express the
-  smallest safe operation, preserve the commit and report the tool gap.
-- If a configured role is absent from runtime discovery, report the routing
-  defect. Never bypass it with Root mutation.
+  represent an already safe local commit. State work calls the public
+  `scripts/hmasd_state.py` interface directly with complete desired bytes and
+  the expected revision. If a public API cannot express the smallest safe
+  operation, preserve the source work and report the tool gap.
+- If the configured Clerk service is absent from runtime discovery, report the
+  routing defect. Never bypass it with Root mutation.
 
 ## Git and worktrees
 
@@ -172,10 +175,11 @@ or a process has a next state. Pending ceremony is not runnable project work.
 - Never use `git add -A` or stage unrelated user work.
 - Branch effects stay inside `omp/*` unless the user explicitly approves
   otherwise.
-- The integration target is `omp/workflow`.
-- Before a permitted push, fetch and compare the exact remote predecessor.
-- Unknown push outcome is observe-only; fetch before any contemplated retry and
-  never push blindly.
+- The normal integration target is `omp/workflow`; any authorized target must
+  remain inside `omp/*`.
+- Immediately before a permitted push, fetch and compare the exact remote
+  predecessor. One job permits one push attempt. An ambiguous outcome permits
+  one read-only fetch/observation and never a retry.
 - A clean local mistake uses the smallest direct reversible repair only when
   authorized. Do not create a recovery workflow for a normal Git operation.
 

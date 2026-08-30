@@ -20,9 +20,6 @@ CRITIC_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-research-critic.md"
 REVIEWER_AGENT = REPO_ROOT / ".omp" / "agents" / "hmasd-reviewer.md"
 PROTOCOL = REPO_ROOT / "docs" / "project" / "HMASD_OMP_CONTROL_PLANE_PROTOCOL.md"
 RESULT_SCHEMA = REPO_ROOT / "scripts" / "schemas" / "hmasd_agent_result.schema.json"
-CLERK_OPERATION_SCHEMA = (
-    REPO_ROOT / "scripts" / "schemas" / "hmasd_clerk_operation.schema.json"
-)
 
 COMMON_V2_REQUIRED = [
     "schema_version",
@@ -410,11 +407,21 @@ def test_common_v2_result_envelope_has_closed_multi_action_carrier() -> None:
     assert definitions["producer_dependency"]["additionalProperties"] is False
     assert definitions["authority_dependency"]["additionalProperties"] is False
     clerk_payload = definitions["clerk_payload"]
-    assert clerk_payload["properties"]["resources"] == {
-        "type": "array",
-        "items": {"$ref": "#/$defs/clerk_resource"},
-    }
-    assert "resolved_model" not in clerk_payload["properties"]
+    assert clerk_payload["additionalProperties"] is False
+    assert clerk_payload["required"] == [
+        "kind",
+        "job_id",
+        "operation",
+        "outcome",
+        "observations",
+    ]
+    assert clerk_payload["properties"]["outcome"]["enum"] == [
+        "COMPLETED",
+        "REFUSED",
+        "UNKNOWN",
+    ]
+    assert "packet_ref" not in clerk_payload["properties"]
+    assert "receipt_refs" not in clerk_payload["properties"]
     transport = definitions["transport_payload"]
     assert "_".join(("transport", "state")) not in transport["properties"]
     assert set(transport["properties"]["phase"]["enum"]) == {
@@ -438,72 +445,7 @@ def test_common_v2_result_envelope_has_closed_multi_action_carrier() -> None:
     )
 
 
-def test_clerk_packet_schema_is_closed_and_operation_discriminated() -> None:
-    schema = json.loads(CLERK_OPERATION_SCHEMA.read_text(encoding="utf-8"))
-    assert schema["$id"] == "hmasd_clerk_operation"
-    assert schema["additionalProperties"] is False
-    assert schema["properties"]["return_owner"] == {"const": "ROOT"}
-    operations = {
-        branch["properties"]["operation"]["const"] for branch in schema["oneOf"]
-    }
-    assert operations == {
-        "STATE_CAS",
-        "WORKTREE_PROVISION",
-        "WORKTREE_INSPECT",
-        "WORKTREE_RELEASE",
-        "PATCH_APPLY",
-        "CANDIDATE_CREATE",
-        "GIT_RECORD",
-        "GIT_PREPARE",
-        "GIT_INTEGRATE_PUSH",
-    }
-    target_defs: set[str] = set()
-    for branch in schema["oneOf"]:
-        properties = branch["properties"]
-        operation = properties["operation"]["const"]
-        target_name = properties["target"]["$ref"].removeprefix("#/$defs/")
-        mutation_name = properties["mutation"]["$ref"].removeprefix("#/$defs/")
-        effect_name = properties["effect"]["$ref"].removeprefix("#/$defs/")
-        target_defs.add(target_name)
-        assert schema["$defs"][target_name]["additionalProperties"] is False
-        assert schema["$defs"][target_name]["required"]
-        assert schema["$defs"][mutation_name]["additionalProperties"] is False
-        authorized = schema["$defs"][effect_name]["properties"]["authorized_effects"][
-            "const"
-        ]
-        assert authorized == ([] if operation == "WORKTREE_INSPECT" else [operation])
-    assert len(target_defs) == 9
-    provision_target = schema["$defs"]["worktree_provision_target"]
-    assert {"integration_policy", "parallel_set_manifest_ref"} <= set(
-        provision_target["required"]
-    )
-    assert provision_target["oneOf"] == [
-        {
-            "properties": {
-                "integration_policy": {"const": "ORTHOGONAL_DIRECTION"},
-                "parallel_set_manifest_ref": {"$ref": "#/$defs/content_ref"},
-                "required_handoff_sha": {"type": "null"},
-            }
-        },
-        {
-            "properties": {
-                "integration_policy": {"const": "EXACT_HANDOFF"},
-                "parallel_set_manifest_ref": {"type": "null"},
-                "required_handoff_sha": {"$ref": "#/$defs/git_sha"},
-            }
-        },
-    ]
-    release_target = schema["$defs"]["worktree_release_target"]
-    assert "ignored_artifacts" in release_target["required"]
-    assert release_target["properties"]["ignored_artifacts"]["enum"] == [
-        "refuse",
-        "discard",
-        "retain",
-    ]
-    executor = schema["$defs"]["executor"]
-    assert executor["required"] == ["role", "logical_identity", "generation"]
-    assert "model" not in executor["properties"]
-    assert "thinking_level" not in executor["properties"]
-    assert schema["$defs"]["effect"]["properties"]["unknown_outcome"] == {
-        "const": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY"
-    }
+def test_obsolete_clerk_operation_schema_is_absent() -> None:
+    assert not (
+        REPO_ROOT / "scripts" / "schemas" / "hmasd_clerk_operation.schema.json"
+    ).exists()

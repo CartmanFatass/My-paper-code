@@ -35,11 +35,7 @@ KINDS = (
     "runtime_worktrees",
 )
 
-SCHEMA_KINDS = (
-    *KINDS,
-    "runtime_browser_assignments",
-    "clerk_operation",
-)
+SCHEMA_KINDS = (*KINDS, "runtime_browser_assignments")
 
 
 def fixture(kind: str) -> dict[str, Any]:
@@ -57,187 +53,6 @@ def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     )
 
 
-def clerk_packet() -> dict[str, Any]:
-    packet: dict[str, Any] = {
-        "schema_version": 1,
-        "kind": "clerk_operation",
-        "operation_id": "state-cas-operation-001",
-        "clerk_assignment_id": "state-cas-clerk-001",
-        "executor": {
-            "role": "hmasd-clerk",
-            "logical_identity": "Clerk-state-cas-clerk-001",
-            "generation": 1,
-        },
-        "authorizer": {
-            "role": "root",
-            "logical_identity": "Root",
-            "generation": 1,
-            "assignment_id": "root-state-cas-authorizer",
-        },
-        "operation": "STATE_CAS",
-        "requires": [
-            {
-                "authority_ref": {
-                    "path": ".omp/runtime/agents.json",
-                    "sha256": "1" * 64,
-                },
-                "revision_or_checkpoint": 1,
-            }
-        ],
-        "authority": {
-            "direction_id": None,
-            "document_writer": "Root",
-            "git_actor": None,
-            "worktree_kind": None,
-            "assignment_authority": "SHARED",
-        },
-        "mutation": {
-            "class": "STATE_PATH",
-            "resources": [
-                {
-                    "kind": "STATE_PATH",
-                    "key": "/home/fires/hmasd/.omp/runtime/agents.json",
-                }
-            ],
-        },
-        "effect": {
-            "attempt": 1,
-            "attempt_token": "2" * 64,
-            "authorized_effects": ["STATE_CAS"],
-            "unknown_outcome": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
-        },
-        "target": {
-            "state_kind": "runtime_agents",
-            "canonical_target_path": "/home/fires/hmasd/.omp/runtime/agents.json",
-            "expected_revision": 1,
-            "input_ref": {
-                "path": "temp/clerk/state-cas-clerk-001/input.json",
-                "sha256": "3" * 64,
-            },
-            "expected_document_writer": "Root",
-        },
-        "acceptance_refs": [
-            {
-                "path": "temp/clerk/state-cas-clerk-001/acceptance.json",
-                "sha256": "4" * 64,
-            }
-        ],
-        "postconditions": {
-            "success": ["revision is exactly 2 and desired bytes match"],
-            "refusal": ["target bytes and revision remain unchanged"],
-            "unknown": "OBSERVE_ONLY_NO_AUTOMATIC_RETRY",
-        },
-        "stop_condition": "Return after one terminal claim receipt.",
-        "return_owner": "ROOT",
-    }
-    packet["packet_sha256"] = hashlib.sha256(
-        (json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
-            "utf-8"
-        )
-    ).hexdigest()
-    return packet
-
-
-def rehash_clerk_packet(packet: dict[str, Any]) -> None:
-    packet.pop("packet_sha256", None)
-    packet["packet_sha256"] = hashlib.sha256(
-        (json.dumps(packet, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode(
-            "utf-8"
-        )
-    ).hexdigest()
-
-
-def worktree_packet(operation: str) -> dict[str, Any]:
-    assert operation in {"WORKTREE_PROVISION", "WORKTREE_RELEASE"}
-    packet = clerk_packet()
-    clerk_assignment_id = f"{operation.lower().replace('_', '-')}-clerk-001"
-    packet["operation_id"] = f"{operation.lower().replace('_', '-')}-operation-001"
-    packet["clerk_assignment_id"] = clerk_assignment_id
-    packet["executor"]["logical_identity"] = f"Clerk-{clerk_assignment_id}"
-    packet["operation"] = operation
-    packet["authority"] = {
-        "direction_id": "example-direction",
-        "document_writer": None,
-        "git_actor": "root",
-        "worktree_kind": "research",
-        "assignment_authority": "SHARED",
-    }
-    packet["mutation"] = {
-        "class": "WORKTREE_REGISTRY",
-        "resources": [
-            {
-                "kind": (
-                    "CONTAINER"
-                    if operation == "WORKTREE_PROVISION"
-                    else "RUNTIME_WORKTREES_STATE"
-                ),
-                "key": (
-                    "/home/fires/hmasd-worktrees"
-                    if operation == "WORKTREE_PROVISION"
-                    else "/home/fires/hmasd/.omp/runtime/worktrees.json"
-                ),
-            },
-            {
-                "kind": (
-                    "RUNTIME_WORKTREES_STATE"
-                    if operation == "WORKTREE_PROVISION"
-                    else "WORKTREE"
-                ),
-                "key": (
-                    "/home/fires/hmasd/.omp/runtime/worktrees.json"
-                    if operation == "WORKTREE_PROVISION"
-                    else "/home/fires/hmasd-worktrees/example-direction-research-assignment-001"
-                ),
-            },
-        ],
-    }
-    packet["effect"]["authorized_effects"] = [operation]
-    mutation_lease = {
-        "manager_assignment_id": "root-worktree-manager-001",
-        "clerk_assignment_id": clerk_assignment_id,
-        "handoff_ref": {
-            "path": f"temp/clerk/{clerk_assignment_id}/handoff.json",
-            "sha256": "b" * 64,
-        },
-        "lease_token": "c" * 64,
-    }
-    common_target = {
-        "canonical_repo_path": "/home/fires/hmasd",
-        "canonical_container_path": "/home/fires/hmasd-worktrees",
-        "canonical_worktree_path": (
-            "/home/fires/hmasd-worktrees/example-direction-research-assignment-001"
-        ),
-        "worktree_ref": "example-direction-research-assignment-001",
-        "direction_id": "example-direction",
-        "worktree_kind": "research",
-        "base_sha": "a" * 40,
-        "expected_registry_revision": 1,
-        "mutation_lease": mutation_lease,
-    }
-    if operation == "WORKTREE_PROVISION":
-        packet["target"] = {
-            **common_target,
-            "integration_policy": "EXACT_HANDOFF",
-            "parallel_set_manifest_ref": None,
-            "expected_lifecycle": "ABSENT",
-            "expected_receipt_sha256": None,
-            "required_handoff_sha": "a" * 40,
-            "required_dependency_refs": [],
-            "prior_operation_receipt": None,
-        }
-    else:
-        packet["target"] = {
-            **common_target,
-            "expected_lifecycle": "PROVISIONED",
-            "expected_receipt_sha256": "d" * 64,
-            "ignored_artifacts": "refuse",
-            "policy": "EXACT_HANDOFF",
-            "required_handoff_sha": "a" * 40,
-            "required_dependency_refs": [],
-            "prior_operation_receipt": None,
-        }
-    rehash_clerk_packet(packet)
-    return packet
 
 
 def test_all_phase0_schema_contracts_are_present_and_strict() -> None:
@@ -404,11 +219,11 @@ def test_common_result_requires_closed_next_actions_and_exact_dependencies(
     document = fixture("agent_result")
     action = {
         "action_id": "persist-research-state",
-        "kind": "EXECUTE_CLERK_PACKET",
+        "kind": "RUN_CLERK_JOB",
         "owner": "CLERK",
         "input_refs": [
             {
-                "path": "temp/clerk/persist-research-state/packet.json",
+                "path": "temp/clerk/persist-research-state/state-input.json",
                 "sha256": "5" * 64,
             }
         ],
@@ -422,7 +237,7 @@ def test_common_result_requires_closed_next_actions_and_exact_dependencies(
             }
         ],
         "authorized_effect_ref": {
-            "path": "temp/clerk/persist-research-state/effect.json",
+            "path": "docs/research/candidates/example-direction/STATE.json",
             "sha256": "7" * 64,
         },
         "stop_or_reentry_ref": {
@@ -463,40 +278,29 @@ def test_common_result_requires_closed_next_actions_and_exact_dependencies(
     assert result.returncode == 2
 
 
-def test_clerk_result_identity_authority_and_no_decision_boundary(
+def test_clerk_result_uses_stable_identity_and_sequential_job_id(
     tmp_path: Path,
 ) -> None:
-    packet = clerk_packet()
     document = fixture("agent_result")
     document.update(
         {
-            "assignment_id": packet["clerk_assignment_id"],
-            "logical_identity": packet["executor"]["logical_identity"],
+            "assignment_id": "clerk-job-001",
+            "logical_identity": "Clerk",
             "materiality": "LOCAL",
             "role": "hmasd-clerk",
-            "summary": "Observed one terminal Clerk operation receipt.",
+            "summary": "Completed one bounded Clerk job.",
             "payload": {
                 "kind": "clerk",
-                "operation_id": packet["operation_id"],
-                "packet_ref": {
-                    "path": "temp/clerk/state-cas-clerk-001/packet.json",
-                    "sha256": packet["packet_sha256"],
-                },
-                "executor_identity": packet["executor"]["logical_identity"],
-                "authorizer": packet["authorizer"],
-                "operation": packet["operation"],
-                "authority_actor_or_writer": "Root",
-                "resources": packet["mutation"]["resources"],
-                "attempt": 1,
-                "outcome": "SUCCEEDED",
-                "effect_state": "LANDED",
-                "receipt_refs": [
+                "job_id": "clerk-job-001",
+                "operation": "integrate-candidate",
+                "outcome": "COMPLETED",
+                "observations": [
                     {
-                        "path": "temp/clerk/state-cas-clerk-001/receipt.json",
-                        "sha256": "9" * 64,
+                        "kind": "integration",
+                        "integrated_sha": "a" * 40,
+                        "push_attempts": 1,
                     }
                 ],
-                "observation_refs": [],
             },
         }
     )
@@ -506,25 +310,14 @@ def test_clerk_result_identity_authority_and_no_decision_boundary(
     assert result.returncode == 0, result.stderr
 
     wrong_identity = copy.deepcopy(document)
-    wrong_identity["logical_identity"] = "Clerk-other-clerk-001"
+    wrong_identity["logical_identity"] = "Clerk-clerk-job-001"
     path.write_text(json.dumps(wrong_identity), encoding="utf-8")
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 5
-    fallback = copy.deepcopy(document)
-    fallback["payload"]["resolved_model_is_fallback"] = True
-    path.write_text(json.dumps(fallback), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
     assert result.returncode == 2
 
-    wrong_model = copy.deepcopy(document)
-    wrong_model["payload"]["resolved_model"] = "openai-codex/gpt-5.6-sol"
-    path.write_text(json.dumps(wrong_model), encoding="utf-8")
-    result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
-    assert result.returncode == 2
-
-    changed_actor = copy.deepcopy(document)
-    changed_actor["payload"]["authority_actor_or_writer"] = "cm:example-direction"
-    path.write_text(json.dumps(changed_actor), encoding="utf-8")
+    wrong_job = copy.deepcopy(document)
+    wrong_job["payload"]["job_id"] = "clerk-job-002"
+    path.write_text(json.dumps(wrong_job), encoding="utf-8")
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
     assert result.returncode == 5
 
@@ -534,8 +327,8 @@ def test_clerk_result_identity_authority_and_no_decision_boundary(
         {
             "kind": "USER_DECISION",
             "ref": {
-                "path": "temp/clerk/state-cas-clerk-001/decision.json",
-                "sha256": "a" * 64,
+                "path": "temp/clerk/decision.json",
+                "sha256": "b" * 64,
             },
         }
     ]
@@ -543,175 +336,119 @@ def test_clerk_result_identity_authority_and_no_decision_boundary(
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
     assert result.returncode == 5
 
-    extra = copy.deepcopy(document)
-    extra["payload"]["successor"] = "ROOT"
-    path.write_text(json.dumps(extra), encoding="utf-8")
+    obsolete = copy.deepcopy(document)
+    obsolete["payload"]["packet_ref"] = {
+        "path": "temp/clerk/operation.json",
+        "sha256": "c" * 64,
+    }
+    path.write_text(json.dumps(obsolete), encoding="utf-8")
     result = run_cli("validate", "--kind", "agent_result", "--path", str(path))
     assert result.returncode == 2
 
 
-def test_clerk_operation_packet_is_closed_content_addressed_and_inert(
+def test_runtime_clerk_identity_is_stable_across_sequential_jobs(
     tmp_path: Path,
 ) -> None:
-    packet = clerk_packet()
-    path = tmp_path / "clerk-operation.json"
-    path.write_text(json.dumps(packet), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-    provision = worktree_packet("WORKTREE_PROVISION")
-    path.write_text(json.dumps(provision), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-    missing_policy = copy.deepcopy(provision)
-    del missing_policy["target"]["integration_policy"]
-    rehash_clerk_packet(missing_policy)
-    path.write_text(json.dumps(missing_policy), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    exact_with_parallel_set = copy.deepcopy(provision)
-    exact_with_parallel_set["target"]["parallel_set_manifest_ref"] = {
-        "path": "docs/project/parallel-sets/example.json",
-        "sha256": "e" * 64,
-    }
-    rehash_clerk_packet(exact_with_parallel_set)
-    path.write_text(json.dumps(exact_with_parallel_set), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    orthogonal = copy.deepcopy(provision)
-    orthogonal["target"]["integration_policy"] = "ORTHOGONAL_DIRECTION"
-    orthogonal["target"]["parallel_set_manifest_ref"] = {
-        "path": "docs/project/parallel-sets/example.json",
-        "sha256": "e" * 64,
-    }
-    orthogonal["target"]["required_handoff_sha"] = None
-    rehash_clerk_packet(orthogonal)
-    path.write_text(json.dumps(orthogonal), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-    orthogonal_without_parallel_set = copy.deepcopy(orthogonal)
-    orthogonal_without_parallel_set["target"]["parallel_set_manifest_ref"] = None
-    rehash_clerk_packet(orthogonal_without_parallel_set)
-    path.write_text(json.dumps(orthogonal_without_parallel_set), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    release = worktree_packet("WORKTREE_RELEASE")
-    path.write_text(json.dumps(release), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 0, result.stderr
-
-    implicit_release_disposition = copy.deepcopy(release)
-    del implicit_release_disposition["target"]["ignored_artifacts"]
-    rehash_clerk_packet(implicit_release_disposition)
-    path.write_text(json.dumps(implicit_release_disposition), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    invalid_release_disposition = copy.deepcopy(release)
-    invalid_release_disposition["target"]["ignored_artifacts"] = "default"
-    rehash_clerk_packet(invalid_release_disposition)
-    path.write_text(json.dumps(invalid_release_disposition), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    malformed_identity = copy.deepcopy(packet)
-    malformed_identity["executor"]["logical_identity"] = "Clerk-other-clerk-001"
-    rehash_clerk_packet(malformed_identity)
-    path.write_text(json.dumps(malformed_identity), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 5
-
-    changed_writer = copy.deepcopy(packet)
-    changed_writer["authority"]["document_writer"] = "CM-example-direction"
-    changed_writer["target"]["expected_document_writer"] = "CM-example-direction"
-    rehash_clerk_packet(changed_writer)
-    path.write_text(json.dumps(changed_writer), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 5
-    changed_actor = copy.deepcopy(packet)
-    changed_actor["authority"]["git_actor"] = "cm:example-direction"
-    rehash_clerk_packet(changed_actor)
-    path.write_text(json.dumps(changed_actor), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 5
-
-    wrong_model = copy.deepcopy(packet)
-    wrong_model["executor"]["model"] = "openai-codex/gpt-5.6-sol"
-    rehash_clerk_packet(wrong_model)
-    path.write_text(json.dumps(wrong_model), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    wrong_return = copy.deepcopy(packet)
-    wrong_return["return_owner"] = "CLERK"
-    rehash_clerk_packet(wrong_return)
-    path.write_text(json.dumps(wrong_return), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    extra = copy.deepcopy(packet)
-    extra["decision_request"] = "RETRY"
-    rehash_clerk_packet(extra)
-    path.write_text(json.dumps(extra), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-    wrong_hash = copy.deepcopy(packet)
-    wrong_hash["packet_sha256"] = "0" * 64
-    path.write_text(json.dumps(wrong_hash), encoding="utf-8")
-    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
-    assert result.returncode == 2
-
-
-def test_runtime_clerks_are_unique_per_assignment_root_children(
-    tmp_path: Path,
-) -> None:
-    document = fixture("runtime_agents")
-    document["agents"].append(
+    current = fixture("runtime_agents")
+    current["agents"].append(
         {
-            "logical_identity": "Clerk-state-cas-clerk-001",
+            "logical_identity": "Clerk",
             "agent_type": "hmasd-clerk",
             "generation": 1,
-            "assignment_id": "state-cas-clerk-001",
+            "assignment_id": "clerk-job-001",
             "parent_identity": "Root",
-            "session_ref": "session-clerk-state-cas",
-            "job_ref": "job-clerk-state-cas",
-            "runtime_ref": "runtime-clerk-state-cas",
-            "lifecycle": "RUNNING",
+            "session_ref": "session-clerk",
+            "job_ref": "job-clerk-001",
+            "runtime_ref": "runtime-clerk",
+            "lifecycle": "IDLE",
             "last_seen_at": "2026-08-24T00:00:00Z",
         }
     )
-    path = tmp_path / "runtime-agents-clerk.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
-    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
-    assert result.returncode == 0, result.stderr
+    current_input = tmp_path / "runtime-current.json"
+    current_input.write_text(json.dumps(current), encoding="utf-8")
+    target = tmp_path / "runtime-agents.json"
+    initialized = run_cli(
+        "initialize",
+        "--kind",
+        "runtime_agents",
+        "--path",
+        str(target),
+        "--writer",
+        "Root",
+        "--input",
+        str(current_input),
+    )
+    assert initialized.returncode == 0, initialized.stderr
 
-    wrong_assignment = copy.deepcopy(document)
-    wrong_assignment["agents"][-1]["assignment_id"] = "other-clerk-001"
-    path.write_text(json.dumps(wrong_assignment), encoding="utf-8")
-    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
-    assert result.returncode == 5
+    running = copy.deepcopy(current)
+    running["revision"] = 2
+    running["updated_at"] = "2026-08-24T00:00:01Z"
+    running["agents"][-1]["assignment_id"] = "clerk-job-002"
+    running["agents"][-1]["job_ref"] = "job-clerk-002"
+    running["agents"][-1]["lifecycle"] = "RUNNING"
+    running["agents"][-1]["last_seen_at"] = "2026-08-24T00:00:01Z"
+    running_input = tmp_path / "runtime-running.json"
+    running_input.write_text(json.dumps(running), encoding="utf-8")
+    replaced = run_cli(
+        "replace",
+        "--kind",
+        "runtime_agents",
+        "--path",
+        str(target),
+        "--writer",
+        "Root",
+        "--expected-revision",
+        "1",
+        "--input",
+        str(running_input),
+    )
+    assert replaced.returncode == 0, replaced.stderr
 
-    wrong_parent = copy.deepcopy(document)
-    wrong_parent["agents"][-1]["parent_identity"] = "EM-example-direction"
-    path.write_text(json.dumps(wrong_parent), encoding="utf-8")
-    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
-    assert result.returncode == 2
-    parked = copy.deepcopy(document)
+    parked = copy.deepcopy(running)
+    parked["revision"] = 3
+    parked["updated_at"] = "2026-08-24T00:00:02Z"
     parked["agents"][-1]["lifecycle"] = "PARKED"
-    path.write_text(json.dumps(parked), encoding="utf-8")
-    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
-    assert result.returncode == 2
+    parked["agents"][-1]["last_seen_at"] = "2026-08-24T00:00:02Z"
+    parked_input = tmp_path / "runtime-parked.json"
+    parked_input.write_text(json.dumps(parked), encoding="utf-8")
+    parked_result = run_cli(
+        "replace",
+        "--kind",
+        "runtime_agents",
+        "--path",
+        str(target),
+        "--writer",
+        "Root",
+        "--expected-revision",
+        "2",
+        "--input",
+        str(parked_input),
+    )
+    assert parked_result.returncode == 0, parked_result.stderr
+    assert json.loads(target.read_text(encoding="utf-8"))["agents"][-1][
+        "logical_identity"
+    ] == "Clerk"
 
-    extra = copy.deepcopy(document)
-    extra["agents"][-1]["advisor"] = "off"
-    path.write_text(json.dumps(extra), encoding="utf-8")
-    result = run_cli("validate", "--kind", "runtime_agents", "--path", str(path))
+    obsolete_identity = copy.deepcopy(parked)
+    obsolete_identity["agents"][-1]["logical_identity"] = "Clerk-clerk-job-002"
+    obsolete_path = tmp_path / "runtime-obsolete-identity.json"
+    obsolete_path.write_text(json.dumps(obsolete_identity), encoding="utf-8")
+    obsolete_result = run_cli(
+        "validate",
+        "--kind",
+        "runtime_agents",
+        "--path",
+        str(obsolete_path),
+    )
+    assert obsolete_result.returncode == 2
+
+
+def test_obsolete_clerk_operation_schema_is_unregistered(tmp_path: Path) -> None:
+    path = tmp_path / "operation.json"
+    path.write_text("{}\n", encoding="utf-8")
+    result = run_cli("validate", "--kind", "clerk_operation", "--path", str(path))
     assert result.returncode == 2
+    assert not (ROOT / "scripts/schemas/hmasd_clerk_operation.schema.json").exists()
 
 
 def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(

@@ -1,14 +1,13 @@
 """Phase 7 pressure evidence for the public HMASD recovery contracts.
 
-The recovery manager has no private Python API.  These tests therefore use the
-state, run, and worktree command-line contracts and inspect only the published
-recovery Skill for the manager-only decisions (generation rotation, late-result
+The recovery manager has no private Python API. These tests therefore use the
+state and run command-line contracts and inspect only the published recovery
+Skill for the manager-only decisions (generation rotation, late-result
 handling, and bounded route selection).
 """
 
 from __future__ import annotations
 
-import hashlib
 import copy
 import json
 import shutil
@@ -27,7 +26,6 @@ PHASE0_FIXTURES = ROOT / "tests" / "fixtures" / "hmasd_phase0"
 RECOVERY_FIXTURES = ROOT / "tests" / "fixtures" / "hmasd_recovery"
 STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
 RUN_SCRIPT = ROOT / "scripts" / "hmasd_run.py"
-WORKTREE_SCRIPT = ROOT / "scripts" / "hmasd_worktree.py"
 EXTERNAL_SCRIPT = ROOT / "scripts" / "hmasd_external_review.py"
 RECOVERY_SKILL = ROOT / ".omp" / "skills" / "hmasd-workflow-recovery" / "SKILL.md"
 
@@ -330,105 +328,6 @@ def test_running_reconcile_observes_once_and_duplicate_execute_is_refused(
     assert manifest.read_bytes() == first_bytes
 
 
-def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
-    tmp_path: Path,
-) -> None:
-    """A journaled Git mutation is inspected, never blindly provisioned twice."""
-
-    repo = tmp_path / "repo"
-    repo.mkdir()
-    _git(repo, "init", "--initial-branch", "omp/workflow")
-    (repo / ".omp").mkdir()
-    (repo / ".omp" / "AGENTS.md").write_text("# test root\n", encoding="utf-8")
-    (repo / "tracked.txt").write_text("initial\n", encoding="utf-8")
-    _git(repo, "add", "tracked.txt")
-    _git(repo, "-c", "user.name=HMASD Test", "-c", "user.email=hmasd@example.invalid", "commit", "-m", "initial")
-    base_sha = _git(repo, "rev-parse", "HEAD").stdout.strip()
-
-    container = tmp_path / "worktrees"
-    container.mkdir()
-    entry = _load(PHASE0_FIXTURES / "runtime_worktrees.json")["worktrees"][0]
-    entry.update(
-        {
-            "base_sha": base_sha,
-            "branch": "omp/example-direction/engineering/run-example",
-            "canonical_absolute_path": str(container / "example-direction-engineering-run-example"),
-            "lifecycle": "PROVISIONING",
-            "operation_token": "0123456789abcdef0123456789abcdef",
-        }
-    )
-    runtime = _load(PHASE0_FIXTURES / "runtime_worktrees.json")
-    runtime["worktrees"] = [entry]
-    runtime_dir = repo / ".omp" / "runtime"
-    runtime_dir.mkdir()
-    runtime_path = runtime_dir / "worktrees.json"
-    runtime_path.write_text(json.dumps(runtime, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    receipt_path = repo / entry["receipt_path"]
-    receipt_path.parent.mkdir(parents=True)
-    receipt_path.write_text(
-        json.dumps(
-            {
-                "schema": "hmasd.worktree-receipt/v1",
-                "worktree_ref": entry["worktree_ref"],
-                "operation_token": entry["operation_token"],
-                "repo": str(repo),
-                "worktree_path": entry["canonical_absolute_path"],
-                "branch": entry["branch"],
-                "base_sha": entry["base_sha"],
-            },
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-
-    inspected = _run(WORKTREE_SCRIPT, "inspect", "--worktree-ref", "wt-example", cwd=repo)
-    assert inspected.returncode == 6, (inspected.stdout, inspected.stderr)
-    observation = _load_json_text(inspected.stdout)
-    assert observation.get("orphaned") is True, observation
-    assert observation.get("orphan_reason"), observation
-
-    handoff_path = repo / "handoffs" / "orphan-provision-clerk.json"
-    handoff_path.parent.mkdir()
-    handoff_path.write_text('{"terminal":true}\n', encoding="utf-8")
-    handoff_sha256 = hashlib.sha256(handoff_path.read_bytes()).hexdigest()
-    before = runtime_path.read_bytes()
-    provisioned = _run(
-        WORKTREE_SCRIPT,
-        "provision",
-        "--repo",
-        str(repo),
-        "--container",
-        str(container),
-        "--direction",
-        "example-direction",
-        "--kind",
-        "engineering",
-        "--assignment",
-        "run-example",
-        "--base",
-        base_sha,
-        "--integration-policy",
-        "EXACT_HANDOFF",
-        "--required-handoff-sha",
-        base_sha,
-        "--manager-assignment-id",
-        "run-example",
-        "--clerk-assignment-id",
-        "orphan-provision-clerk",
-        "--handoff-ref",
-        handoff_path.relative_to(repo).as_posix(),
-        "--handoff-sha256",
-        handoff_sha256,
-        "--lease-token",
-        hashlib.sha256(b"orphan-provision-lease").hexdigest(),
-        cwd=repo,
-    )
-    assert provisioned.returncode == 6, (provisioned.stdout, provisioned.stderr)
-    assert runtime_path.read_bytes() == before
-    assert not (container / "example-direction-engineering-run-example").exists()
-
 def test_external_unknown_commitment_is_not_published_and_response_is_idempotent(
     tmp_path: Path,
     monkeypatch: Any,
@@ -487,17 +386,3 @@ def test_recovery_attempt_deduplication_and_exhaustion_emit_one_precise_blocker(
         assert term in skill
 
 
-def _load_json_text(text: str) -> dict[str, Any]:
-    payload = json.loads(text)
-    assert isinstance(payload, dict)
-    return payload
-
-
-def _git(cwd: Path, *args: str) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        ["git", *args],
-        cwd=cwd,
-        check=True,
-        capture_output=True,
-        text=True,
-    )

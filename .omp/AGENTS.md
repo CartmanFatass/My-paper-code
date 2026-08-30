@@ -40,12 +40,13 @@ the target transport inventory contains the singleton
 - Use only the exact project role names in `.omp/agents/`; do not invent aliases,
   compatibility names, or generated per-direction definitions.
 - `hmasd-em` and `hmasd-cm` are the only project spawn-capable managers. All
-  other project roles, including `hmasd-clerk`, are non-blocking leaves or
-  services. Root executes Portfolio work directly; it never creates an
-  intermediate Portfolio agent. A fresh per-packet Clerk executes only one
-  Root-admitted mechanical operation and cannot spawn, schedule, interpret,
-  choose a successor, or gain science, technical, Portfolio, lifecycle,
-  actor, or writer authority.
+  other project roles are non-blocking leaves or services. `hmasd-clerk`
+  implements the one stable logical `Clerk` service: Root assigns it one
+  concise frozen mechanical job at a time through task or Hub, then the same
+  identity may idle, park, and revive for the next sequential job. Clerk
+  cannot spawn, schedule, interpret, choose a successor, or gain science,
+  technical, Portfolio, lifecycle, actor, or writer authority. Root executes
+  Portfolio work directly; it never creates an intermediate Portfolio agent.
 - Root directly invokes EM and CM managers. Direction-scoped science always
   goes to the responsible EM; Root never bypasses that EM by invoking a
   scientific leaf. Root may invoke a project leaf directly only for
@@ -111,22 +112,23 @@ the target transport inventory contains the singleton
   salience, timing, and later Git state never satisfy an edge.
 - `NodeKey=(logical_identity,generation,assignment_id)` has at most one terminal
   product. Delivery identity is distinct from `NodeKey+result_sha256`, and job
-  settlement is not acceptance. Every manager reentry and Clerk operation uses
-  a new assignment ID; compatible scope may keep the same session, identity,
-  and generation, while material scope change requires a new generation.
+  settlement is not acceptance. Every manager reentry uses a new assignment
+  ID. Every Clerk assignment uses a new sequential `job_id` while the logical
+  identity remains exactly `Clerk`; compatible scope keeps the same service
+  session and material scope change requires a replacement assignment.
 - A manager terminal semantic product names `semantic_product_ref` and
   `persistence_status=PREPARED`; unobserved durable, candidate, and integrated
-  SHAs remain null. Pending Clerk mechanics do not make the manager's scientific
+  SHAs remain null. Pending Clerk work does not make the manager's scientific
   or technical semantic product incomplete. Same-direction EM-to-CM waits for
   the exact accepted EM `integrated_sha`, and CM-to-EM result interpretation
   waits for the exact accepted CM `integrated_sha`; explicitly independent
   semantic, Transport, Portfolio, or Clerk obligations may proceed.
-- Packet presence is inert. Only Root acceptance of the exact authorizer result
-  and packet digest followed by admission authorizes execution. Root dispatches
-  one fresh nonblocking `hmasd-clerk` task per content-addressed packet, batches
-  independent packets, supplies the exact authorizer-result binding, and never
-  reconstructs or rewrites packet fields. Raw watchers, daemons, auto-executing
-  inboxes, and a singleton parked Clerk are forbidden.
+- Root supplies each Clerk job as one concise frozen task/Hub assignment with
+  its exact actor or writer, canonical targets, inputs, allowed paths,
+  authorized effects, competing refusal outcomes, stop, and return route.
+  Clerk runs one active job, returns direct observations, then idles or parks.
+  It never persists another authorization graph or operation draft, and Root
+  never splits one coherent chore into primitive jobs.
 - Literal Codex `[WORK]`, `[RESULT]`, and `[BROWSER WORK]` headings are semantic
   source material only. They are not OMP routing authority, identity, receipts,
   or a substitute for the required meaning sections.
@@ -260,22 +262,22 @@ the target transport inventory contains the singleton
   activity and open a subagent transcript with `Enter`; this complements but
   does not replace Root's main-transcript explanation.
 - EM and CM own semantic authoring in their exact provisioned worktree until
-  terminal physical-lease handoff. They freeze content-addressed Clerk packets
-  for CAS, candidate, and integration mechanics and then become non-writing.
-  A fresh Clerk alone executes the exact operation under the declared actor
-  `em:<direction>` or `cm:<direction>` and mutation key. The manager resumes
-  writing only after terminal Clerk state and a new Root assignment.
-- Root authors Root/shared, cross-direction Portfolio, schema/control-plane, and
-  external-archive semantics. For its own non-overlapping tracked paths, Root
-  may run the local quick check, stage the exact allowlist, and create one local
-  checkpoint directly; this routine reversible path needs no Clerk packet.
+  terminal handoff. They freeze concise mechanical intent for state,
+  candidate, or integration work and then become non-writing. Root assigns
+  that complete bounded job to the stable `Clerk` under the declared actor
+  `em:<direction>` or `cm:<direction>`. The manager resumes writing only after
+  terminal Clerk observation and a new Root assignment.
+- Root authors Root/shared, cross-direction Portfolio, schema/control-plane,
+  and external-archive semantics. For its own non-overlapping tracked paths,
+  Root may run the local quick check, stage the exact allowlist, and create one
+  local checkpoint directly; this routine reversible path needs no Clerk.
   Remote push still requires an immediate fetch/compare and one known-outcome
-  attempt. Direction-owned candidate integration, state CAS, ambiguous
-  recovery, and any operation with a physical manager lease continue through
-  Clerk. Clerk never changes actor, writer, allowlist, policy, lifecycle,
-  acceptance, or successor and never rebases, merges, retries, or resolves a
-  conflict. The sole target is `omp/workflow`; only exact `EXACT_HANDOFF` and
-  `ORTHOGONAL_DIRECTION` policies are accepted for direction candidates.
+  attempt. Direction-owned candidate integration, state CAS, and bounded
+  mechanical work explicitly assigned to Clerk remain with that service.
+  Clerk never changes actor, writer, allowlist, lifecycle, acceptance, or
+  successor and never rebases, retries, or resolves a conflict. Git targets
+  stay inside `omp/*`; every candidate must be one direct child of its declared
+  source base and must change exactly its declared allowed paths.
 - Every writer uses an exact path allowlist. `git add -A` is forbidden.
   Unrelated user changes remain unstaged; mixed ownership in one path is a
   conflict. Runtime maps, raw runs, generated logs, secrets, and unverified
@@ -318,15 +320,16 @@ invocation profile or a job-ID mutation, selects the model.
 - Use repository-relative POSIX tracked references without `..`, symlinks, or
   absolute prefixes. Concrete handles, PIDs, absolute worktree paths, and
   local tab mappings stay under ignored `.omp/runtime/` or `temp/`.
-- All long-lived JSON mutations use exact `scripts/hmasd_state.py` packets and
-  its schema, revision, expected-revision CAS, and exit-code contract. The
-  authority owner freezes complete desired bytes; only an admitted Clerk invokes
-  the mechanical writer.
+- Long-lived JSON mutations use the public `scripts/hmasd_state.py` interface,
+  its schema, complete desired input bytes, revision, expected-revision CAS,
+  and exit-code contract. The authority owner freezes the desired document;
+  an assigned Clerk state job invokes that public interface directly and never
+  edits the bytes or wraps the call in another protocol artifact.
 - Root alone owns shared-authority and recovery semantics. EM and CM own exact
-  direction/kind semantic candidates. None performs target Git; each freezes
-  one-operation packets and transfers the physical lease. A fresh Clerk alone
-  executes the exact authorized candidate/integration operation under the
-  original actor. All other children never commit or push.
+  direction/kind semantic candidates. None performs target Git; each hands
+  Root one concise frozen integration intent. The stable Clerk service executes
+  an admitted candidate integration under the original actor. All other
+  children never commit or push.
 - Agentify remains the sole external submission ledger. The configured MCP
   command runs `C:\Projects\agentify-desktop` with Windows `node.exe` from its
   WSL mount, so Agentify opens the user's configured, visible Windows Chrome

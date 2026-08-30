@@ -184,9 +184,9 @@ def test_engineering_request_is_durable_meaning_complete_and_root_routed() -> No
         "resource/effect bounds and stop rule",
         "run plan without launching it",
         "positive, negative, null, ambiguous, invalid, and technical-failure branches",
-        "hash the request",
-        "freeze its exact desired research-state bytes",
-        "`state_cas` clerk packet",
+        "freeze the complete desired research-state bytes",
+        "expected revision, writer, and exact state path",
+        "concise state or integration job with `owner: clerk`",
         "required `next_actions`",
         "`owner: clerk`",
         "`action_id`",
@@ -218,7 +218,7 @@ def test_material_records_preserve_costly_evidence_and_common_v2_return() -> Non
         "required `next_actions`",
         "owner `em` for local work or interpretation",
         "`cm` only after the exact same-direction integrated-sha edge is satisfied",
-        "`clerk` for a frozen mechanical packet",
+        "`clerk` for concise frozen mechanical intent",
         "`transport` for a frozen pro request",
     ):
         assert requirement in compact
@@ -231,14 +231,14 @@ def test_manager_semantics_are_split_from_clerk_persistence_and_target_git() -> 
     for requirement in (
         "return promptly with `semantic_product_ref` and `persistence_status=prepared`",
         "`candidate_sha`, and `integrated_sha` remain null until directly observed",
-        "one complete content-addressed packet per mechanical state, candidate, or git operation",
+        "one concise complete intent per mechanical state, candidate, or git job",
         "do not perform target git",
-        "physical research worktree only through terminal handoff",
-        "em resumes writing only after every clerk mutation is terminal",
+        "research worktree only through terminal handoff",
+        "em resumes writing only after that clerk job is terminal",
         "root issues a new assignment",
         "clerk refusal or `unknown` changes only the mechanical edge",
         "preserves the accepted semantic product",
-        "neither root nor clerk may reconstruct packet fields",
+        "neither root nor clerk may change science",
     ):
         assert requirement in compact
 

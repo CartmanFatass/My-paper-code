@@ -68,7 +68,7 @@
   "$defs": {
     "logical_identity": {
       "type": "string",
-      "pattern": "^(?:Root|BrowserTransport|Clerk-[a-z0-9][a-z0-9-]{1,127}|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$"
+      "pattern": "^(?:Root|BrowserTransport|Clerk|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|hmasd-(?:project-scout|code-scout|implementer(?:-terra)?|reviewer|verifier|experiment-operator|research-(?:scout|innovator|critic|principles-analyst|artifact-writer)|workflow-recovery-manager)|librarian)$"
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}(?:[0-9a-f]{24})?$" },
@@ -525,79 +525,26 @@
         }
       ]
     },
-    "clerk_authorizer": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["role", "logical_identity", "generation", "assignment_id"],
-      "properties": {
-        "role": { "type": "string", "enum": ["root", "hmasd-em", "hmasd-cm"] },
-        "logical_identity": {
-          "type": "string",
-          "pattern": "^(?:Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63})$"
-        },
-        "generation": { "type": "integer", "minimum": 1 },
-        "assignment_id": { "$ref": "#/$defs/id" }
-      }
-    },
-    "clerk_resource": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "key"],
-      "properties": {
-        "kind": {
-          "type": "string",
-          "enum": ["STATE_PATH", "RUNTIME_WORKTREES_STATE", "WORKTREE", "CONTAINER", "GIT_TARGET", "REMOTE_TARGET"]
-        },
-        "key": { "type": "string", "minLength": 1, "maxLength": 4096 }
-      }
-    },
     "clerk_payload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "operation_id", "packet_ref", "executor_identity", "authorizer", "operation", "authority_actor_or_writer", "resources", "attempt", "outcome", "effect_state", "receipt_refs", "observation_refs"],
+      "required": ["kind", "job_id", "operation", "outcome", "observations"],
       "properties": {
         "kind": { "const": "clerk" },
-        "operation_id": { "$ref": "#/$defs/id" },
-        "packet_ref": { "$ref": "#/$defs/content_ref" },
-        "executor_identity": {
-          "type": "string",
-          "pattern": "^Clerk-[a-z0-9][a-z0-9-]{1,127}$"
-        },
-        "authorizer": { "$ref": "#/$defs/clerk_authorizer" },
+        "job_id": { "$ref": "#/$defs/id" },
         "operation": {
           "type": "string",
-          "enum": ["STATE_CAS", "WORKTREE_PROVISION", "WORKTREE_INSPECT", "WORKTREE_RELEASE", "PATCH_APPLY", "CANDIDATE_CREATE", "GIT_RECORD", "GIT_PREPARE", "GIT_INTEGRATE_PUSH"]
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
         },
-        "authority_actor_or_writer": {
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^(?:Portfolio|Root|EM-[a-z0-9][a-z0-9_-]{1,63}|CM-[a-z0-9][a-z0-9_-]{1,63}|root|em:[a-z0-9][a-z0-9_-]{1,63}|cm:[a-z0-9][a-z0-9_-]{1,63})$"
-            },
-            { "type": "null" }
-          ]
-        },
-        "resources": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/clerk_resource" }
-        },
-        "attempt": { "type": "integer", "const": 1 },
-        "outcome": { "type": "string", "enum": ["SUCCEEDED", "REFUSED", "UNKNOWN"] },
-        "effect_state": {
+        "outcome": {
           "type": "string",
-          "enum": ["NOT_APPLICABLE", "NOT_ATTEMPTED", "LANDED", "NOT_LANDED", "UNKNOWN"]
+          "enum": ["COMPLETED", "REFUSED", "UNKNOWN"]
         },
-        "receipt_refs": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/content_ref" }
-        },
-        "observation_refs": {
+        "observations": {
           "type": "array",
           "items": {
-            "anyOf": [
-              { "$ref": "#/$defs/ref" },
-              { "type": "object" }
-            ]
+            "type": "object",
+            "additionalProperties": true
           }
         }
       }

@@ -103,6 +103,29 @@ def test_human_protocol_covers_the_layered_omp_control_plane() -> None:
         assert meaning_section in protocol
 
 
+def test_human_protocol_uses_stable_sequential_clerk_service() -> None:
+    protocol = _flat(PROTOCOL)
+    for required in (
+        "stable logical `Clerk`",
+        "each sequential job receives a new assignment ID",
+        "may idle, park, or revive under the same identity",
+        "public `scripts/hmasd_state.py` interface directly",
+        "one active job",
+        "only push attempt",
+        "one read-only fetch/observation and never a retry",
+    ):
+        assert required in protocol
+    for obsolete in (
+        "fresh nonblocking `hmasd-clerk`",
+        "accepted-authorizer binding",
+        "packet hash plus admission",
+        "content-addressed Clerk packets",
+        "exact accepted Clerk receipt",
+        "same ID/hash returns the existing receipt",
+    ):
+        assert obsolete not in protocol
+
+
 def test_root_executes_the_complete_portfolio_decision_frame() -> None:
     skill = _flat(ROOT_SKILL)
     agents = _flat(AGENTS)
@@ -165,9 +188,9 @@ def test_root_executes_the_complete_portfolio_decision_frame() -> None:
     assert "the capacity action" in skill
     assert "exact `PORTFOLIO.md` reference, and registry revision" in skill
 
-    assert "freeze the complete desired registry bytes" in skill
-    assert "wait for the exact accepted registry receipt and Root-owned integrated SHA" in skill
-    assert "only Clerk performs the CAS and Git mechanics" in skill
+    assert "State work calls the public `scripts/hmasd_state.py` interface directly" in skill
+    assert "complete desired bytes and the expected revision" in skill
+    assert "Root assigns the stable logical `Clerk` one concise frozen mechanical job" in skill
     assert "Checkpoint only material milestones:" in skill
     for material_milestone in (
         "completed research or engineering rounds",
@@ -368,12 +391,13 @@ def test_common_actions_and_clerk_authority_are_closed_and_explicit() -> None:
         assert action_anchor in agents
 
     for clerk_anchor in (
-        "Packet presence is inert",
-        "fresh nonblocking `hmasd-clerk` task",
-        "without reconstructing, completing, choosing, or rewriting any packet field",
-        "A raw watcher, daemon, auto-executing inbox, or global parked Clerk is forbidden",
-        "Clerk returns observed mechanical facts only to Root",
-        "preserves accepted manager semantics",
+        "stable logical `Clerk`",
+        "one concise frozen mechanical job at a time through task or Hub",
+        "same identity with a new sequential `job_id`",
+        "never holds two active jobs",
+        "State work calls the public `scripts/hmasd_state.py` interface directly",
+        "One job permits one push attempt",
+        "one read-only fetch/observation and never a retry",
     ):
         assert clerk_anchor in skill
 

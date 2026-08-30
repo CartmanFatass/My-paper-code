@@ -55,10 +55,10 @@ def test_engineering_request_is_the_durable_scope_reference_without_note_tax() -
     assert request_path in em
     assert request_path in cm
     assert "write one meaning-complete direction-owned engineering request" in em
-    assert "hash the request" in em
+    assert "freeze the complete desired research-state bytes" in em
     assert "required `next_actions`" in em
     assert "`owner: clerk`" in em
-    assert "packet presence is inert" in em
+    assert "em never executes the state or target-git job" in em
     assert (
         "when no cm note is warranted, the exact durable em request that "
         "satisfied the gate remains the contract and scope reference"

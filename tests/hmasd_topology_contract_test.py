@@ -7,6 +7,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 AGENT_ROOT = REPO_ROOT / ".omp" / "agents"
+RUNTIME_AGENTS_SCHEMA = (
+    REPO_ROOT / "scripts" / "schemas" / "hmasd_runtime_agents.schema.json"
+)
 FrontmatterValue = str | list[str]
 
 
@@ -264,6 +267,23 @@ def test_exact_project_agent_inventory_and_frontmatter() -> None:
             assert "read-summarize" not in metadata
 
 
+def test_runtime_schema_uses_one_stable_revivable_clerk_identity() -> None:
+    schema = json.loads(RUNTIME_AGENTS_SCHEMA.read_text(encoding="utf-8"))
+    definitions = schema["$defs"]
+    clerk = definitions["clerk_agent"]
+    assert clerk["properties"]["logical_identity"] == {"const": "Clerk"}
+    assert set(clerk["properties"]["lifecycle"]["enum"]) == {
+        "CREATED",
+        "RUNNING",
+        "PARKED",
+        "IDLE",
+        "COMPLETED",
+        "FAILED",
+        "RETIRED",
+    }
+    assert "clerk_identity" not in definitions
+
+
 def test_depth_two_graph_and_leaf_specialists() -> None:
     parsed = {
         name: _parse_frontmatter(AGENT_ROOT / f"{name}.md")
@@ -402,20 +422,20 @@ def test_fifteen_complete_skills_and_authority_files() -> None:
             "user-visible blocker",
         ),
         "hmasd-git-integration": (
-            "canonical",
-            "omp/workflow",
-            "one candidate commit",
-            "stale or non-handoff bases refuse",
-            "em:<direction>",
-            "cm:<direction>",
+            "canonical git top level",
+            "stable logical `clerk`",
+            "one non-merge commit",
+            "exact changed-path set",
+            "one read-only fetch and comparison",
+            "observation grants no retry authority",
         ),
         "hmasd-clerk": (
-            "packet-file presence is inert",
-            "openai-codex/gpt-5.6-luna",
-            "thinking level is exactly `xhigh`",
-            "no watcher, daemon, shared parked clerk",
-            "never automatically retry",
-            "`decision_requests` and `next_actions` are always empty",
+            "one stable logical local-project service",
+            "one concise frozen job at a time",
+            "idle, park, and revive",
+            "never has more than one active job",
+            "there is no json input or build step",
+            "`decision_requests` and `next_actions` are empty",
         ),
         "hmasd-paper-lookup": ("on-demand", "explicit network boundary"),
         "hmasd-hypothesis-mechanisms": ("only on demand", "not a manager autoload"),

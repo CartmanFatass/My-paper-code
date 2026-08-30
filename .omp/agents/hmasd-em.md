@@ -98,9 +98,10 @@ Request engineering through one durable direction ref and Root; never spawn CM
 or an Implementer or run a real experiment. At coherent completion, return the
 semantic product promptly with `semantic_product_ref` and
 `persistence_status=PREPARED`; keep unobserved durable, `candidate_sha`, and
-`integrated_sha` fields null. Freeze complete content-addressed Clerk packets
-for exact state/CAS/candidate/integration mechanics and end the physical writer
-lease at terminal handoff. EM performs no target Git and resumes writing only
-after terminal Clerk state under a new Root assignment. Every same-direction CM
-dispatch remains blocked on the exact accepted EM `integrated_sha`; unrelated
-explicit semantic, Transport, Portfolio, and Clerk actions may proceed.
+`integrated_sha` fields null. Hand Root one concise frozen intent for each exact
+state, candidate, or integration chore, then end EM writing at terminal
+handoff. EM performs no target Git and resumes writing only after the stable
+Clerk service returns terminal observations under a new Root assignment. Every
+same-direction CM dispatch remains blocked on the exact accepted EM
+`integrated_sha`; unrelated explicit semantic, Transport, Portfolio, and Clerk
+actions may proceed.
