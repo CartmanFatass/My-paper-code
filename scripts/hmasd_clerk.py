@@ -241,17 +241,35 @@ def _upstream(git: Git, branch: str) -> tuple[str, str]:
             "--format=%(upstream:remotename)%00%(upstream:remoteref)",
             local_ref,
         ).stdout.rstrip(b"\n")
-        remote_raw, remote_ref_raw = raw.split(b"\0", 1)
+        if raw:
+            remote_raw, remote_ref_raw = raw.split(b"\0", 1)
+        else:
+            remote_raw = remote_ref_raw = b""
         remote = remote_raw.decode("utf-8", errors="strict")
         remote_ref = remote_ref_raw.decode("utf-8", errors="strict")
     except (GitFailure, ValueError, UnicodeDecodeError) as exc:
         raise ClerkRefusal("INVALID_TARGET_UPSTREAM", f"cannot discover target upstream: {exc}") from exc
-    if not REMOTE_RE.fullmatch(remote) or remote_ref != local_ref:
+
+    if remote or remote_ref:
+        if not REMOTE_RE.fullmatch(remote) or remote_ref != local_ref:
+            raise ClerkRefusal(
+                "INVALID_TARGET_UPSTREAM",
+                "target must track the same canonical branch on one configured remote",
+            )
+        return remote, remote_ref
+
+    try:
+        remotes = git.run("remote").stdout.decode("utf-8", errors="strict").splitlines()
+    except (GitFailure, UnicodeDecodeError) as exc:
+        raise ClerkRefusal(
+            "INVALID_TARGET_UPSTREAM", f"cannot discover configured remotes: {exc}"
+        ) from exc
+    if len(remotes) != 1 or not REMOTE_RE.fullmatch(remotes[0]):
         raise ClerkRefusal(
             "INVALID_TARGET_UPSTREAM",
-            "target must track the same canonical branch on one configured remote",
+            "target has no upstream and requires exactly one canonical configured remote",
         )
-    return remote, remote_ref
+    return remotes[0], local_ref
 
 
 def _build_integration_commit(

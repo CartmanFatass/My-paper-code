@@ -264,6 +264,102 @@ def test_stable_identity_spans_sequential_job_ids(
     assert second_result["job_id"] == "job-002"
 
 
+def test_upstream_falls_back_to_only_canonical_configured_remote() -> None:
+    upstream_command = (
+        "git",
+        "for-each-ref",
+        "--format=%(upstream:remotename)%00%(upstream:remoteref)",
+        "refs/heads/omp/workflow",
+    )
+    calls: list[tuple[str, ...]] = []
+
+    def runner(
+        command: Sequence[str], _cwd: Path, _input_bytes: bytes | None
+    ) -> subprocess.CompletedProcess[bytes]:
+        call = tuple(command)
+        calls.append(call)
+        if call == upstream_command:
+            stdout = b"\0\n"
+        elif call == ("git", "remote"):
+            stdout = b"origin\n"
+        else:
+            raise AssertionError(f"unexpected command: {call!r}")
+        return subprocess.CompletedProcess(list(command), 0, stdout=stdout, stderr=b"")
+
+    discovered = clerk._upstream(clerk.Git(Path("/unused"), runner), "omp/workflow")
+
+    assert discovered == ("origin", "refs/heads/omp/workflow")
+    assert calls == [upstream_command, ("git", "remote")]
+
+
+@pytest.mark.parametrize(
+    "remote_output",
+    [
+        pytest.param(b"", id="zero"),
+        pytest.param(b"origin\nbackup\n", id="multiple"),
+        pytest.param(b"invalid/name\n", id="invalid"),
+    ],
+)
+def test_upstream_fallback_refuses_noncanonical_remote_sets(remote_output: bytes) -> None:
+    upstream_command = (
+        "git",
+        "for-each-ref",
+        "--format=%(upstream:remotename)%00%(upstream:remoteref)",
+        "refs/heads/omp/workflow",
+    )
+    calls: list[tuple[str, ...]] = []
+
+    def runner(
+        command: Sequence[str], _cwd: Path, _input_bytes: bytes | None
+    ) -> subprocess.CompletedProcess[bytes]:
+        call = tuple(command)
+        calls.append(call)
+        if call == upstream_command:
+            stdout = b"\0\n"
+        elif call == ("git", "remote"):
+            stdout = remote_output
+        else:
+            raise AssertionError(f"unexpected command: {call!r}")
+        return subprocess.CompletedProcess(list(command), 0, stdout=stdout, stderr=b"")
+
+    with pytest.raises(clerk.ClerkRefusal) as refused:
+        clerk._upstream(clerk.Git(Path("/unused"), runner), "omp/workflow")
+
+    assert refused.value.code == "INVALID_TARGET_UPSTREAM"
+    assert "exactly one canonical configured remote" in str(refused.value)
+    assert calls == [upstream_command, ("git", "remote")]
+
+
+def test_upstream_refuses_explicit_different_branch_without_remote_fallback() -> None:
+    upstream_command = (
+        "git",
+        "for-each-ref",
+        "--format=%(upstream:remotename)%00%(upstream:remoteref)",
+        "refs/heads/omp/workflow",
+    )
+    calls: list[tuple[str, ...]] = []
+
+    def runner(
+        command: Sequence[str], _cwd: Path, _input_bytes: bytes | None
+    ) -> subprocess.CompletedProcess[bytes]:
+        call = tuple(command)
+        calls.append(call)
+        if call != upstream_command:
+            raise AssertionError(f"unexpected command: {call!r}")
+        return subprocess.CompletedProcess(
+            list(command),
+            0,
+            stdout=b"origin\0refs/heads/main\n",
+            stderr=b"",
+        )
+
+    with pytest.raises(clerk.ClerkRefusal) as refused:
+        clerk._upstream(clerk.Git(Path("/unused"), runner), "omp/workflow")
+
+    assert refused.value.code == "INVALID_TARGET_UPSTREAM"
+    assert calls == [upstream_command]
+
+
 def test_help_exposes_only_ordinary_job_flags_and_no_json_draft(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
