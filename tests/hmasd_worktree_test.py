@@ -342,6 +342,10 @@ def test_patch_is_prospective_and_candidate_ref_does_not_change_checkout(tmp_pat
     assert git(repo, "rev-parse", candidate["candidate_ref"]).stdout.strip() == candidate_sha
     assert git(target, "rev-parse", "HEAD").stdout.strip() == base
 
+    candidate_facts = worktree.inspect_candidate(str(repo), base, candidate_sha)
+    assert candidate_facts["changed_paths"] == ["owned-a.txt", "owned-b.txt"]
+    assert candidate_facts["delta"]["sha256"] == patched["diff_sha256"]
+
     candidate_entry = candidate["worktree"]
     inspected = worktree.inspect(
         str(repo),

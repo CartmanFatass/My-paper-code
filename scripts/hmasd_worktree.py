@@ -2468,6 +2468,27 @@ def inspect_repository(
     return result
 
 
+def inspect_candidate(
+    repo_raw: str,
+    base_raw: str,
+    candidate_raw: str,
+) -> dict[str, Any]:
+    """Return canonical frozen candidate tree facts without mutation."""
+
+    repo, _ = _repo_context(repo_raw)
+    base = _verify_commit(repo, base_raw, label="candidate base")
+    candidate = _verify_commit(repo, candidate_raw, label="candidate")
+    delta = _canonical_tree_delta(repo, base, candidate)
+    return {
+        "ok": True,
+        "operation": "inspect-candidate",
+        "base_sha": base,
+        "candidate_sha": candidate,
+        "changed_paths": [record["path"] for record in delta["records"]],
+        "delta": delta,
+    }
+
+
 def validate_candidate(
     repo_raw: str,
     base_raw: str,
@@ -2478,9 +2499,9 @@ def validate_candidate(
 ) -> dict[str, Any]:
     """Validate one frozen candidate tree without mutating Git or runtime state."""
 
-    repo, _ = _repo_context(repo_raw)
-    base = _verify_commit(repo, base_raw, label="candidate base")
-    candidate = _verify_commit(repo, candidate_raw, label="candidate")
+    facts = inspect_candidate(repo_raw, base_raw, candidate_raw)
+    base = str(facts["base_sha"])
+    candidate = str(facts["candidate_sha"])
     allowed_paths = _strict_path_list(
         list(allowed_paths_raw),
         label="candidate allowed paths",
@@ -2493,8 +2514,8 @@ def validate_candidate(
         expected_diff_sha256_raw,
         label="candidate expected structural delta",
     )
-    delta = _canonical_tree_delta(repo, base, candidate)
-    changed_paths = [record["path"] for record in delta["records"]]
+    delta = dict(facts["delta"])
+    changed_paths = list(facts["changed_paths"])
     if (
         changed_paths != expected_changed_paths
         or delta["sha256"] != expected_diff_sha256
@@ -5763,6 +5784,13 @@ def _parser() -> argparse.ArgumentParser:
     )
     observe_parser.add_argument("--repo", default=".")
     observe_parser.add_argument("--worktree-ref", required=True)
+    inspect_candidate_parser = sub.add_parser(
+        "inspect-candidate",
+        help="read canonical frozen candidate tree facts without mutation",
+    )
+    inspect_candidate_parser.add_argument("--repo", default=".")
+    inspect_candidate_parser.add_argument("--base", required=True)
+    inspect_candidate_parser.add_argument("--candidate", required=True)
     validate_candidate_parser = sub.add_parser(
         "validate-candidate",
         help="validate frozen candidate tree facts without mutation",
@@ -5922,6 +5950,12 @@ def main(argv: Iterable[str] | None = None) -> int:
             result = observe(
                 args.repo,
                 args.worktree_ref,
+            )
+        elif args.operation == "inspect-candidate":
+            result = inspect_candidate(
+                args.repo,
+                args.base,
+                args.candidate,
             )
         elif args.operation == "validate-candidate":
             result = validate_candidate(

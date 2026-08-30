@@ -114,9 +114,9 @@ The executor maps every operation to exactly one public primitive:
 
 Precommit validation and result-blind reconciliation use only the documented
 read-only primitives `hmasd_worktree.py inspect-repository`,
-`hmasd_worktree.py validate-candidate`, and `hmasd_worktree.py observe`.
-They consume no packet Effect budget. Clerk never imports or calls a private
-`hmasd_worktree` helper.
+`hmasd_worktree.py inspect-candidate`, `hmasd_worktree.py validate-candidate`,
+and `hmasd_worktree.py observe`. They consume no packet Effect budget. Clerk
+never imports or calls a private `hmasd_worktree` helper.
 
 Every worktree/Git target carries canonical repo/container/worktree, exact
 registry revision and lifecycle, current worktree receipt SHA-256, frozen
