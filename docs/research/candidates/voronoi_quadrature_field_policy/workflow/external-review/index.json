@@ -27,10 +27,71 @@
       "terminal_state": "NATURAL_COMPLETION_VERIFIED"
     }
   ],
-  "revision": 3,
-  "rounds": [],
+  "revision": 6,
+  "rounds": [
+    {
+      "completed_at": null,
+      "created_at": "2026-08-30T12:16:37Z",
+      "evidence_set_sha256": "89bd737bfc9e6b4e6ebcfaea5abe4911ff60cc1b11e9997997ef02ca15400c2c",
+      "local_synthesis_ref": null,
+      "prompt_refs": {
+        "pro_convergence": null,
+        "pro_innovator": {
+          "path": "docs/external-review/directions/voronoi_quadrature_field_policy/e47f1643da200939b2dc/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+          "sha256": "a9e5dbc9537ca5853598740742c02f980e2aabeb15656d1535d762b3ad403019"
+        }
+      },
+      "providers": {
+        "pro_convergence": null,
+        "pro_innovator": null
+      },
+      "question_sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368",
+      "round_id": "e47f1643da200939b2dc",
+      "status": "BLOCKED"
+    },
+    {
+      "completed_at": null,
+      "created_at": "2026-08-30T12:30:26Z",
+      "evidence_set_sha256": "af5fa99c6375046d7590251e6c4c5c324bbc8dd1cc845c5d69c8d21446acafee",
+      "local_synthesis_ref": null,
+      "prompt_refs": {
+        "pro_convergence": null,
+        "pro_innovator": {
+          "path": "docs/external-review/directions/voronoi_quadrature_field_policy/a96efe90502f54a8e226/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+          "sha256": "e06453d31252c05e6947c1a18c13959ccaf070dfaefe19183fd2dd0b68643b49"
+        }
+      },
+      "providers": {
+        "pro_convergence": null,
+        "pro_innovator": null
+      },
+      "question_sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368",
+      "round_id": "a96efe90502f54a8e226",
+      "status": "BLOCKED"
+    },
+    {
+      "completed_at": null,
+      "created_at": "2026-08-30T12:40:21Z",
+      "evidence_set_sha256": "606039b78f5d1e0e63bdb2093e1ceae9149ca6dc1867339d9b5184f33d9d8cc2",
+      "local_synthesis_ref": null,
+      "prompt_refs": {
+        "pro_convergence": null,
+        "pro_innovator": {
+          "path": "docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+          "sha256": "f98c9f66c41f4d52b61c60ce9ec27b360e819adf61144a8ae9e85c0f98cf0049"
+        }
+      },
+      "providers": {
+        "pro_convergence": null,
+        "pro_innovator": null
+      },
+      "question_sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368",
+      "round_id": "a486fa196984d912a504",
+      "status": "INNOVATOR_PENDING"
+    }
+  ],
   "schema_version": 3,
-  "updated_at": "2026-08-30T01:57:56Z",
+  "updated_at": "2026-08-30T12:40:21Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-voronoi_quadrature_field_policy"
 }

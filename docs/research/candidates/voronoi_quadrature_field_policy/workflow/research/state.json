@@ -1,79 +1,75 @@
 {
   "actionable": false,
   "active_agents": [],
-  "active_round_id": null,
-  "blockers": [
-    {
-      "code": "PAUSE",
-      "observed_refs": [
-        {
-          "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
-          "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
-        }
-      ],
-      "resume_condition_ref": {
-        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
-        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
-      }
-    }
-  ],
+  "active_round_id": "a486fa196984d912a504",
+  "blockers": [],
+  "cycle_boundary": "FRESH_MATERIAL_CYCLE",
+  "cycle_id": "2026-08-30.19-vqfp-aggregate-witness-alignment-r01",
   "direction_id": "voronoi_quadrature_field_policy",
   "direction_ref": {
     "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-    "sha256": "fed008e19c7e5febb41c74b73857b929d57eff3b51cc1d9e986dcd09183529af"
+    "sha256": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a"
   },
   "engineering_request": null,
-  "evidence_set_sha256": "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9",
-  "last_checkpoint_sha": "b158f49584eeccb890a43c7e60ef97554b6a6aebfaf6252f5a645a5f40f0bb11",
+  "evidence_set_sha256": "606039b78f5d1e0e63bdb2093e1ceae9149ca6dc1867339d9b5184f33d9d8cc2",
+  "last_checkpoint_sha": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-        "sha256": "fed008e19c7e5febb41c74b73857b929d57eff3b51cc1d9e986dcd09183529af"
+        "sha256": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_SCIENCE_CARD_20260829.md",
-        "sha256": "65e11fd28a04d75e7173899f3150bdaf3682a2f8850ae6086c25d78cbf97ecbe"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_SCIENCE_CARD_20260830.md",
+        "sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_QUESTION_20260829.md",
-        "sha256": "4c9e2df6b994a532892bb0877c2f7be6aee77fc06c6666bb5fa9eb415dc04833"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_EVIDENCE_SET_20260830.md",
+        "sha256": "606039b78f5d1e0e63bdb2093e1ceae9149ca6dc1867339d9b5184f33d9d8cc2"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PAUSE_HANDOFF_20260829.md",
-        "sha256": "b158f49584eeccb890a43c7e60ef97554b6a6aebfaf6252f5a645a5f40f0bb11"
+        "path": "docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/PRO_INNOVATOR_PROMPT.md",
+        "sha256": "f98c9f66c41f4d52b61c60ce9ec27b360e819adf61144a8ae9e85c0f98cf0049"
       },
       {
-        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
-        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_REQUEST_20260830.md",
+        "sha256": "ab0f261b0d92125bdb931d1586d8ca5394ba457e70a7d90e449a238c2c78525a"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_RESPONSE_20260829.md",
-        "sha256": "c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
+        "sha256": "6111525d882a7fa6a38f7f0bcb3e84d1c52c97bd557d17d557822971159c9d21"
       },
       {
-        "path": "docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
-        "sha256": "4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRE_SEND_VALIDATOR_RECOVERY_20260830.md",
+        "sha256": "ec7e09b608ed72f736a348b2a56c798f3b4a524a7995279167ec080d83b3b90a"
       }
     ],
-    "kind": "AWAIT_USER_RESUME_FOR_LOCAL_ARCHIVE_REVIEW",
-    "owner": "USER"
+    "kind": "SUBMIT_FROZEN_PRO_INNOVATOR",
+    "owner": "TRANSPORT"
   },
-  "phase": "WAITING",
-  "question_sha256": "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9",
-  "registry_revision_seen": 10,
-  "revision": 6,
+  "phase": "DIVERGENT_REVIEW",
+  "question_sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368",
+  "registry_revision_seen": 19,
+  "revision": 9,
   "schema_version": 2,
-  "updated_at": "2026-08-29T23:57:31Z",
+  "updated_at": "2026-08-30T12:42:13Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
-        "REVIEW_RESOLVED",
-        "HANDOFF_READY",
-        "OBJECTION_UNRESOLVED"
+        "COMPLETE",
+        "ZERO_SEND_FAILED",
+        "COMMITMENT_UNKNOWN",
+        "SENT_WAITING",
+        "SENT_INPUT_MISMATCH",
+        "SENT_MODEL_MISMATCH",
+        "SENT_UNREADABLE",
+        "CONVERSATION_LOST"
       ],
-      "kind": "LOCAL_ARCHIVE_REVIEW_AFTER_RESUME",
-      "ref": "sha256:c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162;bytes=20745;path=docs/research/candidates/voronoi_quadrature_field_policy/VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_RESPONSE_20260829.md;archive=docs/external-review/directions/voronoi_quadrature_field_policy/211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json;archive_sha256=4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
+      "kind": "PRO_INNOVATOR_TRANSPORT",
+      "ref": {
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_REQUEST_20260830.md",
+        "sha256": "ab0f261b0d92125bdb931d1586d8ca5394ba457e70a7d90e449a238c2c78525a"
+      }
     }
   ],
   "writer": "EM-voronoi_quadrature_field_policy"
