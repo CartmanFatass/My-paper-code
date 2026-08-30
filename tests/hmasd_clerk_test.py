@@ -319,6 +319,38 @@ def test_self_authored_model_environment_is_not_proof_or_input(
     assert "resolved_model_is_fallback" not in receipt
 
 
+def test_provision_result_validation_uses_only_provision_fields(
+    tmp_path: Path,
+) -> None:
+    target = {
+        "worktree_ref": "wt-example-direction-research-example-assignment",
+        "canonical_worktree_path": str(tmp_path / "worktree"),
+        "integration_policy": "EXACT_HANDOFF",
+        "required_handoff_sha": "b" * 40,
+        "required_dependency_refs": [],
+        "direction_id": "example-direction",
+        "worktree_kind": "research",
+        "base_sha": "c" * 40,
+    }
+    packet = {"operation": "WORKTREE_PROVISION", "target": target}
+    result = {
+        "operation": "provision",
+        "worktree": {
+            "worktree_ref": target["worktree_ref"],
+            "canonical_absolute_path": target["canonical_worktree_path"],
+            "integration_policy": target["integration_policy"],
+            "required_handoff_sha": target["required_handoff_sha"],
+            "required_dependency_refs": [],
+            "direction_id": target["direction_id"],
+            "kind": target["worktree_kind"],
+            "base_sha": target["base_sha"],
+            "lifecycle": "PROVISIONED",
+        },
+    }
+
+    clerk._validate_primitive_result(packet, tmp_path, result)
+
+
 def test_mutation_resource_array_must_be_complete_and_canonical(
     repo: Path,
     monkeypatch: pytest.MonkeyPatch,

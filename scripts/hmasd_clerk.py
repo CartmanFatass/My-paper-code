@@ -1510,20 +1510,23 @@ def _validate_primitive_result(
                 "PRIMITIVE_RESULT_MISMATCH",
                 f"public primitive result changed frozen {key}",
             )
-    expected_lifecycle = {
-        "WORKTREE_PROVISION": "PROVISIONED",
-        "WORKTREE_INSPECT": target["expected_lifecycle"],
-        "WORKTREE_RELEASE": (
+    if operation == "WORKTREE_INSPECT":
+        expected_lifecycle = target["expected_lifecycle"]
+    elif operation == "WORKTREE_RELEASE":
+        expected_lifecycle = (
             "RETAINED_FOR_RECOVERY"
             if target["ignored_artifacts"] == "retain"
             else "RELEASED"
-        ),
-        "PATCH_APPLY": "PATCHED",
-        "CANDIDATE_CREATE": "CANDIDATE_READY",
-        "GIT_RECORD": "CANDIDATE_READY",
-        "GIT_PREPARE": "PREPARED_FOR_INTEGRATION",
-        "GIT_INTEGRATE_PUSH": "INTEGRATED",
-    }[operation]
+        )
+    else:
+        expected_lifecycle = {
+            "WORKTREE_PROVISION": "PROVISIONED",
+            "PATCH_APPLY": "PATCHED",
+            "CANDIDATE_CREATE": "CANDIDATE_READY",
+            "GIT_RECORD": "CANDIDATE_READY",
+            "GIT_PREPARE": "PREPARED_FOR_INTEGRATION",
+            "GIT_INTEGRATE_PUSH": "INTEGRATED",
+        }[operation]
     if worktree.get("lifecycle") != expected_lifecycle:
         raise ClerkUnknown(
             "PRIMITIVE_RESULT_MISMATCH",
