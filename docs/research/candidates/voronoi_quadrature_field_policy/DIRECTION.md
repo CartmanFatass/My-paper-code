@@ -4,16 +4,17 @@
 
 - Stable direction ID: `voronoi_quadrature_field_policy`
 - Scientific owner: `EM-voronoi_quadrature_field_policy`
-- Current Portfolio authority: `docs/research/portfolio/PORTFOLIO.md`, SHA-256 `ae07ea07dc7782c19cd537029db8dfe74f65bd0fe44753386d27d9bba7a823f7`
-- Registry authority observed: revision `21`, generation `4`
-- Current assignment: `vqfp-aggregate-witness-g4-r1`
-- Assignment baseline: `72f1b4fbbb588d51943c4155814031b6ed56e20f`
-- Current intake boundary: `TERMINAL_GAP_DISPOSITION`
+- Current Portfolio authority: `docs/research/portfolio/PORTFOLIO.md`, SHA-256 `ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d`
+- Current Portfolio transition checkpoint: `6f96d697d3c5faa8fb76dfc9826ef53e43d79d95`; latest Root target observed: `d3c35c8a207f83099f956c5a5df11b7d5b29491e`
+- Registry authority observed: revision `23`, generation `5`, SHA-256 `cd3f1f7b34a84e8c0747eeb9e9da3a65c165c896812598c9acfb964e2ca66be2`
+- Current assignment: `vqfp-current-contract-g5-r2`
+- Assignment baseline: `ccfd4849378b08af253b92f8a581c95d558d7312`
+- Current intake boundary: `CONTINUATION`
 - Portfolio action: `CONTINUE`
 
-**Conclusion first:** strict Agentify operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is terminal `ZERO_SEND_FAILED` at `expected_model_unavailable` before the send click. Direct ledger counters prove `zeroCommitPreClick=true`, `sendCount=0`, `sendActionCount=0`, `newUserMessageCount=0`, no provider message or conversation, and no archive. This is a technical transport fact, not a scientific product. The operation, its old stable/idempotency/fingerprint tuple, and its closed tab are never retried, reused, or converted in place.
+**Conclusion first:** Root accepted the native current two-axis zero-send preflight for `product_model=GPT-5.6 Sol` and `reasoning_effort=Pro`: the exact product control and effort slider were uniquely bound, the composer remained empty, prompt insertion and send activation counts were zero, and no Agentify operation was created. The deployed current normalization source has now been inspected read-only. One fresh current-contract request is prepared at `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_CURRENT_CONTRACT_REQUEST_20260830.md`, SHA-256 `67b849df4ca7549d6b0be0861085966a704fce14f772362e57f819b17324030f`, with new stable/idempotency keys, fingerprint `db4b55ed34a7aaba53cde0a8ddc169c75af9ea8f6380f31cdf1283c70e0f878b`, and fresh stage-owned `response.md` and `operation_ref.json` destinations.
 
-The exact scientific round `a486fa196984d912a504` remains byte-identical and unresolved. The smallest evidence-changing reentry is a new Root-routed, non-sending observation of the actually loaded Agentify controller and separate exact `GPT-5.6 Sol` product / `Pro` effort bindings. A later owner may author one fresh current-contract transport request only after Root accepts that direct observation; any Windows deployment, controller refresh, or live-app mutation first requires explicit user approval. No request is authored or invoked here, and the claim ceiling does not increase.
+Strict operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` remains terminal `ZERO_SEND_FAILED`; its old keys, fingerprints, combined target field, response path, operation identity, and closed tab are provenance only and are never reused or resent. The scientific round `a486fa196984d912a504`, question, source-only evidence set, prompt, alternatives, and claim ceiling remain byte-identical. The prepared request is inert and its operation ID remains `null`. The only successor is Root admission of the exact integrated request to singleton `BrowserTransport`; no scientific leaf, CM action, run, experiment, or direct provider action is needed here.
 
 ## Reconciled preceding disposition
 
@@ -72,22 +73,24 @@ The smallest discriminator is one premise-mapped implication proof, exact compat
 
 - The complete predecessor grammar, current question, source-only evidence set, canonical prompt, and active round are byte-identified and unchanged.
 - The strict witness counts remain separately quantified, no overlap condition is stated, and no selected treatment/FREE tuple, exact aggregate, actual witness count, rung pass, or finite-ladder null is accepted.
-- Operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is terminal `ZERO_SEND_FAILED` before click with exact zero-send, zero-message, no-conversation, and no-archive proof.
-- A later non-sending diagnostic observed one selected visible `Pro` reasoning control but no directly surfaced product label; it did not distinguish controller staleness, controller/UI mapping, provider availability, or entitlement.
-- External-review index v4 revision `7`, SHA-256 `770128ad9848fafe9b1d88a060d2ec0d5b77bcccc7b112f7735d2ed29f9a5d54`, retains round `a486fa196984d912a504` at `INNOVATOR_PENDING` with the registered Innovator prompt, null provider slots, null local synthesis, and null Convergence prompt. Research state revision `9` still points to the consumed prepared request. Those unchanged tracked bytes supply no resend authority.
+- Operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is terminal `ZERO_SEND_FAILED` before click with exact zero-send, zero-message, no-conversation, and no-archive proof. It and every old operation identity remain sealed provenance.
+- Root-accepted preflight `.omp/runtime/root/vqfp-current-contract-preflight-g5-r1.json`, SHA-256 `d4bae0b9896fbc672a797c95a4469dcae2a63bb73e492474e33e80a3cb838d4b`, directly observed deployed controller generation `0`, one selected `GPT-5.6 Sol` product item, the `Pro` effort slider at `4/4`, a closed target menu, zero prompt insertion, zero send activation, and `operation_created=false`.
+- Deployed Agentify candidate `e9d3275d29d6735d6d2f8dc94761e7bc0ed712e7` normalizes separate `productModel` and `reasoningEffort` axes and fingerprints the ordered current request fields in `review-transport.mjs`, SHA-256 `40f18e532bd50a1e3582b608d4126c9da3fdaf17b70900fc14b1e2639f811424`.
+- External-review index v4 revision `7`, SHA-256 `770128ad9848fafe9b1d88a060d2ec0d5b77bcccc7b112f7735d2ed29f9a5d54`, retains round `a486fa196984d912a504` at `INNOVATOR_PENDING` with the registered Innovator prompt, null provider slots, null local synthesis, and null Convergence prompt.
+- The new request SHA-256 is `67b849df4ca7549d6b0be0861085966a704fce14f772362e57f819b17324030f`; its future Agentify operation ID and both stage-owned output hashes are null, and no provider Effect occurred during authorship.
 - No Innovator product, local specialist product, CM task, result command, experiment, or live provider Effect exists.
 
 ### EXTERNAL EVIDENCE
 
-None enters the fresh active round. No provider-visible message or response exists. The recovered cross-swapped archive remains historical provenance only.
+None enters the fresh active round. No provider-visible message or response exists. The accepted preflight is an operational fact, not external scientific evidence. The recovered cross-swapped archive remains historical provenance only.
 
 ### INFERENCE
 
-Material distinctness remains established because the decision variable is the causal meaning of the gate's combined observables, not the gate's outcome. The terminal technical fault cannot change that meaning. The round identity is the immutable scientific question/evidence/prompt tuple; the terminal Agentify operation is a separate external-effect identity.
+The accepted current preflight closes only `VQFP-G4-CURRENT-PRODUCT-EFFORT-BINDING`: it makes authorship of one distinct current-contract request admissible under the new Root assignment. It does not answer the witness-alignment question, replace the old operation automatically, or create send authority by itself. Material scientific distinctness remains established because the decision variable is the causal meaning of the gate's combined observables, not the gate's outcome or transport availability.
 
 ### SPECULATION
 
-The existing aggregate intervention may be sufficient for the narrow finite-distribution contribution claim, or disjoint supports may leave that mechanism underidentified. Separately, the transport fault may arise from a stale deployed controller, controller/UI mapping, provider control availability, or entitlement. Neither scientific branch nor transport cause is favored.
+The existing aggregate intervention may be sufficient for the narrow finite-distribution contribution claim, or disjoint supports may leave that mechanism underidentified. Neither scientific branch is favored by the preflight or prepared request.
 
 ### CONTRADICTION
 
@@ -95,20 +98,18 @@ The existing aggregate intervention may be sufficient for the narrow finite-dist
 - An unconstrained abstract utility table cannot establish physical realizability inside the frozen class.
 - Historical provider bytes cannot become this round's Innovator fact or resend authority.
 - Zero send contradicts any claim that a provider reviewed or rejected this object.
-- A visible `Pro` reasoning control does not establish the separate current `GPT-5.6 Sol` product binding.
-- Stale research-state next-action bytes and a null provider index slot cannot reopen, erase, retry, or replace a terminal Agentify operation.
+- A prepared request, accepted preflight, null provider index slot, response destination, or hash does not itself create an Agentify operation or provider commitment.
+- Reusing any old stable key, idempotency key, fingerprint, combined target field, response path, or operation identity would violate the exact new-operation cutover.
 
 ## Gap register and blind ordering
 
-`VQFP-G4-WITNESS-ALIGNMENT-IDENTIFIABILITY` remains the one open scientific gap. Its accepted closure product is an exact implication proof, compatible minimal counterexample, or strict reduction with the one remaining lemma and smaller discriminator. The technical failure supplies none of those products.
+`VQFP-G4-WITNESS-ALIGNMENT-IDENTIFIABILITY` remains the one open scientific gap. Its accepted closure product is an exact implication proof, compatible minimal counterexample, or strict reduction with the one remaining lemma and smaller discriminator. The technical preflight and prepared request supply none of those products.
 
-`VQFP-G4-CURRENT-PRODUCT-EFFORT-BINDING` is the separate deduplicated operational reentry gap. It changes only whether a future EM owner may safely author a current-contract Innovator request. Its accepted closure is one direct current non-sending result that reports the loaded controller generation/source digest and separately proves unambiguous `product_model=GPT-5.6 Sol` and `reasoning_effort=Pro` bindings with zero prompt insertion, zero send action, and zero provider turns.
+`VQFP-G4-CURRENT-PRODUCT-EFFORT-BINDING` is operationally closed by the accepted two-axis zero-send preflight. The resulting EM decision is only to prepare one exact current-contract Pro Innovator request; Root and singleton `BrowserTransport` retain effect admission and execution.
 
-Zero local specialist leaves are dispatched. The scientific premises are already frozen, and provider/runtime binding cannot be resolved by a theorem, principles, adversarial, retrieval, or different-family scientific leaf. The bounded local intake is negative-complete for science: no answer-changing scientific result follows, the original scientific gap and alternatives survive, and the claim ceiling is unchanged.
+Zero local specialist leaves are dispatched. The next evidence-changing product is the exact Pro Innovator response or a terminal technical fact from the same newly admitted operation. Pro Convergence is mandatory later but remains unauthored until a valid Innovator product is dispositioned and updated local synthesis is durable.
 
-The ladder outcome remains open but is not this gap and is not authorized. Pro Convergence is mandatory later but remains unauthored until a valid Innovator product is dispositioned and updated local synthesis is durable.
-
-## Frozen external-review provenance and reentry
+## Frozen external-review provenance and current request
 
 The immutable index retains two pre-send prompt defects. Round `e47f1643da200939b2dc` named a direction disposition. Round `a96efe90502f54a8e226` removed that reference but used a meta-exclusion phrase rejected by the repository Innovator validator. Both are durably `BLOCKED`, have null provider slots, and possess no transport or resend authority.
 
@@ -136,9 +137,22 @@ The original request and prompt identities are retained as exact provenance:
 
 The original request is consumed and no longer transport-eligible. Its prepared-state wording, old combined model label, response destination, stable key, idempotency key, fingerprints, and operation cannot be reused. `ZERO_SEND_FAILED` proves zero provider commitment only for that exact operation and creates no automatic replacement authority.
 
-The exact future preconditions are frozen in the current disposition ref above. First, one separately Root-routed `TRANSPORT` diagnostic must non-sendingly inspect the current loaded controller and exact provider controls without creating a strict operation, prompt, conversation, response, or archive. It must report the product model and reasoning effort as separate axes and stop on ambiguity. A stale or mismatched live runtime reaches the explicit user-approval boundary before any Windows Agentify deployment, controller refresh, or live-app mutation.
+Root accepted the required current non-sending observation in `.omp/runtime/root/vqfp-current-contract-preflight-g5-r1.json`, SHA-256 `d4bae0b9896fbc672a797c95a4469dcae2a63bb73e492474e33e80a3cb838d4b`. It separately proves `product_model=GPT-5.6 Sol` and `reasoning_effort=Pro` on the deployed strict surface with zero prompt insertion, zero send activation, and no Agentify operation. It changes no scientific branch.
 
-Only after Root accepts a successful diagnostic result may a new EM assignment author one current-contract request while preserving the exact question, evidence set, round, and prompt. That later request must bind `provider=chatgpt`, `review_stage=pro_innovator`, `product_model=GPT-5.6 Sol`, `reasoning_effort=Pro`, operation-ref schema version `3`, separate stage-owned `response.md` and `operation_ref.json` targets, and a fresh unused stable key, idempotency key, fingerprint, and operation authority. No such request or operation exists or is authorized in this assignment.
+The sole prepared transport-eligible request is now:
+
+- Request ref: `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_CURRENT_CONTRACT_REQUEST_20260830.md`
+- Request SHA-256: `67b849df4ca7549d6b0be0861085966a704fce14f772362e57f819b17324030f`
+- New stable key: `vqfp-g5-witness-alignment-r01-pro-innovator-current-contract-2f053495-73cc-44b3-8849-834a43de27b8`
+- New idempotency key: `vqfp-g5-witness-alignment-r01-pro-innovator-current-contract-ff500569-be6a-4b40-b558-9e39892f261a`
+- Current request fingerprint: `db4b55ed34a7aaba53cde0a8ddc169c75af9ea8f6380f31cdf1283c70e0f878b`
+- Product model: `GPT-5.6 Sol`
+- Reasoning effort: `Pro`
+- Response ref: `docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/chatgpt/response.md`
+- Operation receipt ref: `docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/chatgpt/operation_ref.json`, schema version `3`
+- New operation state: `PREPARED_UNSENT_NEW_OPERATION`; Agentify operation ID `null`; provider-message and operation budgets each `1`
+
+The request is inert until its exact candidate is integrated and Root admits the meaning-complete `TRANSPORT` action. Only the current strict Agentify review surface may activate. A proven-zero reversible pre-boundary failure may repair only within that same assignment and operation. Unknown commitment is same-operation observe-only and never resends. Any old request or operation remains terminal provenance. No alternate provider, conversation, target axes, prompt, destination, key, fingerprint, ordinary send surface, or second operation is authorized.
 
 ## Historical provenance boundary
 
@@ -153,6 +167,6 @@ That record is append-only provenance, never an active round, provider dispositi
 
 ## Claim ceiling, recommendation, and reentry
 
-The current maximum claim remains definition-level: the proof-sized one-step association gate is finite, deterministic, result-blind, and exactly specified inside proved class `G`; the fresh cycle may establish only whether its aggregate/witness grammar is sufficient for the narrow finite-distribution causal interpretation. The zero-send transport fact changes no scientific branch. There is no passing certificate, bounded ladder null, physical-measure necessity, arbitrary-geometry or roster-size result, dynamic-membership evidence, learned efficacy, natural policy use, transfer, safety, deployment, or broad MARL claim.
+The current maximum claim remains definition-level: the proof-sized one-step association gate is finite, deterministic, result-blind, and exactly specified inside proved class `G`; the fresh cycle may establish only whether its aggregate/witness grammar is sufficient for the narrow finite-distribution causal interpretation. The old zero-send fact, accepted preflight, and new request change no scientific branch. There is no passing certificate, bounded ladder null, physical-measure necessity, arbitrary-geometry or roster-size result, dynamic-membership evidence, learned efficacy, natural policy use, transfer, safety, deployment, or broad MARL claim.
 
-Recommendation: preserve exact round `a486fa196984d912a504`, seal terminal operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc`, and route only the frozen non-sending current product/effort binding diagnostic through singleton `BrowserTransport` as a separate `next_actions` item owned by `TRANSPORT`. Stop without invoking it. If it exposes a Windows Agentify deployment or live-app mutation need, stop at explicit user approval. A future send-capable request requires a new accepted diagnostic result, a new Root assignment, new EM-authored exact bytes, and a separately admitted action; no ladder, CM, run, or claim increase is authorized.
+Recommendation: preserve exact round `a486fa196984d912a504`, keep terminal operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` sealed, and return the exact integrated current-contract request to Root for singleton `BrowserTransport` admission as `next_action.owner=TRANSPORT`. Stop without invoking Agentify or taking a provider action. Reentry is one validated readable Innovator product or a terminal technical fact for that exact new operation under a new Root assignment; unknown commitment never resends. No local scientific successor, leaf, CM action, run, experiment, Portfolio change, or lifecycle edit is needed.

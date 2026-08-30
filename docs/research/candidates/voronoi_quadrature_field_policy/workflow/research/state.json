@@ -8,16 +8,20 @@
   "direction_id": "voronoi_quadrature_field_policy",
   "direction_ref": {
     "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-    "sha256": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a"
+    "sha256": "725aab4db771d7863f904a719025f34bde94e1eb134cef29b805b2aff0494e1d"
   },
   "engineering_request": null,
   "evidence_set_sha256": "606039b78f5d1e0e63bdb2093e1ceae9149ca6dc1867339d9b5184f33d9d8cc2",
-  "last_checkpoint_sha": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a",
+  "last_checkpoint_sha": "725aab4db771d7863f904a719025f34bde94e1eb134cef29b805b2aff0494e1d",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md",
-        "sha256": "970a455482cb747b499f83e7be3e92acfdd8ce95b690a2ca257db21c187a784a"
+        "sha256": "725aab4db771d7863f904a719025f34bde94e1eb134cef29b805b2aff0494e1d"
+      },
+      {
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_CURRENT_CONTRACT_REQUEST_20260830.md",
+        "sha256": "67b849df4ca7549d6b0be0861085966a704fce14f772362e57f819b17324030f"
       },
       {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_SCIENCE_CARD_20260830.md",
@@ -32,16 +36,24 @@
         "sha256": "f98c9f66c41f4d52b61c60ce9ec27b360e819adf61144a8ae9e85c0f98cf0049"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_REQUEST_20260830.md",
-        "sha256": "ab0f261b0d92125bdb931d1586d8ca5394ba457e70a7d90e449a238c2c78525a"
-      },
-      {
         "path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
-        "sha256": "6111525d882a7fa6a38f7f0bcb3e84d1c52c97bd557d17d557822971159c9d21"
+        "sha256": "770128ad9848fafe9b1d88a060d2ec0d5b77bcccc7b112f7735d2ed29f9a5d54"
       },
       {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRE_SEND_VALIDATOR_RECOVERY_20260830.md",
-        "sha256": "ec7e09b608ed72f736a348b2a56c798f3b4a524a7995279167ec080d83b3b90a"
+        "path": ".omp/runtime/root/vqfp-current-contract-preflight-g5-r1.json",
+        "sha256": "d4bae0b9896fbc672a797c95a4469dcae2a63bb73e492474e33e80a3cb838d4b"
+      },
+      {
+        "path": ".omp/runtime/root/assignments/vqfp-current-contract-g5-r2/handoff.json",
+        "sha256": "8c0c3011692483359d9ac033812c2b8ea9b57419e2538852ac0d466a3a208591"
+      },
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "ca31b80f041e9b1081b25a826d38ad722c65b4823efbb13fa6317d67fe33371d"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "cd3f1f7b34a84e8c0747eeb9e9da3a65c165c896812598c9acfb964e2ca66be2"
       }
     ],
     "kind": "SUBMIT_FROZEN_PRO_INNOVATOR",
@@ -49,10 +61,10 @@
   },
   "phase": "DIVERGENT_REVIEW",
   "question_sha256": "2932932eedd72305c3817065a1d367e304ec025649d4554a5a357f1735fe4368",
-  "registry_revision_seen": 19,
-  "revision": 9,
+  "registry_revision_seen": 23,
+  "revision": 10,
   "schema_version": 2,
-  "updated_at": "2026-08-30T12:42:13Z",
+  "updated_at": "2026-08-30T21:10:33Z",
   "waiting_on": [
     {
       "expected_terminal_states": [
@@ -67,8 +79,8 @@
       ],
       "kind": "PRO_INNOVATOR_TRANSPORT",
       "ref": {
-        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_REQUEST_20260830.md",
-        "sha256": "ab0f261b0d92125bdb931d1586d8ca5394ba457e70a7d90e449a238c2c78525a"
+        "path": "docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_CURRENT_CONTRACT_REQUEST_20260830.md",
+        "sha256": "67b849df4ca7549d6b0be0861085966a704fce14f772362e57f819b17324030f"
       }
     }
   ],
