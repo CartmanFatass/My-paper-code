@@ -2,41 +2,54 @@
   "actionable": false,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [],
-  "cycle_boundary": "FRESH_MATERIAL_CYCLE",
+  "blockers": [
+    {
+      "code": "CURRENT_BYTE_TBCC_FOUNDATION_PROVENANCE_AMBIGUOUS",
+      "observed_refs": [
+        {
+          "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G8_CURRENT_FOUNDATION_ADMISSIBILITY_TERMINAL_GAP_DISPOSITION_20260830.md",
+          "sha256": "b9a7b3038baaea10f69f1172af6ca62e8bfcb93da5094d8c8e2bf888c1fcc820"
+        },
+        "agent://SCDMPFoundationG7R1.FoundationEvidenceCensus",
+        "agent://SCDMPCensusSynthesisG8R1"
+      ],
+      "resume_condition_ref": {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G8_CURRENT_FOUNDATION_ADMISSIBILITY_TERMINAL_GAP_DISPOSITION_20260830.md",
+        "sha256": "b9a7b3038baaea10f69f1172af6ca62e8bfcb93da5094d8c8e2bf888c1fcc820"
+      }
+    }
+  ],
+  "cycle_boundary": "TERMINAL_GAP_DISPOSITION",
   "cycle_id": "2026-08-30.19-portfolio-scdmp-oracle-identification-03",
   "direction_id": "semigroup_consistent_duration_model_policy",
   "direction_ref": {
     "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-    "sha256": "fd6059c9d5f3e427fc06e53194bf6c7df7a0b1f88896fee73ff0b112f8d14a92"
+    "sha256": "377316ab9ecca5077800949ac7c4bd003bd909d324584a412e9f90047399149b"
   },
   "engineering_request": null,
   "evidence_set_sha256": "b1a2951ad55b5f547847ace1c47629fcf19c517dbbf32e6b03779a6490748d8d",
-  "last_checkpoint_sha": "e61bb585ea9e89e13a7657c46df31704e23288a191ef3d19eb09316a89499677",
+  "last_checkpoint_sha": "b9a7b3038baaea10f69f1172af6ca62e8bfcb93da5094d8c8e2bf888c1fcc820",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
-        "sha256": "fd6059c9d5f3e427fc06e53194bf6c7df7a0b1f88896fee73ff0b112f8d14a92"
+        "sha256": "377316ab9ecca5077800949ac7c4bd003bd909d324584a412e9f90047399149b"
       },
       {
-        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G6_ORACLE_IDENTIFICATION_SCOPE_AND_DISPOSITION_20260830.md",
-        "sha256": "e61bb585ea9e89e13a7657c46df31704e23288a191ef3d19eb09316a89499677"
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_G8_CURRENT_FOUNDATION_ADMISSIBILITY_TERMINAL_GAP_DISPOSITION_20260830.md",
+        "sha256": "b9a7b3038baaea10f69f1172af6ca62e8bfcb93da5094d8c8e2bf888c1fcc820"
       },
-      {
-        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/workflow/external-review/index.json",
-        "sha256": "2fbcd4621eca7af342c8f720ff890ba0c4c31886264560943ccca3e10e4d0d1d"
-      }
+      "agent://SCDMPCensusSynthesisG8R1"
     ],
-    "kind": "INTEGRATE_DIRECTION_CANDIDATE_AND_REENTER_FRESH_BASE",
+    "kind": "INTEGRATE_SCDMP_TERMINAL_GAP_CANDIDATE",
     "owner": "ROOT"
   },
-  "phase": "SCOPING",
+  "phase": "COMPLETE",
   "question_sha256": "fd8943cecd99a2ca7db6a405b6eabf96e8ee5487bc3d8cfb9b9a8fe9083ce038",
-  "registry_revision_seen": 19,
-  "revision": 8,
+  "registry_revision_seen": 23,
+  "revision": 9,
   "schema_version": 2,
-  "updated_at": "2026-08-30T12:21:36Z",
+  "updated_at": "2026-08-30T21:10:47Z",
   "waiting_on": [],
   "writer": "EM-semigroup_consistent_duration_model_policy"
 }
