@@ -4,14 +4,16 @@
 
 - Stable direction ID: `voronoi_quadrature_field_policy`
 - Scientific owner: `EM-voronoi_quadrature_field_policy`
-- Current Portfolio authority: `docs/research/portfolio/PORTFOLIO.md`, SHA-256 `376398b580fb153d19a50cb6500f622b05d72af32377cd127314cd1f514faced`
-- Registry authority observed: revision `19`, generation `4`, runtime ref `EMVoronoiQuadratureFieldPolicyG4`
-- Assignment baseline: `02ccfd4c023371acbc8f303fe9b7f9c1722528a0`
+- Current Portfolio authority: `docs/research/portfolio/PORTFOLIO.md`, SHA-256 `ae07ea07dc7782c19cd537029db8dfe74f65bd0fe44753386d27d9bba7a823f7`
+- Registry authority observed: revision `21`, generation `4`
+- Current assignment: `vqfp-aggregate-witness-g4-r1`
+- Assignment baseline: `72f1b4fbbb588d51943c4155814031b6ed56e20f`
+- Current intake boundary: `TERMINAL_GAP_DISPOSITION`
 - Portfolio action: `CONTINUE`
 
-**Conclusion first:** the proof-sized `K1/K2/K3` association gate is a finite, deterministic, result-blind specification. Its coefficient support, exact sites, per-roster aggregation, treatment/FREE tie laws, and roster-specific nonalias counts are explicit. That resolves the historical gate-grammar objection but supplies no selected tuple, gate aggregate, witness-count satisfaction, rung pass, or three-rung null. The claim ceiling therefore does not increase.
+**Conclusion first:** strict Agentify operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is terminal `ZERO_SEND_FAILED` at `expected_model_unavailable` before the send click. Direct ledger counters prove `zeroCommitPreClick=true`, `sendCount=0`, `sendActionCount=0`, `newUserMessageCount=0`, no provider message or conversation, and no archive. This is a technical transport fact, not a scientific product. The operation, its old stable/idempotency/fingerprint tuple, and its closed tab are never retried, reused, or converted in place.
 
-Portfolio reevaluation opens a genuinely new cycle, `VQFP-AGGREGATE-WITNESS-ALIGNMENT-R01`, at the definition/identifiability layer. It asks whether the current aggregate contrasts and separately quantified opportunity and reassociation witnesses support the narrow physical-association contribution sentence, or whether cross-row mixing requires a result-blind support-alignment invariant. This is distinct from evaluating the ladder and changes no old outcome. One neutral Pro Innovator request is frozen and unsent; no provider operation or commitment exists.
+The exact scientific round `a486fa196984d912a504` remains byte-identical and unresolved. The smallest evidence-changing reentry is a new Root-routed, non-sending observation of the actually loaded Agentify controller and separate exact `GPT-5.6 Sol` product / `Pro` effort bindings. A later owner may author one fresh current-contract transport request only after Root accepts that direct observation; any Windows deployment, controller refresh, or live-app mutation first requires explicit user approval. No request is authored or invoked here, and the claim ceiling does not increase.
 
 ## Reconciled preceding disposition
 
@@ -46,6 +48,13 @@ Its bounded conclusions are retained:
 - External-review workflow: `hmasd-external-review-v1`
 - Active canonical round ID: `a486fa196984d912a504`
 
+The bounded current disposition is:
+
+- `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_ZERO_SEND_REENTRY_DISPOSITION_20260830.md`
+- SHA-256 `8471b5908fcb6d9a8191d9b0bc4cd54371dccc40588a3891bc9b28ed29dd6e89`
+
+It preserves the fresh cycle and its science card while separating the terminal operation from any later owner-authored operation authority.
+
 The exact current witness supports at each held-out roster are separately defined:
 
 ```text
@@ -61,39 +70,45 @@ The smallest discriminator is one premise-mapped implication proof, exact compat
 
 ### FACT
 
-- The complete predecessor grammar and its current claim ceiling are byte-identified above.
-- The strict witness counts are separately quantified and no overlap condition is stated.
-- No selected treatment/FREE tuple, exact aggregate, actual witness count, rung pass, or finite-ladder null is accepted.
-- External-review index revision `6` retains two zero-effect pre-send rounds at `BLOCKED` and contains only `a486fa196984d912a504` at `INNOVATOR_PENDING`; all six provider slots are null, all three local synthesis refs are null, and all three Pro Convergence prompts are null.
-- No fresh Agentify operation, provider conversation, provider commitment, archive, CM task, result command, or experiment exists.
+- The complete predecessor grammar, current question, source-only evidence set, canonical prompt, and active round are byte-identified and unchanged.
+- The strict witness counts remain separately quantified, no overlap condition is stated, and no selected treatment/FREE tuple, exact aggregate, actual witness count, rung pass, or finite-ladder null is accepted.
+- Operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc` is terminal `ZERO_SEND_FAILED` before click with exact zero-send, zero-message, no-conversation, and no-archive proof.
+- A later non-sending diagnostic observed one selected visible `Pro` reasoning control but no directly surfaced product label; it did not distinguish controller staleness, controller/UI mapping, provider availability, or entitlement.
+- External-review index v4 revision `7`, SHA-256 `770128ad9848fafe9b1d88a060d2ec0d5b77bcccc7b112f7735d2ed29f9a5d54`, retains round `a486fa196984d912a504` at `INNOVATOR_PENDING` with the registered Innovator prompt, null provider slots, null local synthesis, and null Convergence prompt. Research state revision `9` still points to the consumed prepared request. Those unchanged tracked bytes supply no resend authority.
+- No Innovator product, local specialist product, CM task, result command, experiment, or live provider Effect exists.
 
 ### EXTERNAL EVIDENCE
 
-None enters the fresh active round. The recovered cross-swapped archive and response remain historical provenance only.
+None enters the fresh active round. No provider-visible message or response exists. The recovered cross-swapped archive remains historical provenance only.
 
 ### INFERENCE
 
-Material distinctness is established because the fresh decision variable is the causal meaning of the gate's combined observables, not the gate's outcome. A proof or counterexample can change the interpretation and next discriminator without revealing or predicting a rung result.
+Material distinctness remains established because the decision variable is the causal meaning of the gate's combined observables, not the gate's outcome. The terminal technical fault cannot change that meaning. The round identity is the immutable scientific question/evidence/prompt tuple; the terminal Agentify operation is a separate external-effect identity.
 
 ### SPECULATION
 
-The existing aggregate intervention may be sufficient for the narrow finite-distribution contribution claim, or disjoint supports may leave that mechanism underidentified. Neither branch is favored at freeze.
+The existing aggregate intervention may be sufficient for the narrow finite-distribution contribution claim, or disjoint supports may leave that mechanism underidentified. Separately, the transport fault may arise from a stale deployed controller, controller/UI mapping, provider control availability, or entitlement. Neither scientific branch nor transport cause is favored.
 
 ### CONTRADICTION
 
 - Deterministic grammar does not by itself prove mechanism identifiability.
 - An unconstrained abstract utility table cannot establish physical realizability inside the frozen class.
 - Historical provider bytes cannot become this round's Innovator fact or resend authority.
+- Zero send contradicts any claim that a provider reviewed or rejected this object.
+- A visible `Pro` reasoning control does not establish the separate current `GPT-5.6 Sol` product binding.
+- Stale research-state next-action bytes and a null provider index slot cannot reopen, erase, retry, or replace a terminal Agentify operation.
 
 ## Gap register and blind ordering
 
-`VQFP-G4-WITNESS-ALIGNMENT-IDENTIFIABILITY` is the one open, deduplicated, decision-changing gap. Its accepted closure product is an exact implication proof, compatible minimal counterexample, or strict reduction with the one remaining lemma and smaller discriminator. Its task family is genuinely different-family innovation.
+`VQFP-G4-WITNESS-ALIGNMENT-IDENTIFIABILITY` remains the one open scientific gap. Its accepted closure product is an exact implication proof, compatible minimal counterexample, or strict reduction with the one remaining lemma and smaller discriminator. The technical failure supplies none of those products.
 
-Zero local specialist leaves are dispatched at this freeze. The local authorities already define the premises, and a same-input local proof/counterexample route before transport would duplicate the first-stage innovation gap rather than add a separable method advantage. The exact first blind product is the Pro Innovator. Any later local route must use the same immutable freeze and remain blind until it returns a substantive product or `NO_MATERIAL_INSIGHT`.
+`VQFP-G4-CURRENT-PRODUCT-EFFORT-BINDING` is the separate deduplicated operational reentry gap. It changes only whether a future EM owner may safely author a current-contract Innovator request. Its accepted closure is one direct current non-sending result that reports the loaded controller generation/source digest and separately proves unambiguous `product_model=GPT-5.6 Sol` and `reasoning_effort=Pro` bindings with zero prompt insertion, zero send action, and zero provider turns.
 
-The ladder outcome remains open but is not this gap and is not authorized. Pro Convergence is mandatory later but remains unauthored until Innovator disposition and updated local synthesis.
+Zero local specialist leaves are dispatched. The scientific premises are already frozen, and provider/runtime binding cannot be resolved by a theorem, principles, adversarial, retrieval, or different-family scientific leaf. The bounded local intake is negative-complete for science: no answer-changing scientific result follows, the original scientific gap and alternatives survive, and the claim ceiling is unchanged.
 
-## Frozen external-review request
+The ladder outcome remains open but is not this gap and is not authorized. Pro Convergence is mandatory later but remains unauthored until a valid Innovator product is dispositioned and updated local synthesis is durable.
+
+## Frozen external-review provenance and reentry
 
 The immutable index retains two pre-send prompt defects. Round `e47f1643da200939b2dc` named a direction disposition. Round `a96efe90502f54a8e226` removed that reference but used a meta-exclusion phrase rejected by the repository Innovator validator. Both are durably `BLOCKED`, have null provider slots, and possess no transport or resend authority.
 
@@ -104,26 +119,26 @@ The immutable index retains two pre-send prompt defects. Round `e47f1643da200939
 - Blocked round 2 prompt: `docs/external-review/directions/voronoi_quadrature_field_policy/a96efe90502f54a8e226/pro_innovator/PRO_INNOVATOR_PROMPT.md`, SHA-256 `e06453d31252c05e6947c1a18c13959ccaf070dfaefe19183fd2dd0b68643b49`
 - Blocked round 2 request: `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_PRE_SEND_BLOCKED_REQUEST_02_20260830.md`, SHA-256 `6954487df77bb28db6717aac946d1a8619a0234511193db64e8a6f1b0fb15e03`
 
-The only transport-eligible request is:
+The original request and prompt identities are retained as exact provenance:
 
 - Prompt ref: `docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/PRO_INNOVATOR_PROMPT.md`
 - Prompt SHA-256: `f98c9f66c41f4d52b61c60ce9ec27b360e819adf61144a8ae9e85c0f98cf0049`
-- Repository prompt validator: `VALID` with byte-identical validation copy
 - Request ref: `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_AGGREGATE_WITNESS_ALIGNMENT_R01_PRO_INNOVATOR_REQUEST_20260830.md`
 - Request SHA-256: `ab0f261b0d92125bdb931d1586d8ca5394ba457e70a7d90e449a238c2c78525a`
-- Provider/model: `chatgpt` / exact visible `GPT-5.6 Pro`
-- Review stage/mode: `pro_innovator` / `INNOVATOR`
-- Conversation: `NEW`; not created
-- Stable key: `vqfp-g4-witness-alignment-r01-pro-innovator-final-03`
-- Idempotency key: `vqfp-g4-witness-alignment-r01-pro-innovator-final-03-89545986-368f-4da5-a9c4-6b6ce3542eaa`
-- Request fingerprint: `de8e317784278f8cd8d4c20bbe3ee8f37d90cccd4dec0438725f0fddfb81f693`
-- Agentify operation ID/status: `null` / `NOT_CREATED`
-- Commitment: `UNSENT_NO_OPERATION`
-- Stage-owned future archive: `docs/external-review/directions/voronoi_quadrature_field_policy/a486fa196984d912a504/pro_innovator/chatgpt/NATURAL_COMPLETION_ARCHIVE.json`
-- Archive state: absent and unauthorized for this EM to create
-- External-review index ref: `docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json`, revision `6`, SHA-256 `6111525d882a7fa6a38f7f0bcb3e84d1c52c97bd557d17d557822971159c9d21`
+- Old stable key: `vqfp-g4-witness-alignment-r01-pro-innovator-final-03`
+- Old idempotency key: `vqfp-g4-witness-alignment-r01-pro-innovator-final-03-89545986-368f-4da5-a9c4-6b6ce3542eaa`
+- Old owner request fingerprint: `de8e317784278f8cd8d4c20bbe3ee8f37d90cccd4dec0438725f0fddfb81f693`
+- Terminal Agentify operation: `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc`
+- Agentify request fingerprint: `c62662051d23c5e184befa0282a491a63ca9ef9b4276533de28c2b4a7350fd6f`
+- Terminal state: `ZERO_SEND_FAILED`
+- Commitment proof: `zeroCommitPreClick=true`; every send/message counter is zero; provider conversation and archive are absent
+- External-review index ref: `docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json`, schema version `4`, revision `7`, SHA-256 `770128ad9848fafe9b1d88a060d2ec0d5b77bcccc7b112f7735d2ed29f9a5d54`
 
-The final prompt carries only source definitions and neutral scientific branches. A prepared request is not a provider fact. `SENT_WAITING`, `COMMITMENT_UNKNOWN`, and `SENT_UNREADABLE` would be same-operation observe-only states; unknown commitment never resends. `ZERO_SEND_FAILED` would not authorize a replacement.
+The original request is consumed and no longer transport-eligible. Its prepared-state wording, old combined model label, response destination, stable key, idempotency key, fingerprints, and operation cannot be reused. `ZERO_SEND_FAILED` proves zero provider commitment only for that exact operation and creates no automatic replacement authority.
+
+The exact future preconditions are frozen in the current disposition ref above. First, one separately Root-routed `TRANSPORT` diagnostic must non-sendingly inspect the current loaded controller and exact provider controls without creating a strict operation, prompt, conversation, response, or archive. It must report the product model and reasoning effort as separate axes and stop on ambiguity. A stale or mismatched live runtime reaches the explicit user-approval boundary before any Windows Agentify deployment, controller refresh, or live-app mutation.
+
+Only after Root accepts a successful diagnostic result may a new EM assignment author one current-contract request while preserving the exact question, evidence set, round, and prompt. That later request must bind `provider=chatgpt`, `review_stage=pro_innovator`, `product_model=GPT-5.6 Sol`, `reasoning_effort=Pro`, operation-ref schema version `3`, separate stage-owned `response.md` and `operation_ref.json` targets, and a fresh unused stable key, idempotency key, fingerprint, and operation authority. No such request or operation exists or is authorized in this assignment.
 
 ## Historical provenance boundary
 
@@ -138,6 +153,6 @@ That record is append-only provenance, never an active round, provider dispositi
 
 ## Claim ceiling, recommendation, and reentry
 
-The current maximum claim remains definition-level: the proof-sized one-step association gate is finite, deterministic, result-blind, and exactly specified inside proved class `G`; the fresh cycle may establish only whether its aggregate/witness grammar is sufficient for the narrow finite-distribution causal interpretation. There is no passing certificate, bounded ladder null, physical-measure necessity, arbitrary-geometry or roster-size result, dynamic-membership evidence, learned efficacy, natural policy use, transfer, safety, deployment, or broad MARL claim.
+The current maximum claim remains definition-level: the proof-sized one-step association gate is finite, deterministic, result-blind, and exactly specified inside proved class `G`; the fresh cycle may establish only whether its aggregate/witness grammar is sufficient for the narrow finite-distribution causal interpretation. The zero-send transport fact changes no scientific branch. There is no passing certificate, bounded ladder null, physical-measure necessity, arbitrary-geometry or roster-size result, dynamic-membership evidence, learned efficacy, natural policy use, transfer, safety, deployment, or broad MARL claim.
 
-Recommendation: Root should validate and route exactly the frozen request through singleton `BrowserTransport` with `next_action.owner=TRANSPORT`. This checkpoint itself performs no transport. Reentry is same cycle and same operation after Root returns a concrete transport fact. EM then dispositions the exact scientific product. Only after that disposition and durable local synthesis may Pro Convergence be authored. Enumeration, CM, and result effects remain separately unauthorized.
+Recommendation: preserve exact round `a486fa196984d912a504`, seal terminal operation `40c7053e-d5c9-4ef5-aa9e-89064bc65bbc`, and route only the frozen non-sending current product/effort binding diagnostic through singleton `BrowserTransport` as a separate `next_actions` item owned by `TRANSPORT`. Stop without invoking it. If it exposes a Windows Agentify deployment or live-app mutation need, stop at explicit user approval. A future send-capable request requires a new accepted diagnostic result, a new Root assignment, new EM-authored exact bytes, and a separately admitted action; no ladder, CM, run, or claim increase is authorized.
