@@ -1364,7 +1364,10 @@ def _worktree_command(packet: Mapping[str, Any], repo: Path) -> list[str]:
                 "exact prepare cannot carry orthogonal authority or dependency paths",
             )
         verification_paths = [
-            str(_verify_content_ref(repo, ref, "target.verification_refs")[0])
+            _relative_ref(
+                repo,
+                _verify_content_ref(repo, ref, "target.verification_refs")[0],
+            )
             for ref in target["verification_refs"]
         ]
         return [
