@@ -87,7 +87,7 @@ def test_cm_contract_gate_precedes_effects_and_uses_shared_carrier() -> None:
     )
 
 
-def test_cm_uses_specialized_scouts_and_one_nonoverlapping_implementer() -> None:
+def test_cm_uses_gap_driven_dual_disjoint_writers_and_one_boundary_owner() -> None:
     skill = _text(CM_SKILL)
     _assert_all(
         skill,
@@ -95,23 +95,31 @@ def test_cm_uses_specialized_scouts_and_one_nonoverlapping_implementer() -> None
             "unless a trustworthy map already covers the exact base and scope",
             "`hmasd-project-scout` for current repository, build/test, and path ownership facts",
             "`hmasd-code-scout` for callers, consumers, interfaces, state ownership",
-            "Select exactly one appropriate implementer for a nontrivial change",
+            "Writer cardinality follows those gaps, not a fixed staffing count or wave",
             "use `hmasd-implementer` when probability, gradients, native execution",
             "use `hmasd-implementer-terra` only for genuinely behavior-preserving local work",
-            "The implementer owns the exact assignment paths",
-            "never starts a second writer to reinterpret or repair the same live boundary",
+            "CM may dispatch concurrent implementers only after freezing shared interfaces",
+            "both their path ownership and their semantic/interface ownership are disjoint",
+            "Different files are insufficient when they jointly implement or mutate one live protocol",
+            "exactly one writer owns every overlapping boundary",
+            "stop the affected assignment rather than broadening it",
+            "no second writer may reinterpret or repair another writer's live boundary",
             "Refuse dirty or stale worktrees, conflicts, out-of-scope paths",
             "duplicate writers or command owners",
             "missing required symbol-refactor evidence",
         ),
     )
 
+    assert "Select exactly one appropriate implementer for a nontrivial change" not in skill
+
     cm_agent = _text(CM_AGENT)
     _assert_all(
         cm_agent,
         (
-            "give disjoint path ownership to specialists",
-            "require native LSP evidence for exported-symbol work",
+            "Writer cardinality follows unresolved technical gaps, not a fixed Implementer count",
+            "Concurrent Implementers are allowed only when both their path ownership and their semantic/interface ownership are disjoint",
+            "assigns exactly one writer to every overlapping boundary",
+            "Require native LSP evidence for exported-symbol work",
         ),
     )
 

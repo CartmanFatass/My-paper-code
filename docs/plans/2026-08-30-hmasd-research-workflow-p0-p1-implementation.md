@@ -3,7 +3,7 @@
 ## Metadata and boundary
 
 - **Date:** 2026-08-30
-- **Status:** implementation-ready; P0 and P1 approved, research execution paused
+- **Status:** implemented and verified; P0 and P1 complete, research resume remains a separate Portfolio checkpoint
 - **Owners:** Root owns Portfolio and durable allocation/lifecycle state; EM owns direction science; CM owns engineering and technical acceptance; Git/CM integration owns candidate integration; one Experiment Operator owns one exact result-bearing command.
 - **Supersession boundary:** this document supersedes only earlier P0/P1 research-workflow implementation notes that prescribe fixed leaf counts, direct Root direction-science leaves, or a single all-terminal join. It does not supersede Root Portfolio, the active allocator, assignment worktrees, registries, BrowserTransport, common v1, the exact Pro review pair, or existing scientific/numerical/RNG/checkpoint/bit-identity/external-effect contracts.
 - **P2 boundary:** P2 is not authorized here. Its separate roadmap remains `docs/plans/2026-08-30-hmasd-research-tooling-p2-roadmap.md`.
@@ -350,6 +350,31 @@ No two writers may concurrently edit one listed file or one shared semantic/inte
 | Scientific/numerical/RNG/checkpoint/bit identity is not silently changed | CM and verifier | explicit oracle/seed/version/tolerance/hash fixtures; no default dependency activation |
 
 These are prospective verification requirements, not claims that tests or tools were run while writing this plan.
+
+## Implementation evidence
+
+- Focused P0 contracts and the hermetic repository-contract smoke passed:
+  `54 passed in 0.72s`.
+- The six P1 tool contracts plus the fail-closed provenance gate passed:
+  `58 passed in 2.27s`.
+- The unified topology, capability, manager, lifecycle, transport, recovery,
+  state, worktree, Git-handoff, and Portfolio regression set passed:
+  `144 passed in 34.84s`.
+- `requirements_research_tools.in` is the reproducible source for the
+  hash-locked optional `requirements_research_tools.txt`. The lock installed
+  successfully into an ignored CPython 3.10.21 verification environment
+  without changing either default requirements file.
+- `docs/research-tooling/provenance.yml` records 25 artifacts, 22 managed
+  shipped files, 16 direct/transitive dependencies, immutable upstream source
+  references, local SHA-256 values, licenses, and the explicit one-item source
+  inspection limitation. `tools/research/validate_provenance.py` fails closed
+  on missing or drifted facts.
+- The synthetic smoke consumes actual repository authorities, profiles, and
+  the common-v1 schema. It is a contract compatibility check, not a fabricated
+  runtime dispatcher or scheduler.
+- No provider operation, direction integration, experiment, Portfolio action,
+  or lifecycle transition was performed by P0/P1 implementation. P2 remains
+  unauthorized.
 
 # Stop and rollback
 

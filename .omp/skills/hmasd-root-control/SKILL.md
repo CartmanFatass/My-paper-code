@@ -10,8 +10,9 @@ description: Reconcile, prioritize, and advance the durable HMASD workflow from 
 Root is the one user-facing controller and directly executes the Portfolio
 subflow; `Portfolio` is a durable authority name, not an agent. Root owns user
 framing, startup reconciliation, considered-set and allocation judgment,
-lifecycle/capacity adoption, direct role routing, singleton BrowserTransport
-mediation, shared integration, bounded recovery, and final delivery.
+lifecycle/capacity adoption, boundary-constrained role routing, singleton
+BrowserTransport mediation, shared integration, bounded recovery, and final
+delivery.
 
 Keep meanings separate: EM owns direction science and interpretation, CM owns
 contract realization and technical acceptance, BrowserTransport owns strict
@@ -138,7 +139,85 @@ allocation with durable future value, add one concise historical decision note
 covering alternatives, controlling evidence, claim ceiling, and reactivation
 consequence. The note is history, not current authority or a reentry condition.
 
-### 4. Run the active allocation loop
+### 4. Route science through EM and bound Portfolio analysis
+
+For every selected direction, Root creates one meaning-complete assignment for
+that direction's responsible EM. The assignment freezes the investment
+question, direction-specific lens, material uncertainty, discriminator,
+protected non-goals, stop rule, and action-changing outcome branches. Root
+must not send direction-scoped theorem, concept, mechanism, counterexample,
+evidence-retrieval, implementation, enhancement, synthesis, or interpretation
+of results directly to a generic or scientific leaf. EM alone decides
+whether a direction-scoped analytical leaf is warranted. A requested numeric
+leaf count does not override this boundary: zero qualifying information gaps
+produce zero leaves, and any fan-out follows genuinely separable gaps rather
+than a quota, quorum, wave size, or utilization target.
+
+Root may dispatch a Portfolio analytical leaf only when the information gap is
+cross-direction, can change Root's Portfolio rationale, satisfies the common
+dispatch predicate in `.omp/AGENTS.md`, and belongs to exactly one of these
+categories:
+
+- **Shared-assumption audit:** identify the dependency, affected directions and
+  layer, necessity, common-mode failure path, and relatively independent
+  discriminator.
+- **Complement/substitute analysis:** return `COMPLEMENT`, `SUBSTITUTE`,
+  `ORTHOGONAL`, `CONDITIONAL`, or `UNKNOWN` with the mechanism, conditions,
+  evidence, sequencing implication, distinguishing scientific value,
+  information value, engineering reuse, and common risk.
+- **Option-value analysis:** identify the branch opened, preserved, or closed;
+  reversible enabling action; exercise, abandon, or expiry trigger;
+  information gained; irreversibility; dependencies; and bounded cost/time,
+  without inventing a probability, rank, or numeric pseudo-VOI.
+- **Cross-direction risk analysis:** identify the mechanism, exposed
+  directions, propagation, trigger, blast radius, relatively independent
+  check, and reversible mitigation with its tradeoff.
+
+These are the only Portfolio analytical leaf categories. A Portfolio leaf
+returns conditional relationships and a common analytical product; it never
+ranks directions, allocates resources, changes lifecycle, writes direction
+state, adjudicates direction science, or gains Portfolio or direction
+authority. Root synthesizes cited mechanisms and dependencies, never votes,
+majorities, confidence tallies, leaf counts, or quorum.
+
+Freeze every Portfolio analytical assignment as a neutral packet containing
+the Root-owned variable; frozen question and claim; authoritative definitions
+and hashed references; facts, evidence, inference, speculation, and
+contradictions kept separate; exact gap and assigned lens; all outcome
+branches; non-goals; ownership and Effects; required output; stop; and reentry.
+First-wave packets contain no favored answer, desired `PASS`, sibling result,
+vote tally, or allocation preference. Different mechanism-level lenses remain
+blind to sibling outputs until each returns a substantive product or
+`NO_MATERIAL_INSIGHT`; never hide authoritative constraints or known
+invalidating evidence.
+
+The returned product uses the common fields from `.omp/AGENTS.md`: assignment
+and gap IDs, task family, answered question and materiality, concrete claim,
+exact evidence references and locators, sources and methods, assumptions and
+applicability, separated epistemic categories, falsifier or counterexample,
+surviving alternatives, uncertainty and limitations, residual gap,
+conditional consequence and decision relevance, recommendation, next
+discriminator, done reason, and reentry. It rides in the existing role payload
+of the unchanged common v1 carrier. `NO_MATERIAL_INSIGHT` is a successful
+terminal, negative-complete product that records sources inspected, methods
+attempted, why no answer-changing insight follows within scope, and residual
+uncertainty. It causes no claim delta and is neither technical failure,
+approval, adverse/null scientific evidence, evidence of absence, nor
+scientific rejection.
+
+Portfolio analytical fan-out and refill are evidence-driven. Dispatch none,
+one, or several leaves only for the current distinct gaps and fitting methods.
+Consume each terminal product immediately, close its answered gap, and dispatch
+a successor only for an evidenced residual or newly exposed separable gap.
+Do not reopen the same no-insight family/input without a new mechanism, source,
+observation, premise, or corrected defect. An unrelated Portfolio action may
+proceed while other leaves remain live; wait only for a live product that is a
+dependency of the contemplated action. Record an unresolved relationship as
+`UNKNOWN` with an exact reentry trigger rather than imposing an all-terminal
+barrier. This is task routing through existing OMP carriers, not a scheduler,
+registry, lifecycle, or authority layer.
+
+### 5. Run the active allocation loop
 
 Portfolio is an active allocator, not an all-terminal join. Consume each
 terminal EM, CM, Transport, or Run fact immediately while preserving its
@@ -154,12 +233,17 @@ namespace:
   terminal facts for one exact command.
 - OMP liveness, runtime, worktree, conflict, commit, and push observations are
   routing or Git facts.
+- A Portfolio analytical leaf supplies one conditional common analytical
+  product for its frozen cross-direction gap; Root retains all Portfolio
+  judgment.
 
 Engineering, transport, Run, runtime, and Git facts never imply science or
 lifecycle. Treat transport availability only as evidence availability. Retain
 every nonterminal leg and route each terminal consequence in the same wake.
-One terminal advancing leg releases its capacity slot even while other legs
-remain live.
+Consume a Portfolio analytical product as soon as it arrives and act on every
+unrelated decision whose dependencies are already sufficient; no global wave
+or all-terminal predicate gates allocation. One terminal advancing leg releases
+its capacity slot even while other legs remain live.
 
 When not `PAUSED`, recompute live advancing investments after each material
 fact. If below authorized capacity, screen the strongest authorized fixed-set
@@ -188,7 +272,7 @@ bring already-committed Effects to safe facts. It blocks refill, new direction
 work, fresh transport sends, experiment launches, and every other new Effect.
 Root never refills paused capacity.
 
-### 5. Route meaning-complete role work
+### 6. Route meaning-complete role work
 
 Use the OMP task/Hub carrier, identity, generation, assignment, and common v1
 mechanics defined in `.omp/AGENTS.md`. Each body must make the objective and
@@ -206,6 +290,11 @@ integration, and reconciliation to `ROOT`; and genuine approval choices to
 the same wake, or record exact `waiting_on` with that owner. Never leave a
 material transition ownerless or ask CM to derive scientific authority.
 
+Direction-scoped science, including principles, synthesis, and result
+interpretation, always routes to that direction's EM. Root never treats direct
+access to a scientific leaf as authority to bypass EM. Direct Root analytical
+leaf work is limited to the four Portfolio cross-direction categories above.
+
 Root authors each selected direction's EM assignment with its investment
 question, direction-specific lens, material uncertainty, discriminator,
 protected non-goals, stop rule, and action-changing outcomes. EM sends a
@@ -216,7 +305,7 @@ EM and CM never spawn or contact one another directly.
 Create durable artifacts only at material milestones; there is no mandatory
 document bundle.
 
-### 6. Mediate transport, resources, and Runs
+### 7. Mediate transport, resources, and Runs
 
 BrowserTransport is one Root-mediated logical service. EM or CM freezes a
 durable request and returns `next_action.owner=TRANSPORT` with exact prompt and
@@ -238,7 +327,7 @@ command to one Experiment Operator and apply the time, memory, and approval
 boundaries in `.omp/RULES.md`. Observe long-running work through Hub; material
 transitions are event-driven, not polling- or timer-driven.
 
-### 7. Checkpoint, integrate, and recover
+### 8. Checkpoint, integrate, and recover
 
 Checkpoint only material milestones: completed research or engineering rounds,
 accepted-result or terminal-run evidence promotion, external prompt/archive

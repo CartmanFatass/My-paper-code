@@ -19,6 +19,19 @@ def test_catalog_is_minimal_and_unique() -> None:
     assert all(set(item) == capabilities.FIELDS for item in catalog["capability"])
 
 
+
+def test_paper_lookup_distinguishes_repository_tool_from_installed_adapter() -> None:
+    catalog = capabilities.load_catalog(ROOT / "configs/scientific-capabilities-v1.toml")
+    paper_lookup = next(
+        item for item in catalog["capability"] if item["capability"] == "paper-lookup"
+    )
+    assert paper_lookup["status"] == "unavailable"
+    assert paper_lookup["entrypoint"] == ""
+    assert paper_lookup["environment"] == ""
+    assert "Repository-local hmasd-paper-lookup skill/tool surface" in paper_lookup["purpose"]
+    assert "no dedicated installed" in paper_lookup["purpose"]
+
+
 def test_cli_list_show_and_doctor_are_observation_only() -> None:
     list_result = subprocess.run(
         [sys.executable, "scripts/hmasd_science_capabilities.py", "list"],

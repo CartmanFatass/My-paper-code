@@ -59,6 +59,39 @@ intake, wording repair, claim narrowing, and CM-result interpretation reopen
 neither. A later wake observes the same live operation or resumes the same
 frozen round; it never creates a replacement sender or automatic resend.
 
+## Scientific finding product
+
+The Innovator and Convergence prompts request scientific findings that EM can
+synthesize beside local analytical products. For each material finding or
+bounded no-finding, the scientific product records:
+
+- assignment or evidence-gap ID and task family, including the review stage;
+- the claim or attacked claim/link;
+- exact evidence references and locators, with verified fact, external
+  evidence, inference, speculation, and contradiction kept distinct;
+- assumptions, applicability boundaries, and any surviving alternative;
+- a falsifier or counterexample, or the bounded search that did not find one;
+- uncertainty, limitations, reviewed scope, and the exact residual gap;
+- consequence and decision relevance, including the conditional effect on the
+  claim ceiling or other EM-owned variable; and
+- a recommendation, such as a next discriminator, claim correction, or no
+  change.
+
+Label the product `MATERIAL_INSIGHT` or `NO_MATERIAL_INSIGHT`.
+`NO_MATERIAL_INSIGHT` is a successful negative-complete product within the
+frozen reviewed scope. It records the sources inspected, methods attempted, why
+no answer-changing result follows, and residual uncertainty. It is not
+technical failure, approval, negative evidence, evidence of absence, or
+scientific rejection, and it produces no claim delta. A scientifically adverse,
+negative, or null finding can instead be material when it supports an
+answer-changing conclusion. Reopen the same no-insight scope only after a new
+mechanism, source, observation, premise, or corrected defect.
+
+These fields organize the scientific interpretation and EM disposition; they
+do not modify provider response bytes, archive bytes, common v1 transport facts,
+Agentify commitment state, or authority. A transport failure produces no
+scientific product or update.
+
 ## External-review index v2
 
 `scripts/schemas/hmasd_external_review_index.schema.json` is the exact field and

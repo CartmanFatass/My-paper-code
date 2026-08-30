@@ -73,19 +73,25 @@ def test_fresh_cycle_freezes_the_complete_scientific_object() -> None:
         assert requirement in compact
 
 
-def test_local_routes_are_neutral_gap_driven_and_evidence_separated() -> None:
+def test_local_routes_are_information_gap_driven_neutral_and_negative_complete() -> None:
     compact = _compact(_skill())
 
     for requirement in (
-        "frozen information gaps",
-        "no default quota",
-        "mutually blind early routes the same neutral grounding",
-        "mechanism, lemma, construction, counterexample, measurement, or falsifiable prediction",
-        "no_material_insight",
-        "at the synthesis barrier",
-        "separate `fact`, `inference`, and `speculation`",
-        "coverage, not independent evidence",
-        "self-critique alone cannot change the claim ceiling",
+        "distinct named information gaps determine whether any leaf is needed, its task family, and the specialist mix",
+        "counts, quotas, votes, and quorum never do",
+        "zero qualifying gaps dispatches zero leaves",
+        "choose the task family that matches the product needed, not a persona",
+        "theorem/proof derivation",
+        "concept/principles validation",
+        "counterexample/adversarial search",
+        "source/evidence retrieval",
+        "different-family innovation",
+        "same neutral freeze and keep each blind to favored routes, em conclusions, and sibling outputs",
+        "substantive product or `no_material_insight`",
+        "synthesize mechanisms and discriminators, never response counts",
+        "agreement is coverage rather than independent evidence",
+        "`no_material_insight` is a successful negative-complete analytical product",
+        "technical execution status therefore remain independently queryable",
     ):
         assert requirement in compact
 

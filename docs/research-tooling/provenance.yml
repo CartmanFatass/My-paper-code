@@ -1,0 +1,842 @@
+{
+  "activation": {
+    "autoload": false,
+    "default_network": "disabled",
+    "managers": [],
+    "mode": "explicit-on-demand",
+    "secrets": "Credentials and secrets are neither required by the offline gate nor recorded in provenance artifacts."
+  },
+  "artifacts": [
+    {
+      "dependencies": [],
+      "kind": "skill",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately reduced for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": ".omp/skills/hmasd-experimental-design-tools/SKILL.md",
+      "sha256": "89f03a0c44b46687b156e41c18a18a8744f69b8c557e8d822e10fa80441cb8cb",
+      "skill": "hmasd-experimental-design-tools",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/experimental-design/SKILL.md",
+          "skills/experimental-design/scripts/doe_designs.py",
+          "skills/experimental-design/scripts/randomization.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "skill",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately bounded for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": ".omp/skills/hmasd-hypothesis-mechanisms/SKILL.md",
+      "sha256": "d29ffe9aaace8d19c5504bb1d91d7f3daa6b1751cfc92376f1da16917de27efe",
+      "skill": "hmasd-hypothesis-mechanisms",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/hypothesis-generation/SKILL.md",
+          "skills/hypothesis-generation/assets/falsification_controls_template.json",
+          "skills/hypothesis-generation/assets/hypothesis_record_template.json",
+          "skills/hypothesis-generation/scripts/check_falsification_controls.py",
+          "skills/hypothesis-generation/scripts/validate_hypothesis_schema.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "skill",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately reduced for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": ".omp/skills/hmasd-paper-lookup/SKILL.md",
+      "sha256": "1086585633d1a8994e892094ac2e7dfff20eaf4751bdc86715b2a635726a3a9b",
+      "skill": "hmasd-paper-lookup",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/paper-lookup/SKILL.md",
+          "skills/paper-lookup/scripts/_common.py",
+          "skills/paper-lookup/scripts/arxiv_atom.py",
+          "skills/paper-lookup/scripts/jats_to_text.py",
+          "skills/paper-lookup/scripts/openalex_abstract.py",
+          "skills/paper-lookup/scripts/paginate.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "skill",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD work; no dependency source is copied.",
+      "modification_notice": "Original HMASD skill contract informed only by public dependency APIs.",
+      "origin": "local-original",
+      "path": ".omp/skills/hmasd-scientific-compute-contracts/SKILL.md",
+      "sha256": "e0406b0d6fd6f988f1dce8ed8549064abe722e1fd9290295b5793bf23f94ce73",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [],
+      "kind": "skill",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately bounded for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": ".omp/skills/hmasd-scientific-writing-validation/SKILL.md",
+      "sha256": "441bde8d25d1944fd8218c39987df76b41d593e187e36797a9556a4f7616ba38",
+      "skill": "hmasd-scientific-writing-validation",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/scientific-writing/SKILL.md",
+          "skills/scientific-writing/scripts/_common.py",
+          "skills/scientific-writing/scripts/audit_claims.py",
+          "skills/scientific-writing/scripts/check_consistency.py",
+          "skills/scientific-writing/scripts/validate_manifest.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [
+        "sympy",
+        "z3-solver"
+      ],
+      "kind": "skill",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD work; no SymPy or Z3 source is copied.",
+      "modification_notice": "Original HMASD skill contract informed only by public dependency APIs.",
+      "origin": "local-original",
+      "path": ".omp/skills/hmasd-symbolic-counterexample-tools/SKILL.md",
+      "sha256": "ff92800b1bf8c74700646175ac52dcdb7aa88804c6c5a4fd28a568b6768deb87",
+      "skill": "hmasd-symbolic-counterexample-tools",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "attrs",
+        "exceptiongroup",
+        "hypothesis",
+        "mpmath",
+        "numpy",
+        "pandas",
+        "pydoe3",
+        "python-dateutil",
+        "pytz",
+        "scipy",
+        "six",
+        "sortedcontainers",
+        "sympy",
+        "typing-extensions",
+        "tzdata",
+        "z3-solver"
+      ],
+      "kind": "notice",
+      "license": "LicenseRef-Composite-Notice",
+      "license_evidence": "The file retains the full K-Dense MIT notice and dependency license/source notices.",
+      "modification_notice": "Locally assembled attribution notice; dependency entries do not imply vendored code.",
+      "origin": "local-original",
+      "path": "docs/research-tooling/NOTICE",
+      "sha256": "4eaabe5f66ba9a922a7e4b30a856475cff02aece89e59e5c2afb8b07efcd8bb1",
+      "skill": null,
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "attrs",
+        "exceptiongroup",
+        "hypothesis",
+        "mpmath",
+        "numpy",
+        "pandas",
+        "pydoe3",
+        "python-dateutil",
+        "pytz",
+        "scipy",
+        "six",
+        "sortedcontainers",
+        "sympy",
+        "typing-extensions",
+        "tzdata",
+        "z3-solver"
+      ],
+      "kind": "requirements-source",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local optional dependency declaration; it copies no dependency source.",
+      "modification_notice": "Local dependency input retaining the default-environment constraint without modifying it.",
+      "origin": "local-original",
+      "path": "requirements_research_tools.in",
+      "sha256": "64f2d23a38f5b7b27cfb4819f26252969cdd2a7c1627c53ae1aed94673a1905f",
+      "skill": null,
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "attrs",
+        "exceptiongroup",
+        "hypothesis",
+        "mpmath",
+        "numpy",
+        "pandas",
+        "pydoe3",
+        "python-dateutil",
+        "pytz",
+        "scipy",
+        "six",
+        "sortedcontainers",
+        "sympy",
+        "typing-extensions",
+        "tzdata",
+        "z3-solver"
+      ],
+      "kind": "requirements-lock",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Locally generated lock metadata; distribution licenses are recorded separately.",
+      "modification_notice": "uv-generated exact optional dependency lock with SHA-256 artifact hashes.",
+      "origin": "local-original",
+      "path": "requirements_research_tools.txt",
+      "sha256": "eb6b2f51aebcf7e3f820913fac9d74b0a0b47e9b6a72f7c820d1d0240303626b",
+      "skill": null,
+      "source_ref": null
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD package export glue.",
+      "modification_notice": "Original HMASD package glue; no upstream code copied.",
+      "origin": "local-original",
+      "path": "tools/research/experimental_design/__init__.py",
+      "sha256": "bebd9688078deaabf49e916d354f06e247a072f63a59f5dd13c3e0b0752675aa",
+      "skill": "hmasd-experimental-design-tools",
+      "source_ref": null
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD command-line glue.",
+      "modification_notice": "Original HMASD CLI glue; no upstream code copied.",
+      "origin": "local-original",
+      "path": "tools/research/experimental_design/__main__.py",
+      "sha256": "f459e1f9585c49f046373178453f4b55760858725c6daa890d2048b7cc0713b0",
+      "skill": "hmasd-experimental-design-tools",
+      "source_ref": null
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately reduced for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/experimental_design/engine.py",
+      "sha256": "78f3071a66be1347fbde133a45f3502e3240d827c021beafeed973a735856fba",
+      "skill": "hmasd-experimental-design-tools",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/experimental-design/scripts/doe_designs.py",
+          "skills/experimental-design/scripts/randomization.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and deliberately bounded for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/hypothesis_mechanisms/mechanism_cards.py",
+      "sha256": "a0b920ebf647bea8c8c5e69aaf3fd2016cabedad7fb67b8c6c066773f9eed6f9",
+      "skill": "hmasd-hypothesis-mechanisms",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/hypothesis-generation/SKILL.md",
+          "skills/hypothesis-generation/assets/falsification_controls_template.json",
+          "skills/hypothesis-generation/assets/hypothesis_record_template.json",
+          "skills/hypothesis-generation/scripts/check_falsification_controls.py",
+          "skills/hypothesis-generation/scripts/validate_hypothesis_schema.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted package attribution for HMASD; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/paper_lookup/__init__.py",
+      "sha256": "867e9ce996019c69bf3e53d915606fcb9282b9a7743ff6926d8ad7afeaeef22f",
+      "skill": "hmasd-paper-lookup",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/paper-lookup/SKILL.md"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and reduced to bounded HMASD CLI behavior; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/paper_lookup/cli.py",
+      "sha256": "673f9bd36662cf7cd7774dee0c501ac1813cc01f9df3a4daef783098b8f31e94",
+      "skill": "hmasd-paper-lookup",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/paper-lookup/scripts/_common.py",
+          "skills/paper-lookup/scripts/arxiv_atom.py",
+          "skills/paper-lookup/scripts/jats_to_text.py",
+          "skills/paper-lookup/scripts/openalex_abstract.py",
+          "skills/paper-lookup/scripts/paginate.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted and reduced to explicit bounded network access; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/paper_lookup/fetch.py",
+      "sha256": "61441e275e58969e73501f0336358c6f01991a7d0aab1ae06892169010bf1212",
+      "skill": "hmasd-paper-lookup",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/paper-lookup/scripts/_common.py",
+          "skills/paper-lookup/scripts/paginate.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted for recorded-data-only HMASD normalization; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/paper_lookup/normalizers.py",
+      "sha256": "56c3f5e6aecb335247287fe8e04dc64e76c5ab36a48103aba5563fe67ef89a9a",
+      "skill": "hmasd-paper-lookup",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/paper-lookup/scripts/_common.py",
+          "skills/paper-lookup/scripts/arxiv_atom.py",
+          "skills/paper-lookup/scripts/jats_to_text.py",
+          "skills/paper-lookup/scripts/openalex_abstract.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD package export glue; dependency sources are not copied.",
+      "modification_notice": "Original HMASD package glue using local wrapper modules.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/__init__.py",
+      "sha256": "925f5e08326528a1bc91e9fd8ba19826d7ae7ee10e0d7755530a112c4672ad29",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD module entry point; dependency sources are not copied.",
+      "modification_notice": "Original HMASD module entry point using the local CLI.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/__main__.py",
+      "sha256": "0f7d54f3fbb1f79a85eb8110f11793db99da6f3c61ee979de5abe9a1b5f3fdb3",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD CLI; dependency sources are not copied.",
+      "modification_notice": "Original HMASD command-line wrapper over local compute contracts.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/cli.py",
+      "sha256": "3cc4a729dfe9d048c3962d9a71668bc3640886a4a37ea588c6393f553e6d7f4b",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD wrapper; dependency sources are not copied.",
+      "modification_notice": "Original HMASD numerical comparison and artifact contract implementation.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/contracts.py",
+      "sha256": "2f543d00e1f4b58437977c1cb429b6b8f8d65e6f7c9cb4e16ddcd154372a30ec",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD wrapper; dependency sources are not copied.",
+      "modification_notice": "Original HMASD invariant helper implementation.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/invariants.py",
+      "sha256": "253a1776401cfb6954341bdadd2fbdf0b11c8f1d7667043e1139faa07046bf72",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [
+        "hypothesis",
+        "numpy",
+        "scipy"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD wrapper; dependency sources are not copied.",
+      "modification_notice": "Original HMASD bounded property-testing wrapper over public Hypothesis APIs.",
+      "origin": "local-original",
+      "path": "tools/research/scientific_compute/property_testing.py",
+      "sha256": "888764d44d5f681aa93db39a0a0ebeee4202e2be8f3a3490d9be66b5a9c02c1d",
+      "skill": "hmasd-scientific-compute-contracts",
+      "source_ref": null
+    },
+    {
+      "dependencies": [],
+      "kind": "implementation",
+      "license": "MIT",
+      "license_evidence": "docs/research-tooling/NOTICE and the pinned upstream LICENSE",
+      "modification_notice": "Adapted into deterministic offline HMASD validators; not byte-identical to any upstream file.",
+      "origin": "adapted",
+      "path": "tools/research/scientific_writing/validate.py",
+      "sha256": "84e2f05ceba9abdd4dea54d564ae4e73f25eef987e348f66c40e361e8c0fac09",
+      "skill": "hmasd-scientific-writing-validation",
+      "source_ref": {
+        "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+        "paths": [
+          "skills/scientific-writing/scripts/_common.py",
+          "skills/scientific-writing/scripts/audit_claims.py",
+          "skills/scientific-writing/scripts/check_consistency.py",
+          "skills/scientific-writing/scripts/validate_manifest.py"
+        ],
+        "repository": "https://github.com/K-Dense-AI/scientific-agent-skills"
+      }
+    },
+    {
+      "dependencies": [
+        "sympy",
+        "z3-solver"
+      ],
+      "kind": "implementation",
+      "license": "LicenseRef-HMASD-Local",
+      "license_evidence": "Local-original HMASD wrapper; no SymPy or Z3 source is copied.",
+      "modification_notice": "Original HMASD symbolic and solver wrapper over public dependency APIs.",
+      "origin": "local-original",
+      "path": "tools/research/symbolic/symbolic_tools.py",
+      "sha256": "0c4435f716c08250460106603554c3c5e518d1efaebe0828f101dc3321f2171c",
+      "skill": "hmasd-symbolic-counterexample-tools",
+      "source_ref": null
+    }
+  ],
+  "dependencies": [
+    {
+      "direct": false,
+      "license": "MIT",
+      "license_evidence_url": "https://pypi.org/project/attrs/26.1.0/",
+      "name": "attrs",
+      "normalized_name": "attrs",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/python-attrs/attrs",
+      "version": "26.1.0"
+    },
+    {
+      "direct": false,
+      "license": "MIT",
+      "license_evidence_url": "https://pypi.org/project/exceptiongroup/1.3.1/",
+      "name": "exceptiongroup",
+      "normalized_name": "exceptiongroup",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/agronholm/exceptiongroup",
+      "version": "1.3.1"
+    },
+    {
+      "direct": true,
+      "license": "MPL-2.0",
+      "license_evidence_url": "https://pypi.org/project/hypothesis/6.131.9/",
+      "name": "Hypothesis",
+      "normalized_name": "hypothesis",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        ".omp/skills/hmasd-scientific-compute-contracts/SKILL.md",
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt",
+        "tools/research/scientific_compute/__init__.py",
+        "tools/research/scientific_compute/__main__.py",
+        "tools/research/scientific_compute/cli.py",
+        "tools/research/scientific_compute/contracts.py",
+        "tools/research/scientific_compute/invariants.py",
+        "tools/research/scientific_compute/property_testing.py"
+      ],
+      "source_url": "https://github.com/HypothesisWorks/hypothesis",
+      "version": "6.131.9"
+    },
+    {
+      "direct": false,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/mpmath/1.3.0/",
+      "name": "mpmath",
+      "normalized_name": "mpmath",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/mpmath/mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "direct": true,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/numpy/1.26.3/",
+      "name": "NumPy",
+      "normalized_name": "numpy",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        ".omp/skills/hmasd-scientific-compute-contracts/SKILL.md",
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt",
+        "tools/research/scientific_compute/__init__.py",
+        "tools/research/scientific_compute/__main__.py",
+        "tools/research/scientific_compute/cli.py",
+        "tools/research/scientific_compute/contracts.py",
+        "tools/research/scientific_compute/invariants.py",
+        "tools/research/scientific_compute/property_testing.py"
+      ],
+      "source_url": "https://github.com/numpy/numpy",
+      "version": "1.26.3"
+    },
+    {
+      "direct": true,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/pandas/2.2.3/",
+      "name": "Pandas",
+      "normalized_name": "pandas",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/pandas-dev/pandas",
+      "version": "2.2.3"
+    },
+    {
+      "direct": true,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/pyDOE3/1.0.4/",
+      "name": "pyDOE3",
+      "normalized_name": "pydoe3",
+      "notice": "Installed dependency only; current reduced design slice uses stdlib and vendors no pyDOE3 code.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/relf/pyDOE3",
+      "version": "1.0.4"
+    },
+    {
+      "direct": false,
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/python-dateutil/2.9.0.post0/",
+      "name": "python-dateutil",
+      "normalized_name": "python-dateutil",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/dateutil/dateutil",
+      "version": "2.9.0.post0"
+    },
+    {
+      "direct": false,
+      "license": "MIT",
+      "license_evidence_url": "https://pypi.org/project/pytz/2026.3.post1/",
+      "name": "pytz",
+      "normalized_name": "pytz",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/stub42/pytz",
+      "version": "2026.3.post1"
+    },
+    {
+      "direct": true,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://pypi.org/project/scipy/1.15.2/",
+      "name": "SciPy",
+      "normalized_name": "scipy",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        ".omp/skills/hmasd-scientific-compute-contracts/SKILL.md",
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt",
+        "tools/research/scientific_compute/__init__.py",
+        "tools/research/scientific_compute/__main__.py",
+        "tools/research/scientific_compute/cli.py",
+        "tools/research/scientific_compute/contracts.py",
+        "tools/research/scientific_compute/invariants.py",
+        "tools/research/scientific_compute/property_testing.py"
+      ],
+      "source_url": "https://github.com/scipy/scipy",
+      "version": "1.15.2"
+    },
+    {
+      "direct": false,
+      "license": "MIT",
+      "license_evidence_url": "https://pypi.org/project/six/1.17.0/",
+      "name": "six",
+      "normalized_name": "six",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/benjaminp/six",
+      "version": "1.17.0"
+    },
+    {
+      "direct": false,
+      "license": "Apache-2.0",
+      "license_evidence_url": "https://pypi.org/project/sortedcontainers/2.4.0/",
+      "name": "sortedcontainers",
+      "normalized_name": "sortedcontainers",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/grantjenks/python-sortedcontainers",
+      "version": "2.4.0"
+    },
+    {
+      "direct": true,
+      "license": "BSD-3-Clause",
+      "license_evidence_url": "https://github.com/sympy/sympy/blob/b4ce69ad5d40e4e545614b6c76ca9b0be0b98f0b/LICENSE",
+      "name": "SymPy",
+      "normalized_name": "sympy",
+      "notice": "Installed dependency only; wrapper uses public APIs and copies no SymPy source.",
+      "required_by": [
+        ".omp/skills/hmasd-symbolic-counterexample-tools/SKILL.md",
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt",
+        "tools/research/symbolic/symbolic_tools.py"
+      ],
+      "source_url": "https://github.com/sympy/sympy/tree/b4ce69ad5d40e4e545614b6c76ca9b0be0b98f0b",
+      "version": "1.13.3"
+    },
+    {
+      "direct": false,
+      "license": "PSF-2.0",
+      "license_evidence_url": "https://pypi.org/project/typing-extensions/4.16.0/",
+      "name": "typing-extensions",
+      "normalized_name": "typing-extensions",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/python/typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "direct": false,
+      "license": "Apache-2.0",
+      "license_evidence_url": "https://pypi.org/project/tzdata/2026.3/",
+      "name": "tzdata",
+      "normalized_name": "tzdata",
+      "notice": "Installed dependency only; no source copied or vendored.",
+      "required_by": [
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt"
+      ],
+      "source_url": "https://github.com/python/tzdata",
+      "version": "2026.3"
+    },
+    {
+      "direct": true,
+      "license": "MIT",
+      "license_evidence_url": "https://github.com/Z3Prover/z3/blob/6f24123f0c9d1d8bd84dec275c5c7aea939a19fe/LICENSE.txt",
+      "name": "z3-solver",
+      "normalized_name": "z3-solver",
+      "notice": "Installed dependency only; wrapper uses public APIs and copies no Z3 source.",
+      "required_by": [
+        ".omp/skills/hmasd-symbolic-counterexample-tools/SKILL.md",
+        "docs/research-tooling/NOTICE",
+        "requirements_research_tools.in",
+        "requirements_research_tools.txt",
+        "tools/research/symbolic/symbolic_tools.py"
+      ],
+      "source_url": "https://github.com/Z3Prover/z3/tree/6f24123f0c9d1d8bd84dec275c5c7aea939a19fe",
+      "version": "4.13.4.0"
+    }
+  ],
+  "managed_roots": {
+    "exclusions": [
+      {
+        "pattern": "**/__pycache__/**",
+        "reason": "Generated Python bytecode is not a shipped source adapter."
+      },
+      {
+        "pattern": "**/*.pyc",
+        "reason": "Generated Python bytecode is not a shipped source adapter."
+      },
+      {
+        "pattern": "tests/research_tools/**",
+        "reason": "Focused verification fixtures are not shipped adapter implementations."
+      }
+    ],
+    "skill_roots": [
+      ".omp/skills/hmasd-paper-lookup",
+      ".omp/skills/hmasd-hypothesis-mechanisms",
+      ".omp/skills/hmasd-experimental-design-tools",
+      ".omp/skills/hmasd-scientific-writing-validation",
+      ".omp/skills/hmasd-symbolic-counterexample-tools",
+      ".omp/skills/hmasd-scientific-compute-contracts"
+    ],
+    "tool_roots": [
+      "tools/research/paper_lookup",
+      "tools/research/hypothesis_mechanisms",
+      "tools/research/experimental_design",
+      "tools/research/scientific_writing",
+      "tools/research/symbolic",
+      "tools/research/scientific_compute"
+    ]
+  },
+  "manifest_type": "hmasd-p1-research-tooling-provenance",
+  "review": {
+    "last_reviewed": "2026-08-30",
+    "maintainer_release_risk": "The immutable upstream snapshot is unsigned, its overall Python floor differs from this isolated lock, and the tree/API listing was truncated; exact adapted raw paths and local hashes are therefore authoritative."
+  },
+  "schema_version": 1,
+  "unresolved_facts": [
+    {
+      "fact": "The upstream repository tree/API listing was truncated during review; absence of paths outside the directly inspected set was not established.",
+      "impact": "No absence or whole-tree completeness claim is made; only confirmed pinned raw paths are used as adaptation sources.",
+      "resolution": "Re-review the immutable commit with a complete tree listing if provenance for any additional upstream path is proposed."
+    }
+  ],
+  "upstream": {
+    "authored_date": "2026-08-29",
+    "commit": "f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f",
+    "committed_date": "2026-08-29",
+    "confirmed_paths": [
+      "LICENSE",
+      "pyproject.toml",
+      "skills/experimental-design/SKILL.md",
+      "skills/experimental-design/scripts/doe_designs.py",
+      "skills/experimental-design/scripts/randomization.py",
+      "skills/hypothesis-generation/SKILL.md",
+      "skills/hypothesis-generation/assets/falsification_controls_template.json",
+      "skills/hypothesis-generation/assets/hypothesis_record_template.json",
+      "skills/hypothesis-generation/scripts/check_falsification_controls.py",
+      "skills/hypothesis-generation/scripts/validate_hypothesis_schema.py",
+      "skills/paper-lookup/SKILL.md",
+      "skills/paper-lookup/scripts/_common.py",
+      "skills/paper-lookup/scripts/arxiv_atom.py",
+      "skills/paper-lookup/scripts/jats_to_text.py",
+      "skills/paper-lookup/scripts/openalex_abstract.py",
+      "skills/paper-lookup/scripts/paginate.py",
+      "skills/peer-review/SKILL.md",
+      "skills/scientific-writing/SKILL.md",
+      "skills/scientific-writing/scripts/_common.py",
+      "skills/scientific-writing/scripts/audit_claims.py",
+      "skills/scientific-writing/scripts/check_consistency.py",
+      "skills/scientific-writing/scripts/validate_manifest.py"
+    ],
+    "inspection_limitations": "The repository tree/API listing was truncated; direct immutable raw-path inspection confirmed the listed paper-lookup, hypothesis-generation, experimental-design, scientific-writing, and peer-review paths, and no absent-path claim is made.",
+    "license": "MIT",
+    "license_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/f6fcafeb1cc8c82eca0160a18bc41c38427b8e0f/LICENSE",
+    "project_python": ">=3.13",
+    "project_version": "2.65.0",
+    "repository": "https://github.com/K-Dense-AI/scientific-agent-skills",
+    "selected_compatibility": "The upstream project as a whole requires Python >=3.13. Selected skill headers document lower optional-script compatibility; the isolated CPython 3.10.21 dependency lock records only the selected local slice and does not broaden the upstream project's compatibility claim.",
+    "signature_status": "unsigned"
+  }
+}

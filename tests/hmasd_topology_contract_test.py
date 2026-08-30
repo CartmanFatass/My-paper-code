@@ -182,6 +182,16 @@ LEGACY_ACTIVE_NAMES = (
 )
 
 
+ON_DEMAND_RESEARCH_SKILLS = (
+    "hmasd-paper-lookup",
+    "hmasd-hypothesis-mechanisms",
+    "hmasd-experimental-design-tools",
+    "hmasd-scientific-writing-validation",
+    "hmasd-symbolic-counterexample-tools",
+    "hmasd-scientific-compute-contracts",
+)
+
+
 def _parse_frontmatter(path: Path) -> dict[str, FrontmatterValue]:
     lines = path.read_text(encoding="utf-8").splitlines()
     assert lines and lines[0] == "---", path
@@ -316,7 +326,7 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
         assert "omit" in body
 
 
-def test_eight_complete_skills_and_authority_files() -> None:
+def test_fourteen_complete_skills_and_authority_files() -> None:
     expected_anchors = {
         "hmasd-root-control": (
             "portfolio.md",
@@ -328,7 +338,7 @@ def test_eight_complete_skills_and_authority_files() -> None:
         "hmasd-em-direction-cycle": (
             "material-cycle boundary",
             "algorithm_principles.md",
-            "no default quota",
+            "counts, quotas, votes, and quorum never do",
             "exactly one pro innovator",
             "exactly one pro convergence",
             "returns frozen requests through root",
@@ -336,7 +346,8 @@ def test_eight_complete_skills_and_authority_files() -> None:
         ),
         "hmasd-cm-engineering-cycle": (
             "contract-first gate",
-            "exactly one appropriate implementer",
+            "writer cardinality follows those gaps",
+            "exactly one writer owns every overlapping boundary",
             "singleton `hmasd-browser-transport` service",
             "no mandatory engineering document suite",
         ),
@@ -392,10 +403,30 @@ def test_eight_complete_skills_and_authority_files() -> None:
             "em:<direction>",
             "cm:<direction>",
         ),
+        "hmasd-paper-lookup": ("on-demand", "explicit network boundary"),
+        "hmasd-hypothesis-mechanisms": ("only on demand", "not a manager autoload"),
+        "hmasd-experimental-design-tools": ("optional tool only", "not autoloaded"),
+        "hmasd-scientific-writing-validation": (
+            "on-demand professional research tool",
+            "not standing manager context",
+        ),
+        "hmasd-symbolic-counterexample-tools": (
+            "on-demand observation tool",
+            "not a root, em, or cm autoload",
+        ),
+        "hmasd-scientific-compute-contracts": (
+            "not manager-autoloaded",
+            "optional research-tools environment",
+        ),
     }
-    skill_paths = sorted((REPO_ROOT / ".omp" / "skills").glob("*/SKILL.md"))
+    skills_root = REPO_ROOT / ".omp" / "skills"
+    skill_paths = sorted(skills_root.glob("*/SKILL.md"))
     assert {path.parent.name for path in skill_paths} == set(expected_anchors)
-    assert len(skill_paths) == 8
+    assert len(skill_paths) == 14
+    assert {
+        path.name for path in skills_root.iterdir() if path.is_dir()
+    } == set(expected_anchors)
+    assert not (skills_root / "hmasd-portfolio-control").exists()
     for path in skill_paths:
         metadata = _parse_frontmatter(path)
         assert _string_field(metadata, "name") == path.parent.name
@@ -404,6 +435,22 @@ def test_eight_complete_skills_and_authority_files() -> None:
         lower_body = " ".join(body.lower().split())
         for anchor in expected_anchors[path.parent.name]:
             assert anchor in lower_body, (path, anchor)
+
+    project_agents = sorted(AGENT_ROOT.glob("*.md"))
+    for agent_path in project_agents:
+        autoloaded = _list_field(_parse_frontmatter(agent_path), "autoloadSkills")
+        assert not set(autoloaded).intersection(ON_DEMAND_RESEARCH_SKILLS), agent_path
+    config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
+    assert "autoload" not in config.lower()
+    for skill in ON_DEMAND_RESEARCH_SKILLS:
+        assert skill not in config
+
+    inventory = (REPO_ROOT / ".omp" / "AGENTS.md").read_text(encoding="utf-8")
+    assert "On-demand P1 research tools" in inventory
+    for skill in ON_DEMAND_RESEARCH_SKILLS:
+        assert skill in inventory
+    assert "not agent-profile/config autoloads or default manager dependencies" in inventory
+    assert "Loading a skill grants no authority or Effect" in inventory
 
     rules = (REPO_ROOT / ".omp" / "RULES.md").read_text(encoding="utf-8")
     numbered = re.findall(r"^([1-9])\. ", rules, re.MULTILINE)

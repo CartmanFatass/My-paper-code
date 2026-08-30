@@ -153,6 +153,44 @@ def test_root_executes_the_complete_portfolio_decision_frame() -> None:
         assert material_milestone in skill
 
 
+def test_root_routes_direction_science_through_em_and_bounds_portfolio_leaves() -> None:
+    skill = _flat(ROOT_SKILL)
+    agents = _flat(AGENTS)
+    protocol = _flat(PROTOCOL)
+
+    for text in (skill, protocol):
+        assert "direction-scoped" in text
+        assert "EM" in text
+        assert "never" in text
+        assert "direct" in text
+        for category in (
+            "Shared-assumption audit",
+            "Complement/substitute analysis",
+            "Option-value analysis",
+            "Cross-direction risk analysis",
+        ):
+            assert category in text
+
+    for routing_anchor in (
+        "Direction-scoped science always goes to the responsible EM",
+        "Root never bypasses that EM by invoking a scientific leaf",
+        "Counts follow gaps, never a fixed leaf quota, wave size, utilization target, vote, majority, or quorum",
+        "First-wave packets contain no favored answer, desired `PASS`, sibling conclusion, vote tally, allocation preference, or other result leakage",
+        "each remains blind to sibling results until it returns a substantive product or `NO_MATERIAL_INSIGHT`",
+        "These rules add no scheduler, authority role, lifecycle state, result schema, or registry",
+    ):
+        assert routing_anchor in agents
+
+    for skill_anchor in (
+        "These are the only Portfolio analytical leaf categories",
+        "Root synthesizes cited mechanisms and dependencies, never votes, majorities, confidence tallies, leaf counts, or quorum",
+        "It rides in the existing role payload of the unchanged common v1 carrier",
+        "`NO_MATERIAL_INSIGHT` is a successful terminal, negative-complete product",
+        "This is task routing through existing OMP carriers, not a scheduler, registry, lifecycle, or authority layer",
+    ):
+        assert skill_anchor in skill
+
+
 def test_root_actively_refills_unpaused_capacity_and_pause_blocks_effects() -> None:
     skill = _flat(ROOT_SKILL)
 

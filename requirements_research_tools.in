@@ -1,0 +1,9 @@
+-c requirements_server.txt
+
+hypothesis==6.131.9
+numpy
+pandas
+pyDOE3==1.0.4
+scipy
+sympy==1.13.3
+z3-solver==4.13.4.0

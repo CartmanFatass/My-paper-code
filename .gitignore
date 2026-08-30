@@ -108,6 +108,7 @@ runtime/model-catalog-v2-workaround.json
 *.txt
 !/requirements_server.txt
 !/requirements_sb3.txt
+!/requirements_research_tools.txt
 !scripts/r27_g2_runtime_package_manifest.txt
 *.tar
 !ref/hmasd.tar
@@ -147,6 +148,7 @@ evaluation/
 *.orig
 .pytest_cache/
 **/.pytest_cache/
+.hypothesis/
 .pytest_tmp*/
 .pytest-*/
 .pytest_r*_tmp*/
@@ -198,6 +200,10 @@ tests/.tmp/
 test/.pytest_tmp/
 test/.tmp/
 test*.py
+!tests/hmasd_research_workflow_contract_test.py
+!tests/hmasd_research_workflow_synthetic_smoke_test.py
+!tests/research_tools/
+!tests/research_tools/**/*.py
 # Candidate tests mirror experiments/candidates and remain visible to Git.
 !tests/experiments/
 !tests/experiments/**/*.py

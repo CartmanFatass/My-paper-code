@@ -42,8 +42,12 @@ the target transport inventory contains the singleton
 - `hmasd-em` and `hmasd-cm` are the only project spawn-capable managers. All
   other project roles are non-blocking leaves or services. Root executes
   Portfolio work directly; it never creates an intermediate Portfolio agent.
-- Root directly invokes EM and CM managers and may directly invoke every project
-  leaf. There are no workflow-designer or design-reviewer project roles.
+- Root directly invokes EM and CM managers. Direction-scoped science always
+  goes to the responsible EM; Root never bypasses that EM by invoking a
+  scientific leaf. Root may invoke a project leaf directly only for
+  Root-owned work that the leaf contract fits, including the bounded
+  cross-direction Portfolio analyses below. There are no workflow-designer or
+  design-reviewer project roles.
 - The bundled `task` agent is Root-only and may be used only when no project
   role fits. The bundled `librarian` is available to Root, EM, and CM. Only Root
   may dispatch `hmasd-workflow-recovery-manager`; managers do not spawn it.
@@ -64,7 +68,7 @@ the target transport inventory contains the singleton
   authority.
 
 
-## OMP communication and Portfolio semantics
+## OMP communication, analytical dispatch, and Portfolio semantics
 
 - Every cross-role dispatch uses an OMP `task` or Hub carrier with identity,
   generation, and assignment fields plus meaning-complete sections for
@@ -75,6 +79,72 @@ the target transport inventory contains the singleton
 - Literal Codex `[WORK]`, `[RESULT]`, and `[BROWSER WORK]` headings are semantic
   source material only. They are not OMP routing authority, identity, receipts,
   or a substitute for the required meaning sections.
+- An accountable manager dispatches an analytical leaf only for an unanswered
+  information gap that can change that manager's own decision, is separable
+  from manager synthesis, benefits from the leaf's method, source, code-map, or
+  tool advantage, and can return an inspectable product. The assignment freezes
+  the scope, protected semantics and Effects, positive/negative/null/ambiguous/
+  failure branches, stop condition, and reentry; accepted evidence must not
+  already answer the gap. Zero qualifying gaps dispatch zero leaves. One gap
+  dispatches at most one fitting assignment at a time, while several genuinely
+  separable gaps may fan out. Counts follow gaps, never a fixed leaf quota,
+  wave size, utilization target, vote, majority, or quorum.
+- Every analytical assignment carries a neutral packet containing the
+  manager-owned variable; frozen question, claim, or contract; authoritative
+  definitions and hashed references; facts, evidence, inference, speculation,
+  and contradictions kept separate; exact gap and assigned lens; all outcome
+  branches; non-goals; ownership and authorized Effects; required output; stop;
+  and reentry. First-wave packets contain no favored answer, desired `PASS`,
+  sibling conclusion, vote tally, allocation preference, or other result
+  leakage. Different first-wave assignments may receive different
+  mechanism-level lenses, but each remains blind to sibling results until it
+  returns a substantive product or `NO_MATERIAL_INSIGHT`; authoritative
+  constraints and known invalidating evidence are never hidden.
+- The common analytical product records `assignment_id`, `gap_id`,
+  `task_family`, the answered question, `MATERIAL_INSIGHT` or
+  `NO_MATERIAL_INSIGHT`, and the concrete claim or product; exact
+  source/artifact/observation references and locators; sources inspected and
+  methods attempted; assumptions and applicability boundary; verified facts,
+  external evidence, inference, speculation, and contradiction separately;
+  a falsifier or counterexample and surviving alternatives; uncertainty,
+  limitations, and the exact residual gap; the conditional consequence and
+  decision relevance for the manager-owned variable; a recommendation; and
+  the next discriminator, `DONE_REASON`, and reentry trigger. A leaf's
+  recommendation is conditional analysis, never the manager's decision.
+- `NO_MATERIAL_INSIGHT` is a successful, terminal, negative-complete
+  analytical product: within the frozen scope no answer-changing insight
+  follows. It states the sources inspected, methods attempted, why no material
+  insight follows, and residual uncertainty. It is not `FAILED`, approval,
+  negative scientific evidence, evidence of absence, or scientific rejection,
+  and it causes no silent claim change or resampling. Reopen the same
+  family/input only after a new mechanism, source, observation, premise, or
+  corrected defect. A valid adverse or null scientific observation and a
+  technical failure remain separate from `NO_MATERIAL_INSIGHT`.
+- Analytical products travel in the role-specific payload of the unchanged
+  common v1 result carrier. These rules add no scheduler, authority role,
+  lifecycle state, result schema, or registry. Each manager consumes a
+  terminal analytical product immediately, closes the answered gap, and fans
+  out or refills only for an evidenced residual or newly exposed separable
+  gap. It waits only for a live result on which the contemplated action
+  actually depends, never for an all-terminal wave.
+- Root may dispatch a Portfolio analytical leaf only for a Portfolio-owned
+  cross-direction gap in one of four categories: (1) a **shared-assumption
+  audit** identifying the dependency, affected directions and layer,
+  necessity, common-mode failure path, and independent discriminator; (2) a
+  **complement/substitute analysis** returning `COMPLEMENT`, `SUBSTITUTE`,
+  `ORTHOGONAL`, `CONDITIONAL`, or `UNKNOWN` with mechanism, conditions,
+  evidence, sequencing implication, distinguishing scientific and information
+  value, engineering reuse, and common risk; (3) an **option-value analysis**
+  identifying the branch opened, preserved, or closed, reversible enabling
+  action, exercise/abandon/expiry trigger, information gained, irreversibility,
+  dependencies, and bounded cost/time without invented probability or rank; or
+  (4) a **cross-direction risk analysis** identifying the mechanism, exposed
+  directions, propagation, trigger, blast radius, relatively independent
+  check, and reversible mitigation/tradeoff. These leaves return only
+  conditional relationships. They never rank directions, allocate resources,
+  change lifecycle, write direction state, adjudicate direction science, or
+  gain Portfolio or direction authority; Root synthesizes cited mechanisms and
+  dependencies, not leaf counts.
 - Root's Portfolio subflow adopts one explicit action for every direction in the
   user-fixed considered set. It consumes each terminal EM, CM, Transport, or
   Run fact immediately and actively refills authorized capacity when not
@@ -190,3 +260,25 @@ which are required only after their phase is reached. Disposable output stays
 under `temp/directions/<direction-id>/exp/` and `test/`. Raw runs, generated
 manifests, profiles, checkpoints, and captured logs remain ignored. A Dashboard
 is a read-only derived view and never authority or control surface.
+
+## On-demand P1 research tools
+
+The following repository skills are optional, on-demand research tools; they
+are not agent-profile/config autoloads or default manager dependencies:
+
+- `hmasd-paper-lookup` normalizes bounded scholarly records and makes separately
+  authorized named-endpoint retrieval requests.
+- `hmasd-hypothesis-mechanisms` generates or validates bounded mechanism cards.
+- `hmasd-experimental-design-tools` generates or validates frozen randomized or
+  full-factorial experimental schedules.
+- `hmasd-scientific-writing-validation` checks local scientific-writing
+  metadata records for declared structural consistency.
+- `hmasd-symbolic-counterexample-tools` performs bounded symbolic algebra checks
+  or encoded counterexample searches.
+- `hmasd-scientific-compute-contracts` performs bounded property falsification
+  or explicit numerical-artifact comparison.
+
+Activate one only for its exact assigned research or verification gap and its
+own frozen input contract. Loading a skill grants no authority or Effect,
+including network, provider, experiment, state, Git, lifecycle, or external
+Effects; any such action requires its separate existing authorization.

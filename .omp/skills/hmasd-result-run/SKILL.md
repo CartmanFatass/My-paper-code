@@ -11,7 +11,10 @@ Make one exact local train, evaluate, or analyze command observable and
 reproducible without turning run metadata, terminal success, or metrics into
 approval or scientific authority. Exactly one Experiment Operator owns exactly
 one command from launch through its terminal witness. No CM, Reviewer,
-Verifier, or second Operator shares that command ownership.
+Verifier, or second Operator shares that command ownership. Engineering
+candidate acceptance, observed run execution, and scientific meaning are
+independent axes: CM owns the first, the Operator reports facts for the second,
+and EM alone interprets the third.
 
 ## Inputs
 
@@ -32,7 +35,8 @@ The Operator may execute only these frozen bytes. Missing, contradictory,
 noncanonical, unsafe, or changed fields return a refusal before launch. A
 convenient shell wrapper, different seed, reduced comparator, alternate output
 root, or relaxed stop condition is a different command and requires a new CM
-contract; it is not local recovery.
+contract; it is not local recovery. The Operator has no authority to change
+inputs or execution in response to an observed outcome.
 
 ## Bounded cycle
 
@@ -62,8 +66,12 @@ contract; it is not local recovery.
 The bounded cycle has one prepared manifest, one Operator, one process, and one
 terminal witness. A user response to the frozen decision request or an
 observation of that exact process is the only continuation. Never poll through
-a successor assignment, relaunch an unknown or partially observed process, or
-reinterpret metrics.
+a successor assignment or relaunch an unknown or partially observed process.
+The Operator never retries, reruns, or relaunches on its own, including after a
+terminal failure or an unwanted scientific outcome. Any new execution, even of
+identical argv after a terminal witness, requires a newly frozen CM request and
+run identity with its own singleton command owner. Re-observing the same
+process to resolve its terminal fact is not a rerun.
 
 ## State writes
 
@@ -78,9 +86,11 @@ reinterpret metrics.
 - This Skill records no scientific conclusion, acceptance token,
   Portfolio/EM/CM state, lifecycle action, provider ledger, or Agentify state.
   Accepted scientific result Markdown/JSON remains EM-authored; the Operator
-  never writes it.
+  never writes it or labels an outcome positive, negative, null, supportive, or
+  falsifying.
 - Process exit zero and terminal `SUCCEEDED` mean only that the frozen command
-  completed as observed. They do not establish scientific acceptance.
+  completed as observed. They establish neither engineering-candidate
+  acceptance nor scientific acceptance.
 
 ## Returned result envelope
 
@@ -99,8 +109,11 @@ terminal worker. Include the terminal-witness path in `artifact_refs` and use:
 
 For a long-run boundary, use `status: "BLOCKED"`, `materiality: "USER"`, and
 one exact `decision_requests[]` entry. Advisor or Reviewer output is never an
-approval token. On any terminal status, return observed paths and limitations
-without a scientific interpretation.
+approval token. On any terminal status, return only observed command facts:
+the frozen input and process identities, stdout/stderr and produced artifact
+refs, terminal status, exit code, observation timestamps, and limitations.
+Do not compare the observation to a scientific hypothesis, reinterpret a
+metric, recommend a scientific disposition, or silently rerun.
 
 ## Failure handling
 
@@ -108,13 +121,15 @@ Refuse invalid or mutable argv, noncanonical paths, identity mismatch, duplicate
 ownership, unsafe resources, unbounded workers, undeclared Effects, PID
 mismatch, manifest CAS conflict, or a conflicting terminal witness. Preserve
 the original request and inspect the exact manifest/process before classifying
-an unknown outcome. Never start a successor for a partially observed command.
+an unknown outcome. Never start a successor for a partially observed command
+or repeat a terminal command without the newly frozen CM request and run
+identity.
 
 Record the observed terminal state and return exit code `6` for an observed
 resource conflict, `8` for the user decision boundary, or `1` for another
 directly observed failure. If terminal observation is lost, retain the same run
-identity and exact re-observation condition; do not manufacture an exit code or
-claim completion.
+identity and exact re-observation condition; do not manufacture an exit code,
+claim completion, or infer scientific meaning.
 
 ## Deletion condition
 
