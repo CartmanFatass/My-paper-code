@@ -1,5 +1,5 @@
 {
-  "archive_path": "docs/external-review/directions/example-direction/a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
+  "archive_path": "docs/external-review/directions/example-direction/a2604c701f39adec08f5/pro_innovator/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
   "archive_sha256": "4d54885d5118b2d74e2ff4be842114f6deaded3db04f853f9dfeaa5e0a5f0986",
   "commitment_state": "COMMITTED",
   "direction_id": "example-direction",
@@ -10,7 +10,9 @@
   "provider": "chatgpt",
   "question_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
   "request_fingerprint": "4444444444444444444444444444444444444444444444444444444444444444",
+  "review_stage": "pro_innovator",
   "round_id": "a2604c701f39adec08f5",
   "session_id": "33333333-3333-4333-8333-333333333333",
-  "stable_key": "phase0-example-stable"
+  "stable_key": "phase0-example-stable",
+  "workflow_version": "hmasd-external-review-v1"
 }

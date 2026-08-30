@@ -13,14 +13,28 @@
     "workflow_version",
     "rounds"
   ],
+  "oneOf": [
+    {
+      "properties": { "schema_version": { "const": 2 } },
+      "not": { "required": ["historical_archives"] }
+    },
+    {
+      "properties": { "schema_version": { "const": 3 } },
+      "required": ["historical_archives"]
+    }
+  ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 2 },
+    "schema_version": { "type": "integer", "enum": [2, 3] },
     "revision": { "type": "integer", "minimum": 1 },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "writer": { "type": "string", "pattern": "^EM-[a-z0-9][a-z0-9_-]{1,63}$" },
     "direction_id": { "$ref": "#/$defs/direction_id" },
     "workflow_version": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
-    "rounds": { "type": "array", "items": { "$ref": "#/$defs/round" } }
+    "rounds": { "type": "array", "items": { "$ref": "#/$defs/round" } },
+    "historical_archives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/historical_archive" }
+    }
   },
   "$defs": {
     "timestamp": {
@@ -29,6 +43,8 @@
     },
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "direction_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
+    "round_id": { "type": "string", "pattern": "^[0-9a-f]{20}$" },
+    "identity": { "type": "string", "minLength": 1, "maxLength": 256 },
     "path": {
       "type": "string",
       "minLength": 1,
@@ -59,9 +75,9 @@
         "completed_at"
       ],
       "properties": {
-        "operation_id": { "type": "string", "minLength": 1, "maxLength": 256 },
-        "idempotency_key": { "type": "string", "minLength": 1, "maxLength": 256 },
-        "session_ref": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "operation_id": { "$ref": "#/$defs/identity" },
+        "idempotency_key": { "$ref": "#/$defs/identity" },
+        "session_ref": { "$ref": "#/$defs/identity" },
         "terminal_state": { "type": "string", "pattern": "^[A-Z][A-Z0-9_.-]{0,63}$" },
         "archive_ref": { "$ref": "#/$defs/nullable_ref" },
         "handoff_ref": { "$ref": "#/$defs/nullable_ref" },
@@ -85,7 +101,7 @@
         "completed_at"
       ],
       "properties": {
-        "round_id": { "type": "string", "pattern": "^[0-9a-f]{20}$" },
+        "round_id": { "$ref": "#/$defs/round_id" },
         "question_sha256": { "$ref": "#/$defs/sha256" },
         "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
         "status": {
@@ -123,6 +139,51 @@
         "completed_at": {
           "anyOf": [{ "$ref": "#/$defs/timestamp" }, { "type": "null" }]
         }
+      }
+    },
+    "historical_archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "observed_round_id",
+        "canonical_round_id",
+        "question_sha256",
+        "evidence_set_sha256",
+        "review_stage",
+        "provider",
+        "stable_key",
+        "operation_id",
+        "idempotency_key",
+        "request_fingerprint",
+        "prompt_sha256",
+        "session_id",
+        "terminal_state",
+        "completed_at",
+        "legacy_archive_ref",
+        "response_ref"
+      ],
+      "properties": {
+        "classification": { "type": "string", "const": "CROSS_SWAPPED_ROUND_ID" },
+        "observed_round_id": { "$ref": "#/$defs/round_id" },
+        "canonical_round_id": { "$ref": "#/$defs/round_id" },
+        "question_sha256": { "$ref": "#/$defs/sha256" },
+        "evidence_set_sha256": { "$ref": "#/$defs/sha256" },
+        "review_stage": {
+          "type": "string",
+          "enum": ["pro_innovator", "pro_convergence"]
+        },
+        "provider": { "type": "string", "enum": ["chatgpt", "gemini"] },
+        "stable_key": { "$ref": "#/$defs/identity" },
+        "operation_id": { "$ref": "#/$defs/identity" },
+        "idempotency_key": { "$ref": "#/$defs/identity" },
+        "request_fingerprint": { "$ref": "#/$defs/sha256" },
+        "prompt_sha256": { "$ref": "#/$defs/sha256" },
+        "session_id": { "$ref": "#/$defs/identity" },
+        "terminal_state": { "type": "string", "const": "NATURAL_COMPLETION_VERIFIED" },
+        "completed_at": { "$ref": "#/$defs/timestamp" },
+        "legacy_archive_ref": { "$ref": "#/$defs/ref" },
+        "response_ref": { "$ref": "#/$defs/ref" }
       }
     }
   }

@@ -168,12 +168,18 @@ def _validate_schema(value: Any, schema: Mapping[str, Any], root: Mapping[str, A
                     matches += 1
                 except _SchemaFailure as exc:
                     failures.append(str(exc))
-            required = 1 if keyword == "anyOf" else 1
-            if (keyword == "anyOf" and matches < required) or (
+            if (keyword == "anyOf" and matches < 1) or (
                 keyword == "oneOf" and matches != 1
             ):
                 raise _SchemaFailure(f"{path}: {keyword} failed ({'; '.join(failures)})")
-            return
+
+    if "not" in schema:
+        try:
+            _validate_schema(value, schema["not"], root, path)
+        except _SchemaFailure:
+            pass
+        else:
+            raise _SchemaFailure(f"{path}: not failed")
 
     if "const" in schema and value != schema["const"]:
         raise _SchemaFailure(f"{path}: expected {schema['const']!r}")
@@ -489,14 +495,24 @@ def _validate_direction_state(
 def _validate_external_index(document: Mapping[str, Any]) -> None:
     direction_id = _validate_direction_state(document, "external_review_index")
     workflow_version = document["workflow_version"]
-    seen: set[str] = set()
+    historical_archives = document.get("historical_archives", [])
+
+    seen_rounds: set[str] = set()
     for index, round_document in enumerate(document["rounds"]):
         round_id = round_document["round_id"]
-        if round_id in seen:
+        if round_id in seen_rounds:
             raise ValidationError(f"duplicate external round id: {round_id}")
-        seen.add(round_id)
+        seen_rounds.add(round_id)
         expected = sha256_bytes(
-            (direction_id + "\n" + round_document["question_sha256"] + "\n" + round_document["evidence_set_sha256"] + "\n" + workflow_version).encode("utf-8")
+            (
+                direction_id
+                + "\n"
+                + round_document["question_sha256"]
+                + "\n"
+                + round_document["evidence_set_sha256"]
+                + "\n"
+                + workflow_version
+            ).encode("utf-8")
         )[:20]
         if round_id != expected:
             raise ValidationError(f"rounds[{index}].round_id does not match frozen inputs")
@@ -511,6 +527,76 @@ def _validate_external_index(document: Mapping[str, Any]) -> None:
                 if forbidden in provider:
                     raise ValidationError(f"provider result contains forbidden ledger field {forbidden}")
 
+    historical_round_ids: set[str] = set()
+    historical_keys: set[tuple[str, str, str]] = set()
+    operation_ids: set[str] = set()
+    idempotency_keys: set[str] = set()
+    archive_paths: set[str] = set()
+    for index, record in enumerate(historical_archives):
+        expected = sha256_bytes(
+            (
+                direction_id
+                + "\n"
+                + record["question_sha256"]
+                + "\n"
+                + record["evidence_set_sha256"]
+                + "\n"
+                + workflow_version
+            ).encode("utf-8")
+        )[:20]
+        if record["canonical_round_id"] != expected:
+            raise ValidationError(
+                f"historical_archives[{index}].canonical_round_id does not match frozen inputs"
+            )
+        if record["observed_round_id"] == record["canonical_round_id"]:
+            raise ValidationError(
+                f"historical_archives[{index}] is not a cross-swapped round identity"
+            )
+        expected_archive_path = (
+            f"docs/external-review/directions/{direction_id}/"
+            f"{record['observed_round_id']}/{record['provider']}/"
+            "NATURAL_COMPLETION_ARCHIVE.json"
+        )
+        if record["legacy_archive_ref"]["path"] != expected_archive_path:
+            raise ValidationError(
+                f"historical_archives[{index}].legacy_archive_ref is not the exact legacy-owned path"
+            )
+        response_base = f"docs/research/candidates/{direction_id}/"
+        if not record["response_ref"]["path"].startswith(response_base):
+            raise _owner_error(
+                f"historical_archives[{index}].response_ref is outside the direction"
+            )
+
+        historical_round_ids.update(
+            (record["observed_round_id"], record["canonical_round_id"])
+        )
+        historical_key = (
+            record["observed_round_id"],
+            record["review_stage"],
+            record["provider"],
+        )
+        if historical_key in historical_keys:
+            raise ValidationError(
+                f"duplicate historical archive identity: {historical_key}"
+            )
+        historical_keys.add(historical_key)
+        for identities, identity, label in (
+            (operation_ids, record["operation_id"], "operation_id"),
+            (idempotency_keys, record["idempotency_key"], "idempotency_key"),
+            (archive_paths, record["legacy_archive_ref"]["path"], "legacy archive path"),
+        ):
+            if identity in identities:
+                raise ValidationError(
+                    f"duplicate historical archive {label}: {identity}"
+                )
+            identities.add(identity)
+
+    synthetic_rounds = seen_rounds.intersection(historical_round_ids)
+    if synthetic_rounds:
+        raise ValidationError(
+            "historical archive identity must not be represented as an active round: "
+            + ", ".join(sorted(synthetic_rounds))
+        )
 
 def _validate_run_manifest(document: Mapping[str, Any]) -> None:
     if document["writer"] != document["operator_identity"]:
@@ -777,7 +863,8 @@ def _validate_document(
             raise ValidationError("foreign Agentify archive cannot contain HMASD metadata")
     else:
         version = document.get("schema_version")
-        if isinstance(version, int) and not isinstance(version, bool) and version > SUPPORTED_SCHEMA_VERSION:
+        supported_version = 3 if normalized == "external_review_index" else SUPPORTED_SCHEMA_VERSION
+        if isinstance(version, int) and not isinstance(version, bool) and version > supported_version:
             raise UnsupportedVersionError(f"unsupported schema version {version}")
         _precheck_writer_ownership(normalized, document)
     schema = load_schema(normalized)
@@ -1118,6 +1205,21 @@ def _validate_external_index_transition(
         ("direction_id", "writer", "workflow_version"),
         "external review index",
     )
+    if next_document["schema_version"] < current["schema_version"]:
+        _immutable_conflict("external review index schema_version")
+    current_history = current.get("historical_archives", [])
+    next_history = next_document.get("historical_archives", [])
+    if (
+        current["schema_version"] == 2
+        and next_document["schema_version"] == 3
+        and next_history
+    ):
+        _immutable_conflict("external review index schema migration historical_archives")
+    if (
+        len(next_history) < len(current_history)
+        or next_history[: len(current_history)] != current_history
+    ):
+        _immutable_conflict("external review index historical_archives prefix")
     for round_id, current_round, next_round in _matching_records(
         current["rounds"],
         next_document["rounds"],
@@ -1453,6 +1555,12 @@ def _migrate_engineering_state_v1(document: dict[str, Any]) -> dict[str, Any]:
     return _migrate_routed_state_v1(document, _ENGINEERING_V1_ROUTE_OWNERS)
 
 
+def _migrate_external_review_index_v2(document: dict[str, Any]) -> dict[str, Any]:
+    document["schema_version"] = 3
+    document["historical_archives"] = []
+    return document
+
+
 def register_migration(kind: str, from_version: int, function: Migration) -> None:
     normalized = normalize_kind(kind)
     if not isinstance(from_version, int) or from_version < 1:
@@ -1462,6 +1570,7 @@ def register_migration(kind: str, from_version: int, function: Migration) -> Non
     MIGRATIONS.setdefault(normalized, {})[from_version] = function
 register_migration("research_state", 1, _migrate_research_state_v1)
 register_migration("engineering_state", 1, _migrate_engineering_state_v1)
+register_migration("external_review_index", 2, _migrate_external_review_index_v2)
 
 
 

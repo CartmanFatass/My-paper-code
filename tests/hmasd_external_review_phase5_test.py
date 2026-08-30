@@ -67,6 +67,26 @@ def _operation_with_archive_bytes(operation: dict[str, object], raw: bytes) -> d
     bound["archive_sha256"] = hashlib.sha256(raw).hexdigest()
     return bound
 
+def _stage_archive_path(operation: dict[str, object], stage: str, provider: str = "chatgpt") -> str:
+    return (
+        "docs/external-review/directions/"
+        f"{operation['direction_id']}/{operation['round_id']}/{stage}/{provider}/"
+        "NATURAL_COMPLETION_ARCHIVE.json"
+    )
+
+
+def _canonical_archive_bytes(archive: dict[str, object]) -> bytes:
+    return (
+        json.dumps(
+            archive,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+            separators=(",", ": "),
+        ).encode("utf-8")
+        + b"\n"
+    )
+
 
 def test_round_id_is_stable_and_uses_all_frozen_inputs() -> None:
     question = "1" * 64
@@ -158,6 +178,7 @@ def test_archive_validation_and_handoff_preserve_response_sha(tmp_path: Path) ->
     archive = _archive()
     validated = validate_archive(_operation(), archive)
     assert validated["responseSha256"] == archive["responseSha256"]
+    assert validated["operationId"] == archive["operationId"]
 
     out = tmp_path / "ignored" / "handoff-input.json"
     rendered = render_handoff_input(FIXTURES / "archive.json", out)
@@ -179,6 +200,8 @@ def test_complete_operation_identity_is_required_before_any_archive_write(
     destination.write_bytes(source_bytes)
 
     for missing in (
+        "workflow_version",
+        "review_stage",
         "commitment_state",
         "provider",
         "stable_key",
@@ -205,6 +228,127 @@ def test_complete_operation_identity_is_required_before_any_archive_write(
     with pytest.raises(ExternalReviewError):
         create_archive_if_absent(wrong_binding, FIXTURES / "archive.json", destination)
     assert destination.read_bytes() == source_bytes
+
+
+@pytest.mark.parametrize(
+    "defect",
+    (
+        "wrong_tuple",
+        "transposed_round_id",
+        "missing_stage",
+        "unknown_stage",
+        "wrong_provider",
+        "wrong_path",
+    ),
+)
+def test_future_operation_binding_defects_refuse_before_any_write(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    defect: str,
+) -> None:
+    _use_archive_root(monkeypatch, tmp_path)
+    operation = _operation()
+    if defect == "wrong_tuple":
+        operation["question_sha256"] = "5" * 64
+    elif defect == "transposed_round_id":
+        operation["round_id"] = "0123456789abcdef0123"
+        operation["archive_path"] = _stage_archive_path(operation, "pro_innovator")
+    elif defect == "missing_stage":
+        operation.pop("review_stage")
+    elif defect == "unknown_stage":
+        operation["review_stage"] = "pro_other"
+    elif defect == "wrong_provider":
+        operation["provider"] = "gemini"
+        operation["archive_path"] = _stage_archive_path(operation, "pro_innovator", "gemini")
+    else:
+        operation["archive_path"] = (
+            "docs/external-review/directions/example-direction/"
+            "a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
+        )
+    destination = tmp_path / str(operation["archive_path"])
+
+    with pytest.raises(ExternalReviewError):
+        create_archive_if_absent(operation, FIXTURES / "archive.json", destination)
+
+    assert not (tmp_path / "docs").exists()
+
+
+def test_two_future_stages_have_distinct_idempotent_destinations(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _use_archive_root(monkeypatch, tmp_path)
+    innovator_operation = _operation()
+    innovator_archive = FIXTURES / "archive.json"
+    innovator_destination = _archive_destination(tmp_path, innovator_operation)
+
+    convergence_archive = _archive()
+    convergence_archive["operationId"] = "fixture-convergence-operation"
+    convergence_archive["idempotencyKey"] = "fixture-convergence-idempotency"
+    convergence_archive["stableKey"] = "fixture-convergence-stable"
+    convergence_raw = _canonical_archive_bytes(convergence_archive)
+    convergence_operation = dict(innovator_operation)
+    convergence_operation.update(
+        {
+            "review_stage": "pro_convergence",
+            "operation_id": convergence_archive["operationId"],
+            "idempotency_key": convergence_archive["idempotencyKey"],
+            "stable_key": convergence_archive["stableKey"],
+            "archive_sha256": hashlib.sha256(convergence_raw).hexdigest(),
+        }
+    )
+    convergence_operation["archive_path"] = _stage_archive_path(
+        convergence_operation,
+        "pro_convergence",
+    )
+    convergence_destination = _archive_destination(tmp_path, convergence_operation)
+
+    assert create_archive_if_absent(
+        innovator_operation,
+        innovator_archive,
+        innovator_destination,
+    )["status"] == "CREATED"
+    assert create_archive_if_absent(
+        convergence_operation,
+        convergence_archive,
+        convergence_destination,
+    )["status"] == "CREATED"
+    assert innovator_destination != convergence_destination
+    assert innovator_destination.is_file()
+    assert convergence_destination.read_bytes() == convergence_raw
+    assert create_archive_if_absent(
+        innovator_operation,
+        innovator_archive,
+        innovator_destination,
+    )["status"] == "IDEMPOTENT"
+    assert create_archive_if_absent(
+        convergence_operation,
+        convergence_archive,
+        convergence_destination,
+    )["status"] == "IDEMPOTENT"
+
+
+def test_committed_legacy_reference_is_validate_only_even_when_destination_is_absent(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _use_archive_root(monkeypatch, tmp_path)
+    legacy = _operation()
+    legacy.pop("workflow_version")
+    legacy.pop("review_stage")
+    legacy["archive_path"] = (
+        "docs/external-review/directions/example-direction/"
+        "a2604c701f39adec08f5/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
+    )
+    destination = _archive_destination(tmp_path, legacy)
+
+    assert validate_archive(legacy, FIXTURES / "archive.json")["responseSha256"] == _archive()[
+        "responseSha256"
+    ]
+    with pytest.raises(ExternalReviewError, match="legacy operation references are validate-only"):
+        create_archive_if_absent(legacy, FIXTURES / "archive.json", destination)
+
+    assert not destination.parent.exists()
 
 
 def test_unknown_commitment_refuses_before_archive_create(

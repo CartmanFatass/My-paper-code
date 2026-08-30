@@ -28,6 +28,7 @@ ARCHIVE_SCHEMA = "agentify_review_natural_completion_archive_v1"
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _OWNED_ARCHIVE_ROOT = PurePosixPath("docs/external-review/directions")
 _OWNED_ARCHIVE_FILENAME = "NATURAL_COMPLETION_ARCHIVE.json"
+_SUPPORTED_REVIEW_STAGES = frozenset({"pro_innovator", "pro_convergence"})
 PROMPT_FILES = (
     "PRO_INNOVATOR_PROMPT.md",
     "PRO_CONVERGENCE_PROMPT.md",
@@ -66,6 +67,7 @@ _REQUIRED_OPERATION_FIELDS = (
     "archive_path",
     "archive_sha256",
 )
+_FUTURE_OPERATION_FIELDS = ("workflow_version", "review_stage")
 _COMMITTED_STATES = frozenset({"COMMITTED", "NATURAL_COMPLETION_VERIFIED"})
 _PROVIDER_TARGETS = {
     "chatgpt": ("chatgpt.com", "c"),
@@ -220,8 +222,28 @@ def _require_session_id(value: Any, *, label: str) -> str:
     return session_id
 
 
-def _owned_archive_path(direction_id: str, round_id_value: str, provider: str) -> PurePosixPath:
+def _legacy_owned_archive_path(
+    direction_id: str,
+    round_id_value: str,
+    provider: str,
+) -> PurePosixPath:
     return _OWNED_ARCHIVE_ROOT / direction_id / round_id_value / provider / _OWNED_ARCHIVE_FILENAME
+
+
+def _owned_archive_path(
+    direction_id: str,
+    round_id_value: str,
+    review_stage: str,
+    provider: str,
+) -> PurePosixPath:
+    return (
+        _OWNED_ARCHIVE_ROOT
+        / direction_id
+        / round_id_value
+        / review_stage
+        / provider
+        / _OWNED_ARCHIVE_FILENAME
+    )
 
 
 def _validate_archive_target(provider: str, session_id: str, conversation_url: Any) -> str:
@@ -246,7 +268,11 @@ def _validate_archive_target(provider: str, session_id: str, conversation_url: A
     return url
 
 
-def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
+def _validate_operation_ref(
+    operation_ref: Any,
+    *,
+    allow_legacy: bool,
+) -> dict[str, Any]:
     if not isinstance(operation_ref, Mapping):
         raise ExternalReviewError("operation reference must be a JSON object")
     result = dict(operation_ref)
@@ -274,11 +300,58 @@ def _validate_operation_ref(operation_ref: Any) -> dict[str, Any]:
     for key in ("request_fingerprint", "prompt_sha256", "question_sha256", "evidence_sha256", "archive_sha256"):
         _require_sha(result[key], label=f"operation reference {key}")
 
-    expected_archive_path = _owned_archive_path(direction_id, round_id_value, provider).as_posix()
+    is_future = any(key in result for key in _FUTURE_OPERATION_FIELDS)
+    if not is_future:
+        if not allow_legacy:
+            raise ExternalReviewError(
+                "legacy operation references are validate-only and cannot create or import an archive"
+            )
+        expected_archive_path = _legacy_owned_archive_path(
+            direction_id,
+            round_id_value,
+            provider,
+        ).as_posix()
+    else:
+        missing_future = [key for key in _FUTURE_OPERATION_FIELDS if key not in result]
+        if missing_future:
+            raise ExternalReviewError(
+                "future operation reference is missing required fields: " + ", ".join(missing_future)
+            )
+        workflow_version = _require_text(
+            result["workflow_version"],
+            label="operation reference workflow_version",
+        )
+        review_stage = _require_text(
+            result["review_stage"],
+            label="operation reference review_stage",
+        )
+        if review_stage not in _SUPPORTED_REVIEW_STAGES:
+            raise ExternalReviewError(
+                "operation reference review_stage must be one of: "
+                + ", ".join(sorted(_SUPPORTED_REVIEW_STAGES))
+            )
+        expected_round_id = round_id(
+            direction_id,
+            result["question_sha256"],
+            result["evidence_sha256"],
+            workflow_version,
+        )
+        if round_id_value != expected_round_id:
+            raise ExternalReviewError(
+                "operation reference round_id does not match its frozen direction, question, evidence, and workflow"
+            )
+        expected_archive_path = _owned_archive_path(
+            direction_id,
+            round_id_value,
+            review_stage,
+            provider,
+        ).as_posix()
+
     archive_path = result["archive_path"]
     if not isinstance(archive_path, str) or archive_path != expected_archive_path:
+        ownership = "direction, round, stage, and provider" if is_future else "legacy direction, round, and provider"
         raise ExternalReviewError(
-            "operation reference archive_path does not match its direction, round, and provider ownership"
+            f"operation reference archive_path does not match its {ownership} ownership"
         )
     return result
 
@@ -341,13 +414,21 @@ def _validate_archive_identity(
         raise ExternalReviewError("archive bytes do not match operation reference archive_sha256")
 
 
-def _archive_record(operation_ref: Any | None, archive: Any) -> ArchiveRecord:
+def _archive_record(
+    operation_ref: Any | None,
+    archive: Any,
+    *,
+    allow_legacy_operation: bool = False,
+) -> ArchiveRecord:
     operation: dict[str, Any] | None
     if operation_ref is None:
         operation = None
     else:
         operation_value, _, _ = _input_value(operation_ref, label="operation reference")
-        operation = _validate_operation_ref(operation_value)
+        operation = _validate_operation_ref(
+            operation_value,
+            allow_legacy=allow_legacy_operation,
+        )
     data, raw, source_path = _input_value(archive, label="archive")
     validated = _validate_archive_data(data)
     if raw is None:
@@ -535,9 +616,13 @@ def partition_monitors(sessions: Any, count: int) -> list[list[Any]]:
 
 
 def validate_archive(operation_ref: Any, archive: Any) -> dict[str, Any]:
-    """Validate an Agentify archive without changing or importing it."""
+    """Validate a future or committed legacy archive without changing or importing it."""
 
-    return _archive_record(operation_ref, archive).data.copy()
+    return _archive_record(
+        operation_ref,
+        archive,
+        allow_legacy_operation=True,
+    ).data.copy()
 
 
 def _fsync_directory(path: Path) -> None:
@@ -589,16 +674,18 @@ def create_archive_if_absent(
     archive: Any,
     destination: os.PathLike[str] | str,
 ) -> dict[str, Any]:
-    """Publish one bound foreign archive to its sole owned tracked path.
+    """Publish one future-protocol foreign archive to its stage-owned path.
 
-    The destination is derived from the operation's direction, round, and
-    provider binding, then published by linking a fully written/fsynced
-    temporary file. A losing writer is idempotent only when the destination's
-    complete raw archive bytes have the same SHA-256 as the incoming archive.
+    Legacy operation references are rejected before destination inspection or
+    creation. The future destination is derived from the operation's direction,
+    canonical round, review stage, and provider binding, then published by
+    linking a fully written/fsynced temporary file. A losing writer is
+    idempotent only when the destination's complete raw archive bytes have the
+    same SHA-256 as the incoming archive.
     """
 
     operation_value, _, _ = _input_value(operation_ref, label="operation reference")
-    operation = _validate_operation_ref(operation_value)
+    operation = _validate_operation_ref(operation_value, allow_legacy=False)
     record = _archive_record(operation, archive)
     target = _owned_destination(operation, destination)
     if target.exists() and target.is_dir():
@@ -724,12 +811,15 @@ def _parser() -> argparse.ArgumentParser:
     partition_parser.add_argument("--sessions", required=True)
     partition_parser.add_argument("--count", type=int, choices=(1, 2, 3), required=True)
 
-    archive_parser = commands.add_parser("validate-archive", help="validate or import an Agentify archive")
+    archive_parser = commands.add_parser(
+        "validate-archive",
+        help="validate an archive, or import one future-protocol archive",
+    )
     archive_parser.add_argument("--operation-ref", required=True)
     archive_parser.add_argument("--archive", required=True)
     archive_parser.add_argument(
         "--out",
-        help="optional destination; it must equal the operation's owned direction/round/provider archive path",
+        help="optional future destination; it must equal the operation's stage-owned archive path",
     )
 
     handoff_parser = commands.add_parser("render-handoff-input", help="render an ignored handoff input")
@@ -749,7 +839,11 @@ def _command_result(args: argparse.Namespace) -> Any:
     if args.command == "validate-archive":
         if args.out:
             return create_archive_if_absent(args.operation_ref, args.archive, args.out)
-        record = _archive_record(args.operation_ref, args.archive)
+        record = _archive_record(
+            args.operation_ref,
+            args.archive,
+            allow_legacy_operation=True,
+        )
         return {
             "status": "VALID",
             "operation_id": record.data["operationId"],

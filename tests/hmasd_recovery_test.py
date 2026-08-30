@@ -410,8 +410,8 @@ def test_external_unknown_commitment_is_not_resent_and_archive_import_is_idempot
 
     destination = (
         tmp_path
-        / "docs/external-review/directions/example-direction/a2604c701f39adec08f5/chatgpt"
-        / "NATURAL_COMPLETION_ARCHIVE.json"
+        / "docs/external-review/directions/example-direction/a2604c701f39adec08f5"
+        / "pro_innovator/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
     )
     monkeypatch.setattr(external_review, "_PROJECT_ROOT", tmp_path)
     operation = _load(RECOVERY_FIXTURES / "committed_operation_ref.json")

@@ -42,6 +42,54 @@ SCHEMA_KINDS = (*KINDS, "runtime_browser_assignments")
 def fixture(kind: str) -> dict[str, Any]:
     return json.loads((FIXTURES / f"{kind}.json").read_text(encoding="utf-8"))
 
+def historical_archive(document: dict[str, Any], seed: str) -> dict[str, Any]:
+    question = hashlib.sha256(f"question-{seed}".encode()).hexdigest()
+    evidence = hashlib.sha256(f"evidence-{seed}".encode()).hexdigest()
+    canonical_round_id = hashlib.sha256(
+        (
+            document["direction_id"]
+            + "\n"
+            + question
+            + "\n"
+            + evidence
+            + "\n"
+            + document["workflow_version"]
+        ).encode("utf-8")
+    ).hexdigest()[:20]
+    observed_round_id = hashlib.sha256(f"observed-{seed}".encode()).hexdigest()[:20]
+    provider = "chatgpt"
+    return {
+        "classification": "CROSS_SWAPPED_ROUND_ID",
+        "observed_round_id": observed_round_id,
+        "canonical_round_id": canonical_round_id,
+        "question_sha256": question,
+        "evidence_set_sha256": evidence,
+        "review_stage": "pro_innovator",
+        "provider": provider,
+        "stable_key": f"stable-{seed}",
+        "operation_id": f"operation-{seed}",
+        "idempotency_key": f"idempotency-{seed}",
+        "request_fingerprint": hashlib.sha256(f"request-{seed}".encode()).hexdigest(),
+        "prompt_sha256": hashlib.sha256(f"prompt-{seed}".encode()).hexdigest(),
+        "session_id": f"session-{seed}",
+        "terminal_state": "NATURAL_COMPLETION_VERIFIED",
+        "completed_at": "2026-08-24T00:05:00Z",
+        "legacy_archive_ref": {
+            "path": (
+                f"docs/external-review/directions/{document['direction_id']}/"
+                f"{observed_round_id}/{provider}/NATURAL_COMPLETION_ARCHIVE.json"
+            ),
+            "sha256": hashlib.sha256(f"archive-{seed}".encode()).hexdigest(),
+        },
+        "response_ref": {
+            "path": (
+                f"docs/research/candidates/{document['direction_id']}/"
+                f"RESPONSE_{seed}.md"
+            ),
+            "sha256": hashlib.sha256(f"response-{seed}".encode()).hexdigest(),
+        },
+    }
+
 
 def run_cli(*args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
@@ -62,6 +110,24 @@ def test_all_eleven_schema_contracts_are_present_and_strict() -> None:
         assert schema["type"] == "object"
         assert schema["additionalProperties"] is False
         assert schema["required"]
+
+
+def test_external_review_schema_encodes_versioned_history_shape() -> None:
+    schema = json.loads(
+        (ROOT / "scripts" / "schemas" / "hmasd_external_review_index.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert schema["oneOf"] == [
+        {
+            "properties": {"schema_version": {"const": 2}},
+            "not": {"required": ["historical_archives"]},
+        },
+        {
+            "properties": {"schema_version": {"const": 3}},
+            "required": ["historical_archives"],
+        },
+    ]
 
 
 def test_valid_phase0_fixtures_validate() -> None:
@@ -163,6 +229,392 @@ def test_external_review_v2_rejects_old_three_stage_fields(tmp_path: Path) -> No
     )
 
     assert result.returncode == 2
+
+
+def test_external_review_v3_recomputes_history_and_rejects_synthetic_rounds(
+    tmp_path: Path,
+) -> None:
+    document = fixture("external_review_index")
+    unexpected_history = copy.deepcopy(document)
+    unexpected_history["historical_archives"] = []
+    unexpected_history_path = tmp_path / "external-review-v2-with-history.json"
+    unexpected_history_path.write_text(json.dumps(unexpected_history), encoding="utf-8")
+    assert run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(unexpected_history_path),
+    ).returncode == 2
+
+    missing_history = copy.deepcopy(document)
+    missing_history["schema_version"] = 3
+    missing_history_path = tmp_path / "external-review-v3-without-history.json"
+    missing_history_path.write_text(json.dumps(missing_history), encoding="utf-8")
+    assert run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(missing_history_path),
+    ).returncode == 2
+
+    document["schema_version"] = 3
+    record = historical_archive(document, "one")
+    document["historical_archives"] = [record]
+    valid = tmp_path / "external-review-v3.json"
+    valid.write_text(json.dumps(document, sort_keys=True), encoding="utf-8")
+    result = run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(valid),
+    )
+    assert result.returncode == 0, result.stderr
+
+    wrong_canonical = copy.deepcopy(document)
+    wrong_canonical["historical_archives"][0]["canonical_round_id"] = "0" * 20
+    wrong_path = tmp_path / "external-review-v3-wrong-canonical.json"
+    wrong_path.write_text(json.dumps(wrong_canonical), encoding="utf-8")
+    assert run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(wrong_path),
+    ).returncode == 2
+
+    duplicate = copy.deepcopy(document)
+    duplicate["historical_archives"].append(copy.deepcopy(record))
+    duplicate_path = tmp_path / "external-review-v3-duplicate.json"
+    duplicate_path.write_text(json.dumps(duplicate), encoding="utf-8")
+    assert run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(duplicate_path),
+    ).returncode == 2
+
+    synthetic = copy.deepcopy(document)
+    synthetic_round = synthetic["rounds"][0]
+    synthetic_round["round_id"] = record["canonical_round_id"]
+    synthetic_round["question_sha256"] = record["question_sha256"]
+    synthetic_round["evidence_set_sha256"] = record["evidence_set_sha256"]
+    synthetic_path = tmp_path / "external-review-v3-synthetic-round.json"
+    synthetic_path.write_text(json.dumps(synthetic), encoding="utf-8")
+    assert run_cli(
+        "validate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(synthetic_path),
+    ).returncode == 2
+
+
+def test_checked_in_external_review_identity_recovery_is_exact_and_reciprocal() -> None:
+    expected_records = {
+        "semigroup_consistent_duration_model_policy": {
+            "canonical_round_id": "211d583818335dd612c7",
+            "classification": "CROSS_SWAPPED_ROUND_ID",
+            "completed_at": "2026-08-29T23:52:48.022Z",
+            "evidence_set_sha256": (
+                "29bccb94957be0a4c87bf919195dc054417337be0f322f337cef3846451c9539"
+            ),
+            "idempotency_key": (
+                "scdmp-opportunity-law-r02-pro-convergence-20260829-strict-01"
+            ),
+            "legacy_archive_ref": {
+                "path": (
+                    "docs/external-review/directions/"
+                    "semigroup_consistent_duration_model_policy/"
+                    "9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
+                ),
+                "sha256": (
+                    "299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2"
+                ),
+            },
+            "observed_round_id": "9f48f4a6bcace75fddeb",
+            "operation_id": "499b71d6-ca35-42d6-9aee-4c1202a7a82d",
+            "prompt_sha256": (
+                "a8dff6d04f5b7f8d2c5d43658773deab7c5b2f3d0ae5df7c29d118b4897de10b"
+            ),
+            "provider": "chatgpt",
+            "question_sha256": (
+                "7506749d50500afe5c7108634aaa97e5975854ee8be239a53834be08a4116c55"
+            ),
+            "request_fingerprint": (
+                "f7ff3f3088493379da96aaf99f9bc7b9a63d8482bb91dd115d209e4edd3fb475"
+            ),
+            "response_ref": {
+                "path": (
+                    "docs/research/candidates/"
+                    "semigroup_consistent_duration_model_policy/"
+                    "SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md"
+                ),
+                "sha256": (
+                    "b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f"
+                ),
+            },
+            "review_stage": "pro_convergence",
+            "session_id": "6a93307b-6410-83e8-b9e5-1ab428de2fc6",
+            "stable_key": "scdmp-opportunity-law-r02-pro-convergence",
+            "terminal_state": "NATURAL_COMPLETION_VERIFIED",
+        },
+        "voronoi_quadrature_field_policy": {
+            "canonical_round_id": "9f48f4a6bcace75fddeb",
+            "classification": "CROSS_SWAPPED_ROUND_ID",
+            "completed_at": "2026-08-29T23:53:06.893Z",
+            "evidence_set_sha256": (
+                "26a7f19034b41aad3c029932e501e46c0519783ef983f3b95d83190adf268da9"
+            ),
+            "idempotency_key": (
+                "vqfp-proof-sized-association-gate-r01-pro-innovator-"
+                "resume-20260829-strict-03"
+            ),
+            "legacy_archive_ref": {
+                "path": (
+                    "docs/external-review/directions/voronoi_quadrature_field_policy/"
+                    "211d583818335dd612c7/chatgpt/NATURAL_COMPLETION_ARCHIVE.json"
+                ),
+                "sha256": (
+                    "4df09776b114da27e1e27a8434ebe8125639a3d8ffbae18beae376425e11f47c"
+                ),
+            },
+            "observed_round_id": "211d583818335dd612c7",
+            "operation_id": "be82f31d-a7cc-4757-9dcb-1393653250fb",
+            "prompt_sha256": (
+                "4c9e2df6b994a532892bb0877c2f7be6aee77fc06c6666bb5fa9eb415dc04833"
+            ),
+            "provider": "chatgpt",
+            "question_sha256": (
+                "74d33eeb9525c4e9472ce35e0283ce46214a90b95699b1a638c3e940b46ad1b9"
+            ),
+            "request_fingerprint": (
+                "b22a9ae15c03521e5454c42d276e60878d8f3812b83feaa414e67f724f48119e"
+            ),
+            "response_ref": {
+                "path": (
+                    "docs/research/candidates/voronoi_quadrature_field_policy/"
+                    "VQFP_PROOF_SIZED_ASSOCIATION_GATE_R01_PRO_INNOVATOR_"
+                    "RESPONSE_20260829.md"
+                ),
+                "sha256": (
+                    "c5f6724fc5a656a6a02b968d4d6969b9c87e8bba25d09695d4b73913379fe162"
+                ),
+            },
+            "review_stage": "pro_innovator",
+            "session_id": "6a933040-034c-83e8-9e8c-9e83eed1c1fa",
+            "stable_key": "vqfp-proof-sized-association-gate-r01-pro-innovator",
+            "terminal_state": "NATURAL_COMPLETION_VERIFIED",
+        },
+    }
+
+    recovered: dict[str, dict[str, Any]] = {}
+    for direction_id, expected_record in expected_records.items():
+        index_path = (
+            ROOT
+            / "docs"
+            / "research"
+            / "candidates"
+            / direction_id
+            / "workflow"
+            / "external-review"
+            / "index.json"
+        )
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        assert index == {
+            "direction_id": direction_id,
+            "historical_archives": [expected_record],
+            "revision": 3,
+            "rounds": [],
+            "schema_version": 3,
+            "updated_at": "2026-08-30T01:57:56Z",
+            "workflow_version": "hmasd-external-review-v1",
+            "writer": f"EM-{direction_id}",
+        }
+
+        record = index["historical_archives"][0]
+        canonical_material = "\n".join(
+            (
+                direction_id,
+                record["question_sha256"],
+                record["evidence_set_sha256"],
+                index["workflow_version"],
+            )
+        ).encode("utf-8")
+        assert hashlib.sha256(canonical_material).hexdigest()[:20] == record[
+            "canonical_round_id"
+        ]
+
+        archive_path = ROOT / record["legacy_archive_ref"]["path"]
+        response_path = ROOT / record["response_ref"]["path"]
+        archive_bytes = archive_path.read_bytes()
+        response_bytes = response_path.read_bytes()
+        assert hashlib.sha256(archive_bytes).hexdigest() == record["legacy_archive_ref"][
+            "sha256"
+        ]
+        assert hashlib.sha256(response_bytes).hexdigest() == record["response_ref"][
+            "sha256"
+        ]
+
+        archive = json.loads(archive_bytes)
+        assert archive["schema"] == "agentify_review_natural_completion_archive_v1"
+        assert archive["operationId"] == record["operation_id"]
+        assert archive["idempotencyKey"] == record["idempotency_key"]
+        assert archive["stableKey"] == record["stable_key"]
+        assert archive["provider"] == record["provider"]
+        assert archive["model"] == "Pro"
+        assert archive["conversationId"] == record["session_id"]
+        assert archive["conversationUrl"] == (
+            f"https://chatgpt.com/c/{record['session_id']}"
+        )
+        assert archive["terminalState"] == record["terminal_state"]
+        assert archive["sendCount"] == 1
+        assert archive["sendActionCount"] == 1
+        assert archive["userMessageId"]
+        assert archive["assistantMessageId"]
+        assert archive["completedAt"] == record["completed_at"]
+        assert archive["responseSha256"] == record["response_ref"]["sha256"]
+        assert archive["responseText"].encode("utf-8") == response_bytes
+        recovered[direction_id] = record
+
+    scdmp = recovered["semigroup_consistent_duration_model_policy"]
+    vqfp = recovered["voronoi_quadrature_field_policy"]
+    assert scdmp["observed_round_id"] == vqfp["canonical_round_id"]
+    assert vqfp["observed_round_id"] == scdmp["canonical_round_id"]
+
+
+def test_external_review_v2_to_v3_migration_adds_no_facts_and_history_is_append_only(
+    tmp_path: Path,
+) -> None:
+    original = fixture("external_review_index")
+    target = tmp_path / "external-review-index.json"
+    target.write_text(json.dumps(original, sort_keys=True), encoding="utf-8")
+    stale_before = target.read_bytes()
+    stale = run_cli(
+        "migrate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        "99",
+        "--to-version",
+        "3",
+    )
+    assert stale.returncode == 4
+    assert target.read_bytes() == stale_before
+
+    attempted_bump = copy.deepcopy(original)
+    attempted_bump["schema_version"] = 3
+    attempted_bump["revision"] += 1
+    attempted_bump["historical_archives"] = [
+        historical_archive(attempted_bump, "during-schema-bump")
+    ]
+    attempted_bump_path = tmp_path / "external-review-bump-with-history.json"
+    attempted_bump_path.write_text(json.dumps(attempted_bump), encoding="utf-8")
+    no_facts_before = target.read_bytes()
+    refused_bump = run_cli(
+        "replace",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        str(original["revision"]),
+        "--input",
+        str(attempted_bump_path),
+    )
+    assert refused_bump.returncode == 6
+    assert target.read_bytes() == no_facts_before
+
+    migrated_result = run_cli(
+        "migrate",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        str(original["revision"]),
+        "--to-version",
+        "3",
+    )
+    assert migrated_result.returncode == 0, migrated_result.stderr
+    migrated = json.loads(target.read_text(encoding="utf-8"))
+    assert migrated["schema_version"] == 3
+    assert migrated["revision"] == original["revision"] + 1
+    assert migrated["rounds"] == original["rounds"]
+    assert migrated["historical_archives"] == []
+
+    first = copy.deepcopy(migrated)
+    first["revision"] += 1
+    first["historical_archives"].append(historical_archive(first, "first"))
+    first_path = tmp_path / "external-review-first-history.json"
+    first_path.write_text(json.dumps(first), encoding="utf-8")
+    appended = run_cli(
+        "replace",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        str(migrated["revision"]),
+        "--input",
+        str(first_path),
+    )
+    assert appended.returncode == 0, appended.stderr
+
+    second = copy.deepcopy(first)
+    second["revision"] += 1
+    second["historical_archives"].append(historical_archive(second, "second"))
+    second_path = tmp_path / "external-review-second-history.json"
+    second_path.write_text(json.dumps(second), encoding="utf-8")
+    appended_again = run_cli(
+        "replace",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        str(first["revision"]),
+        "--input",
+        str(second_path),
+    )
+    assert appended_again.returncode == 0, appended_again.stderr
+
+    rewritten = copy.deepcopy(second)
+    rewritten["revision"] += 1
+    rewritten["historical_archives"][0]["response_ref"]["sha256"] = "0" * 64
+    rewritten_path = tmp_path / "external-review-rewritten-history.json"
+    rewritten_path.write_text(json.dumps(rewritten), encoding="utf-8")
+    immutable_before = target.read_bytes()
+    refused = run_cli(
+        "replace",
+        "--kind",
+        "external_review_index",
+        "--path",
+        str(target),
+        "--writer",
+        original["writer"],
+        "--expected-revision",
+        str(second["revision"]),
+        "--input",
+        str(rewritten_path),
+    )
+    assert refused.returncode == 6
+    assert target.read_bytes() == immutable_before
 
 
 def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:

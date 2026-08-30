@@ -1,8 +1,35 @@
 {
   "direction_id": "semigroup_consistent_duration_model_policy",
-  "revision": 2,
+  "historical_archives": [
+    {
+      "canonical_round_id": "211d583818335dd612c7",
+      "classification": "CROSS_SWAPPED_ROUND_ID",
+      "completed_at": "2026-08-29T23:52:48.022Z",
+      "evidence_set_sha256": "29bccb94957be0a4c87bf919195dc054417337be0f322f337cef3846451c9539",
+      "idempotency_key": "scdmp-opportunity-law-r02-pro-convergence-20260829-strict-01",
+      "legacy_archive_ref": {
+        "path": "docs/external-review/directions/semigroup_consistent_duration_model_policy/9f48f4a6bcace75fddeb/chatgpt/NATURAL_COMPLETION_ARCHIVE.json",
+        "sha256": "299c25b8fb5aa3f48744e6ba42fc5758aa68f89d3669ef8098583f5afb2e58b2"
+      },
+      "observed_round_id": "9f48f4a6bcace75fddeb",
+      "operation_id": "499b71d6-ca35-42d6-9aee-4c1202a7a82d",
+      "prompt_sha256": "a8dff6d04f5b7f8d2c5d43658773deab7c5b2f3d0ae5df7c29d118b4897de10b",
+      "provider": "chatgpt",
+      "question_sha256": "7506749d50500afe5c7108634aaa97e5975854ee8be239a53834be08a4116c55",
+      "request_fingerprint": "f7ff3f3088493379da96aaf99f9bc7b9a63d8482bb91dd115d209e4edd3fb475",
+      "response_ref": {
+        "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_GPT56_PRO_CONVERGENCE_RESPONSE_20260829.md",
+        "sha256": "b8b00486f55499bca574dbbd1a3ee90e23042a0aca76544e024f4d2e6ef0336f"
+      },
+      "review_stage": "pro_convergence",
+      "session_id": "6a93307b-6410-83e8-b9e5-1ab428de2fc6",
+      "stable_key": "scdmp-opportunity-law-r02-pro-convergence",
+      "terminal_state": "NATURAL_COMPLETION_VERIFIED"
+    }
+  ],
+  "revision": 3,
   "rounds": [],
-  "schema_version": 2,
+  "schema_version": 3,
   "updated_at": "2026-08-30T01:57:56Z",
   "workflow_version": "hmasd-external-review-v1",
   "writer": "EM-semigroup_consistent_duration_model_policy"

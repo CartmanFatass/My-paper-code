@@ -889,8 +889,13 @@ def _load_current_receipt(
 ) -> tuple[Path, dict[str, Any]]:
     path, receipt = _load_receipt(repo, entry)
     revision = receipt.get("registry_revision")
-    if not isinstance(revision, int) or isinstance(revision, bool) or revision != int(state["revision"]):
-        raise StaleFacts("worktree receipt registry revision does not match the locked registry")
+    if (
+        not isinstance(revision, int)
+        or isinstance(revision, bool)
+        or revision < 1
+        or revision > int(state["revision"])
+    ):
+        raise StaleFacts("worktree receipt registry revision is invalid or newer than the locked registry")
     if receipt.get("lifecycle") != entry.get("lifecycle"):
         raise StaleFacts("worktree receipt lifecycle does not match the locked registry")
     if receipt.get("candidate_sha") != entry.get("candidate_sha"):

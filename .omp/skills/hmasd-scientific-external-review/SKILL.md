@@ -21,12 +21,13 @@ envelopes, hard boundaries, liveness, and transport mechanics are defined by
 
 ## Frozen inputs
 
-Use the direction ID; stable cycle/round ID; frozen question and evidence-set
-SHA-256s; exact prompt and archive refs; required ChatGPT Pro model; existing
-Agentify operation, commitment, and transport facts; observed external-index
-revision; and local synthesis ref before Convergence. Every request returned
-through Root with `next_action.owner=TRANSPORT` remains meaning-complete under
-`.omp/AGENTS.md`.
+Use the direction ID; frozen question and evidence-set SHA-256s; exact
+`workflow_version`; canonical deterministic `round_id`; `review_stage` in
+`pro_innovator` or `pro_convergence`; provider; exact prompt and stage-owned
+archive refs; required ChatGPT Pro model; existing Agentify operation,
+commitment, and transport facts; observed external-index revision; and local
+synthesis ref before Convergence. Every request returned through Root with
+`next_action.owner=TRANSPORT` remains meaning-complete under `.omp/AGENTS.md`.
 
 ## Two-stage round
 
@@ -35,10 +36,11 @@ through Root with `next_action.owner=TRANSPORT` remains meaning-complete under
    the neutral scope without EM conclusions, favored answers, local results, or
    another provider result.
 2. Unless exactly waived, return one `INNOVATOR` request through Root before or
-   alongside mutually blind neutral local work. Bind `provider: chatgpt`, the
-   exact Pro model, prompt hash, operation, conversation, archive target,
-   idempotency key, fingerprint, and commitment state. Only the strict Agentify
-   review surface may send.
+   alongside mutually blind neutral local work. Bind `provider: chatgpt`,
+   `review_stage: pro_innovator`, the exact Pro model, prompt hash, operation,
+   conversation, canonical round, stage-owned archive target, idempotency key,
+   fingerprint, and commitment state. Only the strict Agentify review surface
+   may send.
 3. Root returns the common v1 transport fact and validated archive ref to EM. A
    committed or uncertain operation is observe-only through the same strict
    Agentify operation and is never resent. EM interprets readable content as
@@ -48,8 +50,8 @@ through Root with `next_action.owner=TRANSPORT` remains meaning-complete under
    substitute for synthesis.
 5. Unless exactly waived, author a separate natural-language Convergence prompt
    from the synthesized evidence packet and return one new `CONVERGENCE`
-   request through Root, bound to ChatGPT Pro and its own exact Agentify
-   operation.
+   request through Root, bound to ChatGPT Pro, `review_stage: pro_convergence`,
+   and its own exact Agentify operation and stage-owned archive target.
 6. EM dispositions every material Convergence objection against evidence. Root
    validates and records archive bytes through the external-review CLI; EM
    performs expected-revision CAS updates of external-index pointers.
@@ -92,22 +94,30 @@ do not modify provider response bytes, archive bytes, common v1 transport facts,
 Agentify commitment state, or authority. A transport failure produces no
 scientific product or update.
 
-## External-review index v2
+## External-review index v2 and v3
 
 `scripts/schemas/hmasd_external_review_index.schema.json` is the exact field and
-value-shape authority. Under both `prompt_refs` and `providers`, a v2 round has
-exactly `pro_innovator` and `pro_convergence`. The Innovator prompt is required
-for a new round; the Convergence prompt remains null until synthesis and
-prompt authorship. Provider slots are nullable and may contain the exact
-in-flight or terminal operation fact returned through Root. A waiver fabricates
-no provider result.
+value-shape authority. Both v2 and v3 keep active workflow in `rounds`. Under
+both `prompt_refs` and `providers`, a round has exactly `pro_innovator` and
+`pro_convergence`. The Innovator prompt is required for a new round; the
+Convergence prompt remains null until synthesis and prompt authorship. Provider
+slots are nullable and may contain the exact in-flight or terminal operation
+fact returned through Root. A waiver fabricates no provider result.
 
-The only statuses are `INNOVATOR_PENDING`, `INNOVATOR_RUNNING`,
+V3 adds only the separate append-only `historical_archives` collection. Each
+record preserves an exact legacy archive/response identity and its observed
+cross-swapped ID beside the canonical ID recomputed from direction, question,
+evidence, and workflow. Historical records are provenance, never active rounds,
+provider dispositions, or resend authority. Generic v2-to-v3 migration adds an
+empty `historical_archives` array and increments revision exactly once; it
+invents no facts. V2 remains valid.
+
+The only active-round statuses are `INNOVATOR_PENDING`, `INNOVATOR_RUNNING`,
 `LOCAL_RESEARCH`, `SYNTHESIS_READY`, `CONVERGENCE_RUNNING`, `COMPLETE`, and
 `BLOCKED`. Use the phase actually reached. `COMPLETE` requires disposition of
 every non-waived stage; `BLOCKED` preserves the unresolved stage and reentry.
-Migrate historical empty indexes mechanically; never invent prompt, provider,
-operation, waiver, or synthesis facts for a partial historical round.
+Never invent prompt, provider, operation, waiver, synthesis, round, or
+historical archive facts.
 
 ## State and failure boundaries
 
@@ -117,6 +127,15 @@ tracked scientific state. Root validates requester, mode, model, operation,
 commitment, and archive bytes and alone invokes the external-review CLI. EM
 writes only CAS external-index pointers and scientific disposition after Root
 returns. Immutable natural-completion archive bytes gain no workflow fields.
+
+Future operation refs must bind the exact workflow version, supported review
+stage, canonical recomputed round ID, provider, and destination:
+`docs/external-review/directions/<direction>/<canonical-round>/<review-stage>/<provider>/NATURAL_COMPLETION_ARCHIVE.json`.
+The two stages therefore never share a destination. Committed refs using the
+legacy direction/round/provider path are exact-byte validate-only provenance.
+They can never create, import, or send, even when their old path is absent.
+Never move, copy, rewrite, or synthesize their archives or responses.
+
 Operations, tabs, conversations, archives, and hashes are not scientific or
 workflow authority; provider completion is not accepted science.
 

@@ -410,6 +410,238 @@ def test_target_outside_omp_namespace_is_refused(repo_and_container: tuple[Path,
     assert path.exists()
 
 
+def test_record_candidate_accepts_older_receipt_after_unrelated_registry_advance(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    provisioned = provision(repo, container, "older-receipt-target")
+    worktree = entry(provisioned)
+    receipt_path = Path(provisioned["receipt"])
+    old_revision = json.loads(receipt_path.read_text(encoding="utf-8"))["registry_revision"]
+
+    unrelated = entry(provision(repo, container, "unrelated-registry-advance"))
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_before = json.loads(registry_path.read_text(encoding="utf-8"))
+    assert registry_before["revision"] > old_revision
+
+    path = Path(worktree["canonical_absolute_path"])
+    path.joinpath("src", "owned.py").write_text("VALUE = 'older receipt'\n", encoding="utf-8")
+    candidate = commit(path, "candidate after unrelated registry advance")
+    recorded = run_cli(
+        repo,
+        "record-candidate",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--candidate",
+        candidate,
+    )
+
+    assert recorded.returncode == 0, (recorded.stdout, recorded.stderr)
+    registry_after = json.loads(registry_path.read_text(encoding="utf-8"))
+    target_after = next(
+        row for row in registry_after["worktrees"] if row["worktree_ref"] == worktree["worktree_ref"]
+    )
+    unrelated_after = next(
+        row for row in registry_after["worktrees"] if row["worktree_ref"] == unrelated["worktree_ref"]
+    )
+    receipt_after = json.loads(receipt_path.read_text(encoding="utf-8"))
+    new_revision = registry_before["revision"] + 1
+    assert payload(recorded)["registry_revision"] == new_revision
+    assert registry_after["revision"] == new_revision
+    assert target_after["lifecycle"] == receipt_after["lifecycle"] == "CANDIDATE_READY"
+    assert target_after["candidate_sha"] == receipt_after["candidate_sha"] == candidate
+    assert receipt_after["registry_revision"] == new_revision
+    assert unrelated_after == unrelated
+
+
+@pytest.mark.parametrize("invalid_revision", ["future", "boolean", "zero", "negative"])
+def test_record_candidate_refuses_invalid_receipt_revision(
+    repo_and_container: tuple[Path, Path],
+    invalid_revision: str,
+) -> None:
+    repo, container = repo_and_container
+    provisioned = provision(repo, container, f"invalid-receipt-revision-{invalid_revision}")
+    worktree = entry(provisioned)
+    path = Path(worktree["canonical_absolute_path"])
+    path.joinpath("src", "owned.py").write_text(f"VALUE = {invalid_revision!r}\n", encoding="utf-8")
+    candidate = commit(path, "candidate with invalid receipt revision")
+
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    receipt_path = Path(provisioned["receipt"])
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    invalid_revisions = {
+        "future": registry["revision"] + 1,
+        "boolean": True,
+        "zero": 0,
+        "negative": -1,
+    }
+    receipt["registry_revision"] = invalid_revisions[invalid_revision]
+    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    registry_before = registry_path.read_bytes()
+    receipt_before = receipt_path.read_bytes()
+
+    refused = run_cli(
+        repo,
+        "record-candidate",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--candidate",
+        candidate,
+    )
+
+    assert refused.returncode == 4
+    assert registry_path.read_bytes() == registry_before
+    assert receipt_path.read_bytes() == receipt_before
+
+
+@pytest.mark.parametrize(
+    ("document", "fact", "expected_code"),
+    [
+        pytest.param("receipt", "worktree_ref", 4, id="receipt-identity"),
+        pytest.param("entry", "operation_token", 4, id="entry-token"),
+        pytest.param("receipt", "repo", 5, id="receipt-repository"),
+        pytest.param("entry", "canonical_absolute_path", 5, id="entry-path"),
+        pytest.param("receipt", "branch", 4, id="receipt-branch"),
+        pytest.param("entry", "base_sha", 4, id="entry-base"),
+        pytest.param("receipt", "lifecycle", 4, id="receipt-lifecycle"),
+        pytest.param("entry", "candidate_sha", 4, id="entry-candidate"),
+    ],
+)
+def test_record_candidate_refuses_protected_entry_or_receipt_drift(
+    repo_and_container: tuple[Path, Path],
+    document: str,
+    fact: str,
+    expected_code: int,
+) -> None:
+    repo, container = repo_and_container
+    provisioned = provision(repo, container, f"protected-{document}-{fact.replace('_', '-')}")
+    worktree = entry(provisioned)
+    path = Path(worktree["canonical_absolute_path"])
+    path.joinpath("src", "owned.py").write_text(f"VALUE = {fact!r}\n", encoding="utf-8")
+    candidate = commit(path, "candidate with protected authority drift")
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    receipt_path = Path(provisioned["receipt"])
+
+    if document == "receipt":
+        protected = json.loads(receipt_path.read_text(encoding="utf-8"))
+        drifted_value: Any = {
+            "worktree_ref": worktree["worktree_ref"] + "-drift",
+            "repo": str(repo.parent / "other-repository"),
+            "branch": worktree["branch"] + "-drift",
+            "lifecycle": "CANDIDATE_READY",
+        }[fact]
+        protected[fact] = drifted_value
+        receipt_path.write_text(json.dumps(protected, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    else:
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        protected = next(
+            row for row in registry["worktrees"] if row["worktree_ref"] == worktree["worktree_ref"]
+        )
+        drifted_value = {
+            "operation_token": "drifted-operation-token",
+            "canonical_absolute_path": str(path.with_name(path.name + "-drift")),
+            "base_sha": candidate,
+            "candidate_sha": candidate,
+        }[fact]
+        protected[fact] = drifted_value
+        registry_path.write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    registry_before = registry_path.read_bytes()
+    receipt_before = receipt_path.read_bytes()
+    refused = run_cli(
+        repo,
+        "record-candidate",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--candidate",
+        candidate,
+    )
+
+    assert refused.returncode == expected_code
+    assert registry_path.read_bytes() == registry_before
+    assert receipt_path.read_bytes() == receipt_before
+
+
+def test_integrated_receipt_sha_drift_refuses_release(repo_and_container: tuple[Path, Path]) -> None:
+    repo, container = repo_and_container
+    worktree, path, _, receipt_path = prepared_candidate(repo, container, "integrated-sha-drift")
+    applied = run_cli(repo, "apply", "--receipt", str(receipt_path), "--actor", "root")
+    assert applied.returncode == 0, (applied.stdout, applied.stderr)
+
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt["applied_sha"] = worktree["base_sha"]
+    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_before = registry_path.read_bytes()
+    receipt_before = receipt_path.read_bytes()
+    refused = run_cli(
+        repo,
+        "release",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--actor",
+        "root",
+    )
+
+    assert refused.returncode == 4
+    assert path.is_dir()
+    assert registry_path.read_bytes() == registry_before
+    assert receipt_path.read_bytes() == receipt_before
+
+
+def test_record_candidate_locked_refresh_race_has_no_candidate_transition(
+    repo_and_container: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from scripts import hmasd_worktree as worktree_module
+
+    repo, container = repo_and_container
+    provisioned = provision(repo, container, "candidate-locked-refresh-race")
+    worktree = entry(provisioned)
+    path = Path(worktree["canonical_absolute_path"])
+    path.joinpath("src", "owned.py").write_text("VALUE = 'raced'\n", encoding="utf-8")
+    candidate = commit(path, "candidate before locked refresh race")
+    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    receipt_path = Path(provisioned["receipt"])
+    receipt_before = receipt_path.read_bytes()
+    original_refresh = worktree_module._refresh_locked_documents
+    raced = False
+
+    def racing_refresh(*args: Any, **kwargs: Any) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+        nonlocal raced
+        if not raced:
+            advance_registry(registry_path)
+            raced = True
+        return original_refresh(*args, **kwargs)
+
+    monkeypatch.setattr(worktree_module, "_refresh_locked_documents", racing_refresh)
+    exit_code = worktree_module.main(
+        [
+            "record-candidate",
+            "--repo",
+            str(repo),
+            "--worktree-ref",
+            worktree["worktree_ref"],
+            "--candidate",
+            candidate,
+        ]
+    )
+
+    assert exit_code == 4
+    assert payload(
+        subprocess.CompletedProcess(args=[], returncode=exit_code, stdout=capsys.readouterr().out, stderr="")
+    )["code"] == 4
+    current = json.loads(registry_path.read_text(encoding="utf-8"))
+    current_entry = next(
+        row for row in current["worktrees"] if row["worktree_ref"] == worktree["worktree_ref"]
+    )
+    assert current_entry["lifecycle"] == "PROVISIONED"
+    assert current_entry["candidate_sha"] is None
+    assert receipt_path.read_bytes() == receipt_before
+
+
 def test_dirty_worktree_and_extra_commit_are_rejected(repo_and_container: tuple[Path, Path]) -> None:
     repo, container = repo_and_container
     provisioned = provision(repo, container, "dirty-case")
