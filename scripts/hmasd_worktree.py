@@ -5366,6 +5366,21 @@ def _retain_locked(
     }
 
 
+def _candidate_result_is_materialized(
+    repo: Path,
+    base: str,
+    candidate: str,
+) -> bool:
+    candidate_delta = _canonical_tree_delta(repo, base, candidate)
+    candidate_paths = {record["path"] for record in candidate_delta["records"]}
+    if not candidate_paths:
+        return False
+    target_delta = _canonical_tree_delta(repo, candidate, TARGET_BRANCH)
+    return candidate_paths.isdisjoint(
+        record["path"] for record in target_delta["records"]
+    )
+
+
 def _release_worktree_facts(
     repo: Path,
     entry: Mapping[str, Any],
@@ -5389,27 +5404,38 @@ def _release_worktree_facts(
     candidate = str(entry.get("candidate_sha") or "").lower()
     if candidate:
         integrated_sha = str(entry.get("integrated_sha") or "").lower()
-        if entry["lifecycle"] != "INTEGRATED" or not _FULL_SHA.fullmatch(integrated_sha):
-            raise UnsafeState("release requires an integrated candidate or explicit retain")
-        reachable_sha = (
-            integrated_sha
-            if _integration_policy(entry) == "ORTHOGONAL_DIRECTION"
-            else candidate
-        )
-        target_sha = _branch_sha(repo, TARGET_BRANCH)
-        if (
-            target_sha is None
-            or _run_git(
+        if entry["lifecycle"] == "INTEGRATED" and _FULL_SHA.fullmatch(integrated_sha):
+            reachable_sha = (
+                integrated_sha
+                if _integration_policy(entry) == "ORTHOGONAL_DIRECTION"
+                else candidate
+            )
+            target_sha = _branch_sha(repo, TARGET_BRANCH)
+            if (
+                target_sha is None
+                or _run_git(
+                    repo,
+                    "merge-base",
+                    "--is-ancestor",
+                    reachable_sha,
+                    TARGET_BRANCH,
+                    check=False,
+                ).returncode
+                != 0
+            ):
+                raise StaleFacts("integrated result is not reachable from omp/workflow")
+        elif (
+            entry["lifecycle"] not in {"CANDIDATE_READY", "PREPARED_FOR_INTEGRATION"}
+            or not _candidate_result_is_materialized(
                 repo,
-                "merge-base",
-                "--is-ancestor",
-                reachable_sha,
-                TARGET_BRANCH,
-                check=False,
-            ).returncode
-            != 0
+                str(entry["base_sha"]).lower(),
+                candidate,
+            )
         ):
-            raise StaleFacts("integrated result is not reachable from omp/workflow")
+            raise UnsafeState(
+                "release requires an integrated candidate, an equivalent materialized "
+                "result, or explicit retain"
+            )
         if branch_sha != str(entry["base_sha"]).lower():
             raise StaleFacts("temporary base branch changed before release")
     elif (

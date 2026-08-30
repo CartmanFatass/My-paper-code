@@ -390,6 +390,43 @@ def test_patch_is_prospective_and_candidate_ref_does_not_change_checkout(tmp_pat
     assert recorded["candidate_sha"] == candidate_sha
     assert checkout_snapshot(target) == before_patch
 
+    (repo / "unrelated.txt").write_text("unrelated\n", encoding="utf-8")
+    git(repo, "add", "unrelated.txt")
+    git(repo, "commit", "-m", "advance target independently")
+    assert not worktree._candidate_result_is_materialized(repo, base, candidate_sha)
+    git(repo, "cherry-pick", candidate_sha)
+    assert (
+        git(
+            repo,
+            "merge-base",
+            "--is-ancestor",
+            candidate_sha,
+            worktree.TARGET_BRANCH,
+            check=False,
+        ).returncode
+        == 1
+    )
+    assert worktree._candidate_result_is_materialized(repo, base, candidate_sha)
+
+    released = worktree.release(
+        str(repo),
+        candidate_entry["worktree_ref"],
+        "root",
+        "discard",
+        lease(repo, candidate_entry["assignment_id"], "equivalent-release-clerk"),
+        expected(
+            repo,
+            container,
+            recorded["worktree"],
+            recorded["registry_revision"],
+            "CANDIDATE_READY",
+            receipt,
+            worktree_path=target,
+        ),
+    )
+    assert released["status"] == "RELEASED"
+    assert not target.exists()
+
 
 def test_patch_failure_never_needs_rollback_and_leaves_checkout_registry_receipt_unchanged(tmp_path: Path) -> None:
     repo, base = init_repo(tmp_path)
