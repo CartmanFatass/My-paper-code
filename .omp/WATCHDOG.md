@@ -39,7 +39,11 @@ Raise one `blocker` immediately when Root:
 - repairs control-plane state introduced in the same session instead of
   preserving bytes and stopping;
 - repeats user-reported evidence or a check already proved;
-- waits for a child while unrelated direct work is available; or
+- waits for a child while unrelated direct work is available;
+- serializes the whole workflow because one Git target, registry CAS, provider
+  operation, or other physical Effect is serialized; only that exact shared
+  resource may wait, while independent directions and non-conflicting work
+  continue; or
 - continues because an internal todo or workflow state remains after the user's
   requested answer or deliverable is complete.
 
