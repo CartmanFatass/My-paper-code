@@ -16,32 +16,30 @@ controlled by `.omp/AGENTS.md`, `.omp/RULES.md`, `.omp/WATCHDOG.md`, `.omp/agent
 `.omp/skills/`. Scientific findings, claim ceilings, direction evidence, retained Effects, archive
 hashes, and user PAUSE/RESUME boundaries are migrated as non-control facts.
 
-The user resumed the retained decision at `2026-08-30T00:30:48Z`, then paused all
-research and direction integration at `2026-08-30T02:20:25Z` while the
-source-semantic OMP workflow adaptation was inspected and completed. The
-controlling state is now `PAUSE`:
+The user resumed the retained decision at `2026-08-30T00:30:48Z`, paused all
+research and direction integration at `2026-08-30T02:20:25Z`, then explicitly
+directed P0/P1 execution followed by continued research. P0/P1 completed at
+commit `93ffcf04537f46f9f226b5bc0dc9454245d39daf` with focused P0, complete
+offline P1, and unified workflow verification. At `2026-08-30T10:39:30Z` Root
+therefore adopts the user's current instruction as `RESUME`:
 
-- The authorized advancing-capacity allocation remains exactly four, but
-  `PAUSE` blocks refill, fresh direction dispatch, sends, launches, and all
-  other new scientific or direction-integration Effects.
-- Preserve the four returned EM assignments, their provisioned worktrees, and
-  committed transport/archive facts without consuming or integrating their
-  scientific conclusions until an explicit user `RESUME`.
-- The user separately authorized the reversible control-plane and external-index
-  representation adaptation in the preceding checkpoint. Completing it did not
-  resume research.
-- At `2026-08-30T09:47:08Z`, the user approved the P0 workflow-safety cutover
-  and gated P1 professional-tool integration recorded in
+- The authorized advancing-capacity allocation remains exactly four. Refill
+  only the four adopted direction slots below with fresh successor EM
+  generations and assignment worktrees.
+- Retained unintegrated worktree artifacts are neutral evidence-intake inputs,
+  not accepted science or lifecycle authority. Each successor EM must
+  revalidate exact bytes, scope, claim ceiling, and unresolved objections
+  before any disposition.
+- Committed transport/archive facts remain observe-only. Never resend or
+  replace a committed operation; unknown commitment remains no-resend.
+- This `RESUME` authorizes the four bounded EM reentries and their reversible
+  local scientific work. A provider operation, CM cycle, or result-bearing
+  command still requires its own exact frozen request and the existing
+  Root-mediated transport, engineering, or Experiment Operator boundary.
+- The P0/P1 implementation plan remains
   `docs/plans/2026-08-30-hmasd-research-workflow-p0-p1-implementation.md`.
-  The conditional extensions in
-  `docs/plans/2026-08-30-hmasd-research-tooling-p2-roadmap.md` are recorded
-  only and are not implementation authorization.
-- Planning or implementing P0/P1 does not resume direction work. Research,
-  direction integration, provider Effects, CM tasks, and experiments remain
-  paused until an explicit user `RESUME`.
-- The preceding `RESUME` authorized only the four EM reentries adopted below.
-  It never authorized a provider send, retry, replacement, continuation, CM
-  task, experiment, or claim widening.
+  The conditional P2 roadmap remains recorded only and is not implementation
+  authorization.
 - Representation migration restored the `PARKED` schema representation only
   for the eight source-known parked rows. It did not reinterpret science or
   change any reactivation condition.
