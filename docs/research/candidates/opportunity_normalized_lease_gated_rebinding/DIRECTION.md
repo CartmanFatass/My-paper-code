@@ -20,75 +20,114 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 ## Frozen held-out third-spacing transfer question
 
 Fresh material cycle
-`2026-08-30-portfolio-r19-onlgr-heldout-transfer-01` is frozen at
-`SCOPE_FROZEN` under Portfolio revision 19. It changes no accepted result and
-authorizes no provider, CM, enumeration, or run effect. The exact question is
-whether the one-parameter EXP and RATE maps, fitted and locked using only
-spacings one and four, show material out-of-fit value at one prospectively
-held-out third spacing or only a finite two-spacing fit.
-Here transfer means only held-out direct-return performance of the two
-predeclared forms at spacing two. It does not identify semantic physical-rate
-or exponential causality. A result-blind affine interpolation through RATE's
-two fitting probabilities reproduces RATE exactly at spacing two, while an
-analogous log-survival interpolation reproduces EXP. Those simpler finite-fit
-alternatives survive every same-cell control and cap the claim accordingly.
+`2026-08-30-portfolio-r19-onlgr-heldout-transfer-01` has continued from its
+accepted scope checkpoint to `EXECUTABLE_HELDOUT_OBJECT_FROZEN`. Scientific
+execution remains `NOT_STARTED`: no `J_2`, held-out optimum, return, regret,
+rank, branch, provider fact, CM result, run, or transfer claim exists.
 
-The accepted g3 facts remain intact: on the seven-tick spacing-`{1,4}` host,
-optimized RATE beats EXP by `9753755/536870912`, beats RAW by
+The answer to the geometry-readiness question is **yes, after one prospective
+branch repair**. The unchanged one-parameter maps remain fitted only on
+spacings `{1,4}` at equal physical-time weight, with locked coordinates RAW
+`p*=1/4`, EXP `r*=1/4`, and RATE `h*=3/16`. The only held-out roster entry is
+the preselected `Delta_H=2`, giving family-definition predictions RAW `1/4`,
+EXP `7/16`, and RATE `3/8`. These are coordinates, not held-out outcomes, and
+the held-out cell may never retune a family or re-enter the fitting objective.
+
+The physical object remains one regenerative unit with `L=7`, real renewal
+cost two, service before the ending-boundary action, nonstacking reset, exact
+rational arithmetic, physical-time averaging, state-blind memorylessness, the
+base `1/16` grid, and material margin `M=1/32`. Containing references are
+unretuned RAW, the held-out unrestricted-`Q` memoryless ceiling, KEEP, each
+candidate's matched payload-null shell, and the first-legal-boundary
+age-conditioned competence diagnostic. All deployed families receive the same
+information, physical slots, opportunity flag, cost, reset, and action shell.
+
+A bounded result-blind adversarial audit found one readiness-material defect in
+the accepted prose: branch 4's phrase “both competence gates” could mean both
+direct-competence predicates or both transfer-competence predicates. The
+symbolic relation tuple with both direct checks true, EXP oracle regret
+`3M/4`, RATE oracle regret `5M/4`, EXP-minus-RAW exactly `M`,
+RATE-minus-RAW `M/2`, and `D=M/2` then had two reasonable labels. This was a
+specification counterexample, not a held-out observation.
+
+EM accepts the counterexample and prospectively binds the decision function.
+For `F` in `{EXP,RATE}`, define `DC_F` as strict `>M` headroom over both KEEP
+and the matched shell, `TC_F := DC_F and C-J_F<=M`,
+`I_F := J_F-W>M`, and `D:=E-R`. After `INVALID` and
+`TECHNICAL_FAILURE`, apply in order:
+
+1. `NO_DIRECT_HEADROOM` if `not (DC_EXP and DC_RATE)`;
+2. `RAW_NOT_MATERIALLY_WORSE` if
+   `DC_EXP and DC_RATE and not I_EXP and not I_RATE`;
+3. `BOTH_MAPPINGS_MISS` if `C-E>M and C-R>M`;
+4. `EXP_FORM_TRANSFER` if `TC_EXP and I_EXP and D>M`;
+5. `RATE_FORM_TRANSFER` if `TC_RATE and I_RATE and D<=M`; and
+6. `AMBIGUOUS_VALID_OBSERVATION` otherwise.
+
+Branches 1-3 map to `NO_IDENTIFIED_FORM_TRANSFER` while retaining their exact
+labels and tuples. Binding branch 4 of the original scope to direct competence
+is the comparator-matched reading: if neither map materially beats RAW, oracle
+proximity cannot manufacture added physical-time-map value. The symbolic
+witness now uniquely returns `RAW_NOT_MATERIALLY_WORSE`. Sequential priority,
+exact comparisons, and the final catch-all make the function total without
+computing a result. Equality is on the no-material side, and optimization tie
+rules never select a family from a cross-family scientific tie.
+
+The required future terminal product contains the complete 17-row exact
+unrestricted-`Q` table; candidate row-identity witnesses; `E`, `R`, `W`, `C`,
+`N_EXP`, and `N_RATE`; every candidate service/charge decomposition; KEEP and
+shell headroom; oracle regrets; RAW increments; `D`; all oracle maximizers and
+the lower-activity/lower-index tie witness; the age-conditioned diagnostic;
+input hashes; validity and technical status; and the ordered predicate trace.
+This is the smallest complete value-and-competence decision product.
+
+The accepted g3 facts remain unchanged: on the seven-tick spacing-`{1,4}`
+host, optimized RATE beats EXP by `9753755/536870912`, beats RAW by
 `73746587/536870912`, and lies exactly `5/2048` below the unrestricted
-grid-valued state-blind-memoryless ceiling. That packet remains
-`GENERIC_RATE_SUPPORTED`, not `EXP_LINK_SPECIFIC`, with its original finite
-claim ceiling.
+grid-valued state-blind-memoryless ceiling. The predecessor remains
+`GENERIC_RATE_SUPPORTED`, not `EXP_LINK_SPECIFIC`.
 
-The fresh fitting roster is exactly spacings `{1,4}` at equal physical-time
-weight. Its accepted coordinates are locked as RAW `p*=1/4`, EXP `r*=1/4`,
-and RATE `h*=3/16`. The only held-out roster entry is spacing `Delta_H=2`,
-selected before any held-out return access as the smallest new interior
-positive integer leaving the frozen maps unsaturated and unequal. It yields
-prospective family predictions RAW `q_H=1/4`, EXP `q_H=7/16`, and RATE
-`q_H=3/8`; none may be retuned with the held-out cell.
+The finite claim ceiling is only one exact operational out-of-fit comparison at
+spacing two on this same finite host. A result-blind affine interpolation
+through RATE's two fitting probabilities reproduces RATE at spacing two, and
+finite log-survival interpolation reproduces EXP. `FINITE-AFFINE`, finite
+log-survival, other equal-information mappings, and RAW absorption therefore
+survive. No future branch can establish semantic physical-rate or exponential
+causality, an arbitrary-spacing theorem, learned ONLGR value, causal lease or
+rebinding, natural policy use, task-content value, population or UAV transfer,
+safety, deployment, workload equality, or PPO superiority.
 
-The primary estimand is the exact held-out direct-return contrast
-`J_2(q_H^EXP)-J_2(q_H^RATE)` under the unchanged `L=7`, cost-two,
-service-before-boundary-action regenerative convention. Required containing
-references are unretuned RAW, the held-out unrestricted `q in Q` memoryless
-ceiling, KEEP, each candidate's matched payload-null shell, and the
-out-of-family age-conditioned competence diagnostic. All deployed families
-receive the same information, physical slots, action shell, and exposure.
-Lower-activity and lower-index tie rules select fitting or unrestricted-grid
-optima only; they never select a family from a cross-family scientific tie.
-The material margin remains exactly `1/32`, with equality on the no-material
-side.
-
-Only a leakage-clean exact tuple containing the two candidate returns, their
-unrestricted-ceiling regrets, RAW value, KEEP/shell headroom, oracle tie
-witness, and service/charge decomposition can close the residual gap. A
-material relative winner that remains more than `1/32` below the held-out
-ceiling is not sufficient for a transfer claim. Invalid identity or leakage
-and technical failure make no scientific update; valid adverse, null, and
-ambiguous outcomes remain distinct.
-
-One bounded adversarial route exposed the finite-interpolant equivalence and
-the need for a total pre-outcome branch function. EM accepts both points. The
-frozen scope closes design admissibility by defining operational form transfer,
-ordering every positive, adverse, null, ambiguous, invalid, and technical
-branch, and recording exact grid containment. Only the held-out value gap
-remains.
-
-The maximum fresh claim is one exact out-of-fit predictive comparison at
-spacing two on the same single-unit, seven-tick, base-`1/16`-grid,
-state-blind-memoryless host. It cannot establish an exponential or
-arbitrary-spacing theorem, learned ONLGR value, causal lease or rebinding,
-population or UAV transfer, safety, deployment, workload, or PPO superiority.
-The earlier terminal provider archive is prior-cycle provenance only and is
-neither reinterpreted nor reopened. No fresh external-review round or request
-is created by this checkpoint.
-
-Exact neutral scope, outcome branches, leakage gates, stop, and reentry are:
+The exact immutable original scope and prospective readiness amendment are:
 
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-scope-and-grounding.md`
   (SHA-256
-  `c2831053ecd59d37fbe434f88d93dad8beaf0ae6c58eef5153b2efece27ffdd4`).
+  `c2831053ecd59d37fbe434f88d93dad8beaf0ae6c58eef5153b2efece27ffdd4`);
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/evidence/2026-08-30-2026-08-30-portfolio-r19-onlgr-heldout-transfer-01-geometry-readiness-g4.md`
+  (SHA-256
+  `ae53a9038e534c5b8b3b3238378a8eaad95981fa594d059987756455f3866c6a`).
+
+The meaning-complete but inert engineering request is:
+
+- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/workflow/research/engineering-request.md`
+  (SHA-256
+  `3bfc9c1142cc9b349a7e304d5434e5b041d9fdff7e67326c3298bf58cc49f58b`).
+
+No Effect is authorized by those bytes. The current external-review index is
+schema v4 revision 3 with no round; the fresh Innovator is not registered or
+waived, and Convergence is not eligible before later local synthesis. After
+Root accepts and integrates this exact semantic product, a new EM assignment
+must resolve the neutral Innovator or an exact user waiver before any
+same-direction CM dispatch. CM additionally waits for the exact accepted EM
+`integrated_sha`; a later result waits for technically accepted CM integration
+and one separately authorized Experiment Operator. EM alone interprets a
+returned tuple, and only then may local synthesis precede Convergence.
+
+The direction-level recommendation to Root is conditional `CONTINUE` through
+that one bounded evidence path. Readiness removes a local identification
+obstacle but is not transfer evidence and does not retain a Portfolio slot by
+outcome. Valid adverse, null, ambiguous, or positive evidence updates only the
+smallest frozen proposition; invalidity, technical failure, review
+availability, runtime, Git, and transport facts supply no scientific polarity.
 
 ## Resolved successor 04 seven-tick robustness question
 
