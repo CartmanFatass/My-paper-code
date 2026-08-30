@@ -28,8 +28,17 @@ controlling state is now `PAUSE`:
   committed transport/archive facts without consuming or integrating their
   scientific conclusions until an explicit user `RESUME`.
 - The user separately authorized the reversible control-plane and external-index
-  representation adaptation in this checkpoint. Completing that adaptation
-  does not resume research.
+  representation adaptation in the preceding checkpoint. Completing it did not
+  resume research.
+- At `2026-08-30T09:47:08Z`, the user approved the P0 workflow-safety cutover
+  and gated P1 professional-tool integration recorded in
+  `docs/plans/2026-08-30-hmasd-research-workflow-p0-p1-implementation.md`.
+  The conditional extensions in
+  `docs/plans/2026-08-30-hmasd-research-tooling-p2-roadmap.md` are recorded
+  only and are not implementation authorization.
+- Planning or implementing P0/P1 does not resume direction work. Research,
+  direction integration, provider Effects, CM tasks, and experiments remain
+  paused until an explicit user `RESUME`.
 - The preceding `RESUME` authorized only the four EM reentries adopted below.
   It never authorized a provider send, retry, replacement, continuation, CM
   task, experiment, or claim widening.
