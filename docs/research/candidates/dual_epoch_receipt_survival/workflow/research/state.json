@@ -2,43 +2,96 @@
   "actionable": false,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [],
+  "blockers": [
+    {
+      "code": "RAW_COST_DEPENDENCY_NONSEPARABLE",
+      "observed_refs": [
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-synthesis.md",
+          "sha256": "87b0c9ed35789ba831a2061aa467bb6102d28ca54db172bf70ef59e3f8cbe41d"
+        },
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md",
+          "sha256": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md",
+        "sha256": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08"
+      }
+    },
+    {
+      "code": "R03_PRO_INNOVATOR_ORDER_MISSED",
+      "observed_refs": [
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-scope-freeze.md",
+          "sha256": "c5a847918ef1151cf45af4cd7b42b2aff3cfa278ce2fb296b98ea7d1252a6ef5"
+        },
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-synthesis.md",
+          "sha256": "87b0c9ed35789ba831a2061aa467bb6102d28ca54db172bf70ef59e3f8cbe41d"
+        },
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/workflow/external-review/index.json",
+          "sha256": "4311ba01a047cd3399440c6cc6e28cc5a20595199fe5383015b15f992438d222"
+        },
+        {
+          "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md",
+          "sha256": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md",
+        "sha256": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08"
+      }
+    }
+  ],
+  "cycle_boundary": "TERMINAL_GAP_DISPOSITION",
+  "cycle_id": "2026-08-30.1-resume-dears-owner-robustness-03",
   "direction_id": "dual_epoch_receipt_survival",
   "direction_ref": {
     "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
-    "sha256": "1013d0462a57cd7c8eae32649d7f5cde2d627f1c006b26b5ddbd965057e0022b"
+    "sha256": "dfb4daadc8f0d127013bda7ee8ac4c5f5599e5140e17b78fa80e367a90332e15"
   },
   "engineering_request": null,
   "evidence_set_sha256": "4fd1a7c2b4e54e100412121c7288759b120b4631fdfaf8946e21622a7e0eceb2",
-  "last_checkpoint_sha": "57a25d1b21bc369dfd5b65d2defc6c55ca20f45c5b0f3c30673a4c7c44314161",
+  "last_checkpoint_sha": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08",
   "next_action": {
     "input_refs": [
       {
         "path": "docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md",
-        "sha256": "1013d0462a57cd7c8eae32649d7f5cde2d627f1c006b26b5ddbd965057e0022b"
+        "sha256": "dfb4daadc8f0d127013bda7ee8ac4c5f5599e5140e17b78fa80e367a90332e15"
       },
       {
-        "path": "docs/research/candidates/dual_epoch_receipt_survival/DEARS_SEMANTIC_CURRENTNESS_GATE_R02.md",
-        "sha256": "a62c123a28c83ca2aa79bfac6107e9d4635cefc4dedb2c576ab5081365ce2ecf"
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-scope-freeze.md",
+        "sha256": "c5a847918ef1151cf45af4cd7b42b2aff3cfa278ce2fb296b98ea7d1252a6ef5"
       },
       {
-        "path": "docs/research/candidates/dual_epoch_receipt_survival/DEARS_SEMANTIC_CURRENTNESS_R02_PAUSE_HANDOFF.md",
-        "sha256": "57a25d1b21bc369dfd5b65d2defc6c55ca20f45c5b0f3c30673a4c7c44314161"
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-local-route-cost-frontier.md",
+        "sha256": "a6357c4a091b7502792869728a27078b4e3a78f22a3aefe94e1b4d697c6853be"
       },
       {
-        "path": "docs/research/portfolio/decisions/2026-08-29-four-slot-user-pause-handoff.md",
-        "sha256": "108773031e6f753266ab305425b39525d90f2a725dfbb1b0cace043eb9664527"
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-local-route-containment-critic.md",
+        "sha256": "7c7a758fde51788865daeeb96c5da59e6bd57a059e26e063d057df128819b357"
+      },
+      {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-synthesis.md",
+        "sha256": "87b0c9ed35789ba831a2061aa467bb6102d28ca54db172bf70ef59e3f8cbe41d"
+      },
+      {
+        "path": "docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md",
+        "sha256": "7e6dee2e10576674e21c5bdc0b2c48a6ee1a8fcf4631ca0ba9701a3d0f26da08"
       }
     ],
-    "kind": "PORTFOLIO_CONSUME_TERMINAL_RESULT",
+    "kind": "INTEGRATE_RECORDED_DEARS_CANDIDATE",
     "owner": "ROOT"
   },
   "phase": "COMPLETE",
   "question_sha256": "a1826149ef4f35cd430b56ba2955ea868e0f8aea8051972d5c995378de4df89f",
-  "registry_revision_seen": 10,
-  "revision": 5,
+  "registry_revision_seen": 19,
+  "revision": 6,
   "schema_version": 2,
-  "updated_at": "2026-08-29T20:15:00Z",
+  "updated_at": "2026-08-30T12:23:10Z",
   "waiting_on": [],
   "writer": "EM-dual_epoch_receipt_survival"
 }

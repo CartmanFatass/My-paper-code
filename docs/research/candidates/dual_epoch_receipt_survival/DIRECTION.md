@@ -6,9 +6,10 @@ priority, capacity, and owner remain solely in `docs/research/portfolio/PORTFOLI
 ## Authority
 
 - Stable direction ID: `dual_epoch_receipt_survival`
-- Current material cycle: `2026-08-29.8-portfolio-dears-semantic-currentness-02`
-- Accepted object: `DEARS-OWNER-SEMANTIC-CURRENTNESS-R02`
-- Accepted milestone: `HANDOFF_READY`; independent review is resolved.
+- Current material cycle: `2026-08-30.1-resume-dears-owner-robustness-03`
+- Accepted positive object: `DEARS-OWNER-SEMANTIC-CURRENTNESS-R02`
+- Accepted positive milestone: R02 `HANDOFF_READY`; its independent review is resolved.
+- Latest material disposition: R03 `TERMINAL_DEFINITION_GAP`; its missed fresh-cycle Pro ordering is unresolved and no R03 external round exists.
 
 ## Scientific question
 
@@ -16,6 +17,10 @@ When authentication and SKILL_LEASE remain live, does OWNER-lineage currentness 
 and return value when old receipt content is correct under an exact OWNER chain and conditionally
 fresh after a designated OWNER break? Does the gated rule remain the unrestricted optimum when an
 exact same-information primitive-history controller is allowed to choose freely?
+
+R03 asked the smallest same-scope successor question: after retaining the R02 host, exact raw
+containment, competent reset, and gross probe law, do explicit retention and dependency-based
+verification costs leave a strict raw-optimal OWNER-only robustness region?
 
 ## Accepted finding
 
@@ -39,23 +44,48 @@ abstraction, or algorithm increment. Because all other verifier coordinates are 
 direct OWNER-edge predicate can implement the same optimum; the full verifier is not identified as
 necessary.
 
+## R03 terminal definition result
+
+R03 preserves the exact gross frontier but does not define one scalar costed raw optimum. Let
+`r=c_ret` and `v=c_ver`. The cellwise returns are
+`G=(1-r-v,1/2-r-v)`, `U=(1-r,2rho-1-r)`, `F=(-1-r,1-2rho-r)`,
+`P=(1/2-r,1/2-r)`, and competent bit-deleted reset `R=(1/2,1/2)`.
+At the fully supported point `rho=1/2`, `r=v=1/10`, the gated mapping is
+`(4/5,3/10)`, fixed ungated use is `(9/10,-1/10)`, and fixed probing is
+`(2/5,2/5)`.
+
+Cellwise cheapest implementations splice fixed ungated use in the live cell and fixed probing in
+the broken cell. Those are two OWNER-independent mappings; one realizable mapping that splices
+them depends on OWNER currentness and pays `c_ver`. Because R03 freezes no live/broken
+scalarization, cellwise returns plus policy-dependent cost do not identify one
+`RAW-EXACT-OPTIMUM`. Under the unadopted cellwise-cheapest convention, all strict gates meet only
+on `S_0={(rho,r,v):1/4<rho<3/4,0<=r<1/2,v=0}`, which has empty
+three-dimensional interior. A hypothetical cross-cell scalarization can instead prefer the gated
+mapping, so neither unconditional positive nor unconditional negative architecture polarity is
+supported.
+
+This is a valid material definition gap, not adverse evidence against R02, not
+`NO_MATERIAL_INSIGHT`, and not a technical failure. R03 supplies no unconditional lifecycle
+polarity.
+
 ## Strongest support and contradiction
 
-The strongest support is the broken complete-class conditional cross: even the unrestricted raw
-controller sees no predictive shortcut after the OWNER break, so probe strictly dominates every
-immediate action. This directly closes R01's semantic-optimality counterexample. In the live cell,
-phase-correct retained service strictly dominates probing and yields the exact `1/2` gross advantage
-over competent deletion/reacquisition.
+The strongest R03 support is the exact interior counterexample above: it preserves conditional
+support, pairing, action law, raw information containment, exact arithmetic, and reset competence
+while exposing the missing scalar policy order. The strongest contradiction to a positive-cost
+raw-equality reading is the cheaper same-action cellwise envelope. The strongest contradiction to
+an unconditional negative reading is that its two selected actions are not one mapping, and an
+added scalarization can reverse their aggregate order.
 
-The controlling objection is that OWNER-edge validity and semantic refresh are jointly stipulated.
-R02 proves the Bayes-optimal response under that designed law; it does not establish that natural
-OWNER succession generally causes or predicts stale content. The broken-cell advantage over fixed
-ungated use is expected, not pathwise: ungated returns `1` on matching fresh twins and `-1` on
-nonmatching twins, while the gate always returns `1/2` by probing.
+The inherited R02 support remains the broken complete-class conditional cross: even the
+unrestricted raw controller sees no predictive shortcut after the OWNER break, so probe strictly
+dominates every immediate action. Its controlling objection also remains unchanged: OWNER-edge
+validity and semantic refresh are jointly stipulated, and the result does not establish natural
+OWNER-break causality.
 
-The strongest surviving simpler explanation is a free, deterministic one-edge predicate choosing
-between a free cache hit and a costly probe. Retention and verification are uncharged, so the result
-is gross protocol accounting rather than net resource or external-task evidence.
+The strongest surviving simpler explanation is a free or costed one-edge predicate choosing
+between retained service and probing. Its apparent value depends on the cross-cell policy
+objective, not on a distinct representation, learned mechanism, or full-verifier necessity.
 
 ## Claim ceiling
 
@@ -66,30 +96,45 @@ is the unique unrestricted raw-history optimum in each cell. It returns `1` live
 exceeds competent bit-deleted reset by `1/2` live, and exceeds fixed ungated old-bit use by `1/2` in
 conditional expectation broken.
 
+R03 adds only the bounded nonidentification statement that its cellwise conditional returns and
+dependency-based verification charge do not order one scalar realizable raw mapping. It neither
+raises nor lowers the accepted R02 ceiling above. Exact raw containment, competent reset, and the
+gross `rho=1/4` and `rho=3/4` ties are unchanged.
+
 This does not establish natural OWNER-break semantics, necessity or value of the full verifier, an
 optimized aggregate OWNER-information value, a separate SKILL_LEASE or dual-lineage mechanism,
 authentication/security value, net resource value, pathwise protection, representation necessity,
 learning, MARL, variable population or lifetime, arbitrary-history robustness, UAV relevance,
 safety, or deployment value.
 
-## Next discriminator
+## Next discriminator and review reentry
 
-Any successor is a fresh material cycle. The smallest same-scope continuation is an exact OWNER-only
-robustness frontier over broken-cell persistence `rho=P(b_cur=b_old | pre-probe information)` and
-explicit retention/verification cost, preserving competent reset and exact raw containment. With
-the current probe value, probe is uniquely optimal for `1/4<rho<3/4` and ties an immediate action at
-the endpoints.
+R03 has exhausted the smallest same-scope robustness frontier. Probe is uniquely gross-optimal for
+`1/4<rho<3/4` and ties an immediate action at each endpoint, but the costed scalar raw optimum is
+undefined. No same-object local leaf, CM observation, or run can select the missing scientific
+convention.
 
-An aggregate OWNER-information-value claim would separately require a frozen cross-cell prior and
-the optimized content-retaining OWNER-blind comparator. Addressing the deeper causal objection would
-require a claim-expanding cycle that independently crosses OWNER continuity and semantic refresh;
-that is outside R02's non-factorial scope. No learned comparison is justified unless a separately
-measured nonzero memory, latency, or verification-work distinction survives exact containment.
+Any scientific continuation must freeze a genuinely new object: either a cellwise implementation
+convention, a cross-cell measure with an optimized OWNER-blind comparator, or a changed
+verification cost payer/clock. None is adopted here.
+
+R03 was fresh, yet its durable local synthesis predates any R03 Pro Innovator. The required
+Innovator-before-or-alongside-local-work order cannot be repaired by a late, relabelled, historical,
+or replacement operation, and Convergence cannot substitute for it. No transport request is
+admissible now. Reentry requires either an exact user waiver of the still-unsent R03 Innovator
+stage, after which only the post-synthesis Convergence obligation could be separately frozen, or a
+genuinely new question/evidence tuple whose fresh Innovator is correctly ordered. Existing
+terminal or commitment-unknown Agentify operations remain non-resendable provenance.
 
 ## Evidence set
 
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/dual_epoch_receipt_survival/DEARS_SEMANTIC_CURRENTNESS_GATE_R02.md`
+- `docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-scope-freeze.md`
+- `docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-local-route-cost-frontier.md`
+- `docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-local-route-containment-critic.md`
+- `docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-synthesis.md`
+- `docs/research/candidates/dual_epoch_receipt_survival/evidence/2026-08-30.1-resume-dears-owner-robustness-03-g4-terminal-definition-disposition.md`
 - `docs/research/candidates/dual_epoch_receipt_survival/DEARS_ONLINE_CARRIER_VALUE_GATE_R01.md`
 - `docs/research/candidates/dual_epoch_receipt_survival/DUAL_EPOCH_AUTHENTICATED_RECEIPT_SURVIVAL_SCIENCE_CARD.md`
 - `docs/research/candidates/dual_epoch_receipt_survival/DEARS_B1_SCIENTIFIC_INTAKE.md`
