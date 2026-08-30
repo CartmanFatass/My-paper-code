@@ -1627,7 +1627,8 @@ def _observation(repo: Path, entry: Mapping[str, Any]) -> dict[str, Any]:
         and not target.is_symlink()
         and len(registrations) == 1
         and registrations[0].get("branch") == f"refs/heads/{branch}"
-        and str(registrations[0].get("head", "")).lower() == str(entry.get("candidate_sha") or entry.get("base_sha", "")).lower()
+        and str(registrations[0].get("head", "")).lower()
+        == str(entry.get("base_sha", "")).lower()
         and observed["branch_sha"] == str(registrations[0].get("head", "")).lower()
     )
     observed["exact_registration"] = exact

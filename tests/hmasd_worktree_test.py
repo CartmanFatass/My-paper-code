@@ -343,6 +343,22 @@ def test_patch_is_prospective_and_candidate_ref_does_not_change_checkout(tmp_pat
     assert git(target, "rev-parse", "HEAD").stdout.strip() == base
 
     candidate_entry = candidate["worktree"]
+    inspected = worktree.inspect(
+        str(repo),
+        candidate_entry["worktree_ref"],
+        expected(
+            repo,
+            container,
+            candidate_entry,
+            candidate["registry_revision"],
+            "CANDIDATE_READY",
+            receipt,
+            worktree_path=target,
+        ),
+    )
+    assert inspected["orphaned"] is False
+    assert inspected["observation"]["registration_head"] == base
+
     recorded = worktree.record_candidate(
         str(repo),
         candidate_entry["worktree_ref"],
