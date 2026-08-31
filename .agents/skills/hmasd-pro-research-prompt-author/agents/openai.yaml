@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Pro Research Prompt Author"
+  short_description: "Compose research delivery packets"
+  default_prompt: "Use $hmasd-pro-research-prompt-author to compose a research-only ChatGPT Pro delivery packet with a body and pinned GitHub references."

@@ -1,6 +1,6 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Use when another session supplies a research direction ID and an exact prompt for ChatGPT Pro web transport, especially when model selection, delayed loading, file uploads, ambiguous sends, long generation, scheduled wake-ups, or exact response archiving must be controlled."
+description: "Use when another session supplies a research direction ID, an exact prompt, and optional separate reference attachments for ChatGPT Pro web transport, especially when model selection, delayed loading, ambiguous sends, long generation, scheduled wake-ups, or exact response archiving must be controlled."
 ---
 
 # HMASD ChatGPT Pro Transport
@@ -15,14 +15,21 @@ preserves transport/response evidence.
 ## Input contract and authority
 
 Accept a request object containing `request_id`, `direction_id`, and exactly one
-content source:
+body source:
 
 - `prompt` for exact clipboard-paste mode; or
-- absolute `prompt_path` for file-upload mode, plus an exact companion `prompt` only
+- absolute `prompt_path` for file-upload mode, plus an exact `companion_prompt` only
   when the page requires text before its Send control becomes enabled.
 
-Reject missing/ambiguous content, unknown direction IDs, and relative upload paths.
-Validate `direction_id` against both `docs/research/portfolio/PORTFOLIO.md` and
+An optional `reference_paths` list contains one or more absolute reference files
+(for example the authoring skill's `REFERENCE_FILES.md`). These are separate
+attachments in the same conversation, not extra body text. Validate and hash every
+reference before transport; preserve their order and names. The one-to-one
+direction/conversation rule applies to the body and all references together.
+
+Reject missing/ambiguous content, unknown direction IDs, relative upload paths, and
+missing/duplicate reference files. Validate `direction_id` against both
+`docs/research/portfolio/PORTFOLIO.md` and
 `docs/research/candidates/<direction_id>/DIRECTION.md`; do not choose a direction or
 rewrite the supplied prompt. Use `scripts/validate_request.py` before page actions.
 
@@ -60,9 +67,16 @@ message node even though a response was returned.
 
 For upload mode, start `waitForEvent("filechooser")` before opening the visible
 upload control, set the absolute file path, and wait for the explicit file group and
-filename state. Record file size/hash before upload. If the upload is still pending,
-do not send. Do not invent companion text when file-only Send is disabled; stop and
-request the exact companion text from the calling session.
+filename state. Record file size/hash before upload. If `reference_paths` are
+present, upload them before Send (in one chooser when `isMultiple()` is true, or in
+separate chooser cycles otherwise) and verify every expected filename in the same
+composer. If the upload is still pending, do not send. Do not invent companion text
+when file-only Send is disabled; stop and request the exact companion text from the
+calling session.
+
+For the authoring packet, the preferred transport is exact clipboard paste of
+`PROMPT_BODY.md` plus a separate upload of `REFERENCE_FILES.md`. Never merge the
+manifest into the body, upload it in another conversation, or silently omit it.
 
 Immediately before an outbound send, obtain the required action-time confirmation
 for the exact content and `chatgpt.com` destination when it is not already present
@@ -74,8 +88,11 @@ for this invocation. Click Send once. Record `SEND_ATTEMPTED`, then re-observe:
   the only positive evidence that a pre-send click failed and may permit one retry
   with the same request/idempotency key.
 
-Never retry an uncertain or mismatched send, never open a second conversation, and
-never silently alter whitespace, file selection, or prompt text.
+For a packet with references, `SEND_CONFIRMED` additionally requires every expected
+reference filename/file group and its recorded hash to be associated with that same
+user turn. Never retry an uncertain or mismatched send, never open a second
+conversation, and never silently alter whitespace, file selection, reference order,
+or prompt text.
 
 ## Long generation and 15-minute wake-up
 
@@ -103,9 +120,10 @@ assistant node exactly; partial streamed text is not an archive.
 
 ## Archive and tab lifecycle
 
-Write separate exact UTF-8 prompt and response files plus a transport-fact file
+Write separate exact UTF-8 prompt, reference-file, and response files plus a
+transport-fact file
 containing direction, conversation, tab, model, source mode/path, timestamps, hashes,
-send evidence, wait status, and archive status. Deduplicate by
+reference hashes, send evidence, wait status, and archive status. Deduplicate by
 `(direction_id, conversation_id, response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not
 overwrite anything. Cancel/disable the heartbeat only after durable archive

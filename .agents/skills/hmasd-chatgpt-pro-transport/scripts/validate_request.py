@@ -58,6 +58,39 @@ def validate(request: dict, project_root: Path) -> dict:
         if not prompt_bytes:
             raise ValueError("prompt_path is empty")
 
+    companion_prompt = request.get("companion_prompt")
+    if companion_prompt is not None and (not isinstance(companion_prompt, str) or not companion_prompt):
+        raise ValueError("companion_prompt must be a non-empty string when supplied")
+
+    reference_paths_value = request.get("reference_paths", [])
+    if reference_paths_value is None:
+        reference_paths_value = []
+    if not isinstance(reference_paths_value, list):
+        raise ValueError("reference_paths must be a list")
+    reference_files = []
+    seen_references = set()
+    for raw_reference in reference_paths_value:
+        if not isinstance(raw_reference, str) or not Path(raw_reference).is_absolute():
+            raise ValueError("every reference_path must be an absolute path")
+        reference_path = Path(raw_reference)
+        if not reference_path.is_file():
+            raise ValueError(f"reference_path is not a file: {reference_path}")
+        resolved_reference = reference_path.resolve()
+        if resolved_reference in seen_references:
+            raise ValueError(f"duplicate reference_path: {resolved_reference}")
+        seen_references.add(resolved_reference)
+        reference_bytes = resolved_reference.read_bytes()
+        if not reference_bytes:
+            raise ValueError(f"reference_path is empty: {resolved_reference}")
+        reference_files.append(
+            {
+                "path": str(resolved_reference),
+                "filename": resolved_reference.name,
+                "bytes": len(reference_bytes),
+                "sha256": hashlib.sha256(reference_bytes).hexdigest(),
+            }
+        )
+
     return {
         "valid": True,
         "request_id": request_id,
@@ -67,6 +100,9 @@ def validate(request: dict, project_root: Path) -> dict:
         "prompt_path": str(prompt_path.resolve()) if prompt_path else None,
         "prompt_bytes": len(prompt_bytes),
         "prompt_sha256": hashlib.sha256(prompt_bytes).hexdigest(),
+        "companion_prompt": companion_prompt,
+        "companion_prompt_sha256": hashlib.sha256(companion_prompt.encode("utf-8")).hexdigest() if companion_prompt is not None else None,
+        "reference_files": reference_files,
     }
 
 

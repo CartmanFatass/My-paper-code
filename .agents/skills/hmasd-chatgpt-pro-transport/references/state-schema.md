@@ -18,7 +18,17 @@ The registry is JSON at a caller-supplied path (default project-local path:
   "thinking_effort": "5/5",
   "source_mode": "paste",
   "prompt_path": null,
+  "companion_prompt": null,
   "prompt_sha256": "...",
+  "reference_files": [
+    {
+      "path": ".../REFERENCE_FILES.md",
+      "filename": "REFERENCE_FILES.md",
+      "bytes": 1234,
+      "sha256": "...",
+      "uploaded": true
+    }
+  ],
   "response_sha256": null,
   "state": "WAITING_GENERATION",
   "send_evidence": {
@@ -72,10 +82,13 @@ closes it again after its bounded read.
 3. the exact supplied prompt text in that node, byte-equivalent after the page's
    visible newline normalization; and
 4. for upload mode, the expected filename/file group plus the exact companion text,
-   when one was supplied.
+   when one was supplied; and
+5. for a non-empty `reference_files` list, every expected reference filename/file
+   group is visible in that same user turn and matches its pre-upload hash.
 
-A URL alone, a cleared composer, a spinner, an attachment chip before Send, or a
-`ChatGPT said` heading without a complete response is insufficient.
+A URL alone, a cleared composer, a spinner, an attachment chip before Send, a
+reference manifest in a different turn, or a `ChatGPT said` heading without a
+complete response is insufficient.
 
 ## Natural completion evidence
 

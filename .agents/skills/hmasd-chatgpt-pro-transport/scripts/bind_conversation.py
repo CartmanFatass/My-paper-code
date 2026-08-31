@@ -50,6 +50,12 @@ def bind(args: argparse.Namespace) -> int:
     expected_url = f"https://chatgpt.com/c/{args.conversation_id}"
     if args.provider_url != expected_url:
         return _result({"bound": False, "state": "CONVERSATION_UNVERIFIED", "error": "provider_url does not match conversation_id"}, 2)
+    try:
+        reference_files = json.loads(args.reference_files_json)
+    except json.JSONDecodeError as exc:
+        return _result({"bound": False, "state": "REFERENCE_METADATA_INVALID", "error": str(exc)}, 2)
+    if not isinstance(reference_files, list):
+        return _result({"bound": False, "state": "REFERENCE_METADATA_INVALID", "error": "reference_files_json must be a list"}, 2)
 
     registry_path = args.registry.resolve()
     registry = _load(registry_path)
@@ -82,6 +88,7 @@ def bind(args: argparse.Namespace) -> int:
         "thinking_effort": args.thinking_effort,
         "source_mode": args.source_mode,
         "prompt_sha256": args.prompt_sha256,
+        "reference_files": reference_files,
         "state": "BOUND",
         "send_click_count": 1,
     }
@@ -103,6 +110,7 @@ def main() -> int:
     parser.add_argument("--thinking-effort", required=True)
     parser.add_argument("--source-mode", choices=("paste", "upload"), required=True)
     parser.add_argument("--prompt-sha256", required=True)
+    parser.add_argument("--reference-files-json", default="[]")
     args = parser.parse_args()
     try:
         return bind(args)
