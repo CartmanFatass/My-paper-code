@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD ChatGPT Pro Transport"
+  short_description: "Bind directions to Pro conversations"
+  default_prompt: "Use $hmasd-chatgpt-pro-transport to transport one supplied direction prompt to ChatGPT Pro and archive its natural response."
