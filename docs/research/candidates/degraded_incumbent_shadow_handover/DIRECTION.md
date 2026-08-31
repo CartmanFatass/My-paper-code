@@ -180,3 +180,32 @@ The inference definition is closed, but the direct runner remains `PRODUCTION_NO
 normal-tick, checkpoint, causal-policy, PPO/replay, Welford, fresh-root/RNG, resume, typed-replay,
 data-plane, and direct-resource implementation gaps must still close before a fresh scientific
 root or checkpoint may be created.
+
+## R02 convergence and closure recommendation — 2026-08-31
+
+Independent convergence audit preserves the `24`-root exact-binomial calculation only
+conditionally. The executable object does not yet define one pre-sampling-fixed, deterministic,
+total and panel-independent `F(U)`: the TEST preview accepts different scientific outputs for equal
+root bytes at different storage indices, the legacy R06 generator uses block in geometry and RNG
+addresses, same-panel “outcome-blind” repair does not exclude panel-adaptive map selection, and the
+typed terminal law is incomplete before the fork. These are result-validity blockers, not negative
+COPY or SHADOW evidence. No result activity occurred.
+
+Root stopped further investment in the ten-item production stack and all result preparation. No
+sealed-root implementation was accepted: an unreviewed attempt violated the controlling anti-hash
+boundary and was deleted. All ten material paths remain `REPAIR_REQUIRED`, and the guarded runner
+remains `PRODUCTION_NOT_READY`.
+
+The decision-ready evidence is
+`evidence/2026-08-31-dish-r02-production-investment-stop-and-closure.md`. It recommends that
+Portfolio close the current R02 object and standalone direction with no registered successor. Any
+future fixed-witness, replay-containment, or logical-curtailment design is a new object and must
+freeze its total map, repair law, terminal semantics, cost, and stronger decision-relevance before
+new roots.
+
+Because the recommendation is closure/recast, the direction EM generated the pinned read-only
+GitHub Pro packet under
+`external/2026-08-31-dish-r02-closure-recast-pro-packet/`. It was authored with
+`send_from_author=false`; no Transport action occurred. A later response may advise a prospective
+new object but cannot repair, continue, or supply polarity for R02. Current lifecycle authority
+remains solely in `docs/research/portfolio/PORTFOLIO.md`.

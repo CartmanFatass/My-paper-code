@@ -1,6 +1,6 @@
 # DISH block-certificate prevalence R02 implementation threshold
 
-Status: `R02_EXACT_ROOT_PREVALENCE_FROZEN_ENGINEERING_NOT_READY`
+Status: `R02_CONDITIONAL_SCIENCE_PASS_PRODUCTION_INVESTMENT_STOPPED_CLOSE_RECOMMENDED`
 
 Current scientific object: `DISH-BLOCK-CERTIFICATE-PREVALENCE-R02`.
 
@@ -382,3 +382,27 @@ coverage for the declared bounded/discrete block law, and the support/result alg
 couples the generic-transfer and shadow-source axes. A revised fixed-panel or finite-sample-valid
 superpopulation target, per-axis branch algebra, and replay scope must be prospectively frozen
 before any production checkpoint work. Passing the TEST oracle cannot override this hold.
+
+## R02 convergence stop — 2026-08-31
+
+The R02 exact-binomial calculation supersedes the obsolete max-t hold above, but independent audit
+found that the executable `F(U)` is not yet total, fixed before sampling, or proven independent of
+the sealed panel. Equal root bytes can receive different TEST-preview witnesses across storage
+indices; legacy geometry/addressing is block-indexed; repair can be panel-adaptive without reading
+endpoints; and pre-fork algorithmic terminal states are incomplete. `WITHIN_MARGIN` versus
+`NO_MATERIAL` wording and SHADOW-only replay scope also remain inconsistent between freeze and
+preview.
+
+Any future seal would have to retain the exact scientific request and complete source/native/
+config/numeric/RNG/endpoint/reducer bundle as create-once raw bytes before reading entropy. Retry
+requires direct raw-byte equality or a direct all-domain scientific behaviour-equivalence proof.
+Hashes, digests, identities, or authentication values are not scientific or runtime gates. The
+root is a separate 32-byte scientific key; canonical local addresses contain only semantic local
+coordinates and never storage index or transaction branch.
+
+Root stopped further implementation and result preparation before such a seal. The attempted
+root-panel/address files were unreviewed, violated the anti-hash boundary, and were deleted. Thus
+the formal producer/parser remains absent, all ten gaps above remain `REPAIR_REQUIRED`, and no
+production command is admissible. The controlling convergence evidence is
+`evidence/2026-08-31-dish-r02-production-investment-stop-and-closure.md`; it recommends closure of
+the current object with no registered successor.
