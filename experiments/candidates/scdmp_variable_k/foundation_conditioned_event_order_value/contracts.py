@@ -25,6 +25,11 @@ class ContractError(ValueError):
 
 HOST: Final[str] = "QUAD-UAV-PALLET-GANTRY-24P5M-v1"
 MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V4"
+LIFECYCLE_STATUS: Final[str] = "CLOSED_TERMINAL_OBJECT_CONSUMED"
+RESULT_COMMAND_STATUS: Final[str] = "DO_NOT_INVOKE"
+TERMINAL_TOMBSTONE_MESSAGE: Final[str] = (
+    "FCEOV .3 consumed, no fresh/resume/reload/continuation"
+)
 TICK_SECONDS: Final[float] = 0.1
 HORIZON_TICKS: Final[int] = 364
 K_TARGET: Final[int] = 13
@@ -198,12 +203,12 @@ class Manifest:
     foundation_updates: int = FOUNDATION_UPDATES
     checkpoint_update: int = CHECKPOINT_UPDATE
     result_phase: str = "FOUNDATION_AND_2X3"
-    production_status: str = "READY_GUARDED_RESUMABLE_RESULT"
+    production_status: str = LIFECYCLE_STATUS
     master_contract: tuple[str, ...] = (
-        "one OS-cryptographic 32-byte master after fresh preflight and resource admission",
-        "create-only raw persistence; every resume reloads the same master",
-        "no redraw, replacement, seed selection, threshold change, or tape-count change",
-        "checkpoint V3 binds the same raw master at completed update 160",
+        "the completed .3 scientific object is valid and consumed",
+        "no fresh, resume, reload, continuation, replacement, or result invocation",
+        "preflight reports the terminal tombstone without admission or artifact access",
+        "only explicit read-only validation of the consumed artifact is permitted",
     )
     episodes_per_update: int = EPISODES_PER_UPDATE
     competence_episodes: int = COMPETENCE_EPISODES
@@ -399,10 +404,11 @@ __all__ = [
     "INFERENCE_DISCRETE_Q_FAIL", "INFERENCE_FIRST_GAP_RAW_SUM_PASS",
     "INFERENCE_JOINT_POWER_LOWER_BOUND", "INFERENCE_MARGIN",
     "INFERENCE_N561_JOINT_POWER_LOWER_BOUND", "INFERENCE_PLANNING_GAP",
-    "K_TARGET", "MANIFEST_SCHEMA", "Manifest", "PANEL_FINAL_NATIVE_WIDTH",
+    "K_TARGET", "LIFECYCLE_STATUS", "MANIFEST_SCHEMA", "Manifest", "PANEL_FINAL_NATIVE_WIDTH",
     "PANEL_FINAL_SLICE_TAPES", "PANEL_FULL_SLICE_COUNT", "PANEL_FULL_SLICE_TAPES",
     "PANEL_MAX_NATIVE_WIDTH", "PANEL_SLICE_COUNT", "PANEL_WIDTH", "PanelCell", "PublicClaimState",
-    "RESOURCE_ENVELOPE", "RESOURCE_MAXIMA", "TAPE_COUNT", "TICK_SECONDS",
-    "TerminalFact", "fixed_claim_state", "validate_resource_envelope", "validate_resource_request",
+    "RESOURCE_ENVELOPE", "RESOURCE_MAXIMA", "RESULT_COMMAND_STATUS", "TAPE_COUNT",
+    "TERMINAL_TOMBSTONE_MESSAGE", "TICK_SECONDS", "TerminalFact", "fixed_claim_state",
+    "validate_resource_envelope", "validate_resource_request",
     "validate_state_alias",
 ]

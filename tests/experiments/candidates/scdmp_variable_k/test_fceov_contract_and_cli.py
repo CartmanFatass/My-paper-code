@@ -11,6 +11,7 @@ from types import SimpleNamespace
 import pytest
 
 from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import (
+    analysis,
     artifacts,
     contracts,
     foundation,
@@ -20,8 +21,36 @@ from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_
 )
 
 
+_HISTORICAL_MASTER_CONTRACT = (
+    "one OS-cryptographic 32-byte master after fresh preflight and resource admission",
+    "create-only raw persistence; every resume reloads the same master",
+    "no redraw, replacement, seed selection, threshold change, or tape-count change",
+    "checkpoint V3 binds the same raw master at completed update 160",
+)
+
+
+def _historical_manifest() -> contracts.Manifest:
+    return contracts.Manifest(
+        production_status="READY_GUARDED_RESUMABLE_RESULT",
+        master_contract=_HISTORICAL_MASTER_CONTRACT,
+    )
+
+
 def _bind_canonical(monkeypatch, root):
     monkeypatch.setattr(runner, "CANONICAL_RESULT_ROOT", root)
+
+
+def _simulate_live_package_module_addition(monkeypatch):
+    package_root = Path(source_manifest.__file__).resolve().parent
+    original_glob = Path.glob
+
+    def drifted_glob(path, pattern):
+        rows = original_glob(path, pattern)
+        if path.resolve() == package_root and pattern == "*.py":
+            return iter((*rows, package_root / "future_live_module.py"))
+        return rows
+
+    monkeypatch.setattr(Path, "glob", drifted_glob)
 
 
 def test_fixed_task_clock_horizon_k_state_and_hr_rh_public_alias():
@@ -184,6 +213,15 @@ def test_structural_schema_names_and_direct_manifest_are_exact(tmp_path):
         "SCDMP_FCEOV_SOURCE_NATIVE_DIRECT_BYTES_V2"
     )
     assert artifacts.FINAL_BUNDLE_SCHEMA == "SCDMP_FCEOV_FINAL_BUNDLE_V5"
+    assert contracts.LIFECYCLE_STATUS == "CLOSED_TERMINAL_OBJECT_CONSUMED"
+    assert contracts.RESULT_COMMAND_STATUS == "DO_NOT_INVOKE"
+    assert contracts.Manifest().production_status == "CLOSED_TERMINAL_OBJECT_CONSUMED"
+    assert contracts.Manifest().master_contract == (
+        "the completed .3 scientific object is valid and consumed",
+        "no fresh, resume, reload, continuation, replacement, or result invocation",
+        "preflight reports the terminal tombstone without admission or artifact access",
+        "only explicit read-only validation of the consumed artifact is permitted",
+    )
 
     value = source_manifest.build_source_manifest()
     assert not {"hash", "digest", "identity", "authorization", "approval", "lease"} & {
@@ -213,71 +251,66 @@ def test_structural_schema_names_and_direct_manifest_are_exact(tmp_path):
             source_manifest.validate_source_manifest(tampered)
 
 
-def test_preflight_is_result_blind_ready_and_rejects_existing_result_root(
-    tmp_path, monkeypatch
+def test_preflight_is_an_effect_free_terminal_tombstone(monkeypatch):
+    class ExplodingPath:
+        def __fspath__(self):
+            raise AssertionError("tombstone preflight must not inspect paths")
+
+    for name in (
+        "load_source_manifest", "build_training_plan", "build_panel_inventory",
+        "preflight_native_panel_widths", "verify_public_alias", "headroom_conformance",
+    ):
+        monkeypatch.setattr(
+            runner, name,
+            lambda *args, _name=name, **kwargs: pytest.fail(f"preflight called {_name}"),
+        )
+    report = runner.run_preflight(manifest=ExplodingPath(), result_root=ExplodingPath())
+    assert report == {
+        "lifecycle_status": "CLOSED_TERMINAL_OBJECT_CONSUMED",
+        "result_command_status": "DO_NOT_INVOKE",
+        "message": "FCEOV .3 consumed, no fresh/resume/reload/continuation",
+    }
+
+
+def test_cli_reports_tombstone_rejects_result_and_dispatches_read_only_validation(
+    tmp_path, monkeypatch, capsys,
 ):
     manifest = tmp_path / "manifest.json"
     source_manifest.write_source_manifest(manifest)
-    monkeypatch.setattr(runner, "verify_public_alias", lambda: (b"same", b"same"))
-    monkeypatch.setattr(
-        runner,
-        "headroom_conformance",
-        lambda: host_bridge.HeadroomConformance(
-            host_bridge.HeadroomWitness(0.84, 0.94, 0.66), True, 0.06, True
-        ),
-    )
-
-    result_root = tmp_path / "prospective-results"
-    _bind_canonical(monkeypatch, result_root)
-    report = runner.run_preflight(manifest=manifest, result_root=result_root)
-    assert report["production_pipeline_implemented"] is True
-    assert report["production_result_path_implemented"] is True
-    assert report["result_command_status"] == "READY"
-    assert report["scientific_inference_hold"] is False
-    assert report["resolved_result_root"] == str(result_root.resolve())
-    assert report["training_episodes"] == 1_920
-    assert report["panel_width"] == report["reset_width"] == 3_372
-    assert report["native_session_widths"] == (144,) * 23 + (60,)
-    assert result_root.exists() is False
-
-    result_root.mkdir()
-    with pytest.raises(runner.PreflightError, match="exist"):
-        runner.run_preflight(manifest=manifest, result_root=result_root)
-
-
-def test_cli_accepts_preflight_and_only_the_exact_frozen_result_phase(tmp_path, monkeypatch, capsys):
-    manifest = tmp_path / "manifest.json"
-    source_manifest.write_source_manifest(manifest)
     result_root = tmp_path / "never-created"
-    monkeypatch.setattr(
-        runner,
-        "run_preflight",
-        lambda **kwargs: {"production_result_path_implemented": True},
-    )
-    terminal = contracts.TerminalFact(
-        artifacts.TERMINAL_FACT_SCHEMA,
-        contracts.Disposition.FOUNDATION_NONPASS.value,
-        foundation.analyze_competence(tuple(
-            foundation.CompetenceRecord(row.mission, row.graph, True, False)
-            for row in foundation.competence_inventory()
-        )),
-        False,
-    )
-
     assert runner.main(
         ["--preflight-only", "--manifest", str(manifest), "--result-root", str(result_root)]
     ) == 0
     preflight_stdout = capsys.readouterr().out
-    assert preflight_stdout == '{"production_result_path_implemented":true}\n'
-    assert json.loads(preflight_stdout) == {"production_result_path_implemented": True}
+    assert json.loads(preflight_stdout) == {
+        "lifecycle_status": "CLOSED_TERMINAL_OBJECT_CONSUMED",
+        "result_command_status": "DO_NOT_INVOKE",
+        "message": "FCEOV .3 consumed, no fresh/resume/reload/continuation",
+    }
     assert not result_root.exists()
 
-    monkeypatch.setattr(runner, "run_result", lambda **kwargs: terminal)
+    validation = {
+        "validated": True,
+        "lifecycle_status": "CLOSED_TERMINAL_OBJECT_CONSUMED",
+        "result_command_status": "DO_NOT_INVOKE",
+        "artifact": str(result_root / "final-bundle.json"),
+        "disposition": contracts.Disposition.CLOSED.value,
+        "panel_complete": True,
+    }
+    monkeypatch.setattr(runner, "validate_consumed_artifact", lambda **kwargs: validation)
+    assert runner.main([
+        "--validate-consumed-artifact", str(result_root / "final-bundle.json"),
+        "--result-root", str(result_root),
+    ]) == 0
+    assert json.loads(capsys.readouterr().out) == validation
+
     assert runner.main([
         "--phase", "FOUNDATION_AND_2X3", "--manifest", str(manifest),
         "--result-root", str(result_root),
-    ]) == 0
-    assert terminal.disposition in capsys.readouterr().out
+    ]) == 1
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert ".3 consumed, no fresh/resume/reload/continuation" in captured.err
     assert not result_root.exists()
 
     for phase in ("FOUNDATION", "ASSAY", "anything"):
@@ -293,413 +326,252 @@ def test_cli_accepts_preflight_and_only_the_exact_frozen_result_phase(tmp_path, 
     assert "--preflight-only" in help_text
     assert "--phase" in help_text
     assert "FOUNDATION_AND_2X3" in help_text
+    assert "--validate-consumed-artifact" in help_text
 
 
-def test_result_orchestration_uses_one_final_checkpoint_restore_and_stops_before_panel_on_nonpass(
-    tmp_path, monkeypatch
-):
-    updates = []
-    preflight_calls = []
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: preflight_calls.append(kwargs) or {
-            "resources": dict(contracts.RESOURCE_MAXIMA), "production_result_path_implemented": True,
-            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
-        },
-    )
-    admissions = []
-    assessments = []
-    monkeypatch.setattr(
-        runner, "assess_run", lambda path: assessments.append(path) or {"memory_safe": True},
-    )
-    monkeypatch.setattr(runner, "admit_memory", lambda path: admissions.append(path) or {"passed": True})
-    monkeypatch.setattr(runner, "fresh_master", lambda: bytes(range(32)))
+def test_every_result_entry_rejects_before_path_or_scientific_effect(monkeypatch):
+    class ExplodingPath:
+        def __fspath__(self):
+            raise AssertionError("closed result entry inspected a path")
 
-    def cheap_update(model, optimizer, source, *, update):
-        optimizer.step_index = update * 12
-        updates.append(update)
-        return SimpleNamespace(update=update, episodes_complete=12)
-
-    monkeypatch.setattr(runner, "train_one_update", cheap_update)
-    records = tuple(
-        foundation.CompetenceRecord(row.mission, row.graph, True, False)
-        for row in foundation.competence_inventory()
-    )
-    monkeypatch.setattr(runner, "execute_native_competence", lambda frozen, source: records)
-    monkeypatch.setattr(
-        runner, "execute_native_panel_slice",
-        lambda *args: pytest.fail("panel must not execute after a competence nonpass"),
-    )
-    root = tmp_path / "fresh-result"
-    _bind_canonical(monkeypatch, root)
-    manifest = tmp_path / "manifest.json"
-    source_manifest.write_source_manifest(manifest)
-    def passing_direction_resources(**kwargs):
-        scratch_root = kwargs.get("scratch_root")
-        scratch_bytes = (
-            scratch_root.stat().st_size
-            if scratch_root is not None and scratch_root.is_file()
-            else 0
+    for name in (
+        "set_atomic_scratch_observer", "load_source_manifest", "load_rng_master",
+        "fresh_master", "materialize_foundation", "load_checkpoint",
+    ):
+        monkeypatch.setattr(
+            runner, name,
+            lambda *args, _name=name, **kwargs: pytest.fail(f"closed entry called {_name}"),
         )
-        value = {
-            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
-            "stage": kwargs["stage"],
-            "passed": True,
-            "failure_reasons": [],
-            "scratch_bytes": scratch_bytes,
-            "attempt_cumulative_scratch_peak_bytes": scratch_bytes,
-            "peak_rss_bytes": 1,
-            "wall_seconds": 0.1,
-            "durable_bytes": 0,
-        }
-        receipt = kwargs.get("receipt")
-        if receipt is not None:
-            receipt.write_text(json.dumps(value), encoding="utf-8")
-        return value
+    for entry in (
+        runner.run_result,
+        runner._execute_result_pipeline,
+        runner._execute_result_pipeline_body,
+    ):
+        with pytest.raises(
+            runner.PreflightError,
+            match=r"\.3 consumed, no fresh/resume/reload/continuation",
+        ):
+            entry(manifest=ExplodingPath(), result_root=ExplodingPath())
 
-    monkeypatch.setattr(runner, "_enforce_direction_resources", passing_direction_resources)
-    fact = runner._execute_result_pipeline(manifest=manifest, result_root=root)
-    assert preflight_calls == [{"manifest": manifest, "result_root": root}]
-    assert len(assessments) == 1
-    assert len(admissions) == 1
-    assert updates == list(range(1, 161))
-    assert fact.disposition == contracts.Disposition.FOUNDATION_NONPASS.value
-    assert (root / "rng-master.bin").stat().st_size == 32
-    witness = json.loads((root / "resume-witness.json").read_text())
-    assert witness["checkpoint_update"] == 160 and witness["optimizer_step"] == 1920
-    assert witness["continuation_stage"] == "COMPETENCE"
-    assert len(list(root.glob("*.checkpoint.pt"))) == 1
-    assert len(list(root.glob("direction-resource-foundation-nonpass-complete-*.json"))) == 1
-    runtime = json.loads((root / "run-record.json").read_text())["runtime"]
-    assert runtime["device"] == "cpu"
-    assert runtime["torch_threads"] == 1
-    assert runtime["torch_interop_threads"] == 1
-    assert runtime["deterministic_algorithms"] is True
-    assert not (root / "complete-2x3-panel.json").exists()
-
-    monkeypatch.setattr(
-        runner, "materialize_foundation",
-        lambda *args, **kwargs: pytest.fail("terminal reentry must not materialize a model"),
+    helper_calls = (
+        lambda: runner._admit_memory_or_record(
+            root=ExplodingPath(), receipt=ExplodingPath(), stage="closed",
+        ),
+        lambda: runner._publish_staging_root(ExplodingPath(), ExplodingPath()),
+        lambda: runner._validate_persisted_contract(ExplodingPath(), ExplodingPath()),
+        lambda: runner._initialize_fresh_root(
+            manifest=ExplodingPath(), root=ExplodingPath(), started_at=0.0,
+        ),
+        lambda: runner._train_and_restore_foundation(ExplodingPath(), b""),
+        lambda: runner._load_or_execute_foundation_gate(
+            ExplodingPath(), object(), object(),
+        ),
+        lambda: runner._reconcile_frontier(ExplodingPath(), 0),
+        lambda: runner._prepare_and_publish_final(
+            root=ExplodingPath(), master=b"", run_record_bytes=b"",
+            source_snapshot=object(), records=(), cells=(), panel_analysis=object(),
+            started_at=0.0,
+        ),
     )
-    monkeypatch.setattr(
-        runner, "load_checkpoint",
-        lambda *args, **kwargs: pytest.fail("terminal reentry must not load a checkpoint"),
-    )
-    monkeypatch.setattr(
-        runner, "load_contiguous_panel_slices",
-        lambda *args, **kwargs: pytest.fail("terminal reentry must not load panel cells"),
-    )
-    monkeypatch.setattr(
-        runner, "fresh_master",
-        lambda: pytest.fail("terminal reentry must not generate a master"),
-    )
-    assert runner.run_result(manifest=manifest, result_root=root) == fact
-
-    terminal_path = root / "terminal-fact.json"
-    tampered = json.loads(terminal_path.read_text(encoding="utf-8"))
-    tampered["disposition"] = contracts.Disposition.CLOSED.value
-    terminal_path.write_text(json.dumps(tampered), encoding="utf-8")
-    with pytest.raises(artifacts.ArtifactContractError):
-        runner.run_result(manifest=manifest, result_root=root)
+    for call in helper_calls:
+        with pytest.raises(
+            runner.PreflightError,
+            match=r"\.3 consumed, no fresh/resume/reload/continuation",
+        ):
+            call()
 
 
-def test_resource_refusal_precedes_root_master_training_or_artifact(
+def test_consumed_artifact_missing_is_read_only_and_cannot_fall_back(
     tmp_path, monkeypatch
 ):
-    calls = []
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: calls.append("preflight") or {
-            "resources": dict(contracts.RESOURCE_MAXIMA),
-            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
-        },
-    )
-    monkeypatch.setattr(
-        runner, "assess_run", lambda path: calls.append("assess-run") or {"memory_safe": True},
-    )
-    monkeypatch.setattr(
-        runner, "admit_memory",
-        lambda path: (_ for _ in ()).throw(runner.ResourceAdmissionError("refused")),
-    )
-    monkeypatch.setattr(runner, "fresh_master", lambda: pytest.fail("master must not be generated"))
-    monkeypatch.setattr(runner, "train_one_update", lambda *args, **kwargs: pytest.fail("training must not start"))
-    root = tmp_path / "held-result"
+    root = tmp_path / "missing-consumed-root"
     _bind_canonical(monkeypatch, root)
-    with pytest.raises(runner.ResourceAdmissionError, match="refused"):
-        runner.run_result(manifest=tmp_path / "manifest.json", result_root=root)
-    assert calls == ["preflight", "assess-run"]
+    for name in (
+        "load_consumed_source_manifest", "load_run_record", "load_source_native_snapshot",
+        "load_rng_master", "load_final_bundle", "fresh_master", "materialize_foundation",
+    ):
+        monkeypatch.setattr(
+            runner, name,
+            lambda *args, _name=name, **kwargs: pytest.fail(f"missing validation called {_name}"),
+        )
+    with pytest.raises(runner.PreflightError, match=r"consumed \.3 final bundle is missing"):
+        runner.validate_consumed_artifact(
+            artifact=root / "final-bundle.json", result_root=root,
+        )
     assert not root.exists()
 
 
-def test_passing_route_publishes_only_after_all_slices_and_resume_reuses_master(
-    tmp_path, monkeypatch
+def test_historical_consumed_manifest_status_has_a_dedicated_validator(
+    tmp_path, monkeypatch,
 ):
-    updates = []
-    preflight_calls = []
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: preflight_calls.append(kwargs) or {
-            "resources": dict(contracts.RESOURCE_MAXIMA),
-            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
+    historical = _historical_manifest().to_dict()
+    path = tmp_path / "historical-source-manifest.json"
+    path.write_text(
+        json.dumps(historical, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    _simulate_live_package_module_addition(monkeypatch)
+    with pytest.raises(source_manifest.SourceManifestError, match="module inventory"):
+        source_manifest.validate_source_manifest(source_manifest.build_source_manifest())
+    assert source_manifest.load_consumed_source_manifest(path).production_status == (
+        "READY_GUARDED_RESUMABLE_RESULT"
+    )
+    with pytest.raises(source_manifest.SourceManifestError):
+        source_manifest.load_source_manifest(path)
+
+    for field, value in (("tapes", 561), ("panel_width", 3_371)):
+        tampered = dict(historical)
+        tampered[field] = value
+        path.write_text(
+            json.dumps(tampered, sort_keys=True, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
+        with pytest.raises(source_manifest.SourceManifestError, match=r"historical \.3"):
+            source_manifest.load_consumed_source_manifest(path)
+
+
+def test_validate_consumed_artifact_recomputes_complete_history_without_writes_or_fallback(
+    tmp_path, monkeypatch,
+):
+    root = tmp_path / "synthetic-consumed-dot3"
+    root.mkdir()
+    _bind_canonical(monkeypatch, root)
+
+    historical = _historical_manifest()
+    (root / "source-manifest.json").write_text(
+        json.dumps(historical.to_dict(), sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    run_record = {
+        "schema": "SCDMP_FCEOV_RUN_RECORD_V4",
+        "phase": runner.PHASE,
+        "checkpoint_update": 160,
+        "foundation_updates": 160,
+        "episodes_per_update": 12,
+        "competence_missions": 120,
+        "panel_width": contracts.PANEL_WIDTH,
+        "actions": [0, 10, 12],
+        "resources": dict(contracts.RESOURCE_MAXIMA),
+        "runtime": {
+            "python": "historical-python",
+            "torch": "historical-torch",
+            "device": "cpu",
+            "torch_threads": 1,
+            "torch_interop_threads": 1,
+            "deterministic_algorithms": True,
+            "native_batch_widths": {
+                "training": 12, "competence": 120, "panel_full": 144,
+                "panel_final": 60,
+            },
         },
-    )
-    master_calls = []
-    monkeypatch.setattr(
-        runner, "fresh_master", lambda: master_calls.append("master") or bytes(range(32)),
-    )
-    monkeypatch.setattr(runner, "admit_memory", lambda path: {"passed": True})
-    monkeypatch.setattr(runner, "assess_run", lambda path: {"memory_safe": True})
+    }
+    run_record_bytes = (
+        json.dumps(run_record, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
+    (root / "run-record.json").write_bytes(run_record_bytes)
 
-    def cheap_update(model, optimizer, source, *, update):
-        optimizer.step_index = update * 12
-        updates.append(update)
-        return SimpleNamespace(update=update, episodes_complete=12)
+    keys = (
+        tuple(("owned_python", name) for name in historical.source_modules)
+        + tuple(
+            ("dependency_python", reference.split(":", 1)[0])
+            for reference in historical.allowed_dependencies
+        )
+        + (("native_source", "tbcc_backend.cpp"),
+           ("native_binary", "loaded_tbcc_backend"))
+    )
+    snapshot = artifacts.SourceNativeSnapshot(
+        artifacts.SOURCE_NATIVE_SNAPSHOT_SCHEMA,
+        tuple(
+            artifacts.SourceNativeEntry(
+                kind, name, str((root / f"snapshot-entry-{index}").resolve()),
+                f"historical-direct-{index}".encode("ascii"),
+            )
+            for index, (kind, name) in enumerate(keys)
+        ),
+    )
+    artifacts.write_source_native_snapshot(root / "source-native-snapshot.json", snapshot)
+    master = bytes(range(32))
+    artifacts.write_rng_master(root / "rng-master.bin", master)
 
-    monkeypatch.setattr(runner, "train_one_update", cheap_update)
     records = tuple(
         foundation.CompetenceRecord(row.mission, row.graph, True, True)
         for row in foundation.competence_inventory()
     )
-    monkeypatch.setattr(runner, "execute_native_competence", lambda frozen, source: records)
-    monkeypatch.setattr(
-        runner, "materialize_disturbance_tapes",
-        lambda source, *, start_tape, tape_count: (start_tape, tape_count),
+    action_indices = {"COMMON": 0, "A_HR": 10, "A_RH": 12}
+    cells = tuple(
+        contracts.PanelCell(
+            tape, graph, action_name, action_indices[action_name], True, True, 182,
+        )
+        for tape in range(contracts.TAPE_COUNT)
+        for graph in contracts.GRAPHS
+        for action_name in ("COMMON", "A_HR", "A_RH")
     )
-    panel_calls = []
+    prepared = artifacts.prepare_final_bundle(
+        competence_records=records,
+        panel_cells=cells,
+        panel_analysis=analysis.analyze_complete_panel(cells),
+        resolved_result_root=str(root.resolve()),
+        rng_master=master,
+        run_record_bytes=run_record_bytes,
+        source_native_snapshot=snapshot,
+    )
+    artifacts.write_prepared_final_bundle(root / "final-bundle.json", prepared)
+    receipt_base = {
+        "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+        "passed": True,
+        "failure_reasons": [],
+        "attempt_cumulative_scratch_peak_bytes": 0,
+        "peak_rss_bytes": 1,
+        "wall_seconds": 0.1,
+        "durable_bytes": (root / "final-bundle.json").stat().st_size,
+    }
+    (root / "direction-resource-pre-final-publication-0000.json").write_text(
+        json.dumps({
+            **receipt_base,
+            "stage": "pre-final-publication",
+            "scratch_bytes": (root / "final-bundle.json").stat().st_size,
+        }, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    (root / "direction-resource-final-publication-0000.json").write_text(
+        json.dumps({
+            **receipt_base, "stage": "final-publication",
+        }, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
 
-    def cells_for_slice(frozen, tapes, panel_slice):
-        panel_calls.append(panel_slice.index)
-        if panel_slice.index == 1 and panel_calls.count(1) == 1:
-            raise RuntimeError("technical interruption")
-        return tuple(
-            contracts.PanelCell(
-                lane.tape, lane.graph, lane.action_name, lane.action_index,
-                True, False, None,
-            )
-            for lane in panel_slice.lanes
+    before = tuple(
+        (str(path.relative_to(root)), path.read_bytes())
+        for path in sorted(root.rglob("*")) if path.is_file()
+    )
+    for name in (
+        "fresh_master", "train_one_update", "execute_native_competence",
+        "execute_native_panel_slice", "materialize_foundation", "load_checkpoint",
+        "capture_source_native_snapshot", "compare_source_native_snapshot",
+        "_prepare_and_publish_final",
+    ):
+        monkeypatch.setattr(
+            runner, name,
+            lambda *args, _name=name, **kwargs: pytest.fail(f"validation called {_name}"),
         )
 
-    monkeypatch.setattr(
-        runner, "execute_native_panel_slice", cells_for_slice,
+    _simulate_live_package_module_addition(monkeypatch)
+    report = runner.validate_consumed_artifact(
+        artifact=root / "final-bundle.json", result_root=root,
     )
-    root = tmp_path / "passing-wiring"
-    _bind_canonical(monkeypatch, root)
-    manifest = tmp_path / "manifest.json"
-    source_manifest.write_source_manifest(manifest)
-
-    def passing_direction_resources(**kwargs):
-        scratch_root = kwargs.get("scratch_root")
-        scratch_bytes = (
-            scratch_root.stat().st_size
-            if scratch_root is not None and scratch_root.is_file()
-            else 0
-        )
-        value = {
-            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
-            "stage": kwargs["stage"],
-            "passed": True,
-            "failure_reasons": [],
-            "scratch_bytes": scratch_bytes,
-            "attempt_cumulative_scratch_peak_bytes": scratch_bytes,
-            "peak_rss_bytes": 1,
-            "wall_seconds": 0.1,
-            "durable_bytes": 0,
-        }
-        receipt = kwargs.get("receipt")
-        if receipt is not None:
-            receipt.write_text(json.dumps(value), encoding="utf-8")
-        return value
-
-    monkeypatch.setattr(runner, "_enforce_direction_resources", passing_direction_resources)
-    with pytest.raises(RuntimeError, match="technical interruption"):
-        runner._execute_result_pipeline(manifest=manifest, result_root=root)
-    assert preflight_calls == [{"manifest": manifest, "result_root": root}]
-    assert updates == list(range(1, 161))
-    assert panel_calls == [0, 1]
-    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 1
-    assert len(list(root.glob("panel-slice-*.json"))) == 1
-    assert not (root / "final-bundle.json").exists()
-    assert not (root / "terminal-fact.json").exists()
-
-    monkeypatch.setattr(
-        runner, "admit_memory",
-        lambda path: (_ for _ in ()).throw(runner.ResourceAdmissionError("resume refused")),
+    after = tuple(
+        (str(path.relative_to(root)), path.read_bytes())
+        for path in sorted(root.rglob("*")) if path.is_file()
     )
-    with pytest.raises(runner.ResourceAdmissionError, match="resume refused"):
-        runner.run_result(manifest=manifest, result_root=root)
-    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 1
-    assert len(list(root.glob("panel-slice-*.json"))) == 1
-
-    monkeypatch.setattr(runner, "admit_memory", lambda path: {"passed": True})
-    fact = runner.run_result(manifest=manifest, result_root=root)
-    assert fact.disposition == contracts.Disposition.CLOSED.value
-    assert master_calls == ["master"]
-    assert panel_calls.count(0) == 1
-    assert panel_calls.count(1) == 2
-    assert len(list(root.glob("panel-slice-*.json"))) == contracts.PANEL_SLICE_COUNT
-    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 24
-    assert (root / "final-bundle.json").exists()
-    assert len(list(root.glob("direction-resource-final-publication-*.json"))) == 1
-
-    monkeypatch.setattr(runner, "fresh_master", lambda: pytest.fail("complete load cannot create a master"))
-    assert runner.run_result(manifest=manifest, result_root=root) == fact
-
-
-def test_internal_execution_reruns_direct_preflight_and_rejects_resource_drift(tmp_path, monkeypatch):
-    root = tmp_path / "bound-root"
-    _bind_canonical(monkeypatch, root)
-    manifest = tmp_path / "manifest.json"
-    calls = []
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: calls.append(kwargs) or {"resources": {}},
-    )
-    monkeypatch.setattr(runner, "fresh_master", lambda: pytest.fail("master must follow valid preflight"))
-    with pytest.raises(runner.PreflightError, match="resource report differs"):
-        runner._execute_result_pipeline(manifest=manifest, result_root=root)
-    assert calls == [{"manifest": manifest, "result_root": root}]
-    assert not root.exists()
-
-
-@pytest.mark.parametrize("existing_shape", ("absent", "partial", "complete", "resource-fail"))
-def test_noncanonical_root_is_rejected_before_any_content_or_resource_access(
-    tmp_path, monkeypatch, existing_shape
-):
-    canonical = tmp_path / "canonical"
-    noncanonical = tmp_path / f"other-{existing_shape}"
-    _bind_canonical(monkeypatch, canonical)
-    if existing_shape != "absent":
-        noncanonical.mkdir()
-        if existing_shape == "complete":
-            (noncanonical / "final-bundle.json").write_text("{}", encoding="utf-8")
-        elif existing_shape == "resource-fail":
-            (noncanonical / "invalid-evidence.json").write_text("{}", encoding="utf-8")
-        else:
-            (noncanonical / "rng-master.bin").write_bytes(b"partial")
-    monkeypatch.setattr(
-        runner, "run_preflight",
-        lambda **kwargs: pytest.fail("noncanonical root must precede preflight"),
-    )
-    monkeypatch.setattr(
-        runner, "admit_memory",
-        lambda *args, **kwargs: pytest.fail("noncanonical root must precede resources"),
-    )
-    monkeypatch.setattr(
-        runner, "fresh_master",
-        lambda: pytest.fail("noncanonical root must precede master generation"),
-    )
-    with pytest.raises(runner.PreflightError, match="sole canonical"):
-        runner.run_result(manifest=tmp_path / "manifest.json", result_root=noncanonical)
-
-
-def test_existing_root_without_direct_snapshot_rejects_before_master_checkpoint_or_cells(
-    tmp_path, monkeypatch
-):
-    root = tmp_path / "canonical-old-shape"
-    _bind_canonical(monkeypatch, root)
-    root.mkdir()
-    for name in ("source-manifest.json", "rng-master.bin", "run-record.json"):
-        (root / name).write_bytes(b"legacy")
-    monkeypatch.setattr(
-        runner, "load_rng_master",
-        lambda *args, **kwargs: pytest.fail("old shape must precede master read"),
-    )
-    monkeypatch.setattr(
-        runner, "load_checkpoint",
-        lambda *args, **kwargs: pytest.fail("old shape must precede checkpoint read"),
-    )
-    monkeypatch.setattr(
-        runner, "load_contiguous_panel_slices",
-        lambda *args, **kwargs: pytest.fail("old shape must precede cell read"),
-    )
-    with pytest.raises(runner.PreflightError, match="direct V3 shape"):
-        runner.run_result(manifest=tmp_path / "manifest.json", result_root=root)
-
-
-@pytest.mark.parametrize(
-    "failed_seam",
-    ("rng-master", "source-manifest", "source-native-snapshot", "run-record", "resource-assessment"),
-)
-def test_fresh_staging_init_recovers_every_post_master_seam_with_same_master(
-    tmp_path, monkeypatch, failed_seam
-):
-    root = tmp_path / f"canonical-{failed_seam}"
-    _bind_canonical(monkeypatch, root)
-    manifest = tmp_path / "manifest.json"
-    source_manifest.write_source_manifest(manifest)
-    runner._configure_numerical_runtime()
-    calls = []
-    expected_master = bytes(range(32))
-    monkeypatch.setattr(
-        runner, "fresh_master", lambda: calls.append("fresh") or expected_master,
-    )
-    monkeypatch.setattr(
-        runner, "_enforce_direction_resources", lambda **kwargs: {"passed": True},
-    )
-    failed = {"value": False}
-
-    def fail_once(name):
-        if name == failed_seam and not failed["value"]:
-            failed["value"] = True
-            raise RuntimeError(f"init seam {name}")
-
-    monkeypatch.setattr(runner, "_init_seam", fail_once)
-    with pytest.raises(RuntimeError, match="init seam"):
-        runner._initialize_fresh_root(
-            manifest=manifest, root=root, started_at=runner.time.perf_counter(),
-        )
-    staging = runner._staging_root(root)
-    assert not root.exists()
-    assert (staging / "rng-master.bin").read_bytes() == expected_master
-
-    monkeypatch.setattr(runner, "_init_seam", lambda name: None)
-    master, _, _ = runner._initialize_fresh_root(
-        manifest=manifest, root=root, started_at=runner.time.perf_counter(),
-    )
-    assert master == expected_master
-    assert calls == ["fresh"]
-    assert root.is_dir() and not staging.exists()
-
-
-def test_staged_final_resource_overrun_writes_invalid_fact_before_canonical_publication(
-    tmp_path, monkeypatch
-):
-    root = tmp_path / "canonical-resource-overrun"
-    root.mkdir()
-    encoded_size = 65 * 1024**2
-    prepared = SimpleNamespace(encoded_size=encoded_size, encoded=b"staged-final")
-    monkeypatch.setattr(runner, "prepare_final_bundle", lambda **kwargs: prepared)
-    observed = []
-
-    def assessment(**kwargs):
-        observed.append(kwargs)
-        failed = kwargs["scratch_root"] == root / "final-bundle.pending.json"
-        return {
-            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
-            "passed": not failed,
-            "failure_reasons": ["durable_bytes_exceeded"] if failed else [],
-        }
-
-    monkeypatch.setattr(runner, "_direction_resource_assessment", assessment)
-    staged = []
-
-    def write_staged(path, value):
-        assert value is prepared
-        assert path == root / "final-bundle.pending.json"
-        path.write_bytes(value.encoded)
-        staged.append(path)
-
-    monkeypatch.setattr(runner, "write_prepared_final_bundle", write_staged)
-    with pytest.raises(runner.ResourceAdmissionError, match="pre-final-publication"):
-        runner._prepare_and_publish_final(
-            root=root, master=bytes(range(32)), run_record_bytes=b"record",
-            source_snapshot=object(), records=(), cells=(), panel_analysis=object(),
-            started_at=runner.time.perf_counter(),
-        )
-    assert staged == [root / "final-bundle.pending.json"]
-    assert observed[-1]["scratch_root"] == root / "final-bundle.pending.json"
-    assert (root / "final-bundle.pending.json").read_bytes() == prepared.encoded
-    assert not (root / "final-bundle.json").exists()
-    invalid = json.loads((root / "invalid-evidence.json").read_text(encoding="utf-8"))
-    assert invalid["disposition"] == "INVALID_EVIDENCE"
-    assert invalid["scientific_polarity"] is False
-    assert not runner._contains_forbidden_receipt_key(invalid)
+    assert report == {
+        "validated": True,
+        "lifecycle_status": "CLOSED_TERMINAL_OBJECT_CONSUMED",
+        "result_command_status": "DO_NOT_INVOKE",
+        "artifact": str((root / "final-bundle.json").resolve()),
+        "disposition": contracts.Disposition.CLOSED.value,
+        "panel_complete": True,
+    }
+    assert after == before
 
 
 def test_post_work_resource_measurement_failure_is_terminal_after_resources_recover(
@@ -747,7 +619,7 @@ def test_post_work_resource_measurement_failure_is_terminal_after_resources_reco
         started_at=runner.time.perf_counter(),
     )["passed"] is True
     with pytest.raises(
-        runner.PreflightError, match="terminal invalid evidence forbids resume or final publication"
+        runner.PreflightError, match=r"\.3 consumed, no fresh/resume/reload/continuation"
     ):
         runner._execute_result_pipeline(
             manifest=tmp_path / "unused-manifest.json", result_root=root,
@@ -831,7 +703,7 @@ def test_clean_process_engages_single_thread_intra_interop_and_deterministic_tor
     assert json.loads(completed.stdout) == [1, 1, True]
 
 
-def test_replacement_root_is_distinct_and_quarantine_refuses_before_access(tmp_path, monkeypatch):
+def test_all_historical_and_noncanonical_result_roots_share_the_tombstone(tmp_path, monkeypatch):
     quarantined_first = tmp_path / "2026-08-31.1-wave3-fceov-v3"
     quarantined_second = tmp_path / "2026-08-31.2-wave3-fceov-v3-replacement"
     replacement = tmp_path / "2026-08-31.3-wave3-fceov-v3-replacement"
@@ -840,50 +712,10 @@ def test_replacement_root_is_distinct_and_quarantine_refuses_before_access(tmp_p
         runner, "QUARANTINED_REPLACEMENT_RESULT_ROOT", quarantined_second,
     )
     monkeypatch.setattr(runner, "CANONICAL_RESULT_ROOT", replacement)
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: pytest.fail("quarantine must precede preflight"),
-    )
-    for quarantined in (quarantined_first, quarantined_second):
-        with pytest.raises(runner.PreflightError, match="quarantined"):
-            runner.run_result(manifest=tmp_path / "unused.json", result_root=quarantined)
+    for path in (quarantined_first, quarantined_second, replacement, tmp_path / "other"):
+        with pytest.raises(runner.PreflightError, match=r"\.3 consumed, no fresh/resume/reload/continuation"):
+            runner.run_result(manifest=tmp_path / "unused.json", result_root=path)
     assert replacement not in (quarantined_first, quarantined_second)
-
-
-def test_fresh_order_is_preflight_assess_floor_direction_then_master(tmp_path, monkeypatch):
-    root = tmp_path / "replacement"
-    _bind_canonical(monkeypatch, root)
-    events = []
-    monkeypatch.setattr(
-        runner, "run_preflight", lambda **kwargs: events.append("preflight") or {
-            "resources": dict(contracts.RESOURCE_MAXIMA),
-            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
-        },
-    )
-    monkeypatch.setattr(
-        runner, "assess_run", lambda path: events.append("assess-run") or {"memory_safe": True},
-    )
-    monkeypatch.setattr(
-        runner, "admit_memory", lambda path: events.append("4gib") or {
-            "effective_available_bytes": 8 * 1024**3,
-        },
-    )
-    monkeypatch.setattr(
-        runner, "_enforce_direction_resources",
-        lambda **kwargs: events.append(f"direction-{kwargs['stage']}") or {"passed": True},
-    )
-    monkeypatch.setattr(runner, "_configure_numerical_runtime", lambda: events.append("runtime"))
-
-    def stop_at_initialization(**kwargs):
-        events.append("master-entry")
-        raise RuntimeError("stop before scientific state")
-
-    monkeypatch.setattr(runner, "_initialize_fresh_root", stop_at_initialization)
-    with pytest.raises(RuntimeError, match="stop before scientific state"):
-        runner.run_result(manifest=tmp_path / "manifest.json", result_root=root)
-    assert events == [
-        "preflight", "assess-run", "4gib", "direction-launch", "runtime", "master-entry",
-    ]
-    assert not root.exists()
 
 
 def test_shared_assess_run_validates_exact_frozen_plan_and_floor(tmp_path, monkeypatch):
@@ -993,5 +825,5 @@ def test_post_work_observer_failure_creates_sibling_invalid_and_refuses_reentry(
     monkeypatch.setattr(
         runner, "run_preflight", lambda **kwargs: pytest.fail("invalid sibling must precede preflight"),
     )
-    with pytest.raises(runner.PreflightError, match="sibling invalid"):
+    with pytest.raises(runner.PreflightError, match=r"\.3 consumed, no fresh/resume/reload/continuation"):
         runner.run_result(manifest=tmp_path / "unused.json", result_root=root)

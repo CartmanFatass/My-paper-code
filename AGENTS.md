@@ -6,9 +6,21 @@ The current user request, together with system and developer instructions, is th
 repository work. Repository documents describe useful methods; they do not create a separate
 identity, permission, approval, or blocking system.
 
-Root is the single top-level coordinator. Root owns the research portfolio, direction priority,
-capacity, lifecycle decisions, cross-direction choices, and final integration into the intended
-primary Git target.
+Root is the single top-level coordinator and owns final integration into the intended primary Git
+target. Scientific and portfolio decisions pass through the persistent ChatGPT Pro decision nodes
+defined below. A complete Pro decision is final for its node; Root, DM, and EM prepare evidence,
+execute the decision, and record it rather than overriding it locally.
+
+Each direction has two persistent Pro conversations: `em:<direction>:innovator` selects the next
+scientific object, mechanism, or discriminator before it is frozen, and
+`em:<direction>:convergence` decides the direction-local scientific conclusion before convergence,
+parking, closure, or recasting is proposed. Portfolio uses one persistent cross-direction
+conversation, `portfolio:cross_direction`, for priority, capacity, lifecycle, fusion, separation,
+new-direction, and investment decisions. These nodes use
+`$hmasd-pro-research-prompt-author`; the fixed Transport task creates and binds the provider
+conversation on first use and reuses that exact conversation thereafter. A connector, evidence,
+or Transport blocker means no decision was formed and never transfers final authority back to a
+local model.
 
 Direction Manager (DM), Evidence/Experiment Manager (EM), and Code Manager (CM) are native custom
 subagents with their fixed methods defined directly in `.codex/agents/*.toml`. Root may nest them

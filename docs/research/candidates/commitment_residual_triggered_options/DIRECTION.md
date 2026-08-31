@@ -104,6 +104,10 @@ inherit the completed continuation's evidence or disposition.
 - `docs/research/candidates/commitment_residual_triggered_options/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PILOT_EVIDENCE_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_FREEZE_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_PRO_INTAKE_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_PRE_RESULT_INTERPRETER_REPAIR_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_RESULT_20260831.md`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_V4_PREACTIVITY_SUPPORT_GATE_INTAKE.md`
@@ -247,3 +251,44 @@ production. Before confirmation, the cheapest discriminator is an exact derivati
 support-only census asking whether the frozen K8 first-boundary law can produce any
 `max_replacement G16-G16(KEEP)<=-0.02` witness, without reading final namespace `2026083001` or
 training a learner. See `CRTO_RAW_PILOT_EVIDENCE_20260831.md`.
+
+## Support-only census closure evidence — 2026-08-31
+
+The disjoint result-blind object `CRTO-K8-FIRST-BOUNDARY-SUPPORT-CENSUS-20260831-01` is now validly
+complete. Its first operator attempt failed during interpreter import before the isolated worker
+started and is quarantined as a non-consuming pre-result dependency failure. After an outcome-blind
+exact-interpreter repair, independent review passed and Root granted one replacement slot. The
+replacement passed fresh external and worker memory admissions, ran once, and published a
+validator-clean result.
+
+All `512/512` fixed K8 episodes across slots `0..7` retained their first boundary. Per-slot
+KEEP/REPLAN counts were `0/24`, `0/16`, `0/19`, `0/23`, `0/19`, `0/22`, `0/21`, and `0/15`.
+Global KEEP/MIDDLE/REPLAN counts were `0/353/159`; the most KEEP-favoring value was
+`A=-0.01619978828524196`, still above the inclusive `-0.02` material threshold. The registered
+first-true disposition is `CENSUS_NO_KEEP_WITNESS_ON_FIXED_TARGET`.
+
+The worker completed an independently rebuilt second full replay. Both passes are included in the
+ledger: `314,208/393,216` charged primitive team steps, `104.531/7,200` wall seconds, and
+`744,304,640/2,147,483,648` peak RSS bytes. The external result and direction receipt are directly
+byte-equal, the completion marker is authoritative, and the pure receipt validator passes. Model,
+learner, optimizer, checkpoint, pilot-read, confirmation-read, TRUE, and DERANGED activities are
+all zero.
+
+The archived Pro response supplies a credible component-valid reset-tape material-KEEP
+construction but no fixed generator address for it. It rules out a host-only impossibility claim;
+it does not contradict the fixed-target null. Across the consumed pilot and this census, ten
+complete generated slot blocks comprising `640` rows yielded zero material KEEP observations.
+That descriptive fact is not a probability or all-address theorem.
+
+Direction-local evidence now recommends closing the current natural first-boundary CRTO investment
+without reading the untouched confirmation target or training a learner. The all-eight competence
+prerequisite requires at least eight material KEEP rows per slot and failed with zero in every slot;
+the adequate REPLAN counts cannot compensate. Do not lower the material threshold, change the
+selector, promote MIDDLE rows, or search more arbitrary addresses after this result.
+
+Re-entry requires an independently justified new object: a concrete generated-address
+material-KEEP construction derived without post-result address search, a source-level connection
+between a nontrivial material-KEEP tape set and the exact generator image, or a new population or
+boundary estimand motivated independently of this null. No current evidence supports a successor,
+RAW/residual polarity, final-panel read, policy result, or deployment claim. Portfolio closure
+remains Root's action.

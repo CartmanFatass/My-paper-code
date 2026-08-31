@@ -16,6 +16,15 @@ class SourceManifestError(ValueError):
     pass
 
 
+_CONSUMED_ARTIFACT_PRODUCTION_STATUS = "READY_GUARDED_RESUMABLE_RESULT"
+_CONSUMED_ARTIFACT_MASTER_CONTRACT = (
+    "one OS-cryptographic 32-byte master after fresh preflight and resource admission",
+    "create-only raw persistence; every resume reloads the same master",
+    "no redraw, replacement, seed selection, threshold change, or tape-count change",
+    "checkpoint V3 binds the same raw master at completed update 160",
+)
+
+
 def build_source_manifest() -> dict[str, object]:
     return Manifest().to_dict()
 
@@ -44,6 +53,23 @@ def load_source_manifest(path: str | Path) -> Manifest:
     return validate_source_manifest(value)
 
 
+def load_consumed_source_manifest(path: str | Path) -> Manifest:
+    """Validate the historical manifest persisted before the .3 object closed."""
+
+    source = Path(path)
+    try:
+        value = json.loads(source.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise SourceManifestError("consumed source manifest is not readable canonical JSON") from error
+    expected_manifest = Manifest(
+        production_status=_CONSUMED_ARTIFACT_PRODUCTION_STATUS,
+        master_contract=_CONSUMED_ARTIFACT_MASTER_CONTRACT,
+    )
+    if not isinstance(value, dict) or value != expected_manifest.to_dict():
+        raise SourceManifestError("consumed source manifest differs from the historical .3 contract")
+    return expected_manifest
+
+
 def write_source_manifest(path: str | Path) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -68,5 +94,6 @@ load_and_validate_source_manifest = load_source_manifest
 
 __all__ = [
     "SourceManifestError", "build_source_manifest", "load_and_validate_source_manifest",
-    "load_source_manifest", "validate_source_manifest", "write_source_manifest",
+    "load_consumed_source_manifest", "load_source_manifest", "validate_source_manifest",
+    "write_source_manifest",
 ]

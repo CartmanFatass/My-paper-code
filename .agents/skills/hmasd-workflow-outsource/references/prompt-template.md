@@ -8,6 +8,7 @@ OUTSOURCE_TASK v1
 REQUEST_ID=<unique opaque request id>
 SOURCE_THREAD_ID=<source thread id or UNKNOWN>
 TARGET_THREAD_ID=<exact target thread id>
+EXECUTION_OWNER=TARGET_THREAD_ID (the destination executes, verifies, and returns this task)
 OBJECTIVE=<one observable outcome; one sentence>
 CONTEXT=<facts needed to act; cite exact files/commits when available>
 REPOSITORY=<absolute repository/worktree path>
@@ -29,6 +30,9 @@ RETURN=OUTSOURCE_RESULT v1 with status, summary, changed_paths, deliverables, ve
 
 Execution rules:
 - Execute only this objective and only within OWNED_PATHS and ALLOWED_EFFECTS.
+- The destination task is the execution owner; complete implementation and verification here and
+  return `OUTSOURCE_RESULT v1`. Do not delegate the same task recursively or leave an advice-only
+  plan when execution is requested.
 - Do not spawn subagents, create skills/roles, run experiments, alter scientific meaning, or send another message unless explicitly listed above.
 - Do not commit or push unless ALLOWED_EFFECTS says so.
 - On any stop condition, make no further mutation and return the exact gap.

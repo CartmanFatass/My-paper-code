@@ -33,7 +33,8 @@ from .artifacts import (
 from .analysis import analyze_complete_panel
 from .contracts import (
     CHECKPOINT_UPDATE, PANEL_FINAL_NATIVE_WIDTH, PANEL_MAX_NATIVE_WIDTH, PANEL_SLICE_COUNT,
-    PANEL_WIDTH, RESOURCE_ENVELOPE, RESOURCE_MAXIMA, Disposition, TerminalFact,
+    PANEL_WIDTH, RESOURCE_ENVELOPE, RESOURCE_MAXIMA, Disposition, LIFECYCLE_STATUS,
+    RESULT_COMMAND_STATUS, TERMINAL_TOMBSTONE_MESSAGE, TerminalFact,
 )
 from .foundation import (
     analyze_competence, execute_native_competence, freeze_foundation, materialize_foundation,
@@ -46,7 +47,7 @@ from .panel import (
     validate_complete_panel_cells, validate_panel_slices, validate_tape_pairing,
 )
 from .rng import AddressRNG, fresh_master
-from .source_manifest import load_source_manifest, write_source_manifest
+from .source_manifest import load_consumed_source_manifest, load_source_manifest, write_source_manifest
 from .training import (
     ExactAdamW, build_training_plan, summarize_resource_usage, train_one_update,
     validate_training_rng_contract,
@@ -662,6 +663,8 @@ def assess_run(receipt: str | Path) -> dict[str, object]:
 def _admit_memory_or_record(
     *, root: Path, receipt: Path, stage: str,
 ) -> dict[str, object]:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     try:
         return admit_memory(receipt)
     except ResourceAdmissionError:
@@ -672,71 +675,115 @@ def _admit_memory_or_record(
 
 
 def run_preflight(*, manifest: str | Path, result_root: str | Path) -> dict[str, object]:
-    root = _require_canonical_result_root(result_root)
-    loaded = load_source_manifest(manifest)
-    loaded.validate()
-    if root.exists():
-        raise PreflightError("prospective result-root must not exist; it must be absent and fresh")
-    parent = root.parent
-    if not parent.exists() or not parent.is_dir():
-        raise PreflightError("result-root parent does not exist")
-    plan = build_training_plan()
-    inventory = build_panel_inventory()
-    validate_tape_pairing(inventory)
-    slices = build_panel_slices()
-    validate_panel_slices(slices)
-    reset_width = sum(len(build_native_resets(panel_slice)) for panel_slice in slices)
-    training_rng = validate_training_rng_contract()
-    competence_rng = validate_competence_rng_contract()
-    alias = verify_public_alias()
-    headroom = headroom_conformance()
-    native_session_widths = preflight_native_panel_widths()
-    resources = summarize_resource_usage()
-    if resources != dict(loaded.resource_maxima):
-        raise PreflightError("resource inventory differs from the direct manifest")
-    if CHECKPOINT_UPDATE != 160:
-        raise PreflightError("sole production checkpoint frontier drifted")
-    if (
-        len(inventory) != PANEL_WIDTH
-        or reset_width != PANEL_WIDTH
-        or len(slices) != PANEL_SLICE_COUNT
-        or native_session_widths != (PANEL_MAX_NATIVE_WIDTH,) * 23 + (PANEL_FINAL_NATIVE_WIDTH,)
-    ):
-        raise PreflightError("fixed 23x144 plus 60 native slice inventory differs")
+    """Report the consumed-object tombstone without inspecting either argument."""
+
+    # Deliberately do not coerce, resolve, read, or validate either supplied
+    # path.  Preflight is now an effect-free lifecycle query, not an execution
+    # admission seam.
     return {
-        "manifest": loaded.to_dict(),
-        "training_episodes": len(plan),
-        "panel_width": len(inventory),
-        "reset_width": reset_width,
-        "native_session_widths": native_session_widths,
-        "public_alias": alias[0] == alias[1],
-        "headroom": {
-            "analytic_matched_load": headroom.analytic_witness.matched_load,
-            "analytic_mismatched_load": headroom.analytic_witness.mismatched_load,
-            "analytic_common_maximum_load": headroom.analytic_witness.common_maximum_load,
-            "native_matched_exposure_zero": headroom.native_matched_exposure_zero,
-            "native_mismatched_exposure": headroom.native_mismatched_exposure,
-            "native_common_exposure_zero": headroom.native_common_exposure_zero,
-        },
-        "phase": PHASE,
-        "checkpoint_update": CHECKPOINT_UPDATE,
-        "resources": resources,
-        "resource_envelope": dict(RESOURCE_ENVELOPE),
-        "training_rng_addresses": training_rng,
-        "competence_rng_addresses": competence_rng,
-        "result_root_absent": True,
-        "resolved_result_root": str(root.resolve()),
-        "production_pipeline_implemented": True,
-        "production_result_path_implemented": True,
-        "result_command_status": "READY",
-        "scientific_inference_hold": False,
+        "lifecycle_status": LIFECYCLE_STATUS,
+        "result_command_status": RESULT_COMMAND_STATUS,
+        "message": TERMINAL_TOMBSTONE_MESSAGE,
     }
 
 
 def run_result(*, manifest: str | Path, result_root: str | Path) -> TerminalFact:
-    """Execute or technically resume the one frozen V3 scientific attempt."""
+    """Reject every result invocation before inspecting its arguments."""
 
-    return _execute_result_pipeline(manifest=manifest, result_root=result_root)
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
+
+def _load_consumed_run_record_bytes(path: Path) -> bytes:
+    """Validate historical static controls without consulting the live runtime."""
+
+    try:
+        encoded = path.read_bytes()
+        value = json.loads(encoded.decode("utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ArtifactContractError("consumed run record cannot be loaded") from error
+    expected_top = {
+        "schema": "SCDMP_FCEOV_RUN_RECORD_V4",
+        "phase": PHASE,
+        "checkpoint_update": CHECKPOINT_UPDATE,
+        "foundation_updates": 160,
+        "episodes_per_update": 12,
+        "competence_missions": 120,
+        "panel_width": PANEL_WIDTH,
+        "actions": [0, 10, 12],
+        "resources": dict(RESOURCE_MAXIMA),
+    }
+    if not isinstance(value, dict) or set(value) != {*expected_top, "runtime"}:
+        raise ArtifactContractError("consumed run record fields differ")
+    if any(value.get(key) != expected for key, expected in expected_top.items()):
+        raise ArtifactContractError("consumed run record static contract differs")
+    runtime = value.get("runtime")
+    if not isinstance(runtime, dict) or set(runtime) != {
+        "python", "torch", "device", "torch_threads", "torch_interop_threads",
+        "deterministic_algorithms", "native_batch_widths",
+    }:
+        raise ArtifactContractError("consumed run record runtime fields differ")
+    if any(
+        not isinstance(runtime.get(name), str)
+        or not runtime[name].strip()
+        or any(ord(character) < 32 for character in runtime[name])
+        for name in ("python", "torch")
+    ) or {
+        "device": runtime.get("device"),
+        "torch_threads": runtime.get("torch_threads"),
+        "torch_interop_threads": runtime.get("torch_interop_threads"),
+        "deterministic_algorithms": runtime.get("deterministic_algorithms"),
+        "native_batch_widths": runtime.get("native_batch_widths"),
+    } != {
+        "device": "cpu",
+        "torch_threads": 1,
+        "torch_interop_threads": 1,
+        "deterministic_algorithms": True,
+        "native_batch_widths": {
+            "training": 12, "competence": 120, "panel_full": 144, "panel_final": 60,
+        },
+    }:
+        raise ArtifactContractError("consumed run record runtime controls differ")
+    return encoded
+
+
+def validate_consumed_artifact(
+    *, artifact: str | Path, result_root: str | Path,
+) -> dict[str, object]:
+    """Read-only validation of the already consumed canonical .3 final bundle."""
+
+    root = _require_canonical_result_root(result_root)
+    artifact_path = Path(artifact).resolve(strict=False)
+    expected_artifact = (root / "final-bundle.json").resolve(strict=False)
+    if os.path.normcase(str(artifact_path)) != os.path.normcase(str(expected_artifact)):
+        raise PreflightError("consumed artifact is not the canonical .3 final bundle")
+    if not root.is_dir() or not artifact_path.is_file():
+        raise PreflightError("consumed .3 final bundle is missing")
+
+    _validate_existing_root_shape(root)
+    # The manifest and snapshot are historical evidence.  Validate their
+    # persisted schemas/direct bytes, but do not compare the old snapshot with
+    # the now-tombstoned live runner source.
+    load_consumed_source_manifest(root / "source-manifest.json")
+    run_record_bytes = _load_consumed_run_record_bytes(root / "run-record.json")
+    source_snapshot = load_source_native_snapshot(root / "source-native-snapshot.json")
+    master = load_rng_master(root / "rng-master.bin")
+    _validate_final_publication_receipt(root)
+    _validate_end_receipt(root, "final-publication")
+    fact = load_final_bundle(
+        artifact_path,
+        expected_result_root=str(root),
+        expected_rng_master=master,
+        expected_run_record_bytes=run_record_bytes,
+        expected_source_native_snapshot=source_snapshot,
+    )
+    return {
+        "validated": True,
+        "lifecycle_status": LIFECYCLE_STATUS,
+        "result_command_status": RESULT_COMMAND_STATUS,
+        "artifact": str(artifact_path),
+        "disposition": fact.disposition,
+        "panel_complete": fact.panel_complete,
+    }
 
 
 def _next_admission_path(root: Path, stage: str) -> Path:
@@ -845,6 +892,8 @@ def _init_seam(name: str) -> None:
 
 
 def _publish_staging_root(staging: Path, root: Path) -> None:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     if root.exists():
         raise PreflightError("canonical result-root appeared during staging initialization")
     staging.rename(root)
@@ -853,6 +902,8 @@ def _publish_staging_root(staging: Path, root: Path) -> None:
 def _initialize_fresh_root(
     *, manifest: str | Path, root: Path, started_at: float,
 ) -> tuple[bytes, SourceNativeSnapshot, bytes]:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     staging = _staging_root(root)
     if staging.exists():
         _validate_staging_shape(staging)
@@ -907,6 +958,8 @@ def _initialize_fresh_root(
 def _validate_persisted_contract(
     manifest: str | Path, root: Path,
 ) -> tuple[SourceNativeSnapshot, bytes]:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     _validate_source_manifest_file(manifest, root / "source-manifest.json")
     load_run_record(root / "run-record.json")
     run_record_bytes = (root / "run-record.json").read_bytes()
@@ -918,6 +971,8 @@ def _validate_persisted_contract(
 def _train_and_restore_foundation(
     root: Path, master: bytes,
 ) -> tuple[object, AddressRNG]:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     source = AddressRNG(master)
     checkpoint_path = root / "foundation.checkpoint.pt"
     witness_path = root / "resume-witness.json"
@@ -966,6 +1021,8 @@ def _train_and_restore_foundation(
 
 
 def _load_or_execute_foundation_gate(root: Path, frozen: object, source: AddressRNG):
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     gate_path = root / "foundation-gate.json"
     if gate_path.exists():
         return load_foundation_gate(gate_path)
@@ -976,6 +1033,8 @@ def _load_or_execute_foundation_gate(root: Path, frozen: object, source: Address
 
 
 def _reconcile_frontier(root: Path, completed: int) -> None:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     path = root / "panel-frontier.json"
     expected = build_panel_frontier(completed)
     if path.exists():
@@ -992,6 +1051,8 @@ def _prepare_and_publish_final(
     source_snapshot: SourceNativeSnapshot, records: Sequence[object], cells: Sequence[object],
     panel_analysis: object, started_at: float,
 ) -> TerminalFact:
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
+
     _enforce_direction_resources(
         stage="pre-final-prepare", root=root, scratch_root=None, started_at=started_at,
         terminal_on_failure=True,
@@ -1125,7 +1186,9 @@ def _validate_final_publication_receipt(root: Path) -> dict[str, object]:
 def _execute_result_pipeline_body(
     *, manifest: str | Path, result_root: str | Path
 ) -> TerminalFact:
-    """Fresh-or-resume implementation of the one fixed master and global tape panel."""
+    """Disabled historical implementation; the scientific object is consumed."""
+
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
 
     root = _require_canonical_result_root(result_root)
     # The frozen wall ceiling includes cold interpreter/import time, so use the
@@ -1277,7 +1340,9 @@ def _execute_result_pipeline_body(
 def _execute_result_pipeline(
     *, manifest: str | Path, result_root: str | Path
 ) -> TerminalFact:
-    """Run one invocation with a shared exact atomic-temp scratch observer."""
+    """Reject internal execution bypasses before installing observers."""
+
+    raise PreflightError(TERMINAL_TOMBSTONE_MESSAGE)
 
     global _ACTIVE_SCRATCH_TRACKER
     root = _require_canonical_result_root(result_root)
@@ -1295,11 +1360,12 @@ def _execute_result_pipeline(
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="scdmp-fceov")
-    parser.add_argument("--manifest", required=True)
+    parser.add_argument("--manifest")
     parser.add_argument("--result-root", required=True)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--preflight-only", action="store_true")
     mode.add_argument("--phase", choices=(PHASE,))
+    mode.add_argument("--validate-consumed-artifact")
     return parser
 
 
@@ -1309,6 +1375,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.preflight_only:
             report = run_preflight(manifest=args.manifest, result_root=args.result_root)
+            print(json.dumps(report, sort_keys=True, separators=(",", ":"), allow_nan=False))
+        elif args.validate_consumed_artifact:
+            report = validate_consumed_artifact(
+                artifact=args.validate_consumed_artifact, result_root=args.result_root,
+            )
             print(json.dumps(report, sort_keys=True, separators=(",", ":"), allow_nan=False))
         else:
             fact = run_result(manifest=args.manifest, result_root=args.result_root)
@@ -1327,5 +1398,5 @@ __all__ = [
     "CANONICAL_RESULT_ROOT", "QUARANTINED_RESULT_ROOT",
     "QUARANTINED_REPLACEMENT_RESULT_ROOT", "PHASE", "PreflightError",
     "ResourceAdmissionError", "main",
-    "run_preflight", "run_result",
+    "run_preflight", "run_result", "validate_consumed_artifact",
 ]

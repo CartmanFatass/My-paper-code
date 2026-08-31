@@ -200,6 +200,139 @@ def enumerate_common_future_g16(
     )
 
 
+def _decision_provenance(record: DecisionRecord) -> dict[str, object]:
+    return {
+        "agent": int(record.agent),
+        "kind": record.kind.value,
+        "previous_option": (
+            None if record.previous_option is None else int(record.previous_option)
+        ),
+        "selected_option": int(record.selected_option),
+        "changed": bool(record.changed),
+        "charge": float(record.charge),
+        "age_before": int(record.age_before),
+        "age_after_decision": int(record.age_after_decision),
+        "switch_time": bool(record.switch_time),
+        "reanchored": bool(record.reanchored),
+    }
+
+
+def _step_provenance(step: object) -> dict[str, object]:
+    """JSON-safe complete physical step record for independent G16 replay checks."""
+
+    return {
+        "primitive_time": int(step.primitive_time),
+        "k": int(step.k),
+        "event_active": bool(step.event_active),
+        "physical_queues_before": [int(value) for value in step.physical_queues_before],
+        "deployable_queues_before": [int(value) for value in step.deployable_queues_before],
+        "buffers_before": [int(value) for value in step.buffers_before],
+        "arrivals": [int(value) for value in step.arrivals],
+        "relay_capacity": [int(value) for value in step.relay_capacity],
+        "tracked": [int(value) for value in step.tracked],
+        "delivered": [int(value) for value in step.delivered],
+        "overflow": int(step.overflow),
+        "energy_spent": float(step.energy_spent),
+        "decision_charge": float(step.decision_charge),
+        "reward": float(step.reward),
+        "physical_queues_after": [int(value) for value in step.physical_queues_after],
+        "buffers_after": [int(value) for value in step.buffers_after],
+        "decisions": [_decision_provenance(record) for record in step.decisions],
+    }
+
+
+def materialize_support_boundary_provenance(
+    tape: ScenarioTape,
+    *,
+    ledger: CommonFutureLedger | None = None,
+) -> dict[str, object]:
+    """Materialize the frozen first-boundary G16 with complete branch provenance.
+
+    This support-only seam performs no forecast, model, residual, or persisted-state
+    operation.  An absent boundary is still an explicit observation.  For a retained
+    boundary, KEEP is emitted first and legal changed options follow host printed order.
+    """
+
+    located = _locate_common_history_boundary(tape)
+    if located is None:
+        return {
+            "row_present": False,
+            "scripted_history_transitions": HORIZON,
+        }
+    host = located.host
+    target_agent = located.agent
+    previous = Option(int(host.state.options[target_agent]))
+    actions: list[tuple[int, Option | None]] = [(0, None)]
+    actions.extend(
+        (int(option) + 1, option)
+        for option in Option
+        if option != previous and option in host.audit_action_set(target_agent)
+    )
+    if ledger is not None:
+        ledger.require_common_future_headroom(len(actions))
+    legal_mask = [False] * 8
+    g16: list[float | None] = [None] * 8
+    branches: list[dict[str, object]] = []
+    denominator = max(1, tape.total_physical_arrivals())
+    for printed_index, option in actions:
+        value, branch = common_future_audit_rollout(
+            host,
+            target_agent=target_agent,
+            audit_action=option,
+            aligned_decisions=located.aligned_decisions,
+            continuation=scripted_decisions,
+        )
+        if len(branch.steps) != AUDIT_HORIZON:
+            raise RuntimeError("support branch did not execute exactly sixteen steps")
+        first_target = branch.steps[0].decisions[target_agent]
+        expected_charge = 0.0 if option is None else 0.05 + tape.spec.replanning_cost
+        if abs(float(first_target.charge) - expected_charge) > 1e-12:
+            raise RuntimeError("support intervention charge was not exact at the boundary")
+        expected_option = previous if option is None else option
+        if first_target.selected_option != expected_option:
+            raise RuntimeError("support branch did not apply its printed target action")
+        terminal = branch.physical_audit_state()
+        legal_mask[printed_index] = True
+        g16[printed_index] = float(value)
+        branches.append({
+            "printed_index": printed_index,
+            "action": "KEEP" if option is None else option.label,
+            "selected_option": int(expected_option),
+            "intervention_charge": float(expected_charge),
+            "intervention_charge_step": 0,
+            "g16": float(value),
+            "steps": [_step_provenance(step) for step in branch.steps],
+            "terminal_state": {
+                "primitive_time": int(terminal.primitive_time),
+                "queues": [int(value) for value in terminal.queues],
+                "buffers": [int(value) for value in terminal.buffers],
+                "locations": [int(value) for value in terminal.locations],
+                "energies": [float(value) for value in terminal.energies],
+                "options": [int(value) for value in terminal.options],
+                "option_ages": [int(value) for value in terminal.option_ages],
+                "current_k": int(terminal.current_k),
+                "terminal_potential": float(terminal.terminal_potential()),
+            },
+        })
+        if ledger is not None:
+            ledger.record_common_future_branch(AUDIT_HORIZON)
+    expected_indices = [index for index, _ in actions]
+    if [index for index, present in enumerate(legal_mask) if present] != expected_indices:
+        raise RuntimeError("support common-future action order drifted")
+    return {
+        "row_present": True,
+        "scripted_history_transitions": int(host.state.primitive_time),
+        "primitive_time": int(host.state.primitive_time),
+        "environment_slot": int(target_agent),
+        "elapsed_horizon": int(located.elapsed_horizon),
+        "previous_option": int(previous),
+        "legal_mask": legal_mask,
+        "g16": g16,
+        "denominator": denominator,
+        "branches": branches,
+    }
+
+
 def _valid_event_window(host: ServiceRelayHost) -> bool:
     time = host.state.primitive_time
     onset = host.tape.spec.event_onset

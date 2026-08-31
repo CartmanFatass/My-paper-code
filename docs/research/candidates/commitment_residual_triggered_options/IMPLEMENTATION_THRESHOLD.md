@@ -1,6 +1,6 @@
 # CRTO common-history gate implementation threshold
 
-Status: `VALID_PILOT_SUPPORT_NONIDENTIFYING_LONG_PRODUCTION_WITHHELD`
+Status: `VALID_FIXED512_NO_KEEP_SUPPORT_CLOSE_RECOMMENDED`
 
 Object: `CRTO-COMMON-HISTORY-GATE-20260830-01`. This is a fresh prospective object, never an
 update-1,000 continuation. It must load no B1 probe, optimizer, checkpoint, cursor, result, or
@@ -34,6 +34,30 @@ work agree at `3,632` branches and `484,096` primitive team steps. Peak RSS was
 three worker-bound receipt copies exactly match their files, both public result files are
 byte-identical, and no staging residue remains. This completes only the fixed pilot object; the
 confirmation object and `WITHHOLD_LONG_PRODUCTION` remain unchanged.
+
+The later support-only object
+`CRTO-K8-FIRST-BOUNDARY-SUPPORT-CENSUS-20260831-01` now supersedes the pilot-era next-step statement.
+It froze a disjoint eight-slot by 64-episode target, no learner, two complete host/G16 passes, exact
+fixed-target routing, and a `393,216` primitive-team-step ceiling. Its first operator invocation
+stopped during interpreter import before worker startup and did not consume the object. An
+outcome-blind exact-interpreter replacement passed non-result regression and independent review,
+received one Root slot, and completed once.
+
+The result is validator-clean `CENSUS_NO_KEEP_WITNESS_ON_FIXED_TARGET`. All `512/512` boundaries
+were retained. Per-slot KEEP/REPLAN counts were `0/24`, `0/16`, `0/19`, `0/23`, `0/19`, `0/22`,
+`0/21`, and `0/15`; global KEEP/MIDDLE/REPLAN was `0/353/159`, with
+`A in [-0.01619978828524196, 0.056812238064408105]`. Thus every slot passes the REPLAN minimum and
+every slot fails the material KEEP minimum with zero witnesses. The pure receipt validator, direct
+dual-publication byte comparison, independent 512-tape full replay, resource receipts, work ledger,
+and activity isolation all pass. Actual charged work was `314,208/393,216`, wall was
+`104.531/7,200` seconds, and peak RSS was `744,304,640/2,147,483,648` bytes.
+
+The untouched confirmation target remains technically unconsumed but is no longer scientifically
+admissible under the current support prerequisite. Training cannot repair zero material KEEP rows
+without changing the object. Direction-local evidence therefore recommends closing the current
+natural first-boundary investment rather than launching confirmation, recasting after observation,
+or registering a successor. The result is exact only for its fixed 512 members and carries no
+all-address, representation, optimization, policy, or deployment polarity.
 
 ## Frozen 3 × 2 comparison
 
@@ -436,6 +460,8 @@ experiments/candidates/commitment_residual_triggered_options_common_history_gate
   production.py
   production_worker.py
   pilot.py
+  support_census.py
+  support_census_worker.py
   result.schema.json
   run.py
 
@@ -450,6 +476,8 @@ tests/experiments/candidates/commitment_residual_triggered_options_common_histor
   test_preflight_pipeline.py
   test_production_transaction.py
   test_pilot_transaction.py
+  test_support_census.py
+  test_support_census_cli.py
 ```
 
 Core API materializes panels, enumerates common-future action returns, constructs packet views and
@@ -479,6 +507,10 @@ python -m experiments.candidates.commitment_residual_triggered_options_common_hi
   --resource-receipt <fresh-pilot-prescan-memory-receipt.json> \
   --launch-resource-receipt <fresh-pilot-launch-memory-receipt.json> \
   --launch-run-resource-receipt <fresh-pilot-launch-run-resource-receipt.json>
+python -m experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01 support-census \
+  --output-root <fresh-support-root> --result <fresh-support-result.json> \
+  --resource-receipt <fresh-support-memory-receipt.json> \
+  --run-resource-receipt <fresh-support-run-resource-receipt.json>
 ```
 
 Expose no checkpoint, resume, legacy-result, or update-1,000 option. Focused tests cover common
@@ -492,6 +524,10 @@ validation, and legacy-schema rejection.
 - `CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md`
 - `CRTO_COMMON_HISTORY_GATE_R01_RESULT_BLIND_PREFLIGHT_20260831.md`
 - `CRTO_RAW_PILOT_EVIDENCE_20260831.md`
+- `CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_FREEZE_20260831.md`
+- `CRTO_K8_FIRST_BOUNDARY_PRO_INTAKE_20260831.md`
+- `CRTO_K8_FIRST_BOUNDARY_PRE_RESULT_INTERPRETER_REPAIR_20260831.md`
+- `CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_RESULT_20260831.md`
 - `CRTO_B1_SCIENCE_CARD.md`
 - `CRTO_PROBE_CUT_R01_REVIEW_AND_HANDOFF.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -23,7 +24,9 @@ def _renderer():
 def _request() -> dict[str, object]:
     return {
         "caller_role": "em",
+        "workflow_node": "em_convergence",
         "request_id": "req-companion-01",
+        "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
         "direction_id": "demo_direction",
         "repository": "C:/repo",
         "repository_url": "https://github.com/example/repo",
@@ -48,7 +51,13 @@ def project_root(tmp_path: Path) -> Path:
     direction.mkdir(parents=True)
     portfolio.mkdir(parents=True)
     (direction / "DIRECTION.md").write_text("# Demo\n", encoding="utf-8")
-    (portfolio / "PORTFOLIO.md").write_text("| demo_direction | ACTIVE |\n", encoding="utf-8")
+    second = tmp_path / "docs" / "research" / "candidates" / "second_direction"
+    second.mkdir(parents=True)
+    (second / "DIRECTION.md").write_text("# Second\n", encoding="utf-8")
+    (portfolio / "PORTFOLIO.md").write_text(
+        "| demo_direction | ACTIVE |\n| second_direction | PARKED |\n",
+        encoding="utf-8",
+    )
     return tmp_path
 
 
@@ -65,8 +74,8 @@ def test_omitted_companion_prompt_uses_the_fixed_default(project_root: Path, tmp
     assert packet["companion_prompt"] == (
         "Execute the exact scientific research request in the attached PROMPT_BODY.md. "
         "Use the separately attached REFERENCE_FILES.md only as its read-only GitHub evidence manifest. "
-        "The author remains authoring-only and must not send, open a browser, bind a conversation, "
-        "or validate Transport state."
+        "The author must perform one send_message_to_thread dispatch to the fixed Codex Transport task, "
+        "but must not send to Pro or operate browser, connector, or conversation state."
     )
     handoff = _render(renderer, _request(), project_root, tmp_path / "default")
     assert handoff["transport_request"]["companion_prompt"] == packet["companion_prompt"]
@@ -95,19 +104,18 @@ def test_companion_override_changes_only_handoff_companion_content(
     project_root: Path, tmp_path: Path
 ) -> None:
     renderer = _renderer()
-    default_dir = tmp_path / "default"
-    override_dir = tmp_path / "override"
+    packet_dir = tmp_path / "packet"
     override = "Use this caller-supplied companion verbatim.\n"
 
-    default_handoff = _render(renderer, _request(), project_root, default_dir)
+    default_handoff = _render(renderer, _request(), project_root, packet_dir)
+    default_body = (packet_dir / "PROMPT_BODY.md").read_bytes()
+    default_reference = (packet_dir / "REFERENCE_FILES.md").read_bytes()
     override_handoff = _render(
-        renderer, {**_request(), "companion_prompt": override}, project_root, override_dir
+        renderer, {**_request(), "companion_prompt": override}, project_root, packet_dir
     )
 
-    default_body = (default_dir / "PROMPT_BODY.md").read_bytes()
-    override_body = (override_dir / "PROMPT_BODY.md").read_bytes()
-    default_reference = (default_dir / "REFERENCE_FILES.md").read_bytes()
-    override_reference = (override_dir / "REFERENCE_FILES.md").read_bytes()
+    override_body = (packet_dir / "PROMPT_BODY.md").read_bytes()
+    override_reference = (packet_dir / "REFERENCE_FILES.md").read_bytes()
     assert default_body == override_body
     assert default_reference == override_reference
     assert default_handoff["transport_request"]["companion_prompt"].encode() not in default_body
@@ -132,8 +140,280 @@ def test_author_remains_authoring_only_and_operator_gets_companion_contract(
     handoff = _render(renderer, _request(), project_root, tmp_path / "packet")
     skill_text = SKILL.read_text(encoding="utf-8")
 
-    assert handoff["send_from_author"] is False
+    assert handoff["pro_send_from_caller"] is False
     assert "companion_prompt" in handoff["transport_request"]
     assert "supply the companion_prompt verbatim" in skill_text
     assert "preserve the `PROMPT_BODY.md` and" in skill_text
     assert "`REFERENCE_FILES.md` bytes unchanged" in skill_text
+
+
+def test_handoff_requires_one_dispatch_to_the_fixed_transport_task(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    out_dir = tmp_path / "packet"
+    handoff = _render(renderer, _request(), project_root, out_dir)
+    target_id = "01a05860-6919-7bd3-9b04-99f8344ed73d"
+    target_url = f"codex://threads/{target_id}"
+    handoff_path = str((out_dir / "HANDOFF.json").resolve())
+
+    assert handoff["dispatch_required"] is True
+    assert handoff["dispatch_once"] is True
+    assert handoff["dispatch_target_thread_id"] == target_id
+    assert handoff["dispatch_target_thread_url"] == target_url
+    assert handoff["pro_send_from_caller"] is False
+    assert handoff["workflow_node"] == "em_convergence"
+    assert handoff["direction_ids"] == ["demo_direction"]
+    assert handoff["conversation_binding_key"] == "em:demo_direction:convergence"
+    assert handoff["conversation_reuse_required"] is True
+    assert handoff["decision_authority"] == "pro_final"
+    assert handoff["dispatch_handoff_path"] == handoff_path
+    assert handoff["dispatch_prompt"] == f"Execute the handoff packet at {handoff_path} exactly once."
+    assert handoff["dispatch_instruction"] == (
+        f"Call send_message_to_thread exactly once with threadId={target_id} "
+        f"and prompt=Execute the handoff packet at {handoff_path} exactly once."
+    )
+
+
+@pytest.mark.parametrize(
+    ("caller_role", "workflow_node", "source_thread_id"),
+    [
+        ("em", "em_innovator", "01A04F5A-1C9F-7331-B1D9-249FB767362E"),
+        ("em", "em_convergence", "01a04f5a-1c9f-7331-b1d9-249fb767362e"),
+        ("portfolio", "portfolio_decision", "ABCDEFAB-CDEF-ABCD-EFAB-CDEFABCDEFAB"),
+    ],
+)
+def test_source_thread_id_is_exactly_propagated_for_every_decision_node(
+    project_root: Path,
+    tmp_path: Path,
+    caller_role: str,
+    workflow_node: str,
+    source_thread_id: str,
+) -> None:
+    renderer = _renderer()
+    request = {
+        **_request(),
+        "caller_role": caller_role,
+        "workflow_node": workflow_node,
+        "source_thread_id": source_thread_id,
+    }
+    if caller_role == "portfolio":
+        request["direction_ids"] = ["demo_direction", "second_direction"]
+        request.pop("direction_id")
+
+    out_dir = tmp_path / workflow_node
+    handoff = _render(renderer, request, project_root, out_dir)
+
+    assert handoff["source_thread_id"] == source_thread_id
+    assert handoff["transport_request"]["source_thread_id"] == source_thread_id
+    assert not handoff.get("fallback_enabled", False)
+    assert not handoff["transport_request"].get("fallback_enabled", False)
+    assert source_thread_id not in (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
+    assert source_thread_id not in (out_dir / "REFERENCE_FILES.md").read_text(encoding="utf-8")
+
+
+def test_source_thread_id_changes_only_handoff_routing_content(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    first_dir = tmp_path / "first"
+    second_dir = tmp_path / "second"
+    first = _render(
+        renderer,
+        {**_request(), "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e"},
+        project_root,
+        first_dir,
+    )
+    second = _render(
+        renderer,
+        {**_request(), "source_thread_id": "ABCDEFAB-CDEF-ABCD-EFAB-CDEFABCDEFAB"},
+        project_root,
+        second_dir,
+    )
+
+    assert (first_dir / "PROMPT_BODY.md").read_bytes() == (second_dir / "PROMPT_BODY.md").read_bytes()
+    assert (first_dir / "REFERENCE_FILES.md").read_bytes() == (second_dir / "REFERENCE_FILES.md").read_bytes()
+    assert first["source_thread_id"] != second["source_thread_id"]
+    assert first["transport_request"]["source_thread_id"] != second["transport_request"]["source_thread_id"]
+
+
+@pytest.mark.parametrize("value", [None, "", "  \t"])
+def test_missing_or_blank_source_thread_id_is_a_consolidated_input_gap(
+    project_root: Path, value: object
+) -> None:
+    renderer = _renderer()
+
+    with pytest.raises(renderer.PacketInputError) as exc_info:
+        renderer.validate({**_request(), "source_thread_id": value}, project_root)
+
+    assert exc_info.value.kind == "missing_input"
+    assert exc_info.value.missing_fields == ["source_thread_id"]
+
+
+def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separate(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    handoff = _render(renderer, _request(), project_root, tmp_path / "packet")
+    skill_text = SKILL.read_text(encoding="utf-8")
+
+    assert "Validate the caller input" in skill_text
+    assert "Render exactly the three files" in skill_text
+    assert "`send_message_to_thread` exactly once" in skill_text
+    assert "authoring task is not complete until" in skill_text
+    assert "task exclusively owns Pro/browser send" in skill_text
+    assert "Complete validated input proceeds directly without a confirmation prompt" in skill_text
+    assert "Connector availability and GitHub retrieval are Transport/Pro checks" in skill_text
+    assert "must not become an author-side blocker" in skill_text
+    assert all(
+        term in skill_text
+        for term in (
+            "model and connector checks",
+            "conversation binding",
+            "waiting",
+            "archive",
+            "cleanup",
+        )
+    )
+    assert ("does not call " + "the transport operator") not in skill_text
+    assert ("does not send" + ", open a browser") not in skill_text
+    assert ("send_from_" + "author") not in skill_text
+    assert handoff["dispatch_target_thread_url"] == "codex://threads/01a05860-6919-7bd3-9b04-99f8344ed73d"
+
+
+def test_missing_required_input_returns_one_consolidated_caller_question_without_rendering(
+    project_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    renderer = _renderer()
+    request = _request()
+    request.pop("scientific_question")
+    request.pop("claim_ceiling")
+    request.pop("source_thread_id")
+    request["reference_files"] = []
+    request_path = tmp_path / "request.json"
+    out_dir = tmp_path / "packet"
+    request_path.write_text(json.dumps(request), encoding="utf-8")
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "render_packet.py",
+            str(request_path),
+            "--out-dir",
+            str(out_dir),
+            "--project-root",
+            str(project_root),
+        ],
+    )
+
+    assert renderer.main() == 2
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["valid"] is False
+    assert payload["error"]["kind"] == "missing_input"
+    assert payload["error"]["missing_fields"] == [
+        "source_thread_id",
+        "scientific_question",
+        "claim_ceiling",
+        "reference_files",
+    ]
+    assert payload["error"]["question"].count("?") == 1
+    assert not out_dir.exists()
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "error"),
+    [
+        ("caller_role", "operator", "caller_role"),
+        ("source_thread_id", "not-a-codex-task", "source_thread_id"),
+        ("direction_id", "../escape", "direction_id"),
+        ("repository_url", 42, "repository_url"),
+        ("reference_files", "not-a-list", "reference_files"),
+    ],
+)
+def test_malformed_caller_input_is_rejected(
+    project_root: Path, field: str, value: object, error: str
+) -> None:
+    renderer = _renderer()
+
+    with pytest.raises(renderer.PacketInputError, match=error) as exc_info:
+        renderer.validate({**_request(), field: value}, project_root)
+    assert exc_info.value.kind == "malformed_input"
+    assert exc_info.value.field == error
+
+
+def test_dispatch_contract_has_no_digest_identity_or_authentication_gate(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    handoff = _render(renderer, _request(), project_root, tmp_path / "packet")
+    serialized = json.dumps(handoff, ensure_ascii=False).lower()
+
+    assert ("send_from_" + "author") not in serialized
+    assert not any(token in serialized for token in ("sha256", "digest", "identity", "authentication"))
+
+
+def test_em_innovator_and_convergence_use_distinct_persistent_bindings(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    convergence = _render(renderer, _request(), project_root, tmp_path / "convergence")
+    innovator = _render(
+        renderer,
+        {**_request(), "request_id": "req-innovator-01", "workflow_node": "em_innovator"},
+        project_root,
+        tmp_path / "innovator",
+    )
+
+    assert convergence["conversation_binding_key"] == "em:demo_direction:convergence"
+    assert innovator["conversation_binding_key"] == "em:demo_direction:innovator"
+    assert convergence["conversation_binding_key"] != innovator["conversation_binding_key"]
+    body = (tmp_path / "innovator" / "PROMPT_BODY.md").read_text(encoding="utf-8")
+    assert "REQUEST_CLASS=SCIENTIFIC_INNOVATION" in body
+    assert "DECISION_AUTHORITY=PRO_FINAL" in body
+    assert "final decision for this workflow node" in body
+
+
+def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    request = {
+        **_request(),
+        "caller_role": "portfolio",
+        "workflow_node": "portfolio_decision",
+        "request_id": "portfolio-round-01",
+        "direction_ids": ["demo_direction", "second_direction"],
+    }
+    request.pop("direction_id")
+    handoff = _render(renderer, request, project_root, tmp_path / "portfolio")
+
+    assert handoff["direction_id"] == "portfolio"
+    assert handoff["direction_ids"] == ["demo_direction", "second_direction"]
+    assert handoff["conversation_binding_key"] == "portfolio:cross_direction"
+    assert handoff["decision_authority"] == "pro_final"
+    assert handoff["transport_request"]["conversation_binding_key"] == "portfolio:cross_direction"
+    body = (tmp_path / "portfolio" / "PROMPT_BODY.md").read_text(encoding="utf-8")
+    assert "REQUEST_CLASS=PORTFOLIO_DECISION" in body
+    assert "DIRECTION_SCOPE=demo_direction,second_direction" in body
+    assert "priority, capacity, lifecycle, fusion, separation" in body
+
+
+@pytest.mark.parametrize(
+    ("caller_role", "workflow_node"),
+    [
+        ("portfolio", "em_innovator"),
+        ("portfolio", "em_convergence"),
+        ("em", "portfolio_decision"),
+    ],
+)
+def test_caller_and_workflow_node_must_match(
+    project_root: Path, caller_role: str, workflow_node: str
+) -> None:
+    renderer = _renderer()
+    request = {**_request(), "caller_role": caller_role, "workflow_node": workflow_node}
+    if caller_role == "portfolio":
+        request["direction_ids"] = ["demo_direction"]
+        request.pop("direction_id")
+
+    with pytest.raises(renderer.PacketInputError, match="requires caller_role"):
+        renderer.validate(request, project_root)

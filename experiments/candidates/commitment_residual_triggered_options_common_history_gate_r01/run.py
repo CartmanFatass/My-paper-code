@@ -18,7 +18,7 @@ from typing import Callable, Mapping, Sequence
 from .config import (
     BATCH_SIZE, BUDGETS, DELTA, FROZEN_POLICIES, NUMERIC_TOLERANCE, OBJECT_ID,
     PEAK_RSS_BYTES, PRODUCTION_CONFIG, RAW_LONG_MAX_MEAN_REGRET, RNG_NAMESPACE,
-    PILOT_OBJECT_ID, SCHEMA_VERSION, WALL_SECONDS,
+    PILOT_OBJECT_ID, SCHEMA_VERSION, SUPPORT_CENSUS_OBJECT_ID, WALL_SECONDS,
 )
 
 
@@ -40,7 +40,10 @@ FORBIDDEN_CLI_OPTIONS = frozenset({
 })
 PRE_ADMISSION_TORCH_DEPENDENCY_SUFFIXES = frozenset({
     "torch", "analysis", "calibration", "derangement", "evaluation", "models",
-    "packets", "training",
+    "packets", "pilot", "production", "training",
+})
+IMPORT_SAFE_TRANSACTION_MODULES = frozenset({
+    "pilot.py", "production.py", "support_census.py", "support_census_worker.py",
 })
 
 
@@ -94,13 +97,17 @@ def source_check(package_root: Path = PACKAGE_ROOT) -> dict[str, object]:
                     if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
                         if argument.value in FORBIDDEN_CLI_OPTIONS:
                             errors.append(f"{path.name}:{node.lineno}: forbidden CLI option {argument.value}")
-        if path.name in {"production.py", "pilot.py"}:
+        if path.name in IMPORT_SAFE_TRANSACTION_MODULES:
             for node in tree.body:
                 imported: tuple[str, ...] = ()
                 if isinstance(node, ast.Import):
                     imported = tuple(alias.name for alias in node.names)
-                elif isinstance(node, ast.ImportFrom) and node.module:
-                    imported = (node.module,)
+                elif isinstance(node, ast.ImportFrom):
+                    imported = (
+                        (node.module,)
+                        if node.module
+                        else tuple(alias.name for alias in node.names)
+                    )
                 if any(
                     name.split(".")[-1] in PRE_ADMISSION_TORCH_DEPENDENCY_SUFFIXES
                     for name in imported
@@ -665,6 +672,90 @@ def _launch_raw_pilot_worker(
     return dict(payload)
 
 
+def _launch_support_census_worker(
+    *,
+    output_root: Path,
+    result_path: Path,
+    resource_receipt_path: Path,
+    run_resource_receipt_path: Path,
+) -> dict[str, object]:
+    """Launch the frozen support-only census in one import-safe isolated worker."""
+
+    source_check()
+    output, result, memory, assessment = tuple(
+        Path(path).resolve() for path in (
+            output_root, result_path, resource_receipt_path, run_resource_receipt_path,
+        )
+    )
+    if len({output, result, memory, assessment}) != 4:
+        raise ValueError("support census root, result, and resource receipts must be distinct")
+    if any(path.exists() for path in (output, result, memory, assessment)):
+        raise FileExistsError("support census requires fresh create-only targets and receipts")
+    if any(output == path or output in path.parents for path in (result, memory, assessment)):
+        raise ValueError("support census result and resource receipts must be outside output root")
+    environment = os.environ.copy()
+    for name in (
+        "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+        "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+    ):
+        environment[name] = "1"
+    environment["CUDA_VISIBLE_DEVICES"] = ""
+    environment["HMASD_CRTO_SUPPORT_CENSUS_WORKER"] = SUPPORT_CENSUS_OBJECT_ID
+    completed = subprocess.run(
+        [
+            sys.executable, "-m",
+            (
+                "experiments.candidates."
+                "commitment_residual_triggered_options_common_history_gate_r01."
+                "support_census_worker"
+            ),
+            "--output-root", str(output),
+            "--result", str(result),
+            "--resource-receipt", str(memory),
+            "--run-resource-receipt", str(assessment),
+        ],
+        cwd=PACKAGE_ROOT.parents[2],
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or completed.stdout.strip() or (
+            f"exit {completed.returncode}"
+        )
+        raise RuntimeError(f"isolated CRTO support census worker failed: {detail}")
+    receipt = output / "support_census_receipt.json"
+    marker_path = output / "PUBLICATION_COMPLETE.json"
+    try:
+        result_bytes = result.read_bytes()
+        if receipt.read_bytes() != result_bytes:
+            raise RuntimeError("support census dual-target publication is not byte-identical")
+        marker = json.loads(marker_path.read_text(encoding="utf-8"))
+        if marker != {
+            "format": "CRTO_SUPPORT_CENSUS_DUAL_PUBLICATION_V1",
+            "object_id": SUPPORT_CENSUS_OBJECT_ID,
+            "complete": True,
+            "commit_law": "EXTERNAL_RESULT_FIRST_DIRECTION_ROOT_SECOND",
+            "receipt": "support_census_receipt.json",
+        }:
+            raise RuntimeError("support census direction commit marker is malformed")
+        if {path.name for path in output.iterdir()} != {
+            "support_census_receipt.json", "PUBLICATION_COMPLETE.json",
+        }:
+            raise RuntimeError("support census direction root contains unexpected files")
+        payload = json.loads(result_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise RuntimeError("CRTO support census worker did not publish a readable result") from error
+    if not isinstance(payload, Mapping):
+        raise RuntimeError("CRTO support census worker result must be a JSON object")
+    from .support_census import validate_support_census
+    # The isolated worker already completed the independent full G16 replay.  The
+    # parent validator is pure receipt arithmetic and structure only.
+    validate_support_census(payload)
+    return dict(payload)
+
+
 def _missing_scientific_policy_executor(_stage_root: Path) -> Mapping[str, object]:
     """The threshold intentionally left result-sensitive numeric policy unfrozen."""
 
@@ -915,6 +1006,11 @@ def build_parser() -> argparse.ArgumentParser:
     pilot_parser.add_argument("--resource-receipt", type=Path, required=True)
     pilot_parser.add_argument("--launch-resource-receipt", type=Path, required=True)
     pilot_parser.add_argument("--launch-run-resource-receipt", type=Path, required=True)
+    support_parser = subparsers.add_parser("support-census")
+    support_parser.add_argument("--output-root", type=Path, required=True)
+    support_parser.add_argument("--result", type=Path, required=True)
+    support_parser.add_argument("--resource-receipt", type=Path, required=True)
+    support_parser.add_argument("--run-resource-receipt", type=Path, required=True)
     run_parser = subparsers.add_parser("run")
     run_parser.add_argument("--output-root", type=Path, required=True)
     run_parser.add_argument("--result", type=Path, required=True)
@@ -948,6 +1044,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             resource_receipt_path=arguments.resource_receipt,
             launch_resource_receipt_path=arguments.launch_resource_receipt,
             launch_run_resource_receipt_path=arguments.launch_run_resource_receipt,
+        )
+        return 0
+    if arguments.action == "support-census":
+        _launch_support_census_worker(
+            output_root=arguments.output_root,
+            result_path=arguments.result,
+            resource_receipt_path=arguments.resource_receipt,
+            run_resource_receipt_path=arguments.run_resource_receipt,
         )
         return 0
     run_registered(

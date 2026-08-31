@@ -8,8 +8,9 @@ description: Use when an HMASD workflow, control-plane, role, skill, dispatch, s
 ## Mission
 
 Make one bounded handoff to one explicitly identified Codex task. The caller writes the contract
-and sends it once; the destination task owns the implementation and returns evidence against the
-contract. This skill is a routing boundary, not a second workflow designer.
+and sends it once; the designated target task is the execution owner, performs the complete
+implementation and verification in that task, and returns evidence against the contract. This
+skill is a routing boundary, not a second workflow designer or an advice-only review route.
 
 The designated outsource target is fixed:
 
@@ -20,6 +21,12 @@ OUTSOURCE_TARGET_THREAD=codex://threads/01a058a7-a26c-77d3-b220-d621a615df79
 Always send to that exact task, using UUID `01a058a7-a26c-77d3-b220-d621a615df79` in
 `send_message_to_thread`. Do not infer, override, rediscover, or replace the target from a title,
 model name, summary, role, or URL.
+
+The target is responsible for the full lifecycle after acceptance: it edits only the contracted
+paths, runs the contracted checks, and returns `OUTSOURCE_RESULT v1`. The caller must not duplicate
+the implementation in another task, repair the target in place, or treat a queued handoff as a
+completed result. If the current task is already the fixed target, execute the contract directly;
+do not dispatch the task to itself or create a recursive replacement.
 
 ## Trigger and boundary
 
@@ -50,7 +57,8 @@ subtask; the default is zero subagents and one serial task.
    a replacement task. An uncertain send is `DISPATCH_UNCERTAIN`, not permission to retry.
 5. Return a compact dispatch receipt. If execution was requested, use `wait_threads` for the same
    target; accept completion only after the destination supplies the result schema and every
-   acceptance item is evidenced. The caller never repairs the destination's work in place.
+   acceptance item is evidenced. The caller never repairs the destination's work in place; the
+   destination remains the sole execution owner for the contracted task.
 
 ## Quick reference
 

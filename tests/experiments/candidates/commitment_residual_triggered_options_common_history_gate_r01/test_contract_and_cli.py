@@ -98,6 +98,9 @@ def test_source_check_rejects_legacy_import_and_generic_state_load(tmp_path: Pat
     (
         ("pilot.py", "import torch\n"),
         ("production.py", "from .training import fit_fresh_predictor\n"),
+        ("support_census.py", "import torch\n"),
+        ("support_census_worker.py", "from .training import fit_fresh_predictor\n"),
+        ("support_census.py", "from . import training\n"),
     ),
 )
 def test_source_check_rejects_pre_admission_torch_dependency_imports(

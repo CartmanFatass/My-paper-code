@@ -150,3 +150,54 @@ prospectively powered object with a narrower proved root class, a justified bloc
 plus direct ordered uniform-without-replacement root generation, or a separately justified
 non-mean decision target. No semantic, relational-mechanism, compiler, churn, equality, harm, or
 package polarity is inferred.
+
+## R02 exact-law and investment convergence — 2026-08-31
+
+The prospective 916-row mean-preserving Bernoulli-IUT now has one locally exact candidate law:
+fixed `L_star="FRRIE-R02-LSTAR-20260831-01"`, direct iid-with-replacement 256-bit roots, packed
+1075-bit ancillary words, exact binary64 `B<M` sampling, total four-contrast computation with no
+stochastic support gate, immutable same-packet technical reruns, and a reduced positive/nonpass
+result map. The complete specification and smaller-object audit are in
+`FRRIE_R02_EXACT_LAW_AND_SMALLER_OBJECT_SYNTHESIS_20260831.md`. An author-only pinned-ref Pro
+request packet exists for independent challenge; it was not sent by the author.
+
+This mathematical closure does not make R02 executable or proportionate. The successful 916-row
+branch costs `4,667,408,384` environment slots and `3,626,968,371,982,336` conventional static
+FLOPs. The 909-row same-claim variant saves only seven rows; roster-mixture, direct-only, lower-
+update, and sequential alternatives either change the claim or lack a dependence-robust
+whole-panel cost advantage. `FRRIE_R02_RESOURCE_DISCRIMINATOR_20260831.md` records production
+disposition `REPAIR_REQUIRED`: no complete production trainer/orchestrator or process-tree monitor
+exists, and the bounded TEST path is not extrapolatable. No probe code is retained.
+
+Direction-level advice is to close investment in the 916/909 sampled-return objects and close the
+standalone FRRIE label after preserving its evidence. This is not arm polarity. If Root registers a
+shared structural direction, transfer only the exact universal all-update/all-transition
+noncontact/absorption question covering every claim-relevant evaluation transition; one witness
+refutes absorption but supplies no expected-return polarity. Reentry requires either a sound
+universal certificate or a materially cheaper,
+preregistered-total-cost expected-return discriminator whose result genuinely selects an
+architecture. Root alone owns the Portfolio lifecycle and any fusion/new-direction action. See
+`FRRIE_R02_DIRECTION_CONVERGENCE_20260831.md`.
+
+## R02 external exact-law intake — 2026-08-31
+
+The archived Pro review accepts the 916-row IUT subject to three exact repairs: the margins are the
+rationals `1/25` and `2/25`, `M=2^1075` at `X=+1` requires 1076-bit capacity or endpoint handling,
+and pre-unseal redraw is legal only for payload-independent envelope failure or a separately proved
+product-uniform accepted-packet law. The same-packet full restart after unsealing remains sound.
+
+The review also supplies a finite exact 909-row boundary law: four independent 64-bit words use
+dyadic floors of the rational boundary probabilities, preserving level and leaving the
+dependence-robust joint-power lower bound above `0.80`. This resolves executability of the 909
+mathematical law but saves only seven rows. A 720-row exact two-mixture IUT saves `21.397%` but
+changes the target to 50/50 roster mixtures and has no independent utility rationale in the
+accepted evidence; it is a different, unaccepted utility object and is not registered as a
+successor. Neither object is executable by the current production tree, which remains
+`REPAIR_REQUIRED`. No result run occurred, and no arm polarity follows from the review.
+
+Standalone closure advice is unchanged. Reentry requires either a materially cheaper same-meaning
+Level-A object or universal complete-return equality through all 512 updates and every
+claim-relevant evaluation transition, not the trivial identical pre-training first action. The new
+cheapest scientific discriminator is a finite minimax/worst-coupling calculation for a material
+row ceiling below 909. See
+`FRRIE_R02_EXACT_LAW_PRO_RESULT_INTAKE_20260831.md`.

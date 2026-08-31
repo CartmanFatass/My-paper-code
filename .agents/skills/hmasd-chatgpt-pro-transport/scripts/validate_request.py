@@ -11,6 +11,20 @@ import sys
 from pathlib import Path
 
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from transport_contract import (  # noqa: E402
+    DEFAULT_FALLBACK_THREAD_ID,
+    packet_artifacts,
+    validate_fallback_thread_id,
+)
+
+
+WORKFLOW_NODES = {"em_innovator", "em_convergence", "portfolio_decision", "legacy"}
+
+
 def _error(message: str) -> int:
     print(json.dumps({"valid": False, "error": message}, ensure_ascii=False))
     return 2
@@ -31,10 +45,55 @@ def validate(request: dict, project_root: Path) -> dict:
     if not isinstance(direction_id, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", direction_id):
         raise ValueError("direction_id must use letters, digits, underscore, or hyphen")
 
-    direction_path = project_root / "docs" / "research" / "candidates" / direction_id / "DIRECTION.md"
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
-    if not direction_path.is_file() or not _portfolio_has_direction(portfolio_path, direction_id):
-        raise ValueError(f"unknown or unregistered direction_id: {direction_id}")
+    workflow_node = request.get("workflow_node", "legacy")
+    if workflow_node not in WORKFLOW_NODES:
+        raise ValueError("workflow_node must be em_innovator, em_convergence, portfolio_decision, or legacy")
+    direction_ids_value = request.get("direction_ids", [direction_id])
+    if not isinstance(direction_ids_value, list) or not direction_ids_value:
+        raise ValueError("direction_ids must be a non-empty list")
+    direction_ids: list[str] = []
+    for value in direction_ids_value:
+        if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", value):
+            raise ValueError("every direction_ids entry must be a registered direction token")
+        if value in direction_ids:
+            raise ValueError(f"duplicate direction_id in scope: {value}")
+        direction_ids.append(value)
+        direction_path = project_root / "docs" / "research" / "candidates" / value / "DIRECTION.md"
+        if not direction_path.is_file() or not _portfolio_has_direction(portfolio_path, value):
+            raise ValueError(f"unknown or unregistered direction_id: {value}")
+
+    if workflow_node == "portfolio_decision":
+        if direction_id != "portfolio":
+            raise ValueError("portfolio_decision requires direction_id=portfolio")
+        expected_binding_key = "portfolio:cross_direction"
+    elif workflow_node in {"em_innovator", "em_convergence"}:
+        if direction_ids != [direction_id]:
+            raise ValueError("an EM decision node requires exactly its direction_id in direction_ids")
+        suffix = "innovator" if workflow_node == "em_innovator" else "convergence"
+        expected_binding_key = f"em:{direction_id}:{suffix}"
+    else:
+        if direction_ids != [direction_id]:
+            raise ValueError("legacy transport accepts exactly one direction")
+        expected_binding_key = f"legacy:{direction_id}"
+
+    conversation_binding_key = request.get("conversation_binding_key", expected_binding_key)
+    if conversation_binding_key != expected_binding_key:
+        raise ValueError(
+            f"conversation_binding_key must be {expected_binding_key} for {workflow_node}"
+        )
+    requested_conversation_id = request.get("requested_conversation_id")
+    if requested_conversation_id is not None and (
+        not isinstance(requested_conversation_id, str)
+        or not re.fullmatch(
+            r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+            requested_conversation_id,
+        )
+    ):
+        raise ValueError("requested_conversation_id must be a UUID when supplied")
+    decision_authority = request.get("decision_authority")
+    if workflow_node != "legacy" and decision_authority != "pro_final":
+        raise ValueError("decision_authority must be pro_final for a Pro decision node")
 
     prompt = request.get("prompt")
     prompt_path_value = request.get("prompt_path")
@@ -91,18 +150,63 @@ def validate(request: dict, project_root: Path) -> dict:
             }
         )
 
+    source_thread_id = request.get("source_thread_id")
+    if source_thread_id is not None:
+        if not isinstance(source_thread_id, str) or not re.fullmatch(
+            r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+            source_thread_id,
+        ):
+            raise ValueError("source_thread_id must be a UUID when supplied")
+
+    fallback_enabled = request.get("fallback_enabled", False)
+    if not isinstance(fallback_enabled, bool):
+        raise ValueError("fallback_enabled must be a boolean when supplied")
+    fallback_thread_id = request.get("fallback_thread_id")
+    if fallback_thread_id is not None:
+        validate_fallback_thread_id(fallback_thread_id)
+    if fallback_enabled:
+        fallback_thread_id = validate_fallback_thread_id(
+            fallback_thread_id or DEFAULT_FALLBACK_THREAD_ID
+        )
+
+    packet = packet_artifacts(
+        request_id,
+        direction_id,
+        [item["filename"] for item in reference_files],
+    )
+
     return {
         "valid": True,
         "request_id": request_id,
         "direction_id": direction_id,
-        "direction_path": str(direction_path.resolve()),
+        "direction_ids": direction_ids,
+        "workflow_node": workflow_node,
+        "conversation_binding_key": conversation_binding_key,
+        "requested_conversation_id": requested_conversation_id,
+        "conversation_reuse_required": bool(request.get("conversation_reuse_required", workflow_node != "legacy")),
+        "decision_authority": decision_authority,
+        "direction_path": str(
+            (project_root / "docs" / "research" / "candidates" / direction_ids[0] / "DIRECTION.md").resolve()
+        ),
+        "direction_paths": [
+            str((project_root / "docs" / "research" / "candidates" / value / "DIRECTION.md").resolve())
+            for value in direction_ids
+        ],
         "source_mode": source_mode,
         "prompt_path": str(prompt_path.resolve()) if prompt_path else None,
         "prompt_bytes": len(prompt_bytes),
         "prompt_sha256": hashlib.sha256(prompt_bytes).hexdigest(),
         "companion_prompt": companion_prompt,
         "companion_prompt_sha256": hashlib.sha256(companion_prompt.encode("utf-8")).hexdigest() if companion_prompt is not None else None,
+        "source_thread_id": source_thread_id,
+        "return_receipt_ready": bool(source_thread_id),
+        "fallback_enabled": fallback_enabled,
+        "fallback_thread_id": fallback_thread_id if fallback_enabled else None,
+        "fallback_thread_url": (
+            f"codex://threads/{fallback_thread_id}" if fallback_enabled else None
+        ),
         "reference_files": reference_files,
+        "packet": packet,
     }
 
 
