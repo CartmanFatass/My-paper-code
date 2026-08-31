@@ -90,10 +90,12 @@ Use the heartbeat automation with `FREQ=MINUTELY;INTERVAL=15` as a wake-up, not 
 busy-wait loop. Each wake performs one bounded status read under a per-conversation
 lock and returns. A 20–60 minute generation may therefore span several wakes. At
 60 minutes, persist the same conversation and mark `WAITING_TIMEOUT`; if the
-conversation ID is known, close the temporary tab after recording that state and
-let the next wake recover from the exact provider URL. Do not create a replacement
-or declare a scientific failure. If identity is not known, keep the tab for human
-attention rather than closing an unrecoverable submission.
+conversation ID is known and the tab is agent-created, close the temporary tab
+after recording that state and let the next wake recover from the exact provider
+URL. Do not create a replacement or declare a scientific failure. If identity is
+not known, keep the tab for human attention rather than closing an unrecoverable
+submission. A user-owned or explicitly mentioned tab remains open unless the user
+has separately authorized its closure.
 
 Natural completion requires an explicit completed status, no active generation
 control, and a complete assistant message in the same conversation. Capture the
