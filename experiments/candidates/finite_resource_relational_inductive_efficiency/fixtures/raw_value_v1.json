@@ -1,0 +1,1 @@
+{"balanced_accuracy":"1/2","complete":true,"schema":"FRRIE_RAW_VALUE_CONTROL_V1","rows":[{"association":"INTACT","id":"PAIR_A","label":0,"raw":["-1","2"]},{"association":"REASSOCIATED","id":"PAIR_A","label":1,"raw":["-1","2"]},{"association":"INTACT","id":"PAIR_B","label":1,"raw":["3","1/2"]},{"association":"REASSOCIATED","id":"PAIR_B","label":0,"raw":["3","1/2"]}]}

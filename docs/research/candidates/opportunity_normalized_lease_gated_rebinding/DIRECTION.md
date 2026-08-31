@@ -17,6 +17,14 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > ROAD beat RAW but lost to NEVER and barely beat SHAM; retain the completed result.
 
+## Portfolio closure — 2026-08-30
+
+Successor-04's exact review is dispositioned as generic-rate-only. The standalone exponential,
+lease, and rebinding object is closed. `IMPLEMENTATION_THRESHOLD.md` transfers only a typed capped
+RATE definition, ratio-of-expectations service/cost accounting, and an outside-class age ceiling to
+SCDMP. No ONLGR result polarity, threshold, endpoint, cost constant, or mechanism label transfers,
+and no new standalone code is eligible.
+
 ## Active successor 04 seven-tick robustness question
 
 Material cycle `2026-08-29.4-robustness-01a04a02-onlgr-successor-04` is a

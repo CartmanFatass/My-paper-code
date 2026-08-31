@@ -41,6 +41,25 @@ class ProductionBackendError(RuntimeError):
     pass
 
 
+def decode_promotion_source_receipt(payload: bytes) -> Mapping[str, int]:
+    raw = bytes(payload)
+    if len(raw) != 24:
+        raise ProductionBackendError("promotion-source receipt size differs")
+    value = {
+        "version": raw[0], "source_mode": raw[1], "cas_applied": raw[2],
+        "retained_by_design": raw[3], "owner_before": raw[4], "owner_after": raw[5],
+        "actuator_after": raw[6], "reserved": raw[7],
+        "tick": int.from_bytes(raw[8:12], "little"),
+        "service_epoch_after": int.from_bytes(raw[12:14], "little"),
+        "next_payload_sequence": int.from_bytes(raw[14:18], "little"),
+        "k_epoch": int.from_bytes(raw[18:20], "little"),
+        "intent_origin_tick": int.from_bytes(raw[20:24], "little"),
+    }
+    if value["version"] != 1 or value["reserved"] != 0 or value["source_mode"] not in (0, 1, 2):
+        raise ProductionBackendError("promotion-source receipt schema differs")
+    return value
+
+
 class _ResetInput(ctypes.Structure):
     _fields_ = [("fixture_key", ctypes.c_uint64), ("master", ctypes.c_uint8 * 32)] + [
         (name, ctypes.c_int32)
@@ -159,6 +178,43 @@ class _ForkOutput(ctypes.Structure):
     ]
 
 
+class _PromotionSourceForkOutput(ctypes.Structure):
+    _fields_ = [
+        ("retain_state", _State), ("transfer_copy_state", _State),
+        ("transfer_shadow_state", _State),
+        ("retain_observation", _StepOutput),
+        ("transfer_copy_observation", _StepOutput),
+        ("transfer_shadow_observation", _StepOutput),
+        ("retain_receipt", ctypes.c_uint8 * 24),
+        ("transfer_copy_receipt", ctypes.c_uint8 * 24),
+        ("transfer_shadow_receipt", ctypes.c_uint8 * 24),
+        *[(name, ctypes.c_int32) for name in (
+            "linearization_owner", "linearization_intent_owner",
+            "linearization_service_epoch", "linearization_intent_epoch",
+            "linearization_next_payload_sequence", "linearization_intent_next_sequence",
+            "linearization_k_epoch", "linearization_intent_k_epoch",
+            "linearization_intent_origin_tick", "linearization_snapshot_tick",
+            "linearization_readiness_tick", "linearization_readiness_snapshot_tick",
+            "linearization_intent_snapshot_tick", "linearization_intent_readiness_tick",
+        )],
+        ("linearization_lineage_lock", ctypes.c_int32 * 2),
+        ("linearization_lineage_sequence", ctypes.c_int32 * 2),
+        ("linearization_controller_hidden", ctypes.c_double * 512),
+        ("parent_byte_immutable", ctypes.c_int32),
+        ("combined_predicate_valid", ctypes.c_int32),
+        ("retain_cas_applied", ctypes.c_int32),
+        ("transfer_copy_cas_applied", ctypes.c_int32),
+        ("transfer_shadow_cas_applied", ctypes.c_int32),
+        ("retained_by_design", ctypes.c_int32),
+        ("application_latency_ticks", ctypes.c_int32),
+        ("receipt_bytes", ctypes.c_int32),
+        ("retain_alpha", ctypes.c_double),
+        ("transfer_copy_alpha", ctypes.c_double),
+        ("transfer_shadow_alpha", ctypes.c_double),
+        ("transaction_energy", ctypes.c_double),
+    ]
+
+
 class _PassiveLabelOutput(ctypes.Structure):
     _fields_ = [
         ("target", ctypes.c_double * 4), ("links", ctypes.c_double * 8),
@@ -264,7 +320,7 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
     lib.dish_rbhr_r06_prod_abi_version.argtypes = []; lib.dish_rbhr_r06_prod_abi_version.restype = ctypes.c_int32
     size_names = (
         "reset_input", "step_input", "state", "step_output", "fork_output", "passive_label_output", "script_output", "recovery_witness_output", "protocol_audit_output",
-        "protocol_transition_output",
+        "protocol_transition_output", "promotion_source_fork_output",
     )
     observed = [lib.dish_rbhr_r06_prod_abi_version()]
     for name in size_names:
@@ -272,7 +328,7 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
         function.argtypes = []; function.restype = ctypes.c_uint64; observed.append(function())
     expected = [ABI_VERSION, *map(ctypes.sizeof, (
         _ResetInput, _StepInput, _State, _StepOutput, _ForkOutput, _PassiveLabelOutput, _ScriptOutput, _RecoveryWitnessOutput, _ProtocolAuditOutput,
-        _ProtocolTransitionOutput,
+        _ProtocolTransitionOutput, _PromotionSourceForkOutput,
     ))]
     if observed != expected:
         raise ProductionBackendError(f"production ABI differs: observed={observed}, expected={expected}")
@@ -282,6 +338,11 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
     lib.dish_rbhr_r06_prod_rollout_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.c_uint64, ctypes.POINTER(_StepOutput)]
     lib.dish_rbhr_r06_prod_passive_labels_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_PassiveLabelOutput)]
     lib.dish_rbhr_r06_prod_first_application_valid_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(ctypes.c_int32)]
+    lib.dish_rbhr_r06_prod_clone_promotion_source_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_PromotionSourceForkOutput)]
+    lib.clone_promotion_source_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_size_t, ctypes.POINTER(_PromotionSourceForkOutput)]
+    lib.clone_promotion_source_batch.restype = ctypes.c_int32
+    lib.dish_rbhr_r06_prod_source_factored_test_fixture_batch.argtypes = [ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepInput)]
+    lib.dish_rbhr_r06_prod_source_factored_test_mismatch_fixture_batch.argtypes = [ctypes.c_int32, ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepInput)]
     lib.dish_rbhr_r06_prod_clone_real_sham_batch.argtypes = [ctypes.POINTER(_State), ctypes.c_uint64, ctypes.POINTER(_ForkOutput)]
     lib.dish_rbhr_r06_prod_script_batch.argtypes = [ctypes.POINTER(_State), ctypes.c_uint64, ctypes.POINTER(_ScriptOutput)]
     lib.dish_rbhr_r06_prod_recovery_witness_batch.argtypes = [ctypes.POINTER(_ResetInput), ctypes.c_uint64, ctypes.POINTER(_RecoveryWitnessOutput)]
@@ -297,6 +358,8 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
     for name in (
         "reset_batch", "reset_selected_batch", "step_batch", "rollout_batch", "passive_labels_batch", "first_application_valid_batch", "clone_real_sham_batch",
         "script_batch", "recovery_witness_batch", "rng_words_batch",
+        "clone_promotion_source_batch", "source_factored_test_fixture_batch",
+        "source_factored_test_mismatch_fixture_batch",
     ):
         getattr(lib, f"dish_rbhr_r06_prod_{name}").restype = ctypes.c_int32
     return lib
@@ -331,6 +394,7 @@ def artifact_identity() -> dict[str, object]:
             "recovery_witness_output": ctypes.sizeof(_RecoveryWitnessOutput),
             "protocol_audit_output": ctypes.sizeof(_ProtocolAuditOutput),
             "protocol_transition_output": ctypes.sizeof(_ProtocolTransitionOutput),
+            "promotion_source_fork_output": ctypes.sizeof(_PromotionSourceForkOutput),
         },
         "accepted_native_rng_generator_service": gate,
         "full_reset_step_cpp": True,
@@ -549,6 +613,167 @@ class NativeBatch:
             raise ProductionBackendError(f"native fork clone rejected state ({code})")
         return np.frombuffer(outputs, dtype=np.dtype(_ForkOutput), count=self.width).copy()
 
+    def clone_promotion_source(self, rows: np.ndarray) -> np.ndarray:
+        """Validate and clone RETAIN/COPY/SHADOW in one nonmutating native call."""
+
+        values = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
+        if values.shape != (self.width,):
+            raise ProductionBackendError("promotion-source rows differ")
+        before = bytes(self._states)
+        outputs = (_PromotionSourceForkOutput * self.width)()
+        code = require_cpp_batched_production_backend().clone_promotion_source_batch(
+            self._states, values.ctypes.data_as(ctypes.POINTER(_StepInput)), self.width, outputs,
+        )
+        if code:
+            raise ProductionBackendError(f"native promotion-source clone rejected batch ({code})")
+        if bytes(self._states) != before:
+            raise ProductionBackendError("native promotion-source clone mutated parent")
+        raw = np.frombuffer(outputs, dtype=np.dtype(_PromotionSourceForkOutput), count=self.width).copy()
+        if not np.all(raw["parent_byte_immutable"] == 1):
+            raise ProductionBackendError("native promotion-source immutability witness differs")
+        if not np.all(raw["combined_predicate_valid"] == 1):
+            raise ProductionBackendError("native promotion-source predicate witness differs")
+        exact = (
+            np.all(raw["retain_cas_applied"] == 0) and
+            np.all(raw["transfer_copy_cas_applied"] == 1) and
+            np.all(raw["transfer_shadow_cas_applied"] == 1) and
+            np.all(raw["retained_by_design"] == 1) and
+            np.all(raw["application_latency_ticks"] == 1) and
+            np.all(raw["receipt_bytes"] == 24) and
+            np.all(raw["retain_alpha"] == -1.0) and
+            np.all(raw["transfer_copy_alpha"] == 0.0) and
+            np.all(raw["transfer_shadow_alpha"] == 1.0) and
+            np.all(raw["transaction_energy"] == 0.48)
+        )
+        if not exact:
+            raise ProductionBackendError("native promotion-source transaction contract differs")
+        for index in range(self.width):
+            for field in ("retain_state", "transfer_copy_state", "transfer_shadow_state"):
+                branch = raw[index][field]
+                parent = self._states[index]
+                if (int(branch["tick"]) != parent.tick or
+                        int(branch["protocol_bytes"]) - parent.protocol_bytes != 24 or
+                        abs(float(branch["total_energy"]) - parent.total_energy - 0.48) > 1e-12):
+                    raise ProductionBackendError("native promotion-source equal transaction accounting differs")
+        return raw
+
+    def clone_promotion_source_batches(
+        self, rows: np.ndarray,
+    ) -> tuple[Mapping[str, "NativeBatch"], Mapping[str, Mapping[str, np.ndarray]], Mapping[str, object]]:
+        current = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
+        raw = self.clone_promotion_source(current)
+        names = ("RETAIN", "TRANSFER_COPY", "TRANSFER_SHADOW")
+        state_fields = ("retain_state", "transfer_copy_state", "transfer_shadow_state")
+        observation_fields = ("retain_observation", "transfer_copy_observation", "transfer_shadow_observation")
+        batches = {}
+        for name, state_field, observation_field in zip(names, state_fields, observation_fields):
+            batch = NativeBatch._from_states(tuple(
+                _State.from_buffer_copy(raw[index][state_field].tobytes()) for index in range(self.width)
+            ))
+            for index in range(self.width):
+                batch._outputs[index] = _StepOutput.from_buffer_copy(raw[index][observation_field].tobytes())
+            batches[name] = batch
+        observations = {}
+        for name, field in zip(names, observation_fields):
+            output = np.ascontiguousarray(raw[field])
+            observations[name] = {
+                "actor": output["actor"].reshape(self.width, 4, 54).copy(),
+                "critic": output["critic"].reshape(self.width, 58).copy(),
+                **{key: output[key].copy() for key in (
+                    "owner", "service_epoch", "next_payload_sequence", "handover_used",
+                    "invalid_commit", "tick", "protocol_bytes", "min_separation", "total_energy",
+                    "snapshot_accepted", "readiness_accepted", "application_reason", "cas_applied",
+                    "actuator_owner", "protocol_wire_messages", "version_match",
+                )},
+            }
+        raw_receipt_fields = ("retain_receipt", "transfer_copy_receipt", "transfer_shadow_receipt")
+        raw_receipts = {
+            name: tuple(bytes(raw[index][field]) for index in range(self.width))
+            for name, field in zip(names, raw_receipt_fields)
+        }
+        for index in range(self.width):
+            lane_receipts = tuple(raw_receipts[name][index] for name in names)
+            if any(len(value) != 24 for value in lane_receipts):
+                raise ProductionBackendError("promotion-source raw receipt size differs")
+            state = self._states[index]; row = raw[index]
+            direct_fields = {
+                "linearization_owner": state.owner,
+                "linearization_intent_owner": state.intent_owner,
+                "linearization_service_epoch": state.service_epoch,
+                "linearization_intent_epoch": state.intent_epoch,
+                "linearization_next_payload_sequence": state.next_payload_sequence,
+                "linearization_intent_next_sequence": state.intent_next_sequence,
+                "linearization_k_epoch": state.k_epoch,
+                "linearization_intent_k_epoch": state.intent_k_epoch,
+                "linearization_intent_origin_tick": state.intent_origin_tick,
+                "linearization_snapshot_tick": state.snapshot_tick,
+                "linearization_readiness_tick": state.readiness_tick,
+                "linearization_readiness_snapshot_tick": state.readiness_snapshot_tick,
+                "linearization_intent_snapshot_tick": state.intent_snapshot_tick,
+                "linearization_intent_readiness_tick": state.intent_readiness_tick,
+            }
+            if any(int(row[name]) != int(value) for name, value in direct_fields.items()):
+                raise ProductionBackendError("promotion-source direct linearization tuple differs")
+            if (not np.array_equal(row["linearization_lineage_lock"], np.asarray(state.lineage_lock)) or
+                    not np.array_equal(row["linearization_lineage_sequence"], np.asarray(state.lineage_sequence)) or
+                    not np.array_equal(row["linearization_controller_hidden"], current["controller_hidden"][index])):
+                raise ProductionBackendError("promotion-source direct lineage or recurrent tuple differs")
+            for mode, name, branch_field in zip(range(3), names, state_fields):
+                receipt = decode_promotion_source_receipt(raw_receipts[name][index]); branch = raw[index][branch_field]
+                expected_cas = 0 if mode == 0 else 1; expected_retained = 1 if mode == 0 else 0
+                if (
+                    receipt["source_mode"] != mode or receipt["cas_applied"] != expected_cas or
+                    receipt["retained_by_design"] != expected_retained or
+                    receipt["owner_before"] != state.owner or receipt["owner_after"] != int(branch["owner"]) or
+                    receipt["actuator_after"] != int(branch["actuator_owner"]) or
+                    receipt["tick"] != int(branch["tick"]) or
+                    receipt["service_epoch_after"] != int(branch["service_epoch"]) or
+                    receipt["next_payload_sequence"] != int(branch["next_payload_sequence"]) or
+                    receipt["k_epoch"] != int(branch["k_epoch"]) or
+                    receipt["intent_origin_tick"] != state.intent_origin_tick
+                ):
+                    raise ProductionBackendError("promotion-source receipt/state semantics differ")
+        state_observation_fields = (
+            "owner", "service_epoch", "next_payload_sequence", "handover_used", "invalid_commit",
+            "tick", "protocol_bytes", "min_separation", "total_energy", "snapshot_accepted",
+            "readiness_accepted", "application_reason", "cas_applied", "actuator_owner",
+            "protocol_wire_messages",
+        )
+        for state_field, observation_field in zip(state_fields, observation_fields):
+            for index in range(self.width):
+                state = raw[index][state_field]; observation = raw[index][observation_field]
+                if any(state[name] != observation[name] for name in state_observation_fields):
+                    raise ProductionBackendError("native promotion-source observation/state binding differs")
+        metadata = {
+            "raw_receipts": raw_receipts,
+            "linearization_tuples": tuple({
+                "owner": int(raw[index]["linearization_owner"]),
+                "intent_owner": int(raw[index]["linearization_intent_owner"]),
+                "service_epoch": int(raw[index]["linearization_service_epoch"]),
+                "intent_epoch": int(raw[index]["linearization_intent_epoch"]),
+                "next_payload_sequence": int(raw[index]["linearization_next_payload_sequence"]),
+                "intent_next_sequence": int(raw[index]["linearization_intent_next_sequence"]),
+                "k_epoch": int(raw[index]["linearization_k_epoch"]),
+                "intent_k_epoch": int(raw[index]["linearization_intent_k_epoch"]),
+                "intent_origin_tick": int(raw[index]["linearization_intent_origin_tick"]),
+                "snapshot_tick": int(raw[index]["linearization_snapshot_tick"]),
+                "readiness_tick": int(raw[index]["linearization_readiness_tick"]),
+                "readiness_snapshot_tick": int(raw[index]["linearization_readiness_snapshot_tick"]),
+                "intent_snapshot_tick": int(raw[index]["linearization_intent_snapshot_tick"]),
+                "intent_readiness_tick": int(raw[index]["linearization_intent_readiness_tick"]),
+                "lineage_lock": tuple(map(int, raw[index]["linearization_lineage_lock"])),
+                "lineage_sequence": tuple(map(int, raw[index]["linearization_lineage_sequence"])),
+                "controller_hidden": tuple(map(float, raw[index]["linearization_controller_hidden"])),
+            } for index in range(self.width)),
+            "parent_byte_immutable": True, "combined_predicate_valid": True,
+            "application_latency_ticks": 1, "receipt_bytes": 24,
+            "transaction_energy": 0.48,
+            "retained_by_design": {"RETAIN": 1, "TRANSFER_COPY": 0, "TRANSFER_SHADOW": 0},
+            "cas_applied": {"RETAIN": 0, "TRANSFER_COPY": 1, "TRANSFER_SHADOW": 1},
+            "materialized_before_policy_forward": True,
+        }
+        return batches, observations, metadata
+
     def first_application_valid(self, rows: np.ndarray) -> np.ndarray:
         values = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
         if values.shape != (self.width,):
@@ -607,6 +832,45 @@ def TestProtocolNativeBatch(width: int, authority: TestAuthority) -> NativeBatch
 
     authority.require_test_only()
     return NativeBatch(_protocol_test_reset_inputs(width))
+
+
+def source_factored_test_fixture(
+    width: int, authority: TestAuthority,
+) -> tuple[NativeBatch, np.ndarray]:
+    """Return a native-owned application-boundary fixture for conformance only."""
+
+    authority.require_test_only()
+    if width <= 0 or width > 32:
+        raise ProductionBackendError("source-factored TEST width differs")
+    states = (_State * width)(); rows = (_StepInput * width)()
+    code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_source_factored_test_fixture_batch(
+        width, states, rows,
+    )
+    if code:
+        raise ProductionBackendError(f"native source-factored fixture rejected batch ({code})")
+    batch = NativeBatch._from_states(tuple(states[index] for index in range(width)))
+    values = np.frombuffer(rows, dtype=np.dtype(_StepInput), count=width).copy()
+    return batch, values
+
+
+def source_factored_mismatch_test_fixture(
+    width: int, mismatch: int, authority: TestAuthority,
+) -> tuple[NativeBatch, np.ndarray]:
+    """Native-owned invalid linearization fixtures; Python never edits host fields."""
+
+    authority.require_test_only()
+    if width <= 0 or width > 32 or mismatch not in tuple(range(1, 25)):
+        raise ProductionBackendError("source-factored mismatch TEST fixture differs")
+    states = (_State * width)(); rows = (_StepInput * width)()
+    code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_source_factored_test_mismatch_fixture_batch(
+        mismatch, width, states, rows,
+    )
+    if code:
+        raise ProductionBackendError(f"native source-factored mismatch fixture rejected ({code})")
+    return (
+        NativeBatch._from_states(tuple(states[index] for index in range(width))),
+        np.frombuffer(rows, dtype=np.dtype(_StepInput), count=width).copy(),
+    )
 
 
 def _test_reset_inputs(width: int, *, test_mode: int = 1) -> tuple[_ResetInput, ...]:

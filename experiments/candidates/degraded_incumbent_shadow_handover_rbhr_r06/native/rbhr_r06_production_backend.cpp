@@ -102,6 +102,24 @@ struct ForkOutput {
   std::uint8_t real_telemetry_sha256[32], sham_telemetry_sha256[32];
   std::int32_t byte_identical_telemetry;
 };
+struct PromotionSourceForkOutput {
+  HostState retain_state, transfer_copy_state, transfer_shadow_state;
+  StepOutput retain_observation, transfer_copy_observation, transfer_shadow_observation;
+  std::uint8_t retain_receipt[24], transfer_copy_receipt[24], transfer_shadow_receipt[24];
+  std::int32_t linearization_owner, linearization_intent_owner;
+  std::int32_t linearization_service_epoch, linearization_intent_epoch;
+  std::int32_t linearization_next_payload_sequence, linearization_intent_next_sequence;
+  std::int32_t linearization_k_epoch, linearization_intent_k_epoch;
+  std::int32_t linearization_intent_origin_tick, linearization_snapshot_tick;
+  std::int32_t linearization_readiness_tick, linearization_readiness_snapshot_tick;
+  std::int32_t linearization_intent_snapshot_tick, linearization_intent_readiness_tick;
+  std::int32_t linearization_lineage_lock[2], linearization_lineage_sequence[2];
+  double linearization_controller_hidden[512];
+  std::int32_t parent_byte_immutable, combined_predicate_valid;
+  std::int32_t retain_cas_applied, transfer_copy_cas_applied, transfer_shadow_cas_applied;
+  std::int32_t retained_by_design, application_latency_ticks, receipt_bytes;
+  double retain_alpha, transfer_copy_alpha, transfer_shadow_alpha, transaction_energy;
+};
 struct PassiveLabelOutput {
   double target[4], links[8];
   std::int32_t missing[4], q_labels[20], q_mask, next_mask, q_copy_index;
@@ -278,6 +296,25 @@ inline void critic_row(const HostState& s, const PhysicsTick& ph, bool renew, do
   x[cursor++]=s.k_active==4;x[cursor++]=s.k_active==8;x[cursor++]=s.k_active==12;x[cursor++]=s.k_epoch;x[cursor++]=s.countdown;x[cursor++]=renew;x[cursor++]=s.pending_switch;x[cursor++]=s.terminal;
 }
 
+inline void materialize_observation(const HostState& s, StepOutput& out) {
+  std::memset(&out,0,sizeof(out));
+  const PhysicsTick ph=physics_tick(s);const bool renew=s.countdown==0;
+  for(int i=0;i<2;++i)for(int c=0;c<2;++c)actor_row(s,ph,i,c,renew,out.actor+(i*2+c)*54);
+  critic_row(s,ph,renew,out.critic);
+  out.owner=s.owner;out.service_epoch=s.service_epoch;out.next_payload_sequence=s.next_payload_sequence;
+  out.handover_used=s.handover_used;out.invalid_commit=s.invalid_commit;out.token_gap=s.token_gap;
+  out.dual_owner=s.dual_owner;out.dual_payload=s.dual_payload;out.buffer_clear=s.buffer_clear;
+  out.command_slew_breach=s.command_slew_breach;out.separation_breach=s.separation_breach;
+  out.tick=s.tick;out.protocol_bytes=s.protocol_bytes;out.min_separation=s.min_separation;
+  out.total_energy=s.total_energy;out.snapshot_accepted=s.snapshot_accepted;
+  out.readiness_accepted=s.readiness_accepted;out.application_reason=s.application_reason;
+  out.cas_applied=s.cas_applied;out.actuator_owner=s.actuator_owner;
+  out.protocol_wire_messages=s.protocol_wire_messages;
+  std::memcpy(out.snapshot_payload,s.accepted_snapshot_payload,sizeof(out.snapshot_payload));
+  std::memcpy(out.readiness_candidate,s.accepted_readiness_candidate,sizeof(out.readiness_candidate));
+  out.version_match=s.readiness_accepted&&s.snapshot_accepted&&s.readiness_snapshot_tick==s.snapshot_tick;
+}
+
 inline double predictive_q95(const double* q){double dp[21]={};dp[0]=1.0;for(int j=0;j<20;++j){const double p=std::clamp(q[j],1e-6,1.0-1e-6);for(int m=j+1;m>=0;--m){const double keep=dp[m]*(1.0-p),add=m>0?dp[m-1]*p:0.0;dp[m]=keep+add;}}for(int m=20;m>=0;--m){double tail=0;for(int k=m;k<=20;++k)tail+=dp[k];if(tail>=0.95)return m/20.0;}return 0.0;}
 inline double mahalanobis_position(const StepInput& in){const double dx=in.prediction_mean[0]-in.prediction_mean[4],dy=in.prediction_mean[1]-in.prediction_mean[5];const double s00=in.prediction_covariance[0]+in.prediction_covariance[16]+1e-6,s01=in.prediction_covariance[1]+in.prediction_covariance[17],s11=in.prediction_covariance[5]+in.prediction_covariance[21]+1e-6,det=s00*s11-s01*s01;if(!(det>0)||!std::isfinite(det))return std::numeric_limits<double>::infinity();return (dx*dx*s11-2*dx*dy*s01+dy*dy*s00)/det;}
 inline bool native_origin_certificate(const HostState& s,const StepInput& in,bool renew){if(!renew||s.handover_used||!s.prepare_latched||s.warmup<10||!s.source_exists[0]||!s.source_exists[1]||s.source_sequence[0]!=s.source_sequence[1]||s.terminal)return false;const double dm=mahalanobis_position(in),q95=predictive_q95(in.service_q);if(!std::isfinite(dm)||dm>5.99||q95<0.60||separation(s)<15.0)return false;for(int i=0;i<2;++i){Vec2 previous{s.a[2*i],s.a[2*i+1]},raw{in.raw_action[2*i],in.raw_action[2*i+1]},bounded=clipped(raw,3.0);if(norm({bounded.x-previous.x,bounded.y-previous.y})>1.5+1e-12)return false;}return true;}
@@ -432,6 +469,122 @@ inline bool first_application_valid(const HostState& s,const StepInput& in){
   return true;
 }
 
+inline bool source_factored_combined_predicate(const HostState& s,const StepInput& in){
+  const auto boolean=[](std::int32_t value){return value==0||value==1;};
+  if((s.test_mode!=1&&s.test_mode!=2)||!std::isfinite(s.pending_intent_margin))return false;
+  for(const auto value:{s.initialized,s.pending_intent,s.intent_certificate,s.handover_used,
+      s.source_exists[0],s.source_exists[1],s.snapshot_accepted,s.readiness_accepted})if(!boolean(value))return false;
+  if((s.owner!=0&&s.owner!=1)||(s.intent_owner!=0&&s.intent_owner!=1)||
+     (s.actuator_owner!=0&&s.actuator_owner!=1)||s.owner!=s.actuator_owner)return false;
+  const std::int32_t nonnegative[]={s.tick,s.service_epoch,s.next_payload_sequence,s.k_epoch,
+    s.intent_epoch,s.intent_next_sequence,s.intent_k_epoch,s.intent_origin_tick,s.snapshot_tick,
+    s.readiness_tick,s.readiness_snapshot_tick,s.intent_snapshot_tick,s.intent_readiness_tick,
+    s.source_sequence[0],s.source_sequence[1],s.lineage_sequence[0],s.lineage_sequence[1]};
+  for(const auto value:nonnegative)if(value<0)return false;
+  if(s.service_epoch>65535||s.intent_epoch>65535||s.k_epoch>65535||s.intent_k_epoch>65535)return false;
+  for(int i=0;i<2;++i)if((s.lineage_lock[i]!=0&&s.lineage_lock[i]!=1)||!std::isfinite(s.battery[i]))return false;
+  for(double value:s.p)if(!std::isfinite(value))return false;
+  for(double value:s.v)if(!std::isfinite(value))return false;
+  for(double value:s.a)if(!std::isfinite(value))return false;
+  for(double value:in.raw_action)if(!std::isfinite(value))return false;
+  if(!first_application_valid(s,in)||s.test_mode==0)return false;
+  if(!s.snapshot_accepted||!s.readiness_accepted)return false;
+  if(s.snapshot_tick!=s.intent_snapshot_tick||s.snapshot_tick!=s.intent_origin_tick)return false;
+  if(s.readiness_tick!=s.intent_readiness_tick||s.readiness_tick!=s.intent_origin_tick-1)return false;
+  if(s.readiness_snapshot_tick!=s.snapshot_tick)return false;
+  if(!s.lineage_lock[0]||!s.lineage_lock[1])return false;
+  if(s.lineage_sequence[0]!=s.source_sequence[0]||s.lineage_sequence[1]!=s.source_sequence[1])return false;
+  if(s.lineage_sequence[0]!=s.lineage_sequence[1])return false;
+  for(std::size_t j=0;j<512;++j)if(!std::isfinite(in.controller_hidden[j]))return false;
+  return true;
+}
+
+inline void promote_source_factored(HostState& s,int old_owner,int source_mode){
+  const int standby=1-old_owner,old_i=(2*old_owner)*128,old_s=(2*old_owner+1)*128;
+  const int new_i=(2*standby)*128,new_s=(2*standby+1)*128;
+  double incumbent_active[128]={},selected_source[128]={};
+  std::memcpy(incumbent_active,s.controller_hidden+old_i,sizeof(incumbent_active));
+  if(source_mode==1)std::memcpy(selected_source,incumbent_active,sizeof(selected_source));
+  else std::memcpy(selected_source,s.controller_hidden+new_s,sizeof(selected_source));
+  for(int j=0;j<128;++j)s.controller_hidden[new_i+j]=std::clamp(selected_source[j],-1.0,1.0);
+  std::memcpy(s.controller_hidden+old_s,incumbent_active,sizeof(incumbent_active));
+  s.actuator_owner=standby;
+}
+
+inline std::array<std::uint8_t,24> source_factored_receipt(
+    std::uint8_t mode,std::uint8_t cas,std::uint8_t retained,std::uint8_t owner_before,
+    std::uint8_t owner_after,std::uint8_t actuator_after,std::uint32_t tick,
+    std::uint16_t epoch_after,std::uint32_t next_sequence,std::uint16_t k_epoch,
+    std::uint32_t intent_origin_tick){
+  std::array<std::uint8_t,24>out{};std::size_t p=0;put_u8(out,p,1);put_u8(out,p,mode);
+  put_u8(out,p,cas);put_u8(out,p,retained);put_u8(out,p,owner_before);put_u8(out,p,owner_after);
+  put_u8(out,p,actuator_after);put_u8(out,p,0);put_u32(out,p,tick);put_u16(out,p,epoch_after);
+  put_u32(out,p,next_sequence);put_u16(out,p,k_epoch);put_u32(out,p,intent_origin_tick);return out;
+}
+
+inline void invalidate_source_transaction(HostState& s){
+  s.pending_intent=0;s.intent_owner=0;s.intent_epoch=0;s.intent_next_sequence=0;s.intent_k_epoch=0;
+  s.intent_certificate=0;s.intent_origin_tick=0;s.intent_readiness_tick=0;s.intent_snapshot_tick=0;
+  s.pending_snapshot=0;s.pending_readiness=0;s.snapshot_accepted=0;s.readiness_accepted=0;
+  s.lineage_lock[0]=s.lineage_lock[1]=0;s.lineage_sequence[0]=s.lineage_sequence[1]=0;
+}
+
+inline int clone_promotion_source_one(const HostState& parent,const StepInput& current,PromotionSourceForkOutput& out){
+  std::memset(&out,0,sizeof(out));if(!source_factored_combined_predicate(parent,current))return 2;
+  const HostState before=parent;out.retain_state=parent;out.transfer_copy_state=parent;out.transfer_shadow_state=parent;
+  const int incumbent=parent.owner,recipient=1-incumbent;
+  for(HostState* branch:{&out.retain_state,&out.transfer_copy_state,&out.transfer_shadow_state}){
+    std::memcpy(branch->controller_hidden,current.controller_hidden,sizeof(branch->controller_hidden));
+    ++branch->service_epoch;branch->handover_used=1;branch->application_reason=0;
+    branch->total_energy+=0.48;branch->battery[incumbent]=std::max(0.0,branch->battery[incumbent]-0.48);
+    invalidate_source_transaction(*branch);
+  }
+  out.retain_state.cas_applied=0;out.retain_state.actuator_owner=incumbent;
+  promote_source_factored(out.transfer_copy_state,incumbent,1);
+  out.transfer_copy_state.owner=recipient;out.transfer_copy_state.cas_applied=1;
+  promote_source_factored(out.transfer_shadow_state,incumbent,2);
+  out.transfer_shadow_state.owner=recipient;out.transfer_shadow_state.cas_applied=1;
+  const auto retain_receipt=source_factored_receipt(0,0,1,static_cast<std::uint8_t>(incumbent),
+    static_cast<std::uint8_t>(incumbent),static_cast<std::uint8_t>(incumbent),parent.tick,
+    static_cast<std::uint16_t>(parent.service_epoch+1),static_cast<std::uint32_t>(parent.next_payload_sequence),
+    static_cast<std::uint16_t>(parent.k_epoch),static_cast<std::uint32_t>(parent.intent_origin_tick));
+  const auto copy_receipt=source_factored_receipt(1,1,0,static_cast<std::uint8_t>(incumbent),
+    static_cast<std::uint8_t>(recipient),static_cast<std::uint8_t>(recipient),parent.tick,
+    static_cast<std::uint16_t>(parent.service_epoch+1),static_cast<std::uint32_t>(parent.next_payload_sequence),
+    static_cast<std::uint16_t>(parent.k_epoch),static_cast<std::uint32_t>(parent.intent_origin_tick));
+  const auto shadow_receipt=source_factored_receipt(2,1,0,static_cast<std::uint8_t>(incumbent),
+    static_cast<std::uint8_t>(recipient),static_cast<std::uint8_t>(recipient),parent.tick,
+    static_cast<std::uint16_t>(parent.service_epoch+1),static_cast<std::uint32_t>(parent.next_payload_sequence),
+    static_cast<std::uint16_t>(parent.k_epoch),static_cast<std::uint32_t>(parent.intent_origin_tick));
+  for(HostState* branch:{&out.retain_state,&out.transfer_copy_state,&out.transfer_shadow_state}){
+    branch->protocol_bytes+=24;++branch->protocol_wire_messages;
+  }
+  materialize_observation(out.retain_state,out.retain_observation);
+  materialize_observation(out.transfer_copy_state,out.transfer_copy_observation);
+  materialize_observation(out.transfer_shadow_state,out.transfer_shadow_observation);
+  std::memcpy(out.retain_receipt,retain_receipt.data(),retain_receipt.size());
+  std::memcpy(out.transfer_copy_receipt,copy_receipt.data(),copy_receipt.size());
+  std::memcpy(out.transfer_shadow_receipt,shadow_receipt.data(),shadow_receipt.size());
+  out.linearization_owner=parent.owner;out.linearization_intent_owner=parent.intent_owner;
+  out.linearization_service_epoch=parent.service_epoch;out.linearization_intent_epoch=parent.intent_epoch;
+  out.linearization_next_payload_sequence=parent.next_payload_sequence;
+  out.linearization_intent_next_sequence=parent.intent_next_sequence;
+  out.linearization_k_epoch=parent.k_epoch;out.linearization_intent_k_epoch=parent.intent_k_epoch;
+  out.linearization_intent_origin_tick=parent.intent_origin_tick;out.linearization_snapshot_tick=parent.snapshot_tick;
+  out.linearization_readiness_tick=parent.readiness_tick;
+  out.linearization_readiness_snapshot_tick=parent.readiness_snapshot_tick;
+  out.linearization_intent_snapshot_tick=parent.intent_snapshot_tick;
+  out.linearization_intent_readiness_tick=parent.intent_readiness_tick;
+  std::memcpy(out.linearization_lineage_lock,parent.lineage_lock,sizeof(out.linearization_lineage_lock));
+  std::memcpy(out.linearization_lineage_sequence,parent.lineage_sequence,sizeof(out.linearization_lineage_sequence));
+  std::memcpy(out.linearization_controller_hidden,current.controller_hidden,sizeof(out.linearization_controller_hidden));
+  out.parent_byte_immutable=std::memcmp(&before,&parent,sizeof(parent))==0;out.combined_predicate_valid=1;
+  out.retain_cas_applied=0;out.transfer_copy_cas_applied=1;out.transfer_shadow_cas_applied=1;
+  out.retained_by_design=1;out.application_latency_ticks=1;out.receipt_bytes=24;
+  out.retain_alpha=-1.0;out.transfer_copy_alpha=0.0;out.transfer_shadow_alpha=1.0;out.transaction_energy=0.48;
+  return out.parent_byte_immutable?0:3;
+}
+
 inline int passive_labels_one(const HostState& source,const StepInput& input,PassiveLabelOutput& out){
   std::memset(&out,0,sizeof(out));if(!source.initialized)return 1;
   HostState future=source;StepOutput next{};const int next_rc=step_one(future,input,next);if(next_rc)return next_rc;
@@ -530,6 +683,7 @@ DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_script_output_size(){return sizeof(
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_recovery_witness_output_size(){return sizeof(RecoveryWitnessOutput);}
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_protocol_audit_output_size(){return sizeof(ProtocolAuditOutput);}
 DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_protocol_transition_output_size(){return sizeof(ProtocolTransitionOutput);}
+DISH_EXPORT std::uint64_t dish_rbhr_r06_prod_promotion_source_fork_output_size(){return sizeof(PromotionSourceForkOutput);}
 
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_reset_batch(const ResetInput* in,std::uint64_t count,HostState* state,StepOutput* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){if(!validate_reset(in[i]))return 2;reset_one(in[i],state[i],out[i]);}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_reset_selected_batch(const ResetInput* in,const std::int32_t* selected,std::uint64_t count,HostState* state,StepOutput* out){if(!in||!selected||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i)if(selected[i]){if(!validate_reset(in[i]))return 2;reset_one(in[i],state[i],out[i]);}return 0;}
@@ -537,6 +691,61 @@ DISH_EXPORT std::int32_t dish_rbhr_r06_prod_step_batch(HostState* state,const St
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_rollout_batch(HostState* state,const StepInput* in,std::uint64_t steps,std::uint64_t count,StepOutput* out){if(!in||!state||!out||count==0||steps==0)return 1;for(std::uint64_t t=0;t<steps;++t)for(std::uint64_t i=0;i<count;++i){const int rc=step_one(state[i],in[t*count+i],out[t*count+i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_passive_labels_batch(const HostState* state,const StepInput* in,std::uint64_t count,PassiveLabelOutput* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){const int rc=passive_labels_one(state[i],in[i],out[i]);if(rc)return rc;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_first_application_valid_batch(const HostState* state,const StepInput* in,std::uint64_t count,std::int32_t* out){if(!in||!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i)out[i]=first_application_valid(state[i],in[i])?1:0;return 0;}
+DISH_EXPORT std::int32_t clone_promotion_source_batch(const HostState* parent,const StepInput* current,std::size_t count,PromotionSourceForkOutput* out){if(!parent||!current||!out||count==0)return 1;for(std::size_t i=0;i<count;++i)if(!source_factored_combined_predicate(parent[i],current[i]))return 2;for(std::size_t i=0;i<count;++i){const int rc=clone_promotion_source_one(parent[i],current[i],out[i]);if(rc)return rc;}return 0;}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_clone_promotion_source_batch(const HostState* parent,const StepInput* current,std::uint64_t count,PromotionSourceForkOutput* out){return clone_promotion_source_batch(parent,current,static_cast<std::size_t>(count),out);}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_source_factored_test_fixture_batch(std::uint64_t count,HostState* state,StepInput* current){
+  if(!state||!current||count==0)return 1;
+  for(std::uint64_t i=0;i<count;++i){
+    ResetInput reset{};reset.fixture_key=i+1;reset.test_mode=2;reset.package=static_cast<std::int32_t>(i%2);
+    reset.reflection=1;reset.initial_owner=static_cast<std::int32_t>(i%2);reset.qa_owner=reset.initial_owner;reset.k_initial=4;reset.k_new=4;
+    reset.switch_tick=500;reset.tau_d_tick=420;reset.phase=0;reset.route_speed=4;
+    reset.turn_magnitude_deg=25;reset.turn_sign=1;reset.initial_ux=40;reset.initial_uy=120;
+    StepOutput initial{};reset_one(reset,state[i],initial);HostState& s=state[i];
+    s.tick=100;s.countdown=1;s.source_exists[0]=s.source_exists[1]=1;
+    s.source_sequence[0]=s.source_sequence[1]=7;s.source_tick[0]=s.source_tick[1]=99;
+    s.snapshot_accepted=1;s.snapshot_tick=99;s.readiness_accepted=1;s.readiness_tick=98;s.readiness_snapshot_tick=99;
+    s.pending_intent=1;s.pending_intent_margin=12.0;s.intent_owner=s.owner;s.intent_epoch=s.service_epoch;
+    s.intent_next_sequence=s.next_payload_sequence;s.intent_k_epoch=s.k_epoch;s.intent_certificate=1;
+    s.intent_origin_tick=99;s.intent_readiness_tick=98;s.intent_snapshot_tick=99;
+    s.lineage_lock[0]=s.lineage_lock[1]=1;s.lineage_sequence[0]=s.lineage_sequence[1]=7;
+    std::memset(&current[i],0,sizeof(current[i]));for(int d=0;d<4;++d)current[i].prediction_covariance[d*4+d]=4.0;
+    for(double& q:current[i].service_q)q=0.8;current[i].promotion_alpha=1.0;
+    for(int j=0;j<128;++j){current[i].controller_hidden[j]=0.25;current[i].controller_hidden[128+j]=0.30;
+      current[i].controller_hidden[256+j]=-0.25;current[i].controller_hidden[384+j]=-0.75;}
+  }
+  return 0;
+}
+DISH_EXPORT std::int32_t dish_rbhr_r06_prod_source_factored_test_mismatch_fixture_batch(std::int32_t mismatch,std::uint64_t count,HostState* state,StepInput* current){
+  const int rc=dish_rbhr_r06_prod_source_factored_test_fixture_batch(count,state,current);if(rc)return rc;
+  for(std::uint64_t i=0;i<count;++i){
+    if(mismatch==1)state[i].intent_owner=1-state[i].intent_owner;
+    else if(mismatch==2)++state[i].intent_epoch;
+    else if(mismatch==3)++state[i].intent_next_sequence;
+    else if(mismatch==4)++state[i].intent_k_epoch;
+    else if(mismatch==5)++state[i].intent_origin_tick;
+    else if(mismatch==6)++state[i].intent_snapshot_tick;
+    else if(mismatch==7)++state[i].intent_readiness_tick;
+    else if(mismatch==8)++state[i].readiness_snapshot_tick;
+    else if(mismatch==9)state[i].lineage_lock[1]=0;
+    else if(mismatch==10)++state[i].lineage_sequence[1];
+    else if(mismatch==11)state[i].owner=2;
+    else if(mismatch==12)current[i].raw_action[0]=std::numeric_limits<double>::quiet_NaN();
+    else if(mismatch==13)current[i].raw_action[0]=std::numeric_limits<double>::infinity();
+    else if(mismatch==14)current[i].controller_hidden[0]=std::numeric_limits<double>::quiet_NaN();
+    else if(mismatch==15)current[i].controller_hidden[0]=std::numeric_limits<double>::infinity();
+    else if(mismatch==16)state[i].pending_intent_margin=std::numeric_limits<double>::quiet_NaN();
+    else if(mismatch==17)state[i].initialized=2;
+    else if(mismatch==18)state[i].pending_intent=2;
+    else if(mismatch==19)state[i].intent_certificate=2;
+    else if(mismatch==20)state[i].handover_used=2;
+    else if(mismatch==21)state[i].source_exists[0]=2;
+    else if(mismatch==22)state[i].snapshot_accepted=2;
+    else if(mismatch==23)state[i].readiness_accepted=2;
+    else if(mismatch==24)state[i].test_mode=3;
+    else return 2;
+  }
+  return 0;
+}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_clone_real_sham_batch(const HostState* state,std::uint64_t count,ForkOutput* out){if(!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){if(!state[i].initialized||state[i].handover_used||!state[i].pending_intent)return 2;out[i].real_state=state[i];out[i].sham_state=state[i];const int old_owner=state[i].owner,promoted=1-old_owner;promote_recurrent_state(out[i].real_state,old_owner,1.0);out[i].real_state.owner=promoted;++out[i].real_state.service_epoch;out[i].real_state.handover_used=1;++out[i].sham_state.service_epoch;out[i].sham_state.handover_used=1;out[i].sham_state.actuator_owner=old_owner;for(HostState* branch:{&out[i].real_state,&out[i].sham_state}){branch->pending_intent=0;branch->lineage_lock[0]=branch->lineage_lock[1]=0;branch->application_reason=0;branch->cas_applied=0;branch->total_energy+=0.48;branch->battery[old_owner]=std::max(0.0,branch->battery[old_owner]-0.48);}const auto wire=result_wire(state[i].tick,1,0,promoted,static_cast<std::uint16_t>(state[i].service_epoch+1),state[i].next_payload_sequence,state[i].k_epoch);account_wire(out[i].real_state,wire);account_wire(out[i].sham_state,wire);Sha256 real_sha;real_sha.update(wire.data(),wire.size());const auto real_digest=real_sha.final();std::memcpy(out[i].real_telemetry_sha256,real_digest.data(),32);std::memcpy(out[i].sham_telemetry_sha256,real_digest.data(),32);out[i].byte_identical_telemetry=1;}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_script_batch(const HostState* state,std::uint64_t count,ScriptOutput* out){if(!state||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){if(!state[i].initialized)return 2;out[i]=script_one(state[i]);}return 0;}
 DISH_EXPORT std::int32_t dish_rbhr_r06_prod_recovery_witness_batch(const ResetInput* in,std::uint64_t count,RecoveryWitnessOutput* out){if(!in||!out||count==0)return 1;for(std::uint64_t i=0;i<count;++i){if(!validate_reset(in[i]))return 2;const int rc=recovery_witness_one(in[i],out[i]);if(rc)return rc;}return 0;}

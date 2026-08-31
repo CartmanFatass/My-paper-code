@@ -14,9 +14,11 @@ CCIC, EGRCR, SGSP, and VQFP investment lines. Current lifecycle, priority, and o
 
 ## Scientific question
 
-In one prospectively defined variable-roster relational host, can a typed structured prior reduce the
-finite sample, update, or compute required to reach a native physical-return threshold relative to a
-strictly containing, competent, same-information generic relational learner?
+In one prospectively defined fixed-roster-per-episode relational host, can a typed structured prior
+reduce the finite sample, update, or compute required to reach a native physical-return threshold on
+held-out roster sizes relative to a strictly containing, competent, same-information generic
+relational learner? This first object does not exercise within-episode membership change and makes
+no variable-membership or churn claim.
 
 The structured and generic arms must receive the same raw entity values, public relations, action
 head, environment interactions, minibatch order, optimizer updates, parameter/work budget, and
@@ -54,9 +56,23 @@ deployment, or safety.
 
 ## Evidence ancestry
 
+- `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
 - `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
 - `docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md`
 - `docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md`
 - `docs/research/portfolio/decisions/2026-08-30-fifteen-direction-consolidation.md`
 
+## Formal implementation cycle — 2026-08-30
+
+The isolated fixed-roster FRRIE scaffold is technically accepted with 32 focused tests passing. It
+freezes the exact 35,513-parameter paired architecture, projection containment, matched work/RNG
+contracts, fixed-roster native endpoint, checkpoints/lifecycle structures, and the CCIC, EGRCR,
+raw-value, and VQFP controls. VQFP remains output-disconnected under
+`FRRIE_ACTION_SEAM_ABSENT`. Historical SGSP/VQFP runtimes are not imported, and no non-RNG hash or
+authentication gate remains.
+
+No scientific result exists. Production is blocked on a package-owned native adapter, paired
+512-update trainer/evaluator/checkpoint chain, prospective inputs and unused output roots, and a
+prospectively frozen simultaneous-bound inference method. Current analysis correctly reports
+`UNRESOLVED_ANALYSIS_METHOD_UNFROZEN`; no polarity or churn claim may be inferred.

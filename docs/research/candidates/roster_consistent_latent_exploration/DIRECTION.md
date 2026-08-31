@@ -61,8 +61,13 @@ If the containing comparator receives the same private state or exact recomputat
 the trajectory law, close the recast. A benefit caused only by hiding information from reset supports
 information retention, not an exploration-continuity inductive advantage.
 
+`IMPLEMENTATION_THRESHOLD.md` applies that stop rule: current private state is exactly
+reconstructible from the matched local prefix, messages, and RNG, and no reachable action-relevant
+private cross survives. The current RCLE recast is therefore closed with `HARD_NO_CODE`.
+
 ## Current evidence set
 
+- `docs/research/candidates/roster_consistent_latent_exploration/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/roster_consistent_latent_exploration/evidence/2026-08-29-2026-08-29.8-successor-01a04a02-rcle-public-containment-03-scope-and-grounding.md`
 - `docs/research/candidates/roster_consistent_latent_exploration/evidence/2026-08-29-2026-08-29.8-successor-01a04a02-rcle-public-containment-03-terminal-gap.md`
 - `docs/research/candidates/roster_consistent_latent_exploration/external/2026-08-29-2026-08-29.8-successor-01a04a02-rcle-public-containment-03-pro-innovator-prompt.md`

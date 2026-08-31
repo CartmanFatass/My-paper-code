@@ -46,27 +46,19 @@ absent, replay absorbs the shadow before the deadline, or the incremental shadow
 nonmaterial, the shadow-specific object closes. The full R06 panel remains a later confirmation
 ceiling, not the next purchase.
 
-## Current-protocol cycle boundary — 2026-08-29
+## Formal implementation cycle — 2026-08-30
 
-Cycle `2026-08-29.8-portfolio-dish-preactivity-certificate-01` ended at
-`SCOPE_FROZEN / TERMINAL_GAP` before a valid EM synthesis. Its required fresh
-GPT-5.6 Pro Innovator operation was a strict `ZERO_SEND_FAILED` before prompt
-injection, and bounded non-sending recovery did not establish eligible model
-evidence. No provider conversation, response, empirical Effect, Convergence
-operation, CM task, lifecycle recommendation or accepted current-cycle science
-exists.
+The additive ABI-v1 TEST_ONLY RETAIN/COPY/SHADOW scaffold is technically accepted. All 22 direction
+tests pass, including native/Python source-state equivalence, truthful direct receipts, immutable
+parent state, predicate rejection, replay fencing, 6,912-row accounting, endpoint/nonharm reduction,
+and crash-resumable create-only storage. Existing REAL/SHAM behavior is unchanged, and the new path
+contains no non-RNG hash, lease, authentication, or result-promotion gate.
 
-Direction-owned notes preserve two local pre-synthesis observations without
-elevating them to accepted science: audited proper certificate families admit
-branch-pivotal conforming completions, while exact current source hashes bind
-to the latest consumed P1 technical evidence whose concurrency and overhead
-gates fail. These facts may ground a future fresh cycle after mandatory
-consultation availability, but they do not alter the historical current
-position or imply opportunity, absence, FLEX absorption, simple-rule value,
-CONTINUE, NARROW, PARK or CLOSE.
+No scientific result exists. Production next requires 24 fresh STRUCTURED update-1,024 checkpoints,
+the real first-application-valid and identical 100-tick replay path, complete checkpoint/native/data-
+plane generation for all 6,912 cells, resource observation, reduction, and a direct runner. Until
+those surfaces exist and pass result-blind preflight, the production entry remains unavailable and
+no shadow-specific polarity follows.
 
-Refs:
-
-- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-terminal-gap.md`
-- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-local-certificate-audits.md`
-- `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-29-dish-preactivity-current-substrate-static-audit.md`
+Earlier provider/session transport notes remain historical evidence in the direction folder; they
+do not define the current implementation method or a separate permission system.

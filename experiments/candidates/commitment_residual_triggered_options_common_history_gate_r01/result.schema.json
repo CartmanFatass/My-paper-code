@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crto-common-history-gate-result-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "object_id", "status", "config", "provenance",
+    "replicates", "analysis", "admission"
+  ],
+  "properties": {
+    "schema_version": {"const": "crto-common-history-gate-result-v1"},
+    "object_id": {"const": "CRTO-COMMON-HISTORY-GATE-20260830-01"},
+    "status": {"enum": ["IDENTIFYING", "NONIDENTIFYING"]},
+    "config": {
+      "type": "object",
+      "required": ["rng_namespace", "replicate_count", "short_updates", "long_updates", "batch_size"],
+      "properties": {
+        "rng_namespace": {"const": 2026083001},
+        "replicate_count": {"const": 8},
+        "short_updates": {"const": 128},
+        "long_updates": {"const": 2048},
+        "batch_size": {"const": 64}
+      },
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["fresh_genesis", "legacy_state_reads", "legacy_schema"],
+      "properties": {
+        "fresh_genesis": {"const": true},
+        "legacy_state_reads": {"const": false},
+        "legacy_schema": {"const": false}
+      },
+      "additionalProperties": true
+    },
+    "replicates": {
+      "type": "array", "minItems": 8, "maxItems": 8,
+      "items": {"type": "object"}
+    },
+    "analysis": {
+      "type": "object",
+      "required": ["status", "interpretation", "failures", "intervals"],
+      "properties": {
+        "status": {"enum": ["IDENTIFYING", "NONIDENTIFYING"]},
+        "interpretation": {
+          "enum": [
+            "PERSISTENT_ALIGNED_BIAS", "OPTIMIZATION_EXPOSURE_ONLY",
+            "GENERIC_PREPROCESSING", "CLOSE_TESTED_MECHANISM", "UNRESOLVED"
+          ]
+        },
+        "failures": {"type": "array", "items": {"type": "string"}},
+        "intervals": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "admission": {
+      "type": "object",
+      "required": [
+        "disjoint_panels", "matched_inputs", "derangement_valid",
+        "common_future_valid", "raw_long_competent"
+      ],
+      "properties": {
+        "disjoint_panels": {"type": "boolean"},
+        "matched_inputs": {"type": "boolean"},
+        "derangement_valid": {"type": "boolean"},
+        "common_future_valid": {"type": "boolean"},
+        "raw_long_competent": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    }
+  }
+}

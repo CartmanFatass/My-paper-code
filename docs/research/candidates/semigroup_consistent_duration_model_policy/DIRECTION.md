@@ -9,11 +9,14 @@ This authority preserves the direction's source-grounded scientific question, ev
 
 ## Scientific question
 
-The formal scientific question is the source-defined question for this direction; this bootstrap does not broaden or replace it. The source-grounded current-position statement is: “UAV order opportunity and competent order-erased foundation exist in separate objects; fusion is not established.”
+The source-defined question originated in the inherited bootstrap position: “UAV order opportunity
+and competent order-erased foundation exist in separate objects; fusion is not established.” The
+recast and terminal convergence disposition below now control the direction-local interpretation.
 
-## Current position
+## Inherited source position
 
-The following sentence is preserved from the current `RESEARCH_MAP.md` row and is not a new synthesis:
+The following sentence is preserved from the pre-recast navigation record and is not a new
+synthesis:
 
 > UAV order opportunity and competent order-erased foundation exist in separate objects; fusion is not established.
 
@@ -25,50 +28,53 @@ transformations, and native order-conditioned action value. The current policy d
 duration or termination hazard, so no learned variable-lifetime or general semigroup claim is
 available.
 
-After the retained current operation reaches a terminal observation and is dispositioned, the
-smallest successor freezes one public initial state, one external duration, one competent
-order-erased foundation, two H/R order graphs, and three result-blind precommitted actions: each
-graph-matched action and one common conservative action. Paired future tapes are used for evaluation
-only; no noisy action selector chooses from the same tapes. Continue only if graph-matched actions
-beat both the mismatched and common action on full-mission utility.
+The retained opportunity-law operation is now terminally observed and dispositioned. The smallest
+successor freezes one reachable public Dirac state, external `k=13`, one competent order-erased
+foundation, two H/R order graphs, and three result-blind precommitted actions: each graph-matched
+action and one common conservative action. Paired future tapes are used for evaluation only; no
+noisy action selector chooses from the same tapes. Continue only if graph-matched actions beat both
+the mismatched and common action on full-mission utility.
 
 ONLGR contributes a common executed physical-rate control and service-minus-cost accounting only.
 Its result polarity, exponential-link label, and thresholds do not transfer. Failure of the fixed
 2-by-3 action gate closes the exact host before an adapter or learned duration policy.
 
-## Current-protocol cycle status
+## Opportunity-law convergence disposition — 2026-08-30
 
-Cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02` is the current retained WORK. It froze one
-candidate population-and-cross-fit law, completed four result-blind research leaves and the
-mandatory fresh Pro Innovator, reached a provisional `SYNTHESIS_READY` negative, and sent the fresh
-conclusion-blind Pro Convergence exactly once. Portfolio then issued `PAUSE` while that Convergence
-operation remained `SENT_WAITING`. The current snapshot is therefore `WAITING_REENTRY`: no
-Convergence response archive or assistant identity exists, review is not resolved, and no terminal
-scientific result or lifecycle recommendation has been made. Exact science, transport Effects,
-writer state, prohibitions and reentry are preserved in
-`SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`.
+The retained conclusion-blind review is terminal and matches the frozen opportunity-law prompt and
+target-card object. Review milestone is `REVIEW_RESOLVED`; its accepted disposition is
+`NO_COHERENT_ONE_CORRECTION_OPPORTUNITY_LAW`. Cross-fitting makes held-out evaluation unbiased for
+the true value of the finite selector's returned action, and conditionally equal true action means
+force population `D/S` to zero. It does not turn noisy two-tape selectors into oracle maximizers:
+their differential regrets change `D`, while revised `Q` is not equivalent to disjoint true-optimal
+sets. Independently, the antecedent marginal state laws do not derive the proposed product copula.
 
-Historical cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01` remains terminal evidence only.
-It froze a fresh result-blind audit of whether
-one new task-local pallet/gantry authority could bind native identity, a treatment-independent
-competent order-erased foundation and direct foundation-conditioned order opportunity before any
-adapter. The cycle ended at `SCOPE_FROZEN / TERMINAL_GAP`: the mandatory Innovator transport first
-proved zero send, then two new-conversation operations produced provider-visible input mismatch,
-including the sole shared replacement. Neither isolated conversation is evidence, no response was
-archived, and no Effect remains.
+The claim ceiling is definition-only: this exact composite does not preserve the named direct
+graph-conditioned first-action oracle opportunity within the one-correction boundary. No
+foundation or opportunity gate ran, and the result implies neither absence of physical order value
+nor any adapter, general chronology, semigroup, transfer, safety, deployment or flight claim. The
+review's support-matched selector counterexample was not constructively realized under the exact
+numerical plant; that limit does not supply the missing selector-oracle equality.
 
-Three local routes preserved a possible simulator-defined event-to-action construction, a material
-same-tape selection/evaluation counterexample against the opportunity estimand, an underspecified
-opportunity-state draw, and a source boundary limiting H/R to invented simulator mechanics. These
-observations conflict and were not synthesized because valid Innovator evidence is absent. No CM or
-Convergence stage opened, and this cycle supplies no lifecycle recommendation. The accepted current
-position above is unchanged. Exact preliminary evidence and transport facts are preserved in
-`SCDMP_NATIVE_ICO_GATE_TERMINAL_GAP_20260829.md`.
+The smallest nonredundant alternative is the separately frozen fixed-state, fixed-`k`, precommitted
+`2 x 3` candidate-action gate in `IMPLEMENTATION_THRESHOLD.md`, which contains no outcome-based
+action selector. Direction-local recommendation is `RECAST`: close the rejected 18-action
+opportunity-law object and keep SCDMP only through that narrower successor. This recommendation
+does not mutate Portfolio authority. No result command is in scope. Exact terminal evidence and
+limitations are recorded in
+`SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md`.
+
+Historical cycle `2026-08-29.8-portfolio-scdmp-native-ico-gate-01` remains defect provenance only.
+Its event-to-action construction, same-tape selection/evaluation counterexample, underspecified
+state draw and simulator-only H/R boundary carry no result polarity or lifecycle authority. Exact
+historical facts remain in `SCDMP_NATIVE_ICO_GATE_TERMINAL_GAP_20260829.md`.
 
 ## Evidence set
 
-The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
+The evidence set below supports the recorded current position, recast and terminal convergence
+disposition; historical records remain provenance rather than current workflow authority.
 - `docs/research/RESEARCH_MAP.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_UAV_SUSPENDED_PAYLOAD_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260820.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_NATIVE_ICO_GATE_CYCLE_FREEZE_20260829.md`
@@ -76,7 +82,26 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CYCLE_FREEZE_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md`
 
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
+
+## Formal FCEOV implementation — 2026-08-30
+
+The isolated `foundation_conditioned_event_order_value` result-blind scaffold is technically
+accepted. Its 60 focused tests pass. It binds the fixed public state, external `k=13`, actions
+`0/10/12`, one 160×12 foundation structure, exact seven-member competence family, a production-owned
+width-144 HR/RH native reset inventory, four predeclared paired contrasts, output-disconnected RATE
+controls, addressed RNG domains, and transactional direct-equality checkpoint restore. No rejected
+18-action selector, legacy permit/lease, or non-RNG digest path is imported.
+
+The analytic `.84/.94/.66` loaded-cable fixture is kept distinct from the current native
+TEST_ONLY threshold-classification observation; exact native instantaneous loads are not observable
+through the retained ABI. The direct preflight passes without creating a result root.
+
+No foundation training, competence mission, scientific 2×3 panel, checkpoint, or terminal result has
+run, and no result command exists. Production next requires a fresh RNG master and manifest/resource
+preflight, the 160-update foundation run, nonzero checkpoint-resume observation, the 120-mission
+competence gate, and a separately frozen direct result command before the width-144 panel.

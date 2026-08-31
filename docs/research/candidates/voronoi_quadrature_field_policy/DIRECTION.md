@@ -17,10 +17,18 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > VNPA science is closed and analytic G is proved; current full construction exceeds practical ceilings.
 
+## Portfolio integration boundary — 2026-08-30
+
+`IMPLEMENTATION_THRESHOLD.md` closes standalone implementation. Exact measure, LR, marginal-heap,
+MASS/MASS-P and reassociation definitions may exist only as FRRIE-owned output-disconnected controls
+until a lossless native `ActionCodec` connects integer allocation vectors to the FRRIE action seam.
+Historical packages and retained-operation polarity do not transfer.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
 - `docs/research/RESEARCH_MAP.md`
+- `docs/research/candidates/voronoi_quadrature_field_policy/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_PHYSICAL_ASSOCIATION_VALUE_R03_SCIENCE_CARD_20260823.md`
 ## Provenance boundary
 

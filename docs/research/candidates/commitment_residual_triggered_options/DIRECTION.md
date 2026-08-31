@@ -94,16 +94,14 @@ deployment, or general option-value claims.
 
 ## Next discriminator
 
-No automatic replay, retry, repair, policy activity, or downstream experiment
-is authorized. The same exact continuation becomes technically eligible only
-if a provenance-linked equality witness for every future-relevant update-1,000
-state component is discovered. A canonical from-genesis replay would be a
-separate scientific object requiring fresh Portfolio authority, result-blind
-scope, and its own interpretation ceiling; it cannot inherit this cycle's
-identity or disposition.
+The discarded update-1,000 continuation is not a valid input to the new object because its
+future-relevant state is not reconstructibly equal. A canonical from-genesis replay would be a
+separate scientific question with a prospectively fixed scope and interpretation ceiling; it cannot
+inherit the completed continuation's evidence or disposition.
 
 ## Accepted evidence set
 
+- `docs/research/candidates/commitment_residual_triggered_options/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_V4_PREACTIVITY_SUPPORT_GATE_INTAKE.md`
@@ -120,3 +118,14 @@ note; transport facts themselves carry no scientific meaning.
 The historical map and candidate source documents remain provenance. This
 authority does not rewrite v4, convert a technical gap into scientific polarity,
 or perform a Portfolio lifecycle action.
+
+## Formal implementation cycle — 2026-08-30
+
+The fresh `commitment_residual_triggered_options_common_history_gate_r01` package is technically
+accepted. Its 19 focused tests and source check pass, and direct structural/byte equality replaces
+all non-RNG digest or identity gates. It contains no route to the discarded update-1,000 state.
+
+This is engineering evidence only. A result remains scientifically undefined until the predictor,
+behavior/continuation, calibration, 64-per-regime evaluation population, support and RAW-LONG
+competence laws, inherited audit boundary, and simultaneous-interval method/alpha are frozen. The
+current `run` entry therefore refuses before work or output. Root retains lifecycle responsibility.

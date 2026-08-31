@@ -156,6 +156,14 @@ dynamic service/roster successor condition is false. No UAV transfer,
 multi-agent coordination, variable-`N`, safety, deployment, flight or real-world
 energy/QoS claim follows.
 
+## Prospective contextual-acquisition threshold — 2026-08-30
+
+`IMPLEMENTATION_THRESHOLD.md` defines a fresh shared-policy object across linkage, reliability, and
+probe-cost contexts. It begins with an exact BELIEF action-flip certificate and support-only
+preflight, never reruns R03, and defers COUNT/RAW attribution until acquisition competence is
+established. This makes the new object implementation-ready without changing the accepted R03
+nonidentification.
+
 ## Stop rule and next responsibility
 
 The exact R03 host is exhausted. Its science card makes complete support failure
@@ -175,9 +183,20 @@ R03 direction boundary; EM does not make that cross-direction lifecycle choice.
 
 ## Provenance boundary
 
-The failed `ucope-r03-complete-20260827-01` identity remains a separate immutable
-preactivity technical tombstone and supplies no scientific value. The accepted
-result above comes only from the distinct terminal `-02` transaction. Runtime
-artifacts remain in the exact retained evidence checkout until a later owner
-performs an authorized integration or archival action; this EM did not mutate,
-copy, rerun or delete them.
+The failed `ucope-r03-complete-20260827-01` run remains a separate historical
+technical tombstone and supplies no scientific value. The accepted result above
+comes only from the distinct terminal `-02` run. Its runtime artifacts remain
+historical evidence and were not mutated, copied, rerun, or deleted here.
+
+## Formal contextual-acquisition implementation — 2026-08-30
+
+The isolated `contextual_paid_acquisition_r01` BELIEF package is technically accepted. Root's full
+focused run passes 125 tests. Its deterministic TEST_ONLY preflight regenerates 51,200 episodes
+across ten seeds and eight contexts with zero optimizer updates, and the exact oracle has one unique
+PROBE cell: `LINKED × 17/20 × 9/100`. Held-out `K`, historical R03 runtime, context-parameter, and
+non-RNG hash gates are absent.
+
+No production BELIEF result exists. A later object must freeze the direct result command and
+production resource/support preflight before training 1,638,400 root episodes, 819,200 conditional
+tail transitions, and 6,400 total optimizer updates. COUNT-versus-RAW attribution remains deferred
+until BELIEF acquisition competence is established. Root retains the Portfolio lifecycle decision.

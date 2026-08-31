@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hmasd.local/schemas/cbsc_exact_factorial_result_v1.schema.json",
+  "title": "CBSC complete exact factorial result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "complete", "identity", "manifests", "support", "pairing", "rows", "contrasts", "audits", "interpretation_boundary", "branch", "first_failing_witness"],
+  "properties": {
+    "schema": {"const": "cbsc_exact_factorial_result_v1"},
+    "complete": {"const": true},
+    "identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["direction_id", "protocol_id", "nuisance_version"],
+      "properties": {
+        "direction_id": {"const": "capability_bound_semantic_currentness"},
+        "protocol_id": {"const": "CBSC-EXACT-FACTORIAL-V1"},
+        "nuisance_version": {"const": "CBSC-F0-V1"}
+      }
+    },
+    "manifests": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registered_spec", "row_order", "inventory", "world_inventory"],
+      "properties": {
+        "registered_spec": {"$ref": "#/$defs/registeredSpec"},
+        "row_order": {
+          "type": "object", "additionalProperties": false, "required": ["law", "row_count", "first_key", "last_key"],
+          "properties": {
+            "law": {"const": "LEXICOGRAPHIC_WORLD_ID_THEN_POLICY"}, "row_count": {"const": 36864},
+            "first_key": {"type": "array", "minItems": 2, "maxItems": 2, "prefixItems": [{"type": "string"}, {"type": "string"}], "items": false},
+            "last_key": {"type": "array", "minItems": 2, "maxItems": 2, "prefixItems": [{"type": "string"}, {"type": "string"}], "items": false}
+          }
+        },
+        "inventory": {
+          "type": "object", "additionalProperties": false, "required": ["policies", "actions", "terminal_clocks", "ledger_components"],
+          "properties": {
+            "policies": {"const": ["CBSC_RULE", "RAW_EXACT_OPTIMUM", "OWNER_BLIND_OPTIMUM", "PREDICTIVE_INDEX_CAPABILITY_NULL", "RESET_EXACT", "HARD_OPEN"]},
+            "actions": {"const": ["SERVE", "REFRESH", "SAFE_FALLBACK"]},
+            "terminal_clocks": {"const": [0, 1]},
+            "ledger_components": {"const": ["common_validation_read", "padded_terminal_service_actuation", "refresh_scan", "refresh_delay", "new_content_ingestion", "gross_correct_service", "gross_wrong_service", "gross_unauthorized_attempt", "gross_safe_fallback"]}
+          }
+        },
+        "world_inventory": {"type": "array", "minItems": 6144, "maxItems": 6144, "items": {"$ref": "#/$defs/worldInventoryEntry"}}
+      }
+    },
+    "support": {"const": {"scientific_cell_count": 48, "nuisance_count_per_cell": 128, "world_count_per_arm": 6144, "policy_count": 6, "row_count": 36864}},
+    "pairing": {"const": {"nuisance_version": "CBSC-F0-V1", "distinct_nuisance_ids": 128, "worlds_per_nuisance_id": 48, "controller_or_action_in_address": false}},
+    "rows": {"type": "array", "minItems": 36864, "maxItems": 36864, "items": {"$ref": "#/$defs/row"}},
+    "contrasts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capability_difference_in_differences", "owner_information_value_usable_cell", "retained_content_value_usable_cell", "correct_current_value", "swapped_current_value", "currentness_persist_minus_refresh", "receiver_correct_minus_swapped", "cbsc_min_selected_margin", "optimized_min_selected_margin_excluding_fixed_arms"],
+      "properties": {
+        "capability_difference_in_differences": {"$ref": "#/$defs/rational"}, "owner_information_value_usable_cell": {"$ref": "#/$defs/rational"},
+        "retained_content_value_usable_cell": {"$ref": "#/$defs/rational"}, "correct_current_value": {"$ref": "#/$defs/rational"},
+        "swapped_current_value": {"$ref": "#/$defs/rational"}, "currentness_persist_minus_refresh": {"$ref": "#/$defs/rational"},
+        "receiver_correct_minus_swapped": {"$ref": "#/$defs/rational"}, "cbsc_min_selected_margin": {"$ref": "#/$defs/rational"},
+        "optimized_min_selected_margin_excluding_fixed_arms": {"$ref": "#/$defs/rational"}
+      }
+    },
+    "audits": {
+      "type": "object", "additionalProperties": false,
+      "required": ["raw_rowwise_identity", "cbsc_selected_is_unique_optimum", "cbsc_selected_margin_positive", "optimized_policy_decisions_unique_excluding_fixed_arms", "optimized_selected_margin_positive_excluding_fixed_arms", "hard_open_is_fixed_diagnostic", "open_predictive_index_equivalence", "open_zero_binding_action_value_effect", "currentness_clears_material_margin", "correct_swapped_clears_material_margin", "neutral_payload_never_direct", "capability_did_clears_material_margin", "owner_information_clears_material_margin", "retained_content_clears_material_margin", "no_preaction_authorization_result"],
+      "properties": {
+        "raw_rowwise_identity": {"type": "boolean"}, "cbsc_selected_is_unique_optimum": {"type": "boolean"}, "cbsc_selected_margin_positive": {"type": "boolean"},
+        "optimized_policy_decisions_unique_excluding_fixed_arms": {"type": "boolean"}, "optimized_selected_margin_positive_excluding_fixed_arms": {"type": "boolean"},
+        "hard_open_is_fixed_diagnostic": {"type": "boolean"}, "open_predictive_index_equivalence": {"type": "boolean"}, "open_zero_binding_action_value_effect": {"type": "boolean"},
+        "currentness_clears_material_margin": {"type": "boolean"}, "correct_swapped_clears_material_margin": {"type": "boolean"}, "neutral_payload_never_direct": {"type": "boolean"},
+        "capability_did_clears_material_margin": {"type": "boolean"}, "owner_information_clears_material_margin": {"type": "boolean"}, "retained_content_clears_material_margin": {"type": "boolean"},
+        "no_preaction_authorization_result": {"type": "boolean"}
+      }
+    },
+    "interpretation_boundary": {"const": "Exact one-opportunity protocol value of current receiver-addressed content plus a current execution capability only; no representation, learning, security, proactive acquisition, MARL, variable-population/lifetime, UAV, safety, or deployment claim."},
+    "branch": {"enum": ["VALID_NARROW_PROTOCOL_VALUE", "INDEX_ABSORBS", "RAW_MISMATCH_OR_TIE", "NO_CAPABILITY_EDGE", "NO_CONTENT_EDGE", "INVALID"]},
+    "first_failing_witness": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"branch": {"const": "VALID_NARROW_PROTOCOL_VALUE"}}}, "then": {"properties": {"first_failing_witness": {"type": "null"}}}},
+    {"if": {"properties": {"branch": {"enum": ["INDEX_ABSORBS", "RAW_MISMATCH_OR_TIE", "NO_CAPABILITY_EDGE", "NO_CONTENT_EDGE", "INVALID"]}}}, "then": {"properties": {"first_failing_witness": {"type": "string", "minLength": 1}}}}
+  ],
+  "$defs": {
+    "registeredSpec": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema", "direction_id", "protocol_id", "nuisance_version", "owner_levels", "semantic_levels", "binding_levels", "access_levels", "payload_levels", "policies", "actions", "nuisance_fields", "costs", "material_margin", "protocol_order", "all_payload_issuance_law", "phase_currentness_law", "reassociation_law", "authorization_information_law", "action_clock_law", "determinism_law", "publication_law", "branch_order", "cbsc_fixed_rule", "owner_blind_law", "reset_law", "hard_open_law", "policy_capability_law", "action_ledger_incidence", "contrast_laws", "delta_comparator", "branch_witness_law", "interpretation_boundary"],
+      "properties": {
+        "schema": {"const": "cbsc_host_spec_v1"}, "direction_id": {"const": "capability_bound_semantic_currentness"}, "protocol_id": {"const": "CBSC-EXACT-FACTORIAL-V1"}, "nuisance_version": {"const": "CBSC-F0-V1"},
+        "owner_levels": {"const": ["LIVE", "BROKEN"]}, "semantic_levels": {"const": ["PERSIST", "REFRESH"]}, "binding_levels": {"const": ["AUTHENTIC", "WHOLE_CARRIER_REASSOCIATED"]},
+        "access_levels": {"const": ["OPEN", "BINDING_GATED"]}, "payload_levels": {"const": ["RECEIVER_CORRECT", "SWAPPED", "NATIVE_NEUTRAL"]},
+        "policies": {"const": ["CBSC_RULE", "RAW_EXACT_OPTIMUM", "OWNER_BLIND_OPTIMUM", "PREDICTIVE_INDEX_CAPABILITY_NULL", "RESET_EXACT", "HARD_OPEN"]}, "actions": {"const": ["SERVE", "REFRESH", "SAFE_FALLBACK"]},
+        "nuisance_fields": {"const": ["physical_receiver", "old_bit", "current_bit", "donor_bit", "z0", "z1", "presentation_permutation"]},
+        "costs": {"const": [["common_validation_read", [1, 8]], ["padded_terminal_service_actuation", [1, 8]], ["refresh_scan", [1, 4]], ["refresh_delay", [1, 4]], ["new_content_ingestion", [1, 8]], ["gross_correct_service", [1, 1]], ["gross_wrong_service", [-1, 1]], ["gross_unauthorized_attempt", [-1, 2]], ["gross_safe_fallback", [0, 1]]]},
+        "material_margin": {"const": [1, 4]}, "protocol_order": {"const": ["COMMIT_NEED_RECEIVER_OLD_CONTENT_PHASE", "ISSUE_ALL_IMMUTABLE_BODIES_AND_WHOLE_CARRIERS", "COMMIT_OWNER_AND_SEMANTIC_EPOCH", "COMMIT_ACCESS_LAW", "CHOOSE_ONCE_AT_T0_WITHOUT_AUTHORIZATION_RESULT", "TERMINATE_T0_OR_REFRESH_AND_CORRECT_SERVICE_T1"]},
+        "all_payload_issuance_law": {"const": "CORRECT_SWAPPED_NEUTRAL_IMMUTABLE_INVENTORY_BEFORE_PAYLOAD_SELECTION"}, "phase_currentness_law": {"const": "RECEIVER_KEYED_BASE_BIT_XOR_PUBLIC_Z;_REFRESH_MISMATCH_HIDES_NEW_CONTENT_UNTIL_T1"},
+        "reassociation_law": {"const": "FIXED_POINT_FREE_SWAP_OF_INTACT_CARRIERS_WITHIN_PRETREATMENT_STRATUM"}, "authorization_information_law": {"const": "NO_PREACTION_RESULT;GATED_REQUIRES_LIVE_OWNER_AUTHENTIC_ASSOCIATION_RECEIVER_ADDRESSED_NONNEUTRAL_BODY;OPEN_REMOVES_EDGE;INDEX_NULL_MATCHES_OPEN"},
+        "action_clock_law": {"const": [["SERVE", 0], ["SAFE_FALLBACK", 0], ["REFRESH", 1]]}, "determinism_law": {"const": ["EXHAUSTIVE_FACTORS_AND_NUISANCE", "CBSC_F0_V1_COUNTER_ADDRESSED_NUISANCE_ONLY", "NO_GLOBAL_PYTHON_NUMPY_TORCH_RNG", "CANONICAL_WORLD_THEN_POLICY_ROW_ORDER", "ZERO_OPTIMIZER_SEEDS_CHECKPOINTS"]},
+        "publication_law": {"const": ["COMPLETE_ONLY", "ATOMIC", "CREATE_ONLY", "REJECT_PREEXISTING_TARGET"]}, "branch_order": {"const": ["VALID_NARROW_PROTOCOL_VALUE", "INDEX_ABSORBS", "RAW_MISMATCH_OR_TIE", "NO_CAPABILITY_EDGE", "NO_CONTENT_EDGE", "INVALID"]},
+        "cbsc_fixed_rule": {"const": [["FOCAL_NEED_INACTIVE", "SAFE_FALLBACK"], ["DIRECT_EXECUTABLE_AND_CURRENT_AND_RECEIVER_SOURCE_CORRECT", "SERVE"], ["OTHERWISE", "REFRESH"]]},
+        "owner_blind_law": {"const": ["MASK_OWNER_PREDECESSOR_HISTORY", "OPTIMIZE_UNIFORM_LIVE_BROKEN_MIXTURE"]},
+        "reset_law": {"const": ["REMOVE_ALL_CACHED_BODY_AND_CARRIER_FIELDS", "KEEP_PUBLIC_FOCAL_NEED_ACTIVE", "WAIVE_COMMON_VALIDATION_READ_ONLY", "SINGLE_REACTIVE_REFRESH"]},
+        "hard_open_law": {"const": ["FIXED_NOT_OPTIMIZED", "ACTIVE_NEED_SERVE_CACHED_BODY", "INACTIVE_NEED_SAFE_FALLBACK", "NO_CURRENTNESS_OR_ADDRESS_CONDITIONING"]},
+        "policy_capability_law": {"const": [["CBSC_RULE", "OPEN_ROUTED_OR_GATED_CURRENT_NONFUNGIBLE_CAPABILITY"], ["RAW_EXACT_OPTIMUM", "SAME_CAPABILITY_AND_PRIMITIVES_AS_CBSC"], ["OWNER_BLIND_OPTIMUM", "SAME_CAPABILITY_WITH_OWNER_MASK"], ["PREDICTIVE_INDEX_CAPABILITY_NULL", "OPEN_EQUIVALENT_GATED_NO_NONFUNGIBLE_DIRECT_CAPABILITY"], ["RESET_EXACT", "NO_CACHED_DIRECT_CAPABILITY"], ["HARD_OPEN", "DIAGNOSTIC_FIXED_CACHED_BODY_USE"]]},
+        "action_ledger_incidence": {"const": [["SERVE", ["COMMON_READ_UNLESS_RESET_T0", "ONE_OF_CORRECT_WRONG_UNAUTHORIZED_GROSS_T0", "PADDED_TERMINAL_ACTUATION_T0"]], ["SAFE_FALLBACK", ["COMMON_READ_UNLESS_RESET_T0", "ZERO_GROSS_T0", "PADDED_TERMINAL_ACTUATION_T0"]], ["REFRESH", ["COMMON_READ_UNLESS_RESET_T0", "SCAN_T0", "DELAY_T0", "INGESTION_T1", "ACTIVE_CORRECT_OR_INACTIVE_ZERO_GROSS_T1", "PADDED_TERMINAL_ACTUATION_T1"]]]},
+        "contrast_laws": {"const": [["CAPABILITY_DID", "(CBSC-INDEX)_GATED_USABLE-(CBSC-INDEX)_OPEN_USABLE"], ["OWNER_INFORMATION", "MEAN_LIVE_BROKEN(CBSC-OWNER_BLIND)_GATED_AUTHENTIC_CORRECT_PERSIST"], ["RETAINED_CONTENT", "CBSC-RESET_GATED_LIVE_AUTHENTIC_CORRECT_PERSIST"], ["CURRENTNESS", "CBSC_PERSIST-CBSC_REFRESH_GATED_LIVE_AUTHENTIC_CORRECT"], ["CORRECT_VS_SWAPPED", "CBSC_CORRECT-CBSC_SWAPPED_GATED_LIVE_AUTHENTIC_PERSIST"]]},
+        "delta_comparator": {"const": "NAMED_FIVE_CONTRAST_ACCEPT_IF_GREATER_THAN_OR_EQUAL_TO_MATERIAL_MARGIN;ACTION_GAPS_STRICTLY_POSITIVE_ONLY"},
+        "branch_witness_law": {"const": "REGISTERED_PRECEDENCE;FIRST_FALSE_AUDIT;CANONICAL_WORLD_OR_PAIR_FOR_ROWWISE_FAILURE"},
+        "interpretation_boundary": {"const": "Exact one-opportunity protocol value of current receiver-addressed content plus a current execution capability only; no representation, learning, security, proactive acquisition, MARL, variable-population/lifetime, UAV, safety, or deployment claim."}
+      }
+    },
+    "binary": {"enum": [0, 1]},
+    "nuisance": {"type": "object", "additionalProperties": false, "required": ["physical_receiver", "old_bit", "current_bit", "donor_bit", "z0", "z1", "presentation_permutation"], "properties": {"physical_receiver": {"$ref": "#/$defs/binary"}, "old_bit": {"$ref": "#/$defs/binary"}, "current_bit": {"$ref": "#/$defs/binary"}, "donor_bit": {"$ref": "#/$defs/binary"}, "z0": {"$ref": "#/$defs/binary"}, "z1": {"$ref": "#/$defs/binary"}, "presentation_permutation": {"$ref": "#/$defs/binary"}}},
+    "body": {"type": "object", "additionalProperties": false, "required": ["body_id", "addressed_receiver", "payload_source_receiver", "content_bit", "native_neutral", "epoch", "public_phase"], "properties": {"body_id": {"type": "string", "pattern": "^body:\\{"}, "addressed_receiver": {"$ref": "#/$defs/binary"}, "payload_source_receiver": {"type": ["integer", "null"], "minimum": 0, "maximum": 1}, "content_bit": {"type": ["integer", "null"], "minimum": 0, "maximum": 1}, "native_neutral": {"type": "boolean"}, "epoch": {"const": 0}, "public_phase": {"$ref": "#/$defs/binary"}}},
+    "carrier": {"type": "object", "additionalProperties": false, "required": ["carrier_id", "issued_to_receiver", "body"], "properties": {"carrier_id": {"type": "string", "pattern": "^carrier:\\{"}, "issued_to_receiver": {"$ref": "#/$defs/binary"}, "body": {"$ref": "#/$defs/body"}}},
+    "worldInventoryEntry": {"type": "object", "additionalProperties": false, "required": ["world_id", "nuisance_id", "owner", "semantic", "binding", "access", "payload", "nuisance", "focal_need_active", "issued_inventory", "carrier_assignment", "presentation"], "properties": {"world_id": {"type": "string", "pattern": "^world:\\{"}, "nuisance_id": {"type": "string", "pattern": "^CBSC-F0-V1:[0-9a-f]{24}$"}, "owner": {"enum": ["LIVE", "BROKEN"]}, "semantic": {"enum": ["PERSIST", "REFRESH"]}, "binding": {"enum": ["AUTHENTIC", "WHOLE_CARRIER_REASSOCIATED"]}, "access": {"enum": ["OPEN", "BINDING_GATED"]}, "payload": {"enum": ["RECEIVER_CORRECT", "SWAPPED", "NATIVE_NEUTRAL"]}, "nuisance": {"$ref": "#/$defs/nuisance"}, "focal_need_active": {"type": "boolean"}, "issued_inventory": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/carrier"}}, "carrier_assignment": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string", "pattern": "^carrier:\\{"}}, "presentation": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string", "pattern": "^carrier:\\{"}}}},
+    "rational": {"type": "array", "prefixItems": [{"type": "integer"}, {"type": "integer", "minimum": 1}], "items": false, "minItems": 2, "maxItems": 2},
+    "observation": {"type": "object", "additionalProperties": false, "required": ["primitives"], "properties": {"primitives": {"type": "array", "items": {"type": "array", "minItems": 2, "maxItems": 2}}}},
+    "vector": {"type": "object", "additionalProperties": false, "required": ["serve", "refresh", "safe_fallback"], "properties": {"serve": {"$ref": "#/$defs/rational"}, "refresh": {"$ref": "#/$defs/rational"}, "safe_fallback": {"$ref": "#/$defs/rational"}}},
+    "entry": {"type": "object", "additionalProperties": false, "required": ["name", "clock", "amount"], "properties": {"name": {"type": "string"}, "clock": {"enum": [0, 1]}, "amount": {"$ref": "#/$defs/rational"}}},
+    "ledger": {"type": "object", "additionalProperties": false, "required": ["action", "terminal_clock", "entries", "net_return"], "properties": {"action": {"enum": ["SERVE", "REFRESH", "SAFE_FALLBACK"]}, "terminal_clock": {"enum": [0, 1]}, "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}}, "net_return": {"$ref": "#/$defs/rational"}}},
+    "row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["world_id", "nuisance_id", "policy", "observation", "action_values", "decision", "ledger"],
+      "properties": {
+        "world_id": {"type": "string"}, "nuisance_id": {"type": "string", "pattern": "^CBSC-F0-V1:"},
+        "policy": {"enum": ["CBSC_RULE", "RAW_EXACT_OPTIMUM", "OWNER_BLIND_OPTIMUM", "PREDICTIVE_INDEX_CAPABILITY_NULL", "RESET_EXACT", "HARD_OPEN"]},
+        "observation": {"$ref": "#/$defs/observation"}, "action_values": {"$ref": "#/$defs/vector"},
+        "decision": {"enum": ["SERVE", "REFRESH", "SAFE_FALLBACK"]}, "ledger": {"$ref": "#/$defs/ledger"}
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RISP-ECR-R01-TWIN-CENSUS-V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "binding_class", "spec_schema", "complete", "rows", "twin_summaries", "backend"],
+  "properties": {
+    "schema": {"const": "RISP-ECR-R01-TWIN-CENSUS-V1"},
+    "binding_class": {"enum": ["REGISTERED", "TEST_ONLY"]},
+    "spec_schema": {"enum": ["RISP-ECR-R01-SPEC-V1", "TEST-ONLY-RISP-ECR-R01-SPEC-V1"]},
+    "complete": {"const": true},
+    "rows": {"type": "array", "minItems": 2, "maxItems": 8, "items": {"$ref": "#/$defs/row"}},
+    "twin_summaries": {"type": "array", "minItems": 1, "maxItems": 4, "items": {"$ref": "#/$defs/summary"}},
+    "backend": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registered_key", "reference_fallback_key", "used", "native_status", "all_rows_reference_equal"],
+      "properties": {
+        "registered_key": {"type": "string", "minLength": 1},
+        "reference_fallback_key": {"type": "string", "minLength": 1},
+        "used": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+        "native_status": {"type": "object"},
+        "all_rows_reference_equal": {"type": "boolean"}
+      }
+    }
+  },
+  "$defs": {
+    "rational": {
+      "type": "array",
+      "prefixItems": [{"type": "integer"}, {"type": "integer", "minimum": 1}],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "belief": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/rational"}},
+    "q": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["LEFT", "CENTER", "RIGHT"],
+      "properties": {
+        "LEFT": {"$ref": "#/$defs/rational"},
+        "CENTER": {"$ref": "#/$defs/rational"},
+        "RIGHT": {"$ref": "#/$defs/rational"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller", "state_kind", "state", "q_values", "action", "value", "decision_state_physical_time_normalized_expected_return", "endpoint_value", "physical_time_normalized_endpoint_return", "unique_action"],
+      "properties": {
+        "controller": {"enum": ["RAW_HISTORY_BAYES", "FULL_BAYES_K", "FULL_BAYES_K_ERASED", "LAST_ACK_BAYES", "LAST_ACK_G"]},
+        "state_kind": {"enum": ["EXACT_BELIEF", "EXACT_FIXED_G_MASS"]},
+        "state": {"$ref": "#/$defs/belief"},
+        "q_values": {"$ref": "#/$defs/q"},
+        "action": {"enum": ["LEFT", "CENTER", "RIGHT"]},
+        "value": {"$ref": "#/$defs/rational"},
+        "decision_state_physical_time_normalized_expected_return": {"$ref": "#/$defs/rational"},
+        "endpoint_value": {"$ref": "#/$defs/rational"},
+        "physical_time_normalized_endpoint_return": {"$ref": "#/$defs/rational"},
+        "unique_action": {"type": "boolean"}
+      }
+    },
+    "controllers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["RAW_HISTORY_BAYES", "FULL_BAYES_K", "FULL_BAYES_K_ERASED", "LAST_ACK_BAYES", "LAST_ACK_G"],
+      "properties": {
+        "RAW_HISTORY_BAYES": {"$ref": "#/$defs/decision"},
+        "FULL_BAYES_K": {"$ref": "#/$defs/decision"},
+        "FULL_BAYES_K_ERASED": {"$ref": "#/$defs/decision"},
+        "LAST_ACK_BAYES": {"$ref": "#/$defs/decision"},
+        "LAST_ACK_G": {"$ref": "#/$defs/decision"}
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["twin_id", "side", "history_id", "history", "population_weight", "expected_raw_action", "reference_path_mass", "pre_last_belief", "endpoint", "physical_accounting", "controllers", "raw_full_equal", "native_reference_equal", "backend"],
+      "properties": {
+        "twin_id": {"type": "string", "minLength": 1},
+        "side": {"enum": ["A", "B"]},
+        "history_id": {"type": "string", "minLength": 1},
+        "history": {"type": "object"},
+        "population_weight": {"$ref": "#/$defs/rational"},
+        "expected_raw_action": {"enum": ["LEFT", "CENTER", "RIGHT", null]},
+        "reference_path_mass": {"$ref": "#/$defs/rational"},
+        "pre_last_belief": {"$ref": "#/$defs/belief"},
+        "endpoint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["next_duration", "next_hold_credit_start", "next_hold_credit_end"],
+          "properties": {
+            "next_duration": {"enum": [4, 8, 12]},
+            "next_hold_credit_start": {"type": "integer", "minimum": 1},
+            "next_hold_credit_end": {"type": "integer", "minimum": 2}
+          }
+        },
+        "physical_accounting": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["realized_utility", "completed_physical_time", "physical_time_normalized_return"],
+          "properties": {
+            "realized_utility": {"type": "integer"},
+            "completed_physical_time": {"type": "integer", "minimum": 1},
+            "physical_time_normalized_return": {"$ref": "#/$defs/rational"}
+          }
+        },
+        "controllers": {"$ref": "#/$defs/controllers"},
+        "raw_full_equal": {"type": "boolean"},
+        "native_reference_equal": {"type": "boolean"},
+        "backend": {"type": "string", "minLength": 1}
+      }
+    },
+    "regrets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["FULL_BAYES_K_ERASED", "LAST_ACK_BAYES", "LAST_ACK_G"],
+      "properties": {
+        "FULL_BAYES_K_ERASED": {"$ref": "#/$defs/rational"},
+        "LAST_ACK_BAYES": {"$ref": "#/$defs/rational"},
+        "LAST_ACK_G": {"$ref": "#/$defs/rational"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["twin_id", "coarsened_controller", "coarsened_view", "common_key_matches", "pre_last_beliefs_differ", "raw_actions", "raw_actions_opposite", "equal_weight_regret"],
+      "properties": {
+        "twin_id": {"type": "string", "minLength": 1},
+        "coarsened_controller": {"enum": ["FULL_BAYES_K_ERASED", "LAST_ACK_BAYES"]},
+        "coarsened_view": {"type": "array", "minItems": 1},
+        "common_key_matches": {"type": "boolean"},
+        "pre_last_beliefs_differ": {"type": "boolean"},
+        "raw_actions": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"enum": ["LEFT", "CENTER", "RIGHT"]}},
+        "raw_actions_opposite": {"type": "boolean"},
+        "equal_weight_regret": {"$ref": "#/$defs/regrets"}
+      }
+    }
+  }
+}
