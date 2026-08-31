@@ -1,8 +1,9 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-31T08:42:13Z
+Updated at: 2026-08-31T12:25:55Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
+Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 
 | Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
@@ -31,7 +32,7 @@ Investment capacity: `UNBOUNDED`
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
 | semantic_graphon_shared_policy | CLOSED | TERMINAL | NONE | 2026-08-31T00:01:00Z | The narrow physical prior is strictly contained by EDGE-FLEX. SGSP becomes the learned-treatment ancestry of FRRIE; the old graphon/RSCF label and result polarity do not transfer. |
 | semigroup_consistent_duration_model_policy | ACTIVE | MEDIUM | ROOT | 2026-08-31T08:42:13Z | FCEOV production mechanics and real width-144 preflight are accepted with 88 tests, but the result route is held before master creation. The 24-block Student-t rule can falsely establish four negative population contrasts with probability about `0.8284`; a valid Hoeffding repair subtracts `0.6026` and lacks a power rationale. Next investment is a prospective inference/margin/tape-count/resource freeze. |
-| ucope | ACTIVE | HIGH | ROOT | 2026-08-31T08:42:13Z | BELIEF v2 is technically complete and prospectively recast to exact all-ten/all-80 fixed-panel stability, with no seed-superpopulation claim. Production is currently `NOT_READY_RESOURCE_WALL_AND_LIVE_MEMORY`: projected wall is 3,600 seconds versus 1,800 registered and fresh live-RAM admission is below 4 GiB. Revise resources prospectively and run only after fresh admission; COUNT/RAW stays deferred. |
+| ucope | PARKED | MEDIUM | ROOT | 2026-08-31T12:25:55Z | Contextual BELIEF v2 completed validly as `STOP_FIXED_PANEL_COMPETENCE`: support and all ten checkpoints are complete, but `0/10` seeds pass competence, every root action vector differs from the oracle, every seed exceeds regret `0.02`, and every tail-agreement score is below `0.95`. Positive forced-PROBE margins have no acquisition authority; COUNT/RAW is ineligible. Reopen only for a new independently justified competence-first learner object, never by rerun or post-result budget/tuning changes. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |
 | voronoi_quadrature_field_policy | CLOSED | TERMINAL | NONE | 2026-08-31T08:42:13Z | Standalone reactivation is structurally impossible under the current FRRIE action authority: at shared `N=6`, 234,531,275 allocations cannot inject into 1,296 one-step joint categorical actions, forcing collision fibers of at least 180,966. Retain only FRRIE-owned output-disconnected provenance; an allocation-capable ABI would be a new FRRIE successor. |

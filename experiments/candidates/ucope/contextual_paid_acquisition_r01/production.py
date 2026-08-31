@@ -20,11 +20,19 @@ from .contract import (
     BATCH_SIZE,
     CONTRACT_ID,
     DISPLAYED_COUNT_FLOOR,
+    DURABLE_CEILING_BYTES,
+    ESTIMATED_PEAK_MEMORY_BYTES,
     INFERENCE_READINESS,
+    MAXIMUM_RESULT_WALL_SECONDS,
+    MINIMUM_FREE_DISK_BYTES,
+    MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES,
+    PROJECTED_DURABLE_BYTES,
+    PROJECTED_SCRATCH_BYTES,
     PRODUCTION_MODE,
     PRODUCTION_WORKLOAD,
     RESOURCE_CEILING,
     SCHEMA_VERSION,
+    SCRATCH_CEILING_BYTES,
     SEED_SLOTS,
     default_manifest,
     validate_contract,
@@ -32,15 +40,11 @@ from .contract import (
 from .schema import canonical_bytes
 
 
-PRODUCTION_PREFLIGHT_FORMAT = "UCOPE_CPA_PRODUCTION_RESOURCE_SUPPORT_PREFLIGHT_V2"
+PRODUCTION_PREFLIGHT_FORMAT = "UCOPE_CPA_PRODUCTION_RESOURCE_SUPPORT_PREFLIGHT_V3"
 RESULT_FILENAME = "belief-result.json"
 SUPPORT_ARTIFACT_RELATIVE = "support/support-preflight.json"
 REQUIRED_PYTHON = (3, 10)
 REQUIRED_TORCH = "2.7.0+cpu"
-ESTIMATED_PEAK_MEMORY_BYTES = 2 * 1024**3
-MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES = 4 * 1024**3
-MINIMUM_FREE_DISK_BYTES = 4 * 1024**3
-MAXIMUM_RESULT_WALL_SECONDS = 1_800
 # 2026-08-31 bounded accepted-runtime benchmark at 640 episodes/context:
 # 1.876490 s exact seed-row replay + 7.055924 s for 20 cadence-1 updates.
 # Linear 32x episode/update scaling across ten seeds with a 25% guard rounds up to 3,600 s.
@@ -199,6 +203,31 @@ def _runtime_resource_record(output_root: str | Path) -> dict[str, Any]:
             f"observed {max(free_disk, 0)} bytes"
         )
 
+    static_resources = {
+        "estimated_peak_memory_bytes": ESTIMATED_PEAK_MEMORY_BYTES,
+        "minimum_live_available_memory_bytes": MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES,
+        "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
+        "projected_scratch_bytes": PROJECTED_SCRATCH_BYTES,
+        "projected_durable_bytes": PROJECTED_DURABLE_BYTES,
+        "scratch_ceiling_bytes": SCRATCH_CEILING_BYTES,
+        "durable_ceiling_bytes": DURABLE_CEILING_BYTES,
+        "maximum_result_wall_seconds": MAXIMUM_RESULT_WALL_SECONDS,
+    }
+    if any(type(value) is not int or value <= 0 for value in static_resources.values()):
+        issues.append("resource byte/time limits must be positive exact integers")
+    if any(RESOURCE_CEILING.get(name) != value for name, value in static_resources.items()):
+        issues.append("manifest and runtime resource contracts differ")
+    if ESTIMATED_PEAK_MEMORY_BYTES > MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES:
+        issues.append("estimated peak memory exceeds the minimum live-memory admission")
+    if max(SCRATCH_CEILING_BYTES, DURABLE_CEILING_BYTES) > MINIMUM_FREE_DISK_BYTES:
+        issues.append("scratch or durable ceiling exceeds the minimum free-disk admission")
+    scratch_safe = PROJECTED_SCRATCH_BYTES <= SCRATCH_CEILING_BYTES
+    durable_safe = PROJECTED_DURABLE_BYTES <= DURABLE_CEILING_BYTES
+    if not scratch_safe:
+        issues.append("projected scratch usage exceeds the frozen scratch ceiling")
+    if not durable_safe:
+        issues.append("projected durable usage exceeds the frozen durable ceiling")
+
     projected_wall = PROJECTED_RESULT_WALL_SECONDS
     wall_safe = (
         type(projected_wall) is int
@@ -208,7 +237,7 @@ def _runtime_resource_record(output_root: str | Path) -> dict[str, Any]:
         observed = "unavailable" if projected_wall is None else repr(projected_wall)
         issues.append(
             "bounded Torch result-wall projection must be positive and no greater than "
-            f"1800 seconds; observed {observed}"
+            f"{MAXIMUM_RESULT_WALL_SECONDS} seconds; observed {observed}"
         )
 
     if issues:
@@ -230,6 +259,12 @@ def _runtime_resource_record(output_root: str | Path) -> dict[str, Any]:
         "estimated_peak_memory_bytes": ESTIMATED_PEAK_MEMORY_BYTES,
         "minimum_live_available_memory_bytes": MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES,
         "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
+        "projected_scratch_bytes": PROJECTED_SCRATCH_BYTES,
+        "projected_durable_bytes": PROJECTED_DURABLE_BYTES,
+        "scratch_ceiling_bytes": SCRATCH_CEILING_BYTES,
+        "durable_ceiling_bytes": DURABLE_CEILING_BYTES,
+        "scratch_safe": scratch_safe,
+        "durable_safe": durable_safe,
         "live_available_memory_bytes": live_memory,
         "live_free_disk_bytes": free_disk,
         "projected_result_wall_seconds": projected_wall,
@@ -239,9 +274,9 @@ def _runtime_resource_record(output_root: str | Path) -> dict[str, Any]:
 
 
 def _materialize_support(manifest: str | Path | Mapping[str, Any], output_root: str | Path):
-    from .support import preflight_support
+    from .support import _preflight_production_support
 
-    return preflight_support(manifest, output_root)
+    return _preflight_production_support(manifest, output_root)
 
 
 def _validate_support(path: str | Path, manifest: str | Path | Mapping[str, Any]):
@@ -266,6 +301,12 @@ def _expected_resources(value: Mapping[str, Any]) -> bool:
         "estimated_peak_memory_bytes": ESTIMATED_PEAK_MEMORY_BYTES,
         "minimum_live_available_memory_bytes": MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES,
         "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
+        "projected_scratch_bytes": PROJECTED_SCRATCH_BYTES,
+        "projected_durable_bytes": PROJECTED_DURABLE_BYTES,
+        "scratch_ceiling_bytes": SCRATCH_CEILING_BYTES,
+        "durable_ceiling_bytes": DURABLE_CEILING_BYTES,
+        "scratch_safe": True,
+        "durable_safe": True,
         "maximum_result_wall_seconds": MAXIMUM_RESULT_WALL_SECONDS,
         "wall_safe": True,
     }

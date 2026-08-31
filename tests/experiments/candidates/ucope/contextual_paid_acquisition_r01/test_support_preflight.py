@@ -122,3 +122,10 @@ def test_test_only_preflight_is_complete_bound_strict_and_nonresult(tmp_path):
             stream.write(canonical_bytes(row).decode("ascii") + "\n")
     with pytest.raises(SupportError):
         validate_support(artifact_path, manifest)
+
+
+def test_public_support_preflight_cannot_bypass_production_resources(tmp_path):
+    output_root = tmp_path / "forbidden-production-support"
+    with pytest.raises(SupportError, match="TEST_ONLY"):
+        preflight_support(contract.default_manifest(), output_root)
+    assert not output_root.exists()

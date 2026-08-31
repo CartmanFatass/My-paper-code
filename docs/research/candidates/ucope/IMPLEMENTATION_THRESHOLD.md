@@ -1,13 +1,12 @@
 # UCOPE contextual paid acquisition implementation threshold
 
-Status: `PRODUCTION_V2_IMPLEMENTED_NOT_READY_RESOURCE_WALL_AND_LIVE_MEMORY`
+Status: `COMPLETE_STOP_FIXED_PANEL_COMPETENCE`
 
 The sole BELIEF production command, exact production manifest, combined resource/support preflight,
-and complete-only result schema are frozen and implemented. They are not currently schedulable:
-the guarded result projection is `3,600` seconds against the current `1,800`-second ceiling, and the
-fresh host preflight observed `3,514,687,488` bytes of live available RAM against the required
-`4,294,967,296`. The preflight refused before support materialization, model construction, optimizer
-activity, held-out evaluation, or result publication. R03 is immutable and must never be rerun.
+and complete-only result schema are frozen and implemented. The resource-only v3 revision admitted
+the existing guarded `3,600`-second projection without changing scientific or execution semantics.
+The sole result completed once and validated as `STOP_FIXED_PANEL_COMPETENCE`: `0/10` seeds passed
+competence. The contextual object and historical R03 are both immutable and must never be rerun.
 
 ## Scientific object
 
@@ -108,6 +107,7 @@ experiments/candidates/ucope/contextual_paid_acquisition_r01/
   evaluation.py
   analysis.py
   artifact.py
+  production.py
   cli.py
   __main__.py
 
@@ -120,6 +120,7 @@ tests/experiments/candidates/ucope/contextual_paid_acquisition_r01/
   test_checkpoint_resume.py
   test_analysis_and_schema.py
   test_cli_and_dependency_firewall.py
+  test_production_command.py
 ```
 
 Schemas cover contract, exact BELIEF-flip certificate, support certificate, checkpoint, and complete
@@ -146,8 +147,8 @@ path at every batch, completes and validates all ten batch-640 checkpoints befor
 invoking held-out evaluation, and publishes only one create-once complete v2 result. Historical
 R03/B2 runtime modules are not imported; tests enforce the dependency firewall.
 
-The literal command sequence is currently blocked at production preflight and must not be run past
-that refusal:
+The following was the exact exhausted production sequence. Manifest, preflight, and `run-belief`
+completed once; it is retained as provenance and must not be invoked again:
 
 ```powershell
 $python = 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe'
@@ -163,23 +164,44 @@ $root = 'temp\directions\ucope\exp\ucope-contextual-paid-acquisition-r01-product
 
 Current resource contract: Python 3.10, PyTorch `2.7.0+cpu`, CPU-only deterministic algorithms,
 one worker, one intra-op and one inter-op thread, batch 256, checkpoint cadence one batch, estimated
-peak `2 GiB`, at least `4 GiB` live available RAM and `4 GiB` free disk, and result wall ceiling
-`1,800` seconds. The guarded projection is `3,600` seconds, so the command is fail-closed regardless
-of a later recovery in live RAM.
+peak `2 GiB`, at least `4,294,967,296` live available bytes and `4,294,967,296` free-disk bytes,
+benchmark-derived projected scratch and durable usage of `67,108,864` bytes each under separate
+`268,435,456`-byte ceilings, and an exact `3,600`-second guarded result wall ceiling.
 
-A prospective resource-only revision is available for Root decision; it is not implemented or
-authorized here. It would retain the identical science, data, RNG, learner, work, and command while
-raising only the wall ceiling to the already guarded `3,600` seconds, with `2 GiB` peak RAM,
-`256 MiB` scratch, `256 MiB` durable, one worker, intra/inter-op threads 1, batch 256, and checkpoint
-cadence 1. It would still require a fresh exact preflight, absent output roots, at least `4 GiB` live
-RAM and `4 GiB` free disk, and the exact production support minimum `361>=256` before any activity.
+The retained v3 receipt is
+`temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/preflight/production-preflight.json`.
+It records `16,621,502,464` live available bytes, `659,803,439,104` free-disk bytes, both storage
+projections safe, complete support minimum `361>=256`, `82` files totaling `30,057,292` bytes, and
+zero optimizer updates. The completed `run-belief` invocation freshly rechecked the same live
+runtime/resource gates before accepting this preflight. No further invocation is permitted.
+
+The retained complete result is
+`temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/result/belief-result.json`.
+It validates all ten batch-640 checkpoint records, 6,400 total optimizer updates, complete held-out
+evaluation, and create-once publication. Its exact conclusion-bearing fields are:
+
+```text
+competent_seed_count=0
+competence_pass=false
+acquisition_all_flips=false
+panel_min_signed_specificity=12190847/800000000
+acquisition_pass=false
+fixed_panel_disposition=STOP_FIXED_PANEL_COMPETENCE
+representation_conclusion=NONE
+claim_ceiling=TEN_FIXED_SEED_SLOTS_FINITE_HOST_ONLY_NO_SEED_SUPERPOPULATION
+```
+
+Every seed fails oracle-root-vector equality, `max_regret<=0.02`, and
+`forced_probe_tail_agreement>=0.95`; all score choices remain unique. The positive panel minimum is
+downstream diagnostic evidence only and cannot rescue competence.
 
 ## Deferred representation phase
 
-Only after BELIEF competence and acquisition pass may a separately frozen phase compare COUNT,
+Only after BELIEF competence and acquisition pass could a separately frozen phase compare COUNT,
 unrestricted RAW, and training-time permutation-invariant RAW on identical data and matched work.
 Post-hoc RAW-PERMAVG is insufficient. Any COUNT effect is finite-resource bias because RAW contains
-the count.
+the count. This result fails competence first, so COUNT/RAW is ineligible and no representation phase
+may begin from this object.
 
 ## Stop and claim ceiling
 
@@ -193,6 +215,16 @@ A positive result supports only finite-host contextual paid acquisition by one s
 held-out K. It supports no COUNT advantage, variable-N, MARL, UAV, safety, deployment, or real-world
 QoS claim.
 
+The realized terminal claim is narrower: the exact fixed-budget shared BELIEF learner was
+incompetent in all ten registered seeds despite complete support. It does not establish acquisition
+failure or generic BELIEF unlearnability. No added budget, seed replacement, retuning, checkpoint
+selection, or rerun is permitted.
+
+Root accepted closure of this exact object and the direction-level move from `ACTIVE/HIGH` to
+`PARKED/MEDIUM`. The Portfolio snapshot remains separately Root-owned and was not edited here.
+Reactivation requires a new prospectively frozen competence-first learner or representation object
+with independent justification; it cannot continue this result transaction.
+
 ## Evidence
 
 - `DIRECTION.md`
@@ -200,3 +232,6 @@ QoS claim.
 - `ACQUISITION_PARK_CERT_INDEX.md`
 - `experiments/candidates/ucope/variable_k_paid_probe_r01_r03/`
 - `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-wave2-bounded-benchmark/benchmark-observation.json`
+- `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/preflight/production-preflight.json`
+- `UCOPE_CONTEXTUAL_PAID_ACQUISITION_R01_BELIEF_RESULT_INTAKE_20260831.md`
+- `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/result/belief-result.json`

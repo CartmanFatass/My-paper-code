@@ -24,6 +24,16 @@ DISPLAYED_COUNT_FLOOR = 256
 BATCH_SIZE = 256
 SEED_SLOTS = tuple(f"cpa-r01-fresh-slot-{index:02d}" for index in range(10))
 RNG_VERSION_SPEC = "UCOPE_CPA_COUNTER_V1"
+ESTIMATED_PEAK_MEMORY_BYTES = 2 * 1024**3
+MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES = 4 * 1024**3
+MINIMUM_FREE_DISK_BYTES = 4 * 1024**3
+# Wave-2 measurements projected roughly 45.0 MiB scratch and 47.7 MiB durable with the
+# existing 25% guard; both admissions round upward to an exact 64 MiB reservation.
+PROJECTED_SCRATCH_BYTES = 64 * 1024**2
+PROJECTED_DURABLE_BYTES = 64 * 1024**2
+SCRATCH_CEILING_BYTES = 256 * 1024**2
+DURABLE_CEILING_BYTES = 256 * 1024**2
+MAXIMUM_RESULT_WALL_SECONDS = 3_600
 MODEL_SPEC = {"dtype": "float32", "root": [9, 64, 64, 1], "tail": [9, 64, 64, 1], "activation": "relu", "initialization": "counter_glorot"}
 OPTIMIZER_SPEC = {
     "name": "AdamW",
@@ -48,7 +58,14 @@ RESOURCE_CEILING = {
     "batch_size": BATCH_SIZE,
     "model_checkpoints_per_seed": 1,
     "checkpoint_cadence_batches": 1,
-    "maximum_result_wall_seconds": 1_800,
+    "estimated_peak_memory_bytes": ESTIMATED_PEAK_MEMORY_BYTES,
+    "minimum_live_available_memory_bytes": MINIMUM_LIVE_AVAILABLE_MEMORY_BYTES,
+    "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
+    "projected_scratch_bytes": PROJECTED_SCRATCH_BYTES,
+    "projected_durable_bytes": PROJECTED_DURABLE_BYTES,
+    "scratch_ceiling_bytes": SCRATCH_CEILING_BYTES,
+    "durable_ceiling_bytes": DURABLE_CEILING_BYTES,
+    "maximum_result_wall_seconds": MAXIMUM_RESULT_WALL_SECONDS,
 }
 PRODUCTION_WORKLOAD = {
     "seeds": 10,

@@ -31,6 +31,21 @@ count. The direct-service alternative remains separated by the frozen
 
 ## Current position
 
+The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
+
+```text
+FIXED_PANEL_DISPOSITION=STOP_FIXED_PANEL_COMPETENCE
+COMPETENT_SEED_COUNT=0/10
+COMPETENCE_PASS=false
+ACQUISITION_ALL_FLIPS=false
+ACQUISITION_PASS=false
+REPRESENTATION_CONCLUSION=NONE
+COUNT_RAW_ELIGIBLE=false
+```
+
+This is a terminal fixed-budget nonidentification, not evidence that contextual acquisition fails.
+The exact object may not be rerun, enlarged, retuned, seed-filtered, or rescued after result.
+
 The unique complete replacement transaction
 `ucope-r03-complete-20260827-02` is technically valid, complete and terminal.
 Its accepted scientific disposition is:
@@ -196,16 +211,17 @@ across ten seeds and eight contexts with zero optimizer updates, and the exact o
 PROBE cell: `LINKED × 17/20 × 9/100`. Held-out `K`, historical R03 runtime, context-parameter, and
 non-RNG hash gates are absent.
 
-No production BELIEF result exists. A later object must freeze the direct result command and
+At that date no production BELIEF result existed. A later object had to freeze the direct result command and
 production resource/support preflight before training 1,638,400 root episodes, 819,200 conditional
 tail transitions, and 6,400 total optimizer updates. COUNT-versus-RAW attribution remains deferred
 until BELIEF acquisition competence is established. Root retains the Portfolio lifecycle decision.
 
 ## Contextual BELIEF v2 fixed-panel and production boundary — 2026-08-31
 
-The direct production surface is now implemented as schema/result v2, but it is not currently
-schedulable. No production support root, model, optimizer update, held-out evaluation, or BELIEF
-result was created.
+The direct production surface is implemented as schema/result v2. Its initial `1,800 s` resource
+contract was not schedulable; the later resource-only v3 preflight revision below admits the
+unchanged object. Production support was then created, and the later complete result is interpreted
+below.
 
 ### Prospective inference recast
 
@@ -252,14 +268,73 @@ working set `281,575,424` bytes. Scaling the unchanged ten-seed production work 
 25-percent guard yields a `3,600 s` result projection and about `1.53 GiB` guarded peak, retained under
 a `2 GiB` estimate.
 
-The current contract permits only `1,800 s` and requires at least `4,294,967,296` bytes live RAM.
+The then-current contract permitted only `1,800 s` and required at least `4,294,967,296` bytes live RAM.
 A fresh exact CLI preflight observed only `3,514,687,488` live bytes and refused before support
 materialization; both wall and current live-memory gates fail. This is an engineering/resource
 disposition, not scientific polarity.
 
-Root may prospectively consider a resource-only revision to a `3,600 s` wall ceiling, `2 GiB` peak,
-`256 MiB` scratch, `256 MiB` durable, one worker, one intra-op and one inter-op thread, batch 256,
-and checkpoint cadence 1. That revision is not authorized here and would still require a fresh
-passing runtime/resource/support preflight with at least `4 GiB` live RAM and `4 GiB` free disk.
-COUNT/RAW remains deferred until a complete BELIEF result passes both competence and fixed-panel
-acquisition. Root retains every Portfolio lifecycle and scheduling decision.
+### Resource-only production admission — 2026-08-31
+
+The prospective resource revision is now implemented without changing science, data, RNG,
+learner, optimizer exposure, checkpoint semantics, evaluation, inference, or claim ceiling. The
+result wall ceiling is `3,600 s`; the remaining exact contract is Python 3.10, PyTorch
+`2.7.0+cpu`, CPU-only deterministic algorithms, one worker, one intra-op and one inter-op thread,
+batch 256, checkpoint cadence 1, `2 GiB` estimated peak, at least `4 GiB` live available physical
+RAM, at least `4 GiB` free disk, and benchmark-derived `64 MiB` scratch and durable projections
+under separate `256 MiB` ceilings.
+
+The single fresh preflight completed successfully and atomically published
+`temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/preflight/production-preflight.json`.
+The validated `UCOPE_CPA_PRODUCTION_RESOURCE_SUPPORT_PREFLIGHT_V3` receipt records
+`16,621,502,464` live available bytes, `659,803,439,104` free-disk bytes, both projected-storage
+gates safe, exact support minimum `361>=256`, `82` files totaling `30,057,292` bytes, and zero
+optimizer updates. It created no model, held-out evaluation, or result.
+
+At admission time the unchanged three-input `run-belief` command was technically READY. It was
+later executed once to the complete terminal result below. Root retains every Portfolio lifecycle
+and scheduling decision.
+
+### Complete contextual BELIEF result — 2026-08-31
+
+The create-once artifact
+`temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/result/belief-result.json`
+validates as `UCOPE_CPA_COMPLETE_BELIEF_RESULT_V2`, schema 2, phase `BELIEF`, mode `PRODUCTION`, and
+`complete=true`. It binds all ten complete batch-640 checkpoints to the accepted support record,
+for exactly 6,400 optimizer updates. The retained support minimum is `361>=256`; no technical
+invalidity or incomplete branch precedes interpretation.
+
+The first controlling scientific branch is `STOP_FIXED_PANEL_COMPETENCE`. Competence is `0/10`
+against the required `>=9/10`. Every seed fails the same three substantive predicates:
+
+- its learned eight-cell root vector differs from the oracle vector;
+- its maximum regret is strictly above `0.02`; and
+- its minimum forced-PROBE tail agreement is below `0.95`.
+
+All root and tail score choices are finite and unique, so ties do not explain the failure. Maximum
+regret ranges from `0.02143710125` to `0.0779428825`; minimum per-seed tail agreement ranges from
+`0` to `0.611558515625`. None of the ten seeds reproduces the exact target-only PROBE vector.
+
+The complete downstream panel minimum is nevertheless positive:
+
+```text
+panel_min_signed_specificity = 12190847/800000000 = 0.01523855875
+```
+
+That descriptive forced-PROBE sign cannot rescue the earlier competence failure or establish
+endogenous acquisition. The validated result therefore keeps `acquisition_all_flips=false`,
+`acquisition_pass=false`, and `representation_conclusion=NONE`. COUNT/RAW is ineligible because its
+entry gate required both BELIEF competence and acquisition support.
+
+The artifact claim-ceiling literal remains
+`TEN_FIXED_SEED_SLOTS_FINITE_HOST_ONLY_NO_SEED_SUPERPOPULATION`; the realized supported claim is
+narrower: on this exact fixed-data, fixed-budget host, the shared BELIEF fitted-Q learner failed the
+prespecified competence gate in every seed despite complete support and positive signed
+forced-PROBE margins. This establishes neither that paid information is valueless nor that BELIEF is
+generally unlearnable, and it supplies no COUNT/RAW polarity.
+
+Root accepted the direction-level recommendation to close this exact contextual BELIEF v2 object as
+terminal and move UCOPE from `ACTIVE/HIGH` to `PARKED/MEDIUM`. Reopen only for a genuinely new, prospectively frozen
+competence-first learner with an independently justified optimizer or representation change—not a
+rerun, larger budget, replacement seed, checkpoint selection, or post-result rescue. The historical
+R03 result remains a distinct support failure and supplies no competence or acquisition polarity.
+The Portfolio snapshot remains separately Root-owned and was not edited in this intake.

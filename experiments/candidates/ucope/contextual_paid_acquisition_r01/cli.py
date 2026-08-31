@@ -9,6 +9,7 @@ import json
 
 from .contract import CONTRACT_ID, FEATURE_NAMES, TEST_ONLY_MODE, validate_contract
 from .production import (
+    PRODUCTION_PREFLIGHT_FORMAT,
     create_production_manifest,
     preflight_production,
     run_belief,
@@ -64,7 +65,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             candidate = json.load(stream)
         value = (
             validate_production_preflight(args.artifact)
-            if isinstance(candidate, dict) and candidate.get("format") == "UCOPE_CPA_PRODUCTION_RESOURCE_SUPPORT_PREFLIGHT_V2"
+            if isinstance(candidate, dict) and candidate.get("format") == PRODUCTION_PREFLIGHT_FORMAT
             else validate_support(args.artifact)
         )
         print(json.dumps({"valid": True, "complete": value["complete"]}, sort_keys=True))

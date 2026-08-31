@@ -335,8 +335,8 @@ def _atomic_json(path: Path, value: Any) -> None:
         raise
 
 
-def preflight_support(
-    manifest: str | Path | Mapping[str, Any],
+def _preflight_support_validated(
+    manifest_value: Mapping[str, Any],
     output_root: str | Path,
 ) -> Path:
     """Materialize all data, validate it, then atomically publish one support certificate.
@@ -344,7 +344,6 @@ def preflight_support(
     The output is support-only: no learner is constructed and no oracle values or conclusions are
     serialized. Existing output roots are never appended to or resampled.
     """
-    manifest_value = validate_contract(manifest)
     root = Path(output_root)
     if root.exists():
         raise FileExistsError(f"output root must not already exist: {root}")
@@ -400,3 +399,25 @@ def preflight_support(
     except BaseException:
         shutil.rmtree(staging, ignore_errors=True)
         raise
+
+
+def preflight_support(
+    manifest: str | Path | Mapping[str, Any],
+    output_root: str | Path,
+) -> Path:
+    """Materialize only the bounded TEST_ONLY support seam."""
+    manifest_value = validate_contract(manifest)
+    if manifest_value["mode"] != TEST_ONLY_MODE:
+        raise SupportError("public preflight_support is TEST_ONLY; use preflight-production")
+    return _preflight_support_validated(manifest_value, output_root)
+
+
+def _preflight_production_support(
+    manifest: str | Path | Mapping[str, Any],
+    output_root: str | Path,
+) -> Path:
+    """Production-internal support materialization after live resource admission."""
+    manifest_value = validate_contract(manifest)
+    if manifest_value["mode"] != PRODUCTION_MODE:
+        raise SupportError("production support requires the exact PRODUCTION manifest")
+    return _preflight_support_validated(manifest_value, output_root)

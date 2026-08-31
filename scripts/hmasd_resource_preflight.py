@@ -2,9 +2,9 @@
 """Capture host resources and assess one result-bearing run.
 
 The capture mode is deliberately observational: it never accepts a run estimate
-and never makes an admission decision.  ``assess-run`` applies the frozen HMASD
-memory formula to a fresh capture and writes the evidence used by a run
-manifest.
+and never makes an admission decision. ``admit-memory`` applies the fixed 4 GiB
+physical/effective available-memory floor. ``assess-run`` additionally applies
+the frozen HMASD reserve and peak formula to a fresh capture.
 """
 
 from __future__ import annotations
@@ -31,6 +31,7 @@ except ImportError:
 SCHEMA_VERSION = 1
 GIB = 1024**3
 KIB = 1024
+MINIMUM_AVAILABLE_MEMORY_BYTES = 4 * GIB
 _DIRECTION_RE = re.compile(r"[a-z0-9][a-z0-9_-]{1,63}\Z")
 
 PROC_CPUINFO = Path("/proc/cpuinfo")
@@ -227,6 +228,9 @@ def capture_snapshot() -> dict[str, Any]:
         "host_identity": platform.node(),
         "cpu": _read_cpu(),
         "memory": {
+            "measurement_source": (
+                "GlobalMemoryStatusEx" if os.name == "nt" else "/proc/meminfo"
+            ),
             "total_bytes": memory_values.get("MemTotal", 0),
             "available_bytes": memory_values.get("MemAvailable", 0),
             "total_gib": round(memory_values.get("MemTotal", 0) / GIB, 6),
@@ -240,6 +244,108 @@ def capture_snapshot() -> dict[str, Any]:
                 None if current_bytes is None else round(current_bytes / GIB, 6)
             ),
         },
+    }
+
+
+def assess_memory_floor(snapshot: Mapping[str, Any]) -> dict[str, Any]:
+    """Assess the fixed pre-run available-memory floor without a run estimate."""
+
+    memory = snapshot.get("memory")
+    reasons: list[str] = []
+    if not isinstance(memory, Mapping):
+        memory = {}
+        reasons.append("snapshot memory is missing")
+
+    try:
+        available_bytes = _parse_memory_bytes(
+            _memory_field(memory, "available_bytes", "available_gib", "MemAvailable"),
+            default_unit="bytes",
+        )
+        if "available_gib" in memory and "available_bytes" not in memory:
+            available_bytes = _parse_memory_bytes(memory["available_gib"], default_unit="GiB")
+    except ValueError as exc:
+        available_bytes = None
+        reasons.append(f"available physical memory is invalid: {exc}")
+    if available_bytes is None or available_bytes < 0:
+        available_bytes = None
+        if not any(reason.startswith("available physical memory") for reason in reasons):
+            reasons.append("available physical memory is unavailable")
+
+    cgroup_max_raw = _memory_field(memory, "cgroup_memory_max_raw", "memory_max")
+    cgroup_max_value = _memory_field(memory, "cgroup_memory_max_bytes", "cgroup_max_bytes")
+    try:
+        if cgroup_max_raw is not None and str(cgroup_max_raw).strip().lower() == "max":
+            cgroup_max_bytes = None
+        elif cgroup_max_value is not None:
+            cgroup_max_bytes = _parse_memory_bytes(cgroup_max_value, default_unit="bytes")
+        elif cgroup_max_raw is not None:
+            cgroup_max_bytes = _parse_memory_bytes(cgroup_max_raw, default_unit="bytes")
+        else:
+            cgroup_max_bytes = None
+    except ValueError as exc:
+        cgroup_max_bytes = None
+        reasons.append(f"cgroup memory limit is invalid: {exc}")
+
+    cgroup_current_value = _memory_field(
+        memory,
+        "cgroup_memory_current_bytes",
+        "cgroup_current_bytes",
+        "memory_current",
+        "cgroup_memory_current_raw",
+    )
+    try:
+        cgroup_current_bytes = (
+            None
+            if cgroup_current_value is None
+            else _parse_memory_bytes(cgroup_current_value, default_unit="bytes")
+        )
+    except ValueError as exc:
+        cgroup_current_bytes = None
+        reasons.append(f"cgroup memory.current is invalid: {exc}")
+
+    if cgroup_max_bytes is not None and cgroup_current_bytes is None:
+        reasons.append("bounded cgroup memory.current is unavailable")
+        cgroup_headroom_bytes = None
+        effective_available_bytes = None
+    elif cgroup_max_bytes is None:
+        cgroup_headroom_bytes = None
+        effective_available_bytes = available_bytes
+    else:
+        cgroup_headroom_bytes = max(0, cgroup_max_bytes - (cgroup_current_bytes or 0))
+        effective_available_bytes = (
+            None
+            if available_bytes is None
+            else min(available_bytes, cgroup_headroom_bytes)
+        )
+
+    physical_floor_pass = (
+        available_bytes is not None
+        and available_bytes >= MINIMUM_AVAILABLE_MEMORY_BYTES
+    )
+    effective_floor_pass = (
+        effective_available_bytes is not None
+        and effective_available_bytes >= MINIMUM_AVAILABLE_MEMORY_BYTES
+    )
+    if not physical_floor_pass:
+        reasons.append("available physical memory is below 4 GiB")
+    if physical_floor_pass and not effective_floor_pass:
+        reasons.append("effective available memory is below 4 GiB")
+
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "captured_at": snapshot.get("captured_at"),
+        "assessed_at": _utc_now(),
+        "measurement_source": memory.get("measurement_source"),
+        "minimum_available_bytes": MINIMUM_AVAILABLE_MEMORY_BYTES,
+        "available_physical_bytes": available_bytes,
+        "cgroup_memory_max_bytes": cgroup_max_bytes,
+        "cgroup_memory_current_bytes": cgroup_current_bytes,
+        "cgroup_headroom_bytes": cgroup_headroom_bytes,
+        "effective_available_bytes": effective_available_bytes,
+        "physical_floor_pass": physical_floor_pass,
+        "effective_floor_pass": effective_floor_pass,
+        "passed": physical_floor_pass and effective_floor_pass and not reasons,
+        "failure_reasons": reasons,
     }
 
 
@@ -359,7 +465,10 @@ def assess_snapshot(
     reserve_gib = max(4.0, 0.20 * effective_limit_gib)
     usable_gib = max(0.0, effective_available_gib - reserve_gib)
     adjusted_peak_gib = 1.25 * peak_gib
-    memory_safe = adjusted_peak_gib <= usable_gib
+    physical_floor_pass = available_bytes >= MINIMUM_AVAILABLE_MEMORY_BYTES
+    effective_floor_pass = effective_available_bytes >= MINIMUM_AVAILABLE_MEMORY_BYTES
+    memory_floor_pass = physical_floor_pass and effective_floor_pass
+    memory_safe = memory_floor_pass and adjusted_peak_gib <= usable_gib
     return {
         "schema_version": SCHEMA_VERSION,
         "preflight_id": snapshot.get("preflight_id"),
@@ -382,6 +491,10 @@ def assess_snapshot(
         "reserve_gib": round(reserve_gib, 6),
         "usable_gib": round(usable_gib, 6),
         "adjusted_peak_gib": round(adjusted_peak_gib, 6),
+        "minimum_available_bytes": MINIMUM_AVAILABLE_MEMORY_BYTES,
+        "physical_floor_pass": physical_floor_pass,
+        "effective_floor_pass": effective_floor_pass,
+        "memory_floor_pass": memory_floor_pass,
         "memory_safe": memory_safe,
         "memory": {
             "total_bytes": total_bytes,
@@ -397,6 +510,11 @@ def _parser() -> argparse.ArgumentParser:
     modes = parser.add_subparsers(dest="mode", required=True)
     capture = modes.add_parser("capture", help="capture observed host resources")
     capture.add_argument("--out", required=True)
+    memory_floor = modes.add_parser(
+        "admit-memory",
+        help="require at least 4 GiB of physical and effective available memory",
+    )
+    memory_floor.add_argument("--out", required=True)
     assess = modes.add_parser("assess-run", help="assess one result-bearing run")
     assess.add_argument("--direction", required=True)
     assess.add_argument("--run-id", required=True)
@@ -417,6 +535,12 @@ def main(argv: list[str] | None = None) -> int:
             _atomic_write_json(Path(args.out), payload)
             print(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
             return 0
+
+        if args.mode == "admit-memory":
+            payload = assess_memory_floor(capture_snapshot())
+            _atomic_write_json(Path(args.out), payload)
+            print(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+            return 0 if payload["passed"] else 6
 
         snapshot = capture_snapshot()
         assessed = assess_snapshot(

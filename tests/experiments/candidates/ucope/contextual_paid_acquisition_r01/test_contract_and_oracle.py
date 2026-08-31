@@ -31,6 +31,22 @@ def test_frozen_contract_population_and_manifest_are_exact():
         "fixed_seed_slots": 10,
         "seed_superpopulation_claim": False,
     }
+    assert contract.RESOURCE_CEILING == {
+        "workers": 1,
+        "torch_intraop_threads": 1,
+        "torch_interop_threads": 1,
+        "batch_size": 256,
+        "model_checkpoints_per_seed": 1,
+        "checkpoint_cadence_batches": 1,
+        "estimated_peak_memory_bytes": 2 * 1024**3,
+        "minimum_live_available_memory_bytes": 4 * 1024**3,
+        "minimum_free_disk_bytes": 4 * 1024**3,
+        "projected_scratch_bytes": 64 * 1024**2,
+        "projected_durable_bytes": 64 * 1024**2,
+        "scratch_ceiling_bytes": 256 * 1024**2,
+        "durable_ceiling_bytes": 256 * 1024**2,
+        "maximum_result_wall_seconds": 3_600,
+    }
     assert contract.validate_contract() == contract.default_manifest()
 
 

@@ -9,7 +9,7 @@ import gzip
 import json
 
 from .checkpoint import checkpoint_payload, load_checkpoint, save_checkpoint
-from .contract import BATCH_SIZE, K_TRAIN, SEED_SLOTS, as_fraction, contexts, default_manifest
+from .contract import BATCH_SIZE, K_TRAIN, SEED_SLOTS, TEST_ONLY_MODE, as_fraction, contexts, default_manifest
 from .model import build_shared_model, displayed_belief, feature_vector, validate_shared_model
 from .schema import canonical_bytes
 from .support import build_fixed_behavior_plan, materialize_fixed_behavior_plan, validate_support
@@ -98,6 +98,8 @@ def train_one_seed(
     if seed_slot not in SEED_SLOTS:
         raise ValueError("unknown seed slot")
     support = validate_support(preflight_artifact, manifest)
+    if support["mode"] != TEST_ONLY_MODE:
+        raise ValueError("public train_one_seed is TEST_ONLY; use run-belief for PRODUCTION")
     return _train_one_seed_from_validated_support(
         seed_slot,
         preflight_artifact,
