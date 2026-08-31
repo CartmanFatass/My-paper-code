@@ -16,10 +16,24 @@ whenever useful. Specialist profiles remain optional native subagents. A subagen
 working method, not an exclusive authority boundary. Native prompts and responses use ordinary
 language; no repository message envelope or routing identifier is required.
 
-Name native subagent tasks as `<alias>_<model><effort>_<direction>_<task>`. Use the shortest unique
-alias; model codes are `l/t/s` for Luna/Terra/Sol and effort codes are `l/m/h/xh/mx` for
-low/medium/high/xhigh/max. Task IDs remain lowercase because the native API accepts lowercase
-letters, digits and underscores; user-facing notation may capitalize the model code.
+Name native subagent tasks as `<agent-alias>_<model><effort>_<direction>_<task>`. `agent-alias` is
+the shortest stable alias of the custom subagent type, not an instance or task alias: use `dm`, `em`
+and `cm` for Direction Manager, Evidence/Experiment Manager and Code Manager, and the corresponding
+shortest unambiguous role alias for specialists. Model codes are `l/t/s` for Luna/Terra/Sol and
+effort codes are `l/m/h/xh/mx` for low/medium/high/xhigh/max. Task IDs remain lowercase because the
+native API accepts lowercase letters, digits and underscores; user-facing notation may capitalize
+the model code.
+
+## Workflow-task routing
+
+When a user asks the designated Codex session to handle a workflow or control-plane change or audit
+(`AGENTS.md`, `.agents/skills`, `.agents/roles`, `.codex/agents`, dispatch, session routing,
+transport, permissions, or task lifecycle), trigger `$hmasd-workflow-outsource` before editing,
+spawning, or sending any other workflow request. The skill makes one exact prompt and one dispatch
+to the named target; it does not authorize a second objective, parallel fan-out, or unlisted file.
+The current "this session" target is recorded in that skill, while an explicit target in the user
+request takes precedence. If the target, owned paths, allowed effects, or acceptance checks are
+missing, stop with `BLOCKED_INPUT` or ask one blocking AMA question rather than guessing.
 
 ## Workspace and Git
 

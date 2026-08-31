@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Workflow Outsource"
+  short_description: "Dispatch bounded workflow work to a named session"
+  default_prompt: "Use $hmasd-workflow-outsource to dispatch one bounded workflow task to the designated Codex session."
