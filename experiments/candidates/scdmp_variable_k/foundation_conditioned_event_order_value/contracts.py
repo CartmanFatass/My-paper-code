@@ -24,7 +24,7 @@ class ContractError(ValueError):
 
 
 HOST: Final[str] = "QUAD-UAV-PALLET-GANTRY-24P5M-v1"
-MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V2"
+MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V3"
 TICK_SECONDS: Final[float] = 0.1
 HORIZON_TICKS: Final[int] = 364
 K_TARGET: Final[int] = 13
@@ -32,8 +32,14 @@ FOUNDATION_UPDATES: Final[int] = 160
 CHECKPOINT_UPDATE: Final[int] = FOUNDATION_UPDATES
 EPISODES_PER_UPDATE: Final[int] = 12
 COMPETENCE_EPISODES: Final[int] = 120
-TAPE_COUNT: Final[int] = 24
-PANEL_WIDTH: Final[int] = 144
+TAPE_COUNT: Final[int] = 562
+PANEL_WIDTH: Final[int] = 3_372
+PANEL_FULL_SLICE_TAPES: Final[int] = 24
+PANEL_FULL_SLICE_COUNT: Final[int] = 23
+PANEL_FINAL_SLICE_TAPES: Final[int] = 10
+PANEL_SLICE_COUNT: Final[int] = 24
+PANEL_MAX_NATIVE_WIDTH: Final[int] = 144
+PANEL_FINAL_NATIVE_WIDTH: Final[int] = 60
 FAILURE_LABELS: Final[tuple[str, ...]] = (
     "cable_overload",
     "gantry_contact",
@@ -66,13 +72,36 @@ GRAPH_EVENTS: Final[Mapping[str, tuple[str, str]]] = MappingProxyType({
 })
 
 RESOURCE_MAXIMA: Final[Mapping[str, int]] = MappingProxyType({
-    "episodes_rollouts": 2_184,
-    "primitive_slots": 794_976,
+    "episodes_rollouts": 5_412,
+    "primitive_slots": 1_969_968,
     "adamw_steps": 1_920,
     "checkpoints": 1,
-    "forced_actions": 144,
-    "foundation_queries": 61_008,
+    "forced_actions": 3_372,
+    "foundation_queries": 148_164,
+    "panel_slices": 24,
 })
+
+RESOURCE_ENVELOPE: Final[Mapping[str, int]] = MappingProxyType({
+    "wall_seconds": 300,
+    "peak_rss_bytes": 1_073_741_824,
+    "scratch_bytes": 67_108_864,
+    "durable_bytes": 67_108_864,
+    "workers": 1,
+    "native_threads": 1,
+    "torch_threads": 1,
+    "torch_interop_threads": 1,
+    "minimum_available_memory_bytes": 4_294_967_296,
+})
+
+INFERENCE_ALPHA: Final[float] = 0.05
+INFERENCE_MARGIN: Final[float] = 0.0
+INFERENCE_CONTINUOUS_Q_STAR: Final[float] = 0.551580065745296
+INFERENCE_DISCRETE_Q_FAIL: Final[float] = 0.551579365312785
+INFERENCE_FIRST_GAP_RAW_SUM_PASS: Final[int] = 21_046
+INFERENCE_COMMON_GAP_RAW_SUM_PASS: Final[int] = 42_091
+INFERENCE_PLANNING_GAP: Final[float] = 0.1
+INFERENCE_JOINT_POWER_LOWER_BOUND: Final[float] = 0.801021247429385
+INFERENCE_N561_JOINT_POWER_LOWER_BOUND: Final[float] = 0.799048262648854
 
 
 class Graph(str, Enum):
@@ -82,8 +111,9 @@ class Graph(str, Enum):
 
 class Disposition(str, Enum):
     ESTABLISHED = "TARGET_CANDIDATE_ORDER_VALUE_ESTABLISHED"
-    CLOSED = "TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED"
+    CLOSED = "TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED_AT_FROZEN_RESOLUTION"
     FOUNDATION_NONPASS = "FOUNDATION_COMPETENCE_NOT_ESTABLISHED"
+    INVALID = "INVALID_EVIDENCE"
 
 
 @dataclass(frozen=True, slots=True)
@@ -168,11 +198,12 @@ class Manifest:
     foundation_updates: int = FOUNDATION_UPDATES
     checkpoint_update: int = CHECKPOINT_UPDATE
     result_phase: str = "FOUNDATION_AND_2X3"
-    production_status: str = "SCIENTIFIC_INFERENCE_HOLD"
+    production_status: str = "READY_GUARDED_RESUMABLE_RESULT"
     master_contract: tuple[str, ...] = (
-        "one OS-cryptographic 32-byte master after preflight and fresh-root creation",
-        "create-only raw persistence; reload unchanged; no seed selection, redraw, or retry",
-        "checkpoint V2 binds the same raw master at completed update 160",
+        "one OS-cryptographic 32-byte master after fresh preflight and resource admission",
+        "create-only raw persistence; every resume reloads the same master",
+        "no redraw, replacement, seed selection, threshold change, or tape-count change",
+        "checkpoint V3 binds the same raw master at completed update 160",
     )
     episodes_per_update: int = EPISODES_PER_UPDATE
     competence_episodes: int = COMPETENCE_EPISODES
@@ -210,10 +241,26 @@ class Manifest:
         "V_A=min(0.5*d_0m,0.5*d_1m,0.5*(d_0c+d_1c))",
     )
     inference_contract: tuple[tuple[str, object], ...] = (
-        ("blocks", 24), ("family_size", 4), ("family_alpha", 0.05),
-        ("one_sided_alpha", 0.05 / 4.0), ("df", 23),
-        ("reduction", "float64_fsum"), ("zero_variance", "lower_equals_mean"),
-        ("branch", "all_four_adjusted_lower_bounds_strictly_positive"),
+        ("tapes", 562),
+        ("component_names", ("g_A_RH", "g_A_HR", "g_COMMON")),
+        ("g_A_RH", "0.5*d_1m"),
+        ("g_A_HR", "0.5*d_0m"),
+        ("g_COMMON", "0.5*(d_0c+d_1c)"),
+        ("method", "bounded_Bernoulli_KL_Chernoff"),
+        ("component_alpha", 0.05),
+        ("joint_p_value", "max_component_p_value_IUT"),
+        ("error_control", "all_or_none_strong_FWER"),
+        ("margin", 0.0),
+        ("branch", "single_joint_claim_only"),
+        ("integer_first_pass_A_RH", 21_046),
+        ("integer_first_pass_A_HR", 21_046),
+        ("integer_first_pass_COMMON", 42_091),
+        ("continuous_q_star", 0.551580065745296),
+        ("discrete_q_fail", 0.551579365312785),
+        ("planning_normalized_support_range_gap_minimum", 0.1),
+        ("joint_power_lower_bound", 0.801021247429385),
+        ("n561_joint_power_lower_bound", 0.799048262648854),
+        ("forbidden_reporting", "independent_component_claims_or_simultaneous_confidence_intervals"),
     )
     rng_contract: tuple[str, ...] = (
         "foundation-initialization:uniform24:(tensor_name,flat_index)",
@@ -227,6 +274,18 @@ class Manifest:
     )
     endpoint: str = "U=1[safe_dock]*(1-dock_tick/364); failure_or_timeout=0"
     resource_maxima: tuple[tuple[str, int], ...] = tuple(RESOURCE_MAXIMA.items())
+    resource_envelope: tuple[tuple[str, int], ...] = tuple(RESOURCE_ENVELOPE.items())
+    panel_slice_contract: tuple[tuple[str, object], ...] = (
+        ("slice_count", 24),
+        ("full_slice_count", 23),
+        ("full_slice_tapes", 24),
+        ("full_slice_width", 144),
+        ("final_slice_tapes", 10),
+        ("final_slice_width", 60),
+        ("ordering", "global_tape_then_HR_RH_then_COMMON_A_HR_A_RH"),
+        ("publication", "all_3372_cells_then_one_atomic_global_recomputation"),
+        ("stopping", "no_early_stop_no_supplement_no_replacement"),
+    )
     source_modules: tuple[str, ...] = (
         "__init__", "__main__", "contracts", "rng", "foundation", "training", "host_bridge", "panel",
         "clock_controls", "analysis", "lifecycle", "artifacts", "source_manifest", "runner",
@@ -259,6 +318,7 @@ class Manifest:
     def to_dict(self) -> dict[str, object]:
         value = json.loads(json.dumps(asdict(self), allow_nan=False))
         value["resource_maxima"] = dict(self.resource_maxima)
+        value["resource_envelope"] = dict(self.resource_envelope)
         return value
 
 
@@ -269,6 +329,13 @@ def validate_resource_request(observed: Mapping[str, int]) -> None:
         value = observed[name]
         if isinstance(value, bool) or not isinstance(value, int) or value < 0 or value > maximum:
             raise ContractError(f"resource ceiling exceeded or invalid: {name}")
+
+
+def validate_resource_envelope(observed: Mapping[str, int]) -> None:
+    if not isinstance(observed, Mapping) or dict(observed) != dict(RESOURCE_ENVELOPE):
+        raise ContractError("resource envelope differs from the frozen V3 contract")
+    if any(isinstance(value, bool) or not isinstance(value, int) or value <= 0 for value in observed.values()):
+        raise ContractError("resource envelope values must be positive integers")
 
 
 @dataclass(frozen=True, slots=True)
@@ -298,7 +365,10 @@ class TerminalFact:
     disposition: str
     foundation_gate: FoundationGate
     panel_complete: bool
-    adjusted_lower_bounds: tuple[tuple[str, float], ...] = ()
+    gap_integer_sums: tuple[tuple[str, int], ...] = ()
+    component_p_values: tuple[tuple[str, float], ...] = ()
+    joint_p_value: float | None = None
+    joint_effect_lower_bound: float | None = None
 
 
 if ACTIONS[COMMON_INDEX] != (1, (0, 0, 0, 0)):
@@ -309,6 +379,15 @@ if ACTIONS[A_RH_INDEX] != (2, (0, 0, 1, -1)):
     raise RuntimeError("registered A_RH catalogue action drifted")
 if PANEL_WIDTH != TAPE_COUNT * len(GRAPHS) * len(CANDIDATE_ACTIONS):
     raise RuntimeError("FCEOV native panel width drifted")
+if (
+    PANEL_FULL_SLICE_COUNT * PANEL_FULL_SLICE_TAPES + PANEL_FINAL_SLICE_TAPES
+    != TAPE_COUNT
+    or PANEL_FULL_SLICE_TAPES * len(GRAPHS) * len(CANDIDATE_ACTIONS)
+    != PANEL_MAX_NATIVE_WIDTH
+    or PANEL_FINAL_SLICE_TAPES * len(GRAPHS) * len(CANDIDATE_ACTIONS)
+    != PANEL_FINAL_NATIVE_WIDTH
+):
+    raise RuntimeError("FCEOV panel-slice decomposition drifted")
 
 
 __all__ = [
@@ -316,7 +395,14 @@ __all__ = [
     "COMPETENCE_EPISODES", "ContractError", "Disposition", "EPISODES_PER_UPDATE",
     "FAILURE_LABELS", "FOUNDATION_UPDATES", "FoundationGate", "GRAPH_ASSIGNMENT",
     "GRAPH_EVENTS", "GRAPH_Q", "GRAPHS", "Graph", "HORIZON_TICKS", "HOST",
-    "K_TARGET", "MANIFEST_SCHEMA", "Manifest", "PANEL_WIDTH", "PanelCell", "PublicClaimState",
-    "RESOURCE_MAXIMA", "TAPE_COUNT", "TICK_SECONDS",
-    "TerminalFact", "fixed_claim_state", "validate_resource_request", "validate_state_alias",
+    "INFERENCE_ALPHA", "INFERENCE_COMMON_GAP_RAW_SUM_PASS", "INFERENCE_CONTINUOUS_Q_STAR",
+    "INFERENCE_DISCRETE_Q_FAIL", "INFERENCE_FIRST_GAP_RAW_SUM_PASS",
+    "INFERENCE_JOINT_POWER_LOWER_BOUND", "INFERENCE_MARGIN",
+    "INFERENCE_N561_JOINT_POWER_LOWER_BOUND", "INFERENCE_PLANNING_GAP",
+    "K_TARGET", "MANIFEST_SCHEMA", "Manifest", "PANEL_FINAL_NATIVE_WIDTH",
+    "PANEL_FINAL_SLICE_TAPES", "PANEL_FULL_SLICE_COUNT", "PANEL_FULL_SLICE_TAPES",
+    "PANEL_MAX_NATIVE_WIDTH", "PANEL_SLICE_COUNT", "PANEL_WIDTH", "PanelCell", "PublicClaimState",
+    "RESOURCE_ENVELOPE", "RESOURCE_MAXIMA", "TAPE_COUNT", "TICK_SECONDS",
+    "TerminalFact", "fixed_claim_state", "validate_resource_envelope", "validate_resource_request",
+    "validate_state_alias",
 ]

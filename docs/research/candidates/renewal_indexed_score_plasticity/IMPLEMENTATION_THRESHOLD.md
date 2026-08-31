@@ -6,6 +6,16 @@ This exact zero-learning certificate completed on 2026-08-30 and is recorded in
 `RISP_ECR_R01_RESULT_INTAKE.md`; it must not be rerun. The prospective support law does not modify
 the historical fixed-five-schedule host or inherit its result polarity.
 
+## Successor boundary — 2026-08-31
+
+No witness-independent prevalence successor is frozen for implementation. The mathematically
+complete `PC3-IID-REFERENCE` candidate was not adopted because its behavior occupancy, stopping,
+duration, opportunity, next-`k`, regret, and materiality choices are convenience conventions rather
+than an independently target-grounded law. Do not create or enumerate a prevalence package from
+that candidate. Reconsider only with a complete intended-target generative/utility law or a robust
+lower bound over an independently justified law class, as recorded in
+`RISP_PROSPECTIVE_POPULATION_LAW_DECISION_AUDIT_20260831.md`.
+
 ## Controllers and information
 
 - `RAW_HISTORY_BAYES`: all deployable public history, never hidden state; independent ceiling.

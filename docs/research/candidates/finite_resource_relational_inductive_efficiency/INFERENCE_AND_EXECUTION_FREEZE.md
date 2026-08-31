@@ -1,11 +1,14 @@
-# FRRIE fixed-work estimand and execution freeze; inference blocker
+# FRRIE fixed-work estimand and execution freeze; resolved no-result object
 
-Status: `INFERENCE_BLOCKED`
+Status: `R01_CLOSED_NO_RESULT_LAUNCH`
 
-This document freezes the candidate estimands, margins, block population, checkpoint, and minimum
+This document preserves the candidate estimands, margins, block population, checkpoint, and minimum
 native/learner semantics for the first fresh `RIDGEGATE-2Z/RSCF` fixed-roster object. It records why
 no scientifically valid, decision-capable simultaneous mean-bound method exists under the current
-24-block ceiling and branch law. It does not authorize or report production activity.
+24-block ceiling and branch law. The later controlling resolution is
+`FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`: R01 is closed before production, not awaiting
+selection among the repair options below. This file does not authorize or report production
+activity.
 
 ## Conclusion
 
@@ -29,10 +32,13 @@ branches. Wave-2 engineering has since added the v2 external-action native seam,
 intact-versus-shadow probability surface, per-block checkpoint/resume law, exact work accounting,
 and result-blind orchestration. Those technical repairs do not change the inference impossibility.
 
-The smallest inference repair is a prospective choice among four materially different objects:
+The historical smallest-repair set comprised four materially different objects:
 increase the block count; widen/change the margins; change the estimand to a median/majority-block
 claim; or drop equivalence/cut-insensitive closure and accept a one-sided efficacy-only object.
-Root prospectively chose the narrow package-effect object before activity. Same-host compiler
+The 2026-08-31 resolution audit found that none supplies a proportionate decision-capable R01:
+even the four-condition one-sided IUT has at most about 13% power at one native delivery beyond its
+margins under the protected bounded root class, while majority/prevalence changes the mean-return
+estimand. The current result object therefore stops without production. Same-host compiler
 absorption, semantic correctness, and relational-mechanism conclusions are deleted from this first
 object rather than silently treated as passed. A competent same-host compiler is a separate
 successor object and cannot be added after observing this object's values.
@@ -540,9 +546,10 @@ Four prospective resolutions are scientifically distinct:
 3. change the estimand to an exact median or majority-block claim; or
 4. delete equivalence and cut-insensitive closure and freeze a one-sided efficacy-only mean object.
 
-No option is selected here. Until Root selects and EM freezes one, v2 preflight must return
-`SIMULTANEOUS_MEAN_INFERENCE_UNRESOLVED_AT_24_BLOCKS`, `ready=false`, and no polarity-capable
-analysis or terminal status.
+The later resolution audit selects no result launch rather than one of these historical repairs.
+V2 preflight must remain `ready=false` and no polarity-capable analysis or terminal result may be
+implemented for R01. A future repair is a new prospectively frozen object, not an activation of
+this panel.
 
 ### Finite-24-root descriptive alternative
 
@@ -633,8 +640,11 @@ paired parameter/optimizer byte equality facts. If no PHY projection ever change
 update 512 and both complete learned parameter and optimizer states remain byte-identical after
 every update, the arm trajectories are exactly the same under the common addressed tapes. The
 runner may return `CLOSED_EXACT_NO_PROJECTION_CONTACT` before evaluation. This establishes only
-zero treatment effect for this exact training path and budget. A failed or missing audit cannot
-select this branch, and projection contact by itself is not positive evidence.
+zero treatment effect for the exact executed paths and budget, not the unsampled root population.
+R01 is now closed before production, so this sampled branch must not be launched as an inference
+substitute. A failed or missing audit cannot select it, and projection contact by itself is not
+positive evidence. Universal treatment closure instead requires a static proof over every
+reachable supported training path; no such proof currently exists.
 
 No other early stop is allowed after scientific activity begins. A resource ceiling or technical
 failure stops safely with no partial scientific values.

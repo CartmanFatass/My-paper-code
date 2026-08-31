@@ -1,14 +1,47 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "crto-common-history-gate-result-v1",
+  "$id": "crto-common-history-gate-result-v2",
+  "$defs": {
+    "effectHull": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contrast", "budget", "slot_effects", "descriptive_mean", "lower", "upper",
+        "width", "replicate_count", "method", "joint_coverage", "family_alpha",
+        "multiplicity"
+      ],
+      "properties": {
+        "contrast": {
+          "enum": [
+            "RAW_MINUS_TRUE", "DERANGED_MINUS_TRUE", "RAW_MINUS_DERANGED",
+            "RAW_GAIN", "TRUE_DEGRADE"
+          ]
+        },
+        "budget": {"enum": ["SHORT", "LONG"]},
+        "slot_effects": {
+          "type": "array", "minItems": 8, "maxItems": 8,
+          "items": {"type": "number"}
+        },
+        "descriptive_mean": {"type": "number"},
+        "lower": {"type": "number"},
+        "upper": {"type": "number"},
+        "width": {"type": "number", "minimum": 0},
+        "replicate_count": {"const": 8},
+        "method": {"const": "FIXED_EIGHT_ADDRESS_CENSUS_EFFECT_HULL"},
+        "joint_coverage": {"const": 1.0},
+        "family_alpha": {"type": "null"},
+        "multiplicity": {"type": "null"}
+      }
+    }
+  },
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version", "object_id", "status", "config", "provenance",
-    "replicates", "analysis", "admission"
+    "replicates", "analysis", "resource", "ledger", "runtime", "admission"
   ],
   "properties": {
-    "schema_version": {"const": "crto-common-history-gate-result-v1"},
+    "schema_version": {"const": "crto-common-history-gate-result-v2"},
     "object_id": {"const": "CRTO-COMMON-HISTORY-GATE-20260830-01"},
     "status": {"enum": ["IDENTIFYING", "NONIDENTIFYING"]},
     "config": {
@@ -35,36 +68,151 @@
     },
     "replicates": {
       "type": "array", "minItems": 8, "maxItems": 8,
-      "items": {"type": "object"}
+      "prefixItems": [
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 0}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 1}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 2}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 3}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 4}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 5}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 6}}},
+        {"type": "object", "required": ["replicate"], "properties": {"replicate": {"const": 7}}}
+      ],
+      "items": false
     },
     "analysis": {
       "type": "object",
-      "required": ["status", "interpretation", "failures", "intervals"],
+      "required": [
+        "status", "interpretation", "failures", "effect_hulls", "trajectory_hulls",
+        "raw_long_competence", "close_budget_descriptions", "inference_method",
+        "target_population"
+      ],
       "properties": {
         "status": {"enum": ["IDENTIFYING", "NONIDENTIFYING"]},
         "interpretation": {
           "enum": [
             "PERSISTENT_ALIGNED_BIAS", "OPTIMIZATION_EXPOSURE_ONLY",
-            "GENERIC_PREPROCESSING", "CLOSE_TESTED_MECHANISM", "UNRESOLVED"
+            "GENERIC_PREPROCESSING", "CLOSE_TESTED_MECHANISM", "UNRESOLVED",
+            "NONIDENTIFYING_K8_COMPETENCE_SUPPORT", "STOP_RAW_LONG_INCOMPETENT"
           ]
         },
         "failures": {"type": "array", "items": {"type": "string"}},
-        "intervals": {"type": "array", "items": {"type": "object"}}
+        "effect_hulls": {
+          "type": "array", "maxItems": 6, "items": {"$ref": "#/$defs/effectHull"}
+        },
+        "trajectory_hulls": {
+          "type": "array", "maxItems": 2, "items": {"$ref": "#/$defs/effectHull"}
+        },
+        "raw_long_competence": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["cells", "c_raw", "max_raw_minus_script", "script_is_qualification_gate"],
+              "properties": {
+                "cells": {
+                  "type": "array", "minItems": 16, "maxItems": 16,
+                  "items": {
+                    "type": "object", "additionalProperties": false,
+                    "required": [
+                      "slot", "stratum", "row_count", "raw_mean_regret",
+                      "script_mean_regret", "raw_minus_script"
+                    ],
+                    "properties": {
+                      "slot": {"type": "integer", "minimum": 0, "maximum": 7},
+                      "stratum": {"enum": ["KEEP_MATERIAL", "REPLAN_MATERIAL"]},
+                      "row_count": {"type": "integer", "minimum": 8},
+                      "raw_mean_regret": {"type": "number", "minimum": 0},
+                      "script_mean_regret": {"type": "number", "minimum": 0},
+                      "raw_minus_script": {"type": "number"}
+                    }
+                  }
+                },
+                "c_raw": {"type": "number", "minimum": 0},
+                "max_raw_minus_script": {"type": "number"},
+                "script_is_qualification_gate": {"const": false}
+              }
+            }
+          ]
+        },
+        "close_budget_descriptions": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["SHORT", "LONG"],
+              "properties": {
+                "SHORT": {"enum": ["RAW_SUPERIOR", "PRACTICAL_EQUIVALENCE", "MIXED_OR_SMALL_TRUE_EFFECT"]},
+                "LONG": {"enum": ["RAW_SUPERIOR", "PRACTICAL_EQUIVALENCE", "MIXED_OR_SMALL_TRUE_EFFECT"]}
+              }
+            }
+          ]
+        },
+        "inference_method": {"const": "FIXED_EIGHT_ADDRESS_CENSUS_EFFECT_HULL"},
+        "target_population": {"const": "FIXED_ADDRESSES_0_TO_7_NO_SEED_SUPERPOPULATION"},
+        "intervals": {"type": "array", "maxItems": 0}
       },
-      "additionalProperties": true
+      "additionalProperties": false
+    },
+    "resource": {
+      "type": "object", "additionalProperties": true,
+      "required": ["memory_floor_pass", "available_physical_bytes", "effective_available_bytes"],
+      "properties": {
+        "memory_floor_pass": {"const": true},
+        "available_physical_bytes": {"type": "integer", "minimum": 4294967296},
+        "effective_available_bytes": {"type": "integer", "minimum": 4294967296}
+      }
+    },
+    "ledger": {
+      "type": "object", "additionalProperties": true,
+      "required": [
+        "formula", "charged_full_tape_primitive_team_steps",
+        "common_future_steps_per_actual_branch", "expected_common_future_branch_count",
+        "actual_common_future_branch_count", "actual_common_future_steps",
+        "pre_result_exact", "within_ceiling", "actual_total_steps", "ceiling"
+      ],
+      "properties": {
+        "formula": {"const": "8*1088*256 + 16*actual_common_future_branch_count"},
+        "charged_full_tape_primitive_team_steps": {"const": 2228224},
+        "common_future_steps_per_actual_branch": {"const": 16},
+        "expected_common_future_branch_count": {"type": "integer", "minimum": 0},
+        "actual_common_future_branch_count": {"type": "integer", "minimum": 0},
+        "actual_common_future_steps": {"type": "integer", "minimum": 0},
+        "pre_result_exact": {"const": true},
+        "within_ceiling": {"const": true},
+        "actual_total_steps": {"type": "integer", "minimum": 0},
+        "ceiling": {"const": 2596864}
+      }
+    },
+    "runtime": {
+      "type": "object", "additionalProperties": true,
+      "required": ["workers", "threads_per_worker", "peak_rss_bytes", "wall_seconds"],
+      "properties": {
+        "workers": {"const": 1},
+        "threads_per_worker": {"const": 1},
+        "peak_rss_bytes": {"type": "integer", "minimum": 0, "maximum": 2147483648},
+        "wall_seconds": {"type": "number", "minimum": 0, "maximum": 7200}
+      }
     },
     "admission": {
       "type": "object",
       "required": [
         "disjoint_panels", "matched_inputs", "derangement_valid",
-        "common_future_valid", "raw_long_competent"
+        "common_future_valid", "raw_long_competent", "resource_valid", "ledger_valid",
+        "runtime_valid", "calibration_valid", "k8_competence_support_valid"
       ],
       "properties": {
         "disjoint_panels": {"type": "boolean"},
         "matched_inputs": {"type": "boolean"},
         "derangement_valid": {"type": "boolean"},
         "common_future_valid": {"type": "boolean"},
-        "raw_long_competent": {"type": "boolean"}
+        "raw_long_competent": {"type": "boolean"},
+        "resource_valid": {"type": "boolean"},
+        "ledger_valid": {"type": "boolean"},
+        "runtime_valid": {"type": "boolean"},
+        "calibration_valid": {"type": "boolean"},
+        "k8_competence_support_valid": {"type": "boolean"}
       },
       "additionalProperties": true
     }

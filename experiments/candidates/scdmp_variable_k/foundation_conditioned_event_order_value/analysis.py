@@ -1,92 +1,207 @@
-"""Complete-only paired FCEOV analysis with no action selection."""
+"""Complete-only bounded FCEOV analysis with one all-or-none IUT claim."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import fsum, isfinite, sqrt
-from typing import Mapping, Sequence
-
-from scipy.stats import t as student_t
+from math import exp, isfinite, log
+from typing import Sequence
 
 from .contracts import (
-    CANDIDATE_ACTIONS, Disposition, FAILURE_LABELS, GRAPHS, PANEL_WIDTH, PanelCell, TAPE_COUNT,
+    CANDIDATE_ACTIONS,
+    Disposition,
+    FAILURE_LABELS,
+    GRAPHS,
+    INFERENCE_ALPHA,
+    INFERENCE_COMMON_GAP_RAW_SUM_PASS,
+    INFERENCE_CONTINUOUS_Q_STAR,
+    INFERENCE_DISCRETE_Q_FAIL,
+    INFERENCE_FIRST_GAP_RAW_SUM_PASS,
+    INFERENCE_JOINT_POWER_LOWER_BOUND,
+    INFERENCE_N561_JOINT_POWER_LOWER_BOUND,
+    PANEL_WIDTH,
+    PanelCell,
+    TAPE_COUNT,
 )
-from .panel import mission_utility
 
 
 class AnalysisContractError(ValueError):
     pass
 
 
-CONTRAST_NAMES = ("d_0m", "d_1m", "d_0c", "d_1c")
-FAMILY_ALPHA = 0.05
-FAMILY_SIZE = 4
+INFERENCE_SAMPLE_SIZE = TAPE_COUNT
+EXPECTED_CELL_COUNT = PANEL_WIDTH
+UTILITY_DENOMINATOR = 364
+MAXIMUM_UTILITY_NUMERATOR = 363
+GAP_NAMES = ("g_A_RH", "g_A_HR", "g_COMMON")
+COMPONENT_ALPHA = INFERENCE_ALPHA
+FIRST_ACTION_FIRST_PASSING_RAW_SUM = INFERENCE_FIRST_GAP_RAW_SUM_PASS
+COMMON_FIRST_PASSING_RAW_SUM = INFERENCE_COMMON_GAP_RAW_SUM_PASS
+CRITICAL_NORMALIZED_MEAN = INFERENCE_CONTINUOUS_Q_STAR
+LARGEST_FAILING_NORMALIZED_MEAN = INFERENCE_DISCRETE_Q_FAIL
+PLANNING_JOINT_POWER_LOWER_BOUND = INFERENCE_JOINT_POWER_LOWER_BOUND
+N561_PLANNING_JOINT_POWER_LOWER_BOUND = INFERENCE_N561_JOINT_POWER_LOWER_BOUND
+_LOG_ALPHA_INVERSE = log(1.0 / COMPONENT_ALPHA)
 
 
 @dataclass(frozen=True, slots=True)
 class TapeContrasts:
+    """The four original paired contrasts, stored first on the exact /364 grid."""
+
     tape: int
-    d_0m: float
-    d_1m: float
-    d_0c: float
-    d_1c: float
+    d_0m_numerator: int
+    d_1m_numerator: int
+    d_0c_numerator: int
+    d_1c_numerator: int
 
     @property
-    def interaction(self) -> float:
-        return 0.5 * (self.d_0m + self.d_1m)
+    def d_0m(self) -> float:
+        return self.d_0m_numerator / UTILITY_DENOMINATOR
+
+    @property
+    def d_1m(self) -> float:
+        return self.d_1m_numerator / UTILITY_DENOMINATOR
+
+    @property
+    def d_0c(self) -> float:
+        return self.d_0c_numerator / UTILITY_DENOMINATOR
+
+    @property
+    def d_1c(self) -> float:
+        return self.d_1c_numerator / UTILITY_DENOMINATOR
+
 
 @dataclass(frozen=True, slots=True)
-class PairedBound:
+class GapEvidence:
+    """Audit statistics for one member of the inseparable three-gap conjunction."""
+
     name: str
-    mean: float
-    standard_error: float
-    lower: float
-    zero_variance: bool
+    raw_utility_numerator_sum: int
+    raw_gap_mean: float
+    normalized_mean: float
+    log_statistic: float
+    p_value_upper: float
+    first_passing_raw_sum: int
+    component_test_passed: bool
+    audit_marginal_raw_lower: float
 
 
 @dataclass(frozen=True, slots=True)
 class PanelAnalysis:
     disposition: str
-    bounds: tuple[PairedBound, ...]
+    joint_claim_established: bool
+    p_iut: float
+    minimum_raw_gap_mean: float
+    joint_value_raw_lower: float
+    gaps: tuple[GapEvidence, GapEvidence, GapEvidence]
     tape_contrasts: tuple[TapeContrasts, ...]
     cell_means: tuple[tuple[str, str, float], ...]
-    interaction: float
-    candidate_order_value: float
 
 
-def paired_t_lower_bound(
-    values: Sequence[float], *, name: str = "contrast"
-) -> PairedBound:
-    raw = tuple(values)
-    if len(raw) != TAPE_COUNT or any(
-        isinstance(value, bool) or not isinstance(value, (int, float)) for value in raw
-    ):
-        raise AnalysisContractError("paired Student-t input must contain 24 finite tape blocks")
-    rows = tuple(float(value) for value in raw)
-    if any(not isfinite(value) for value in rows):
-        raise AnalysisContractError("paired Student-t input must contain 24 finite tape blocks")
-    mean = fsum(rows) / len(rows)
-    centered_squares = fsum((value - mean) * (value - mean) for value in rows)
-    if centered_squares == 0.0:
-        return PairedBound(name, mean, 0.0, mean, True)
-    variance = centered_squares / (len(rows) - 1)
-    standard_error = sqrt(variance / len(rows))
-    critical = float(student_t.ppf(1.0 - FAMILY_ALPHA / FAMILY_SIZE, df=23))
-    return PairedBound(name, mean, standard_error, mean - critical * standard_error, False)
+def _validate_probability(value: float, *, name: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise AnalysisContractError(f"{name} must be a finite real in [0,1]")
+    result = float(value)
+    if not isfinite(result) or not 0.0 <= result <= 1.0:
+        raise AnalysisContractError(f"{name} must be a finite real in [0,1]")
+    return result
 
 
-def _cell_values(cells: Sequence[PanelCell]) -> dict[tuple[int, str, str], float]:
+def binary_kl(observed: float, reference: float) -> float:
+    """Return binary kl(observed || reference) with endpoint conventions."""
+
+    x = _validate_probability(observed, name="observed mean")
+    q = _validate_probability(reference, name="reference mean")
+    if x == 0.0:
+        return -log(1.0 - q) if q < 1.0 else float("inf")
+    if x == 1.0:
+        return -log(q) if q > 0.0 else float("inf")
+    if q == 0.0 or q == 1.0:
+        return float("inf")
+    return x * log(x / q) + (1.0 - x) * log((1.0 - x) / (1.0 - q))
+
+
+def binary_kl_from_half(normalized_mean: float) -> float:
+    """Return kl(normalized_mean || 0.5) with continuous endpoint conventions."""
+
+    return binary_kl(normalized_mean, 0.5)
+
+
+def invert_marginal_lower(normalized_mean: float, *, sample_size: int) -> float:
+    """Invert n*kl(x||ell)=log(20); the returned marginal is audit-only."""
+
+    x = _validate_probability(normalized_mean, name="normalized mean")
+    if isinstance(sample_size, bool) or not isinstance(sample_size, int) or sample_size <= 0:
+        raise AnalysisContractError("sample size must be a positive integer")
+    if x == 0.0:
+        return 0.0
+    lower = 0.0
+    upper = x
+    for _ in range(100):
+        midpoint = (lower + upper) / 2.0
+        statistic = sample_size * binary_kl(x, midpoint)
+        if not isfinite(statistic):
+            lower = midpoint
+        elif statistic > _LOG_ALPHA_INVERSE:
+            lower = midpoint
+        else:
+            upper = midpoint
+    result = (lower + upper) / 2.0
+    residual = sample_size * binary_kl(x, result)
+    if not isfinite(result) or not isfinite(residual) or abs(residual - _LOG_ALPHA_INVERSE) > 1e-10:
+        raise AnalysisContractError("marginal lower inversion failed")
+    return result
+
+
+def bounded_chernoff_p_value(normalized_mean: float, *, sample_size: int) -> tuple[float, float]:
+    """Return the log statistic and conservative one-sided bounded-mean p-value."""
+
+    if isinstance(sample_size, bool) or not isinstance(sample_size, int) or sample_size <= 0:
+        raise AnalysisContractError("sample size must be a positive integer")
+    value = _validate_probability(normalized_mean, name="normalized mean")
+    divergence = binary_kl_from_half(value)
+    if value <= 0.5:
+        return 0.0, 1.0
+    log_statistic = sample_size * divergence
+    p_value = exp(-log_statistic)
+    if not isfinite(log_statistic) or not isfinite(p_value):
+        raise AnalysisContractError("nonfinite bounded-mean statistic")
+    return log_statistic, p_value
+
+
+def _utility_numerator(row: PanelCell) -> int:
+    if row.safe_dock:
+        if (
+            isinstance(row.dock_tick, bool)
+            or not isinstance(row.dock_tick, int)
+            or not 1 <= row.dock_tick <= UTILITY_DENOMINATOR
+        ):
+            raise AnalysisContractError("safe terminal cell has an invalid dock tick")
+        return UTILITY_DENOMINATOR - row.dock_tick
+    if row.dock_tick is not None:
+        raise AnalysisContractError("unsafe terminal cell cannot have a dock tick")
+    return 0
+
+
+def _cell_numerators(cells: Sequence[PanelCell]) -> dict[tuple[int, str, str], int]:
     rows = tuple(cells)
-    if len(rows) != PANEL_WIDTH or any(not row.terminal for row in rows):
-        raise AnalysisContractError("analysis requires 144 terminal cells")
-    result: dict[tuple[int, str, str], float] = {}
+    if len(rows) != EXPECTED_CELL_COUNT:
+        raise AnalysisContractError("analysis requires 3372 terminal cells")
+    result: dict[tuple[int, str, str], int] = {}
     for row in rows:
         if not isinstance(row, PanelCell):
             raise AnalysisContractError("analysis inputs must be PanelCell values")
-        if not isinstance(row.terminal, bool) or not isinstance(row.safe_dock, bool):
+        if not isinstance(row.terminal, bool) or not row.terminal:
+            raise AnalysisContractError("analysis requires 3372 terminal cells")
+        if not isinstance(row.safe_dock, bool):
             raise AnalysisContractError("panel endpoint flags must be bool")
-        if isinstance(row.tape, bool) or not isinstance(row.tape, int) or not 0 <= row.tape < TAPE_COUNT:
+        if (
+            isinstance(row.tape, bool)
+            or not isinstance(row.tape, int)
+            or not 0 <= row.tape < INFERENCE_SAMPLE_SIZE
+        ):
             raise AnalysisContractError("panel tape index differs")
+        if row.graph not in GRAPHS:
+            raise AnalysisContractError("panel graph label differs")
         if (
             isinstance(row.action_index, bool)
             or not isinstance(row.action_index, int)
@@ -103,10 +218,10 @@ def _cell_values(cells: Sequence[PanelCell]) -> dict[tuple[int, str, str], float
         key = (row.tape, row.graph, row.action_name)
         if key in result:
             raise AnalysisContractError("duplicate panel lane")
-        result[key] = mission_utility(safe_dock=row.safe_dock, dock_tick=row.dock_tick)
+        result[key] = _utility_numerator(row)
     expected = {
         (tape, graph, action)
-        for tape in range(TAPE_COUNT)
+        for tape in range(INFERENCE_SAMPLE_SIZE)
         for graph in GRAPHS
         for action in ("COMMON", "A_HR", "A_RH")
     }
@@ -115,49 +230,123 @@ def _cell_values(cells: Sequence[PanelCell]) -> dict[tuple[int, str, str], float
     return result
 
 
+def _gap_evidence(name: str, raw_sum: int) -> GapEvidence:
+    if name in ("g_A_RH", "g_A_HR"):
+        normalization_denominator = 2 * MAXIMUM_UTILITY_NUMERATOR * INFERENCE_SAMPLE_SIZE
+        threshold = FIRST_ACTION_FIRST_PASSING_RAW_SUM
+    elif name == "g_COMMON":
+        normalization_denominator = 4 * MAXIMUM_UTILITY_NUMERATOR * INFERENCE_SAMPLE_SIZE
+        threshold = COMMON_FIRST_PASSING_RAW_SUM
+    else:  # pragma: no cover - only fixed internal names call this helper
+        raise AnalysisContractError("unknown gap name")
+    normalized_mean = 0.5 + raw_sum / normalization_denominator
+    log_statistic, p_value = bounded_chernoff_p_value(
+        normalized_mean, sample_size=INFERENCE_SAMPLE_SIZE
+    )
+    integer_pass = raw_sum >= threshold
+    if abs(log_statistic - _LOG_ALPHA_INVERSE) <= 1e-12:
+        raise AnalysisContractError("ambiguous bounded-mean decision boundary")
+    log_space_pass = log_statistic > _LOG_ALPHA_INVERSE
+    p_value_pass = p_value < COMPONENT_ALPHA
+    if integer_pass != log_space_pass or integer_pass != p_value_pass:
+        raise AnalysisContractError("integer-grid, log-space, and p-value decisions disagree")
+    range_length = (
+        MAXIMUM_UTILITY_NUMERATOR / UTILITY_DENOMINATOR
+        if name in ("g_A_RH", "g_A_HR")
+        else 2 * MAXIMUM_UTILITY_NUMERATOR / UTILITY_DENOMINATOR
+    )
+    marginal_lower = range_length * (
+        invert_marginal_lower(normalized_mean, sample_size=INFERENCE_SAMPLE_SIZE) - 0.5
+    )
+    return GapEvidence(
+        name=name,
+        raw_utility_numerator_sum=raw_sum,
+        raw_gap_mean=raw_sum / (2 * UTILITY_DENOMINATOR * INFERENCE_SAMPLE_SIZE),
+        normalized_mean=normalized_mean,
+        log_statistic=log_statistic,
+        p_value_upper=p_value,
+        first_passing_raw_sum=threshold,
+        component_test_passed=integer_pass,
+        audit_marginal_raw_lower=marginal_lower,
+    )
+
+
 def analyze_complete_panel(cells: Sequence[PanelCell]) -> PanelAnalysis:
-    values = _cell_values(cells)
+    """Analyze exactly 562 complete tapes; no partial panel has a scientific branch."""
+
+    values = _cell_numerators(cells)
     contrasts = tuple(
         TapeContrasts(
-            tape,
-            values[tape, "RH", "A_RH"] - values[tape, "RH", "A_HR"],
-            values[tape, "HR", "A_HR"] - values[tape, "HR", "A_RH"],
-            values[tape, "RH", "A_RH"] - values[tape, "RH", "COMMON"],
-            values[tape, "HR", "A_HR"] - values[tape, "HR", "COMMON"],
+            tape=tape,
+            d_0m_numerator=values[tape, "RH", "A_RH"] - values[tape, "RH", "A_HR"],
+            d_1m_numerator=values[tape, "HR", "A_HR"] - values[tape, "HR", "A_RH"],
+            d_0c_numerator=values[tape, "RH", "A_RH"] - values[tape, "RH", "COMMON"],
+            d_1c_numerator=values[tape, "HR", "A_HR"] - values[tape, "HR", "COMMON"],
         )
-        for tape in range(TAPE_COUNT)
+        for tape in range(INFERENCE_SAMPLE_SIZE)
     )
-    bounds = tuple(
-        paired_t_lower_bound(tuple(getattr(row, name) for row in contrasts), name=name)
-        for name in CONTRAST_NAMES
+    raw_sums = (
+        sum(row.d_1m_numerator for row in contrasts),
+        sum(row.d_0m_numerator for row in contrasts),
+        sum(row.d_0c_numerator + row.d_1c_numerator for row in contrasts),
     )
-    established = all(row.lower > 0.0 for row in bounds)
-    means = {
-        (graph, action): fsum(values[tape, graph, action] for tape in range(TAPE_COUNT)) / TAPE_COUNT
+    gaps_untyped = tuple(
+        _gap_evidence(name, raw_sum) for name, raw_sum in zip(GAP_NAMES, raw_sums, strict=True)
+    )
+    gaps = (gaps_untyped[0], gaps_untyped[1], gaps_untyped[2])
+    # This is the production branch.  It is intentionally evaluated only on
+    # exact integer endpoint numerators, never on reconstructed utility floats.
+    joint_established = (
+        raw_sums[0] >= FIRST_ACTION_FIRST_PASSING_RAW_SUM
+        and raw_sums[1] >= FIRST_ACTION_FIRST_PASSING_RAW_SUM
+        and raw_sums[2] >= COMMON_FIRST_PASSING_RAW_SUM
+    )
+    p_iut = max(row.p_value_upper for row in gaps)
+    if (p_iut < COMPONENT_ALPHA) != joint_established:
+        raise AnalysisContractError("IUT p-value and integer-grid decisions disagree")
+    joint_value_lower = min(row.audit_marginal_raw_lower for row in gaps)
+    if (joint_value_lower > 0.0) != joint_established:
+        raise AnalysisContractError("joint lower and integer-grid decisions disagree")
+    cell_means = tuple(
+        (
+            graph,
+            action,
+            sum(values[tape, graph, action] for tape in range(INFERENCE_SAMPLE_SIZE))
+            / (UTILITY_DENOMINATOR * INFERENCE_SAMPLE_SIZE),
+        )
         for graph in GRAPHS
         for action in CANDIDATE_ACTIONS
-    }
-    d_means = {
-        name: fsum(getattr(row, name) for row in contrasts) / TAPE_COUNT
-        for name in CONTRAST_NAMES
-    }
-    interaction = 0.5 * (d_means["d_0m"] + d_means["d_1m"])
-    candidate_value = min(
-        0.5 * d_means["d_0m"],
-        0.5 * d_means["d_1m"],
-        0.5 * (d_means["d_0c"] + d_means["d_1c"]),
     )
     return PanelAnalysis(
-        Disposition.ESTABLISHED.value if established else Disposition.CLOSED.value,
-        bounds,
-        contrasts,
-        tuple((graph, action, means[graph, action]) for graph in GRAPHS for action in CANDIDATE_ACTIONS),
-        interaction,
-        candidate_value,
+        disposition=Disposition.ESTABLISHED.value if joint_established else Disposition.CLOSED.value,
+        joint_claim_established=joint_established,
+        p_iut=p_iut,
+        minimum_raw_gap_mean=min(row.raw_gap_mean for row in gaps),
+        joint_value_raw_lower=joint_value_lower,
+        gaps=gaps,
+        tape_contrasts=contrasts,
+        cell_means=cell_means,
     )
 
 
 __all__ = [
-    "AnalysisContractError", "CONTRAST_NAMES", "FAMILY_ALPHA", "PairedBound", "PanelAnalysis",
-    "TapeContrasts", "analyze_complete_panel", "paired_t_lower_bound",
+    "AnalysisContractError",
+    "COMMON_FIRST_PASSING_RAW_SUM",
+    "COMPONENT_ALPHA",
+    "CRITICAL_NORMALIZED_MEAN",
+    "EXPECTED_CELL_COUNT",
+    "FIRST_ACTION_FIRST_PASSING_RAW_SUM",
+    "GAP_NAMES",
+    "GapEvidence",
+    "INFERENCE_SAMPLE_SIZE",
+    "LARGEST_FAILING_NORMALIZED_MEAN",
+    "N561_PLANNING_JOINT_POWER_LOWER_BOUND",
+    "PLANNING_JOINT_POWER_LOWER_BOUND",
+    "PanelAnalysis",
+    "TapeContrasts",
+    "analyze_complete_panel",
+    "binary_kl",
+    "binary_kl_from_half",
+    "bounded_chernoff_p_value",
+    "invert_marginal_lower",
 ]

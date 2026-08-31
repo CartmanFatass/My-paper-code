@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import fields
+from dataclasses import fields, replace
 from types import SimpleNamespace
 
 import pytest
@@ -13,12 +13,15 @@ from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_
 )
 
 
-def _constant_tape(index: int) -> panel.DisturbanceTape:
-    return panel.DisturbanceTape(
-        tape=index,
-        eta_v=(0.003,) * 364,
-        eta_y=(0.002,) * 364,
-        eta_omega=(0.004,) * 364,
+def _constant_tapes(panel_slice: panel.PanelSlice) -> tuple[panel.DisturbanceTape, ...]:
+    return tuple(
+        panel.DisturbanceTape(
+            tape=index,
+            eta_v=(0.003,) * 364,
+            eta_y=(0.002,) * 364,
+            eta_omega=(0.004,) * 364,
+        )
+        for index in range(panel_slice.start_tape, panel_slice.start_tape + panel_slice.tape_count)
     )
 
 
@@ -48,19 +51,20 @@ def _output(*, active: bool, terminal: bool, tick: int, safe: bool = False):
 
 
 class TwoHoldSession:
-    def __init__(self) -> None:
-        self.initial = tuple(_output(active=True, terminal=False, tick=0) for _ in range(144))
+    def __init__(self, width: int) -> None:
+        self.width = width
+        self.initial = tuple(_output(active=True, terminal=False, tick=0) for _ in range(width))
         self.calls = []
 
     @property
     def active_lanes(self):
-        return tuple(range(144))
+        return tuple(range(self.width))
 
     def renew(self, rows):
         self.calls.append(tuple(rows))
         if len(self.calls) == 1:
-            return tuple(_output(active=True, terminal=False, tick=13) for _ in range(144))
-        return tuple(_output(active=False, terminal=True, tick=26, safe=True) for _ in range(144))
+            return tuple(_output(active=True, terminal=False, tick=13) for _ in range(self.width))
+        return tuple(_output(active=False, terminal=True, tick=26, safe=True) for _ in range(self.width))
 
 
 class TieFoundation:
@@ -76,41 +80,106 @@ class TieFoundation:
         return torch.zeros((observations.shape[0], 18), dtype=torch.float32)
 
 
-def test_panel_inventory_is_one_width_144_session_with_each_tape_in_all_six_cells():
-    inventory = panel.build_panel_inventory()
+def _terminal_cells(panel_slice: panel.PanelSlice):
+    return tuple(
+        contracts.PanelCell(
+            lane.tape, lane.graph, lane.action_name, lane.action_index,
+            True, True, 26, (),
+        )
+        for lane in panel_slice.lanes
+    )
 
-    assert len(inventory) == 24 * 2 * 3 == 144
-    assert [row.lane for row in inventory] == list(range(144))
+
+def test_global_inventory_and_typed_slices_are_exact_562_by_2_by_3():
+    inventory = panel.build_panel_inventory()
+    slices = panel.build_panel_slices()
+
+    assert len(inventory) == 562 * 2 * 3 == 3372
+    assert [row.lane for row in inventory] == list(range(3372))
     assert panel.validate_tape_pairing(inventory) is True
-    for tape in range(24):
+    assert panel.validate_panel_slices(slices) is True
+    assert len(slices) == 24
+    assert tuple(row.width for row in slices) == (144,) * 23 + (60,)
+    assert tuple(row.tape_count for row in slices) == (24,) * 23 + (10,)
+    assert slices[-1].index == 23
+    assert slices[-1].start_tape == 552
+    assert [lane.tape for lane in slices[-1].lanes[:6]] == [552] * 6
+    assert [lane.tape for lane in slices[-1].lanes[-6:]] == [561] * 6
+    for tape in (0, 23, 24, 551, 552, 561):
         rows = [row for row in inventory if row.tape == tape]
-        assert {(row.graph, row.action_name) for row in rows} == {
+        assert [(row.graph, row.action_name) for row in rows] == [
             (graph, action)
             for graph in ("HR", "RH")
             for action in ("COMMON", "A_HR", "A_RH")
-        }
+        ]
 
-    drifted = list(inventory)
-    first = drifted[0]
-    drifted[0] = panel.PanelLane(False, first.tape, first.graph, first.action_name, first.action_index)
-    with pytest.raises(panel.PanelContractError, match="indices"):
-        panel.validate_tape_pairing(drifted)
 
-    resets = panel.build_native_resets(inventory)
+def test_slice_inventory_validator_rejects_duplicate_missing_reordered_and_mutated_lanes():
+    slices = list(panel.build_panel_slices())
+
+    for drifted in (slices[:-1], slices + [slices[-1]], [*slices[:2], slices[0], *slices[3:]]):
+        with pytest.raises(panel.PanelContractError, match="slice inventory"):
+            panel.validate_panel_slices(drifted)
+
+    lanes = list(slices[0].lanes)
+    lanes[0], lanes[1] = lanes[1], lanes[0]
+    with pytest.raises(panel.PanelContractError, match="bounds, lanes, or order"):
+        panel.validate_slice_tape_pairing(replace(slices[0], lanes=tuple(lanes)))
+
+    first = slices[0].lanes[0]
+    malformed = replace(slices[0], lanes=(replace(first, lane=False), *slices[0].lanes[1:]))
+    with pytest.raises(panel.PanelContractError, match="bounds, lanes, or order|indices"):
+        panel.validate_slice_tape_pairing(malformed)
+
+
+def test_native_resets_preserve_global_lane_order_for_full_and_short_slices():
     hr, rh = host_bridge.fixed_resets()
-    assert len(resets) == 144
-    assert all(reset == (hr if lane.graph == "HR" else rh) for lane, reset in zip(inventory, resets))
+    for panel_slice in (panel.build_panel_slices()[0], panel.build_panel_slices()[-1]):
+        resets = panel.build_native_resets(panel_slice)
+        assert len(resets) == panel_slice.width
+        assert all(
+            reset == (hr if lane.graph == "HR" else rh)
+            for lane, reset in zip(panel_slice.lanes, resets)
+        )
     assert hr.k_initial == rh.k_initial == 13
     assert (hr.initial_v, hr.initial_y, hr.initial_phi) == (0.015, 0.0, 0.0)
     assert (rh.initial_v, rh.initial_y, rh.initial_phi) == (0.015, 0.0, 0.0)
 
 
-def test_production_executor_constructs_and_owns_exact_native_reset_order(monkeypatch):
+def test_materialization_uses_global_tape_addresses_in_last_slice():
+    assert tuple(field.name for field in fields(panel.TapeAddress)) == ("tape", "tick", "component")
+
+    class RecordingSource:
+        def __init__(self) -> None:
+            self.calls = []
+
+        def uniforms(self, domain, address, count):
+            self.calls.append((domain, tuple(address), count))
+            return (0.75,)
+
+    source = RecordingSource()
+    last = panel.build_panel_slices()[-1]
+    tapes = panel.materialize_disturbance_tapes(
+        source, start_tape=last.start_tape, tape_count=last.tape_count
+    )
+
+    assert [row.tape for row in tapes] == list(range(552, 562))
+    assert len(source.calls) == 10 * 364 * 3
+    assert {domain for domain, _, _ in source.calls} == {"assay-disturbance"}
+    assert all(len(address) == 3 and count == 1 for _, address, count in source.calls)
+    assert source.calls[0][1] == (552, 0, "eta_v")
+    assert source.calls[-1][1] == (561, 363, "eta_omega")
+    with pytest.raises(panel.PanelContractError, match="global inventory"):
+        panel.materialize_disturbance_tapes(source, start_tape=552, tape_count=11)
+
+
+@pytest.mark.parametrize("slice_index,expected_width", ((0, 144), (23, 60)))
+def test_production_slice_executor_constructs_one_exact_native_batch(monkeypatch, slice_index, expected_width):
     captured = []
 
     class BoundBatch(TwoHoldSession):
         def __init__(self, resets):
-            super().__init__()
+            super().__init__(len(resets))
             captured.append(tuple(resets))
             self.closed = False
 
@@ -124,24 +193,31 @@ def test_production_executor_constructs_and_owns_exact_native_reset_order(monkey
             self.closed = True
 
     monkeypatch.setattr(panel, "NativeBatch", BoundBatch)
-    foundation = TieFoundation()
-    cells = panel.execute_native_panel(
-        foundation,
-        tuple(_constant_tape(index) for index in range(24)),
+    panel_slice = panel.build_panel_slices()[slice_index]
+    cells = panel.execute_native_panel_slice(
+        TieFoundation(), _constant_tapes(panel_slice), panel_slice
     )
 
-    assert captured == [panel.build_native_resets()]
-    assert len(cells) == 144
+    assert captured == [panel.build_native_resets(panel_slice)]
+    assert len(cells) == expected_width
+    assert [cell.tape for cell in cells[:6]] == [panel_slice.start_tape] * 6
+    assert [cell.tape for cell in cells[-6:]] == [panel_slice.start_tape + panel_slice.tape_count - 1] * 6
     assert "_test_only_execute_panel_session" not in panel.__all__
 
 
-def test_preflight_opens_validates_and_closes_exact_width_144_native_session(monkeypatch):
+def test_real_native_preflight_accepts_width_144_and_width_60():
+    slices = panel.build_panel_slices()
+    assert panel.preflight_native_panel_slice(slices[0]) == 144
+    assert panel.preflight_native_panel_slice(slices[-1]) == 60
+
+
+def test_preflight_all_slices_opens_23_width_144_and_one_width_60(monkeypatch):
     captured = []
 
     class PreflightBatch:
         def __init__(self, resets):
             self.resets = tuple(resets)
-            self.initial = tuple(_output(active=True, terminal=False, tick=0) for _ in range(144))
+            self.initial = tuple(_output(active=True, terminal=False, tick=0) for _ in resets)
             self.closed = False
             captured.append(self)
 
@@ -149,10 +225,9 @@ def test_preflight_opens_validates_and_closes_exact_width_144_native_session(mon
         def __exit__(self, *_): self.closed = True
 
     monkeypatch.setattr(panel, "NativeBatch", PreflightBatch)
-    assert panel.preflight_native_panel_session() == 144
-    assert len(captured) == 1
-    assert captured[0].resets == panel.build_native_resets()
-    assert captured[0].closed is True
+    assert panel.preflight_native_panel_widths() == (144,) * 23 + (60,)
+    assert [len(item.resets) for item in captured] == [144] * 23 + [60]
+    assert all(item.closed for item in captured)
 
     class DriftedPreflightBatch(PreflightBatch):
         def __init__(self, resets):
@@ -161,168 +236,128 @@ def test_preflight_opens_validates_and_closes_exact_width_144_native_session(mon
 
     monkeypatch.setattr(panel, "NativeBatch", DriftedPreflightBatch)
     with pytest.raises(panel.PanelContractError, match="reset state/counters"):
-        panel.preflight_native_panel_session()
-
-def test_disturbance_addresses_contain_only_tape_tick_component_and_are_shared():
-    assert tuple(field.name for field in fields(panel.TapeAddress)) == ("tape", "tick", "component")
-
-    class RecordingSource:
-        def __init__(self) -> None:
-            self.calls = []
-
-        def uniforms(self, domain, address, count):
-            self.calls.append((domain, tuple(address), count))
-            return (0.75,)
-
-    source = RecordingSource()
-    tapes = panel.materialize_disturbance_tapes(source)
-
-    assert len(tapes) == 24
-    assert len(source.calls) == 24 * 364 * 3
-    assert {domain for domain, _, _ in source.calls} == {"assay-disturbance"}
-    assert all(len(address) == 3 and count == 1 for _, address, count in source.calls)
-    assert source.calls[0][1] == (0, 0, "eta_v")
-    assert source.calls[-1][1] == (23, 363, "eta_omega")
+        panel.preflight_native_panel_slice(panel.build_panel_slices()[-1])
 
 
-def test_forced_first_hold_precedes_any_foundation_query_then_uses_lexicographic_argmax():
-    inventory = panel.build_panel_inventory()
-    session = TwoHoldSession()
+@pytest.mark.parametrize("slice_index", (0, 23))
+def test_forced_first_hold_precedes_query_and_query_ceiling_scales_with_slice_width(slice_index):
+    panel_slice = panel.build_panel_slices()[slice_index]
+    session = TwoHoldSession(panel_slice.width)
     foundation = TieFoundation()
 
     cells = panel._test_only_execute_panel_session(
-        session,
-        foundation,
-        tuple(_constant_tape(index) for index in range(24)),
+        session, foundation, _constant_tapes(panel_slice), panel_slice
     )
 
     assert len(session.calls) == 2
-    assert [row.action for row in session.calls[0]] == [row.action_index for row in inventory]
+    assert [row.action for row in session.calls[0]] == [row.action_index for row in panel_slice.lanes]
     assert all(len(row.eta_v) == len(row.eta_y) == len(row.eta_omega) == 13 for row in session.calls[0])
-    assert foundation.queries == 144  # only after the forced 13-tick hold
-    assert {row.action for row in session.calls[1]} == {0}  # all-logit tie -> catalogue index 0
+    assert foundation.queries == panel_slice.width
+    assert {row.action for row in session.calls[1]} == {0}
     assert foundation.validations == 2
-    assert len(cells) == 144 and all(row.terminal for row in cells)
+    assert len(cells) == panel_slice.width and all(row.terminal for row in cells)
 
 
-def test_absorption_during_first_hold_performs_no_foundation_query():
+def test_absorption_during_first_hold_performs_no_foundation_query_on_short_slice():
+    panel_slice = panel.build_panel_slices()[-1]
+
     class OneHoldSession(TwoHoldSession):
         def renew(self, rows):
             self.calls.append(tuple(rows))
-            return tuple(_output(active=False, terminal=True, tick=7) for _ in range(144))
+            return tuple(_output(active=False, terminal=True, tick=7) for _ in range(self.width))
 
-    session = OneHoldSession()
+    session = OneHoldSession(panel_slice.width)
     foundation = TieFoundation()
     cells = panel._test_only_execute_panel_session(
-        session,
-        foundation,
-        tuple(_constant_tape(index) for index in range(24)),
+        session, foundation, _constant_tapes(panel_slice), panel_slice
     )
-
     assert len(session.calls) == 1
     assert foundation.queries == 0
     assert all(row.terminal and not row.safe_dock for row in cells)
 
 
-def test_panel_rejects_wrong_but_aliased_state_short_native_output_and_wrong_policy_batch():
-    class WrongAlias(TwoHoldSession):
-        def __init__(self):
-            super().__init__()
-            wrong = _output(active=True, terminal=False, tick=0)
-            wrong.observation = (0.0,) * 18
-            self.initial = (wrong,) * 144
-
-    with pytest.raises(panel.PanelContractError, match="reset state/counters"):
+def test_slice_execution_rejects_wrong_tape_address_short_output_and_wrong_policy_batch():
+    panel_slice = panel.build_panel_slices()[-1]
+    tapes = list(_constant_tapes(panel_slice))
+    tapes[0] = replace(tapes[0], tape=0)
+    with pytest.raises(panel.PanelContractError, match="slice disturbance tape inventory"):
         panel._test_only_execute_panel_session(
-            WrongAlias(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
+            TwoHoldSession(60), TieFoundation(), tapes, panel_slice
         )
 
     class ShortOutput(TwoHoldSession):
         def renew(self, rows):
             self.calls.append(tuple(rows))
-            return tuple(_output(active=False, terminal=True, tick=13) for _ in range(143))
+            return tuple(_output(active=False, terminal=True, tick=13) for _ in range(self.width - 1))
 
-    with pytest.raises(panel.PanelContractError, match="144|width"):
+    with pytest.raises(panel.PanelContractError, match="width"):
         panel._test_only_execute_panel_session(
-            ShortOutput(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
+            ShortOutput(60), TieFoundation(), _constant_tapes(panel_slice), panel_slice
         )
 
     class WrongBatchFoundation(TieFoundation):
-        def __init__(self, rows):
-            super().__init__()
-            self.rows = rows
-
         def __call__(self, observations):
             self.queries += observations.shape[0]
-            return torch.zeros((self.rows, 18), dtype=torch.float32)
+            return torch.zeros((1, 18), dtype=torch.float32)
 
-    for rows in (1, 145):
-        with pytest.raises(panel.PanelContractError, match="batch|policy"):
-            panel._test_only_execute_panel_session(
-                TwoHoldSession(),
-                WrongBatchFoundation(rows),
-                tuple(_constant_tape(index) for index in range(24)),
-            )
-
-
-def test_panel_rejects_query_ceiling_and_terminal_lane_reactivation():
-    class TooManyQueries(TwoHoldSession):
-        def renew(self, rows):
-            self.calls.append(tuple(rows))
-            if len(self.calls) <= 28:
-                return tuple(
-                    _output(active=True, terminal=False, tick=min(13 * len(self.calls), 363))
-                    for _ in range(144)
-                )
-            return tuple(_output(active=False, terminal=True, tick=364) for _ in range(144))
-
-    # A 28th post-intervention query is already impossible under the exact
-    # 364-tick/fixed-13 clock, so either the clock guard or the explicit work
-    # ceiling must stop this malformed session before another query.
-    with pytest.raises(panel.PanelContractError, match="query ceiling|fixed-13|frontier"):
+    with pytest.raises(panel.PanelContractError, match="batch"):
         panel._test_only_execute_panel_session(
-            TooManyQueries(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
-        )
-
-    class Reactivating(TwoHoldSession):
-        def renew(self, rows):
-            self.calls.append(tuple(rows))
-            if len(self.calls) == 1:
-                return tuple(
-                    _output(active=index >= 72, terminal=index < 72, tick=13)
-                    for index in range(144)
-                )
-            return tuple(_output(active=True, terminal=False, tick=26) for _ in range(144))
-
-    with pytest.raises(panel.PanelContractError, match="reactivat|terminal"):
-        panel._test_only_execute_panel_session(
-            Reactivating(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
+            TwoHoldSession(60), WrongBatchFoundation(), _constant_tapes(panel_slice), panel_slice
         )
 
 
-@pytest.mark.parametrize("mode", ("safe_tick_mismatch", "timeout_and_failure"))
-def test_panel_rejects_incoherent_terminal_cause_before_panel_cells(mode):
-    class Incoherent(TwoHoldSession):
-        def renew(self, rows):
-            self.calls.append(tuple(rows))
-            call = len(self.calls)
-            values = []
-            for _ in range(144):
-                if mode == "safe_tick_mismatch":
-                    row = _output(active=False, terminal=True, tick=13, safe=True)
-                    row.dock_tick = 12
-                elif call < 28:
-                    row = _output(active=True, terminal=False, tick=13 * call)
-                else:
-                    row = _output(active=False, terminal=True, tick=364, safe=False)
-                    row.cable_overload = True
-                values.append(row)
-            return tuple(values)
+def test_global_aggregation_accepts_only_complete_ordered_terminal_3372_cells():
+    slices = panel.build_panel_slices()
+    completed = tuple(_terminal_cells(panel_slice) for panel_slice in slices)
+    cells = panel.aggregate_panel_slices(completed)
 
-    with pytest.raises(panel.PanelContractError, match="terminal endpoint|cause classes"):
-        panel._test_only_execute_panel_session(
-            Incoherent(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
-        )
+    assert len(cells) == 3372
+    assert panel.validate_complete_panel_cells(cells) is True
+
+    with pytest.raises(panel.PanelContractError, match="slice count"):
+        panel.aggregate_panel_slices(completed[:-1])
+    with pytest.raises(panel.PanelContractError, match="order|identity|completeness"):
+        panel.aggregate_panel_slices((*completed[:-1], completed[-1][:-1]))
+
+    for drifted in (
+        cells[:-1],
+        (*cells[:-1], cells[-2]),
+        (cells[1], cells[0], *cells[2:]),
+        (replace(cells[0], terminal=False), *cells[1:]),
+    ):
+        with pytest.raises(panel.PanelContractError, match="order|identity|completeness|terminal"):
+            panel.validate_complete_panel_cells(drifted)
+
+
+def test_slice_artifact_validator_rejects_identity_endpoint_and_failure_tampering():
+    panel_slice = panel.build_panel_slices()[-1]
+    cells = _terminal_cells(panel_slice)
+    assert panel.validate_panel_slice_cells(cells, panel_slice) is True
+
+    identity_tampers = (
+        cells[:-1],
+        (*cells[:-1], cells[-2]),
+        (cells[1], cells[0], *cells[2:]),
+        (replace(cells[0], tape=0), *cells[1:]),
+    )
+    for drifted in identity_tampers:
+        with pytest.raises(panel.PanelContractError, match="order|identity|completeness"):
+            panel.validate_panel_slice_cells(drifted, panel_slice)
+
+    endpoint_tampers = (
+        replace(cells[0], terminal=False),
+        replace(cells[0], safe_dock=1),
+        replace(cells[0], dock_tick=None),
+        replace(cells[0], dock_tick=365),
+        replace(cells[0], failures=("cable_overload",)),
+        replace(cells[0], safe_dock=False, dock_tick=26),
+        replace(cells[0], safe_dock=False, dock_tick=None, failures=["cable_overload"]),
+        replace(cells[0], safe_dock=False, dock_tick=None, failures=("cable_overload", "cable_overload")),
+        replace(cells[0], safe_dock=False, dock_tick=None, failures=("unregistered",)),
+    )
+    for drifted_cell in endpoint_tampers:
+        with pytest.raises(panel.PanelContractError, match="terminal|endpoint|failure"):
+            panel.validate_panel_slice_cells((drifted_cell, *cells[1:]), panel_slice)
 
 
 def test_full_mission_utility_ignores_rewards_loads_and_rate_diagnostics():

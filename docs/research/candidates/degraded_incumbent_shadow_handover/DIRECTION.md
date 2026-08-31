@@ -98,3 +98,26 @@ polarity.
 
 Earlier provider/session transport notes remain historical evidence in the direction folder; they
 do not define the current implementation method or a separate permission system.
+
+## Wave-3 phased oracle and inference hold — 2026-08-31
+
+The smallest reusable two-owner TEST oracle is now implemented in an isolated phased sidecar. It
+directly checks both owners, post-arrival/pre-CAS recurrent handoff binding, recipient-only snapshot
+bridge mutation, full native-versus-independent 54/58 causal vectors, source-specific masked
+Welford state, stored fragment-initial recurrent state, independent live/replay one-tick forwards,
+old-policy log probability, and exact behavior-policy ratio one. The row-54 oracle includes common
+SOURCE/lineage authority and explicit current, stale, and absent records. The complete focused R06
+direction suite passed `48` tests. Shared R06 and REAL/SHAM code remains unchanged.
+
+This engineering advance does not make production READY. A controlling mathematical audit found
+that the frozen 24-block bootstrap max-t can return the point interval `[0.04,0.04]` with probability
+`(24/25)^24 = 0.375413246727102` under a legal bounded block law whose population mean is
+`-1/625`. The object is therefore under `PROSPECTIVE_INFERENCE_HOLD` before every scientific master,
+checkpoint, coordinate, or result.
+
+The same audit found that support and disposition must be factorized by `COPY-RETAIN` and
+`SHADOW-COPY`, and that replay containment can absorb only the shadow-source contrast, not generic
+transfer. The controlling evidence is
+`evidence/2026-08-31-dish-phased-oracle-inference-hold.md`. Root must next choose a fixed-panel
+descriptive claim or a finite-sample-valid, powered superpopulation design. Until that prospective
+decision is frozen, only TEST conformance may be claimed and the direct runner remains `NOT_READY`.

@@ -275,15 +275,16 @@ def test_training_rng_addresses_pair_only_state_and_disturbance_and_use_uniform2
 
 def test_registered_resource_maxima_include_only_one_checkpoint_and_query_decomposition():
     assert training.summarize_resource_usage() == {
-        "episodes_rollouts": 2_184,
-        "primitive_slots": 794_976,
+        "episodes_rollouts": 5_412,
+        "primitive_slots": 1_969_968,
         "adamw_steps": 1_920,
         "checkpoints": 1,
-        "forced_actions": 144,
-        "foundation_queries": 61_008,
+        "forced_actions": 3_372,
+        "foundation_queries": 148_164,
+        "panel_slices": 24,
     }
-    assert 794_976 == (1_920 + 120 + 144) * 364
-    assert 61_008 == 1_920 * 28 + 120 * 28 + 144 * 27
+    assert 1_969_968 == (1_920 + 120 + 3_372) * 364
+    assert 148_164 == 1_920 * 28 + 120 * 28 + 3_372 * 27
 
 
 def test_duration_correct_gae_keeps_complete_episodes_separate_and_validates_offsets():

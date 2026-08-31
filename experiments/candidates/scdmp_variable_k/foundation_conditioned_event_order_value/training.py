@@ -20,6 +20,8 @@ from .contracts import (
     GRAPHS,
     HORIZON_TICKS,
     K_TARGET,
+    PANEL_SLICE_COUNT,
+    PANEL_WIDTH,
     RESOURCE_MAXIMA,
     validate_resource_request,
 )
@@ -224,8 +226,16 @@ def summarize_resource_usage() -> dict[str, int]:
 
     value = dict(RESOURCE_MAXIMA)
     validate_resource_request(value)
+    if value["episodes_rollouts"] != 1_920 + 120 + PANEL_WIDTH:
+        raise RuntimeError("episode/rollout ceiling decomposition differs")
+    if value["primitive_slots"] != value["episodes_rollouts"] * 364:
+        raise RuntimeError("primitive-slot ceiling decomposition differs")
+    if value["forced_actions"] != PANEL_WIDTH:
+        raise RuntimeError("forced-action ceiling decomposition differs")
+    if value["panel_slices"] != PANEL_SLICE_COUNT:
+        raise RuntimeError("panel-slice ceiling decomposition differs")
     if value["foundation_queries"] != (
-        1_920 * 28 + 120 * 28 + 144 * 27
+        1_920 * 28 + 120 * 28 + PANEL_WIDTH * 27
     ):
         raise RuntimeError("foundation-query ceiling decomposition differs")
     return value

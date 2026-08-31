@@ -74,6 +74,8 @@ def bind(args: argparse.Namespace) -> int:
         "conversation_id": args.conversation_id,
         "provider_url": args.provider_url,
         "tab_id": args.tab_id,
+        "tab_lifecycle": "OPEN",
+        "last_reopened_at": None,
         "request_id": args.request_id,
         "visible_model": args.visible_model,
         "underlying_model": args.underlying_model,

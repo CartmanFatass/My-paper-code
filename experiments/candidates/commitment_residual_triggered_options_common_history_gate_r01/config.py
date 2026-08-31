@@ -12,7 +12,7 @@ import numpy as np
 
 
 OBJECT_ID: Final = "CRTO-COMMON-HISTORY-GATE-20260830-01"
-SCHEMA_VERSION: Final = "crto-common-history-gate-result-v1"
+SCHEMA_VERSION: Final = "crto-common-history-gate-result-v2"
 RNG_NAMESPACE: Final = 2_026_083_001
 REPLICATES: Final = tuple(range(8))
 REPRESENTATIONS: Final = ("RAW", "TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT")
@@ -34,6 +34,12 @@ GRADIENT_NORM_CAP: Final = 1.0
 DISCOUNT: Final = 0.99
 AUDIT_HORIZON: Final = 16
 DELTA: Final = 0.005
+MATERIAL_ADVANTAGE_THRESHOLD: Final = 0.02
+MATERIAL_STRATA: Final = ("KEEP_MATERIAL", "REPLAN_MATERIAL")
+MINIMUM_K8_ROWS_PER_MATERIAL_STRATUM: Final = 8
+RAW_LONG_MAX_MEAN_REGRET: Final = 0.010000000000
+NUMERIC_TOLERANCE: Final = 1e-12
+FIXED_CENSUS_METHOD: Final = "FIXED_EIGHT_ADDRESS_CENSUS_EFFECT_HULL"
 CPU_WORKERS: Final = 1
 PEAK_RSS_BYTES: Final = 2 * 1024**3
 WALL_SECONDS: Final = 120 * 60
@@ -44,22 +50,20 @@ RNG_PURPOSES: Final = (
     "gate_initialization", "gate_order", "derangement",
 )
 
-# These clean-room policies are useful implementation seams but are not yet
-# prospectively frozen by IMPLEMENTATION_THRESHOLD.md.  Registered execution must
-# stop before using them for an optimizer update or result.
-INHERITED_ASSUMPTIONS: Final[Mapping[str, str]] = MappingProxyType({
-    "predictor_policy": "PROVISIONAL_FRESH_PREDICTOR_R01",
-    "predictor_policy_status": "INHERITED_ASSUMPTION",
-    "behavior_continuation_policy": "PROVISIONAL_DETERMINISTIC_SCRIPT_R01",
-    "behavior_continuation_status": "INHERITED_ASSUMPTION",
-    "calibration_population_policy": "CALLER_SUPPLIED_CALIBRATION_R01",
-    "calibration_population_status": "INHERITED_ASSUMPTION",
-    "gate_initialization_policy": "PROVISIONAL_GATE_INITIALIZATION_R01",
-    "gate_initialization_status": "INHERITED_ASSUMPTION",
+# Immutable scientific policies frozen by IMPLEMENTATION_THRESHOLD.md.
+FROZEN_POLICIES: Final[Mapping[str, str]] = MappingProxyType({
+    "predictor_policy": "FRESH_PREDICTOR_R01",
+    "predictor_policy_status": "FROZEN",
+    "behavior_continuation_policy": "DETERMINISTIC_SCRIPT_R01",
+    "behavior_continuation_status": "FROZEN",
+    "calibration_population_policy": "CANONICAL_CALIBRATION_R01",
+    "calibration_population_status": "FROZEN",
+    "gate_initialization_policy": "COUNTER_ADDRESSED_GATE_INITIALIZATION_R01",
+    "gate_initialization_status": "FROZEN",
     "evaluation_population_policy": "LEGACY_B1_64_EPISODES_PER_REGIME",
-    "evaluation_population_status": "INHERITED_ASSUMPTION",
+    "evaluation_population_status": "FROZEN",
     "audit_boundary_policy": "LEGACY_B1_ONSET_PLUS_4_TO_20_SWITCH_EXCLUSION",
-    "audit_boundary_status": "INHERITED_ASSUMPTION",
+    "audit_boundary_status": "FROZEN",
 })
 
 

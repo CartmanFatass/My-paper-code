@@ -19,8 +19,8 @@ def test_contract_constants_rng_domains_and_ambient_state() -> None:
     assert config.REPRESENTATIONS == ("RAW", "TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT")
     assert dict(config.BUDGETS) == {"SHORT": 128, "LONG": 2048}
     assert config.BATCH_SIZE == 64 and config.MAX_PRIMITIVE_TEAM_STEPS == 2_596_864
-    assert config.INHERITED_ASSUMPTIONS["evaluation_population_status"] == "INHERITED_ASSUMPTION"
-    assert config.INHERITED_ASSUMPTIONS["audit_boundary_status"] == "INHERITED_ASSUMPTION"
+    assert config.FROZEN_POLICIES["evaluation_population_status"] == "FROZEN"
+    assert config.FROZEN_POLICIES["audit_boundary_status"] == "FROZEN"
     before = np.random.get_state()
     seeds = {config.counter_seed(purpose, 0, 0) for purpose in config.RNG_PURPOSES}
     after = np.random.get_state()
@@ -47,7 +47,7 @@ def test_source_check_cli_shape_and_run_admission_block(tmp_path: Path) -> None:
         parser.parse_args(["run", "--output-root", "fresh", "--result", "r.json", "--resume"])
     output = tmp_path / "absent-parent" / "never-created"
     result = tmp_path / "absent-parent" / "never-created.json"
-    with pytest.raises(PermissionError, match="INHERITED_ASSUMPTIONS"):
+    with pytest.raises(PermissionError, match="NONIDENTIFYING_MISSING_PREFLIGHT"):
         run_registered(output, result)
     assert not output.exists() and not result.exists()
     assert not output.parent.exists()

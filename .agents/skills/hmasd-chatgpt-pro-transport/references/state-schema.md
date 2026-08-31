@@ -10,6 +10,8 @@ The registry is JSON at a caller-supplied path (default project-local path:
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
   "tab_id": "7",
+  "tab_lifecycle": "OPEN",
+  "last_reopened_at": null,
   "request_id": "req-...",
   "visible_model": "Pro",
   "underlying_model": "GPT-5.6 Sol",
@@ -52,8 +54,14 @@ The registry is JSON at a caller-supplied path (default project-local path:
 
 Terminal or attention states are `SEND_UNCERTAIN`, `SENT_INPUT_MISMATCH`,
 `WAITING_UNKNOWN`, `WAITING_TIMEOUT`, `UPLOAD_READY_SEND_DISABLED`, `MODEL_UNVERIFIED`,
-`DIRECTION_UNVERIFIED`, `ARCHIVE_CONFLICT`, and `BLOCKED`. A timeout or browser
-exception is never converted into a new conversation.
+`DIRECTION_UNVERIFIED`, `ARCHIVE_CONFLICT`, `RECOVERY_URL_MISMATCH`, and `BLOCKED`.
+A timeout or browser exception is never converted into a new conversation.
+
+`tab_lifecycle` is ephemeral and may be `OPEN`, `HANDOFF`, or `CLOSED`; it is never
+the conversation identity. Once a complete response is archived, set
+`tab_lifecycle=CLOSED`, clear `tab_id`, and retain `conversation_id`, `provider_url`,
+and archive paths. A later wake opens a new temporary tab from that exact URL and
+closes it again after its bounded read.
 
 ## Send evidence
 
@@ -79,7 +87,10 @@ labels. Hash the exact bytes written to the response file.
 ## Heartbeat contract
 
 The 15-minute heartbeat reads pending records under a per-conversation lock. It may
-reopen or reclaim the mapped tab, but it may not send, retry, switch direction,
-create a replacement conversation, or click `Answer now`. On natural completion it
-captures/archives once and disables its own pending wake. On timeout it keeps the
-record and same conversation in `WAITING_TIMEOUT` for human attention.
+reopen or reclaim the mapped tab from the persisted provider URL, but it may not
+send, retry, switch direction, create a replacement conversation, or click `Answer
+now`. On natural completion it captures/archives once, closes the temporary tab,
+clears its ephemeral handle, and disables its own pending wake. On a 60-minute
+timeout it keeps the record and same conversation in `WAITING_TIMEOUT`; when the
+conversation ID is known it may close the temporary tab and recover it from the URL
+on a later wake. A missing or mismatched URL is a blocker, not a replacement route.

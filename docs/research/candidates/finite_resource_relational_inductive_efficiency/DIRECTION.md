@@ -70,6 +70,7 @@ independent prior rather than shrinkage, optimizer geometry, or a host-aligned c
 
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/INFERENCE_AND_EXECUTION_FREEZE.md`
+- `docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
 - `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
 - `docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md`
@@ -118,9 +119,34 @@ revalidation. The current full focused suite reports `152 passed, 1 skipped`.
 A separate bounded Windows-native smoke passed all eight native tests and removed its temporary
 artifact afterward. No production training, evaluation, or scientific result ran.
 
-Inference is the sole remaining scientific blocker. It is not the sole launch blocker: production
-preflight still reports `RESOURCE_RUNTIME_CONFORMANCE_UNOBSERVED`, the native artifact is not
-retained, and no process-level resource/monitor admission has been observed. Structural acceptance
-cannot override those technical facts. V2 preflight and `run` must retain `ready=false` before
-roots, RNG, models, native execution, or scientific values. No polarity, semantic, relational-
-mechanism, compiler, or churn claim may be inferred.
+## R01 inference-resolution conclusion — 2026-08-31
+
+The current 24-root R01 conclusion-bearing object is closed before production, with no arm
+polarity. The original seen-equivalence branch cannot be distribution-free certified even on an
+all-zero 24-root sample.
+Narrowing to the smallest four-condition one-sided mean IUT would remove the 56-tail multiplicity,
+but it would still have at most `0.132336` direct and `0.130241` competence power against a
+one-native-delivery alternative within the protected arbitrary bounded root class. At least 523
+blocks are necessary even for 80% power of the weakest single component; no current root-variance
+or joint-alternative law turns that lower bound into a defensible complete design.
+
+A majority/sign repair is rejected because root-wise prevalence neither implies nor is implied by
+expected native return. The current V2 validator would accept arbitrary distinct root strings and
+any nonempty provenance string; it does not generate or observe the required ordered uniform-
+without-replacement procedure for a root-population claim. These are scientific population and
+resolution limits, not engineering or authentication failures.
+
+V1 and V2 remain accepted TEST/non-result structural evidence. They must retain `ready=false` and
+must not create roots, RNG, models, native execution, checkpoints, or result values for R01. The
+exact no-projection-contact equality theorem remains available only if non-contact is proved over
+every reachable supported training path. The `beta=0.60` strict-capacity witness proves operator
+difference, not reachable contact; generic clipped-Adam admits both contact and non-contact
+histories, including same-sign displacement of about `0.1536` over 512 steps, so optimizer-supported
+universal equality is false and no actual-DGP static proof currently exists. Observing no contact
+still requires all
+24 complete 512-update full-suffix trajectories and closes only those paths; observing contact
+proves divergence, not efficacy. Direction-level advice is `PARK`, with reentry only for a new,
+prospectively powered object with a narrower proved root class, a justified block and resource law
+plus direct ordered uniform-without-replacement root generation, or a separately justified
+non-mean decision target. No semantic, relational-mechanism, compiler, churn, equality, harm, or
+package polarity is inferred.

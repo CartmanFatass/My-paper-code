@@ -1,11 +1,11 @@
 # DISH promotion-source-factored implementation threshold
 
-Status: `SCIENCE_FROZEN_TEST_SCAFFOLD_ONLY_PRODUCTION_BLOCKED_BEFORE_CHECKPOINTS`
+Status: `PROSPECTIVE_INFERENCE_HOLD_TWO_OWNER_TEST_ORACLE_ONLY`
 
-Object: `DISH-PROMOTION-SOURCE-FORK-R01`. The bounded TEST_ONLY transaction scaffold is complete.
-The inherited trainer currently disagrees with the frozen role/recurrent/normalization law, and the
-fresh checkpoint, real first-valid path, replay certificate, 6,912-cell data plane, inference,
-resource preflight, request, and direct runner remain unaccepted. No fresh checkpoint or scientific
+Object: `DISH-PROMOTION-SOURCE-FORK-R01`. The bounded TEST_ONLY transaction scaffold and isolated
+two-owner phased/pathwise oracle are complete. The inherited trainer still disagrees with the
+frozen role/recurrent/normalization law, the full production chain remains unaccepted, and the old
+24-block bootstrap max-t has a finite-sample counterexample. No fresh checkpoint or scientific
 result command is presently admissible.
 
 The wave-2 freeze in
@@ -271,5 +271,37 @@ training/evaluation/replay/reduction command.
 - `DISH_RBHR_R06_SCIENCE_COMPOSITE_20260822.md`
 - `DISH_RBHR_R06_ENGINEERING_CONFORMANCE_CM_TECHNICAL_PACKET_20260822.md`
 - `evidence/2026-08-30-dish-promotion-source-fork-wave2-freeze.md`
+- `evidence/2026-08-31-dish-phased-oracle-inference-hold.md`
 - `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_real_sham.py`
 - `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_backend.py`
+
+## Wave-3 implementation threshold — 2026-08-31
+
+The following TEST-only threshold is directly closed:
+
+- independent phased ABI with nonmutating parent/prepared/handoff inputs;
+- typed linearization binding and rejection of lane-swapped, stale, malformed, or wrong-recipient
+  recurrent handoff;
+- exact two-owner RETAIN/COPY/SHADOW source promotion before branch observation and before one policy
+  forward;
+- full 54/58 native causal vectors matching a separate Python oracle;
+- actor/snapshot/critic per-dimension masked Welford with Boolean gate validation and exact state
+  round-trip;
+- independent live and typed-replay one-tick paths using stored fragment-initial state, explicit
+  owner history, frozen `W^u`, equal hidden/logits/old log probability, ratio one, and equal
+  post-collection `W^{u+1}`.
+
+The complete R06 direction tests pass `48` tests. A fresh V2 TEST preflight observes the oracle from
+read-only native caches with zero compiler children, but truthfully returns
+`passed=false,status=NOT_READY,production_mode_reachable=false` and retains both scientific holds.
+These facts remove the old absence of a minimal
+phased/pathwise TEST discriminator, but do not close production integration. The runner remains
+`PRODUCTION_NOT_READY`; normal-tick generation, real snapshot bridge, production trainer/PPO,
+resume parity, full replay/deadline, shared block checkpoint/no-trigger plane, complete resources,
+and a valid request/result path remain absent.
+
+There is also a controlling `PROSPECTIVE_INFERENCE_HOLD`. The frozen max-t law has no finite-sample
+coverage for the declared bounded/discrete block law, and the support/result algebra incorrectly
+couples the generic-transfer and shadow-source axes. A revised fixed-panel or finite-sample-valid
+superpopulation target, per-axis branch algebra, and replay scope must be prospectively frozen
+before any production checkpoint work. Passing the TEST oracle cannot override this hold.

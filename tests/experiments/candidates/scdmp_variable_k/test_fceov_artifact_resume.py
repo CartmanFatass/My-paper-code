@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 from dataclasses import replace
 import json
+from pathlib import Path
 
 import pytest
 import torch
@@ -33,6 +34,37 @@ def _model_and_optimizer(*, final: bool = True):
 MASTER = bytes(range(32))
 
 
+def _snapshot(tmp_path: Path, *, changed_index: int | None = None):
+    manifest = contracts.Manifest()
+    keys = (
+        tuple(("owned_python", name) for name in manifest.source_modules)
+        + tuple(
+            ("dependency_python", reference.split(":", 1)[0])
+            for reference in manifest.allowed_dependencies
+        )
+        + (("native_source", "tbcc_backend.cpp"), ("native_binary", "loaded_tbcc_backend"))
+    )
+    entries = tuple(
+        artifacts.SourceNativeEntry(
+            kind,
+            name,
+            str((tmp_path / f"entry-{index}").resolve()),
+            (f"direct-{index}".encode() + (b"!" if index == changed_index else b"")),
+        )
+        for index, (kind, name) in enumerate(keys)
+    )
+    return artifacts.SourceNativeSnapshot(artifacts.SOURCE_NATIVE_SNAPSHOT_SCHEMA, entries)
+
+
+def _bundle_bindings(tmp_path: Path):
+    return {
+        "resolved_result_root": str(tmp_path.resolve()),
+        "rng_master": MASTER,
+        "run_record_bytes": b'{"direct":"run-record"}\n',
+        "source_native_snapshot": _snapshot(tmp_path),
+    }
+
+
 def _gate(*, complete: bool = True, passed: bool = True) -> contracts.FoundationGate:
     if not complete:
         return contracts.FoundationGate(False, False, (), float("nan"), ())
@@ -50,7 +82,7 @@ def _complete_cells() -> tuple[contracts.PanelCell, ...]:
     indices = {"COMMON": 0, "A_HR": 10, "A_RH": 12}
     return tuple(
         contracts.PanelCell(tape, graph, action, indices[action], True, True, 182)
-        for tape in range(24)
+        for tape in range(contracts.TAPE_COUNT)
         for graph in ("HR", "RH")
         for action in ("COMMON", "A_HR", "A_RH")
     )
@@ -94,25 +126,29 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
 
     cells = _complete_cells()
     panel_analysis = analysis.analyze_complete_panel(cells)
-    with pytest.raises(artifacts.ArtifactContractError, match="144 terminal"):
+    with pytest.raises(artifacts.ArtifactContractError, match="3372 terminal"):
         artifacts._test_only_write_final_bundle(
-            tmp_path / "panel.json", competence_records=_records(), panel_cells=cells[:-1]
+            tmp_path / "panel.json", competence_records=_records(), panel_cells=cells[:-1],
+            **_bundle_bindings(tmp_path),
         )
 
     panel_path = tmp_path / "final-bundle.json"
     bundled_fact = artifacts._test_only_write_final_bundle(
-        panel_path, competence_records=_records(), panel_cells=cells
+        panel_path, competence_records=_records(), panel_cells=cells,
+        **_bundle_bindings(tmp_path),
     )
     payload = json.loads(panel_path.read_text(encoding="utf-8"))
     assert payload["schema"] == artifacts.FINAL_BUNDLE_SCHEMA
-    assert len(payload["panel_cells"]) == 144
+    assert len(payload["panel_cells"]) == contracts.PANEL_WIDTH
     assert len(payload["competence_records"]) == 120
     assert payload["terminal_fact"]["disposition"] == bundled_fact.disposition
-    assert len(payload["terminal_fact"]["adjusted_lower_bounds"]) == 4
+    assert len(payload["terminal_fact"]["gap_integer_sums"]) == 3
+    assert len(payload["terminal_fact"]["component_p_values"]) == 3
     assert not list(tmp_path.glob("*.tmp"))
     with pytest.raises(artifacts.ArtifactContractError, match="create-only"):
         artifacts._test_only_write_final_bundle(
-            panel_path, competence_records=_records(), panel_cells=cells
+            panel_path, competence_records=_records(), panel_cells=cells,
+            **_bundle_bindings(tmp_path),
         )
 
     fact = contracts.TerminalFact(
@@ -126,13 +162,17 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
             tmp_path / "fact.json", fact, competence_records=_records()
         )
 
-    bounds = tuple((bound.name, bound.lower) for bound in panel_analysis.bounds)
     closed_fact = contracts.TerminalFact(
         schema=artifacts.TERMINAL_FACT_SCHEMA,
         disposition=panel_analysis.disposition,
         foundation_gate=_gate(),
         panel_complete=True,
-        adjusted_lower_bounds=bounds,
+        gap_integer_sums=tuple(
+            (gap.name, gap.raw_utility_numerator_sum) for gap in panel_analysis.gaps
+        ),
+        component_p_values=tuple((gap.name, gap.p_value_upper) for gap in panel_analysis.gaps),
+        joint_p_value=panel_analysis.p_iut,
+        joint_effect_lower_bound=panel_analysis.joint_value_raw_lower,
     )
     with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
         artifacts.write_terminal_fact(
@@ -244,6 +284,7 @@ def test_artifacts_reject_analysis_gate_and_terminal_semantic_tampering(tmp_path
     with pytest.raises(artifacts.ArtifactContractError, match="panel semantics"):
         artifacts._test_only_write_final_bundle(
             tmp_path / "mismatch.json", competence_records=_records(), panel_cells=duplicate,
+            **_bundle_bindings(tmp_path),
         )
 
     with pytest.raises(artifacts.ArtifactContractError, match="120 raw"):
@@ -285,7 +326,7 @@ def test_typed_run_record_recomputes_exact_fixed_fields_and_rejects_tampering(tm
     assert payload["actions"] == [0, 10, 12]
     assert payload["resources"] == dict(contracts.RESOURCE_MAXIMA)
     assert payload["runtime"]["native_batch_widths"] == {
-        "training": 12, "competence": 120, "panel": 144,
+        "training": 12, "competence": 120, "panel_full": 144, "panel_final": 60,
     }
     assert payload["runtime"]["torch_threads"] == 1
     assert payload["runtime"]["deterministic_algorithms"] is True
@@ -306,9 +347,124 @@ def test_typed_run_record_recomputes_exact_fixed_fields_and_rejects_tampering(tm
         torch.use_deterministic_algorithms(True)
 
 
-def test_historical_t_bundle_fixture_is_private_and_not_a_public_result_publisher():
-    assert not hasattr(artifacts, "write_final_bundle")
+def test_production_bundle_publisher_is_distinct_from_the_private_fixture():
+    assert hasattr(artifacts, "write_final_bundle")
+    assert "write_final_bundle" in artifacts.__all__
     assert "_test_only_write_final_bundle" not in artifacts.__all__
+
+
+def test_direct_source_native_snapshot_has_exact_inventory_lengths_and_rejects_byte_drift(
+    tmp_path, monkeypatch,
+):
+    fixture_root = tmp_path / "live"
+    fixture_root.mkdir()
+    template = _snapshot(fixture_root)
+    material = []
+    for index, entry in enumerate(template.entries):
+        path = fixture_root / f"material-{index}"
+        path.write_bytes(entry.direct_bytes)
+        material.append((entry.kind, entry.name, path))
+    monkeypatch.setattr(artifacts, "_live_source_native_material", lambda: tuple(material))
+
+    captured = artifacts.capture_source_native_snapshot()
+    assert len(captured.entries) == 19
+    assert [entry.kind for entry in captured.entries].count("owned_python") == 14
+    assert [entry.kind for entry in captured.entries].count("dependency_python") == 3
+    assert [entry.kind for entry in captured.entries].count("native_source") == 1
+    assert [entry.kind for entry in captured.entries].count("native_binary") == 1
+    encoded = artifacts.encode_source_native_snapshot(captured)
+    payload = json.loads(encoded)
+    assert all(row["length_bytes"] == len(entry.direct_bytes) for row, entry in zip(payload["entries"], captured.entries))
+    assert all("hash" not in key.lower() for row in payload["entries"] for key in row)
+
+    path = tmp_path / "source-native-snapshot.json"
+    artifacts.write_source_native_snapshot(path, captured)
+    loaded = artifacts.load_source_native_snapshot(path)
+    artifacts.compare_source_native_snapshot(loaded, captured)
+    with pytest.raises(artifacts.ArtifactContractError, match="create-only"):
+        artifacts.write_source_native_snapshot(path, captured)
+
+    material[7][2].write_bytes(material[7][2].read_bytes() + b"one-byte")
+    changed = artifacts.capture_source_native_snapshot()
+    with pytest.raises(artifacts.ArtifactContractError, match="direct bytes"):
+        artifacts.compare_source_native_snapshot(loaded, changed)
+
+    tampered = json.loads(encoded)
+    tampered["entries"][0]["length_bytes"] += 1
+    tampered_path = tmp_path / "length-tampered.json"
+    tampered_path.write_text(json.dumps(tampered, sort_keys=True, separators=(",", ":")) + "\n")
+    with pytest.raises(artifacts.ArtifactContractError, match="length"):
+        artifacts.load_source_native_snapshot(tampered_path)
+
+
+def test_v4_final_bundle_preencoding_binds_root_master_record_and_snapshot(tmp_path):
+    cells = _complete_cells()
+    bindings = _bundle_bindings(tmp_path)
+    prepared = artifacts.prepare_final_bundle(
+        competence_records=_records(),
+        panel_cells=cells,
+        panel_analysis=analysis.analyze_complete_panel(cells),
+        **bindings,
+    )
+    assert artifacts.final_bundle_encoded_size(prepared) == len(prepared.encoded)
+    assert artifacts.final_bundle_encoded_size(prepared) < 64 * 1024 * 1024
+    payload = json.loads(prepared.encoded)
+    assert payload["resolved_result_root"] == str(tmp_path.resolve())
+    assert payload["schema"] == "SCDMP_FCEOV_FINAL_BUNDLE_V4"
+    assert "hash" not in json.dumps(payload["source_native_snapshot"]).lower()
+
+    bundle = tmp_path / "final-bundle.json"
+    fact = artifacts.write_prepared_final_bundle(bundle, prepared)
+    assert artifacts.load_final_bundle(
+        bundle,
+        expected_result_root=bindings["resolved_result_root"],
+        expected_rng_master=MASTER,
+        expected_run_record_bytes=bindings["run_record_bytes"],
+        expected_source_native_snapshot=bindings["source_native_snapshot"],
+    ) == fact
+    for changed in (
+        {"expected_result_root": str((tmp_path / "other-root").resolve())},
+        {"expected_rng_master": b"x" * 32},
+        {"expected_run_record_bytes": b"other-record"},
+        {"expected_source_native_snapshot": _snapshot(tmp_path, changed_index=0)},
+    ):
+        expected = {
+            "expected_result_root": bindings["resolved_result_root"],
+            "expected_rng_master": MASTER,
+            "expected_run_record_bytes": bindings["run_record_bytes"],
+            "expected_source_native_snapshot": bindings["source_native_snapshot"],
+        }
+        expected.update(changed)
+        with pytest.raises(artifacts.ArtifactContractError, match="binding"):
+            artifacts.load_final_bundle(bundle, **expected)
+
+
+def test_foundation_nonpass_terminal_loader_recomputes_and_rejects_tampering(tmp_path):
+    records = _records(safe=False)
+    gate = foundation.analyze_competence(records)
+    path = tmp_path / "terminal-fact.json"
+    artifacts.write_terminal_fact(
+        path,
+        contracts.TerminalFact(
+            artifacts.TERMINAL_FACT_SCHEMA,
+            contracts.Disposition.FOUNDATION_NONPASS.value,
+            gate,
+            False,
+        ),
+        competence_records=records,
+    )
+    first = artifacts.load_foundation_nonpass_terminal(path)
+    second = artifacts.load_foundation_nonpass_terminal(path)
+    assert first == second
+    assert first[0].disposition == contracts.Disposition.FOUNDATION_NONPASS.value
+    assert len(first[1]) == 120
+
+    payload = json.loads(path.read_text())
+    payload["competence_records"][0]["safe_dock"] = True
+    tampered = tmp_path / "tampered-terminal.json"
+    tampered.write_text(json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n")
+    with pytest.raises(artifacts.ArtifactContractError, match="120 raw|differs"):
+        artifacts.load_foundation_nonpass_terminal(tampered)
 
 
 def test_foundation_artifact_retains_all_raw_records_counts_and_rejects_partial_or_tampered(tmp_path):

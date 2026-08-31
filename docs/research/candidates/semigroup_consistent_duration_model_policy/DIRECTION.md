@@ -84,6 +84,8 @@ disposition; historical records remain provenance rather than current workflow a
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`
 
 ## Provenance boundary
 
@@ -141,3 +143,75 @@ enable production until Root prospectively freezes a finite-sample-valid inferen
 margin or explicit zero margin, tape count, stop rule, atomic result law and revised resource
 envelope. No prior result polarity transfers, and this direction-local hold does not mutate
 Portfolio authority.
+
+## FCEOV prospective finite-sample inference repair — 2026-08-31
+
+The missing scientific fields are now prospectively frozen; no result was observed. The exact
+claim is reduced to the three balanced policy-value gaps between the graph-matched mapping and the
+three graph-blind simplex vertices `A_RH`, `A_HR` and `COMMON`. Positivity of all three gaps is
+necessary and sufficient for superiority over every fixed or randomized graph-blind policy in the
+candidate set. The earlier requirement that the two per-graph COMMON contrasts each be positive was
+unnecessarily stronger than this claim.
+
+Use exactly `562` independent tape blocks in 23 full width-144 native slices and one final width-60
+slice. Each bounded gap uses a one-sided Bernoulli-KL/Chernoff component test at `alpha=0.05`; only
+the all-three conjunction can publish. This all-or-none intersection-union rule controls the single
+joint claim at level `0.05` but gives no standalone or simultaneous component claim. The sole
+publishable lower bound is `L_theta`, the minimum of the three unit-range-normalized marginal KL
+lower limits and a one-sided 95% lower bound on their minimum. Its positivity is equivalent to
+`V_A>0`.
+
+The scientific margin is zero because the object asks strict candidate-set dominance and no valid
+full-mission nonzero margin exists. Power is planned at a mean shift equal to `0.1` of each gap's
+full support range. Exact grid thresholds are `21,046` for each matched/mismatched numerator sum and
+`42,091` for the COMMON sum. The discrete distribution-free joint-power lower bound is
+`0.801021247429385`; `n=561` gives only `0.799048262648854`, so `562` is the smallest admissible tape
+count for the frozen criterion.
+
+Common tapes reduce variance but do not create sign symmetry or action/graph-label exchangeability;
+Student-t, sign-flip and permutation routes remain ineligible. A complete nonpass means only that
+the conjunction was not established at the frozen resolution. It cannot establish zero or negative
+order value. Same-master, same-tape technical resume is allowed only from an atomic complete-slice
+frontier after a fresh 4 GiB admission; a new master, redraw, replacement, changed `n`, changed
+threshold or result-aware extension is a new scientific attempt and is forbidden.
+
+At the time of this prospective freeze, the executable remained on implementation hold pending the
+three-gap KL/IUT contract, width-60 tail slice, atomic frontier and revised resource envelope. That
+next action is superseded by the consumed invalid-evidence disposition below. The bounded claim
+remains conditional on the ideal independent
+fair-bit/PRF tape law, one competence-qualified foundation, one state, `k=13`, the exact simulator
+and the three-action candidate set. Exact formulas, assumptions, limitations and evidence paths are
+in `SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`.
+
+## FCEOV V3 consumed invalid-evidence disposition — 2026-08-31
+
+This section supersedes the preceding implementation-hold and prospective-resume next actions. The
+exact V3 formal object has been consumed and is classified
+`INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`. No outcome is interpreted and no scientific
+polarity enters this direction.
+
+Root's read-only validity isolation and the independent reviewer agree on one actual invalidator:
+the run lacked a prospective direction-specific `assess-run`, formal-process peak-RSS telemetry and
+scratch-peak telemetry. All 26 fixed 4 GiB admissions passed; the approximate `58.4 s` wall,
+durable-byte ceiling and complete 24-slice/3,372-cell structure passed. Those passing facts cannot
+reconstruct the missing prospective/high-watermark measurements after completion.
+
+Canonical-root, atomic staging, raw source/native byte, master/root and nonpass-reentry weaknesses
+remain Blocker/High defects for future entrypoint correctness, but they are not additional actual
+invalidators because the observed execution was one fresh root and master, one foreground process,
+fresh-to-complete, without resume or re-root. They must be repaired with direct raw-byte equality and
+identity-free resource telemetry, not hashes, digests, identity, authentication or approval fields.
+
+The quarantine artifact cannot establish or refute any component, joint value or mechanism claim.
+A non-observed resource envelope is invalid evidence, not a negative result. Do not open or quote
+outcome fields, rerun, resume, redraw, replace tapes, create another master or create an alternate
+result root. The existing `.1` canonical root is occupied permanently.
+
+Future work is limited to no-run code hardening and TEST_ONLY/result-blind tests: canonical-root
+refusal before effect; same-master atomic recovery; create-only path/length/full-raw-byte snapshots
+for the owned, allowlisted and loaded native surfaces with resume `read_bytes()` equality; final
+bundle binding to canonical resolved root/raw master/run record/raw-byte snapshot; and prospective
+direction assessment plus live wall/peak-RSS/scratch/durable telemetry. Successful hardening does
+not reopen this exact object or create a second scientific attempt. Full validity evidence and the
+no-outcome boundary are recorded in
+`SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`.

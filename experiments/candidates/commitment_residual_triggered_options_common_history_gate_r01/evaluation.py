@@ -8,9 +8,23 @@ from typing import Mapping
 import numpy as np
 import torch
 
+from .config import MATERIAL_ADVANTAGE_THRESHOLD, MATERIAL_STRATA
 from .contracts import Budget, PanelRow, Representation
 from .models import CommonHistoryGate
 from .packets import PacketDataset
+
+
+def classify_material_advantage(advantage: float) -> str | None:
+    """Classify the exact frozen material tails; the middle remains unstratified."""
+
+    value = float(advantage)
+    if not np.isfinite(value):
+        raise ValueError("material advantage must be finite")
+    if value <= -MATERIAL_ADVANTAGE_THRESHOLD:
+        return MATERIAL_STRATA[0]
+    if value >= MATERIAL_ADVANTAGE_THRESHOLD:
+        return MATERIAL_STRATA[1]
+    return None
 
 
 def select_printed_action(values: np.ndarray, legal_mask: np.ndarray) -> int:
@@ -50,21 +64,23 @@ def _collate_all(
 
 @dataclass(frozen=True)
 class EvaluationSummary:
+    replicate: int
     representation: Representation
     budget: Budget
     regime_mean_regret: Mapping[str, float]
     target_equal_weight_regret: float
-    k8_mean_regret: float
     row_count_by_regime: Mapping[str, int]
-    target_action_headroom_count: int
     keep_optimal_count: int
     zero_regret_oracle_count: int
     logged_action_count: int
-    logged_scripted_mean_regret: float
     logged_scripted_regret_by_regime: Mapping[str, float]
     oracle_regret_max_abs: float
-    target_action_headroom_by_regime: Mapping[str, int]
     keep_optimal_by_regime: Mapping[str, int]
+    material_stratum_count_by_regime: Mapping[str, Mapping[str, int]]
+    mean_regret_by_regime_and_material_stratum: Mapping[str, Mapping[str, float]]
+    logged_scripted_mean_regret_by_regime_and_material_stratum: Mapping[
+        str, Mapping[str, float]
+    ]
 
 
 def evaluate_checkpoint(
@@ -81,15 +97,20 @@ def evaluate_checkpoint(
     if not isinstance(packets, PacketDataset):
         raise TypeError("evaluation requires a row-keyed PacketDataset")
     packets.require_rows(rows)
+    replicate_ids = {row.key.replicate for row in rows}
+    if len(replicate_ids) != 1:
+        raise ValueError("one evaluation summary must contain exactly one replicate slot")
+    replicate = next(iter(replicate_ids))
     histories, lengths, packet_tensor = _collate_all(rows, packets.values)
     model.eval()
     with torch.no_grad():
         predictions = model(histories, lengths, packet_tensor).cpu().numpy()
     regrets: dict[str, list[float]] = {}
-    headroom = keep_optimal = zero_regret = logged = 0
+    keep_optimal = zero_regret = logged = 0
     logged_regrets: dict[str, list[float]] = {}
-    headroom_by_regime: dict[str, int] = {}
     keep_by_regime: dict[str, int] = {}
+    stratum_regrets: dict[str, dict[str, list[float]]] = {}
+    stratum_logged_regrets: dict[str, dict[str, list[float]]] = {}
     oracle_regret_max_abs = 0.0
     for row, prediction in zip(rows, predictions):
         selected = select_printed_action(prediction, row.legal_mask)
@@ -108,35 +129,44 @@ def evaluate_checkpoint(
         oracle_regret_max_abs = max(
             oracle_regret_max_abs, abs(native_regret(row.g16, row.legal_mask, oracle_action))
         )
-        headroom_witness = int(any(
-            row.legal_mask[index] and row.g16[index] > row.g16[0] + 1e-12
-            for index in range(1, 8)
-        ))
-        headroom += headroom_witness
-        headroom_by_regime[row.key.regime] = (
-            headroom_by_regime.get(row.key.regime, 0) + headroom_witness
-        )
+        legal_replacements = row.g16[1:][row.legal_mask[1:]]
+        if legal_replacements.size == 0:
+            raise ValueError("material classification requires a legal replacement")
+        material_advantage = float(np.max(legal_replacements) - row.g16[0])
+        stratum = classify_material_advantage(material_advantage)
+        if stratum is not None:
+            stratum_regrets.setdefault(row.key.regime, {}).setdefault(stratum, []).append(regret)
+            stratum_logged_regrets.setdefault(row.key.regime, {}).setdefault(stratum, []).append(
+                logged_regret
+            )
     missing = [regime for regime in target_regimes if regime not in regrets]
     if missing:
         raise ValueError(f"evaluation panel lacks target regimes: {missing}")
     means = {regime: float(np.mean(values)) for regime, values in regrets.items()}
     return EvaluationSummary(
+        replicate=replicate,
         representation=Representation(representation), budget=Budget(budget),
         regime_mean_regret=means,
         target_equal_weight_regret=float(np.mean([means[regime] for regime in target_regimes])),
-        k8_mean_regret=float(means.get("K8", np.nan)),
         row_count_by_regime={regime: len(values) for regime, values in regrets.items()},
-        target_action_headroom_count=headroom,
         keep_optimal_count=keep_optimal,
         zero_regret_oracle_count=zero_regret,
         logged_action_count=logged,
-        logged_scripted_mean_regret=float(np.mean([
-            value for values in logged_regrets.values() for value in values
-        ])),
         logged_scripted_regret_by_regime={
             regime: float(np.mean(values)) for regime, values in logged_regrets.items()
         },
         oracle_regret_max_abs=oracle_regret_max_abs,
-        target_action_headroom_by_regime=headroom_by_regime,
         keep_optimal_by_regime=keep_by_regime,
+        material_stratum_count_by_regime={
+            regime: {stratum: len(values) for stratum, values in strata.items()}
+            for regime, strata in stratum_regrets.items()
+        },
+        mean_regret_by_regime_and_material_stratum={
+            regime: {stratum: float(np.mean(values)) for stratum, values in strata.items()}
+            for regime, strata in stratum_regrets.items()
+        },
+        logged_scripted_mean_regret_by_regime_and_material_stratum={
+            regime: {stratum: float(np.mean(values)) for stratum, values in strata.items()}
+            for regime, strata in stratum_logged_regrets.items()
+        },
     )

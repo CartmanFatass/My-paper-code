@@ -1,6 +1,15 @@
 # FRRIE implementation threshold
 
-Status: `INFERENCE_BLOCKED`
+Status: `R01_CLOSED_NO_RESULT_IMPLEMENTATION`
+
+The 2026-08-31 inference-resolution audit closes the current 24-root R01 result object before
+production. The accepted V2 surface remains TEST/non-result evidence only; there is no current
+polarity analyzer, production implementation, resource characterization, root generation, or
+result run to build. See `FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`.
+
+This does not reject either learned arm. Direction-level advice is `PARK`. Implementation may
+resume only for a new prospectively powered scientific object; it must not convert the existing
+24-root panel into a one-sided, majority/sign, descriptive-polarity, or post-selected result.
 
 The first object is fixed-roster per episode with adaptation-free held-out-size evaluation. It does
 not exercise join, leave, rejoin, replacement, or within-episode churn and cannot support those

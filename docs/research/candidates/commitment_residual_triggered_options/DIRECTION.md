@@ -21,7 +21,7 @@ question: does a copy of that exact observed probe/Adam trajectory, continued
 unchanged from update 1,000 to the sole update-10,000 endpoint, reach both
 unchanged gates?
 
-## Current accepted position
+## Historical probe-cut accepted position
 
 The successor endpoint is presently unanswerable, not failed. The available
 record establishes the historical scalar gate failure but does not identify any
@@ -92,7 +92,7 @@ off-support decodability, hypothesis-class equality, information gain, semantic
 uniqueness, policy or variable-`K` value; or supports warehouse, UAV, safety,
 deployment, or general option-value claims.
 
-## Next discriminator
+## Probe-cut reentry condition
 
 The discarded update-1,000 continuation is not a valid input to the new object because its
 future-relevant state is not reconstructibly equal. A canonical from-genesis replay would be a
@@ -102,6 +102,7 @@ inherit the completed continuation's evidence or disposition.
 ## Accepted evidence set
 
 - `docs/research/candidates/commitment_residual_triggered_options/IMPLEMENTATION_THRESHOLD.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_V4_PREACTIVITY_SUPPORT_GATE_INTAKE.md`
@@ -125,44 +126,66 @@ The fresh `commitment_residual_triggered_options_common_history_gate_r01` packag
 accepted. Its 19 focused tests and source check pass, and direct structural/byte equality replaces
 all non-RNG digest or identity gates. It contains no route to the discarded update-1,000 state.
 
-This is engineering evidence only. The automatic wave-2 source audit in
-`IMPLEMENTATION_THRESHOLD.md` now freezes the recoverable predictor, deterministic
-behavior/continuation, independent calibration, 64-per-regime evaluation population, inherited
-audit boundary, and support laws. It also records the source-defined six-interval Bonferroni
-Student-t calculation, but does not treat its finite-sample coverage as established. That partial
-freeze does not establish end-to-end implementation conformance and does not authorize activity.
+The automatic wave-2 source audit in `IMPLEMENTATION_THRESHOLD.md` froze the recoverable predictor,
+deterministic behavior/continuation, independent calibration, evaluation population, audit boundary,
+and support laws. It correctly left RAW competence and seed-sampling validity unresolved.
 
-The primary decisive scientific blocker is:
+## Competence and decision closure — 2026-08-31
 
-> `NONIDENTIFYING_MISSING_RAW_LONG_COMPETENCE_LAW`: accepted CRTO authority supplies no choice among
-> absolute oracle-regret proximity, superiority or noninferiority to the logged script, or an
-> across-replicate inferential competence condition; it also supplies no aggregation rule or numeric
-> margin. The common-history contrast margin `0.005` and B1 decoder gates `0.01/0.95` govern other
-> endpoints and cannot be reassigned to RAW-LONG competence.
+`CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md` resolves those two gaps
+prospectively without observing an untouched R01 result.
 
-The primary missing prospective object is exactly
-`RAW_LONG_COMPETENCE = (K8 regret reference, replicate aggregation/bound, acceptance inequality and
-numeric margin)`. Root may separately invest in a result-blind competence-definition/development
-cycle.
+RAW-LONG competence now uses exact K8 G16 oracle regret separately on material KEEP rows
+`max_replacement G16-G16(KEEP)<=-0.02` and material REPLAN rows with the same quantity `>=+0.02`.
+Every one of the eight fixed slots needs at least eight rows in both strata, and every one of the
+sixteen slot-by-stratum mean regrets must be at most `0.01`. Logged-script regret is a required
+same-row diagnostic, not a gate. This prevents easy-row dilution: an always-KEEP rule could otherwise
+score only `0.004` overall while failing every one of the registered 20% material replanning rows.
 
-A second unresolved scientific validity issue is
-`NONIDENTIFYING_MISSING_REPLICATE_SAMPLING_AND_COVERAGE_LAW`. Fixed counter-addresses establish
-reproducible, disjoint streams; they do not establish that eight replicate effects are iid Normal,
-exchangeable, or sampled from any identified population. The registered Student-t calculation is
-therefore descriptive/model-conditional, not a finite-sample coverage guarantee, and may not route a
-first-match branch. Exact sign-flip inference is not design-valid because representations were not
-randomly assigned under a sharp exchangeable null. The second missing object is
-`SIMULTANEOUS_INFERENCE_VALIDITY = (target randomness/population law, coverage method, familywise
-calibration, n=8 power-or-width bound, failure handling)`. Root may separately invest either in a
-defensible sampling-model justification or in a distribution-free familywise construction with an
-adequate pre-result resolution bound at `delta=0.005`.
+The fixed counter addresses are explicitly a complete eight-slot finite target, not an iid-Normal or
+exchangeable sample. For each of the six representation-by-budget contrasts, decisions use the
+minimum and maximum across all eight slot effects. Superiority requires every slot to exceed
+`delta=0.005`; equivalence requires every slot to lie in `[-delta,+delta]`. Cross-slot means and the
+historical Student-t calculation are descriptive only. This is an exact simultaneous census fact,
+not probabilistic coverage or seed-population generalization.
 
-Until both missing objects are justified and frozen before untouched confirmation, the present
-`run` entry must continue to refuse before optimizer work or output. No READY command, result,
-scientific polarity, or Portfolio lifecycle action follows from this audit.
+The mutually exclusive result order is persistent aligned bias, generic preprocessing,
+optimization-exposure only, close tested mechanism, then unresolved. The optimization branch also
+requires SHORT alignment specificity, all three LONG pairs to be equivalent, material absolute RAW
+improvement from SHORT to LONG in every slot, and no material TRUE degradation. A closing result may
+contain material RAW superiority and may not be called equivalence unless the exact equivalence
+predicate also holds.
 
-The maximum future claim remains finite-budget supervised action-gate regret on registered,
-supported audit rows reached by the frozen script and valued by its frozen 16-step continuation. It
-cannot establish information gain, hypothesis-class superiority or equality, residual-semantic
-uniqueness, full-policy return, MARL value, arbitrary `K`, warehouse or UAV value, safety, or
-deployment value.
+These scientific objects are complete. The package now implements the material-stratum RAW gate,
+the exact eight-slot effect and budget-trajectory hulls, the final first-match table, CLOSE
+subclassification, typed fixed policy, strict result schema, and semantic result checks. Its
+result-blind prospective preflight also fixes the population schedule and calibration manifest,
+per-slot structural support scan, KEEP-inclusive common-future branch count, charged-step ledger,
+4 GiB and run-resource receipts, and runtime monitor seams. The 31 focused tests, source check,
+compilation, and diff check pass.
+
+The official result-blind final-namespace preflight then completed once. It observed
+`15,023,247,360` physical/effective available bytes, retained all `6,144/6,144` structural
+boundaries, and passed every per-slot support gate. It counted `19,295` prospective G16 branches
+and charged `2,536,944` primitive team steps, leaving `59,920` below the ceiling. Forecast, G16,
+model, optimizer, checkpoint, root, and result activity remained zero. See
+`CRTO_COMMON_HISTORY_GATE_R01_RESULT_BLIND_PREFLIGHT_20260831.md`.
+
+The completed official preflight reports `ready_for_optimizer=false` on the exact blocker
+`ENGINEERING_SINGLE_PASS_RESIDUAL_CALIBRATION_PIPELINE_INCOMPLETE`. All-horizon calibration
+aggregation, first-boundary G16 collection, staged RAW-LONG competence, final analysis publication,
+and the second fresh memory admission immediately before launch are not yet connected into one
+production transaction. The fail-closed `run` entry stops before models, optimizers, scientific
+roots, or results. Neither the optional two-slot development pilot nor the fixed-eight confirmation
+is presently eligible.
+
+The cheapest next discriminator remains the bounded RAW-only pilot, but only after that single-pass
+production transaction and second launch admission are implemented and verified. A pilot failure
+updates only its development architecture-budget object; a structural or threshold change requires
+fresh confirmation addresses.
+
+The maximum future claim is finite-budget supervised action-gate regret uniformly across the eight
+registered addresses and their supported script-reachable audit rows under the frozen 16-step
+continuation. It cannot establish a seed/address superpopulation result, probability coverage,
+information gain, hypothesis-class superiority or equality, residual-semantic uniqueness,
+full-policy return, MARL value, arbitrary `K`, warehouse or UAV value, safety, or deployment value.

@@ -80,15 +80,20 @@ never silently alter whitespace, file selection, or prompt text.
 ## Long generation and 15-minute wake-up
 
 Once `conversation_id` is bound, persist it before waiting and mark the tab for
-handoff. During Pro generation, `Pro thinking`, `Stop answering`, a browser timeout,
-or `Answer now` are non-terminal observations. Never click `Answer now`, Retry,
-Continue, or Stop. A timeout becomes `WAITING_UNKNOWN`, not a send failure.
+handoff. The tab handle is ephemeral; the durable identity is the exact
+`conversation_id` and `provider_url`. During Pro generation, `Pro thinking`, `Stop
+answering`, a browser timeout, or `Answer now` are non-terminal observations. Never
+click `Answer now`, Retry, Continue, or Stop. A timeout becomes `WAITING_UNKNOWN`,
+not a send failure.
 
 Use the heartbeat automation with `FREQ=MINUTELY;INTERVAL=15` as a wake-up, not a
 busy-wait loop. Each wake performs one bounded status read under a per-conversation
 lock and returns. A 20–60 minute generation may therefore span several wakes. At
-60 minutes, retain the same tab/conversation and mark `WAITING_TIMEOUT`; do not
-create a replacement or declare a scientific failure.
+60 minutes, persist the same conversation and mark `WAITING_TIMEOUT`; if the
+conversation ID is known, close the temporary tab after recording that state and
+let the next wake recover from the exact provider URL. Do not create a replacement
+or declare a scientific failure. If identity is not known, keep the tab for human
+attention rather than closing an unrecoverable submission.
 
 Natural completion requires an explicit completed status, no active generation
 control, and a complete assistant message in the same conversation. Capture the
@@ -102,13 +107,23 @@ send evidence, wait status, and archive status. Deduplicate by
 `(direction_id, conversation_id, response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not
 overwrite anything. Cancel/disable the heartbeat only after durable archive
-verification. Close an agent-created tab only after archive verification; keep or
-mark handoff for active, uncertain, or timeout states. Mark deliverable only when the
-user explicitly wants the page left visible.
+verification. After a complete response is captured, hash-verified, and durably
+archived, close the agent-created tab immediately and set its ephemeral `tab_id` to
+null (or `tab_lifecycle=CLOSED`) while retaining the conversation URL/ID and archive
+paths. Do not keep a completed page alive merely for convenience.
+
+When a later wake needs a closed or stale page, create a fresh temporary tab in the
+same in-app browser and navigate to the persisted exact `provider_url`. Verify the
+loaded URL/conversation and direction before reading; never call `tabs.get()` on the
+old handle and never create a new conversation. Close the recovered tab again after
+the bounded status read or archive. A user-owned/explicitly mentioned tab is not
+closed unless the user has authorized closing that tab. Mark deliverable only when
+the user explicitly wants the page left visible.
 
 ## Stop conditions
 
 Stop and report the exact state on unknown direction, missing prompt, failed Pro
 verification, incomplete upload, uncertain/mismatched submission, stale/ambiguous
-conversation identity, partial response, archive conflict, or heartbeat overlap.
+conversation identity, partial response, archive conflict, heartbeat overlap, or a
+recovery URL that no longer resolves to the bound conversation.
 Transport facts never imply scientific conclusions.

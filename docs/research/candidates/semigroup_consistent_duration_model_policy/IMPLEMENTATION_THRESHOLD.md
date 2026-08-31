@@ -1,13 +1,14 @@
 # SCDMP foundation-conditioned event-order value implementation threshold
 
-Status: `PRODUCTION_PIPELINE_IMPLEMENTED_SCIENTIFIC_INFERENCE_HOLD`
+Status: `EXACT_OBJECT_CONSUMED_INVALID_EVIDENCE_NO_RERUN_HARDENING_ONLY`
 
 The retained conclusion-blind review is terminal and rejects the earlier 18-action finite-selector
 opportunity law at the definition level. The separately frozen fixed-state, fixed-`k`, precommitted
 2×3 candidate-action gate below avoids both selector regret and assay-state copula ambiguity and
-has a technically accepted implementation. It inherits no polarity from the rejected object. Its
-reserved phase entry is fail-closed before every result-bearing effect because the historical
-Student-t rule below lacks a frozen finite-sample coverage justification.
+has a technically accepted V2 implementation and a frozen V3 definition. It inherits no polarity
+from the rejected object. The one V3 formal object is now consumed as
+`INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`; no result-bearing entry may run again. This file
+retains the exact definition only to constrain no-run hardening and result-blind tests.
 
 ## Scientific object
 
@@ -87,9 +88,15 @@ A_RH   = index 12 = (2,(0,0,1,-1))
 An analytic frozen fixture gives the registered local loaded-cable witness: `0.84` matched, `0.94`
 mismatched, and common-action maximum `0.66`. The existing native TEST_ONLY observable must reproduce
 the corresponding threshold classifications; it does not expose exact load values and therefore is
-not described as an exact-value measurement. Bind 24 complete disturbance tapes addressed only by
-tape/tick/component; every tape is shared across all six graph/action cells, giving one accepted
-width-144 native session.
+not described as an exact-value measurement. Bind exactly 562 complete disturbance tapes addressed
+only by tape/tick/component. Every tape is shared across all six graph/action cells. Execute 23
+strictly serial slices of 24 tapes/144 lanes followed by one final slice of 10 tapes/60 lanes. Slice
+boundaries do not change the tape population or inference unit.
+
+The scientific RNG law treats distinct addressed assay draws as an ideal PRF: mutually independent
+fair bits across tape/tick/component addresses and independent of the foundation training and
+competence domains. Finite-sample claims are conditional on this explicit abstraction; domain
+separation alone is not an information-theoretic independence proof.
 
 Force the precommitted action for the first 13 ticks or absorption, then return active lanes to the
 same immutable foundation under deterministic lexicographic argmax. The first hold is not a
@@ -102,34 +109,60 @@ U_{lga}=1\{\text{safe dock}\}(1-\text{dock tick}/364).
 \]
 
 Failure and timeout are zero. Training reward, interval reward, instantaneous load, RATE diagnostics,
-and partial cells cannot activate a branch. With `a0=A_RH`, `a1=A_HR`, and `c=COMMON`, freeze
+and partial cells cannot activate a branch. With `a0=A_RH`, `a1=A_HR`, and `c=COMMON`, retain the
+raw tape contrasts
 
 ```text
-d_0m = mu_0,a0 - mu_0,a1
-d_1m = mu_1,a1 - mu_1,a0
-d_0c = mu_0,a0 - mu_0,c
-d_1c = mu_1,a1 - mu_1,c
+d_0m,i = U_i(0,a0) - U_i(0,a1)
+d_1m,i = U_i(1,a1) - U_i(1,a0)
+d_0c,i = U_i(0,a0) - U_i(0,c)
+d_1c,i = U_i(1,a1) - U_i(1,c)
 
-I   = 0.5*(d_0m+d_1m)
-V_A = min(0.5*d_0m,
-          0.5*d_1m,
-          0.5*(d_0c+d_1c))
+G_RH,i     = 0.5*d_1m,i
+G_HR,i     = 0.5*d_0m,i
+G_COMMON,i = 0.5*(d_0c,i+d_1c,i)
+
+V_A = min(E[G_RH],E[G_HR],E[G_COMMON]).
 ```
 
-Compute these only after all cells terminate. Across 24 tape blocks use one four-member family on
-`(d_0m,d_1m,d_0c,d_1c)` of one-sided paired Student-t bounds with `df=23`, critical quantile
-`1-0.05/4`, float64 `fsum` reductions, and explicit zero-variance handling.
-`TARGET_CANDIDATE_ORDER_VALUE_ESTABLISHED` requires every adjusted lower bound strictly positive.
-Every other complete valid outcome closes this exact state/K/foundation/candidate-set gate before
-any adapter.
+These three means are exactly the matched mapping's balanced-graph value gaps against the three
+graph-blind pure vertices. Their simultaneous positivity is necessary and sufficient for superiority
+over every fixed or randomized graph-blind policy on the candidate set. Separate positivity of
+`d_0c` and `d_1c` is not required.
 
-The preceding Student-t rule is retained only as historical implementation provenance and a
-TEST_ONLY counterexample target. It cannot activate a scientific branch. Under the bounded endpoint
-law, each contrast lies in `[-363/364,363/364]`; the zero-variance rule can return four positive
-lower bounds with probability `(127/128)^24` even when all four population means are
-`-59/11648`. Production remains on `SCIENTIFIC_INFERENCE_HOLD` until Root prospectively freezes a
-finite-sample-valid method, material margin or explicit zero margin, tape count, stop rule, atomic
-result law and revised resource envelope.
+Let `B=363/364`. The supports are `G_RH,G_HR in [-B/2,B/2]` with range `B`, and
+`G_COMMON in [-B,B]` with range `2B`. Normalize every component by its own complete range:
+
+```text
+X_j,i = 0.5 + G_j,i/R_j in [0,1].
+```
+
+After all 3,372 cells terminate, compute for each component
+
+```text
+p_j = 1                                            if mean(X_j)<=0.5
+p_j = exp(-562*kl(mean(X_j)||0.5))                otherwise.
+```
+
+The only positive branch is the all-or-none intersection-union decision
+
+```text
+max(p_RH,p_HR,p_COMMON) < 0.05.
+```
+
+No component pass or marginal lower limit is independently publishable. Invert the three marginal
+tests only to publish the single unit-range joint lower bound
+`L_theta=min(ell_RH-0.5,ell_HR-0.5,ell_COMMON-0.5)`; `L_theta>0` is equivalent to `V_A>0`. The
+scientific margin is zero. Exact endpoint-grid passage
+requires integer numerator sums at least `21,046`, `21,046`, and `42,091`; the previous integer never
+passes. The planning alternative is a mean gap equal to `0.1` of each component's full support range.
+At `n=562` its discrete distribution-free joint-power lower bound is `0.801021247429385`; `n=561`
+gives `0.799048262648854`.
+
+The Student-t analyzer remains TEST_ONLY defect provenance and cannot activate any branch. Common
+tapes do not justify sign flips or action/graph permutations. Exact formulas, the IUT proof,
+counterexamples, zero-margin rationale, numeric conventions and claim ceiling are frozen in
+`SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`.
 
 ## Typed RATE receiver seam
 
@@ -179,7 +212,7 @@ opportunity/production/lifecycle/RNG/result modules that encode the rejected 18-
 
 Schemas cover manifest, checkpoint, foundation gate, complete 2×3 result, and terminal fact.
 
-## CLI, direct preflight and scientific hold
+## CLI retirement and no-run hardening
 
 ```text
 python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value.runner \
@@ -189,38 +222,58 @@ python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_o
   --phase FOUNDATION_AND_2X3 --manifest PATH --result-root PATH
 ```
 
-The preflight command exact-validates the prospective V2 manifest, resource/RNG inventories, public
-alias and a real native width-144 reset session without creating the result root. The phase command
-is reserved but not READY: it reruns preflight and returns `SCIENTIFIC_INFERENCE_HOLD` before result
-root creation, fresh-master generation, numerical-runtime mutation, model materialization,
-training, competence, tapes, panel execution or publication.
+The displayed phase syntax is historical and permanently unavailable for this exact object. The
+existing `.1` canonical production root is occupied. Every alternate root, old-schema request and
+second phase invocation must refuse before model, master, checkpoint, tape or output creation.
+`--preflight-only` may remain only for result-blind and TEST_ONLY hardening; it cannot prepare or
+license another result.
 
-Behind that hold, the private future pipeline fixes one internally generated OS 256-bit master,
-160×12 fixed-13 training, one update-160/step-1,920 checkpoint, fresh-genesis direct restore
-equality, 120 raw competence records with recomputed bounds, and a raw width-144 precommitted panel.
-It has no callable path from raw panel cells to the held t analysis or a passing scientific artifact.
+The consumed definition used one internally generated OS 256-bit master, 160×12 fixed-13 training,
+one update-160/step-1,920 checkpoint, 120 competence records, 23 width-144 slices and one width-60
+slice over 562 tape addresses. These counts are immutable provenance, not a future workload.
 
-Maximum registered work is 2,184 episodes/rollouts, 794,976 allocated primitive slots, 1,920 AdamW
-steps, one checkpoint, 144 forced actions, and at most 61,008 foundation queries, with one worker
-and one native/Torch thread. Non-result checks
+The consumed maximum was 5,412 episodes/rollouts, 1,969,968 allocated primitive slots, 1,920
+AdamW steps, one checkpoint, 3,372 forced actions, and at most 148,164 foundation queries, with one
+worker and one native/Torch thread. The frozen ceilings were 300 seconds, 1 GiB peak RSS, 64 MiB
+scratch and 64 MiB durable. Non-result checks
 cover state serialization, H/R aliasing, action mapping, local headroom, fixed-13 training, exact
-competence bounds, width-144 inventory, tape equality, selector absence, full-mission accounting,
-RATE disconnection, complete-only artifacts, direct resume equality, legacy-schema rejection, and
-dependency firewall.
+competence bounds, width-144 and width-60 inventory, 562-tape equality, selector absence,
+full-mission accounting, RATE disconnection, integer/KL branch equality, all-or-none IUT,
+complete-only artifacts, same-master frontier resume, legacy-schema rejection, and dependency
+firewall.
 
-Stop on `SCIENTIFIC_INFERENCE_HOLD`, contract drift, foundation nonpass, alias/headroom failure,
-tape leakage, foundation mutation, duplicate/nonterminal lane, resume divergence, partial output,
-or resource refusal.
+The production phase now stops unconditionally before effect. There is no formal resume: same-master
+frontier recovery remains only a TEST_ONLY correctness surface. A new master, redraw, replacement,
+changed `n`, changed threshold, alternate root or result-aware extension is forbidden.
+
+Root/reviewer final validity found the actual artifact's sole invalidator to be the missing
+prospective direction-specific `assess-run` plus missing formal-process peak-RSS and scratch-peak
+telemetry. Fixed 4 GiB admissions, wall, durable and structural checks passed, but no post-hoc
+observation can replace the missing evidence. Therefore no scientific branch exists.
+
+Future-entry hardening is code/test work only:
+
+- canonicalize the existing `.1` root and reject all others before effect;
+- stage same-master initialization/finalization atomically;
+- create-only persist path, length and full raw bytes for 14 owned Python modules, three allowlisted
+  dependencies, native C++ and the actual loaded DLL, then require resume
+  `read_bytes()==persisted_bytes`;
+- bind a final fixture bundle directly to canonical resolved root, raw master bytes, run record and
+  raw-byte snapshot;
+- add identity-free prospective direction assessment and live wall/peak-RSS/scratch/durable
+  telemetry with missing measurements failing closed.
+
+Do not add hashes, digests, identity, authentication or approval fields. These surfaces may be
+exercised only by unit, fixture, TEST_ONLY native and result-blind preflight tests; they cannot
+produce another formal run.
 
 ## Claim ceiling
 
-No scientific result is currently available. After a valid future inference freeze, the ceiling is
-fixed-simulator, fixed-state, fixed-K, single-foundation candidate-set event-order value against the
-best graph-blind fixed or randomized policy on `{A_RH,A_HR,COMMON}` under the registered
-disturbance law. It does not compare against the best of all 18 actions or necessarily the
-foundation's natural first action. Technical success cannot establish learned chronology,
-learned duration, semigroup composition, arbitrary words, variable lifetime/membership, simulator
-transfer, UAV safety, deployment, or flight.
+No scientific result is available. The prospective fixed-simulator, fixed-state, fixed-K,
+single-foundation candidate-set statement remains definition-only; the consumed artifact cannot
+activate it or any narrower component claim. Technical hardening cannot establish learned
+chronology, learned duration, semigroup composition, arbitrary words, variable lifetime/membership,
+simulator transfer, UAV safety, deployment or flight.
 
 ## Evidence
 
@@ -228,4 +281,6 @@ transfer, UAV safety, deployment, or flight.
 - `SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md`
 - `SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
 - `SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
+- `SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`
+- `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/IMPLEMENTATION_THRESHOLD.md`

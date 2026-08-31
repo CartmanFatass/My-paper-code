@@ -11,6 +11,7 @@ from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.producti
     SourceFactoredNotReady, canonical_json_bytes, complete_contract, production_readiness_gap_inventory,
 )
 from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_preflight import run_preflight
+from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_process import run_two_owner_one_tick_pathwise_oracle
 from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_runner import (
     main as runner_main, refuse_run,
 )
@@ -25,9 +26,10 @@ def _not_ready_request_header() -> dict[str, object]:
 
 
 def test_source_factored_preflight_is_measured_result_blind_and_discloses_native_setup(tmp_path: Path) -> None:
+    run_two_owner_one_tick_pathwise_oracle()  # build outside the read-only preflight
     run_root = tmp_path / "preflight-receipt-root"
     receipt = run_preflight(repository_root=Path.cwd(), run_root=run_root)
-    assert receipt["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V1"
+    assert receipt["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V2"
     assert receipt["passed"] is False and receipt["status"] == "NOT_READY"
     assert receipt["master_created"] is False and receipt["scientific_master_created"] is False
     assert receipt["checkpoint_created"] is False
@@ -48,7 +50,29 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
         assert receipt["native_probe"]["ordinary_mode0_clone_rejected"] is True
         assert receipt["native_probe"]["ordinary_mode0_clone_rejection_code"] == 2
     assert receipt["native_probe"]["static_test_predicate_explicitly_rejects_mode0"] is True
-    assert receipt["native_probe"]["production_source_factored_sidecar_abi_present"] is False
+    assert receipt["native_probe"]["test_source_factored_sidecar_abi_present"] is True
+    assert receipt["native_probe"]["test_post_arrival_observation_conformance"] is True
+    assert receipt["native_probe"]["production_mode_reachable"] is False
+    oracle = receipt["two_owner_one_tick_oracle"]
+    assert oracle == {
+        "schema": "DISH_PSF_R01_TWO_OWNER_ONE_TICK_ORACLE_V1",
+        "test_only": True,
+        "passed": True,
+        "owners": [0, 1],
+        "owner_history_explicit": True,
+        "pre_application_promotion_count": 0,
+        "actor_fields_compared": 1296,
+        "critic_fields_compared": 348,
+        "native_causal_vector_equal": True,
+        "source_specific_masked_welford_equal": True,
+        "live_replay_hidden_equal": True,
+        "live_replay_logits_equal": True,
+        "live_replay_old_log_probability_equal": True,
+        "behavior_policy_ratio_exactly_one": True,
+        "snapshot_assimilation_before_cas": True,
+        "branch_observation_before_single_forward": True,
+        "question_relevant_output": False,
+    }
     assert receipt["measured_process"]["scope"] == "single_process_read_only_cache_and_sentinel_scope"
     assert receipt["measured_process"]["process_tree_measurement_complete"] is True
     accounting = receipt["side_effect_accounting"]
@@ -65,6 +89,19 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
         "rss_gib": 6.61, "scratch_gib": 1.66, "durable_gib": 0.83, "io_gib": 68.14,
     }
     assert receipt["gap_inventory"] == production_readiness_gap_inventory()
+    assert receipt["gap_inventory"]["scientific_holds"] == [
+        "PROSPECTIVE_INFERENCE_HOLD",
+        "FINITE_SAMPLE_INFERENCE_LAW_UNRESOLVED",
+    ]
+    assert receipt["gap_inventory"]["test_conformance_closed"] == [
+        "TEST_PHASED_SIDECAR_ABI_V1",
+        "TEST_VALIDATED_RECURRENT_HANDOFF_V1",
+        "TEST_TWO_OWNER_ONE_TICK_NATIVE_CAUSAL_54_58_ORACLE",
+        "TEST_SOURCE_SPECIFIC_MASKED_PER_DIMENSION_WELFORD",
+        "TEST_TYPED_OWNER_HISTORY_LIVE_REPLAY_RATIO_ONE",
+    ]
+    assert "SOURCE_FACTORED_PHASED_SIDECAR_ABI_AND_BEGIN_TICK_TOKEN_ABSENT" not in receipt["gap_inventory"]["gaps"]
+    assert "PROSPECTIVE_INFERENCE_HOLD" in receipt["gap_inventory"]["gaps"]
     with pytest.raises(ValueError, match="must be absent"):
         run_preflight(repository_root=Path.cwd(), run_root=run_root)
 
@@ -94,12 +131,87 @@ def test_source_factored_preflight_cold_cache_skips_native_and_writes_only_recei
     ]
     assert receipt["native_probe"]["dynamic_test_clone_executed"] is False
     assert receipt["native_probe"]["accepted_test_clone_branches"] == []
+    assert receipt["native_probe"]["test_source_factored_sidecar_abi_present"] is True
+    assert receipt["two_owner_one_tick_oracle"]["passed"] is True
     assert receipt["fixed_test_master_used"] is False
     assert receipt["fixed_test_reset_instantiated"] is False
     assert not cold_cache.exists()
     assert {path.name for path in tmp_path.iterdir()} == {receipt_root.name}
     assert {path.name for path in receipt_root.iterdir()} == {"preflight-receipt.json"}
     assert (receipt_root / "preflight-receipt.json").read_bytes() == canonical_json_bytes(receipt)
+
+
+def test_source_factored_preflight_cold_sidecar_cache_never_compiles(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cold_sidecar = tmp_path / "absent-sidecar-cache"
+    receipt_root = tmp_path / "cold-sidecar-receipt"
+
+    def forbidden(*_args: object, **_kwargs: object) -> object:
+        raise AssertionError("sidecar compile/toolchain path must not be called by preflight")
+
+    monkeypatch.setattr(
+        preflight_module._source_factored_backend,
+        "_sidecar_cache_root",
+        lambda: cold_sidecar,
+    )
+    monkeypatch.setattr(preflight_module._source_factored_backend, "_compile", forbidden)
+    monkeypatch.setattr(preflight_module._source_factored_backend, "_vs_installation", forbidden)
+    receipt = run_preflight(repository_root=Path.cwd(), run_root=receipt_root)
+
+    cache = receipt["side_effect_accounting"]["source_factored_sidecar_cache"]
+    assert cache["status"] == "CACHE_ABSENT"
+    assert cache["compile_called"] is False and cache["cache_write_attempted"] is False
+    assert receipt["two_owner_one_tick_oracle"] == {
+        "schema": "DISH_PSF_R01_TWO_OWNER_ONE_TICK_ORACLE_V1",
+        "test_only": True,
+        "passed": False,
+        "executed": False,
+        "status": "CACHE_ABSENT",
+        "question_relevant_output": False,
+    }
+    assert receipt["native_probe"]["test_source_factored_sidecar_abi_present"] is False
+    assert "PREEXISTING_CURRENT_TEST_SIDECAR_CACHE_ABSENT" in receipt["preflight_gaps"]
+    assert not cold_sidecar.exists()
+    assert {path.name for path in receipt_root.iterdir()} == {"preflight-receipt.json"}
+
+
+def test_source_factored_preflight_pins_loaded_sidecar_across_source_key_change(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    run_two_owner_one_tick_pathwise_oracle()  # ensure the current TEST cache exists
+    receipt_root = tmp_path / "source-key-race-receipt"
+    backend = preflight_module._source_factored_backend
+    original_key = backend._source_stat_key()
+    calls = 0
+
+    def changing_key() -> str:
+        nonlocal calls
+        calls += 1
+        return original_key if calls == 1 else original_key + "-changed-during-probe"
+
+    def forbidden(*_args: object, **_kwargs: object) -> object:
+        raise AssertionError("read-only preflight must not compile after a source-key change")
+
+    original_oracle = preflight_module.run_two_owner_one_tick_pathwise_oracle
+
+    def changed_source_oracle() -> object:
+        assert backend._source_stat_key() != original_key
+        return original_oracle()
+
+    monkeypatch.setattr(backend, "_source_stat_key", changing_key)
+    monkeypatch.setattr(backend, "_compile", forbidden)
+    monkeypatch.setattr(
+        preflight_module,
+        "run_two_owner_one_tick_pathwise_oracle",
+        changed_source_oracle,
+    )
+    receipt = run_preflight(repository_root=Path.cwd(), run_root=receipt_root)
+
+    assert calls >= 2
+    assert receipt["two_owner_one_tick_oracle"]["passed"] is True
+    assert receipt["native_probe"]["test_source_factored_sidecar_abi_present"] is True
+    assert receipt["status"] == "NOT_READY" and receipt["passed"] is False
 
 
 def test_source_factored_runner_refuses_before_run_root_or_master(tmp_path: Path) -> None:

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 import numpy as np
 import torch
@@ -68,10 +68,13 @@ def train_one_path(
     order: np.ndarray,
     short_updates: int = BUDGETS["SHORT"],
     long_updates: int = BUDGETS["LONG"],
+    resource_monitor: Callable[[], None] | None = None,
 ) -> TrainedPath:
     """Continue one unchanged Adam trajectory through both frozen checkpoints."""
 
     representation = Representation(representation)
+    monitor = resource_monitor or (lambda: None)
+    monitor()
     if not isinstance(packets, PacketDataset):
         raise TypeError("training requires a row-keyed PacketDataset")
     packets.require_rows(rows)
@@ -91,6 +94,7 @@ def train_one_path(
     audits: dict[Budget, ExposureAudit] = {}
     model.train()
     for update in range(1, long_updates + 1):
+        monitor()
         begin = (update - 1) * BATCH_SIZE
         batch = order[begin:begin + BATCH_SIZE]
         histories, lengths, packet, legal, target = _collate(rows, packets.values, batch)
@@ -102,6 +106,7 @@ def train_one_path(
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), GRADIENT_NORM_CAP)
         optimizer.step()
+        monitor()
         budget = Budget.SHORT if update == short_updates else Budget.LONG if update == long_updates else None
         if budget is not None:
             snapshot = deepcopy(model).eval()
@@ -129,6 +134,7 @@ def train_matched_paths(
     packets: Mapping[Representation, PacketDataset],
     *,
     replicate: int,
+    resource_monitor: Callable[[], None] | None = None,
 ) -> dict[Representation, TrainedPath]:
     """Train all three paths with byte-identical initialization/order/work."""
 
@@ -140,6 +146,7 @@ def train_matched_paths(
         representation: train_one_path(
             rows, packets[representation], replicate=replicate,
             representation=representation, order=order,
+            resource_monitor=resource_monitor,
         )
         for representation in Representation
     }
@@ -194,11 +201,14 @@ def _collate_predictor(
 def fit_fresh_predictor(
     examples: tuple[PredictorExample, ...], *, replicate: int,
     updates: int = 400, batch_size: int = 256,
+    resource_monitor: Callable[[], None] | None = None,
 ) -> tuple[FreshPredictor, PredictorFitAudit]:
     """Fit a fresh predictor without any historical state or artifact route."""
 
     if not examples:
         raise ValueError("fresh predictor fit requires examples")
+    monitor = resource_monitor or (lambda: None)
+    monitor()
     ordered = tuple(sorted(examples, key=lambda row: row.canonical_key))
     model = FreshPredictor(counter_rng("predictor_initialization", replicate))
     optimizer = torch.optim.Adam(
@@ -209,6 +219,7 @@ def fit_fresh_predictor(
     horizon_to_index = {value: index for index, value in enumerate(FORECAST_HORIZONS)}
     model.train()
     for update in range(updates):
+        monitor()
         indices = order[update * batch_size:(update + 1) * batch_size]
         histories, lengths, option, k, horizon, target = _collate_predictor(ordered, indices)
         distribution = model(histories, lengths, option, k, FORECAST_HORIZONS)
@@ -226,6 +237,7 @@ def fit_fresh_predictor(
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optimizer.step()
+        monitor()
     model.eval()
     for parameter in model.parameters():
         parameter.requires_grad_(False)

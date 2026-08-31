@@ -100,6 +100,29 @@ law-conditioned coarsened nulls, estimand denominators/units/tie handling, and n
 branch before any code or enumeration. The full audit is recorded in
 `RISP_PREVALENCE_CENSUS_R01_BLOCKER_INTAKE_20260830.md`.
 
+## Prospective population-law decision audit — 2026-08-31
+
+`PC3-IID-REFERENCE` demonstrates that a witness-independent finite population can be made exactly
+complete: fix three completed renewals, sample the four completed/next durations and three reference
+actions independently and uniformly, and evaluate the sole terminal opportunity. The resulting
+17,496 public histories have a strictly positive normalized rational law, and both duration-erased
+and last-ACK nulls can be recomputed as exact population-conditional Bayes controllers.
+
+This candidate is not adopted. Its stopping, duration, behavior, opportunity, next-duration,
+regret-unit, and materiality choices are prospective convenience conventions rather than an
+independently target-grounded occupancy. Actions affect ACK information, so replacing the uniform
+reference behavior changes both history prevalence and the coarsened Bayes nulls. The local
+InstSci corpus supports distinguishing decision-event, physical-time, and policy-induced occupancy
+measures but supplies no RISP population law or cost-calibrated materiality rule.
+
+No census implementation or enumeration is scientifically warranted. Direction-local advice to
+Root is to close standalone RISP while retaining `RISP-ECR-R01` only as an exact noncommutation
+theorem/control input for another direction, with no polarity transfer. Reconsider standalone RISP
+only if an intended target supplies the complete generative/utility law or a robust lower bound over
+an independently justified law class crosses a cost-calibrated threshold. The derivation, literature
+boundary, and rejected candidate are recorded in
+`RISP_PROSPECTIVE_POPULATION_LAW_DECISION_AUDIT_20260831.md`.
+
 ## Evidence set
 
 The current direction evidence set includes the registered exact result and its prospective
@@ -109,6 +132,7 @@ authority, together with the historical navigation and provenance documents belo
 - `docs/research/candidates/renewal_indexed_score_plasticity/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_ECR_R01_RESULT_INTAKE.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_PREVALENCE_CENSUS_R01_BLOCKER_INTAKE_20260830.md`
+- `docs/research/candidates/renewal_indexed_score_plasticity/RISP_PROSPECTIVE_POPULATION_LAW_DECISION_AUDIT_20260831.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_DORMANT_FALLBACK_PORTFOLIO_DISPOSITION_20260823.md`
 

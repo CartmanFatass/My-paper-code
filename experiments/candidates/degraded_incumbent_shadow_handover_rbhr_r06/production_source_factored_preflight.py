@@ -12,7 +12,10 @@ import tempfile
 import time
 from typing import Iterator, Mapping, Sequence
 
+import numpy as np
+
 from . import production_backend as _production_backend
+from . import production_source_factored_backend as _source_factored_backend
 from .production_backend import (
     ProductionBackendError, empty_step_rows, native_batch_from_rows, source_factored_test_fixture,
 )
@@ -23,6 +26,7 @@ from .production_source_factored_contract import (
     TOTAL_UPDATES, canonical_json_bytes, complete_claim_inventory,
     production_readiness_gap_inventory,
 )
+from .production_source_factored_process import run_two_owner_one_tick_pathwise_oracle
 
 
 def _process_counters() -> Mapping[str, object]:
@@ -136,6 +140,104 @@ def _use_read_only_cached_library(library: ctypes.CDLL) -> Iterator[None]:
         _production_backend.require_cpp_batched_production_backend = original
 
 
+@contextmanager
+def _use_fixed_read_only_sidecar(cache: Mapping[str, object]) -> Iterator[None]:
+    """Pin one already-loaded sidecar handle; never re-key or compile mid-probe."""
+
+    key = str(cache["source_stat_key"])
+    with _source_factored_backend._LOCK:
+        library = _source_factored_backend._LOADED.get(key)
+        if library is None:
+            raise RuntimeError("read-only sidecar handle is unavailable")
+        original = _source_factored_backend._require_sidecar
+        _source_factored_backend._require_sidecar = lambda: library
+        try:
+            yield
+        finally:
+            _source_factored_backend._require_sidecar = original
+
+
+def _read_only_two_owner_oracle() -> tuple[Mapping[str, object], Mapping[str, object]]:
+    cache = _source_factored_backend.load_cached_sidecar_read_only()
+    if not cache["dynamic_test_probe_available"]:
+        return cache, {
+            "schema": "DISH_PSF_R01_TWO_OWNER_ONE_TICK_ORACLE_V1",
+            "test_only": True,
+            "passed": False,
+            "executed": False,
+            "status": str(cache["status"]),
+            "question_relevant_output": False,
+        }
+    try:
+        with _use_fixed_read_only_sidecar(cache):
+            oracle = run_two_owner_one_tick_pathwise_oracle()
+        passed = bool(
+            np.array_equal(oracle.native_actor, oracle.causal_oracle_actor)
+            and np.array_equal(oracle.native_critic, oracle.causal_oracle_critic)
+            and np.array_equal(oracle.live_hidden, oracle.replay_hidden)
+            and np.array_equal(oracle.live_logits, oracle.replay_logits)
+            and np.array_equal(oracle.old_log_probability, oracle.replay_log_probability)
+            and np.array_equal(oracle.behavior_policy_ratio, np.ones(2, dtype=np.float64))
+            and np.array_equal(oracle.live_normalized_actor, oracle.replay_normalized_actor)
+            and oracle.actor_welford_post_equal
+            and oracle.welford_pre_state_immutable
+            and oracle.current_tstar_excluded_from_welford_pre_state
+            and oracle.replay_owner_history_consumed
+            and oracle.question_relevant_output is False
+        )
+        receipt = {
+            "schema": oracle.schema,
+            "test_only": True,
+            "passed": passed,
+            "owners": list(map(int, oracle.initial_owner)),
+            "owner_history_explicit": bool(
+                np.array_equal(
+                    oracle.owner_history,
+                    np.broadcast_to(oracle.initial_owner, oracle.owner_history.shape),
+                )
+            ),
+            "pre_application_promotion_count": oracle.pre_application_promotion_count,
+            "actor_fields_compared": oracle.actor_fields_compared,
+            "critic_fields_compared": oracle.critic_fields_compared,
+            "native_causal_vector_equal": bool(
+                np.array_equal(oracle.native_actor, oracle.causal_oracle_actor)
+                and np.array_equal(oracle.native_critic, oracle.causal_oracle_critic)
+            ),
+            "source_specific_masked_welford_equal": bool(
+                oracle.actor_welford_post_equal
+                and oracle.welford_pre_state_immutable
+                and oracle.current_tstar_excluded_from_welford_pre_state
+            ),
+            "live_replay_hidden_equal": bool(np.array_equal(oracle.live_hidden, oracle.replay_hidden)),
+            "live_replay_logits_equal": bool(np.array_equal(oracle.live_logits, oracle.replay_logits)),
+            "live_replay_old_log_probability_equal": bool(
+                np.array_equal(oracle.old_log_probability, oracle.replay_log_probability)
+            ),
+            "behavior_policy_ratio_exactly_one": bool(
+                np.array_equal(oracle.behavior_policy_ratio, np.ones(2, dtype=np.float64))
+            ),
+            "snapshot_assimilation_before_cas": oracle.snapshot_assimilation_before_cas,
+            "branch_observation_before_single_forward": bool(
+                oracle.branch_observation_before_forward
+                and np.array_equal(oracle.forward_count_before, np.zeros(2, dtype=np.int32))
+                and np.array_equal(oracle.forward_count_after, np.ones(2, dtype=np.int32))
+            ),
+            "question_relevant_output": False,
+        }
+        return cache, receipt
+    except Exception as error:  # fail closed into the TEST receipt
+        message = str(error).encode("ascii", "backslashreplace").decode("ascii")
+        return cache, {
+            "schema": "DISH_PSF_R01_TWO_OWNER_ONE_TICK_ORACLE_V1",
+            "test_only": True,
+            "passed": False,
+            "executed": True,
+            "status": "CONFORMANCE_ERROR",
+            "error": message,
+            "question_relevant_output": False,
+        }
+
+
 def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, object]:
     repository = Path(repository_root).resolve(); receipt_root = Path(run_root).resolve()
     if not (repository / "AGENTS.md").is_file():
@@ -144,6 +246,7 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
         raise ValueError("TEST-only preflight receipt root must be absent")
     started_wall = time.perf_counter(); started_cpu = time.process_time(); before = _process_counters()
     library, native_cache = _load_cached_test_library()
+    sidecar_cache, pathwise_oracle = _read_only_two_owner_oracle()
     branches: tuple[str, ...] = (); metadata: Mapping[str, object] = {}
     ordinary_mode0_rejected = False; ordinary_mode0_rejection_code = None
     if library is not None:
@@ -175,8 +278,14 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
     preflight_gaps = ([] if library is not None else [
         "PREEXISTING_SOURCE_MATCHED_TEST_NATIVE_" + str(native_cache["status"]),
     ])
+    if not pathwise_oracle["passed"]:
+        preflight_gaps.append(
+            ("TWO_OWNER_ONE_TICK_TEST_CONFORMANCE_FAILED"
+             if sidecar_cache["dynamic_test_probe_available"] else
+             "PREEXISTING_CURRENT_TEST_SIDECAR_" + str(sidecar_cache["status"]))
+        )
     receipt = {
-        "schema": "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V1",
+        "schema": "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V2",
         "passed": False, "status": "NOT_READY", "result_blind": True,
         "preflight_receipt_root": str(receipt_root), "scientific_run_root_created": False,
         "master_created": False, "scientific_master_created": False,
@@ -187,20 +296,26 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
             "total_filesystem_effects_claimed_receipt_only": True,
             "requested_root_contains_only_canonical_receipt": True,
             "preexisting_native_cache_read_only": True,
+            "source_factored_sidecar_cache_read_only": True,
             "native_toolchain_or_compile_child_processes": 0,
             "native_cache": native_cache,
+            "source_factored_sidecar_cache": sidecar_cache,
         },
         "native_probe": {
-            "scope": "ACCEPTED_TEST_ONLY_TRANSACTION_SENTINEL_NOT_HOST_CONFORMANCE",
+            "scope": "TEST_ONLY_LEGACY_TRANSACTION_AND_PSF_PATHWISE_CONFORMANCE",
             "dynamic_test_clone_executed": library is not None,
             "ordinary_mode0_clone_rejected": ordinary_mode0_rejected,
             "ordinary_mode0_clone_rejection_code": ordinary_mode0_rejection_code,
             "static_test_predicate_explicitly_rejects_mode0": static_mode0_refusal,
             "accepted_test_clone_branches": list(branches),
             "accepted_test_parent_immutable": metadata.get("parent_byte_immutable") if metadata else None,
-            "production_source_factored_sidecar_abi_present": False,
-            "production_post_arrival_observation_conformance": False,
+            "test_source_factored_sidecar_abi_present": bool(
+                sidecar_cache["dynamic_test_probe_available"]
+            ),
+            "test_post_arrival_observation_conformance": bool(pathwise_oracle["passed"]),
+            "production_mode_reachable": False,
         },
+        "two_owner_one_tick_oracle": pathwise_oracle,
         "exact_ledgers": {
             "training_jobs": 24, "updates": TOTAL_UPDATES,
             "training_transitions": TOTAL_TRAINING_TRANSITIONS, "claim_rows": len(inventory),

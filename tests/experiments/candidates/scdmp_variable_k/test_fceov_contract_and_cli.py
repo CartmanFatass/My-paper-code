@@ -19,6 +19,10 @@ from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_
 )
 
 
+def _bind_canonical(monkeypatch, root):
+    monkeypatch.setattr(runner, "CANONICAL_RESULT_ROOT", root)
+
+
 def test_fixed_task_clock_horizon_k_state_and_hr_rh_public_alias():
     assert contracts.HOST == "QUAD-UAV-PALLET-GANTRY-24P5M-v1"
     assert contracts.TICK_SECONDS == 0.1
@@ -68,12 +72,13 @@ def test_graph_maps_action_catalogue_and_resource_contract_are_exact_and_immutab
     assert contracts.ACTIONS[10] == (2, (1, -1, 0, 0))
     assert contracts.ACTIONS[12] == (2, (0, 0, 1, -1))
     assert dict(contracts.RESOURCE_MAXIMA) == {
-        "episodes_rollouts": 2_184,
-        "primitive_slots": 794_976,
+        "episodes_rollouts": 5_412,
+        "primitive_slots": 1_969_968,
         "adamw_steps": 1_920,
         "checkpoints": 1,
-        "forced_actions": 144,
-        "foundation_queries": 61_008,
+        "forced_actions": 3_372,
+        "foundation_queries": 148_164,
+        "panel_slices": 24,
     }
 
     for value in (
@@ -164,12 +169,12 @@ def test_shared_transition_requires_full_cached_absorbed_output_equality():
 
 
 def test_structural_schema_names_and_direct_manifest_are_exact(tmp_path):
-    assert contracts.MANIFEST_SCHEMA == "SCDMP_FCEOV_MANIFEST_V2"
-    assert artifacts.CHECKPOINT_SCHEMA == "SCDMP_FCEOV_CHECKPOINT_V2"
+    assert contracts.MANIFEST_SCHEMA == "SCDMP_FCEOV_MANIFEST_V3"
+    assert artifacts.CHECKPOINT_SCHEMA == "SCDMP_FCEOV_CHECKPOINT_V3"
     assert contracts.CHECKPOINT_UPDATE == 160
-    assert artifacts.FOUNDATION_GATE_SCHEMA == "SCDMP_FCEOV_FOUNDATION_GATE_V2"
-    assert artifacts.PANEL_SCHEMA == "SCDMP_FCEOV_COMPLETE_2X3_RESULT_V1"
-    assert artifacts.TERMINAL_FACT_SCHEMA == "SCDMP_FCEOV_TERMINAL_V2"
+    assert artifacts.FOUNDATION_GATE_SCHEMA == "SCDMP_FCEOV_FOUNDATION_GATE_V3"
+    assert artifacts.PANEL_SCHEMA == "SCDMP_FCEOV_COMPLETE_2X3_RESULT_V3"
+    assert artifacts.TERMINAL_FACT_SCHEMA == "SCDMP_FCEOV_TERMINAL_V3"
 
     value = source_manifest.build_source_manifest()
     assert not {"hash", "digest", "identity", "authorization", "approval", "lease"} & {
@@ -199,7 +204,7 @@ def test_structural_schema_names_and_direct_manifest_are_exact(tmp_path):
             source_manifest.validate_source_manifest(tampered)
 
 
-def test_preflight_has_no_result_route_or_files_and_rejects_existing_result_root(
+def test_preflight_is_result_blind_ready_and_rejects_existing_result_root(
     tmp_path, monkeypatch
 ):
     manifest = tmp_path / "manifest.json"
@@ -214,14 +219,16 @@ def test_preflight_has_no_result_route_or_files_and_rejects_existing_result_root
     )
 
     result_root = tmp_path / "prospective-results"
+    _bind_canonical(monkeypatch, result_root)
     report = runner.run_preflight(manifest=manifest, result_root=result_root)
     assert report["production_pipeline_implemented"] is True
-    assert report["production_result_path_implemented"] is False
-    assert report["result_command_status"] == "SCIENTIFIC_INFERENCE_HOLD"
-    assert report["scientific_inference_hold"] is True
+    assert report["production_result_path_implemented"] is True
+    assert report["result_command_status"] == "READY"
+    assert report["scientific_inference_hold"] is False
     assert report["resolved_result_root"] == str(result_root.resolve())
     assert report["training_episodes"] == 1_920
-    assert report["panel_width"] == report["reset_width"] == 144
+    assert report["panel_width"] == report["reset_width"] == 3_372
+    assert report["native_session_widths"] == (144,) * 23 + (60,)
     assert result_root.exists() is False
 
     result_root.mkdir()
@@ -238,6 +245,15 @@ def test_cli_accepts_preflight_and_only_the_exact_frozen_result_phase(tmp_path, 
         "run_preflight",
         lambda **kwargs: {"production_result_path_implemented": True},
     )
+    terminal = contracts.TerminalFact(
+        artifacts.TERMINAL_FACT_SCHEMA,
+        contracts.Disposition.FOUNDATION_NONPASS.value,
+        foundation.analyze_competence(tuple(
+            foundation.CompetenceRecord(row.mission, row.graph, True, False)
+            for row in foundation.competence_inventory()
+        )),
+        False,
+    )
 
     assert runner.main(
         ["--preflight-only", "--manifest", str(manifest), "--result-root", str(result_root)]
@@ -247,11 +263,12 @@ def test_cli_accepts_preflight_and_only_the_exact_frozen_result_phase(tmp_path, 
     assert json.loads(preflight_stdout) == {"production_result_path_implemented": True}
     assert not result_root.exists()
 
+    monkeypatch.setattr(runner, "run_result", lambda **kwargs: terminal)
     assert runner.main([
         "--phase", "FOUNDATION_AND_2X3", "--manifest", str(manifest),
         "--result-root", str(result_root),
-    ]) == 1
-    assert "SCIENTIFIC_INFERENCE_HOLD" in capsys.readouterr().err
+    ]) == 0
+    assert terminal.disposition in capsys.readouterr().out
     assert not result_root.exists()
 
     for phase in ("FOUNDATION", "ASSAY", "anything"):
@@ -277,8 +294,11 @@ def test_result_orchestration_uses_one_final_checkpoint_restore_and_stops_before
     monkeypatch.setattr(
         runner, "run_preflight", lambda **kwargs: preflight_calls.append(kwargs) or {
             "resources": dict(contracts.RESOURCE_MAXIMA), "production_result_path_implemented": True,
+            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
         },
     )
+    admissions = []
+    monkeypatch.setattr(runner, "admit_memory", lambda path: admissions.append(path) or {"passed": True})
     monkeypatch.setattr(runner, "fresh_master", lambda: bytes(range(32)))
 
     def cheap_update(model, optimizer, source, *, update):
@@ -293,13 +313,36 @@ def test_result_orchestration_uses_one_final_checkpoint_restore_and_stops_before
     )
     monkeypatch.setattr(runner, "execute_native_competence", lambda frozen, source: records)
     monkeypatch.setattr(
-        runner, "execute_native_panel",
+        runner, "execute_native_panel_slice",
         lambda *args: pytest.fail("panel must not execute after a competence nonpass"),
     )
     root = tmp_path / "fresh-result"
+    _bind_canonical(monkeypatch, root)
     manifest = tmp_path / "manifest.json"
+    source_manifest.write_source_manifest(manifest)
+    def passing_direction_resources(**kwargs):
+        scratch_root = kwargs.get("scratch_root")
+        scratch_bytes = (
+            scratch_root.stat().st_size
+            if scratch_root is not None and scratch_root.is_file()
+            else 0
+        )
+        value = {
+            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+            "stage": kwargs["stage"],
+            "passed": True,
+            "failure_reasons": [],
+            "scratch_bytes": scratch_bytes,
+        }
+        receipt = kwargs.get("receipt")
+        if receipt is not None:
+            receipt.write_text(json.dumps(value), encoding="utf-8")
+        return value
+
+    monkeypatch.setattr(runner, "_enforce_direction_resources", passing_direction_resources)
     fact = runner._execute_result_pipeline(manifest=manifest, result_root=root)
     assert preflight_calls == [{"manifest": manifest, "result_root": root}]
+    assert len(admissions) == 1
     assert updates == list(range(1, 161))
     assert fact.disposition == contracts.Disposition.FOUNDATION_NONPASS.value
     assert (root / "rng-master.bin").stat().st_size == 32
@@ -314,38 +357,72 @@ def test_result_orchestration_uses_one_final_checkpoint_restore_and_stops_before
     assert runtime["deterministic_algorithms"] is True
     assert not (root / "complete-2x3-panel.json").exists()
 
+    monkeypatch.setattr(
+        runner, "materialize_foundation",
+        lambda *args, **kwargs: pytest.fail("terminal reentry must not materialize a model"),
+    )
+    monkeypatch.setattr(
+        runner, "load_checkpoint",
+        lambda *args, **kwargs: pytest.fail("terminal reentry must not load a checkpoint"),
+    )
+    monkeypatch.setattr(
+        runner, "load_contiguous_panel_slices",
+        lambda *args, **kwargs: pytest.fail("terminal reentry must not load panel cells"),
+    )
+    monkeypatch.setattr(
+        runner, "fresh_master",
+        lambda: pytest.fail("terminal reentry must not generate a master"),
+    )
+    assert runner.run_result(manifest=manifest, result_root=root) == fact
 
-def test_public_result_phase_holds_after_preflight_before_root_master_training_or_artifact(
+    terminal_path = root / "terminal-fact.json"
+    tampered = json.loads(terminal_path.read_text(encoding="utf-8"))
+    tampered["disposition"] = contracts.Disposition.CLOSED.value
+    terminal_path.write_text(json.dumps(tampered), encoding="utf-8")
+    with pytest.raises(artifacts.ArtifactContractError):
+        runner.run_result(manifest=manifest, result_root=root)
+
+
+def test_resource_refusal_precedes_root_master_training_or_artifact(
     tmp_path, monkeypatch
 ):
     calls = []
     monkeypatch.setattr(
         runner, "run_preflight", lambda **kwargs: calls.append("preflight") or {
-            "resources": dict(contracts.RESOURCE_MAXIMA)
+            "resources": dict(contracts.RESOURCE_MAXIMA),
+            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
         },
+    )
+    monkeypatch.setattr(
+        runner, "admit_memory",
+        lambda path: (_ for _ in ()).throw(runner.ResourceAdmissionError("refused")),
     )
     monkeypatch.setattr(runner, "fresh_master", lambda: pytest.fail("master must not be generated"))
     monkeypatch.setattr(runner, "train_one_update", lambda *args, **kwargs: pytest.fail("training must not start"))
     root = tmp_path / "held-result"
-    with pytest.raises(runner.ScientificInferenceHold, match="SCIENTIFIC_INFERENCE_HOLD"):
+    _bind_canonical(monkeypatch, root)
+    with pytest.raises(runner.ResourceAdmissionError, match="refused"):
         runner.run_result(manifest=tmp_path / "manifest.json", result_root=root)
     assert calls == ["preflight"]
     assert not root.exists()
 
 
-def test_internal_passing_route_stops_after_raw_panel_before_analysis_or_publication(
+def test_passing_route_publishes_only_after_all_slices_and_resume_reuses_master(
     tmp_path, monkeypatch
 ):
-    assert not hasattr(runner, "analyze_complete_panel")
-    assert not hasattr(runner, "write_complete_panel")
     updates = []
     preflight_calls = []
     monkeypatch.setattr(
         runner, "run_preflight", lambda **kwargs: preflight_calls.append(kwargs) or {
-            "resources": dict(contracts.RESOURCE_MAXIMA)
+            "resources": dict(contracts.RESOURCE_MAXIMA),
+            "resource_envelope": dict(contracts.RESOURCE_ENVELOPE),
         },
     )
-    monkeypatch.setattr(runner, "fresh_master", lambda: bytes(range(32)))
+    master_calls = []
+    monkeypatch.setattr(
+        runner, "fresh_master", lambda: master_calls.append("master") or bytes(range(32)),
+    )
+    monkeypatch.setattr(runner, "admit_memory", lambda path: {"passed": True})
 
     def cheap_update(model, optimizer, source, *, update):
         optimizer.step_index = update * 12
@@ -358,42 +435,88 @@ def test_internal_passing_route_stops_after_raw_panel_before_analysis_or_publica
         for row in foundation.competence_inventory()
     )
     monkeypatch.setattr(runner, "execute_native_competence", lambda frozen, source: records)
-    monkeypatch.setattr(runner, "materialize_disturbance_tapes", lambda source: ("raw-tapes",))
-    raw_cells = tuple(
-        contracts.PanelCell(
-            tape, graph, action, {"COMMON": 0, "A_HR": 10, "A_RH": 12}[action],
-            True, False, None,
-        )
-        for tape in range(24)
-        for graph in contracts.GRAPHS
-        for action in contracts.CANDIDATE_ACTIONS
+    monkeypatch.setattr(
+        runner, "materialize_disturbance_tapes",
+        lambda source, *, start_tape, tape_count: (start_tape, tape_count),
     )
     panel_calls = []
+
+    def cells_for_slice(frozen, tapes, panel_slice):
+        panel_calls.append(panel_slice.index)
+        if panel_slice.index == 1 and panel_calls.count(1) == 1:
+            raise RuntimeError("technical interruption")
+        return tuple(
+            contracts.PanelCell(
+                lane.tape, lane.graph, lane.action_name, lane.action_index,
+                True, False, None,
+            )
+            for lane in panel_slice.lanes
+        )
+
     monkeypatch.setattr(
-        runner,
-        "execute_native_panel",
-        lambda frozen, tapes: panel_calls.append(tapes) or raw_cells,
-    )
-    terminal_calls = []
-    monkeypatch.setattr(
-        runner,
-        "write_terminal_fact",
-        lambda *args, **kwargs: terminal_calls.append((args, kwargs)),
+        runner, "execute_native_panel_slice", cells_for_slice,
     )
     root = tmp_path / "passing-wiring"
+    _bind_canonical(monkeypatch, root)
     manifest = tmp_path / "manifest.json"
-    with pytest.raises(runner.ScientificInferenceHold, match="raw 144-cell panel completed"):
+    source_manifest.write_source_manifest(manifest)
+
+    def passing_direction_resources(**kwargs):
+        scratch_root = kwargs.get("scratch_root")
+        scratch_bytes = (
+            scratch_root.stat().st_size
+            if scratch_root is not None and scratch_root.is_file()
+            else 0
+        )
+        value = {
+            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+            "stage": kwargs["stage"],
+            "passed": True,
+            "failure_reasons": [],
+            "scratch_bytes": scratch_bytes,
+        }
+        receipt = kwargs.get("receipt")
+        if receipt is not None:
+            receipt.write_text(json.dumps(value), encoding="utf-8")
+        return value
+
+    monkeypatch.setattr(runner, "_enforce_direction_resources", passing_direction_resources)
+    with pytest.raises(RuntimeError, match="technical interruption"):
         runner._execute_result_pipeline(manifest=manifest, result_root=root)
     assert preflight_calls == [{"manifest": manifest, "result_root": root}]
     assert updates == list(range(1, 161))
-    assert panel_calls == [("raw-tapes",)]
-    assert terminal_calls == []
-    assert not (root / "complete-2x3-panel.json").exists()
+    assert panel_calls == [0, 1]
+    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 1
+    assert len(list(root.glob("panel-slice-*.json"))) == 1
+    assert not (root / "final-bundle.json").exists()
     assert not (root / "terminal-fact.json").exists()
+
+    monkeypatch.setattr(
+        runner, "admit_memory",
+        lambda path: (_ for _ in ()).throw(runner.ResourceAdmissionError("resume refused")),
+    )
+    with pytest.raises(runner.ResourceAdmissionError, match="resume refused"):
+        runner.run_result(manifest=manifest, result_root=root)
+    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 1
+    assert len(list(root.glob("panel-slice-*.json"))) == 1
+
+    monkeypatch.setattr(runner, "admit_memory", lambda path: {"passed": True})
+    fact = runner.run_result(manifest=manifest, result_root=root)
+    assert fact.disposition == contracts.Disposition.CLOSED.value
+    assert master_calls == ["master"]
+    assert panel_calls.count(0) == 1
+    assert panel_calls.count(1) == 2
+    assert len(list(root.glob("panel-slice-*.json"))) == contracts.PANEL_SLICE_COUNT
+    assert json.loads((root / "panel-frontier.json").read_text())["completed_slices"] == 24
+    assert (root / "final-bundle.json").exists()
+
+    monkeypatch.setattr(runner, "fresh_master", lambda: pytest.fail("complete load cannot create a master"))
+    assert runner.run_result(manifest=manifest, result_root=root) == fact
 
 
 def test_internal_execution_reruns_direct_preflight_and_rejects_resource_drift(tmp_path, monkeypatch):
     root = tmp_path / "bound-root"
+    _bind_canonical(monkeypatch, root)
     manifest = tmp_path / "manifest.json"
     calls = []
     monkeypatch.setattr(
@@ -404,6 +527,265 @@ def test_internal_execution_reruns_direct_preflight_and_rejects_resource_drift(t
         runner._execute_result_pipeline(manifest=manifest, result_root=root)
     assert calls == [{"manifest": manifest, "result_root": root}]
     assert not root.exists()
+
+
+@pytest.mark.parametrize("existing_shape", ("absent", "partial", "complete", "resource-fail"))
+def test_noncanonical_root_is_rejected_before_any_content_or_resource_access(
+    tmp_path, monkeypatch, existing_shape
+):
+    canonical = tmp_path / "canonical"
+    noncanonical = tmp_path / f"other-{existing_shape}"
+    _bind_canonical(monkeypatch, canonical)
+    if existing_shape != "absent":
+        noncanonical.mkdir()
+        if existing_shape == "complete":
+            (noncanonical / "final-bundle.json").write_text("{}", encoding="utf-8")
+        elif existing_shape == "resource-fail":
+            (noncanonical / "invalid-evidence.json").write_text("{}", encoding="utf-8")
+        else:
+            (noncanonical / "rng-master.bin").write_bytes(b"partial")
+    monkeypatch.setattr(
+        runner, "run_preflight",
+        lambda **kwargs: pytest.fail("noncanonical root must precede preflight"),
+    )
+    monkeypatch.setattr(
+        runner, "admit_memory",
+        lambda *args, **kwargs: pytest.fail("noncanonical root must precede resources"),
+    )
+    monkeypatch.setattr(
+        runner, "fresh_master",
+        lambda: pytest.fail("noncanonical root must precede master generation"),
+    )
+    with pytest.raises(runner.PreflightError, match="sole canonical"):
+        runner.run_result(manifest=tmp_path / "manifest.json", result_root=noncanonical)
+
+
+def test_existing_root_without_direct_snapshot_rejects_before_master_checkpoint_or_cells(
+    tmp_path, monkeypatch
+):
+    root = tmp_path / "canonical-old-shape"
+    _bind_canonical(monkeypatch, root)
+    root.mkdir()
+    for name in ("source-manifest.json", "rng-master.bin", "run-record.json"):
+        (root / name).write_bytes(b"legacy")
+    monkeypatch.setattr(
+        runner, "load_rng_master",
+        lambda *args, **kwargs: pytest.fail("old shape must precede master read"),
+    )
+    monkeypatch.setattr(
+        runner, "load_checkpoint",
+        lambda *args, **kwargs: pytest.fail("old shape must precede checkpoint read"),
+    )
+    monkeypatch.setattr(
+        runner, "load_contiguous_panel_slices",
+        lambda *args, **kwargs: pytest.fail("old shape must precede cell read"),
+    )
+    with pytest.raises(runner.PreflightError, match="direct V3 shape"):
+        runner.run_result(manifest=tmp_path / "manifest.json", result_root=root)
+
+
+@pytest.mark.parametrize(
+    "failed_seam",
+    ("rng-master", "source-manifest", "source-native-snapshot", "run-record", "resource-assessment"),
+)
+def test_fresh_staging_init_recovers_every_post_master_seam_with_same_master(
+    tmp_path, monkeypatch, failed_seam
+):
+    root = tmp_path / f"canonical-{failed_seam}"
+    _bind_canonical(monkeypatch, root)
+    manifest = tmp_path / "manifest.json"
+    source_manifest.write_source_manifest(manifest)
+    runner._configure_numerical_runtime()
+    calls = []
+    expected_master = bytes(range(32))
+    monkeypatch.setattr(
+        runner, "fresh_master", lambda: calls.append("fresh") or expected_master,
+    )
+    monkeypatch.setattr(
+        runner, "_enforce_direction_resources", lambda **kwargs: {"passed": True},
+    )
+    failed = {"value": False}
+
+    def fail_once(name):
+        if name == failed_seam and not failed["value"]:
+            failed["value"] = True
+            raise RuntimeError(f"init seam {name}")
+
+    monkeypatch.setattr(runner, "_init_seam", fail_once)
+    with pytest.raises(RuntimeError, match="init seam"):
+        runner._initialize_fresh_root(
+            manifest=manifest, root=root, started_at=runner.time.perf_counter(),
+        )
+    staging = runner._staging_root(root)
+    assert not root.exists()
+    assert (staging / "rng-master.bin").read_bytes() == expected_master
+
+    monkeypatch.setattr(runner, "_init_seam", lambda name: None)
+    master, _, _ = runner._initialize_fresh_root(
+        manifest=manifest, root=root, started_at=runner.time.perf_counter(),
+    )
+    assert master == expected_master
+    assert calls == ["fresh"]
+    assert root.is_dir() and not staging.exists()
+
+
+def test_staged_final_resource_overrun_writes_invalid_fact_before_canonical_publication(
+    tmp_path, monkeypatch
+):
+    root = tmp_path / "canonical-resource-overrun"
+    root.mkdir()
+    encoded_size = 65 * 1024**2
+    prepared = SimpleNamespace(encoded_size=encoded_size, encoded=b"staged-final")
+    monkeypatch.setattr(runner, "prepare_final_bundle", lambda **kwargs: prepared)
+    observed = []
+
+    def assessment(**kwargs):
+        observed.append(kwargs)
+        failed = kwargs["scratch_root"] == root / "final-bundle.pending.json"
+        return {
+            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+            "passed": not failed,
+            "failure_reasons": ["durable_bytes_exceeded"] if failed else [],
+        }
+
+    monkeypatch.setattr(runner, "_direction_resource_assessment", assessment)
+    staged = []
+
+    def write_staged(path, value):
+        assert value is prepared
+        assert path == root / "final-bundle.pending.json"
+        path.write_bytes(value.encoded)
+        staged.append(path)
+
+    monkeypatch.setattr(runner, "write_prepared_final_bundle", write_staged)
+    with pytest.raises(runner.ResourceAdmissionError, match="pre-final-publication"):
+        runner._prepare_and_publish_final(
+            root=root, master=bytes(range(32)), run_record_bytes=b"record",
+            source_snapshot=object(), records=(), cells=(), panel_analysis=object(),
+            started_at=runner.time.perf_counter(),
+        )
+    assert staged == [root / "final-bundle.pending.json"]
+    assert observed[-1]["scratch_root"] == root / "final-bundle.pending.json"
+    assert (root / "final-bundle.pending.json").read_bytes() == prepared.encoded
+    assert not (root / "final-bundle.json").exists()
+    invalid = json.loads((root / "invalid-evidence.json").read_text(encoding="utf-8"))
+    assert invalid["disposition"] == "INVALID_EVIDENCE"
+    assert invalid["scientific_polarity"] is False
+    assert not runner._contains_forbidden_receipt_key(invalid)
+
+
+def test_post_work_resource_measurement_failure_is_terminal_after_resources_recover(
+    tmp_path, monkeypatch
+):
+    root = tmp_path / "canonical-post-work-measurement-failure"
+    root.mkdir()
+    for name in (
+        "source-manifest.json", "source-native-snapshot.json", "rng-master.bin",
+        "run-record.json",
+    ):
+        (root / name).write_bytes(b"present")
+    _bind_canonical(monkeypatch, root)
+
+    monkeypatch.setattr(
+        runner, "_direction_resource_assessment",
+        lambda **kwargs: (_ for _ in ()).throw(RuntimeError("telemetry unavailable")),
+    )
+    with pytest.raises(runner.ResourceAdmissionError, match="slice-000-native"):
+        runner._enforce_direction_resources(
+            stage="slice-000-native", root=root, scratch_root=None,
+            started_at=runner.time.perf_counter(), terminal_on_failure=True,
+        )
+
+    invalid_path = root / "invalid-evidence.json"
+    invalid = json.loads(invalid_path.read_text(encoding="utf-8"))
+    assert invalid["failure_reasons"] == ["resource_measurement_failed"]
+    assert invalid["resource_assessment"]["failure_reasons"] == [
+        "resource_measurement_failed"
+    ]
+    assert invalid["resource_assessment"]["passed"] is False
+    assert not runner._contains_forbidden_receipt_key(invalid)
+
+    healthy_calls = []
+    monkeypatch.setattr(
+        runner, "_direction_resource_assessment",
+        lambda **kwargs: healthy_calls.append(kwargs) or {
+            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+            "passed": True,
+            "failure_reasons": [],
+        },
+    )
+    assert runner._enforce_direction_resources(
+        stage="later-healthy-observation", root=root, scratch_root=None,
+        started_at=runner.time.perf_counter(),
+    )["passed"] is True
+    with pytest.raises(
+        runner.PreflightError, match="terminal invalid evidence forbids resume or final publication"
+    ):
+        runner._execute_result_pipeline(
+            manifest=tmp_path / "unused-manifest.json", result_root=root,
+        )
+    assert len(healthy_calls) == 1
+    assert not (root / "final-bundle.json").exists()
+
+
+def test_pre_work_resource_measurement_failure_can_recover_at_same_frontier(
+    tmp_path, monkeypatch
+):
+    root = tmp_path / "recoverable-pre-work-measurement-failure"
+    root.mkdir()
+    calls = []
+
+    def fail_then_pass(**kwargs):
+        calls.append(kwargs)
+        if len(calls) == 1:
+            raise RuntimeError("telemetry unavailable")
+        return {
+            "schema": runner._DIRECTION_RESOURCE_SCHEMA,
+            "passed": True,
+            "failure_reasons": [],
+        }
+
+    monkeypatch.setattr(runner, "_direction_resource_assessment", fail_then_pass)
+    with pytest.raises(runner.ResourceAdmissionError, match="slice-007-before"):
+        runner._enforce_direction_resources(
+            stage="slice-007-before", root=root, scratch_root=None,
+            started_at=runner.time.perf_counter(), terminal_on_failure=False,
+        )
+    assert not (root / "invalid-evidence.json").exists()
+    assert runner._enforce_direction_resources(
+        stage="slice-007-before", root=root, scratch_root=None,
+        started_at=runner.time.perf_counter(), terminal_on_failure=False,
+    )["passed"] is True
+    assert len(calls) == 2
+    assert not (root / "invalid-evidence.json").exists()
+
+
+def test_direction_launch_capacity_uses_shared_reserve_and_peak_formula(tmp_path, monkeypatch):
+    root = tmp_path / "capacity"
+    monkeypatch.setattr(runner, "_physical_total_memory_bytes", lambda: 16 * 1024**3)
+    monkeypatch.setattr(runner, "_peak_working_set_bytes", lambda: 128 * 1024**2)
+    unsafe = runner._direction_resource_assessment(
+        root=root, scratch_root=None, started_at=runner.time.perf_counter(),
+        memory_receipt={
+            "effective_available_bytes": 5 * 1024**3,
+            "cgroup_memory_max_bytes": None,
+        },
+    )
+    assert unsafe["capacity"]["workers"] == 1
+    assert unsafe["capacity"]["threads_per_worker"] == 1
+    assert unsafe["capacity"]["adjusted_peak_bytes"] == 5 * 1024**3 // 4
+    assert unsafe["passed"] is False
+    assert "shared_reserve_and_peak_formula_failed" in unsafe["failure_reasons"]
+
+    safe = runner._direction_resource_assessment(
+        root=root, scratch_root=None, started_at=runner.time.perf_counter(),
+        memory_receipt={
+            "effective_available_bytes": 6 * 1024**3,
+            "cgroup_memory_max_bytes": None,
+        },
+    )
+    assert safe["capacity"]["memory_safe"] is True
+    assert safe["passed"] is True
 
 
 def test_clean_process_engages_single_thread_intra_interop_and_deterministic_torch():
