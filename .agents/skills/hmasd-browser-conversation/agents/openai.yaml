@@ -1,5 +1,0 @@
-interface:
-  display_name: "HMASD Browser Transport"
-  short_description: "Multiplex exact external browser consultations"
-policy:
-  allow_implicit_invocation: false

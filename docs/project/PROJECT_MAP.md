@@ -13,7 +13,7 @@ registry, or current-work ledger.
 | Candidate test source | [`../../tests/experiments/candidates/`](../../tests/experiments/candidates/) |
 | Per-direction implementation, test, and scratch mapping | [`../research/RESEARCH_MAP.md#code-tests-and-generated-output`](../research/RESEARCH_MAP.md#code-tests-and-generated-output) |
 | Standalone process-core usage | [`../../ha_ctse_process/README.md`](../../ha_ctse_process/README.md) |
-| Local temporary files and worktree layout | [`../../temp/README.md`](../../temp/README.md) |
+| Local temporary files | Ignored runtime output under `../../temp/` |
 
 ## Research-direction codemap standard
 
@@ -29,11 +29,11 @@ a navigation convention, not workflow state.
 | Local experiment output | `temp/directions/<direction-id>/exp/` | Ignored runs, checkpoints, profiles, captured output, and rebuildable generated manifests. |
 | Local test output | `temp/directions/<direction-id>/test/` | Ignored pytest bases, fixtures, test databases, and compiler probes. |
 
-`RESEARCH_MAP.md` is the per-direction inventory: it records all 33 direction
-keys and their current primary implementation and test paths. `AGENTS.md`
-defines how agents must create and use the local directories. `temp/README.md`
-defines cleanup and worktree layout. Do not duplicate the 33-row inventory in
-another document.
+`RESEARCH_MAP.md` is the per-direction inventory: it records all 35 direction
+keys and their current primary implementation and test paths. Codex uses the
+checkout, native worktree, or working directory attached to the current task.
+`temp/` holds ignored experiment and test output. Do not duplicate the 35-row
+inventory in another document.
 
 ## Stable lineages
 
@@ -118,10 +118,9 @@ control execution.
 
 ## Optional Codex collaboration layer
 
-The `main` branch may include `AGENTS.md` and `.codex/agents/*.toml` for native
-Codex delegation. Those files select collaborators only; they do not sit in
-the application import graph. The `codex/control-plane-free-20260824` branch
-omits that layer while keeping the same product and research tree.
+`AGENTS.md`, Root-level skills, and the self-contained custom subagents in
+`.codex/agents/*.toml` describe native collaboration methods. They do not sit in the application
+import graph and do not create repository-level identity or permission state.
 
 Update this map when a stable executable route, dependency direction, or the
 codemap layout contract changes. Update `RESEARCH_MAP.md` when an individual

@@ -17,6 +17,25 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > UAV order opportunity and competent order-erased foundation exist in separate objects; fusion is not established.
 
+## Portfolio recast — 2026-08-30
+
+The next object is `foundation_conditioned_event_order_value`. It separates three facts previously
+bundled under the direction name: elapsed-time transition/reward composition, noncommuting event
+transformations, and native order-conditioned action value. The current policy does not select a
+duration or termination hazard, so no learned variable-lifetime or general semigroup claim is
+available.
+
+After the retained current operation reaches a terminal observation and is dispositioned, the
+smallest successor freezes one public initial state, one external duration, one competent
+order-erased foundation, two H/R order graphs, and three result-blind precommitted actions: each
+graph-matched action and one common conservative action. Paired future tapes are used for evaluation
+only; no noisy action selector chooses from the same tapes. Continue only if graph-matched actions
+beat both the mismatched and common action on full-mission utility.
+
+ONLGR contributes a common executed physical-rate control and service-minus-cost accounting only.
+Its result polarity, exponential-link label, and thresholds do not transfer. Failure of the fixed
+2-by-3 action gate closes the exact host before an adapter or learned duration policy.
+
 ## Current-protocol cycle status
 
 Cycle `2026-08-29.8-portfolio-scdmp-opportunity-law-02` is the current retained WORK. It froze one

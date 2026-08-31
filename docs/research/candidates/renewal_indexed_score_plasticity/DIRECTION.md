@@ -17,6 +17,24 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > Pro-closed object and blinded frontier are retained; the current measurement component is not a practical continuation.
 
+## Portfolio recast — 2026-08-30
+
+The surviving object is event-conditioned Bayesian recurrence, not a privileged `G` initialization.
+Before learned work, compare `FULL-BAYES-K`, `FULL-BAYES-K-ERASED`, `LAST-ACK-BAYES`, and the existing
+`LAST-ACK-G` on paired reachable histories with the same final action, ACK, duration, and current
+observation but different earlier priors. The native endpoint is the next renewal action and its
+physical-time return.
+
+The current host does not identify renewal indexing because the registered `G` ignores the prior,
+duration, and time columns. A future host must make persistence or ACK reliability uncertain or
+drifting, and must show that duration/event order changes a competent Bayes action. If exact Bayes
+state is action-sufficient, the learned initialization question reduces to finite-resource
+inductive efficiency.
+
+APFI's capacity-censored typed-flow idea may supply a prospective host only after exact low-order
+controls fail and a nondegenerate posterior crosses a native action boundary. APFI's current XOR-
+reducible object and polarity do not transfer into RISP.
+
 ## Evidence set
 
 The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.

@@ -43,6 +43,25 @@ provenance-linked full-state digest under adequate numerical provenance, could
 identify the original continuation without changing the scientific object.
 Neither witness is presently in evidence.
 
+## Portfolio recast — 2026-08-30
+
+The discarded update-1,000 continuation is no longer an independent investment target. A future
+cycle under this direction must instead ask whether an explicit commitment-origin residual improves
+finite-budget native action choice over a competent same-history raw learner. Because the residual
+is a deterministic transform of raw history, no information-gain or function-class claim is
+available.
+
+The smallest eligible object is a prospective common-history decision probe, not reconstruction of
+all residual coordinates. It crosses `RAW / TRUE-RESIDUAL / CALIBRATED-DERANGEMENT` with short and
+long matched optimization exposure, uses common future tapes and real replan cost, and evaluates
+native action regret on held-out `K` cells. Raw in-support competence is a prerequisite. A short-
+budget residual advantage that raw closes at the long budget supports only optimization exposure;
+a derangement-insensitive advantage is generic preprocessing; equality or raw superiority closes
+the tested residual mechanism.
+
+Historical B1 and probe-cut evidence remains at its existing claim ceiling and is not a baseline
+result for the prospective object.
+
 ## Claim ceiling and surviving alternative
 
 The maximum accepted claim is:

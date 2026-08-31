@@ -26,6 +26,26 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
 
+## Portfolio recast — 2026-08-30
+
+The next scientific object isolates the source of promoted recurrent state at one legal atomic
+handover. At the same first application-valid checkpoint and future physical tape, compare:
+
+- `RETAIN`: no owner transfer;
+- `TRANSFER-COPY`: the same legal CAS/owner/actuator transfer using incumbent state;
+- `TRANSFER-SHADOW`: the identical transfer using the pre-warmed shadow state.
+
+The two estimands remain separate: `TRANSFER-COPY - RETAIN` is generic vehicle/owner-transfer value;
+`TRANSFER-SHADOW - TRANSFER-COPY` is the incremental value of shadow preparation. Service and tail
+recovery are primary endpoints, with continuity, separation, slew, energy, bytes, latency, and
+invalid-commit events as nonharm checks. A competent same-information replay/replan arm must be able
+to reconstruct shadow state when the deadline permits.
+
+This recast does not transfer any positive R06 polarity. If the direct-transfer opportunity gate is
+absent, replay absorbs the shadow before the deadline, or the incremental shadow margin is
+nonmaterial, the shadow-specific object closes. The full R06 panel remains a later confirmation
+ceiling, not the next purchase.
+
 ## Current-protocol cycle boundary — 2026-08-29
 
 Cycle `2026-08-29.8-portfolio-dish-preactivity-certificate-01` ended at

@@ -1,8 +1,5 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-approval_policy = "never"
-sandbox_mode = "danger-full-access"
-
 [features]
 multi_agent_v2 = true
 hooks = false
@@ -11,56 +8,68 @@ hooks = false
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 
+[agents.HMASDDirectionManager]
+description = "Optional native coordination method for one research direction."
+config_file = "./agents/hmasd-direction-manager.toml"
+
+[agents.HMASDEM]
+description = "Fixed native scientific evidence and experiment subagent."
+config_file = "./agents/hmasd-em.toml"
+
+[agents.HMASDCM]
+description = "Fixed native engineering and implementation subagent."
+config_file = "./agents/hmasd-cm.toml"
+
 [agents.HMASDCMScout]
-description = "Read-only map of an unfamiliar engineering surface."
+description = "Optional engineering-surface mapping method."
 config_file = "./agents/hmasd-cm-scout.toml"
 
 [agents.HMASDReviewer]
-description = "Independent high-impact CM-owned engineering reviewer."
+description = "Optional engineering-analysis method."
 config_file = "./agents/hmasd-reviewer.toml"
 
 [agents.HMASDWorkflowDesigner]
-description = "Designs one exact HMASD workflow/control-plane transaction."
+description = "Optional workflow-design method."
 config_file = "./agents/hmasd-workflow-designer.toml"
 
 [agents.HMASDDesignReviewer]
-description = "One-shot independent review of one exact HMASD workflow/control-plane design."
+description = "Optional design-analysis method."
 config_file = "./agents/hmasd-design-reviewer.toml"
 
 [agents.HMASDVerifier]
-description = "Exceptional focused runtime verifier."
+description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
 
 [agents.HMASDExperimentOperator]
-description = "Operator for one exact result-bearing command."
+description = "Optional operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDResearchScout]
-description = "Primary and multi-source research evidence scout."
+description = "Optional primary and multi-source research method."
 config_file = "./agents/hmasd-research-scout.toml"
 
 [agents.HMASDResearchCritic]
-description = "Exceptional independent research critic."
+description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
 [agents.HMASDGeneralLeaf]
-description = "General Luna-xhigh leaf for bounded non-mainline chores."
+description = "Optional general native child method."
 config_file = "./agents/hmasd-general-leaf.toml"
 
 [agents.HMASDResearchInnovator]
-description = "Independent mechanism and discriminator innovator for one EM-frozen question."
+description = "Optional mechanism and discriminator exploration method."
 config_file = "./agents/hmasd-research-innovator.toml"
 
 [agents.HMASDResearchPrinciplesAnalyst]
-description = "Independent MARL principles audit for one EM-frozen scientific object."
+description = "Optional MARL principles-analysis method."
 config_file = "./agents/hmasd-research-principles-analyst.toml"
 
 [agents.HMASDImplementer]
-description = "Semantic implementation worker for one CM-frozen bounded change."
+description = "Optional semantic implementation method."
 config_file = "./agents/hmasd-implementer.toml"
 
 [agents.HMASDRoutineImplementer]
-description = "Routine behavior-preserving implementation worker for one CM-frozen change."
+description = "Optional routine implementation method."
 config_file = "./agents/hmasd-routine-implementer.toml"
 
 [mcp_servers.agentify-desktop]

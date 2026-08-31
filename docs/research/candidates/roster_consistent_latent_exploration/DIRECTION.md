@@ -45,6 +45,22 @@ than accepted direction science. No synthesis, finite enumeration, CM, source
 change, result command, learning, or Convergence was reached. This transport-
 limited gap has no scientific decision impact and no lifecycle recommendation.
 
+## Portfolio recast — 2026-08-30
+
+The public-plan CARRY object is closed by functional containment whenever a competent REPLAN class
+has the same complete public history, objective, actions, dynamics, clocks, work, and correlated
+randomness. The only surviving direction is private-state churn exploration continuity.
+
+A new host must hold public history and current physical state fixed while changing one causally
+owned survivor/private setup state, decentralized belief, or correlated exploration sample across a
+leave, rejoin, or replacement event. It must compare carry with a decentralized same-local-
+information recompute/reset controller under matched communication, capacity, updates, and work.
+Post-churn recovery time and integrated unserved demand are native endpoints.
+
+If the containing comparator receives the same private state or exact recomputation and reproduces
+the trajectory law, close the recast. A benefit caused only by hiding information from reset supports
+information retention, not an exploration-continuity inductive advantage.
+
 ## Current evidence set
 
 - `docs/research/candidates/roster_consistent_latent_exploration/evidence/2026-08-29-2026-08-29.8-successor-01a04a02-rcle-public-containment-03-scope-and-grounding.md`

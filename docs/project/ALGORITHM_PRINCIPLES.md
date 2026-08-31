@@ -7,9 +7,9 @@ specification, experiment dashboard, or research history.
 Current direction science belongs in
 `docs/research/candidates/<direction>/DIRECTION.md` and its cited evidence;
 current cross-direction investment belongs in
-`docs/research/portfolio/PORTFOLIO.md`. Shared meanings are defined only in
-root `AGENTS.md`, and each top-level role's method is defined only in its
-`hmasd-*-task` skill. This file does not restate workflow authority. Formal
+`docs/research/portfolio/PORTFOLIO.md`. Shared meanings are defined in root
+`AGENTS.md`; the fixed EM and CM subagent methods are defined directly in
+`.codex/agents/hmasd-em.toml` and `.codex/agents/hmasd-cm.toml`. This file does not restate workflow authority. Formal
 experiment contracts and dispositions belong in `docs/project/ExpRecord.md`.
 Git history preserves removed research history.
 
@@ -292,10 +292,9 @@ identification result or a portfolio update. Documentation and workflow status
 alone are support work.
 
 Shared responsibilities for scientific review, adoption, implementation,
-acceptance, provenance, resources and communication are defined only in root
-`AGENTS.md`; each top-level role's method is defined in its own session skill.
-This principles file specifies the scientific result and evidence semantics
-those roles must preserve.
+acceptance, provenance, resources and communication are defined in root
+`AGENTS.md` and the fixed custom-subagent files under `.codex/agents/`. This principles file
+specifies the scientific result and evidence semantics those subagents must preserve.
 
 Review output never authorizes code or compute by itself.
 
