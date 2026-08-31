@@ -11,17 +11,25 @@ import torch
 
 from .config import (
     ADAM_BETAS, ADAM_EPSILON, BATCH_SIZE, BUDGETS, GRADIENT_NORM_CAP,
-    LEARNING_RATE, counter_rng,
+    LEARNING_RATE, RNG_NAMESPACE, counter_rng_for_namespace,
 )
 from .contracts import Budget, ExposureAudit, PanelRow, PredictorExample, Representation
 from .models import CommonHistoryGate, FORECAST_HORIZONS, FreshPredictor, canonical_state, gaussian_nll
 from .packets import PacketDataset
 
 
-def canonical_example_order(row_count: int, *, replicate: int, updates: int = BUDGETS["LONG"]) -> np.ndarray:
+def canonical_example_order(
+    row_count: int,
+    *,
+    replicate: int,
+    updates: int = BUDGETS["LONG"],
+    rng_namespace: int = RNG_NAMESPACE,
+) -> np.ndarray:
     if row_count <= 0:
         raise ValueError("training requires at least one retained row")
-    permutation = counter_rng("gate_order", replicate).permutation(row_count).astype(np.int64)
+    permutation = counter_rng_for_namespace(
+        rng_namespace, "gate_order", replicate,
+    ).permutation(row_count).astype(np.int64)
     order = np.resize(permutation, updates * BATCH_SIZE)
     order.setflags(write=False)
     return order
@@ -68,6 +76,8 @@ def train_one_path(
     order: np.ndarray,
     short_updates: int = BUDGETS["SHORT"],
     long_updates: int = BUDGETS["LONG"],
+    rng_namespace: int = RNG_NAMESPACE,
+    capture_short: bool = True,
     resource_monitor: Callable[[], None] | None = None,
 ) -> TrainedPath:
     """Continue one unchanged Adam trajectory through both frozen checkpoints."""
@@ -83,7 +93,9 @@ def train_one_path(
     required = long_updates * BATCH_SIZE
     if order.shape != (required,):
         raise ValueError("canonical order has the wrong processed-example length")
-    model = CommonHistoryGate(counter_rng("gate_initialization", replicate))
+    model = CommonHistoryGate(counter_rng_for_namespace(
+        rng_namespace, "gate_initialization", replicate,
+    ))
     initialization_state = canonical_state(model)
     optimizer = torch.optim.Adam(
         model.parameters(), lr=LEARNING_RATE, betas=ADAM_BETAS,
@@ -107,7 +119,11 @@ def train_one_path(
         torch.nn.utils.clip_grad_norm_(model.parameters(), GRADIENT_NORM_CAP)
         optimizer.step()
         monitor()
-        budget = Budget.SHORT if update == short_updates else Budget.LONG if update == long_updates else None
+        budget = (
+            Budget.SHORT
+            if capture_short and update == short_updates
+            else Budget.LONG if update == long_updates else None
+        )
         if budget is not None:
             snapshot = deepcopy(model).eval()
             checkpoints[budget] = snapshot
@@ -134,6 +150,7 @@ def train_matched_paths(
     packets: Mapping[Representation, PacketDataset],
     *,
     replicate: int,
+    rng_namespace: int = RNG_NAMESPACE,
     resource_monitor: Callable[[], None] | None = None,
 ) -> dict[Representation, TrainedPath]:
     """Train all three paths with byte-identical initialization/order/work."""
@@ -141,11 +158,14 @@ def train_matched_paths(
     expected = set(Representation)
     if set(packets) != expected:
         raise ValueError("matched training requires exactly the three frozen representations")
-    order = canonical_example_order(len(rows), replicate=replicate)
+    order = canonical_example_order(
+        len(rows), replicate=replicate, rng_namespace=rng_namespace,
+    )
     paths = {
         representation: train_one_path(
             rows, packets[representation], replicate=replicate,
             representation=representation, order=order,
+            rng_namespace=rng_namespace,
             resource_monitor=resource_monitor,
         )
         for representation in Representation
@@ -201,6 +221,7 @@ def _collate_predictor(
 def fit_fresh_predictor(
     examples: tuple[PredictorExample, ...], *, replicate: int,
     updates: int = 400, batch_size: int = 256,
+    rng_namespace: int = RNG_NAMESPACE,
     resource_monitor: Callable[[], None] | None = None,
 ) -> tuple[FreshPredictor, PredictorFitAudit]:
     """Fit a fresh predictor without any historical state or artifact route."""
@@ -210,11 +231,15 @@ def fit_fresh_predictor(
     monitor = resource_monitor or (lambda: None)
     monitor()
     ordered = tuple(sorted(examples, key=lambda row: row.canonical_key))
-    model = FreshPredictor(counter_rng("predictor_initialization", replicate))
+    model = FreshPredictor(counter_rng_for_namespace(
+        rng_namespace, "predictor_initialization", replicate,
+    ))
     optimizer = torch.optim.Adam(
         model.parameters(), lr=1e-3, betas=(0.9, 0.999), eps=1e-8, weight_decay=1e-5,
     )
-    permutation = counter_rng("predictor_order", replicate).permutation(len(ordered))
+    permutation = counter_rng_for_namespace(
+        rng_namespace, "predictor_order", replicate,
+    ).permutation(len(ordered))
     order = np.resize(permutation, updates * batch_size).astype(np.int64)
     horizon_to_index = {value: index for index, value in enumerate(FORECAST_HORIZONS)}
     model.train()

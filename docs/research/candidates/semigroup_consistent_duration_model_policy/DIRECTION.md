@@ -86,6 +86,9 @@ disposition; historical records remain provenance rather than current workflow a
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_VALIDITY_AND_INTAKE_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_RESULT_INTAKE_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
 
 ## Provenance boundary
 
@@ -222,3 +225,55 @@ of `.1`. If that replacement is also incomplete for a technical or evidence-enve
 quarantined without consuming the object; only a valid completed assignment consumes it. Full
 validity evidence and the no-outcome boundary are recorded in
 `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`.
+
+## FCEOV `.2` non-consuming result-atom invalidity — 2026-08-31
+
+The fresh `.2` replacement is classified `INVALID_EVIDENCE` with sole scientific invalidator
+`RESULT_ATOM_L_THETA_SCALE_DRIFT`. Its technical structure, resource observations and execution
+bindings passed independent review, but its create-only final result atom did not implement the
+prospectively frozen lower-bound estimand. The freeze requires the single unit-range-normalized
+bound `L_theta=min_j(ell_j-0.5)`. The analyzer instead range-scaled each marginal lower bound before
+taking the minimum and published the resulting raw-utility-scale quantity as the joint effect lower
+bound. Because the candidate gaps have unequal support ranges, these are different parameters.
+
+No `.2` outcome is interpreted or enters direction science. Do not quote its competence, panel,
+gap, p-value, lower-bound or terminal-disposition fields; do not resume, amend, republish or reuse
+its root, master, checkpoint, tapes or result. The defect is visible from the frozen formulas and
+implementation types without scientific outcome access. Branch agreement cannot substitute one
+estimand for another or complete an already published atomic artifact.
+
+The incomplete result atom means `.2` does not consume the scientific object. The unchanged next
+evidence instance is a fresh outcome-blind `.3` replacement after result-blind repair and review. It
+must retain the treatment, comparators, population law, endpoint, `562` tapes, three-gap KL/IUT,
+integer thresholds, zero margin and stop rule, while publishing the normalized `L_theta` explicitly
+and preventing a raw-scale bound from occupying that field. Both `.1` and `.2` remain quarantined.
+Exact validity reasoning and the no-outcome boundary are recorded in
+`SCDMP_FCEOV_REPLACEMENT_RESULT_INTAKE_20260831.md`.
+
+## FCEOV `.3` valid result disposition — 2026-08-31
+
+The fresh `.3` replacement validly and completely implements the frozen assignment. One fresh
+graph-erased foundation passed the exact competence gate, all `562` tapes and `3,372` terminal cells
+were present, and independent raw-cell recomputation agreed with the integer-grid, log-space,
+p-value and normalized-`L_theta` result atom.
+
+The controlling disposition is
+`TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED_AT_FROZEN_RESOLUTION`. The three integer sums were
+`16,665`, `16,565` and `14,809`, below the frozen thresholds `21,046`, `21,046` and `42,091`.
+The component p-value bounds were `0.15301493739902053`, `0.15649461946648216` and
+`0.6905544624698072`; hence `p_IUT=0.6905544624698072`. The prospectively frozen normalized joint
+lower bound was `L_theta=-0.03343566747722848`. No component passes or has standalone publication
+authority.
+
+The direct panel pattern is favorable but descriptive: every observed tape contrast was positive.
+That cannot exclude rare adverse tapes under the registered full support and cannot replace the
+frozen bounded-mean inference. The valid nonpass therefore establishes neither zero nor negative
+order value and does not identify which population component, if any, is nonpositive.
+
+This valid completed assignment consumes the exact fixed-state, fixed-`k`, single-foundation,
+three-action purchase. No rerun, added tapes, new foundation, changed support, threshold, margin or
+inference is a continuation, and no adapter is eligible. Direction-local recommendation is
+`CLOSED / TERMINAL`: the surviving SCDMP object is consumed and no independent falsifiable
+mechanism remains registered. A future complete-support proof or counterexample would be a new
+structural object, not SCDMP re-entry. Exact observations, limitations and claim ceiling are in
+`SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`.

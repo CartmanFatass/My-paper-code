@@ -12,6 +12,12 @@ from pathlib import Path
 
 OPERATOR_THREAD = "codex://threads/01a05860-6919-7bd3-9b04-99f8344ed73d"
 ROLE_SET = {"portfolio", "em"}
+DEFAULT_COMPANION_PROMPT = (
+    "Execute the exact scientific research request in the attached PROMPT_BODY.md. "
+    "Use the separately attached REFERENCE_FILES.md only as its read-only GitHub evidence manifest. "
+    "The author remains authoring-only and must not send, open a browser, bind a conversation, "
+    "or validate Transport state."
+)
 
 
 def fail(message: str) -> int:
@@ -47,6 +53,13 @@ def validate(data: dict, project_root: Path) -> dict:
     question = _text(data.get("scientific_question"), "scientific_question")
     deliverable = _text(data.get("deliverable"), "deliverable")
     claim_ceiling = _text(data.get("claim_ceiling"), "claim_ceiling")
+    if "companion_prompt" not in data:
+        companion_prompt = DEFAULT_COMPANION_PROMPT
+    else:
+        companion_prompt_value = data["companion_prompt"]
+        if not isinstance(companion_prompt_value, str) or not companion_prompt_value.strip():
+            raise ValueError("companion_prompt must be a non-empty string when provided")
+        companion_prompt = companion_prompt_value
 
     direction_path = project_root / "docs" / "research" / "candidates" / direction_id / "DIRECTION.md"
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
@@ -97,6 +110,7 @@ def validate(data: dict, project_root: Path) -> dict:
         "scientific_question": question,
         "deliverable": deliverable,
         "claim_ceiling": claim_ceiling,
+        "companion_prompt": companion_prompt,
         "reference_files": clean_refs,
         "constraints": list(constraints),
         "response_schema": list(response_schema),
@@ -189,6 +203,7 @@ claim ceiling; do not change the task class or silently fallback.
             "direction_id": packet["direction_id"],
             "prompt_path": "PROMPT_BODY.md",
             "reference_paths": ["REFERENCE_FILES.md"],
+            "companion_prompt": packet["companion_prompt"],
             "source_mode": "body_plus_reference_attachment",
         },
         "instruction": "Use PROMPT_BODY.md verbatim as the prompt and attach REFERENCE_FILES.md verbatim; preserve direction, ref, claim ceiling, and bytes.",

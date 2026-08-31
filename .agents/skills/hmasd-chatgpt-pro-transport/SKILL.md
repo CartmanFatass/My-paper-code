@@ -1,6 +1,6 @@
 ---
 name: hmasd-chatgpt-pro-transport
-description: "Use when another session supplies a research direction ID, an exact prompt, and optional separate reference attachments for ChatGPT Pro web transport, especially when model selection, delayed loading, ambiguous sends, long generation, scheduled wake-ups, or exact response archiving must be controlled."
+description: "Use when another session supplies a research direction ID, an exact prompt, and optional reference attachments for ChatGPT Pro web transport, especially when model selection, delayed loading, ambiguous sends, long generation, scheduled wake-ups, or exact response archiving must be controlled."
 ---
 
 # HMASD ChatGPT Pro Transport
@@ -21,11 +21,18 @@ body source:
 - absolute `prompt_path` for file-upload mode, plus an exact `companion_prompt` only
   when the page requires text before its Send control becomes enabled.
 
+The handoff must also provide the exact originating Codex `source_thread_id` for
+the completion receipt. Treat it as routing metadata, never as scientific content;
+do not infer it from the provider conversation URL or from prose.
+
 An optional `reference_paths` list contains one or more absolute reference files
-(for example the authoring skill's `REFERENCE_FILES.md`). These are separate
-attachments in the same conversation, not extra body text. Validate and hash every
-reference before transport; preserve their order and names. The one-to-one
-direction/conversation rule applies to the body and all references together.
+(for example the authoring skill's `REFERENCE_FILES.md`). Validate and hash every
+reference before transport. There is no strict filename or orthogonality requirement:
+the provider may normalize/display attachment names, and references may be attached
+or otherwise supplied in the page-supported form. Record the provider-visible names
+and preserve the byte hashes and intended order where the page permits. The
+one-to-one direction/conversation rule still applies to the body and all references
+together.
 
 Reject missing/ambiguous content, unknown direction IDs, relative upload paths, and
 missing/duplicate reference files. Validate `direction_id` against both
@@ -67,20 +74,25 @@ message node even though a response was returned.
 
 For upload mode, start `waitForEvent("filechooser")` before opening the visible
 upload control, set the absolute file path, and wait for the explicit file group and
-filename state. Record file size/hash before upload. If `reference_paths` are
-present, upload them before Send (in one chooser when `isMultiple()` is true, or in
-separate chooser cycles otherwise) and verify every expected filename in the same
-composer. If the upload is still pending, do not send. Do not invent companion text
-when file-only Send is disabled; stop and request the exact companion text from the
+upload completion state. Record file size/hash before upload. Before each upload
+action, obtain the required action-time confirmation for the exact local file(s) and
+the `chatgpt.com` destination when it is not already present for this invocation.
+This is the only transport-level confirmation gate; do not add another confirmation
+immediately before Send (subject to any higher-level browser safety confirmation).
+If `reference_paths` are present, upload them before Send (in one chooser when
+`isMultiple()` is true, or in separate chooser cycles otherwise) and verify every
+expected file by its recorded size/hash and conversation association. A provider
+filename suffix or other display normalization is informational, not a blocker. If
+the upload is still pending, do not send. Do not invent companion text when
+file-only Send is disabled; stop and request the exact companion text from the
 calling session.
 
-For the authoring packet, the preferred transport is exact clipboard paste of
-`PROMPT_BODY.md` plus a separate upload of `REFERENCE_FILES.md`. Never merge the
-manifest into the body, upload it in another conversation, or silently omit it.
+For an authoring packet, preserve the exact body bytes and every supplied reference
+hash, but use whichever body/reference arrangement the page and request support;
+do not require the manifest to remain orthogonal to the body or reject a provider
+filename normalization.
 
-Immediately before an outbound send, obtain the required action-time confirmation
-for the exact content and `chatgpt.com` destination when it is not already present
-for this invocation. Click Send once. Record `SEND_ATTEMPTED`, then re-observe:
+After the verified packet is ready, click Send once. Record `SEND_ATTEMPTED`, then re-observe:
 
 - `/c/<uuid>` plus a visible exact user-message node is `SEND_CONFIRMED`;
 - a URL change without the user node is `SEND_UNCERTAIN`;
@@ -89,10 +101,10 @@ for this invocation. Click Send once. Record `SEND_ATTEMPTED`, then re-observe:
   with the same request/idempotency key.
 
 For a packet with references, `SEND_CONFIRMED` additionally requires every expected
-reference filename/file group and its recorded hash to be associated with that same
-user turn. Never retry an uncertain or mismatched send, never open a second
-conversation, and never silently alter whitespace, file selection, reference order,
-or prompt text.
+file group and its recorded hash to be associated with the bound conversation; the
+provider-visible filename need not equal the local basename. Never retry an uncertain
+or mismatched send, never open a second conversation, and never silently alter
+whitespace, file selection, reference order, or prompt text.
 
 ## Long generation and 15-minute wake-up
 
@@ -131,6 +143,36 @@ verification. After a complete response is captured, hash-verified, and durably
 archived, close the agent-created tab immediately and set its ephemeral `tab_id` to
 null (or `tab_lifecycle=CLOSED`) while retaining the conversation URL/ID and archive
 paths. Do not keep a completed page alive merely for convenience.
+
+### Completion receipt to the originating session
+
+After a response is durably archived and hash-verified, send exactly one structured
+completion receipt to the supplied `source_thread_id` using
+`mcp__codex_app__send_message_to_thread`. The receipt must contain at least
+`request_id`, `direction_id`, `state=ARCHIVED`, `conversation_id`, `provider_url`,
+response SHA-256, archive paths, and heartbeat retirement status; it must report
+transport facts only and must not add scientific interpretation. Record the receipt
+timestamp, destination thread ID, and delivery status in the registry or
+transport-fact file. Treat the logical receipt as idempotent; on uncertain delivery,
+do not create a duplicate or send to another session—record
+`RETURN_RECEIPT_UNCERTAIN` and report it. If `source_thread_id` is missing or no
+longer resolves, archive remains valid but mark `RETURN_RECEIPT_BLOCKED` and report
+the exact routing gap. For an explicit terminal/blocker state with no archive, send
+the analogous structured blocker receipt when the source thread is available.
+
+### Heartbeat retirement at task close
+
+Persist the heartbeat automation ID and status with the transport facts. A shared
+heartbeat remains active while any mapped conversation still needs a bounded wake
+(`WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`, or a recoverable
+`WAITING_TIMEOUT`). When every conversation in this transport task is durably
+`ARCHIVED`, or is an explicit terminal/blocker state with no scheduled recovery,
+disable the existing heartbeat exactly once (for example by updating it to `PAUSED`)
+and record the retirement timestamp and verification. If one heartbeat multiplexes
+multiple directions, do not retire it when only one direction finishes; retire it
+only after the last pending record is closed. Never leave a task-close heartbeat
+active after the task has no pending recovery work, and never create a replacement
+heartbeat merely to avoid retiring the existing one.
 
 When a later wake needs a closed or stale page, create a fresh temporary tab in the
 same in-app browser and navigate to the persisted exact `provider_url`. Verify the

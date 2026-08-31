@@ -7,18 +7,19 @@ description: Use when an HMASD workflow, control-plane, role, skill, dispatch, s
 
 ## Mission
 
-Make one bounded handoff to one named Codex task. The caller writes the contract and sends it
-once; the destination task owns the implementation and returns evidence against the contract.
-This skill is a routing boundary, not a second workflow designer.
+Make one bounded handoff to one explicitly identified Codex task. The caller writes the contract
+and sends it once; the destination task owns the implementation and returns evidence against the
+contract. This skill is a routing boundary, not a second workflow designer.
 
-Use the current destination requested by the user when they say "this session":
+The designated outsource target is fixed:
 
 ```text
-DEFAULT_TARGET_THREAD_ID=01a04f5a-1c9f-7331-b1d9-249fb767362e
+OUTSOURCE_TARGET_THREAD=codex://threads/01a058a7-a26c-77d3-b220-d621a615df79
 ```
 
-An explicit target ID in the current request overrides this value. Never infer a target from a
-title, a model name, or a stale URL.
+Always send to that exact task, using UUID `01a058a7-a26c-77d3-b220-d621a615df79` in
+`send_message_to_thread`. Do not infer, override, rediscover, or replace the target from a title,
+model name, summary, role, or URL.
 
 ## Trigger and boundary
 
@@ -37,14 +38,14 @@ subtask; the default is zero subagents and one serial task.
    allowed effects, deliverables, acceptance checks, verification commands, and stop conditions.
    Preserve user wording and facts;
    do not add research, portfolio, experiment, or transport work.
-2. If any required slot is missing or the request contains multiple independent objectives, ask one
-   blocking AMA question or return `BLOCKED_INPUT`; do not guess and do not send a vague prompt.
+2. If any required contract slot is missing or the request contains multiple independent
+   objectives, ask one blocking AMA question or return `BLOCKED_INPUT`; do not guess and do not
+   send a vague prompt.
 3. Read [references/prompt-template.md](references/prompt-template.md), fill every field, and keep
    the prompt self-contained. The prompt must tell the destination to return `OUTSOURCE_RESULT v1`
    and to stop on scope expansion.
-4. If the source and target thread IDs are identical, return `BLOCKED_INPUT` rather than recurse.
-   Otherwise call `send_message_to_thread` exactly once with the completed prompt and the target
-   thread ID.
+4. Call `send_message_to_thread` exactly once with the completed prompt and the fixed target UUID
+   `01a058a7-a26c-77d3-b220-d621a615df79`.
    If the target is already running, the message is queued; do not interrupt, duplicate, or create
    a replacement task. An uncertain send is `DISPATCH_UNCERTAIN`, not permission to retry.
 5. Return a compact dispatch receipt. If execution was requested, use `wait_threads` for the same
@@ -82,6 +83,5 @@ contract. Do not turn AMA into an open-ended design interview.
 - silently broadening "workflow" into a repository-wide audit;
 - claiming tests, files, or commits that the destination did not evidence;
 - retrying an uncertain send or creating another conversation.
-- dispatching to the source thread itself (which would create a recursive handoff).
 
 See the reference for the canonical prompt and return contract.

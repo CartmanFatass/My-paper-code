@@ -1,6 +1,6 @@
 # SCDMP foundation-conditioned event-order value implementation threshold
 
-Status: `REGISTERED_REPLACEMENT_EVIDENCE_INSTANCE_PENDING`
+Status: `VALID_COMPLETE_NOT_ESTABLISHED_OBJECT_CONSUMED`
 
 The retained conclusion-blind review is terminal and rejects the earlier 18-action finite-selector
 opportunity law at the definition level. The separately frozen fixed-state, fixed-`k`, precommitted
@@ -9,8 +9,12 @@ has a technically accepted V2 implementation and a frozen V3 definition. It inhe
 from the rejected object. The first V3 evidence attempt is quarantined as
 `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`; missing prospective assessment and run-time
 resource telemetry mean that attempt did not completely implement the assignment and did not
-consume the scientific object. A result-bearing replacement remains unavailable until its fresh
-entrypoint and complete prospective resource contract pass result-blind implementation and review.
+consume the scientific object. The fresh `.2` replacement is also non-consuming invalid evidence:
+its final atom range-scaled the marginal lower bounds before taking their minimum and therefore
+published a raw-utility-scale bound instead of the frozen unit-range-normalized `L_theta`. The fresh
+`.3` replacement corrected that atom result-blind, completed validly and returned
+`TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED_AT_FROZEN_RESOLUTION`. The exact purchase is consumed
+and no further result-bearing replacement is eligible.
 
 ## Scientific object
 
@@ -224,10 +228,10 @@ python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_o
   --phase FOUNDATION_AND_2X3 --manifest PATH --result-root PATH
 ```
 
-The existing `.1` production root and its phase invocation are permanently quarantined. They must
-refuse reentry before model, master, checkpoint, tape or output creation. `--preflight-only` remains
-available for result-blind and TEST_ONLY checks. A replacement result command must use a separately
-frozen fresh root and must not read, resume, normalize or reuse `.1`.
+The existing `.1` and `.2` production roots remain permanently quarantined. The valid `.3` root is
+immutable consumed evidence. Every phase invocation against any of the three must refuse reentry
+before model, master, checkpoint, tape or output creation. `--preflight-only` remains available for
+non-result checks only; no further result command is eligible for this object.
 
 The frozen object uses one internally generated OS 256-bit master per evidence instance, 160×12 fixed-13 training,
 one update-160/step-1,920 checkpoint, 120 competence records, 23 width-144 slices and one width-60
@@ -243,22 +247,34 @@ full-mission accounting, RATE disconnection, integer/KL branch equality, all-or-
 complete-only artifacts, same-master frontier resume, legacy-schema rejection, and dependency
 firewall.
 
-The current production phase stops unconditionally before effect. There is no formal resume of `.1`:
-same-master frontier recovery remains only a TEST_ONLY correctness surface. Replacement-entrypoint
-work may enable one fresh master and root only after the unchanged object and full prospective
-resource observations are verified result-blind. Changed `n`, thresholds, estimand, comparators,
-stopping rule or any result-aware extension is not a replacement and requires a new scientific object.
+The production phase must now stop unconditionally before effect because the exact object is
+consumed. There is no formal resume of `.1`, `.2` or `.3`; same-master frontier recovery remains only
+a TEST_ONLY correctness surface. Changed `n`, thresholds, support, foundation, estimand,
+comparators, stopping rule or any result-aware extension is a new scientific object rather than a
+replacement.
 
-Root/reviewer final validity found the actual artifact's sole invalidator to be the missing
+Root/reviewer final validity found the `.1` artifact's sole invalidator to be the missing
 prospective direction-specific `assess-run` plus missing formal-process peak-RSS and scratch-peak
 telemetry. Fixed 4 GiB admissions, wall, durable and structural checks passed, but no post-hoc
 observation can replace the missing evidence. Therefore no scientific branch exists for the
-quarantined attempt.
+quarantined `.1` attempt.
 
-Replacement-entrypoint work is result-blind code/test work:
+Independent scientific intake found `.2` technically complete but scientifically invalid because
+its result atom did not contain the required normalized `L_theta`. The stored raw-scale minimum is
+a different parameter when component ranges differ. No `.2` scientific outcome may be interpreted;
+the artifact cannot be corrected in place and does not consume the object.
 
-- keep the existing `.1` root quarantined and reject every attempt to reenter or reuse it;
-- freeze one separate fresh replacement root before effect and refuse any undeclared root;
+Independent scientific intake found `.3` valid and complete. Its exact integer sums were `16,665`,
+`16,565` and `14,809`, all below their frozen thresholds. The joint p-value bound was
+`0.6905544624698072` and normalized `L_theta` was `-0.03343566747722848`. The disposition is
+`TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED_AT_FROZEN_RESOLUTION`; no component has standalone
+claim authority, zero or negative order value is not established, and the exact purchase is
+consumed before an adapter.
+
+The completed result-blind replacement work established:
+
+- the existing `.1` and `.2` roots remain quarantined and `.3` is immutable consumed evidence;
+- every result reentry or undeclared root refuses before scientific effect;
 - stage same-master initialization/finalization atomically;
 - create-only persist path, length and full raw bytes for 14 owned Python modules, three allowlisted
   dependencies, native C++ and the actual loaded DLL, then require resume
@@ -267,6 +283,8 @@ Replacement-entrypoint work is result-blind code/test work:
   raw-byte snapshot;
 - add identity-free prospective direction assessment and live wall/peak-RSS/scratch/durable
   telemetry with missing measurements failing closed.
+- `L_theta=min_j(ell_j-0.5)` is published explicitly on its normalized scale, with unequal-range
+  synthetic checks separating it from `min_j R_j(ell_j-0.5)`.
 
 Do not add hashes, digests, identity, authentication or approval fields. These surfaces may be
 exercised by unit, fixture, TEST_ONLY native and result-blind preflight tests before the replacement
@@ -275,10 +293,10 @@ replacement must also pass the complete prospective resource contract on its own
 
 ## Claim ceiling
 
-No scientific result is available. The prospective fixed-simulator, fixed-state, fixed-K,
-single-foundation candidate-set statement remains definition-only; the quarantined artifact cannot
-activate it or any narrower component claim. Only a valid fresh replacement evidence instance can
-evaluate it. Technical hardening cannot establish learned
+One valid scientific nonpass is available. It establishes only that strict candidate-set dominance
+was not established at the frozen resolution; it does not establish zero, negativity or a failed
+population component. No component is independently publishable, and no further run or adapter is
+eligible for the consumed object. Neither technical hardening nor the result can establish learned
 chronology, learned duration, semigroup composition, arbitrary words, variable lifetime/membership,
 simulator transfer, UAV safety, deployment or flight.
 
@@ -290,4 +308,7 @@ simulator transfer, UAV safety, deployment or flight.
 - `SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
 - `SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`
 - `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`
+- `SCDMP_FCEOV_REPLACEMENT_VALIDITY_AND_INTAKE_20260831.md`
+- `SCDMP_FCEOV_REPLACEMENT_RESULT_INTAKE_20260831.md`
+- `SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/IMPLEMENTATION_THRESHOLD.md`

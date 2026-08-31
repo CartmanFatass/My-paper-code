@@ -30,6 +30,14 @@ THREADS_PER_WORKER: Final = 1
 PACKAGE_ROOT: Final = Path(__file__).resolve().parent
 REPOSITORY_ROOT: Final = PACKAGE_ROOT.parents[2]
 RESOURCE_SCRIPT: Final = REPOSITORY_ROOT / "scripts" / "hmasd_resource_preflight.py"
+EXPECTED_PRODUCTION_CAPABILITY: Final[Mapping[str, object]] = {
+    "version": "CRTO_SINGLE_PASS_PRODUCTION_V1",
+    "single_pass_population_traversal": True,
+    "second_launch_admission_before_science": True,
+    "raw_long_k8_staged_gate": True,
+    "residual_evaluation_only_after_competence": True,
+    "validated_create_only_publication": True,
+}
 
 
 @dataclass(frozen=True)
@@ -134,6 +142,21 @@ def validate_run_resource_receipt(receipt: Mapping[str, object]) -> tuple[str, .
     if receipt.get("memory_floor_pass") is not True or receipt.get("memory_safe") is not True:
         issues.append("shared assess-run memory admission did not pass")
     return tuple(issues)
+
+
+def validate_production_capability() -> tuple[str, ...]:
+    """Bind readiness to the import-safe frozen production capability declaration."""
+
+    try:
+        from .production import production_capability
+        observed = production_capability()
+    except Exception as error:  # import/version failure is a pre-activity engineering fact
+        return (f"production capability is unavailable: {type(error).__name__}: {error}",)
+    if observed != dict(EXPECTED_PRODUCTION_CAPABILITY):
+        return (
+            "production capability declaration is missing, incomplete, or version-drifted",
+        )
+    return ()
 
 
 def load_resource_receipt(path: Path) -> Mapping[str, object]:
@@ -366,6 +389,7 @@ def prospective_preflight(
     schedule_issues = list(validate_population_schedule())
     target_issues = list(_fresh_target_issues(output_root, result_path))
     runtime_issues: list[str] = []
+    production_issues = list(validate_production_capability())
     if CPU_WORKERS != 1 or THREADS_PER_WORKER != 1:
         runtime_issues.append("runtime must use one worker and one thread")
     if PEAK_RSS_BYTES != 2 * 1024**3 or WALL_SECONDS != 7_200:
@@ -398,14 +422,15 @@ def prospective_preflight(
             "issues": list(scan_report.get("issues", [])),
         },
         "single_pass_production_pipeline": {
+            "passed": not production_issues,
+            "issues": production_issues,
+        },
+        "long_production_efficiency_review": {
             "passed": False,
             "issues": [
-                "ENGINEERING_SINGLE_PASS_RESIDUAL_CALIBRATION_PIPELINE_INCOMPLETE: the formal "
-                "runner does not yet bind all-horizon calibration residuals and the first audit "
-                "row to one full 256-step TRAIN/EVALUATION host traversal, nor the staged "
-                "RAW-LONG competence stop to the analysis API; it also lacks the second fresh "
-                "4-GiB/assess-run recheck immediately after the potentially long dry scan and "
-                "before model/optimizer construction; remain before every model and optimizer"
+                "WITHHOLD_LONG_PRODUCTION: transaction conformance is implemented, but the "
+                "eight-slot Python/native-host route lacks an accepted stage-throughput and "
+                "efficiency review; only the fixed two-slot RAW pilot is launch-eligible"
             ],
         },
     }
@@ -414,6 +439,9 @@ def prospective_preflight(
         "object_id": OBJECT_ID,
         "rng_namespace": RNG_NAMESPACE,
         "replicates": list(REPLICATES),
+        "production_capability": (
+            dict(EXPECTED_PRODUCTION_CAPABILITY) if not production_issues else None
+        ),
         "population_schedule": [asdict(block) for block in POPULATION_SCHEDULE],
         "resource": dict(resource_receipt),
         "run_resource": None if run_resource_receipt is None else dict(run_resource_receipt),
@@ -465,5 +493,6 @@ __all__ = [
     "prospective_preflight",
     "validate_population_schedule",
     "validate_resource_receipt",
+    "validate_production_capability",
     "validate_run_resource_receipt",
 ]

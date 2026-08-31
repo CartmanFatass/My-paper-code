@@ -1,6 +1,6 @@
 # CRTO common-history gate implementation threshold
 
-Status: `RESULT_BLIND_PREFLIGHT_COMPLETE_PRODUCTION_BLOCKED`
+Status: `VALID_PILOT_SUPPORT_NONIDENTIFYING_LONG_PRODUCTION_WITHHELD`
 
 Object: `CRTO-COMMON-HISTORY-GATE-20260830-01`. This is a fresh prospective object, never an
 update-1,000 continuation. It must load no B1 probe, optimizer, checkpoint, cursor, result, or
@@ -10,10 +10,30 @@ evaluation-population, audit, and support laws. The `2026-08-31` competence/cens
 the previously missing RAW-LONG numerical gate and replaces decision-bearing Student-t inference
 with an exact all-slot finite-panel law. The material-stratum analysis, exact census hulls, strict
 result contract, result-blind structural preflight, prospective branch ledger, runtime monitor
-seams, and shared resource checks are implemented and focused-test green. A result-bearing run
-remains unavailable because the single-pass residual/calibration/first-boundary transaction, staged
-RAW-LONG routing, final publication, and second fresh launch admission are not yet connected. The
-current fail-closed `run` entry remains correct; it must not be bypassed.
+seams, and shared resource checks are implemented and focused-test green. The single-pass
+residual/calibration/first-boundary transaction, staged RAW-LONG routing, exact final analysis,
+dual-target create-only publication, and second fresh launch admission are now connected behind the
+frozen capability declaration `CRTO_SINGLE_PASS_PRODUCTION_V1`. The fixed two-slot RAW-only pilot
+is also implemented. Full eight-slot confirmation remains explicitly withheld as
+`WITHHOLD_LONG_PRODUCTION`: the current Python/native-host path has no accepted stage-throughput or
+efficiency review and no vectorized/native parallel production envelope. Only the fixed pilot was
+launch-eligible at that boundary. An initial pilot invocation passed operator, pre-scan, and post-scan launch-memory
+admission but failed before `assess-run` receipt creation because the launcher supplied an uppercase
+object-derived operational run ID rejected by the shared lowercase grammar. It created no model,
+optimizer, staging root, output, or result and is therefore an incomplete implementation attempt,
+not consumption of either scientific object. The launcher now freezes
+`crto_common_history_raw_pilot_20260831_01_launch`.
+
+Fresh replacement `2026-08-31.2` completed as a validator-clean
+`NONIDENTIFYING_PILOT_K8_SUPPORT` result. Material counts were slot 0
+`(KEEP=0, REPLAN=14)` and slot 1 `(KEEP=0, REPLAN=18)`; the support barrier therefore left RAW gate
+models, RAW updates, checkpoints, summaries, and competence cells at zero. Prospective and actual
+work agree at `3,632` branches and `484,096` primitive team steps. Peak RSS was
+`1,968,742,400 / 2,147,483,648` bytes, leaving `178,741,248` bytes (`170.461 MiB`); wall was
+`736.922 / 7,200` seconds, leaving `6,463.078` seconds. All four resource receipts validate, the
+three worker-bound receipt copies exactly match their files, both public result files are
+byte-identical, and no staging residue remains. This completes only the fixed pilot object; the
+confirmation object and `WITHHOLD_LONG_PRODUCTION` remain unchanged.
 
 ## Frozen 3 × 2 comparison
 
@@ -351,7 +371,9 @@ performs a result-blind first-boundary scan, counts KEEP plus every legal change
 and refuses when `2,228,224 + 16*branch_count` exceeds the fixed ceiling. The runtime ledger binds
 that expected branch count to actual branches and exposes one-worker, one-thread, wall, RSS, and
 optimizer-loop monitor seams. Official preflight creates fresh shared 4 GiB and `assess-run`
-receipts, but deliberately retains a failed `single_pass_production_pipeline` gate.
+receipts. The current source binds `single_pass_production_pipeline` to the exact import-safe
+`CRTO_SINGLE_PASS_PRODUCTION_V1` capability declaration and fails closed if that declaration is
+missing or version-drifted.
 
 The first official final-namespace preflight completed on `2026-08-31`: it observed
 `15,023,247,360` physical/effective available bytes, retained all `6,144/6,144` structural
@@ -360,22 +382,38 @@ exact charged total was `2,536,944`, leaving `59,920` below the ceiling. All que
 activity counters were zero. See
 `CRTO_COMMON_HISTORY_GATE_R01_RESULT_BLIND_PREFLIGHT_20260831.md`.
 
-The remaining exact blocker is
-`ENGINEERING_SINGLE_PASS_RESIDUAL_CALIBRATION_PIPELINE_INCOMPLETE`: all-horizon residual collection,
-first-boundary G16, calibration aggregation, staged RAW-LONG competence, final analysis publication,
-and a second fresh memory admission immediately before production are not yet wired into one
-transaction. Therefore `ready_for_optimizer=false`; development and confirmation runs are both
-ineligible. This engineering gap creates no scientific polarity.
+That historical preflight receipt remains accurate for the earlier code state and is not rewritten:
+it observed `ready_for_optimizer=false` before production integration. A current `run` invocation
+must create a new first memory/`assess-run`/preflight receipt set, repeat the complete result-blind
+scan, and then create a second fresh memory/`assess-run` pair inside an isolated one-worker,
+one-thread, CPU-only process before Torch, models, optimizers, staging roots, or results. Only that
+fresh invocation could establish runtime admission, but current preflight also retains the explicit
+failed `long_production_efficiency_review` gate with `WITHHOLD_LONG_PRODUCTION`. Therefore the full
+confirmation command remains fail-closed. At that historical integration boundary no pilot or
+confirmation result had yet been produced; the later valid pilot intake is recorded at the top of
+this document and in `CRTO_RAW_PILOT_EVIDENCE_20260831.md`.
 
 ### Optional two-slot development pilot
 
-Before a full confirmation, CM may implement one RAW-only B-level feasibility pilot with two
-development slots in an RNG namespace disjoint from final `2026083001`. It uses the same predictor,
-2,048-update RAW checkpoint, 64 fixed-K8 development tapes, material strata, support rules, and
-`0.01` competence ceiling. It does not train or inspect TRUE/DERANGED and cannot read final slots,
-select a checkpoint/address, or change `0.02`, `0.01`, `0.005`, exposure, or row laws. A pass shows
-feasibility only. A fail updates only that development architecture-budget object; any repair needs
-fresh confirmation addresses. The 4 GiB admission applies immediately before this pilot.
+Before a full confirmation, CM may implement the fixed RAW-only B-level object
+`CRTO-COMMON-HISTORY-RAW-PILOT-20260831-01`, RNG namespace `2026083191`, slots `(0,1)`, and literal
+claim ceiling `TWO_SLOT_RAW_LONG_DEVELOPMENT_FEASIBILITY_ONLY`. These fields are compiled constants,
+not CLI inputs. The pilot uses the same predictor, 2,048-update RAW checkpoint, 64 fixed-K8
+development tapes, material strata, support rules, and `0.01` competence ceiling. It does not train
+or inspect TRUE/DERANGED, instantiate final namespace `2026083001`, read final slots, select a
+checkpoint/address, or change `0.02`, `0.01`, `0.005`, exposure, or row laws.
+
+Before constructing any pilot RNG address or tape, the pilot requires a fresh passing 4 GiB memory
+receipt. After its result-blind structural scan and immediately before any Torch-dependent
+component, model, optimizer, scientific root, or result, it requires a second fresh passing 4 GiB
+receipt and same-envelope `assess-run` receipt.
+All four slot-by-stratum competence cells must pass for `PILOT_FEASIBLE`; missing support is
+`NONIDENTIFYING_PILOT_K8_SUPPORT`, and complete supported incompetence is
+`PILOT_RAW_LONG_INCOMPETENT`. The receipt must preserve those cells and support/resource/work facts,
+bind the literal claim ceiling, and affirm zero final-namespace and TRUE/DERANGED activity. A pass
+shows feasibility only. A fail updates only that development architecture-budget object; any repair
+needs fresh confirmation addresses. No pilot branch supplies a confirmation, representation,
+policy-value, promotion, or closure claim.
 
 ## Isolated implementation surface
 
@@ -392,9 +430,12 @@ experiments/candidates/commitment_residual_triggered_options_common_history_gate
   training.py
   evaluation.py
   analysis.py
+  calibration.py
   ledger.py
   preflight.py
   production.py
+  production_worker.py
+  pilot.py
   result.schema.json
   run.py
 
@@ -405,7 +446,10 @@ tests/experiments/candidates/commitment_residual_triggered_options_common_histor
   test_common_future_g16.py
   test_matched_exposure.py
   test_analysis_schema.py
+  test_calibration_admission.py
   test_preflight_pipeline.py
+  test_production_transaction.py
+  test_pilot_transaction.py
 ```
 
 Core API materializes panels, enumerates common-future action returns, constructs packet views and
@@ -425,9 +469,16 @@ python -m experiments.candidates.commitment_residual_triggered_options_common_hi
   --receipt <fresh-preflight-receipt.json>
 python -m experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01 run \
   --output-root <fresh-root> --result <fresh-result.json> \
-  --resource-receipt <fresh-launch-memory-receipt.json> \
-  --run-resource-receipt <fresh-launch-run-resource-receipt.json> \
-  --preflight-receipt <fresh-launch-preflight-receipt.json>
+  --resource-receipt <fresh-first-memory-receipt.json> \
+  --run-resource-receipt <fresh-first-run-resource-receipt.json> \
+  --preflight-receipt <fresh-first-preflight-receipt.json> \
+  --launch-resource-receipt <fresh-second-memory-receipt.json> \
+  --launch-run-resource-receipt <fresh-second-run-resource-receipt.json>
+python -m experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01 pilot \
+  --output-root <fresh-pilot-root> --result <fresh-pilot-result.json> \
+  --resource-receipt <fresh-pilot-prescan-memory-receipt.json> \
+  --launch-resource-receipt <fresh-pilot-launch-memory-receipt.json> \
+  --launch-run-resource-receipt <fresh-pilot-launch-run-resource-receipt.json>
 ```
 
 Expose no checkpoint, resume, legacy-result, or update-1,000 option. Focused tests cover common
@@ -440,6 +491,7 @@ validation, and legacy-schema rejection.
 - `DIRECTION.md`
 - `CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md`
 - `CRTO_COMMON_HISTORY_GATE_R01_RESULT_BLIND_PREFLIGHT_20260831.md`
+- `CRTO_RAW_PILOT_EVIDENCE_20260831.md`
 - `CRTO_B1_SCIENCE_CARD.md`
 - `CRTO_PROBE_CUT_R01_REVIEW_AND_HANDOFF.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`

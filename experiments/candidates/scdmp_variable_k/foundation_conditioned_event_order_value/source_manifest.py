@@ -9,6 +9,7 @@ import tempfile
 from typing import Mapping
 
 from .contracts import Manifest
+from .artifacts import observe_atomic_scratch
 
 
 class SourceManifestError(ValueError):
@@ -54,6 +55,7 @@ def write_source_manifest(path: str | Path) -> None:
             handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())
+        observe_atomic_scratch(temporary)
         os.link(temporary, target)
     except FileExistsError as error:
         raise SourceManifestError("source manifest is create-only") from error

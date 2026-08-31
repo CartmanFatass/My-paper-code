@@ -275,13 +275,35 @@ not an alternate analysis of these fixed addresses.
 
 ## Development pilot
 
-A smallest useful B-level feasibility pilot is permitted after CM implements the frozen calculation:
+A smallest useful B-level feasibility pilot is permitted after CM implements the frozen calculation.
+Its prospective registration is fixed as follows and is not caller-selectable:
 
-- two development-only addressed slots in a namespace disjoint from `2026083001`;
+```text
+object_id = CRTO-COMMON-HISTORY-RAW-PILOT-20260831-01
+rng_namespace = 2026083191
+slots = (0,1)
+claim_ceiling = TWO_SLOT_RAW_LONG_DEVELOPMENT_FEASIBILITY_ONLY
+```
+
+The pilot namespace is disjoint from confirmation namespace `2026083001`; a repository-wide
+source search before registration found no prior use of either the pilot object ID or namespace.
+The CLI may accept output and receipt paths only. It may not accept or override the object ID,
+namespace, slots, checkpoint, threshold, row law, or population counts.
+
+The registered pilot uses:
+
 - the same predictor law, RAW gate, 2,048-update LONG checkpoint, and 64 fixed-K8 development tapes;
 - the identical KEEP/REPLAN material strata, support counts, and `0.01` oracle-regret ceiling;
 - no TRUE or DERANGED training or evaluation; and
-- the ordinary 4 GiB memory admission immediately before the run.
+- a fresh 4 GiB admission before any pilot RNG address or tape is constructed, followed by the
+  result-blind structural scan, then a second fresh 4 GiB admission and same-envelope `assess-run`
+  immediately before any Torch-dependent component, model, optimizer, scientific root, or result.
+
+Every slot must retain all 64 preassigned fixed-K8 episodes, at least 48 audit rows, at least eight
+rows in each material stratum, and finite charge-once G16 labels. The pilot is `PILOT_FEASIBLE`
+only if all four slot-by-stratum RAW-LONG mean regrets are at most `0.01`. A support failure is
+`NONIDENTIFYING_PILOT_K8_SUPPORT`; a complete supported failure is
+`PILOT_RAW_LONG_INCOMPETENT`. There is no averaging or compensation across slots or strata.
 
 The pilot can reveal missing two-sided support, gross RAW learnability failure, runtime, or an
 implementation defect before paying for all six confirmation cells. It cannot inspect the final
@@ -289,6 +311,18 @@ eight addresses, choose or alter `0.02`, `0.01`, `0.005`, 2,048 updates, checkpo
 address, and cannot substitute for confirmation. A pass establishes feasibility only. A valid fail
 updates that development architecture-budget object, not the untouched fixed-eight confirmation;
 any scientific repair requires a new prospectively named object and fresh confirmation addresses.
+
+The durable pilot receipt must state the exact object ID, namespace, slots, `RAW`-only arm set,
+LONG-only decision checkpoint, support counts, four competence cells, both memory admissions, the
+post-scan `assess-run`, work facts, outcome, and the literal claim ceiling above. It must also state
+that confirmation namespace
+`2026083001` was not instantiated and that no TRUE/DERANGED model, checkpoint, evaluation, effect
+hull, or representation polarity was produced. `PILOT_FEASIBLE` supports only executable
+two-slot RAW-LONG feasibility. Neither pass nor fail estimates confirmation success probability,
+generalizes to another address, or supplies information, residual, optimization, policy-return,
+MARL, promotion, or closure evidence. An incomplete implementation is quarantined and consumes
+neither this pilot object nor the confirmation object under the repository-wide incomplete-attempt
+rule.
 
 ## Judgment impact and claim ceiling
 

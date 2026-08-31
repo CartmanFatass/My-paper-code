@@ -29,8 +29,10 @@ Require an input object with:
 - exact `repository`/`repository_url` and a pinned `commit_or_ref` (prefer a full
   commit SHA; never silently follow a moving default branch);
 - a non-empty `reference_files` list of `{path, purpose, provenance}` objects;
+- optional non-empty `companion_prompt`, preserved byte-for-byte when supplied;
 - optional `constraints`, `response_schema`, and `archive_label` supplied by the
-  caller, preserved without invention.
+  caller, preserved without invention. If `companion_prompt` is omitted, use the
+  renderer's fixed default; an empty or whitespace-only value is invalid.
 
 The calling Portfolio/EM owns direction identity, wording, scientific meaning,
 claim ceiling, and reference selection. Preserve every supplied value exactly.
@@ -83,9 +85,13 @@ the fixed operator target above. It must say that the operator should use the
 body verbatim as the prompt and attach the manifest/reference file verbatim,
 then apply `hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
 conversation binding, send evidence, long wait, archive, and tab cleanup.
-The transport request should expose `prompt_path=PROMPT_BODY.md` and
-`reference_paths=[REFERENCE_FILES.md]` (or the equivalent absolute paths after
-handoff) so the operator cannot mistake the manifest for body text.
+The transport request must also expose the exact `companion_prompt` (the fixed
+default when omitted by the caller). The operator must supply the companion_prompt verbatim.
+Do not merge it into the body or reference; preserve the `PROMPT_BODY.md` and
+`REFERENCE_FILES.md` bytes unchanged. It should expose
+`prompt_path=PROMPT_BODY.md` and `reference_paths=[REFERENCE_FILES.md]` (or the
+equivalent absolute paths after handoff) so the operator cannot mistake the
+manifest or companion for body text.
 
 The author does not call the transport operator, send a message, or create a
 conversation. If the operator reports a transport blocker, preserve the packet

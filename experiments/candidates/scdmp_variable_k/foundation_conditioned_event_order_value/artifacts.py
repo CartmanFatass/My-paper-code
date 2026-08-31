@@ -12,7 +12,7 @@ import pickle
 import platform
 from pathlib import Path
 import tempfile
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 import torch
 from torch import Tensor, nn
@@ -28,20 +28,38 @@ from .foundation import CompetenceRecord, FoundationActorCritic, analyze_compete
 from .rng import AddressRNG
 
 
-CHECKPOINT_SCHEMA = "SCDMP_FCEOV_CHECKPOINT_V3"
-FOUNDATION_GATE_SCHEMA = "SCDMP_FCEOV_FOUNDATION_GATE_V3"
-PANEL_SCHEMA = "SCDMP_FCEOV_COMPLETE_2X3_RESULT_V3"
-TERMINAL_FACT_SCHEMA = "SCDMP_FCEOV_TERMINAL_V3"
-RUN_RECORD_SCHEMA = "SCDMP_FCEOV_RUN_RECORD_V3"
-RESUME_WITNESS_SCHEMA = "SCDMP_FCEOV_RESUME_WITNESS_V3"
-PANEL_SLICE_SCHEMA = "SCDMP_FCEOV_PANEL_SLICE_V3"
-PANEL_FRONTIER_SCHEMA = "SCDMP_FCEOV_PANEL_FRONTIER_V3"
-SOURCE_NATIVE_SNAPSHOT_SCHEMA = "SCDMP_FCEOV_SOURCE_NATIVE_DIRECT_BYTES_V1"
-FINAL_BUNDLE_SCHEMA = "SCDMP_FCEOV_FINAL_BUNDLE_V4"
+CHECKPOINT_SCHEMA = "SCDMP_FCEOV_CHECKPOINT_V4"
+FOUNDATION_GATE_SCHEMA = "SCDMP_FCEOV_FOUNDATION_GATE_V4"
+PANEL_SCHEMA = "SCDMP_FCEOV_COMPLETE_2X3_RESULT_V4"
+TERMINAL_FACT_SCHEMA = "SCDMP_FCEOV_TERMINAL_V4"
+RUN_RECORD_SCHEMA = "SCDMP_FCEOV_RUN_RECORD_V4"
+RESUME_WITNESS_SCHEMA = "SCDMP_FCEOV_RESUME_WITNESS_V4"
+PANEL_SLICE_SCHEMA = "SCDMP_FCEOV_PANEL_SLICE_V4"
+PANEL_FRONTIER_SCHEMA = "SCDMP_FCEOV_PANEL_FRONTIER_V4"
+SOURCE_NATIVE_SNAPSHOT_SCHEMA = "SCDMP_FCEOV_SOURCE_NATIVE_DIRECT_BYTES_V2"
+FINAL_BUNDLE_SCHEMA = "SCDMP_FCEOV_FINAL_BUNDLE_V5"
 
 
 class ArtifactContractError(RuntimeError):
     pass
+
+
+_atomic_scratch_observer: Callable[[Path], None] | None = None
+
+
+def set_atomic_scratch_observer(observer: Callable[[Path], None] | None) -> None:
+    """Bind one process-local invocation observer for every atomic temp file."""
+
+    global _atomic_scratch_observer
+    _atomic_scratch_observer = observer
+
+
+def observe_atomic_scratch(path: Path) -> None:
+    """Observe a fully flushed temp before any publish or cleanup operation."""
+
+    observer = _atomic_scratch_observer
+    if observer is not None:
+        observer(path)
 
 
 @dataclass(frozen=True, slots=True)
@@ -77,6 +95,7 @@ def _atomic_create(path: Path, payload: bytes) -> None:
             handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())
+        observe_atomic_scratch(temporary)
         os.link(temporary, path)
     except FileExistsError as error:
         raise ArtifactContractError("FCEOV artifacts are create-only") from error
@@ -119,6 +138,7 @@ def _atomic_replace_json(path: Path, value: Mapping[str, object]) -> None:
             handle.write(payload)
             handle.flush()
             os.fsync(handle.fileno())
+        observe_atomic_scratch(temporary)
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
@@ -948,7 +968,7 @@ def _complete_final_bundle(
         gap_integer_sums=gap_integer_sums,
         component_p_values=component_p_values,
         joint_p_value=panel_analysis.p_iut,
-        joint_effect_lower_bound=panel_analysis.joint_value_raw_lower,
+        l_theta=panel_analysis.l_theta,
     )
     payload: dict[str, object] = {
         "schema": FINAL_BUNDLE_SCHEMA,
@@ -1109,7 +1129,7 @@ def _decode_terminal_fact_payload(value: object) -> TerminalFact:
             _decode_foundation_gate(value["foundation_gate"]), value["panel_complete"],
             integer_sums, p_values,
             None if value["joint_p_value"] is None else float(value["joint_p_value"]),
-            None if value["joint_effect_lower_bound"] is None else float(value["joint_effect_lower_bound"]),
+            None if value["l_theta"] is None else float(value["l_theta"]),
         )
     except (TypeError, ValueError) as error:
         raise ArtifactContractError("terminal fact typed payload differs") from error
@@ -1202,7 +1222,7 @@ def write_final_bundle(
     run_record_bytes: bytes,
     source_native_snapshot: SourceNativeSnapshot,
 ) -> TerminalFact:
-    """Compatibility convenience around the V4 prepare/resource/publish seam."""
+    """Compatibility convenience around the V5 prepare/resource/publish seam."""
 
     prepared = prepare_final_bundle(
         competence_records=competence_records,
@@ -1269,7 +1289,7 @@ def write_terminal_fact(
         or getattr(fact, "gap_integer_sums", ())
         or getattr(fact, "component_p_values", ())
         or getattr(fact, "joint_p_value", None) is not None
-        or getattr(fact, "joint_effect_lower_bound", None) is not None
+        or getattr(fact, "l_theta", None) is not None
         or fact.disposition != Disposition.FOUNDATION_NONPASS.value
     ):
         raise ArtifactContractError("foundation nonpass terminal branch differs")

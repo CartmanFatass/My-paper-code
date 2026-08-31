@@ -178,7 +178,7 @@ class TestOnlySourceFactoredDataPlane:
         _validate_direct_receipts(receipt_rows)
         resources = validate_resource_observation(resource_observation)
         manifest = {
-            "schema": "DISH_PROMOTION_SOURCE_FORK_R01_TEST_GENERATION_V1",
+            "schema": "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_TEST_GENERATION_V2",
             "coordinate": coordinate.key(), "sealed": True, "test_only": True,
             "payload_hex": {name: payload.hex() for name, payload in payloads.items()},
             "receipt_hex": {mode: payload.hex() for mode, payload in receipt_rows.items()},
@@ -223,7 +223,7 @@ class TestOnlySourceFactoredDataPlane:
             set(manifest) != _MANIFEST_KEYS or
             set(manifest.get("payload_hex", {})) != set(_PAYLOAD_FILES) or
             set(manifest.get("receipt_hex", {})) != set(_RECEIPT_FILES) or
-            manifest.get("schema") != "DISH_PROMOTION_SOURCE_FORK_R01_TEST_GENERATION_V1" or
+            manifest.get("schema") != "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_TEST_GENERATION_V2" or
             manifest.get("coordinate") != coordinate.key() or manifest.get("sealed") is not True or
             manifest.get("test_only") is not True or manifest.get("complete_result_firewall") is not True or
             manifest.get("receipt_bytes") != 24 or manifest.get("receipt_schema_version") != 1 or

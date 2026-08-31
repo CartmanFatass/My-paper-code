@@ -17,15 +17,23 @@ def main() -> int:
     parser.add_argument("--request", type=Path, required=True)
     parser.add_argument("--run-root", type=Path, required=True)
     parser.add_argument("--max-units", type=int, required=True)
-    args = parser.parse_args()
-    root = args.repository_root.resolve(); sys.path.insert(0, str(root))
-    module_name, function_name = args.lease_loader.split(":", 1)
-    loader = getattr(importlib.import_module(module_name), function_name)
-    authority, data_plane = loader(repository_root=root, lease_path=args.lease.resolve(), request_path=args.request.resolve())
-    from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_full_panel import FullPanelExecutor
-    value = FullPanelExecutor(authority=authority, data_plane=data_plane, run_root=args.run_root.resolve()).run_slice(max_units=args.max_units)
-    print(json.dumps(value, sort_keys=True, separators=(",", ":")))
-    return 0 if value["status"] in ("COMPLETE", "SLICE_COMPLETE", "HARD_GUARD") else 2
+    parser.parse_args()
+    refusal = {
+        "schema": "DISH_RBHR_R06_FULL_PANEL_HOLD_REFUSAL_V1",
+        "status": "NOT_READY",
+        "exit_code": 2,
+        "reason": "LEGACY_R06_OBJECT_NOT_CURRENT_SOURCE_FACTORED_PATH_ONLY",
+        "legacy_object": "DISH_RBHR_R06_FULL_PANEL",
+        "current_object": "DISH-BLOCK-CERTIFICATE-PREVALENCE-R02",
+        "legacy_24_block_bootstrap_allowed": False,
+        "lease_loader_imported": False,
+        "run_root_created": False,
+        "master_created": False,
+        "checkpoint_created": False,
+        "result_created": False,
+    }
+    print(json.dumps(refusal, sort_keys=True, separators=(",", ":")))
+    return 2
 
 
 if __name__ == "__main__":

@@ -142,6 +142,14 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
     assert len(payload["panel_cells"]) == contracts.PANEL_WIDTH
     assert len(payload["competence_records"]) == 120
     assert payload["terminal_fact"]["disposition"] == bundled_fact.disposition
+    assert payload["terminal_fact"]["l_theta"] == bundled_fact.l_theta
+    assert "joint_effect_lower_bound" not in payload["terminal_fact"]
+    assert "minimum_raw_gap_mean" not in payload["panel_analysis"]
+    assert "joint_value_raw_lower" not in payload["panel_analysis"]
+    assert all(
+        "audit_marginal_raw_lower" not in gap
+        for gap in payload["panel_analysis"]["gaps"]
+    )
     assert len(payload["terminal_fact"]["gap_integer_sums"]) == 3
     assert len(payload["terminal_fact"]["component_p_values"]) == 3
     assert not list(tmp_path.glob("*.tmp"))
@@ -172,7 +180,7 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
         ),
         component_p_values=tuple((gap.name, gap.p_value_upper) for gap in panel_analysis.gaps),
         joint_p_value=panel_analysis.p_iut,
-        joint_effect_lower_bound=panel_analysis.joint_value_raw_lower,
+        l_theta=panel_analysis.l_theta,
     )
     with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
         artifacts.write_terminal_fact(
@@ -397,7 +405,7 @@ def test_direct_source_native_snapshot_has_exact_inventory_lengths_and_rejects_b
         artifacts.load_source_native_snapshot(tampered_path)
 
 
-def test_v4_final_bundle_preencoding_binds_root_master_record_and_snapshot(tmp_path):
+def test_v5_final_bundle_preencoding_binds_root_master_record_and_snapshot(tmp_path):
     cells = _complete_cells()
     bindings = _bundle_bindings(tmp_path)
     prepared = artifacts.prepare_final_bundle(
@@ -410,7 +418,7 @@ def test_v4_final_bundle_preencoding_binds_root_master_record_and_snapshot(tmp_p
     assert artifacts.final_bundle_encoded_size(prepared) < 64 * 1024 * 1024
     payload = json.loads(prepared.encoded)
     assert payload["resolved_result_root"] == str(tmp_path.resolve())
-    assert payload["schema"] == "SCDMP_FCEOV_FINAL_BUNDLE_V4"
+    assert payload["schema"] == "SCDMP_FCEOV_FINAL_BUNDLE_V5"
     assert "hash" not in json.dumps(payload["source_native_snapshot"]).lower()
 
     bundle = tmp_path / "final-bundle.json"
@@ -422,6 +430,22 @@ def test_v4_final_bundle_preencoding_binds_root_master_record_and_snapshot(tmp_p
         expected_run_record_bytes=bindings["run_record_bytes"],
         expected_source_native_snapshot=bindings["source_native_snapshot"],
     ) == fact
+
+    legacy_payload = dict(payload)
+    legacy_payload["schema"] = "SCDMP_FCEOV_FINAL_BUNDLE_V4"
+    legacy_bundle = tmp_path / "legacy-v4-final-bundle.json"
+    legacy_bundle.write_text(
+        json.dumps(legacy_payload, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(artifacts.ArtifactContractError, match="schema"):
+        artifacts.load_final_bundle(
+            legacy_bundle,
+            expected_result_root=bindings["resolved_result_root"],
+            expected_rng_master=MASTER,
+            expected_run_record_bytes=bindings["run_record_bytes"],
+            expected_source_native_snapshot=bindings["source_native_snapshot"],
+        )
     for changed in (
         {"expected_result_root": str((tmp_path / "other-root").resolve())},
         {"expected_rng_master": b"x" * 32},

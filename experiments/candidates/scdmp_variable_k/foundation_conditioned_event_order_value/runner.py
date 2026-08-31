@@ -28,6 +28,7 @@ from .artifacts import (
     write_panel_frontier, write_panel_slice, write_resume_witness, write_rng_master,
     write_run_record, write_source_native_snapshot, write_terminal_fact,
     write_prepared_final_bundle, validate_live_run_record_runtime,
+    observe_atomic_scratch, set_atomic_scratch_observer,
 )
 from .analysis import analyze_complete_panel
 from .contracts import (
@@ -54,9 +55,15 @@ from .training import (
 
 PHASE = "FOUNDATION_AND_2X3"
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-CANONICAL_RESULT_ROOT = _REPOSITORY_ROOT / "temp" / "directions" / (
+QUARANTINED_RESULT_ROOT = _REPOSITORY_ROOT / "temp" / "directions" / (
     "semigroup_consistent_duration_model_policy"
 ) / "exp" / "2026-08-31.1-wave3-fceov-v3"
+QUARANTINED_REPLACEMENT_RESULT_ROOT = _REPOSITORY_ROOT / "temp" / "directions" / (
+    "semigroup_consistent_duration_model_policy"
+) / "exp" / "2026-08-31.2-wave3-fceov-v3-replacement"
+CANONICAL_RESULT_ROOT = _REPOSITORY_ROOT / "temp" / "directions" / (
+    "semigroup_consistent_duration_model_policy"
+) / "exp" / "2026-08-31.3-wave3-fceov-v3-replacement"
 _RESOURCE_SCRIPT = _REPOSITORY_ROOT / "scripts" / "hmasd_resource_preflight.py"
 _FORBIDDEN_RECEIPT_KEYS = ("identity", "hash", "approval", "authorization")
 _WALL_SECONDS_CEILING = 300.0
@@ -64,6 +71,66 @@ _PEAK_RSS_BYTES_CEILING = 1 * 1024**3
 _SCRATCH_BYTES_CEILING = 64 * 1024**2
 _DURABLE_BYTES_CEILING = 64 * 1024**2
 _DIRECTION_RESOURCE_SCHEMA = "SCDMP_FCEOV_DIRECTION_RESOURCE_V1"
+_ASSESS_DIRECTION = "semigroup_consistent_duration_model_policy"
+_ASSESS_RUN_ID = "2026-08-31-3-wave3-fceov-v3-replacement"
+
+
+class _InvocationScratchTracker:
+    def __init__(self, root: Path) -> None:
+        self.root = root
+        self.invocation_peak_bytes = 0
+        self.attempt_cumulative_peak_bytes = _prior_attempt_scratch_peak(root)
+        self.scientific_state_started = False
+        self.failed = False
+
+    def observe(self, path: Path) -> None:
+        try:
+            temporary_size = path.stat().st_size
+            staging = _staging_root(self.root)
+            size = (
+                _recursive_file_bytes(staging)
+                if path.is_relative_to(staging)
+                else temporary_size
+            )
+        except (OSError, ValueError) as error:
+            self.failed = True
+            set_atomic_scratch_observer(None)
+            assessment = {
+                "schema": _DIRECTION_RESOURCE_SCHEMA,
+                "passed": False,
+                "failure_reasons": ["scratch_observation_failed"],
+                "measurement_error_type": type(error).__name__,
+                "invocation_scratch_peak_bytes": self.invocation_peak_bytes,
+                "attempt_cumulative_scratch_peak_bytes": self.attempt_cumulative_peak_bytes,
+            }
+            if self.scientific_state_started:
+                _record_invalid_evidence(
+                    root=self.root, stage="atomic-scratch-observer", assessment=assessment,
+                )
+            raise ResourceAdmissionError("atomic scratch observation failed") from error
+        if isinstance(size, bool) or not isinstance(size, int) or size < 0:
+            self.failed = True
+            set_atomic_scratch_observer(None)
+            assessment = {
+                "schema": _DIRECTION_RESOURCE_SCHEMA,
+                "passed": False,
+                "failure_reasons": ["scratch_observation_failed"],
+                "measurement_error_type": "invalid_size",
+                "invocation_scratch_peak_bytes": self.invocation_peak_bytes,
+                "attempt_cumulative_scratch_peak_bytes": self.attempt_cumulative_peak_bytes,
+            }
+            if self.scientific_state_started:
+                _record_invalid_evidence(
+                    root=self.root, stage="atomic-scratch-observer", assessment=assessment,
+                )
+            raise ResourceAdmissionError("atomic scratch observation returned an invalid size")
+        self.invocation_peak_bytes = max(self.invocation_peak_bytes, size)
+        self.attempt_cumulative_peak_bytes = max(
+            self.attempt_cumulative_peak_bytes, self.invocation_peak_bytes,
+        )
+
+
+_ACTIVE_SCRATCH_TRACKER: _InvocationScratchTracker | None = None
 
 
 def _process_creation_perf_counter() -> float:
@@ -112,12 +179,56 @@ class ResourceAdmissionError(RuntimeError):
 
 def _require_canonical_result_root(result_root: str | Path) -> Path:
     root = Path(result_root).resolve(strict=False)
+    quarantined = tuple(
+        Path(path).resolve(strict=False)
+        for path in (QUARANTINED_RESULT_ROOT, QUARANTINED_REPLACEMENT_RESULT_ROOT)
+    )
+    if any(
+        os.path.normcase(str(root)) == os.path.normcase(str(path))
+        for path in quarantined
+    ):
+        raise PreflightError("the .1 and .2 FCEOV attempts are quarantined and cannot be resumed")
     expected = Path(CANONICAL_RESULT_ROOT).resolve(strict=False)
     if os.path.normcase(str(root)) != os.path.normcase(str(expected)):
         raise PreflightError(
             "result-root is not the sole canonical FCEOV V3 result coordinate"
         )
     return root
+
+
+def _prior_attempt_scratch_peak(root: Path) -> int:
+    """Load the maximum scratch peak from direct receipts of this .3 attempt only."""
+
+    candidates = [root]
+    staging = _staging_root(root)
+    if staging != root:
+        candidates.append(staging)
+    peak = 0
+    for parent in candidates:
+        if not parent.is_dir():
+            continue
+        for path in parent.glob("direction-resource-*.json"):
+            try:
+                value = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                continue
+            if (
+                not isinstance(value, dict)
+                or value.get("schema") != _DIRECTION_RESOURCE_SCHEMA
+                or not isinstance(value.get("stage"), str)
+                or value.get("passed") not in (True, False)
+                or _contains_forbidden_receipt_key(value)
+            ):
+                continue
+            for key in (
+                "attempt_cumulative_scratch_peak_bytes",
+                "invocation_scratch_peak_bytes",
+                "observed_scratch_peak_bytes",
+            ):
+                observed = value.get(key)
+                if isinstance(observed, int) and not isinstance(observed, bool) and observed >= 0:
+                    peak = max(peak, observed)
+    return peak
 
 
 def _staging_root(root: Path) -> Path:
@@ -189,13 +300,23 @@ def _peak_working_set_bytes() -> int:
                 ("PeakPagefileUsage", ctypes.c_size_t),
             )
 
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        psapi = ctypes.WinDLL("psapi", use_last_error=True)
+        kernel32.GetCurrentProcess.argtypes = ()
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        psapi.GetProcessMemoryInfo.argtypes = (
+            wintypes.HANDLE, ctypes.POINTER(_ProcessMemoryCounters), wintypes.DWORD,
+        )
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
         counters = _ProcessMemoryCounters()
         counters.cb = ctypes.sizeof(counters)
-        handle = ctypes.windll.kernel32.GetCurrentProcess()
-        if not ctypes.windll.psapi.GetProcessMemoryInfo(
+        handle = kernel32.GetCurrentProcess()
+        if not psapi.GetProcessMemoryInfo(
             handle, ctypes.byref(counters), counters.cb
         ):
-            raise ResourceAdmissionError("direct process peak working-set measurement failed")
+            raise ResourceAdmissionError(
+                f"direct process peak working-set measurement failed: {ctypes.get_last_error()}"
+            )
         return int(counters.PeakWorkingSetSize)
     try:
         import resource
@@ -220,6 +341,7 @@ def _atomic_create_json(path: Path, value: dict[str, object]) -> None:
             stream.write(encoded)
             stream.flush()
             os.fsync(stream.fileno())
+        observe_atomic_scratch(temporary)
         os.link(temporary, path)
     except FileExistsError as error:
         raise ResourceAdmissionError("resource receipt already exists") from error
@@ -241,9 +363,17 @@ def _direction_resource_assessment(
         _largest_file_bytes(root),
         0 if scratch_root is None else _largest_file_bytes(scratch_root),
     )
-    observed_scratch_peak_bytes = max(
-        scratch_bytes, largest_artifact_bytes, projected_scratch_bytes,
+    tracker = _ACTIVE_SCRATCH_TRACKER
+    invocation_peak = 0 if tracker is None else tracker.invocation_peak_bytes
+    prior_cumulative_peak = (
+        _prior_attempt_scratch_peak(root)
+        if tracker is None else tracker.attempt_cumulative_peak_bytes
     )
+    observed_scratch_peak_bytes = max(scratch_bytes, invocation_peak)
+    attempt_cumulative_peak = max(prior_cumulative_peak, observed_scratch_peak_bytes)
+    scratch_envelope_bytes = max(attempt_cumulative_peak, projected_scratch_bytes)
+    if tracker is not None:
+        tracker.attempt_cumulative_peak_bytes = attempt_cumulative_peak
     disk_parent = root.parent
     disk_free = shutil.disk_usage(disk_parent).free
     reasons: list[str] = []
@@ -251,7 +381,7 @@ def _direction_resource_assessment(
         reasons.append("wall_seconds_exceeded")
     if peak_rss > _PEAK_RSS_BYTES_CEILING:
         reasons.append("peak_rss_bytes_exceeded")
-    if observed_scratch_peak_bytes > _SCRATCH_BYTES_CEILING:
+    if scratch_envelope_bytes > _SCRATCH_BYTES_CEILING:
         reasons.append("scratch_bytes_exceeded")
     if durable_bytes + projected_durable_bytes > _DURABLE_BYTES_CEILING:
         reasons.append("durable_bytes_exceeded")
@@ -297,6 +427,9 @@ def _direction_resource_assessment(
         "scratch_bytes": scratch_bytes,
         "largest_artifact_bytes": largest_artifact_bytes,
         "observed_scratch_peak_bytes": observed_scratch_peak_bytes,
+        "invocation_scratch_peak_bytes": invocation_peak,
+        "attempt_cumulative_scratch_peak_bytes": attempt_cumulative_peak,
+        "scratch_envelope_bytes": scratch_envelope_bytes,
         "projected_scratch_bytes": projected_scratch_bytes,
         "durable_bytes": durable_bytes,
         "projected_durable_bytes": projected_durable_bytes,
@@ -470,6 +603,59 @@ def admit_memory(receipt: str | Path) -> dict[str, object]:
         or value["effective_available_bytes"] < 4 * 1024**3
     ):
         raise ResourceAdmissionError("4 GiB memory admission receipt is internally inconsistent")
+    return value
+
+
+def assess_run(receipt: str | Path) -> dict[str, object]:
+    """Run and validate the shared prospective one-worker FCEOV assessment."""
+
+    path = Path(receipt)
+    completed = subprocess.run(
+        [
+            sys.executable, str(_RESOURCE_SCRIPT), "assess-run",
+            "--direction", _ASSESS_DIRECTION,
+            "--run-id", _ASSESS_RUN_ID,
+            "--workers", "1",
+            "--threads-per-worker", "1",
+            "--estimated-wall-seconds", "300",
+            "--estimated-peak-gib", "1",
+            "--basis", "frozen SCDMP FCEOV replacement resource envelope",
+            "--out", str(path),
+        ],
+        capture_output=True, text=True, check=False,
+    )
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ResourceAdmissionError("shared assess-run did not produce a readable receipt") from error
+    if (
+        completed.returncode != 0
+        or not isinstance(value, dict)
+        or value.get("memory_safe") is not True
+        or value.get("memory_floor_pass") is not True
+        or value.get("physical_floor_pass") is not True
+        or value.get("effective_floor_pass") is not True
+        or value.get("minimum_available_bytes") != 4 * 1024**3
+        or _contains_forbidden_receipt_key(value)
+    ):
+        raise ResourceAdmissionError("shared assess-run refused before result work")
+    expected = {
+        "direction_id": _ASSESS_DIRECTION,
+        "run_id": _ASSESS_RUN_ID,
+        "workers": 1,
+        "threads_per_worker": 1,
+    }
+    for key, expected_value in expected.items():
+        if value.get(key) != expected_value:
+            raise ResourceAdmissionError("shared assess-run receipt contract differs")
+    estimate = value.get("estimate")
+    if (
+        not isinstance(estimate, dict)
+        or estimate.get("wall_seconds") != 300
+        or estimate.get("peak_memory_gib") != 1.0
+        or estimate.get("basis") != "frozen SCDMP FCEOV replacement resource envelope"
+    ):
+        raise ResourceAdmissionError("shared assess-run peak estimate differs")
     return value
 
 
@@ -848,7 +1034,52 @@ def _prepare_and_publish_final(
         pass
     if final_path.exists() is not True:
         raise PreflightError("atomic final bundle was not published")
+    _enforce_direction_resources(
+        stage="final-publication", root=root,
+        scratch_root=pending_path if pending_path.exists() else None, started_at=started_at,
+        receipt=_next_direction_resource_path(root, "final-publication"),
+        terminal_on_failure=True,
+    )
     return prepared.fact
+
+
+def _validate_end_receipt(root: Path, stage: str) -> dict[str, object]:
+    receipts = tuple(root.glob(f"direction-resource-{stage}-*.json"))
+    indexed: list[tuple[int, Path]] = []
+    for path in receipts:
+        try:
+            indexed.append((int(path.stem.rsplit("-", 1)[1]), path))
+        except (IndexError, ValueError) as error:
+            raise PreflightError(f"{stage} resource receipt inventory differs") from error
+    if not indexed:
+        raise PreflightError(f"{stage} lacks a passing end-of-invocation resource receipt")
+    try:
+        value = json.loads(max(indexed)[1].read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise PreflightError(f"{stage} resource receipt cannot be loaded") from error
+    if (
+        not isinstance(value, dict)
+        or value.get("schema") != _DIRECTION_RESOURCE_SCHEMA
+        or value.get("stage") != stage
+        or value.get("passed") is not True
+        or value.get("failure_reasons") != []
+        or isinstance(value.get("attempt_cumulative_scratch_peak_bytes"), bool)
+        or not isinstance(value.get("attempt_cumulative_scratch_peak_bytes"), int)
+        or value["attempt_cumulative_scratch_peak_bytes"] < 0
+        or value["attempt_cumulative_scratch_peak_bytes"] > _SCRATCH_BYTES_CEILING
+        or not isinstance(value.get("peak_rss_bytes"), int)
+        or value["peak_rss_bytes"] < 0
+        or value["peak_rss_bytes"] > _PEAK_RSS_BYTES_CEILING
+        or not isinstance(value.get("wall_seconds"), (int, float))
+        or value["wall_seconds"] < 0
+        or value["wall_seconds"] > _WALL_SECONDS_CEILING
+        or not isinstance(value.get("durable_bytes"), int)
+        or value["durable_bytes"] < 0
+        or value["durable_bytes"] > _DURABLE_BYTES_CEILING
+        or _contains_forbidden_receipt_key(value)
+    ):
+        raise PreflightError(f"{stage} resource receipt differs")
+    return value
 
 
 def _validate_final_publication_receipt(root: Path) -> dict[str, object]:
@@ -891,7 +1122,7 @@ def _validate_final_publication_receipt(root: Path) -> dict[str, object]:
     return value
 
 
-def _execute_result_pipeline(
+def _execute_result_pipeline_body(
     *, manifest: str | Path, result_root: str | Path
 ) -> TerminalFact:
     """Fresh-or-resume implementation of the one fixed master and global tape panel."""
@@ -902,12 +1133,17 @@ def _execute_result_pipeline(
     started_at = _PROCESS_STARTED_AT
     fresh = not root.exists()
     if fresh:
+        sibling_invalid = _invalid_evidence_path(root)
+        if sibling_invalid.exists():
+            _load_invalid_evidence(sibling_invalid)
+            raise PreflightError("terminal sibling invalid evidence forbids replacement reentry")
         report = run_preflight(manifest=manifest, result_root=root)
         if (
             report.get("resources") != dict(RESOURCE_MAXIMA)
             or report.get("resource_envelope") != dict(RESOURCE_ENVELOPE)
         ):
             raise PreflightError("internal execution resource report differs after direct preflight")
+        assess_run(_next_sibling_receipt(root, "shared-assess-run-launch"))
         memory_receipt = _admit_memory_or_record(
             root=root, receipt=_next_sibling_receipt(root, "resource-admission-launch"),
             stage="launch-memory",
@@ -918,6 +1154,8 @@ def _execute_result_pipeline(
             memory_receipt=memory_receipt,
         )
         _configure_numerical_runtime()
+        if _ACTIVE_SCRATCH_TRACKER is not None:
+            _ACTIVE_SCRATCH_TRACKER.scientific_state_started = True
         master, source_snapshot, run_record_bytes = _initialize_fresh_root(
             manifest=manifest, root=root, started_at=started_at,
         )
@@ -932,16 +1170,20 @@ def _execute_result_pipeline(
         if terminal_path.exists():
             load_rng_master(root / "rng-master.bin")
             fact, _ = load_foundation_nonpass_terminal(terminal_path)
+            _validate_end_receipt(root, "foundation-nonpass-complete")
             return fact
         master = load_rng_master(root / "rng-master.bin")
         if (root / "final-bundle.json").exists():
             _validate_final_publication_receipt(root)
+            _validate_end_receipt(root, "final-publication")
             return load_final_bundle(
                 root / "final-bundle.json",
                 expected_result_root=str(root), expected_rng_master=master,
                 expected_run_record_bytes=run_record_bytes,
                 expected_source_native_snapshot=source_snapshot,
             )
+        if _ACTIVE_SCRATCH_TRACKER is not None:
+            _ACTIVE_SCRATCH_TRACKER.scientific_state_started = True
         memory_receipt = _admit_memory_or_record(
             root=root, receipt=_next_admission_path(root, "resume"), stage="resume-memory",
         )
@@ -973,6 +1215,12 @@ def _execute_result_pipeline(
         if terminal_path.exists():
             raise PreflightError("foundation nonpass terminal fact already exists")
         write_terminal_fact(terminal_path, fact, competence_records=records)
+        _enforce_direction_resources(
+            stage="foundation-nonpass-complete", root=root, scratch_root=None,
+            started_at=started_at,
+            receipt=_next_direction_resource_path(root, "foundation-nonpass-complete"),
+            terminal_on_failure=True,
+        )
         return fact
 
     if (root / "terminal-fact.json").exists():
@@ -1026,6 +1274,25 @@ def _execute_result_pipeline(
     )
 
 
+def _execute_result_pipeline(
+    *, manifest: str | Path, result_root: str | Path
+) -> TerminalFact:
+    """Run one invocation with a shared exact atomic-temp scratch observer."""
+
+    global _ACTIVE_SCRATCH_TRACKER
+    root = _require_canonical_result_root(result_root)
+    if _ACTIVE_SCRATCH_TRACKER is not None:
+        raise PreflightError("nested FCEOV result invocations are forbidden")
+    tracker = _InvocationScratchTracker(root)
+    _ACTIVE_SCRATCH_TRACKER = tracker
+    set_atomic_scratch_observer(tracker.observe)
+    try:
+        return _execute_result_pipeline_body(manifest=manifest, result_root=root)
+    finally:
+        set_atomic_scratch_observer(None)
+        _ACTIVE_SCRATCH_TRACKER = None
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="scdmp-fceov")
     parser.add_argument("--manifest", required=True)
@@ -1057,6 +1324,8 @@ if __name__ == "__main__":
 
 
 __all__ = [
-    "CANONICAL_RESULT_ROOT", "PHASE", "PreflightError", "ResourceAdmissionError", "main",
+    "CANONICAL_RESULT_ROOT", "QUARANTINED_RESULT_ROOT",
+    "QUARANTINED_REPLACEMENT_RESULT_ROOT", "PHASE", "PreflightError",
+    "ResourceAdmissionError", "main",
     "run_preflight", "run_result",
 ]

@@ -10,13 +10,15 @@ import math
 import os
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 from typing import Callable, Mapping, Sequence
 
 from .config import (
     BATCH_SIZE, BUDGETS, DELTA, FROZEN_POLICIES, NUMERIC_TOLERANCE, OBJECT_ID,
     PEAK_RSS_BYTES, PRODUCTION_CONFIG, RAW_LONG_MAX_MEAN_REGRET, RNG_NAMESPACE,
-    SCHEMA_VERSION, WALL_SECONDS,
+    PILOT_OBJECT_ID, SCHEMA_VERSION, WALL_SECONDS,
 )
 
 
@@ -35,6 +37,10 @@ FORBIDDEN_LEGACY_MODULE_SUFFIXES = frozenset({
 })
 FORBIDDEN_CLI_OPTIONS = frozenset({
     "--checkpoint", "--resume", "--legacy-result", "--update-1000",
+})
+PRE_ADMISSION_TORCH_DEPENDENCY_SUFFIXES = frozenset({
+    "torch", "analysis", "calibration", "derangement", "evaluation", "models",
+    "packets", "training",
 })
 
 
@@ -88,6 +94,21 @@ def source_check(package_root: Path = PACKAGE_ROOT) -> dict[str, object]:
                     if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
                         if argument.value in FORBIDDEN_CLI_OPTIONS:
                             errors.append(f"{path.name}:{node.lineno}: forbidden CLI option {argument.value}")
+        if path.name in {"production.py", "pilot.py"}:
+            for node in tree.body:
+                imported: tuple[str, ...] = ()
+                if isinstance(node, ast.Import):
+                    imported = tuple(alias.name for alias in node.names)
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    imported = (node.module,)
+                if any(
+                    name.split(".")[-1] in PRE_ADMISSION_TORCH_DEPENDENCY_SUFFIXES
+                    for name in imported
+                ):
+                    errors.append(
+                        f"{path.name}: top-level Torch-dependent import violates "
+                        "pre-admission capability"
+                    )
         lowered = source.lower()
         historical_markers = (
             "crto_b1_" + "result.json",
@@ -97,6 +118,11 @@ def source_check(package_root: Path = PACKAGE_ROOT) -> dict[str, object]:
         for marker in historical_markers:
             if marker in lowered:
                 errors.append(f"{path.name}: forbidden historical-state marker {marker!r}")
+    try:
+        from .preflight import validate_production_capability
+        errors.extend(validate_production_capability())
+    except Exception as error:
+        errors.append(f"production capability check failed: {type(error).__name__}: {error}")
     if errors:
         raise RuntimeError("source isolation check failed:\n" + "\n".join(errors))
     return {
@@ -119,6 +145,11 @@ def validate_result(result: Mapping[str, object]) -> None:
         raise ValueError("result outer replicate ids must be exactly ordered 0..7")
     analysis = result["analysis"]
     assert isinstance(analysis, Mapping)
+    provenance = result["provenance"]
+    assert isinstance(provenance, Mapping)
+    from .preflight import EXPECTED_PRODUCTION_CAPABILITY
+    if provenance.get("production_capability") != dict(EXPECTED_PRODUCTION_CAPABILITY):
+        raise ValueError("result provenance lacks the exact frozen production capability")
     hulls = [*analysis.get("effect_hulls", []), *analysis.get("trajectory_hulls", [])]  # type: ignore[misc]
     by_key: dict[tuple[str, str], tuple[float, ...]] = {}
     serialized_keys: list[tuple[str, str]] = []
@@ -224,6 +255,94 @@ def validate_result(result: Mapping[str, object]) -> None:
     }
     trajectory_keys = {("RAW_GAIN", "LONG"), ("TRUE_DEGRADE", "LONG")}
     if status == "IDENTIFYING":
+        base_regrets: list[dict[tuple[str, str], float]] = []
+        required_cells = {
+            (representation, budget)
+            for representation in ("RAW", "TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT")
+            for budget in ("SHORT", "LONG")
+        }
+        for slot, replicate in enumerate(replicates):
+            if not isinstance(replicate, Mapping):
+                raise ValueError("replicate result must be an object")
+            evaluations = replicate.get("evaluations")
+            if not isinstance(evaluations, Sequence) or len(evaluations) != 6:
+                raise ValueError("IDENTIFYING result requires exact six evaluation cells per slot")
+            values: dict[tuple[str, str], float] = {}
+            for summary in evaluations:
+                if not isinstance(summary, Mapping) or summary.get("replicate") != slot:
+                    raise ValueError("evaluation cell is not bound to its outer replicate slot")
+                key = (str(summary.get("representation")), str(summary.get("budget")))
+                if key in values or key not in required_cells:
+                    raise ValueError("evaluation cells are duplicated or outside the frozen six")
+                regimes = summary.get("regime_mean_regret")
+                if not isinstance(regimes, Mapping) or set(regimes) != {
+                    "K8", "K16", "K4_TO_16", "K16_TO_4",
+                }:
+                    raise ValueError("complete evaluation cell requires exactly four regime means")
+                target = sum(float(regimes[name]) for name in (
+                    "K16", "K4_TO_16", "K16_TO_4",
+                )) / 3.0
+                if not math.isfinite(target) or target < 0.0 or any(
+                    not math.isfinite(float(value)) or float(value) < 0.0
+                    for value in regimes.values()
+                ):
+                    raise ValueError("evaluation base regrets must be finite and nonnegative")
+                if not math.isclose(
+                    float(summary.get("target_equal_weight_regret", float("nan"))),
+                    target,
+                    rel_tol=0.0,
+                    abs_tol=NUMERIC_TOLERANCE,
+                ):
+                    raise ValueError("target equal-weight regret was not recomputed from regimes")
+                values[key] = target
+            if set(values) != required_cells:
+                raise ValueError("IDENTIFYING result lacks the exact six evaluation cells")
+            if (
+                not isinstance(replicate.get("derangements"), Mapping)
+                or set(replicate["derangements"]) != {"TRAIN", "EVALUATION"}
+            ):
+                raise ValueError("IDENTIFYING result requires persisted derangement plans")
+            base_regrets.append(values)
+
+        expected_slot_effects = {
+            ("RAW_MINUS_TRUE", budget): tuple(
+                slot[("RAW", budget)] - slot[("TRUE_RESIDUAL", budget)]
+                for slot in base_regrets
+            )
+            for budget in ("SHORT", "LONG")
+        }
+        expected_slot_effects.update({
+            ("DERANGED_MINUS_TRUE", budget): tuple(
+                slot[("CALIBRATED_DERANGEMENT", budget)]
+                - slot[("TRUE_RESIDUAL", budget)]
+                for slot in base_regrets
+            )
+            for budget in ("SHORT", "LONG")
+        })
+        expected_slot_effects.update({
+            ("RAW_MINUS_DERANGED", budget): tuple(
+                slot[("RAW", budget)]
+                - slot[("CALIBRATED_DERANGEMENT", budget)]
+                for slot in base_regrets
+            )
+            for budget in ("SHORT", "LONG")
+        })
+        expected_slot_effects[("RAW_GAIN", "LONG")] = tuple(
+            slot[("RAW", "SHORT")] - slot[("RAW", "LONG")]
+            for slot in base_regrets
+        )
+        expected_slot_effects[("TRUE_DEGRADE", "LONG")] = tuple(
+            slot[("TRUE_RESIDUAL", "LONG")] - slot[("TRUE_RESIDUAL", "SHORT")]
+            for slot in base_regrets
+        )
+        if set(by_key) != set(expected_slot_effects) or any(
+            any(
+                not math.isclose(left, right, rel_tol=0.0, abs_tol=NUMERIC_TOLERANCE)
+                for left, right in zip(by_key[key], expected)
+            )
+            for key, expected in expected_slot_effects.items()
+        ):
+            raise ValueError("analysis hull slot effects disagree with replicate base regrets")
         if set(serialized_keys[:len(analysis.get("effect_hulls", []))]) != effect_keys:
             raise ValueError("IDENTIFYING result requires the exact six contrast hulls")
         if set(serialized_keys[len(analysis.get("effect_hulls", [])):]) != trajectory_keys:
@@ -344,6 +463,36 @@ def validate_result(result: Mapping[str, object]) -> None:
             or float(competence["c_raw"]) <= RAW_LONG_MAX_MEAN_REGRET + NUMERIC_TOLERANCE
         ):
             raise ValueError("RAW-LONG STOP requires a complete failing competence report")
+        for slot, replicate in enumerate(replicates):
+            if not isinstance(replicate, Mapping):
+                raise ValueError("replicate result must be an object")
+            if "derangements" in replicate:
+                raise ValueError("NONIDENTIFYING result cannot serialize derangement plans")
+            evaluations = replicate.get("evaluations")
+            if interpretation == "UNRESOLVED":
+                if evaluations is not None:
+                    raise ValueError(
+                        "structural/calibration NONIDENTIFYING result cannot serialize evaluations"
+                    )
+                continue
+            if not isinstance(evaluations, Sequence) or len(evaluations) != 1:
+                raise ValueError(
+                    "competence NONIDENTIFYING result requires exact one RAW-LONG K8 evaluation"
+                )
+            summary = evaluations[0]
+            if (
+                not isinstance(summary, Mapping)
+                or summary.get("replicate") != slot
+                or summary.get("representation") != "RAW"
+                or summary.get("budget") != "LONG"
+                or not isinstance(summary.get("regime_mean_regret"), Mapping)
+                or set(summary["regime_mean_regret"]) != {"K8"}
+                or not isinstance(summary.get("row_count_by_regime"), Mapping)
+                or set(summary["row_count_by_regime"]) != {"K8"}
+            ):
+                raise ValueError(
+                    "competence NONIDENTIFYING result permits only exact RAW-LONG K8 evaluations"
+                )
 
 
 def result_skeleton(
@@ -357,6 +506,7 @@ def result_skeleton(
 ) -> dict[str, object]:
     """Assemble only caller-supplied evidence; never synthesize production receipts."""
 
+    from .preflight import EXPECTED_PRODUCTION_CAPABILITY
     return {
         "schema_version": SCHEMA_VERSION,
         "object_id": OBJECT_ID,
@@ -369,6 +519,7 @@ def result_skeleton(
         "provenance": {
             "fresh_genesis": True, "legacy_state_reads": False, "legacy_schema": False,
             "frozen_policies": dict(FROZEN_POLICIES),
+            "production_capability": dict(EXPECTED_PRODUCTION_CAPABILITY),
         },
         "replicates": list(replicates),
         "analysis": dict(analysis),
@@ -380,6 +531,138 @@ def result_skeleton(
 
 
 Executor = Callable[[Path], Mapping[str, object]]
+
+
+def _launch_production_worker(
+    *,
+    output_root: Path,
+    result_path: Path,
+    preflight_receipt_path: Path,
+    launch_resource_receipt_path: Path,
+    launch_run_resource_receipt_path: Path,
+) -> dict[str, object]:
+    """Run the sole scientific worker with native thread limits set before import."""
+
+    command = [
+        sys.executable,
+        "-m",
+        (
+            "experiments.candidates."
+            "commitment_residual_triggered_options_common_history_gate_r01.production_worker"
+        ),
+        "--output-root", str(Path(output_root).resolve()),
+        "--result", str(Path(result_path).resolve()),
+        "--preflight-receipt", str(Path(preflight_receipt_path).resolve()),
+        "--launch-resource-receipt", str(Path(launch_resource_receipt_path).resolve()),
+        "--launch-run-resource-receipt", str(Path(launch_run_resource_receipt_path).resolve()),
+    ]
+    environment = os.environ.copy()
+    for name in (
+        "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+        "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+    ):
+        environment[name] = "1"
+    environment["CUDA_VISIBLE_DEVICES"] = ""
+    environment["HMASD_CRTO_PRODUCTION_WORKER"] = OBJECT_ID
+    completed = subprocess.run(
+        command,
+        cwd=PACKAGE_ROOT.parents[2],
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or completed.stdout.strip() or (
+            f"exit {completed.returncode}"
+        )
+        raise RuntimeError(f"CRTO isolated production worker failed: {detail}")
+    try:
+        acknowledgement = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            "CRTO isolated production worker returned invalid acknowledgement"
+        ) from error
+    if acknowledgement != {"status": "PUBLISHED", "object_id": OBJECT_ID}:
+        raise RuntimeError("CRTO isolated production worker acknowledgement drifted")
+    try:
+        payload = json.loads(Path(result_path).resolve().read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("CRTO isolated production result is unreadable") from error
+    if not isinstance(payload, Mapping):
+        raise RuntimeError("CRTO isolated production result must be a JSON object")
+    validate_result(payload)
+    return dict(payload)
+
+
+def _launch_raw_pilot_worker(
+    *,
+    output_root: Path,
+    result_path: Path,
+    resource_receipt_path: Path,
+    launch_resource_receipt_path: Path,
+    launch_run_resource_receipt_path: Path,
+) -> dict[str, object]:
+    """Launch the fixed pilot without importing Torch into the parent process."""
+
+    output, result, memory, launch_memory, launch_assessment = tuple(
+        Path(path).resolve() for path in (
+            output_root, result_path, resource_receipt_path,
+            launch_resource_receipt_path, launch_run_resource_receipt_path,
+        )
+    )
+    if len({output, result, memory, launch_memory, launch_assessment}) != 5:
+        raise ValueError("pilot root, result, and resource receipts must be distinct")
+    if any(path.exists() for path in (
+        output, result, memory, launch_memory, launch_assessment,
+    )):
+        raise FileExistsError("pilot requires fresh create-only targets and receipts")
+    if any(output == path or output in path.parents for path in (
+        result, memory, launch_memory, launch_assessment,
+    )):
+        raise ValueError("pilot result and resource receipts must be outside the output root")
+    environment = os.environ.copy()
+    for name in (
+        "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+        "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS",
+    ):
+        environment[name] = "1"
+    environment["CUDA_VISIBLE_DEVICES"] = ""
+    environment["HMASD_CRTO_PILOT_WORKER"] = PILOT_OBJECT_ID
+    completed = subprocess.run(
+        [
+            sys.executable, "-m",
+            (
+                "experiments.candidates."
+                "commitment_residual_triggered_options_common_history_gate_r01.pilot"
+            ),
+            "--worker",
+            "--output-root", str(output),
+            "--result", str(result),
+            "--resource-receipt", str(memory),
+            "--launch-resource-receipt", str(launch_memory),
+            "--launch-run-resource-receipt", str(launch_assessment),
+        ],
+        cwd=PACKAGE_ROOT.parents[2],
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.strip() or completed.stdout.strip() or (
+            f"exit {completed.returncode}"
+        )
+        raise RuntimeError(f"isolated CRTO pilot worker failed: {detail}")
+    try:
+        payload = json.loads(result.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError("CRTO pilot worker did not publish a readable result") from error
+    if not isinstance(payload, Mapping):
+        raise RuntimeError("CRTO pilot worker result must be a JSON object")
+    from .pilot import validate_pilot_result
+    validate_pilot_result(payload)
+    return dict(payload)
 
 
 def _missing_scientific_policy_executor(_stage_root: Path) -> Mapping[str, object]:
@@ -559,15 +842,35 @@ def run_registered(
     resource_receipt_path: Path | None = None,
     run_resource_receipt_path: Path | None = None,
     preflight_receipt_path: Path | None = None,
+    launch_resource_receipt_path: Path | None = None,
+    launch_run_resource_receipt_path: Path | None = None,
 ) -> dict[str, object]:
     """Enforce current admission before work, optimizer updates, or publication."""
 
     source_check()
-    if resource_receipt_path is None or run_resource_receipt_path is None or preflight_receipt_path is None:
+    if any(path is None for path in (
+        resource_receipt_path, run_resource_receipt_path, preflight_receipt_path,
+        launch_resource_receipt_path, launch_run_resource_receipt_path,
+    )):
         raise PermissionError(
             "NONIDENTIFYING_MISSING_PREFLIGHT: official run requires "
-            "fresh 4-GiB, assess-run, and prospective-preflight receipt paths before any output"
+            "first preflight plus second fresh launch 4-GiB/assess-run receipt paths "
+            "before any output"
         )
+    assert resource_receipt_path is not None
+    assert run_resource_receipt_path is not None
+    assert preflight_receipt_path is not None
+    assert launch_resource_receipt_path is not None
+    assert launch_run_resource_receipt_path is not None
+    all_paths = tuple(Path(path).resolve() for path in (
+        output_root, result_path, resource_receipt_path, run_resource_receipt_path,
+        preflight_receipt_path, launch_resource_receipt_path,
+        launch_run_resource_receipt_path,
+    ))
+    if len(set(all_paths)) != len(all_paths):
+        raise ValueError("scientific targets and every preflight/launch receipt must be distinct")
+    if any(all_paths[0] in receipt.parents for receipt in all_paths[2:]):
+        raise ValueError("preflight and launch receipts must remain outside the scientific output root")
     report = _run_official_preflight(
         output_root=output_root,
         result_path=result_path,
@@ -586,11 +889,14 @@ def run_registered(
             "CRTO prospective preflight refused before model/optimizer/result root: "
             + "; ".join(map(str, blockers))
         )
-    # Import only after every result-blind and resource gate passes.
-    from .production import execute_fresh_pipeline
-    return dict(execute_fresh_pipeline(
-        output_root=Path(output_root), result_path=Path(result_path), preflight=report,
-    ))
+    payload = _launch_production_worker(
+        output_root=Path(output_root), result_path=Path(result_path),
+        preflight_receipt_path=Path(preflight_receipt_path),
+        launch_resource_receipt_path=Path(launch_resource_receipt_path),
+        launch_run_resource_receipt_path=Path(launch_run_resource_receipt_path),
+    )
+    validate_result(payload)
+    return payload
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -603,12 +909,20 @@ def build_parser() -> argparse.ArgumentParser:
     preflight_parser.add_argument("--resource-receipt", type=Path, required=True)
     preflight_parser.add_argument("--run-resource-receipt", type=Path, required=True)
     preflight_parser.add_argument("--receipt", type=Path, required=True)
+    pilot_parser = subparsers.add_parser("pilot")
+    pilot_parser.add_argument("--output-root", type=Path, required=True)
+    pilot_parser.add_argument("--result", type=Path, required=True)
+    pilot_parser.add_argument("--resource-receipt", type=Path, required=True)
+    pilot_parser.add_argument("--launch-resource-receipt", type=Path, required=True)
+    pilot_parser.add_argument("--launch-run-resource-receipt", type=Path, required=True)
     run_parser = subparsers.add_parser("run")
     run_parser.add_argument("--output-root", type=Path, required=True)
     run_parser.add_argument("--result", type=Path, required=True)
     run_parser.add_argument("--resource-receipt", type=Path)
     run_parser.add_argument("--run-resource-receipt", type=Path)
     run_parser.add_argument("--preflight-receipt", type=Path)
+    run_parser.add_argument("--launch-resource-receipt", type=Path)
+    run_parser.add_argument("--launch-run-resource-receipt", type=Path)
     return parser
 
 
@@ -627,12 +941,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         print(json.dumps(report, indent=2, sort_keys=True))
         return 0 if report["ready_for_optimizer"] else 6
+    if arguments.action == "pilot":
+        _launch_raw_pilot_worker(
+            output_root=arguments.output_root,
+            result_path=arguments.result,
+            resource_receipt_path=arguments.resource_receipt,
+            launch_resource_receipt_path=arguments.launch_resource_receipt,
+            launch_run_resource_receipt_path=arguments.launch_run_resource_receipt,
+        )
+        return 0
     run_registered(
         arguments.output_root,
         arguments.result,
         resource_receipt_path=arguments.resource_receipt,
         run_resource_receipt_path=arguments.run_resource_receipt,
         preflight_receipt_path=arguments.preflight_receipt,
+        launch_resource_receipt_path=arguments.launch_resource_receipt,
+        launch_run_resource_receipt_path=arguments.launch_run_resource_receipt,
     )
     return 0
 

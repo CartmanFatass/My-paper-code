@@ -36,6 +36,36 @@ RNG, checkpointing, result identity, native execution, or external effects. A ro
 is appropriate only for behavior-preserving local work. Children may edit their assigned paths, but
 CM integrates the complete result and inspects the final diff.
 
+### Mandatory performance readiness
+
+Functional readiness does not imply performance readiness. Before any production-capable or
+materially result-bearing path can launch, assign that path exactly one explicit performance
+disposition: `PERFORMANCE_READY`, `PILOT_ONLY`, `REPAIR_REQUIRED`, or `NOT_APPLICABLE`, with a
+one-line reason and the evidence supporting it. A missing disposition is `REPAIR_REQUIRED` and
+withholds long production. A `PILOT_ONLY` path is allowed only for an explicitly bounded pilot
+with measured or conservative resource/runtime evidence and a pilot-only claim ceiling.
+
+Inspect the actual production path, not a scaffold, across environment/native backend,
+environment and model batching, vectorization, bounded worker/process parallelism, numerical
+precision, rollout, forward/backward, optimizer, checkpoint/resume, serialization, filesystem,
+reducer, and end-to-end stages. The performance record must be result-blind: capture applicable
+stage and end-to-end wall time, scientific-work throughput, process-tree peak RSS, CPU/worker
+occupancy, scratch and durable high-water marks, and I/O. Static ceilings, projected work, mock or
+sentinel-only timing, nominal worker counts, and the mere presence of a batch API are not evidence.
+
+Require C++/another native backend or environment batching when measured or credibly projected
+scalar Python environment work is a material bottleneck for the intended production run. Do not
+impose C++, GPU, or parallelism by convention when the measured bounded path already meets its
+wall and resource contract. When concurrency is scientifically admissible, freeze a bounded worker
+plan and deterministic parent reduction, then require scalar-versus-production-batch and 1/2/4-
+worker equivalence where supported. Compare RNG, trajectories/endpoints, update counts,
+parameters/checkpoints, resume, artifacts (or an explicit tolerance), and external effects. A
+serial disposition must state its scientific, bit-identity, resource, or measured-efficiency reason.
+
+Keep this performance disposition separate from scientific polarity and from functional acceptance.
+Do not launch long production under `REPAIR_REQUIRED`; return the missing measurement or repair
+contract. Do not replace a measured performance gap with a different scientific question.
+
 Preserve ordering, pairing, support, counts, event clocks, endpoints, dtype/precision, RNG streams,
 resume equivalence, checkpoint format, and observable side effects unless the assignment explicitly
 changes them. Few changed lines do not make a semantic change routine. A serial or Python scaffold

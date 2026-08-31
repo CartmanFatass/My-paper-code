@@ -20,9 +20,11 @@ from experiments.candidates.commitment_residual_triggered_options_common_history
     PacketDataset,
 )
 from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.preflight import (
-    assess_structural_scan, canonical_population_schedule, prospective_preflight,
+    EXPECTED_PRODUCTION_CAPABILITY, assess_structural_scan, canonical_population_schedule,
+    prospective_preflight,
     validate_population_schedule, validate_resource_receipt, validate_run_resource_receipt,
 )
+from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01 import production
 from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.run import (
     _run_official_preflight, build_parser, run_registered, source_check,
 )
@@ -201,11 +203,42 @@ def test_resource_receipts_and_preflight_are_fail_closed_without_activity(tmp_pa
         structural_scan=_scan_rows(),
     )
     failed_gates = [name for name, gate in clean_report["gates"].items() if not gate["passed"]]
-    assert failed_gates == ["single_pass_production_pipeline"]
-    blocker = clean_report["gates"]["single_pass_production_pipeline"]["issues"]
-    assert len(blocker) == 1 and "SECOND" not in blocker[0]
-    assert "second fresh 4-GiB/assess-run recheck" in blocker[0]
+    assert failed_gates == ["long_production_efficiency_review"]
+    assert clean_report["gates"]["single_pass_production_pipeline"] == {
+        "passed": True,
+        "issues": [],
+    }
+    assert clean_report["gates"]["long_production_efficiency_review"] == {
+        "passed": False,
+        "issues": [
+            "WITHHOLD_LONG_PRODUCTION: transaction conformance is implemented, but the "
+            "eight-slot Python/native-host route lacks an accepted stage-throughput and "
+            "efficiency review; only the fixed two-slot RAW pilot is launch-eligible"
+        ],
+    }
     assert clean_report["ready_for_optimizer"] is False
+    assert clean_report["production_capability"] == dict(EXPECTED_PRODUCTION_CAPABILITY)
+
+
+def test_preflight_and_source_check_fail_closed_on_production_capability_drift(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+) -> None:
+    monkeypatch.setattr(production, "PRODUCTION_CAPABILITY_VERSION", "DRIFTED")
+    report = prospective_preflight(
+        resource_receipt=_memory_receipt(),
+        run_resource_receipt=_run_receipt(),
+        output_root=tmp_path / "output",
+        result_path=tmp_path / "result.json",
+        structural_scan=_scan_rows(),
+    )
+    gate = report["gates"]["single_pass_production_pipeline"]
+    assert gate["passed"] is False
+    assert "version-drifted" in gate["issues"][0]
+    assert report["ready_for_optimizer"] is False
+    assert report["production_capability"] is None
+    assert report["activity"]["models_constructed"] == 0
+    with pytest.raises(RuntimeError, match="production capability"):
+        source_check()
 
 
 def test_single_pass_observables_and_calibration_path_never_call_g16() -> None:

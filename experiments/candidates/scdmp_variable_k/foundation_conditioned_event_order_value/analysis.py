@@ -82,7 +82,6 @@ class GapEvidence:
     p_value_upper: float
     first_passing_raw_sum: int
     component_test_passed: bool
-    audit_marginal_raw_lower: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -90,8 +89,7 @@ class PanelAnalysis:
     disposition: str
     joint_claim_established: bool
     p_iut: float
-    minimum_raw_gap_mean: float
-    joint_value_raw_lower: float
+    l_theta: float
     gaps: tuple[GapEvidence, GapEvidence, GapEvidence]
     tape_contrasts: tuple[TapeContrasts, ...]
     cell_means: tuple[tuple[str, str, float], ...]
@@ -127,7 +125,7 @@ def binary_kl_from_half(normalized_mean: float) -> float:
 
 
 def invert_marginal_lower(normalized_mean: float, *, sample_size: int) -> float:
-    """Invert n*kl(x||ell)=log(20); the returned marginal is audit-only."""
+    """Invert n*kl(x||ell)=log(20) on the shared unit-range support."""
 
     x = _validate_probability(normalized_mean, name="normalized mean")
     if isinstance(sample_size, bool) or not isinstance(sample_size, int) or sample_size <= 0:
@@ -250,14 +248,6 @@ def _gap_evidence(name: str, raw_sum: int) -> GapEvidence:
     p_value_pass = p_value < COMPONENT_ALPHA
     if integer_pass != log_space_pass or integer_pass != p_value_pass:
         raise AnalysisContractError("integer-grid, log-space, and p-value decisions disagree")
-    range_length = (
-        MAXIMUM_UTILITY_NUMERATOR / UTILITY_DENOMINATOR
-        if name in ("g_A_RH", "g_A_HR")
-        else 2 * MAXIMUM_UTILITY_NUMERATOR / UTILITY_DENOMINATOR
-    )
-    marginal_lower = range_length * (
-        invert_marginal_lower(normalized_mean, sample_size=INFERENCE_SAMPLE_SIZE) - 0.5
-    )
     return GapEvidence(
         name=name,
         raw_utility_numerator_sum=raw_sum,
@@ -267,7 +257,6 @@ def _gap_evidence(name: str, raw_sum: int) -> GapEvidence:
         p_value_upper=p_value,
         first_passing_raw_sum=threshold,
         component_test_passed=integer_pass,
-        audit_marginal_raw_lower=marginal_lower,
     )
 
 
@@ -304,8 +293,11 @@ def analyze_complete_panel(cells: Sequence[PanelCell]) -> PanelAnalysis:
     p_iut = max(row.p_value_upper for row in gaps)
     if (p_iut < COMPONENT_ALPHA) != joint_established:
         raise AnalysisContractError("IUT p-value and integer-grid decisions disagree")
-    joint_value_lower = min(row.audit_marginal_raw_lower for row in gaps)
-    if (joint_value_lower > 0.0) != joint_established:
+    l_theta = min(
+        invert_marginal_lower(row.normalized_mean, sample_size=INFERENCE_SAMPLE_SIZE) - 0.5
+        for row in gaps
+    )
+    if (l_theta > 0.0) != joint_established:
         raise AnalysisContractError("joint lower and integer-grid decisions disagree")
     cell_means = tuple(
         (
@@ -321,8 +313,7 @@ def analyze_complete_panel(cells: Sequence[PanelCell]) -> PanelAnalysis:
         disposition=Disposition.ESTABLISHED.value if joint_established else Disposition.CLOSED.value,
         joint_claim_established=joint_established,
         p_iut=p_iut,
-        minimum_raw_gap_mean=min(row.raw_gap_mean for row in gaps),
-        joint_value_raw_lower=joint_value_lower,
+        l_theta=l_theta,
         gaps=gaps,
         tape_contrasts=contrasts,
         cell_means=cell_means,

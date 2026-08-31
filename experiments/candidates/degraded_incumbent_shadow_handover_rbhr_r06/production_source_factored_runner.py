@@ -87,7 +87,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         except OSError:
             run_root_present_at_refusal = None
         receipt = {
-            "schema": "DISH_PROMOTION_SOURCE_FORK_R01_RUN_REFUSAL_V1",
+            "schema": "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_RUN_REFUSAL_V2",
             "status": "NOT_READY", "exit_code": 2, "message": str(error),
             "reason": ("READINESS_GAPS" if isinstance(error, SourceFactoredNotReady)
                        else "INVALID_OR_UNAVAILABLE_REQUEST"),

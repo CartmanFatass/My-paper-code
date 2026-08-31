@@ -1,12 +1,89 @@
-# DISH promotion-source-factored implementation threshold
+# DISH block-certificate prevalence R02 implementation threshold
 
-Status: `PROSPECTIVE_INFERENCE_HOLD_TWO_OWNER_TEST_ORACLE_ONLY`
+Status: `R02_EXACT_ROOT_PREVALENCE_FROZEN_ENGINEERING_NOT_READY`
 
-Object: `DISH-PROMOTION-SOURCE-FORK-R01`. The bounded TEST_ONLY transaction scaffold and isolated
-two-owner phased/pathwise oracle are complete. The inherited trainer still disagrees with the
-frozen role/recurrent/normalization law, the full production chain remains unaccepted, and the old
-24-block bootstrap max-t has a finite-sample counterexample. No fresh checkpoint or scientific
-result command is presently admissible.
+Current scientific object: `DISH-BLOCK-CERTIFICATE-PREVALENCE-R02`.
+
+Transaction substrate: `DISH-PROMOTION-SOURCE-FORK-R01`, ABI v1. The bounded TEST_ONLY transaction
+scaffold and isolated two-owner phased/pathwise oracle remain accepted substrate. The full
+production chain remains unaccepted, so no fresh checkpoint or scientific result command is
+presently admissible.
+
+## Controlling R02 supersession
+
+R02 replaces the R01 continuous-mean/bootstrap inference object. R01 transaction, causal-fork,
+endpoint, margin, and sidecar details below remain provenance and reusable substrate when they do
+not conflict with this section. R01's 99,999-resample max-t, zero-SE rules, mean-return authority,
+single first-match branch, generic-transfer wording, coupled support, and scientific hold are not
+current executable authority.
+
+The R02 population is exactly 24 independent roots
+`U_b ~ Uniform({0,1}^256)`. Duplicate roots are retained. Every root enters the same canonical local
+address map `F(U_b)`; global `b` is storage/order only and never enters an RNG address. Each root
+censuses `2 packages x 3 schedules x 3 speeds x 16 slots`. Future physical, exogenous, and
+evaluation stochastic addresses and the counter frontier are identical across RETAIN, COPY, and
+SHADOW. Branch identity never enters a scientific RNG address; its non-RNG roles are limited to
+transaction metadata, output metadata, and deterministic intervention state.
+
+Four separately frozen exact-binomial tests cover
+`COPY-RETAIN x {VALUE, NO_MATERIAL}` and
+`SHADOW-COPY x {VALUE, NO_MATERIAL}`. Each test uses `alpha=1/80` without recycling and rejects
+`p<=1/2` only at `K>=18` of 24 roots. The exact boundary tail is
+`190051/16777216`; the Bonferroni family bound is `190051/4194304`; planning power at `p=0.8` is
+`48343602127962112/59604644775390625`. Failure to reject VALUE never implies NO_MATERIAL. The
+endpoint and anchor speed are root-local existential witnesses and may differ by root; no fixed
+endpoint/anchor prevalence follows.
+
+The two axes retain Cartesian dispositions. COPY means only atomic owner/actuator remap under the
+common transaction shell, not generic or natural transfer. SHADOW VALUE additionally requires the
+SHADOW-RETAIN total safeguard. Replay is an orthogonal SHADOW-only modifier and requires every
+endpoint row, complete post-CAS native/policy/Welford/RNG state, and the full 100-tick twin; first
+action equality alone is insufficient. R02 has algorithmic-root certificate-prevalence authority,
+not expected/mean return, natural prevalence, optimal-COPY, unique-information, training-advantage,
+safety, deployment, or flight authority.
+
+The root panel is create-only. A failure before panel creation may create a fresh panel. After the
+panel exists, a technical repair must rerun outcome-blind from the beginning with the same 24 roots;
+redraw is forbidden. Missing instrumentation, bare nonfinite data, transport mismatch, or missing
+required endpoints makes the assignment incomplete and non-consuming. Only a preregistered typed
+`ALGORITHM_RUNTIME_OR_NONFINITE` terminal record may materialize finite worst-case endpoints and a
+hard-event flag; that is a scientific zero/harm, not technical incompleteness.
+
+## Current R02 implementation fact — 2026-08-31
+
+`production_source_factored_reducer.py::exact_prevalence_preview` implements only result-blind
+algebra preview under schema `DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_REDUCER_PREVIEW_V2` and status
+`TEST_ONLY_NOT_READY`. Its output fixes
+`scientific_object_consumed=false`, `scientific_tests_executed=false`,
+`production_result_authority=false`, and `question_relevant_output=false`; caller-constructed root
+indicators cannot publish or accept R02 evidence. A formal sealed branch producer, create-only
+24-root parser, typed terminal parser, complete result parser, and production publication path are
+still absent and remain part of the engineering gaps below.
+
+The final focused DISH namespace passed `62` tests. Independent post-fix engineering review returned
+`CLEAN` with no remaining Blocker or High. These observations establish TEST contract conformance,
+not production readiness or scientific polarity. No result-bearing experiment was run.
+
+## Remaining production blockers
+
+Exact prevalence inference removes the former inference hold, but these ten engineering gaps remain:
+
+1. production source-factored normal-tick and generator path;
+2. checkpoint snapshot bridge and recurrent-handoff integration;
+3. causal-vector and role-indexed policy integration;
+4. role-indexed live/snapshot/PPO replay integration;
+5. source-specific masked per-dimension Welford integration;
+6. fresh-prefix producers and addressed minibatch frontier;
+7. exact uninterrupted/resume checkpoint parity;
+8. full typed causal replay and directly observed deadline;
+9. shared block checkpoint plus typed no-trigger data plane; and
+10. direct process-tree/filesystem resource preflight.
+
+The guarded runner remains `NOT_READY` until all ten close. Immediately before every future
+result-bearing invocation, resume, retry, or slice, run
+`python scripts/hmasd_resource_preflight.py admit-memory --out <receipt>` and require both physical
+and effective available memory to be at least 4 GiB. The check must precede scientific roots,
+masters, models, optimizers, checkpoints, and results.
 
 The wave-2 freeze in
 `evidence/2026-08-30-dish-promotion-source-fork-wave2-freeze.md` controls every production detail

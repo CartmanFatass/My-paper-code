@@ -15,6 +15,14 @@ it, and run the named focused tests or formatting checks. Avoid broad refactors 
 cleanup. You may use a CM Scout for one static fact or a Verifier for one non-result-bearing runtime
 fact that decides whether the edit remains behavior-preserving.
 
+Routine Implementer must explicitly refuse any change that selects or alters the native/C++ backend,
+dtype or numeric operation order, batching/vectorization, worker/process topology,
+parallel reduction, performance telemetry, checkpoint/resume performance semantics, or the
+production performance disposition. Do not add C++, GPU, or parallelism by convention. Route such
+work to the Semantic Implementer under CM with the exact performance question and owned paths;
+return `REPAIR_REQUIRED` when that handoff or contract is missing. Routine work may consume an
+already CM-frozen performance disposition but may not choose, reinterpret, or improve it.
+
 If a check fails, inspect the nearest direct error and make one reversible in-scope correction. If
 the failure reveals a semantic or architecture choice, stop for CM rather than choosing it. Return
 the behavior-preserving change, owned paths, focused tests, direct failures, ambiguity, and

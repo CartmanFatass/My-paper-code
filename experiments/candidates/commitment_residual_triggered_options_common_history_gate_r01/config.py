@@ -14,6 +14,10 @@ import numpy as np
 OBJECT_ID: Final = "CRTO-COMMON-HISTORY-GATE-20260830-01"
 SCHEMA_VERSION: Final = "crto-common-history-gate-result-v2"
 RNG_NAMESPACE: Final = 2_026_083_001
+PILOT_OBJECT_ID: Final = "CRTO-COMMON-HISTORY-RAW-PILOT-20260831-01"
+PILOT_RNG_NAMESPACE: Final = 2_026_083_191
+PILOT_SLOTS: Final = (0, 1)
+PILOT_LAUNCH_RUN_ID: Final = "crto_common_history_raw_pilot_20260831_01_launch"
 REPLICATES: Final = tuple(range(8))
 REPRESENTATIONS: Final = ("RAW", "TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT")
 BUDGETS: Final[Mapping[str, int]] = MappingProxyType({"SHORT": 128, "LONG": 2_048})
@@ -67,21 +71,45 @@ FROZEN_POLICIES: Final[Mapping[str, str]] = MappingProxyType({
 })
 
 
-def counter_seed(purpose: str, *coordinates: int) -> int:
-    """Return a stable counter-addressed seed without consulting ambient RNG."""
+def counter_seed_for_namespace(
+    rng_namespace: int, purpose: str, *coordinates: int,
+) -> int:
+    """Return an explicit-namespace counter seed without consulting ambient RNG."""
 
+    if (
+        isinstance(rng_namespace, bool)
+        or not isinstance(rng_namespace, Integral)
+        or int(rng_namespace) < 0
+    ):
+        raise ValueError("RNG namespace must be a nonnegative integer")
     if purpose not in RNG_PURPOSES:
         raise ValueError(f"unknown RNG purpose: {purpose}")
     if any(isinstance(v, bool) or not isinstance(v, Integral) or int(v) < 0 for v in coordinates):
         raise ValueError("RNG coordinates must be nonnegative integers")
-    material = ":".join((str(RNG_NAMESPACE), purpose, *(str(int(v)) for v in coordinates)))
+    material = ":".join((str(int(rng_namespace)), purpose, *(str(int(v)) for v in coordinates)))
     return int.from_bytes(sha256(material.encode("ascii")).digest()[:16], "little")
 
 
-def counter_rng(purpose: str, *coordinates: int) -> np.random.Generator:
-    """Construct a fresh PCG64 stream identified entirely by explicit counters."""
+def counter_seed(purpose: str, *coordinates: int) -> int:
+    """Return a stable final-namespace seed without consulting ambient RNG."""
 
-    return np.random.Generator(np.random.PCG64(counter_seed(purpose, *coordinates)))
+    return counter_seed_for_namespace(RNG_NAMESPACE, purpose, *coordinates)
+
+
+def counter_rng_for_namespace(
+    rng_namespace: int, purpose: str, *coordinates: int,
+) -> np.random.Generator:
+    """Construct a fresh PCG64 stream from an explicit namespace and counters."""
+
+    return np.random.Generator(np.random.PCG64(
+        counter_seed_for_namespace(rng_namespace, purpose, *coordinates)
+    ))
+
+
+def counter_rng(purpose: str, *coordinates: int) -> np.random.Generator:
+    """Construct a fresh final-namespace PCG64 stream from explicit counters."""
+
+    return counter_rng_for_namespace(RNG_NAMESPACE, purpose, *coordinates)
 
 
 @dataclass(frozen=True)

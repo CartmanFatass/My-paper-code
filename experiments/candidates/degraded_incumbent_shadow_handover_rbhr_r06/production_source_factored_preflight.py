@@ -22,8 +22,9 @@ from .production_backend import (
 from .production_contract import TestAuthority
 from .production_train_reset import build_train_reset_wave
 from .production_source_factored_contract import (
-    CLAIM_ROWS, MAX_FORK_TICKS, MAX_PREFIX_TICKS, TOTAL_TRAINING_TRANSITIONS,
-    TOTAL_UPDATES, canonical_json_bytes, complete_claim_inventory,
+    CLAIM_ROWS, MAX_FORK_TICKS, MAX_PREFIX_TICKS, PREVALENCE_REJECTION_THRESHOLD,
+    ROOT_BYTES, ROOT_COUNT, TOTAL_TRAINING_TRANSITIONS, TOTAL_UPDATES,
+    canonical_json_bytes, complete_claim_inventory,
     production_readiness_gap_inventory,
 )
 from .production_source_factored_process import run_two_owner_one_tick_pathwise_oracle
@@ -254,7 +255,9 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
             authority = TestAuthority()
             admitted, rows = source_factored_test_fixture(2, authority)
             branches, _observations, metadata = admitted.clone_promotion_source_batches(rows)
-            fixed_master = hashlib.sha256(b"TEST/DISH/PROMOTION-SOURCE-FORK/R01/PREFLIGHT/V1").digest()
+            fixed_master = hashlib.sha256(
+                b"TEST/DISH/BLOCK-CERTIFICATE-PREVALENCE/R02/PREFLIGHT/V2"
+            ).digest()
             ordinary = native_batch_from_rows(build_train_reset_wave(
                 fixed_master, block=0, arm="STRUCTURED", episode_wave=0,
             ))
@@ -285,7 +288,7 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
              "PREEXISTING_CURRENT_TEST_SIDECAR_" + str(sidecar_cache["status"]))
         )
     receipt = {
-        "schema": "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V2",
+        "schema": "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_PREFLIGHT_RECEIPT_V2",
         "passed": False, "status": "NOT_READY", "result_blind": True,
         "preflight_receipt_root": str(receipt_root), "scientific_run_root_created": False,
         "master_created": False, "scientific_master_created": False,
@@ -320,7 +323,12 @@ def run_preflight(*, repository_root: Path, run_root: Path) -> Mapping[str, obje
             "training_jobs": 24, "updates": TOTAL_UPDATES,
             "training_transitions": TOTAL_TRAINING_TRANSITIONS, "claim_rows": len(inventory),
             "max_prefix_ticks": MAX_PREFIX_TICKS, "max_three_branch_fork_ticks": MAX_FORK_TICKS,
-            "inference_resamples": 99_999,
+            "prevalence_inference": {
+                "roots": ROOT_COUNT, "root_bytes": ROOT_BYTES, "tests": 4,
+                "per_test_alpha": {"numerator": 1, "denominator": 80},
+                "rejection_threshold": PREVALENCE_REJECTION_THRESHOLD,
+                "exact_null_tail": {"numerator": 190051, "denominator": 16777216},
+            },
         },
         "measured_process": {
             "scope": "single_process_read_only_cache_and_sentinel_scope",

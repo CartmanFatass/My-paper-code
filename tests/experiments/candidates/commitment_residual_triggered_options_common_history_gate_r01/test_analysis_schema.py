@@ -358,22 +358,44 @@ def test_schema_rejects_legacy_registration_and_atomic_fresh_publication(tmp_pat
 def test_identifying_result_requires_complete_recomputed_semantics() -> None:
     evidence = _test_only_nonresult_evidence()
     evidence["admission"] = {name: True for name in evidence["admission"]}
+    summaries = _replicates()
+    replicate_records = tuple({
+        "replicate": index,
+        "derangements": {"TRAIN": {}, "EVALUATION": {}},
+        "evaluations": [{
+            "replicate": summary.replicate,
+            "representation": summary.representation.value,
+            "budget": summary.budget.value,
+            "regime_mean_regret": dict(summary.regime_mean_regret),
+            "target_equal_weight_regret": summary.target_equal_weight_regret,
+        } for summary in slot.values()],
+    } for index, slot in enumerate(summaries))
     payload = result_skeleton(
-        analysis=analyze(_replicates()),
-        replicates=tuple({"replicate": index} for index in range(8)),
+        analysis=analyze(summaries),
+        replicates=replicate_records,
         **evidence,
     )
     validate_result(payload)
 
     empty_hulls = deepcopy(payload)
     empty_hulls["analysis"]["effect_hulls"] = []
-    with pytest.raises(ValueError, match="exact six"):
+    with pytest.raises(ValueError, match="slot effects|exact six"):
         validate_result(empty_hulls)
 
     wrong_branch = deepcopy(payload)
     wrong_branch["analysis"]["interpretation"] = "PERSISTENT_ALIGNED_BIAS"
     with pytest.raises(ValueError, match="first-match"):
         validate_result(wrong_branch)
+
+    base_regret_tamper = deepcopy(payload)
+    raw_short = next(
+        cell for cell in base_regret_tamper["replicates"][0]["evaluations"]
+        if cell["representation"] == "RAW" and cell["budget"] == "SHORT"
+    )
+    raw_short["regime_mean_regret"]["K16"] += 0.03
+    raw_short["target_equal_weight_regret"] += 0.01
+    with pytest.raises(ValueError, match="hull slot effects"):
+        validate_result(base_regret_tamper)
 
     mismatched_ledger = deepcopy(payload)
     mismatched_ledger["ledger"]["expected_common_future_branch_count"] = 1

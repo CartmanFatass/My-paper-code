@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import sys
 
 import pytest
 
 from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06 import production_source_factored_preflight as preflight_module
 from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_contract import (
-    CLAIM_ROWS, PRODUCTION_REQUEST_SCHEMA, PRODUCTION_STATUS, RUN_MODE, RUNNER_MASTER_POLICY,
+    CLAIM_ROWS, OBJECT_ID, PRODUCTION_REQUEST_SCHEMA, PRODUCTION_STATUS, RUN_MODE, RUNNER_MASTER_POLICY,
     SourceFactoredNotReady, canonical_json_bytes, complete_contract, production_readiness_gap_inventory,
 )
 from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_preflight import run_preflight
@@ -29,7 +30,7 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
     run_two_owner_one_tick_pathwise_oracle()  # build outside the read-only preflight
     run_root = tmp_path / "preflight-receipt-root"
     receipt = run_preflight(repository_root=Path.cwd(), run_root=run_root)
-    assert receipt["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V2"
+    assert receipt["schema"] == "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_PREFLIGHT_RECEIPT_V2"
     assert receipt["passed"] is False and receipt["status"] == "NOT_READY"
     assert receipt["master_created"] is False and receipt["scientific_master_created"] is False
     assert receipt["checkpoint_created"] is False
@@ -41,6 +42,13 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
     assert receipt["exact_ledgers"]["claim_rows"] == CLAIM_ROWS == 6_912
     assert receipt["exact_ledgers"]["updates"] == 24_576
     assert receipt["exact_ledgers"]["training_transitions"] == 100_663_296
+    assert receipt["exact_ledgers"]["prevalence_inference"] == {
+        "roots": 24, "root_bytes": 32, "tests": 4,
+        "per_test_alpha": {"numerator": 1, "denominator": 80},
+        "rejection_threshold": 18,
+        "exact_null_tail": {"numerator": 190051, "denominator": 16777216},
+    }
+    assert "inference_resamples" not in receipt["exact_ledgers"]
     assert receipt["measured_process"]["device"] == "cpu"
     assert receipt["measured_process"]["gpu_count"] == 0
     dynamic_probe = receipt["native_probe"]["dynamic_test_clone_executed"]
@@ -89,10 +97,10 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
         "rss_gib": 6.61, "scratch_gib": 1.66, "durable_gib": 0.83, "io_gib": 68.14,
     }
     assert receipt["gap_inventory"] == production_readiness_gap_inventory()
-    assert receipt["gap_inventory"]["scientific_holds"] == [
-        "PROSPECTIVE_INFERENCE_HOLD",
-        "FINITE_SAMPLE_INFERENCE_LAW_UNRESOLVED",
-    ]
+    assert receipt["gap_inventory"]["scientific_holds"] == []
+    assert len(receipt["gap_inventory"]["gaps"]) == 10
+    assert "PROSPECTIVE_INFERENCE_HOLD" not in receipt["gap_inventory"]["gaps"]
+    assert "FINITE_SAMPLE_INFERENCE_LAW_UNRESOLVED" not in receipt["gap_inventory"]["gaps"]
     assert receipt["gap_inventory"]["test_conformance_closed"] == [
         "TEST_PHASED_SIDECAR_ABI_V1",
         "TEST_VALIDATED_RECURRENT_HANDOFF_V1",
@@ -101,7 +109,7 @@ def test_source_factored_preflight_is_measured_result_blind_and_discloses_native
         "TEST_TYPED_OWNER_HISTORY_LIVE_REPLAY_RATIO_ONE",
     ]
     assert "SOURCE_FACTORED_PHASED_SIDECAR_ABI_AND_BEGIN_TICK_TOKEN_ABSENT" not in receipt["gap_inventory"]["gaps"]
-    assert "PROSPECTIVE_INFERENCE_HOLD" in receipt["gap_inventory"]["gaps"]
+    assert receipt["gap_inventory"]["scientific_inference_object"] == OBJECT_ID
     with pytest.raises(ValueError, match="must be absent"):
         run_preflight(repository_root=Path.cwd(), run_root=run_root)
 
@@ -229,7 +237,7 @@ def test_source_factored_runner_cli_emits_structured_not_ready(tmp_path: Path, c
         "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
     ]) == 2
     value = json.loads(capsys.readouterr().out)
-    assert value["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_RUN_REFUSAL_V1"
+    assert value["schema"] == "DISH_BLOCK_CERTIFICATE_PREVALENCE_R02_RUN_REFUSAL_V2"
     assert value["status"] == "NOT_READY" and value["exit_code"] == 2
     assert value["reason"] == "READINESS_GAPS"
     assert value["master_created"] is False and value["result_created"] is False
@@ -313,7 +321,7 @@ def test_source_factored_contract_and_thin_wrappers_cannot_route_to_full_r06() -
     ]
     assert production_readiness_gap_inventory()["transfer_replay"] == {
         "name": "TRANSFER_REPLAY", "certificate_only": True,
-        "population_arm": False, "max_t_member": False,
+        "population_arm": False, "confirmatory_test_member": False,
     }
     for path in (
         Path("tools/experiments/run_dish_rbhr_source_factored_preflight.py"),
@@ -326,3 +334,49 @@ def test_source_factored_contract_and_thin_wrappers_cannot_route_to_full_r06() -
         assert "production_full_panel" not in source
         assert "production_real_sham" not in source
         assert "secrets." not in source and "os.urandom" not in source and "token_bytes" not in source
+        assert "99_999" not in source and "INFERENCE_RESAMPLES" not in source
+        assert "PROSPECTIVE_INFERENCE_HOLD" not in source
+
+
+def test_legacy_r06_full_panel_cli_refuses_before_loading_lease_or_creating_run_root(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],
+) -> None:
+    from tools.experiments import run_dish_rbhr_r06_full_panel as legacy_cli
+
+    lease = tmp_path / "lease.json"
+    request = tmp_path / "request.json"
+    lease.write_text("{}", encoding="ascii")
+    request.write_text("{}", encoding="ascii")
+    run_root = tmp_path / "legacy-scientific-run"
+
+    def forbidden_import(_name: str) -> object:
+        raise AssertionError("legacy lease loader must not be imported during inference hold")
+
+    monkeypatch.setattr(legacy_cli.importlib, "import_module", forbidden_import)
+    monkeypatch.setattr(sys, "argv", [
+        "run_dish_rbhr_r06_full_panel",
+        "--repository-root", str(Path.cwd()),
+        "--lease-loader", "forbidden.module:load",
+        "--lease", str(lease),
+        "--request", str(request),
+        "--run-root", str(run_root),
+        "--max-units", "1",
+    ])
+
+    assert legacy_cli.main() == 2
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt == {
+        "schema": "DISH_RBHR_R06_FULL_PANEL_HOLD_REFUSAL_V1",
+        "status": "NOT_READY",
+        "exit_code": 2,
+        "reason": "LEGACY_R06_OBJECT_NOT_CURRENT_SOURCE_FACTORED_PATH_ONLY",
+        "legacy_object": "DISH_RBHR_R06_FULL_PANEL",
+        "current_object": "DISH-BLOCK-CERTIFICATE-PREVALENCE-R02",
+        "legacy_24_block_bootstrap_allowed": False,
+        "lease_loader_imported": False,
+        "run_root_created": False,
+        "master_created": False,
+        "checkpoint_created": False,
+        "result_created": False,
+    }
+    assert not run_root.exists()

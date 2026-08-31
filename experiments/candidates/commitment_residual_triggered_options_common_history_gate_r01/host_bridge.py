@@ -28,7 +28,10 @@ from experiments.candidates.commitment_residual_triggered_options.host import (
     common_future_audit_rollout,
 )
 
-from .config import AUDIT_HORIZON, EVALUATION_REGIMES, OBSERVATION_DIM, counter_seed
+from .config import (
+    AUDIT_HORIZON, EVALUATION_REGIMES, OBSERVATION_DIM, RNG_NAMESPACE,
+    counter_seed_for_namespace,
+)
 from .contracts import (
     Panel, PanelRow, PredictorExample, REPLANNING_COSTS, RowKey, Split, TapeRecord,
     canonical_array,
@@ -531,13 +534,16 @@ def build_balanced_tapes(
     regime: str,
     count: int,
     first_episode_index: int,
+    rng_namespace: int = RNG_NAMESPACE,
 ) -> tuple[ScenarioTape, ...]:
     """Pre-materialize a split-isolated tape batch from the registered namespace."""
 
     regime_value = Regime(regime)
     split_ordinal = tuple(Split).index(Split(split))
     regime_ordinal = tuple(Regime).index(regime_value)
-    root_seed = counter_seed("panel_tape", replicate, split_ordinal, regime_ordinal) % (2**63)
+    root_seed = counter_seed_for_namespace(
+        rng_namespace, "panel_tape", replicate, split_ordinal, regime_ordinal,
+    ) % (2**63)
     specs = balanced_scenario_specs(
         count=count, regime=regime_value, root_seed=root_seed,
         first_episode_index=first_episode_index,
@@ -546,7 +552,7 @@ def build_balanced_tapes(
 
 
 def canonical_calibration_specs(
-    *, replicate: int, regime: str,
+    *, replicate: int, regime: str, rng_namespace: int = RNG_NAMESPACE,
 ) -> tuple[ScenarioSpec, ...]:
     """Return the unshuffled 32-row K4 or K8 calibration manifest."""
 
@@ -555,8 +561,8 @@ def canonical_calibration_specs(
         raise ValueError("calibration is defined only for K4 and K8")
     split_ordinal = tuple(Split).index(Split.CALIBRATION)
     regime_ordinal = tuple(Regime).index(regime_value)
-    root_seed = counter_seed(
-        "panel_tape", replicate, split_ordinal, regime_ordinal,
+    root_seed = counter_seed_for_namespace(
+        rng_namespace, "panel_tape", replicate, split_ordinal, regime_ordinal,
     ) % (2**63)
     first = 256 if regime_value is Regime.K4 else 288
     rows: list[ScenarioSpec] = []
@@ -578,15 +584,16 @@ def canonical_calibration_specs(
 
 
 def canonical_calibration_tapes(
-    *, replicate: int, regime: str,
+    *, replicate: int, regime: str, rng_namespace: int = RNG_NAMESPACE,
 ) -> tuple[ScenarioTape, ...]:
     return tuple(build_scenario_tape(spec) for spec in canonical_calibration_specs(
-        replicate=replicate, regime=regime,
+        replicate=replicate, regime=regime, rng_namespace=rng_namespace,
     ))
 
 
 def evaluation_tape_batches(
     *, replicate: int, split: Split, count_per_regime: int, first_episode_index: int,
+    rng_namespace: int = RNG_NAMESPACE,
 ) -> dict[str, tuple[ScenarioTape, ...]]:
     batches: dict[str, tuple[ScenarioTape, ...]] = {}
     cursor = first_episode_index
@@ -594,6 +601,7 @@ def evaluation_tape_batches(
         batches[regime] = build_balanced_tapes(
             replicate=replicate, split=split, regime=regime,
             count=count_per_regime, first_episode_index=cursor,
+            rng_namespace=rng_namespace,
         )
         cursor += count_per_regime
     return batches

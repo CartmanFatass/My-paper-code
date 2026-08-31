@@ -121,3 +121,62 @@ transfer. The controlling evidence is
 `evidence/2026-08-31-dish-phased-oracle-inference-hold.md`. Root must next choose a fixed-panel
 descriptive claim or a finite-sample-valid, powered superpopulation design. Until that prospective
 decision is frozen, only TEST conformance may be claimed and the direct runner remains `NOT_READY`.
+
+## R02 block-certificate prevalence re-entry — 2026-08-31
+
+The prospective inference choice is now frozen as
+`DISH-BLOCK-CERTIFICATE-PREVALENCE-R02`. R02 retains the R01 causal three-branch fork and accepted
+TEST-only two-owner oracle as ancestry, but replaces the R01 continuous-mean/bootstrap authority,
+coupled branch Boolean, and single first-match result. The invalid bootstrap remains historical
+evidence and is not repaired or reused.
+
+R02 samples 24 independent uniform 256-bit algorithmic roots. Each root executes the same canonical
+local RNG map; the global root index is storage metadata and cannot alter an RNG address. Within a
+root, the complete two-package, three-schedule, three-speed, sixteen-slot panel produces separate
+COPY-shell-remap and SHADOW-COPY root certificates. The four confirmatory targets are majority
+prevalence of VALUE and strict WITHIN-MARGIN certificates for each axis. With four fixed one-sided
+exact binomial tests, per-test `alpha=0.0125`, success threshold `18/24`, the null tail is
+`0.011327922344207764`, Bonferroni FWER is `0.045311689376831055`, and power at the frozen
+`p_q=0.8` planning alternative is `0.8110710551188801` for any one prespecified proposition `q`.
+This is marginal, not joint or Cartesian-branch power; VALUE and WITHIN are disjoint within an axis.
+At this four-test contract, 24 is the smallest integer sample size meeting that per-proposition 80%
+planning-power requirement.
+
+All three forks share one branch-independent future stochastic tape and counter frontier; branch
+labels are transaction/output metadata, not selectors for physical, exogenous, evaluation, or
+policy-sampling draws. The 24-root panel is atomically sealed before scientific work. After that
+seal, a technically incomplete attempt is quarantined and any outcome-blind from-start repair must
+reuse the same panel; only failure before the panel exists permits fresh root creation. Registered
+algorithm numeric/runtime/hard failures count as scientific zeros/harm only through a preregistered
+producer terminal record `ALGORITHM_RUNTIME_OR_NONFINITE` that binds root/cell/branch/stage before
+reduction and materializes a typed finite worst-case endpoint plus hard flag. RETAIN failure zeros
+COPY and total dependencies; COPY failure zeros COPY, SHADOW, and total; SHADOW failure zeros SHADOW
+and total. A bare/provenance-unknown nonfinite or missing endpoint makes the whole assignment
+`INVALID_OR_INCOMPLETE`; the four tests do not run, and an outcome-blind from-start repair reuses the
+same sealed panel.
+
+The root certificate uses one common endpoint and anchor speed across both packages and all three
+schedules, plus noninferiority everywhere else. COPY and SHADOW validity, nonharm, value, and
+within-margin states are derived separately; SHADOW value additionally requires the total
+SHADOW-RETAIN safeguard. Legal state/action equality is a zero path, so the old post-treatment
+epsilon-separation rates become mediator diagnostics rather than outcome eligibility filters.
+Replay is an orthogonal SHADOW modifier and must cover every triggered row entering an endpoint; it
+cannot erase COPY-remap evidence.
+
+This changes the estimand. A positive result means that a complete certificate occurs in more than
+half of uniform algorithmic roots; it does not mean positive expected return. COPY is only atomic
+owner/actuator remap relative to shell-matched RETAIN, not natural or generic transfer. SHADOW
+remains limited by SHADOW-trained checkpoint/source co-adaptation, and exact on-time replay removes
+unique-information or necessary-shadow wording. Fixed-panel and event-first summaries are retained
+only as descriptive sensitivity.
+
+The qualifying endpoint and anchor may vary by root. Majority prevalence of the existential
+certificate does not imply majority prevalence for any fixed endpoint, fixed anchor, or fixed pair;
+R02 performs no such fixed-witness test.
+
+The controlling prospective science is
+`evidence/2026-08-31-dish-block-certificate-prevalence-r02-freeze.md`. No result activity occurred.
+The inference definition is closed, but the direct runner remains `PRODUCTION_NOT_READY`: ten
+normal-tick, checkpoint, causal-policy, PPO/replay, Welford, fresh-root/RNG, resume, typed-replay,
+data-plane, and direct-resource implementation gaps must still close before a fresh scientific
+root or checkpoint may be created.

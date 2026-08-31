@@ -37,6 +37,11 @@ def test_source_factored_policy_modes_checkpoint_addresses_and_replay_fence() ->
     assert tuple(mode.value for mode in TRANSACTION_TO_POLICY_STATE.values()) == ("RETAIN", "COPY", "SHADOW")
     assert len({row["checkpoint_bytes"] for row in bindings.values()}) == 1
     assert future_address_equality({name: row["future_addresses"] for name, row in bindings.items()})
+    assert len({row["rng_frontier_bytes"] for row in bindings.values()}) == 1
+    assert all(set(row) == {
+        "checkpoint_bytes", "normalization_bytes", "rng_frontier_bytes", "future_addresses",
+        "future_ticks", "optimizer_updates", "transaction_branch", "policy_state_mode",
+    } for row in bindings.values())
     prefix = (ReplayRecord(8, 0, "snapshot", b"x"), ReplayRecord(9, 0, "message", b"y"))
     replay = CausalReplayWorkShell(9, 10, prefix, prefix, 10)
     assert replay.ordered_work == ((8, 0, "snapshot", b"x"), (9, 0, "message", b"y"))

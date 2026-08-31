@@ -24,7 +24,7 @@ class ContractError(ValueError):
 
 
 HOST: Final[str] = "QUAD-UAV-PALLET-GANTRY-24P5M-v1"
-MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V3"
+MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V4"
 TICK_SECONDS: Final[float] = 0.1
 HORIZON_TICKS: Final[int] = 364
 K_TARGET: Final[int] = 13
@@ -368,7 +368,7 @@ class TerminalFact:
     gap_integer_sums: tuple[tuple[str, int], ...] = ()
     component_p_values: tuple[tuple[str, float], ...] = ()
     joint_p_value: float | None = None
-    joint_effect_lower_bound: float | None = None
+    l_theta: float | None = None
 
 
 if ACTIONS[COMMON_INDEX] != (1, (0, 0, 0, 0)):

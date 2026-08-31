@@ -103,6 +103,7 @@ inherit the completed continuation's evidence or disposition.
 
 - `docs/research/candidates/commitment_residual_triggered_options/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_COMMON_HISTORY_GATE_R01_COMPETENCE_AND_CENSUS_FREEZE_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PILOT_EVIDENCE_20260831.md`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_V4_PREACTIVITY_SUPPORT_GATE_INTAKE.md`
@@ -189,3 +190,60 @@ registered addresses and their supported script-reachable audit rows under the f
 continuation. It cannot establish a seed/address superpopulation result, probability coverage,
 information gain, hypothesis-class superiority or equality, residual-semantic uniqueness,
 full-policy return, MARL value, arbitrary `K`, warehouse or UAV value, safety, or deployment value.
+
+## Production integration closure — 2026-08-31
+
+The blocker recorded by the first official result-blind preflight has since been closed in code.
+The earlier receipt remains historical evidence for its exact code state; it is not rewritten or
+reused as a current launch admission.
+
+Current source binds readiness to the import-safe frozen capability
+`CRTO_SINGLE_PASS_PRODUCTION_V1`. A confirmation invocation repeats the result-blind final-namespace
+scan, then launches one isolated CPU worker which creates a second fresh 4 GiB and `assess-run`
+receipt before importing Torch-dependent components or creating a model, optimizer, staging root,
+or result. Each assigned tape has one full production traversal. Calibration and structural support
+are assessed before matched paths; all paths reach LONG before only the eight RAW-LONG K8
+competence cells are inspected. A support or competence stop does not evaluate or serialize
+TRUE/DERANGED polarity. Only a competence pass reaches the six representation-by-budget cells and
+exact fixed-eight analysis. Validated outputs use create-only dual-target publication.
+
+This establishes transaction conformance, not long-production readiness. Full confirmation is
+currently withheld as `WITHHOLD_LONG_PRODUCTION` because the Python/native-host execution path has
+no accepted per-stage throughput/efficiency evidence and no vectorized/native parallel production
+envelope. The current preflight therefore retains a failed long-production efficiency gate. Only
+the fixed two-slot RAW pilot was launch-eligible at that boundary; its valid disposition below now
+consumes that pilot object.
+
+The fixed development object `CRTO-COMMON-HISTORY-RAW-PILOT-20260831-01`, namespace `2026083191`,
+slots `(0,1)`, is also implemented as a RAW-only LONG feasibility entry. Its CLI exposes only fresh
+output and resource-receipt paths. It performs a fresh memory admission before pilot RNG/tape
+construction, then repeats memory admission and performs `assess-run` after its result-blind scan
+and before Torch-dependent work. It filters to prospectively supported cells, records support
+failure without partial RAW outcome publication, and cannot instantiate or read final namespace
+`2026083001` or any TRUE/DERANGED path.
+
+Focused implementation tests and source isolation pass. Attempt `2026-08-31.1` created passing
+operator, pre-scan, and post-scan launch-memory receipts, then stopped before `assess-run` because
+its uppercase object-derived run ID violated the shared lowercase grammar. It was an incomplete
+assignment with no model, optimizer, root, output, result, polarity, or object consumption. The
+result-blind repair fixed the operational ID as
+`crto_common_history_raw_pilot_20260831_01_launch` without changing the scientific object.
+
+Fresh replacement `2026-08-31.2` then completed validly as
+`NONIDENTIFYING_PILOT_K8_SUPPORT`; its external result and direction receipt are byte-identical and
+pass direct validation. All `1,152/1,152` TRAIN plus EVALUATION boundaries were structurally
+retained and supported, but the fixed K8 material counts were KEEP/REPLAN `0/14` in slot 0 and
+`0/18` in slot 1. The support stop created two predictors and no RAW gate, optimizer update,
+checkpoint, competence cell, TRUE/DERANGED activity, or final-namespace read. Exact work was
+`3,632` branches and `484,096` total primitive team steps; wall time was `736.922` seconds and peak
+RSS `1,968,742,400` bytes, with every resource and work bound passing.
+
+The valid support branch consumes only the fixed two-slot pilot object. It establishes that this
+complete pilot target cannot identify two-sided RAW-LONG competence because neither slot contains a
+material KEEP row; it does not establish RAW incompetence or any representation, optimization,
+policy, MARL, or confirmation polarity. The disjoint fixed-eight confirmation remains live and
+untouched, but it has no pilot feasibility pass and remains separately withheld from long
+production. Before confirmation, the cheapest discriminator is an exact derivation or new disjoint
+support-only census asking whether the frozen K8 first-boundary law can produce any
+`max_replacement G16-G16(KEEP)<=-0.02` witness, without reading final namespace `2026083001` or
+training a learner. See `CRTO_RAW_PILOT_EVIDENCE_20260831.md`.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import fields
+from dataclasses import asdict, fields
+import json
 from math import exp, log
 
 import pytest
@@ -77,7 +78,11 @@ def test_complete_panel_preserves_four_exact_tape_contrasts_and_three_gap_mappin
     assert first.d_1m_numerator == first.d_1c_numerator
     assert first.d_0m == first.d_0m_numerator / 364
     assert first.d_1m == first.d_1m_numerator / 364
-    assert result.minimum_raw_gap_mean == pytest.approx(21_046 / (2 * 364 * N))
+    assert [row.raw_gap_mean for row in result.gaps] == pytest.approx([
+        21_046 / (2 * 364 * N),
+        21_046 / (2 * 364 * N),
+        42_091 / (2 * 364 * N),
+    ])
 
 
 def test_exact_integer_first_passing_boundaries_establish_only_the_joint_claim():
@@ -87,7 +92,7 @@ def test_exact_integer_first_passing_boundaries_establish_only_the_joint_claim()
     assert result.disposition == contracts.Disposition.ESTABLISHED.value
     assert result.p_iut == max(row.p_value_upper for row in result.gaps)
     assert result.p_iut < 0.05
-    assert result.joint_value_raw_lower > 0.0
+    assert result.l_theta > 0.0
     assert [row.first_passing_raw_sum for row in result.gaps] == [21_046, 21_046, 42_091]
     assert all(row.component_test_passed for row in result.gaps)
 
@@ -110,7 +115,35 @@ def test_preceding_integer_in_each_component_fails_whole_bundle(
     assert result.joint_claim_established is False
     assert result.disposition == contracts.Disposition.CLOSED.value
     assert result.p_iut >= 0.05
-    assert result.joint_value_raw_lower <= 0.0
+    assert result.l_theta <= 0.0
+
+
+def test_heterogeneous_support_joint_lower_is_normalized_before_taking_minimum():
+    result = analysis.analyze_complete_panel(
+        _inventory_for_raw_sums(g_a_rh=25_000, g_a_hr=30_000, g_common=46_500)
+    )
+    normalized_lowers = tuple(
+        analysis.invert_marginal_lower(row.normalized_mean, sample_size=N) - 0.5
+        for row in result.gaps
+    )
+    assert normalized_lowers.index(min(normalized_lowers)) == 2  # g_COMMON
+    assert result.l_theta == pytest.approx(normalized_lowers[2], abs=1e-15)
+
+    raw_scale_lowers = (
+        normalized_lowers[0] * 363 / 364,
+        normalized_lowers[1] * 363 / 364,
+        normalized_lowers[2] * 2 * 363 / 364,
+    )
+    assert raw_scale_lowers.index(min(raw_scale_lowers)) == 0  # g_A_RH
+
+    payload = json.loads(json.dumps(asdict(result)))
+    assert set(payload) == {
+        "disposition", "joint_claim_established", "p_iut", "l_theta",
+        "gaps", "tape_contrasts", "cell_means",
+    }
+    assert all("marginal" not in key and "lower" not in key for gap in payload["gaps"] for key in gap)
+    assert "minimum_raw_gap_mean" not in payload
+    assert "joint_value_raw_lower" not in payload
 
 
 def test_iut_is_max_component_p_and_components_have_no_independent_claim_field():
@@ -258,7 +291,6 @@ def test_joint_iut_p_value_disagreement_fails_closed(monkeypatch):
             p_value_upper=1.0,
             first_passing_raw_sum=1,
             component_test_passed=True,
-            audit_marginal_raw_lower=0.01,
         )
 
     monkeypatch.setattr(analysis, "_gap_evidence", inconsistent_gap)
