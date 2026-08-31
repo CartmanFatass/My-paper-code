@@ -1,7 +1,4 @@
-"""Fail-closed production guard and paired logical-work receipts.
-
-No production trainer is supplied by this result-blind scaffold.
-"""
+"""Fail-closed production guards and explicitly bounded TEST_ONLY chains."""
 
 from __future__ import annotations
 
@@ -11,7 +8,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .contracts.core import (
-    FRRIE_SEALED_SEED_PACKET_V1, LEARNED_ARMS, ContractError,
+    FRRIE_SEALED_SEED_PACKET_V1, INFERENCE_CONTRACT, LEARNED_ARMS, ContractError,
     manifest_packet_contract, validate_manifest,
 )
 from .host import (
@@ -30,6 +27,19 @@ class ResumeContractMismatch(ContractError):
 
 class ProductionTrainingUnavailable(RuntimeError):
     pass
+
+
+INFERENCE_BLOCKER = "SIMULTANEOUS_MEAN_INFERENCE_UNRESOLVED_AT_24_BLOCKS"
+
+
+def guard_v2_production_run(manifest0: Mapping[str, Any]) -> None:
+    """Refuse current V2 result activity at its earliest semantic gate."""
+    manifest = validate_manifest(manifest0)
+    if manifest["inference"] == INFERENCE_CONTRACT and manifest["inference"]["status"] == INFERENCE_BLOCKER:
+        raise ProductionTrainingUnavailable(INFERENCE_BLOCKER)
+    raise ProductionTrainingUnavailable(
+        "V2 production orchestration requires a ready prospective preflight"
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -139,7 +149,7 @@ def guard_production_run(
 
 
 def run_test_only_chain(*, steps: int = 2) -> dict[str, Any]:
-    """Bounded structural smoke chain, never admitted as production evidence."""
+    """Legacy V1 bounded smoke retained only for explicit TEST_ONLY callers."""
     if isinstance(steps, bool) or not isinstance(steps, int) or not 1 <= steps <= 8:
         raise ContractError("TEST_ONLY chain steps must be in [1,8]")
     backend = TestOnlyNativeBackend()
@@ -199,4 +209,173 @@ def run_test_only_chain(*, steps: int = 2) -> dict[str, Any]:
         "schema": "TEST_ONLY_FRRIE_CHAIN_V1", "TEST_ONLY": True,
         "production_admissible": False, "steps": steps,
         "trajectory_contracts": trajectory_contracts,
+    }
+
+
+def _clone_episode(episode: Any) -> Any:
+    """Give each equal-weight TEST_ONLY batch position a distinct container."""
+    from .training import RSCFEpisode
+    return RSCFEpisode(**{
+        field: getattr(episode, field)
+        for field in (
+            "roster_size", "selected_probabilities", "q_targets", "legal_masks",
+            "factual_actions", "all_probabilities", "critic_values", "terminal_return",
+        )
+    })
+
+
+def run_test_only_v2_chain(*, exercise_package_native: bool = False) -> dict[str, Any]:
+    """One-update external-action V2 semantic witness, never result evidence.
+
+    The lane deliberately uses TEST_ONLY identities and in-memory checkpoint
+    bytes.  It creates no production root, seed packet, receipt, or schema and
+    cannot be enlarged through arguments.
+    """
+    import io
+    import numpy as np
+    import torch
+
+    from .arms import initialize_paired_arms
+    from .evaluator import probability_vector_tv
+    from .native_adapter import test_only_package_native_preflight
+    from .orchestration import (
+        OriginCoordinate, TestOnlyExternalEnvironment,
+        assert_paired_initialization, capture_rscf_episode,
+    )
+    from .policy import make_actor_critic
+    from .rng import AddressedRNG
+    from .training import RSCFTrainer, TRAIN_ROSTER_ORDER
+
+    native_witness: dict[str, Any]
+    if exercise_package_native:
+        try:
+            native_witness = test_only_package_native_preflight(
+                {
+                    "device": "cpu", "gpu": False, "model_dtype": "float32",
+                    "reduction_dtype": "float64", "native_width": 1,
+                    "workers": 1, "threads": 1, "network": False,
+                },
+                build_if_absent=True,
+            )
+        except (OSError, RuntimeError) as exc:
+            native_witness = {
+                "schema": "TEST_ONLY_EXTERNAL_ADAPTER_FALLBACK_V2",
+                "TEST_ONLY": True,
+                "production_admissible": False,
+                "reason": type(exc).__name__,
+            }
+    else:
+        native_witness = {
+            "schema": "TEST_ONLY_EXTERNAL_ADAPTER_FALLBACK_V2",
+            "TEST_ONLY": True,
+            "production_admissible": False,
+            "reason": "PACKAGE_NATIVE_EXERCISE_NOT_REQUESTED",
+        }
+
+    phy_arm, edge_arm = initialize_paired_arms(
+        AddressedRNG(b"V" * 32), "FRRIE-TEST-ONLY-V2-INITIALIZATION"
+    )
+    models = {
+        "PHY_TRUST": make_actor_critic(phy_arm),
+        "EDGE_FLEX": make_actor_critic(edge_arm),
+    }
+    assert_paired_initialization(models)
+    trainers = {arm: RSCFTrainer(model) for arm, model in models.items()}
+    update_receipts: dict[str, dict[str, Any]] = {}
+    branch_shapes: dict[str, dict[str, list[int]]] = {}
+    replay_audits: dict[str, dict[str, dict[str, Any]]] = {}
+    common_uniforms: dict[int, Any] = {
+        roster: np.full((12, roster), np.float32(0.5), dtype=np.float32)
+        for roster in (9, 15)
+    }
+    for arm in LEARNED_ARMS:
+        witnesses: dict[int, Any] = {}
+        replay_audits[arm] = {}
+        for roster in (9, 15):
+            width = roster // 3
+            audit: dict[str, Any] = {}
+            witnesses[roster] = capture_rscf_episode(
+                model=models[arm],
+                environment=TestOnlyExternalEnvironment(roster),
+                environment_tape={"TEST_ONLY": True, "roster": roster},
+                action_uniforms=common_uniforms[roster],
+                origins=(
+                    OriginCoordinate(0, 0, 0),
+                    OriginCoordinate(1, 0, width),
+                    OriginCoordinate(2, 0, 2 * width),
+                ),
+                audit_out=audit,
+            )
+            replay_audits[arm][str(roster)] = audit
+        batch = [_clone_episode(witnesses[roster]) for roster in TRAIN_ROSTER_ORDER]
+        receipt = trainers[arm].update(batch)
+        update_receipts[arm] = asdict(receipt)
+        branch_shapes[arm] = {
+            str(roster): list(witnesses[roster].q_targets.shape) for roster in (9, 15)
+        }
+    parity_fields = ("backward_calls", "optimizer_steps", "episodes", "roster_counts")
+    if any(
+        update_receipts[LEARNED_ARMS[0]][field]
+        != update_receipts[LEARNED_ARMS[1]][field]
+        for field in parity_fields
+    ):
+        raise ContractError("TEST_ONLY paired update work differs")
+
+    # Direct arm + optimizer bytes, in-memory TEST_ONLY checkpoint roundtrip.
+    state = {
+        "schema": "TEST_ONLY_FRRIE_CHECKPOINT_V2",
+        "TEST_ONLY": True,
+        "production_admissible": False,
+        "update": 1,
+        "evaluation_cursor": 0,
+        "arms": {arm: models[arm].parameter_bytes() for arm in LEARNED_ARMS},
+        "optimizers": {},
+    }
+    for arm in LEARNED_ARMS:
+        buffer = io.BytesIO()
+        torch.save(trainers[arm].optimizer.state_dict(), buffer)
+        state["optimizers"][arm] = buffer.getvalue()
+    checkpoint_buffer = io.BytesIO()
+    torch.save(state, checkpoint_buffer)
+    checkpoint_bytes = checkpoint_buffer.getvalue()
+    restored = torch.load(io.BytesIO(checkpoint_bytes), map_location="cpu", weights_only=False)
+    if restored["schema"] != "TEST_ONLY_FRRIE_CHECKPOINT_V2" or restored["update"] != 1:
+        raise ContractError("TEST_ONLY checkpoint roundtrip differs")
+    if any(restored["arms"][arm] != state["arms"][arm] for arm in LEARNED_ARMS):
+        raise ContractError("TEST_ONLY direct arm bytes changed on checkpoint roundtrip")
+
+    # Same observation and incoming hidden; rotated shadow does not propagate.
+    model = models["PHY_TRUST"]
+    environment = TestOnlyExternalEnvironment(9)
+    environment.reset({"TEST_ONLY": True})
+    frame = environment.observe()
+    observations = torch.as_tensor(frame.observations, dtype=torch.float32)
+    roles = torch.as_tensor(frame.roles, dtype=torch.int64)
+    incoming = model.initial_hidden(9)
+    shadow_environment_before = environment.snapshot()
+    intact = model.actor_step(observations, roles, incoming)
+    shadow = model.shadow_step(observations, roles, incoming)
+    if (not torch.equal(incoming, torch.zeros_like(incoming))
+            or environment.snapshot() != shadow_environment_before):
+        raise ContractError("TEST_ONLY shadow forward propagated state")
+    tv = probability_vector_tv(
+        intact.probabilities.detach().tolist(),
+        shadow.probabilities.detach().tolist(),
+        roles.tolist(),
+    )
+    return {
+        "schema": "TEST_ONLY_FRRIE_EXTERNAL_ACTION_CHAIN_V2",
+        "TEST_ONLY": True,
+        "production_admissible": False,
+        "updates": 1,
+        "evaluation_episodes": 1,
+        "native": native_witness,
+        "origin_suffix_q_shapes": branch_shapes,
+        "origin_suffix_audits": replay_audits,
+        "paired_update_receipts": update_receipts,
+        "checkpoint_roundtrip": True,
+        "evaluation_adaptation": False,
+        "shadow_native_steps": 0,
+        "tv_reducer_shape": [len(tv)],
+        "scientific_values_published": False,
     }

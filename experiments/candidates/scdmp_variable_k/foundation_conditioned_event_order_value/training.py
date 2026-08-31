@@ -1,7 +1,7 @@
 """Schedule-independent fixed-13 PPO/GAE/AdamW structure for FCEOV.
 
-This module exposes the exact algebra and resume state.  It deliberately has
-no rollout driver, result branch, seed selection, retry, or training CLI.
+This module exposes the exact algebra, native width-12 rollout driver, and
+resume state.  It has no result branch, seed selection, retry, or training CLI.
 """
 
 from __future__ import annotations
@@ -12,6 +12,7 @@ from typing import Mapping, Sequence
 
 import torch
 from torch import Tensor
+from torch.distributions import Categorical
 
 from .contracts import (
     EPISODES_PER_UPDATE,
@@ -53,6 +54,25 @@ DISTURBANCE_MAGNITUDES = {
 
 class TrainingContractError(ValueError):
     pass
+
+
+@dataclass(frozen=True, slots=True)
+class UpdateObservation:
+    update: int
+    record_count: int
+    optimizer_step: int
+    episodes_complete: int
+
+
+@dataclass(frozen=True, slots=True)
+class RolloutBatch:
+    observations: Tensor
+    actions: Tensor
+    old_log_probabilities: Tensor
+    old_values: Tensor
+    primitive_rewards: tuple[tuple[float, ...], ...]
+    nonterminal: Tensor
+    episode_offsets: tuple[int, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -209,6 +229,176 @@ def summarize_resource_usage() -> dict[str, int]:
     ):
         raise RuntimeError("foundation-query ceiling decomposition differs")
     return value
+
+
+def _training_reset(slot: EpisodeSlot, source: AddressRNG):
+    from .host_bridge import ResetLane
+    from ..target_bound_competent_controller_order_value.config import FORMATION_ROTATE, HOOK_HANDOFF
+
+    v, y, phi = training_initial_draws(source, slot)
+    events = (HOOK_HANDOFF, FORMATION_ROTATE) if slot.graph == "HR" else (FORMATION_ROTATE, HOOK_HANDOFF)
+    return ResetLane(events, K_TARGET, v, y, phi)
+
+
+def _training_renewal(slot: EpisodeSlot, source: AddressRNG, *, tick: int, action: int, active: bool):
+    from .host_bridge import RenewalLane
+
+    def component(name: str) -> tuple[float, ...]:
+        return tuple(
+            training_disturbance(source, slot, tick=min(tick + offset, HORIZON_TICKS - 1), component=name)
+            for offset in range(K_TARGET)
+        )
+    return RenewalLane(action, component("eta_v"), component("eta_y"), component("eta_omega"), active)
+
+
+def collect_update_rollout(model: object, source: AddressRNG, *, update: int) -> RolloutBatch:
+    """Collect one complete 12-lane fixed-13 update through the native batch host."""
+
+    from .foundation import FoundationActorCritic
+    from .host_bridge import (
+        HostBridgeError, NativeBatch, validate_native_reset_outputs, validate_native_transition,
+        validate_terminal_endpoints,
+    )
+
+    if not isinstance(model, FoundationActorCritic) or not isinstance(source, AddressRNG):
+        raise TypeError("native foundation rollout requires the FCEOV model and addressed RNG")
+    if isinstance(update, bool) or not isinstance(update, int) or not 1 <= update <= FOUNDATION_UPDATES:
+        raise TrainingContractError("rollout update is outside the fixed schedule")
+    slots = build_training_plan()[(update - 1) * EPISODES_PER_UPDATE : update * EPISODES_PER_UPDATE]
+    per_episode: list[list[tuple[Tensor, Tensor, Tensor, Tensor, tuple[float, ...], bool]]] = [
+        [] for _ in slots
+    ]
+    renewal_indices = [0] * EPISODES_PER_UPDATE
+    resets = tuple(_training_reset(slot, source) for slot in slots)
+    with NativeBatch(resets) as session:
+        outputs = session.initial
+        try:
+            validate_native_reset_outputs(
+                resets, tuple(outputs), width=EPISODES_PER_UPDATE, context="foundation training"
+            )
+        except HostBridgeError as error:
+            raise TrainingContractError(str(error)) from error
+        while any(row.active for row in outputs):
+            active = tuple(index for index, row in enumerate(outputs) if row.active)
+            observations = torch.tensor(tuple(outputs[index].observation for index in active), dtype=torch.float32)
+            with torch.no_grad():
+                evaluated = model(observations)
+                actions = sample_training_actions(
+                    evaluated.logits,
+                    source,
+                    tuple(slots[index] for index in active),
+                    tuple(renewal_indices[index] for index in active),
+                )
+                distribution = Categorical(logits=evaluated.logits)
+                log_probabilities = distribution.log_prob(actions)
+            by_lane = {index: offset for offset, index in enumerate(active)}
+            following = session.renew(tuple(
+                _training_renewal(
+                    slot,
+                    source,
+                    tick=outputs[index].tick,
+                    action=int(actions[by_lane[index]]) if index in by_lane else 0,
+                    active=index in by_lane,
+                )
+                for index, slot in enumerate(slots)
+            ))
+            try:
+                validate_native_transition(
+                    tuple(outputs), tuple(following), width=EPISODES_PER_UPDATE,
+                    context="foundation training",
+                )
+            except HostBridgeError as error:
+                raise TrainingContractError(str(error)) from error
+            for index in active:
+                offset = by_lane[index]
+                after = following[index]
+                count = after.last_hold_reward_count
+                delta = after.tick - outputs[index].tick
+                trace = tuple(after.last_hold_rewards)
+                if (
+                    count != delta
+                    or len(trace) != K_TARGET
+                    or any(value != 0.0 for value in trace[count:])
+                    or not math.isclose(
+                        math.fsum(trace[:count]),
+                        after.cumulative_reward - outputs[index].cumulative_reward,
+                        rel_tol=1e-12,
+                        abs_tol=1e-12,
+                    )
+                ):
+                    raise TrainingContractError("native rollout hold trace differs")
+                per_episode[index].append((
+                    observations[offset].detach().clone(),
+                    actions[offset].detach().clone(),
+                    log_probabilities[offset].detach().clone(),
+                    evaluated.value[offset].detach().clone(),
+                    trace[:count],
+                    bool(after.active),
+                ))
+                renewal_indices[index] += 1
+                if renewal_indices[index] > 28:
+                    raise TrainingContractError("foundation query ceiling exceeded")
+            outputs = following
+    if len(outputs) != EPISODES_PER_UPDATE or any(row.active or not row.terminal for row in outputs):
+        raise TrainingContractError("native training final width/state differs")
+    try:
+        validate_terminal_endpoints(tuple(outputs), context="foundation training")
+    except HostBridgeError as error:
+        raise TrainingContractError(str(error)) from error
+    if any(not rows or rows[-1][-1] for rows in per_episode):
+        raise TrainingContractError("foundation update contains an incomplete episode")
+    flat = tuple(item for rows in per_episode for item in rows)
+    offsets = [0]
+    for rows in per_episode:
+        offsets.append(offsets[-1] + len(rows))
+    return RolloutBatch(
+        torch.stack(tuple(row[0] for row in flat)),
+        torch.stack(tuple(row[1] for row in flat)).to(torch.int64),
+        torch.stack(tuple(row[2] for row in flat)).to(torch.float32),
+        torch.stack(tuple(row[3] for row in flat)).to(torch.float32),
+        tuple(row[4] for row in flat),
+        torch.tensor(tuple(row[5] for row in flat), dtype=torch.bool),
+        tuple(offsets),
+    )
+
+
+def train_one_update(model: object, optimizer: "ExactAdamW", source: AddressRNG, *, update: int) -> UpdateObservation:
+    """Perform the exact three-epoch/four-minibatch PPO update."""
+
+    from .foundation import FoundationActorCritic
+
+    if not isinstance(model, FoundationActorCritic) or not isinstance(optimizer, ExactAdamW):
+        raise TypeError("foundation training requires the isolated model and exact optimizer")
+    if optimizer.step_index != (update - 1) * OPTIMIZER_STEPS_PER_UPDATE:
+        raise TrainingContractError("optimizer/update frontier differs")
+    rollout = collect_update_rollout(model, source, update=update)
+    targets = duration_correct_gae(
+        rollout.primitive_rewards,
+        rollout.old_values,
+        rollout.nonterminal,
+        episode_offsets=rollout.episode_offsets,
+    )
+    for epoch in epoch_keyed_minibatches(source, update=update, record_count=len(rollout.primitive_rewards)):
+        for indices in epoch:
+            index = torch.tensor(indices, dtype=torch.int64)
+            for parameter in optimizer.parameters:
+                parameter.grad = None
+            evaluated = model(rollout.observations[index])
+            distribution = Categorical(logits=evaluated.logits)
+            loss = joint_ppo_loss(
+                current_log_probability=distribution.log_prob(rollout.actions[index]),
+                current_value=evaluated.value,
+                current_entropy=distribution.entropy(),
+                old_log_probability=rollout.old_log_probabilities[index],
+                value_target=targets.value_targets[index],
+                normalized_advantage=targets.normalized_advantages[index],
+            )
+            loss.total.backward()
+            clip_global_gradient(optimizer.parameters)
+            optimizer.step()
+    if optimizer.step_index != update * OPTIMIZER_STEPS_PER_UPDATE:
+        raise TrainingContractError("optimizer did not reach the exact update frontier")
+    return UpdateObservation(update, len(rollout.primitive_rewards), optimizer.step_index, EPISODES_PER_UPDATE)
 
 
 @dataclass(frozen=True, slots=True)
@@ -613,10 +803,11 @@ for update in range(1, 161):
 __all__ = [
     "ADAMW_LR", "EpisodeSlot", "ExactAdamW", "GAETargets", "GAMMA", "GAE_LAMBDA",
     "JointLoss", "OptimizerSnapshot", "TrainingContractError", "build_training_plan",
-    "clip_global_gradient", "duration_correct_gae", "epoch_keyed_minibatches", "initial_public_draws",
+    "RolloutBatch", "UpdateObservation", "clip_global_gradient", "collect_update_rollout",
+    "duration_correct_gae", "epoch_keyed_minibatches", "initial_public_draws",
     "joint_ppo_loss", "sample_actions_from_logits", "sample_training_actions",
     "split_four_near_equal", "strict_clip", "training_action_uniform", "training_disturbance",
     "training_initial_draws", "validate_training_rng_contract",
     "strict_inverse_cdf", "summarize_resource_usage",
-    "three_epoch_minibatches", "tie_mean_min",
+    "three_epoch_minibatches", "tie_mean_min", "train_one_update",
 ]

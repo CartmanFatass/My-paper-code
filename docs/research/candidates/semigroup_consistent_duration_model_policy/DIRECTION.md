@@ -83,6 +83,7 @@ disposition; historical records remain provenance rather than current workflow a
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_PAUSE_HANDOFF_20260829.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
 
 ## Provenance boundary
 
@@ -105,3 +106,38 @@ No foundation training, competence mission, scientific 2×3 panel, checkpoint, o
 run, and no result command exists. Production next requires a fresh RNG master and manifest/resource
 preflight, the 160-update foundation run, nonzero checkpoint-resume observation, the 120-mission
 competence gate, and a separately frozen direct result command before the width-144 panel.
+
+## FCEOV production-prerequisite wave and inference audit — 2026-08-31
+
+The private production pipeline is now implemented and its exact eight-file focused suite passes
+`88` tests. It binds one internally generated OS-cryptographic 256-bit master with no CLI seed,
+master, retry or redraw control; 160 updates by 12 complete fixed-13 episodes; the sole final
+checkpoint at update `160` and AdamW step `1,920`; fresh-genesis direct restore equality; 120
+ordered competence missions with raw-record recomputation; and the precommitted native width-144
+panel. Shared native guards bind exact product-law reset observations and counters, fixed-13
+transitions, absorbed-lane immutability and terminal endpoint semantics. The rejected 18-action
+selector remains absent.
+
+The direct prospective preflight opens and closes a real width-144 native session and passes without
+creating the reserved result root. The phase entry is nevertheless not a READY result command: it
+returns `SCIENTIFIC_INFERENCE_HOLD` after preflight and before root creation, master generation,
+model materialization, training, competence or panel execution.
+
+For each tape contrast, `d` lies in `[-363/364,363/364]`. The registered 24-block paired
+Student-t rule has no established finite-sample coverage under this bounded discrete law, and its
+zero-variance branch admits an exact false positive. If all four contrasts equal `+1/364` with
+probability `127/128` and `-363/364` with probability `1/128`, every population contrast equals
+`-59/11648`, while the historical rule reports all four positive with probability
+`(127/128)^24 = 0.8284189626...`.
+
+This is an inference counterexample, not an empirical FCEOV result or mechanism polarity. A
+Hoeffding/Bonferroni repair at the current width would subtract `0.6026319107430721` from every
+sample mean, so strict positivity would require all four means to exceed that value. The analytic
+`.84/.94/.66` load fixture supplies no full-mission utility or power justification and remains
+distinct from the native threshold-classification observation.
+
+Direction-local recommendation is `KEEP_DIRECTION_HOLD_RESULT_ENTRY`. Do not generate a master or
+enable production until Root prospectively freezes a finite-sample-valid inference method, material
+margin or explicit zero margin, tape count, stop rule, atomic result law and revised resource
+envelope. No prior result polarity transfers, and this direction-local hold does not mutate
+Portfolio authority.

@@ -6,7 +6,7 @@ from typing import Any, Mapping
 import os,tempfile
 from .contract import CONTRACT_ID,FEATURE_NAMES,K_TRAIN,MODEL_SPEC,OPTIMIZER_SPEC,SCHEMA_VERSION,SEED_SLOTS,contract_spec
 from .rng import rng_contract
-CHECKPOINT_FORMAT="UCOPE_CPA_SINGLE_SHARED_CHECKPOINT_V1"
+CHECKPOINT_FORMAT="UCOPE_CPA_SINGLE_SHARED_CHECKPOINT_V2"
 def _torch():
     try: import torch
     except ImportError as exc: raise RuntimeError("checkpoint operations require PyTorch") from exc

@@ -6,7 +6,10 @@ import math
 from dataclasses import asdict, dataclass
 from typing import Any, Mapping, Protocol, runtime_checkable
 
-from .contracts.core import ContractError, HOST_ID, NATIVE_ABI, NATIVE_COMPONENT, SOURCE_ID
+from .contracts.core import (
+    ContractError, HOST_ID, NATIVE_ABI, NATIVE_BINDING_KIND, NATIVE_COMPONENT, SOURCE_ID,
+)
+from .native.native_abi import NATIVE_STEP_ABI
 
 HORIZON = 12
 PUBLIC_ROLES = ("WEST_SURVEYOR", "EAST_SURVEYOR", "RIDGE_RELAY")
@@ -48,20 +51,22 @@ class NativeContract:
     def validate(self, *, production: bool) -> "NativeContract":
         if self.host_id != HOST_ID or self.source_id != SOURCE_ID:
             raise NativeBackendUnavailable("backend host/source differs from the fresh FRRIE contract")
-        if self.component != NATIVE_COMPONENT or self.abi != NATIVE_ABI:
-            raise NativeBackendUnavailable("backend component/ABI differs from the fresh FRRIE contract")
+        if self.component != NATIVE_COMPONENT:
+            raise NativeBackendUnavailable("backend component differs from the fresh FRRIE contract")
         if self.python_fallback:
             raise NativeBackendUnavailable("Python fallback is forbidden")
         if production and self.test_only:
             raise NativeBackendUnavailable("TEST_ONLY backends are categorically forbidden in production")
+        if not self.test_only and self.abi != NATIVE_STEP_ABI:
+            raise NativeBackendUnavailable("legacy autonomous native ABI is production-inadmissible")
         if self.device != "cpu" or self.dtype != "float32" or self.reduction_dtype != "float64":
             raise NativeBackendUnavailable("native CPU/FP32/float64 reduction contract mismatch")
         for field in ("native_width", "workers", "threads"):
             value = getattr(self, field)
             if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
                 raise NativeBackendUnavailable(f"native {field} must be positive")
-        if self.binding_kind != "FRRIE_NATIVE_CTYPES_V1" and not self.test_only:
-            raise NativeBackendUnavailable("native binding kind is not the direct FRRIE ctypes seam")
+        if self.binding_kind != NATIVE_BINDING_KIND and not self.test_only:
+            raise NativeBackendUnavailable("native binding kind is not the direct external-action ctypes seam")
         return self
 
 
@@ -78,13 +83,20 @@ def admit_native_backend(backend: Any, *, production: bool = True) -> NativeBack
         raise NativeBackendUnavailable("a caller-supplied native backend is required")
     backend.contract.validate(production=production)
     if production:
-        raise NativeBackendUnavailable("fresh package-owned production native adapter is not bundled")
+        # Imported lazily so the package adapter may reuse NativeContract
+        # without a module-import cycle.
+        from .native_adapter import admit_package_native_adapter
+        return admit_package_native_adapter(backend)  # type: ignore[return-value]
     if not callable(getattr(backend, "preflight", None)) or not callable(getattr(backend, "rollout", None)):
         raise NativeBackendUnavailable("native backend protocol is incomplete")
     return backend
 
 
 def preflight_native_backend(backend: NativeBackend, resource_ceiling: Mapping[str, int]) -> Mapping[str, Any]:
+    if backend.contract.test_only is not True:
+        raise NativePreflightFailed(
+            "backend-written preflight receipts are production-inadmissible; use direct prospective preflight"
+        )
     receipt = backend.preflight(resource_ceiling)
     required = {
         "schema", "ok", "fresh", "complete",
@@ -110,8 +122,11 @@ def preflight_native_backend(backend: NativeBackend, resource_ceiling: Mapping[s
 class Trajectory:
     kind: str
     observations: tuple[Any, ...]
+    roles: tuple[Any, ...]
+    legal_role_masks: tuple[Any, ...]
     actions: tuple[Any, ...]
     rewards: tuple[Any, ...]
+    endpoint_primitives: dict[str, Any]
     terminal: bool
     tape_contract: dict[str, Any]
     side_effect_count: int
@@ -122,7 +137,7 @@ class Trajectory:
     def from_backend(cls, value: Mapping[str, Any], expected_kind: str, request: Mapping[str, Any]) -> "Trajectory":
         expected_fields = {
             "schema", "kind", "purpose", "intervention", "roster", "observations", "roles", "legal_role_masks",
-            "actions", "rewards", "terminal", "complete", "tape_contract", "side_effect_count",
+            "actions", "rewards", "endpoint_primitives", "terminal", "complete", "tape_contract", "side_effect_count",
             "state_before", "state_after",
         }
         if set(value) != expected_fields or value.get("schema") != "FRRIE_NATIVE_TRAJECTORY_V1":
@@ -165,7 +180,12 @@ class Trajectory:
             for entity in range(roster):
                 mask = masks[step][entity]
                 action = actions[step][entity]
-                if mask != role_masks[roles[step][entity]]:
+                if (
+                    not isinstance(mask, list)
+                    or len(mask) != 6
+                    or any(type(legal) is not bool for legal in mask)
+                    or mask != role_masks[roles[step][entity]]
+                ):
                     raise ContractError("legal role masks must be six literal booleans with support")
                 if isinstance(action, bool) or not isinstance(action, int) or not 0 <= action < 6 or not mask[action]:
                     raise ContractError("native categorical action is illegal under its role mask")
@@ -176,20 +196,35 @@ class Trajectory:
             raise ContractError("roles must remain stable for the fixed-roster episode")
         if any(isinstance(reward, bool) or not isinstance(reward, (int, float)) or not math.isfinite(float(reward)) for reward in rewards):
             raise ContractError("native rewards must be finite scalars")
+        primitives = value["endpoint_primitives"]
+        if not isinstance(primitives, Mapping) or set(primitives) != {"dw", "de", "waste"}:
+            raise ContractError("endpoint primitives must contain exactly dw, de, and waste")
+        # The strict-support endpoint validator supplies literal-int, finite,
+        # and native-support checks.  Its return is intentionally discarded:
+        # trajectories retain primitives and do not silently replace them by
+        # a reduced scientific value.
+        native_endpoint(primitives["dw"], primitives["de"], primitives["waste"])
         if isinstance(value["side_effect_count"], bool) or not isinstance(value["side_effect_count"], int) or value["side_effect_count"] < 0:
             raise ContractError("side_effect_count must be a nonnegative literal integer")
         tape = value["tape_contract"]
         _validate_tape_contract(tape, request)
         return cls(
-            expected_kind, tuple(value["observations"]), tuple(value["actions"]),
-            tuple(value["rewards"]), value["terminal"], dict(tape),
+            expected_kind, tuple(value["observations"]), tuple(value["roles"]),
+            tuple(value["legal_role_masks"]), tuple(value["actions"]),
+            tuple(value["rewards"]), dict(primitives), value["terminal"], dict(tape),
             int(value["side_effect_count"]), dict(value["state_before"]), dict(value["state_after"]),
         )
 
 
 class FRRIEHost:
+    """Legacy whole-rollout wrapper retained only for bounded TEST_ONLY use."""
+
     def __init__(self, backend: NativeBackend):
-        self.backend = admit_native_backend(backend, production=True)
+        self.backend = admit_native_backend(backend, production=False)
+        if self.backend.contract.test_only is not True:
+            raise NativeBackendUnavailable(
+                "legacy whole-rollout FRRIEHost is TEST_ONLY and production-inadmissible"
+            )
 
     def factual(self, request: Mapping[str, Any]) -> Trajectory:
         payload = _validate_rollout_request(request)
@@ -231,6 +266,8 @@ class TestOnlyNativeBackend:
         )
 
     def preflight(self, resource_ceiling: Mapping[str, int]) -> Mapping[str, Any]:
+        if dict(resource_ceiling) != {"wall_seconds": 1}:
+            raise NativePreflightFailed("TEST_ONLY preflight is bounded to one declared wall second")
         return {
             "schema": "FRRIE_NATIVE_PREFLIGHT_V1",
             "ok": True,
@@ -243,6 +280,9 @@ class TestOnlyNativeBackend:
     def rollout(self, request: Mapping[str, Any]) -> Mapping[str, Any]:
         if request.get("trajectory_kind") not in {"FACTUAL", "SHADOW"}:
             raise ContractError("TEST_ONLY trajectory kind required")
+        step = request.get("step", 0)
+        if type(step) is not int or not 0 <= step < 8:
+            raise ContractError("TEST_ONLY rollout step must be a literal integer in [0,7]")
         shadow = request["trajectory_kind"] == "SHADOW"
         return {
             "schema": "FRRIE_NATIVE_TRAJECTORY_V1", "kind": request["trajectory_kind"],
@@ -255,16 +295,17 @@ class TestOnlyNativeBackend:
                 [False, False, True, True, True, True],
             ] for _ in range(HORIZON)],
             "actions": [[0, 5, 4] for _ in range(HORIZON)], "rewards": [0.0] * HORIZON,
+            "endpoint_primitives": {"dw": 0, "de": 0, "waste": 0.0},
             "terminal": True, "complete": True,
             "tape_contract": request.get("tape_contract", {
                 "schema": "FRRIE_ADDRESSED_TAPE_V1", "seed_block": "TEST_ONLY",
                 "purpose": "TEST_ONLY", "roster": 3, "update": 0, "episode": 0,
             }),
             "side_effect_count": 0 if shadow else 1,
-            "state_before": {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": request.get("step", 0)},
+            "state_before": {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": step},
             "state_after": (
-                {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": request.get("step", 0)}
-                if shadow else {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": request.get("step", 0) + 1}
+                {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": step}
+                if shadow else {"schema": "TEST_ONLY_NATIVE_STATE_V1", "step": step + 1}
             ),
         }
 

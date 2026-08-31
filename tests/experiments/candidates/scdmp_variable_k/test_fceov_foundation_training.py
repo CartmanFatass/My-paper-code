@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import inspect
 import math
+from types import SimpleNamespace
 
 import pytest
 import torch
 
 from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import (
+    contracts,
     foundation,
     rng as fceov_rng,
     training,
@@ -110,6 +112,137 @@ def test_training_plan_is_160_by_12_fixed_13_and_balanced_without_running_traini
         assert [row.episode for row in rows] == list(range(12))
         assert sum(row.graph == "HR" and row.q == 1 for row in rows) == 6
         assert sum(row.graph == "RH" and row.q == 0 for row in rows) == 6
+
+
+def test_native_update_rollout_is_one_complete_width_12_fixed_13_batch(monkeypatch):
+    from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import host_bridge
+
+    captured = []
+
+    def output(*, tick, active, terminal, rewards=(), cumulative_reward=0.0, ticks_advanced=None, observation=None):
+        return SimpleNamespace(
+            observation=(0.0,) * 18 if observation is None else observation,
+            tick=tick, active=active, terminal=terminal,
+            advanced=tick != 0, hold_k=0 if tick == 0 else 13, next_k=13,
+            last_hold_reward_count=len(rewards), last_hold_rewards=tuple(rewards) + (0.0,) * (13 - len(rewards)),
+            ticks_advanced=tick if ticks_advanced is None else ticks_advanced,
+            safe_dock=False, timeout=terminal and tick == 364,
+            cable_overload=terminal and tick < 364, gantry_contact=False,
+            attitude_loss=False, formation_loss=False, cumulative_reward=cumulative_reward,
+            cumulative_energy=0.0, energy_ticks=tick, dock_tick=None,
+        )
+
+    class Batch:
+        def __init__(self, resets):
+            reset_rows = tuple(resets)
+            captured.append(reset_rows)
+            self.initial = tuple(
+                output(
+                    tick=0, active=True, terminal=False,
+                    observation=contracts.PublicClaimState(
+                        v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                    ).observation(),
+                )
+                for row in reset_rows
+            )
+            self.calls = 0
+
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+
+        def renew(self, rows):
+            assert len(tuple(rows)) == 12
+            self.calls += 1
+            if self.calls == 1:
+                return tuple(output(tick=13, active=True, terminal=False, rewards=(0.1,) * 13, cumulative_reward=1.3) for _ in range(12))
+            return tuple(output(tick=26, active=False, terminal=True, rewards=(0.2,) * 13, cumulative_reward=3.9, ticks_advanced=13) for _ in range(12))
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", Batch)
+    model = foundation.FoundationActorCritic(MidpointUniforms())
+    observed = training.collect_update_rollout(
+        model, fceov_rng.TestAddressRNG(bytes(range(32))), update=1
+    )
+    assert len(captured) == 1 and len(captured[0]) == 12
+    assert {row.k_initial for row in captured[0]} == {13}
+    assert all(captured[0][index].initial_v == captured[0][index + 1].initial_v for index in range(0, 12, 2))
+    assert observed.observations.shape == (24, 18)
+    assert observed.episode_offsets == tuple(range(0, 25, 2))
+    assert not bool(observed.nonterminal[1::2].any())
+
+
+def test_native_update_rejects_tick_reward_count_mismatch_and_masked_lane_mutation(monkeypatch):
+    from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import host_bridge
+
+    def output(*, tick, active, terminal, count, cumulative, safe=False, ticks_advanced=13, observation=None):
+        rewards = (0.1,) * count + (0.0,) * (13 - count)
+        return SimpleNamespace(
+            observation=(0.0,) * 18 if observation is None else observation,
+            tick=tick, active=active, terminal=terminal,
+            advanced=tick != 0, hold_k=0 if tick == 0 else 13, next_k=13,
+            ticks_advanced=ticks_advanced, last_hold_reward_count=count,
+            last_hold_rewards=rewards, cumulative_reward=cumulative,
+            safe_dock=safe, timeout=terminal and not safe and tick == 364,
+            cable_overload=terminal and not safe and tick < 364,
+            gantry_contact=False, attitude_loss=False, formation_loss=False,
+            cumulative_energy=0.0, energy_ticks=tick, dock_tick=tick if safe else None,
+        )
+
+    def initial_for(resets):
+        return tuple(
+            output(
+                tick=0, active=True, terminal=False, count=0, cumulative=0.0,
+                ticks_advanced=0,
+                observation=contracts.PublicClaimState(
+                    v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                ).observation(),
+            )
+            for row in resets
+        )
+
+    class BadResetObservation:
+        def __init__(self, resets):
+            rows = list(initial_for(resets))
+            rows[0] = SimpleNamespace(**{**vars(rows[0]), "observation": (0.0,) * 18})
+            self.initial = tuple(rows)
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", BadResetObservation)
+    model = foundation.FoundationActorCritic(MidpointUniforms())
+    source = fceov_rng.TestAddressRNG(bytes(range(32)))
+    with pytest.raises(training.TrainingContractError, match="reset state/counters"):
+        training.collect_update_rollout(model, source, update=1)
+
+    class CountMismatch:
+        def __init__(self, resets): self.initial = initial_for(resets)
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+        def renew(self, rows):
+            return tuple(output(tick=1, active=False, terminal=True, count=13, cumulative=1.3, ticks_advanced=1) for _ in range(12))
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", CountMismatch)
+    with pytest.raises(training.TrainingContractError, match="frontier|hold trace"):
+        training.collect_update_rollout(model, source, update=1)
+
+    class MaskMutation:
+        def __init__(self, resets): self.initial, self.calls = initial_for(resets), 0
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+        def renew(self, rows):
+            self.calls += 1
+            if self.calls == 1:
+                return (
+                    output(tick=13, active=False, terminal=True, count=13, cumulative=1.3),
+                    *(output(tick=13, active=True, terminal=False, count=13, cumulative=1.3) for _ in range(11)),
+                )
+            return (
+                output(tick=26, active=True, terminal=False, count=13, cumulative=2.6),
+                *(output(tick=26, active=False, terminal=True, count=13, cumulative=2.6) for _ in range(11)),
+            )
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", MaskMutation)
+    with pytest.raises(training.TrainingContractError, match="absorbed.*mutated|reactivated"):
+        training.collect_update_rollout(model, source, update=1)
 
 
 def test_training_rng_addresses_pair_only_state_and_disturbance_and_use_uniform24_actions():

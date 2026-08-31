@@ -9,7 +9,7 @@ from copy import deepcopy
 import json
 
 CONTRACT_ID = "UCOPE-CONTEXTUAL-PAID-ACQUISITION-R01-20260830"
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 HORIZON = 12
 MARK_COUNT = 6
 LINKAGES = ("LINKED", "SEVERED")
@@ -41,7 +41,22 @@ OPTIMIZER_SPEC = {
     "gradient_clip": 1.0,
     "passes": 1,
 }
-RESOURCE_CEILING = {"workers": 1, "torch_threads": 1, "batch_size": BATCH_SIZE, "model_checkpoints_per_seed": 1}
+RESOURCE_CEILING = {
+    "workers": 1,
+    "torch_intraop_threads": 1,
+    "torch_interop_threads": 1,
+    "batch_size": BATCH_SIZE,
+    "model_checkpoints_per_seed": 1,
+    "checkpoint_cadence_batches": 1,
+    "maximum_result_wall_seconds": 1_800,
+}
+PRODUCTION_WORKLOAD = {
+    "seeds": 10,
+    "contexts": 8,
+    "root_episodes": 1_638_400,
+    "conditional_probe_tails": 819_200,
+    "optimizer_updates": 6_400,
+}
 
 # The scorer structure includes this order. Root and tail use distinct scorers, so stage is
 # represented structurally rather than by a tenth coordinate.
@@ -59,6 +74,14 @@ FEATURE_NAMES = (
 
 PRODUCTION_MODE = "PRODUCTION"
 TEST_ONLY_MODE = "TEST_ONLY"
+INFERENCE_READINESS = {
+    "ready": True,
+    "status": "READY",
+    "rule": "ALL_TEN_ALL_EIGHT_STRICT_POSITIVE_V1",
+    "strict_threshold": {"numerator": 0, "denominator": 1},
+    "fixed_seed_slots": 10,
+    "seed_superpopulation_claim": False,
+}
 
 
 class ContractError(ValueError):
@@ -130,12 +153,22 @@ def default_manifest(mode: str = PRODUCTION_MODE, episodes_per_context: int | No
         "seed_slots": list(SEED_SLOTS),
         "episodes_per_context": episodes,
         "context_ids": [context_id(c) for c in contexts()],
+        "inference_readiness": deepcopy(INFERENCE_READINESS),
         "contract_spec": spec,
     }
 
 
 def contract_spec(mode: str, episodes_per_context: int) -> dict[str, Any]:
     unit = episodes_per_context // 10
+    workload = {
+        "seeds": len(SEED_SLOTS),
+        "contexts": len(contexts()),
+        "root_episodes": len(SEED_SLOTS) * len(contexts()) * episodes_per_context,
+        "conditional_probe_tails": len(SEED_SLOTS) * len(contexts()) * 5 * unit,
+        "optimizer_updates": len(SEED_SLOTS) * len(contexts()) * episodes_per_context // BATCH_SIZE,
+    }
+    if mode == PRODUCTION_MODE and workload != PRODUCTION_WORKLOAD:
+        raise ContractError("production workload total drift")
     return {
         "horizon": HORIZON,
         "mark_count": MARK_COUNT,
@@ -157,6 +190,8 @@ def contract_spec(mode: str, episodes_per_context: int) -> dict[str, Any]:
         "rng_version": RNG_VERSION_SPEC,
         "mode": mode,
         "resource_ceiling": deepcopy(RESOURCE_CEILING),
+        "workload_totals": workload,
+        "inference_readiness": deepcopy(INFERENCE_READINESS),
         "host_law": {
             "latent_regime_prior": [1, 2],
             "tail_q": "95/100-(k-center)^2/100; centers SHORT=2,LONG=8",
@@ -168,7 +203,7 @@ def contract_spec(mode: str, episodes_per_context: int) -> dict[str, Any]:
             "severed_display": "independent_balanced_prior_regime_and_marks",
         },
         "oracle_law": {"gamma": "indicator(LINKED)*I_p(K)+1/25-C", "direct": "1/25-C", "required_unique_positive_cell": "LINKED-p17_20-c9_100"},
-        "evaluation_law": {"competent_seeds_required": 9, "seed_count": 10, "max_regret": 0.02, "minimum_per_cell_tail_agreement": 0.95, "specificity_t_df9_critical": 1.833112932653633},
+        "evaluation_law": {"competent_seeds_required": 9, "seed_count": 10, "max_regret": 0.02, "minimum_per_cell_tail_agreement": 0.95, "fixed_panel_rule": "ALL_TEN_ALL_EIGHT_STRICT_POSITIVE_V1", "strict_threshold": {"numerator": 0, "denominator": 1}, "seed_superpopulation_claim": False},
     }
 
 
@@ -187,7 +222,7 @@ def load_manifest(manifest: str | Path | Mapping[str, Any] | None) -> dict[str, 
 def validate_contract(manifest: str | Path | Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Validate the immutable contract without constructing a model or emitting results."""
     value = load_manifest(manifest)
-    required = {"schema_version", "contract_id", "mode", "seed_slots", "episodes_per_context", "context_ids", "contract_spec"}
+    required = {"schema_version", "contract_id", "mode", "seed_slots", "episodes_per_context", "context_ids", "inference_readiness", "contract_spec"}
     if set(value) != required:
         raise ContractError(f"manifest key inventory mismatch: {sorted(set(value) ^ required)}")
     if type(value["schema_version"]) is not int or value["schema_version"] != SCHEMA_VERSION:
@@ -200,6 +235,8 @@ def validate_contract(manifest: str | Path | Mapping[str, Any] | None = None) ->
         raise ContractError("the ten fresh seed slots are immutable")
     if type(value["context_ids"]) is not list or any(type(item) is not str for item in value["context_ids"]) or value["context_ids"] != [context_id(c) for c in contexts()]:
         raise ContractError("context population or order drift")
+    if type(value["inference_readiness"]) is not dict or value["inference_readiness"] != INFERENCE_READINESS:
+        raise ContractError("inference readiness fixed-panel rule drift")
     if type(value["episodes_per_context"]) is not int:
         raise ContractError("episodes_per_context must be an integer, not bool/coercible text")
     episodes = value["episodes_per_context"]

@@ -17,7 +17,9 @@ def test_rng_is_arm_and_cut_independent():
     rng = AddressedRNG(b"x" * 32)
     address = RNGAddress("FRRIE-FRESH-BLOCK-001", "EVALUATE", 6, 512, 0, 0, 0, 0, "EVALUATION")
     assert rng.block(address) == rng.block(address)
-    with pytest.raises(ValueError, match="arm- and intervention-independent"):
+    with pytest.raises(
+        ValueError, match="arm-, cut-, intervention-, and branch-independent",
+    ):
         RNGAddress.from_mapping({**asdict(address), "arm": "PHY_TRUST"})
 
 

@@ -22,6 +22,15 @@ def test_frozen_contract_population_and_manifest_are_exact():
     assert contract.DISPLAYED_COUNT_FLOOR == 256
     assert len(contract.SEED_SLOTS) == len(set(contract.SEED_SLOTS)) == 10
     assert all("r03" not in seed.lower() for seed in contract.SEED_SLOTS)
+    assert contract.SCHEMA_VERSION == 2
+    assert contract.INFERENCE_READINESS == {
+        "ready": True,
+        "status": "READY",
+        "rule": "ALL_TEN_ALL_EIGHT_STRICT_POSITIVE_V1",
+        "strict_threshold": {"numerator": 0, "denominator": 1},
+        "fixed_seed_slots": 10,
+        "seed_superpopulation_claim": False,
+    }
     assert contract.validate_contract() == contract.default_manifest()
 
 
@@ -32,6 +41,7 @@ def test_frozen_contract_population_and_manifest_are_exact():
     ("seed_slots", []),
     ("episodes_per_context", 20_479),
     ("context_ids", []),
+    ("inference_readiness", {"ready": False, "status": "UNRESOLVED"}),
 ])
 def test_manifest_drift_fails_closed(field, bad):
     manifest = contract.default_manifest()

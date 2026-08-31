@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 import struct
 
 from ..target_bound_competent_controller_order_value.config import (
@@ -19,11 +20,129 @@ from ..target_bound_competent_controller_order_value.native_backend import (
     test_only_primitive,
     test_only_setup_composition,
 )
-from .contracts import A_HR_INDEX, A_RH_INDEX, COMMON_INDEX, fixed_claim_state
+from .contracts import A_HR_INDEX, A_RH_INDEX, COMMON_INDEX, PublicClaimState, fixed_claim_state
 
 
 class HostBridgeError(RuntimeError):
     pass
+
+
+def validate_native_transition(
+    previous: tuple[HostOutput, ...],
+    following: tuple[HostOutput, ...],
+    *,
+    width: int,
+    context: str,
+) -> None:
+    """Validate fixed-width native advancement and absorbed-lane immutability."""
+
+    if len(previous) != width or len(following) != width:
+        raise HostBridgeError(f"{context} native transition width differs")
+    for before, after in zip(previous, following):
+        failures = any(bool(getattr(after, label)) for label in (
+            "cable_overload", "gantry_contact", "attitude_loss", "formation_loss"
+        ))
+        if after.terminal:
+            validate_terminal_endpoints((after,), context=context)
+        elif (
+            not after.active
+            or after.safe_dock
+            or after.timeout
+            or failures
+            or after.dock_tick is not None
+        ):
+            raise HostBridgeError(f"{context} nonterminal native endpoint is incoherent")
+        if before.terminal or not before.active:
+            if after != before:
+                raise HostBridgeError(f"{context} absorbed native lane mutated or reactivated")
+            continue
+        delta = after.tick - before.tick
+        reward_trace = tuple(after.last_hold_rewards)
+        if (
+            not 1 <= delta <= 13
+            or after.advanced is not True
+            or after.ticks_advanced != delta
+            or after.hold_k != 13
+            or after.next_k != 13
+            or after.last_hold_reward_count != delta
+            or len(reward_trace) != 13
+            or any(not math.isfinite(value) for value in reward_trace)
+            or any(value != 0.0 for value in reward_trace[delta:])
+            or (after.active and (after.terminal or delta != 13))
+            or (after.terminal and after.active)
+        ):
+            raise HostBridgeError(f"{context} active native tick/terminal frontier differs")
+
+
+def validate_native_reset_outputs(
+    resets: tuple[ResetLane, ...],
+    outputs: tuple[HostOutput, ...],
+    *,
+    width: int,
+    context: str,
+) -> None:
+    """Require exact public reset materialization and zero endpoint/counter state."""
+
+    if len(resets) != width or len(outputs) != width:
+        raise HostBridgeError(f"{context} native reset width differs")
+    for reset, output in zip(resets, outputs):
+        expected = PublicClaimState(
+            v=reset.initial_v, y=reset.initial_y, phi=reset.initial_phi, k=13
+        ).observation_bytes()
+        try:
+            observed = struct.pack("<18d", *output.observation)
+        except (TypeError, struct.error) as error:
+            raise HostBridgeError(f"{context} native reset observation differs") from error
+        if (
+            reset.k_initial != 13
+            or output.advanced is not False
+            or not output.active
+            or output.terminal
+            or output.tick != 0
+            or output.ticks_advanced != 0
+            or output.hold_k != 0
+            or output.next_k != 13
+            or output.cumulative_reward != 0.0
+            or output.cumulative_energy != 0.0
+            or output.energy_ticks != 0
+            or output.safe_dock
+            or output.timeout
+            or any(bool(getattr(output, label)) for label in (
+                "cable_overload", "gantry_contact", "attitude_loss", "formation_loss"
+            ))
+            or output.dock_tick is not None
+            or output.last_hold_reward_count != 0
+            or tuple(output.last_hold_rewards) != (0.0,) * 13
+            or observed != expected
+        ):
+            raise HostBridgeError(f"{context} native reset state/counters differ")
+
+
+def validate_terminal_endpoints(outputs: tuple[HostOutput, ...], *, context: str) -> None:
+    """Require exactly one coherent native terminal cause class per lane."""
+
+    labels = ("cable_overload", "gantry_contact", "attitude_loss", "formation_loss")
+    for output in outputs:
+        failures = tuple(label for label in labels if bool(getattr(output, label)))
+        safe = bool(output.safe_dock)
+        timeout = bool(output.timeout)
+        if output.active or not output.terminal or sum((safe, timeout, bool(failures))) != 1:
+            raise HostBridgeError(f"{context} terminal cause classes are incoherent")
+        if safe:
+            if (
+                isinstance(output.dock_tick, bool)
+                or not isinstance(output.dock_tick, int)
+                or output.dock_tick != output.tick
+                or not 1 <= output.dock_tick <= 364
+                or timeout
+                or failures
+            ):
+                raise HostBridgeError(f"{context} safe terminal endpoint is incoherent")
+        elif timeout:
+            if output.tick != 364 or output.dock_tick is not None or failures:
+                raise HostBridgeError(f"{context} timeout terminal endpoint is incoherent")
+        elif output.dock_tick is not None or timeout or not failures:
+            raise HostBridgeError(f"{context} failure terminal endpoint is incoherent")
 
 
 def fixed_resets() -> tuple[ResetLane, ResetLane]:
@@ -134,5 +253,7 @@ def headroom_conformance() -> HeadroomConformance:
 
 __all__ = [
     "HeadroomConformance", "HeadroomWitness", "HostBridgeError", "HostOutput", "NativeBatch",
-    "RenewalLane", "ResetLane", "fixed_resets", "headroom_conformance", "verify_public_alias",
+    "RenewalLane", "ResetLane", "fixed_resets", "headroom_conformance",
+    "validate_native_reset_outputs", "validate_native_transition", "validate_terminal_endpoints",
+    "verify_public_alias",
 ]

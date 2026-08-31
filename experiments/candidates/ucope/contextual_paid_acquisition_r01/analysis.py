@@ -2,23 +2,34 @@
 
 from __future__ import annotations
 
-from math import sqrt
-from statistics import mean, stdev
-from typing import Any, Iterable
+from fractions import Fraction
+from typing import Any, Mapping
 
-from .contract import SEED_SLOTS
+from .contract import SEED_SLOTS, as_fraction, context_id, contexts, fraction_json
 from .evaluation import validate_competence
 from .schema import SeedEvaluation
 
-ONE_SIDED_95_T_DF9 = 1.833112932653633
+TARGET_CELL = "LINKED-p17_20-c9_100"
+EXPECTED_CONTEXT_IDS = frozenset(context_id(context) for context in contexts())
 
 
-def signed_specificity_lower_bound(values: Iterable[float]) -> float:
-    values = tuple(float(value) for value in values)
-    if len(values) != 10 or any(not (-float("inf") < value < float("inf")) for value in values):
-        raise ValueError("specificity bound requires ten finite paired seed values")
-    standard_error = stdev(values) / sqrt(len(values))
-    return mean(values) - ONE_SIDED_95_T_DF9 * standard_error
+def minimum_signed_specificity(cell_evidence: Mapping[str, Mapping[str, Any]]) -> Fraction:
+    if not isinstance(cell_evidence, Mapping) or set(cell_evidence) != EXPECTED_CONTEXT_IDS:
+        raise ValueError("specificity requires the exact eight-cell fixed panel")
+    signed = []
+    for cell, evidence in cell_evidence.items():
+        if not isinstance(evidence, Mapping) or "Gamma" not in evidence:
+            raise ValueError("cell evidence lacks exact Gamma")
+        gamma = as_fraction(evidence["Gamma"])
+        signed.append(gamma if cell == TARGET_CELL else -gamma)
+    return min(signed)
+
+
+def _seed_minimum(item: SeedEvaluation) -> Fraction:
+    derived = minimum_signed_specificity(item.cell_evidence)
+    if item.minimum_seed_signed_specificity != fraction_json(derived):
+        raise ValueError("stored seed signed minimum differs from exact cell evidence")
+    return derived
 
 
 def analyze_acquisition(evaluations: list[SeedEvaluation] | tuple[SeedEvaluation, ...]) -> dict[str, Any]:
@@ -26,12 +37,24 @@ def analyze_acquisition(evaluations: list[SeedEvaluation] | tuple[SeedEvaluation
     from .oracle import construct_flip_certificate
     oracle_vector = {cell.context_id: cell.test_action for cell in construct_flip_certificate().cells}
     all_flips = all(item.action_vector == oracle_vector for item in evaluations)
-    lower_bound = signed_specificity_lower_bound(item.signed_specificity for item in evaluations)
+    seed_minima = tuple(_seed_minimum(item) for item in evaluations)
+    if len(seed_minima) != 10:
+        raise ValueError("fixed-panel acquisition requires all ten retained seed slots")
+    panel_minimum = min(seed_minima)
+    acquisition_pass = bool(competence["competence_pass"] and all_flips and panel_minimum > Fraction(0))
+    disposition = (
+        "STOP_FIXED_PANEL_COMPETENCE"
+        if not competence["competence_pass"]
+        else "FIXED_PANEL_ACQUISITION_SUPPORTED"
+        if acquisition_pass
+        else "STOP_FIXED_PANEL_ACQUISITION"
+    )
     return {
         **competence,
         "acquisition_all_flips": all_flips,
-        "specificity_lower_bound": lower_bound,
-        "acquisition_pass": bool(competence["competence_pass"] and all_flips and lower_bound > 0.0),
+        "panel_min_signed_specificity": fraction_json(panel_minimum),
+        "acquisition_pass": acquisition_pass,
+        "fixed_panel_disposition": disposition,
     }
 
 

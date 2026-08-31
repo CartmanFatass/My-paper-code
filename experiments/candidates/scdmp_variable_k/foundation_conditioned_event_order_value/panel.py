@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import struct
 from typing import Protocol, Sequence, runtime_checkable
 
 import torch
@@ -16,10 +15,12 @@ from .contracts import (
     PANEL_WIDTH,
     PanelCell,
     TAPE_COUNT,
-    fixed_claim_state,
 )
 from .foundation import FrozenFoundation, lexicographic_argmax
-from .host_bridge import HostOutput, NativeBatch, RenewalLane
+from .host_bridge import (
+    HostBridgeError, HostOutput, NativeBatch, RenewalLane, validate_native_reset_outputs,
+    validate_native_transition, validate_terminal_endpoints,
+)
 from .host_bridge import ResetLane, fixed_resets
 from .rng import AddressRNG
 
@@ -185,7 +186,21 @@ def execute_native_panel(
     lanes = build_panel_inventory()
     resets = build_native_resets(lanes)
     with NativeBatch(resets) as session:
-        return _execute_bound_session(session, foundation, tapes, lanes)
+        return _execute_bound_session(session, foundation, tapes, lanes, resets)
+
+
+def preflight_native_panel_session() -> int:
+    """Open, validate, and close the exact prospective width-144 native session."""
+
+    resets = build_native_resets()
+    with NativeBatch(resets) as session:
+        try:
+            validate_native_reset_outputs(
+                resets, tuple(session.initial), width=PANEL_WIDTH, context="panel preflight"
+            )
+        except HostBridgeError as error:
+            raise PanelContractError(str(error)) from error
+    return PANEL_WIDTH
 
 
 def _test_only_execute_panel_session(
@@ -195,7 +210,8 @@ def _test_only_execute_panel_session(
 ) -> tuple[PanelCell, ...]:
     """Exercise panel mechanics with a duck session; never a result route."""
 
-    return _execute_bound_session(session, foundation, tapes, build_panel_inventory())
+    lanes = build_panel_inventory()
+    return _execute_bound_session(session, foundation, tapes, lanes, build_native_resets(lanes))
 
 
 def _execute_bound_session(
@@ -203,6 +219,7 @@ def _execute_bound_session(
     foundation: FrozenFoundation,
     tapes: Sequence[DisturbanceTape],
     lanes: Sequence[PanelLane],
+    resets: Sequence[ResetLane],
 ) -> tuple[PanelCell, ...]:
     """Execute only a session whose production owner supplied exact resets."""
 
@@ -213,25 +230,21 @@ def _execute_bound_session(
         raise PanelContractError("disturbance tape inventory differs")
     for tape in tape_rows:
         tape.validate()
-    if len(session.initial) != PANEL_WIDTH:
-        raise PanelContractError("native session must preserve width 144")
-    expected_observation = struct.pack("<18d", *fixed_claim_state().observation())
-    if any(
-        struct.pack("<18d", *row.observation) != expected_observation
-        or not row.active
-        or row.terminal
-        or row.tick != 0
-        for row in session.initial
-    ):
-        raise PanelContractError("native initial lanes do not preserve the aliased fixed state")
+    try:
+        validate_native_reset_outputs(
+            tuple(resets), tuple(session.initial), width=PANEL_WIDTH, context="panel"
+        )
+    except HostBridgeError as error:
+        raise PanelContractError(str(error)) from error
     foundation.validate_immutable()
     outputs = session.renew(
         tuple(_renewal_row(lane.action_index, tape_rows[lane.tape], 0, active=True) for lane in lanes)
     )
-    if len(outputs) != PANEL_WIDTH:
-        raise PanelContractError("native renew must preserve width 144")
     previous = session.initial
-    _validate_transition(previous, outputs)
+    try:
+        validate_native_transition(tuple(previous), tuple(outputs), width=PANEL_WIDTH, context="panel")
+    except HostBridgeError as error:
+        raise PanelContractError(str(error)) from error
     query_count = 0
     while any(row.active for row in outputs):
         active = tuple(index for index, row in enumerate(outputs) if row.active)
@@ -257,13 +270,18 @@ def _execute_bound_session(
             for index, lane in enumerate(lanes)
         )
         following = session.renew(rows)
-        if len(following) != PANEL_WIDTH:
-            raise PanelContractError("native renew must preserve width 144")
-        _validate_transition(outputs, following)
+        try:
+            validate_native_transition(tuple(outputs), tuple(following), width=PANEL_WIDTH, context="panel")
+        except HostBridgeError as error:
+            raise PanelContractError(str(error)) from error
         previous, outputs = outputs, following
     foundation.validate_immutable()
     if query_count > 144 * 27:
         raise PanelContractError("assay foundation-query ceiling exceeded")
+    try:
+        validate_terminal_endpoints(tuple(outputs), context="panel")
+    except HostBridgeError as error:
+        raise PanelContractError(str(error)) from error
     cells = []
     for lane, output in zip(lanes, outputs):
         failures = tuple(label for label in FAILURE_LABELS if bool(getattr(output, label)))
@@ -276,26 +294,9 @@ def _execute_bound_session(
     return tuple(cells)
 
 
-def _validate_transition(previous: Sequence[HostOutput], following: Sequence[HostOutput]) -> None:
-    for before, after in zip(previous, following):
-        if before.terminal:
-            fields = ("active", "terminal", "tick", "safe_dock", "dock_tick") + FAILURE_LABELS
-            if any(getattr(before, name) != getattr(after, name) for name in fields):
-                raise PanelContractError("terminal native lane mutated")
-        elif before.active:
-            maximum_tick = min(before.tick + 13, HORIZON_TICKS)
-            if after.tick <= before.tick or after.tick > maximum_tick:
-                raise PanelContractError("active native lane tick frontier is invalid")
-            if after.active and after.tick != maximum_tick:
-                raise PanelContractError("nonterminal native hold did not consume the full fixed-13 spacing")
-        elif after.active:
-            raise PanelContractError("inactive native lane reactivated")
-        if after.terminal and after.active:
-            raise PanelContractError("terminal native lane cannot remain active")
-
-
 __all__ = [
     "COMPONENTS", "DisturbanceTape", "NativePanelSession", "PanelContractError", "PanelLane",
     "TapeAddress", "build_native_resets", "build_panel_inventory", "execute_native_panel", "materialize_disturbance_tapes",
+    "preflight_native_panel_session",
     "mission_utility", "validate_tape_pairing",
 ]

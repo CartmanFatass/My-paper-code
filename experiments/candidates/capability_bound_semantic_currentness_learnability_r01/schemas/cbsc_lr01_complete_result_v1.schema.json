@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cbsc_lr01_complete_result_v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "complete", "protocol_id", "codec_schedules", "branch", "audits", "first_failing_witness", "preflight", "competence", "main", "decision", "work", "resource"],
+  "properties": {
+    "schema": {"const": "cbsc_lr01_complete_result_v1"},
+    "complete": {"const": true},
+    "protocol_id": {"const": "CBSC-LR01"},
+    "codec_schedules": {"type": "object"},
+    "branch": {"enum": ["INVALID", "RAW_INCOMPETENT", "NO_RESOLVABLE_HEADROOM", "VALID_NARROW_CBSC_INDUCTIVE_BIAS", "GENERIC_FACTORIZATION_OR_CONDITIONING", "NO_CAPABILITY_SPECIFIC_ATTRIBUTION", "PRACTICAL_EQUIVALENCE", "RAW_OR_SHAM_MATERIALLY_SUPERIOR", "UNRESOLVED"]},
+    "audits": {"type": "object"},
+    "first_failing_witness": {"type": ["string", "null"]},
+    "preflight": {"type": "object"},
+    "competence": {"type": "array", "minItems": 4, "maxItems": 4},
+    "main": {"type": "array", "maxItems": 24},
+    "decision": {"type": ["object", "null"]},
+    "work": {"type": "object"},
+    "resource": {"type": "object"}
+  }
+}

@@ -1,9 +1,13 @@
 # UCOPE contextual paid acquisition implementation threshold
 
-Status: `ISOLATED_IMPLEMENTATION_AND_TEST_ONLY_PREFLIGHT_COMPLETE`
+Status: `PRODUCTION_V2_IMPLEMENTED_NOT_READY_RESOURCE_WALL_AND_LIVE_MEMORY`
 
-No production result command is scientifically frozen or implemented. R03 is immutable and must
-never be rerun.
+The sole BELIEF production command, exact production manifest, combined resource/support preflight,
+and complete-only result schema are frozen and implemented. They are not currently schedulable:
+the guarded result projection is `3,600` seconds against the current `1,800`-second ceiling, and the
+fresh host preflight observed `3,514,687,488` bytes of live available RAM against the required
+`4,294,967,296`. The preflight refused before support materialization, model construction, optimizer
+activity, held-out evaluation, or result publication. R03 is immutable and must never be rerun.
 
 ## Scientific object
 
@@ -69,9 +73,24 @@ return. No validation selection, early stop, retry, sweep, rescue, or held-out-e
 exposure.
 
 Complete held-out enumeration requires at least 9/10 seeds to reproduce the eight-cell action
-vector, keep max BELIEF-DP regret `<=0.02`, and achieve forced-PROBE tail agreement `>=0.95`. After
-competence, acquisition requires every retained seed to execute the exact root flip and a strictly
-positive one-sided confidence bound on signed specificity. Failure stops before COUNT/RAW.
+vector, keep max BELIEF-DP regret `<=0.02`, and achieve forced-PROBE tail agreement `>=0.95`.
+Competence literally requires each counted seed's learned action vector to equal the oracle vector.
+
+The prospective v2 acquisition rule is an exact census of the ten preregistered slots, not a
+seed-superpopulation inference. For seed `s` and context `c`, let `S_s,c=Gamma_s,c` in the sole
+target cell and `S_s,c=-Gamma_s,c` in every nontarget cell. Compute exact rational
+`M_s=min_c S_s,c` and `M_panel=min_s M_s` from the retained cell evidence. Acquisition requires the
+unchanged competence gate, all ten exact root vectors, and strict `M_panel>0`. All ten seeds and all
+80 seed/context margins remain; none may be dropped, replaced, rounded, or selected by competence.
+The rule literal is `ALL_TEN_ALL_EIGHT_STRICT_POSITIVE_V1` with exact threshold `0/1`.
+
+The former Student-t mean rule is rejected. Counter-addressed seed slots are fixed design points,
+not a registered random sample, and the t statistic had no finite-sample coverage law. The exact
+range is
+`M_s in [-52945109/160000000, 17149681/800000000]`; a bounded mean-zero two-point law makes all ten
+observations equal the positive endpoint with probability about `0.5338`, where the old zero-variance
+t rule would falsely pass. This pre-result v2 recast supports only complete-panel stability and no
+practical materiality floor or seed-superpopulation mean. Failure stops before COUNT/RAW.
 
 ## Isolated implementation surface
 
@@ -108,18 +127,52 @@ BELIEF result. APIs validate the contract, construct the flip certificate, build
 fixed behavior plan, validate support, train one seed, evaluate held-out cells, validate competence,
 and atomically publish a complete result.
 
-Current CLI is non-result only:
+The v2 CLI is exact:
 
 ```text
 ... describe
 ... check-contract --manifest PATH
-... preflight-support --manifest PATH --output-root PATH
+... create-production-manifest --manifest PATH
+... preflight-support --manifest PATH --output-root PATH       # TEST_ONLY support seam
+... preflight-production --manifest PATH --output-root PATH
 ... validate-preflight --artifact PATH
+... run-belief --manifest PATH --preflight PATH --output-root PATH
 ```
 
-A later result command may accept only manifest, accepted preflight, and output root—never seed,
-context, cost, reliability, K, threshold, arm, retry, or partial-result overrides. Historical R03/B2
-runtime modules are not imported; tests enforce the dependency firewall.
+`run-belief` is the sole result route and accepts only manifest, accepted production preflight, and
+output root—never seed, context, cost, reliability, K, threshold, arm, retry, resume, checkpoint
+selection, partial-result, or COUNT/RAW overrides. It atomically resumes its fixed per-seed checkpoint
+path at every batch, completes and validates all ten batch-640 checkpoints before importing or
+invoking held-out evaluation, and publishes only one create-once complete v2 result. Historical
+R03/B2 runtime modules are not imported; tests enforce the dependency firewall.
+
+The literal command sequence is currently blocked at production preflight and must not be run past
+that refusal:
+
+```powershell
+$python = 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe'
+$root = 'temp\directions\ucope\exp\ucope-contextual-paid-acquisition-r01-production'
+& $python -m experiments.candidates.ucope.contextual_paid_acquisition_r01 `
+  create-production-manifest --manifest "$root\manifest.json"
+& $python -m experiments.candidates.ucope.contextual_paid_acquisition_r01 `
+  preflight-production --manifest "$root\manifest.json" --output-root "$root\preflight"
+& $python -m experiments.candidates.ucope.contextual_paid_acquisition_r01 `
+  run-belief --manifest "$root\manifest.json" `
+  --preflight "$root\preflight\production-preflight.json" --output-root "$root\result"
+```
+
+Current resource contract: Python 3.10, PyTorch `2.7.0+cpu`, CPU-only deterministic algorithms,
+one worker, one intra-op and one inter-op thread, batch 256, checkpoint cadence one batch, estimated
+peak `2 GiB`, at least `4 GiB` live available RAM and `4 GiB` free disk, and result wall ceiling
+`1,800` seconds. The guarded projection is `3,600` seconds, so the command is fail-closed regardless
+of a later recovery in live RAM.
+
+A prospective resource-only revision is available for Root decision; it is not implemented or
+authorized here. It would retain the identical science, data, RNG, learner, work, and command while
+raising only the wall ceiling to the already guarded `3,600` seconds, with `2 GiB` peak RAM,
+`256 MiB` scratch, `256 MiB` durable, one worker, intra/inter-op threads 1, batch 256, and checkpoint
+cadence 1. It would still require a fresh exact preflight, absent output roots, at least `4 GiB` live
+RAM and `4 GiB` free disk, and the exact production support minimum `361>=256` before any activity.
 
 ## Deferred representation phase
 
@@ -130,10 +183,11 @@ the count.
 
 ## Stop and claim ceiling
 
-Stop on contract drift, absent/nonunique flip, nonnegative direct probe value, support failure,
-context leakage or context-specific parameters, held-out-K leakage, primitive-ledger mismatch,
-RNG/resume failure, resource-preflight failure, BELIEF incompetence, or nonpositive acquisition
-bound.
+Stop in this order on contract/oracle drift, runtime/resource refusal, support failure,
+checkpoint/resume failure, incomplete evaluation, BELIEF incompetence, or failed fixed-panel
+acquisition. Context leakage or context-specific parameters, held-out-K leakage, primitive-ledger
+mismatch, and RNG/resume inequality are technical invalidity. Downstream values cannot rescue an
+earlier branch.
 
 A positive result supports only finite-host contextual paid acquisition by one shared policy on
 held-out K. It supports no COUNT advantage, variable-N, MARL, UAV, safety, deployment, or real-world
@@ -145,3 +199,4 @@ QoS claim.
 - `UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md`
 - `ACQUISITION_PARK_CERT_INDEX.md`
 - `experiments/candidates/ucope/variable_k_paid_probe_r01_r03/`
+- `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-wave2-bounded-benchmark/benchmark-observation.json`

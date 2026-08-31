@@ -22,20 +22,27 @@ class MidpointUniforms:
         return (0.5,) * count
 
 
-def _model_and_optimizer():
+def _model_and_optimizer(*, final: bool = True):
     model = foundation.FoundationActorCritic(MidpointUniforms())
     optimizer = training.ExactAdamW(tuple(model.named_parameters()))
+    if final:
+        optimizer.step_index = 1_920
     return model, optimizer
 
 
+MASTER = bytes(range(32))
+
+
 def _gate(*, complete: bool = True, passed: bool = True) -> contracts.FoundationGate:
-    graph_bound = 0.9 if passed else 0.72
-    return contracts.FoundationGate(
-        complete,
-        passed,
-        (("HR", graph_bound), ("RH", 0.9)) if complete else (),
-        0.9 if complete else float("nan"),
-        tuple((name, 0.01) for name in contracts.FAILURE_LABELS) if complete else (),
+    if not complete:
+        return contracts.FoundationGate(False, False, (), float("nan"), ())
+    return foundation.analyze_competence(_records(safe=passed))
+
+
+def _records(*, safe: bool = True):
+    return tuple(
+        foundation.CompetenceRecord(row.mission, row.graph, True, safe)
+        for row in foundation.competence_inventory()
     )
 
 
@@ -52,7 +59,7 @@ def _complete_cells() -> tuple[contracts.PanelCell, ...]:
 def test_checkpoint_restore_has_direct_tensor_and_optimizer_equality(tmp_path):
     model, optimizer = _model_and_optimizer()
     path = tmp_path / "foundation.checkpoint.pt"
-    artifacts.write_checkpoint(path, model, optimizer, completed_updates=0)
+    artifacts.write_checkpoint(path, model, optimizer, completed_updates=160, rng_master=MASTER)
     loaded = artifacts.load_checkpoint(path, model, optimizer)
     assert artifacts.direct_resume_equal(loaded, model, optimizer)
 
@@ -68,9 +75,9 @@ def test_checkpoint_restore_has_direct_tensor_and_optimizer_equality(tmp_path):
 def test_registered_checkpoint_path_is_create_only_and_legacy_schema_is_rejected(tmp_path):
     model, optimizer = _model_and_optimizer()
     path = tmp_path / "foundation.checkpoint.pt"
-    artifacts.write_checkpoint(path, model, optimizer, completed_updates=0)
+    artifacts.write_checkpoint(path, model, optimizer, completed_updates=160, rng_master=MASTER)
     with pytest.raises(artifacts.ArtifactContractError, match="create-only"):
-        artifacts.write_checkpoint(path, model, optimizer, completed_updates=0)
+        artifacts.write_checkpoint(path, model, optimizer, completed_updates=160, rng_master=MASTER)
     assert [item.name for item in tmp_path.iterdir()] == ["foundation.checkpoint.pt"]
 
     legacy = tmp_path / "legacy.pt"
@@ -81,19 +88,32 @@ def test_registered_checkpoint_path_is_create_only_and_legacy_schema_is_rejected
 
 def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tmp_path):
     with pytest.raises(artifacts.ArtifactContractError, match="incomplete foundation"):
-        artifacts.write_foundation_gate(tmp_path / "gate.json", _gate(complete=False, passed=False))
+        artifacts.write_foundation_gate(
+            tmp_path / "gate.json", _gate(complete=False, passed=False), ()
+        )
 
     cells = _complete_cells()
     panel_analysis = analysis.analyze_complete_panel(cells)
-    with pytest.raises(artifacts.ArtifactContractError, match="partial panel"):
-        artifacts.write_complete_panel(tmp_path / "panel.json", cells[:-1], panel_analysis)
+    with pytest.raises(artifacts.ArtifactContractError, match="144 terminal"):
+        artifacts._test_only_write_final_bundle(
+            tmp_path / "panel.json", competence_records=_records(), panel_cells=cells[:-1]
+        )
 
-    panel_path = tmp_path / "panel.json"
-    artifacts.write_complete_panel(panel_path, cells, panel_analysis)
+    panel_path = tmp_path / "final-bundle.json"
+    bundled_fact = artifacts._test_only_write_final_bundle(
+        panel_path, competence_records=_records(), panel_cells=cells
+    )
     payload = json.loads(panel_path.read_text(encoding="utf-8"))
-    assert payload["schema"] == artifacts.PANEL_SCHEMA
-    assert len(payload["cells"]) == 144
+    assert payload["schema"] == artifacts.FINAL_BUNDLE_SCHEMA
+    assert len(payload["panel_cells"]) == 144
+    assert len(payload["competence_records"]) == 120
+    assert payload["terminal_fact"]["disposition"] == bundled_fact.disposition
+    assert len(payload["terminal_fact"]["adjusted_lower_bounds"]) == 4
     assert not list(tmp_path.glob("*.tmp"))
+    with pytest.raises(artifacts.ArtifactContractError, match="create-only"):
+        artifacts._test_only_write_final_bundle(
+            panel_path, competence_records=_records(), panel_cells=cells
+        )
 
     fact = contracts.TerminalFact(
         schema=artifacts.TERMINAL_FACT_SCHEMA,
@@ -101,8 +121,10 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
         foundation_gate=_gate(),
         panel_complete=False,
     )
-    with pytest.raises(artifacts.ArtifactContractError, match="complete panel"):
-        artifacts.write_terminal_fact(tmp_path / "fact.json", fact)
+    with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
+        artifacts.write_terminal_fact(
+            tmp_path / "fact.json", fact, competence_records=_records()
+        )
 
     bounds = tuple((bound.name, bound.lower) for bound in panel_analysis.bounds)
     closed_fact = contracts.TerminalFact(
@@ -112,25 +134,15 @@ def test_foundation_panel_and_terminal_artifacts_are_atomic_and_complete_only(tm
         panel_complete=True,
         adjusted_lower_bounds=bounds,
     )
-    artifacts.write_terminal_fact(
-        tmp_path / "closed-fact.json", closed_fact, panel_cells=cells
-    )
-    assert json.loads((tmp_path / "closed-fact.json").read_text())["disposition"] == (
-        contracts.Disposition.CLOSED.value
-    )
-
-    spoofed = replace(
-        closed_fact,
-        disposition=contracts.Disposition.ESTABLISHED.value,
-        adjusted_lower_bounds=tuple((name, 0.1) for name, _ in bounds),
-    )
-    with pytest.raises(artifacts.ArtifactContractError, match="panel analysis"):
+    with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
         artifacts.write_terminal_fact(
-            tmp_path / "spoofed-fact.json", spoofed, panel_cells=cells
+            tmp_path / "closed-fact.json", closed_fact,
+            competence_records=_records(), panel_cells=cells
         )
-    with pytest.raises(artifacts.ArtifactContractError, match="complete panel"):
+    with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
         artifacts.write_terminal_fact(
-            tmp_path / "bool-fact.json", replace(closed_fact, panel_complete=1), panel_cells=cells  # type: ignore[arg-type]
+            tmp_path / "bool-fact.json", replace(closed_fact, panel_complete=1),
+            competence_records=_records(), panel_cells=cells  # type: ignore[arg-type]
         )
 
 
@@ -138,7 +150,8 @@ def test_complete_foundation_nonpass_can_end_without_creating_assay_artifact(tmp
     gate = _gate(passed=False)
     gate_path = tmp_path / "foundation-gate.json"
     fact_path = tmp_path / "terminal-fact.json"
-    artifacts.write_foundation_gate(gate_path, gate)
+    records = _records(safe=False)
+    artifacts.write_foundation_gate(gate_path, gate, records)
     artifacts.write_terminal_fact(
         fact_path,
         contracts.TerminalFact(
@@ -147,6 +160,7 @@ def test_complete_foundation_nonpass_can_end_without_creating_assay_artifact(tmp
             foundation_gate=gate,
             panel_complete=False,
         ),
+        competence_records=records,
     )
     assert {item.name for item in tmp_path.iterdir()} == {
         "foundation-gate.json",
@@ -156,8 +170,8 @@ def test_complete_foundation_nonpass_can_end_without_creating_assay_artifact(tmp
 
 def test_checkpoint_tampering_rejects_float_step_truncated_or_nonfinite_moments_without_mutation():
     model, optimizer = _model_and_optimizer()
-    checkpoint = artifacts.make_checkpoint(model, optimizer, completed_updates=0)
-    baseline = artifacts.make_checkpoint(model, optimizer, completed_updates=0)
+    checkpoint = artifacts.make_checkpoint(model, optimizer, completed_updates=160, rng_master=MASTER)
+    baseline = artifacts.make_checkpoint(model, optimizer, completed_updates=160, rng_master=MASTER)
 
     mutations = []
     float_step = copy.deepcopy(checkpoint)
@@ -192,17 +206,47 @@ def test_checkpoint_tampering_rejects_float_step_truncated_or_nonfinite_moments_
         assert artifacts.direct_resume_equal(baseline, model, optimizer)
 
 
+def test_final_checkpoint_binds_persisted_master_and_observes_direct_resume_equality(tmp_path):
+    master_path = tmp_path / "rng-master.bin"
+    artifacts.write_rng_master(master_path, MASTER)
+    assert artifacts.load_rng_master(master_path) == MASTER
+    with pytest.raises(artifacts.ArtifactContractError, match="create-only"):
+        artifacts.write_rng_master(master_path, MASTER)
+
+    uninterrupted_model, uninterrupted_optimizer = _model_and_optimizer()
+    checkpoint = artifacts.make_checkpoint(
+        uninterrupted_model, uninterrupted_optimizer, completed_updates=160, rng_master=MASTER
+    )
+    restored_model, restored_optimizer = _model_and_optimizer(final=False)
+    assert restored_optimizer.step_index == 0
+    artifacts.restore_checkpoint(checkpoint, restored_model, restored_optimizer)
+    assert restored_optimizer.step_index == 1_920
+    assert artifacts.direct_resume_equal(checkpoint, restored_model, restored_optimizer)
+    witness = artifacts.observe_resume_equality(
+        checkpoint,
+        uninterrupted_model,
+        uninterrupted_optimizer,
+        restored_model,
+        restored_optimizer,
+        persisted_master=artifacts.load_rng_master(master_path),
+    )
+    assert witness.checkpoint_update == 160
+    assert witness.optimizer_step == 1_920
+    assert witness.continuation_stage == "COMPETENCE"
+    assert witness.model_tensors_equal and witness.optimizer_tensors_equal
+    assert witness.counters_equal and witness.addressed_inputs_equal
+
+
 def test_artifacts_reject_analysis_gate_and_terminal_semantic_tampering(tmp_path):
     cells = _complete_cells()
-    observed = analysis.analyze_complete_panel(cells)
-    with pytest.raises(artifacts.ArtifactContractError, match="recomputation"):
-        artifacts.write_complete_panel(
-            tmp_path / "mismatch.json",
-            cells,
-            replace(observed, interaction=observed.interaction + 0.1),
+    duplicate = list(cells)
+    duplicate[1] = duplicate[0]
+    with pytest.raises(artifacts.ArtifactContractError, match="panel semantics"):
+        artifacts._test_only_write_final_bundle(
+            tmp_path / "mismatch.json", competence_records=_records(), panel_cells=duplicate,
         )
 
-    with pytest.raises(artifacts.ArtifactContractError, match="pass flag"):
+    with pytest.raises(artifacts.ArtifactContractError, match="120 raw"):
         artifacts.write_foundation_gate(
             tmp_path / "bad-gate.json",
             contracts.FoundationGate(
@@ -212,9 +256,10 @@ def test_artifacts_reject_analysis_gate_and_terminal_semantic_tampering(tmp_path
                 0.9,
                 tuple((name, 0.01) for name in contracts.FAILURE_LABELS),
             ),
+            _records(),
         )
 
-    with pytest.raises(artifacts.ArtifactContractError, match="exact four"):
+    with pytest.raises(artifacts.ArtifactContractError, match="atomic final bundle"):
         artifacts.write_terminal_fact(
             tmp_path / "bad-fact.json",
             contracts.TerminalFact(
@@ -224,8 +269,67 @@ def test_artifacts_reject_analysis_gate_and_terminal_semantic_tampering(tmp_path
                 True,
                 (("d_0m", 0.1),),
             ),
+            competence_records=_records(),
             panel_cells=cells,
         )
+
+
+def test_typed_run_record_recomputes_exact_fixed_fields_and_rejects_tampering(tmp_path, monkeypatch):
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
+    monkeypatch.setattr(artifacts.torch, "get_num_interop_threads", lambda: 1)
+    record = artifacts.build_run_record()
+    path = tmp_path / "run-record.json"
+    artifacts.write_run_record(path, record)
+    payload = json.loads(path.read_text())
+    assert payload["actions"] == [0, 10, 12]
+    assert payload["resources"] == dict(contracts.RESOURCE_MAXIMA)
+    assert payload["runtime"]["native_batch_widths"] == {
+        "training": 12, "competence": 120, "panel": 144,
+    }
+    assert payload["runtime"]["torch_threads"] == 1
+    assert payload["runtime"]["deterministic_algorithms"] is True
+    with pytest.raises(artifacts.ArtifactContractError, match="frozen execution"):
+        artifacts.write_run_record(
+            tmp_path / "tampered.json", replace(record, panel_width=143)
+        )
+    with pytest.raises(artifacts.ArtifactContractError, match="version strings"):
+        artifacts.write_run_record(
+            tmp_path / "bad-version.json",
+            replace(record, runtime=replace(record.runtime, torch="")),
+        )
+    torch.use_deterministic_algorithms(False)
+    try:
+        with pytest.raises(artifacts.ArtifactContractError, match="runtime"):
+            artifacts.write_run_record(tmp_path / "runtime-drift.json", record)
+    finally:
+        torch.use_deterministic_algorithms(True)
+
+
+def test_historical_t_bundle_fixture_is_private_and_not_a_public_result_publisher():
+    assert not hasattr(artifacts, "write_final_bundle")
+    assert "_test_only_write_final_bundle" not in artifacts.__all__
+
+
+def test_foundation_artifact_retains_all_raw_records_counts_and_rejects_partial_or_tampered(tmp_path):
+    records = _records()
+    gate = foundation.analyze_competence(records)
+    path = tmp_path / "gate.json"
+    artifacts.write_foundation_gate(path, gate, records)
+    payload = json.loads(path.read_text())
+    assert len(payload["competence_records"]) == 120
+    assert payload["counts"] == {
+        "missions": 120,
+        "safe_by_graph": {"HR": 60, "RH": 60},
+        "pooled_safe": 120,
+        "failures": {name: 0 for name in contracts.FAILURE_LABELS},
+    }
+    with pytest.raises(artifacts.ArtifactContractError, match="120 raw"):
+        artifacts.write_foundation_gate(tmp_path / "partial.json", gate, records[:-1])
+    tampered = list(records)
+    tampered[0] = replace(tampered[0], safe_dock=False)
+    with pytest.raises(artifacts.ArtifactContractError, match="120 raw"):
+        artifacts.write_foundation_gate(tmp_path / "tampered.json", gate, tampered)
 
 
 def test_lifecycle_is_fail_closed_and_contains_no_authorization_stage():

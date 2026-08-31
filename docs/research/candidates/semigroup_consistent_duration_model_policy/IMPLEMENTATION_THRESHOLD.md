@@ -1,12 +1,13 @@
 # SCDMP foundation-conditioned event-order value implementation threshold
 
-Status: `RESULT_BLIND_SCAFFOLD_COMPLETE`
+Status: `PRODUCTION_PIPELINE_IMPLEMENTED_SCIENTIFIC_INFERENCE_HOLD`
 
 The retained conclusion-blind review is terminal and rejects the earlier 18-action finite-selector
 opportunity law at the definition level. The separately frozen fixed-state, fixed-`k`, precommitted
-2×3 candidate-action gate below avoids both selector regret and assay-state copula ambiguity and is
-now has a technically accepted result-blind scaffold. It inherits no polarity from the rejected
-object, and no production result command exists.
+2×3 candidate-action gate below avoids both selector regret and assay-state copula ambiguity and
+has a technically accepted implementation. It inherits no polarity from the rejected object. Its
+reserved phase entry is fail-closed before every result-bearing effect because the historical
+Student-t rule below lacks a frozen finite-sample coverage justification.
 
 ## Scientific object
 
@@ -122,6 +123,14 @@ Compute these only after all cells terminate. Across 24 tape blocks use one four
 Every other complete valid outcome closes this exact state/K/foundation/candidate-set gate before
 any adapter.
 
+The preceding Student-t rule is retained only as historical implementation provenance and a
+TEST_ONLY counterexample target. It cannot activate a scientific branch. Under the bounded endpoint
+law, each contrast lies in `[-363/364,363/364]`; the zero-variance rule can return four positive
+lower bounds with probability `(127/128)^24` even when all four population means are
+`-59/11648`. Production remains on `SCIENTIFIC_INFERENCE_HOLD` until Root prospectively freezes a
+finite-sample-valid method, material margin or explicit zero margin, tape count, stop rule, atomic
+result law and revised resource envelope.
+
 ## Typed RATE receiver seam
 
 Add output-disconnected pure contracts for `ClockControlSpec`, primitive spacing, eligible boundary,
@@ -170,7 +179,7 @@ opportunity/production/lifecycle/RNG/result modules that encode the rejected 18-
 
 Schemas cover manifest, checkpoint, foundation gate, complete 2×3 result, and terminal fact.
 
-## CLI and non-result acceptance
+## CLI, direct preflight and scientific hold
 
 ```text
 python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value.runner \
@@ -180,24 +189,36 @@ python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_o
   --phase FOUNDATION_AND_2X3 --manifest PATH --result-root PATH
 ```
 
-Only preflight and focused TEST_ONLY checks are part of this implementation phase. No production
-result command is implemented here; a direct result path is a later scientific step after the
-implementation and resource preflight are observed.
+The preflight command exact-validates the prospective V2 manifest, resource/RNG inventories, public
+alias and a real native width-144 reset session without creating the result root. The phase command
+is reserved but not READY: it reruns preflight and returns `SCIENTIFIC_INFERENCE_HOLD` before result
+root creation, fresh-master generation, numerical-runtime mutation, model materialization,
+training, competence, tapes, panel execution or publication.
+
+Behind that hold, the private future pipeline fixes one internally generated OS 256-bit master,
+160×12 fixed-13 training, one update-160/step-1,920 checkpoint, fresh-genesis direct restore
+equality, 120 raw competence records with recomputed bounds, and a raw width-144 precommitted panel.
+It has no callable path from raw panel cells to the held t analysis or a passing scientific artifact.
 
 Maximum registered work is 2,184 episodes/rollouts, 794,976 allocated primitive slots, 1,920 AdamW
-steps, one checkpoint, 144 forced actions, and at most 61,008 foundation queries. Non-result checks
+steps, one checkpoint, 144 forced actions, and at most 61,008 foundation queries, with one worker
+and one native/Torch thread. Non-result checks
 cover state serialization, H/R aliasing, action mapping, local headroom, fixed-13 training, exact
 competence bounds, width-144 inventory, tape equality, selector absence, full-mission accounting,
 RATE disconnection, complete-only artifacts, direct resume equality, legacy-schema rejection, and
 dependency firewall.
 
-Stop on contract drift, foundation nonpass, alias/headroom failure, tape leakage, foundation
-mutation, duplicate/nonterminal lane, resume divergence, partial output, or resource refusal.
+Stop on `SCIENTIFIC_INFERENCE_HOLD`, contract drift, foundation nonpass, alias/headroom failure,
+tape leakage, foundation mutation, duplicate/nonterminal lane, resume divergence, partial output,
+or resource refusal.
 
 ## Claim ceiling
 
-At most, fixed-simulator, fixed-state, fixed-K, single-foundation candidate-set event-order value
-under the registered disturbance law. Technical success cannot establish learned chronology,
+No scientific result is currently available. After a valid future inference freeze, the ceiling is
+fixed-simulator, fixed-state, fixed-K, single-foundation candidate-set event-order value against the
+best graph-blind fixed or randomized policy on `{A_RH,A_HR,COMMON}` under the registered
+disturbance law. It does not compare against the best of all 18 actions or necessarily the
+foundation's natural first action. Technical success cannot establish learned chronology,
 learned duration, semigroup composition, arbitrary words, variable lifetime/membership, simulator
 transfer, UAV safety, deployment, or flight.
 
@@ -206,4 +227,5 @@ transfer, UAV safety, deployment, or flight.
 - `DIRECTION.md`
 - `SCDMP_TARGET_BOUND_COMPETENT_CONTROLLER_ORDER_VALUE_SCIENCE_CARD_REVISION_02_20260821.md`
 - `SCDMP_OPPORTUNITY_LAW_SYNTHESIS_READY_20260829.md`
+- `SCDMP_FCEOV_WAVE2_SCIENTIFIC_INFERENCE_HOLD_20260831.md`
 - `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/IMPLEMENTATION_THRESHOLD.md`

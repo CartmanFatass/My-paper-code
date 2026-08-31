@@ -116,7 +116,7 @@ class SeedEvaluation:
     tail_unique: bool
     min_tail_margin: float
     target_flip: bool
-    signed_specificity: float
+    minimum_seed_signed_specificity: dict[str, int]
 
 
 @dataclass(frozen=True)
@@ -131,11 +131,12 @@ class BeliefResult:
     competence_pass: bool
     competent_seed_count: int
     acquisition_all_flips: bool
-    specificity_lower_bound: float
+    panel_min_signed_specificity: dict[str, int]
     acquisition_pass: bool
     complete: bool
+    fixed_panel_disposition: str
     representation_conclusion: str = "NONE"
-    claim_ceiling: str = "FINITE_HOST_CONTEXTUAL_PAID_ACQUISITION_ONLY"
+    claim_ceiling: str = "TEN_FIXED_SEED_SLOTS_FINITE_HOST_ONLY_NO_SEED_SUPERPOPULATION"
 
 
 def dataclass_from_json(cls: type, value: Mapping[str, Any]):

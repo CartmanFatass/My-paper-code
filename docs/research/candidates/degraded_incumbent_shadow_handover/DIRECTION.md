@@ -60,5 +60,41 @@ plane generation for all 6,912 cells, resource observation, reduction, and a dir
 those surfaces exist and pass result-blind preflight, the production entry remains unavailable and
 no shadow-specific polarity follows.
 
+## Wave-2 scientific freeze — 2026-08-30
+
+The source-state estimands survive, but production is stopped before checkpoint generation. Direct
+static audit found that the inherited live controller, PPO replay, fragment state, and normalization
+do not instantiate one common frozen STRUCTURED process: role-authoritative head indices differ,
+PPO promotion lacks owner history, fragments start from zero, and actor/snapshot/critic Welford
+transforms disagree between behavior, replay, checkpoint, and evaluation. These are engineering
+invalidities, not negative DISH evidence. The accepted native three-way clone remains useful
+TEST-only transaction conformance.
+
+The controlling freeze is
+`evidence/2026-08-30-dish-promotion-source-fork-wave2-freeze.md`. It fixes the additive production
+RNG/master law, origin-action first-valid predicate, post-transaction policy-forward order, exact
+role and masked-Welford semantics, typed no-trigger rows, trigger-conditioned 24-block simultaneous
+inference, direct resource reduction, request, and runner acceptance. `TRANSFER_REPLAY` is a
+certificate-only containing null outside the scientific population: exact deadline-bound state and
+first-action reconstruction absorbs the shadow without a fourth production outcome. Existing
+REAL/SHAM and full R06 remain untouched.
+
+The strongest surviving alternative is checkpoint co-adaptation: all 24 STRUCTURED policies are
+trained under SHADOW promotion, so a positive SHADOW-COPY intervention could reflect a learned
+shadow-specific hidden code rather than unique information in prewarming. The claim ceiling is
+therefore fixed-host, finite-budget, first-valid-trigger-conditional source selection under the
+declared SHADOW-trained process. The cheapest next discriminator is the two-owner pathwise
+live/replay/native role-and-normalization test, followed only after it passes by direct TEST-only
+production preflight. A contrary exact on-time replay reconstruction for every supported trigger
+selects `SHADOW_ABSORBED`; a valid nonmaterial SHADOW-COPY interval removes independent source value
+at this ceiling.
+
+CM returned the fail-closed technical branch on 2026-08-31. The focused direction suite passed
+`32` tests, but the direct TEST-only preflight wrote `NOT_READY` and the guarded runner refused with
+exit code `2` before creating a scientific run root, master, model, checkpoint, coordinate, or
+result. Native/backend REAL/SHAM bytes remain at the audited baseline. This preserves the scientific
+question and makes production reentry explicit; it is neither a source-value null nor negative
+polarity.
+
 Earlier provider/session transport notes remain historical evidence in the direction folder; they
 do not define the current implementation method or a separate permission system.

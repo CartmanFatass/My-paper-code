@@ -24,17 +24,26 @@ def _constant_tape(index: int) -> panel.DisturbanceTape:
 
 def _output(*, active: bool, terminal: bool, tick: int, safe: bool = False):
     return SimpleNamespace(
+        advanced=tick != 0,
         active=active,
         terminal=terminal,
+        ticks_advanced=min(tick, 13),
         tick=tick,
         observation=contracts.fixed_claim_state().observation(),
-        hold_k=13,
+        hold_k=0 if tick == 0 else 13,
+        next_k=13,
         safe_dock=safe,
         dock_tick=tick if safe else None,
-        cable_overload=False,
+        timeout=terminal and not safe and tick == 364,
+        cable_overload=terminal and not safe and tick < 364,
         gantry_contact=False,
         attitude_loss=False,
         formation_loss=False,
+        cumulative_reward=0.0,
+        cumulative_energy=0.0,
+        energy_ticks=tick,
+        last_hold_reward_count=min(tick, 13),
+        last_hold_rewards=(0.0,) * 13,
     )
 
 
@@ -125,6 +134,35 @@ def test_production_executor_constructs_and_owns_exact_native_reset_order(monkey
     assert len(cells) == 144
     assert "_test_only_execute_panel_session" not in panel.__all__
 
+
+def test_preflight_opens_validates_and_closes_exact_width_144_native_session(monkeypatch):
+    captured = []
+
+    class PreflightBatch:
+        def __init__(self, resets):
+            self.resets = tuple(resets)
+            self.initial = tuple(_output(active=True, terminal=False, tick=0) for _ in range(144))
+            self.closed = False
+            captured.append(self)
+
+        def __enter__(self): return self
+        def __exit__(self, *_): self.closed = True
+
+    monkeypatch.setattr(panel, "NativeBatch", PreflightBatch)
+    assert panel.preflight_native_panel_session() == 144
+    assert len(captured) == 1
+    assert captured[0].resets == panel.build_native_resets()
+    assert captured[0].closed is True
+
+    class DriftedPreflightBatch(PreflightBatch):
+        def __init__(self, resets):
+            super().__init__(resets)
+            self.initial[0].hold_k = 13
+
+    monkeypatch.setattr(panel, "NativeBatch", DriftedPreflightBatch)
+    with pytest.raises(panel.PanelContractError, match="reset state/counters"):
+        panel.preflight_native_panel_session()
+
 def test_disturbance_addresses_contain_only_tape_tick_component_and_are_shared():
     assert tuple(field.name for field in fields(panel.TapeAddress)) == ("tape", "tick", "component")
 
@@ -194,7 +232,7 @@ def test_panel_rejects_wrong_but_aliased_state_short_native_output_and_wrong_pol
             wrong.observation = (0.0,) * 18
             self.initial = (wrong,) * 144
 
-    with pytest.raises(panel.PanelContractError, match="fixed state"):
+    with pytest.raises(panel.PanelContractError, match="reset state/counters"):
         panel._test_only_execute_panel_session(
             WrongAlias(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
         )
@@ -241,7 +279,7 @@ def test_panel_rejects_query_ceiling_and_terminal_lane_reactivation():
     # A 28th post-intervention query is already impossible under the exact
     # 364-tick/fixed-13 clock, so either the clock guard or the explicit work
     # ceiling must stop this malformed session before another query.
-    with pytest.raises(panel.PanelContractError, match="query ceiling|fixed-13"):
+    with pytest.raises(panel.PanelContractError, match="query ceiling|fixed-13|frontier"):
         panel._test_only_execute_panel_session(
             TooManyQueries(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
         )
@@ -259,6 +297,31 @@ def test_panel_rejects_query_ceiling_and_terminal_lane_reactivation():
     with pytest.raises(panel.PanelContractError, match="reactivat|terminal"):
         panel._test_only_execute_panel_session(
             Reactivating(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
+        )
+
+
+@pytest.mark.parametrize("mode", ("safe_tick_mismatch", "timeout_and_failure"))
+def test_panel_rejects_incoherent_terminal_cause_before_panel_cells(mode):
+    class Incoherent(TwoHoldSession):
+        def renew(self, rows):
+            self.calls.append(tuple(rows))
+            call = len(self.calls)
+            values = []
+            for _ in range(144):
+                if mode == "safe_tick_mismatch":
+                    row = _output(active=False, terminal=True, tick=13, safe=True)
+                    row.dock_tick = 12
+                elif call < 28:
+                    row = _output(active=True, terminal=False, tick=13 * call)
+                else:
+                    row = _output(active=False, terminal=True, tick=364, safe=False)
+                    row.cable_overload = True
+                values.append(row)
+            return tuple(values)
+
+    with pytest.raises(panel.PanelContractError, match="terminal endpoint|cause classes"):
+        panel._test_only_execute_panel_session(
+            Incoherent(), TieFoundation(), tuple(_constant_tape(index) for index in range(24))
         )
 
 

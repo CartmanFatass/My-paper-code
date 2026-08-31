@@ -24,11 +24,12 @@ class ContractError(ValueError):
 
 
 HOST: Final[str] = "QUAD-UAV-PALLET-GANTRY-24P5M-v1"
-MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V1"
+MANIFEST_SCHEMA: Final[str] = "SCDMP_FCEOV_MANIFEST_V2"
 TICK_SECONDS: Final[float] = 0.1
 HORIZON_TICKS: Final[int] = 364
 K_TARGET: Final[int] = 13
 FOUNDATION_UPDATES: Final[int] = 160
+CHECKPOINT_UPDATE: Final[int] = FOUNDATION_UPDATES
 EPISODES_PER_UPDATE: Final[int] = 12
 COMPETENCE_EPISODES: Final[int] = 120
 TAPE_COUNT: Final[int] = 24
@@ -165,6 +166,14 @@ class Manifest:
     horizon_ticks: int = HORIZON_TICKS
     external_k: int = K_TARGET
     foundation_updates: int = FOUNDATION_UPDATES
+    checkpoint_update: int = CHECKPOINT_UPDATE
+    result_phase: str = "FOUNDATION_AND_2X3"
+    production_status: str = "SCIENTIFIC_INFERENCE_HOLD"
+    master_contract: tuple[str, ...] = (
+        "one OS-cryptographic 32-byte master after preflight and fresh-root creation",
+        "create-only raw persistence; reload unchanged; no seed selection, redraw, or retry",
+        "checkpoint V2 binds the same raw master at completed update 160",
+    )
     episodes_per_update: int = EPISODES_PER_UPDATE
     competence_episodes: int = COMPETENCE_EPISODES
     tapes: int = TAPE_COUNT
@@ -303,7 +312,7 @@ if PANEL_WIDTH != TAPE_COUNT * len(GRAPHS) * len(CANDIDATE_ACTIONS):
 
 
 __all__ = [
-    "ACTIONS", "A_HR_INDEX", "A_RH_INDEX", "CANDIDATE_ACTIONS", "COMMON_INDEX",
+    "ACTIONS", "A_HR_INDEX", "A_RH_INDEX", "CANDIDATE_ACTIONS", "CHECKPOINT_UPDATE", "COMMON_INDEX",
     "COMPETENCE_EPISODES", "ContractError", "Disposition", "EPISODES_PER_UPDATE",
     "FAILURE_LABELS", "FOUNDATION_UPDATES", "FoundationGate", "GRAPH_ASSIGNMENT",
     "GRAPH_EVENTS", "GRAPH_Q", "GRAPHS", "Graph", "HORIZON_TICKS", "HOST",

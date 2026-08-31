@@ -17,6 +17,7 @@ from .contract import (
     DISPLAYED_COUNT_FLOOR,
     EPISODES_PER_CONTEXT,
     K_TRAIN,
+    INFERENCE_READINESS,
     PROBE_EPISODES,
     PRODUCTION_MODE,
     ROOT_ACTION_FLOOR,
@@ -179,9 +180,11 @@ def _validate_counts(counts: Mapping[str, Any], mode: str) -> None:
         raise SupportError("production support size drift")
 
 
-def validate_support(
+def _validate_support(
     artifact: str | Path | Mapping[str, Any] | SupportCertificate,
     manifest: str | Path | Mapping[str, Any] | None = None,
+    *,
+    verify_materialized: bool,
 ) -> dict[str, Any]:
     if isinstance(artifact, SupportCertificate):
         value = asdict(artifact)
@@ -208,6 +211,7 @@ def validate_support(
         "seed_slots": value["seed_slots"],
         "episodes_per_context": value["episodes_per_context"],
         "context_ids": value["context_ids"],
+        "inference_readiness": dict(INFERENCE_READINESS),
         "contract_spec": value["contract_spec"],
     }
     manifest_value = validate_contract(manifest) if manifest is not None else validate_contract(reconstructed_manifest)
@@ -235,6 +239,29 @@ def validate_support(
         materialized_root = artifact_path.parent / "materialized"
         if materialized_root.is_symlink() or not materialized_root.is_dir():
             raise SupportError("materialized root absent or symlinked")
+        structural_files = set()
+        for seed_index, seed_slot in enumerate(SEED_SLOTS):
+            for cell_index, cell_id in enumerate(manifest_value["context_ids"]):
+                logical_key = f"{seed_slot}|{cell_id}"
+                file_record = value["materialized_files"][logical_key]
+                expected_filename = f"cell-{seed_index:02d}-{cell_index:02d}.jsonl.gz"
+                if (
+                    not isinstance(file_record, dict)
+                    or set(file_record) != {"filename", "rows"}
+                    or file_record["filename"] != expected_filename
+                    or type(file_record["rows"]) is not int
+                    or file_record["rows"] != value["episodes_per_context"]
+                ):
+                    raise SupportError("materialized file record structure mismatch")
+                path = materialized_root / expected_filename
+                if path.is_symlink() or not path.is_file():
+                    raise SupportError("materialized file absent or symlinked")
+                structural_files.add(path)
+        if set(materialized_root.iterdir()) != structural_files:
+            raise SupportError("missing or extra materialized entries")
+    if verify_materialized and not isinstance(artifact, (Mapping, SupportCertificate)):
+        artifact_path = Path(artifact)
+        materialized_root = artifact_path.parent / "materialized"
         observed_files = set()
         regenerated_counts = {}
         context_lookup = {context_id(context): context for context in contexts()}
@@ -273,6 +300,22 @@ def validate_support(
         if regenerated_counts != value["seed_context_counts"]:
             raise SupportError("regenerated support counters mismatch")
     return value
+
+
+def validate_support(
+    artifact: str | Path | Mapping[str, Any] | SupportCertificate,
+    manifest: str | Path | Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validate structure and regenerate every on-disk row for the public support seam."""
+    return _validate_support(artifact, manifest, verify_materialized=True)
+
+
+def validate_support_structure(
+    artifact: str | Path | Mapping[str, Any] | SupportCertificate,
+    manifest: str | Path | Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Production-internal structural gate; seed loaders perform the exact row replay once."""
+    return _validate_support(artifact, manifest, verify_materialized=False)
 
 
 def _atomic_json(path: Path, value: Any) -> None:

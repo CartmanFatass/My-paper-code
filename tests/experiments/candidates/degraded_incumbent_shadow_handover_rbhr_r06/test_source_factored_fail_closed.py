@@ -1,0 +1,216 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import pytest
+
+from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06 import production_source_factored_preflight as preflight_module
+from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_contract import (
+    CLAIM_ROWS, PRODUCTION_REQUEST_SCHEMA, PRODUCTION_STATUS, RUN_MODE, RUNNER_MASTER_POLICY,
+    SourceFactoredNotReady, canonical_json_bytes, complete_contract, production_readiness_gap_inventory,
+)
+from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_preflight import run_preflight
+from experiments.candidates.degraded_incumbent_shadow_handover_rbhr_r06.production_source_factored_runner import (
+    main as runner_main, refuse_run,
+)
+
+
+def _not_ready_request_header() -> dict[str, object]:
+    return {
+        "schema": PRODUCTION_REQUEST_SCHEMA,
+        "master_policy": RUNNER_MASTER_POLICY,
+        "caller_master_allowed": False,
+    }
+
+
+def test_source_factored_preflight_is_measured_result_blind_and_discloses_native_setup(tmp_path: Path) -> None:
+    run_root = tmp_path / "preflight-receipt-root"
+    receipt = run_preflight(repository_root=Path.cwd(), run_root=run_root)
+    assert receipt["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_PREFLIGHT_RECEIPT_V1"
+    assert receipt["passed"] is False and receipt["status"] == "NOT_READY"
+    assert receipt["master_created"] is False and receipt["scientific_master_created"] is False
+    assert receipt["checkpoint_created"] is False
+    assert receipt["scientific_coordinate_executed"] is False
+    assert run_root.is_dir()
+    assert (run_root / "preflight-receipt.json").is_file()
+    assert {path.name for path in run_root.iterdir()} == {"preflight-receipt.json"}
+    assert (run_root / "preflight-receipt.json").read_bytes() == canonical_json_bytes(receipt)
+    assert receipt["exact_ledgers"]["claim_rows"] == CLAIM_ROWS == 6_912
+    assert receipt["exact_ledgers"]["updates"] == 24_576
+    assert receipt["exact_ledgers"]["training_transitions"] == 100_663_296
+    assert receipt["measured_process"]["device"] == "cpu"
+    assert receipt["measured_process"]["gpu_count"] == 0
+    dynamic_probe = receipt["native_probe"]["dynamic_test_clone_executed"]
+    assert receipt["fixed_test_master_used"] is dynamic_probe
+    assert receipt["fixed_test_reset_instantiated"] is dynamic_probe
+    if dynamic_probe:
+        assert receipt["native_probe"]["ordinary_mode0_clone_rejected"] is True
+        assert receipt["native_probe"]["ordinary_mode0_clone_rejection_code"] == 2
+    assert receipt["native_probe"]["static_test_predicate_explicitly_rejects_mode0"] is True
+    assert receipt["native_probe"]["production_source_factored_sidecar_abi_present"] is False
+    assert receipt["measured_process"]["scope"] == "single_process_read_only_cache_and_sentinel_scope"
+    assert receipt["measured_process"]["process_tree_measurement_complete"] is True
+    accounting = receipt["side_effect_accounting"]
+    assert accounting["total_filesystem_effects_claimed_receipt_only"] is True
+    assert accounting["requested_root_contains_only_canonical_receipt"] is True
+    assert accounting["preexisting_native_cache_read_only"] is True
+    cache = accounting["native_cache"]
+    assert cache["toolchain_discovery_called"] is False
+    assert cache["compiler_called"] is False
+    assert cache["cache_write_attempted"] is False
+    assert receipt["gap_inventory"]["resource_ceilings"] == {
+        "workers_max": 8, "cpu_cores_max": 8, "torch_threads_per_worker": 1,
+        "gpu_count": 0, "device": "cpu", "cpu_hours": 40.0, "wall_hours": 10.0,
+        "rss_gib": 6.61, "scratch_gib": 1.66, "durable_gib": 0.83, "io_gib": 68.14,
+    }
+    assert receipt["gap_inventory"] == production_readiness_gap_inventory()
+    with pytest.raises(ValueError, match="must be absent"):
+        run_preflight(repository_root=Path.cwd(), run_root=run_root)
+
+
+def test_source_factored_preflight_cold_cache_skips_native_and_writes_only_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cold_cache = tmp_path / "absent-native-cache"
+    receipt_root = tmp_path / "cold-cache-receipt"
+    def forbidden(*_args: object, **_kwargs: object) -> object:
+        raise AssertionError("native toolchain/compile path must not be called")
+    monkeypatch.setattr(preflight_module, "_native_cache_root", lambda: cold_cache)
+    monkeypatch.setattr(preflight_module._production_backend, "_build_material", forbidden)
+    monkeypatch.setattr(preflight_module._production_backend, "_compile", forbidden)
+    monkeypatch.setattr(preflight_module._production_backend, "_configure", forbidden)
+    monkeypatch.setattr(preflight_module._production_backend, "_toolchain", forbidden)
+    monkeypatch.setattr(
+        preflight_module._production_backend,
+        "require_cpp_batched_production_backend",
+        forbidden,
+    )
+    receipt = run_preflight(repository_root=Path.cwd(), run_root=receipt_root)
+    assert receipt["status"] == "NOT_READY"
+    assert receipt["side_effect_accounting"]["native_cache"]["status"] == "CACHE_ABSENT"
+    assert receipt["preflight_gaps"] == [
+        "PREEXISTING_SOURCE_MATCHED_TEST_NATIVE_CACHE_ABSENT",
+    ]
+    assert receipt["native_probe"]["dynamic_test_clone_executed"] is False
+    assert receipt["native_probe"]["accepted_test_clone_branches"] == []
+    assert receipt["fixed_test_master_used"] is False
+    assert receipt["fixed_test_reset_instantiated"] is False
+    assert not cold_cache.exists()
+    assert {path.name for path in tmp_path.iterdir()} == {receipt_root.name}
+    assert {path.name for path in receipt_root.iterdir()} == {"preflight-receipt.json"}
+    assert (receipt_root / "preflight-receipt.json").read_bytes() == canonical_json_bytes(receipt)
+
+
+def test_source_factored_runner_refuses_before_run_root_or_master(tmp_path: Path) -> None:
+    request = tmp_path / "request.json"; request.write_text(json.dumps(_not_ready_request_header()), encoding="ascii")
+    run_root = tmp_path / "scientific-run"
+    with pytest.raises(SourceFactoredNotReady, match="NOT READY"):
+        refuse_run(repository_root=Path.cwd(), request=request, run_root=run_root)
+    assert not run_root.exists()
+
+
+def test_source_factored_runner_cli_emits_structured_not_ready(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    request = tmp_path / "request.json"; request.write_text(json.dumps(_not_ready_request_header()), encoding="ascii")
+    run_root = tmp_path / "scientific-run"
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    value = json.loads(capsys.readouterr().out)
+    assert value["schema"] == "DISH_PROMOTION_SOURCE_FORK_R01_RUN_REFUSAL_V1"
+    assert value["status"] == "NOT_READY" and value["exit_code"] == 2
+    assert value["reason"] == "READINESS_GAPS"
+    assert value["master_created"] is False and value["result_created"] is False
+    assert value["run_root_preexisting"] is False
+    assert value["run_root_created_by_runner"] is False
+    assert not run_root.exists()
+    request.write_text(json.dumps({**_not_ready_request_header(), "seed": 7}), encoding="ascii")
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    invalid = json.loads(capsys.readouterr().out)
+    assert invalid["status"] == "NOT_READY" and invalid["reason"] == "INVALID_OR_UNAVAILABLE_REQUEST"
+    assert "master/seed" in invalid["message"]
+    assert not run_root.exists()
+    request.write_text(json.dumps({**_not_ready_request_header(), "nested": {"candidate_seed_alias": 7}}), encoding="ascii")
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    nested = json.loads(capsys.readouterr().out)
+    assert nested["reason"] == "INVALID_OR_UNAVAILABLE_REQUEST" and "master/seed" in nested["message"]
+    assert not run_root.exists()
+
+
+@pytest.mark.parametrize("change", [
+    {"master_policy": "CALLER_VALUE"},
+    {"caller_master_allowed": True},
+    {"nested": {"master_policy": RUNNER_MASTER_POLICY}},
+    {"nested": {"caller_master_allowed": False}},
+])
+def test_source_factored_runner_rejects_policy_value_and_nested_aliases(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], change: dict[str, object],
+) -> None:
+    request_value = {**_not_ready_request_header(), **change}
+    request = tmp_path / "request.json"; request.write_text(json.dumps(request_value), encoding="ascii")
+    run_root = tmp_path / "scientific-run"
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["reason"] == "INVALID_OR_UNAVAILABLE_REQUEST"
+    assert receipt["run_root_created_by_runner"] is False
+    assert not run_root.exists()
+
+
+def test_source_factored_runner_structures_request_read_race_and_preexisting_root(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    request = tmp_path / "request.json"; request.write_text(json.dumps(_not_ready_request_header()), encoding="ascii")
+    run_root = tmp_path / "scientific-run"
+    original_read_text = Path.read_text
+    def race_read_text(path: Path, *args: object, **kwargs: object) -> str:
+        if path == request.resolve():
+            raise OSError("simulated request replacement")
+        return original_read_text(path, *args, **kwargs)
+    monkeypatch.setattr(Path, "read_text", race_read_text)
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    raced = json.loads(capsys.readouterr().out)
+    assert raced["reason"] == "INVALID_OR_UNAVAILABLE_REQUEST"
+    assert "became unavailable" in raced["message"]
+    assert raced["run_root_created_by_runner"] is False
+    monkeypatch.setattr(Path, "read_text", original_read_text)
+    run_root.mkdir()
+    assert runner_main([
+        "--repository-root", str(Path.cwd()), "--request", str(request), "--run-root", str(run_root),
+    ]) == 2
+    preexisting = json.loads(capsys.readouterr().out)
+    assert preexisting["run_root_preexisting"] is True
+    assert preexisting["run_root_present_at_refusal"] is True
+    assert preexisting["run_root_created_by_runner"] is False
+
+
+def test_source_factored_contract_and_thin_wrappers_cannot_route_to_full_r06() -> None:
+    assert RUN_MODE == "TEST_ONLY"
+    assert PRODUCTION_STATUS == "PRODUCTION_NOT_READY"
+    contract = complete_contract()
+    assert contract["run_mode"] == "TEST_ONLY" and contract["question_relevant_output"] is False
+    assert contract["transaction_branches"] == [
+        "RETAIN", "TRANSFER_COPY", "TRANSFER_SHADOW",
+    ]
+    assert production_readiness_gap_inventory()["transfer_replay"] == {
+        "name": "TRANSFER_REPLAY", "certificate_only": True,
+        "population_arm": False, "max_t_member": False,
+    }
+    for path in (
+        Path("tools/experiments/run_dish_rbhr_source_factored_preflight.py"),
+        Path("tools/experiments/run_dish_rbhr_source_factored_fork.py"),
+        Path("experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_preflight.py"),
+        Path("experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_runner.py"),
+    ):
+        source = path.read_text(encoding="utf-8")
+        assert "run_dish_rbhr_r06_full_panel" not in source
+        assert "production_full_panel" not in source
+        assert "production_real_sham" not in source
+        assert "secrets." not in source and "os.urandom" not in source and "token_bytes" not in source

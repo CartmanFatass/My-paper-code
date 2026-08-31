@@ -31,6 +31,7 @@ LAYER_SHAPES: tuple[tuple[str, tuple[int, ...]], ...] = (
 )
 PROJECTION_BOXES = {"PHY_TRUST": (-0.15, 0.15), "EDGE_FLEX": (-1.50, 1.50)}
 STRICT_CAPACITY_WITNESS = np.float32(0.60)
+PARAMETER_BYTE_COUNT = MODEL_PARAMETER_COUNT * np.dtype("<f4").itemsize
 
 
 def architecture_parameter_count() -> int:
@@ -91,16 +92,19 @@ class LearnedArm:
     def __post_init__(self) -> None:
         if self.arm_id not in PROJECTION_BOXES:
             raise ContractError("unknown learned arm")
+        self._validate_parameters()
+
+    def _validate_parameters(self) -> None:
         if set(self.parameters) != {name for name, _ in LAYER_SHAPES}:
             raise ContractError("learned arm parameter keys are not exact")
         if tuple((name, tuple(self.parameters[name].shape)) for name, _ in LAYER_SHAPES) != LAYER_SHAPES:
             raise ContractError("learned arm parameter names/shapes are not exact")
         if any(
-            array.dtype != np.dtype("float32") or not array.flags.c_contiguous
+            array.dtype != np.dtype("<f4") or not array.flags.c_contiguous
             or not np.isfinite(array).all()
             for array in self.parameters.values()
         ):
-            raise ContractError("learned arm parameters must be finite contiguous FP32")
+            raise ContractError("learned arm parameters must be finite C-order little-endian FP32")
 
     @property
     def projection_box(self) -> tuple[float, float]:
@@ -111,7 +115,32 @@ class LearnedArm:
         return sum(array.size for array in self.parameters.values())
 
     def parameter_bytes(self) -> bytes:
-        return b"".join(np.ascontiguousarray(self.parameters[name], dtype="<f4").tobytes() for name, _ in LAYER_SHAPES)
+        self._validate_parameters()
+        data = b"".join(self.parameters[name].tobytes(order="C") for name, _ in LAYER_SHAPES)
+        if len(data) != PARAMETER_BYTE_COUNT:
+            raise ContractError("learned arm parameter byte count drift")
+        return data
+
+    @classmethod
+    def from_parameter_bytes(cls, arm_id: str, data: bytes) -> "LearnedArm":
+        """Restore the exact fixed-order finite FP32 parameter representation."""
+        if not isinstance(data, bytes) or len(data) != PARAMETER_BYTE_COUNT:
+            raise ContractError(
+                f"learned arm state must be exactly {PARAMETER_BYTE_COUNT} bytes"
+            )
+        flat = np.frombuffer(data, dtype="<f4")
+        if flat.size != MODEL_PARAMETER_COUNT or not np.isfinite(flat).all():
+            raise ContractError("learned arm state must contain exactly finite FP32 values")
+        parameters: dict[str, np.ndarray] = {}
+        cursor = 0
+        for name, shape in LAYER_SHAPES:
+            size = math.prod(shape)
+            parameters[name] = flat[cursor:cursor + size].reshape(shape, order="C").copy()
+            cursor += size
+        arm = cls(arm_id=arm_id, parameters=parameters)
+        if arm.parameter_bytes() != data:
+            raise ContractError("learned arm state is not the canonical fixed-order FP32 layout")
+        return arm
 
     def project_beta(self) -> None:
         low, high = self.projection_box

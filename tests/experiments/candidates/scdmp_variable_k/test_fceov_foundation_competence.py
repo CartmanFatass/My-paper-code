@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from dataclasses import fields
 from math import comb
+from types import SimpleNamespace
 
 import pytest
 
 from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import (
+    contracts,
     foundation,
     rng as fceov_rng,
 )
@@ -201,6 +203,15 @@ def test_complete_all_safe_inventory_passes_and_incomplete_inventory_stops_close
     assert stopped.failure_upper_bounds == ()
 
 
+def test_strict_clopper_pearson_gate_has_exact_integer_count_equivalents():
+    assert foundation.exact_binomial_bound(52, 60, side="lower") > 0.72
+    assert foundation.exact_binomial_bound(51, 60, side="lower") <= 0.72
+    assert foundation.exact_binomial_bound(111, 120, side="lower") > 0.84
+    assert foundation.exact_binomial_bound(110, 120, side="lower") <= 0.84
+    assert foundation.exact_binomial_bound(4, 120, side="upper") < 0.10
+    assert foundation.exact_binomial_bound(5, 120, side="upper") >= 0.10
+
+
 def test_competence_rejects_bool_mission_alias_and_non_bool_endpoint_flags():
     rows = list(_complete_records())
     rows[0] = foundation.CompetenceRecord(False, "HR", True, True)
@@ -212,3 +223,179 @@ def test_competence_rejects_bool_mission_alias_and_non_bool_endpoint_flags():
     rows[0] = foundation.CompetenceRecord(first.mission, first.graph, 1, True)  # type: ignore[arg-type]
     with pytest.raises(foundation.FoundationContractError, match="flags"):
         foundation.analyze_competence(rows)
+
+
+def test_native_competence_is_one_fresh_width_120_complete_batch(monkeypatch):
+    from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import host_bridge
+
+    captured = []
+
+    def output(*, tick, active, terminal, safe=False, ticks_advanced=None, observation=None):
+        return SimpleNamespace(
+            observation=(0.0,) * 18 if observation is None else observation,
+            tick=tick, active=active, terminal=terminal,
+            advanced=tick != 0, hold_k=0 if tick == 0 else 13, next_k=13,
+            ticks_advanced=tick if ticks_advanced is None else ticks_advanced,
+            safe_dock=safe, dock_tick=tick if safe else None,
+            timeout=terminal and not safe and tick == 364,
+            cable_overload=terminal and not safe and tick < 364,
+            gantry_contact=False, attitude_loss=False, formation_loss=False,
+            cumulative_reward=0.0, cumulative_energy=0.0, energy_ticks=tick,
+            last_hold_reward_count=0 if tick == 0 else 13,
+            last_hold_rewards=(0.0,) * 13,
+        )
+
+    class Batch:
+        def __init__(self, resets):
+            reset_rows = tuple(resets)
+            captured.append(reset_rows)
+            self.initial = tuple(
+                output(
+                    tick=0, active=True, terminal=False,
+                    observation=contracts.PublicClaimState(
+                        v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                    ).observation(),
+                )
+                for row in reset_rows
+            )
+
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+        def renew(self, rows):
+            assert len(tuple(rows)) == 120
+            return tuple(output(tick=13, active=False, terminal=True) for _ in range(120))
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", Batch)
+    source = fceov_rng.TestAddressRNG(bytes(range(32)))
+    actor_critic = foundation.FoundationActorCritic(source)
+    records = foundation.execute_native_competence(foundation.freeze_foundation(actor_critic), source)
+    assert len(captured) == 1 and len(captured[0]) == 120
+    assert len(records) == 120 and all(row.complete for row in records)
+    assert {graph: sum(row.graph == graph for row in records) for graph in ("HR", "RH")} == {"HR": 60, "RH": 60}
+
+
+def test_native_competence_rejects_initial_terminal_shortcut_and_terminal_endpoint_mutation(monkeypatch):
+    from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import host_bridge
+
+    def output(*, tick, active, terminal, safe=False, ticks_advanced=0, observation=None):
+        return SimpleNamespace(
+            observation=(0.0,) * 18 if observation is None else observation,
+            tick=tick, active=active, terminal=terminal,
+            advanced=tick != 0, hold_k=0 if tick == 0 else 13, next_k=13,
+            ticks_advanced=ticks_advanced, safe_dock=safe,
+            timeout=terminal and not safe and tick == 364,
+            cable_overload=terminal and not safe and tick < 364,
+            gantry_contact=False, attitude_loss=False, formation_loss=False,
+            cumulative_reward=0.0, cumulative_energy=0.0, energy_ticks=tick,
+            dock_tick=tick if safe else None,
+            last_hold_reward_count=0 if tick == 0 else 13,
+            last_hold_rewards=(0.0,) * 13,
+        )
+
+    class InitialTerminal:
+        def __init__(self, resets):
+            self.initial = tuple(
+                output(
+                    tick=0, active=False, terminal=True,
+                    observation=contracts.PublicClaimState(
+                        v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                    ).observation(),
+                )
+                for row in resets
+            )
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+
+    source = fceov_rng.TestAddressRNG(bytes(range(32)))
+    frozen = foundation.freeze_foundation(foundation.FoundationActorCritic(source))
+
+    class BadResetCounter:
+        def __init__(self, resets):
+            rows = []
+            for index, row in enumerate(resets):
+                value = output(
+                    tick=0, active=True, terminal=False,
+                    observation=contracts.PublicClaimState(
+                        v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                    ).observation(),
+                )
+                if index == 0:
+                    value.cumulative_energy = 1.0
+                rows.append(value)
+            self.initial = tuple(rows)
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", BadResetCounter)
+    with pytest.raises(foundation.FoundationContractError, match="reset state/counters"):
+        foundation.execute_native_competence(frozen, source)
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", InitialTerminal)
+    with pytest.raises(foundation.FoundationContractError, match="reset state/counters"):
+        foundation.execute_native_competence(frozen, source)
+
+    class EndpointMutation:
+        def __init__(self, resets):
+            self.initial = tuple(
+                output(
+                    tick=0, active=True, terminal=False,
+                    observation=contracts.PublicClaimState(
+                        v=row.initial_v, y=row.initial_y, phi=row.initial_phi
+                    ).observation(),
+                )
+                for row in resets
+            )
+            self.calls = 0
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+        def renew(self, rows):
+            self.calls += 1
+            if self.calls == 1:
+                return (
+                    output(tick=13, active=False, terminal=True, ticks_advanced=13),
+                    *(output(tick=13, active=True, terminal=False, ticks_advanced=13) for _ in range(119)),
+                )
+            return (
+                output(tick=13, active=False, terminal=True, safe=True),
+                *(output(tick=26, active=False, terminal=True, ticks_advanced=13) for _ in range(119)),
+            )
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", EndpointMutation)
+    with pytest.raises(foundation.FoundationContractError, match="absorbed.*mutated"):
+        foundation.execute_native_competence(frozen, source)
+
+
+@pytest.mark.parametrize(("safe", "dock_tick", "timeout"), ((True, None, False), (False, None, False)))
+def test_native_competence_rejects_malformed_terminal_endpoint_coherence(
+    monkeypatch, safe, dock_tick, timeout
+):
+    from experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value import host_bridge
+
+    def value(*, reset=None, terminal=False):
+        observation = contracts.PublicClaimState(
+            v=reset.initial_v, y=reset.initial_y, phi=reset.initial_phi
+        ).observation() if reset is not None else (0.0,) * 18
+        return SimpleNamespace(
+            observation=observation, tick=13 if terminal else 0,
+            active=not terminal, terminal=terminal, ticks_advanced=13 if terminal else 0,
+            advanced=terminal, hold_k=13 if terminal else 0, next_k=13,
+            safe_dock=safe if terminal else False, dock_tick=dock_tick if terminal else None,
+            timeout=timeout if terminal else False, cable_overload=False, gantry_contact=False,
+            attitude_loss=False, formation_loss=False, cumulative_reward=0.0,
+            cumulative_energy=0.0, energy_ticks=13 if terminal else 0,
+            last_hold_reward_count=13 if terminal else 0,
+            last_hold_rewards=(0.0,) * 13,
+        )
+
+    class MalformedEndpoint:
+        def __init__(self, resets):
+            self.initial = tuple(value(reset=row) for row in resets)
+        def __enter__(self): return self
+        def __exit__(self, *_): return None
+        def renew(self, rows): return tuple(value(terminal=True) for _ in range(120))
+
+    monkeypatch.setattr(host_bridge, "NativeBatch", MalformedEndpoint)
+    source = fceov_rng.TestAddressRNG(bytes(range(32)))
+    frozen = foundation.freeze_foundation(foundation.FoundationActorCritic(source))
+    with pytest.raises(foundation.FoundationContractError, match="terminal"):
+        foundation.execute_native_competence(frozen, source)

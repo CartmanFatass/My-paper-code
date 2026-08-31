@@ -70,7 +70,7 @@ def test_test_only_preflight_is_complete_bound_strict_and_nonresult(tmp_path):
     observed_manifest = {name: value[name] for name in (
         "schema_version", "contract_id", "mode", "seed_slots", "episodes_per_context", "context_ids", "contract_spec",
     )}
-    assert observed_manifest == manifest
+    assert observed_manifest == {name: manifest[name] for name in observed_manifest}
     records = list(value["materialized_files"].values())
     assert all(set(record) == {"filename", "rows"} and record["rows"] == 640 for record in records)
     assert sorted(record["filename"] for record in records) == [

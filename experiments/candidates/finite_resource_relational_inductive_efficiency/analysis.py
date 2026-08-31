@@ -1,29 +1,183 @@
-"""Complete-panel-only FRRIE reduction with competence-first ordering.
-
-Only deterministic block and gate inputs are computed. The frozen contract does not
-freeze a simultaneous-bound procedure, so this module emits no polarity.
-"""
+"""FRRIE v2 complete-panel, block-level reduction and frozen inference."""
 
 from __future__ import annotations
 
 import math
-from typing import Any, Iterable, Mapping, Sequence
+import json
+from copy import deepcopy
+from pathlib import Path
+from typing import Any, Mapping, Sequence
 
 from .contracts.core import (
-    EVALUATIONS_PER_CELL,
-    FRRIE_COMPLETE_PANEL_RESULT_V1,
-    HELDOUT_ROSTERS,
-    INTERVENTIONS,
-    LEARNED_ARMS,
-    TRAIN_ROSTERS,
-    ContractError,
-    validate_manifest,
+    EVALUATIONS_PER_CELL, FP32_PROBABILITY_TOLERANCE, FRRIE_CHECKPOINT_V2,
+    FRRIE_COMPLETE_PANEL_ANALYSIS_V2, FRRIE_COMPLETE_PANEL_RESULT_V2,
+    FRRIE_SEALED_SEED_PACKET_V2,
+    HELDOUT_ROSTERS, INTERVENTIONS, LEARNED_ARMS, QUANTITY_ORDER,
+    REQUIRED_SEED_BLOCKS, THRESHOLDS, TRAIN_ROSTERS, ContractError,
+    expected_block_checkpoint_path, expected_native_contract_record, validate_manifest,
 )
 from .host import HORIZON, LEGAL_ACTIONS_BY_ROLE, PUBLIC_ROLES, native_endpoint
+from .work import checkpoint_cumulative_work, final_cumulative_work
+
+ANALYSIS_SCHEMA = FRRIE_COMPLETE_PANEL_ANALYSIS_V2
+ALL_ARMS = (*LEARNED_ARMS, "UNIFORM_LEGAL")
+ALL_ROSTERS = (*TRAIN_ROSTERS, *HELDOUT_ROSTERS)
 
 
 class IncompletePanel(ContractError):
     pass
+
+
+class CheckpointBytesUnvalidated(IncompletePanel):
+    pass
+
+
+def _seed_packet_binding(manifest: Mapping[str, Any], block: str, provenance: str) -> dict[str, Any]:
+    index = manifest["seed_blocks"].index(block)
+    return {
+        "packet_path": manifest["sealed_seed_packet"]["path"],
+        "schema": FRRIE_SEALED_SEED_PACKET_V2,
+        "version": 2,
+        "block_index": index,
+        "block_label": block,
+        "generation_provenance": provenance,
+        "no_prior_use": True,
+    }
+
+
+def expected_checkpoint_inventory(
+    manifest: Mapping[str, Any], *, generation_provenance: str,
+    checkpoint_bytes_revalidated: bool,
+) -> dict[str, Any]:
+    """Construct the direct, digest-free block checkpoint inventory."""
+    if not isinstance(generation_provenance, str) or not generation_provenance:
+        raise IncompletePanel("checkpoint inventory requires direct seed generation provenance")
+    if type(checkpoint_bytes_revalidated) is not bool:
+        raise IncompletePanel("checkpoint byte revalidation state must be literal boolean")
+    return {
+        "schema": "FRRIE_PANEL_CHECKPOINT_INVENTORY_V2",
+        "checkpoint_bytes_revalidated": checkpoint_bytes_revalidated,
+        "blocks": [
+            {
+                "seed_block": block,
+                "block_index": index,
+                "update": 512,
+                "checkpoint_path": str(expected_block_checkpoint_path(manifest, block)),
+                "checkpoint_schema": FRRIE_CHECKPOINT_V2,
+                "open_mode": "READ_ONLY",
+                "seed_packet_binding": _seed_packet_binding(
+                    manifest, block, generation_provenance,
+                ),
+            }
+            for index, block in enumerate(manifest["seed_blocks"])
+        ],
+        "final_cumulative_receipt": final_cumulative_work(manifest["compute"]),
+    }
+
+
+def _cell_work(arm: str, roster: int, intervention: str) -> dict[str, Any]:
+    learned = arm in LEARNED_ARMS
+    decisions = EVALUATIONS_PER_CELL * HORIZON * roster if learned else 0
+    shadow = (
+        decisions if learned and roster in HELDOUT_ROSTERS and intervention == "INTACT"
+        else 0
+    )
+    return {
+        "schema": "FRRIE_CELL_WORK_V2",
+        "environment_slots": EVALUATIONS_PER_CELL * HORIZON,
+        "learned_policy_decisions": decisions,
+        "shadow_audit_policy_decisions": shadow,
+        "evaluation_opportunities": EVALUATIONS_PER_CELL,
+    }
+
+
+def expected_result_binding(
+    manifest: Mapping[str, Any], inventory: Mapping[str, Any], *, block: str,
+    arm: str, roster: int, intervention: str,
+) -> dict[str, Any]:
+    index = manifest["seed_blocks"].index(block)
+    inventory_block = inventory["blocks"][index]
+    if arm in LEARNED_ARMS:
+        source = {
+            "kind": "LEARNED_BLOCK_CHECKPOINT",
+            "path": inventory_block["checkpoint_path"],
+            "schema": FRRIE_CHECKPOINT_V2,
+            "open_mode": "READ_ONLY",
+            "checkpoint_bytes_revalidated": inventory["checkpoint_bytes_revalidated"],
+        }
+    else:
+        source = {
+            "kind": "UNIFORM_LEGAL_EVALUATION_ONLY",
+            "path": None,
+            "schema": None,
+            "open_mode": "EVALUATION_ONLY_NO_CHECKPOINT",
+            "checkpoint_bytes_revalidated": None,
+        }
+    return {
+        "schema": "FRRIE_CELL_RESULT_BINDING_V2",
+        "seed_block": block,
+        "block_index": index,
+        "arm": arm,
+        "update": 512,
+        "source": source,
+        "seed_packet_binding": deepcopy(inventory_block["seed_packet_binding"]),
+        "native_contract": expected_native_contract_record(manifest["compute"]),
+        "package_source_relative_path": "native/frrie_ridgegate2z_external.cpp",
+        "cell_work": _cell_work(arm, roster, intervention),
+        "rng_tape_binding": {
+            "mapping_schema": "FRRIE_ADDRESSED_FP32_UNIFORM_V1",
+            "uniform_formula": "TOP24 / 2**24",
+            "same_index_episode_tape": True,
+            "arm_independent": True,
+            "cut_independent": True,
+            "branch_independent": True,
+        },
+    }
+
+
+def _revalidate_checkpoint_files(
+    manifest: Mapping[str, Any], inventory: Mapping[str, Any],
+) -> None:
+    """Independently restore exact checkpoint paths before value reduction."""
+    from .checkpoint import restore_checkpoint
+
+    packet_path = Path(manifest["sealed_seed_packet"]["path"])
+    try:
+        with packet_path.open("r", encoding="utf-8") as handle:
+            packet = json.load(handle)
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CheckpointBytesUnvalidated(
+            "current sealed seed packet is absent or unreadable during analysis"
+        ) from exc
+    if not isinstance(packet, Mapping):
+        raise CheckpointBytesUnvalidated(
+            "current sealed seed packet is not a direct object during analysis"
+        )
+    native_contract = expected_native_contract_record(manifest["compute"])
+    try:
+        for index, seed_block in enumerate(manifest["seed_blocks"]):
+            expected_path = expected_block_checkpoint_path(manifest, seed_block)
+            if inventory["blocks"][index]["checkpoint_path"] != str(expected_path):
+                raise CheckpointBytesUnvalidated(
+                    "checkpoint inventory path differs from exact manifest path"
+                )
+            with expected_path.open("rb") as handle:
+                checkpoint_bytes = handle.read()
+            restore_checkpoint(
+                checkpoint_bytes,
+                manifest_contract=manifest,
+                native_contract=native_contract,
+                seed_packet_contract=packet,
+                expected_update=512,
+                expected_seed_block=seed_block,
+                seed_packet_path=manifest["sealed_seed_packet"]["path"],
+            )
+    except (OSError, ContractError, KeyError, IndexError, TypeError) as exc:
+        if isinstance(exc, CheckpointBytesUnvalidated):
+            raise
+        raise CheckpointBytesUnvalidated(
+            "exact block checkpoint files were not independently restored during analysis"
+        ) from exc
 
 
 def _exact_keys(value: Mapping[str, Any], keys: set[str], field: str) -> None:
@@ -31,240 +185,313 @@ def _exact_keys(value: Mapping[str, Any], keys: set[str], field: str) -> None:
         raise IncompletePanel(f"{field} fields must be exact")
 
 
-def _mean(values: Iterable[float]) -> float:
-    materialized = tuple(float(value) for value in values)
-    if not materialized:
+def _finite(value: Any, field: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise IncompletePanel(f"{field} must be a finite real scalar")
+    result = float(value)
+    if not math.isfinite(result):
+        raise IncompletePanel(f"{field} must be finite")
+    return result
+
+
+def _mean(values: Sequence[float]) -> float:
+    if not values:
         raise IncompletePanel("required complete-panel reduction is empty")
-    return math.fsum(materialized) / len(materialized)
+    return math.fsum(values) / len(values)
+
+
+def _validate_receipts(value: Any, manifest: Mapping[str, Any]) -> tuple[bool, str | None]:
+    if not isinstance(value, Mapping):
+        raise IncompletePanel("panel receipts must be direct objects")
+    _exact_keys(value, {"checkpoint", "work", "support"}, "receipts")
+    expected = {
+        "checkpoint": checkpoint_cumulative_work(manifest["compute"]),
+        "work": final_cumulative_work(manifest["compute"]),
+    }
+    for name, wanted in expected.items():
+        if not isinstance(value[name], Mapping) or dict(value[name]) != wanted:
+            raise IncompletePanel(f"{name} receipt is absent, partial, or false")
+    support = value["support"]
+    if (not isinstance(support, Mapping)
+            or set(support) != {"endpoint_support_complete", "complete", "reason"}
+            or type(support["endpoint_support_complete"]) is not bool
+            or support["complete"] is not True
+            or (support["endpoint_support_complete"] and support["reason"] is not None)
+            or (not support["endpoint_support_complete"] and not isinstance(support["reason"], str))
+            or (isinstance(support["reason"], str) and not support["reason"])):
+        raise IncompletePanel("support receipt is absent or partial")
+    return support["endpoint_support_complete"], support["reason"]
 
 
 def _validate_tapes(row: Mapping[str, Any]) -> None:
     tapes = row["tape_contracts"]
     if not isinstance(tapes, list) or len(tapes) != EVALUATIONS_PER_CELL:
-        raise IncompletePanel("cell must carry every direct evaluation tape contract")
+        raise IncompletePanel("cell must carry all 256 addressed evaluation tapes")
     for episode, tape in enumerate(tapes):
         expected = {
-            "schema": "FRRIE_ADDRESSED_TAPE_V1",
-            "seed_block": row["seed_block"],
-            "purpose": "EVALUATE",
-            "roster": row["roster"],
-            "update": row["checkpoint"],
+            "schema": "FRRIE_ADDRESSED_TAPE_V1", "seed_block": row["seed_block"],
+            "purpose": "EVALUATE", "roster": row["roster"], "update": 512,
             "episode": episode,
         }
         if not isinstance(tape, Mapping) or dict(tape) != expected:
-            raise IncompletePanel("cell tape contract does not bind its direct coordinates")
+            raise IncompletePanel("cell tape does not bind its direct coordinates")
 
 
-def _validate_action_counts(value: Any, roster: int) -> dict[str, tuple[int, ...]]:
-    if not isinstance(value, Mapping) or set(value) != set(PUBLIC_ROLES):
-        raise IncompletePanel("episode action counts must bind all three public roles")
-    expected_per_role = HORIZON * (roster // 3)
-    result: dict[str, tuple[int, ...]] = {}
-    for role in PUBLIC_ROLES:
-        counts = value[role]
-        if (
-            not isinstance(counts, list)
-            or len(counts) != 6
-            or any(type(count) is not int or count < 0 for count in counts)
-            or sum(counts) != expected_per_role
-        ):
-            raise IncompletePanel("episode action counts have the wrong shape or total")
-        legal = set(LEGAL_ACTIONS_BY_ROLE[role])
-        if any(counts[action] for action in range(6) if action not in legal):
-            raise IncompletePanel("episode contains an illegal role-masked action")
-        result[role] = tuple(counts)
-    return result
+def _probability_vector(value: Any, role: str, field: str) -> tuple[float, ...]:
+    if not isinstance(value, list) or len(value) != 6:
+        raise IncompletePanel(f"{field} must be a six-action probability vector")
+    vector = tuple(_finite(item, field) for item in value)
+    legal = set(LEGAL_ACTIONS_BY_ROLE[role])
+    if any(item < 0.0 or item > 1.0 for item in vector):
+        raise IncompletePanel(f"{field} lies outside the probability simplex")
+    if any(vector[action] != 0.0 for action in range(6) if action not in legal):
+        raise IncompletePanel(f"{field} assigns probability to an illegal action")
+    if not math.isclose(math.fsum(vector), 1.0, rel_tol=0.0, abs_tol=FP32_PROBABILITY_TOLERANCE):
+        raise IncompletePanel(f"{field} does not sum to one")
+    minimum = 0.04 / len(legal)
+    if any(vector[action] + FP32_PROBABILITY_TOLERANCE < minimum for action in legal):
+        raise IncompletePanel(f"{field} violates the frozen legal probability floor")
+    return vector
 
 
-def _validate_episode(record: Mapping[str, Any], roster: int) -> dict[str, Any]:
-    _exact_keys(record, {"dw", "de", "waste", "action_counts_by_role"}, "episode")
+def _decision_values(value: Any, roster: int) -> tuple[float, float]:
+    if not isinstance(value, list) or len(value) != HORIZON * roster:
+        raise IncompletePanel("intact PHY episode must carry every slot/entity probability pair")
+    tv, tv_sup = [], []
+    for index, item in enumerate(value):
+        if not isinstance(item, Mapping):
+            raise IncompletePanel("decision probability pair must be an object")
+        _exact_keys(item, {"slot", "entity", "role", "intact", "shadow"}, "decision pair")
+        slot, entity, role = item["slot"], item["entity"], item["role"]
+        expected_role = PUBLIC_ROLES[min(entity // (roster // 3), 2)]
+        if (slot != index // roster or entity != index % roster or role != expected_role):
+            raise IncompletePanel("decision history is not in exact episode/slot/entity order")
+        intact = _probability_vector(item["intact"], role, "intact probability")
+        shadow = _probability_vector(item["shadow"], role, "shadow probability")
+        legal = LEGAL_ACTIONS_BY_ROLE[role]
+        tv.append(0.5 * math.fsum(abs(intact[a] - shadow[a]) for a in legal))
+        m = len(legal)
+        tv_sup.append(1.0 - (m - 1) * (0.04 / m) - min(intact[a] for a in legal))
+    return _mean(tv), _mean(tv_sup)
+
+
+def _validate_episode(
+    record: Any, roster: int, needs_probabilities: bool, *, episode: int,
+    tape_contract: Mapping[str, Any], decision_cache: dict[tuple[int, int], tuple[float, float]],
+) -> dict[str, float]:
+    if not isinstance(record, Mapping):
+        raise IncompletePanel("episode primitive must be an object")
+    _exact_keys(record, {"episode", "tape_contract", "dw", "de", "waste", "decision_probability_pairs"}, "episode")
+    if record["episode"] != episode or record["tape_contract"] != tape_contract:
+        raise IncompletePanel("episode primitive is not directly bound to its same-index tape")
     if type(record["dw"]) is not int or type(record["de"]) is not int:
-        raise IncompletePanel("episode delivery primitives must be integer counts")
-    waste = record["waste"]
-    if isinstance(waste, bool) or not isinstance(waste, (int, float)) or not math.isfinite(float(waste)):
-        raise IncompletePanel("episode waste primitive must be finite")
+        raise IncompletePanel("basin delivery primitives must be integer counts")
+    waste = _finite(record["waste"], "episode waste")
     try:
-        native_return = native_endpoint(record["dw"], record["de"], float(waste))
+        endpoint = native_endpoint(record["dw"], record["de"], waste)
     except ContractError as exc:
         raise IncompletePanel("episode endpoint primitive is outside support") from exc
-    return {
-        "native_return": native_return,
-        "basin_delivery": min(record["dw"], record["de"]) / 3.0,
-        "action_counts_by_role": _validate_action_counts(record["action_counts_by_role"], roster),
-    }
+    result = {"return": endpoint, "west": record["dw"] / 3.0, "east": record["de"] / 3.0}
+    pairs = record["decision_probability_pairs"]
+    if needs_probabilities:
+        cache_key = (id(pairs), roster)
+        if cache_key not in decision_cache:
+            decision_cache[cache_key] = _decision_values(pairs, roster)
+        result["tv"], result["tv_sup"] = decision_cache[cache_key]
+    elif pairs is not None:
+        raise IncompletePanel("only intact PHY episodes may carry shadow probability histories")
+    return result
 
 
 def validate_complete_panel(panel: Mapping[str, Any], manifest0: Mapping[str, Any]) -> list[dict[str, Any]]:
     manifest = validate_manifest(manifest0)
-    _exact_keys(panel, {"schema", "manifest_contract", "complete", "cells"}, "panel")
-    if panel["schema"] != FRRIE_COMPLETE_PANEL_RESULT_V1 or panel["complete"] is not True:
+    if not isinstance(panel, Mapping):
+        raise IncompletePanel("panel must be an object")
+    _exact_keys(panel, {"schema", "manifest_contract", "complete", "receipts", "checkpoint_inventory", "cells"}, "panel")
+    if panel["schema"] != FRRIE_COMPLETE_PANEL_RESULT_V2 or panel["complete"] is not True:
         raise IncompletePanel("panel is not a complete FRRIE result")
     if panel["manifest_contract"] != manifest:
         raise IncompletePanel("panel manifest contract differs from the validated contract")
-    rows0 = panel["cells"]
-    if not isinstance(rows0, list):
+    support_receipt, support_reason = _validate_receipts(panel["receipts"], manifest)
+    inventory = panel["checkpoint_inventory"]
+    try:
+        provenance = inventory["blocks"][0]["seed_packet_binding"]["generation_provenance"]
+        bytes_revalidated = inventory["checkpoint_bytes_revalidated"]
+        expected_inventory = expected_checkpoint_inventory(
+            manifest, generation_provenance=provenance,
+            checkpoint_bytes_revalidated=bytes_revalidated,
+        )
+    except (KeyError, IndexError, TypeError, IncompletePanel) as exc:
+        raise IncompletePanel("checkpoint inventory is absent or partial") from exc
+    if inventory != expected_inventory or inventory["final_cumulative_receipt"] != panel["receipts"]["work"]:
+        raise IncompletePanel("checkpoint inventory differs from the exact 24-block/final-work binding")
+    if not bytes_revalidated:
+        raise CheckpointBytesUnvalidated(
+            "checkpoint inventory does not assert prior byte revalidation"
+        )
+    # The prior transaction receipt is necessary but never sufficient:
+    # standalone analysis reopens and restores every exact file itself before
+    # it can inspect any episode primitive or descriptive value.
+    _revalidate_checkpoint_files(manifest, inventory)
+    cells = panel["cells"]
+    if not isinstance(cells, list):
         raise IncompletePanel("panel cells must be a list")
-    row_fields = {
-        "seed_block", "arm", "checkpoint", "roster", "intervention", "episodes",
-        "tape_contracts", "episode_records", "support_valid",
-    }
+    expected_keys = [(block, arm, 512, roster, cut) for block in REQUIRED_SEED_BLOCKS
+                     for arm in ALL_ARMS for roster in ALL_ROSTERS for cut in INTERVENTIONS]
+    if len(cells) != len(expected_keys):
+        raise IncompletePanel("complete panel cell contract set is partial")
     rows: list[dict[str, Any]] = []
-    observed: set[tuple[Any, ...]] = set()
-    for index, row0 in enumerate(rows0):
-        if not isinstance(row0, Mapping):
+    decision_cache: dict[tuple[int, int], tuple[float, float]] = {}
+    fields = {"seed_block", "arm", "checkpoint", "roster", "intervention", "episodes", "tape_contracts", "episode_records", "support_valid", "support_reason", "result_binding"}
+    for index, (row, wanted) in enumerate(zip(cells, expected_keys)):
+        if not isinstance(row, Mapping):
             raise IncompletePanel(f"panel cell {index} must be an object")
-        _exact_keys(row0, row_fields, f"panel cell {index}")
-        key = (row0["seed_block"], row0["arm"], row0["checkpoint"], row0["roster"], row0["intervention"])
-        if key in observed:
-            raise IncompletePanel("duplicate panel cell")
-        observed.add(key)
-        if row0["episodes"] != EVALUATIONS_PER_CELL or type(row0["support_valid"]) is not bool:
-            raise IncompletePanel("panel cell lacks exact episodes/support flag")
-        _validate_tapes(row0)
-        if not row0["support_valid"]:
-            if row0["episode_records"] is not None:
-                raise IncompletePanel("unsupported cell must not expose partial scientific values")
-            rows.append(dict(row0))
+        _exact_keys(row, fields, f"panel cell {index}")
+        key = (row["seed_block"], row["arm"], row["checkpoint"], row["roster"], row["intervention"])
+        if key != wanted:
+            raise IncompletePanel("panel cells must follow manifest block and frozen cell order")
+        if row["episodes"] != EVALUATIONS_PER_CELL or type(row["support_valid"]) is not bool:
+            raise IncompletePanel("panel cell episode/support facts are invalid")
+        expected_binding = expected_result_binding(
+            manifest, inventory, block=row["seed_block"], arm=row["arm"],
+            roster=row["roster"], intervention=row["intervention"],
+        )
+        if row["result_binding"] != expected_binding:
+            raise IncompletePanel("cell result_binding differs from its direct V2 identity/work/RNG binding")
+        if row["support_valid"] != support_receipt:
+            raise IncompletePanel("cell and direct panel support receipts disagree")
+        if row["support_valid"]:
+            if row["support_reason"] is not None:
+                raise IncompletePanel("supported cell must not carry a failure reason")
+        elif not isinstance(row["support_reason"], str) or not row["support_reason"] or row["support_reason"] != support_reason:
+            raise IncompletePanel("unsupported cell must carry the direct support reason")
+        _validate_tapes(row)
+        records = row["episode_records"]
+        if not bytes_revalidated:
+            if records is not None:
+                raise IncompletePanel("unvalidated checkpoint bytes must expose no episode scientific values")
+            rows.append(dict(row))
             continue
-        records0 = row0["episode_records"]
-        if not isinstance(records0, list) or len(records0) != EVALUATIONS_PER_CELL:
-            raise IncompletePanel("supported cell must contain all episode primitives")
-        records = [_validate_episode(record, row0["roster"]) for record in records0]
-        row = dict(row0)
-        row["native_return"] = _mean(record["native_return"] for record in records)
-        row["basin_delivery"] = _mean(record["basin_delivery"] for record in records)
-        row["legal_action_rate"] = 1.0
-        row["action_counts_by_role"] = {
-            role: tuple(sum(record["action_counts_by_role"][role][action] for record in records) for action in range(6))
-            for role in PUBLIC_ROLES
-        }
-        rows.append(row)
-    required = {
-        (block, arm, checkpoint, roster, intervention)
-        for block in manifest["seed_blocks"]
-        for arm in (*LEARNED_ARMS, "UNIFORM_LEGAL")
-        for checkpoint in manifest["training"]["checkpoints"]
-        for roster in (*TRAIN_ROSTERS, *HELDOUT_ROSTERS)
-        for intervention in INTERVENTIONS
-    }
-    if observed != required:
-        raise IncompletePanel("complete panel cell contract set mismatch")
+        if not row["support_valid"]:
+            if records is not None:
+                raise IncompletePanel("unsupported cell must expose no episode scientific values")
+            rows.append(dict(row))
+            continue
+        if not isinstance(records, list) or len(records) != EVALUATIONS_PER_CELL:
+            raise IncompletePanel("panel cell must carry every episode primitive without partial values")
+        needs_probabilities = row["arm"] == "PHY_TRUST" and row["intervention"] == "INTACT"
+        episodes = [
+            _validate_episode(
+                record, row["roster"], needs_probabilities, episode=episode,
+                tape_contract=row["tape_contracts"][episode], decision_cache=decision_cache,
+            )
+            for episode, record in enumerate(records)
+        ]
+        reduced = dict(row)
+        reduced.update({
+            "native_return": _mean([episode["return"] for episode in episodes]),
+            "basin_west": _mean([episode["west"] for episode in episodes]),
+            "basin_east": _mean([episode["east"] for episode in episodes]),
+            "support_valid": True,
+        })
+        if needs_probabilities:
+            reduced["legal_tv"] = _mean([episode["tv"] for episode in episodes])
+            reduced["tv_sup"] = _mean([episode["tv_sup"] for episode in episodes])
+        rows.append(reduced)
+    for arm in LEARNED_ARMS:
+        final_row = inventory["final_cumulative_receipt"]["arms"][arm]
+        for block in REQUIRED_SEED_BLOCKS:
+            cell_work = [
+                row["result_binding"]["cell_work"] for row in cells
+                if row["arm"] == arm and row["seed_block"] == block
+            ]
+            totals = {
+                "learned_eval_environment_slots": sum(row["environment_slots"] for row in cell_work),
+                "learned_eval_policy_decisions": sum(row["learned_policy_decisions"] for row in cell_work),
+                "shadow_audit_policy_decisions": sum(row["shadow_audit_policy_decisions"] for row in cell_work),
+                "evaluation_opportunities": sum(row["evaluation_opportunities"] for row in cell_work),
+            }
+            if any(final_row[field] != value for field, value in totals.items()):
+                raise IncompletePanel("cell work inventory does not sum to exact per-block work.py final counters")
     return rows
 
 
-def _select(rows: Sequence[Mapping[str, Any]], *, arm: str, checkpoint: int, roster: int, intervention: str) -> list[Mapping[str, Any]]:
-    selected = [row for row in rows if row["arm"] == arm and row["checkpoint"] == checkpoint and row["roster"] == roster and row["intervention"] == intervention]
-    if not selected:
-        raise IncompletePanel("registered cell reduction is absent")
-    return selected
+def _block_quantities(rows: Sequence[Mapping[str, Any]], block: str) -> dict[str, float]:
+    by_key = {(row["arm"], row["roster"], row["intervention"]): row for row in rows if row["seed_block"] == block}
+    def cell(arm: str, roster: int, cut: str = "INTACT") -> Mapping[str, Any]:
+        return by_key[(arm, roster, cut)]
+    def h(value: float, delta: float) -> float:
+        return min(value, 1.0 - value) - delta
+    direct = {n: cell("PHY_TRUST", n)["native_return"] - cell("EDGE_FLEX", n)["native_return"] for n in ALL_ROSTERS}
+    seen = 0.5 * (direct[9] + direct[15])
+    values: dict[str, float] = {f"d_N{n}": direct[n] for n in ALL_ROSTERS}
+    values.update({f"e_N{n}": cell("EDGE_FLEX", n)["native_return"] - cell("UNIFORM_LEGAL", n)["native_return"] for n in TRAIN_ROSTERS})
+    for n in HELDOUT_ROSTERS:
+        pi, ei = cell("PHY_TRUST", n), cell("EDGE_FLEX", n)
+        pr, er = cell("PHY_TRUST", n, "SEMANTIC_COLUMN_ROTATE"), cell("EDGE_FLEX", n, "SEMANTIC_COLUMN_ROTATE")
+        values[f"c_N{n}"] = direct[n] - seen
+        values[f"z_N{n}"] = min(pi["basin_west"], pi["basin_east"]) - min(ei["basin_west"], ei["basin_east"])
+        values[f"C_PHY_N{n}"] = pi["native_return"] - pr["native_return"]
+        values[f"V_N{n}"] = pi["legal_tv"]
+        values[f"I_N{n}"] = values[f"C_PHY_N{n}"] - (ei["native_return"] - er["native_return"])
+        values[f"A_cut_N{n}"] = min(h(cell("PHY_TRUST", n, cut)["native_return"], THRESHOLDS["delta_cutR"]) for cut in INTERVENTIONS)
+        values[f"A_atten_N{n}"] = min(h(cell(arm, n, cut)["native_return"], THRESHOLDS["delta_I"]) for arm in LEARNED_ARMS for cut in INTERVENTIONS)
+        values[f"A_TV_N{n}"] = pi["tv_sup"] - THRESHOLDS["delta_TV"]
+        values[f"A_dir_N{n}"] = min(h(cell(arm, n)["native_return"], THRESHOLDS["delta_R"]) for arm in LEARNED_ARMS)
+        values[f"A_interaction_N{n}"] = min(h(cell(arm, m)["native_return"], THRESHOLDS["delta_C"]) for arm in LEARNED_ARMS for m in (n, *TRAIN_ROSTERS))
+        values[f"A_zone_N{n}"] = min(h(cell(arm, n)[basin], THRESHOLDS["delta_Z"]) for arm in LEARNED_ARMS for basin in ("basin_west", "basin_east"))
+    if set(values) != set(QUANTITY_ORDER) or any(not math.isfinite(value) for value in values.values()):
+        raise IncompletePanel("block quantity family is missing, reordered, or nonfinite")
+    return {name: values[name] for name in QUANTITY_ORDER}
 
 
-def _cell_mean(rows: Sequence[Mapping[str, Any]], metric: str, *, arm: str, checkpoint: int, roster: int, intervention: str) -> float:
-    return _mean(row[metric] for row in _select(rows, arm=arm, checkpoint=checkpoint, roster=roster, intervention=intervention))
-
-
-def _cell_action_tv(rows: Sequence[Mapping[str, Any]], *, checkpoint: int, roster: int, intervention: str) -> dict[str, float]:
-    totals = {arm: {role: [0] * 6 for role in PUBLIC_ROLES} for arm in LEARNED_ARMS}
-    for arm in LEARNED_ARMS:
-        for row in _select(rows, arm=arm, checkpoint=checkpoint, roster=roster, intervention=intervention):
-            for role in PUBLIC_ROLES:
-                for action, count in enumerate(row["action_counts_by_role"][role]):
-                    totals[arm][role][action] += count
-    output = {}
-    for role in PUBLIC_ROLES:
-        distributions = {}
-        for arm in LEARNED_ARMS:
-            denominator = sum(totals[arm][role])
-            distributions[arm] = [count / denominator for count in totals[arm][role]]
-        output[role] = 0.5 * math.fsum(abs(left - right) for left, right in zip(distributions["PHY_TRUST"], distributions["EDGE_FLEX"]))
-    return output
-
-
-def generic_competence_passes(panel: Mapping[str, Any], manifest0: Mapping[str, Any]) -> bool:
-    manifest = validate_manifest(manifest0)
-    rows = validate_complete_panel(panel, manifest)
-    edge = [row for row in rows if row["arm"] == "EDGE_FLEX" and row["checkpoint"] == 512 and row["intervention"] == "INTACT"]
-    if any(not row["support_valid"] for row in edge):
-        return False
-    held = [row for row in edge if row["roster"] in HELDOUT_ROSTERS]
-    seen = [row for row in edge if row["roster"] in TRAIN_ROSTERS]
-    metrics = {
-        "heldout_direct_return_lower": min(row["native_return"] for row in held),
-        "seen_direct_return_lower": min(row["native_return"] for row in seen),
-        "worst_basin_delivery_lower": min(row["basin_delivery"] for row in edge),
-        "legal_action_validity_lower": min(row["legal_action_rate"] for row in edge),
-    }
-    return all(float(metrics[field]) >= float(bound) for field, bound in manifest["generic_competence"].items())
-
-
-def _work_crossings(rows: Sequence[Mapping[str, Any]], manifest: Mapping[str, Any]) -> dict[str, dict[str, int | None]]:
-    checkpoints = manifest["training"]["checkpoints"]
-    thresholds = manifest["work_to_threshold"]["thresholds_by_roster"]
-    output = {}
-    for arm in LEARNED_ARMS:
-        by_roster = {}
-        for roster in (*TRAIN_ROSTERS, *HELDOUT_ROSTERS):
-            threshold = float(thresholds[str(roster)])
-            by_roster[str(roster)] = next((checkpoint for checkpoint in checkpoints if _cell_mean(rows, "native_return", arm=arm, checkpoint=checkpoint, roster=roster, intervention="INTACT") >= threshold), None)
-        output[arm] = by_roster
-    return output
+def _invalid(manifest: Mapping[str, Any], reason: str) -> dict[str, Any]:
+    return {"schema": ANALYSIS_SCHEMA, "complete": False, "manifest_contract": dict(manifest),
+            "status": "INVALID", "scientific_polarity": None,
+            "invalid_reasons": [reason], "scientific_values_emitted": False}
 
 
 def analyze_complete_panel(panel: Mapping[str, Any], manifest0: Mapping[str, Any]) -> dict[str, Any]:
-    manifest = validate_manifest(manifest0)
-    rows = validate_complete_panel(panel, manifest)
-    base = {"schema": "FRRIE_COMPLETE_PANEL_ANALYSIS_V1", "complete": True, "manifest_contract": manifest}
-    if any(not row["support_valid"] for row in rows):
-        return {**base, "status": "NONIDENTIFICATION_ENDPOINT_SUPPORT", "treatment_contrasts_computed": False}
-    if not generic_competence_passes(panel, manifest):
-        return {**base, "status": "NONIDENTIFICATION_GENERIC_INCOMPETENCE", "treatment_contrasts_computed": False}
-    cell_returns = {
-        (roster, intervention, arm): _cell_mean(rows, "native_return", arm=arm, checkpoint=512, roster=roster, intervention=intervention)
-        for roster in (*TRAIN_ROSTERS, *HELDOUT_ROSTERS) for intervention in INTERVENTIONS for arm in LEARNED_ARMS
-    }
-    contrasts = {
-        f"N{roster}:{intervention}": cell_returns[(roster, intervention, "PHY_TRUST")] - cell_returns[(roster, intervention, "EDGE_FLEX")]
-        for roster in (*TRAIN_ROSTERS, *HELDOUT_ROSTERS) for intervention in INTERVENTIONS
-    }
-    interaction_values = {
-        f"heldout_N{heldout}-seen_N{seen}": contrasts[f"N{heldout}:INTACT"] - contrasts[f"N{seen}:INTACT"]
-        for heldout in HELDOUT_ROSTERS for seen in TRAIN_ROSTERS
-    }
-    treatment_cut = {str(roster): cell_returns[(roster, "INTACT", "PHY_TRUST")] - cell_returns[(roster, "SEMANTIC_COLUMN_ROTATE", "PHY_TRUST")] for roster in HELDOUT_ROSTERS}
-    edge_cut = {str(roster): cell_returns[(roster, "INTACT", "EDGE_FLEX")] - cell_returns[(roster, "SEMANTIC_COLUMN_ROTATE", "EDGE_FLEX")] for roster in HELDOUT_ROSTERS}
-    basin = {
-        str(roster): _cell_mean(rows, "basin_delivery", arm="PHY_TRUST", checkpoint=512, roster=roster, intervention="INTACT") - _cell_mean(rows, "basin_delivery", arm="EDGE_FLEX", checkpoint=512, roster=roster, intervention="INTACT")
-        for roster in HELDOUT_ROSTERS
-    }
-    action_tv = {str(roster): _cell_action_tv(rows, checkpoint=512, roster=roster, intervention="INTACT") for roster in HELDOUT_ROSTERS}
-    differential = {roster: treatment_cut[roster] - edge_cut[roster] for roster in treatment_cut}
-    block_contrasts = {}
-    for block in manifest["seed_blocks"]:
-        block_rows = [row for row in rows if row["seed_block"] == block]
-        block_contrasts[block] = {
-            f"N{roster}:{intervention}": _cell_mean(block_rows, "native_return", arm="PHY_TRUST", checkpoint=512, roster=roster, intervention=intervention) - _cell_mean(block_rows, "native_return", arm="EDGE_FLEX", checkpoint=512, roster=roster, intervention=intervention)
-            for roster in (*TRAIN_ROSTERS, *HELDOUT_ROSTERS) for intervention in INTERVENTIONS
+    try:
+        manifest = validate_manifest(manifest0)
+    except ContractError as exc:
+        return _invalid({}, str(exc))
+    try:
+        rows = validate_complete_panel(panel, manifest)
+        if not all(row["support_valid"] for row in rows):
+            return {
+                "schema": ANALYSIS_SCHEMA, "complete": True, "manifest_contract": manifest,
+                "status": "NONIDENTIFICATION_ENDPOINT_SUPPORT", "scientific_polarity": None,
+                "scientific_values_emitted": False,
+                "final_cumulative_receipt": dict(panel["receipts"]["work"]),
+                "quantity_order": list(QUANTITY_ORDER), "intervals": None,
+                "predicates": [], "predicate_flags": {"support_structural": False},
+                "support_reason": panel["receipts"]["support"]["reason"],
+            }
+        block_values = {block: _block_quantities(rows, block) for block in REQUIRED_SEED_BLOCKS}
+    except CheckpointBytesUnvalidated as exc:
+        return {
+            "schema": ANALYSIS_SCHEMA, "complete": False, "manifest_contract": manifest,
+            "status": "TECHNICAL_FAILURE", "scientific_polarity": None,
+            "scientific_values_emitted": False,
+            "engineering_blockers": ["CHECKPOINT_BYTES_NOT_REVALIDATED"],
+            "invalid_reasons": [str(exc)],
         }
-    deterministic_inputs = {
-        "heldout_direct_return": min(contrasts[f"N{roster}:INTACT"] for roster in HELDOUT_ROSTERS),
-        "heldout_minus_seen_interactions": interaction_values,
-        "heldout_minus_seen_interaction_worst": min(interaction_values.values()),
-        "worst_basin_delivery_by_roster": basin,
-        "worst_basin_delivery": min(basin.values()),
-        "treatment_cut_loss_by_roster": treatment_cut,
-        "treatment_cut_loss": min(treatment_cut.values()),
-        "legal_action_tv_by_roster_and_role": action_tv,
-        "legal_action_tv": min(value for by_role in action_tv.values() for value in by_role.values()),
-        "differential_cut_attenuation_by_roster": differential,
-        "differential_cut_attenuation": min(differential.values()),
-    }
+    except (ContractError, KeyError, TypeError, ValueError) as exc:
+        return _invalid(manifest, str(exc))
+    support_structural = True
+    status = "UNRESOLVED_ANALYSIS_METHOD_UNFROZEN"
     return {
-        **base,
-        "status": "UNRESOLVED_ANALYSIS_METHOD_UNFROZEN",
-        "treatment_contrasts_computed": True,
-        "scientific_polarity": None,
-        "cell_contrasts": dict(sorted(contrasts.items())),
-        "block_contrasts": block_contrasts,
-        "deterministic_gate_inputs": deterministic_inputs,
-        "point_work_to_threshold_crossings": _work_crossings(rows, manifest),
+        "schema": ANALYSIS_SCHEMA, "complete": True, "manifest_contract": manifest,
+        "status": status, "scientific_polarity": None, "scientific_values_emitted": True,
+        "final_cumulative_receipt": dict(panel["receipts"]["work"]),
+        "quantity_order": list(QUANTITY_ORDER), "block_quantities": block_values,
+        "inference": dict(manifest["inference"]), "intervals": None,
+        "predicates": [], "predicate_flags": {"support_structural": support_structural},
     }
+
+
+def generic_competence_passes(panel: Mapping[str, Any], manifest0: Mapping[str, Any]) -> bool:
+    """Competence is not decidable until the distribution-free family is frozen."""
+    analyze_complete_panel(panel, manifest0)
+    return False

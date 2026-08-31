@@ -125,7 +125,44 @@ The fresh `commitment_residual_triggered_options_common_history_gate_r01` packag
 accepted. Its 19 focused tests and source check pass, and direct structural/byte equality replaces
 all non-RNG digest or identity gates. It contains no route to the discarded update-1,000 state.
 
-This is engineering evidence only. A result remains scientifically undefined until the predictor,
-behavior/continuation, calibration, 64-per-regime evaluation population, support and RAW-LONG
-competence laws, inherited audit boundary, and simultaneous-interval method/alpha are frozen. The
-current `run` entry therefore refuses before work or output. Root retains lifecycle responsibility.
+This is engineering evidence only. The automatic wave-2 source audit in
+`IMPLEMENTATION_THRESHOLD.md` now freezes the recoverable predictor, deterministic
+behavior/continuation, independent calibration, 64-per-regime evaluation population, inherited
+audit boundary, and support laws. It also records the source-defined six-interval Bonferroni
+Student-t calculation, but does not treat its finite-sample coverage as established. That partial
+freeze does not establish end-to-end implementation conformance and does not authorize activity.
+
+The primary decisive scientific blocker is:
+
+> `NONIDENTIFYING_MISSING_RAW_LONG_COMPETENCE_LAW`: accepted CRTO authority supplies no choice among
+> absolute oracle-regret proximity, superiority or noninferiority to the logged script, or an
+> across-replicate inferential competence condition; it also supplies no aggregation rule or numeric
+> margin. The common-history contrast margin `0.005` and B1 decoder gates `0.01/0.95` govern other
+> endpoints and cannot be reassigned to RAW-LONG competence.
+
+The primary missing prospective object is exactly
+`RAW_LONG_COMPETENCE = (K8 regret reference, replicate aggregation/bound, acceptance inequality and
+numeric margin)`. Root may separately invest in a result-blind competence-definition/development
+cycle.
+
+A second unresolved scientific validity issue is
+`NONIDENTIFYING_MISSING_REPLICATE_SAMPLING_AND_COVERAGE_LAW`. Fixed counter-addresses establish
+reproducible, disjoint streams; they do not establish that eight replicate effects are iid Normal,
+exchangeable, or sampled from any identified population. The registered Student-t calculation is
+therefore descriptive/model-conditional, not a finite-sample coverage guarantee, and may not route a
+first-match branch. Exact sign-flip inference is not design-valid because representations were not
+randomly assigned under a sharp exchangeable null. The second missing object is
+`SIMULTANEOUS_INFERENCE_VALIDITY = (target randomness/population law, coverage method, familywise
+calibration, n=8 power-or-width bound, failure handling)`. Root may separately invest either in a
+defensible sampling-model justification or in a distribution-free familywise construction with an
+adequate pre-result resolution bound at `delta=0.005`.
+
+Until both missing objects are justified and frozen before untouched confirmation, the present
+`run` entry must continue to refuse before optimizer work or output. No READY command, result,
+scientific polarity, or Portfolio lifecycle action follows from this audit.
+
+The maximum future claim remains finite-budget supervised action-gate regret on registered,
+supported audit rows reached by the frozen script and valued by its frozen 16-step continuation. It
+cannot establish information gain, hypothesis-class superiority or equality, residual-semantic
+uniqueness, full-policy return, MARL value, arbitrary `K`, warehouse or UAV value, safety, or
+deployment value.

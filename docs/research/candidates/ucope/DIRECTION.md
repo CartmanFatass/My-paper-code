@@ -200,3 +200,66 @@ No production BELIEF result exists. A later object must freeze the direct result
 production resource/support preflight before training 1,638,400 root episodes, 819,200 conditional
 tail transitions, and 6,400 total optimizer updates. COUNT-versus-RAW attribution remains deferred
 until BELIEF acquisition competence is established. Root retains the Portfolio lifecycle decision.
+
+## Contextual BELIEF v2 fixed-panel and production boundary — 2026-08-31
+
+The direct production surface is now implemented as schema/result v2, but it is not currently
+schedulable. No production support root, model, optimizer update, held-out evaluation, or BELIEF
+result was created.
+
+### Prospective inference recast
+
+The original ten-seed Student-t lower bound is removed before result activity. Counter-addressed
+seed slots are deterministic design points and supplied no registered random seed population or
+finite-sample t coverage law. Exact policy enumeration bounds each seed's worst signed specificity
+by
+
+```text
+M_s in [-52945109/160000000, 17149681/800000000]
+```
+
+and admits a bounded mean-zero two-point counterexample on which all ten observations equal the
+positive endpoint with probability about `0.5338`. The former zero-variance t branch would therefore
+have false-positive probability above 53 percent under a law it did not exclude.
+
+The smallest prospective repair keeps the existing ten slots and all work unchanged. For every
+seed/context cell, use exact rational `Gamma=A-B`; sign the target cell positively and all seven
+nontarget cells negatively. The rule
+`ALL_TEN_ALL_EIGHT_STRICT_POSITIVE_V1` requires the unchanged at-least-9/10 competence gate, all ten
+exact root vectors, and the minimum of all 80 signed margins to be strictly above exact zero. No seed
+may be excluded or replaced. This is a complete fixed-panel census with no seed-superpopulation or
+practical-effect-size claim. Any positive materiality floor or sampled-seed population is a new
+prospective object.
+
+### Engineering acceptance and resource refusal
+
+The v2 production surface provides a create-once manifest, combined runtime/resource/support
+preflight, the sole three-input `run-belief` command, deterministic batch-addressed checkpoints,
+per-batch atomic resume, all-checkpoints-before-any-held-out-evaluation sequencing, and atomic
+complete-only publication. A real TEST_ONLY interruption after batch 7 and cold continuation through
+batch 20 is recursively bit-equal to uninterrupted training in model tensors, full AdamW state,
+progress, and held-out evaluation.
+
+Focused exact-runtime evidence is `143/145` on the first full pass plus `2/2` repaired targeted
+checks, for aggregate `145/145`. The deterministic production tape has global displayed-count
+minimum `361`, above the frozen floor `256`; this remains support evidence, not efficacy.
+
+The bounded observation at
+`temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-wave2-bounded-benchmark/benchmark-observation.json`
+records TEST_ONLY-640 support `35.285 s` and `1,125,816` bytes, one-seed row replay `1.876 s`, twenty
+cadence-one updates `7.056 s`, held-out evaluation `0.139 s`, checkpoint `214,323` bytes, and peak
+working set `281,575,424` bytes. Scaling the unchanged ten-seed production work and adding the frozen
+25-percent guard yields a `3,600 s` result projection and about `1.53 GiB` guarded peak, retained under
+a `2 GiB` estimate.
+
+The current contract permits only `1,800 s` and requires at least `4,294,967,296` bytes live RAM.
+A fresh exact CLI preflight observed only `3,514,687,488` live bytes and refused before support
+materialization; both wall and current live-memory gates fail. This is an engineering/resource
+disposition, not scientific polarity.
+
+Root may prospectively consider a resource-only revision to a `3,600 s` wall ceiling, `2 GiB` peak,
+`256 MiB` scratch, `256 MiB` durable, one worker, one intra-op and one inter-op thread, batch 256,
+and checkpoint cadence 1. That revision is not authorized here and would still require a fresh
+passing runtime/resource/support preflight with at least `4 GiB` live RAM and `4 GiB` free disk.
+COUNT/RAW remains deferred until a complete BELIEF result passes both competence and fixed-panel
+acquisition. Root retains every Portfolio lifecycle and scheduling decision.

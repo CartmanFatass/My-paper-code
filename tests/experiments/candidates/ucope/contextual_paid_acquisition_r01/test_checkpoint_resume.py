@@ -1,4 +1,5 @@
 from copy import deepcopy
+from dataclasses import asdict
 
 import pytest
 
@@ -12,6 +13,9 @@ from experiments.candidates.ucope.contextual_paid_acquisition_r01.checkpoint imp
 )
 from experiments.candidates.ucope.contextual_paid_acquisition_r01.model import build_shared_model
 from experiments.candidates.ucope.contextual_paid_acquisition_r01.rng import uint64
+from experiments.candidates.ucope.contextual_paid_acquisition_r01 import training
+from experiments.candidates.ucope.contextual_paid_acquisition_r01.evaluation import evaluate_heldout_cells
+from experiments.candidates.ucope.contextual_paid_acquisition_r01.support import preflight_support
 
 
 torch = pytest.importorskip("torch")
@@ -106,6 +110,45 @@ def test_zero_step_checkpoint_atomic_roundtrip_and_cold_resume(tmp_path):
     resumed = validate_cold_resume(path, build_shared_model, _optimizer)
     _assert_recursive_equal(resumed["model_state"], payload["model_state"])
     _assert_recursive_equal(resumed["optimizer_state"], payload["optimizer_state"])
+
+
+def test_interrupted_resume_is_bit_exact_and_checkpoints_every_batch(tmp_path, monkeypatch):
+    manifest = contract.default_manifest(contract.TEST_ONLY_MODE, 640)
+    support_path = preflight_support(manifest, tmp_path / "support")
+    seed = contract.SEED_SLOTS[0]
+    uninterrupted_path = tmp_path / "uninterrupted.pt"
+    resumed_path = tmp_path / "resumed.pt"
+
+    uninterrupted = training.train_one_seed(
+        seed, support_path, uninterrupted_path, manifest=manifest
+    )
+    assert uninterrupted["completed_batches"] == uninterrupted["optimizer_updates"] == 20
+
+    real_save = training.save_checkpoint
+    committed = []
+
+    def recording_save(path, payload):
+        committed.append(payload["completed_batches"])
+        return real_save(path, payload)
+
+    monkeypatch.setattr(training, "save_checkpoint", recording_save)
+    interrupted = training.train_one_seed(
+        seed, support_path, resumed_path, manifest=manifest, max_batches=7
+    )
+    assert interrupted["complete_pass"] is False
+    assert committed == list(range(1, 8))
+    resumed = training.train_one_seed(
+        seed, support_path, resumed_path, manifest=manifest, resume_from=resumed_path
+    )
+    assert resumed["complete_pass"] is True
+    assert committed == list(range(1, 21))
+
+    uninterrupted_payload = load_checkpoint(uninterrupted_path)
+    resumed_payload = load_checkpoint(resumed_path)
+    _assert_recursive_equal(uninterrupted_payload, resumed_payload)
+    assert asdict(evaluate_heldout_cells(uninterrupted_path)) == asdict(
+        evaluate_heldout_cells(resumed_path)
+    )
 
 
 def test_checkpoint_rejects_extra_or_context_specific_model_state():

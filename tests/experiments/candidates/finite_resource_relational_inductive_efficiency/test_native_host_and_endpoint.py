@@ -7,6 +7,7 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.host
     admit_native_backend, native_endpoint,
 )
 from experiments.candidates.finite_resource_relational_inductive_efficiency.contracts import core
+from experiments.candidates.finite_resource_relational_inductive_efficiency.native.native_abi import NATIVE_STEP_ABI
 
 
 def test_endpoint_formula_and_strict_support():
@@ -32,8 +33,8 @@ def test_production_rejects_python_and_test_only_fallback(tmp_path):
 
     class PythonFake:
         contract = NativeContract(
-            core.HOST_ID, core.SOURCE_ID, core.NATIVE_COMPONENT, core.NATIVE_ABI,
-            "FRRIE_NATIVE_CTYPES_V1", 8, 1, 1,
+            core.HOST_ID, core.SOURCE_ID, core.NATIVE_COMPONENT, NATIVE_STEP_ABI,
+            core.NATIVE_BINDING_KIND, 8, 1, 1,
         )
         native_entrypoint = staticmethod(lambda: None)
 

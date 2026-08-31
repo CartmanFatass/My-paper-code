@@ -1,27 +1,28 @@
-"""FRRIE describe/check/guarded-run command line."""
+"""Value-blind FRRIE V2 describe, prospective-check, and guarded-run CLI."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import sys
-from dataclasses import asdict
 from pathlib import Path
 from typing import Sequence
 
-from .contracts.core import ContractError, FIXTURE_CONTRACTS, load_manifest, structural_description
-from .host import NativeBackendUnavailable, NativeContract, NativePreflightFailed
-from .runner import (
-    ProductionTrainingUnavailable, ResumeContractMismatch, SealedInputMissing,
-    validate_sealed_seed_packet,
-)
+from .contracts.core import INFERENCE_CONTRACT, ContractError, load_manifest, structural_description
+from .host import NativeBackendUnavailable, NativePreflightFailed
 from .lifecycle import publish_create_only
+from .preflight import prospective_preflight
+
 
 EXIT_INVALID_CONTRACT = 2
 EXIT_MISSING_NATIVE_BACKEND = 3
-EXIT_FAILED_PREFLIGHT = 4
-EXIT_RESUME_MISMATCH = 5
-EXIT_TECHNICAL_FAILURE = 6
+EXIT_NATIVE_BUILD_REQUIRED = 4
+EXIT_FAILED_PREFLIGHT = 5
+EXIT_NOT_READY = 6
+EXIT_TECHNICAL_FAILURE = 7
+EXIT_RESUME_MISMATCH = EXIT_INVALID_CONTRACT
+
+INFERENCE_BLOCKER = "SIMULTANEOUS_MEAN_INFERENCE_UNRESOLVED_AT_24_BLOCKS"
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -48,70 +49,59 @@ def _load_json(path: str, field: str) -> dict[str, object]:
     return value
 
 
+def _check_exit(report: dict[str, object]) -> int:
+    """Classify the prospective report without changing the published facts."""
+    blockers = report.get("blockers")
+    if not isinstance(blockers, list):
+        raise NativePreflightFailed("prospective preflight returned no blocker list")
+    if "PACKAGE_NATIVE_ARTIFACT_ABSENT" in blockers:
+        return EXIT_MISSING_NATIVE_BACKEND
+    if "PACKAGE_NATIVE_FRESH_BUILD_REQUIRED" in blockers:
+        return EXIT_NATIVE_BUILD_REQUIRED
+    if any(blocker in blockers for blocker in (
+        "PACKAGE_NATIVE_ABI_UNAVAILABLE", "PACKAGE_NATIVE_CONTRACT_MISMATCH",
+    )):
+        return EXIT_FAILED_PREFLIGHT
+    if report.get("ready") is not True:
+        return EXIT_NOT_READY
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
         if args.command == "describe":
             print(json.dumps(structural_description(), sort_keys=True))
             return 0
+
+        # validate_manifest is the V2 gate and rejects V1 before packet, root,
+        # RNG, model, native, rollout, or scientific-value activity.
         manifest = load_manifest(args.manifest)
         if args.command == "check":
             output = Path(args.output)
-            if output.exists():
+            bound_output = Path(manifest["preflight_receipt"]["path"])
+            if output.resolve(strict=False) != bound_output.resolve(strict=False):
+                raise ContractError("--output must equal the manifest preflight receipt path")
+            if output.exists() or output.with_name(output.name + ".tmp").exists():
                 raise ContractError("check output is create-only")
-            seed_packet = _load_json(manifest["sealed_seed_packet"]["path"], "sealed seed packet")
-            validate_sealed_seed_packet(seed_packet, manifest)
-            preflight = _load_json(manifest["preflight_receipt"]["path"], "preflight receipt")
-            host = manifest["host"]
-            compute = manifest["compute"]
-            expected_native = NativeContract(
-                host["id"], host["source_id"], host["component"], host["abi"],
-                host["binding_kind"], compute["native_width"], compute["workers"],
-                compute["threads"], dtype=compute["model_dtype"],
-                reduction_dtype=compute["reduction_dtype"], device=compute["device"],
-                python_fallback=False, test_only=False,
+            # The bound packet is read directly.  A prewritten receipt is never
+            # read; prospective_preflight performs its structural validation.
+            packet = _load_json(manifest["sealed_seed_packet"]["path"], "sealed seed packet")
+            report = prospective_preflight(
+                manifest, packet, resource_ceiling=manifest["resource_ceiling"]
             )
-            expected_preflight = {
-                "schema": "FRRIE_NATIVE_PREFLIGHT_V1",
-                "ok": True,
-                "fresh": True,
-                "complete": True,
-                "native_contract": asdict(expected_native),
-                "resource_ceiling": manifest["resource_ceiling"],
-            }
-            if preflight != expected_preflight:
-                raise NativePreflightFailed("preflight structure differs from the direct resource/native contract")
-            fixture_dir = Path(__file__).parent / "fixtures"
-            fixture_paths = {
-                "ccic": fixture_dir / "ccic_control_v1.json",
-                "egrcr": fixture_dir / "egrcr_control_v1.json",
-                "raw_value": fixture_dir / "raw_value_v1.json",
-                "vqfp": fixture_dir / "vqfp_controls_v1.json",
-            }
-            for name, path in fixture_paths.items():
-                fixture = _load_json(str(path), f"{name} fixture")
-                contract = {key: fixture[key] for key in FIXTURE_CONTRACTS[name] if key in fixture}
-                if contract != FIXTURE_CONTRACTS[name]:
-                    raise ContractError(f"{name} fixture does not satisfy its direct contract")
-            facts = {
-                "schema": "FRRIE_VALUE_BLIND_CHECK_V1",
-                "contract_valid": True,
-                "sealed_packet_structurally_complete": True,
-                "preflight_structurally_complete": True,
-                "native_callable_available": False,
-                "ready_for_result_activity": False,
-                "scientific_values_read": False,
-            }
-            publish_create_only(output, facts)
-            return EXIT_MISSING_NATIVE_BACKEND
+            publish_create_only(output, report)
+            return _check_exit(report)
+
+        # This exact inference gate deliberately precedes output-root equality,
+        # resume, RNG-root use, model construction, native admission and values.
+        if manifest["inference"] == INFERENCE_CONTRACT and manifest["inference"]["status"] == INFERENCE_BLOCKER:
+            print(INFERENCE_BLOCKER, file=sys.stderr)
+            return EXIT_NOT_READY
         if Path(args.output_root) != Path(manifest["roots"]["output"]):
             raise ContractError("--output-root does not bind the manifest fresh root")
-        # No fresh FRRIE ctypes function or production trainer is bundled.
-        raise NativeBackendUnavailable("fresh FRRIE native backend is not installed")
-    except ResumeContractMismatch as exc:
-        print(f"resume mismatch: {exc}", file=sys.stderr)
-        return EXIT_RESUME_MISMATCH
-    except (ContractError, SealedInputMissing) as exc:
+        raise NativePreflightFailed("V2 result activity requires a ready prospective preflight")
+    except ContractError as exc:
         print(f"invalid contract: {exc}", file=sys.stderr)
         return EXIT_INVALID_CONTRACT
     except NativeBackendUnavailable as exc:
@@ -120,7 +110,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     except NativePreflightFailed as exc:
         print(f"failed preflight: {exc}", file=sys.stderr)
         return EXIT_FAILED_PREFLIGHT
-    except (ProductionTrainingUnavailable, OSError, RuntimeError) as exc:
+    except OSError as exc:
         print(f"technical failure: {exc}", file=sys.stderr)
         return EXIT_TECHNICAL_FAILURE
 

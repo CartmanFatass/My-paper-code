@@ -9,9 +9,10 @@ import gzip
 import json
 
 from .checkpoint import checkpoint_payload, load_checkpoint, save_checkpoint
-from .contract import BATCH_SIZE, K_TRAIN, SEED_SLOTS, as_fraction, contexts
+from .contract import BATCH_SIZE, K_TRAIN, SEED_SLOTS, as_fraction, contexts, default_manifest
 from .model import build_shared_model, displayed_belief, feature_vector, validate_shared_model
-from .support import validate_support
+from .schema import canonical_bytes
+from .support import build_fixed_behavior_plan, materialize_fixed_behavior_plan, validate_support
 
 
 def _torch():
@@ -35,21 +36,31 @@ def _context_lookup() -> dict[str, Mapping[str, Any]]:
 
 def _load_seed_rows(preflight_path: Path, seed_slot: str, support: Mapping[str, Any]) -> list[dict[str, Any]]:
     root = preflight_path.parent / "materialized"
+    if root.is_symlink() or not root.is_dir():
+        raise FileNotFoundError(f"materialized root absent or symlinked: {root}")
     cells: list[list[dict[str, Any]]] = []
-    for cell_id in _context_lookup():
+    manifest = default_manifest(support["mode"], int(support["episodes_per_context"]))
+    context_lookup = _context_lookup()
+    for cell_id, context in context_lookup.items():
         cell_rows: list[dict[str, Any]] = []
         logical_key = f"{seed_slot}|{cell_id}"
         path = root / support["materialized_files"][logical_key]["filename"]
-        if not path.is_file():
+        if path.is_symlink() or not path.is_file():
             raise FileNotFoundError(f"missing materialized dataset: {path}")
+        plan = build_fixed_behavior_plan(seed_slot, context, manifest)
+        expected_records = materialize_fixed_behavior_plan(plan, context)
         with gzip.open(path, "rt", encoding="utf-8") as stream:
-            for line in stream:
+            for expected, line in zip(expected_records, stream):
                 row = json.loads(line)
                 if row["seed_slot"] != seed_slot or row["context_id"] != cell_id:
                     raise ValueError("materialized row binding mismatch")
                 if int(row["period"]) not in K_TRAIN:
                     raise ValueError("held-out period reached training loader")
+                if line.rstrip("\n").encode("utf-8") != canonical_bytes(expected.to_dict()):
+                    raise ValueError("materialized row differs from fixed plan/counter tape")
                 cell_rows.append(row)
+            if len(cell_rows) != len(expected_records) or stream.readline():
+                raise ValueError("materialized row-count mismatch")
         cells.append(cell_rows)
     size = len(cells[0])
     if any(len(cell_rows) != size for cell_rows in cells):
@@ -87,6 +98,32 @@ def train_one_seed(
     if seed_slot not in SEED_SLOTS:
         raise ValueError("unknown seed slot")
     support = validate_support(preflight_artifact, manifest)
+    return _train_one_seed_from_validated_support(
+        seed_slot,
+        preflight_artifact,
+        checkpoint_path,
+        support_record=support,
+        resume_from=resume_from,
+        max_batches=max_batches,
+    )
+
+
+def _train_one_seed_from_validated_support(
+    seed_slot: str,
+    preflight_artifact: str | Path,
+    checkpoint_path: str | Path,
+    *,
+    support_record: Mapping[str, Any],
+    rows: list[dict[str, Any]] | None = None,
+    resume_from: str | Path | None = None,
+    max_batches: int | None = None,
+) -> dict[str, Any]:
+    """Train from the production orchestrator's once-validated on-disk support."""
+    if seed_slot not in SEED_SLOTS:
+        raise ValueError("unknown seed slot")
+    if not isinstance(support_record, Mapping):
+        raise ValueError("validated support record must be a mapping")
+    support = dict(support_record)
     destination = Path(checkpoint_path)
     if resume_from is None and destination.exists():
         raise FileExistsError("fresh training refuses an existing checkpoint path")
@@ -114,7 +151,8 @@ def train_one_seed(
             raise ValueError("resume checkpoint binding mismatch")
         completed_batches = restored["completed_batches"]
         optimizer_updates = restored["optimizer_updates"]
-    rows = _load_seed_rows(Path(preflight_artifact), seed_slot, support)
+    if rows is None:
+        rows = _load_seed_rows(Path(preflight_artifact), seed_slot, support)
     total_batches = (len(rows) + BATCH_SIZE - 1) // BATCH_SIZE
     if completed_batches > total_batches:
         raise ValueError("resume cursor exceeds deterministic one-pass batch count")
@@ -125,6 +163,7 @@ def train_one_seed(
     stop_batch = total_batches if max_batches is None else min(total_batches, completed_batches + int(max_batches))
     context_lookup = _context_lookup()
     model.train()
+    payload = None
     for batch_index in range(completed_batches, stop_batch):
         batch = rows[batch_index * BATCH_SIZE : (batch_index + 1) * BATCH_SIZE]
         root_features = []
@@ -154,18 +193,31 @@ def train_one_seed(
         optimizer.step()
         optimizer_updates += 1
         completed_batches = batch_index + 1
-    payload = checkpoint_payload(
-        model,
-        optimizer,
-        seed_slot=seed_slot,
-        completed_batches=completed_batches,
-        optimizer_updates=optimizer_updates,
-        total_batches=total_batches,
-        mode=support["mode"],
-        contract_spec=support["contract_spec"],
-        support_record=support,
-    )
-    save_checkpoint(checkpoint_path, payload)
+        payload = checkpoint_payload(
+            model,
+            optimizer,
+            seed_slot=seed_slot,
+            completed_batches=completed_batches,
+            optimizer_updates=optimizer_updates,
+            total_batches=total_batches,
+            mode=support["mode"],
+            contract_spec=support["contract_spec"],
+            support_record=support,
+        )
+        save_checkpoint(checkpoint_path, payload)
+    if payload is None:
+        payload = checkpoint_payload(
+            model,
+            optimizer,
+            seed_slot=seed_slot,
+            completed_batches=completed_batches,
+            optimizer_updates=optimizer_updates,
+            total_batches=total_batches,
+            mode=support["mode"],
+            contract_spec=support["contract_spec"],
+            support_record=support,
+        )
+        save_checkpoint(checkpoint_path, payload)
     return {
         "checkpoint_path": str(checkpoint_path),
         "checkpoint_record": {key: payload[key] for key in payload if key not in ("model_state","optimizer_state")},

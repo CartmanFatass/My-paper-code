@@ -1,13 +1,17 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
-This direction's registered exact factorial is complete. It was distilled from DEARS, FSBS, and
-EOCIV-lite; current lifecycle, priority, and owner remain solely in
+This direction's registered exact factorial is complete. A distinct finite-resource learned
+successor is now prospectively frozen but has no implementation or result. The direction was
+distilled from DEARS, FSBS, and EOCIV-lite; current lifecycle, priority, and owner remain solely in
 `docs/research/portfolio/PORTFOLIO.md`.
 
 ## Authority
 
 - Stable direction ID: `capability_bound_semantic_currentness`.
 - Accepted object: `CBSC-EXACT-FACTORIAL-V1`.
+- Prospective learned object: `CBSC-LR01`.
+- Prospective learned threshold: `CBSC_LR01_IMPLEMENTATION_THRESHOLD.md`.
+- Learned-object status: `RESULT_BLIND_CONTRACT_FROZEN_NOT_IMPLEMENTED`.
 - Accepted result intake:
   `CBSC_EXACT_FACTORIAL_RESULT_INTAKE_20260830.md`.
 - Complete artifact:
@@ -62,27 +66,66 @@ No learned abstraction, natural-frequency claim, proactive acquisition, general 
 value, variable-population MARL, UAV transfer, safety, or deployment claim follows. Proactive paid
 probing and COUNT-versus-RAW efficiency remain `ucope` questions.
 
-## Lifecycle recommendation and next nonredundant question
+## Prospective learned successor — 2026-08-31
 
-The exact factorial is scientifically complete and must not be rerun, retuned, or repaired.
-Direction-local advice is `KEEP/RECAST`, not automatic promotion: preserve the exact result as
-foundation evidence and require a separately frozen object before learning. Root retains the
-Portfolio decision; if no such object is prioritized, the completed exact object can close.
+`CBSC-LR01` asks whether one prospectively fixed, lossless CBSC relation codec reduces finite-budget
+held-out native regret relative to both a competent dense RAW parameterization and an equal-work
+deranged semantic codec. All three arms receive the same 112 primitive bits, exact three-action
+ledger targets, dense learner, initialization, optimizer exposure, training/evaluation population,
+parameters, logical compute, checkpoints, and zero model-selection exposure. The only treatment is
+which of three registered invertible 49-XOR codecs precedes the common learner.
 
-The next nonredundant question is finite-resource learnability: under matched primitive
-information, training support, interactions, parameters, optimizer updates, compute, and model
-selection, can a structured CBSC learner recover the exact rule on held-out support more efficiently
-than a competent same-information, same-capability unrestricted RAW learner? The predictive index
-remains the capability-specificity control rather than an equal-capability efficiency competitor.
-Any positive answer would support only finite-resource inductive bias, never semantic necessity.
-Re-enumerating this host or weakening RAW is not a successor question.
+The 24 MAIN blocks are deterministic registered design points, not an iid or exchangeable sample.
+`CBSC-LR01` therefore makes an exact finite-panel decision with componentwise worst-block margins;
+it uses no bootstrap, p-value, standard error, confidence interval, or population extrapolation.
+
+RAW is unrestricted only within that frozen dense parameterization. A learner unrestricted over all
+possible algorithms could run the structured codec itself, so no universal structured-over-RAW
+claim is coherent. The deranged structured arm and a gated-minus-open specificity contrast are
+mandatory because a two-arm advantage would remain attributable to generic factorization,
+conditioning, or task-aligned post-oracle compilation.
+
+This is a full-information offline action-value assay: each training context is reset and executed
+under all three supported actions to produce its exact Q-vector. It is not an online contextual-
+bandit, exploration, credit-acquisition, or MARL experiment. The exact-factorial runner is
+exhausted and was not used to execute this object.
+
+## Learned successor result — 2026-08-31
+
+`CBSC-LR01` completed once as a valid create-only `UNRESOLVED` result. All admission, numerical,
+direct-pair, work-parity, update-zero, and completeness audits passed, and the four independent RAW
+competence blocks reached strict zero regret at 512 updates.
+
+The registered worst-block benefits were `-0.07509358723958337` for STRUCTURED minus RAW,
+`-0.07509358723958337` for STRUCTURED minus SHAM, and `-0.138916015625` for gated-minus-open
+specificity. All three coordinates also had positive maxima, while none of the 24 blocks passed the
+STRUCT endpoint gate. The result therefore supports neither a robust structured advantage,
+practical equivalence, nor uniform RAW/SHAM superiority. Post-result averaging, resampling, block
+replacement, budget changes, or margin changes would answer a different question.
+
+## Lifecycle recommendation
+
+The exact factorial and the learned successor are both complete and must not be rerun, retuned, or
+repaired. Direction-local advice is `CLOSE`: preserve the exact factorial as narrow protocol-value
+evidence and retain `CBSC-LR01` as evidence that the chosen codec/optimizer package did not produce
+a robust all-block finite-budget advantage. Further optimizer or budget searches would be
+post-result recasts of an already exhausted synthetic ceiling.
+
+Natural-frequency acquisition remains a UCOPE question. A future representation study with a new
+host, population, or compiler null must register as a new successor object; no exact-factorial or
+`CBSC-LR01` polarity transfers.
 
 ## Evidence ancestry
 
 - `docs/research/candidates/capability_bound_semantic_currentness/CBSC_EXACT_FACTORIAL_RESULT_INTAKE_20260830.md`
 - `docs/research/candidates/capability_bound_semantic_currentness/IMPLEMENTATION_THRESHOLD.md`
+- `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_IMPLEMENTATION_THRESHOLD.md`
+- `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_RESULT_INTAKE_20260831.md`
+- `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_EXECUTION_INCIDENT_20260831.md`
 - `docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md`
 - `docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md`
 - `docs/research/candidates/eociv_lite/DIRECTION.md`
+- `docs/research/candidates/eociv_lite/PAYLOAD_CONTENT_LEARNABILITY_CODE_SCIENCE_INDEX.md`
+- `docs/research/candidates/eociv_lite/PAYLOAD_CONTENT_LEARNABILITY_RESULT.json`
 - `docs/research/candidates/ucope/DIRECTION.md`
 - `docs/research/portfolio/decisions/2026-08-30-fifteen-direction-consolidation.md`

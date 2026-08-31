@@ -52,7 +52,7 @@ def audit_discrete_policy(root_selected_actions: dict[str,str], tail_selected_pe
     )
     return {"oracle_action_vector":oracle_vector,"action_vector":actions,"cell_evidence":evidence,
         "cell_tail_agreement":{k:float(v) for k,v in agreements.items()},"max_regret":float(max(regrets)),
-        "forced_probe_tail_agreement":float(min(agreements.values())),"target_flip":actions==oracle_vector,"signed_specificity":float(specificity)}
+        "forced_probe_tail_agreement":float(min(agreements.values())),"target_flip":actions==oracle_vector,"minimum_seed_signed_specificity":fraction_json(specificity)}
 
 def evaluate_heldout_cells(model_or_checkpoint: Any, seed_slot: str|None=None, *, test_only: bool=False) -> SeedEvaluation:
     if isinstance(model_or_checkpoint,(str,Path)):
@@ -73,12 +73,12 @@ def evaluate_heldout_cells(model_or_checkpoint: Any, seed_slot: str|None=None, *
             belief=displayed_belief(context["link"],p,count); score_values=_score(model,"tail",[feature_vector(context,belief_short=belief,action_is_probe=False,period=k) for k in K_TEST]); tail_scores[cell][str(count)]={str(k):v for k,v in zip(K_TEST,score_values)}; ranking=sorted(zip(score_values,K_TEST),key=lambda x:x[0],reverse=True)
             tail_unique &= ranking[0][0]!=ranking[1][0]; tail_margins.append(ranking[0][0]-ranking[1][0]); tail_selected[cell][str(count)]=ranking[0][1]
     audit=audit_discrete_policy(root_selected,tail_selected)
-    return SeedEvaluation(seed,checkpoint_record,eligible,audit["action_vector"],root_selected,tail_selected,root_scores,tail_scores,audit["cell_evidence"],audit["oracle_action_vector"],audit["max_regret"],audit["forced_probe_tail_agreement"],audit["cell_tail_agreement"],root_unique,min(root_margins),tail_unique,min(tail_margins),audit["target_flip"],audit["signed_specificity"])
+    return SeedEvaluation(seed,checkpoint_record,eligible,audit["action_vector"],root_selected,tail_selected,root_scores,tail_scores,audit["cell_evidence"],audit["oracle_action_vector"],audit["max_regret"],audit["forced_probe_tail_agreement"],audit["cell_tail_agreement"],root_unique,min(root_margins),tail_unique,min(tail_margins),audit["target_flip"],audit["minimum_seed_signed_specificity"])
 
 def validate_competence(evaluations) -> dict[str,Any]:
     if len(evaluations)!=10 or {e.seed_slot for e in evaluations}!=set(SEED_SLOTS): raise ValueError("competence requires ten frozen seeds")
     certificate=construct_flip_certificate(); oracle_vector={c.context_id:c.test_action for c in certificate.cells}; competent={}
     for item in evaluations:
         audit=audit_discrete_policy(item.root_selected_actions,item.tail_selected_periods)
-        competent[item.seed_slot]=bool(item.oracle_action_vector==oracle_vector and item.action_vector==audit["action_vector"] and item.cell_evidence==audit["cell_evidence"] and item.root_unique and item.tail_unique and item.min_root_margin>0 and item.min_tail_margin>0 and audit["max_regret"]<=.02 and audit["forced_probe_tail_agreement"]>=.95)
+        competent[item.seed_slot]=bool(item.oracle_action_vector==oracle_vector and item.action_vector==oracle_vector and item.action_vector==audit["action_vector"] and item.cell_evidence==audit["cell_evidence"] and item.root_unique and item.tail_unique and item.min_root_margin>0 and item.min_tail_margin>0 and audit["max_regret"]<=.02 and audit["forced_probe_tail_agreement"]>=.95)
     count=sum(competent.values()); return {"competent_seed_count":count,"competence_pass":count>=9,"per_seed":{s:competent[s] for s in SEED_SLOTS}}

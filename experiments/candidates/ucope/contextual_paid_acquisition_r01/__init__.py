@@ -6,6 +6,12 @@ Importing this package performs no materialization, training, or evaluation.
 from .contract import CONTRACT_ID, FEATURE_NAMES, validate_contract
 from .oracle import build_flip_certificate, construct_flip_certificate
 from .support import build_fixed_behavior_plan, materialize_fixed_behavior_plan, validate_support
+from .production import (
+    create_production_manifest,
+    preflight_production,
+    run_belief,
+    validate_production_preflight,
+)
 
 __all__ = [
     "CONTRACT_ID",
@@ -16,4 +22,8 @@ __all__ = [
     "build_fixed_behavior_plan",
     "materialize_fixed_behavior_plan",
     "validate_support",
+    "create_production_manifest",
+    "preflight_production",
+    "run_belief",
+    "validate_production_preflight",
 ]

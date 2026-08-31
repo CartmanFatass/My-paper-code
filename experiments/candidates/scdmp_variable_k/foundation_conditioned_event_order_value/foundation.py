@@ -342,11 +342,118 @@ def analyze_competence(records: Sequence[CompetenceRecord]) -> FoundationGate:
     return FoundationGate(True, passed, graph_bounds, pooled, failure_bounds)
 
 
+def _competence_reset(source: AddressRNG, mission: CompetenceMission):
+    from .host_bridge import ResetLane
+    from ..target_bound_competent_controller_order_value.config import FORMATION_ROTATE, HOOK_HANDOFF
+
+    v, y, phi = competence_initial_draws(source, mission)
+    events = (HOOK_HANDOFF, FORMATION_ROTATE) if mission.graph == "HR" else (FORMATION_ROTATE, HOOK_HANDOFF)
+    return ResetLane(events, 13, v, y, phi)
+
+
+def _competence_renewal(
+    source: AddressRNG, mission: CompetenceMission, *, tick: int, action: int, active: bool
+):
+    from .host_bridge import RenewalLane
+
+    def component(name: str) -> tuple[float, ...]:
+        return tuple(
+            competence_disturbance(
+                source, mission, tick=min(tick + offset, 363), component=name
+            )
+            for offset in range(13)
+        )
+    return RenewalLane(action, component("eta_v"), component("eta_y"), component("eta_omega"), active)
+
+
+def execute_native_competence(
+    foundation: FrozenFoundation, source: AddressRNG
+) -> tuple[CompetenceRecord, ...]:
+    """Execute exactly 120 fresh missions in one native batch, 60 per graph."""
+
+    from .host_bridge import (
+        HostBridgeError, NativeBatch, validate_native_reset_outputs, validate_native_transition,
+        validate_terminal_endpoints,
+    )
+
+    if not isinstance(foundation, FrozenFoundation) or not isinstance(source, AddressRNG):
+        raise TypeError("competence execution requires a frozen foundation and addressed RNG")
+    missions = competence_inventory()
+    query_count = 0
+    resets = tuple(_competence_reset(source, mission) for mission in missions)
+    with NativeBatch(resets) as session:
+        outputs = session.initial
+        try:
+            validate_native_reset_outputs(
+                resets, tuple(outputs), width=COMPETENCE_EPISODES, context="competence"
+            )
+        except HostBridgeError as error:
+            raise FoundationContractError(str(error)) from error
+        renewals = [0] * len(missions)
+        while any(row.active for row in outputs):
+            active = tuple(index for index, row in enumerate(outputs) if row.active)
+            observations = torch.tensor(tuple(outputs[index].observation for index in active), dtype=torch.float32)
+            with torch.no_grad():
+                actions = lexicographic_argmax(foundation(observations))
+            if actions.shape != (len(active),):
+                raise FoundationContractError("competence policy batch differs")
+            query_count += len(active)
+            if query_count > COMPETENCE_EPISODES * 28:
+                raise FoundationContractError("competence foundation-query ceiling exceeded")
+            by_lane = {index: offset for offset, index in enumerate(active)}
+            following = session.renew(tuple(
+                _competence_renewal(
+                    source,
+                    mission,
+                    tick=outputs[index].tick,
+                    action=int(actions[by_lane[index]]) if index in by_lane else 0,
+                    active=index in by_lane,
+                )
+                for index, mission in enumerate(missions)
+            ))
+            try:
+                validate_native_transition(
+                    tuple(outputs), tuple(following), width=COMPETENCE_EPISODES,
+                    context="competence",
+                )
+            except HostBridgeError as error:
+                raise FoundationContractError(str(error)) from error
+            for index in active:
+                renewals[index] += 1
+                if renewals[index] > 28:
+                    raise FoundationContractError("competence mission exceeded 28 policy queries")
+            outputs = following
+    if (
+        len(outputs) != COMPETENCE_EPISODES
+        or any(row.active or not row.terminal for row in outputs)
+    ):
+        raise FoundationContractError("competence native final width/state differs")
+    try:
+        validate_terminal_endpoints(tuple(outputs), context="competence")
+    except HostBridgeError as error:
+        raise FoundationContractError(str(error)) from error
+    foundation.validate_immutable()
+    records = tuple(
+        CompetenceRecord(
+            mission.mission,
+            mission.graph,
+            bool(output.terminal),
+            bool(output.safe_dock),
+            tuple(label for label in FAILURE_LABELS if bool(getattr(output, label))),
+        )
+        for mission, output in zip(missions, outputs)
+    )
+    gate = analyze_competence(records)
+    if gate.complete is not True:
+        raise FoundationContractError("competence batch did not complete")
+    return records
+
+
 __all__ = [
     "CompetenceMission", "CompetenceRecord", "FoundationActorCritic", "FoundationContractError",
     "FoundationOutput", "FrozenFoundation", "InitializationUniformSource", "TensorState",
     "analyze_competence", "competence_disturbance", "competence_initial_draws",
     "competence_inventory", "direct_tensor_state", "exact_binomial_bound",
-    "freeze_foundation", "lexicographic_argmax", "materialize_foundation",
+    "execute_native_competence", "freeze_foundation", "lexicographic_argmax", "materialize_foundation",
     "validate_competence_rng_contract",
 ]

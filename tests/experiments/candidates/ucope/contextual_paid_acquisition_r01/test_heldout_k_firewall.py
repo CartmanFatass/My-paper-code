@@ -36,7 +36,11 @@ def test_heldout_periods_never_enter_support_training_or_checkpoint_selection():
 def test_training_loader_runtime_rejects_even_period_rows(tmp_path):
     materialized = tmp_path / "materialized"
     materialized.mkdir()
-    support = {"materialized_files": {}}
+    support = {
+        "mode": contract.TEST_ONLY_MODE,
+        "episodes_per_context": 160,
+        "materialized_files": {},
+    }
     seed = contract.SEED_SLOTS[0]
     for index, cell in enumerate(contract.default_manifest()["context_ids"]):
         filename = f"cell-{index}.jsonl.gz"

@@ -109,6 +109,31 @@ def test_zero_variance_is_explicit_and_every_lower_bound_must_be_strictly_positi
     assert result.disposition == contracts.Disposition.CLOSED.value
 
 
+def test_scientific_hold_counterexample_for_current_24_block_t_rule_is_exact():
+    cells = tuple(
+        _cell(
+            tape,
+            graph,
+            action,
+            1 if (graph, action) in (("HR", "A_HR"), ("RH", "A_RH")) else 2,
+        )
+        for tape in range(24)
+        for graph in ("HR", "RH")
+        for action in ("COMMON", "A_HR", "A_RH")
+    )
+    observed = analysis.analyze_complete_panel(cells)
+    direct_float_contrast = (1.0 - 1.0 / 364.0) - (1.0 - 2.0 / 364.0)
+    assert all(bound.zero_variance for bound in observed.bounds)
+    assert all(bound.lower == direct_float_contrast for bound in observed.bounds)
+    assert direct_float_contrast == pytest.approx(1.0 / 364.0, abs=1e-17)
+    assert observed.disposition == contracts.Disposition.ESTABLISHED.value
+
+    parent_mean = (127.0 / 128.0) * (1.0 / 364.0) + (1.0 / 128.0) * (-363.0 / 364.0)
+    all_positive_probability = (127.0 / 128.0) ** 24
+    assert parent_mean == pytest.approx(-59.0 / 11648.0, abs=1e-18)
+    assert all_positive_probability == pytest.approx(0.8284, abs=5e-5)
+
+
 def test_analysis_rejects_partial_nonterminal_duplicate_and_action_index_mismatch():
     rows = list(_nonlinear_inventory())
     with pytest.raises(analysis.AnalysisContractError, match="144 terminal"):

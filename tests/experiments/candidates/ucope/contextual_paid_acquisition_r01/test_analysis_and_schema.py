@@ -2,14 +2,14 @@ from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from fractions import Fraction
-from math import sqrt
-from statistics import mean, stdev
+from pathlib import Path
 
 import pytest
 
+from experiments.candidates.ucope.contextual_paid_acquisition_r01 import analysis as analysis_module
 from experiments.candidates.ucope.contextual_paid_acquisition_r01.analysis import (
     analyze_acquisition,
-    signed_specificity_lower_bound,
+    minimum_signed_specificity,
     validate_analysis,
 )
 from experiments.candidates.ucope.contextual_paid_acquisition_r01.artifact import _atomic_create_bytes, build_complete_result, validate_complete_result
@@ -30,7 +30,6 @@ from experiments.candidates.ucope.contextual_paid_acquisition_r01.schema import 
 from experiments.candidates.ucope.contextual_paid_acquisition_r01.rng import rng_contract
 
 
-T_DF9_ONE_SIDED_95 = 1.8331129326536335
 FORBIDDEN_FIELDS = {
     "contract_spec_digest", "manifest_digest", "tape_digest", "dataset_digest", "support_digest",
     "artifact_digest", "state_digest", "checkpoint_digests", "rng_contract_digest",
@@ -75,7 +74,7 @@ def _production_preflight_record():
 
 def _checkpoint_record(seed):
     return {
-        "format": "UCOPE_CPA_SINGLE_SHARED_CHECKPOINT_V1", "schema_version": SCHEMA_VERSION,
+        "format": "UCOPE_CPA_SINGLE_SHARED_CHECKPOINT_V2", "schema_version": SCHEMA_VERSION,
         "contract_id": CONTRACT_ID, "seed_slot": seed, "feature_names": list(FEATURE_NAMES),
         "train_periods": list(K_TRAIN), "model_spec": deepcopy(MODEL_SPEC),
         "optimizer_spec": deepcopy(OPTIMIZER_SPEC), "completed_batches": 640, "total_batches": 640,
@@ -117,7 +116,7 @@ def _evaluation(seed, *, root_selected=None, tail_selected=None, **changes):
         max_regret=audit["max_regret"], forced_probe_tail_agreement=audit["forced_probe_tail_agreement"],
         cell_tail_agreement=audit["cell_tail_agreement"], root_unique=True, min_root_margin=2.0,
         tail_unique=True, min_tail_margin=2.0, target_flip=audit["target_flip"],
-        signed_specificity=audit["signed_specificity"],
+        minimum_seed_signed_specificity=audit["minimum_seed_signed_specificity"],
     )
     return replace(value, **changes)
 
@@ -144,13 +143,41 @@ def _all_mapping_keys(value):
             yield from _all_mapping_keys(item)
 
 
-def test_student_t_df9_one_sided_lower_bound_is_exact():
-    values = tuple(0.01 * index for index in range(10))
-    expected = mean(values) - T_DF9_ONE_SIDED_95 * stdev(values) / sqrt(10)
-    assert signed_specificity_lower_bound(values) == pytest.approx(expected, rel=0, abs=1e-15)
-    for bad in (values[:-1], (*values[:-1], float("nan")), (*values, 1.0)):
-        with pytest.raises(ValueError):
-            signed_specificity_lower_bound(bad)
+def test_fixed_panel_exact_signed_minimum_strict_zero_and_negative_law():
+    evidence = deepcopy(_evaluation(SEED_SLOTS[0]).cell_evidence)
+    baseline = minimum_signed_specificity(evidence)
+    assert baseline > 0
+    target = "LINKED-p17_20-c9_100"
+    evidence[target]["Gamma"] = {"numerator": 0, "denominator": 1}
+    assert minimum_signed_specificity(evidence) == 0
+    evidence[target]["Gamma"] = {"numerator": -1, "denominator": 1000}
+    assert minimum_signed_specificity(evidence) < 0
+    evidence["unexpected"] = evidence.pop(next(cell for cell in evidence if cell != target))
+    with pytest.raises(ValueError):
+        minimum_signed_specificity(evidence)
+
+
+@pytest.mark.parametrize("numerator", [0, -1])
+def test_fixed_panel_zero_or_negative_stops_acquisition_after_competence(tmp_path, monkeypatch, numerator):
+    evaluations = list(_evaluations())
+    first = evaluations[0]
+    evidence = deepcopy(first.cell_evidence)
+    evidence["LINKED-p17_20-c9_100"]["Gamma"] = {"numerator": numerator, "denominator": 1000}
+    minimum = minimum_signed_specificity(evidence)
+    evaluations[0] = replace(
+        first,
+        cell_evidence=evidence,
+        minimum_seed_signed_specificity={"numerator": minimum.numerator, "denominator": minimum.denominator},
+    )
+    competence = {"competent_seed_count": 10, "competence_pass": True, "per_seed": {seed: True for seed in SEED_SLOTS}}
+    monkeypatch.setattr(analysis_module, "validate_competence", lambda items: competence)
+    result = analyze_acquisition(tuple(evaluations))
+    assert result["acquisition_all_flips"] is True
+    assert result["acquisition_pass"] is False
+    assert result["fixed_panel_disposition"] == "STOP_FIXED_PANEL_ACQUISITION"
+    competence["competence_pass"] = False
+    competence["competent_seed_count"] = 8
+    assert analyze_acquisition(tuple(evaluations))["fixed_panel_disposition"] == "STOP_FIXED_PANEL_COMPETENCE"
 
 
 def test_competence_requires_exact_policy_per_cell_floor_and_no_ties():
@@ -176,8 +203,13 @@ def test_analysis_binds_seed_slots_independent_of_input_order():
         validate_analysis((evaluations[0], *evaluations[1:-1], evaluations[0]))
     result = analyze_acquisition(evaluations)
     assert result["acquisition_all_flips"] is True
-    assert result["specificity_lower_bound"] > 0
+    assert Fraction(
+        result["panel_min_signed_specificity"]["numerator"],
+        result["panel_min_signed_specificity"]["denominator"],
+    ) > 0
     assert result["acquisition_pass"] is True
+    assert result["fixed_panel_disposition"] == "FIXED_PANEL_ACQUISITION_SUPPORTED"
+
 
 
 def test_complete_result_binds_explicit_production_preflight_and_checkpoint_records():
@@ -189,7 +221,16 @@ def test_complete_result_binds_explicit_production_preflight_and_checkpoint_reco
     assert set(value["result"]["checkpoint_records"]) == set(SEED_SLOTS)
     assert FORBIDDEN_FIELDS.isdisjoint(set(_all_mapping_keys(value)))
     assert validated["result"]["representation_conclusion"] == "NONE"
-    assert validated["result"]["claim_ceiling"] == "FINITE_HOST_CONTEXTUAL_PAID_ACQUISITION_ONLY"
+    assert validated["result"]["claim_ceiling"] == "TEN_FIXED_SEED_SLOTS_FINITE_HOST_ONLY_NO_SEED_SUPERPOPULATION"
+    assert validated["result"]["fixed_panel_disposition"] == "FIXED_PANEL_ACQUISITION_SUPPORTED"
+    legacy = deepcopy(value)
+    legacy["format"] = "UCOPE_CPA_COMPLETE_BELIEF_RESULT_V1"
+    with pytest.raises(ValueError):
+        validate_complete_result(legacy)
+    legacy = deepcopy(value)
+    legacy["result"]["specificity_t_df9_critical"] = 1.833112932653633
+    with pytest.raises(ValueError):
+        validate_complete_result(legacy)
 
 
 @pytest.mark.parametrize("mutation", [
@@ -206,10 +247,13 @@ def test_complete_result_binds_explicit_production_preflight_and_checkpoint_reco
     lambda r: r["seed_evaluations"][0].update(min_root_margin=0.0),
     lambda r: r["seed_evaluations"][0].update(min_root_margin=float("nan")),
     lambda r: r["seed_evaluations"][0].update(target_flip=False),
+    lambda r: r["seed_evaluations"][0].update(minimum_seed_signed_specificity={"numerator": 0, "denominator": 1}),
     lambda r: r["seed_evaluations"][0].update(extra=True),
     lambda r: r.update(complete=False),
     lambda r: r.update(representation_conclusion="COUNT_WINS"),
     lambda r: r.update(claim_ceiling="BROADER_THAN_FROZEN_HOST"),
+    lambda r: r.update(panel_min_signed_specificity={"numerator": 0, "denominator": 1}),
+    lambda r: r.update(fixed_panel_disposition="FIXED_PANEL_ACQUISITION_SUPPORTED-ish"),
 ])
 def test_complete_result_strictly_rejects_partial_or_forged_payloads(mutation):
     value = deepcopy(_build_result())
@@ -223,7 +267,7 @@ def test_seed_evaluation_schema_has_only_prespecified_fields():
         "seed_slot", "checkpoint_record", "result_eligible", "action_vector", "root_selected_actions",
         "tail_selected_periods", "root_scores", "tail_scores", "cell_evidence", "oracle_action_vector",
         "max_regret", "forced_probe_tail_agreement", "cell_tail_agreement", "root_unique",
-        "min_root_margin", "tail_unique", "min_tail_margin", "target_flip", "signed_specificity",
+        "min_root_margin", "tail_unique", "min_tail_margin", "target_flip", "minimum_seed_signed_specificity",
     }
 
 
@@ -285,7 +329,22 @@ def test_complete_result_with_learned_ties_is_publishable_structure_but_incompet
     assert value["result"]["complete"] is True
     assert value["result"]["competence_pass"] is False
     assert value["result"]["acquisition_pass"] is False
+    assert value["result"]["fixed_panel_disposition"] == "STOP_FIXED_PANEL_COMPETENCE"
     assert validate_complete_result(value) == value
+
+
+def test_removed_seed_superpopulation_inference_surface_is_absent():
+    source = "\n".join(
+        Path(path).read_text(encoding="utf-8").lower()
+        for path in (
+            "experiments/candidates/ucope/contextual_paid_acquisition_r01/contract.py",
+            "experiments/candidates/ucope/contextual_paid_acquisition_r01/analysis.py",
+            "experiments/candidates/ucope/contextual_paid_acquisition_r01/schema.py",
+            "experiments/candidates/ucope/contextual_paid_acquisition_r01/artifact.py",
+        )
+    )
+    for forbidden in ("specificity_lower_bound", "student", "t_df9", "one_sided_95"):
+        assert forbidden not in source
 
 
 def test_atomic_create_bytes_never_replaces_a_concurrent_winner(tmp_path):

@@ -71,6 +71,35 @@ materiality floor passes, a separately frozen finite-resource approximation ques
 eligible; if it does not, close standalone RISP and retain this result only as a constructive
 theorem/control. Root owns the Portfolio lifecycle decision.
 
+## PARKED reactivation audit — 2026-08-30
+
+`RISP-PREVALENCE-CENSUS-R01` stopped before implementation or enumeration because the current
+evidence does not uniquely define the requested witness-independent population. The ECR authority
+fixes the conditional tri-sector transition/ACK host, public information views, action tie order,
+duration support, uniform reference-action factor for witness reachability, and next-hold endpoint.
+It does not fix a probability law over renewal count or stopping, completed-duration strings,
+decision-opportunity sampling, or current next `k`. Those weights are constitutive: they determine
+the law-conditioned beliefs and actions of `FULL_BAYES_K_ERASED` and `LAST_ACK_BAYES`, as well as
+the action-difference mass and expected regret.
+
+The historical five-schedule target is a source-compatible candidate, not a uniquely inherited
+law. It contains multiple training, evaluation, target-mixture, and eligible-row populations and
+separates learned deployed policies from a uniform control. Current authority does not select one
+of those combinations for this census. Its per-tick hidden kernel is mathematically the same ECR
+kernel: diagonal `23/24` and off-diagonal `1/48` give nontrivial eigenvalue `15/16`.
+
+No current source supplies numeric prevalence/regret materiality floors or a rule combining them.
+Consequently no census value or lifecycle branch is presently defined. No prevalence package,
+test, result command, RISP-ECR-R01 rerun, or learning activity was created or executed. This is a
+definition-level blocker, not evidence of negligible prevalence and not a change to the completed
+existence result.
+
+Direction-local advice to Root is to keep standalone RISP `PARKED`. The smallest next discriminator
+is a result-independent authority that prospectively freezes the complete normalized history law,
+law-conditioned coarsened nulls, estimand denominators/units/tie handling, and numeric materiality
+branch before any code or enumeration. The full audit is recorded in
+`RISP_PREVALENCE_CENSUS_R01_BLOCKER_INTAKE_20260830.md`.
+
 ## Evidence set
 
 The current direction evidence set includes the registered exact result and its prospective
@@ -79,6 +108,7 @@ authority, together with the historical navigation and provenance documents belo
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_ECR_R01_RESULT_INTAKE.md`
+- `docs/research/candidates/renewal_indexed_score_plasticity/RISP_PREVALENCE_CENSUS_R01_BLOCKER_INTAKE_20260830.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md`
 - `docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_DORMANT_FALLBACK_PORTFOLIO_DISPOSITION_20260823.md`
 

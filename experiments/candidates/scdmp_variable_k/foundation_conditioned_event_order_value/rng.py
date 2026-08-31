@@ -5,6 +5,7 @@ from __future__ import annotations
 import hmac
 import hashlib
 import math
+import secrets
 from typing import Sequence
 
 
@@ -13,6 +14,15 @@ MAX_UNIFORM24 = 1.0 - 2.0**-24
 
 class RNGContractError(ValueError):
     pass
+
+
+def fresh_master() -> bytes:
+    """Create the sole master for one new result root using the OS CSPRNG."""
+
+    value = secrets.token_bytes(32)
+    if not isinstance(value, bytes) or len(value) != 32:
+        raise RNGContractError("operating-system RNG did not return one 256-bit master")
+    return value
 
 
 class AddressRNG:
@@ -115,4 +125,4 @@ class TestAddressRNG(AddressRNG):
         return hmac.new(self._master, encoded, hashlib.sha256).digest()
 
 
-__all__ = ["AddressRNG", "MAX_UNIFORM24", "RNGContractError", "TestAddressRNG"]
+__all__ = ["AddressRNG", "MAX_UNIFORM24", "RNGContractError", "TestAddressRNG", "fresh_master"]

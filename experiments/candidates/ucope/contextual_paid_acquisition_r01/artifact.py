@@ -23,7 +23,7 @@ from .contract import (
 from .evaluation import audit_discrete_policy
 from .rng import rng_contract
 from .schema import BeliefResult,SeedEvaluation,canonical_bytes
-RESULT_FORMAT="UCOPE_CPA_COMPLETE_BELIEF_RESULT_V1"
+RESULT_FORMAT="UCOPE_CPA_COMPLETE_BELIEF_RESULT_V2"
 
 def _checkpoint_record(record, seed, preflight_record):
     fields={"format","schema_version","contract_id","seed_slot","feature_names","train_periods","model_spec","optimizer_spec","completed_batches","total_batches","optimizer_updates","mode","contract_spec","support_record","rng_contract"}
@@ -59,7 +59,7 @@ def build_complete_result(*,preflight_record:Mapping[str,Any],checkpoint_records
     if preflight_record.get("mode")!=PRODUCTION_MODE or preflight_record.get("contract_spec")!=default_manifest()["contract_spec"]: raise ValueError("production preflight structure required")
     if not isinstance(checkpoint_records,Mapping) or set(checkpoint_records)!=set(SEED_SLOTS) or any(not e.result_eligible or checkpoint_records.get(e.seed_slot)!=e.checkpoint_record for e in evaluations): raise ValueError("checkpoint/evaluation structure mismatch")
     checkpoint_records={seed:_checkpoint_record(record,seed,preflight_record) for seed,record in checkpoint_records.items()}
-    a=analyze_acquisition(evaluations); result=BeliefResult(SCHEMA_VERSION,CONTRACT_ID,"BELIEF",dict(preflight_record),PRODUCTION_MODE,dict(checkpoint_records),evaluations,a["competence_pass"],a["competent_seed_count"],a["acquisition_all_flips"],a["specificity_lower_bound"],a["acquisition_pass"],True)
+    a=analyze_acquisition(evaluations); result=BeliefResult(SCHEMA_VERSION,CONTRACT_ID,"BELIEF",dict(preflight_record),PRODUCTION_MODE,dict(checkpoint_records),evaluations,a["competence_pass"],a["competent_seed_count"],a["acquisition_all_flips"],a["panel_min_signed_specificity"],a["acquisition_pass"],True,a["fixed_panel_disposition"])
     return validate_complete_result({"format":RESULT_FORMAT,"result":asdict(result)})
 def _seed(value):
     if not isinstance(value,Mapping) or set(value)!=set(SeedEvaluation.__dataclass_fields__): raise ValueError("seed field inventory mismatch")
@@ -80,8 +80,9 @@ def _seed(value):
     if any(type(getattr(e,name)) not in (int,float) or isinstance(getattr(e,name),bool) or not math.isfinite(getattr(e,name)) for name in ("min_root_margin","min_tail_margin")): raise ValueError("score margins must be finite numbers")
     if e.root_unique!=(min(rm)>0) or e.tail_unique!=(min(tm)>0) or abs(e.min_root_margin-min(rm))>1e-12 or abs(e.min_tail_margin-min(tm))>1e-12: raise ValueError("score margin mismatch")
     if e.cell_tail_agreement!=audit["cell_tail_agreement"] or e.target_flip!=audit["target_flip"]: raise ValueError("stored policy summary mismatch")
-    for name in ("max_regret","forced_probe_tail_agreement","signed_specificity"):
+    for name in ("max_regret","forced_probe_tail_agreement"):
         if not math.isfinite(getattr(e,name)) or abs(getattr(e,name)-audit[name])>1e-12: raise ValueError("derived metric mismatch")
+    if e.minimum_seed_signed_specificity!=audit["minimum_seed_signed_specificity"]: raise ValueError("exact seed specificity minimum mismatch")
     return e
 def validate_complete_result(value):
     if not isinstance(value,Mapping) or set(value)!={"format","result"} or value["format"]!=RESULT_FORMAT: raise ValueError("result envelope mismatch")
@@ -92,9 +93,9 @@ def validate_complete_result(value):
     if len(ev)!=10 or {e.seed_slot for e in ev}!=set(SEED_SLOTS) or not isinstance(r["checkpoint_records"],dict) or set(r["checkpoint_records"])!=set(SEED_SLOTS) or any(r["checkpoint_records"][e.seed_slot]!=e.checkpoint_record for e in ev): raise ValueError("result seed/checkpoint structure mismatch")
     for seed,record in r["checkpoint_records"].items(): _checkpoint_record(record,seed,r["preflight_record"])
     a=analyze_acquisition(ev)
-    for n in ("competence_pass","competent_seed_count","acquisition_all_flips","specificity_lower_bound","acquisition_pass"):
+    for n in ("competence_pass","competent_seed_count","acquisition_all_flips","panel_min_signed_specificity","acquisition_pass","fixed_panel_disposition"):
         if r[n]!=a[n]: raise ValueError("analysis field mismatch")
-    if type(r["complete"])is not bool or not r["complete"] or any(type(r[n])is not bool for n in ("competence_pass","acquisition_all_flips","acquisition_pass")) or type(r["competent_seed_count"])is not int or isinstance(r["competent_seed_count"],bool) or type(r["specificity_lower_bound"])not in(int,float) or isinstance(r["specificity_lower_bound"],bool) or not math.isfinite(r["specificity_lower_bound"]) or r["representation_conclusion"]!="NONE" or r["claim_ceiling"]!="FINITE_HOST_CONTEXTUAL_PAID_ACQUISITION_ONLY": raise ValueError("partial/deferred phase mismatch")
+    if type(r["complete"])is not bool or not r["complete"] or any(type(r[n])is not bool for n in ("competence_pass","acquisition_all_flips","acquisition_pass")) or type(r["competent_seed_count"])is not int or isinstance(r["competent_seed_count"],bool) or r["panel_min_signed_specificity"]!=a["panel_min_signed_specificity"] or r["fixed_panel_disposition"] not in {"STOP_FIXED_PANEL_COMPETENCE","STOP_FIXED_PANEL_ACQUISITION","FIXED_PANEL_ACQUISITION_SUPPORTED"} or r["representation_conclusion"]!="NONE" or r["claim_ceiling"]!="TEN_FIXED_SEED_SLOTS_FINITE_HOST_ONLY_NO_SEED_SUPERPOPULATION": raise ValueError("partial/deferred phase mismatch")
     return dict(value)
 def _atomic_create_bytes(path,payload):
     p=Path(path); p.parent.mkdir(parents=True,exist_ok=True); h,t=tempfile.mkstemp(prefix=f".{p.name}.",suffix=".tmp",dir=p.parent)
