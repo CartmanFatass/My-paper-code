@@ -4,12 +4,13 @@
 - Exact object: `foundation_conditioned_event_order_value` V3
 - Final validity: `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`
 - Scientific polarity: none
-- Exact-object state: consumed; no rerun, redraw or replacement
-- Portfolio mutation: none; Root retains cross-direction lifecycle authority
+- Evidence-attempt state: quarantined; no resume, salvage or reuse
+- Scientific-object state: unconsumed; a fresh outcome-blind replacement is permitted after repair
+- Portfolio mutation: `REGISTERED / MEDIUM`
 
 ## Conclusion
 
-The one formal V3 object is consumed but scientifically invalid. Its sole actual invalidator is the
+The first formal V3 evidence attempt is scientifically invalid. Its sole actual invalidator is the
 absence of a prospective direction-specific `assess-run` together with missing formal-process
 peak-RSS and scratch-peak telemetry. The fixed 4 GiB admissions, wall ceiling, durable-size ceiling
 and structural completion checks passed, but those observations cannot reconstruct the missing
@@ -19,7 +20,9 @@ prospective and high-watermark facts after completion. The exact classification 
 INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED
 ```
 
-and not any scientific pass, nonpass, null, negative or mechanism conclusion.
+and not any scientific pass, nonpass, null, negative or mechanism conclusion. Because those missing
+observations mean the frozen assignment was not completely implemented, this invalid attempt does
+not consume the scientific object.
 
 The evidence is quarantined and must not be opened for outcome interpretation. This audit
 disregards and does not quote, summarize or infer from component statistics, joint statistics,
@@ -102,33 +105,39 @@ establish or refute:
 - graph-conditioned value, graph-blind comparator value or candidate-set dominance;
 - learned chronology, duration, semigroup composition, transfer, safety or deployment.
 
-The prospective mathematical derivation remains a definition-level lemma, but the exact V3
-empirical object has been consumed without admissible evidence. No result from this artifact may be
+The prospective mathematical derivation and frozen empirical object remain live at the definition
+level, but the first V3 evidence attempt is inadmissible. No result from this artifact may be
 used in direction science, portfolio comparison, successor selection, threshold revision or model
 design.
 
-## No-rerun and quarantine law
+## Quarantine and outcome-blind replacement law
 
 The missing evidence was required prospectively or during the formal process. It cannot be repaired
-by replaying the same science, changing only telemetry, or observing the retained outcome. Therefore:
+inside the retained artifact, by observing its outcome, or by post-hoc measurement. Therefore:
 
-- do not rerun, resume, redraw, replace tapes, create a new master or choose another checkpoint;
+- do not resume, redraw, replace tapes, alter the master or choose another checkpoint within `.1`;
 - do not move, overwrite, normalize, republish or reinterpret the quarantine root;
-- do not create a second result root under a new name;
 - do not weaken the resource contract or reclassify post-hoc measurements as prospective evidence.
 
-The existing `.1` canonical root is occupied permanently. Old-schema and alternate-root requests
-must remain result-blind and refuse before any scientific effect.
+The existing `.1` canonical root is occupied permanently. Its old-schema and reentry requests must
+remain result-blind and refuse before any scientific effect. After the implementation defect is
+repaired and reviewed without outcome access, one separately frozen fresh root and master may
+instantiate the unchanged treatment, comparators, population law, 562-tape design, inference,
+thresholds and stopping rule. That is a replacement evidence instance, not a resume or salvage.
+If a replacement again omits a required prospective or run-time element, quarantine that attempt
+under the same rule; it still does not consume the object. Only a valid completed scientific
+assignment consumes it.
 
-## Future-entry hardening only — no run
+## Replacement-entrypoint hardening
 
-The remaining work is code correctness and non-result testing. It does not reopen this object and
-must not trigger another formal invocation.
+The remaining work is result-blind code correctness and non-result testing before a replacement
+command becomes reachable.
 
 ### Canonical root and atomic recovery
 
-- Fix the canonical path to the existing isolated `.1` root; reject every other root before model,
-  master, checkpoint, tape or output creation.
+- Keep the existing isolated `.1` root quarantined and reject every attempt to reenter or reuse it
+  before model, master, checkpoint, tape or output creation.
+- Freeze one separate replacement root prospectively and reject every undeclared root.
 - At a TEST_ONLY fixture seam, stage initialization and finalization atomically around the same raw
   master and exercise only same-master recovery from a complete atomic frontier.
 - Keep production post-result reentry impossible; the fixture must reject re-root and new-master
@@ -163,9 +172,9 @@ is direct byte equality inside the fixed local execution object.
 - Refuse scientific publication when any measurement is missing; resource refusal preserves no
   scientific branch.
 
-These changes may be exercised only by unit, fixture, TEST_ONLY native and result-blind preflight
-tests. Because the canonical production root is consumed, successful hardening does not create a
-second result opportunity.
+These changes must first be exercised by unit, fixture, TEST_ONLY native and result-blind preflight
+tests. Successful hardening makes the next fresh replacement evidence instance eligible for separate
+result admission; it does not validate the quarantine artifact or permit outcome-informed changes.
 
 ## Evidence paths
 
@@ -181,7 +190,8 @@ second result opportunity.
 
 ## Portfolio-relevant consequence and next observation
 
-The exact FCEOV V3 object is consumed as invalid evidence and has no rerun. Future work is limited to
-the no-run hardening above so later, independently defined objects cannot repeat this evidence loss.
-There is no next scientific observation for this object. Root may separately decide the direction's
-lifecycle, but no outcome from the quarantined artifact can inform that decision.
+The first FCEOV V3 evidence attempt is quarantined as invalid evidence, but the frozen scientific
+object remains unconsumed because the assignment was not completely implemented. The next
+decision-changing observation may be the next fresh outcome-blind replacement evidence instance after
+the hardening and complete prospective resource contract pass review. No outcome from the
+quarantined artifact may inform that replacement or its interpretation.

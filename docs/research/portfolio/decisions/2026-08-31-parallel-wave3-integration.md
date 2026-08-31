@@ -15,7 +15,7 @@ parallel, each with direction-local EM/CM work. Root accepts the following lifec
 | DISH | `ACTIVE / MEDIUM` | Keep on `PROSPECTIVE_INFERENCE_HOLD`. The bounded two-owner pathwise oracle is accepted; do not build the full production panel until a valid population law or an explicit fixed-panel claim is selected. |
 | FRRIE | `PARKED / MEDIUM` | Park. Close R01 before production because the protected 24-root class cannot supply useful power and no proportionate larger design is justified. |
 | RISP | `CLOSED / TERMINAL` | Close standalone RISP. Retain the exact ECR witness only as a noncommutation theorem/control with no polarity transfer. |
-| SCDMP | `PARKED / MEDIUM` | Park. The exact V3 object was consumed as invalid evidence and cannot be rerun; retain the KL/IUT derivation and hardened code only for independently defined future objects. |
+| SCDMP | `REGISTERED / MEDIUM` | Keep the frozen object live. The first V3 evidence attempt is invalid because required prospective/run-time resource observations were absent; that incomplete assignment is quarantined but does not consume the scientific object. Enable and review a fresh outcome-blind replacement evidence instance. |
 
 UCOPE remains `PARKED / MEDIUM`; CBSC and VQFP remain closed. No closed or parked result polarity is
 transferred into another direction.
@@ -81,16 +81,19 @@ tapes in `23` width-144 slices plus one width-60 slice, with integer thresholds
 `21,046 / 21,046 / 42,091` and a joint power lower bound `0.8010212474` at the frozen normalized
 planning alternative.
 
-The sole formal V3 command completed before an independent review stop reached it. Root quarantines
+The first formal V3 command completed before an independent review stop reached it. Root quarantines
 the artifact as `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`: every 4 GiB admission, wall,
 durable and structural check passed, but the prospective direction-specific assessment and formal
 peak-RSS/scratch high-watermarks were not observed and cannot be reconstructed. The artifact has no
-scientific polarity and cannot be rerun, resumed, redrawn or salvaged.
+scientific polarity and cannot be resumed, redrawn or salvaged. Because the assignment was not
+completely implemented, this attempt does not consume the frozen scientific object.
 
-No-run hardening now fixes the canonical root, direct raw-byte source/native snapshot, same-master
+Result-blind hardening now fixes quarantine-root refusal, direct raw-byte source/native snapshot, same-master
 staging recovery, root/master/run-record bundle binding, full resource telemetry, terminal invalid
 semantics and completed-result/nonpass reentry without hashes, authentication or identity fields.
-Independent re-review is clean. Focused verification: `117 passed`.
+Independent re-review is clean. Focused verification: `117 passed`. The next engineering investment
+is a separately frozen replacement root/command that preserves the complete V3 scientific contract
+and cannot read or reuse the quarantine artifact.
 
 ## Cross-direction conclusions
 
@@ -102,8 +105,9 @@ Independent re-review is clean. Focused verification: `117 passed`.
 3. An all-components-positive claim is an intersection-union test. Component tests can each use the
    global alpha only when no component is independently publishable and failure produces no
    selective negative claim.
-4. Resource and implementation conformance determine whether evidence is admissible; they do not
-   create positive or negative scientific polarity. SCDMP is the explicit invalid-evidence example.
+4. Resource and implementation conformance determine whether an evidence attempt is admissible;
+   an incomplete assignment neither creates scientific polarity nor consumes its scientific object.
+   SCDMP is the explicit invalid-evidence example.
 5. RISP's noncommutation theorem may inform SCDMP controls, but its witness weights and polarity do
    not transfer. CRTO and FRRIE may share bounded-mean and matched-work infrastructure without
    merging their scientific estimands.
@@ -115,8 +119,10 @@ Independent re-review is clean. Focused verification: `117 passed`.
 2. For DISH, choose the estimand and valid inference target before further production work. First
    consider exact replay absorption, then a reduced primary bounded family with a prospective power
    law; otherwise park the direction.
-3. Do not invest further result compute in FRRIE, RISP, SCDMP or UCOPE until their explicit reentry
-   conditions produce genuinely new scientific objects.
+3. Enable and review SCDMP's fresh replacement entrypoint without reading the quarantine outcome;
+   then admit the next replacement evidence instance under the unchanged 562-tape contract.
+4. Do not invest further result compute in FRRIE, RISP or UCOPE until their explicit reentry
+   conditions produce decision-changing scientific objects.
 
 Every future result-bearing experiment, resume, retry or slice continues to require a fresh shared
 4 GiB physical/effective memory admission plus its direction-specific preflight.

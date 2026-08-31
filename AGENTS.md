@@ -16,6 +16,11 @@ whenever useful. Specialist profiles remain optional native subagents. A subagen
 working method, not an exclusive authority boundary. Native prompts and responses use ordinary
 language; no repository message envelope or routing identifier is required.
 
+Name native subagent tasks as `<alias>_<model><effort>_<direction>_<task>`. Use the shortest unique
+alias; model codes are `l/t/s` for Luna/Terra/Sol and effort codes are `l/m/h/xh/mx` for
+low/medium/high/xhigh/max. Task IDs remain lowercase because the native API accepts lowercase
+letters, digits and underscores; user-facing notation may capitalize the model code.
+
 ## Workspace and Git
 
 Use the checkout, native worktree, or working directory actually supplied by Codex for the task.
@@ -40,6 +45,15 @@ engineering blocker.
 Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
 bit identity, declared comparison, or external side effects. State material assumptions and
 distinguish observation from inference.
+
+Distinguish a scientific object from an evidence attempt. A launch or artifact that omits required
+prospective instrumentation, resource observation, or another part of the frozen assignment is an
+incomplete implementation and does not consume the scientific object. Quarantine that artifact and
+do not interpret, resume, or salvage it. An outcome-blind fresh replacement attempt may implement
+the unchanged object after the defect is repaired and the complete contract is frozen prospectively.
+This applies to every incomplete attempt; technical failures do not create a finite retry budget.
+Only a valid completed scientific assignment consumes the object. An outcome-informed redesign is
+a different scientific object.
 
 Direction science lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
 evidence. `docs/research/portfolio/PORTFOLIO.md` is Root's current lifecycle and priority snapshot.

@@ -1,9 +1,15 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-08-31T14:59:40Z
+Updated at: 2026-08-31T16:07:17Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
+Incomplete-assignment rule: a missing prospective instrument, resource observation, or other
+required implementation element invalidates and quarantines that evidence attempt but does not
+consume its scientific object. A fresh outcome-blind replacement may implement the unchanged object
+after the defect and full prospective contract are resolved; it is not a resume or salvage. This
+applies to every incomplete attempt. Only a valid completed scientific assignment consumes the
+object; technical failures do not create a finite retry budget.
 
 | Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
@@ -31,7 +37,7 @@ Result-run memory floor: `4 GiB physical and effective available memory, freshly
 | roster_smf | CLOSED | TERMINAL | NONE | 2026-08-29T15:04:58Z | Readiness `TERMINAL`. Exact census dominates sampled-mass compression under the current access law. Re-open only if the system makes exact census genuinely unavailable or materially different; no current independent investment remains. |
 | scope_1s | CLOSED | LOW | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Synthetic whole-epoch carrier separation lacks a production authenticated atom. Portfolio closes standalone Scope-1s and retains its ancestry/compatibility controls as FSBS/DEARS provenance. |
 | semantic_graphon_shared_policy | CLOSED | TERMINAL | NONE | 2026-08-31T00:01:00Z | The narrow physical prior is strictly contained by EDGE-FLEX. SGSP becomes the learned-treatment ancestry of FRRIE; the old graphon/RSCF label and result polarity do not transfer. |
-| semigroup_consistent_duration_model_policy | PARKED | MEDIUM | ROOT | 2026-08-31T14:59:40Z | The three-gap graph-blind-simplex KL/IUT object is mathematically frozen at the minimal 562 tapes and the no-run entrypoint is hardened with 117 focused tests, but the sole formal V3 object is consumed as `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`. Its prospective direction assessment and formal peak-RSS/scratch telemetry were missing, so the quarantined artifact has no polarity and cannot be rerun, resumed, redrawn, or salvaged. Reopen only through a genuinely independent new scientific object; telemetry repair cannot recreate this attempt. |
+| semigroup_consistent_duration_model_policy | REGISTERED | MEDIUM | ROOT | 2026-08-31T16:07:17Z | The three-gap graph-blind-simplex KL/IUT object remains live at the frozen minimal 562 tapes. The first V3 evidence attempt is quarantined as `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED` because prospective direction assessment and formal peak-RSS/scratch telemetry were never observed; that incomplete assignment has no polarity and does not consume the scientific object. The old artifact cannot be resumed, redrawn, or salvaged. Next investment is result-blind replacement-entrypoint enablement and review, followed by a fresh outcome-blind evidence instance with the complete prospective resource contract. |
 | ucope | PARKED | MEDIUM | ROOT | 2026-08-31T12:25:55Z | Contextual BELIEF v2 completed validly as `STOP_FIXED_PANEL_COMPETENCE`: support and all ten checkpoints are complete, but `0/10` seeds pass competence, every root action vector differs from the oracle, every seed exceeds regret `0.02`, and every tail-agreement score is below `0.95`. Positive forced-PROBE margins have no acquisition authority; COUNT/RAW is ineligible. Reopen only for a new independently justified competence-first learner object, never by rerun or post-result budget/tuning changes. |
 | vap_folr_core | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Early typed owner-state reachability survives, but later calibration was nonidentifying and deterministic latches were stronger. Portfolio closes standalone VAP/FOLR and retains its carrier/invalidation primitives as DEARS/RCLE controls. |
 | variable_n_fleet_churn | CLOSED | MEDIUM | NONE | 2026-08-29T15:04:58Z | Readiness `NO-STANDALONE-WORK`. Exact physical-command commutation is a useful prerequisite, not an independent return question. Portfolio closes standalone VNFC and retains the physical-key/presentation-invariance gate as an RCLE prerequisite; substrate burden does not negate the primitive's value. |

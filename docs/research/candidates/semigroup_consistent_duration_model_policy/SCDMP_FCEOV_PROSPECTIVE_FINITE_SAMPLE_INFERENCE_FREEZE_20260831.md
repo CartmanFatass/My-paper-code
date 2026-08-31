@@ -3,15 +3,17 @@
 - Frozen: `2026-08-31`
 - Baseline: `742f322b`
 - Scientific object: `foundation_conditioned_event_order_value`
-- State: `HISTORICAL_FREEZE_EXACT_OBJECT_CONSUMED_INVALID_EVIDENCE`
+- State: `REGISTERED_OBJECT_FIRST_EVIDENCE_ATTEMPT_QUARANTINED`
 - Formal result: quarantined as `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`; outcome not interpreted
-- Portfolio mutation: none; Root retains lifecycle and investment decisions
+- Portfolio mutation: `REGISTERED / MEDIUM`
 
 ## Conclusion
 
-Post-freeze disposition: the exact object defined below has been consumed as invalid evidence and
-has no rerun. The remaining text preserves the prospective mathematical contract only; it is not an
-executable next action. Current validity and no-run hardening are recorded in
+Post-freeze disposition: the first evidence attempt is quarantined as invalid because it did not
+completely implement the prospective resource-observation assignment. It does not consume the
+scientific object. The contract below remains the unchanged basis for the next fresh outcome-blind
+replacement evidence instance after result-blind entrypoint enablement and review. Current validity
+and replacement-entrypoint hardening are recorded in
 `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`.
 
 Replace the historical four-member paired Student-t rule with one fixed-sample,
@@ -322,7 +324,7 @@ terminate completely. No slice statistic, p-value, confidence bound, favorable p
 resource observation or partial cell may stop, extend, replace or reorder the panel. Analyze only
 after all `3,372` terminal cells are present.
 
-One formal attempt uses one fresh internally generated master, the frozen final checkpoint and the
+One complete evidence instance uses one fresh internally generated master, the frozen final checkpoint and the
 exact `562` addressed tapes. There is no CLI seed/master, new master after activity begins, tape
 replacement, redraw, checkpoint selection, changed tape count, changed threshold, result-aware
 extension, or second attempt after a valid result. A valid complete bundle pass establishes only the
@@ -330,7 +332,9 @@ frozen conjunction. Every other valid complete bundle is
 `TARGET_CANDIDATE_ORDER_VALUE_NOT_ESTABLISHED_AT_FROZEN_RESOLUTION` and ends this exact
 state/`k`/foundation/candidate-set purchase before an adapter. Missing or duplicate durable cells,
 support/RNG drift, foundation mutation, resume divergence or partial scientific publication are
-invalid evidence and carry no scientific polarity.
+invalid evidence and carry no scientific polarity. An incomplete assignment does not consume the
+scientific object; after result-blind defect repair, a fresh replacement instance starts with its own
+new master and full unchanged contract. This is not a second attempt after a valid result.
 
 Resource refusal or process interruption is technical rather than scientific. Each slice publishes
 one complete raw-cell frontier atomically; completed slices are immutable. A later technical resume
@@ -340,7 +344,9 @@ atomically completes may restart that same slice from its same addresses and imm
 it may not preserve a subset, replace a tape or advance the frontier. No inference value is computed
 or exposed before all slices complete. A technical resume that satisfies these equalities is not a
 new scientific retry. Any new master, tape redraw/replacement, completed-slice rewrite, frontier
-divergence or result-informed continuation is invalid and cannot be repaired inside this object.
+divergence or result-informed continuation inside that evidence instance is invalid and cannot be
+repaired in place. This does not bar the separately frozen outcome-blind replacement instance after
+an incomplete assignment; it bars continuation or salvage of the invalid instance.
 
 The raw `3,372` cells, the three integer-grid block-gap vectors, point estimates, log statistics,
 p-value bounds, `p_IUT`, component flags and single `L_theta` form one atomic complete result. No
@@ -465,9 +471,9 @@ Limitations:
 
 ## Cheapest next discriminator
 
-There is no next scientific discriminator or formal compute for this exact object. Future work is
-limited to the no-run canonical-root, atomic staging, direct raw-byte equality and identity-free
-resource-telemetry hardening in
+The cheapest next discriminator remains the unchanged complete 562-tape object. First enable and
+review a separate replacement root/command with quarantine-root refusal, atomic staging, direct
+raw-byte equality and identity-free resource telemetry as specified in
 `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`. Unit, fixture, TEST_ONLY native and
-result-blind preflight tests may preserve the derivation and prevent recurrence, but they cannot
-create a second result opportunity.
+result-blind preflight tests must pass before the next fresh outcome-blind replacement evidence instance
+can enter result admission.

@@ -172,23 +172,26 @@ Common tapes reduce variance but do not create sign symmetry or action/graph-lab
 Student-t, sign-flip and permutation routes remain ineligible. A complete nonpass means only that
 the conjunction was not established at the frozen resolution. It cannot establish zero or negative
 order value. Same-master, same-tape technical resume is allowed only from an atomic complete-slice
-frontier after a fresh 4 GiB admission; a new master, redraw, replacement, changed `n`, changed
-threshold or result-aware extension is a new scientific attempt and is forbidden.
+frontier within one admissible evidence instance after a fresh 4 GiB admission. Within that instance,
+a new master, redraw, replacement, changed `n`, changed threshold or result-aware extension is
+invalid. This old clause does not prohibit the fresh outcome-blind replacement evidence instance
+defined by the incomplete-assignment nonconsumption decision; `.1` itself remains non-resumable.
 
 At the time of this prospective freeze, the executable remained on implementation hold pending the
-three-gap KL/IUT contract, width-60 tail slice, atomic frontier and revised resource envelope. That
-next action is superseded by the consumed invalid-evidence disposition below. The bounded claim
+three-gap KL/IUT contract, width-60 tail slice, atomic frontier and revised resource envelope. The
+first evidence attempt below did not completely implement that assignment. The bounded claim
 remains conditional on the ideal independent
 fair-bit/PRF tape law, one competence-qualified foundation, one state, `k=13`, the exact simulator
 and the three-action candidate set. Exact formulas, assumptions, limitations and evidence paths are
 in `SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`.
 
-## FCEOV V3 consumed invalid-evidence disposition — 2026-08-31
+## FCEOV V3 non-consuming invalid-evidence disposition — 2026-08-31
 
-This section supersedes the preceding implementation-hold and prospective-resume next actions. The
-exact V3 formal object has been consumed and is classified
+The first V3 evidence attempt is classified
 `INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`. No outcome is interpreted and no scientific
-polarity enters this direction.
+polarity enters this direction. Because required prospective and run-time resource observations
+were absent, the frozen assignment was not completely implemented and the scientific object is not
+consumed.
 
 Root's read-only validity isolation and the independent reviewer agree on one actual invalidator:
 the run lacked a prospective direction-specific `assess-run`, formal-process peak-RSS telemetry and
@@ -204,14 +207,18 @@ identity-free resource telemetry, not hashes, digests, identity, authentication 
 
 The quarantine artifact cannot establish or refute any component, joint value or mechanism claim.
 A non-observed resource envelope is invalid evidence, not a negative result. Do not open or quote
-outcome fields, rerun, resume, redraw, replace tapes, create another master or create an alternate
-result root. The existing `.1` canonical root is occupied permanently.
+its outcome fields, resume it, redraw or replace its tapes, alter its master, or reuse its result
+root. The existing `.1` canonical root remains occupied permanently.
 
-Future work is limited to no-run code hardening and TEST_ONLY/result-blind tests: canonical-root
-refusal before effect; same-master atomic recovery; create-only path/length/full-raw-byte snapshots
-for the owned, allowlisted and loaded native surfaces with resume `read_bytes()` equality; final
-bundle binding to canonical resolved root/raw master/run record/raw-byte snapshot; and prospective
-direction assessment plus live wall/peak-RSS/scratch/durable telemetry. Successful hardening does
-not reopen this exact object or create a second scientific attempt. Full validity evidence and the
-no-outcome boundary are recorded in
+The completed result-blind hardening covers canonical-root refusal before effect; same-master atomic
+recovery; create-only path/length/full-raw-byte snapshots for the owned, allowlisted and loaded
+native surfaces with recovery `read_bytes()` equality; final bundle binding to resolved root/raw
+master/run record/raw-byte snapshot; and prospective direction assessment plus live
+wall/peak-RSS/scratch/durable telemetry. The next implementation may enable a separate fresh result
+root for the next outcome-blind replacement evidence instance. It must preserve the frozen treatment,
+comparators, population law, 562-tape count, inference, thresholds and stopping rule, and it must
+complete every prospective resource observation before publication. This is not a resume or salvage
+of `.1`. If that replacement is also incomplete for a technical or evidence-envelope reason, it is
+quarantined without consuming the object; only a valid completed assignment consumes it. Full
+validity evidence and the no-outcome boundary are recorded in
 `SCDMP_FCEOV_V3_INVALID_EVIDENCE_RESOURCE_AUDIT_20260831.md`.

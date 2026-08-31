@@ -1,14 +1,16 @@
 # SCDMP foundation-conditioned event-order value implementation threshold
 
-Status: `EXACT_OBJECT_CONSUMED_INVALID_EVIDENCE_NO_RERUN_HARDENING_ONLY`
+Status: `REGISTERED_REPLACEMENT_EVIDENCE_INSTANCE_PENDING`
 
 The retained conclusion-blind review is terminal and rejects the earlier 18-action finite-selector
 opportunity law at the definition level. The separately frozen fixed-state, fixed-`k`, precommitted
 2×3 candidate-action gate below avoids both selector regret and assay-state copula ambiguity and
 has a technically accepted V2 implementation and a frozen V3 definition. It inherits no polarity
-from the rejected object. The one V3 formal object is now consumed as
-`INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`; no result-bearing entry may run again. This file
-retains the exact definition only to constrain no-run hardening and result-blind tests.
+from the rejected object. The first V3 evidence attempt is quarantined as
+`INVALID_EVIDENCE_RESOURCE_ENVELOPE_UNOBSERVED`; missing prospective assessment and run-time
+resource telemetry mean that attempt did not completely implement the assignment and did not
+consume the scientific object. A result-bearing replacement remains unavailable until its fresh
+entrypoint and complete prospective resource contract pass result-blind implementation and review.
 
 ## Scientific object
 
@@ -212,7 +214,7 @@ opportunity/production/lifecycle/RNG/result modules that encode the rejected 18-
 
 Schemas cover manifest, checkpoint, foundation gate, complete 2×3 result, and terminal fact.
 
-## CLI retirement and no-run hardening
+## Quarantined CLI and replacement-entrypoint threshold
 
 ```text
 python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_order_value.runner \
@@ -222,17 +224,16 @@ python -m experiments.candidates.scdmp_variable_k.foundation_conditioned_event_o
   --phase FOUNDATION_AND_2X3 --manifest PATH --result-root PATH
 ```
 
-The displayed phase syntax is historical and permanently unavailable for this exact object. The
-existing `.1` canonical production root is occupied. Every alternate root, old-schema request and
-second phase invocation must refuse before model, master, checkpoint, tape or output creation.
-`--preflight-only` may remain only for result-blind and TEST_ONLY hardening; it cannot prepare or
-license another result.
+The existing `.1` production root and its phase invocation are permanently quarantined. They must
+refuse reentry before model, master, checkpoint, tape or output creation. `--preflight-only` remains
+available for result-blind and TEST_ONLY checks. A replacement result command must use a separately
+frozen fresh root and must not read, resume, normalize or reuse `.1`.
 
-The consumed definition used one internally generated OS 256-bit master, 160×12 fixed-13 training,
+The frozen object uses one internally generated OS 256-bit master per evidence instance, 160×12 fixed-13 training,
 one update-160/step-1,920 checkpoint, 120 competence records, 23 width-144 slices and one width-60
-slice over 562 tape addresses. These counts are immutable provenance, not a future workload.
+slice over 562 tape addresses. These counts are the immutable replacement workload.
 
-The consumed maximum was 5,412 episodes/rollouts, 1,969,968 allocated primitive slots, 1,920
+The frozen maximum is 5,412 episodes/rollouts, 1,969,968 allocated primitive slots, 1,920
 AdamW steps, one checkpoint, 3,372 forced actions, and at most 148,164 foundation queries, with one
 worker and one native/Torch thread. The frozen ceilings were 300 seconds, 1 GiB peak RSS, 64 MiB
 scratch and 64 MiB durable. Non-result checks
@@ -242,18 +243,22 @@ full-mission accounting, RATE disconnection, integer/KL branch equality, all-or-
 complete-only artifacts, same-master frontier resume, legacy-schema rejection, and dependency
 firewall.
 
-The production phase now stops unconditionally before effect. There is no formal resume: same-master
-frontier recovery remains only a TEST_ONLY correctness surface. A new master, redraw, replacement,
-changed `n`, changed threshold, alternate root or result-aware extension is forbidden.
+The current production phase stops unconditionally before effect. There is no formal resume of `.1`:
+same-master frontier recovery remains only a TEST_ONLY correctness surface. Replacement-entrypoint
+work may enable one fresh master and root only after the unchanged object and full prospective
+resource observations are verified result-blind. Changed `n`, thresholds, estimand, comparators,
+stopping rule or any result-aware extension is not a replacement and requires a new scientific object.
 
 Root/reviewer final validity found the actual artifact's sole invalidator to be the missing
 prospective direction-specific `assess-run` plus missing formal-process peak-RSS and scratch-peak
 telemetry. Fixed 4 GiB admissions, wall, durable and structural checks passed, but no post-hoc
-observation can replace the missing evidence. Therefore no scientific branch exists.
+observation can replace the missing evidence. Therefore no scientific branch exists for the
+quarantined attempt.
 
-Future-entry hardening is code/test work only:
+Replacement-entrypoint work is result-blind code/test work:
 
-- canonicalize the existing `.1` root and reject all others before effect;
+- keep the existing `.1` root quarantined and reject every attempt to reenter or reuse it;
+- freeze one separate fresh replacement root before effect and refuse any undeclared root;
 - stage same-master initialization/finalization atomically;
 - create-only persist path, length and full raw bytes for 14 owned Python modules, three allowlisted
   dependencies, native C++ and the actual loaded DLL, then require resume
@@ -264,14 +269,16 @@ Future-entry hardening is code/test work only:
   telemetry with missing measurements failing closed.
 
 Do not add hashes, digests, identity, authentication or approval fields. These surfaces may be
-exercised only by unit, fixture, TEST_ONLY native and result-blind preflight tests; they cannot
-produce another formal run.
+exercised by unit, fixture, TEST_ONLY native and result-blind preflight tests before the replacement
+command becomes reachable. Passing tests do not themselves make result evidence admissible; the
+replacement must also pass the complete prospective resource contract on its own invocation.
 
 ## Claim ceiling
 
 No scientific result is available. The prospective fixed-simulator, fixed-state, fixed-K,
-single-foundation candidate-set statement remains definition-only; the consumed artifact cannot
-activate it or any narrower component claim. Technical hardening cannot establish learned
+single-foundation candidate-set statement remains definition-only; the quarantined artifact cannot
+activate it or any narrower component claim. Only a valid fresh replacement evidence instance can
+evaluate it. Technical hardening cannot establish learned
 chronology, learned duration, semigroup composition, arbitrary words, variable lifetime/membership,
 simulator transfer, UAV safety, deployment or flight.
 
