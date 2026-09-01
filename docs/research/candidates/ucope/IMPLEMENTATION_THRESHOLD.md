@@ -242,7 +242,7 @@ The successor object is
 `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`. Its independent
 three-arm harness, outcome-free cold resume, exact 72-checkpoint inventory,
 resource journal, two-stage publication telemetry, and terminal hash chain are
-implemented. Focused non-result tests report `32 passed` (`17` runner-focused), and independent final
+implemented. Focused non-result tests report `34 passed` (`19` runner-focused), and independent final
 review is `CLEAN`.
 
 Engineering status is `IMPLEMENTATION_READY=YES` for a fresh A/RECON sizing
@@ -259,14 +259,14 @@ one new result-blind sizing root:
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
   scripts/run_ucope_competence_first_scout_r01.py assess-run `
-  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-04
+  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-05
 ```
 
 The fresh receipt must validate, report both 4 GiB floors, complete process-tree
 RSS/CPU/I/O and separate scratch/durable high-water telemetry, retain frozen
 process/thread/Torch caps, and yield `PERFORMANCE_READY`. Only then may
 `create-b1-manifest` run. No valid or completed B1 scientific result exists,
-and no fresh B1 is launch-ready until `.03` validates. The already launched
+and no fresh B1 is launch-ready until `.05` validates. The already launched
 `b1-20260901-01` is only an unrecoverable incomplete technical attempt. Every
 future run still requires its own fresh 4 GiB admission; the quarantined root
 must never be resumed.
@@ -311,4 +311,28 @@ repair adds the counter only to the B1 policy schema. A/RECON continues to
 exclude it; workload, arms, seeds, clocks, checkpoints, gates, precision, RNG,
 and scientific meaning are unchanged. After this source change, `.03` remains
 historical readiness evidence for its exact bytes but cannot bind a new
-manifest. The next allowed sizing root is the fresh `.04` path above.
+manifest. The next allowed sizing root was `.04`; after the filesystem
+telemetry repair below, only fresh `.05` may bind the next manifest.
+
+### Quarantined B1 filesystem-observation refusal
+
+`temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-03` is a third
+incomplete, nonconsuming engineering attempt. Its outcome-free resource journal
+reached all 72 checkpoint events and a core terminal, but publication failed
+closed at `PUBLICATION_MONITOR_FINISH`. The monitor's background thread was
+walking a checkpoint directory under `.complete-staging-*` while the main
+thread renamed that tree to `.complete-postvalidated-*`; the walker then raised
+Windows error 3 on the old path. No visible `complete` directory exists and the
+transient work root remains quarantined. It must not be resumed, salvaged,
+published, rerun, or inspected for scientific content.
+
+The repair binds the final old-tree sample, same-parent atomic rename, durable-
+root retarget, and first new-tree sample under the monitor's single lock. A
+background walk therefore cannot overlap the rename. Both endpoint directory
+sizes are actually measured and contribute conservatively to the existing
+high-water; a missing bound root raises instead of contributing a false zero.
+Plain-directory and symlink rejection remain unchanged. Source/manifest,
+workload, arms, seeds, updates, checkpoints, evaluation, gates, RNG, precision,
+and scientific semantics are unchanged. `.04` remains historical readiness
+evidence for its exact source. After Root commits this repair, the only next
+sizing root is fresh `.05` above, followed by a new manifest and B1 root.

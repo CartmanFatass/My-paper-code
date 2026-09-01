@@ -390,7 +390,7 @@ manifest, result, ledger, and terminal receipt. Hidden publication interruption
 is permanently fail-closed for that RunBinding; it is never promoted by a later
 unmeasured invocation.
 
-Focused non-result verification is `32 passed` (`17` runner-focused); the final independent review is
+Focused non-result verification is `34 passed` (`19` runner-focused); the final independent review is
 `CLEAN`. The first B1 launch did not produce a scientific result. The earlier sizing receipt at
 `temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-01/assessment-receipt.json`
 is superseded by later source and telemetry-schema repairs and has no readiness
@@ -418,7 +418,7 @@ and no checkpoint outcome or policy evidence may be read.
 
 Resume, salvage, publication, and rerun of that root are prohibited. The only
 next route is a fresh source-bound A/RECON at
-`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-04`, after the
+`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-05`, after the
 resource-only RSS calibration repair is integrated. Its projection must retain
 5/4 headroom above the greater of the new reduced assessment peak and the
 quarantined full-load RSS floor; only a fresh validated `PERFORMANCE_READY`
@@ -441,4 +441,21 @@ The validator therefore simultaneously prohibited and required the same field.
 The one-field B1-only schema repair preserves the A firewall and every frozen
 scientific and execution literal. The quarantined root must never be resumed,
 salvaged, published, or rerun. After Root commits the repair, only fresh
-A/RECON path `ucope-scout-r01-assess-20260901-04` may support a new manifest.
+A/RECON path `ucope-scout-r01-assess-20260901-05` may support a new manifest.
+
+### B1-20260901-03 incomplete filesystem-observation artifact
+
+Run root `temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-03` is
+quarantined as `INCOMPLETE_FILESYSTEM_TELEMETRY_RACE`. The outcome-free journal
+records 72 checkpoint events and a core terminal, but publication ended at
+`PUBLICATION_MONITOR_FINISH` with Windows error 3. The durable monitor was
+walking the old hidden staging pathname concurrently with its same-tree rename.
+The visible complete namespace is absent; the work tree remains isolated. No
+scientific result exists and the object is not consumed.
+
+The root must never be resumed, salvaged, published, rerun, or inspected for
+scientific evidence. The repair moves the staging-to-postvalidated rename into
+the monitor lock between real pre- and post-rename directory samples. Missing
+monitored roots remain errors, never zero-byte observations; high-water and
+symlink defenses remain conservative. Only the fresh post-commit `.05`
+A/RECON path may support a new named manifest and output root.

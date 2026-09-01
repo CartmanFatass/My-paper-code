@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import threading
 
 import pytest
 
@@ -103,6 +104,81 @@ def test_process_tree_monitor_uses_deltas_and_filesystem_high_water(tmp_path, mo
     assert result["durable_peak_bytes"] == 19
 
 
+def test_durable_rename_is_serialized_with_directory_walk_and_preserves_high_water(
+    tmp_path, monkeypatch,
+):
+    monkeypatch.setattr(
+        runner, "_windows_process_tree", lambda: (_sample(1.0, 1, 2, 3),),
+    )
+    monkeypatch.setattr(runner.os, "name", "nt")
+    scratch, source, destination = (
+        tmp_path / "scratch", tmp_path / ".complete-staging-a1",
+        tmp_path / ".complete-postvalidated-a1",
+    )
+    scratch.mkdir(); source.mkdir()
+    (scratch / "work.bin").write_bytes(b"x" * 17)
+    (source / "checkpoints").mkdir()
+    (source / "checkpoints" / "state.bin").write_bytes(b"y" * 19)
+    real_directory_size = runner._directory_size
+    walk_entered = threading.Event()
+    release_walk = threading.Event()
+
+    def blocking_directory_size(root, *, require_exists=False):
+        if Path(root) == source and threading.current_thread().name == "walker":
+            walk_entered.set()
+            assert release_walk.wait(timeout=5)
+        return real_directory_size(Path(root), require_exists=require_exists)
+
+    monkeypatch.setattr(runner, "_directory_size", blocking_directory_size)
+    monitor = runner.ProcessTreeMonitor(scratch, source, sample_seconds=100)
+    errors = []
+    walker = threading.Thread(
+        target=lambda: _capture_thread_error(errors, monitor._observe), name="walker",
+    )
+    mover_started = threading.Event()
+
+    def move():
+        mover_started.set()
+        _capture_thread_error(
+            errors, lambda: monitor.rename_durable_root(source, destination),
+        )
+
+    mover = threading.Thread(target=move, name="mover")
+    walker.start()
+    assert walk_entered.wait(timeout=5)
+    mover.start()
+    assert mover_started.wait(timeout=5)
+    assert source.is_dir() and not destination.exists()
+    release_walk.set()
+    walker.join(timeout=5); mover.join(timeout=5)
+    assert not walker.is_alive() and not mover.is_alive() and not errors
+    assert not source.exists() and destination.is_dir()
+    assert monitor.durable_root == destination
+    assert monitor.durable_peak_bytes >= 19
+    assert monitor.finish()["durable_peak_bytes"] >= 19
+
+
+def _capture_thread_error(errors, callback):
+    try:
+        callback()
+    except BaseException as exc:  # surfaced in the main test thread
+        errors.append(exc)
+
+
+def test_monitor_refuses_a_missing_bound_root_instead_of_recording_zero(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        runner, "_windows_process_tree", lambda: (_sample(1.0, 1, 2, 3),),
+    )
+    monkeypatch.setattr(runner.os, "name", "nt")
+    scratch, durable = tmp_path / "scratch", tmp_path / "durable"
+    scratch.mkdir(); durable.mkdir()
+    monitor = runner.ProcessTreeMonitor(scratch, durable)
+    durable.rmdir()
+    with pytest.raises(runner.RunnerRefusal, match="resource root disappeared"):
+        monitor._observe()
+    assert monitor.durable_peak_bytes == 0
+
+
 def test_central_memory_admission_requires_both_exact_four_gib_floors(tmp_path, monkeypatch):
     receipt = tmp_path / "admit.json"
 
@@ -199,7 +275,7 @@ def test_result_commands_call_central_preflight_and_keep_namespaces_separate():
     assert '.complete-staging-' in body
     assert '.complete-postvalidated-' in body
     assert '.publication-scratch-' in body
-    assert "os.replace(staging, postvalidated)" in body
+    assert "publication_monitor.rename_durable_root(staging, postvalidated)" in body
     assert "os.replace(postvalidated, complete)" in body
     assert "os.replace(staging, complete)" not in body
     assert "run_workload(" in body and "config = ScoutConfig.b1()" in body
@@ -209,8 +285,8 @@ def test_result_commands_call_central_preflight_and_keep_namespaces_separate():
     assert body.index("publication_monitor = ProcessTreeMonitor") < body.index('atomic_create_json(staging / "resource-ledger.json"')
     assert "ProcessTreeMonitor(publication_scratch, staging)" in body
     assert "ProcessTreeMonitor(work, output)" not in body
-    assert body.index("validate_b1_preterminal_tree(staging") < body.index("os.replace(staging, postvalidated)")
-    assert body.index("os.replace(staging, postvalidated)") < body.index("validate_b1_preterminal_tree(postvalidated")
+    assert body.index("validate_b1_preterminal_tree(staging") < body.index("publication_monitor.rename_durable_root(staging, postvalidated)")
+    assert body.index("publication_monitor.rename_durable_root(staging, postvalidated)") < body.index("validate_b1_preterminal_tree(postvalidated")
     assert body.index("validate_b1_preterminal_tree(postvalidated") < body.index("publication_monitor.finish")
     assert body.index("publication_monitor.finish") < body.index('kind="PUBLICATION_TERMINAL"')
     assert body.index("atomic_create_json(terminal_path") < body.index('kind="PUBLICATION_TERMINAL"')

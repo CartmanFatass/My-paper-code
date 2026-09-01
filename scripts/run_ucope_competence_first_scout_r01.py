@@ -86,8 +86,10 @@ class RunnerRefusal(RuntimeError):
     """Fail-closed engineering refusal."""
 
 
-def _directory_size(root: Path) -> int:
+def _directory_size(root: Path, *, require_exists: bool = False) -> int:
     if not root.exists():
+        if require_exists:
+            raise RunnerRefusal(f"monitored resource root disappeared: {root}")
         return 0
     if root.is_symlink() or not root.is_dir():
         raise RunnerRefusal(f"resource root is not a plain directory: {root}")
@@ -312,8 +314,12 @@ class ProcessTreeMonitor:
         self.peak_rss_bytes = max(self.peak_rss_bytes, sum(row.rss_bytes for row in rows))
         self.peak_processes = max(self.peak_processes, len(rows))
         self.peak_threads = max(self.peak_threads, sum(row.threads for row in rows))
-        self.scratch_peak_bytes = max(self.scratch_peak_bytes, _directory_size(self.scratch_root))
-        self.durable_peak_bytes = max(self.durable_peak_bytes, _directory_size(self.durable_root))
+        self.scratch_peak_bytes = max(
+            self.scratch_peak_bytes, _directory_size(self.scratch_root, require_exists=True)
+        )
+        self.durable_peak_bytes = max(
+            self.durable_peak_bytes, _directory_size(self.durable_root, require_exists=True)
+        )
         for row in rows:
             self._first.setdefault(row.identity, row)
             self._last[row.identity] = row
@@ -366,13 +372,27 @@ class ProcessTreeMonitor:
                 "aggregate_io_bytes": read_bytes + write_bytes + other_bytes,
             }
 
-    def retarget_durable_root(self, durable_root: Path) -> None:
-        """Atomically carry high-water accounting across a hidden-root rename."""
+    def rename_durable_root(self, source: Path, destination: Path) -> None:
+        """Bind the final old sample, rename, retarget, and first new sample under one lock."""
         with self._lock:
             if self._finished or self._error is not None:
                 raise RunnerRefusal("cannot retarget an inactive resource monitor")
+            source = Path(source)
+            destination = Path(destination)
+            if (
+                self.durable_root.resolve() != source.resolve()
+                or source.parent.resolve() != destination.parent.resolve()
+                or source.is_symlink()
+                or not source.is_dir()
+                or destination.exists()
+            ):
+                raise RunnerRefusal("durable monitor rename transaction has unsafe paths")
+            # The monitor lock excludes the sampling thread from walking the old
+            # tree while its name changes.  Both endpoint samples are real; a
+            # missing/renamed root is never represented as zero bytes.
             self._observe_locked()
-            self.durable_root = durable_root
+            os.replace(source, destination)
+            self.durable_root = destination
             self._observe_locked()
 
     def _cumulative_counters_locked(self) -> tuple[float, int, int, int]:
@@ -1723,9 +1743,8 @@ def run_b1(manifest_path: str | Path, output_root: str | Path, *, resume: bool) 
         if postvalidated.exists():
             raise RunnerRefusal("hidden post-validation namespace already exists")
         phase = "ATOMIC_HIDDEN_POSTVALIDATION_RENAME"
-        os.replace(staging, postvalidated)
+        publication_monitor.rename_durable_root(staging, postvalidated)
         staging = None
-        publication_monitor.retarget_durable_root(postvalidated)
         phase = "HIDDEN_POSTVALIDATION_PRETERMINAL_VALIDATION"
         complete_preterminal = validate_b1_preterminal_tree(postvalidated, manifest_file)
         if {
