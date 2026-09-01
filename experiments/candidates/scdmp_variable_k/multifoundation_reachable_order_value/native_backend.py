@@ -9,14 +9,16 @@ from __future__ import annotations
 
 import ctypes
 import functools
+import hashlib
+import json
 import os
 from pathlib import Path
 import platform
+import shutil
 import struct
 import subprocess
 import sys
 import tempfile
-import time
 from typing import Iterable
 
 from .native_state import (
@@ -32,6 +34,8 @@ from .native_state import (
     RH_ASSIGNMENT,
     ReachableTwins,
     SourceScanReceipt,
+    SourceCandidateWitness,
+    SourceRenewalWitness,
     TapeAddress,
     TapeNamespace,
     TARGET_TICKS,
@@ -51,6 +55,8 @@ _ORDER_RH = 2
 _SOURCE = Path(__file__).with_name("native") / "mf_rs_native.cpp"
 _BUILD_ROOT = Path(tempfile.gettempdir()) / "hmasd_scdmp_mf_rs_mk_native"
 _COMPILE_FLAGS = ("/nologo", "/std:c++20", "/O2", "/EHsc", "/LD", "/W4")
+_BUILD_RECEIPT_SCHEMA = "SCDMP_MF_RS_NATIVE_BUILD_V1"
+_BUILD_RECEIPT_NAME = "build-receipt.json"
 
 
 class NativeBackendError(RuntimeError):
@@ -60,11 +66,15 @@ class NativeBackendError(RuntimeError):
 class ReachableStatePanelNotEstablished(RuntimeError):
     """Valid bounded-support diagnosis after all eight source candidates."""
 
-    def __init__(self, receipts: tuple[SourceScanReceipt, ...]) -> None:
+    def __init__(
+        self, receipts: tuple[SourceScanReceipt, ...],
+        witnesses: tuple[SourceCandidateWitness, ...] = (),
+    ) -> None:
         super().__init__("all eight source tapes failed to reach an eligible target boundary")
         self.receipts = receipts
         self.transitions = sum(row.transitions for row in receipts)
         self.policy_queries = sum(row.policy_queries for row in receipts)
+        self.witnesses = witnesses
 
 
 class _ResetInput(ctypes.Structure):
@@ -176,45 +186,175 @@ def _compiler_path() -> Path:
     return max(candidates, key=lambda path: path.parents[3].name).resolve()
 
 
-def _compiled_path() -> Path:
-    # This coordinate is only a process build cache, never state/result identity
-    # or validation.  ABI size/version checks below are authoritative.
-    source_stat = _SOURCE.stat()
-    runtime = f"{platform.machine()}_{ctypes.sizeof(ctypes.c_void_p)}_{sys.implementation.cache_tag}"
-    cache = _BUILD_ROOT / f"{source_stat.st_size}_{source_stat.st_mtime_ns}_{runtime}"
+def _sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
+
+
+def _canonical_json(value: dict[str, object]) -> bytes:
+    try:
+        return (json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n").encode("utf-8")
+    except (TypeError, ValueError) as error:
+        raise NativeBackendError("native build binding is not canonical JSON") from error
+
+
+def _compiler_version(compiler: Path) -> dict[str, object]:
+    try:
+        completed = subprocess.run(
+            [str(compiler), "/Bv"], capture_output=True, check=False,
+        )
+    except OSError as error:
+        raise NativeBackendError("the selected compiler version cannot be measured") from error
+    direct = bytes(completed.stdout) + bytes(completed.stderr)
+    if not direct:
+        raise NativeBackendError("the selected compiler returned no direct version evidence")
+    return {
+        "command": [str(compiler), "/Bv"],
+        "returncode": int(completed.returncode),
+        "output_sha256": _sha256_bytes(direct),
+        "output_utf8": direct.decode("utf-8", errors="replace"),
+    }
+
+
+def _direct_build_facts() -> dict[str, object]:
+    try:
+        source = _SOURCE.resolve(strict=True)
+        source_bytes = source.read_bytes()
+        compiler = _compiler_path().resolve(strict=True)
+        compiler_bytes = compiler.read_bytes()
+    except OSError as error:
+        raise NativeBackendError("native source or compiler bytes cannot be measured") from error
+    return {
+        "schema": _BUILD_RECEIPT_SCHEMA,
+        "native_cpp_source": {
+            "resolved_path": str(source),
+            "byte_size": len(source_bytes),
+            "sha256": _sha256_bytes(source_bytes),
+        },
+        "compiler": {
+            "resolved_executable": str(compiler),
+            "byte_size": len(compiler_bytes),
+            "sha256": _sha256_bytes(compiler_bytes),
+            "version": _compiler_version(compiler),
+        },
+        "compile_flags": list(_COMPILE_FLAGS),
+        "compile_argument_template": [
+            str(compiler), *_COMPILE_FLAGS, str(source),
+            "/Fo:{staging}/mf_rs_native.obj", "/Fe:{staging}/mf_rs_native.dll",
+        ],
+        "runtime_architecture": {
+            "platform_system": platform.system(),
+            "platform_release": platform.release(),
+            "platform_version": platform.version(),
+            "machine": platform.machine(),
+            "processor": platform.processor(),
+            "pointer_bits": 8 * ctypes.sizeof(ctypes.c_void_p),
+            "python_cache_tag": sys.implementation.cache_tag,
+            "compiler_target": "x64",
+        },
+    }
+
+
+def _build_key(facts: dict[str, object]) -> str:
+    return _sha256_bytes(_canonical_json(facts))
+
+
+def _read_build_receipt(cache: Path, facts: dict[str, object]) -> dict[str, object]:
+    expected_key = _build_key(facts)
+    if cache.name != expected_key:
+        raise NativeBackendError("native cache path does not match the direct build key")
+    receipt_path = cache / _BUILD_RECEIPT_NAME
     dll = cache / "mf_rs_native.dll"
-    if dll.is_file():
-        return dll
-    cache.mkdir(parents=True, exist_ok=True)
+    try:
+        encoded = receipt_path.read_bytes()
+        receipt = json.loads(encoded.decode("utf-8"))
+        dll_bytes = dll.read_bytes()
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise NativeBackendError("native cache receipt or DLL is unavailable") from error
+    if not isinstance(receipt, dict) or _canonical_json(receipt) != encoded:
+        raise NativeBackendError("native build receipt is not canonical direct JSON")
+    expected = {
+        "schema": _BUILD_RECEIPT_SCHEMA,
+        "cache_key_sha256": expected_key,
+        "build_facts": facts,
+        "dll": {
+            "basename": "mf_rs_native.dll",
+            "byte_size": len(dll_bytes),
+            "sha256": _sha256_bytes(dll_bytes),
+        },
+    }
+    if receipt != expected:
+        raise NativeBackendError("native build receipt, cache key, or DLL bytes differ")
+    if dll.resolve(strict=True).parent != cache.resolve(strict=True):
+        raise NativeBackendError("native DLL resolved outside its keyed cache directory")
+    return receipt
+
+
+def _compile_into(staging: Path, facts: dict[str, object]) -> None:
     vcvars = _vs_installation() / "VC/Auxiliary/Build/vcvars64.bat"
-    unique = f"{os.getpid()}_{time.time_ns()}"
-    obj = cache / f"mf_rs_native_{unique}.obj"
-    staged = cache / f"mf_rs_native_{unique}.dll"
+    compiler = Path(str(facts["compiler"]["resolved_executable"]))
+    obj = staging / "mf_rs_native.obj"
+    dll = staging / "mf_rs_native.dll"
     command = (
-        f'call "{vcvars}" >nul && "{_compiler_path()}" {" ".join(_COMPILE_FLAGS)} '
-        f'"{_SOURCE}" /Fo:"{obj}" /Fe:"{staged}"'
+        f'call "{vcvars}" >nul && "{compiler}" {" ".join(_COMPILE_FLAGS)} '
+        f'"{_SOURCE}" /Fo:"{obj}" /Fe:"{dll}"'
     )
     completed = subprocess.run(
         command,
         shell=True,
         executable=os.environ.get("COMSPEC", "cmd.exe"),
-        cwd=cache,
+        cwd=staging,
         capture_output=True,
         text=True,
     )
     try:
-        if completed.returncode != 0 or not staged.is_file():
+        if completed.returncode != 0 or not dll.is_file():
             raise NativeBackendError(
                 f"MF-RS native compilation failed ({completed.returncode}):\n"
                 f"{completed.stdout}\n{completed.stderr}"
             )
-        if dll.is_file():
-            staged.unlink()
-        else:
-            os.replace(staged, dll)
     finally:
         obj.unlink(missing_ok=True)
-        staged.unlink(missing_ok=True)
+
+
+def _compiled_path() -> Path:
+    facts = _direct_build_facts()
+    key = _build_key(facts)
+    cache = _BUILD_ROOT / key
+    dll = cache / "mf_rs_native.dll"
+    if cache.exists():
+        _read_build_receipt(cache, facts)
+        return dll
+    _BUILD_ROOT.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f".{key}.", dir=_BUILD_ROOT))
+    try:
+        _compile_into(staging, facts)
+        dll_bytes = (staging / "mf_rs_native.dll").read_bytes()
+        receipt = {
+            "schema": _BUILD_RECEIPT_SCHEMA,
+            "cache_key_sha256": key,
+            "build_facts": facts,
+            "dll": {
+                "basename": "mf_rs_native.dll",
+                "byte_size": len(dll_bytes),
+                "sha256": _sha256_bytes(dll_bytes),
+            },
+        }
+        try:
+            with (staging / _BUILD_RECEIPT_NAME).open("xb") as stream:
+                stream.write(_canonical_json(receipt))
+                stream.flush()
+                os.fsync(stream.fileno())
+        except FileExistsError as error:
+            raise NativeBackendError("native build receipt publication is create-only") from error
+        try:
+            staging.rename(cache)
+            staging = cache
+        except FileExistsError:
+            pass
+    finally:
+        if staging != cache:
+            shutil.rmtree(staging, ignore_errors=True)
+    _read_build_receipt(cache, facts)
     return dll
 
 
@@ -257,12 +397,45 @@ def _configure(library: ctypes.CDLL) -> ctypes.CDLL:
         ctypes.POINTER(_HostOutput),
     ]
     library.mf_rs_apply_order_batch.restype = ctypes.c_int32
+    library.mf_rs_verify_transition.argtypes = [
+        ctypes.POINTER(_NativeState), ctypes.POINTER(_StepInput), ctypes.POINTER(_NativeState),
+        ctypes.POINTER(_NativeState), ctypes.POINTER(_HostOutput),
+    ]
+    library.mf_rs_verify_transition.restype = ctypes.c_int32
     return library
 
 
 @functools.lru_cache(maxsize=1)
 def require_native_backend() -> ctypes.CDLL:
     return _configure(ctypes.CDLL(str(_compiled_path())))
+
+
+def native_abi_identity() -> dict[str, object]:
+    """Return the loaded ABI3 together with its revalidated build binding."""
+
+    library = require_native_backend()
+    library_path = Path(str(vars(library).get("_name", ""))).resolve(strict=True)
+    build_binding = _read_build_receipt(library_path.parent, _direct_build_facts())
+    return {
+        "abi_version": int(library.mf_rs_abi_version()),
+        "magic": int(library.mf_rs_magic()),
+        "max_batch_width": int(library.mf_rs_max_width()),
+        "struct_sizes": {
+            "reset_input": int(library.mf_rs_sizeof_reset_input()),
+            "step_input": int(library.mf_rs_sizeof_step_input()),
+            "host_output": int(library.mf_rs_sizeof_host_output()),
+            "native_state": int(library.mf_rs_sizeof_native_state()),
+        },
+        "python_struct_sizes": {
+            "reset_input": ctypes.sizeof(_ResetInput),
+            "step_input": ctypes.sizeof(_StepInput),
+            "host_output": ctypes.sizeof(_HostOutput),
+            "native_state": ctypes.sizeof(_NativeState),
+        },
+        "compiled_library_resolved_path": str(library_path),
+        "build_receipt_resolved_path": str((library_path.parent / _BUILD_RECEIPT_NAME).resolve(strict=True)),
+        "build_binding": build_binding,
+    }
 
 
 def _host_output(value: _HostOutput) -> HostOutput:
@@ -326,6 +499,61 @@ def _step_input(action: int, row: DisturbanceHold, active: bool) -> _StepInput:
         (ctypes.c_double * MAX_HOLD_TICKS)(*row.eta_y),
         (ctypes.c_double * MAX_HOLD_TICKS)(*row.eta_omega),
     )
+
+
+def verify_native_transition(
+    *,
+    pre_state_bytes: bytes,
+    action: int,
+    active: bool,
+    disturbance_hold: DisturbanceHold,
+    expected_post_state_bytes: bytes,
+) -> dict[str, object]:
+    """Purely measure one ABI3 transition without mutating the source POD.
+
+    This technical verifier allocates only local ctypes POD copies.  It does not
+    construct ``NativeSession``, address a tape, create RNG state, or publish a
+    scientific artifact.
+    """
+
+    if not isinstance(active, bool):
+        raise TypeError("native transition active flag must be bool")
+    validate_actions((action,), 1)
+    source = _state_from_bytes(pre_state_bytes)
+    expected = _state_from_bytes(expected_post_state_bytes)
+    step = _step_input(action, disturbance_hold, active)
+    measured = _NativeState()
+    output = _HostOutput()
+    source_before = _state_bytes(source)
+    abi = native_abi_identity()  # Revalidates cache key, receipt, and DLL bytes.
+    status = int(require_native_backend().mf_rs_verify_transition(
+        ctypes.byref(source), ctypes.byref(step), ctypes.byref(expected),
+        ctypes.byref(measured), ctypes.byref(output),
+    ))
+    if _state_bytes(source) != source_before:
+        raise NativeBackendError("native transition verifier mutated its source POD")
+    if status not in (0, 4):
+        raise NativeBackendError(f"native transition verifier rejected input with status {status}")
+    measured_bytes = _state_bytes(measured)
+    measured_output = _host_output(output)
+    return {
+        "schema": "SCDMP_MF_RS_NATIVE_TRANSITION_VERIFICATION_V1",
+        "matched": status == 0,
+        "native_status": status,
+        "abi_version": int(abi["abi_version"]),
+        "build_cache_key_sha256": str(abi["build_binding"]["cache_key_sha256"]),
+        "action": action,
+        "active": active,
+        "disturbance_hold_sha256": _sha256_bytes(struct.pack(
+            "<39d", *(disturbance_hold.eta_v + disturbance_hold.eta_y + disturbance_hold.eta_omega),
+        )),
+        "pre_state_sha256": _sha256_bytes(source_before),
+        "expected_post_state_sha256": _sha256_bytes(expected_post_state_bytes),
+        "measured_post_state_sha256": _sha256_bytes(measured_bytes),
+        "measured_tick": measured_output.tick,
+        "measured_terminal": measured_output.terminal,
+        "measured_ticks_advanced": measured_output.ticks_advanced,
+    }
 
 
 class NativeSession:
@@ -449,6 +677,13 @@ def _public_bytes(output: HostOutput) -> bytes:
     return struct.pack("<18d", *output.observation)
 
 
+def _tape_sha256(rows: tuple[DisturbanceHold, ...]) -> str:
+    direct = b"".join(
+        struct.pack("<39d", *(row.eta_v + row.eta_y + row.eta_omega)) for row in rows
+    )
+    return hashlib.sha256(direct).hexdigest()
+
+
 def _persistent_bytes(payload: bytes) -> bytes:
     state = _state_from_bytes(payload)
     state.event_phase = 0
@@ -458,6 +693,16 @@ def _persistent_bytes(payload: bytes) -> bytes:
     state.q = 0
     ctypes.memset(ctypes.byref(state.cached), 0, ctypes.sizeof(state.cached))
     return _state_bytes(state)
+
+
+def persistent_normalized_bytes(payload: bytes) -> bytes:
+    """Normalize only registered event/latent/cache fields for twin equality."""
+
+    return _persistent_bytes(payload)
+
+
+def disturbance_tape_sha256(rows: tuple[DisturbanceHold, ...]) -> str:
+    return _tape_sha256(rows)
 
 
 def construct_reachable_twins(
@@ -482,6 +727,7 @@ def construct_reachable_twins(
     pre_event_q = run_manifest.q_by_cell[STATE_SPECS.index(state_spec)]
     selected = None
     receipts = []
+    witnesses = []
     total_transitions = 0
     total_policy_queries = 0
     for tape_index in range(8):
@@ -492,18 +738,25 @@ def construct_reachable_twins(
             width=1, k=k, pre_event_q=pre_event_q,
             initial_v=initial_v, initial_y=initial_y, initial_phi=initial_phi,
         )
+        reset_state_bytes = common.state_bytes()[0]
+        renewal_witnesses = []
         transitions = 0
         policy_queries = 0
         renewal_steps = 0
         eligible = False
         terminal = False
         for renewal_index, row in enumerate(tape):
+            pre_state_bytes = common.state_bytes()[0]
             observations = (common.outputs[0].observation,)
             actions = tuple(prefix_policy(observations))
             validate_actions(actions, 1)
             policy_queries += 1
             renewal_steps += 1
             output = common.step(actions, (row,))[0]
+            renewal_witnesses.append(SourceRenewalWitness(
+                tape_index, renewal_index, struct.pack("<18d", *observations[0]),
+                actions[0], pre_state_bytes, common.state_bytes()[0],
+            ))
             transitions += output.ticks_advanced
             if output.terminal:
                 terminal = True
@@ -516,13 +769,18 @@ def construct_reachable_twins(
                 break
         total_transitions += transitions
         total_policy_queries += policy_queries
-        receipts.append(SourceScanReceipt(
+        receipt = SourceScanReceipt(
             tape_index, eligible, renewal_steps, transitions, policy_queries, terminal,
+        )
+        receipts.append(receipt)
+        witnesses.append(SourceCandidateWitness(
+            tape_index, address, (initial_v, initial_y, initial_phi), _tape_sha256(tape),
+            reset_state_bytes, tuple(renewal_witnesses), receipt,
         ))
         if selected is not None:
             break
     if selected is None:
-        raise ReachableStatePanelNotEstablished(tuple(receipts))
+        raise ReachableStatePanelNotEstablished(tuple(receipts), tuple(witnesses))
     (
         selected_tape_index, address, tape, common, output, renewal_index,
     ) = selected
@@ -562,6 +820,7 @@ def construct_reachable_twins(
         source_renewal_index=renewal_index, source_scan_receipts=tuple(receipts),
         persistent_twin_bytes_equal=persistent_equal,
         transitions=total_transitions, policy_queries=total_policy_queries,
+        source_candidate_witnesses=tuple(witnesses),
     )
 
 
@@ -606,9 +865,11 @@ def evaluate_twin_branches(
     if tape_index >= len(tape):
         raise RuntimeError("evaluation tape exhausted before forced twin hold")
     outputs = session.step(forced_actions, (tape[tape_index], tape[tape_index]))
-    transitions = sum(item.ticks_advanced for item in outputs)
+    transitions_by_lane = [item.ticks_advanced for item in outputs]
+    transitions = sum(transitions_by_lane)
     renewal_steps = 1
     policy_queries = 0
+    policy_queries_by_lane = [0, 0]
     policy_batch_calls = 0
     tape_index += 1
 
@@ -620,6 +881,8 @@ def evaluate_twin_branches(
         selected = tuple(foundation_policy(visible))
         validate_actions(selected, len(active_indices))
         policy_queries += len(active_indices)
+        for index in active_indices:
+            policy_queries_by_lane[index] += 1
         policy_batch_calls += 1
         actions = [0, 0]
         for index, action in zip(active_indices, selected, strict=True):
@@ -627,6 +890,8 @@ def evaluate_twin_branches(
         active = tuple(index in active_indices for index in range(2))
         outputs = session.step(tuple(actions), (tape[tape_index], tape[tape_index]), active=active)
         transitions += sum(outputs[index].ticks_advanced for index in active_indices)
+        for index in active_indices:
+            transitions_by_lane[index] += outputs[index].ticks_advanced
         renewal_steps += 1
         tape_index += 1
 
@@ -652,10 +917,13 @@ def evaluate_twin_branches(
         policy_batch_calls=policy_batch_calls,
         renewal_steps=renewal_steps,
         transitions=transitions,
+        policy_queries_by_lane=tuple(policy_queries_by_lane),
+        transitions_by_lane=tuple(transitions_by_lane),
     )
 
 
 __all__ = [
     "NativeBackendError", "NativeSession", "ReachableStatePanelNotEstablished", "construct_reachable_twins",
-    "evaluate_twin_branches", "require_native_backend",
+    "disturbance_tape_sha256", "evaluate_twin_branches", "native_abi_identity",
+    "persistent_normalized_bytes", "require_native_backend", "verify_native_transition",
 ]

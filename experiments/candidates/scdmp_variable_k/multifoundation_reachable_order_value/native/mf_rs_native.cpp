@@ -333,6 +333,25 @@ double primitive(NativeStateV1& state, std::int32_t action,
     return reward;
 }
 
+void advance_hold(NativeStateV1& state, const StepInput& input, HostOutput& output) {
+    if (input.active == 0) {
+        output = state.cached;
+        return;
+    }
+    const auto held_k = state.current_k;
+    const auto planned = std::min(held_k, kHorizon - state.n);
+    std::array<double, kMaxHold> rewards{};
+    std::int32_t advanced = 0;
+    for (std::int32_t tick = 0; tick < planned; ++tick) {
+        rewards[advanced] = primitive(state, input.action, input.eta_v[tick],
+                                      input.eta_y[tick], input.eta_omega[tick]);
+        ++advanced;
+        if (state.terminal) break;
+    }
+    state.cached = snapshot(state, advanced, held_k, rewards.data());
+    output = state.cached;
+}
+
 }  // namespace
 
 MF_EXPORT std::int32_t mf_rs_abi_version() { return kAbi; }
@@ -385,22 +404,26 @@ MF_EXPORT std::int32_t mf_rs_step_batch(NativeStateV1* states, const StepInput* 
         if (inputs[i].active == 1 && (!states[i].enabled || states[i].terminal)) return 3;
     }
     for (std::int32_t i = 0; i < width; ++i) {
-        auto& state = states[i];
-        if (inputs[i].active == 0) { outputs[i] = state.cached; continue; }
-        const auto held_k = state.current_k;
-        const auto planned = std::min(held_k, kHorizon - state.n);
-        std::array<double, kMaxHold> rewards{};
-        std::int32_t advanced = 0;
-        for (std::int32_t tick = 0; tick < planned; ++tick) {
-            rewards[advanced] = primitive(state, inputs[i].action, inputs[i].eta_v[tick],
-                                          inputs[i].eta_y[tick], inputs[i].eta_omega[tick]);
-            ++advanced;
-            if (state.terminal) break;
-        }
-        state.cached = snapshot(state, advanced, held_k, rewards.data());
-        outputs[i] = state.cached;
+        advance_hold(states[i], inputs[i], outputs[i]);
     }
     return 0;
+}
+
+// Pure ABI3 technical proof.  The supplied source is copied, the copy advances
+// through the exact production hold semantics above, and only measured outputs
+// are written.  No caller-owned state, session, RNG, or result object advances.
+MF_EXPORT std::int32_t mf_rs_verify_transition(const NativeStateV1* source,
+                                               const StepInput* input,
+                                               const NativeStateV1* expected,
+                                               NativeStateV1* measured,
+                                               HostOutput* output) {
+    if (!source || !input || !expected || !measured || !output) return 1;
+    if (!valid_state(*source) || !valid_step(*input)) return 2;
+    if (input->active == 1 && (!source->enabled || source->terminal)) return 3;
+    NativeStateV1 local = *source;
+    advance_hold(local, *input, *output);
+    *measured = local;
+    return std::memcmp(&local, expected, sizeof(NativeStateV1)) == 0 ? 0 : 4;
 }
 
 MF_EXPORT std::int32_t mf_rs_apply_order_batch(NativeStateV1* states, const std::int32_t* orders,

@@ -1,8 +1,9 @@
-"""Preflight-only CLI for the current SCDMP B01 engineering milestone."""
+"""Explicit CLI for SCDMP B01 preflight, A/RECON, or confirmed RUN-01."""
 
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -13,22 +14,88 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.runner import (
+    RUN_CONFIRMATION,
     preflight_only,
+    run_assess,
+    run_result,
+)
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.performance_readiness import (
+    validate_performance_readiness_receipt,
 )
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    exact_argv = tuple(sys.argv if argv is None else (str(Path(__file__).resolve()), *argv))
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--preflight-only", action="store_true", required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--preflight-only", action="store_true")
+    mode.add_argument("--assess-run", choices=("A/RECON",))
+    mode.add_argument("--run-01", action="store_true")
     parser.add_argument("--receipt", type=Path, required=True)
-    parser.add_argument("--result-root", type=Path, required=True)
-    args = parser.parse_args()
-    value = preflight_only(
-        receipt=args.receipt,
-        result_root=args.result_root,
-        command_runner=subprocess.run,
+    parser.add_argument("--result-root", type=Path)
+    parser.add_argument("--assess-root", type=Path)
+    parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--stop-after-frontier")
+    parser.add_argument("--confirm-run-id")
+    parser.add_argument("--performance-readiness", type=Path)
+    args = parser.parse_args(argv)
+    cwd = Path.cwd().resolve()
+
+    if args.preflight_only:
+        if (args.result_root is None or args.assess_root is not None or args.resume
+                or args.stop_after_frontier or args.performance_readiness is not None):
+            parser.error("--preflight-only requires only --result-root and --receipt")
+        observed = preflight_only(
+            receipt=args.receipt, result_root=args.result_root, command_runner=subprocess.run,
+        )
+        print(json.dumps({"mode": "PREFLIGHT_ONLY", "passed": observed.passed,
+                          "receipt": str(observed.path.resolve()),
+                          "prospective_result_root": str(args.result_root.resolve()),
+                          "cwd": str(cwd), "argv": list(exact_argv)}, sort_keys=True))
+        return 0
+
+    if args.assess_run:
+        if (args.assess_root is None or args.result_root is not None or args.resume
+                or args.confirm_run_id or args.stop_after_frontier
+                or args.performance_readiness is not None):
+            parser.error("A/RECON requires --assess-root and forbids result/resume/confirmation options")
+        print(json.dumps({"mode": "A/RECON", "assess_root": str(args.assess_root.resolve()),
+                          "receipt": str(args.receipt.resolve()), "cwd": str(cwd),
+                          "argv": list(exact_argv)}, sort_keys=True), flush=True)
+        result = run_assess(
+            assess_root=args.assess_root, admission_receipt=args.receipt,
+            command_runner=subprocess.run, argv=exact_argv, cwd=cwd,
+        )
+        print(json.dumps({"assessment": str(result.resolve()),
+                         "source_identity": str((args.assess_root / "source-identity.json").resolve()),
+                         "disposition": "REVIEW_REQUIRED"},
+                         sort_keys=True))
+        return 0
+
+    if args.result_root is None or args.assess_root is not None:
+        parser.error("--run-01 requires --result-root and forbids --assess-root")
+    if args.confirm_run_id != RUN_CONFIRMATION:
+        parser.error(f"--run-01 requires --confirm-run-id {RUN_CONFIRMATION}")
+    if args.performance_readiness is None:
+        parser.error("--run-01 requires --performance-readiness")
+    try:
+        validate_performance_readiness_receipt(args.performance_readiness)
+    except Exception as error:
+        parser.error(f"invalid --performance-readiness: {type(error).__name__}")
+    print(json.dumps({"mode": "RUN-01", "result_root": str(args.result_root.resolve()),
+                      "receipt": str(args.receipt.resolve()), "resume": args.resume,
+                      "performance_readiness": str(args.performance_readiness.resolve()),
+                      "cwd": str(cwd), "argv": list(exact_argv)}, sort_keys=True), flush=True)
+    result = run_result(
+        result_root=args.result_root, admission_receipt=args.receipt,
+        confirmation=args.confirm_run_id, resume=args.resume, argv=exact_argv, cwd=cwd,
+        command_runner=subprocess.run, stop_after_frontier=args.stop_after_frontier,
+        performance_readiness=args.performance_readiness,
     )
-    print(f"passed={str(value.passed).lower()}")
+    key = "technical_frontier" if result.name == "technical-frontier.json" else "published_result"
+    print(json.dumps({key: str(result.resolve()),
+                      "source_identity": str((args.result_root / "source-identity.json").resolve())},
+                     sort_keys=True))
     return 0
 
 

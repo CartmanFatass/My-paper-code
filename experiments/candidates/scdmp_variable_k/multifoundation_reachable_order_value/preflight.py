@@ -68,4 +68,15 @@ def preflight_run(
     return PreflightReceipt(path, physical, effective, True)
 
 
-__all__ = ["FOUR_GIB", "PreflightError", "PreflightReceipt", "preflight_run"]
+def admission_receipt_passed(path: str | Path) -> bool:
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return False
+    return isinstance(value, dict) and value.get("passed") is True
+
+
+__all__ = [
+    "FOUR_GIB", "PreflightError", "PreflightReceipt", "admission_receipt_passed",
+    "preflight_run",
+]

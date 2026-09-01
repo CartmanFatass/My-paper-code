@@ -149,6 +149,7 @@ class ReachableTwins:
     persistent_twin_bytes_equal: bool
     transitions: int
     policy_queries: int
+    source_candidate_witnesses: tuple["SourceCandidateWitness", ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -165,6 +166,8 @@ class BranchEvaluation:
     policy_batch_calls: int
     renewal_steps: int
     transitions: int
+    policy_queries_by_lane: tuple[int, ...] = ()
+    transitions_by_lane: tuple[int, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -175,6 +178,27 @@ class SourceScanReceipt:
     transitions: int
     policy_queries: int
     terminal: bool
+
+
+@dataclass(frozen=True, slots=True)
+class SourceRenewalWitness:
+    candidate_index: int
+    renewal_index: int
+    public_input_bytes: bytes
+    foundation_action: int
+    pre_state_bytes: bytes
+    post_state_bytes: bytes
+
+
+@dataclass(frozen=True, slots=True)
+class SourceCandidateWitness:
+    candidate_index: int
+    address: TapeAddress
+    reset_values: tuple[float, float, float]
+    tape_sha256: str
+    reset_state_bytes: bytes
+    renewals: tuple[SourceRenewalWitness, ...]
+    receipt: SourceScanReceipt
 
 
 def validate_actions(actions: tuple[int, ...], width: int) -> None:
@@ -189,5 +213,5 @@ __all__ = [
     "ACTION_COUNT", "ALLOWED_K", "BatchedPolicy", "BranchEvaluation", "DisturbanceHold",
     "HORIZON_TICKS", "HR_ASSIGNMENT", "HostOutput", "MAX_BATCH_WIDTH", "MAX_HOLD_TICKS",
     "NativeState", "OBSERVATION_WIDTH", "RH_ASSIGNMENT", "ReachableTwins", "SourceScanReceipt", "TARGET_TICKS",
-    "TapeAddress", "TapeNamespace", "validate_actions",
+    "SourceCandidateWitness", "SourceRenewalWitness", "TapeAddress", "TapeNamespace", "validate_actions",
 ]
