@@ -213,19 +213,48 @@ agreement and the BC all-zero tail agreement make an optimization/conditioning
 diagnostic potentially informative, but this is an inference from the observed
 patterns, not a demonstrated cause.
 
-## Judgment impact pending persistent convergence
+## Persistent convergence decision
 
-This evidence is ready for the persistent `em:ucope:convergence` node. No local
-CONTINUE, PARK, CLOSE, or RECAST decision is formed in this note. The Pro node
-must decide whether one adaptive, explicitly named competence-focused B run is
-still the cheapest valuable discriminator, whether this particular host/budget
-realization should be retired and UCOPE parked, or whether a recast is justified.
+The complete persistent `em:ucope:convergence` response for request
+`ucope-em-convergence-20260901-02` decides:
 
-Any continuation must preserve B1, name the changed budget/optimizer/measurement
-and its outcome-informed reason, keep acquisition and COUNT/RAW locked until a
-FLEX seed passes both folds, and remain within the B/EXPLORE ceiling. Direction
-closure would require evidence beyond this one valid exploratory
-non-competence result.
+```text
+FINAL_DIRECTION_DECISION=CONTINUE
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+
+CURRENT_B1_STATUS=VALID_COMPLETE_RETAINED_B_EXPLORE_NO_ARM_COMPETENT
+B1_UNCHANGED_REPEAT=RETIRE_AS_LOW_VALUE
+B_STUDY_FAMILY_STATUS=ADAPTIVE_FOLLOWUP_ELIGIBLE
+PAID_ACQUISITION_JUDGMENT=GATE_LOCKED_NO_POLARITY
+COUNT_RAW_STATUS=LOCKED
+```
+
+The direction continues only through the exact read-only A/RECON diagnostic
+`UCOPE-A-RECON-B1-ODD-SUPPORT-VS-EVEN-HELDOUT-COMPETENCE-AUDIT-R01`.
+It audits all 72 immutable checkpoints on odd training-period support
+`K_train={1,3,5,7,9}` beside the retained even held-out support
+`K_eval={2,4,6,8}`. It changes no tensor, training data, weight, optimizer
+exposure, fold, information, checkpoint inventory, or original B1 result; it
+performs no training, environment interaction, model selection, acquisition
+evaluation, or COUNT/RAW unlock.
+
+The unchanged B1 configuration may not be repeated as a decision-relevant
+run, and automatic budget enlargement is not justified. Odd-support competence
+with even-support failure recasts the next B object around extrapolation; clear
+FLEX/BC odd-support separation permits a paired optimizer/conditioning B
+discriminator; material FT/MT odd-support root separation may justify a later
+target-schedule comparison. Materially similar odd-support failure in every
+arm, seed, fold, and checkpoint with no package or learning-curve separation
+changes the direction recommendation to `PARK`.
+
+The canonical response is
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-convergence-20260901-02/RESPONSE.md`,
+SHA-256
+`fdb8361c32052c5c32e4d317a49c88c4dcdc29be683c5f887b47fb0d8516765e`.
+Full interpretation and the result-to-next-action map are retained in
+`UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_CONVERGENCE_DECISION_INTAKE_20260901.md`.
 
 ## Exact evidence and contract paths
 
@@ -237,3 +266,5 @@ non-competence result.
 - `experiments/candidates/ucope/competence_first_scout_r01/evaluation.py`
 - `experiments/candidates/ucope/competence_first_scout_r01/gates.py`
 - `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
+- `docs/research/candidates/ucope/UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_CONVERGENCE_DECISION_INTAKE_20260901.md`
+- `temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-convergence-20260901-02/RESPONSE.md`

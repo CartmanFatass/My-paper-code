@@ -54,8 +54,23 @@ proceed in parallel.
 
 ### Execution snapshot — 2026-09-01
 
-All five directions have frozen new `B/EXPLORE` objects and reached audited implementation
-thresholds without producing a new algorithm-effect observation. Their lifecycle and priority
-remain `ACTIVE/HIGH`, and the order above is unchanged. The exact engineering boundaries, negative
-claim boundaries, verification evidence, and next direction-local investments are recorded in
+The first implementation-threshold snapshot remains recorded in
 `docs/research/portfolio/decisions/2026-09-01-first-investment-wave-implementation-threshold.md`.
+Subsequent execution has produced one new valid algorithm observation: UCOPE B1 completed with
+complete support but `0/3` competent seeds in each of its three arms. Acquisition was not evaluated
+and COUNT/RAW remains locked. Its direction-local Convergence decision is `CONTINUE`, with the
+unchanged B1 repeat retired and a read-only odd-training-support versus even-heldout audit selected
+as the sole next discriminator.
+
+VNFC has reached a reviewed construction-ready boundary and passed its construction-only PS-B0
+readiness command; its frozen DEBUG learner run is next. CBSC is integrating the lossless raw-table
+publication required before its three-seed B1. FRRIE remains pre-result while its complete-panel
+runner and full-chain telemetry are closed. SCDMP's first RUN-01 attempt is quarantined as an
+incomplete telemetry attempt with no scientific polarity or object consumption; telemetry,
+unbypassable readiness, and replacement-identity semantics must be repaired before another result
+attempt.
+
+All five directions remain `ACTIVE/HIGH`, and the formal order above is unchanged. This factual
+integration does not select a new cross-direction priority, lifecycle, fusion, separation, or
+capacity decision. Detailed current evidence and non-goals are recorded in
+`docs/research/portfolio/decisions/2026-09-01-first-investment-wave-live-progress.md`.

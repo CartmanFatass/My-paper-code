@@ -79,8 +79,83 @@ That decision established that the frozen five-term-tail/seven-term-root Bellman
 uniformly structurally competent and that no successor was justified from that evidence alone. It
 left later lifecycle and reinvestment to `portfolio:cross_direction`. The later Portfolio decision
 made UCOPE `ACTIVE/HIGH` under the empirical B standard, and the new Innovator round selected a
-genuinely fresh object rather than relaxing or rescuing the consumed objects. No result for the new
-family has yet been observed.
+genuinely fresh object rather than relaxing or rescuing the consumed objects. The valid result and
+new direction-local convergence decision for that family are recorded next.
+
+### Competence-first B1 result and convergence — 2026-09-01
+
+The unique valid complete B1 publication at
+`temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-04/execution/complete/`
+is a retained B/EXPLORE result. It reports complete support, `122,880`
+environment episodes, `614,400` transitions, `8,640` optimizer updates, 18
+completed policies, 72 checkpoints, 576 exact policy evaluations, and 36,864
+sampled evaluation episodes with no nonfinite training event.
+
+All 18 final policies are finite and unique, but none matches the oracle root
+vector, reaches maximum regret `<=1/50`, or reaches minimum forced-PROBE tail
+agreement `>=19/20`. No intermediate checkpoint passes any of those three
+substantive predicates. Every arm has `0/3` competent seeds, so the controlling
+branch is `NO_ARM_COMPETENT`.
+
+The complete persistent `em:ucope:convergence` response for request
+`ucope-em-convergence-20260901-02` decides:
+
+```text
+FINAL_DIRECTION_DECISION=CONTINUE
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+
+CURRENT_B1_STATUS=VALID_COMPLETE_RETAINED_B_EXPLORE_NO_ARM_COMPETENT
+B1_UNCHANGED_REPEAT=RETIRE_AS_LOW_VALUE
+B_STUDY_FAMILY_STATUS=ADAPTIVE_FOLLOWUP_ELIGIBLE
+PAID_ACQUISITION_JUDGMENT=GATE_LOCKED_NO_POLARITY
+COUNT_RAW_STATUS=LOCKED
+```
+
+The smallest supported proposition is limited to this exact host, learner
+packages, data, folds, FP32 AdamW settings, and `160` tail / `320` root update
+exposure: no arm established the competence prerequisite for interpreting
+endogenous paid acquisition. Target freezing supplies no positive competence
+signal, but is neither equivalent nor formally contradicted. The gradient
+`FT-XF-BC` package is not competent and supplies no advantage; its zero tail
+agreement at all checkpoints does not establish structural incapability or a
+pure representation effect. Acquisition was not evaluated, and COUNT/RAW is
+not authorized.
+
+The unchanged B1 configuration is retired as a low-value repeat. The direction
+continues only through the read-only A/RECON object
+`UCOPE-A-RECON-B1-ODD-SUPPORT-VS-EVEN-HELDOUT-COMPETENCE-AUDIT-R01`, whose
+execution is not granted by the convergence decision. It must audit every one
+of the 72 immutable B1 checkpoints on odd training support
+`K_train={1,3,5,7,9}` beside retained even held-out support
+`K_eval={2,4,6,8}`, changing no tensor, data, weight, optimizer exposure, fold,
+information, checkpoint, or B1 result and performing no training, environment
+interaction, model selection, acquisition evaluation, or COUNT/RAW unlock.
+
+Odd-support competence with even-support failure recasts the next B object
+around extrapolation. Clear FLEX/BC odd-support separation permits one paired
+optimizer/conditioning B discriminator; material FT/MT odd-support root
+separation may justify a later target-schedule comparison. Materially similar
+odd-support failure in every arm, seed, fold, and checkpoint with no package or
+learning-curve separation changes the direction recommendation to `PARK`.
+
+The strongest bounded contradiction is zero competence under complete support
+across all three packages and all checkpoints, especially BC's zero tail
+agreement everywhere. The strongest surviving alternative is common
+learnability from finite optimizer exposure, conditioning, odd-to-even
+extrapolation, fold coupling, or common regression difficulty. The result and
+decision remain finite-host B/EXPLORE science with no generic UCOPE, paid
+information, COUNT/RAW, variable-`k`, variable-`N`, MARL/UAV, transfer, safety,
+deployment, flight, energy, or real-world QoS claim.
+
+The canonical Pro response is archived at
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-convergence-20260901-02/RESPONSE.md`,
+SHA-256
+`fdb8361c32052c5c32e4d317a49c88c4dcdc29be683c5f887b47fb0d8516765e`.
+Detailed provenance and the exact result-to-next-action map are in
+`UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_RESULT_EVIDENCE_20260901.md` and
+`UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_CONVERGENCE_DECISION_INTAKE_20260901.md`.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
 
