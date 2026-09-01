@@ -12,6 +12,7 @@
 /.codex/** text eol=lf
 /.agents/** text eol=lf
 /AGENTS.md text eol=lf
+/CLAUDE.md text eol=lf
 /CONTEXT.md text eol=lf
 /scripts/hmasd_*.py text eol=lf
 /scripts/schemas/hmasd_*.schema.json text eol=lf

@@ -29,11 +29,18 @@ a navigation convention, not workflow state.
 | Local experiment output | `temp/directions/<direction-id>/exp/` | Ignored runs, checkpoints, profiles, captured output, and rebuildable generated manifests. |
 | Local test output | `temp/directions/<direction-id>/test/` | Ignored pytest bases, fixtures, test databases, and compiler probes. |
 
-`RESEARCH_MAP.md` is the per-direction inventory: it records all 35 direction
-keys and their current primary implementation and test paths. Codex uses the
-checkout, native worktree, or working directory attached to the current task.
-`temp/` holds ignored experiment and test output. Do not duplicate the 35-row
-inventory in another document.
+`RESEARCH_MAP.md` is the per-direction inventory: it records the 21 current
+direction keys and their current primary implementation and test paths. The 14
+structurally closed or absorbed labels are indexed separately under
+`docs/research/legacy/directions/`. Codex uses the checkout, native worktree, or
+working directory attached to the current task. `temp/` holds ignored experiment
+and test output. Do not duplicate either inventory in another document.
+
+The implementation key is not always a flat sibling of the direction key. Some
+directions nest one level deeper — `scdmp_variable_k/<sub>/` and `ucope/<sub>/`
+each hold several sub-implementations — and a candidate's test directory may be
+flattened with underscores rather than mirroring that nesting. `RESEARCH_MAP.md`
+is authoritative for the exact pair.
 
 ## Stable lineages
 
@@ -96,7 +103,8 @@ from `standalone_agent.py`, `standalone_models.py`,
 | [`collectors.py`](../../ha_ctse_process/collectors.py) | Worker transport, ordering, validation, and snapshot aggregation. |
 | Agent/model/update modules | Policy probabilities, recurrent state, optimization, and update identity. |
 | Segment/lifecycle modules | Rollout and temporal lifecycle state. |
-| [`checkpoint_io.py`](../../ha_ctse_process/checkpoint_io.py) | Checkpoint payloads, loading, migration, and pruning. |
+| [`checkpoint_io.py`](../../ha_ctse_process/checkpoint_io.py) | Checkpoint payloads, loading, migration, and pruning on the standard route. |
+| [`variable_roster_event_checkpoint.py`](../../ha_ctse_process/variable_roster_event_checkpoint.py) | Event and variable-roster checkpoint payloads and restore. This route does not pass through `checkpoint_io.py`; `event_process_runner.py` and `standalone_variable_roster_runner.py` call it directly. |
 | Manifest/metrics/plotting modules | Output identity, metric I/O, reporting, and visualization. |
 | Variable-roster event modules | Event state, active-only packing, opportunity clocks, policy definitions, and restore. |
 
@@ -109,12 +117,29 @@ call native kernels, including
 and [`envs/pettingzoo/uav_cpp_backend.py`](../../envs/pettingzoo/uav_cpp_backend.py).
 The map does not claim that every environment or default route is native.
 
+That cache is not the only native path.
+[`envs/native/production_backend.py`](../../envs/native/production_backend.py)
+is a fail-closed capability registry that dispatches to candidate-owned native
+loaders, and most candidates that go native ship their own `native_backend.py`
+or `native_loader.py` with independent build-and-load code rather than reusing
+the shared cache. There is no single native choke point.
+
+There is also no separate build step. `load_source_keyed_extension` compiles and
+caches through the PyTorch JIT extension loader on first use, keyed by a source
+digest, so the first run or test touching a native backend pays that compile.
+
 ## Dependency direction
 
 Entries wire runners; runners depend on agents, collectors, environments, and
-output owners. Python adapters may call native kernels. Production routes do
-not import isolated candidates. Research documents describe meaning but do not
-control execution.
+output owners. Python adapters may call native kernels. Research documents
+describe meaning but do not control execution.
+
+Isolated candidates are not import-isolated from shared infrastructure.
+`envs/native/production_backend.py` lazily imports native loaders out of
+`experiments/candidates/*` inside its loader functions, covering roughly ten
+implementations, and `tests/production_backend_policy_test.py` exercises that
+path. Candidate isolation holds for the route entries and for the algorithm
+packages; it does not hold for the native registry.
 
 ## Optional Codex collaboration layer
 

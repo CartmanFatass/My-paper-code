@@ -48,6 +48,7 @@ data/
 !README.md
 !CONTEXT.md
 !AGENTS.md
+!CLAUDE.md
 # Stable project and research documentation.
 !memory/*.md
 !docs/project/*.md
