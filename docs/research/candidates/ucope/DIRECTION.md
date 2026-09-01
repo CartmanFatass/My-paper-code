@@ -401,3 +401,44 @@ bundle/READY evidence remains superseded and cannot qualify V2. The fixed
 scientific result root remains absent: neither `run` nor `validate` was
 invoked, and this qualification grants no outcome authorization or scientific
 polarity. A separate explicit Root outcome slot is still required.
+
+## Structural competence innovator decision — 2026-08-31
+
+The complete persistent `em:ucope:innovator` Pro response is archived at
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-innovator-20260831-01/RESPONSE.md`
+in provider conversation `6a963684-685c-83e8-a894-439bb35203d6`. Its final decision is:
+
+```text
+FINAL_INNOVATOR_DECISION=PROCEED_UNCHANGED
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+```
+
+The exact object remains
+`UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`. The Pro decision finds it the smallest
+justified next discriminator and requires no change to its science, arithmetic, fold law,
+implementation, resource contract, or claim semantics. No outcome was observed. The V2
+qualification closes the listed pre-result engineering/resource blockers; fresh run-time admission,
+binding, monitoring, and publication checks remain execution predicates and any failure of them is
+a non-result rather than scientific polarity.
+
+The scientific branches remain the all-twenty `STRUCTURAL_PREREQUISITE_PASS` prerequisite and the
+first-true `STOP_FOLD_RANK`, `STOP_NONUNIQUE_POLICY`, or `STOP_STRUCTURAL_COMPETENCE` falsifier. A
+pass keeps `admit=false` and requires `ROOT_NEW_OBJECT_DECISION_REQUIRED`; no branch supplies
+acquisition, COUNT/RAW, neural, seed-population, generic representation, MARL/UAV, safety,
+deployment, or automatic-successor authority.
+
+Therefore an explicit request for the unique outcome slot is now scientifically eligible, but the
+slot is not granted by this decision:
+
+```text
+OUTCOME_SLOT_REQUEST_SCIENTIFICALLY_ELIGIBLE=true
+OUTCOME_AUTHORIZATION=NO
+EXACT_NEXT_ACTION=ROOT_GRANT_UNIQUE_RESULT_SLOT_AND_RUN_FROZEN_CERTIFICATE
+```
+
+The exact run and subsequent complete-result-only validation commands, full predicate, falsifier
+map, and claim ceiling are retained in
+`UCOPE_STRUCTURAL_COMPETENCE_INNOVATOR_PRO_DECISION_INTAKE_20260831.md`. Root retains execution
+scheduling, and Portfolio lifecycle remains separately decided through `portfolio:cross_direction`.
