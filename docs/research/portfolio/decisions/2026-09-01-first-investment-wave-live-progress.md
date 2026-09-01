@@ -38,13 +38,27 @@ VNFC has no new algorithm-effect observation. Its B/EXPLORE runner, process-tree
 create-once incomplete/valid publication, actual-path PS-B0, native call ledger, and source-bound
 CLI have passed the reviewed non-result suite. The construction-only PS-B0 readiness command
 completed with 18 states and 24 primary-only host calls while creating no model, RNG, optimizer,
-checkpoint, evaluator, or scientific result. The next result-bearing object is the single frozen
-DEBUG seed with eight updates, after a separate fresh 4 GiB physical-and-effective memory
-admission and exact committed-source/native binding.
+checkpoint, evaluator, or scientific result.
+
+The sole R01 DEBUG attempt later passed fresh memory admission but failed its actual
+presentation-safety prerequisite before a valid result body or claim was published. Its
+quarantined checkpoints and telemetry are an incomplete, non-consuming implementation attempt and
+carry no return or recovery polarity. An independent source-level counterexample confirmed that
+finite-precision presentation order can change a physical action in a reachable near-tie, so this
+was not eligible for a reporting-only repair or unchanged rerun.
+
+The complete persistent Innovator decision is `CLOSE_AND_REVISE_R01`. It closes only exact R01,
+keeps the VNFC direction open, and registers sequential B/EXPLORE successor
+`VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` as non-executable. The sole next object is the
+non-result `VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0`, which must prospectively bind one finite
+deterministic, stochastic, RNG, and training action law and pass a finite conformance panel before
+any R02 DEBUG. R01 resume, rerun, evaluation, publication, checkpoint, return, and RNG transfer are
+forbidden.
 
 Evidence:
 
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_R01_ENGINEERING_MILESTONE_20260901.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R01_CLOSE_R02_FINITE_ACTION_LAW_INNOVATOR_INTAKE_20260901.md`
 - commit `98c96af0fdf66f4f539e841218a1de175dfa9db7`
 
 ### CBSC

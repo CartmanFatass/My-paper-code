@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-01T13:14:40Z
+Updated at: 2026-09-01T17:02:20Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -36,7 +36,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE multi-foundation/state/`k` order-value scout, accepting RISP recurrence, ONLGR rate controls, and EBCR coordination without polarity transfer. Valid `.3` remains an exact frozen-resolution nonpass. |
 | ucope | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | New B/EXPLORE competence-first acquisition discriminator. The consumed 0/10 learner and 17/20 structural-prior results do not establish paid-acquisition polarity; COUNT/RAW remains gated on new competence. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Continue typed/generic/reset B3 after writer-competence repair, retaining stale-load routing controls and complete curves. Earlier calibration nonidentification is a B diagnostic. |
-| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE BPCR learnability at train `N={3,5}` and held-out `N=7` against containing DIRECT and a competent heuristic. PCPI is a prerequisite, not the return question. |
+| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-01T17:02:20Z | Exact R01 is closed after the presentation-safety prerequisite failed without a valid return result. Sequential B/EXPLORE R02 is registered but non-executable; its sole next object is the non-result finite physical-action-law A0. |
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
@@ -62,10 +62,13 @@ and COUNT/RAW remains locked. Its direction-local Convergence decision is `CONTI
 unchanged B1 repeat retired and a read-only odd-training-support versus even-heldout audit selected
 as the sole next discriminator.
 
-VNFC has reached a reviewed construction-ready boundary and passed its construction-only PS-B0
-readiness command; its frozen DEBUG learner run is next. CBSC is integrating the lossless raw-table
-publication required before its three-seed B1. FRRIE remains pre-result while its complete-panel
-runner and full-chain telemetry are closed. SCDMP's first RUN-01 attempt is quarantined as an
+VNFC R01 reached DEBUG but failed its presentation-safety prerequisite before valid result
+publication. Its incomplete attempt is quarantined and non-consuming. The persistent Innovator
+decision `CLOSE_AND_REVISE_R01` closes that exact object, keeps the direction open, and registers a
+non-executable R02 whose sole next object is a finite physical-action-law A/RECON. CBSC is
+integrating the lossless raw-table publication required before its three-seed B1. FRRIE remains
+pre-result while its complete-panel runner and full-chain telemetry are closed. SCDMP's first
+RUN-01 attempt is quarantined as an
 incomplete telemetry attempt with no scientific polarity or object consumption; telemetry,
 unbypassable readiness, and replacement-identity semantics must be repaired before another result
 attempt.
