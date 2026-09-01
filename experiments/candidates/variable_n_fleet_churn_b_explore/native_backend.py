@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import stat
 import subprocess
 import tempfile
 from time import perf_counter
@@ -29,6 +30,8 @@ B_BUILD_MAGIC = 0x564E46434254454C
 MINIMUM_BATCH_WIDTH = 8
 TICKS_PER_STEP = 20
 PERFORMANCE_DISPOSITION = "PILOT_ONLY"
+CALL_LEDGER_SCHEMA = "VNFC-BEXP-PAIRED-HOST-CALL-LEDGER-v1"
+_LOAD_ONLY_BINDING: dict[str, object] | None = None
 
 _PACKAGE = Path(__file__).resolve().parent
 _SOURCE = _PACKAGE / "native" / "telemetry_backend.cpp"
@@ -40,6 +43,35 @@ _R09_SOURCE = _R09_NATIVE / "bpcr_backend.cpp"
 
 class NativeTelemetryError(RuntimeError):
     """The B-only native telemetry boundary is unavailable or rejected input."""
+
+
+def expected_host_call_inventory(
+    *,
+    paired_steps: int,
+    primary_sensitivity_calls: int = 0,
+    primary_bcrh_calls: int = 0,
+) -> dict[str, object]:
+    """Canonical inventory for a fully successful paired construction path."""
+    values = (paired_steps, primary_sensitivity_calls, primary_bcrh_calls)
+    if any(not isinstance(value, int) or value < 0 for value in values):
+        raise ValueError("expected host-call counts must be nonnegative integers")
+    return {
+        "schema": CALL_LEDGER_SCHEMA,
+        "primary": {
+            "reset": 1,
+            "step": paired_steps,
+            "sensitivity": primary_sensitivity_calls,
+            "bcrh": primary_bcrh_calls,
+        },
+        "shadow": {
+            "reset": 1,
+            "step": paired_steps,
+            "sensitivity": 0,
+            "bcrh": 0,
+        },
+        "paired": {"step": paired_steps},
+        "close_accounting": "excluded_non_scientific_lifecycle",
+    }
 
 
 class _TickRow(ctypes.Structure):
@@ -97,6 +129,84 @@ def native_build_key(source_identity: Mapping[str, str] | None = None) -> str:
         digest.update(flag.encode("ascii"))
     digest.update(B_ABI_VERSION.to_bytes(4, "big"))
     return digest.hexdigest()
+
+
+def _pure_filesystem_compiler_candidates(program_files_roots: Sequence[Path] | None = None) -> tuple[Path, ...]:
+    roots = tuple(program_files_roots) if program_files_roots is not None else tuple(Path(value) for key in ("ProgramFiles", "ProgramFiles(x86)") if (value := os.environ.get(key)))
+    found = set()
+    for root in roots:
+        base = Path(root) / "Microsoft Visual Studio"
+        if base.is_dir(): found.update(path.resolve() for path in base.glob("**/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe") if path.is_file())
+    return tuple(sorted(found, key=lambda path: str(path).casefold()))
+
+
+def _r09_key_for_compiler_sha(compiler_sha256: str) -> str:
+    frozen = _r09.verify_immutable_inputs(_r09._REPOSITORY_ROOT); digest = hashlib.sha256(b"VNFC-BPCR-R09-NATIVE-BUILD-v1\0")
+    for item in (_r09.native_source_sha256(), _r09.contract_sha256(), str(frozen["science_card_sha256"]), str(frozen["public_law_sha256"]), compiler_sha256): digest.update(item.encode("ascii"))
+    for flag in MSVC_COMPILE_FLAGS:
+        encoded = flag.encode("ascii"); digest.update(len(encoded).to_bytes(4, "big")); digest.update(encoded)
+    digest.update(_r09.NATIVE_ABI_VERSION.to_bytes(4, "big")); return digest.hexdigest()
+
+
+def _shadow_key_for_compiler_sha(source_identity: Mapping[str, str], compiler_sha256: str) -> str:
+    digest = hashlib.sha256(b"VNFC-BPCR-BEXP-TICK-TELEMETRY-BUILD-v1\0")
+    for name, value in sorted(source_identity.items()): digest.update(name.encode("ascii")); digest.update(value.encode("ascii"))
+    digest.update(compiler_sha256.encode("ascii"))
+    for flag in MSVC_COMPILE_FLAGS: digest.update(flag.encode("ascii"))
+    digest.update(B_ABI_VERSION.to_bytes(4, "big")); return digest.hexdigest()
+
+
+def resolve_prebuilt_load_only_binding(*, program_files_roots: Sequence[Path] | None = None, cache_root: Path | None = None) -> dict[str, object]:
+    compilers = _pure_filesystem_compiler_candidates(program_files_roots); by_sha: dict[str, list[Path]] = {}
+    for path in compilers: by_sha.setdefault(_sha256(path), []).append(path)
+    cache = Path(tempfile.gettempdir()) if cache_root is None else Path(cache_root); source = _source_identity(); matches = []
+    for compiler_sha, paths in sorted(by_sha.items()):
+        r09_key = _r09_key_for_compiler_sha(compiler_sha); shadow_key = _shadow_key_for_compiler_sha(source, compiler_sha)
+        primary = cache / "hmasd_vnfc_bpcr_r09_native" / r09_key / "bpcr_backend.dll"; shadow = cache / "hmasd_vnfc_b_tick_native" / shadow_key / "vnfc_b_tick_telemetry.dll"
+        if primary.is_file() and shadow.is_file(): matches.append((compiler_sha, paths[0], r09_key, shadow_key, primary.resolve(), shadow.resolve()))
+    if len(matches) != 1: raise NativeTelemetryError(f"REPAIR_REQUIRED: expected exactly one prebuilt load-only native key pair, found {len(matches)}")
+    compiler_sha, compiler, r09_key, shadow_key, primary, shadow = matches[0]
+    return {"schema": "VNFC_BPCR_BEXP_R01_PREBUILT_LOAD_ONLY_BINDING_V1", "compiler_path": str(compiler), "compiler_sha256": compiler_sha, "source_identity": source, "r09_build_key": r09_key, "shadow_build_key": shadow_key, "primary_artifact_path": str(primary), "primary_artifact_sha256": _sha256(primary), "primary_artifact_size": primary.stat().st_size, "shadow_artifact_path": str(shadow), "shadow_artifact_sha256": _sha256(shadow), "shadow_artifact_size": shadow.stat().st_size}
+
+
+def _install_prebuilt_load_only_binding(binding: Mapping[str, object]) -> dict[str, object]:
+    """Privately install only a fully rederived live filesystem binding."""
+    global _LOAD_ONLY_BINDING, native_build_key, _compiled_path
+    required = {"schema", "compiler_path", "compiler_sha256", "source_identity", "r09_build_key", "shadow_build_key", "primary_artifact_path", "primary_artifact_sha256", "primary_artifact_size", "shadow_artifact_path", "shadow_artifact_sha256", "shadow_artifact_size"}
+    live_source = _source_identity()
+    if set(binding) != required or binding.get("schema") != "VNFC_BPCR_BEXP_R01_PREBUILT_LOAD_ONLY_BINDING_V1" or binding.get("source_identity") != live_source: raise NativeTelemetryError("load-only binding schema/source differs")
+    compiler = Path(str(binding["compiler_path"])).resolve()
+    reparse_flag = getattr(compiler.stat(), "st_file_attributes", 0) & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0) if compiler.exists() else 0
+    if not compiler.is_file() or reparse_flag or compiler.name.casefold() != "cl.exe" or compiler not in _pure_filesystem_compiler_candidates(): raise NativeTelemetryError("load-only compiler path is not a live enumerated regular cl.exe")
+    compiler_sha = _sha256(compiler)
+    if binding.get("compiler_sha256") != compiler_sha: raise NativeTelemetryError("load-only compiler hash differs")
+    expected_r09_key = _r09_key_for_compiler_sha(compiler_sha); expected_shadow_key = _shadow_key_for_compiler_sha(live_source, compiler_sha)
+    if binding.get("r09_build_key") != expected_r09_key or binding.get("shadow_build_key") != expected_shadow_key: raise NativeTelemetryError("load-only binding keys do not rederive from live bytes")
+    primary_raw, shadow_raw = Path(str(binding["primary_artifact_path"])), Path(str(binding["shadow_artifact_path"]))
+    if not primary_raw.is_absolute() or not shadow_raw.is_absolute(): raise NativeTelemetryError("load-only artifact paths are not absolute")
+    primary, shadow = primary_raw.resolve(), shadow_raw.resolve()
+    if primary.name != "bpcr_backend.dll" or primary.parent.name != expected_r09_key or shadow.name != "vnfc_b_tick_telemetry.dll" or shadow.parent.name != expected_shadow_key: raise NativeTelemetryError("load-only artifact cache key/path differs")
+    for path, sha, size in ((primary, binding["primary_artifact_sha256"], binding["primary_artifact_size"]), (shadow, binding["shadow_artifact_sha256"], binding["shadow_artifact_size"])):
+        attributes = getattr(path.stat(), "st_file_attributes", 0) if path.exists() else 0
+        if not path.is_file() or path.is_symlink() or attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0) or path.stat().st_size != size or _sha256(path) != sha: raise NativeTelemetryError("load-only bound artifact drifted")
+    source = dict(binding["source_identity"]); r09_key, shadow_key = str(binding["r09_build_key"]), str(binding["shadow_build_key"])
+    def bound_r09_key() -> str: return r09_key
+    def bound_toolchain() -> dict[str, object]: return {"compiler_path": str(binding["compiler_path"]), "compiler_sha256": str(binding["compiler_sha256"]), "compile_flags": list(MSVC_COMPILE_FLAGS), "abi_version": _r09.NATIVE_ABI_VERSION, "load_only": True}
+    def bound_r09_path() -> Path:
+        if not primary.is_file() or _sha256(primary) != binding["primary_artifact_sha256"]: raise NativeTelemetryError("bound primary artifact drifted")
+        return primary
+    def bound_shadow_key(identity: Mapping[str, str] | None = None) -> str:
+        if dict(source if identity is None else identity) != source: raise NativeTelemetryError("bound shadow source identity differs")
+        return shadow_key
+    def bound_shadow_path(key: str) -> Path:
+        if key != shadow_key or not shadow.is_file() or _sha256(shadow) != binding["shadow_artifact_sha256"]: raise NativeTelemetryError("bound shadow artifact drifted")
+        return shadow
+    _r09.native_build_key = bound_r09_key; _r09.native_toolchain_identity = bound_toolchain; _r09._compiled_path = bound_r09_path; _r09.require_cpp_batched_backend.cache_clear()
+    native_build_key = bound_shadow_key; _compiled_path = bound_shadow_path; _load_b_native_telemetry.cache_clear(); _LOAD_ONLY_BINDING = dict(binding); return dict(binding)
+
+
+def active_prebuilt_load_only_binding() -> dict[str, object] | None:
+    return None if _LOAD_ONLY_BINDING is None else dict(_LOAD_ONLY_BINDING)
 
 
 def _compiled_path(build_key: str) -> Path:
@@ -498,6 +608,13 @@ class PairedPrimaryShadowBatch:
                 "width": self._width,
                 "main_return_source": "registered_r09_native_interactive_primary",
                 "shadow_role": "telemetry_only_no_action_or_return_authority",
+                "authority": {
+                    "scientific_trajectory_source": "registered_r09_native_interactive_primary",
+                    "action_source": "single_paired_caller_command_forwarded_unchanged",
+                    "scientific_return_source": "registered_r09_native_interactive_primary",
+                    "shadow_effect": "read_only_deterministic_replay_telemetry",
+                },
+                "host_call_ledger": expected_host_call_inventory(paired_steps=0),
                 "initial": {
                     "primary_full_output_digest": _canonical_digest(
                         self._primary.initial, b"VNFC-BEXP-INITIAL-OUTPUT-v1"
@@ -510,6 +627,8 @@ class PairedPrimaryShadowBatch:
                 "source_pre": source,
                 "source_post": source,
                 "boundaries": [],
+                "incomplete": False,
+                "last_failure": None,
             }
             self._open = True
         except Exception as error:
@@ -534,11 +653,24 @@ class PairedPrimaryShadowBatch:
         if not self._open or self._primary is None or self._shadow is None:
             raise NativeTelemetryError("paired primary/shadow batch is closed")
         if _source_identity() != self._source_fence:
+            self._mark_incomplete(
+                "INCOMPLETE: paired primary/shadow included-source identity drifted"
+            )
             self._close_safely()
             raise NativeTelemetryError(
                 "INCOMPLETE: paired primary/shadow included-source identity drifted"
             )
         return self._primary, self._shadow
+
+    def _increment_host_call(self, owner: str, operation: str) -> None:
+        ledger = self._receipt["host_call_ledger"]
+        row = ledger[owner]  # type: ignore[index]
+        row[operation] = int(row[operation]) + 1  # type: ignore[index]
+
+    def _mark_incomplete(self, error: object) -> None:
+        if hasattr(self, "_receipt"):
+            self._receipt["incomplete"] = True
+            self._receipt["last_failure"] = str(error)
 
     def _close_safely(self) -> None:
         shadow, primary = self._shadow, self._primary
@@ -579,7 +711,9 @@ class PairedPrimaryShadowBatch:
                 )
             # Scientific outputs originate here, before the observational shadow.
             primary_rows = primary.step(immutable)
+            self._increment_host_call("primary", "step")
             shadow_rows = shadow.step(immutable)
+            self._increment_host_call("shadow", "step")
             require_boundary_equivalence(primary_rows, shadow_rows)
             source_post = _paired_source_snapshot(primary, shadow)
             if source_post != source_pre:
@@ -587,6 +721,7 @@ class PairedPrimaryShadowBatch:
                     "INCOMPLETE: paired source/artifact identity drifted across boundary"
                 )
         except Exception as error:
+            self._mark_incomplete(error)
             self._close_safely()
             if isinstance(error, NativeTelemetryError) and "INCOMPLETE" in str(error):
                 raise
@@ -631,6 +766,7 @@ class PairedPrimaryShadowBatch:
         self._receipt["action_digest"] = self._action_hasher.hexdigest()
         self._receipt["source_post"] = source_post
         self._receipt["boundaries"].append(boundary)  # type: ignore[union-attr]
+        self._increment_host_call("paired", "step")
         return {
             "primary_rows": primary_rows,
             "shadow_rows": shadow_rows,
@@ -648,6 +784,7 @@ class PairedPrimaryShadowBatch:
                     "INCOMPLETE: paired source/artifact changed before BCRH"
                 )
             rows = primary.bcrh(include_candidate_records=False)
+            self._increment_host_call("primary", "bcrh")
             source_post = _paired_source_snapshot(primary, shadow)
             if source_post != source_pre:
                 raise NativeTelemetryError(
@@ -655,6 +792,7 @@ class PairedPrimaryShadowBatch:
                 )
             return rows
         except Exception as error:
+            self._mark_incomplete(error)
             self._close_safely()
             if isinstance(error, NativeTelemetryError) and "INCOMPLETE" in str(error):
                 raise
@@ -672,6 +810,7 @@ class PairedPrimaryShadowBatch:
                     "INCOMPLETE: paired source/artifact changed before sensitivity"
                 )
             rows = primary.sensitivity()
+            self._increment_host_call("primary", "sensitivity")
             source_post = _paired_source_snapshot(primary, shadow)
             if source_post != source_pre:
                 raise NativeTelemetryError(
@@ -683,6 +822,7 @@ class PairedPrimaryShadowBatch:
                 )
             return rows
         except Exception as error:
+            self._mark_incomplete(error)
             self._close_safely()
             if isinstance(error, NativeTelemetryError) and "INCOMPLETE" in str(error):
                 raise
@@ -794,10 +934,13 @@ __all__ = [
     "MINIMUM_BATCH_WIDTH",
     "NativeTelemetryError",
     "PairedPrimaryShadowBatch",
+    "active_prebuilt_load_only_binding",
+    "expected_host_call_inventory",
     "derive_recovery_telemetry",
     "native_artifact_identity",
     "native_build_key",
     "performance_readiness",
+    "resolve_prebuilt_load_only_binding",
     "require_boundary_equivalence",
     "require_b_native_telemetry",
 ]

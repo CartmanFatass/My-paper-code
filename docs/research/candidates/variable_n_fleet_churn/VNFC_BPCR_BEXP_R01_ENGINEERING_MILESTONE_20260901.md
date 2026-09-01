@@ -1,55 +1,95 @@
 # VNFC BPCR B/EXPLORE R01 engineering milestone
 
-## Disposition
+## Current disposition
 
-`VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R01` is construction-complete enough for
-static review but is not executable. The runner declares `IMPLEMENTATION_READY = False`.
-Do not run DEBUG, PRIMARY, OPTIONAL, result serialization, or DEBUG-gate construction.
-Every public execution or publication entry must first validate a fresh passing 4 GiB
-preflight receipt and then stop with `REPAIR_REQUIRED`, before native admission, RNG/model
-construction, training, checkpoint creation, result reads, or file writes.
+`VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R01` has passed the independent A–G,
+bounded thin-CLI, and load-only native-binding reviews. The runner now declares
+`IMPLEMENTATION_READY = True` for the single frozen DEBUG pilot.
 
-The pre-seal baseline reported by the integration wave is 53 non-result-bearing tests.
-The focused runner suite additionally checks the centralized hard fence and has no native
-endpoint test enabled.
+The production path has performance disposition `PILOT_ONLY`: one frozen eight-update DEBUG may
+run only after the final READY flip and a fresh 4 GiB admission. Its process-tree telemetry must
+measure wall time, CPU, peak RSS, scratch and durable high-water marks, I/O, and scientific-work
+throughput. PRIMARY and OPTIONAL remain unavailable until a valid archived DEBUG three-piece
+bundle is accepted. Static tests do not establish scientific polarity or production performance.
 
-## Final-review material repair contracts
+The final non-result regression contains 102 passing tests. No formal DEBUG, PRIMARY, OPTIONAL, or
+other result-bearing endpoint was run during implementation.
 
-The final independent review found three material gaps. The hard fence prevents them from
-producing activity or an artifact; it does not resolve them:
+## Closed engineering contracts
 
-1. Failure quarantine is incomplete. Once execution is eventually enabled, every post-admission
-   training, gate, checkpoint, and evaluation failure must create one structured `INCOMPLETE`
-   record without leaving an orphaned create-once checkpoint that blocks the namespace. The
-   common-host BCRH failure path must carry an explicit reason and must never index a missing
-   `missing_adapter` field.
-2. Artifact validation is not yet meaning-complete. Recovery values must be recomputed from the
-   retained raw tick rows. BCRH checker rows, N7 sensitivity, DIRECT residual activity, native tick
-   totals, and primary-only versus paired host-call counts must be deeply validated and rebound to
-   the terminal rather than accepted from lengths or summary booleans.
-3. PS-B0 evidence is incomplete. A source-bound built-in actual-path support-state adapter must
-   construct the null-legal, multi-candidate, opaque deterministic tie-support states without
-   claiming an unobserved equal-logit tie. The artifact must retain all 288 addressed comparisons
-   plus canonical/presented score and probability-difference diagnostics instead of only a summary.
+- The registered R09 primary remains the only authority for trajectory, action, and return. The B
+  shadow is a deterministic, read-only same-input/action replay. Its raw-tick latency is a direct
+  shadow observation; applicability to primary is an inference allowed only when every boundary,
+  source identity, and native artifact identity is exact.
+- PS-B0 constructs 18 actual-path states and four distinct active presentations, then persists all
+  288 initial/debug-final MAPR/DIRECT comparisons with score/probability diagnostics. It tests
+  opaque deterministic support and explicitly makes no equal-logit claim.
+- Runtime validation binds every paired receipt to its exact training arm/update/roster or
+  evaluation cell/checkpoint/arm. DEBUG requires four primary-only N7 sensitivity calls, twelve
+  primary-only BCRH calls, and the separate 24-call PS-B0 ledger.
+- Durable publication is monotonic and create-once. A valid run consists only of scientific
+  `RESULT_BODY.json` plus observer `TELEMETRY_TERMINAL.json` and `VALID_CLAIM.json`. A pre-seal
+  failure preserves all partial bytes, appends `INCOMPLETE.json`, seals the partial inventory, and
+  publishes only `TELEMETRY_TERMINAL.json` plus `INCOMPLETE_CLAIM.json`. Post-seal observer failure
+  cannot change the scientific root and creates only `OBSERVER_INCOMPLETE.json` in the publication
+  namespace. Legacy `RESULT.json`, `OUTCOME_CLAIM.json`, rollback deletion, and post-hoc artifact
+  registration seams are absent.
+- Recovery is recomputed from retained raw ticks. BCRH, sensitivity, DIRECT activity, exact host
+  calls, source/native bindings, checkpoint identities, and process/storage telemetry are
+  cross-validated rather than accepted from summary booleans.
 
-After those repairs, measured external performance telemetry is still required. Current schema
-validators and static counts are not end-to-end evidence and do not establish peak RSS, throughput,
-scratch/durable high-water marks, I/O, or the true overhead of primary-only BCRH and sensitivity
-calls.
+Old R09 code and tests have zero content diff. Its full historical suite still has pre-existing
+canonical-EOL manifest failures in this checkout; the B/EXPLORE change neither edits nor repairs
+that frozen surface.
 
-Recovery/tick telemetry is directly observed on the deterministic shadow host. Its application to
-the registered R09 primary host is only an inference conditioned on exact same-input/action,
-boundary-output, and source equivalence; it must never be described as a direct primary-host
-observation.
+## Construction-only PS-B0 readiness command
 
-## Preserved engineering work
+Use the project interpreter and create a fresh admission receipt immediately before the command:
 
-The construction surface contains paired single-seam native wiring, exact DEBUG/PRIMARY count and
-exposure contracts, finite-value/action-probability rejection, training/evaluation/readout schemas,
-create-once checkpoint/result format scaffolds, and treatment-blind N7 action-sensitivity wiring.
-The material validation and quarantine gaps above remain open. These are implementation assets,
-not permission to execute R01.
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/hmasd_resource_preflight.py admit-memory --out 'temp/vnfc-bexp-r01/ps-b0-readiness-preflight.json'
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_vnfc_bpcr_b_explore.py ps-b0-readiness --preflight-receipt 'temp/vnfc-bexp-r01/ps-b0-readiness-preflight.json'
+```
 
-Construction-only helpers are deliberately excluded from the module public export list. The
-internal lower-level orchestrator remains solely for static call-order tests and is not an
-alternative runtime entry.
+This is construction-only and non-result-bearing. It reads the admission receipt once, requires
+the existing content-keyed primary and shadow DLLs without building them, constructs and closes the
+18 in-memory native states, and prints one canonical JSON receipt with the exact 24-call ledger to
+stdout. It creates no RNG master, Torch model, optimizer, checkpoint, scientific/durable root,
+publication root, terminal, or result. Its only disclosed runtime effects are loading the prebuilt
+native libraries and constructing temporary in-memory host state.
+
+Formal PS-B0 must not be run separately. It uses the initial and same-invocation debug-final
+checkpoints inside the frozen DEBUG command below.
+
+## Frozen formal DEBUG command
+
+Choose three new, empty, pairwise-disjoint roots. The durable root must be the exact named
+scientific namespace shown here; the publication root is a separate observer namespace.
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/hmasd_resource_preflight.py admit-memory --out 'temp/vnfc-bexp-r01/debug-2026090101-preflight.json'
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_vnfc_bpcr_b_explore.py debug --stage B0-DEBUG --seed 2026090101 --updates 8 --preflight-receipt 'temp/vnfc-bexp-r01/debug-2026090101-preflight.json' --scratch-root 'temp/vnfc-bexp-r01/debug-2026090101-scratch' --durable-root 'temp/vnfc-bexp-r01/VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R01/B0-DEBUG/2026090101' --publication-root 'temp/vnfc-bexp-r01/debug-2026090101-publication'
+```
+
+The CLI rejects any different DEBUG stage, seed, or update count before reading the receipt or
+touching roots. It reads the fresh receipt once, binds the current prebuilt artifacts into the exact
+storage contract, creates one production process-tree telemetry sink, and invokes the public
+runtime exactly once. It performs no retry. On success, its sole stdout record is the canonical
+execution receipt. This DEBUG is the only result-bearing invocation currently open; PRIMARY and
+OPTIONAL remain gated by its archived canonical three-piece bundle.
+
+Both CLI paths use a pure-filesystem load-only resolver after fresh preflight validation. It walks
+standard Program Files Visual Studio layouts with `pathlib`, hashes `cl.exe` candidates as files,
+and never invokes `vswhere`, `cl.exe`, a subprocess, or an original build-capable helper. For each
+unique compiler hash it recomputes the exact R09 and shadow keys from current source, contract,
+science/public-law, frozen-flag, and ABI bytes. Exactly one pair with both cache DLLs must exist;
+missing or ambiguous pairs are `REPAIR_REQUIRED`. The selected source/compiler/key/path/hash/size
+facts install process-local validating load-only functions. Formal DEBUG resolves and installs this
+binding before sink construction but performs actual DLL loading, ABI/magic validation, and shadow
+embedded-fingerprint validation only after telemetry starts in the monitored source stage.
+The installer is private and treats resolver output as untrusted: before changing any process
+function or cache it independently re-enumerates and rehashes the regular non-reparse `cl.exe`,
+rehashes live source inputs, recomputes both keys, checks exact DLL filenames/key-parent
+directories, and rechecks absolute artifact paths, sizes, hashes, and reparse status. A forged or
+stale binding therefore fails before global mutation, cache clearing, DLL loading, root access, or
+monitor construction.

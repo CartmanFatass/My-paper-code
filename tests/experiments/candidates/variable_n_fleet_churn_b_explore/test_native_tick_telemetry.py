@@ -11,6 +11,7 @@ from experiments.candidates.variable_n_fleet_churn_b_explore import (
     NativeTelemetryError,
     PairedPrimaryShadowBatch,
     derive_recovery_telemetry,
+    expected_host_call_inventory,
     native_artifact_identity,
     performance_readiness,
     require_boundary_equivalence,
@@ -184,6 +185,7 @@ def test_paired_receipt_contains_six_exact_boundaries_and_canonical_digests() ->
     fixtures = _fixtures(8)
     paired = PairedPrimaryShadowBatch(fixtures)
     try:
+        assert len(paired.sensitivity()) == 8
         for epoch in range(6):
             result = paired.step(tuple(fixture.post_commands[epoch] for fixture in fixtures))
         receipt = result["receipt"]
@@ -199,6 +201,11 @@ def test_paired_receipt_contains_six_exact_boundaries_and_canonical_digests() ->
         assert all(row["shadow_ticks_per_session"] == (20,) * 8 for row in receipt["boundaries"])
         assert receipt["boundaries"][-1]["primary_integrated_ticks"] == (240,) * 8
         assert receipt["boundaries"][-1]["shadow_integrated_ticks"] == (240,) * 8
+        assert receipt["host_call_ledger"] == expected_host_call_inventory(
+            paired_steps=6, primary_sensitivity_calls=1
+        )
+        assert receipt["incomplete"] is False
+        assert receipt["last_failure"] is None
     finally:
         paired.close()
 
@@ -222,6 +229,11 @@ def test_paired_boundary_drift_fails_incomplete_and_closes(
     monkeypatch.setattr(paired._shadow, "step", drift)
     with pytest.raises(NativeTelemetryError, match="INCOMPLETE"):
         paired.step(tuple(fixture.post_commands[0] for fixture in fixtures))
+    receipt = paired.receipt
+    assert receipt["host_call_ledger"]["primary"]["step"] == 1
+    assert receipt["host_call_ledger"]["shadow"]["step"] == 1
+    assert receipt["host_call_ledger"]["paired"]["step"] == 0
+    assert receipt["incomplete"] is True
     with pytest.raises(NativeTelemetryError, match="closed"):
         paired.step(tuple(fixture.post_commands[1] for fixture in fixtures))
 
@@ -326,16 +338,26 @@ def test_paired_rejects_stable_artifact_change_between_boundaries_before_step(
     assert paired._open is False
     assert paired._primary._open is False
     assert paired._shadow._open is False
+    assert paired.receipt["host_call_ledger"] == expected_host_call_inventory(
+        paired_steps=0
+    )
+    assert paired.receipt["incomplete"] is True
     with pytest.raises(NativeTelemetryError, match="before BCRH"):
         paired_bcrh.bcrh()
     assert paired_bcrh._open is False
     assert paired_bcrh._primary._open is False
     assert paired_bcrh._shadow._open is False
+    assert paired_bcrh.receipt["host_call_ledger"] == expected_host_call_inventory(
+        paired_steps=0
+    )
     with pytest.raises(NativeTelemetryError, match="before sensitivity"):
         paired_sensitivity.sensitivity()
     assert paired_sensitivity._open is False
     assert paired_sensitivity._primary._open is False
     assert paired_sensitivity._shadow._open is False
+    assert paired_sensitivity.receipt["host_call_ledger"] == expected_host_call_inventory(
+        paired_steps=0
+    )
 
 
 def test_primary_only_sensitivity_returns_width_rows_and_does_not_advance_state() -> None:
@@ -351,7 +373,13 @@ def test_primary_only_sensitivity_returns_width_rows_and_does_not_advance_state(
             == {"candidate_count", "min_c60", "max_c60", "sensitive"}
             for row in rows
         )
-        assert diagnosed.receipt == before
+        after_sensitivity = diagnosed.receipt
+        assert after_sensitivity["input_digest"] == before["input_digest"]
+        assert after_sensitivity["action_digest"] == before["action_digest"]
+        assert after_sensitivity["boundaries"] == before["boundaries"]
+        assert after_sensitivity["host_call_ledger"] == expected_host_call_inventory(
+            paired_steps=0, primary_sensitivity_calls=1
+        )
         commands = tuple(fixture.post_commands[0] for fixture in fixtures)
         diagnosed_step = diagnosed.step(commands)
         control_step = control.step(commands)
@@ -361,6 +389,58 @@ def test_primary_only_sensitivity_returns_width_rows_and_does_not_advance_state(
         ) == tuple(row["interactive"] for row in control_step["shadow_rows"])
         assert diagnosed_step["receipt"]["action_digest"] == control_step["receipt"]["action_digest"]
         assert diagnosed_step["receipt"]["boundaries"] == control_step["receipt"]["boundaries"]
+        assert diagnosed_step["receipt"]["host_call_ledger"] == expected_host_call_inventory(
+            paired_steps=1, primary_sensitivity_calls=1
+        )
     finally:
         diagnosed.close()
         control.close()
+
+
+def test_primary_only_bcrh_plus_six_steps_has_exact_real_call_inventory() -> None:
+    paired = PairedPrimaryShadowBatch(_fixtures(8))
+    try:
+        for _ in range(6):
+            diagnostics = paired.bcrh(include_candidate_records=False)
+            assert len(diagnostics) == 8
+            commands = tuple(row["scorer_command"] for row in diagnostics)
+            result = paired.step(commands)
+        receipt = result["receipt"]
+        assert receipt["host_call_ledger"] == expected_host_call_inventory(
+            paired_steps=6, primary_bcrh_calls=6
+        )
+        assert receipt["host_call_ledger"]["shadow"]["bcrh"] == 0
+        assert receipt["host_call_ledger"]["shadow"]["sensitivity"] == 0
+        assert receipt["main_return_source"] == "registered_r09_native_interactive_primary"
+        assert receipt["shadow_role"] == "telemetry_only_no_action_or_return_authority"
+        assert receipt["authority"] == {
+            "scientific_trajectory_source": "registered_r09_native_interactive_primary",
+            "action_source": "single_paired_caller_command_forwarded_unchanged",
+            "scientific_return_source": "registered_r09_native_interactive_primary",
+            "shadow_effect": "read_only_deterministic_replay_telemetry",
+        }
+        assert len(receipt["boundaries"]) == 6
+        assert all(row["exact"] for row in receipt["boundaries"])
+    finally:
+        paired.close()
+
+
+def test_partial_shadow_failure_records_only_successful_real_host_calls(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fixtures = _fixtures(8)
+    paired = PairedPrimaryShadowBatch(fixtures)
+
+    def shadow_failure(_commands):
+        raise NativeTelemetryError("synthetic shadow construction failure")
+
+    monkeypatch.setattr(paired._shadow, "step", shadow_failure)
+    with pytest.raises(NativeTelemetryError, match="INCOMPLETE"):
+        paired.step(tuple(fixture.post_commands[0] for fixture in fixtures))
+    ledger = paired.receipt["host_call_ledger"]
+    assert ledger["primary"]["step"] == 1
+    assert ledger["shadow"]["step"] == 0
+    assert ledger["paired"]["step"] == 0
+    assert paired.receipt["boundaries"] == []
+    with pytest.raises(ValueError):
+        expected_host_call_inventory(paired_steps=-1)
