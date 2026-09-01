@@ -1,15 +1,17 @@
 # Direction ucope: UCOPE
 
 This is the durable direction-science authority for UCOPE. It records the
-accepted interpretation of the exact Pro-closed R03 object and its scientific
-provenance.
+accepted interpretation and provenance of consumed UCOPE objects and the
+current direction-level Pro conclusion.
 
 ## Authority
 
 - Stable direction ID: `ucope`
 - Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
-- Exact science object:
+- Historical R03 science object:
   `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`
+- Latest consumed science object:
+  `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
 - Science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Science-card canonical-LF object digest:
@@ -30,6 +32,25 @@ count. The direct-service alternative remains separated by the frozen
 `Gamma=I+D` decomposition and analytic `D≈-0.02` boundary.
 
 ## Current position
+
+The complete persistent `em:ucope:convergence` Pro node has formed the final direction decision:
+
+```text
+FINAL_DIRECTION_DECISION=PARK
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+CURRENT_OBJECT_STATUS=CONSUMED_TERMINAL_NONRERUNNABLE
+SUCCESSOR_REGISTRATION_JUDGMENT=NOT_JUSTIFIED
+PRESENTLY_JUSTIFIED_SUCCESSOR=NONE
+```
+
+The smallest supported conclusion is that the frozen five-term-tail/seven-term-root Bellman prior
+is not uniformly structurally competent on the exact retained UCOPE panel. The broader acquisition
+question remains potentially open, but no admissible successor or justified active resource path
+currently exists. This direction-level `PARK` conclusion does not itself mutate the lifecycle,
+priority, or capacity recorded in the Portfolio; that requires a later `portfolio:cross_direction`
+decision and Root integration.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
 
@@ -486,3 +507,46 @@ acquisition, COUNT/RAW, neural/optimizer, generic representation, seed-populatio
 deployment, historical-mechanism, automatic-successor, or Portfolio lifecycle polarity. This exact
 object may not be rerun or rescued; a successor or lifecycle effect requires the separately governed
 convergence and Portfolio decisions.
+
+## EM convergence decision — 2026-08-31
+
+The archived complete `em:ucope:convergence` response for request
+`ucope-em-convergence-20260831-01` records:
+
+```text
+FINAL_DIRECTION_DECISION=PARK
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+CURRENT_OBJECT_STATUS=CONSUMED_TERMINAL_NONRERUNNABLE
+CURRENT_OBJECT_DISPOSITION=STOP_STRUCTURAL_COMPETENCE
+PREREQUISITE_PASS=false
+ADMIT=false
+NEXT_ACTION=NONE
+SUCCESSOR_REGISTRATION_JUDGMENT=NOT_JUSTIFIED
+PRESENTLY_JUSTIFIED_SUCCESSOR=NONE
+CHEAPEST_DECISIVE_NEXT_DISCRIMINATOR=NONE_CURRENTLY_JUSTIFIED
+```
+
+All twenty policies pass rank, exact coefficient validity, uniqueness, positive margins, exact root
+vectors, and regret. Only `17/20` pass forced-PROBE tail agreement; the three exact failures are
+`06/fold1`, `08/fold1`, and `09/fold0`. This census failure rejects uniform competence of the one
+frozen Bellman prior, not acquisition value, COUNT/RAW, optimization, generic representation, or a
+seed population.
+
+The Pro node selects `PARK`: `CONTINUE` has no remaining registered work, `RECAST` lacks an
+independently motivated prospective object, and `CLOSE` would turn an unresolved acquisition
+question into an unsupported negative claim. No target-frozen MLP, optimizer-only learner, richer
+basis, altered fold, relaxed threshold, passing subset, or COUNT/RAW object is currently justified.
+The two completed objects remain consumed and cannot be reused as rescues or pilots.
+
+Re-entry requires an independently motivated mechanism rationale, a genuinely new prospectively
+frozen object, an identifiable mechanism axis, competence-first admission, no reuse or relaxation of
+consumed results, and separate science registration plus technical qualification and outcome
+authorization. These conditions do not register a successor. The exact uncertainty map, six
+re-entry conditions, claim ceiling, and evidence reasoning are recorded in
+`UCOPE_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.
+
+This is the final direction-local convergence decision. Portfolio lifecycle, priority, fusion,
+separation, capacity, and investment remain reserved for `portfolio:cross_direction` and Root
+integration.
