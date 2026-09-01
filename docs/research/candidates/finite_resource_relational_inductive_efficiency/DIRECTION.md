@@ -272,9 +272,13 @@ or safety claim. It has a new experiment/schema/output namespace and cannot unlo
 R01, R02, or their result maps. No B01 result activity has occurred. Exact specification and Pro
 provenance are in `FRRIE_B01_INNOVATOR_DECISION_INTAKE_20260901.md`.
 
-The independent B01 contract/checkpoint/TEST-smoke infrastructure is engineering-accepted at this
-milestone: B01 tests are `38 passed, 1 skipped`, and the full FRRIE regression is `200 passed,
-2 skipped`. Production remains `REPAIR_REQUIRED` because actual package-native scalar/batch and
-1/2/4-worker evidence, end-to-end telemetry, and exact complete-panel inventories are absent; see
-`FRRIE_B01_CM_ENGINEERING_MILESTONE_20260901.md`. This engineering state does not change the
+The current engineering milestone now includes real MSVC/package-native A/RECON, 48 directly equal
+scalar/batch rows, 24 directly equal 1/2/4-worker rows, and one actual width-32 two-arm collector
+assessment with end-to-end process telemetry. Two later integrated TEST-only attempts exposed
+outcome-blind conformance defects and were correctly quarantined as incomplete; neither consumes
+the B01 object or supplies a scientific value. Production remains `REPAIR_REQUIRED` under the
+single direction-level blocker `FULL_PANEL_RUNNER_AND_FULL_CHAIN_TELEMETRY_INCOMPLETE`. The
+complete 512-update runner, 98 evaluation cells per seed, exact shadow/action-TV/parameter panel,
+all 28 quantities, and a clean commit-bound source gate remain absent. See
+`FRRIE_B01_CM_ENGINEERING_MILESTONE_20260901.md`. This engineering progress does not change the
 Innovator selection or create a B01 scientific result.

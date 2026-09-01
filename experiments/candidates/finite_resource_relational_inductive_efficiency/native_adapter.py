@@ -161,22 +161,88 @@ def _windows_build_environment(vcvars: Path) -> tuple[str, dict[str, str]]:
         raise NativeBackendUnavailable("MSVC vcvars64 environment could not run") from exc
     if completed.returncode != 0:
         raise NativeBackendUnavailable("MSVC vcvars64 environment initialization failed")
-    environment = dict(os.environ)
-    for line in completed.stdout.splitlines():
-        if "=" in line and not line.startswith("="):
-            name, value = line.split("=", 1)
-            for existing in tuple(environment):
-                if existing.casefold() == name.casefold() and existing != name:
-                    environment.pop(existing)
-            environment[name] = value
-    path_value = next(
-        (value for name, value in environment.items() if name.casefold() == "path"),
-        None,
-    )
-    compiler = shutil.which("cl.exe", path=path_value)
-    if compiler is None:
-        raise NativeBackendUnavailable("MSVC vcvars64 did not expose cl.exe")
+    compiler, environment = _select_vcvars_environment(os.environ, completed.stdout)
+    _validate_vcvars_compiler(vcvars, compiler)
     return compiler, environment
+
+
+def _select_vcvars_environment(
+    base_environment: Mapping[str, str], set_output: str,
+) -> tuple[str, dict[str, str]]:
+    """Merge ``set`` output case-insensitively and select the live MSVC PATH.
+
+    Windows environment keys are case-insensitive even though Python dicts are
+    not.  Some hosts retain ``Path`` while vcvars emits a new ``PATH``; cmd's
+    ``set`` can then print both.  We retain exactly one key per casefolded name
+    and retain the first vcvars value for each ordinary casefolded name.  PATH
+    is special: candidates stay in output order and the first candidate that
+    directly resolves ``cl.exe`` wins.
+    """
+
+    environment: dict[str, str] = {}
+    for name, value in base_environment.items():
+        folded = name.casefold()
+        existing = next((key for key in environment if key.casefold() == folded), None)
+        if existing is not None:
+            environment.pop(existing)
+        environment[name] = value
+    updates: list[tuple[str, str]] = []
+    seen_updates: set[str] = set()
+    path_candidates: list[str] = []
+    for line in set_output.splitlines():
+        if "=" not in line or line.startswith("="):
+            continue
+        name, value = line.split("=", 1)
+        folded = name.casefold()
+        if folded == "path":
+            path_candidates.append(value)
+            continue
+        if folded in seen_updates:
+            continue
+        seen_updates.add(folded)
+        updates.append((name, value))
+    for name, value in updates:
+        for existing in tuple(environment):
+            if existing.casefold() == name.casefold():
+                environment.pop(existing)
+        environment[name] = value
+    selected_path: str | None = None
+    compiler: str | None = None
+    for candidate in path_candidates:
+        resolved = shutil.which("cl.exe", path=candidate)
+        if resolved is not None:
+            selected_path = candidate
+            compiler = resolved
+            break
+    if not path_candidates:
+        selected_path = next(
+            (value for name, value in environment.items() if name.casefold() == "path"),
+            None,
+        )
+        compiler = shutil.which("cl.exe", path=selected_path)
+    if selected_path is None or compiler is None:
+        raise NativeBackendUnavailable("MSVC vcvars64 did not expose cl.exe")
+    for existing in tuple(environment):
+        if existing.casefold() == "path":
+            environment.pop(existing)
+    environment["PATH"] = selected_path
+    return compiler, environment
+
+
+def _validate_vcvars_compiler(vcvars: Path, compiler: str) -> Path:
+    """Require the resolved compiler to belong to this vcvars VS installation."""
+
+    try:
+        vc_root = vcvars.resolve(strict=True).parents[2]
+        tools_root = (vc_root / "Tools").resolve(strict=True)
+        compiler_path = Path(compiler).resolve(strict=True)
+    except (OSError, IndexError) as exc:
+        raise NativeBackendUnavailable("MSVC vcvars/compiler path is unavailable") from exc
+    if not compiler_path.is_relative_to(tools_root):
+        raise NativeBackendUnavailable(
+            "resolved cl.exe is outside the vcvars Visual Studio VC/Tools tree"
+        )
+    return compiler_path
 
 
 def build_package_native_artifact() -> Path:

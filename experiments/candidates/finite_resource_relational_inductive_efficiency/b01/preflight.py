@@ -9,7 +9,8 @@ from ..arms import PROJECTION_BOXES
 from ..state_codec import encode_optimizer_state
 from ..training import (
     CRITIC_COEFFICIENT, ENTROPY_COEFFICIENT, GRADIENT_CLIP_NORM,
-    RSCFTrainer, TRAIN_EPISODES_PER_UPDATE, make_optimizer, rscf_batch_loss,
+    RSCFTrainer, TRAIN_EPISODES_PER_UPDATE, _rscf_batch_loss_with_receipt,
+    make_optimizer,
 )
 from .constants import LEARNED_ARMS, MODEL_PARAMETERS
 from .contract import B01ContractError, exact_algorithm_contract
@@ -20,7 +21,7 @@ def static_algorithm_receipt() -> dict[str, Any]:
 
     update_source = inspect.getsource(RSCFTrainer.update)
     b01_update_source = inspect.getsource(ProjectionObservedTrainer.update)
-    batch_source = inspect.getsource(rscf_batch_loss)
+    batch_source = inspect.getsource(_rscf_batch_loss_with_receipt)
     optimizer_source = inspect.getsource(make_optimizer)
     adam_position = update_source.find("self.optimizer.step()")
     projection_position = update_source.find("self.model.project_beta()")
@@ -34,7 +35,7 @@ def static_algorithm_receipt() -> dict[str, Any]:
     if any(fragment not in combined for fragment in required_source):
         raise B01ContractError("actual trainer source differs from the full-batch algorithm")
     ordered_fragments = (
-        "zero_grad(set_to_none=True)", "rscf_batch_loss(episodes)",
+        "zero_grad(set_to_none=True)", "_rscf_batch_loss_with_receipt(episodes)",
         "terms.loss.backward()", "clip_grad_norm_", "self.optimizer.step()",
         "self.model.project_beta()",
     )

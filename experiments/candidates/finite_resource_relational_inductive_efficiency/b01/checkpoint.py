@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import json
+from pathlib import Path
 from typing import Any, Mapping
 
 from ..arms import LearnedArm, PARAMETER_BYTE_COUNT
@@ -312,3 +313,79 @@ def restore_runtime(
             ) from exc
         raise B01ContractError("B01 paired restore failed; both arms rolled back") from exc
     return decoded
+
+
+def reopen_decode_restore_checkpoint(
+    path: str | Path, *, manifest: Mapping[str, Any], seed_label: str, update: int,
+) -> dict[str, Any]:
+    """Literal-path readback plus paired temporary restore for panel validation."""
+
+    return _reopen_decode_restore_checkpoint(
+        path, manifest=manifest, seed_label=seed_label, update=update,
+        expected_test_only=False,
+    )
+
+
+def reopen_decode_restore_test_checkpoint0(
+    path: str | Path, *, manifest: Mapping[str, Any], seed_label: str,
+) -> dict[str, Any]:
+    """Explicit TEST-only checkpoint-0 integration seam; never a panel helper."""
+
+    if seed_label != TEST_SEED_LABEL:
+        raise B01ContractError("TEST checkpoint0 helper requires the canonical TEST seed")
+    return _reopen_decode_restore_checkpoint(
+        path, manifest=manifest, seed_label=seed_label, update=0,
+        expected_test_only=True,
+    )
+
+
+def _reopen_decode_restore_checkpoint(
+    path: str | Path, *, manifest: Mapping[str, Any], seed_label: str,
+    update: int, expected_test_only: bool,
+) -> dict[str, Any]:
+
+    checkpoint_path = Path(path)
+    if not checkpoint_path.is_absolute():
+        raise B01ContractError("panel checkpoint locator must be absolute")
+    try:
+        data = checkpoint_path.read_bytes()
+    except OSError as error:
+        raise B01ContractError("panel checkpoint literal file is unreadable") from error
+    decoded = decode_checkpoint(
+        data, manifest=manifest, expected_seed_label=seed_label,
+        expected_update=update, expected_test_only=expected_test_only,
+    )
+    from ..policy import FRRIEActorCritic
+    from ..training import make_optimizer
+    models = {
+        arm: FRRIEActorCritic(LearnedArm.from_parameter_bytes(
+            arm, decoded["arm_state_bytes"][arm],
+        ))
+        for arm in LEARNED_ARMS
+    }
+    optimizers = {arm: make_optimizer(models[arm]) for arm in LEARNED_ARMS}
+    restored = restore_runtime(
+        data, manifest=manifest, seed_label=seed_label, update=update,
+        models=models, optimizers=optimizers,
+    )
+    for arm in LEARNED_ARMS:
+        if (
+            models[arm].parameter_bytes() != decoded["arm_state_bytes"][arm]
+            or encode_optimizer_state(models[arm], optimizers[arm])
+            != decoded["optimizer_state_bytes"][arm]
+        ):
+            raise B01ContractError("panel checkpoint temporary restore bytes differ")
+    return {
+        "schema": "FRRIE_B01_CHECKPOINT_RESTORE_RECEIPT_V1",
+        "seed_label": seed_label, "checkpoint": update,
+        "literal_path": str(checkpoint_path.resolve(strict=True)),
+        "literal_byte_count": len(data), "paired_decode_complete": True,
+        "paired_restore_complete": True,
+        "model_byte_count_by_arm": {
+            arm: len(restored["arm_state_bytes"][arm]) for arm in LEARNED_ARMS
+        },
+        "optimizer_byte_count_by_arm": {
+            arm: len(restored["optimizer_state_bytes"][arm]) for arm in LEARNED_ARMS
+        },
+        "complete": True,
+    }

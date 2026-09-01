@@ -333,6 +333,124 @@ if TORCH_AVAILABLE:
                 raise ContractError("actor produced nonfinite probabilities")
             return ActorStep(logits, probabilities, hidden, messages, summary, denominator)
 
+        def actor_step_batch(
+            self,
+            observations: torch.Tensor,
+            roles: torch.Tensor,
+            incoming_hidden: torch.Tensor,
+            *,
+            rotate_columns: bool = False,
+        ) -> ActorStep:
+            """Vectorized, lane-isolated actor step for homogeneous rosters.
+
+            The leading axis is an environment lane.  Relational reductions
+            are performed along the entity axis only, so neither messages nor
+            recurrent state can cross lanes.
+            """
+
+            if (
+                observations.device.type != "cpu"
+                or observations.dtype != torch.float32
+                or observations.ndim != 3
+                or observations.shape[2] != 22
+            ):
+                raise ContractError("batched actor observations must be CPU FP32 [lanes,agents,22]")
+            lanes, agents, _ = observations.shape
+            if (
+                roles.device.type != "cpu" or roles.dtype != torch.int64
+                or roles.shape != (lanes, agents)
+                or incoming_hidden.device.type != "cpu"
+                or incoming_hidden.dtype != torch.float32
+                or incoming_hidden.shape != (lanes, agents, 64)
+                or lanes <= 0 or agents <= 0
+            ):
+                raise ContractError("batched roles/hidden axes differ from observations")
+            if bool(((roles < 0) | (roles > 2)).any().item()):
+                raise ContractError("batched public role indices must be in {0,1,2}")
+            if not bool(torch.isfinite(observations).all().item()) or not bool(
+                torch.isfinite(incoming_hidden).all().item()
+            ):
+                raise ContractError("batched actor inputs must be finite")
+            counts_i64 = torch.stack(
+                [(roles == role).sum(dim=1) for role in range(3)], dim=1,
+            )
+            if bool((counts_i64 == 0).any().item()):
+                raise ContractError("every batched lane must contain all public roles")
+
+            messages = self.message_encoder(observations.reshape(lanes * agents, 22)).reshape(
+                lanes, agents, 32,
+            )
+            role_sums = torch.stack(
+                [
+                    (messages * (roles == role).unsqueeze(2)).sum(dim=1)
+                    for role in range(3)
+                ],
+                dim=1,
+            )
+            counts = counts_i64.to(dtype=torch.float32)
+            p0 = self._p0
+            latency = self._latency
+            if rotate_columns:
+                permutation = torch.tensor(
+                    semantic_column_permutation(True), dtype=torch.int64,
+                )
+                p0 = p0.index_select(1, permutation)
+                latency = latency.index_select(1, permutation)
+            base_logits = torch.log(p0) - torch.log1p(-p0)
+            loaded = torch.sigmoid(
+                base_logits.unsqueeze(0) - 0.22 * (counts.unsqueeze(1) - 1.0)
+            )
+            k0 = loaded / latency.unsqueeze(0)
+            public_value = (
+                2.0 * torch.log(counts) - math.log(14.0)
+            ) / math.log(3.5)
+            residual = (
+                self.beta[None, :, :, 0]
+                + self.beta[None, :, :, 1] * public_value[:, None, :]
+            )
+            omega = k0 * torch.exp(residual)
+            denominator_by_role = (omega * counts.unsqueeze(1)).sum(dim=2)
+            summary_by_role = torch.matmul(omega, role_sums) / (
+                denominator_by_role[:, :, None] + 1.0e-12
+            )
+            lane_index = torch.arange(lanes, dtype=torch.int64)[:, None]
+            summary = summary_by_role[lane_index, roles]
+            denominator = denominator_by_role[lane_index, roles]
+            actor_input = torch.cat((observations, summary, denominator[:, :, None]), dim=2)
+            hidden = self.gru(
+                actor_input.reshape(lanes * agents, 55),
+                incoming_hidden.reshape(lanes * agents, 64),
+            ).reshape(lanes, agents, 64)
+            logits = self.action_head(hidden.reshape(lanes * agents, 64)).reshape(
+                lanes, agents, 6,
+            )
+            legal = self._legal_masks.index_select(0, roles.reshape(-1)).reshape(
+                lanes, agents, 6,
+            )
+            masked_logits = logits.masked_fill(~legal, -torch.inf)
+            legal_softmax = torch.softmax(masked_logits, dim=2)
+            legal_count = legal.sum(dim=2, keepdim=True).to(torch.float32)
+            probabilities = 0.96 * legal_softmax + legal.to(torch.float32) * (
+                0.04 / legal_count
+            )
+            if not bool(torch.isfinite(probabilities).all().item()):
+                raise ContractError("batched actor produced nonfinite probabilities")
+            return ActorStep(logits, probabilities, hidden, messages, summary, denominator)
+
+        def actions_from_uniforms_batch(
+            self, probabilities: torch.Tensor, uniforms: torch.Tensor,
+        ) -> torch.Tensor:
+            if probabilities.ndim != 3 or probabilities.shape[2] != 6:
+                raise ContractError("batched probabilities must have shape [lanes,agents,6]")
+            if (
+                uniforms.shape != probabilities.shape[:2]
+                or uniforms.dtype != torch.float32 or uniforms.device.type != "cpu"
+                or bool(((uniforms < 0.0) | (uniforms >= 1.0)).any().item())
+            ):
+                raise ContractError("batched uniforms must be CPU FP32 [lanes,agents] in [0,1)")
+            cumulative = probabilities.cumsum(dim=2)
+            return (uniforms[:, :, None] >= cumulative).sum(dim=2).clamp(max=5).to(torch.int64)
+
         def shadow_step(
             self, observations: torch.Tensor, roles: torch.Tensor, incoming_hidden: torch.Tensor
         ) -> ActorStep:
@@ -384,6 +502,38 @@ if TORCH_AVAILABLE:
                 means.append(role_sum / counts[:, None].to(torch.float32))
             result = self.critic(torch.cat(means, dim=1))
             return result.squeeze(0) if squeeze else result
+
+        def critic_values_batch(
+            self, observations: torch.Tensor, roles: torch.Tensor,
+        ) -> torch.Tensor:
+            """Vectorized per-lane critic for ``[lanes,slots,agents,22]``."""
+
+            if (
+                observations.device.type != "cpu"
+                or observations.dtype != torch.float32
+                or observations.ndim != 4
+                or observations.shape[3] != 22
+            ):
+                raise ContractError(
+                    "batched critic observations must be CPU FP32 [lanes,slots,agents,22]"
+                )
+            lanes, slots, agents, _ = observations.shape
+            if roles.dtype != torch.int64 or roles.device.type != "cpu" or roles.shape != (
+                lanes, agents,
+            ):
+                raise ContractError("batched critic roles must have shape [lanes,agents]")
+            means = []
+            for role in range(3):
+                mask = roles == role
+                counts = mask.sum(dim=1)
+                if bool((counts == 0).any().item()):
+                    raise ContractError("every critic lane must contain all public roles")
+                role_sum = (
+                    observations * mask[:, None, :, None]
+                ).sum(dim=2)
+                means.append(role_sum / counts[:, None, None].to(torch.float32))
+            team = torch.cat(means, dim=2)
+            return self.critic(team.reshape(lanes * slots, 66)).reshape(lanes, slots)
 
 
 else:

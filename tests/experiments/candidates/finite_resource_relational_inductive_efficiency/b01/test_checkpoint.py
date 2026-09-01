@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import struct
+import sys
+from pathlib import Path
 
 import pytest
 
@@ -12,7 +15,8 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.stat
     OPTIMIZER_STATE_MAGIC, OPTIMIZER_STATE_VERSION,
 )
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.checkpoint import (
-    decode_checkpoint, encode_checkpoint,
+    decode_checkpoint, encode_checkpoint, reopen_decode_restore_checkpoint,
+    reopen_decode_restore_test_checkpoint0,
 )
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.contract import B01ContractError
 
@@ -69,6 +73,56 @@ def test_checkpoint_zero_roundtrip_binds_pair_manifest_work_and_resource(
     )
     assert decoded["arm_state_bytes"]["PHY_TRUST"] == phy.parameter_bytes()
     assert decoded["optimizer_state_bytes"]["EDGE_FLEX"] == _zero_optimizer()
+
+
+def test_panel_checkpoint_literal_reopen_decode_and_paired_restore(
+    tmp_path, b01_manifest, b01_production_binding,
+):
+    phy, edge = initialize_paired_arms(AddressedRNG(b"T" * 32), "FRRIE-B01-RESTORE-PANEL")
+    data = encode_checkpoint(
+        manifest=b01_manifest, seed_label="FRRIE-B01-FRESH-BLOCK-001", update=0,
+        arm_state_bytes={"PHY_TRUST": phy.parameter_bytes(), "EDGE_FLEX": edge.parameter_bytes()},
+        optimizer_state_bytes={"PHY_TRUST": _zero_optimizer(), "EDGE_FLEX": _zero_optimizer()},
+        work=_work(), invocation_binding=b01_production_binding, projection_audit=_audit(),
+    )
+    path = (tmp_path / "literal-checkpoint-0.json").resolve()
+    path.write_bytes(data)
+    receipt = reopen_decode_restore_checkpoint(
+        path, manifest=b01_manifest, seed_label="FRRIE-B01-FRESH-BLOCK-001", update=0,
+    )
+    assert receipt["literal_byte_count"] == len(data)
+    assert receipt["paired_decode_complete"] is True
+    assert receipt["paired_restore_complete"] is True
+
+
+def test_explicit_test_checkpoint0_reopen_does_not_open_formal_panel_helper(
+    tmp_path, b01_test_manifest, b01_resource_binding,
+):
+    phy, edge = initialize_paired_arms(AddressedRNG(b"T" * 32), "FRRIE-TEST-ONLY-B01-PAIR")
+    data = encode_checkpoint(
+        manifest=b01_test_manifest, seed_label="FRRIE-B01-TEST-ONLY-BLOCK-001", update=0,
+        arm_state_bytes={"PHY_TRUST": phy.parameter_bytes(), "EDGE_FLEX": edge.parameter_bytes()},
+        optimizer_state_bytes={"PHY_TRUST": _zero_optimizer(), "EDGE_FLEX": _zero_optimizer()},
+        work=_work(), invocation_binding=b01_resource_binding, projection_audit=_audit(),
+    )
+    path = (tmp_path / "test-checkpoint0.json").resolve()
+    path.write_bytes(data)
+    with pytest.raises(B01ContractError, match="namespace"):
+        reopen_decode_restore_checkpoint(
+            path, manifest=b01_test_manifest,
+            seed_label="FRRIE-B01-TEST-ONLY-BLOCK-001", update=0,
+        )
+    receipt_path = (tmp_path / "adjacent-admit-memory.json").resolve()
+    completed = subprocess.run(
+        [sys.executable, str(Path("scripts/hmasd_resource_preflight.py").resolve()),
+         "admit-memory", "--out", str(receipt_path)],
+        check=False, capture_output=True, text=True, timeout=30,
+    )
+    assert completed.returncode == 0, completed.stderr or completed.stdout
+    receipt = reopen_decode_restore_test_checkpoint0(
+        path, manifest=b01_test_manifest, seed_label="FRRIE-B01-TEST-ONLY-BLOCK-001",
+    )
+    assert receipt["checkpoint"] == 0 and receipt["paired_restore_complete"] is True
 
 
 def test_checkpoint_rejects_partial_pair_and_manifest_tamper(

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import subprocess
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -16,7 +17,12 @@ from .constants import (
     IMPLEMENTATION_PROFILE, MODEL_DTYPE, MODEL_PARAMETERS, REDUCTION_DTYPE,
     ROOT_LABELS, TEST_EXPERIMENT_ID, TEST_MANIFEST_SCHEMA, TEST_SEED_LABEL,
     TRAIN_ROSTER_ORDER,
-    TRAIN_ROSTERS, UNIFORM_MAPPING, UPDATES,
+    TRAIN_ROSTERS, UNIFORM_MAPPING, UPDATES, QUANTITY_ORDER, QUANTITY_MARGINS,
+    PRIMITIVE_ROWS_PER_SEED, ARM_UPDATE_RECEIPTS_PER_SEED,
+    PAIRED_CHECKPOINT_RESTORES_PER_SEED, QUANTITY_VALUES_PER_SEED,
+    SHADOW_ACTION_PAIRS_PER_SEED, TRAIN_FACTUAL_WORK_PER_ARM_SEED,
+    TRAIN_ALTERNATIVE_WORK_PER_ARM_SEED, TRAIN_AUDIT_WORK_PER_ARM_SEED,
+    TRAIN_TOTAL_WORK_PER_ARM_SEED, EVALUATION_WORK_PER_ARM_SEED,
 )
 
 
@@ -101,7 +107,7 @@ def bind_invocation_resource(
 ) -> dict[str, Any]:
     if not isinstance(invocation_id, str) or not invocation_id.strip():
         raise B01ContractError("invocation_id must be nonempty")
-    if operation not in {"TRAIN", "EVALUATE", "RESUME", "REPAIR", "TEST_SMOKE"}:
+    if operation not in {"TRAIN", "EVALUATE", "RESUME", "REPAIR", "ANALYZE", "TEST_SMOKE"}:
         raise B01ContractError("unknown B01 invocation operation")
     path0 = Path(receipt_path)
     if not path0.is_absolute():
@@ -132,7 +138,9 @@ def validate_invocation_binding(value: Any, *, require_test_only: bool | None = 
         raise B01ContractError("invocation binding schema differs")
     if not isinstance(binding["invocation_id"], str) or not binding["invocation_id"].strip():
         raise B01ContractError("invocation binding ID is empty")
-    if binding["operation"] not in {"TRAIN", "EVALUATE", "RESUME", "REPAIR", "TEST_SMOKE"}:
+    if binding["operation"] not in {
+        "TRAIN", "EVALUATE", "RESUME", "REPAIR", "ANALYZE", "TEST_SMOKE",
+    }:
         raise B01ContractError("invocation binding operation differs")
     if type(binding["test_only"]) is not bool:
         raise B01ContractError("invocation binding test_only must be literal bool")
@@ -189,6 +197,141 @@ def exact_algorithm_contract() -> dict[str, Any]:
             "common_addressed_tapes": True,
         },
         "tuning": "NO_ARM_SPECIFIC_OR_WITHIN_RUN_TUNING",
+    }
+
+
+def exact_descriptive_contract() -> dict[str, Any]:
+    """Machine-bound 28-value family and direct inventory/work cardinalities."""
+
+    return {
+        "quantity_order": list(QUANTITY_ORDER),
+        "margins": dict(QUANTITY_MARGINS),
+        "reduction": {
+            "dtype": REDUCTION_DTYPE,
+            "order": ["EPISODE", "CELL", "SEED_CHECKPOINT", "MANIFEST_SEED_ORDER"],
+            "cross_seed_summaries": ["INDIVIDUAL", "MEAN", "MEDIAN", "MIN", "MAX"],
+            "branch_interpretation": False,
+            "confidence_intervals": False,
+            "polarity": False,
+        },
+        "inventory_per_seed": {
+            "primitive_rows": PRIMITIVE_ROWS_PER_SEED,
+            "arm_update_receipts": ARM_UPDATE_RECEIPTS_PER_SEED,
+            "paired_checkpoint_restores": PAIRED_CHECKPOINT_RESTORES_PER_SEED,
+            "quantity_values": QUANTITY_VALUES_PER_SEED,
+            "shadow_action_pairs": SHADOW_ACTION_PAIRS_PER_SEED,
+        },
+        "work_per_arm_seed": {
+            "factual": TRAIN_FACTUAL_WORK_PER_ARM_SEED,
+            "seven_nonfactual_alternatives": TRAIN_ALTERNATIVE_WORK_PER_ARM_SEED,
+            "three_audits": TRAIN_AUDIT_WORK_PER_ARM_SEED,
+            "total": TRAIN_TOTAL_WORK_PER_ARM_SEED,
+            "evaluation": EVALUATION_WORK_PER_ARM_SEED,
+        },
+        "raw_native_call_counts": "RECORDED_NOT_FROZEN",
+        "postcontact_cross_arm_action_tv_anchor": {
+            "role": "MANDATORY_DESCRIPTIVE_NON_GATE",
+            "selected_anchor": "SYMMETRIC",
+            "included_in_ordered_28": False,
+            "serialization_order": [
+                "seed", "checkpoint", "roster_9_15_6_21", "intervention_INTACT_ROTATE",
+                "episode", "slot", "entity", "anchor_PHY_EDGE",
+            ],
+            "availability": "FIRST_PHY_TIGHT_PROJECTION_FP32_BIT_CHANGE_KAPPA_LE_CHECKPOINT",
+            "precontact_or_no_contact": "CELL_AVAILABILITY_RECORD_ONLY_NO_RAW_ROWS",
+            "raw_schema": "FRRIE_B01_BETWEEN_ARM_TV_RAW_V1",
+            "raw_probability_representation": "EXACT_U32_FP32_BITS_6_PER_ARM",
+            "same_input": "FULL_ROSTER_OBSERVATION_ROLE_MASK_INCOMING_HIDDEN",
+            "non_anchor_hidden": "DISCARDED_NO_ACTION_RNG_ENV_OR_WORK",
+            "cell_reduction": "MEAN_256x12xN_THEN_SYMMETRIC_HALF_PHY_HALF_EDGE",
+            "cross_seed_reduction": [
+                "AVAILABLE_SEED_IDS", "AVAILABLE_COUNT", "INDIVIDUAL",
+                "MEAN", "MEDIAN", "MIN", "MAX",
+            ],
+            "no_available_seed_status": "NO_POST_CONTACT_SEEDS",
+            "missing_scope": "UNAVAILABLE_MEASUREMENT_DEFECT_DIAGNOSTIC_ONLY",
+            "exact_zero": "VALID",
+            "maximum_rows_per_seed_contact_by_32": 3_133_440,
+        },
+        "postcontact_parameter_distance": {
+            "raw_schema": "FRRIE_B01_PARAMETER_DISTANCE_RAW_V1",
+            "state_stage": "POSTPROJECTION",
+            "capture_boundary": (
+                "AFTER_ADAM_AND_ARM_PROJECTION_BEFORE_NEXT_MODEL_MUTATION"
+            ),
+            "domain": "EVERY_UPDATE_KAPPA_THROUGH_512",
+            "measurement_role": "MANDATORY_DESCRIPTIVE_NON_GATE",
+            "included_in_ordered_28": False,
+            "parameter_layout": {
+                "schema": "FRRIE_LAYER_SHAPES_V1",
+                "parameter_count": 35_513, "parameter_byte_count": 142_052,
+                "dtype": "IEEE754_BINARY32", "byte_order": "LITTLE_ENDIAN",
+                "tensor_flattening": "C_ORDER",
+                "beta_flat_start": 26_982, "beta_flat_end_exclusive": 27_000,
+                "beta_byte_start": 107_928, "beta_byte_end_exclusive": 108_000,
+            },
+            "distance_object": [
+                "ELEMENTWISE_SIGNED_BINARY64_DIFFERENCE_RECOMPUTATION_SUBSTRATE",
+                "LINF_FULL", "LINF_BETA", "LINF_NONBETA",
+            ],
+            "authoritative_scalar": "IEEE754_BINARY64_BITS_U64",
+            "source_binding": "INLINE_PARAMETER_BYTES_OR_IMMUTABLE_STATE_REF",
+            "precontact_reason": "PRE_TIGHT_CONTACT",
+            "no_contact_reason": "NO_TIGHT_CONTACT_BY_512",
+            "missing_reason": "PARAMETER_DISTANCE_MEASUREMENT_DEFECT",
+            "nonfinite_reason": "PARAMETER_DISTANCE_NONFINITE_RECORD",
+            "checkpoint_display": {
+                "checkpoints": list(CHECKPOINTS),
+                "summaries": [
+                    "AVAILABLE_SEED_IDS", "AVAILABLE_COUNT", "INDIVIDUAL",
+                    "MEAN", "MEDIAN", "MIN", "MAX",
+                ],
+                "no_available_status": "NO_POSTCONTACT_SEEDS",
+            },
+            "temporal_reducer": None,
+            "scientific_work_term": False,
+            "branch_gate_or_validity_role": False,
+        },
+    }
+
+
+def exact_formal_runner_contract() -> dict[str, Any]:
+    """Engineering order for a formal B01 launch; it confers no readiness."""
+
+    return {
+        "schema": "FRRIE_B01_FORMAL_RUNNER_CONTRACT_V1",
+        "stage_order": [
+            "ACTUAL_SOURCE_GATE",
+            "FRESH_INVOCATION_MEMORY_ADMISSION",
+            "PROCESS_TREE_MONITOR_START",
+            "CANONICAL_PACKAGE_NATIVE_LOAD",
+            "PAIRED_MODEL_OPTIMIZER_CREATE_OR_LITERAL_RESTORE",
+            "MANIFEST_BOUND_BATCH_COLLECTION",
+            "ATOMIC_PAIRED_UPDATE",
+            "LITERAL_CHECKPOINT_WRITE_REOPEN_DECODE_RESTORE",
+            "DIRECT_EVALUATION_SHARDS",
+            "DIRECT_VALIDATION_REPLAYS",
+            "RAW_CONTROL_READBACK",
+            "ORDERED28_DESCRIPTIVE_REDUCTION",
+            "PROCESS_TREE_MONITOR_FINALIZE",
+            "CREATE_ONCE_PANEL_PUBLICATION",
+        ],
+        "native_loader": "CANONICAL_PACKAGE_NATIVE_NO_PUBLIC_ADAPTER_INJECTION",
+        "collector": "PUBLIC_MANIFEST_BOUND_COLLECTOR_COMPLETE_MANIFEST_REQUIRED",
+        "seed_labels": "EXACT_VALIDATED_MANIFEST_EXECUTION_LABELS",
+        "invocations": "VERSIONED_UNIQUE_ID_AND_FRESH_RECEIPT_CLOSURE",
+        "state_evidence": "MODEL_AND_ADAM_PRE_POSTADAM_POSTPROJECTION_DIRECT_BYTES",
+        "validation_replay_work": "SEPARATE_FROM_SCIENTIFIC_WORK",
+        "checkpoint": "LITERAL_PATH_REOPEN_DECODE_TEMPORARY_PAIRED_RESTORE",
+        "telemetry": [
+            "WALL_SECONDS", "SCIENTIFIC_WORK_THROUGHPUT",
+            "PROCESS_TREE_PEAK_RSS", "CPU_CORE_EQUIVALENTS",
+            "HOST_CPU_OCCUPANCY", "PEAK_PROCESS_COUNT", "PEAK_THREAD_COUNT",
+            "SCRATCH_HIGH_WATER", "DURABLE_HIGH_WATER",
+            "OS_IO_TRANSFER", "DIRECT_CREATED_FILE_CENSUS",
+        ],
+        "failure": "ATOMIC_INCOMPLETE_QUARANTINE_NO_RESULT_PUBLICATION",
+        "readiness_from_static_contract": False,
     }
 
 
@@ -272,6 +415,7 @@ def validate_manifest(value: Any, *, require_roots: bool = True) -> dict[str, An
             "evaluation_rosters", "interventions", "evaluation_episodes",
             "horizon", "model_parameters", "uniform_mapping",
             "checkpoint_randomness_role", "uniform_baseline_schedule",
+            "descriptive_contract",
         },
         "scientific_contract",
     ))
@@ -291,6 +435,7 @@ def validate_manifest(value: Any, *, require_roots: bool = True) -> dict[str, An
         "uniform_mapping": UNIFORM_MAPPING,
         "checkpoint_randomness_role": "METADATA_ONLY",
         "uniform_baseline_schedule": "ONCE_PER_SEED_N9_N15_INTACT",
+        "descriptive_contract": exact_descriptive_contract(),
     }
     if science != expected:
         raise B01ContractError("scientific_contract differs from literal B01 constants")
@@ -366,6 +511,7 @@ def manifest_template(
             "uniform_mapping": UNIFORM_MAPPING,
             "checkpoint_randomness_role": "METADATA_ONLY",
             "uniform_baseline_schedule": "ONCE_PER_SEED_N9_N15_INTACT",
+            "descriptive_contract": exact_descriptive_contract(),
         },
         # Caller must explicitly select and persist a measured implementation profile.
         "compute": dict(compute),
@@ -425,6 +571,46 @@ def validate_test_manifest(value: Any) -> dict[str, Any]:
     }:
         raise B01ContractError("TEST resource policy differs")
     return manifest
+
+
+def validate_formal_source_gate(manifest: Mapping[str, Any]) -> dict[str, Any]:
+    """Bind formal execution to actual HEAD and a clean exact FRRIE source surface."""
+
+    manifest0 = validate_manifest(manifest)
+    repository = Path(__file__).resolve().parents[4]
+
+    def git(*arguments: str) -> str:
+        completed = subprocess.run(
+            ["git", *arguments], cwd=repository, check=False,
+            capture_output=True, text=True, timeout=30,
+        )
+        if completed.returncode != 0:
+            raise B01ContractError(
+                "formal source gate cannot read actual checkout Git state"
+            )
+        return completed.stdout.strip()
+
+    head = git("rev-parse", "HEAD")
+    if head != manifest0["code_revision"]:
+        raise B01ContractError("BLOCKED_SOURCE_REVISION: manifest differs from actual checkout HEAD")
+    scoped_paths = [
+        "experiments/candidates/finite_resource_relational_inductive_efficiency",
+        "scripts/hmasd_resource_preflight.py",
+    ]
+    drift = git(
+        "status", "--porcelain=v1", "--untracked-files=all", "--", *scoped_paths,
+    )
+    if drift:
+        raise B01ContractError(
+            "BLOCKED_UNCOMMITTED: formal FRRIE source surface has tracked/untracked drift"
+        )
+    return {
+        "schema": "FRRIE_B01_FORMAL_SOURCE_GATE_V1",
+        "repository": str(repository), "actual_head": head,
+        "manifest_code_revision": manifest0["code_revision"],
+        "scoped_paths": scoped_paths, "tracked_and_untracked_clean": True,
+        "caller_revision_accepted": False, "complete": True,
+    }
 
 
 def make_test_manifest(

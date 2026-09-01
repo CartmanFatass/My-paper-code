@@ -1,8 +1,10 @@
 """Direct computation receipt for the immutable raw-value control."""
 
 from fractions import Fraction
+from typing import Any, Mapping
 
 from ..controls.raw_value import RAW_VALUE_ROWS, balanced_accuracy
+from .contract import B01ContractError
 
 
 def raw_control_receipt() -> dict:
@@ -28,3 +30,9 @@ def raw_control_receipt() -> dict:
         "output_disconnected": True,
         "complete": True,
     }
+
+
+def validate_raw_control_receipt(value: Any) -> dict:
+    if not isinstance(value, Mapping) or dict(value) != raw_control_receipt():
+        raise B01ContractError("raw control receipt differs from direct fixture computation")
+    return dict(value)

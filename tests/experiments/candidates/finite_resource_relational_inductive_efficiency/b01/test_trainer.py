@@ -13,8 +13,15 @@ import pytest
 from experiments.candidates.finite_resource_relational_inductive_efficiency.arms import initialize_paired_arms
 from experiments.candidates.finite_resource_relational_inductive_efficiency.policy import FRRIEActorCritic, TORCH_AVAILABLE
 from experiments.candidates.finite_resource_relational_inductive_efficiency.rng import AddressedRNG
-from experiments.candidates.finite_resource_relational_inductive_efficiency.state_codec import encode_optimizer_state
-from experiments.candidates.finite_resource_relational_inductive_efficiency.training import RSCFEpisode, make_optimizer
+from experiments.candidates.finite_resource_relational_inductive_efficiency.state_codec import (
+    decode_optimizer_state, encode_optimizer_state,
+)
+from experiments.candidates.finite_resource_relational_inductive_efficiency.training import (
+    LossReductionReceipt, RSCFEpisode, validate_loss_reduction_receipt, make_optimizer,
+)
+from experiments.candidates.finite_resource_relational_inductive_efficiency.contracts.core import (
+    ContractError,
+)
 from experiments.candidates.finite_resource_relational_inductive_efficiency.tapes import generate_episode_tape
 from experiments.candidates.finite_resource_relational_inductive_efficiency.policy import LEGAL_ACTION_INDICES
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.contract import B01ContractError, validate_resource_receipt
@@ -22,7 +29,7 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.trainer import (
     ArmUpdateReceipt, B01ArmBatch, PairedB01Trainer, ProjectionObservedTrainer,
     assert_common_exogenous_and_work, assert_precontact_observation_equality,
-    capture_exogenous_episode,
+    assert_paired_episode_information, capture_exogenous_episode,
 )
 
 pytestmark = pytest.mark.skipif(not TORCH_AVAILABLE, reason="Torch is required")
@@ -54,9 +61,11 @@ def _episode(torch, roster: int, model) -> RSCFEpisode:
         ((1, 1, 0, 0, 0, 1), (1, 1, 0, 0, 0, 1), (0, 0, 1, 1, 1, 1)),
         dtype=torch.bool,
     )
+    q_targets = torch.full((3, 6), float("nan"), dtype=torch.float32)
+    q_targets[legal] = 0.0
     return RSCFEpisode(
         roster_size=roster, selected_probabilities=selected,
-        q_targets=torch.zeros((3, 6), dtype=torch.float32), legal_masks=legal,
+        q_targets=q_targets, legal_masks=legal,
         factual_actions=torch.tensor((0, 1, 2), dtype=torch.int64),
         all_probabilities=actor.probabilities.unsqueeze(0).expand(12, -1, -1),
         critic_values=model.critic_values(observations.unsqueeze(0).expand(12, -1, -1), roles),
@@ -117,15 +126,169 @@ def _batch(model, *, update: int, exogenous=None, episodes=None, slots=4_928):
     )
 
 
+def _nan_sentinel_episode(torch) -> RSCFEpisode:
+    legal = torch.tensor(
+        ((1, 1, 0, 0, 0, 1), (1, 1, 0, 0, 0, 1), (0, 0, 1, 1, 1, 1)),
+        dtype=torch.bool,
+    )
+    q_targets = torch.full((3, 6), float("nan"), dtype=torch.float32)
+    q_targets[legal] = torch.linspace(0.0, 1.0, int(legal.sum()), dtype=torch.float32)
+    return RSCFEpisode(
+        roster_size=9,
+        selected_probabilities=torch.full((3, 6), 1.0 / 6.0, dtype=torch.float32),
+        q_targets=q_targets, legal_masks=legal,
+        factual_actions=torch.tensor((0, 1, 2), dtype=torch.int64),
+        all_probabilities=torch.full((12, 9, 6), 1.0 / 6.0, dtype=torch.float32),
+        critic_values=torch.zeros(12, dtype=torch.float32),
+        terminal_return=torch.tensor(0.5, dtype=torch.float32),
+    )
+
+
+def test_paired_q_targets_accept_canonical_illegal_nan_bits_and_reject_drift():
+    import torch
+
+    left = _nan_sentinel_episode(torch)
+    right = dataclasses.replace(
+        left, q_targets=left.q_targets.clone(), legal_masks=left.legal_masks.clone(),
+    )
+    # Regression: torch.equal(left.q_targets, right.q_targets) is False solely
+    # because the authorized illegal-action structural sentinels are NaNs.
+    assert not torch.equal(left.q_targets, right.q_targets)
+    assert_paired_episode_information((left,), (right,))
+
+    noncanonical_nan = torch.tensor([0x7FC00001], dtype=torch.int32).view(torch.float32)[0]
+    drift_left = left.q_targets.clone()
+    drift_right = right.q_targets.clone()
+    drift_left[0, 2] = noncanonical_nan
+    drift_right[0, 2] = noncanonical_nan
+    with pytest.raises(B01ContractError, match="different information"):
+        assert_paired_episode_information(
+            (dataclasses.replace(left, q_targets=drift_left),),
+            (dataclasses.replace(right, q_targets=drift_right),),
+        )
+
+    legal_drift = right.q_targets.clone()
+    legal_drift[0, 0] = torch.nextafter(
+        legal_drift[0, 0], torch.tensor(float("inf"), dtype=torch.float32),
+    )
+    with pytest.raises(B01ContractError, match="different information"):
+        assert_paired_episode_information(
+            (left,), (dataclasses.replace(right, q_targets=legal_drift),),
+        )
+
+    illegal_non_nan = right.q_targets.clone()
+    illegal_non_nan[0, 2] = 0.0
+    with pytest.raises(B01ContractError, match="different information"):
+        assert_paired_episode_information(
+            (left,), (dataclasses.replace(right, q_targets=illegal_non_nan),),
+        )
+
+    mask_drift = right.legal_masks.clone()
+    mask_drift[0, 2] = True
+    with pytest.raises(B01ContractError, match="different information"):
+        assert_paired_episode_information(
+            (left,), (dataclasses.replace(right, legal_masks=mask_drift),),
+        )
+
+
+def test_exact_loss_reduction_provenance_replays_left_fold_and_rejects_tamper():
+    import torch
+
+    component_order = ("loss", "score", "entropy", "critic")
+    case = None
+    for seed in range(64):
+        generator = torch.Generator().manual_seed(seed)
+        score = torch.randn(64, generator=generator, dtype=torch.float32)
+        entropy = 3.0 * torch.rand(64, generator=generator, dtype=torch.float32)
+        critic = 4.0 * torch.rand(64, generator=generator, dtype=torch.float32)
+        loss = score - 0.01 * entropy + 0.5 * critic
+        columns = (loss, score, entropy, critic)
+        aggregate = tuple(sum(column) / 64.0 for column in columns)
+        separate_recombination = (
+            aggregate[1] - 0.01 * aggregate[2] + 0.5 * aggregate[3]
+        )
+        if int(aggregate[0].view(torch.int32)) != int(
+            separate_recombination.view(torch.int32)
+        ):
+            case = columns, aggregate, separate_recombination
+            break
+    assert case is not None
+    columns, aggregate, separate_recombination = case
+    assert int(aggregate[0].view(torch.int32)) != int(
+        separate_recombination.view(torch.int32)
+    )
+
+    rows = torch.stack(columns, dim=1)
+    receipt = {
+        "schema": "FRRIE_RSCF_LOSS_REDUCTION_RECEIPT_V1",
+        "component_order": list(component_order), "roster_order": list((9, 15) * 32),
+        "per_episode_u32_bits": rows.view(torch.int32).to(torch.int64).bitwise_and(
+            0xFFFFFFFF
+        ).tolist(),
+        "reduction_law": "PYTHON_SUM_INT0_LEFT_FOLD_THEN_DIVIDE_FLOAT64_LITERAL_64",
+        "divisor": 64, "dtype": "CPU_FP32",
+        "aggregate_u32_bits": [
+            int(value.view(torch.int32)) & 0xFFFFFFFF for value in aggregate
+        ],
+    }
+    scalars = {name: float(value) for name, value in zip(component_order, aggregate)}
+    assert validate_loss_reduction_receipt(
+        receipt, aggregate_scalars=scalars,
+    )["exact_replay_validated"] is True
+
+    episode_tamper = json.loads(json.dumps(receipt))
+    episode_tamper["per_episode_u32_bits"][0][1] ^= 1
+    with pytest.raises(ContractError, match="episode composite"):
+        validate_loss_reduction_receipt(episode_tamper, aggregate_scalars=scalars)
+
+    order_tamper = json.loads(json.dumps(receipt))
+    order_tamper["roster_order"][0:2] = [15, 9]
+    with pytest.raises(ContractError, match="identity/order"):
+        validate_loss_reduction_receipt(order_tamper, aggregate_scalars=scalars)
+
+    divisor_tamper = {**receipt, "divisor": 63}
+    with pytest.raises(ContractError, match="identity/order"):
+        validate_loss_reduction_receipt(divisor_tamper, aggregate_scalars=scalars)
+
+    aggregate_tamper = json.loads(json.dumps(receipt))
+    aggregate_tamper["aggregate_u32_bits"][0] ^= 1
+    with pytest.raises(ContractError, match="aggregate bits"):
+        validate_loss_reduction_receipt(aggregate_tamper, aggregate_scalars=scalars)
+
+    for invalid_bits in (False, -1, 0x1_0000_0000):
+        invalid_receipt = json.loads(json.dumps(receipt))
+        invalid_receipt["aggregate_u32_bits"][2] = invalid_bits
+        with pytest.raises(ContractError, match="identity/order"):
+            validate_loss_reduction_receipt(invalid_receipt, aggregate_scalars=scalars)
+
+    for invalid_scalar in (False, float("nan"), float("inf"), float("-inf")):
+        invalid_scalars = {**scalars, "entropy": invalid_scalar}
+        with pytest.raises(ContractError, match="identity/order"):
+            validate_loss_reduction_receipt(receipt, aggregate_scalars=invalid_scalars)
+
+
 def _receipt(arm: str, update: int, indices=()):
     return ArmUpdateReceipt(
-        arm=arm, update=update, loss=0.1, score=0.2, entropy=0.3, critic=0.4,
+        arm=arm, update=update, loss=0.0, score=0.0, entropy=0.0, critic=0.0,
+        loss_reduction_receipt=LossReductionReceipt(
+            schema="FRRIE_RSCF_LOSS_REDUCTION_RECEIPT_V1",
+            component_order=("loss", "score", "entropy", "critic"),
+            roster_order=(9, 15) * 32,
+            per_episode_u32_bits=((0, 0, 0, 0),) * 64,
+            reduction_law="PYTHON_SUM_INT0_LEFT_FOLD_THEN_DIVIDE_FLOAT64_LITERAL_64",
+            divisor=64, dtype="CPU_FP32", aggregate_u32_bits=(0, 0, 0, 0),
+        ),
         preclip_global_norm=0.5, backward_calls=1, adam_steps=1,
         projection_changed_indices=tuple(indices), box_contact=bool(indices),
         maximum_box_overshoot=0.1 if indices else 0.0,
         projection_displacement=0.2 if indices else 0.0,
         preprojection_beta=tuple([0.2] * 18), postprojection_beta=tuple([0.15] * 18),
         optimizer_moments_unchanged_by_projection=True,
+        model_pre_bytes=b"model-pre", optimizer_pre_bytes=b"optimizer-pre",
+        model_post_adam_bytes=b"model-post-adam",
+        optimizer_post_adam_bytes=b"optimizer-post-adam",
+        model_post_projection_bytes=b"model-post-projection",
+        optimizer_post_projection_bytes=b"optimizer-post-projection",
     )
 
 
@@ -188,6 +351,16 @@ def test_projection_receipt_contains_loss_parts_beta_values_and_real_indices(tmp
         receipt.preclip_global_norm,
     ))
     assert receipt.optimizer_moments_unchanged_by_projection is True
+    assert receipt.model_pre_bytes
+    assert receipt.optimizer_pre_bytes
+    assert receipt.model_post_adam_bytes != receipt.model_post_projection_bytes
+    assert receipt.optimizer_post_adam_bytes == receipt.optimizer_post_projection_bytes
+    assert decode_optimizer_state(receipt.optimizer_pre_bytes).step == 0
+    assert decode_optimizer_state(receipt.optimizer_post_adam_bytes).step == 1
+    assert models["PHY_TRUST"].parameter_bytes() == receipt.model_post_projection_bytes
+    assert encode_optimizer_state(
+        models["PHY_TRUST"], optimizers["PHY_TRUST"],
+    ) == receipt.optimizer_post_projection_bytes
 
 
 def test_postcontact_different_derived_batches_are_allowed_with_same_direct_envelope(tmp_path):

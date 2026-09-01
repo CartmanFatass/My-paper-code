@@ -10,6 +10,7 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.contract import (
     B01ContractError, bind_invocation_resource, named_compute_profile,
     validate_invocation_binding, validate_manifest, validate_test_manifest,
+    validate_formal_source_gate,
 )
 
 
@@ -22,6 +23,31 @@ def test_manifest_freezes_literal_b01_panel_and_named_compute_profile(b01_manife
     assert science["checkpoint_randomness_role"] == "METADATA_ONLY"
     assert validated["compute"] == named_compute_profile()
     assert validated["compute"]["reduction_dtype"] == REDUCTION_DTYPE == "float64"
+
+
+def test_formal_source_gate_reads_actual_head_and_blocks_scoped_uncommitted_drift(
+    b01_manifest,
+):
+    import subprocess
+    altered = deepcopy(b01_manifest)
+    altered["code_revision"] = subprocess.run(
+        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    with pytest.raises(B01ContractError, match="BLOCKED_UNCOMMITTED"):
+        validate_formal_source_gate(altered)
+
+
+def test_formal_source_cli_exposes_same_fail_closed_gate(tmp_path, b01_manifest):
+    import json
+    import subprocess
+    from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.cli import main
+    altered = deepcopy(b01_manifest)
+    altered["code_revision"] = subprocess.run(
+        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    path = (tmp_path / "formal-source-manifest.json").resolve()
+    path.write_text(json.dumps(altered), encoding="utf-8")
+    assert main(["formal-source-check", "--manifest", str(path)]) == 2
 
 
 @pytest.mark.parametrize("field,value", [

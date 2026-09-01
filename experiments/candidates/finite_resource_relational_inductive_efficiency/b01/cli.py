@@ -16,7 +16,7 @@ from .checkpoint import decode_checkpoint, snapshot_runtime
 from .constants import CHECKPOINTS, EXPERIMENT_ID, LEARNED_ARMS
 from .contract import (
     B01ContractError, bind_invocation_resource, canonical_json_bytes,
-    validate_manifest, validate_test_manifest,
+    validate_manifest, validate_test_manifest, validate_formal_source_gate,
 )
 from .lifecycle import claim_fresh_roots, publish_create_only
 from .preflight import runtime_algorithm_receipt, static_algorithm_receipt
@@ -118,6 +118,8 @@ def parser() -> argparse.ArgumentParser:
     check = commands.add_parser("check")
     check.add_argument("--manifest", required=True)
     check.add_argument("--test-only", action="store_true")
+    source = commands.add_parser("formal-source-check")
+    source.add_argument("--manifest", required=True)
     smoke = commands.add_parser("test-smoke")
     smoke.add_argument("--manifest", required=True)
     smoke.add_argument("--receipt", required=True)
@@ -139,6 +141,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             manifest = _read(args.manifest)
             validated = validate_test_manifest(manifest) if args.test_only else validate_manifest(manifest)
             print(canonical_json_bytes(validated).decode("ascii"))
+            return 0
+        if args.command == "formal-source-check":
+            print(canonical_json_bytes(
+                validate_formal_source_gate(_read(args.manifest))
+            ).decode("ascii"))
             return 0
         return _smoke(args.manifest, args.receipt)
     except (B01ContractError, OSError, json.JSONDecodeError) as exc:

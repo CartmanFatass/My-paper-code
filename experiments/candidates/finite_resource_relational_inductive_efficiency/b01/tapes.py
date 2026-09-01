@@ -14,7 +14,10 @@ from ..tapes import (
     NATIVE_MAX_AGENTS, PUBLIC_ROLES, SURVEYOR_ROLE_COUNT, EpisodeTape,
     NativeEnvironmentTapePayload, generate_episode_tape,
 )
-from .constants import CHECKPOINTS, EVALUATION_EPISODES, EVALUATION_ROSTERS, ROOT_LABELS
+from .constants import (
+    CHECKPOINTS, EVALUATION_EPISODES, EVALUATION_ROSTERS, ROOT_LABELS,
+    TEST_SEED_LABELS,
+)
 from .contract import B01ContractError, canonical_json_bytes
 
 EVALUATION_ADDRESS_SCHEMA: Final = "FRRIE_B01_EVALUATION_ADDRESS_V1"
@@ -49,7 +52,7 @@ class B01EvaluationAddress:
     draw: int = 0
 
     def validate(self) -> "B01EvaluationAddress":
-        if self.seed_label not in ROOT_LABELS:
+        if self.seed_label not in (*ROOT_LABELS, *TEST_SEED_LABELS):
             raise B01ContractError("B01 evaluation address seed label is not registered")
         if self.roster not in EVALUATION_ROSTERS:
             raise B01ContractError("B01 evaluation roster is invalid")
@@ -133,7 +136,7 @@ class B01EvaluationTape:
     action_uniform: np.ndarray
 
     def __post_init__(self) -> None:
-        if self.seed_label not in ROOT_LABELS or self.roster not in EVALUATION_ROSTERS:
+        if self.seed_label not in (*ROOT_LABELS, *TEST_SEED_LABELS) or self.roster not in EVALUATION_ROSTERS:
             raise B01ContractError("B01 evaluation tape identity is invalid")
         if type(self.episode) is not int or not 0 <= self.episode < EVALUATION_EPISODES:
             raise B01ContractError("B01 evaluation tape episode is invalid")

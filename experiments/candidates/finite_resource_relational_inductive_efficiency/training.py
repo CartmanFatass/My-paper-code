@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Final, Sequence
+from typing import Any, Final, Mapping, Sequence
 
 from .contracts.core import ContractError, FP32_PROBABILITY_TOLERANCE
 from .policy import FRRIEActorCritic, TORCH_AVAILABLE, require_torch
@@ -52,6 +52,32 @@ class LossTerms:
     critic: Any
     baselines: Any
     advantages: Any
+
+
+@dataclass(frozen=True)
+class LossReductionReceipt:
+    """Detached bit provenance for the unchanged 64-episode FP32 reduction."""
+
+    schema: str
+    component_order: tuple[str, ...]
+    roster_order: tuple[int, ...]
+    per_episode_u32_bits: tuple[tuple[int, ...], ...]
+    reduction_law: str
+    divisor: int
+    dtype: str
+    aggregate_u32_bits: tuple[int, ...]
+
+
+def exact_loss_reduction_contract() -> dict[str, Any]:
+    return {
+        "schema": "FRRIE_RSCF_LOSS_REDUCTION_CONTRACT_V1",
+        "component_order": ["loss", "score", "entropy", "critic"],
+        "roster_order": list(TRAIN_ROSTER_ORDER),
+        "reduction_law": "PYTHON_SUM_INT0_LEFT_FOLD_THEN_DIVIDE_FLOAT64_LITERAL_64",
+        "divisor": TRAIN_EPISODES_PER_UPDATE,
+        "dtype": "CPU_FP32",
+        "episode_axis": TRAIN_EPISODES_PER_UPDATE,
+    }
 
 
 @dataclass(frozen=True)
@@ -206,13 +232,15 @@ def validate_update_batch(episodes: Sequence[RSCFEpisode]) -> dict[int, int]:
     return counts
 
 
-def rscf_batch_loss(episodes: Sequence[RSCFEpisode]) -> LossTerms:
-    """Average 64 complete episode losses with exact equal episode weighting."""
+def _rscf_batch_loss_with_receipt(
+    episodes: Sequence[RSCFEpisode],
+) -> tuple[LossTerms, LossReductionReceipt]:
+    """One unchanged graph pass plus detached exact reduction provenance."""
 
     validate_update_batch(episodes)
     terms = [rscf_episode_loss(episode) for episode in episodes]
     divisor = float(TRAIN_EPISODES_PER_UPDATE)
-    return LossTerms(
+    aggregate = LossTerms(
         loss=sum(term.loss for term in terms) / divisor,
         score=sum(term.score for term in terms) / divisor,
         entropy=sum(term.entropy for term in terms) / divisor,
@@ -220,6 +248,119 @@ def rscf_batch_loss(episodes: Sequence[RSCFEpisode]) -> LossTerms:
         baselines=torch.stack([term.baselines for term in terms]),
         advantages=torch.stack([term.advantages for term in terms]),
     )
+    component_order = ("loss", "score", "entropy", "critic")
+
+    def bits(value: Any) -> int:
+        return int(value.detach().contiguous().view(torch.int32).item()) & 0xFFFFFFFF
+
+    receipt = LossReductionReceipt(
+        schema="FRRIE_RSCF_LOSS_REDUCTION_RECEIPT_V1",
+        component_order=component_order,
+        roster_order=tuple(episode.roster_size for episode in episodes),
+        per_episode_u32_bits=tuple(
+            tuple(bits(getattr(term, name)) for name in component_order)
+            for term in terms
+        ),
+        reduction_law="PYTHON_SUM_INT0_LEFT_FOLD_THEN_DIVIDE_FLOAT64_LITERAL_64",
+        divisor=TRAIN_EPISODES_PER_UPDATE,
+        dtype="CPU_FP32",
+        aggregate_u32_bits=tuple(bits(getattr(aggregate, name)) for name in component_order),
+    )
+    return aggregate, receipt
+
+
+def rscf_batch_loss(episodes: Sequence[RSCFEpisode]) -> LossTerms:
+    """Average 64 losses with the original graph/order; discard provenance."""
+
+    return _rscf_batch_loss_with_receipt(episodes)[0]
+
+
+def validate_loss_reduction_receipt(
+    value: Any, *, aggregate_scalars: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Replay composite and left-fold arithmetic exactly on CPU FP32 bits."""
+
+    import numpy as np
+
+    expected_fields = {
+        "schema", "component_order", "roster_order", "per_episode_u32_bits",
+        "reduction_law", "divisor", "dtype", "aggregate_u32_bits",
+    }
+    if not isinstance(value, Mapping) or set(value) != expected_fields:
+        raise ContractError("loss reduction receipt fields differ")
+    receipt = dict(value)
+    component_order = ("loss", "score", "entropy", "critic")
+    if (
+        receipt["schema"] != "FRRIE_RSCF_LOSS_REDUCTION_RECEIPT_V1"
+        or tuple(receipt["component_order"]) != component_order
+        or tuple(receipt["roster_order"]) != TRAIN_ROSTER_ORDER
+        or receipt["reduction_law"]
+        != "PYTHON_SUM_INT0_LEFT_FOLD_THEN_DIVIDE_FLOAT64_LITERAL_64"
+        or receipt["divisor"] != TRAIN_EPISODES_PER_UPDATE
+        or receipt["dtype"] != "CPU_FP32"
+        or not isinstance(receipt["per_episode_u32_bits"], (list, tuple))
+        or len(receipt["per_episode_u32_bits"]) != TRAIN_EPISODES_PER_UPDATE
+        or not isinstance(receipt["aggregate_u32_bits"], (list, tuple))
+        or len(receipt["aggregate_u32_bits"]) != len(component_order)
+        or any(
+            type(item) is not int or not 0 <= item <= 0xFFFFFFFF
+            for item in receipt["aggregate_u32_bits"]
+        )
+        or not isinstance(aggregate_scalars, Mapping)
+        or set(aggregate_scalars) != set(component_order)
+        or any(
+            type(aggregate_scalars[name]) not in (int, float)
+            or not np.isfinite(aggregate_scalars[name])
+            for name in component_order
+        )
+    ):
+        raise ContractError("loss reduction receipt identity/order differs")
+
+    rows = []
+    for row in receipt["per_episode_u32_bits"]:
+        if (
+            not isinstance(row, (list, tuple)) or len(row) != len(component_order)
+            or any(type(item) is not int or not 0 <= item <= 0xFFFFFFFF for item in row)
+        ):
+            raise ContractError("loss reduction episode bit row differs")
+        tensor = torch.from_numpy(
+            np.asarray(row, dtype="<u4").view("<f4").copy(),
+        )
+        if not bool(torch.isfinite(tensor).all().item()):
+            raise ContractError("loss reduction episode components are nonfinite")
+        composite = (
+            tensor[1] - ENTROPY_COEFFICIENT * tensor[2]
+            + CRITIC_COEFFICIENT * tensor[3]
+        )
+        composite_bits = int(composite.view(torch.int32).item()) & 0xFFFFFFFF
+        if composite_bits != row[0]:
+            raise ContractError("loss reduction episode composite bits differ")
+        rows.append(tensor)
+
+    aggregates = tuple(
+        sum(row[column] for row in rows) / float(TRAIN_EPISODES_PER_UPDATE)
+        for column in range(len(component_order))
+    )
+    aggregate_bits = tuple(
+        int(item.contiguous().view(torch.int32).item()) & 0xFFFFFFFF
+        for item in aggregates
+    )
+    if tuple(receipt["aggregate_u32_bits"]) != aggregate_bits:
+        raise ContractError("loss reduction aggregate bits differ")
+    scalar_bits = tuple(
+        int(np.asarray([aggregate_scalars[name]], dtype="<f4").view("<u4")[0])
+        for name in component_order
+    )
+    if scalar_bits != aggregate_bits:
+        raise ContractError("loss reduction receipt scalar bits differ")
+    return {
+        **receipt,
+        "component_order": list(component_order),
+        "roster_order": list(TRAIN_ROSTER_ORDER),
+        "per_episode_u32_bits": [list(row) for row in receipt["per_episode_u32_bits"]],
+        "aggregate_u32_bits": list(aggregate_bits),
+        "exact_replay_validated": True,
+    }
 
 
 def make_optimizer(model: FRRIEActorCritic) -> Any:
