@@ -316,7 +316,7 @@ def test_immediate_predecessor_is_literal_provenance_only() -> None:
 
 
 def test_ledger_matches_source_literals() -> None:
-    ledger_path = ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R2_CONSTRAINT_TARGET_LEDGER_V1.json"
+    ledger_path = ROOT / "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2R2_CONSTRAINT_TARGET_LEDGER_V1.json"
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     assert ledger["source_population"]["catalog_cardinality"] == generator.catalog_count_proof()["total"]
     assert ledger["source_population"]["selected_manifest_target"] == generator.SELECTED_TARGET

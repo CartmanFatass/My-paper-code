@@ -122,10 +122,35 @@ host, population, or compiler null must register as a new successor object; no e
 - `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_RESULT_INTAKE_20260831.md`
 - `docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_EXECUTION_INCIDENT_20260831.md`
-- `docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md`
-- `docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md`
+- `docs/research/legacy/directions/dual_epoch_receipt_survival/DIRECTION.md`
+- `docs/research/legacy/directions/finite_semantic_boundary_support/DIRECTION.md`
 - `docs/research/candidates/eociv_lite/DIRECTION.md`
 - `docs/research/candidates/eociv_lite/PAYLOAD_CONTENT_LEARNABILITY_CODE_SCIENCE_INDEX.md`
 - `docs/research/candidates/eociv_lite/PAYLOAD_CONTENT_LEARNABILITY_RESULT.json`
 - `docs/research/candidates/ucope/DIRECTION.md`
 - `docs/research/portfolio/decisions/2026-08-30-fifteen-direction-consolidation.md`
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit reactivates CBSC at `ACTIVE/HIGH` for a new B/EXPLORE online,
+multi-opportunity currentness study. The exact factorial remains positive and narrow, and LR01
+remains a valid `UNRESOLVED` result for its one fixed codec/optimizer package. Neither object may be
+rerun or reinterpreted.
+
+The next study places OWNER live/broken, persist/refresh, open/gated capability, and
+receiver-correct/swapped content in a dynamic host. It compares a structured recurrent currentness
+policy with same-information RAW recurrence, predictive-index, and deranged semantic controls under
+matched interactions, updates, parameters, and model-selection exposure. Three-to-five seeds may
+establish only a bounded exploratory learning signal.
+
+CBSC accepts the following legacy controls without polarity transfer:
+
+- `docs/research/legacy/directions/dual_epoch_receipt_survival/` supplies OWNER-currentness and
+  retained-content controls;
+- `docs/research/legacy/directions/finite_semantic_boundary_support/` supplies the structural
+  equality boundary and capability-changing edge; and
+- `docs/research/legacy/directions/vsp_04/` supplies generated-row finite-cell diagnostics only
+  after an independent host produces the rows.
+
+ACVC uncertain veto learning, EOCIV receiver-addressed credit, and UCOPE paid acquisition remain
+separate ACTIVE questions.

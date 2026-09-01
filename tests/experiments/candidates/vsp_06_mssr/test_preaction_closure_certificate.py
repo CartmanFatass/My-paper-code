@@ -16,7 +16,7 @@ from experiments.candidates.vsp_06_mssr import preaction_closure_certificate as 
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_06_mssr/preaction_closure_certificate.py"
-INDEX = ROOT / "docs/research/candidates/vsp_06_mssr/CODE_SCIENCE_INDEX.md"
+INDEX = ROOT / "docs/research/legacy/directions/vsp_06_mssr/CODE_SCIENCE_INDEX.md"
 
 
 def assert_failure(label: str, callback) -> None:

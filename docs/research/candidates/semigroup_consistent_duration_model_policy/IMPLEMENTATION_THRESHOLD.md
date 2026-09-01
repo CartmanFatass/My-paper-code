@@ -311,4 +311,4 @@ simulator transfer, UAV safety, deployment or flight.
 - `SCDMP_FCEOV_REPLACEMENT_VALIDITY_AND_INTAKE_20260831.md`
 - `SCDMP_FCEOV_REPLACEMENT_RESULT_INTAKE_20260831.md`
 - `SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
-- `docs/research/candidates/opportunity_normalized_lease_gated_rebinding/IMPLEMENTATION_THRESHOLD.md`
+- `docs/research/legacy/directions/opportunity_normalized_lease_gated_rebinding/IMPLEMENTATION_THRESHOLD.md`

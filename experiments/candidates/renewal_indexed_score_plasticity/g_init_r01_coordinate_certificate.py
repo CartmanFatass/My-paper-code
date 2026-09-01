@@ -46,10 +46,10 @@ FORBIDDEN_PROVENANCE = frozenset(str(Path(path).resolve()) for path in (
     "C:/Projects/HMASD/temp/pytest_risp_g_r01_lifecycle_20260821_b/test_certificate_is_no_overwri0/TEST/certificate.json",
     "C:/Projects/HMASD/temp/pytest_cm_risp_g_r01_integration_20260821/test_certificate_is_no_overwri0/TEST/certificate.json",
 ))
-SCIENCE = ROOT / "docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md"
-PRO = ROOT / "docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_EXTERNAL_PRO_CLOSED_INTAKE_R01.md"
-COST = ROOT / "docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_DEFINITION_AND_COST_MILESTONE_R01.md"
-HANDOFF = ROOT / "docs/research/candidates/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_EMPIRICAL_STAGE_EM_HANDOFF_20260821.md"
+SCIENCE = ROOT / "docs/research/legacy/directions/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md"
+PRO = ROOT / "docs/research/legacy/directions/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_EXTERNAL_PRO_CLOSED_INTAKE_R01.md"
+COST = ROOT / "docs/research/legacy/directions/renewal_indexed_score_plasticity/RISP_G_INITIALIZATION_REACHABILITY_DEFINITION_AND_COST_MILESTONE_R01.md"
+HANDOFF = ROOT / "docs/research/legacy/directions/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_EMPIRICAL_STAGE_EM_HANDOFF_20260821.md"
 PORTFOLIO = ROOT / "docs/research/workflow-runs/2026-08-11_five-round-research-team/RISP_G_INIT_REACH_R01_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md"
 BACKEND_BINDING_INTERFACE = {
     "schema": "RISP-G-INIT-REACH-R01-ACCEPTED-SHARED-FULL-HOST-CPP-BINDING-V1",

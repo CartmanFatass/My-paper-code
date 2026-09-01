@@ -235,3 +235,18 @@ The response creates no COPY/SHADOW polarity and does not perform the later
 failure remain non-authoritative technical attempts. Until the Portfolio transaction is complete,
 `docs/research/portfolio/PORTFOLIO.md` remains the lifecycle authority even though its `ACTIVE` row
 predates this direction-level `CLOSE` decision.
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit retains R02 as a closed, non-result C design and reactivates DISH
+at `ACTIVE/MEDIUM` for a materially smaller B/EXPLORE object. The next object uses three-to-five
+independent seeds on a small predeclared first-valid-trigger panel and compares RETAIN, COPY, and
+SHADOW under the same checkpoints and future tapes. It reports recovery return, tail behavior,
+energy, and failure events. Before the first run, close only the deterministic state map,
+normal-tick semantics, and terminal-record coverage needed by that panel; the 24-root prevalence
+law and full R02 production surface are not B admission gates.
+
+`docs/research/legacy/directions/vsp_05/` is absorbed as the orthogonal proposal-veto and
+exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted; DISH's original
+contrast asks which state source should be transferred. Evidence for either axis cannot substitute
+for the other, and no legacy polarity transfers.

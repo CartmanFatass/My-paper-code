@@ -25,3 +25,16 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit reactivates VSP-02 at `ACTIVE/LOW` for a B/EXPLORE
+competence-first Adam CARRY/RESET study across several predeclared lifecycle ages. Development may
+repair learner competence transparently. The evaluation reports full curves, return AUC,
+time-to-correct, cue-conditioned action gap, and terminal return over three-to-five seeds. Equal
+exact success sets on the earlier five-root panel remain evidence, but do not establish equality of
+continuous paths, transient regret, or sample efficiency.
+
+`docs/research/legacy/directions/optimizer_entropy_exposure_boundary_relay/` supplies the
+CARRY/FRESH optimizer-history provenance control. It transfers no entropy-amplification or return
+polarity.

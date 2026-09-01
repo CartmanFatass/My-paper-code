@@ -15,7 +15,7 @@ from experiments.candidates.vsp_04 import matched_boundary_rational_certificate 
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_04/matched_boundary_rational_certificate.py"
-INDEX = ROOT / "docs/research/candidates/vsp_04/CODE_SCIENCE_INDEX.md"
+INDEX = ROOT / "docs/research/legacy/directions/vsp_04/CODE_SCIENCE_INDEX.md"
 
 
 def test_primary_exact_a_b_and_fixed_instance() -> None:

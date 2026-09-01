@@ -1070,14 +1070,14 @@ not a contrary branch in this first object.
 
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_R03_DEFINITION_SCIENCE_CARD.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_RSCF_R01_28_FAMILY_SUPPORT_SLACKS_NONREVISION_CLARIFICATION_20260821.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_R03_DEFINITION_SCIENCE_CARD.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_RSCF_R01_28_FAMILY_SUPPORT_SLACKS_NONREVISION_CLARIFICATION_20260821.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
 - `experiments/candidates/semantic_graphon_shared_policy_rscf_r01/runner.py`
-- `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
+- `docs/research/legacy/directions/covariance_calibrated_information_clock/DIRECTION.md`
 - `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
-- `docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md`
+- `docs/research/legacy/directions/voronoi_quadrature_field_policy/DIRECTION.md`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/contracts/core.py`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/host.py`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/arms.py`

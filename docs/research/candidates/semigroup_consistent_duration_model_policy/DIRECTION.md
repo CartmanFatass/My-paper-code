@@ -295,3 +295,30 @@ branch-dependent decision. The direction decision does not itself mutate cross-d
 capacity, fusion, ownership, or investment; those remain for a later `portfolio:cross_direction`
 decision. The authoritative reconciliation and unchanged claim ceiling are recorded in
 `SCDMP_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit reactivates SCDMP at `ACTIVE/HIGH` for a genuinely new
+B/EXPLORE study family. The valid `.3` result remains consumed at its exact fixed state, `k=13`,
+single foundation, three actions, 562 tapes, estimands, and decision rule. Its favorable descriptive
+contrasts and frozen-resolution nonpass are neither erased nor reinterpreted.
+
+The next object uses multiple independent foundations, reachable states, and at least two `k`
+values. It compares graph-matched, mismatched, and common actions with paired tapes and reports raw
+return gaps, variance, competence, and complete learning curves. Three-to-five seeds support only a
+bounded exploratory order-value signal; complete-support proof is not an admission condition.
+
+The temporal programme accepts these legacy sources without polarity transfer:
+
+- `docs/research/legacy/directions/renewal_indexed_score_plasticity/` supplies the exact
+  event/duration-order noncommutation theorem and full-Bayes versus erased/last-ACK controls;
+- `docs/research/legacy/directions/opportunity_normalized_lease_gated_rebinding/` supplies generic
+  RATE, ratio-of-expectations service/cost accounting, and the age ceiling; and
+- `docs/research/legacy/directions/event_triggered_budgeted_cooperative_renewal/` supplies the
+  coordinated-renewal branch.
+
+The EBCR frozen contract required a 2 GiB peak-RSS bound, while its result recorded no continuous
+peak measurement. Under the current evidence standard that attempt does not consume the C object;
+an unchanged outcome-blind replacement remains eligible inside SCDMP after technical repair. Its
+old numeric outcome carries no formal polarity. APFI remains a separate PARKED censored-flow
+question and is not absorbed here.

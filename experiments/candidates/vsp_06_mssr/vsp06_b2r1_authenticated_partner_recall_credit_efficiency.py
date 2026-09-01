@@ -120,8 +120,8 @@ SOURCE_CONFIG_RELATIVE_PATHS = (
     "experiments/candidates/vsp_06_mssr/vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
     "scripts/run_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
     "tests/experiments/candidates/vsp_06_mssr/test_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
-    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json",
-    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md",
+    "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json",
+    "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md",
 )
 
 

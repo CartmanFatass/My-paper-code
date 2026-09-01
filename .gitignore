@@ -70,6 +70,9 @@ data/
 !docs/research/specs/*.md
 !docs/research/candidates/
 !docs/research/candidates/**/*.md
+!docs/research/legacy/
+!docs/research/legacy/directions/
+!docs/research/legacy/directions/**/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 /.scratch/

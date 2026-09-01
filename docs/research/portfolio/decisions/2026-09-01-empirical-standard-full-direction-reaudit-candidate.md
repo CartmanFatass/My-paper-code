@@ -4,6 +4,10 @@ Date: 2026-09-01
 
 Status: `PREDECISION_EVIDENCE_PACKET`
 
+Final disposition: superseded by
+`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`.
+The final decision retains the `19/2/14` totals but moves APFI to PARKED and VQFP to LEGACY.
+
 This document does not mutate Portfolio lifecycle. It records Root's candidate synthesis for the
 `portfolio:cross_direction` decision after a read-only review of all 35 registered direction
 authorities under `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`.

@@ -17,7 +17,7 @@ from experiments.candidates.vsp_05 import semantic_veto_census as svc
 
 ROOT = Path(__file__).parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_05/semantic_veto_census.py"
-INDEX = ROOT / "docs/research/candidates/vsp_05/CODE_SCIENCE_INDEX.md"
+INDEX = ROOT / "docs/research/legacy/directions/vsp_05/CODE_SCIENCE_INDEX.md"
 
 
 @pytest.fixture(scope="module")

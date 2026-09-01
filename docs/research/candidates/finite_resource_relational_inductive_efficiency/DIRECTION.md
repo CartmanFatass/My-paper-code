@@ -71,10 +71,10 @@ independent prior rather than shrinkage, optimizer geometry, or a host-aligned c
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/INFERENCE_AND_EXECUTION_FREEZE.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
+- `docs/research/legacy/directions/covariance_calibrated_information_clock/DIRECTION.md`
 - `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md`
-- `docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/DIRECTION.md`
+- `docs/research/legacy/directions/voronoi_quadrature_field_policy/DIRECTION.md`
 - `docs/research/portfolio/decisions/2026-08-30-fifteen-direction-consolidation.md`
 
 ## Formal implementation cycle — 2026-08-30
@@ -225,3 +225,31 @@ relevant evaluation transition, and equality through the complete native return.
 admission follows only after a decision-eligible Level-A object exists. No result, competence,
 contact, equality, harm, superiority, semantic, mechanism, deployment, or safety polarity is
 created. See `FRRIE_EM_CONVERGENCE_FINAL_DECISION_INTAKE_20260831.md`.
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit reactivates FRRIE at `ACTIVE/HIGH`. R01 and the 909/916-row
+constructions retain their exact closure/deferment meanings, but their conclusion-bearing power and
+resource obligations are not prerequisites for B/EXPLORE learning curves.
+
+The next study compares tight `PHY_TRUST` with competent containing `EDGE_FLEX` on train and
+held-out roster sizes over three-to-five independent seeds. Information, interactions, optimizer
+exposure, parameters, tuning opportunity, and work remain matched. Report complete learning curves,
+native return, EDGE competence, projection contact, reassociation sensitivity, wall time, and RSS.
+The claim ceiling is an exploratory finite-budget package signal on the declared host.
+
+FRRIE accepts these legacy sources without result-polarity transfer:
+
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/` for treatment ancestry and
+  reassociation controls;
+- `docs/research/legacy/directions/covariance_calibrated_information_clock/` for typed-wedge and
+  higher-order motif controls;
+- `docs/research/legacy/directions/field_slot_coordination/` for a variable-`N` compression and
+  critical-member B branch;
+- `docs/research/legacy/directions/roster_smf/` for the exact full-access census control; and
+- `docs/research/legacy/directions/voronoi_quadrature_field_policy/` for output-disconnected
+  measure, mass, LR, reassociation, and marginal-heap controls.
+
+An allocation-capable ABI is a new FRRIE revision or successor, not VQFP re-entry. EGRCR remains a
+separate ACTIVE finite-resource credit-estimator question even though its exact pair-aware fixture
+may serve as an FRRIE control.

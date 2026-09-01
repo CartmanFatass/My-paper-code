@@ -40,11 +40,11 @@ DIAGNOSTIC_GRID = tuple(
 )
 
 CARD_RELATIVE_PATH = (
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/"
+    "docs/research/legacy/directions/opportunity_normalized_lease_gated_rebinding/"
     "ONLGR_B2_STATE_BLIND_EVENT_RATE_FLEXIBILITY_SCIENCE_CARD.md"
 )
 CLOSURE_RELATIVE_PATH = (
-    "docs/research/candidates/opportunity_normalized_lease_gated_rebinding/"
+    "docs/research/legacy/directions/opportunity_normalized_lease_gated_rebinding/"
     "ONLGR_B2_EXTERNAL_PRO_MATHEMATICAL_CLOSURE_INTAKE.md"
 )
 

@@ -163,6 +163,6 @@ permits only a separately frozen learnability question.
 
 - `DIRECTION.md`
 - `docs/research/portfolio/decisions/2026-08-30-fifteen-direction-consolidation.md`
-- `docs/research/candidates/dual_epoch_receipt_survival/DIRECTION.md`
-- `docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md`
+- `docs/research/legacy/directions/dual_epoch_receipt_survival/DIRECTION.md`
+- `docs/research/legacy/directions/finite_semantic_boundary_support/DIRECTION.md`
 - `docs/research/candidates/eociv_lite/DIRECTION.md`

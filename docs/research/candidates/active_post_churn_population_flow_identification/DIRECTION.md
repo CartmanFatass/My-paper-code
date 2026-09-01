@@ -39,3 +39,14 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
+
+## Portfolio empirical-standard disposition — 2026-09-01
+
+APFI is `PARKED/LOW`, not absorbed. The current CCF remains closed because it is exactly reducible
+to a two-event XOR/DFA. SCDMP may cite its host ancestry but does not preserve the independent
+censored-flow identification question.
+
+Reactivate only after prospective acceptance and independent challenge of a non-XOR/non-DFA
+construction that matches low-order marginals yet requires opposite native actions or returns
+against a competent low-order controller. The current unaccepted construction is not an executable
+object.

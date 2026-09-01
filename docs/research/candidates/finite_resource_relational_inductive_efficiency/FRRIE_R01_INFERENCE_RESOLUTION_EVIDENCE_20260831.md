@@ -238,10 +238,10 @@ one-delivery alternative within an independently feasible block/resource contrac
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/INFERENCE_AND_EXECUTION_FREEZE.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_R03_DEFINITION_SCIENCE_CARD.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_RSCF_R01_28_FAMILY_SUPPORT_SLACKS_NONREVISION_CLARIFICATION_20260821.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_R03_DEFINITION_SCIENCE_CARD.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RG2Z_RSCF_R01_28_FAMILY_SUPPORT_SLACKS_NONREVISION_CLARIFICATION_20260821.md`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/contracts/core.py`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/preflight.py`
 - `experiments/candidates/finite_resource_relational_inductive_efficiency/analysis.py`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`

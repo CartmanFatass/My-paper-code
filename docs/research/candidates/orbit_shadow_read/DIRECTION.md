@@ -25,3 +25,12 @@ The bootstrap evidence set is the existing navigation record and the cited candi
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
+
+## Portfolio empirical-standard disposition — 2026-09-01
+
+Orbit is `PARKED/LOW`. Existing evidence establishes owner-by-role action-kernel sensitivity but no
+independent return population, learner comparison, or utility beyond currentness provenance.
+
+Reactivate only when a concrete return-bearing host makes opaque owner-by-role identity change the
+competent optimal action, with owner-role, owner-blind, and validity-only learners under matched
+information and work.

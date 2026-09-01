@@ -15,7 +15,7 @@ from experiments.candidates.vsp_06_mssr import vsp06_b2r1_independent_exact_mani
 from experiments.candidates.vsp_06_mssr import vsp06_b2r1_authenticated_partner_recall_credit_efficiency as toy
 
 ROOT = Path(__file__).resolve().parents[4]
-LEDGER = ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json"
+LEDGER = ROOT / "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json"
 RUNNER = ROOT / "scripts/run_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py"
 SOURCE_PATHS = (
     ROOT / "experiments/candidates/vsp_06_mssr/vsp06_b2r1_source_bound_exact_feasibility.py",
@@ -1111,6 +1111,6 @@ def test_stage1_status_static_guards_zero_activity_and_reserved_absence() -> Non
     assert ".glob(" not in runtime_sources and ".rglob(" not in runtime_sources
 
 def test_index_is_synthetic_only_and_does_not_overclaim() -> None:
-    text=(ROOT/"docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md").read_text(encoding="utf-8")
+    text=(ROOT/"docs/research/legacy/directions/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md").read_text(encoding="utf-8")
     assert DOMAIN in text and TOKEN in text and "no canonical feasibility" in text.lower()
     assert "dormant" in text.lower() and "stage 2" in text.lower()

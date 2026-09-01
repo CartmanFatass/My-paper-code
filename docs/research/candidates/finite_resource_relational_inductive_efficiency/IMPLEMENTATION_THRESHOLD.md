@@ -243,7 +243,7 @@ current blocker, no sampled-root population claim is available.
 
 - `DIRECTION.md`
 - `INFERENCE_AND_EXECUTION_FREEZE.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/DIRECTION.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/DIRECTION.md`
+- `docs/research/legacy/directions/covariance_calibrated_information_clock/DIRECTION.md`
 - `docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md`
-- `docs/research/candidates/voronoi_quadrature_field_policy/DIRECTION.md`
+- `docs/research/legacy/directions/voronoi_quadrature_field_policy/DIRECTION.md`

@@ -29,7 +29,7 @@ from .lifecycle import LifecycleContractError, canonical_sha256, validate_test_n
 
 ANALYZER_SCHEMA_VERSION = "SGSP_RSCF_28_FAMILY_ANALYZER_V1"
 SUPPORT_SLACK_CLARIFICATION_PATH = (
-    "docs/research/candidates/semantic_graphon_shared_policy/"
+    "docs/research/legacy/directions/semantic_graphon_shared_policy/"
     "SGSP_RG2Z_RSCF_R01_28_FAMILY_SUPPORT_SLACKS_NONREVISION_CLARIFICATION_20260821.md"
 )
 SUPPORT_SLACK_CLARIFICATION_SHA256 = "53d0bdefc0af54f335f25b6f7304b79a62b8d364ebb7109050e4419b2577559a"

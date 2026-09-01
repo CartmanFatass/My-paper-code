@@ -48,7 +48,7 @@ transfer, churn, variable lifetime, UAV value, deployment, or safety.
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/INFERENCE_AND_EXECUTION_FREEZE.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - the 2026-08-31 FRRIE row in `docs/research/portfolio/PORTFOLIO.md`
 
@@ -278,6 +278,6 @@ science.
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/INFERENCE_AND_EXECUTION_FREEZE.md`
 - `docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R01_INFERENCE_RESOLUTION_EVIDENCE_20260831.md`
-- `docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
+- `docs/research/legacy/directions/semantic_graphon_shared_policy/SGSP_RSCF_SHORT_GATE_R01_SYNTHESIS_EVIDENCE_20260829.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/research/portfolio/PORTFOLIO.md`

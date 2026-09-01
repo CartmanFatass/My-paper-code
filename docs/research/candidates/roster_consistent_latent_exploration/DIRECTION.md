@@ -104,3 +104,20 @@ remain provenance:
 
 This authority does not rewrite those historical files or treat their old
 operational status as current authorization.
+
+## Portfolio empirical-standard recast — 2026-09-01
+
+The final cross-direction reaudit reactivates RCLE at `ACTIVE/MEDIUM` for a B/EXPLORE
+finite-budget package question. Exact same-information recomputation continues to close public or
+private information-necessity claims. It does not establish equal search geometry, gradient
+variance, transient recovery, or finite-budget native return.
+
+The next object compares persistent-common and containing FLEX packages on churn recovery over
+three-to-five seeds with matched local information, communication, RNG access, parameters,
+interactions, updates, and model-selection exposure. Report full learning curves, post-churn
+recovery time, and integrated unserved demand.
+
+`docs/research/legacy/directions/vsp_06_mssr/` is absorbed as the selective authenticated
+partner-memory branch, with its generic compiler retained as the containing null. No expression or
+information-necessity polarity transfers; only finite-budget learning and recovery effects remain
+eligible.

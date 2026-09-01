@@ -173,7 +173,7 @@ def build_certificate() -> dict[str, Any]:
     checks.append(Check("isolated_package_python_syntax", not syntax_errors, syntax_errors))
 
     workspace = Path(__file__).parents[3]
-    authority_dir = workspace / "docs/research/candidates/semantic_graphon_shared_policy"
+    authority_dir = workspace / "docs/research/legacy/directions/semantic_graphon_shared_policy"
     actual_hashes = {name: _sha256(authority_dir / name) for name in EXPECTED_HASHES}
     checks.append(Check(
         "exact_r03_science_map_and_pro_closed_intake_binding",

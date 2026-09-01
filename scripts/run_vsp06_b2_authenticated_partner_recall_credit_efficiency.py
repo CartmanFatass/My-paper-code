@@ -28,7 +28,7 @@ from experiments.candidates.vsp_06_mssr import (  # noqa: E402
 )
 
 
-DEFAULT_LEDGER = ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2_CONSTRAINT_TARGET_LEDGER_V1.json"
+DEFAULT_LEDGER = ROOT / "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2_CONSTRAINT_TARGET_LEDGER_V1.json"
 DEFAULT_VERIFIER = ROOT / "experiments/candidates/vsp_06_mssr/vsp06_b2_independent_exact_manifest_verifier.py"
 RESULT_PATH = ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json"
 SESSION_ROOT = ROOT / "temp/sessions/code_project_manager/vsp06_b2_source_bound_exact_feasibility_credit_efficiency"

@@ -28,7 +28,7 @@ from experiments.candidates.vsp_06_mssr import (
 
 REPO = Path(__file__).resolve().parents[4]
 TEST_ROOT = REPO / "temp/sessions/code_project_manager/vsp06_b2_source_bound_exact_feasibility_credit_efficiency/implementation-tests"
-LEDGER_PATH = REPO / "docs/research/candidates/vsp_06_mssr/VSP06_B2_CONSTRAINT_TARGET_LEDGER_V1.json"
+LEDGER_PATH = REPO / "docs/research/legacy/directions/vsp_06_mssr/VSP06_B2_CONSTRAINT_TARGET_LEDGER_V1.json"
 SELECTOR_PATH = REPO / "experiments/candidates/vsp_06_mssr/vsp06_b2_source_bound_exact_feasibility.py"
 VERIFIER_PATH = REPO / "experiments/candidates/vsp_06_mssr/vsp06_b2_independent_exact_manifest_verifier.py"
 RUNNER_PATH = REPO / "scripts/run_vsp06_b2_authenticated_partner_recall_credit_efficiency.py"
