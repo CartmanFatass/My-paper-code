@@ -12,6 +12,35 @@
 - CTVD / complete-support registration judgment: one candidate, `UNREGISTERED`
 - Portfolio mutation: none; any later cross-direction action belongs to `portfolio:cross_direction`
 
+## Repository provenance transcribed from the authoritative archive
+
+The following facts are transcribed from the archived `RESPONSE.md` and
+`TRANSPORT_FACTS.json` for `scdmp-em-convergence-20260831-04`:
+
+- Exact repository: `CartmanFatass/My-paper-code`
+- Exact pinned ref: `b3d6793ceef194fea8cffb48a1015d3375338de0`
+- Repository evidence access: GitHub connector, read-only mode
+- Transport prompt source mode: `upload`
+- Unlisted-path statement: “No unlisted repository path, moving branch, web mirror, local clone,
+  or pasted substitute was used.”
+
+The response reports that all ten listed repository paths were actually read:
+
+1. `docs/research/portfolio/PORTFOLIO.md`
+2. `docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md`
+3. `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
+4. `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_PROSPECTIVE_FINITE_SAMPLE_INFERENCE_FREEZE_20260831.md`
+5. `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_COMPLETE_SUPPORT_PRO_RESPONSE_INTAKE_20260831.md`
+6. `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_POSTCLOSURE_COMPLETE_SUPPORT_CONVERGENCE_AUDIT_20260831.md`
+7. `docs/research/candidates/semigroup_consistent_duration_model_policy/pro_structural_closure_20260831/LOCAL_STRUCTURAL_AUDIT.md`
+8. `experiments/candidates/scdmp_variable_k/foundation_conditioned_event_order_value/contracts.py`
+9. `experiments/candidates/scdmp_variable_k/foundation_conditioned_event_order_value/runner.py`
+10. `experiments/candidates/scdmp_variable_k/foundation_conditioned_event_order_value/source_manifest.py`
+
+Neither authoritative file reports a connector blob SHA for any of those paths. Consequently, no
+per-path blob SHA is assigned or inferred here. These entries preserve provider-reported provenance
+only: this intake did not recompute content, compare a digest, or create a verification gate.
+
 ## Supersession and decision completeness
 
 The clean replacement response is the authoritative output for this convergence node. It supersedes

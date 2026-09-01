@@ -13,6 +13,71 @@ Pinned repository ref: `b3d6793ceef194fea8cffb48a1015d3375338de0`
 Archived response:
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/degraded_incumbent_shadow_handover/dish-em-convergence-20260831-01/RESPONSE.md`
 
+## Archived provenance transcription
+
+The repository bound by the archived request manifest was exactly:
+
+```text
+repository: CartmanFatass/My-paper-code
+repository_url: https://github.com/CartmanFatass/My-paper-code
+commit_or_ref: b3d6793ceef194fea8cffb48a1015d3375338de0
+access: read-only connected GitHub connector
+```
+
+The response states that all repository evidence listed below was read in read-only mode at exact
+ref `b3d6793ceef194fea8cffb48a1015d3375338de0`, as required by the manifest. The Transport record's
+`source_mode=upload` describes how the prompt/reference material reached Pro; it is distinct from
+the response's read-only GitHub connector access to repository evidence.
+
+The governing manifest required retrieval only from its listed repository-relative paths and
+forbade use of an unlisted file, moving/default branch, web mirror, local clone, or pasted full-file
+substitute. The response enumerates the following eleven paths as actually read. It does not contain
+a separate explicit assertion that zero unlisted paths were read, so this intake does not invent
+one.
+
+No connector-reported repository blob SHA appears in `RESPONSE.md` for any path. `NOT_REPORTED`
+below means precisely that; it is not a locally computed value. The Transport-level prompt and
+response SHA values are archive-transcription fields, not repository blob SHA values and not
+scientific, access, or runtime gates.
+
+| Repository path actually read | Connector-reported blob SHA | Direct observation reported in the response |
+| --- | --- | --- |
+| `docs/research/portfolio/PORTFOLIO.md` | `NOT_REPORTED` | The pinned Portfolio still records DISH as ACTIVE with root-panel/address-map implementation as its next investment. |
+| `docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md` | `NOT_REPORTED` | Records no R02 result, failure of total/fixed/panel-independent `F`, stopped implementation, and the local close/no-successor recommendation. |
+| `docs/research/candidates/degraded_incumbent_shadow_handover/IMPLEMENTATION_THRESHOLD.md` | `NOT_REPORTED` | Gives the conditional-science/production-stopped status, ten gaps, convergence defects, raw-equality requirement, and closure recommendation. |
+| `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-31-dish-r02-production-investment-stop-and-closure.md` | `NOT_REPORTED` | Supplies duplicate-root, block/index, branch-consumption, panel-adaptive-repair, incomplete-terminal, performance, claim-ceiling, and re-entry analyses. |
+| `docs/research/candidates/degraded_incumbent_shadow_handover/evidence/2026-08-31-dish-block-certificate-prevalence-r02-freeze.md` | `NOT_REPORTED` | Defines the conditional exact-binomial law, root certificate, existential witness, replay modifier, result branches, counterexamples, and forbidden claims. |
+| `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_contract.py` | `NOT_REPORTED` | Declares the intended root/address law plus TEST-only, production-not-ready, no-result-entry, and ten-gap facts. |
+| `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_reducer.py` | `NOT_REPORTED` | Shows the preview reducer, same-index root check, limited terminal stages, `NO_MATERIAL` vocabulary, replay gating, and no result authority. |
+| `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_population.py` | `NOT_REPORTED` | Shows block dependence in legacy geometry, turns, canonical keys, and RNG addresses. |
+| `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_fork.py` | `NOT_REPORTED` | Provides the TEST transaction/replay shell and address-sequence equality helper, but no production rollout or semantic draw-consumption proof. |
+| `experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_source_factored_process.py` | `NOT_REPORTED` | Provides source-specific Welford and a two-owner one-tick TEST oracle, not full production replay. |
+| `tests/experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/test_source_factored_contract_reducer.py` | `NOT_REPORTED` | Confirms TEST-only/no-authority behavior and exposes duplicate roots with index-dependent witnesses plus whole-preview suppression for invalid replay. |
+
+The existing `TRANSPORT_FACTS.json` records, without local recomputation:
+
+```text
+schema_version: 2
+request_id: dish-em-convergence-20260831-01
+direction_id: degraded_incumbent_shadow_handover
+workflow_node: em_convergence
+conversation_binding_key: em:degraded_incumbent_shadow_handover:convergence
+conversation_id: 6a961889-c40c-83e8-bd1d-3f59113ecb9f
+visible_model: Pro
+underlying_model: GPT-5.6 Sol
+thinking_effort: 5/5
+source_mode: upload
+observed_state: NATURAL_COMPLETION
+archive_status: ARCHIVED
+prompt_sha256: a2197ebc8384d09a01e9349b707e97a68079e6932e24225deffe748b6d8e239f
+response_sha256: abe7c4e12233edf4f0d2b61a1fd4cfd716298d1939c6a9b77a7f2cea5af07fe5
+captured_at: 2026-09-01T00:18:53.776Z
+```
+
+Those two SHA values are transcribed Transport archive observations only. This intake neither
+recomputed them nor uses them to verify response content, connector retrieval, or scientific
+validity.
+
 ## Conclusion
 
 The first valid bound direction-level convergence response formed a complete decision:
