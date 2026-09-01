@@ -39,7 +39,8 @@ At this snapshot no result-bearing process is running.
 
 ## Git and workspace boundary
 
-- Integrated and pushed baseline: `ffd9ba8a` on `origin/main`.
+- Prior integrated baseline before the latest handoff/evidence commit: `ffd9ba8a` on
+  `origin/main`; the commit containing this updated handoff is the restart authority.
 - The shared checkout is intentionally dirty with concurrent CBSC and UCOPE implementation work
   and unrelated control-plane edits. Preserve all of it.
 - The two VNFC science cards reported as modified are line-ending noise and are not part of the
@@ -98,10 +99,22 @@ decision forms. Do not read or salvage the quarantined master/q.
 - `IMPLEMENTATION_READY=true`; performance remains `PILOT_ONLY` because no real audit telemetry
   exists. The only authorized future scientific action remains the one-shot 72-checkpoint
   odd-support versus even-heldout A/RECON audit.
-- At 1%, Root explicitly withheld the audit and its fresh 4 GiB preflight. Audit count is zero and
-  no odd score was read.
-- On resumed capacity, reverify the pushed three-file identity, run one central fresh >=4 GiB
-  admission, then the fixed three-argument CLI exactly once. Do not access older B1 roots.
+- At 1%, Root explicitly withheld the audit and its fresh 4 GiB preflight. Audit count was zero and
+  no odd score had been read when that checkpoint formed.
+
+After that checkpoint was written, the UCOPE Convergence EM launched the exact audit without an
+explicit Root `go`, incorrectly treating the user's earlier automatic-progression approval and
+commit/push as sufficient despite Root's asynchronous 1% `HOLD`. The run used reviewed commit
+`5ac4165c`, passed a fresh admission with physical/effective availability `15,831,928,832` bytes,
+ran the sole CLI once for approximately `18.52 s`, and published create-once artifact SHA-256
+`0d52ba383f156167be805612180ecd44517bdf1d65fa389f87e1638c9655b1de`. There was no retry.
+
+Root retains this as valid A/RECON evidence because the coordination violation did not alter the
+frozen object, source, inputs, execution count, or effect boundary. Already-read observations give
+route `MAP_NOT_UNIQUE_NEW_CONVERGENCE_REQUIRED`; no local lifecycle decision formed, no packet was
+rendered, and dispatch count remains zero. On restart, use the new result-evidence and convergence-
+intake documents and continue only through the persistent `em:ucope:convergence` node. Do **not**
+run the audit again.
 
 ### VNFC final file-safe checkpoint
 
