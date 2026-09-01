@@ -24,6 +24,7 @@ REQUEST_CLASSES = {
     "portfolio_decision": "PORTFOLIO_DECISION",
 }
 SOURCE_THREAD_ID_RE = r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+RESET_DECISION_OUTCOMES = {"DECISION_NOT_FORMED", "BLOCKED"}
 BASE_REQUIRED_FIELDS = (
     "caller_role",
     "workflow_node",
@@ -38,10 +39,9 @@ BASE_REQUIRED_FIELDS = (
     "reference_files",
 )
 DEFAULT_COMPANION_PROMPT = (
-    "Execute the exact scientific research request in the attached PROMPT_BODY.md. "
-    "Use the separately attached REFERENCE_FILES.md only as its read-only GitHub evidence manifest. "
-    "The author must perform one send_message_to_thread dispatch to the fixed Codex Transport task, "
-    "but must not send to Pro or operate browser, connector, or conversation state."
+    "Execute the attached PROMPT_BODY.md exactly. "
+    "It contains the complete read-only evidence manifest. "
+    "Return this node's final decision or the exact blocker."
 )
 
 
@@ -188,6 +188,40 @@ def _source_thread_id(value: object) -> str:
     return source_thread_id
 
 
+def _provider_context_reset_evidence(value: object) -> dict[str, object]:
+    if not isinstance(value, dict):
+        raise PacketInputError(
+            "provider_context_reset_evidence must be an object when reset is requested",
+            field="provider_context_reset_evidence",
+        )
+    previous_request_id = _text(value.get("previous_request_id"), "previous_request_id")
+    decision_outcome = _text(value.get("decision_outcome"), "decision_outcome")
+    if decision_outcome not in RESET_DECISION_OUTCOMES:
+        raise PacketInputError(
+            "decision_outcome must be DECISION_NOT_FORMED or BLOCKED for a context reset",
+            field="provider_context_reset_evidence.decision_outcome",
+        )
+    paths_read = value.get("repository_paths_read")
+    if isinstance(paths_read, bool) or paths_read != 0:
+        raise PacketInputError(
+            "repository_paths_read must be exactly 0 for a context reset",
+            field="provider_context_reset_evidence.repository_paths_read",
+        )
+    if value.get("provider_context_contamination_acknowledged") is not True:
+        raise PacketInputError(
+            "provider_context_contamination_acknowledged must be true for a context reset",
+            field="provider_context_reset_evidence.provider_context_contamination_acknowledged",
+        )
+    prompt_defect = _text(value.get("acknowledged_prompt_defect"), "acknowledged_prompt_defect")
+    return {
+        "previous_request_id": previous_request_id,
+        "decision_outcome": decision_outcome,
+        "repository_paths_read": 0,
+        "provider_context_contamination_acknowledged": True,
+        "acknowledged_prompt_defect": prompt_defect,
+    }
+
+
 def validate(data: dict, project_root: Path) -> dict:
     gaps = missing_input_gaps(data)
     if gaps:
@@ -241,6 +275,27 @@ def validate(data: dict, project_root: Path) -> dict:
     deliverable = _text(data.get("deliverable"), "deliverable")
     claim_ceiling = _text(data.get("claim_ceiling"), "claim_ceiling")
     requested_conversation_id = _optional_conversation_id(data.get("conversation_id"))
+    reset_invalid_provider_context = data.get("reset_invalid_provider_context", False)
+    if not isinstance(reset_invalid_provider_context, bool):
+        raise PacketInputError(
+            "reset_invalid_provider_context must be a boolean when provided",
+            field="reset_invalid_provider_context",
+        )
+    reset_evidence_value = data.get("provider_context_reset_evidence")
+    if reset_invalid_provider_context:
+        if requested_conversation_id is not None:
+            raise PacketInputError(
+                "conversation_id must be absent when reset_invalid_provider_context is true",
+                field="conversation_id",
+            )
+        provider_context_reset_evidence = _provider_context_reset_evidence(reset_evidence_value)
+    else:
+        if reset_evidence_value is not None:
+            raise PacketInputError(
+                "provider_context_reset_evidence requires reset_invalid_provider_context=true",
+                field="provider_context_reset_evidence",
+            )
+        provider_context_reset_evidence = None
     if "companion_prompt" not in data:
         companion_prompt = DEFAULT_COMPANION_PROMPT
     else:
@@ -293,6 +348,8 @@ def validate(data: dict, project_root: Path) -> dict:
         "direction_ids": direction_ids,
         "conversation_binding_key": conversation_binding_key,
         "requested_conversation_id": requested_conversation_id,
+        "reset_invalid_provider_context": reset_invalid_provider_context,
+        "provider_context_reset_evidence": provider_context_reset_evidence,
         "decision_authority": "pro_final",
         "repository": repository,
         "repository_url": repository_url,
@@ -357,7 +414,7 @@ def render(packet: dict, out_dir: Path) -> dict:
             "Missing connector, repository, ref, or path is BLOCKED_CONNECTOR_ACCESS; no fallback source is allowed.",
         ]
     )
-    (out_dir / "REFERENCE_FILES.md").write_text("\n".join(ref_lines) + "\n", encoding="utf-8", newline="\n")
+    reference_manifest = "\n".join(ref_lines)
 
     constraints = "\n".join(f"- {x}" for x in packet["constraints"]) or "- Preserve the stated question and claim ceiling exactly."
     schema = "\n".join(f"- {x}" for x in packet["response_schema"]) or "- conclusion-first answer, evidence/provenance, uncertainty, limitations, next discriminator"
@@ -376,7 +433,7 @@ DECISION_AUTHORITY=PRO_FINAL
 You are acting as an HMASD scientific research analyst. Use the connected GitHub
 connector in read-only mode for repository `{packet['repository']}` at the exact
 `{packet['commit_or_ref']}` reference. Retrieve only the paths listed in the
-attached `REFERENCE_FILES.md` manifest and report which paths were actually read.
+`GITHUB_EVIDENCE_MANIFEST` below and report which paths were actually read.
 If the connector, repository, ref, or any listed path is unavailable, return
 `BLOCKED_CONNECTOR_ACCESS` with the exact gap. Do not use an unlisted file, a
 moving/default branch, a web mirror, a local clone, or pasted full-file substitute.
@@ -405,6 +462,9 @@ presence of code does not authorize code review, implementation, debugging, or a
 AMA (Ask Me Anything). Make only the node-specific decision above. If the evidence
 is insufficient, state the precise gap and stop at the stated claim ceiling; do
 not change the task class or silently fallback.
+
+GITHUB_EVIDENCE_MANIFEST
+{reference_manifest}
 """
     (out_dir / "PROMPT_BODY.md").write_text(body, encoding="utf-8", newline="\n")
 
@@ -422,6 +482,8 @@ not change the task class or silently fallback.
         "conversation_binding_key": packet["conversation_binding_key"],
         "requested_conversation_id": packet["requested_conversation_id"],
         "conversation_reuse_required": True,
+        "reset_invalid_provider_context": packet["reset_invalid_provider_context"],
+        "provider_context_reset_evidence": packet["provider_context_reset_evidence"],
         "decision_authority": packet["decision_authority"],
         "repository": packet["repository"],
         "repository_url": packet["repository_url"],
@@ -442,7 +504,6 @@ not change the task class or silently fallback.
         ),
         "pro_send_from_caller": False,
         "prompt_body_file": "PROMPT_BODY.md",
-        "reference_file": "REFERENCE_FILES.md",
         "transport_request": {
             "source_thread_id": packet["source_thread_id"],
             "direction_id": packet["direction_id"],
@@ -452,19 +513,20 @@ not change the task class or silently fallback.
             "conversation_binding_key": packet["conversation_binding_key"],
             "requested_conversation_id": packet["requested_conversation_id"],
             "conversation_reuse_required": True,
+            "reset_invalid_provider_context": packet["reset_invalid_provider_context"],
+            "provider_context_reset_evidence": packet["provider_context_reset_evidence"],
             "decision_authority": packet["decision_authority"],
             "prompt_path": "PROMPT_BODY.md",
-            "reference_paths": ["REFERENCE_FILES.md"],
             "companion_prompt": packet["companion_prompt"],
-            "source_mode": "body_plus_reference_attachment",
+            "source_mode": "single_body_attachment",
         },
-        "instruction": "Use PROMPT_BODY.md verbatim as the prompt and attach REFERENCE_FILES.md verbatim; preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent conversation on first use, then reuse that exact conversation ID. The fixed Transport task exclusively owns Pro/browser send, model/connector checks, conversation binding, wait, archive, cleanup, and Transport evidence.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent conversation on first use, then reuse that exact conversation ID. The fixed Transport task exclusively owns Pro/browser send, model/connector checks, conversation binding, wait, archive, cleanup, and Transport evidence.",
     }
     (out_dir / "HANDOFF.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return {
         "valid": True,
         "output_dir": str(out_dir.resolve()),
-        "files": ["PROMPT_BODY.md", "REFERENCE_FILES.md", "HANDOFF.json"],
+        "files": ["PROMPT_BODY.md", "HANDOFF.json"],
         "operator_thread": OPERATOR_THREAD,
         "operator_thread_id": OPERATOR_THREAD_ID,
         "dispatch_target_thread_id": OPERATOR_THREAD_ID,
@@ -478,6 +540,7 @@ not change the task class or silently fallback.
         "direction_ids": packet["direction_ids"],
         "conversation_binding_key": packet["conversation_binding_key"],
         "requested_conversation_id": packet["requested_conversation_id"],
+        "reset_invalid_provider_context": packet["reset_invalid_provider_context"],
         "decision_authority": packet["decision_authority"],
         "dispatch_instruction": (
             f"Call send_message_to_thread exactly once with threadId={OPERATOR_THREAD_ID} "

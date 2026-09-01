@@ -338,3 +338,41 @@ competence-first learner with an independently justified optimizer or representa
 rerun, larger budget, replacement seed, checkpoint selection, or post-result rescue. The historical
 R03 result remains a distinct support failure and supplies no competence or acquisition polarity.
 The Portfolio snapshot remains separately Root-owned and was not edited in this intake.
+
+## Prospective same-data structural competence certificate — 2026-08-31
+
+`UCOPE_STRUCTURAL_COMPETENCE_CERTIFICATE_PROSPECTIVE_FREEZE_20260831.md`
+prospectively freezes the zero-model, zero-optimizer prerequisite before any
+reference bundle, exact fit, held-out evaluation or result exists. It narrows
+two implementation suggestions in the competence-first successor intake:
+
+- same-data acceptance uses a create-once full raw bundle, phase-scoped direct
+  byte equality and full validator recomputation, not a checksum,
+  authentication or summary-value gate; and
+- the indivisible group is `(seed_slot,index)` across all eight contexts, with
+  `fold_id=(index//10)%2`. The halves preserve every action-period stratum and
+  prevent direct self-target reuse, but the global balanced-rank construction
+  couples them; no independence, iid, orthogonality or unbiased-cross-fit claim
+  is available.
+
+The fit reads only bundled odd-`K` rows through the five-term tail and
+seven-term root Bellman bases after complete training-only replay. Exact
+coefficients are create-once sealed before held-out oracle access or competence
+evaluation. Every
+one of the twenty slot/fold policies must pass exact rank, uniqueness, root
+vector, regret and tail-agreement predicates. A structural pass is only
+`STRUCTURAL_PREREQUISITE_PASS` with `admit=false` and
+`ROOT_NEW_OBJECT_DECISION_REQUIRED`; Root alone may decide whether to register
+a distinct target-frozen MLP object. No acquisition, COUNT/RAW, historical
+mechanism or lifecycle polarity follows from this prospective freeze.
+
+The final pre-result arithmetic and phase law is stricter than the initial
+draft: each floating JSON token is decoded to nearest binary64 under
+round-to-nearest/ties-to-even and then converted to an exact dyadic rational,
+with no later FP32 quantization. Before any fit artifact exists, the same
+captured bundle bytes must pass complete `1,638,400`-row canonical validation
+and deterministic replay through an oracle-, evaluation- and `K_TEST`-free
+training decoder. IMMEDIATE root targets read the historical contract field
+`tail_return`; `unshaped_return` and `immediate_return` are forbidden fit
+dependencies. The exact resource ceilings and publication headroom are frozen
+in the prospective certificate document.

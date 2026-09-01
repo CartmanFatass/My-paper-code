@@ -209,3 +209,29 @@ GitHub Pro packet under
 `send_from_author=false`; no Transport action occurred. A later response may advise a prospective
 new object but cannot repair, continue, or supply polarity for R02. Current lifecycle authority
 remains solely in `docs/research/portfolio/PORTFOLIO.md`.
+
+## Authoritative EM convergence Pro decision — 2026-08-31
+
+The first valid bound response for
+`em:degraded_incumbent_shadow_handover:convergence`, request
+`dish-em-convergence-20260831-01`, formed `PRO_FINAL_DECISION: CLOSE`. It selects closure of current
+R02 and the standalone direction, rejects `CONTINUE`, `PARK`, and present-node `RECAST`, and finds no
+presently justified successor. The controlling intake is
+`DISH_R02_EM_CONVERGENCE_PRO_INTAKE_20260831.md`.
+
+The response preserves the conditional exact-binomial construction, TEST transaction/oracle, and
+validity counterexamples as provenance. It confirms that duplicate-root output inconsistency,
+block-indexed legacy generation, branch-consumption drift, panel-adaptive repair, incomplete
+terminal coverage, result-vocabulary drift, and replay-scope inconsistency are scientific validity
+defects distinct from the ten still-absent production surfaces.
+
+Fixed-witness, replay-containment, and logical-curtailment remain unregistered research families,
+not successors. Re-entry requires a distinct pre-entropy object with a total panel-independent map,
+duplicate-root equality, semantic-coordinate common draws, complete terminal law, direct repair
+equivalence, a materially smaller exact work surface, and a declared decision-relevant claim.
+
+The response creates no COPY/SHADOW polarity and does not perform the later
+`portfolio:cross_direction` lifecycle mutation. The previous cross-direction mismatch and pre-send
+failure remain non-authoritative technical attempts. Until the Portfolio transaction is complete,
+`docs/research/portfolio/PORTFOLIO.md` remains the lifecycle authority even though its `ACTIVE` row
+predates this direction-level `CLOSE` decision.

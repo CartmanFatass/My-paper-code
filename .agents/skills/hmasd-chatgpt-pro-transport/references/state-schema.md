@@ -88,7 +88,14 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
     "prompt_file": null,
     "reference_files": [],
     "response_file": null,
-    "transport_fact_file": null
+    "transport_fact_file": null,
+    "provider_context_reset_facts": {
+      "request_id": "portfolio-frrie-r02-exact-law-20260831-01",
+      "decision_outcome": "DECISION_NOT_FORMED|BLOCKED|<actual formed outcome>",
+      "repository_paths_read": 0,
+      "provider_context_contamination_acknowledged": false,
+      "acknowledged_prompt_defect": null
+    }
   },
   "return_receipt": {
     "required": true,
@@ -128,6 +135,33 @@ already be `ARCHIVED`. Move its request/packet/archive/receipt facts into
 `request_history`, reset only request-local state, and continue with the same
 `conversation_id` and `provider_url`. A second request while the first is pending
 is `BINDING_BUSY`, not permission to create another conversation.
+
+## Contaminated provider-context reset
+
+Serial reuse is the default. A binding may leave that default only when an explicit
+`reset_invalid_provider_context=true` handoff supplies complete routing evidence and
+the active record is the immediately previous `ARCHIVED` round: its outcome is
+`DECISION_NOT_FORMED` or `BLOCKED`, `repository_paths_read` is exactly `0`, and an
+acknowledged provider-context contamination names the prompt defect. The caller
+never supplies a replacement conversation ID. Archive the actual outcome, exact
+repository-path-read count, contamination acknowledgement, and named prompt defect
+in `archive.provider_context_reset_facts` before accepting any reset. Admission
+compares every caller field to those persisted facts; missing facts or a mismatch are
+zero-mutation refusals. On admission, move the prior round to
+`request_history`, append a quarantine entry containing its provider ID, binding,
+reason, and evidence, and persist that ID in the registry-root
+`quarantined_conversations` map. Set the binding to `CONTEXT_RESET_PENDING` with
+`conversation_id=null` and `provider_url=null`; it has no active provider
+conversation during this interval.
+
+Only a new concrete webpage `/c/<uuid>` URL observed after successful send may
+replace that empty binding. Bind it with `observed_after_successful_send=true`; reject
+all old quarantined IDs for every node, every unobserved replacement, and every
+incomplete reset gate. The replacement record begins at `SEND_CONFIRMED` with
+`send_click_count=1` and durable URL/user-node/attachment send evidence, so its next
+reachable lifecycle step is generation waiting rather than another send. Reset
+metadata is routing-only and never belongs in
+`PROMPT_BODY.md`, `REFERENCE_FILES.md`, or companion UI text.
 
 ## Canonical packet and names
 

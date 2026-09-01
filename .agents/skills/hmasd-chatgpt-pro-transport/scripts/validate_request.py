@@ -19,6 +19,7 @@ from transport_contract import (  # noqa: E402
     DEFAULT_FALLBACK_THREAD_ID,
     packet_artifacts,
     validate_fallback_thread_id,
+    validate_provider_context_reset_evidence,
 )
 
 
@@ -91,6 +92,25 @@ def validate(request: dict, project_root: Path) -> dict:
         )
     ):
         raise ValueError("requested_conversation_id must be a UUID when supplied")
+    declared_source_mode = request.get("source_mode")
+    if declared_source_mode is not None and declared_source_mode not in {
+        "single_body_attachment",
+        "paste",
+        "upload",
+    }:
+        raise ValueError("source_mode must be single_body_attachment, paste, or upload when supplied")
+    reset_invalid_provider_context = request.get("reset_invalid_provider_context", False)
+    if not isinstance(reset_invalid_provider_context, bool):
+        raise ValueError("reset_invalid_provider_context must be a boolean when supplied")
+    reset_evidence_value = request.get("provider_context_reset_evidence")
+    if reset_invalid_provider_context:
+        if requested_conversation_id is not None:
+            raise ValueError("requested_conversation_id must be absent for a provider-context reset")
+        provider_context_reset_evidence = validate_provider_context_reset_evidence(reset_evidence_value)
+    else:
+        if reset_evidence_value is not None:
+            raise ValueError("provider_context_reset_evidence requires reset_invalid_provider_context=true")
+        provider_context_reset_evidence = None
     decision_authority = request.get("decision_authority")
     if workflow_node != "legacy" and decision_authority != "pro_final":
         raise ValueError("decision_authority must be pro_final for a Pro decision node")
@@ -116,6 +136,12 @@ def validate(request: dict, project_root: Path) -> dict:
         prompt_bytes = prompt_path.read_bytes()
         if not prompt_bytes:
             raise ValueError("prompt_path is empty")
+
+    if declared_source_mode == "single_body_attachment":
+        if source_mode != "upload" or prompt_path is None or prompt_path.name != "PROMPT_BODY.md":
+            raise ValueError("single_body_attachment requires exactly the sole PROMPT_BODY.md upload")
+        if "reference_paths" in request or "reference_file" in request:
+            raise ValueError("single_body_attachment must not declare reference_paths or reference_file")
 
     companion_prompt = request.get("companion_prompt")
     if companion_prompt is not None and (not isinstance(companion_prompt, str) or not companion_prompt):
@@ -184,6 +210,8 @@ def validate(request: dict, project_root: Path) -> dict:
         "conversation_binding_key": conversation_binding_key,
         "requested_conversation_id": requested_conversation_id,
         "conversation_reuse_required": bool(request.get("conversation_reuse_required", workflow_node != "legacy")),
+        "reset_invalid_provider_context": reset_invalid_provider_context,
+        "provider_context_reset_evidence": provider_context_reset_evidence,
         "decision_authority": decision_authority,
         "direction_path": str(
             (project_root / "docs" / "research" / "candidates" / direction_ids[0] / "DIRECTION.md").resolve()
@@ -192,7 +220,8 @@ def validate(request: dict, project_root: Path) -> dict:
             str((project_root / "docs" / "research" / "candidates" / value / "DIRECTION.md").resolve())
             for value in direction_ids
         ],
-        "source_mode": source_mode,
+        "source_mode": declared_source_mode or source_mode,
+        "transport_input_mode": source_mode,
         "prompt_path": str(prompt_path.resolve()) if prompt_path else None,
         "prompt_bytes": len(prompt_bytes),
         "prompt_sha256": hashlib.sha256(prompt_bytes).hexdigest(),

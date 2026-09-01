@@ -6,6 +6,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "scripts"
@@ -87,6 +89,9 @@ def _bind_args(
     direction_ids: list[str],
     conversation_id: str,
     request_id: str,
+    reset_invalid_provider_context: bool = False,
+    provider_context_reset_evidence: dict[str, object] | None = None,
+    observed_after_successful_send: bool = False,
 ) -> argparse.Namespace:
     return argparse.Namespace(
         registry=registry,
@@ -111,6 +116,31 @@ def _bind_args(
         packet_id=None,
         packet_manifest=None,
         tab_origin="agent",
+        reset_invalid_provider_context=reset_invalid_provider_context,
+        provider_context_reset_evidence=provider_context_reset_evidence,
+        observed_after_successful_send=observed_after_successful_send,
+    )
+
+
+def _reset_evidence(previous_request_id: str, **changes: object) -> dict[str, object]:
+    evidence: dict[str, object] = {
+        "previous_request_id": previous_request_id,
+        "decision_outcome": "DECISION_NOT_FORMED",
+        "repository_paths_read": 0,
+        "provider_context_contamination_acknowledged": True,
+        "acknowledged_prompt_defect": "obsolete provider-visible dispatch instruction",
+    }
+    evidence.update(changes)
+    return evidence
+
+
+def _persist_reset_facts(contract, record: dict, *, outcome: str = "DECISION_NOT_FORMED", paths_read: int = 0) -> None:
+    contract.persist_archived_provider_context_reset_facts(
+        record,
+        decision_outcome=outcome,
+        repository_paths_read=paths_read,
+        provider_context_contamination_acknowledged=True,
+        acknowledged_prompt_defect="obsolete provider-visible dispatch instruction",
     )
 
 
@@ -238,3 +268,191 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["request_id"] == "alpha-innovator-02"
     assert current["state"] == "DIRECTION_VERIFIED"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"
+
+
+def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observed_url(
+    tmp_path: Path,
+) -> None:
+    binder = _module("hmasd_transport_context_reset", "bind_conversation.py")
+    contract = _module("hmasd_transport_context_reset_contract", "transport_contract.py")
+    registry = tmp_path / "registry.json"
+    old_id = "66666666-6666-6666-6666-666666666666"
+    new_id = "77777777-7777-7777-7777-777777777777"
+    binding_key = "em:alpha:innovator"
+    first = _bind_args(
+        registry,
+        workflow_node="em_innovator",
+        binding_key=binding_key,
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id=old_id,
+        request_id="alpha-innovator-01",
+    )
+    assert binder.bind(first) == 0
+    before_reset = json.loads(registry.read_text(encoding="utf-8"))
+    before_reset["bindings"][binding_key]["state"] = "ARCHIVED"
+    _persist_reset_facts(contract, before_reset["bindings"][binding_key])
+    registry.write_text(json.dumps(before_reset), encoding="utf-8")
+    evidence = _reset_evidence("alpha-innovator-01")
+
+    prepared = binder.prepare_context_reset(
+        registry,
+        conversation_binding_key=binding_key,
+        replacement_request_id="alpha-innovator-02",
+        reset_invalid_provider_context=True,
+        provider_context_reset_evidence=evidence,
+    )
+    assert prepared["state"] == "CONTEXT_RESET_PENDING"
+    assert prepared["conversation_id"] is None
+    assert prepared["provider_url"] is None
+    assert prepared["request_history"][-1]["request_id"] == "alpha-innovator-01"
+    assert prepared["quarantined_provider_conversations"][-1]["conversation_id"] == old_id
+    pending = json.loads(registry.read_text(encoding="utf-8"))
+    assert pending["quarantined_conversations"][old_id]["conversation_binding_key"] == binding_key
+
+    unobserved = _bind_args(
+        registry,
+        workflow_node="em_innovator",
+        binding_key=binding_key,
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id=new_id,
+        request_id="alpha-innovator-02",
+        reset_invalid_provider_context=True,
+        provider_context_reset_evidence=evidence,
+    )
+    pending_bytes = registry.read_bytes()
+    assert binder.bind(unobserved) == 3
+    assert registry.read_bytes() == pending_bytes
+
+    observed = _bind_args(
+        registry,
+        workflow_node="em_innovator",
+        binding_key=binding_key,
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id=new_id,
+        request_id="alpha-innovator-02",
+        reset_invalid_provider_context=True,
+        provider_context_reset_evidence=evidence,
+        observed_after_successful_send=True,
+    )
+    assert binder.bind(observed) == 0
+    current = json.loads(registry.read_text(encoding="utf-8"))["bindings"][binding_key]
+    assert current["conversation_id"] == new_id
+    assert current["provider_url"] == f"https://chatgpt.com/c/{new_id}"
+    assert current["state"] == "SEND_CONFIRMED"
+    assert current["send_click_count"] == 1
+    assert current["send_evidence"]["post_send_replacement"] is True
+    with pytest.raises(ValueError, match="invalid transport transition"):
+        contract.validate_transition(current["state"], "SEND_ATTEMPTED")
+    assert current["last_provider_context_reset"]["quarantined_conversation_id"] == old_id
+
+    old_for_another_node = _bind_args(
+        registry,
+        workflow_node="em_convergence",
+        binding_key="em:alpha:convergence",
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id=old_id,
+        request_id="alpha-convergence-01",
+    )
+    assert binder.bind(old_for_another_node) == 3
+
+
+@pytest.mark.parametrize(
+    ("state", "flag", "evidence_changes"),
+    [
+        ("ARCHIVED", False, {}),
+        ("DIRECTION_VERIFIED", True, {}),
+        ("ARCHIVED", True, {"previous_request_id": "wrong-prior"}),
+        ("ARCHIVED", True, {"decision_outcome": "DECISION_FORMED"}),
+        ("ARCHIVED", True, {"repository_paths_read": 1}),
+        ("ARCHIVED", True, {"provider_context_contamination_acknowledged": False}),
+        ("ARCHIVED", True, {"acknowledged_prompt_defect": ""}),
+    ],
+)
+def test_every_invalid_context_reset_gate_leaves_registry_unchanged(
+    tmp_path: Path,
+    state: str,
+    flag: bool,
+    evidence_changes: dict[str, object],
+) -> None:
+    binder = _module("hmasd_transport_context_reset_gates", "bind_conversation.py")
+    contract = _module("hmasd_transport_context_reset_gates_contract", "transport_contract.py")
+    registry = tmp_path / "registry.json"
+    binding_key = "em:alpha:innovator"
+    first = _bind_args(
+        registry,
+        workflow_node="em_innovator",
+        binding_key=binding_key,
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id="88888888-8888-8888-8888-888888888888",
+        request_id="alpha-innovator-01",
+    )
+    assert binder.bind(first) == 0
+    value = json.loads(registry.read_text(encoding="utf-8"))
+    value["bindings"][binding_key]["state"] = state
+    if state == "ARCHIVED":
+        _persist_reset_facts(contract, value["bindings"][binding_key])
+    registry.write_text(json.dumps(value), encoding="utf-8")
+    before = registry.read_bytes()
+    evidence = _reset_evidence("alpha-innovator-01")
+    evidence.update(evidence_changes)
+
+    with pytest.raises(ValueError):
+        binder.prepare_context_reset(
+            registry,
+            conversation_binding_key=binding_key,
+            replacement_request_id="alpha-innovator-02",
+            reset_invalid_provider_context=flag,
+            provider_context_reset_evidence=evidence,
+        )
+
+    assert registry.read_bytes() == before
+
+
+def test_missing_or_contradicted_archived_reset_facts_refuse_without_mutation(tmp_path: Path) -> None:
+    binder = _module("hmasd_transport_archived_facts", "bind_conversation.py")
+    contract = _module("hmasd_transport_archived_facts_contract", "transport_contract.py")
+    registry = tmp_path / "registry.json"
+    binding_key = "em:alpha:innovator"
+    first = _bind_args(
+        registry,
+        workflow_node="em_innovator",
+        binding_key=binding_key,
+        direction_id="alpha",
+        direction_ids=["alpha"],
+        conversation_id="99999999-9999-9999-9999-999999999999",
+        request_id="alpha-innovator-01",
+    )
+    assert binder.bind(first) == 0
+    value = json.loads(registry.read_text(encoding="utf-8"))
+    record = value["bindings"][binding_key]
+    record["state"] = "ARCHIVED"
+    registry.write_text(json.dumps(value), encoding="utf-8")
+    evidence = _reset_evidence("alpha-innovator-01")
+    missing_before = registry.read_bytes()
+    with pytest.raises(ValueError, match="archived provider-context reset facts are missing"):
+        binder.prepare_context_reset(
+            registry,
+            conversation_binding_key=binding_key,
+            replacement_request_id="alpha-innovator-02",
+            reset_invalid_provider_context=True,
+            provider_context_reset_evidence=evidence,
+        )
+    assert registry.read_bytes() == missing_before
+
+    _persist_reset_facts(contract, record, outcome="FINAL_DIRECTION_DECISION:CLOSE", paths_read=9)
+    registry.write_text(json.dumps(value), encoding="utf-8")
+    contradicted_before = registry.read_bytes()
+    with pytest.raises(ValueError, match="caller evidence disagrees with archived decision_outcome"):
+        binder.prepare_context_reset(
+            registry,
+            conversation_binding_key=binding_key,
+            replacement_request_id="alpha-innovator-02",
+            reset_invalid_provider_context=True,
+            provider_context_reset_evidence=evidence,
+        )
+    assert registry.read_bytes() == contradicted_before

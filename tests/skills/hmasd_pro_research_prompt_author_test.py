@@ -72,13 +72,156 @@ def test_omitted_companion_prompt_uses_the_fixed_default(project_root: Path, tmp
     packet = renderer.validate(_request(), project_root)
 
     assert packet["companion_prompt"] == (
-        "Execute the exact scientific research request in the attached PROMPT_BODY.md. "
-        "Use the separately attached REFERENCE_FILES.md only as its read-only GitHub evidence manifest. "
-        "The author must perform one send_message_to_thread dispatch to the fixed Codex Transport task, "
-        "but must not send to Pro or operate browser, connector, or conversation state."
+        "Execute the attached PROMPT_BODY.md exactly. "
+        "It contains the complete read-only evidence manifest. "
+        "Return this node's final decision or the exact blocker."
     )
-    handoff = _render(renderer, _request(), project_root, tmp_path / "default")
+    out_dir = tmp_path / "default"
+    handoff = _render(renderer, _request(), project_root, out_dir)
     assert handoff["transport_request"]["companion_prompt"] == packet["companion_prompt"]
+    assert "companion_prompt" not in handoff
+    assert packet["companion_prompt"].encode() not in (out_dir / "PROMPT_BODY.md").read_bytes()
+    assert not (out_dir / "REFERENCE_FILES.md").exists()
+    assert handoff["transport_request"]["prompt_path"] == "PROMPT_BODY.md"
+    assert "reference_paths" not in handoff["transport_request"]
+    assert handoff["transport_request"]["source_mode"] == "single_body_attachment"
+    body = (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
+    assert "GITHUB_EVIDENCE_MANIFEST" in body
+    assert "docs/research/candidates/demo_direction/DIRECTION.md" in body
+    assert "purpose: direction definition" in body
+
+
+def test_default_companion_is_provider_facing_and_excludes_author_workflow_terms(
+    project_root: Path
+) -> None:
+    renderer = _renderer()
+    companion = renderer.validate(_request(), project_root)["companion_prompt"]
+
+    assert "PROMPT_BODY.md" in companion
+    assert "REFERENCE_FILES.md" not in companion
+    assert "final decision" in companion
+    assert "exact blocker" in companion
+    assert not any(
+        term in companion.lower()
+        for term in (
+            "author",
+            "send_message_to_thread",
+            "codex",
+            "transport",
+            "browser",
+            "dispatch",
+            "conversation-binding",
+            "routing",
+            "cleanup",
+            "workflow",
+        )
+    )
+
+
+def test_provider_context_reset_is_routing_only_and_default_reuse_is_unchanged(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    evidence = {
+        "previous_request_id": "req-companion-00",
+        "decision_outcome": "DECISION_NOT_FORMED",
+        "repository_paths_read": 0,
+        "provider_context_contamination_acknowledged": True,
+        "acknowledged_prompt_defect": "obsolete provider-visible author dispatch instruction",
+    }
+    default_dir = tmp_path / "default"
+    reset_dir = tmp_path / "reset"
+    default_handoff = _render(renderer, _request(), project_root, default_dir)
+    reset_handoff = _render(
+        renderer,
+        {
+            **_request(),
+            "reset_invalid_provider_context": True,
+            "provider_context_reset_evidence": evidence,
+        },
+        project_root,
+        reset_dir,
+    )
+
+    assert default_handoff["reset_invalid_provider_context"] is False
+    assert default_handoff["transport_request"]["reset_invalid_provider_context"] is False
+    assert default_handoff["conversation_reuse_required"] is True
+    assert reset_handoff["reset_invalid_provider_context"] is True
+    assert reset_handoff["transport_request"]["reset_invalid_provider_context"] is True
+    assert reset_handoff["provider_context_reset_evidence"] == evidence
+    assert reset_handoff["transport_request"]["provider_context_reset_evidence"] == evidence
+    assert (default_dir / "PROMPT_BODY.md").read_bytes() == (reset_dir / "PROMPT_BODY.md").read_bytes()
+    companion = reset_handoff["transport_request"]["companion_prompt"]
+    for text in (
+        (reset_dir / "PROMPT_BODY.md").read_text(encoding="utf-8"),
+        companion,
+    ):
+        assert "reset_invalid_provider_context" not in text
+        assert "provider_context_reset_evidence" not in text
+
+
+@pytest.mark.parametrize(
+    ("changes", "field"),
+    [
+        ({"reset_invalid_provider_context": "true"}, "reset_invalid_provider_context"),
+        ({"reset_invalid_provider_context": True}, "provider_context_reset_evidence"),
+        (
+            {
+                "reset_invalid_provider_context": True,
+                "provider_context_reset_evidence": {
+                    "previous_request_id": "prior",
+                    "decision_outcome": "DECISION_FORMED",
+                    "repository_paths_read": 0,
+                    "provider_context_contamination_acknowledged": True,
+                    "acknowledged_prompt_defect": "bad companion",
+                },
+            },
+            "provider_context_reset_evidence.decision_outcome",
+        ),
+        (
+            {
+                "reset_invalid_provider_context": True,
+                "provider_context_reset_evidence": {
+                    "previous_request_id": "prior",
+                    "decision_outcome": "BLOCKED",
+                    "repository_paths_read": 1,
+                    "provider_context_contamination_acknowledged": True,
+                    "acknowledged_prompt_defect": "bad companion",
+                },
+            },
+            "provider_context_reset_evidence.repository_paths_read",
+        ),
+    ],
+)
+def test_invalid_provider_context_reset_metadata_is_rejected(
+    project_root: Path, changes: dict[str, object], field: str
+) -> None:
+    renderer = _renderer()
+
+    with pytest.raises(renderer.PacketInputError) as exc_info:
+        renderer.validate({**_request(), **changes}, project_root)
+
+    assert exc_info.value.field == field
+
+
+def test_reset_caller_cannot_supply_a_replacement_conversation_id(project_root: Path) -> None:
+    renderer = _renderer()
+    with pytest.raises(renderer.PacketInputError, match="conversation_id"):
+        renderer.validate(
+            {
+                **_request(),
+                "conversation_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                "reset_invalid_provider_context": True,
+                "provider_context_reset_evidence": {
+                    "previous_request_id": "prior",
+                    "decision_outcome": "BLOCKED",
+                    "repository_paths_read": 0,
+                    "provider_context_contamination_acknowledged": True,
+                    "acknowledged_prompt_defect": "bad companion",
+                },
+            },
+            project_root,
+        )
 
 
 def test_non_empty_companion_prompt_is_preserved_byte_for_byte(project_root: Path) -> None:
@@ -109,19 +252,14 @@ def test_companion_override_changes_only_handoff_companion_content(
 
     default_handoff = _render(renderer, _request(), project_root, packet_dir)
     default_body = (packet_dir / "PROMPT_BODY.md").read_bytes()
-    default_reference = (packet_dir / "REFERENCE_FILES.md").read_bytes()
     override_handoff = _render(
         renderer, {**_request(), "companion_prompt": override}, project_root, packet_dir
     )
 
     override_body = (packet_dir / "PROMPT_BODY.md").read_bytes()
-    override_reference = (packet_dir / "REFERENCE_FILES.md").read_bytes()
     assert default_body == override_body
-    assert default_reference == override_reference
     assert default_handoff["transport_request"]["companion_prompt"].encode() not in default_body
-    assert default_handoff["transport_request"]["companion_prompt"].encode() not in default_reference
     assert override.encode() not in override_body
-    assert override.encode() not in override_reference
     assert default_handoff["transport_request"]["companion_prompt"] != override_handoff["transport_request"]["companion_prompt"]
     assert override_handoff["transport_request"]["companion_prompt"] == override
     default_without_companion = dict(default_handoff)
@@ -143,8 +281,11 @@ def test_author_remains_authoring_only_and_operator_gets_companion_contract(
     assert handoff["pro_send_from_caller"] is False
     assert "companion_prompt" in handoff["transport_request"]
     assert "supply the companion_prompt verbatim" in skill_text
-    assert "preserve the `PROMPT_BODY.md` and" in skill_text
-    assert "`REFERENCE_FILES.md` bytes unchanged" in skill_text
+    assert "provider-visible scientific UI text only" in skill_text
+    assert "Those instructions belong only in the author-to-Transport `HANDOFF.json`" in skill_text
+    assert "all\nrouting and execution workflow remains in `HANDOFF.json`" in skill_text
+    assert "sole provider attachment" in skill_text
+    assert "must not declare or upload a reference attachment" in skill_text
 
 
 def test_handoff_requires_one_dispatch_to_the_fixed_transport_task(
@@ -209,7 +350,6 @@ def test_source_thread_id_is_exactly_propagated_for_every_decision_node(
     assert not handoff.get("fallback_enabled", False)
     assert not handoff["transport_request"].get("fallback_enabled", False)
     assert source_thread_id not in (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
-    assert source_thread_id not in (out_dir / "REFERENCE_FILES.md").read_text(encoding="utf-8")
 
 
 def test_source_thread_id_changes_only_handoff_routing_content(
@@ -232,7 +372,6 @@ def test_source_thread_id_changes_only_handoff_routing_content(
     )
 
     assert (first_dir / "PROMPT_BODY.md").read_bytes() == (second_dir / "PROMPT_BODY.md").read_bytes()
-    assert (first_dir / "REFERENCE_FILES.md").read_bytes() == (second_dir / "REFERENCE_FILES.md").read_bytes()
     assert first["source_thread_id"] != second["source_thread_id"]
     assert first["transport_request"]["source_thread_id"] != second["transport_request"]["source_thread_id"]
 
@@ -258,7 +397,7 @@ def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separ
     skill_text = SKILL.read_text(encoding="utf-8")
 
     assert "Validate the caller input" in skill_text
-    assert "Render exactly the three files" in skill_text
+    assert "Render exactly the two files" in skill_text
     assert "`send_message_to_thread` exactly once" in skill_text
     assert "authoring task is not complete until" in skill_text
     assert "task exclusively owns Pro/browser send" in skill_text

@@ -31,13 +31,22 @@ the completion receipt. Treat it as routing metadata, never as scientific conten
 do not infer it from the provider conversation URL or from prose.
 
 An optional `reference_paths` list contains one or more absolute reference files
-(for example the authoring skill's `REFERENCE_FILES.md`). Validate and hash every
+for bounded noncanonical/legacy transport. Validate and hash every
 reference before transport. There is no strict filename or orthogonality requirement:
 the provider may normalize/display attachment names, and references may be attached
 or otherwise supplied in the page-supported form. Record the provider-visible names
 and preserve the byte hashes and intended order where the page permits. The
 one-to-one binding-key/conversation rule still applies to the body and all
 references together.
+
+For canonical Prompt Author handoffs, `PROMPT_BODY.md` is the sole scientific
+attachment: its `GITHUB_EVIDENCE_MANIFEST` already contains the read-only reference
+metadata. Such a handoff must not declare, upload, or synthesize `reference_paths`.
+`scripts/validate_request.py` recognizes `source_mode=single_body_attachment`,
+requires the sole `PROMPT_BODY.md` upload, and rejects any reference attachment
+declaration in that mode.
+Use the body bytes verbatim and retain any generic legacy reference support only for
+non-Author transport requests.
 
 The allowed decision-node bindings are exact:
 
@@ -76,6 +85,27 @@ of a timeout, stale tab, model mismatch, or uncertain click. A new mapping is bo
 only after a concrete `/c/<uuid>` URL is observed.
 Use `scripts/bind_conversation.py` for the first binding and every idempotent retry;
 it refuses a different conversation ID for an already-bound key.
+
+Normal operation reuses the same bound conversation serially. A provider-context
+reset is the sole exception and is available only when the handoff explicitly sets
+`reset_invalid_provider_context=true` with complete
+`provider_context_reset_evidence`: the immediately previous round is `ARCHIVED`,
+its final outcome is `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero
+repository paths, and acknowledged provider-context contamination is traced to a
+named prompt defect. Before reset admission, archive those actual facts in
+`archive.provider_context_reset_facts`; compare every caller field to that persisted
+record and refuse missing or mismatched facts without mutation. Do not accept a
+pending request, a caller replacement ID, or an ordinary bad answer as a reset. Before page actions, call
+`scripts/bind_conversation.py:prepare_context_reset` to atomically quarantine the
+old provider ID and leave the binding with no active provider conversation. The old
+ID is permanently unavailable to every binding. Then create no provider conversation
+by inference: only after a successful send produces a newly observed webpage
+`/c/<uuid>` URL may Transport call `bind` with
+`observed_after_successful_send=true` to bind that replacement. A reset flag and its
+evidence are routing metadata; never put them in the body, reference manifest, or
+provider-visible companion text. That replacement is persisted directly as
+`SEND_CONFIRMED` with one send click and durable send evidence; it may proceed only
+to generation waiting, never to another Send action.
 
 ## Browser and model preflight
 
@@ -123,6 +153,10 @@ hash. Upload the manifest-selected physical files in the recorded order when the
 page requires attachments. A provider filename suffix or normalization is an
 observation to record, not a reason to rewrite the packet or fail the send.
 
+For a canonical Prompt Author single-body packet, upload only `PROMPT_BODY.md`.
+The in-body `GITHUB_EVIDENCE_MANIFEST` is not a second attachment and must not be
+split back out for upload.
+
 After the verified packet is ready, click Send once. Record `SEND_ATTEMPTED`, then re-observe:
 
 - `/c/<uuid>` plus a visible exact user-message node is `SEND_CONFIRMED`;
@@ -136,6 +170,33 @@ file group and its recorded hash to be associated with the bound conversation; t
 provider-visible filename need not equal the local basename. Never retry an uncertain
 or mismatched send, never open a second conversation, and never silently alter
 whitespace, file selection, reference order, or prompt text.
+
+### Locator hit-point mismatch recovery
+
+A locator result is not, by itself, proof that its rendered hit point is clickable. The
+observed failure mode is an exact Send prompt locator with `matchCount=1`,
+`visibleCount=1`, and `disabled=false`, followed by a force-click error such as
+`No element found at point … waiting on click for selector`. Treat that combination
+as a locator coordinate offset, not as `SEND_FAILED_PRE_SEND` and not as evidence
+that a submission occurred.
+
+Before making any classification, take fresh DOM state and call
+`dom_cua.get_visible_dom()`. Select the exact visible Send prompt `node_id` from that
+fresh DOM; do not guess coordinates or reuse a stale node. A single DOM-node click is
+permitted only when all of the following are true: the URL is unchanged from the
+pre-send observation, no visible user-message node exists for the exact prompt, and
+fresh locator diagnostics still prove that this exact Send control is enabled and
+visible. This DOM-node click replaces the failed locator click; it is the one Send
+attempt and is recorded as `SEND_ATTEMPTED`.
+
+Immediately after the DOM-node click, re-verify the concrete `/c/<uuid>` URL (and the
+bound conversation when one already exists), the exact visible user-message node and
+its exact prompt text, and every expected attachment/file group and recorded hash. If
+that evidence is complete, record `SEND_CONFIRMED`. If the URL or user-node evidence
+is ambiguous at any point, record terminal `SEND_UNCERTAIN`; do not retry. If the
+post-click snapshot is unambiguously unchanged with no user node, record
+`SEND_FAILED_PRE_SEND` and stop. Never perform blind coordinate retries, a second
+DOM-node click, or any retry after `SEND_UNCERTAIN`.
 
 ## Long generation and asynchronous wake-up
 

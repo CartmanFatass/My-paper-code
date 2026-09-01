@@ -277,3 +277,21 @@ inference is a continuation, and no adapter is eligible. Direction-local recomme
 mechanism remains registered. A future complete-support proof or counterexample would be a new
 structural object, not SCDMP re-entry. Exact observations, limitations and claim ceiling are in
 `SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`.
+
+## Authoritative EM convergence closure — 2026-08-31
+
+The clean replacement output for `em:semigroup_consistent_duration_model_policy:convergence`
+formed the complete direction-local decision `FINAL_DECISION=CLOSE`. It supersedes the obsolete
+blocked `-02` / `-03` convergence intake without changing the `.3` result or claim ceiling. The
+complete-support labels `CTVD-R01-EXACT-FOUNDATION-COMPLETE-SUPPORT` and
+`FOUNDATION_BOUND_EVENT_ORDER_POINTWISE_SUPPORT_R01` denote one prospective candidate, not two.
+That candidate remains unregistered and is not registration-ready; its unresolved theorem/witness
+dichotomy therefore does not keep, park, reopen, or recast SCDMP.
+
+The consumed `.3` object has no re-entry condition. Any future structural registration would be a
+new Portfolio-authorized recast with a prospectively bound subject, support, total numerical
+semantics, complete independent checker, result-blind tractability evidence, and a named
+branch-dependent decision. The direction decision does not itself mutate cross-direction priority,
+capacity, fusion, ownership, or investment; those remain for a later `portfolio:cross_direction`
+decision. The authoritative reconciliation and unchanged claim ceiling are recorded in
+`SCDMP_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.

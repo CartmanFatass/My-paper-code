@@ -22,6 +22,7 @@ from typing import Any, Mapping, MutableMapping
 SCHEMA_VERSION = 2
 DEFAULT_FALLBACK_THREAD_ID = "01a04f5a-1c9f-7331-b1d9-249fb767362e"
 DEFAULT_FALLBACK_THREAD_URL = f"codex://threads/{DEFAULT_FALLBACK_THREAD_ID}"
+RESET_DECISION_OUTCOMES = frozenset({"DECISION_NOT_FORMED", "BLOCKED"})
 
 STATES = (
     "RECEIVED",
@@ -51,6 +52,7 @@ STATES = (
     "MONITOR_IDENTITY_MISMATCH",
     "RETURN_RECEIPT_UNCERTAIN",
     "RETURN_RECEIPT_BLOCKED",
+    "CONTEXT_RESET_PENDING",
     "BLOCKED",
 )
 
@@ -317,6 +319,104 @@ def validate_fallback_thread_id(value: str) -> str:
             f"fallback_thread_id must be {DEFAULT_FALLBACK_THREAD_ID}"
         )
     return value
+
+
+def validate_provider_context_reset_evidence(value: object) -> dict[str, object]:
+    """Validate the narrow, caller-supplied evidence needed to quarantine a binding."""
+
+    if not isinstance(value, dict):
+        raise ValueError("provider_context_reset_evidence must be an object")
+    previous_request_id = value.get("previous_request_id")
+    if not isinstance(previous_request_id, str) or not previous_request_id.strip():
+        raise ValueError("provider_context_reset_evidence.previous_request_id must be non-empty")
+    decision_outcome = value.get("decision_outcome")
+    if decision_outcome not in RESET_DECISION_OUTCOMES:
+        raise ValueError("provider_context_reset_evidence.decision_outcome must be DECISION_NOT_FORMED or BLOCKED")
+    paths_read = value.get("repository_paths_read")
+    if isinstance(paths_read, bool) or paths_read != 0:
+        raise ValueError("provider_context_reset_evidence.repository_paths_read must be exactly 0")
+    if value.get("provider_context_contamination_acknowledged") is not True:
+        raise ValueError("provider_context_contamination_acknowledged must be true")
+    prompt_defect = value.get("acknowledged_prompt_defect")
+    if not isinstance(prompt_defect, str) or not prompt_defect.strip():
+        raise ValueError("provider_context_reset_evidence.acknowledged_prompt_defect must be non-empty")
+    return {
+        "previous_request_id": previous_request_id,
+        "decision_outcome": decision_outcome,
+        "repository_paths_read": 0,
+        "provider_context_contamination_acknowledged": True,
+        "acknowledged_prompt_defect": prompt_defect,
+    }
+
+
+def archived_provider_context_reset_facts(record: Mapping[str, Any]) -> dict[str, object]:
+    """Read the immutable archive facts that, rather than caller prose, admit a reset."""
+
+    archive = record.get("archive")
+    if not isinstance(archive, Mapping):
+        raise ValueError("archived provider-context reset facts are missing")
+    facts = archive.get("provider_context_reset_facts")
+    if not isinstance(facts, Mapping):
+        raise ValueError("archived provider-context reset facts are missing")
+    request_id = facts.get("request_id")
+    if not isinstance(request_id, str) or not request_id.strip():
+        raise ValueError("archived provider-context reset facts have no request_id")
+    decision_outcome = facts.get("decision_outcome")
+    if not isinstance(decision_outcome, str) or not decision_outcome.strip():
+        raise ValueError("archived provider-context reset facts have no decision_outcome")
+    paths_read = facts.get("repository_paths_read")
+    if isinstance(paths_read, bool) or not isinstance(paths_read, int) or paths_read < 0:
+        raise ValueError("archived provider-context reset facts have invalid repository_paths_read")
+    contamination = facts.get("provider_context_contamination_acknowledged")
+    if not isinstance(contamination, bool):
+        raise ValueError("archived provider-context reset facts have invalid contamination acknowledgement")
+    prompt_defect = facts.get("acknowledged_prompt_defect")
+    if contamination and (not isinstance(prompt_defect, str) or not prompt_defect.strip()):
+        raise ValueError("archived provider-context reset facts have no acknowledged_prompt_defect")
+    return {
+        "request_id": request_id,
+        "decision_outcome": decision_outcome,
+        "repository_paths_read": paths_read,
+        "provider_context_contamination_acknowledged": contamination,
+        "acknowledged_prompt_defect": prompt_defect,
+    }
+
+
+def persist_archived_provider_context_reset_facts(
+    record: MutableMapping[str, Any],
+    *,
+    decision_outcome: str,
+    repository_paths_read: int,
+    provider_context_contamination_acknowledged: bool,
+    acknowledged_prompt_defect: str | None,
+) -> MutableMapping[str, Any]:
+    """Persist the archive observation that may later be compared for a reset."""
+
+    if str(record.get("state")) != "ARCHIVED":
+        raise ValueError("provider-context reset facts may be persisted only after ARCHIVED")
+    request_id = record.get("request_id")
+    if not isinstance(request_id, str) or not request_id.strip():
+        raise ValueError("archived record has no request_id")
+    if not isinstance(decision_outcome, str) or not decision_outcome.strip():
+        raise ValueError("decision_outcome must be non-empty")
+    if isinstance(repository_paths_read, bool) or not isinstance(repository_paths_read, int) or repository_paths_read < 0:
+        raise ValueError("repository_paths_read must be a non-negative integer")
+    if not isinstance(provider_context_contamination_acknowledged, bool):
+        raise ValueError("provider_context_contamination_acknowledged must be boolean")
+    if provider_context_contamination_acknowledged and (
+        not isinstance(acknowledged_prompt_defect, str) or not acknowledged_prompt_defect.strip()
+    ):
+        raise ValueError("acknowledged_prompt_defect is required when contamination is acknowledged")
+    archive = dict(record.get("archive") or {})
+    archive["provider_context_reset_facts"] = {
+        "request_id": request_id,
+        "decision_outcome": decision_outcome,
+        "repository_paths_read": repository_paths_read,
+        "provider_context_contamination_acknowledged": provider_context_contamination_acknowledged,
+        "acknowledged_prompt_defect": acknowledged_prompt_defect,
+    }
+    record["archive"] = archive
+    return record
 
 
 def stage_receipt(

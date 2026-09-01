@@ -108,6 +108,7 @@ inherit the completed continuation's evidence or disposition.
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_PRO_INTAKE_20260831.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_PRE_RESULT_INTERPRETER_REPAIR_20260831.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_RESULT_20260831.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_V4_PREACTIVITY_SUPPORT_GATE_INTAKE.md`
@@ -292,3 +293,35 @@ between a nontrivial material-KEEP tape set and the exact generator image, or a 
 boundary estimand motivated independently of this null. No current evidence supports a successor,
 RAW/residual polarity, final-panel read, policy result, or deployment claim. Portfolio closure
 remains Root's action.
+
+## Mandatory convergence node — 2026-08-31
+
+The authoritative complete response for
+`em:commitment_residual_triggered_options:convergence`, archived as
+`crto-em-convergence-20260831-03`, retrieved all nine manifest-listed paths and returned
+`FINAL_DIRECTION_DECISION: CLOSE`. It supersedes the earlier blocked `-02` response for this node.
+The later attempted `-04` reset did not replace it and produced no provider-visible change.
+
+The decision closes the current natural first-boundary CRTO object direction-locally. The consumed
+two-slot pilot and valid fixed-512 census supplied no material-KEEP witness; the census failed the
+all-eight two-sided support prerequisite with zero KEEP rows in every slot. The current object
+therefore has no admissible path to its registered competence or representation comparisons. Leave
+the untouched confirmation unread and register no successor now.
+
+The claim remains bounded to the consumed fixed targets and current support-dependent object. It is
+not a generator-wide impossibility theorem, witness-frequency statement, untouched-confirmation
+claim, RAW competence result, residual or representation result, optimization polarity, policy or
+MARL result, safety claim, deployment claim, or cross-direction investment decision. The
+component-valid reset-tape construction remains the strongest contradiction: it refutes host-only
+impossibility but lacks a generated address and therefore does not overturn the fixed-target nulls.
+
+Re-entry requires a prospectively registered new object supported by a non-post-result constructive
+generated witness, a source-level connection between material-KEEP tapes and the exact generator
+image, or an independently motivated new population or boundary estimand. Additional arbitrary
+addresses, a lower threshold, a changed selector, MIDDLE-row promotion, or a final-target support
+search is insufficient.
+
+This is the direction-local Pro decision. It does not itself perform the later
+`portfolio:cross_direction` lifecycle mutation, which remains a separate Root-owned authority event
+and must not be conflated with this direction's scientific ceiling or no-successor judgment. See
+`CRTO_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.

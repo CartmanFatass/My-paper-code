@@ -37,17 +37,30 @@ Require an input object with:
 - a non-empty `reference_files` list of `{path, purpose, provenance}` objects;
 - optional `conversation_id` only when the caller is prebinding an existing
   provider conversation; otherwise Transport binds the first concrete conversation;
+- optional `reset_invalid_provider_context=false`, plus
+  `provider_context_reset_evidence` only when it is explicitly `true`; this is
+  routing metadata for the exceptional contaminated-context reset, never
+  scientific content;
 - optional non-empty `companion_prompt`, preserved byte-for-byte when supplied;
 - optional `constraints`, `response_schema`, and `archive_label` supplied by the
   caller, preserved without invention. If `companion_prompt` is omitted, use the
   renderer's fixed default; an empty or whitespace-only value is invalid.
 
+The default `companion_prompt` is provider-visible scientific UI text only: it tells
+ChatGPT Pro to execute the attached `PROMPT_BODY.md` exactly; that one file contains
+the read-only evidence manifest and the node request. It returns the node's final
+decision or exact blocker. It must not carry author, Codex task, Transport,
+browser, dispatch, binding, routing, cleanup, or workflow-execution instructions.
+Those instructions belong only in the author-to-Transport `HANDOFF.json` and its
+dispatch fields. A caller-supplied non-empty companion override remains byte-for-byte
+preserved as provider-visible text.
+
 `source_thread_id` is required routing metadata for the originating Codex task.
 Validate it as the exact source-task UUID and preserve it byte-for-byte in the
 machine-readable handoff. It is never scientific content, a Pro conversation
 identity, or a caller-authority field, and must never be copied into
-`PROMPT_BODY.md` or `REFERENCE_FILES.md`. The normal path returns to this exact
-source thread; it must not rely on Transport fallback routing.
+the provider-visible `PROMPT_BODY.md`. The normal path returns to this exact source
+thread; it must not rely on Transport fallback routing.
 
 The calling Portfolio/EM owns direction scope, wording, scientific meaning,
 claim ceiling, and reference selection. Pro owns the final decision at the
@@ -67,6 +80,15 @@ The first two are independent conversations for each direction. The Portfolio
 key is one global conversation reused across all multi-direction rounds. Never
 infer a replacement key from a request ID, title, lifecycle state, or tab.
 
+Normal behavior is serial reuse of that binding's exact provider conversation. The
+only exception is an explicit `reset_invalid_provider_context=true` with complete
+evidence: the immediately previous round is archived, its outcome is
+`DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero repository paths, and its
+acknowledged cause is provider-context contamination from a named prompt defect.
+For this exception, `conversation_id` must be absent; the caller never selects a
+replacement ID. The reset metadata is written only to `HANDOFF.json` and its
+`transport_request`, never to `PROMPT_BODY.md` or the provider-visible companion.
+
 Complete validated input proceeds directly without a confirmation prompt. Read-only
 discovery is allowed only for mechanically unique facts such as checking the local
 direction registration and path shape. Never invent or normalize scientific wording,
@@ -75,14 +97,13 @@ is missing or genuinely ambiguous in a way that changes packet meaning, ask at m
 one consolidated caller question listing every known gap; do not render or dispatch
 until the caller answers.
 
-## Body + reference-file recipe
+## Single-body packet recipe
 
-Write three outputs:
+Write two provider/dispatch outputs:
 
-1. `PROMPT_BODY.md`: the exact user-facing body to send to Pro;
-2. `REFERENCE_FILES.md`: a separate manifest/attachment describing the exact
-   GitHub repository, commit/ref, direction, and allowed paths; and
-3. `HANDOFF.json`: a machine-readable handoff to the designated Transport task,
+1. `PROMPT_BODY.md`: the sole provider attachment. It contains both the exact
+   user-facing request and the read-only GitHub evidence manifest; and
+2. `HANDOFF.json`: a machine-readable handoff to the designated Transport task,
    with `pro_send_from_caller=false`.
 
 The body must contain these slots in this order:
@@ -117,9 +138,9 @@ the connector, repository, ref, or any listed path is unavailable, it must retur
 `BLOCKED_CONNECTOR_ACCESS` with the exact gap. It must not use an unlisted file,
 default branch, web mirror, local clone, or a pasted full-repository substitute.
 
-`REFERENCE_FILES.md` is a reference manifest, not a second prompt. Keep it
-separate so the transport operator can attach it without changing the body. Do
-not paste entire repository files into the body. Do not treat a filename as proof
+The `GITHUB_EVIDENCE_MANIFEST` is part of `PROMPT_BODY.md`, not a second upload.
+It describes the exact repository, pinned ref, direction scope, and allowed paths;
+do not paste entire repository files into the body. Do not treat a filename as proof
 that its contents were retrieved.
 
 ## Closed author-to-Transport sequence
@@ -128,13 +149,13 @@ that its contents were retrieved.
    unsafe, unregistered, unpinned, duplicate, or structurally incomplete input.
    Connector availability and GitHub retrieval are Transport/Pro checks, not
    author-side validation gates.
-2. Render exactly the three files `PROMPT_BODY.md`, `REFERENCE_FILES.md`, and
-   `HANDOFF.json`. The renderer records the fixed Transport UUID/URL, an
+2. Render exactly the two files `PROMPT_BODY.md` and `HANDOFF.json`. The renderer records the fixed Transport UUID/URL, an
    absolute `HANDOFF.json` path, `dispatch_required=true`, and
    `dispatch_once=true`, plus the exact workflow node, direction scope,
    conversation binding key, optional requested conversation ID, exact
    `source_thread_id`, and `decision_authority=pro_final`. Routing metadata is
-   written only to `HANDOFF.json` and its `transport_request` object.
+   written only to `HANDOFF.json` and its `transport_request` object. This includes
+   an explicit contaminated-context reset flag/evidence when the caller supplied it.
 3. Call `send_message_to_thread` exactly once with `threadId=01a05860-6919-7bd3-9b04-99f8344ed73d`
    and the minimal prompt `Execute the handoff packet at <absolute HANDOFF.json
    path> exactly once.` Use the exact path emitted by the renderer.
@@ -158,18 +179,22 @@ is the only dispatch target.
 `HANDOFF.json` identifies the source caller (`portfolio` or `em`), exact
 `source_thread_id`, workflow node, exact direction scope/request ID, durable
 conversation binding key, body path,
-reference manifest path, repository/ref, and the fixed operator target above.
-It says that the operator should use the body
-verbatim as the prompt and attach the manifest/reference file verbatim, then
-apply `hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
+repository/ref, and the fixed operator target above. It says that the operator
+should upload the body verbatim as the sole scientific packet, then apply
+`hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
 conversation binding, send evidence, long wait, archive, and tab cleanup.
 The transport request must also expose the exact `companion_prompt` (the fixed
 default when omitted by the caller). The operator must supply the companion_prompt verbatim.
+This provider-visible companion is not an author-to-Transport instruction: all
+routing and execution workflow remains in `HANDOFF.json` and its dispatch fields.
+If the handoff carries `reset_invalid_provider_context=true`, it is routing evidence
+only: the author must not supply a replacement conversation ID or alter provider
+text. Transport alone verifies the old archived round, quarantines its old provider
+ID, and binds a replacement only after a successful send yields a newly observed
+webpage `/c/<uuid>` URL.
 Do not merge routing metadata into the body or reference; preserve the `PROMPT_BODY.md` and
-`REFERENCE_FILES.md` bytes unchanged. It should expose
-`prompt_path=PROMPT_BODY.md` and `reference_paths=[REFERENCE_FILES.md]` (or the
-equivalent absolute paths after handoff) so the operator cannot mistake the
-manifest or companion for body text.
+bytes unchanged. It exposes only `prompt_path=PROMPT_BODY.md` (or the equivalent
+absolute path after handoff); it must not declare or upload a reference attachment.
 
 The author performs the single Codex task dispatch in the closed sequence but
 does not send to Pro or operate browser, connector, or conversation state. If

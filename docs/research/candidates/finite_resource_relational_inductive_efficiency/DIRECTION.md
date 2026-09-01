@@ -201,3 +201,27 @@ claim-relevant evaluation transition, not the trivial identical pre-training fir
 cheapest scientific discriminator is a finite minimax/worst-coupling calculation for a material
 row ceiling below 909. See
 `FRRIE_R02_EXACT_LAW_PRO_RESULT_INTAKE_20260831.md`.
+
+## Mandatory EM convergence final decision — 2026-08-31
+
+The complete `em_convergence` node makes the final direction-local decision `PARK`. This later
+decision supersedes the local recommendation to close the standalone label while preserving the
+decision not to execute the 916-row or 909-row sampled-return objects. FRRIE retains a coherent
+same-meaning expected-return target because the finite-executable 909-row law exists, the
+`523..908` minimax/worst-coupling interval remains open, and universal complete-return absorption
+is unresolved. It has no proportionate, production-ready active successor.
+
+The 720-row 50/50 roster-mixture IUT is not a successor: it replaces four individual-roster
+conditions with compensatory mixture means, and the accepted evidence supplies no independent
+native-utility basis for equal weighting. Staged and capped-sequential proposals do not establish
+a dependence-robust successful-branch whole-panel saving. Production remains `REPAIR_REQUIRED`;
+missing runtime evidence is not infeasibility or arm polarity, and a resource probe alone cannot
+create a scientific object.
+
+Re-entry requires either (1) a materially cheaper same-meaning Level-A law with all four roster
+conditions, level/power, total completion, architecture-selection, and preregistered maximum and
+expected cost; or (2) a universal certificate covering every root, all 512 updates, every claim-
+relevant evaluation transition, and equality through the complete native return. Production
+admission follows only after a decision-eligible Level-A object exists. No result, competence,
+contact, equality, harm, superiority, semantic, mechanism, deployment, or safety polarity is
+created. See `FRRIE_EM_CONVERGENCE_FINAL_DECISION_INTAKE_20260831.md`.

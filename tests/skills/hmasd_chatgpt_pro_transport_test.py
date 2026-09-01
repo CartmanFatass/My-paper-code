@@ -319,6 +319,60 @@ def test_validate_request_requires_the_explicit_fallback_flag() -> None:
         contract.validate_fallback_thread_id("not-the-bound-session")
 
 
+def test_validate_request_accepts_only_evidenced_provider_context_reset(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    evidence = {
+        "previous_request_id": "req-transport-00",
+        "decision_outcome": "BLOCKED",
+        "repository_paths_read": 0,
+        "provider_context_contamination_acknowledged": True,
+        "acknowledged_prompt_defect": "obsolete provider-visible instruction",
+    }
+    accepted = TRANSPORT_VALIDATE.validate(
+        {**upload_request, "reset_invalid_provider_context": True, "provider_context_reset_evidence": evidence},
+        project_root,
+    )
+    assert accepted["reset_invalid_provider_context"] is True
+    assert accepted["provider_context_reset_evidence"] == evidence
+
+    with pytest.raises(ValueError, match="requested_conversation_id"):
+        TRANSPORT_VALIDATE.validate(
+            {
+                **upload_request,
+                "requested_conversation_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                "reset_invalid_provider_context": True,
+                "provider_context_reset_evidence": evidence,
+            },
+            project_root,
+        )
+
+
+def test_validate_request_enforces_canonical_single_body_attachment(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    canonical = {
+        **upload_request,
+        "source_mode": "single_body_attachment",
+    }
+    canonical.pop("reference_paths")
+    accepted = TRANSPORT_VALIDATE.validate(canonical, project_root)
+    assert accepted["source_mode"] == "single_body_attachment"
+    assert accepted["transport_input_mode"] == "upload"
+    assert accepted["reference_files"] == []
+
+    with pytest.raises(ValueError, match="must not declare reference_paths"):
+        TRANSPORT_VALIDATE.validate(
+            {**canonical, "reference_paths": []},
+            project_root,
+        )
+    with pytest.raises(ValueError, match="must not declare reference_paths"):
+        TRANSPORT_VALIDATE.validate(
+            {**canonical, "reference_file": "REFERENCE_FILES.md"},
+            project_root,
+        )
+
+
 def test_bind_records_v2_lease_monitor_and_outbox(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     args = Namespace(
@@ -413,3 +467,37 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     assert "The target is responsible for the full lifecycle after acceptance" in outsource_text
     assert "do not dispatch the task to itself" in outsource_text
     assert "close the temporary tab\nafter recording that state" not in transport_text
+
+
+def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
+    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+
+    for phrase in (
+        "Locator hit-point mismatch recovery",
+        "matchCount=1",
+        "visibleCount=1",
+        "disabled=false",
+        "No element found at point",
+        "dom_cua.get_visible_dom()",
+        "exact visible Send prompt `node_id`",
+        "the URL is unchanged from the\npre-send observation",
+        "no visible user-message node exists for the exact prompt",
+        "enabled and\nvisible",
+        "the exact visible user-message node and\nits exact prompt text",
+        "every expected attachment/file group and recorded hash",
+        "terminal `SEND_UNCERTAIN`; do not retry",
+        "Never perform blind coordinate retries, a second\nDOM-node click, or any retry after `SEND_UNCERTAIN`.",
+    ):
+        assert phrase in transport_text
+
+    assert "Treat that combination\nas a locator coordinate offset, not as `SEND_FAILED_PRE_SEND`" in transport_text
+    assert "This DOM-node click replaces the failed locator click; it is the one Send\nattempt" in transport_text
+
+
+def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:
+    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
+
+    assert "`PROMPT_BODY.md` is the sole scientific\nattachment" in transport_text
+    assert "must not declare, upload, or synthesize `reference_paths`" in transport_text
+    assert "upload only `PROMPT_BODY.md`" in transport_text
+    assert "must not be\nsplit back out for upload" in transport_text
