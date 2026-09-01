@@ -376,3 +376,28 @@ training decoder. IMMEDIATE root targets read the historical contract field
 `tail_return`; `unshaped_return` and `immediate_return` are forbidden fit
 dependencies. The exact resource ceilings and publication headroom are frozen
 in the prospective certificate document.
+
+## Structural competence V2 technical qualification — 2026-08-31
+
+The non-result V2 qualification at committed HEAD
+`b79438edc3585ad3dd86ad3fc70308c219688f09` is complete. The create-once
+`ucope-structural-competence-reference-bundle-v2` contains 91 ordered members;
+its retained receipt and the independent `check-binding` invocation both
+report `MATCH` after canonical comparison and deterministic replay of all
+`1,638,400` training rows.
+
+The outcome-blind V2 assessment is `PERFORMANCE_READY`. It completed two
+independent exact in-memory solve passes with direct equality, while opening
+zero postfit members, serializing zero solve documents, and creating zero
+scientific outputs. Its measured envelope was `1054.5743775 s` wall,
+`1066.890625 s` CPU, `114,110,464` bytes peak RSS, five peak process threads,
+and `182,035,085` aggregate I/O bytes; one worker and zero scientific child
+processes were observed. Bundle freeze and binding-check resource ledgers also
+passed.
+
+The durable evidence map and all exact receipt paths are recorded in
+`UCOPE_STRUCTURAL_COMPETENCE_V2_QUALIFICATION_INTAKE_20260831.md`. The V1
+bundle/READY evidence remains superseded and cannot qualify V2. The fixed
+scientific result root remains absent: neither `run` nor `validate` was
+invoked, and this qualification grants no outcome authorization or scientific
+polarity. A separate explicit Root outcome slot is still required.
