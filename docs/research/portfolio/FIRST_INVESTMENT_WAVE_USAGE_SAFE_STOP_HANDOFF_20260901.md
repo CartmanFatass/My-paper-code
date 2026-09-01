@@ -23,6 +23,11 @@ Latest explicit host reading before this handoff update: the main account weekly
 `1% left`, with the same displayed reset time. Root therefore held every new result-bearing launch
 and asked all live directions to stop at file-safe boundaries before the exact 0% event.
 
+Terminal monitor reading: `STOP_USAGE_0`, main account weekly limit `0% left`, reset displayed as
+`12:08 on 7 Sep`. All direction trees have reported or been confirmed at file-safe terminal states.
+No result process or artifact writer remains active. This final handoff update and its immediate Git
+push are the only effects performed after the 0% signal.
+
 On `STOP_USAGE_0`:
 
 1. Do not spawn, dispatch, admit, launch, resume, retry, or start another test or experiment.
