@@ -19,6 +19,10 @@ First successful host reading: the account weekly limit showed `5% left`, resett
 7 Sep` as displayed by the CLI. The separate Spark 5-hour and weekly limits both showed `100% left`
 and do not override the main account-weekly stop condition.
 
+Latest explicit host reading before this handoff update: the main account weekly limit showed
+`1% left`, with the same displayed reset time. Root therefore held every new result-bearing launch
+and asked all live directions to stop at file-safe boundaries before the exact 0% event.
+
 On `STOP_USAGE_0`:
 
 1. Do not spawn, dispatch, admit, launch, resume, retry, or start another test or experiment.
@@ -35,12 +39,86 @@ At this snapshot no result-bearing process is running.
 
 ## Git and workspace boundary
 
-- Integrated and pushed baseline: `5f0e4ef4` on `origin/main`.
+- Integrated and pushed baseline: `ffd9ba8a` on `origin/main`.
 - The shared checkout is intentionally dirty with concurrent CBSC and UCOPE implementation work
   and unrelated control-plane edits. Preserve all of it.
 - The two VNFC science cards reported as modified are line-ending noise and are not part of the
   current VNFC work.
 - Never integrate the isolated VNFC R01 diagnostic worktree.
+
+## 1% pre-stop delta
+
+This section is newer than the detailed direction sections below and overrides them where the two
+conflict. It records the final DM checkpoints collected after the account reached 1%.
+
+### Integrated since the first handoff snapshot
+
+- `1ee17161` — FRRIE full512 Slice A pure production-plan gate. `104 passed, 3 actual-native
+  deselected`; reviewer `CLEAN`; no effects or launch authority.
+- `5ac4165c` — UCOPE odd-support competence audit implementation. Full owned suite `52 passed`;
+  independent focused `18 passed`; reviewer `CLEAN`; real audit count remains zero.
+- `ffd9ba8a` — VNFC R02/A0 docs-only finite-action-law freeze. No CM implementation or A0 run.
+
+### CBSC final file-safe checkpoint
+
+- No B1 run or new observation; B0 remains absolutely nonpolar.
+- The full 15-table chain is present but uncommitted and `REPAIR_REQUIRED`.
+- One HIGH remains: the consumer validator does not independently reconstruct
+  `compute_b1_mechanical` from bound raw tables, replay/checkpoint evidence, and typed audits. A
+  recomputed self-hash can therefore preserve forged mechanical/RAW-competence fields.
+- The formal performance gate also remains false because no authoritative full-formal canonical
+  payload, result-blind size projection exists.
+- Resume only with a compact mechanical-input descriptor, independent consumer recomputation, full
+  packet equality, then the non-result capacity projection, full regression, and same reviewer.
+  Do not run B1.
+
+### FRRIE final file-safe checkpoint
+
+- Slice A is clean and pushed as `1ee17161`.
+- Slice B is **not commit-ready**. Its current paths are modified `checkpoint.py` and
+  `test_checkpoint.py`, plus new `training_runner.py`, `training_shards.py`,
+  `test_training_runner_contract.py`, and `test_training_shards.py`.
+- Completed local facts: pure exact512 plan focused `10 passed`; checkpoint/resume focused
+  `14 passed, 7 deselected`; checkpoint compatibility `20 passed, 1 deselected`; latest synthetic
+  dense/sparse downgrade focused `11 passed`.
+- Missing: post-downgrade combined suite, diff check, independent review, B4 resume suffix, B5
+  kappa/parameter inventory, and authoritative full512 paired-shard validation.
+- No actual, result, resource, production root, or scientific object was created. Preserve the six
+  WIP paths and resume from review, not from launch.
+
+### SCDMP final file-safe checkpoint
+
+No state changed after the first handoff snapshot. Commit `92a3b7c2` remains the clean engineering
+baseline. A-R2 and replacement RUN remain blocked until exactly one lawful replacement-identity
+decision forms. Do not read or salvage the quarantined master/q.
+
+### UCOPE final file-safe checkpoint
+
+- The three-file read-only audit implementation is clean and pushed as `5ac4165c`.
+- `IMPLEMENTATION_READY=true`; performance remains `PILOT_ONLY` because no real audit telemetry
+  exists. The only authorized future scientific action remains the one-shot 72-checkpoint
+  odd-support versus even-heldout A/RECON audit.
+- At 1%, Root explicitly withheld the audit and its fresh 4 GiB preflight. Audit count is zero and
+  no odd score was read.
+- On resumed capacity, reverify the pushed three-file identity, run one central fresh >=4 GiB
+  admission, then the fixed three-argument CLI exactly once. Do not access older B1 roots.
+
+### VNFC final file-safe checkpoint
+
+- R01 remains closed/non-consuming and the direction remains open.
+- `ffd9ba8a` records the selected law `VNFC-R02-ORC-B64-Q52-U64-V1` and the intended 304-row A0;
+  however a late Sol/max critic returned four material freeze-closure blockers after that commit:
+  1. sigmoid/exp/log/sqrt dependency and DLL bytes are deferred to a future manifest rather than
+     closed prospectively;
+  2. `DUPLICATE_TIE` and `NEXTAFTER_STRICT` define token 0 but leave token 1–3 address cardinality
+     ambiguous;
+  3. `/CDF/<edge-index>/<probe-name>` does not freeze edge indexing, exact probe strings, or the
+     no-midpoint endpoint record rule;
+  4. the documents state 74 logical group-arm steps but do not distinguish the required 292
+     presentation-specific optimizer evaluations and records.
+- These blockers do not select a different law, but they invalidate implementation readiness.
+  CM/A0 remains unstarted. On resume, close only these four docs issues and obtain another
+  independent review before any code assignment.
 
 ## Direction summary
 
