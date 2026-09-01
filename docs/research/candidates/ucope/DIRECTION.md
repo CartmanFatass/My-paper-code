@@ -398,9 +398,10 @@ passed.
 The durable evidence map and all exact receipt paths are recorded in
 `UCOPE_STRUCTURAL_COMPETENCE_V2_QUALIFICATION_INTAKE_20260831.md`. The V1
 bundle/READY evidence remains superseded and cannot qualify V2. The fixed
-scientific result root remains absent: neither `run` nor `validate` was
-invoked, and this qualification grants no outcome authorization or scientific
-polarity. A separate explicit Root outcome slot is still required.
+scientific result root was absent at qualification time: neither `run` nor
+`validate` had been invoked, and the qualification granted no outcome
+authorization or scientific polarity. The later authorized, valid result is
+recorded below.
 
 ## Structural competence innovator decision — 2026-08-31
 
@@ -429,8 +430,8 @@ pass keeps `admit=false` and requires `ROOT_NEW_OBJECT_DECISION_REQUIRED`; no br
 acquisition, COUNT/RAW, neural, seed-population, generic representation, MARL/UAV, safety,
 deployment, or automatic-successor authority.
 
-Therefore an explicit request for the unique outcome slot is now scientifically eligible, but the
-slot is not granted by this decision:
+At innovator-decision time an explicit request for the unique outcome slot was scientifically
+eligible, but the slot had not yet been granted by that decision:
 
 ```text
 OUTCOME_SLOT_REQUEST_SCIENTIFICALLY_ELIGIBLE=true
@@ -442,3 +443,46 @@ The exact run and subsequent complete-result-only validation commands, full pred
 map, and claim ceiling are retained in
 `UCOPE_STRUCTURAL_COMPETENCE_INNOVATOR_PRO_DECISION_INTAKE_20260831.md`. Root retains execution
 scheduling, and Portfolio lifecycle remains separately decided through `portfolio:cross_direction`.
+
+## Valid structural competence result — 2026-08-31
+
+Root granted the unique outcome slot for
+`UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01` against clean committed and pushed HEAD
+`cf1f52697f92ed48c3429b292e538a4fa84ede1d`. From `C:/Projects/HMASD`, the exact frozen `run` was
+invoked once with CPython 3.11.9, passed fresh physical and effective memory admission, exited `0`,
+and atomically published the complete five-file result. The exact frozen `validate` was then
+invoked once, passed its own fresh admission, independently refit and recomputed the result, and
+exited `0` with the same certificate. There was no control, incomplete branch, retry, or replacement
+attempt.
+
+The valid terminal result is:
+
+```text
+SCIENTIFIC_OBJECT_CONSUMED=true
+complete=true
+disposition=STOP_STRUCTURAL_COMPETENCE
+prerequisite_pass=false
+admit=false
+next_action=NONE
+```
+
+All twenty fold policies have full tail/root rank `5/7`, finite canonical exact coefficients,
+unique root and tail choices, strictly positive margins, exact eight-context root-vector equality,
+and maximum regret at most `1/50`. Forced-PROBE tail agreement reaches `19/20` in only `17/20`
+policies. The exact failures are slot `06` fold `1` at `3332651/6400000`, slot `08` fold `1` at
+`7827949/12800000`, and slot `09` fold `0` at `7827949/12800000`. Their exact regrets remain below
+the gate, so tail agreement alone causes the first-true `STOP_STRUCTURAL_COMPETENCE` branch.
+
+Run admission observed `17,181,069,312` physical and effective available bytes; its passed ledger
+records `450.9457940 s` wall, `457.0625 s` CPU, `109,379,584` bytes peak RSS, five threads, and
+`243,802,906` I/O bytes. Validate admission observed `17,256,742,912` bytes; its passed ledger
+records `457.4120552 s` wall, `463.234375 s` CPU, `106,848,256` bytes peak RSS, five threads, and
+`243,801,557` I/O bytes. Both used one worker and zero scientific children.
+
+The exact commands, receipts, ledgers, five-file inventory, ALL_20 table, and scientific-consumption
+boundary are recorded in `UCOPE_STRUCTURAL_COMPETENCE_VALID_RESULT_INTAKE_20260831.md`. This result
+rejects only the fixed retained-data-plus-Bellman-prior structural prerequisite. It supplies no
+acquisition, COUNT/RAW, neural/optimizer, generic representation, seed-population, MARL/UAV, safety,
+deployment, historical-mechanism, automatic-successor, or Portfolio lifecycle polarity. This exact
+object may not be rerun or rescued; a successor or lifecycle effect requires the separately governed
+convergence and Portfolio decisions.
