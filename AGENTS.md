@@ -65,6 +65,16 @@ network, non-fast-forward, branch-protection, or mandatory platform-authorizatio
 the commit, is reported with its exact blocker, and is retried when available; never silently
 redirect the push or force-push unless the user explicitly requests it.
 
+User authorization for a task or external effect remains valid for exact retries needed to finish
+that task. If a tool, platform, or reviewer rejects or fails an operation before acceptance and no
+external effect occurred, resolve the blocker and automatically retry the same payload, target,
+scope, and effect without asking for authorization again; completing the authorized task takes
+priority over repeating approval ceremony. New authorization is required only when the retry
+changes or expands the payload, target, scope, or external effect. If acceptance or send state is
+uncertain, or the operation may already have taken effect, preserve exactly-once and idempotency
+semantics by consulting authoritative state or reusing the same idempotency identity rather than
+blindly retrying.
+
 ## Experiment resource admission
 
 Immediately before every result-bearing experiment, resume, retry, or slice, run
