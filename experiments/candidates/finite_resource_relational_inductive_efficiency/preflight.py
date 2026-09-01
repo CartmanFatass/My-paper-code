@@ -48,6 +48,11 @@ _PACKAGE_DIR = Path(__file__).resolve().parent
 _FIXTURE_DIR = _PACKAGE_DIR / "fixtures"
 _FIREWALL_PACKAGE_DIR = _PACKAGE_DIR
 _REPO_ROOT = _PACKAGE_DIR.parents[2]
+# The B/EXPLORE infrastructure is a separate evidence-class package surface.
+# It must neither mutate nor be silently absorbed into the frozen C V2 source
+# inventory that this preflight directly recomputes.
+_C_ONLY_SOURCE_EXCLUSIONS = frozenset({"explore_infrastructure.py"})
+_C_ONLY_SOURCE_EXCLUSION_PREFIXES = ("b01/",)
 _FORBIDDEN_IMPORT_TOKENS = (
     "semantic_graphon_shared_policy", "sgsp", "vqfp_vnpa",
     "vqfp_frrie_action_codec", "envs.native", "action_codec",
@@ -78,6 +83,10 @@ def _actual_package_source_inventory() -> list[str]:
         and (
             path.suffix in {".py", ".cpp"}
             or (path.parent.name == "fixtures" and path.suffix == ".json")
+        )
+        and path.relative_to(_PACKAGE_DIR).as_posix() not in _C_ONLY_SOURCE_EXCLUSIONS
+        and not path.relative_to(_PACKAGE_DIR).as_posix().startswith(
+            _C_ONLY_SOURCE_EXCLUSION_PREFIXES
         )
     )
 

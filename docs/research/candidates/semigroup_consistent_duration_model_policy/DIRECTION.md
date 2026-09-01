@@ -322,3 +322,30 @@ peak measurement. Under the current evidence standard that attempt does not cons
 an unchanged outcome-blind replacement remains eligible inside SCDMP after technical repair. Its
 old numeric outcome carries no formal polarity. APFI remains a separate PARKED censored-flow
 question and is not absorbed here.
+
+## Multi-foundation reachable-state multi-`k` B object — 2026-09-01
+
+The first complete response from `em:semigroup_consistent_duration_model_policy:innovator` formed
+`FINAL_INNOVATOR_DECISION=REVISE_OBJECT`, `DECISION_FORMED=true`, with no blocker, and selected the
+executable study family `SCDMP-MF-RS-MK-ORDER-VALUE-B01`. RUN-01 is a bounded B/EXPLORE action-value
+scout, not a continuation of FCEOV `.3`: it uses two independent competent foundations, six
+result-blind first-legal-boundary state twins targeting ticks `64/160/256`, `k={7,13}`, the full
+eighteen-action catalogue with eight development tapes, and sixteen disjoint held-out tapes comparing matched,
+swapped and strongest graph-blind common actions.
+
+The fixed FCEOV actions `0/10/12` are development-rank diagnostics only. RISP, ONLGR and EBCR enter
+only through theorem/control/clock ancestry and transfer no numeric or scientific polarity. The
+exact named-run contract, learning curves, competence gates, source checkerboard, metrics, ordered
+branches, invalidity law, resources, promotion boundary and CM objective are frozen in
+`SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`. No experiment has yet run, so this
+milestone adds an executable scientific object but no order-value result.
+
+A serial clarification from the same innovator conversation formed
+`FINAL_INNOVATOR_CLARIFICATION=REVISE_SOURCE_LAW` with no blocker. RUN-01 now freezes identity
+`p_pre=(1,2,3,4)` and one pre-training draw from the admissible six-cell `q_pre` vectors
+`{001110,011100,100011,110001}`. The selected bit remains fixed through every prefix tick and source
+candidate in its cell; it is invisible to the foundation and selector. The first legal boundary is
+cloned before HR/RH, which overwrite `p,q`, followed by a zero-tick, persistent-state-inert
+`LEVEL_RELEASE`. This clarification changes the conditional six-state population and claim wording
+but adds no rollout, seed, tape, optimizer or resource workload. Exact ordering, invalidity and
+claim limits are incorporated in the B01 science card; no result has run.

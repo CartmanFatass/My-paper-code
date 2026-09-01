@@ -364,3 +364,44 @@ It is byte-identical to the independently validated full-run result (SHA-256
 `72cd3b24132e1f3cc2983e0e59512fb20b12e9c609c4a5b05e296412eb274db9`).
 The accepted result commit is the Git commit containing this index update and
 the canonical public result.
+
+## Competence-first scout R01 engineering surface
+
+Object `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01` now has an
+independent, meaning-complete implementation under
+`experiments/candidates/ucope/competence_first_scout_r01/`. It does not import,
+resume, reinterpret, or rescue the consumed contextual learner or structural
+artifacts.
+
+The frozen B1 comparison has three paired arms: `MT-XF-FLEX`, `FT-XF-FLEX`,
+and `FT-XF-BC`. It uses three fresh seeds, eight group-ancestry contexts, two
+folds, 5,120 episodes per context and seed, FP32 AdamW, 160 tail updates and
+320 root updates per arm/seed/fold, and checkpoints/evaluations at root updates
+40, 80, 160, and 320. Competence precedes conditional acquisition; COUNT/RAW
+can unlock only from the same qualifying FLEX seeds.
+
+The runner is `scripts/run_ucope_competence_first_scout_r01.py`. It provides a
+strictly result-blind `assess-run`, source/runtime-bound manifest creation, and
+fresh/resume B1 commands. Every B1 invocation performs the central 4 GiB
+admission before scientific output. Outcome-free checkpoints and resource
+journals are create-once and run-bound. Complete publication binds all 72
+checkpoints, admissions, core and publication telemetry, resource caps,
+manifest, result, ledger, and terminal receipt. Hidden publication interruption
+is permanently fail-closed for that RunBinding; it is never promoted by a later
+unmeasured invocation.
+
+Focused non-result verification is `30 passed`; the final independent review is
+`CLEAN`. No B1 launch or scientific result exists. The earlier sizing receipt at
+`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-01/assessment-receipt.json`
+is superseded by later source and telemetry-schema repairs and has no readiness
+authority. Performance disposition is `REPAIR_REQUIRED / NEEDS_FRESH_SIZING`
+until the integrated source is committed and one fresh A/RECON receipt binds
+those exact bytes. Only a resulting `PERFORMANCE_READY` assessment may create
+the B1 manifest.
+
+Current locators:
+
+- `experiments/candidates/ucope/competence_first_scout_r01/`
+- `scripts/run_ucope_competence_first_scout_r01.py`
+- `tests/experiments/candidates/ucope/competence_first_scout_r01/`
+- `docs/research/candidates/ucope/IMPLEMENTATION_THRESHOLD.md`

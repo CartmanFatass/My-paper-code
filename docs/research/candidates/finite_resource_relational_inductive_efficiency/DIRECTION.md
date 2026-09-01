@@ -253,3 +253,28 @@ FRRIE accepts these legacy sources without result-polarity transfer:
 An allocation-capable ABI is a new FRRIE revision or successor, not VQFP re-entry. EGRCR remains a
 separate ACTIVE finite-resource credit-estimator question even though its exact pair-aware fixture
 may serve as an FRRIE control.
+
+## B01 Innovator selection — 2026-09-01
+
+The complete direction-local Innovator node selects
+`FRRIE-B01-PHY-EDGE-MATCHED-CURVES-20260901` as a new `B/EXPLORE` family. It uses the accepted
+fixed-roster `RIDGEGATE-2Z/RSCF` definitions, trains at `N={9,15}`, holds out `N={6,21}`, and
+compares byte-paired `PHY_TRUST` and containing `EDGE_FLEX` for 512 updates. The initial three
+ordered roots may extend only to two additional roots generated in the same prospective five-root
+packet. Adaptation-free 256-episode cells are observed at updates `{0,32,64,128,256,512}` under
+`INTACT` and `SEMANTIC_COLUMN_ROTATE`, with `UNIFORM_LEGAL` seen-roster competence, projection
+contact, raw-value, complete learning-curve, work, and resource observations.
+
+The claim ceiling is a preliminary finite-budget tight-versus-containing projection/optimizer-
+package signal or counterexample on the literal three- or five-seed panel. B01 has no
+superpopulation, stable-superiority, semantic, generic MARL, arbitrary-`N`, churn, UAV, deployment,
+or safety claim. It has a new experiment/schema/output namespace and cannot unlock or reinterpret
+R01, R02, or their result maps. No B01 result activity has occurred. Exact specification and Pro
+provenance are in `FRRIE_B01_INNOVATOR_DECISION_INTAKE_20260901.md`.
+
+The independent B01 contract/checkpoint/TEST-smoke infrastructure is engineering-accepted at this
+milestone: B01 tests are `38 passed, 1 skipped`, and the full FRRIE regression is `200 passed,
+2 skipped`. Production remains `REPAIR_REQUIRED` because actual package-native scalar/batch and
+1/2/4-worker evidence, end-to-end telemetry, and exact complete-panel inventories are absent; see
+`FRRIE_B01_CM_ENGINEERING_MILESTONE_20260901.md`. This engineering state does not change the
+Innovator selection or create a B01 scientific result.

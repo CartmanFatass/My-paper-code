@@ -1,8 +1,8 @@
 # Direction ucope: UCOPE
 
 This is the durable direction-science authority for UCOPE. It records the
-accepted interpretation and provenance of consumed UCOPE objects and the
-current direction-level Pro conclusion.
+accepted interpretation and provenance of consumed UCOPE objects, the current
+selected B study family, and the bounded Pro conclusions that govern them.
 
 ## Authority
 
@@ -12,6 +12,8 @@ current direction-level Pro conclusion.
   `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`
 - Latest consumed science object:
   `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
+- Current selected B study family:
+  `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`
 - Science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Science-card canonical-LF object digest:
@@ -33,7 +35,35 @@ count. The direct-service alternative remains separated by the frozen
 
 ## Current position
 
-The complete persistent `em:ucope:convergence` Pro node has formed the final direction decision:
+The complete persistent `em:ucope:innovator` round
+`ucope-em-innovator-20260901-03` selects the current science object:
+
+```text
+FINAL_INNOVATOR_DECISION=SELECT_OBJECT
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+SELECTED_OBJECT_ID=UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01
+EVIDENCE_CLASS=B/EXPLORE
+```
+
+This is a fresh, adaptive, competence-first three-arm family on new paired data:
+`MT-XF-FLEX`, `FT-XF-FLEX`, and `FT-XF-BC`. It first tests the moving-versus-frozen
+cross-fitted target package at fixed FLEX class, then the FLEX-versus-low-dimensional
+Bellman-complete learner package under fixed targets. It evaluates endogenous paid acquisition only
+for competent seed/fold policies. B1 uses three fresh seeds, two group-disjoint folds, `5,120`
+episodes per context and seed, `160` tail plus `320` root updates per arm/seed/fold policy, and exact
+enumeration plus paired sampled evaluation at four checkpoints.
+
+COUNT/RAW remains locked unless a FLEX arm passes both `B_COMPETENT` and
+`B_ACQUISITION_POSITIVE` in the same named run and qualifying seeds. BC-only success cannot unlock
+it. Neither consumed object may supply data, initialization, targets, tuning, seed/fold selection,
+or causal controls; both remain provenance only. The exact arms, clocks, parity, gates, result map,
+resource/telemetry/publication tickets, and CM objective are frozen in
+`UCOPE_B_EXPLORE_MT_XF_BC_COMPETENCE_FIRST_SCOUT_R01_INNOVATOR_INTAKE_20260901.md`.
+
+The earlier complete `em:ucope:convergence` response remains final for the consumed structural
+object and the direction state that existed before the later Portfolio reinvestment:
 
 ```text
 FINAL_DIRECTION_DECISION=PARK
@@ -45,12 +75,12 @@ SUCCESSOR_REGISTRATION_JUDGMENT=NOT_JUSTIFIED
 PRESENTLY_JUSTIFIED_SUCCESSOR=NONE
 ```
 
-The smallest supported conclusion is that the frozen five-term-tail/seven-term-root Bellman prior
-is not uniformly structurally competent on the exact retained UCOPE panel. The broader acquisition
-question remains potentially open, but no admissible successor or justified active resource path
-currently exists. This direction-level `PARK` conclusion does not itself mutate the lifecycle,
-priority, or capacity recorded in the Portfolio; that requires a later `portfolio:cross_direction`
-decision and Root integration.
+That decision established that the frozen five-term-tail/seven-term-root Bellman prior was not
+uniformly structurally competent and that no successor was justified from that evidence alone. It
+left later lifecycle and reinvestment to `portfolio:cross_direction`. The later Portfolio decision
+made UCOPE `ACTIVE/HIGH` under the empirical B standard, and the new Innovator round selected a
+genuinely fresh object rather than relaxing or rescuing the consumed objects. No result for the new
+family has yet been observed.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
 

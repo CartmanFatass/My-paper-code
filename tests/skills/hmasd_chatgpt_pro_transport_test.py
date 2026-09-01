@@ -445,6 +445,89 @@ def test_bind_persists_explicit_fallback_binding(tmp_path: Path) -> None:
     assert record["return_receipt"]["fallback_enabled"] is True
 
 
+def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
+    conversation_id = "6a95b06d-0104-83e8-9493-f59f26b61c82"
+    return Namespace(
+        registry=tmp_path / "registry.json",
+        direction_id="demo_direction",
+        direction_ids_json=json.dumps(["demo_direction"]),
+        workflow_node="em_innovator",
+        conversation_binding_key="em:demo_direction:innovator",
+        decision_authority="pro_final",
+        conversation_id=conversation_id,
+        provider_url=f"https://chatgpt.com/c/{conversation_id}",
+        tab_id="17",
+        request_id=request_id,
+        visible_model="Pro",
+        underlying_model="GPT-5.6 Sol",
+        thinking_effort="5/5",
+        source_mode="upload",
+        prompt_sha256="a" * 64,
+        reference_files_json="[]",
+        source_thread_id="01a04f5a-1c9f-7331-b1d9-249fb767362e",
+        fallback_enabled=False,
+        fallback_thread_id=None,
+        packet_id=None,
+        packet_manifest=None,
+        tab_origin="agent",
+    )
+
+
+def test_archived_direction_mirror_releases_stale_binding_for_next_serial_round(
+    tmp_path: Path,
+) -> None:
+    first = _em_bind_args(tmp_path, "req-01")
+    assert BIND.bind(first) == 0
+    registry = json.loads(first.registry.read_text(encoding="utf-8"))
+    key = first.conversation_binding_key
+
+    # Model an older completion writer that durably archived the historical
+    # direction mirror but failed before replacing the duplicated binding copy.
+    archived = registry["directions"][first.direction_id]
+    archived.update(
+        {
+            "state": "ARCHIVED",
+            "archive": {"response_file": "response.md", "transport_fact_file": "facts.json"},
+            "timestamps": {"archived_at": "2026-09-01T00:00:00Z"},
+        }
+    )
+    registry["bindings"][key]["state"] = "WAITING_GENERATION"
+    first.registry.write_text(json.dumps(registry), encoding="utf-8")
+
+    second = _em_bind_args(tmp_path, "req-02")
+    assert BIND.bind(second) == 0
+
+    repaired = json.loads(second.registry.read_text(encoding="utf-8"))["bindings"][key]
+    assert repaired["conversation_id"] == first.conversation_id
+    assert repaired["provider_url"] == first.provider_url
+    assert repaired["request_id"] == "req-02"
+    assert repaired["state"] == "DIRECTION_VERIFIED"
+    assert repaired["send_click_count"] == 0
+    assert repaired["request_history"][-1]["request_id"] == "req-01"
+    assert repaired["request_history"][-1]["state"] == "ARCHIVED"
+
+
+def test_nonterminal_binding_still_blocks_distinct_serial_request(tmp_path: Path) -> None:
+    first = _em_bind_args(tmp_path, "req-01")
+    assert BIND.bind(first) == 0
+    before = first.registry.read_bytes()
+
+    second = _em_bind_args(tmp_path, "req-02")
+    assert BIND.bind(second) == 4
+    assert first.registry.read_bytes() == before
+
+
+def test_same_request_bind_is_idempotent_after_initial_admission(tmp_path: Path) -> None:
+    request = _em_bind_args(tmp_path, "req-01")
+    assert BIND.bind(request) == 0
+    assert BIND.bind(request) == 0
+
+    record = json.loads(request.registry.read_text(encoding="utf-8"))["bindings"][request.conversation_binding_key]
+    assert record["request_id"] == "req-01"
+    assert record.get("request_history") is None
+    assert record["send_click_count"] == 1
+
+
 def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> None:
     transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
     outsource_text = OUTSOURCE_SKILL.read_text(encoding="utf-8")

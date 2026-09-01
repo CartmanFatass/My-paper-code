@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-01T09:55:33Z
+Updated at: 2026-09-01T13:14:40Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -51,3 +51,11 @@ provenance, but result polarity never transfers into an accepting direction.
 
 This order is scientific value, not a capacity or WIP limit. Independent ACTIVE A/B preparation may
 proceed in parallel.
+
+### Execution snapshot — 2026-09-01
+
+All five directions have frozen new `B/EXPLORE` objects and reached audited implementation
+thresholds without producing a new algorithm-effect observation. Their lifecycle and priority
+remain `ACTIVE/HIGH`, and the order above is unchanged. The exact engineering boundaries, negative
+claim boundaries, verification evidence, and next direction-local investments are recorded in
+`docs/research/portfolio/decisions/2026-09-01-first-investment-wave-implementation-threshold.md`.

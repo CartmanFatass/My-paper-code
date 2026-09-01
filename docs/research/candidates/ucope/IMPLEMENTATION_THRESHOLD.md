@@ -235,3 +235,33 @@ with independent justification; it cannot continue this result transaction.
 - `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/preflight/production-preflight.json`
 - `UCOPE_CONTEXTUAL_PAID_ACQUISITION_R01_BELIEF_RESULT_INTAKE_20260831.md`
 - `temp/directions/ucope/exp/ucope-contextual-paid-acquisition-r01-production/result/belief-result.json`
+
+## Competence-first scout R01 threshold
+
+The successor object is
+`UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`. Its independent
+three-arm harness, outcome-free cold resume, exact 72-checkpoint inventory,
+resource journal, two-stage publication telemetry, and terminal hash chain are
+implemented. Focused non-result tests report `30 passed`, and independent final
+review is `CLEAN`.
+
+Engineering status is `IMPLEMENTATION_READY=YES` for a fresh A/RECON sizing
+observation. Production performance status is
+`REPAIR_REQUIRED / NEEDS_FRESH_SIZING`; B1 is not yet launch-ready. The retained
+`ucope-scout-r01-assess-20260901-01` receipt is superseded because its source
+bytes and cap schema precede the final transaction repairs.
+
+After integration commits the exact candidate package and runner bytes, create
+one new result-blind sizing root:
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
+  scripts/run_ucope_competence_first_scout_r01.py assess-run `
+  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-02
+```
+
+The fresh receipt must validate, report both 4 GiB floors, complete process-tree
+RSS/CPU/I/O and separate scratch/durable high-water telemetry, retain frozen
+process/thread/Torch caps, and yield `PERFORMANCE_READY`. Only then may
+`create-b1-manifest` run. B1 itself remains unlaunched and requires its own
+fresh 4 GiB admission on every run or resume.

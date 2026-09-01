@@ -129,7 +129,13 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
 
 At the registry root, active records live under `bindings`, keyed by the exact
 `conversation_binding_key`. A legacy `directions` object may remain as historical
-transport evidence but is not consulted for the three decision-node bindings.
+transport evidence and is not normally consulted for the three decision-node
+bindings. The one repair exception is an atomically locked serial admission: when
+the binding is stale but its direction mirror is `ARCHIVED`, has a non-empty
+`timestamps.archived_at` plus an archive object, and exactly agrees on binding key,
+direction, request, conversation ID, and provider URL, the archived mirror repairs
+the binding before admission. Any missing or disagreeing fact remains
+`BINDING_BUSY`; this reconciliation never contacts the provider or creates a send.
 When a new `request_id` arrives for an existing binding, the previous request must
 already be `ARCHIVED`. Move its request/packet/archive/receipt facts into
 `request_history`, reset only request-local state, and continue with the same

@@ -204,6 +204,72 @@ def _archived_round(record: dict) -> dict:
     }
 
 
+def _archived_direction_mirror(
+    binding: dict,
+    direction_record: object,
+    *,
+    conversation_binding_key: str,
+    direction_id: str,
+) -> dict | None:
+    """Return only a provably matching durable archive mirror.
+
+    ``directions`` is normally historical evidence for decision-node bindings.
+    Older completion writers, however, can leave its archival update split from
+    the canonical ``bindings`` entry.  That mirror may repair a stale active
+    entry only when it attests the same immutable request/conversation identity
+    and contains the durable archive timestamp and facts.  Any disagreement is
+    deliberately treated as an active binding rather than as permission to
+    release or send another request.
+    """
+
+    if not isinstance(direction_record, dict) or direction_record is binding:
+        return None
+    if direction_record.get("state") != "ARCHIVED":
+        return None
+    for field, expected in (
+        ("conversation_binding_key", conversation_binding_key),
+        ("direction_id", direction_id),
+        ("request_id", binding.get("request_id")),
+        ("conversation_id", binding.get("conversation_id")),
+        ("provider_url", binding.get("provider_url")),
+    ):
+        if not expected or direction_record.get(field) != expected:
+            return None
+    archive = direction_record.get("archive")
+    timestamps = direction_record.get("timestamps")
+    if not isinstance(archive, dict) or not isinstance(timestamps, dict):
+        return None
+    if not isinstance(timestamps.get("archived_at"), str) or not timestamps["archived_at"].strip():
+        return None
+    return direction_record
+
+
+def _reconcile_archived_binding_mirror(
+    binding: dict,
+    directions: dict,
+    *,
+    conversation_binding_key: str,
+    direction_id: str,
+) -> dict:
+    """Repair a stale active binding from its matching archived mirror in memory."""
+
+    mirror = _archived_direction_mirror(
+        binding,
+        directions.get(direction_id),
+        conversation_binding_key=conversation_binding_key,
+        direction_id=direction_id,
+    )
+    if mirror is None:
+        return binding
+    reconciled = dict(mirror)
+    reconciled["binding_reconciliation"] = {
+        "kind": "archived_direction_mirror",
+        "stale_binding_state": binding.get("state"),
+        "stale_binding_updated_at": binding.get("updated_at"),
+    }
+    return reconciled
+
+
 def prepare_context_reset(
     registry_path: Path,
     *,
@@ -396,6 +462,13 @@ def bind(args: argparse.Namespace) -> int:
             )
         if old is None and args.conversation_binding_key == f"legacy:{args.direction_id}":
             old = directions.get(args.direction_id)
+        if old is not None:
+            old = _reconcile_archived_binding_mirror(
+                old,
+                directions,
+                conversation_binding_key=args.conversation_binding_key,
+                direction_id=args.direction_id,
+            )
         for other_key, other_record in bindings.items():
             if (
                 other_key != args.conversation_binding_key
@@ -567,15 +640,7 @@ def bind(args: argparse.Namespace) -> int:
                         4,
                     )
                 history = list(old.get("request_history") or [])
-                history.append(
-                    {
-                        "request_id": old.get("request_id"),
-                        "packet_id": old.get("packet_id"),
-                        "state": old.get("state"),
-                        "archive": old.get("archive"),
-                        "return_receipt": old.get("return_receipt"),
-                    }
-                )
+                history.append(_archived_round(old))
                 packet_names = packet_artifacts(
                     args.request_id,
                     args.direction_id,
