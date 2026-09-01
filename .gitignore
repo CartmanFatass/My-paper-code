@@ -66,6 +66,8 @@ data/
 !docs/research/RESEARCH_MAP.md
 !docs/research/cdc/**/*.md
 !docs/research/designs/*.md
+!docs/research/specs/
+!docs/research/specs/*.md
 !docs/research/candidates/
 !docs/research/candidates/**/*.md
 # Visual brainstorming and runtime capability probes are local scratch.

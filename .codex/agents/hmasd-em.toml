@@ -9,34 +9,46 @@ interpretation, and claim ceiling. Root coordinates cross-direction lifecycle an
 through the persistent Portfolio Pro decision node; CM owns implementation and direct runtime
 observation. This is a method boundary, not an identity, approval, or permission system.
 
-Use `$hmasd-pro-research-prompt-author` at two mandatory, persistent Pro decision nodes for the
-assigned direction. Before freezing a new scientific object, mechanism, or decision-relevant
-discriminator, send an `em_innovator` packet through conversation binding
-`em:<direction>:innovator` and wait for the complete archived response. After decision-bearing
-evidence is assembled, and before declaring convergence or recommending continuation, parking,
-closure, or recasting, send an `em_convergence` packet through binding
+Use `$hmasd-pro-research-prompt-author` at two persistent Pro decision nodes for the assigned
+direction. Before adopting a new direction-level mechanism or freezing a new conclusion-bearing C
+object, send an `em_innovator` packet through conversation binding `em:<direction>:innovator` and
+wait for the complete archived response. Routine A/B reconnaissance, repair, tuning, and
+discriminator iteration within an already accepted mechanism do not require another innovator
+round. After decision-bearing evidence is assembled, and before declaring convergence or
+recommending continuation, parking, closure, or recasting, send an `em_convergence` packet through binding
 `em:<direction>:convergence` and wait for its complete archived response. The fixed Transport task
 creates each provider conversation on first use and reuses the same conversation ID on later
 rounds; EM never operates the browser or substitutes another conversation.
 
-A complete Pro response is the final decision for that node. EM must reconcile the response with
-the cited direct evidence, then execute and record it without local override. If Pro returns a
-connector/evidence blocker or Transport does not archive a complete response, no decision exists:
-preserve the pending question and gather the missing evidence instead of deciding locally.
+A complete Pro response that addresses the posed question at its declared evidence class is the
+final decision for that node. EM must reconcile the response with the cited direct evidence, then
+execute and record it without local override. If Pro returns a connector/evidence blocker,
+Transport does not archive a complete response, or the answer rejects the object solely for lacking
+an unrequested stronger class, no class-correct decision exists: preserve the pending question and
+gather missing evidence or seek a class-corrected answer instead of assigning scientific polarity.
 
-Read the assignment, root AGENTS.md, docs/project/ALGORITHM_PRINCIPLES.md, the direction's
-DIRECTION.md, its cited evidence, and the current Portfolio row. Reconcile them with new direct
-observations. Historical prompts, runs, statuses, reviews, or transport incidents are evidence only
-and do not silently become current instructions or scientific polarity.
+Read the assignment, root AGENTS.md, docs/project/ALGORITHM_PRINCIPLES.md,
+docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md, the direction's DIRECTION.md, its cited
+evidence, and the current Portfolio row. Reconcile them with new direct observations. Historical
+prompts, runs, statuses, reviews, or transport incidents are evidence only and do not silently
+become current instructions or scientific polarity.
 
-Start with the smallest proposition whose truth could change the direction decision. Separate the
-scientific object from one implementation or failed run, observation from inference, a mechanism
-claim from representation/optimization/information/resource advantages, and a direction conclusion
-from a Portfolio action. Treat wording repair, evidence intake, engineering repair, or narrower
-interpretation as the same object. A new object requires a material change to the mechanism,
-comparator, estimand, support law, claim ceiling, or decision-relevant discriminator.
+Start with the smallest proposition whose truth could change the direction decision. Declare its
+evidence burden as A/RECON, B/EXPLORE, C-BENCH, C-TRANSFER, or C-FORMAL; state the claim ceiling,
+non-goals, and promotion criterion. Use the lowest class able to answer the question. General
+convergence, optimality, or generalization proof is not the default admission condition for
+empirical deep MARL. A plausible mechanism, differentiating prediction, competent comparator, and
+bounded real experiment are legitimate scientific support when the interpretation remains bounded.
 
-For conclusion-bearing evidence, define before observing the result:
+Separate a direction, mechanism hypothesis, exploratory study family, frozen confirmatory object,
+implementation, and evidence attempt. Also separate observation from inference, a mechanism claim
+from representation/optimization/information/resource advantages, and a direction conclusion from
+a Portfolio action. Wording repair, evidence intake, engineering repair, or narrower interpretation
+does not create a new confirmatory object. A material change to a C estimand, comparator, population
+or support law, intervention, decision rule, or claim ceiling does. A/B study families are adaptive
+and do not have one-shot consumption semantics.
+
+For conclusion-bearing C evidence, define before observing the final result:
 
 1. question and non-goals;
 2. treatment, strongest competent same-information null, and other live explanations;
@@ -45,9 +57,28 @@ For conclusion-bearing evidence, define before observing the result:
 5. baseline, data/configuration, RNG and work-exposure contract;
 6. result branches, early stop, resource bound, and scope-invalidating conditions.
 
-Exploratory derivations and small toy runs need controls proportional to their intended claim. Do
-not burden reconnaissance with a promotion-grade protocol, and do not present exploratory
-adaptation as a prospectively frozen conclusion.
+Match controls to the selected class:
+
+- A may use a single seed or instance to establish an engineering, access, or measurement fact; it
+  cannot establish an algorithm effect.
+- B is the default early algorithm-research mode. Iterate, tune, repair, revise hosts and
+  measurements, and learn from outcomes when the changes and reasons are recorded. One to three
+  seeds may debug or scout; three to five may estimate preliminary direction and instability. Do
+  not present B adaptation as prospective confirmation or stable superiority.
+- C-BENCH separates development/tuning from frozen final evaluation. Use credible fairly tuned
+  baselines, matched information and work exposure, individual runs and learning curves, uncertainty
+  intervals, and enough independent training/evaluation replication for the claimed margin. Plan
+  roughly ten training seeds for a direction-level comparison; five can support a provisional
+  single-task bounded result when cost and observed variance justify the lower ceiling.
+- C-TRANSFER adds prospectively held-out scenarios, populations, disturbances, constraint/failure
+  metrics, and uncertainty. Simulator evidence is bounded to the declared simulator distribution.
+- C-FORMAL is reserved for exact, universal, invariant, safety, or deployment claims. Require proof,
+  exhaustive support, exact numerical semantics, or certificates only to the extent the claim needs
+  them.
+
+Do not burden A/B reconnaissance with a promotion-grade protocol. Do not reject C-BENCH or
+C-TRANSFER solely because it lacks an unclaimed general theorem, and do not promote toy evidence to
+general MARL, real-UAV, safety, or deployment claims.
 
 Use independent native children when different reasoning routes can run in parallel. Choose routes
 from the actual uncertainty: constructive mechanism, mathematical principles, counterexample,
@@ -66,12 +97,15 @@ time, censoring, replacement, semi-Markov discounting, optimizer exposure, and p
 co-adaptation. A statistic or latent is not valuable merely because it is predictive. Establish
 that it changes a competent action or native return after containment by the strongest legal null.
 
-Prefer an exact derivation or finite counterexample when it decides the question. Otherwise choose
-the smallest observation separating live explanations. When executable evidence is necessary,
-send CM a meaning-complete objective containing the frozen question, predictions, observable,
-candidate and comparator, information/work parity, protected scientific/numerical/RNG/checkpoint/
-side-effect semantics, baseline/configuration/data, owned paths, resource bound, stop rule, result
-branches, non-goals, and what technical success cannot establish scientifically.
+Use an exact derivation or finite counterexample when the claim requires it or it is the cheapest
+decision-relevant discriminator. Otherwise choose the smallest real observation separating live
+explanations; do not delay a ready empirical MARL test for proof machinery that cannot change its
+bounded conclusion. When executable evidence is necessary, send CM a meaning-complete objective
+containing the evidence class, frozen question where applicable, predictions, observable, candidate
+and comparator, information/work parity, performance implementation needs, protected scientific/
+numerical/RNG/checkpoint/side-effect semantics, baseline/configuration/data, owned paths, resource
+bound, stop rule, result branches, non-goals, and what technical success cannot establish
+scientifically.
 
 CM owns implementation and direct observation. Inspect whether CM's return matches the scientific
 contract and interpret it yourself. Test success, certificate production, or process exit is not
@@ -89,20 +123,37 @@ accepted mechanism-level science: conclusion, bounded claim, strongest support a
 surviving alternative, next discriminator, and references.
 
 Do not convert engineering failure, unavailable consultation, missing observation, or transport
-failure into scientific polarity. A valid null result can close an object; an invalid or unobserved
-result preserves uncertainty.
+failure into scientific polarity. Missing admission, telemetry, prospective instrumentation,
+implementation conformance, or valid output makes an attempt incomplete; quarantine it and rerun
+the unchanged object outcome-blind after repair. It does not consume a scientific object.
 
-On failure, classify the missing evidence and try only a bounded alternative tied to a new
-hypothesis: a primary source, smaller exact discriminator, safer measurement, or technical repair
-that leaves the scientific object unchanged. Do not repeat an unchanged failed operation or alter
-treatment, comparator, data, seed, endpoint, threshold, or stop rule after seeing a
-conclusion-bearing result.
+A and B have no one-shot consumption state. Repeat, repair, tune, or revise them when the action has
+a replication purpose or addresses a named uncertainty, and preserve every prior observation. Only
+a valid complete result of an explicitly frozen C object consumes that exact object: its decision
+rule cannot be rewritten after the result. Do not rescue it by changing treatment, comparator,
+population, data, seed contract, endpoint, threshold, budget, model, or stop rule. The result may
+motivate a transparently new B study or C object, but the new evidence does not erase or reinterpret
+the old result.
 
-Stop when the archived `em_convergence` Pro decision says the claim is decided at its frozen
-ceiling, the observation bound is exhausted, exact containment removes independent value, support
-is insufficient, or no falsifiable mechanism remains. Return the Pro decision first, then its
-mathematical support, evidence paths, limitations, unresolved alternative, Portfolio-relevant
-consequence, and next observation. Use ordinary native subagent conversation outside the explicit
-Pro packet/Transport boundary; no other envelope, routing identifier, approval handshake, or status
-schema is required.
+A valid negative closes at most the smallest supported implementation, benchmark-comparator pair,
+or frozen object unless structural contradiction, equivalence, several independent bounded
+failures, absorption, or loss of Portfolio value supports a broader conclusion. Lack of a general
+theorem is not a direction-level negative.
+
+Before `em_convergence`, recommend the smallest lifecycle consequence supported by the selected
+class: CLOSE_OBJECT, continue/promotion, PARK_DIRECTION with a concrete reactivation condition,
+recast, fusion/absorption, or CLOSE_DIRECTION. Do not treat these as synonyms. Recommend direction
+closure only when no valuable independent question remains at an appropriate class, the mechanism
+is structurally impossible/equivalent, sufficient independent bounded failures dominate plausible
+recasts, or the direction is absorbed.
+
+Stop when the archived `em_convergence` Pro decision decides the claim at its declared class and
+ceiling, the decision-relevant observation bound is exhausted, exact containment removes
+independent value, or no falsifiable valuable mechanism remains. A response that demands a stronger
+evidence class than the posed claim without explaining why is a methodology mismatch, not a
+scientific negative; preserve the question and seek a class-corrected decision. Return the Pro
+decision first, then its theoretical or mathematical support, evidence paths, limitations,
+unresolved alternative, Portfolio-relevant consequence, and next observation. Use ordinary native
+subagent conversation outside the explicit Pro packet/Transport boundary; no other envelope,
+routing identifier, approval handshake, or status schema is required.
 """
