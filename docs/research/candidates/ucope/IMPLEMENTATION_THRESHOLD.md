@@ -242,12 +242,14 @@ The successor object is
 `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`. Its independent
 three-arm harness, outcome-free cold resume, exact 72-checkpoint inventory,
 resource journal, two-stage publication telemetry, and terminal hash chain are
-implemented. Focused non-result tests report `30 passed`, and independent final
+implemented. Focused non-result tests report `31 passed` (`17` runner-focused), and independent final
 review is `CLEAN`.
 
 Engineering status is `IMPLEMENTATION_READY=YES` for a fresh A/RECON sizing
-observation. Production performance status is
-`REPAIR_REQUIRED / NEEDS_FRESH_SIZING`; B1 is not yet launch-ready. The retained
+observation. The `.02` assessment was valid for its exact source and produced a
+`PERFORMANCE_READY` manifest, but the first B1 attempt exposed an RSS projection
+defect. Production performance status is again
+`REPAIR_REQUIRED / NEEDS_FRESH_SIZING`; B1 is not launch-ready. The retained
 `ucope-scout-r01-assess-20260901-01` receipt is superseded because its source
 bytes and cap schema precede the final transaction repairs.
 
@@ -257,11 +259,35 @@ one new result-blind sizing root:
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
   scripts/run_ucope_competence_first_scout_r01.py assess-run `
-  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-02
+  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-03
 ```
 
 The fresh receipt must validate, report both 4 GiB floors, complete process-tree
 RSS/CPU/I/O and separate scratch/durable high-water telemetry, retain frozen
 process/thread/Torch caps, and yield `PERFORMANCE_READY`. Only then may
-`create-b1-manifest` run. B1 itself remains unlaunched and requires its own
-fresh 4 GiB admission on every run or resume.
+`create-b1-manifest` run. No valid or completed B1 scientific result exists,
+and no fresh B1 is launch-ready until `.03` validates. The already launched
+`b1-20260901-01` is only an unrecoverable incomplete technical attempt. Every
+future run still requires its own fresh 4 GiB admission; the quarantined root
+must never be resumed.
+
+### Quarantined B1 resource refusal
+
+`temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-01` is an incomplete,
+nonconsuming engineering attempt. Both prelaunch and runner admissions passed.
+The core wrote all 72 outcome-free checkpoints, then failed closed before
+result publication because process-tree peak RSS was `455,176,192` bytes above
+the manifest cap `402,653,184` bytes. Core wall time was `122.8474525000056`
+seconds; scratch/durable peaks were `10,630,135`/`10,629,120` bytes; the peak was
+one process and 29 threads. No checkpoint science, evaluation, gate, or outcome
+was read or interpreted during this repair.
+
+The attempt is quarantined. It must not be resumed, salvaged, published, or
+rerun, and it does not consume the scientific object. The reduced sizing path
+underestimated full-load RSS because a 5/4 multiplier on its own peak did not
+represent the retained three-seed populations and CPU allocator high-water
+across the full arm sequence. Future projections therefore take the maximum of
+the fresh A/RECON peak with 5/4 headroom and this resource-only `455,176,192`-
+byte full-load floor with the same headroom, then round the cap upward to a
+64 MiB quantum. For the observed envelope this yields a `576 MiB` RSS cap,
+`603,979,776` bytes, while retaining the explicit 2 GiB readiness ceiling.

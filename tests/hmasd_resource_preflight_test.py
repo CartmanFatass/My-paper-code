@@ -2,10 +2,70 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
 from scripts import hmasd_resource_preflight as preflight
+
+
+def _long_windows_receipt_path(tmp_path: Path, *, target_length: int = 248) -> Path:
+    """Keep the destination valid while making a copied basename exceed MAX_PATH."""
+
+    receipt_name = "cbsc-omrc-b01-00-STRUCT-admission.raw-" + "a" * 64 + ".json"
+    parent = tmp_path
+    padding = target_length - len(str(parent / receipt_name)) - 1
+    if padding > 0:
+        parent /= "x" * padding
+    parent.mkdir(parents=True)
+    output = parent / receipt_name
+    assert len(str(output)) <= 250
+    return output
+
+
+def test_admit_memory_subprocess_publishes_receipt_at_long_windows_path(
+    tmp_path: Path,
+) -> None:
+    output = _long_windows_receipt_path(tmp_path)
+    script = Path("scripts/hmasd_resource_preflight.py").resolve()
+
+    completed = subprocess.run(
+        [sys.executable, str(script), "admit-memory", "--out", str(output)],
+        cwd=script.parent.parent,
+        capture_output=True,
+        text=True,
+        shell=False,
+        timeout=60,
+    )
+
+    assert completed.returncode in (0, 6), completed.stderr
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert payload["minimum_available_bytes"] == 4 * preflight.GIB
+    assert completed.returncode == (0 if payload["passed"] else 6)
+
+
+def test_admit_memory_subprocess_cleans_temp_when_long_path_publish_fails(
+    tmp_path: Path,
+) -> None:
+    output = _long_windows_receipt_path(tmp_path, target_length=246)
+    output.mkdir()
+    script = Path("scripts/hmasd_resource_preflight.py").resolve()
+
+    completed = subprocess.run(
+        [sys.executable, str(script), "admit-memory", "--out", str(output)],
+        cwd=script.parent.parent,
+        capture_output=True,
+        text=True,
+        shell=False,
+        timeout=60,
+    )
+
+    assert completed.returncode == 1
+    assert "No such file or directory" not in completed.stderr
+    assert output.is_dir()
+    assert list(output.iterdir()) == []
+    assert list(output.parent.glob("*.tmp")) == []
 
 
 def test_capture_is_observation_only_and_does_not_require_an_estimate(tmp_path: Path) -> None:

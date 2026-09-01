@@ -390,8 +390,8 @@ manifest, result, ledger, and terminal receipt. Hidden publication interruption
 is permanently fail-closed for that RunBinding; it is never promoted by a later
 unmeasured invocation.
 
-Focused non-result verification is `30 passed`; the final independent review is
-`CLEAN`. No B1 launch or scientific result exists. The earlier sizing receipt at
+Focused non-result verification is `31 passed` (`17` runner-focused); the final independent review is
+`CLEAN`. The first B1 launch did not produce a scientific result. The earlier sizing receipt at
 `temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-01/assessment-receipt.json`
 is superseded by later source and telemetry-schema repairs and has no readiness
 authority. Performance disposition is `REPAIR_REQUIRED / NEEDS_FRESH_SIZING`
@@ -405,3 +405,21 @@ Current locators:
 - `scripts/run_ucope_competence_first_scout_r01.py`
 - `tests/experiments/candidates/ucope/competence_first_scout_r01/`
 - `docs/research/candidates/ucope/IMPLEMENTATION_THRESHOLD.md`
+
+### B1-20260901-01 incomplete resource artifact
+
+Run root `temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-01` is
+quarantined as `INCOMPLETE_RESOURCE_CAP_REFUSAL`. It passed both fresh 4 GiB
+admissions and retained all 72 outcome-free checkpoints, but publication
+failed closed because core peak RSS `455,176,192` bytes exceeded the frozen
+`402,653,184`-byte cap. This is an artifact/engineering defect, not a completed
+scientific assignment: the object is unconsumed, no scientific result exists,
+and no checkpoint outcome or policy evidence may be read.
+
+Resume, salvage, publication, and rerun of that root are prohibited. The only
+next route is a fresh source-bound A/RECON at
+`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-03`, after the
+resource-only RSS calibration repair is integrated. Its projection must retain
+5/4 headroom above the greater of the new reduced assessment peak and the
+quarantined full-load RSS floor; only a fresh validated `PERFORMANCE_READY`
+receipt may create a differently named B1 manifest and output root.

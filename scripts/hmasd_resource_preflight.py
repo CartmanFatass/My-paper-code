@@ -58,7 +58,7 @@ def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
             encoding="utf-8",
             newline="\n",
             dir=path.parent,
-            prefix=f".{path.name}.",
+            prefix=".hmasd-rsrc-",
             suffix=".tmp",
             delete=False,
         ) as stream:

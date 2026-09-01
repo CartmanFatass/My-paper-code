@@ -66,6 +66,15 @@ PUBLICATION_HEADROOM_BYTES = 1 * 1024**2
 MAX_READY_WALL_SECONDS = 7_200
 MAX_READY_RSS_BYTES = 2 * 1024**3
 MAX_READY_STORAGE_BYTES = 2 * 1024**3
+# Resource-only calibration from the quarantined, incomplete B1 attempt.  No
+# checkpoint payload, evaluation, gate, or scientific outcome contributes to
+# this engineering floor.  The observed full-load process-tree peak is guarded
+# independently because reduced A/RECON cannot reproduce the retained three-
+# seed populations plus the CPU allocator high-water across all three arms.
+B1_RESOURCE_ONLY_RSS_CALIBRATION_ID = "ucope-scout-r01-b1-20260901-01"
+B1_RESOURCE_ONLY_PEAK_RSS_BYTES = 455_176_192
+RSS_HEADROOM_NUMERATOR = 5
+RSS_HEADROOM_DENOMINATOR = 4
 FORBIDDEN_MODULE_TOKENS = (
     "contextual_paid_acquisition_r01",
     "variable_k_paid_probe_r01_r03",
@@ -833,7 +842,15 @@ def _projection(core: Mapping[str, Any], resources: Mapping[str, Any]) -> dict[s
     central_wall = data_wall * 48 + policy_wall * 60
     central_cpu = data_cpu * 48 + policy_cpu * 60
     guarded_wall = central_wall * 1.5 + 60.0
-    guarded_rss = int(math.ceil(int(resources["peak_rss_bytes"]) * 1.25))
+    assess_guarded_rss = (
+        int(resources["peak_rss_bytes"]) * RSS_HEADROOM_NUMERATOR
+        + RSS_HEADROOM_DENOMINATOR - 1
+    ) // RSS_HEADROOM_DENOMINATOR
+    calibrated_b1_guarded_rss = (
+        B1_RESOURCE_ONLY_PEAK_RSS_BYTES * RSS_HEADROOM_NUMERATOR
+        + RSS_HEADROOM_DENOMINATOR - 1
+    ) // RSS_HEADROOM_DENOMINATOR
+    guarded_rss = max(assess_guarded_rss, calibrated_b1_guarded_rss)
     # Frozen-target checkpoints dominate storage: 16x rows, 2x checkpoints, 3x seeds.
     storage_scale = 96
     guarded_scratch = int(math.ceil(int(resources["scratch_peak_bytes"]) * storage_scale * 1.5))
@@ -855,13 +872,23 @@ def _projection(core: Mapping[str, Any], resources: Mapping[str, Any]) -> dict[s
     if torch_intraop <= 0 or torch_interop <= 0:
         raise RunnerRefusal("sizing receipt lacks positive frozen Torch thread counts")
     return {
-        "basis": "measured reduced three-arm A/RECON; exact work scaling with 50% wall/storage and 25% RSS guards",
+        "basis": "measured reduced three-arm A/RECON plus outcome-blind full-load RSS calibration; exact work scaling with 50% wall/storage and 5/4 RSS guards",
         "data_scale": 48,
         "policy_work_scale": 60,
         "storage_scale": storage_scale,
         "central_projected_wall_seconds": central_wall,
         "guarded_projected_wall_seconds": guarded_wall,
         "central_projected_cpu_seconds": central_cpu,
+        "assess_guarded_peak_rss_bytes": assess_guarded_rss,
+        "resource_only_b1_rss_calibration": {
+            "attempt_id": B1_RESOURCE_ONLY_RSS_CALIBRATION_ID,
+            "complete": False,
+            "scientific_object_consumed": False,
+            "observed_peak_rss_bytes": B1_RESOURCE_ONLY_PEAK_RSS_BYTES,
+            "headroom_numerator": RSS_HEADROOM_NUMERATOR,
+            "headroom_denominator": RSS_HEADROOM_DENOMINATOR,
+            "guarded_peak_rss_bytes": calibrated_b1_guarded_rss,
+        },
         "guarded_projected_peak_rss_bytes": guarded_rss,
         "guarded_projected_scratch_bytes": guarded_scratch,
         "guarded_projected_durable_bytes": guarded_durable,

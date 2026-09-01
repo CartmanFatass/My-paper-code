@@ -155,6 +155,39 @@ def test_assessment_is_source_runtime_bound_and_has_no_science_surface():
         runner.validate_assessment(tampered)
 
 
+def test_rss_projection_covers_quarantined_full_load_resource_envelope():
+    resources = _resource_record()
+    resources["peak_thread_count"] = 29
+    projection = runner._projection(_core_assessment(), resources)
+    calibration = projection["resource_only_b1_rss_calibration"]
+    observed = 455_176_192
+    required_guard = (observed * 5 + 3) // 4
+    assert calibration == {
+        "attempt_id": "ucope-scout-r01-b1-20260901-01",
+        "complete": False,
+        "scientific_object_consumed": False,
+        "observed_peak_rss_bytes": observed,
+        "headroom_numerator": 5,
+        "headroom_denominator": 4,
+        "guarded_peak_rss_bytes": required_guard,
+    }
+    assert projection["guarded_projected_peak_rss_bytes"] >= required_guard
+    assert projection["resource_cap"]["peak_rss_bytes"] == 576 * 1024**2
+    assert projection["resource_cap"]["peak_rss_bytes"] > observed
+    runner._validate_resource_cap(
+        {
+            "wall_seconds": 122.8474525000056,
+            "peak_rss_bytes": observed,
+            "scratch_peak_bytes": 10_630_135,
+            "durable_peak_bytes": 10_629_120,
+            "worker_count": 1,
+            "peak_process_count": 1,
+            "peak_thread_count": 29,
+        },
+        projection["resource_cap"],
+    )
+
+
 def test_result_commands_call_central_preflight_and_keep_namespaces_separate():
     source = runner.RUNNER_PATH.read_text(encoding="utf-8")
     body = source[source.index("def run_b1(") : source.index("def _parser(")]
