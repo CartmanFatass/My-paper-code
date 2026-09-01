@@ -390,7 +390,7 @@ manifest, result, ledger, and terminal receipt. Hidden publication interruption
 is permanently fail-closed for that RunBinding; it is never promoted by a later
 unmeasured invocation.
 
-Focused non-result verification is `31 passed` (`17` runner-focused); the final independent review is
+Focused non-result verification is `32 passed` (`17` runner-focused); the final independent review is
 `CLEAN`. The first B1 launch did not produce a scientific result. The earlier sizing receipt at
 `temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-01/assessment-receipt.json`
 is superseded by later source and telemetry-schema repairs and has no readiness
@@ -418,8 +418,27 @@ and no checkpoint outcome or policy evidence may be read.
 
 Resume, salvage, publication, and rerun of that root are prohibited. The only
 next route is a fresh source-bound A/RECON at
-`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-03`, after the
+`temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-04`, after the
 resource-only RSS calibration repair is integrated. Its projection must retain
 5/4 headroom above the greater of the new reduced assessment peak and the
 quarantined full-load RSS floor; only a fresh validated `PERFORMANCE_READY`
 receipt may create a differently named B1 manifest and output root.
+
+### B1-20260901-02 incomplete publication artifact
+
+Run root `temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-02` is
+quarantined as `INCOMPLETE_ACTIVITY_SCHEMA_REFUSAL`. Its resource caps passed
+and its outcome-free journal recorded the full 72-checkpoint cadence, but
+`RESULT_PUBLICATION` failed closed on `per-policy exact activity mismatch`.
+There is no complete result, and the attempt does not consume the scientific
+object. No checkpoint or policy/action/score/return/gate/competence/acquisition
+content was used to diagnose the defect.
+
+The cause was purely set arithmetic: A/RECON correctly excluded the
+action-dependent `sampled_evaluation_transitions` counter, while the B1 policy
+field set inherited the A set and failed to add that required B1 counter back.
+The validator therefore simultaneously prohibited and required the same field.
+The one-field B1-only schema repair preserves the A firewall and every frozen
+scientific and execution literal. The quarantined root must never be resumed,
+salvaged, published, or rerun. After Root commits the repair, only fresh
+A/RECON path `ucope-scout-r01-assess-20260901-04` may support a new manifest.

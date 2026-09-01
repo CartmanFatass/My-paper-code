@@ -3,7 +3,14 @@ from types import SimpleNamespace
 
 import pytest
 
-from experiments.candidates.ucope.competence_first_scout_r01.artifact import sanitize_assess_result, validate_assess_artifact
+from experiments.candidates.ucope.competence_first_scout_r01.artifact import (
+    ASSESS_POLICY_ACTIVITY_FIELDS,
+    POLICY_ACTIVITY_FIELDS,
+    _validate_complete_policy_activity,
+    sanitize_assess_result,
+    validate_assess_artifact,
+)
+from experiments.candidates.ucope.competence_first_scout_r01.checkpoint import expected_policy_activity
 from experiments.candidates.ucope.competence_first_scout_r01.contract import ARM_IDS, RunBinding, ScoutConfig
 from experiments.candidates.ucope.competence_first_scout_r01.evaluation import PolicyEvaluation
 from experiments.candidates.ucope.competence_first_scout_r01.gates import apply_gates
@@ -63,3 +70,52 @@ def test_assess_sanitizer_projects_out_all_learning_outcomes():
     poisoned["activity"] = dict(artifact["activity"], regret=0.0)
     with pytest.raises(ValueError):
         validate_assess_artifact(poisoned)
+
+
+def test_b1_transition_counter_is_required_but_remains_absent_from_assess_schema():
+    config = ScoutConfig.b1()
+    assert "sampled_evaluation_transitions" not in ASSESS_POLICY_ACTIVITY_FIELDS
+    assert "sampled_evaluation_transitions" in POLICY_ACTIVITY_FIELDS
+    rows = {}
+    for arm in config.arms:
+        for seed in config.seed_ids:
+            for fold in (0, 1):
+                row = expected_policy_activity(
+                    config, arm, fold, config.root_updates, config.tail_updates,
+                )
+                row.update({
+                    "root_clipping_events": 0,
+                    "tail_clipping_events": 0,
+                    "root_gradient_norm_sum": 0.0,
+                    "tail_gradient_norm_sum": 0.0,
+                    "root_gradient_norm_max": 0.0,
+                    "tail_gradient_norm_max": 0.0,
+                    "sampled_evaluation_transitions": 1,
+                })
+                assert set(row) == POLICY_ACTIVITY_FIELDS
+                rows[f"{arm}|{seed}|fold-{fold}"] = row
+    summed = (
+        "root_optimizer_updates", "tail_optimizer_updates", "root_example_exposures",
+        "tail_example_exposures", "target_refresh_events", "target_refresh_rows",
+        "target_materialization_events", "target_materialization_rows",
+        "root_clipping_events", "tail_clipping_events", "root_gradient_norm_sum",
+        "tail_gradient_norm_sum", "nonfinite_events", "exact_policy_evaluations",
+        "sampled_evaluation_episodes", "sampled_evaluation_transitions",
+    )
+    activity = {field: sum(row[field] for row in rows.values()) for field in summed}
+    activity.update({
+        "root_gradient_norm_max": 0.0,
+        "tail_gradient_norm_max": 0.0,
+        "per_policy": rows,
+    })
+    _validate_complete_policy_activity(activity, config)
+
+    missing = {key: dict(row) for key, row in rows.items()}
+    missing[next(iter(missing))].pop("sampled_evaluation_transitions")
+    with pytest.raises(ValueError, match="per-policy exact activity mismatch"):
+        _validate_complete_policy_activity({**activity, "per_policy": missing}, config)
+
+    tampered = {key: dict(row) for key, row in rows.items()}
+    tampered[next(iter(tampered))]["root_optimizer_updates"] -= 1
+    with pytest.raises(ValueError, match="per-policy exact activity mismatch"):
+        _validate_complete_policy_activity({**activity, "per_policy": tampered}, config)

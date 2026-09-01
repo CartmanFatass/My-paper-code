@@ -53,7 +53,7 @@ ASSESS_POLICY_ACTIVITY_FIELDS = (ASSESS_ACTIVITY_FIELDS - {
 }) | {"root_inventory", "tail_inventory"}
 POLICY_ACTIVITY_FIELDS = ASSESS_POLICY_ACTIVITY_FIELDS | {
     "root_clipping_events", "tail_clipping_events", "root_gradient_norm_sum", "tail_gradient_norm_sum",
-    "root_gradient_norm_max", "tail_gradient_norm_max",
+    "root_gradient_norm_max", "tail_gradient_norm_max", "sampled_evaluation_transitions",
 }
 
 

@@ -242,7 +242,7 @@ The successor object is
 `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`. Its independent
 three-arm harness, outcome-free cold resume, exact 72-checkpoint inventory,
 resource journal, two-stage publication telemetry, and terminal hash chain are
-implemented. Focused non-result tests report `31 passed` (`17` runner-focused), and independent final
+implemented. Focused non-result tests report `32 passed` (`17` runner-focused), and independent final
 review is `CLEAN`.
 
 Engineering status is `IMPLEMENTATION_READY=YES` for a fresh A/RECON sizing
@@ -259,7 +259,7 @@ one new result-blind sizing root:
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
   scripts/run_ucope_competence_first_scout_r01.py assess-run `
-  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-03
+  --output-root temp/directions/ucope/recon/ucope-scout-r01-assess-20260901-04
 ```
 
 The fresh receipt must validate, report both 4 GiB floors, complete process-tree
@@ -291,3 +291,24 @@ the fresh A/RECON peak with 5/4 headroom and this resource-only `455,176,192`-
 byte full-load floor with the same headroom, then round the cap upward to a
 64 MiB quantum. For the observed envelope this yields a `576 MiB` RSS cap,
 `603,979,776` bytes, while retaining the explicit 2 GiB readiness ceiling.
+
+### Quarantined B1 publication-schema refusal
+
+`temp/directions/ucope/exp/ucope-scout-r01-b1-20260901-02` is also an
+incomplete, nonconsuming engineering attempt. Its `.03`-bound resource contract
+passed, and the outcome-free journal reached all 72 checkpoint events. Result
+publication then failed closed with `per-policy exact activity mismatch`; no
+complete namespace or valid scientific result exists. The root is permanently
+quarantined and must not be resumed, salvaged, published, rerun, or inspected
+for policy/action/score/return/gate/competence/acquisition evidence.
+
+The exact defect was a contradictory B1 activity schema introduced when the
+action-dependent `sampled_evaluation_transitions` counter was correctly removed
+from the A/RECON surface. `POLICY_ACTIVITY_FIELDS` inherited that reduced set,
+so B1 first rejected every real per-policy row for containing the required
+counter and then immediately required the same counter to be positive. The
+repair adds the counter only to the B1 policy schema. A/RECON continues to
+exclude it; workload, arms, seeds, clocks, checkpoints, gates, precision, RNG,
+and scientific meaning are unchanged. After this source change, `.03` remains
+historical readiness evidence for its exact bytes but cannot bind a new
+manifest. The next allowed sizing root is the fresh `.04` path above.
