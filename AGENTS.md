@@ -65,6 +65,12 @@ network, non-fast-forward, branch-protection, or mandatory platform-authorizatio
 the commit, is reported with its exact blocker, and is retried when available; never silently
 redirect the push or force-push unless the user explicitly requests it.
 
+On this Windows host, every Git CLI push from Codex runs outside the default process sandbox with
+`sandbox_permissions=require_escalated`. The sandboxed Git for Windows HTTPS helper can crash with
+an application-error dialog before Git returns a diagnostic, while the identical unsandboxed
+command succeeds. Do not run a sandboxed push probe or retry; keep the ordinary Git command and
+change only its Codex execution boundary.
+
 User authorization for a task or external effect remains valid for exact retries needed to finish
 that task. If a tool, platform, or reviewer rejects or fails an operation before acceptance and no
 external effect occurred, resolve the blocker and automatically retry the same payload, target,
