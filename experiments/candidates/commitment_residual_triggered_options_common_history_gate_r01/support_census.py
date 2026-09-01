@@ -1,15 +1,13 @@
-"""Strict support-only census core for the frozen CRTO K8 target.
+"""Read-only validator and permanent tombstone for the consumed CRTO K8 census.
 
-This module deliberately has no learner, Torch, residual, checkpoint, pilot,
-production, or confirmation-result dependency.  Its only dynamic operation is
-the deterministic legacy-host bridge over the separately registered namespace.
+Importing this module does not load the tape builder, legacy host, G16 bridge,
+learner, Torch, checkpoint, pilot, or production execution surfaces.
 """
 
 from __future__ import annotations
 
 from collections import Counter
 from copy import deepcopy
-from functools import lru_cache
 import json
 import math
 import os
@@ -25,27 +23,28 @@ from .config import (
     PEAK_RSS_BYTES,
     SUPPORT_CENSUS_EPISODES_PER_SLOT,
     SUPPORT_CENSUS_CLAIM_CEILING,
+    SUPPORT_CENSUS_CONSUMED_ATTEMPT,
     SUPPORT_CENSUS_COMMIT_CPU_HEADROOM_SECONDS,
     SUPPORT_CENSUS_COMMIT_IO_READ_HEADROOM_BYTES,
     SUPPORT_CENSUS_COMMIT_IO_WRITE_HEADROOM_BYTES,
     SUPPORT_CENSUS_COMMIT_RSS_HEADROOM_BYTES,
     SUPPORT_CENSUS_COMMIT_WALL_HEADROOM_SECONDS,
     SUPPORT_CENSUS_FIRST_EPISODE,
+    SUPPORT_CENSUS_FRESH_EXECUTION_ENABLED,
     SUPPORT_CENSUS_LAUNCH_RUN_ID,
+    SUPPORT_CENSUS_LIFECYCLE,
     SUPPORT_CENSUS_MAX_PRIMITIVE_TEAM_STEPS,
     SUPPORT_CENSUS_OBJECT_ID,
     SUPPORT_CENSUS_PERFORMANCE_DISPOSITION,
     SUPPORT_CENSUS_RNG_NAMESPACE,
     SUPPORT_CENSUS_SLOTS,
+    SUPPORT_CENSUS_TERMINAL_DISPOSITION,
+    SUPPORT_CENSUS_TOMBSTONE_REASON,
+    SupportCensusConsumedError,
     WALL_SECONDS,
+    refuse_consumed_support_census,
 )
 from .contracts import ACTION_ORDER, Split
-from .host_bridge import (
-    build_balanced_tapes,
-    canonical_tape,
-    materialize_support_boundary_provenance,
-)
-from .preflight import validate_resource_receipt, validate_run_resource_receipt
 
 
 FORMAT = "CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_V1"
@@ -152,6 +151,7 @@ TAPE_ARRAY_INVENTORY = (
         "raw_byte_length": 8192,
     },
 )
+_MINIMUM_AVAILABLE_BYTES = 4 * 1024**3
 
 
 class SupportCensusError(ValueError):
@@ -173,31 +173,85 @@ def _require_keys(value: object, keys: frozenset[str], label: str) -> Mapping[st
     return value
 
 
-@lru_cache(maxsize=len(SUPPORT_CENSUS_SLOTS))
+def _validate_resource_receipt(receipt: Mapping[str, object]) -> tuple[str, ...]:
+    """Validate the persisted memory receipt without importing execution preflight."""
+
+    issues: list[str] = []
+    if receipt.get("schema_version") != 1:
+        issues.append("shared resource receipt schema_version must equal 1")
+    if receipt.get("minimum_available_bytes") != _MINIMUM_AVAILABLE_BYTES:
+        issues.append("shared resource receipt does not bind the exact 4-GiB floor")
+    for field in ("available_physical_bytes", "effective_available_bytes"):
+        value = receipt.get(field)
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or value < _MINIMUM_AVAILABLE_BYTES
+        ):
+            issues.append(f"shared resource receipt {field} is absent or below 4 GiB")
+    if receipt.get("physical_floor_pass") is not True:
+        issues.append("shared resource receipt physical floor did not pass")
+    if receipt.get("effective_floor_pass") is not True:
+        issues.append("shared resource receipt effective floor did not pass")
+    if receipt.get("passed") is not True:
+        issues.append("shared resource receipt final admission did not pass")
+    reasons = receipt.get("failure_reasons")
+    if not isinstance(reasons, list) or reasons:
+        issues.append("shared resource receipt contains missing or nonempty failure reasons")
+    return tuple(issues)
+
+
+def _validate_run_resource_receipt(receipt: Mapping[str, object]) -> tuple[str, ...]:
+    """Validate the persisted run estimate without importing execution preflight."""
+
+    issues: list[str] = []
+    expected = {
+        "workers": 1,
+        "threads_per_worker": 1,
+        "minimum_available_bytes": _MINIMUM_AVAILABLE_BYTES,
+    }
+    for field, expected_value in expected.items():
+        if receipt.get(field) != expected_value:
+            issues.append(
+                f"shared assess-run receipt {field} must equal {expected_value}"
+            )
+    estimate = receipt.get("estimate")
+    if not isinstance(estimate, Mapping):
+        issues.append("shared assess-run receipt estimate is missing")
+    else:
+        try:
+            wall = float(estimate.get("wall_seconds", -1))
+            peak = float(estimate.get("peak_memory_gib", -1))
+        except (TypeError, ValueError):
+            wall = peak = -1.0
+        if wall != 7_200.0:
+            issues.append("shared assess-run wall estimate must equal 7,200 seconds")
+        if peak != 2.0:
+            issues.append("shared assess-run peak estimate must equal 2 GiB")
+    if receipt.get("physical_floor_pass") is not True:
+        issues.append("shared assess-run physical 4-GiB floor did not pass")
+    if receipt.get("effective_floor_pass") is not True:
+        issues.append("shared assess-run effective 4-GiB floor did not pass")
+    if (
+        receipt.get("memory_floor_pass") is not True
+        or receipt.get("memory_safe") is not True
+    ):
+        issues.append("shared assess-run memory admission did not pass")
+    return tuple(issues)
+
+
 def _expected_tapes(slot: int) -> tuple[object, ...]:
-    if not _is_int(slot) or slot not in SUPPORT_CENSUS_SLOTS:
-        raise SupportCensusError("support slot is outside the fixed 0..7 target")
-    return build_balanced_tapes(
-        replicate=slot,
-        split=Split.EVALUATION,
-        regime="K8",
-        count=SUPPORT_CENSUS_EPISODES_PER_SLOT,
-        first_episode_index=SUPPORT_CENSUS_FIRST_EPISODE,
-        rng_namespace=SUPPORT_CENSUS_RNG_NAMESPACE,
-    )
+    refuse_consumed_support_census()
 
 
 def _expected_tape(slot: int, episode_index: int) -> object:
-    offset = episode_index - SUPPORT_CENSUS_FIRST_EPISODE
-    if not 0 <= offset < SUPPORT_CENSUS_EPISODES_PER_SLOT:
-        raise SupportCensusError("episode index is outside the fixed 832..895 target")
-    return _expected_tapes(slot)[offset]
+    refuse_consumed_support_census()
 
 
 def registered_support_tapes(slot: int) -> tuple[object, ...]:
     """Return the create-once registered tape tuple used by execution and validation."""
 
-    return _expected_tapes(slot)
+    refuse_consumed_support_census()
 
 
 def _observed_tape_array_inventory(tape: object) -> list[dict[str, object]]:
@@ -301,35 +355,7 @@ def materialize_support_observation(
 ) -> dict[str, object]:
     """Materialize one always-present member of the exact fixed census target."""
 
-    if not _is_int(slot) or slot not in SUPPORT_CENSUS_SLOTS:
-        raise SupportCensusError("support slot must be one of the frozen slots 0..7")
-    try:
-        episode_index = int(tape.spec.episode_index)
-    except (AttributeError, TypeError, ValueError) as error:
-        raise SupportCensusError("support tape lacks an exact scenario spec") from error
-    expected = _expected_tape(slot, episode_index)
-    if canonical_tape(tape) != canonical_tape(expected):
-        raise SupportCensusError(
-            "support tape differs from its fixed namespace/slot/episode member"
-        )
-    boundary = materialize_support_boundary_provenance(tape, ledger=ledger)
-    completed_boundary = _complete_boundary_summary(boundary)
-    return {
-        "format": OBSERVATION_FORMAT,
-        "object_id": SUPPORT_CENSUS_OBJECT_ID,
-        "rng_namespace": SUPPORT_CENSUS_RNG_NAMESPACE,
-        "slot": slot,
-        "split": Split.EVALUATION.value,
-        "regime": "K8",
-        "episode_index": episode_index,
-        "population_ordinal": (
-            slot * SUPPORT_CENSUS_EPISODES_PER_SLOT
-            + episode_index - SUPPORT_CENSUS_FIRST_EPISODE
-        ),
-        "spec": _spec_record(tape),
-        "boundary_scan": _boundary_scan_record(completed_boundary),
-        "boundary": completed_boundary,
-    }
+    refuse_consumed_support_census()
 
 
 def validate_support_full_replay(
@@ -337,55 +363,7 @@ def validate_support_full_replay(
 ) -> dict[str, object]:
     """Independently rebuild every tape and replay every exact G16 before publication."""
 
-    expected_count = len(SUPPORT_CENSUS_SLOTS) * SUPPORT_CENSUS_EPISODES_PER_SLOT
-    if len(observations) != expected_count:
-        raise SupportCensusError("independent full replay requires all 512 observations")
-    try:
-        ledger.begin_validation_replay()
-    except AttributeError as error:
-        raise SupportCensusError("independent full replay requires a phase-aware ledger") from error
-    transitions = 0
-    ordinal = 0
-    for slot in SUPPORT_CENSUS_SLOTS:
-        rebuilt_tapes = build_balanced_tapes(
-            replicate=slot,
-            split=Split.EVALUATION,
-            regime="K8",
-            count=SUPPORT_CENSUS_EPISODES_PER_SLOT,
-            first_episode_index=SUPPORT_CENSUS_FIRST_EPISODE,
-            rng_namespace=SUPPORT_CENSUS_RNG_NAMESPACE,
-        )
-        if len(rebuilt_tapes) != SUPPORT_CENSUS_EPISODES_PER_SLOT:
-            raise SupportCensusError("independent rebuild did not produce the fixed 64 tapes")
-        for offset, rebuilt in enumerate(rebuilt_tapes):
-            observation = observations[ordinal]
-            episode = SUPPORT_CENSUS_FIRST_EPISODE + offset
-            _validate_observation(observation, expected_slot=slot, expected_episode=episode)
-            _compare_independently_rebuilt_tape(_expected_tape(slot, episode), rebuilt)
-            replayed_boundary = _complete_boundary_summary(
-                materialize_support_boundary_provenance(rebuilt, ledger=ledger)
-            )
-            if replayed_boundary != observation["boundary"]:
-                raise SupportCensusError(
-                    "independent full G16 replay differs from first complete boundary provenance"
-                )
-            step_count = int(replayed_boundary["scripted_history_transitions"])
-            ledger.record_validation_base_episode(step_count)
-            transitions += step_count
-            ordinal += 1
-    ledger.finish_validation_replay()
-    per_tape_bytes = sum(
-        int(item["raw_byte_length"]) for item in TAPE_ARRAY_INVENTORY
-    )
-    return {
-        "mode": INDEPENDENT_REPLAY_MODE,
-        "rebuilt_tapes": expected_count,
-        "scenario_spec_direct_matches": expected_count,
-        "array_raw_byte_direct_matches": expected_count * len(TAPE_ARRAY_INVENTORY),
-        "raw_bytes_compared_per_side": expected_count * per_tape_bytes,
-        "complete_boundary_provenance_direct_matches": expected_count,
-        "tape_array_inventory": deepcopy([dict(item) for item in TAPE_ARRAY_INVENTORY]),
-    }
+    refuse_consumed_support_census()
 
 
 def _validate_int_pair(value: object, label: str) -> None:
@@ -953,7 +931,7 @@ def _validate_runtime(
 def _validate_support_run_receipt(value: object) -> None:
     if not isinstance(value, Mapping):
         raise SupportCensusError("support run assessment must be an object")
-    if validate_run_resource_receipt(value):
+    if _validate_run_resource_receipt(value):
         raise SupportCensusError("fresh same-envelope run assessment is invalid")
     estimate = value.get("estimate")
     if (
@@ -1014,7 +992,8 @@ def summarize_support_census(
 ) -> dict[str, object]:
     """Strictly summarize the complete canonical 8x64 population."""
 
-    if validate_resource_receipt(resource_receipt):
+    refuse_consumed_support_census()
+    if _validate_resource_receipt(resource_receipt):
         raise SupportCensusError("fresh 4-GiB resource receipt is invalid")
     _validate_support_run_receipt(run_resource_receipt)
     replay_record = _validate_independent_replay(independent_replay)
@@ -1172,7 +1151,7 @@ def validate_support_census(payload: Mapping[str, object]) -> dict[str, object]:
     }
     if any(value.get(field) != expected for field, expected in expected_constants.items()):
         raise SupportCensusError("support census registration constants drifted")
-    if validate_resource_receipt(value["resource_receipt"]):
+    if _validate_resource_receipt(value["resource_receipt"]):
         raise SupportCensusError("embedded resource receipt is invalid")
     _validate_support_run_receipt(value["run_resource_receipt"])
     value["independent_replay"] = _validate_independent_replay(
@@ -1244,7 +1223,10 @@ def validate_support_census(payload: Mapping[str, object]) -> dict[str, object]:
         raise SupportCensusError("global A extrema do not recompute")
     if value["keep_witnesses"] != derived_witnesses:
         raise SupportCensusError("KEEP witness certificates are missing, extra, or altered")
-    if value["disposition"] != _disposition(derived_summaries):
+    if (
+        value["disposition"] != _disposition(derived_summaries)
+        or value["disposition"] != SUPPORT_CENSUS_TERMINAL_DISPOSITION
+    ):
         raise SupportCensusError("scientific disposition violates the frozen priority order")
     runtime = _validate_runtime(value["runtime"], transitions=transitions, branches=total_branches)
     expected_activity = {
@@ -1296,6 +1278,7 @@ def prepare_support_census_publication(
 ) -> dict[str, object]:
     """Validate, encode, write, and fsync both targets without making either visible."""
 
+    refuse_consumed_support_census()
     validated = validate_support_census(payload)
     encoded = _encoded(validated)
     output = Path(output_root).resolve()
@@ -1361,6 +1344,7 @@ def prepare_support_census_publication(
 
 
 def discard_prepared_support_publication(prepared: Mapping[str, object]) -> None:
+    refuse_consumed_support_census()
     stage = Path(prepared["stage"])
     temporary = Path(prepared["temporary"])
     output = Path(prepared["output"])
@@ -1375,14 +1359,15 @@ def discard_prepared_support_publication(prepared: Mapping[str, object]) -> None
 def commit_prepared_support_publication(prepared: Mapping[str, object]) -> dict[str, object]:
     """Perform only the external-first/direction-second commit renames."""
 
+    refuse_consumed_support_census()
     output = Path(prepared["output"])
     result = Path(prepared["result"])
     stage = Path(prepared["stage"])
     temporary = Path(prepared["temporary"])
     payload = prepared["payload"]
     os.rename(temporary, result)
-    # If the second rename fails, the external receipt is an explicitly
-    # non-authoritative orphan because the direction-root marker never appears.
+    # If the second rename fails, the external receipt is an uncommitted orphan
+    # because the direction-root marker never appears.
     os.rename(stage, output)
     return payload  # type: ignore[return-value]
 
@@ -1394,6 +1379,7 @@ def publish_support_census_create_only(
     *,
     before_commit: object | None = None,
 ) -> dict[str, object]:
+    refuse_consumed_support_census()
     prepared = prepare_support_census_publication(output_root, result_path, payload)
     try:
         if before_commit is not None:
@@ -1404,16 +1390,35 @@ def publish_support_census_create_only(
     return commit_prepared_support_publication(prepared)
 
 
+def support_census_tombstone() -> dict[str, object]:
+    """Return the immutable terminal record without touching execution state."""
+
+    return {
+        "object_id": SUPPORT_CENSUS_OBJECT_ID,
+        "lifecycle": SUPPORT_CENSUS_LIFECYCLE,
+        "terminal_disposition": SUPPORT_CENSUS_TERMINAL_DISPOSITION,
+        "consumed_attempt": SUPPORT_CENSUS_CONSUMED_ATTEMPT,
+        "fresh_execution_enabled": SUPPORT_CENSUS_FRESH_EXECUTION_ENABLED,
+        "reason": SUPPORT_CENSUS_TOMBSTONE_REASON,
+    }
+
+
+def load_consumed_support_census(path: str | Path) -> dict[str, object]:
+    """Read and purely validate an already-published consumed-object receipt."""
+
+    try:
+        decoded = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise SupportCensusError("consumed support receipt is unreadable") from error
+    if not isinstance(decoded, Mapping):
+        raise SupportCensusError("consumed support receipt must be a JSON object")
+    return validate_support_census(decoded)
+
+
 __all__ = [
+    "SupportCensusConsumedError",
     "SupportCensusError",
-    "materialize_support_observation",
-    "PUBLICATION_MARKER_NAME",
-    "registered_support_tapes",
-    "validate_support_full_replay",
-    "summarize_support_census",
+    "load_consumed_support_census",
+    "support_census_tombstone",
     "validate_support_census",
-    "prepare_support_census_publication",
-    "discard_prepared_support_publication",
-    "commit_prepared_support_publication",
-    "publish_support_census_create_only",
 ]

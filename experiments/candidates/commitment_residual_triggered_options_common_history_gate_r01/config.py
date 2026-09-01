@@ -30,6 +30,17 @@ SUPPORT_CENSUS_CLAIM_CEILING: Final = (
     "FIXED_EIGHT_SLOT_K8_FIRST_BOUNDARY_SUPPORT_ONLY"
 )
 SUPPORT_CENSUS_PERFORMANCE_DISPOSITION: Final = "PILOT_ONLY"
+SUPPORT_CENSUS_LIFECYCLE: Final = "TERMINAL_CONSUMED"
+SUPPORT_CENSUS_TERMINAL_DISPOSITION: Final = (
+    "CENSUS_NO_KEEP_WITNESS_ON_FIXED_TARGET"
+)
+SUPPORT_CENSUS_CONSUMED_ATTEMPT: Final = ".2"
+SUPPORT_CENSUS_FRESH_EXECUTION_ENABLED: Final = False
+SUPPORT_CENSUS_TOMBSTONE_REASON: Final = (
+    "SUPPORT_CENSUS_TERMINAL_CONSUMED: valid attempt .2 completed with "
+    "CENSUS_NO_KEEP_WITNESS_ON_FIXED_TARGET; fresh execution, replay, and publication "
+    "are permanently disabled"
+)
 REPLICATES: Final = tuple(range(8))
 REPRESENTATIONS: Final = ("RAW", "TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT")
 BUDGETS: Final[Mapping[str, int]] = MappingProxyType({"SHORT": 128, "LONG": 2_048})
@@ -75,6 +86,16 @@ RNG_PURPOSES: Final = (
     "panel_tape", "predictor_initialization", "predictor_order",
     "gate_initialization", "gate_order", "derangement",
 )
+
+
+class SupportCensusConsumedError(PermissionError):
+    """Stable fail-closed signal for every consumed-object execution surface."""
+
+
+def refuse_consumed_support_census() -> None:
+    """Unconditionally reject any new execution of the consumed support object."""
+
+    raise SupportCensusConsumedError(SUPPORT_CENSUS_TOMBSTONE_REASON)
 
 # Immutable scientific policies frozen by IMPLEMENTATION_THRESHOLD.md.
 FROZEN_POLICIES: Final[Mapping[str, str]] = MappingProxyType({

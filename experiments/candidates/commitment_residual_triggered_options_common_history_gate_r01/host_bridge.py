@@ -30,7 +30,7 @@ from experiments.candidates.commitment_residual_triggered_options.host import (
 
 from .config import (
     AUDIT_HORIZON, EVALUATION_REGIMES, OBSERVATION_DIM, RNG_NAMESPACE,
-    counter_seed_for_namespace,
+    counter_seed_for_namespace, refuse_consumed_support_census,
 )
 from .contracts import (
     Panel, PanelRow, PredictorExample, REPLANNING_COSTS, RowKey, Split, TapeRecord,
@@ -253,6 +253,7 @@ def materialize_support_boundary_provenance(
     boundary, KEEP is emitted first and legal changed options follow host printed order.
     """
 
+    refuse_consumed_support_census()
     located = _locate_common_history_boundary(tape)
     if located is None:
         return {

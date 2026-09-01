@@ -1643,6 +1643,46 @@ def test_rank_and_tie_are_valid_scientific_stops_not_technical_errors(structural
     }
 
 
+def test_tail_agreement_only_failure_is_terminal_nonadmitting_competence_stop(structural):
+    receipt = {"status": "MATCH"}
+    competent_root = (
+        Fraction(61, 100), Fraction(81, 100), Fraction(-891, 1000),
+        Fraction(43, 200), Fraction(-1),
+        Fraction(-388036941, 3200000000), Fraction(38665803, 160000000),
+    )
+    unique_but_incompetent_tail = (
+        Fraction(31, 100), Fraction(3, 5), Fraction(27, 20),
+        Fraction(-27, 25), Fraction(-867, 1000),
+    )
+    fit = _fit_document(
+        structural,
+        _fit_record(structural, competent_root, 81_920),
+        _fit_record(structural, unique_but_incompetent_tail, 40_960),
+        receipt,
+    )
+
+    certificate = structural._certificate_document(fit, receipt, receipt)
+    folds = [fold for seed in certificate["seeds"] for fold in seed["folds"]]
+
+    assert certificate["gate_counts"] == {
+        "fold_policies": 20, "rank_pass": 20, "unique": 20, "competent": 0,
+    }
+    assert all(fold["root_vector"] == fold["expected_root_vector"] for fold in folds)
+    assert all(fold["maximum_regret"] <= Fraction(1, 50) for fold in folds)
+    assert all(fold["minimum_root_margin"] > 0 for fold in folds)
+    assert all(fold["minimum_tail_margin"] > 0 for fold in folds)
+    assert all(fold["minimum_forced_probe_tail_agreement"] < Fraction(19, 20) for fold in folds)
+    assert {
+        field: certificate[field]
+        for field in ("disposition", "prerequisite_pass", "admit", "next_action")
+    } == {
+        "disposition": "STOP_STRUCTURAL_COMPETENCE",
+        "prerequisite_pass": False,
+        "admit": False,
+        "next_action": "NONE",
+    }
+
+
 def test_structural_pass_requires_root_decision_and_never_auto_admits(structural):
     receipt = {"status": "MATCH"}
     tail = (

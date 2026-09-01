@@ -19,6 +19,7 @@ from .config import (
     BATCH_SIZE, BUDGETS, DELTA, FROZEN_POLICIES, NUMERIC_TOLERANCE, OBJECT_ID,
     PEAK_RSS_BYTES, PRODUCTION_CONFIG, RAW_LONG_MAX_MEAN_REGRET, RNG_NAMESPACE,
     PILOT_OBJECT_ID, SCHEMA_VERSION, SUPPORT_CENSUS_OBJECT_ID, WALL_SECONDS,
+    refuse_consumed_support_census,
 )
 
 
@@ -681,6 +682,7 @@ def _launch_support_census_worker(
 ) -> dict[str, object]:
     """Launch the frozen support-only census in one import-safe isolated worker."""
 
+    refuse_consumed_support_census()
     source_check()
     output, result, memory, assessment = tuple(
         Path(path).resolve() for path in (
@@ -1006,11 +1008,9 @@ def build_parser() -> argparse.ArgumentParser:
     pilot_parser.add_argument("--resource-receipt", type=Path, required=True)
     pilot_parser.add_argument("--launch-resource-receipt", type=Path, required=True)
     pilot_parser.add_argument("--launch-run-resource-receipt", type=Path, required=True)
-    support_parser = subparsers.add_parser("support-census")
-    support_parser.add_argument("--output-root", type=Path, required=True)
-    support_parser.add_argument("--result", type=Path, required=True)
-    support_parser.add_argument("--resource-receipt", type=Path, required=True)
-    support_parser.add_argument("--run-resource-receipt", type=Path, required=True)
+    subparsers.add_parser(
+        "support-census", help="terminal consumed object; fresh execution is disabled",
+    )
     run_parser = subparsers.add_parser("run")
     run_parser.add_argument("--output-root", type=Path, required=True)
     run_parser.add_argument("--result", type=Path, required=True)
@@ -1023,7 +1023,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    arguments = build_parser().parse_args(argv)
+    raw_argv = sys.argv[1:] if argv is None else argv
+    if len(raw_argv) > 0 and raw_argv[0] == "support-census":
+        refuse_consumed_support_census()
+    arguments = build_parser().parse_args(raw_argv)
     if arguments.action == "source-check":
         print(json.dumps(source_check(), indent=2, sort_keys=True))
         return 0
@@ -1044,14 +1047,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             resource_receipt_path=arguments.resource_receipt,
             launch_resource_receipt_path=arguments.launch_resource_receipt,
             launch_run_resource_receipt_path=arguments.launch_run_resource_receipt,
-        )
-        return 0
-    if arguments.action == "support-census":
-        _launch_support_census_worker(
-            output_root=arguments.output_root,
-            result_path=arguments.result,
-            resource_receipt_path=arguments.resource_receipt,
-            run_resource_receipt_path=arguments.run_resource_receipt,
         )
         return 0
     run_registered(

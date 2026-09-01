@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from copy import deepcopy
+from itertools import product
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -10,15 +12,23 @@ from experiments.candidates.commitment_residual_triggered_options_common_history
     support_census as census,
 )
 from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.config import (
+    SUPPORT_CENSUS_CONSUMED_ATTEMPT,
+    SUPPORT_CENSUS_FRESH_EXECUTION_ENABLED,
+    SUPPORT_CENSUS_LIFECYCLE,
     SUPPORT_CENSUS_MAX_PRIMITIVE_TEAM_STEPS,
+    SUPPORT_CENSUS_TERMINAL_DISPOSITION,
+    SupportCensusConsumedError,
 )
 from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.contracts import (
     ACTION_ORDER,
-    Split,
 )
-from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.host_bridge import (
-    build_balanced_tapes,
+
+
+EVENTS = (
+    "NONE", "UNANNOUNCED-DIFFERENTIAL", "CUED-DIFFERENTIAL", "COMMON-SENSOR",
 )
+ONSETS = (50, 66, 82, 98, 146, 162, 178, 194)
+CELLS = tuple(product(EVENTS, (0.25, 4.0), ONSETS))
 
 
 def _decision(
@@ -42,31 +52,22 @@ def _decision(
 
 def _branch(
     *, printed_index: int, boundary_time: int, cost: float, denominator: int,
-    target_g16: float, tape: object,
+    target_g16: float,
 ) -> dict[str, object]:
     selected = 6 if printed_index == 0 else printed_index - 1
     charge = 0.0 if printed_index == 0 else 0.05 + cost
-    steps = []
     queues = [0, 0]
     buffers = [32, 32]
     selected_options = [selected, 6, 6, 6]
     ages_after = [0 if selected != 6 else 8, 8, 8, 8]
+    steps: list[dict[str, object]] = []
     for offset in range(16):
-        event_active, arrivals, relay_capacity = census._expected_exogenous_step(
-            tape, boundary_time + offset,
-        )
+        arrivals = [1, 0]
+        relay_capacity = [1, 1]
         step_charge = charge if offset == 0 else 0.0
-        step_delivered = [
-            min(buffers[lane], relay_capacity[lane]) for lane in range(2)
-        ]
-        step_energy = 0.0
-        queues_after = [queues[lane] + arrivals[lane] for lane in range(2)]
-        buffers_after = [buffers[lane] - step_delivered[lane] for lane in range(2)]
-        reward = (
-            sum(step_delivered)
-            - 0.02 * (sum(queues_after) + sum(buffers_after))
-            - 0.01 * step_energy - step_charge
-        )
+        delivered = [1, 1]
+        queues_after = [queues[0] + 1, queues[1]]
+        buffers_after = [buffers[0] - 1, buffers[1] - 1]
         decisions = []
         for agent in range(4):
             if offset == 0:
@@ -88,41 +89,39 @@ def _branch(
             decisions.append(decision)
             selected_options[agent] = current
             ages_after[agent] = int(decision["age_after_decision"])
-        deployable_offset = 4 if (
-            tape.spec.event.value == "COMMON-SENSOR" and event_active
-        ) else 0
+        reward = (
+            sum(delivered) - 0.02 * (sum(queues_after) + sum(buffers_after))
+            - step_charge
+        )
         steps.append({
             "primitive_time": boundary_time + offset,
             "k": 8,
-            "event_active": event_active,
+            "event_active": False,
             "physical_queues_before": list(queues),
-            "deployable_queues_before": [
-                min(64, value + deployable_offset) for value in queues
-            ],
+            "deployable_queues_before": list(queues),
             "buffers_before": list(buffers),
             "arrivals": arrivals,
             "relay_capacity": relay_capacity,
             "tracked": [0, 0],
-            "delivered": step_delivered,
+            "delivered": delivered,
             "overflow": 0,
-            "energy_spent": step_energy,
+            "energy_spent": 0.0,
             "decision_charge": step_charge,
             "reward": reward,
             "physical_queues_after": list(queues_after),
             "buffers_after": list(buffers_after),
             "decisions": decisions,
         })
-        queues = queues_after
-        buffers = buffers_after
+        queues, buffers = queues_after, buffers_after
     terminal_potential = -0.02 * (sum(queues) + sum(buffers))
-    base_numerator = sum(
+    numerator = sum(
         (0.99 ** offset) * float(step["reward"])
         for offset, step in enumerate(steps)
     ) + (0.99 ** 16) * terminal_potential
-    energy_adjustment = (base_numerator - target_g16 * denominator) / 0.01
-    assert energy_adjustment >= 0.0
-    steps[0]["energy_spent"] = energy_adjustment
-    steps[0]["reward"] = float(steps[0]["reward"]) - 0.01 * energy_adjustment
+    adjustment = (numerator - target_g16 * denominator) / 0.01
+    assert adjustment >= 0.0
+    steps[0]["energy_spent"] = adjustment
+    steps[0]["reward"] = float(steps[0]["reward"]) - 0.01 * adjustment
     return {
         "printed_index": printed_index,
         "action": ACTION_ORDER[printed_index],
@@ -133,11 +132,11 @@ def _branch(
         "steps": steps,
         "terminal_state": {
             "primitive_time": boundary_time + 16,
-            "queues": list(queues),
-            "buffers": list(buffers),
+            "queues": queues,
+            "buffers": buffers,
             "locations": [0, 1, 1, 2],
             "energies": [32.0, 32.0, 32.0, 32.0],
-            "options": [selected, 6, 6, 6],
+            "options": selected_options,
             "option_ages": [value + 1 for value in ages_after],
             "current_k": 8,
             "terminal_potential": terminal_potential,
@@ -145,12 +144,14 @@ def _branch(
     }
 
 
-def _observation(slot: int, episode: int, material: str) -> dict[str, object]:
-    tape = census._expected_tape(slot, episode)
-    cost = float(tape.spec.replanning_cost)
-    denominator = int(tape.total_physical_arrivals())
-    replacement_g16 = {"KEEP": -0.02, "MIDDLE": 0.0, "REPLAN": 0.02}[material]
-    boundary_time = 80
+def _observation(slot: int, offset: int) -> dict[str, object]:
+    episode = 832 + offset
+    event, cost, onset = CELLS[offset]
+    denominator = 512
+    keep_g16 = -0.05
+    replacement_g16 = -0.03
+    advantage = replacement_g16 - keep_g16
+    boundary_time = 20
     boundary = {
         "row_present": True,
         "scripted_history_transitions": boundary_time,
@@ -159,23 +160,23 @@ def _observation(slot: int, episode: int, material: str) -> dict[str, object]:
         "elapsed_horizon": 8,
         "previous_option": 6,
         "legal_mask": [True, True, False, False, False, False, False, False],
-        "g16": [0.0, replacement_g16, None, None, None, None, None, None],
+        "g16": [keep_g16, replacement_g16, None, None, None, None, None, None],
         "denominator": denominator,
         "branches": [
             _branch(
                 printed_index=0, boundary_time=boundary_time, cost=cost,
-                denominator=denominator, target_g16=0.0, tape=tape,
+                denominator=denominator, target_g16=keep_g16,
             ),
             _branch(
                 printed_index=1, boundary_time=boundary_time, cost=cost,
-                denominator=denominator, target_g16=replacement_g16, tape=tape,
+                denominator=denominator, target_g16=replacement_g16,
             ),
         ],
-        "keep_g16": 0.0,
+        "keep_g16": keep_g16,
         "max_replacement_g16": replacement_g16,
         "maximizing_replacement": 1,
-        "advantage": replacement_g16,
-        "material_class": material,
+        "advantage": advantage,
+        "material_class": "REPLAN",
     }
     return {
         "format": census.OBSERVATION_FORMAT,
@@ -185,9 +186,24 @@ def _observation(slot: int, episode: int, material: str) -> dict[str, object]:
         "split": "EVALUATION",
         "regime": "K8",
         "episode_index": episode,
-        "population_ordinal": slot * 64 + episode - 832,
-        "spec": census._spec_record(tape),
-        "boundary_scan": census._boundary_scan_record(boundary),
+        "population_ordinal": slot * 64 + offset,
+        "spec": {
+            "episode_index": episode,
+            "episode_seed": 10_000_000 + slot * 10_000 + episode,
+            "regime": "K8",
+            "event": event,
+            "event_onset": onset,
+            "replanning_cost": cost,
+        },
+        "boundary_scan": {
+            "row_present": True,
+            "scripted_history_transitions": boundary_time,
+            "primitive_time": boundary_time,
+            "environment_slot": 0,
+            "elapsed_horizon": 8,
+            "previous_option": 6,
+            "legal_printed_indices": [0, 1],
+        },
         "boundary": boundary,
     }
 
@@ -226,15 +242,42 @@ def _run_receipt() -> dict[str, object]:
     }
 
 
-def _runtime(observations: list[dict[str, object]]) -> dict[str, object]:
-    branches = sum(
-        len(row["boundary"]["branches"])
-        for row in observations if row["boundary"]["row_present"]
-    )
-    transitions = sum(row["boundary"]["scripted_history_transitions"] for row in observations)
+@pytest.fixture(scope="module")
+def consumed_payload() -> dict[str, object]:
+    observations = [_observation(slot, offset) for slot in range(8) for offset in range(64)]
+    branches = 2 * len(observations)
+    transitions = 20 * len(observations)
     base = 512 * 256
     common = 16 * branches
-    return {
+    cells = {
+        f"h{elapsed}/cost{cost:.2f}": (32 if elapsed == 8 else 0)
+        for elapsed in (4, 8, 12, 16) for cost in (0.25, 4.0)
+    }
+    slot_summaries = [{
+        "slot": slot,
+        "assigned_tapes": 64,
+        "retained_boundaries": 64,
+        "absent_boundaries": 0,
+        "counts": {"KEEP": 0, "MIDDLE": 0, "REPLAN": 64},
+        "advantage_extrema": {
+            "minimum": observations[0]["boundary"]["advantage"],
+            "maximum": observations[0]["boundary"]["advantage"],
+        },
+        "elapsed_horizon_cost_cell_counts": dict(cells),
+        "common_future_branches": 128,
+    } for slot in range(8)]
+    replay = {
+        "mode": census.INDEPENDENT_REPLAY_MODE,
+        "rebuilt_tapes": 512,
+        "scenario_spec_direct_matches": 512,
+        "array_raw_byte_direct_matches": 512 * len(census.TAPE_ARRAY_INVENTORY),
+        "raw_bytes_compared_per_side": 512 * sum(
+            int(item["raw_byte_length"]) for item in census.TAPE_ARRAY_INVENTORY
+        ),
+        "complete_boundary_provenance_direct_matches": 512,
+        "tape_array_inventory": [dict(item) for item in census.TAPE_ARRAY_INVENTORY],
+    }
+    runtime = {
         "workers": 1,
         "threads_per_worker": 1,
         "base_episode_count": 1024,
@@ -275,200 +318,178 @@ def _runtime(observations: list[dict[str, object]]) -> dict[str, object]:
             "io_write_bytes": 0,
         },
     }
-
-
-def _independent_replay() -> dict[str, object]:
-    count = 512
-    per_tape = sum(
-        int(item["raw_byte_length"]) for item in census.TAPE_ARRAY_INVENTORY
-    )
     return {
-        "mode": census.INDEPENDENT_REPLAY_MODE,
-        "rebuilt_tapes": count,
-        "scenario_spec_direct_matches": count,
-        "array_raw_byte_direct_matches": count * len(census.TAPE_ARRAY_INVENTORY),
-        "raw_bytes_compared_per_side": count * per_tape,
-        "complete_boundary_provenance_direct_matches": count,
-        "tape_array_inventory": [dict(item) for item in census.TAPE_ARRAY_INVENTORY],
+        "format": census.FORMAT,
+        "object_id": census.SUPPORT_CENSUS_OBJECT_ID,
+        "rng_namespace": census.SUPPORT_CENSUS_RNG_NAMESPACE,
+        "claim_ceiling": census.SUPPORT_CENSUS_CLAIM_CEILING,
+        "slots": list(range(8)),
+        "split": "EVALUATION",
+        "regime": "K8",
+        "first_episode_index": 832,
+        "episodes_per_slot": 64,
+        "population_order": "SLOT_THEN_EPISODE_INDEX",
+        "selection_law": census.SELECTION_LAW,
+        "material_advantage_threshold": 0.02,
+        "minimum_rows_per_material_stratum": 8,
+        "slot_summaries": slot_summaries,
+        "global_counts": {"KEEP": 0, "MIDDLE": 0, "REPLAN": 512},
+        "global_advantage_extrema": slot_summaries[0]["advantage_extrema"],
+        "keep_witnesses": [],
+        "observations": observations,
+        "independent_replay": replay,
+        "disposition": SUPPORT_CENSUS_TERMINAL_DISPOSITION,
+        "resource_receipt": _resource_receipt(),
+        "run_resource_receipt": _run_receipt(),
+        "runtime": runtime,
+        "performance": {
+            "disposition": "PILOT_ONLY",
+            "bounded_support_census_only": True,
+            "raw_pilot_object": False,
+            "reason": census.PERFORMANCE_REASON,
+        },
+        "activity": {
+            "support_tapes_materialized": 1024,
+            "support_boundaries_materialized": 1024,
+            "materialization_support_tapes": 512,
+            "validation_support_tapes": 512,
+            "materialization_support_boundaries": 512,
+            "validation_support_boundaries": 512,
+            "common_future_rollouts": 2 * branches,
+            "materialization_common_future_rollouts": branches,
+            "validation_common_future_rollouts": branches,
+            "learner_models_constructed": 0,
+            "predictor_models_constructed": 0,
+            "gate_models_constructed": 0,
+            "optimizer_updates": 0,
+            "checkpoints": 0,
+            "true_residual_activity": 0,
+            "deranged_activity": 0,
+            "final_namespace_reads": 0,
+            "pilot_namespace_reads": 0,
+        },
     }
 
 
-def _population(material_for: object) -> list[dict[str, object]]:
-    return [
-        _observation(slot, episode, material_for(slot, episode))
-        for slot in range(8)
-        for episode in range(832, 896)
-    ]
-
-
-def test_disposition_priority_is_mutually_exclusive() -> None:
-    def summaries(keep: list[int], replan: list[int]) -> list[dict[str, object]]:
-        return [
-            {"counts": {"KEEP": keep[slot], "MIDDLE": 64 - keep[slot] - replan[slot],
-                        "REPLAN": replan[slot]}}
-            for slot in range(8)
-        ]
-
-    assert census._disposition(summaries([0] * 8, [64] * 8)) == census.DISPOSITION_NO_KEEP
-    assert census._disposition(summaries([1] + [8] * 7, [8] * 8)) == census.DISPOSITION_KEEP_MINIMUM_FAIL
-    assert census._disposition(summaries([8] * 8, [7] + [8] * 7)) == census.DISPOSITION_REPLAN_MINIMUM_FAIL
-    assert census._disposition(summaries([8] * 8, [8] * 8)) == census.DISPOSITION_FEASIBLE
-
-
-def test_complete_synthetic_population_summarizes_and_rejects_tampering(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
-) -> None:
-    rows = _population(lambda _slot, episode: "KEEP" if episode == 832 else "REPLAN")
-    payload = census.summarize_support_census(
-        rows,
-        independent_replay=_independent_replay(),
-        resource_receipt=_resource_receipt(),
-        run_resource_receipt=_run_receipt(),
-        runtime=_runtime(rows),
-    )
-    assert [summary["counts"]["KEEP"] for summary in payload["slot_summaries"]] == [1] * 8
-    # One witness in every slot is constructive but below the frozen minimum.
-    assert payload["disposition"] == census.DISPOSITION_KEEP_MINIMUM_FAIL
-    assert len(payload["keep_witnesses"]) == 8
-    assert census.validate_support_census(payload) == payload
-
-    boundaries_by_tape = {
-        (
-            int(row["spec"]["episode_seed"]), int(row["episode_index"]),
-        ): deepcopy(row["boundary"])
-        for row in rows
+def test_tombstone_constants_and_surface_are_terminal() -> None:
+    assert census.support_census_tombstone() == {
+        "object_id": census.SUPPORT_CENSUS_OBJECT_ID,
+        "lifecycle": "TERMINAL_CONSUMED",
+        "terminal_disposition": "CENSUS_NO_KEEP_WITNESS_ON_FIXED_TARGET",
+        "consumed_attempt": ".2",
+        "fresh_execution_enabled": False,
+        "reason": census.SUPPORT_CENSUS_TOMBSTONE_REASON,
+    }
+    assert SUPPORT_CENSUS_LIFECYCLE == "TERMINAL_CONSUMED"
+    assert SUPPORT_CENSUS_CONSUMED_ATTEMPT == ".2"
+    assert SUPPORT_CENSUS_FRESH_EXECUTION_ENABLED is False
+    assert set(census.__all__) == {
+        "SupportCensusConsumedError", "SupportCensusError",
+        "load_consumed_support_census", "support_census_tombstone",
+        "validate_support_census",
     }
 
-    class ReplayLedger:
-        def __init__(self) -> None:
-            self.started = False
-            self.count = 0
 
-        def begin_validation_replay(self) -> None:
-            self.started = True
+def test_existing_receipt_validator_and_loader_remain_read_only(
+    consumed_payload: dict[str, object], tmp_path: Path,
+) -> None:
+    assert census.validate_support_census(consumed_payload) == consumed_payload
+    artifact = tmp_path / "consumed.json"
+    artifact.write_text(json.dumps(consumed_payload), encoding="utf-8")
+    before = {path: path.stat().st_size for path in tmp_path.iterdir()}
+    assert census.load_consumed_support_census(artifact) == consumed_payload
+    after = {path: path.stat().st_size for path in tmp_path.iterdir()}
+    assert after == before
 
-        def record_validation_base_episode(self, _steps: int) -> None:
-            assert self.started
-            self.count += 1
 
-        def finish_validation_replay(self) -> None:
-            assert self.count == 512
-
-    original_build = census.build_balanced_tapes
-    rebuild_slots: list[int] = []
-
-    def independent_build(*, replicate: int, **kwargs):
-        rebuild_slots.append(replicate)
-        return original_build(replicate=replicate, **kwargs)
-
-    monkeypatch.setattr(census, "build_balanced_tapes", independent_build)
-    monkeypatch.setattr(
-        census,
-        "materialize_support_boundary_provenance",
-        lambda tape, **_kwargs: deepcopy(boundaries_by_tape[(
-            int(tape.spec.episode_seed), int(tape.spec.episode_index),
-        )]),
+def test_read_only_validator_import_does_not_load_preflight_builder_or_host() -> None:
+    package = (
+        "experiments.candidates."
+        "commitment_residual_triggered_options_common_history_gate_r01"
     )
-    assert census.validate_support_full_replay(
-        rows, ledger=ReplayLedger(),
-    ) == _independent_replay()
-    assert rebuild_slots == list(range(8))
-    monkeypatch.setattr(
-        census,
-        "materialize_support_boundary_provenance",
-        lambda *_args, **_kwargs: pytest.fail("pure receipt validation reached host/G16"),
+    code = (
+        "import sys\n"
+        f"from {package} import support_census\n"
+        "forbidden = (\n"
+        f"    '{package}.preflight',\n"
+        f"    '{package}.host_bridge',\n"
+        "    'experiments.candidates.commitment_residual_triggered_options.host',\n"
+        ")\n"
+        "loaded = [name for name in forbidden if name in sys.modules]\n"
+        "assert not loaded, loaded\n"
     )
-    monkeypatch.setattr(
-        census,
-        "build_balanced_tapes",
-        lambda **_kwargs: pytest.fail("pure receipt validation rebuilt a tape"),
+    repository_root = Path(census.__file__).resolve().parents[3]
+    completed = subprocess.run(
+        [sys.executable, "-B", "-c", code],
+        cwd=repository_root,
+        check=False,
+        capture_output=True,
+        text=True,
     )
-    assert census.validate_support_census(payload) == payload
-    census.publish_support_census_create_only(
-        tmp_path / "pure-direction", tmp_path / "pure-external.json", payload,
-    )
-
-    mutated = deepcopy(payload)
-    mutated["activity"]["optimizer_updates"] = 1
-    with pytest.raises(census.SupportCensusError, match="activity"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    mutated["independent_replay"]["array_raw_byte_direct_matches"] -= 1
-    with pytest.raises(census.SupportCensusError, match="independent full replay"):
-        census.validate_support_census(mutated)
-
-    for field, bad_value in (
-        ("direction_id", "another_direction"),
-        ("run_id", "wrong_support_run"),
-    ):
-        mutated = deepcopy(payload)
-        mutated["run_resource_receipt"][field] = bad_value
-        with pytest.raises(census.SupportCensusError, match="launch"):
-            census.validate_support_census(mutated)
-    mutated = deepcopy(payload)
-    mutated["run_resource_receipt"]["estimate"]["basis"] = "generic envelope"
-    with pytest.raises(census.SupportCensusError, match="launch"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    mutated["observations"][0]["boundary"]["denominator"] += 1
-    with pytest.raises(census.SupportCensusError, match="denominator|G16"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    mutated["observations"][0]["boundary"]["branches"][0]["steps"][0]["arrivals"][0] += 1
-    with pytest.raises(census.SupportCensusError, match="transition arithmetic"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    mutated["observations"][0]["boundary_scan"]["primitive_time"] += 4
-    with pytest.raises(census.SupportCensusError, match="boundary scan"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    mutated["observations"][0]["boundary"]["branches"][1]["steps"][0][
-        "decisions"
-    ][1]["kind"] = "DISCRETIONARY"
-    with pytest.raises(census.SupportCensusError, match="share one predecision state"):
-        census.validate_support_census(mutated)
-
-    mutated = deepcopy(payload)
-    row = mutated["observations"][0]
-    step = row["boundary"]["branches"][1]["steps"][5]
-    step["event_active"] = not step["event_active"]
-    deployable_offset = 4 if (
-        row["spec"]["event"] == "COMMON-SENSOR" and step["event_active"]
-    ) else 0
-    step["deployable_queues_before"] = [
-        min(64, value + deployable_offset) for value in step["physical_queues_before"]
-    ]
-    with pytest.raises(census.SupportCensusError, match="share one predecision state"):
-        census.validate_support_census(mutated)
+    assert completed.returncode == 0, completed.stderr or completed.stdout
 
 
-def test_namespace_mismatch_is_rejected_before_boundary_execution() -> None:
-    unrelated_tape = build_balanced_tapes(
-        replicate=0, split=Split.EVALUATION, regime="K8", count=64,
-        first_episode_index=832, rng_namespace=2_026_083_193,
-    )[0]
-    with pytest.raises(census.SupportCensusError, match="namespace"):
-        census.materialize_support_observation(unrelated_tape, slot=0)
-
-
-def test_create_only_publishes_byte_identical_receipts(
+def test_host_bridge_support_materializer_is_a_zero_effect_tombstone(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
 ) -> None:
-    payload = {"small": "validated"}
-    monkeypatch.setattr(census, "validate_support_census", lambda value: dict(value))
-    output = tmp_path / "direction"
-    result = tmp_path / "external.json"
-    assert census.publish_support_census_create_only(output, result, payload) == payload
-    receipt = output / "support_census_receipt.json"
-    assert receipt.read_bytes() == result.read_bytes()
-    marker = json.loads((output / census.PUBLICATION_MARKER_NAME).read_text(encoding="utf-8"))
-    assert marker["complete"] is True
-    assert marker["commit_law"] == "EXTERNAL_RESULT_FIRST_DIRECTION_ROOT_SECOND"
-    assert json.loads(result.read_text(encoding="utf-8")) == payload
-    with pytest.raises(FileExistsError):
-        census.publish_support_census_create_only(output, result, payload)
+    from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01 import (
+        host_bridge,
+    )
+
+    monkeypatch.setattr(
+        host_bridge, "_locate_common_history_boundary",
+        lambda _tape: pytest.fail("support materializer reached host boundary scan"),
+    )
+    monkeypatch.setattr(
+        host_bridge, "common_future_audit_rollout",
+        lambda *_args, **_kwargs: pytest.fail("support materializer reached G16"),
+    )
+    poison = _Unreadable()
+    before = list(tmp_path.iterdir())
+    with pytest.raises(SupportCensusConsumedError):
+        host_bridge.materialize_support_boundary_provenance(poison, ledger=poison)
+    assert list(tmp_path.iterdir()) == before
+
+
+class _Unreadable:
+    def __getattribute__(self, name: str) -> object:
+        raise AssertionError(f"consumed seam inspected argument attribute {name}")
+
+    def __iter__(self):
+        raise AssertionError("consumed seam iterated an argument")
+
+    def __len__(self) -> int:
+        raise AssertionError("consumed seam measured an argument")
+
+    def __getitem__(self, key: object) -> object:
+        raise AssertionError(f"consumed seam indexed an argument at {key!r}")
+
+
+@pytest.mark.parametrize(
+    "invoke",
+    (
+        lambda poison: census._expected_tapes(poison),
+        lambda poison: census._expected_tape(poison, poison),
+        lambda poison: census.registered_support_tapes(poison),
+        lambda poison: census.materialize_support_observation(poison, slot=poison, ledger=poison),
+        lambda poison: census.validate_support_full_replay(poison, ledger=poison),
+        lambda poison: census.summarize_support_census(
+            poison, independent_replay=poison, resource_receipt=poison,
+            run_resource_receipt=poison, runtime=poison,
+        ),
+        lambda poison: census.prepare_support_census_publication(poison, poison, poison),
+        lambda poison: census.discard_prepared_support_publication(poison),
+        lambda poison: census.commit_prepared_support_publication(poison),
+        lambda poison: census.publish_support_census_create_only(
+            poison, poison, poison, before_commit=poison,
+        ),
+    ),
+)
+def test_every_execution_and_publication_seam_rejects_before_argument_access(
+    invoke: object, tmp_path: Path,
+) -> None:
+    poison = _Unreadable()
+    before = list(tmp_path.iterdir())
+    with pytest.raises(SupportCensusConsumedError, match="valid attempt \\.2"):
+        invoke(poison)
+    assert list(tmp_path.iterdir()) == before
