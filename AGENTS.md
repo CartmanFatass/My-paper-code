@@ -38,14 +38,14 @@ the model code.
 
 ## Workflow-task routing
 
-When a user asks the designated Codex session to handle a workflow or control-plane change or audit
-(`AGENTS.md`, `.agents/skills`, `.agents/roles`, `.codex/agents`, dispatch, session routing,
-transport, permissions, or task lifecycle), trigger `$hmasd-workflow-outsource` before editing,
-spawning, or sending any other workflow request. The skill makes one exact prompt and one dispatch
-to the named target; it does not authorize a second objective, parallel fan-out, or unlisted file.
-The current "this session" target is recorded in that skill, while an explicit target in the user
-request takes precedence. If the target, owned paths, allowed effects, or acceptance checks are
-missing, stop with `BLOCKED_INPUT` or ask one blocking AMA question rather than guessing.
+Use `$hmasd-workflow-outsource` only when the user explicitly names it or explicitly requests
+outsourcing or delegation of that workflow/control-plane task. Otherwise, the current agent handles
+ordinary workflow/control-plane changes and audits directly. On an explicit invocation, the skill
+makes one exact prompt and one dispatch to the named target; it does not authorize a second
+objective, parallel fan-out, or unlisted file. The current "this session" target is recorded in
+that skill, while an explicit target in the user request takes precedence. If the target, owned
+paths, allowed effects, or acceptance checks are missing, stop with `BLOCKED_INPUT` or ask one
+blocking AMA question rather than guessing.
 
 ## Workspace and Git
 
@@ -56,6 +56,14 @@ task database or workspace-routing state.
 An assigned child may edit or commit in its actual native worktree when the assignment calls for
 it. Root integrates the resulting Git facts into the intended primary target. In any checkout,
 inspect existing changes, preserve unrelated user work, and limit edits to the requested scope.
+
+After every commit created for an authorized repository task, Root or the assigned integrator
+immediately pushes the checked-out branch to its corresponding configured upstream/remote branch.
+This standing user authorization permits no repository-internal approval, review, verification,
+status, hash, handoff, or separate push gate between commit and push. An external credential,
+network, non-fast-forward, branch-protection, or mandatory platform-authorization failure preserves
+the commit, is reported with its exact blocker, and is retried when available; never silently
+redirect the push or force-push unless the user explicitly requests it.
 
 ## Experiment resource admission
 

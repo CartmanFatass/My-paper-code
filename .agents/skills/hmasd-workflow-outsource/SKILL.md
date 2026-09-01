@@ -1,6 +1,6 @@
 ---
 name: hmasd-workflow-outsource
-description: Use when an HMASD workflow, control-plane, role, skill, dispatch, session-routing, or AGENTS change must be outsourced or delegated to another Codex task.
+description: Use only when the user explicitly names `$hmasd-workflow-outsource` or explicitly requests that an HMASD workflow or control-plane task be outsourced or delegated.
 ---
 
 # HMASD Workflow Outsource
@@ -30,12 +30,13 @@ do not dispatch the task to itself or create a recursive replacement.
 
 ## Trigger and boundary
 
-Trigger for workflow/control-plane changes or audits involving `AGENTS.md`, `.agents/skills`,
-`.agents/roles`, `.codex/agents`, dispatch, session routing, transport, permissions, or task
-lifecycle when the user wants the work handled by the designated session. Do not trigger for an
-ordinary scientific question or implementation that does not change workflow behavior.
+Trigger only when the user explicitly names `$hmasd-workflow-outsource` or explicitly requests
+outsourcing or delegation of a workflow/control-plane change or audit involving `AGENTS.md`,
+`.agents/skills`, `.agents/roles`, `.codex/agents`, dispatch, session routing, transport,
+permissions, or task lifecycle. Otherwise, the current agent handles ordinary
+workflow/control-plane work directly.
 
-The caller must not edit workflow files, choose a second workflow owner, or fan out subagents
+When explicitly invoked, the caller must not edit workflow files, choose a second workflow owner, or fan out subagents
 before dispatch. The destination may use a subagent only when the prompt explicitly lists that
 subtask; the default is zero subagents and one serial task.
 
