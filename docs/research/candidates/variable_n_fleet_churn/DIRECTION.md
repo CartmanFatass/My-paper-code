@@ -29,9 +29,12 @@ return-bearing question are not closed. Its prospectively distinct, sequential s
 `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` at `B/EXPLORE`. R02 is motivated by a known
 conformance defect and is not independent confirmation.
 
-R02 is not executable. Before any new DEBUG it must bind exactly one prospectively declared
-`FINITE-PHYSICAL-ACTION-LAW`. The immediate decision-relevant object is the non-result-bearing
-`VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` at `A/RECON`.
+R02 is not executable. Its one selected finite law is `VNFC-R02-ORC-B64-Q52-U64-V1`: opaque-rank
+canonical serialization, a scalar CPU binary64 reference, an exact normalized 52-bit physical
+probability vector, and uint64-midpoint physical CDF sampling. Deterministic choice compares the
+same law's centered `q` strictly and uses opaque-rank/null-last only for exact `q` ties; integer
+probability masses do not change that ordering. The immediate decision-relevant object is the
+non-result-bearing `VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` at `A/RECON`.
 
 ## Controlling conformance result
 
@@ -88,20 +91,25 @@ Before any R02 DEBUG, exactly one finite physical-action law must prospectively 
 7. an address-resolved conformance gate for structural predicates, deterministic commands,
    physically aligned probabilities, and RNG-coupled physical actions.
 
+`VNFC-R02-ORC-B64-Q52-U64-V1` and its A0 freeze now prospectively fulfill these seven definition
+obligations. Their finite conformance remains unobserved until A0 is implemented and executed.
+
 R02 requires fresh source identity, configuration, seed/RNG family, namespaces, checkpoints,
 optimizer states, and run identity. No R01 checkpoint or optimizer state may be interpreted under
 the R02 law.
 
 ## Immediate A0 object
 
-`VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` asks whether one named law—not a menu—gives a single
-inverse-mapped deterministic action and a single RNG-coupled stochastic physical action across
-co-presentations while preserving the declared MAPR/DIRECT topology and zero-residual containment.
+`VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` asks whether the single frozen
+`VNFC-R02-ORC-B64-Q52-U64-V1` law gives one inverse-mapped deterministic action and one RNG-coupled
+stochastic physical action across co-presentations while preserving the declared MAPR/DIRECT
+topology and zero-residual containment.
 
-Its minimum finite source-level panel contains the registered `N=5/reverse` witness, all 18 PS-B0
-descriptors under four presentations, finite synthetic MAPR fixtures and zero-residual DIRECT
-embeddings, deterministic commands, physically aligned supports/probabilities, fixed-uniform CDF
-boundaries and adjacent representable values, and undeclared ordering/key-channel checks.
+Its frozen panel contains 304 address rows: 288 rows from all 18 descriptors, four presentations,
+two fresh parameter fixtures and both MAPR/zero-residual DIRECT; four deterministic source-witness
+rows; and twelve duplicate/nextafter/fixed-prefix primitive rows. Every physical CDF boundary,
+adjacent representable value and adjacent production word is enumerated, together with replay,
+gradient, optimizer, containment, and undeclared-channel checks.
 
 A0 fails on any co-presentation difference in physical deterministic action, claimed-exact aligned
 probability, declared RNG-coupled sampled action, MAPR versus zero-residual DIRECT behavior, or on
@@ -138,10 +146,11 @@ engineering readiness flag authorizes another R01 DEBUG, repair, resume, restart
 publication. R01 source may be reused read-only as substrate or counterexample provenance only
 where R02 explicitly transfers a definition.
 
-Permitted next work is limited to selecting and prospectively binding one R02 finite physical-
-action law and implementing/assessing its non-result-bearing A0 conformance object. The R01
-validator's combined `structural` counter must be replaced for R02 evidence by address-resolved
-predicate reporting, but that reporting repair is not the scientific conformance repair.
+The law and A0 object are now prospectively frozen. Permitted next work is limited to implementing
+and assessing this exact non-result-bearing A0 object. Runtime-selectable alternatives or silent
+law changes are forbidden. The R01 validator's combined `structural` counter must be replaced for
+R02 evidence by address-resolved predicate reporting, but that reporting repair is not the
+scientific conformance repair.
 
 No R02 result-bearing DEBUG is permitted until the one-law A0 object is complete and passing under
 its finite claim ceiling.
@@ -151,6 +160,8 @@ its finite claim ceiling.
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_BEXP_R01_ENGINEERING_MILESTONE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R01_CLOSE_R02_FINITE_ACTION_LAW_INNOVATOR_INTAKE_20260901.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R02_FINITE_PHYSICAL_ACTION_LAW_A0_FREEZE_20260901.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R02_A0_EM_FREEZE_INTAKE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R09_SAME_DIRECTION_SCIENTIFIC_RESULT_INTAKE_20260821.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R09_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE_20260821.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_CLOSED_EM_INTAKE_20260822.md`
