@@ -274,8 +274,8 @@ provenance are in `FRRIE_B01_INNOVATOR_DECISION_INTAKE_20260901.md`.
 
 The current engineering milestone now includes real MSVC/package-native A/RECON, 48 directly equal
 scalar/batch rows, 24 directly equal 1/2/4-worker rows, and one actual width-32 two-arm collector
-assessment with end-to-end process telemetry. Two later integrated TEST-only attempts exposed
-outcome-blind conformance defects and were correctly quarantined as incomplete; neither consumes
+assessment with end-to-end process telemetry. Three later integrated TEST-only attempts exposed
+outcome-blind conformance defects and were correctly quarantined as incomplete; none consumes
 the B01 object or supplies a scientific value. Production remains `REPAIR_REQUIRED` under the
 single direction-level blocker `FULL_PANEL_RUNNER_AND_FULL_CHAIN_TELEMETRY_INCOMPLETE`. The
 complete 512-update runner, 98 evaluation cells per seed, exact shadow/action-TV/parameter panel,

@@ -19,7 +19,6 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 
 from ..arms import initialize_paired_arms
-from ..host import native_endpoint
 from ..native_adapter import (
     build_package_native_artifact, load_package_native_adapter,
     package_native_artifact_path, _windows_vcvars64, _windows_build_environment,
@@ -40,7 +39,7 @@ from .contract import (
     B01ContractError, bind_invocation_resource, canonical_json_bytes,
     make_test_manifest, named_compute_profile, validate_resource_receipt,
 )
-from .native_batch import B01NativeBatchEnvironment
+from .native_batch import B01NativeBatchEnvironment, derive_native_primitive_endpoint
 from .recon import _AReconProcessTreeMonitor
 from .seed_packet import create_test_seed_packet, read_test_seed_packet
 from .tapes import evaluation_tape
@@ -1249,16 +1248,12 @@ def validate_integrated_test_artifact(root: Path) -> dict[str, Any]:
             for name in required - {"waste"}
         ) or not isinstance(primitive["waste"], (int, float)) or not np.isfinite(primitive["waste"]):
             raise B01ContractError("integrated representative primitive fields/types differ")
-        expected_waste = (
-            0.0 if primitive["radio_actions"] == 0
-            else primitive["waste_actions"] / primitive["radio_actions"]
+        derive_native_primitive_endpoint(
+            dw=primitive["dw"], de=primitive["de"],
+            radio_actions=primitive["radio_actions"],
+            waste_actions=primitive["waste_actions"], abi_waste=primitive["waste"],
+            observed_return=float(arrays["returns"][episode]),
         )
-        if float(primitive["waste"]).hex() != float(expected_waste).hex() or float(
-            arrays["returns"][episode]
-        ).hex() != float(native_endpoint(
-            primitive["dw"], primitive["de"], primitive["waste"],
-        )).hex():
-            raise B01ContractError("integrated representative primitive/return derivation differs")
         if primitive["successful_deliveries"] != primitive["dw"] + primitive["de"]:
             raise B01ContractError("integrated representative delivery ledger differs")
     replay_row = index.get("representative_eval_live_replay")

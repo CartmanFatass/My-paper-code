@@ -83,8 +83,8 @@ Complete-panel analysis remains fail-closed.
 
 ## Quarantined integrated-smoke attempts
 
-Two fresh, non-result TEST attempts exposed integration defects. Both are retained only as
-`*.incomplete`; neither consumes the B01 scientific object, and neither may be interpreted,
+Three fresh, non-result TEST attempts exposed integration defects. All are retained only as
+`*.incomplete`; none consumes the B01 scientific object, and none may be interpreted,
 resumed, salvaged, or used as a result source.
 
 1. `temp/frrie_b01_integrated_one_update_test_20260901_01.incomplete/` stopped before the optimizer
@@ -97,12 +97,21 @@ resumed, salvaged, or used as a result source.
    between `mean(per-episode composite loss)` and a recombination of separately averaged
    components. FP32 non-associativity makes that identity invalid. Repair is restricted to
    preserving and replaying the original left-fold/division reduction and exact serialized bits;
-   it must not change training arithmetic. No third smoke is authorized before independent review
-   and a Root-integrated commit-bound source milestone.
+   it must not change training arithmetic. Root integrated and pushed that independently CLEAN
+   repair as commit `1fc04ab3` before authorizing the next attempt.
+3. `temp/frrie_b01_integrated_one_update_test_20260901_03.incomplete/` used committed source and
+   passed fresh admission, collection, update, and most final validation. The remaining validator
+   duplicated the native waste derivation with Python binary64 integer division, while the C++ ABI
+   and producer define waste through FP32 operands and division. Legal non-exact ratios such as
+   `1/3` therefore failed exact comparison. The repair introduces one authoritative
+   primitive-to-return helper shared by the batch producer and artifact validator. It validates
+   count support, reproduces the C++ FP32 waste bits, derives the binary64 endpoint once, and can
+   validate an observed return exactly. The old duplicated binary64 ratio and endpoint arithmetic
+   are removed.
 
-The two fresh receipts recorded physical/effective availability of 14,999,437,312 and
-14,731,214,848 bytes respectively. Both passed the 4 GiB admission floor. In both cases the final
-name was absent after failure and the package `_native` directory was clean.
+The three fresh receipts recorded physical/effective availability of 14,999,437,312,
+14,731,214,848, and 15,404,646,400 bytes respectively. All passed the 4 GiB admission floor. In
+every case the final name was absent after failure and the package `_native` directory was clean.
 
 ## Verification state
 
@@ -112,7 +121,7 @@ records all per-episode component bits plus aggregate bits, and replays that exa
 integrated and direct-512 validators. The reviewer also confirmed strict built-in integer/range
 checking for aggregate bit words and rejection of Boolean or nonfinite aggregate scalars.
 
-The final bounded B01 suite is `93 passed, 3 deselected`; the deselected cases are actual/native
+The final bounded B01 suite is `94 passed, 3 deselected`; the deselected cases are actual/native
 invocations and were not silently counted as evidence. Focused checks include:
 
 - integrated root/cleanup/quarantine contract: `6 passed`;
@@ -122,13 +131,16 @@ invocations and were not silently counted as evidence. Focused checks include:
 - arithmetic, projection, Boolean/u32 range, nonfinite, and tamper regression: independently CLEAN;
 - direct-512 reduction schema: `1 passed`;
 - CM trainer/integrated independent run: `13 passed`.
+- authoritative primitive-to-return FP32 round trip and tamper regression: `7 passed` integrated,
+  `4 passed, 1 deselected` batch static, and reviewer-independent `1 passed`.
 
-No actual run is part of the arithmetic repair. No third integrated smoke has been created.
+The reviewer returned **CLEAN** for the primitive repair and found no material issue. No `_04`
+smoke is authorized or required for this commit-ready non-result milestone.
 
 ## Remaining production work
 
-1. Root must integrate this CLEAN non-result source into a commit-bound milestone. Do not launch a
-   third integrated smoke before that integration.
+1. Root must integrate the CLEAN primitive-to-return repair into a commit-bound milestone. Do not
+   launch another integrated smoke as a substitute for the full production chain.
 2. Implement one atomic full-seed runner for all 512 updates with checkpoint restore inventory and
    actual four-worker seed-level orchestration.
 3. Publish all 98 adaptation-free evaluation cells per seed and the exact ordered-shadow,

@@ -24,6 +24,9 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.stat
     OPTIMIZER_PAYLOAD_BYTE_COUNT, OPTIMIZER_STATE_MAGIC, OPTIMIZER_STATE_VERSION,
 )
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.checkpoint import encode_checkpoint
+from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.native_batch import (
+    derive_native_primitive_endpoint,
+)
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.constants import (
     LEARNED_ARMS, TEST_SEED_LABEL,
 )
@@ -65,6 +68,44 @@ def test_integrated_contract_admits_before_build_and_never_invents_update1_check
     assert contract["artifact_role"] == "INTEGRATED_RUNTIME_SMOKE_NOT_INDEPENDENTLY_REPLAYABLE"
     assert contract["implementation_critical"] is False
     assert contract["production_readiness"] is False
+
+
+def test_native_primitive_endpoint_uses_exact_cpp_fp32_waste_and_rejects_tamper():
+    one_third = float(np.float32(np.float32(1) / np.float32(3)))
+    receipt = derive_native_primitive_endpoint(
+        dw=2, de=1, radio_actions=3, waste_actions=1, abi_waste=one_third,
+    )
+    assert receipt.abi_waste == one_third
+    assert receipt.abi_waste_f32_bits_u32 == int(
+        np.asarray([one_third], dtype="<f4").view("<u4")[0]
+    )
+    assert derive_native_primitive_endpoint(
+        dw=2, de=1, radio_actions=3, waste_actions=1, abi_waste=one_third,
+        observed_return=receipt.endpoint,
+    ) == receipt
+
+    zero = derive_native_primitive_endpoint(
+        dw=0, de=0, radio_actions=0, waste_actions=0, abi_waste=0.0,
+    )
+    assert zero.abi_waste_f32_bits_u32 == 0
+    with pytest.raises(B01ContractError, match="count/support"):
+        derive_native_primitive_endpoint(
+            dw=0, de=0, radio_actions=0, waste_actions=1, abi_waste=0.0,
+        )
+    with pytest.raises(B01ContractError, match="waste bits"):
+        derive_native_primitive_endpoint(
+            dw=2, de=1, radio_actions=3, waste_actions=2, abi_waste=one_third,
+        )
+    drifted_waste = float(np.nextafter(np.float32(one_third), np.float32(np.inf)))
+    with pytest.raises(B01ContractError, match="waste bits"):
+        derive_native_primitive_endpoint(
+            dw=2, de=1, radio_actions=3, waste_actions=1, abi_waste=drifted_waste,
+        )
+    with pytest.raises(B01ContractError, match="endpoint binary64"):
+        derive_native_primitive_endpoint(
+            dw=2, de=1, radio_actions=3, waste_actions=1, abi_waste=one_third,
+            observed_return=float(np.nextafter(receipt.endpoint, np.inf)),
+        )
 
 
 def test_integrated_runtime_has_no_public_adapter_or_model_injection():

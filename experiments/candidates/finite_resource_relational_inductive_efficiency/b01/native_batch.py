@@ -42,6 +42,66 @@ class NativePrimitives:
 
 
 @dataclass(frozen=True, slots=True)
+class PrimitiveEndpointReceipt:
+    schema: str
+    dw: int
+    de: int
+    radio_actions: int
+    waste_actions: int
+    abi_waste: float
+    abi_waste_f32_bits_u32: int
+    endpoint: float
+    endpoint_binary64_hex: str
+
+
+def derive_native_primitive_endpoint(
+    *, dw: int, de: int, radio_actions: int, waste_actions: int,
+    abi_waste: int | float, observed_return: int | float | None = None,
+) -> PrimitiveEndpointReceipt:
+    """Single authority for the C++ FP32 waste ratio and endpoint boundary."""
+
+    counts = {
+        "dw": dw, "de": de, "radio_actions": radio_actions,
+        "waste_actions": waste_actions,
+    }
+    if (
+        any(type(value) is not int for value in counts.values())
+        or not 0 <= dw <= 3 or not 0 <= de <= 3
+        or not 0 <= radio_actions <= 0xFFFFFFFF
+        or not 0 <= waste_actions <= radio_actions
+    ):
+        raise B01ContractError("native primitive direct count/support differs")
+    if type(abi_waste) not in (int, float) or not np.isfinite(abi_waste):
+        raise B01ContractError("native primitive ABI waste is not one finite scalar")
+    direct_abi_waste = np.float32(abi_waste)
+    if float(direct_abi_waste) != float(abi_waste):
+        raise B01ContractError("native primitive ABI waste is not an exact FP32 value")
+    canonical_waste = (
+        np.float32(0.0)
+        if radio_actions == 0
+        else np.float32(np.float32(waste_actions) / np.float32(radio_actions))
+    )
+    direct_bits = int(np.asarray([direct_abi_waste], dtype="<f4").view("<u4")[0])
+    canonical_bits = int(np.asarray([canonical_waste], dtype="<f4").view("<u4")[0])
+    if direct_bits != canonical_bits:
+        raise B01ContractError("native primitive ABI waste bits differ from C++ FP32 ratio")
+    endpoint = float(native_endpoint(dw, de, float(canonical_waste)))
+    if observed_return is not None:
+        if (
+            type(observed_return) not in (int, float)
+            or not np.isfinite(observed_return)
+            or float(observed_return).hex() != endpoint.hex()
+        ):
+            raise B01ContractError("native primitive observed endpoint binary64 differs")
+    return PrimitiveEndpointReceipt(
+        schema="FRRIE_B01_NATIVE_PRIMITIVE_ENDPOINT_V1",
+        dw=dw, de=de, radio_actions=radio_actions, waste_actions=waste_actions,
+        abi_waste=float(canonical_waste), abi_waste_f32_bits_u32=canonical_bits,
+        endpoint=endpoint, endpoint_binary64_hex=endpoint.hex(),
+    )
+
+
+@dataclass(frozen=True, slots=True)
 class BatchStep:
     terminals: tuple[bool, ...]
     returns: tuple[float, ...]
@@ -166,10 +226,15 @@ class B01NativeBatchEnvironment:
         successes = np.empty((self.lanes, self.roster), dtype=np.bool_)
         for lane, row in enumerate(outputs):
             metrics = row.metrics
+            endpoint_receipt = derive_native_primitive_endpoint(
+                dw=int(metrics.dw), de=int(metrics.de),
+                radio_actions=int(metrics.radio_actions),
+                waste_actions=int(metrics.waste_actions), abi_waste=float(metrics.waste),
+            )
             terminals.append(bool(row.terminal))
-            returns.append(native_endpoint(int(metrics.dw), int(metrics.de), float(metrics.waste)))
+            returns.append(endpoint_receipt.endpoint)
             primitives.append(NativePrimitives(
-                dw=int(metrics.dw), de=int(metrics.de), waste=float(metrics.waste),
+                dw=int(metrics.dw), de=int(metrics.de), waste=endpoint_receipt.abi_waste,
                 duplicate=int(metrics.duplicate_arrivals),
                 expired=int(metrics.expired_arrivals), collision=int(metrics.collision_loss),
                 empty_radio=int(metrics.empty_actions), radio_actions=int(metrics.radio_actions),
