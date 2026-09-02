@@ -154,3 +154,26 @@ Each is one page and each has a matching measurement in section 5.
 Learned termination (D7), any train-k/test-k′ contract, oracle-retuned comparators, and failure
 boundaries are C-time items and appear only when a B signal repeats. No variable-N element enters
 this direction; churn-driven termination is the roster direction's concern.
+
+## 11. Decisions taken with the owner, 2026-09-02
+
+Confirmed one by one in session. These replace the [DECIDE] / [ASK] items above.
+
+| Item | Decision |
+| --- | --- |
+| A. First object | D2, policy-based interruption (no Q head) |
+| B. Team code Z | Two-level interruption: Z re-decided only when a team-level interruption fires on the global state |
+| C. Check interval | δ = 1, every step; chattering controlled by c |
+| D. First route | HMASD base route (`hmasd/agent.py`), aligned with the paper baseline |
+| E. Hosts | Existing UAV scenario 1 for E1/E2; relay-corridor family for E3/E4 |
+| F. SCDMP | Recast toward D6: the duration model's value is sharing Q(s, z, k) across k in place of |K|-arm exploration; semigroup consistency becomes optional analysis; to be recorded in SCDMP's next intake |
+| G. UCOPE | Stays independent; the exposure shortfall is fixed first; its odd/even duration split is a candidate C-time transfer test for this direction later |
+| H. ADR | The owner writes the one-page ADR for D2 and the corridor host; Claude reviews it adversarially (tutoring protocol) |
+| ASK 1. Toys | Plan mode is kept: Claude designs and reviews, the owner uses Codex as the implementer for the toys and for any repository code; Opus is not used to build them now |
+
+Predictions committed before any run (predict-then-verify):
+
+- Q4, owner's prediction: under the interruption rule the mean segment length versus switching cost c is monotone increasing, concave, and saturates at the episode length H. To be checked against the renewal-process toy when it runs.
+- Q5, owner's answer: unclear. Record the question ("after adding age as a discriminator input, does the label-agreement rate between adjacent checkpoints on a frozen probe set rise or fall?") and compare with the E1 result when it exists; both directions and the probe-set-dependence answer stay open.
+
+Implementation ownership from here: Codex implements toys and D2 under the owner's ADR; Claude keeps design, adversarial review, and the bounds in section 7.

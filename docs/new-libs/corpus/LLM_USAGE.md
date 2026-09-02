@@ -9,6 +9,10 @@
 5. Inspect the original PDF page whenever an extraction warning affects the
    exact object being used.
 
+For questions specifically about the B01 textbook, route through
+`papers/B01/SECTION_INDEX.md` instead of step 2-3 above — it is that paper's
+own outline-ordered, chunk-anchored entry point.
+
 ## Local search commands
 
 From the repository root in PowerShell:

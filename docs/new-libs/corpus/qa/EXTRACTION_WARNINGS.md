@@ -2,83 +2,56 @@
 
 Warnings are routing signals, not silently repaired source content.
 
-- `B01-C0001` PDF pages [1, 2, 3, 4, 5, 6]: scan_or_font_issue
-- `B01-C0002` PDF pages [7, 8, 9, 10, 11, 12]: scan_or_font_issue
-- `B01-C0004` PDF pages [19, 20, 21, 22, 23, 24]: scan_or_font_issue
-- `B01-C0005` PDF pages [25, 26, 27, 28, 29, 30]: scan_or_font_issue
-- `B01-C0007` PDF pages [37, 38, 39, 40, 41, 42]: equation_text_unreliable
-- `B01-C0008` PDF pages [43, 44, 45, 46, 47]: scan_or_font_issue
-- `B01-C0010` PDF pages [54, 55, 56, 57, 58, 59]: equation_text_unreliable
-- `B01-C0010` PDF pages [54, 55, 56, 57, 58, 59]: scan_or_font_issue
-- `B01-C0011` PDF pages [60, 61, 62, 63, 64, 65]: equation_text_unreliable
-- `B01-C0011` PDF pages [60, 61, 62, 63, 64, 65]: scan_or_font_issue
-- `B01-C0012` PDF pages [66, 67, 68, 69, 70, 71]: scan_or_font_issue
-- `B01-C0016` PDF pages [90, 91, 92, 93, 94, 95]: equation_text_unreliable
-- `B01-C0016` PDF pages [90, 91, 92, 93, 94, 95]: scan_or_font_issue
-- `B01-C0017` PDF pages [96, 97, 98, 99, 100, 101]: equation_text_unreliable
-- `B01-C0019` PDF pages [108, 109, 110, 111, 112, 113]: equation_text_unreliable
-- `B01-C0019` PDF pages [108, 109, 110, 111, 112, 113]: scan_or_font_issue
-- `B01-C0022` PDF pages [124, 125, 126, 127, 128, 129]: equation_text_unreliable
-- `B01-C0022` PDF pages [124, 125, 126, 127, 128, 129]: scan_or_font_issue
-- `B01-C0024` PDF pages [136, 137, 138, 139, 140, 141]: equation_text_unreliable
-- `B01-C0025` PDF pages [142, 143, 144, 145, 146, 147]: equation_text_unreliable
-- `B01-C0025` PDF pages [142, 143, 144, 145, 146, 147]: scan_or_font_issue
-- `B01-C0026` PDF pages [148, 149, 150, 151, 152, 153]: equation_text_unreliable
-- `B01-C0026` PDF pages [148, 149, 150, 151, 152, 153]: scan_or_font_issue
-- `B01-C0027` PDF pages [154, 155, 156, 157, 158, 159]: equation_text_unreliable
-- `B01-C0028` PDF pages [160, 161, 162, 163, 164, 165]: scan_or_font_issue
-- `B01-C0029` PDF pages [166, 167, 168, 169, 170, 171]: scan_or_font_issue
-- `B01-C0030` PDF pages [172, 173, 174, 175, 176, 177]: equation_text_unreliable
-- `B01-C0030` PDF pages [172, 173, 174, 175, 176, 177]: scan_or_font_issue
-- `B01-C0031` PDF pages [178, 179, 180, 181, 182, 183]: equation_text_unreliable
-- `B01-C0031` PDF pages [178, 179, 180, 181, 182, 183]: scan_or_font_issue
-- `B01-C0033` PDF pages [188, 189, 190, 191, 192, 193]: equation_text_unreliable
-- `B01-C0033` PDF pages [188, 189, 190, 191, 192, 193]: scan_or_font_issue
-- `B01-C0034` PDF pages [194, 195, 196, 197, 198, 199]: scan_or_font_issue
-- `B01-C0035` PDF pages [200, 201, 202, 203, 204, 205]: equation_text_unreliable
-- `B01-C0035` PDF pages [200, 201, 202, 203, 204, 205]: scan_or_font_issue
-- `B01-C0036` PDF pages [206, 207, 208, 209, 210, 211]: scan_or_font_issue
-- `B01-C0037` PDF pages [212, 213, 214, 215, 216, 217]: scan_or_font_issue
-- `B01-C0038` PDF pages [218, 219, 220, 221, 222, 223]: equation_text_unreliable
-- `B01-C0038` PDF pages [218, 219, 220, 221, 222, 223]: scan_or_font_issue
-- `B01-C0039` PDF pages [224, 225, 226, 227, 228, 229]: equation_text_unreliable
-- `B01-C0039` PDF pages [224, 225, 226, 227, 228, 229]: scan_or_font_issue
-- `B01-C0040` PDF pages [230, 231, 232, 233, 234, 235]: equation_text_unreliable
-- `B01-C0040` PDF pages [230, 231, 232, 233, 234, 235]: scan_or_font_issue
-- `B01-C0041` PDF pages [236, 237, 238, 239, 240, 241]: scan_or_font_issue
-- `B01-C0043` PDF pages [248, 249, 250, 251, 252, 253]: equation_text_unreliable
-- `B01-C0043` PDF pages [248, 249, 250, 251, 252, 253]: scan_or_font_issue
-- `B01-C0044` PDF pages [254, 255, 256, 257, 258, 259]: equation_text_unreliable
-- `B01-C0044` PDF pages [254, 255, 256, 257, 258, 259]: scan_or_font_issue
-- `B01-C0045` PDF pages [260, 261, 262, 263, 264, 265]: equation_text_unreliable
-- `B01-C0045` PDF pages [260, 261, 262, 263, 264, 265]: scan_or_font_issue
-- `B01-C0046` PDF pages [266, 267, 268, 269, 270, 271]: equation_text_unreliable
-- `B01-C0046` PDF pages [266, 267, 268, 269, 270, 271]: scan_or_font_issue
-- `B01-C0047` PDF pages [272, 273, 274, 275, 276, 277]: equation_text_unreliable
-- `B01-C0047` PDF pages [272, 273, 274, 275, 276, 277]: scan_or_font_issue
-- `B01-C0048` PDF pages [278, 279, 280, 281, 282, 283]: scan_or_font_issue
-- `B01-C0050` PDF pages [290, 291, 292, 293, 294, 295]: equation_text_unreliable
-- `B01-C0050` PDF pages [290, 291, 292, 293, 294, 295]: scan_or_font_issue
-- `B01-C0051` PDF pages [296, 297, 298, 299, 300, 301]: scan_or_font_issue
-- `B01-C0052` PDF pages [302, 303, 304, 305, 306, 307]: equation_text_unreliable
-- `B01-C0052` PDF pages [302, 303, 304, 305, 306, 307]: scan_or_font_issue
-- `B01-C0053` PDF pages [308, 309, 310, 311, 312, 313]: scan_or_font_issue
-- `B01-C0054` PDF pages [314, 315, 316, 317, 318, 319]: equation_text_unreliable
-- `B01-C0054` PDF pages [314, 315, 316, 317, 318, 319]: scan_or_font_issue
-- `B01-C0055` PDF pages [320, 321, 322, 323, 324, 325]: scan_or_font_issue
-- `B01-C0056` PDF pages [326, 327, 328, 329, 330, 331]: scan_or_font_issue
-- `B01-C0057` PDF pages [332, 333, 334, 335, 336, 337]: equation_text_unreliable
-- `B01-C0057` PDF pages [332, 333, 334, 335, 336, 337]: scan_or_font_issue
-- `B01-C0058` PDF pages [338, 339, 340, 341, 342, 343]: equation_text_unreliable
-- `B01-C0060` PDF pages [348, 349, 350, 351, 352, 353]: equation_text_unreliable
-- `B01-C0061` PDF pages [354, 355, 356, 357, 358, 359]: equation_text_unreliable
-- `B01-C0062` PDF pages [360, 361, 362, 363, 364, 365]: equation_text_unreliable
-- `B01-C0062` PDF pages [360, 361, 362, 363, 364, 365]: scan_or_font_issue
-- `B01-C0063` PDF pages [366, 367, 368, 369, 370, 371]: equation_text_unreliable
-- `B01-C0064` PDF pages [372, 373, 374, 375, 376, 377]: equation_text_unreliable
-- `B01-C0065` PDF pages [378, 379, 380, 381, 382, 383]: equation_text_unreliable
-- `B01-C0066` PDF pages [384, 385, 386, 387, 388, 389]: equation_text_unreliable
-- `B01-C0067` PDF pages [390, 391, 392, 393, 394, 395]: scan_or_font_issue
+- `B01-C0012` PDF pages [50, 51, 52, 53, 54]: equation_text_unreliable
+- `B01-C0013` PDF pages [55, 56, 57, 58, 59, 60]: equation_text_unreliable
+- `B01-C0014` PDF pages [61, 62, 63]: equation_text_unreliable
+- `B01-C0015` PDF pages [64, 65, 66, 67, 68]: equation_text_unreliable
+- `B01-C0016` PDF pages [69, 70, 71]: equation_text_unreliable
+- `B01-C0017` PDF pages [72, 73, 74, 75, 76, 77]: equation_text_unreliable
+- `B01-C0018` PDF pages [78, 79, 80, 81, 82]: equation_text_unreliable
+- `B01-C0019` PDF pages [83, 84, 85, 86]: equation_text_unreliable
+- `B01-C0021` PDF pages [90, 91, 92, 93]: equation_text_unreliable
+- `B01-C0022` PDF pages [94, 95, 96, 97, 98, 99]: equation_text_unreliable
+- `B01-C0023` PDF pages [100, 101, 102, 103, 104]: equation_text_unreliable
+- `B01-C0024` PDF pages [105, 106, 107, 108]: equation_text_unreliable
+- `B01-C0025` PDF pages [109, 110, 111]: equation_text_unreliable
+- `B01-C0027` PDF pages [118, 119, 120, 121, 122]: equation_text_unreliable
+- `B01-C0028` PDF pages [123, 124, 125, 126, 127, 128]: equation_text_unreliable
+- `B01-C0031` PDF pages [136, 137, 138, 139, 140]: equation_text_unreliable
+- `B01-C0033` PDF pages [144, 145, 146]: equation_text_unreliable
+- `B01-C0034` PDF pages [147, 148, 149, 150, 151, 152]: equation_text_unreliable
+- `B01-C0035` PDF pages [153, 154, 155]: equation_text_unreliable
+- `B01-C0036` PDF pages [156, 157, 158, 159, 160, 161]: equation_text_unreliable
+- `B01-C0037` PDF pages [162, 163, 164, 165, 166, 167]: equation_text_unreliable
+- `B01-C0038` PDF pages [168]: equation_text_unreliable
+- `B01-C0039` PDF pages [169, 170, 171, 172, 173, 174]: equation_text_unreliable
+- `B01-C0040` PDF pages [175, 176, 177, 178, 179]: equation_text_unreliable
+- `B01-C0041` PDF pages [180, 181, 182, 183, 184]: equation_text_unreliable
+- `B01-C0043` PDF pages [188, 189, 190, 191, 192]: equation_text_unreliable
+- `B01-C0044` PDF pages [193, 194, 195, 196, 197]: equation_text_unreliable
+- `B01-C0045` PDF pages [198, 199, 200, 201, 202, 203]: equation_text_unreliable
+- `B01-C0046` PDF pages [204, 205, 206, 207, 208]: equation_text_unreliable
+- `B01-C0048` PDF pages [212, 213, 214, 215, 216, 217]: equation_text_unreliable
+- `B01-C0049` PDF pages [218, 219, 220, 221, 222]: equation_text_unreliable
+- `B01-C0050` PDF pages [223, 224, 225, 226, 227, 228]: equation_text_unreliable
+- `B01-C0051` PDF pages [229, 230, 231, 232, 233, 234]: equation_text_unreliable
+- `B01-C0052` PDF pages [235, 236, 237, 238, 239, 240]: equation_text_unreliable
+- `B01-C0056` PDF pages [252, 253, 254, 255, 256, 257]: equation_text_unreliable
+- `B01-C0058` PDF pages [259, 260, 261, 262, 263, 264]: equation_text_unreliable
+- `B01-C0059` PDF pages [265, 266, 267, 268, 269, 270]: equation_text_unreliable
+- `B01-C0060` PDF pages [271, 272, 273, 274, 275, 276]: equation_text_unreliable
+- `B01-C0061` PDF pages [277, 278, 279, 280, 281, 282]: equation_text_unreliable
+- `B01-C0062` PDF pages [283, 284, 285, 286, 287, 288]: equation_text_unreliable
+- `B01-C0063` PDF pages [289, 290, 291, 292, 293, 294]: equation_text_unreliable
+- `B01-C0064` PDF pages [295, 296, 297, 298, 299, 300]: equation_text_unreliable
+- `B01-C0065` PDF pages [301, 302]: equation_text_unreliable
+- `B01-C0066` PDF pages [303, 304, 305, 306, 307, 308]: equation_text_unreliable
+- `B01-C0067` PDF pages [309]: equation_text_unreliable
+- `B01-C0068` PDF pages [310, 311, 312, 313, 314, 315]: equation_text_unreliable
+- `B01-C0069` PDF pages [316, 317, 318]: equation_text_unreliable
+- `B01-C0070` PDF pages [319, 320, 321, 322, 323, 324]: equation_text_unreliable
+- `B01-C0071` PDF pages [325, 326, 327, 328, 329]: equation_text_unreliable
+- `B01-C0077` PDF pages [352, 353, 354, 355, 356, 357]: equation_text_unreliable
 - `B02-C0002` PDF pages [7, 8, 9, 10, 11, 12]: scan_or_font_issue
 - `B02-C0004` PDF pages [19]: scan_or_font_issue
 - `B02-C0005` PDF pages [20, 21, 22, 23, 24, 25]: scan_or_font_issue
@@ -410,3 +383,5 @@ Warnings are routing signals, not silently repaired source content.
 - `P25-C0006` PDF pages [18, 19, 20, 21, 22, 23]: multi_column_order_uncertain
 - `P25-C0007` PDF pages [24, 25, 26, 27, 28, 29]: equation_text_unreliable
 - `P25-C0007` PDF pages [24, 25, 26, 27, 28, 29]: multi_column_order_uncertain
+
+B01 control-character glyphs (2026-09-02): 41 chunk files contained ASCII control bytes where expectation/bracket operators were extracted; replaced with U+FFFD and tagged `scan_or_font_issue` in the chunk headers, `chunks.jsonl`, and `search_index.jsonl`. Check the PDF page for any expression containing �.

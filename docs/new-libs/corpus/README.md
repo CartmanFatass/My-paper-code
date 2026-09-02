@@ -46,6 +46,11 @@ Each `papers/<ID>/` directory contains:
 Use the overview for orientation. Use claim rows for precise retrieval. Use
 chunks only when the actual surrounding source text is needed.
 
+For questions about the B01 textbook (Albrecht, Christianos, and Schäfer, *Multi-Agent
+Reinforcement Learning: Foundations and Modern Approaches*), start at
+[`papers/B01/SECTION_INDEX.md`](papers/B01/SECTION_INDEX.md), its outline-ordered,
+chunk-anchored LLM entry point.
+
 ## Retrieval contract for an LLM
 
 1. Identify the intended object: theorem, algorithm, empirical result,

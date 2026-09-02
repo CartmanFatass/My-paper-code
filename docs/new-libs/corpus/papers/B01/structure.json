@@ -4,152 +4,1933 @@
   "sections": [
     {
       "section_id": "S001",
-      "heading": "Front matter, notation, and preface",
+      "heading": "Summary of Notation",
       "level": 1,
       "pdf_pages": [
-        1,
-        29
+        16,
+        19
       ]
     },
     {
       "section_id": "S002",
-      "heading": "Chapter 1: Introduction",
+      "heading": "List of Figures",
       "level": 1,
+      "pdf_pages": [
+        20,
+        25
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Preface",
+      "level": 1,
+      "pdf_pages": [
+        26,
+        29
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "1 Introduction",
+      "level": 1,
+      "number": "1",
       "pdf_pages": [
         30,
         45
       ]
     },
     {
-      "section_id": "S003",
-      "heading": "Part I: Foundations of Multi-Agent Reinforcement Learning",
-      "level": 1,
+      "section_id": "S005",
+      "heading": "1.1 Multi-Agent Systems",
+      "level": 2,
+      "number": "1.1",
       "pdf_pages": [
-        46,
-        47
+        31,
+        33
       ]
     },
     {
-      "section_id": "S004",
-      "heading": "Chapter 2: Reinforcement Learning",
+      "section_id": "S006",
+      "heading": "1.2 Multi-Agent Reinforcement Learning",
+      "level": 2,
+      "number": "1.2",
+      "pdf_pages": [
+        34,
+        37
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "1.3 Application Examples",
+      "level": 2,
+      "number": "1.3",
+      "pdf_pages": [
+        38,
+        40
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "1.3.1 Multi-Robot Warehouse Management",
+      "level": 3,
+      "number": "1.3.1",
+      "pdf_pages": [
+        38,
+        38
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "1.3.2 Competitive Play in Board Games and Video Games",
+      "level": 3,
+      "number": "1.3.2",
+      "pdf_pages": [
+        39,
+        39
+      ]
+    },
+    {
+      "section_id": "S010",
+      "heading": "1.3.3 Autonomous Driving",
+      "level": 3,
+      "number": "1.3.3",
+      "pdf_pages": [
+        39,
+        39
+      ]
+    },
+    {
+      "section_id": "S011",
+      "heading": "1.3.4 Automated Trading in Electronic Markets",
+      "level": 3,
+      "number": "1.3.4",
+      "pdf_pages": [
+        40,
+        40
+      ]
+    },
+    {
+      "section_id": "S012",
+      "heading": "1.4 Challenges of MARL",
+      "level": 2,
+      "number": "1.4",
+      "pdf_pages": [
+        41,
+        41
+      ]
+    },
+    {
+      "section_id": "S013",
+      "heading": "1.5 Agendas of MARL",
+      "level": 2,
+      "number": "1.5",
+      "pdf_pages": [
+        42,
+        43
+      ]
+    },
+    {
+      "section_id": "S014",
+      "heading": "1.6 Book Contents and Structure",
+      "level": 2,
+      "number": "1.6",
+      "pdf_pages": [
+        44,
+        45
+      ]
+    },
+    {
+      "section_id": "S015",
+      "heading": "I Foundations of Multi-Agent Reinforcement Learning",
       "level": 1,
+      "number": "I",
+      "pdf_pages": [
+        46,
+        187
+      ]
+    },
+    {
+      "section_id": "S016",
+      "heading": "2 Reinforcement Learning",
+      "level": 2,
+      "number": "2",
       "pdf_pages": [
         48,
         71
       ]
     },
     {
-      "section_id": "S005",
-      "heading": "Chapter 3: Games: Models of Multi-Agent Interaction",
-      "level": 1,
+      "section_id": "S017",
+      "heading": "2.1 General Definition",
+      "level": 3,
+      "number": "2.1",
+      "pdf_pages": [
+        48,
+        49
+      ]
+    },
+    {
+      "section_id": "S018",
+      "heading": "2.2 Markov Decision Processes",
+      "level": 3,
+      "number": "2.2",
+      "pdf_pages": [
+        50,
+        52
+      ]
+    },
+    {
+      "section_id": "S019",
+      "heading": "2.3 Expected Discounted Returns and Optimal Policies",
+      "level": 3,
+      "number": "2.3",
+      "pdf_pages": [
+        53,
+        54
+      ]
+    },
+    {
+      "section_id": "S020",
+      "heading": "2.4 Value Functions and Bellman Equation",
+      "level": 3,
+      "number": "2.4",
+      "pdf_pages": [
+        55,
+        56
+      ]
+    },
+    {
+      "section_id": "S021",
+      "heading": "2.5 Dynamic Programming",
+      "level": 3,
+      "number": "2.5",
+      "pdf_pages": [
+        57,
+        60
+      ]
+    },
+    {
+      "section_id": "S022",
+      "heading": "2.6 Temporal-Difference Learning",
+      "level": 3,
+      "number": "2.6",
+      "pdf_pages": [
+        61,
+        63
+      ]
+    },
+    {
+      "section_id": "S023",
+      "heading": "2.7 Evaluation with Learning Curves",
+      "level": 3,
+      "number": "2.7",
+      "pdf_pages": [
+        64,
+        67
+      ]
+    },
+    {
+      "section_id": "S024",
+      "heading": "2.8 Equivalence of R(s,a,s') and R(s,a)",
+      "level": 3,
+      "number": "2.8",
+      "pdf_pages": [
+        68,
+        68
+      ]
+    },
+    {
+      "section_id": "S025",
+      "heading": "2.9 Summary",
+      "level": 3,
+      "number": "2.9",
+      "pdf_pages": [
+        69,
+        71
+      ]
+    },
+    {
+      "section_id": "S026",
+      "heading": "3 Games: Models of Multi-Agent Interaction",
+      "level": 2,
+      "number": "3",
       "pdf_pages": [
         72,
         89
       ]
     },
     {
-      "section_id": "S006",
-      "heading": "Chapter 4: Solution Concepts for Games",
-      "level": 1,
+      "section_id": "S027",
+      "heading": "3.1 Normal-Form Games",
+      "level": 3,
+      "number": "3.1",
+      "pdf_pages": [
+        72,
+        74
+      ]
+    },
+    {
+      "section_id": "S028",
+      "heading": "3.2 Repeated Normal-Form Games",
+      "level": 3,
+      "number": "3.2",
+      "pdf_pages": [
+        75,
+        75
+      ]
+    },
+    {
+      "section_id": "S029",
+      "heading": "3.3 Stochastic Games",
+      "level": 3,
+      "number": "3.3",
+      "pdf_pages": [
+        76,
+        77
+      ]
+    },
+    {
+      "section_id": "S030",
+      "heading": "3.4 Partially Observable Stochastic Games",
+      "level": 3,
+      "number": "3.4",
+      "pdf_pages": [
+        78,
+        82
+      ]
+    },
+    {
+      "section_id": "S031",
+      "heading": "3.4.1 Belief States and Filtering",
+      "level": 4,
+      "number": "3.4.1",
+      "pdf_pages": [
+        82,
+        82
+      ]
+    },
+    {
+      "section_id": "S032",
+      "heading": "3.5 Modeling Communication",
+      "level": 3,
+      "number": "3.5",
+      "pdf_pages": [
+        83,
+        84
+      ]
+    },
+    {
+      "section_id": "S033",
+      "heading": "3.6 Knowledge Assumptions in Games",
+      "level": 3,
+      "number": "3.6",
+      "pdf_pages": [
+        85,
+        86
+      ]
+    },
+    {
+      "section_id": "S034",
+      "heading": "3.7 Dictionary: Reinforcement Learning  Game Theory",
+      "level": 3,
+      "number": "3.7",
+      "pdf_pages": [
+        87,
+        87
+      ]
+    },
+    {
+      "section_id": "S035",
+      "heading": "3.8 Summary",
+      "level": 3,
+      "number": "3.8",
+      "pdf_pages": [
+        87,
+        89
+      ]
+    },
+    {
+      "section_id": "S036",
+      "heading": "4 Solution Concepts for Games",
+      "level": 2,
+      "number": "4",
       "pdf_pages": [
         90,
         117
       ]
     },
     {
-      "section_id": "S007",
-      "heading": "Chapter 5: MARL in Games: First Steps and Challenges",
-      "level": 1,
+      "section_id": "S037",
+      "heading": "4.1 Joint Policy and Expected Return",
+      "level": 3,
+      "number": "4.1",
+      "pdf_pages": [
+        91,
+        93
+      ]
+    },
+    {
+      "section_id": "S038",
+      "heading": "4.2 Best Response",
+      "level": 3,
+      "number": "4.2",
+      "pdf_pages": [
+        94,
+        94
+      ]
+    },
+    {
+      "section_id": "S039",
+      "heading": "4.3 Minimax",
+      "level": 3,
+      "number": "4.3",
+      "pdf_pages": [
+        94,
+        96
+      ]
+    },
+    {
+      "section_id": "S040",
+      "heading": "4.3.1 Minimax Solution via Linear Programming",
+      "level": 4,
+      "number": "4.3.1",
+      "pdf_pages": [
+        96,
+        96
+      ]
+    },
+    {
+      "section_id": "S041",
+      "heading": "4.4 Nash Equilibrium",
+      "level": 3,
+      "number": "4.4",
+      "pdf_pages": [
+        97,
+        98
+      ]
+    },
+    {
+      "section_id": "S042",
+      "heading": "4.5 -Nash Equilibrium",
+      "level": 3,
+      "number": "4.5",
+      "pdf_pages": [
+        99,
+        99
+      ]
+    },
+    {
+      "section_id": "S043",
+      "heading": "4.6 (Coarse) Correlated Equilibrium",
+      "level": 3,
+      "number": "4.6",
+      "pdf_pages": [
+        100,
+        103
+      ]
+    },
+    {
+      "section_id": "S044",
+      "heading": "4.6.1 Correlated Equilibrium via Linear Programming",
+      "level": 4,
+      "number": "4.6.1",
+      "pdf_pages": [
+        103,
+        103
+      ]
+    },
+    {
+      "section_id": "S045",
+      "heading": "4.7 Conceptual Limitations of Equilibrium Solutions",
+      "level": 3,
+      "number": "4.7",
+      "pdf_pages": [
+        104,
+        104
+      ]
+    },
+    {
+      "section_id": "S046",
+      "heading": "4.8 Pareto Optimality",
+      "level": 3,
+      "number": "4.8",
+      "pdf_pages": [
+        105,
+        106
+      ]
+    },
+    {
+      "section_id": "S047",
+      "heading": "4.9 Social Welfare and Fairness",
+      "level": 3,
+      "number": "4.9",
+      "pdf_pages": [
+        107,
+        108
+      ]
+    },
+    {
+      "section_id": "S048",
+      "heading": "4.10 No-Regret",
+      "level": 3,
+      "number": "4.10",
+      "pdf_pages": [
+        109,
+        111
+      ]
+    },
+    {
+      "section_id": "S049",
+      "heading": "4.11 The Complexity of Computing Equilibria",
+      "level": 3,
+      "number": "4.11",
+      "pdf_pages": [
+        112,
+        115
+      ]
+    },
+    {
+      "section_id": "S050",
+      "heading": "4.11.1 PPAD Complexity Class",
+      "level": 4,
+      "number": "4.11.1",
+      "pdf_pages": [
+        113,
+        114
+      ]
+    },
+    {
+      "section_id": "S051",
+      "heading": "4.11.2 Computing -Nash Equilibrium Is PPAD-Complete",
+      "level": 4,
+      "number": "4.11.2",
+      "pdf_pages": [
+        115,
+        115
+      ]
+    },
+    {
+      "section_id": "S052",
+      "heading": "4.12 Summary",
+      "level": 3,
+      "number": "4.12",
+      "pdf_pages": [
+        116,
+        117
+      ]
+    },
+    {
+      "section_id": "S053",
+      "heading": "5 Multi-Agent Reinforcement Learning in Games: First Steps and Challenges",
+      "level": 2,
+      "number": "5",
       "pdf_pages": [
         118,
         143
       ]
     },
     {
-      "section_id": "S008",
-      "heading": "Chapter 6: Foundational MARL Algorithms",
-      "level": 1,
+      "section_id": "S054",
+      "heading": "5.1 General Learning Process",
+      "level": 3,
+      "number": "5.1",
+      "pdf_pages": [
+        119,
+        120
+      ]
+    },
+    {
+      "section_id": "S055",
+      "heading": "5.2 Convergence Types",
+      "level": 3,
+      "number": "5.2",
+      "pdf_pages": [
+        121,
+        122
+      ]
+    },
+    {
+      "section_id": "S056",
+      "heading": "5.3 Single-Agent RL Reductions",
+      "level": 3,
+      "number": "5.3",
+      "pdf_pages": [
+        123,
+        129
+      ]
+    },
+    {
+      "section_id": "S057",
+      "heading": "5.3.1 Central Learning",
+      "level": 4,
+      "number": "5.3.1",
+      "pdf_pages": [
+        124,
+        125
+      ]
+    },
+    {
+      "section_id": "S058",
+      "heading": "5.3.2 Independent Learning",
+      "level": 4,
+      "number": "5.3.2",
+      "pdf_pages": [
+        126,
+        127
+      ]
+    },
+    {
+      "section_id": "S059",
+      "heading": "5.3.3 Example: Level-Based Foraging",
+      "level": 4,
+      "number": "5.3.3",
+      "pdf_pages": [
+        128,
+        129
+      ]
+    },
+    {
+      "section_id": "S060",
+      "heading": "5.4 Challenges of MARL",
+      "level": 3,
+      "number": "5.4",
+      "pdf_pages": [
+        130,
+        137
+      ]
+    },
+    {
+      "section_id": "S061",
+      "heading": "5.4.1 Non-Stationarity",
+      "level": 4,
+      "number": "5.4.1",
+      "pdf_pages": [
+        131,
+        132
+      ]
+    },
+    {
+      "section_id": "S062",
+      "heading": "5.4.2 Equilibrium Selection",
+      "level": 4,
+      "number": "5.4.2",
+      "pdf_pages": [
+        133,
+        134
+      ]
+    },
+    {
+      "section_id": "S063",
+      "heading": "5.4.3 Multi-Agent Credit Assignment",
+      "level": 4,
+      "number": "5.4.3",
+      "pdf_pages": [
+        135,
+        136
+      ]
+    },
+    {
+      "section_id": "S064",
+      "heading": "5.4.4 Scaling to Many Agents",
+      "level": 4,
+      "number": "5.4.4",
+      "pdf_pages": [
+        137,
+        137
+      ]
+    },
+    {
+      "section_id": "S065",
+      "heading": "5.5 What Algorithms Do Agents Use?",
+      "level": 3,
+      "number": "5.5",
+      "pdf_pages": [
+        138,
+        140
+      ]
+    },
+    {
+      "section_id": "S066",
+      "heading": "5.5.1 Self-Play",
+      "level": 4,
+      "number": "5.5.1",
+      "pdf_pages": [
+        139,
+        139
+      ]
+    },
+    {
+      "section_id": "S067",
+      "heading": "5.5.2 Mixed-Play",
+      "level": 4,
+      "number": "5.5.2",
+      "pdf_pages": [
+        140,
+        140
+      ]
+    },
+    {
+      "section_id": "S068",
+      "heading": "5.6 Summary",
+      "level": 3,
+      "number": "5.6",
+      "pdf_pages": [
+        141,
+        143
+      ]
+    },
+    {
+      "section_id": "S069",
+      "heading": "6 Multi-Agent Reinforcement Learning: Foundational Algorithms",
+      "level": 2,
+      "number": "6",
       "pdf_pages": [
         144,
         187
       ]
     },
     {
-      "section_id": "S009",
-      "heading": "Part II: Multi-Agent Deep Reinforcement Learning",
-      "level": 1,
+      "section_id": "S070",
+      "heading": "6.1 Dynamic Programming for Games: Value Iteration",
+      "level": 3,
+      "number": "6.1",
       "pdf_pages": [
-        188,
-        189
+        145,
+        146
       ]
     },
     {
-      "section_id": "S010",
-      "heading": "Chapter 7: Deep Learning",
+      "section_id": "S071",
+      "heading": "6.2 Temporal-Difference Learning for Games: Joint-Action Learning",
+      "level": 3,
+      "number": "6.2",
+      "pdf_pages": [
+        147,
+        155
+      ]
+    },
+    {
+      "section_id": "S072",
+      "heading": "6.2.1 Minimax Q-Learning",
+      "level": 4,
+      "number": "6.2.1",
+      "pdf_pages": [
+        150,
+        151
+      ]
+    },
+    {
+      "section_id": "S073",
+      "heading": "6.2.2 Nash Q-Learning",
+      "level": 4,
+      "number": "6.2.2",
+      "pdf_pages": [
+        152,
+        152
+      ]
+    },
+    {
+      "section_id": "S074",
+      "heading": "6.2.3 Correlated Q-Learning",
+      "level": 4,
+      "number": "6.2.3",
+      "pdf_pages": [
+        153,
+        153
+      ]
+    },
+    {
+      "section_id": "S075",
+      "heading": "6.2.4 Limitations of Joint-Action Learning",
+      "level": 4,
+      "number": "6.2.4",
+      "pdf_pages": [
+        153,
+        155
+      ]
+    },
+    {
+      "section_id": "S076",
+      "heading": "6.3 Agent Modeling",
+      "level": 3,
+      "number": "6.3",
+      "pdf_pages": [
+        156,
+        168
+      ]
+    },
+    {
+      "section_id": "S077",
+      "heading": "6.3.1 Fictitious Play",
+      "level": 4,
+      "number": "6.3.1",
+      "pdf_pages": [
+        157,
+        159
+      ]
+    },
+    {
+      "section_id": "S078",
+      "heading": "6.3.2 Joint-Action Learning with Agent Modeling",
+      "level": 4,
+      "number": "6.3.2",
+      "pdf_pages": [
+        160,
+        162
+      ]
+    },
+    {
+      "section_id": "S079",
+      "heading": "6.3.3 Bayesian Learning and Value of Information",
+      "level": 4,
+      "number": "6.3.3",
+      "pdf_pages": [
+        163,
+        168
+      ]
+    },
+    {
+      "section_id": "S080",
+      "heading": "6.4 Policy-Based Learning",
+      "level": 3,
+      "number": "6.4",
+      "pdf_pages": [
+        169,
+        179
+      ]
+    },
+    {
+      "section_id": "S081",
+      "heading": "6.4.1 Gradient Ascent in Expected Reward",
+      "level": 4,
+      "number": "6.4.1",
+      "pdf_pages": [
+        169,
+        170
+      ]
+    },
+    {
+      "section_id": "S082",
+      "heading": "6.4.2 Learning Dynamics of Infinitesimal Gradient Ascent",
+      "level": 4,
+      "number": "6.4.2",
+      "pdf_pages": [
+        171,
+        172
+      ]
+    },
+    {
+      "section_id": "S083",
+      "heading": "6.4.3 Win or Learn Fast",
+      "level": 4,
+      "number": "6.4.3",
+      "pdf_pages": [
+        173,
+        175
+      ]
+    },
+    {
+      "section_id": "S084",
+      "heading": "6.4.4 Win or Learn Fast with Policy Hill Climbing",
+      "level": 4,
+      "number": "6.4.4",
+      "pdf_pages": [
+        176,
+        177
+      ]
+    },
+    {
+      "section_id": "S085",
+      "heading": "6.4.5 Generalized Infinitesimal Gradient Ascent",
+      "level": 4,
+      "number": "6.4.5",
+      "pdf_pages": [
+        178,
+        179
+      ]
+    },
+    {
+      "section_id": "S086",
+      "heading": "6.5 No-Regret Learning",
+      "level": 3,
+      "number": "6.5",
+      "pdf_pages": [
+        180,
+        184
+      ]
+    },
+    {
+      "section_id": "S087",
+      "heading": "6.5.1 Unconditional and Conditional Regret Matching",
+      "level": 4,
+      "number": "6.5.1",
+      "pdf_pages": [
+        180,
+        181
+      ]
+    },
+    {
+      "section_id": "S088",
+      "heading": "6.5.2 Convergence of Regret Matching",
+      "level": 4,
+      "number": "6.5.2",
+      "pdf_pages": [
+        182,
+        184
+      ]
+    },
+    {
+      "section_id": "S089",
+      "heading": "6.6 Summary",
+      "level": 3,
+      "number": "6.6",
+      "pdf_pages": [
+        185,
+        187
+      ]
+    },
+    {
+      "section_id": "S090",
+      "heading": "II Multi-Agent Deep Reinforcement Learning: Algorithms and Practice",
       "level": 1,
+      "pdf_pages": [
+        188,
+        395
+      ]
+    },
+    {
+      "section_id": "S091",
+      "heading": "7 Deep Learning",
+      "level": 2,
+      "number": "7",
       "pdf_pages": [
         190,
         211
       ]
     },
     {
-      "section_id": "S011",
-      "heading": "Chapter 8: Deep Reinforcement Learning",
-      "level": 1,
+      "section_id": "S092",
+      "heading": "7.1 Function Approximation for Reinforcement Learning",
+      "level": 3,
+      "number": "7.1",
+      "pdf_pages": [
+        190,
+        191
+      ]
+    },
+    {
+      "section_id": "S093",
+      "heading": "7.2 Linear Function Approximation",
+      "level": 3,
+      "number": "7.2",
+      "pdf_pages": [
+        192,
+        192
+      ]
+    },
+    {
+      "section_id": "S094",
+      "heading": "7.3 Feedforward Neural Networks",
+      "level": 3,
+      "number": "7.3",
+      "pdf_pages": [
+        193,
+        197
+      ]
+    },
+    {
+      "section_id": "S095",
+      "heading": "7.3.1 Neural Unit",
+      "level": 4,
+      "number": "7.3.1",
+      "pdf_pages": [
+        195,
+        195
+      ]
+    },
+    {
+      "section_id": "S096",
+      "heading": "7.3.2 Activation Functions",
+      "level": 4,
+      "number": "7.3.2",
+      "pdf_pages": [
+        196,
+        196
+      ]
+    },
+    {
+      "section_id": "S097",
+      "heading": "7.3.3 Composing a Network from Layers and Units",
+      "level": 4,
+      "number": "7.3.3",
+      "pdf_pages": [
+        197,
+        197
+      ]
+    },
+    {
+      "section_id": "S098",
+      "heading": "7.4 Gradient-Based Optimization",
+      "level": 3,
+      "number": "7.4",
+      "pdf_pages": [
+        198,
+        203
+      ]
+    },
+    {
+      "section_id": "S099",
+      "heading": "7.4.1 Loss Function",
+      "level": 4,
+      "number": "7.4.1",
+      "pdf_pages": [
+        199,
+        199
+      ]
+    },
+    {
+      "section_id": "S100",
+      "heading": "7.4.2 Gradient Descent",
+      "level": 4,
+      "number": "7.4.2",
+      "pdf_pages": [
+        200,
+        202
+      ]
+    },
+    {
+      "section_id": "S101",
+      "heading": "7.4.3 Backpropagation",
+      "level": 4,
+      "number": "7.4.3",
+      "pdf_pages": [
+        203,
+        203
+      ]
+    },
+    {
+      "section_id": "S102",
+      "heading": "7.5 Convolutional and Recurrent Neural Networks",
+      "level": 3,
+      "number": "7.5",
+      "pdf_pages": [
+        204,
+        208
+      ]
+    },
+    {
+      "section_id": "S103",
+      "heading": "7.5.1 Learning from Images—Exploiting Spatial Relationships in Data",
+      "level": 4,
+      "number": "7.5.1",
+      "pdf_pages": [
+        204,
+        206
+      ]
+    },
+    {
+      "section_id": "S104",
+      "heading": "7.5.2 Learning from Sequences with Memory",
+      "level": 4,
+      "number": "7.5.2",
+      "pdf_pages": [
+        207,
+        208
+      ]
+    },
+    {
+      "section_id": "S105",
+      "heading": "7.6 Summary",
+      "level": 3,
+      "number": "7.6",
+      "pdf_pages": [
+        209,
+        211
+      ]
+    },
+    {
+      "section_id": "S106",
+      "heading": "8 Deep Reinforcement Learning",
+      "level": 2,
+      "number": "8",
       "pdf_pages": [
         212,
         247
       ]
     },
     {
-      "section_id": "S012",
-      "heading": "Chapter 9: Multi-Agent Deep Reinforcement Learning",
-      "level": 1,
+      "section_id": "S107",
+      "heading": "8.1 Deep Value Function Approximation",
+      "level": 3,
+      "number": "8.1",
+      "pdf_pages": [
+        212,
+        222
+      ]
+    },
+    {
+      "section_id": "S108",
+      "heading": "8.1.1 Deep Q-Learning—What Can Go Wrong?",
+      "level": 4,
+      "number": "8.1.1",
+      "pdf_pages": [
+        213,
+        215
+      ]
+    },
+    {
+      "section_id": "S109",
+      "heading": "8.1.2 Moving Target Problem",
+      "level": 4,
+      "number": "8.1.2",
+      "pdf_pages": [
+        216,
+        216
+      ]
+    },
+    {
+      "section_id": "S110",
+      "heading": "8.1.3 Breaking Correlations",
+      "level": 4,
+      "number": "8.1.3",
+      "pdf_pages": [
+        217,
+        219
+      ]
+    },
+    {
+      "section_id": "S111",
+      "heading": "8.1.4 Putting It All Together: Deep Q-Networks",
+      "level": 4,
+      "number": "8.1.4",
+      "pdf_pages": [
+        220,
+        221
+      ]
+    },
+    {
+      "section_id": "S112",
+      "heading": "8.1.5 Beyond Deep Q-Networks",
+      "level": 4,
+      "number": "8.1.5",
+      "pdf_pages": [
+        222,
+        222
+      ]
+    },
+    {
+      "section_id": "S113",
+      "heading": "8.2 Policy Gradient Algorithms",
+      "level": 3,
+      "number": "8.2",
+      "pdf_pages": [
+        223,
+        243
+      ]
+    },
+    {
+      "section_id": "S114",
+      "heading": "8.2.1 Advantages of Learning a Policy",
+      "level": 4,
+      "number": "8.2.1",
+      "pdf_pages": [
+        224,
+        225
+      ]
+    },
+    {
+      "section_id": "S115",
+      "heading": "8.2.2 Policy Gradient Theorem",
+      "level": 4,
+      "number": "8.2.2",
+      "pdf_pages": [
+        226,
+        228
+      ]
+    },
+    {
+      "section_id": "S116",
+      "heading": "8.2.3 REINFORCE: Monte Carlo Policy Gradient",
+      "level": 4,
+      "number": "8.2.3",
+      "pdf_pages": [
+        229,
+        230
+      ]
+    },
+    {
+      "section_id": "S117",
+      "heading": "8.2.4 Actor-Critic Algorithms",
+      "level": 4,
+      "number": "8.2.4",
+      "pdf_pages": [
+        231,
+        232
+      ]
+    },
+    {
+      "section_id": "S118",
+      "heading": "8.2.5 A2C: Advantage Actor-Critic",
+      "level": 4,
+      "number": "8.2.5",
+      "pdf_pages": [
+        233,
+        235
+      ]
+    },
+    {
+      "section_id": "S119",
+      "heading": "8.2.6 PPO: Proximal Policy Optimization",
+      "level": 4,
+      "number": "8.2.6",
+      "pdf_pages": [
+        236,
+        237
+      ]
+    },
+    {
+      "section_id": "S120",
+      "heading": "8.2.7 Policy Gradient Algorithms in Practice",
+      "level": 4,
+      "number": "8.2.7",
+      "pdf_pages": [
+        238,
+        238
+      ]
+    },
+    {
+      "section_id": "S121",
+      "heading": "8.2.8 Concurrent Training of Policies",
+      "level": 4,
+      "number": "8.2.8",
+      "pdf_pages": [
+        239,
+        243
+      ]
+    },
+    {
+      "section_id": "S122",
+      "heading": "8.3 Observations, States, and Histories in Practice",
+      "level": 3,
+      "number": "8.3",
+      "pdf_pages": [
+        244,
+        244
+      ]
+    },
+    {
+      "section_id": "S123",
+      "heading": "8.4 Summary",
+      "level": 3,
+      "number": "8.4",
+      "pdf_pages": [
+        245,
+        247
+      ]
+    },
+    {
+      "section_id": "S124",
+      "heading": "9 Multi-Agent Deep Reinforcement Learning",
+      "level": 2,
+      "number": "9",
       "pdf_pages": [
         248,
         333
       ]
     },
     {
-      "section_id": "S013",
-      "heading": "Chapter 10: MARL in Practice",
-      "level": 1,
+      "section_id": "S125",
+      "heading": "9.1 Training and Execution Modes",
+      "level": 3,
+      "number": "9.1",
+      "pdf_pages": [
+        249,
+        250
+      ]
+    },
+    {
+      "section_id": "S126",
+      "heading": "9.1.1 Centralized Training and Execution",
+      "level": 4,
+      "number": "9.1.1",
+      "pdf_pages": [
+        249,
+        249
+      ]
+    },
+    {
+      "section_id": "S127",
+      "heading": "9.1.2 Decentralized Training and Execution",
+      "level": 4,
+      "number": "9.1.2",
+      "pdf_pages": [
+        250,
+        250
+      ]
+    },
+    {
+      "section_id": "S128",
+      "heading": "9.1.3 Centralized Training with Decentralized Execution",
+      "level": 4,
+      "number": "9.1.3",
+      "pdf_pages": [
+        251,
+        251
+      ]
+    },
+    {
+      "section_id": "S129",
+      "heading": "9.2 Notation for Multi-Agent Deep Reinforcement Learning",
+      "level": 3,
+      "number": "9.2",
+      "pdf_pages": [
+        251,
+        251
+      ]
+    },
+    {
+      "section_id": "S130",
+      "heading": "9.3 Independent Learning",
+      "level": 3,
+      "number": "9.3",
+      "pdf_pages": [
+        252,
+        258
+      ]
+    },
+    {
+      "section_id": "S131",
+      "heading": "9.3.1 Independent Value-Based Learning",
+      "level": 4,
+      "number": "9.3.1",
+      "pdf_pages": [
+        253,
+        254
+      ]
+    },
+    {
+      "section_id": "S132",
+      "heading": "9.3.2 Independent Policy Gradient Methods",
+      "level": 4,
+      "number": "9.3.2",
+      "pdf_pages": [
+        255,
+        256
+      ]
+    },
+    {
+      "section_id": "S133",
+      "heading": "9.3.3 Example: Deep Independent Learning in a LargeTask",
+      "level": 4,
+      "number": "9.3.3",
+      "pdf_pages": [
+        257,
+        258
+      ]
+    },
+    {
+      "section_id": "S134",
+      "heading": "9.4 Multi-Agent Policy Gradient Algorithms",
+      "level": 3,
+      "number": "9.4",
+      "pdf_pages": [
+        259,
+        270
+      ]
+    },
+    {
+      "section_id": "S135",
+      "heading": "9.4.1 Multi-Agent Policy Gradient Theorem",
+      "level": 4,
+      "number": "9.4.1",
+      "pdf_pages": [
+        260,
+        260
+      ]
+    },
+    {
+      "section_id": "S136",
+      "heading": "9.4.2 Centralized Critics",
+      "level": 4,
+      "number": "9.4.2",
+      "pdf_pages": [
+        261,
+        264
+      ]
+    },
+    {
+      "section_id": "S137",
+      "heading": "9.4.3 Centralized Action-Value Critics",
+      "level": 4,
+      "number": "9.4.3",
+      "pdf_pages": [
+        265,
+        265
+      ]
+    },
+    {
+      "section_id": "S138",
+      "heading": "9.4.4 Counterfactual Action-Value Estimation",
+      "level": 4,
+      "number": "9.4.4",
+      "pdf_pages": [
+        266,
+        267
+      ]
+    },
+    {
+      "section_id": "S139",
+      "heading": "9.4.5 Equilibrium Selection with Centralized Action-Value Critics",
+      "level": 4,
+      "number": "9.4.5",
+      "pdf_pages": [
+        268,
+        270
+      ]
+    },
+    {
+      "section_id": "S140",
+      "heading": "9.5 Value Decomposition in Common-Reward Games",
+      "level": 3,
+      "number": "9.5",
+      "pdf_pages": [
+        271,
+        294
+      ]
+    },
+    {
+      "section_id": "S141",
+      "heading": "9.5.1 Individual-Global-Max Property",
+      "level": 4,
+      "number": "9.5.1",
+      "pdf_pages": [
+        273,
+        274
+      ]
+    },
+    {
+      "section_id": "S142",
+      "heading": "9.5.2 Linear Value Decomposition",
+      "level": 4,
+      "number": "9.5.2",
+      "pdf_pages": [
+        275,
+        277
+      ]
+    },
+    {
+      "section_id": "S143",
+      "heading": "9.5.3 Monotonic Value Decomposition",
+      "level": 4,
+      "number": "9.5.3",
+      "pdf_pages": [
+        278,
+        283
+      ]
+    },
+    {
+      "section_id": "S144",
+      "heading": "9.5.4 Value Decomposition in Practice",
+      "level": 4,
+      "number": "9.5.4",
+      "pdf_pages": [
+        284,
+        289
+      ]
+    },
+    {
+      "section_id": "S145",
+      "heading": "9.5.5 Beyond Monotonic Value Decomposition",
+      "level": 4,
+      "number": "9.5.5",
+      "pdf_pages": [
+        290,
+        294
+      ]
+    },
+    {
+      "section_id": "S146",
+      "heading": "9.6 Agent Modeling with Neural Networks",
+      "level": 3,
+      "number": "9.6",
+      "pdf_pages": [
+        295,
+        302
+      ]
+    },
+    {
+      "section_id": "S147",
+      "heading": "9.6.1 Joint-Action Learning with Deep Agent Models",
+      "level": 4,
+      "number": "9.6.1",
+      "pdf_pages": [
+        296,
+        299
+      ]
+    },
+    {
+      "section_id": "S148",
+      "heading": "9.6.2 Learning Representations of Agent Policies",
+      "level": 4,
+      "number": "9.6.2",
+      "pdf_pages": [
+        300,
+        302
+      ]
+    },
+    {
+      "section_id": "S149",
+      "heading": "9.7 Environments with Homogeneous Agents",
+      "level": 3,
+      "number": "9.7",
+      "pdf_pages": [
+        303,
+        309
+      ]
+    },
+    {
+      "section_id": "S150",
+      "heading": "9.7.1 Parameter Sharing",
+      "level": 4,
+      "number": "9.7.1",
+      "pdf_pages": [
+        305,
+        306
+      ]
+    },
+    {
+      "section_id": "S151",
+      "heading": "9.7.2 Experience Sharing",
+      "level": 4,
+      "number": "9.7.2",
+      "pdf_pages": [
+        307,
+        309
+      ]
+    },
+    {
+      "section_id": "S152",
+      "heading": "9.8 Policy Self-Play in Zero-Sum Games",
+      "level": 3,
+      "number": "9.8",
+      "pdf_pages": [
+        310,
+        318
+      ]
+    },
+    {
+      "section_id": "S153",
+      "heading": "9.8.1 Monte Carlo Tree Search",
+      "level": 4,
+      "number": "9.8.1",
+      "pdf_pages": [
+        312,
+        314
+      ]
+    },
+    {
+      "section_id": "S154",
+      "heading": "9.8.2 Self-Play MCTS",
+      "level": 4,
+      "number": "9.8.2",
+      "pdf_pages": [
+        315,
+        316
+      ]
+    },
+    {
+      "section_id": "S155",
+      "heading": "9.8.3 Self-Play MCTS with Deep Neural Networks: AlphaZero",
+      "level": 4,
+      "number": "9.8.3",
+      "pdf_pages": [
+        317,
+        318
+      ]
+    },
+    {
+      "section_id": "S156",
+      "heading": "9.9 Population-Based Training",
+      "level": 3,
+      "number": "9.9",
+      "pdf_pages": [
+        319,
+        329
+      ]
+    },
+    {
+      "section_id": "S157",
+      "heading": "9.9.1 Policy Space Response Oracles",
+      "level": 4,
+      "number": "9.9.1",
+      "pdf_pages": [
+        321,
+        323
+      ]
+    },
+    {
+      "section_id": "S158",
+      "heading": "9.9.2 Convergence of PSRO",
+      "level": 4,
+      "number": "9.9.2",
+      "pdf_pages": [
+        324,
+        325
+      ]
+    },
+    {
+      "section_id": "S159",
+      "heading": "9.9.3 Grandmaster Level in StarCraft II: as",
+      "level": 4,
+      "number": "9.9.3",
+      "pdf_pages": [
+        326,
+        329
+      ]
+    },
+    {
+      "section_id": "S160",
+      "heading": "9.10 Summary",
+      "level": 3,
+      "number": "9.10",
+      "pdf_pages": [
+        330,
+        333
+      ]
+    },
+    {
+      "section_id": "S161",
+      "heading": "10 Multi-Agent Deep Reinforcement Learning in Practice",
+      "level": 2,
+      "number": "10",
       "pdf_pages": [
         334,
         347
       ]
     },
     {
-      "section_id": "S014",
-      "heading": "Chapter 11: Multi-Agent Environments",
-      "level": 1,
+      "section_id": "S162",
+      "heading": "10.1 The Agent-Environment Interface",
+      "level": 3,
+      "number": "10.1",
+      "pdf_pages": [
+        334,
+        335
+      ]
+    },
+    {
+      "section_id": "S163",
+      "heading": "10.2 MARL Neural Networks in PyTorch",
+      "level": 3,
+      "number": "10.2",
+      "pdf_pages": [
+        336,
+        339
+      ]
+    },
+    {
+      "section_id": "S164",
+      "heading": "10.2.1 Seamless Parameter Sharing Implementation",
+      "level": 4,
+      "number": "10.2.1",
+      "pdf_pages": [
+        338,
+        338
+      ]
+    },
+    {
+      "section_id": "S165",
+      "heading": "10.2.2 Defining the Models: An Example with IDQN",
+      "level": 4,
+      "number": "10.2.2",
+      "pdf_pages": [
+        339,
+        339
+      ]
+    },
+    {
+      "section_id": "S166",
+      "heading": "10.3 Centralized Value Functions",
+      "level": 3,
+      "number": "10.3",
+      "pdf_pages": [
+        340,
+        340
+      ]
+    },
+    {
+      "section_id": "S167",
+      "heading": "10.4 Value Decomposition",
+      "level": 3,
+      "number": "10.4",
+      "pdf_pages": [
+        341,
+        341
+      ]
+    },
+    {
+      "section_id": "S168",
+      "heading": "10.5 Practical Tips for MARL Algorithms",
+      "level": 3,
+      "number": "10.5",
+      "pdf_pages": [
+        342,
+        344
+      ]
+    },
+    {
+      "section_id": "S169",
+      "heading": "10.5.1 Stacking Time Steps vs. Recurrent Network vs. Neither",
+      "level": 4,
+      "number": "10.5.1",
+      "pdf_pages": [
+        343,
+        343
+      ]
+    },
+    {
+      "section_id": "S170",
+      "heading": "10.5.2 Standardizing Rewards",
+      "level": 4,
+      "number": "10.5.2",
+      "pdf_pages": [
+        343,
+        343
+      ]
+    },
+    {
+      "section_id": "S171",
+      "heading": "10.5.3 Centralized Optimization",
+      "level": 4,
+      "number": "10.5.3",
+      "pdf_pages": [
+        344,
+        344
+      ]
+    },
+    {
+      "section_id": "S172",
+      "heading": "10.6 Presentation of Experimental Results",
+      "level": 3,
+      "number": "10.6",
+      "pdf_pages": [
+        345,
+        347
+      ]
+    },
+    {
+      "section_id": "S173",
+      "heading": "10.6.1 Learning Curves",
+      "level": 4,
+      "number": "10.6.1",
+      "pdf_pages": [
+        345,
+        346
+      ]
+    },
+    {
+      "section_id": "S174",
+      "heading": "10.6.2 Hyperparameter Search",
+      "level": 4,
+      "number": "10.6.2",
+      "pdf_pages": [
+        347,
+        347
+      ]
+    },
+    {
+      "section_id": "S175",
+      "heading": "11 Multi-Agent Environments",
+      "level": 2,
+      "number": "11",
       "pdf_pages": [
         348,
         365
       ]
     },
     {
-      "section_id": "S015",
-      "heading": "Appendix A: Surveys on MARL",
-      "level": 1,
+      "section_id": "S176",
+      "heading": "11.1 Criteria for Choosing Environments",
+      "level": 3,
+      "number": "11.1",
+      "pdf_pages": [
+        348,
+        348
+      ]
+    },
+    {
+      "section_id": "S177",
+      "heading": "11.2 Structurally Distinct 2 2 Matrix Games",
+      "level": 3,
+      "number": "11.2",
+      "pdf_pages": [
+        349,
+        351
+      ]
+    },
+    {
+      "section_id": "S178",
+      "heading": "11.2.1 No-Conflict Games",
+      "level": 4,
+      "number": "11.2.1",
+      "pdf_pages": [
+        350,
+        350
+      ]
+    },
+    {
+      "section_id": "S179",
+      "heading": "11.2.2 Conflict Games",
+      "level": 4,
+      "number": "11.2.2",
+      "pdf_pages": [
+        351,
+        351
+      ]
+    },
+    {
+      "section_id": "S180",
+      "heading": "11.3 Complex Environments",
+      "level": 3,
+      "number": "11.3",
+      "pdf_pages": [
+        352,
+        360
+      ]
+    },
+    {
+      "section_id": "S181",
+      "heading": "11.3.1 Level-Based Foraging",
+      "level": 4,
+      "number": "11.3.1",
+      "pdf_pages": [
+        353,
+        354
+      ]
+    },
+    {
+      "section_id": "S182",
+      "heading": "11.3.2 Multi-Agent Particle Environment",
+      "level": 4,
+      "number": "11.3.2",
+      "pdf_pages": [
+        355,
+        355
+      ]
+    },
+    {
+      "section_id": "S183",
+      "heading": "11.3.3 StarCraft Multi-Agent Challenge",
+      "level": 4,
+      "number": "11.3.3",
+      "pdf_pages": [
+        356,
+        356
+      ]
+    },
+    {
+      "section_id": "S184",
+      "heading": "11.3.4 Multi-Robot Warehouse",
+      "level": 4,
+      "number": "11.3.4",
+      "pdf_pages": [
+        357,
+        357
+      ]
+    },
+    {
+      "section_id": "S185",
+      "heading": "11.3.5 Google Research Football",
+      "level": 4,
+      "number": "11.3.5",
+      "pdf_pages": [
+        358,
+        358
+      ]
+    },
+    {
+      "section_id": "S186",
+      "heading": "11.3.6 Hanabi",
+      "level": 4,
+      "number": "11.3.6",
+      "pdf_pages": [
+        359,
+        359
+      ]
+    },
+    {
+      "section_id": "S187",
+      "heading": "11.3.7 Overcooked",
+      "level": 4,
+      "number": "11.3.7",
+      "pdf_pages": [
+        360,
+        360
+      ]
+    },
+    {
+      "section_id": "S188",
+      "heading": "11.4 Environment Collections",
+      "level": 3,
+      "number": "11.4",
+      "pdf_pages": [
+        361,
+        365
+      ]
+    },
+    {
+      "section_id": "S189",
+      "heading": "11.4.1 Melting Pot",
+      "level": 4,
+      "number": "11.4.1",
+      "pdf_pages": [
+        362,
+        362
+      ]
+    },
+    {
+      "section_id": "S190",
+      "heading": "11.4.2 OpenSpiel",
+      "level": 4,
+      "number": "11.4.2",
+      "pdf_pages": [
+        363,
+        363
+      ]
+    },
+    {
+      "section_id": "S191",
+      "heading": "11.4.3 Petting Zoo",
+      "level": 4,
+      "number": "11.4.3",
+      "pdf_pages": [
+        363,
+        365
+      ]
+    },
+    {
+      "section_id": "S192",
+      "heading": "A Surveys on Multi-Agent Reinforcement Learning",
+      "level": 2,
+      "number": "A",
       "pdf_pages": [
         366,
         369
       ]
     },
     {
-      "section_id": "S016",
+      "section_id": "S193",
       "heading": "References",
-      "level": 1,
+      "level": 2,
       "pdf_pages": [
         370,
         391
       ]
     },
     {
-      "section_id": "S017",
+      "section_id": "S194",
       "heading": "Index",
-      "level": 1,
+      "level": 2,
       "pdf_pages": [
         392,
         395
