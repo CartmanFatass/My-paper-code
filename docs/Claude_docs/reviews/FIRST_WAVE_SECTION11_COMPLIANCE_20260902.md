@@ -288,3 +288,84 @@ Working-tree state as of 2026-09-02. Modification status verified with `git diff
 - **All five are blocked by at least one gate §11.4 does not permit, and in every case the operative block is in code, not only in prose** — `launch_capable=False` (FRRIE), the A0 conformance precondition (VNFC), `FORMAL_ANALYSIS_BOUND` (CBSC), the `PERFORMANCE_READY` receipt (SCDMP, UCOPE). Editing documents alone will not unblock any of them.
 - **Net movement since the review**: VNFC away (byte binding deepened), UCOPE away (whitening substituted for the ladder; locks retained), SCDMP away on the two gates the review named while adopting the fresh-attempt identity it endorsed, CBSC split (exposure telemetry added in `ppo.py`; consumer-recompute boundary entrenched in docs), FRRIE toward in engineering only (trainer/checkpoint work) with no governance change.
 - **What I could not determine**: whether the FRRIE `b01/` Slice-B work in the working tree is close enough to run a 128-update chain (I read the module inventory and the hard-coded dispositions, not the trainer's completeness); whether a §11.4-conforming exposure line exists for SCDMP (the card requires "every training metric" but no parameter-displacement statement); and whether CBSC's B0 artifact `cbsc_omrc_b0_instrument_888bd9f50_r02` was accepted as complete (I did not open it).
+
+---
+
+## Part C — SCDMP recast intake (2026-09-02, later)
+
+Object: decision 1 of A.4 executed by an Opus session on `main`: commits `c5a10ef4c` (the
+direction's uncommitted working-tree state, 21 files, committed unchanged for provenance),
+`d9c052ed9` (recast intake `SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md`, DIRECTION.md entry,
+science-card addendum), `c5c1655e9` (receipt and telemetry gates to recorded fields; 17 new test
+cases; direction suite 566 passed), `b76d06cec` (result document
+`SCDMP_B01_RUN_01_REPLACEMENT_01_RESULT_EVIDENCE_20260902.md`). File scope verified by
+`git show --name-only`: every path is under the SCDMP direction, implementation, tests, or its
+run script. Verdict: **accepted as a valid, complete B/EXPLORE run; recast in force.**
+
+### C.1 What the reviewer checked
+
+1. **Gates to fields, not weaker integrity.** `runner.py`'s `ResultExecutionDisabled` receipt
+   refusal is replaced by `performance_assessment_record()` with `gating: false`, which records the
+   receipt (absent), the A/RECON assessment (`REVIEW_REQUIRED`), and the source constant
+   `RUN_01_PERFORMANCE_DISPOSITION` (still `REPAIR_REQUIRED`, recorded beside it). Telemetry
+   failure reasons are partitioned into unmeasured (`telemetry_missing`,
+   `telemetry_measurement_failed`, `telemetry_zero_work` → `resources_unmeasured: true`) and
+   invalidating (the four measured cap exceedances, cumulative wall, nonzero exit → still fail and
+   quarantine). Unchanged: "published RUN-01 is immutable", 4 GiB admission, competence gates,
+   nonzero-count reconciliation, `q_by_cell` law, RNG-domain separation, zero-access quarantine,
+   create-once publication, §6.2 learner-side quarantine. This is decisions 1 and 7 exactly.
+2. **The run.** Launched at `c5c1655e9`, SCDMP paths clean; preflight 14.47 GiB available;
+   wall 348.5 s against the 1,800 s cap (A-R2 projected 350.1 s); telemetry fully measured
+   (peak RSS 400 MB of 2 GiB, scratch 459 KB, durable 130 MB); exit 0; nothing quarantined; the
+   frozen object executed as written (seeds 1709/2903, 160 × 12, nine curve points, 128/128
+   competence both seeds, six twins, 18-action sweep, 16 held-out tapes, realized
+   `q_by_cell = 001110`).
+3. **Branch.** The card's rule applied verbatim gives branch 5,
+   `PRELIMINARY_REPEATABLE_ORDER_VALUE_SIGNAL`: `delta_swap` 0.0611 / 0.0647 and `delta_common`
+   0.0260 / 0.0261 per seed, positive in both `k` strata and 6/6 states for each contrast in
+   each seed. The card says branches 5–8 are exploratory B observations, never direction
+   decisions; the result document says the same and claims nothing beyond §14.
+4. **Deviations.** D1 (no receipt) is the decision itself. D2: the native build cache under
+   `%LOCALAPPDATA%\Temp\hmasd_scdmp_mf_rs_mk_native\c0aeb83f…` is unreadable and undeletable
+   by the owning user, so `TMPDIR/TEMP/TMP` were redirected to a sibling of the run root and
+   the DLL rebuilt from the unchanged source (same source sha256, flags, ABI); only the resolved
+   path in `source-identity.json` differs. Accepted as a technical deviation with no scientific
+   factor touched. D3 (`hmasd_run.py` not used): the card's own runner owns the manifest;
+   consistent with E0. D4 (torch interop threads at the platform default 8, intraop 1 as the
+   card declares): exceeds the reviewer's "4 threads" instruction, not the card; harmless.
+
+### C.2 The observation that bounds the result
+
+The SWAPPED arm returned `U = 0.0` in all 384 cells: every swapped first action absorbed with
+`cable_overload` after 6 transitions and 0 policy queries. So `delta_swap ≡ M`, and the
+matched-versus-swapped separation is the swapped control's immediate failure, not a graded return
+difference. The COMMON arm absorbed the same way in exactly the 80 cells whose common action was
+evaluated under the graph it is not matched to. The informative contrast is therefore
+`delta_common` (about 41% of `M`), and even that carries the absorption in 80 of 384 cells. The
+result document records this as a direct observation (§8, §13) and the card defines no polarity
+for it. Reviewer's reading, not the card's: on this host the "value of order" is dominated by an
+absorbing failure of the wrong first action, which is a property of the cable dynamics rather than
+of the learner; a graded order-value question needs a host row where the wrong order is costly but
+not fatal. That is a different object and is put to the owner in C.4.
+
+### C.3 Flags for the owner
+
+- **Poisoned native caches under `%LOCALAPPDATA%\Temp`.** The undeletable
+  `hmasd_scdmp_mf_rs_mk_native` directory is the same reason `tests/production_backend_policy_test.py`
+  fails 25 of 74 (`onlgr.*`, `vnfc_bpcr.*`, `scdmp_tbcc.*` loaders). Clearing them needs elevated
+  rights; the VNFC recast (its `bpcr_backend.dll` is source-keyed under the same root) will meet
+  the same wall and will use the same redirect unless the caches are cleared first.
+- **`RUN_01_PERFORMANCE_DISPOSITION = "REPAIR_REQUIRED"`** stays in the source as a recorded
+  constant; nothing reads it as a gate any more. Left as is deliberately so the history is visible.
+
+### C.4 Decisions this intake produces
+
+1. SCDMP's next object: `RUN-02A` (seed 4013) and `RUN-02B` (5171, 6361) as the card's promotion
+   ladder, now bindable to this base run; or first a cheap diagnostic object on why the swapped
+   arm is uniformly fatal (a host row where the wrong first action is costly but survivable), so
+   that the order-value contrast becomes graded before more foundations are spent. The reviewer
+   recommends the diagnostic first. Asked of the owner with the other intakes.
+
+PORTFOLIO row for `semigroup_consistent_duration_model_policy` updated by the reviewer in the
+commit carrying this part (next-object text and timestamp only; lifecycle, priority, owner
+unchanged).

@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-02T20:50:41Z
+Updated at: 2026-09-02T22:15:11Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -35,7 +35,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | recct_lite | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE consequence-distinct LR/RL/no-update target intervention with proximal measurement and downstream return. The one-port equal-intervention result closes only that host. |
 | roster_consistent_latent_exploration | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE persistent-common versus containing FLEX finite-budget churn recovery, absorbing VSP-06 partner memory. Information-necessity claims remain structurally closed. |
 | scope_1s | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE real learner/trainer/evaluator wrapper for the exact Q16 carrier/current-only/deranged toy. Missing production authentication is not a toy-mechanism negative. |
-| semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE multi-foundation/state/`k` order-value scout, accepting RISP recurrence, ONLGR rate controls, and EBCR coordination without polarity transfer. Valid `.3` remains an exact frozen-resolution nonpass. |
+| semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-02T22:15:11Z | B/EXPLORE multi-foundation/state/`k` order-value scout, recast to evidence spec §11 on 2026-09-02 (`SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md`). Base run `RUN-01-REPLACEMENT-01` complete and valid: branch 5 `PRELIMINARY_REPEATABLE_ORDER_VALUE_SIGNAL`, bounded by the swapped arm absorbing (`U = 0`) in every cell (`SCDMP_B01_RUN_01_REPLACEMENT_01_RESULT_EVIDENCE_20260902.md`). Next object (owner decision pending): RUN-02A/02B foundations or a graded-order-value diagnostic host row first. Valid `.3` remains an exact frozen-resolution nonpass. |
 | ucope | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | New B/EXPLORE competence-first acquisition discriminator. The consumed 0/10 learner and 17/20 structural-prior results do not establish paid-acquisition polarity; COUNT/RAW remains gated on new competence. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Continue typed/generic/reset B3 after writer-competence repair, retaining stale-load routing controls and complete curves. Earlier calibration nonidentification is a B diagnostic. |
 | variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-01T17:02:20Z | Exact R01 is closed after the presentation-safety prerequisite failed without a valid return result. Sequential B/EXPLORE R02 is registered but non-executable; its sole next object is the non-result finite physical-action-law A0. |
