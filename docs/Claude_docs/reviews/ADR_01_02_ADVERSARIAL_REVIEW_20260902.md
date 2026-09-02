@@ -720,3 +720,78 @@ Claude reviews the host diff against ADR 02's nine invariants and the nine tests
 implementer delivers it, in the same form as the D2 acceptance checklist in
 `../plans/D2_IMPLEMENTATION_PLAN_20260902.md` §11. No further architecture round is open on
 either ADR.
+
+---
+
+# Part VI — review of the relay corridor host implementation (2026-09-02, later)
+
+Object: branch `worktree-agent-aeda939d06a5b4fea`, five commits on top of `f8d2dd5b3`
+(`22390b48c` host core, `9be152b39` references and margins, `b5a8ac1eb` adapter, `e996bd48f`
+tests, `e26063d81` report), written by an Opus implementation session in an isolated worktree.
+Files: `envs/relay_corridor/{__init__,config,rng,renewal,host,references,adapter}.py`,
+`tests/relay_corridor_host_test.py`, `../plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md`. No file
+outside those was changed; the learner files being edited concurrently on `main` were not touched.
+
+**Verdict: ACCEPT. The host meets ADR 02's nine invariants; the branch is integrated into
+`main`.** One convention needs the owner's confirmation (VI.2 F1); nothing else is open.
+
+## VI.0 Reviewer's own run
+
+Preflight passed, then the nine tests were re-run by the reviewer in the worktree:
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/relay_corridor_host_test.py --basetemp <worktree>/temp/pytest_relay_corridor_review
+.........                                                                [100%]
+9 passed in 13.47s
+```
+
+## VI.1 Invariants against code
+
+| # | Invariant | Where it is met | Reviewer check |
+| --- | --- | --- | --- |
+| 1 | ragged, unpadded family boundary | `RelayCorridorHost.public_state_records`, `record_padding`; test 1 | records emitted at live cardinality for `N in {3,5,6,9}`; no padding path exists in the host |
+| 2 | key-stable, order-independent streams | `rng.stream_generator` keyed `(master seed, episode, stream, id)`; `_build_tapes`; test 2 | one generator per key, fixed draw order (`theta0`, `H` event uniforms, `H` switch uniforms; one role uniform per agent) |
+| 3 | every positive `N` valid | `config.__post_init__`, `_balanced_sizes`; test 3 | no `N mod K` rule; `K >= 2` is enforced, which the page implies ("draws a different theta") |
+| 4 | pinning, laws share only `E[D]`, full initial dwell | `renewal.py` hazard tables with age `0` at reset; `DeterministicLaw.hazard_table` is `1` at age `D-1`; test 4 | events at `D, 2D, ...`; variances `0 / 380 / 687.309` reproduced by the CDF-bin masses |
+| 5 | enumeration reproduces both margins; `m_dur` acceptance scale | `references.dp_service_profile`, `enumerate_references`; test 5 | DP equals the page's closed forms to `1e-12`; three table rows to the printed digits; `sigma_Delta` measured on 512 matched lanes (`0.0133 / 0.0064 / 0.0137`) |
+| 6 | `H >= 10 max(D0_k_set)`; D2 exempt, `M` emitted | `validate_horizon`, `rows_per_rollout`; test 6 | only `d0_fixed_k` mode raises |
+| 7 | argmax roles, renew mask, shared mean, per-agent indicators, disabled fields exact | `host.decode_roles`, `host.step` part 1, `adapter.step`; test 7 | reward `= Delta/N * sum(service)`; `probe_*` and `coupling` fields are zero arrays; `e5_coupling_enabled=True` raises |
+| 8 | references, D0 cut, setup outage, `k = D` equality, cue timing, `K = 2` greedy equality | `host.step` parts 1 to 3; scripted policies in `references.py`; test 8 | step order asserted on tapes (flag at `t` = event realised into `t`; cue at `t` = `theta_{t-1}`; zero service on the RENEW step; service at `t+1`); greedy and switching oracle produce identical service indicators on 64 matched lanes at `K = 2`; `K = 3` strictly short |
+| 9 | native-disabled NumPy against the `1e4` target | test 9 subprocess with `sys.modules` guards | `30,935` mechanics steps/s/core single lane; `485,648` env-steps/s/core at batch 64; disposition `meets_target` |
+
+## VI.2 Findings (none blocking)
+
+- **F1 (owner confirms). Cue at reset.** The page defines `y_{r,t} = theta_{r,t-1}`, undefined
+  at `t = 0`. The host sets `y_{r,0} = theta_{r,0}`, so the learner sees the true initial latent
+  through the cue. This is the reading under which "greedy equals the switching oracle by
+  construction" is exact; the alternative (cue zero or random at reset) costs greedy
+  `(1 - 1/K) Delta / H` per region, about `5e-4`, and makes the equality approximate. Recommend
+  accepting and adding one sentence to the mechanics page's "State" section; the page is the
+  owner's.
+- **F2. Time in the observation.** `obs_layout` carries `t / H`, which the page's record list
+  does not. It cannot be exploited on E3/E4 (a lease renewed before an event is invalidated by
+  the event's epoch increment), and HMASD's UAV observation carries a time feature too. Record;
+  drop it only if a later object wants a strictly homogeneous public state.
+- **F3. Greedy at `K = 2` in the DP is assigned, not computed** (`per_region_greedy =
+  per_region_switch`). The falsifiable check is the host-level one in test 8 (identical service
+  indicators on matched tapes), which is the right place for it. At `K = 3` the DP computes greedy
+  through the `pending-cue` coordinate and test 8 checks it against a closed form.
+- **F4. Adapter is not yet wired into the base route.** `RelayCorridorAdapter.step(actions,
+  renew_mask)` takes `S_t` as an input, by design (review V.2 note 2). Wiring is a separate
+  commit after D2 Phase 8: the rollout loop passes the D2 sampled mask into the env step, and
+  `obs_dim`, `state_dim`, `action_dim = K`, `n_z = K` flow into the learner config. The IV.0
+  item "base-route actor is continuous-only" stays open until that commit.
+- **F5. DP state count differs from the page's `64,160`.** The page's number was a size estimate
+  for `(theta, freshness, fixed-phase, age)`; the implementation runs the phase as the step index
+  and adds `plan-match` and `pending-cue`. Returns equal the closed forms, so the estimate is
+  moot; the report records it (its item 4).
+- **F6. Report items 1 to 12** are all readings the reviewer agrees with; items 1 (F1 here), 4
+  (F5), and 12 (adapter shapes follow `ParallelToArrayAdapter`) are the ones a later reader
+  should know.
+
+## VI.3 Integration
+
+The branch was rebased onto `origin/main` (which by then carried D2 Phases 3 to 7) and pushed to
+`main` from the worktree; the two lines touch disjoint files, so the rebase was clean. Part VI
+and the README entry were committed with it. The D2 implementer's next push rebases over these
+commits as its operating notes prescribe.

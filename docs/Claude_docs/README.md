@@ -45,7 +45,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   with five non-blocking implementer notes and a hand-off to Codex. Part IV reviews the corridor
   mechanics page and ADR 02 revision 3 (adapter, `K = 2` latent publicity, inert `Z`, cue, initial
   dwell) and records three owner decisions; Part V accepts the finalised mechanics page and ADR 02
-  revision 4 after checking that no formula, grid, or margin changed.
+  revision 4 after checking that no formula, grid, or margin changed. Part VI accepts the relay
+  corridor host implementation against the nine invariants (reviewer re-ran the nine tests) with
+  one convention for the owner to confirm (cue at reset) and integrates the branch into `main`.
 
 ### research_notes/
 
@@ -83,7 +85,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   companion of ADR 02.
 - `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's ADR for the relay-corridor host family (E2–E4),
   revision 4 (revisions 1 to 3 at `ea20bccb0`, `7591f23a1`, `33f009211`); accepted by the
-  review's Part V; the host implementer works against its nine invariants and nine tests.
+  review's Part V; implemented under `envs/relay_corridor/` with `tests/relay_corridor_host_test.py`.
+- `RELAY_CORRIDOR_HOST_REPORT_20260902.md` — the implementer's report for the corridor host:
+  what was built and where, how each invariant is met, enumeration results next to the table
+  values, throughput and machine identity, twelve reading choices, and what could not be
+  verified (no learner ran; the adapter is not yet wired into the base route).
 
 ### environment_design/
 
