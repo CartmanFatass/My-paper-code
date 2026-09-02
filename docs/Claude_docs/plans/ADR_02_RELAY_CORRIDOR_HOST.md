@@ -1,74 +1,94 @@
 # ADR 02 — Relay corridor host family for duration-plan E2–E4
 
-Provenance: revision 2, drafted by GPT Pro (GitHub connector on `CartmanFatass/My-paper-code`,
-branch `main`) on 2026-09-02 after the round-1 review, pasted into the Claude Code session by the
-owner and stored verbatim (only this header added). Revision 1 is in Git history at commit
-`ea20bccb0`. Status remains `proposed`; implementation is blocked until the owner supplies the
-corridor mechanics. Round-2 review: Part II of `../reviews/ADR_01_02_ADVERSARIAL_REVIEW_20260902.md`.
-GPT Pro's shared "could not verify" list is kept at the end of `ADR_01_D2_POLICY_INTERRUPTION.md`.
+Provenance: revision 3, drafted by GPT Pro (GitHub connector on `CartmanFatass/My-paper-code`,
+branch `main`) on 2026-09-02 from `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md`, pasted into
+the Claude Code session by the owner and stored verbatim (only this header added). Revision 1 is
+at commit `ea20bccb0`, revision 2 at `7591f23a1`. Normative companion:
+`RELAY_CORRIDOR_MECHANICS_20260902.md`. Status: `proposed`; Part IV of
+`../reviews/ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` lists the changes required before the owner
+finalises it.
 
 ---
 
 ## Title
 
-ADR 02 — Relay corridor host family for duration-plan E2–E4
+ADR 02 — Relay corridor host family for duration-plan E2–E4, revision 3
 
 ## Status: proposed
 
 ## Context
 
-The plan keeps E1/E2 on UAV scenario 1 and assigns E3/E4 to the relay corridor. Advice §§3–4 require ragged entities, matched randomness, three references, declared resolution, ten largest-\(k\) segments, and vectorized-NumPy speed. Review §4.1 fixes agent-pinned \(\lambda\) regions, deterministic/exponential/lognormal renewal laws matched on \(E[D]\), and owner authorship of the mechanics. Evidence-spec §11 makes this B-EXPLORE and fixes \(N\) within each duration object.
+The duration plan §§5–6 and 11 assign E3/E4 to the relay corridor under B-EXPLORE. Environment advice §§3–4 requires three references, resolvable margins, ragged CRNs, ten fixed-\(k\) segments, and vectorized-NumPy speed. Review Part I F2.1–F2.9, §4.1, and Part II II.6–II.10.1 fix agent-pinned regions, mean-matched renewal laws, D0 as \(c=c_Z=\infty\), both \(m\) and \(m_{\mathrm{dur}}\), and the ten-segment rule only for fixed-\(k\) D0. ADR 01 revision 3 supplies \(k_{\max}\), \(k_Z=H\) for E3/E4, per-agent segments, and \(M\)-row exposure accounting. `RELAY_CORRIDOR_MECHANICS_20260902.md` is the normative mechanics companion.
 
 ## Decision
 
-This ADR fixes only the surrounding contract. Before implementation, the owner supplies the entity/state schema, action, latent, hazard, reward, probe, and structure cut; these must yield task reward in \([0,1]\) before costs and computable reference returns. No corridor dynamics are selected here.
+The host has two regions, \(Z\) zones, and \(N\) fixed-roster agents pinned to region and zone. Region \(r\) has \(\theta_r\in\{0,\ldots,K-1\}\); zone \(q\) requires role \((q+\theta_r)\bmod K\). An event changes \(\theta_r\) and invalidates regional leases. Agent action is role plus `KEEP/RENEW`; `RENEW` opens the ADR-01 segment, stamps the epoch, and causes one zero-service step. Reward is \(\Delta\) times the fraction keeping a fresh, correct lease, so it lies in \([0,1]\).
 
-The host emits ragged entity sets; packing is learner-owned. Entities use streams keyed by `(master seed, episode, entity id)` and each regional event process uses `(master seed, episode, region id)`. Agents are pinned to one region per episode: E3 has \(\lambda_1\ne\lambda_2\), while the homogeneous point has equality. E4 uses deterministic, exponential, and lognormal \(D\), sharing an owner-set finite mean and finite variance.
+E3 uses Bernoulli hazards \(\lambda_1,\lambda_2\). E4 uses positive-integer deterministic, geometric—discrete exponential—or rounded-lognormal \(D\), matched only on \(E[D]\), with \(\operatorname{Var}(D)\) reported. Deterministic \(D\) has fixed \(k=D\) as its restricted oracle. Public state has a lagged latent cue and immediate change/freshness flags; oracle latent is excluded. E2–E4 have \(c_{\text{probe}}=0\) and no probe action, while reserved fields preserve the state layout.
 
-References are oracle with the latent; greedy on public state, with no asserted ordering; and duration-structure-blind D0, the same learner with \(c_{\text{switch}}=c_Z=\infty\). Define
+References are the switching oracle, each fixed-\(k\) oracle, the best open-loop zone-role map/fixed period, and greedy. Exact DP/enumeration registers
 
 $$
-m=J^*_{\text{oracle plan}}-J^*_{\text{best open-loop/fixed plan}},
+m=J^*_{\mathrm{switch}}-J^*_{\mathrm{open}},\qquad
+m_{\mathrm{dur}}=J^*_{\mathrm{switch}}-\max_kJ^*_k.
 $$
 
-closed-form or exhaustively, not from trained D0. At each of three registered margins, \(J_O^*=J_F^*+m\); greedy and trained-D0 returns are merely reported.
+D0 is the same learner with \(c=c_Z=\infty\) and cannot renew between fixed boundaries.
 
-Note: FRRIE is \(K=3,\lambda=\rho=0,N\) swept; VNFC is \(Z=2,\rho>0,N\) swept; SCDMP sweeps \(k,\lambda>0\); UCOPE has \(c_{\text{probe}}>0,v,k\); CBSC maps nuisance coordinates to \(Z\).
+Family coordinates from advice §4 remain: FRRIE uses \(K=3,\lambda=\rho=0\) with \(N\) swept; VNFC uses two contexts and \(\rho>0\); SCDMP sweeps \(k\) at \(\lambda>0\); UCOPE enables \(c_{\text{probe}},v,k\); CBSC uses nuisance contexts.
 
 ## Parameters
 
-`N:int`, default unset, positive owner grid but fixed per object; `K:int`, default unset, positive owner grid; `Z:int`, default unset, positive owner grid; `H:int`, default unset, \(H\ge10k_{\max}^{sweep}\); `k:int`, default `10`, owner grid; `lambda: probability`, default unset, range `[0,1]`; `rho: probability`, default `0`, family range `[0,1]` but fixed `0` here; `c_probe,v: float≥0`, defaults unset, owner grids; `m: float>0`, default unset, three owner values; `time_homogeneous: bool`, default `true`, sweep `{true,false}`; `lambda_regions: pair`, default equal, sweep equal/unequal; `renewal_law: enum`, default `deterministic`, sweep `{deterministic,exponential,lognormal}`; `renewal_mean: positive float`, default unset, common across laws.
+`N,K,Z,H: positive int`, fixed within an object; `rho=0`; `Delta: float in (0,1]`; `lambda_regions: pair in [0,1]^2`; `D0_k_set: positive-int set`; `renewal_law ∈ {deterministic, geometric, lognormal}`; `renewal_mean, lognormal_shape > 0`; `c_probe=0`, `v` inactive. D2's `c,c_Z,k_max,k_Z` follow ADR 01, with `k_Z=H` for E3/E4. `time_homogeneous` is removed: renewal age is explicit state and service mechanics are time-homogeneous. The registered proposal is the companion mechanics-page grid.
 
 ## Invariants
 
-1. Host observations are ragged and unpadded.
-2. Entity and regional-event streams are key-stable and independent.
-3. Every positive \(N\) is admissible; no \(N\bmod K\) rule exists.
-4. \(H\) contains at least ten segments at the largest registered \(k\)/cap.
-5. For each \(m\), exhaustive arithmetic gives \(J_O^*-J_F^*=m\); greedy has no required order.
-6. Agents retain their region, and all E4 laws share \(E[D]\).
-7. Native-disabled vectorized NumPy targets \(10^4\) steps/s/core on a recorded CPU.
+1. Host-boundary entities are ragged and unpadded.
+2. Entity and regional-event RNG streams are key-stable and order-independent.
+3. Every positive \(N\) is valid; no \(N\bmod K\) rule exists.
+4. Agents remain pinned; hazards and dwell laws follow registration and share only \(E[D]\).
+5. Enumeration reproduces every stated \(m\) and \(m_{\mathrm{dur}}\), with \(m_{\mathrm{dur}}\ge3\sigma_\Delta/\sqrt{E_{\mathrm{eval}}}\).
+6. \(H\ge10\max(\text{D0\_k\_set})\); D2 \(k_{\max}\) is exempt and reports \(M\) rows per rollout.
+7. Pre-cost reward is in \([0,1]\), and probe-off behavior is exact.
+8. References, D0 cut, setup outage, and deterministic \(k=D\) equality match the mechanics page.
+9. Native-disabled NumPy is checked against the recorded \(10^4\)-steps/s/core target.
 
 ## Tests-as-specs
 
-Use `tests/relay_corridor_host_test.py` and `--basetemp C:/Projects/HMASD/temp/pytest_relay_corridor`. Tests 1–7 assert: no sentinel padding; unchanged entity/event tapes under batch and enumeration-order changes; divisible and non-divisible \(N\) both run; rejection below ten segments; exact three-margin identities with unconstrained greedy output; fixed regions and matched law means; recorded-machine throughput with native loading disabled. The top-level path follows `CLAUDE.md`; it presumes the host is placed under `envs/`.
+Run:
+
+`C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/relay_corridor_host_test.py --basetemp C:/Projects/HMASD/temp/pytest_relay_corridor`
+
+Tests 1–9 use, respectively: variable entity counts, asserting no padding; permuted batch/enumeration order, asserting identical keyed tapes; divisible and non-divisible \(N\), asserting both execute; scripted Bernoulli and three-law dwell tapes, asserting pinning, means, and reported variances; the three proposal points plus measured \(\sigma_\Delta\), asserting both margins and the resolution inequality; too-short \(H\) and large-\(k_{\max}\) D2, asserting only fixed-\(k\) D0 is rejected and \(M\) is emitted; reward/probe boundary cases, asserting range and disabled fields; exhaustive reference traces including \(D=20,k=20\), asserting oracle equality and D0 cut; and a pinned-CPU native-disabled benchmark, recording target disposition. The interpreter, top-level `*_test.py` naming, and isolated scratch convention follow root `CLAUDE.md` §§Environment and Commands/Tests.
 
 ## Metrics to log
 
-Reference returns and \(m\); hazards by region; realized \(D\); probes/costs; delays, switches and segment lengths; CRN audit; live counts; throughput/machine identity; transitions, high-level samples, optimizer updates and evaluations.
+\(m\), \(m_{\mathrm{dur}}\), all reference returns, regional hazards, \(D\) and \(\operatorname{Var}(D)\), renewals, stale-service loss, segment lengths, \(M\), CRN audit, reward components, greedy gap, transition/update/evaluation counts, throughput, and machine identity.
 
 ## Resolution arithmetic
 
-With \(M\) valid high-level rows per rollout, batch 128 (`hmasd/agent.py:4747`), 15 epochs and 200 rollouts, **inference:** Adam steps are \(200\cdot15\cdot\lceil M/128\rceil\), and naive displacement budget is \(10^{-4}\) times that count. At D0, \(M=32\cdot500/10=1600\), giving 39,000 and 3.9; actual corridor-D2 \(M\), parameter counts and norm displacement are exposure-line measurements rather than host assumptions. Eight paired episodes resolve \(\sigma_\Delta/\sqrt8\); each \(m\) must be at least three times the largest declared resolution term.
+**Proposal:** \(4{,}096\) matched evaluation episodes, so resolution is
+
+$$
+\frac{\sigma_\Delta}{\sqrt{4096}}=\frac{\sigma_\Delta}{64}.
+$$
+
+Per-episode mean-return differences lie in \([-1,1]\), hence \(\sigma_\Delta\le1\); the smallest proposed \(m_{\mathrm{dur}}=0.057037\) exceeds \(3/64=0.046875\). The corridor learner's \(M\), parameter count, optimizer-step count, and norm displacement are machine-generated exposure-line measurements; ADR-01 optimizer totals are not copied. This follows ADR 01 revision 3's identification of \(M\) as the binding long-hold term and evidence-spec §11.4's machine-generated exposure requirement.
 
 ## Consequences and risks
 
-Implementation is blocked until the owner supplies mechanics. Risks are structure leakage, non-enumerable margin, RNG coupling, and machine-dependent speed.
+Both margins become auditable without learner training. Risks are lease-stamp structure leakage, an inadequate public cue, renewal discretization, long-\(k\) sample collapse, and machine-dependent speed.
 
 ## Out of scope
 
-Inventing mechanics, within-object variable \(N\), learned termination, \((z,k)\) menus, native kernels, UAV transfer, and C contracts.
+Learned termination, a \((z,k)\) menu, variable \(N\) within an object, churn in E2–E4, native code, UAV transfer, and any C-class contract. These exclusions preserve plan §11 and evidence-spec §11.
 
 ## Open questions
 
-What owner-supplied mechanics definition applies? What numeric parameter, margin and lognormal-shape grids apply? What CPU profile owns the speed target?
+Which finite D2 \(c,c_Z,k_{\max}\) grid is paired with these points? Which CPU owns the speed record? Is the lagged cue sufficient without probing?
+
+## Could not verify
+
+* No measured corridor \(\sigma_\Delta\), \(M\), parameter count, parameter displacement, or vectorized-NumPy throughput exists in the reviewed evidence; the proposed evaluation and speed figures are prospective.
+* The finite D2 \(c,c_Z,k_{\max}\) sweep remains open in ADR 01 revision 3.
+* The margin table and renewal variances are analytic outputs of this proposed mechanics definition, not executed repository results; they require Part IV review and later tests before being treated as implementation evidence.

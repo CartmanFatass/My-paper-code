@@ -74,8 +74,12 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   tests, the report format, and the reviewer's acceptance checklist.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
+- `RELAY_CORRIDOR_MECHANICS_20260902.md` — GPT Pro's draft of the corridor mechanics (state,
+  entities, action, latent, hazard, reward, probe, cut, references and margins, enumeration
+  recipe, proposed grids); the owner finalises it after the review's Part IV.
 - `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's ADR for the relay-corridor host family (E2–E4),
-  revision 2 stored verbatim; status `proposed`, blocked until the owner writes the mechanics.
+  revision 3 stored verbatim (revisions 1 and 2 at `ea20bccb0`, `7591f23a1`); held for three
+  owner decisions in the review's Part IV (adapter, `K`, coupling term).
 
 ### environment_design/
 

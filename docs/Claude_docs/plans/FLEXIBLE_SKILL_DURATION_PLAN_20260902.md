@@ -190,5 +190,7 @@ ADR rounds 2 and 3 (2026-09-02): revision 2 added a separate team cap `k_Z` (def
 `H` for E3/E4), the per-agent segment table, and `M` rows per rollout as the binding resolution
 term; ADR 02 must register a duration margin `m_dur` next to `m`, and the ten-segment rule binds
 only the fixed-`k` D0 sweep (review §II.10.1). Revision 3 of ADR 01 was accepted for
-implementation (review Part III); Codex implements it. ADR 02 stays on hold until the owner's
-mechanics page exists.
+implementation (review Part III); the implementer follows `D2_IMPLEMENTATION_PLAN_20260902.md`.
+ADR round 4 (2026-09-02): GPT Pro drafted `RELAY_CORRIDOR_MECHANICS_20260902.md` and ADR 02
+revision 3; the margins were re-derived and hold; three owner decisions remain (review Part IV:
+the HMASD adapter, `K = 2` with `m` demoted versus `K = 3`, and a coupling term for E5).

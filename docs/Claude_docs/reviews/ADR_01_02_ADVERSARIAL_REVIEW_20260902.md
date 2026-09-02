@@ -527,3 +527,123 @@ and team age `a_Z / k_Z`. No invariant was weakened between revisions.
 Codex implements ADR 01 revision 3 on the HMASD base route under plan §8 touch points, with tests
 1 to 8 as specifications and III.1 items 2 and 3 added to tests 2 and 1. Claude reviews the diff
 against the eight invariants; the owner runs E0 (exposure and probe set) before E1.
+
+---
+
+# Part IV — review of the corridor mechanics page and ADR 02 revision 3 (2026-09-02, later)
+
+Objects: `../plans/RELAY_CORRIDOR_MECHANICS_20260902.md` (GPT Pro draft, owner to finalise) and
+ADR 02 revision 3 (same path as before; revisions 1 and 2 at `ea20bccb0`, `7591f23a1`).
+
+**Verdict: the mechanics are sound and the margins are real; HOLD for three owner decisions,
+then the owner finalises the page and ADR 02 is accepted.** The host does what E3 and E4 need:
+a visible change, a physical switching cost, a hazard that differs by region, and reference
+values computable without training. What is missing is the seam to the learner: the page never
+says how HMASD's `(Z, z_i, low-level action)` becomes the host's `(role, KEEP/RENEW)`, and at
+`K = 2` the latent is public by construction, which makes one of the two registered margins a
+measurement against a straw man.
+
+## IV.0 Numeric and citation check
+
+| Claim | Check | Status |
+| --- | --- | --- |
+| `C(20, 0.005) = 0.9539`, `C(20, 0.02) = 0.8310` | `toy_studies/untied_k_n/RESULTS.md:20` | correct |
+| Margin table (three rows, `m` and `m_dur`) | recomputed from the page's closed forms with `H = 400`, `w_r = 1/2`, `k in {1,2,5,20,40}`: `0.2260 / 0.0570`, `0.3565 / 0.1444`, `0.5807 / 0.2712`; best `k` = 20, 5, 5 | matches to four digits; the "exact enumeration" values equal the closed form, as they should for independent regions |
+| Geometric variance `mu(mu-1) = 380` at `mu = 20`; lognormal shape 1 variance `687` | `CV^2 = e - 1 = 1.718`, times `400` | correct |
+| DP size `2 x 2 x 40 x 401 = 64,160` | arithmetic | correct |
+| `J_sw`, `J_k`, `J_open,k = J_k / K` | derivation re-read: one lost step per event for the switching oracle; `C - 1/k` served fraction per fixed window; `+1/H` for the free initial lease; open-loop correct with probability `1/K` per window | consistent with the stated conventions (initial lease at reset, one-step outage per `RENEW`) |
+| Base-route low-level actor action type | `config_1.py:30` `action_space_type = 'continuous'`; no categorical head in `R_Actor` (`hmasd/networks.py:1131-1305`) | continuous-only as far as read; the implementer must confirm |
+
+## IV.1 (must fix before finalising) The HMASD adapter is one sentence and it is not enough
+
+The page says "the ADR-01 adapter emits `RENEW` when a high-level segment opens". It does not say
+what the skill `z_i` is on this host, what the low-level policy outputs each step, or what the team
+code `Z` does. Three readings, one to be chosen (decision 1):
+
+- (a) **High-level only.** `z_i` is the role, `n_z = K`; the low-level policy is the identity and
+  is not trained; discriminators idle. Cleanest for E3/E4 but it is a different learner from the
+  one E1/E2 run on scenario 1, so E2 to E3 comparisons change two things at once.
+- (b) **Full stack, discrete low-level.** `n_z = K`; the low-level policy chooses the role each step
+  from a categorical head conditioned on `z_i`. The base-route actor is continuous-only as read, so
+  this adds a head to the learner.
+- (c) **Full stack, continuous low-level, host argmax.** The low-level policy emits a `K`-vector as
+  today; the host takes the argmax as the role. No learner change; the low-level must learn to
+  place the argmax where `z_i` says, which the individual discriminator rewards (the held role is in
+  the observation). `RENEW` is emitted for `i in S_t` by the adapter, exactly as the page says.
+
+Recommendation: (c). It keeps ADR 01 untouched and makes the corridor a drop-in host for the same
+learner. State in the page: `n_z = K`, low-level action dimension `K`, host role = argmax, and that
+the reward is delivered to the learner as the shared mean `r_t` (per-agent components logged).
+
+## IV.2 (must fix before finalising) At `K = 2` the latent is public and `m` is a straw-man margin
+
+A switch draws a *different* `theta_r`. With `K = 2` the new value is `1 - theta_r`, so the
+immediate change flag reveals it; the one-step-lag cue is redundant; greedy on public state renews
+at the same step as the switching oracle with the same role, so `J_greedy = J_sw` exactly. The
+latent-structure margin `m` is then measured against open-loop plans that ignore the flag, which is
+not "how much knowing the latent is worth" but "how much reacting is worth". `m_dur` is unaffected:
+it compares two latent-aware oracles and is the quantity E3 needs.
+
+Options (decision 2):
+
+- Keep `K = 2` for the first object and demote `m`: registered, reported, not an acceptance
+  criterion for E2 to E4; say in the ADR that at `K = 2` greedy equals the switching oracle by
+  construction, so the learner's ceiling is exactly `J_sw`.
+- Move to `K = 3`: the flag no longer reveals the new latent; greedy loses two steps per event
+  (flag, then cue), the oracle one; `m` becomes meaningful; open-loop census `3^4 x 6 = 486`,
+  still trivial. Adds one learning problem (map cue to role) that E3 does not need.
+
+Recommendation: `K = 2` with `m` demoted, and `K = 3` registered as the family point where `m` and
+the cue matter (UCOPE's probe value `v` also needs `K >= 3` to be non-zero).
+
+## IV.3 (should fix, not blocking E3/E4) Agents do not interact, so `Z` is inert and E5 cannot run here
+
+The reward is a mean of independent per-agent indicators and regions are independent. The team
+code `Z` has nothing to condition on, so its discriminator reward is noise and E5 (two-level
+interruption, "no collapse of `Z` semantics on probes") has no signal on this host. This is fine
+for E3/E4 and matches the single-agent inspiration model, but plan §5 places E5 on the corridor.
+Add, off by default, one coupling term to be switched on for E5: for example a zone serves only if
+both roles are present among its agents, or a region bonus when all its agents are fresh. Design it
+when E5 is scheduled (decision 3), not now.
+
+## IV.4 (should fix) Define the cue and replace open question 3
+
+"One-step-lag cue `y_r`" is not defined; presumably `theta_r` at `t - 1`. Under IV.2 it is
+redundant at `K = 2`. Define it, and replace open question 3 ("is the lagged cue sufficient
+without probing?"), which the construction already answers (greedy matches the oracle up to one
+step per event at `K = 2`, two at `K >= 3`), with the real open item: the finite `c` grid at which
+D2 stops chattering on the change flag.
+
+## IV.5 (should fix) State the initial-dwell convention for the deterministic law
+
+"Deterministic `D` has fixed `k = D` as its restricted oracle" holds only if the first dwell after
+reset is a full `D`, so that boundaries at `0, D, 2D, ...` coincide with events. Under a stationary
+residual-life convention the phase would be random and `k = D` misaligned, giving `m_dur > 0` at
+zero variance. Test 8 (`D = 20, k = 20` equality) depends on this; write the convention down.
+
+## IV.6 (minor) The evaluation budget is loose in a safe direction
+
+`sigma_Delta <= 1` is a bound; the per-episode mean over `400 x 6` indicators will have a standard
+deviation closer to a few hundredths, so 4,096 matched episodes resolve far below `m_dur`. The
+cost is `4,096 x 400 = 1.6e6` steps per policy per evaluation, about three minutes per policy at
+the target speed. Acceptable as a proposal; invariant 5 should use the measured `sigma_Delta` from
+the reference tapes, which test 5 already does.
+
+## IV.7 (minor) Wording
+
+- "Ragged" is vacuous at `rho = 0`; keep it as a family property, say so.
+- Metrics already list reward components; make explicit that per-agent service indicators are
+  logged so the asynchronous-credit question (Part I F1.10) can be examined later.
+- The `m_dur` approximation line says `0.0580` from the `C`-table and `0.057037` exact; the
+  difference is the `1/H` term and the rounding of the table, not a finite-`H` DP effect.
+
+## IV.8 Decisions for the owner
+
+1. Adapter (IV.1): (a) high-level only, (b) discrete low-level head, (c) continuous low-level with
+   host argmax.
+2. `K` (IV.2): `K = 2` with `m` demoted, or `K = 3`.
+3. Coupling term for E5 (IV.3): design later when E5 is scheduled, or now.
+
+After these, the owner finalises the mechanics page (adds the adapter paragraph, the cue
+definition, the initial-dwell convention, and the `m` disposition) and ADR 02 revision 4 is a
+wording pass; no further review round is needed before the host is implemented.
