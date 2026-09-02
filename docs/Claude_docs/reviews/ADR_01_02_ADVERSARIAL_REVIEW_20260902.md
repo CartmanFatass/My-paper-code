@@ -451,3 +451,15 @@ handled by II.3.
 
 After these, ADR 01 goes to Codex with II.2 to II.5 folded in as text; ADR 02 waits for the owner
 mechanics page, which Part I F2.1 lists in order.
+
+### II.10.1 Decisions taken with the owner, round 2 (confirmed one by one in session)
+
+| # | Decision |
+| --- | --- |
+| 1 | Separate team cap `k_Z`, default `k_max` (D0 parity), `k_Z = H` for E3/E4; "every team decision forces all agents" and invariant 7 stay |
+| 2 | ADR 02 registers both margins: `m` (latent-structure, host calibration) and `m_dur` (switching oracle minus best fixed-`k` oracle, the E3/E4 acceptance scale, at least three times the declared resolution term) |
+| 3 | The ten-segment rule binds only the fixed-`k` D0 sweep; the D2 `k_max` sweep is exempt and reports `M` per rollout |
+
+Status after round 2: ADR 01 may go to Codex once revision 3 folds in decision 1 and II.2 to II.5.
+ADR 02 waits for the owner's mechanics page (Part I F2.1 order: state, action, latent, hazard,
+reward, probe, cut), then a revision that adds `m_dur` and the II.8, II.9 wording.
