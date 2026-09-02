@@ -368,13 +368,72 @@ class MultiUAVEnv(ParallelEnv):
     def _get_observation(self, agent):
         """
         获取指定智能体基于通信能力的局部观测
-        
+
         参数:
             agent: 智能体ID
-            
+
         返回:
             observation: 智能体的观测
         """
+        if self.channel_backend == "reference" or not self._vector_channel_state_is_current():
+            return self._get_observation_reference(agent)
+        return self._get_observation_vectorized(agent)
+
+    def _get_observation_vectorized(self, agent):
+        """Same layout and ordering, assembled from the precomputed SINR matrices."""
+        agent_idx = int(agent.split("_")[1])
+        own_position = self.uav_positions[agent_idx]
+
+        # 1. 自身位置 (3维)
+        normalized_position = own_position / self.area_size
+        normalized_position[2] = (own_position[2] - self.height_range[0]) / (
+            self.height_range[1] - self.height_range[0]
+        )
+
+        # 2. 局部用户观测 (max_observed_users * 3维)
+        user_obs = np.zeros(self.max_observed_users * 3)
+        user_indices, user_sinr = self._local_user_entries(agent_idx)
+        observed_users = min(int(user_indices.size), self.max_observed_users)
+        if observed_users:
+            selected = user_indices[:observed_users]
+            relative_positions = (
+                self.user_positions[selected] - own_position[:2]
+            ) / self.area_size
+            normalized_sinr = np.clip((user_sinr[:observed_users] + 10) / 50, 0, 1)
+            block = user_obs[: observed_users * 3].reshape(observed_users, 3)
+            block[:, 0] = relative_positions[:, 0]
+            block[:, 1] = relative_positions[:, 1]
+            block[:, 2] = normalized_sinr
+
+        # 3. 局部无人机观测 (max_observed_uavs * 4维)
+        uav_obs = np.zeros(self.max_observed_uavs * 4)
+        uav_indices, uav_sinr = self._local_uav_entries(agent_idx)
+        observed_uavs = min(int(uav_indices.size), self.max_observed_uavs)
+        if observed_uavs:
+            selected = uav_indices[:observed_uavs]
+            relative_positions = self.uav_positions[selected] - own_position
+            relative_xy = relative_positions[:, :2] / self.area_size
+            relative_z = relative_positions[:, 2] / (
+                self.height_range[1] - self.height_range[0]
+            )
+            normalized_sinr = np.clip((uav_sinr[:observed_uavs] + 10) / 50, 0, 1)
+            block = uav_obs[: observed_uavs * 4].reshape(observed_uavs, 4)
+            block[:, 0] = relative_xy[:, 0]
+            block[:, 1] = relative_xy[:, 1]
+            block[:, 2] = relative_z
+            block[:, 3] = normalized_sinr
+
+        # 4. 当前步数 (1维)
+        step_normalized = np.array([self.current_step / self.max_steps])
+
+        obs = np.concatenate(
+            [normalized_position, user_obs, uav_obs, step_normalized]
+        ).astype(np.float32, copy=False)
+        action_mask = np.ones(3, dtype=np.float32)
+        return {"obs": obs, "action_mask": action_mask}
+
+    def _get_observation_reference(self, agent):
+        """Scalar reference path: local lists rebuilt per agent from `_compute_sinr`."""
         agent_idx = int(agent.split("_")[1])
         own_position = self.uav_positions[agent_idx]
         
@@ -501,13 +560,36 @@ class MultiUAVEnv(ParallelEnv):
     def _get_local_users(self, agent_idx):
         """
         获取指定无人机可通信的用户列表（基于SINR阈值）
-        
+
         参数:
             agent_idx: 无人机索引
-            
+
         返回:
             local_users: 按SINR降序排序的(用户索引, SINR)元组列表
         """
+        if self.channel_backend == "reference" or not self._vector_channel_state_is_current():
+            return self._get_local_users_reference(agent_idx)
+        indices, values = self._local_user_entries(agent_idx)
+        return list(zip(indices.tolist(), values.tolist()))
+
+    def _local_user_entries(self, agent_idx):
+        """(indices, SINR) above the threshold, SINR descending, from `sinr_matrix`."""
+        row = self.sinr_matrix[agent_idx]
+        eligible = np.flatnonzero(row >= self.min_sinr)
+        # 降序，等值保持用户索引升序 —— 与 list.sort(reverse=True) 的稳定性一致。
+        order = eligible[np.argsort(-row[eligible], kind="stable")]
+        return order, row[order]
+
+    def _local_uav_entries(self, agent_idx):
+        """(indices, SINR) above the threshold, SINR descending, from `uav_sinr_matrix`."""
+        row = self.uav_sinr_matrix[agent_idx]
+        eligible = np.flatnonzero(row >= self.min_sinr)
+        eligible = eligible[eligible != agent_idx]  # 跳过自己
+        order = eligible[np.argsort(-row[eligible], kind="stable")]
+        return order, row[order]
+
+    def _get_local_users_reference(self, agent_idx):
+        """Scalar reference path: one `_compute_sinr` call per user."""
         local_users = []
         
         for user_idx in range(self.n_users):
@@ -525,13 +607,20 @@ class MultiUAVEnv(ParallelEnv):
     def _get_local_uavs(self, agent_idx):
         """
         获取指定无人机可通信的其他无人机列表（基于SINR阈值）
-        
+
         参数:
             agent_idx: 无人机索引
-            
+
         返回:
             local_uavs: 按SINR降序排序的(无人机索引, SINR)元组列表
         """
+        if self.channel_backend == "reference" or not self._vector_channel_state_is_current():
+            return self._get_local_uavs_reference(agent_idx)
+        indices, values = self._local_uav_entries(agent_idx)
+        return list(zip(indices.tolist(), values.tolist()))
+
+    def _get_local_uavs_reference(self, agent_idx):
+        """Scalar reference path: one `_compute_uav_to_uav_sinr` call per other UAV."""
         local_uavs = []
         
         for other_idx in range(self.n_uavs):
