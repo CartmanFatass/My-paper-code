@@ -1294,6 +1294,65 @@ class RolloutBuffer:
                         'masks': torch.from_numpy(masks_flat[:, batch_indices]).bool()
                     }
 
+    def get_d2_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch, device=None):
+        """
+        D2 coordinator sampler (plan section 8).
+
+        Rows are `(t, e)` pairs where at least one agent segment row or the team
+        segment row is valid; each row carries the `[N]` replay metadata and the
+        per-head valid masks so the update can mask log-probs, entropies and
+        value losses.
+        """
+        if not self.d2_enabled:
+            raise RuntimeError("get_d2_coordinator_sampler called on a buffer that is not in d2 mode")
+        data = self._get_full_rollout_data()
+        if data is None:
+            main_logger.warning("无有效数据，无法创建D2 Coordinator采样器。")
+            return None
+
+        row_mask = (
+            self.d2_agent_valid[:num_steps].any(axis=-1) | self.d2_team_valid[:num_steps]
+        )
+        valid_time_steps, valid_env_indices = np.where(row_mask)
+        num_valid_samples = len(valid_time_steps)
+        if num_valid_samples == 0:
+            return None
+
+        valid_indices = np.arange(num_valid_samples)
+
+        def _pack(time_batch, env_batch):
+            def _t(array, dtype):
+                view = array[time_batch, env_batch]
+                tensor = torch.as_tensor(np.ascontiguousarray(view), dtype=dtype)
+                return tensor.to(device) if device is not None else tensor
+
+            return {
+                'observations': _t(data["obs"], torch.float32),
+                'states': _t(data["states"], torch.float32),
+                'team_skills': _t(self.d2_team_skill, torch.long),
+                'agent_skills': _t(self.d2_agent_skills, torch.long),
+                'order': _t(self.d2_order, torch.long),
+                'sampled_mask': _t(self.d2_sampled_mask, torch.bool),
+                'sample_Z': _t(self.d2_sample_Z, torch.bool),
+                'team_valid': _t(self.d2_team_valid, torch.float32),
+                'agent_valid': _t(self.d2_agent_valid, torch.float32),
+                'old_team_log_probs': _t(self.d2_team_old_log_prob, torch.float32),
+                'old_agent_log_probs': _t(self.d2_agent_old_log_probs, torch.float32),
+                'team_advantages': _t(self.high_level_team_advantages, torch.float32),
+                'agent_advantages': _t(self.high_level_agent_advantages, torch.float32),
+                'team_returns': _t(self.high_level_team_returns, torch.float32),
+                'agent_returns': _t(self.high_level_agent_returns, torch.float32),
+                'team_age': _t(self.d2_team_age, torch.long),
+                'agent_age': _t(self.d2_agent_age, torch.long),
+            }
+
+        for _epoch in range(ppo_epochs):
+            self._sampler_rng.shuffle(valid_indices)
+            for start in range(0, num_valid_samples, num_sequences_per_batch):
+                end = min(start + num_sequences_per_batch, num_valid_samples)
+                batch_indices = valid_indices[start:end]
+                yield _pack(valid_time_steps[batch_indices], valid_env_indices[batch_indices])
+
     def get_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch, device=None, cache_tensors=False):
         """
         为Coordinator生成采样器。

@@ -545,6 +545,21 @@ class HMASDAgent:
 
         # 创建网络
         self.skill_coordinator = SkillCoordinator(config).to(self.device)
+        if self.d2_enabled:
+            # theta_0 for the exposure line's ||theta - theta_0|| / ||theta_0||
+            # (ADR 01 "Metrics to log", plan section 8).
+            with torch.no_grad():
+                self.d2_coordinator_theta0 = [
+                    p.detach().clone() for p in self.skill_coordinator.parameters()
+                ]
+                self.d2_coordinator_theta0_norm = float(
+                    torch.sqrt(
+                        sum((p.double() ** 2).sum() for p in self.d2_coordinator_theta0)
+                    ).item()
+                )
+        else:
+            self.d2_coordinator_theta0 = None
+            self.d2_coordinator_theta0_norm = 0.0
         self.ha_ctse_editor = HorizonSkillEditor(config).to(self.device) if self.use_ha_ctse else None
         self.low_level_compact_extractor = (
             OPTCompactExtractor(config).to(self.device)
@@ -5361,8 +5376,9 @@ class HMASDAgent:
 
         if self.d2_enabled:
             # Close every still-open segment at the rollout boundary before the
-            # tables are read (plan section 6).
+            # tables are read (plan section 6), then run the masked D2 update.
             self._d2_flush_open_segments(num_steps)
+            return self.update_coordinator_d2(num_steps, bootstrap_values=bootstrap_values)
 
         # num_steps 现在是实际在缓冲区中的有效数据量
         
@@ -5730,6 +5746,260 @@ class HMASDAgent:
                avg_team_entropy, avg_agent_entropy, \
                mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
     
+    def update_coordinator_d2(self, num_steps, bootstrap_values=None):
+        """
+        D2 masked PPO update (plan section 8, ADR 01 invariant 6).
+
+        Rows are `(t, e)` pairs with at least one valid segment row.  The joint
+        action is replayed in the stored decode order with
+        `evaluate_training_batch_ordered`; policy losses, entropies and value
+        losses are masked by the per-head `valid` masks (`valid` implies
+        `sampled`, so forced positions never enter any term).
+        """
+        rollout_data = self.rollout_buffer._get_full_rollout_data()
+        if rollout_data is None:
+            main_logger.warning("没有有效的Rollout数据，跳过D2 Coordinator更新")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        row_mask = tables['agent_valid'].any(axis=-1) | tables['team_valid']
+        rows_M = int(row_mask.sum())
+        if rows_M == 0:
+            main_logger.warning("没有有效的D2高层策略数据，跳过Coordinator更新")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        if bootstrap_values is not None:
+            high_level_last_values = bootstrap_values
+        else:
+            high_level_last_values = self._compute_high_level_bootstrap_values(num_steps)
+
+        profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
+        self.rollout_buffer.compute_high_level_advantages(
+            high_level_last_values,
+            gamma=self.config.gamma,
+            value_normalizer=None,
+        )
+        if self.enable_runtime_profiling:
+            self._add_update_profile('coord_advantage', time.perf_counter() - profile_start)
+
+        # Exposure line: M, target scale and variance per head (ADR 01 metrics).
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        team_returns_all = tables['team_returns'][tables['team_valid']]
+        agent_returns_all = tables['agent_returns'][tables['agent_valid']]
+        metrics = self.d2_metrics
+        metrics['rows_M'] = rows_M
+        metrics['rows_M_agent'] = int(tables['agent_valid'].sum())
+        metrics['rows_M_team'] = int(tables['team_valid'].sum())
+        metrics['target_scale_team'] = (
+            float(np.mean(np.abs(team_returns_all))) if team_returns_all.size else 0.0
+        )
+        metrics['target_scale_agent'] = (
+            float(np.mean(np.abs(agent_returns_all))) if agent_returns_all.size else 0.0
+        )
+        metrics['target_var_team'] = (
+            float(np.var(team_returns_all)) if team_returns_all.size else 0.0
+        )
+        metrics['target_var_agent'] = (
+            float(np.var(agent_returns_all)) if agent_returns_all.size else 0.0
+        )
+
+        if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+            all_returns = self.rollout_buffer.get_all_high_level_returns(num_steps)
+            if all_returns.size > 0:
+                self.value_norm_coordinator.update(all_returns)
+
+        coordinator_batch_size = getattr(self.config, 'coordinator_batch_size', 128)
+        sampler = self.rollout_buffer.get_d2_coordinator_sampler(
+            num_steps,
+            getattr(self.config, 'ppo_epochs', 10),
+            coordinator_batch_size,
+            device=self.device,
+        )
+        if sampler is None:
+            main_logger.error("无法获取D2 Coordinator采样器")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        obs_norm_mean = obs_norm_var = None
+        if getattr(self.config, 'use_obsnorm', False) and self.obs_norm is not None:
+            obs_norm_mean = torch.as_tensor(self.obs_norm.mean, device=self.device, dtype=torch.float32)
+            obs_norm_var = torch.as_tensor(self.obs_norm.var, device=self.device, dtype=torch.float32)
+        state_norm_mean = state_norm_var = None
+        if getattr(self.config, 'use_statenorm', True) and self.state_norm is not None:
+            state_norm_mean = torch.as_tensor(self.state_norm.mean, device=self.device, dtype=torch.float32)
+            state_norm_var = torch.as_tensor(self.state_norm.var, device=self.device, dtype=torch.float32)
+
+        coord_value_norm_tensors = self._value_norm_tensors(self.value_norm_coordinator)
+
+        total_policy_loss = torch.zeros((), device=self.device)
+        total_value_loss = torch.zeros((), device=self.device)
+        total_entropy_loss = torch.zeros((), device=self.device)
+        total_loss_acc = torch.zeros((), device=self.device)
+        total_team_entropy = torch.zeros((), device=self.device)
+        total_agent_entropy = torch.zeros((), device=self.device)
+        update_count = 0
+
+        for batch in sampler:
+            observations_batch = batch['observations']
+            states_batch = batch['states']
+            if obs_norm_mean is not None:
+                observations_batch = torch.clamp(
+                    (observations_batch - obs_norm_mean) / torch.sqrt(obs_norm_var + 1e-8), -10.0, 10.0
+                )
+            if state_norm_mean is not None:
+                states_batch = torch.clamp(
+                    (states_batch - state_norm_mean) / torch.sqrt(state_norm_var + 1e-8), -10.0, 10.0
+                )
+
+            team_mask = batch['team_valid']
+            agent_mask = batch['agent_valid']
+            team_count = torch.clamp(team_mask.sum(), min=1.0)
+            agent_count = torch.clamp(agent_mask.sum(), min=1.0)
+            batch_size = observations_batch.shape[0]
+
+            with self._update_autocast():
+                coord_eval = self.skill_coordinator.evaluate_training_batch_ordered(
+                    states_batch,
+                    observations_batch,
+                    batch['team_skills'],
+                    batch['agent_skills'],
+                    batch['order'],
+                    batch['sampled_mask'],
+                    batch['sample_Z'],
+                )
+
+            team_log_probs = coord_eval['team_log_probs']
+            agent_log_probs = coord_eval['agent_log_probs']
+            team_entropy = coord_eval['team_entropy']
+            agent_entropies_tensor = coord_eval['agent_entropies']
+
+            # Entropy sums over sampled (valid) positions only (ADR invariant 6).
+            total_entropy_per_sample = (
+                team_entropy * team_mask + (agent_entropies_tensor * agent_mask).sum(dim=1)
+            )
+            entropy = total_entropy_per_sample.sum() / max(1, batch_size)
+
+            state_values = coord_eval['state_values'].squeeze(-1)
+            agent_values_tensor = coord_eval['agent_values']
+
+            team_advantages_batch = batch['team_advantages'] * team_mask
+            agent_advantages_batch = batch['agent_advantages'] * agent_mask
+            all_advantages = torch.cat(
+                [team_advantages_batch.reshape(-1), agent_advantages_batch.reshape(-1)], dim=0
+            )
+            all_mask = torch.cat([team_mask.reshape(-1), agent_mask.reshape(-1)], dim=0)
+            mask_total = torch.clamp(all_mask.sum(), min=1.0)
+            global_mean = (all_advantages * all_mask).sum() / mask_total
+            global_var = ((all_advantages - global_mean) ** 2 * all_mask).sum() / mask_total
+            global_std = torch.sqrt(global_var) + 1e-8
+            team_advantages_batch = (batch['team_advantages'] - global_mean) / global_std
+            agent_advantages_batch = (batch['agent_advantages'] - global_mean) / global_std
+
+            clip = self.config.clip_epsilon
+            team_ratios = torch.exp(team_log_probs - batch['old_team_log_probs'].detach())
+            team_surr1 = team_ratios * team_advantages_batch
+            team_surr2 = torch.clamp(team_ratios, 1.0 - clip, 1.0 + clip) * team_advantages_batch
+            team_policy_loss = -(torch.min(team_surr1, team_surr2) * team_mask).sum() / team_count
+
+            agent_ratios = torch.exp(agent_log_probs - batch['old_agent_log_probs'].detach())
+            agent_surr1 = agent_ratios * agent_advantages_batch
+            agent_surr2 = torch.clamp(agent_ratios, 1.0 - clip, 1.0 + clip) * agent_advantages_batch
+            agent_policy_loss = -(torch.min(agent_surr1, agent_surr2) * agent_mask).sum() / agent_count
+
+            policy_loss = team_policy_loss + agent_policy_loss
+
+            team_returns_tensor = batch['team_returns']
+            agent_returns_tensor = batch['agent_returns']
+            if coord_value_norm_tensors is not None:
+                mean, var, std = coord_value_norm_tensors
+                team_target = (team_returns_tensor - mean) / std
+                agent_target = (agent_returns_tensor - mean) / std
+                if hasattr(self.config, "value_clip"):
+                    team_target = torch.clamp(team_target, -self.config.value_clip, self.config.value_clip)
+                    agent_target = torch.clamp(agent_target, -self.config.value_clip, self.config.value_clip)
+            else:
+                team_target = team_returns_tensor
+                agent_target = agent_returns_tensor
+
+            team_value_loss = (
+                ((state_values - team_target.detach()) ** 2) * team_mask
+            ).sum() / team_count
+            agent_value_loss = (
+                ((agent_values_tensor - agent_target.detach()) ** 2) * agent_mask
+            ).sum() / agent_count
+            value_loss = team_value_loss + agent_value_loss
+
+            entropy_loss = -self.config.lambda_h * entropy
+            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+
+            if torch.isnan(loss).any() or torch.isinf(loss).any():
+                main_logger.error("D2 coordinator loss contains NaN or Inf! Skipping update.")
+                continue
+
+            self.coordinator_optimizer.zero_grad()
+            if self.update_amp_enabled:
+                self.update_grad_scaler.scale(loss).backward()
+                self.update_grad_scaler.unscale_(self.coordinator_optimizer)
+            else:
+                loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.skill_coordinator.parameters(), self.config.max_grad_norm)
+            if self.update_amp_enabled:
+                self.update_grad_scaler.step(self.coordinator_optimizer)
+                self.update_grad_scaler.update()
+            else:
+                self.coordinator_optimizer.step()
+
+            total_policy_loss = total_policy_loss + policy_loss.detach()
+            total_value_loss = total_value_loss + value_loss.detach()
+            total_entropy_loss = total_entropy_loss + entropy_loss.detach()
+            total_loss_acc = total_loss_acc + loss.detach()
+            total_team_entropy = total_team_entropy + (
+                (team_entropy * team_mask).sum() / team_count
+            ).detach()
+            total_agent_entropy = total_agent_entropy + (
+                (agent_entropies_tensor * agent_mask).sum() / agent_count
+            ).detach()
+            update_count += 1
+
+        metrics['optimizer_steps'] += int(update_count)
+        if self.d2_coordinator_theta0 is not None and self.d2_coordinator_theta0_norm > 0.0:
+            with torch.no_grad():
+                displacement = torch.sqrt(
+                    sum(
+                        ((p.detach() - p0).double() ** 2).sum()
+                        for p, p0 in zip(self.skill_coordinator.parameters(), self.d2_coordinator_theta0)
+                    )
+                ).item()
+            metrics['param_displacement'] = float(displacement) / self.d2_coordinator_theta0_norm
+
+        avg_policy_loss = (total_policy_loss / update_count).item() if update_count > 0 else 0.0
+        avg_value_loss = (total_value_loss / update_count).item() if update_count > 0 else 0.0
+        avg_entropy_loss = (total_entropy_loss / update_count).item() if update_count > 0 else 0.0
+        avg_total_loss = (total_loss_acc / update_count).item() if update_count > 0 else 0.0
+        avg_team_entropy = (total_team_entropy / update_count).item() if update_count > 0 else 0.0
+        avg_agent_entropy = (total_agent_entropy / update_count).item() if update_count > 0 else 0.0
+
+        rewards_all = np.concatenate([
+            tables['team_reward'][tables['team_valid']].ravel(),
+            tables['agent_reward'][tables['agent_valid']].ravel(),
+        ])
+        avg_high_level_reward = float(np.mean(rewards_all)) if rewards_all.size else 0.0
+        mean_state_value = (
+            float(np.mean(tables['team_value'][tables['team_valid']]))
+            if tables['team_valid'].any() else 0.0
+        )
+        mean_agent_value = (
+            float(np.mean(tables['agent_values'][tables['agent_valid']]))
+            if tables['agent_valid'].any() else 0.0
+        )
+
+        main_logger.info(
+            f"D2 Coordinator 更新完成: {update_count}次更新, M={rows_M}, "
+            f"平均损失={avg_total_loss:.6f}, 参数位移={metrics['param_displacement']:.6g}"
+        )
+        return avg_total_loss, avg_policy_loss, avg_value_loss, \
+            avg_team_entropy, avg_agent_entropy, \
+            mean_state_value, mean_agent_value, avg_high_level_reward, 0.0
+
     def update_discoverer_from_rollout(self, last_values, dones):
         """
         使用重构后的RolloutBuffer更新低层技能发现器网络。
