@@ -107,6 +107,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   cProfile shares (environment 81%, update 12%, inference 2%), phases P0 to P4 (reference tape
   and equivalence harness, vectorised channel model, observations from matrices, fingerprint
   re-freeze and re-timing, update phase), expected effect, integrity policy, two owner decisions.
+- `ENV_THROUGHPUT_REFACTOR_REPORT_20260902.md` — P0–P3 report: harness bit-identical across the
+  five channel models, per-step 24.6 ms → 0.47 ms, E0 collection 240 s → 18 s per rollout at 32
+  lanes, fingerprint unchanged (re-freeze unspent), six plan-versus-code discrepancies, could-not-
+  verify. Accepted in the ADR review's Part X.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,

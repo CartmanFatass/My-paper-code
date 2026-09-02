@@ -1039,3 +1039,87 @@ E1 (age input; D0 versus D1 at `k = 10` on scenario 1) per plan §5, using the f
 the C1 (value-target variance) and C2 (discriminator accuracy, label agreement between adjacent
 checkpoints) measurements. The owner writes the prediction first; the reviewer drafts the E1 launch
 contract in the E0 format when asked.
+
+---
+
+# Part X — throughput refactor P0–P3 intake (2026-09-02, later)
+
+Object: `../plans/ENV_THROUGHPUT_REFACTOR_PLAN_20260902.md` phases P0–P3, implemented by an Opus
+session on `main` in commits `42b75e4eb` (P0 harness), `e2b50f606` (P1 vectorised channel model),
+`c2179d31f` (P2 observations from the matrices), `9f4d0e4ba` (P3 fingerprint regeneration,
+re-timing, report). Report: `../plans/ENV_THROUGHPUT_REFACTOR_REPORT_20260902.md`. Verdict:
+**accepted; integrated as landed** (the commits are already on `main`). E1 launches on this
+commit per `RESEARCH_ADVANCEMENT_PLAN_20260902.md` §7 decision 1.
+
+## X.1 What the reviewer checked
+
+1. **Formula preservation, by reading.** `_compute_path_loss_matrix` against
+   `_compute_path_loss_reference` (five models; the 2-D user convention with `z = 0`; elevation
+   by `arctan2` for 3GPP and by `arcsin(h/d)` for the probabilistic model; `max(d, 1e-6)`);
+   `_compute_uav_path_loss_matrix` against `_compute_uav_path_loss_reference` (3GPP air-to-air
+   reduces to free space; probabilistic uses the fixed 0.9/0.1 split; the diagonal written as
+   `0.0` explicitly); `_sinr_from_path_loss` against `_compute_sinr` (the dBm round trip through
+   `10*log10` and back, the `-inf` branch when interference is zero, FDMA branch);
+   `_compute_uav_uav_sinr_matrix` excludes sender and receiver as the scalar loop does (receiver
+   row zeroed, which adds an exact `0.0`); `_greedy_connection_assignment` uses a stable
+   descending sort over `(uav, user)` row-major order, which is what `list.sort(reverse=True)`
+   on the scalar pair list produces, and its early exit fires only when no further assignment is
+   possible. `_local_user_entries` / `_local_uav_entries` reproduce the threshold and the same
+   stable descending order. Nothing in the reward, the observation layout, the RNG schedule or
+   the learner is touched.
+2. **The harness.** `tests/uav_env_channel_equivalence_test.py` compares the live default backend
+   to a tape written once from the scalar backend (content digest
+   `cf389585ba62371e2c95b63cd645f6de29d87ad0b421de5587e838a17ebf8c02` pinned in the test; a
+   missing tape is regenerated and must reproduce that digest). Five models, 2 × 500 steps at
+   `n_uavs = 6, n_users = 50`: max abs diff 0.0 on SINR, rewards, observations, state; 0 of
+   1,349,000 positions above 1e-12; 0 of 300,000 connection mismatches. The owner's 1e-9
+   allowance (plan §6.1) was never consumed.
+3. **Fingerprint.** Regenerated on the vectorised environment after a passing preflight and
+   came back byte-identical (canonical `3c525b9c…`, raw `6ba55c2e…`); `git log` on
+   `tests/fixtures/flexible_skill_duration_d2/` still ends at the phase-0 commit `307992fe6`
+   and the diff over the refactor range is empty. The one re-freeze the owner authorised is
+   unspent. The `off` byte-identity guard therefore still holds against the pre-D2 baseline.
+4. **Through the learner.** The two E0 timing reruns (`timing_off_{1,4}thread_vectorized`, 32
+   lanes, 2 rollouts) reproduce the old evaluation return means bit-for-bit
+   (`40.09186398791525`, `39.84203863517143`) with unchanged optimizer counts, transitions,
+   episodes and exposure line.
+5. **Reviewer's own run.**
+   `pytest -q -p no:cacheprovider --basetemp temp/pytest_fable_refactor_review
+   tests/uav_env_channel_equivalence_test.py tests/flexible_skill_duration_d2_test.py
+   tests/uav_path_loss_cache_test.py` → `41 passed, 14 warnings in 33.58s`.
+6. **Timing (4 threads, 32 lanes).** Collection 240 s → 18 s per rollout, evaluation 61 s → 4.4
+   s, update unchanged at 188 s (drift +3.6%, untouched code), rollout+update 422 s → 206 s.
+   The update is now 91% of a rollout: the plan's precondition for P4 is met; per §7 decision 4
+   P4 is decided after E1's intake.
+
+## X.2 Findings (none blocking)
+
+- **F1 — scenarios 2 and 3 inherit the default.** `UAVCooperativeNetworkEnv` and `UAVMultiHopEnv`
+  now evaluate through the vectorised backend; their cache-versus-reference oracle passes but
+  no scalar-versus-vectorised tape exists for them, and scenario 3's default `n_uavs = 20` is
+  past the size (nine interferers) at which NumPy's pairwise reduction makes exact equality
+  unexpected. **Condition registered:** before any result-bearing run on scenario 2 or 3, or on
+  scenario 1 with `n_uavs > 9`, a tape for that configuration is written from the `reference`
+  backend and the harness passes at the 1e-9 tolerance (a fingerprint re-freeze would then be
+  the second, unauthorised one, so the owner is asked first).
+- **F2 — the path-loss cache benchmark's premise is stale.** `step_path_loss_cache` False and
+  True now do the same work, so `tools/benchmarks/benchmark_uav_path_loss_cache.py`'s
+  `optimized_default_eligible` gate is a coin flip and its `main()` may return 1. The pytest
+  contract does not assert that gate. Left as is; noted for the owner, since the benchmark
+  belongs to an older engineering line (`docs/project/EFFICIENCY_PRACTICES.md`).
+- **F3 — plan §2 was wrong about RNG.** The 3GPP model draws one uniform per link per step; the
+  implementer preserved the stream by drawing them as one row-major array and left the
+  shadowing combination on the scalar matrix path. Scenario 1 uses `free_space`, so E-series
+  runs are unaffected; recorded as a plan erratum.
+- **F4 — untested branches.** `use_fdma=True`, three-column user positions, and 3GPP with
+  shadowing at the harness size have no test and are reachable from no route entry; they are
+  recorded in report §9 and not needed by any contracted study.
+
+## X.3 Consequence
+
+R0 is done (`RESEARCH_ADVANCEMENT_PLAN_20260902.md` §1). E1 launches at this commit under the
+E1 contract with `num_envs = 32` (206 s per rollout at 4 threads → about 70 minutes per run at
+`R = 20`, inside the contract's 90-minute condition for 32 lanes), two runs concurrent as
+matched seed pairs, 8-hour study cap. The SCDMP recast run (Part A.4 of
+`FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`) shares the machine; at 16 logical cores three
+4-thread processes do not oversubscribe.

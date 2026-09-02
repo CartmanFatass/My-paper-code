@@ -14,8 +14,8 @@ launch policy. Decisions confirmed with the owner are in §7. Governing texts:
 | ADR 01 (D2 policy interruption) | implemented on the base route; `off` byte-identical; accepted (review Parts VII, VIII) |
 | ADR 02 (relay corridor host) | implemented, references and margins exact, joined to the learner (Parts VI, VIII) |
 | E0 (exposure, probe set) | two seeds, four arms complete, probe set frozen (Part IX) |
-| Throughput refactor P0–P3 | running (`ENV_THROUGHPUT_REFACTOR_PLAN_20260902.md`); P4 decided after P3 |
-| E1 contract | written, prediction on record; launches after P3 (`E1_AGE_INPUT_20260902.md`) |
+| Throughput refactor P0–P3 | done and accepted (review Part X, commit `9f4d0e4ba`): collection 240 s → 18 s per rollout, fingerprint unchanged; P4 decided after E1's intake (§7 decision 4) |
+| E1 contract | written, prediction on record; launched 2026-09-02 after Part X at `num_envs = 32`, two runs concurrent (`E1_AGE_INPUT_20260902.md`) |
 | Open from ADR 02 | the finite `c` grid; the E5 coupling term (designed when E5 is scheduled) |
 
 ## 1. The sequence
