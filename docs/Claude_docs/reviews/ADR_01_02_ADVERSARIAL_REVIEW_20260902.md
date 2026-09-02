@@ -309,3 +309,145 @@ F1.8, F2.2 to F2.5 applied; Claude reviews the re-issue; Codex implements only a
   that any finite `c` must clear.)
 - P3. If `E[D]` is matched across the three renewal laws in E4, which law gives the fixed-`k` learner
   the largest loss at its best `k`, and does the ranking change if only the median is matched?
+
+---
+
+# Part II — round-2 review of the re-issued ADRs (2026-09-02, later)
+
+Objects: revision 2 of both ADRs (stored at the same paths; revision 1 is at commit `ea20bccb0`).
+Citations re-verified against the working tree at `9cc2a8ff2` plus uncommitted Codex paths.
+
+Verdict in one line each:
+
+- **ADR 01: ACCEPT WITH TWO CHANGES.** All six §4.1 decisions and every must-fix item from Part I
+  are applied, and the arithmetic is now correct. Two structural gaps remain: the team cap
+  re-synchronises every agent, which undoes most of the per-agent-clock decision at any
+  `k_max < H` (II.1), and the per-agent segment storage the decision needs is not named (II.2).
+  Both are additions, not reversals. After them Codex can start.
+- **ADR 02: HOLD, as it says itself.** The contract part is now consistent. One addition is
+  required before the owner writes the mechanics: the margin it registers is not the quantity E3
+  measures (II.7).
+
+## II.0 Citation audit, round 2
+
+| ADR claim | Verified location | Status |
+| --- | --- | --- |
+| `SkillCoordinator.assign_and_value_batch` samples causally | `hmasd/networks.py:787-835` | correct |
+| Forced masks only in `HorizonSkillEditor.assign_and_value_batch` | `hmasd/ha_ctse.py:284` (class), `633-660` (method) | correct |
+| `get_coordinator_sampler` keeps the partial batch | `hmasd/utils.py:1026`, batching loop `range(0, n, batch)` with `min(...)` end | correct, so the ceiling is right |
+| Coordinator batch 128 "in the pinned Config" | `hmasd/agent.py:4747` is a `getattr` default; `config_1.py` has no `coordinator_batch_size` | wording: an agent-side default, not a Config field |
+| Adam steps about 39,000, lr times steps about 3.9 | recomputed | correct |
+| `Config` `N = 6`, `n_uavs = 6` | `config_1.py:25` has 6, but `main.py:58` defaults `--n_uavs 5` and `main.py:410` overwrites `config.n_agents = env.n_uavs` | the pin only holds if the run passes `--n_uavs 6`; say so |
+| Observation layout at `uav_env.py:122-126` | those lines are SINR threshold and power-cost parameters; the layout is `uav_env.py:138` (obs_dim formula) and `_get_observation` at `353` | wrong lines, right content |
+| Scenario 1 reward | `envs/pettingzoo/scenario1.py:78-112` | correct |
+| Eight evaluation episodes | `config_1.py:196` for in-training evaluation; `main.py:51` CLI default is 10 for `--mode eval` | still unpinned; state which |
+
+## II.1 (must fix) The team cap re-synchronises all agents at every `k_max`
+
+The decision says a team decision, team cap, reset, or invalidity makes `S_t` all live agents, and
+that the team clock uses the same `k_max` cap as the agent clocks. Consequence: the team cap fires
+`k_max` steps after the last team decision, and at that moment every agent is forced. An agent that
+switched early has a younger age than the team, so its own cap never fires before the team cap.
+Per-agent caps therefore never bind; the only asynchrony left is early exits, and the whole roster
+re-synchronises at multiples of `k_max`. At `k_max < H` this is the global-clock reading of Part I
+F1.2 with `k` renamed, and the E3 mechanism (hold longer where hazard is low) is again capped and
+re-synchronised. At `k_max = H` the problem vanishes, which is why the draft does not notice it.
+
+D0 parity does not need the shared cap: at infinite costs there are no early exits, every agent age
+equals the team age, and all caps fire together whether or not they are the same parameter.
+
+Fix, an added parameter rather than a rule change: a separate team cap `k_Z`, default `k_max`
+(parity with D0 and with `off`), swept to `H` for E3/E4 so that the team code is re-decided only by
+interruption or reset. Keep "every team decision forces all agents" (decision 3, invariant 7). State
+explicitly that at `k_Z < H` the team cap re-synchronises the roster, so the E3 object must run with
+`k_Z = H`.
+
+## II.2 (must fix) Per-agent segment storage is missing from the decision
+
+The buffer stores one high-level row per `(step, env)`: scalar `high_level_valid_mask`,
+`high_level_rewards`, `high_level_elapsed_steps`, `high_level_terminal`, `high_level_close_reason`
+(`hmasd/utils.py:243-255`); only the log-probabilities and advantages already carry an agent axis
+(`utils.py:250, 285-287`). The GAE at `utils.py:721-748` walks one sequence per env. With per-agent
+segments, each agent needs its own valid mask, segment reward, elapsed length, terminal flag, and
+bootstrap value, and the team code needs the same set with its own length. The decision names three
+stored objects (order, forced tokens, sampled mask) and none of these. Add: in `d2` the high-level
+buffer holds a per-agent segment table `(valid, reward, elapsed, terminal, value)` of shape
+`[T, E, N]` plus a team table `[T, E]`; `off` keeps the current arrays. This is the largest code
+change in the object and belongs in the touch points; invariant 8 would fail without it, but the ADR
+should not rely on a test to discover a design element.
+
+## II.3 (should fix) Sample-count collapse at large `k_max` is the binding resolution term
+
+At `k_max = H = 500` and infinite costs, each agent has one segment per episode, so `M = 32` rows
+per rollout, one minibatch, 3,000 Adam steps, and 32 high-level samples per update. `M` scales as
+`32 x 500 / mean segment length`. The exposure line covers optimiser steps; the ADR should name `M`
+per rollout as the quantity that shrinks with long holds and record it beside displacement. It is
+already in the metrics list ("high-level samples"); the risk section should say why it matters.
+
+## II.4 (should fix) The interruption check multiplies coordinator inference by `k`
+
+At `delta = 1` the teacher-forced pass runs every step for every env instead of every `k` steps. At
+`k = 10` that is ten times the coordinator inference of `off`. Not a correctness issue; it belongs in
+the risks and in the plan speed budget, since scenario 1 on CPU is already slow.
+
+## II.5 (minor) Wording repairs
+
+- `n_uavs = 6`: state the entry-point pin (`--n_uavs 6`, or a preset) because `main.py:410`
+  overrides `Config`.
+- `eval_episodes`: pin "in-training evaluation, `config_1.py:196`, eight episodes".
+- Observation-layout citation: `uav_env.py:138` and `353`.
+- "The pinned `Config` has coordinator batch 128": it is the `getattr` default at `agent.py:4747`.
+- Age normalisation: with `k_Z` separate, the team age is `a_Z / k_Z`.
+
+## II.6 ADR 02: what round 2 fixed
+
+Mechanics deferred to the owner with an explicit block; `m` defined from enumerable plans rather
+than a trained policy; greedy carries no ordering; D0 named as the duration-structure-blind cut;
+agent-pinned regions; region-keyed event streams; lognormal with matched mean; speed as a
+recorded-machine target. All consistent with Part I §4.1.
+
+## II.7 (must fix before the mechanics) The registered margin is not what E3 measures
+
+`m = J*(oracle plan) - J*(best open-loop or fixed plan)` is the latent-structure margin from the
+environment advice: it measures how much knowing the latent is worth. The E3 claim is different: D2
+beats the best fixed-`k` policy on a heterogeneous-hazard host. The quantity that has to be
+resolvable is a duration margin,
+
+    m_dur = J*(oracle that knows the latent and switches at hazard events)
+          - max over k of J*(oracle that knows the latent but may switch only every k steps),
+
+both computable by enumeration at toy scale once the mechanics exist. `m_dur` is the number the
+ledger min-over-k max-regret bound predicts from the two hazard rates, and it is the number the E3
+evaluation budget must exceed by the factor three the advice requires. Register both margins: `m`
+for the host calibration, `m_dur` as the E3/E4 acceptance scale, and require `m_dur` to be at least
+three times the declared resolution term. Without `m_dur`, a host can pass all three `m`
+calibrations and still make E3 undecidable, because the best fixed `k` may already be within noise
+of the switching oracle.
+
+## II.8 (should fix) "Ten segments at the largest cap" conflicts with `k_max = H`
+
+ADR 02 requires `H` at least ten times the largest swept cap, and invariant 4 repeats it; ADR 01
+sweeps `k_max` up to `H`, where an episode-long hold is the intended behaviour. The ten-segment rule
+is for the fixed-`k` D0 sweep, so the D0 sample count is not degenerate. Restate: `H` at least ten
+times the largest fixed `k` in the D0 sweep; the D2 cap sweep is exempt, and its sample count is
+handled by II.3.
+
+## II.9 (minor) ADR 02 wording
+
+- "sharing an owner-set finite mean and finite variance": only the mean can be matched across
+  deterministic (variance 0), exponential (variance equal to mean squared), and lognormal. Match the
+  mean; report the variance.
+- `time_homogeneous` has no defined effect in either round. With agent-pinned regions and stationary
+  hazard it is inert for E2-E4; define it or drop it from this ADR.
+- The deterministic law has the fixed `k = D` policy as its oracle; it is the natural D0 tuning
+  target for E4 and worth one sentence.
+
+## II.10 Decisions for the owner, round 2
+
+1. Separate team cap `k_Z` (II.1): add it with default `k_max` and `k_Z = H` for E3/E4, or keep a
+   single cap and accept that E3 runs only at `k_max = H`.
+2. Register `m_dur` (II.7) as the E3/E4 acceptance scale next to `m`, or keep only `m`.
+3. Ten-segment rule (II.8): apply to the fixed-`k` D0 sweep only, or to both sweeps.
+
+After these, ADR 01 goes to Codex with II.2 to II.5 folded in as text; ADR 02 waits for the owner
+mechanics page, which Part I F2.1 lists in order.
