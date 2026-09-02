@@ -193,6 +193,7 @@ class RolloutBuffer:
         action_space_type='continuous',
         compact_dim=0,
         sampler_seed=0,
+        d2_enabled=False,
     ):
         self.num_steps = num_steps
         self.num_envs = num_envs
@@ -205,6 +206,10 @@ class RolloutBuffer:
         self.state_dim = state_dim
         self.action_space_type = action_space_type
         self.compact_dim = max(1, int(compact_dim or 0))
+        # D2 policy-based interruption (ADR 01).  The per-agent segment table and
+        # the team table are allocated only in `d2`; `off` keeps exactly the
+        # arrays it had before.
+        self.d2_enabled = bool(d2_enabled)
         self._sampler_rng = np.random.default_rng(int(sampler_seed))
 
         self.reset()
@@ -285,6 +290,9 @@ class RolloutBuffer:
         self.high_level_agent_advantages = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.high_level_team_returns = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_agent_returns = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+
+        if self.d2_enabled:
+            self._reset_d2_tables()
 
         self._cached_rollout_data = None
         self._profile = {
@@ -422,6 +430,161 @@ class RolloutBuffer:
         if applied > 0:
             self._cached_rollout_data = None
         return applied
+
+    # ------------------------------------------------------------------
+    # D2 policy-based interruption tables (ADR 01 revision 3, plan section 6).
+    # Allocated and written only when `d2_enabled`.
+    # ------------------------------------------------------------------
+
+    def _reset_d2_tables(self):
+        T, E, N = self.num_steps, self.num_envs, self.n_agents
+
+        # Per-(step, env) replay metadata of the assignment decided at that step.
+        self.d2_decision = np.zeros((T, E), dtype=np.bool_)
+        self.d2_sample_Z = np.zeros((T, E), dtype=np.bool_)
+        self.d2_sampled_mask = np.zeros((T, E, N), dtype=np.bool_)
+        self.d2_order = np.tile(np.arange(N, dtype=np.int64), (T, E, 1))
+        self.d2_team_skill = np.full((T, E), -1, dtype=np.int64)
+        self.d2_agent_skills = np.full((T, E, N), -1, dtype=np.int64)
+        self.d2_team_old_log_prob = np.zeros((T, E), dtype=np.float32)
+        self.d2_agent_old_log_probs = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_team_value = np.zeros((T, E), dtype=np.float32)
+        self.d2_agent_values = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_agent_cause = np.zeros((T, E, N), dtype=np.int64)
+        self.d2_team_cause = np.zeros((T, E), dtype=np.int64)
+
+        # Ages at the step the transition was collected (plan section 9).
+        self.d2_agent_age = np.zeros((T, E, N), dtype=np.int64)
+        self.d2_team_age = np.zeros((T, E), dtype=np.int64)
+
+        # Per-agent segment table [T, E, N] and team table [T, E].  A row is
+        # written at the segment's start index when the segment closes.
+        self.d2_agent_valid = np.zeros((T, E, N), dtype=np.bool_)
+        self.d2_agent_reward = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_agent_elapsed = np.ones((T, E, N), dtype=np.int32)
+        self.d2_agent_terminal = np.zeros((T, E, N), dtype=np.bool_)
+
+        self.d2_team_valid = np.zeros((T, E), dtype=np.bool_)
+        self.d2_team_reward = np.zeros((T, E), dtype=np.float32)
+        self.d2_team_elapsed = np.ones((T, E), dtype=np.int32)
+        self.d2_team_terminal = np.zeros((T, E), dtype=np.bool_)
+
+    def add_d2_step(self, env_idx, time_step, agent_age, team_age, decision=False,
+                    team_skill=None, agent_skills=None, sampled_mask=None, sample_Z=False,
+                    order=None, team_log_prob=0.0, agent_log_probs=None,
+                    team_value=0.0, agent_values=None, agent_cause=None, team_cause=0):
+        """Record one D2 step: the per-step ages and, on a decision, the replay metadata."""
+        if not self.d2_enabled:
+            raise RuntimeError("add_d2_step called on a buffer that is not in d2 mode")
+        if env_idx >= self.num_envs or time_step < 0 or time_step >= self.num_steps:
+            main_logger.error(
+                f"add_d2_step: index out of range env_idx={env_idx}, time_step={time_step}"
+            )
+            return False
+        if not self.masks[time_step, env_idx]:
+            main_logger.error(
+                f"add_d2_step: low-level data missing at env_idx={env_idx}, time_step={time_step}"
+            )
+            return False
+
+        self.d2_agent_age[time_step, env_idx] = self._agent_vector(agent_age, np.int64, "d2_agent_age")
+        self.d2_team_age[time_step, env_idx] = int(team_age)
+
+        if decision:
+            self.d2_decision[time_step, env_idx] = True
+            self.d2_sample_Z[time_step, env_idx] = bool(sample_Z)
+            self.d2_sampled_mask[time_step, env_idx] = self._agent_vector(
+                sampled_mask, np.bool_, "d2_sampled_mask"
+            )
+            self.d2_order[time_step, env_idx] = self._agent_vector(order, np.int64, "d2_order")
+            self.d2_team_skill[time_step, env_idx] = int(team_skill)
+            self.d2_agent_skills[time_step, env_idx] = self._agent_vector(
+                agent_skills, np.int64, "d2_agent_skills"
+            )
+            self.d2_team_old_log_prob[time_step, env_idx] = float(team_log_prob)
+            self.d2_agent_old_log_probs[time_step, env_idx] = self._agent_vector(
+                agent_log_probs, np.float32, "d2_agent_old_log_probs"
+            )
+            self.d2_team_value[time_step, env_idx] = float(team_value)
+            self.d2_agent_values[time_step, env_idx] = self._agent_vector(
+                agent_values, np.float32, "d2_agent_values"
+            )
+            if agent_cause is not None:
+                self.d2_agent_cause[time_step, env_idx] = self._agent_vector(
+                    agent_cause, np.int64, "d2_agent_cause"
+                )
+            self.d2_team_cause[time_step, env_idx] = int(team_cause)
+
+        self._cached_rollout_data = None
+        return True
+
+    def close_d2_agent_segment(self, env_idx, agent_idx, start_step, reward, elapsed, terminal):
+        """Write one closed per-agent segment row at its start index."""
+        if not self.d2_enabled:
+            raise RuntimeError("close_d2_agent_segment called on a buffer that is not in d2 mode")
+        if start_step < 0 or start_step >= self.num_steps or env_idx >= self.num_envs:
+            main_logger.error(
+                f"close_d2_agent_segment: index out of range env={env_idx}, t={start_step}"
+            )
+            return False
+        self.d2_agent_valid[start_step, env_idx, agent_idx] = True
+        self.d2_agent_reward[start_step, env_idx, agent_idx] = float(reward)
+        self.d2_agent_elapsed[start_step, env_idx, agent_idx] = max(1, int(elapsed))
+        self.d2_agent_terminal[start_step, env_idx, agent_idx] = bool(terminal)
+        self.high_level_valid_mask[start_step, env_idx] = True
+        self._cached_rollout_data = None
+        return True
+
+    def close_d2_team_segment(self, env_idx, start_step, reward, elapsed, terminal):
+        """Write one closed team segment row at its start index."""
+        if not self.d2_enabled:
+            raise RuntimeError("close_d2_team_segment called on a buffer that is not in d2 mode")
+        if start_step < 0 or start_step >= self.num_steps or env_idx >= self.num_envs:
+            main_logger.error(
+                f"close_d2_team_segment: index out of range env={env_idx}, t={start_step}"
+            )
+            return False
+        self.d2_team_valid[start_step, env_idx] = True
+        self.d2_team_reward[start_step, env_idx] = float(reward)
+        self.d2_team_elapsed[start_step, env_idx] = max(1, int(elapsed))
+        self.d2_team_terminal[start_step, env_idx] = bool(terminal)
+        self.high_level_valid_mask[start_step, env_idx] = True
+        self._cached_rollout_data = None
+        return True
+
+    def get_d2_tables(self, num_steps=None):
+        """Return views of the D2 tables truncated to `num_steps` (diagnostics/tests)."""
+        if not self.d2_enabled:
+            return None
+        sl = slice(0, self.num_steps if num_steps is None else int(num_steps))
+        return {
+            'decision': self.d2_decision[sl],
+            'sample_Z': self.d2_sample_Z[sl],
+            'sampled_mask': self.d2_sampled_mask[sl],
+            'order': self.d2_order[sl],
+            'team_skill': self.d2_team_skill[sl],
+            'agent_skills': self.d2_agent_skills[sl],
+            'team_old_log_prob': self.d2_team_old_log_prob[sl],
+            'agent_old_log_probs': self.d2_agent_old_log_probs[sl],
+            'team_value': self.d2_team_value[sl],
+            'agent_values': self.d2_agent_values[sl],
+            'agent_cause': self.d2_agent_cause[sl],
+            'team_cause': self.d2_team_cause[sl],
+            'agent_age': self.d2_agent_age[sl],
+            'team_age': self.d2_team_age[sl],
+            'agent_valid': self.d2_agent_valid[sl],
+            'agent_reward': self.d2_agent_reward[sl],
+            'agent_elapsed': self.d2_agent_elapsed[sl],
+            'agent_terminal': self.d2_agent_terminal[sl],
+            'team_valid': self.d2_team_valid[sl],
+            'team_reward': self.d2_team_reward[sl],
+            'team_elapsed': self.d2_team_elapsed[sl],
+            'team_terminal': self.d2_team_terminal[sl],
+            'agent_advantages': self.high_level_agent_advantages[sl],
+            'agent_returns': self.high_level_agent_returns[sl],
+            'team_advantages': self.high_level_team_advantages[sl],
+            'team_returns': self.high_level_team_returns[sl],
+        }
 
     def add_high_level_data(self, env_idx, time_step, state_value=None, agent_values=None,
                            team_log_prob=None, agent_log_probs=None, accumulated_reward=None, **kwargs):

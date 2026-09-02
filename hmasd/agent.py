@@ -778,6 +778,7 @@ class HMASDAgent:
             action_space_type=action_space_type,
             compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0,
             sampler_seed=rollout_sampler_seed,
+            d2_enabled=self.d2_enabled,
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -2077,6 +2078,180 @@ class HMASDAgent:
         """Drop all open D2 segment bookkeeping (rollout boundary)."""
         self.d2_open_agent_segments = {}
         self.d2_open_team_segments = {}
+
+    def _d2_open_agent(self, env_id):
+        seg = self.d2_open_agent_segments.get(env_id)
+        if seg is None:
+            seg = {
+                'start': np.full(self.config.n_agents, -1, dtype=np.int64),
+                'disc': np.zeros(self.config.n_agents, dtype=np.float64),
+            }
+            self.d2_open_agent_segments[env_id] = seg
+        return seg
+
+    def _d2_open_team(self, env_id):
+        seg = self.d2_open_team_segments.get(env_id)
+        if seg is None:
+            seg = {'start': -1, 'disc': 0.0}
+            self.d2_open_team_segments[env_id] = seg
+        return seg
+
+    def _d2_store_transition(self, env_id, rollout_step_idx, reward, done, d2_step):
+        """
+        D2 storage (plan section 6): maintain the open per-agent and team
+        segments, write a closed row at the segment's start index, and
+        accumulate the discounted within-segment reward `sum_u gamma^u r`.
+
+        Close rules: an agent segment closes when the agent is sampled again,
+        at episode end (`terminal`), or at rollout end (bootstrap, written by
+        `_d2_flush_open_segments`).  The team segment closes on a team
+        decision, episode end, or rollout end.  A team decision samples every
+        agent, so it closes every agent segment (invariant 7).
+        """
+        if rollout_step_idx is None:
+            main_logger.error("D2 storage requires rollout_step_idx")
+            return False
+
+        t = int(rollout_step_idx)
+        gamma = float(self.config.gamma)
+        n_agents = self.config.n_agents
+        seg = self._d2_open_agent(env_id)
+        team = self._d2_open_team(env_id)
+
+        sampled = np.asarray(d2_step['sampled_mask'], dtype=np.bool_)
+        sample_Z = bool(d2_step['sample_Z'])
+        decision = bool(d2_step['decision'])
+
+        # 1. Close the segments that this step's decision ends.
+        for i in range(n_agents):
+            if sampled[i] and seg['start'][i] >= 0:
+                start = int(seg['start'][i])
+                elapsed = t - start
+                self.rollout_buffer.close_d2_agent_segment(
+                    env_id, i, start, float(seg['disc'][i]), elapsed, False
+                )
+                self.d2_metrics['segment_lengths_agent'].append(int(max(1, elapsed)))
+                seg['start'][i] = -1
+                seg['disc'][i] = 0.0
+        if sample_Z and team['start'] >= 0:
+            start = int(team['start'])
+            elapsed = t - start
+            self.rollout_buffer.close_d2_team_segment(
+                env_id, start, float(team['disc']), elapsed, False
+            )
+            self.d2_metrics['segment_lengths_team'].append(int(max(1, elapsed)))
+            team['start'] = -1
+            team['disc'] = 0.0
+
+        # 2. Open the segments this step's decision starts, and record the
+        #    replay metadata / ages of the step.
+        for i in range(n_agents):
+            if sampled[i]:
+                seg['start'][i] = t
+                seg['disc'][i] = 0.0
+        if sample_Z:
+            team['start'] = t
+            team['disc'] = 0.0
+
+        log_probs = self.env_log_probs.get(env_id, {})
+        self.rollout_buffer.add_d2_step(
+            env_idx=env_id,
+            time_step=t,
+            agent_age=d2_step['agent_ages'],
+            team_age=d2_step['team_age'],
+            decision=decision,
+            team_skill=int(self.env_team_skills.get(env_id, -1)),
+            agent_skills=np.asarray(
+                self.env_agent_skills.get(env_id, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ),
+            sampled_mask=sampled,
+            sample_Z=sample_Z,
+            order=d2_step['order'],
+            team_log_prob=float(log_probs.get('team_log_prob', 0.0)),
+            agent_log_probs=np.asarray(
+                log_probs.get('agent_log_probs', [0.0] * n_agents), dtype=np.float32
+            ),
+            team_value=float(log_probs.get('state_value', 0.0)),
+            agent_values=np.asarray(
+                log_probs.get('agent_values', [0.0] * n_agents), dtype=np.float32
+            ),
+            agent_cause=d2_step['agent_cause'],
+            team_cause=d2_step['team_cause'],
+        )
+
+        # 3. Accumulate the discounted within-segment reward for this step.
+        r = float(reward)
+        for i in range(n_agents):
+            start = int(seg['start'][i])
+            if start >= 0:
+                seg['disc'][i] += (gamma ** (t - start)) * r
+        if team['start'] >= 0:
+            team['disc'] += (gamma ** (t - int(team['start']))) * r
+
+        # 4. Episode end closes every open segment as terminal.
+        any_done = bool(np.any(done)) if hasattr(done, '__iter__') else bool(done)
+        if any_done:
+            for i in range(n_agents):
+                start = int(seg['start'][i])
+                if start >= 0:
+                    self.rollout_buffer.close_d2_agent_segment(
+                        env_id, i, start, float(seg['disc'][i]), t - start + 1, True
+                    )
+                    self.d2_metrics['segment_lengths_agent'].append(int(t - start + 1))
+                    seg['start'][i] = -1
+                    seg['disc'][i] = 0.0
+            if team['start'] >= 0:
+                start = int(team['start'])
+                self.rollout_buffer.close_d2_team_segment(
+                    env_id, start, float(team['disc']), t - start + 1, True
+                )
+                self.d2_metrics['segment_lengths_team'].append(int(t - start + 1))
+                team['start'] = -1
+                team['disc'] = 0.0
+        return True
+
+    def _d2_flush_open_segments(self, num_steps):
+        """
+        Close every still-open D2 segment at the rollout boundary with
+        `terminal = False`, so the GAE bootstraps it with the value of the next
+        state (plan section 6, mirroring `high_level_last_values` in `off`).
+        """
+        if not self.d2_enabled:
+            return 0
+        last_t = int(num_steps) - 1
+        if last_t < 0:
+            return 0
+        closed = 0
+        for env_id, seg in self.d2_open_agent_segments.items():
+            for i in range(self.config.n_agents):
+                start = int(seg['start'][i])
+                if start >= 0:
+                    self.rollout_buffer.close_d2_agent_segment(
+                        env_id, i, start, float(seg['disc'][i]), last_t - start + 1, False
+                    )
+                    self.d2_metrics['segment_lengths_agent'].append(int(last_t - start + 1))
+                    seg['start'][i] = -1
+                    seg['disc'][i] = 0.0
+                    closed += 1
+        for env_id, team in self.d2_open_team_segments.items():
+            start = int(team['start'])
+            if start >= 0:
+                self.rollout_buffer.close_d2_team_segment(
+                    env_id, start, float(team['disc']), last_t - start + 1, False
+                )
+                self.d2_metrics['segment_lengths_team'].append(int(last_t - start + 1))
+                team['start'] = -1
+                team['disc'] = 0.0
+                closed += 1
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        if tables is not None:
+            self.d2_metrics['rows_M_agent'] = int(tables['agent_valid'].sum())
+            self.d2_metrics['rows_M_team'] = int(tables['team_valid'].sum())
+            self.d2_metrics['rows_M'] = int(
+                (tables['agent_valid'].any(axis=-1) | tables['team_valid']).sum()
+            )
+        return closed
 
     def get_d2_metrics(self):
         """Return a JSON-friendly summary of the accumulated D2 metrics."""
@@ -3458,7 +3633,8 @@ class HMASDAgent:
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
                          skill_timer_for_env=None, env_id=0, values=None, rollout_step_idx=None,
-                         reward_info=None, _precomputed_reward_components=None, _skip_discriminator_store=False):
+                         reward_info=None, _precomputed_reward_components=None, _skip_discriminator_store=False,
+                         d2_step=None):
         """
         存储环境交互经验（重构后的简化版本）
         
@@ -3528,6 +3704,20 @@ class HMASDAgent:
         # without a new high-level action. Keep the existing pending sample
         # open across such boundaries.
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
+        if self.d2_enabled:
+            # D2 owns its own segment tables; the `off` pending/close mechanism
+            # (which assumes one global k-boundary per env) is bypassed entirely.
+            if d2_step is None:
+                d2_step = self.env_d2_last_decision.get(env_id)
+            if d2_step is None:
+                main_logger.error(f"D2 storage: no decision metadata for env {env_id}")
+            else:
+                self._d2_store_transition(
+                    env_id, rollout_step_idx, current_reward, dones, d2_step
+                )
+            if self.enable_runtime_profiling:
+                self._add_transition_profile('high_level_bookkeeping', time.perf_counter() - profile_start)
+            return returned_reward_components
         if (
             rollout_step_idx is not None
             and skill_timer_for_env == 0
@@ -3653,6 +3843,26 @@ class HMASDAgent:
             log_probs_batch = [info['log_probs'] for info in infos_batch]
             skill_timers = np.asarray([info['skill_timer'] for info in infos_batch], dtype=np.int64)
 
+        d2_steps = None
+        if self.d2_enabled:
+            if step_data is not None and 'd2_sampled_mask' in step_data:
+                d2_steps = [
+                    {
+                        'decision': bool(step_data['d2_decision'][env_id]),
+                        'team_decision': bool(step_data['d2_team_decision'][env_id]),
+                        'sampled_mask': np.asarray(step_data['d2_sampled_mask'][env_id], dtype=np.bool_),
+                        'sample_Z': bool(step_data['d2_sample_Z'][env_id]),
+                        'order': np.asarray(step_data['d2_order'][env_id], dtype=np.int64),
+                        'agent_ages': np.asarray(step_data['d2_agent_ages'][env_id], dtype=np.int64),
+                        'team_age': int(step_data['d2_team_ages'][env_id]),
+                        'agent_cause': np.asarray(step_data['d2_agent_cause'][env_id], dtype=np.int64),
+                        'team_cause': int(step_data['d2_team_cause'][env_id]),
+                    }
+                    for env_id in range(num_envs)
+                ]
+            else:
+                d2_steps = [self.env_d2_last_decision.get(env_id) for env_id in range(num_envs)]
+
         intrinsic_batch = self._compute_intrinsic_rewards_batch(
             next_states=next_states,
             rewards=rewards,
@@ -3701,7 +3911,8 @@ class HMASDAgent:
                     rollout_step_idx=rollout_step_idx,
                     reward_info=reward_info,
                     _precomputed_reward_components=env_reward_components,
-                    _skip_discriminator_store=True
+                    _skip_discriminator_store=True,
+                    d2_step=(d2_steps[env_id] if d2_steps is not None else None),
                 )
             )
         return reward_components
@@ -5147,6 +5358,11 @@ class HMASDAgent:
         """更新高层技能协调器网络（使用标准PPO更新，而非错误的序列化更新）"""
         if self.use_ha_ctse:
             return self.update_coordinator_ha_ctse(num_steps, bootstrap_values=bootstrap_values)
+
+        if self.d2_enabled:
+            # Close every still-open segment at the rollout boundary before the
+            # tables are read (plan section 6).
+            self._d2_flush_open_segments(num_steps)
 
         # num_steps 现在是实际在缓冲区中的有效数据量
         
