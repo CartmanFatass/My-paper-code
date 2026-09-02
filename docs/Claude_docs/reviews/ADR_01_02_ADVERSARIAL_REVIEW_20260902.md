@@ -929,3 +929,57 @@ buffer-level replay-consistency assertion (VII F3); the compact-discriminator gu
 `value_normalizer is None` assertion in the D2 advantage routine (VII F5). Then the integration
 commit of VII.4 (corridor adapter wired to the D2 rollout, learner dimensions taken from the host,
 smoke run in `off` and `d2`).
+
+---
+
+# Part VIII — the D2 follow-ups and the corridor integration (2026-09-02, later)
+
+Objects: `9500557f4` (D2 follow-ups: VII F1 guard, VII F3 buffer-level replay test, VII F4
+compact-discriminator guard, VII F5 normaliser assertion) and `6338c336b` (the integration commit
+of VII.4: `envs/relay_corridor/hmasd_driver.py`, `tests/relay_corridor_hmasd_test.py`, section 7
+of `../plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md`), both by an Opus session on `main`.
+
+**Verdict: ACCEPT both.** The two lines are now joined: the full HMASD stack runs on the corridor
+in `off`, D0 and finite-`c` `d2`, with `S_t` reaching the host as the renew mask. No open item
+remains on either ADR at the code level.
+
+## VIII.0 Reviewer's own run
+
+Preflight passed, then the three test files together:
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/flexible_skill_duration_d2_test.py tests/relay_corridor_host_test.py tests/relay_corridor_hmasd_test.py --basetemp C:/Projects/HMASD/temp/d2_review/pytest2 -p no:cacheprovider
+26 passed, 14 warnings in 41.07s
+```
+
+## VIII.1 Checks
+
+| Item | Where | Reviewer check |
+| --- | --- | --- |
+| VII F1 guard | `config_1._validate_policy_interruption` | raises in `d2` when `rollout_length % episode_length != 0`, naming both; `off` untouched; test 10 |
+| VII F3 | D2 test 12 | stored rows through the D2 sampler and `evaluate_training_batch_ordered` reproduce the stored old log-probs at valid rows (`atol 1e-5`); the configuration has both running normalisers off, so no disabling was needed |
+| VII F4 guard | same validator | refuses `age_feature = "normalized"` with either compact discriminator flag; test 11 |
+| VII F5 | `RolloutBuffer._compute_d2_high_level_advantages` | asserts `value_normalizer is None` with the reason |
+| Adapter seam | `hmasd_driver.py` | `d2`: renew mask = `step_data['d2_sampled_mask']` every step; `off`: renew mask = `env_steps % k == 0` or done, broadcast over agents, so RENEW is emitted exactly when a segment opens in both modes |
+| Learner dimensions from the host | `build_corridor_learner_config` | `n_z = K`, `action_dim = K`, `action_space_type = "continuous"`, `episode_length = H`, `obs_dim`, `state_dim`, `n_agents` from the adapter; `n_Z` left as configured (team code present, inert) |
+| Reset and bootstrap | `run_rollout` | all lanes terminate at `H - 1`; the stored transition keeps the terminal next state, the policy input takes the reset observations; episode ids advance by `num_envs` per rollout so keyed streams never repeat; zero bootstrap at the rollout end is exact because every lane is terminal there |
+| Tests | `relay_corridor_hmasd_test.py` | 1: `off` smoke, renew masks equal the `off` boundaries, learner reward equals the shared reward, no service on RENEW steps; 2: D0 renew masks, roles and stored rewards equal `off` on rollout 1, `M = E H / k`, causes `reset` and `team_cap` only; 3: `c = 0` renew mask equals the sampled mask every step, `M = E H`; 4: dimensions from the host with `rollout_length = 2H` |
+| IV.0 open item (actor head) | report section 7, B2 | `SkillDiscoverer.__init__` builds a `Box` action space for `action_space_type == 'continuous'` (the `config_1` default) and `R_Actor` → `ACTLayer` picks `DiagGaussian`; the actor emits an unbounded continuous `K`-vector, reshaped to `[num_envs, N, K]`, asserted by the driver each step. Closed: the adapter reading (c) needs no learner change |
+
+## VIII.2 Notes (none blocking)
+
+- The driver's `off` renew rule includes the done flag as the base route's `skill_changed` does;
+  on the corridor every lane is done at the same step, so it never differs from `env_steps % k == 0`.
+- Default `k = H` when the caller passes none. E2 and later pass `k` explicitly through the D0 grid;
+  the default only matters for smoke runs.
+- `hmasd_driver.py` is deliberately not exported from `envs/relay_corridor/__init__.py`, so the
+  host package stays torch-free and host test 9's no-torch guard holds.
+- The corridor observation is 19-dimensional and the state 47-dimensional at `K = 2, N = 3, Z = 4`;
+  at the E3/E4 proposal (`N = 6`) the state grows with `N`. Not a concern, recorded for sizing.
+
+## VIII.3 State of the programme
+
+Code: ADR 01 and ADR 02 implemented and joined. Experiments: E0 (scenario 1, `off` versus D0,
+exposure line and probe set) is running under `../experiments/E0_EXPOSURE_PROBE_SET_20260902.md`.
+Next after E0: E1 (age input, D0 versus D1 on scenario 1 or the corridor) per plan §5, whose
+prediction the owner writes first.

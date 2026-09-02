@@ -52,6 +52,8 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   Part VII accepts the D2 implementation (Phases 3 to 8) against ADR 01's eight invariants
   (reviewer re-ran the ten tests), records eight findings with one owner decision (rollout
   boundary guard), and three reviewer errata to the implementation plan.
+  Part VIII accepts the D2 follow-up guards and the corridor integration (26 tests re-run) and
+  closes the low-level-actor item: the base route emits a continuous K-vector.
 
 ### research_notes/
 
@@ -88,6 +90,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   and commits, the fingerprint, test output, smoke-rollout numbers (P1, P2, the inference
   ratio), the discrepancy list, new `d2` behaviour and the design points the plan did not fix,
   the acceptance checklist as observed, and what could not be verified.
+- `RELAY_CORRIDOR_HOST_REPORT_20260902.md` section 7 — the integration of the HMASD stack on the
+  corridor (`envs/relay_corridor/hmasd_driver.py`): what the driver does, the five readings it
+  fixed, the actor-head answer, verbatim test results, could-not-verify.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,
