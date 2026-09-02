@@ -35,6 +35,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   `.codex/agents`, skills, gates, portfolio) read as a research process: measured output, seven
   failure modes F1–F7, nine recommendations R1–R9, and a 2026-09-02 addendum mapping them onto the
   owner's calibration. R4 (telemetry as a recorded field) is left open for the owner.
+- `ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` — adversarial review of the two GPT Pro ADR drafts:
+  citation audit, ranked findings (both `REVISE`), the six decisions only the owner can take, and
+  three predict-then-verify prompts. Headline: the interruption statistic is not computable by the
+  causal decoder as written, the forced boundary decides whether E3 can succeed, and the exposure
+  arithmetic is off by about 200×.
 
 ### research_notes/
 
@@ -54,7 +59,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   claim in two parts, a ten-item concern register (C1–C10) with mitigations and measurables, the
   scheme ladder D0–D8 with the policy-based interruption rule as the proposed first B object,
   inspiration models, the B-class experiment ladder E0–E6, hosts, the theory ceiling, repository
-  touch points, and the decisions marked [DECIDE] / [ASK] that the owner has to make.
+  touch points, and the decisions marked [DECIDE] / [ASK] that the owner has to make. Section 11
+  records the decisions taken with the owner on 2026-09-02.
+- `ADR_REQUEST_PROMPT_GPT_PRO_20260902.md` — the prompt and repository facts handed to GPT Pro
+  (GitHub connector) to draft the two ADRs below.
+- `ADR_01_D2_POLICY_INTERRUPTION.md` — GPT Pro's draft ADR for the D2 policy-based interruption
+  rule on the HMASD base route, stored verbatim; status `proposed`, under revision per the review.
+- `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's draft ADR for the relay-corridor host family
+  (E2–E4), stored verbatim; status `proposed`, under revision per the review.
 
 ### environment_design/
 
