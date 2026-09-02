@@ -18,7 +18,7 @@ contract §4 step 2 requires. Sections 4 onwards were written after.
 | Worktree cleanliness at launch | `git status --porcelain` listed **two** entries, both untracked documents of this task (`E0_EXPOSURE_PROBE_SET_RESULT_20260902.md`, `E0_probe_set_sample_seed1.json`). **No** modification under `hmasd/`, `config_1.py`, `envs/` or `tests/`. The manifests' `code_dirty: true` refers only to those two documents |
 | Machine | `Jacob`, Windows-10-10.0.26200-SP0, AMD64 Family 25 Model 117 (AMD), 16 logical CPUs |
 | Interpreter / libraries | Python 3.10.20, torch 2.7.0+cpu, numpy 1.26.3, device `cpu` |
-| Run directories | `temp/directions/flexible_skill_duration/exp/E0_20260902/{timing_off_1thread, timing_off_4thread, off_seed1, d0_seed1}` (gitignored) |
+| Run directories | `temp/directions/flexible_skill_duration/exp/E0_20260902/{timing_off_1thread, timing_off_4thread, off_seed1, d0_seed1, off_seed2, d0_seed2}` (gitignored). The seed-2 pair was run after intake; see §12 |
 
 ---
 
@@ -334,17 +334,19 @@ Timing runs (not evidence): 1 thread `"wall_seconds_total": 1209.3`, `"seconds_p
 | # | Deviation | Status |
 | --- | --- | --- |
 | D1 | `num_envs` 32 → 16, hence 80,000 transitions per arm instead of 160,000 and `M = 800` instead of 1600 | §3; forced by the measured rate against the contract's 60-minute-per-arm ceiling; explicitly authorised by the executing instruction |
-| D2 | **Seed 2 not run for either arm** | Contract §2's condition ("seed 2 … only if seed 1 of one arm finished within 45 minutes") **was met** — both arms finished in 37.7 and 39.9 minutes. Seed 2 was nevertheless *not* launched because the session's ~3-hour wall-clock cap had already been reached when seed 1 of D0 completed. Recorded as **not run**, with this reason. It is the one contract clause this run declines rather than satisfies |
+| D2 | Seed 2 initially not run — **run after intake** | Contract §2's condition ("seed 2 … only if seed 1 of one arm finished within 45 minutes") **was met** — seed-1 arms finished in 37.7 and 39.9 minutes — but seed 2 was not launched in the first pass because the session's ~3-hour wall-clock cap had already been reached. The reviewer lifted that cap at intake and both seed-2 arms were then run to completion; see **§12**. The deviation is closed: nothing about seed 2 remains outstanding |
 | D3 | `scripts/hmasd_run.py prepare/execute/reconcile` not used | as contract §7 directs; the runner writes an equivalent manifest |
 | D4 | The `d2_metrics_delta` field written into `d0_seed1/metrics.jsonl` is meaningless | It was computed as "this rollout minus the previous rollout" on the assumption that `get_d2_metrics()` accumulates. It does not — `clear_buffers` resets it (agent.py:1481) — so the delta reads zero for rollouts 2–10 while the raw `d2_metrics` dict beside it is already the correct per-rollout value. The raw dict is what §5.3 reports. The runner was **not** edited after the evidence was produced, so the committed script is byte-identical to the one that ran; the field is documented here as an artifact to ignore rather than silently repaired |
 
 ## 10. Could not verify
 
-- **Nothing about which arm is better.** Two evaluations per arm, one seed, `R = 10`, no repeats.
-  The D0 final evaluation mean (35.86) is higher than `off`'s (22.65) and the per-rollout training
-  returns are noisy in both arms; under the contract's non-goals this is **not** a signal and must
-  not be quoted as one. A B-class comparison needs E1 and later.
-- **Seed 2**, for either arm (deviation D2). No seed-count claim is available.
+- **Nothing about which arm is better.** Two evaluations per arm, two seeds, `R = 10`, no repeats.
+  At seed 1 the D0 final evaluation mean (35.86) is higher than `off`'s (22.65); **at seed 2 the
+  ordering reverses** (`off` 32.35 versus D0 26.44). Under the contract's non-goals neither is a
+  signal and neither may be quoted as one. A B-class comparison needs E1 and later.
+- **A seed-count claim.** Seed 2 *was* run for both arms after intake (§12), so the contract's
+  seed clause is satisfied, but two seeds support no variance or ordering statement — only the
+  repetition of the integrity checks and of the exposure lines.
 - **The contract's transition floor.** 80,000 per arm against the contract's 160,000 (deviation
   D1). Whether the exposure lines would look different at 32 lanes is untested.
 - **`M = 1600`** is verified only in the two timing runs (2 rollouts each, no probe set, no seed-2
@@ -377,9 +379,163 @@ Timing runs (not evidence): 1 thread `"wall_seconds_total": 1209.3`, `"seconds_p
 
 ## 11. Interpretation boundary (contract §8)
 
-Bounded to scenario 1 with six UAVs and fifty users, one machine, **one seed**, `R = 10` rollouts
-at **16** lanes, and the measurements above. E0 shows that both learners run and move within their
-budget, that at D0 the `d2` path reproduces the `off` boundaries, skills and row count on the first
-rollout exactly and its target scale by the predicted `1.0458` factor, and it freezes a 1,536-probe
-set for the C1/C2 measurements of E1 and later. It says nothing about which arm is better, about
-finite `c`, or about the corridor.
+Bounded to scenario 1 with six UAVs and fifty users, one machine, **two seeds** (1 and 2; §12),
+`R = 10` rollouts at **16** lanes, and the measurements above. E0 shows that both learners run and
+move within their budget, that at D0 the `d2` path reproduces the `off` boundaries, skills and row
+count on the first rollout exactly — at both seeds — and its target scale by the predicted `1.0458`
+factor, and it freezes a 1,536-probe set (seed 1 only) for the C1/C2 measurements of E1 and later.
+It says nothing about which arm is better, about finite `c`, or about the corridor.
+
+---
+
+## 12. Seed 2 (2026-09-02, later)
+
+Run after intake, on the reviewer's instruction, once the wall-clock cap that had blocked it was
+lifted. Deviation D2 is therefore closed: **contract §2's second seed was run for both arms.**
+
+Configuration is byte-for-byte the seed-1 configuration except the seed: `--num-envs 16
+--rollouts 10 --threads 4`, `off` then D0, lane seeds `2…17`, evaluation lanes unchanged
+(`10_000…10_007`). Each arm ran its own resource preflight inside the runner. **No probe set was
+generated for seed 2** — the frozen probe set is seed 1 only, as instructed. The runner was **not**
+edited between seed 1 and seed 2, so deviation D4 (the meaningless `d2_metrics_delta` field) stays
+as documented; `d2_metrics` itself is per-rollout and is what §12.4 reports.
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/run_flexible_skill_duration_e0.py \
+  --arm off --seed 2 --rollouts 10 --num-envs 16 --threads 4 --run-name off_seed2 \
+  --output-root temp/directions/flexible_skill_duration/exp/E0_20260902
+
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/run_flexible_skill_duration_e0.py \
+  --arm d0 --seed 2 --rollouts 10 --num-envs 16 --threads 4 --run-name d0_seed2 \
+  --reference-dir temp/directions/flexible_skill_duration/exp/E0_20260902/off_seed2 \
+  --output-root temp/directions/flexible_skill_duration/exp/E0_20260902
+```
+
+Both arms recorded code sha **`fbe2c9d1723d`** with `code_dirty: false` (the branch had been
+rebased onto `origin/main` by the reviewer; the seed-1 arms carry `9a8cd9011f42`. The runner source
+is the same file in both cases — the rebase moved the two E0 commits to `619f4b4cd` / `fbe2c9d17`
+without touching `scripts/run_flexible_skill_duration_e0.py`).
+
+Both preflights passed:
+
+| Arm | `assessed_at` | available physical = effective | `passed` | wall |
+| --- | --- | --- | --- | --- |
+| `off` seed 2 | 2026-09-02T18:49:59.424186Z | 18,517,393,408 B (17.2 GiB) | `true` | 2269.98 s = 37.8 min (214.5 s/rollout) |
+| D0 seed 2 | 2026-09-02T19:28:09.089600Z | 18,636,959,744 B (17.4 GiB) | `true` | 2396.31 s = 39.9 min (225.5 s/rollout) |
+
+Both arms reached `R = 10` with no non-finite loss or return at any rollout. **Nothing was
+quarantined; no `QUARANTINED` file exists in either seed-2 run directory.**
+
+### 12.1 Counters (identical in both arms, and identical to seed 1)
+
+10 of 10 rollouts, **80,000 transitions**, **160 episodes**, `M = 800` in every rollout,
+**2 evaluations** (after rollouts 5 and 10) of 8 deterministic episodes each. Optimizer steps over
+the run: coordinator **1,050**, discoverer actor **22,500**, discoverer critic **22,500**, team
+discriminator **150**, individual discriminator **600**.
+
+Evaluation (8 deterministic episodes on lanes seeded `10_000 + rank`):
+
+| Arm | rollout 5 mean ± sd | rollout 10 (final) mean ± sd | wall s per evaluation |
+| --- | --- | --- | --- |
+| `off` seed 2 | 33.4015 ± 4.2100 | **32.3484 ± 4.5426** | 61.0, 61.2 |
+| D0 seed 2 | 22.4358 ± 7.1672 | **26.4443 ± 5.5560** | 68.7, 69.0 |
+
+Not compared. Note only that the seed-1 ordering of the two final evaluation means (`off` 22.65 <
+D0 35.86) is **reversed** at seed 2 (`off` 32.35 > D0 26.44), which is what the contract's
+non-goals already forbid reading as a signal; two seeds of a lightly trained learner carry no
+ordering.
+
+### 12.2 Exposure line, `off` arm (seed 2)
+
+Columns: coordinator, discoverer actor, discoverer critic, team discriminator, individual
+discriminator.
+
+| r | transitions | episodes | `M` | coord opt steps | mean ep return | mean HL segment reward | coord | disc-actor | disc-critic | team-D | ind-D | collect s | update s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8000 | 16 | 800 | 105 | 21.2215 | 0.4244 | 2.393027e-02 | 1.593350e-01 | 7.477890e-02 | 1.139061e-02 | 2.335927e-02 | 122.0 | 91.5 |
+| 2 | 16000 | 32 | 800 | 210 | 20.5482 | 0.4110 | 3.156931e-02 | 2.381776e-01 | 1.052435e-01 | 1.634549e-02 | 3.422886e-02 | 122.6 | 91.5 |
+| 3 | 24000 | 48 | 800 | 315 | 19.4256 | 0.3885 | 3.619377e-02 | 2.943402e-01 | 1.276667e-01 | 2.030073e-02 | 4.159608e-02 | 122.5 | 91.6 |
+| 4 | 32000 | 64 | 800 | 420 | 16.1327 | 0.3227 | 3.969484e-02 | 3.465152e-01 | 1.468826e-01 | 2.422202e-02 | 4.769543e-02 | 122.5 | 94.0 |
+| **5** | 40000 | 80 | 800 | 525 | 15.4819 | 0.3096 | **4.304100e-02** | **3.982883e-01** | **1.631842e-01** | **2.747144e-02** | **5.316801e-02** | 122.5 | 91.4 |
+| 6 | 48000 | 96 | 800 | 630 | 20.2373 | 0.4047 | 4.567194e-02 | 4.448963e-01 | 1.785732e-01 | 3.016736e-02 | 5.819336e-02 | 122.6 | 91.6 |
+| 7 | 56000 | 112 | 800 | 735 | 24.5252 | 0.4905 | 4.823257e-02 | 4.861495e-01 | 1.928062e-01 | 3.282909e-02 | 6.369741e-02 | 122.9 | 92.1 |
+| 8 | 64000 | 128 | 800 | 840 | 25.2889 | 0.5058 | 5.104476e-02 | 5.197516e-01 | 2.071892e-01 | 3.493972e-02 | 6.814297e-02 | 123.1 | 91.6 |
+| 9 | 72000 | 144 | 800 | 945 | 21.1550 | 0.4231 | 5.422508e-02 | 5.558503e-01 | 2.201844e-01 | 3.692814e-02 | 7.202372e-02 | 122.7 | 90.9 |
+| **10** | 80000 | 160 | 800 | 1050 | 26.6351 | 0.5327 | **5.621227e-02** | **5.870048e-01** | **2.316001e-01** | **3.883363e-02** | **7.594499e-02** | 123.6 | 91.6 |
+
+### 12.3 Exposure line, D0 arm (seed 2)
+
+| r | transitions | episodes | `M` | coord opt steps | mean ep return | mean HL segment reward | coord | disc-actor | disc-critic | team-D | ind-D | collect s | update s |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8000 | 16 | 800 | 105 | 21.2215 | 0.4059 | 2.557279e-02 | 1.593350e-01 | 7.477890e-02 | 1.139061e-02 | 2.335927e-02 | 133.9 | 92.2 |
+| 2 | 16000 | 32 | 800 | 210 | 20.4850 | 0.3918 | 3.310077e-02 | 2.406302e-01 | 1.047757e-01 | 1.652155e-02 | 3.432704e-02 | 133.8 | 91.5 |
+| 3 | 24000 | 48 | 800 | 315 | 16.6263 | 0.3180 | 3.793966e-02 | 3.000470e-01 | 1.273620e-01 | 2.047331e-02 | 4.131749e-02 | 133.8 | 92.1 |
+| 4 | 32000 | 64 | 800 | 420 | 16.3987 | 0.3136 | 4.177240e-02 | 3.556255e-01 | 1.467037e-01 | 2.419835e-02 | 4.734192e-02 | 133.8 | 91.3 |
+| **5** | 40000 | 80 | 800 | 525 | 17.0274 | 0.3257 | **4.469992e-02** | **4.024101e-01** | **1.633571e-01** | **2.731919e-02** | **5.249040e-02** | 134.1 | 91.6 |
+| 6 | 48000 | 96 | 800 | 630 | 15.3504 | 0.2936 | 4.703010e-02 | 4.406306e-01 | 1.793864e-01 | 2.987572e-02 | 5.681263e-02 | 134.8 | 91.5 |
+| 7 | 56000 | 112 | 800 | 735 | 16.0948 | 0.3078 | 4.998670e-02 | 4.709140e-01 | 1.928461e-01 | 3.224033e-02 | 6.103142e-02 | 133.8 | 91.8 |
+| 8 | 64000 | 128 | 800 | 840 | 10.7017 | 0.2047 | 5.516006e-02 | 5.009929e-01 | 2.074508e-01 | 3.428848e-02 | 6.425590e-02 | 133.5 | 91.7 |
+| 9 | 72000 | 144 | 800 | 945 | 10.9206 | 0.2089 | 5.925210e-02 | 5.281707e-01 | 2.196750e-01 | 3.621371e-02 | 6.719439e-02 | 133.5 | 91.0 |
+| **10** | 80000 | 160 | 800 | 1050 | 14.8273 | 0.2836 | **6.252761e-02** | **5.561207e-01** | **2.305619e-01** | **3.803618e-02** | **6.958646e-02** | 133.9 | 91.7 |
+
+**Both learners move at seed 2 as well.** Every network's exposure line is strictly increasing in
+the rollout index in both arms. The D0 coordinator line again reproduces the agent's own
+`get_d2_metrics()['param_displacement']` (rollout 10: 0.06252761 both ways). The seed-1 observation
+repeats exactly: at rollout 1 the discoverer actor, discoverer critic and both discriminator lines
+are **bit-identical between the arms** (1.593350e-01 / 7.477890e-02 / 1.139061e-02 / 2.335927e-02)
+and only the coordinator differs (2.393027e-02 `off` versus 2.557279e-02 D0).
+
+### 12.4 D0-only `get_d2_metrics()` at seed 2
+
+Identical in all ten rollouts, and identical to seed 1: `steps` 8,000; `decision_steps` /
+`team_decisions` 800 / 800; `sampled_total` / `forced_total` 4,800 / 43,200; `rows_M` /
+`rows_M_team` / `rows_M_agent` 800 / 800 / 4,800; `cause_counts` = `reset` 16, `team_cap` 784,
+**`gap` 0, `team_gap` 0, `cap` 0**; `segment_length_agent_mean` / `segment_length_team_mean` 10.0 /
+10.0; `S_t_fraction` over all steps 0.10, hence **1.000 at decision steps** (`4800 / (800 × 6)`);
+`optimizer_steps` 105.
+
+### 12.5 The three integrity checks at seed 2 (rollout 1, `off` versus D0)
+
+Machine-written to
+`temp/directions/flexible_skill_duration/exp/E0_20260902/d0_seed2/integrity_checks.json`.
+
+| Check | Result | Numbers |
+| --- | --- | --- |
+| **1. boundary mask `[T, E]` identical** | **PASS** | shape (500, 16) = 8,000 entries; **0 mismatches**; 800 boundaries in each arm |
+| **1b. `M` equal in both arms and equal to `num_envs × rollout_length / k`** | **PASS** | `M` = **800** in both arms, expected 800 (deviation D1 still applies) |
+| **2. rollout-1 team and agent skills identical** | **PASS** | team skills (500, 16): **0 of 8,000**; agent skills (500, 16, 6): **0 of 48,000** |
+| **3. target-scale ratio `off / d2` in [1.03, 1.06]** | **PASS** | team: `2.647198438644409 / 2.5315301418304443` = **1.045691**; agent: `2.6458845138549805 / 2.5302162170410156` = **1.045715**; closed form **1.045829**. Deviation `-1.4e-04` (team), `-1.1e-04` (agent) |
+
+Side note, recorded as an observation and not interpreted: the rollout-1 **boundary-mask digest is
+the same at seed 1 and seed 2** (`cf3442d48ab7cb9aede612e721302defad302d3e1986bc930e8de16290f783ce`
+in all four arm directories). That is expected — at `off`, and at D0 with `k_max = k_Z = k`, the
+boundary is `env_steps % k == 0` and every lane starts on a reset, so the mask does not depend on
+the seed. The team- and agent-skill digests do differ between the seeds, as they must.
+
+### 12.6 Verbatim summary lines, seed 2
+
+`off` seed 2:
+
+```
+{"arm": "off", "seed": 2, "completed": true, "rollouts_completed": 10, "transitions_total": 80000, "episodes_total": 160, "optimizer_steps_total": {"coordinator": 1050, "discoverer_actor": 22500, "discoverer_critic": 22500, "team_discriminator": 150, "individual_discriminator": 600}, "evaluation_count": 2, "final_evaluation_return_mean": 32.34838244469445, "exposure_line_rollout_last": {"coordinator": 0.056212268002235694, "discoverer_actor": 0.5870048464671992, "discoverer_critic": 0.231600144549102, "team_discriminator": 0.038833632922708944, "individual_discriminator": 0.07594498880621639}, "wall_seconds_total": 2269.9838401000015, "seconds_per_rollout_mean": 214.47322918999998, "run_dir": "C:\\Projects\\HMASD\\.claude\\worktrees\\agent-a5ae2957862d225cd\\temp\\directions\\flexible_skill_duration\\exp\\E0_20260902\\off_seed2"}
+```
+
+D0 seed 2:
+
+```
+{"arm": "d0", "seed": 2, "completed": true, "rollouts_completed": 10, "transitions_total": 80000, "episodes_total": 160, "optimizer_steps_total": {"coordinator": 1050, "discoverer_actor": 22500, "discoverer_critic": 22500, "team_discriminator": 150, "individual_discriminator": 600}, "evaluation_count": 2, "final_evaluation_return_mean": 26.444298837324308, "exposure_line_rollout_last": {"coordinator": 0.0625276086536763, "discoverer_actor": 0.5561206994656263, "discoverer_critic": 0.23056185565423198, "team_discriminator": 0.0380361794319235, "individual_discriminator": 0.06958645974375673}, "wall_seconds_total": 2396.308161599998, "seconds_per_rollout_mean": 225.53892913999735, "run_dir": "C:\\Projects\\HMASD\\.claude\\worktrees\\agent-a5ae2957862d225cd\\temp\\directions\\flexible_skill_duration\\exp\\E0_20260902\\d0_seed2"}
+```
+
+### 12.7 What seed 2 does and does not add
+
+It adds a second independent seed for the integrity checks: all three pass again, exactly (zero
+mismatches) for the boundary mask and the skills, and to within 1.4e-04 of the closed form for the
+target-scale ratio. It adds a second exposure line per network per arm, all monotone.
+
+It does **not** turn E0 into a comparison. Two seeds is not a seed-count claim, the evaluation
+ordering between the arms flips between the seeds, and the contract's non-goals stand unchanged.
+Deviation D1 (16 lanes, 80,000 transitions per arm, `M = 800`) applies to seed 2 exactly as to
+seed 1.
+
+Local copies of the seed-2 run directories:
+`C:/Projects/HMASD/temp/directions/flexible_skill_duration/exp/E0_20260902/{off_seed2, d0_seed2}`.
