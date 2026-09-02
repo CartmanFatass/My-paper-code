@@ -1,0 +1,81 @@
+# Claude_docs
+
+Deliverables written by Claude Code (Fable 5.1) for the repository owner, kept outside the
+research authority tree on purpose: nothing here is a science card, contract, or decision record.
+Everything is evidence for the owner to evaluate. Dates in file names are the date the document
+was closed; several carry a later dated addendum inside.
+
+Provenance for all of them: Claude Code session `session_015hGLzLCuJLFFtZTboKg2bd`,
+2026-09-01 to 2026-09-02, repository HEAD `71b2bba2b` at the time of review, 96 dirty paths in
+the working tree. Sub-agents used: Sonnet scouts (local and web literature, repository tie points,
+workflow inventory, environment inventory), an Opus numeric toy study, and a Fable red-team pass
+whose corrections are incorporated. No experiment was run and no scientific object was consumed.
+
+## Layout
+
+| Directory | Contents |
+| --- | --- |
+| `reviews/` | Independent assessments of existing work: the five first-wave directions, and the Codex science workflow. |
+| `research_notes/` | Scientific synthesis on a question the owner asked, with labelled literature and toy numbers. |
+| `environment_design/` | Design advice for toy hosts and the UAV environment. |
+| `toy_studies/` | Small self-contained numeric studies (numpy, fixed seeds) that back a research note. |
+| `artifacts/` | Rendered, published forms of the above and the script that builds them. |
+
+## Documents
+
+### reviews/
+
+- `FIRST_WAVE_INDEPENDENT_REVIEW_20260901.md` — independent review of the five `ACTIVE/HIGH`
+  first-wave directions (FRRIE, VNFC, CBSC, SCDMP, UCOPE) against the packet in
+  `docs/research/review_packets/2026-09-01-first-wave-latest-model/`. Dispositions: SCDMP, CBSC,
+  FRRIE `CONTINUE`; UCOPE, VNFC `RECAST`. The 2026-09-02 addendum records the owner's calibration
+  and what it removes from each direction's next object.
+- `CODEX_SCIENCE_WORKFLOW_REVIEW_20260901.md` — the Codex workflow (`AGENTS.md`,
+  `.codex/agents`, skills, gates, portfolio) read as a research process: measured output, seven
+  failure modes F1–F7, nine recommendations R1–R9, and a 2026-09-02 addendum mapping them onto the
+  owner's calibration. R4 (telemetry as a recorded field) is left open for the owner.
+
+### research_notes/
+
+- `UNTIED_K_N_TRADEOFF_LEDGER_20260901.md` — the trade-off ledger for untying the skill duration
+  k (K-1 to K-7) and the agent count N (N-1 to N-7) in HMASD-style hierarchical MARL, with the
+  repository's tie points, toy numbers, literature labelled DIRECT / PARAPHRASE / CURATOR /
+  REVIEWER_INFERENCE / UNKNOWN, and three predict-then-verify prompts. The 2026-09-02 addendum
+  fixes the two untyings as separate directions and states the theory ceiling (a suboptimality
+  bound for the implemented scheme) and the per-direction inspiration-model ladder.
+
+### environment_design/
+
+- `TOY_HOST_AND_UAV_ENV_DESIGN_ADVICE_20260901.md` — inventory of the five first-wave hosts and
+  the UAV family, diagnosis D1–D6, host principles P1–P8, the proposed relay-corridor parametric
+  family, UAV recommendations U1–U7, and an invitation for the owner to write the one-page ADR.
+  The 2026-09-02 addendum places the bandit and single-agent bridge below the toy hosts.
+
+### toy_studies/untied_k_n/
+
+- `untied_toys.py` — numpy study (fixed seeds, about 0.4 s): commitment fraction C(k, λ),
+  window identifiability, k-step model composition versus direct prediction, role coverage
+  probability, single-loss coverage gap, joint-assignment versus composition counts.
+- `RESULTS.md` — the tables the research note quotes, with the study's stated limits.
+
+### artifacts/
+
+- `clocks_and_rosters_20260902.html` — the published page that bundles the research note, the
+  workflow review, and the environment advice with a schematic and part navigation. Live copy:
+  <https://claude.ai/code/artifact/10bdcf8f-32f2-44b6-a9f3-8050e5547304>.
+- `build_clocks_and_rosters_page.py` — rebuilds the HTML from the three markdown sources in this
+  tree (`python docs/Claude_docs/artifacts/build_clocks_and_rosters_page.py`); it performs a
+  structural HTML check and writes next to itself.
+
+## Related change outside this tree
+
+The owner's 2026-09-02 calibration (inspiration model → B-EXPLORE → C-BENCH; no invariance
+proofs, at most a suboptimality bound; suboptimal schemes are legitimate; only integrity, nonzero
+learner counts, resource admission, and one exposure line may hold a B launch; duration and roster
+untying are separate directions) is normative in
+`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11, commit `a615cbd9b`.
+
+## Git
+
+`.gitignore` re-includes `docs/Claude_docs/**` so files here are visible to Git; the repository's
+default `*.md` rule would otherwise hide them.

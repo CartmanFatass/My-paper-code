@@ -133,6 +133,9 @@ docs/research/literature/n_k_many_agent_deep_dive/code/
 !docs/new-libs/corpus/qa/*.md
 !docs/new-libs/corpus/papers/*/overview.md
 
+# Claude Code session deliverables (reviews, research notes, design advice, toy studies).
+!docs/Claude_docs/**
+
 # 生成的模型和结果
 models/
 results/
