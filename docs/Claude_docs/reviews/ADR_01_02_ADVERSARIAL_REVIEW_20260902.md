@@ -725,9 +725,9 @@ either ADR.
 
 # Part VI — review of the relay corridor host implementation (2026-09-02, later)
 
-Object: branch `worktree-agent-aeda939d06a5b4fea`, five commits on top of `f8d2dd5b3`
-(`22390b48c` host core, `9be152b39` references and margins, `b5a8ac1eb` adapter, `e996bd48f`
-tests, `e26063d81` report), written by an Opus implementation session in an isolated worktree.
+Object: branch `worktree-agent-aeda939d06a5b4fea`, five commits, rebased onto `5224590d8` at integration (pre-rebase hashes on the pushed branch `worktree-agent-aeda939d06a5b4fea`)
+(`d446fe340` host core, `d1bc3cecd` references and margins, `ca0fca5cf` adapter, `101667eb1`
+tests, `f71871435` report), written by an Opus implementation session in an isolated worktree.
 Files: `envs/relay_corridor/{__init__,config,rng,renewal,host,references,adapter}.py`,
 `tests/relay_corridor_host_test.py`, `../plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md`. No file
 outside those was changed; the learner files being edited concurrently on `main` were not touched.
