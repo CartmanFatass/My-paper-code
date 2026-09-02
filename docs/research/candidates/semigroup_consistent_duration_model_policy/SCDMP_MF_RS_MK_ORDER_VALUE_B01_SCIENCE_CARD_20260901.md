@@ -755,3 +755,41 @@ recommendation.
 - `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`
+
+## Addendum — section 11 recast, 2026-09-02
+
+This addendum is appended under evidence spec §11.6. The frozen body above is unchanged; no
+scientific factor, seed, state, tape, action map, endpoint, comparator, budget, branch or claim
+ceiling is altered by it. The demotion record is
+`SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md`; the provenance is
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 decisions 1 and 7 and
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`.
+
+The following gates of this card are now **recorded fields**, not launch or validity conditions:
+
+- the `PERFORMANCE_READY` performance-readiness receipt that the runner required before RUN-01
+  (`experiments/candidates/scdmp_variable_k/multifoundation_reachable_order_value/runner.py:606-611`
+  as committed before the recast). Whatever assessment exists is recorded with its disposition and
+  the run proceeds;
+- the telemetry-arming step of the ordered commitment list, ":79-81" above ("arm continuous
+  process-tree peak-RSS, scratch-high-water, durable-byte and wall/resource telemetry and record a
+  valid initial observation"), as a precondition for creating a scientific artifact. Telemetry is
+  still armed and still collected; a failure to arm or measure it is recorded;
+- ":530-531" above, "A missing measurement invalidates the attempt just as a measured cap exceedance
+  does" — the missing-measurement half only. A **measured** exceedance of the ":525-528" ceilings
+  (peak RSS `<= 2 GiB`, scratch `<= 256 MiB`, durable `<= 256 MiB`, wall `<= 30 minutes`) still
+  invalidates;
+- the "Missing or invalid telemetry" clause of ":96-99" as a resume-forbidding, quarantining
+  condition. Every other clause of that sentence is unchanged;
+- the "missing peak-RSS, scratch or durable telemetry" half of ":621". The "failed
+  physical/effective `4 GiB` admission" half of the same line remains a launch condition.
+
+A run whose resource telemetry is missing is valid and is marked `resources_unmeasured: true` with
+its reason. Learner-side instrumentation failure — missing logs, missing checkpoints, or a missing
+required scientific measurement — still quarantines the attempt under spec §6.2.
+
+Everything else in this card remains binding, including ":77-78" (fresh `4 GiB` physical and
+effective admission), ":201-211" (the B eligibility competence counts), ":513-514" (nonzero training
+transitions, optimizer steps and real evaluator calls), ":616-618" and ":70-71" (permanent
+zero-access quarantine of the old physical root), ":626-627" (the `q_by_cell` law), ":641-642" (RNG
+domain separation and the held-out leakage boundary), and the create-once publication law.

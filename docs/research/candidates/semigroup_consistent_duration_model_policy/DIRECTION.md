@@ -395,3 +395,16 @@ valid FCEOV `.3` interpretation. Exact decision reconciliation, identity law, in
 and evidence paths are recorded in
 `SCDMP_B01_FRESH_NAMED_ATTEMPT_INNOVATOR_INTAKE_20260901.md`; the prospectively repaired controlling
 contract is `SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`.
+
+## Section 11 recast — 2026-09-02
+
+The owner-approved recast of this direction to `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
+§11 is recorded in
+`SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md`. Under §11.6 that intake, not this file, holds the
+demotion record: the `PERFORMANCE_READY` receipt and resource telemetry become recorded fields, and
+the frozen `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01` object, its resource admission,
+its competence and nonzero-count conditions, its `q_by_cell` law, its RNG-domain separation and the
+zero-access quarantine of the old named run are unchanged. The provenance is
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 decisions 1 and 7 and
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. This entry adds no
+order-value observation and consumes no scientific object.
