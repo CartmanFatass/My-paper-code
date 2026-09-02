@@ -855,7 +855,16 @@ class RolloutBuffer:
             return
         
         num_actual_steps = data["num_actual_steps"]
-        
+
+        if self.d2_enabled:
+            return self._compute_d2_high_level_advantages(
+                high_level_last_values,
+                gamma=gamma,
+                gae_lambda=gae_lambda,
+                value_normalizer=value_normalizer,
+                num_actual_steps=num_actual_steps,
+            )
+
         if isinstance(high_level_last_values, dict):
             last_state_values = high_level_last_values.get('state', np.zeros(self.num_envs))
             last_agent_values = high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents)))
@@ -956,6 +965,96 @@ class RolloutBuffer:
 
         main_logger.debug("高层策略GAE计算完成。")
 
+    def _compute_d2_high_level_advantages(self, high_level_last_values, gamma, gae_lambda,
+                                          value_normalizer, num_actual_steps):
+        """
+        D2 SMDP advantages (plan section 7, ADR 01 target formula).
+
+        One discounted-GAE sequence per `(env, agent)` over that agent's valid
+        segment rows, and one per env over the team table, both with
+        `discounts = gamma ** elapsed`.  The last valid row of each sequence
+        bootstraps with the value of the next state, exactly as `off` does via
+        `high_level_last_values`.
+        """
+        if isinstance(high_level_last_values, dict):
+            last_state_values = np.asarray(
+                high_level_last_values.get('state', np.zeros(self.num_envs))
+            )
+            last_agent_values = np.asarray(
+                high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents)))
+            )
+        else:
+            last_state_values = np.asarray(high_level_last_values)
+            if last_state_values.ndim == 2:
+                last_agent_values = last_state_values
+                last_state_values = last_state_values[:, 0]
+            else:
+                last_agent_values = np.tile(
+                    last_state_values[:, np.newaxis], (1, self.n_agents)
+                )
+
+        if value_normalizer is not None:
+            mean = value_normalizer.mean
+            std = np.sqrt(value_normalizer.var + 1e-8)
+        else:
+            mean, std = 0.0, 1.0
+
+        last_state_values_real = last_state_values * std + mean
+        last_agent_values_real = last_agent_values * std + mean
+
+        def _sequence(rewards, values, elapsed, terminal, last_value):
+            values_real = values.astype(np.float32) * std + mean
+            next_values = np.zeros_like(values_real)
+            if values_real.size > 1:
+                next_values[:-1] = values_real[1:]
+            next_values[-1] = last_value
+            discounts = np.power(
+                float(gamma), np.maximum(elapsed.astype(np.float32), 1.0)
+            ).astype(np.float32)
+            return self._compute_gae_with_discounts_torch(
+                rewards.astype(np.float32),
+                values_real,
+                next_values,
+                terminal.astype(np.float32),
+                discounts,
+                gae_lambda,
+            )
+
+        for env_idx in range(self.num_envs):
+            team_rows = np.flatnonzero(self.d2_team_valid[:num_actual_steps, env_idx])
+            if team_rows.size > 0:
+                advantages, returns = _sequence(
+                    self.d2_team_reward[team_rows, env_idx],
+                    self.d2_team_value[team_rows, env_idx],
+                    self.d2_team_elapsed[team_rows, env_idx],
+                    self.d2_team_terminal[team_rows, env_idx],
+                    last_state_values_real[env_idx],
+                )
+                for i, t in enumerate(team_rows):
+                    self.high_level_team_advantages[t, env_idx] = advantages[i].item()
+                    self.high_level_team_returns[t, env_idx] = returns[i].item()
+                    self.high_level_advantages[t, env_idx] = advantages[i].item()
+                    self.high_level_returns[t, env_idx] = returns[i].item()
+
+            for agent_idx in range(self.n_agents):
+                agent_rows = np.flatnonzero(
+                    self.d2_agent_valid[:num_actual_steps, env_idx, agent_idx]
+                )
+                if agent_rows.size == 0:
+                    continue
+                advantages, returns = _sequence(
+                    self.d2_agent_reward[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_values[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_elapsed[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_terminal[agent_rows, env_idx, agent_idx],
+                    last_agent_values_real[env_idx, agent_idx],
+                )
+                for i, t in enumerate(agent_rows):
+                    self.high_level_agent_advantages[t, env_idx, agent_idx] = advantages[i].item()
+                    self.high_level_agent_returns[t, env_idx, agent_idx] = returns[i].item()
+
+        main_logger.debug("D2 高层策略GAE计算完成。")
+
     def _compute_gae_torch(self, rewards, values, next_values, dones, gamma, lam):
         rewards = torch.tensor(rewards, dtype=torch.float32)
         values = torch.tensor(values, dtype=torch.float32)
@@ -987,10 +1086,19 @@ class RolloutBuffer:
         if data is None:
             return np.array([])
         
+        if self.d2_enabled:
+            # D2 heads have their own valid masks: the team row and the agent
+            # rows of one (t, e) pair do not have to be valid together.
+            team_mask = self.d2_team_valid[:num_steps]
+            agent_mask = self.d2_agent_valid[:num_steps]
+            team_returns = self.high_level_team_returns[:num_steps][team_mask]
+            agent_returns = self.high_level_agent_returns[:num_steps][agent_mask]
+            return np.concatenate([team_returns.flatten(), agent_returns.flatten()])
+
         valid_mask = data["high_level_valid_mask"][:num_steps]
         team_returns = self.high_level_team_returns[:num_steps][valid_mask]
         agent_returns = self.high_level_agent_returns[:num_steps][valid_mask]
-        
+
         # 将团队和个体回报合并为一个列表
         all_returns = np.concatenate([team_returns.flatten(), agent_returns.flatten()])
         return all_returns
