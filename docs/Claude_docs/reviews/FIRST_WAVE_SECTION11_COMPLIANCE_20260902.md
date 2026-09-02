@@ -87,9 +87,26 @@ concurrent) these fit around E1 without delaying it if SCDMP and UCOPE go first.
 
 The decisions put to the owner are in A.4; the audit follows.
 
-### A.4 Decisions
+### A.4 Decisions (owner, 2026-09-02, one question each)
 
-Recorded after the owner answers (see the commit that follows this one).
+| # | Question | Decision |
+| --- | --- | --- |
+| 1 | SCDMP | Recast per §11 and run now: the `PERFORMANCE_READY` receipt becomes a recorded field; telemetry is recorded, not gating; RUN-01-REPLACEMENT-01 runs exactly as frozen; the intake records the §11 demotion and the §11.3 reading of the `k ∈ {7, 13}` menu |
+| 2 | UCOPE | Recast per §11: the exposure ladder is registered as a named B object and runs first; the whitening discriminator runs alongside, not instead; the exact-oracle competence predicate becomes a recorded observation; the runner's clean-source and assessment-03 refusals become recorded fields |
+| 3 | CBSC | Recast per §11 and run the frozen B1: `FORMAL_ANALYSIS_BOUND`, `READINESS_DISPOSITION` and the two publication raises become recorded fields; descriptive curves are published directly; B1b (4× updates) is declared now as the next ladder rung |
+| 4 | VNFC | Recast per §11: the 304-row A0 law is demoted to optional analysis and replaced as an integrity item by a ~50-row unit-test-scale presentation check; R02 DEBUG (8 updates) and three 64-update seeds run on the R01 runner; byte manifests are recorded if produced, never required |
+| 5 | FRRIE | Recast per §11: `launch_capable` / `performance_disposition` become recorded fields and the panel validators optional analysis; the implementer first checks whether the Slice-B trainer runs 128 updates and reports back if not (no completion of the full chain); then the 1-seed smoke, then three seeds |
+| 6 | Order | SCDMP → UCOPE → CBSC → VNFC → FRRIE, one Opus session each, sharing the two-concurrent budget with E1 (E1 still launches on its own trigger after P3) |
+| 7 | Telemetry missing (spec §11.4 undecided clause; workflow review R4) | Downgrade, not annul: a run whose resource telemetry (peak RSS, scratch, wall) is missing stays valid and is marked "resources unmeasured"; annulment only when the claim itself is a resource claim. Learner-side instrumentation failure (missing logs or checkpoints) still quarantines under §6.2 |
+
+Decision 7 closes the item left open in `CODEX_SCIENCE_WORKFLOW_REVIEW_20260901.md` (R4) and
+in spec §11.4's last sentence; the formal record is
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`.
+
+Execution: each recast is one Opus session in the main tree (the directions' uncommitted
+working-tree changes must be included, so a worktree at HEAD is not usable), touching only its
+direction's paths, staging by explicit path, and pushing `main`. The reviewer intakes each result
+as a new part of this file.
 
 ## Part B — audit (verbatim)
 
