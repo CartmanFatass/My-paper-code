@@ -41,7 +41,8 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   causal decoder as written, the forced boundary decides whether E3 can succeed, and the exposure
   arithmetic is off by about 200×. Part II reviews revision 2: ADR 01 accepted with two additions
   (separate team cap, per-agent segment storage); ADR 02 held for the owner's mechanics page and
-  needs a duration margin registered next to the latent margin.
+  needs a duration margin registered next to the latent margin. Part III accepts ADR 01 revision 3
+  with five non-blocking implementer notes and a hand-off to Codex.
 
 ### research_notes/
 
@@ -66,8 +67,8 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `ADR_REQUEST_PROMPT_GPT_PRO_20260902.md` — the prompt and repository facts handed to GPT Pro
   (GitHub connector) to draft the two ADRs below.
 - `ADR_01_D2_POLICY_INTERRUPTION.md` — GPT Pro's ADR for the D2 policy-based interruption rule
-  on the HMASD base route, revision 2 stored verbatim (revision 1 at commit `ea20bccb0`); status
-  `proposed`, accepted with two additions in the review's Part II.
+  on the HMASD base route, revision 3 stored verbatim (revision 1 at commit `ea20bccb0`, revision
+  2 at `7591f23a1`); accepted for implementation by the review's Part III; Codex implements.
 - `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's ADR for the relay-corridor host family (E2–E4),
   revision 2 stored verbatim; status `proposed`, blocked until the owner writes the mechanics.
 

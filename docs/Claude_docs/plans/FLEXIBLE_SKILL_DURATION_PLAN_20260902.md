@@ -185,3 +185,10 @@ were confirmed with the owner (review §4.1): causal-prefix interruption test in
 per-agent forced boundary with cap `k_max`; a `Z` switch forces every agent to re-decide; the rule
 uses `gap ≥ c`; the owner writes the corridor mechanics; E4's heavy-tailed law is lognormal with
 `E[D]` matched across laws. These refine decisions A to C above without reopening them.
+
+ADR rounds 2 and 3 (2026-09-02): revision 2 added a separate team cap `k_Z` (default `k_max`,
+`H` for E3/E4), the per-agent segment table, and `M` rows per rollout as the binding resolution
+term; ADR 02 must register a duration margin `m_dur` next to `m`, and the ten-segment rule binds
+only the fixed-`k` D0 sweep (review §II.10.1). Revision 3 of ADR 01 was accepted for
+implementation (review Part III); Codex implements it. ADR 02 stays on hold until the owner's
+mechanics page exists.

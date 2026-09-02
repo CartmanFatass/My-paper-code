@@ -463,3 +463,67 @@ mechanics page, which Part I F2.1 lists in order.
 Status after round 2: ADR 01 may go to Codex once revision 3 folds in decision 1 and II.2 to II.5.
 ADR 02 waits for the owner's mechanics page (Part I F2.1 order: state, action, latent, hazard,
 reward, probe, cut), then a revision that adds `m_dur` and the II.8, II.9 wording.
+
+---
+
+# Part III — round-3 review of ADR 01 revision 3 (2026-09-02, later)
+
+Object: revision 3 of ADR 01 (same path; revisions 1 and 2 at `ea20bccb0` and `7591f23a1`).
+ADR 02 was not re-issued and stays on HOLD for the owner's mechanics page.
+
+**Verdict: ACCEPT. ADR 01 goes to Codex.** Round-2 decision 1 (`k_Z`) and items II.2 to II.5 are
+applied as text: the per-agent segment table `[T, E, N]` plus team table `[T, E]` with replay
+metadata, `M` named as the binding resolution term at long holds, the ten-fold inference cost, the
+`--n_uavs 6` entry-point pin, the in-training evaluation pin, the corrected observation citation,
+and team age `a_Z / k_Z`. No invariant was weakened between revisions.
+
+## III.0 Citation audit, round 3
+
+| ADR claim | Verified location | Status |
+| --- | --- | --- |
+| `--n_uavs` default 5, `config.n_agents = env.n_uavs` | `main.py:58`, `main.py:410` | correct |
+| Observation layout | `uav_env.py:138` (obs_dim), `_get_observation` `353-419` | correct |
+| `lr_coordinator` at `config_1.py:148` | 148 is `lr_discoverer_critic`; `lr_coordinator` is 146; both `1e-4` | value right, line off by two |
+| `gamma`, `ppo_epochs`, `num_envs`, `rollout_length` at 152, 158, 181-183 | 153, 156, 179-180 | values right, lines off by a few; Part I's audit carried the same offsets |
+| `eval_episodes = 8` at 196 | 196 | correct |
+| Sampler keeps the partial minibatch | `hmasd/utils.py:1026` onward | correct |
+
+## III.1 Non-blocking notes for the implementer (no change to the decision)
+
+1. **The switch event is outside the likelihood.** `S_t` is a deterministic function of the policy
+   (gap at least `c`), so the PPO ratio covers only the skill chosen for sampled positions, never the
+   decision to re-decide. The gradient of the rule with respect to the parameters is dropped, and
+   the old and new policies would produce different `S_t` on the same state. This is the accepted
+   approximation of an interruption rule without learned termination (plan §3, D2), and it is exactly
+   where the suboptimality term of plan §7 enters. Name it in the risks in the next revision; nothing
+   to implement.
+2. **D0 boundary parity (invariant 2) rests on reset alignment.** `off` redraws at
+   `env_steps % k == 0` on a per-env counter that restarts at reset; D0 redraws when every age reaches
+   `k` after a reset. They coincide because `episode_length % k == 0` and all ages restart together.
+   Test 2 should include at least one mid-rollout reset so that the alignment is exercised, not
+   assumed.
+3. **The per-step pass must not draw RNG.** The teacher-forced pass computes log-probabilities and
+   values only; sampling happens for `S_t` positions alone. Test 1 (byte equality in `off`) will not
+   catch an extra draw in `d2`; add a check that two `d2` runs at `c = ∞` with the same seed produce
+   identical rollouts (determinism of the trigger path).
+4. **Value normalisation.** `use_valuenorm = True` (`config_1.py:199`); the discounted targets in
+   `d2` have a different scale from `off`, and the normaliser statistics are per head. The
+   per-column denormalisation already exists (`agent.py:1931-1942`, `_denormalize_values` at `1294`); the team table needs its own.
+5. **Where the tests live.** Top-level `tests/flexible_skill_duration_d2_test.py` is correct for a
+   base-route change (`hmasd/`), per CLAUDE.md. Run with the explicit interpreter and
+   `--basetemp C:/Projects/HMASD/temp/pytest_d2_policy_interrupt`.
+
+## III.2 Predict-then-verify prompts carried into implementation
+
+- P1 (switch rate by agent index under the causal-prefix test) and P2 (chattering floor at `c = 0`:
+  about 5/6 of agents per step for an untrained six-skill coordinator) stand from Part I §5. Both
+  are answerable from the first E0 rollout and should be recorded before it.
+- P4 (new): at `c = ∞`, `k_max = k_Z = k = 10`, what is the ratio of `d2` to `off` high-level target
+  scale? The undiscounted-to-discounted factor `τ(1−γ)/(1−γ^τ)` at `τ = 10`, `γ = 0.99` is about
+  1.046; test 2's logged ratio should match it to three digits on a constant-reward episode.
+
+## III.3 Hand-off
+
+Codex implements ADR 01 revision 3 on the HMASD base route under plan §8 touch points, with tests
+1 to 8 as specifications and III.1 items 2 and 3 added to tests 2 and 1. Claude reviews the diff
+against the eight invariants; the owner runs E0 (exposure and probe set) before E1.
