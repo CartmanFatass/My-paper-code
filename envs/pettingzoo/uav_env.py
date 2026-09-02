@@ -15,7 +15,10 @@ class MultiUAVEnv(ParallelEnv):
         "name": "multi_uav_env_v0",
         "is_parallelizable": True,
     }
-    
+
+    #: 信道模型的两条求值路径，见 __init__ 的 channel_backend 参数。
+    CHANNEL_BACKENDS = ("vectorized", "reference")
+
     def __init__(
         self,
         n_uavs=5,
@@ -37,6 +40,7 @@ class MultiUAVEnv(ParallelEnv):
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
         ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
         step_path_loss_cache=True,  # 每步复用完全相同链路的路径损耗
+        channel_backend="vectorized",  # 信道模型求值路径: "vectorized" 或 "reference"
     ):
         """
         初始化多无人机基站环境
@@ -71,6 +75,14 @@ class MultiUAVEnv(ParallelEnv):
         if not isinstance(step_path_loss_cache, (bool, np.bool_)):
             raise TypeError("step_path_loss_cache must be a bool")
         self.step_path_loss_cache = bool(step_path_loss_cache)
+        # 信道模型求值路径。"reference" 是逐链路的标量实现（原始代码，未修改）；
+        # "vectorized" 用数组运算一次性求出同样的公式。两者在 1e-9 绝对容差内等价，
+        # 由 tests/uav_env_channel_equivalence_test.py 判定。
+        if channel_backend not in self.CHANNEL_BACKENDS:
+            raise ValueError(
+                f"channel_backend must be one of {self.CHANNEL_BACKENDS}, got {channel_backend!r}"
+            )
+        self.channel_backend = channel_backend
         
         # 局部观测参数
         self.max_observed_uavs = max_observed_uavs
@@ -97,7 +109,10 @@ class MultiUAVEnv(ParallelEnv):
         self._path_loss_matrix_context = None
         self._path_loss_uav_position_bytes = None
         self._path_loss_user_position_bytes = None
-        
+        # 向量化路径每步一次性求出的无人机-无人机 SINR 矩阵，以及它对应的物理状态代。
+        self.uav_sinr_matrix = None
+        self._channel_state_generation = None
+
         # 通信参数 - 基于论文模型
         self.carrier_frequency = 2e9  # 载波频率 (Hz) - 论文中为2 GHz
         self.bandwidth = bandwidth  # 子信道带宽 (Hz) - 可配置参数
@@ -582,6 +597,13 @@ class MultiUAVEnv(ParallelEnv):
 
     def _prime_path_loss_matrices(self):
         """Materialize each base-environment link once for the current state."""
+        if self.channel_backend == "reference":
+            self._prime_path_loss_matrices_reference()
+        else:
+            self._prime_path_loss_matrices_vectorized()
+
+    def _prime_path_loss_matrices_reference(self):
+        """Scalar reference path: one `_compute_path_loss_reference` call per link."""
         if not (self.step_path_loss_cache or self.channel_model == "3gpp-36777"):
             return
 
@@ -621,6 +643,278 @@ class MultiUAVEnv(ParallelEnv):
                 key = self._path_loss_key("uav_uav", first_pos, second_pos, context)
                 self._path_loss_cache[key] = value
                 self._path_loss_cache_misses += 1
+
+    # ------------------------------------------------------------------
+    # 向量化信道后端（吞吐重构 P1/P2）。
+    #
+    # 公式与上面的标量参考路径逐字相同，只是改用广播求值。浮点求和次序因此改变，
+    # 两条路径是 1e-9 绝对容差内等价而不是逐位相同；连接矩阵完全相等。
+    # 判定工具是 tests/uav_env_channel_equivalence_test.py。
+    # ------------------------------------------------------------------
+
+    def _channel_realization_is_stochastic(self):
+        """True when a link's path loss consumes RNG (one draw per link per step)."""
+        return self.channel_model == "3gpp-36777"
+
+    def _user_position_components(self):
+        """User x, y and z columns, with the scalar path's 2-D convention (z = 0)."""
+        users = np.asarray(self.user_positions, dtype=float)
+        if users.ndim != 2 or users.shape[1] < 2:
+            raise ValueError("user_positions must be a [n_users, >=2] array")
+        if users.shape[1] == 2:
+            return users[:, 0], users[:, 1], np.zeros(users.shape[0], dtype=float)
+        if users.shape[1] == 3:
+            return users[:, 0], users[:, 1], users[:, 2]
+        raise ValueError("user positions with more than three components are unsupported")
+
+    def _uav_user_geometry(self):
+        """3-D distance, 2-D distance, elevation angle and height for every (UAV, user)."""
+        uav = np.asarray(self.uav_positions, dtype=float)
+        user_x, user_y, user_z = self._user_position_components()
+        height = uav[:, 2][:, None]
+        delta_x = uav[:, 0][:, None] - user_x[None, :]
+        delta_y = uav[:, 1][:, None] - user_y[None, :]
+        delta_z = height - user_z[None, :]
+        distance_3d = np.sqrt(delta_x * delta_x + delta_y * delta_y + delta_z * delta_z)
+        distance_2d = np.sqrt(delta_x * delta_x + delta_y * delta_y)
+        elevation_angle = np.degrees(np.arctan2(height, distance_2d))
+        return distance_3d, distance_2d, elevation_angle, height
+
+    def _compute_path_loss_matrix(self):
+        """[n_uavs, n_users] path loss in dB — `_compute_path_loss_reference`, broadcast."""
+        distance_3d, _distance_2d, elevation_angle, height = self._uav_user_geometry()
+        safe_distance = np.maximum(distance_3d, 1e-6)
+
+        if self.channel_model == "free_space":
+            wavelength = 3e8 / self.carrier_frequency
+            return 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+
+        if self.channel_model == "urban":
+            return 128.1 + 37.6 * np.log10(safe_distance / 1000)
+
+        if self.channel_model == "suburban":
+            return 120 + 35 * np.log10(safe_distance / 1000)
+
+        if self.channel_model == "3gpp-36777":
+            f_c = self.carrier_frequency / 1e9
+            p_los = 1 / (1 + 5 * np.exp(-0.6 * (elevation_angle - 5)))
+            pl_los = 28.0 + 22 * np.log10(safe_distance) + 20 * np.log10(f_c)
+            pl_nlos = 22.7 + 41 * np.log10(safe_distance) + 20 * np.log10(f_c)
+            # 与标量路径同序、同数量地消耗 RNG：每条链路一次 uniform，行优先，
+            # 这与 n_uavs * n_users 次标量 uniform(0, 1) 逐位相同。
+            is_los = self.np_random.uniform(0, 1, size=p_los.shape) < p_los
+            return np.where(is_los, pl_los, pl_nlos)
+
+        if self.channel_model == "probabilistic":
+            theta_deg = np.degrees(np.arcsin(height / safe_distance))
+            p_los = 1 / (
+                1
+                + self.prob_channel_a
+                * np.exp(-self.prob_channel_b * (theta_deg - self.prob_channel_a))
+            )
+            p_nlos = 1 - p_los
+            wavelength = 3e8 / self.carrier_frequency
+            l_fs = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+            return p_los * (l_fs + self.eta_los) + p_nlos * (l_fs + self.eta_nlos)
+
+        raise ValueError(f"未知的信道模型: {self.channel_model}")
+
+    def _compute_uav_path_loss_matrix(self):
+        """[n_uavs, n_uavs] path loss in dB — `_compute_uav_path_loss_reference`, broadcast."""
+        uav = np.asarray(self.uav_positions, dtype=float)
+        difference = uav[:, None, :] - uav[None, :, :]
+        distance_3d = np.sqrt(
+            difference[:, :, 0] * difference[:, :, 0]
+            + difference[:, :, 1] * difference[:, :, 1]
+            + difference[:, :, 2] * difference[:, :, 2]
+        )
+        safe_distance = np.maximum(distance_3d, 1e-6)
+
+        if self.channel_model in ("free_space", "3gpp-36777"):
+            wavelength = 3e8 / self.carrier_frequency
+            matrix = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+        elif self.channel_model == "urban":
+            matrix = 128.1 + 37.6 * np.log10(safe_distance / 1000)
+        elif self.channel_model == "suburban":
+            matrix = 120 + 35 * np.log10(safe_distance / 1000)
+        elif self.channel_model == "probabilistic":
+            wavelength = 3e8 / self.carrier_frequency
+            l_fs = 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
+            matrix = 0.9 * (l_fs + self.eta_los) + 0.1 * (l_fs + self.eta_nlos)
+        else:
+            raise ValueError(f"未知的信道模型: {self.channel_model}")
+
+        # 标量路径把对角线显式写成 0.0（不走公式），这里照做。
+        np.fill_diagonal(matrix, 0.0)
+        return matrix
+
+    def _prime_path_loss_matrices_vectorized(self):
+        """Array path: both link matrices for the current physical state in one pass."""
+        if self._channel_realization_is_stochastic() and self.use_shadowing:
+            # 阴影衰落把 uniform 与 normal 抽样按链路交错，向量化会改变 RNG 消费顺序，
+            # 所以这一组合的矩阵仍由标量路径求出（SINR 仍然向量化）。
+            self._prime_path_loss_matrices_reference()
+            return
+
+        context = self._ensure_path_loss_context()
+        self._path_loss_matrix_context = context
+        self._path_loss_uav_position_bytes = tuple(
+            row.tobytes() for row in self.uav_positions
+        )
+        self._path_loss_user_position_bytes = tuple(
+            row.tobytes() for row in self.user_positions
+        )
+
+        uav_user = np.ascontiguousarray(self._compute_path_loss_matrix(), dtype=float)
+        uav_uav = np.ascontiguousarray(self._compute_uav_path_loss_matrix(), dtype=float)
+        if not (np.all(np.isfinite(uav_user)) and np.all(np.isfinite(uav_uav))):
+            raise FloatingPointError("path-loss computation produced a non-finite value")
+        self._uav_user_path_loss_matrix = uav_user
+        self._uav_uav_path_loss_matrix = uav_uav
+        self._path_loss_cache_misses += (
+            self.n_uavs * self.n_users + (self.n_uavs * (self.n_uavs - 1)) // 2
+        )
+
+        if self._channel_realization_is_stochastic():
+            # 一条链路在一个物理状态代内只有一次抽样：按链路调用的外部消费者
+            # （场景 2/3、诊断工具）必须看到同一个实现值，所以字典照样填满。
+            for uav_idx in range(self.n_uavs):
+                uav_position = self.uav_positions[uav_idx]
+                for user_idx in range(self.n_users):
+                    key = self._path_loss_key(
+                        "uav_user", uav_position, self.user_positions[user_idx], context
+                    )
+                    self._path_loss_cache[key] = float(uav_user[uav_idx, user_idx])
+            for first_idx in range(self.n_uavs):
+                for second_idx in range(first_idx + 1, self.n_uavs):
+                    key = self._path_loss_key(
+                        "uav_uav",
+                        self.uav_positions[first_idx],
+                        self.uav_positions[second_idx],
+                        context,
+                    )
+                    self._path_loss_cache[key] = float(uav_uav[first_idx, second_idx])
+
+    @staticmethod
+    def _sum_excluding_own_row(values):
+        """out[s, c] = sum over k != s of values[k, c], accumulated in ascending k."""
+        rows = values.shape[0]
+        result = np.zeros_like(values)
+        for source in range(rows):
+            accumulator = np.zeros(values.shape[1], dtype=values.dtype)
+            for other in range(rows):
+                if other == source:
+                    continue
+                accumulator += values[other]
+            result[source] = accumulator
+        return result
+
+    def _sinr_from_path_loss(self, path_loss, interference_linear):
+        """`_compute_sinr`'s dB arithmetic, including its zero-interference branch."""
+        rx_power = self.tx_power - path_loss
+        if self.use_fdma:
+            return rx_power - self.noise_power
+
+        noise_linear = 10 ** (self.noise_power / 10)
+        positive = interference_linear > 0
+        safe_interference = np.where(positive, interference_linear, 1.0)
+        # 标量路径经过 dBm 往返（10*log10 再 10**(x/10)），这里保留同样的往返。
+        total_interference_dbm = 10 * np.log10(safe_interference)
+        interference_plus_noise_dbm = np.where(
+            positive,
+            10 * np.log10(noise_linear + 10 ** (total_interference_dbm / 10)),
+            float(self.noise_power),
+        )
+        return rx_power - interference_plus_noise_dbm
+
+    def _compute_uav_user_sinr_matrix(self):
+        """[n_uavs, n_users] SINR in dB from the primed path-loss matrix."""
+        path_loss = self._uav_user_path_loss_matrix
+        if path_loss is None:
+            raise RuntimeError("path-loss matrices were not primed for this step")
+        if self.use_fdma:
+            interference = np.zeros_like(path_loss)
+        else:
+            interference = self._sum_excluding_own_row(
+                10 ** ((self.tx_power - path_loss) / 10)
+            )
+        return self._sinr_from_path_loss(path_loss, interference)
+
+    def _compute_uav_uav_sinr_matrix(self):
+        """[sender, receiver] SINR in dB, matching `_compute_uav_to_uav_sinr`."""
+        path_loss = self._uav_uav_path_loss_matrix
+        if path_loss is None:
+            raise RuntimeError("path-loss matrices were not primed for this step")
+        if self.use_fdma:
+            interference = np.zeros_like(path_loss)
+        else:
+            linear = 10 ** ((self.tx_power - path_loss) / 10)
+            # 接收方自己不是干扰源。把对角线置零后按 k 升序累加，与标量路径的
+            # "跳过 k == receiver" 同序（加 0.0 是精确运算）。
+            np.fill_diagonal(linear, 0.0)
+            interference = self._sum_excluding_own_row(linear)
+        return self._sinr_from_path_loss(path_loss, interference)
+
+    def _greedy_connection_assignment(self):
+        """The scalar path's greedy rule, with its exact descending/tie order."""
+        sinr = self.sinr_matrix
+        n_uavs, n_users = sinr.shape
+        connections = np.zeros((n_uavs, n_users), dtype=bool)
+        flat = np.asarray(sinr).reshape(-1)
+        eligible = np.flatnonzero(flat >= self.min_sinr)
+        if eligible.size == 0:
+            return connections
+
+        # 降序，等值保持 (uav, user) 升序 —— 与 list.sort(key=sinr, reverse=True)
+        # 的稳定性完全一致。
+        order = eligible[np.argsort(-flat[eligible], kind="stable")]
+
+        uav_connections = [0] * n_uavs
+        user_connected = [False] * n_users
+        connected_total = 0
+        full_uavs = 0
+        for position in order.tolist():
+            uav_idx = position // n_users
+            user_idx = position - uav_idx * n_users
+            if user_connected[user_idx] or uav_connections[uav_idx] >= self.max_connections:
+                continue
+            connections[uav_idx, user_idx] = True
+            uav_connections[uav_idx] += 1
+            if uav_connections[uav_idx] >= self.max_connections:
+                full_uavs += 1
+            user_connected[user_idx] = True
+            connected_total += 1
+            if connected_total == n_users or full_uavs == n_uavs:
+                break
+        return connections
+
+    def _update_channel_state_vectorized(self):
+        """SINR for every pair by matrix operations, then the same greedy assignment."""
+        self._prime_path_loss_matrices()
+
+        sinr = self._compute_uav_user_sinr_matrix()
+        if (
+            not isinstance(self.sinr_matrix, np.ndarray)
+            or self.sinr_matrix.shape != sinr.shape
+            or self.sinr_matrix.dtype != sinr.dtype
+        ):
+            self.sinr_matrix = np.array(sinr, dtype=float)
+        else:
+            # 原地写入，保留 info 字典里既有视图的语义。
+            self.sinr_matrix[...] = sinr
+        self.uav_sinr_matrix = self._compute_uav_uav_sinr_matrix()
+        self._channel_state_generation = self._path_loss_cache_generation
+
+        self.connections = self._greedy_connection_assignment()
+
+    def _vector_channel_state_is_current(self):
+        """True when the cached SINR matrices belong to the current physical state."""
+        return (
+            self.channel_backend != "reference"
+            and self.uav_sinr_matrix is not None
+            and self._channel_state_generation == self._path_loss_cache_generation
+            and self._path_loss_matrix_context == self._path_loss_context()
+        )
 
     def _cached_uav_user_path_loss(self, uav_idx, user_idx):
         if self._uav_user_path_loss_matrix is not None:
@@ -997,6 +1291,13 @@ class MultiUAVEnv(ParallelEnv):
         """
         更新信道状态和连接
         """
+        if self.channel_backend == "reference":
+            self._update_channel_state_reference()
+        else:
+            self._update_channel_state_vectorized()
+
+    def _update_channel_state_reference(self):
+        """Scalar reference path: one `_compute_sinr` call per (UAV, user) pair."""
         self._prime_path_loss_matrices()
 
         # 计算所有UAV-用户对的SINR
