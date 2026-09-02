@@ -138,6 +138,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   ratio 1.04589 against 1.04583), the frozen 1,536-probe set with its content digest, deviations
   D1 to D4, and what could not be verified; section 12 adds seed 2 for both arms (same counts,
   checks pass, evaluation ordering reverses between seeds). Accepted by the review's Part IX.
+- `E1_AGE_INPUT_20260902.md` — launch contract for E1 (D0 versus D1 at fixed k = 10 on scenario 1):
+  the prediction on record, arms, the probe measurements (adjacent-checkpoint label agreement,
+  probe accuracy split by age bucket, value-target drift, age-weight share), three seeds, R = 20,
+  the reading rule written before the data. Launches after the throughput refactor P3.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
 
 ### artifacts/

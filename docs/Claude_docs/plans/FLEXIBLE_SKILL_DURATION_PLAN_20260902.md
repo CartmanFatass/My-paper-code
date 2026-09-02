@@ -211,3 +211,15 @@ under `d2`, enforced in config validation. Next code step: the follow-up guards 
 integration commit that wires the D2 sampled mask into the corridor adapter and takes the
 learner dimensions from the host; then E0 (integrity, scenario 1, `off` versus D0) is the owner's
 to schedule.
+E1 prediction (2026-09-02, written before E1 runs). Owner: "年龄在现在这种中断式的 action 来说似乎不是
+一个有效信息，因为本质就是一个事件驱动的决策边界" — age is not effective information for the
+interruption-style decision because the boundary is event-driven; for E1 (fixed `k`) the owner
+expects no material change in label agreement or probe accuracy from the age input, and no
+effect under D2 either. Reviewer's counter-prediction: age carries information through effect
+accumulation (a skill held longer has moved the state further), so D1's discriminator-accuracy
+gain concentrates on high-age probes; at fixed `k` the age is redundant with the step counter in
+the observation, so the E1 gain is smaller than the D2 gain will be. Differentiating measurement
+added to E1: discriminator accuracy on the frozen probe set split by age bucket (0-2, 3-6, 7-9).
+Decision: E1 stays as planned (fixed `k = 10`, D0 versus D1 on scenario 1); the D2 age question is
+E2's. Contract: `../experiments/E1_AGE_INPUT_20260902.md`, launched after the throughput refactor's
+P3.
