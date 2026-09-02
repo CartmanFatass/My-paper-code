@@ -956,6 +956,268 @@ class SkillCoordinator(nn.Module):
             'cd_loss': torch.tensor(0.0, device=device, requires_grad=True),
             'profile': profile,
         }
+
+    def evaluate_held_batch(self, state, observations, held_Z, held_z):
+        """
+        D2 trigger statistic (ADR 01): one teacher-forced pass in canonical order
+        over the held joint action.  Returns the logits and value heads the caller
+        needs to compute
+
+            g_Z = max_Z log pi(Z) - log pi(held_Z)
+            g_i = max_z ell_i(z) - ell_i(held_z_i),
+            ell_i(z) = log pi(z | Z_held, z_held_{<i})
+
+        (the softmax normaliser cancels in both gaps, so raw logits suffice).
+        This method must not sample and must not draw RNG.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+
+        state = state.float()
+        observations = observations.float()
+        held_Z = held_Z.long()
+        held_z = held_z.long()
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+
+        z_logits = []
+        for i in range(n_agents):
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                held_Z,
+                held_z[:, :i] if i > 0 else None,
+                step=i + 1,
+                agent_specific_query=encoded_observations[:, i:i + 1, :],
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            z_logits.append(zi_logits)
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=state.device)
+
+        return {
+            'Z_logits': Z_logits,
+            'z_logits': torch.stack(z_logits, dim=1),
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+        }
+
+    def assign_partial_batch(
+        self,
+        state,
+        observations,
+        held_Z,
+        held_z,
+        sample_Z_mask,
+        sampled_mask,
+        deterministic=False,
+    ):
+        """
+        D2 partial re-assignment (ADR 01): decode in order O_t = (kept agents in
+        canonical order, then S_t in canonical order).  The team token is sampled
+        where `sample_Z_mask` and forced to `held_Z` otherwise; kept agents are
+        forced to their held skills and `S_t` agents are sampled.  Policy terms
+        are zero at forced positions.  Positional encoding follows decode
+        position, exactly as the canonical decoder does with `step`.  No new
+        parameters are introduced.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+        device = state.device
+
+        state = state.float()
+        observations = observations.float()
+        held_Z = held_Z.long()
+        held_z = held_z.long()
+        sample_Z_mask = sample_Z_mask.bool()
+        sampled_mask = sampled_mask.bool()
+
+        # O_t per batch element: kept agents first (canonical), then sampled
+        # agents (canonical).  Keys are unique per row, so argsort is exact.
+        agent_range = torch.arange(n_agents, device=device).unsqueeze(0).expand(batch_size, -1)
+        sort_key = agent_range + n_agents * sampled_mask.long()
+        order = torch.argsort(sort_key, dim=1)
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        # Team token: sampled where sample_Z_mask, forced to held_Z otherwise.
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+        Z_dist = Categorical(logits=Z_logits)
+        sampled_team = Z_logits.argmax(dim=-1) if deterministic else Z_dist.sample()
+        team_skills = torch.where(sample_Z_mask, sampled_team, held_Z)
+        team_log_probs = torch.where(
+            sample_Z_mask,
+            Z_dist.log_prob(team_skills),
+            torch.zeros(batch_size, device=device),
+        )
+
+        # Agent tokens in decode order O_t.
+        batch_idx = torch.arange(batch_size, device=device)
+        decoded_in_order = torch.zeros(batch_size, n_agents, dtype=torch.long, device=device)
+        agent_log_probs = torch.zeros(batch_size, n_agents, device=device)
+        for p in range(n_agents):
+            agent_at_p = order[:, p]
+            forced_at_p = ~sampled_mask[batch_idx, agent_at_p]
+            held_at_p = held_z[batch_idx, agent_at_p]
+            query = encoded_observations[batch_idx, agent_at_p].unsqueeze(1)
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                team_skills,
+                decoded_in_order[:, :p] if p > 0 else None,
+                step=p + 1,
+                agent_specific_query=query,
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            zi_dist = Categorical(logits=zi_logits)
+            sampled_at_p = zi_logits.argmax(dim=-1) if deterministic else zi_dist.sample()
+            token_at_p = torch.where(forced_at_p, held_at_p, sampled_at_p)
+            decoded_in_order[:, p] = token_at_p
+            log_prob_at_p = torch.where(
+                forced_at_p,
+                torch.zeros(batch_size, device=device),
+                zi_dist.log_prob(token_at_p),
+            )
+            agent_log_probs[batch_idx, agent_at_p] = log_prob_at_p
+
+        agent_skills = torch.zeros(batch_size, n_agents, dtype=torch.long, device=device)
+        agent_skills[batch_idx.unsqueeze(1), order] = decoded_in_order
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=device)
+
+        return {
+            'team_skills': team_skills,
+            'agent_skills': agent_skills,
+            'team_log_probs': team_log_probs,
+            'agent_log_probs': agent_log_probs,
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+            'order': order,
+        }
+
+    def evaluate_training_batch_ordered(
+        self,
+        state,
+        observations,
+        team_skills,
+        agent_skills,
+        order,
+        sampled_mask,
+        sample_Z_mask,
+    ):
+        """
+        D2 PPO replay (ADR 01): teacher-forced replay of the stored joint action
+        in the stored decode order.  Log-probabilities and entropies are zero at
+        forced positions; team terms are zero where the team token was not
+        sampled.  At the collecting parameters this reproduces exactly the
+        log-probabilities recorded by `assign_partial_batch`.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+        device = state.device
+
+        state = state.float()
+        observations = observations.float()
+        team_skills = team_skills.long()
+        agent_skills = agent_skills.long()
+        order = order.long()
+        sampled_mask = sampled_mask.bool()
+        sample_Z_mask = sample_Z_mask.bool()
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+        Z_dist = Categorical(logits=Z_logits)
+        team_log_probs = torch.where(
+            sample_Z_mask,
+            Z_dist.log_prob(team_skills),
+            torch.zeros(batch_size, device=device),
+        )
+        team_entropy = torch.where(
+            sample_Z_mask,
+            Z_dist.entropy(),
+            torch.zeros(batch_size, device=device),
+        )
+
+        batch_idx = torch.arange(batch_size, device=device)
+        ordered_skills = torch.gather(agent_skills, 1, order)
+        agent_log_probs = torch.zeros(batch_size, n_agents, device=device)
+        agent_entropies = torch.zeros(batch_size, n_agents, device=device)
+        for p in range(n_agents):
+            agent_at_p = order[:, p]
+            sampled_at_p = sampled_mask[batch_idx, agent_at_p]
+            query = encoded_observations[batch_idx, agent_at_p].unsqueeze(1)
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                team_skills,
+                ordered_skills[:, :p] if p > 0 else None,
+                step=p + 1,
+                agent_specific_query=query,
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            zi_dist = Categorical(logits=zi_logits)
+            token = ordered_skills[:, p]
+            agent_log_probs[batch_idx, agent_at_p] = torch.where(
+                sampled_at_p,
+                zi_dist.log_prob(token),
+                torch.zeros(batch_size, device=device),
+            )
+            agent_entropies[batch_idx, agent_at_p] = torch.where(
+                sampled_at_p,
+                zi_dist.entropy(),
+                torch.zeros(batch_size, device=device),
+            )
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=device)
+
+        return {
+            'team_log_probs': team_log_probs,
+            'agent_log_probs': agent_log_probs,
+            'team_entropy': team_entropy,
+            'agent_entropies': agent_entropies,
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+            'cd_loss': torch.tensor(0.0, device=device, requires_grad=True),
+        }
     
     def forward(self, state, observations, deterministic=False, history_context=None):
         """
