@@ -203,3 +203,11 @@ confirms every formula, grid, and margin value is unchanged and the four additio
 ADR 02 revision 4 is accepted. Both ADRs are now closed at the architecture level: D2 is being
 implemented against `D2_IMPLEMENTATION_PLAN_20260902.md`, and the corridor host can be implemented
 against ADR 02's nine invariants. Claude reviews each diff when it is delivered.
+ADR round 6 (2026-09-02): both implementations were delivered by Opus sessions and accepted by
+the review's Parts VI (corridor host, `envs/relay_corridor/`, nine tests) and VII (D2 Phases 3
+to 8, ten tests). Decisions taken: the corridor cue at reset is `y_{r,0} = theta_{r,0}`
+(sentence added to the mechanics page); `rollout_length` must be a multiple of `episode_length`
+under `d2`, enforced in config validation. Next code step: the follow-up guards and the
+integration commit that wires the D2 sampled mask into the corridor adapter and takes the
+learner dimensions from the host; then E0 (integrity, scenario 1, `off` versus D0) is the owner's
+to schedule.

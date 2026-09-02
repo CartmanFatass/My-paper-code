@@ -15,7 +15,10 @@ change flag, dwell age, one-step-lag cue \(y_{r,t}=\theta_{r,t-1}\), reserved pr
 reserved E5 coupling field fixed to zero while coupling is disabled; agents carry an identifier,
 pinned region, zone, held role, lease-freshness flag, and segment age. If a switch occurs between
 \(t-1\) and \(t\), the change flag is immediate but \(y_{r,t}\) still carries the old latent; on the
-next public state the cue carries the new latent. The current latent and renewal epoch are host-private,
+next public state the cue carries the new latent. At reset the lag is degenerate and the cue is
+defined as \(y_{r,0}=\theta_{r,0}\); this is the reading under which greedy equals the switching
+oracle exactly at \(K=2\) (owner decision recorded in review Part VII.5, applied to the finalised
+page as one sentence). The current latent and renewal epoch are host-private,
 exposed only to exact oracles or an enabled probe. E2–E4 are time-homogeneous by construction, so no
 `time_homogeneous` flag is exposed. Raggedness is a family boundary property; with \(\rho=0\) and
 fixed \(N\), E2–E4 do not change live cardinality. This follows the ragged-boundary, temporal-depth,

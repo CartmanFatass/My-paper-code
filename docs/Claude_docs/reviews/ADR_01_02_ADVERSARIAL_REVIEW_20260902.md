@@ -916,3 +916,16 @@ integration commit that neither line could make alone: the rollout loop hands th
 `state_dim`, `action_dim = K`, `n_z = K` from the host; that commit also closes the IV.0 item on
 the low-level actor being continuous-only. E0 (integrity on scenario 1, `off` versus D0) needs
 nothing further from the code.
+
+### VII.5 Decisions taken with the owner after Parts VI and VII (confirmed in session)
+
+| # | Decision |
+| --- | --- |
+| VI F1 | Accepted: `y_{r,0} = theta_{r,0}` at reset. One sentence recording the convention is added to the mechanics page's "State" section with attribution; the host and test 8 are unchanged |
+| VII F1 | Accepted: "`rollout_length` is a multiple of `episode_length`" is registered as an E-series constraint for `d2`, and `_validate_policy_interruption` raises in `d2` mode otherwise |
+
+Follow-up code items handed to the implementer in one commit: the VII F1 guard with a test; the
+buffer-level replay-consistency assertion (VII F3); the compact-discriminator guard (VII F4); the
+`value_normalizer is None` assertion in the D2 advantage routine (VII F5). Then the integration
+commit of VII.4 (corridor adapter wired to the D2 rollout, learner dimensions taken from the host,
+smoke run in `off` and `d2`).
