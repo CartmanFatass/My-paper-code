@@ -114,6 +114,14 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
             nn.init.zeros_(module.bias)
 
 
+def _d2_age_feature_enabled(config):
+    """True only under D2 with `age_feature = "normalized"` (ADR 01, plan section 9)."""
+    return (
+        str(getattr(config, 'policy_interruption_mode', 'off')) == 'd2'
+        and str(getattr(config, 'age_feature', 'off')) == 'normalized'
+    )
+
+
 class ResBlock(nn.Module):
     """残差块 - 用于构建更深的网络"""
     def __init__(self, hidden_dim):
@@ -1744,12 +1752,17 @@ class TeamDiscriminator(nn.Module):
     def __init__(self, config):
         super(TeamDiscriminator, self).__init__()
         
+        # D2 age feature (ADR 01, plan section 9). `off` keeps the exact input
+        # dimension and therefore the exact checkpoint keys/shapes it had.
+        self.age_input_dim = 1 if _d2_age_feature_enabled(config) else 0
+        input_dim = config.state_dim + self.age_input_dim
+
         # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
         # SMAC 的状态数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
-        self.input_norm = nn.LayerNorm(config.state_dim)
-        
+        self.input_norm = nn.LayerNorm(input_dim)
+
         # 输入投影层：将状态维度映射到隐藏维度
-        self.input_projection = nn.Linear(config.state_dim, config.hidden_size)
+        self.input_projection = nn.Linear(input_dim, config.hidden_size)
         
         # 【关键增强】添加残差块以提升学习能力和梯度流
         self.res_blocks = nn.ModuleList([
@@ -1771,17 +1784,24 @@ class TeamDiscriminator(nn.Module):
             if isinstance(layer, nn.Linear):
                 initialize_weights(layer, gain=1.0)
     
-    def forward(self, state):
+    def forward(self, state, age=None):
         """
         参数:
             state: 全局状态 [batch_size, state_dim]
-            
+            age: 归一化团队年龄 a_Z / k_Z [batch_size]，仅在 D2 age_feature="normalized" 下需要
+
         返回:
             logits: 团队技能logits [batch_size, n_Z]
         """
         # 确保state是float32类型
         state = state.float()
-        
+
+        if self.age_input_dim:
+            if age is None:
+                raise ValueError("TeamDiscriminator requires a normalized team age when age_feature='normalized'")
+            age_tensor = torch.as_tensor(age, dtype=torch.float32, device=state.device).reshape(state.shape[0], 1)
+            state = torch.cat([state, age_tensor], dim=-1)
+
         # 【关键修复】先进行 LayerNorm 归一化，再投影
         x = self.input_norm(state)
         x = self.input_projection(x)
@@ -1804,12 +1824,17 @@ class IndividualDiscriminator(nn.Module):
         super(IndividualDiscriminator, self).__init__()
         self.config = config
         
+        # D2 age feature (ADR 01, plan section 9). `off` keeps the exact input
+        # dimension and therefore the exact checkpoint keys/shapes it had.
+        self.age_input_dim = 1 if _d2_age_feature_enabled(config) else 0
+        input_dim = config.obs_dim + self.age_input_dim
+
         # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
         # 观测的数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
-        self.input_norm = nn.LayerNorm(config.obs_dim)
-        
+        self.input_norm = nn.LayerNorm(input_dim)
+
         # 1. 观测编码器 - 使用残差连接的深度架构
-        self.obs_input_projection = nn.Linear(config.obs_dim, config.hidden_size)
+        self.obs_input_projection = nn.Linear(input_dim, config.hidden_size)
         
         # 【关键增强】为观测编码器添加残差块
         self.obs_res_blocks = nn.ModuleList([
@@ -1855,14 +1880,25 @@ class IndividualDiscriminator(nn.Module):
             if isinstance(layer, nn.Linear):
                 initialize_weights(layer, gain=1.0)
 
-    def forward(self, observation, team_skill):
+    def forward(self, observation, team_skill, age=None):
         # 确保 team_skill 是长整型的索引
         if team_skill.dtype != torch.long:
             team_skill = team_skill.long()
 
         # --- 增强版 Discriminator FiLM 架构实现（使用残差连接）---
+        observation = observation.float()
+        if self.age_input_dim:
+            if age is None:
+                raise ValueError(
+                    "IndividualDiscriminator requires a normalized agent age when age_feature='normalized'"
+                )
+            age_tensor = torch.as_tensor(
+                age, dtype=torch.float32, device=observation.device
+            ).reshape(observation.shape[0], 1)
+            observation = torch.cat([observation, age_tensor], dim=-1)
+
         # 【关键修复】先进行 LayerNorm 归一化，再投影
-        observation = self.input_norm(observation.float())
+        observation = self.input_norm(observation)
         
         # 1. 观测编码 - 使用残差连接
         # 输入投影

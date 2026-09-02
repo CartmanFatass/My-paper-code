@@ -3557,7 +3557,8 @@ class HMASDAgent:
         
         return True
 
-    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills):
+    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills,
+                                  env_id=None):
         """
         将状态-技能对存储到当前rollout的判别器缓存中。
         
@@ -3576,12 +3577,18 @@ class HMASDAgent:
                 compact_np = self._compute_ha_discriminator_compact_tensor(state_tensor, obs_tensor)
                 compact_np = compact_np.squeeze(0).detach().cpu().numpy().astype(np.float32, copy=False)
         
+        d2_decision = (
+            self.env_d2_last_decision.get(env_id) if self._d2_uses_age_feature() else None
+        )
+
         # 存储团队技能数据（使用归一化状态）
         team_experience = {'type': 'team', 'state': normalized_state, 'skill': team_skill}
         if compact_np is not None:
             team_experience['compact'] = compact_np
+        if d2_decision is not None:
+            team_experience['d2_age'] = float(d2_decision['team_age']) / float(max(1, self.d2_k_Z))
         self.discriminator_buffer.push(team_experience)
-        
+
         # 存储每个智能体的个体技能数据（使用归一化观测）
         for i in range(self.config.n_agents):
             ind_experience = {
@@ -3592,9 +3599,14 @@ class HMASDAgent:
             }
             if compact_np is not None:
                 ind_experience['compact'] = compact_np
+            if d2_decision is not None:
+                ind_experience['d2_age'] = (
+                    float(d2_decision['agent_ages'][i]) / float(max(1, self.d2_k_max))
+                )
             self.discriminator_buffer.push(ind_experience)
 
-    def _store_discriminator_data_batch(self, normalized_states, team_skills, normalized_observations, agent_skills):
+    def _store_discriminator_data_batch(self, normalized_states, team_skills, normalized_observations, agent_skills,
+                                        team_ages=None, agent_ages=None):
         """
         批量存储判别器训练数据。输入必须已经归一化，避免与批量内在奖励路径重复归一化。
         """
@@ -3622,6 +3634,16 @@ class HMASDAgent:
                 if compact_tensor is not None:
                     compact_np = compact_tensor.detach().cpu().numpy().astype(np.float32, copy=False)
 
+        store_ages = self._d2_uses_age_feature()
+        team_ages_np = (
+            np.asarray(team_ages, dtype=np.float32).reshape(num_envs)
+            if (store_ages and team_ages is not None) else np.zeros(num_envs, dtype=np.float32)
+        )
+        agent_ages_np = (
+            np.asarray(agent_ages, dtype=np.float32).reshape(num_envs, n_agents)
+            if (store_ages and agent_ages is not None) else np.zeros((num_envs, n_agents), dtype=np.float32)
+        )
+
         experiences = []
         for env_idx in range(num_envs):
             team_experience = {
@@ -3631,6 +3653,8 @@ class HMASDAgent:
             }
             if compact_np is not None:
                 team_experience['compact'] = compact_np[env_idx]
+            if store_ages:
+                team_experience['d2_age'] = float(team_ages_np[env_idx]) / float(max(1, self.d2_k_Z))
             experiences.append(team_experience)
             for agent_idx in range(n_agents):
                 ind_experience = {
@@ -3641,6 +3665,10 @@ class HMASDAgent:
                 }
                 if compact_np is not None:
                     ind_experience['compact'] = compact_np[env_idx]
+                if store_ages:
+                    ind_experience['d2_age'] = (
+                        float(agent_ages_np[env_idx, agent_idx]) / float(max(1, self.d2_k_max))
+                    )
                 experiences.append(ind_experience)
 
         self.discriminator_buffer.extend(experiences)
@@ -3710,7 +3738,9 @@ class HMASDAgent:
         # 根据论文，我们使用 t+1 时刻的状态/观测
         if (not _skip_discriminator_store) and not getattr(self.config, 'disable_discriminator_training', False):
             profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
-            self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
+            self._store_discriminator_data(
+                next_state, team_skill, next_observations, agent_skills, env_id=env_id
+            )
             if self.enable_runtime_profiling:
                 self._add_transition_profile('discriminator_buffer_write', time.perf_counter() - profile_start)
 
@@ -3878,12 +3908,27 @@ class HMASDAgent:
             else:
                 d2_steps = [self.env_d2_last_decision.get(env_id) for env_id in range(num_envs)]
 
+        d2_team_ages = d2_agent_ages = None
+        if self._d2_uses_age_feature() and d2_steps is not None:
+            d2_team_ages = np.asarray(
+                [(s['team_age'] if s is not None else 0) for s in d2_steps], dtype=np.int64
+            )
+            d2_agent_ages = np.asarray(
+                [
+                    (s['agent_ages'] if s is not None else np.zeros(self.config.n_agents, dtype=np.int64))
+                    for s in d2_steps
+                ],
+                dtype=np.int64,
+            )
+
         intrinsic_batch = self._compute_intrinsic_rewards_batch(
             next_states=next_states,
             rewards=rewards,
             next_observations=next_observations,
             team_skills=team_skills,
-            agent_skills=agent_skills_batch
+            agent_skills=agent_skills_batch,
+            team_ages=d2_team_ages,
+            agent_ages=d2_agent_ages,
         )
 
         if not getattr(self.config, 'disable_discriminator_training', False):
@@ -3892,7 +3937,9 @@ class HMASDAgent:
                 intrinsic_batch['normalized_states'],
                 team_skills,
                 intrinsic_batch['normalized_observations'],
-                agent_skills_batch
+                agent_skills_batch,
+                team_ages=d2_team_ages,
+                agent_ages=d2_agent_ages,
             )
             if self.enable_runtime_profiling:
                 self._add_transition_profile('discriminator_buffer_write', time.perf_counter() - profile_start)
@@ -4015,23 +4062,48 @@ class HMASDAgent:
         compact, _, _, _, _ = self.low_level_compact_extractor(states_tensor, joint_observations_tensor)
         return compact
 
-    def _team_discriminator_logits(self, states_tensor, compact_tensor=None):
+    def _d2_uses_age_feature(self):
+        """True when the D2 discriminator age feature is active (plan section 9)."""
+        return self.d2_enabled and self.d2_age_feature == 'normalized'
+
+    def _d2_normalized_team_age(self, team_ages, batch_size):
+        ages = np.asarray(team_ages, dtype=np.float32).reshape(-1)
+        if ages.size != batch_size:
+            ages = np.resize(ages, batch_size)
+        return ages / float(max(1, self.d2_k_Z))
+
+    def _d2_normalized_agent_age(self, agent_ages, batch_size):
+        ages = np.asarray(agent_ages, dtype=np.float32).reshape(-1)
+        if ages.size != batch_size:
+            ages = np.resize(ages, batch_size)
+        return ages / float(max(1, self.d2_k_max))
+
+    def _team_discriminator_logits(self, states_tensor, compact_tensor=None, age=None):
         if self.use_compact_team_discriminator:
             if compact_tensor is None:
                 compact_tensor = self._zero_compact_tensor(states_tensor.shape[0])
             return self.team_discriminator(states_tensor, compact_tensor)
+        if self._d2_uses_age_feature():
+            if age is None:
+                age = np.zeros(states_tensor.shape[0], dtype=np.float32)
+            return self.team_discriminator(states_tensor, age)
         return self.team_discriminator(states_tensor)
 
-    def _individual_discriminator_logits(self, obs_tensor, team_skill_tensor, compact_tensor=None):
+    def _individual_discriminator_logits(self, obs_tensor, team_skill_tensor, compact_tensor=None, age=None):
         if team_skill_tensor.dim() == 0:
             team_skill_tensor = team_skill_tensor.unsqueeze(0)
         if self.use_compact_individual_discriminator:
             if compact_tensor is None:
                 compact_tensor = self._zero_compact_tensor(obs_tensor.shape[0])
             return self.individual_discriminator(obs_tensor, team_skill_tensor, compact_tensor)
+        if self._d2_uses_age_feature():
+            if age is None:
+                age = np.zeros(obs_tensor.shape[0], dtype=np.float32)
+            return self.individual_discriminator(obs_tensor, team_skill_tensor, age)
         return self.individual_discriminator(obs_tensor, team_skill_tensor)
 
-    def _compute_intrinsic_rewards_batch(self, next_states, rewards, next_observations, team_skills, agent_skills):
+    def _compute_intrinsic_rewards_batch(self, next_states, rewards, next_observations, team_skills, agent_skills,
+                                         team_ages=None, agent_ages=None):
         """
         Vectorized discriminator reward computation for one VecEnv step.
 
@@ -4085,7 +4157,19 @@ class HMASDAgent:
 
                 self._sync_cuda_for_profile()
                 team_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
-                team_disc_logits = self._team_discriminator_logits(state_tensor, compact_tensor)
+                team_age_input = None
+                agent_age_input = None
+                if self._d2_uses_age_feature():
+                    team_age_input = self._d2_normalized_team_age(
+                        team_ages if team_ages is not None else np.zeros(num_envs), num_envs
+                    )
+                    agent_age_input = self._d2_normalized_agent_age(
+                        agent_ages if agent_ages is not None else np.zeros((num_envs, n_agents)),
+                        num_envs * n_agents,
+                    )
+                team_disc_logits = self._team_discriminator_logits(
+                    state_tensor, compact_tensor, age=team_age_input
+                )
                 team_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
                     team_disc_logits, "team_disc_logits_batch"
                 )
@@ -4115,6 +4199,7 @@ class HMASDAgent:
                     obs_tensor,
                     team_skill_tensor,
                     flat_compact_tensor,
+                    age=agent_age_input,
                 )
                 agent_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
                     agent_disc_logits, "agent_disc_logits_batch"
@@ -6329,6 +6414,8 @@ class HMASDAgent:
         update_epochs,
         batch_size,
         noise_std,
+        team_ages=None,
+        ind_ages=None,
     ):
         num_team_samples = int(team_states.size(0)) if team_states is not None else 0
         num_ind_samples = int(ind_observations.size(0)) if ind_observations is not None else 0
@@ -6355,7 +6442,10 @@ class HMASDAgent:
                     batch_compacts = team_compacts[batch_indices] if team_compacts is not None else None
                     with torch.no_grad():
                         state_noise = torch.randn_like(batch_states) * noise_std
-                    team_disc_logits = self._team_discriminator_logits(batch_states + state_noise, batch_compacts)
+                    batch_team_ages = team_ages[batch_indices] if team_ages is not None else None
+                    team_disc_logits = self._team_discriminator_logits(
+                        batch_states + state_noise, batch_compacts, age=batch_team_ages
+                    )
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     loss_terms.append(team_disc_loss)
                     update_team = True
@@ -6371,10 +6461,12 @@ class HMASDAgent:
                     batch_compacts = ind_compacts[batch_indices] if ind_compacts is not None else None
                     with torch.no_grad():
                         obs_noise = torch.randn_like(batch_obs) * noise_std
+                    batch_ind_ages = ind_ages[batch_indices] if ind_ages is not None else None
                     agent_disc_logits = self._individual_discriminator_logits(
                         batch_obs + obs_noise,
                         batch_team_skills,
                         batch_compacts,
+                        age=batch_ind_ages,
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     loss_terms.append(agent_disc_loss)
@@ -6417,11 +6509,11 @@ class HMASDAgent:
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         with torch.no_grad():
             team_acc = (
-                (self._team_discriminator_logits(team_states, team_compacts).argmax(-1) == team_skills_tensor).float().mean().item()
+                (self._team_discriminator_logits(team_states, team_compacts, age=team_ages).argmax(-1) == team_skills_tensor).float().mean().item()
                 if team_states is not None else 0.0
             )
             ind_acc = (
-                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts).argmax(-1) == ind_agent_skills).float().mean().item()
+                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts, age=ind_ages).argmax(-1) == ind_agent_skills).float().mean().item()
                 if ind_observations is not None else 0.0
             )
         if self.enable_runtime_profiling:
@@ -6482,6 +6574,7 @@ class HMASDAgent:
         
         # 预处理数据为张量
         team_states, team_skills_tensor, team_compacts = None, None, None
+        team_ages_tensor, ind_ages_tensor = None, None
         if len(team_data) > 0:
             team_states = torch.FloatTensor(np.array([d['state'] for d in team_data])).to(self.device)
             team_skills_tensor = torch.LongTensor([d['skill'] for d in team_data]).to(self.device)
@@ -6491,6 +6584,10 @@ class HMASDAgent:
                         d.get('compact', np.zeros(int(getattr(self.config, 'opt_compact_dim', 1)), dtype=np.float32))
                         for d in team_data
                     ])
+                ).to(self.device)
+            if self._d2_uses_age_feature():
+                team_ages_tensor = torch.FloatTensor(
+                    np.array([float(d.get('d2_age', 0.0)) for d in team_data], dtype=np.float32)
                 ).to(self.device)
 
         ind_observations, ind_team_skills_cond, ind_agent_skills, ind_compacts = None, None, None, None
@@ -6504,6 +6601,10 @@ class HMASDAgent:
                         d.get('compact', np.zeros(int(getattr(self.config, 'opt_compact_dim', 1)), dtype=np.float32))
                         for d in ind_data
                     ])
+                ).to(self.device)
+            if self._d2_uses_age_feature():
+                ind_ages_tensor = torch.FloatTensor(
+                    np.array([float(d.get('d2_age', 0.0)) for d in ind_data], dtype=np.float32)
                 ).to(self.device)
         if self.enable_runtime_profiling:
             self._add_update_profile('disc_pack', time.perf_counter() - profile_start)
@@ -6520,6 +6621,8 @@ class HMASDAgent:
                 update_epochs,
                 getattr(self.config, 'discriminator_batch_size', self.config.batch_size),
                 noise_std,
+                team_ages=team_ages_tensor,
+                ind_ages=ind_ages_tensor,
             )
         
         # 【修复】分别追踪两个判别器的损失
@@ -6549,7 +6652,10 @@ class HMASDAgent:
                     noisy_batch_states = batch_states + state_noise
                     # ================= [噪声注入结束] =================
                     
-                    team_disc_logits = self._team_discriminator_logits(noisy_batch_states, batch_compacts)
+                    batch_team_ages = team_ages_tensor[batch_indices] if team_ages_tensor is not None else None
+                    team_disc_logits = self._team_discriminator_logits(
+                        noisy_batch_states, batch_compacts, age=batch_team_ages
+                    )
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     
                     self.team_discriminator_optimizer.zero_grad()
@@ -6582,10 +6688,12 @@ class HMASDAgent:
                     noisy_batch_obs = batch_obs + obs_noise
                     # ================= [噪声注入结束] =================
                     
+                    batch_ind_ages = ind_ages_tensor[batch_indices] if ind_ages_tensor is not None else None
                     agent_disc_logits = self._individual_discriminator_logits(
                         noisy_batch_obs,
                         batch_team_skills,
                         batch_compacts,
+                        age=batch_ind_ages,
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     
@@ -6610,11 +6718,11 @@ class HMASDAgent:
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         with torch.no_grad():
             team_acc = (
-                (self._team_discriminator_logits(team_states, team_compacts).argmax(-1) == team_skills_tensor).float().mean().item()
+                (self._team_discriminator_logits(team_states, team_compacts, age=team_ages_tensor).argmax(-1) == team_skills_tensor).float().mean().item()
                 if team_states is not None else 0.0
             )
             ind_acc = (
-                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts).argmax(-1) == ind_agent_skills).float().mean().item()
+                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts, age=ind_ages_tensor).argmax(-1) == ind_agent_skills).float().mean().item()
                 if ind_observations is not None else 0.0
             )
         if self.enable_runtime_profiling:
