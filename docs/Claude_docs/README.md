@@ -32,6 +32,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   `docs/research/review_packets/2026-09-01-first-wave-latest-model/`. Dispositions: SCDMP, CBSC,
   FRRIE `CONTINUE`; UCOPE, VNFC `RECAST`. The 2026-09-02 addendum records the owner's calibration
   and what it removes from each direction's next object.
+- `FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` — compliance note: the five first-wave
+  directions audited against evidence spec §11.4/§11.6 after the calibration. Every
+  pre-launch condition quoted with `file:line` and classed ALLOWED / DEMOTED / UNCLEAR; none of
+  the five acknowledges §11 and each is held by a gate §11.4 does not permit (four in code). Part
+  A gives the reviewer's reading, the concrete recast per direction, and the owner's decisions.
 - `CODEX_SCIENCE_WORKFLOW_REVIEW_20260901.md` — the Codex workflow (`AGENTS.md`,
   `.codex/agents`, skills, gates, portfolio) read as a research process: measured output, seven
   failure modes F1–F7, nine recommendations R1–R9, and a 2026-09-02 addendum mapping them onto the
