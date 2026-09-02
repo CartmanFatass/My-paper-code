@@ -55,13 +55,30 @@ _TELEMETRY_WITNESS_NONCE = object()
 class _InitialTelemetryWitness:
     nonce: object
     monitor_identity: int
+    unmeasured_reason: str | None = None
 
 
 def _issue_initial_telemetry_witness(monitor: object) -> _InitialTelemetryWitness:
+    """Arm live telemetry and record, rather than refuse, a failed initial observation.
+
+    Section 11 recast, 2026-09-02 (owner decision 7): telemetry arming is no
+    longer a launch precondition.  The monitor is still armed and the initial
+    observation is still attempted; when it cannot be made, the reason travels
+    with the witness and is published as `resources_unmeasured`.  A monitor that
+    cannot validate at all is a programming error, not a measurement failure,
+    and still raises.
+    """
+
     validator = getattr(monitor, "require_valid_initial_observation", None)
     if not callable(validator):
         raise AttemptError("live telemetry monitor cannot validate its initial observation")
-    validator()
+    try:
+        validator()
+    except Exception as error:
+        return _InitialTelemetryWitness(
+            _TELEMETRY_WITNESS_NONCE, id(monitor),
+            f"initial_observation_unavailable:{type(error).__name__}",
+        )
     return _InitialTelemetryWitness(_TELEMETRY_WITNESS_NONCE, id(monitor))
 
 

@@ -13,6 +13,7 @@ from .orchestration import (
     Attempt, AttemptError, _read_regular_bytes, _require_direct_directory,
     validate_sealed_identity,
 )
+from .resources import partition_failure_reasons
 from .source_identity import compute_source_identity_bytes, validate_source_identity_bytes
 
 
@@ -223,8 +224,10 @@ def load_technical_frontier(attempt: Attempt) -> dict[str, object] | None:
         or resource.get("scientific_polarity") is not None
         or resource.get("ordered_branch") is not None
         or not isinstance(telemetry, dict)
-        or telemetry.get("passed") is not True
-        or telemetry.get("failure_reasons") != []
+        # Section 11 recast, 2026-09-02: a sealed slice may carry recorded
+        # `resources_unmeasured` reasons; only a measured cap exceedance or a
+        # nonzero exit still invalidates the frontier.
+        or partition_failure_reasons(telemetry.get("failure_reasons") or ())[1] != ()
         or telemetry.get("exit_status") != 0
         or value["tail_accounting"].get("resource_exact_bytes") != len(resource_direct)
         or value["tail_accounting"].get("frontier_exact_bytes") != len(direct)

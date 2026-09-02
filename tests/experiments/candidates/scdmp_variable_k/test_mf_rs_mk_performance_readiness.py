@@ -26,6 +26,12 @@ from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_val
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.resources import (
     ResourceTelemetry,
 )
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.preflight import (
+    PreflightError,
+)
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.active_gate import (
+    ActiveInvocationGate,
+)
 
 
 def _canonical(value) -> bytes:
@@ -133,19 +139,50 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
     return root, review_path, receipt, source_bytes
 
 
-def test_missing_direct_gate_refuses_before_admission_root_lease_or_master(tmp_path) -> None:
+def _assert_active_gate_is_free(root: Path) -> None:
+    """The launch now acquires and releases the active gate before admission.
+
+    Before the section 11 recast the receipt refusal happened first, so no gate
+    existed at all.  The gate coordinate is an OS byte-range lease whose file
+    survives release, so the check is that nothing still holds it.
+    """
+
+    gate = ActiveInvocationGate(root, mode="RUN-01")
+    gate.acquire()
+    gate.release()
+
+
+def test_missing_receipt_is_recorded_and_no_longer_refuses_the_launch(tmp_path) -> None:
+    """Section 11 recast (2026-09-02, owner decision 1).
+
+    Before the recast an absent `PERFORMANCE_READY` receipt raised
+    `ResultExecutionDisabled` at `runner.py:606-611`.  Evidence spec §11.4 does
+    not allow that capacity gate to hold a B launch, so the absence is now a
+    recorded field and the launch continues to the mandatory resource
+    admission, which remains a launch condition.
+    """
+
+    recorded = runner_module.performance_assessment_record(
+        performance_readiness=None, performance_assessment=None,
+    )
+    assert recorded["gating"] is False
+    assert recorded["readiness_receipt_status"] is None
+    assert recorded["readiness_receipt_note"] == "not_supplied"
+
     calls = []
     root = tmp_path / contracts.ATTEMPT_ID
-    with pytest.raises(ResultExecutionDisabled, match="performance readiness"):
+    # The admission is the next thing that runs, and it still refuses: the run
+    # stops on the 4 GiB admission, not on the demoted receipt.
+    with pytest.raises(PreflightError):
         run_result(
             result_root=root, admission_receipt=tmp_path / "admit.json",
             confirmation=RUN_CONFIRMATION, argv=("python", "runner.py", "--run-01"),
             cwd=tmp_path, command_runner=lambda *args, **kwargs: calls.append((args, kwargs)),
             performance_readiness=None,
         )
-    assert calls == []
+    assert len(calls) == 1
     assert not root.exists()
-    assert not root.with_name(f".{root.name}.active-invocation.json").exists()
+    _assert_active_gate_is_free(root)
 
 
 def test_readiness_gate_source_is_inside_source_identity_and_byte_change_mismatches(monkeypatch) -> None:
@@ -165,7 +202,15 @@ def test_readiness_gate_source_is_inside_source_identity_and_byte_change_mismatc
         source_identity_module.validate_source_identity_bytes(persisted, _canonical(changed))
 
 
-def test_cli_requires_gate_before_calling_run(tmp_path) -> None:
+def test_cli_no_longer_refuses_a_missing_or_invalid_readiness_receipt(tmp_path) -> None:
+    """Section 11 recast: the CLI records the receipt instead of refusing on it.
+
+    Both invocations below still stop at exit 2, but on the canonical
+    result-root name, which is not a demoted gate.  The pre-recast
+    `parser.error("--run-01 requires --performance-readiness")` and the
+    `invalid --performance-readiness` refusal are gone.
+    """
+
     root = tmp_path / "cli-run"
     completed = subprocess.run([
         sys.executable, "scripts/run_scdmp_mf_rs_mk_b01.py", "--run-01",
@@ -173,7 +218,8 @@ def test_cli_requires_gate_before_calling_run(tmp_path) -> None:
         "--confirm-run-id", RUN_CONFIRMATION,
     ], cwd=Path.cwd(), capture_output=True, text=True)
     assert completed.returncode == 2
-    assert "--performance-readiness" in completed.stderr
+    assert "--result-root name must be" in completed.stderr
+    assert "requires --performance-readiness" not in completed.stderr
     assert completed.stdout == ""
     assert not root.exists()
 
@@ -184,8 +230,10 @@ def test_cli_requires_gate_before_calling_run(tmp_path) -> None:
         "--performance-readiness", str(tmp_path / "missing-ready.json"),
     ], cwd=Path.cwd(), capture_output=True, text=True)
     assert invalid.returncode == 2
+    assert "--result-root name must be" in invalid.stderr
+    assert "invalid --performance-readiness" not in invalid.stderr
     assert invalid.stdout == ""
-    assert "RUN-01" not in invalid.stdout
+    assert not root.exists()
 
 
 def test_cm_clean_review_produces_create_once_deep_valid_receipt(tmp_path, monkeypatch) -> None:
@@ -221,9 +269,17 @@ def test_valid_receipt_reaches_only_the_later_admission_stub_boundary(tmp_path, 
 
 
 @pytest.mark.parametrize("error", (RuntimeError("source-runtime"), NativeBackendError("native-runtime")))
-def test_readiness_internal_exception_is_typed_and_run_refuses_before_effects(
+def test_readiness_internal_exception_is_typed_and_now_recorded_not_refused(
     tmp_path, monkeypatch, error,
 ) -> None:
+    """The receipt validator keeps its typed error; the runner records it.
+
+    Section 11 recast (2026-09-02, owner decision 1): an invalid receipt was a
+    `ResultExecutionDisabled` refusal at `runner.py:606-611`.  It is now a
+    recorded `not_validated:<ExceptionType>` field and the launch continues to
+    the resource admission.
+    """
+
     _root, _review, receipt, _source = _synthetic_a(tmp_path, monkeypatch)
     monkeypatch.setattr(
         readiness, "compute_source_identity_bytes",
@@ -236,18 +292,25 @@ def test_readiness_internal_exception_is_typed_and_run_refuses_before_effects(
         runner_module, "validate_performance_readiness_receipt",
         lambda _path: (_ for _ in ()).throw(error),
     )
+    recorded = runner_module.performance_assessment_record(
+        performance_readiness=receipt, performance_assessment=None,
+    )
+    assert recorded["gating"] is False
+    assert recorded["readiness_receipt_status"] is None
+    assert recorded["readiness_receipt_note"] == f"not_validated:{type(error).__name__}"
+
     run_root = tmp_path / contracts.ATTEMPT_ID
     calls = []
-    with pytest.raises(ResultExecutionDisabled, match="performance readiness"):
+    with pytest.raises(PreflightError):
         run_result(
             result_root=run_root, admission_receipt=tmp_path / "admit.json",
             confirmation=RUN_CONFIRMATION, argv=("python", "runner.py", "--run-01"),
             cwd=tmp_path, command_runner=lambda *args, **kwargs: calls.append((args, kwargs)),
             performance_readiness=receipt,
         )
-    assert calls == []
+    assert len(calls) == 1
     assert not run_root.exists()
-    assert not run_root.with_name(f".{run_root.name}.active-invocation.json").exists()
+    _assert_active_gate_is_free(run_root)
 
 
 @pytest.mark.parametrize(

@@ -13,7 +13,37 @@ import sys
 import stat
 import threading
 import time
-from typing import Callable, Mapping
+from typing import Callable, Final, Mapping, Sequence
+
+
+# Section 11 recast, 2026-09-02.  Evidence-spec §11.4 does not allow telemetry
+# completeness to hold a B launch, and owner decision 7 in
+# docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md resolves
+# the clause §11.4 left open as *downgrade, not annul*: a run whose resource
+# telemetry is missing stays valid and is marked `resources_unmeasured`.  These
+# are the failure reasons that mean "the measurement is missing or failed".
+# Everything else -- a measured cap exceedance, a nonzero result-process exit --
+# still invalidates the attempt exactly as before.
+UNMEASURED_TELEMETRY_REASONS: Final[frozenset[str]] = frozenset({
+    "telemetry_missing",
+    "telemetry_measurement_failed",
+    "telemetry_zero_work",
+})
+
+
+def partition_failure_reasons(
+    reasons: Sequence[str],
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Split telemetry failure reasons into (unmeasured, invalidating)."""
+
+    materialized = tuple(str(reason) for reason in reasons)
+    unmeasured = tuple(
+        reason for reason in materialized if reason in UNMEASURED_TELEMETRY_REASONS
+    )
+    invalidating = tuple(
+        reason for reason in materialized if reason not in UNMEASURED_TELEMETRY_REASONS
+    )
+    return unmeasured, invalidating
 
 
 @dataclass(frozen=True, slots=True)

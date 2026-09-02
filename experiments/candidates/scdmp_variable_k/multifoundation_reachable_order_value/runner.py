@@ -31,7 +31,7 @@ from .frontier import (
 )
 from .resources import (
     ContinuousResourceMonitor, MeasurementIncident, ResourceLimits, ResourceTelemetry,
-    foreground_io_snapshot, tree_bytes,
+    foreground_io_snapshot, partition_failure_reasons, tree_bytes,
 )
 
 
@@ -43,6 +43,101 @@ A_PILOT_PERFORMANCE_DISPOSITION = "PILOT_ONLY"
 A_RECON_PERFORMANCE_DISPOSITION = "REVIEW_REQUIRED"
 RUN_01_PERFORMANCE_DISPOSITION = "REPAIR_REQUIRED"
 RUN_CONFIRMATION = NAMED_RUN_ID
+
+# Section 11 recast, 2026-09-02.  Provenance:
+# docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md A.4
+# decisions 1 and 7; docs/research/portfolio/decisions/
+# 2026-09-02-first-wave-section11-recast.md; the direction record is
+# docs/research/candidates/semigroup_consistent_duration_model_policy/
+# SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md.
+PERFORMANCE_ASSESSMENT_SCHEMA = "SCDMP_MF_RS_MK_B01_PERFORMANCE_ASSESSMENT_V1"
+PERFORMANCE_ASSESSMENT_FILE = "performance-assessment.json"
+SECTION11_RECAST_RECORD = (
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/"
+    "SCDMP_B01_SECTION11_RECAST_INTAKE_20260902.md"
+)
+
+
+def _read_optional_json(path: Path | None) -> tuple[str | None, dict[str, object] | None, str | None]:
+    """Read an optional recorded artifact without ever refusing the launch."""
+
+    if path is None:
+        return None, None, "not_supplied"
+    try:
+        resolved = Path(path).resolve(strict=True)
+        direct = resolved.read_bytes()
+        value = json.loads(direct.decode("utf-8"))
+    except Exception as error:
+        return str(path), None, f"unreadable:{type(error).__name__}"
+    if not isinstance(value, dict):
+        return str(resolved), None, "not_a_json_object"
+    return str(resolved), value, None
+
+
+def performance_assessment_record(
+    *, performance_readiness: str | Path | None, performance_assessment: str | Path | None,
+) -> dict[str, object]:
+    """Record whatever performance evidence exists; never gate on it.
+
+    Before the section 11 recast this evidence was a launch condition:
+    `run_result` raised `ResultExecutionDisabled` unless a create-once
+    `PERFORMANCE_READY` receipt validated (`runner.py:606-611` at commit
+    c5a10ef4c).  Evidence spec §11.4 does not allow a capacity gate of this kind
+    to hold a B launch, so the receipt, the A/RECON assessment and the reason
+    either is absent or invalid are now recorded fields and the run proceeds.
+    """
+
+    receipt_path, receipt_value, receipt_note = _read_optional_json(
+        Path(performance_readiness) if performance_readiness is not None else None
+    )
+    receipt_status: object = None
+    if receipt_value is not None:
+        try:
+            validated = validate_performance_readiness_receipt(receipt_path)
+            receipt_status = validated.get("status")
+        except Exception as error:
+            receipt_status = None
+            receipt_note = f"not_validated:{type(error).__name__}"
+    assessment_path, assessment_value, assessment_note = _read_optional_json(
+        Path(performance_assessment) if performance_assessment is not None else None
+    )
+    disposition: object = None
+    assessment_id: object = None
+    assessment_status: object = None
+    projection: object = None
+    if assessment_value is not None:
+        disposition = assessment_value.get("performance_readiness")
+        assessment_id = assessment_value.get("assessment_id")
+        assessment_status = assessment_value.get("status")
+        raw_projection = assessment_value.get("projection")
+        if isinstance(raw_projection, dict):
+            projection = {
+                key: raw_projection.get(key)
+                for key in (
+                    "conservative_projected_total_seconds", "margin_to_1800_seconds",
+                    "projected_work_seconds", "fixed_overhead_seconds", "formula",
+                )
+            }
+    return {
+        "schema": PERFORMANCE_ASSESSMENT_SCHEMA,
+        "section11_recast_record": SECTION11_RECAST_RECORD,
+        "gating": False,
+        "recorded_only_reason": (
+            "evidence spec 11.4: a performance readiness capacity gate may not hold a B launch"
+        ),
+        "readiness_receipt_path": receipt_path,
+        "readiness_receipt_status": receipt_status,
+        "readiness_receipt_note": receipt_note,
+        "assessment_path": assessment_path,
+        "assessment_id": assessment_id,
+        "assessment_status": assessment_status,
+        "assessment_performance_readiness": disposition,
+        "assessment_projection": projection,
+        "assessment_note": assessment_note,
+        "run_01_performance_disposition": RUN_01_PERFORMANCE_DISPOSITION,
+        "scientific_polarity": None,
+        "ordered_branch": None,
+    }
 
 
 def _validate_new_result_root(result_root: str | Path) -> Path:
@@ -102,7 +197,10 @@ def _load_telemetry(path: Path) -> ResourceTelemetry:
         })
     except (OSError, UnicodeError, json.JSONDecodeError, TypeError) as error:
         raise AttemptError("prior invocation telemetry is unreadable") from error
-    if not result.passed or result.failure_reasons or result.exit_status != 0:
+    # Section 11 recast: a missing or failed measurement is recorded, not fatal;
+    # a measured cap exceedance and a nonzero result-process exit still are.
+    _unmeasured, invalidating = partition_failure_reasons(result.failure_reasons)
+    if invalidating or result.exit_status != 0:
         raise AttemptError("prior invocation telemetry did not pass")
     return result
 
@@ -146,8 +244,18 @@ def _aggregate_telemetry(rows: Sequence[ResourceTelemetry]) -> dict[str, object]
             asdict(incident) for row in values for incident in row.measurement_incidents
         ],
     }
-    reasons = []
-    if any(not row.passed for row in values): reasons.append("invocation_telemetry_failed")
+    reasons: list[str] = []
+    unmeasured: list[str] = []
+    # Section 11 recast, 2026-09-02 (owner decision 7): a per-invocation failure
+    # reason invalidates only when it is a measured cap exceedance or a nonzero
+    # exit.  A missing or failed measurement is recorded as `resources_unmeasured`
+    # and never invalidates or quarantines the attempt.
+    for row in values:
+        row_unmeasured, row_invalidating = partition_failure_reasons(row.failure_reasons)
+        for reason in row_unmeasured:
+            if reason not in unmeasured: unmeasured.append(reason)
+        for reason in row_invalidating:
+            if reason not in reasons: reasons.append(reason)
     if int(aggregate["process_tree_peak_rss_bytes"]) > RESOURCE_CAPS["peak_rss_bytes"]:
         reasons.append("process_tree_peak_rss_exceeded")
     if int(aggregate["scratch_high_water_bytes"]) > RESOURCE_CAPS["scratch_bytes"]:
@@ -155,8 +263,13 @@ def _aggregate_telemetry(rows: Sequence[ResourceTelemetry]) -> dict[str, object]
     if int(aggregate["durable_high_water_bytes"]) > RESOURCE_CAPS["durable_bytes"]:
         reasons.append("durable_output_exceeded")
     if wall > RESOURCE_CAPS["wall_seconds"]: reasons.append("cumulative_wall_time_exceeded")
-    aggregate["passed"] = not reasons
-    aggregate["failure_reasons"] = reasons
+    deduplicated: list[str] = []
+    for reason in reasons:
+        if reason not in deduplicated: deduplicated.append(reason)
+    aggregate["passed"] = not deduplicated
+    aggregate["failure_reasons"] = deduplicated
+    aggregate["resources_unmeasured"] = bool(unmeasured)
+    aggregate["resources_unmeasured_reasons"] = unmeasured
     return aggregate
 
 
@@ -176,6 +289,8 @@ def _artifact_inventory(root: Path, outcome: PipelineOutcome, run_manifest) -> l
         for directory in ("admissions", "invocations")
         for index in range(completed)
     ]
+    if _direct_regular_exists(root / PERFORMANCE_ASSESSMENT_FILE):
+        required.append(root / PERFORMANCE_ASSESSMENT_FILE)
     if _direct_regular_exists(root / "technical-frontier.json"):
         required.append(root / "technical-frontier.json")
     validation_dir = root / "resume-validation"
@@ -278,6 +393,15 @@ def _publish_or_validate(path: Path, value: dict[str, object]) -> None:
         if existing != encoded: raise AttemptError(f"partial publication differs: {path.name}")
     else:
         atomic_create_json(path, value)
+
+
+def _record_performance_assessment(root: Path, record: dict[str, object]) -> Path:
+    """Create-once record of the demoted performance evidence inside the attempt."""
+
+    path = root / PERFORMANCE_ASSESSMENT_FILE
+    if _optional_direct_regular_bytes(path, label="recorded performance assessment") is None:
+        atomic_create_json(path, record)
+    return path
 
 
 def _canonical_bytes(value: dict[str, object]) -> bytes:
@@ -577,6 +701,13 @@ def _publication_values(
                  "scientific_polarity": outcome.branch if outcome.complete_full_chain else None,
                  "complete_full_chain": outcome.complete_full_chain, "work_ledger_file": "work-ledger.json",
                  "ordered_branch_file": "ordered-branch.json", "resource_telemetry": aggregate,
+                 # Section 11 recast, 2026-09-02: recorded fields, never gates.
+                 "resources_unmeasured": bool(aggregate.get("resources_unmeasured")),
+                 "resources_unmeasured_reasons": list(
+                     aggregate.get("resources_unmeasured_reasons") or ()
+                 ),
+                 "performance_assessment_file": PERFORMANCE_ASSESSMENT_FILE,
+                 "section11_recast_record": SECTION11_RECAST_RECORD,
                  "artifact_inventory_scope": "complete_prepublication_scientific_and_engineering_inputs",
                  "artifact_inventory": inventory,
                  "sealed_identity_inventory": list(sealed_identity),
@@ -597,18 +728,21 @@ def run_result(
     monitor_factory: Callable[..., ContinuousResourceMonitor] = ContinuousResourceMonitor,
     stop_after_frontier: str | None = None,
     performance_readiness: str | Path | None = None,
+    performance_assessment: str | Path | None = None,
 ) -> Path:
     root = canonical_result_root(result_root)
     if confirmation != RUN_CONFIRMATION or admission_receipt is None or cwd is None or not argv:
         raise ResultExecutionDisabled(
             f"RUN-01 requires explicit --confirm-run-id {RUN_CONFIRMATION}, receipt, cwd, and argv"
         )
-    if performance_readiness is None:
-        raise ResultExecutionDisabled("RUN-01 performance readiness receipt is required")
-    try:
-        validate_performance_readiness_receipt(performance_readiness)
-    except Exception as error:
-        raise ResultExecutionDisabled("RUN-01 performance readiness receipt is invalid") from error
+    # Section 11 recast, 2026-09-02: the performance-readiness receipt is a
+    # recorded field, not a launch condition.  Whatever evidence exists -- a
+    # valid receipt, an assessment whose disposition is REVIEW_REQUIRED, or
+    # nothing at all -- is recorded and the run proceeds.
+    assessment_record = performance_assessment_record(
+        performance_readiness=performance_readiness,
+        performance_assessment=performance_assessment,
+    )
     scratch = root.with_name(f".{root.name}.scratch-{Path(admission_receipt).stem}")
     monitor: ContinuousResourceMonitor | None = None
     attempt: Attempt | None = None
@@ -642,6 +776,10 @@ def run_result(
             result_root=root, admission_receipt=admission_receipt, admission=admission,
             argv=argv, cwd=cwd, resume=resume, telemetry_witness=telemetry_witness,
         )
+        assessment_record["initial_telemetry_unmeasured_reason"] = (
+            telemetry_witness.unmeasured_reason
+        )
+        _record_performance_assessment(attempt.root, assessment_record)
         prior = _prior_telemetry(attempt)
         frontier_controller = FrontierController(attempt, stop_after=stop_after_frontier)
         torch.set_num_threads(1)
@@ -652,7 +790,8 @@ def run_result(
             )
         except TechnicalSliceStop as stopped:
             telemetry = monitor.finalize(exit_status=0)
-            if not telemetry.passed:
+            _unmeasured, invalidating = partition_failure_reasons(telemetry.failure_reasons)
+            if invalidating or telemetry.exit_status != 0:
                 raise AttemptError("technical slice resource telemetry did not pass")
             slice_plan = _build_technical_slice_tail_plan(
                 attempt=attempt, stopped=stopped, telemetry=telemetry,
@@ -669,7 +808,10 @@ def run_result(
         )
         telemetry = monitor.finalize(exit_status=0)
         aggregate = _aggregate_telemetry((*prior, telemetry))
-        if not telemetry.passed or aggregate.get("passed") is not True:
+        # Section 11 recast: only a *measured* cap exceedance or a nonzero exit
+        # can fail the resource contract.  A missing measurement publishes with
+        # `resources_unmeasured: true` and its reason.
+        if aggregate.get("passed") is not True or telemetry.exit_status != 0:
             raise AttemptError("RUN-01 measured resource contract did not pass")
         prepublication_durable = _tree_bytes(attempt.root)
         probe_ledger, probe_branch, probe_published = _publication_values(
@@ -739,5 +881,7 @@ def run_result(
 
 
 __all__ = ["A_PILOT_PERFORMANCE_DISPOSITION", "A_RECON_PERFORMANCE_DISPOSITION",
-           "RUN_01_PERFORMANCE_DISPOSITION", "RUN_CONFIRMATION", "ResultExecutionDisabled",
+           "PERFORMANCE_ASSESSMENT_FILE", "PERFORMANCE_ASSESSMENT_SCHEMA",
+           "RUN_01_PERFORMANCE_DISPOSITION", "RUN_CONFIRMATION", "SECTION11_RECAST_RECORD",
+           "ResultExecutionDisabled", "performance_assessment_record",
            "preflight_only", "run_assess", "run_result"]
