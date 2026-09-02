@@ -94,6 +94,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `RELAY_CORRIDOR_HOST_REPORT_20260902.md` section 7 — the integration of the HMASD stack on the
   corridor (`envs/relay_corridor/hmasd_driver.py`): what the driver does, the five readings it
   fixed, the actor-head answer, verbatim test results, could-not-verify.
+- `ENV_THROUGHPUT_REFACTOR_PLAN_20260902.md` — engineering plan to speed up the scenario-1 loop:
+  cProfile shares (environment 81%, update 12%, inference 2%), phases P0 to P4 (reference tape
+  and equivalence harness, vectorised channel model, observations from matrices, fingerprint
+  re-freeze and re-timing, update phase), expected effect, integrity policy, two owner decisions.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,
