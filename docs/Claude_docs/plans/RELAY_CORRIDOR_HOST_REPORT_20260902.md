@@ -328,3 +328,163 @@ equal to the table values, or implementation facts a reviewer should know.
 * **Long-`k` sample collapse, lease-stamp structure leakage, low-level argmax
   learning and chattering** — the four learner-side risks ADR 02's "Consequences
   and risks" names — cannot be examined from the host alone and were not.
+
+---
+
+## 7. Integration on the corridor (2026-09-02)
+
+Appended after the review's Parts VI and VII, for the single integration commit
+§VII.4 asks for. Sections 1–6 above are unchanged and describe the host as it
+was accepted; nothing here revises them.
+
+### What the driver does
+
+`envs/relay_corridor/hmasd_driver.py` holds `build_corridor_learner_config` and
+`RelayCorridorHMASDDriver`. It is not imported from `envs/relay_corridor/__init__.py`,
+so the host package stays torch-free and test 9's native-disabled subprocess is
+unaffected.
+
+* **Dimensions come from the host.** `build_corridor_learner_config` takes
+  `obs_dim` and `state_dim` from `RelayCorridorAdapter`, `n_agents = N`,
+  `episode_length = H`, and `action_dim = n_z = K` from
+  `RelayCorridorConfig.low_level_action_dim` / `.n_z`
+  (ADR 02 "Parameters"). At `K = 2`, `Z = 4`, two regions and `N = 3` that is
+  `obs_dim = 19`, `state_dim = 47`. `n_Z` is *not* taken from the host: it stays
+  at the learner default (6), so the team code remains present and inert
+  (ADR 02 "Decision", E5 coupling off).
+* **The loop** mirrors the batched base-route loop of
+  `train_multiproc_config_1.py` and the driver in
+  `tests/flexible_skill_duration_d2_test.py`: `agent.step` on the batched
+  observations and global state → continuous actions `[num_envs, N, K]` →
+  `RelayCorridorAdapter.step(actions, renew_mask=S_t)` → `store_transition_batch`
+  → `agent.update` at the rollout boundary, then `clear_buffers`.
+* **`S_t`.** In `d2` the renew mask is the D2 sampled mask of that step,
+  `step_data['d2_sampled_mask']` (`[num_envs, n_agents]`). In `off` it is
+  all-True exactly at the `off` boundaries — `env_steps % k == 0`, which includes
+  the first step of an episode after a reset — and all-False otherwise. So
+  `RENEW` opens the segment in both modes, and D0 reproduces the `off` renew
+  pattern step for step.
+* **Reward and metrics.** The learner receives the shared mean reward
+  (`info['shared_reward']`, identical to the adapter's returned reward). The
+  per-rollout summary carries the per-agent service indicators `[T, B, N]`, the
+  decoded roles, the renew masks, the `off` boundary masks, the sampled masks in
+  `d2`, the stored env-reward component, `service_rate_per_agent`,
+  `renew_rate_per_agent`, `mean_shared_reward`, the lane episode ids, and (in
+  `d2`) the `get_d2_metrics()` snapshot.
+* **Lanes and CRNs.** `num_envs` lanes start at episode ids `0..num_envs-1` and
+  `advance_episode_ids()` moves every lane on by `num_envs` after each episode,
+  so no keyed corridor stream is ever reused (host invariant 2).
+* **No file under `hmasd/` was changed for this part.** The existing agent
+  consumes the adapter's arrays as they are.
+
+Readings taken where the ADRs are silent (kept so that `off` and D0 boundaries
+stay identical, per the task's rule):
+
+1. **Terminal-state storage and reset.** The stored transition keeps the
+   terminal next state and the next policy input takes the reset observations,
+   while the policy *state* stays the terminal state — the base-route collector
+   convention that the phase 0 driver documents. The corridor host is one
+   batched object, so every lane terminates together at `t = H - 1`.
+2. **Rollout bootstrap.** `last_values` is zero at the rollout boundary. With
+   `rollout_length = H` the last stored step is terminal, so the bootstrap is
+   multiplied by zero either way.
+3. **`off` renew rule.** `env_steps % k == 0` (or a done) is used verbatim; it is
+   what `skill_changed` computes in `off`, so the renew mask and the learner's
+   own boundary notion cannot drift apart.
+4. **D2 metrics snapshot.** `clear_buffers` resets `d2_metrics`, so the summary
+   snapshots `get_d2_metrics()` after `agent.update` (which flushes the open
+   segments and therefore fixes `M`) and before `clear_buffers`.
+5. **Default `k`.** When the caller does not pass `k`, the driver uses `k = H`
+   (one `off` segment per episode). The tests pass `k = 10` explicitly.
+
+### B2 — the open item from review §IV.0 (low-level actor)
+
+**The base-route low-level actor is not continuous-*only*; it is continuous by
+default and dispatches on `config.action_space_type`, and with
+`action_dim = K` it emits a `K`-dimensional continuous action per agent.**
+
+Symbols read: `hmasd/networks.py` `SkillDiscoverer.__init__` builds
+`spaces.Discrete(config.action_dim)` when
+`getattr(config, 'action_space_type', 'continuous') == 'discrete'` and otherwise
+`spaces.Box(low=-config.action_bound, high=config.action_bound, shape=(config.action_dim,))`,
+and passes that space to `R_Actor`, whose `ACTLayer`
+(`hmasd/r_mappo_utils.py:209`) selects `DiagGaussian` (or `TanhDiagGaussian`) for
+a `Box` and `Categorical` for a `Discrete`. `config_1.Config` defaults to
+`action_space_type = 'continuous'`, which the corridor learner configuration
+keeps, so `R_Actor.forward` returns a `[B*N, K]` sample and
+`HMASDAgent._batched_select_action` reshapes it to
+`[num_envs, n_agents, config.action_dim]`; the driver asserts that shape at every
+step. ADR 02's "the low-level policy emits a continuous `K`-vector each step and
+the host takes its `argmax`" is therefore satisfied by configuration, not by a
+code change, and the discrete head stays reachable for other routes. The
+`DiagGaussian` sample is not clipped to `action_bound` (the `Box` bounds are only
+carried by the space object), so the argmax cannot be forced into a tie at the
+bound.
+
+### Test results, verbatim
+
+Preflight immediately before the run (receipt at
+`temp/relay_corridor_hmasd/preflight.json`, an ignored path;
+`--basetemp` is a subdirectory of it and does not wipe it):
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_resource_preflight.py `
+    admit-memory --out C:/Projects/HMASD/temp/relay_corridor_hmasd/preflight.json
+"passed": true, "effective_available_bytes": 16461737984,
+"minimum_available_bytes": 4294967296, "measurement_source": "GlobalMemoryStatusEx"
+```
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q `
+    tests/flexible_skill_duration_d2_test.py tests/relay_corridor_host_test.py `
+    tests/relay_corridor_hmasd_test.py `
+    --basetemp C:/Projects/HMASD/temp/relay_corridor_hmasd/pytest -p no:cacheprovider
+26 passed, 14 warnings in 35.34s
+```
+
+`tests/relay_corridor_hmasd_test.py` (four tests, `K = 2`, `N = 3`, `Z = 4`,
+`H = 40`, `k = 10`, two lanes, one rollout each):
+
+| Test | What it asserts |
+| --- | --- |
+| 1 `off` smoke | learner dimensions come from the host (`n_z = action_dim = K`, `n_agents = N`, `episode_length = H`, `n_Z = 6` untouched); array shapes; roles in `[0, K)`; `RENEW` exactly at `env_steps % k == 0`; the reward the learner stored (`rollout_buffer.reward_env`) equals the adapter's shared mean reward; a `RENEW` step scores zero service; one `agent.update` completes |
+| 2 `d2` at D0 | `c = c_Z = inf`, `k_max = k_Z = k = 10`: the renew masks equal the `off` boundaries and equal the `off` run's own masks; the mask handed to the host is the sampled mask; `gap` and `team_gap` causes are zero; `M = 8`, agent rows `= 24`, `reset = 2`, `team_cap = 6`; one `agent.update` completes |
+| 3 `d2` at finite `c` | `c = 0`: the mask handed to the host equals the agent's sampled mask at every step, is all-True, and is not the `off` boundary mask; `M = 80`; the corridor serves nobody, so the shared reward is identically zero |
+| 4 config | `build_corridor_learner_config` reads the adapter; the new rollout-boundary guard (review VII F1) fires on this route too |
+
+Observed numbers from one driver run (`master_seed = seed = 20260902`, one
+rollout, **not evidence and no claim about learning**):
+
+| Arm | mean shared reward | per-agent service rate | renew fraction | `M` |
+| --- | --- | --- | --- | --- |
+| `off`, `k = 10` | 0.168333 | 0.3625 / 0.4375 / 0.4625 | 0.100 | — |
+| `d2` D0 | 0.168333 | 0.3625 / 0.4375 / 0.4625 | 0.100 | 8 |
+| `d2`, `c = 0` | 0.000000 | 0 / 0 / 0 | 1.000 | 80 |
+
+Test 2 also asserts, one level stronger than ADR 01 invariant 2 requires, that
+the D0 and `off` runs produce identical decoded roles, service indicators and
+rewards on the first rollout (before either has updated). That follows from the
+skills being bit-equal at D0 on the same seed, which the D2 report records; only
+the boundary equality is a claim of the ADR.
+
+### Could not verify
+
+* **No learning claim.** One or two rollouts per arm, one seed, no E-series run.
+  Nothing here says whether the stack learns anything on the corridor.
+* **`off` versus D0 beyond the first rollout.** The trajectory equality above is
+  asserted only before the first update. After an update the two arms optimise
+  different (discounted versus undiscounted) targets and are not expected to
+  agree; that was observed to still agree on a second rollout in one manual run,
+  which is not asserted anywhere and should not be relied on.
+* **Scale.** Everything ran at `N = 3`, `K = 2`, `H = 40`, two lanes, on CPU with
+  `torch.set_num_threads(1)`. The E3/E4 proposal object (`N = 6`, `H = 400`,
+  `Delta` per level) has not been run through the learner, so the corridor's
+  `M`, parameter count, optimizer-step count and norm displacement remain the
+  prospective exposure-line quantities section 6 lists.
+* **Reference comparison.** The driver logs no reference return; nothing here
+  compares the learner against `J_sw`, `J_k` or `J_open`, and no margin is
+  measured.
+* **Checkpointing.** No checkpoint was saved or restored through this route.
+* **The D2 `c` grid** is still unfixed; test 3 uses `c = 0` because it is the
+  extreme that makes the mask non-trivially different from the `off` boundaries,
+  not because it is a registered arm.
