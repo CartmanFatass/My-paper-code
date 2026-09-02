@@ -2,7 +2,7 @@
 
 This is the durable direction-science authority for UCOPE. It records the
 accepted interpretation and provenance of consumed UCOPE objects, the current
-selected B study family, and the bounded Pro conclusions that govern them.
+selected B discriminator, and the bounded Pro conclusions that govern them.
 
 ## Authority
 
@@ -12,8 +12,10 @@ selected B study family, and the bounded Pro conclusions that govern them.
   `UCOPE-NEXT-VARIABLE-K-PAID-PROBE-CONTAINMENT-R01-SCIENCE-20260823-03`
 - Latest consumed science object:
   `UCOPE-CPA-SAME-DATA-BELLMAN-STRUCTURAL-COMPETENCE-R01`
-- Current selected B study family:
-  `UCOPE-B-EXPLORE-MT-XF-BC-COMPETENCE-FIRST-SCOUT-R01`
+- Current selected B discriminator:
+  `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
+- Latest direction-local decision:
+  `CONTINUE` through that one discriminator; acquisition and COUNT/RAW remain locked.
 - Science-card current-byte SHA-256:
   `e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8`
 - Science-card canonical-LF object digest:
@@ -36,7 +38,8 @@ count. The direct-service alternative remains separated by the frozen
 ## Current position
 
 The complete persistent `em:ucope:innovator` round
-`ucope-em-innovator-20260901-03` selects the current science object:
+`ucope-em-innovator-20260901-03` selected the competence-first B1 object that produced the current
+evidence:
 
 ```text
 FINAL_INNOVATOR_DECISION=SELECT_OBJECT
@@ -55,11 +58,12 @@ for competent seed/fold policies. B1 uses three fresh seeds, two group-disjoint 
 episodes per context and seed, `160` tail plus `320` root updates per arm/seed/fold policy, and exact
 enumeration plus paired sampled evaluation at four checkpoints.
 
-COUNT/RAW remains locked unless a FLEX arm passes both `B_COMPETENT` and
-`B_ACQUISITION_POSITIVE` in the same named run and qualifying seeds. BC-only success cannot unlock
-it. Neither consumed object may supply data, initialization, targets, tuning, seed/fold selection,
-or causal controls; both remain provenance only. The exact arms, clocks, parity, gates, result map,
-resource/telemetry/publication tickets, and CM objective are frozen in
+That B1 COUNT/RAW entry gate was not met and its unchanged configuration is retired. Under the
+current conditioning discriminator, paid acquisition remains unevaluated and locked and COUNT/RAW
+remains locked; even a conditioning competence pass cannot open either automatically. Neither
+consumed object, B1 runtime, nor the odd-support audit runtime may supply data, initialization,
+targets, tuning, seed/fold selection, or causal controls. The historical B1 arms, clocks, parity,
+gates, result map, resource/telemetry/publication tickets, and CM objective remain recorded in
 `UCOPE_B_EXPLORE_MT_XF_BC_COMPETENCE_FIRST_SCOUT_R01_INNOVATOR_INTAKE_20260901.md`.
 
 The earlier complete `em:ucope:convergence` response remains final for the consumed structural
@@ -156,6 +160,83 @@ SHA-256
 Detailed provenance and the exact result-to-next-action map are in
 `UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_RESULT_EVIDENCE_20260901.md` and
 `UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_CONVERGENCE_DECISION_INTAKE_20260901.md`.
+
+### Odd-support audit and conditioning continuation — 2026-09-01
+
+Root retains the one-shot odd-support A/RECON artifact as usable evidence while preserving its
+recorded launch-coordination violation. The violation did not change the frozen object, source,
+input, resource admission, execution count, or interpretation boundary. The artifact independently
+reproduced all 72 even-support rows, performed no training, selection, acquisition, tuning, retry,
+or COUNT/RAW work, and observed:
+
+```text
+odd finite and unique policies             72/72
+odd competent policies                     0/72
+odd near-competent policies                0/72
+qualifying final seeds per arm             0/3
+FT-FLEX:FT-BC dominance at 40/80/160/320  2:3,2:2,4:1,3:2
+adjacent stable learner-package separation false
+final MT/FT tail-map equality               6/6
+final MT/FT root-vector distance            0 in 6/6
+all_similar_odd_failure                     false
+route                                       MAP_NOT_UNIQUE_NEW_CONVERGENCE_REQUIRED
+```
+
+The complete persistent `em:ucope:convergence` response for request
+`ucope-em-convergence-20260901-03` decides:
+
+```text
+FINAL_DIRECTION_DECISION=CONTINUE
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+
+NEXT_DISCRIMINATOR_COUNT=1
+NEXT_OBJECT_ID=UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01
+NEXT_EVIDENCE_CLASS=B/EXPLORE
+PAID_ACQUISITION_STATUS=UNEVALUATED_LOCKED
+COUNT_RAW_STATUS=LOCKED_UNTIL_COMPETENCE
+PORTFOLIO_EFFECTS=RESERVED
+```
+
+The smallest supported proposition is that competence failure occurs on both odd training support
+and even held-out support at the exact B1 exposure, so even-only extrapolation is insufficient.
+No target-schedule effect or stable learner-package effect is established. The isolated update-160
+FLEX-over-BC advantage is transient: it is absent at final update 320 and not repeated at an
+adjacent checkpoint. Recasting around generalization is therefore unsupported, while immediate
+parking is premature because the all-arm-similar predicate is false and one orthogonal,
+function-class-preserving conditioning question remains.
+
+The current object compares only `FT-XF-BC-RAW` with `FT-XF-BC-WHITENED` on three new seeds and two
+folds. For each seed/fold/stage it freezes a target-blind deterministic positive-diagonal Cholesky
+transform `G=X^T X/n=LL^T`, `z_w=L^-1 z`, and function-space-matched initialization
+`beta_tilde_0=L^T beta_0`. Both arms retain the exact five-term tail and seven-term root spans,
+target-frozen cross-fitting, data, information, FP32 AdamW settings, update exposure, checkpoint
+schedule, and evaluator. Non-positive-definite `G` stops rather than admitting ridge, truncation,
+or outcome-dependent repair.
+
+A positive requires whitened even-support `B_COMPETENT`, raw noncompetence, and a clear paired
+whitened advantage at both updates 160 and 320. The exact falsifier is whitened noncompetence plus
+no clear paired advantage at both checkpoints. A negative rejects only this intervention's
+sufficiency at the fixed exposure. The strongest surviving alternatives remain objective/target
+misspecification, insufficient span, other optimizer dynamics, fold coupling, seed instability,
+common regression difficulty, and an additional odd-to-even cost.
+
+The claim ceiling is a preliminary two-package, three-seed/two-fold B/EXPLORE observation on this
+finite host. No pure conditioning/optimization/representation attribution, stable superiority,
+seed-population, acquisition, COUNT/RAW, generic UCOPE, variable-`k`, variable-`N`, MARL/UAV,
+transfer, safety, deployment, flight, energy, or real-world QoS conclusion follows. No unchanged B1
+repeat, audit rerun, extra B1/audit score read, budget enlargement, acquisition evaluation, or
+COUNT/RAW work is permitted. Every valid result returns to `em:ucope:convergence` before a new
+direction conclusion.
+
+The canonical response is archived at
+`temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-convergence-20260901-03/RESPONSE.md`,
+SHA-256
+`465b4db967dfa3eb36bce4fb8f6ff4591001219418df47277e6204ec4aebf0ba`.
+The accepted intake and exact prospective contract are
+`UCOPE_INVERTIBLE_CONDITIONING_R01_CONVERGENCE_DECISION_INTAKE_20260901.md` and
+`UCOPE_B_EXPLORE_FT_XF_BC_INVERTIBLE_CONDITIONING_DISCRIMINATOR_R01_PROSPECTIVE_CONTRACT_20260901.md`.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
 
