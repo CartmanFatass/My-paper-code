@@ -471,6 +471,24 @@ class HMASDAgent:
         }
         
         self.use_ha_ctse = bool(getattr(config, 'use_horizon_window', False))
+        # D2 policy-based interruption (ADR 01 revision 3). `off` is the default and
+        # must stay byte-identical to the pre-D2 route: every `d2` branch below is
+        # guarded by `self.d2_enabled`, and nothing is allocated or drawn in `off`.
+        self.policy_interruption_mode = str(getattr(config, 'policy_interruption_mode', 'off'))
+        self.d2_enabled = (self.policy_interruption_mode == 'd2')
+        if self.d2_enabled:
+            self.d2_cost_c = float(getattr(config, 'interruption_cost_c', float('inf')))
+            self.d2_cost_c_Z = float(getattr(config, 'interruption_cost_c_Z', float('inf')))
+            self.d2_k_max = int(getattr(config, 'skill_cap_k_max', getattr(config, 'k', 10)))
+            _team_cap = getattr(config, 'team_cap_k_Z', None)
+            self.d2_k_Z = self.d2_k_max if _team_cap is None else int(_team_cap)
+            self.d2_age_feature = str(getattr(config, 'age_feature', 'off'))
+        else:
+            self.d2_cost_c = float('inf')
+            self.d2_cost_c_Z = float('inf')
+            self.d2_k_max = int(getattr(config, 'k', 10))
+            self.d2_k_Z = self.d2_k_max
+            self.d2_age_feature = 'off'
         self.use_low_level_compact = bool(getattr(config, 'use_compact_in_low_level_actor', False))
         self.use_process_exploration = bool(
             self.use_ha_ctse and getattr(config, 'use_process_exploration', False)
@@ -802,6 +820,15 @@ class HMASDAgent:
         self.env_skill_ages = {}
         self.env_skill_duration_remaining = {}
         self.env_skill_duration_target = {}
+        # D2 per-env bookkeeping (ADR 01). Allocated in both modes as empty dicts so
+        # that `clear_buffers`/`reset_env_state` have a uniform surface, but only
+        # written by the `d2` branches.
+        self.env_team_ages = {}
+        self.env_d2_last_decision = {}
+        self._d2_last_step = None
+        self.d2_open_agent_segments = {}
+        self.d2_open_team_segments = {}
+        self.d2_metrics = self._new_d2_metrics() if self.d2_enabled else None
         self.process_outcome_extractor = (
             SkillProcessOutcomeExtractor(
                 normalize=getattr(config, 'normalize_process_outcomes', True),
@@ -1429,6 +1456,13 @@ class HMASDAgent:
         self.env_skill_ages = {}
         self.env_skill_duration_remaining = {}
         self.env_skill_duration_target = {}
+        if self.d2_enabled:
+            # D2 per-rollout state: ages, replay metadata and open segment
+            # bookkeeping are all rollout-scoped, exactly like the buffer.
+            self.env_team_ages = {}
+            self.env_d2_last_decision = {}
+            self._d2_reset_open_segments()
+            self.d2_metrics = self._new_d2_metrics()
         if self.process_segment_buffer is not None:
             self.process_segment_buffer.reset()
         if self._uses_process_high_level_flow():
@@ -1551,6 +1585,8 @@ class HMASDAgent:
             self.env_timers[env_id] = 0
             main_logger.debug(f"已重置环境 {env_id} 的技能计时器为0")
         self.env_skill_ages[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
+        if self.d2_enabled:
+            self.env_team_ages[env_id] = 0
         self.env_skill_duration_remaining[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
         self.env_skill_duration_target[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
         if self.process_segment_buffer is not None:
@@ -1880,6 +1916,14 @@ class HMASDAgent:
                 dones_batch,
                 deterministic=deterministic,
             )
+        if self.d2_enabled:
+            return self._batched_assign_skills_d2(
+                states_batch,
+                observations_batch,
+                env_steps_batch,
+                dones_batch,
+                deterministic=deterministic,
+            )
 
         num_envs = states_batch.shape[0]
         
@@ -1973,6 +2017,415 @@ class HMASDAgent:
             self.env_agent_skills[i] = new_agent_skills_batch[i]
             self.env_log_probs[i] = new_log_probs_batch[i]
             
+        return new_team_skills_batch, new_agent_skills_batch, new_log_probs_batch
+
+    # ------------------------------------------------------------------
+    # D2 policy-based interruption (ADR 01 revision 3).  Everything below is
+    # reachable only when `policy_interruption_mode == "d2"`.
+    # ------------------------------------------------------------------
+
+    D2_CAUSE_NONE = 0
+    D2_CAUSE_RESET = 1
+    D2_CAUSE_TEAM_GAP = 2
+    D2_CAUSE_TEAM_CAP = 3
+    D2_CAUSE_GAP = 4
+    D2_CAUSE_CAP = 5
+    D2_CAUSE_NAMES = {
+        0: 'none',
+        1: 'reset',
+        2: 'team_gap',
+        3: 'team_cap',
+        4: 'gap',
+        5: 'cap',
+    }
+
+    @staticmethod
+    def _new_d2_metrics():
+        """Fresh D2 metric accumulators (ADR 01 "Metrics to log", plan section 5)."""
+        return {
+            'steps': 0,
+            'decision_steps': 0,
+            'team_decisions': 0,
+            'sampled_total': 0,
+            'forced_total': 0,
+            'S_t_sizes': [],
+            'gap_agent': [],
+            'gap_team': [],
+            'switch_count_by_agent': [],
+            'segment_lengths_agent': [],
+            'segment_lengths_team': [],
+            'cause_counts': {name: 0 for name in ('reset', 'team_gap', 'team_cap', 'gap', 'cap')},
+            'coordinator_inference_seconds': 0.0,
+            'coordinator_inference_calls': 0,
+            'rows_M_agent': 0,
+            'rows_M_team': 0,
+            'rows_M': 0,
+            'optimizer_steps': 0,
+            'param_displacement': 0.0,
+            'target_scale_team': 0.0,
+            'target_scale_agent': 0.0,
+            'target_var_team': 0.0,
+            'target_var_agent': 0.0,
+        }
+
+    def reset_d2_metrics(self):
+        """Reset the D2 metric accumulators (called at rollout boundaries)."""
+        if self.d2_enabled:
+            self.d2_metrics = self._new_d2_metrics()
+
+    def _d2_reset_open_segments(self):
+        """Drop all open D2 segment bookkeeping (rollout boundary)."""
+        self.d2_open_agent_segments = {}
+        self.d2_open_team_segments = {}
+
+    def get_d2_metrics(self):
+        """Return a JSON-friendly summary of the accumulated D2 metrics."""
+        if not self.d2_enabled or self.d2_metrics is None:
+            return None
+        m = self.d2_metrics
+        n_agents = int(self.config.n_agents)
+        switch_by_agent = np.zeros(n_agents, dtype=np.int64)
+        for row in m['switch_count_by_agent']:
+            switch_by_agent += np.asarray(row, dtype=np.int64)
+        gap_agent = np.asarray(m['gap_agent'], dtype=np.float64) if m['gap_agent'] else np.zeros(0)
+        gap_team = np.asarray(m['gap_team'], dtype=np.float64) if m['gap_team'] else np.zeros(0)
+
+        def _hist(values):
+            if values.size == 0:
+                return {'count': 0}
+            return {
+                'count': int(values.size),
+                'mean': float(np.mean(values)),
+                'std': float(np.std(values)),
+                'min': float(np.min(values)),
+                'max': float(np.max(values)),
+                'quantiles': [float(q) for q in np.quantile(values, [0.1, 0.5, 0.9])],
+            }
+
+        steps = max(1, int(m['steps']))
+        return {
+            'steps': int(m['steps']),
+            'decision_steps': int(m['decision_steps']),
+            'team_decisions': int(m['team_decisions']),
+            'sampled_total': int(m['sampled_total']),
+            'forced_total': int(m['forced_total']),
+            'mean_S_t': float(np.mean(m['S_t_sizes'])) if m['S_t_sizes'] else 0.0,
+            'S_t_fraction': (
+                float(np.mean(m['S_t_sizes'])) / float(n_agents) if m['S_t_sizes'] else 0.0
+            ),
+            'switch_rate_by_agent': [float(c) / steps for c in switch_by_agent.tolist()],
+            'switch_count_by_agent': switch_by_agent.tolist(),
+            'gap_agent_hist': _hist(gap_agent),
+            'gap_team_hist': _hist(gap_team),
+            'cause_counts': dict(m['cause_counts']),
+            'coordinator_inference_seconds': float(m['coordinator_inference_seconds']),
+            'coordinator_inference_calls': int(m['coordinator_inference_calls']),
+            'segment_length_agent_mean': (
+                float(np.mean(m['segment_lengths_agent'])) if m['segment_lengths_agent'] else 0.0
+            ),
+            'segment_length_team_mean': (
+                float(np.mean(m['segment_lengths_team'])) if m['segment_lengths_team'] else 0.0
+            ),
+            'rows_M_agent': int(m['rows_M_agent']),
+            'rows_M_team': int(m['rows_M_team']),
+            'rows_M': int(m['rows_M']),
+            'optimizer_steps': int(m['optimizer_steps']),
+            'param_displacement': float(m['param_displacement']),
+            'target_scale_team': float(m['target_scale_team']),
+            'target_scale_agent': float(m['target_scale_agent']),
+            'target_var_team': float(m['target_var_team']),
+            'target_var_agent': float(m['target_var_agent']),
+        }
+
+    def _batched_assign_skills_d2(self, states_batch, observations_batch, env_steps_batch,
+                                  dones_batch, deterministic=False):
+        """
+        D2 rollout logic (plan section 5, ADR 01 "Decision").
+
+        Per env and step: reset/done/invalid forces a team decision with every
+        agent sampled; otherwise one teacher-forced pass over the held joint
+        action gives the gaps `g_Z`, `g_i`, a team decision fires on
+        `g_Z >= c_Z` or `a_Z >= k_Z`, and otherwise agent `i` is sampled on
+        `g_i >= c` or `a_i >= k_max`.  The teacher-forced pass draws no RNG;
+        sampling happens only in `assign_partial_batch` and only for `S_t`.
+
+        Age convention: `a_x` is the number of steps elapsed since the decision
+        that produced the currently held skill, evaluated *before* this step's
+        decision.  A skill decided at step `t` has age 0 while it executes at
+        step `t` and age `k_max` at step `t + k_max`, so `a_i >= k_max`
+        reproduces the `env_steps % k == 0` boundaries of `off` when
+        `k_max = k_Z = k`.
+        """
+        num_envs = states_batch.shape[0]
+        n_agents = self.config.n_agents
+        dones_mask = np.asarray(dones_batch, dtype=np.bool_).reshape(num_envs)
+        env_steps = np.asarray(env_steps_batch, dtype=np.int64).reshape(num_envs)
+
+        has_invalid_team_skill = np.array([
+            self.env_team_skills.get(i, -1) == -1 for i in range(num_envs)
+        ])
+        has_invalid_agent_skills = np.array([
+            np.any(np.asarray(
+                self.env_agent_skills.get(i, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ) == -1)
+            for i in range(num_envs)
+        ])
+        invalid_skills_mask = has_invalid_team_skill | has_invalid_agent_skills
+        # `env_steps == 0` is the first step of an episode; `reset_env_state`
+        # additionally invalidates the held skills, so the two agree on the base
+        # route.  Both are kept so a collector that omits one still resets.
+        reset_mask = (env_steps == 0) | dones_mask | invalid_skills_mask
+
+        for i in range(num_envs):
+            if i not in self.env_skill_ages:
+                self.env_skill_ages[i] = np.zeros(n_agents, dtype=np.int64)
+            if i not in self.env_team_ages:
+                self.env_team_ages[i] = 0
+        agent_ages = np.stack(
+            [np.asarray(self.env_skill_ages[i], dtype=np.int64) for i in range(num_envs)]
+        ).astype(np.int64, copy=False)
+        team_ages = np.array([int(self.env_team_ages[i]) for i in range(num_envs)], dtype=np.int64)
+
+        held_team = np.array(
+            [self.env_team_skills.get(i, -1) for i in range(num_envs)], dtype=np.int64
+        )
+        held_agents = np.array(
+            [np.asarray(
+                self.env_agent_skills.get(i, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ) for i in range(num_envs)],
+            dtype=np.int64,
+        )
+
+        sampled_mask = np.zeros((num_envs, n_agents), dtype=np.bool_)
+        sample_Z_mask = np.zeros(num_envs, dtype=np.bool_)
+        team_decision_mask = np.zeros(num_envs, dtype=np.bool_)
+        agent_cause = np.zeros((num_envs, n_agents), dtype=np.int64)
+        team_cause = np.zeros(num_envs, dtype=np.int64)
+        g_agents = np.full((num_envs, n_agents), np.nan, dtype=np.float64)
+        g_team = np.full(num_envs, np.nan, dtype=np.float64)
+
+        # 1. Reset / done / invalid: team decision, every agent sampled.
+        if np.any(reset_mask):
+            sampled_mask[reset_mask] = True
+            sample_Z_mask[reset_mask] = True
+            team_decision_mask[reset_mask] = True
+            agent_cause[reset_mask] = self.D2_CAUSE_RESET
+            team_cause[reset_mask] = self.D2_CAUSE_RESET
+
+        # 2. Otherwise: the teacher-forced gap pass, then the cap/gap tests.
+        eval_indices = np.where(~reset_mask)[0]
+        if eval_indices.size > 0:
+            inference_start = time.perf_counter()
+            eval_states = torch.as_tensor(
+                self._normalize_states(states_batch[eval_indices], update=False),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            eval_obs = torch.as_tensor(
+                self._normalize_observations(observations_batch[eval_indices], update=False),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            held_Z_t = torch.as_tensor(held_team[eval_indices], dtype=torch.long, device=self.device)
+            held_z_t = torch.as_tensor(held_agents[eval_indices], dtype=torch.long, device=self.device)
+            with torch.no_grad():
+                held_eval = self.skill_coordinator.evaluate_held_batch(
+                    eval_states, eval_obs, held_Z_t, held_z_t
+                )
+                Z_logits = held_eval['Z_logits']
+                z_logits = held_eval['z_logits']
+                gap_Z = (
+                    Z_logits.max(dim=-1).values
+                    - Z_logits.gather(1, held_Z_t.unsqueeze(1)).squeeze(1)
+                ).detach().cpu().numpy()
+                gap_z = (
+                    z_logits.max(dim=-1).values
+                    - z_logits.gather(2, held_z_t.unsqueeze(-1)).squeeze(-1)
+                ).detach().cpu().numpy()
+            elapsed = time.perf_counter() - inference_start
+            self.d2_metrics['coordinator_inference_seconds'] += float(elapsed)
+            self.d2_metrics['coordinator_inference_calls'] += 1
+            self._add_transition_profile('d2_trigger_inference', elapsed)
+
+            g_team[eval_indices] = gap_Z.astype(np.float64, copy=False)
+            g_agents[eval_indices] = gap_z.astype(np.float64, copy=False)
+
+            team_gap_fire = gap_Z >= self.d2_cost_c_Z
+            team_cap_fire = team_ages[eval_indices] >= self.d2_k_Z
+            team_fire = team_gap_fire | team_cap_fire
+            fire_idx = eval_indices[team_fire]
+            if fire_idx.size > 0:
+                sampled_mask[fire_idx] = True
+                sample_Z_mask[fire_idx] = True
+                team_decision_mask[fire_idx] = True
+                causes = np.where(
+                    team_gap_fire[team_fire], self.D2_CAUSE_TEAM_GAP, self.D2_CAUSE_TEAM_CAP
+                )
+                team_cause[fire_idx] = causes
+                agent_cause[fire_idx] = causes[:, None]
+
+            hold_local = ~team_fire
+            hold_idx = eval_indices[hold_local]
+            if hold_idx.size > 0:
+                agent_gap_fire = gap_z[hold_local] >= self.d2_cost_c
+                agent_cap_fire = agent_ages[hold_idx] >= self.d2_k_max
+                fire = agent_gap_fire | agent_cap_fire
+                sampled_mask[hold_idx] = fire
+                cause_here = np.where(
+                    agent_gap_fire, self.D2_CAUSE_GAP, self.D2_CAUSE_CAP
+                )
+                agent_cause[hold_idx] = np.where(fire, cause_here, self.D2_CAUSE_NONE)
+
+        # Cheap D2-only invariant asserts (plan section 5).
+        if not np.isfinite(self.d2_cost_c):
+            assert not np.any(agent_cause == self.D2_CAUSE_GAP), \
+                "D2: c = inf produced a `gap` boundary cause"
+        if not np.isfinite(self.d2_cost_c_Z):
+            assert not np.any(team_cause == self.D2_CAUSE_TEAM_GAP), \
+                "D2: c_Z = inf produced a `team_gap` boundary cause"
+        assert np.all(sampled_mask[team_decision_mask]), \
+            "D2: a team decision did not force every agent into S_t (invariant 7)"
+
+        decision_mask = sampled_mask.any(axis=1)
+
+        new_team_skills_batch = held_team.copy()
+        new_agent_skills_batch = held_agents.copy()
+        new_log_probs_batch = [self.env_log_probs.get(i, {}) for i in range(num_envs)]
+
+        decision_indices = np.where(decision_mask)[0]
+        if decision_indices.size > 0:
+            inference_start = time.perf_counter()
+            # `update=True` on the decision subset only, exactly as `off` does,
+            # so the running normalisers see the same states at D0.
+            assign_states = torch.as_tensor(
+                self._normalize_states(states_batch[decision_indices]),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            assign_obs = torch.as_tensor(
+                self._normalize_observations(observations_batch[decision_indices]),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            with torch.no_grad():
+                assignment = self.skill_coordinator.assign_partial_batch(
+                    assign_states,
+                    assign_obs,
+                    torch.as_tensor(held_team[decision_indices], dtype=torch.long, device=self.device),
+                    torch.as_tensor(held_agents[decision_indices], dtype=torch.long, device=self.device),
+                    torch.as_tensor(sample_Z_mask[decision_indices], dtype=torch.bool, device=self.device),
+                    torch.as_tensor(sampled_mask[decision_indices], dtype=torch.bool, device=self.device),
+                    deterministic=deterministic,
+                )
+                state_values = assignment['state_values']
+                agent_values_tensor = assignment['agent_values']
+                if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+                    state_values = self._denormalize_values(state_values, self.value_norm_coordinator)
+                    agent_value_columns = [
+                        self._denormalize_values(
+                            agent_values_tensor[:, agent_idx:agent_idx + 1],
+                            self.value_norm_coordinator,
+                        ).squeeze(-1)
+                        for agent_idx in range(agent_values_tensor.size(1))
+                    ]
+                    if agent_value_columns:
+                        agent_values_tensor = torch.stack(agent_value_columns, dim=1)
+
+                team_skills_np = assignment['team_skills'].detach().cpu().numpy()
+                agent_skills_np = assignment['agent_skills'].detach().cpu().numpy()
+                team_log_probs_np = assignment['team_log_probs'].detach().cpu().numpy()
+                agent_log_probs_np = assignment['agent_log_probs'].detach().cpu().numpy()
+                order_np = assignment['order'].detach().cpu().numpy()
+                state_values_np = state_values.squeeze(-1).detach().cpu().numpy()
+                agent_values_np = agent_values_tensor.detach().cpu().numpy()
+            elapsed = time.perf_counter() - inference_start
+            self.d2_metrics['coordinator_inference_seconds'] += float(elapsed)
+            self.d2_metrics['coordinator_inference_calls'] += 1
+            self._add_transition_profile('d2_assign_inference', elapsed)
+        else:
+            order_np = np.zeros((0, n_agents), dtype=np.int64)
+
+        order_batch = np.tile(np.arange(n_agents, dtype=np.int64), (num_envs, 1))
+        for local_idx, env_idx in enumerate(decision_indices):
+            env_idx = int(env_idx)
+            new_team_skills_batch[env_idx] = int(team_skills_np[local_idx])
+            new_agent_skills_batch[env_idx] = agent_skills_np[local_idx]
+            order_batch[env_idx] = order_np[local_idx]
+            new_log_probs_batch[env_idx] = {
+                'team_log_prob': float(team_log_probs_np[local_idx]),
+                'agent_log_probs': agent_log_probs_np[local_idx].astype(np.float32, copy=False).tolist(),
+                'state_value': float(state_values_np[local_idx]),
+                'agent_values': agent_values_np[local_idx].astype(np.float32, copy=False).tolist(),
+            }
+            self.env_timers[env_idx] = 0
+
+        for env_idx in np.where(~decision_mask)[0]:
+            self.env_timers[int(env_idx)] = self.env_timers.get(int(env_idx), 0) + 1
+
+        # Ages of the skills that actually execute at this step: 0 where the
+        # skill was just decided, the pre-decision age otherwise.
+        exec_agent_ages = np.where(sampled_mask, 0, agent_ages).astype(np.int64, copy=False)
+        exec_team_ages = np.where(sample_Z_mask, 0, team_ages).astype(np.int64, copy=False)
+
+        switched = (new_agent_skills_batch != held_agents) & sampled_mask & (held_agents >= 0)
+
+        for i in range(num_envs):
+            self.env_team_skills[i] = int(new_team_skills_batch[i])
+            self.env_agent_skills[i] = new_agent_skills_batch[i]
+            self.env_log_probs[i] = new_log_probs_batch[i]
+            self.env_skill_ages[i] = exec_agent_ages[i] + 1
+            self.env_team_ages[i] = int(exec_team_ages[i]) + 1
+
+        self._d2_last_step = {
+            'decision': decision_mask.copy(),
+            'team_decision': team_decision_mask.copy(),
+            'sampled_mask': sampled_mask.copy(),
+            'sample_Z': sample_Z_mask.copy(),
+            'order': order_batch,
+            'agent_ages': exec_agent_ages,
+            'team_ages': exec_team_ages,
+            'agent_cause': agent_cause,
+            'team_cause': team_cause,
+            'g_agents': g_agents,
+            'g_team': g_team,
+        }
+        for env_idx in range(num_envs):
+            self.env_d2_last_decision[env_idx] = {
+                'decision': bool(decision_mask[env_idx]),
+                'team_decision': bool(team_decision_mask[env_idx]),
+                'sampled_mask': sampled_mask[env_idx].copy(),
+                'sample_Z': bool(sample_Z_mask[env_idx]),
+                'order': order_batch[env_idx].copy(),
+                'agent_ages': exec_agent_ages[env_idx].copy(),
+                'team_age': int(exec_team_ages[env_idx]),
+                'agent_cause': agent_cause[env_idx].copy(),
+                'team_cause': int(team_cause[env_idx]),
+            }
+
+        metrics = self.d2_metrics
+        metrics['steps'] += num_envs
+        metrics['decision_steps'] += int(decision_mask.sum())
+        metrics['team_decisions'] += int(team_decision_mask.sum())
+        metrics['sampled_total'] += int(sampled_mask.sum())
+        metrics['forced_total'] += int((~sampled_mask).sum())
+        metrics['S_t_sizes'].extend(sampled_mask.sum(axis=1).astype(np.int64).tolist())
+        metrics['switch_count_by_agent'].append(switched.sum(axis=0).astype(np.int64))
+        finite_agent_gaps = g_agents[np.isfinite(g_agents)]
+        if finite_agent_gaps.size:
+            metrics['gap_agent'].extend(finite_agent_gaps.tolist())
+        finite_team_gaps = g_team[np.isfinite(g_team)]
+        if finite_team_gaps.size:
+            metrics['gap_team'].extend(finite_team_gaps.tolist())
+        # Team-level causes are counted once per env; per-agent causes are counted
+        # per sampled (env, agent) position.
+        metrics['cause_counts']['reset'] += int(np.sum(team_cause == self.D2_CAUSE_RESET))
+        metrics['cause_counts']['team_gap'] += int(np.sum(team_cause == self.D2_CAUSE_TEAM_GAP))
+        metrics['cause_counts']['team_cap'] += int(np.sum(team_cause == self.D2_CAUSE_TEAM_CAP))
+        metrics['cause_counts']['gap'] += int(np.sum(agent_cause == self.D2_CAUSE_GAP))
+        metrics['cause_counts']['cap'] += int(np.sum(agent_cause == self.D2_CAUSE_CAP))
+
         return new_team_skills_batch, new_agent_skills_batch, new_log_probs_batch
 
     def _batched_assign_skills_ha_ctse(self, states_batch, observations_batch, env_steps_batch, dones_batch, deterministic=False):
@@ -2465,6 +2918,10 @@ class HMASDAgent:
                 [self._is_new_high_level_decision(log_probs) for log_probs in log_probs_list],
                 dtype=bool,
             ) | np.asarray(dones_batch, dtype=bool)
+        elif self.d2_enabled:
+            # A D2 boundary is any step where at least one agent is re-decided;
+            # a team decision implies every agent is sampled (invariant 7).
+            skill_changed = np.asarray(self._d2_last_step['decision'], dtype=bool)
         else:
             skill_changed = ((env_steps_batch % self.config.k) == 0) | np.asarray(dones_batch, dtype=bool)
         skill_timers = np.asarray([self.env_timers[i] for i in range(num_envs)], dtype=np.int64)
@@ -2478,6 +2935,17 @@ class HMASDAgent:
             'log_probs': log_probs_list,
             'env_id': np.arange(num_envs, dtype=np.int64),
         }
+        if self.d2_enabled:
+            # Replay metadata and ages for the D2 storage path (plan sections 6, 9).
+            step_data['d2_decision'] = self._d2_last_step['decision']
+            step_data['d2_team_decision'] = self._d2_last_step['team_decision']
+            step_data['d2_sampled_mask'] = self._d2_last_step['sampled_mask']
+            step_data['d2_sample_Z'] = self._d2_last_step['sample_Z']
+            step_data['d2_order'] = self._d2_last_step['order']
+            step_data['d2_agent_ages'] = self._d2_last_step['agent_ages']
+            step_data['d2_team_ages'] = self._d2_last_step['team_ages']
+            step_data['d2_agent_cause'] = self._d2_last_step['agent_cause']
+            step_data['d2_team_cause'] = self._d2_last_step['team_cause']
         # 3. 准备info字典列表
         profile_start = time.perf_counter() if profile_enabled else 0.0
         infos_list = None
