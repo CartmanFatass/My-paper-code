@@ -21,6 +21,7 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 | `toy_studies/` | Small self-contained numeric studies (numpy, fixed seeds) that back a research note. |
 | `plans/` | Follow-up plans written for alignment with the owner: concern registers, candidate schemes, experiment ladders, and the decisions still open. |
 | `artifacts/` | Rendered, published forms of the above and the script that builds them. |
+| `experiments/` | B-class experiment designs and result documents for the duration direction (E0 onward). |
 
 ## Documents
 
@@ -114,6 +115,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   window identifiability, k-step model composition versus direct prediction, role coverage
   probability, single-loss coverage gap, joint-assignment versus composition counts.
 - `RESULTS.md` — the tables the research note quotes, with the study's stated limits.
+
+### experiments/
+
+- `E0_EXPOSURE_PROBE_SET_20260902.md` — launch contract for E0 on scenario 1: question and
+  claim ceiling (B, integrity and exposure only), the two arms (`off`, D0), measurements, budget
+  and stop rule, the frozen probe set recipe for C1/C2, outputs, and why `hmasd_run.py` is not
+  used. The result document is written by the executing session when the runs finish.
 
 ### artifacts/
 
