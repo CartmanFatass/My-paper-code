@@ -69,6 +69,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `ADR_01_D2_POLICY_INTERRUPTION.md` — GPT Pro's ADR for the D2 policy-based interruption rule
   on the HMASD base route, revision 3 stored verbatim (revision 1 at commit `ea20bccb0`, revision
   2 at `7591f23a1`); accepted for implementation by the review's Part III; Codex implements.
+- `D2_IMPLEMENTATION_PLAN_20260902.md` — phase-ordered implementation plan for ADR 01 revision 3
+  handed to the implementer: ground rules, file and function touch points per phase, the nine
+  tests, the report format, and the reviewer's acceptance checklist.
+- `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
+  mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's ADR for the relay-corridor host family (E2–E4),
   revision 2 stored verbatim; status `proposed`, blocked until the owner writes the mechanics.
 
