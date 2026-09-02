@@ -223,3 +223,7 @@ added to E1: discriminator accuracy on the frozen probe set split by age bucket 
 Decision: E1 stays as planned (fixed `k = 10`, D0 versus D1 on scenario 1); the D2 age question is
 E2's. Contract: `../experiments/E1_AGE_INPUT_20260902.md`, launched after the throughput refactor's
 P3.
+
+Advancement plan (2026-09-02): the sequence after E0 and the launch, budget and host decisions are in
+`RESEARCH_ADVANCEMENT_PLAN_20260902.md` section 7 (trigger-based launch for E1 to E4; E2 on the
+homogeneous corridor first; 8-hour cap with two concurrent runs; E1 before refactor P4).

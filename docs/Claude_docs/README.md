@@ -94,6 +94,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `RELAY_CORRIDOR_HOST_REPORT_20260902.md` section 7 — the integration of the HMASD stack on the
   corridor (`envs/relay_corridor/hmasd_driver.py`): what the driver does, the five readings it
   fixed, the actor-head answer, verbatim test results, could-not-verify.
+- `RESEARCH_ADVANCEMENT_PLAN_20260902.md` — the sequence after E0: refactor R0/R1, E1, E2 on the
+  homogeneous corridor then E2b on scenario 1, E3, E4, the C-BENCH gate, E5/E6, UAV transfer; what
+  each step needs from the owner (a prediction, the post-intake decisions), the launch and budget
+  policy, budget estimates, stop conditions, and the four decisions confirmed on 2026-09-02.
 - `ENV_THROUGHPUT_REFACTOR_PLAN_20260902.md` — engineering plan to speed up the scenario-1 loop:
   cProfile shares (environment 81%, update 12%, inference 2%), phases P0 to P4 (reference tape
   and equivalence harness, vectorised channel model, observations from matrices, fingerprint
