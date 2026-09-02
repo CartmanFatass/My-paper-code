@@ -177,3 +177,11 @@ Predictions committed before any run (predict-then-verify):
 - Q5, owner's answer: unclear. Record the question ("after adding age as a discriminator input, does the label-agreement rate between adjacent checkpoints on a frozen probe set rise or fall?") and compare with the E1 result when it exists; both directions and the probe-set-dependence answer stay open.
 
 Implementation ownership from here: Codex implements toys and D2 under the owner's ADR; Claude keeps design, adversarial review, and the bounds in section 7.
+
+ADR round 1 (2026-09-02, later the same day): GPT Pro drafted `ADR_01_D2_POLICY_INTERRUPTION.md`
+and `ADR_02_RELAY_CORRIDOR_HOST.md`; both were reviewed in
+`../reviews/ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` and returned as REVISE. Six further decisions
+were confirmed with the owner (review §4.1): causal-prefix interruption test in canonical order;
+per-agent forced boundary with cap `k_max`; a `Z` switch forces every agent to re-decide; the rule
+uses `gap ≥ c`; the owner writes the corridor mechanics; E4's heavy-tailed law is lognormal with
+`E[D]` matched across laws. These refine decisions A to C above without reopening them.

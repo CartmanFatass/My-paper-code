@@ -285,6 +285,20 @@ count from scenario 1. Defer the numbers to the exposure line; do not repeat the
 Everything else in sections 1 and 2 is a wording or bookkeeping repair Codex can make once these six
 are fixed.
 
+### 4.1 Decisions taken with the owner, 2026-09-02 (confirmed one by one in session)
+
+| # | Decision |
+| --- | --- |
+| 1 | Causal-prefix test: `ℓ_i(z) = log π(z | Z, z^{held}_{<i})` in canonical order, one teacher-forced pass; switch rate by agent index is a required metric |
+| 2 | Per-agent forced boundary: agent `i` re-decides `k_max` steps after its own last switch; `k_max` swept, `k_max = H` included; the `episode_length % k` assertion at `config_1.py:719` is handled inside the mode switch |
+| 3 | A `Z` switch forces `S_t` = all live agents; new invariant: team-segment boundaries are a subset of every agent's segment boundaries |
+| 4 | Interruption rule uses `gap ≥ c`; invariant 3 stands as written; `c` is continuous at 0 |
+| 5 | The owner writes the corridor mechanics (state, action, latent, hazard, reward, probe, cut), GPT Pro may draft; Claude attacks the result |
+| 6 | E4 heavy-tailed law is lognormal, with the three laws matched on `E[D]` |
+
+Next step: the owner re-issues both ADRs with these six decisions and the must-fix items F1.5 to
+F1.8, F2.2 to F2.5 applied; Claude reviews the re-issue; Codex implements only after that.
+
 ## 5. Predict-then-verify prompts for the owner
 
 - P1. Under the causal-prefix test, which agent index switches most often, and why? (Answer to be
