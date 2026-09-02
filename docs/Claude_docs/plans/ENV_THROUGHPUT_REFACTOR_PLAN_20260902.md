@@ -120,3 +120,8 @@ its recorded reason, the repeated timing run, and a report
 `ENV_THROUGHPUT_REFACTOR_REPORT_<date>.md` with the harness numbers, the before/after timings, and
 a could-not-verify list. The reviewer checks the harness, the fixture provenance, and that no
 formula changed.
+
+### 6.1 Decisions taken (2026-09-02)
+
+1. Tolerance-level equivalence accepted (`1e-9` absolute; connections exact) with one recorded re-freeze of the D2 fingerprint.
+2. Scope: P0 to P3 now; P4 decided after the P3 measurement.
