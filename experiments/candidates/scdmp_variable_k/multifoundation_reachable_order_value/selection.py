@@ -7,6 +7,8 @@ import json
 import math
 from typing import Iterable
 
+from .contracts import HELDOUT_NAMESPACE_TOKEN, NAMED_RUN_ID, STUDY_ID
+
 
 TRAINING_SEEDS = (1709, 2903)
 STATE_ROWS = (
@@ -224,8 +226,8 @@ def freeze_development_mapping(cells: Iterable[DevelopmentCell]) -> DevelopmentM
             ))
     payload = {
         "schema": "SCDMP_MF_RS_MK_B01_DEVELOPMENT_MAPPING_V1",
-        "object_id": "SCDMP-MF-RS-MK-ORDER-VALUE-B01",
-        "run_id": "SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01",
+        "object_id": STUDY_ID,
+        "run_id": NAMED_RUN_ID,
         "tie_rule": "maximum_mean_then_smallest_native_action_index",
         "units": [
             {
@@ -248,7 +250,7 @@ def freeze_development_mapping(cells: Iterable[DevelopmentCell]) -> DevelopmentM
     # The namespace is prospectively fixed and therefore cannot depend on any
     # development outcome. The artifact fence, not address derivation, proves
     # that the complete mapping persisted before this namespace was opened.
-    token = "SCDMP-MF-RS-MK-B01/heldout/RUN-01"
+    token = HELDOUT_NAMESPACE_TOKEN
     return DevelopmentMapping(tuple(units), rows, encoded, token)
 
 

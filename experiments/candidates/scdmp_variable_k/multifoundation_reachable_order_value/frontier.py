@@ -5,11 +5,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
 import json
+import os
 from pathlib import Path
 
 from .contracts import STATE_SPECS, TRAINING_SEEDS
-from .orchestration import Attempt, AttemptError
-from .source_identity import validate_source_identity_gate
+from .orchestration import (
+    Attempt, AttemptError, _read_regular_bytes, _require_direct_directory,
+    validate_sealed_identity,
+)
+from .source_identity import compute_source_identity_bytes, validate_source_identity_bytes
 
 
 def _frontier_ids() -> tuple[str, ...]:
@@ -37,7 +41,7 @@ _FRONTIER_KEYS = {
 _RESOURCE_KEYS = {
     "schema", "run_binding", "invocation_index", "source_identity_sha256",
     "frontier_id", "frontier_index", "invocation_telemetry", "tail_accounting",
-    "scientific_polarity", "ordered_branch",
+    "sealed_identity_inventory", "scientific_polarity", "ordered_branch",
 }
 _ACCOUNTING_KEYS = {
     "prepublication_durable_bytes", "resource_exact_bytes", "frontier_exact_bytes",
@@ -56,11 +60,18 @@ def _canonical(value: dict[str, object]) -> bytes:
 
 
 def _source_identity_digest(root: Path) -> str:
-    try:
-        direct = (root / "source-identity.json").read_bytes()
-    except OSError as error:
-        raise AttemptError("technical frontier source identity is unavailable") from error
+    direct = _read_regular_bytes(
+        root / "source-identity.json", label="technical frontier source identity",
+    )
     return hashlib.sha256(direct).hexdigest()
+
+
+def _optional_direct_file(path: Path) -> bytes | None:
+    try:
+        os.lstat(path)
+    except FileNotFoundError:
+        return None
+    return _read_regular_bytes(path, label="technical frontier artifact")
 
 
 def technical_frontier_value(
@@ -116,12 +127,15 @@ def _validate_frontier_artifacts(attempt: Attempt, index: int) -> None:
     binding = attempt.run_manifest.to_dict()
     for row_index, frontier_id in enumerate(TECHNICAL_FRONTIER_IDS):
         candidates = _artifact_path(attempt.root, frontier_id)
-        present = tuple(path for path in candidates if path.is_file())
+        present = tuple(
+            (path, direct) for path in candidates
+            if (direct := _optional_direct_file(path)) is not None
+        )
         if row_index <= index:
             if len(present) != 1:
                 raise AttemptError("technical frontier atomic artifact inventory differs")
             try:
-                direct = present[0].read_bytes()
+                direct = present[0][1]
                 value = json.loads(direct)
             except (OSError, UnicodeError, json.JSONDecodeError) as error:
                 raise AttemptError("technical frontier atomic artifact is unreadable") from error
@@ -132,7 +146,8 @@ def _validate_frontier_artifacts(attempt: Attempt, index: int) -> None:
 
 
 def _exact_indexed_paths(directory: Path, count: int) -> tuple[Path, ...]:
-    observed = tuple(sorted(directory.glob("invocation-*.json"))) if directory.is_dir() else ()
+    _require_direct_directory(directory, label="technical frontier transaction directory")
+    observed = tuple(sorted(directory.glob("invocation-*.json")))
     expected = tuple(directory / f"invocation-{index:06d}.json" for index in range(count))
     if observed != expected:
         raise AttemptError("technical frontier transaction chronology differs")
@@ -141,10 +156,10 @@ def _exact_indexed_paths(directory: Path, count: int) -> tuple[Path, ...]:
 
 def load_technical_frontier(attempt: Attempt) -> dict[str, object] | None:
     path = attempt.root / "technical-frontier.json"
-    if not path.exists():
+    direct = _optional_direct_file(path)
+    if direct is None:
         return None
     try:
-        direct = path.read_bytes()
         value = json.loads(direct)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise AttemptError("technical frontier is unreadable") from error
@@ -173,17 +188,25 @@ def load_technical_frontier(attempt: Attempt) -> dict[str, object] | None:
         )
     ):
         raise AttemptError("technical frontier binding or chronology differs")
-    validate_source_identity_gate(attempt.root / "source-identity.json")
+    source_direct = _read_regular_bytes(
+        attempt.root / "source-identity.json", label="technical frontier source identity",
+    )
+    validate_source_identity_bytes(source_direct, compute_source_identity_bytes())
     _exact_indexed_paths(attempt.root / "admissions", attempt.invocation_index + 1)
     _exact_indexed_paths(attempt.root / "invocations", attempt.invocation_index + 1)
     _exact_indexed_paths(attempt.root / "resources", attempt.invocation_index)
     resource_path = attempt.root / expected_resource
     try:
-        resource_direct = resource_path.read_bytes()
+        resource_direct = _read_regular_bytes(
+            resource_path, label="prior technical frontier resource telemetry",
+        )
         resource = json.loads(resource_direct)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise AttemptError("technical frontier resource telemetry is unreadable") from error
     telemetry = resource.get("invocation_telemetry") if isinstance(resource, dict) else None
+    sealed_inventory = resource.get("sealed_identity_inventory") if isinstance(resource, dict) else None
+    current_inventory = list(validate_sealed_identity(attempt))
+    expected_sealed_rows = 5 + completed + 1
     if (
         not isinstance(resource, dict) or set(resource) != _RESOURCE_KEYS
         or resource_direct != _canonical(resource)
@@ -194,6 +217,9 @@ def load_technical_frontier(attempt: Attempt) -> dict[str, object] | None:
         or resource.get("frontier_id") != frontier_id
         or resource.get("frontier_index") != index
         or resource.get("tail_accounting") != value["tail_accounting"]
+        or not isinstance(sealed_inventory, list)
+        or len(sealed_inventory) != expected_sealed_rows
+        or sealed_inventory != current_inventory[:expected_sealed_rows]
         or resource.get("scientific_polarity") is not None
         or resource.get("ordered_branch") is not None
         or not isinstance(telemetry, dict)

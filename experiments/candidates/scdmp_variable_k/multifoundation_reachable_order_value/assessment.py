@@ -42,8 +42,8 @@ from .workload import (
 )
 
 
-ASSESS_SCHEMA = "SCDMP_MF_RS_MK_B01_A_RECON_V1"
-ASSESS_ID = "SCDMP-MF-RS-MK-B01-A-RECON"
+ASSESS_SCHEMA = "SCDMP_MF_RS_MK_B01_A_R2_V1"
+ASSESS_ID = "SCDMP-MF-RS-MK-ORDER-VALUE-B01-A-R2"
 ASSESS_COUNTS = {
     "training_updates": 1,
     "optimizer_steps": 12,

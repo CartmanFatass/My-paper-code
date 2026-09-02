@@ -7,30 +7,38 @@ at import time.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import base64
+import hashlib
 import json
 import math
 import os
 from pathlib import Path
 import secrets
 import shutil
+import stat
 import tempfile
 from typing import Callable, Mapping, Sequence
 
 import torch
 from torch import Tensor
 
-from .contracts import Q_COUNTER_ADDRESS, RunManifest, WORKLOADS, build_run_manifest
+from .contracts import (
+    ATTEMPT_ID, NAMED_RUN_ID, Q_COUNTER_ADDRESS, QUARANTINED_NAMED_RUN_ID,
+    SCIENCE_CARD_REVISION, STUDY_ID, Manifest, RunManifest, WORKLOADS, build_run_manifest,
+)
 from .foundation import FoundationActorCritic, materialize_foundation
-from .preflight import PreflightReceipt, preflight_run
+from .preflight import PreflightReceipt, validate_preflight_receipt_bytes
 from .rng import CounterRNG
-from .source_identity import validate_source_identity_gate, write_source_identity_gate
+from .source_identity import (
+    compute_source_identity_bytes, validate_source_identity_bytes, write_source_identity_gate,
+)
 from .quarantine import raise_after_quarantine, validate_quarantine_lock
 from .training import ExactAdamW, UpdateReceipt
 
 
-ATTEMPT_SCHEMA = "SCDMP_MF_RS_MK_B01_ATTEMPT_V1"
+ATTEMPT_SCHEMA = f"{ATTEMPT_ID}-MANIFEST-V1"
+ATTEMPT_HEADER_SCHEMA = f"{ATTEMPT_ID}-HEADER-V1"
 WORKER_TOPOLOGY = {
     "foreground_processes": 1,
     "telemetry_threads": 1,
@@ -40,6 +48,21 @@ WORKER_TOPOLOGY = {
     "native_twin_batch_width": 2,
 }
 CHECKPOINT_SCHEMA = "SCDMP_MF_RS_MK_B01_FOUNDATION_CHECKPOINT_V1"
+_TELEMETRY_WITNESS_NONCE = object()
+
+
+@dataclass(frozen=True, slots=True)
+class _InitialTelemetryWitness:
+    nonce: object
+    monitor_identity: int
+
+
+def _issue_initial_telemetry_witness(monitor: object) -> _InitialTelemetryWitness:
+    validator = getattr(monitor, "require_valid_initial_observation", None)
+    if not callable(validator):
+        raise AttemptError("live telemetry monitor cannot validate its initial observation")
+    validator()
+    return _InitialTelemetryWitness(_TELEMETRY_WITNESS_NONCE, id(monitor))
 
 
 @dataclass(frozen=True, slots=True)
@@ -215,6 +238,7 @@ class Attempt:
     invocation_index: int
     frozen_argv: tuple[str, ...]
     frozen_cwd: Path
+    sealed_identity_baseline: tuple[bytes, ...] = ()
 
 
 def _tensor_value(name: str, value: Tensor) -> dict[str, object]:
@@ -459,7 +483,7 @@ def atomic_create_json(
 
 def _read_canonical_json(path: Path) -> dict[str, object]:
     try:
-        encoded = path.read_bytes()
+        encoded = _read_regular_bytes(path, label="canonical attempt artifact")
         value = json.loads(encoded.decode("utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         raise AttemptError(f"attempt artifact is missing or unreadable: {path.name}") from error
@@ -468,12 +492,165 @@ def _read_canonical_json(path: Path) -> dict[str, object]:
     return value
 
 
-def _resolved_root(path: str | Path) -> Path:
-    root = Path(path).resolve(strict=False)
+def _read_regular_bytes(path: Path, *, label: str) -> bytes:
+    """Read one exact opened regular-file object without following its leaf."""
+
+    try:
+        absolute = Path(os.path.abspath(os.fspath(path)))
+        # Reject static parent aliases before opening; the leaf itself is
+        # verified atomically through the opened handle below.
+        current = Path(absolute.anchor)
+        for component in absolute.parts[1:-1]:
+            current /= component
+            observed = os.lstat(current)
+            attributes = int(getattr(observed, "st_file_attributes", 0))
+            if stat.S_ISLNK(observed.st_mode) or attributes & 0x400:
+                raise AttemptError(f"{label} traverses a symlink, junction, or reparse point")
+        return _read_opened_regular_file(absolute, label=label)
+    except AttemptError:
+        raise
+    except OSError as error:
+        raise AttemptError(f"{label} is unavailable") from error
+
+
+def _read_fd_all(descriptor: int) -> bytes:
+    chunks = []
+    while True:
+        chunk = os.read(descriptor, 1024 * 1024)
+        if not chunk:
+            return b"".join(chunks)
+        chunks.append(chunk)
+
+
+def _read_opened_regular_file(path: Path, *, label: str) -> bytes:
+    if os.name != "nt":
+        flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(path, flags)
+        try:
+            if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+                raise AttemptError(f"{label} is not an opened regular file")
+            return _read_fd_all(descriptor)
+        finally:
+            os.close(descriptor)
+
+    import ctypes
+    import msvcrt
+    from ctypes import wintypes
+
+    class _ByHandleFileInformation(ctypes.Structure):
+        _fields_ = [
+            ("dwFileAttributes", wintypes.DWORD),
+            ("ftCreationTime", wintypes.FILETIME),
+            ("ftLastAccessTime", wintypes.FILETIME),
+            ("ftLastWriteTime", wintypes.FILETIME),
+            ("dwVolumeSerialNumber", wintypes.DWORD),
+            ("nFileSizeHigh", wintypes.DWORD),
+            ("nFileSizeLow", wintypes.DWORD),
+            ("nNumberOfLinks", wintypes.DWORD),
+            ("nFileIndexHigh", wintypes.DWORD),
+            ("nFileIndexLow", wintypes.DWORD),
+        ]
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_file = kernel32.CreateFileW
+    create_file.argtypes = [
+        wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, wintypes.LPVOID,
+        wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE,
+    ]
+    create_file.restype = wintypes.HANDLE
+    get_info = kernel32.GetFileInformationByHandle
+    get_info.argtypes = [wintypes.HANDLE, ctypes.POINTER(_ByHandleFileInformation)]
+    get_info.restype = wintypes.BOOL
+    close_handle = kernel32.CloseHandle
+    close_handle.argtypes = [wintypes.HANDLE]
+    close_handle.restype = wintypes.BOOL
+    handle = create_file(
+        str(path), 0x80000000, 0x00000001 | 0x00000002 | 0x00000004,
+        None, 3, 0x00200000, None,
+    )
+    invalid_handle = wintypes.HANDLE(-1).value
+    if handle == invalid_handle:
+        raise OSError(ctypes.get_last_error(), f"CreateFileW failed for {label}")
+    descriptor = None
+    try:
+        information = _ByHandleFileInformation()
+        if not get_info(handle, ctypes.byref(information)):
+            raise OSError(ctypes.get_last_error(), f"GetFileInformationByHandle failed for {label}")
+        if information.dwFileAttributes & (0x00000010 | 0x00000400):
+            raise AttemptError(f"{label} is a directory or reparse point")
+        descriptor = msvcrt.open_osfhandle(
+            int(handle), os.O_RDONLY | getattr(os, "O_BINARY", 0),
+        )
+        handle = None
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise AttemptError(f"{label} is not an opened regular file")
+        return _read_fd_all(descriptor)
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+        elif handle is not None:
+            close_handle(handle)
+
+
+def _require_direct_directory(path: Path, *, label: str) -> None:
+    try:
+        absolute = Path(os.path.abspath(os.fspath(path)))
+        current = Path(absolute.anchor)
+        observed = None
+        for component in absolute.parts[1:]:
+            current /= component
+            observed = os.lstat(current)
+            attributes = int(getattr(observed, "st_file_attributes", 0))
+            if stat.S_ISLNK(observed.st_mode) or attributes & 0x400:
+                raise AttemptError(f"{label} traverses a symlink, junction, or reparse point")
+        if observed is None or not stat.S_ISDIR(observed.st_mode):
+            raise AttemptError(f"{label} is not a direct directory")
+    except AttemptError:
+        raise
+    except OSError as error:
+        raise AttemptError(f"{label} is unavailable") from error
+
+
+def canonical_result_root(path: str | Path) -> Path:
+    """Reject every noncanonical coordinate before any filesystem content probe."""
+
+    unprobed = Path(path)
+    if unprobed.name != ATTEMPT_ID:
+        raise AttemptError(
+            f"result root name must be the canonical evidence attempt identity {ATTEMPT_ID}"
+        )
+    root = Path(os.path.abspath(os.fspath(unprobed)))
+    current = Path(root.anchor)
+    for component in root.parts[1:]:
+        current /= component
+        try:
+            observed = os.lstat(current)
+        except FileNotFoundError:
+            break
+        except OSError as error:
+            raise AttemptError("result coordinate cannot be checked without following aliases") from error
+        attributes = int(getattr(observed, "st_file_attributes", 0))
+        if stat.S_ISLNK(observed.st_mode) or attributes & 0x400:
+            raise AttemptError("result coordinate contains a symlink, junction, or reparse point")
     normalized = str(root).replace("\\", "/").lower()
     if "foundation_conditioned_event_order_value" in normalized or "2026-08-31." in normalized:
         raise AttemptError("old FCEOV coordinates are isolated from B01")
     return root
+
+
+def _attempt_header_value(*, root: Path, argv: tuple[str, ...], cwd: Path) -> dict[str, object]:
+    return {
+        "schema": ATTEMPT_HEADER_SCHEMA,
+        "study_id": STUDY_ID,
+        "named_run_id": NAMED_RUN_ID,
+        "attempt_id": ATTEMPT_ID,
+        "quarantined_named_run_id": QUARANTINED_NAMED_RUN_ID,
+        "resolved_result_root": str(root),
+        "science_card_revision": SCIENCE_CARD_REVISION,
+        "unchanged_scientific_contract": Manifest().to_dict(),
+        "frozen_argv": list(argv),
+        "frozen_cwd": str(cwd),
+    }
 
 
 def _manifest_value(
@@ -485,6 +662,9 @@ def _manifest_value(
 ) -> dict[str, object]:
     return {
         "schema": ATTEMPT_SCHEMA,
+        "study_id": STUDY_ID,
+        "named_run_id": NAMED_RUN_ID,
+        "attempt_id": ATTEMPT_ID,
         "run_identity": run_manifest.static.schema,
         "resolved_result_root": str(root),
         "frozen_argv": list(argv),
@@ -515,7 +695,9 @@ def _invocation_value(
     resume: bool, admission_file: str,
 ) -> dict[str, object]:
     return {
-        "schema": "SCDMP_MF_RS_MK_B01_INVOCATION_V1",
+        "schema": f"{ATTEMPT_ID}-INVOCATION-V1",
+        "named_run_id": NAMED_RUN_ID,
+        "attempt_id": ATTEMPT_ID,
         "invocation_index": index,
         "exact_argv": list(argv),
         "exact_cwd": str(cwd),
@@ -525,95 +707,257 @@ def _invocation_value(
     }
 
 
+def _validate_resume_history(
+    root: Path, *, pending_admission: Path | None = None,
+    frozen_argv: tuple[str, ...] | None = None, frozen_cwd: str | None = None,
+) -> tuple[int, tuple[dict[str, object], ...]]:
+    admissions = root / "admissions"
+    invocations = root / "invocations"
+    _require_direct_directory(admissions, label="admission history directory")
+    _require_direct_directory(invocations, label="invocation history directory")
+    admission_paths = tuple(sorted(admissions.glob("invocation-*.json")))
+    invocation_paths = tuple(sorted(invocations.glob("invocation-*.json")))
+    completed = len(invocation_paths)
+    expected_invocations = tuple(
+        invocations / f"invocation-{index:06d}.json" for index in range(completed)
+    )
+    expected_admissions = tuple(
+        admissions / f"invocation-{index:06d}.json"
+        for index in range(completed + (pending_admission is not None))
+    )
+    if invocation_paths != expected_invocations or admission_paths != expected_admissions:
+        raise AttemptError("admission/invocation history is missing, sparse, or extra")
+    if pending_admission is not None and (
+        not expected_admissions or pending_admission != expected_admissions[-1]
+    ):
+        raise AttemptError("pending admission is not the next contiguous history slot")
+    rows: list[dict[str, object]] = []
+    for index, invocation_path in enumerate(invocation_paths):
+        admission_path = admissions / f"invocation-{index:06d}.json"
+        admission_direct = _read_regular_bytes(admission_path, label="admission history artifact")
+        invocation_direct = _read_regular_bytes(invocation_path, label="invocation history artifact")
+        admission = validate_preflight_receipt_bytes(admission_direct, path=admission_path)
+        invocation = _read_canonical_json(invocation_path)
+        required = {
+            "schema", "named_run_id", "attempt_id", "invocation_index", "exact_argv",
+            "exact_cwd", "resolved_result_root", "technical_resume", "admission_file",
+        }
+        if (
+            set(invocation) != required
+            or invocation.get("schema") != f"{ATTEMPT_ID}-INVOCATION-V1"
+            or invocation.get("named_run_id") != NAMED_RUN_ID
+            or invocation.get("attempt_id") != ATTEMPT_ID
+            or invocation.get("invocation_index") != index
+            or invocation.get("resolved_result_root") != str(root)
+            or invocation.get("technical_resume") is not (index > 0)
+            or invocation.get("admission_file") != f"admissions/invocation-{index:06d}.json"
+            or not isinstance(invocation.get("exact_argv"), list)
+            or not invocation["exact_argv"]
+            or not all(isinstance(item, str) and item for item in invocation["exact_argv"])
+            or not isinstance(invocation.get("exact_cwd"), str)
+            or not invocation["exact_cwd"]
+            or (frozen_cwd is not None and invocation.get("exact_cwd") != frozen_cwd)
+            or (
+                index == 0 and frozen_argv is not None
+                and invocation.get("exact_argv") != list(frozen_argv)
+            )
+            or admission.path != admission_path
+        ):
+            raise AttemptError("persisted invocation history binding differs")
+        rows.append({
+            "invocation_index": index,
+            "admission_relative_path": admission_path.relative_to(root).as_posix(),
+            "invocation_relative_path": invocation_path.relative_to(root).as_posix(),
+            "admission_size_bytes": len(admission_direct),
+            "admission_sha256": hashlib.sha256(admission_direct).hexdigest(),
+            "invocation_size_bytes": len(invocation_direct),
+            "invocation_sha256": hashlib.sha256(invocation_direct).hexdigest(),
+            "available_physical_bytes": admission.available_physical_bytes,
+            "effective_available_bytes": admission.effective_available_bytes,
+            "admission_passed": admission.passed,
+        })
+    if pending_admission is not None:
+        pending_direct = _read_regular_bytes(pending_admission, label="pending admission artifact")
+        pending = validate_preflight_receipt_bytes(pending_direct, path=pending_admission)
+        if pending.path != pending_admission:
+            raise AttemptError("pending admission receipt binding differs")
+    return completed, tuple(rows)
+
+
 def _validate_manifest(root: Path, master: bytes) -> tuple[RunManifest, dict[str, object]]:
     if len(master) != 32:
-        raise AttemptError("persisted RUN-01 master must contain exactly 32 bytes")
+        raise AttemptError("persisted replacement-attempt master must contain exactly 32 bytes")
     run_manifest = build_run_manifest(master)
+    header = _read_canonical_json(root / "attempt-header.json")
     value = _read_canonical_json(root / "manifest.json")
     required = {
-        "schema", "run_identity", "resolved_result_root", "frozen_argv", "frozen_cwd",
-        "run_manifest", "worker_topology",
+        "schema", "study_id", "named_run_id", "attempt_id", "run_identity",
+        "resolved_result_root", "frozen_argv", "frozen_cwd", "run_manifest", "worker_topology",
     }
     if (
-        set(value) != required
+        header != _attempt_header_value(
+            root=root,
+            argv=tuple(header.get("frozen_argv", ())) if isinstance(header.get("frozen_argv"), list) else (),
+            cwd=Path(str(header.get("frozen_cwd", ""))),
+        )
+        or set(value) != required
         or value.get("schema") != ATTEMPT_SCHEMA
+        or value.get("study_id") != STUDY_ID
+        or value.get("named_run_id") != NAMED_RUN_ID
+        or value.get("attempt_id") != ATTEMPT_ID
         or value.get("run_identity") != run_manifest.static.schema
         or value.get("resolved_result_root") != str(root)
+        or header.get("frozen_argv") != value.get("frozen_argv")
+        or header.get("frozen_cwd") != value.get("frozen_cwd")
         or value.get("run_manifest") != run_manifest.to_dict()
         or value.get("worker_topology") != WORKER_TOPOLOGY
         or not isinstance(value.get("frozen_argv"), list)
         or not all(isinstance(item, str) for item in value["frozen_argv"])
         or not isinstance(value.get("frozen_cwd"), str)
     ):
-        raise AttemptError("persisted manifest differs from the sealed RUN-01 identity")
+        raise AttemptError("persisted manifest differs from the sealed replacement-attempt identity")
     if _read_canonical_json(root / "realized-q-audit.json") != _q_audit_value(run_manifest):
         raise AttemptError("persisted realized-q audit differs from the sealed RUN-01 identity")
-    validate_source_identity_gate(root / "source-identity.json")
+    source_identity_path = root / "source-identity.json"
+    source_direct = _read_regular_bytes(source_identity_path, label="sealed source identity")
+    validate_source_identity_bytes(source_direct, compute_source_identity_bytes())
     return run_manifest, value
+
+
+def _observe_sealed_identity(attempt: Attempt) -> tuple[dict[str, object], ...]:
+    """Observe every sealed identity byte without establishing a new baseline."""
+
+    if not isinstance(attempt, Attempt):
+        raise AttemptError("sealed identity validation requires a typed attempt")
+    root = canonical_result_root(attempt.root)
+    try:
+        master = _read_regular_bytes(root / "run-master.bin", label="sealed attempt master")
+    except OSError as error:
+        raise AttemptError("sealed attempt master is unavailable") from error
+    try:
+        observed, _manifest = _validate_manifest(root, master)
+    except AttemptError:
+        raise
+    except Exception as error:
+        raise AttemptError("sealed source or identity validation failed") from error
+    if observed != attempt.run_manifest:
+        raise AttemptError("live attempt binding differs from the sealed identity")
+    next_index, history = _validate_resume_history(
+        root, frozen_argv=tuple(_manifest["frozen_argv"]),
+        frozen_cwd=str(_manifest["frozen_cwd"]),
+    )
+    if next_index != attempt.invocation_index + 1:
+        raise AttemptError("attempt invocation index differs from sealed history")
+    current_transaction = history[attempt.invocation_index]
+    if (
+        current_transaction["available_physical_bytes"]
+        != attempt.admission.available_physical_bytes
+        or current_transaction["effective_available_bytes"]
+        != attempt.admission.effective_available_bytes
+        or current_transaction["admission_passed"] is not attempt.admission.passed
+    ):
+        raise AttemptError("current invocation admission fields differ from the attempt binding")
+    paths = (
+        root / "attempt-header.json",
+        root / "manifest.json",
+        root / "run-master.bin",
+        root / "realized-q-audit.json",
+        root / "source-identity.json",
+    )
+    inventory = []
+    for path in paths:
+        try:
+            direct = _read_regular_bytes(path, label="sealed identity artifact")
+        except OSError as error:
+            raise AttemptError(f"sealed identity artifact is unavailable: {path.name}") from error
+        inventory.append({
+            "relative_path": path.relative_to(root).as_posix(),
+            "direct_size_bytes": len(direct),
+            "sha256": hashlib.sha256(direct).hexdigest(),
+        })
+    master_row = next(row for row in inventory if row["relative_path"] == "run-master.bin")
+    if master_row["sha256"] != attempt.run_manifest.master_commitment:
+        raise AttemptError("sealed master direct commitment differs")
+    inventory.extend({"transaction": row} for row in history)
+    return tuple(inventory)
+
+
+def validate_sealed_identity(attempt: Attempt) -> tuple[dict[str, object], ...]:
+    """Compare the current sealed bytes with the immutable Attempt baseline."""
+
+    if not attempt.sealed_identity_baseline:
+        raise AttemptError("attempt has no established sealed identity baseline")
+    observed = _observe_sealed_identity(attempt)
+    if tuple(_canonical_json(row) for row in observed) != attempt.sealed_identity_baseline:
+        raise AttemptError("sealed identity differs from the immutable attempt baseline")
+    return observed
+
+
+def _seal_attempt_identity(attempt: Attempt) -> Attempt:
+    if attempt.sealed_identity_baseline:
+        raise AttemptError("attempt sealed identity baseline is already established")
+    observed = _observe_sealed_identity(attempt)
+    return replace(
+        attempt,
+        sealed_identity_baseline=tuple(_canonical_json(row) for row in observed),
+    )
 
 
 def _fresh_attempt(
     *,
     root: Path,
     admission_receipt: Path,
-    command_runner: Callable[..., object],
+    admission: PreflightReceipt,
     master_source: Callable[[], bytes],
     argv: tuple[str, ...],
     cwd: Path,
 ) -> Attempt:
     if root.exists():
-        raise AttemptError("existing RUN-01 root requires explicit technical resume")
+        raise AttemptError("existing replacement-attempt root requires explicit technical resume")
     try:
         admission_receipt.resolve(strict=False).relative_to(root)
     except ValueError:
         pass
     else:
         raise AttemptError("fresh admission receipt must be outside the not-yet-created result root")
-    admission = preflight_run(admission_receipt, command_runner=command_runner)
-    source_gate = admission_receipt.with_name(admission_receipt.name + ".source-identity.json")
-    write_source_identity_gate(source_gate)
+    if admission.path.resolve(strict=False) != admission_receipt.resolve(strict=False) or not admission.passed:
+        raise AttemptError("fresh invocation admission binding differs")
+    root.mkdir(parents=True, exist_ok=False)
+    atomic_create_json(root / "attempt-header.json", _attempt_header_value(root=root, argv=argv, cwd=cwd))
+    write_source_identity_gate(root / "source-identity.json")
     master = master_source()
     if not isinstance(master, bytes) or len(master) != 32:
-        raise AttemptError("RUN-01 master source must return exactly 32 fresh bytes")
+        raise AttemptError("replacement-attempt master source must return exactly 32 fresh bytes")
     run_manifest = build_run_manifest(master)
-    staging = root.with_name(f".{root.name}.initializing")
-    if staging.exists():
-        raise AttemptError("incomplete initialization staging root requires quarantine")
-    staging.mkdir(parents=True, exist_ok=False)
     try:
-        atomic_create_bytes(staging / "run-master.bin", master)
+        atomic_create_bytes(root / "run-master.bin", master)
         atomic_create_json(
-            staging / "manifest.json",
+            root / "manifest.json",
             _manifest_value(run_manifest, root=root, argv=argv, cwd=cwd),
         )
-        atomic_create_json(staging / "realized-q-audit.json", _q_audit_value(run_manifest))
-        shutil.move(str(source_gate), staging / "source-identity.json")
-        admissions = staging / "admissions"
+        atomic_create_json(root / "realized-q-audit.json", _q_audit_value(run_manifest))
+        admissions = root / "admissions"
         admissions.mkdir()
         shutil.move(str(admission_receipt), admissions / "invocation-000000.json")
-        atomic_create_json(staging / "invocations" / "invocation-000000.json", _invocation_value(
+        atomic_create_json(root / "invocations" / "invocation-000000.json", _invocation_value(
             index=0, argv=argv, cwd=cwd, root=root, resume=False,
             admission_file="admissions/invocation-000000.json",
         ))
-        if root.exists():
-            raise AttemptError("RUN-01 root appeared during create-once initialization")
-        staging.rename(root)
     except Exception:
-        # A partially initialized staging directory is deliberately retained.
-        # It contains no published result root and is not eligible for resume.
+        # A partially initialized canonical root is retained for fail-closed quarantine.
         raise
-    persisted_master = (root / "run-master.bin").read_bytes()
+    persisted_master = _read_regular_bytes(root / "run-master.bin", label="fresh sealed master")
     observed, value = _validate_manifest(root, persisted_master)
     if observed != run_manifest or tuple(value["frozen_argv"]) != argv:
-        raise AttemptError("fresh RUN-01 identity changed during publication")
-    return Attempt(root, True, observed, admission, 0, argv, cwd)
+        raise AttemptError("fresh replacement-attempt identity changed during sealing")
+    return _seal_attempt_identity(Attempt(root, True, observed, admission, 0, argv, cwd))
 
 
 def _resume_attempt(
     *,
     root: Path,
     admission_receipt: Path,
-    command_runner: Callable[..., object],
+    admission: PreflightReceipt,
     argv: tuple[str, ...],
     cwd: Path,
 ) -> Attempt:
@@ -625,51 +969,65 @@ def _resume_attempt(
         raise AttemptError("quarantined RUN-01 attempt cannot be resumed")
     if validate_quarantine_lock(root, mode="RUN-01"):
         raise AttemptError("quarantine lock forbids RUN-01 resume")
-    master = (root / "run-master.bin").read_bytes()
+    master = _read_regular_bytes(root / "run-master.bin", label="resume sealed master")
     run_manifest, value = _validate_manifest(root, master)
     frozen_cwd = Path(str(value["frozen_cwd"])).resolve(strict=False)
     if cwd != frozen_cwd:
         raise AttemptError("technical resume cwd differs from the frozen RUN-01 cwd")
     admissions = root / "admissions"
-    expected_index = len(tuple(admissions.glob("invocation-*.json")))
+    invocations = root / "invocations"
+    expected_index, _history = _validate_resume_history(
+        root, pending_admission=admission_receipt,
+        frozen_argv=tuple(value["frozen_argv"]), frozen_cwd=str(value["frozen_cwd"]),
+    )
     expected_path = admissions / f"invocation-{expected_index:06d}.json"
     if admission_receipt.resolve(strict=False) != expected_path.resolve(strict=False):
         raise AttemptError("resume admission receipt must use the next create-only invocation slot")
-    admission = preflight_run(expected_path, command_runner=command_runner)
+    if admission.path.resolve(strict=False) != expected_path.resolve(strict=False) or not admission.passed:
+        raise AttemptError("resume admission receipt differs from the next create-only slot")
     atomic_create_json(
-        root / "invocations" / f"invocation-{expected_index:06d}.json",
+        invocations / f"invocation-{expected_index:06d}.json",
         _invocation_value(
             index=expected_index, argv=argv, cwd=cwd, root=root, resume=True,
             admission_file=f"admissions/invocation-{expected_index:06d}.json",
         ),
     )
-    return Attempt(
+    attempt = Attempt(
         root, False, run_manifest, admission, expected_index, tuple(value["frozen_argv"]), frozen_cwd,
     )
+    return _seal_attempt_identity(attempt)
 
 
-def initialize_or_resume_attempt(
+def _initialize_or_resume_attempt(
     *,
     result_root: str | Path,
     admission_receipt: str | Path,
-    command_runner: Callable[..., object],
+    admission: PreflightReceipt,
     master_source: Callable[[], bytes] = lambda: secrets.token_bytes(32),
     argv: Sequence[str],
     cwd: str | Path,
     resume: bool,
+    telemetry_witness: _InitialTelemetryWitness,
 ) -> Attempt:
-    """Admit memory, then create or validate exactly one RUN-01 identity."""
+    """After admission and initial telemetry, create or validate the canonical attempt."""
 
-    root = _resolved_root(result_root)
-    receipt = Path(admission_receipt).resolve(strict=False)
+    root = canonical_result_root(result_root)
+    receipt = Path(os.path.abspath(os.fspath(admission_receipt)))
     materialized_argv = tuple(argv)
     resolved_cwd = Path(cwd).resolve(strict=True)
+    if (
+        not isinstance(telemetry_witness, _InitialTelemetryWitness)
+        or telemetry_witness.nonce is not _TELEMETRY_WITNESS_NONCE
+    ):
+        raise AttemptError("a valid live telemetry observation must precede attempt access")
+    if not isinstance(admission, PreflightReceipt) or not admission.passed:
+        raise AttemptError("a passing invocation-specific admission is required")
     if not materialized_argv or not all(isinstance(item, str) and item for item in materialized_argv):
         raise AttemptError("exact invocation argv must be a nonempty string sequence")
     if resume:
         try:
             return _resume_attempt(
-                root=root, admission_receipt=receipt, command_runner=command_runner,
+                root=root, admission_receipt=receipt, admission=admission,
                 argv=materialized_argv, cwd=resolved_cwd,
             )
         except BaseException as error:
@@ -680,12 +1038,13 @@ def initialize_or_resume_attempt(
                 )
             raise
     return _fresh_attempt(
-        root=root, admission_receipt=receipt, command_runner=command_runner,
+        root=root, admission_receipt=receipt, admission=admission,
         master_source=master_source, argv=materialized_argv, cwd=resolved_cwd,
     )
 
 
 __all__ = [
     "ATTEMPT_SCHEMA", "Attempt", "AttemptError", "WORKER_TOPOLOGY",
-    "atomic_create_bytes", "atomic_create_json", "initialize_or_resume_attempt",
+    "atomic_create_bytes", "atomic_create_json", "canonical_result_root",
+    "validate_sealed_identity",
 ]

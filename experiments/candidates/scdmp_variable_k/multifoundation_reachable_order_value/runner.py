@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+import hashlib
 import json
 import os
 from pathlib import Path
+import stat
 import subprocess
 from typing import Callable, Sequence
 
@@ -14,12 +16,14 @@ import torch
 from .assessment import raise_after_quarantine, run_assess
 from .active_gate import ActiveInvocationGate
 from .quarantine import validate_quarantine_lock
-from .contracts import RESOURCE_CAPS, SCHEMA
+from .contracts import NAMED_RUN_ID, RESOURCE_CAPS
 from .orchestration import (
-    Attempt, AttemptError, atomic_create_bytes, atomic_create_json, initialize_or_resume_attempt,
-    load_checkpoint_training_receipt, load_foundation_checkpoint,
+    Attempt, AttemptError, atomic_create_bytes, atomic_create_json, canonical_result_root,
+    _initialize_or_resume_attempt, _issue_initial_telemetry_witness, _validate_resume_history,
+    _read_regular_bytes, load_checkpoint_training_receipt, load_foundation_checkpoint,
+    validate_sealed_identity,
 )
-from .preflight import PreflightError, PreflightReceipt, admission_receipt_passed, preflight_run
+from .preflight import PreflightError, PreflightReceipt, preflight_run
 from .performance_readiness import validate_performance_readiness_receipt
 from .production import PipelineOutcome, execute_full_pipeline
 from .frontier import (
@@ -38,12 +42,17 @@ class ResultExecutionDisabled(RuntimeError):
 A_PILOT_PERFORMANCE_DISPOSITION = "PILOT_ONLY"
 A_RECON_PERFORMANCE_DISPOSITION = "REVIEW_REQUIRED"
 RUN_01_PERFORMANCE_DISPOSITION = "REPAIR_REQUIRED"
-RUN_CONFIRMATION = SCHEMA
+RUN_CONFIRMATION = NAMED_RUN_ID
 
 
 def _validate_new_result_root(result_root: str | Path) -> Path:
-    root = Path(result_root).resolve(strict=False)
-    if (root / "published-result.json").is_file():
+    try:
+        root = canonical_result_root(result_root)
+    except AttemptError as error:
+        raise PreflightError(str(error)) from error
+    if _optional_direct_regular_bytes(
+        root / "published-result.json", label="published result",
+    ) is not None:
         raise ResultExecutionDisabled("published RUN-01 is immutable")
     normalized = str(root).replace("\\", "/").lower()
     if "foundation_conditioned_event_order_value" in normalized or "2026-08-31." in normalized:
@@ -51,6 +60,24 @@ def _validate_new_result_root(result_root: str | Path) -> Path:
     if root.exists():
         raise PreflightError("prospective B01 result root must not exist during preflight")
     return root
+
+
+def _new_scientific_size_source() -> Callable[[Path, Path], tuple[int, int]]:
+    """Allow precreation zero once, then fail if an observed durable root disappears."""
+
+    durable_observed = False
+
+    def measure(scratch: Path, durable: Path) -> tuple[int, int]:
+        nonlocal durable_observed
+        scratch_bytes = tree_bytes(scratch)
+        if durable.exists():
+            durable_observed = True
+            return scratch_bytes, tree_bytes(durable)
+        if durable_observed:
+            raise OSError("observed canonical durable root disappeared")
+        return scratch_bytes, 0
+
+    return measure
 
 
 def preflight_only(
@@ -63,7 +90,7 @@ def preflight_only(
 
 def _load_telemetry(path: Path) -> ResourceTelemetry:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = json.loads(_read_regular_bytes(path, label="prior resource telemetry"))
         if isinstance(value, dict) and isinstance(value.get("invocation_telemetry"), dict):
             value = value["invocation_telemetry"]
         raw_incidents = value.get("measurement_incidents", [])
@@ -82,7 +109,7 @@ def _load_telemetry(path: Path) -> ResourceTelemetry:
 
 def _prior_telemetry(attempt: Attempt) -> tuple[ResourceTelemetry, ...]:
     directory = attempt.root / "resources"
-    paths = tuple(sorted(directory.glob("invocation-*.json"))) if directory.is_dir() else ()
+    paths = tuple(sorted(directory.glob("invocation-*.json"))) if _direct_directory_exists(directory) else ()
     expected = tuple(directory / f"invocation-{index:06d}.json" for index in range(attempt.invocation_index))
     if paths != expected:
         raise AttemptError("technical resume lacks a contiguous prior telemetry record")
@@ -134,16 +161,9 @@ def _aggregate_telemetry(rows: Sequence[ResourceTelemetry]) -> dict[str, object]
 
 
 def _artifact_inventory(root: Path, outcome: PipelineOutcome, run_manifest) -> list[dict[str, object]]:
-    admission_paths = tuple(sorted((root / "admissions").glob("invocation-*.json")))
-    invocation_paths = tuple(sorted((root / "invocations").glob("invocation-*.json")))
-    expected_transaction_paths = tuple(
-        (root / directory / f"invocation-{index:06d}.json").resolve()
-        for directory in ("admissions", "invocations")
-        for index in range(len(admission_paths))
-    )
-    if tuple(path.resolve() for path in (*admission_paths, *invocation_paths)) != expected_transaction_paths:
-        raise AttemptError("admission/invocation transaction inventory differs")
-    required = [root / "manifest.json", root / "run-master.bin", root / "realized-q-audit.json",
+    completed, _history = _validate_resume_history(root)
+    required = [root / "attempt-header.json", root / "manifest.json", root / "run-master.bin",
+                root / "realized-q-audit.json",
                 root / "source-identity.json",
                 root / "foundation-competence-gate.json"]
     required += [root / "foundations" / str(seed) / "checkpoints" / f"update-{update:03d}.json"
@@ -154,15 +174,17 @@ def _artifact_inventory(root: Path, outcome: PipelineOutcome, run_manifest) -> l
     required += [
         root / directory / f"invocation-{index:06d}.json"
         for directory in ("admissions", "invocations")
-        for index in range(len(admission_paths))
+        for index in range(completed)
     ]
-    if (root / "technical-frontier.json").is_file():
+    if _direct_regular_exists(root / "technical-frontier.json"):
         required.append(root / "technical-frontier.json")
     validation_dir = root / "resume-validation"
-    if validation_dir.is_dir():
+    if _direct_directory_exists(validation_dir):
         required += list(sorted(validation_dir.glob("invocation-*.json")))
     if outcome.branch != "FOUNDATION_COMPETENCE_NOT_ESTABLISHED":
         source_dir = root / "source-states"
+        if not _direct_directory_exists(source_dir):
+            raise AttemptError("source scan artifact directory is missing")
         sources = tuple(source_dir.glob("k*.json")) + tuple(source_dir.glob("*-not-established.json"))
         if not sources: raise AttemptError("source scan artifact inventory is empty")
         required += list(sources)
@@ -176,8 +198,12 @@ def _artifact_inventory(root: Path, outcome: PipelineOutcome, run_manifest) -> l
         required += [root / "heldout" / str(seed) / f"{state}.json"
                      for seed in (1709, 2903)
                      for state in ("k7-early", "k7-middle", "k7-late", "k13-early", "k13-middle", "k13-late")]
-    missing = tuple(path for path in required if not path.is_file())
-    if missing: raise AttemptError(f"required publication artifact is missing: {missing[0].name}")
+    direct_by_path = {}
+    for path in required:
+        try:
+            direct_by_path[path] = _read_regular_bytes(path, label="required publication artifact")
+        except AttemptError as error:
+            raise AttemptError(f"required publication artifact is invalid: {path.name}") from error
     # Cold, streamed validation of every one of the 322 checkpoints.  This
     # validates full run/source binding, parameter tensors, Adam moments and
     # update frontier instead of trusting receipt-only summaries.
@@ -192,15 +218,64 @@ def _artifact_inventory(root: Path, outcome: PipelineOutcome, run_manifest) -> l
             receipt = load_checkpoint_training_receipt(path)
             if (update == 0) != (receipt is None):
                 raise AttemptError("cold checkpoint training receipt frontier differs")
-    unique = tuple(sorted(set(path.resolve() for path in required), key=str))
-    return [{"relative_path": path.relative_to(root).as_posix(), "direct_size_bytes": path.stat().st_size}
-            for path in unique]
+    unique = tuple(sorted(set(required), key=str))
+    result = []
+    for path in unique:
+        direct = direct_by_path[path]
+        result.append({
+            "relative_path": path.relative_to(root).as_posix(),
+            "direct_size_bytes": len(direct),
+            "sha256": hashlib.sha256(direct).hexdigest(),
+        })
+    return result
+
+
+def _direct_regular_exists(path: Path) -> bool:
+    try:
+        observed = os.lstat(path)
+    except FileNotFoundError:
+        return False
+    attributes = int(getattr(observed, "st_file_attributes", 0))
+    if stat.S_ISLNK(observed.st_mode) or attributes & 0x400:
+        raise AttemptError("publication artifact coordinate is a symlink, junction, or reparse point")
+    return stat.S_ISREG(observed.st_mode)
+
+
+def _optional_direct_regular_bytes(path: Path, *, label: str) -> bytes | None:
+    """Return exact opened bytes, or None when the lexical leaf is absent."""
+
+    try:
+        observed = os.lstat(path)
+    except FileNotFoundError:
+        return None
+    attributes = int(getattr(observed, "st_file_attributes", 0))
+    if (
+        stat.S_ISLNK(observed.st_mode)
+        or attributes & 0x400
+        or not stat.S_ISREG(observed.st_mode)
+    ):
+        raise AttemptError(f"{label} is a symlink, junction, reparse point, or nonregular file")
+    return _read_regular_bytes(path, label=label)
+
+
+def _direct_directory_exists(path: Path) -> bool:
+    try:
+        observed = os.lstat(path)
+    except FileNotFoundError:
+        return False
+    attributes = int(getattr(observed, "st_file_attributes", 0))
+    if stat.S_ISLNK(observed.st_mode) or attributes & 0x400:
+        raise AttemptError("publication directory is a symlink, junction, or reparse point")
+    if not stat.S_ISDIR(observed.st_mode):
+        raise AttemptError("publication directory coordinate is not a directory")
+    return True
 
 
 def _publish_or_validate(path: Path, value: dict[str, object]) -> None:
     encoded = (json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n").encode()
-    if path.exists():
-        if path.read_bytes() != encoded: raise AttemptError(f"partial publication differs: {path.name}")
+    existing = _optional_direct_regular_bytes(path, label="partial publication artifact")
+    if existing is not None:
+        if existing != encoded: raise AttemptError(f"partial publication differs: {path.name}")
     else:
         atomic_create_json(path, value)
 
@@ -222,6 +297,7 @@ class PublicationTailPlan:
     predicted_final_durable_bytes: int
     preview_io_read_bytes: int
     preview_io_write_bytes: int
+    sealed_identity_inventory: tuple[dict[str, object], ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -231,6 +307,7 @@ class TechnicalSliceTailPlan:
     frontier_bytes: bytes
     prepublication_durable_bytes: int
     predicted_final_durable_bytes: int
+    sealed_identity_inventory: tuple[dict[str, object], ...]
 
 
 def _validate_tail_capacity(prepublication_bytes: int, new_tail_bytes: int) -> int:
@@ -249,6 +326,7 @@ def _build_technical_slice_tail_plan(
     *, attempt: Attempt, stopped: TechnicalSliceStop, telemetry: ResourceTelemetry,
     prepublication_durable_bytes: int,
 ) -> TechnicalSliceTailPlan:
+    sealed_identity = validate_sealed_identity(attempt)
     relative = f"resources/invocation-{attempt.invocation_index:06d}.json"
     accounting: dict[str, object] = {}
     resource_bytes = b""
@@ -263,6 +341,7 @@ def _build_technical_slice_tail_plan(
             "run_binding": attempt.run_manifest.to_dict(),
             "invocation_index": attempt.invocation_index,
             "source_identity_sha256": frontier["source_identity_sha256"],
+            "sealed_identity_inventory": list(sealed_identity),
             "frontier_id": stopped.frontier_id,
             "frontier_index": stopped.frontier_index,
             "invocation_telemetry": asdict(telemetry),
@@ -293,6 +372,7 @@ def _build_technical_slice_tail_plan(
         raise AttemptError("technical slice tail byte accounting differs")
     return TechnicalSliceTailPlan(
         relative, resource_bytes, frontier_bytes, prepublication_durable_bytes, predicted,
+        sealed_identity,
     )
 
 
@@ -315,7 +395,10 @@ def _stage_and_commit_technical_slice_tail(
         raise AttemptError("technical slice staged tail bytes or scratch cap differ")
     resource_path = attempt.root / plan.resource_relative_path
     frontier_path = attempt.root / "technical-frontier.json"
-    if resource_path.exists() or frontier_path.exists():
+    if (
+        _optional_direct_regular_bytes(resource_path, label="technical resource tail") is not None
+        or _optional_direct_regular_bytes(frontier_path, label="technical frontier tail") is not None
+    ):
         raise AttemptError("technical slice tail coordinate is not create-once")
     if _tree_bytes(attempt.root) != plan.prepublication_durable_bytes:
         raise AttemptError("technical slice prepublication durable bytes changed")
@@ -328,12 +411,16 @@ def _stage_and_commit_technical_slice_tail(
     resource_path.parent.mkdir(parents=True, exist_ok=True)
     os.rename(staged_resource, resource_path)
     if (
-        resource_path.read_bytes() != plan.resource_bytes
+        _optional_direct_regular_bytes(
+            resource_path, label="technical resource committed readback",
+        ) != plan.resource_bytes
         or _tree_bytes(attempt.root) + len(plan.frontier_bytes) != plan.predicted_final_durable_bytes
     ):
         raise AttemptError("technical slice resource or direct durable accounting differs")
     active_gate.assert_owner()
     active_gate.retain_until_process_exit()
+    if validate_sealed_identity(attempt) != plan.sealed_identity_inventory:
+        raise AttemptError("sealed identity changed after technical tail staging")
     # Unique final commit: successful rename is followed only by immediate
     # return.  No cleanup, readback, lease release, or finally action follows.
     final_committer(staged_frontier, frontier_path)
@@ -352,7 +439,10 @@ def _build_tail_plan(
     preview_io_write_bytes: int,
     active_gate_binding: dict[str, object],
 ) -> PublicationTailPlan:
-    ledger, branch, published = _publication_values(attempt, outcome, aggregate, inventory)
+    sealed_identity = validate_sealed_identity(attempt)
+    ledger, branch, published = _publication_values(
+        attempt, outcome, aggregate, inventory, sealed_identity=sealed_identity,
+    )
     for value in (ledger, branch, published):
         value["active_invocation_gate"] = active_gate_binding
     branch["status"] = "PREPARED_NOT_PUBLISHED"
@@ -376,7 +466,10 @@ def _build_tail_plan(
         )
         exact = sum(len(encoded) for _name, encoded in candidate)
         new = sum(
-            len(encoded) for name, encoded in candidate if not (attempt.root / name).exists()
+            len(encoded) for name, encoded in candidate
+            if _optional_direct_regular_bytes(
+                attempt.root / name, label="publication tail planning artifact",
+            ) is None
         )
         next_accounting = {
             "prepublication_durable_bytes": prepublication_durable_bytes,
@@ -395,24 +488,28 @@ def _build_tail_plan(
     else:
         raise AttemptError("publication tail byte-accounting fixed point did not converge")
     predicted = prepublication_durable_bytes + sum(
-        len(encoded) for name, encoded in payloads if not (attempt.root / name).exists()
+        len(encoded) for name, encoded in payloads
+        if _optional_direct_regular_bytes(
+            attempt.root / name, label="publication tail prediction artifact",
+        ) is None
     )
     _validate_tail_capacity(prepublication_durable_bytes, predicted - prepublication_durable_bytes)
     return PublicationTailPlan(
         payloads, prepublication_durable_bytes, sum(len(row[1]) for row in payloads),
         predicted - prepublication_durable_bytes, predicted,
-        preview_io_read_bytes, preview_io_write_bytes,
+        preview_io_read_bytes, preview_io_write_bytes, sealed_identity,
     )
 
 
 def _stage_and_publish_tail(
     plan: PublicationTailPlan,
     *,
-    root: Path,
+    attempt: Attempt,
     scratch: Path,
     writer: Callable[[Path, bytes], None] = atomic_create_bytes,
     final_committer: Callable[[Path, Path], None] = os.rename,
 ) -> Path:
+    root = attempt.root
     staged = scratch / "publication-tail"
     staged.mkdir(exist_ok=False)
     for name, encoded in plan.payloads:
@@ -426,17 +523,22 @@ def _stage_and_publish_tail(
     # fails while no scientific result is published.
     for name, encoded in plan.payloads[:-1]:
         path = root / name
-        if path.exists():
-            if path.read_bytes() != encoded:
+        existing = _optional_direct_regular_bytes(path, label="publication tail existing artifact")
+        if existing is not None:
+            if existing != encoded:
                 raise AttemptError("publication tail existing bytes differ")
         else:
             writer(path, encoded)
-        if path.read_bytes() != encoded:
+        if _optional_direct_regular_bytes(
+            path, label="publication tail committed readback",
+        ) != encoded:
             raise AttemptError("publication tail direct size/bytes mismatch before polarity")
     published_name, published_bytes = plan.payloads[-1]
     published_path = root / published_name
     staged_published_path = staged / published_name.replace("/", "__")
-    if published_path.exists():
+    if _optional_direct_regular_bytes(
+        published_path, label="published result commit coordinate",
+    ) is not None:
         raise AttemptError("published result commit already exists")
     direct_prefinal = _tree_bytes(root)
     if direct_prefinal + len(published_bytes) > RESOURCE_CAPS["durable_bytes"]:
@@ -447,6 +549,8 @@ def _stage_and_publish_tail(
     # staged file has already been fsynced, read back, sized, and accounted.
     # No cleanup (including temp unlink), read, lease mutation, assertion, or
     # other fallible operation may follow a successful rename.
+    if validate_sealed_identity(attempt) != plan.sealed_identity_inventory:
+        raise AttemptError("sealed identity changed after publication tail staging")
     final_committer(staged_published_path, published_path)
     return published_path
 
@@ -454,7 +558,10 @@ def _stage_and_publish_tail(
 def _publication_values(
     attempt: Attempt, outcome: PipelineOutcome, aggregate: dict[str, object],
     inventory: list[dict[str, object]],
+    *, sealed_identity: tuple[dict[str, object], ...] | None = None,
 ):
+    if sealed_identity is None:
+        sealed_identity = validate_sealed_identity(attempt)
     reconciliation = outcome.ledger.reconcile_for_branch(
         branch=outcome.branch, source_states=outcome.source_states, ppo_updates=outcome.ppo_updates,
     )
@@ -472,6 +579,7 @@ def _publication_values(
                  "ordered_branch_file": "ordered-branch.json", "resource_telemetry": aggregate,
                  "artifact_inventory_scope": "complete_prepublication_scientific_and_engineering_inputs",
                  "artifact_inventory": inventory,
+                 "sealed_identity_inventory": list(sealed_identity),
                  "excluded_transaction_tail_artifacts": [
                      "resources/invocation-NNNNNN.json", "work-ledger.json",
                      "ordered-branch.json", "published-result.json",
@@ -490,6 +598,7 @@ def run_result(
     stop_after_frontier: str | None = None,
     performance_readiness: str | Path | None = None,
 ) -> Path:
+    root = canonical_result_root(result_root)
     if confirmation != RUN_CONFIRMATION or admission_receipt is None or cwd is None or not argv:
         raise ResultExecutionDisabled(
             f"RUN-01 requires explicit --confirm-run-id {RUN_CONFIRMATION}, receipt, cwd, and argv"
@@ -500,26 +609,39 @@ def run_result(
         validate_performance_readiness_receipt(performance_readiness)
     except Exception as error:
         raise ResultExecutionDisabled("RUN-01 performance readiness receipt is invalid") from error
-    root = Path(result_root).resolve(strict=False)
     scratch = root.with_name(f".{root.name}.scratch-{Path(admission_receipt).stem}")
-    staging = root.with_name(f".{root.name}.initializing")
-    source_gate = Path(admission_receipt).resolve(strict=False).with_name(
-        Path(admission_receipt).name + ".source-identity.json"
-    )
     monitor: ContinuousResourceMonitor | None = None
     attempt: Attempt | None = None
     telemetry: ResourceTelemetry | None = None
     active_gate = ActiveInvocationGate(root, mode="RUN-01")
     active_gate.acquire()
     try:
+        if resume and (
+            (root / "terminal-no-polarity.json").exists()
+            or validate_quarantine_lock(root, mode="RUN-01")
+        ):
+            raise AttemptError("quarantined replacement attempt cannot be resumed")
+        if resume:
+            next_index, _history = _validate_resume_history(root)
+            expected_receipt = root / "admissions" / f"invocation-{next_index:06d}.json"
+            requested_receipt = Path(os.path.abspath(os.fspath(admission_receipt)))
+            if requested_receipt != expected_receipt:
+                raise AttemptError("resume admission receipt is not the verified next history slot")
         if scratch.exists():
             raise AttemptError("invocation scratch coordinate already exists")
-        attempt = initialize_or_resume_attempt(
-            result_root=root, admission_receipt=admission_receipt, command_runner=command_runner,
-            argv=argv, cwd=cwd, resume=resume,
-        )
+        admission = preflight_run(admission_receipt, command_runner=command_runner)
         scratch.mkdir(exist_ok=False)
-        monitor = monitor_factory(scratch_root=scratch, durable_root=root, limits=ResourceLimits())
+        monitor = monitor_factory(
+            scratch_root=scratch, durable_root=root, limits=ResourceLimits(),
+            size_source=_new_scientific_size_source(), autostart=False,
+        )
+        monitor.sample_now()
+        telemetry_witness = _issue_initial_telemetry_witness(monitor)
+        monitor.start()
+        attempt = _initialize_or_resume_attempt(
+            result_root=root, admission_receipt=admission_receipt, admission=admission,
+            argv=argv, cwd=cwd, resume=resume, telemetry_witness=telemetry_witness,
+        )
         prior = _prior_telemetry(attempt)
         frontier_controller = FrontierController(attempt, stop_after=stop_after_frontier)
         torch.set_num_threads(1)
@@ -580,18 +702,20 @@ def run_result(
         ):
             raise AttemptError("terminal/quarantine state forbids result publication")
         active_gate.retain_until_process_exit()
-        return _stage_and_publish_tail(plan, root=attempt.root, scratch=scratch)
+        return _stage_and_publish_tail(plan, attempt=attempt, scratch=scratch)
     except BaseException as error:
         if telemetry is None and monitor is not None:
             telemetry = monitor.finalize(exit_status=1)
         if root.is_dir():
             quarantine = root
-        elif staging.exists():
-            quarantine = staging
-        elif source_gate.exists() or admission_receipt_passed(admission_receipt):
-            quarantine = root.with_name(f".{root.name}.initialization-failure")
         else:
-            # Fresh admission refusal occurred before source/result effects.
+            # Admission/telemetry failure before the canonical root remains retryable.
+            if monitor is not None:
+                monitor.stop()
+            try:
+                scratch.rmdir()
+            except OSError:
+                pass
             try:
                 active_gate.release()
             except BaseException as gate_error:

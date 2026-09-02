@@ -35,7 +35,7 @@ def test_manifest_is_the_frozen_b01_static_and_run_contract() -> None:
     manifest = contracts.Manifest()
     run_manifest = contracts.build_run_manifest(b"scdmp-b01-test-master-32-bytes!!")
 
-    assert manifest.schema == "SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01"
+    assert manifest.schema == contracts.NAMED_RUN_ID
     assert contracts.TRAINING_SEEDS == (1709, 2903)
     assert contracts.K_VALUES == (7, 13)
     assert contracts.FOUNDATION_UPDATES == 160

@@ -773,6 +773,14 @@ class ContinuousResourceMonitor:
                 ))
             self._stop.set()
 
+    def require_valid_initial_observation(self) -> None:
+        """Fail closed unless at least one complete, incident-free sample is recorded."""
+
+        if not self._samples or self._errors or any(
+            incident.severity == "FATAL" for incident in self._incidents
+        ):
+            raise RuntimeError("live resource telemetry lacks a valid initial observation")
+
     def observe_scratch_path(self, path: str | Path) -> None:
         """Observe an atomic temporary before unlink so polling cannot miss it."""
 

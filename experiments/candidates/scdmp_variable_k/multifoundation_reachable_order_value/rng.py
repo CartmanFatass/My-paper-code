@@ -12,7 +12,10 @@ import hmac
 import struct
 from typing import Final, Sequence
 
-from .contracts import HELDOUT_TAPES, DEVELOPMENT_TAPES, SCHEMA, STATE_SPECS, TRAINING_SEEDS, StateSpec
+from .contracts import (
+    DEVELOPMENT_TAPES, HELDOUT_NAMESPACE_TOKEN, HELDOUT_TAPES, SCIENTIFIC_RNG_NAMESPACE,
+    STATE_SPECS, TRAINING_SEEDS, StateSpec,
+)
 from .native_state import DisturbanceHold, TapeAddress, TapeNamespace
 
 
@@ -20,7 +23,7 @@ class RNGContractError(ValueError):
     pass
 
 
-_PREFIX: Final[bytes] = (SCHEMA + "\x00COUNTER-RNG-V1\x00").encode("ascii")
+_PREFIX: Final[bytes] = (SCIENTIFIC_RNG_NAMESPACE + "\x00COUNTER-RNG-V1\x00").encode("ascii")
 MAX_UNIFORM24: Final[float] = 1.0 - 2.0**-24
 
 
@@ -162,7 +165,7 @@ def source_tape_address(state: StateSpec, scan: int) -> TapeAddress:
 
 def heldout_tape_address(token: str, state_id: str, tape: int) -> TapeAddress:
     state = _state(state_id)
-    if token != "SCDMP-MF-RS-MK-B01/heldout/RUN-01":
+    if token != HELDOUT_NAMESPACE_TOKEN:
         raise RNGContractError("held-out namespace token differs")
     if tape not in HELDOUT_TAPES:
         raise RNGContractError("held-out tape address lies outside RUN-01")

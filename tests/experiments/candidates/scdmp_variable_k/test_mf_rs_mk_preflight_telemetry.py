@@ -31,6 +31,7 @@ from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_val
 )
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import runner as runner_module
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import assessment as assessment_module
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import contracts
 
 
 FOUR_GIB = 4 * 1024**3
@@ -423,7 +424,7 @@ def _fake_admission(path: Path, *, physical: int = FOUR_GIB, effective: int = FO
 
 def test_preflight_validates_fresh_physical_and_effective_floor_without_result_root(tmp_path) -> None:
     receipt = tmp_path / "admit.json"
-    result_root = tmp_path / "scientific-result"
+    result_root = tmp_path / contracts.ATTEMPT_ID
 
     observed = preflight_only(
         receipt=receipt,
@@ -442,7 +443,7 @@ def test_preflight_refuses_missing_floor_or_existing_scientific_root(tmp_path) -
     receipt = tmp_path / "admit.json"
     with pytest.raises(PreflightError, match="4 GiB"):
         preflight_run(receipt, command_runner=_fake_admission(receipt, effective=FOUR_GIB - 1))
-    occupied = tmp_path / "occupied"
+    occupied = tmp_path / contracts.ATTEMPT_ID
     occupied.mkdir()
     with pytest.raises(PreflightError, match="must not exist"):
         preflight_only(
@@ -526,7 +527,7 @@ def test_missing_or_over_cap_telemetry_is_invalid_and_result_entry_is_disabled(t
     )
     assert empty.finalize(exit_status=0).failure_reasons == ("telemetry_missing",)
     with pytest.raises(ResultExecutionDisabled, match="RUN-01"):
-        run_result(result_root=tmp_path / "forbidden")
+        run_result(result_root=tmp_path / contracts.ATTEMPT_ID)
 
 
 def test_default_monitor_observes_the_real_current_process_tree_without_optional_packages(tmp_path) -> None:

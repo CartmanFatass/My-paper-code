@@ -26,9 +26,13 @@ from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_val
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.orchestration import (
     AttemptError,
     WorkLedger,
-    initialize_or_resume_attempt,
+    _initialize_or_resume_attempt,
+    _issue_initial_telemetry_witness,
     load_foundation_checkpoint,
     write_foundation_checkpoint,
+)
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.preflight import (
+    preflight_run,
 )
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.rng import (
     CounterRNG, materialize_disturbance_tape,
@@ -108,15 +112,27 @@ def _admit(command, **_kwargs):
     return SimpleNamespace(returncode=0)
 
 
+def initialize_or_resume_attempt(*, admission_receipt, command_runner, **kwargs):
+    admission = preflight_run(admission_receipt, command_runner=command_runner)
+    witness = _issue_initial_telemetry_witness(SimpleNamespace(
+        require_valid_initial_observation=lambda: None,
+    ))
+    return _initialize_or_resume_attempt(
+        admission_receipt=admission_receipt, admission=admission,
+        telemetry_witness=witness, **kwargs,
+    )
+
+
 def test_fresh_attempt_admits_before_root_and_resume_reuses_sealed_identity(tmp_path) -> None:
-    root = tmp_path / "run-01"
+    root = tmp_path / contracts.ATTEMPT_ID
     first_receipt = tmp_path / "admit-fresh.json"
     calls: list[str] = []
 
     def master_source() -> bytes:
         calls.append("master")
         assert first_receipt.is_file()
-        assert not root.exists()
+        assert root.is_dir()
+        assert (root / "attempt-header.json").is_file()
         return MASTER
 
     fresh = initialize_or_resume_attempt(
@@ -194,7 +210,9 @@ def test_fresh_attempt_admits_before_root_and_resume_reuses_sealed_identity(tmp_
             cwd=tmp_path,
             resume=True,
         )
-    assert not (root / "admissions" / "invocation-000002.json").exists()
+    # This direct test helper pre-admits before calling the resume gate; the
+    # scientific CLI path refuses a locked attempt before writing this slot.
+    assert (root / "admissions" / "invocation-000002.json").is_file()
 
 
 def test_checkpoint_round_trip_preserves_full_float32_model_and_adamw_state(tmp_path) -> None:
@@ -355,7 +373,7 @@ def test_a_recon_transaction_is_create_once_and_never_publishes_science(tmp_path
     )
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     assert attempt.root == root.resolve()
-    assert manifest["assessment_id"] == "SCDMP-MF-RS-MK-B01-A-RECON"
+    assert manifest["assessment_id"] == assessment_module.ASSESS_ID
     assert "run-master.bin" not in {row.name for row in root.iterdir()}
     assert manifest["science_exclusions"] == [
         "RUN-01 result root", "RUN-01 master", "RUN-01 q draw",
@@ -500,7 +518,7 @@ def test_source_identity_tamper_is_rejected_by_direct_recomputation(field) -> No
 
 
 def test_resume_source_identity_mismatch_locks_original_run_root(tmp_path) -> None:
-    root = tmp_path / "source-mismatch-run"
+    root = tmp_path / "source-mismatch-run" / contracts.ATTEMPT_ID
     initialize_or_resume_attempt(
         result_root=root, admission_receipt=tmp_path / "source-mismatch-admit.json",
         command_runner=_admit, master_source=lambda: MASTER,
@@ -525,7 +543,7 @@ def test_resume_source_identity_mismatch_locks_original_run_root(tmp_path) -> No
 def test_legal_run_terminal_writer_failure_leaves_independent_nonresumable_lock(
     tmp_path, monkeypatch,
 ) -> None:
-    root = tmp_path / "legal-run"
+    root = tmp_path / "legal-run" / contracts.ATTEMPT_ID
     receipt = tmp_path / "legal-admit.json"
     initialize_or_resume_attempt(
         result_root=root, admission_receipt=receipt, command_runner=_admit,
@@ -710,7 +728,7 @@ def test_run01_resume_stale_scratch_and_monitor_ctor_failures_lock_original_root
         ("scratch", None),
         ("monitor", lambda **_kwargs: (_ for _ in ()).throw(RuntimeError("monitor-ctor"))),
     ):
-        root = tmp_path / f"run-{suffix}"
+        root = tmp_path / f"run-{suffix}" / contracts.ATTEMPT_ID
         initialize_or_resume_attempt(
             result_root=root, admission_receipt=tmp_path / f"run-{suffix}-admit.json",
             command_runner=_admit, master_source=lambda: MASTER,
@@ -800,7 +818,15 @@ def _commit_first_frontier(tmp_path, monkeypatch, *, final_committer=None):
     checkpoint.parent.mkdir(parents=True)
     checkpoint.write_bytes(_canonical({"run_binding": manifest.to_dict(), "seed": 1709, "update": 1}))
     fresh = SimpleNamespace(root=root, run_manifest=manifest, invocation_index=0)
-    monkeypatch.setattr(frontier_module, "validate_source_identity_gate", lambda _path: {})
+    monkeypatch.setattr(
+        frontier_module, "compute_source_identity_bytes", lambda: b"sealed-source-identity\n",
+    )
+    monkeypatch.setattr(
+        frontier_module, "validate_source_identity_bytes", lambda _persisted, _current: {},
+    )
+    sealed_rows = tuple({"test": index} for index in range(6))
+    monkeypatch.setattr(runner_module, "validate_sealed_identity", lambda _attempt: sealed_rows)
+    monkeypatch.setattr(frontier_module, "validate_sealed_identity", lambda _attempt: sealed_rows)
     stopped = TechnicalSliceStop(TECHNICAL_FRONTIER_IDS[0], 0)
     plan = runner_module._build_technical_slice_tail_plan(
         attempt=fresh, stopped=stopped, telemetry=_passing_telemetry(),
@@ -865,13 +891,14 @@ def test_frontier_tamper_and_resource_artifact_mismatch_are_rejected(
         load_technical_frontier(resumed)
 
 
-def test_technical_slice_tail_overcap_is_refused_before_staging(tmp_path) -> None:
+def test_technical_slice_tail_overcap_is_refused_before_staging(tmp_path, monkeypatch) -> None:
     root = tmp_path / "slice-overcap"
     root.mkdir()
     (root / "source-identity.json").write_bytes(b"identity\n")
     attempt = SimpleNamespace(
         root=root, run_manifest=contracts.build_run_manifest(MASTER), invocation_index=0,
     )
+    monkeypatch.setattr(runner_module, "validate_sealed_identity", lambda _attempt: ())
     with pytest.raises(AttemptError, match="exceeds 256 MiB"):
         runner_module._build_technical_slice_tail_plan(
             attempt=attempt, stopped=TechnicalSliceStop(TECHNICAL_FRONTIER_IDS[0], 0),
@@ -925,7 +952,7 @@ def test_publication_tail_overcap_and_direct_mismatch_fail_before_polarity(tmp_p
     )
     total = sum(len(value) for _name, value in payloads)
     plan = runner_module.PublicationTailPlan(
-        payloads, 0, total, total, total, 11, 17,
+        payloads, 0, total, total, total, 11, 17, (),
     )
 
     def corrupt(path: Path, payload: bytes) -> None:
@@ -934,7 +961,7 @@ def test_publication_tail_overcap_and_direct_mismatch_fail_before_polarity(tmp_p
 
     with pytest.raises(AttemptError, match="mismatch"):
         runner_module._stage_and_publish_tail(
-            plan, root=root, scratch=scratch, writer=corrupt,
+            plan, attempt=SimpleNamespace(root=root), scratch=scratch, writer=corrupt,
         )
     assert not (root / "published-result.json").exists()
     assert plan.preview_io_read_bytes == 11
@@ -953,7 +980,7 @@ def test_published_result_create_is_irreversible_last_effect(tmp_path, monkeypat
         ("published-result.json", b"commit"),
     )
     total = sum(len(value) for _name, value in payloads)
-    plan = runner_module.PublicationTailPlan(payloads, 0, total, total, total, 0, 0)
+    plan = runner_module.PublicationTailPlan(payloads, 0, total, total, total, 0, 0, ())
     committed = False
     original_tree_bytes = runner_module._tree_bytes
     original_unlink = Path.unlink
@@ -980,9 +1007,11 @@ def test_published_result_create_is_irreversible_last_effect(tmp_path, monkeypat
         return original_unlink(path, *args, **kwargs)
 
     monkeypatch.setattr(runner_module, "_tree_bytes", guarded_tree_bytes)
+    monkeypatch.setattr(runner_module, "validate_sealed_identity", lambda _attempt: ())
     monkeypatch.setattr(Path, "unlink", guarded_unlink)
     result = runner_module._stage_and_publish_tail(
-        plan, root=root, scratch=scratch, writer=writer, final_committer=commit,
+        plan, attempt=SimpleNamespace(root=root), scratch=scratch,
+        writer=writer, final_committer=commit,
     )
     assert result == root / "published-result.json"
     assert committed

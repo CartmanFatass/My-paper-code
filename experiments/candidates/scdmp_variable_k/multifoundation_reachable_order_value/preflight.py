@@ -44,9 +44,30 @@ def preflight_run(
         text=True,
         check=False,
     )
+    observed = validate_preflight_receipt(path)
+    if getattr(completed, "returncode", 1) != 0:
+        raise PreflightError("fresh physical and effective 4 GiB admission failed")
+    return observed
+
+
+def validate_preflight_receipt(path: str | Path) -> PreflightReceipt:
+    """Deeply validate one persisted admission receipt without rerunning admission."""
+
+    receipt_path = Path(path)
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        direct = receipt_path.read_bytes()
+    except OSError as error:
+        raise PreflightError("4 GiB admission receipt is missing or unreadable") from error
+    return validate_preflight_receipt_bytes(direct, path=receipt_path)
+
+
+def validate_preflight_receipt_bytes(direct: bytes, *, path: str | Path) -> PreflightReceipt:
+    """Validate already-opened receipt bytes without reopening their path."""
+
+    receipt_path = Path(path)
+    try:
+        value = json.loads(direct)
+    except (UnicodeError, json.JSONDecodeError, TypeError) as error:
         raise PreflightError("4 GiB admission receipt is missing or unreadable") from error
     required = {
         "minimum_available_bytes", "available_physical_bytes", "effective_available_bytes",
@@ -57,7 +78,6 @@ def preflight_run(
     if (
         not isinstance(value, dict) or not required <= set(value)
         or value.get("minimum_available_bytes") != FOUR_GIB
-        or getattr(completed, "returncode", 1) != 0
         or value.get("physical_floor_pass") is not True
         or value.get("effective_floor_pass") is not True
         or value.get("passed") is not True
@@ -65,7 +85,7 @@ def preflight_run(
         or isinstance(effective, bool) or not isinstance(effective, int) or effective < FOUR_GIB
     ):
         raise PreflightError("fresh physical and effective 4 GiB admission failed")
-    return PreflightReceipt(path, physical, effective, True)
+    return PreflightReceipt(receipt_path, physical, effective, True)
 
 
 def admission_receipt_passed(path: str | Path) -> bool:
@@ -78,5 +98,5 @@ def admission_receipt_passed(path: str | Path) -> bool:
 
 __all__ = [
     "FOUR_GIB", "PreflightError", "PreflightReceipt", "admission_receipt_passed",
-    "preflight_run",
+    "preflight_run", "validate_preflight_receipt", "validate_preflight_receipt_bytes",
 ]

@@ -89,6 +89,8 @@ disposition; historical records remain provenance rather than current workflow a
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_VALIDITY_AND_INTAKE_20260831.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_RESULT_INTAKE_20260831.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B01_FRESH_NAMED_ATTEMPT_INNOVATOR_INTAKE_20260901.md`
 
 ## Provenance boundary
 
@@ -327,8 +329,9 @@ question and is not absorbed here.
 
 The first complete response from `em:semigroup_consistent_duration_model_policy:innovator` formed
 `FINAL_INNOVATOR_DECISION=REVISE_OBJECT`, `DECISION_FORMED=true`, with no blocker, and selected the
-executable study family `SCDMP-MF-RS-MK-ORDER-VALUE-B01`. RUN-01 is a bounded B/EXPLORE action-value
-scout, not a continuation of FCEOV `.3`: it uses two independent competent foundations, six
+executable study family `SCDMP-MF-RS-MK-ORDER-VALUE-B01`. The originally named base-run design,
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01`, is a bounded B/EXPLORE action-value scout, not a
+continuation of FCEOV `.3`: it uses two independent competent foundations, six
 result-blind first-legal-boundary state twins targeting ticks `64/160/256`, `k={7,13}`, the full
 eighteen-action catalogue with eight development tapes, and sixteen disjoint held-out tapes comparing matched,
 swapped and strongest graph-blind common actions.
@@ -337,15 +340,58 @@ The fixed FCEOV actions `0/10/12` are development-rank diagnostics only. RISP, O
 only through theorem/control/clock ancestry and transfer no numeric or scientific polarity. The
 exact named-run contract, learning curves, competence gates, source checkerboard, metrics, ordered
 branches, invalidity law, resources, promotion boundary and CM objective are frozen in
-`SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`. No experiment has yet run, so this
-milestone adds an executable scientific object but no order-value result.
+`SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`. At that Innovator milestone no experiment
+had yet run, so it added an executable scientific object but no order-value result.
 
 A serial clarification from the same innovator conversation formed
-`FINAL_INNOVATOR_CLARIFICATION=REVISE_SOURCE_LAW` with no blocker. RUN-01 now freezes identity
-`p_pre=(1,2,3,4)` and one pre-training draw from the admissible six-cell `q_pre` vectors
+`FINAL_INNOVATOR_CLARIFICATION=REVISE_SOURCE_LAW` with no blocker. At that milestone, the originally
+named base-run design froze identity `p_pre=(1,2,3,4)` and one pre-training draw from the admissible
+six-cell `q_pre` vectors
 `{001110,011100,100011,110001}`. The selected bit remains fixed through every prefix tick and source
 candidate in its cell; it is invisible to the foundation and selector. The first legal boundary is
 cloned before HR/RH, which overwrite `p,q`, followed by a zero-tick, persistent-state-inert
 `LEVEL_RELEASE`. This clarification changes the conditional six-state population and claim wording
 but adds no rollout, seed, tape, optimizer or resource workload. Exact ordering, invalidity and
-claim limits are incorporated in the B01 science card; no result has run.
+claim limits were incorporated in the B01 science card; at that clarification milestone no result
+had run.
+
+## B01 fresh named-attempt identity clarification — 2026-09-01
+
+The next complete response from the same persistent Innovator conversation formed
+`DECISION_FORMED=true`,
+`FINAL_INNOVATOR_CLARIFICATION=FRESH_NAMED_ATTEMPT_VALID`, at `B/EXPLORE`, with no blocker. The
+archived response SHA-256 is
+`c9db250b763253318159f85e54c2696836c734e51b7f6ed7420bcf70df8506f3`. This is the final decision
+for the replacement-identity node and is implemented without local override.
+
+The direct observation preceding the clarification is technical, not scientific: the old named
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01` attempt ended in
+`telemetry_measurement_failed`, is invalid, nonpolar, non-consuming and permanently quarantined.
+Its physical root and descendants, including master, realized `q`, states, tapes, checkpoints,
+metrics, results and outcomes, are under permanent zero-access quarantine. They may not be opened,
+traversed, read, hashed, copied, reconstructed, compared, resumed, salvaged or used to derive a new
+attempt. Only the already recorded external terminal/quarantine facts may be consulted.
+
+The unchanged B01 family now prospectively binds the fresh base run
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01` and first evidence attempt
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01-ATTEMPT-01`. After fresh `4 GiB`
+physical/effective admission, valid live telemetry and create-only root/attempt-header creation,
+that attempt receives one independent fresh master and exactly one pre-model constrained-balanced
+`q_by_cell` draw from `{001110,011100,100011,110001}` using the canonical `NAMED_RUN_ID` counter
+token. Root, master, `q`, stochastic coordinates, manifest and atomic frontier remain fixed within
+the attempt; any replacement needing a new realization uses a new prospectively recorded named run
+and attempt and never becomes a retry of the same identity.
+
+`RUN-02A` and `RUN-02B` remain optional prespecified seed expansions and bind only to the first
+valid base run's six states and realized `q_by_cell`; they cannot bind to the quarantined old run.
+Treatment, comparators, host, source law, checkerboard, seeds, training and competence laws,
+state/tape construction, action catalogue, endpoint, budgets, stop branches, resource limits,
+promotion criteria and the finite B claim ceiling are unchanged.
+
+This clarification adds no order-value observation and establishes no `q` effect, algorithm
+performance, stability, confirmation, promotion, retirement, lifecycle, engineering-readiness,
+launch, transfer, safety, deployment or general-MARL claim. It does not consume B01 or change the
+valid FCEOV `.3` interpretation. Exact decision reconciliation, identity law, invalidity boundaries
+and evidence paths are recorded in
+`SCDMP_B01_FRESH_NAMED_ATTEMPT_INNOVATOR_INTAKE_20260901.md`; the prospectively repaired controlling
+contract is `SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md`.

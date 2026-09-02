@@ -1,4 +1,4 @@
-"""Explicit CLI for SCDMP B01 preflight, A/RECON, or confirmed RUN-01."""
+"""Explicit CLI for SCDMP B01 preflight, A-R2, or the confirmed replacement run."""
 
 from __future__ import annotations
 
@@ -21,6 +21,12 @@ from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_val
 )
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.performance_readiness import (
     validate_performance_readiness_receipt,
+)
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.assessment import (
+    ASSESS_ID,
+)
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value.contracts import (
+    ATTEMPT_ID, NAMED_RUN_ID, STUDY_ID,
 )
 
 
@@ -59,14 +65,15 @@ def main(argv: list[str] | None = None) -> int:
                 or args.confirm_run_id or args.stop_after_frontier
                 or args.performance_readiness is not None):
             parser.error("A/RECON requires --assess-root and forbids result/resume/confirmation options")
-        print(json.dumps({"mode": "A/RECON", "assess_root": str(args.assess_root.resolve()),
+        print(json.dumps({"mode": "A/RECON", "assessment_id": ASSESS_ID,
+                          "assess_root": str(args.assess_root.resolve()),
                           "receipt": str(args.receipt.resolve()), "cwd": str(cwd),
                           "argv": list(exact_argv)}, sort_keys=True), flush=True)
         result = run_assess(
             assess_root=args.assess_root, admission_receipt=args.receipt,
             command_runner=subprocess.run, argv=exact_argv, cwd=cwd,
         )
-        print(json.dumps({"assessment": str(result.resolve()),
+        print(json.dumps({"assessment": str(result.resolve()), "assessment_id": ASSESS_ID,
                          "source_identity": str((args.assess_root / "source-identity.json").resolve()),
                          "disposition": "REVIEW_REQUIRED"},
                          sort_keys=True))
@@ -74,6 +81,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.result_root is None or args.assess_root is not None:
         parser.error("--run-01 requires --result-root and forbids --assess-root")
+    if args.result_root.name != ATTEMPT_ID:
+        parser.error(f"--result-root name must be {ATTEMPT_ID}")
     if args.confirm_run_id != RUN_CONFIRMATION:
         parser.error(f"--run-01 requires --confirm-run-id {RUN_CONFIRMATION}")
     if args.performance_readiness is None:
@@ -82,7 +91,9 @@ def main(argv: list[str] | None = None) -> int:
         validate_performance_readiness_receipt(args.performance_readiness)
     except Exception as error:
         parser.error(f"invalid --performance-readiness: {type(error).__name__}")
-    print(json.dumps({"mode": "RUN-01", "result_root": str(args.result_root.resolve()),
+    print(json.dumps({"mode": NAMED_RUN_ID, "study_id": STUDY_ID,
+                      "attempt_id": ATTEMPT_ID,
+                      "result_root": str(args.result_root.resolve()),
                       "receipt": str(args.receipt.resolve()), "resume": args.resume,
                       "performance_readiness": str(args.performance_readiness.resolve()),
                       "cwd": str(cwd), "argv": list(exact_argv)}, sort_keys=True), flush=True)

@@ -95,7 +95,7 @@ def test_complete_development_panel_freezes_exact_mapping_before_heldout_namespa
     assert mapping.action_for(1709, "k7-early", "HR") == 4
     assert mapping.action_for(1709, "k7-early", "RH") == 9
     assert mapping.common_for(1709, "k7-early") == 2
-    assert mapping.heldout_namespace_token == "SCDMP-MF-RS-MK-B01/heldout/RUN-01"
+    assert mapping.heldout_namespace_token == contracts.HELDOUT_NAMESPACE_TOKEN
     assert mapping.fceov_rank_diagnostics(1709, "k7-early") == {
         "HR": {0: 3, 10: 11, 12: 13},
         "RH": {0: 3, 10: 11, 12: 13},

@@ -11,6 +11,7 @@ from typing import Callable
 from .selection import DevelopmentMapping, STATE_ROWS, TRAINING_SEEDS
 from .native_state import DisturbanceHold, TapeAddress
 from .rng import heldout_tape_address, materialize_disturbance_tape
+from .contracts import HELDOUT_NAMESPACE_TOKEN
 
 
 class ActionMapArtifactError(RuntimeError):
@@ -92,7 +93,7 @@ def validate_heldout_permit(
         or value._capability not in _OPEN_CAPABILITIES
     ):
         raise ActionMapArtifactError("held-out evaluation requires a post-freeze permit")
-    prefix = f"SCDMP-MF-RS-MK-B01/heldout/RUN-01/{value.state_id}/"
+    prefix = f"{HELDOUT_NAMESPACE_TOKEN}/{value.state_id}/"
     try:
         tape = int(value.address.tape_id.removeprefix(prefix))
     except ValueError as error:
@@ -100,7 +101,7 @@ def validate_heldout_permit(
     if (
         not value.address.tape_id.startswith(prefix)
         or value.address != heldout_tape_address(
-            "SCDMP-MF-RS-MK-B01/heldout/RUN-01", value.state_id, tape,
+            HELDOUT_NAMESPACE_TOKEN, value.state_id, tape,
         )
     ):
         raise ActionMapArtifactError("held-out permit state/address binding differs")

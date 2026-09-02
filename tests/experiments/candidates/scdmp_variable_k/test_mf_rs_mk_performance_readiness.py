@@ -12,6 +12,7 @@ import pytest
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import (
     performance_readiness as readiness,
 )
+from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import contracts
 from experiments.candidates.scdmp_variable_k.multifoundation_reachable_order_value import (
     source_identity as source_identity_module,
 )
@@ -39,8 +40,8 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(readiness, "compute_source_identity_bytes", lambda: source_bytes)
     (root / "source-identity.json").write_bytes(source_bytes)
     manifest = {
-        "schema": "SCDMP_MF_RS_MK_B01_A_RECON_V1",
-        "assessment_id": "SCDMP-MF-RS-MK-B01-A-RECON",
+        "schema": readiness.ASSESS_SCHEMA,
+        "assessment_id": readiness.ASSESS_ID,
         "resolved_assess_root": str(root),
         "resource_caps": {
             "peak_rss_bytes": 2 * 1024**3, "scratch_bytes": 256 * 1024**2,
@@ -57,8 +58,8 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
         "assumptions": ["test artifact"],
     }
     assessment = {
-        "schema": "SCDMP_MF_RS_MK_B01_A_RECON_V1",
-        "assessment_id": "SCDMP-MF-RS-MK-B01-A-RECON",
+        "schema": readiness.ASSESS_SCHEMA,
+        "assessment_id": readiness.ASSESS_ID,
         "status": "PERFORMANCE_OBSERVATION_COMPLETE",
         "performance_readiness": "REVIEW_REQUIRED",
         "projection": projection,
@@ -105,7 +106,7 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
                 "direct_size_bytes": path.stat().st_size,
             })
     preview = {
-        "schema": "SCDMP_MF_RS_MK_B01_A_RECON_V1",
+        "schema": readiness.ASSESS_SCHEMA,
         "source_identity_file": "source-identity.json",
         "checkpoint_files": 322,
         "checkpoint_direct_bytes": sum(row["direct_size_bytes"] for row in inventory),
@@ -115,11 +116,11 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
     }
     (root / "technical-publication-preview.json").write_bytes(_canonical(preview))
     review = {
-        "schema": "SCDMP_MF_RS_MK_B01_CM_PERFORMANCE_REVIEW_V1",
+        "schema": readiness.REVIEW_SCHEMA,
         "review_disposition": "CLEAN",
         "review_evidence_id": "review-test-001",
         "reviewer_identity": "cm-reviewer-test",
-        "assessment_id": "SCDMP-MF-RS-MK-B01-A-RECON",
+        "assessment_id": readiness.ASSESS_ID,
         "assessment_root": str(root),
         "scientific_polarity": None,
     }
@@ -134,7 +135,7 @@ def _synthetic_a(tmp_path: Path, monkeypatch):
 
 def test_missing_direct_gate_refuses_before_admission_root_lease_or_master(tmp_path) -> None:
     calls = []
-    root = tmp_path / "RUN-01"
+    root = tmp_path / contracts.ATTEMPT_ID
     with pytest.raises(ResultExecutionDisabled, match="performance readiness"):
         run_result(
             result_root=root, admission_receipt=tmp_path / "admit.json",
@@ -201,7 +202,7 @@ def test_cm_clean_review_produces_create_once_deep_valid_receipt(tmp_path, monke
 
 def test_valid_receipt_reaches_only_the_later_admission_stub_boundary(tmp_path, monkeypatch) -> None:
     _root, _review, receipt, _source = _synthetic_a(tmp_path, monkeypatch)
-    run_root = tmp_path / "RUN-01"
+    run_root = tmp_path / contracts.ATTEMPT_ID
     calls = []
 
     def refuse_admission(*args, **kwargs):
@@ -235,7 +236,7 @@ def test_readiness_internal_exception_is_typed_and_run_refuses_before_effects(
         runner_module, "validate_performance_readiness_receipt",
         lambda _path: (_ for _ in ()).throw(error),
     )
-    run_root = tmp_path / "exception-run"
+    run_root = tmp_path / contracts.ATTEMPT_ID
     calls = []
     with pytest.raises(ResultExecutionDisabled, match="performance readiness"):
         run_result(

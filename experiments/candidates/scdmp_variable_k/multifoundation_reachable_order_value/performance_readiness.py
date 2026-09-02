@@ -16,8 +16,8 @@ from .resources import ResourceTelemetry
 from .source_identity import compute_source_identity_bytes, validate_source_identity_bytes
 
 
-READINESS_SCHEMA = "SCDMP_MF_RS_MK_B01_PERFORMANCE_READINESS_V1"
-REVIEW_SCHEMA = "SCDMP_MF_RS_MK_B01_CM_PERFORMANCE_REVIEW_V1"
+READINESS_SCHEMA = "SCDMP_MF_RS_MK_B01_A_R2_PERFORMANCE_READINESS_V1"
+REVIEW_SCHEMA = "SCDMP_MF_RS_MK_B01_A_R2_CM_PERFORMANCE_REVIEW_V1"
 _RECEIPT_KEYS = {
     "schema", "status", "assessment_id", "assessment_root", "source_identity_sha256",
     "source_identity", "assessment_binding", "telemetry_binding", "inventory_binding",

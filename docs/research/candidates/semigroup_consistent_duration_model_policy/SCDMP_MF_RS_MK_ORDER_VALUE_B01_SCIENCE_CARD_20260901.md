@@ -2,28 +2,109 @@
 
 - Direction: `semigroup_consistent_duration_model_policy`
 - Study family: `SCDMP-MF-RS-MK-ORDER-VALUE-B01`
-- Initial named run: `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01`
+- Quarantined old named run: `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01`
+- Canonical base-run symbol: `NAMED_RUN_ID`
+- Bound fresh named base run: `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01`
+- Canonical evidence-attempt symbol: `EVIDENCE_ATTEMPT_ID`
+- Bound first evidence attempt:
+  `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01-ATTEMPT-01`
 - Evidence class: `B/EXPLORE`
 - Innovator request: `scdmp-em-innovator-bexplore-20260901-01`
 - Source-law clarification request: `scdmp-em-innovator-bexplore-20260901-02`
+- Fresh-attempt identity clarification request:
+  `scdmp-em-innovator-b01-fresh-attempt-identity-20260901-04`
 - Innovator binding: `em:semigroup_consistent_duration_model_policy:innovator`
 - Innovator decision: `FINAL_INNOVATOR_DECISION=REVISE_OBJECT`
 - Source-law decision: `FINAL_INNOVATOR_CLARIFICATION=REVISE_SOURCE_LAW`
+- Fresh-attempt identity decision:
+  `FINAL_INNOVATOR_CLARIFICATION=FRESH_NAMED_ATTEMPT_VALID`
 - Pre-event source law: `CONSTRAINED_BALANCED_Q_BLOCK_WITH_IDENTITY_P`
 - Clarification formed: `true`; blocker: `NONE`
 - Decision formed: `true`; blocker: `NONE`
 - Selected object: `SCDMP-MF-RS-MK-ORDER-VALUE-B01`
 - Provider conversation: `6a96a735-442c-83e8-98e3-76949dc1799d`
-- Evidence ref read by Pro: `f198cedf8b0bb2c06b6e79ed3415e08b6e197477`
+- Initial/source-law evidence ref read by Pro: `f198cedf8b0bb2c06b6e79ed3415e08b6e197477`
+- Fresh-attempt identity evidence ref read by Pro:
+  `71b2bba2bb1a123a2ffc0a7269cf6a9a20c5b7a5`
+- Fresh-attempt archived response SHA-256:
+  `c9db250b763253318159f85e54c2696836c734e51b7f6ed7420bcf70df8506f3`
 
 `REVISE_OBJECT` accepts this study family after the exact contraction below. The primary
 discriminator uses development-split construction over the complete existing first-action
 catalogue. The consumed FCEOV action triple remains an output-disconnected continuity diagnostic,
 not the treatment and not a result branch.
 
-This card freezes one reproducible exploratory run. It is not a confirmatory C object and has no
-one-shot consumption semantics. Later B runs may adapt only under the named family law below, with
-each change and reason preserved under a new run ID.
+This card freezes one reproducible exploratory base run under the canonical `NAMED_RUN_ID`. It is
+not a confirmatory C object and has no one-shot consumption semantics. The first implementation of
+the old named run ended as an instrumentation-invalid attempt and remains permanently quarantined.
+The complete Innovator clarification accepts one outcome-blind fresh named base run and attempt
+under the unchanged study family and scientific comparison. Later B runs may adapt only under the
+named family law below, with each change and reason preserved under a new run ID.
+
+## Prospective base-run, attempt and quarantine identity
+
+For the next base run, bind these literal values before any implementation or result activity:
+
+```text
+NAMED_RUN_ID = "SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01"
+EVIDENCE_ATTEMPT_ID =
+  "SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01-ATTEMPT-01"
+```
+
+These are new attempt-level identities inside the unchanged
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01` adaptive B/EXPLORE study family. They are not `RUN-02A` or
+`RUN-02B`, do not create a new scientific comparison, and do not make the replacement a
+confirmation or replication of the invalid old attempt. One newly allocated canonical physical
+root must be bound exclusively to this `NAMED_RUN_ID` and `EVIDENCE_ATTEMPT_ID` and created with
+create-only semantics.
+
+The old physical root corresponding to
+`SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01` and every descendant are under permanent zero-access
+quarantine. The only admissible old-attempt facts are the already recorded external facts that the
+identity exists, ended in `telemetry_measurement_failed`, is invalid, nonpolar, non-consuming and
+quarantined. Never open or traverse the old root; read or hash its master, realized `q`, source
+states, tapes, checkpoints, metrics, results or outcomes; copy, move, rename, materialize or
+transfer any descendant; reconstruct or infer an old stochastic value; compare a new realization
+with the old; use the old root as a parent or resume source; or salvage any old value into a new
+manifest, population, branch or interpretation. An external tombstone or already recorded identity
+may be checked only to refuse the old path before content access.
+
+The identity-only manifest may be prepared prospectively, but no scientific artifact may be
+created until the following order is satisfied:
+
+1. freeze `NAMED_RUN_ID`, `EVIDENCE_ATTEMPT_ID`, the intended create-only physical root, this card
+   revision and the unchanged scientific-factor manifest;
+2. perform a fresh invocation-specific memory admission and observe at least `4 GiB` physical and
+   effective available memory;
+3. arm continuous process-tree peak-RSS, scratch-high-water, durable-byte and wall/resource
+   telemetry and record a valid initial observation;
+4. atomically create the collision-free physical root with create-only semantics;
+5. atomically create the attempt header binding the run, attempt, root, card and unchanged
+   scientific contract;
+6. generate exactly one fresh attempt master, independent of and not derived from the quarantined
+   attempt;
+7. make exactly one `q_by_cell` draw under the unchanged four-vector law and atomically seal the
+   realized vector in the attempt manifest; and
+8. only then create models, optimizers, checkpoints, source states, development or held-out tapes,
+   actions or evaluation artifacts.
+
+A retry or resume is within one evidence attempt only when it preserves the same `NAMED_RUN_ID`,
+`EVIDENCE_ATTEMPT_ID`, physical root, master, realized `q_by_cell`, scientific manifest, already
+created state/tape/checkpoint mappings and a directly verified atomic complete frontier. Every new
+invocation or resumed slice still requires fresh admission and complete live telemetry. A failure
+before any root, master or `q` commitment may retry the same prospectively assigned attempt. Once a
+root, master or `q` exists, that attempt is bound to them. Missing or invalid telemetry, uncertain
+frontier commitment, escaped partial results, unrecoverable exact binding, regenerated stochastic
+coordinates, or a required root/identity change forbids resume and permanently quarantines that
+attempt. A new master or `q` is never a retry under the same named-run identity.
+
+An outcome-blind replacement of another invalid attempt remains possible in this adaptive B family
+only under a prospectively recorded new named-run ID, new attempt ID, new create-only root, fresh
+master and one new draw from the same law. Every scientific factor listed in this card must remain
+unchanged unless a separately named B revision records the material change and reason. There is no
+finite technical-replacement budget, but repeated identities may not be used to select a favorable
+`q`, model, state panel, action map or result. Invalid attempts may not be pooled, counted as seeds,
+or described as confirmation.
 
 ## Smallest proposition and non-goals
 
@@ -78,9 +159,10 @@ U = 1{safe dock} * (1 - dock_tick / 364),
 ```
 
 with failure or timeout equal to zero. Preserve the unmodified native external-reward sum as a
-diagnostic when the evaluator exposes it; it cannot replace `U` within RUN-01.
+diagnostic when the evaluator exposes it; it cannot replace `U` within the base run identified by
+`NAMED_RUN_ID`.
 
-## RUN-01 foundation population, training and curves
+## `NAMED_RUN_ID` foundation population, training and curves
 
 Use exactly two independent training seeds, `1709` and `2903`. A failed seed is not replaced. Each
 seed has disjoint model-initialization, training-environment, action-sampling, minibatch-order,
@@ -124,7 +206,8 @@ per foundation. A foundation qualifies only when all of these B eligibility coun
 - every record is terminal, finite and evaluator-valid.
 
 These counts are exploratory eligibility conditions, not population confidence statements. If
-either seed fails, RUN-01 stops before state or action construction as
+either seed fails, the base run identified by `NAMED_RUN_ID` stops before state or action
+construction as
 `FOUNDATION_COMPETENCE_NOT_ESTABLISHED`, with no order-value polarity.
 
 ## Six result-blind reachable public-state twins
@@ -144,7 +227,8 @@ Construct exactly one state in each of the following immutable cell order:
 
 The source-foundation checkerboard does not change.
 
-After the mandatory result-invocation memory admission and RUN-01 master creation, but before model
+After the mandatory result-invocation memory admission, live-telemetry observation, create-only
+root and attempt-header creation, generate the one fresh attempt master `M_ATTEMPT`. Before model
 initialization, foundation training, competence, source scanning, action construction or held-out
 generation, make exactly one stateless constrained randomization. In the cell order above, define:
 
@@ -155,9 +239,9 @@ Q[2] = 100011
 Q[3] = 110001
 
 u = PRF64(
-      M_RUN01,
+      M_ATTEMPT,
       ("SCDMP-MF-RS-MK-ORDER-VALUE-B01",
-       "RUN-01",
+       NAMED_RUN_ID,
        "PRE_EVENT_Q_PATTERN",
        0))
 j = u mod 4
@@ -171,17 +255,22 @@ marginal probability `1/2` of either value. Vectors `000111/111000` are excluded
 perfectly confound `q_pre` with `k`; `010101/101010` are excluded because they perfectly confound it
 with the source-foundation checkerboard.
 
-Identity `p=(1,2,3,4)` is accepted. The all-`q=0` candidate is rejected as RUN-01's source law: it
+Identity `p=(1,2,3,4)` is accepted. The all-`q=0` candidate is rejected as the base run's source
+law: it
 would be coherent only for the narrower object “order-conditioned value after identity-`p`,
 `q_pre=0` histories,” and would condition the entire panel on one physically consequential latent
 regime. The constrained block represents both values without adding a state, rollout, seed, tape or
 update. Its balance is an experimental design law, not evidence for a natural Bernoulli-`1/2` plant
 distribution.
 
-Seal the realized vector in the immutable manifest. Do not redraw it after failure, retry, an
-inconvenient source state, action construction or return observation. A technical retry with the
-same RUN-01 identity/master reproduces it. RUN-02A and RUN-02B reuse the same six states and vector.
-A future named run building a new state panel may make its own one-shot draw under this law.
+Seal the realized vector in the immutable attempt manifest. Do not redraw it after failure, retry,
+an inconvenient source state, action construction or return observation. Within one named base run
+and evidence attempt, every retry or resume uses the same `NAMED_RUN_ID`, `EVIDENCE_ATTEMPT_ID`,
+physical root, master and realized `q_by_cell`. An invalid or incomplete attempt is quarantined and
+is never resumed or salvaged. An outcome-blind replacement may instantiate the unchanged B01 family
+only under a prospectively recorded new named-run identity, attempt identity, create-only root,
+fresh master and exactly one draw from this unchanged law. The prespecified seed expansions reuse
+the state panel and `q_by_cell` of the first valid base run to which they are prospectively bound.
 
 The `q`-pattern counter is a separate stateless domain. It consumes no sequential RNG state and may
 not shift or enter any foundation, source-reset, source-prefix, development or held-out tape
@@ -397,7 +486,7 @@ may be descriptive only and must remain labelled exploratory.
 
 ## Workload and resource contract
 
-RUN-01 maxima are:
+The base-run maxima for `NAMED_RUN_ID` are:
 
 | Component | Maximum count |
 | --- | ---: |
@@ -431,7 +520,7 @@ result process and continuously measure process-tree peak RSS and scratch-direct
 Record final durable bytes, wall time, CPU/native/Torch thread counts, batching width, start/end
 memory and exit status.
 
-RUN-01 engineering ceilings are:
+The base-run engineering ceilings for `NAMED_RUN_ID` are:
 
 - process-tree peak RSS `<= 2 GiB`;
 - scratch high water `<= 256 MiB`;
@@ -443,9 +532,10 @@ attempt just as a measured cap exceedance does.
 
 ## Stop law and ordered result branches
 
-There is no return-sensitive early stop. RUN-01 stops only on resource/admission or implementation
-invalidity, failure of either competence gate, failure to construct all six public-state twins, a
-fully non-discriminating development mapping, or completion of every held-out cell.
+There is no return-sensitive early stop. The base run identified by `NAMED_RUN_ID` stops only on
+resource/admission or implementation invalidity, failure of either competence gate, failure to
+construct all six public-state twins, a fully non-discriminating development mapping, or completion
+of every held-out cell.
 
 A foundation is `panel-positive` only when:
 
@@ -470,10 +560,15 @@ Apply these branches in exact order:
 Branches 5 through 8 are exploratory B observations, never stable-performance or direction
 decisions.
 
+The registered token `ORDER_ASSOCIATION_NOT_OBSERVED_IN_RUN_01` remains byte-for-byte unchanged as
+a result-branch label. Its `RUN_01` suffix denotes the first-valid-base-run branch in this study
+card; it does not identify, reopen or permit reuse of the quarantined old named run.
+
 ## Adaptive B-family law and promotion
 
 Result-informed revision between named runs is allowed only with a new run ID and a record of every
-material change and reason. Preserve RUN-01 alongside every successor.
+material change and reason. Preserve the provenance of every prior valid or invalid named run
+alongside every successor while maintaining permanent zero-access quarantine where required.
 
 The prespecified unchanged-seed expansion order is:
 
@@ -485,8 +580,11 @@ uses the same six public states, and receives fresh disjoint development and hel
 own action construction. Per added seed, cap the workload at `4,640` missions, `1,688,960` primitive
 slots, `160` PPO updates and `1,920` AdamW steps.
 
-RUN-02A and RUN-02B reuse the exact realized RUN-01 `q_by_cell` vector and the same six states; they
-do not redraw `q` or reconstruct the source panel.
+`RUN-02A` and `RUN-02B` bind only to the first valid base run under this card. They reuse that base
+run's exact realized `q_by_cell` vector and the same six states; they do not redraw `q` or
+reconstruct the source panel. The current prospective base candidate is `NAMED_RUN_ID`. If its
+attempt is invalid or incomplete, neither expansion binds to it, and neither may bind to the
+quarantined old named run.
 
 - Branch 5 proceeds to RUN-02A and, absent invalidity, may proceed to RUN-02B.
 - Branch 8 proceeds to RUN-02A only if at least one initial seed is panel-positive and development
@@ -515,11 +613,22 @@ inference laws. B evidence cannot itself promote an adapter or prove learned ord
 
 The following produce no scientific polarity:
 
+- any opening, traversal, read, hash, copy, move, reconstruction, inference, comparison, resume,
+  salvage or other use of the quarantined old physical root or its master, `q`, checkpoints,
+  states, tapes, metrics, results, outcomes or descendants;
+- reuse of the quarantined old named-run identity while creating a new root, master or `q`, or use
+  of the old root as the new root, a resume source or a parent scientific artifact;
 - failed physical/effective `4 GiB` admission or missing peak-RSS, scratch or durable telemetry;
+- creation of a scientific root, master, model, optimizer, checkpoint or result before fresh
+  admission, live telemetry and the ordered identity commitments above;
+- a physical-root collision, non-create-only root creation, more than one master or more than one
+  `q` draw under one `EVIDENCE_ATTEMPT_ID`, or a counter key not bound to `NAMED_RUN_ID`;
 - a `q_by_cell` vector outside `001110/011100/100011/110001`, or selection after any model,
   competence, source, development, held-out or outcome observation;
 - any `q` redraw after failure/retry, variation across candidates or prefix ticks in one cell, use
   in tape addressing/scan order, or substitution of source-foundation identity for the frozen draw;
+- rejection or replacement of a realized `q` because of source-panel failure, action construction,
+  inconvenience, favorable or adverse return, or any other result-aware selection;
 - pre-event `p` other than identity, or mutation of `p_pre/q_pre` during a prefix;
 - exposure of `p` or `q` to actor, critic or source-state selector;
 - skipping the first legal boundary, or cloning after an event, another query or future-tape draw;
@@ -535,7 +644,13 @@ The following produce no scientific polarity:
 - unequal public twins, invalid latent intervention or a nonreachable snapshot;
 - exact reuse of the FCEOV `.3` state, tapes, root or result;
 - changed action-index map, tie rule, reward, hold duration, checkpoint or evaluator;
+- within-attempt resume with a different named run, attempt, root, master, `q`, checkpoint frontier,
+  state panel, stochastic coordinate or scientific manifest, or with an uncertain/non-atomic
+  frontier;
 - seed replacement, retry selection, checkpoint selection or result-aware tape extension;
+- suppression of an invalid-attempt record, pooling invalid attempts, treating replacement roots as
+  added seeds or `q` replicates without a prospectively named B design, or describing the fresh run
+  as confirmation;
 - unequal downstream foundation, physical work or policy work across arms;
 - missing curve points, raw cells, terminal records or count reconciliation;
 - numerical corruption, truncated artifacts, resource-cap stop or implementation nonconformance.
@@ -548,8 +663,8 @@ polarity.
 
 RISP enters only as the exact existence rationale and erased-versus-order-associated control shape.
 No RISP Bayes controller, recurrence learner, regret number, threshold, prevalence claim or learned-
-value polarity enters RUN-01. A learned order-history versus duration-erased or last-event control
-is a future branch only after native value is observed.
+value polarity enters the base run identified by `NAMED_RUN_ID`. A learned order-history versus
+duration-erased or last-event control is a future branch only after native value is observed.
 
 ONLGR enters only through explicit primitive/event clock separation, executed physical-rate
 telemetry, and ratio-of-expectations service/cost accounting when the native host exposes the
@@ -598,6 +713,10 @@ Implement a new isolated native B runner for `SCDMP-MF-RS-MK-ORDER-VALUE-B01`. D
 modify, resume or republish the consumed FCEOV runner. The implementation must directly instantiate
 and report:
 
+- the exact bound `NAMED_RUN_ID` and `EVIDENCE_ATTEMPT_ID`, one exclusive create-only physical
+  root, and the ordered admission/telemetry/root/header/master/`q` commitment above;
+- permanent refusal before content access for the quarantined old named run and every descendant,
+  with no old master, `q`, checkpoint, state, tape, result or outcome read, derivation or transfer;
 - real native host, foundation actor/critic, learner, trainer and evaluator calls;
 - exact revision, configuration, seeds, native action table and loaded backend;
 - complete training and fixed evaluation curves plus final competence records;
@@ -623,6 +742,7 @@ recommendation.
 ## Evidence
 
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md`
+- `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B01_FRESH_NAMED_ATTEMPT_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/IMPLEMENTATION_THRESHOLD.md`
 - `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`
