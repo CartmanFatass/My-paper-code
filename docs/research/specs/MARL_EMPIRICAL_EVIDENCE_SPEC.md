@@ -297,3 +297,87 @@ requirements follow the concerns in
 These sources justify stronger empirical reporting, not a universal demand for formal proof. Exact
 guarantees remain appropriate for deliberately restricted theoretical objects whose assumptions and
 claim boundaries are explicit.
+
+## 11. Owner calibration for exploratory directions (2026-09-02)
+
+This section records a calibration agreed with the repository owner on 2026-09-02, after the
+first-wave independent review found that contracts written for C-class claims were being applied to
+B-class runs and that formal obligations were blocking launches without changing any decision. It
+was written by Claude at the owner's request and is normative for every direction whose current
+claim ceiling is B or C-BENCH. Where a `DIRECTION.md`, science card, or contract asks for more than
+this section for a B or C-BENCH object, this section prevails unless the owner names the stronger
+burden for that specific object in writing.
+
+### 11.1 Research order: inspiration, then experiment
+
+MARL mechanisms in this project are discovered by the following order, and the evidence class
+follows the order rather than preceding it:
+
+1. **Inspiration model.** A bandit, single-agent, or closed-form toy that isolates one quantity and
+   yields a one-sentence prediction. It has no evidence class and no consumption state. Its purpose
+   is to say what to try first and what to measure.
+2. **B — EXPLORE ladder.** One-to-three-seed runs on the real learner, changed between named runs
+   as the results suggest, with each change and its reason recorded. B is the default early mode
+   (§5.2) and is entered directly from an inspiration model.
+3. **C-BENCH** only when a B signal is repeatable across three to five seeds and is being promoted
+   to a paper-level or portfolio-level claim.
+
+Frozen contracts, pre-registered failure boundaries, oracle-retuned comparators, held-out transfer
+splits (train-k / test-k′, train-N / test-N′), and consumption semantics are **C-time obligations**.
+They MUST NOT be launch conditions for A or B objects. A B object MAY be planned with them in mind,
+but their absence never blocks a B launch and never lowers a B result below its §5.2 ceiling.
+
+### 11.2 Theory ceiling
+
+No direction is required to prove permutation or roster invariance, duration-independent skill
+semantics, semigroup consistency, an exact support census, an exact equality theorem, or bit
+identity in order to run or promote a B or C-BENCH object. Such results MAY be pursued as optional
+analysis; they are not admission conditions and their absence is not a reason to park.
+
+The preferred theoretical product for a direction is a **suboptimality or error bound for the
+scheme as implemented**: a bound on the gap between the implemented (possibly heuristic) scheme and
+a stated optimum or oracle, in terms of the environment quantities the scheme is meant to handle.
+Such a bound is C-FORMAL only if the paper claims it as a theorem; as an analysis attached to a
+C-BENCH result it needs no proof obligation beyond stating its assumptions. Its assumptions MUST
+match the implemented scheme; a bound derived for an idealized scheme MUST NOT be presented as a
+property of a different implemented one.
+
+Empirically better performance on the declared population, under fair comparators and the §5.3
+reporting defaults, is a sufficient direction-level claim.
+
+### 11.3 Suboptimal schemes are legitimate objects
+
+A treatment does not have to be optimal, learned end to end, or invariant by construction. Fixed
+duration menus with hazard-rate termination, sum-plus-count pooling with boundary-deferred
+re-planning, canonical-sort presentation, and similar simple schemes are admissible treatments and
+admissible comparators. A direction MUST NOT be parked or closed because its scheme is known to be
+suboptimal; it may be parked or closed only under §7.
+
+### 11.4 What may gate a B launch
+
+Only the following may hold a B launch: the §4 common integrity requirements; the §5.2 requirement
+that the real learner runs and reports nonzero transition, update, and evaluation counts; the
+mandatory resource admission; and one machine-generated **exposure line** (parameter displacement
+budget relative to initialisation scale, or an equivalent statement that the learner can move in its
+budget). Nothing else, including hash chains, byte manifests, telemetry completeness beyond what
+the run's own claim needs, capacity gates, formal-analysis flags, or prospective contracts, may
+hold a B launch. The quarantine rule for incomplete attempts (§6.2) is unchanged by this section;
+whether an instrumentation failure downgrades rather than annuls a run is a separate owner decision
+not taken here.
+
+### 11.5 Direction separation for the untying programme
+
+Untying the skill duration k and untying the agent count N are **two separate directions**, not one
+joint algorithm. Each holds the other quantity fixed as a stated parameter of its objects and
+reports sensitivity to it where the bound in §11.2 depends on it. No joint variable-k-plus-variable-N
+object exists unless the owner opens one.
+
+### 11.6 Effect on existing obligations
+
+Obligations of the following kinds, wherever they appear in direction documents for B or C-BENCH
+objects, are demoted to optional analysis by this section: theorem-or-witness dichotomies as
+registration conditions, exact equality theorems over all reachable training paths, byte-addressed
+finite-action laws as conformance conditions for a B run, formal-analysis-bound flags that refuse a
+complete learner chain, and capacity or consumer-recompute gates that do not change a B decision.
+Direction owners SHOULD record the demotion in the direction's next intake rather than rewrite
+historical documents.
