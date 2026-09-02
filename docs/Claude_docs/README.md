@@ -19,6 +19,7 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 | `research_notes/` | Scientific synthesis on a question the owner asked, with labelled literature and toy numbers. |
 | `environment_design/` | Design advice for toy hosts and the UAV environment. |
 | `toy_studies/` | Small self-contained numeric studies (numpy, fixed seeds) that back a research note. |
+| `plans/` | Follow-up plans written for alignment with the owner: concern registers, candidate schemes, experiment ladders, and the decisions still open. |
 | `artifacts/` | Rendered, published forms of the above and the script that builds them. |
 
 ## Documents
@@ -42,7 +43,18 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   repository's tie points, toy numbers, literature labelled DIRECT / PARAPHRASE / CURATOR /
   REVIEWER_INFERENCE / UNKNOWN, and three predict-then-verify prompts. The 2026-09-02 addendum
   fixes the two untyings as separate directions and states the theory ceiling (a suboptimality
-  bound for the implemented scheme) and the per-direction inspiration-model ladder.
+  bound for the implemented scheme) and the per-direction inspiration-model ladder. Section 9
+  (later on 2026-09-02) records the non-stationarity / semantic-drift / credit chain, the
+  action-space cost of a duration menu and the interruption rule that replaces it, unpatterned
+  event durations, and asynchronous switching against the autoregressive coordinator.
+
+### plans/
+
+- `FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` — alignment draft for the duration direction: the
+  claim in two parts, a ten-item concern register (C1–C10) with mitigations and measurables, the
+  scheme ladder D0–D8 with the policy-based interruption rule as the proposed first B object,
+  inspiration models, the B-class experiment ladder E0–E6, hosts, the theory ceiling, repository
+  touch points, and the decisions marked [DECIDE] / [ASK] that the owner has to make.
 
 ### environment_design/
 

@@ -132,6 +132,7 @@ docs/research/literature/n_k_many_agent_deep_dive/code/
 !docs/new-libs/corpus/*.md
 !docs/new-libs/corpus/qa/*.md
 !docs/new-libs/corpus/papers/*/overview.md
+!docs/new-libs/corpus/papers/*/SECTION_INDEX.md
 
 # Claude Code session deliverables (reviews, research notes, design advice, toy studies).
 !docs/Claude_docs/**
