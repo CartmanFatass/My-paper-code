@@ -1,6 +1,6 @@
 # HMASD Research Map
 
-This is the human navigation map for the repository's 21 current candidate directions. It records
+This is the human navigation map for the repository's 22 current candidate directions. It records
 a concise position and links to stable research and code directories. It is documentation, not an
 authorization, scheduling, lease, or workflow surface.
 
@@ -21,6 +21,7 @@ and their complete evidence live under [`legacy/directions/`](legacy/directions/
 | EOCIV-lite | Static receiver content is a CBSC control; receiver-addressed credit remains a distinct B object whose prior attempt had zero scientific activity. | [`eociv_lite/`](candidates/eociv_lite/) | [`eociv_lite/`](../../experiments/candidates/eociv_lite/) |
 | EGRCR — expressibility-gated renewal credit relay | Exact-population conditional-Q contains information necessity; finite-data/optimization efficiency remains a separate active credit-estimator question. | [`expressibility_gated_renewal_credit_relay/`](candidates/expressibility_gated_renewal_credit_relay/) | [`credit relay`](../../experiments/candidates/expressibility_gated_renewal_credit_relay/) |
 | FRRIE — finite-resource relational inductive efficiency | Tight-versus-containing relational packages are ready for small matched-work learning curves; prior high-power C designs remain closed or deferred without package polarity. | [`finite_resource_relational_inductive_efficiency/`](candidates/finite_resource_relational_inductive_efficiency/) | [`FRRIE`](../../experiments/candidates/finite_resource_relational_inductive_efficiency/) |
+| FSD — flexible skill duration | Policy-based interruption of fixed-duration skills (D2) is implemented on the HMASD base route with a byte-identical `off` path; the relay corridor host gives exact references and margins; E0 fixed the exposure line and probe set. E1 (age input at fixed `k`) is the live B object, then the `c` sweep on the homogeneous corridor. | [`flexible_skill_duration/`](candidates/flexible_skill_duration/) | [`D2 on the base route`](../../hmasd/agent.py), [`relay corridor host`](../../envs/relay_corridor/) |
 | MGTAP — metric ground transport allocation | Prior objects stopped before efficacy at stationarity gates. The live object is bounded METRIC/FREE learning geometry over named budgets. | [`metric_ground_transport_allocation/`](candidates/metric_ground_transport_allocation/) | [`MGTAP`](../../experiments/candidates/metric_ground_transport_allocation/) |
 | Orbit shadow read | Owner-role binding reaches the action kernel, but no return-bearing learner object exists; reactivation requires one. | [`orbit_shadow_read/`](candidates/orbit_shadow_read/) | [`orbit_shadow_read/`](../../experiments/candidates/orbit_shadow_read/) |
 | RECCT-lite | The one-port host cannot distinguish LR/RL; a consequence-distinct target-intervention localization object remains live. | [`recct_lite/`](candidates/recct_lite/) | [`recct_lite/`](../../experiments/candidates/recct_lite/) |

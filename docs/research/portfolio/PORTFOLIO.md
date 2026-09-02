@@ -1,12 +1,13 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-01T17:02:20Z
+Updated at: 2026-09-02T20:50:41Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 Evidence standard: `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
 Controlling decision:
-`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`
+`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
+direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
 
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
@@ -28,6 +29,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | eociv_lite | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Fresh outcome-blind B9 receiver-addressed credit execution after peak-RSS and invalid-attempt namespace repair. The prior zero-activity telemetry failure is not an observation. |
 | expressibility_gated_renewal_credit_relay | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE finite-resource association-credit efficiency on one native allocation/utility host. Exact-population conditional-Q containment closes information necessity, not finite-data/optimization efficiency. |
 | finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE matched-work `PHY_TRUST` versus containing `EDGE_FLEX` learning curves on train and held-out roster sizes. The disproportionate 909/916-row C designs are not B admission gates. |
+| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-02T20:50:41Z | B/EXPLORE policy-based skill interruption (D2) against fixed `k`: E1 age-input control at fixed `k` on scenario 1, then the interruption-cost sweep on the homogeneous relay corridor against exact fixed-`k` references. ADR 01/02 implemented and E0 complete; nothing consumed. Registered by `decisions/2026-09-02-register-flexible-skill-duration.md`. |
 | metric_ground_transport_allocation | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE METRIC/FREE finite-budget learning curves across named budgets. Both prior C objects stopped before efficacy and carry no metric polarity. |
 | orbit_shadow_read | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Kernel actionability exists, but no return population, learner, or evaluator is defined. Reactivate when an owner-by-role host changes the competent optimal action under matched owner-role/owner-blind/validity-only comparisons. |
 | recct_lite | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE consequence-distinct LR/RL/no-update target intervention with proximal measurement and downstream return. The one-port equal-intervention result closes only that host. |
