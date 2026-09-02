@@ -42,7 +42,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   arithmetic is off by about 200×. Part II reviews revision 2: ADR 01 accepted with two additions
   (separate team cap, per-agent segment storage); ADR 02 held for the owner's mechanics page and
   needs a duration margin registered next to the latent margin. Part III accepts ADR 01 revision 3
-  with five non-blocking implementer notes and a hand-off to Codex.
+  with five non-blocking implementer notes and a hand-off to Codex. Part IV reviews the corridor
+  mechanics page and ADR 02 revision 3 (adapter, `K = 2` latent publicity, inert `Z`, cue, initial
+  dwell) and records three owner decisions; Part V accepts the finalised mechanics page and ADR 02
+  revision 4 after checking that no formula, grid, or margin changed.
 
 ### research_notes/
 
@@ -74,12 +77,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   tests, the report format, and the reviewer's acceptance checklist.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
-- `RELAY_CORRIDOR_MECHANICS_20260902.md` — GPT Pro's draft of the corridor mechanics (state,
-  entities, action, latent, hazard, reward, probe, cut, references and margins, enumeration
-  recipe, proposed grids); the owner finalises it after the review's Part IV.
+- `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,
+  latent, hazard, reward, probe, cut, references and margins, enumeration recipe, proposed grids),
+  drafted by GPT Pro and finalised at commit `5c4a32f77` after the review's Part IV; normative
+  companion of ADR 02.
 - `ADR_02_RELAY_CORRIDOR_HOST.md` — GPT Pro's ADR for the relay-corridor host family (E2–E4),
-  revision 3 stored verbatim (revisions 1 and 2 at `ea20bccb0`, `7591f23a1`); held for three
-  owner decisions in the review's Part IV (adapter, `K`, coupling term).
+  revision 4 (revisions 1 to 3 at `ea20bccb0`, `7591f23a1`, `33f009211`); accepted by the
+  review's Part V; the host implementer works against its nine invariants and nine tests.
 
 ### environment_design/
 

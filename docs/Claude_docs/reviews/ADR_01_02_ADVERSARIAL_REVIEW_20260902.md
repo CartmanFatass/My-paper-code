@@ -661,3 +661,62 @@ definition and the `m` disposition (decision 2, IV.4), the initial-dwell convent
 reserved coupling switch (decision 3); ADR 02 revision 4 folds the same items in as wording. No
 further review round is required before the host is implemented; Claude reviews the host diff
 against ADR 02's nine invariants when it exists.
+
+---
+
+# Part V — acceptance of the finalised mechanics page and ADR 02 revision 4 (2026-09-02, later)
+
+Objects: `../plans/RELAY_CORRIDOR_MECHANICS_20260902.md` as finalised at commit `5c4a32f77` and
+ADR 02 revision 4 at `cd1d1b5be`. Both were written by GPT Pro through the GitHub connector and
+pushed to `main` directly, authored under the owner's name; the provenance headers inside the
+files record this. Checks were made against the round-4 versions at `33f009211`.
+
+**Verdict: ACCEPT ADR 02 revision 4 and the mechanics page. The host can be implemented.**
+
+## V.0 What was checked
+
+| Check | Method | Result |
+| --- | --- | --- |
+| Display-math blocks unchanged | extracted every `$$` block from both files at `33f009211` and `HEAD`, compared with whitespace removed | identical (14 blocks in the mechanics page, 4 in the ADR) |
+| Margin table, variances, DP size, evaluation budget unchanged | grep counts of `.057037`, `.356468`, `.144358`, `.580747`, `.271219`, `687.309`, `64,160`, `4,096`, `0.046875` before and after | same counts in both files |
+| Decision 1 (adapter) present | mechanics "Action"; ADR "Decision", "Parameters" (`n_z=K`, `low_level_action_dim=K`, `role_decode=argmax`), invariant 7, test 7 | present; ADR 01 not touched |
+| Decision 2 (`K = 2`, `m` demoted) present | mechanics "Structure cut", "Probe", "Reference policies and margins", "Proposed grids"; ADR "Decision", invariant 5, test 8 | present; `K = 3` registered as the family point |
+| Decision 3 (coupling switch) present | mechanics "State", "Action", "Speed note"; ADR "Parameters" (`e5_coupling_enabled=false`), invariant 7 | present, rule deferred |
+| IV.4 cue definition and open question 3 | mechanics "State" (`y_{r,t} = theta_{r,t-1}`, flag immediate); ADR "Open questions" | done; the question now asks for the finite `c` grid at which D2 stops chattering on the flag |
+| IV.5 initial-dwell convention | mechanics "Hazard"; ADR "Decision", invariant 4, tests 4 and 8 | done: first dwell is a full `D`, events at `D, 2D, ...`, boundaries at `0, D, 2D, ...` |
+| IV.7 wording | raggedness as a family property; per-agent indicators logged; `0.0580` vs `0.057037` attributed to `1/H` and table rounding | done |
+
+## V.1 Errata (non-blocking)
+
+- Both provenance headers say revision 3 is at `149bd7c4e`. It was stored at `33f009211`;
+  `149bd7c4e` contains it unchanged, so the pointer resolves, but the storing commit is
+  `33f009211`.
+- ADR 02 test 1 now reads "distinct fixed-`N` family instances, asserting ragged records without
+  padding" where revision 3 said "variable entity counts". This follows invariant 1 (raggedness is
+  a family property) and is consistent; test 3 still exercises divisible and non-divisible `N`.
+  The implementer should not read test 1 as requiring variable `N` inside one object.
+- ADR status line still says `proposed`. This review is the acceptance record; the ADR text is
+  stored as delivered and is not edited.
+
+## V.2 Notes for the host implementer
+
+1. The step order the mechanics page fixes: the event is realised in the transition into state
+   `t`, the change flag is visible at `t`, the cue at `t` still shows the old latent, `RENEW` at
+   `t` is one zero-service step, service resumes at `t + 1`. The `D = 20, k = 20` equality in
+   test 8 and the `K = 2` greedy equality both depend on this order; write it into the step
+   function's docstring and test it directly.
+2. The learner side is ADR 01's implementation, whose phases 1 and 2 landed at `a85fe706c` and
+   `368206861` while this part was written. The host needs only the adapter surface named in
+   ADR 02's "Parameters"; it must not depend on ADR 01 phases that are still open.
+3. The host file location is not fixed by ADR 02. `envs/` is the shared environment package and
+   the natural home; the test is a top-level `tests/relay_corridor_host_test.py` per the ADR.
+   Run `git check-ignore -v` on any new path before committing.
+4. Reference returns and both margins are computed by enumeration inside the test (test 5), not
+   copied from the table; the table is the expected value.
+
+## V.3 Hand-off
+
+Claude reviews the host diff against ADR 02's nine invariants and the nine tests when the
+implementer delivers it, in the same form as the D2 acceptance checklist in
+`../plans/D2_IMPLEMENTATION_PLAN_20260902.md` §11. No further architecture round is open on
+either ADR.

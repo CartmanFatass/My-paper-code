@@ -197,3 +197,9 @@ stack with a continuous `K`-dimensional low-level action and host argmax as the 
 `m` reported but not an acceptance criterion (`m_dur` is); the E5 coupling term is designed when
 E5 is scheduled, with a default-off switch reserved. The owner finalises the mechanics page and
 ADR 02 revision 4 as a wording pass; then the host can be implemented.
+ADR round 5 (2026-09-02): GPT Pro finalised the mechanics page (`5c4a32f77`) and re-issued ADR 02
+as revision 4 (`cd1d1b5be`), pushed directly through the GitHub connector. The review's Part V
+confirms every formula, grid, and margin value is unchanged and the four additions are present;
+ADR 02 revision 4 is accepted. Both ADRs are now closed at the architecture level: D2 is being
+implemented against `D2_IMPLEMENTATION_PLAN_20260902.md`, and the corridor host can be implemented
+against ADR 02's nine invariants. Claude reviews each diff when it is delivered.
