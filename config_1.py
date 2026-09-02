@@ -810,6 +810,38 @@ class Config:
                 "age_feature must be 'off' or 'normalized', got "
                 f"{getattr(self, 'age_feature', None)!r}"
             )
+        # Review VII.2 F4: the compact (HA-CTSE) discriminators do not accept the
+        # age feature, so a `d2` configuration that asks for it together with
+        # either compact discriminator would silently drop the age.
+        if getattr(self, "age_feature", "off") == "normalized":
+            compact_flags = [
+                name
+                for name in (
+                    "use_compact_team_discriminator",
+                    "use_compact_individual_discriminator",
+                )
+                if bool(getattr(self, name, False))
+            ]
+            if compact_flags:
+                raise ValueError(
+                    "age_feature='normalized' is not implemented for the compact "
+                    "discriminators; remove "
+                    + ", ".join(compact_flags)
+                    + " or set age_feature='off'"
+                )
+        # Review VII.2 F1 (owner decision VII.5): a rollout that starts mid-episode
+        # can begin with every skill held, and the steps before that rollout's first
+        # decision would then enter no segment row.  Registered as an E-series
+        # constraint for `d2`; `off` is unaffected.
+        rollout_length = int(getattr(self, "rollout_length", episode_length))
+        if episode_length <= 0 or rollout_length % episode_length != 0:
+            raise ValueError(
+                f"policy_interruption_mode='d2' requires rollout_length "
+                f"({rollout_length}) to be a multiple of episode_length "
+                f"({episode_length}); otherwise a rollout can start mid-episode "
+                "with every skill held and the steps before its first decision "
+                "enter no segment row"
+            )
 
     def update_env_dims(self, state_dim, obs_dim, n_agents=None):
         self.state_dim = state_dim

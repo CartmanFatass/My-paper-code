@@ -976,6 +976,17 @@ class RolloutBuffer:
         bootstraps with the value of the next state, exactly as `off` does via
         `high_level_last_values`.
         """
+        # Review VII.2 F5: D2 stores values that were already denormalised at
+        # collection (`_batched_assign_skills_d2` denormalises through
+        # `value_norm_coordinator` before writing them), and the bootstrap values
+        # are denormalised the same way, so GAE here runs on real values.
+        # `update_coordinator_d2` passes `None`, exactly as `off` does; anything
+        # else would denormalise twice.
+        assert value_normalizer is None, (
+            "D2 advantages must be computed with value_normalizer=None: the "
+            "stored segment values and the bootstrap values are already "
+            "denormalised at collection time"
+        )
         if isinstance(high_level_last_values, dict):
             last_state_values = np.asarray(
                 high_level_last_values.get('state', np.zeros(self.num_envs))

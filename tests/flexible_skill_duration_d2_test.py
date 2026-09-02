@@ -20,6 +20,12 @@ Test map (plan section 10):
   8  invariant 8   table shapes, the ADR target formula, normalized ages
   9  review III.1.3 the trigger path draws no RNG
 
+Review follow-ups (Part VII findings F1, F3, F4; owner decisions in VII.5):
+
+  10 VII F1       `d2` refuses a rollout_length that is not a multiple of episode_length
+  11 VII F4       `d2` refuses age_feature='normalized' with a compact discriminator
+  12 VII F3       stored rows replay to the collection log-probabilities
+
 The phase 0 fingerprint in `tests/fixtures/flexible_skill_duration_d2/fingerprint_off.json`
 was produced strictly before any edit to `config_1.py`, `hmasd/networks.py`, `hmasd/agent.py`,
 or `hmasd/utils.py`. It is the only reference invariant 1 ("`off` is byte-identical to current
@@ -53,6 +59,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 import torch
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -961,6 +968,130 @@ def test_9_trigger_path_draws_no_rng(tmp_path):
         )
     np.testing.assert_array_equal(record_a["log_probs"], record_b["log_probs"])
     np.testing.assert_array_equal(record_a["rewards"], record_b["rewards"])
+
+
+def test_10_d2_requires_rollout_length_multiple_of_episode_length():
+    """Review VII F1 (owner decision VII.5): the rollout-boundary guard."""
+
+    with pytest.raises(ValueError) as excinfo:
+        _make_config("d2", episode_length=40, rollout_length=45,
+                     interruption_cost_c=float("inf"),
+                     interruption_cost_c_Z=float("inf"),
+                     skill_cap_k_max=10, team_cap_k_Z=10)
+    message = str(excinfo.value)
+    assert "45" in message and "40" in message, message
+
+    # `off` is unaffected by the guard.
+    off_config = _make_config("off", episode_length=40, rollout_length=45)
+    assert off_config.rollout_length == 45
+    assert off_config.episode_length == 40
+
+    # A multiple is accepted in `d2`.
+    ok_config = _make_config("d2", episode_length=20, rollout_length=40,
+                             interruption_cost_c=float("inf"),
+                             interruption_cost_c_Z=float("inf"),
+                             skill_cap_k_max=10, team_cap_k_Z=10)
+    assert ok_config.rollout_length == 40
+
+
+def test_11_d2_refuses_age_feature_with_compact_discriminators():
+    """Review VII F4: the compact discriminators do not accept the age feature."""
+
+    for flag in ("use_compact_team_discriminator", "use_compact_individual_discriminator"):
+        with pytest.raises(ValueError) as excinfo:
+            _make_config("d2", age_feature="normalized",
+                         interruption_cost_c=float("inf"),
+                         interruption_cost_c_Z=float("inf"),
+                         skill_cap_k_max=10, team_cap_k_Z=10,
+                         **{flag: True})
+        assert flag in str(excinfo.value)
+
+    # age_feature='off' with the same flags, and 'normalized' without them, pass.
+    _make_config("d2", age_feature="off", use_compact_team_discriminator=True,
+                 interruption_cost_c=float("inf"), interruption_cost_c_Z=float("inf"),
+                 skill_cap_k_max=10, team_cap_k_Z=10)
+    _make_config("d2", age_feature="normalized",
+                 interruption_cost_c=float("inf"), interruption_cost_c_Z=float("inf"),
+                 skill_cap_k_max=10, team_cap_k_Z=10)
+    # `off` ignores the age feature entirely.
+    _make_config("off", age_feature="normalized", use_compact_team_discriminator=True)
+
+
+def test_12_stored_rows_replay_to_the_collection_log_probs(tmp_path):
+    """
+    Review VII F3: the buffer-level replay consistency.
+
+    A short `d2` rollout is collected with a scripted non-uniform `S_t` (the
+    same rule as test 5, so this is not the trivial all-sampled case), and the
+    stored rows are replayed through the D2 sampler and
+    `evaluate_training_batch_ordered` at the *collecting* parameters — no update
+    runs in between.  The replayed log-probabilities must reproduce
+    `d2_agent_old_log_probs` at valid agent positions and `d2_team_old_log_prob`
+    at valid team rows.
+    """
+
+    patch = _scripted_gap_patch(
+        agent_rule=lambda call, env_idx, agent_idx: ((call + agent_idx + env_idx) % 3) == 0
+    )
+    agent, record = _run_rollout(
+        "d2", tmp_path / "logs", store=True, patch_held=patch,
+        interruption_cost_c=1.0, interruption_cost_c_Z=float("inf"),
+        skill_cap_k_max=40, team_cap_k_Z=40,
+    )
+    # The scripted gaps really did produce a non-trivial S_t.
+    sizes = record["sampled"].sum(axis=2)
+    assert sizes.min() < N_UAVS
+
+    # The update replays with the running normalisers as they stand at update
+    # time, while collection normalised with the statistics of the moment, so an
+    # exact comparison is only meaningful with the normalisers off.  The D2
+    # configuration inherits `use_obsnorm = use_statenorm = False` from
+    # `config_1.Config`, so the stored rows *are* the normalised rows the update
+    # would use, and no separate disabling is needed.
+    assert bool(getattr(agent.config, "use_obsnorm", False)) is False
+    assert bool(getattr(agent.config, "use_statenorm", True)) is False
+
+    tables = agent.rollout_buffer.get_d2_tables(ROLLOUT_LENGTH)
+    assert tables["agent_valid"].any() and tables["team_valid"].any()
+
+    sampler = agent.rollout_buffer.get_d2_coordinator_sampler(
+        ROLLOUT_LENGTH, 1, 4096, device=agent.device
+    )
+    assert sampler is not None
+
+    checked_team = 0
+    checked_agent = 0
+    for batch in sampler:
+        with torch.no_grad():
+            replay = agent.skill_coordinator.evaluate_training_batch_ordered(
+                batch["states"],
+                batch["observations"],
+                batch["team_skills"],
+                batch["agent_skills"],
+                batch["order"],
+                batch["sampled_mask"],
+                batch["sample_Z"],
+            )
+        team_mask = batch["team_valid"].bool()
+        agent_mask = batch["agent_valid"].bool()
+        # `valid` implies `sampled`, so no forced position enters the comparison.
+        assert torch.all(batch["sampled_mask"][agent_mask])
+        assert torch.all(batch["sample_Z"][team_mask])
+        torch.testing.assert_close(
+            replay["team_log_probs"][team_mask],
+            batch["old_team_log_probs"][team_mask],
+            rtol=0, atol=1e-5,
+        )
+        torch.testing.assert_close(
+            replay["agent_log_probs"][agent_mask],
+            batch["old_agent_log_probs"][agent_mask],
+            rtol=0, atol=1e-5,
+        )
+        checked_team += int(team_mask.sum())
+        checked_agent += int(agent_mask.sum())
+
+    assert checked_team == int(tables["team_valid"].sum())
+    assert checked_agent == int(tables["agent_valid"].sum())
 
 
 if __name__ == "__main__":
