@@ -387,3 +387,43 @@ following are `d2`-only and are new behaviour rather than a restatement of the p
   uncommitted modifications belonging to other work lines. The file imports nothing from `hmasd/`,
   so the failures cannot come from this change; they were not investigated and nothing there was
   touched. `tests/hmasd_run_test.py` and `tests/intrinsic_reward_batch_test.py` pass.
+
+---
+
+## Addendum 2026-09-02: fingerprint re-frozen after the channel-model vectorisation — the regeneration reproduced the same bytes, so nothing was re-frozen
+
+Phase P3 of `ENV_THROUGHPUT_REFACTOR_PLAN_20260902.md` vectorised the scenario-1 channel model
+(`envs/pettingzoo/uav_env.py`, `envs/pettingzoo/scenario1.py`; commits `e2b50f606` and
+`c2179d31f`). The plan's §5 integrity policy expected array operations to change floating-point
+summation order and therefore budgeted **one** re-freeze of this fixture, accepted by the owner in
+plan §6.1. The fixture was regenerated on the vectorised environment as planned:
+
+```powershell
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_resource_preflight.py `
+  admit-memory --out temp/uav_refactor_preflight/preflight_p3_fixture.json   # passed
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe tests/flexible_skill_duration_d2_test.py
+```
+
+| Digest | Before the refactor | After the regeneration on the vectorised environment |
+| --- | --- | --- |
+| canonical-JSON sha256 (the value test 1 compares) | `3c525b9c3d26ef0385231c660f25a962eccdee87103feb39a4fc361dd225d937` | `3c525b9c3d26ef0385231c660f25a962eccdee87103feb39a4fc361dd225d937` |
+| raw file sha256 | `6ba55c2eb310aa011f34933a1bc79566029a2db2dd2d461c18472ca0d7cf30b4` | `6ba55c2eb310aa011f34933a1bc79566029a2db2dd2d461c18472ca0d7cf30b4` |
+
+`git status --porcelain tests/fixtures/flexible_skill_duration_d2/` was empty after the
+regeneration: the file is byte-identical, so **the fixture in Git is still the phase-0 baseline
+produced before any D2 edit**, and the owner's one allowed re-freeze remains unspent.
+
+Reason it did not move: at this configuration the vectorised path is not merely
+tolerance-equivalent but bit-identical to the scalar path. The equivalence harness
+`tests/uav_env_channel_equivalence_test.py` (two 500-step episodes, `n_uavs = 6`,
+`n_users = 50`, every channel model) reports max absolute difference `0.0` for the SINR matrix,
+the rewards, the observations and the global state, `0` positions above `1e-12`, and `0`
+connection mismatches. Interference is accumulated in ascending interferer index, which is the
+order NumPy's own small-array reduction uses, and the `3gpp-36777` LoS draw is one vectorised
+`uniform` per link in row-major order, which consumes the RNG stream exactly as the scalar loop
+did. `test_1_off_mode_matches_phase0_fingerprint` passed against the unmodified fixture both
+before and after the regeneration (`13 passed, 14 warnings in 13.29s` for the whole file).
+
+The environment's per-step wall time at the E0 configuration fell from 24.585 ms to 0.482 ms.
+The measured effect on the E0 timing run is recorded in
+`ENV_THROUGHPUT_REFACTOR_REPORT_20260902.md`; nothing in this addendum is experimental evidence.
