@@ -48,6 +48,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   revision 4 after checking that no formula, grid, or margin changed. Part VI accepts the relay
   corridor host implementation against the nine invariants (reviewer re-ran the nine tests) with
   one convention for the owner to confirm (cue at reset) and integrates the branch into `main`.
+  Part VII accepts the D2 implementation (Phases 3 to 8) against ADR 01's eight invariants
+  (reviewer re-ran the ten tests), records eight findings with one owner decision (rollout
+  boundary guard), and three reviewer errata to the implementation plan.
 
 ### research_notes/
 
@@ -76,7 +79,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   2 at `7591f23a1`); accepted for implementation by the review's Part III; Codex implements.
 - `D2_IMPLEMENTATION_PLAN_20260902.md` — phase-ordered implementation plan for ADR 01 revision 3
   handed to the implementer: ground rules, file and function touch points per phase, the nine
-  tests, the report format, and the reviewer's acceptance checklist.
+  tests, the report format, and the reviewer's acceptance checklist. Section 11.1 carries the
+  reviewer's errata recorded after implementation.
+- `D2_EXECUTION_HANDOFF_20260902.md` — the Codex implementer's handoff after Phases 0 to 2:
+  state, Phase 3 design notes, plan-versus-code discrepancies, operating notes.
+- `D2_IMPLEMENTATION_REPORT_20260902.md` — the implementer's report for Phases 3 to 8: status
+  and commits, the fingerprint, test output, smoke-rollout numbers (P1, P2, the inference
+  ratio), the discrepancy list, new `d2` behaviour and the design points the plan did not fix,
+  the acceptance checklist as observed, and what could not be verified.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,

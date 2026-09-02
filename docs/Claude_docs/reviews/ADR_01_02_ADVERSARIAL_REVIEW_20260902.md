@@ -795,3 +795,124 @@ The branch was rebased onto `origin/main` (which by then carried D2 Phases 3 to 
 `main` from the worktree; the two lines touch disjoint files, so the rebase was clean. Part VI
 and the README entry were committed with it. The D2 implementer's next push rebases over these
 commits as its operating notes prescribe.
+
+---
+
+# Part VII — review of the D2 implementation, Phases 3 to 8 (2026-09-02, later)
+
+Object: commits `c3b49f50c` (Phase 3), `4087819a7` (4), `e234201ad` (5), `e4484efc1` (6),
+`2088a1e4d` (7), `5224590d8` (8), `9bead2588` + `81a6b4aea` (report) on `main`, by an Opus
+implementation session continuing from the Codex handoff at Phase 2. Files: `hmasd/agent.py`,
+`hmasd/utils.py`, `hmasd/networks.py`, `tests/flexible_skill_duration_d2_test.py`,
+`../plans/D2_IMPLEMENTATION_REPORT_20260902.md`. Phases 0 to 2 (`307992fe`, `a85fe706`,
+`368206861`) were read as context; Phase 2's three coordinator methods were re-read in full.
+
+**Verdict: ACCEPT. ADR 01 revision 3 is implemented; the eight invariants hold in code and in
+the tests; `off` is byte-identical by construction and by fingerprint.** One design point needs
+the owner's decision (VII.2 F1) and the plan carries three reviewer errata (VII.3). Nothing blocks
+E0.
+
+## VII.0 Reviewer's own run
+
+Preflight passed (receipt `temp/d2_review/preflight_review.json`), then:
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/flexible_skill_duration_d2_test.py --basetemp C:/Projects/HMASD/temp/d2_review/pytest -p no:cacheprovider
+10 passed, 14 warnings in 17.49s
+```
+
+## VII.1 Invariants against code
+
+| # | Invariant (ADR 01 rev 3) | Where it is met | Reviewer check |
+| --- | --- | --- | --- |
+| 1 | `off` byte-identical | every `d2` branch behind `self.d2_enabled` / `self.d2_enabled` on the buffer; `_d2_age_feature_enabled` on the discriminators; new keyword arguments default to `None` | test 1 hashes coordinator and both discriminator `state_dict`s after one update plus every per-step skill, log-prob and high-level buffer array of two rollouts against the Phase 0 fixture; test 1b asserts no `d2` allocation and `age_input_dim == 0`. Diff read: no `off`-reachable statement changed |
+| 2 | D0 (`c = c_Z = inf`, `k_max = k_Z = k`) reproduces `off` boundaries | age convention "0 while executing at the decision step, `k_max` at `t + k_max`" in `_batched_assign_skills_d2`; `reset_mask = (env_steps == 0) or done or invalid` | test 2 with a mid-rollout reset: boundary masks equal, `sampled` equals the boundary mask broadcast, `sample_Z` equals it. Loss reductions were compared line by line: `off` takes `.mean()` over `[B]` (team) and `[B, N]` (agents), entropy mean over rows of `team + sum_i agent_i`, value MSE mean; `d2` takes masked sums over `team_count`, `agent_count` and `batch_size`, which equal `B`, `B N`, `B` at D0. So D0 differs from `off` only by the registered discounted target (ratio `off/d2 = 1.0458` at `tau = 10`, test 2) |
+| 3 | `c = c_Z = inf` never switches before the cap | trigger uses `gap >= c` on finite logits, so `inf` never fires; asserted at runtime in `d2` | test 3: boundaries at `0, 7, 14, ...` for `k_max = 7`, team only at reset for `k_Z = 40` |
+| 4 | `c = c_Z = 0, delta = 1` samples every live agent every step | `g >= 0` always; `>=` rule | test 4 |
+| 5 | segment lengths partition live steps | `_d2_store_transition` closes on re-sample (`elapsed = t - start`), on done (`t - start + 1`, terminal), and `_d2_flush_open_segments` at rollout end (bootstrap) | test 5 with a scripted non-uniform `S_t`: per-agent and team elapsed sums equal the live steps. See F1 for the one case the plan's configuration never produces |
+| 6 | ordered replay reproduces collection log-probs; zero at forced positions | `assign_partial_batch` and `evaluate_training_batch_ordered` decode in `O_t` with positional encoding by decode position and identity by `agent_specific_query`; forced positions get `log_prob = 0`, `entropy = 0`; the update masks by per-head `valid` | test 6 on a non-contiguous `S_t` (`[T, F, T]`, `[F, T, F]`), `atol = 1e-6`. See F3 |
+| 7 | a team decision forces every agent | `sampled_mask[fire_idx] = True` on team gap/cap and on reset; runtime assert | test 7 with a scripted team decision at step 13 closes every agent segment |
+| 8 | shapes, targets, normalised ages | tables `[T, E, N]` and `[T, E]`; `discounts = gamma ** elapsed` in `_compute_d2_high_level_advantages`; ages `/ k_max`, `/ k_Z` at reward time and in the discriminator buffer | test 8 |
+| III.1.3 | no RNG in the trigger pass | `evaluate_held_batch` has no sampling; `_batched_assign_skills_d2` calls it under `no_grad` before any draw | test 9 |
+
+Additional code checks that are not tests:
+
+- The segment reward is the same quantity `off` accumulates (`current_reward = mean(rewards)`,
+  the shared reward), discounted within the segment by `gamma ** (t - start)`.
+- The bootstrap chain per agent uses the value stored at that agent's next row, which is the
+  value head at the re-decision state; the last open segment bootstraps with the same
+  `_compute_high_level_bootstrap_values` as `off`. Terminal rows cut the chain in
+  `_compute_gae_with_discounts_torch`.
+- The value normaliser is the single coordinator normaliser, applied to both heads exactly as
+  `off` applies it (denormalised at collection, GAE on real values, renormalised targets in the
+  loss). The running state and observation normalisers are updated only on the decision subset,
+  so at D0 they see the same states as `off`; the trigger pass uses `update=False`.
+- The per-agent gap is the causal-prefix statistic: `evaluate_held_batch` conditions position `i`
+  on `Z_held` and `z_held_{<i}` in canonical order and returns raw clamped logits; the softmax
+  normaliser cancels in the gap.
+- `skill_changed` in `d2` is "any agent re-decided"; its only consumers are the skill-usage
+  loggers in `train_multiproc_config_1.py` and `main.py`, so no low-level state is reset by a
+  partial decision.
+
+## VII.2 Findings (none blocking)
+
+- **F1 (owner decides). Rollout boundary.** Open segments are flushed with a bootstrap at the end
+  of a rollout and not carried over; the next rollout's segments open at the next actual
+  decision. If a rollout starts mid-episode with agents whose skills are held, the steps before
+  their first decision in that rollout enter no segment row (their reward reaches the learner
+  only through the previous segment's bootstrap value). With `episode_length = rollout_length =
+  500` in `config_1.py` every rollout starts on a reset and the case never occurs. Recommend:
+  register "`rollout_length` is a multiple of `episode_length`" as an E-series constraint and add
+  a guard in `_validate_policy_interruption` that raises in `d2` mode otherwise. Alternative
+  (carry a continuation row that is valid for the value loss but not the policy loss) is a design
+  change the ADR does not contain; not recommended before E1.
+- **F2. RNG at forced positions.** `assign_partial_batch` draws `Z_dist.sample()` and
+  `zi_dist.sample()` at every position and selects with `torch.where`, so forced positions still
+  consume draws. At D0 every position is sampled, so the draw count equals `off` and the skills
+  are bit-equal (Phase 2 smoke check 2). At finite `c` the stream differs from D0 anyway. Harmless;
+  note it in any common-random-number pairing across `c` values.
+- **F3. Buffer-level replay consistency is not in the test file.** Test 6 checks the method pair
+  on synthetic inputs; the stored-row path (tables, sampler, `evaluate_training_batch_ordered`
+  against `d2_*_old_log_prob` at the collecting parameters with frozen normalisers) was checked by
+  the Phase 2 smoke script, which is gitignored. Recommend one assertion added to test 8 on a
+  short `d2` rollout with `store=True`.
+- **F4. Compact discriminators ignore `age_feature`.** Unreachable today (`use_ha_ctse` and
+  `d2` are exclusive dispatch branches), but `_validate_policy_interruption` should refuse
+  `age_feature = "normalized"` together with `use_compact_team_discriminator` or
+  `use_compact_individual_discriminator`.
+- **F5. `_compute_d2_high_level_advantages` accepts a `value_normalizer`** and would denormalise
+  values that the collection path has already denormalised. `update_coordinator_d2` passes
+  `None`, as `off` does; a comment or an assertion that it is `None` would remove the trap.
+- **F6. P1 recorded.** Switch counts by agent index are monotone in the decode position both at
+  `c = 0` (`0.70, 0.80, 0.85`) and at D0 (`5, 6, 8` of 80). This is the causal-prefix index bias
+  the ADR names as a risk; E1 measures it at `N = 6` and the owner interprets it there, not here.
+- **F7. Inference cost.** `d2 / off = 8.96` in `_batched_assign_skills` wall time on the tiny
+  configuration, one timing. Consistent with Part II II.4's "about `k` times"; the E-series cost
+  line in ADR 01 stands.
+- **F8. Unrelated failures.** `tests/production_backend_policy_test.py` reports 7 failures from
+  pinned C++ source hashes over `experiments/candidates/*`, which carry uncommitted modifications
+  from other work lines that predate this session. Not D2's; not investigated.
+
+## VII.3 Reviewer errata to `../plans/D2_IMPLEMENTATION_PLAN_20260902.md`
+
+The implementer followed the ADR where the plan disagreed with it, which is the plan's own rule.
+The plan was wrong in three places; an errata paragraph is appended to its section 11.
+
+1. §11 "chattering floor near 5/6 at `c = 0`": with the ADR's `>=` rule and `g >= 0`, the
+   sampled fraction at `c = 0` is exactly 1 by construction (invariant 4). The diagnostic
+   quantity is the fraction of positions whose held skill is not the argmax; measured `0.65` on
+   the tiny configuration (`n_z = 6`, `N = 3`), below the `5/6` a uniform-held-skill argument
+   gives because the held skill was drawn from the same policy one step earlier.
+2. §11 and Part III P4 "ratio of `d2` to `off` about 1.046": the ratio that equals
+   `tau(1 - gamma) / (1 - gamma^tau)` is `off / d2`; `d2 / off` is `0.956`.
+3. §7 "add the team normaliser": there is one coordinator value normaliser serving both heads in
+   `off`; `d2` uses it identically.
+
+## VII.4 Hand-off
+
+Both ADRs are now implemented on `main`. What remains before E0/E1 on the corridor is one
+integration commit that neither line could make alone: the rollout loop hands the D2 sampled mask
+`S_t` to `RelayCorridorAdapter.step` as its renew mask, and the learner config takes `obs_dim`,
+`state_dim`, `action_dim = K`, `n_z = K` from the host; that commit also closes the IV.0 item on
+the low-level actor being continuous-only. E0 (integrity on scenario 1, `off` versus D0) needs
+nothing further from the code.

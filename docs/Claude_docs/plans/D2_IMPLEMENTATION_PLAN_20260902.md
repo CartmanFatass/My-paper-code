@@ -237,3 +237,19 @@ Phases 2, 4, and 6 carry most of the work (new coordinator methods, the per-agen
 update); phases 1, 3, 5, 7 are small; phase 0 and 8 are bookkeeping. Order is fixed: 0 before any
 edit, 2 before 3, 4 before 5 before 6. Expect the diff to be dominated by `hmasd/utils.py` and
 `hmasd/agent.py`.
+
+
+### 11.1 Errata recorded after implementation (reviewer, 2026-09-02, review Part VII)
+
+The implementation followed the ADR where this plan disagreed with it. Three statements in this
+plan were wrong and are corrected here without editing the text above:
+
+1. "The smoke rollout at `c = 0` shows the chattering floor near 5/6" (section 11). With the
+   ADR's `>=` rule and `g >= 0`, the sampled fraction at `c = 0` is exactly 1 by construction
+   (invariant 4). The diagnostic quantity is the fraction of positions whose held skill is not the
+   argmax, measured 0.65 on the tiny configuration.
+2. "The logged target-scale ratio of `d2` to `off` is close to `tau(1 - gamma)/(1 - gamma^tau)`
+   (about 1.046 at `tau = 10`)" (section 11, test 2). The ratio that equals that expression is
+   `off / d2`; `d2 / off` is about 0.956. Test 2 asserts both directions.
+3. "Add the team normaliser for the team table" (section 7). There is one coordinator value
+   normaliser serving both heads in `off`; `d2` uses it identically and adds none.
