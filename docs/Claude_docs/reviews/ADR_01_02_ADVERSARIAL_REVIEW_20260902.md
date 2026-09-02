@@ -983,3 +983,59 @@ Code: ADR 01 and ADR 02 implemented and joined. Experiments: E0 (scenario 1, `of
 exposure line and probe set) is running under `../experiments/E0_EXPOSURE_PROBE_SET_20260902.md`.
 Next after E0: E1 (age input, D0 versus D1 on scenario 1 or the corridor) per plan §5, whose
 prediction the owner writes first.
+
+---
+
+# Part IX — E0 intake (2026-09-02, later)
+
+Object: `../experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md` with the runner
+`scripts/run_flexible_skill_duration_e0.py` (branch commits `619f4b4cd`, `fbe2c9d17`, rebased onto
+`main`), executed by an Opus session in a worktree against the launch contract
+`../experiments/E0_EXPOSURE_PROBE_SET_20260902.md`. Run directories and the probe npz are local
+under `temp/directions/flexible_skill_duration/`.
+
+**Verdict: ACCEPTED as B-class integrity and exposure evidence, with deviations D1 to D4 as the
+result document states them.** Both arms are complete attempts under the contract's stop rule;
+nothing was quarantined; no scientific object is consumed (B class).
+
+## IX.1 What the reviewer checked
+
+- Contract §4 integrity items are each present: question and ceiling, algorithm and comparator,
+  observations preserved (per-rollout tables, verbatim summary lines), exposure separated from
+  interaction (transition counts next to optimizer steps per network), implementation and RNG facts
+  (code sha, thread setting, seeds, evaluation isolation by a second agent under saved RNG state),
+  no instrumentation failure, and the interpretation boundary.
+- §11.4 launch items: preflight receipts passed for both arms; nonzero transition (80,000),
+  update (coordinator 1,050; discoverer 22,500 each; discriminators 150 and 600) and evaluation
+  (2 × 8 episodes) counts; the exposure line is monotone in every network in both arms.
+- The three first-rollout integrity checks pass with zero mismatches (boundary mask, team and agent
+  skills) and the target-scale ratio `off/d2 = 1.04589` against the closed form `1.04583`; the D0
+  coordinator's exposure line reproduces the agent's own `param_displacement` digit for digit, an
+  independent check of the runner's computation.
+- The unplanned observation that the four non-coordinator exposure lines are bit-identical between
+  arms at rollout 1 is what D0 predicts (same trajectory, same low-level and discriminator data,
+  only the coordinator targets differ). It is consistent with the D2 acceptance in Part VII.
+- Probe set frozen: 1,536 probes, content digest `1b983ea9…afbf51c`, shapes recorded; the 32-probe
+  JSON sample (485 KB) is tracked.
+
+## IX.2 Deviations and their standing
+
+| # | Deviation | Standing |
+| --- | --- | --- |
+| D1 | 16 lanes instead of 32; 80,000 transitions per arm instead of 160,000; `M = 800` | authorised by the executing instruction for exactly this case; the transition floor is a recorded shortfall; `M = 1600` at 32 lanes confirmed by the timing runs |
+| D2 | seed 2 not run although its condition was met | caused by the reviewer's own 3-hour cap, not by the contract; seed 2 for both arms is launched after this intake (same runner, same configuration) and appended to the result document when done |
+| D3 | `hmasd_run.py` not used | per contract §7 |
+| D4 | a meaningless `d2_metrics_delta` field in the D0 `metrics.jsonl` | documented, runner left byte-identical to what ran; ignore the field |
+
+## IX.3 What E0 does not say
+
+Nothing about which arm is better. The two final evaluation means differ (22.6 versus 35.9) on one
+seed with two evaluations each; under the contract's non-goals this is not a signal and is not
+carried forward. E1's prediction is written before E1 runs (plan §5, Q5 in §11).
+
+## IX.4 Next
+
+E1 (age input; D0 versus D1 at `k = 10` on scenario 1) per plan §5, using the frozen probe set for
+the C1 (value-target variance) and C2 (discriminator accuracy, label agreement between adjacent
+checkpoints) measurements. The owner writes the prediction first; the reviewer drafts the E1 launch
+contract in the E0 format when asked.

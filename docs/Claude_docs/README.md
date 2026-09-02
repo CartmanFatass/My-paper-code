@@ -54,6 +54,7 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   boundary guard), and three reviewer errata to the implementation plan.
   Part VIII accepts the D2 follow-up guards and the corridor integration (26 tests re-run) and
   closes the low-level-actor item: the base route emits a continuous K-vector.
+  Part IX takes E0 in as B-class integrity and exposure evidence and launches seed 2.
 
 ### research_notes/
 
@@ -126,7 +127,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `E0_EXPOSURE_PROBE_SET_20260902.md` — launch contract for E0 on scenario 1: question and
   claim ceiling (B, integrity and exposure only), the two arms (`off`, D0), measurements, budget
   and stop rule, the frozen probe set recipe for C1/C2, outputs, and why `hmasd_run.py` is not
-  used. The result document is written by the executing session when the runs finish.
+  used.
+- `E0_EXPOSURE_PROBE_SET_RESULT_20260902.md` — the E0 result: timing run, the 16-lane deviation,
+  both arms complete (80,000 transitions, nonzero optimizer and evaluation counts, monotone exposure
+  lines in every network), the three first-rollout integrity checks (zero mismatches; target-scale
+  ratio 1.04589 against 1.04583), the frozen 1,536-probe set with its content digest, deviations
+  D1 to D4, and what could not be verified. Accepted by the review's Part IX.
+- `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
 
 ### artifacts/
 
