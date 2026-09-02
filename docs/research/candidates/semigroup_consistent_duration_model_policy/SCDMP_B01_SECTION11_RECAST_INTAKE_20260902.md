@@ -145,3 +145,22 @@ comparator, budget or branch, and consumes no scientific object. It establishes 
 performance, stability, promotion, retirement, lifecycle, transfer, safety or general-MARL claim.
 The previous attempt `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01` remains permanently quarantined under
 zero access, and this recast does not resume, salvage, reopen or reinterpret it.
+
+## 7. Result
+
+The recast object ran the same day. `SCDMP-MF-RS-MK-ORDER-VALUE-B01-RUN-01-REPLACEMENT-01-ATTEMPT-01`
+launched at commit `c5c1655e91b2f021bf4491f65265113680cf9649` with no `PERFORMANCE_READY` receipt:
+the A/RECON assessment's `REVIEW_REQUIRED` disposition was recorded as a field in
+`<root>/performance-assessment.json` and `published-result.json`, and the launch proceeded, which is
+decision D1 in force. The fresh `4 GiB` physical/effective admission ran twice and passed
+(14,472,634,368 B standalone; 14,285,918,208 B at the invocation). Both foundations reached
+`128/128` competence, all six state twins were established on their first legal boundary and first
+source candidate, the eighteen-action development sweep discriminated in all twelve crossed units,
+and all sixteen held-out tapes per state completed, publishing the ordered branch
+`PRELIMINARY_REPEATABLE_ORDER_VALUE_SIGNAL` with `complete_full_chain: true` in 348.488 s against
+the card's 1,800 s ceiling. Resource telemetry was fully measured, so the D7 downgrade path was not
+exercised and the result carries `resources_unmeasured: false`; peak RSS 399,925,248 B, scratch high
+water 459,086 B and durable output 129,513,695 B all sit well inside their ceilings. Nothing was
+quarantined. The complete evidence, per-seed tables, verbatim summary lines, four named deviations
+and the could-not-verify list are in
+`SCDMP_B01_RUN_01_REPLACEMENT_01_RESULT_EVIDENCE_20260902.md`.
