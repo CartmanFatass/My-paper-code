@@ -1023,7 +1023,7 @@ nothing was quarantined; no scientific object is consumed (B class).
 | # | Deviation | Standing |
 | --- | --- | --- |
 | D1 | 16 lanes instead of 32; 80,000 transitions per arm instead of 160,000; `M = 800` | authorised by the executing instruction for exactly this case; the transition floor is a recorded shortfall; `M = 1600` at 32 lanes confirmed by the timing runs |
-| D2 | seed 2 not run although its condition was met | caused by the reviewer's own 3-hour cap, not by the contract; seed 2 for both arms is launched after this intake (same runner, same configuration) and appended to the result document when done |
+| D2 | seed 2 not run although its condition was met | caused by the reviewer's own 3-hour cap, not by the contract; seed 2 for both arms was run after this intake (same runner, same configuration; result document section 12) and the deviation is closed. At seed 2 both arms are complete with the same counts, every exposure line is monotone, the three first-rollout integrity checks pass with zero mismatches, and the target-scale ratio is 1.04569 (team) and 1.04572 (agent). The evaluation-mean ordering of the arms reverses between seeds (seed 1: off 22.6 versus D0 35.9; seed 2: off 32.3 versus D0 26.4), which is recorded as one more reason the arms are not compared at E0 |
 | D3 | `hmasd_run.py` not used | per contract §7 |
 | D4 | a meaningless `d2_metrics_delta` field in the D0 `metrics.jsonl` | documented, runner left byte-identical to what ran; ignore the field |
 

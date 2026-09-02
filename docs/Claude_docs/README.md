@@ -132,7 +132,8 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   both arms complete (80,000 transitions, nonzero optimizer and evaluation counts, monotone exposure
   lines in every network), the three first-rollout integrity checks (zero mismatches; target-scale
   ratio 1.04589 against 1.04583), the frozen 1,536-probe set with its content digest, deviations
-  D1 to D4, and what could not be verified. Accepted by the review's Part IX.
+  D1 to D4, and what could not be verified; section 12 adds seed 2 for both arms (same counts,
+  checks pass, evaluation ordering reverses between seeds). Accepted by the review's Part IX.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
 
 ### artifacts/
