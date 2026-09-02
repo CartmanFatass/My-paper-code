@@ -380,3 +380,10 @@ following are `d2`-only and are new behaviour rather than a restatement of the p
   gitignored).
 - **No claim is made about learning.** No training run was launched. Nothing in this report speaks to
   whether D2 helps or hurts.
+- **A pre-existing unrelated test failure was observed and left alone.**
+  `tests/production_backend_policy_test.py` reports `7 failed, 100 passed, 1 skipped`. The failures
+  are pinned `source_sha256` assertions over C++ sources under `experiments/candidates/*` (e.g.
+  `ddb14c33d822...` expected, `76c715a6a1cc...` measured), and that tree currently carries 37
+  uncommitted modifications belonging to other work lines. The file imports nothing from `hmasd/`,
+  so the failures cannot come from this change; they were not investigated and nothing there was
+  touched. `tests/hmasd_run_test.py` and `tests/intrinsic_reward_batch_test.py` pass.
