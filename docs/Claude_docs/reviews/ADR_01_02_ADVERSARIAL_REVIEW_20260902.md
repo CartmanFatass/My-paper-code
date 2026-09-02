@@ -647,3 +647,17 @@ the reference tapes, which test 5 already does.
 After these, the owner finalises the mechanics page (adds the adapter paragraph, the cue
 definition, the initial-dwell convention, and the `m` disposition) and ADR 02 revision 4 is a
 wording pass; no further review round is needed before the host is implemented.
+
+### IV.8.1 Decisions taken with the owner, round 4 (confirmed one by one in session)
+
+| # | Decision |
+| --- | --- |
+| 1 | Adapter (c): full HMASD stack; `n_z = K`; the low-level policy emits a `K`-dimensional continuous action and the host takes the argmax as the role; `RENEW` is emitted by the adapter for `i in S_t`; the learner receives the shared mean reward, per-agent components logged. ADR 01 is untouched |
+| 2 | `K = 2` for the first object; `m` is registered and reported but is not an acceptance criterion for E2 to E4; at `K = 2` greedy equals the switching oracle by construction and the learner's ceiling is `J_sw`; `K = 3` is registered as the family point where `m`, the cue, and the probe value `v` are meaningful |
+| 3 | The agent-coupling term for E5 is designed when E5 is scheduled; the mechanics page reserves a default-off switch and state layout for it |
+
+Finalisation: the owner adds to the mechanics page the adapter paragraph (decision 1), the cue
+definition and the `m` disposition (decision 2, IV.4), the initial-dwell convention (IV.5), and the
+reserved coupling switch (decision 3); ADR 02 revision 4 folds the same items in as wording. No
+further review round is required before the host is implemented; Claude reviews the host diff
+against ADR 02's nine invariants when it exists.

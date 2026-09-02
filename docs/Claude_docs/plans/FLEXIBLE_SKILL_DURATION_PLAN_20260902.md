@@ -192,5 +192,8 @@ term; ADR 02 must register a duration margin `m_dur` next to `m`, and the ten-se
 only the fixed-`k` D0 sweep (review §II.10.1). Revision 3 of ADR 01 was accepted for
 implementation (review Part III); the implementer follows `D2_IMPLEMENTATION_PLAN_20260902.md`.
 ADR round 4 (2026-09-02): GPT Pro drafted `RELAY_CORRIDOR_MECHANICS_20260902.md` and ADR 02
-revision 3; the margins were re-derived and hold; three owner decisions remain (review Part IV:
-the HMASD adapter, `K = 2` with `m` demoted versus `K = 3`, and a coupling term for E5).
+revision 3; the margins were re-derived and hold. Decisions taken (review §IV.8.1): full HMASD
+stack with a continuous `K`-dimensional low-level action and host argmax as the role; `K = 2` with
+`m` reported but not an acceptance criterion (`m_dur` is); the E5 coupling term is designed when
+E5 is scheduled, with a default-off switch reserved. The owner finalises the mechanics page and
+ADR 02 revision 4 as a wording pass; then the host can be implemented.
