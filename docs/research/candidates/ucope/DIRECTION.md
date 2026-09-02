@@ -130,7 +130,14 @@ not authorized.
 The unchanged B1 configuration is retired as a low-value repeat. The direction
 continues only through the read-only A/RECON object
 `UCOPE-A-RECON-B1-ODD-SUPPORT-VS-EVEN-HELDOUT-COMPETENCE-AUDIT-R01`, whose
-execution is not granted by the convergence decision. It must audit every one
+execution is not granted by the convergence decision.
+
+> **Corrected 2026-09-02 (section 11 recast).** "continues only through" is corrected to
+> "continues alongside". That audit is complete, and under owner decision 2 of
+> `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 the direction now
+> continues through two concurrent `B/EXPLORE` objects, not one: the named exposure ladder
+> `UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01` first, and the whitening discriminator alongside it,
+> not instead of it. See `UCOPE_SECTION11_RECAST_INTAKE_20260902.md` section 5. It must audit every one
 of the 72 immutable B1 checkpoints on odd training support
 `K_train={1,3,5,7,9}` beside retained even held-out support
 `K_eval={2,4,6,8}`, changing no tensor, data, weight, optimizer exposure, fold,
@@ -230,6 +237,17 @@ repeat, audit rerun, extra B1/audit score read, budget enlargement, acquisition 
 COUNT/RAW work is permitted. Every valid result returns to `em:ucope:convergence` before a new
 direction conclusion.
 
+> **Superseded in part 2026-09-02 (section 11 recast).** The "budget enlargement" clause of the
+> sentence above is superseded for **named exposure-ladder rungs** only, under owner decision 2 of
+> `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 and
+> `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. Reason, per evidence
+> spec §5.2 ("the EM MAY revise ... budget ... between named runs after seeing earlier results. Each
+> material change and its reason MUST be recorded") and §11.1 (the B ladder is "changed between named
+> runs as the results suggest"): a named rung is a new B object, not an enlargement of a running one.
+> Every other clause of the sentence stands unchanged — no unchanged B1 repeat, no audit rerun, no
+> extra B1 or audit score read, no acquisition evaluation, no COUNT/RAW work. See
+> `UCOPE_SECTION11_RECAST_INTAKE_20260902.md` section 4.1.
+
 The canonical response is archived at
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/ucope/ucope-em-convergence-20260901-03/RESPONSE.md`,
 SHA-256
@@ -237,6 +255,52 @@ SHA-256
 The accepted intake and exact prospective contract are
 `UCOPE_INVERTIBLE_CONDITIONING_R01_CONVERGENCE_DECISION_INTAKE_20260901.md` and
 `UCOPE_B_EXPLORE_FT_XF_BC_INVERTIBLE_CONDITIONING_DISCRIMINATOR_R01_PROSPECTIVE_CONTRACT_20260901.md`.
+
+### Section 11 recast — 2026-09-02
+
+Owner decisions 2 and 7 of `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`
+A.4, recorded formally in `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`,
+recast this direction to `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11 without changing
+any frozen scientific object. The §11.6 record of the demotion, with every demoted condition quoted
+at its `file:line`, is `UCOPE_SECTION11_RECAST_INTAKE_20260902.md`.
+
+```text
+LADDER_OBJECT_ID=UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01
+LADDER_EVIDENCE_CLASS=B/EXPLORE
+LADDER_RUNG_1=lr 3e-3 at the frozen 160/320 updates, arms FT-XF-FLEX and FT-XF-BC, 3 seeds, 2 folds
+CONCURRENT_B_OBJECT_COUNT=2
+PAID_ACQUISITION_STATUS=UNEVALUATED_LOCKED
+COUNT_RAW_STATUS=LOCKED_UNTIL_COMPETENCE
+```
+
+Four changes, and only these:
+
+1. The exposure ladder is registered as a **named** `B/EXPLORE` object and runs first. Its rungs,
+   its two candidate mechanisms, what distinguishes them, and its reading rule are frozen in the
+   intake before any of its data existed.
+2. The whitening discriminator `UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01`
+   runs **alongside**, not instead. Its frozen object, arms, seeds, folds, exposure and reading rule
+   are unchanged. A both-arms-noncompetent outcome is not `PARK` support on its own.
+3. The exact-oracle competence predicate `C_even` becomes a **recorded observation** reported per
+   run at unchanged thresholds. It is no longer a pass/fail gate on any run's completion or
+   publication. The acquisition and COUNT/RAW locks above stay in force as this direction's own
+   sequencing choice, not as evidence-spec gates, and this recast opens neither.
+4. The two runner refusals become recorded fields: the clean-committed-source check
+   (`scripts/run_ucope_bc_conditioning_discriminator_r01.py:82`) now records the
+   `git status --porcelain` result and the HEAD SHA and proceeds; the `PERFORMANCE_READY`
+   `assessment-03` binding (`:127`) now records whichever assessment exists —
+   `assessment-02.json` is `PERFORMANCE_READY` on disk and `INVALID_NOT_ADOPTED` by the prospective
+   contract's own line 561, and both facts are recorded while neither gates.
+
+Still holding a launch, unchanged: the §4 integrity items (group-disjoint folds, odd/even support
+separation, no reading of B1 or audit runtime rows, the non-positive-definite `G` stop), the §5.2
+nonzero transition/update/evaluation counts, the fresh `4 GiB` physical and effective memory
+admission immediately before each run, one machine-generated exposure line, and §6.2 quarantine of a
+learner-side instrumentation failure. Per decision 7, missing **resource** telemetry downgrades a run
+to `resources_unmeasured` with reasons and never annuls or quarantines it.
+
+Results of the two runs: `UCOPE_EXPOSURE_LADDER_R1_RESULT_EVIDENCE_20260902.md` and
+`UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:
 

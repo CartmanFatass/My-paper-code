@@ -803,3 +803,49 @@ sent to a fresh `em:ucope:convergence` round before direction-local convergence 
 - `docs/research/candidates/ucope/UCOPE_B_EXPLORE_MT_XF_BC_COMPETENCE_FIRST_SCOUT_R01_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
+---
+
+## Addendum — section 11 recast, 2026-09-02 (appended; the frozen body above is unchanged)
+
+Authority: owner decisions 2 and 7 of
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4;
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`;
+`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11, which prevails over this contract
+wherever this contract asks more of a `B/EXPLORE` object than §11 does. The §11.6 record of the
+demotion, with every condition quoted at its `file:line`, is
+`UCOPE_SECTION11_RECAST_INTAKE_20260902.md`.
+
+Nothing in the frozen body above is edited, and no scientific factor of
+`UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01` changes: the two arms, three
+fresh seeds, two group-disjoint folds, 5,120 episodes per context, batch 256, `160`/`320` updates at
+lr `3e-4`, checkpoints `{40, 80, 160, 320}`, the target-blind positive-diagonal Cholesky transform
+and function-space-matched initialisation, the exact oracles, the `C_even` thresholds, the positive
+and falsifier definitions, and the claim ceiling all stand exactly as written above.
+
+**Demoted from launch condition to recorded field** (each is quoted from the body above at the line
+the compliance note's Part B section 5 gives):
+
+| # | Body clause | Line | Now |
+| --- | --- | --- | --- |
+| 1 | "Before any result-bearing invocation, CM must return implementation evidence showing: … 8. create-once manifest/checkpoint/result binding, full activity and resource telemetry, complete-only publication, and incomplete-attempt quarantine" | :462, :478-479 | the binding, complete-only publication and incomplete-attempt quarantine stand; "full … resource telemetry" as a pre-launch condition is recorded, and a missing measurement sets `resources_unmeasured` with reasons (decision 7) |
+| 2 | "CM must also produce outcome-blind A/RECON performance evidence for the exact implementation." | :483-484 | recorded field `performance_assessment` with `gating: false` |
+| 3 | "A later manifest may bind only the exact create-once `assessment-03` bytes, their source aggregate, V3 schema, V2 projection law, frozen topology, and `PERFORMANCE_READY` disposition." | :705-708 | recorded. `assessment-03` does not exist; `assessment-02.json` does, is `PERFORMANCE_READY` on disk, and is declared `ASSESSMENT_02_READINESS=INVALID_NOT_ADOPTED` at :561. Both facts are recorded; neither gates |
+| 4 | "The result manifest must bind a clean committed source revision, source-byte inventory, …" | :711-714 | the revision, inventory, exact config, three seeds, RNG/data-ancestry law, arm order, transform implementation and zero-effect firewall are still bound and validated; only "clean committed" is recorded rather than required |
+| 5 | `C_even(P) = … AND exact_eight_context_oracle_root_vector AND maximum_expected_regret <= 1/50 AND minimum_forced_PROBE_tail_agreement >= 19/20`; "Update 320 alone controls competence." | :324-333 | computed unchanged at the same exact thresholds and **reported per run as a recorded observation**. It gates neither the run's completion nor its publication |
+| 6 | "A late, different, or unverifiable topology is `REPAIR_REQUIRED`" | :589-592 | the topology is still configured (1 intraop thread, 1 interop thread, deterministic algorithms) and recorded in the manifest and run record; it no longer refuses |
+| 7 | the projection resource caps derived from the assessment | :705-708 and the readiness block above them | recorded as `cap_exceedances` beside the observed telemetry, with `gating: false`, because they descend from an assessment this contract itself declares ineligible |
+
+**Still holding this launch, unchanged:** the §4 integrity items; "9. real environment, learner,
+trainer, checkpoint, and evaluator calls with nonzero transitions, updates, and evaluations in the
+result path" (:480-481); "Immediately before every result-bearing attempt, run the central memory
+admission and require both physical and effective available memory to be at least `4,294,967,296`
+bytes" (:710-711); "Group-disjoint folds", the odd/even support separation and "It may not read B1
+or audit runtime rows" (:305-311); the non-positive-definite `G` stop; one machine-generated
+exposure line (§11.4); create-once binding and complete-only publication; and §6.2 quarantine of an
+incomplete attempt on a learner-side instrumentation failure.
+
+**Sequencing.** Under decision 2 this object runs **alongside** the named exposure ladder
+`UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01`, not instead of it, and the ladder runs first. A
+both-arms-noncompetent outcome here is not `PARK` support on its own before the ladder has run.
+
+**Result.** `UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.
