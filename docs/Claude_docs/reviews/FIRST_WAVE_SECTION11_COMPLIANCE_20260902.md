@@ -364,7 +364,14 @@ not fatal. That is a different object and is put to the owner in C.4.
    ladder, now bindable to this base run; or first a cheap diagnostic object on why the swapped
    arm is uniformly fatal (a host row where the wrong first action is costly but survivable), so
    that the order-value contrast becomes graded before more foundations are spent. The reviewer
-   recommends the diagnostic first. Asked of the owner with the other intakes.
+   recommends the diagnostic first. **Owner decision (2026-09-02): the diagnostic object first;**
+   RUN-02A/02B stay as frozen and are not launched until the diagnostic is in. The diagnostic is a
+   new scientific object with its own one-page card (host row, reading rule, prediction) written
+   before any run; it is scheduled after the UCOPE recast under the two-concurrent budget.
+2. Native caches: **owner decision (2026-09-02): the owner clears the `%LOCALAPPDATA%\Temp\hmasd_*`
+   directories with elevated rights; later recast sessions do not redirect `TMP` and use the
+   default cache root.** Until the clearing is confirmed a session that meets the wall records the
+   redirect as a deviation, as SCDMP did.
 
 PORTFOLIO row for `semigroup_consistent_duration_model_policy` updated by the reviewer in the
 commit carrying this part (next-object text and timestamp only; lifecycle, priority, owner
