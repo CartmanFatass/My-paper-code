@@ -38,6 +38,7 @@ if str(REPO_ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import run_flexible_skill_duration_e1 as e1  # noqa: E402
+import run_flexible_skill_duration_e1_aggregate as e1agg  # noqa: E402
 
 E1_OUTPUT_ROOT = Path(os.environ.get(
     "E1_OUTPUT_ROOT",
@@ -299,10 +300,17 @@ def test_no_e0_d0_run_exists_at_32_lanes():
     )
 
 
-def _e1_rollout1(run_name):
-    run_dir = E1_OUTPUT_ROOT / run_name
-    if not (run_dir / "rollout1_summary.json").exists():
-        pytest.skip(f"E1 run artifacts not present at {run_dir}")
+def _e1_rollout1(arm, seed=1):
+    """The completed, non-quarantined run for `arm` at `seed`.
+
+    A quarantined first attempt is re-run under a new run name, so the directory is
+    resolved by completion rather than assumed to be `<arm>_seed<S>`.
+    """
+    if not E1_OUTPUT_ROOT.exists():
+        pytest.skip(f"E1 output root not present at {E1_OUTPUT_ROOT}")
+    run_dir = e1agg.resolve_run_dir(E1_OUTPUT_ROOT, arm, seed)
+    if run_dir is None or not (run_dir / "rollout1_summary.json").exists():
+        pytest.skip(f"no completed E1 {arm} seed {seed} run under {E1_OUTPUT_ROOT}")
     return {
         "dir": run_dir,
         "summary": json.loads((run_dir / "rollout1_summary.json").read_text(encoding="utf-8")),
@@ -332,8 +340,8 @@ def test_e1_arms_rollout1_parity():
     draws from the global torch RNG and every later sample diverges.  The coordinator and
     the discoverer, which are constructed *before* the discriminators, are bit-identical.
     """
-    d0 = _e1_rollout1("d0_seed1")
-    d1 = _e1_rollout1("d1_seed1")
+    d0 = _e1_rollout1("d0", 1)
+    d1 = _e1_rollout1("d1", 1)
 
     assert np.array_equal(d0["boundaries"], d1["boundaries"])
     assert d0["summary"]["boundaries_sha256"] == d1["summary"]["boundaries_sha256"]
