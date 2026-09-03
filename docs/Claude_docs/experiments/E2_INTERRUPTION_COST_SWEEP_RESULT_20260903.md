@@ -192,14 +192,158 @@ Because the corridor's streams are keyed by `(master seed, episode id)` alone, t
 id is the same episode in every arm, every seed and every checkpoint, and a prefix of the set is
 still a matched set.
 
-<!-- PLACEHOLDER: 5. Budget, timing basis and stop rule -->
+## 5. Budget, timing basis and stop rule (contract §4)
+
+### 5.1 The timing basis
+
+Review Part XII.1 item 5 requires the wall-clock estimate to come from E2's own first rollout,
+not from the P3 table. It does. Everything below was measured on this machine at the launch
+commit, with two concurrent four-thread processes, 16 lanes and `H = 400`.
+
+| Measurement | Value | When |
+| --- | --- | --- |
+| Corridor rollout + update, single process | 64.2 s | pre-launch probe |
+| Corridor rollout + update, two concurrent processes | 78 s | pre-launch probe (concurrency factor **1.21**) |
+| Corridor rollout + update, two concurrent, **the runner as launched** | 86.4 / 85.6 s (`d0_k40` seed 1, rollouts 1–2) and 84.7 / 83.5 s (seed 2) | first pair |
+| Evaluation, per episode, two concurrent | 0.46 s | pre-launch probe at 512 lanes |
+| Evaluation, per episode, measured in the run | **0.460 s** — 235.6 s for 512 tapes (`d0_k40` seed 1, rollout 5) and 234.8 s (seed 2) | first pair |
+
+The runner's per-rollout figure is about 10% above the probe's because the probe did not carry
+the per-step gap, cause and change-flag capture or the per-rollout decile accounting.
+
+### 5.2 Why the contract's evaluation size does not fit, measured
+
+At contract §3's schedule — 4,096 matched tapes every 5 rollouts, four evaluations per run —
+one run costs 26 min of training plus 4 × 31.5 min of evaluation = 152 min, so 18 runs at two
+concurrent (9 slots) is **22.8 h**, about 2.9× the 8-hour cap (advancement plan §7 decision 3).
+
+Contract §4.4's remedy does not reach it. §4.4 drops runs, not evaluation size: at the
+contract's evaluation size the 14-run version is 17.7 h, and only 6 of the 18 runs fit inside
+8 h. The binding constraint is the tape count, not the run count.
+
+The cause is measured, not inferred. `cProfile` on the evaluation step at 512 lanes puts 93% of
+the time inside `hmasd/networks.py::SkillCoordinator.evaluate_held_batch` — the teacher-forced
+transformer pass D2 runs **every step** at `delta = 1`, in every arm including the D0 arms with
+`c = inf` — with `torch._C._nn.linear` and `scaled_dot_product_attention` the two largest leaves.
+Cost per lane-step is flat from batch 256 to 1024 (0.83, 0.85, 0.83 ms), so batching does not
+help, and nothing the runner may touch changes it: fixing it would mean editing `hmasd/`, which
+the assignment forbids.
+
+The resolution consequence is small. Deviation **D1** (§8) evaluates the final checkpoint on
+2,048 tapes and the intermediate checkpoints on 512.
+
+The per-episode return standard deviation over the matched tapes, measured in the study's first
+evaluations, is **0.0302** (`d0_k40` seed 1) and **0.0345** (seed 2). Taking the larger:
+
+| Evaluation size | standard error of the mean | tightest reference gap `J_20 − J_5 = 0.0080752` in standard errors |
+| --- | --- | --- |
+| 4,096 (contract) | 0.000539 | 15.0 |
+| **2,048 (final checkpoints here)** | **0.000762** | **10.6** |
+| **512 (intermediate checkpoints here)** | **0.001525** | **5.3** |
+
+ADR 02 invariant 5 asks for `m_dur ≥ 3·σ_Δ/√E_eval`. `m_dur = 0.0786280`; bounding the paired
+per-episode difference by `σ_Δ ≤ √2 · 0.0345 = 0.0488` (the two arms treated as independent,
+which is the pessimistic direction — matched tapes make the true paired sd smaller), the
+requirement at 2,048 tapes is `3 × 0.0488 / 45.25 = 0.00324`, which `m_dur` exceeds by a factor
+of 24. It is also satisfied at 512 (`0.00647`, a factor of 12). **Observation, not inference:**
+no comparison this study makes is limited by the evaluation size at either checkpoint size; what
+limits §5 is `s`, the across-seed range of two seeds, which §7 shows is two orders of magnitude
+larger.
+
+### 5.3 Stop rules
+
+* **Per run** (contract §4.3): `R = 20` rollouts, or the first non-finite loss or return. Any
+  instrumentation failure quarantines the run — no interpretation, no resume, no salvage; one
+  fresh re-run under a new name; a second failure reports the arm-seed as not run. The runner
+  writes a `QUARANTINED` marker and returns a non-zero exit code on any exception and on any
+  incomplete rollout count.
+* **Per study** (contract §4.4): all 18 runs, or the 8-hour machine-time cap, or the owner's
+  stop. The cap was projected to be breached by 5.6% after the first rollout; the decision on
+  record was to keep all 18 runs (deviation **D2**, §8).
+
+<!-- FILL: realised machine time -->
+
 
 <!-- PLACEHOLDER: 6. The eighteen runs -->
 
 <!-- PLACEHOLDER: 7. The contract §5 reading rule, applied verbatim -->
 
-<!-- PLACEHOLDER: 8. Deviations -->
+## 8. Deviations, each named
 
-<!-- PLACEHOLDER: 9. Could not verify -->
+| # | Deviation | Status |
+| --- | --- | --- |
+| **D1** | **Contract §3 item 1's evaluation size was reduced: the final checkpoint is evaluated on 2,048 matched tapes and the intermediate checkpoints (rollouts 5, 10, 15) on 512, instead of 4,096 at every checkpoint.** The §3.1 *schedule* — evaluation every 5 rollouts — is unchanged, as is the deterministic policy, the second-agent mechanism and the matching property: the declared tape set is episode ids `0..4095` at evaluation master seed `770001`, its content digest `9844b04cfe01eda3cb1d1c102b4e8b44631994eadb99f594c7fcca7f0134c5b1` is recomputed and recorded in every run, and what is evaluated is a **prefix** of that set, so every arm, seed and checkpoint still sees the same episodes. Measured basis (§5.1, §5.2): a rollout costs 85.5 s at two concurrent processes and an evaluation episode 0.46 s, so the contract's 4 × 4,096 schedule costs 152 min per run and **22.8 h** for the study against an 8-hour cap; §4.4's drop rule reduces runs, not evaluation size, and cannot reach it (only 6 of 18 runs fit). The cause is measured: 93% of the evaluation step is the coordinator's teacher-forced transformer pass, which D2 runs every step at `delta = 1` in every arm, and its cost per lane-step is flat in the batch size, so no runner-side change helps and the fix would require editing `hmasd/`. **Decided before launch, not after seeing any result**, and approved on the record as a pre-launch contract deviation (ADR review XII.4) with the conditions applied here: the intermediate checkpoints are reported as trajectory reads only and are never a §5 deciding quantity; the 4,096-tape digest is kept and every final checkpoint is retained, so a later contract can evaluate the full declared set on the saved checkpoints |
+| **D2** | **The 8-hour machine-time cap (advancement plan §7 decision 3) was projected to be exceeded and the study was run in full anyway.** After the first rollout the projection was 56.3 min per run — 28.5 min of training (20 × 85.5 s) plus 27.5 min of evaluation (3,584 episodes × 0.46 s) — giving 9 slots × 56.3 min = **8.45 h**, a 5.6% overrun. Contract §4.4's remedy (drop seed 2 of the outer arms `k ∈ {1, 2}`, `c ∈ {0.25, 2.0}`, taking the study to 14 runs and ~6.6 h) was weighed and **not** applied: it would remove seed 2 from two of the four `c` arms, which makes §5's mechanism-A clause "the mean segment length is non-decreasing in `c` across the four `c` arms **in both seeds**" unevaluable as written, and would cost the reviewer's numerical clauses a seed at two of the four `c` values — a larger loss than the 27 minutes it saves. The decision on record (ADR review XII.5) keeps all 18 runs, notes that the overrun sits inside the 8–9% between-session timing drift P4 measured on identical code the same day, and requires the projection to be re-checked after every pair with an escalation threshold of 9.0 h. <!-- FILL: realised machine time and whether any re-projection crossed 9.0 h --> |
+| **D3** | **`RelayCorridorHMASDDriver.__init__` pins `torch.set_num_threads(1)`; the runner restores 4 immediately after construction.** The contract runs at four threads (executing instruction, and E0/E1's setting). The driver's own default is not a contract quantity and no arm differs from any other in this respect, so it does not affect a comparison; it is recorded because the driver file says one thing and every manifest records `torch_num_threads: 4` |
+| **D4** | **The learner config object's class is rebound after construction.** `build_corridor_learner_config` builds its config from a class defined **inside the function body**, which `torch.save` cannot pickle, and `HMASDAgent.save_model` pickles `self.config`; without the rebinding to the module-level `E2CorridorConfig(Config)` no checkpoint could be written at all. Both classes are empty subclasses of `config_1.Config`; no attribute, default or behaviour changes, only the pickle path. `envs/relay_corridor/hmasd_driver.py` was **not** edited |
+| **D5** | **Three bound methods on runner-owned instances are wrapped to capture contract §3 quantities the driver does not return.** `adapter.step` (per-step `g_i` / `g_Z`, sampled mask, boundary causes, host change flags), `agent.get_d2_metrics` (the raw completed-segment lists, which `clear_buffers` drops), `agent.update` (its loss dict). These are instance attributes; the imported modules are untouched, exactly as E0's `_StepCounter` treats the optimizers. Without them contract §3 items 2 and 3 could not be measured at all without editing `envs/relay_corridor/hmasd_driver.py` |
+| **D6** | **`scripts/hmasd_run.py prepare/execute/reconcile` not used**, as at E0 and E1 (E0 contract §7, spec §11.4). The runner writes its own manifest with the same facts |
+| **D7** | **The study ran in a git worktree, not the main tree**, so the study root is `…/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E2_20260903/` rather than `C:/Projects/HMASD/temp/…`. `temp/**` is gitignored in both, so no run output was ever going to enter Git; the path is recorded so the directories can be found |
+<!-- FILL: further deviations discovered during the runs -->
 
-<!-- PLACEHOLDER: 10. Interpretation boundary -->
+
+## 9. Could not verify
+
+- **Nothing about which arm is better as a matter of algorithm design.** Contract §1's non-goals
+  forbid it and the budget would not support it: two seeds, `R = 20` rollouts, 320,000
+  transitions per run, four evaluations. Everything in §6 and §7 is the contract's own rule
+  applied to its own numbers.
+- **A seed-count or variance claim.** Two seeds is what plan §1 asks for — "direction and
+  obvious instability" — and no more. Every "across-seed range" in §7 is `max − min` of two
+  numbers; it is a range, not an estimate of a standard deviation, and `s` in §5's rule is
+  therefore a very coarse scale.
+- **The full 4,096-tape evaluation.** Deviation D1 evaluates 2,048 tapes at the final checkpoint
+  and 512 at the intermediate ones. The declared 4,096-tape set and its digest are recorded and
+  every final checkpoint is retained, so the full set can be evaluated later, but it **was not**
+  evaluated here and no number in this document is a 4,096-tape number.
+- **That the intermediate checkpoints say anything about the reading.** They are 512-tape
+  trajectory reads at a quarter of the final resolution and are excluded from §5 by
+  construction; the rule is applied to the final checkpoint only.
+- **Whether the observed `c` grid is well centred.** The grid `{0.25, 0.5, 1.0, 2.0}` came from
+  **E0's** D0 gap histogram on UAV scenario 1 (agent gap median 0.22, q90 0.64, max 1.66 in
+  logit units), not from the corridor. The corridor's own gap distribution is recorded per
+  rollout (§6, `gaps.jsonl`) precisely so the next contract can re-centre it; whether this grid
+  brackets the corridor's gap scale is an observation this study reports, not a design it
+  validated in advance.
+- **The event-alignment fraction's window.** "Within one step after the flag flipped" is read as
+  the two-step window `{t_flip, t_flip + 1}`. The one-step reading is reported beside every
+  value. No test or reference fixes which of the two the contract's author meant; the choice is
+  recorded in §2 and the alternative is always visible.
+- **Whether "interruptions" in §5 means all of them or only the gap-caused ones.** Both are
+  reported everywhere; §5 is applied to the literal reading (all sampled positions). At the D0
+  arms, and at any `c` large enough never to fire, the cap and the episode reset are the only
+  causes, so the literal alignment fraction of such an arm is a statement about cap boundaries,
+  not about the gap.
+- **Evaluation isolation is argued, not proved.** Inherited from E0 §10 and E1 §9: the evaluator
+  is a second `HMASDAgent` synced by `state_dict` plus deep copies of `obs_norm`, `state_norm`
+  and both value normalisers, built and run inside a saved/restored RNG state. If the learner
+  carried any other state affecting the forward pass, the evaluation would silently use a stale
+  value. No test in the repo compares the two numerically on the same input.
+- **Chunking the evaluation is argued from the host's keying, not measured.** The 400-step
+  episodes are run in chunks of 512 lanes; the argument that a chunk sees exactly the episodes
+  it would see inside one 4,096-lane batch rests on the host's `(master seed, episode id)`
+  keying and ADR 02 invariant 2 (which `tests/relay_corridor_host_test.py` covers), not on a
+  direct 4,096-lane comparison, which was never run.
+- **Checkpoint restore was not exercised.** `checkpoint_final.pt` was written by
+  `agent.save_model` in each completed run and never loaded back.
+- **No CUDA comparison** is possible: neither declared conda env has CUDA (`CLAUDE.md`).
+- **The corridor's `σ_Δ`.** ADR 02's resolution arithmetic is written for the *paired* per-episode
+  return difference `σ_Δ`. What this study measures is each arm's own per-episode return
+  standard deviation over the matched tapes; paired differences between arms on the same tape
+  were not formed, so the ADR's exact quantity is reported as unmeasured and the per-arm sd is
+  used as its stand-in wherever a standard error appears.
+<!-- FILL: anything further the runs make unverifiable -->
+
+## 10. Interpretation boundary (contract §7)
+
+Bounded to the homogeneous relay corridor at `(λ₁, λ₂) = (0.02, 0.02)`, `Δ = 0.4`, `N = 6`,
+`K = 2`, `Z = 4`, `H = 400`, the D0 grid `k ∈ {1, 2, 5, 20, 40}` and the D2 grid
+`c ∈ {0.25, 0.5, 1.0, 2.0}` at `k_max = k_Z = 40`, two seeds, `R = 20` rollouts at 16 lanes,
+one machine, the measurements of contract §3 as computed in §2, and the evaluation sizes of
+deviation D1.
+
+It says whether D2 at some finite `c` reached the best fixed `k` **on this host at this budget**,
+and whether its interruptions were event-aligned in the sense §2 fixes. It says nothing about
+heterogeneous hazards (E3), random event durations (E4), the UAV host (E2b), which `c` transfers,
+or any `K` other than 2. Anything in §6 beyond what §5's rule reads is recorded under §5's last
+clause as an observation for E3's design, not as a result.
