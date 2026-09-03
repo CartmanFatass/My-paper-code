@@ -723,6 +723,47 @@ point); **reviewer C-B**: a majority of folds competent but not all six, because
 predicate is tight (regret ≤ 0.02, tail agreement ≥ 0.95) and the whitened learner's residual to
 the exact solve (0.01–0.08 at the smaller `n`) will cross it in at least one fold.
 
+### D.15 Competence object intake (2026-09-03)
+
+Commits `b21fb61f5` (predictions on the card; runner) and `57285f598` (result
+`UCOPE_COMPETENCE_WHITENED_R01_RESULT_EVIDENCE_20260903.md`); scope verified. Admission 11.8 GiB
+before any model; whitening contract checked per stage before any optimiser step (residual
+≤ 5.6e-17); 983,040 fresh counter-addressed episodes at the recorded offset; wall 111 s;
+complete, nothing quarantined; 31 unit checks. **Accepted.**
+
+Outcome by the rule in its stated order: EXACT-SOLVE competent in 6 of 6 (regret 0, agreement
+1, oracle root vector everywhere); WHITENED-10X competent in **3 of 6**; RAW-10X 0 of 6. C-A
+fails (3 ≠ 6), C-B fails (3 < 4), **C-C fires: the ceiling is competent, the learner is not.**
+The binding component in all three whitened failures is the forced-PROBE tail agreement (0.61,
+0.61, 0.52 against 0.95); the oracle-root and regret gates fail once each. The post-hoc
+breakdown localises every whitened failure to the same context, the direction's own target
+context, with 2 of 8 contexts below the gate.
+
+Two new quantities the chain had never measured: the **root** stage's condition number is
+5,014, seven times the tail's, and the root's `d_learned` median is 0.154 whitened (2 of 6
+inside `ε_L`) against the tail's 0.044 (5 of 6). So the tail is now essentially solved by
+whitening and budget, and the residual sits in the root learner, on a design seven times worse
+conditioned. Two policies inside `ε_L` on the tail still fail the agreement gate, which says the
+gate is decided by the root's choices in the target context, not by the tail's coefficients.
+
+Verdicts. Owner: "unclear", no verdict. Reviewer's C-B: not borne out by the wording (3 of 6 is
+not a majority); right that the predicate is tight and that not all six would pass, wrong on the
+count and on the location of the failure (the root, not the tail residual).
+
+Reviewer's reading. The chain has moved the failure from "the learner does not learn" to "the
+tail learner learns, the root learner on a κ ≈ 5,000 design does not, in one context". The next
+object is the root stage's version of the conditioning object: whitened root design (from
+training rows only, same contract) versus raw, with the exact root solve as ceiling, competence
+recorded per arm; it is the first object whose C-A branch would be a learner reaching
+competence on this host, which is what the direction's locked question has waited for since
+2026-08. Cost is minutes.
+
+### D.16 Decisions this intake produces
+
+1. UCOPE's next object: (a) the root-learner conditioning object as above (reviewer's
+   recommendation); (b) a tail-agreement-margin object on the binding context; (c) stop here
+   with the chain as the record (competence reached by the exact solve only).
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
