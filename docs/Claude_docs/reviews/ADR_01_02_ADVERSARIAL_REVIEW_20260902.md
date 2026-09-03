@@ -1207,5 +1207,9 @@ foreign labelling.
    measurement: the update is 91% of a rollout at 4 threads (188 s of 206 s at 32 lanes); E1's
    runs took 100–137 minutes each with two concurrent. E2 as sized (ten arms × two seeds × 20
    rollouts) is update-bound on the corridor too. The reviewer recommends P4 before E2.
+   **Owner decision (2026-09-03): P4 first, then E2.** P4 runs under the refactor plan's
+   equivalence policy (the fingerprint stays or the one authorised re-freeze is spent under the
+   tolerance harness, recorded); the E2 contract and the owner's prediction are completed while
+   P4 runs, and E2 launches when P4 is reviewed and integrated.
 2. **E2 contract and prediction**: drafted by the reviewer next; the owner's prediction requested
    before launch.

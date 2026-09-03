@@ -436,6 +436,10 @@ D8's and E4's territory.
    (c) re-pose B01 on the neighbour row `(0.92, 0.25)` with two seeds, to measure the near-zero
    graded value with its sign per state; (d) re-pose B01 at the frozen row with the survivable
    `a = 1` rows as the control, which changes the question from order to action choice.
+   **Owner decision (2026-09-03): (a).** RUN-02A/02B are held; the B01 line stops with the base
+   run and the diagnostic as its record; SCDMP continues only through the D6 recast when that
+   object is designed; the `k`-split survival observation is handed to `flexible_skill_duration`
+   as an E4 design input.
 
 ---
 
@@ -846,6 +850,10 @@ the value correctly). It sits behind a published result; the fail-soft fix is th
    small coefficient error; whether a larger `n`, or the whitened tail at a larger budget, or a
    margin-aware objective restores it): card it next (reviewer's recommendation), or stop the
    UCOPE chain here.
+   **Owner decisions (2026-09-03): 1 (a), 2 card it.** The root object runs under `C_root`
+   frozen before launch as an exploration run (no owner prediction; reviewer's for the record:
+   R'-B, the whitened root improves the regret and oracle-root components but not in all six);
+   the tail-margin object is carded and waits for the owner's prediction.
 
 ---
 
