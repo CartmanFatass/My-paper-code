@@ -863,3 +863,20 @@ re-entry conditions, claim ceiling, and evidence reasoning are recorded in
 This is the final direction-local convergence decision. Portfolio lifecycle, priority, fusion,
 separation, capacity, and investment remain reserved for `portfolio:cross_direction` and Root
 integration.
+
+## Paid acquisition measured under evidence spec section 11.1 — 2026-09-03
+
+Object `UCOPE_PAID_ACQUISITION_B01_CARD_20260903.md`, result
+`UCOPE_PAID_ACQUISITION_B01_RESULT_EVIDENCE_20260903.md`, branch **PA-B**: under the competence-free
+predicate `A_paid` (the frozen `acquisition_pass` with its competence conjunct removed and nothing
+else changed), the whitened margin-aware learner pays the probe cost at the unique context where
+paying is profitable and captures the full `+0.021437` net acquisition in 5 of 6 policies; the exact
+reference does so in 6 of 6. Competence is recorded beside it and gates nothing: `C_even` 3 of 6 for
+both arms; the frozen conditional exposure returns `acquisition_pass = false` with null values for
+all twelve arm-policies.
+
+Owner decision (2026-09-03, compliance note D.25): `PAID_ACQUISITION_STATUS=UNEVALUATED_LOCKED` and
+`COUNT_RAW_STATUS=LOCKED_UNTIL_COMPETENCE` keep their wording, which ties the acquisition lock to
+competence; **PA-B is recorded beside them as the measured status under `A_paid`**
+(`PAID_ACQUISITION_MEASURED_A_PAID=5_OF_6_TREATMENT_6_OF_6_REFERENCE`). The chain is paused; the
+three-witness hinge object is queued as its next object when a concurrency slot frees.
