@@ -1154,6 +1154,27 @@ admission) and a fresh attempt are permitted under §6.2. The session that launc
 by the rate limit at the same time. Held until a concurrency slot frees: the owner now caps
 concurrent directions at two (E2 and UCOPE first).
 
+### E.7 Correction of E.6, repair and second B1 launch (2026-09-03, 14:17 PDT)
+
+**The reviewer's E.6 diagnosis was wrong.** The implementer reproduced the failure instead of
+reading it: `b1.py` already created the admissions directory before the preflight; the rename
+failed because the target path was 279 characters, past Windows' 260-character `MAX_PATH`. The
+longest path an attempt writes (a bound admission's raw sibling) is the run-root name plus 235
+characters at this output directory, so the run-root name may be at most 21 characters, and the
+first attempt used 43. Repair `2e5bc4695`, nothing scientific: a projected-path budget measured
+over all 12 slots and 4 slice intervals, a `BLOCKED_PATH_BUDGET` refusal from both entry points
+before any staging directory or receipt exists, and the prescribed admissions-directory creation
+kept as belt and braces; two tests pin the refusal and the directory. Suite `1 failed, 284
+passed`, the one being the pre-existing fixture-composition failure. Registered as the reviewer's
+erratum: a diagnosis from error text alone, corrected by reproduction.
+
+Second launch at `c3db02e8f` (a clean CBSC surface; the repair is its ancestor), 21:17:20Z,
+detached, run root `exp/b1_scout_r02` (longest projected path 250 of 260), preflight passed at
+10.37 GiB, B0 rehashed at launch and equal to `B0_REVIEWED_AUTHORITY` in every field. One
+refused relaunch at 21:15:26Z (`BLOCKED_UNCOMMITTED`, HEAD moved between push and launch;
+nothing created) is a deviation for the result document, as is the first attempt. Early pace
+40–50 s per slice, projecting 25–35 minutes against the 120-minute cap.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
