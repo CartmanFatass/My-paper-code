@@ -1191,3 +1191,6 @@ object, as the exposure ladder was for UCOPE.
    host and a budget ladder (reviewer's recommendation); (b) the budget ladder first (256 and
    1,024 updates, one seed, exposure line reported); (c) more seeds at 64 updates; (d) park the
    B/EXPLORE line, keeping A0 as optional analysis.
+   **Owner decision (2026-09-03): (a), the controller-headroom object**, carded first as an
+   A/RECON object with its outcome branches frozen and the owner's prediction taken before it
+   runs.

@@ -1275,6 +1275,7 @@ with the drift caveat above.
    Owner: (a) close P4 as is, nothing applied (reviewer's recommendation); (b) apply C2 + C3
    now under the harness (bit-identical, about 1.2%, with the `foreach` checkpoint caveat);
    (c) open a numerics-change decision on C1 with its own tolerance policy, not before E4.
+   **Owner decision (2026-09-03): (a), P4 closed as is, nothing applied.**
 2. E2 launches at this commit under XI.4's standing decision; no further question. The runner
    is implemented by an Opus session in a worktree from the E2 contract, predictions already on
    record (plan §11, 2026-09-03).
