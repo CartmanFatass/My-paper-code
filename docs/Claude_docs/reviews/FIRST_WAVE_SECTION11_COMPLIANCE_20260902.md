@@ -855,6 +855,55 @@ the value correctly). It sits behind a published result; the fail-soft fix is th
    R'-B, the whitened root improves the regret and oracle-root components but not in all six);
    the tail-margin object is carded and waits for the owner's prediction.
 
+### D.19 Root-conditioning object and tail-margin card intake (2026-09-03)
+
+Commits `104aca591`, `538e34444`, `f86cce872` (rule amendment and runner before the run, clean
+source inventory at launch; result `UCOPE_ROOT_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md`;
+margin card `UCOPE_TAIL_MARGIN_R01_CARD_20260903.md` with its part-1 numbers); scope verified.
+**Both accepted.**
+
+**Root object: `R'-B`.** Tail-reproduction gate passed at exactly 0.0 in all six policies, so
+the three root arms sit on the competence object's tail. Under `C_root` (frozen before launch):
+WHITENED-ROOT-10X 5 of 6, EXACT-ROOT-SOLVE 6 of 6, RAW-ROOT-10X 1 of 6. Mechanism (ii)(a) is
+ruled out on its own measurement (`d_objective_root` 0.009–0.058, all inside `ε_L`, the ceiling
+competent on the carried targets); the raw root's characteristic error is refusing to probe at
+the target context in 3 of 6 policies at regret 0.0214 against the 0.02 gate. Under the full
+`C_even`: whitened root 3 of 6, ceiling 3 of 6, so the pre-launch amendment is demonstrated
+necessary. Reviewer's `R'-B` borne out by wording and by the named components (oracle root
+vector and regret each 1 of 6 raw → 5 of 6 whitened). Neither lock opened.
+
+**Tail-margin card, part 1 (A/RECON, outcome-free, 13 tests).** The fragile object is the
+belief stratum `(LINKED, p = 17/20)`, not one context: the tail basis has no cost term, so the
+target context ties exactly with its cost twin. Tightest cell: true top-two gap 0.0080 between
+periods 6 and 8 at belief 3e-05, flip radius 0.0195, against 0.0334 at `p = 13/20` and 0.1142
+when SEVERED. The three published failures are exactly the cells whose coefficient error
+projects past that gap (projections −0.0083, −0.0142, −0.0178 against −0.0080). The exact solves
+never flip, so the objective at `n = 81,920` is already safe. An exact identity in the basis,
+`z(b, j) − z(b, j+2) = (z(b, j−1) − z(b, j+3))/2`, verified over all 168 cells to 1e-16, gives the
+held-out `(6, 8)` margin a training-support witness `(5, 9)`, so a hinge on the training-support
+gap controls the held-out margin at a factor of two without any held-out period entering
+training; the frozen odd/even separation is preserved.
+
+**Follow-on B object `UCOPE-B-EXPLORE-TAIL-MARGIN-REMEDIES-R01`** (carded, not run): arms
+LARGER-N (`n` doubled; predicted from the sensitivity: no change, 3 of 6), BUDGET-100X (16,000
+tail updates; the three failing projections must shrink by 4%, 44%, 55%; predicted 5 or 6 of 6),
+MARGIN-AWARE (the training-support hinge, `m = 0.024`, weight 1.0; predicted 6 of 6 on the
+agreement gate at the price of value bias). Rule M-A to M-E on the frozen 19/20 agreement gate,
+majority 4 of 6, baseline 3 of 6, fixed before data; budget under 25 minutes; neither lock opened.
+
+Reviewer's reading. The chain is now at the last measured obstacle: three cells at the edge of
+a 0.008 margin. The card's own sensitivity arithmetic makes MARGIN-AWARE the mechanism-level
+answer and BUDGET-100X the cheaper test of whether plain optimisation gets there; LARGER-N is
+the control that the sensitivity says will not move. If any arm reaches 6 of 6 on `C_even`,
+the direction's acquisition question becomes askable for the first time.
+
+### D.20 Decisions this intake produces
+
+1. The owner's prediction over the remedies: LARGER-N, BUDGET-100X, MARGIN-AWARE (which reaches
+   the agreement gate in all six), or unclear.
+2. The `set_num_interop_threads(1)` assertion in the competence runner: fail-soft (record the
+   observed value) or leave as is behind the published result.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
