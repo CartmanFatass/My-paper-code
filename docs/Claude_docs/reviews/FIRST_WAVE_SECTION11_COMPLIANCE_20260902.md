@@ -889,4 +889,8 @@ already present in R01 and is the reason no R02 DEBUG has ever run.
    declared property is presentation conformance, and the R02 law meets it exactly);
    (b) require batch-position invariance too, which is a larger object about the model's
    numerics, not about presentation; (c) demote the aggregate to a recorded field with a
-   stated tolerance and proceed.
+   stated tolerance and proceed. **Owner decision (2026-09-03): (a).** The probe is repaired to
+   the declared like-for-like comparison, installed from the R02 runner (the R01 runner stays
+   read-only substrate) with a test that reproduces the diagnostic's 0/192 and 15/192 on the
+   two laws; the batch-position residual is a separate recorded quantity; a fresh DEBUG and the
+   three 64-update seeds follow at the repaired commit.
