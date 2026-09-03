@@ -804,3 +804,89 @@ third, single-thread process is put to the owner in E.4 rather than assumed.
    reported the directory restored on 2026-09-02; at 02:25 PDT 2026-09-03 the reviewer's
    PowerShell still gets `Access to the path … is denied` on `Get-ChildItem` and `Get-Acl`, so
    the restore did not take and B1 stays held.
+
+---
+
+## Part F — VNFC recast intake, no B result (2026-09-03)
+
+Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
+(working-tree state, committed unchanged), `adbc42b51` (recast intake
+`VNFC_SECTION11_RECAST_INTAKE_20260903.md`, DIRECTION.md entry, addenda on the A0 freeze and the
+EM intake), `04b032eb9` (the canonical opaque-rank sort installed on the R01 runner from a new
+`scripts/run_vnfc_bpcr_r02.py`; A0 gates to records; the 52-row presentation check), `a8305f645`
+and `a2efdc6a4` (two runner repairs), `117550a32` (result document
+`VNFC_BPCR_R02_RESULT_EVIDENCE_20260903.md`). Scope verified: every path under a VNFC surface;
+`scripts/run_vnfc_bpcr_b_explore.py` (the R01 runner, read-only substrate) untouched. Verdict:
+**recast accepted; no B result; the object is not consumed; the block is a defective §4
+measurement, put to the owner in F.4.**
+
+### F.1 What the reviewer checked
+
+1. **Gates to fields.** DIRECTION.md:181-182 ("No R02 result-bearing DEBUG is permitted until …
+   A0 …") superseded and quoted; the 304-row panel and A0's `PASS_CONFORMANT` / `FAIL_LAW`
+   dispositions are A0's own, holding nothing; the byte manifests (942 sources, 31 resources,
+   81→82 modules, DLL build key) are `native_identity_record()` / `byte_manifest_record()` with
+   `gating: false`; the "framework autograd is not an implementation of this law" sentence is
+   recorded as the law's statement; "complete telemetry" became `resources_unmeasured` (D7);
+   the R01 runner's load-only anti-tamper refusal is replaced by building the DLL from the
+   unchanged source before the sink exists, with the key recorded. All other "Forbidden now"
+   clauses of the A0 freeze stay binding. This is decision 4 and decision 7.
+2. **The 52-row presentation check**, row list frozen in the intake before implementation: all
+   52 pass (54 tests). Two rows are exercised at the decoder rather than through byte-identical
+   model inputs because the row-wise GEMM is row-position dependent (implementer's D5, recorded
+   as a dated note, no row changed).
+3. **DLL identity.** Build key `7222d990…` and size 213,504 B identical to the frozen literals
+   after a rebuild from unchanged source into the default cache root; the image sha differs
+   (MSVC image non-determinism), recorded, holding nothing. This is the byte-manifest demotion
+   working as intended.
+4. **Tests.** `8 failed, 348 passed`; the 8 are the pre-existing canonical-EOL
+   `SourceManifestError` failures the R01 engineering milestone already records (frozen surface,
+   not touched); 84 passing tests are new.
+5. **The two DEBUG attempts.** Attempt 01 (154.9 s) quarantined on a `TypeError` in a
+   serialisation helper on a never-executed path, upstream of the held-out freeze; repaired from
+   the R02 runner and a fresh attempt 02 launched under §6.2's "after repair, an outcome-blind
+   fresh attempt may implement the unchanged object" (no endpoint existed; the exposure lines of
+   the two attempts are bit-identical where they overlap). The reviewer accepts that reading: the
+   "do not rerun with changes" instruction is about instrumentation failures with an outcome in
+   view, and there was none. Attempt 02 (162 s, telemetry fully measured) quarantined at the R01
+   runner's relabel probe, `INCOMPLETE: learned-arm actual-path relabel mismatch`
+   (`run_vnfc_bpcr_b_explore.py:1911`), before any held-out `N = 7` endpoint. Not repaired, no
+   third attempt: correct, since changing what a §4 item compares after seeing it fail would be
+   an outcome-informed change.
+
+### F.2 The block, and what the diagnostic shows
+
+The relabel probe is a §4 integrity item the R01 runner inherited. A recorded, non-result-bearing
+probe (192 world-decisions per law, untrained checkpoints, 18.6 s) separates what it conflates:
+
+| law | batch-8 vs batch-1 | presentation 1 vs 1 | R01 runner's probe (8 vs 1) |
+| --- | ---: | ---: | ---: |
+| R01 (no canonical sort) | 12/192 | 15/192 | 8/192 |
+| R02 (canonical opaque-rank sort) | 12/192 | **0/192** | 12/192 |
+
+The R02 law drives presentation dependence to exactly zero, which is what the direction's B
+question needs. The residual 12/192 is batch-position dependence of the row-wise GEMM, identical
+under both laws, which no presentation law can remove. The runner's probe compares a batch-8
+forward against a batch-1 relabelled forward, so it varies both at once and is less sensitive to
+real presentation failure than the like-for-like comparison (8 versus 15). It therefore refuses a
+law with zero presentation dependence. Reviewer's reading: this is a defective measurement of the
+declared property, not a null result and not an integrity failure of the R02 object; it was
+already present in R01 and is the reason no R02 DEBUG has ever run.
+
+### F.3 Flags for the owner
+
+- `experiments/candidates/variable_n_fleet_churn_r02/` (the 13-module A0 implementation) sits
+  outside the implementer's enumerated path and was left uncommitted, while its test directory
+  was committed. The reviewer commits the package unchanged as a provenance record in the commit
+  carrying this part (A0 is optional analysis now; nothing runs it).
+- The `.tsv` byte manifest is tracked (no ignore rule matches) and was committed in `55a46c206`.
+
+### F.4 Decisions this intake produces
+
+1. The relabel probe: (a) repair it to the declared like-for-like comparison (presentation 1 vs
+   1 at equal batch position), record the batch-position residual as a separate descriptive
+   quantity, and launch a fresh DEBUG then the three seeds (reviewer's recommendation: the
+   declared property is presentation conformance, and the R02 law meets it exactly);
+   (b) require batch-position invariance too, which is a larger object about the model's
+   numerics, not about presentation; (c) demote the aggregate to a recorded field with a
+   stated tolerance and proceed.
