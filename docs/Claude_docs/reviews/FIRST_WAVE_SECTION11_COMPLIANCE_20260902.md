@@ -698,6 +698,12 @@ named. That is the kind of quantity worth computing before predicting.
 2. The held whitening discriminator R01: retire as superseded by the conditioning object
    (reviewer's recommendation), repair its tolerance and confirm, or leave quarantined.
 
+**Owner decisions (2026-09-03): 1 (a), 2 retire as superseded.** The competence object is carded
+first (the larger `n` chosen by an outcome-free calculation on the exact solve, the whitened
+learner at the 10× budget, competence recorded per arm, reading rule ordered by effect size)
+and waits for the owner's prediction; the discriminator is recorded in DIRECTION.md as
+superseded, its quarantine record untouched.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
