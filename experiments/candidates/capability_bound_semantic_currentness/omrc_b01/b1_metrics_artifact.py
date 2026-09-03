@@ -17,6 +17,11 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .artifact import canonical_json_bytes, ensure_confined
+from .b1_descriptive import (
+    B1DescriptiveError,
+    unavailable_descriptive_curves,
+    validate_descriptive_curves,
+)
 from .b1_contract import (
     B1_INNOVATOR_SELECTION_ARCHIVE_RELATIVE_PATH,
     B1_INNOVATOR_SELECTION_REQUEST_ID,
@@ -38,8 +43,24 @@ from .b1_contract import (
 B1_METRICS_SCHEMA = "cbsc_omrc_b01_b_explore_result_v1"
 B1_METRICS_TEST_SCHEMA = "cbsc_omrc_b01_b_explore_result_test_only_v1"
 OBJECT_ID = "CBSC-OMRC-B01"
+#: Section-11 recast, owner decision 3 of 2026-09-02.  ``FORMAL_ANALYSIS_BOUND``
+#: and ``READINESS_DISPOSITION`` keep their historical values and are still
+#: published in every manifest, but nothing reads them as a gate any more: the
+#: refusals that used to consult them are removed and the values are recorded
+#: fields.  Evidence spec §11.4 does not permit a formal-analysis flag to hold a
+#: B launch, and §11.6 demotes it explicitly.  See
+#: docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md
+#: and CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md.
 FORMAL_ANALYSIS_BOUND = False
 READINESS_DISPOSITION = "REPAIR_REQUIRED"
+FORMAL_ANALYSIS_GATES_PUBLICATION = False
+SECTION11_RECAST_DECISION = (
+    "docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md"
+)
+SECTION11_RECAST_INTAKE = (
+    "docs/research/candidates/capability_bound_semantic_currentness/"
+    "CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md"
+)
 SCIENTIFIC_DECISION = "DECISION_PENDING"
 INCIDENT_CLAIM = "ENGINEERING_INCIDENT_ONLY"
 MAXIMUM_CLAIM_CEILING = (
@@ -1302,6 +1323,37 @@ def _validate_incident_lineage(value: object) -> list[dict[str, Any]]:
     return output
 
 
+def formal_analysis_record() -> dict[str, Any]:
+    """The former publication gate, as a recorded field (section-11 recast)."""
+
+    return {
+        "formal_analysis_bound": FORMAL_ANALYSIS_BOUND,
+        "readiness_disposition": READINESS_DISPOSITION,
+        "gating": FORMAL_ANALYSIS_GATES_PUBLICATION,
+        "demoted_by": "MARL_EMPIRICAL_EVIDENCE_SPEC.md section 11.4, section 11.6",
+        "decision_record": SECTION11_RECAST_DECISION,
+        "recast_intake": SECTION11_RECAST_INTAKE,
+    }
+
+
+def _validate_formal_analysis_record(value: object) -> dict[str, Any]:
+    expected = formal_analysis_record()
+    if not isinstance(value, Mapping) or dict(value) != expected:
+        raise MetricsArtifactError("formal analysis record differs from the source constants")
+    return expected
+
+
+def _descriptive_packet(value: object) -> dict[str, Any]:
+    if value is None:
+        return unavailable_descriptive_curves(
+            "descriptive summary was not supplied by the publication caller"
+        )
+    try:
+        return validate_descriptive_curves(value)
+    except B1DescriptiveError as exc:
+        raise MetricsArtifactError(f"descriptive curves are invalid: {exc}") from exc
+
+
 def _claim_boundary(source: Mapping[str, Any]) -> dict[str, str]:
     return {
         "maximum_claim": MAXIMUM_CLAIM_CEILING,
@@ -1325,14 +1377,14 @@ def _build_metrics_only_manifest(
     literal_nulls: Mapping[str, Any],
     mechanical: Mapping[str, Any], incident_references: Sequence[Mapping[str, Any]],
     test_only: bool = False, _transaction_witness: object = None,
+    descriptive_curves: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Build a manifest only after raw-table bytes have been materialized."""
+    """Build a manifest only after raw-table bytes have been materialized.
 
-    if not test_only and not FORMAL_ANALYSIS_BOUND:
-        raise MetricsArtifactError(
-            "FORMAL_ANALYSIS_BOUND is false and caller manifests cannot replace canonical "
-            "attempt reconstruction"
-        )
+    The former ``FORMAL_ANALYSIS_BOUND`` refusal is removed by the section-11
+    recast; the flag is published in ``formal_analysis_record`` instead.
+    """
+
     source = _validate_identity(identity)
     witness = None
     if not test_only:
@@ -1398,6 +1450,8 @@ def _build_metrics_only_manifest(
         "b2_extension_trigger": None,
         "formal_analysis_bound": FORMAL_ANALYSIS_BOUND,
         "readiness_disposition": READINESS_DISPOSITION,
+        "formal_analysis_record": formal_analysis_record(),
+        "descriptive_curves": _descriptive_packet(descriptive_curves),
         "durable_size_bytes": artifact_bytes,
     }
     for _ in range(16):
@@ -1420,6 +1474,7 @@ def build_metrics_only_manifest(
     artifact_inventory: Sequence[Mapping[str, Any]],
     literal_nulls: Mapping[str, Any], mechanical: Mapping[str, Any],
     incident_references: Sequence[Mapping[str, Any]], test_only: bool = False,
+    descriptive_curves: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """TEST_ONLY manifest builder; formal construction is production-internal."""
 
@@ -1428,7 +1483,7 @@ def build_metrics_only_manifest(
         table_inventory=table_inventory, artifact_inventory=artifact_inventory,
         literal_nulls=literal_nulls, mechanical=mechanical,
         incident_references=incident_references, test_only=test_only,
-        _transaction_witness=None,
+        _transaction_witness=None, descriptive_curves=descriptive_curves,
     )
 
 
@@ -1465,7 +1520,8 @@ def validate_metrics_only_manifest(
         "diagnostic_metadata", "decision", "claim_boundary", "incident_claim",
         "convergence_required", "scientific_branch",
         "scientific_polarity", "promotion_eligible", "b2_extension_trigger",
-        "formal_analysis_bound", "readiness_disposition", "durable_size_bytes",
+        "formal_analysis_bound", "readiness_disposition", "formal_analysis_record",
+        "descriptive_curves", "durable_size_bytes",
     }
     if set(manifest) != required:
         raise MetricsArtifactError("metrics-only manifest fields differ")
@@ -1474,8 +1530,8 @@ def validate_metrics_only_manifest(
         if not allow_test_only or manifest["test_only"] is not True:
             raise MetricsArtifactError("TEST_ONLY metrics manifest requires explicit opt-in")
     elif manifest["schema"] == B1_METRICS_SCHEMA:
-        if manifest["test_only"] is not False or not FORMAL_ANALYSIS_BOUND:
-            raise MetricsArtifactError("formal metrics manifest is not currently bound")
+        if manifest["test_only"] is not False:
+            raise MetricsArtifactError("formal metrics manifest test_only flag differs")
     else:
         raise MetricsArtifactError("metrics-only manifest schema differs")
     if manifest["object_id"] != OBJECT_ID or manifest["run_name"] != B1_RUN_NAME:
@@ -1504,7 +1560,9 @@ def validate_metrics_only_manifest(
     if manifest["convergence_required"] is not (False if test_only else True):
         raise MetricsArtifactError("convergence_required differs from complete-three-seed routing")
     if manifest["formal_analysis_bound"] is not FORMAL_ANALYSIS_BOUND or manifest["readiness_disposition"] != READINESS_DISPOSITION:
-        raise MetricsArtifactError("formal readiness gate differs")
+        raise MetricsArtifactError("recorded readiness fields differ from the source constants")
+    _validate_formal_analysis_record(manifest["formal_analysis_record"])
+    _descriptive_packet(manifest["descriptive_curves"])
     inventory = manifest["table_inventory"]
     if not isinstance(inventory, list) or [row.get("table") for row in inventory if isinstance(row, Mapping)] != list(TABLE_KEY_FIELDS):
         raise MetricsArtifactError("table inventory names/order differ")
@@ -1664,7 +1722,9 @@ __all__ = [
     "AUC_METADATA_FIELDS", "B1_METRICS_SCHEMA", "B1_METRICS_TEST_SCHEMA",
     "DIAGNOSTIC_METADATA_FIELDS", "DIAGNOSTIC_NAMES", "FORMAL_ANALYSIS_BOUND",
     "LITERAL_NULL_DERIVED_FIELDS", "MetricsArtifactError", "PARALLEL_MODULE_PROTOCOL",
-    "READINESS_DISPOSITION", "TABLE_KEY_FIELDS", "build_metrics_only_manifest",
+    "READINESS_DISPOSITION", "FORMAL_ANALYSIS_GATES_PUBLICATION",
+    "SECTION11_RECAST_DECISION", "SECTION11_RECAST_INTAKE", "formal_analysis_record",
+    "TABLE_KEY_FIELDS", "build_metrics_only_manifest",
     "canonicalize_metrics_table_order",
     "build_complete_artifact_inventory",
     "build_prospective_artifact_inventory", "PreparedMetricsTables",

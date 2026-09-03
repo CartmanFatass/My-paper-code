@@ -187,6 +187,80 @@ def validate_telemetry(
     return record
 
 
+#: Only the wall cap stops a B1 run.  Section-11 recast, owner decisions 3 and 7
+#: of 2026-09-02: the peak-RSS, scratch and durable caps are recorded budgets, a
+#: measured exceedance is recorded, and missing or failed resource measurement
+#: downgrades to ``resources_unmeasured`` rather than annulling or quarantining.
+STOPPING_CAPS = ("wall_seconds",)
+RESOURCE_ASSESSMENT_SCHEMA = "cbsc_omrc_b01_resource_assessment_v1"
+
+
+def assess_resource_telemetry(
+    value: object, *, caps: ResourceCaps = ResourceCaps()
+) -> dict[str, Any]:
+    """Assess one invocation's resource telemetry without refusing on it.
+
+    Returns a record that is always publishable.  ``resources_unmeasured`` is
+    true when the measurement is absent, unreadable, or fails validation, and
+    ``unmeasured_reasons`` says why.  ``cap_exceedances`` lists every measured
+    cap that was exceeded; ``stop_run`` is true only for the wall cap.
+
+    Learner-side instrumentation failure is out of scope here and still
+    quarantines under evidence spec §6.2; this function judges resource
+    telemetry only.
+    """
+
+    record: dict[str, Any] = {
+        "schema": RESOURCE_ASSESSMENT_SCHEMA,
+        "resources_unmeasured": False,
+        "unmeasured_reasons": [],
+        "cap_exceedances": [],
+        "stopping_cap_exceedances": [],
+        "stop_run": False,
+        "caps": caps.as_dict(),
+        "measurement": None,
+    }
+    if value is None:
+        record["resources_unmeasured"] = True
+        record["unmeasured_reasons"] = ["telemetry_missing"]
+        return record
+    if not isinstance(value, Mapping):
+        record["resources_unmeasured"] = True
+        record["unmeasured_reasons"] = ["telemetry_not_a_record"]
+        return record
+    try:
+        measured = validate_telemetry(value, caps=RECORDED_BUDGET_CAPS)
+    except TelemetryError as exc:
+        record["resources_unmeasured"] = True
+        record["unmeasured_reasons"] = [f"telemetry_measurement_failed: {exc}"]
+        return record
+    record["measurement"] = measured
+    exceeded: list[str] = []
+    if float(measured["end_to_end_wall_seconds"]) > caps.wall_seconds:
+        exceeded.append("wall_seconds")
+    if int(measured["process_tree_peak_rss_bytes"]) > caps.process_tree_peak_rss_bytes:
+        exceeded.append("process_tree_peak_rss_bytes")
+    if int(measured["scratch_high_water_bytes"]) > caps.scratch_high_water_bytes:
+        exceeded.append("scratch_high_water_bytes")
+    if int(measured["durable_high_water_bytes"]) > caps.durable_high_water_bytes:
+        exceeded.append("durable_high_water_bytes")
+    record["cap_exceedances"] = exceeded
+    stopping = [name for name in exceeded if name in STOPPING_CAPS]
+    record["stopping_cap_exceedances"] = stopping
+    record["stop_run"] = bool(stopping)
+    return record
+
+
+#: The RSS, scratch and durable caps are recorded budgets under the section-11
+#: recast, so completeness validation inside the B1 chain runs against these.
+RECORDED_BUDGET_CAPS = ResourceCaps(
+    wall_seconds=float("inf"),
+    process_tree_peak_rss_bytes=1 << 62,
+    scratch_high_water_bytes=1 << 62,
+    durable_high_water_bytes=1 << 62,
+)
+
+
 def _tree_size(root: Path, *, exclude: Path | None = None) -> int:
     total = 0
     if not root.exists():

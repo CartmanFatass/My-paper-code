@@ -37,6 +37,12 @@ from .b1_contract import (
     B1_SLOT_ORDER,
     B1Plan,
 )
+from .b1_descriptive import (
+    B1DescriptiveError,
+    compute_b1_descriptive_curves,
+    unavailable_descriptive_curves,
+    validate_descriptive_curves,
+)
 from .b1_metrics_artifact import (
     FORMAL_ANALYSIS_BOUND,
     LITERAL_BINDING_SPEC_RELATIVE_PATH,
@@ -1577,10 +1583,12 @@ def _assemble_and_publish_b1_metrics(
 
     if type(test_only) is not bool:
         raise B1MetricsProductionError("test_only must be literal bool")
-    if not test_only and not FORMAL_ANALYSIS_BOUND:
-        raise B1MetricsProductionError(
-            "REPAIR_REQUIRED: formal metrics publication awaits whole-pipeline CLEAN review"
-        )
+    # Section-11 recast (owner decision 3, 2026-09-02): the former
+    # `if not FORMAL_ANALYSIS_BOUND: raise B1MetricsProductionError(
+    #     "REPAIR_REQUIRED: formal metrics publication awaits whole-pipeline
+    #      CLEAN review")`
+    # is removed here.  The flag is published in the manifest's
+    # `formal_analysis_record` with `gating: false` instead.
     try:
         incident_references = materialize_b1_incident_lineage(
             incident_lineage_witness, allowed_root=allowed_root
@@ -1878,6 +1886,18 @@ def _assemble_and_publish_b1_metrics(
             "formal final mechanical conformance/readability failed"
         )
     actual_inventory = build_complete_artifact_inventory(root)
+    try:
+        descriptive = validate_descriptive_curves(compute_b1_descriptive_curves(
+            per_tape_curves=materialized["per_tape_curves"],
+            policy_decisions=materialized["policy_decisions"],
+            training_episodes=materialized["training_episodes"],
+            optimizer_steps=materialized["optimizer_steps"],
+            raw_competence=materialized["raw_competence"],
+        ))
+    except (B1DescriptiveError, KeyError, TypeError, ValueError) as exc:
+        # Decision 7 (2026-09-02): a summary that cannot be produced is recorded
+        # with its reason; it never annuls or quarantines the attempt.
+        descriptive = unavailable_descriptive_curves(str(exc))
     manifest = _build_metrics_only_manifest(
         identity=identity,
         b0_evidence=materialized_b0,
@@ -1887,6 +1907,7 @@ def _assemble_and_publish_b1_metrics(
         literal_nulls=build_literal_null_manifest_fields(),
         mechanical=final_mechanical,
         incident_references=incident_references,
+        descriptive_curves=descriptive,
         test_only=test_only,
         _transaction_witness=None if test_only else transaction,
     )
@@ -1908,12 +1929,13 @@ def assemble_and_publish_b1_metrics(
     policy_replay_witness: B1PolicyReplayBatchWitness,
     allowed_root: Path,
 ) -> Path:
-    """The sole public formal entry; ordinary source/B0/law values are not accepted."""
+    """The sole public formal entry; ordinary source/B0/law values are not accepted.
 
-    if not FORMAL_ANALYSIS_BOUND:
-        raise B1MetricsProductionError(
-            "REPAIR_REQUIRED: formal metrics publication awaits whole-pipeline CLEAN review"
-        )
+    Section-11 recast (owner decision 3, 2026-09-02): the former
+    ``FORMAL_ANALYSIS_BOUND`` refusal that stood here is removed; the flag is a
+    recorded manifest field.
+    """
+
     groups = tuple(tuple(group) for group in grouped_raw_slices)
     attempt = _attempt_id(groups)
     authority = materialize_b1_canonical_authority_witness(

@@ -343,13 +343,17 @@ def test_formal_production_api_accepts_no_tables_models_fact_booleans_or_factori
     } == parameters
 
 
-def test_formal_gate_refuses_before_mutation_and_runtime_surface_is_bound(
+def test_formal_entry_refuses_before_mutation_and_runtime_surface_is_bound(
     tmp_path: Path,
 ) -> None:
+    # Section-11 recast (owner decision 3, 2026-09-02): the two
+    # `REPAIR_REQUIRED: formal metrics publication awaits whole-pipeline CLEAN
+    # review` raises are removed.  The formal entry still refuses a caller that
+    # supplies no canonical authority witness, and still mutates nothing first.
     staging = tmp_path / ".result.partial-test"
     staging.mkdir()
     before = list(staging.rglob("*"))
-    with pytest.raises(B1MetricsProductionError, match="REPAIR_REQUIRED"):
+    with pytest.raises((B1MetricsProductionError, TypeError, ValueError)):
         assemble_and_publish_b1_metrics(
             staging_root=staging,
             final_path=tmp_path / "result",
@@ -370,12 +374,14 @@ def test_formal_gate_refuses_before_mutation_and_runtime_surface_is_bound(
         assert any(path.endswith(name) for path in b1.CANONICAL_SOURCE_SURFACE)
 
 
-def test_orchestrator_complete_assembly_is_gate_first_and_cannot_publish(
+def test_orchestrator_complete_assembly_refuses_empty_evidence_and_cannot_publish(
     tmp_path: Path,
 ) -> None:
+    # Was gated by `_refuse_pending_analysis()`; that gate is demoted.  The
+    # assembly still refuses an empty raw-slice sequence and publishes nothing.
     staging = tmp_path / ".formal.partial-test"
     staging.mkdir()
-    with pytest.raises(b1.B1OrchestrationError, match="REPAIR_REQUIRED"):
+    with pytest.raises(b1.B1OrchestrationError):
         b1._assemble_and_publish_complete(
             staging=staging,
             final_path=tmp_path / "formal",

@@ -443,7 +443,9 @@ def test_formal_manifest_is_fail_closed_until_full_module_integration() -> None:
             Path("temp/formal-table-injection"), _tables(),
             allowed_root=Path("temp"), allow_test_only=False,
         )
-    with pytest.raises(MetricsArtifactError, match="FORMAL_ANALYSIS_BOUND"):
+    # Section-11 recast: the FORMAL_ANALYSIS_BOUND refusal is gone; a caller
+    # formal build is still refused, now by the transaction witness alone.
+    with pytest.raises(MetricsArtifactError, match="transaction witness"):
         build_metrics_only_manifest(
             identity=_identity(), b0_evidence=_b0(), table_inventory=[],
             law_digests=_laws(), artifact_inventory=[],

@@ -33,7 +33,11 @@ from .b1_training_records import (
 from .contract import Action, DECISION_ACTION_MASK, EPISODE_TRANSITIONS, OPPORTUNITY_COUNT
 from .host import DynamicHost
 from .ppo import PPOConfig, config_digest, ordered_episode_indices
-from .telemetry import TelemetryError, validate_telemetry
+# The frozen caps (4 GiB RSS, 2 GiB scratch, 512 MiB durable, 120 min wall) are
+# recorded budgets under the section-11 recast; a measured exceedance is
+# published, not refused.  The wall cap alone stops a run, at the slot boundary.
+# `RECORDED_BUDGET_CAPS` therefore does not refuse inside the assembly.
+from .telemetry import RECORDED_BUDGET_CAPS, TelemetryError, validate_telemetry
 
 
 ASSEMBLY_SCHEMA = "cbsc_omrc_b01_b1_metrics_training_assembly_v1"
@@ -300,9 +304,15 @@ def _validate_telemetry_fact(
         or row["arm"] != arm
     ):
         raise B1MetricsTrainingAssemblyError("direct telemetry invocation identity differs")
+    # Section-11 recast, owner decisions 3 and 7 (2026-09-02): the resource
+    # caps are recorded budgets, so a measured exceedance is published rather
+    # than refused here.  Only the wall cap stops a run, and it stops it at the
+    # slot boundary in `b1._load_slot_evidence`.  The measurement itself is
+    # still required to be a complete, finite, nonzero-work record, because the
+    # work reconciliation below is a §4 integrity item.
     try:
         row["measurement"] = validate_telemetry(
-            row["measurement"], caps=B1_RESOURCE_CAPS
+            row["measurement"], caps=RECORDED_BUDGET_CAPS
         )
     except (TypeError, TelemetryError) as exc:
         raise B1MetricsTrainingAssemblyError("direct telemetry measurement is invalid") from exc
@@ -408,7 +418,7 @@ def _validate_policy_replay_resources(
                 )
         try:
             measurement = validate_telemetry(
-                telemetry["measurement"], caps=B1_RESOURCE_CAPS
+                telemetry["measurement"], caps=RECORDED_BUDGET_CAPS
             )
         except (TypeError, TelemetryError) as exc:
             raise B1MetricsTrainingAssemblyError(

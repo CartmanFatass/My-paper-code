@@ -221,14 +221,22 @@ def test_canonical_source_surface_binds_actual_factory_worker_cli_and_preflight(
 
 
 def test_cli_modes_are_fixed_and_reject_injection(capsys) -> None:
-    assert cli.main(["readiness"]) == 4
+    # Section-11 recast (owner decision 3, 2026-09-02): readiness no longer
+    # refuses on FORMAL_ANALYSIS_BOUND / READINESS_DISPOSITION; both are
+    # recorded fields.  The source and B0 bindings still refuse when supplied
+    # and unsatisfied, and `start` still binds them itself.
+    assert cli.main(["readiness"]) == 0
     document = json.loads(capsys.readouterr().out)
     assert document["engine_bound"] is True
-    assert document["start_authorized"] is False
+    assert document["start_authorized"] is True
     assert document["decision"] == "DECISION_PENDING"
     assert document["production_assembly"] == list(b1.PRODUCTION_ASSEMBLY)
-    assert document["production_assembly_ready"] is False
-    assert document["readiness_disposition"] == "REPAIR_REQUIRED"
+    assert document["production_assembly_ready"] is True
+    assert document["readiness_disposition"] == "READY"
+    assert document["blockers"] == []
+    assert document["formal_analysis_record"]["gating"] is False
+    assert document["formal_analysis_record"]["formal_analysis_bound"] is False
+    assert document["formal_analysis_record"]["readiness_disposition"] == "REPAIR_REQUIRED"
     for argv in (
         ["readiness", "--engine", "evil:factory"],
         ["start", "--output", "x", "--implementation-commit", "a" * 40,
@@ -447,11 +455,16 @@ def test_invocation_slice_allows_checkpoint_zero_resume_but_not_bare_nonzero() -
         b1._validate_invocation_slice(12, 24, None)
 
 
-def test_production_assembly_is_unreachable_before_point03_and_cannot_publish(tmp_path) -> None:
+def test_production_assembly_no_longer_refuses_on_the_demoted_formal_flags(tmp_path) -> None:
+    # Was: `_refuse_pending_analysis()` raised REPAIR_REQUIRED because
+    # FORMAL_ANALYSIS_BOUND was false.  Under the section-11 recast the residual
+    # check is only the parallel-module protocol, which holds.
     destination = tmp_path / "must-not-publish"
-    with pytest.raises(b1.B1OrchestrationError, match="REPAIR_REQUIRED"):
-        b1._refuse_pending_analysis()
+    b1._refuse_pending_analysis()
     assert not destination.exists()
+    monkeypatched = b1._readiness_result()
+    assert monkeypatched.authorized is True
+    assert monkeypatched.blockers == ()
 
 
 def test_resume_consumes_only_artifact_bound_canonical_incident_ledger(
@@ -809,10 +822,10 @@ def test_direct_script_launcher_resolves_repository_imports() -> None:
         [sys.executable, str(script), "readiness"], cwd=script.parent.parent,
         capture_output=True, text=True, shell=False, timeout=60,
     )
-    assert completed.returncode == 4
+    assert completed.returncode == 0
     document = json.loads(completed.stdout)
     assert document["engine_bound"] is True
-    assert document["start_authorized"] is False
+    assert document["start_authorized"] is True
 
 
 def test_single_readiness_result_never_reports_denied_while_start_is_reachable(
@@ -824,32 +837,42 @@ def test_single_readiness_result_never_reports_denied_while_start_is_reachable(
     monkeypatch.setattr(b1, "verify_source_conformance", lambda commit: source)
     monkeypatch.setattr(b1, "locate_b0_evidence", lambda root: b0)
     monkeypatch.setattr(b1, "require_parallel_module_protocols", lambda: {})
-    monkeypatch.setattr(b1, "READINESS_DISPOSITION", "READY")
     called = []
     monkeypatch.setattr(
         b1, "_execute_fresh_attempt",
         lambda **kwargs: (called.append(kwargs) or tmp_path / "published"),
     )
 
+    # Section-11 recast: the value of FORMAL_ANALYSIS_BOUND no longer changes
+    # authorization in either direction.  Start is reachable with the flag at
+    # its recorded historical value, and the readiness document says so.
     monkeypatch.setattr(b1, "FORMAL_ANALYSIS_BOUND", False)
-    assert b1.readiness_document("a" * 40, tmp_path)["start_authorized"] is False
-    with pytest.raises(b1.B1OrchestrationError, match="REPAIR_REQUIRED"):
-        b1.run_b1_start(
-            final_path=tmp_path / "blocked", implementation_commit="a" * 40,
-            b0_root=tmp_path,
-        )
-    assert called == []
-
-    monkeypatch.setattr(b1, "FORMAL_ANALYSIS_BOUND", True)
     document = b1.readiness_document("a" * 40, tmp_path)
     assert document["start_authorized"] is True
     assert document["resume_authorized"] is True
     assert document["readiness_disposition"] == "READY"
+    assert document["formal_analysis_record"]["gating"] is False
     assert b1.run_b1_start(
         final_path=tmp_path / "ready", implementation_commit="a" * 40,
         b0_root=tmp_path,
     ) == tmp_path / "published"
     assert len(called) == 1
+
+    monkeypatch.setattr(b1, "FORMAL_ANALYSIS_BOUND", True)
+    assert b1.readiness_document("a" * 40, tmp_path)["start_authorized"] is True
+
+    # An explicitly unsatisfied source or B0 binding still blocks.
+    monkeypatch.setattr(b1, "verify_source_conformance", _raise_source)
+    with pytest.raises(b1.B1OrchestrationError):
+        b1.run_b1_start(
+            final_path=tmp_path / "blocked", implementation_commit="a" * 40,
+            b0_root=tmp_path,
+        )
+    assert len(called) == 1
+
+
+def _raise_source(commit: str) -> dict[str, str]:
+    raise b1.B1OrchestrationError("BLOCKED_UNCOMMITTED: test-only refusal")
 
 
 def test_formal_orchestrator_has_no_legacy_analysis_or_caller_manifest_route() -> None:

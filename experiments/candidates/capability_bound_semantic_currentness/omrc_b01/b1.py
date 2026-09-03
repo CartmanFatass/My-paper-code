@@ -35,6 +35,7 @@ from .b1_metrics_artifact import (
     FORMAL_ANALYSIS_BOUND,
     LITERAL_BINDING_SPEC_RELATIVE_PATH,
     READINESS_DISPOSITION,
+    formal_analysis_record,
     require_parallel_module_protocols,
 )
 from .b1_metrics_production import (
@@ -76,7 +77,15 @@ from .b1_engine import (
 )
 from .b1_worker import WORKER_RESULT_SCHEMA, wrap_worker_result
 from .b1_policy_replay_worker import encode_policy_replay_request
-from .telemetry import ProcessTreeMonitor, ResourceCaps, TelemetryError, validate_telemetry
+from .telemetry import (
+    ProcessTreeMonitor,
+    RECORDED_BUDGET_CAPS,
+    ResourceCaps,
+    STOPPING_CAPS,
+    TelemetryError,
+    assess_resource_telemetry,
+    validate_telemetry,
+)
 
 
 class B1OrchestrationError(RuntimeError):
@@ -99,10 +108,16 @@ def _readiness_result(
         require_parallel_module_protocols()
     except ValueError as exc:
         blockers.append(str(exc))
-    if not FORMAL_ANALYSIS_BOUND:
-        blockers.append("formal .03 metrics analysis/publication law is not bound")
-    if READINESS_DISPOSITION != "READY":
-        blockers.append(f"canonical metrics readiness disposition is {READINESS_DISPOSITION}")
+    # Section-11 recast (owner decision 3, 2026-09-02).  The two blockers that
+    # stood here --
+    #   if not FORMAL_ANALYSIS_BOUND:
+    #       blockers.append("formal .03 metrics analysis/publication law is not bound")
+    #   if READINESS_DISPOSITION != "READY":
+    #       blockers.append(f"canonical metrics readiness disposition is {READINESS_DISPOSITION}")
+    # -- are removed.  Evidence spec §11.4 does not permit a formal-analysis
+    # flag to hold a B launch and §11.6 demotes it explicitly.  Both values are
+    # still reported, in `readiness_document()["formal_analysis_record"]` and in
+    # every published manifest, with `gating: false`.
     if source_ready is False:
         blockers.append("implementation commit/source conformance is required")
     if b0_ready is False:
@@ -166,6 +181,7 @@ CANONICAL_SOURCE_SURFACE = tuple(dict.fromkeys((
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_policy_records.py",
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_training_records.py",
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_mechanical.py",
+    "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_descriptive.py",
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_metrics_artifact.py",
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_metrics_rehydrate.py",
     "experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_metrics_policy_assembly.py",
@@ -348,6 +364,7 @@ def readiness_document(
         "arm_seed_order": [[seed, arm] for seed, arm in ARM_SEED_ORDER],
         "resource_caps": B1_RESOURCE_CAPS.as_dict(),
         "formal_analysis_bound": FORMAL_ANALYSIS_BOUND,
+        "formal_analysis_record": formal_analysis_record(),
         "production_assembly": list(PRODUCTION_ASSEMBLY),
         "production_assembly_ready": readiness.authorized,
         "start_authorized": readiness.authorized,
@@ -719,6 +736,8 @@ def supervise_child(
             _atomic_create_json(supervisor_incident, snapshot)
             raise TelemetryError("process-tree telemetry failed during supervision") from exc
         failures: tuple[str, ...] = ()
+        stopping: tuple[str, ...] = ()
+        recorded_cap_failures: set[str] = set()
         try:
             while process.poll() is None:
                 try:
@@ -748,21 +767,27 @@ def supervise_child(
                     raise TelemetryError(
                         "process-tree telemetry failed during supervision"
                     ) from exc
-                if failures:
+                # Section-11 recast, owner decision 3 (2026-09-02): the RSS,
+                # scratch and durable caps are recorded budgets, so a live
+                # exceedance is observed and published rather than killing the
+                # child.  Only the wall cap stops a run.
+                recorded_cap_failures.update(failures)
+                stopping = tuple(name for name in failures if name in STOPPING_CAPS)
+                if stopping:
                     _kill_process_tree(process)
                     break
                 time.sleep(interval_seconds)
         finally:
             if process.poll() is None:
                 _kill_process_tree(process)
-        if failures:
+        if stopping:
             _atomic_create_json(
                 supervisor_incident,
                 monitor.incident_snapshot(
-                    reason="LIVE_RESOURCE_CAP_TERMINATION", cap_failures=failures
+                    reason="LIVE_RESOURCE_CAP_TERMINATION", cap_failures=stopping
                 ),
             )
-            raise TelemetryError(f"live resource cap exceeded: {','.join(failures)}")
+            raise TelemetryError(f"live wall cap exceeded: {','.join(stopping)}")
         if process.returncode != 0:
             _atomic_create_json(
                 supervisor_incident,
@@ -801,7 +826,17 @@ def supervise_child(
             scientific_work_transitions=scientific_work,
             stage_measurements=stages,
         )
-    return raw, validate_telemetry(telemetry, caps=caps)
+        if recorded_cap_failures:
+            _atomic_create_json(
+                supervisor_incident,
+                monitor.incident_snapshot(
+                    reason="LIVE_RESOURCE_CAP_RECORDED",
+                    cap_failures=tuple(sorted(recorded_cap_failures)),
+                ),
+            )
+    # Recorded budgets: the caps are published by `assess_resource_telemetry`
+    # at the slot boundary, so the completeness validation here is uncapped.
+    return raw, validate_telemetry(telemetry, caps=RECORDED_BUDGET_CAPS)
 
 
 def supervise_policy_replay_child(
@@ -1156,7 +1191,10 @@ def _load_slot_evidence(
     *, expected_attempt_id: str, expected_commit: str,
 ) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any], dict[str, str]]:
     paths = _slot_paths(root, index, seed, arm)
-    if not paths["raw"] or len(paths["raw"]) != len(paths["telemetry"]):
+    if not paths["raw"] or len(paths["telemetry"]) > len(paths["raw"]):
+        # A telemetry file per invocation is expected; fewer is a resource
+        # measurement gap, which decision 7 downgrades below rather than
+        # refusing here.  More than one per invocation is an inventory defect.
         raise B1OrchestrationError("slot raw/telemetry invocation inventory differs")
     if len(paths["raw"]) != len(paths["admission"]):
         raise B1OrchestrationError("slot raw/admission invocation inventory differs")
@@ -1175,12 +1213,32 @@ def _load_slot_evidence(
         ):
             raise B1OrchestrationError("slot raw attempt/arm/seed/commit binding differs")
         raw_slices.append(raw)
+    # Section-11 recast, owner decision 7 (2026-09-02): missing or failed
+    # resource telemetry downgrades to `resources_unmeasured` with reasons and
+    # never annuls or quarantines; a measured cap exceedance is recorded, and
+    # only the wall cap stops the run.  Learner-side instrumentation failure
+    # (an absent or unreadable worker result, above) still quarantines.
+    resource_assessments: list[dict[str, Any]] = []
     for path in paths["telemetry"]:
         try:
             value = json.loads(path.read_text(encoding="utf-8"))
-            telemetry_values.append(validate_telemetry(value, caps=B1_RESOURCE_CAPS))
-        except (OSError, json.JSONDecodeError, TelemetryError) as exc:
-            raise B1OrchestrationError("slot telemetry is invalid") from exc
+        except (OSError, json.JSONDecodeError) as exc:
+            assessment = assess_resource_telemetry(None, caps=B1_RESOURCE_CAPS)
+            assessment["unmeasured_reasons"] = [f"telemetry_unreadable: {exc}"]
+        else:
+            assessment = assess_resource_telemetry(value, caps=B1_RESOURCE_CAPS)
+        resource_assessments.append(assessment)
+        if assessment["stop_run"]:
+            raise TelemetryError(
+                "B1 wall cap exceeded: "
+                + ",".join(assessment["stopping_cap_exceedances"])
+            )
+        if assessment["measurement"] is not None:
+            telemetry_values.append(assessment["measurement"])
+    for _ in range(len(paths["raw"]) - len(paths["telemetry"])):
+        resource_assessments.append(
+            assess_resource_telemetry(None, caps=B1_RESOURCE_CAPS)
+        )
     for path in paths["admission"]:
         try:
             value = json.loads(path.read_text(encoding="utf-8"))
@@ -1197,18 +1255,37 @@ def _load_slot_evidence(
             for path in paths["admission"]
         ],
     }
+    unmeasured_reasons = [
+        reason
+        for assessment in resource_assessments
+        for reason in assessment["unmeasured_reasons"]
+    ]
+    cap_exceedances = sorted({
+        name
+        for assessment in resource_assessments
+        for name in assessment["cap_exceedances"]
+    })
     telemetry_record = {
-        "arm": arm, "seed": seed, "within_caps": True,
+        "arm": arm, "seed": seed,
+        "within_caps": not cap_exceedances,
+        "resources_unmeasured": bool(unmeasured_reasons),
+        "unmeasured_reasons": unmeasured_reasons,
+        "recorded_cap_exceedances": cap_exceedances,
         "process_tree_peak_rss_bytes": max(
-            value["process_tree_peak_rss_bytes"] for value in telemetry_values
+            (value["process_tree_peak_rss_bytes"] for value in telemetry_values),
+            default=0,
         ),
         "scratch_high_water_bytes": max(
-            value["scratch_high_water_bytes"] for value in telemetry_values
+            (value["scratch_high_water_bytes"] for value in telemetry_values),
+            default=0,
         ),
         "durable_high_water_bytes": max(
-            value["durable_high_water_bytes"] for value in telemetry_values
+            (value["durable_high_water_bytes"] for value in telemetry_values),
+            default=0,
         ),
-        "wall_seconds": sum(value["end_to_end_wall_seconds"] for value in telemetry_values),
+        "wall_seconds": sum(
+            value["end_to_end_wall_seconds"] for value in telemetry_values
+        ),
         "invocations": telemetry_values,
     }
     digests = {
