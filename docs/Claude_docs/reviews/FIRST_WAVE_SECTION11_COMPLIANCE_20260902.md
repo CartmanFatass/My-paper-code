@@ -904,6 +904,13 @@ the direction's acquisition question becomes askable for the first time.
 2. The `set_num_interop_threads(1)` assertion in the competence runner: fail-soft (record the
    observed value) or leave as is behind the published result.
 
+**Owner decisions (2026-09-03): prediction — MARGIN-AWARE reaches 6 of 6 and BUDGET-100X does
+not; interop assertion — fail-soft, recorded value, published record unchanged.** Reviewer's
+prediction for the record: MARGIN-AWARE 6 of 6, BUDGET-100X 5 of 6 (the card's own arithmetic:
+one of the three failing projections must shrink by 55%, which a tenfold budget on a
+travel-ceiling-free whitened design should manage for the two smaller ones and may not for the
+largest), LARGER-N 3 of 6. The two predictions differ only on BUDGET-100X's count.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
