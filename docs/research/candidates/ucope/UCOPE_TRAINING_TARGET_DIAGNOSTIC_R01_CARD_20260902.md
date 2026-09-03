@@ -190,3 +190,16 @@ Please pick one before the run, so the diagnostic is a test rather than a fishin
   and frozen before the root ever runs, so the root is fit against a model that never saw its data.
 - **Option "none of these".** The mechanisms as written do not cover it, and the diagnostic should
   report `D5` rather than force a fit.
+
+## 8. Prediction on record (added 2026-09-03; card body and reading rule unchanged)
+
+The owner recorded a prediction on 2026-09-02 (compliance note D.10), before the diagnostic ran:
+
+> M2, optimisation shortfall on the ill-conditioned Gram under clipped AdamW with unshuffled
+> cyclic batches, i.e. the objective's own optimum is still beta* and the learners do not reach it.
+
+This section records the prediction only. Nothing in sections 1-7 is altered by it: the four
+mechanisms, the four measurements, the five-branch reading rule and its thresholds stand exactly as
+they were frozen on 2026-09-02, and the branch is decided by those numbers alone. Whether the
+prediction is supported or contradicted is reported afterwards, in the rule's own wording, in
+`UCOPE_TRAINING_TARGET_DIAGNOSTIC_R01_RESULT_20260903.md`.
