@@ -159,6 +159,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   the §5 rule applied verbatim (prediction on record unrefuted, supported on three of four
   applications), age-feature weight share at the equal-column baseline, eleven deviations,
   could-not-verify. Accepted in the ADR review's Part XI.
+- `E2_INTERRUPTION_COST_SWEEP_20260903.md` — E2 contract: D2 at `c ∈ {0.25, 0.5, 1, 2}` (cap 40)
+  against the D0 `k` sweep `{1, 2, 5, 20, 40}` on the homogeneous corridor (λ = 0.02 both regions),
+  two seeds, 4,096 matched evaluation episodes against the exact references, event-alignment and
+  segment-length measurements, the two mechanisms and the reading rule written before the data.
+  Launches after P4 with the owner's prediction on record.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
 
 ### artifacts/
