@@ -222,3 +222,24 @@ Please pick one before the run.
   gradient clip, or the unshuffled cyclic batch order.
 - **Option "unclear".** Neither picture holds cleanly — a majority-but-not-all outcome, or a ceiling
   that itself falls short — and `C-B`, `C-D` or `C-E` is the honest result.
+
+## 11. Predictions on record (added 2026-09-03; card body and reading rule unchanged)
+
+Two predictions were recorded on 2026-09-03 (compliance note D.14, commit `953e5e310`), before the
+object ran.
+
+Owner:
+
+> unclear (an exploration run without a calibration point)
+
+Reviewer:
+
+> C-B (a majority of folds competent but not all six, because the competence predicate is tight and
+> the whitened learner's residual to the exact solve will cross it in at least one fold)
+
+This section records the predictions only. Nothing in sections 1-10 is altered: the arms, the
+whitening contract, the `n` fixed at 81,920 tail rows per policy, the measurements, the five
+branches and the thresholds stand exactly as frozen, and the branch is decided by those numbers
+alone. The owner's prediction is "unclear" and therefore carries no verdict; the reviewer's is
+judged in the rule's own wording and against the numbers in
+`UCOPE_COMPETENCE_WHITENED_R01_RESULT_EVIDENCE_20260903.md`.
