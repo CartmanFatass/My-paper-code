@@ -556,6 +556,38 @@ all untouched by the check and by the ladders).
    mechanisms, differentiating measurement, reading rule) and waits for the owner's prediction
    before any run.
 
+### D.9 Ladder R02 rung 2 and the diagnostic card (2026-09-02, later)
+
+Commits `3b1c42c92` (R02 rung 2 result) and `d56c5f9b7` (diagnostic card, written, not run);
+scope verified. **Rung 2 accepted; the ladder object closes at `R2-D`.** Launch sha `905ca9246`,
+bound inventory clean; preflight 10.70 GiB; wall 631 s at 4 threads; telemetry measured; 12
+policies complete, every count reconciled, `validate` true. Per-arm rule verbatim:
+`m_FLEX = 0.1075`, `m_BC = 0.2494`, both below 0.30; competence 0/6 per arm → neither moved.
+The cross-rung fact that matters: with `steps × lr = 0.96` at both rungs, each arm's
+least-moving coordinate changed by under one percent between rung 1 and rung 2 (FLEX
+0.1081 → 0.1075, BC 0.2502 → 0.2494), set by the same policy and stage both times. Ten times the
+optimizer budget at one tenth the step moved nothing; the learners are at a fixed point of
+their own objective or their own optimizer, not short of exposure.
+
+Diagnostic card `UCOPE_TRAINING_TARGET_DIAGNOSTIC_R01_CARD_20260902.md`: four mechanisms read
+from the code (M1 the tail MSE objective's own fixed point differs from `β*`; M2 an optimisation
+shortfall on an ill-conditioned Gram under clipped AdamW with unshuffled cyclic batches, where
+the per-coordinate travel budget is identical at both rungs; M3 the root's frozen targets are
+built from the learned tail and maximised over the odd training support while competence ranks
+over the evaluation support; M4 fold coupling with the tail-before-root freeze), one
+differentiating measurement each (X1 solve the tail normal equations and compare the gradient
+at `β*` and at the published `β`; X2 rebuild the root targets from the oracle tail, from the
+normal-equation tail and from each published tail; X3 an extended `_step` loop only if X1 calls
+for it; X4 per-fold solutions), a five-branch reading rule with `ε = 0.10` and a gradient ratio
+of 10 fixed before data, and a budget under twenty minutes. One closed-form quantity was
+computed while writing the card (the training-versus-evaluation support gap, at most 0.0037,
+which makes the target-package branch unlikely) and is disclosed in the card. The card ends with
+the prediction request to the owner; nothing runs until the prediction is on record.
+
+### D.10 Decision this intake produces
+
+1. The owner's prediction among M1–M4 or "none of these" (asked directly).
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
@@ -631,4 +663,6 @@ third, single-thread process is put to the owner in E.4 rather than assumed.
 1. Restore read access to the B0 artifact directory (owner, elevated rights); until then B1 is
    held.
 2. Whether B1 may run now as a third, single-thread process beside E1's two 4-thread runs, or
-   waits for E1 to finish.
+   waits for E1 to finish. **Owner decision (2026-09-02): once the directory is restored, B1
+   runs immediately as a third single-thread process**, recorded as a one-off deviation from
+   §7 decision 3 of the advancement plan (16 logical cores; 4 + 4 + 1 threads).
