@@ -262,6 +262,46 @@ def test_installed_probe_replaces_the_r01_comparison(r02):
             delattr(r01, "_r01_validate_runtime_payload_cross_consistency")
 
 
+def test_installed_validator_checks_the_aggregate_exposure(r02):
+    """The frozen 48/60 constant appears twice; both are covered.
+
+    `run_vnfc_bpcr_b_explore.py:852` pins it per learned row and `:975` pins the
+    aggregate `terminal["exposure"]`.  The wrapper asserts the true R02 budget in
+    both places.
+    """
+    r01 = r02.load_r01_runner()
+    saved = {
+        "_evaluate_learned_batch": r01._evaluate_learned_batch,
+        "_validate_runtime_payload_cross_consistency": r01._validate_runtime_payload_cross_consistency,
+    }
+    installed = getattr(r01, "_r02_relabel_probe_installed", False)
+    try:
+        r01._r02_relabel_probe_installed = False
+        r02.install_like_for_like_relabel_probe(r01, [])
+        learned = tuple(
+            {"arm": arm, "diagnostic_forward_calls": r02.R02_DIAGNOSTIC_FORWARDS[arm],
+             "relabel_mismatch_count": 0}
+            for arm in ("MAPR", "DIRECT")
+        )
+        terminal = {
+            "evaluation": {"learned": learned},
+            "exposure": {"evaluation": {
+                "MAPR": {"policy_forward_calls": 6, "diagnostic_forward_calls": 48},
+                "DIRECT": {"policy_forward_calls": 6, "diagnostic_forward_calls": 108},
+                "BCRH": {"policy_forward_calls": 0, "diagnostic_forward_calls": 0},
+            }},
+        }
+        with pytest.raises(r01.BExploreContractError) as raised:
+            r01._validate_runtime_payload_cross_consistency(None, terminal)
+        assert "R02 like-for-like relabel probe aggregate exposure differs" == str(raised.value)
+    finally:
+        for name, value in saved.items():
+            setattr(r01, name, value)
+        r01._r02_relabel_probe_installed = installed
+        if hasattr(r01, "_r01_validate_runtime_payload_cross_consistency"):
+            delattr(r01, "_r01_validate_runtime_payload_cross_consistency")
+
+
 def test_r01_runner_source_is_untouched():
     """The repair is installed from the R02 runner; R01 stays read-only substrate."""
     source = (REPOSITORY_ROOT / "scripts" / "run_vnfc_bpcr_b_explore.py").read_text("utf-8")

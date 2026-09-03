@@ -537,11 +537,13 @@ def install_like_for_like_relabel_probe(
         """Validate the R02 exposure budget here, then run every frozen check.
 
         The R01 validator pins `diagnostic_forward_calls` to the frozen 48/60 of
-        the old probe, which the repaired probe cannot satisfy: it spends two
-        batch-1 forwards per decision instead of one.  The true budget (96/108) is
-        asserted here and is what the terminal publishes; the frozen accounting
-        constant is satisfied on a throwaway copy so that the validator's other
-        checks still run against the real terminal.  Recorded as a deviation.
+        the old probe in two places -- per learned row
+        (`run_vnfc_bpcr_b_explore.py:852`) and in the aggregate exposure terminal
+        (`:975`).  The repaired probe cannot satisfy either: it spends two batch-1
+        forwards per decision instead of one.  The true budget (96/108 per row) is
+        asserted here and is what the terminal publishes; the two frozen
+        accounting constants are satisfied on a throwaway copy so that every other
+        check still runs against the real terminal.  Recorded as a deviation.
         """
         evaluation = terminal.get("evaluation")
         learned = evaluation.get("learned") if isinstance(evaluation, Mapping) else None
@@ -559,6 +561,24 @@ def install_like_for_like_relabel_probe(
                 for row in learned
             )
             normalized = {**terminal, "evaluation": {**evaluation, "learned": normalized_learned}}
+            exposure = terminal.get("exposure")
+            if isinstance(exposure, Mapping) and isinstance(exposure.get("evaluation"), Mapping):
+                groups = len(tuple(row for row in learned if row.get("arm") == "MAPR"))
+                observed = exposure["evaluation"]
+                for arm in ("MAPR", "DIRECT"):
+                    if observed.get(arm, {}).get("diagnostic_forward_calls") != R02_DIAGNOSTIC_FORWARDS[arm] * groups:
+                        raise r01.BExploreContractError("R02 like-for-like relabel probe aggregate exposure differs")
+                normalized_evaluation_exposure = {
+                    arm: (
+                        {**row, "diagnostic_forward_calls": FROZEN_DIAGNOSTIC_FORWARDS[arm] * groups}
+                        if arm in FROZEN_DIAGNOSTIC_FORWARDS else dict(row)
+                    )
+                    for arm, row in observed.items()
+                }
+                normalized = {
+                    **normalized,
+                    "exposure": {**exposure, "evaluation": normalized_evaluation_exposure},
+                }
         original_cross(config, normalized)
 
     r01._evaluate_learned_batch = evaluate_learned_batch
