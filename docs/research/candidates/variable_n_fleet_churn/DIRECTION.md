@@ -29,6 +29,38 @@ return-bearing question are not closed. Its prospectively distinct, sequential s
 `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` at `B/EXPLORE`. R02 is motivated by a known
 conformance defect and is not independent confirmation.
 
+### Section 11 recast (2026-09-03)
+
+The owner-approved section 11 recast of this direction is recorded in
+`docs/research/candidates/variable_n_fleet_churn/VNFC_SECTION11_RECAST_INTAKE_20260903.md`
+(decisions 4, 6 and 7 of `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`
+A.4, formalized in `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`).
+Under `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` section 11.6 the historical text below
+is left standing and is not rewritten; the following sentences of this file are **superseded** for
+the `B/EXPLORE` object `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02`. Line numbers are those of the
+2026-09-02 compliance note's citations, i.e. of this file as committed unchanged at `55a46c206`,
+before this block was inserted:
+
+- line 181-182: "No R02 result-bearing DEBUG is permitted until the one-law A0 object is complete
+  and passing under its finite claim ceiling."
+- line 105-106, obligation 7: "an address-resolved conformance gate for structural predicates,
+  deterministic commands, physically aligned probabilities, and RNG-coupled physical actions."
+- line 122-126: "Its frozen panel contains 304 address rows... Every physical CDF boundary,
+  adjacent representable value and adjacent production word is enumerated"
+- line 41-44 and 47-51: the 942-source / 31-resource / 81-to-82-module bindings and the literal
+  `bpcr_backend.dll` build key, which are now **recorded if produced, never required**.
+- line 174-176: "Framework autograd or a different algebraic derivative association is not an
+  implementation of this law.", which is recorded as the law's own statement about itself and is
+  not a launch condition for R02.
+- line 94, the "complete telemetry" half only: missing **resource** telemetry now downgrades to
+  `resources_unmeasured` and does not annul. The fresh 4-GiB admission, create-once quarantine and
+  `B/EXPLORE` claim semantics of that line are unchanged.
+
+`VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` is demoted from conformance condition to optional
+analysis. It holds nothing and may be completed later as an `A/RECON` object on its own merit. Its
+replacement as a section 4 integrity item is the 52-row unit-test-scale presentation-conformance
+check `VNFC-R02-PRESENTATION-CONFORMANCE-52`, whose row list is frozen in the recast intake.
+
 R02 is not executable. Its one selected finite law is `VNFC-R02-ORC-B64-Q52-U64-V1`: opaque-rank
 canonical serialization, a scalar CPU binary64 reference, an exact normalized 52-bit physical
 probability vector, and uint64-midpoint physical CDF sampling. Deterministic choice compares the

@@ -909,3 +909,41 @@ Forbidden now:
 - using opaque rank as a learned feature or using latent physical rank, presentation, row, memory,
   hash, dict, vector-lane, or batch-neighbor identity; and
 - claiming performance, learnability, recovery, general invariance, or lifecycle polarity from A0.
+
+## Addendum 2026-09-03 -- section 11 recast (body above unchanged)
+
+This addendum records a demotion under `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
+section 11.6 ("Direction owners SHOULD record the demotion in the direction's next intake rather
+than rewrite historical documents"). Nothing in the frozen body above is edited, withdrawn or
+reinterpreted.
+
+Owner decision 4 of `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4,
+formalized in `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`:
+
+> Recast per section 11: the 304-row A0 law is demoted to optional analysis and replaced as an
+> integrity item by a ~50-row unit-test-scale presentation check; R02 DEBUG (8 updates) and three
+> 64-update seeds run on the R01 runner; byte manifests are recorded if produced, never required
+
+Consequences for this object, `VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0`:
+
+1. It is **optional analysis**. It is neither executed nor abandoned, holds nothing, and may be
+   completed later as an `A/RECON` object on its own merit. `implementation_started=false` is
+   unchanged.
+2. The clause of "Decision rule" that reads "It returns this law for revision, has no algorithm
+   polarity, and forbids R02 DEBUG." keeps its first two limbs; the "forbids R02 DEBUG" limb is
+   **superseded**. `PASS_CONFORMANT`, `FAIL_LAW` and `INCOMPLETE` remain A0's own dispositions and
+   are not launch conditions for R02.
+3. The "Forbidden now:" bullet "any result-bearing R02 DEBUG, PRIMARY, OPTIONAL, return endpoint,
+   learner training, or B claim" is **superseded** for R02 DEBUG and PRIMARY. Every other bullet in
+   that list is unchanged and still binding: no R01 rerun, resume, repair, evaluation or read; no
+   import of isolated R01 diagnostic WIP; no alternate or runtime-selectable law menu; no use of
+   opaque rank as a learned feature and no latent physical rank, presentation, row, memory, hash,
+   dict, vector-lane or batch-neighbour identity; and no performance, learnability, recovery,
+   general-invariance or lifecycle polarity claimed from A0.
+4. The `INCOMPLETE` clause "artifact/telemetry failure" is split by owner decision 7: missing
+   **resource** telemetry downgrades a run to `resources_unmeasured: true` with reasons; learner-side
+   instrumentation failure still quarantines under section 6.2.
+
+The replacement section 4 integrity item is the 52-row unit-test-scale presentation-conformance
+check `VNFC-R02-PRESENTATION-CONFORMANCE-52`, whose row list is frozen before execution in
+`VNFC_SECTION11_RECAST_INTAKE_20260903.md` section 4.

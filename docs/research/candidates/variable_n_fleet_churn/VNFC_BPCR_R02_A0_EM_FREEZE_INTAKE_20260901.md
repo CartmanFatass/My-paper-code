@@ -165,3 +165,35 @@ no algorithm performance or scientific return polarity.
 After this intake is returned to the Direction Manager, CM may implement A0 only. No CM work was
 started by this freeze. A valid mismatch returns the law for revision; an incomplete attempt is
 repaired and rerun outcome-blind. Neither branch authorizes R01 activity or result-bearing R02 work.
+
+## Addendum 2026-09-03 -- section 11 recast (body above unchanged)
+
+This addendum records a demotion under `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
+section 11.6. Nothing in the frozen body above is edited, withdrawn or reinterpreted.
+
+Owner decision 4 of `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4
+demotes the byte-level dependency bindings this intake records from launch conditions to recorded
+fields for the `B/EXPLORE` object `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02`:
+
+- the 942 hashed Python dependency sources, the content-bound `scripts/run_vnfc_bpcr_r02_a0.py`
+  `__main__` row, the 31 opened distribution resources and the 81-row compiled-module set through
+  probe two;
+- the exact 82-row post-load compiled set and its canonical root
+  `ce22039a3888cea1f3e12963e4e0e3fb8eb00753446b332770cb8257c521ed63`;
+- the literal `bpcr_backend.dll` build key
+  `7222d990642a7e4cb010b6526f17acdb3f3aa85f11d1b8d34be0eedbe11e9c99` and the 213,504-byte artifact
+  with SHA-256 `dadac9589cf1a885b1acd3891f7411152fa2748cbc34ddbf3537d0b2708f5f68`;
+- the load-only transaction's prohibition on compilation, helper subprocesses, fallback and cache
+  mutation.
+
+These are **recorded if the tooling produces them, never required**. Under section 11.4 hash chains
+and byte manifests may not hold a `B` launch. Concretely, for R02: the native backend may be
+compiled from unchanged source, and the observed build key together with the observed artifact
+size and SHA-256 is recorded as a field with `gating: false`. A DLL rebuilt from unchanged source
+whose build key or artifact digest differs from the literals above is recorded as such and holds
+nothing.
+
+These statements remain binding **for A0 itself** if A0 is ever executed. A0 is optional analysis
+after this recast; see the addendum on
+`VNFC_BPCR_R02_FINITE_PHYSICAL_ACTION_LAW_A0_FREEZE_20260901.md` and
+`VNFC_SECTION11_RECAST_INTAKE_20260903.md`.
