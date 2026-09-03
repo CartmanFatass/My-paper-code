@@ -235,3 +235,23 @@ Please pick one before the run.
   proportion you expect between the two.
 - **Option "neither / unclear".** Neither the whitened base nor the ten-fold extension closes it,
   or the picture is mixed enough that `O-E` is the honest outcome.
+
+## 11. Predictions on record (added 2026-09-03; card body and reading rule unchanged)
+
+Two predictions were recorded on 2026-09-03 (compliance note D.12, commit `66198aa32`), before the
+object ran.
+
+Owner:
+
+> O-A (conditioning is the cause; whitening closes d_learned at the base budget)
+
+Reviewer:
+
+> O-B (whitening removes most of the gap, the clip and the unshuffled cyclic windows leave a
+> residual that only the 10x budget closes)
+
+This section records the predictions only. Nothing in sections 1-10 is altered: the arms, the
+whitening contract, the measurements, the five branches and the thresholds `eps_L = 0.10` and
+`rho = 5` stand exactly as frozen on 2026-09-03, and the branch is decided by those numbers alone.
+Each prediction is judged afterwards, in the rule's own wording and against the numbers, in
+`UCOPE_OPTIMISER_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md`.
