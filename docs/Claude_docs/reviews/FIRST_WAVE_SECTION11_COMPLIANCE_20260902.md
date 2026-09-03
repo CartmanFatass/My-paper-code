@@ -506,3 +506,49 @@ under either arm.
    an outcome-free, unit-scale object (no training); ladder R02 is registered only if the check
    passes, with the displacement statistic and the reading rule taken per arm and both fixed
    before its first rung.
+
+### D.7 Instrumentation check and ladder R02 rung 1 intake (2026-09-02, later)
+
+Commits `71fb70a3a` (check card, tests, result), `9ef1b36b6` (R02 registration, intake §9),
+`71e33efdb` (R02 rung 1 result); scope verified, all under UCOPE surfaces. **Both accepted.**
+
+**Instrumentation check `UCOPE-A-INSTRUMENTATION-TAIL-AGREEMENT-COMPETENCE-CHECK-R01`: PASS, no
+defect.** Card written before the run; 77 test cases are the check. Tail agreement recovers 0,
+1 and two intermediate known values on both arms to 1e-12 (exact 1/2 is unattainable on this
+host, proved by enumerating all 128 count-mass subsets); the competence predicate can fire and
+its four components match a `Fraction` reference; the displacement statistic recomputes every
+published row of both R01 rungs to 1e-12. The two anomalies are explained and are not defects:
+the FT arms complete the whole tail loop before the first root update (`training.py:226-234`),
+so a policy's tail is byte-identical at every checkpoint; and every published BC tail model's
+argmax lands on periods 2 or 8 only, while period 8 is never optimal and period 4 is the unique
+optimum at belief 1/2 in the four all-or-nothing contexts, so those contexts score exactly 0.
+The basis can represent the truth (max error < 1e-6 over 224 points), so the zeros are a
+learning outcome. Two design facts recorded: the minimum tail agreement is a minimum over eight
+contexts, four all-or-nothing; the R01 exposure line's per-coordinate move read only `beta`,
+excluding FLEX's residual.
+
+**Ladder R02 rung 1: `R2-D`, neither arm moved.** Per-arm rule fixed before data: each arm's
+minimum over its 12 rows of the largest absolute per-coordinate move over all its trained
+coordinates (FLEX's residual inside), threshold 0.30 for both, with the derivation recorded
+(steps × lr ceiling 0.96 at the root stage; 0.30 about a third of it). Outcome:
+`m_FLEX = 0.108`, `m_BC = 0.250`, both below 0.30; competence 0/6 per arm. Counting the residual
+raises FLEX's minimum 2.3× over R01's statistic, not enough to change any branch; R01's records
+are undisturbed and the 48 evaluation rows are byte-identical to R01 rung 1. Wall 109 s.
+
+Reviewer's reading. The ladder question is now answered as far as it can be at this budget: BC's
+minimum move is 0.250 at 160/320 and 0.249 at 1,600/3,200 updates, so BC is not exposure-limited;
+it settles early at coefficients far from the exactly representable optimum (the check recovers
+them by least squares with residual under 2e-7 and shows `max|β − β*| > 0.5` for every policy).
+That is a property of the objective or its target, not of the update count. Rung 2 of R02 would
+tell whether FLEX crosses 0.30 with ten times the budget (about six minutes) and would close the
+registered object; it cannot change the BC conclusion. The next scientific object, if the
+direction continues, is a diagnostic of the training target: why the learned β lands where it
+does when the basis can represent the optimum (target package, bootstrapping, fold coupling are
+all untouched by the check and by the ladders).
+
+### D.8 Decisions this intake produces
+
+1. UCOPE: (a) run R02 rung 2 to close the ladder, then register a training-target diagnostic
+   object (reviewer's recommendation, since rung 2 is cheap and the diagnostic is where the
+   answer is); (b) skip rung 2 and go straight to the diagnostic; (c) park the direction with the
+   two ladders and the check as its record.
