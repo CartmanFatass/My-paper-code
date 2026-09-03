@@ -1041,6 +1041,16 @@ and pausing the UCOPE chain here with the three-witness hinge queued as its next
    (c) a refusal diagnostic on seed 02 fold 1 first; (d) stop the chain.
    **Owner decision (2026-09-03): (a).**
 
+### Standing instruction: unattended running (2026-09-03, 13:58 PDT)
+
+From this point the owner is not answering decisions in real time. Every later decision section
+in this note and in the ADR review keeps its options and recommendation and then records
+`Owner-delegated decision (unattended, 2026-09-03 instruction): (x)`, the selected option being
+the recommended one. Predictions: the reviewer's is recorded before each launch; the owner's slot
+is marked not taken. Cross-direction lifecycle, priority, fusion, separation, capacity and
+investment decisions are not covered and are held. Record:
+`docs/research/portfolio/decisions/2026-09-03-unattended-delegation.md`.
+
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
 
 Object: decision 3 of A.4 executed by an Opus session on `main`: commits `335559bcf` (the
