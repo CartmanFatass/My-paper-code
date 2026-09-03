@@ -401,6 +401,34 @@ understate FLEX's movement — but not enough to change the branch, and R01 rung
 is not disturbed. Rung 2 of R02 is registered and **not run**. Full evidence:
 `UCOPE_EXPOSURE_LADDER_R02_R1_RESULT_EVIDENCE_20260902.md`.
 
+**Exposure ladder R02 rung 2 — complete, valid, `R2-D NEITHER_ARM_MOVED`; the ladder closes.** Run
+2026-09-02 on the owner instruction to close the ladder (compliance note D.8), at commit
+`905ca924661024d734d29cac773b59323626862b` with the bound 14-file source inventory clean; admission
+10.70 GiB physical and effective; 631.1 s wall, 1,515.8 s CPU at four intra-op threads, 12 policies,
+38,400 root and 19,200 tail optimizer updates, 60 checkpoints at roots `{40, 80, 160, 320, 3200}`,
+every counter reconciled, no non-finite event, telemetry fully measured (`resources_unmeasured:
+false`, peak RSS 412.50 MiB). The 60 evaluation rows are byte-identical to R01 rung 2's and every
+exposure field R01 recorded is identical too, both checked row by row. Competence observation,
+recorded and deciding nothing: 0 of 12 competent, 0 of 12 oracle root-vector matches,
+`NO_ARM_COMPETENT`. Per-arm rule of section 9.4 applied verbatim: `m_FT-XF-FLEX = 0.107457 < 0.30`
+(all-coordinate minimum, residual included, seed `…fresh-02` fold 1 tail) and
+`m_FT-XF-BC = 0.249392 < 0.30`, so both arms `NOT_MOVED` and the branch is **R2-D**. Across the two
+rungs — a ten-fold change in learning rate traded against a ten-fold change in update count, so that
+`steps x lr` is `0.96` at both — the per-arm displacement floors are essentially unchanged
+(`FT-XF-FLEX` 0.108116 to 0.107457, −0.61 %; `FT-XF-BC` 0.250245 to 0.249392, −0.34 %), set by the
+same policy and stage at both rungs. Ten times the optimizer budget at one tenth the step size moved
+the least-moving coordinate of each arm by less than one percent. Rung 3 was not run. Full evidence:
+`UCOPE_EXPOSURE_LADDER_R02_R2_RESULT_EVIDENCE_20260902.md`.
+
+Consequence for the direction, recorded without deciding it: with both rungs read per arm and the
+instrumentation verified, the ladder has said what it can say and the open question has moved. It is
+no longer "was the exposure budget realised" but "why does the learned Bellman coefficient vector
+settle far from the optimum its own basis can represent exactly, and why does an order-of-magnitude
+change of schedule not move it". That question is carded as
+`UCOPE-A-TRAINING-TARGET-DIAGNOSTIC-R01` in
+`UCOPE_TRAINING_TARGET_DIAGNOSTIC_R01_CARD_20260902.md`, written but **not run**: it awaits the
+owner's prediction among the candidate mechanisms listed at the end of that card.
+
 **Instrumentation check — passed, no defect.**
 `UCOPE-A-INSTRUMENTATION-TAIL-AGREEMENT-COMPETENCE-CHECK-R01` (card and result dated 2026-09-02, 77
 tests, all passing) established that the tail-agreement, regret, oracle-root-vector, competence and
@@ -528,7 +556,9 @@ so `R2-C` must not be read as one arm outperforming the other.
 
 ### 9.8 Result
 
-Rung 1 was run on 2026-09-02; the full record is
-`UCOPE_EXPOSURE_LADDER_R02_R1_RESULT_EVIDENCE_20260902.md` and the outcome is summarised in section
-8 above. Rung 2 of R02 is registered but **not run**, and does not run without a further owner
-instruction.
+Both registered rungs were run on 2026-09-02 and both returned `R2-D NEITHER_ARM_MOVED`. Rung 1:
+`UCOPE_EXPOSURE_LADDER_R02_R1_RESULT_EVIDENCE_20260902.md`, `m_FT-XF-FLEX = 0.108116`,
+`m_FT-XF-BC = 0.250245`. Rung 2, run on the owner instruction to close the ladder:
+`UCOPE_EXPOSURE_LADDER_R02_R2_RESULT_EVIDENCE_20260902.md`, `m_FT-XF-FLEX = 0.107457`,
+`m_FT-XF-BC = 0.249392`. Both outcomes are summarised in section 8 above. Rung 3 was not run and
+is not registered for R02.
