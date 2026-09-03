@@ -38,6 +38,12 @@ from .b1_metrics_artifact import (
     formal_analysis_record,
     require_parallel_module_protocols,
 )
+from .b1_metrics_policy_assembly import (
+    ONE_SLOT_EVALUATION_JOIN_RECORD_COUNT,
+    ONE_SLOT_EXECUTION_MODE_RECORD_COUNT,
+    ONE_SLOT_FORMAL_POLICY_CURVE_COUNT,
+    ONE_SLOT_FORMAL_POLICY_DECISION_COUNT,
+)
 from .b1_metrics_production import (
     B1PolicyReplayBatchWitness,
     assemble_and_publish_b1_metrics,
@@ -925,13 +931,20 @@ def supervise_policy_replay_child(
                 incident_path, monitor.incident_snapshot(reason="WORKER_RESULT_UNREADABLE")
             )
             raise B1OrchestrationError("policy replay result is unreadable") from exc
-        expected = (
-            {"policy_decisions": 192, "policy_curves": 2,
-             "execution_mode_records": 4, "evaluation_join_records": 4}
-            if test_only else
-            {"policy_decisions": 6144, "policy_curves": 64,
-             "execution_mode_records": 4, "evaluation_join_records": 128}
-        )
+        # These are the assembly module's own per-slot counts, imported rather
+        # than restated.  The formal branch previously hardcoded
+        # "evaluation_join_records": 128 against a canonical value of 4, so no
+        # conformant formal run could pass; the test-only branch already carried
+        # the correct 4, which is why the test-only integration profile never
+        # exercised the wrong constant.
+        expected = {
+            "policy_decisions": (
+                192 if test_only else ONE_SLOT_FORMAL_POLICY_DECISION_COUNT
+            ),
+            "policy_curves": 2 if test_only else ONE_SLOT_FORMAL_POLICY_CURVE_COUNT,
+            "execution_mode_records": ONE_SLOT_EXECUTION_MODE_RECORD_COUNT,
+            "evaluation_join_records": ONE_SLOT_EVALUATION_JOIN_RECORD_COUNT,
+        }
         if counts != expected or any(wrapper.get(name) is not None for name in (
             "scientific_branch", "scientific_polarity", "promotion_eligible",
             "b2_extension_trigger",
@@ -1725,7 +1738,13 @@ def _prepare_policy_replay_invocation(
                 "sha256": record.get("sha256"),
             }
         for record in raw.get("evaluations", ()):
-            update = record.get("checkpoint_update")
+            # The worker records a held-out evaluation under "update", the same
+            # key `checkpoints_created` uses; "checkpoint_update" is a metrics
+            # TABLE column, not a field of this raw record. Reading the absent
+            # key yielded None for every evaluation, so the second evaluation of
+            # a slice always collided at key None and every conformant run
+            # refused with "policy replay evaluation coverage duplicates".
+            update = record.get("update")
             if update in evaluations:
                 raise B1OrchestrationError("policy replay evaluation coverage duplicates")
             evaluations[update] = dict(record)

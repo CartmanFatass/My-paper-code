@@ -1127,3 +1127,28 @@ def test_policy_replay_refuses_absent_active_mode_provenance(tmp_path):
     group = [_replay_raw_slice(seed=seed, arm=arm, active_modes=None, omit=True)]
     with pytest.raises(b1.B1OrchestrationError, match="provenance is absent"):
         _prepare_replay(tmp_path, group)
+def test_policy_replay_reads_evaluation_updates_from_the_update_key(tmp_path):
+    """The worker records held-out evaluations under "update", not "checkpoint_update".
+
+    Reading the absent key returned None for every evaluation, so the second
+    evaluation of a slice always collided at key None and every conformant run
+    refused with "policy replay evaluation coverage duplicates".
+    """
+    seed, arm = b1.ARM_SEED_ORDER[0]
+    record = _replay_raw_slice(seed=seed, arm=arm, active_modes=[])
+    record["evaluations"] = [{"update": 0}, {"update": 12}]
+    with pytest.raises(b1.B1OrchestrationError) as excinfo:
+        _prepare_replay(tmp_path, [record])
+    assert "duplicates" not in str(excinfo.value)
+    assert "checkpoint/evaluation coverage differs" in str(excinfo.value)
+
+
+def test_policy_replay_still_refuses_genuinely_duplicated_evaluations(tmp_path):
+    """Two evaluations at the same update remain a refusal."""
+    seed, arm = b1.ARM_SEED_ORDER[0]
+    record = _replay_raw_slice(seed=seed, arm=arm, active_modes=[])
+    record["evaluations"] = [{"update": 12}, {"update": 12}]
+    with pytest.raises(
+        b1.B1OrchestrationError, match="evaluation coverage duplicates"
+    ):
+        _prepare_replay(tmp_path, [record])
