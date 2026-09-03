@@ -594,6 +594,52 @@ the prediction request to the owner; nothing runs until the prediction is on rec
    like a converged fixed point than a starved optimiser; if M2 is right, X3's extended loop
    should keep moving. The diagnostic runs on 2026-09-03 with both predictions on record.
 
+### D.11 Training-target diagnostic intake (2026-09-03)
+
+Commits `1f714a95c` (both predictions on record in the card) and `2b6ef8630` (runner, 13 unit
+checks, result `UCOPE_TRAINING_TARGET_DIAGNOSTIC_R01_RESULT_20260903.md`); scope verified.
+Launch sha `d2b4c2542`; preflight 11.4 GiB before every measurement; wall 28 s. **Accepted.**
+
+Outcome by the card's rule, in its stated order: D4 does not fire (rebuilding the root's frozen
+targets from the exact oracle tail reproduces the oracle root vector in 6 of 6 folds, so the
+target package is not a ceiling); **D1 fires**: the tail objective's own per-policy optimum
+`β_tail*` differs from `β*` by up to 0.223 (five of six policies above `ε = 0.10`), with
+`κ_tail ≈ 715–737`. X3 (the extended optimiser loop) did not run because its trigger is
+`d_objective ≤ ε`.
+
+What the branch does not capture, reported in full by the implementer and decisive for the
+reading: pooling all six designs (61,440 rows) gives an optimum within 0.022 of `β*`, every
+coordinate inside 1.22 standard errors, so the **population** optimum is `β*` and the per-policy
+departure is estimation variance at `n = 10,240` on a design with condition number about 717.
+And separately, the linear arm's learned `β` is 0.95–2.38 from its own per-policy optimum with
+gradient ratios up to 108, so the learner is not converging to its objective either.
+
+Verdicts on the predictions, by the rule's wording: the owner's M2 ("the objective's optimum is
+still `β*` and the learners do not reach it") is contradicted, because D1 fires first and D2 is
+never reached; the reviewer's M1/M3 is not supported either, because the objective's population
+optimum is `β*` and the root reconstruction is sound. By the numbers rather than the branch, M2's
+phenomenon is real and larger than the effect that decided the branch: the optimiser is far from
+its own optimum (up to 2.38) while the objective's optimum is off by at most 0.22 through
+variance. The rule's fault, recorded for the next card: it tested the objective's fixed point
+first with a threshold that finite-sample variance alone exceeds on an ill-conditioned design,
+so the smaller effect captured the branch.
+
+Reviewer's reading. Two mechanisms are now measured, both traceable to the same
+ill-conditioning: the tail estimator's variance at this `n`, and the optimiser's failure to reach
+even the variance-shifted optimum. The whitening question the held discriminator was built to
+ask is therefore alive on the evidence, but as an optimiser and conditioning question, not as a
+competence discriminator. That is the natural next object: does whitening the design (or an
+exact solve as the ceiling) close `d_learned`, and does a larger `n` close `d_objective`? Both
+are cheap and outcome-free in their reference arms.
+
+### D.12 Decisions this intake produces
+
+1. UCOPE's next object: (a) an optimiser-and-conditioning object — the linear arm trained on the
+   whitened design versus the raw design, with the exact solve as ceiling and X3's extended loop,
+   reading `d_learned` per arm (reviewer's recommendation; it also answers what the held
+   discriminator wanted to know, with a tolerance set at science scale); (b) an estimator
+   variance object first (larger `n`, pooled fits); (c) a reading-rule successor only; (d) park.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
