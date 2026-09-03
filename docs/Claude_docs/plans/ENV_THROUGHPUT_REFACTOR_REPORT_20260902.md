@@ -401,3 +401,217 @@ plan defers to this measurement.
 - **`tests/production_backend_policy_test.py`** was not run; the D2 report already records it as
   failing for unrelated reasons (pinned C++ source digests under `experiments/candidates/*` with
   uncommitted changes from other work lines). Nothing in this refactor touches it.
+
+---
+
+# P4 addendum — the update phase (2026-09-03)
+
+Implemented by the same session under the owner decision of
+`../reviews/ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` §XI.4 ("P4 first, then E2", 2026-09-03),
+after P0–P3 were accepted in review Part X. Scope as handed over: the update phase only —
+`hmasd/agent.py`'s update paths and the `hmasd/utils.py` batch/sampler code the E-series
+exercises; the environment and the rollout code untouched.
+
+**Outcome: no production code was changed.** The phase delivers the measurement instrument, the
+profile, and four measured candidates. The one candidate worth more than 1% of the update
+(−12.6%) moves post-update parameters by 3.3e-3, six orders of magnitude past the 1e-9 the
+equivalence policy allows, so it was not taken and the authorised fingerprint re-freeze remains
+unspent. §12 gives the owner the price list.
+
+## 10. Profile before any change
+
+Two independent measurements of the same workload — the E0 `off` arm, 32 lanes, 4 threads, one
+500-step rollout and one `agent.update`, seed 1, the same configuration §7's timing runs use.
+
+**(a) `cProfile` over the whole runner** (mandated form:
+`python -m cProfile -o … scripts/run_flexible_skill_duration_e0.py --arm off --seed 1
+--rollouts 1 --num-envs 32 --threads 4`). Total process 305.2 s, of which `agent.update`
+**265.3 s (87%)**; collection is now a rounding error next to it.
+
+| Inside `agent.update` | cumtime s | share of update |
+| --- | --- | --- |
+| `update_discoverer_from_rollout` | 142.7 | 53.8% |
+| `update_coordinator` | 89.1 | 33.6% |
+| `update_discriminators` → `_update_discriminators_fused` | 33.6 | 12.7% |
+| — of which `run_backward` (autograd engine, all three) | 147.2 (tottime) | 55.5% |
+| — of which `torch._C._nn.linear` | 36.6 (tottime) | 13.8% |
+| — of which `torch.gru`, **92,001 calls** | 31.3 (tottime) | 11.8% |
+| — of which `scaled_dot_product_attention` | 5.1 (tottime) | 1.9% |
+| — of which `Adam._single_tensor_adam` | 12.5 | 4.7% |
+
+That run ended with a `PicklingError` in `agent.save_model` after the update
+(`Can't pickle <class '__main__.E0Config'>` — running the runner under `-m cProfile` makes the
+script's module `__main__` unpicklable). Collection and the update had both completed, so the
+update shares above are complete; the evaluation did not run and is not in the profile.
+
+**(b) The agent's own runtime profiling** (`set_runtime_profiling(True)`, no `cProfile`
+distortion), same configuration, through a scratch driver under `temp/`. Update **204.8 s**,
+collection 16.9 s.
+
+| Bucket | s | share of update |
+| --- | --- | --- |
+| **discoverer** total | 112.1 | 54.7% |
+| — actor sequence eval | 18.91 | 9.2% |
+| — critic sequence eval | 16.98 | 8.3% |
+| — backward + two grad clips | 62.94 | 30.7% |
+| — optimizer step | 9.97 | 4.9% |
+| — loss assembly | 1.30 | 0.6% |
+| — sampler | 1.89 | 0.9% |
+| **coordinator** total | 67.7 | 33.1% |
+| — encode + autoregressive policy forward | 22.00 | 10.7% |
+| — backward | 42.32 | 20.7% |
+| — optimizer step | 1.29 | 0.6% |
+| — advantages, sampler, stats | 0.47 | 0.2% |
+| **discriminators** total | 25.96 | 12.7% |
+| — train (fused team+individual) | 25.39 | 12.4% |
+| — accuracy pass | 0.49 | 0.2% |
+
+Reading, and the reason this phase changes nothing: **~51% of the update is the autograd engine
+and ~34% is module forward compute**, all of it inside `hmasd/networks.py` and
+`hmasd/r_mappo_utils.py`. The code this phase was scoped to — `agent.py`'s glue and
+`utils.py`'s samplers — is **4.2 s of 204.8 s (2.1%)**, and the optimizer step, the only other
+in-scope item, is 11.3 s (5.5%). No rearrangement of the in-scope 7.6% can produce a material
+change.
+
+## 11. The instrument
+
+`tests/update_phase_equivalence_test.py` (commit `33abc6801`), written before any candidate was
+tried. For both arms (`off`, `d0`) it drives the batched base-route loop at scenario 1,
+`n_uavs = 6`, `n_users = 50`, 4 lanes, `rollout_length = episode_length = 40`, `k = 10`, one
+fixed seed, for two rollouts with a full `agent.update` after each, and compares **172 parameter
+tensors (5,519,666 positions) per arm** plus the numeric fields of both `agent.update` results
+against a tape written from the pre-P4 code
+(`temp/directions/flexible_skill_duration/test/update_reference_tape_d87065200670.npz`, content
+sha256 `d870652006702f0c31413b6011054c19c8229da3332cf3a8dad6bccf03e26c06` pinned in the test).
+Two updates, so a divergence compounds rather than cancels. It is a strictly stronger instrument
+than the D2 fingerprint the plan named for P4, which covers one arm at 3 agents and 2 lanes.
+
+On the unchanged code, in a fresh process: max abs diff 0.0, 0 tensors not bit-identical, both
+arms.
+
+## 12. Candidates, measured
+
+| # | Candidate | In the phase's scope? | Equivalence (measured) | Timing (measured) | Taken |
+| --- | --- | --- | --- | --- | --- |
+| C1 | `RNNLayer(sequence_backend="segmented")` — fuse the discoverer's per-timestep GRU loop over each contiguous chunk | no: `hmasd/r_mappo_utils.py` plus a config default | forward bit-identical; **backward differs**: RNN weight gradients by 5.3e-5, and after two updates **163 of 172 tensors differ, worst 3.3e-3 on parameters and 1.5e-2 on a loss** | update **204.8 → 179.0 s (−12.6%)**; discoverer actor eval 18.91 → 14.46, discoverer backward 62.94 → 47.32 | **no** |
+| C2 | `Adam(..., foreach=True)` on the five optimizers | yes (`agent.py`) | **bit-identical** — mixed shapes, `weight_decay` 0 and 1e-5, five steps, max abs diff 0.0 | optimizer step 750 → 657 µs (−12%) at `weight_decay = 0`; ≈1.3 s of 204.8 s (**−0.6%**); no gain at `weight_decay = 1e-5` | no |
+| C3 | Stop building and slicing `joint_observations` in `get_discoverer_sampler` when the consumer does not use it (`use_compact_in_low_level_actor = False` in `config_1.py`) | yes (`utils.py` + its `agent.py` call site) | bit-identical by construction (the array is never read) | bounded above by the whole sampler bucket, 1.89 s (**≤0.9%**); also ≈240 MB of transient RSS per update at 32 lanes | no |
+| C4 | Vectorise the coordinator's per-agent value loss (the plan's third P4 candidate) | yes (`agent.py`) | **not** bit-identical: replaces a mean-of-per-agent-means by one mean, changing the reduction | ≈0.05 s over 195 minibatches (**≤0.03%**) | no |
+| C5 | Thread count for the update only (the plan's first P4 candidate) | no: owned by `scripts/run_flexible_skill_duration_e0.py`, which this hand-off forbids touching | changes results — E0's own runs show 1 thread and 4 threads give different evaluation return means (40.09186 vs 39.84204) | not measured | no |
+
+C2 + C3 together are ≈2.5 s of 204.8 s (≈1.2%), which is inside this machine's run-to-run drift
+on untouched code (§13 measures that drift at up to +9%). C2 would additionally write
+`foreach: True` into every saved optimizer `param_groups`, and a resume from an older checkpoint
+would silently restore `foreach: None` — a footgun for a gain that cannot be measured. Neither
+was taken; both remain available and are cheap to apply if the owner wants them.
+
+**One correction to my own method, recorded because it nearly produced a false result.** The
+first pass at measuring C1 drove the harness through a scratch script that set `sys.argv` before
+parsing its own arguments, so the candidate flag was never applied and the run reported
+"bit-identical" while actually re-running the baseline. The number in the table comes from the
+replacement experiment: one process, one seed, `run_arm` called twice with the backend set
+explicitly in between, with the segment structure instrumented to confirm the fused path really
+ran (`(T=10, 2 segments)` per call, 180 calls per update). Treat any equivalence result that is
+not accompanied by evidence that the change was actually active as unproven.
+
+## 13. Timing, and what it says
+
+The two E0 timing commands of §7, repeated verbatim on the P4 tree (run names
+`timing_off_1thread_p4`, `timing_off_4thread_p4`; the runner does its own passing preflight):
+
+| Setting | collection s (r1, r2) | update s (r1, r2) | evaluation s | 2-rollout wall s | evaluation return mean |
+| --- | --- | --- | --- | --- | --- |
+| 1 thread, before P1–P3 | 242.0, 241.7 | 330.9, 331.1 | 60.8 | 1209.3 | 40.09186398791525 |
+| 1 thread, after P1–P3 | 19.1, 19.0 | 333.5, 335.8 | 5.3 | 714.6 | 40.09186398791525 |
+| 1 thread, **after P4** | 21.2, 20.0 | 357.7, 367.6 | 5.9 | 774.6 | **40.09186398791525** |
+| 4 threads, before P1–P3 | 239.7, 240.5 | 181.3, 182.8 | 61.0 | 908.4 | 39.84203863517143 |
+| 4 threads, after P1–P3 | 19.1, 16.7 | 188.1, 187.9 | 4.4 | 418.5 | 39.84203863517143 |
+| 4 threads, **after P4** | 17.6, 18.0 | 205.2, 203.8 | 4.5 | 451.3 | **39.84203863517143** |
+
+Both P4 runs reproduce the evaluation return mean **bit-for-bit** at their thread count, as they
+must: no code changed. The update seconds nonetheless rose 8–9% against the P3 runs on
+identical code (333.5/335.8 → 357.7/367.6 at 1 thread; 188.1/187.9 → 205.2/203.8 at 4 threads).
+That is this machine's drift between sessions, and it is the number that decides P4: a candidate
+worth 0.6% or 1.2% cannot be distinguished from it, and even C1's 12.6% — measured across two
+separate processes, not interleaved — carries that same uncertainty.
+
+## 14. Fingerprint status
+
+**Unchanged, and the authorised re-freeze is still unspent.**
+`tests/fixtures/flexible_skill_duration_d2/fingerprint_off.json` was neither regenerated nor
+modified in P4; `git status --porcelain tests/fixtures/flexible_skill_duration_d2/` is empty and
+the canonical-JSON sha256 is still
+`3c525b9c3d26ef0385231c660f25a962eccdee87103feb39a4fc361dd225d937` (raw
+`6ba55c2eb310aa011f34933a1bc79566029a2db2dd2d461c18472ca0d7cf30b4`). No addendum was appended to
+`D2_IMPLEMENTATION_REPORT_20260902.md` for P4, because there is nothing to record there: the
+P3 addendum's statement that the fixture is still the pre-D2 phase-0 baseline continues to hold.
+
+## 15. Tests
+
+Each file separately, `--basetemp C:/Projects/HMASD/temp/pytest_uav_env_refactor
+-p no:cacheprovider`, after a passing preflight
+(`temp/uav_refactor_preflight/preflight_p4_tests.json`). Verbatim summary lines:
+
+```
+### tests/flexible_skill_duration_d2_test.py
+13 passed, 14 warnings in 13.89s
+### tests/flexible_skill_duration_e1_test.py
+17 passed, 14 warnings in 4.52s
+### tests/relay_corridor_host_test.py
+9 passed in 9.47s
+### tests/relay_corridor_hmasd_test.py
+4 passed, 14 warnings in 9.88s
+### tests/uav_env_channel_equivalence_test.py
+7 passed in 18.82s
+### tests/hmasd_r_mappo_utils_contract_test.py
+5 passed in 2.08s
+### tests/update_phase_equivalence_test.py
+2 passed, 14 warnings in 25.65s
+```
+
+## 16. Plan-versus-code discrepancies (P4)
+
+1. **The plan's three P4 candidates are all small or unavailable.** "Thread count for the update
+   only" is owned by the runner this hand-off forbids editing and changes results anyway (C5);
+   "removing repeated host-to-tensor conversions per minibatch" is worth ≤0.9% because the whole
+   sampler bucket is 0.9% of the update (C3) — the conversion cost the plan inferred from the
+   2026-09-02 profile was measured against a 4-lane run where the environment dominated, and it
+   does not survive re-measurement at 32 lanes; "vectorising the per-agent Python loops in the
+   coordinator value loss" is worth ≤0.03% and is not bit-identical (C4).
+2. **The plan's assumption that P4's candidates are "checked by the fingerprint test (bit-exact
+   at the fingerprint configuration)" understates what is needed.** The fingerprint covers one
+   arm at 3 agents and 2 lanes; C1's divergence would be caught there, but a change that is
+   exact at that size and inexact at E0's could pass it. §11's harness (both arms, 6 agents,
+   4 lanes, 172 tensors, two chained updates) plus the E0 return-mean cross-check is the pair
+   that actually closes the gap, and even that pair does not reach 32 lanes.
+3. **`cache_update_tensors` and `rnn_sequence_backend` already exist as switched-off options**
+   (`hmasd/utils.py`, `hmasd/networks.py`, `hmasd/r_mappo_utils.py`), with their own equivalence
+   test (`tests/hmasd_rnn_sequence_test.py`, float64, atol 1e-12) and benchmark
+   (`tools/benchmarks/benchmark_rnn_sequence_backend.py`, float32 rtol 1e-6 / atol 1e-7). The
+   benchmark's float32 tolerances are the honest description: in float32 the segmented backend
+   is *not* bit-identical, and the float64 test does not say it is. P4 measured what those
+   tolerances mean downstream (§12 C1).
+4. **The 2026-09-02 profile in plan §1 put `agent.update` at 25.3 s of 202 s (12%).** At the
+   E-series configuration (32 lanes, not 4) it is 265 s of 305 s (87%) under `cProfile` and
+   204.8 s of a 222 s rollout in the clean measurement. The plan's §4 estimate that the update
+   would dominate after P1–P3 was right; its share was understated because it was measured at
+   4 lanes.
+
+## 17. Could not verify (P4)
+
+- **Whether any candidate is bit-identical at 32 lanes.** The harness runs at 4 lanes and 40
+  steps for cost reasons; GEMM shapes change with batch size, so a candidate that is exact at
+  the harness's shapes could be inexact at E0's. The only 32-lane instrument used here is the
+  evaluation return mean of the timing runs, which is a single scalar per run.
+- **C1's 12.6% to better than the machine's ±9% drift.** The two measurements were separate
+  processes minutes apart, not interleaved repetitions. The direction is not in doubt (the
+  discoverer's actor eval and backward both fell); the magnitude is ±a few points.
+- **C2 and C3 end-to-end.** Both were measured as micro-benchmarks and as a share of the runtime
+  profile's buckets, not by an E0 run, because their predicted effect (≈1.2% combined) is well
+  inside the drift an E0 run would carry.
+- **The discriminator bucket's internal split** (25.4 s, 12.4% of the update). The agent's
+  instrumentation reports it as one `disc_train` number; no per-batch decomposition was taken,
+  so a cheaper in-scope win there, if one exists, would not have been visible. Its Python glue
+  (`disc_pack`, 0.08 s) is not where the time is.
+- **Anything about learning.** Nothing in P4 speaks to whether any of this changes what the
+  algorithm learns; C1 was rejected on exactness, not on a claim that its arithmetic is worse.
