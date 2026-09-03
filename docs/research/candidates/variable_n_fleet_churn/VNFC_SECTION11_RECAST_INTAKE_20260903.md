@@ -437,3 +437,51 @@ against a batch-1 relabelled forward and so varies presentation and batch width 
 The complete evidence, per-attempt tables, verbatim summary lines, seven named deviations, the
 could-not-verify list and the open question this leaves for the owner are in
 `VNFC_BPCR_R02_RESULT_EVIDENCE_20260903.md`.
+
+### Result addendum, 2026-09-03 (second launch window, after owner decision F.4(a))
+
+The open question §8 above left for the owner was settled the same day: owner decision **F.4 option
+(a)** (`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` F.4 decision 1, commit
+`ee84406cc`) authorised repairing the relabel probe to the declared like-for-like comparison. The
+probe was repaired at commit `b90122e68` (installed from `scripts/run_vnfc_bpcr_r02.py`;
+`scripts/run_vnfc_bpcr_b_explore.py` untouched), the batch-position residual was demoted to a
+descriptive `gating: false` field, and the object was then run to completion.
+
+**The recast object produced a valid `B/EXPLORE` result and is consumed. Polarity:
+`INSTABILITY/HETEROGENEITY`.** A fresh `B0-DEBUG` (attempt 05, seed `2026090301`, 8 updates)
+completed and sealed in 119.5 s with relabel mismatch 0/0, and the three 64-update `PRIMARY` seeds
+`2026090311`, `2026090321` and `2026090331` — fixed outcome-blind in §3 before any launch — all
+completed and sealed, one process at a time, with a fresh 4 GiB admission before each (626.1 s,
+691.1 s, 584.9 s wall; `resources_unmeasured: false` throughout).
+
+Every §4 integrity item and every launch condition this recast keeps held in all four runs: relabel
+mismatch 0/0 per arm under the like-for-like law, PS-B0 passed, `common_host_hard_valid: true`,
+action sensitivity 64/64 on the held-out `N = 7` rows, `BCRH: IDENTIFIED`, 2,048 matched optimizer
+steps per arm per seed, and an exposure line reaching 20-24% relative parameter displacement for
+both learners.
+
+The reading rule's first clause (preliminary support) is met by **zero of three** seeds against a
+requirement of two; its second clause (falsification) fails because seed `2026090331` shows positive
+MAPR final-minus-initial `R_fail_60` at **both** training sizes (+0.143646 at `N = 3`, +0.128229 at
+`N = 5`). Its third clause governs: seed signs are mixed (MAPR final-minus-initial `R_fail_60` at
+`N = 3` is +0.060521 / -0.031250 / +0.143646 across seeds; the paired `N = 7` MAPR-DIRECT contrast is
+-0.032917 / +0.107292 / -0.022187) and failed-zone reversal is present within seeds. The one stable
+direction is against the fixed controller: paired `N = 7` MAPR-BCRH `R_fail_60` is negative in every
+seed (-0.157292, -0.093333, -0.131354), so the competent bounded receding-horizon controller is not
+beaten on the held-out worlds at this budget.
+
+The batch-position residual, now measured at trained checkpoints for the first time, persists and
+does not vanish with training: 18/576 at DEBUG and 15, 30 and 17 per 1,152 across the three seeds,
+concentrated in the `N = 7` cells and absent from every `N = 3` cell. It gates nothing and carries no
+claim.
+
+Two `B0-DEBUG` attempts (03 and 04) and one aborted `PRIMARY` launch are permanently quarantined in
+this window: 03 and 04 stopped on the R01 runner's frozen 48/60 diagnostic-forward accounting
+constant, made unsatisfiable by the authorised probe repair, during terminal construction before any
+result body or seal existed; the aborted `PRIMARY` was killed by the launching shell's 10-minute
+timeout with only `STARTED.json` written. None is a learner-side instrumentation failure and none
+carries polarity.
+
+Part II of `VNFC_BPCR_R02_RESULT_EVIDENCE_20260903.md` holds the full per-seed tables, the reading
+rule applied clause by clause with the deciding numbers, the seal digests, five further named
+deviations (D8-D12) and the could-not-verify list.

@@ -474,3 +474,553 @@ zero presentation dependence. Three options, none of them taken here:
 
 The reviewer's recommendation is option 1, as the repair of a measurement to what the direction's
 own text declares, with the §9 numbers published beside it.
+
+---
+
+# Part II — the repaired relabel probe, `B0-DEBUG` attempt 05, and the three 64-update `PRIMARY` seeds (2026-09-03, second launch window)
+
+Executed 2026-09-03 by Claude Code (Fable 5.1) after owner decision **F.4 option (a)** of
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` (commit `ee84406cc`) — the
+option §16 above put to the owner as "repair the probe to the declared comparison". Part I is left
+exactly as written: it is the permanent record of attempts 01 and 02 and is not revised by anything
+below.
+
+**Outcome: a valid `B/EXPLORE` result. The object `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` is
+consumed. Polarity: `INSTABILITY/HETEROGENEITY`.** Neither preliminary support nor falsification is
+reached; the reading rule's third clause governs. The deciding numbers are in §22.
+
+| Fact | Value |
+| --- | --- |
+| Launch sha, all four runs | `b90122e68` — "Install the R02 exposure budget at validate_runtime_terminal" |
+| Relabel probe law | `VNFC-R02-RELABEL-LIKE-FOR-LIKE-V1` (presentation only, both sides at batch 1) |
+| Presentation law | `VNFC-R02-ORC-CANONICAL-OPAQUE-RANK-SORT-V1` (unchanged from Part I) |
+| Seeds | `B0-DEBUG` `2026090301` (8 updates); `B1-B3-PRIMARY` `2026090311`, `2026090321`, `2026090331` (64 updates each), fixed outcome-blind in the recast intake §3 before any launch |
+| Attempts consumed | `B0-DEBUG` attempt 05 (sealed); three `PRIMARY` attempts, all sealed |
+| Attempts quarantined in this window | `B0-DEBUG` attempts 03 and 04 (frozen accounting constant, §26 D8); `PRIMARY_2026090311_ABORTED_01` (shell timeout, §26 D9) |
+| Disposition | **`VALID_B_EXPLORE_RESULT`**, polarity `INSTABILITY/HETEROGENEITY` |
+| Result root (gitignored) | `temp/directions/variable_n_fleet_churn/exp/R02_20260903/` |
+
+---
+
+## 17. What changed: the relabel probe, before and after
+
+The old probe, quoted from the read-only R01 substrate
+(`scripts/run_vnfc_bpcr_b_explore.py`, `_evaluate_learned_batch`, lines 461-506):
+
+```python
+477:                output = model(*stacked); policy_forwards += 1
+...
+490:                    permuted_output = model(*_permuted_inputs(inputs[index], permutation)); diagnostic_forwards += 1
+492:                    permuted = permuted_output["command"][0]
+493:                mapped = tuple(len(permutation) if int(choice) == len(permutation) else permutation[int(choice)] for choice in permuted)
+494:                mismatch += int(tuple(int(choice) for choice in output["command"][index]) != mapped)
+```
+
+`output` at line 477 is a **batch-8** forward; `permuted_output` at line 490 is a **batch-1** forward.
+Line 494 therefore compares a batch-8 identity presentation against a batch-1 relabelled
+presentation, so it varies presentation and batch position together and reports their composition.
+Part I §9 measured that composition on untrained checkpoints: the old probe reports 8/96 under the
+R01 law and 12/96 under the R02 law, i.e. it under-reports real presentation failure and refuses a
+law whose presentation dependence is exactly zero.
+
+The repaired probe, installed by `install_like_for_like_relabel_probe()` in
+`scripts/run_vnfc_bpcr_r02.py` onto the imported R01 module — `scripts/run_vnfc_bpcr_b_explore.py`
+is **not edited** (`DIRECTION.md:164-165` makes R01 source read-only substrate):
+
+```python
+identity_output = model(*inputs[index]); diagnostic_forwards += 1        # batch 1, identity
+permuted_output = model(*r01._permuted_inputs(inputs[index], permutation)); diagnostic_forwards += 1  # batch 1, relabelled
+reference = tuple(int(c) for c in identity_output["command"][0])
+mapped = tuple(len(permutation) if int(c) == len(permutation) else permutation[int(c)] for c in permuted_output["command"][0])
+mismatch += int(reference != mapped)                                     # GATING: presentation only
+batched = tuple(int(c) for c in output["command"][index])                # the batch-8 forward
+residual_sink.append({..., "batch_position_command_differs": batched != reference})   # descriptive
+```
+
+Both sides of the gating comparison are batch-1 forwards of the same decision state at the same
+batch position; presentation is the only quantity that varies. That is the direction's own declared
+condition, verbatim: "Every later evaluation decision state also receives one fresh relabel of that
+arm's own checkpoint with zero physical-command mismatches required"
+(`VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`:66-68). It remains a
+launch condition and still requires exactly zero.
+
+The **batch-position residual** — the batch-8 policy forward against the batch-1 identity forward at
+the same presentation — is computed from the same identity forward at no extra cost and published as
+`VNFC_BPCR_R02_BATCH_POSITION_RESIDUAL_V1` with `gating: false`. It never gates.
+
+---
+
+## 18. Tests of the repair
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q \
+  --basetemp C:/Projects/HMASD/temp/directions/variable_n_fleet_churn/test/r02_probe_e3 \
+  tests/experiments/candidates/variable_n_fleet_churn_b_explore/test_r02_relabel_probe.py
+12 passed in 15.79s
+```
+
+The 12 cases, in
+`tests/experiments/candidates/variable_n_fleet_churn_b_explore/test_r02_relabel_probe.py`:
+
+| Test | What it pins |
+| --- | --- |
+| `test_diagnostic_totals_reproduce` | rebuilds Part I §9's panel on untrained checkpoints and reproduces all six totals exactly |
+| `test_batch_residual_is_identical_under_both_laws` | 12/96 under R01 and under R02 — the residual is a property of the arithmetic, not of the presentation law |
+| `test_repaired_probe_passes_the_r02_law_and_fails_the_r01_law` | the required discrimination |
+| `test_old_conflated_probe_refuses_the_r02_law` | the defect Part I §16 reported |
+| `test_repaired_probe_exposure_budget` | 96 (MAPR) / 108 (DIRECT) diagnostic forwards per learned evaluation row |
+| `test_batch_residual_record_is_descriptive_only` / `test_empty_residual_record_is_valid` | `gating: false`, and the record is well-formed when empty |
+| `test_recast_record_names_the_repaired_probe` | the probe law and the F.4 provenance appear in the run record |
+| `test_installed_probe_replaces_the_r01_comparison` | installation swaps `_evaluate_learned_batch` and `validate_runtime_terminal` on the imported module |
+| `test_installed_validator_checks_the_aggregate_exposure` | the second frozen 48/60 constant, at `run_vnfc_bpcr_b_explore.py:975` |
+| `test_r01_runner_source_is_untouched` | `RELABEL_PROBE_LAW` and `batch_position_command_differs` do not appear in the R01 source |
+
+The reproduced totals, over **96 world-decisions per law** (6 `(N, failed-zone)` cells x 8 worlds x
+2 arms; Part I wrote "/192", which is the total across *both* laws — the correction is recorded in
+the recast intake §7b):
+
+| Law | batch-position residual | presentation (like-for-like) | old conflated probe |
+| --- | ---: | ---: | ---: |
+| R01, no canonical sort | 12 / 96 | **15 / 96** | 8 / 96 |
+| R02, canonical opaque-rank sort | 12 / 96 | **0 / 96** | 12 / 96 |
+
+---
+
+## 19. Resource admission (a launch condition, unchanged)
+
+`python scripts/hmasd_resource_preflight.py admit-memory --out <run_dir>/preflight.json`, immediately
+before each invocation, re-validated inside the runner (freshness window 300 s, floor
+`4,294,967,296` B on both physical and effective). Physical equals effective on this host.
+
+| Receipt | `assessed_at` | available physical = effective | `passed` |
+| --- | --- | ---: | --- |
+| `DEBUG_ATTEMPT_03/preflight.json` | 2026-09-03T15:40:58.764950Z | 15,612,915,712 B | `true` |
+| `DEBUG_ATTEMPT_04/preflight.json` | 2026-09-03T15:46:25.584083Z | 15,710,945,280 B | `true` |
+| `DEBUG_ATTEMPT_05/preflight.json` (superseded, §26 D10) | 2026-09-03T16:04:53.102920Z | 14,206,586,880 B | `true` |
+| `DEBUG_ATTEMPT_05/preflight.json` | 2026-09-03T16:06:24.508416Z | 14,270,267,392 B | `true` |
+| `PRIMARY_2026090311_ABORTED_01/preflight.json` | 2026-09-03T16:10:43.191837Z | 13,621,387,264 B | `true` |
+| `PRIMARY_2026090311_02/preflight.json` | 2026-09-03T16:22:24.193893Z | 14,109,392,896 B | `true` |
+| `PRIMARY_2026090321_01/preflight.json` | 2026-09-03T16:33:57.040367Z | 12,531,900,416 B | `true` |
+| `PRIMARY_2026090331_01/preflight.json` | 2026-09-03T16:46:04.860484Z | 13,068,845,056 B | `true` |
+
+---
+
+## 20. Commands actually run
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/hmasd_resource_preflight.py admit-memory --out '<A>/preflight.json'
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_vnfc_bpcr_r02.py debug `
+    --stage B0-DEBUG --seed 2026090301 --updates 8 `
+    --preflight-receipt '<A>/preflight.json' `
+    --scratch-root '<A>/scratch' `
+    --durable-root '<A>/scientific/VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02/B0-DEBUG/2026090301' `
+    --publication-root '<A>/publication' --record-root '<A>'
+
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/hmasd_resource_preflight.py admit-memory --out '<P>/preflight.json'
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_vnfc_bpcr_r02.py primary `
+    --stage B1-B3-PRIMARY --seed <SEED> --updates 64 `
+    --preflight-receipt '<P>/preflight.json' `
+    --scratch-root '<P>/scratch' `
+    --durable-root '<P>/scientific/VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02/B1-B3-PRIMARY/<SEED>' `
+    --publication-root '<P>/publication' --record-root '<P>' `
+    --archived-debug-valid-claim '<A>/publication/VALID_CLAIM.json' `
+    --archived-debug-scientific-root '<A>/scientific/VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02/B0-DEBUG/2026090301'
+```
+
+with `<A>` = `<root>/DEBUG_ATTEMPT_05`, `<P>` in
+`{PRIMARY_2026090311_02, PRIMARY_2026090321_01, PRIMARY_2026090331_01}`, `<SEED>` the matching seed,
+and `<root>` = `temp/directions/variable_n_fleet_churn/exp/R02_20260903`. One process at a time;
+`OMP_NUM_THREADS=MKL_NUM_THREADS=4` in the environment and `torch.set_num_threads(1)` inside the
+runner, so at most one torch thread was used and the four-thread ceiling was never approached.
+
+---
+
+## 21. `B0-DEBUG` attempt 05 — completed and sealed
+
+| Field | Value |
+| --- | ---: |
+| Started / finished | 2026-09-03T16:06:41.445972Z / 2026-09-03T16:08:40.970787Z |
+| Wall (runner) / wall (telemetry) / CPU | 119.525 s / 118.580 s / 131.75 s |
+| `status` | `COMPLETE`; `attempt_disposition` `VALID_CAPABLE` |
+| Relabel mismatch, MAPR / DIRECT | **0 / 0** — the repaired probe passes at trained checkpoints |
+| PS-B0 | passed, 288 comparisons, 0 mismatches per arm |
+| Evaluation diagnostic forwards | MAPR 576 = 96 x 6 groups; DIRECT 648 = 108 x 6 — the R02 budget, exactly |
+| Batch-position residual (descriptive) | 18 / 576, by cell `{N5z1: 3, N5z2: 2, N7z1: 5, N7z2: 8}` |
+| `RESULT_BODY.json` | sha256 `d7c78b0bfcfbb061ae9288cfda7a7ccc822ec4e0c8efe6ba958fc2cc78832e87`, 43,458,334 B |
+| storage seal | sha256 `a6cc89fc6e83a7f972657fbf067c3469ef3355404deac60d0ecebdd72a6ae328` |
+| `TELEMETRY_TERMINAL.json` | sha256 `777038183267035fa21ef3fe319259f4be3291d2a1b113fba2928358ef6b87d2`, 5,682 B |
+| `resources_unmeasured` | `false` |
+
+Attempt 05's exposure line is **bit-identical** to attempt 02's where they overlap (MAPR update 0
+`0.02585059206655834`, update 1 `0.0409398324711615`; DIRECT update 6 `0.10711893599150846`, update 7
+`0.11702537303517462`). The probe repair therefore did not touch training, sampling or the optimizer:
+it changed only what the diagnostic compares. This is the direct evidence that attempt 05 was
+outcome-blind with respect to the learning question.
+
+The sealed attempt-05 bundle is what gated the three `PRIMARY` seeds: the runner's `PRIMARY` path
+rebuilds the DEBUG gate receipt from the archived `VALID_CLAIM.json` + `RESULT_BODY.json` +
+`TELEMETRY_TERMINAL.json` and refuses to start without it.
+
+---
+
+## 22. The three 64-update `PRIMARY` seeds
+
+All three completed, sealed and published the three-artifact bundle. Every §4 integrity item and
+every launch condition the recast keeps held in every seed.
+
+Each cell below is the **mean over the 16 worlds of that training size** (2 failed-zone strata x 8
+worlds), with the count of positive worlds in parentheses. `R_fail_60` is the primary endpoint.
+
+### 22.1 The primary endpoint, `R_fail_60`
+
+| Seed | MAPR final-minus-initial N=3 | MAPR final-minus-initial N=5 | paired N=7 MAPR-DIRECT | paired N=7 MAPR-BCRH |
+| --- | ---: | ---: | ---: | ---: |
+| `2026090311` | **+0.060521** (10/16) | **-0.034375** (6/16) | **-0.032917** (1/16) | **-0.157292** (0/16) |
+| `2026090321` | **-0.031250** (1/16) | **+0.080104** (9/16) | **+0.107292** (10/16) | **-0.093333** (0/16) |
+| `2026090331` | **+0.143646** (14/16) | **+0.128229** (14/16) | **-0.022187** (5/16) | **-0.131354** (3/16) |
+
+### 22.2 Secondary endpoints
+
+`U_total`
+
+| Seed | MAPR f-i N=3 | MAPR f-i N=5 | MAPR-DIRECT N=7 | MAPR-BCRH N=7 |
+| --- | ---: | ---: | ---: | ---: |
+| `2026090311` | +0.258228 (16/16) | +0.264927 (16/16) | -0.056129 (4/16) | -0.141193 (5/16) |
+| `2026090321` | -0.033839 (2/16) | +0.072360 (10/16) | +0.054266 (13/16) | -0.152270 (1/16) |
+| `2026090331` | +0.309568 (16/16) | +0.378045 (16/16) | -0.081096 (3/16) | -0.274326 (0/16) |
+
+`U_intact`
+
+| Seed | MAPR f-i N=3 | MAPR f-i N=5 | MAPR-DIRECT N=7 | MAPR-BCRH N=7 |
+| --- | ---: | ---: | ---: | ---: |
+| `2026090311` | +0.179715 (11/16) | +0.409908 (16/16) | -0.072309 (3/16) | -0.164836 (3/16) |
+| `2026090321` | +0.000000 (0/16) | -0.028904 (3/16) | +0.072851 (10/16) | -0.169135 (2/16) |
+| `2026090331` | +0.240034 (11/16) | +0.353083 (14/16) | -0.117014 (1/16) | -0.389861 (0/16) |
+
+`J_ext = 0.5*R_fail_60 + 0.5*U_total`
+
+| Seed | MAPR f-i N=3 | MAPR f-i N=5 | MAPR-DIRECT N=7 | MAPR-BCRH N=7 |
+| --- | ---: | ---: | ---: | ---: |
+| `2026090311` | +0.159374 (15/16) | +0.115276 (14/16) | -0.044523 (4/16) | -0.149242 (2/16) |
+| `2026090321` | -0.032545 (2/16) | +0.076232 (10/16) | +0.080779 (13/16) | -0.122802 (0/16) |
+| `2026090331` | +0.226607 (16/16) | +0.253137 (16/16) | -0.051642 (7/16) | -0.202840 (0/16) |
+
+### 22.3 Zone strata (the rule's zone-reversal clause)
+
+MAPR final-minus-initial `R_fail_60`:
+
+| Seed | N3z1 | N3z2 | N5z1 | N5z2 | N7z1 | N7z2 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `2026090311` | +0.088125 (5/8) | +0.032917 (5/8) | +0.000000 (4/8) | **-0.068750** (2/8) | +0.210417 (7/8) | **-0.119792** (0/8) |
+| `2026090321` | **-0.058333** (0/8) | **-0.004167** (1/8) | **-0.004167** (1/8) | +0.164375 (8/8) | +0.000000 (1/8) | +0.068750 (4/8) |
+| `2026090331` | +0.156042 (6/8) | +0.131250 (8/8) | +0.201042 (7/8) | +0.055417 (7/8) | +0.157500 (6/8) | +0.100417 (6/8) |
+
+Paired N=7 `R_fail_60` by stratum:
+
+| Seed | MAPR-DIRECT N7z1 | MAPR-DIRECT N7z2 | MAPR-BCRH N7z1 | MAPR-BCRH N7z2 |
+| --- | ---: | ---: | ---: | ---: |
+| `2026090311` | -0.060417 (0/8) | -0.005417 (1/8) | -0.159375 (0/8) | -0.155208 (0/8) |
+| `2026090321` | +0.199167 (6/8) | +0.015417 (4/8) | -0.041667 (0/8) | -0.145000 (0/8) |
+| `2026090331` | +0.017500 (1/8) | -0.061875 (4/8) | -0.087500 (3/8) | -0.175208 (0/8) |
+
+Sign reverses **between zone strata within a seed** at N=5 and N=7 in seed `2026090311`, at N=3/N=5
+in seed `2026090321`, and in the paired N=7 MAPR-DIRECT contrast in seed `2026090331`.
+
+### 22.4 Validity, comparator competence and instrumentation
+
+| Seed | relabel mismatch MAPR / DIRECT | PS-B0 | common host hard valid | BCRH | action-sensitive N=7 rows | DIRECT residual: nonzero total variation / physical-command changes | batch-position residual (descriptive) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `2026090311` | 0 / 0 | pass | `true` | `IDENTIFIED` | 64/64 | 288/576 nonzero, 0 command | 15/1152 `{N5z2:1, N7z1:6, N7z2:8}` |
+| `2026090321` | 0 / 0 | pass | `true` | `IDENTIFIED` | 64/64 | 288/576 nonzero, 3 command | 30/1152 `{N5z1:4, N7z1:7, N7z2:19}` |
+| `2026090331` | 0 / 0 | pass | `true` | `IDENTIFIED` | 64/64 | 286/576 nonzero, 1 command | 17/1152 `{N5z1:2, N7z1:8, N7z2:7}` |
+
+Also `true` in all three: `n7_controls_frozen_before_open`, `shadow_boundary_exact`,
+`shadow_source_stable`, `observations_complete`, `finite_values`,
+`initial_final_checkpoints_retained`, `source_pre_digest == source_post_digest`;
+`shadow_influenced_actions` is `false`.
+
+### 22.5 Counts and exposure budget (identical across seeds)
+
+| Quantity | Value |
+| --- | ---: |
+| training episodes / joint transitions / optimizer steps / evaluation rollouts | 2,048 / 12,288 / 2,048 / 208 |
+| evaluation diagnostic forwards, MAPR / DIRECT | 1,152 = 96 x 12 groups / 1,296 = 108 x 12 groups |
+| exposure-line rows | 128 (64 updates x 2 arms) |
+
+### 22.6 The exposure line
+
+| Seed | Arm | `||θ0||` | update 0 relative | update 63 relative | AdamW steps/update |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `2026090311` | MAPR | 33.316665 | 0.024313 | **0.232585** | 16 |
+| `2026090311` | DIRECT | 38.652299 | 0.026450 | **0.215438** | 16 |
+| `2026090321` | MAPR | 33.316665 | 0.021612 | **0.239145** | 16 |
+| `2026090321` | DIRECT | 38.652299 | 0.026860 | **0.210009** | 16 |
+| `2026090331` | MAPR | 33.316665 | 0.021606 | **0.223496** | 16 |
+| `2026090331` | DIRECT | 38.652299 | 0.026712 | **0.204767** | 16 |
+
+Both learners move monotonically to 20-24% relative parameter displacement over 64 updates, with
+matched optimizer exposure (2,048 steps each per seed). §11.4's exposure clause is satisfied.
+
+---
+
+## 23. The reading rule, applied
+
+The rule, transferred verbatim from the recast intake §5, itself transferred verbatim from
+`VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`:99-114:
+
+> Preliminary support requires at least two of the first three valid seeds to show positive MAPR
+> final-minus-initial recovery at both training sizes and positive paired `N=7 R_fail_60` directions
+> against each comparator, with active/competent comparators, no persistent zone reversal, and no
+> repeated adverse `U_total` or `U_intact` direction. This remains hypothesis-generating.
+>
+> The exact 64-update proposition is falsified only when common validity, PS-B0, action sensitivity,
+> and comparator competence hold and either:
+>
+> - MAPR has nonpositive final-minus-initial recovery at one or both training sizes in every seed; or
+> - MAPR learns at both training sizes but has nonpositive paired `N=7` recovery versus both DIRECT
+>   and BCRH in every seed.
+>
+> Mixed seed signs or zone reversal mean `INSTABILITY/HETEROGENEITY`. Relabel, telemetry, resource,
+> native-host, hard-validity, or comparator-competence failure means `INCOMPLETE` or comparator-
+> specific `NONIDENTIFIED`, never a scientific null. A valid Class B null does not close the
+> direction.
+
+**Precondition — all three seeds are valid.** Common validity (`common_host_hard_valid: true`),
+PS-B0 (passed, 0 mismatches), action sensitivity (64/64 N=7 rows sensitive), and comparator
+competence (`BCRH: IDENTIFIED`) hold in every seed (§22.4). No relabel, telemetry, resource,
+native-host or hard-validity failure occurred: `resources_unmeasured: false` in all four runs and
+the relabel mismatch is 0/0 everywhere. The last clause of the rule is therefore **not** triggered;
+this is not `INCOMPLETE` and not `NONIDENTIFIED`.
+
+**Clause 1 — preliminary support: NOT reached.** It requires at least two of the three seeds to show
+positive MAPR final-minus-initial `R_fail_60` at **both** training sizes *and* positive paired N=7
+directions against **each** comparator. Seed by seed:
+
+| Seed | positive MAPR f-i at both N=3 and N=5? | positive paired N=7 vs DIRECT? | positive paired N=7 vs BCRH? | meets clause 1? |
+| --- | --- | --- | --- | --- |
+| `2026090311` | no (N=5 is -0.034375) | no (-0.032917) | no (-0.157292) | **no** |
+| `2026090321` | no (N=3 is -0.031250) | yes (+0.107292) | no (-0.093333) | **no** |
+| `2026090331` | **yes** (+0.143646, +0.128229) | no (-0.022187) | no (-0.131354) | **no** |
+
+Zero of three seeds meet it, against a requirement of two. Independently, the clause's own
+side-conditions fail as well: zone reversal is present (§22.3) and the paired N=7 `U_intact`
+direction is adverse in all three seeds (-0.072309, -0.169135, -0.389861 against BCRH; negative
+against DIRECT in two of three).
+
+**Clause 2 — falsification: NOT reached.** Both bullets are conjunctions over *every* seed:
+
+- First bullet — "MAPR has nonpositive final-minus-initial recovery at one or both training sizes in
+  every seed": false. Seed `2026090331` is positive at **both** training sizes
+  (+0.143646 at N=3, +0.128229 at N=5, 14/16 positive worlds each).
+- Second bullet — "MAPR learns at both training sizes but has nonpositive paired N=7 recovery versus
+  both DIRECT and BCRH in every seed": false. Its antecedent holds only in seed `2026090331`; seeds
+  `2026090311` and `2026090321` do not learn at both training sizes, so the conjunction over every
+  seed fails. (In the one seed where the antecedent does hold, the consequent also holds:
+  -0.022187 versus DIRECT and -0.131354 versus BCRH.)
+
+The exact 64-update proposition is therefore **not falsified**.
+
+**Clause 3 — governs. `INSTABILITY/HETEROGENEITY`.** "Mixed seed signs or zone reversal mean
+`INSTABILITY/HETEROGENEITY`." Both antecedents are satisfied:
+
+- *Mixed seed signs.* MAPR final-minus-initial `R_fail_60` at N=3 is +0.060521, -0.031250, +0.143646
+  across the three seeds; at N=5 it is -0.034375, +0.080104, +0.128229. The paired N=7 MAPR-DIRECT
+  contrast is -0.032917, +0.107292, -0.022187. Every one of these three quantities changes sign
+  across seeds.
+- *Zone reversal.* §22.3: within seed `2026090311`, N7z1 is +0.210417 while N7z2 is -0.119792;
+  within seed `2026090321`, N3z1/N3z2/N5z1 are negative while N5z2 is +0.164375; within seed
+  `2026090331` the paired N=7 MAPR-DIRECT contrast is +0.017500 in z1 and -0.061875 in z2.
+
+**The one direction that is stable across all three seeds** is the comparison against the fixed
+controller: paired N=7 MAPR-BCRH `R_fail_60` is negative in every seed (-0.157292, -0.093333,
+-0.131354; 0/16, 0/16 and 3/16 positive worlds), and the same holds on `U_total`, `U_intact` and
+`J_ext`. The competent bounded receding-horizon controller matches or beats the learner on the
+held-out `N = 7` worlds at this budget in every seed. This is the mechanism separation the object was
+built to make: per the object's own statement, "if the fixed controller matches or beats the learner,
+the host is solved by a rule and the learning question is not yet posed". It is a comparator
+observation at a 64-update budget, not a claim that MAPR-4 cannot learn recovery.
+
+**On the MAPR versus DIRECT limb.** DIRECT strictly contains MAPR, so no MAPR edge could have been
+representational in any case. The residual-activity flag confirms DIRECT was not degenerate: 286-288
+of 576 evaluation rows carry nonzero residual total variation (per-seed maxima 0.579264, 0.647854, 0.581158), with 0, 3 and 1
+physical-command changes across the three seeds. So DIRECT distributes differently from MAPR while
+almost always commanding the same physical action; the paired MAPR-DIRECT differences reported above
+are small and sign-unstable, consistent with the `INSTABILITY/HETEROGENEITY` reading and with no
+finite-budget inductive-bias effect being resolvable at 64 updates.
+
+**Scope.** This is a `B/EXPLORE` result. It is preliminary, hypothesis-generating, and specific to
+this simulator, these implementations, these three seeds and a 64-update budget. It is not a
+stability, superiority, arbitrary-`N`, repeated-churn, general-MARL, permutation-invariance,
+transfer, UAV, safety, flight or deployment claim. A valid Class B result of this polarity does not
+close the direction.
+
+---
+
+## 24. The batch-position residual at trained checkpoints
+
+Published as a separate descriptive field, `gating: false`, per owner decision F.4(a). Part I §14
+listed "whether the 12/192 batch-position residual would persist at trained checkpoints" as a
+could-not-verify item. It is now measured.
+
+| Run | decisions | differing | rate | by cell |
+| --- | ---: | ---: | ---: | --- |
+| `B0-DEBUG` attempt 05 (8 updates) | 576 | 18 | 3.13% | `{N5z1:3, N5z2:2, N7z1:5, N7z2:8}` |
+| `PRIMARY` `2026090311` (64 updates) | 1,152 | 15 | 1.30% | `{N5z2:1, N7z1:6, N7z2:8}` |
+| `PRIMARY` `2026090321` (64 updates) | 1,152 | 30 | 2.60% | `{N5z1:4, N7z1:7, N7z2:19}` |
+| `PRIMARY` `2026090331` (64 updates) | 1,152 | 17 | 1.48% | `{N5z1:2, N7z1:8, N7z2:7}` |
+
+Observations, and only these: the residual **persists at trained checkpoints** and does not vanish
+with training; it is concentrated in the larger rosters (`N7z1`/`N7z2` carry 14/15, 26/30 and 15/17
+of the differing decisions, and no `N=3` cell ever differs); and its rate varies across seeds by a
+factor of two. Split by checkpoint in seed `2026090311`, 10 of the 15 differing decisions are at the
+`initial` checkpoint and 5 at `final`.
+
+This is a property of float64 row-wise GEMM arithmetic at different batch positions, identical under
+the R01 and R02 presentation laws (Part I §9; `test_batch_residual_is_identical_under_both_laws`).
+It gates nothing, and no claim is made from it. It is not evidence about presentation safety, which
+is measured separately and is exactly zero in every run.
+
+---
+
+## 25. Resource telemetry (measured; `resources_unmeasured: false` in all four runs)
+
+| Field | `B0-DEBUG` 05 | `2026090311` | `2026090321` | `2026090331` |
+| --- | ---: | ---: | ---: | ---: |
+| `attempt_disposition` | `VALID_CAPABLE` | `VALID_CAPABLE` | `VALID_CAPABLE` | `VALID_CAPABLE` |
+| `end_to_end_wall_seconds` | 118.580 | 624.511 | 689.369 | 583.283 |
+| `end_to_end_cpu_seconds` | 131.75 | 705.906 | 782.563 | 655.469 |
+| `process_tree_peak_rss_bytes` | 466,690,048 | 926,728,192 | 932,610,048 | 914,251,776 |
+| `durable_peak_bytes` | 59,892,006 | 245,297,177 | 245,227,680 | 245,442,808 |
+| `scratch_peak_bytes` | 0 | 0 | 0 | 0 |
+| `cpu_core_equivalents` | 1.111 | 1.130 | 1.135 | 1.124 |
+| `worker_count` / `threads_per_worker` / `peak_process_count` | 1 / 1 / 1 | 1 / 1 / 1 | 1 / 1 / 1 | 1 / 1 / 1 |
+| `execution_topology` | `SERIAL_NO_CHILD_PROCESSES` | same | same | same |
+| runner wall (record) | 119.525 | 626.079 | 691.121 | 584.934 |
+
+Native identity, identical in all four runs and unchanged from Part I §7: `bpcr_backend.dll` build
+key `7222d990642a7e4cb010b6526f17acdb3f3aa85f11d1b8d34be0eedbe11e9c99` (equals the frozen literal),
+size 213,504 B (equals frozen), image sha256
+`adc39faacc60dc13c1572f0098ead13a986c851f2ee121855fb12120e5bc3580` (differs from the frozen
+`dadac958…`, recorded, `gating: false`); shadow `vnfc_b_tick_telemetry.dll` key `1327df63…`, sha256
+`1656cabbe68ce6af86303173dbfffa246801121f52d21fbce320738031d871a1`, 161,792 B;
+`source_native_admission: PREBUILT_FROZEN_LOAD_ONLY_NO_COMPILE`.
+
+Publication seals:
+
+| Run | `RESULT_BODY.json` sha256 / bytes | storage seal sha256 | telemetry sha256 |
+| --- | --- | --- | --- |
+| `2026090311` | `bd7ed53139d2d49949a6795783ccece2aaca1bb0243d48c5e6b1a6b6372a9ce9` / 241,445,961 | `f72033518f482895c3f5396262ab584b78fc272bc4f66303cf480095425db8b9` | `7aef1e3694072d0f47f869ee746213e4290aa811f18c3745715a01af955c6998` |
+| `2026090321` | `2987ffb0143cc23c8e56aa60b9b5f5bb77f71a7bcb04a03da4d1c69ad912b17c` / 241,376,464 | `11eb087171379ae4aac0235df078d541a8ab3bb544be582e827b12be039e7d2a` | `e288514363242b83bae4e6264f36e2cb7ab23b0611ab4a05ec164fad04a5b31f` |
+| `2026090331` | `def0cae757fcff8c234915d7bdf9403dbdaeab3590843d2742617c069c2522a5` / 241,591,592 | `76e4e4343ff9d08f85901874223ed94dcf5d928e389086e0d58c3e377407c62f` | `d80b60d3817472b29085e9be732d0274d6a71ca8917a73ff1d915dfeea02188d` |
+
+---
+
+## 26. Deviations in this window, each named
+
+Part I's D1-D7 stand. New:
+
+- **D8 — `B0-DEBUG` attempts 03 and 04 stopped on a frozen accounting constant and stay
+  quarantined.** The repaired probe spends two batch-1 forwards per decision instead of one, moving
+  `diagnostic_forward_calls` per learned evaluation row from the frozen 48 (MAPR) / 60 (DIRECT) to
+  96 / 108. The R01 runner pins that constant in **two** places: per learned row at
+  `scripts/run_vnfc_bpcr_b_explore.py:852` (inside `_validate_runtime_payload_cross_consistency`),
+  and in the aggregate exposure terminal at `:975` (inside `validate_runtime_terminal` itself, which
+  calls the cross-consistency check at `:934` and then continues). Attempt 03 (sha `1ab48e0bc`)
+  covered only the per-row constant; attempt 04 (sha `4c7bcc369`) wrapped the cross-consistency
+  function, which cannot reach `:975` because `:975` executes after that call returns. Both returned
+  `BExploreContractError: exact training/evaluation exposure terminal differs` after 1 m 59.7 s and
+  2 m 3.9 s, during terminal construction, **before any result body, endpoint or seal existed**. This
+  is an accounting constant made unsatisfiable by an owner-authorised measurement repair, not a
+  learner-side instrumentation failure and not a scientific outcome. Both attempts are permanently
+  quarantined and were not resumed or salvaged; the fix (commit `b90122e68`) wraps
+  `validate_runtime_terminal` — the one entry point all three call sites (`:1517`, `:1779`, `:1977`)
+  reach as a module global — asserts the true R02 budget on the real terminal and satisfies the two
+  frozen constants on a throwaway copy, so every other frozen check still runs against the real
+  terminal. **The published terminal carries the true budget** (§22.5). Attempt 05 is a fresh,
+  outcome-blind attempt of the unchanged object under §6.2, and §21 shows its training was
+  bit-identical to attempt 02's.
+- **D9 — one `PRIMARY` attempt was aborted by the launching shell and stays quarantined.** The first
+  launch of seed `2026090311` (preflight 16:10:43.191837Z) was killed at the 10-minute tool timeout
+  of the shell that started it. Only `STARTED.json` existed; no result body, no endpoint, no seal.
+  This is an operator-side interruption, not a scientific or instrumentation failure. It is
+  quarantined at
+  `<root>/PRIMARY_2026090311_ABORTED_01/` with an `ABORTED_NOTE.txt`, and the seed was relaunched as
+  a fresh attempt under a new root with a fresh preflight. All subsequent runs were launched
+  detached so no shell timeout could interrupt them.
+- **D10 — one superseded preflight receipt.** The first attempt-05 invocation (receipt
+  16:04:53.102920Z) was refused in 2 s by `BExploreContractError: durable root must end with
+  RUN_REVISION/stage/seed` — an argument error on my side, before the telemetry sink or any RNG
+  master existed. The roots were recreated correctly and a fresh receipt taken at 16:06:24.508416Z.
+- **D11 — the deciding numbers are reported as means over worlds, with positive-world counts beside
+  them.** The reading rule says "positive MAPR final-minus-initial recovery at both training sizes"
+  and "positive paired `N=7 R_fail_60` directions" without naming an aggregation across the 16 worlds
+  of a training size. This document reports the arithmetic mean over worlds as the seed-level
+  direction, and prints the positive-world count in every cell so the alternative reading is visible.
+  The two readings agree on the clause-3 outcome: under a median/majority reading, MAPR f-i at N=5 in
+  seed `2026090311` is 6/16 positive (nonpositive), at N=3 in seed `2026090321` is 1/16 (nonpositive),
+  and seed `2026090331` is 14/16 at both (positive) — the same seed pattern, so preliminary support
+  still fails 0-of-3 and falsification bullet 1 still fails on seed `2026090331`. No cell in §22.1
+  changes its sign between the two readings.
+- **D12 — `tests/vnfc_bpcr_b_explore_test.py` was omitted from the commit-E suite line.** Commit
+  `b90122e68`'s body quotes a four-directory run (8 failed, 327 passed). The whole-direction line in
+  §27 below adds that fifth path, matching Part I §6's command.
+
+---
+
+## 27. Suite at the launch sha
+
+```
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q \
+  --basetemp C:/Projects/HMASD/temp/directions/variable_n_fleet_churn/test/r02_all_f \
+  tests/experiments/candidates/variable_n_fleet_churn \
+  tests/experiments/candidates/variable_n_fleet_churn_b_explore \
+  tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09 \
+  tests/experiments/candidates/variable_n_fleet_churn_r02 \
+  tests/vnfc_bpcr_b_explore_test.py
+8 failed, 360 passed, 1 warning in 179.31s (0:02:59)
+```
+
+The 8 failures are the pre-existing canonical-EOL
+`SourceManifestError: empirical source manifest bytes are not canonical` failures recorded in
+`VNFC_BPCR_BEXP_R01_ENGINEERING_MILESTONE_20260901.md` (2 in `test_fixed_fh_q0.py`, 6 in
+`test_empirical_preactivity.py`). They reproduce in isolation at this checkout, are on a frozen
+surface this work does not touch, and none is in an R02 file.
+
+---
+
+## 28. Could not verify
+
+- **Whether the `INSTABILITY/HETEROGENEITY` polarity would persist beyond three seeds or beyond 64
+  updates.** The budget was three seeds at 64 updates, fixed outcome-blind before launch. Nothing
+  here estimates a seed distribution or an asymptote.
+- **Why the paired N=7 MAPR-BCRH direction is negative in every seed.** Whether the bounded
+  controller is genuinely sufficient for this host, or the learners are budget-starved at 64 updates,
+  is not separated by this design. Both readings are consistent with the numbers.
+- **Whether the batch-position residual would shrink under a batch-invariant kernel or a different
+  BLAS.** Only the shipped float64 CPU path was measured, on one host.
+- **The A0 byte-manifest quantities** (Part I §14) remain unproduced; the A0 runner is still
+  unfinished. Unchanged by this window.
+- **Whether the `bpcr_backend.dll` image-digest mismatch is entirely MSVC image non-determinism.**
+  Unchanged from Part I §14.
+- **The per-arm relabel mismatch counts of the two quarantined attempts 03 and 04.** They stopped
+  before writing the counter. Attempt 05 and the three seeds measure the same quantity on the same
+  law and report 0/0 in every case.
+- **The 8 pre-existing suite failures** were reproduced but not diagnosed.
+
+---
+
+## 29. Interpretation boundary
+
+The object is consumed with polarity `INSTABILITY/HETEROGENEITY` at `B/EXPLORE`. What may be said:
+on this exact two-zone one-unannounced-executor-loss simulator, with the canonical opaque-rank sort
+as the presentation law and a like-for-like presentation probe measuring exactly zero presentation
+dependence, three seeds of a 64-update budget give sign-unstable MAPR recovery direction across
+seeds and across failed-zone strata, no preliminary support and no falsification of the exact
+64-update proposition, and a competent fixed bounded receding-horizon controller that is not beaten
+on held-out `N = 7` worlds in any seed.
+
+What may not be said: nothing here is a stability, superiority, arbitrary-`N`, repeated-churn,
+general-MARL, permutation-invariance theorem, unique-mechanism, transfer, UAV, hardware, safety,
+flight, deployment or lifecycle claim. Revision-09 remains consumed and invalid for value
+attribution, and the quarantined R01 DEBUG remains unavailable. A valid Class B result of this
+polarity does not close the direction.
