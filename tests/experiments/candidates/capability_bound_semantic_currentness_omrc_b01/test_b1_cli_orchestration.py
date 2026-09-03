@@ -1072,3 +1072,58 @@ def test_fresh_attempt_creates_the_admissions_directory_with_the_transaction(
         )
     staging = seen["staging"]
     assert (staging / "admissions").is_dir()
+
+
+def _replay_raw_slice(*, seed: int, arm: str, active_modes: object, omit: bool = False):
+    """One raw slice record carrying only what the active-mode gate reads."""
+    record: dict[str, object] = {"seed": seed, "arm": arm}
+    if not omit:
+        record["mechanical_direct"] = {"active_modes": active_modes}
+    return record
+
+
+def _prepare_replay(tmp_path: Path, raw_group):
+    return b1._prepare_policy_replay_invocation(
+        staging=tmp_path,
+        attempt_id="a" * 32,
+        index=0,
+        seed=b1.ARM_SEED_ORDER[0][0],
+        arm=b1.ARM_SEED_ORDER[0][1],
+        raw_group=raw_group,
+        implementation_commit="c" * 40,
+        source_conformance_sha256="d" * 64,
+        literal_binding_spec_sha256="e" * 64,
+    )
+
+
+def test_policy_replay_accepts_the_conformant_empty_active_mode_record(tmp_path):
+    """`observe_active_modes` records VIOLATING modes, so a clean slice records [].
+
+    The gate must not demand a prohibited mode. This slot's checkpoint coverage is
+    deliberately empty, so a run that clears the active-mode gate refuses later, on
+    coverage -- which is exactly how we detect that the gate was passed.
+    """
+    seed, arm = b1.ARM_SEED_ORDER[0]
+    group = [_replay_raw_slice(seed=seed, arm=arm, active_modes=[]) for _ in range(3)]
+    with pytest.raises(b1.B1OrchestrationError) as excinfo:
+        _prepare_replay(tmp_path, group)
+    assert "checkpoint/evaluation coverage differs" in str(excinfo.value)
+    assert "active-mode" not in str(excinfo.value)
+
+
+def test_policy_replay_refuses_a_prohibited_active_execution_mode(tmp_path):
+    """A non-empty list means a prohibited mode ran; both consumers require empty."""
+    seed, arm = b1.ARM_SEED_ORDER[0]
+    group = [_replay_raw_slice(seed=seed, arm=arm, active_modes=["autocast"])]
+    with pytest.raises(
+        b1.B1OrchestrationError, match="source execution modes are prohibited"
+    ):
+        _prepare_replay(tmp_path, group)
+
+
+def test_policy_replay_refuses_absent_active_mode_provenance(tmp_path):
+    """Missing provenance is still a refusal, not a silent empty tuple."""
+    seed, arm = b1.ARM_SEED_ORDER[0]
+    group = [_replay_raw_slice(seed=seed, arm=arm, active_modes=None, omit=True)]
+    with pytest.raises(b1.B1OrchestrationError, match="provenance is absent"):
+        _prepare_replay(tmp_path, group)

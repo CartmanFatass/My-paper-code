@@ -1694,8 +1694,23 @@ def _prepare_policy_replay_invocation(
         if raw.get("seed") != seed or raw.get("arm") != arm:
             raise B1OrchestrationError("policy replay raw slot identity differs")
         mechanical = raw.get("mechanical_direct")
-        modes = tuple(mechanical.get("active_modes", ())) if isinstance(mechanical, Mapping) else ()
-        if not modes or (active_modes is not None and modes != active_modes):
+        if not isinstance(mechanical, Mapping) or not isinstance(
+            mechanical.get("active_modes"), list
+        ):
+            raise B1OrchestrationError("policy replay active-mode provenance is absent")
+        modes = tuple(mechanical["active_modes"])
+        # `b1_runtime_audit.observe_active_modes` records the execution modes that
+        # VIOLATE frozen FP32 CPU execution, so a conformant slice records the empty
+        # list and `require_frozen_execution_modes` has already refused a non-empty
+        # one. The former clause was `if not modes or (...)`, which demanded at least
+        # one prohibited mode and so could not be satisfied by any conformant run,
+        # while both consumers of this value require it to be empty
+        # (b1_metrics_policy_assembly rejects non-empty `source_active_modes`;
+        # b1_metrics_training_assembly audits `active_modes` against expected=[]).
+        # Absent provenance still refuses, above.
+        if modes:
+            raise B1OrchestrationError("policy replay source execution modes are prohibited")
+        if active_modes is not None and modes != active_modes:
             raise B1OrchestrationError("policy replay active-mode provenance differs")
         active_modes = modes
         for record in raw.get("checkpoints_created", ()):
