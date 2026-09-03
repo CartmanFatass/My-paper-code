@@ -551,4 +551,7 @@ all untouched by the check and by the ladders).
 1. UCOPE: (a) run R02 rung 2 to close the ladder, then register a training-target diagnostic
    object (reviewer's recommendation, since rung 2 is cheap and the diagnostic is where the
    answer is); (b) skip rung 2 and go straight to the diagnostic; (c) park the direction with the
-   two ladders and the check as its record.
+   two ladders and the check as its record. **Owner decision (2026-09-02): (a).** R02 rung 2 runs
+   to close the ladder; the training-target diagnostic is written as a card first (question,
+   mechanisms, differentiating measurement, reading rule) and waits for the owner's prediction
+   before any run.
