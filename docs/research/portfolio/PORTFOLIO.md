@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-03T02:43:58Z
+Updated at: 2026-09-03T02:56:28Z
 Owner: Root
 Investment capacity: `UNBOUNDED`
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -22,7 +22,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE uncertain/delayed veto learner against competent confidence/freshness, authenticated-probe, and same-information recurrent controls. The deterministic-verdict B1 loss closes only that host/object. |
-| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE online multi-opportunity OWNER/refresh/capability/receiver-content learning. Exact protocol value remains positive and narrow; LR01 remains a valid `UNRESOLVED` codec/optimizer object. |
+| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-03T02:56:28Z | Recast to evidence spec §11 on 2026-09-02 (`CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`): publication gates are recorded fields, descriptive curves published by the runner, B1b declared as the next rung. Frozen three-seed B1 held only by an unreadable B0 artifact directory (owner restores with elevated rights). B/EXPLORE online multi-opportunity OWNER/refresh/capability/receiver-content learning. Exact protocol value remains positive and narrow; LR01 remains a valid `UNRESOLVED` codec/optimizer object. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE constructed KEEP/REPLAN-balanced RAW/TRUE-RESIDUAL/DERANGED comparison. The consumed natural K8 targets retain zero material KEEP support and no residual polarity. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE RETAIN/COPY/SHADOW scout on a small first-valid-trigger panel. R02 remains closed with no source-selection polarity; VSP-05 enters as the separately estimable proposal-veto/FSM axis. |
 | ec4g_r1 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |

@@ -555,3 +555,80 @@ all untouched by the check and by the ladders).
    to close the ladder; the training-target diagnostic is written as a card first (question,
    mechanisms, differentiating measurement, reading rule) and waits for the owner's prediction
    before any run.
+
+---
+
+## Part E — CBSC recast intake, run pending (2026-09-02, later)
+
+Object: decision 3 of A.4 executed by an Opus session on `main`: commits `335559bcf` (the
+direction's uncommitted working-tree state, 41 files, committed unchanged), `5502f5dcb` (recast
+intake `CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`, DIRECTION.md entry, addenda on the
+CM contract and the metrics-only spec), `31b21d733` (gates to recorded fields, descriptive
+curves published by the runner, tests; direction suite 282 passed with the one pre-existing
+failure). Scope verified. Verdict: **recast accepted; the B1 run is held by a filesystem
+permission fault, not by any gate.**
+
+### E.1 What the reviewer checked
+
+1. **Gates to fields.** `FORMAL_ANALYSIS_BOUND` and `READINESS_DISPOSITION` keep their historical
+   values and are published with `gating: false` by `formal_analysis_record()` in the readiness
+   document and every manifest; the two `blockers.append` lines, the `MetricsArtifactError` on
+   the flag, the `FORMAL_ANALYSIS_BOUND` clause in the test-only check, and both
+   `B1MetricsProductionError("REPAIR_REQUIRED…")` raises are removed (quoted in comments). The
+   live supervisor now kills a child only on the wall cap; RSS, scratch and durable exceedances are
+   recorded (`RECORDED_BUDGET_CAPS`). Slot telemetry failure records `resources_unmeasured` with
+   reasons instead of raising. Still gating: §4 items, nonzero counts, the 4 GiB admission per
+   invocation, the exposure line, leakage and equal-exposure audits, the RAW-competence gate, the
+   120-minute wall cap, §6.2 quarantine. This is decision 3 and decision 7.
+2. **Descriptive curves.** New `b1_descriptive.py` on the canonical source surface publishes
+   per-checkpoint held-out mean/min/max returns, held-out action counts and serve rate, training
+   action counts, one exposure line per arm-seed, and the RAW-competence flags. The manifest's
+   derived fields (`auc_metadata`, `diagnostic_metadata`, branch, polarity, promotion, B2 trigger)
+   stay literal null: the recast publishes what the run measures, not the consumer's analysis.
+   B1b (4× updates) is declared as the ladder's next rung in the intake.
+3. **D7 at the slot boundary only** (implementer's deviation 6, intake §8): a run whose telemetry
+   is entirely absent downgrades at the slot but does not reach the 15-table publication, because
+   the work reconciliation against `slice_counts` is a §4 item reading the same record. Accepted:
+   that reconciliation is an integrity item, and threading a null measurement through the frozen
+   schema is outside the recast. Recorded so the next contract does not inherit the coupling.
+4. **`verify_source_conformance`'s clean-source requirement** was left gating (implementer's
+   flag). It is a byte-manifest gate of the kind §11.4 demotes, as UCOPE's recast did for its
+   equivalent. It is satisfied at `31b21d733`, so it does not hold this launch; **registered for
+   demotion at CBSC's next code change**, not now.
+5. **Tests.** `1 failed, 282 passed` against a baseline of `1 failed, 271 passed`; the failure is
+   the pre-existing `test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables`
+   (`FINAL_COUNTER_MISMATCH`; the test mixes two fixtures). The implementer tried a one-line fix,
+   it moved the failure, and they reverted it: correct. Consequence: the end-to-end 15-table path
+   with `descriptive_curves` is covered only by a smoke-scale round trip, so the first B1 run is
+   also the first full exercise of the publication path; if it fails there, that is an
+   instrumentation failure and the run quarantines under §6.2 without consuming the object.
+6. **`tests/production_backend_policy_test.py`**: 12 failed, 62 passed, down from 25 after the
+   cache clearing. The remaining 12 are artifact-SHA / build-key mismatches in `onlgr_tbvuus`,
+   `rcle_tbcfv`, `scdmp_tbcc` plus the registry-separation test: the rebuilt DLLs hash
+   differently from the pinned expectations. Those pins are the byte-manifest gates §11.4
+   demotes; they belong to directions outside the first wave and are left for their owners.
+
+### E.2 The blocker
+
+`temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02`
+denies read access to the owner's account (`PermissionError [WinError 5]` on `iterdir` and on
+`manifest.json`; `icacls` cannot read its ACL; every sibling is owned by the user and readable).
+`run_b1_start` rehashes and copies the 33 B0 files first, so B1 cannot start until the directory
+is restored with elevated rights (the same class of fault as the native caches). Also recorded:
+no direction document records B0's acceptance; the only record is the `B0_REVIEWED_AUTHORITY`
+constant in `b1.py` (`CLEAN`, 33 files, 12,807,274 bytes, commit `888bd9f50`). The B1 result
+document must state that B0's acceptance rests on that constant and on the rehash at launch.
+
+### E.3 Launch when released
+
+One process, 12 arm-seeds sequential, `torch.set_num_threads(1)`, the runner's own admission
+before each of the 36 child invocations; expected 0.5–3 h (no measured B0 timing exists because
+the artifact is unreadable). Concurrency: E1 holds the two 4-thread slots of §7 decision 3; a
+third, single-thread process is put to the owner in E.4 rather than assumed.
+
+### E.4 Decisions this intake produces
+
+1. Restore read access to the B0 artifact directory (owner, elevated rights); until then B1 is
+   held.
+2. Whether B1 may run now as a third, single-thread process beside E1's two 4-thread runs, or
+   waits for E1 to finish.
