@@ -1123,3 +1123,89 @@ E1 contract with `num_envs = 32` (206 s per rollout at 4 threads → about 70 mi
 matched seed pairs, 8-hour study cap. The SCDMP recast run (Part A.4 of
 `FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`) shares the machine; at 16 logical cores three
 4-thread processes do not oversubscribe.
+
+---
+
+# Part XI — E1 intake (2026-09-03)
+
+Object: `../experiments/E1_AGE_INPUT_20260902.md` (D0 versus D1 at fixed `k = 10`, scenario 1,
+three seed pairs, `R = 20`, 32 lanes), executed by an Opus session in a worktree at the launch
+commit `6fba1c7ba`; branch `e1-age-input-20260902` (`eb5318ec1` runner + test, `b9290a1ed`
+aggregator, `39bf7e626` result document `../experiments/E1_AGE_INPUT_RESULT_20260902.md`), merged
+into `main` by the reviewer as `c7ac239e3` after the test passed on `main` (`17 passed`).
+Verdict: **accepted as a valid complete B/EXPLORE study; the prediction on record stands
+unrefuted; one contract erratum registered (XI.3).**
+
+## XI.1 What the reviewer checked
+
+1. **Mechanism.** The E1 runner imports the E0 runner's `_execute` unedited and wraps two
+   module-level names: the config factory (so D1 carries `age_feature="normalized"`) and the
+   per-rollout exposure hook, which runs once after `agent.update()` and `clear_buffers()` and
+   outside E0's timers. Measurements are taken by a second agent instance, state-dict-synced
+   from the learner with deep-copied normalisers, in `train(False)` under `no_grad`, built inside
+   E0's RNG-preserving context, so the learner's RNG and per-lane state are untouched. The probe
+   set's content digest is verified before anything is constructed. The discriminators in use are
+   the full `TeamDiscriminator` / `IndividualDiscriminator` (`use_ha_ctse=False`), so the
+   compact-discriminator guard never fires and `age_input_dim = 1` under D1.
+2. **Counts.** All six runs: 20 of 20 rollouts, 320,000 transitions, 640 episodes, `M = 1,600`
+   every rollout, optimizer steps identical across runs (coordinator 3,900; discoverer actor and
+   critic 90,000 each; team discriminator 300; individual discriminator 1,200), four evaluations,
+   no non-finite value, every exposure line monotone, nothing quarantined. Preflights 14.5 to
+   17.0 GiB. The runner is byte-identical across all six runs and the quarantined attempt.
+3. **Rule applied verbatim** (`E1_summary.json` checked by the reviewer): window `r ≥ 10`, team
+   accuracy → *neither* (excess of the 7–9 bucket over the 0–2 bucket: −0.029, +0.053, +0.034
+   against a threshold 0.148; not contradicted; not supported because seed 1's 7–9 gain 0.068
+   exceeds that bucket's spread 0.067); individual accuracy → *supported*; final rollout both →
+   *supported*. Net: contradicted on none of four applications, supported on three. Label
+   agreement between adjacent rollouts: team D1 − D0 positive in all three seeds (+0.002, +0.024,
+   +0.069), individual negative in all three (−0.037, −0.054, −0.049). Return: D1 − D0 −21.1,
+   −8.2, −3.2 against across-seed ranges of about 15.5 in each arm; the rule's literal output
+   ("outside the range of both arms") is reported as wording, under the E0 caveat and the
+   contract's non-goals.
+4. **Age-feature weight share** (D1): the team discriminator's age column sits within ±0.0006 of
+   the equal-column baseline `1/√120 = 0.0913` at every checkpoint in every seed; the individual
+   one drifts slightly below `1/√105 = 0.0976`. The age input is not specially weighted.
+5. **The quarantined seed-1 attempts.** Killed at rollout 12 by the executing harness's
+   background-task facility, an external cause with no instrumentation failure; quarantined
+   anyway (contract §4.3, spec §6.2), nothing read from them; the runner unchanged between
+   attempts (`git diff` empty), only the launch mechanism changed; the rerun is the one re-run
+   the contract permits. Accepted.
+6. **Deviations** (eleven, all recorded in the document §8). The two that matter: D2, contract
+   §2's "rollout 1 identical up to the first discriminator update" does not hold because D1's
+   discriminators consume different initialisation draws, so sampled skills differ from step 1
+   while coordinator and discoverer parameters, boundary masks and every count are identical
+   (asserted in the test); D3, the 90-minute-per-run condition was not met (101–137 min) because
+   two concurrent 4-thread processes ran at 1.5–1.9× the single-process timing basis. Neither
+   touches a scientific factor. D8: elapsed clock 13.4 h against 7.3 h machine-occupied, the
+   difference being session interruptions; the 8-hour cap holds on machine time.
+
+## XI.2 Reading
+
+The owner's prediction ("age is not an effective signal for an interruption-style decision
+boundary; the boundary is event-driven") is supported on three of four applications of the rule
+and contradicted on none; the weight share says the same thing more directly. The reviewer's
+prediction (a gain concentrated on high-age probes) is not observed. E1 settles what it was for:
+at fixed `k` the explicit age input changes neither label stability nor the discriminators'
+behaviour on the probes in a way three seeds can see, so the age feature is not carried into E2
+as a control arm; E2 compares D2 at finite `c` against the D0 `k` sweep without it.
+
+## XI.3 Contract erratum (reviewer's own)
+
+The contract's "probe accuracy versus the recorded skill" is ill-posed as an accuracy: skill
+labels are a latent labelling that permutes across training runs, and the probe set's recorded
+skills come from the E0 `off` seed-1 run at 16 lanes, not from the E1 runs. Both arms sit at 0.11
+to 0.24 on a six-way label whose chance level is 0.167, which is what agreement with another
+run's labelling looks like. The rule as frozen was applied to it verbatim and its verdicts stand
+as verdicts on that quantity; the measurements that carry meaning here are the label agreement
+between adjacent checkpoints (C2), the value-target drift (C1) and the weight share. Registered
+so that E2's contract measures label stability within a run and never "accuracy" against a
+foreign labelling.
+
+## XI.4 Decisions this intake produces
+
+1. **P4** (the update phase), deferred by advancement-plan §7 decision 4 to this intake. R0's
+   measurement: the update is 91% of a rollout at 4 threads (188 s of 206 s at 32 lanes); E1's
+   runs took 100–137 minutes each with two concurrent. E2 as sized (ten arms × two seeds × 20
+   rollouts) is update-bound on the corridor too. The reviewer recommends P4 before E2.
+2. **E2 contract and prediction**: drafted by the reviewer next; the owner's prediction requested
+   before launch.

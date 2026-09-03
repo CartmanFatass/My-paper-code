@@ -227,3 +227,13 @@ P3.
 Advancement plan (2026-09-02): the sequence after E0 and the launch, budget and host decisions are in
 `RESEARCH_ADVANCEMENT_PLAN_20260902.md` section 7 (trigger-based launch for E1 to E4; E2 on the
 homogeneous corridor first; 8-hour cap with two concurrent runs; E1 before refactor P4).
+
+### E1 verdict (2026-09-03)
+
+Owner's prediction (age is not an effective signal at fixed `k`): supported on three of four
+applications of the contract's §5 rule, contradicted on none; the D1 age column's share of the
+discriminators' input-projection norm stays at the equal-column baseline throughout training.
+Reviewer's prediction (a gain concentrated on high-age probes): not observed. The age feature is
+not carried into E2. Erratum: the contract's "probe accuracy versus the recorded skill" compares
+against a foreign labelling (the E0 `off` run's skills) and is not an accuracy; E2 measures label
+stability within a run only. Review Part XI; result `../experiments/E1_AGE_INPUT_RESULT_20260902.md`.

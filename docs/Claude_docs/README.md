@@ -155,6 +155,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   the prediction on record, arms, the probe measurements (adjacent-checkpoint label agreement,
   probe accuracy split by age bucket, value-target drift, age-weight share), three seeds, R = 20,
   the reading rule written before the data. Launches after the throughput refactor P3.
+- `E1_AGE_INPUT_RESULT_20260902.md` — E1 result: six runs (D0/D1 × seeds 1–3, 32 lanes, R = 20),
+  the §5 rule applied verbatim (prediction on record unrefuted, supported on three of four
+  applications), age-feature weight share at the equal-column baseline, eleven deviations,
+  could-not-verify. Accepted in the ADR review's Part XI.
 - `E0_probe_set_sample_seed1.json` — the first 32 probes of the frozen set, for checking the recipe.
 
 ### artifacts/

@@ -15,7 +15,7 @@ launch policy. Decisions confirmed with the owner are in §7. Governing texts:
 | ADR 02 (relay corridor host) | implemented, references and margins exact, joined to the learner (Parts VI, VIII) |
 | E0 (exposure, probe set) | two seeds, four arms complete, probe set frozen (Part IX) |
 | Throughput refactor P0–P3 | done and accepted (review Part X, commit `9f4d0e4ba`): collection 240 s → 18 s per rollout, fingerprint unchanged; P4 decided after E1's intake (§7 decision 4) |
-| E1 contract | written, prediction on record; launched 2026-09-02 after Part X at `num_envs = 32`, two runs concurrent (`E1_AGE_INPUT_20260902.md`) |
+| E1 | complete 2026-09-03, six runs, accepted (review Part XI): the owner's prediction stands unrefuted, the age feature is not carried into E2; one contract erratum (accuracy against a foreign labelling) registered (`E1_AGE_INPUT_RESULT_20260902.md`) |
 | Open from ADR 02 | the finite `c` grid; the E5 coupling term (designed when E5 is scheduled) |
 
 ## 1. The sequence

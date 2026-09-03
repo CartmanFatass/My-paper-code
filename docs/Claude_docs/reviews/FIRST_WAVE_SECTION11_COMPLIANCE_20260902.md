@@ -391,6 +391,52 @@ PORTFOLIO row for `semigroup_consistent_duration_model_policy` updated by the re
 commit carrying this part (next-object text and timestamp only; lifecycle, priority, owner
 unchanged).
 
+### C.5 Graded order-value diagnostic intake (2026-09-03)
+
+Commits `1e14f81b6` and `7609c9cd2` (predictions on the card; runner; result
+`SCDMP_B01_GRADED_ORDER_VALUE_DIAGNOSTIC_R01_RESULT_20260903.md`); SCDMP paths only. Bit-identity
+of the diagnostic translation unit against the frozen library recorded before any grid row
+(both censuses digest to `ac7828a3…` over 864 cells); `mf_rs_native.cpp` unedited; the
+quarantined root untouched; wall 241 s; `resources_unmeasured: true` (peak RSS and scratch not
+instrumented, recorded under decision 7). **Accepted.**
+
+Outcome: **G-A.** `D = 12` of 12: the swapped first action absorbs with `cable_overload` inside
+the forced hold at transition 5 or 6, in all four tapes, with zero policy queries; `S(g) ≥ 11` at
+45 of 49 grid points; the matched action docks 12 of 12 at all 49; the absorbing index never
+exceeds the cell's `k`. Both predictions confirmed, the reviewer's in the strong form (only the
+`a = 2` rows that put `r = +1` on the loaded carrier survive; `r = −1` absorbs at transition 2).
+
+The number neither prediction covered decides the reading. At the nearest survivable neighbour
+row (`TAU_LEAK 0.90, Z_LIMIT 0.30`, or equivalently `0.92, 0.25` with the dock predicate and the
+observation normaliser untouched) the swapped mapping survives everywhere and `M − X = 0.00046`,
+0.73% of the matched return (a sixth of one horizon tick per mission), and not uniformly signed
+across the six states. At the frozen row `X = 0` exactly. So on this host family the value of
+order is either the fatality of the swapped first action or about nothing; there is no graded
+regime in the swept neighbourhood. The base run's branch 5 was the fatality. Two side
+observations, recorded not branched: all nine `a = 1` rows are costly-but-survivable wrong first
+actions at the frozen row (52–57% of the matched return), and at `(0.88, 0.30)` and `(0.88,
+0.35)` survival splits exactly along `k` (all `k = 7` survive, all `k = 13` absorb), which bears
+on `flexible_skill_duration`'s comparator D8.
+
+Reviewer's reading. SCDMP's B01 question ("does the matched order of first actions carry
+value across foundations") has no graded answer on this host: RUN-02A/02B as frozen would
+reproduce the fatality with more foundations, and the neighbour row would measure a value of
+order indistinguishable from zero at two seeds. The direction's live scientific content is
+elsewhere: its `(z, k)` menu as comparator D8 in `flexible_skill_duration` (plan §11 F) and the
+recast toward D6 (a duration model whose value is sharing `Q(s, z, k)` across `k`), which has no
+object yet. The `k`-split survival observation is exactly a duration-dependent hazard, which is
+D8's and E4's territory.
+
+### C.6 Decisions this intake produces
+
+1. SCDMP B01: (a) hold RUN-02A/02B and park the B01 line with the base run and this diagnostic
+   as its record; SCDMP continues only through the D6 recast when that object is designed, and
+   its `k`-split observation is handed to `flexible_skill_duration` as an E4 design input
+   (reviewer's recommendation); (b) run RUN-02A/02B as frozen, accepting that `delta_swap ≡ M`;
+   (c) re-pose B01 on the neighbour row `(0.92, 0.25)` with two seeds, to measure the near-zero
+   graded value with its sign per state; (d) re-pose B01 at the frozen row with the survivable
+   `a = 1` rows as the control, which changes the question from order to action choice.
+
 ---
 
 ## Part D — UCOPE recast intake (2026-09-02, later)
@@ -765,6 +811,41 @@ competence on this host, which is what the direction's locked question has waite
    with the chain as the record (competence reached by the exact solve only). **Owner decision
    (2026-09-03): (a).** Carded first with the root stage's own contract numbers, branches ordered
    by effect size, and the owner's prediction requested before the run.
+
+### D.17 Root-conditioning card intake, with a correction (2026-09-03)
+
+Commit `80f7b00da`, card `UCOPE_ROOT_CONDITIONING_R01_CARD_20260903.md`, not run. The
+implementer wrote the rule exactly as D.16 specified and then showed, before any run, that it is
+degenerate: `C_even`'s forced-PROBE tail-agreement component is computed from the tail model
+alone, the tail is fixed across all three arms, and its six values are already known (0.61, 0.61,
+1.0, 1.0, 0.52, 1.0 against 0.95). Three policies fail it before any root arm exists, so no arm,
+the ceiling included, can pass `C_even` in more than 3 of 6, and R-D fires with probability one.
+The implementer did not amend the rule and offered a root-restricted predicate `C_root` (the same
+branches on `C_even` minus the tail-only gate, which would read 5 of 6 on the competence run's
+whitened arm) for the owner to freeze before launch. Correct conduct on both counts.
+
+**Reviewer's correction of D.15.** D.15 read the residual as sitting in the root learner because
+two policies inside `ε_L` on the tail still failed the agreement gate. That inference was wrong:
+the agreement gate is a tail-only quantity, decided by the tail model's argmax over periods in
+the target context, and coefficient errors well inside `ε_L` flip that argmax there. So the
+binding failure is a decision-margin problem of the tail at the target context, which was option
+(b) of D.16, not the root. The root object still answers a real question (root conditioning for
+the regret and oracle-root components, each of which failed once), but it cannot reach
+competence; the tail-margin object is where competence is decided.
+
+**Flag (not fixed):** `run_ucope_competence_whitened_r01.py:206` asserts
+`torch.set_num_interop_threads(1)`, which raises inside a shared pytest process after parallel
+work has started (one test fails in the full sweep, passes standalone; the published run recorded
+the value correctly). It sits behind a published result; the fail-soft fix is the owner's call.
+
+### D.18 Decisions this intake produces
+
+1. The root object: (a) adopt `C_root` as its predicate, frozen before launch, and run it as a
+   cheap answer on the root-only components; (b) drop it.
+2. The tail-margin object at the target context (why the tail's period argmax flips there under
+   small coefficient error; whether a larger `n`, or the whitened tail at a larger budget, or a
+   margin-aware objective restores it): card it next (reviewer's recommendation), or stop the
+   UCOPE chain here.
 
 ---
 
