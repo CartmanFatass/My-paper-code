@@ -502,3 +502,7 @@ under either arm.
 
 1. UCOPE ladder: (a) instrumentation check first, then ladder R02 with a per-arm statistic
    (reviewer's recommendation); (b) run rung 3 as declared; (c) park the direction.
+   **Owner decision (2026-09-02): (a).** Rung 3 of R01 is not run. The instrumentation check is
+   an outcome-free, unit-scale object (no training); ladder R02 is registered only if the check
+   passes, with the displacement statistic and the reading rule taken per arm and both fixed
+   before its first rung.
