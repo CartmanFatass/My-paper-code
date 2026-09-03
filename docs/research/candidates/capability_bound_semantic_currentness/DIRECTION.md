@@ -41,6 +41,57 @@ in `docs/research/portfolio/PORTFOLIO.md`.
   `eociv_lite`.
 - `ucope` remains a separate paid-acquisition direction and transfers no result into this object.
 - Source results are controls and provenance; their polarity does not transfer.
+- Section-11 recast intake (2026-09-02): `CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`.
+- Registered exposure-ladder rung: `CBSC-OMRC-B1B-FOUR-TIMES-EXPOSURE`.
+
+## Section-11 recast — 2026-09-02
+
+`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11 (owner calibration, 2026-09-02) is
+controlling for this direction's B objects. Owner decisions 3 and 7 of
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4, recorded in
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`, are implemented in
+`CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`. That intake is the §11.6 record of the
+demotion; the frozen scientific object is unchanged.
+
+Three sentences below are superseded, and are kept in place so the change is visible. First, the
+publication delegation at "Engineering publishes exact undiscounted per-tape episode returns …":
+
+> It does not compute AUC, terminal or panel means, oracle-regret summaries, diagnostic rates or
+> effects, arm contrasts, thresholds, signs, or branches. Those fields remain literal null until a
+> separate Convergence decision.
+
+is superseded **for descriptive quantities only**. The runner now computes and publishes
+per-checkpoint held-out returns, held-out action counts and serve rate, training action counts, the
+mechanical RAW-competence flags, and one exposure line, all from its own records. AUC definitions,
+arm contrasts, thresholds, signs, branches, polarity, promotion and the B2 trigger stay literal
+null; engineering still has no threshold or branch authority.
+
+Second, the B2 chaining:
+
+> `CBSC-OMRC-B2-TWO-SEED-STABILITY` may add unchanged seeds `21161, 21179` only after the mandatory
+> interim `em:capability_bound_semantic_currentness:convergence` decision returns
+> `RUN_FIXED_B2_STABILITY`.
+
+is superseded as a **launch condition**. B2 keeps its exact definition — those two seeds, unchanged,
+no replacement — and is now sequenced by the direction itself: after three complete valid B1 seeds,
+labelled `outcome_informed_from_B1=true` and `confirmatory=false`, with its reading formulas
+recorded before it runs.
+
+Third, and only for the named ladder rung declared in the intake:
+
+> No sixth seed, selected checkpoint, larger budget, or altered adapter belongs to B01.
+
+stands unchanged for B01. `CBSC-OMRC-B1B-FOUR-TIMES-EXPOSURE` is a separate named B object with the
+same seeds, arms, host, adapters, learner and evaluator and four times B1's optimizer exposure
+(1,536 episodes, 192 updates, checkpoints `0, 48, 96, 192`), declared in advance with its reading
+rule fixed before any data, as §5.2 and §11.1 permit between named runs.
+
+What still holds a launch: the §4 integrity items, the §5.2 nonzero transition/update/evaluation
+counts, the 4 GiB resource admission per invocation, one exposure line, the leakage and
+equal-exposure audits, and the mechanical RAW-competence gate below, which is unchanged. Resource
+caps are recorded budgets and only the 120-minute wall cap stops a run; missing resource telemetry
+is recorded as `resources_unmeasured` and never annuls, while learner-side instrumentation failure
+still quarantines under §6.2.
 
 ## Scientific question
 

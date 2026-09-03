@@ -292,3 +292,38 @@ not stable superiority, representation necessity, universal RAW inferiority, nat
 paid acquisition, authentication, receiver credit, variable-population/lifetime or general MARL
 value, UAV transfer, safety, deployment, direction convergence/closure, or reinterpretation of the
 exact factorial or `CBSC-LR01=UNRESOLVED`.
+
+## Addendum — 2026-09-02 (section-11 recast)
+
+The frozen body above is unchanged. Per evidence spec §11.6, this addendum records which of its
+boundaries stopped gating on 2026-09-02 under owner decisions 3 and 7 of
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 and
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. The full record is
+`CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`.
+
+- §1 and §3 (lines 48-52 and 192-217), the metrics-only delegation and the literal-null derived
+  field list — superseded for **descriptive** quantities. The runner computes from its own
+  materialized tables and publishes a `descriptive_curves` block (schema
+  `cbsc_omrc_b01_b1_descriptive_curves_v1`): per `(seed, arm, split)` mean/min/max held-out episode
+  return at each checkpoint; per `(seed, arm, split, checkpoint)` SERVE/REFRESH/SAFE_FALLBACK counts
+  and serve rate; per `(seed, arm)` training action counts; per `(seed, arm)` an exposure line
+  (Adam step count, whether the parameter digest moved, post-clip gradient-norm magnitudes); and the
+  mechanical RAW-competence flags. §11.6 demotes the consumer-recompute boundary as a gate that
+  "does not change a B decision"; a descriptive mean of 64 held-out returns is not an
+  interpretation.
+- Everything the section reserves for Convergence is still reserved. No AUC normalization, panel
+  pooling, seed aggregation, pairing rule, missing/nonfinite rule, arm contrast, threshold, sign,
+  branch, polarity, promotion flag or B2 trigger is computed by engineering. The manifest fields
+  listed at lines 196-217 remain literal null and their validator is unchanged. The lossless
+  15-table raw publication of §2 is unchanged.
+- §4 (lines 219-247), mechanical conformance and RAW competence — **unchanged and still in force**,
+  including the exact four-component `raw_competence_pass` predicate at its stated thresholds. Its
+  resource-cap clause is read under the recast: a measured cap exceedance is recorded, only the wall
+  cap stops a run, and missing resource telemetry downgrades to `resources_unmeasured` rather than
+  failing conformance. Learner-side instrumentation failure still fails conformance and quarantines.
+- §5 (lines 248-271), Convergence routing — `convergence_required` stays `true` in every B1 manifest
+  as a recorded routing fact, and B1 still writes no branch. It no longer blocks
+  `CBSC-OMRC-B2-TWO-SEED-STABILITY`, which the direction now sequences itself with the same
+  `outcome_informed_from_B1=true, confirmatory=false` labelling. `B0_NONPOLARITY=ABSOLUTE` is
+  unchanged.
+- §6, the claim ceiling and falsifier — unchanged in every respect.

@@ -173,3 +173,43 @@ Technical success cannot establish stable superiority, representation necessity,
 natural prevalence, paid acquisition, authentication/security, receiver credit, variable population
 or lifetime, UAV transfer, safety, deployment, convergence, closure, or any reinterpretation of the
 completed exact factorial or LR01.
+
+## Addendum — 2026-09-02 (section-11 recast)
+
+The frozen body above is unchanged. This addendum records, per evidence spec §11.6, which of its
+conditions stopped being launch or publication gates on 2026-09-02 under owner decisions 3 and 7 of
+`docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 and
+`docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. The full record,
+with `file:line` for every condition, is `CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`.
+
+Demoted to recorded fields:
+
+- lines 125-127, "It must set every derived AUC/mean/regret, diagnostic,
+  separation/concentration/instability, adverse-seed, promotion, B2-trigger, branch, and polarity
+  field to literal null" — superseded for **descriptive** quantities only. The runner now publishes
+  per-checkpoint held-out returns, held-out action counts and serve rate, training action counts,
+  the RAW-competence flags and one exposure line. The interpretive fields (`scientific_branch`,
+  `scientific_polarity`, `promotion_eligible`, `b2_extension_trigger`) and every named AUC and
+  diagnostic definition stay literal null.
+- lines 117-119, the per-invocation 4 GiB RSS, 2 GiB scratch and 512 MiB durable caps — recorded
+  budgets. A measured exceedance is published, not refused. Only the 120-minute B1/B2 wall cap stops
+  a run.
+- lines 129-132, "Implementation/instrumentation failure ... is a blocking mechanical fact" — split
+  by decision 7. Missing, unreadable or invalid **resource** telemetry downgrades to
+  `resources_unmeasured` with reasons and keeps the attempt valid. **Learner-side** instrumentation
+  failure — absent or unreadable worker result, recurrent-reset defect, checkpoint round-trip
+  failure, learner leakage, unequal exposure, illegal action, incomplete twins, RAW incompetence —
+  still refuses and still quarantines under §6.2.
+- lines 110-111, chaining `B2-TWO-SEED-STABILITY` behind an interim Convergence decision — no longer
+  a launch condition. B2 keeps seeds `21161, 21179` unchanged, with no replacement, and is sequenced
+  by the direction itself.
+- lines 156-159, "Before B1, CM must first establish ... create-only publication, and every parity
+  audit" — the parity audits, literal-law conformance and real recurrent-PPO realization remain and
+  still run; "create-only publication" remains a property of publication but is no longer a
+  pre-launch condition.
+
+Unchanged and still gating: lines 23-25 (real environment, policy, recurrent learner, PPO trainer
+and adaptation-free evaluator with nonzero transitions, updates and evaluations), lines 115-117 (the
+4 GiB admission immediately before every invocation or slice), the protected scientific meaning of
+lines 30-60 in full, the leakage and equal-exposure audits, and the §6.2 quarantine of an incomplete
+attempt.
