@@ -308,3 +308,28 @@ A second, optional prediction: whether a survivable neighbour exists on the decl
 - `experiments/candidates/scdmp_variable_k/multifoundation_reachable_order_value/native/mf_rs_native.cpp` (`:19-20`, `:106-113`, `:165-175`, `:271-283`, `:292`, `:296-320`, `:338-352`)
 - `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` (§4, §5.1, §6.2, §11)
 - `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` (Part C, Part C.4)
+
+## 11. Predictions on record — 2026-09-03
+
+Recorded before any measurement of this object, from compliance note C.4 (commit `19eeb9338`). The
+body of this card and the reading rule in §7 are unchanged by this section; it exists only so the
+reading in §7 is scored against prospective statements.
+
+**Owner, verbatim:**
+
+> owner G-A (deterministic absorption given graph and first action, and a survivable neighbour row
+> exists)
+
+**Reviewer, verbatim:**
+
+> reviewer also G-A, for the card's own arithmetic
+
+Both predictions name branch **G-A** of the §7 table: `D >= 11` **and** some `g` on the declared
+grid has `S(g) >= 11` with a finite, reported `M - X` at that `g`. The owner's stated reason is
+mechanism (i) — absorption deterministic given `(graph, first action)` — together with a "yes" to
+the optional second prediction of §9 (a survivable neighbour exists on the declared
+`TAU_LEAK x Z_LIMIT` grid). The reviewer's stated reason is the card's own arithmetic in §3
+("Code-read expectation, to be confirmed or refuted by measurement, not assumed").
+
+The verdict is decided by the §7 wording alone, applied in the stated order to the measured `D` and
+`S(g)`; agreement of the two predictions carries no weight in that decision.
