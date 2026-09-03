@@ -40,6 +40,7 @@ import importlib.util
 import json
 import math
 import sys
+import traceback
 import types
 from datetime import datetime, timezone
 from pathlib import Path
@@ -340,6 +341,45 @@ def byte_manifest_record() -> dict[str, object]:
     }
 
 
+def _json_material(value: object) -> object:
+    """Convert working dataclass rows to the JSON values a digest can take."""
+    if dataclasses.is_dataclass(value) and not isinstance(value, type):
+        to_dict = getattr(value, "to_dict", None)
+        return to_dict() if callable(to_dict) else dataclasses.asdict(value)
+    if isinstance(value, Mapping):
+        return {key: _json_material(item) for key, item in value.items()}
+    if isinstance(value, (tuple, list)):
+        return [_json_material(item) for item in value]
+    return value
+
+
+def install_serializable_freeze_material(r01: types.ModuleType) -> None:
+    """Repair, in the R02 runner, the held-out freeze token's digest input.
+
+    `assess_posttraining_debug_gate` carries the live PS-B0 comparison rows under
+    `ps_b0_comparisons` so that the artifact serialiser can consume them, and
+    `_freeze_before_n7` then puts `dict(gate)` into a canonical-JSON digest.  On
+    the DEBUG path with a real adapter those rows are `PSB0ActualComparison`
+    dataclasses, so the digest raises
+    `TypeError: Object of type PSB0ActualComparison is not JSON serializable`
+    before the held-out `N=7` evaluation is opened.  The rows are bound through
+    the same `to_dict()`/`asdict()` conversion the PS-B0 artifact serialiser
+    already uses at `_serialize_ps_b0_artifact_once`, so the freeze still binds
+    the whole gate and nothing scientific changes: the token's digest is never
+    compared against any external value, only its namespace is.
+
+    The R01 runner is reused read-only as substrate (DIRECTION.md:164-165), so
+    the repair lives here rather than in `scripts/run_vnfc_bpcr_b_explore.py`.
+    """
+    original = getattr(r01, "_r01_freeze_before_n7", None) or r01._freeze_before_n7
+    r01._r01_freeze_before_n7 = original
+
+    def freeze_before_n7(config, training, checkpoints, gate):
+        return original(config, training, checkpoints, _json_material(gate))
+
+    r01._freeze_before_n7 = freeze_before_n7
+
+
 def install_resource_telemetry_downgrade(r01: types.ModuleType, sink: dict[str, object]) -> None:
     """Owner decision 7: missing resource telemetry downgrades, never annuls."""
     original = getattr(r01, "_r01_validate_telemetry_payload", None) or r01.validate_telemetry_payload
@@ -429,6 +469,7 @@ def install_r02(
     ps_b0.MAPR4 = canonical_mapr
     ps_b0.DirectSetAR = canonical_direct
     install_canonical_ps_b0_trace(ps_b0, r01)
+    install_serializable_freeze_material(r01)
 
     # R02 run identity: a fresh revision, namespace and seed family.  R02 may not
     # reuse an R01 checkpoint, optimizer state, namespace or RNG family
@@ -626,6 +667,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "status": "QUARANTINED_INCOMPLETE_ATTEMPT",
             "error_type": type(error).__name__,
             "error_message": str(error),
+            "traceback": traceback.format_exc(),
         }
         try:
             record_path.write_text(_canonical_json_line(quarantine), encoding="utf-8")
@@ -658,6 +700,7 @@ __all__ = [
     "canonicalize_inputs",
     "install_exposure_line",
     "install_r02",
+    "install_serializable_freeze_material",
     "install_resource_telemetry_downgrade",
     "load_r01_runner",
     "native_identity_record",
