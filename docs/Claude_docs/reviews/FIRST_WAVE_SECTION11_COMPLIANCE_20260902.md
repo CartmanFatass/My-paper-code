@@ -368,6 +368,18 @@ not fatal. That is a different object and is put to the owner in C.4.
    RUN-02A/02B stay as frozen and are not launched until the diagnostic is in. The diagnostic is a
    new scientific object with its own one-page card (host row, reading rule, prediction) written
    before any run; it is scheduled after the UCOPE recast under the two-concurrent budget.
+   Carded 2026-09-03 (commit `75a4092e3`, `SCDMP_B01_GRADED_ORDER_VALUE_DIAGNOSTIC_R01_CARD_20260903.md`):
+   the absorption is a leaky excess accumulator crossing 0.25 (`mf_rs_native.cpp:297-307`), the
+   loading pattern is selected by the post-event latent, and "matched" is the forced share
+   vector equalling it; measurements are an 18-action census from the six twins under both
+   graphs and a 7×7 sweep of the leak threshold and the accumulator limit on a diagnostic
+   translation unit that must reproduce the frozen library bit-for-bit at the frozen point.
+   **Predictions on record (2026-09-03): owner G-A** (deterministic absorption given graph and
+   first action, and a survivable neighbour row exists); **reviewer also G-A**, for the card's
+   own arithmetic (the accumulator crosses at n ≈ 6–7 for the swapped share vector from any
+   state, and a modest rise of either literal keeps it under the limit). Agreement is noted: this
+   run has no calibration contrast between the two of us; its value is the neighbour row it
+   names.
 2. Native caches: **owner decision (2026-09-02): the owner clears the `%LOCALAPPDATA%\Temp\hmasd_*`
    directories with elevated rights; later recast sessions do not redirect `TMP` and use the
    default cache root.** Until the clearing is confirmed a session that meets the wall records the
