@@ -650,6 +650,54 @@ are cheap and outcome-free in their reference arms.
    unshuffled cyclic windows leave a residual that only the 10× budget closes). The run follows
    with both on record.
 
+### D.13 Optimiser-and-conditioning intake (2026-09-03)
+
+Commits `d69d54b6d` (predictions on the card) and `9787259c7` (runner, 14 unit checks, result
+`UCOPE_OPTIMISER_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md`); scope verified. Launch sha
+`adbc42b51`; admission 11.4 GiB before any model; wall 24 s; whitening contract passed with
+reconstruction residual ≤ 5.6e-17 against the 1e-10 ceiling and `λ_min ≈ 2.6e-3`. **Accepted.**
+
+Outcome by the rule in its stated order: O-A does not fire (WHITENED-BASE `d_learned` 0.062 to
+1.183, one of six below `ε_L = 0.10`); **O-B fires** (median RAW-BASE → WHITENED-BASE
+1.841 → 0.328, factor 5.61 ≥ ρ = 5; WHITENED-10X 0.010 to 0.080, all six below 0.10). Outside the
+rule: RAW-10X closes none (median 1.264, factor 1.46). So whitening is necessary and, given
+whitening, the budget is also necessary. The exposure line carries the mechanism: at the base
+budget the raw arm moves 0.25 to 0.50 per coordinate, exactly at its `160 × 3e-3 = 0.48` travel
+ceiling, while the distance to the optimum is 1.3 to 2.1; the whitened arm moves the recovered
+vector 1.2 to 2.0 in the same 160 steps because the recovery amplifies along the slow directions
+by up to `1/√λ_min ≈ 19.6`. `d_objective` reproduces the diagnostic's numbers digit for digit, as
+a bijective reparameterisation must.
+
+Verdicts. Owner's O-A: contradicted by the wording and the numbers (worst policy 1.18, twelve
+times `ε_L`); its direction is right, conditioning dominates, its strength is not. Reviewer's
+O-B: supported by both; with the recorded qualification that the object never varied the clip or
+the batch order, so the residual's cause is not established, and the whitened arm's own travel
+ceiling at 160 steps is a sufficient alternative.
+
+Reviewer's reading of the chain (ladders → check → diagnostic → this object). The learner's
+failure to reach competence decomposes into three measured parts: a raw optimiser pinned at
+its per-coordinate travel ceiling on a design with κ ≈ 717 (removed by whitening); a residual
+that the 10× budget closes; and estimation variance of the tail objective at `n = 10,240`, which
+no optimiser removes and which makes even the exact optimum lose the oracle root vector in 2 of
+6 folds. Competence on this host therefore needs both the whitened learner and a larger `n`;
+the direction's actual question, paid acquisition, stays locked behind competence until then.
+The held whitening discriminator is superseded on its own question by this object.
+
+Tutoring note for the record: the owner's prediction named the right mechanism and
+overestimated its strength; the reviewer's hedge was right for a reason the object did not
+test. The measurement that separated them was the travel ceiling, which neither prediction
+named. That is the kind of quantity worth computing before predicting.
+
+### D.14 Decisions this intake produces
+
+1. UCOPE's next object: (a) a competence object combining the whitened linear learner at the
+   10× budget with a larger `n` chosen so that the exact solve recovers the oracle root vector
+   in all six folds (reviewer's recommendation; it is the first object that can reach the
+   direction's locked question); (b) the whitened learner alone at the current `n`; (c) park the
+   direction with this chain as its record.
+2. The held whitening discriminator R01: retire as superseded by the conditioning object
+   (reviewer's recommendation), repair its tolerance and confirm, or leave quarantined.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
