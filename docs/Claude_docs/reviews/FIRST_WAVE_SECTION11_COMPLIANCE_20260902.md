@@ -963,6 +963,31 @@ three-witness hinge run alongside as the cheap mechanism-level follow-up.
 
 ---
 
+### D.23 Paid-acquisition card intake (2026-09-03, later)
+
+Card `UCOPE_PAID_ACQUISITION_B01_CARD_20260903.md` and its 18-test companion (content in
+`0bd92ac6d`, attribution commit `70da2868a`; see the note below). **Accepted.** The card fixes,
+outcome-free from the oracle alone, that `LINKED-p17_20-c9_100` is the unique context where
+paying pays (net acquisition `+0.021437`, the same number that has recurred all chain as the
+regret of refusing to probe there), and defines the branch statistic `A_paid` as the frozen
+`acquisition_pass` with its competence conjunct removed and nothing else changed. Two things the
+reviewer checked: the frozen conditional exposure is empty under the published record (no seed
+has both folds competent), so §11.1 is doing real work here, not relabelling; and conjunct 2
+(`target_delta_acquisition > 0`, under the policy's own held-out tail choices) carries content
+beyond a root-action check, since paying at the right context is not enough. The draw is reused
+at offset 2,000,000 so the recorded competence field describes the same policies and the exact
+reference is paired; the tail-reproduction gate is 1e-6 rather than bitwise because the published
+vectors were produced at four threads and this run is single-threaded. Predictions recorded in
+§12 before launch (`1fbad77e7`): owner `PA-B` (treatment 4–5 of 6, reference 6 of 6); reviewer
+`PA-B` (5 of 6, 6 of 6, the failure at the root's refusal to pay). Launched as a fourth process,
+single-threaded and under 30 minutes, beside E2's two 4-thread runs and CBSC's single-thread B1;
+recorded here as a one-off beyond the E.4 deviation.
+
+Process note, the reviewer's own: the card and test were staged by the implementer and swept
+into the reviewer's intake commit `0bd92ac6d` because the two sessions share one index; the
+implementer added a record-only attribution commit rather than rewriting history. Correct
+conduct. The reviewer now commits by explicit pathspec.
+
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
 
 Object: decision 3 of A.4 executed by an Opus session on `main`: commits `335559bcf` (the
@@ -1044,6 +1069,13 @@ third, single-thread process is put to the owner in E.4 rather than assumed.
    the restore did not take and B1 stays held.
 
 ---
+
+### E.5 B0 restored, B1 released (2026-09-03, 17:24 UTC)
+
+The owner ran `takeown` and `icacls` on the B0 artifact directory; it now lists 33 files,
+12,807,274 bytes, owner `JACOBires`, `manifest.json` readable, matching the
+`B0_REVIEWED_AUTHORITY` constant exactly. B1 released under E.4's standing decision as a third
+single-thread process, launched detached, beside E2's two 4-thread runs.
 
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
