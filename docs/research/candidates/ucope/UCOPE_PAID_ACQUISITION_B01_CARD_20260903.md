@@ -309,13 +309,17 @@ published. The two objects are parallel, and neither is a precondition of the ot
 
 To be filled in before launch. Nothing in sections 1 to 11 may change when they are recorded.
 
-**Owner:**
+**Owner (2026-09-03, before launch):**
 
-> _(empty — to be recorded before the run)_
+> `PA-B`: the treatment arm satisfies `A_paid` in 4 or 5 of 6 policies, the exact reference in
+> 6 of 6.
 
-**Reviewer:**
+**Reviewer (2026-09-03, before launch):**
 
-> _(empty — to be recorded before the run)_
+> `PA-B`, treatment 5 of 6 and reference 6 of 6, the one treatment failure being a policy whose
+> root refuses to pay at the target context (the root object's 5-of-6 oracle-root match carried
+> forward), not a failed conjunct 2; the reference's count-0 flips at this offset cost it less than
+> the `+0.021437` net acquisition, so conjunct 2 holds for it in all six.
 
 ## 13. Deviations
 
