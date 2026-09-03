@@ -382,6 +382,34 @@ to move to the margin-scaled falsifier held in reserve is an owner decision; nei
 the statistic is changed here, because moving a prospective rule after seeing two outcomes would be an
 outcome-informed rewrite.
 
+**Exposure ladder R02 rung 1 — complete, valid, `R2-D NEITHER_ARM_MOVED`.** Registered in section
+9 below and launched 2026-09-02 at commit `9ef1b36b68b27160975df202a00bda08f1214c28` with the bound
+14-file source inventory clean at that HEAD; admission 10.19 GiB physical and effective; 108.7 s
+wall, 198.3 s CPU at four intra-op threads, 12 policies, 122,880 episodes, 3,840 root and 1,920 tail
+optimizer updates, 48 checkpoints, every activity counter reconciled, no non-finite event, telemetry
+fully measured (`resources_unmeasured: false`, peak RSS 412.97 MiB). Because R02 reuses R01's
+workload and the counter-addressed RNG never keys on the object label, the 48 evaluation rows are
+**byte-identical** to R01 rung 1's, and every exposure field R01 recorded is identical too; both were
+checked row by row rather than assumed. Competence observation, recorded and deciding nothing: 0 of
+12 policies competent, 0 of 12 oracle root-vector matches, branch `NO_ARM_COMPETENT`, both arms
+`false`. The per-arm rule of section 9.4 applied verbatim: no arm `B_COMPETENT`;
+`m_FT-XF-FLEX = 0.108116 < 0.30` (all-coordinate minimum, residual included, at seed `…fresh-02`
+fold 1 tail) and `m_FT-XF-BC = 0.250245 < 0.30`, so both arms `NOT_MOVED` and the branch is
+**R2-D**, which is registered as uninformative for the ladder's question. Counting FLEX's residual
+raises that arm's minimum by a factor of 2.33 over R01's beta-only `0.046434`, so R01's statistic did
+understate FLEX's movement — but not enough to change the branch, and R01 rung 1's published `R1-C`
+is not disturbed. Rung 2 of R02 is registered and **not run**. Full evidence:
+`UCOPE_EXPOSURE_LADDER_R02_R1_RESULT_EVIDENCE_20260902.md`.
+
+**Instrumentation check — passed, no defect.**
+`UCOPE-A-INSTRUMENTATION-TAIL-AGREEMENT-COMPETENCE-CHECK-R01` (card and result dated 2026-09-02, 77
+tests, all passing) established that the tail-agreement, regret, oracle-root-vector, competence and
+displacement measurements are correct on both arms; that the competence predicate returns `True` for
+an exactly-optimal policy on both arms; and that both recorded anomalies are properties of the
+trained policies and of the frozen FT clock rather than of the instrument. No R01 record or document
+was altered. Card: `UCOPE_INSTRUMENTATION_CHECK_R01_CARD_20260902.md`; result:
+`UCOPE_INSTRUMENTATION_CHECK_R01_RESULT_20260902.md`.
+
 ## 9. `UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02` — registered 2026-09-02
 
 ### 9.1 Why a second ladder object rather than an edit to R01
