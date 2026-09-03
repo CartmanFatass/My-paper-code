@@ -72,6 +72,10 @@ from experiments.candidates.ucope.competence_first_scout_r01.checkpoint import (
 )
 from experiments.candidates.ucope.competence_first_scout_r01.contract import (  # noqa: E402
     LADDER_OBJECT_ID,
+    LADDER_R02_MOVEMENT_THRESHOLDS,
+    LADDER_R02_OBJECT_ID,
+    LADDER_R02_RUNG_1_ID,
+    LADDER_R02_RUNG_2_ID,
     LADDER_RUNG_1_ID,
     LADDER_RUNG_1_LEARNING_RATE,
     LADDER_RUNG_2_ID,
@@ -84,6 +88,13 @@ from experiments.candidates.ucope.competence_first_scout_r01.contract import (  
 RUNGS = {
     1: (LADDER_RUNG_1_ID, ScoutConfig.ladder_rung_1, "lr 3e-3 at the frozen 160/320 tail/root updates"),
     2: (LADDER_RUNG_2_ID, ScoutConfig.ladder_rung_2, "lr 3e-4 at 1,600/3,200 tail/root updates"),
+}
+# The second exposure-ladder object reuses R01's rungs and workload byte for byte; only the
+# reading rule differs (per arm, FLEX residual explicit). Registered by section 9 of
+# docs/research/candidates/ucope/UCOPE_SECTION11_RECAST_INTAKE_20260902.md.
+LADDER_OBJECTS = {
+    "R01": (LADDER_OBJECT_ID, {1: LADDER_RUNG_1_ID, 2: LADDER_RUNG_2_ID}),
+    "R02": (LADDER_R02_OBJECT_ID, {1: LADDER_R02_RUNG_1_ID, 2: LADDER_R02_RUNG_2_ID}),
 }
 from experiments.candidates.ucope.competence_first_scout_r01.model import build_arm  # noqa: E402
 from experiments.candidates.ucope.competence_first_scout_r01.workflow import run_workload  # noqa: E402
@@ -399,6 +410,15 @@ def exposure_line(config: ScoutConfig, checkpoint_root: Path) -> dict[str, Any]:
                         scale += float(torch.sum(base * base).item())
                     beta_delta = (final_state["beta"].detach() - init_state["beta"].detach()).to(torch.float64)
                     beta_init = init_state["beta"].detach().to(torch.float64)
+                    # Largest absolute per-coordinate move over ALL trained coordinates of
+                    # this arm. For FT-XF-BC that is the Bellman vector alone; for
+                    # FT-XF-FLEX the paired residual is deliberately included, which is the
+                    # statistic the R02 per-arm reading rule uses. The beta-only fields
+                    # below keep the R01 definition unchanged.
+                    all_move = max(
+                        float(torch.max(torch.abs((final_state[name].detach() - tensor.detach()).to(torch.float64))).item())
+                        for name, tensor in init_state.items()
+                    )
                     rows.append({
                         "arm_id": arm,
                         "seed_id": seed,
@@ -410,9 +430,27 @@ def exposure_line(config: ScoutConfig, checkpoint_root: Path) -> dict[str, Any]:
                         "beta_displacement_l2": float(torch.sqrt(torch.sum(beta_delta * beta_delta)).item()),
                         "beta_initialisation_l2": float(torch.sqrt(torch.sum(beta_init * beta_init)).item()),
                         "beta_max_abs_coordinate_move": float(torch.max(torch.abs(beta_delta)).item()),
+                        "max_abs_coordinate_move": all_move,
                     })
     ratios = [row["displacement_over_initialisation_scale"] for row in rows if row["displacement_over_initialisation_scale"] is not None]
     moves = [row["beta_max_abs_coordinate_move"] for row in rows]
+    per_arm = {}
+    for arm in config.arms:
+        arm_rows = [row for row in rows if row["arm_id"] == arm]
+        if not arm_rows:
+            continue
+        per_arm[arm] = {
+            "rows": len(arm_rows),
+            "minimum_beta_max_abs_coordinate_move": min(row["beta_max_abs_coordinate_move"] for row in arm_rows),
+            "maximum_beta_max_abs_coordinate_move": max(row["beta_max_abs_coordinate_move"] for row in arm_rows),
+            "minimum_max_abs_coordinate_move": min(row["max_abs_coordinate_move"] for row in arm_rows),
+            "maximum_max_abs_coordinate_move": max(row["max_abs_coordinate_move"] for row in arm_rows),
+            "minimum_displacement_ratio": min(row["displacement_over_initialisation_scale"] for row in arm_rows),
+            "residual_included_in_max_abs_coordinate_move": bool(
+                any(name != "beta" for name in build_arm(arm, config.seed_ids[0], 0)[1].state_dict())
+            ),
+            "movement_threshold": LADDER_R02_MOVEMENT_THRESHOLDS.get(arm),
+        }
     return {
         "statement": (
             "parameter displacement relative to initialisation scale, per policy and stage, "
@@ -425,6 +463,7 @@ def exposure_line(config: ScoutConfig, checkpoint_root: Path) -> dict[str, Any]:
         "rows": rows,
         "minimum_displacement_ratio": min(ratios) if ratios else None,
         "maximum_displacement_ratio": max(ratios) if ratios else None,
+        "per_arm": per_arm,
         "minimum_beta_max_abs_coordinate_move": min(moves) if moves else None,
         "maximum_beta_max_abs_coordinate_move": max(moves) if moves else None,
         "learner_can_move_in_its_budget": bool(moves) and min(moves) > 0.0,
@@ -455,11 +494,21 @@ def _configure_topology(max_threads: int = 1) -> None:
         torch.set_num_interop_threads(1)
 
 
-def run_rung(output_root: str | Path, *, thread_cap: int = 1, rung: int = 1) -> Path:
-    """Execute one exposure-ladder rung and publish a complete run record."""
+def run_rung(output_root: str | Path, *, thread_cap: int = 1, rung: int = 1, ladder_object: str = "R01") -> Path:
+    """Execute one exposure-ladder rung and publish a complete run record.
+
+    ``ladder_object`` selects which named ladder object the rung is being run for. R01 and
+    R02 share this workload byte for byte -- same arms, seeds, folds, update counts and
+    counter-addressed RNG -- and differ only in the registered reading rule, so the object
+    identity is recorded and nothing about the execution changes.
+    """
     if rung not in RUNGS:
         raise LaunchRefusal(f"unknown ladder rung: {rung}")
+    if ladder_object not in LADDER_OBJECTS:
+        raise LaunchRefusal(f"unknown ladder object: {ladder_object}")
     science_object_id, config_factory, rung_definition = RUNGS[rung]
+    ladder_object_id, rung_ids = LADDER_OBJECTS[ladder_object]
+    science_object_id = rung_ids[rung]
     output = Path(output_root).resolve()
     if output.exists():
         raise LaunchRefusal(f"output root is create-once: {output}")
@@ -492,7 +541,7 @@ def run_rung(output_root: str | Path, *, thread_cap: int = 1, rung: int = 1) -> 
             "format": RESULT_FORMAT,
             "schema_version": 1,
             "science_object_id": science_object_id,
-            "ladder_object_id": LADDER_OBJECT_ID,
+            "ladder_object_id": ladder_object_id,
             "code_object_id": OBJECT_ID,
             "rung": rung,
             "rung_definition": rung_definition,
@@ -576,6 +625,7 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--output-root", required=True)
     run.add_argument("--thread-cap", type=int, default=1)
     run.add_argument("--rung", type=int, default=1, choices=sorted(RUNGS))
+    run.add_argument("--ladder-object", default="R01", choices=sorted(LADDER_OBJECTS))
     validate = commands.add_parser("validate", allow_abbrev=False)
     validate.add_argument("--complete-root", required=True)
     return parser
@@ -585,7 +635,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
         if args.command == "run":
-            result: dict[str, Any] = {"path": str(run_rung(args.output_root, thread_cap=args.thread_cap, rung=args.rung))}
+            result: dict[str, Any] = {
+                "path": str(
+                    run_rung(
+                        args.output_root,
+                        thread_cap=args.thread_cap,
+                        rung=args.rung,
+                        ladder_object=args.ladder_object,
+                    )
+                )
+            }
         elif args.command == "validate":
             result = validate_complete(args.complete_root)
         else:

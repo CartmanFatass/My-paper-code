@@ -60,6 +60,20 @@ LADDER_RUNG_2_ROOT_UPDATES = 3_200
 LADDER_RUNG_2_CHECKPOINT_ROOT_UPDATES = (40, 80, 160, 320, 3_200)
 B1_LEARNING_RATE = 3e-4
 
+# --- Second exposure-ladder object (2026-09-02) ---------------------------------------
+# UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02 registered by section 9 of
+# docs/research/candidates/ucope/UCOPE_SECTION11_RECAST_INTAKE_20260902.md. It reuses R01's
+# arms, seeds, folds, rungs and workload byte for byte; the only difference is the reading
+# rule, which is applied PER ARM against that arm's own threshold, with FT-XF-FLEX's paired
+# residual explicitly inside its own displacement statistic. No configuration changes.
+LADDER_R02_OBJECT_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02"
+LADDER_R02_RUNG_1_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02-RUNG-1"
+LADDER_R02_RUNG_2_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02-RUNG-2"
+# Both arms share the optimizer, learning rate and step count, so the same per-coordinate
+# arithmetic that fixed R01's 0.30 fixes both arms' thresholds at 0.30. They are applied
+# separately, so neither arm's number can decide the other arm's branch.
+LADDER_R02_MOVEMENT_THRESHOLDS = {"FT-XF-FLEX": 0.30, "FT-XF-BC": 0.30}
+
 
 BINDING_KINDS = {"B1": "B1_ADMITTED", "LADDER1": "LADDER1_ADMITTED", "LADDER2": "LADDER2_ADMITTED", "ASSESS": "ASSESS_SOURCE"}
 LADDER_MODES = frozenset({"LADDER1", "LADDER2"})

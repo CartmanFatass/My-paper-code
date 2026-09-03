@@ -381,3 +381,126 @@ minimum over 24 stage-policies and a single low-displacement `FT-XF-FLEX` tail p
 to move to the margin-scaled falsifier held in reserve is an owner decision; neither the threshold nor
 the statistic is changed here, because moving a prospective rule after seeing two outcomes would be an
 outcome-informed rewrite.
+
+## 9. `UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02` — registered 2026-09-02
+
+### 9.1 Why a second ladder object rather than an edit to R01
+
+Two of R01's three registered rungs returned `R1-C` for the same structural reason: `m` is a single
+minimum taken over all 24 stage-policies of both arms, so one low-displacement `FT-XF-FLEX` tail
+policy fixes the branch for the whole rung while most policies move far more. Changing R01's rule
+after seeing two of its outcomes would be an outcome-informed rewrite of a prospective rule. Under
+the spec's own wording an outcome-informed redesign is *a different scientific object*, so it is
+registered here as one. R01's rungs 1 and 2, their records, their `R1-C` branches and their reading
+stand exactly as published and are not reinterpreted.
+
+The instrumentation check `UCOPE-A-INSTRUMENTATION-TAIL-AGREEMENT-COMPETENCE-CHECK-R01` (card and
+result dated 2026-09-02) passed on every measurement, so the numbers R01 recorded are correct
+measurements and R02 inherits the same instrument with no repair. That check also established the
+two facts this object acts on: `exposure_line` reads the whole `state_dict()` for the aggregate
+displacement — for `FT-XF-FLEX` that is `beta` plus 4,865 residual coordinates — and reads only
+`state_dict()["beta"]` for the per-coordinate move that R01's `m` is built from.
+
+### 9.2 What R02 keeps, byte for byte
+
+Arms `FT-XF-FLEX` and `FT-XF-BC`; seeds `ucope-scout-r01-b1-fresh-{00,01,02}`; two group-disjoint
+folds; 5,120 episodes per context; batch 256; the frozen host, oracle, competence predicate
+`C_even` and checkpoint cadence; and the same two coded rungs — rung 1 at `lr 3e-3` with 160/320
+tail/root updates, rung 2 at `lr 3e-4` with 1,600/3,200. The counter-addressed RNG is keyed on
+`(namespace, seed, fold, index)` and never on the object label, so R02 rung 1 reproduces R01 rung 1's
+training exactly. Nothing about the execution changes; the runner records which object the rung was
+run for, and nothing else differs.
+
+The competence observation is recorded **per arm** exactly as in R01: a seed passes an arm when both
+of its final fold policies pass `C_even`, an arm is `B_COMPETENT` when at least 2 of its 3 seeds
+pass, and the observation decides nothing on its own.
+
+### 9.3 The displacement statistic, per arm, with the residual handled explicitly
+
+For each arm `A` and each of that arm's 12 rows (6 policies x 2 stages), at the final checkpoint:
+
+`move(row)` = the largest absolute per-coordinate change, from the exact deterministic
+initialisation of the same arm/seed/fold, over **all trained coordinates of that arm**.
+
+- For `FT-XF-BC` the trained coordinates *are* the Bellman vector (7 at root, 5 at tail), so `move`
+  is identical to R01's `beta_max_abs_coordinate_move` for this arm. Nothing is added and nothing is
+  dropped.
+- For `FT-XF-FLEX` the trained coordinates are the Bellman vector **together with** the paired
+  residual (`residual.{0,2,4}.{weight,bias}`, 4,865 tail coordinates). The residual is therefore
+  **inside** this arm's statistic. R01's `m` excluded it, which is why a FLEX policy that moved its
+  residual freely could still register as not having moved.
+
+`m_A` is the minimum of `move(row)` over that arm's 12 rows. Both `m_A` and the beta-only minimum
+`b_A` are recorded for both arms; only `m_A` decides. The runner emits them in
+`exposure_line.per_arm`, and the R01 fields (`minimum_beta_max_abs_coordinate_move` and the rest)
+are untouched, so R01's published records keep their meaning.
+
+### 9.4 Reading rule — written before any R02 run
+
+Applied verbatim after each rung, using only the quantities named here.
+
+- Arm `A` is `MOVED` when `m_A >= t_A`, and `NOT_MOVED` otherwise.
+- `t_FT-XF-FLEX = 0.30` and `t_FT-XF-BC = 0.30`.
+
+Branches, evaluated in order; exactly one applies:
+
+- **R2-A — `EXPOSURE_EXPLAINS_INCOMPETENCE`.** At least one arm is `B_COMPETENT`. Reading and next
+  steps as R01's `R1-A`.
+- **R2-B — `BOTH_ARMS_MOVED_NO_COMPETENCE`.** No arm `B_COMPETENT` and **both** arms `MOVED`.
+  Reading: on this host, at this rung, a realised displacement budget of this size does not produce
+  even-support competence in either learner package. Mechanism A is not a sufficient explanation for
+  either arm. Next: the margin-scaled competence falsifier held in reserve by the review becomes the
+  direction's next named object.
+- **R2-C — `ONE_ARM_MOVED_NO_COMPETENCE`.** No arm `B_COMPETENT` and **exactly one** arm `MOVED`.
+  Reading: the rung is informative for the moved arm only, and for that arm it reads as `R2-B` does.
+  For the unmoved arm the rung says nothing about mechanism A. Next: the rung is repeated for the
+  unmoved arm only if a later object is registered to do so; the moved arm's reading stands.
+- **R2-D — `NEITHER_ARM_MOVED`.** No arm `B_COMPETENT` and neither arm `MOVED`. Reading: the rung
+  did not deliver the intended exposure increase for either arm and is uninformative for the
+  ladder's question, as R01's `R1-C` was.
+
+### 9.5 How the thresholds were chosen, and why they coincide
+
+Both thresholds come from the same arithmetic that fixed R01's `0.30`, and that arithmetic depends
+only on the optimizer, the learning rate and the number of steps — which the two arms share. AdamW's
+per-step per-coordinate displacement is bounded by approximately the learning rate for every
+coordinate, whichever tensor it sits in, so the per-coordinate ceiling over a rung is `steps x lr`:
+`320 x 3e-3 = 0.96` at the root stage of rung 1 and `3,200 x 3e-4 = 0.96` at the root stage of rung
+2 (tail stages `0.48` at both rungs). `0.30` is about a third of that ceiling and three to six times
+the `lr 3e-4` figure the review's arithmetic gives over the frozen schedule, so it separates "the
+intended increase was realised" from "it was not" without requiring the ceiling to be reached.
+
+The two numbers therefore coincide at `0.30`. They are still *per-arm* thresholds, applied separately
+to per-arm statistics: the point of the rule is that neither arm's number can decide the other arm's
+branch, not that the numbers must differ. Both are fixed here, before any R02 run.
+
+### 9.6 What is already known before the run, stated openly
+
+`FT-XF-BC` has no residual, so `m_FT-XF-BC` is numerically identical to R01's per-arm beta minimum
+for that arm, and that number is already published: `0.250245` at rung 1 and `0.249392` at rung 2.
+Both are below `0.30`, so `FT-XF-BC` is known in advance to be `NOT_MOVED` at both rungs, and branch
+`R2-B` is therefore unreachable at rung 1 and rung 2. This is recorded here rather than discovered
+later; the rule is not adjusted to make `R2-B` reachable, because that would be exactly the
+outcome-informed edit section 9.1 refuses.
+
+`m_FT-XF-FLEX` under this definition has not been computed for any rung: `exposure_line` did not
+record an all-coordinate move before today, so the FLEX statistic is genuinely unseen at the moment
+this rule is fixed. R01's beta-only FLEX minima (`0.046434`, `0.025254`) are not that statistic.
+
+### 9.7 Claim ceiling
+
+Unchanged from section 4.6, with the statistic read per arm: "On this exact finite eight-context
+host, with these two learner packages, three seeds, two folds and this competence criterion, a
+displacement budget of this size was / was not realised **by this arm**, and did / did not produce
+even-support competence **for this arm**." R02 supports no acquisition polarity, no COUNT/RAW
+polarity, no conditioning or representation attribution, no stable superiority, no seed-population
+claim, and nothing about generic UCOPE, variable-`k`, variable-`N`, MARL/UAV, transfer, safety,
+deployment, flight, energy or real-world QoS. At three seeds no arm-comparison polarity is available,
+so `R2-C` must not be read as one arm outperforming the other.
+
+### 9.8 Result
+
+Rung 1 was run on 2026-09-02; the full record is
+`UCOPE_EXPOSURE_LADDER_R02_R1_RESULT_EVIDENCE_20260902.md` and the outcome is summarised in section
+8 above. Rung 2 of R02 is registered but **not run**, and does not run without a further owner
+instruction.
