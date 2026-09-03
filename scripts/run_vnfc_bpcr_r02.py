@@ -527,62 +527,78 @@ def install_like_for_like_relabel_probe(
         finally:
             batch.close()
 
-    original_cross = (
-        getattr(r01, "_r01_validate_runtime_payload_cross_consistency", None)
-        or r01._validate_runtime_payload_cross_consistency
+    original_validate = (
+        getattr(r01, "_r01_validate_runtime_terminal", None)
+        or r01.validate_runtime_terminal
     )
-    r01._r01_validate_runtime_payload_cross_consistency = original_cross
+    r01._r01_validate_runtime_terminal = original_validate
 
-    def cross_consistency(config, terminal):
-        """Validate the R02 exposure budget here, then run every frozen check.
+    def r02_terminal_expectations(terminal):
+        """Assert the R02 exposure budget and the zero presentation mismatch.
 
-        The R01 validator pins `diagnostic_forward_calls` to the frozen 48/60 of
-        the old probe in two places -- per learned row
-        (`run_vnfc_bpcr_b_explore.py:852`) and in the aggregate exposure terminal
-        (`:975`).  The repaired probe cannot satisfy either: it spends two batch-1
-        forwards per decision instead of one.  The true budget (96/108 per row) is
-        asserted here and is what the terminal publishes; the two frozen
-        accounting constants are satisfied on a throwaway copy so that every other
-        check still runs against the real terminal.  Recorded as a deviation.
+        Returns the normalized copy the frozen validator is given, or the
+        terminal unchanged when it carries no learned evaluation rows.
         """
         evaluation = terminal.get("evaluation")
         learned = evaluation.get("learned") if isinstance(evaluation, Mapping) else None
-        normalized = terminal
-        if isinstance(learned, Sequence) and not isinstance(learned, (str, bytes)):
-            for row in learned:
-                if not isinstance(row, Mapping):
-                    raise r01.BExploreContractError("learned evaluation row schema differs")
-                if R02_DIAGNOSTIC_FORWARDS.get(row.get("arm")) != row.get("diagnostic_forward_calls"):
-                    raise r01.BExploreContractError("R02 like-for-like relabel probe exposure differs")
-                if row.get("relabel_mismatch_count") != 0:
-                    raise r01.BExploreContractError("R02 like-for-like relabel probe presentation mismatch")
-            normalized_learned = tuple(
-                {**row, "diagnostic_forward_calls": FROZEN_DIAGNOSTIC_FORWARDS[row["arm"]]}
-                for row in learned
-            )
-            normalized = {**terminal, "evaluation": {**evaluation, "learned": normalized_learned}}
-            exposure = terminal.get("exposure")
-            if isinstance(exposure, Mapping) and isinstance(exposure.get("evaluation"), Mapping):
-                groups = len(tuple(row for row in learned if row.get("arm") == "MAPR"))
-                observed = exposure["evaluation"]
-                for arm in ("MAPR", "DIRECT"):
-                    if observed.get(arm, {}).get("diagnostic_forward_calls") != R02_DIAGNOSTIC_FORWARDS[arm] * groups:
-                        raise r01.BExploreContractError("R02 like-for-like relabel probe aggregate exposure differs")
-                normalized_evaluation_exposure = {
+        if not isinstance(learned, Sequence) or isinstance(learned, (str, bytes)) or not learned:
+            return terminal
+        for row in learned:
+            if not isinstance(row, Mapping):
+                raise r01.BExploreContractError("learned evaluation row schema differs")
+            if R02_DIAGNOSTIC_FORWARDS.get(row.get("arm")) != row.get("diagnostic_forward_calls"):
+                raise r01.BExploreContractError("R02 like-for-like relabel probe exposure differs")
+            if row.get("relabel_mismatch_count") != 0:
+                raise r01.BExploreContractError("R02 like-for-like relabel probe presentation mismatch")
+        groups = len(tuple(row for row in learned if row.get("arm") == "MAPR"))
+        normalized = {
+            **terminal,
+            "evaluation": {
+                **evaluation,
+                "learned": tuple(
+                    {**row, "diagnostic_forward_calls": FROZEN_DIAGNOSTIC_FORWARDS[row["arm"]]}
+                    for row in learned
+                ),
+            },
+        }
+        exposure = terminal.get("exposure")
+        if isinstance(exposure, Mapping) and isinstance(exposure.get("evaluation"), Mapping):
+            observed = exposure["evaluation"]
+            for arm in ("MAPR", "DIRECT"):
+                expected = R02_DIAGNOSTIC_FORWARDS[arm] * groups
+                if observed.get(arm, {}).get("diagnostic_forward_calls") != expected:
+                    raise r01.BExploreContractError("R02 like-for-like relabel probe aggregate exposure differs")
+            normalized["exposure"] = {
+                **exposure,
+                "evaluation": {
                     arm: (
                         {**row, "diagnostic_forward_calls": FROZEN_DIAGNOSTIC_FORWARDS[arm] * groups}
                         if arm in FROZEN_DIAGNOSTIC_FORWARDS else dict(row)
                     )
                     for arm, row in observed.items()
-                }
-                normalized = {
-                    **normalized,
-                    "exposure": {**exposure, "evaluation": normalized_evaluation_exposure},
-                }
-        original_cross(config, normalized)
+                },
+            }
+        return normalized
+
+    def validate_runtime_terminal(config, terminal):
+        """Validate the R02 exposure budget here, then run every frozen check.
+
+        The R01 runner pins `diagnostic_forward_calls` to the frozen 48/60 of the
+        old probe in two places -- per learned row
+        (`scripts/run_vnfc_bpcr_b_explore.py:852`, inside
+        `_validate_runtime_payload_cross_consistency`) and in the aggregate
+        exposure terminal (`:975`, inside `validate_runtime_terminal` itself).
+        The repaired probe cannot satisfy either: it spends two batch-1 forwards
+        per decision instead of one.  The true budget (96/108 per learned row) is
+        asserted here and is what the terminal publishes; the two frozen
+        accounting constants are satisfied on a throwaway copy so that every other
+        check still runs against the real terminal.  Recorded as a deviation.
+        """
+        original_validate(config, r02_terminal_expectations(terminal))
 
     r01._evaluate_learned_batch = evaluate_learned_batch
-    r01._validate_runtime_payload_cross_consistency = cross_consistency
+    r01.validate_runtime_terminal = validate_runtime_terminal
+    r01.r02_terminal_expectations = r02_terminal_expectations
     r01._r02_relabel_probe_installed = True
     r01._r02_relabel_probe_law = RELABEL_PROBE_LAW
 

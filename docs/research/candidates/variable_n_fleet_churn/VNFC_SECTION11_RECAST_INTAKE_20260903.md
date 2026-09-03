@@ -378,9 +378,16 @@ removes.
 
 **Exposure accounting.** The repaired probe spends two batch-1 forwards per decision instead of one,
 so `diagnostic_forward_calls` per learned evaluation row moves from the frozen 48 (MAPR) / 60
-(DIRECT) to 96 / 108. The published terminal carries the true budget; see the result document's
-deviation list for how the frozen accounting constant in
-`_validate_runtime_payload_cross_consistency` is handled.
+(DIRECT) to 96 / 108. The published terminal carries the true budget. The R01 runner pins the old
+probe's constant in **two** places, and both had to be handled: per learned evaluation row at
+`scripts/run_vnfc_bpcr_b_explore.py:852` (inside `_validate_runtime_payload_cross_consistency`), and
+in the aggregate exposure terminal at `:975` (inside `validate_runtime_terminal` itself, after it
+calls the cross-consistency check at `:934`). The repair therefore wraps `validate_runtime_terminal`
+— the single entry point all three call sites (`:1517`, `:1779`, `:1977`) reach as a module global —
+asserts the true R02 budget (96 / 108 per row; 96 / 108 x learned groups in the aggregate) and zero
+presentation mismatch on the real terminal, and satisfies the two frozen constants on a throwaway
+copy so every other frozen check still runs against the real terminal. Recorded as a deviation; see
+the result document's deviation list.
 
 **Denominator correction.** The diagnostic's counts are over **96 world-decisions per law**
 (6 `(N, failed-zone)` cells × 8 worlds × 2 arms), not 192; 192 is the total across both laws. The

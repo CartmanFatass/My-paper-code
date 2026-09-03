@@ -230,7 +230,7 @@ def test_installed_probe_replaces_the_r01_comparison(r02):
     r01 = r02.load_r01_runner()
     saved = {
         "_evaluate_learned_batch": r01._evaluate_learned_batch,
-        "_validate_runtime_payload_cross_consistency": r01._validate_runtime_payload_cross_consistency,
+        "validate_runtime_terminal": r01.validate_runtime_terminal,
     }
     installed = getattr(r01, "_r02_relabel_probe_installed", False)
     try:
@@ -238,41 +238,42 @@ def test_installed_probe_replaces_the_r01_comparison(r02):
         sink: list[dict[str, object]] = []
         r02.install_like_for_like_relabel_probe(r01, sink)
         assert r01._evaluate_learned_batch is not saved["_evaluate_learned_batch"]
-        assert r01._validate_runtime_payload_cross_consistency is not saved[
-            "_validate_runtime_payload_cross_consistency"
-        ]
+        assert r01.validate_runtime_terminal is not saved["validate_runtime_terminal"]
         assert r01._r02_relabel_probe_law == "VNFC-R02-RELABEL-LIKE-FOR-LIKE-V1"
 
         terminal = {"evaluation": {"learned": ({"arm": "MAPR", "diagnostic_forward_calls": 48,
                                                 "relabel_mismatch_count": 0},)}}
         with pytest.raises(r01.BExploreContractError) as raised:
-            r01._validate_runtime_payload_cross_consistency(None, terminal)
+            r01.validate_runtime_terminal(None, terminal)
         assert "R02 like-for-like relabel probe exposure differs" == str(raised.value)
 
         terminal = {"evaluation": {"learned": ({"arm": "MAPR", "diagnostic_forward_calls": 96,
                                                 "relabel_mismatch_count": 1},)}}
         with pytest.raises(r01.BExploreContractError) as raised:
-            r01._validate_runtime_payload_cross_consistency(None, terminal)
+            r01.validate_runtime_terminal(None, terminal)
         assert "R02 like-for-like relabel probe presentation mismatch" == str(raised.value)
     finally:
         for name, value in saved.items():
             setattr(r01, name, value)
         r01._r02_relabel_probe_installed = installed
-        if hasattr(r01, "_r01_validate_runtime_payload_cross_consistency"):
-            delattr(r01, "_r01_validate_runtime_payload_cross_consistency")
+        for attribute in ("_r01_validate_runtime_terminal", "r02_terminal_expectations"):
+            if hasattr(r01, attribute):
+                delattr(r01, attribute)
 
 
 def test_installed_validator_checks_the_aggregate_exposure(r02):
     """The frozen 48/60 constant appears twice; both are covered.
 
-    `run_vnfc_bpcr_b_explore.py:852` pins it per learned row and `:975` pins the
-    aggregate `terminal["exposure"]`.  The wrapper asserts the true R02 budget in
-    both places.
+    `run_vnfc_bpcr_b_explore.py:852` pins it per learned row (inside
+    `_validate_runtime_payload_cross_consistency`) and `:975` pins the aggregate
+    `terminal["exposure"]` (inside `validate_runtime_terminal` itself, after it
+    calls the cross-consistency check).  Wrapping `validate_runtime_terminal`
+    covers both; the wrapper asserts the true R02 budget in both places.
     """
     r01 = r02.load_r01_runner()
     saved = {
         "_evaluate_learned_batch": r01._evaluate_learned_batch,
-        "_validate_runtime_payload_cross_consistency": r01._validate_runtime_payload_cross_consistency,
+        "validate_runtime_terminal": r01.validate_runtime_terminal,
     }
     installed = getattr(r01, "_r02_relabel_probe_installed", False)
     try:
@@ -292,14 +293,15 @@ def test_installed_validator_checks_the_aggregate_exposure(r02):
             }},
         }
         with pytest.raises(r01.BExploreContractError) as raised:
-            r01._validate_runtime_payload_cross_consistency(None, terminal)
+            r01.validate_runtime_terminal(None, terminal)
         assert "R02 like-for-like relabel probe aggregate exposure differs" == str(raised.value)
     finally:
         for name, value in saved.items():
             setattr(r01, name, value)
         r01._r02_relabel_probe_installed = installed
-        if hasattr(r01, "_r01_validate_runtime_payload_cross_consistency"):
-            delattr(r01, "_r01_validate_runtime_payload_cross_consistency")
+        for attribute in ("_r01_validate_runtime_terminal", "r02_terminal_expectations"):
+            if hasattr(r01, attribute):
+                delattr(r01, attribute)
 
 
 def test_r01_runner_source_is_untouched():
