@@ -380,6 +380,216 @@ def install_serializable_freeze_material(r01: types.ModuleType) -> None:
     r01._freeze_before_n7 = freeze_before_n7
 
 
+# --------------------------------------------------------------------------
+# the repaired per-decision relabel probe (owner decision F.4(a), 2026-09-03)
+# --------------------------------------------------------------------------
+
+RELABEL_PROBE_LAW = "VNFC-R02-RELABEL-LIKE-FOR-LIKE-V1"
+
+# The R01 probe compared a batch-8 forward against a batch-1 relabelled forward,
+# so it varied presentation and batch width together.  The repaired probe spends
+# two batch-1 forwards per decision: the identity presentation and the fresh
+# relabel.  The batch-position residual then falls out of the identity forward
+# against the batch-8 policy forward, at no extra cost.
+FROZEN_DIAGNOSTIC_FORWARDS = {"MAPR": 48, "DIRECT": 60}
+R02_DIAGNOSTIC_FORWARDS = {"MAPR": 96, "DIRECT": 108}
+
+
+def install_like_for_like_relabel_probe(
+    r01: types.ModuleType, residual_sink: list[dict[str, object]]
+) -> None:
+    """Repair `_evaluate_learned_batch`'s per-decision fresh-relabel comparison.
+
+    Before, at `scripts/run_vnfc_bpcr_b_explore.py:477,490-494`:
+
+        permuted_output = model(*_permuted_inputs(inputs[index], permutation))
+        permuted = permuted_output["command"][0]
+        mapped = tuple(len(permutation) if int(choice) == len(permutation) else permutation[int(choice)] for choice in permuted)
+        mismatch += int(tuple(int(choice) for choice in output["command"][index]) != mapped)
+
+    `output` is a forward over a batch of 8 worlds and `permuted_output` a forward
+    over a batch of 1, so the comparison varies the presentation *and* the batch
+    width.  It therefore refuses a law whose presentation dependence is exactly
+    zero, and it is less sensitive to real presentation failure than a
+    like-for-like comparison (measured 8/192 versus 15/192 under the R01 law).
+
+    After: both sides are batch-1 forwards of the same decision state at the same
+    batch position, so presentation is the only quantity that varies.  This is the
+    comparison the direction declares -- "Every later evaluation decision state
+    also receives one fresh relabel of that arm's own checkpoint with zero
+    physical-command mismatches required"
+    (`VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`:66-68).
+    It stays a launch condition and still requires exactly zero.
+
+    The batch-position residual (batch-8 versus batch-1 at the *same* presentation)
+    is computed from the identity forward and appended to `residual_sink`.  It is
+    descriptive and never gates: it is a property of the arithmetic, identical
+    under both laws, and is the channel the A0 freeze forbids relying on rather
+    than one any presentation law removes.
+
+    Installed from here; `scripts/run_vnfc_bpcr_b_explore.py` stays untouched
+    (DIRECTION.md:164-165, R01 source is read-only substrate).
+    """
+    if getattr(r01, "_r02_relabel_probe_installed", False):
+        return
+
+    from experiments.candidates.variable_n_fleet_churn_bpcr_r09.empirical_training import _model_inputs
+
+    def evaluate_learned_batch(config, rng, token, fixtures, model, arm, checkpoint, cell, world_rows, now):
+        if token.namespace != config.namespace or len(fixtures) != 8 or len(world_rows) != 8:
+            raise r01.BExploreContractError("held-out freeze token/evaluation native batch differs")
+        from experiments.candidates.variable_n_fleet_churn_b_explore import PairedPrimaryShadowBatch
+        batch = PairedPrimaryShadowBatch(fixtures)
+        mismatch = 0
+        raw_sensitivity = tuple(batch.sensitivity()) if cell.startswith("N7") else ()
+        sensitivity = tuple({"world": int(world_rows[index]), **row} for index, row in enumerate(raw_sensitivity))
+        rows = ()
+        residual_rows = []
+        policy_forwards = 0
+        diagnostic_forwards = 0
+        zero = copy.deepcopy(model) if arm == "DIRECT" else None
+        if zero is not None:
+            with torch.no_grad():
+                zero.p("residual.out.weight").zero_()
+                zero.p("residual.out.bias").zero_()
+        try:
+            observations = tuple(row["next_observation"] for row in batch.initial)
+            failed = tuple(row["failed_rank"] for row in batch.initial)
+            for epoch in range(6):
+                inputs = [_model_inputs(observation, fixture, failed_rank)
+                          for observation, fixture, failed_rank in zip(observations, fixtures, failed)]
+                stacked = tuple(torch.cat([row[index] for row in inputs], 0) for index in range(6))
+                with torch.no_grad():
+                    output = model(*stacked)
+                    policy_forwards += 1
+                    r01._validate_model_output(output, context=f"evaluation/{cell}/{checkpoint}/{arm}/policy/epoch{epoch}")
+                    if zero is not None:
+                        ablated = zero(*stacked, forced_commands=output["command"], _evaluation_support_valid_forcing=True)
+                        zero_free = zero(*stacked)
+                        diagnostic_forwards += 2
+                        r01._validate_model_output(ablated, context=f"evaluation/{cell}/{checkpoint}/{arm}/ablation/epoch{epoch}")
+                        r01._validate_model_output(zero_free, context=f"evaluation/{cell}/{checkpoint}/{arm}/zero-free/epoch{epoch}")
+                        tv = .5 * torch.abs(output["token_probabilities"] - ablated["token_probabilities"]).sum(2).max(1).values
+                        residual_rows.extend({
+                            "boundary": epoch, "world_row": world_rows[index],
+                            "total_variation": float(tv[index]),
+                            "physical_command_change": not torch.equal(output["command"][index], zero_free["command"][index]),
+                            "status": "OBSERVED_DIRECT_ABLATION",
+                        } for index in range(8))
+                commands = tuple(r01._physical_command(output["command"][index], fixture, int(failed[index]), epoch)
+                                 for index, fixture in enumerate(fixtures))
+                for index, fixture in enumerate(fixtures):
+                    permutation = r01._fresh_relabel_permutation(rng, config, arm, checkpoint, fixture, int(world_rows[index]), epoch, now)
+                    with torch.no_grad():
+                        identity_output = model(*inputs[index])
+                        diagnostic_forwards += 1
+                        r01._validate_model_output(identity_output, context=f"evaluation/{cell}/{checkpoint}/{arm}/identity/world{index}/epoch{epoch}")
+                        permuted_output = model(*r01._permuted_inputs(inputs[index], permutation))
+                        diagnostic_forwards += 1
+                        r01._validate_model_output(permuted_output, context=f"evaluation/{cell}/{checkpoint}/{arm}/relabel/world{index}/epoch{epoch}")
+                        identity = identity_output["command"][0]
+                        permuted = permuted_output["command"][0]
+                    mapped = tuple(len(permutation) if int(choice) == len(permutation) else permutation[int(choice)]
+                                   for choice in permuted)
+                    reference = tuple(int(choice) for choice in identity)
+                    # gating: presentation only, both sides batch 1, same batch position
+                    mismatch += int(reference != mapped)
+                    # descriptive: batch position only, same (identity) presentation
+                    batched = tuple(int(choice) for choice in output["command"][index])
+                    residual_sink.append({
+                        "cell": cell, "checkpoint": checkpoint, "arm": arm, "boundary": epoch,
+                        "world_row": int(world_rows[index]),
+                        "batch_position_command_differs": batched != reference,
+                    })
+                paired = batch.step(commands)
+                rows = paired["primary_rows"]
+                shadow_rows = paired["shadow_rows"]
+                observations = tuple(row["next_observation"] for row in rows)
+            receipt = r01.build_shadow_receipt(f"{config.namespace}/{cell}/{checkpoint}/{arm}", batch.receipt, shadow_rows)
+            validated_endpoint_rows = r01._validate_host_endpoint_rows(rows, context=f"evaluation/{cell}/{checkpoint}/{arm}")
+            expected_diagnostic = R02_DIAGNOSTIC_FORWARDS[arm]
+            if policy_forwards != 6 or diagnostic_forwards != expected_diagnostic:
+                raise r01.BExploreContractError("evaluation policy/diagnostic forward exposure differs")
+            return {
+                "arm": arm, "checkpoint": checkpoint, "cell": cell, "rollouts": 8,
+                "relabel_mismatch_count": mismatch,
+                "hard_valid": all(row["terminal"] and not row["safety_violation"] and not row["exclusivity_violation"] for row in rows),
+                "finite_values": validated_endpoint_rows == 8 and policy_forwards == 6 and diagnostic_forwards == expected_diagnostic,
+                "evaluation_policy_forward_calls": policy_forwards,
+                "diagnostic_forward_calls": diagnostic_forwards,
+                "action_sensitivity": sensitivity,
+                "action_sensitivity_status": "OBSERVED_TREATMENT_BLIND_N7" if cell.startswith("N7") else "NOT_APPLICABLE_TRAIN_SUPPORT_CELL",
+                "direct_residual_activity": tuple(residual_rows),
+                "direct_residual_activity_status": "OBSERVED_DIRECT_ABLATION" if arm == "DIRECT" else "NOT_APPLICABLE_MAPR",
+                "endpoints": tuple({key: row[key] for key in ("fail_endpoint", "total_endpoint", "intact_endpoint")} for row in rows),
+                "shadow_receipts": (receipt,),
+            }
+        finally:
+            batch.close()
+
+    original_cross = (
+        getattr(r01, "_r01_validate_runtime_payload_cross_consistency", None)
+        or r01._validate_runtime_payload_cross_consistency
+    )
+    r01._r01_validate_runtime_payload_cross_consistency = original_cross
+
+    def cross_consistency(config, terminal):
+        """Validate the R02 exposure budget here, then run every frozen check.
+
+        The R01 validator pins `diagnostic_forward_calls` to the frozen 48/60 of
+        the old probe, which the repaired probe cannot satisfy: it spends two
+        batch-1 forwards per decision instead of one.  The true budget (96/108) is
+        asserted here and is what the terminal publishes; the frozen accounting
+        constant is satisfied on a throwaway copy so that the validator's other
+        checks still run against the real terminal.  Recorded as a deviation.
+        """
+        evaluation = terminal.get("evaluation")
+        learned = evaluation.get("learned") if isinstance(evaluation, Mapping) else None
+        normalized = terminal
+        if isinstance(learned, Sequence) and not isinstance(learned, (str, bytes)):
+            for row in learned:
+                if not isinstance(row, Mapping):
+                    raise r01.BExploreContractError("learned evaluation row schema differs")
+                if R02_DIAGNOSTIC_FORWARDS.get(row.get("arm")) != row.get("diagnostic_forward_calls"):
+                    raise r01.BExploreContractError("R02 like-for-like relabel probe exposure differs")
+                if row.get("relabel_mismatch_count") != 0:
+                    raise r01.BExploreContractError("R02 like-for-like relabel probe presentation mismatch")
+            normalized_learned = tuple(
+                {**row, "diagnostic_forward_calls": FROZEN_DIAGNOSTIC_FORWARDS[row["arm"]]}
+                for row in learned
+            )
+            normalized = {**terminal, "evaluation": {**evaluation, "learned": normalized_learned}}
+        original_cross(config, normalized)
+
+    r01._evaluate_learned_batch = evaluate_learned_batch
+    r01._validate_runtime_payload_cross_consistency = cross_consistency
+    r01._r02_relabel_probe_installed = True
+    r01._r02_relabel_probe_law = RELABEL_PROBE_LAW
+
+
+def batch_residual_record(residual_sink):
+    """The batch-position residual, published descriptively and never gating."""
+    rows = tuple(residual_sink)
+    differing = tuple(row for row in rows if row["batch_position_command_differs"])
+    by_cell = {}
+    for row in differing:
+        by_cell[str(row["cell"])] = by_cell.get(str(row["cell"]), 0) + 1
+    return {
+        "schema": "VNFC_BPCR_R02_BATCH_POSITION_RESIDUAL_V1",
+        "gating": False,
+        "recorded_only_reason": (
+            "owner decision F.4(a) 2026-09-03: batch-position dependence is a property of the "
+            "arithmetic, identical under the R01 and R02 laws, and is not a presentation quantity"
+        ),
+        "probe_law": RELABEL_PROBE_LAW,
+        "comparison": "batch-8 policy forward versus batch-1 forward of the same decision state, same presentation",
+        "decisions": len(rows),
+        "differing_decisions": len(differing),
+        "differing_by_cell": dict(sorted(by_cell.items())),
+        "rows": rows,
+    }
+
+
 def install_resource_telemetry_downgrade(r01: types.ModuleType, sink: dict[str, object]) -> None:
     """Owner decision 7: missing resource telemetry downgrades, never annuls."""
     original = getattr(r01, "_r01_validate_telemetry_payload", None) or r01.validate_telemetry_payload
@@ -455,6 +665,7 @@ def install_r02(
     *,
     exposure_sink: list[dict[str, object]] | None = None,
     telemetry_sink: dict[str, object] | None = None,
+    residual_sink: list[dict[str, object]] | None = None,
 ) -> types.ModuleType:
     """Install the R02 law, identity and recast records on the R01 runner."""
     r01 = load_r01_runner()
@@ -470,6 +681,8 @@ def install_r02(
     ps_b0.DirectSetAR = canonical_direct
     install_canonical_ps_b0_trace(ps_b0, r01)
     install_serializable_freeze_material(r01)
+    if residual_sink is not None:
+        install_like_for_like_relabel_probe(r01, residual_sink)
 
     # R02 run identity: a fresh revision, namespace and seed family.  R02 may not
     # reuse an R01 checkpoint, optimizer state, namespace or RNG family
@@ -501,6 +714,11 @@ def r02_recast_record() -> dict[str, object]:
         "presentation_law": PRESENTATION_LAW,
         "conformance_object": CONFORMANCE_OBJECT,
         "conformance_rows": 52,
+        "relabel_probe_law": RELABEL_PROBE_LAW,
+        "relabel_probe_decision": (
+            "docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md F.4 decision 1, "
+            "owner 2026-09-03, option (a)"
+        ),
         "recast_intake": RECAST_INTAKE,
         "decisions": (
             "docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md A.4 decisions 4, 6, 7",
@@ -518,7 +736,7 @@ def r02_recast_record() -> dict[str, object]:
             "one exposure line: ||theta - theta0|| / ||theta0|| per arm per update",
             "equal MAPR/DIRECT interaction and optimizer exposure",
             "held-out N=7 leakage boundary and freeze token",
-            "per-decision fresh-relabel mismatch counts",
+            "per-decision fresh-relabel mismatch counts, like-for-like: presentation only, both sides batch 1",
             "BCRH comparator competence precheck",
             "create-once publication and section 6.2 quarantine",
         ),
@@ -571,6 +789,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(f"primary seed must be one of {PRIMARY_SEEDS}")
 
     exposure: list[dict[str, object]] = []
+    residual: list[dict[str, object]] = []
     telemetry_state: dict[str, object] = {"resources_unmeasured": False, "resources_unmeasured_reasons": ()}
     record_root = Path(args.record_root)
     record_root.mkdir(parents=True, exist_ok=True)
@@ -580,7 +799,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         binding = prepare_native_backends()
         native_record = native_identity_record(binding)
-        r01 = install_r02(exposure_sink=exposure, telemetry_sink=telemetry_state)
+        r01 = install_r02(exposure_sink=exposure, telemetry_sink=telemetry_state, residual_sink=residual)
         preflight, preflight_sha = _read_receipt(args.preflight_receipt)
         now = datetime.now(timezone.utc)
         config = r01.BExploreRunConfig(args.stage, args.seed, args.updates)
@@ -638,6 +857,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "resources_unmeasured": bool(telemetry_state["resources_unmeasured"]),
             "resources_unmeasured_reasons": tuple(telemetry_state["resources_unmeasured_reasons"]),
             "exposure_line": tuple(exposure),
+            "batch_position_residual": batch_residual_record(residual),
             "publication_root": result["publication_root"],
             "status": "COMPLETE",
         }
@@ -649,6 +869,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "wall_seconds": record["wall_seconds"],
             "resources_unmeasured": record["resources_unmeasured"],
             "exposure_rows": len(exposure),
+            "batch_position_residual_decisions": len(residual),
             "publication_root": result["publication_root"],
         }))
         return 0
@@ -664,6 +885,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "resources_unmeasured": bool(telemetry_state["resources_unmeasured"]),
             "resources_unmeasured_reasons": tuple(telemetry_state["resources_unmeasured_reasons"]),
             "exposure_line": tuple(exposure),
+            "batch_position_residual": batch_residual_record(residual),
             "status": "QUARANTINED_INCOMPLETE_ATTEMPT",
             "error_type": type(error).__name__,
             "error_message": str(error),
@@ -692,13 +914,17 @@ __all__ = [
     "PRIMARY_SEEDS",
     "PRESENTATION_LAW",
     "R02ContractError",
+    "R02_DIAGNOSTIC_FORWARDS",
+    "RELABEL_PROBE_LAW",
     "RESOURCE_MEASUREMENT_FAILURES",
     "RUN_REVISION",
     "build_canonical_model_classes",
+    "batch_residual_record",
     "byte_manifest_record",
     "canonical_permutation",
     "canonicalize_inputs",
     "install_exposure_line",
+    "install_like_for_like_relabel_probe",
     "install_r02",
     "install_serializable_freeze_material",
     "install_resource_telemetry_downgrade",

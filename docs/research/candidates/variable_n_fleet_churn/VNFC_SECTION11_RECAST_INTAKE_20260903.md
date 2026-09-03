@@ -329,6 +329,71 @@ neither executed nor abandoned: it becomes optional analysis with no polarity, a
 implementation stays in the working tree at `experiments/candidates/variable_n_fleet_churn_r02/`,
 uncommitted.
 
+## 7b. The relabel probe repaired (2026-09-03, owner decision F.4(a))
+
+The 2026-09-03 `B0-DEBUG` attempt 02 was quarantined on the per-decision fresh-relabel condition,
+which §3 of this intake keeps as a launch condition. The probe as implemented did not measure the
+declared quantity.
+
+**The old probe**, `scripts/run_vnfc_bpcr_b_explore.py:477,490-494`:
+
+> ```python
+> output = model(*stacked); policy_forwards += 1
+> ...
+>     permuted_output = model(*_permuted_inputs(inputs[index], permutation)); diagnostic_forwards += 1
+>     ...
+>     permuted = permuted_output["command"][0]
+> mapped = tuple(len(permutation) if int(choice) == len(permutation) else permutation[int(choice)] for choice in permuted)
+> mismatch += int(tuple(int(choice) for choice in output["command"][index]) != mapped)
+> ```
+
+`output` is a forward over a batch of 8 worlds; `permuted_output` is a forward over a batch of 1. The
+comparison therefore varies the presentation **and** the batch width together.
+
+**Decision provenance.** `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md`
+Part F.4 decision 1 (intake commit `d2c504104`, decision commit `ee84406cc`), owner 2026-09-03,
+option **(a)**, verbatim:
+
+> The probe is repaired to the declared like-for-like comparison, installed from the R02 runner (the
+> R01 runner stays read-only substrate) with a test that reproduces the diagnostic's 0/192 and
+> 15/192 on the two laws; the batch-position residual is a separate recorded quantity; a fresh DEBUG
+> and the three 64-update seeds follow at the repaired commit.
+
+**The repaired probe** (`VNFC-R02-RELABEL-LIKE-FOR-LIKE-V1`, installed from
+`scripts/run_vnfc_bpcr_r02.py`; `scripts/run_vnfc_bpcr_b_explore.py` is untouched, per
+`DIRECTION.md:164-165`): per evaluation decision, two batch-1 forwards of the same state — the
+identity presentation and the fresh relabel — compared after inverse mapping. Presentation is the
+only quantity that varies, at the same batch width and the same batch position. It stays a launch
+condition and still requires exactly zero, which is the direction's own declared condition:
+"Every later evaluation decision state also receives one fresh relabel of that arm's own checkpoint
+with zero physical-command mismatches required"
+(`VNFC_BPCR_BEXP_PRESENTATION_SAFE_RETURN_R01_INNOVATOR_INTAKE_20260901.md`:66-68).
+
+The **batch-position residual** — the batch-8 policy forward against the batch-1 identity forward,
+same presentation — is computed from the same identity forward at no extra cost and published as a
+separate descriptive field (`VNFC_BPCR_R02_BATCH_POSITION_RESIDUAL_V1`, `gating: false`) in the run
+record. It never gates: it is a property of the arithmetic, identical under both laws, and is the
+channel the A0 freeze forbids relying on (A0 freeze:909-910) rather than one any presentation law
+removes.
+
+**Exposure accounting.** The repaired probe spends two batch-1 forwards per decision instead of one,
+so `diagnostic_forward_calls` per learned evaluation row moves from the frozen 48 (MAPR) / 60
+(DIRECT) to 96 / 108. The published terminal carries the true budget; see the result document's
+deviation list for how the frozen accounting constant in
+`_validate_runtime_payload_cross_consistency` is handled.
+
+**Denominator correction.** The diagnostic's counts are over **96 world-decisions per law**
+(6 `(N, failed-zone)` cells × 8 worlds × 2 arms), not 192; 192 is the total across both laws. The
+"/192" written in `VNFC_BPCR_R02_RESULT_EVIDENCE_20260903.md` §9 on 2026-09-03 and carried into the
+compliance note's F.4 quotation mislabels that denominator. The counts themselves are unchanged and
+are reproduced exactly by
+`tests/experiments/candidates/variable_n_fleet_churn_b_explore/test_r02_relabel_probe.py`:
+
+| Law | batch-position residual | presentation (like-for-like) | old conflated probe |
+| --- | ---: | ---: | ---: |
+| R01, no canonical sort | 12 / 96 | **15 / 96** | 8 / 96 |
+| R02, canonical opaque-rank sort | 12 / 96 | **0 / 96** | 12 / 96 |
+
 ## 8. Result
 
 The recast object was launched the same day and produced **no B result**. Two `B0-DEBUG` attempts of
