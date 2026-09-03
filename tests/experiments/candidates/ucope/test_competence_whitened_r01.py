@@ -347,3 +347,25 @@ def test_the_output_root_is_create_once(tmp_path):
     (tmp_path / "taken").mkdir()
     with pytest.raises(RUNNER.LaunchRefusal, match="create-once"):
         RUNNER.run_object(tmp_path / "taken")
+
+
+def test_the_interop_thread_knob_fails_soft_and_is_only_recorded(monkeypatch):
+    """Topology is recorded-not-gating (spec 11.4), so a refused knob must not stop a run."""
+    import torch as _torch_module
+
+    def refuse(_value):
+        raise RuntimeError(
+            "Error: cannot set number of interop threads after parallel work has started")
+
+    monkeypatch.setattr(_torch_module, "set_num_interop_threads", refuse)
+    RUNNER._configure_topology(2)          # must not raise
+    record = RUNNER.topology_record(2)
+    assert record["gating"] is False
+    assert record["torch_interop_threads_observed"] == _torch_module.get_num_interop_threads()
+    assert "cannot set number of interop threads" in record["torch_interop_threads_set_error"]
+
+    # With the real torch restored the call still must not raise; in a shared pytest process the
+    # genuine knob refuses too, and that refusal is recorded rather than asserted.
+    monkeypatch.undo()
+    RUNNER._configure_topology(2)
+    assert RUNNER.topology_record(2)["torch_intraop_threads"] == 2

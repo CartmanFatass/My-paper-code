@@ -198,12 +198,28 @@ def source_status_record() -> dict[str, Any]:
     return record
 
 
+INTEROP_THREAD_SET_ERROR: str | None = None
+
+
 def _configure_topology(thread_cap: int) -> None:
+    """Configure the recorded-not-gating execution topology.
+
+    ``torch.set_num_interop_threads`` can only be called before any parallel work has started in
+    the process, so in a shared process (a whole-suite pytest run, for instance) it raises. The
+    topology is recorded and never gating under spec 11.4, so this fails soft: the attempt is
+    made, the failure is captured, and ``topology_record`` reports the value actually observed.
+    Nothing here asserts a thread count.
+    """
+    global INTEROP_THREAD_SET_ERROR
     torch = _torch()
     if type(thread_cap) is not int or not 1 <= thread_cap <= 16:
         raise LaunchRefusal("thread cap must be an integer between 1 and 16")
     torch.set_num_threads(thread_cap)
-    torch.set_num_interop_threads(1)
+    INTEROP_THREAD_SET_ERROR = None
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError as exc:
+        INTEROP_THREAD_SET_ERROR = f"{type(exc).__name__}: {exc}"
     torch.use_deterministic_algorithms(True)
 
 
@@ -217,6 +233,8 @@ def topology_record(thread_cap: int) -> dict[str, Any]:
         "torch_cuda_available": bool(torch.cuda.is_available()),
         "torch_intraop_threads": torch.get_num_threads(),
         "torch_interop_threads": torch.get_num_interop_threads(),
+        "torch_interop_threads_observed": torch.get_num_interop_threads(),
+        "torch_interop_threads_set_error": INTEROP_THREAD_SET_ERROR,
         "thread_cap_requested": thread_cap,
         "deterministic_algorithms": True,
         "process_count": 1,
