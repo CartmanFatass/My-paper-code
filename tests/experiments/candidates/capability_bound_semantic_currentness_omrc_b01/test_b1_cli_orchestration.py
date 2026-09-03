@@ -991,3 +991,84 @@ def test_policy_replay_supervisor_cap_kills_and_preserves_incident(tmp_path) -> 
             stdout_path=tmp_path / "stdout2.log", stderr_path=tmp_path / "stderr2.log",
             test_only=True,
         )
+
+
+def test_attempt_path_budget_is_measured_and_refused_before_anything_exists(
+    monkeypatch, tmp_path
+) -> None:
+    """The 2026-09-03 incident b1-bca815500920492da688f83a2595e34e.
+
+    Its first bound admission wrote a 279-character path and Windows refused it
+    with `WinError 3`, whose message names a path rather than the length.  The
+    orchestrator now measures the budget before it creates anything.
+    """
+
+    base = Path("C:/Projects/HMASD/temp/directions/capability_bound_semantic_currentness/exp")
+    long_name = "cbsc_omrc_b1_three_seed_scout_036fe4eff_r01"
+    over = b1.projected_attempt_paths(base / long_name)
+    assert over["fits"] is False
+    assert over["longest_projected_length"] > b1.WINDOWS_MAX_PATH
+    # The longest path is a bound admission's raw sibling, under `admissions/`.
+    assert over["longest_projected_path"].endswith(".json")
+    assert (chr(92) + "admissions" + chr(92)) in over["longest_projected_path"]
+    assert len(long_name) > over["maximum_run_root_name_length"]
+
+    under = b1.projected_attempt_paths(base / "b1_r02")
+    assert under["fits"] is True
+    assert under["longest_projected_length"] < b1.WINDOWS_MAX_PATH
+    b1.require_attempt_path_budget(base / "b1_r02")
+
+    with pytest.raises(b1.B1OrchestrationError, match="BLOCKED_PATH_BUDGET"):
+        b1.require_attempt_path_budget(base / long_name)
+
+    # It refuses after the source and B0 bindings and before any staging
+    # directory, admission receipt or child process exists.  The destination is
+    # under `tmp_path` so the assertion does not depend on ambient state.
+    monkeypatch.setattr(b1, "CONFINED_ROOT", tmp_path.resolve())
+    monkeypatch.setattr(
+        b1, "verify_source_conformance",
+        lambda commit: {"source_conformance_sha256": "b" * 64},
+    )
+    monkeypatch.setattr(b1, "locate_b0_evidence", lambda root: {})
+    executed: list[object] = []
+    monkeypatch.setattr(
+        b1, "_execute_fresh_attempt", lambda **kwargs: executed.append(kwargs)
+    )
+    overflowing = "z" * (
+        b1.projected_attempt_paths(tmp_path / "z")["maximum_run_root_name_length"] + 1
+    )
+    destination = tmp_path / overflowing
+    assert b1.projected_attempt_paths(destination)["fits"] is False
+    with pytest.raises(b1.B1OrchestrationError, match="BLOCKED_PATH_BUDGET"):
+        b1.run_b1_start(
+            final_path=destination, implementation_commit="a" * 40,
+            b0_root=tmp_path,
+        )
+    assert executed == []
+    assert not destination.exists()
+    assert not list(tmp_path.glob(f".{overflowing}.partial-*"))
+
+
+def test_fresh_attempt_creates_the_admissions_directory_with_the_transaction(
+    monkeypatch, tmp_path
+) -> None:
+    monkeypatch.setattr(b1, "CONFINED_ROOT", tmp_path.resolve())
+    seen: dict[str, Path] = {}
+
+    def _capture(**kwargs):
+        raise RuntimeError("stop after staging")
+
+    monkeypatch.setattr(b1, "_execute_slot", _capture)
+    monkeypatch.setattr(b1, "_law_digests", lambda receipt: {})
+    monkeypatch.setattr(b1, "_publish_attempt_incident", lambda **kwargs: seen.setdefault(
+        "staging", Path(kwargs["staging"])
+    ))
+    with pytest.raises(RuntimeError, match="stop after staging"):
+        b1._execute_fresh_attempt(
+            final_path=tmp_path / "b1_r99",
+            implementation_commit="a" * 40,
+            source_receipt={"source_conformance_sha256": "b" * 64},
+            b0_evidence={"root": str(tmp_path)},
+        )
+    staging = seen["staging"]
+    assert (staging / "admissions").is_dir()

@@ -1861,6 +1861,7 @@ def _execute_fresh_attempt(
 ) -> Path:
     attempt_id = f"b1-{uuid.uuid4().hex}"
     staging = create_b1_staging_directory(final_path, allowed_root=CONFINED_ROOT)
+    (staging / "admissions").mkdir(parents=True, exist_ok=True)
     laws = _law_digests(source_receipt)
     raw_slices: list[dict[str, Any]] = []
     admissions: list[dict[str, Any]] = []
@@ -1923,6 +1924,7 @@ def _execute_resume_attempt(
     ledger = validated_incident["ledger"]
     attempt_id = ledger.binding.attempt_id
     staging = create_b1_staging_directory(final_path, allowed_root=CONFINED_ROOT)
+    (staging / "admissions").mkdir(parents=True, exist_ok=True)
     laws = _law_digests(source_receipt)
     raw_slices: list[dict[str, Any]] = []
     admissions: list[dict[str, Any]] = []
@@ -1990,6 +1992,75 @@ def _execute_resume_attempt(
             )
         raise
 
+WINDOWS_MAX_PATH = 260
+#: Bytes reserved under `scratch/<slot>/<invocation>/` for engine-written files,
+#: whose names the orchestrator does not fix.
+SCRATCH_NAME_RESERVE = 48
+
+
+def projected_attempt_paths(final_path: Path) -> dict[str, Any]:
+    """Measure the longest absolute path this attempt will write.
+
+    Windows refuses a path over ``MAX_PATH`` (260) with ``WinError 3``, and the
+    first thing an attempt writes is the bound admission receipt's raw sibling,
+    the longest path in the transaction.  The 2026-09-03 attempt
+    ``b1-bca815500920492da688f83a2595e34e`` died there at 279 characters with a
+    message that names a missing path, so this measures the budget up front and
+    refuses with the arithmetic instead.  Nothing scientific depends on the run
+    root's name.
+    """
+
+    final = Path(final_path).resolve(strict=False)
+    staging = final.parent / f".{final.name}.partial-{'0' * 32}"
+    longest = str(staging)
+    for index, (seed, arm) in enumerate(ARM_SEED_ORDER):
+        tag = _slot_tag(index, seed, arm)
+        for start, stop in ((0, 12), (12, 24), (24, 48), (0, 48)):
+            invocation = f"slice-{start:02d}-{stop:02d}"
+            receipt = staging / "admissions" / f"{tag}-{invocation}-admission.json"
+            worker_root = staging / "workers" / tag / invocation
+            candidates = (
+                receipt,
+                receipt.with_name(f".{receipt.name}.raw-{'0' * 32}.json"),
+                worker_root / "supervisor-incident.json",
+                staging / "arm-seeds" / tag / f"checkpoint-update-{stop}.pt",
+                Path(
+                    str(staging / "scratch" / tag / invocation)
+                    + "\\" + "x" * SCRATCH_NAME_RESERVE
+                ),
+            )
+            for candidate in candidates:
+                text = str(candidate)
+                if len(text) > len(longest):
+                    longest = text
+    overhead = len(longest) - len(final.name)
+    return {
+        "final_path": str(final),
+        "longest_projected_path": longest,
+        "longest_projected_length": len(longest),
+        "limit": WINDOWS_MAX_PATH,
+        "run_root_name": final.name,
+        "maximum_run_root_name_length": WINDOWS_MAX_PATH - 1 - overhead,
+        "fits": len(longest) < WINDOWS_MAX_PATH,
+    }
+
+
+def require_attempt_path_budget(final_path: Path) -> dict[str, Any]:
+    """Refuse before creating anything when the attempt cannot fit MAX_PATH."""
+
+    budget = projected_attempt_paths(final_path)
+    if not budget["fits"]:
+        raise B1OrchestrationError(
+            "BLOCKED_PATH_BUDGET: the longest path this attempt writes is "
+            f"{budget['longest_projected_length']} characters against the "
+            f"{WINDOWS_MAX_PATH}-character limit; the run root name "
+            f"{budget['run_root_name']!r} may be at most "
+            f"{budget['maximum_run_root_name_length']} characters at this "
+            "output directory"
+        )
+    return budget
+
+
 def _refuse_pending_analysis() -> None:
     readiness = _readiness_result()
     if not readiness.authorized:
@@ -2003,6 +2074,7 @@ def run_b1_start(*, final_path: Path, implementation_commit: str, b0_root: Path)
 
     source = verify_source_conformance(implementation_commit)
     b0_evidence = locate_b0_evidence(b0_root)
+    require_attempt_path_budget(final_path)
     ensure_confined(Path(final_path), CONFINED_ROOT)
     if Path(final_path).exists():
         raise FileExistsError(f"create-only B1 final root already exists: {final_path}")
@@ -2021,6 +2093,7 @@ def run_b1_resume(
 
     source = verify_source_conformance(implementation_commit)
     b0_evidence = locate_b0_evidence(b0_root)
+    require_attempt_path_budget(final_path)
     ensure_confined(Path(final_path), CONFINED_ROOT)
     if Path(final_path).exists():
         raise FileExistsError(f"create-only B1 resume final root already exists: {final_path}")
@@ -2044,7 +2117,8 @@ __all__ = [
     "ARM_SEED_ORDER", "B1OrchestrationError", "CANONICAL_ENGINE_FACTORY",
     "CANONICAL_ENGINE_MODULE", "CANONICAL_ENGINE_TYPE", "CANONICAL_SOURCE_SURFACE",
     "CANONICAL_WORKER_MODULE", "CONFINED_ROOT", "DECISION", "FORMAL_ANALYSIS_BOUND",
-    "canonical_engine_identity", "locate_b0_evidence", "readiness_document",
+    "canonical_engine_identity", "locate_b0_evidence", "projected_attempt_paths",
+    "readiness_document", "require_attempt_path_budget",
     "run_assess_preflight", "run_b1_resume", "run_b1_start", "supervise_child",
     "validate_resume_incident", "verify_source_conformance",
 ]
