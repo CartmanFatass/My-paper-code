@@ -1,12 +1,13 @@
 # CBSC-OMRC-B01 CM implementation contract
 
-Status: `PRO_BOUND / IMPLEMENTATION_READY`
+Status: `PRO_BOUND / IMPLEMENTATION_READY_WITH_NULL_DERIVED_FIELDS`
 
 This is the meaning boundary for implementing the Innovator-selected
-`CBSC-OMRC-B01` B/EXPLORE object on `CBSC-DYNAMIC-CACHE-2R-1C-v1`. It is not an
-experiment authorization or result. `DIRECTION.md` owns the accepted mechanism and claim ceiling;
-the two complete Pro responses select and literally bind it, and
-`CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md` is the implementation-unique authority. CM owns
+`CBSC-OMRC-B01` B/EXPLORE object on `CBSC-DYNAMIC-CACHE-2R-1C-v1`. It is not an experiment
+authorization or result. `DIRECTION.md` owns the accepted mechanism and claim ceiling; `.01` selects
+the object, `.02` binds literal implementation identity, and `.03` binds lossless raw publication
+while reserving derived interpretation for Convergence. `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md` and
+`CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md` are the implementation authorities. CM owns
 implementation and direct runtime observation.
 
 ## Objective and evidence class
@@ -76,12 +77,13 @@ independently testable and auditable:
 4. **Recurrent PPO trainer.** Preserve complete episode sequences for GAE and BPTT, common sampled
    action uniforms, full checkpointable RNG/optimizer/trainer state, exact exposure counters, and
    adaptation-free evaluation at updates `0,12,24,48`.
-5. **Evaluator.** Recompute ledger return, unique oracle action, regret, RAW competence, all primary
-   endpoints and action diagnostics from held-out truth. It must report individual seeds and paired
-   episode differences without checkpoint or seed selection.
+5. **Evaluator.** Recompute exact potential ledger, unique oracle action/value, every truth component,
+   and the mechanical RAW-competence components. Publish all raw held-out decisions, per-tape returns,
+   motifs/twins, supports, and individual curves without AUC, diagnostic rates/effects, arm contrasts,
+   thresholds, checkpoint/seed selection, B2 trigger, branch, or polarity.
 6. **Artifact and telemetry.** Publish complete-only, create-only manifests with code/config digests,
    literal host/adapter laws, seeds, train/evaluation tape identities, counts, full curves,
-   checkpoints or checkpoint digests, diagnostics, validity audits, process-tree peak RSS,
+   checkpoints or checkpoint digests, raw diagnostic ingredients, validity audits, process-tree peak RSS,
    wall/CPU time, worker/thread occupancy, scratch and durable-output high-water, and failure facts.
 
 ## Existing `online/` substrate boundary
@@ -105,8 +107,8 @@ fixtures and must not be renamed, wrapped, or reported as recurrent PPO or as `C
   train transitions, 9,216 decisions, 48 eight-episode rollouts, four PPO epochs with four
   two-episode minibatches per rollout, 768 Adam steps, and four checkpoints. Each checkpoint has 64
   held-out episodes and 38,912 evaluation transitions.
-- `B2-TWO-SEED-STABILITY` uses only `21161,21179`, unchanged, and only for a preliminary-positive or
-  unstable valid B1. It cannot replace an earlier seed.
+- `B2-TWO-SEED-STABILITY` uses only `21161,21179`, unchanged, and only after the mandatory interim
+  Convergence decision returns `RUN_FIXED_B2_STABILITY`. It cannot replace an earlier seed.
 - B0+B1+B2 is capped at two million primitive transitions. There is no sixth seed, selected
   checkpoint, silent budget increase, or adapter/host/reward redesign inside B01.
 
@@ -116,19 +118,20 @@ physical and effective available memory. Per invocation, peak RSS is capped at 4
 2 GiB; B0 wall time is capped at 30 minutes and B1/B2 at 120 minutes. The complete create-only
 durable-output cap is 512 MiB. A pass does not override implementation conformance.
 
-## Primary evidence and result branches
+## Raw evidence and interpretation boundary
 
-Primary outputs are undiscounted held-out return, normalized return AUC over updates
-`{0,12,24,48}`, update-48 return, oracle regret, each seed curve, and paired held-out differences.
-Required diagnostics are oracle action accuracy; invalid/missed SERVE; unnecessary/missed REFRESH;
-inactive fallback; OWNER-only and semantic-only twin flips; correct-versus-swapped sensitivity;
-GATED-minus-OPEN capability specificity; retention gap; event order; and all support counts.
+The result reporter implements `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`: canonical raw tape,
+truth, policy, curve, motif/twin, support, training, optimizer, resource, and audit records. It must
+set every derived AUC/mean/regret, diagnostic, separation/concentration/instability, adverse-seed,
+promotion, B2-trigger, branch, and polarity field to literal null. It may compute only mechanical
+readability/conformance and the exact nonpolar per-seed RAW-competence Boolean.
 
-The result reporter must implement the exact branch meanings in `DIRECTION.md` without inventing a
-C-level threshold. RAW competence is an interpretation precondition. Engineering/instrumentation
-failure, leakage, support failure, unequal exposure, evaluator overlap, recurrent-reset defect, or
-RAW incompetence yields `INVALID_OR_NONIDENTIFYING`, not mechanism polarity. A repaired B attempt is
-allowed only as a named, preserved repair under the unchanged scientific object.
+Implementation/instrumentation failure, leakage, support failure, unequal exposure, evaluator
+overlap, recurrent-reset defect, or RAW incompetence is a blocking mechanical fact, not an
+implementation-assigned `INVALID_OR_NONIDENTIFYING` branch and not mechanism polarity. Preserve the
+incident. An outcome-blind repair may produce a new create-only attempt under the unchanged object.
+After three valid B1 seeds, set `convergence_required=true`; B2 is forbidden until the persistent
+Convergence node authorizes it.
 
 ## Literal binding and implementation boundary
 
@@ -138,7 +141,13 @@ counter-addressed randomness and common action uniforms, parameter initializatio
 full-episode PPO/minibatch order, the 32 motif tapes, B0, checkpoints, artifact transaction, and
 resource caps. It reports `REMAINING_MATERIAL_AMBIGUITY=NONE` and `IMPLEMENTATION_READY=YES`.
 
-CM must implement `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md` exactly. Only module/class organization,
+The complete `.03` clarification resolves the later classifier and aggregation tension with
+`METRICS_ONLY_CONVERGENCE_CLASSIFIES`. It does not modify `.02`; it requires lossless raw records,
+literal-null derived fields, exact mechanical conformance/RAW competence, absolute B0 nonpolarity,
+and mandatory interim/final Convergence decisions. It reports no remaining implementation or raw-
+publication ambiguity and intentionally leaves scientific reductions to Convergence.
+
+CM must implement both bound specifications exactly. Only module/class organization,
 scalar versus vectorized execution, same-seed device choice under FP32 parity, worker scheduling,
 logging, compression/container format, filenames below the run root, progress/plotting, and
 episode-local cache layout remain delegated prospective engineering choices. They must be fixed
@@ -147,7 +156,7 @@ before an attempt, symmetric across arms, recorded, and meaning-preserving.
 Implementation readiness does not authorize result execution. Before B1, CM must first establish
 literal-law conformance, full recurrent-PPO rather than Q/replay realization, B0 completeness,
 resource admission/telemetry, create-only publication, and every parity audit. B0 itself has no
-scientific branch.
+scientific branch, classifier eligibility, threshold-tuning eligibility, or B2-trigger eligibility.
 
 ## Evidence and non-goals
 
@@ -155,8 +164,10 @@ scientific branch.
 - `CBSC_EXACT_FACTORIAL_RESULT_INTAKE_20260830.md`
 - `CBSC_LR01_RESULT_INTAKE_20260831.md`
 - `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md`
+- `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`
 - `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-01/RESPONSE.md`
 - `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-02/RESPONSE.md`
+- `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-03/RESPONSE.md`
 
 Technical success cannot establish stable superiority, representation necessity, general MARL,
 natural prevalence, paid acquisition, authentication/security, receiver credit, variable population

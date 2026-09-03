@@ -21,6 +21,7 @@ from .model import (
     CommonRecurrentActorCritic,
     ModelValidationError,
     _default_u64,
+    model_parameter_digest,
 )
 
 
@@ -192,6 +193,10 @@ class PPOLossRecord:
     entropy: float
     total_loss: float
     gradient_norm: float
+    rollout_update: int = -1
+    postclip_gradient_norm: float = float("nan")
+    optimizer_step_count: int = 0
+    parameter_sha256_after_step: str = ""
 
 
 def compute_gae(rollout: EpisodeRollout, config: PPOConfig | None = None) -> AdvantageBatch:
@@ -436,16 +441,47 @@ class RecurrentPPOTrainer:
             + self.config.value_coefficient * value_loss
             - self.config.entropy_coefficient * entropy
         )
-        if not torch.isfinite(total_loss).item():
-            raise PPOValidationError("nonfinite PPO loss")
+        for name, scalar in (
+            ("actor loss", actor_loss),
+            ("value loss", value_loss),
+            ("entropy", entropy),
+            ("total loss", total_loss),
+        ):
+            if scalar.dtype != torch.float32 or not torch.isfinite(scalar).item():
+                raise PPOValidationError(f"{name} must be a finite FP32 scalar")
         self.optimizer.zero_grad(set_to_none=True)
         total_loss.backward()
         gradient_norm = nn.utils.clip_grad_norm_(
             self.model.parameters(), self.config.gradient_norm_cap
         )
-        if not torch.isfinite(gradient_norm).item():
-            raise PPOValidationError("nonfinite global gradient norm")
+        if gradient_norm.dtype != torch.float32 or not torch.isfinite(gradient_norm).item():
+            raise PPOValidationError("preclip global gradient norm must be finite FP32")
+        gradients = [
+            parameter.grad.detach()
+            for parameter in self.model.parameters()
+            if parameter.grad is not None
+        ]
+        if not gradients or any(
+            gradient.dtype != torch.float32 or not torch.isfinite(gradient).all().item()
+            for gradient in gradients
+        ):
+            raise PPOValidationError("postclip gradients must be finite FP32 tensors")
+        postclip_gradient_norm = torch.linalg.vector_norm(
+            torch.stack([torch.linalg.vector_norm(gradient) for gradient in gradients])
+        )
+        if (
+            postclip_gradient_norm.dtype != torch.float32
+            or not torch.isfinite(postclip_gradient_norm).item()
+        ):
+            raise PPOValidationError("postclip global gradient norm is not finite FP32")
         self.optimizer.step()
+        expected_optimizer_step = self.counters.adam_steps + 1
+        optimizer_step_counts = {
+            int(self.optimizer.state[parameter]["step"].item())
+            for parameter in self.model.parameters()
+        }
+        if optimizer_step_counts != {expected_optimizer_step}:
+            raise PPOValidationError("Adam state step count differs across parameters")
         ids = tuple(int(rollout.episode_ids[index].item()) for index in selected)
         return PPOLossRecord(
             epoch,
@@ -456,6 +492,10 @@ class RecurrentPPOTrainer:
             float(entropy.detach().item()),
             float(total_loss.detach().item()),
             float(gradient_norm.detach().item()),
+            self.counters.rollout_updates,
+            float(postclip_gradient_norm.detach().item()),
+            expected_optimizer_step,
+            model_parameter_digest(self.model),
         )
 
 

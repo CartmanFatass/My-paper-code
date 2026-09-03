@@ -3,7 +3,8 @@
 This direction's registered exact factorial and distinct finite-resource learned successor are
 complete. Portfolio has reactivated the direction, and the persistent Innovator has selected an
 online multi-opportunity B/EXPLORE successor. Its host, mechanism, recurrent-PPO comparison,
-budgets, endpoints, claim ceiling, and literal implementation identity are now bound. The direction
+  budgets, endpoints, claim ceiling, literal implementation identity, and raw-evidence boundary are
+  now bound. The direction
 was distilled from DEARS, FSBS, and EOCIV-lite; current lifecycle, priority, and owner remain solely
 in `docs/research/portfolio/PORTFOLIO.md`.
 
@@ -16,7 +17,7 @@ in `docs/research/portfolio/PORTFOLIO.md`.
 - Learned-object status: `COMPLETE_VALID_UNRESOLVED`.
 - Selected online object: `CBSC-OMRC-B01`.
 - Selected host: `CBSC-DYNAMIC-CACHE-2R-1C-v1`.
-- Online-object status: `PRO_INNOVATOR_BOUND_IMPLEMENTATION_READY`.
+- Online-object status: `PRO_INNOVATOR_BOUND_IMPLEMENTATION_READY_WITH_NULL_DERIVED_FIELDS`.
 - Innovator request: `cbsc-online-b-innovator-20260901-01`.
 - Persistent Innovator conversation: `6a96a6c0-e918-83e8-a0c0-9dc9222dce1c`.
 - Archived response SHA-256:
@@ -26,6 +27,12 @@ in `docs/research/portfolio/PORTFOLIO.md`.
 - Literal clarification response SHA-256:
   `e96df981f7cdb40a6206f2fddcc989a05783491a1fa422e7b0ca673344a05844`.
 - Literal binding specification: `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md`.
+- Classifier-responsibility request: `cbsc-online-b-innovator-20260901-03`.
+- Classifier-responsibility outcome: `METRICS_ONLY_CONVERGENCE_CLASSIFIES`.
+- Classifier-responsibility response SHA-256:
+  `7a3bd74e12508e22ea577a1563737eda119c10560e094b25279503648d1105f7`.
+- Raw-evidence and Convergence specification:
+  `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`.
 - Accepted result intake:
   `CBSC_EXACT_FACTORIAL_RESULT_INTAKE_20260830.md`.
 - Complete artifact:
@@ -229,9 +236,12 @@ authorization label is sampled.
 The public token is 16 bytes plus one flag byte, unpacked to 136 binary channels. A deterministic
 four-byte adapter adds 32 binary channels. The same persistent Innovator conversation has now bound
 the byte codes/masks, family NOOPs, eight-token initialization, RAW FIFO, STRUCT/PI/DERANGED timing,
-counter-addressed PRF, action sampling, recurrent-PPO initialization/order, fixed motif panel, B0,
-artifacts, publication, and resources. `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md` is the implementation-
-unique authority. No comparator-identity or support-law ambiguity remains.
+  counter-addressed PRF, action sampling, recurrent-PPO initialization/order, fixed motif panel, B0,
+  artifacts, publication, and resources. `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md` is the literal
+  implementation authority. A third decision fixes lossless raw publication and delegates every
+  AUC, diagnostic aggregation, threshold, branch, B2 trigger, and polarity decision to the persistent
+  Convergence node; `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md` is authoritative for that
+  boundary. No comparator-identity or raw-support ambiguity remains.
 
 ### Selected learner and parity
 
@@ -266,37 +276,41 @@ learner/trainer cannot instantiate or be reported as `CBSC-OMRC-B01`.
   PPO epochs and four two-episode minibatches per update, and 768 Adam steps. Checkpoints are
   updates `0,12,24,48`; each gets 64 held-out evaluation episodes, 38,912 transitions, and 6,144
   opportunities, split between fresh stochastic and fixed matched-motif tapes.
-- `CBSC-OMRC-B2-TWO-SEED-STABILITY` may add unchanged seeds `21161, 21179` only after a valid
-  preliminary signal or material three-seed instability. No seed may be replaced. B0+B1+B2 is
+- `CBSC-OMRC-B2-TWO-SEED-STABILITY` may add unchanged seeds `21161, 21179` only after the mandatory
+  interim `em:capability_bound_semantic_currentness:convergence` decision returns
+  `RUN_FIXED_B2_STABILITY`. No seed may be replaced. B0+B1+B2 is
   capped at two million primitive transitions; B1+B2 has at most 15,360 Adam steps and 20 complete
   arm-by-seed curves.
 
-Primary evidence is undiscounted episode return, normalized trapezoidal return AUC at updates
-`0,12,24,48`, terminal return, oracle regret, every seed curve, and paired held-out episode
-differences. Required diagnostics include invalid/missed service, unnecessary/missed refresh,
-inactive fallback accuracy, matched OWNER/epoch/content twin responses, retention-gap and
-event-order strata, and `GATED-minus-OPEN` capability specificity with support counts.
+Engineering publishes exact undiscounted per-tape episode returns at updates `0,12,24,48`, every
+paired raw seed curve, complete evaluator truth and potential ledger, policy decisions, motif/twin
+identities, event order, body age, training/optimizer exposure, support indexes, and all conformance
+facts. It does not compute AUC, terminal or panel means, oracle-regret summaries, diagnostic rates or
+effects, arm contrasts, thresholds, signs, or branches. Those fields remain literal null until a
+separate Convergence decision. The lossless schema and canonical order are fixed in
+`CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`.
 
-A structured-positive reading is blocked unless every RAW seed beats `ALWAYS_REFRESH` and
-`ALWAYS_SAFE`, serves at least 80% of immediately current/correct/active/OPEN cases, and avoids
-collapse, constant action, missing support, and invalid masking.
+The exact mechanical RAW-competence gate is nonpolar. At update 48 on stochastic tapes `0..31`, each
+RAW seed must strictly beat same-tape `ALWAYS_REFRESH` and `ALWAYS_SAFE`, serve at least 80% inclusive
+of the literally eligible current/correct/active/OPEN cases, contain oracle support for every
+scientific action, select at least two actions, and have zero masking, nonfinite, missing, or duplicate
+records. False or null competence blocks both STRUCT interpretation and B2; it is not negative
+mechanism evidence.
 
 ### Branches, stopping, and claim ceiling
 
-The branches are `PRELIMINARY_SEMANTIC_CURRENTNESS_SIGNAL`,
+The branch vocabulary is `PRELIMINARY_SEMANTIC_CURRENTNESS_SIGNAL`,
 `GENERIC_FACTORIZATION_OR_CONDITIONING`, `PREDICTIVE_INDEX_SUFFICIENT_ON_HOST`,
 `NULL_AT_THIS_BUDGET`, `INSTABILITY`, `ADVERSE_COUNTEREXAMPLE`, and
-`INVALID_OR_NONIDENTIFYING`. The first requires competent RAW, positive STRUCT-minus-RAW AUC and
-terminal return in all three initial seeds, separation from DERANGED and PI on currentness motifs,
-predicted service/refresh corrections, and a residual concentrated in GATED rather than OPEN. It
-licenses only the fixed two-seed stability extension, not superiority.
-
-Stop after three seeds for a clear competent null, control explanation, predictive-index
-sufficiency result, or adverse counterexample; otherwise stop after the two fixed stability seeds.
-No sixth seed, selected checkpoint, larger budget, or altered adapter belongs to B01. A later
-C-BENCH design is worth considering only after four-of-five same-direction AUC/terminal signs, no
-catastrophic seed, RAW competence in every seed, separation from DERANGED and PI, predicted
-OWNER/epoch corrections, and a GATED-concentrated capability residual.
+`INVALID_OR_NONIDENTIFYING`. These names are non-executable B interpretations: engineering has no
+threshold, priority, tie, branch, promotion, or B2-trigger authority. After three complete valid B1
+seeds, it publishes literal-null derived fields and a complete packet. The persistent Convergence
+node then returns exactly `RUN_FIXED_B2_STABILITY`, `STOP_AFTER_B1`, or
+`NO_B2_INTERPRETATION_BLOCKED`. If it authorizes B2, it must prospectively record for those two seeds
+the B1-informed formulas it will use, labeled `outcome_informed_from_B1=true` and
+`confirmatory=false`; a second Convergence call interprets B1+B2. No sixth seed, selected checkpoint,
+larger budget, or altered adapter belongs to B01. Any later C-BENCH requires a separately prospective
+object rather than promotion by an engineering predicate.
 
 The maximum claim is one preliminary recurrent-PPO learning signal, null, instability diagnosis,
 generic-control explanation, predictive-index-sufficiency observation, or adverse counterexample on
@@ -315,7 +329,13 @@ direction convergence, or reinterpretation of the exact factorial or LR01.
   `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-02/RESPONSE.md`
 - Literal clarification Transport facts:
   `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-02/TRANSPORT_FACTS.json`
+- Complete classifier-responsibility clarification:
+  `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-03/RESPONSE.md`
+- Classifier-responsibility Transport facts:
+  `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-03/TRANSPORT_FACTS.json`
 - Literal binding authority:
   `CBSC_OMRC_B01_LITERAL_BINDING_SPEC.md`
+- Raw-publication and Convergence authority:
+  `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`
 - Direction-owned intake:
   `CBSC_OMRC_B01_INNOVATOR_INTAKE_20260901.md`

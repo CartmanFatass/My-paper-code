@@ -1,16 +1,19 @@
 # CBSC-OMRC-B01 literal binding specification
 
-Status: `PRO_BOUND / IMPLEMENTATION_READY`
+Status: `PRO_BOUND / LITERAL_LAWS_READY`
 
 This specification binds the serialization, initialization, adapter, RNG, recurrent-PPO,
 evaluation-tape, publication, and resource laws of the already selected `CBSC-OMRC-B01` object on
 `CBSC-DYNAMIC-CACHE-2R-1C-v1`. It creates no new scientific object and does not change the host
-probabilities, native reward ledger, arm identities, B0/B1/B2 budgets, endpoints, stopping rule, or
-B/EXPLORE claim ceiling in `DIRECTION.md`.
+probabilities, native reward ledger, arm identities, B0/B1/B2 budgets, endpoints, stopping ceiling,
+or B/EXPLORE claim ceiling in `DIRECTION.md`.
 
 Authority is the complete `.02` Innovator clarification in persistent conversation
 `6a96a6c0-e918-83e8-a0c0-9dc9222dce1c`, response SHA-256
 `e96df981f7cdb40a6206f2fddcc989a05783491a1fa422e7b0ca673344a05844`.
+The later `.03` decision leaves every literal law here unchanged and governs raw publication,
+literal-null derived fields, and Convergence routing through
+`CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`.
 
 ## 1. Primitive token
 
@@ -281,10 +284,11 @@ IDs `0..3` and motif IDs `0,12,20,28`. This is exactly 16 episode executions per
 scientific branch or selection authority, and contributes nothing to B1/B2. Repair uses a new
 create-only B0 attempt identity preserving the failed record.
 
-B1 uses only seeds `21101,21121,21143`; B2 uses only `21161,21179` and only under the existing
-stability-extension condition. Per arm/seed: 384 train episodes, 48 rollouts, 768 Adam steps,
-checkpoints `0,12,24,48`, and 64 held-out episodes per checkpoint. All previous maximum exposure,
-endpoint, RAW-competence, branch, and stop laws in `DIRECTION.md` remain unchanged.
+B1 uses only seeds `21101,21121,21143`; B2 uses only `21161,21179` and only after the mandatory
+interim Convergence decision returns `RUN_FIXED_B2_STABILITY`. Per arm/seed: 384 train episodes, 48
+rollouts, 768 Adam steps, checkpoints `0,12,24,48`, and 64 held-out episodes per checkpoint. Maximum
+exposure remains unchanged. Raw publication, mechanical RAW competence, literal-null derived fields,
+and Convergence routing are fixed separately in `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`.
 
 ## 8. Checkpoints, publication, and resources
 
@@ -294,16 +298,18 @@ seed/update identity, and parameter-init, train-tape, action-uniform, minibatch-
 digests. Adapter state and recurrent hidden state are episode-local and are not checkpointed.
 
 Authoritative result schema: `cbsc_omrc_b01_b_explore_result_v1`. Each run manifest includes object
-and clarification IDs, run and implementation/evidence refs, config and environment/adapter/token
-digests, arms/seeds/checkpoints, all interaction/update/evaluation counts, every seed curve and
-return/regret, all currentness/action diagnostics and 32 motif records, RAW competence, parity and
-numerical audits, resource admission/peak RSS, incidents, applicable B branch, and exact claim
-ceiling. B1 and B2 have distinct manifests; B2 may reference but never replace B1.
+and all clarification IDs, run and implementation/evidence refs, config and environment/adapter/token
+digests, arms/seeds/checkpoints, all interaction/update/evaluation counts, every raw seed/tape curve,
+complete truth/policy/motif/support/training records, exact mechanical RAW competence, parity and
+numerical audits, resource admission/peak RSS, incidents, literal-null derived and branch fields, and
+the claim ceiling as specified by `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`. B1 and B2 have
+distinct manifests; B2 may reference but never replace B1.
 
 Publication is create-only: write a fresh temporary run directory, validate completeness/digests/
 audits, write the manifest, flush files and directory metadata, then atomically rename to a fresh
 final identity. Collision is an incident; never overwrite. Partial, truncated, resource-stopped,
-nonfinite, or parity-failing attempts publish incident-only and have no scientific branch.
+nonfinite, or parity-failing attempts publish incident-only and have no engineering-assigned
+scientific branch.
 
 Immediately before initializing every B0 arm or B1/B2 arm-seed process, require both OS physical
 available memory and effective container/cgroup headroom to be at least 4 GiB through the repository
@@ -329,11 +335,15 @@ before an attempt, symmetric, recorded, and meaning-preserving. Low-level kernel
 bit-identical across hardware, but the mathematical initialization, GRU, action, PPO, tape, adapter,
 and within-seed parity laws must match this specification.
 
-No material comparator or support ambiguity remains. RAW retains every primitive token and is not
+No material comparator or raw-support ambiguity remains. RAW retains every primitive token and is not
 information-deleted; STRUCT/DERANGED work is exact; PI age and neutral semantics are single-valued;
 NOOP, initial bodies, causal order, supports, recurrent recomputation, normalization, masking, and
 sampling are bound. No adapter receives semantic Booleans, validity, reward, success, oracle action,
 future facts, or extra interaction.
+
+Derived AUC, diagnostic, threshold, separation, instability, branch, B2-trigger, promotion, and
+polarity semantics are intentionally not implementation laws. Their manifest fields are literal null
+and the persistent Convergence node owns their later host-bounded interpretation.
 
 The surviving alternative is scientific: any STRUCT advantage may reflect finite-budget
 conditioning or optimization rather than representation necessity. The falsifier remains competent
@@ -347,5 +357,8 @@ this host. Exact-factorial and `CBSC-LR01=UNRESOLVED` meanings do not change.
 - `DIRECTION.md`
 - `CBSC_OMRC_B01_CM_IMPLEMENTATION_CONTRACT.md`
 - `CBSC_OMRC_B01_INNOVATOR_INTAKE_20260901.md`
+- `CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md`
 - `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-02/RESPONSE.md`
 - `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-02/TRANSPORT_FACTS.json`
+- `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-03/RESPONSE.md`
+- `temp/sessions/hmasd-chatgpt-pro-transport/archive/capability_bound_semantic_currentness/cbsc-online-b-innovator-20260901-03/TRANSPORT_FACTS.json`
