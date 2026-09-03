@@ -988,6 +988,59 @@ into the reviewer's intake commit `0bd92ac6d` because the two sessions share one
 implementer added a record-only attribution commit rather than rewriting history. Correct
 conduct. The reviewer now commits by explicit pathspec.
 
+### D.24 Paid-acquisition result intake (2026-09-03, later)
+
+Commits `ceaae3a7e` (runner and tests, 50 passed, the launch sha) and `5169d67c6` (result
+`UCOPE_PAID_ACQUISITION_B01_RESULT_EVIDENCE_20260903.md`); scope verified, UCOPE paths only.
+One process, one thread, wall 62 s, admission passed at 14.99 GiB, source inventory clean,
+every §5.2 count nonzero and reconciled, nothing quarantined. Resource telemetry unmeasured
+(the capture call omitted `--out`; decision 7 downgrade, recorded). **Accepted.**
+
+Outcome by the rule in its stated order: **PA-B, paid-acquisition majority.** The treatment
+(whitened MARGIN-AWARE learner) satisfies `A_paid` in 5 of 6 policies, the exact reference in 6
+of 6. Where the treatment pays it captures the entire available gain (`delta = +0.021437`,
+shortfall exactly zero, five of six); the one failure, seed 02 fold 1, is a root that chose
+IMMEDIATE in all eight contexts, so conjunct 2 fails there only as the arithmetic consequence of
+conjunct 1. The reference gives up 0.003155 in three policies to the count-0 tail flips the
+tail-margin object measured at this offset, well under the 0.021437 net acquisition. Tail
+reproduction against the published remedies vectors is bitwise in all six despite the change
+from four threads to one, so the treatment is exactly the learner the card named.
+
+The fact this object was opened to measure: two policies satisfy `A_paid` while failing `C_even`
+on the `p = 13/20` agreement stratum, which has nothing to do with paying; and the frozen
+conditional exposure returned `acquisition_pass = false` with null values for all twelve
+arm-policies of both arms, the exact reference included. Under the frozen code the direction's
+own question was unmeasurable; under §11.1 it is measured.
+
+Verdicts. Owner (PA-B, treatment 4–5 of 6, reference 6 of 6): exact. Reviewer (PA-B, 5 of 6 and
+6 of 6, failure at the root's refusal to pay, reference flips cheaper than the net acquisition):
+right on the branch, both counts and the mechanism; wrong in the literal clause "not a failed
+conjunct 2", since conjunct 2 also reads false when the root does not pay.
+
+Reviewer's reading. Eleven objects since the recast: the direction's question, whether the
+learner pays for information exactly where it is worth buying, now has its first measured answer
+on this host, and it is yes in five of six policies with the full gain captured. Nothing here is a
+population claim or a COUNT/RAW result; `C_even` stays 3 of 6 for both arms. The direction's
+acquisition lock is worded in terms of competence, so by its own wording PA-B does not satisfy
+it; whether the wording should follow §11.1 is the owner's, not the reviewer's. On the chain: the
+open mechanism-level residual is still the two `p = 13/20` decision directions the single-pair
+hinge never constrained (three-witness hinge, carded as the parallel follow-up); the open
+behavioural residual is one root that refuses to pay. Neither is urgent for the direction's
+question, and the concurrency cap is two directions. The reviewer recommends recording the
+acquisition status as measured (PA-B, 5 of 6 under `A_paid`), keeping the lock wording as is,
+and pausing the UCOPE chain here with the three-witness hinge queued as its next object.
+
+### D.25 Decisions this intake produces
+
+1. The acquisition lock's wording: (a) keep it tied to competence and record PA-B beside it as
+   the measured status under `A_paid` (reviewer's recommendation); (b) relax it to the
+   competence-free predicate, which would make PA-B satisfy it.
+   **Owner decision (2026-09-03): (a).**
+2. UCOPE next: (a) pause the chain here, the three-witness hinge queued as the next object when
+   a slot frees (reviewer's recommendation); (b) run the three-witness hinge now, taking a slot;
+   (c) a refusal diagnostic on seed 02 fold 1 first; (d) stop the chain.
+   **Owner decision (2026-09-03): (a).**
+
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
 
 Object: decision 3 of A.4 executed by an Opus session on `main`: commits `335559bcf` (the
