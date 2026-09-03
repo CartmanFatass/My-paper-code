@@ -300,3 +300,24 @@ rather than the `16 * eps_fp32 = 3.81e-06` ceiling that stopped this one at `9.1
 
 Whether this object is later repaired, superseded or retired remains an owner decision, and this
 note takes none of those steps.
+
+## 14. Note added 2026-09-03 — retired as SUPERSEDED
+
+Owner decision D.14 (commit `bc35a9abd`) records
+`UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01` as **`SUPERSEDED`** by
+`UCOPE-B-EXPLORE-OPTIMISER-CONDITIONING-R01`, whose result document
+(`UCOPE_OPTIMISER_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md` section 12) states it verbatim:
+
+> its scientific question — is conditioning what keeps the `FT-XF-BC` learner from its target — has
+> now been answered **yes, dominantly**, at 24 seconds of compute, with an FP64 contract that passed
+> by seven orders of magnitude where its FP32 ceiling failed by a factor of `2.4`–`2.5`.
+
+That object ran with `max |L L^T - G| <= 5.551e-17` against a `1e-10` ceiling derived from the
+science-scale condition number, where this one refused at `9.12e-06`-`9.69e-06` against
+`16 * eps_fp32 = 3.81e-06`, and it reached branch `O-B CONDITIONING_MOSTLY_CLOSES_IT`.
+
+This note is a **status record only**. The §6.2 quarantine recorded in section 9 above, the failure
+receipt, the artifact and the registration are unchanged. This object was never run to completion,
+produced no polarity and consumed no scientific object; nothing here reinterprets, resumes or
+salvages it. The direction status entry is
+`DIRECTION.md` -> "Conditioning chain, and the whitening discriminator retired — 2026-09-03".

@@ -364,6 +364,41 @@ prespecified branch is complete support failure, which precedes competence,
 acquisition and COUNT-versus-RAW attribution. It prohibits added episodes,
 dropped seeds, retuning, checkpoint selection and another run of this host.
 
+### Conditioning chain, and the whitening discriminator retired — 2026-09-03
+
+Owner decision D.14 (commit `bc35a9abd`), following D.11 (`187941bf6`) and D.13 (`095617a78`). Four
+objects since the section-11 recast have separated the direction's obstruction into named parts, and
+one earlier object is retired as superseded.
+
+```text
+INSTRUMENTATION_CHECK=UCOPE-A-INSTRUMENTATION-TAIL-AGREEMENT-COMPETENCE-CHECK-R01 PASS (77 tests)
+EXPOSURE_LADDER_R02=UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R02 rungs 1 and 2 both R2-D NEITHER_ARM_MOVED
+TRAINING_TARGET_DIAGNOSTIC=UCOPE-A-TRAINING-TARGET-DIAGNOSTIC-R01 branch D1 OBJECTIVE_FIXED_POINT_DIFFERS
+OPTIMISER_CONDITIONING=UCOPE-B-EXPLORE-OPTIMISER-CONDITIONING-R01 branch O-B CONDITIONING_MOSTLY_CLOSES_IT
+NEXT_OBJECT=UCOPE-B-EXPLORE-COMPETENCE-WHITENED-R01 carded 2026-09-03, n fixed at 81,920 tail rows, NOT RUN
+DISCRIMINATOR_STATUS=SUPERSEDED
+PAID_ACQUISITION_STATUS=UNEVALUATED_LOCKED
+COUNT_RAW_STATUS=LOCKED_UNTIL_COMPETENCE
+```
+
+**`UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01` is `SUPERSEDED`** by
+`UCOPE-B-EXPLORE-OPTIMISER-CONDITIONING-R01`. The superseding object's result document
+(`UCOPE_OPTIMISER_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md` section 12) records why, verbatim:
+
+> its scientific question — is conditioning what keeps the `FT-XF-BC` learner from its target — has
+> now been answered **yes, dominantly**, at 24 seconds of compute, with an FP64 contract that passed
+> by seven orders of magnitude where its FP32 ceiling failed by a factor of `2.4`–`2.5`.
+
+Retirement is a status record only. The discriminator's §6.2 quarantine, its failure receipt, its
+artifact and its registration are **untouched**; it was never run to completion, produced no
+polarity, consumed no scientific object, and is not reinterpreted, resumed or salvaged by this
+entry. Its result document carries a dated note pointing here and to the superseding object.
+
+Neither the acquisition lock nor the COUNT/RAW lock is opened by any of this. Under the section-11
+recast both are the direction's own sequencing choice, recorded and not §11 gates, and
+`UCOPE-B-EXPLORE-COMPETENCE-WHITENED-R01` — carded but not run — is the object whose outcome would
+place the COUNT/RAW lock's stated precondition in front of the owner.
+
 ## Accepted R03 result — 2026-08-27
 
 ### Terminal and provenance identity
