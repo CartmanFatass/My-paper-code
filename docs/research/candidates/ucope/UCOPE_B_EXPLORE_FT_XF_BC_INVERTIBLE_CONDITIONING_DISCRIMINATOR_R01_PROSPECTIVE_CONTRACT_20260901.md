@@ -848,4 +848,13 @@ incomplete attempt on a learner-side instrumentation failure.
 `UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01`, not instead of it, and the ladder runs first. A
 both-arms-noncompetent outcome here is not `PARK` support on its own before the ladder has run.
 
-**Result.** `UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.
+**Result.** The first launch attempt under this recast, at commit
+`ce361d40ac7db9cc8ba7714fee278bb62dbf8793`, is a **quarantined incomplete attempt with no
+polarity**: it failed 22 s in at `conditioning.py:106` with
+`ConditioningTransformError: recorded Gram/Cholesky relation is invalid`, during
+`prepare_fold_data` and before any model, optimizer, target, checkpoint or evaluation existed.
+Under evidence spec §6.2 this object is **not consumed** and remains registered and unrun; the
+positive and falsifier defined in the frozen body above are both untested, and neither is
+satisfied. Record, with the post-hoc outcome-free measurement of the FP32 reconstruction
+residual on all twelve science-scale designs:
+`UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.

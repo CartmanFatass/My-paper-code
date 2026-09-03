@@ -299,7 +299,35 @@ admission immediately before each run, one machine-generated exposure line, and 
 learner-side instrumentation failure. Per decision 7, missing **resource** telemetry downgrades a run
 to `resources_unmeasured` with reasons and never annuls or quarantines it.
 
-Results of the two runs: `UCOPE_EXPOSURE_LADDER_R1_RESULT_EVIDENCE_20260902.md` and
+Results of the two runs, both launched at commit `ce361d40ac7db9cc8ba7714fee278bb62dbf8793`:
+
+```text
+LADDER_RUNG_1_STATUS=COMPLETE_VALID
+LADDER_RUNG_1_BRANCH=R1-C EXPOSURE_DID_NOT_MOVE
+LADDER_RUNG_1_COMPETENCE=0/12 policies, NO_ARM_COMPETENT (recorded observation)
+DISCRIMINATOR_R01_STATUS=QUARANTINED_INCOMPLETE_ATTEMPT
+DISCRIMINATOR_R01_POLARITY=NONE
+DISCRIMINATOR_R01_OBJECT_CONSUMED=false
+PAID_ACQUISITION_STATUS=UNEVALUATED_LOCKED
+COUNT_RAW_STATUS=LOCKED_UNTIL_COMPETENCE
+```
+
+Rung 1 completed and is valid: 0 of 12 policies competent at lr `3e-3`, and the minimum measured
+Bellman per-coordinate displacement `0.046434` fell below the `0.30` threshold the ladder's reading
+rule fixed in advance, so the registered branch is `R1-C`: rung 1 is uninformative about the exposure
+hypothesis and rung 2 (`lr 3e-4` at 1,600/3,200 updates) must run before any exposure conclusion.
+
+The whitening discriminator attempted a launch for the first time — the recast's two recorded fields
+are what allowed it — and failed 22 s in, inside its own frozen numerical core, with
+`ConditioningTransformError: recorded Gram/Cholesky relation is invalid`
+(`conditioning_discriminator_r01/conditioning.py:106`), before any model or optimizer existed. It is
+quarantined under evidence spec §6.2 with **no polarity**; the object is **not consumed** and remains
+registered and unrun. Nothing about it supports `PARK`. A post-hoc outcome-free diagnostic shows the
+frozen `16·eps_fp32` reconstruction tolerance is exceeded by a factor of about 2.4–2.5 on all twelve
+science-scale designs, so as frozen this object does not appear executable at science scale on this
+platform. What to do about that is an owner decision and is not taken here.
+
+Full evidence: `UCOPE_EXPOSURE_LADDER_R1_RESULT_EVIDENCE_20260902.md` and
 `UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.
 
 The contextual BELIEF v2 production object is complete and terminal. Its validated disposition is:

@@ -319,9 +319,42 @@ and still validates as the same configuration.
 
 ## 8. Result
 
-Pending at the time this intake was written. Both objects run on 2026-09-02 at the commit that
-carries the gate-to-field code change, the exposure ladder rung 1 first and the whitening
-discriminator alongside it, one at a time, each with its own resource admission immediately before
-launch. This section is completed with the deciding numbers when they exist; the evidence documents
-will be `UCOPE_EXPOSURE_LADDER_R1_RESULT_EVIDENCE_20260902.md` and
+Both objects were launched on 2026-09-02 at commit `ce361d40ac7db9cc8ba7714fee278bb62dbf8793`, the
+ladder first and the discriminator alongside it, one at a time, each with its own fresh `4 GiB`
+physical and effective admission immediately before launch (10.74 GiB and 10.91 GiB available). One
+completed and one did not.
+
+**Exposure ladder rung 1 — complete, valid, `R1-C EXPOSURE_DID_NOT_MOVE`.** 89.3 s wall, 12 policies,
+122,880 episodes, 3,840 root and 1,920 tail optimizer updates, 48 checkpoints, every activity counter
+reconciled exactly, no non-finite event, telemetry fully measured (`resources_unmeasured: false`,
+peak RSS 411.5 MiB). The competence observation, recorded and deciding nothing: 0 of 12 policies
+competent, 0 of 12 matching the exact oracle root vector, branch `NO_ARM_COMPETENT`, both arms
+`false`. The reading rule of section 4.5 applied verbatim: no arm `B_COMPETENT`, and
+`m = 0.046434 < 0.30`, so branch **R1-C**, whose registered reading is that rung 1 did not deliver the
+intended exposure increase and is uninformative about mechanism A; rung 2 must run before any exposure
+conclusion. The branch is unchanged if `FT-XF-BC` is taken alone, where the Bellman vector is the
+whole model and the minimum move is `0.250245`. Closest approaches at update 320: regret `0.0285629`
+against the `0.02` gate, tail agreement `1.000000` against the `0.95` gate — but no policy matched the
+oracle root vector. Full evidence: `UCOPE_EXPOSURE_LADDER_R1_RESULT_EVIDENCE_20260902.md`.
+
+**Whitening discriminator R01 — quarantined incomplete attempt, no polarity, object not consumed.**
+The recast let this object attempt a launch for the first time: both refusals were exercised as
+recorded fields (`assessment-02` recorded as `PERFORMANCE_READY` on disk and `INVALID_NOT_ADOPTED` by
+contract:561, `gating: false`; source clean and recorded). It then failed 22 s in, inside its own
+frozen numerical core, at
+`experiments/candidates/ucope/conditioning_discriminator_r01/conditioning.py:106` with
+`ConditioningTransformError: recorded Gram/Cholesky relation is invalid`, during
+`prepare_fold_data` and before any model, optimizer, target, checkpoint or evaluation existed. It was
+quarantined under §6.2 and not rerun with changes. An outcome-free post-hoc diagnostic shows the
+failure is deterministic and universal at science scale: all twelve seed/fold/stage designs give
+`max|LLᵀ − G|` of `9.12e-06` to `9.69e-06` against the frozen `16·eps_fp32` ceiling of `3.81e-06`,
+about 2.4 to 2.5 times over, at Gram condition numbers `7.2e2` (tail) and `5.0e3` (root). The object
+produced no competence observation, its reading rule is not applicable, and **its falsifier is not
+satisfied** — a falsifier needs an observed noncompetence and nothing was observed. Full record:
 `UCOPE_BC_CONDITIONING_DISCRIMINATOR_R01_RESULT_EVIDENCE_20260902.md`.
+
+Consequence for the direction, recorded without deciding it: as frozen, the whitening discriminator
+appears not to be executable at science scale on this platform, and the FP32 tolerance that stops it
+was calibrated at the 40-episode technical scale the two assessments used. Whether that becomes a
+`REPAIR_REQUIRED` disposition, a fresh object with an outcome-blind scale-appropriate tolerance, or a
+different conditioning intervention is an owner decision. Nothing here supports `PARK`.
