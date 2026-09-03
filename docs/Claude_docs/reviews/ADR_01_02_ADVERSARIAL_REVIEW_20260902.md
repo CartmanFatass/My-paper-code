@@ -1313,3 +1313,29 @@ final checkpoints are retained with the full-set digest so a later contract can 
 4,096 tapes if ever needed. The cost itself is recorded as an open engineering item for the
 E-series: evaluation at `delta = 1` is transformer-bound and cannot be reduced without editing
 `hmasd/`, which the E2 assignment forbids.
+
+## XII.5 E2 whole-study estimate and the cap (2026-09-03, 14:13 PDT)
+
+After the first two rollouts of the first pair (`d0_k40` seeds 1 and 2, two concurrent
+4-thread processes): 86.4 / 85.6 s and 84.7 / 83.5 s per rollout, `M = 160` coordinator rows per
+rollout as expected at `k_max = 40`, first-rollout mean per-step return 0.1446 and 0.1318 against
+`J_switch = 0.39202` and `J_fixed_40 = 0.26815`. Projection under package C: 28.5 min training
+plus 27.5 min evaluation plus 20 s per run, 56.3 min, nine slots, **8.45 h**, 27 minutes over the
+8-hour cap. The per-rollout figure is 10% above the pre-launch probe because the runner's
+per-step gap, cause and change-flag capture and the per-rollout decile accounting were not in
+the probe.
+
+Options: (a) accept the overrun and keep all 18 runs; (b) apply contract §4.4 as written (drop
+seed 2 of `k ∈ {1, 2}` and `c ∈ {0.25, 2.0}`; 14 runs, 6.6 h), which makes §5's clause "mean
+segment length non-decreasing in `c` across the four `c` arms in both seeds" unevaluable in seed
+2 and removes a seed from two of the reviewer's four scored `c` values; (c) cut the intermediate
+evaluations to 256 tapes on the runs not yet launched, which mixes evaluation sizes across runs
+mid-study.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** A 5.6% overrun is inside
+the 8–9% between-session drift P4 measured on identical code today; the cap is a budget, not a
+scientific factor; §4.4's saving is smaller than what it removes from the reading rule. Recorded
+as deviation D2 in the result document with the estimate and the first real evaluation's cost.
+Stop rule added: re-project after every completed pair; if the projection exceeds 9.0 h (12.5%
+over), §4.4 applies to whatever has not launched. Intermediate state is committed to the branch
+as each pair finishes.
