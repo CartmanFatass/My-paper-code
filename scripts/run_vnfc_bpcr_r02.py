@@ -273,7 +273,11 @@ def prepare_native_backends() -> dict[str, object]:
 
     r09_native.require_cpp_batched_backend()
     b_native.require_b_native_telemetry()
-    return b_native.resolve_prebuilt_load_only_binding()
+    binding = b_native.resolve_prebuilt_load_only_binding()
+    # The resolver only reports; installing is what binds the process-local
+    # load-only functions the R01 runner's storage contract reads back.
+    b_native._install_prebuilt_load_only_binding(binding)
+    return binding
 
 
 def native_identity_record(binding: Mapping[str, object]) -> dict[str, object]:
