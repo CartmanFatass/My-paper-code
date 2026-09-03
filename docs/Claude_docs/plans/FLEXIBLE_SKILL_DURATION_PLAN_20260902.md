@@ -237,3 +237,10 @@ Reviewer's prediction (a gain concentrated on high-age probes): not observed. Th
 not carried into E2. Erratum: the contract's "probe accuracy versus the recorded skill" compares
 against a foreign labelling (the E0 `off` run's skills) and is not an accuracy; E2 measures label
 stability within a run only. Review Part XI; result `../experiments/E1_AGE_INPUT_RESULT_20260902.md`.
+
+### E2 prediction on record (2026-09-03)
+
+Owner: mechanism A — event-driven interruption; some finite `c` reaches or exceeds the best fixed
+`k` on the homogeneous corridor. Reviewer: A, with the best `c` in `[0.5, 1.0]` and the
+event-alignment fraction above one half there. Contract
+`../experiments/E2_INTERRUPTION_COST_SWEEP_20260903.md`; launches when P4 is integrated.

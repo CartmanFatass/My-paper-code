@@ -18,9 +18,11 @@ duration `k`, and do its interruptions behave as an event-driven boundary (segme
 increasing in `c`, interruptions concentrated at event flags) rather than as noise in the
 coordinator's log-probability gap?
 
-Prediction on record (plan §11, to be filled before launch): owner — ___ ; reviewer — mechanism A
-below, with the best `c` between 0.5 and 1.0 and the fraction of interruptions at event flags
-above one half at that `c`.
+Prediction on record (plan §11, 2026-09-03): owner — mechanism A, event-driven interruption, some
+finite `c` reaches or exceeds the best fixed `k`; reviewer — mechanism A as well, with the best
+`c` between 0.5 and 1.0 and the fraction of interruptions at event flags above one half at that
+`c`. Both predictions agree on the mechanism; the reviewer's numerical clauses are the only
+calibration contrast this study carries.
 
 The two mechanisms the arms separate:
 
