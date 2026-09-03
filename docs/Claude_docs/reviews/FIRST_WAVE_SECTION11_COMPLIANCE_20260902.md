@@ -459,3 +459,46 @@ register that object is the owner's call (D.4).
 
 PORTFOLIO row for `ucope` updated by the reviewer in the commit carrying this part (next-object
 text and timestamp only).
+
+### D.5 Ladder rung 2 intake (2026-09-02, later)
+
+Commit `7f04b67ce` (result document `UCOPE_EXPOSURE_LADDER_R2_RESULT_EVIDENCE_20260902.md`, the
+intake's Result paragraph, and the three files that register rung 2 in the runner; scope
+verified). Launched at `ba8d165fc` with the tree dirty for exactly those three files, recorded
+by the demoted clean-source field with the 14-file inventory pinned (aggregate `62f91839…`).
+Preflight 12.77 GiB; wall 359 s; telemetry measured; 12 policies complete, 122,880 episodes,
+614,400 transitions, every counter reconciled, `validate` true. **Accepted as a valid complete
+run.**
+
+Outcome by the frozen rule: 0 of 2 arms competent (closest at update 3,200: regret 0.0302
+against 0.02, tail agreement 0.788 against 0.95); `m = 0.0253 < 0.30` → **R1-C again.** Ten
+times the update budget did not move the minimum-over-24 statistic (rung 1: 0.046). On
+`FT-XF-BC` alone the minimum move is 0.249 at both rungs.
+
+Reviewer's reading. Two facts make rung 3 pointless under this rule and call for an integrity
+check before any further exposure:
+
+1. **The statistic is dominated by the FLEX arm.** `m` is the minimum over both arms' 24
+   stage-policies; the BC arm's own minimum is 0.25 at both rungs, so the 0.025–0.046 that
+   decides R1-C comes from FLEX stage-policies whose Bellman coordinates barely move. FLEX carries
+   a residual that may absorb the displacement (not verified, listed in both documents). A rule
+   whose branch is fixed by the arm that has no reason to move its Bellman head cannot detect
+   exposure moving the other arm; rung 3 would return R1-C by construction.
+2. **Two measurement anomalies** the implementer recorded and did not investigate: the BC arm's
+   tail agreement is exactly `0.000000` in all 30 rows at both rungs, and each FLEX policy's
+   agreement is constant across its five checkpoints. A learner does not produce an exact zero
+   agreement in every row; this reads as the tail-agreement measurement not being wired for BC
+   (or measuring a constant), which is a §4 integrity question, not an outcome. Until it is
+   answered the competence observation for BC is not interpretable.
+
+Consequence put to the owner (D.6): no rung 3 under the R01 rule. The next UCOPE object should
+be an outcome-free instrumentation check of the tail-agreement and competence measurement on
+both arms (unit-scale, no training), and only then a ladder successor R02 whose reading rule
+takes the displacement statistic per arm. Both are new named objects; R01's two rungs stay as
+recorded evidence that exposure up to 3,200 updates does not produce competence on this host
+under either arm.
+
+### D.6 Decisions this intake produces
+
+1. UCOPE ladder: (a) instrumentation check first, then ladder R02 with a per-arm statistic
+   (reviewer's recommendation); (b) run rung 3 as declared; (c) park the direction.
