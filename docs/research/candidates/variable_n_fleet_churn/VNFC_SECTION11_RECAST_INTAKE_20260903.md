@@ -331,4 +331,37 @@ uncommitted.
 
 ## 8. Result
 
-See §9 (added after the run).
+The recast object was launched the same day and produced **no B result**. Two `B0-DEBUG` attempts of
+`VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` (seed `2026090301`, 8 updates) were launched at
+`a8305f645` and `a2efdc6a4` and both were mechanically quarantined as `INCOMPLETE`
+(`quarantine_only: true`, `resume_allowed: false`, `scientific_result: false`,
+`evaluation_allowed: false`) before any held-out `N = 7` endpoint was opened. The object is **not
+consumed**, carries no polarity, and the three 64-update `PRIMARY` seeds were not launched: the
+runner's `PRIMARY` path requires an archived sealed `DEBUG` bundle that does not exist.
+
+Neither quarantine was caused by a demoted gate. Attempt 01 stopped on a serialization defect in the
+R01 runner's held-out freeze token (`TypeError: Object of type PSB0ActualComparison is not JSON
+serializable`), repaired from the R02 runner; attempt 02 stopped on the per-decision fresh-relabel
+mismatch counter, a §4 integrity item this recast explicitly keeps. Attempt 02 was **not** repaired
+and no third attempt was launched.
+
+Recorded on the way: the fresh 4 GiB admission passed at every invocation (13,067,223,040 B and
+12,690,440,192 B); the 52-row `VNFC-R02-PRESENTATION-CONFORMANCE-52` check passed in full
+(54 passed, 19.36 s); the `bpcr_backend.dll` was rebuilt from unchanged source into the default
+cache root and its build key rederived exactly to the frozen literal `7222d990…` at the frozen size
+213,504 B while the image digest differs (`adc39faa…` versus `dadac958…`), which under the recast is
+recorded and holds nothing; the exposure line shows both arms moving monotonically to about 12%
+relative parameter displacement over 8 updates; resource telemetry was fully measured
+(`resources_unmeasured: false`, peak RSS 428,601,344 B, wall 161.3 s).
+
+The one positive finding is a conformance observation, not an algorithm observation: the
+288-comparison PS-B0 panel passed inside attempt 02 under the canonical sort, and a separate
+non-result-bearing `A/RECON` probe over 192 world-decisions per law measured presentation dependence
+of the inverse-mapped physical command at **15/192 under the R01 law and 0/192 under the R02
+canonical opaque-rank sort**, with a batch-position residual of 12/192 that is identical under both
+laws. That residual is what the R01 relabel probe reports, because it compares a batch-8 forward
+against a batch-1 relabelled forward and so varies presentation and batch width together.
+
+The complete evidence, per-attempt tables, verbatim summary lines, seven named deviations, the
+could-not-verify list and the open question this leaves for the owner are in
+`VNFC_BPCR_R02_RESULT_EVIDENCE_20260903.md`.
