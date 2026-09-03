@@ -49,10 +49,20 @@ LADDER_OBJECT_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01"
 LADDER_ARMS = ("FT-XF-FLEX", "FT-XF-BC")
 LADDER_RUNG_1_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01-RUNG-1"
 LADDER_RUNG_1_LEARNING_RATE = 3e-3
+LADDER_RUNG_2_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01-RUNG-2"
+LADDER_RUNG_2_LEARNING_RATE = 3e-4
+LADDER_RUNG_2_TAIL_UPDATES = 1_600
+LADDER_RUNG_2_ROOT_UPDATES = 3_200
+# Rung 2 keeps the four frozen checkpoint roots so every quantity stays directly comparable
+# with rung 1 and B1 at the identical update counts, and adds its own final root, which is
+# where competence is judged. The intake registered rung 2 by its learning rate and update
+# counts only; this cadence is declared here and recorded in the rung-2 result document.
+LADDER_RUNG_2_CHECKPOINT_ROOT_UPDATES = (40, 80, 160, 320, 3_200)
 B1_LEARNING_RATE = 3e-4
 
 
-BINDING_KINDS = {"B1": "B1_ADMITTED", "LADDER1": "LADDER1_ADMITTED", "ASSESS": "ASSESS_SOURCE"}
+BINDING_KINDS = {"B1": "B1_ADMITTED", "LADDER1": "LADDER1_ADMITTED", "LADDER2": "LADDER2_ADMITTED", "ASSESS": "ASSESS_SOURCE"}
+LADDER_MODES = frozenset({"LADDER1", "LADDER2"})
 
 
 class ContractError(ValueError):
@@ -87,6 +97,12 @@ class RunBinding:
     @classmethod
     def ladder1(cls, *, manifest_digest: str, source_aggregate: str, assessment_digest: str) -> "RunBinding":
         return cls("UCOPE_SCOUT_R01_RUN_BINDING_V1", "LADDER1_ADMITTED", manifest_digest, source_aggregate, assessment_digest).validate("LADDER1")
+
+    @classmethod
+    def ladder(cls, mode: str, *, manifest_digest: str, source_aggregate: str, assessment_digest: str) -> "RunBinding":
+        if mode not in LADDER_MODES:
+            raise ContractError("ladder binding requires a ladder mode")
+        return cls("UCOPE_SCOUT_R01_RUN_BINDING_V1", BINDING_KINDS[mode], manifest_digest, source_aggregate, assessment_digest).validate(mode)
 
     def validate(self, mode: str) -> "RunBinding":
         if self.binding_schema != "UCOPE_SCOUT_R01_RUN_BINDING_V1":
@@ -172,6 +188,28 @@ class ScoutConfig:
         ).validate()
 
     @classmethod
+    def ladder_rung_2(cls) -> "ScoutConfig":
+        """Rung 2 of the named exposure ladder: lr 3e-4 at 1,600/3,200 updates.
+
+        The second of the three rungs registered verbatim from the independent review. It
+        holds the learning rate at the frozen B1 value and multiplies the optimizer budget
+        by ten instead. Host, oracle, competence predicate, seeds, folds, episodes per
+        context, batch law and arm pair are the B1/ladder values, unchanged.
+        """
+        return cls(
+            run_id="ucope-scout-r01-exposure-ladder-rung-2",
+            mode="LADDER2",
+            seed_ids=B1_SEEDS,
+            episodes_per_context=5_120,
+            tail_updates=LADDER_RUNG_2_TAIL_UPDATES,
+            root_updates=LADDER_RUNG_2_ROOT_UPDATES,
+            evaluation_root_updates=LADDER_RUNG_2_CHECKPOINT_ROOT_UPDATES,
+            sampled_evaluation_episodes=64,
+            arms=LADDER_ARMS,
+            learning_rate=LADDER_RUNG_2_LEARNING_RATE,
+        ).validate()
+
+    @classmethod
     def assess(cls) -> "ScoutConfig":
         return cls(
             run_id="ucope-scout-r01-assess-r01",
@@ -189,7 +227,7 @@ class ScoutConfig:
             raise ContractError("object/RNG identity drift")
         if self.mode not in BINDING_KINDS:
             raise ContractError("mode must be B1, LADDER1 or ASSESS")
-        expected_arms = LADDER_ARMS if self.mode == "LADDER1" else ARM_IDS
+        expected_arms = LADDER_ARMS if self.mode in LADDER_MODES else ARM_IDS
         if not self.run_id or self.arms != expected_arms:
             raise ContractError("run identity or arm order drift")
         if type(self.learning_rate) is not float or not 0.0 < self.learning_rate < 1.0:
@@ -256,6 +294,24 @@ class ScoutConfig:
             }
             if self.__dict__ != canonical_ladder1:
                 raise ContractError("exposure ladder rung-1 configuration drift")
+        if self.mode == "LADDER2":
+            canonical_ladder2 = {
+                "run_id": "ucope-scout-r01-exposure-ladder-rung-2",
+                "mode": "LADDER2",
+                "seed_ids": B1_SEEDS,
+                "episodes_per_context": 5_120,
+                "tail_updates": LADDER_RUNG_2_TAIL_UPDATES,
+                "root_updates": LADDER_RUNG_2_ROOT_UPDATES,
+                "evaluation_root_updates": LADDER_RUNG_2_CHECKPOINT_ROOT_UPDATES,
+                "sampled_evaluation_episodes": 64,
+                "batch_size": BATCH_SIZE,
+                "arms": LADDER_ARMS,
+                "object_id": OBJECT_ID,
+                "rng_version": RNG_VERSION,
+                "learning_rate": LADDER_RUNG_2_LEARNING_RATE,
+            }
+            if self.__dict__ != canonical_ladder2:
+                raise ContractError("exposure ladder rung-2 configuration drift")
         if self.mode == "ASSESS":
             canonical = {
                 "run_id": "ucope-scout-r01-assess-r01",

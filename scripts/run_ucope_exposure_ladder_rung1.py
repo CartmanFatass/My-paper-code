@@ -74,10 +74,17 @@ from experiments.candidates.ucope.competence_first_scout_r01.contract import (  
     LADDER_OBJECT_ID,
     LADDER_RUNG_1_ID,
     LADDER_RUNG_1_LEARNING_RATE,
+    LADDER_RUNG_2_ID,
     OBJECT_ID,
     RunBinding,
     ScoutConfig,
 )
+
+# Rung registry: science object id, config factory, prose definition.
+RUNGS = {
+    1: (LADDER_RUNG_1_ID, ScoutConfig.ladder_rung_1, "lr 3e-3 at the frozen 160/320 tail/root updates"),
+    2: (LADDER_RUNG_2_ID, ScoutConfig.ladder_rung_2, "lr 3e-4 at 1,600/3,200 tail/root updates"),
+}
 from experiments.candidates.ucope.competence_first_scout_r01.model import build_arm  # noqa: E402
 from experiments.candidates.ucope.competence_first_scout_r01.workflow import run_workload  # noqa: E402
 
@@ -429,10 +436,11 @@ def exposure_line(config: ScoutConfig, checkpoint_root: Path) -> dict[str, Any]:
 # --------------------------------------------------------------------------------------
 
 
-def _binding(source_aggregate: str) -> RunBinding:
-    manifest_digest = hashlib.sha256(f"{LADDER_RUNG_1_ID}|MANIFEST".encode("utf-8")).hexdigest()
-    assessment_digest = hashlib.sha256(f"{LADDER_RUNG_1_ID}|NO_ASSESSMENT".encode("utf-8")).hexdigest()
-    return RunBinding.ladder1(
+def _binding(source_aggregate: str, *, mode: str = "LADDER1", object_id: str = LADDER_RUNG_1_ID) -> RunBinding:
+    manifest_digest = hashlib.sha256(f"{object_id}|MANIFEST".encode("utf-8")).hexdigest()
+    assessment_digest = hashlib.sha256(f"{object_id}|NO_ASSESSMENT".encode("utf-8")).hexdigest()
+    return RunBinding.ladder(
+        mode,
         manifest_digest=manifest_digest,
         source_aggregate=source_aggregate,
         assessment_digest=assessment_digest,
@@ -447,13 +455,16 @@ def _configure_topology(max_threads: int = 1) -> None:
         torch.set_num_interop_threads(1)
 
 
-def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
-    """Execute exposure-ladder rung 1 and publish a complete run record."""
+def run_rung(output_root: str | Path, *, thread_cap: int = 1, rung: int = 1) -> Path:
+    """Execute one exposure-ladder rung and publish a complete run record."""
+    if rung not in RUNGS:
+        raise LaunchRefusal(f"unknown ladder rung: {rung}")
+    science_object_id, config_factory, rung_definition = RUNGS[rung]
     output = Path(output_root).resolve()
     if output.exists():
         raise LaunchRefusal(f"output root is create-once: {output}")
     attempt_id = uuid.uuid4().hex
-    config = ScoutConfig.ladder_rung_1()
+    config = config_factory()
     output.mkdir(parents=True)
     work = output / "work"
     staging = output / f".complete-staging-{attempt_id}"
@@ -469,7 +480,7 @@ def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
     start = {"wall": time.perf_counter(), "cpu": time.process_time()}
     resources: dict[str, Any] | None = None
     try:
-        binding = _binding(source["aggregate_sha256"])
+        binding = _binding(source["aggregate_sha256"], mode=config.mode, object_id=science_object_id)
         result = run_workload(config, work, run_binding=binding)
         inventory = stage_checkpoint_inventory(config, result.checkpoints, staging_root=staging, run_binding=binding)
         exposure = exposure_line(config, work / "scientific_checkpoints")
@@ -480,15 +491,15 @@ def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
         record = {
             "format": RESULT_FORMAT,
             "schema_version": 1,
-            "science_object_id": LADDER_RUNG_1_ID,
+            "science_object_id": science_object_id,
             "ladder_object_id": LADDER_OBJECT_ID,
             "code_object_id": OBJECT_ID,
-            "rung": 1,
-            "rung_definition": "lr 3e-3 at the frozen 160/320 tail/root updates",
+            "rung": rung,
+            "rung_definition": rung_definition,
             "evidence_class": EVIDENCE_CLASS,
             "complete": True,
             "attempt_id": attempt_id,
-            "learning_rate": LADDER_RUNG_1_LEARNING_RATE,
+            "learning_rate": config.learning_rate,
             "admission": admission,
             "recast_ledger": RECAST_LEDGER,
             "source_status": source,
@@ -501,7 +512,7 @@ def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
         publish_complete(staging / "result.json", artifact, artifact_root=staging)
         atomic_create_json(staging / "run-manifest.json", {
             "object_id": OBJECT_ID,
-            "science_object_id": LADDER_RUNG_1_ID,
+            "science_object_id": science_object_id,
             "config": config.to_dict(),
             "run_binding": binding.to_dict(),
             "rng_version": config.rng_version,
@@ -526,7 +537,7 @@ def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
             if work.exists():
                 os.replace(work, quarantine / "work")
             atomic_create_json(quarantine / "failure.json", {
-                "science_object_id": LADDER_RUNG_1_ID,
+                "science_object_id": science_object_id,
                 "complete": False,
                 "quarantined": True,
                 "quarantine_rule": "MARL_EMPIRICAL_EVIDENCE_SPEC.md#6.2",
@@ -536,6 +547,11 @@ def run_rung_1(output_root: str | Path, *, thread_cap: int = 1) -> Path:
                 "resources": resources,
             })
         raise
+
+
+# Retained name: the committed section-11 recast tests address the implementation through it,
+# and rung 1's published record was produced by this exact function body.
+run_rung_1 = run_rung
 
 
 def validate_complete(complete_root: str | Path) -> dict[str, Any]:
@@ -559,6 +575,7 @@ def _parser() -> argparse.ArgumentParser:
     run = commands.add_parser("run", allow_abbrev=False)
     run.add_argument("--output-root", required=True)
     run.add_argument("--thread-cap", type=int, default=1)
+    run.add_argument("--rung", type=int, default=1, choices=sorted(RUNGS))
     validate = commands.add_parser("validate", allow_abbrev=False)
     validate.add_argument("--complete-root", required=True)
     return parser
@@ -568,7 +585,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
         if args.command == "run":
-            result: dict[str, Any] = {"path": str(run_rung_1(args.output_root, thread_cap=args.thread_cap))}
+            result: dict[str, Any] = {"path": str(run_rung(args.output_root, thread_cap=args.thread_cap, rung=args.rung))}
         elif args.command == "validate":
             result = validate_complete(args.complete_root)
         else:

@@ -155,8 +155,8 @@ at 1,600/3,200 updates, and both."
 
 | Rung | Learning rate | Tail / root updates | Status |
 | --- | --- | --- | --- |
-| 1 | `3e-3` | 160 / 320 (frozen) | runs now |
-| 2 | `3e-4` | 1,600 / 3,200 | declared, not run |
+| 1 | `3e-3` | 160 / 320 (frozen) | run 2026-09-02, branch `R1-C` |
+| 2 | `3e-4` | 1,600 / 3,200 | run 2026-09-02, branch `R1-C` |
 | 3 | `3e-3` | 1,600 / 3,200 | declared, not run |
 
 Rung 1 is registered as a distinct configuration in code
@@ -358,3 +358,26 @@ appears not to be executable at science scale on this platform, and the FP32 tol
 was calibrated at the 40-episode technical scale the two assessments used. Whether that becomes a
 `REPAIR_REQUIRED` disposition, a fresh object with an outcome-blind scale-appropriate tolerance, or a
 different conditioning intervention is an owner decision. Nothing here supports `PARK`.
+
+**Exposure ladder rung 2 — complete, valid, `R1-C EXPOSURE_DID_NOT_MOVE`.** Rung 1 was accepted in
+Part D of the compliance note, and its reading rule named rung 2 as the required next step; the owner
+directed it to run. Launched 2026-09-02 with HEAD `ba8d165fc193cfb0582b15f96fc68c4a9dd3afa6` and a
+**dirty, recorded** working tree — the first launch to exercise the clean-source demotion in its
+intended direction. Admission 12.77 GiB physical and effective. 359.3 s wall, 12 policies, 38,400 root
+and 19,200 tail optimizer updates (ten times rung 1), 60 checkpoints at roots
+`{40, 80, 160, 320, 3200}`, every activity counter reconciled, no non-finite event, telemetry fully
+measured (`resources_unmeasured: false`, peak RSS 411.1 MiB). Competence observation, recorded and
+deciding nothing: 0 of 12 policies competent, 0 of 12 oracle root-vector matches, branch
+`NO_ARM_COMPETENT`, both arms `false`. Reading rule of section 4.5 applied verbatim: no arm
+`B_COMPETENT` and `m = 0.025254 < 0.30`, so branch **R1-C** again; unchanged on `FT-XF-BC` alone,
+whose minimum move is `0.249392`. At update 3,200 the closest regret is `0.030221` against the `0.02`
+gate and the maximum tail agreement `0.788446` against the `0.95` gate. Ten times the update budget
+moved the Bellman coefficients no further than rung 1 did. Full evidence:
+`UCOPE_EXPOSURE_LADDER_R2_RESULT_EVIDENCE_20260902.md`.
+
+Two of the three registered rungs have now returned `R1-C` for the same structural reason: `m` is a
+minimum over 24 stage-policies and a single low-displacement `FT-XF-FLEX` tail policy fixes it below
+`0.30` while most policies move far more. Whether to run rung 3, to recast the exposure statistic, or
+to move to the margin-scaled falsifier held in reserve is an owner decision; neither the threshold nor
+the statistic is changed here, because moving a prospective rule after seeing two outcomes would be an
+outcome-informed rewrite.
