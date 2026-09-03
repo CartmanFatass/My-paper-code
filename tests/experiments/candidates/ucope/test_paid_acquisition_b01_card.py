@@ -242,10 +242,16 @@ def test_the_branch_names_appear_in_the_carded_order(card_text):
         card_text.index(label) for label in labels)
 
 
-def test_both_prediction_slots_are_present_and_empty(card_text):
+def test_both_prediction_slots_are_present_and_recorded_before_launch(card_text):
+    """The slots were written empty; the predictions were recorded into them before launch."""
     section = card_text.split("## 12. Predictions requested", 1)[1].split("## 13.", 1)[0]
-    assert "**Owner:**" in section and "**Reviewer:**" in section
-    assert section.count("_(empty — to be recorded before the run)_") == 2
+    assert "**Owner (2026-09-03, before launch):**" in section
+    assert "**Reviewer (2026-09-03, before launch):**" in section
+    assert "_(empty — to be recorded before the run)_" not in section
+    quotes = [line for line in section.splitlines() if line.startswith(">")]
+    assert len(quotes) >= 2
+    owner, reviewer = section.split("**Reviewer", 1)
+    assert "`PA-B`" in owner and "`PA-B`" in reviewer
 
 
 def test_deviations_and_could_not_verify_are_present_and_empty(card_text):
@@ -266,5 +272,7 @@ def test_the_three_witness_follow_up_is_mentioned_once_and_is_not_an_arm(card_te
     assert "MARGIN-AWARE-TREATMENT" in arms and "EXACT-REFERENCE" in arms
 
 
-def test_no_runner_exists_for_this_object_yet():
-    assert not list((PROJECT_ROOT / "scripts").glob("run_ucope_paid_acquisition*.py"))
+def test_the_runner_is_the_single_one_the_card_names():
+    """The card was written before the runner; the runner now exists and is unique."""
+    runners = sorted((PROJECT_ROOT / "scripts").glob("run_ucope_paid_acquisition*.py"))
+    assert [path.name for path in runners] == ["run_ucope_paid_acquisition_b01.py"]
