@@ -1077,6 +1077,20 @@ The owner ran `takeown` and `icacls` on the B0 artifact directory; it now lists 
 `B0_REVIEWED_AUTHORITY` constant exactly. B1 released under E.4's standing decision as a third
 single-thread process, launched detached, beside E2's two 4-thread runs.
 
+### E.6 First B1 attempt stopped at its first admission (2026-09-03, 10:30 PDT)
+
+The CBSC session launched B1 at implementation commit `036fe4eff` (launch dir
+`exp/cbsc_omrc_b1_launch`, preflight 10:30:05 passed). The orchestrator's first child admission
+(arm-seed `00-seed-21101-STRUCT-CURRENTNESS-GRU`, slice 00-12) failed with `WinError 3`: the
+preflight's atomic rename targeted an `admissions/` subdirectory of the partial run root that did
+not yet exist. Recorded by the runner itself as incident
+`b1-bca815500920492da688f83a2595e34e` with `decision: DECISION_PENDING`, before any RNG master,
+model or result existed. Reviewer's reading: a runner defect in directory creation, technical,
+no object consumed, no polarity; repair (create the admissions directory before the first
+admission) and a fresh attempt are permitted under §6.2. The session that launched it was killed
+by the rate limit at the same time. Held until a concurrency slot frees: the owner now caps
+concurrent directions at two (E2 and UCOPE first).
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
