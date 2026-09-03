@@ -378,3 +378,82 @@ not fatal. That is a different object and is put to the owner in C.4.
 PORTFOLIO row for `semigroup_consistent_duration_model_policy` updated by the reviewer in the
 commit carrying this part (next-object text and timestamp only; lifecycle, priority, owner
 unchanged).
+
+---
+
+## Part D — UCOPE recast intake (2026-09-02, later)
+
+Object: decision 2 of A.4 executed by an Opus session on `main`: commits `3423d5aca` (the
+direction's uncommitted working-tree state, 23 files, committed unchanged), `bd8648964` (recast
+intake `UCOPE_SECTION11_RECAST_INTAKE_20260902.md`, DIRECTION.md corrections, contract addenda;
+the exposure ladder registered as `UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01`), `ce361d40a`
+(refusals and the oracle-competence gate to recorded fields; 17 new test cases; direction suite
+631 passed, 4 pre-existing failures in `contextual_paid_acquisition_r01`), `06cf712e7` (two result
+documents). File scope verified by `git show --name-only`: every path under a UCOPE surface.
+Verdict: **recast accepted; ladder rung 1 accepted as a valid complete run; the whitening
+discriminator quarantined as an incomplete attempt (object not consumed).**
+
+### D.1 What the reviewer checked
+
+1. **Gates to fields.** The clean-source refusal records the porcelain status, HEAD sha and the
+   per-file inventory with `gating: false`; the assessment-03 binding records the assessment that
+   exists (`assessment-02`, `PERFORMANCE_READY` on disk, `INVALID_NOT_ADOPTED` by contract line
+   561) and gates on neither; the resource-cap refusal records exceedances and, when a field is
+   missing, `resources_unmeasured` with reasons (decision 7); `C_even` is computed at unchanged
+   thresholds and published per run, with a test asserting that no publication path branches on
+   it. DIRECTION.md's "continues only through" became "alongside" with the old sentence quoted;
+   the "no budget enlargement" sentence is superseded for named ladder rungs only, citing §5.2
+   and §11.1. Still gating: 4 GiB admission, §4 integrity items, nonzero counts, one exposure
+   line, §6.2 learner-side quarantine. This is decision 2 exactly.
+2. **The ladder as registered.** Rungs verbatim from the 2026-09-01 review: rung 1 lr 3e-3 at
+   160/320 updates; rung 2 lr 3e-4 at 1,600/3,200; rung 3 both. Reading rule frozen before the
+   data (intake §4.5): `m` = the minimum over 12 policies × 2 stages of the largest absolute
+   Bellman per-coordinate move at the final checkpoint; R1-A at least one arm `B_COMPETENT`;
+   R1-B none competent and `m ≥ 0.30`; R1-C none competent and `m < 0.30`.
+3. **Rung 1.** Preflight 10.74 GiB; wall 89 s; telemetry measured; 0 of 12 policies competent,
+   0 oracle root-vector matches, both arms `NO_ARM_COMPETENT`; `m = 0.046` → **R1-C, exposure
+   did not move** at this budget. The closest miss at update 320: regret 0.0286 against the
+   recorded 0.02 threshold, tail agreement 1.000. By the frozen rule rung 1 is uninformative
+   about the exposure hypothesis and rung 2 runs next; the reviewer has instructed the same
+   session to run rung 2 (about ten times rung 1's wall) as the registered object prescribes.
+4. **The whitening discriminator.** First-ever launch attempt under the recast; it failed in its
+   own frozen core (`conditioning.py:106`, `ConditioningTransformError: recorded Gram/Cholesky
+   relation is invalid`) in `prepare_fold_data`, before any model or optimizer. Quarantined, not
+   rerun, no polarity. An outcome-free diagnostic on the design matrices alone (no learner, no
+   quarantined artifact read) shows the failure is deterministic and universal at science scale:
+   all 12 seed/fold/stage designs give `max|LLᵀ − G|` of 9.1e-06 to 9.7e-06 against the frozen
+   `16·eps_fp32 = 3.81e-06` ceiling, at condition numbers 7e2 to 5e3. The implementer's
+   inference, which the reviewer shares: the tolerance was calibrated at the 40-episode technical
+   scale of the assessments, so the object as frozen is not executable at science scale.
+5. **Deviations** are all recorded and none touches a scientific factor: the ladder runs two arms
+   as registered (RNG counter-addressed); no A/RECON assessment for the ladder (the recast);
+   E1's two processes ran concurrently (wall times are upper bounds); no native cache is involved
+   in either UCOPE package; a post-hoc residual diagnostic is itself listed as a deviation.
+
+### D.2 Reviewer's reading
+
+Rung 1 says the 160/320 exposure is far too small for either arm to move, which is what the
+2026-09-01 review predicted when it proposed the ladder. Nothing about the conditioning question
+can be read yet. The discriminator's failure is a technical fact, not an outcome: under the
+repository's own rule a technical failure creates no retry budget and no polarity, and a redesign
+that fixes the tolerance (FP64 Gram, or a scale-appropriate FP32 ceiling) is a different object,
+instrumentation-informed rather than outcome-informed, since no outcome was produced. Whether to
+register that object is the owner's call (D.4).
+
+### D.3 Flags for the owner
+
+- The 4 pre-existing failures in `contextual_paid_acquisition_r01/test_structural_competence_certificate.py`
+  predate the recast and are untouched; they are not native-cache failures.
+- The discriminator runner's `prepare-run` lost its `--assessment` flag and its manifest format
+  moved to a `…_RECAST_V1` schema; both recorded in the result document.
+
+### D.4 Decisions this intake produces
+
+1. The whitening discriminator: register a successor object with a scale-appropriate Gram /
+   Cholesky tolerance (FP64 Gram at science scale; everything else frozen as R01) and run it
+   alongside ladder rung 2; or drop the discriminator and continue only through the ladder; or
+   park it until rung 2 says whether exposure moves anything. The reviewer recommends the
+   third: rung 2 decides whether there is a conditioning question worth a discriminator at all.
+
+PORTFOLIO row for `ucope` updated by the reviewer in the commit carrying this part (next-object
+text and timestamp only).
