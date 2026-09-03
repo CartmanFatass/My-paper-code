@@ -170,6 +170,7 @@ def run_workload(
         final_root_update=config.root_updates,
         host_valid=True,
         support_limited=support_limited,
+        arms=config.arms,
     )
     per_policy = {f"{run.arm_id}|{run.seed_id}|fold-{run.fold_id}": dict(run.activity) for run in policy_runs}
     activity = dict(data_activity)

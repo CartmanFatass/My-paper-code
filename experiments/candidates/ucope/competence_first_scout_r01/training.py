@@ -172,7 +172,7 @@ def train_policy(
     checkpoint_paths = []
     if latest is None:
         root, tail = build_arm(arm_id, seed_id, fold_id)
-        root_optimizer, tail_optimizer = optimizer_for(root), optimizer_for(tail)
+        root_optimizer, tail_optimizer = optimizer_for(root, config.learning_rate), optimizer_for(tail, config.learning_rate)
         root_updates = tail_updates = 0
         activity = _initial_activity(len(root_rows), len(tail_rows))
     else:

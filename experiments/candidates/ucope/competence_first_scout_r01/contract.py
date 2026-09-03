@@ -39,6 +39,21 @@ OPTIMIZER = {
     "gradient_clip": 1.0,
 }
 
+# --- Section-11 recast (2026-09-02): named exposure-ladder object -------------------
+# Registered by docs/research/candidates/ucope/UCOPE_SECTION11_RECAST_INTAKE_20260902.md
+# under owner decision 2 of FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md A.4. The ladder
+# reuses this frozen B1 code, host, criterion, seeds, folds, update counts, batch law and
+# checkpoint cadence; its single declared axis is optimizer exposure (learning rate), and
+# its arm pair is the review's FT-XF-FLEX / FT-XF-BC contrast.
+LADDER_OBJECT_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01"
+LADDER_ARMS = ("FT-XF-FLEX", "FT-XF-BC")
+LADDER_RUNG_1_ID = "UCOPE-B-EXPLORE-FT-XF-EXPOSURE-LADDER-R01-RUNG-1"
+LADDER_RUNG_1_LEARNING_RATE = 3e-3
+B1_LEARNING_RATE = 3e-4
+
+
+BINDING_KINDS = {"B1": "B1_ADMITTED", "LADDER1": "LADDER1_ADMITTED", "ASSESS": "ASSESS_SOURCE"}
+
 
 class ContractError(ValueError):
     """Raised before stateful work when the frozen observable drifts."""
@@ -69,10 +84,14 @@ class RunBinding:
     def b1(cls, *, manifest_digest: str, source_aggregate: str, assessment_digest: str) -> "RunBinding":
         return cls("UCOPE_SCOUT_R01_RUN_BINDING_V1", "B1_ADMITTED", manifest_digest, source_aggregate, assessment_digest).validate("B1")
 
+    @classmethod
+    def ladder1(cls, *, manifest_digest: str, source_aggregate: str, assessment_digest: str) -> "RunBinding":
+        return cls("UCOPE_SCOUT_R01_RUN_BINDING_V1", "LADDER1_ADMITTED", manifest_digest, source_aggregate, assessment_digest).validate("LADDER1")
+
     def validate(self, mode: str) -> "RunBinding":
         if self.binding_schema != "UCOPE_SCOUT_R01_RUN_BINDING_V1":
             raise ContractError("run binding schema drift")
-        expected_kind = "B1_ADMITTED" if mode == "B1" else "ASSESS_SOURCE"
+        expected_kind = BINDING_KINDS.get(mode, "ASSESS_SOURCE")
         if self.binding_kind != expected_kind:
             raise ContractError("run binding kind/mode mismatch")
         for name in ("manifest_digest", "source_aggregate", "assessment_digest"):
@@ -114,6 +133,9 @@ class ScoutConfig:
     arms: tuple[str, ...] = ARM_IDS
     object_id: str = OBJECT_ID
     rng_version: str = RNG_VERSION
+    # Section-11 recast (2026-09-02): the exposure ladder's single declared axis. The B1 and
+    # ASSESS values are unchanged at 3e-4, so every pre-existing artifact keeps its meaning.
+    learning_rate: float = B1_LEARNING_RATE
 
     @classmethod
     def b1(cls) -> "ScoutConfig":
@@ -126,6 +148,27 @@ class ScoutConfig:
             root_updates=320,
             evaluation_root_updates=CHECKPOINT_ROOT_UPDATES,
             sampled_evaluation_episodes=64,
+        ).validate()
+
+    @classmethod
+    def ladder_rung_1(cls) -> "ScoutConfig":
+        """Rung 1 of the named exposure ladder: lr 3e-3 at the frozen 160/320 exposure.
+
+        Everything except the learning rate and the two-arm contrast is the B1 object as
+        frozen: the same three seeds, two group-disjoint folds, 5,120 episodes per context,
+        batch 256, checkpoints 40/80/160/320, host, oracle and competence predicate.
+        """
+        return cls(
+            run_id="ucope-scout-r01-exposure-ladder-rung-1",
+            mode="LADDER1",
+            seed_ids=B1_SEEDS,
+            episodes_per_context=5_120,
+            tail_updates=160,
+            root_updates=320,
+            evaluation_root_updates=CHECKPOINT_ROOT_UPDATES,
+            sampled_evaluation_episodes=64,
+            arms=LADDER_ARMS,
+            learning_rate=LADDER_RUNG_1_LEARNING_RATE,
         ).validate()
 
     @classmethod
@@ -144,10 +187,13 @@ class ScoutConfig:
     def validate(self) -> "ScoutConfig":
         if self.object_id != OBJECT_ID or self.rng_version != RNG_VERSION:
             raise ContractError("object/RNG identity drift")
-        if self.mode not in {"B1", "ASSESS"}:
-            raise ContractError("mode must be B1 or ASSESS")
-        if not self.run_id or self.arms != ARM_IDS:
+        if self.mode not in BINDING_KINDS:
+            raise ContractError("mode must be B1, LADDER1 or ASSESS")
+        expected_arms = LADDER_ARMS if self.mode == "LADDER1" else ARM_IDS
+        if not self.run_id or self.arms != expected_arms:
             raise ContractError("run identity or arm order drift")
+        if type(self.learning_rate) is not float or not 0.0 < self.learning_rate < 1.0:
+            raise ContractError("learning rate must be a positive float below one")
         if not self.seed_ids or len(set(self.seed_ids)) != len(self.seed_ids):
             raise ContractError("seed identifiers must be nonempty and unique")
         if any(seed.startswith(CONSUMED_SEED_PREFIX) for seed in self.seed_ids):
@@ -188,9 +234,28 @@ class ScoutConfig:
                 "arms": ARM_IDS,
                 "object_id": OBJECT_ID,
                 "rng_version": RNG_VERSION,
+                "learning_rate": B1_LEARNING_RATE,
             }
             if self.__dict__ != canonical_b1:
                 raise ContractError("B1 configuration drift")
+        if self.mode == "LADDER1":
+            canonical_ladder1 = {
+                "run_id": "ucope-scout-r01-exposure-ladder-rung-1",
+                "mode": "LADDER1",
+                "seed_ids": B1_SEEDS,
+                "episodes_per_context": 5_120,
+                "tail_updates": 160,
+                "root_updates": 320,
+                "evaluation_root_updates": CHECKPOINT_ROOT_UPDATES,
+                "sampled_evaluation_episodes": 64,
+                "batch_size": BATCH_SIZE,
+                "arms": LADDER_ARMS,
+                "object_id": OBJECT_ID,
+                "rng_version": RNG_VERSION,
+                "learning_rate": LADDER_RUNG_1_LEARNING_RATE,
+            }
+            if self.__dict__ != canonical_ladder1:
+                raise ContractError("exposure ladder rung-1 configuration drift")
         if self.mode == "ASSESS":
             canonical = {
                 "run_id": "ucope-scout-r01-assess-r01",
@@ -205,6 +270,7 @@ class ScoutConfig:
                 "arms": ARM_IDS,
                 "object_id": OBJECT_ID,
                 "rng_version": RNG_VERSION,
+                "learning_rate": B1_LEARNING_RATE,
             }
             if self.__dict__ != canonical:
                 raise ContractError("ASSESS configuration drift")
@@ -220,9 +286,15 @@ class ScoutConfig:
 
     @classmethod
     def from_dict(cls, value: Mapping[str, Any]) -> "ScoutConfig":
-        if not isinstance(value, Mapping) or set(value) != set(cls.__dataclass_fields__):
+        if not isinstance(value, Mapping):
             raise ContractError("configuration field inventory mismatch")
         converted = dict(value)
+        # Backward compatibility with artifacts written before the 2026-09-02 recast added
+        # the explicit learning-rate field. Every such artifact is B1/ASSESS at 3e-4.
+        if "learning_rate" not in converted:
+            converted["learning_rate"] = B1_LEARNING_RATE
+        if set(converted) != set(cls.__dataclass_fields__):
+            raise ContractError("configuration field inventory mismatch")
         for name in ("seed_ids", "evaluation_root_updates", "arms"):
             if not isinstance(converted[name], (list, tuple)):
                 raise ContractError(f"{name} must be a sequence")

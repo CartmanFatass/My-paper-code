@@ -118,7 +118,7 @@ def validate_scientific_artifact(value: Mapping[str, Any], *, artifact_root: str
         raise ValueError("scientific artifact field inventory mismatch")
     config = ScoutConfig.from_dict(value["config"])
     run_binding = RunBinding.from_value(value["run_binding"], config.mode)
-    if config.mode != "B1" or value["format"] != SCIENTIFIC_FORMAT or value["schema_version"] != SCHEMA_VERSION or value["object_id"] != OBJECT_ID or value["complete"] is not True:
+    if config.mode not in {"B1", "LADDER1"} or value["format"] != SCIENTIFIC_FORMAT or value["schema_version"] != SCHEMA_VERSION or value["object_id"] != OBJECT_ID or value["complete"] is not True:
         raise ValueError("complete B1 artifact identity mismatch")
     if not isinstance(value["internal_result"], Mapping) or set(value["internal_result"]) != {"support_limited", "support_histograms", "gates", "evaluations"}:
         raise ValueError("complete B1 artifact lacks gate/evaluation evidence")
@@ -153,6 +153,7 @@ def validate_scientific_artifact(value: Mapping[str, Any], *, artifact_root: str
         seed_ids=config.seed_ids,
         final_root_update=config.root_updates,
         support_limited=support_limited,
+        arms=config.arms,
     )
     if value["internal_result"]["gates"] != recomputed:
         raise ValueError("complete B1 gate evidence mismatch")
@@ -218,8 +219,8 @@ def _validate_complete_policy_activity(activity: Mapping[str, Any], config: Scou
 
 def build_scientific_artifact(result: Any, *, checkpoint_inventory, artifact_root: str | Path | None = None) -> dict[str, Any]:
     config = result.config if isinstance(result.config, ScoutConfig) else ScoutConfig.from_dict(result.config)
-    if config.mode != "B1":
-        raise ValueError("scientific artifact builder accepts only B1")
+    if config.mode not in {"B1", "LADDER1"}:
+        raise ValueError("scientific artifact builder accepts only B1 or LADDER1")
     value = {
         "format": SCIENTIFIC_FORMAT,
         "schema_version": SCHEMA_VERSION,

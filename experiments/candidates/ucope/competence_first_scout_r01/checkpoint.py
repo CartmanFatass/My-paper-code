@@ -128,7 +128,7 @@ def validate_checkpoint(value: Mapping[str, Any]) -> dict[str, Any]:
         group = optimizer_state["param_groups"]
         if len(group) != 1 or group[0].get("params") != list(range(len(parameters))):
             raise ValueError(f"{prefix} optimizer parameter inventory mismatch")
-        expected_hyper = {"lr": 3e-4, "betas": (0.9, 0.999), "eps": 1e-8, "weight_decay": 0.0}
+        expected_hyper = {"lr": config.learning_rate, "betas": (0.9, 0.999), "eps": 1e-8, "weight_decay": 0.0}
         if any(group[0].get(key) != item for key, item in expected_hyper.items()):
             raise ValueError(f"{prefix} optimizer hyperparameter drift")
         state = optimizer_state["state"]

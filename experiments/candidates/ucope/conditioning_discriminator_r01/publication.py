@@ -23,6 +23,11 @@ ASSESS_FORMAT = "UCOPE_BC_CONDITIONING_R01_A_RECON_PERFORMANCE_V3"
 ASSESSMENT_ID = "ucope-bc-conditioning-r01-assessment-03"
 PROJECTION_LAW = "DECOMPOSED_STAGE_SCALING_V2_CONSTANT_SHAPE_SETUP_RELOAD"
 MANIFEST_FORMAT = "UCOPE_BC_CONDITIONING_R01_RESULT_MANIFEST_V1"
+# Section-11 recast (2026-09-02, owner decision 2 of FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md
+# A.4): a second manifest format whose performance-assessment binding and source-cleanliness
+# fields are recorded rather than gating. The strict V1 path above is retained unchanged so the
+# historical assessment-03 contract stays readable; nothing calls it on the result path.
+RECAST_MANIFEST_FORMAT = "UCOPE_BC_CONDITIONING_R01_RESULT_MANIFEST_RECAST_V1"
 RESULT_FORMAT = "UCOPE_BC_CONDITIONING_R01_COMPLETE_RESULT_V1"
 MAX_WALL_SECONDS = 900.0
 MAX_RSS_BYTES = 603_979_776
@@ -172,6 +177,58 @@ def validate_manifest(value: Mapping[str, Any]) -> dict[str, Any]:
     return dict(value)
 
 
+def build_recast_manifest(*, assessment_record: Mapping[str, Any], resource_caps: Mapping[str, Any], execution_topology: Mapping[str, Any], source_record: Mapping[str, Any], output_root: str) -> dict[str, Any]:
+    """Manifest for the section-11 recast run.
+
+    Differences from ``build_manifest``, and only these: the performance assessment is a
+    recorded field (any assessment on disk, or none, with its contract declaration beside
+    it) instead of a mandatory create-once ``assessment-03`` with a ``PERFORMANCE_READY``
+    disposition; and the source revision/inventory carry the working-tree status instead of
+    a refusal when it is dirty. Both demotions are §11.4. Everything the run's own claim
+    needs -- exact scientific configuration, science contract, RNG version, data-ancestry
+    law, batch law, transform implementation, zero-effect firewall -- is unchanged.
+    """
+    config = WorkloadConfig.science()
+    binding_payload = {
+        "object_id": OBJECT_ID, "config": config.to_dict(), "science_contract": ConditioningConfig.r01().to_dict(),
+        "source_revision": source_record["revision"], "source_inventory": list(source_record["inventory"]),
+        "source_status": dict(source_record["status"]),
+        "performance_assessment": dict(assessment_record),
+        "rng_version": RNG_VERSION,
+        "data_ancestry_law": "counter_addressed_run_seed_episode_context_shared_across_arms",
+        "batch_law": "ordered_rows_cyclic_batch_update_times_256_mod_inventory",
+        "transform_implementation": "ordered_fp32_X_matmul_div_n_cholesky_lower_solve_triangular_column",
+        "execution_topology": dict(execution_topology),
+        "scratch_root": f"{output_root}/work", "output_root": output_root, "resource_caps": dict(resource_caps),
+    }
+    binding = hashlib.sha256(canonical_json_bytes(binding_payload)).hexdigest()
+    return {"format": RECAST_MANIFEST_FORMAT, "schema_version": SCHEMA_VERSION, **binding_payload, "binding": binding, "zero_effects": zero_effect_ledger()}
+
+
+def validate_recast_manifest(value: Mapping[str, Any]) -> dict[str, Any]:
+    """Structural validation only for the recast manifest.
+
+    It still binds the exact scientific configuration, science contract and zero-effect
+    firewall, and it still detects tampering through the binding digest. It does not read
+    the recorded assessment or source status as a pass/fail condition.
+    """
+    required = {"format", "schema_version", "object_id", "config", "science_contract", "source_revision", "source_inventory", "source_status", "performance_assessment", "rng_version", "data_ancestry_law", "batch_law", "transform_implementation", "execution_topology", "scratch_root", "output_root", "binding", "resource_caps", "zero_effects"}
+    if not isinstance(value, Mapping) or set(value) != required or value["format"] != RECAST_MANIFEST_FORMAT or value["object_id"] != OBJECT_ID: raise ValueError("recast manifest schema/identity mismatch")
+    if WorkloadConfig.from_dict(value["config"]) != WorkloadConfig.science(): raise ValueError("manifest must bind exact scientific configuration")
+    ConditioningConfig.from_dict(value["science_contract"])
+    assessment_record = value["performance_assessment"]
+    if not isinstance(assessment_record, Mapping) or assessment_record.get("gating") is not False: raise ValueError("recast manifest assessment record must be marked non-gating")
+    source_status = value["source_status"]
+    if not isinstance(source_status, Mapping) or source_status.get("gating") is not False: raise ValueError("recast manifest source status must be marked non-gating")
+    cap_keys = {"wall_seconds", "cpu_seconds", "process_tree_rss_bytes", "scratch_bytes", "durable_bytes", "io_read_bytes", "io_write_bytes", "aggregate_io_bytes", "thread_cap", "process_cap", "child_process_cap"}
+    caps = value["resource_caps"]
+    if not isinstance(caps, Mapping) or set(caps) != cap_keys: raise ValueError("recast manifest resource cap inventory mismatch")
+    _require_exact_topology(value["execution_topology"], label="manifest")
+    payload = {key: value[key] for key in ("object_id", "config", "science_contract", "source_revision", "source_inventory", "source_status", "performance_assessment", "rng_version", "data_ancestry_law", "batch_law", "transform_implementation", "execution_topology", "scratch_root", "output_root", "resource_caps")}
+    if hashlib.sha256(canonical_json_bytes(payload)).hexdigest() != value["binding"] or value["zero_effects"] != zero_effect_ledger(): raise ValueError("manifest binding/firewall mismatch")
+    return dict(value)
+
+
 def validate_admission(value: Mapping[str, Any], *, now: datetime_module.datetime | None = None, maximum_age_seconds: float | None = 300.0) -> dict[str, Any]:
     assessment = value if isinstance(value, Mapping) else None
     required = {"schema_version", "captured_at", "assessed_at", "measurement_source", "minimum_available_bytes", "available_physical_bytes", "cgroup_memory_max_bytes", "cgroup_memory_current_bytes", "cgroup_headroom_bytes", "effective_available_bytes", "physical_floor_pass", "effective_floor_pass", "passed", "failure_reasons"}
@@ -243,10 +300,19 @@ def validate_complete_result(value: Mapping[str, Any], *, complete_root: str | P
     if len(value["checkpoints"]) != len(expected_checkpoint_ids) or set(checkpoint_by_id) != expected_checkpoint_ids: raise ValueError("checkpoint result inventory mismatch")
     if not allow_test:
         resources = value["resources"]
-        if not isinstance(resources, Mapping) or set(resources) != {"observed", "caps", "within_caps"} or resources["within_caps"] is not True: raise ValueError("result resource ledger mismatch")
-        observed, caps = resources["observed"], resources["caps"]
-        comparisons = (("wall_seconds", "wall_seconds"), ("cpu_seconds", "cpu_seconds"), ("process_tree_peak_rss_bytes", "process_tree_rss_bytes"), ("scratch_high_water_bytes", "scratch_bytes"), ("durable_high_water_bytes", "durable_bytes"), ("io_read_bytes", "io_read_bytes"), ("io_write_bytes", "io_write_bytes"), ("aggregate_io_bytes", "aggregate_io_bytes"), ("thread_count_peak", "thread_cap"), ("process_count_peak", "process_cap"), ("child_process_count_peak", "child_process_cap"))
-        if any(observed.get(source, float("inf")) > caps.get(cap, -1) for source, cap in comparisons): raise ValueError("result resource cap violation")
+        if not isinstance(resources, Mapping): raise ValueError("result resource ledger mismatch")
+        if resources.get("gating") is False:
+            # Section-11 recast (2026-09-02): the projection caps are inherited from an
+            # assessment the object's own contract declares ineligible, so a measured
+            # exceedance is recorded, not invalidating (§11.4 capacity gate). Owner decision
+            # 7: a missing measurement downgrades to resources_unmeasured, never annuls.
+            recast_keys = {"observed", "caps", "within_caps", "gating", "cap_source", "cap_exceedances", "resources_unmeasured", "unmeasured_reasons"}
+            if set(resources) != recast_keys: raise ValueError("recast result resource ledger inventory mismatch")
+        else:
+            if set(resources) != {"observed", "caps", "within_caps"} or resources["within_caps"] is not True: raise ValueError("result resource ledger mismatch")
+            observed, caps = resources["observed"], resources["caps"]
+            comparisons = (("wall_seconds", "wall_seconds"), ("cpu_seconds", "cpu_seconds"), ("process_tree_peak_rss_bytes", "process_tree_rss_bytes"), ("scratch_high_water_bytes", "scratch_bytes"), ("durable_high_water_bytes", "durable_bytes"), ("io_read_bytes", "io_read_bytes"), ("io_write_bytes", "io_write_bytes"), ("aggregate_io_bytes", "aggregate_io_bytes"), ("thread_count_peak", "thread_cap"), ("process_count_peak", "process_cap"), ("child_process_count_peak", "child_process_cap"))
+            if any(observed.get(source, float("inf")) > caps.get(cap, -1) for source, cap in comparisons): raise ValueError("result resource cap violation")
     if complete_root is not None:
         root = Path(complete_root)
         for record in value["checkpoints"]:

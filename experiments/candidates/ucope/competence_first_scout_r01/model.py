@@ -124,6 +124,13 @@ def validate_arm(root, tail, *, flexible: bool) -> None:
             raise ValueError("model parameters must be finite FP32")
 
 
-def optimizer_for(scorer):
+def optimizer_for(scorer, learning_rate: float = 3e-4):
+    """AdamW at the caller's declared exposure.
+
+    The default is the frozen B1/ASSESS learning rate; the exposure-ladder object passes its
+    own declared rung rate. Every other optimizer literal is unchanged.
+    """
     torch = _torch()
-    return torch.optim.AdamW(scorer.parameters(), lr=3e-4, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.0)
+    if type(learning_rate) is not float or not 0.0 < learning_rate < 1.0:
+        raise ValueError("learning rate must be a positive float below one")
+    return torch.optim.AdamW(scorer.parameters(), lr=learning_rate, betas=(0.9, 0.999), eps=1e-8, weight_decay=0.0)
