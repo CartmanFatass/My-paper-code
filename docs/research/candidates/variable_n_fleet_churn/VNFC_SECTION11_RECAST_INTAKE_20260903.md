@@ -203,6 +203,29 @@ the frozen witness parameterisation lives in the untracked A0 package
 check constructs its own near-tie exhibiting the same mechanism. This is recorded as a deviation,
 not as a reproduction of the witness.
 
+### Implementation note (2026-09-03, after the row list was frozen, before the run)
+
+The check is implemented at
+`tests/experiments/candidates/variable_n_fleet_churn_b_explore/test_r02_presentation_conformance.py`,
+whose `ROW_IDS` tuple is the table above, in order, and is itself asserted to hold exactly 52 unique
+ids. Two rows are exercised in a way worth recording, because the frozen wording could be read more
+narrowly than the mechanism allows:
+
+- **A05** is exercised at the *decoder*: an exactly-tied masked-logit row with a known opaque-rank
+  vector, canonicalised and decoded under all four presentations. It is not exercised by feeding the
+  model two byte-identical agent rows, because that does **not** guarantee byte-identical candidate
+  logits: the row-wise GEMM is row-position dependent, which is the same finite-precision mechanism
+  the R01 `N=5/reverse` counterexample exhibited. Testing the tie rule through the model would have
+  tested the GEMM, not the rule.
+- **G02** therefore asserts two things: that two byte-identical agent rows with different opaque
+  ranks give the same inverse-mapped physical command and the same physically keyed probability
+  vector under all four presentations (the property the canonical sort delivers), and that the
+  exact-tie limb of the rule — smaller opaque rank wins — holds on the decoder. The direct
+  observation that byte-identical rows need not produce byte-identical logits is recorded in the
+  test's docstring; it is an observation about the arithmetic, not a defect of the law.
+
+No row was added, removed or renamed.
+
 ## 5. The R02 object, restated in one page
 
 **Question.** On the exact two-zone, one-unannounced-executor-loss simulator, does a
