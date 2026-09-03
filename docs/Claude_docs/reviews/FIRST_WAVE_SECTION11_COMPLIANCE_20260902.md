@@ -911,6 +911,56 @@ one of the three failing projections must shrink by 55%, which a tenfold budget 
 travel-ceiling-free whitened design should manage for the two smaller ones and may not for the
 largest), LARGER-N 3 of 6. The two predictions differ only on BUDGET-100X's count.
 
+### D.21 Tail-margin remedies intake (2026-09-03)
+
+Commits `cba112c72`, `572317349`, `1af397fe6` (predictions on the card; runner and tests; result
+`UCOPE_TAIL_MARGIN_REMEDIES_R01_RESULT_EVIDENCE_20260903.md`; the fail-soft interop change with
+the published competence record unchanged); scope verified. 1,966,080 fresh episodes at offset
+2,000,000, wall 182 s, clean inventory, nothing quarantined. **Accepted.**
+
+Outcome by the rule in its stated order: agreement gate MARGIN-AWARE 4 of 6, BUDGET-100X 2 of 6,
+LARGER-N 2 of 6 → **M-B, margin majority.** The card's frozen quantity says what happened:
+MARGIN-AWARE turned the count-0 gap in the fragile stratum positive in all six policies
+(+0.014 to +0.033), at a value bias of at most 0.49% excess training MSE; BUDGET-100X, ten
+times the tail budget and 99% unclipped, moved that gap by at most 0.0014 and has flags
+identical to LARGER-N. Under the full `C_even`: MARGIN-AWARE 3 of 6, the others 2 of 6; no arm
+beats the published baseline of 3. Neither lock opened.
+
+Two facts decide the reading. First, the residual moved rather than vanished: MARGIN-AWARE's
+two agreement failures sit in the `p = 13/20` stratum on the other two held-out decision
+directions (`(2, 4)` and `(4, 6)`), which the hinge, constraining only the `(5, 9)` witness, did
+not touch; a three-witness hinge is the named successor. Second, the baseline is not paired: at
+the new offset the exact solve itself flips count 0 in 3 of 6 policies at `n = 81,920` (never at
+the published offset), and `d_objective` reaches 0.18. The margins this predicate turns on are at
+the noise floor of the tail estimate at this `n`.
+
+Verdicts. Owner ("MARGIN-AWARE 6 of 6 and BUDGET-100X does not"): false by wording (4, not 6),
+right in direction and exactly right about the margin. Reviewer ("6 / 5 / 3"): all three counts
+wrong (observed 4 / 2 / 2), the ordering survives, and the sharp miss is separating BUDGET-100X
+from LARGER-N when they came out identical: the budget does nothing once the travel ceiling is
+gone, which the conditioning object had already shown and the reviewer did not carry forward.
+
+Reviewer's reading of where the chain stands. Six objects since the recast have decomposed the
+learner's failure to reach `C_even` into the raw optimiser's travel ceiling (removed by
+whitening), the root's conditioning (removed by whitening the root), estimation variance at the
+original `n` (removed by eight times the data), and now a decision margin of about 0.008 in two
+belief strata that sits at the noise floor of the tail estimate itself. What remains is not a
+learner defect; it is that the competence predicate demands 19/20 tail agreement across eight
+contexts, four of them all-or-nothing, on decisions the exact solve itself gets wrong at a
+different draw. Spec §11.1 demotes exactly this kind of oracle-retuned competence criterion from
+a gate to a recorded observation, and the recast intake recorded the COUNT/RAW and acquisition
+locks as the direction's own sequencing, not as §11 gates. The reviewer therefore recommends
+that the direction's actual question, paid acquisition, be asked now with competence recorded
+per arm (3 of 6 on `C_even`, 6 of 6 on the margin) rather than required, and that the
+three-witness hinge run alongside as the cheap mechanism-level follow-up.
+
+### D.22 Decisions this intake produces
+
+1. UCOPE next: (a) open the paid-acquisition B object with competence recorded, not required,
+   under §11.1, the whitened MARGIN-AWARE learner as the treatment learner and the exact solve as
+   the reference (reviewer's recommendation); (b) the three-witness hinge object first, then
+   decide; (c) a draw-variance object (larger `n`) first; (d) stop the chain here.
+
 ---
 
 ## Part E — CBSC recast intake, run pending (2026-09-02, later)
