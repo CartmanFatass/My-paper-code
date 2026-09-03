@@ -586,7 +586,13 @@ the prediction request to the owner; nothing runs until the prediction is on rec
 
 ### D.10 Decision this intake produces
 
-1. The owner's prediction among M1–M4 or "none of these" (asked directly).
+1. The owner's prediction among M1–M4 or "none of these" (asked directly). **Owner's
+   prediction on record (2026-09-02): M2**, optimisation shortfall on the ill-conditioned Gram
+   under clipped AdamW with unshuffled cyclic batches; the objective's own optimum is still `β*`.
+   The reviewer's prediction, for the record: M1 or M3 (the objective or the root's inherited
+   targets), because the sub-one-percent change between rungs at equal `steps × lr` reads more
+   like a converged fixed point than a starved optimiser; if M2 is right, X3's extended loop
+   should keep moving. The diagnostic runs on 2026-09-03 with both predictions on record.
 
 ---
 
@@ -665,4 +671,7 @@ third, single-thread process is put to the owner in E.4 rather than assumed.
 2. Whether B1 may run now as a third, single-thread process beside E1's two 4-thread runs, or
    waits for E1 to finish. **Owner decision (2026-09-02): once the directory is restored, B1
    runs immediately as a third single-thread process**, recorded as a one-off deviation from
-   §7 decision 3 of the advancement plan (16 logical cores; 4 + 4 + 1 threads).
+   §7 decision 3 of the advancement plan (16 logical cores; 4 + 4 + 1 threads). The owner
+   reported the directory restored on 2026-09-02; at 02:25 PDT 2026-09-03 the reviewer's
+   PowerShell still gets `Access to the path … is denied` on `Get-ChildItem` and `Get-Acl`, so
+   the restore did not take and B1 stays held.
