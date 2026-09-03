@@ -702,7 +702,14 @@ named. That is the kind of quantity worth computing before predicting.
 first (the larger `n` chosen by an outcome-free calculation on the exact solve, the whitened
 learner at the 10× budget, competence recorded per arm, reading rule ordered by effect size)
 and waits for the owner's prediction; the discriminator is recorded in DIRECTION.md as
-superseded, its quarantine record untouched.
+superseded, its quarantine record untouched. Done in commits `a4a0a998a` (retirement) and
+`be5b68b22` (card `UCOPE_COMPETENCE_WHITENED_R01_CARD_20260903.md` with the outcome-free `n`
+table: the exact solve meets both conditions in 6/6 folds first at `n = 81,920` rows per policy,
+eight times the ladder's `n`; arms WHITENED-10X, RAW-10X, EXACT-SOLVE; branches C-A to C-E).
+**Predictions on record (2026-09-03): owner "unclear"** (an exploration run without a calibration
+point); **reviewer C-B**: a majority of folds competent but not all six, because the competence
+predicate is tight (regret ≤ 0.02, tail agreement ≥ 0.95) and the whitened learner's residual to
+the exact solve (0.01–0.08 at the smaller `n`) will cross it in at least one fold.
 
 ---
 
