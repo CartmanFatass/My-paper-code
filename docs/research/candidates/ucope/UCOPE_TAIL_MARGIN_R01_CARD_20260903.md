@@ -313,3 +313,25 @@ Please pick one before part 2 is registered and run.
 
 Please also say whether part 2 is to be registered as
 `UCOPE-B-EXPLORE-TAIL-MARGIN-REMEDIES-R01` as written, or amended first.
+
+## 13. Predictions on record (added 2026-09-03; card body and reading rule unchanged)
+
+Recorded 2026-09-03 under owner decision D.20 (commit `da8e02301`), following the acceptance of
+this card and the root-conditioning result (compliance note D.19, commit `7482e7e31`), and **before
+part 2 ran**.
+
+Owner:
+
+> MARGIN-AWARE reaches 6 of 6 on the agreement gate and BUDGET-100X does not
+
+Reviewer:
+
+> MARGIN-AWARE 6 of 6, BUDGET-100X 5 of 6, LARGER-N 3 of 6
+
+This section records the predictions only. Nothing in sections 1-12 is altered: part 1's geometry,
+the three arms and their fixed hyperparameters (`m = 0.024022`, hinge weight `1.0`), the branch
+statistic, the five branches `M-A` to `M-E`, the thresholds (agreement gate `19/20`, majority
+`4 of 6`, baseline `3 of 6`, "strictly improves the margin" = a negative baseline count-0 gap
+becomes positive) and the launch conditions stand exactly as frozen, and the branch is decided by
+those numbers alone. Both predictions are judged in the rule's own wording and against the numbers
+in `UCOPE_TAIL_MARGIN_REMEDIES_R01_RESULT_EVIDENCE_20260903.md`.
