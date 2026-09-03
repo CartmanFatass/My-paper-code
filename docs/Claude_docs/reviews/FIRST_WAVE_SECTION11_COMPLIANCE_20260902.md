@@ -639,6 +639,9 @@ are cheap and outcome-free in their reference arms.
    reading `d_learned` per arm (reviewer's recommendation; it also answers what the held
    discriminator wanted to know, with a tolerance set at science scale); (b) an estimator
    variance object first (larger `n`, pooled fits); (c) a reading-rule successor only; (d) park.
+   **Owner decision (2026-09-03): (a).** The object is carded first with the two mechanisms and a
+   reading rule whose branches are ordered by effect size (the D.11 lesson), and waits for the
+   owner's prediction before its run.
 
 ---
 
