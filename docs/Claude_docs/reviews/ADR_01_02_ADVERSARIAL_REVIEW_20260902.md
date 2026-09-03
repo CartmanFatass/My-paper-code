@@ -1279,3 +1279,37 @@ with the drift caveat above.
 2. E2 launches at this commit under XI.4's standing decision; no further question. The runner
    is implemented by an Opus session in a worktree from the E2 contract, predictions already on
    record (plan §11, 2026-09-03).
+
+## XII.4 E2 pre-launch deviation: evaluation tape count (2026-09-03, 14:06 PDT)
+
+The E2 implementer (worktree branch `worktree-agent-a88287f2315bb99a0`, launch sha `92243f413`)
+measured, before any result-bearing run, that contract §3.1's evaluation (4,096 matched tapes at
+rollouts 5, 10, 15, 20) costs 31.5 minutes per evaluation on this host (0.46 s per episode: the
+skill coordinator's transformer runs at every step because D2 checks the gap at `delta = 1`,
+and the cost per lane-step is flat from batch 256 to 1,024), so the 18 runs at two concurrent
+would take about 22.8 hours of machine time, 2.9 times the owner's 8-hour cap (advancement plan
+§7 decision 3). The contract's own remedy, §4.4's drop rule, reduces runs, not evaluation size,
+and cannot reach the cap (14 runs would still take 17.7 hours). Corridor training itself is
+78 s per rollout at two concurrent 4-thread processes (64 s single; factor 1.21).
+
+Options put on record: (A) full 4,096 at the final checkpoint plus 512 at the intermediates,
+10.4 hours, 30% over the cap; (B) full 4,096 at the final checkpoint and no intermediate
+evaluations, 8.6 hours, which removes §3.1's schedule; (C) all 18 runs, `R = 20`, the §2 order
+and the §3.1 schedule intact, the matched set declared as episode ids 0..4095 at evaluation
+master seed 770001 with its content digest in every manifest, the final checkpoint evaluated on
+the first 2,048 and the intermediate checkpoints on the first 512, strict matched prefixes for
+every arm, seed and checkpoint, 8.0 hours (reviewer's recommendation).
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (C).** Reasoning: the tightest
+reference gap in the `k` grid at this host point is `J_20 − J_5 = 0.0081` (references computed
+and recorded: `J_switch = 0.39202`, `J_fixed_k = {1: 0.001, 2: 0.197, 5: 0.305317, 20: 0.313392,
+40: 0.268150}`, `k* = 20`, `m = 0.235324`, `m_dur = 0.078628`); at a per-episode return standard
+deviation of order 0.05 the standard error is about 0.001 at 2,048 episodes and 0.0022 at 512,
+so every §5 comparison stays resolvable and ADR 02 invariant 5 (`m_dur ≥ 3σ/√E`) holds with
+room; §5's deciding scale is `s`, the across-seed range, which dominates both. Conditions: the
+deviation is D1 in the result document with the measured costs and the standard-error
+arithmetic; intermediate checkpoints are trajectory reads, never the §5 deciding quantity; the
+final checkpoints are retained with the full-set digest so a later contract can evaluate all
+4,096 tapes if ever needed. The cost itself is recorded as an open engineering item for the
+E-series: evaluation at `delta = 1` is transformer-bound and cannot be reduced without editing
+`hmasd/`, which the E2 assignment forbids.
