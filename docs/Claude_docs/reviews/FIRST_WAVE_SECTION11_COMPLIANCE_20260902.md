@@ -371,7 +371,9 @@ not fatal. That is a different object and is put to the owner in C.4.
 2. Native caches: **owner decision (2026-09-02): the owner clears the `%LOCALAPPDATA%\Temp\hmasd_*`
    directories with elevated rights; later recast sessions do not redirect `TMP` and use the
    default cache root.** Until the clearing is confirmed a session that meets the wall records the
-   redirect as a deviation, as SCDMP did.
+   redirect as a deviation, as SCDMP did. **Cleared 2026-09-02 17:54 PDT** (owner, elevated
+   PowerShell; reviewer verified every `hmasd_*_native` root absent). From here on native backends
+   rebuild into the default root on first use and no session redirects `TMP`.
 
 PORTFOLIO row for `semigroup_consistent_duration_model_policy` updated by the reviewer in the
 commit carrying this part (next-object text and timestamp only; lifecycle, priority, owner
