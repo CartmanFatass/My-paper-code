@@ -454,6 +454,8 @@ register that object is the owner's call (D.4).
    alongside ladder rung 2; or drop the discriminator and continue only through the ladder; or
    park it until rung 2 says whether exposure moves anything. The reviewer recommends the
    third: rung 2 decides whether there is a conditioning question worth a discriminator at all.
+   **Owner decision (2026-09-02): the discriminator is held until ladder rung 2 is in;** no
+   successor object is registered now and the R01 quarantine stands.
 
 PORTFOLIO row for `ucope` updated by the reviewer in the commit carrying this part (next-object
 text and timestamp only).
