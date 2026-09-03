@@ -34,7 +34,21 @@ canonical serialization, a scalar CPU binary64 reference, an exact normalized 52
 probability vector, and uint64-midpoint physical CDF sampling. Deterministic choice compares the
 same law's centered `q` strictly and uses opaque-rank/null-last only for exact `q` ties; integer
 probability masses do not change that ordering. The immediate decision-relevant object is the
-non-result-bearing `VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` at `A/RECON`.
+non-result-bearing `VNFC-BPCR-R02-FINITE-PHYSICAL-ACTION-LAW-A0` at `A/RECON`. Its scalar
+`sigmoid/exp/log/sqrt` callables and current-target Python/torch/runtime bytes are literal frozen
+inputs; an implementation cannot regenerate expected digests from its environment. The same-PID
+transaction starts with `-S`, manually adds the verified site-packages path without site/`.pth`
+processing, and binds exactly 942 loaded Python dependency sources plus the content-bound real
+`scripts/run_vnfc_bpcr_r02_a0.py` `__main__`, 31 opened distribution resources, and 81 compiled
+modules through the second probe before continuing into content-bound A0 source. The
+31-resource set is full row-wise equality, not a subset; audit enforcement remains active through
+publication, with later reads and create-once outputs limited to prospectively declared paths. The
+formal transferred 24-call host path then performs one exact load-only same-PID transition: it
+binds six candidate-local Python/C++/HPP source rows and the source-keyed
+`bpcr_backend.dll` at literal build key `7222d990642a7e4cb010b6526f17acdb3f3aa85f11d1b8d34be0eedbe11e9c99`,
+forbids compilation, helper subprocesses, fallback, or cache mutation, and changes the compiled
+inventory from the frozen 81-row pre-load root to exactly the frozen 82-row post-load root through
+publication.
 
 ## Controlling conformance result
 
@@ -109,7 +123,11 @@ Its frozen panel contains 304 address rows: 288 rows from all 18 descriptors, fo
 two fresh parameter fixtures and both MAPR/zero-residual DIRECT; four deterministic source-witness
 rows; and twelve duplicate/nextafter/fixed-prefix primitive rows. Every physical CDF boundary,
 adjacent representable value and adjacent production word is enumerated, together with replay,
-gradient, optimizer, containment, and undeclared-channel checks.
+gradient, optimizer, containment, and undeclared-channel checks. The twelve primitive rows each
+contain all four token addresses, exactly 80 support-matched candidate children, and exactly 512
+CDF children. Decimal CDF edge indices, exact probe names, and endpoint no-midpoint omissions are
+frozen. The model-bearing panel has 74 logical group-arm steps but 292 independent presentation-
+specific replay/gradient/optimizer evaluations and records; those counts are not interchangeable.
 
 A0 fails on any co-presentation difference in physical deterministic action, claimed-exact aligned
 probability, declared RNG-coupled sampled action, MAPR versus zero-residual DIRECT behavior, or on
@@ -152,6 +170,14 @@ law changes are forbidden. The R01 validator's combined `structural` counter mus
 R02 evidence by address-resolved predicate reporting, but that reporting repair is not the
 scientific conformance repair.
 
+The source-owned scalar reverse is part of the same law, not a successor mechanism. Its memoized
+scalar DAG fixes node/edge traversal, primitive parent contributions, repeated-leaf and SiLU merge
+order, affine output/input accumulation, record order, and every custom-adjoint boundary. Framework
+autograd or a different algebraic derivative association is not an implementation of this law.
+Categorical log-probability and entropy reverse nodes reuse stored forward `p/log_p/H`, apply their
+upstream adjoints after separately rounded locals, emit candidates in canonical physical order, and
+merge only through that DAG accumulator.
+
 No R02 result-bearing DEBUG is permitted until the one-law A0 object is complete and passing under
 its finite claim ceiling.
 
@@ -162,6 +188,8 @@ its finite claim ceiling.
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R01_CLOSE_R02_FINITE_ACTION_LAW_INNOVATOR_INTAKE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R02_FINITE_PHYSICAL_ACTION_LAW_A0_FREEZE_20260901.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R02_A0_EM_FREEZE_INTAKE_20260901.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_R02_ORC_B64_Q52_U64_V1_REFERENCE_KERNEL_BYTE_MANIFEST_20260901.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_R02_ORC_B64_Q52_U64_V1_REFERENCE_PYTHON_SOURCE_MANIFEST_20260901.tsv`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R09_SAME_DIRECTION_SCIENTIFIC_RESULT_INTAKE_20260821.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R09_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE_20260821.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_CLOSED_EM_INTAKE_20260822.md`

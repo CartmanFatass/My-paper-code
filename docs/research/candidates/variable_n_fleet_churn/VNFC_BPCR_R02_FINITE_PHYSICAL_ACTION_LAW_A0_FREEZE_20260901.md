@@ -9,6 +9,9 @@ result_bearing=false
 law=VNFC-R02-ORC-B64-Q52-U64-V1
 law_selected=true
 object_frozen=true
+late_freeze_closure=complete
+scalar_reverse_graph_closure=complete
+categorical_reverse_closure=complete
 implementation_started=false
 ```
 
@@ -92,8 +95,10 @@ The reference environment is frozen to:
 - CPU only; IEEE-754 binary64 only; round-to-nearest, ties-to-even;
 - Python `3.10.20` and PyTorch `2.7.0+cpu`, commit
   `134179474539648ba7dee1317959529fbd0e7f89`;
-- the content-bound dependency/DLL inventory and CPU feature mask recorded by the future R02 source
-  manifest; the initial target is Windows `10.0.26200`, AMD64 family 25 model 117 stepping 2;
+- the exact callable schemas, probe outputs, Python/torch distribution, compiled math/runtime bytes,
+  CPU feature identity, and fail-closed verification rule in
+  `VNFC_R02_ORC_B64_Q52_U64_V1_REFERENCE_KERNEL_BYTE_MANIFEST_20260901.md`; the target is Windows
+  `10.0.26200`, AMD64 family 25 model 117 stepping 2, with PyTorch CPU capability `AVX512`;
 - one intra-op and one inter-op thread, eager execution, deterministic algorithms, denormal
   preservation, no autocast/AMP/TF32, no JIT/compile, no fused/foreach optimizer, and no FMA;
 - finite inputs and parameters only; every `-0.0` primitive output is canonicalized to `+0.0`;
@@ -110,9 +115,18 @@ for k = 0..d-1:
 ```
 
 Multiplication and addition are separate materialized primitives. SiLU is the separately
-materialized `RN64(x * sigmoid_R02(x))`; `sigmoid_R02`, `exp_R02`, `log_R02`, and `sqrt_R02` are the
-one-element CPU float64 operators from the content-bound reference dependency. No affine or
-activation spans multiple candidates or states.
+materialized `RN64(x * sigmoid_R02(x))`. `sigmoid_R02`, `exp_R02`, `log_R02`, and `sqrt_R02` are
+respectively the exact default ATen schemas `aten::sigmoid`, `aten::exp`, `aten::log`, and
+`aten::sqrt` applied to separate contiguous shape-`(1,)`, stride-`(1)` CPU float64 tensors under
+the byte manifest above. No affine or activation spans multiple candidates or states. Convenience,
+fused, vector-width-greater-than-one, alternate-overload, NumPy, or Python-math calls are forbidden
+semantic substitutions.
+
+The byte-manifest preflight occurs before any fixture, RNG master, parameter, optimizer state, or
+persisted panel row exists. The later R02 source manifest must content-bind and verify that already
+frozen inventory; it cannot choose the dependency bytes. A version, callable, output-bit, CPU
+capability, wheel-entry, DLL/module, or runtime-byte mismatch is `INCOMPLETE` and creates no A0
+observation.
 
 The roster mean uses an exact rational sum of the already encoded binary64 rows followed by one
 round-to-nearest-even division by `N`; its adjoint is the incoming gradient divided by `N` for each
@@ -121,12 +135,150 @@ the lower opaque rank's bit pattern and route the entire max adjoint to that row
 left fold in physical token order. Prefix maximum keeps the earlier variable token on exact ties.
 Null and fixed occupants never update variable prefix state.
 
-All reverse-mode adjoints accumulate in fixed operation-graph order. Training records are ordered
-by their fresh R02 record address; parameters are traversed by ASCII parameter name and C-order
-index. Gradient norm, clipping, AdamW moments, decay, and parameter updates use this same scalar
-order and binary64 state. R02 retains `lr=3e-4`, `betas=(0.9,0.999)`, `eps=1e-8`, global raw-gradient
-cap `0.5`, and weight decay `1e-4` on tensors of rank at least two; `amsgrad`, fused, foreach,
-capturable, and differentiable optimizer modes are false.
+### Source-owned scalar reverse graph
+
+Framework autograd is not semantic authority. Each presentation-specific replay builds one
+source-owned scalar directed acyclic graph for the displayed synthetic total loss. Let `R(x)` mean
+one binary64 round-to-nearest-even operation followed immediately by the already frozen
+`-0.0 -> +0.0` canonicalization. Every intermediate named below is materialized; algebraic
+reassociation, common-subexpression duplication, FMA, zero-elision, and derivative fusion are
+forbidden.
+
+Graph construction and traversal are total:
+
+1. Register differentiable parameter leaves by ASCII parameter name and C-order index. Register
+   other differentiable tensor leaves by fully qualified semantic tensor address and C-order index.
+   Constants are immutable and receive no adjoint.
+2. Expand the one scalar `total` root by memoized depth-first postorder. Visit primitive operands in
+   their displayed left-to-right slot order. Visit records by ascending fresh R02 record address,
+   tokens in physical order `0..3`, candidates in ascending opaque-rank/null-last order, tensor
+   elements in C order, affine output coordinate `j` increasing, and affine input coordinate `k`
+   increasing. At any still-independent named branch not ordered above, visit the ASCII-smaller
+   fully qualified semantic path first. Shared values, including the one `p` object, are emitted
+   once at first visit and reused.
+3. Assign a zero-based `node_id` when a leaf is registered or a primitive output is emitted. Every
+   primitive node is emitted after all of its operand nodes, so every edge points from a lower to a
+   higher `node_id`. Persist the resulting table
+   `(node_id, semantic_path, primitive, parent_node_ids_in_operand_slot_order)`; the validator
+   independently reconstructs this table from the frozen
+   shapes and rules before accepting any gradient record.
+4. Seed only the `total` root with exact `+1.0`. Process primitive nodes by strictly decreasing
+   `node_id`. A child computes and appends parent contributions in increasing operand-slot order.
+   Thus a parent's contribution order is decreasing consumer `node_id`, then increasing consumer
+   operand slot. No contribution, including exact zero, may be omitted.
+5. When a node is reached, start its adjoint accumulator at exact `+0.0` and left-fold every queued
+   contribution in that order with `acc=R(acc+contribution)`. This rule applies to shared/repeated
+   leaves, shared parameters, routed views, and branch merges. A presentation clone owns a separate
+   graph and accumulator; no contribution crosses clone or arm boundaries.
+
+For multiple training records in a later R02 update, build and reverse each record graph separately
+in ascending record-address order, then left-fold each record's parameter gradient into the update
+gradient in that same ascending order with `R`. A0 has one replay record per presentation-specific
+optimizer evaluation. The 292 evaluations remain independent and never share an accumulator.
+
+The only primitive reverse rules are below. Here `g` is the already accumulated output adjoint;
+`x`, `y`, and named outputs are stored forward binary64 values. Operand-zero contribution is always
+computed before operand one.
+
+```text
+copy / reshape / slice / concatenate / permutation:
+    route R(g) to the exact source element; aliases merge only by the global rule
+
+z = R(x + y):
+    c_x = R(g)
+    c_y = R(g)
+
+z = R(x - y):
+    c_x = R(g)
+    c_y = R(-g)
+
+z = R(-x):
+    c_x = R(-g)
+
+z = R(x * y):
+    c_x = R(g * y)
+    c_y = R(g * x)
+
+z = R(x / y):
+    c_x = R(g / y)
+    yy = R(y * y)
+    gx = R(g * x)
+    qy = R(gx / yy)
+    c_y = R(-qy)
+
+z = exp_R02(x):
+    c_x = R(g * z)
+
+z = log_R02(x):
+    c_x = R(g / x)
+
+z = sqrt_R02(x):
+    two_z = R(0x1.0000000000000p+1 * z)
+    c_x = R(g / two_z)
+
+s = sigmoid_R02(x):
+    one_minus_s = R(0x1.0000000000000p+0 - s)
+    sigmoid_local = R(s * one_minus_s)
+    c_x = R(g * sigmoid_local)
+```
+
+Every division denominator above is the displayed stored value or displayed separately rounded
+product; the negative denominator-parent sign is applied only after the rounded positive quotient
+`qy`. No `-(g*x)/(y*y)`, `(-g*x)/(y*y)`, `-g*(x/y)/y`, reciprocal, or other association is an alias.
+Zero or nonfinite denominators, contributions, or adjoints are `INCOMPLETE`.
+
+SiLU is exactly the two-node graph `s=sigmoid_R02(x)` followed by `z=R(x*s)`. Its reverse is not an
+expanded formula:
+
+```text
+direct_x = R(g * s)                         # multiply operand 0, appended first
+to_s = R(g * x)                             # multiply operand 1
+one_minus_s = R(1.0 - s)
+sigmoid_local = R(s * one_minus_s)
+sigmoid_path_x = R(to_s * sigmoid_local)    # appended when lower-id sigmoid is visited
+bar_x = R(R(+0.0 + direct_x) + sigmoid_path_x)
+```
+
+Thus the direct-`x` contribution precedes the sigmoid-path contribution. If a primitive uses the
+same leaf more than once, contributions remain distinct: for `R(x*x)`, compute slot-zero
+`R(g*x)` first, slot-one `R(g*x)` second, then fold them in that order. No multiplicity factor or
+`R(2*g*x)` replacement is permitted.
+
+For one affine call with output width `m`, outputs were emitted for `j=0..m-1`; reverse traversal
+therefore processes `j=m-1..0`. Within output `j`, the forward left-fold emitted inputs for
+`k=0..d-1`, so reverse visits `k=d-1..0`. With accumulated output adjoint `g_j`, execute:
+
+```text
+for j = m-1 .. 0:
+    for k = d-1 .. 0:
+        c_weight[j,k] = R(g_j * input[k])
+        c_input_from_j[k] = R(g_j * weight[j,k])
+    c_bias[j] = R(g_j)
+```
+
+The multiplication operand order is `(weight[j,k],input[k])`, so weight contribution precedes input
+contribution at that node. For each shared input coordinate, contributions across output coordinates
+left-fold in strictly decreasing `j`; shared-parameter contributions across candidate, token, or
+other affine calls follow the global decreasing-consumer-node rule. Bias, weight, and input
+contributions may not be accumulated by a BLAS/GEMM, vector reduction, or an increasing-`j`
+substitute.
+
+Let `N64` be the exact binary64 conversion of roster integer `N`. Exact rational roster mean emits
+`R(g/N64)` to row slots in ascending opaque-rank order. Strict roster/prefix maximum and `min` emit
+`R(g)` to the already frozen forward winner and exact `+0.0` to every loser; equality uses the
+already frozen earlier/lower-rank/first-operand winner. General clamp emits `R(g)` only when the
+stored input is strictly inside its bounds and exact `+0.0` at or outside either boundary. The
+centered-maximum, categorical, entropy, and clamp adjoints specified below are bespoke primitive
+nodes and replace, rather than supplement, differentiation through apportionment, CDF comparison,
+or framework softmax. The zero-residual identity join emits `R(g)` first to base operand zero and
+then to residual operand one.
+
+Training records are ordered by their fresh R02 record address; parameters are traversed by ASCII
+parameter name and C-order index. Gradient norm, clipping, AdamW moments, decay, and parameter
+updates use this same scalar order and binary64 state. R02 retains `lr=3e-4`,
+`betas=(0.9,0.999)`, `eps=1e-8`, global raw-gradient cap `0.5`, and weight decay `1e-4` on tensors of
+rank at least two; `amsgrad`, fused, foreach, capturable, and differentiable optimizer modes are
+false.
 
 Those constants are the exact binary64 values
 `0x1.3a92a30553261p-12`, `(0x1.ccccccccccccdp-1,0x1.ff7ced916872bp-1)`,
@@ -209,22 +361,54 @@ remainder ties use ascending opaque rank and null last. Define `n_i` as the resu
 Consequently every `p_i` is an exactly representable positive binary64 value and
 `sum_i n_i=M` exactly.
 
-This same `p` object, without recomputation or an alternate softmax, supplies:
+For every candidate `k` in ascending opaque-rank/null-last order, store exactly one
+`stored_log_p[k]=log_R02(p[k])`. Form and store entropy in that same order:
+
+```text
+entropy_acc = +0.0
+for k in canonical candidate order:
+    entropy_term[k] = R(p[k] * stored_log_p[k])
+    entropy_acc = R(entropy_acc + entropy_term[k])
+stored_H = R(-entropy_acc)
+```
+
+This same stored `p`, `stored_log_p`, and `stored_H` object, without recomputation or an alternate
+softmax/log/entropy call, supplies:
 
 - the physically aligned probability diagnostic;
 - stochastic collection and evaluation;
-- forced physical-command log probability `log_R02(p_chosen)`;
-- entropy, reduced in canonical order as `-sum_i p_i*log_R02(p_i)`;
+- forced physical-command log probability by bit-copying `stored_log_p[chosen]`;
+- entropy by bit-copying `stored_H`;
 - the categorical custom adjoint; and
 - every PPO ratio, entropy term, gradient, and optimizer input.
 
-The apportionment is nondifferentiable. Its one declared custom adjoint is the ordinary categorical
-adjoint evaluated at the same quantized `p`: for chosen candidate `c`,
-`d log p_c / d q_k = 1[k=c]-p_k`; the entropy adjoint is
-`-p_k*(log_R02(p_k)+H_token)`, where `H_token=-sum_i p_i*log_R02(p_i)` for this probability
-object. Form the total `g_q` in the frozen loss-graph order using separate
-binary64 operations. The clamp gate is one only when `d_i>-16`; it is zero when `d_i<=-16`,
-including the exact boundary. Set `g_d[i]=RN64(g_q[i]*gate[i])`.
+The apportionment is nondifferentiable. Log probability and entropy are two bespoke local reverse
+nodes evaluated only from the stored forward bits above. For a log-probability node with accumulated
+upstream adjoint `g` and chosen candidate `c`, emit contributions in ascending opaque-rank/null-last
+candidate order:
+
+```text
+indicator = exact +1.0 when k == c, else exact +0.0
+local = R(indicator - p[k])
+c_q[k] = R(g * local)
+```
+
+For an entropy node with its own accumulated upstream adjoint `g`, emit in the same candidate order:
+
+```text
+lp_plus_H = R(stored_log_p[k] + stored_H)
+p_term = R(p[k] * lp_plus_H)
+local = R(-p_term)
+c_q[k] = R(g * local)
+```
+
+Each `c_q[k]` is a distinct edge contribution. Log-probability and entropy contributions are never
+pre-summed, reassociated, vector-reduced, or merged locally; they merge only through the existing
+global decreasing-consumer-node/increasing-operand-slot accumulator. No node may recompute `p`,
+`log_R02(p[k])`, entropy, or a softmax during reverse. When the `q[k]` node is reached, let `g_q[k]`
+be that global accumulated adjoint. The clamp gate is exact one only when `d_i>-16`; it is exact zero
+when `d_i<=-16`, including the exact boundary. Set `g_d[i]=R(g_q[i]*gate[i])`, emitting coordinates
+in ascending opaque-rank/null-last order.
 
 Let `h` be the unique winner retained by the strict-fold maximum, including its lower-rank/null-last
 tie rule. Sum `g_d` by a left fold in canonical candidate order and apply the centered-maximum
@@ -447,11 +631,18 @@ PRIMITIVE/<primitive>/<presentation>/<arm>
 
 Main presentations are in the four-name order above, fixtures are
 `F_ZERO_TIE_V1,F_DYADIC_DENSE_V1`, and arms are `MAPR,DIRECT`. Witness presentations are
-`canonical,reverse`. Primitive presentations are `canonical,reverse`. Token, candidate, CDF,
-replay, gradient, and optimizer records append respectively
-`/TOKEN/<0..3>`, `/CANDIDATE/<opaque-rank-or-NULL>`,
-`/CDF/<edge-index>/<probe-name>`, `/REPLAY`, `/GRADIENT`, and `/OPTIMIZER`. No ordinal-only or
-aggregate address is authoritative.
+`canonical,reverse`. Primitive presentations are `canonical,reverse`. Every top-level row has
+exactly four token records, at `/TOKEN/0` through `/TOKEN/3`. Candidate and CDF records append to
+their token address as `/CANDIDATE/<opaque-rank-or-NULL>` and
+`/CDF/<edge-index>/<probe-name>`. Replay, gradient, and optimizer records append directly to the
+top-level address as `/REPLAY`, `/GRADIENT`, and `/OPTIMIZER`. No ordinal-only or aggregate address
+is authoritative.
+
+Every token record has exactly one `/CANDIDATE/<opaque-rank-or-NULL>` child for every member of its
+declared support and no other candidate child. This includes a fixed token, whose one-member support
+therefore has exactly one candidate child even though it has no CDF records. Illegal, already
+removed, and otherwise absent physical candidates have no child. A missing, duplicate, or extra
+candidate child is `INCOMPLETE`.
 
 For an A0 common production-word probe, instantiate the action record as follows:
 
@@ -550,6 +741,15 @@ Twelve additional address rows are frozen:
   difference remains strict for deterministic choice, which selects rank one from `q` even if the
   first two `exp_R02` bits or apportioned masses are equal. Those probability equalities affect
   only apportionment and the stochastic CDF; no additional deterministic tolerance is permitted.
+- For both `DUPLICATE_TIE` and `NEXTAFTER_STRICT`, token zero is the stated three-candidate variable
+  token and both physical-candidate base hiddens are exact 64-wide positive zero. Tokens one, two,
+  and three are each variable with all physical legality false and support exactly `(null)`. Their
+  sole final logit and centered score are `+0.0`, their integer mass is `M`, probability is exact
+  `1.0`, deterministic and every production-word action are null, and forced log probability and
+  entropy are `+0.0`. Each queries its own common-word `token_role` coordinate; null remains
+  reusable and does not remove a key or update the positive-zero prefix. Thus every one of the
+  eight top-level rows across these two primitives has exactly four token records; tokens one
+  through three are neither omitted nor inherited from token zero.
 - `FIXED_PREFIX_NULL`: three physical agents have opaque ranks one, two, and three and exact
   64-wide candidate hiddens `e0,e1,e2`. Token zero is fixed to rank one. Token one has support
   `(rank2,rank3,null)`, centered scores `(0,-2,-3)`, and selects rank two. Token two has support
@@ -561,26 +761,76 @@ Twelve additional address rows are frozen:
   the stated variable sequence.
 
 Each primitive is injected identically into the MAPR and zero-residual DIRECT law wrappers and is
-co-permuted under canonical/reverse. It is a law/prefix primitive, not a learned-model or optimizer
-fixture; optimizer equality is purchased by the model-bearing main and witness groups below.
+co-permuted under canonical/reverse. Every one of the twelve primitive top-level rows has exactly
+four token records, for 48 primitive token records in total. It is a law/prefix primitive, not a
+learned-model or optimizer fixture; optimizer equality is purchased by the model-bearing main and
+witness groups below.
+
+The primitive child-address cardinalities are exact:
+
+- each `DUPLICATE_TIE` top-level row has six candidate children and 42 CDF children; its four rows
+  therefore have 24 candidate and 168 CDF children;
+- each `NEXTAFTER_STRICT` top-level row has six candidate children and 42 CDF children; its four
+  rows therefore have 24 candidate and 168 CDF children; and
+- each `FIXED_PREFIX_NULL` top-level row has eight candidate children and 44 CDF children: the fixed
+  token-zero support contributes one candidate and no CDF, while the three variable supports of
+  sizes three, two, and two contribute respectively 18, 13, and 13 CDF records. Its four rows
+  therefore have 32 candidate and 176 CDF children.
+
+The twelve primitive top-level rows thus contain exactly 80 candidate children and 512 CDF
+children. These are child records inside the unchanged 12 primitive rows; they do not change the
+304 top-level address cardinality.
 
 These yield a total of `304` top-level address rows.
 
-For every variable-token probability object at every address, enumerate the complete edge set
-`{0,N_0/M,...,N_last/M=1}`. Probe each exact edge and its lower and upper binary64 `nextafter`
-values after conversion to exact dyadics, applying the frozen out-of-domain rule at zero and one.
-Probe the nearest existing production midpoint word below and above each edge. At an internal exact
-boundary the right candidate must win. Every production midpoint must select exactly one candidate.
-No boundary or address may be sampled or omitted.
+For a variable-token probability object with `K` candidates, define edge integers in candidate
+order as `B_0=0` and `B_j=N_{j-1}` for `j=1..K`; therefore `B_K=M`. The literal decimal
+`edge-index` is `j` with no sign, prefix, or zero padding. Each edge always has exactly these three
+diagnostic-u records:
 
-Each model-bearing main or witness co-presentation group also performs one source-only synthetic
-forced replay and one optimizer step per arm: exactly 36 main groups (18 descriptors by two
-fixtures) and one witness group, hence 37 steps per arm and 74 total. Primitive groups do not step
-an optimizer. The canonical presentation first
-collects with the group's common A0 action word and persists that physical opaque-rank command, its
-detached joint log probability, and its detached current value. Every co-presentation then replays
-that same physical record; it does not detach a presentation-local replacement. No GAE or old
-value enters the synthetic loss.
+```text
+/CDF/<j>/EXACT
+/CDF/<j>/NEXTAFTER_LOWER
+/CDF/<j>/NEXTAFTER_UPPER
+```
+
+`EXACT` is the exact rational `B_j/M`. `NEXTAFTER_LOWER` and `NEXTAFTER_UPPER` are respectively
+the adjacent binary64 values toward negative and positive infinity after `B_j/M` is rounded once
+to binary64, each then interpreted as an exact dyadic. The lower probe at edge zero is rejected;
+the exact and upper probes at edge `K` are rejected. At an internal exact boundary the right
+candidate wins.
+
+Production-word record names are exactly `PRODUCTION_WORD_BELOW` and
+`PRODUCTION_WORD_ABOVE`. When `B_j>0`, the below word exists and is
+`r_below=4096*B_j-1`; otherwise `/CDF/0/PRODUCTION_WORD_BELOW` must not exist. When `B_j<M`, the
+above word exists and is `r_above=4096*B_j`; otherwise
+`/CDF/<K>/PRODUCTION_WORD_ABOVE` must not exist. No placeholder, null-word, sentinel, or expected-
+absence record occupies either forbidden endpoint address. Thus each variable token has exactly
+`3*(K+1)+2*K = 5*K+3` CDF records. A missing required or present forbidden record is
+`INCOMPLETE`; a valid record with the wrong action is `FAIL_LAW`. Every existing production word
+must select exactly one candidate. No boundary, address, or required record may be sampled or
+omitted, and no unlisted probe-name string is legal.
+
+Each model-bearing main or witness co-presentation group defines one logical source-only synthetic
+step per arm: exactly 36 main groups (18 descriptors by two fixtures) and one witness group, hence
+37 logical group-arm steps per arm and 74 logical group-arm steps total. This is a comparison-key
+count, not the executed optimizer-work count. Primitive groups do not evaluate an optimizer.
+
+For each logical group-arm step, the canonical presentation collects once with the group's common
+A0 action word and supplies the one persisted physical opaque-rank command, detached joint log
+probability, detached current value, and identical pre-step parameter/optimizer bytes. Independently
+clone that pre-step state for every co-presentation. Each clone performs its own forced replay,
+backward pass, clipping, and scalar AdamW evaluation, and persists presentation-specific
+`/REPLAY`, `/GRADIENT`, and `/OPTIMIZER` records. No presentation-local replacement record is
+detached, no optimizer result is chained into another presentation, and no GAE or old value enters
+the synthetic loss.
+
+Consequently the 36 main groups require `36*2*4=288` presentation-specific optimizer evaluations
+and the witness group requires `1*2*2=4`, for exactly 292 executed optimizer evaluations and 292
+records at each of `/REPLAY`, `/GRADIENT`, and `/OPTIMIZER`. Each arm has 37 logical steps but 146
+executed evaluations. Telemetry must report both `logical_group_arm_steps=74` and
+`presentation_optimizer_evaluations=292`; reporting 74 as the executed optimizer count is
+`INCOMPLETE`.
 
 For the single replay record, let `new_logp` be the canonical-token-order sum of variable-token
 forced log probabilities, `old_logp` the persisted canonical detached value, `A=+1.0`,
