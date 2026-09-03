@@ -338,3 +338,76 @@ Please pick one before the run.
 
 Please also say, in the same reply, whether the card stands as frozen or whether the section 8
 alternative (`C_root` as the branch statistic) is to be adopted as an amendment before launch.
+
+## 13. Rule amendment before launch (2026-09-03) — `C_root` adopted as the branch statistic
+
+**Status of this amendment.** Made 2026-09-03 under owner decision D.18 (commit `298ca67e2`), after
+the card was accepted with the section 8 finding (compliance note D.17, commit `00f916f45`) and
+**before the object ran**. **No data of this object existed when this amendment was written**: no
+run had been launched, no output root created, no `beta_tail`, `beta_root`, competence flag or
+branch had been computed for `UCOPE-B-EXPLORE-ROOT-CONDITIONING-R01`. This is a pre-launch repair of
+a degeneracy that section 8 identified from *already published* numbers, not an outcome-informed
+rewrite.
+
+**What changes.** The branch statistic becomes `C_root`, defined in section 5 and repeated here:
+
+> `C_root` = `all_scores_finite AND all_choices_unique AND exact_eight_context_oracle_root_vector
+> AND max_expected_regret <= 1/50`
+
+that is, the frozen `C_even` **minus its fifth component**, the purely tail-determined
+`min_forced_PROBE_tail_agreement >= 19/20`. Section 8's reason stands: with one tail fixed across
+all three arms that component is arm-invariant, is already known to fail in 3 of 6 policies, and
+therefore makes `R-A`, `R-B` and `R-C` unreachable and `R-D` certain. `C_root` is arm-sensitive and
+is the predicate that matches this object's question, which is about the root stage.
+
+**What does not change.** The arms, the fixed tail and its `<= 1e-6` reproduction gate, `n`, the
+budget, the seeds, the folds, the index law, the whitening contract, the measurements, the
+mechanisms, the branch **names, order and thresholds** (majority = **at least 4 of 6**,
+`eps_L = 0.10`), the launch conditions, the budget and the lock position. **The full `C_even` and all
+five of its components remain a required reported measurement** for every arm and policy; it simply
+no longer decides the branch.
+
+**The amended rule**, evaluated in this order; exactly one applies.
+
+- **`R'-A — WHITENED_ROOT_COMPETENT`.** `WHITENED-ROOT-10X` satisfies `C_root` in **all six**
+  policies. Reading: mechanism (i) completely.
+- **`R'-B — WHITENED_ROOT_MAJORITY_CEILING_CLEAN`.** Not `R'-A`, but `WHITENED-ROOT-10X` satisfies
+  `C_root` in **at least four** of six **and** `EXACT-ROOT-SOLVE` satisfies it in all six. Reading:
+  mechanism (i) substantially, with a residual the ceiling does not share.
+- **`R'-C — CEILING_COMPETENT_ROOT_LEARNER_NOT`.** `EXACT-ROOT-SOLVE` satisfies `C_root` in all six,
+  `WHITENED-ROOT-10X` in fewer than four. Reading: mechanism (ii)(b) — the root problem is solvable
+  on these targets and the root **learner** binds; the clip in whitened norm and the unshuffled
+  cyclic batch order are the named suspects.
+- **`R'-D — CEILING_NOT_COMPETENT`.** `EXACT-ROOT-SOLVE` does not satisfy `C_root` in all six.
+  Reading: mechanism (ii)(a) — the targets built from the learned tail carry its residual, so the
+  root problem as posed is not solvable to `C_root`. `d_objective_root` and the per-context breakdown
+  say how far and where.
+- **`R'-E — UNCLEAR`.** Any other combination. Report every number, name what is unexplained,
+  propose no successor.
+
+Descriptive and deciding nothing, as before: the full `C_even`, `d_learned_root`,
+`d_objective_root`, the gradient ratios, the whitening numbers, the per-context breakdown, the
+exposure line, `RAW-ROOT-10X`'s counts, and any per-seed spread.
+
+**The D.17 correction, recorded.** The reviewer's D.15 inference — that the competence object's
+failures were the whitened learner's residual crossing a tight predicate — is corrected: the binding
+failure is **the tail's decision margin at the target context**. That is what makes the tail-only
+agreement component fail in three policies regardless of the root, and it is the subject of the
+separate object `UCOPE-A-TAIL-MARGIN-TARGET-CONTEXT-R01`. It does not change this object's arms or
+question; it is why `C_even` cannot be this object's branch statistic.
+
+## 14. Predictions on record (added 2026-09-03; sections 1-12 unchanged, section 13 is the frozen rule)
+
+Recorded 2026-09-03 under owner decision D.18 (commit `298ca67e2`), before the object ran.
+
+Owner:
+
+> none (exploration run)
+
+Reviewer:
+
+> R'-B (the whitened root improves the regret and oracle-root components but not in all six)
+
+The owner offers no prediction and therefore carries no verdict. The reviewer's is judged in the
+amended rule's own wording and against the numbers in
+`UCOPE_ROOT_CONDITIONING_R01_RESULT_EVIDENCE_20260903.md`.
