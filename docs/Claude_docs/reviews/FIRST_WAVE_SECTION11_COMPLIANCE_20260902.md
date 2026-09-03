@@ -762,7 +762,9 @@ competence on this host, which is what the direction's locked question has waite
 
 1. UCOPE's next object: (a) the root-learner conditioning object as above (reviewer's
    recommendation); (b) a tail-agreement-margin object on the binding context; (c) stop here
-   with the chain as the record (competence reached by the exact solve only).
+   with the chain as the record (competence reached by the exact solve only). **Owner decision
+   (2026-09-03): (a).** Carded first with the root stage's own contract numbers, branches ordered
+   by effect size, and the owner's prediction requested before the run.
 
 ---
 
