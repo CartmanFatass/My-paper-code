@@ -282,3 +282,21 @@ unrun. It establishes nothing about the UCOPE host, the learner packages, paid a
 versus RAW, variable `k`, variable `N`, MARL, UAV autonomy, transfer, safety or deployment. The only
 finding is engineering: as frozen, this object cannot execute at science scale on this platform, and
 what to do about that is an owner decision.
+
+## 13. Note added 2026-09-03 — the conditioning question is carried elsewhere
+
+This document, its §6.2 quarantine and its record of the failed launch are **unchanged**. Nothing
+here is reinterpreted, resumed or salvaged, and
+`UCOPE-B-EXPLORE-FT-XF-BC-INVERTIBLE-CONDITIONING-DISCRIMINATOR-R01` remains registered, unrun and
+unconsumed.
+
+For the record only: under owner decision D.12 of 2026-09-03 the scientific question this object was
+built to ask — whether the conditioning of the design is what keeps the `FT-XF-BC` learner away from
+its target — is now carried by a separate named object,
+`UCOPE-B-EXPLORE-OPTIMISER-CONDITIONING-R01`, carded in
+`UCOPE_OPTIMISER_CONDITIONING_R01_CARD_20260903.md`. That object whitens at float64 with a Cholesky
+tolerance of `1e-10` derived from the condition number measured at science scale (`kappa ~= 717`),
+rather than the `16 * eps_fp32 = 3.81e-06` ceiling that stopped this one at `9.12e-06`-`9.69e-06`.
+
+Whether this object is later repaired, superseded or retired remains an owner decision, and this
+note takes none of those steps.
