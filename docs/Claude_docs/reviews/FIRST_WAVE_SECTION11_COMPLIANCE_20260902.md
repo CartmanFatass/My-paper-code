@@ -1132,3 +1132,62 @@ already present in R01 and is the reason no R02 DEBUG has ever run.
    read-only substrate) with a test that reproduces the diagnostic's 0/192 and 15/192 on the
    two laws; the batch-position residual is a separate recorded quantity; a fresh DEBUG and the
    three 64-update seeds follow at the repaired commit.
+
+### F.5 R02 result intake (2026-09-03, later)
+
+Commits `1ab48e0bc`, `4c7bcc369`, `b90122e68` (the probe repair, in three steps because the R01
+runner pins the diagnostic-forward budget in two places) and `227cec321` (result Part II and the
+intake's result addendum). Scope verified: VNFC document, runner and test paths only;
+`scripts/run_vnfc_bpcr_b_explore.py` unchanged since `55a46c206`. Launch sha `b90122e68` for all
+four runs. Verdict: **accepted as a valid complete B/EXPLORE result; the object
+`VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` is consumed; polarity `INSTABILITY/HETEROGENEITY`.**
+
+1. **The repair is the declared comparison.** Both sides of the gating relabel probe are batch-1
+   forwards of the same decision state; presentation is the only varying quantity. The batch-8
+   versus batch-1 difference is published as a separate descriptive record, `gating: false`.
+   Twelve tests reproduce the F.2 diagnostic exactly. One correction to F.2's table: its
+   denominators are totals across both laws; per law the figures are 15/96 (R01) and 0/96
+   (R02) for presentation and 12/96 for the batch residual under either law. The counts stand.
+2. **The two accounting constants.** Attempts 03 and 04 stopped during terminal construction on
+   the R01 runner's frozen 48/60 diagnostic-forward count, which the authorised repair makes
+   96/108. Both were quarantined before any endpoint existed; the third wrapper asserts the true
+   budget on the real terminal and satisfies the frozen constants on a copy, with a test that
+   pins this and a published terminal that carries the true budget (§22.5). Accepted: the frozen
+   constant encoded the old probe's cost, not a scientific quantity.
+3. **Outcome-blindness of the repair.** Attempt 05's exposure line is bit-identical to attempt
+   02's where they overlap, so the repair touched only what the diagnostic compares.
+4. **The rule, verbatim.** Precondition met in all three seeds (relabel 0/0, PS-B0, hard validity,
+   64/64 action sensitivity, `BCRH: IDENTIFIED`, telemetry measured). Clause 1 met by none of
+   three; clause 2 blocked because seed `2026090331` learns at both training sizes; clause 3
+   governs on both antecedents (sign changes across seeds in every deciding quantity; zone
+   reversal inside every seed). D11's aggregation ambiguity (mean over worlds against a
+   majority of worlds) is reported both ways and gives the same outcome.
+5. **The one stable finding.** Paired `N = 7` MAPR − BCRH `R_fail_60` is negative in every seed
+   (0/16, 0/16, 3/16 positive worlds), and on every secondary endpoint. By the object's own
+   statement the host is solved by a rule at this budget and the learning question is not yet
+   posed.
+6. **Deviations D8–D12** are named and each is operator- or accounting-side; the shell-timeout
+   abort (D9) was quarantined with only `STARTED.json` written and relaunched fresh. Suite
+   `8 failed, 360 passed`, the eight being the pre-existing canonical-EOL failures on a frozen
+   surface.
+
+Reviewer's reading. The recast did what §11 is for: an object that had never reached a DEBUG in
+three attempts, held by an inherited probe that measured the wrong thing, became a completed
+three-seed study in one day, with the integrity item it was actually about (presentation
+conformance) met exactly in every run. The result is not about presentation. It is about the
+comparator: a bounded receding-horizon controller is not beaten on held-out worlds in any seed,
+and MAPR's own learning direction is sign-unstable across seeds and zones. Two readings survive,
+a controller that is sufficient for this host and a learner starved at 64 updates, and the design
+does not separate them. The cheap discriminating object is the controller's headroom: how much
+`R_fail_60` the held-out worlds leave above BCRH. If that gap is near zero the host must be
+re-posed before any learner runs again; if it is large, a budget ladder for MAPR is the next
+object, as the exposure ladder was for UCOPE.
+
+### F.6 Decisions this intake produces
+
+1. VNFC next: (a) a controller-headroom object (A/RECON): the gap between BCRH and the best
+   achievable `R_fail_60` on the 16 held-out worlds, from an oracle or an upper bound if the
+   simulator admits one, otherwise from a best-of-many search; it decides between re-posing the
+   host and a budget ladder (reviewer's recommendation); (b) the budget ladder first (256 and
+   1,024 updates, one seed, exposure line reported); (c) more seeds at 64 updates; (d) park the
+   B/EXPLORE line, keeping A0 as optional analysis.

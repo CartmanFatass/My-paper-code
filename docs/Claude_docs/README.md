@@ -110,7 +110,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `ENV_THROUGHPUT_REFACTOR_REPORT_20260902.md` — P0–P3 report: harness bit-identical across the
   five channel models, per-step 24.6 ms → 0.47 ms, E0 collection 240 s → 18 s per rollout at 32
   lanes, fingerprint unchanged (re-freeze unspent), six plan-versus-code discrepancies, could-not-
-  verify. Accepted in the ADR review's Part X.
+  verify. Accepted in the ADR review's Part X. P4 addendum (2026-09-03): the update is 87%
+  of the rollout and autograd-bound; four candidates measured, none taken (the segmented RNN
+  backend gives −12.6% but is not equivalent at 1e-9); fingerprint unchanged. Review Part XII.
 - `ADR_02_CONVERGENCE_PROMPT_GPT_PRO_20260902.md` — prompt for GPT Pro to draft the corridor
   mechanics page and re-issue ADR 02 as revision 3 with both margins registered.
 - `RELAY_CORRIDOR_MECHANICS_20260902.md` — the corridor mechanics (state, entities, action,

@@ -244,3 +244,11 @@ Owner: mechanism A — event-driven interruption; some finite `c` reaches or exc
 `k` on the homogeneous corridor. Reviewer: A, with the best `c` in `[0.5, 1.0]` and the
 event-alignment fraction above one half there. Contract
 `../experiments/E2_INTERRUPTION_COST_SWEEP_20260903.md`; launches when P4 is integrated.
+
+### P4 closed, E2 launched (2026-09-03)
+
+Refactor P4 (the update phase) closed with no code change: 51% of the update is the autograd
+engine and 34% module forward, outside the phase's scope; the one material candidate (the
+segmented RNN backend, −12.6%) is not equivalent under the 1e-9 policy and was not taken; the
+fingerprint is unchanged and the re-freeze unspent. Review Part XII. E2 launches at the
+Part XII commit under XI.4's standing decision.

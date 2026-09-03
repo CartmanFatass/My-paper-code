@@ -14,7 +14,7 @@ launch policy. Decisions confirmed with the owner are in §7. Governing texts:
 | ADR 01 (D2 policy interruption) | implemented on the base route; `off` byte-identical; accepted (review Parts VII, VIII) |
 | ADR 02 (relay corridor host) | implemented, references and margins exact, joined to the learner (Parts VI, VIII) |
 | E0 (exposure, probe set) | two seeds, four arms complete, probe set frozen (Part IX) |
-| Throughput refactor P0–P3 | done and accepted (review Part X, commit `9f4d0e4ba`): collection 240 s → 18 s per rollout, fingerprint unchanged. P4 approved 2026-09-03 after E1's intake (review XI.4); running; E2 launches when P4 is integrated |
+| Throughput refactor P0–P3 | done and accepted (review Part X, commit `9f4d0e4ba`): collection 240 s → 18 s per rollout, fingerprint unchanged. P4 closed 2026-09-03 with no code change (review Part XII): the update is autograd-bound outside the phase's scope; the segmented RNN backend (−12.6%) is not equivalent under the 1e-9 policy and was left untaken. E2 launched 2026-09-03 |
 | E1 | complete 2026-09-03, six runs, accepted (review Part XI): the owner's prediction stands unrefuted, the age feature is not carried into E2; one contract erratum (accuracy against a foreign labelling) registered (`E1_AGE_INPUT_RESULT_20260902.md`) |
 | Open from ADR 02 | the finite `c` grid; the E5 coupling term (designed when E5 is scheduled) |
 

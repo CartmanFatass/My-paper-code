@@ -1213,3 +1213,68 @@ foreign labelling.
    P4 runs, and E2 launches when P4 is reviewed and integrated.
 2. **E2 contract and prediction**: drafted by the reviewer next; the owner's prediction requested
    before launch.
+
+---
+
+# Part XII — P4 intake (2026-09-03)
+
+Object: refactor plan P4 (the update phase), executed on `main` by the same Opus session that
+delivered P0–P3, under XI.4's owner decision "P4 first, then E2": `33abc6801` (the instrument,
+`tests/update_phase_equivalence_test.py`) and `32839c955` (report addendum §10–17 of
+`../plans/ENV_THROUGHPUT_REFACTOR_REPORT_20260902.md`). Verdict: **accepted; no production code
+changed; fingerprint unchanged; the authorised re-freeze is unspent; XI.4's launch condition for
+E2 is met at this commit.**
+
+## XII.1 What the reviewer checked
+
+1. **Scope.** `git diff 67604063f..HEAD` restricted to `hmasd/`, `envs/`, `config_1.py`,
+   `config.py`, `main.py`, `tests/fixtures/` and the E0/E1 runners is empty. The phase added one
+   test file and one report section and nothing else.
+2. **The instrument.** Both arms (`off`, `d0`), scenario 1, 6 agents, 4 lanes, 40-step rollouts,
+   two chained updates, 172 parameter tensors (5.5 million positions) plus the numeric update
+   fields, against a tape whose content digest is pinned in the test; on unchanged code the
+   maximum absolute difference is 0.0 in both arms. It is stronger than the D2 fingerprint (one
+   arm, 3 agents, 2 lanes) and the implementer says plainly that it does not reach 32 lanes,
+   where GEMM shapes differ; the 32-lane check is the timing runs' evaluation return mean.
+3. **The profile, taken before any candidate.** Two independent measurements agree: the update
+   is 87% of the process under `cProfile` and 204.8 s of a 222 s rollout under the agent's own
+   timers at 32 lanes, 4 threads. Inside it, 51% is the autograd engine and 34% module forward,
+   all in `networks.py` / `r_mappo_utils.py`; the code P4 was scoped to is 2.1%, the optimizer
+   step 5.5%. That no in-scope rearrangement can be material is arithmetic, not judgement.
+4. **Candidates.** C1 (segmented RNN backend) is the only material lever, −12.6% on the update,
+   and after two updates 163 of 172 tensors differ, worst 3.3e-3 on a parameter; six orders
+   past the 1e-9 the equivalence policy allows, so it was correctly not taken and the re-freeze
+   not spent on it. C2 (`foreach` Adam) is bit-identical and worth 0.6%; C3 (skip an unread
+   array) at most 0.9%; C4 changes a reduction; C5 is runner-owned and changes results. Leaving
+   C2 and C3 untaken is a judgement the reviewer shares: the gain is inside the machine's
+   between-session drift and C2 writes a `foreach` flag into every saved optimizer group.
+5. **Timing.** The two E0 timing commands repeated verbatim reproduce the evaluation return mean
+   bit-for-bit at both thread counts (40.09186398791525 at 1 thread, 39.84203863517143 at 4),
+   while update seconds rose 8–9% on identical code. That drift is the number that bounds what
+   P4 could have shown, and it is also a warning for E2's budget: the contract's wall-clock
+   estimate must come from E2's own first rollout, not from the P3 table.
+6. **Conduct.** The implementer caught and recorded its own false "bit-identical" reading of C1
+   (a scratch driver had clobbered `sys.argv`, so the candidate never ran) and replaced it with
+   a single-process A/B whose fused path was instrumented to prove it ran. The report's rule that
+   an equivalence result without evidence the change was active is unproven is adopted here.
+
+## XII.2 Reading
+
+P4 answers R1's question, "whether the update is worth engineering now": not within the
+equivalence policy. What is left is a numerics change, not a refactor: the segmented backend
+offers float32 tolerance equivalence (its own benchmark says rtol 1e-6), which the policy's
+1e-9 was never going to accept. The reviewer recommends leaving it untaken through E2–E4. Those
+studies make within-series comparisons against exact references and each other; a change of
+arithmetic regime in the middle of the series would split it in two for a speed-up that is
+worth less than one seed. The plan's cost table (advancement plan §4) stands at the P3 numbers
+with the drift caveat above.
+
+## XII.3 Decisions this intake produces
+
+1. P4 closed with no code change; C1, C2, C3 recorded as available with their measured prices.
+   Owner: (a) close P4 as is, nothing applied (reviewer's recommendation); (b) apply C2 + C3
+   now under the harness (bit-identical, about 1.2%, with the `foreach` checkpoint caveat);
+   (c) open a numerics-change decision on C1 with its own tolerance policy, not before E4.
+2. E2 launches at this commit under XI.4's standing decision; no further question. The runner
+   is implemented by an Opus session in a worktree from the E2 contract, predictions already on
+   record (plan §11, 2026-09-03).
