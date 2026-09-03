@@ -641,7 +641,14 @@ are cheap and outcome-free in their reference arms.
    variance object first (larger `n`, pooled fits); (c) a reading-rule successor only; (d) park.
    **Owner decision (2026-09-03): (a).** The object is carded first with the two mechanisms and a
    reading rule whose branches are ordered by effect size (the D.11 lesson), and waits for the
-   owner's prediction before its run.
+   owner's prediction before its run. Card `UCOPE_OPTIMISER_CONDITIONING_R01_CARD_20260903.md`
+   (commit `2807e4f3d`): arms RAW-BASE, WHITENED-BASE, EXACT-SOLVE, RAW-10X, WHITENED-10X;
+   whitening from training rows only at float64 with `max|LLᵀ − G| ≤ 1e-10`; branches O-A to
+   O-E with `ε_L = 0.10` and `ρ = 5`. **Predictions on record (2026-09-03): owner O-A**
+   (conditioning is the cause; whitening closes `d_learned` at the base budget); **reviewer O-B**
+   (whitening removes most of the gap but the clip firing on a quarter of the steps and the
+   unshuffled cyclic windows leave a residual that only the 10× budget closes). The run follows
+   with both on record.
 
 ---
 
