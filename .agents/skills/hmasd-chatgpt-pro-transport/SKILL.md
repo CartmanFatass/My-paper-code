@@ -152,11 +152,13 @@ message node even though a response was returned.
 
 For upload mode, start `waitForEvent("filechooser")` before opening the visible
 upload control, set the absolute file path, and wait for the explicit file group and
-upload completion state. Record file size/hash before upload. Before each upload
-action, obtain the required action-time confirmation for the exact local file(s) and
-the `chatgpt.com` destination when it is not already present for this invocation.
-This is the only transport-level confirmation gate; do not add another confirmation
-immediately before Send (subject to any higher-level browser safety confirmation).
+upload completion state. Record file size/hash before upload. Acceptance of a
+validated handoff authorizes uploading exactly its validated `prompt_path` and any
+validated `reference_paths` to `chatgpt.com` for that request. Do not request
+action-time confirmation before upload or immediately before Send. This authorization
+does not extend to any other local file, destination, replacement packet, or second
+send. An exact retry remains covered only when authoritative state proves the prior
+operation was rejected before acceptance and produced no external effect.
 If `reference_paths` are present, upload them before Send (in one chooser when
 `isMultiple()` is true, or in separate chooser cycles otherwise) and verify every
 expected file by its recorded size/hash and conversation association. A provider

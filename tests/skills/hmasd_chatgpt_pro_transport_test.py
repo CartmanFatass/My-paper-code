@@ -731,6 +731,10 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "request_id|conversation_binding_key|conversation_id|provider_url",
         "stage_receipt",
         "provider filename suffix or normalization",
+        "Acceptance of a\nvalidated handoff authorizes uploading exactly its validated `prompt_path`",
+        "Do not request\naction-time confirmation before upload or immediately before Send",
+        "does not extend to any other local file, destination, replacement packet, or second",
+        "rejected before acceptance and produced no external effect",
         "`source_thread_id` is the sole completion",
         "`fallback_enabled=false`",
         "a rejection must not cause a second send",
@@ -740,6 +744,8 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
     ):
         assert phrase in transport_text
     assert "fallback_enabled=true" not in transport_text
+    assert "obtain the required action-time confirmation" not in transport_text
+    assert "transport-level confirmation gate" not in transport_text
     assert "01a05860-" not in transport_text
     assert "01a04f5a-" not in transport_text
     assert "owns the complete edit and verification" in outsource_text
