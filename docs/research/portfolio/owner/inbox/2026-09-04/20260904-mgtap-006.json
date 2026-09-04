@@ -1,0 +1,37 @@
+{
+  "id": "20260904-mgtap-006",
+  "created": "2026-09-04T15:28:34-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "N5 B02 首轮预测：哪种机制主导曲线？",
+  "context": "比较 256 次更新内的平均曲线差，最小关注效应为绝对回报 0.01。",
+  "options": [
+    {
+      "key": "a",
+      "label": "共同可学习性或一般条件数主导，差异小于关注值",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "METRIC 出现正向曲线信号",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "METRIC 条件数不利，FREE 出现信号",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "预测 a：两算法均进步，早期差异较小；任何差异仍可能只是有效步长，所有者预测未取。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": null
+}
