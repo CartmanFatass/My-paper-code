@@ -141,7 +141,22 @@ trainable_parameters               = 32
 ```
 
 The non-result `project-cost` mode must emit those counts before launch and must report a
-conservative projection below the fixed machine-time cap of 600 wall seconds per learned arm.
+conservative projection from the runner's fixed planning law:
+
+```text
+projected_arm_seconds = 3 * (
+    5
+    + 0.01 * training_environment_transitions
+    + 0.005 * optimizer_example_exposures
+    + 0.01 * evaluation_environment_transitions
+    + 0.02 * exact_evaluation_cells
+)
+                      = 119.64 seconds per learned arm.
+```
+
+The coefficients are prospective planning weights, not observed performance, and factor three is
+the fixed implementation/host-load allowance. The fixed machine-time cap is 600 wall seconds per
+learned arm.
 Because both arms run sequentially in one process, the invocation cap is 1,200 wall seconds. A cap
 stop is an incomplete technical attempt and is not interpreted or resumed. A valid attempt runs
 both learned arms in fixed order `GENERIC_PAIR`, then `ASSOCIATION_FACTOR`, without inspecting the
@@ -173,8 +188,9 @@ For each learned arm, report over the 16 action-time cells:
 - RMSE and maximum absolute error against `Q*`;
 - exact action-ranking competence, `C_Q`, the number of the eight source/content contexts whose
   greedy action is `a=c` (shared deterministic tie rule);
-- the uniform-policy source-gradient vector induced by the learned Q, its L2 error and cosine to
-  the exact-Q source gradient;
+- the eight-component uniform-policy source-gradient vector, one component per `(s,c)` logit,
+  `g[s,c]=0.25*(Q(s,c,+1)-Q(s,c,-1))`, plus its L2 error and cosine to the corresponding exact-Q
+  vector;
 - mean probability allocated to `a=c`, exact expected bounded utility, paired sampled bounded
   utility, and their per-source/content values.
 
