@@ -1,0 +1,32 @@
+{
+  "id": "20260904-frrie-008",
+  "created": "2026-09-04T11:34:06-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "brief",
+  "title": "B01 三根观测路径等价结果简报",
+  "context": "三根预先排序的固定主机运行都完成了 512 次真实更新和完整评估。紧投影从未改变坐标，两臂的模型、优化器与评估轨迹全程相同；按预注册分支顺序在观测路径等价处停止，根 004、005 不运行。该结论只限这三根与本预算，不能推断触壁后机制价值。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-04_FRRIE-B01-THREE-SEED-AGGREGATE.md",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": null
+}

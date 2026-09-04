@@ -1,0 +1,42 @@
+{
+  "id": "20260904-frrie-004",
+  "created": "2026-09-04T11:25:52-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B01 下一最小判别器：contact-active R128",
+  "context": "三根 aggregate 仅支持固定主机、无紧约束接触路径的观察等价。A1 只读 intake 已确认缺少可行策略上界与调优同信息 learner；拟议的一步局部动作 census 不训练 learner，正负结果都不会回答投影接触是否改变学习回报，因而不会改变下一项投资。选择 fresh-root contact-active R128 B，在真实 RSCF/Adam 学习中比较 PHY_TRUST_004 与包含型 EDGE_FLEX_150。",
+  "options": [
+    {
+      "key": "a",
+      "label": "先执行一阶 A1 局部动作 census",
+      "consequence": "增加便宜的局部动作跨度描述，但仍不回答 learner/contact/value，随后仍需真实 learner。"
+    },
+    {
+      "key": "b",
+      "label": "冻结并执行 contact-active R128 B",
+      "consequence": "付出一次约 34 分钟的双臂运行，直接判别接触激活后约束是否改变学习回报；结论上限仍为 B。"
+    },
+    {
+      "key": "c",
+      "label": "重复或扩展旧 B01",
+      "consequence": "再采集无接触路径，不能消除当前最强替代解释。"
+    },
+    {
+      "key": "d",
+      "label": "转为方向或组合层处置",
+      "consequence": "需要方向级或组合级权限，且当前对象族仍有更小可逆判别器。"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "A1 不会改变下一投资；contact-active R128 是当前最小、可逆且直接触及 learner 路径的判别器。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L9",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

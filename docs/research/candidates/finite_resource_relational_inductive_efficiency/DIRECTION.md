@@ -310,3 +310,81 @@ The next discriminator is the unchanged three-seed B01 rung using the already ge
 roots `001..003`; no result-sensitive treatment, comparator, seed, or configuration change is
 authorized. See `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-001 full-path result — 2026-09-04
+
+The first ordered root has now completed the full 512-update B01 learner and planned 98-cell
+actual-host panel. All 23 completion checks passed. Each arm completed 512 paired RSCF/Adam updates,
+393,216 factual learner transitions, and 2,523,136 total training slots; evaluation completed
+25,088 episodes and 301,056 transitions. Peak RSS remained unavailable, so the valid result is
+marked `resources_unmeasured`.
+
+Root 001 is `B01_SEED_VALID_DIRECT`, not a three-seed branch. The tight projection changed no FP32
+coordinate through update 512; complete model/optimizer state and direct evaluation traces remained
+equal across all checkpoints, rosters, and interventions; hence every intact and rotated
+`PHY_TRUST-EDGE_FLEX` return difference is zero on this path. Overall model displacement was
+`L_inf(theta_512-theta_0)/0.05 = 2.092398852` in both arms, so movement elsewhere exceeded 0.10
+without tight-`beta` contact. Update-512 EDGE margins over uniform were only `+0.0068689` at `N=9`
+and `+0.0126184` at `N=15`; the maximum held-out within-PHY reassociation TV was `0.000226887`.
+
+This establishes observed-path equality for one literal root only. It does not apply
+`B01_OBSERVED_PATH_EQUIVALENCE`, `B01_WIDE_INCOMPETENT`, or another aggregate branch; roots 002 and
+003 remain unobserved. The strongest support is the complete paired learner/evaluator trace. The
+strongest contradiction to package value is that the treatment never activated. Surviving
+explanations include coordinate-specific noncontact, common `K0` alignment, generic Adam geometry,
+literal-root variation, and contact on another ordered root.
+
+The next discriminator remains root 002 and then root 003 under the unchanged card. Per the active
+REMOTE_FIRST control plane, new invocations use exact pushed bytes in freshly admitted detached
+remote worktrees; root 001 is not migrated or repeated. See
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-002 full-path result — 2026-09-04
+
+The second ordered root also completed 512 paired RSCF/Adam updates and the full 98-cell fixed-host
+panel. All 23 completion checks passed. It is separately `B01_SEED_VALID_DIRECT` and remains a
+single-seed result; the three-seed branch is not applied before root 003.
+
+No tight FP32 coordinate changed. Complete model/optimizer state, direct action traces, and native
+return rows remained equal between `PHY_TRUST` and `EDGE_FLEX` at every checkpoint, roster, and
+intervention. Overall displacement reached
+`L_inf(theta_512-theta_0)/0.05 = 2.017686367` in both arms, yet tight-projection displacement was
+zero. At update 512, EDGE minus uniform was only `+0.0058027` at `N=9` and `+0.0055035` at `N=15`;
+the maximum held-out within-PHY reassociation TV was `0.000270478`.
+
+Roots 001 and 002 now supply two direct, distinct literal-root instances of no contact and
+observed-path arm equality. That strengthens the bounded path description but still establishes no
+three-seed equality branch, comparator competence, post-contact effect, or seed-population claim.
+Peak RSS was unavailable, so root 002 remains valid as `resources_unmeasured`.
+
+The next discriminator is the unchanged ordered root 003 on the same Windows host. See
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed aggregate result — 2026-09-04
+
+All three prospectively ordered roots completed the real 512-update learner and planned 98-cell
+fixed-host panel. Every root passed all 23 completion checks, fresh admission, exposure, paired
+work, state preservation, and nonzero learner/optimizer/evaluator counts. Peak RSS was unavailable
+for all three, so the valid aggregate is marked `resources_unmeasured`.
+
+The accepted branch is `B01_OBSERVED_PATH_EQUIVALENCE`. Tight projection changed no FP32
+coordinate on roots `001..003`; complete model/optimizer states and direct evaluation traces
+remained equal across all checkpoints, rosters, and interventions. The panel therefore stops at
+three, leaving roots `004..005` unopened. The later numerical wide-incompetence row is not applied
+because the registered rule stops at the earlier fully determined branch.
+
+The bounded claim is observed-path equality on those literal roots, the local Windows/MSVC/CPU
+surface, the declared schedule, and 512 updates. Strongest support is three complete paired
+learner/evaluator traces. Strongest contradiction to any mechanism-value claim is that the only
+treatment difference never activated; no post-contact value or equivalence follows. Surviving
+alternatives include common `K0` alignment, generic optimizer geometry, and treatment-coordinate
+noncontact at this budget.
+
+The conditional DM prediction is not scored because no root contacted; the predeclared no-contact
+alternative applied. No next object is selected by this result. A contact-capable discriminator
+would require a separately authorized outcome-blind card. The existing A1 local action-headroom
+census remains only a read-only boundary, not a frozen successor. See
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.
