@@ -83,7 +83,7 @@ from .b1_policy_replay_worker import (
     POLICY_REPLAY_TEST_RESULT_SCHEMA,
 )
 from .b1_mechanical import b0_nonpolarity_record
-from .telemetry import validate_telemetry
+from .telemetry import assess_resource_telemetry
 
 
 PRODUCTION_SCHEMA = "cbsc_omrc_b01_b1_metrics_production_v1"
@@ -222,8 +222,8 @@ class B1PolicyReplaySlotSnapshot:
     admission_sha256: str
     admission_bytes: bytes
     telemetry_relative_path: str
-    telemetry_sha256: str
-    telemetry_bytes: bytes
+    telemetry_sha256: str | None
+    telemetry_bytes: bytes | None
     raw_receipt_relative_path: str
     raw_receipt_sha256: str
     raw_receipt_bytes: bytes
@@ -325,15 +325,11 @@ def make_b1_policy_replay_batch_witness(
         "raw_output_path", "python_executable", "python_sha256", "preflight_script",
         "preflight_script_sha256", "exact_command", "raw_receipt_sha256", "receipt",
     }
-    telemetry_fields = {
-        "schema", "attempt_id", "run_name", "original_slot_index", "seed", "arm",
-        "measurement", "scientific_branch",
-    }
     for index in indices:
         seed, arm = B1_SLOT_ORDER[index]
         slot_root = staging / "policy-replay" / f"{index:02d}"
         paths = {
-            name: ensure_confined(slot_root / f"{name}.json", root).resolve(strict=True)
+            name: ensure_confined(slot_root / f"{name}.json", root).resolve(strict=name != "telemetry")
             for name in ("result", "admission", "telemetry")
         }
         payload = paths["result"].read_bytes()
@@ -347,37 +343,28 @@ def make_b1_policy_replay_batch_witness(
             value, index=index, attempt_id=attempt_id, test_only=test_only
         )
         admission_bytes = paths["admission"].read_bytes()
-        telemetry_bytes = paths["telemetry"].read_bytes()
+        try:
+            telemetry_bytes = paths["telemetry"].read_bytes()
+        except OSError:
+            telemetry_bytes = None
         try:
             admission = json.loads(admission_bytes.decode("ascii"))
-            telemetry = json.loads(telemetry_bytes.decode("ascii"))
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
             raise B1MetricsProductionError("policy replay admission/telemetry is unreadable") from exc
         if (
             canonical_json_bytes(admission) + b"\n" != admission_bytes
-            or canonical_json_bytes(telemetry) + b"\n" != telemetry_bytes
             or not isinstance(admission, Mapping) or set(admission) != admission_fields
-            or not isinstance(telemetry, Mapping) or set(telemetry) != telemetry_fields
             or admission["schema"] != "cbsc_omrc_b01_b1_bound_admission_v1"
             or admission["attempt_id"] != attempt_id or admission["run_name"] != B1_RUN_NAME
             or admission["seed"] != seed or admission["arm"] != arm
             or admission["implementation_commit"] != implementation_commit
             or admission["source_conformance_sha256"] != source_conformance_sha256
-            or telemetry["schema"] != "cbsc_omrc_b01_policy_replay_telemetry_v1"
-            or telemetry["attempt_id"] != attempt_id or telemetry["run_name"] != B1_RUN_NAME
-            or telemetry["original_slot_index"] != index
-            or telemetry["seed"] != seed or telemetry["arm"] != arm
-            or telemetry["scientific_branch"] is not None
             or value["admission_receipt_sha256"] != _digest(admission_bytes)
             or value["implementation_commit"] != implementation_commit
             or value["source_conformance_sha256"] != source_conformance_sha256
             or value["literal_binding_spec_sha256"] != literal_binding_spec_sha256
         ):
             raise B1MetricsProductionError("policy replay admission/telemetry/source binding differs")
-        try:
-            validate_telemetry(telemetry["measurement"], caps=B1_RESOURCE_CAPS)
-        except ValueError as exc:
-            raise B1MetricsProductionError("policy replay telemetry measurement differs") from exc
         raw_receipt_path = ensure_confined(
             Path(admission["raw_output_path"]), root
         ).resolve(strict=True)
@@ -391,7 +378,7 @@ def make_b1_policy_replay_batch_witness(
             admission_relative_path=paths["admission"].relative_to(root).as_posix(),
             admission_sha256=_digest(admission_bytes), admission_bytes=admission_bytes,
             telemetry_relative_path=paths["telemetry"].relative_to(root).as_posix(),
-            telemetry_sha256=_digest(telemetry_bytes), telemetry_bytes=telemetry_bytes,
+            telemetry_sha256=None if telemetry_bytes is None else _digest(telemetry_bytes), telemetry_bytes=telemetry_bytes,
             raw_receipt_relative_path=raw_receipt_path.relative_to(root).as_posix(),
             raw_receipt_sha256=_digest(raw_receipt_bytes),
             raw_receipt_bytes=raw_receipt_bytes,
@@ -426,12 +413,10 @@ def materialize_b1_policy_replay_batch_witness(
     for slot, index in zip(witness.slots, indices, strict=True):
         payload = (root / slot.result_relative_path).read_bytes()
         admission = (root / slot.admission_relative_path).read_bytes()
-        telemetry = (root / slot.telemetry_relative_path).read_bytes()
         raw_receipt = (root / slot.raw_receipt_relative_path).read_bytes()
         if (
             payload != slot.result_bytes or _digest(payload) != slot.result_sha256
             or admission != slot.admission_bytes or _digest(admission) != slot.admission_sha256
-            or telemetry != slot.telemetry_bytes or _digest(telemetry) != slot.telemetry_sha256
             or raw_receipt != slot.raw_receipt_bytes
             or _digest(raw_receipt) != slot.raw_receipt_sha256
         ):
@@ -452,8 +437,7 @@ def _policy_replay_resource_authority(
     mechanical: list[dict[str, Any]] = []
     for slot in witness.slots:
         admission = json.loads(slot.admission_bytes.decode("ascii"))
-        telemetry = json.loads(slot.telemetry_bytes.decode("ascii"))
-        measurement = validate_telemetry(telemetry["measurement"], caps=B1_RESOURCE_CAPS)
+        measurement = _load_resource_telemetry(root / slot.telemetry_relative_path, replay=True)
         raw_receipt = ensure_confined(Path(admission["raw_output_path"]), root)
         raw_receipt_relative = raw_receipt.relative_to(root).as_posix()
         if (
@@ -1288,9 +1272,11 @@ def reconstruct_b1_mechanical_from_artifact(
             admission_doc = _load_json(
                 slot_root / "admission.json", "consumer policy replay admission"
             )
-            telemetry_doc = _load_json(
-                slot_root / "telemetry.json", "consumer policy replay telemetry"
-            )
+            measurement = _load_resource_telemetry(slot_root / "telemetry.json", replay=True)
+            try:
+                telemetry_sha256 = _digest((slot_root / "telemetry.json").read_bytes())
+            except OSError:
+                telemetry_sha256 = None
             validated_policy_admission = _validate_relocated_training_admission(
                 slot_root / "admission.json",
                 admission_doc,
@@ -1300,14 +1286,6 @@ def reconstruct_b1_mechanical_from_artifact(
                 implementation_commit=implementation_commit,
                 source_conformance_sha256=source_conformance_sha256,
             )
-            telemetry_fields = {
-                "schema", "attempt_id", "run_name", "original_slot_index",
-                "seed", "arm", "measurement", "scientific_branch",
-            }
-            if set(telemetry_doc) != telemetry_fields:
-                raise B1MetricsProductionError(
-                    "policy replay telemetry companion fields differ"
-                )
             resource_matches = [
                 row for row in tables["resource_admissions"]
                 if row.get("invocation_kind") == "POLICY_REPLAY"
@@ -1332,15 +1310,7 @@ def reconstruct_b1_mechanical_from_artifact(
                     "policy replay raw admission receipt is unreadable"
                 ) from exc
             if (
-                telemetry_doc.get("schema")
-                != "cbsc_omrc_b01_policy_replay_telemetry_v1"
-                or telemetry_doc.get("attempt_id") != attempt_id
-                or telemetry_doc.get("run_name") != B1_RUN_NAME
-                or telemetry_doc.get("original_slot_index") != index
-                or telemetry_doc.get("seed") != wrapper.get("seed")
-                or telemetry_doc.get("arm") != wrapper.get("arm")
-                or telemetry_doc.get("scientific_branch") is not None
-                or resource_row.get("attempt_id") != attempt_id
+                resource_row.get("attempt_id") != attempt_id
                 or telemetry_row.get("attempt_id") != attempt_id
                 or resource_row.get("bound_admission_relative_path")
                 != (slot_root / "admission.json").relative_to(Path(root)).as_posix()
@@ -1349,12 +1319,6 @@ def reconstruct_b1_mechanical_from_artifact(
                 )
                 or wrapper.get("admission_receipt_sha256")
                 != _digest((slot_root / "admission.json").read_bytes())
-                or telemetry_row.get("telemetry_relative_path")
-                != (slot_root / "telemetry.json").relative_to(Path(root)).as_posix()
-                or telemetry_row.get("telemetry_sha256") != _digest(
-                    (slot_root / "telemetry.json").read_bytes()
-                )
-                or telemetry_row.get("measurement") != telemetry_doc.get("measurement")
                 or not raw_receipt.is_file()
                 or _digest(raw_receipt.read_bytes()) != resource_row.get("raw_receipt_sha256")
                 or resource_row.get("raw_receipt_sha256")
@@ -1394,11 +1358,11 @@ def reconstruct_b1_mechanical_from_artifact(
             })
             reopened_replay_telemetry.append({
                 **base,
-                "measurement": telemetry_doc["measurement"],
+                "measurement": measurement,
                 "telemetry_relative_path": (
                     slot_root / "telemetry.json"
                 ).relative_to(Path(root)).as_posix(),
-                "telemetry_sha256": _digest((slot_root / "telemetry.json").read_bytes()),
+                "telemetry_sha256": telemetry_sha256,
             })
     policy_resources = (
         {
@@ -1531,6 +1495,16 @@ def _load_json(path: Path, label: str) -> Mapping[str, Any]:
     return value
 
 
+def _load_resource_telemetry(path: Path, *, replay: bool = False) -> dict[str, Any]:
+    try:
+        value = _load_json(path, "resource telemetry")
+        if replay:
+            value = value.get("measurement")
+    except (OSError, ValueError):
+        value = None
+    return assess_resource_telemetry(value)["measurement"]
+
+
 def _direct_invocation_groups(
     staging: Path,
     groups: Sequence[Sequence[Mapping[str, Any]]],
@@ -1562,7 +1536,7 @@ def _direct_invocation_groups(
             telemetry_path = staging / "workers" / tag / invocation / "telemetry.json"
             result_path = staging / "workers" / tag / invocation / "result.json.gz"
             bound = _load_json(admission_path, "bound admission")
-            measurement = _load_json(telemetry_path, "direct telemetry")
+            measurement = _load_resource_telemetry(telemetry_path)
             result_wrapper = _load_json(result_path, "direct worker result")
             receipt = bound.get("receipt")
             if (

@@ -459,28 +459,89 @@ def test_parent_supervision_short_lived_canonical_result_does_not_race_telemetry
     assert not (tmp_path / "supervisor-incident.json").exists()
 
 
-def test_parent_supervision_poll_failure_kills_child_and_publishes_incident(
-    monkeypatch, tmp_path
-) -> None:
-    def fail_poll(self, *, caps):
-        raise TelemetryError("test-only telemetry backend failure")
+def _resource_failure_child(tmp_path, replay, defect=None):
+    if replay:
+        counts = {"policy_decisions": 192, "policy_curves": 2,
+                  "execution_mode_records": 4, "evaluation_join_records": 4}
+        wrapper = {"counts": counts, **{name: [{}] * count for name, count in counts.items()}}
+        wrapper.update(scientific_branch=None, scientific_polarity=None,
+                       promotion_eligible=None, b2_extension_trigger=None)
+        if defect == "counts":
+            wrapper["policy_decisions"].pop()
+    else:
+        raw = {"schema": B1_RAW_EVIDENCE_SCHEMA, "scientific_branch": None,
+               "scientific_work_transitions": 2,
+               "stage_measurements": [{"stage": "test-only", "wall_seconds": 0.01,
+                   "cpu_seconds": 0.001, "transitions": 2, "transitions_per_second": 200.0}]}
+        if defect == "counts":
+            raw["scientific_work_transitions"] = 3
+        wrapper = {"schema": WORKER_RESULT_SCHEMA, "raw_evidence": raw, "scientific_branch": None}
+    payload = json.dumps(wrapper, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n"
+    if defect == "malformed":
+        payload = "{"
+    code = "import pathlib,time,sys; time.sleep(0.08); "
+    if defect != "missing":
+        code += f"pathlib.Path({str(tmp_path / 'result.json')!r}).write_bytes({payload.encode('ascii')!r}); "
+    code += "sys.exit(7)" if defect == "exit" else "sys.exit(0)"
+    return [sys.executable, "-c", code]
 
-    monkeypatch.setattr(b1.ProcessTreeMonitor, "poll_caps", fail_poll)
-    with pytest.raises(TelemetryError, match="telemetry failed during supervision"):
-        b1.supervise_child(
-            [sys.executable, "-c", "import time; time.sleep(10)"],
-            scratch_root=tmp_path / "scratch", durable_root=tmp_path,
-            result_path=tmp_path / "result.json",
-            stdout_path=tmp_path / "stdout.log",
-            stderr_path=tmp_path / "stderr.log", interval_seconds=0.01,
-            caps=B1_RESOURCE_CAPS,
-        )
-    incident = json.loads(
-        (tmp_path / "supervisor-incident.json").read_text(encoding="utf-8")
+
+@pytest.mark.parametrize("replay", [False, True])
+@pytest.mark.parametrize("failure", ["begin", "poll_caps", "finish"])
+def test_resource_sampling_failure_keeps_successful_child(monkeypatch, tmp_path, replay, failure):
+    def fail(*args, **kwargs):
+        raise TelemetryError("test-only unavailable sampler")
+    monkeypatch.setattr(b1.ProcessTreeMonitor, failure, fail)
+    supervise = b1.supervise_policy_replay_child if replay else b1.supervise_child
+    raw, measured = supervise(
+        _resource_failure_child(tmp_path, replay), result_path=tmp_path / "result.json",
+        scratch_root=tmp_path / "scratch", durable_root=tmp_path,
+        stdout_path=tmp_path / "stdout.log", stderr_path=tmp_path / "stderr.log",
+        interval_seconds=0.01, **({"test_only": True} if replay else {}),
     )
-    assert incident["reason"] == "TELEMETRY_FAILURE"
-    assert incident["measurement_complete"] is False
-    assert incident["scientific_branch"] is None
+    assert measured["resources_unmeasured"] is True
+    assert measured["measurement_complete"] is False
+    assert measured["end_to_end_wall_seconds"] > 0
+    assert measured["scientific_work_transitions"] == (192 if replay else 2)
+    if failure == "begin":
+        assert measured["process_tree_peak_rss_bytes"] is None
+        assert measured["end_to_end_cpu_seconds"] is None
+        assert measured["scratch_high_water_bytes"] is None
+    else:
+        assert measured["sample_count"] > 0
+        assert measured["process_tree_peak_rss_bytes"] > 0
+    assert not (tmp_path / "supervisor-incident.json").exists()
+
+
+@pytest.mark.parametrize("replay", [False, True])
+@pytest.mark.parametrize("defect", ["exit", "missing", "malformed", "counts"])
+def test_resource_failure_never_masks_worker_evidence_failure(monkeypatch, tmp_path, replay, defect):
+    def fail(*args, **kwargs):
+        raise TelemetryError("sampler and snapshot unavailable")
+    monkeypatch.setattr(b1.ProcessTreeMonitor, "begin", fail)
+    monkeypatch.setattr(b1.ProcessTreeMonitor, "incident_snapshot", fail)
+    supervise = b1.supervise_policy_replay_child if replay else b1.supervise_child
+    with pytest.raises(b1.B1OrchestrationError):
+        supervise(_resource_failure_child(tmp_path, replay, defect),
+            result_path=tmp_path / "result.json", scratch_root=tmp_path / "scratch",
+            durable_root=tmp_path, stdout_path=tmp_path / "stdout.log",
+            stderr_path=tmp_path / "stderr.log", interval_seconds=0.01,
+            **({"test_only": True} if replay else {}))
+
+
+@pytest.mark.parametrize("replay", [False, True])
+@pytest.mark.parametrize("failure", ["begin", "poll_caps"])
+def test_independent_wall_stop_survives_resource_failure(monkeypatch, tmp_path, replay, failure):
+    def fail(*args, **kwargs):
+        raise TelemetryError("sampler unavailable")
+    monkeypatch.setattr(b1.ProcessTreeMonitor, failure, fail)
+    supervise = b1.supervise_policy_replay_child if replay else b1.supervise_child
+    with pytest.raises(TelemetryError, match="wall"):
+        supervise([sys.executable, "-c", "import time; time.sleep(10)"],
+            result_path=tmp_path / "result.json", scratch_root=tmp_path / "scratch",
+            durable_root=tmp_path, stdout_path=tmp_path / "stdout.log",
+            stderr_path=tmp_path / "stderr.log", interval_seconds=0.01,
+            caps=ResourceCaps(wall_seconds=0.05), **({"test_only": True} if replay else {}))
 
 
 def test_worker_wrapper_and_engine_raw_schema_are_exact_and_science_null() -> None:
@@ -1331,3 +1392,23 @@ def test_launch_conformance_still_requires_the_bound_commit_to_be_head(monkeypat
         b1.B1OrchestrationError, match="implementation_commit is not current HEAD"
     ):
         b1.verify_source_conformance(BOUND_COMMIT)
+
+
+@pytest.mark.parametrize("replay", [False, True])
+def test_sampler_interrupt_still_cleans_up_child(monkeypatch, tmp_path, replay):
+    killed = []
+    kill = b1._kill_process_tree
+    def observed_kill(process):
+        killed.append(process.pid)
+        return kill(process)
+    def interrupt(*args, **kwargs):
+        raise KeyboardInterrupt
+    monkeypatch.setattr(b1, "_kill_process_tree", observed_kill)
+    monkeypatch.setattr(b1.ProcessTreeMonitor, "begin", interrupt)
+    supervise = b1.supervise_policy_replay_child if replay else b1.supervise_child
+    with pytest.raises(KeyboardInterrupt):
+        supervise([sys.executable, "-c", "import time; time.sleep(10)"],
+            result_path=tmp_path / "result.json", scratch_root=tmp_path / "scratch",
+            durable_root=tmp_path, stdout_path=tmp_path / "stdout.log",
+            stderr_path=tmp_path / "stderr.log", **({"test_only": True} if replay else {}))
+    assert len(killed) == 1

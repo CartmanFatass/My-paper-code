@@ -238,30 +238,34 @@ def assess_resource_telemetry(
         "caps": caps.as_dict(),
         "measurement": None,
     }
-    if value is None:
-        record["resources_unmeasured"] = True
-        record["unmeasured_reasons"] = ["telemetry_missing"]
-        return record
-    if not isinstance(value, Mapping):
-        record["resources_unmeasured"] = True
-        record["unmeasured_reasons"] = ["telemetry_not_a_record"]
-        return record
+    measured = dict(value) if isinstance(value, Mapping) else {}
     try:
-        measured = validate_telemetry(value, caps=RECORDED_BUDGET_CAPS)
-    except TelemetryError as exc:
+        measured = validate_telemetry(measured, caps=RECORDED_BUDGET_CAPS)
+    except (TypeError, ValueError) as exc:
         record["resources_unmeasured"] = True
-        record["unmeasured_reasons"] = [f"telemetry_measurement_failed: {exc}"]
-        return record
+        record["unmeasured_reasons"] = [
+            "telemetry_missing" if value is None else f"telemetry_measurement_failed: {exc}"
+        ]
+        measured["measurement_complete"] = False
+    # Keep actual partial observations; missing or malformed quantities are null.
+    for name in REQUIRED_TELEMETRY_FIELDS - {
+        "measurement_complete", "measurement_source", "stage_measurements",
+        "scientific_work_transitions",
+    }:
+        number = measured.get(name)
+        if type(number) not in (int, float) or not math.isfinite(number) or number < 0:
+            measured[name] = None
+    measured["resources_unmeasured"] = record["resources_unmeasured"]
     record["measurement"] = measured
     exceeded: list[str] = []
-    if float(measured["end_to_end_wall_seconds"]) > caps.wall_seconds:
-        exceeded.append("wall_seconds")
-    if int(measured["process_tree_peak_rss_bytes"]) > caps.process_tree_peak_rss_bytes:
-        exceeded.append("process_tree_peak_rss_bytes")
-    if int(measured["scratch_high_water_bytes"]) > caps.scratch_high_water_bytes:
-        exceeded.append("scratch_high_water_bytes")
-    if int(measured["durable_high_water_bytes"]) > caps.durable_high_water_bytes:
-        exceeded.append("durable_high_water_bytes")
+    for field, cap_name in (
+        ("end_to_end_wall_seconds", "wall_seconds"),
+        ("process_tree_peak_rss_bytes", "process_tree_peak_rss_bytes"),
+        ("scratch_high_water_bytes", "scratch_high_water_bytes"),
+        ("durable_high_water_bytes", "durable_high_water_bytes"),
+    ):
+        if measured[field] is not None and measured[field] > getattr(caps, cap_name):
+            exceeded.append(cap_name)
     record["cap_exceedances"] = exceeded
     stopping = [name for name in exceeded if name in STOPPING_CAPS]
     record["stopping_cap_exceedances"] = stopping

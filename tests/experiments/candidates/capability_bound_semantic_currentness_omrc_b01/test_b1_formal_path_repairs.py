@@ -273,3 +273,151 @@ def test_memory_admission_failure_still_reports_a_stderr_refusal(monkeypatch, tm
             arm=b1.ARM_SEED_ORDER[0][1], seed=b1.ARM_SEED_ORDER[0][0],
             implementation_commit="c" * 40, source_conformance_sha256="d" * 64,
         )
+
+
+@pytest.mark.skipif(not __import__("os").environ.get("CBSC_R05_FIXTURE"),
+                    reason="requires frozen r05 offline evidence")
+def test_r05_formal_publication_with_absent_resources(monkeypatch, tmp_path):
+    """Offline historical admission context; never a current-source learner witness.
+
+    CM verified the actual historical Windows interpreter bytes against the
+    fixed SHA below before this remote check. Original receipt and learner bytes
+    are preserved. Only a transient host/path copy goes through the unchanged
+    production admission validator; original invocation, hashes, memory and
+    consumer relocation checks all remain exercised.
+    """
+    import os
+    import re
+    import shutil
+    import time
+    import types
+    from pathlib import Path, PureWindowsPath
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1_metrics_production as production
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_artifact import make_b1_incident_lineage_witness
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import FORMAL_TABLE_ROW_COUNTS, validate_metrics_only_manifest
+
+    started = time.monotonic()
+    source = Path(os.environ["CBSC_R05_FIXTURE"])
+    b0_root = tmp_path / "b0"
+    shutil.copytree(Path(os.environ["CBSC_B0_FIXTURE"]), b0_root)
+    historical_python = Path(os.environ["CBSC_HISTORICAL_PYTHON"]).read_bytes()
+    assert hashlib.sha256(historical_python).hexdigest() == "7075cb605dd9d7596074b438b2640c7db0a33c436f0c7046a38c211ab257ad3b"
+    staging, final = tmp_path / "offline-staging", tmp_path / "offline-publication"
+    shutil.copytree(source, staging)
+    commit = "4679e8dc86fb39b7b72fe7404f3f837f11ebbaad"
+    conformance = "2f8dc132a1ca67138b26736094999d3771a0d2b841a399c9050cfc581b71fdd0"
+    attempt = "b1-61d8b522f3fc4e8da6b48e0e01d24510"
+    def historical_bytes(relative):
+        return subprocess.run(["git", "show", f"{commit}:{relative}"], cwd=b1.REPO_ROOT,
+                              check=True, capture_output=True).stdout
+    preflight_sha = hashlib.sha256(historical_bytes("scripts/hmasd_resource_preflight.py")).hexdigest()
+    assert preflight_sha == "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
+    originals, relative_paths, raw_locations = {}, {}, {}
+    admission_files = [*source.glob("admissions/*-admission.json"),
+                       *source.glob("policy-replay/*/admission.json")]
+    assert len(admission_files) == 48
+    for path in admission_files:
+        bound = json.loads(path.read_bytes())
+        bound_path, raw_path = (PureWindowsPath(bound[key]) for key in ("bound_receipt_path", "raw_output_path"))
+        assert bound["python_executable"] == r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
+        assert bound["python_sha256"] == "7075cb605dd9d7596074b438b2640c7db0a33c436f0c7046a38c211ab257ad3b"
+        assert bound["preflight_script_sha256"] == preflight_sha
+        assert bound["exact_command"] == [bound["python_executable"], bound["preflight_script"],
+                                           "admit-memory", "--out", str(raw_path)]
+        assert raw_path.parent == bound_path.parent
+        assert raw_path.name.startswith(f".{bound_path.name}.raw-")
+        assert hashlib.sha256((path.parent / raw_path.name).read_bytes()).hexdigest() == bound["raw_receipt_sha256"]
+        key = bound["bound_receipt_path"]
+        originals[key] = bound
+        relative_paths[key] = path.relative_to(source)
+        if path.parent.parent.name == "policy-replay":
+            raw_locations[bound["raw_output_path"]] = path.parent.relative_to(source) / raw_path.name
+    assert len(raw_locations) == 12
+
+    original_validate = b1.validate_bound_admission
+    checked = set()
+    def historical_admission(value, **kwargs):
+        key = value["bound_receipt_path"]
+        assert value == originals[key]
+        root = staging if staging.exists() else final
+        bound_path = root / relative_paths[key]
+        raw_path = bound_path.parent / PureWindowsPath(value["raw_output_path"]).name
+        assert bound_path.read_bytes() == (source / relative_paths[key]).read_bytes()
+        # Context-only copies: persist no altered receipt and retain raw-byte checks.
+        contextual = dict(value)
+        executable = Path(os.path.abspath(__import__("sys").executable))
+        contextual.update(python_executable=str(executable),
+            python_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),
+            preflight_script=str(b1.CANONICAL_PREFLIGHT),
+            preflight_script_sha256=hashlib.sha256(b1.CANONICAL_PREFLIGHT.read_bytes()).hexdigest(),
+            bound_receipt_path=str(bound_path.resolve()), raw_output_path=str(raw_path.resolve()),
+            exact_command=[str(executable), str(b1.CANONICAL_PREFLIGHT), "admit-memory", "--out", str(raw_path.resolve())])
+        kwargs["expected_receipt_path"] = bound_path
+        validated = original_validate(contextual, **kwargs)
+        assert validated["receipt"]["available_physical_bytes"] >= 4 * 1024**3
+        assert validated["receipt"]["effective_available_bytes"] >= 4 * 1024**3
+        checked.add(key)
+        return dict(value)
+    monkeypatch.setattr(b1, "validate_bound_admission", historical_admission)
+    # Preserve the consumer function's checks, using Windows names for its two
+    # historical metadata paths and native paths for actual artifact reads.
+    relocation = production._validate_relocated_training_admission
+    historical_paths = {value[key] for value in originals.values()
+                        for key in ("bound_receipt_path", "raw_output_path")}
+    context = dict(relocation.__globals__)
+    context["Path"] = lambda value: PureWindowsPath(value) if str(value) in historical_paths else Path(value)
+    monkeypatch.setattr(production, "_validate_relocated_training_admission",
+        types.FunctionType(relocation.__code__, context, relocation.__name__, relocation.__defaults__))
+    confined = production.ensure_confined
+    def locate(path, root):
+        relative = raw_locations.get(str(path))
+        return confined(staging / relative if relative is not None else path, root)
+    monkeypatch.setattr(production, "ensure_confined", locate)
+
+    groups = []
+    for index, (seed, arm) in enumerate(b1.B1_SLOT_ORDER):
+        tag = f"{index:02d}-seed-{seed}-{arm}"
+        group = [json.loads(path.read_bytes())["raw_evidence"]
+                 for path in sorted((staging / "workers" / tag).glob("slice-*/result.json"))]
+        assert len(group) == 3
+        groups.append(group)
+    # Delete only resource companions in this test's disposable copy.
+    resource_files = [*staging.glob("workers/*/slice-*/telemetry.json"),
+                      *staging.glob("policy-replay/*/telemetry.json")]
+    assert len(resource_files) == 48
+    for path in resource_files:
+        path.unlink()
+    laws = b1._law_digests({"files": [{"path": relative,
+        "sha256": hashlib.sha256(historical_bytes(relative)).hexdigest()}
+        for relative in re.findall(r'"((?:experiments/|docs/)[^"]+)"', inspect.getsource(b1._law_digests))]})
+    replay = production.make_b1_policy_replay_batch_witness(staging_root=staging,
+        allowed_root=tmp_path, attempt_id=attempt, implementation_commit=commit,
+        source_conformance_sha256=conformance,
+        literal_binding_spec_sha256=hashlib.sha256((b1.REPO_ROOT / production.LITERAL_BINDING_SPEC_RELATIVE_PATH).read_bytes()).hexdigest(),
+        test_only=False)
+    published = production._assemble_and_publish_b1_metrics(staging_root=staging,
+        final_path=final, grouped_raw_slices=groups, implementation_commit=commit,
+        source_conformance_sha256=conformance, b0_root=b0_root,
+        b0_evidence=b1.locate_b0_evidence(b0_root), law_digests=laws,
+        incident_lineage_witness=make_b1_incident_lineage_witness([], allowed_root=tmp_path),
+        policy_replay_witness=replay, allowed_root=tmp_path, test_only=False)
+    manifest = json.loads((published / "manifest.json").read_bytes())
+    validate_metrics_only_manifest(manifest, root=published, allow_test_only=False)
+    assert checked == set(originals)
+    assert len(manifest["table_inventory"]) == 15
+    counts = {row["table"]: row["row_count"] for row in manifest["table_inventory"]}
+    assert all(counts[name] == count for name, count in FORMAL_TABLE_ROW_COUNTS.items())
+    assert counts["telemetry"] == counts["resource_admissions"] == 48
+    assert manifest["mechanical"]["mechanical_attempt_complete"] is True
+    assert manifest["mechanical"]["mechanical_components"]["resource_caps"] is None
+    telemetry = [json.loads(line) for line in (published / "metrics/raw/telemetry.jsonl").read_bytes().splitlines()]
+    assert all(row["measurement"]["resources_unmeasured"] is True for row in telemetry)
+    assert all(row["measurement"]["process_tree_peak_rss_bytes"] is None for row in telemetry)
+    summary = json.loads((published / "summary.json").read_bytes())
+    assert "descriptive_curves" in summary
+    assert all(value is None for value in manifest["derived_fields"].values())
+    assert all(manifest[field] is None for field in ("scientific_branch", "scientific_polarity",
+                                                    "promotion_eligible", "b2_extension_trigger"))
+    import resource
+    print(json.dumps({"offline_formal_wall_seconds": time.monotonic() - started,
+                      "peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024}))

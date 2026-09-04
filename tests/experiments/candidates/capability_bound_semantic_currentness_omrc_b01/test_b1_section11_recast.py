@@ -365,7 +365,8 @@ def test_missing_resource_telemetry_downgrades_and_does_not_quarantine() -> None
     assert absent["resources_unmeasured"] is True
     assert absent["unmeasured_reasons"] == ["telemetry_missing"]
     assert absent["stop_run"] is False
-    assert absent["measurement"] is None
+    assert absent["measurement"]["end_to_end_wall_seconds"] is None
+    assert absent["measurement"]["process_tree_peak_rss_bytes"] is None
 
     broken = assess_resource_telemetry({"measurement_complete": True}, caps=B1_RESOURCE_CAPS)
     assert broken["resources_unmeasured"] is True
@@ -405,15 +406,16 @@ def test_measured_cap_exceedance_is_recorded_and_only_the_wall_cap_stops() -> No
     assert inside["stop_run"] is False
 
 
+@pytest.mark.parametrize("measured_count", [0, 2])
 def test_slot_evidence_records_unmeasured_resources_without_refusing(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, measured_count: int,
 ) -> None:
     monkeypatch.setattr(
         b1, "_slot_paths",
         lambda root, index, seed, arm: {
-            "raw": [tmp_path / "result.json"],
-            "admission": [tmp_path / "admission.json"],
-            "telemetry": [],
+            "raw": [tmp_path / "result.json"] * 3,
+            "admission": [tmp_path / "admission.json"] * 3,
+            "telemetry": [tmp_path / f"telemetry-{i}.json" for i in range(measured_count)],
         },
     )
     monkeypatch.setattr(
@@ -431,14 +433,20 @@ def test_slot_evidence_records_unmeasured_resources_without_refusing(
     (tmp_path / "result.json").write_text("{}", encoding="utf-8")
     (tmp_path / "admission.json").write_text("{}", encoding="utf-8")
 
+    for i in range(measured_count):
+        (tmp_path / f"telemetry-{i}.json").write_text(json.dumps(_measurement()), encoding="utf-8")
     _, _, telemetry_record, _ = b1._load_slot_evidence(
         tmp_path, 0, 21101, "RAW-GRU",
         expected_attempt_id="attempt-1", expected_commit="a" * 40,
     )
     assert telemetry_record["resources_unmeasured"] is True
-    assert telemetry_record["unmeasured_reasons"] == ["telemetry_missing"]
+    assert telemetry_record["unmeasured_reasons"] == ["telemetry_missing"] * (3 - measured_count)
     assert telemetry_record["recorded_cap_exceedances"] == []
-    assert telemetry_record["invocations"] == []
+    assert len(telemetry_record["invocations"]) == measured_count
+    assert telemetry_record["wall_seconds"] is None
+    assert telemetry_record["within_caps"] is None
+    assert all(row["end_to_end_wall_seconds"] == _measurement()["end_to_end_wall_seconds"]
+               for row in telemetry_record["invocations"])
 
 
 # (v) learner-side instrumentation failure still quarantines ------------------

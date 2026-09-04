@@ -38,7 +38,7 @@ from .ppo import PPOConfig, config_digest, ordered_episode_indices
 # recorded budgets under the section-11 recast; a measured exceedance is
 # published, not refused.  The wall cap alone stops a run, at the slot boundary.
 # `RECORDED_BUDGET_CAPS` therefore does not refuse inside the assembly.
-from .telemetry import RECORDED_BUDGET_CAPS, TelemetryError, validate_telemetry
+from .telemetry import assess_resource_telemetry
 
 
 ASSEMBLY_SCHEMA = "cbsc_omrc_b01_b1_metrics_training_assembly_v1"
@@ -334,18 +334,7 @@ def _validate_telemetry_fact(
         or row["arm"] != arm
     ):
         raise B1MetricsTrainingAssemblyError("direct telemetry invocation identity differs")
-    # Section-11 recast, owner decisions 3 and 7 (2026-09-02): the resource
-    # caps are recorded budgets, so a measured exceedance is published rather
-    # than refused here.  Only the wall cap stops a run, and it stops it at the
-    # slot boundary in `b1._load_slot_evidence`.  The measurement itself is
-    # still required to be a complete, finite, nonzero-work record, because the
-    # work reconciliation below is a §4 integrity item.
-    try:
-        row["measurement"] = validate_telemetry(
-            row["measurement"], caps=RECORDED_BUDGET_CAPS
-        )
-    except (TypeError, TelemetryError) as exc:
-        raise B1MetricsTrainingAssemblyError("direct telemetry measurement is invalid") from exc
+    row["measurement"] = assess_resource_telemetry(row["measurement"])["measurement"]
     return row
 
 
@@ -425,10 +414,8 @@ def _validate_policy_replay_resources(
             "receipt_sha256", "raw_receipt_sha256",
         ):
             _digest(admission[field], f"policy replay {field}")
-        _digest(telemetry["telemetry_sha256"], "policy replay telemetry SHA")
         for field in (
             "bound_admission_relative_path", "raw_receipt_relative_path",
-            "telemetry_relative_path",
         ):
             row = admission if field in admission else telemetry
             path = row[field]
@@ -446,14 +433,7 @@ def _validate_policy_replay_resources(
                 raise B1MetricsTrainingAssemblyError(
                     "policy replay admission available memory differs"
                 )
-        try:
-            measurement = validate_telemetry(
-                telemetry["measurement"], caps=RECORDED_BUDGET_CAPS
-            )
-        except (TypeError, TelemetryError) as exc:
-            raise B1MetricsTrainingAssemblyError(
-                "policy replay telemetry measurement differs"
-            ) from exc
+        measurement = assess_resource_telemetry(telemetry["measurement"])["measurement"]
         telemetry["measurement"] = measurement
         admissions.append(admission)
         telemetry_rows.append(telemetry)
@@ -724,10 +704,15 @@ def _raw_facts(
             "invocation_id": invocation,
             "physical_available_bytes": admission["available_physical_bytes"],
             "effective_available_bytes": admission["effective_available_bytes"],
-            "wall_seconds": measurement["end_to_end_wall_seconds"],
-            "peak_rss_bytes": measurement["process_tree_peak_rss_bytes"],
-            "scratch_peak_bytes": measurement["scratch_high_water_bytes"],
-            "durable_peak_bytes": measurement["durable_high_water_bytes"],
+            **{target: measurement[field] if (
+                not measurement["resources_unmeasured"] or
+                measurement[field] is not None and measurement[field] > cap
+            ) else None for target, field, cap in (
+                ("wall_seconds", "end_to_end_wall_seconds", 7200),
+                ("peak_rss_bytes", "process_tree_peak_rss_bytes", 4 * 1024**3),
+                ("scratch_peak_bytes", "scratch_high_water_bytes", 2 * 1024**3),
+                ("durable_peak_bytes", "durable_high_water_bytes", 512 * 1024**2),
+            )},
         })
 
     tape_bindings: list[dict[str, str]] = []
@@ -2150,21 +2135,21 @@ def assemble_b1_metrics_training(
                     raise B1MetricsTrainingAssemblyError("raw slice work count differs")
             raw_slice_work = counts["train_transitions"] + counts["evaluation_transitions"]
             measurement = measured["measurement"]
-            stages = measurement["stage_measurements"]
-            stage_work = sum(
-                stage["transitions"]
+            # Scientific work comes from raw learner records even if resource
+            # sampling or its companion file is absent.
+            stages = raw.get("stage_measurements")
+            if not isinstance(stages, list) or not stages or any(
+                not isinstance(stage, Mapping) or type(stage.get("transitions")) is not int
                 for stage in stages
-                if isinstance(stage, Mapping) and type(stage.get("transitions")) is int
-            )
-            if len(stages) != sum(isinstance(stage, Mapping) for stage in stages):
-                raise B1MetricsTrainingAssemblyError("telemetry stage record differs")
-            if (
-                measurement["scientific_work_transitions"] != raw_slice_work
-                or stage_work != raw_slice_work
             ):
-                raise B1MetricsTrainingAssemblyError(
-                    "telemetry slice work differs from raw slice_counts/stage sum"
-                )
+                raise B1MetricsTrainingAssemblyError("raw stage record differs")
+            stage_work = sum(stage["transitions"] for stage in stages)
+            if raw.get("scientific_work_transitions") != raw_slice_work or stage_work != raw_slice_work:
+                raise B1MetricsTrainingAssemblyError("raw slice work differs from raw slice_counts/stage sum")
+            if (measurement.get("scientific_work_transitions") not in (None, raw_slice_work)
+                or measurement.get("stage_measurements", stages) != stages):
+                raise B1MetricsTrainingAssemblyError("telemetry slice work differs from raw slice_counts/stage sum")
+            measurement.update(scientific_work_transitions=raw_slice_work, stage_measurements=stages)
             admission_rows.append({
                 "run_order": 0, "invocation_kind": "TRAINING_SLICE",
                 "original_slot_index": group_index,

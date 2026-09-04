@@ -606,7 +606,7 @@ def _named_records(facts: Mapping[str, Any], name: str, fields: set[str]) -> lis
     return rows
 
 
-def _compute_mechanical_components(facts: Mapping[str, Any]) -> dict[str, bool]:
+def _compute_mechanical_components(facts: Mapping[str, Any]) -> dict[str, bool | None]:
     inventories = _named_records(
         facts, "inventories", {"name", "expected_keys", "observed_keys"}
     )
@@ -637,14 +637,15 @@ def _compute_mechanical_components(facts: Mapping[str, Any]) -> dict[str, bool]:
     for row in resources:
         physical = _integer(row["physical_available_bytes"], "physical available bytes")
         effective = _integer(row["effective_available_bytes"], "effective available bytes")
-        wall = _number(row["wall_seconds"], "wall seconds")
-        peak_rss = _integer(row["peak_rss_bytes"], "peak RSS")
-        scratch = _integer(row["scratch_peak_bytes"], "scratch peak")
-        durable = _integer(row["durable_peak_bytes"], "durable peak")
         admission_pass = admission_pass and physical >= 4 * _GIB and effective >= 4 * _GIB
-        resource_cap_pass = resource_cap_pass and (
-            wall <= 7200 and peak_rss <= 4 * _GIB and scratch <= 2 * _GIB and durable <= 512 * _MIB
-        )
+        for field, cap in (("wall_seconds", 7200), ("peak_rss_bytes", 4 * _GIB),
+                           ("scratch_peak_bytes", 2 * _GIB), ("durable_peak_bytes", 512 * _MIB)):
+            measured = row[field]
+            if measured is None:
+                if resource_cap_pass is True:
+                    resource_cap_pass = None
+            elif _number(measured, field) > cap:
+                resource_cap_pass = False
 
     digest_rows = _named_records(
         facts,
@@ -916,7 +917,8 @@ def compute_b1_mechanical(
         "twins": "INCOMPLETE_TWIN",
         "literal_laws": "LITERAL_CONFORMANCE_FAILURE",
     }
-    codes.extend(code for name, code in component_codes.items() if not components[name])
+    codes.extend(code for name, code in component_codes.items()
+                 if name != "resource_caps" and not components[name])
     competence_values = [row["raw_competence_pass"] for row in competence]
     if any(value is False for value in competence_values):
         codes.append("RAW_COMPETENCE_FAILURE")
@@ -930,7 +932,6 @@ def compute_b1_mechanical(
     attempt_complete = (
         components["inventory"]
         and components["resource_admission"]
-        and components["resource_caps"]
         and components["publication_digests"]
         and components["finite"]
         and competence_integrity
@@ -941,7 +942,9 @@ def compute_b1_mechanical(
         and components["finite"]
         and competence_integrity
     )
-    mechanical_conformance = attempt_complete and all(components.values())
+    mechanical_conformance = attempt_complete and all(
+        value for name, value in components.items() if name != "resource_caps"
+    )
     return {
         "schema": B1_MECHANICAL_SCHEMA,
         "mechanical_attempt_complete": attempt_complete,

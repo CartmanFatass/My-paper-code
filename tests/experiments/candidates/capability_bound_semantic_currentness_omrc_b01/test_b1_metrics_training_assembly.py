@@ -293,6 +293,8 @@ def _raw_slice(start_update: int = 0, stop_update: int = 48) -> dict[str, object
             "source_conformance_sha256": "c" * 64,
         },
         "slice_counts": counts,
+        "scientific_work_transitions": counts["train_transitions"] + counts["evaluation_transitions"],
+        "stage_measurements": deepcopy(_telemetry(start_update, stop_update)["measurement"]["stage_measurements"]),
         "rollouts": evidence["rollouts"],
         "final_counters": evidence["final_counters"],
         "final_model_parameter_digest": evidence["final_model_parameter_digest"],
@@ -845,3 +847,43 @@ def test_policy_replay_resources_join_canonical_tables_and_mechanical_inventory(
             telemetry_groups=[[_telemetry()]], policy_replay_resources=tampered,
             shared_tables=shared, policy_tables=policy, test_only=True,
         )
+
+
+@pytest.mark.parametrize("defect", [None, "work", "stage"])
+def test_missing_resources_preserve_raw_work_reconciliation(defect):
+    shared, policy = _shared_policy_tables()
+    raw = _raw_slice()
+    if defect == "work":
+        raw["scientific_work_transitions"] += 1
+    elif defect == "stage":
+        raw["stage_measurements"][0]["transitions"] += 1
+    kwargs = dict(raw_slice_groups=[[raw]], admission_groups=[[_admission()]],
+        telemetry_groups=[[{**_telemetry(), "measurement": None}]],
+        shared_tables=shared, policy_tables=policy, test_only=True)
+    if defect:
+        with pytest.raises(B1MetricsTrainingAssemblyError, match="raw slice work"):
+            assemble_b1_metrics_training(**kwargs)
+    else:
+        packet = assemble_b1_metrics_training(**kwargs)
+        measured = packet["tables"]["telemetry"][0]["measurement"]
+        assert measured["resources_unmeasured"] is True
+        assert measured["process_tree_peak_rss_bytes"] is None
+        assert measured["scientific_work_transitions"] == raw["scientific_work_transitions"]
+
+
+@pytest.mark.parametrize("rss,cap", [(1024, None), (10**15, False)])
+def test_partial_samples_remain_numeric_without_claiming_full_caps(rss, cap):
+    shared, policy = _shared_policy_tables()
+    telemetry = _telemetry()
+    telemetry["measurement"].update(measurement_complete=False, process_tree_peak_rss_bytes=rss)
+    packet = assemble_b1_metrics_training(raw_slice_groups=[[_raw_slice()]],
+        admission_groups=[[_admission()]], telemetry_groups=[[telemetry]],
+        shared_tables=shared, policy_tables=policy, test_only=True)
+    measurement = packet["tables"]["telemetry"][0]["measurement"]
+    assert measurement["resources_unmeasured"] is True
+    assert measurement["process_tree_peak_rss_bytes"] == rss
+    from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_mechanical import _compute_mechanical_components
+    from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_mechanical import _facts
+    facts = _facts()
+    facts["resources"] = packet["prepublication_raw_facts"]["resources"]
+    assert _compute_mechanical_components(facts)["resource_caps"] is cap

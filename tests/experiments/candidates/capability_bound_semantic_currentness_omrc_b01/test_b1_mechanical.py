@@ -288,3 +288,19 @@ def test_b0_nonpolarity_marks_all_five_eligibilities_false() -> None:
         "b2_trigger_eligible": False,
         "promotion_eligible": False,
     }
+
+
+@pytest.mark.parametrize("resource", [None, 10**15])
+def test_resource_unknown_or_exceedance_does_not_invalidate_learner(resource):
+    facts = _facts()
+    for row in facts["resources"]:
+        for field in ("wall_seconds", "peak_rss_bytes", "scratch_peak_bytes", "durable_peak_bytes"):
+            row[field] = resource
+    result = compute_b1_mechanical(facts, [_competence(seed) for seed in SEEDS])
+    assert result["mechanical_attempt_complete"] is True
+    assert result["mechanical_conformance_pass"] is True
+    assert result["mechanical_components"]["resource_caps"] is (None if resource is None else False)
+    facts["resources"][0]["physical_available_bytes"] = 0
+    result = compute_b1_mechanical(facts, [_competence(seed) for seed in SEEDS])
+    assert result["mechanical_attempt_complete"] is False
+    assert "RESOURCE_ADMISSION_FAILURE" in result["blocking_audit_codes"]

@@ -87,10 +87,8 @@ from .telemetry import (
     ProcessTreeMonitor,
     RECORDED_BUDGET_CAPS,
     ResourceCaps,
-    STOPPING_CAPS,
     TelemetryError,
     assess_resource_telemetry,
-    validate_telemetry,
 )
 
 
@@ -753,6 +751,51 @@ def _validate_stage_measurements(value: object) -> tuple[int, list[dict[str, Any
     return total, records
 
 
+def _resource_snapshot(monitor: ProcessTreeMonitor, *, reason: str,
+                       cap_failures: tuple[str, ...] = ()) -> dict[str, Any]:
+    try:
+        snapshot = monitor.incident_snapshot(reason=reason, cap_failures=cap_failures)
+    except Exception:
+        snapshot = {"measurement_complete": False, "reason": reason,
+                    "cap_failures": list(cap_failures), "scientific_branch": None}
+    if not snapshot.get("sample_count"):
+        for field in ("observed_cpu_seconds", "process_tree_peak_rss_bytes",
+                      "peak_process_count", "peak_thread_count", "io_read_bytes",
+                      "io_write_bytes", "scratch_high_water_bytes", "durable_high_water_bytes"):
+            snapshot[field] = None
+    return snapshot
+
+
+def _finish_resources(monitor: ProcessTreeMonitor, *, failed: bool, started: float,
+                      work: int, stages: list[dict[str, Any]]) -> dict[str, Any]:
+    try:
+        measurement = monitor.finish(scientific_work_transitions=work,
+                                     stage_measurements=stages)
+    except Exception:
+        measurement = _resource_snapshot(monitor, reason="TELEMETRY_FAILURE")
+        measurement["end_to_end_cpu_seconds"] = measurement.get("observed_cpu_seconds")
+        failed = True
+    wall = time.monotonic() - started
+    if failed:
+        measurement["measurement_complete"] = False
+    if not measurement.get("sample_count"):
+        measurement.update(_resource_snapshot(monitor, reason="TELEMETRY_FAILURE"))
+    measurement.update(end_to_end_wall_seconds=wall,
+                       scientific_work_transitions=work,
+                       scientific_work_transitions_per_second=work / wall,
+                       stage_measurements=stages)
+    cpu = measurement.get("end_to_end_cpu_seconds") if measurement.get("sample_count") else None
+    measurement["end_to_end_cpu_seconds"] = cpu
+    if not stages:
+        measurement["stage_measurements"] = [{
+            "stage": "policy-replay-model-forward-units", "wall_seconds": wall,
+            "cpu_seconds": cpu, "transitions": work, "transitions_per_second": work / wall,
+        }]
+    measurement["cpu_core_equivalents"] = None if cpu is None else cpu / wall
+    measurement["cpu_occupancy_fraction"] = measurement["cpu_core_equivalents"]
+    return assess_resource_telemetry(measurement, caps=RECORDED_BUDGET_CAPS)["measurement"]
+
+
 def supervise_child(
     command: Sequence[str], *, scratch_root: Path, durable_root: Path,
     result_path: Path, stdout_path: Path, stderr_path: Path,
@@ -772,69 +815,25 @@ def supervise_child(
             scratch_root, durable_root, worker_count=1, threads_per_worker=1,
             interval_seconds=interval_seconds, root_pid=process.pid,
         )
-        try:
-            monitor.begin()
-        except BaseException as exc:
-            if process.poll() is None:
-                _kill_process_tree(process)
-            try:
-                snapshot = monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-            except BaseException:
-                snapshot = {
-                    "schema": "cbsc_omrc_b01_supervisor_incident_v1",
-                    "measurement_complete": False,
-                    "measurement_source": "telemetry_initialization_failed",
-                    "reason": "TELEMETRY_FAILURE", "cap_failures": [],
-                    "sample_interval_seconds": interval_seconds, "sample_count": 0,
-                    "observed_wall_seconds": 0.0, "observed_cpu_seconds": 0.0,
-                    "process_tree_peak_rss_bytes": 0, "peak_process_count": 0,
-                    "peak_thread_count": 0, "io_read_bytes": 0, "io_write_bytes": 0,
-                    "scratch_high_water_bytes": 0, "durable_high_water_bytes": 0,
-                    "scientific_branch": None,
-                }
-            _atomic_create_json(supervisor_incident, snapshot)
-            raise TelemetryError("process-tree telemetry failed during supervision") from exc
-        failures: tuple[str, ...] = ()
+        started = time.monotonic()
+        resource_failed = False
         stopping: tuple[str, ...] = ()
         recorded_cap_failures: set[str] = set()
         try:
+            try:
+                monitor.begin()
+            except Exception:
+                resource_failed = True
             while process.poll() is None:
-                try:
-                    failures = monitor.poll_caps(caps=caps)
-                except BaseException as exc:
-                    returncode = process.poll()
-                    try:
-                        snapshot = monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-                    except BaseException:
-                        snapshot = {
-                            "schema": "cbsc_omrc_b01_supervisor_incident_v1",
-                            "measurement_complete": False,
-                            "measurement_source": "telemetry_poll_failed",
-                            "reason": "TELEMETRY_FAILURE", "cap_failures": [],
-                            "sample_interval_seconds": interval_seconds, "sample_count": 0,
-                            "observed_wall_seconds": 0.0, "observed_cpu_seconds": 0.0,
-                            "process_tree_peak_rss_bytes": 0, "peak_process_count": 0,
-                            "peak_thread_count": 0, "io_read_bytes": 0,
-                            "io_write_bytes": 0, "scratch_high_water_bytes": 0,
-                            "durable_high_water_bytes": 0, "scientific_branch": None,
-                        }
-                    if returncode == 0 and snapshot.get("sample_count", 0) >= 2:
-                        break
-                    if returncode is None:
-                        _kill_process_tree(process)
-                    _atomic_create_json(supervisor_incident, snapshot)
-                    raise TelemetryError(
-                        "process-tree telemetry failed during supervision"
-                    ) from exc
-                # Section-11 recast, owner decision 3 (2026-09-02): the RSS,
-                # scratch and durable caps are recorded budgets, so a live
-                # exceedance is observed and published rather than killing the
-                # child.  Only the wall cap stops a run.
-                recorded_cap_failures.update(failures)
-                stopping = tuple(name for name in failures if name in STOPPING_CAPS)
-                if stopping:
+                if time.monotonic() - started > caps.wall_seconds:
+                    stopping = ("wall_seconds",)
                     _kill_process_tree(process)
                     break
+                if not resource_failed:
+                    try:
+                        recorded_cap_failures.update(monitor.poll_caps(caps=caps))
+                    except Exception:
+                        resource_failed = True
                 time.sleep(interval_seconds)
         finally:
             if process.poll() is None:
@@ -842,7 +841,7 @@ def supervise_child(
         if stopping:
             _atomic_create_json(
                 supervisor_incident,
-                monitor.incident_snapshot(
+                _resource_snapshot(monitor,
                     reason="LIVE_RESOURCE_CAP_TERMINATION", cap_failures=stopping
                 ),
             )
@@ -850,19 +849,19 @@ def supervise_child(
         if process.returncode != 0:
             _atomic_create_json(
                 supervisor_incident,
-                monitor.incident_snapshot(reason=f"WORKER_EXIT_{process.returncode}"),
+                _resource_snapshot(monitor, reason=f"WORKER_EXIT_{process.returncode}"),
             )
             raise B1OrchestrationError(f"canonical B1 worker exited {process.returncode}")
         if not result_path.is_file():
             _atomic_create_json(
-                supervisor_incident, monitor.incident_snapshot(reason="WORKER_RESULT_ABSENT")
+                supervisor_incident, _resource_snapshot(monitor, reason="WORKER_RESULT_ABSENT")
             )
             raise B1OrchestrationError("canonical B1 worker produced no create-only result")
         try:
             wrapper = json.loads(result_path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as exc:
             _atomic_create_json(
-                supervisor_incident, monitor.incident_snapshot(reason="WORKER_RESULT_UNREADABLE")
+                supervisor_incident, _resource_snapshot(monitor, reason="WORKER_RESULT_UNREADABLE")
             )
             raise B1OrchestrationError("canonical B1 worker result is unreadable") from exc
         try:
@@ -878,24 +877,24 @@ def supervise_child(
         except B1OrchestrationError:
             _atomic_create_json(
                 supervisor_incident,
-                monitor.incident_snapshot(reason="WORKER_RESULT_SCHEMA_INVALID"),
+                _resource_snapshot(monitor, reason="WORKER_RESULT_SCHEMA_INVALID"),
             )
             raise
-        telemetry = monitor.finish(
-            scientific_work_transitions=scientific_work,
-            stage_measurements=stages,
+        telemetry = _finish_resources(
+            monitor, failed=resource_failed, started=started,
+            work=scientific_work, stages=stages,
         )
         if recorded_cap_failures:
             _atomic_create_json(
                 supervisor_incident,
-                monitor.incident_snapshot(
+                _resource_snapshot(monitor,
                     reason="LIVE_RESOURCE_CAP_RECORDED",
                     cap_failures=tuple(sorted(recorded_cap_failures)),
                 ),
             )
     # Recorded budgets: the caps are published by `assess_resource_telemetry`
     # at the slot boundary, so the completeness validation here is uncapped.
-    return raw, validate_telemetry(telemetry, caps=RECORDED_BUDGET_CAPS)
+    return raw, telemetry
 
 
 def supervise_policy_replay_child(
@@ -917,55 +916,38 @@ def supervise_policy_replay_child(
             scratch_root, durable_root, worker_count=1, threads_per_worker=1,
             interval_seconds=interval_seconds, root_pid=process.pid,
         )
-        try:
-            monitor.begin()
-        except BaseException as exc:
-            if process.poll() is None:
-                _kill_process_tree(process)
-            _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-            )
-            raise TelemetryError("policy replay telemetry failed") from exc
+        started = time.monotonic()
+        resource_failed = False
         failures: tuple[str, ...] = ()
         try:
+            try:
+                monitor.begin()
+            except Exception:
+                resource_failed = True
             while process.poll() is None:
-                try:
-                    failures = monitor.poll_caps(caps=caps)
-                except BaseException as exc:
-                    returncode = process.poll()
-                    snapshot = monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-                    if returncode == 0 and snapshot.get("sample_count", 0) >= 2:
-                        break
-                    if returncode is None:
-                        _kill_process_tree(process)
-                    _atomic_create_json(incident_path, snapshot)
-                    raise TelemetryError("policy replay telemetry failed") from exc
-                if failures:
+                if time.monotonic() - started > caps.wall_seconds:
+                    failures = ("wall_seconds",)
                     _kill_process_tree(process)
                     break
+                if not resource_failed:
+                    try:
+                        monitor.poll_caps(caps=caps)
+                    except Exception:
+                        resource_failed = True
                 time.sleep(interval_seconds)
-        except TelemetryError:
-            raise
-        except BaseException as exc:
-            if process.poll() is None:
-                _kill_process_tree(process)
-            _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-            )
-            raise TelemetryError("policy replay telemetry failed") from exc
         finally:
             if process.poll() is None:
                 _kill_process_tree(process)
         if failures:
             _atomic_create_json(
-                incident_path, monitor.incident_snapshot(
+                incident_path, _resource_snapshot(monitor,
                     reason="LIVE_RESOURCE_CAP_TERMINATION", cap_failures=failures
                 ),
             )
             raise TelemetryError(f"policy replay resource cap exceeded: {','.join(failures)}")
         if process.returncode != 0 or not result_path.is_file():
             _atomic_create_json(
-                incident_path, monitor.incident_snapshot(
+                incident_path, _resource_snapshot(monitor,
                     reason=(f"WORKER_EXIT_{process.returncode}"
                             if process.returncode != 0 else "WORKER_RESULT_ABSENT")
                 ),
@@ -981,7 +963,7 @@ def supervise_policy_replay_child(
             counts = wrapper.get("counts")
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, B1OrchestrationError) as exc:
             _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="WORKER_RESULT_UNREADABLE")
+                incident_path, _resource_snapshot(monitor, reason="WORKER_RESULT_UNREADABLE")
             )
             raise B1OrchestrationError("policy replay result is unreadable") from exc
         # These are the assembly module's own per-slot counts, imported rather
@@ -1003,38 +985,15 @@ def supervise_policy_replay_child(
             "b2_extension_trigger",
         )) or any(len(wrapper.get(field, ())) != expected[field] for field in expected):
             _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="WORKER_RESULT_SCHEMA_INVALID")
+                incident_path, _resource_snapshot(monitor, reason="WORKER_RESULT_SCHEMA_INVALID")
             )
             raise B1OrchestrationError("policy replay result counts/nulls differ")
         work_units = expected["policy_decisions"]
-        measurement = monitor.finish(
-            scientific_work_transitions=work_units,
-            stage_measurements=[{
-                "stage": "policy-replay-model-forward-units", "wall_seconds": 1.0,
-                "cpu_seconds": 1.0, "transitions": work_units,
-                "transitions_per_second": float(work_units),
-            }],
+        measurement = _finish_resources(
+            monitor, failed=resource_failed, started=started,
+            work=work_units, stages=[],
         )
-        wall = measurement["end_to_end_wall_seconds"]
-        cpu = measurement["end_to_end_cpu_seconds"]
-        if not wall > 0:
-            _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-            )
-            raise TelemetryError("policy replay direct wall measurement is incomplete")
-        measurement["stage_measurements"] = [{
-            "stage": "policy-replay-model-forward-units", "wall_seconds": wall,
-            "cpu_seconds": cpu, "transitions": work_units,
-            "transitions_per_second": work_units / wall,
-        }]
-    try:
-        return wrapper, validate_telemetry(measurement, caps=caps)
-    except TelemetryError:
-        if not incident_path.exists():
-            _atomic_create_json(
-                incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
-            )
-        raise
+        return wrapper, measurement
 
 
 def run_assess_preflight(receipt_path: Path) -> dict[str, Any]:
@@ -1333,25 +1292,28 @@ def _load_slot_evidence(
     })
     telemetry_record = {
         "arm": arm, "seed": seed,
-        "within_caps": not cap_exceedances,
+        "within_caps": False if cap_exceedances else (None if unmeasured_reasons else True),
         "resources_unmeasured": bool(unmeasured_reasons),
         "unmeasured_reasons": unmeasured_reasons,
         "recorded_cap_exceedances": cap_exceedances,
         "process_tree_peak_rss_bytes": max(
-            (value["process_tree_peak_rss_bytes"] for value in telemetry_values),
-            default=0,
+            (value["process_tree_peak_rss_bytes"] for value in telemetry_values
+             if value["process_tree_peak_rss_bytes"] is not None),
+            default=None,
         ),
         "scratch_high_water_bytes": max(
-            (value["scratch_high_water_bytes"] for value in telemetry_values),
-            default=0,
+            (value["scratch_high_water_bytes"] for value in telemetry_values
+             if value["scratch_high_water_bytes"] is not None),
+            default=None,
         ),
         "durable_high_water_bytes": max(
-            (value["durable_high_water_bytes"] for value in telemetry_values),
-            default=0,
+            (value["durable_high_water_bytes"] for value in telemetry_values
+             if value["durable_high_water_bytes"] is not None),
+            default=None,
         ),
-        "wall_seconds": sum(
-            value["end_to_end_wall_seconds"] for value in telemetry_values
-        ),
+        "wall_seconds": (sum(value["end_to_end_wall_seconds"] for value in telemetry_values)
+                         if len(telemetry_values) == len(paths["raw"]) and all(value["end_to_end_wall_seconds"] is not None
+                                                     for value in telemetry_values) else None),
         "invocations": telemetry_values,
     }
     digests = {
