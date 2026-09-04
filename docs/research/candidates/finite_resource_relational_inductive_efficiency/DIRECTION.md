@@ -361,3 +361,30 @@ Peak RSS was unavailable, so root 002 remains valid as `resources_unmeasured`.
 The next discriminator is the unchanged ordered root 003 on the same Windows host. See
 `FRRIE_B01_THREE_SEED_ROOT002_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_THREE_SEED_ROOT002_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed aggregate result — 2026-09-04
+
+All three prospectively ordered roots completed the real 512-update learner and planned 98-cell
+fixed-host panel. Every root passed all 23 completion checks, fresh admission, exposure, paired
+work, state preservation, and nonzero learner/optimizer/evaluator counts. Peak RSS was unavailable
+for all three, so the valid aggregate is marked `resources_unmeasured`.
+
+The accepted branch is `B01_OBSERVED_PATH_EQUIVALENCE`. Tight projection changed no FP32
+coordinate on roots `001..003`; complete model/optimizer states and direct evaluation traces
+remained equal across all checkpoints, rosters, and interventions. The panel therefore stops at
+three, leaving roots `004..005` unopened. The later numerical wide-incompetence row is not applied
+because the registered rule stops at the earlier fully determined branch.
+
+The bounded claim is observed-path equality on those literal roots, the local Windows/MSVC/CPU
+surface, the declared schedule, and 512 updates. Strongest support is three complete paired
+learner/evaluator traces. Strongest contradiction to any mechanism-value claim is that the only
+treatment difference never activated; no post-contact value or equivalence follows. Surviving
+alternatives include common `K0` alignment, generic optimizer geometry, and treatment-coordinate
+noncontact at this budget.
+
+The conditional DM prediction is not scored because no root contacted; the predeclared no-contact
+alternative applied. No next object is selected by this result. A contact-capable discriminator
+would require a separately authorized outcome-blind card. The existing A1 local action-headroom
+census remains only a read-only boundary, not a frozen successor. See
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.

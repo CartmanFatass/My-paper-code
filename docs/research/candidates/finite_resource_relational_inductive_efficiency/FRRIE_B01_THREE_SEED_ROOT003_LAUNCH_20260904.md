@@ -1,6 +1,6 @@
 # FRRIE B01 three-seed root 003 launch — 2026-09-04
 
-Status: `DETACHED_RUNNING / RESULT_UNOBSERVED`
+Status: `TERMINAL / VALID COMPLETE SINGLE-SEED / AGGREGATE APPLIED SEPARATELY`
 
 Object: `FRRIE-B01-THREE-SEED-SECTION11-20260904`
 
@@ -80,3 +80,21 @@ invocation, within four attributed wall-hours per arm and eight wall-hours total
 acceptance and later exit are engineering facts only. They establish no projection contact,
 comparator competence, return difference, reassociation effect, seed validity, or three-seed
 branch.
+
+## Terminal observation
+
+The accepted PID was absent on the terminal check at `2026-09-04T17:35:34.1219942Z`. This
+process-state fact was interpreted only after inspecting the exact output root once:
+
+- `summary.json` was complete, `59,240` bytes, and had SHA-256
+  `f963b380f44974340b4edb9771bababe4585a37e4436edfb49baf00a586b0b90`;
+- all 23 registered completion comparisons were true;
+- stdout and stderr remained zero bytes; and
+- the summary directly classified this invocation as `B01_SEED_VALID_DIRECT`, with aggregate
+  application withheld from the single-seed runner.
+
+The native DLL was moved after terminal into this exact ignored run root without changing its
+SHA-256, `6264aad6bbd68a8c8b944acf7388deea6f14db2f98e1855fb919c4e8ad70824a`. No rerun,
+resume, salvage, or duplicate invocation occurred. The scientific reading is in
+`FRRIE_B01_THREE_SEED_ROOT003_RESULT_EVIDENCE_20260904.md`; the root-003 and three-seed intake is
+in `FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.
