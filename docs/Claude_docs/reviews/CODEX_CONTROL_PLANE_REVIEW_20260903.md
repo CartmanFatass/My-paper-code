@@ -289,3 +289,45 @@ The prior review's R2 (exposure card in every packet) and R3 (engineering dissen
 the mechanism that makes the two Pro tiers affordable: the card gives the node the facts that
 decided this wave, and the dissent record lets a wrong engineering premise be corrected in one
 message instead of a round.
+
+## 10. Addendum, 2026-09-03 18:12 PDT: Pro is the cheaper and stronger decider
+
+The owner corrected §9's cost premise: Pro time is worth spending. The Pro model performs better
+than the local models, and it runs on an independent quota, so a Pro round does not draw on the
+rate limit that bounds the Codex and Claude sessions. On both axes, cost and performance, Pro is
+the better decider. §9's "sixteen rounds a day is not an unattended loop" was an argument from
+the wrong currency and is withdrawn.
+
+What survives of §9 once cost is removed is only latency and blocking: a round takes 20–60
+minutes of wall time plus transport, and the current design serialises requests per binding key
+and puts the round on the direction's critical path. Neither is a reason to keep Pro off a
+decision. Both are reasons to make the loop asynchronous.
+
+Revised again (this replaces T2′; T2″ and T7′ stand):
+
+T2‴. **Pro decides wherever judgment is needed; the loop does not wait for it.** Every decision
+that selects what to run next, at any tier, goes to the direction's Pro node with the exposure
+card attached: the next rung, a card's treatment and comparator, whether an arm is dropped, what
+follows a consumed object, lifecycle, and Portfolio. The direction's loop then parks that
+direction at a clean boundary (committed, runs detached, state in the repository) and the driver
+moves to another direction; when the archive lands, the driver resumes the parked direction and
+executes the decision. With independent quota the right number of rounds is the number of
+judgments, not a budget. What stays local is what needs no judgment: applying a frozen rule to a
+measured number (cap exceeded, quarantine after reproduction, preflight refusal), and the
+mechanical intake of a result into its record. The owner audits from the ledger of §9 item 1,
+where every Pro decision appears with its packet, archive hash and the action taken.
+
+Two consequences for the transport. First, the serial-per-binding rule ("only one request may be
+active per binding") is right for one conversation but must not serialise the loop: with twenty
+ACTIVE directions and separate innovator and convergence conversations per direction, the driver
+can have many rounds in flight, and the heartbeat must multiplex them (the skill already allows
+one heartbeat over several directions). Second, the exposure card (prior review R2) becomes
+mandatory in every packet, because the only failure of the Pro path the record shows is a
+decision made without the arithmetic that decided the outcome (F1 in the prior review), and that
+is fixed by what the packet carries, not by who decides.
+
+Why zero rounds ran on 09-02/03 is then explained without a cost story: the owner was present and
+decided directly, and the Claude reviewer took the object-level selections under delegation from
+13:58. When the owner is absent and the Codex loop drives, the same selections go to Pro. The
+Claude-side delegation of 09-03 is the fallback for a runtime without a Pro transport, not the
+model for the Codex side.
