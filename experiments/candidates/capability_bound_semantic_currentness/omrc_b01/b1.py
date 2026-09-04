@@ -729,7 +729,9 @@ def _validate_stage_measurements(value: object) -> tuple[int, list[dict[str, Any
                 raise B1OrchestrationError(
                     f"B1 stage_measurements[{index}].{name} differs"
                 ) from exc
-            if not math.isfinite(number) or number <= 0:
+            if not math.isfinite(number) or (
+                number < 0 if name == "cpu_seconds" else number <= 0
+            ):
                 raise B1OrchestrationError(f"B1 stage_measurements[{index}].{name} differs")
         transitions = record.get("transitions")
         if type(transitions) is not int or transitions <= 0:
@@ -1015,11 +1017,11 @@ def supervise_policy_replay_child(
         )
         wall = measurement["end_to_end_wall_seconds"]
         cpu = measurement["end_to_end_cpu_seconds"]
-        if not (wall > 0 and cpu > 0):
+        if not wall > 0:
             _atomic_create_json(
                 incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
             )
-            raise TelemetryError("policy replay direct wall/CPU measurement is incomplete")
+            raise TelemetryError("policy replay direct wall measurement is incomplete")
         measurement["stage_measurements"] = [{
             "stage": "policy-replay-model-forward-units", "wall_seconds": wall,
             "cpu_seconds": cpu, "transitions": work_units,

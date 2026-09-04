@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 import hashlib
+import math
 import os
 from pathlib import Path
 import tempfile
@@ -192,21 +193,25 @@ def build_stage_measurements(
     )
     stages: list[dict[str, Any]] = []
     for stage, wall, cpu, transitions in measurements:
+        try:
+            wall_value = float(wall)
+            cpu_value = float(cpu)
+        except (TypeError, ValueError) as exc:
+            raise B1EngineError(f"{stage} stage measurement differs") from exc
         if (
-            isinstance(wall, bool)
-            or isinstance(cpu, bool)
-            or float(wall) <= 0.0
-            or float(cpu) <= 0.0
+            isinstance(wall, bool) or isinstance(cpu, bool)
+            or not math.isfinite(wall_value) or wall_value <= 0.0
+            or not math.isfinite(cpu_value) or cpu_value < 0.0
             or transitions <= 0
         ):
             raise B1EngineError(f"{stage} stage measurement must report positive work")
         stages.append(
             {
                 "stage": stage,
-                "wall_seconds": float(wall),
-                "cpu_seconds": float(cpu),
+                "wall_seconds": wall_value,
+                "cpu_seconds": cpu_value,
                 "transitions": transitions,
-                "transitions_per_second": transitions / float(wall),
+                "transitions_per_second": transitions / wall_value,
             }
         )
     return stages
