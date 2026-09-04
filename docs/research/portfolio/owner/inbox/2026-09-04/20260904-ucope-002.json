@@ -1,0 +1,38 @@
+{
+  "id": "20260904-ucope-002",
+  "created": "2026-09-04T10:14:02-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "拒绝超出工程编排预算的数值定位实现",
+  "context": "跨节点 numerical-locus 计划保持不变，但独立完整分类显示最终最小实现仍为 98/295=33.22% orchestration，超过 30% 上限。至少再删 14 行会移除计划要求的双模式、admission/绑定、平台/exposure、staged IO 或失败事实；增加无关计算稀释比例也不可接受。三个未提交文件已精确删除；没有测试最终草案、preflight、task 或结果。此项只有工程 blocker，无科学极性。",
+  "options": [
+    {
+      "key": "a",
+      "label": "拒绝并移除未提交实现，保留 clean blocker",
+      "consequence": "保持冻结问题与工程规范，向 Root 返回两个命名依赖。"
+    },
+    {
+      "key": "b",
+      "label": "豁免 30% 工程预算",
+      "consequence": "超出 DM 权限，且 owner 未授权。"
+    },
+    {
+      "key": "c",
+      "label": "删除冻结计划要求的直接事实",
+      "consequence": "会削弱技术问题和失败可审计性。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "不把超预算编排作为取得结果的代价，也不把工程失败转成科学极性。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_NUMERICAL_LOCUS_IMPLEMENTATION_BLOCKER_20260904.md",
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_NUMERICAL_LOCUS_PLAN_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L13",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
