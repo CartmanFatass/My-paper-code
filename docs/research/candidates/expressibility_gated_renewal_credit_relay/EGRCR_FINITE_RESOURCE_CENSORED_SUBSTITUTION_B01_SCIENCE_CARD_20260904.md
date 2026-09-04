@@ -53,9 +53,10 @@ exactly these fields. There is no hidden treatment-only edge, label, counterfact
 
 At transition 1 the selected original waiter becomes the carrier. At transition 2 the carrier mode
 is sampled uniformly from `PERSIST`, `REPLACE`, and `EXPIRE`. `REPLACE` transfers the already
-selected job to the unique non-source, non-selected substitute; the selected relation remains the
-job's provenance while physical carrier identity changes. `EXPIRE` censors the job. At transition
-3 a nonexpired carrier serves. External bounded utility is
+selected job to the opposite-ring agent `(s+2) mod 4`, which is neither source nor either eligible
+waiter. The unselected eligible waiter never substitutes. The selected relation remains the job's
+provenance while physical carrier identity changes. `EXPIRE` censors the job. At transition 3 a
+nonexpired carrier serves. External bounded utility is
 
 ```text
 U = 1{mode != EXPIRE} * 1{a = c} in {0,1}.
@@ -279,6 +280,15 @@ three-seed investment conditional on an observed finite-resource signal.
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** This is object-tier wording
 inside an already opened B family. It changes no frozen prior result, direction lifecycle,
 Portfolio priority, fusion boundary, or investment decision.
+
+Before implementation acceptance, CM identified that “non-source, non-selected substitute” left
+two physical agents in a four-agent ring. The outcome-blind clarification options were (d) use the
+unselected eligible waiter or (e) use the opposite-ring non-waiter `(s+2) mod 4`. Recommendation:
+**(e)**, because it preserves the chosen source-waiter relation while changing only carrier
+identity and does not turn the alternative scarce action into the treatment's replacement path.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (e).** This clarification was made
+before tests, cost projection, or scientific execution and is reversible until launch.
 
 ## Non-goals
 
