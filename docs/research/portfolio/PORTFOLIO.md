@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T18:40:06Z
+Updated at: 2026-09-04T18:56:58Z
 Owner: Root
 Lifecycle admission: all 19 `ACTIVE` directions remain admitted; the lifecycle count is not an execution-parallelism target
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
@@ -30,7 +30,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:40:06Z | The exact remote R02 certificate is valid `HC-D / CERTIFICATE_INTERVAL_UNRESOLVED`: legal history value is positive (`Delta_L=124861/5625000`) but the certificate interval straddles the carded `0.25` threshold. This is the direction's second RECAST, so the decision executes while ACVC moves to the lowest sequencing priority among `ACTIVE` directions; the owner may asynchronously PARK it. |
-| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-04T18:35:09Z | Defect-8 is technically accepted (`17 passed`) and the current-host headroom census is `HC-M/null`. B1 readiness then reproduced a Linux short-child telemetry defect (`4 passed / 2 failed`): first-sample CPU was incorrectly subtracted. A narrow portability repair and independent review are active; B1 has not launched. |
+| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-04T18:56:58Z | Defect-8 and the Linux short-child telemetry repair are technically accepted; exact-SHA final readiness passed. The sole r06 task then failed before import because its child worker resolved from the project venv to a UV base interpreter without NumPy. Exact-byte reproduction confirmed a technical incomplete attempt with no model, learner, evaluation, or scientific object consumption; r06 is quarantined and the narrow subprocess-identity repair is active for a fresh r07. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:35:09Z | The RAW-only update-252..264 A/RECON implementation is accepted, but the remote exact-SHA sparse worktree materialized `0/1903` required files and blocked in the partial-clone promisor fetch before any task or preflight. A01 remains unobserved and is queued behind the named remote materialization dependency. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:35:09Z | The first-trigger RETAIN/COPY/SHADOW B01 remains unconsumed. C03 reached its terminal technical rule when the remote sparse checkout omitted the frozen test (`0` collected); no cost or science ran, the unaccepted code was quarantined, and the direction is queued behind that named checkout dependency. |
 | ec4g_r1 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |
@@ -71,8 +71,9 @@ The current five direction-level slots are:
    `medium_d2_seed2` cell is running remotely under its own admission.
 2. `finite_resource_relational_inductive_efficiency` — high-priority learner evidence; the
    contact-active R128 R02 card is in bounded CM implementation after three no-contact roots.
-3. `capability_bound_semantic_currentness` — high-priority B1 chain; a reproduced Linux telemetry
-   portability defect is under narrow repair and review before the first scientific launch.
+3. `capability_bound_semantic_currentness` — high-priority B1 chain; exact readiness passed, but
+   r06 was quarantined after exact-byte reproduction showed its child worker lost the project venv
+   and failed before import. A narrow subprocess-identity repair is active for a fresh r07.
 4. `variable_n_fleet_churn` — high-priority direction evidence; valid K1024 intake is integrated
    and the persistent Convergence decision is being recovered without duplicate provider send.
 5. `semigroup_consistent_duration_model_policy` — high-priority direction evidence; the valid A02
