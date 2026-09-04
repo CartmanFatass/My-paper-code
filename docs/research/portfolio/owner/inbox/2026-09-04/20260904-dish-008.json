@@ -1,0 +1,38 @@
+{
+  "id": "20260904-dish-008",
+  "created": "2026-09-04T16:49:53-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "Add B01 descriptive MEI and headroom fields",
+  "context": "Before any B01 result, add the binding information-flow description, a five-service-tick absolute MEI and absent tuned-headroom record. Native recovery service sums 100 binary ticks. The MEI helps interpretation only; every original FTS sign, support, tail and nonharm branch remains unchanged.",
+  "options": [
+    {
+      "key": "a",
+      "label": "Add description and preserve original rule",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "Import FOLR threshold and upper reference",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "Change original sign branches to a new threshold",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Five extra service-positive ticks is a concrete five-percent full-scale recovery difference, and the card retains its original exploratory reading rule.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_INTAKE_20260904.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-c04-continuation",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
