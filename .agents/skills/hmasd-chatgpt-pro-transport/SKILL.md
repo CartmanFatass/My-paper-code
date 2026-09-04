@@ -142,14 +142,24 @@ load delay. After every navigation, reload, click, or upload, take a fresh DOM s
 check before the next action. The tab handle is a lease, not the conversation
 identity; persist `conversation_id` and `provider_url` before handing off to a wake.
 
-Identify the model from the page, never from the account plan. Require visible
-`Pro`, then open the selector and require the `Pro, 5 of 5.` indicator and the
-checked underlying model shown by the page (currently `GPT-5.6 Sol`). The closed
-control is labelled `Pro`; while open it may be labelled `Thinking effort`, so use
-state-based fallback locators rather than one hard-coded accessible name. If the
-required Pro state cannot be verified, stop before typing or sending. If a switch is
-needed, select Pro, wait for the resulting page update, and re-check the composer
-and exact input.
+Identify the model from the page, never from the account plan or the closed `Pro`
+label alone. Read the provider selection in `.codex/hmasd-transport.toml` separately
+from the Codex executor model: the owner's 2026-09-04 requirement is **GPT-6 Astra
+in Pro mode (6 Pro)**. Open the selector and verify both the checked underlying
+model and Pro effort; record the exact visible model, underlying model and effort
+labels. The UI has used `Pro, 5 of 5.` and may label the open control `Thinking
+effort`, so use current state-based locators rather than a single hard-coded name.
+If the required 6 Pro state cannot be verified, stop before typing or sending and
+report the exact available state; do not substitute GPT-5.6 Sol or a non-Pro mode.
+If a switch is needed on an idle conversation, select the required model and Pro
+mode, wait for the page update, and re-check the composer and exact input.
+
+An owner model change after a confirmed Send does not change the model of that
+accepted request. Preserve its original model and one-send evidence; do not switch
+an active generation or resend its request ID. A newly authorized review under the
+new model uses a distinct caller-supplied handoff on the same persistent binding
+after the previous request's natural completion and archival. Record the prior
+answer as superseded for the owner's model requirement, not as a scientific negative.
 
 ## Exact input and one-send rule
 

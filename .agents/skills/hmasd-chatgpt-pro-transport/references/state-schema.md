@@ -58,7 +58,7 @@ its operator UUID never selects a provider conversation.
     "cursor": null
   },
   "visible_model": "Pro",
-  "underlying_model": "GPT-5.6 Sol",
+  "underlying_model": "GPT-6 Astra",
   "thinking_effort": "5/5",
   "source_mode": "upload",
   "prompt_sha256": "...",

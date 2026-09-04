@@ -10,3 +10,9 @@ project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "xhigh"
+
+# Owner request 2026-09-04: use 6 Pro for provider research reviews.
+# This is independent of the Codex Transport executor model above.
+[provider]
+model = "GPT-6 Astra"
+mode = "Pro"
