@@ -1,6 +1,12 @@
 # FRRIE contact-active R128 R02 — repaired attempt 04 (2026-09-04)
 
-Status: `REPAIR_ACCEPTED / R04_OBSERVED_RUNNING / SCIENTIFIC_COMPLETION_UNOBSERVED`.
+Status: `REPAIR_ACCEPTED / R04_FAILED / CAUSE_PROVISIONAL_UNRESOLVED / OWNER_DIRECT_HOLD`.
+
+Superseding terminal intake:
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_TERMINAL_INTAKE_20260904.md`.
+Task `_04` ended at `2026-09-04T22:26:33Z`, exit 1 after 733 seconds, with an empty output root.
+The owner directed a safe handoff before any fresh attempt. No attempt 05 or continuing repair
+loop is authorized. The acceptance/running snapshots below are preserved historical observations.
 
 R04 is an execution-attempt label, not a new scientific object. The existing
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` card remains unchanged, at `B/EXPLORE` ceiling.
@@ -117,8 +123,8 @@ an earlier invocation were reused.
 The next direct CM check found the same task still running at 92 seconds, supervisor `98520`,
 `tmux_active=true`, `exit_code=null`. Runner `98525` remained alive at 90 seconds; its RSS
 snapshot was 598,688 KiB, not peak RSS. No exception appeared in the log tail. No published
-result or learner counter was read. This later running snapshot, together with the exact handle
-sent to Root/shared observer, is the clean execution handoff.
+result or learner counter was read. This was the running snapshot at the earlier execution
+handoff and is superseded by the terminal intake linked above.
 
 This is accepted-process evidence, not a measured optimizer count or native return. The observer
 receives the same task and retains routine observation; no duplicate may be submitted when
@@ -129,7 +135,8 @@ ssh hmasd-wsl-node '/usr/local/bin/agent-task status frrie_b01_contact_r02_732cc
 ssh hmasd-wsl-node '/usr/local/bin/agent-task logs frrie_b01_contact_r02_732cc2b2_04 50'
 ```
 
-The expected terminal artifact is `<output>/summary.json`. DM takes it in against the unchanged
-card after completion; CM handles a reproduced technical failure if one is reported. Owner
-reviews at this clean boundary have no unapplied instruction. The repaired launch does not change
-the accepted DIRECTION science or create a valid-result brief.
+The expected artifact was `<output>/summary.json`; none was produced. The terminal intake records
+the missing counts and exact reproduction limit. Cause remains unresolved and no scientific
+result or polarity is accepted. The current owner hold supersedes earlier execution instructions.
+The repaired launch and incomplete terminal attempt do not change the accepted DIRECTION science
+or create a valid-result brief.
