@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-003",
+  "created": "2026-09-04T09:11:08-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "冻结并完成 CBSC 动态宿主最小只读 headroom census",
+  "context": "当前 exact 结果属于旧的一次机会协议，LR01 属于离线有限面板；B1 r01-r05 均为技术失败。已选择只读检查当前动态宿主是否已有 matched same-information upper 与 tuned RAW-GRU baseline；缺失或错配就保留 null，不训练、不套阈值、不启动 B。",
+  "options": [
+    {
+      "key": "a",
+      "label": "把 exact/LR01/技术值代入当前宿主 headroom",
+      "consequence": "改变宿主与估量，产生伪 headroom。"
+    },
+    {
+      "key": "b",
+      "label": "最小只读 matched-pair census",
+      "consequence": "只记录现有证据是否可相减，零 learner/零实验。"
+    },
+    {
+      "key": "c",
+      "label": "构造/调优资产或启动 B",
+      "consequence": "打开新的 B 工作，超出 A01 授权。"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "只读 census 是回答现有资产问题的最小证据类，并保持旧宿主与当前宿主分离。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L69",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

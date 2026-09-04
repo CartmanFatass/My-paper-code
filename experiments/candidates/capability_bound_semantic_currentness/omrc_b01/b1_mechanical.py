@@ -221,7 +221,17 @@ def build_mechanical_input_descriptor(
         if (
             len(worker_groups) != len(training_slot_indices)
             or not all(worker_groups)
+            or any(
+                not source["source_relative_path"].endswith("/result.json.gz")
+                for group in worker_groups for source in group
+            )
             or not mode_sources
+            or (
+                not test_only and any(
+                    not source["source_relative_path"].endswith("/result.json.gz")
+                    for source in mode_sources
+                )
+            )
             or not bindings
             or artifact_inventory_sha256 is None
         ):

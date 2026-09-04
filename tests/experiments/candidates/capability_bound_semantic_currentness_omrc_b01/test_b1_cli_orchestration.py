@@ -1003,23 +1003,28 @@ def test_attempt_path_budget_is_measured_and_refused_before_anything_exists(
     orchestrator now measures the budget before it creates anything.
     """
 
-    base = Path("C:/Projects/HMASD/temp/directions/capability_bound_semantic_currentness/exp")
+    monkeypatch.setattr(b1, "WINDOWS_MAX_PATH_ENFORCED", True)
+    base = Path("/t")
     long_name = "cbsc_omrc_b1_three_seed_scout_036fe4eff_r01"
     over = b1.projected_attempt_paths(base / long_name)
-    assert over["fits"] is False
-    assert over["longest_projected_length"] > b1.WINDOWS_MAX_PATH
-    # The longest path is a bound admission's raw sibling, under `admissions/`.
+    assert over["fits"] is True
+    assert over["longest_projected_length"] < b1.WINDOWS_MAX_PATH
+    # The longer static name makes staging the longest projected surface.
     assert over["longest_projected_path"].endswith(".json")
-    assert (chr(92) + "admissions" + chr(92)) in over["longest_projected_path"]
-    assert len(long_name) > over["maximum_run_root_name_length"]
+    assert over["longest_projected_surface"] == "STAGING"
+    assert over["windows_fits"] is True
 
-    under = b1.projected_attempt_paths(base / "b1_r02")
+    # A shorter run root isolates the incident publication as the winner.
+    incident = b1.projected_attempt_paths(base / "b1_r02")
+    assert incident["longest_projected_surface"] == "INCIDENT"
+    assert "incidents" in Path(incident["longest_projected_path"]).parts
+    assert incident["windows_fits"] is True
+
+    # Projection only: keep this independent of pytest's deliberately long basetemp.
+    under = b1.projected_attempt_paths(Path("/t/b1_r02"))
     assert under["fits"] is True
     assert under["longest_projected_length"] < b1.WINDOWS_MAX_PATH
-    b1.require_attempt_path_budget(base / "b1_r02")
-
-    with pytest.raises(b1.B1OrchestrationError, match="BLOCKED_PATH_BUDGET"):
-        b1.require_attempt_path_budget(base / long_name)
+    b1.require_attempt_path_budget(Path("/t/b1_r02"))
 
     # It refuses after the source and B0 bindings and before any staging
     # directory, admission receipt or child process exists.  The destination is
@@ -1034,8 +1039,9 @@ def test_attempt_path_budget_is_measured_and_refused_before_anything_exists(
     monkeypatch.setattr(
         b1, "_execute_fresh_attempt", lambda **kwargs: executed.append(kwargs)
     )
-    overflowing = "z" * (
-        b1.projected_attempt_paths(tmp_path / "z")["maximum_run_root_name_length"] + 1
+    overflowing = "z" * max(
+        1,
+        b1.projected_attempt_paths(tmp_path / "z")["maximum_run_root_name_length"] + 1,
     )
     destination = tmp_path / overflowing
     assert b1.projected_attempt_paths(destination)["fits"] is False
@@ -1047,6 +1053,17 @@ def test_attempt_path_budget_is_measured_and_refused_before_anything_exists(
     assert executed == []
     assert not destination.exists()
     assert not list(tmp_path.glob(f".{overflowing}.partial-*"))
+
+
+def test_max_path_projection_is_recorded_but_not_enforced_on_linux(
+    monkeypatch, tmp_path
+) -> None:
+    monkeypatch.setattr(b1, "WINDOWS_MAX_PATH_ENFORCED", False)
+    destination = tmp_path / ("z" * 220)
+    budget = b1.require_attempt_path_budget(destination)
+    assert budget["windows_fits"] is False
+    assert budget["platform_limit_enforced"] is False
+    assert budget["fits"] is True
 
 
 def test_fresh_attempt_creates_the_admissions_directory_with_the_transaction(

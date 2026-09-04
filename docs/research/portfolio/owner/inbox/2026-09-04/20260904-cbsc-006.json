@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-006",
+  "created": "2026-09-04T09:13:26-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "更正 A01 绑定提交的长 SHA 转录",
+  "context": "首次 git ls-tree 在读取任何证据前返回 not a tree object，确认卡片长 SHA 是转录错误。已把 locator 更正为实际已推送的 defect-closure commit；inventory、结果规则、预测和科学含义均未改变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "更正为实际 pushed defect-closure commit",
+      "consequence": "恢复卡片可执行性，保持原问题和证据边界。"
+    },
+    {
+      "key": "b",
+      "label": "改绑其他 evidence state",
+      "consequence": "无依据改变证据快照。"
+    },
+    {
+      "key": "c",
+      "label": "继续使用不可读 locator",
+      "consequence": "必然选择 HC-X，无法完成盘点。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是证据读取前发现的纯 locator 转录错误；实际提交身份可由 Git 直接验证。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L72",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20260904-cbsc-009",
+  "created": "2026-09-04T09:18:16-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CBSC 动态宿主 headroom A01 有效结果简报",
+  "context": "有效只读 A/RECON：当前动态宿主没有可相减的 same-information upper 与 tuned RAW-GRU return 对。旧 exact、LR01 和 defect 8 均保留原边界；差值未知，不是零。中文简报已写，循环不等待审阅。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "简报忠实反映英文 intake 的 HC-M、null 边界、预测核对和无 B/无 lifecycle 动作。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L75",
+  "brief": "docs/research/portfolio/owner/briefs/capability_bound_semantic_currentness/2026-09-04_CBSC-DYNAMIC-HOST-HEADROOM-CENSUS-A01.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
