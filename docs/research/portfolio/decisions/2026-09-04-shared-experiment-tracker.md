@@ -21,15 +21,17 @@ CM/Operator owns launch, collection, verification and technical repair; DM owns 
 Duplicate handoffs reconnect to the same accepted handle. Idle DMs are resumed with direct sibling
 followup; unavailable DMs are reported once to Root for restoration.
 
-The runtime may need a later session to expose a newly registered custom role. For this live tree,
-Root creates the same tracker using the default native agent with the explicit owner-requested
-model/effort and the installed role instructions. Future sessions can select the registered role.
+For this live tree, Root created a temporary tracker using the default native agent with the
+explicit owner-requested model/effort and the role instructions. This is not evidence that a
+custom-role instance was loaded. The configured custom role must be selected by its file's name
+when the runtime exposes it; current discovery failures do not establish a reload mechanism.
 No other agent's model is changed. Existing user model edits in the saved project are preserved.
 
 ## Live validation and remaining limitation
 
-The Luna/xhigh tracker successfully adopted same-handle process observations and committed its
-tracking table. This live runtime did not expose native outbound sibling tools to that agent.
+The temporary default Luna/xhigh tracker successfully adopted same-handle process observations and
+committed its tracking table. That agent's top-level tool context did not expose native outbound
+sibling tools; this is not a finding about all custom agents or all Luna runtimes.
 Its app task-message attempt was rejected with
 `direct app-server input is not allowed for multi-agent v2 sub-agents`; that path is not retried or
 bypassed. A Root attempt to select the newly registered role returned `unknown agent_type` in this
@@ -37,9 +39,25 @@ already-running turn. Configuration registration alone has therefore not proved 
 
 Root delivered the initial CBSC/FRRIE terminal notifications and FSD adoption ACK through Root's
 native collaboration tools so scientific work could continue. The direct-sibling requirement is
-explicitly **not yet complete**. The next fresh Root runtime/configuration load should test native
-outbound capability once before claiming it works. If absent, report the limitation immediately,
+explicitly **not yet complete for the Luna tracker**. Select the custom role when exposed and test
+native outbound capability once before claiming it works. If absent, report the limitation immediately,
 retain bounded tracker observations and required Root delivery, and avoid repeated transport
 workarounds. No experiment is duplicated or blocked by this communication limitation.
+
+## Owner follow-up: installed role and verified sibling guide
+
+The owner explicitly requested the custom role, both local and remote instructions, and a docs
+guide after confirming sibling use. The role now separates remote agent-task supervision from
+local detached process identity and private tool-session access. It explicitly enables the
+documented agents.enabled setting and points at the native guide; this is configuration, not a
+claim that a missing tool has become available.
+
+Root verified two peer roundtrips between the existing FSD and CRTO custom DMs: direct
+send_message with an actual returned ACK, then followup_task waking the idle FSD DM with an ACK
+received by CRTO. Root forwarded neither test message. The independently reported calls and the
+default tracker limitation are recorded in
+[SIBLING_COMMUNICATION.md](../../../project/SIBLING_COMMUNICATION.md), together with official
+configuration references and the exact native invocation boundaries. No research process changed
+because of these communication probes.
 
 Scope: owner-requested native process observation and coordination; no new runtime machinery.

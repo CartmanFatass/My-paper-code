@@ -45,6 +45,11 @@ release routine polling and remain available for collection, verification or rep
 The tracker owns process observations; you retain technical acceptance and the DM retains science.
 Do not restart or duplicate a live run when an observer changes. Tracker adoption is not an extra
 launch condition and does not add a per-run heartbeat.
+Remote handoff names the configured node and accepted agent-task, not the SSH client session.
+Local handoff identifies the owning session or detached PID/start time, logs and existing exit
+witness; a private exec session ID alone cannot transfer tool access. Keep an observation owner
+until adoption is confirmed and never manufacture a relaunch to hand a handle over. Native sibling
+addressing and capability recovery are described in docs/project/SIBLING_COMMUNICATION.md.
 
 ### Engineering scope
 

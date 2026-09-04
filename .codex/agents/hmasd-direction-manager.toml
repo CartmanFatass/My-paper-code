@@ -58,6 +58,12 @@ you retain intake and all scientific decisions. On its terminal reminder, resume
 your intake; acknowledge handoff so it stops repeating that event. Reuse its one observer rather
 than keep a CM/DM polling the same run. Tracker absence or missing metadata is not a launch gate;
 leave a durable handle and ask Root to restore the tracker without duplicating the experiment.
+Call native collaboration tools at the top level using the tracker's canonical path; they are not
+functions.exec tools.* methods or app task-message tools. See docs/project/SIBLING_COMMUNICATION.md.
+For local work include the launcher-owned session or detached PID/start-time identity and existing
+log/exit witnesses; for remote work include the node's accepted agent-task name and remote paths.
+If the observer reports a real missing outbound capability, retain observation coverage through
+Root's temporary recovery handoff; do not mistake absent ACKs for a science or admission failure.
 
 ### Intake and the decision ladder
 

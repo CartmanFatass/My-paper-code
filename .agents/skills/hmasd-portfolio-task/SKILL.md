@@ -61,6 +61,13 @@ receive reminders directly, with no Root relay. It is the single writer of
 `docs/research/portfolio/EXPERIMENT_TRACKING.md`; integrate meaningful updates while the DMs retain
 science and CM retains technical acceptance. Reconcile the same handles before restoring a lost
 tracker. Do not create a registry, separate scheduler, per-run heartbeat, or an admission gate.
+Spawn the installed custom role by its file's name, `hmasd-experiment-tracker`; its model and effort
+are fixed in that file. Use docs/project/SIBLING_COMMUNICATION.md for verified native addressing.
+If this runtime has not exposed the new role, record that exact discovery failure; a default agent
+with copied instructions is a temporary substitute, not a validated custom-role instance. Publish
+observed send/receive capability separately from configuration. Missing outbound tools in one
+agent do not disprove sibling support; restore direct delivery at a supported configuration load
+while retaining necessary process observation and DM wakeups.
 
 - Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
   Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
