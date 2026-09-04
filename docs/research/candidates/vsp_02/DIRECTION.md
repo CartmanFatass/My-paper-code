@@ -38,3 +38,31 @@ continuous paths, transient regret, or sample efficiency.
 `docs/research/legacy/directions/optimizer_entropy_exposure_boundary_relay/` supplies the
 CARRY/FRESH optimizer-history provenance control. It transfers no entropy-amplification or return
 polarity.
+
+## Guidance A1 current-host headroom census — 2026-09-04
+
+The valid A/RECON retained-evidence census reports exact matched greedy headroom `0` on
+`VSP02-A2-PHYSICAL-LIFECYCLE-HOST-v1`: the legal public-cue upper and all five accepted
+X-memory tabular seeds have greedy return `3/2`. The historical arithmetic difference
+`1.50-1.35=0.15` is not headroom because it compares a deterministic oracle with a baseline
+value that retains the fixed exploration mixture.
+
+The bounded claim is only that a saturation-qualified same-information table leaves no terminal
+greedy mapping headroom on the finite B1V2 held-out clone population. The strongest support is the
+accepted `5/5` strict correct mapping and exact physical return cells. The strongest contradiction
+is B5R1's equal exact-success sets but nonidentical descriptive carry/reset values (paired mean
+difference approximately `+0.003792` with one sign reversal), which preserves transient-path
+uncertainty.
+
+The current host has one action-owning owner, a fixed no-op partner and static roster; B5R1 resets
+Adam at a training-update boundary, not a roster-age event. No current observation binds
+optimizer state to join/leave/rejoin, replacement, survivor state, entity-versus-slot identity, or
+partner co-adaptation. A future discriminator would need those semantics and a competent
+same-information generic learner prospectively declared on that population. No B, PARK, closure,
+or VNFC fusion is selected by this census.
+
+Evidence:
+
+- `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md`
+- `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_RESULT_EVIDENCE_20260904.md`
+- `VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md`

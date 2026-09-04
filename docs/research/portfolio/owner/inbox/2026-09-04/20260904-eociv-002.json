@@ -1,0 +1,35 @@
+{
+  "id": "20260904-eociv-002",
+  "created": "2026-09-04T11:37:40Z",
+  "direction": "eociv_lite",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept the valid complete B9R1 result as `B9R1_GENERIC_OR_SOURCE_HARM_ONLY`, without rerun…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T11:37:40Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept valid complete B9R1 and publish its frozen branch",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine despite passing the card",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun the same object",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/eociv_lite/EOCIV_B9R1_RECEIVER_ADDRESSED_CREDIT_INTAKE_20260904.md#decision-1--disposition-of-the-completed-attempt-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

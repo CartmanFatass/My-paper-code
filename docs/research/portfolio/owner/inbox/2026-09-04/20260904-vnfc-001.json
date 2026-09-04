@@ -1,0 +1,40 @@
+{
+  "id": "20260904-vnfc-001",
+  "created": "2026-09-04T09:39:49Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "literal first-primary 16-world panel with bracketed K=256 best-of-many search",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T09:39:49Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "literal first-primary 16-world panel with bracketed K=256 best-of-many search",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "all 48 primary worlds",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "fresh 16-world panel",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "budget ladder without headroom",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

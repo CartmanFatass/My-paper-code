@@ -45,6 +45,20 @@ node is re-opened with that document rather than a new round.
 
 Only the owner takes Portfolio-tier decisions in the owner's absence; see §4.
 
+**Investment fields** (owner decision 2026-09-04 as revised the same day, evidence spec §11.7).
+Headroom, the gap between a stated upper reference and a tuned same-information baseline on the
+direction's host, is a diagnostic and sequencing input, not an investment threshold: every
+Portfolio proposal states each direction's headroom record or its absence, and when compute is
+contended a direction with a record sequences ahead of one without. Each card declares its own
+minimum effect of interest (absolute, relative, or both) with the DM's reason; there is no
+repository-wide number, and the declared value informs Portfolio comparison without rewriting the
+card's own result branches. Each direction has a recast budget of one: a second Convergence
+`RECAST` still executes (the Pro decision is final for its node), but the direction drops to the
+lowest sequencing priority among ACTIVE directions and the DM flags a digest row `second-recast`;
+the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: all ACTIVE
+directions continue in parallel under the unbounded-capacity decision. Nothing in this paragraph
+waits for the owner, none of it is a §11.4 launch condition, and ladders already open continue.
+
 ## 3. Blocker rule
 
 A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
@@ -70,11 +84,37 @@ When the owner is absent the loop keeps running under a standing delegation (own
    history rewrites, deletion of evidence roots, or any other irreversible action outside the
    ordinary research loop; edits to this file, `.codex/`, `.agents/`, or `CLAUDE.md`.
 4. **Audit ledger.** Every automatic decision is appended to
-   `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, options,
-   chosen option, reversible (yes/no), provenance label, evidence path, and an empty `owner`
-   column. The owner intervenes by filling that column; a non-empty entry overrides the decision
-   and the loop applies it at the next clean boundary.
-5. The delegation lasts until the owner revokes it.
+   `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, kind,
+   options, chosen option, reversible (yes/no), provenance label, evidence path, owner flag, and
+   an empty `owner` column. `kind` is `selection` when the choice picks what to run next or
+   changes a treatment, comparator, arm set or budget, otherwise `technical`. The owner flag is
+   `none` or one of `close-call` (the recommendation and its runner-up were not clearly
+   separated), `critic-dissent` (a critic's material objection was overruled), `second-recast`,
+   `portfolio`. The owner intervenes by filling the `owner` column; a non-empty entry overrides
+   the decision and the loop applies it at the next clean boundary.
+5. **Owner surfaces** (owner decision 2026-09-04,
+   `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`). The loop never
+   waits for the owner. It writes structured items under `docs/research/portfolio/owner/`
+   (schemas in that directory's `README.md`) and reads the owner's reviews there and the ledger
+   `owner` column at every clean boundary:
+   - `inbox/<YYYY-MM-DD>/<id>.json`: one item per thing that needs the owner's eye, written when
+     the decision is made or the card is frozen: a delegated decision (with the executed option
+     marked `auto_applied`), a new card, a prediction request (one per ladder, not per
+     invocation), a brief, a critic dissent, a close call, a second recast, a Portfolio proposal.
+     Each item carries its options with one `recommended`, its evidence paths, and its ledger row.
+     Items are written only through `tools/owner_console/item.py`; an item the owner must rule on
+     (Portfolio proposal, second recast, critic dissent, close call, new card, any direction- or
+     portfolio-tier item) carries the decision packet defined in that README and is refused
+     without it.
+   - `reviews/<YYYY-MM-DD>.md`: written by the owner's console from the owner's replies. Each
+     section carries the chosen option, a comment, and one `instruction` line; the DM and Root
+     apply the instructions that differ from what already ran and cite the review line in the
+     ledger. `agree` means seen. At intake the DM scores a `prediction` reply if one exists and
+     records `not taken` otherwise.
+   - `briefs/<direction>/<YYYY-MM-DD>_<object>.md`: a one-page owner brief in Chinese for every
+     valid result, written at intake beside the English intake document and referenced from a
+     `brief` item.
+6. The delegation lasts until the owner revokes it.
 
 ## 5. Capacity and resume
 

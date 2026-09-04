@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vsp03-002",
+  "created": "2026-09-04T07:09:14-07:00",
+  "direction": "vsp_03",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept `HC-D / UPPER_REFERENCE_AND_GENERIC_BASELINE_MISSING`, with population/exposure…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:09:14-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `HC-D` and record headroom as undefined because both required assets are missing",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "relabel zero runtime or Boolean rule difference as `H=0`",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "quarantine because no learner ran",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_HEADROOM_CENSUS_A01_INTAKE_20260904.md#decision-1--accept-or-reject-the-arecon-observation-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "20260904-vnfc-010",
+  "created": "2026-09-04T12:16:21Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "continue the clean wait without rapid polling; make no result invocation and preserve the …",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T12:16:21Z). Provenance: `OWNER_DELEGATED` — prior unattended option (a) remains controlling after the fresh receipt refused. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "after the distinct fresh receipt remains below 4 GiB, continue the clean wait for another meaningful pressure change",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "launch below threshold",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "kill unrelated work",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "recast from a transient host-capacity fact",
+      "consequence": ""
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_MEMORY_BOUNDED_K1024_R02_RESOURCE_ADMISSION_REFUSAL_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

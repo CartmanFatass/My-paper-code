@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vsp03-003",
+  "created": "2026-09-04T07:09:15-07:00",
+  "direction": "vsp_03",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(d) no B or local successor; return the exact deficit and binding-structure flag to Root's…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:09:15-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (d). Reversible: yes.",
+  "options": [
+    {
+      "key": "d",
+      "label": "return `HC-D` to Root and launch nothing",
+      "consequence": ""
+    },
+    {
+      "key": "e",
+      "label": "construct the semi-Markov host/oracle/generic learner or launch B inside A1",
+      "consequence": ""
+    },
+    {
+      "key": "f",
+      "label": "apply MEI, fuse into FSD E4, or select PARK locally",
+      "consequence": ""
+    }
+  ],
+  "recommended": "d",
+  "auto_applied": "d",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_HEADROOM_CENSUS_A01_INTAKE_20260904.md#decision-2--local-action-after-the-census-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

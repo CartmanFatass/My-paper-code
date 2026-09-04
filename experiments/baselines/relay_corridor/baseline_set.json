@@ -1,0 +1,104 @@
+{
+  "baseline_set": "relay_corridor",
+  "status": "PARTIAL_REUSE_ONLY",
+  "claim_ceiling": "B_EXPLORE_HOMOGENEOUS_RELAY_CORRIDOR",
+  "new_result_operation_launched": false,
+  "host": {
+    "class": "envs.relay_corridor",
+    "n_agents": 6,
+    "n_roles": 2,
+    "n_zones": 4,
+    "n_regions": 2,
+    "horizon": 400,
+    "delta": 0.4,
+    "event_process": "bernoulli",
+    "lambda_regions": [0.02, 0.02],
+    "rho": 0.0,
+    "c_probe": 0.0,
+    "role_decode": "argmax",
+    "e5_coupling_enabled": false
+  },
+  "run_budget": {
+    "rollouts": 20,
+    "num_envs": 16,
+    "transitions": 128000,
+    "training_episodes": 320,
+    "evaluation_checkpoints": 4,
+    "evaluation_interval_rollouts": 5,
+    "evaluation_tape_set": 4096,
+    "evaluation_episodes_final": 2048,
+    "evaluation_episodes_intermediate": 512,
+    "evaluation_chunk": 512,
+    "evaluation_master_seed": 770001,
+    "torch_threads": 4
+  },
+  "learner": {
+    "family": "HMASD_FAIR_D0",
+    "driver": "envs.relay_corridor.hmasd_driver.RelayCorridorHMASDDriver",
+    "policy_interruption_mode": "d2",
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "interruption_delta": 1,
+    "age_feature": "off",
+    "skill_cap_rule": "skill_cap_k_max=team_cap_k_Z=k"
+  },
+  "historical_runner": {
+    "source_commit": "92243f413f22100cb19757687de33abda4b519d1",
+    "path": "scripts/run_flexible_skill_duration_e2.py",
+    "available_at_current_main": false,
+    "argv_shape": [
+      "scripts/run_flexible_skill_duration_e2.py",
+      "--arm", "d0_k<K>",
+      "--seed", "<SEED>",
+      "--rollouts", "20",
+      "--num-envs", "16",
+      "--threads", "4",
+      "--eval-interval", "5",
+      "--eval-tape-set", "4096",
+      "--eval-episodes", "2048",
+      "--eval-intermediate-episodes", "512",
+      "--eval-chunk", "512",
+      "--eval-master-seed", "770001",
+      "--launch-commit", "<FROZEN_SHA>",
+      "--output-root", "<NEW_RUN_ROOT>"
+    ]
+  },
+  "cells": [
+    {"k": 1, "seed": 1, "status": "QUARANTINED_EXCLUDED", "return": null},
+    {"k": 1, "seed": 2, "status": "QUARANTINED_EXCLUDED", "return": null},
+    {"k": 2, "seed": 1, "status": "VALID", "return": 0.181548421},
+    {"k": 2, "seed": 2, "status": "NOT_LAUNCHED", "return": null},
+    {"k": 5, "seed": 1, "status": "VALID", "return": 0.287241292},
+    {"k": 5, "seed": 2, "status": "VALID", "return": 0.287209880},
+    {"k": 20, "seed": 1, "status": "VALID_LEARNED_BEST", "return": 0.301320475},
+    {"k": 20, "seed": 2, "status": "VALID_LEARNED_BEST", "return": 0.304232422},
+    {"k": 40, "seed": 1, "status": "VALID", "return": 0.261021159},
+    {"k": 40, "seed": 2, "status": "VALID", "return": 0.175042155}
+  ],
+  "exact_references": {
+    "J_switch": 0.39202,
+    "best_fixed_k": 20,
+    "J_fixed_k": {
+      "1": 0.001,
+      "2": 0.197,
+      "5": 0.3053168128,
+      "20": 0.3133920282449043,
+      "40": 0.2681497980245237
+    }
+  },
+  "unbound_families": [
+    "FLAT_MAPPO_STYLE",
+    "SEPARATELY_TUNED_HMASD_AS_SHIPPED"
+  ],
+  "future_only_rng_contract": {
+    "paired_seeds_required": true,
+    "common_random_numbers_required_where_host_allows": true,
+    "applies_retroactively": false,
+    "launch_requires_new_card_and_per_arm_cost_projection": true
+  },
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md",
+    "docs/Claude_docs/experiments/E2_INTERRUPTION_COST_SWEEP_20260903.md"
+  ]
+}

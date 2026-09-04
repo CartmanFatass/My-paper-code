@@ -1,0 +1,35 @@
+{
+  "id": "20260904-frrie-001",
+  "created": "2026-09-04 02:37 PDT",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "preserve WIP and build fresh minimal §11 R128 runner",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 02:37 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "adopt owner-dirty full-512 bundle",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "launch from component tests",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "preserve WIP and build fresh minimal §11 R128 runner",
+      "consequence": ""
+    }
+  ],
+  "recommended": "c",
+  "auto_applied": "c",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_DIRTY_SLICE_B_ADMISSION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

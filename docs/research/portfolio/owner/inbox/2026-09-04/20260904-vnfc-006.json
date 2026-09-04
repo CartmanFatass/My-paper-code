@@ -1,0 +1,40 @@
+{
+  "id": "20260904-vnfc-006",
+  "created": "2026-09-04T10:19:54Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "select only the prospectively carded K=1024 discriminator, contingent on result-blind RSS …",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T10:19:54Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "prospectively card K=1024 with result-blind RSS pilot",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "jump to K=2048/3072",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "attempt over-cap K=4096",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "escalate recast now",
+      "consequence": ""
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_R01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

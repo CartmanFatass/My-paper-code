@@ -50,6 +50,43 @@ Distinguish technical success, bounded task competence, comparative algorithm ad
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
 
+## Investment fields (owner decision 2026-09-04, revised the same day)
+
+Controlling record: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`;
+field text: evidence spec §11.7 and `AGENTS.md` §2. These are comparison inputs and sequencing
+rules, not launch gates, exclusion rules, or lifecycle dispositions. All ACTIVE directions
+continue in parallel under the unbounded-capacity decision; sequencing orders contended compute
+and never parks a direction by itself.
+
+- **Headroom record.** Every Portfolio proposal states each in-scope direction's headroom record
+  on its host or its absence. A missing record sequences that measurement early (A/RECON when
+  computed from existing results, a declared B when a baseline must be trained); it is never a
+  reason to stop investing. When compute is contended, a direction with a record sequences ahead
+  of one without.
+- **Declared MEI.** Compare B signals across directions against each card's own declared minimum
+  effect of interest (absolute, relative, or both), not against a repository-wide number and not
+  by absolute edge alone. The declared MEI never rewrites a card's result branches.
+- **Recast budget one.** A direction at its second Convergence `RECAST` continues (the Pro
+  decision is final for its node) but takes the lowest sequencing priority among ACTIVE
+  directions: Root admits every other ACTIVE direction's work first. It appears in the owner
+  digest as `second-recast`; Root does not mutate the lifecycle field, and an owner reply may PARK
+  it. Nothing waits for that reply.
+- **Usage per valid result, two measures.** `PORTFOLIO.md` carries two columns per direction:
+  the compute of each valid result itself, and the total compute of all accepted attempts divided
+  by the number of valid results. Each value names its node and device and is `unmeasured` where
+  the summary lacks it; a single wall-time number is not used because it mixes hardware, technical
+  failure and scientific cost. Root refreshes both with every snapshot and cites them in every
+  cross-direction proposal.
+- **Fusion and shared assets.** Directions on one host share baseline sets and evidence
+  interfaces without fusing. Fusion is proposed only when question, comparator, estimand and next
+  object are shown to be materially the same.
+- **Owner items.** Every Portfolio proposal awaiting ratification, and every direction
+  recommendation a DM returns, is one owner item of kind `portfolio` written with
+  `python tools/owner_console/item.py add --direction portfolio --tier portfolio --kind portfolio ...`
+  (`$hmasd-owner-item`; never by hand). At every clean boundary Root runs
+  `python tools/owner_console/item.py reviews`: a `ratify` instruction is the owner's
+  ratification, `refuse` or `amend` is not; then `mark-answered`. Nothing waits for it.
+
 ## Lifecycle semantics
 
 Update the smallest implicated unit:
