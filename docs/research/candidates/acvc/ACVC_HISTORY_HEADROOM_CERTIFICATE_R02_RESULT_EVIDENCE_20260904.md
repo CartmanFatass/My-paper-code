@@ -50,6 +50,19 @@ Local copyback, durable linked JSON, and remote bytes match exactly. The remote 
 remains at
 `/home/wu/.agent-tasks/acvc_r02_result_3831a66d_02/task.log`.
 
+## Usage record
+
+- Valid result's own compute: `2.288506334 s` result-run wall on node `wsl_4070`, device `CPU`
+  (processor model unreported), one process and one computational thread.
+- Total accepted scientific-attempt compute divided by valid results:
+  `2.288506334 s / 1 = 2.288506334 s`. The empty-command task ran no scientific process and is not
+  an accepted attempt.
+- Prospective engineering compute is recorded separately: the accepted result-blind project-cost
+  used `7.251637622 s` wall on the same node. The non-admitting local development measurement and
+  pre-computation fetch/launcher failures are not scientific-attempt compute.
+- Scratch usage was not measured; the claim is not a resource claim. Wall and peak RSS for the
+  valid result are measured as reported above.
+
 ## Direct exact observations
 
 | quantity | exact rational | decimal |

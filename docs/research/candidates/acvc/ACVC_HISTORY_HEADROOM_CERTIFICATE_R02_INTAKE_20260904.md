@@ -70,6 +70,10 @@ threshold or harm envelope, adding a learner, or increasing the cap.
   a legal same-information treatment or as the guidance A1 upper reference.
 - Guidance A1 remains not done: no matched same-information upper and tuned generic baseline pair
   exists, raw A1 gap remains `null`, and the unapproved 5%/25% MEI thresholds remain unused.
+- This is ACVC's second Convergence `RECAST`. It executes as final for its node, but the current
+  investment policy flags `second-recast` and places ACVC at the lowest sequencing priority among
+  ACTIVE directions; the owner may asynchronously choose PARK. This is scheduling/Portfolio
+  provenance, not scientific polarity.
 - The frozen `HC-D` mapping parks this direction at its exact dependency boundary and admits no
   learner. This executes the earlier `PRO_FINAL / RECAST_CERTIFIED_BOUND` decision; it does not
   make a Portfolio lifecycle decision.
@@ -146,3 +150,11 @@ legal same-information lower certificate that clears `1/4` with a visible action
 positive forced-`DET-CF` advantage, or a prospectively resource-admitted tighter exact upper below
 `1/4`. No learner, approximate evaluation, predictive statistic, cap increase, MEI threshold, or
 new B object is authorized.
+
+## Usage for Portfolio comparison
+
+The valid result used `2.288506334 s` result-run wall on `wsl_4070`, CPU (processor model
+unreported), one process and one computational thread. There is one valid scientific result and
+one accepted scientific attempt, so accepted-attempt compute per valid result is also
+`2.288506334 s`. The separate admitted project-cost used `7.251637622 s`; it is engineering
+admission compute, not a scientific attempt. Scratch usage is unmeasured.

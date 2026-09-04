@@ -1,0 +1,37 @@
+{
+  "id": "20260904-acvc-006",
+  "created": "2026-09-04T11:33:13-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "空命令后唯一修正 scientific dispatch",
+  "context": "首个 supervisor task 权威显示为空命令：没有 preflight、runner、进程或结果根，因此不是 scientific invocation。DM 在命令非空校验后允许同一 SHA、argv 和未存在结果根上的一次修正 dispatch；它成为唯一实际 invocation。",
+  "options": [
+    {
+      "key": "a",
+      "label": "在非空校验后修正远端 dispatch",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "作为 incomplete blocker 停驻",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "转为本地 fallback",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "零副作用装配失败不消耗冻结 invocation，精确修正不改变科学意义。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L94",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

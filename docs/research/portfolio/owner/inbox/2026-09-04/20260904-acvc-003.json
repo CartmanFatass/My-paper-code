@@ -1,0 +1,37 @@
+{
+  "id": "20260904-acvc-003",
+  "created": "2026-09-04T11:33:08-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R02 采用隔离实现面",
+  "context": "第二次 Convergence 将对象重铸为全新的精确证书。为避免把未完成的 full-DP 诊断或 core MARL 字节混入新估量，DM 选择独立研究目录、runner 和测试面；该选择已执行且 R01 诊断保持只读。",
+  "options": [
+    {
+      "key": "a",
+      "label": "新建隔离的 certificate-R02 实现面",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "复用未完成的 full-DP R01 路径",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "加入共享或 core MARL",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "隔离面保留新旧估量边界且不新增共享机制。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HEADROOM_CERTIFICATE_R02_CONVERGENCE_DECISION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L91",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
