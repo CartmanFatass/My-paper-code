@@ -10,8 +10,23 @@ from experiments.candidates.commitment_residual_triggered_options.raw_phase_trac
 from scripts import run_crto_raw_phase_trace_a01 as runner
 
 
+EXPECTED_THREAD_CONTRACT = {
+    "required_computational_threads": 1,
+    "native_thread_environment": {
+        "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1",
+    },
+    "torch_intraop_threads": 1, "torch_interop_threads": 1, "matches": True,
+}
+
+
 def test_exact_panel_namespace_and_prospective_counts() -> None:
+    from experiments.candidates.commitment_residual_triggered_options.balanced_residual_b01_r1 import (
+        experiment as accepted_b01,
+    )
+
     rows = experiment.selected_population_spec()
+    assert rows == accepted_b01.selected_population_spec()
     assert len(rows) == 64
     assert sum(row["split"] == "TRAIN" for row in rows) == 48
     assert sum(row["split"] == "EVAL" for row in rows) == 16
@@ -25,14 +40,7 @@ def test_exact_panel_namespace_and_prospective_counts() -> None:
     assert cost["fixed_planning_law"] == "3 * 434.7066687 = 1304.1200061 seconds"
     assert cost["projected_raw_trace_arm_seconds"] == 1304.1200061
     assert cost["projection_within_cap"] is True
-    assert cost["thread_contract"] == {
-        "required_computational_threads": 1,
-        "native_thread_environment": {
-            "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
-            "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1",
-        },
-        "torch_intraop_threads": 1, "torch_interop_threads": 1, "matches": True,
-    }
+    assert cost["thread_contract"] == EXPECTED_THREAD_CONTRACT
     assert all(os.environ[name] == "1" for name in experiment.THREAD_ENVIRONMENT)
     assert cost["prospective_work_counts"] == {
         "predictor_tapes": 128, "predictor_updates": 100,
@@ -153,8 +161,7 @@ def test_toy_runner_end_to_end_under_60_seconds(tmp_path: Path, monkeypatch) -> 
     assert summary["result_branch"] == "A01-RAW-PHASE-INCOMPLETE"
     assert summary["completeness_issues"] == ["TOY_SMOKE_NOT_A_SCIENTIFIC_POPULATION"]
     assert summary["representation"] == "RAW"
-    assert summary["thread_contract"]["torch_intraop_threads"] == 1
-    assert summary["thread_contract"]["torch_interop_threads"] == 1
+    assert summary["thread_contract"] == EXPECTED_THREAD_CONTRACT
     assert summary["absent_representations"] == ["TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT"]
     assert summary["work_counts"]["true_residual_gate_updates"] == 0
     assert summary["work_counts"]["calibrated_derangement_evaluation_rows"] == 0
