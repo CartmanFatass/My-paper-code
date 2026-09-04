@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-002",
+  "created": "2026-09-04T09:06:34-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 CBSC defect 8 工程闭环，保持 B 对象未启动",
+  "context": "缺陷已在历史字节上直接复现；最终修复经独立 reviewer PASS，并在已推送精确 SHA 的 Linux detached worktree 上通过 17 项 profile。修复保留 512 MiB cap、完整无损证据、15 张表、FP32/RNG/PPO/checkpoint 语义。没有 formal artifact、r06 或 B 结果。",
+  "options": [
+    {
+      "key": "d",
+      "label": "接受 bounded engineering closure",
+      "consequence": "关闭 defect 8，科学对象保持未启动，转入只读 A1 census。"
+    },
+    {
+      "key": "e",
+      "label": "仍隔离该实现",
+      "consequence": "保留安全但无依据的工程阻塞。"
+    },
+    {
+      "key": "f",
+      "label": "扩展到进程树或立即启动 r06",
+      "consequence": "越出当前对象范围并可能混入新运行。"
+    }
+  ],
+  "recommended": "d",
+  "auto_applied": "d",
+  "dm_reason": "复现、独立复审与精确提交远端 profile 已覆盖卡片要求，技术通过不被解释为科学结果。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DEFECT8_TECHNICAL_CLOSURE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L68",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

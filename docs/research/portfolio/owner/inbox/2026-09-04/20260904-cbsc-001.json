@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-001",
+  "created": "2026-09-04T09:06:33-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "远端 GitHub 不可达时以已推送精确提交 bundle 完成工程 profile",
+  "context": "远端 SSH 正常但 GitHub HTTPS 无响应，且尚无 profile task 被接受。已选择把已推送提交作为完整 Git bundle 传到远端，验证 bundle 摘要、提交身份与 clean detached worktree 后继续同一工程 profile；未复制未提交源码，也未启动科学运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "已推送精确提交的验证 bundle",
+      "consequence": "保持同一 commit id/字节并完成 remote-first 工程验证。"
+    },
+    {
+      "key": "b",
+      "label": "停止并记录远端 profile blocker",
+      "consequence": "安全停止，但 defect 8 缺少最终远端 profile。"
+    },
+    {
+      "key": "c",
+      "label": "复制工作树或静默本地回退",
+      "consequence": "削弱来源或路由纪律，不可接受。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "bundle 只搬运已推送 Git objects，保持精确提交身份且不改变科学语义。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DEFECT8_TECHNICAL_CLOSURE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L67",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
