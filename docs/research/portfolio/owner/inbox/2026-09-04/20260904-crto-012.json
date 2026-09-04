@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-012",
+  "created": "2026-09-04T14:58:54-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受A02限定时间内未复现故障的技术结果",
+  "context": "一次原路径诊断85秒内正常完成，有完整输出，没有堆栈。接受原卡片的未复现故障分支；此前失败和未知原因仍保留，不自动变成A01科学成功。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受原技术分支并保留来源",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把原失败任务改称成功",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "再训练以寻找崩溃",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整任务与输出符合A02正常完成分支，额外运行不能替代对现有证据的正确定位。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L228",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
