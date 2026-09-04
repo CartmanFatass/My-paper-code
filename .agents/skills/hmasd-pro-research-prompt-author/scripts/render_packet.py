@@ -11,6 +11,8 @@ from pathlib import Path
 
 
 DISPATCH_MODE = "CREATE_ON_DEMAND"
+OPERATOR_MODEL = "gpt-5.6-luna"
+OPERATOR_THINKING = "medium"
 ROLE_SET = {"portfolio", "em"}
 WORKFLOW_NODE_ROLES = {
     "em_innovator": "em",
@@ -498,6 +500,8 @@ GITHUB_EVIDENCE_MANIFEST
         "dispatch_required": True,
         "dispatch_once": True,
         "dispatch_state": "PENDING_CREATE",
+        "operator_model": OPERATOR_MODEL,
+        "operator_thinking": OPERATOR_THINKING,
         "operator_thread_id": None,
         "operator_thread_url": None,
         "return_receipt_thread_id": packet["source_thread_id"],
@@ -506,7 +510,8 @@ GITHUB_EVIDENCE_MANIFEST
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
             "Call create_thread exactly once for a new transport operator in the same local "
-            "HMASD project with operator_bootstrap_prompt. Record the returned canonical threadId "
+            f"HMASD project with model={OPERATOR_MODEL}, thinking={OPERATOR_THINKING}, and "
+            "operator_bootstrap_prompt. Record the returned canonical threadId "
             "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
             f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
         ),
@@ -541,6 +546,8 @@ GITHUB_EVIDENCE_MANIFEST
         "files": ["PROMPT_BODY.md", "HANDOFF.json"],
         "dispatch_mode": DISPATCH_MODE,
         "dispatch_state": "PENDING_CREATE",
+        "operator_model": OPERATOR_MODEL,
+        "operator_thinking": OPERATOR_THINKING,
         "operator_thread_id": None,
         "operator_thread_url": None,
         "return_receipt_thread_id": packet["source_thread_id"],
@@ -558,7 +565,8 @@ GITHUB_EVIDENCE_MANIFEST
         "decision_authority": packet["decision_authority"],
         "dispatch_instruction": (
             "Call create_thread exactly once for a new transport operator in the same local "
-            "HMASD project with operator_bootstrap_prompt. Record the returned canonical threadId "
+            f"HMASD project with model={OPERATOR_MODEL}, thinking={OPERATOR_THINKING}, and "
+            "operator_bootstrap_prompt. Record the returned canonical threadId "
             "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
             f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
         ),

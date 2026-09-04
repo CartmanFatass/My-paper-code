@@ -161,11 +161,13 @@ that its contents were retrieved.
    conversation ID, and `decision_authority=pro_final`. Routing metadata is written
    only to `HANDOFF.json` and its `transport_request` object.
 3. Resolve the current saved HMASD project, then call `create_thread` exactly once
-   with that project's `local` environment and the emitted
-   `operator_bootstrap_prompt`. The bootstrap tells the new operator to wait; it
-   must not inspect or execute the handoff yet. Do not reuse a prior operator. If
-   creation returns only a `clientThreadId`, do not record it as the operator UUID
-   and do not create another task; wait for the canonical `threadId`.
+   with that project's `local` environment, `model=gpt-5.6-luna`,
+   `thinking=medium`, and the emitted `operator_bootstrap_prompt`. Pass the model
+   and thinking fields explicitly; never inherit them from the creator task. The
+   bootstrap tells the new operator to wait; it must not inspect or execute the
+   handoff yet. Do not reuse a prior operator. If creation returns only a
+   `clientThreadId`, do not record it as the operator UUID and do not create another
+   task; wait for the canonical `threadId`.
 4. Immediately record that canonical ID with
    `scripts/render_packet.py --record-operator-thread-id <threadId>
    --handoff-path <absolute HANDOFF.json path>`. This updates both the top-level
@@ -185,7 +187,9 @@ The author must not perform any of those operations.
 
 The created operator's UUID is a runtime fact for this handoff only. It must not be
 reused as a global target, enter `conversation_binding_key`, or replace
-`source_thread_id` as the return destination.
+`source_thread_id` as the return destination. After its terminal receipt is delivered
+and its heartbeat is retired, the creator archives that operator task; every later
+handoff creates a fresh Luna/medium operator.
 
 ## Handoff and transport boundary
 
