@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T14:34:50Z`
+Snapshot: `2026-09-04T14:42:02Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -28,9 +28,21 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `7`; running `0`; valid complete cells `6`; quarantined attempts
+  independently admitted/launched `8`; running `1`; valid complete cells `6`; quarantined attempts
   `1`; unfulfilled cells `12`, of which `11` have never launched. The earlier local refusal is
   preserved as evidence but was not itself an admission or launch.
+
+## Active detached process at the snapshot
+
+| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | current state |
+| --- | --- | --- | ---: | --- | --- |
+| `medium_d0_seed1` attempt 02 | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_02`; wrapper PID `21170` | `2026-09-04T14:41:52.389634Z` | `15434072064 / 15434072064` | pushed SHA `ee7fdae278cede2200ab8c356c4f238cce980edb`; runner SHA-256 `4c4a002868378bd7fba8125e1d36d633101c5dd07a703f33a3d3e524d4fd9ba1` | `running`; tmux active |
+
+Attempt 02 runs in detached worktree
+`/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_02`. Its one supervised payload ran the
+fresh remote `admit-memory` immediately before the exact full runner and passed both 4 GiB floors.
+It is a new attempt at the repaired SHA, not a resume, salvage, migration, or duplicate of attempt
+01. No other new invocation was admitted by this receipt.
 
 ## Terminal remote attempt at the snapshot
 
@@ -105,7 +117,7 @@ output has been created for that invocation.
 | small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 3 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
-| medium | D0 | 1 | `k=5`, `c=inf` | `QUARANTINED_ATTEMPT_01 / REPAIR_HOLD`; task `fsd_e3_medium_d0_seed1_20260904_01`; local refusal retained separately |
+| medium | D0 | 1 | `k=5`, `c=inf` | `RUNNING_REMOTE_ATTEMPT_02`; task `fsd_e3_medium_d0_seed1_20260904_02`; attempt 01 quarantined and local refusal retained separately |
 | medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | medium | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -121,14 +133,14 @@ output has been created for that invocation.
 ## Resume boundary
 
 Attempt 01 is terminal and must not be resent, resumed, migrated, postprocessed into acceptance, or
-used to alter the frozen sequence. The next action is the smallest outcome-blind portability fix
-and an end-to-end publication-path test. Only after those bytes are accepted, explicitly
-committed, and pushed may a new detached remote task make one fresh `medium_d0_seed1` attempt at the
-new exact SHA. Its one payload must combine its own fresh 4 GiB remote preflight and exact runner
-under the remote supervisor. After a valid complete replacement, continue with its D2 pair and
-then the remaining medium and large row pairs as actual resource and dependency state allow. This
-is an operational order, not a batch admission. A refused admission creates no learner state; the
-quarantined attempt creates no scientific result.
+used to alter the frozen sequence. Observe only attempt 02 to terminal without sending another
+payload for this cell or admitting another E3 cell concurrently in this ordinary sequence. On
+terminal success, fetch its request-specific root, verify copied bytes and every frozen output
+receipt, then continue with its D2 pair and the remaining medium and large row pairs as actual
+resource and dependency state allow. Any next payload requires its own fresh 4 GiB remote
+preflight immediately before its exact runner. This is an operational order, not a batch
+admission. A refused admission creates no learner state; the quarantined attempt creates no
+scientific result.
 
 Do not apply the frozen E3 result rule until all 18 required invocations are validly complete. Do
 not revive E2b, retune `c`, or use any intermediate return to alter the remaining launch set.
