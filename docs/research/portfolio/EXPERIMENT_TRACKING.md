@@ -1,15 +1,19 @@
 # HMASD experiment tracking
 
-Canonical observer: `/root/tracker_lxh_experiments` (temporary default runtime, explicit Luna/xhigh;
-the installed `hmasd-experiment-tracker` custom role was not confirmed loaded).
-Root's fresh post-sync named-role probe returned `unknown agent_type`. Native sibling send and
-idle-wake roundtrips are verified between the FSD and CRTO custom DMs; this temporary runtime
-still has no outbound collaboration tools.
+Canonical observer: `/root/tracker_tl_experiments` (resumed `hmasd-experiment-tracker` role,
+`gpt-5.6-terra` / `low`). Native outbound `collaboration.send_message` and
+`collaboration.followup_task` are exposed in this runtime. The previous temporary default/Luna
+observer's capability limitation is historical only; its terminal records remain below.
 The identity of a tracked process is `(execution node, accepted agent-task handle)`. This table
 records process facts and routing only; CM retains technical acceptance and the DM retains
 scientific intake. Terminal rows stay here until the owning DM has the evidence needed for intake.
 
-Observation snapshot: `2026-09-04T22:48:04Z`, using the configured `hmasd-wsl-node` supervisor.
+Observation snapshot: `2026-09-04T23:39:35Z`, using the configured `hmasd-wsl-node` supervisor.
+Authoritative `agent-task list` contains no live task: every listed task is `finished`, `failed`,
+or the historical stopped environment task, and every `TMUX_ACTIVE` field is `no`. These are
+terminal historical handles, not candidates for restart. The direct FSD tracker/DM ACK roundtrip
+(`tracker-resume-fsd-20260904-01`) completed at recovery: FSD received the tracker adoption
+request and the tracker received and acknowledged FSD's receipt. No new FSD handle was accepted.
 
 ## Accepted work and terminal handoffs
 
