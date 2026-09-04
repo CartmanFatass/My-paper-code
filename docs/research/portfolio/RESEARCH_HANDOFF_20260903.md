@@ -6,6 +6,14 @@ implementers finish and add their parts, then pause research. This file is the e
 Codex session resuming the work. Sections marked *pending* are filled when the named implementer
 reports.
 
+> **Current-status overlay (owner, 2026-09-04).** The owner lifted the handoff pause and directed
+> automatic research to resume. The repository now has no fixed research-concurrency cap, Direction
+> Managers run at `gpt-5.6-sol` / `max`, and every Pro handoff creates an on-demand Transport
+> operator whose single receipt returns to its creator `source_thread_id`. Root `AGENTS.md`,
+> `PORTFOLIO.md`, and `decisions/2026-09-04-dm-max-and-unbounded-research-capacity.md` are the current
+> control plane. Statements below about the old pause, two-direction cap, deleted Claude heartbeat,
+> or fixed receipt routing describe the historical handoff state only.
+
 ## 1. Read in this order
 
 1. `AGENTS.md` on `main` (merged 2026-09-03 20:26 PDT as `824b499aa`; §3 below). It carries
@@ -23,25 +31,28 @@ reports.
    `docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md` with the owner's answers in
    `docs/research/portfolio/decisions/2026-09-03-control-plane-revision.md`.
 
-## 2. Standing owner instructions in force
+## 2. Standing owner instructions at the handoff
 
-- Two implementer sessions and two result-bearing runs at a time (13:33 PDT).
+- Historical capacity at the handoff: two implementer sessions and two result-bearing runs at a
+  time (13:33 PDT). Superseded by the 2026-09-04 unbounded-capacity decision cited above.
 - Unattended delegation (13:58 PDT, `decisions/2026-09-03-unattended-delegation.md`): at every
   object-tier decision list options and a recommendation, select the recommended one, record
   `Owner-delegated decision (unattended, 2026-09-03 instruction): (x)`. Portfolio-tier decisions,
   frozen scientific meaning, and irreversible actions are excluded.
-- Research is **paused** after the two running implementers finish (20:14 PDT). Do not start the
-  queued objects in §4 until the owner lifts the pause.
-- Pro nodes are the decider at the direction and portfolio tiers when Codex drives (owner
-  clarification 18:07 and 18:12 PDT, review §9–10): Pro performs better and runs on an
-  independent quota; object-tier decisions stay local for latency.
+- Historical pause: research was to pause after the two running implementers finished (20:14 PDT).
+  The owner lifted this pause on 2026-09-04; the queued objects in §4 may now advance subject to the
+  current decision ladder and resource admission.
+- Direction Pro nodes decide direction-tier questions. The persistent Portfolio Pro node produces
+  a Portfolio proposal, and the owner ratifies it before any Portfolio action takes effect.
+  Object-tier decisions stay local for latency and follow the unattended delegation.
 
 ## 3. Control plane: state at handoff
 
 Merged on `main`:
 - `ac5cd664e` the owner's 09-03 09:57 edits (outsource → `spawn_agent`; transport receipt to the
-  fixed return session; CM/DM effort `high`; routine implementer Luna/max) with the prompt-author
-  wording aligned and four transport tests rewritten (`tests/skills`: 76 passed).
+  then-current return session; CM/DM effort `high`; routine implementer Luna/max) with the
+  prompt-author wording aligned and four transport tests rewritten (`tests/skills`: 76 passed).
+  The routing and DM-effort portions are superseded by the current-status overlay above.
 - `502896633` third-party skills to `.agents/third_party/`; empty authority directories and
   `.codex/runtime/` removed; external-review README pointer fixed.
 - Records: `decisions/2026-09-03-control-plane-revision.md`, review
@@ -59,12 +70,13 @@ Merged on `main`:
   script-prefix column; `pytest.ini`; scope self-check in CM, implementers, reviewer, critic, DM
   and the outsource template; `scope:` commit trailer rule; `.gitignore` rewrite (visible by
   default; run output anchored at the root). `656bdffea` keeps
-  `max_concurrent_threads_per_session = 40`: the two-direction cap is a rule applied by Root and
-  the DMs (`AGENTS.md` §5), not a thread limit, because a DM → CM → implementer chain needs
-  several threads.
-- `f368aedb5` `PORTFOLIO.md` capacity line as the two numbers, with pointers to the scope spec
-  and the audit ledger. `docs/research/portfolio/audit/` is created on the first delegated
-  decision. `.codex/config.toml` is still to be re-checked against the Codex version in use.
+  `max_concurrent_threads_per_session = 40`: at the handoff the two-direction cap was a Root/DM
+  policy rather than a thread limit. That research cap is now superseded; the runtime thread limit
+  remains an implementation constraint because a DM → CM → implementer chain needs several
+  threads.
+- `f368aedb5` recorded the then-current two-number capacity line in `PORTFOLIO.md`, with pointers to
+  the scope spec and audit ledger. The capacity line is now `UNBOUNDED` at the repository-policy
+  layer. `docs/research/portfolio/audit/` is created on the first delegated decision.
 - Housekeeping (Opus agent, reported 21:04 PDT): `fd0cb36e6` seven analysis scripts →
   `tools/analysis/` (six left in `scripts/` because a frozen document or a candidate cites them
   by path; 55 tests pass); `a1ce91797` user-profile interpreter paths removed from six scripts
@@ -85,7 +97,7 @@ Merged on `main`:
 
 ## 4. Research: state per direction
 
-| Direction | State at handoff | Next (held by the pause) |
+| Direction | State at handoff | Next recorded at handoff |
 | --- | --- | --- |
 | flexible_skill_duration | E2 interruption-cost sweep running detached on branch `worktree-agent-a88287f2315bb99a0` (launch sha `92243f413`; branch tip `8329f4e4a`, pushed, declares the study's two §4 items: the two-slot launch queue with a JSON state file and the `wait_for_pids` liveness probe, both instruction-named). 15-run plan after the `k = 1` arm was dropped (XII.6), re-projected 10.3 h (XII.7). **Sweep complete: 15 of 15** summaries at 07:24Z (last run `d2_c2p0` seed 2); no run failed; the queue has exited. Seed-1 D0 ordering so far matches the exact references; `d0_k5` across-seed range 3.1e-5 against `d0_k40`'s 0.086. The implementer was stopped by the session limit at 21:04 PDT; queue state and per-run summaries are in the study root (§5). Result document and Part XIII intake **not written** | Codex: when 15 summaries exist, write the E2 result document from the study root in the E0 format (rule from the E2 card applied verbatim; the §5 return test with `s` from the D2 arm's own across-seed range), intake it, merge the branch, then decide E2b/E3 (per-arm cost projection rule, `AGENTS.md` §5) |
 | capability_bound_semantic_currentness | B1 attempts r01–r05 all refused by orchestration guards or, for r05, a memory-admission floor crossed at the replay phase (E.6–E.12); guard repairs `2e5bc4695`, `09acf0539`, `0b629eff4`, `4679e8dc8`. E.8 item 3 follow-up committed as `81dfbd72e` (E.13): four more formal-path defects repaired with ten pinning tests, preflight refusal reasons surfaced, offline coverage of the whole publication path; `84 passed, 1 deselected`. Unfinished: the unified end-to-end profile is red at `test_b1_metrics_production.py:699`; incident-root path budget drafted only; **defect 8** (durable cap 512 MiB versus a 685 MiB formal artifact) held for the owner with three options and a recommendation in E.13. Working tree clean for CBSC paths | Owner decision on defect 8 → unified profile green (short `--basetemp`) → `b1_scout_r06` at that sha, detached, short incident root (E.11 decision (b)). Do not launch r06 before the cap decision; it would stop after ~40 min of replay. The object is unconsumed |
@@ -108,12 +120,13 @@ admissions would change "immediately before each invocation"); a Git LFS or size
   stash or reset; push immediately; on this host push outside the Codex sandbox.
 - Machine: 29.8 GiB RAM; two E2 runs take about 2.5 GB each; the 4 GiB floor is crossed when a
   third result-bearing process joins them (E.11).
-- The Claude session's heartbeat cron (`23,53 * * * *`, job `bb7c8b33`) is deleted when the pause
-  begins; after that nothing resumes a stopped agent, and the detached E2 queue does not need one.
+- The Claude session's heartbeat cron (`23,53 * * * *`, job `bb7c8b33`) was deleted when the pause
+  began. It is superseded by the active Codex heartbeat `hmasd-research-loop`, which resumes the
+  creator Root task every 30 minutes.
 - E2 monitor: `bw9qgennf` reports each completed run; study root
   `.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E2_20260903/`.
 
-## 6. Open at the pause (2026-09-03 23:58 PDT; research paused, heartbeat cron deleted)
+## 6. Open at the historical pause (2026-09-03 23:58 PDT)
 
 - E2 sweep complete (15 of 15, 07:24Z) → result document, Part XIII intake, merge → §4 row. Not started.
 - Layout standard items not yet applied (owner-approved, `decisions/2026-09-03-control-plane-revision.md`):

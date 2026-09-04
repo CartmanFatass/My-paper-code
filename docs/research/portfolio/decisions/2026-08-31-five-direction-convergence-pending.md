@@ -13,7 +13,8 @@ subsequent documentation work in progress.
 
 ## Transport blocker transcription
 
-The fixed Transport task supplied
+The per-request Transport task used by the then-current control plane supplied (current handoffs
+use an on-demand operator and the creator-session return route)
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/portfolio-five-direction-convergence-20260831-01/SEND_UNCERTAIN_FACTS.json`.
 The durable facts needed for recovery are:
 

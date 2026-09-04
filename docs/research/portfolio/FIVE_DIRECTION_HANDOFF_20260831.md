@@ -28,7 +28,8 @@ Root authored request `portfolio-five-direction-convergence-20260831-01` at pinn
 manifest contained the Portfolio snapshot, five `DIRECTION.md` files, and five final convergence
 intakes.
 
-The fixed Transport task returned:
+The per-request Transport task used by the then-current control plane returned (current handoffs
+instead create an on-demand operator and route one receipt to their creator session):
 
 ```text
 state=SEND_UNCERTAIN
