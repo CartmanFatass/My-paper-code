@@ -32,11 +32,14 @@ seed/host/budget rung. It does not show that episode history has no native decis
 learners may share an optimization or objective bias, and no competent history-conditioned policy
 has yet established return headroom over `DET-CF`.
 
-The next discriminator is direction-tier: either open a headroom-first A/RECON family comparing a
-competent same-information history-conditioned policy with `DET-CF`, open a learner-competence
-ladder, or park/close the algorithm line. The DM recommends headroom first and has escalated this
-choice to `em:acvc:convergence`; no further ACVC launch is authorized locally while that decision
-is pending.
+The persistent Convergence node formed the final direction decision
+`PRO_FINAL / RECAST_HEADROOM_FIRST`. Do not reopen B1 or R01 and do not start a learner ladder.
+The admitted next discriminator is `ACVC-A-RECON-HISTORY-HEADROOM-R01`: an exact finite-horizon
+Bayes/dynamic-program policy using only receiver-online information against unchanged `DET-CF`.
+Its purpose is to establish whether the host contains at least `0.25` native-return headroom with
+positive-probability legal-action disagreement and the existing harm envelope. A learner object is
+admitted only by the frozen `HR-A` mapping; `HR-B`, `HR-C`, and `HR-D` instead constrain or park
+the line as registered.
 
 ## Evidence set
 
@@ -50,8 +53,13 @@ The accepted evidence set is:
 - `docs/research/candidates/acvc/ACVC_UNCERTAIN_DELAYED_VETO_R01_RESULT_EVIDENCE_20260904.md`
 - `docs/research/candidates/acvc/ACVC_UNCERTAIN_DELAYED_VETO_R01_RESULT_20260904.json`
 - `docs/research/candidates/acvc/ACVC_UNCERTAIN_DELAYED_VETO_R01_INTAKE_20260904.md`
+- `docs/research/candidates/acvc/external/2026-09-04-acvc-b2c-convergence-01/RESPONSE.md`
+- `docs/research/candidates/acvc/ACVC_B2C_CONVERGENCE_DECISION_INTAKE_20260904.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_R01_SCIENCE_CARD_20260904.md`
+
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. The current synthesis above
-is bounded by the cited accepted result records; it does not turn a one-seed negative into a
-direction lifecycle decision.
+is bounded by the cited accepted result records and the complete archived Convergence decision.
+The direction-local recast does not alter Portfolio lifecycle, priority, ownership, capacity, or
+investment.
