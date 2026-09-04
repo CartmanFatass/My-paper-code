@@ -4,6 +4,12 @@ Date: 2026-09-04
 
 Decision: `FINAL / OWNER_DIRECT / ROOT_INTEGRATED`
 
+Supersession: current-rules item 5 was replaced later on 2026-09-04 by
+`2026-09-04-singleton-transport.md`; it is retained below only as the decision state at this
+record's timestamp. New handoffs reuse the configured Luna/xhigh singleton and do not create a
+task. Result-compute placement is additionally governed by
+`2026-09-04-remote-first-compute-routing.md`.
+
 ## Provenance
 
 The owner instructed Root to clear the identified specification drift and then resume automatic

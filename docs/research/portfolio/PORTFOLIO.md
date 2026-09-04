@@ -1,8 +1,9 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T12:21:00Z
+Updated at: 2026-09-04T13:41:57Z
 Owner: Root
 Investment capacity: `UNBOUNDED` at the repository-policy layer for both concurrent implementer sessions and concurrent result-bearing runs (owner, 2026-09-04; runtime availability and the per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
+Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 Evidence standard: `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
 Engineering scope: `docs/project/ENGINEERING_SCOPE_SPEC.md`
@@ -11,6 +12,7 @@ Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
 Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-transport.md`
+Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
@@ -39,9 +41,9 @@ provenance, but result polarity never transfers into an accepting direction.
 | roster_consistent_latent_exploration | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE persistent-common versus containing FLEX finite-budget churn recovery, absorbing VSP-06 partner memory. Information-necessity claims remain structurally closed. |
 | scope_1s | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE real learner/trainer/evaluator wrapper for the exact Q16 carrier/current-only/deranged toy. Missing production authentication is not a toy-mechanism negative. |
 | semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-04T12:19:48Z | Reopened Convergence returned `PRO_FINAL=SPLIT_A_RECON_THEN_REOPEN_B`. The current D6 B card is `NOT_LAUNCHABLE_SECTION_11_4_METHOD_CONFLICT`; no B is authorized. Only `SCDMP-D6-DURATION-ACTION-RELEVANCE-A01` is frozen: two source trajectories plus 1,152 native candidate missions, exact integer `W/R7/R13`, seven ordered A branches, and no model, optimizer, or learner. Its pure-A CM chain is active. |
-| ucope | ACTIVE | HIGH | ROOT | 2026-09-04T12:12:52Z | `UCOPE-A-RECON-THREE-WITNESS-ROOT-TARGET-VS-ROOT-FIT-AUDIT-R01` is implemented and technically accepted with an exact 185.481 s projection. Its first fresh official preflight measured 3,893,518,336 bytes physical/effective available, below 4 GiB, so no runner, process, result root, polarity, or object consumption exists. The unchanged sole invocation waits at a clean resource boundary for a new receipt after meaningful pressure relief. |
+| ucope | ACTIVE | HIGH | ROOT | 2026-09-04T12:12:52Z | `UCOPE-A-RECON-THREE-WITNESS-ROOT-TARGET-VS-ROOT-FIT-AUDIT-R01` is implemented and technically accepted with an exact 185.481 s projection. Its first local official preflight measured 3,893,518,336 bytes physical/effective available, below 4 GiB, so no runner, process, result root, polarity, or object consumption exists. The unchanged sole invocation is at a clean boundary and is now eligible for a distinct fresh preflight on the remote-first node; the local refusal does not admit that run. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Continue typed/generic/reset B3 after writer-competence repair, retaining stale-load routing controls and complete curves. Earlier calibration nonidentification is a B diagnostic. |
-| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-04T12:17:19Z | The memory-bounded K1024 R02 implementation is accepted and its single result-blind saturation pilot is `PILOT_ADMITTED`, with positive RSS and a fixed live bound below 2 GiB. Two distinct official result preflights then measured 3,986,948,096 and 4,101,500,928 bytes physical/effective available, both below 4 GiB. No scientific process or result exists; the admitted unchanged object waits without rapid polling until a meaningful memory-pressure change. |
+| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-04T12:17:19Z | The memory-bounded K1024 R02 implementation is accepted and its single result-blind saturation pilot is `PILOT_ADMITTED`, with positive RSS and a fixed live bound below 2 GiB. Two distinct local official result preflights then measured 3,986,948,096 and 4,101,500,928 bytes physical/effective available, both below 4 GiB. No scientific process or result exists; the admitted unchanged object is at a clean boundary and is now eligible for a distinct fresh preflight on the remote-first node. |
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
@@ -88,15 +90,17 @@ capacity decision. Detailed current evidence and non-goals are recorded in
 The repository-level research-capacity ceiling is removed. Independent ACTIVE directions advance
 concurrently subject only to actual runtime availability, path ownership, frozen scientific
 contracts, runner-owned per-arm cost limits, and a fresh memory admission for every result-bearing
-invocation.
+invocation. New portable result-bearing work is placed on the configured `wsl_4070` node first;
+local placement is not the default and follows only the recorded portability/fallback boundary.
 
 Current clean boundaries are:
 
 - FRRIE root 001 is live after fresh admission; FSD has three valid E3 invocations and three more
   running. Both remain outcome-blind until their frozen aggregate rules become applicable.
 - UCOPE and VNFC are technically admitted but have no scientific invocation because their latest
-  official preflights were below the 4 GiB floor. Both wait at clean, recoverable resource boundaries
-  without rapid polling; a later invocation requires a distinct fresh passing receipt.
+  local official preflights were below the 4 GiB floor. Those receipts do not admit a remote run.
+  Their next portable invocation is routed to `wsl_4070` and requires a distinct fresh passing
+  receipt there; neither direction gains scientific polarity from the placement change.
 - ACVC and SCDMP have consumed their parent-routed Pro decisions and are in bounded CM chains for
   exact non-learner A/RECON objects. EGRCR is direction-level `PARKED`. EOCIV remains at its already
   dispatched Convergence boundary. All later handoffs reuse the project Luna/xhigh Transport

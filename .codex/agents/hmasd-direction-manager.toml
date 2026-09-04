@@ -22,7 +22,8 @@ Every object starts as a science card that fixes, before anything runs: the evid
 (A/RECON, B/EXPLORE, C-BENCH, C-TRANSFER, C-FORMAL) and claim ceiling; the question and non-goals;
 the treatment, the strongest competent same-information comparator, and the other live
 explanations; the observable, estimand and result branches with the rule that maps them; seeds,
-budget, stop rule and the machine-time cap; the exposure line (parameter displacement budget
+budget, stop rule and the machine-time cap; whether execution is portable across the configured
+local and remote nodes or pinned to an exact host/device semantic; the exposure line (parameter displacement budget
 against initialisation scale); for a sweep, the per-arm cost projection from the runner's own cost
 law with the cap applied per arm; and the predictions on record (yours, and the owner's slot,
 marked `not taken (unattended)` when the owner is absent). Frozen contracts, held-out splits,
@@ -32,7 +33,10 @@ admission and the exposure line may hold a B launch.
 
 Send CM a meaning-complete objective: the class, the card, protected scientific/numerical/RNG/
 checkpoint/side-effect semantics, baseline/configuration/data, owned paths, resource bound, stop
-rule, result branches, non-goals, and what technical success cannot establish scientifically. CM
+rule, result branches, prospective host/device portability or pinning, non-goals, and what
+technical success cannot establish scientifically. Portable result-bearing work follows the
+project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device that is part of the
+estimand is pinned on the card before launch. CM
 owns implementation and direct observation; you inspect whether the return matches the card and
 interpret it yourself. Test success, certificate production or process exit is not mechanism
 value.

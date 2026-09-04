@@ -22,8 +22,11 @@ Analysis, plotting and screening scripts belong in `tools/analysis/`, not here.
   the repository root from `__file__`.
 - Immediately before every result-bearing run, resume or queue element:
   `python scripts/hmasd_resource_preflight.py admit-memory --out <receipt.json>` (both physical and
-  effective available memory ≥ 4 GiB, `--out` required). That is the only admission; no other
-  receipt, witness or guard is added (scope spec §4).
+  effective available memory ≥ 4 GiB, `--out` required) on the actual execution node. The receipt
+  admits only the adjacent invocation in the same execution context. On the configured remote route
+  it is joined to the exact runner by `&&` inside the same `agent-task` command, whose task facts
+  record the execution host. That is the only admission; no other receipt, witness or guard is
+  added (scope spec §4).
 - A queue is a list of commands run in order with one preflight each; it is not a scheduler.
 - Before a sweep, the runner reports its cost law (wall time per unit of the swept quantity) so
   the card can project cost per arm; the machine-time cap applies per arm.

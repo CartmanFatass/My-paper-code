@@ -15,6 +15,15 @@ reports.
 > `PORTFOLIO.md`, and `decisions/2026-09-04-dm-max-and-unbounded-research-capacity.md` are the current
 > control plane. Statements below about the old pause, two-direction cap, deleted Claude heartbeat,
 > or fixed receipt routing describe the historical handoff state only.
+>
+> **Remote-compute overlay (owner, 2026-09-04).** New portable result-bearing invocations are
+> remote-first on the `wsl_4070` node declared in `.codex/hmasd-compute.toml`; local Windows remains
+> the control plane and prospectively authorized fallback. The node uses exact-sha detached
+> worktrees, `/home/wu/.venvs/hmasd`, one remote 4 GiB admission per invocation, and the existing
+> `/usr/local/bin/agent-task` supervisor. Credentials remain outside the repository. Existing live
+> local processes are not migrated. The controlling owner decision is
+> `decisions/2026-09-04-remote-first-compute-routing.md`. No Codex restart is required; new tasks
+> load the updated project configuration.
 
 ## 1. Read in this order
 

@@ -33,6 +33,12 @@ priority, lifecycle, exclusion, fusion, separation, or investment decision. If s
 force a choice among directions rather than a queue in which all remain admitted, use the
 Portfolio decision path below.
 
+Execution placement is remote-first under `.codex/hmasd-compute.toml`. Route new portable
+result-bearing invocations to the enabled remote node while the local machine retains the control
+plane and acts as a prospectively authorized fallback. This is capacity routing, not evidence or a
+direction-priority signal. A node change must preserve the card's declared host/device semantics,
+must occur before question-relevant output, and requires a fresh admission on the destination.
+
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
 exact support census, bit identity, transfer evidence, or deployment assurance that its current
@@ -79,11 +85,11 @@ and includes the current Portfolio snapshot, this evidence specification, the se
 class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
 project-shared registry creates or binds the provider conversation on first use under the stable
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each handoff creates one Transport operator task on demand, records its per-handoff runtime
-`operator_thread_id`, and sends exactly one completion or terminal-blocker receipt back to the
-handoff author's declared `parent_thread_id`. The operator is created explicitly with
-`model=gpt-5.6-luna` and `thinking=high`. An operator task ID is never a
-provider-conversation binding or a global dispatch target.
+Each handoff reuses the one project Transport task declared in `.codex/hmasd-transport.toml` and
+sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
+`parent_thread_id`. Dispatch passes `model=gpt-5.6-luna` and `thinking=xhigh` explicitly; it never
+calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
+never a provider-conversation binding or receipt destination.
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
 the Portfolio proposal. Root records it with its evidence and bounded rationale in a decision record
