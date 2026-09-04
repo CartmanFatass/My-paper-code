@@ -24,6 +24,7 @@ from transport_contract import (  # noqa: E402
     packet_id,
     receipt_has_delivery_evidence,
     registry_lock,
+    validate_parent_thread_id,
     validate_provider_context_reset_evidence,
     validate_source_thread_id,
 )
@@ -79,7 +80,7 @@ def _clear_active_legacy_routing(record: dict) -> None:
 
 
 def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
-    """Add creator-route fields and migrate only definitely unsent legacy receipts."""
+    """Add parent-route fields and migrate only definitely unsent legacy receipts."""
 
     handle = _tab_handle(args.tab_id) or _tab_handle(record.get("tab_id"))
     logical_packet_id = record.get("packet_id") or getattr(args, "packet_id", None) or packet_id(args.request_id, args.direction_id)
@@ -90,6 +91,13 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     source_thread_id = existing_source_thread_id or incoming_source_thread_id
     if source_thread_id is not None:
         source_thread_id = validate_source_thread_id(source_thread_id)
+    incoming_parent_thread_id = getattr(args, "parent_thread_id", None)
+    existing_parent_thread_id = record.get("parent_thread_id")
+    if existing_parent_thread_id and incoming_parent_thread_id and existing_parent_thread_id != incoming_parent_thread_id:
+        raise ValueError("parent_thread_id conflicts with the existing request parent")
+    parent_thread_id = existing_parent_thread_id or incoming_parent_thread_id
+    if parent_thread_id is not None:
+        parent_thread_id = validate_parent_thread_id(parent_thread_id)
     incoming_operator_thread_id = getattr(args, "operator_thread_id", None)
     existing_operator_thread_id = record.get("operator_thread_id")
     if existing_operator_thread_id and incoming_operator_thread_id and existing_operator_thread_id != incoming_operator_thread_id:
@@ -120,8 +128,9 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     )
     record["source_thread_id"] = source_thread_id
     record["creator_thread_id"] = source_thread_id
+    record["parent_thread_id"] = parent_thread_id
     record["operator_thread_id"] = operator_thread_id
-    record["return_route"] = "CREATOR_SESSION"
+    record["return_route"] = "PARENT_SESSION" if parent_thread_id else None
     record.setdefault("tab_id", handle)
     record.setdefault("tab_lifecycle", "OPEN" if handle else "HANDOFF")
     record.setdefault(
@@ -154,10 +163,10 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
         for key in tuple(receipt):
             if key.startswith("fallback_") or key == "primary_destination_thread_id":
                 receipt.pop(key, None)
-        receipt.update(_new_return_receipt(source_thread_id))
+        receipt.update(_new_return_receipt(source_thread_id, parent_thread_id))
         if existing_message_key:
             receipt["message_key"] = existing_message_key
-        if source_thread_id is not None:
+        if parent_thread_id is not None:
             receipt.pop("receipt_state", None)
             receipt.pop("error", None)
         record["return_receipt"] = receipt
@@ -176,32 +185,38 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     return record
 
 
-def _new_return_receipt(source_thread_id: str | None) -> dict:
+def _new_return_receipt(source_thread_id: str | None, parent_thread_id: str | None) -> dict:
     receipt = {
-        "required": source_thread_id is not None,
+        "required": parent_thread_id is not None,
         "source_thread_id": source_thread_id,
-        "destination_thread_id": source_thread_id,
-        "status": "PENDING" if source_thread_id else "BLOCKED",
+        "parent_thread_id": parent_thread_id,
+        "destination_thread_id": parent_thread_id,
+        "status": "PENDING" if parent_thread_id else "BLOCKED",
         "attempt_count": 0,
         "message_key": None,
         "retry_allowed": False,
-        "routing_mode": "CREATOR_SESSION",
+        "routing_mode": "PARENT_SESSION",
         "fallback_enabled": False,
     }
-    if source_thread_id is None:
+    if parent_thread_id is None:
         receipt["receipt_state"] = "RETURN_RECEIPT_BLOCKED"
-        receipt["error"] = "RETURN_RECEIPT_BLOCKED: legacy request has no source_thread_id"
+        receipt["error"] = "RETURN_RECEIPT_BLOCKED: legacy request has no parent_thread_id"
     return receipt
 
 
-def _request_routing(args: argparse.Namespace) -> tuple[str | None, str | None, dict]:
+def _request_routing(args: argparse.Namespace) -> tuple[str | None, str | None, str | None, dict]:
     source_thread_id = getattr(args, "source_thread_id", None)
     if source_thread_id is not None:
         source_thread_id = validate_source_thread_id(source_thread_id)
+    parent_thread_id = getattr(args, "parent_thread_id", None)
+    if parent_thread_id is not None:
+        parent_thread_id = validate_parent_thread_id(parent_thread_id)
     operator_thread_id = getattr(args, "operator_thread_id", None)
     if operator_thread_id is not None:
         operator_thread_id = validate_source_thread_id(operator_thread_id)
-    return source_thread_id, operator_thread_id, _new_return_receipt(source_thread_id)
+    return source_thread_id, parent_thread_id, operator_thread_id, _new_return_receipt(
+        source_thread_id, parent_thread_id
+    )
 
 
 def _atomic_write(path: Path, value: dict) -> None:
@@ -246,6 +261,7 @@ def _archived_round(record: dict) -> dict:
         "state": record.get("state"),
         "source_thread_id": record.get("source_thread_id"),
         "creator_thread_id": record.get("creator_thread_id") or record.get("source_thread_id"),
+        "parent_thread_id": record.get("parent_thread_id"),
         "operator_thread_id": record.get("operator_thread_id"),
         "return_route": record.get("return_route"),
         "conversation_id": record.get("conversation_id"),
@@ -424,6 +440,7 @@ def prepare_context_reset(
                 },
                 "source_thread_id": None,
                 "creator_thread_id": None,
+                "parent_thread_id": None,
                 "operator_thread_id": None,
                 "return_route": None,
                 "return_receipt": None,
@@ -490,6 +507,11 @@ def bind(args: argparse.Namespace) -> int:
             {"bound": False, "state": "SOURCE_THREAD_UNVERIFIED", "error": "canonical binding requires source_thread_id"},
             2,
         )
+    if getattr(args, "parent_thread_id", None) is None and args.workflow_node != "legacy":
+        return _result(
+            {"bound": False, "state": "PARENT_THREAD_UNVERIFIED", "error": "canonical binding requires parent_thread_id"},
+            2,
+        )
     if getattr(args, "operator_thread_id", None) is None and args.workflow_node != "legacy":
         return _result(
             {"bound": False, "state": "OPERATOR_THREAD_UNVERIFIED", "error": "canonical binding requires operator_thread_id"},
@@ -498,6 +520,8 @@ def bind(args: argparse.Namespace) -> int:
     try:
         if args.source_thread_id is not None:
             args.source_thread_id = validate_source_thread_id(args.source_thread_id)
+        if getattr(args, "parent_thread_id", None) is not None:
+            args.parent_thread_id = validate_parent_thread_id(args.parent_thread_id)
         if getattr(args, "operator_thread_id", None) is not None:
             args.operator_thread_id = validate_source_thread_id(args.operator_thread_id)
     except ValueError as exc:
@@ -513,7 +537,7 @@ def bind(args: argparse.Namespace) -> int:
     for item in reference_files:
         if not isinstance(item, dict):
             return _result({"bound": False, "state": "REFERENCE_METADATA_INVALID", "error": "each reference metadata entry must be an object"}, 2)
-    source_thread_id, operator_thread_id, return_receipt = _request_routing(args)
+    source_thread_id, parent_thread_id, operator_thread_id, return_receipt = _request_routing(args)
 
     registry_path = args.registry.resolve()
     with registry_lock(registry_path):
@@ -610,8 +634,9 @@ def bind(args: argparse.Namespace) -> int:
                     },
                     "source_thread_id": source_thread_id,
                     "creator_thread_id": source_thread_id,
+                    "parent_thread_id": parent_thread_id,
                     "operator_thread_id": operator_thread_id,
-                    "return_route": "CREATOR_SESSION",
+                    "return_route": "PARENT_SESSION" if parent_thread_id else None,
                     "tab_id": tab_handle,
                     "tab_lifecycle": "OPEN" if tab_handle else "HANDOFF",
                     "tab_lease": {
@@ -737,8 +762,9 @@ def bind(args: argparse.Namespace) -> int:
                         },
                         "source_thread_id": source_thread_id,
                         "creator_thread_id": source_thread_id,
+                        "parent_thread_id": parent_thread_id,
                         "operator_thread_id": operator_thread_id,
-                        "return_route": "CREATOR_SESSION",
+                        "return_route": "PARENT_SESSION" if parent_thread_id else None,
                         "tab_id": tab_handle,
                         "tab_lifecycle": "OPEN" if tab_handle else "HANDOFF",
                         "tab_lease": {
@@ -833,8 +859,9 @@ def bind(args: argparse.Namespace) -> int:
             "request_id": args.request_id,
             "source_thread_id": source_thread_id,
             "creator_thread_id": source_thread_id,
+            "parent_thread_id": parent_thread_id,
             "operator_thread_id": operator_thread_id,
-            "return_route": "CREATOR_SESSION",
+            "return_route": "PARENT_SESSION" if parent_thread_id else None,
             "visible_model": args.visible_model,
             "underlying_model": args.underlying_model,
             "thinking_effort": args.thinking_effort,
@@ -891,6 +918,7 @@ def main() -> int:
     parser.add_argument("--prompt-sha256", required=True)
     parser.add_argument("--reference-files-json", default="[]")
     parser.add_argument("--source-thread-id", default=None)
+    parser.add_argument("--parent-thread-id", default=None)
     parser.add_argument("--operator-thread-id", default=None)
     parser.add_argument("--reset-invalid-provider-context", action="store_true")
     parser.add_argument("--provider-context-reset-evidence-json", default=None)

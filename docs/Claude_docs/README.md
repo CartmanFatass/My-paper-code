@@ -88,6 +88,25 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `OWNER_CONSOLE_DESIGN_20260904.md` — design and build record of the owner console
+  (`tools/owner_console/`): Codex writes one JSON item per thing needing the owner's eye, the
+  local page renders them as grading cards (options with ★ recommended and ✓ executed, free
+  comment), replies regenerate `owner/reviews/<date>.md` for Codex and are committed by pathspec;
+  the item and review schemas, the four decisions taken with the owner, what was built and what
+  is deferred.
+- `OWNER_INTERVENTION_WORKFLOW_PLAN_20260904.md` — the plan behind the owner-intervention decision
+  of 2026-09-04: intervene in selection pressure and output format, never in execution; the
+  owner's four answers (Chinese brief per valid result, soft veto for new cards, no prediction
+  wait, MEI 5%/25% and recast budget one, no hard stops added); every file changed and why; how a
+  decision flows through ledger, digest, prediction queue and briefs; the owner's rhythm; what
+  Codex does first; what is still open.
+- `MARL_EXPLORATION_GUIDANCE_20260904.md` — alignment draft for the owner and Codex Root on how to
+  explore MARL algorithms after the 2026-09-04 portfolio snapshot: the observed outcome pattern
+  (`NEITHER`, comparator weak, generic wins, narrow positives), a three-part diagnosis, five
+  principles (headroom before mechanism with a minimum effect of interest, comparator as a
+  first-class object, invest only where a MARL structure binds, fewer directions on the production
+  host, three readings written before the run), six actions with tiers, a proposed ACTIVE/PARK
+  disposition for all 22 directions, and the [DECIDE]/[ASK] items.
 - `CODEBASE_LAYOUT_STANDARD_20260903.md` — alignment draft for the directory standard: nine
   principles-to-application sections (target layout, candidate directories, tests, scripts,
   scratch/worktrees/branches/git hygiene, `.gitignore` rewrite, layered `AGENTS.md` with one-line

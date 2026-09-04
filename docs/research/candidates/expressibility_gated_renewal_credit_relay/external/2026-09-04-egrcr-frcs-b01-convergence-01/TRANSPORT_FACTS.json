@@ -1,0 +1,56 @@
+{
+  "schema_version": 3,
+  "request_id": "2026-09-04-egrcr-frcs-b01-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:expressibility_gated_renewal_credit_relay:convergence",
+  "direction_id": "expressibility_gated_renewal_credit_relay",
+  "direction_ids": [
+    "expressibility_gated_renewal_credit_relay"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a9ab103-03a8-83e8-9f93-5ad067d05399",
+  "provider_url": "https://chatgpt.com/c/6a9ab103-03a8-83e8-9f93-5ad067d05399",
+  "operator_thread_id": "01a06c3d-6f06-7013-8d92-297c1d8d25c8",
+  "source_thread_id": "01a06c13-a87d-7a30-90cd-206a51254eb8",
+  "parent_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+  "tab_id": null,
+  "visible_model": "Pro",
+  "underlying_model": "GPT-5.6 Sol",
+  "thinking_effort": "5/5",
+  "source_mode": "single_body_attachment",
+  "prompt_sha256": "db755a53e09ecc0c8d3a6e870c3f6a22f470d08497ab035f9d29e0d8c43b063d",
+  "companion_prompt_sha256": "25d60fd10fe5a3a21b24d47d37beee201512694a835c187c3619200518170de1",
+  "provider_filename": "PROMPT_BODY(20260904-115211).md",
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": true,
+    "provider_filename": "PROMPT_BODY(20260904-115211).md",
+    "companion_prompt_exact": true
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "response_sha256": "38f8842dcffef8f98b8d39e3b9336cf54e585c187c7a1b836d3d7ec328c6a5b8",
+  "archive_status": "ARCHIVED",
+  "archive_paths": {
+    "prompt_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/expressibility_gated_renewal_credit_relay/2026-09-04-egrcr-frcs-b01-convergence-01--expressibility_gated_renewal_credit_relay--attempt-01/PROMPT_BODY.md",
+    "response_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/expressibility_gated_renewal_credit_relay/2026-09-04-egrcr-frcs-b01-convergence-01--expressibility_gated_renewal_credit_relay--attempt-01/RESPONSE.md",
+    "packet_manifest": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/expressibility_gated_renewal_credit_relay/2026-09-04-egrcr-frcs-b01-convergence-01--expressibility_gated_renewal_credit_relay--attempt-01/PACKET_MANIFEST.json",
+    "transport_fact_file": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/expressibility_gated_renewal_credit_relay/2026-09-04-egrcr-frcs-b01-convergence-01--expressibility_gated_renewal_credit_relay--attempt-01/TRANSPORT_FACTS.json"
+  },
+  "heartbeat_automation_id": "egrcr-frcs-b01-convergence-transport-wake-2026-09-04",
+  "heartbeat_status": "PAUSED",
+  "captured_at": "2026-09-04T12:03:20.835Z",
+  "heartbeat_retired_at": "2026-09-04T12:03:59.334Z",
+  "heartbeat_retirement_verified": true,
+  "receipt": {
+    "status": "SENT",
+    "delivery_status": "accepted",
+    "attempt_count": 1,
+    "destination_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+    "sent_at": "2026-09-04T12:04:30.729Z"
+  },
+  "tab_lifecycle": "CLOSED",
+  "closed_at": "2026-09-04T12:04:30.729Z"
+}

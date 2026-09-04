@@ -1,0 +1,35 @@
+{
+  "id": "20260904-crto-001",
+  "created": "2026-09-04T04:05:08-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "exact outcome-informed matched balanced panel",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T04:05:08-07:00). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "continue natural K8 address search",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "exact outcome-informed matched balanced panel",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "construct around the archived external tape first",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md#11-object-tier-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

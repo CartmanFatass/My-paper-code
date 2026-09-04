@@ -325,3 +325,58 @@ This is the direction-local Pro decision. It does not itself perform the later
 `portfolio:cross_direction` lifecycle mutation, which remains a separate Root-owned authority event
 and must not be conflated with this direction's scientific ceiling or no-successor judgment. See
 `CRTO_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.
+
+## Empirical-standard Portfolio reopening — 2026-09-01
+
+The later final Portfolio Pro decision
+`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`
+keeps this direction `ACTIVE/MEDIUM` and opens one scientifically distinct B/EXPLORE successor:
+an explicitly outcome-informed KEEP/REPLAN-balanced population comparing RAW, true residual, and
+deranged residual at matched short/long exposure. This Portfolio action supersedes the older
+`NO_SUCCESSOR_PRESENTLY_JUSTIFIED` lifecycle consequence; it does not overturn the natural K8
+first-boundary closure or transfer any residual polarity from the zero-KEEP support objects.
+
+The first rung is frozen in
+`CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`. It selects exact high-cost rows from the
+already observed `2026083192` census in matched event/onset pairs, labels the selection
+outcome-informed, and makes no natural-K8 prevalence claim. The strongest comparator is the
+same-information RAW packet, the treatment is the aligned calibrated residual, and a within-cell
+packet derangement tests generic preprocessing.
+
+## Balanced-residual B01-R1 result — 2026-09-04
+
+The one-seed B/EXPLORE rung completed validly and produced the frozen first-matching branch
+`BR-E — COMPARATOR_WEAK`. All `48` TRAIN and `16` EVAL rows reproduced, both split-specific
+derangements had zero fixed points, learner and evaluation counts were nonzero, every LONG
+trajectory moved, and all path/invocation caps passed. Peak RSS was unavailable, so the result is
+valid with `resources_unmeasured`.
+
+RAW-LONG passed KEEP competence (`8/8` exact, zero mean regret) but failed REPLAN competence
+(`4/8` exact and mean regret `0.0066464624`, versus `>=6/8` and `<=0.005`). Its equal-side regret
+was `0.0033232312`. TRUE_RESIDUAL equal-side regret was `0.0150498235` at SHORT and `0.0092213257`
+at LONG, while RAW was `0.0065818810` and `0.0033232312`. These are retained direct observations,
+but the registered BR-E branch permits no competent-comparator residual polarity.
+
+The bounded accepted conclusion is therefore a learnability diagnostic on this exact
+outcome-informed population and initialization. It does not estimate natural K8 prevalence,
+establish residual information or function-class value, show a stable effect, or support policy,
+MARL, transfer, safety, or deployment claims. See
+`CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md` and
+`CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md`.
+
+The strongest surviving alternative is checkpoint-phase comparator instability: RAW changed from
+REPLAN-perfect/KEEP-weak at SHORT to KEEP-perfect/REPLAN-weak at LONG under batch `32` over `48`
+cyclic rows. The next selected discriminator is a separate RAW-only A/RECON trace at every update
+`252..264`, with no residual-effect claim. It must receive its own cost projection, exposure line,
+card, and fresh admission before launch.
+
+Separately, two direct current-source reproductions did not reproduce the archived Pro
+lower-domain construction's previous option, legal action set, or material advantage. The archive
+remains historical external provenance rather than a current locally reproduced support fact; this
+does not alter the B01 result or reopen the consumed natural-support objects.
+
+The accepted evidence set additionally includes:
+
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md`

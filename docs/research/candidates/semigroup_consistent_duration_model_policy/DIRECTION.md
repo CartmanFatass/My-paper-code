@@ -408,3 +408,77 @@ zero-access quarantine of the old named run are unchanged. The provenance is
 `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 decisions 1 and 7 and
 `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. This entry adds no
 order-value observation and consumes no scientific object.
+
+## D6 cross-k Q-sharing recast — 2026-09-04
+
+The complete archived response from
+`em:semigroup_consistent_duration_model_policy:convergence` formed the direction-tier decision
+`FINAL_DECISION=RECAST_D6` with `DECISION_FORMED=true`. Its exact SHA-256 is
+`95c60538bdf36b0cd78e68ef91ecd20548b7d68e473c7a5f609d27c3e2b473b7`. The B01 line remains
+stopped: `RUN-02A` and `RUN-02B` are not reopened, the valid base branch stays bounded by uniform
+swapped-arm absorption, the graded diagnostic stays A/RECON and FCEOV `.3` stays an exact consumed
+nonpass.
+
+The admitted independent mechanism is D6: one duration-conditioned value head shares learning
+across `k`, compared with a same-information D8 menu whose duration-specific heads do not share.
+The decision-relevant quantity is the samples or updates needed for competent native composite
+action choice, measured by normalized native decision regret and an action-consequence witness;
+prediction accuracy alone cannot activate a result branch. This is distinct from flexible-skill-
+duration D2, which changes mid-segment interruption authority.
+
+The strongest support is the clean D6/D8 treatment-null pair, a native host where duration can
+change consequences and a feasible B-scale learner/evaluator path. The strongest contradiction is
+that the nearest survivable B01 neighbour had only a `0.00045788` mean gap, with one zero and one
+negative state. The strongest live alternative is ordinary regularization/easier optimization or
+negative transfer, not meaningful duration structure.
+
+The finite claim ceiling is B/EXPLORE on the exact declared host, six fresh states,
+`{0,10,12}×{7,13}` actions, common data, three seeds and fixed budget. No general superiority,
+unseen-duration transfer, semigroup invariance, D2 value, safety or deployment claim is available.
+The next discriminator is `SCDMP-D6-CROSS-K-Q-SHARING-B01`, frozen in
+`SCDMP_D6_CROSS_K_Q_SHARING_B01_SCIENCE_CARD_20260904.md`. No experiment has run; launch remains
+held for the runner's numeric per-arm cost projection.
+
+The provider response completed and archived normally. Its one return receipt failed only because
+direct app-server input is unavailable to Multi-Agent v2 subagents; Root supplied the verified
+archive directly, and the DM consumed it without retry. Exact intake, archive and transport facts
+are in `SCDMP_D6_RECAST_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-recast-convergence-01/`. Portfolio lifecycle and investment remain
+outside this direction-local decision.
+
+## D6 section-11 class correction — 2026-09-04
+
+The engineering dissent reopened the same persistent convergence node before any command ran. Its
+complete archived response formed `DECISION_FORMED=true` and
+`FINAL_DECISION=SPLIT_A_RECON_THEN_REOPEN_B`; exact response SHA-256 is
+`a98efe074a2bd0ec714e5495209555b4745d724a9894c2f8c72669c40bdb8621`.
+
+Historical `RECAST_D6` remains the mechanism-level conclusion, but
+`SCDMP-D6-CROSS-K-Q-SHARING-B01` now has status
+`NOT_LAUNCHABLE_SECTION_11_4_METHOD_CONFLICT`. Its 1,152-mission pre-model census was a fifth B
+launch hold that could terminate with zero learner activity, contrary to controlling evidence spec
+§11.4. It may not be repaired in place, and no B learner object is authorized. No smoke, census,
+dataset, model, optimizer, evaluator or result existed when the conflict was corrected.
+
+The only admitted next discriminator is
+`SCDMP-D6-DURATION-ACTION-RELEVANCE-A01`, A/RECON: exact row `TAU_LEAK=.92`, `Z_LIMIT=.25`; source
+streams `9011/k7` and `9013/k13`; targets `64/160/256`; six HR/RH public twins;
+`{0,10,12}×{7,13}` actions; evaluation domain `9029`; sixteen tapes per state; two source
+trajectories and 1,152 candidate-evaluation missions. Exact integer quantities `W`, `R7` and
+`R13` distinguish two-sided, one-sided, action-
+relevant/no-material-cross-k and zero-span panels. There is no learner or parameter exposure.
+
+The strongest support is that this exact native-return census can change whether an action-linked
+D6 learner question exists, while §11.4 forbids hiding it as a B prerequisite. The strongest
+contradiction is the delay and transparent outcome dependence introduced by sequencing A before
+any B. A positive A branch establishes only finite host/population/action relevance; an adverse
+branch closes only the exact panel. Ordinary regularization/easier optimization and heterogeneous
+state-by-duration negative transfer remain live explanations for any later B.
+
+After valid A intake, reopen `em:semigroup_consistent_duration_model_policy:convergence` to decide
+whether `W>0`, `R7=1`, `R13=1` justify a newly named three-seed D6-versus-D8 B with fresh tapes and
+no census launch gate, or whether one prospectively different host/population object or parking is
+supported. Exact intake, card and archive are
+`SCDMP_D6_SECTION11_REOPEN_CONVERGENCE_INTAKE_20260904.md`,
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_SCIENCE_CARD_20260904.md`, and
+`external/2026-09-04-scdmp-d6-section11-reopen-convergence-02/`. Portfolio state is unchanged.

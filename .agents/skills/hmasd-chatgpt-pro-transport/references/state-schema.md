@@ -9,12 +9,12 @@ has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
 handles, heartbeat wakeups, and executor turns remain ephemeral observations. The
-registry is shared across all on-demand operators; an operator UUID never selects a
-provider conversation.
+registry is shared across all requests handled by the project Transport singleton;
+its operator UUID never selects a provider conversation.
 
 ```json
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "conversation_binding_key": "em:finite_resource_relational_inductive_efficiency:innovator",
   "workflow_node": "em_innovator",
   "direction_id": "finite_resource_relational_inductive_efficiency",
@@ -24,8 +24,12 @@ provider conversation.
   "packet_id": "portfolio-frrie-r02-exact-law-20260831-01--finite_resource_relational_inductive_efficiency",
   "source_thread_id": "01a...",
   "creator_thread_id": "01a...",
+  "parent_thread_id": "01p...",
   "operator_thread_id": "01b...",
-  "return_route": "CREATOR_SESSION",
+  "operator_mode": "PROJECT_SINGLETON",
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "xhigh",
+  "return_route": "PARENT_SESSION",
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
   "state": "WAITING_GENERATION",
@@ -102,14 +106,15 @@ provider conversation.
   "return_receipt": {
     "required": true,
     "source_thread_id": "01a...",
-    "destination_thread_id": "01a...",
+    "parent_thread_id": "01p...",
+    "destination_thread_id": "01p...",
     "status": "PENDING",
     "message_key": null,
     "attempt_count": 0,
     "retry_allowed": false,
     "delivery_mode": "bounded_single_attempt",
     "return_control_after_attempt": true,
-    "routing_mode": "CREATOR_SESSION",
+    "routing_mode": "PARENT_SESSION",
     "fallback_enabled": false,
     "delivery_status": null,
     "error": null
@@ -140,15 +145,16 @@ already be `ARCHIVED`. Move its request/packet/archive/receipt facts into
 is `BINDING_BUSY`, not permission to create another conversation.
 
 Each `request_history` entry preserves that round's `source_thread_id`,
-`creator_thread_id`, `operator_thread_id`, and `return_route` alongside its archive
-and receipt. A new round may use a different operator and creator while retaining
-the binding's exact provider conversation. Completed old fixed-route receipts remain
+`creator_thread_id`, `parent_thread_id`, `operator_thread_id`, and `return_route` alongside its archive
+and receipt. A singleton-era round reuses the configured operator but may use a
+different creator while retaining the binding's exact provider conversation;
+historical entries may preserve old per-handoff operator IDs. Completed old fixed-route receipts remain
 historical evidence and are not rewritten or resent. An old `PENDING` or `BLOCKED`
-receipt may migrate to `CREATOR_SESSION` only when `attempt_count=0`, no send is
+receipt may migrate to `PARENT_SESSION` only when `attempt_count=0`, no send is
 recorded on either its primary or fallback route, and that same round has a valid
-`source_thread_id`; its deterministic message key is preserved. Any primary/fallback
+`parent_thread_id`; its deterministic message key is preserved. Any primary/fallback
 attempt count, delivery status, sent timestamp, or terminal delivery state freezes
-the old receipt as historical evidence. A record without a source is marked
+the old receipt as historical evidence. A record without a parent task is marked
 ineligible for an automatic receipt and is never sent to an old destination.
 
 ## Contaminated provider-context reset
@@ -209,7 +215,7 @@ failures. Terminal or attention states are `SEND_UNCERTAIN`, `SENT_INPUT_MISMATC
 `UPLOAD_READY_SEND_DISABLED`, `MODEL_UNVERIFIED`, `DIRECTION_UNVERIFIED`,
 `ARCHIVE_CONFLICT`, `RECOVERY_URL_MISMATCH`, `MONITOR_IDENTITY_MISMATCH`,
 `RETURN_RECEIPT_UNCERTAIN`, and `BLOCKED`. `RETURN_RECEIPT_BLOCKED` is a receipt
-substate for a missing creator route; it does not replace an `ARCHIVED` scientific
+substate for a missing parent route; it does not replace an `ARCHIVED` scientific
 transport state.
 `BOUND` is accepted only as a legacy result label; new records start at
 `DIRECTION_VERIFIED`. A timeout or browser exception is never converted into a new
@@ -277,27 +283,28 @@ provider URL; the loaded URL and direction must be re-verified before observatio
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-Each on-demand operator owns one handoff and does not multiplex later directions.
-Retain its heartbeat while that record requires a wake or recoverable timeout. After
-the record is durably archived, or is an
+The singleton may own several request records, including provider generations that
+overlap in time, but every tab lease, heartbeat, outbox entry, archive and
+idempotency key remains request-scoped. Retain a request's heartbeat while that
+record requires a wake or recoverable timeout. After the record is durably archived, or is an
 explicit terminal/blocker state with no scheduled recovery, update the existing
 automation to `PAUSED` exactly once, verify the disabled status, and persist
 `retired_at` plus `retirement_verified=true`. Heartbeat retirement and tab closure
-are separate facts.
+are separate facts. Never archive the singleton task as part of request cleanup.
 
 ## Automatic return outbox
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
-using `send_message_to_thread`. The deterministic `message_key` remains
+using `send_message_to_thread` exactly once on the validated parent task. The deterministic `message_key` remains
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
 from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the exact
-creator destination, timestamp, attempt count, delivery status, and error.
-`destination_thread_id` must equal the validated `source_thread_id`,
-`routing_mode` is `CREATOR_SESSION`, and `fallback_enabled` is false.
+parent destination, timestamp, attempt count, delivery status, and error.
+`destination_thread_id` must equal the validated `parent_thread_id`,
+`routing_mode` is `PARENT_SESSION`, and `fallback_enabled` is false.
 
 An uncertain delivery or rejection is terminal for that outbox entry and is never
 retried, rerouted, or duplicated. Terminal blockers without an archive use
-`stage_blocker_receipt` with the same creator-session rule. If no valid source is
+`stage_blocker_receipt` with the same parent-session rule. If no valid parent is
 available, no outbox message is staged: the receipt records
 `required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
 `destination_thread_id=null`, and no message key. Legacy transport may still

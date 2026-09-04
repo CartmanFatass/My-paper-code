@@ -32,6 +32,12 @@ PyTorch JIT loader, keyed by a source hash, so the first test touching it is slo
 direction's contract before switching device: CPU is sometimes scientifically invalid, not merely
 slower (`docs/project/PROBLEM_CACHE.md` P1b).
 
+Execution placement inherits the repository's `.codex/hmasd-compute.toml` remote-first policy.
+The card fixes host/device portability before launch; a Windows-only native backend, a device-bound
+numerical contract, or a different RNG/device semantic is a real pin, not a reason to silently
+change the experiment. Portable committed attempts use an exact-sha remote worktree and the
+destination node's fresh admission; existing live local attempts are never moved or duplicated.
+
 ## Directory map (2026-09-03)
 
 Status: `current` = the directory `RESEARCH_MAP.md` links for a live direction; `prior` = a

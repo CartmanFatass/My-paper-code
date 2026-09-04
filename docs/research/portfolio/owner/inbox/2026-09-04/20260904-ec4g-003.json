@@ -1,0 +1,35 @@
+{
+  "id": "20260904-ec4g-003",
+  "created": "2026-09-04T07:06:11-07:00",
+  "direction": "ec4g_r1",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(d) no local successor or B; return the baseline deficit and MARL-structure field to Root",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:06:11-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (d). Reversible: yes.",
+  "options": [
+    {
+      "key": "d",
+      "label": "stop cleanly and report the missing tuned baseline to Root",
+      "consequence": ""
+    },
+    {
+      "key": "e",
+      "label": "compute only an exact upper despite no subtractable baseline",
+      "consequence": ""
+    },
+    {
+      "key": "f",
+      "label": "repair/relaunch B1 or start a new B",
+      "consequence": ""
+    }
+  ],
+  "recommended": "d",
+  "auto_applied": "d",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/ec4g_r1/EC4G_CURRENT_HOST_HEADROOM_A_RECON_INTAKE_20260904.md#decision-2--next-local-rung-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

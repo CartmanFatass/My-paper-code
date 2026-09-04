@@ -1,0 +1,116 @@
+{
+  "baseline_set": "scenario_1",
+  "status": "INCOMPLETE_EXPOSURE_ONLY",
+  "claim_ceiling": "B_EXPLORE_INTEGRITY_AND_EXPOSURE_ONLY",
+  "performance_comparison_authorized": false,
+  "new_result_operation_launched": false,
+  "host": {
+    "class": "envs.pettingzoo.scenario1.UAVBaseStationEnv",
+    "n_uavs": 6,
+    "n_users": 50,
+    "episode_length": 500,
+    "rollout_length": 500,
+    "num_envs": 16,
+    "training_lane_seed_rule": "arm_seed+rank",
+    "evaluation_lanes": 8,
+    "evaluation_seeds": [10000, 10001, 10002, 10003, 10004, 10005, 10006, 10007]
+  },
+  "existing_runner": {
+    "path": "scripts/run_flexible_skill_duration_e0.py",
+    "run_manifest_commits": {
+      "seed_1": "9a8cd9011f42848d6643cda5d912461ee851739b",
+      "seed_2": "fbe2c9d1723d1645ebbf70a3bb8b313f68ed1951"
+    },
+    "tracked_runner_commit_after_rebase": "619f4b4cdbf39ad5ffd7162105737297a3f603d7",
+    "runner_blob_at_tracked_and_seed_2_commits": "fb215bd8f46c2d354e7901f4bdce8c01d32ab892",
+    "rollouts": 10,
+    "threads": 4,
+    "eval_interval": 5,
+    "probe_seed": 20260902,
+    "probes_per_rollout": 512,
+    "argv_shape": [
+      "scripts/run_flexible_skill_duration_e0.py",
+      "--arm", "<off|d0>",
+      "--seed", "<1|2>",
+      "--rollouts", "10",
+      "--num-envs", "16",
+      "--threads", "4",
+      "--n-uavs", "6",
+      "--n-users", "50",
+      "--episode-length", "500",
+      "--rollout-length", "500",
+      "--eval-interval", "5",
+      "--eval-lanes", "8",
+      "--eval-seed-base", "10000",
+      "--output-root", "<NEW_RUN_ROOT>"
+    ]
+  },
+  "existing_cells": [
+    {
+      "family": "HMASD_OFF",
+      "seed": 1,
+      "status": "VALID_EXPOSURE_ONLY",
+      "final_evaluation_return_counter": 22.648224557174537,
+      "coordinator_exposure_last": 0.05904587990125509
+    },
+    {
+      "family": "FAIR_D0_K10",
+      "seed": 1,
+      "status": "VALID_EXPOSURE_ONLY",
+      "final_evaluation_return_counter": 35.86302269262961,
+      "coordinator_exposure_last": 0.05692106996317533
+    },
+    {
+      "family": "HMASD_OFF",
+      "seed": 2,
+      "status": "VALID_EXPOSURE_ONLY",
+      "final_evaluation_return_counter": 32.34838244469445,
+      "coordinator_exposure_last": 0.056212268002235694
+    },
+    {
+      "family": "FAIR_D0_K10",
+      "seed": 2,
+      "status": "VALID_EXPOSURE_ONLY",
+      "final_evaluation_return_counter": 26.444298837324308,
+      "coordinator_exposure_last": 0.0625276086536763
+    }
+  ],
+  "probe_set": {
+    "source_family": "HMASD_OFF",
+    "source_seed": 1,
+    "rollouts": [1, 5, 10],
+    "row_count": 1536,
+    "content_sha256": "1b983ea98260a6b498fb0a01fb66d245fb4af105eb5dca43a0042d712afbf51c",
+    "tracked_sample": "docs/Claude_docs/experiments/E0_probe_set_sample_seed1.json"
+  },
+  "missing_families": {
+    "FLAT_MAPPO_STYLE": {
+      "implementation_switch": "hmasd.baselines.apply_algorithm_config(config, 'mappo')",
+      "exact_scenario_1_runner_exists": false,
+      "result_exists": false,
+      "note": "train_multiproc_config_1.py --scenario base constructs UAVRoutedRelayEnv, not UAVBaseStationEnv"
+    },
+    "TUNED_HMASD_AS_SHIPPED": {
+      "performance_result_exists": false
+    },
+    "D0_FIXED_K_SWEEP": {
+      "result_exists": false,
+      "existing_integrity_point_only": 10
+    }
+  },
+  "future_only_config": {
+    "families": ["HMASD_AS_SHIPPED", "FLAT_MAPPO_STYLE", "D0_FIXED_K_SWEEP"],
+    "paired_seeds": [1, 2],
+    "common_random_numbers_required_where_host_allows": true,
+    "applies_retroactively": false,
+    "requires_new_object_card": true,
+    "requires_most_expensive_arm_pilot_and_per_arm_cost_projection": true,
+    "remote_first": true,
+    "launch_authorized_by_this_file": false
+  },
+  "evidence": [
+    "docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_20260902.md",
+    "docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md",
+    "docs/Claude_docs/experiments/E0_probe_set_sample_seed1.json"
+  ]
+}

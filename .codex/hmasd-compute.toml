@@ -1,0 +1,58 @@
+schema_version = 1
+status = "active"
+routing_policy = "remote_first"
+control_plane_node = "local_windows"
+default_result_node = "wsl_4070"
+fallback_policy = "local_only_if_prospectively_portable_no_remote_process_and_freshly_admitted"
+
+[nodes.local_windows]
+role = "control_plane_and_fallback_compute"
+project_root = "C:/Projects/HMASD"
+python = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
+result_memory_floor_gib = 4
+
+[nodes.wsl_4070]
+role = "primary_result_and_heavy_compute"
+enabled = true
+transport = "ssh"
+ssh_target = "hmasd-wsl-node"
+host_identity = "LAPTOP-U9TDKC8A"
+os = "Ubuntu 24.04 on WSL2"
+repo_root = "/home/wu/projects/HMASD"
+worktree_root = "/home/wu/hmasd-worktrees"
+input_staging_root = "/home/wu/hmasd-inputs"
+python = "/home/wu/.venvs/hmasd/bin/python"
+network_shell = "zsh -lic"
+run_shell = "bash -lc"
+path_prefix = "/home/wu/.local/bin:/usr/lib/wsl/lib"
+task_supervisor = "/usr/local/bin/agent-task"
+gpu_probe = "/usr/lib/wsl/lib/nvidia-smi"
+gpu = "NVIDIA GeForce RTX 4070 Laptop GPU"
+gpu_memory_mib = 8188
+environment_verified_at = "2026-09-04T13:41:49Z"
+python_version = "3.10.21"
+numpy_version = "1.26.3"
+torch_version = "2.7.0+cu118"
+cuda_runtime = "11.8"
+artifact_transport = "scp"
+frozen_input_transport = "scp_with_declared_sha256"
+result_memory_floor_gib = 4
+sparse_checkout = [
+  "hmasd",
+  "ha_ctse_process",
+  "envs",
+  "environments",
+  "experiments",
+  "scripts",
+  "tools",
+  "tests",
+  "manifold_hmasd",
+]
+
+[invariants]
+credentials_in_repository = false
+remote_receipt_admits_local = false
+local_receipt_admits_remote = false
+migrate_live_processes = false
+allow_duplicate_launch = false
+control_plane_moves_remote = false

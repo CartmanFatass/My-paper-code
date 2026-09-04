@@ -10,10 +10,10 @@ Root owns Portfolio decisions. This is a method boundary, not an identity, appro
 system.
 
 Read the assignment, root AGENTS.md (sections 5 to 8), applicable direction/shared authority, current code and tests,
-runtime and Git state, and unrelated working-tree changes. Restate the requested observable or
+`.codex/hmasd-compute.toml`, runtime and Git state, and unrelated working-tree changes. Restate the requested observable or
 behavior, acceptance, non-goals, baseline/configuration/data/RNG contract, protected scientific/
 numerical/checkpoint/bit-identity/side-effect semantics, owned paths, resource bounds, output
-location, and stop condition.
+location, execution-node portability or pinning, and stop condition.
 
 If direct facts make the request contradictory or meaning-changing, return the concrete conflict
 to the requester. Do not silently replace a comparator, metric, seed law, endpoint, or
@@ -85,12 +85,26 @@ Run checks proportional to risk, beginning with the smallest focused test that c
 contract. Add observability only for a concrete corruption risk not already exposed by tests or the
 result. Report what each check establishes and what it cannot establish.
 
-For a material result-bearing operation, freeze exact argv, cwd, output root, resource bound, and
-stop condition first. Run scripts/hmasd_resource_preflight.py admit-memory immediately before
-the launch and use scripts/hmasd_run.py when it is the frozen entry point. Launch the assigned result operation once and
-follow that process to a terminal witness. Loss of observation is not permission to launch a
-duplicate. Admission estimates, missing dependencies, sentinel zeroes, or child exit alone do not
-prove runtime resource conformance.
+For a material result-bearing operation, freeze exact argv, cwd, output root, execution node,
+host/device portability boundary, resource bound, and stop condition first. Apply the project
+`remote_first` policy: use the enabled remote node for every portable new invocation; keep work
+local only for a prospectively pinned Windows/local/device semantic, an exact dependency or source
+surface the node cannot run, or a failed remote-node admission. Do not migrate a live local
+process. Prefer the same node for long portable builds, focused suites, and verification probes
+once their exact source bytes are committed; keep ordinary edits, short checks, and uncommitted work
+local. Commit and push the launch source bytes before remote preparation, then use a detached
+remote worktree at that exact sha. A frozen input artifact that is not Git-tracked may be copied
+only to the configured request-specific input staging root and must match the digest already fixed
+by the card or launch assignment; never use this path to transfer uncommitted source. Run
+scripts/hmasd_resource_preflight.py admit-memory on the actual
+execution node immediately before the launch and use scripts/hmasd_run.py when it is the frozen
+entry point. On the remote route, preflight and runner are one configured `agent-task` command
+joined by `&&`; the local preflight cannot admit it. Launch the assigned result operation once and
+follow that exact local handle or remote task id to a terminal witness. If remote acceptance is
+uncertain, inspect that task id instead of retrying. A local fallback requires no accepted remote
+process, a prospectively portable object, and a new local preflight. Loss of observation is not
+permission to launch a duplicate. Admission estimates, missing dependencies, sentinel zeroes, or
+child exit alone do not prove runtime resource conformance.
 
 Use an independent Reviewer child for a high-risk diff affecting shared core, scientific meaning,
 numerics, RNG, checkpoint compatibility, bit identity, or external effects. Give it the fixed

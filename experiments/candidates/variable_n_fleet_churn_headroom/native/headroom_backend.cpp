@@ -1,4 +1,5 @@
 #include <memory>
+#include <cstring>
 
 // Build the registered R09 implementation unchanged into this analysis DLL.
 // The adapter below only composes its public-law state and functions.
@@ -9,6 +10,9 @@ using namespace bpcr_general;
 
 constexpr int kPolicies = 3;
 constexpr int kDepths = 3;
+constexpr int kMaxCommands = 1961;
+
+using CommandScratch = std::array<GC, kMaxCommands>;
 
 struct HeadroomOutput {
     std::int32_t status, failed_rank, beam_width;
@@ -20,9 +24,27 @@ struct HeadroomOutput {
     std::int32_t bcrh_independent_enumerator_equal[6], bcrh_all_candidate_records_exact[6];
     std::int32_t bcrh_scorer_command[6][4], bcrh_checker_command[6][4];
     std::uint64_t bcrh_candidate_digest[6], bcrh_checker_digest[6];
+    GBcrhCandidateRecord bcrh_candidate_records[6][kMaxCommands];
     std::int64_t beam_states_before[kDepths], beam_legal_commands[kDepths];
     std::int64_t beam_expansions[kDepths], beam_states_retained[kDepths];
     std::int64_t beam_native_ticks[kDepths];
+    std::int64_t beam_current_nodes_high_water[kDepths];
+    std::int64_t beam_next_nodes_high_water[kDepths];
+    std::int64_t beam_transient_nodes_high_water[kDepths];
+    std::int64_t beam_live_nodes_high_water[kDepths];
+    std::int64_t beam_current_capacity_high_water[kDepths];
+    std::int64_t beam_next_capacity_high_water[kDepths];
+    std::int64_t beam_current_agent_capacity_high_water[kDepths];
+    std::int64_t beam_next_agent_capacity_high_water[kDepths];
+    std::int64_t beam_transient_agent_capacity_high_water[kDepths];
+    std::int64_t beam_current_owned_bytes_high_water[kDepths];
+    std::int64_t beam_next_owned_bytes_high_water[kDepths];
+    std::int64_t beam_transient_owned_bytes_high_water[kDepths];
+    std::int64_t beam_total_owned_bytes_high_water[kDepths];
+    std::int64_t beam_replacements[kDepths];
+    std::int64_t beam_enumerator_count_high_water[kDepths];
+    std::int64_t beam_fixed_enumerator_scratch_bytes;
+    std::int64_t beam_conservative_fixed_storage_allowance_bytes;
     std::int32_t persist_candidate_count, persist_sensitivity_agreement;
     std::int64_t persist_native_ticks, bcrh_native_ticks, terminal_completion_native_ticks;
 };
@@ -33,6 +55,142 @@ struct Node {
     std::array<int, 12> prefix{};
     Node() { prefix.fill(G_NULL); }
 };
+
+struct SelectorInput {
+    std::int64_t score;
+    std::int32_t prefix[12];
+};
+
+struct SelectorItem {
+    SelectorInput rank{};
+    std::int32_t source_index = 0;
+};
+
+struct SelectorBetter {
+    int prefix_size = 0;
+    bool operator()(const SelectorItem& a, const SelectorItem& b) const {
+        if (a.rank.score != b.rank.score) return a.rank.score > b.rank.score;
+        return std::lexicographical_compare(
+            a.rank.prefix, a.rank.prefix + prefix_size,
+            b.rank.prefix, b.rank.prefix + prefix_size
+        );
+    }
+};
+
+enum class InsertDisposition { Added, Rejected, Replaced };
+
+template <typename Item, typename Better>
+InsertDisposition fixed_top_k_insert(
+    std::vector<Item>& heap, Item&& candidate, std::size_t width,
+    const Better& better, std::int64_t& replacements
+) {
+    if (heap.size() < width) {
+        heap.push_back(std::move(candidate));
+        std::push_heap(heap.begin(), heap.end(), better);
+        return InsertDisposition::Added;
+    }
+    if (!better(candidate, heap.front())) return InsertDisposition::Rejected;
+    std::pop_heap(heap.begin(), heap.end(), better);
+    heap.back() = std::move(candidate);
+    std::push_heap(heap.begin(), heap.end(), better);
+    ++replacements;
+    return InsertDisposition::Replaced;
+}
+
+template <typename Item, typename Better>
+void finish_fixed_top_k(std::vector<Item>& heap, const Better& better) {
+    std::sort(heap.begin(), heap.end(), better);
+}
+
+std::size_t owned_bytes(
+    const std::vector<Node>& nodes, std::size_t total_agent_capacity
+) {
+    return nodes.capacity() * sizeof(Node) + total_agent_capacity * sizeof(GA);
+}
+
+std::size_t owned_bytes(const Node& node) {
+    return sizeof(Node) + node.state.a.capacity() * sizeof(GA);
+}
+
+void record_memory(
+    HeadroomOutput& output, int depth, const std::vector<Node>& current,
+    std::size_t current_agent_capacity, const std::vector<Node>& next,
+    std::size_t next_agent_capacity, const Node* transient
+) {
+    const auto transient_nodes = transient ? std::size_t{1} : std::size_t{0};
+    const auto transient_agents = transient ? transient->state.a.capacity() : std::size_t{0};
+    const auto current_bytes = owned_bytes(current, current_agent_capacity);
+    const auto next_bytes = owned_bytes(next, next_agent_capacity);
+    const auto transient_bytes = transient ? owned_bytes(*transient) : std::size_t{0};
+    const auto update = [](std::int64_t& target, std::size_t value) {
+        target = std::max(target, static_cast<std::int64_t>(value));
+    };
+    update(output.beam_current_nodes_high_water[depth], current.size());
+    update(output.beam_next_nodes_high_water[depth], next.size());
+    update(output.beam_transient_nodes_high_water[depth], transient_nodes);
+    update(output.beam_live_nodes_high_water[depth], current.size() + next.size() + transient_nodes);
+    update(output.beam_current_capacity_high_water[depth], current.capacity());
+    update(output.beam_next_capacity_high_water[depth], next.capacity());
+    update(output.beam_current_agent_capacity_high_water[depth], current_agent_capacity);
+    update(output.beam_next_agent_capacity_high_water[depth], next_agent_capacity);
+    update(output.beam_transient_agent_capacity_high_water[depth], transient_agents);
+    update(output.beam_current_owned_bytes_high_water[depth], current_bytes);
+    update(output.beam_next_owned_bytes_high_water[depth], next_bytes);
+    update(output.beam_transient_owned_bytes_high_water[depth], transient_bytes);
+    update(
+        output.beam_total_owned_bytes_high_water[depth],
+        current_bytes + next_bytes + transient_bytes
+    );
+}
+
+bool fixed_enumerate_rec(
+    const GS& state, int token, std::array<bool, 9>& used, GC& command,
+    CommandScratch& scratch, std::size_t& count
+) {
+    if (token == 4) {
+        if (count == scratch.size()) return false;
+        scratch[count++] = command;
+        return true;
+    }
+    int fixed = 0;
+    if (gfixed_token(state, token, fixed)) {
+        command.o[token] = fixed;
+        return fixed_enumerate_rec(state, token + 1, used, command, scratch, count);
+    }
+    command.o[token] = G_NULL;
+    if (!fixed_enumerate_rec(state, token + 1, used, command, scratch, count)) return false;
+    for (const auto& agent : state.a) {
+        if (!used[agent.rank] && !genroute(agent)) {
+            const auto legality = gcontingency(state, agent, token);
+            if (legality.second >= 0) {
+                used[agent.rank] = true;
+                command.o[token] = agent.rank;
+                if (!fixed_enumerate_rec(
+                    state, token + 1, used, command, scratch, count
+                )) return false;
+                used[agent.rank] = false;
+            }
+        }
+    }
+    return true;
+}
+
+bool fixed_enumerate(const GS& state, CommandScratch& scratch, std::size_t& count) {
+    count = 0;
+    GC command;
+    command.o.fill(G_NULL);
+    std::array<bool, 9> used{};
+    for (int token = 0; token < 4; ++token) {
+        int fixed = 0;
+        if (gfixed_token(state, token, fixed)) used[fixed] = true;
+    }
+    if (!fixed_enumerate_rec(state, 0, used, command, scratch, count)) return false;
+    std::sort(
+        scratch.begin(), scratch.begin() + count,
+        [](const GC& a, const GC& b) { return a.o < b.o; }
+    );
+    return true;
+}
 
 bool prefix_less(const Node& a, const Node& b, int commands) {
     return std::lexicographical_compare(
@@ -143,8 +301,10 @@ bool run_bcrh(const GEpisodeInput& input, const GS& initial, HeadroomOutput& out
         output.bcrh_candidate_digest[epoch] = facts->candidate_digest;
         output.bcrh_checker_digest[epoch] = facts->checker_digest;
         bool all_exact = true;
-        for (int index = 0; index < facts->candidate_count; ++index)
+        for (int index = 0; index < facts->candidate_count; ++index) {
             all_exact = all_exact && facts->records[index].exact_match;
+            output.bcrh_candidate_records[epoch][index] = facts->records[index];
+        }
         output.bcrh_all_candidate_records_exact[epoch] = all_exact;
         GC command;
         for (int token = 0; token < 4; ++token) {
@@ -220,51 +380,102 @@ bool run_persistent(const GEpisodeInput& input, const GS& initial, HeadroomOutpu
 }
 
 bool run_beam(const GEpisodeInput& input, const GS& initial, int width, HeadroomOutput& output) {
-    std::vector<Node> retained(1); retained[0].state = initial;
-    Node selected; bool selected_set = false;
+    std::vector<Node> retained;
+    std::vector<Node> next;
+    retained.reserve(static_cast<std::size_t>(width));
+    next.reserve(static_cast<std::size_t>(width));
+    retained.emplace_back();
+    retained[0].state = initial;
+    std::size_t retained_agent_capacity = retained[0].state.a.capacity();
+    std::size_t next_agent_capacity = 0;
+    CommandScratch commands{};
+    output.beam_fixed_enumerator_scratch_bytes = sizeof(commands);
+    output.beam_conservative_fixed_storage_allowance_bytes =
+        sizeof(commands) + sizeof(Node) + sizeof(GC) + sizeof(std::array<bool, 9>);
     for (int depth = 0; depth < 3; ++depth) {
         output.beam_states_before[depth] = static_cast<std::int64_t>(retained.size());
-        std::vector<Node> expanded;
-        if (depth < 2) expanded.reserve(retained.size() * 256);
+        next.clear();
+        next_agent_capacity = 0;
+        record_memory(
+            output, depth, retained, retained_agent_capacity,
+            next, next_agent_capacity, nullptr
+        );
+        const auto better = [depth](const Node& a, const Node& b) {
+            return a.state.af != b.state.af
+                ? a.state.af > b.state.af
+                : prefix_less(a, b, depth + 1);
+        };
         for (const Node& parent : retained) {
-            auto commands = genum(parent.state);
-            std::sort(commands.begin(), commands.end(), [](const GC& a, const GC& b) { return a.o < b.o; });
-            output.beam_legal_commands[depth] += static_cast<std::int64_t>(commands.size());
-            for (const GC& command : commands) {
+            std::size_t command_count = 0;
+            if (!fixed_enumerate(parent.state, commands, command_count)) return false;
+            output.beam_enumerator_count_high_water[depth] = std::max(
+                output.beam_enumerator_count_high_water[depth],
+                static_cast<std::int64_t>(command_count)
+            );
+            output.beam_legal_commands[depth] += static_cast<std::int64_t>(command_count);
+            for (std::size_t command_index = 0; command_index < command_count; ++command_index) {
+                const GC& command = commands[command_index];
                 Node child = parent;
                 for (int token = 0; token < 4; ++token) child.prefix[4 * depth + token] = command.o[token];
                 if (!advance(child.state, child.safety_violation, input, depth, command)) return false;
                 ++output.beam_expansions[depth]; output.beam_native_ticks[depth] += 20;
+                record_memory(
+                    output, depth, retained, retained_agent_capacity,
+                    next, next_agent_capacity, &child
+                );
+                const auto child_agent_capacity = child.state.a.capacity();
                 if (depth == 2) {
-                    if (!selected_set || ratio_better(child, selected, 3)) {
-                        selected = std::move(child); selected_set = true;
-                    }
+                    const auto final_better = [](const Node& a, const Node& b) {
+                        return ratio_better(a, b, 3);
+                    };
+                    const auto evicted_agent_capacity = next.empty()
+                        ? std::size_t{0} : next.front().state.a.capacity();
+                    const auto disposition = fixed_top_k_insert(
+                        next, std::move(child), 1, final_better,
+                        output.beam_replacements[depth]
+                    );
+                    if (disposition == InsertDisposition::Added)
+                        next_agent_capacity += child_agent_capacity;
+                    else if (disposition == InsertDisposition::Replaced)
+                        next_agent_capacity = next_agent_capacity
+                            - evicted_agent_capacity + child_agent_capacity;
                 } else {
-                    expanded.push_back(std::move(child));
+                    const auto evicted_agent_capacity = next.size() < static_cast<std::size_t>(width)
+                        ? std::size_t{0} : next.front().state.a.capacity();
+                    const auto disposition = fixed_top_k_insert(
+                        next, std::move(child), static_cast<std::size_t>(width),
+                        better, output.beam_replacements[depth]
+                    );
+                    if (disposition == InsertDisposition::Added)
+                        next_agent_capacity += child_agent_capacity;
+                    else if (disposition == InsertDisposition::Replaced)
+                        next_agent_capacity = next_agent_capacity
+                            - evicted_agent_capacity + child_agent_capacity;
                 }
+                record_memory(
+                    output, depth, retained, retained_agent_capacity,
+                    next, next_agent_capacity, nullptr
+                );
             }
         }
         if (depth < 2) {
-            auto better = [depth](const Node& a, const Node& b) {
-                return a.state.af != b.state.af ? a.state.af > b.state.af : prefix_less(a, b, depth + 1);
-            };
-            const std::size_t keep = std::min<std::size_t>(width, expanded.size());
-            if (keep < expanded.size()) std::nth_element(expanded.begin(), expanded.begin() + keep, expanded.end(), better);
-            expanded.resize(keep); std::sort(expanded.begin(), expanded.end(), better);
-            retained = std::move(expanded);
+            finish_fixed_top_k(next, better);
+            retained.swap(next);
+            std::swap(retained_agent_capacity, next_agent_capacity);
             output.beam_states_retained[depth] = static_cast<std::int64_t>(retained.size());
         } else {
-            output.beam_states_retained[depth] = selected_set ? 1 : 0;
+            output.beam_states_retained[depth] = next.empty() ? 0 : 1;
         }
     }
-    if (!selected_set) return false;
+    if (next.empty()) return false;
+    Node& selected = next.front();
     output.numerator[2] = selected.state.af; output.denominator[2] = selected.state.df;
     for (int index = 0; index < 12; ++index) output.commands[2][index] = selected.prefix[index];
     return complete_lexicographically(selected, input, 2, output);
 }
 
 int run(const GEpisodeInput& input, int width, HeadroomOutput& output) {
-    output = {};
+    std::memset(&output, 0, sizeof(output));
     output.beam_width = width;
     for (int policy = 0; policy < kPolicies; ++policy)
         for (int index = 0; index < 24; ++index) output.commands[policy][index] = G_NULL;
@@ -297,4 +508,36 @@ BPCR_EXPORT std::int32_t vnfc_headroom_run(
         output->status = 99;
         return 99;
     }
+}
+
+BPCR_EXPORT std::size_t vnfc_headroom_sizeof_selector_input() {
+    return sizeof(vnfc_headroom::SelectorInput);
+}
+
+BPCR_EXPORT std::int32_t vnfc_headroom_select_top_k(
+    const vnfc_headroom::SelectorInput* input, std::int32_t count,
+    std::int32_t width, std::int32_t prefix_size, std::int32_t* selected_indices,
+    std::int32_t* selected_count, std::int64_t* replacements
+) {
+    if (!input || !selected_indices || !selected_count || !replacements ||
+        count <= 0 || count > vnfc_headroom::kMaxCommands || width <= 0 ||
+        prefix_size <= 0 || prefix_size > 12) return 1;
+    const auto keep = static_cast<std::size_t>(std::min(count, width));
+    std::vector<vnfc_headroom::SelectorItem> retained;
+    retained.reserve(keep);
+    const vnfc_headroom::SelectorBetter better{prefix_size};
+    *replacements = 0;
+    for (int index = 0; index < count; ++index) {
+        vnfc_headroom::SelectorItem item{};
+        item.rank = input[index];
+        item.source_index = index;
+        vnfc_headroom::fixed_top_k_insert(
+            retained, std::move(item), keep, better, *replacements
+        );
+    }
+    vnfc_headroom::finish_fixed_top_k(retained, better);
+    *selected_count = static_cast<std::int32_t>(retained.size());
+    for (std::size_t index = 0; index < retained.size(); ++index)
+        selected_indices[index] = retained[index].source_index;
+    return 0;
 }
