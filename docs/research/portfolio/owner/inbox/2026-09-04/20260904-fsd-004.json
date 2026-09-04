@@ -1,0 +1,32 @@
+{
+  "id": "20260904-fsd-004",
+  "created": "2026-09-04T15:44:05-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "brief",
+  "title": "E3 本轮完成一格，安全停在下一格之前",
+  "context": "固定时钟第三种子回报0.40685，约为相应参考的95.9%；这里只报告本格。累计十一格有效、无运行、七格未启动。已按你的要求完成本轮收尾，保留下次恢复入口。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "完整对照结果已保存，后续配对与机制判断仍待完整 E3。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D0_SEED3_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-seed3-terminal-20260904",
+  "brief": "docs/research/portfolio/owner/briefs/flexible_skill_duration/2026-09-04_E3_medium_d0_seed3.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

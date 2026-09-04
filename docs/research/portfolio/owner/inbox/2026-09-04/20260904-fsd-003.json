@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-003",
+  "created": "2026-09-04T15:44:04-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 E3 中等风险固定时钟第三种子的完整结果",
+  "context": "原任务已终止，十份文件的远端、暂存和规范副本一致。二十次训练、四次规定评估、全部网络更新和暴露测量、区域路径及最终检查点齐全。接受这一格后累计十一格有效；完整 E3 的比较仍待七格，不因进程成功就宣布机制结论。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受本格，完整研究的读取规则不变",
+      "consequence": "研究计数更新为十一格有效；保留原始证据，不提前作配对或机制判断"
+    },
+    {
+      "key": "b",
+      "label": "虽产物齐全，仍等全组结束才接受本格",
+      "consequence": "推迟本格技术有效性记录，不增加科学证据"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "本格全部必要测量已完成；单格有效性和全组科学判断应分别记录。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D0_SEED3_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D0_SEED3_RESULT_EVIDENCE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-seed3-terminal-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
