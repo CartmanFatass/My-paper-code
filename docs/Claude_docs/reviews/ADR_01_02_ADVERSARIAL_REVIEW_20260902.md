@@ -1374,3 +1374,35 @@ the result as D2b with the cost law, the §4.4 application and its partial rever
 open item that any `k` sweep on this route must be projected per arm from `M` before launch
 (carried to the E3/E4 contracts). Reviewer's own erratum: XII.5's overrun figure and my
 acceptance of it rested on a one-arm projection I did not question.
+
+## XII.7 E2 re-projection at the first post-XII.6 completion (2026-09-03, 19:10 PDT)
+
+With three measured D0 points the implementer refit the cost law: about 64.6 s fixed plus
+0.769 s per coordinator optimizer step, against the 0.618 s/step that XII.6's two-point fit on
+`k = 40` and `k = 1` gave. The cost is slightly sublinear at the top of the range, so a fit
+anchored on the extremes understates the middle of the grid: `d0_k5` measured 96.8 min per run
+against 80.5 predicted, `d0_k2` projects about 145 min against 127. At 02:06Z, 4.96 h after
+launch: 5 runs complete (`d0_k40` both seeds, `d2_c1p0` both, `d0_k5` seed 1), 2 quarantined
+(`d0_k1`, XII.6), 2 running, 8 pending; remaining single-run work about 638 min, about 5.3 h at
+two concurrent, total about 10.3 h against XII.6's 9.4 h and the 8 h cap.
+
+Options: (a) accept about 10.3 h and continue as queued; (b) drop a further run, which the
+implementer shows damages §5 in every case (`d0_k20` at both seeds is `k*` itself, the four `c`
+arms at both seeds are the mechanism-A clause, `d0_k2` seed 1 is 14 of 20 through and anchors the
+low end of the D0 ordering); (c) reduce the evaluation size for the remaining runs, which splits
+the study's evaluation basis. **Owner-delegated decision (unattended, 2026-09-03 instruction):
+(a).** A 29% overrun of the cap is accepted on XII.5's grounds; the study is past its half-way
+point and the remaining runs are the ones the reading rule needs.
+
+Carried to the E3/E4 contracts, as an addition to XII.6's open item: a per-arm projection must be
+fit on a short pilot of the most expensive *retained* arm plus one mid-grid arm, not on the two
+extremes of the sweep; a two-point fit anchored on a dropped arm projected this study twice and
+was wrong twice.
+
+Science on record from the completed D0 arms at seed 1, for the result document's intake: the
+learner ordering matches the reference ordering at the top (`k = 5` 0.287241 above `k = 40`
+0.261021; references 0.305317 above 0.268150), the gaps to the fixed-`k` oracles are 0.018 and
+0.007, segment means sit exactly at the cap; `d2_c1p0` stays below both D0 arms at seed 1
+(0.230409) with agent-level gap and cap-boundary counts exactly zero at both seeds. If the zero
+counts hold at `c = 0.5` and `c = 0.25`, the implementer places that structural fact ahead of the
+§5 verdict, as agreed in XII.4.
