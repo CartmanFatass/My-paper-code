@@ -157,6 +157,57 @@ def test_all_frozen_result_branches(pairs, expected) -> None:
     assert e3.apply_result_rule(pairs) == expected
 
 
+def test_postprocess_publishes_when_peak_rss_is_unavailable(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    run_dir = tmp_path / "small_d0_seed1"
+    run_dir.mkdir()
+    evaluations = [
+        {"rollout": rollout, "episodes": episodes,
+         "episode_returns": [0.0] * episodes}
+        for rollout, episodes in ((5, 512), (10, 512), (15, 512), (20, 2048))
+    ]
+    summary_path = run_dir / "summary.json"
+    summary_path.write_text(json.dumps({
+        "schema_version": 1,
+        "references": {
+            "J_fixed_k": {"20": 1.0},
+            "m_dur": e3.PROPOSAL_GRID["small"]["m_dur"],
+        },
+        "final_evaluation_return_mean": 0.9,
+        "evaluations": evaluations,
+        "wall_seconds_total": 123.0,
+        "seconds_per_rollout_mean": 6.15,
+    }), encoding="utf-8")
+    (run_dir / "manifest.json").write_text(json.dumps({
+        "schema_version": 1,
+        "evaluation": {"tapes": {"keying": "(master_seed, episode_id, entity_or_region_id)"}},
+    }), encoding="utf-8")
+    (run_dir / "interruptions.jsonl").write_text(json.dumps({
+        "rollout": 20,
+        "regional_path": _path_fixture(),
+    }) + "\n", encoding="utf-8")
+    receipt = run_dir / "preflight.json"
+    _passed_receipt(receipt)
+    monkeypatch.setattr(e3, "_PREFLIGHT_RECEIPT", receipt)
+    monkeypatch.delattr(e3.ctypes, "windll", raising=False)
+    e3._postprocess(run_dir, "small", "d0")
+
+    published = json.loads(summary_path.read_text(encoding="utf-8"))
+    assert published["d0_competence_ratio_input"] == pytest.approx(0.9)
+    assert published["cumulative_regional_path"] is not None
+    assert published["evaluation_episodes_total"] == 3584
+    assert published["peak_rss_bytes"] is None
+    assert published["resource_telemetry_status"] == "resources_unmeasured"
+    manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["evaluation"]["reduced_from_contract"] is False
+    assert manifest["evaluation"]["e3_expected_counts"] == {
+        "checkpoints": [5, 10, 15, 20],
+        "intermediate_episodes": 512,
+        "final_episodes": 2048,
+        "full_run_records": 4,
+    }
+
+
 def test_toy_end_to_end_writes_exact_e3_artifacts(tmp_path: Path) -> None:
     root = tmp_path / "E3_toy"
     run_dir = root / "small_d2_seed1"
