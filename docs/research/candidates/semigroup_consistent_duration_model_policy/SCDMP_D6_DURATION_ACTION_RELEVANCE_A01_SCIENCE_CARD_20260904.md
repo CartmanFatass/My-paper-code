@@ -5,7 +5,9 @@
 - Object: `SCDMP-D6-DURATION-ACTION-RELEVANCE-A01`
 - Direction: `semigroup_consistent_duration_model_policy`
 - Evidence class: **A/RECON**
-- Scientific status: **FROZEN before implementation, smoke, cost measurement or observation**
+- Scientific status: **FROZEN before implementation, smoke, cost measurement or observation**;
+  CM may append only the outcome-blind numeric cost row required below, changing no scientific
+  field
 - Launch readiness: **HELD only for conforming implementation, its single technical-smoke cost
   row, and the fresh mandatory resource admission**
 - Direction authority: `PRO_FINAL — SPLIT_A_RECON_THEN_REOPEN_B`, response SHA-256
