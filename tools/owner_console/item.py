@@ -43,15 +43,18 @@ DEFAULT_OPTIONS = {
 def cmd_add(a) -> int:
     options = [{"key": k, "label": label, "consequence": ""} for k, label in (a.option or [])]
     if not options and a.kind in DEFAULT_OPTIONS:
-        options = [{"key": k, "label": l, "consequence": ""} for k, l in DEFAULT_OPTIONS[a.kind]]
+        options = [{"key": k, "label": l, "consequence": l} for k, l in DEFAULT_OPTIONS[a.kind]]
     for k, text in (a.consequence or []):
         for o in options:
             if o["key"] == k:
                 o["consequence"] = text
+    packet = None
+    if a.packet:
+        packet = json.loads(Path(a.packet).read_text(encoding="utf-8"))
     out = srv.new_item(a.root, a.direction, a.kind, a.title, options, recommended=a.recommended,
                        auto_applied=a.auto_applied, context=a.context or "", dm_reason=a.dm_reason or "",
                        evidence=a.evidence or [], tier=a.tier, ledger_row=a.ledger_row or "",
-                       brief=a.brief or "", ledger_kind=a.ledger_kind or "")
+                       brief=a.brief or "", ledger_kind=a.ledger_kind or "", packet=packet)
     print(str(out.relative_to(a.root)).replace("\\", "/"))
     return 0
 
@@ -98,6 +101,9 @@ def main(argv=None) -> int:
     s.add_argument("--ledger-row", dest="ledger_row", default="")
     s.add_argument("--ledger-kind", dest="ledger_kind", default="", choices=("", "technical", "selection"))
     s.add_argument("--brief", default="")
+    s.add_argument("--packet", help="JSON file with the decision packet (required for portfolio, "
+                                    "second-recast, critic-dissent, close-call, new-card and any "
+                                    "direction/portfolio-tier item; see owner/README.md)")
     s.set_defaults(fn=cmd_add)
 
     r = sub.add_parser("reviews", help="owner instructions not yet applied")

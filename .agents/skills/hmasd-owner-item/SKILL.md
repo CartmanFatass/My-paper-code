@@ -38,6 +38,40 @@ python tools/owner_console/item.py add --direction <direction-id> --kind decisio
 `--direction` is the direction id from `docs/research/RESEARCH_MAP.md` (or `portfolio`); the id
 prefix is derived from it. Kinds with default options need no `--option`.
 
+## Decision packet (required for anything the owner must rule on)
+
+`item.py add` refuses a `portfolio`, `second-recast`, `critic-dissent`, `close-call` or
+`new-card` item, and any direction- or portfolio-tier item, without `--packet <file.json>` and a
+non-empty `consequence` on every option. The owner cannot rule on a one-line context; the console
+shows such an item as "上下文不足" and the owner's reply `needs-context` sends it back. Write the
+packet in Chinese, from the material you already have (the Pro response's PORTFOLIO_EFFECTS,
+RATIFICATION_CHANGES, EVIDENCE and UNCERTAINTY sections; the intake; the card):
+
+```json
+{
+  "question": "一句话：要所有者决定什么",
+  "changes_if_approved": [
+    {"target": "PORTFOLIO.md · semigroup_consistent_duration_model_policy", "from": "无 second-recast 标记", "to": "second-recast，最低争用排序，仍 ACTIVE/HIGH"}
+  ],
+  "if_refused": "拒绝后循环怎么走，什么保持不变",
+  "evidence_for": [
+    {"path": "<repo path>", "quote": "≤2 句原文", "why": "为什么它支持推荐项"}
+  ],
+  "evidence_against": [
+    {"path": "<repo path>", "quote": "≤2 句原文", "why": "为什么要谨慎"}
+  ],
+  "uncertainty": ["未决点或复审触发条件，每条一句"],
+  "cost": {"compute": "…", "owner_time": "…", "reversibility": "reversible | costly | irreversible", "waits_on_this": "等待此决定的事，或 nothing"},
+  "verdict_text": "裁决原文（Pro 的 OWNER_RATIFICATION_TEXT 或 DM 的建议段），逐字",
+  "source": "<path of the Pro response, intake or card>"
+}
+```
+
+Required: `question`, `changes_if_approved` (at least one entry, or one string `"none"`),
+`if_refused`, `evidence_for` (each with `path` and `quote`), `cost.reversibility`. A `decision` of
+object tier needs no packet; its `context` paragraph and the intake link are enough because the
+owner is reviewing, not ruling.
+
 ## Read point (every clean boundary)
 
 ```

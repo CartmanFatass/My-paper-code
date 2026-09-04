@@ -113,7 +113,7 @@ def test_new_item_validates_and_numbers_ids(tmp_path):
     with pytest.raises(ValueError):
         srv.new_item(root, "ucope", "decision", "t", opts, recommended="z")
     p1 = srv.new_item(root, "ucope", "decision", "first", opts, recommended="a", auto_applied="a", day="2026-09-06")
-    p2 = srv.new_item(root, "ucope", "new-card", "second", opts, day="2026-09-06")
+    p2 = srv.new_item(root, "ucope", "prediction", "second", opts, day="2026-09-06")
     assert p1.name == "20260906-ucope-001.json" and p2.name == "20260906-ucope-002.json"
     item = json.loads(p1.read_text(encoding="utf-8"))
     assert item["status"] == "open" and item["auto_applied"] == "a"
@@ -166,8 +166,13 @@ def test_item_cli_add_and_reviews(tmp_path, capsys):
     spec = importlib.util.spec_from_file_location("owner_console_item", ROOT / "tools/owner_console/item.py")
     cli = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cli)
+    # a new card without a decision packet is refused
+    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "new-card", "--title", "card X"]) == 2
+    capsys.readouterr()
+    pk = tmp_path / "packet.json"
+    pk.write_text(json.dumps(PACKET, ensure_ascii=False), encoding="utf-8")
     rc = cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "new-card", "--title", "card X",
-                   "--context", "claim; structure (b)", "--evidence", "docs/x/CARD.md"])
+                   "--context", "claim; structure (b)", "--evidence", "docs/x/CARD.md", "--packet", str(pk)])
     assert rc == 0
     printed = capsys.readouterr().out.strip()
     item = json.loads((root / printed).read_text(encoding="utf-8"))
@@ -177,6 +182,45 @@ def test_item_cli_add_and_reviews(tmp_path, capsys):
     assert cli.main(["--root", str(root), "reviews"]) == 0
     out = capsys.readouterr().out
     assert item["id"] in out and "do not launch" in out
+
+
+PACKET = {"question": "批准吗", "changes_if_approved": [{"target": "PORTFOLIO.md", "from": "x", "to": "y"}],
+          "if_refused": "保持不变", "evidence_for": [{"path": "docs/a.md", "quote": "原文", "why": "支持"}],
+          "cost": {"reversibility": "reversible"}}
+
+
+def test_decision_bearing_items_require_a_packet(tmp_path):
+    root = make_repo(tmp_path, "2026-09-01")
+    opts = [{"key": "ratify", "label": "r", "consequence": "c"}, {"key": "refuse", "label": "f", "consequence": "c"}]
+    with pytest.raises(ValueError, match="packet.question missing"):
+        srv.new_item(root, "portfolio", "portfolio", "t", opts, tier="portfolio")
+    bad = [{"key": "ratify", "label": "r", "consequence": ""}, {"key": "refuse", "label": "f", "consequence": "c"}]
+    with pytest.raises(ValueError, match=r"option \(ratify\) has no consequence"):
+        srv.new_item(root, "portfolio", "portfolio", "t", bad, tier="portfolio", packet=PACKET)
+    p = srv.new_item(root, "portfolio", "portfolio", "t", opts, tier="portfolio", packet=PACKET, day="2026-09-06")
+    assert json.loads(p.read_text(encoding="utf-8"))["packet"]["question"] == "批准吗"
+    # object-tier decisions never need one
+    srv.new_item(root, "ucope", "decision", "t", [{"key": "a", "label": "x"}], day="2026-09-06")
+    # a direction-tier decision does
+    with pytest.raises(ValueError):
+        srv.new_item(root, "ucope", "decision", "t", [{"key": "a", "label": "x", "consequence": "c"}], tier="direction")
+
+
+def test_needs_context_reply_and_problem_report(tmp_path):
+    import datetime as dt
+    today = dt.date.today().isoformat()
+    root = make_repo(tmp_path, today)
+    inbox = root / "docs/research/portfolio/owner/inbox" / today
+    (inbox / "20260905-root-001.json").write_text(json.dumps({
+        "id": "20260905-root-001", "direction": "portfolio", "tier": "portfolio", "kind": "portfolio",
+        "title": "proposal", "options": [{"key": "ratify", "label": "r"}], "recommended": "ratify"}), encoding="utf-8")
+    items = {i["id"]: i for i in srv.enrich_items(root, srv.load_items(root, days=7))}
+    assert items["20260905-fsd-001"]["context_problems"] == []
+    probs = items["20260905-root-001"]["context_problems"]
+    assert "packet.question missing" in probs and "option (ratify) has no consequence" in probs
+    paths = srv.write_reply(root, "20260905-root-001", "needs-context", "缺少决策包")
+    review = (root / paths["review"]).read_text(encoding="utf-8")
+    assert "**owner: needs-context**" in review and "re-file as a new item with a complete decision packet" in review
 
 
 def test_skill_names_every_kind_and_command():

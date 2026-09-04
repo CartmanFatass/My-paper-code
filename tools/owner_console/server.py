@@ -92,6 +92,33 @@ def owner_dir(root: Path) -> Path:
     return root / OWNER_REL
 
 
+# kinds that ask the owner to rule (P1/P2) must carry a decision packet, not a one-line context
+PACKET_KINDS = ("portfolio", "second-recast", "critic-dissent", "close-call", "new-card")
+PACKET_REQUIRED = ("question", "changes_if_approved", "if_refused", "evidence_for", "cost")
+UNIVERSAL_CHOICES = ("agree", "other", "needs-context")
+
+
+def needs_packet(item: dict) -> bool:
+    return item.get("kind") in PACKET_KINDS or item.get("tier") in ("direction", "portfolio")
+
+
+def packet_problems(item: dict) -> list[str]:
+    """Why a decision-bearing item cannot be ruled on; empty when the packet is complete."""
+    if not needs_packet(item):
+        return []
+    pk = item.get("packet") or {}
+    probs = [f"packet.{k} missing" for k in PACKET_REQUIRED if not pk.get(k)]
+    ev = pk.get("evidence_for") or []
+    if ev and not all(isinstance(e, dict) and e.get("path") and e.get("quote") for e in ev):
+        probs.append("every evidence_for entry needs path and quote")
+    if isinstance(pk.get("cost"), dict) and not pk["cost"].get("reversibility"):
+        probs.append("packet.cost.reversibility missing")
+    for o in item.get("options", []):
+        if not (o.get("consequence") or "").strip():
+            probs.append(f"option ({o.get('key')}) has no consequence")
+    return probs
+
+
 def item_priority(item: dict) -> int:
     p = KIND_PRIORITY.get(item.get("kind"), 3)
     if item.get("kind") == "decision":
@@ -105,10 +132,19 @@ def item_priority(item: dict) -> int:
 def new_item(root: Path, direction: str, kind: str, title: str, options: list[dict], *,
              recommended: str | None = None, auto_applied: str | None = None, context: str = "",
              dm_reason: str = "", evidence: list[str] | None = None, tier: str = "object",
-             ledger_row: str = "", brief: str = "", ledger_kind: str = "", day: str | None = None) -> Path:
-    """Write one validated item; the id is <YYYYMMDD>-<prefix>-<nnn> with the next free nnn."""
+             ledger_row: str = "", brief: str = "", ledger_kind: str = "", day: str | None = None,
+             packet: dict | None = None) -> Path:
+    """Write one validated item; the id is <YYYYMMDD>-<prefix>-<nnn> with the next free nnn.
+
+    Decision-bearing kinds (PACKET_KINDS, or any direction/portfolio-tier item) are refused
+    without a complete decision packet: the owner cannot rule on a one-line context.
+    """
     if kind not in KINDS:
         raise ValueError(f"kind must be one of {KINDS}")
+    probe = {"kind": kind, "tier": tier, "options": options, "packet": packet}
+    probs = packet_problems(probe)
+    if probs:
+        raise ValueError("decision packet incomplete: " + "; ".join(probs))
     if not title.strip():
         raise ValueError("title is required")
     if not options:
@@ -134,6 +170,7 @@ def new_item(root: Path, direction: str, kind: str, title: str, options: list[di
         "context": context, "options": options, "recommended": recommended,
         "auto_applied": auto_applied, "dm_reason": dm_reason, "evidence": evidence or [],
         "ledger_row": ledger_row, "brief": brief, "ledger_kind": ledger_kind, "status": "open",
+        "packet": packet or None,
     }
     out = day_dir / f"{item_id}.json"
     _atomic_write(out, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
@@ -209,7 +246,7 @@ def write_reply(root: Path, item_id: str, choice: str, comment: str) -> dict:
     if p is None:
         raise FileNotFoundError(f"no item {item_id}")
     item = json.loads(p.read_text(encoding="utf-8"))
-    keys = {o.get("key") for o in item.get("options", [])} | {"agree", "other"}
+    keys = {o.get("key") for o in item.get("options", [])} | set(UNIVERSAL_CHOICES)
     if choice not in keys:
         raise ValueError(f"choice {choice!r} is not an option of {item_id}")
     now = dt.datetime.now(dt.timezone.utc).astimezone()
@@ -240,6 +277,9 @@ def _atomic_write(path: Path, text: str) -> None:
 def instruction_for(item: dict, reply: dict) -> str:
     choice, auto = reply.get("choice"), item.get("auto_applied")
     kind = item.get("kind", "decision")
+    if choice == "needs-context":
+        return ("owner cannot rule on this context; re-file as a new item with a complete decision packet "
+                "(owner/README.md, packet section), then mark this one answered")
     if choice == "agree":
         return "none (seen; delegated decision stands)" if auto else "none (seen)"
     if kind == "decision" or kind in ("critic-dissent", "close-call"):
@@ -278,7 +318,7 @@ def render_review(root: Path, date: str) -> Path:
     for _, item, reply in entries:
         labels = {o.get("key"): o.get("label", "") for o in item.get("options", [])}
         ch = reply["choice"]
-        ch_txt = ch if ch in ("agree", "other") else f"({ch}) {labels.get(ch, '')}".strip()
+        ch_txt = ch if ch in UNIVERSAL_CHOICES else f"({ch}) {labels.get(ch, '')}".strip()
         lines.append(f"## {item['id']} · {item.get('direction', '?')} · {item.get('kind')} · {item.get('title', '')}")
         meta = []
         if item.get("recommended"):
@@ -351,6 +391,7 @@ def enrich_items(root: Path, items: list[dict]) -> list[dict]:
         it["priority"] = item_priority(it)
         it["code"] = PREFIX.get(it.get("direction", ""), (it.get("direction") or "?")[:6])
         it["dir_priority"] = prio.get(it.get("direction"), "")
+        it["context_problems"] = packet_problems(it)
     return items
 
 

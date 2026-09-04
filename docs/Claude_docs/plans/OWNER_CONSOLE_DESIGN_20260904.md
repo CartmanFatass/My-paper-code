@@ -221,5 +221,24 @@ amber and slate dots for HIGH/MEDIUM/LOW directions; dark scheme follows the OS.
 to the strip unfold and respects reduced-motion. Keyboard: `j/k`, `x`, `a`–`e`, `g`, `Enter`,
 `Ctrl+Enter`, `]` for the evidence pane, which is closed by default so the bay has the width.
 
-Not verified visually in this session: the Chrome extension was not connected, so no screenshot
-was taken; the endpoints and the 12 tests were exercised.
+Verified visually afterwards through the Chrome DevTools plugin (inbox, expanded strip, board);
+two defects found and fixed (option-key overlap, seeded titles and timestamps).
+
+## 9. Revision 4 (08:35 PDT): the decision packet
+
+Owner feedback: "这些较为高级的决策选项应该提供非常详细的上下文才可以，以如今的颗粒度我实际上无法做出
+决策." The first real P1 item from Codex confirmed it: a 90-word context and a link to a
+37 KB Pro response whose own sections (PORTFOLIO_EFFECTS, RATIFICATION_CHANGES, EVIDENCE,
+UNCERTAINTY, OWNER_RATIFICATION_TEXT) never reached the card.
+
+Contract change: any item the owner must rule on (`portfolio`, `second-recast`, `critic-dissent`,
+`close-call`, `new-card`, and any direction- or portfolio-tier item) must carry a `packet`, in
+Chinese, with `question`, `changes_if_approved` (target / from / to), `if_refused`, `evidence_for`
+(path + quote + why), `evidence_against`, `uncertainty`, `cost` (compute, owner time,
+reversibility, what waits on this), `verdict_text` verbatim, and `source`; every option needs a
+non-empty `consequence`. `item.py add` refuses the item otherwise (`--packet <file.json>`). The
+console renders the packet as sections above the options, opens `source` in the evidence pane
+when a P1/P2 strip is clicked open, marks an incomplete item 上下文不足 with the missing fields
+listed, and offers 要求补充决策包, which files a `needs-context` reply whose review instruction
+tells the loop to re-file the item with a complete packet. Object-tier `decision` items are
+exempt: the owner reviews them after the fact. Skill, README and tests (14) updated.

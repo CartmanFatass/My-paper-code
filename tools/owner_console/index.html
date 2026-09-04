@@ -108,6 +108,23 @@
   .meta dd{margin:2px 0 0;font-family:var(--mono);font-size:11.5px;word-break:break-all}
   .meta a{cursor:pointer;text-decoration:none;display:block}
   .reply{margin-top:10px;padding:6px 10px;border-left:3px solid var(--hi);color:var(--muted);font-size:12.5px;background:var(--panel)}
+  .lack{margin:10px 0 4px;padding:8px 12px;border:1px solid var(--p1);border-left-width:4px;border-radius:3px;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+  .lack b{font-family:var(--display);letter-spacing:.04em;color:var(--p1);font-weight:600;font-size:13.5px}
+  .lack span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .lack .btn{margin-left:auto}
+  .pk{margin:6px 0 14px;border-top:1px solid var(--rule)}
+  .pk h5{font-family:var(--display);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px;font-weight:600}
+  .pk p{margin:0 0 4px;white-space:pre-wrap}
+  .pk table{border-collapse:collapse;font-size:12.5px;width:100%}
+  .pk td{border-top:1px solid var(--rule);padding:4px 8px;vertical-align:top}
+  .pk td:first-child{color:var(--muted);width:32%;font-family:var(--mono);font-size:11.5px}
+  .pk .arrow{color:var(--muted);padding:0 6px}
+  .pk blockquote{margin:4px 0 6px;padding:4px 10px;border-left:3px solid var(--p3);color:var(--ink);background:var(--panel);font-size:12.5px}
+  .pk blockquote.against{border-left-color:var(--p2)}
+  .pk blockquote small{display:block;color:var(--muted);font-size:11.5px;margin-top:2px}
+  .pk blockquote a{cursor:pointer;text-decoration:none;font-family:var(--mono);font-size:11px}
+  .pk ul{margin:0;padding-left:18px}
+  .pk .verdict{font-size:12.5px;padding:8px 10px;border:1px dashed var(--rule);border-radius:3px;white-space:pre-wrap;max-height:220px;overflow:auto}
   .empty{color:var(--muted);padding:56px 20px;text-align:center}
   .empty b{display:block;color:var(--ink);font-family:var(--display);font-size:17px;letter-spacing:.04em;margin-bottom:6px;font-weight:600}
 
@@ -264,7 +281,9 @@ function strip(it, idx){
   return `<article class="strip p${it.priority} ${S.open.has(it.id)?'open':''} ${idx===S.focus?'focus':''} ${it.status==='answered'?'answered':''}" data-id="${esc(it.id)}" data-idx="${idx}">
     <div class="srow"><span class="t">${esc(when(it.created||it.day))}</span><span class="code">${esc(it.code)}</span><span class="kind">${KIND_ZH[it.kind]||esc(it.kind)}</span><span class="title" title="${esc(it.title)}">${esc(it.title)}</span><span class="marks">${marks}</span><span class="dp ${esc(it.dir_priority)}" title="方向优先级 ${esc(it.dir_priority)}"></span><span class="chev">▶</span></div>
     <div class="body"><div>
+      ${(it.context_problems||[]).length?`<div class="lack"><b>上下文不足，无法裁决</b>${it.context_problems.map(p=>`<span>${esc(p)}</span>`).join('')}<button class="btn quiet" data-act="needs">要求补充决策包</button></div>`:''}
       ${it.context?`<div class="ctx">${esc(it.context)}</div>`:'<div class="ctx"></div>'}${it.dm_reason?`<div class="dm">DM：${esc(it.dm_reason)}</div>`:''}
+      ${packet(it)}
       <div class="opts">${opts}</div>
       <textarea placeholder="评论（可空）。改掉已执行的决定时，写一句原因。">${esc(S.sel[it.id+'#c'] ?? (it.reply?.comment||''))}</textarea>
       <div class="acts"><button class="btn quiet" data-act="agree">同意</button><button class="btn" data-act="submit">提交批改</button><span class="hint">提交后写入 reviews/${esc(S.today)}.md 并 commit</span></div>
@@ -273,9 +292,27 @@ function strip(it, idx){
   </article>`;
 }
 
+function packet(it){
+  const pk = it.packet; if (!pk) return '';
+  const ev = (list, cls) => (list||[]).map(e => `<blockquote class="${cls}">${esc(e.quote||'')}<small>${esc(e.why||'')} ${e.path?`<a data-doc="${esc(e.path)}">${esc(e.path.split('/').pop())}</a>`:''}</small></blockquote>`).join('');
+  const changes = Array.isArray(pk.changes_if_approved) ? pk.changes_if_approved : [];
+  return `<div class="pk">
+    ${pk.question?`<h5>要你裁决的问题</h5><p>${esc(pk.question)}</p>`:''}
+    ${changes.length?`<h5>批准后改变什么</h5><table>${changes.map(c => typeof c === 'string' ? `<tr><td colspan="2">${esc(c)}</td></tr>` : `<tr><td>${esc(c.target||'')}</td><td>${esc(c.from||'')}<span class="arrow">→</span><b>${esc(c.to||'')}</b></td></tr>`).join('')}</table>`:''}
+    ${pk.if_refused?`<h5>拒绝会怎样</h5><p>${esc(pk.if_refused)}</p>`:''}
+    ${(pk.evidence_for||[]).length?`<h5>支持证据</h5>${ev(pk.evidence_for,'')}`:''}
+    ${(pk.evidence_against||[]).length?`<h5>反对或谨慎的证据</h5>${ev(pk.evidence_against,'against')}`:''}
+    ${(pk.uncertainty||[]).length?`<h5>不确定性与复审触发</h5><ul>${pk.uncertainty.map(u=>`<li>${esc(u)}</li>`).join('')}</ul>`:''}
+    ${pk.cost?`<h5>代价与可逆性</h5><table>${Object.entries(pk.cost).map(([k,v])=>`<tr><td>${esc({compute:'算力',owner_time:'你的时间',reversibility:'可逆性',waits_on_this:'等待此决定的事'}[k]||k)}</td><td>${esc(v)}</td></tr>`).join('')}</table>`:''}
+    ${pk.verdict_text?`<h5>裁决原文</h5><div class="verdict">${esc(pk.verdict_text)}</div>`:''}
+    ${pk.source?`<p><a data-doc="${esc(pk.source)}" style="cursor:pointer;text-decoration:none;font-family:var(--mono);font-size:11.5px">来源 ${esc(pk.source.split('/').pop())}</a></p>`:''}
+  </div>`;
+}
+
 function wire(it, idx){
   const el = $('#bay').querySelector(`.strip[data-id="${CSS.escape(it.id)}"]`);
-  el.querySelector('.srow').onclick = () => { S.focus = idx; toggle(it.id); };
+  el.querySelector('.srow').onclick = () => { S.focus = idx; toggle(it.id); if (S.open.has(it.id) && it.priority <= 2 && (it.evidence||[]).length && !$('#desk').classList.contains('pane-open')) openDoc(it.packet?.source || it.evidence[0]); };
+  const nb = el.querySelector('[data-act=needs]'); if (nb) nb.onclick = () => submit(it, 'needs-context', S.sel[it.id+'#c'] || '缺少决策包：请补齐问题、改变项、证据引文、代价与可逆性后重新提交。');
   el.querySelectorAll('.opt').forEach(o => o.onclick = () => { S.sel[it.id] = o.dataset.k; S.focus = idx; renderBay(); });
   const ta = el.querySelector('textarea');
   ta.oninput = e => S.sel[it.id+'#c'] = e.target.value;
@@ -287,8 +324,8 @@ function wire(it, idx){
 function toggle(id){ S.open.has(id) ? S.open.delete(id) : S.open.add(id); renderBay(); }
 function refocus(){ $('#bay').querySelectorAll('.strip').forEach(c => c.classList.toggle('focus', +c.dataset.idx === S.focus)); const f = $('#bay').querySelector('.strip.focus'); f && f.scrollIntoView({block:'nearest'}); }
 
-async function submit(it, forced){
-  const choice = forced || S.sel[it.id]; const comment = S.sel[it.id+'#c'] ?? '';
+async function submit(it, forced, commentOverride){
+  const choice = forced || S.sel[it.id]; const comment = commentOverride ?? (S.sel[it.id+'#c'] ?? '');
   if (!choice) return toast('先选一个选项，或点“同意”。');
   if (!forced && it.auto_applied && choice !== it.auto_applied && !comment.trim()) return toast('这会改掉已执行的决定，请写一句原因。', 3200);
   try{
