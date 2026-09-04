@@ -1226,6 +1226,26 @@ Also recorded: incident preservation writes `.raw-*.json` receipts past `MAX_PAT
 through the `\\?\` prefix); the path budget covers the staging root, not the incident root. An
 engineering item for the same follow-up commit.
 
+### E.9 Fourth attempt refused at publication by a HEAD-currentness guard (2026-09-03, 17:30 PDT)
+
+`b1_scout_r04` completed its learner and replay phases and was refused at publication:
+`BLOCKED_UNCOMMITTED: implementation_commit is not current HEAD` (incident `b1-44915086…`,
+00:30:40Z). The bound implementation commit `0b629eff4` was current at launch; during the
+44-minute run the reviewer's own intake commits moved `main` (docs and portfolio only, nothing
+under the CBSC surface), and the guard compares against current HEAD rather than against the
+bound commit's surface. Reviewer's reading, put to the implementer for confirmation by
+reproduction: an orchestration guard of E.8's family, wrong under concurrent sessions, since
+currentness at publication time is not a scientific quantity; the check that carries meaning is
+that HEAD's CBSC surface is byte-identical to the bound commit's.
+
+Owner-delegated decision (unattended): repair the guard to compare surfaces with the bound sha
+recorded and a pinning test (doc-only HEAD advance passes, CBSC-surface change refuses); no
+salvage of r04, whose evidence stays quarantined with r01–r03; exercise the publication step
+offline against r04's quarantined evidence before a fresh fifth attempt. Reviewer's note on
+process: four attempts have now failed on four different post-learner guards that the direction's
+own end-to-end test never exercised; the engineering follow-up of E.8 item 3 is the condition for
+any CBSC object after B1.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
