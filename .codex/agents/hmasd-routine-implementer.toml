@@ -1,7 +1,7 @@
 name = "hmasd-routine-implementer"
 description = "Routine behavior-preserving implementation worker for one CM-frozen change."
 model = "gpt-5.6-luna"
-model_reasoning_effort = "max"
+model_reasoning_effort = "xhigh"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """

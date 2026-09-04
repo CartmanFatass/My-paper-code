@@ -48,7 +48,7 @@ unrequested machinery; do not accept it as the price of a result.
 
 ### Experiment tracking sibling
 
-The owner requested one shared root-level `hmasd-experiment-tracker` (Luna/xhigh), a sibling of
+The owner requested one shared root-level `hmasd-experiment-tracker` (Terra/low), a sibling of
 the DMs. Read its canonical name in PORTFOLIO.md and hand accepted long-running process handles
 directly to it using collaboration.send_message (running) or collaboration.followup_task (idle).
 Include or cite the accepted task/session, node, launch SHA, cwd, outputs/receipt, expected bound,

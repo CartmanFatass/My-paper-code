@@ -63,7 +63,7 @@
 ## 专用 experiment tracker
 
 定义在 [hmasd-experiment-tracker.toml](../../.codex/agents/hmasd-experiment-tracker.toml)，
-`name = "hmasd-experiment-tracker"`，固定 `gpt-5.6-luna` / `xhigh`，并显式启用
+`name = "hmasd-experiment-tracker"`，固定 `gpt-5.6-terra` / `low`，并显式启用
 `agents.enabled`。项目 config 保留相应 role 声明。Root 创建一个与 DMs 同层的实例，
 公布其 canonical name、独立 worktree 和跟踪文档；各 DM 按需直接发派任务。
 
