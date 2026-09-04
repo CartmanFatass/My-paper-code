@@ -310,3 +310,32 @@ The next discriminator is the unchanged three-seed B01 rung using the already ge
 roots `001..003`; no result-sensitive treatment, comparator, seed, or configuration change is
 authorized. See `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-001 full-path result — 2026-09-04
+
+The first ordered root has now completed the full 512-update B01 learner and planned 98-cell
+actual-host panel. All 23 completion checks passed. Each arm completed 512 paired RSCF/Adam updates,
+393,216 factual learner transitions, and 2,523,136 total training slots; evaluation completed
+25,088 episodes and 301,056 transitions. Peak RSS remained unavailable, so the valid result is
+marked `resources_unmeasured`.
+
+Root 001 is `B01_SEED_VALID_DIRECT`, not a three-seed branch. The tight projection changed no FP32
+coordinate through update 512; complete model/optimizer state and direct evaluation traces remained
+equal across all checkpoints, rosters, and interventions; hence every intact and rotated
+`PHY_TRUST-EDGE_FLEX` return difference is zero on this path. Overall model displacement was
+`L_inf(theta_512-theta_0)/0.05 = 2.092398852` in both arms, so movement elsewhere exceeded 0.10
+without tight-`beta` contact. Update-512 EDGE margins over uniform were only `+0.0068689` at `N=9`
+and `+0.0126184` at `N=15`; the maximum held-out within-PHY reassociation TV was `0.000226887`.
+
+This establishes observed-path equality for one literal root only. It does not apply
+`B01_OBSERVED_PATH_EQUIVALENCE`, `B01_WIDE_INCOMPETENT`, or another aggregate branch; roots 002 and
+003 remain unobserved. The strongest support is the complete paired learner/evaluator trace. The
+strongest contradiction to package value is that the treatment never activated. Surviving
+explanations include coordinate-specific noncontact, common `K0` alignment, generic Adam geometry,
+literal-root variation, and contact on another ordered root.
+
+The next discriminator remains root 002 and then root 003 under the unchanged card. Per the active
+REMOTE_FIRST control plane, new invocations use exact pushed bytes in freshly admitted detached
+remote worktrees; root 001 is not migrated or repeated. See
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_INTAKE_20260904.md`.

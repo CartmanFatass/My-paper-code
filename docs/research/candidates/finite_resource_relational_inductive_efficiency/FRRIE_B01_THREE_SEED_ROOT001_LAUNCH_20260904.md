@@ -1,6 +1,6 @@
 # FRRIE B01 three-seed root 001 launch — 2026-09-04
 
-Status: `DETACHED_RUNNING / RESULT_UNOBSERVED`
+Status: `TERMINAL / COMPLETE SUMMARY / RESULT INTAKE RECORDED`
 
 Object: `FRRIE-B01-THREE-SEED-SECTION11-20260904`
 
@@ -56,3 +56,12 @@ frozen caps are four attributed wall-hours per learned arm and eight wall-hours 
 invocation. Process acceptance, test success, and later process exit are engineering facts only;
 they establish no projection contact, comparator competence, return difference, reassociation
 effect, seed validity, or three-seed branch.
+
+## Terminal observation
+
+The process was observed terminated at `2026-09-04T13:54:53.4457124Z`. It wrote one complete
+59,343-byte `summary.json` with SHA-256
+`0632e741121b9f7d42f506fe6fc5bc763d84e158280dbc25ffc72bf4582dccea`; both redirected logs are
+empty. The monitor retained no numeric Windows exit code. Scientific validity and bounded reading
+are recorded separately in `FRRIE_B01_THREE_SEED_ROOT001_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_INTAKE_20260904.md`.
