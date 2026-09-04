@@ -88,3 +88,27 @@ fresh receipt must have a distinct path; the refused receipt remains historical 
 
 This is an object-tier wait, not a Direction- or Portfolio-tier lifecycle decision. No MAPR or Pro
 handoff is opened at this boundary.
+
+## Prospective `REMOTE_FIRST` invocation route
+
+Root changed runtime routing at `2026-09-04T13:10:46Z`. Because no local scientific process was
+ever accepted, no target root exists, and portability is declared before any target output, the
+unchanged sole R02 invocation is prospectively portable and now `REMOTE_FIRST`.
+
+The direction must remain at this clean boundary until Root explicitly marks
+`.codex/hmasd-compute.toml` active. Then the launch uses a detached remote worktree at the exact
+pushed commit containing this route and exactly one remote `agent-task` command. That command must
+perform the remote `admit-memory` and, only on its success, the exact frozen runner invocation in
+one accepted remote payload. The remote receipt, interpreter, argv, root, SHA, acceptance fact,
+PID/process fact, and terminal result must be recorded.
+
+The failed local `attempt_01_preflight.json` and `attempt_02_preflight.json` receipts do not admit a
+remote invocation. Local execution is forbidden unless remote acceptance is definitively absent,
+portability remains declared before output, and a distinct new local admission passes. An uncertain
+remote acceptance state is a hard no-duplicate boundary: consult authoritative remote state and do
+not send or launch again blindly.
+
+This changes only the execution host. Population, seed, bytes, treatment, comparators, numerical
+and RNG semantics, result rule, stop rule, exposure, claim ceiling, and one-invocation limit remain
+unchanged. It is Root capacity coordination, not new scientific polarity or a MAPR/Direction
+decision.
