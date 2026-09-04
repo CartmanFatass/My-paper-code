@@ -1,0 +1,37 @@
+{
+  "id": "20260904-mgtap-010",
+  "created": "2026-09-04T15:55:08-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B02：完整曲线低于关注值，保留三个正向差异",
+  "context": "三个配对种子的曲线面积差均为正，平均 +0.00839669，低于预定 0.010。真实更新、完整曲线和资源记录均符合卡片。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受低于关注值的探索结果并保留正向差异",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "按正负号改判为实质优势",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "宣称等价或几何机制失败",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "只有 a 同时遵守原卡规则、完整呈现小正差异，并保留一般条件数解释。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_MAIN_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L310",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

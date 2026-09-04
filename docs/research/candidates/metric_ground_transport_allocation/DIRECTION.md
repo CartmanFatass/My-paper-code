@@ -12,6 +12,44 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Accepted B02 learning-curve observation — 2026-09-04
+
+The new owner-adopted B/EXPLORE question is finite-budget learning geometry on
+the existing allocation toy. Its first complete comparison is
+`B02_INSIDE_MEI`: mean METRIC-minus-FREE curve AUC is
+`+0.008396685564959483`, below this object's absolute MEI `0.01`. The three paired
+seed contrasts are `+0.008041720920139`, `+0.007686614990234` and
+`+0.009461720784505`. This is a positive observed difference below the declared
+effect of interest; it is neither practical equivalence nor a metric-family negative.
+
+Both equal-class, same-information actors trained at N=4/8 for 256 updates per
+seed, with zero initialization, SGD 0.1 and no explicit weight decay. All 17
+evaluation points and learner traces are complete. Mean return at update 256 is
+0.491427951388889 for METRIC and 0.484165219907407 for FREE. The same-population
+oracle is 0.66875; the untuned finite-budget FREE gap is 0.184584780092593.
+The tuned baseline headroom record, particularly at held-out N=6/12, remains absent.
+
+Strongest support is positive AUC separation in all three paired seeds with real
+native-return learning and matched work. Strongest contradiction to a material
+advantage is the below-MEI aggregate and the single fixed optimizer setting.
+Generic conditioning/effective step size and implicit finite-training regularization
+remain the strongest alternatives. No binding-cut or conditioning-matched control
+isolates a metric-specific cause. The ceiling is preliminary centralized balanced
+allocation learning at trained sizes, without churn, transfer, warehouse or UAV claims.
+
+The next candidate discriminator is a same-information step-size/conditioning
+control, to be selected only after a later research resume. The current round
+ends at completed intake; no successor card or launch is created. The two old
+C objects below remain terminal at their original structural-nonidentification
+meanings. Their stationarity gate is historical authority for those objects and
+does not control the new B learning curves.
+
+Evidence: `MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md`,
+`MGTAP_B02_PILOT_INTAKE_20260904.md`,
+`MGTAP_B02_MAIN_RESULT_EVIDENCE_20260904.md`,
+`MGTAP_B02_MAIN_SUMMARY_20260904.json`,
+`MGTAP_B02_MAIN_INTAKE_20260904.md`, and `MGTAP_B02_CURVES_20260904.png`.
+
 ## Authority
 
 - Stable direction ID: `metric_ground_transport_allocation`
