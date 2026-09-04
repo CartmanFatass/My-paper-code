@@ -88,6 +88,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `MARL_EXPLORATION_GUIDANCE_20260904.md` — alignment draft for the owner and Codex Root on how to
+  explore MARL algorithms after the 2026-09-04 portfolio snapshot: the observed outcome pattern
+  (`NEITHER`, comparator weak, generic wins, narrow positives), a three-part diagnosis, five
+  principles (headroom before mechanism with a minimum effect of interest, comparator as a
+  first-class object, invest only where a MARL structure binds, fewer directions on the production
+  host, three readings written before the run), six actions with tiers, a proposed ACTIVE/PARK
+  disposition for all 22 directions, and the [DECIDE]/[ASK] items.
 - `CODEBASE_LAYOUT_STANDARD_20260903.md` — alignment draft for the directory standard: nine
   principles-to-application sections (target layout, candidate directories, tests, scripts,
   scratch/worktrees/branches/git hygiene, `.gitignore` rewrite, layered `AGENTS.md` with one-line
