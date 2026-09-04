@@ -366,9 +366,18 @@ MARL, transfer, safety, or deployment claims. See
 
 The strongest surviving alternative is checkpoint-phase comparator instability: RAW changed from
 REPLAN-perfect/KEEP-weak at SHORT to KEEP-perfect/REPLAN-weak at LONG under batch `32` over `48`
-cyclic rows. The next selected discriminator is a separate RAW-only A/RECON trace at every update
-`252..264`, with no residual-effect claim. It must receive its own cost projection, exposure line,
-card, and fresh admission before launch.
+cyclic rows. The two checkpoints directly record oracle-minus-RAW equal-side gaps of
+`0.006581880989529963` and `0.0033232311868946172`, respectively, but neither supplies the requested
+tuned competent generic-baseline headroom measurement: SHORT is KEEP-weak and LONG is REPLAN-weak.
+Comparator weakness remains an identification limit, not a mechanism negative.
+
+The current object-level discriminator is therefore the no-learner A/RECON frozen in
+`CRTO_GENERIC_HEADROOM_A01_SCIENCE_CARD_20260904.md`. It replays the exact existing balanced panel,
+uses the stated legal-G16 oracle, tunes a finite generic action-rule family on TRAIN only, and
+reports the untouched EVAL gap without a percentage threshold or lifecycle implication. It
+supersedes the unlaunched update-`252..264` RAW trace as the immediate rung. CRTO remains Portfolio
+`ACTIVE`; no `5%`/`25%` MEI, new B, conditional status, or `PARK` action is authorized by this
+object-level selection. See `CRTO_GENERIC_HEADROOM_A01_INTAKE_20260904.md`.
 
 Separately, two direct current-source reproductions did not reproduce the archived Pro
 lower-domain construction's previous option, legal action set, or material advantage. The archive
@@ -380,3 +389,5 @@ The accepted evidence set additionally includes:
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_GENERIC_HEADROOM_A01_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/commitment_residual_triggered_options/CRTO_GENERIC_HEADROOM_A01_INTAKE_20260904.md`
