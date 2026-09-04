@@ -134,3 +134,73 @@ commit changes no execution bytes. Node `wsl_4070`, detached cwd
 
 One accepted process will be handed to the DM for the shared tracker. No duplicate observer,
 new heartbeat, restart or migration is added. Completion/timeout/failure is the stop condition.
+
+## Completed observation and technical acceptance
+
+**The full implementation and observation exist and are technically accepted.** The one full
+task finished with exit 0, supervisor PID **97387**, at **2026-09-04T22:09:13Z**, supervisor
+duration **43 s**. The shared tracker subsequently observed the terminal state at
+22:09:55Z (tracker record commit `e914ee039fa6a36fd0c00ed77ebb59cda1eff70b`). The DM handed
+the accepted process to that tracker; CM released routine polling and collected only after
+the terminal handoff. No duplicate launch, repair or rerun occurred.
+
+Full admission at **2026-09-04T22:08:30.583381Z** measured both physical and effective available
+memory **12,932,308,992 bytes**. Learner wall **40.371824955997 s** and peak RSS
+**484,229,120 bytes** were measured. Actual wall by three-seed phase, including train and
+evaluation: WRITER **8.502901867999753 s**, TYPED **10.483885985959205 s**, GENERIC
+**10.186610095966898 s**, RESET **10.03539999393979 s**, LATCH **0.350390626990702 s**.
+With the full writer charged to each routing arm, actual measured phase totals are
+**18.98678785395896**, **18.689511963966652**, and **18.538301861939544 s** respectively.
+These observed walls fit the recorded limits. RSS is the learner process high-water mark;
+it is not a whole-node resource census. No throughput or resource-comparison claim is made.
+
+Actual totals match the card: **98,304 training episodes**, **1,536 updates**, **49,920
+evaluation episodes**, **148,224 complete episodes**, **444,672 primitive transitions**.
+The summary retains phase/seed/arm counts, batched policy-call counts by role, individual
+terminal decisions, and separately counted counterfactual kernel rows. WAIT transitions
+are not counted as learned policy calls. All 12 learners reached update 128.
+
+| Seed | TYPED STALE AUC | GENERIC STALE AUC | Difference | TYPED final STALE | GENERIC final STALE | RESET final STALE | LATCH final STALE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 96041 | 0.87158203125 | 0.86962890625 | 0.001953125 | 0.9921875 | 0.9921875 | 0.5078125 | 1.0 |
+| 96042 | 0.898681640625 | 0.89892578125 | -0.000244140625 | 0.9921875 | 0.9921875 | 0.50390625 | 0.99609375 |
+| 96043 | 0.867431640625 | 0.861328125 | 0.006103515625 | 0.98046875 | 0.98046875 | 0.5078125 | 1.0 |
+
+The recorded first-matching card rule is **`B04_WITHIN_MEI`**, because mean STALE AUC difference
+is **0.0026041666666666665**, whose absolute value is below 0.05. CLEAN AUC differences are
+**0.000732421875**, **-0.0009765625**, **0.001953125**; final CLEAN gaps are **0.00390625**,
+**0**, **0**. All final STALE gaps are zero. Seed-mean final STALE return is **0.98828125**
+for both TYPED and GENERIC, **0.5065104166666666** for RESET, and **0.9986979166666666** for
+LATCH. Every final writer sampled return is 1.0. Independent descriptive flags are
+`writer_weak=false` and `simple_control_headroom=false`. These are recorded arithmetic facts;
+scientific interpretation and the next object remain with the DM.
+
+Collection independently read all **12 final model/optimizer checkpoints**, **15 plain final
+evaluation files containing 6,912 rows**, complete training curves at updates 1–128 and
+evaluation curves at 0,16,…,128. Checks reconstructed final row rewards and expected reward
+probabilities, normalized AUC from each curve, final parameter norms from saved tensors,
+and frozen writer equality across arms. All checkpoint tensors were finite CPU float32;
+every present Adam state had step 128. Each learner had nonzero measured parameter
+displacement. Complete float64 initial/final/displacement norms, component accuracies,
+final obsolete-flip TVs and all expected-reward-probability curves are in `summary.json`.
+The full endpoint and publication path are now observed; there is no open B04 publication
+coverage item. No runtime verifier or second learner smoke was needed for collection.
+
+Complete original bytes remain at the remote output root in the frozen command above.
+The complete local copy is:
+
+`C:/Projects/HMASD-worktrees/cm-n3-folr-b04-20260904/temp/directions/vap_folr_core/exp/n3_routing_b04_full_20260904_a1/`
+
+It contains `summary.json`, `resource_admission.json`, copied `supervisor.log`,
+`seed_<seed>/{writer,TYPED,GENERIC,RESET}/final.pt`, each phase's
+`final_evaluation.jsonl` (including LATCH), and local `collection_check.json` from the
+offline arithmetic/readability check. The smoke's complete artifacts and supervisor log
+are retained in the sibling `n3_routing_b04_smoke_20260904_a1/` directory.
+No original result bytes were edited. The source remains exactly the launch SHA; only this
+report changes afterward. CM checkout is clean after its report commit and push.
+
+Limitations: one fixed CPU configuration and three seeds; no cross-host bit-equivalence,
+throughput, generic optimality or mechanism-necessity conclusion. Technical checks establish
+conformance, not scientific truth. Next step: DM intake of the accepted result and Root
+integration of the explicitly owned commits. The owner-item boundary read returned no
+pending owner instructions.
