@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "request_id": "2026-09-04-scdmp-d6-recast-convergence-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "provider_url": "https://chatgpt.com/c/6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "operator_thread_id": "01a06bc9-12fb-7da2-abfb-4bb1830efab7",
+  "source_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
+  "source_mode": "single_body_attachment",
+  "visible_model": "Pro",
+  "underlying_model": "GPT-5.6 Sol",
+  "thinking_effort": "5/5",
+  "packet_id": "2026-09-04-scdmp-d6-recast-convergence-01--semigroup_consistent_duration_model_policy",
+  "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\a\\20260904-scdmp-d6-r1\\2026-09-04-scdmp-d6-recast-convergence-01--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+  "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\a\\20260904-scdmp-d6-r1\\2026-09-04-scdmp-d6-recast-convergence-01--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+  "prompt_bytes": 10453,
+  "prompt_sha256": "fdac9faabee0fbc58dc145bdd64c719a5165db26de26a46a83f8dfc81298e893",
+  "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\a\\20260904-scdmp-d6-r1\\2026-09-04-scdmp-d6-recast-convergence-01--semigroup_consistent_duration_model_policy--attempt-01__02_RESPONSE.md",
+  "response_bytes": 37117,
+  "response_sha256": "95c60538bdf36b0cd78e68ef91ecd20548b7d68e473c7a5f609d27c3e2b473b7",
+  "manifest_sha256": "53f86339fbaf8a125c0fa2b6882af2196357f4c35a274898332f1430b05ae2f7",
+  "reference_files": [],
+  "companion_prompt_sha256": "25d60fd10fe5a3a21b24d47d37beee201512694a835c187c3619200518170de1",
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": true,
+    "exact_prompt_text": true
+  },
+  "completion": {
+    "observed_at": "2026-09-04T10:51:48.9739059Z",
+    "status": "NATURAL_COMPLETION",
+    "active_generation_control_absent": true,
+    "complete_assistant_message": true
+  },
+  "heartbeat": {
+    "automation_id": "scdmp-convergence-transport-wake-2026-09-04",
+    "status": "DELETED",
+    "retirement_status": "VERIFIED",
+    "retired_at": "2026-09-04T10:55:19.1364477Z"
+  },
+  "archive_status": "ARCHIVED",
+  "captured_via": "provider-visible Copy response action",
+  "captured_text_encoding": "UTF-8 no BOM",
+  "created_at": "2026-09-04T10:51:48.9739059Z",
+  "receipt_status": "FAILED",
+  "receipt_attempt_count": 1,
+  "receipt_destination_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
+  "receipt_error": "direct app-server input is not allowed for multi-agent v2 sub-agents",
+  "updated_at": "2026-09-04T10:55:19.1364477Z"
+}

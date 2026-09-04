@@ -408,3 +408,40 @@ zero-access quarantine of the old named run are unchanged. The provenance is
 `docs/Claude_docs/reviews/FIRST_WAVE_SECTION11_COMPLIANCE_20260902.md` A.4 decisions 1 and 7 and
 `docs/research/portfolio/decisions/2026-09-02-first-wave-section11-recast.md`. This entry adds no
 order-value observation and consumes no scientific object.
+
+## D6 cross-k Q-sharing recast — 2026-09-04
+
+The complete archived response from
+`em:semigroup_consistent_duration_model_policy:convergence` formed the direction-tier decision
+`FINAL_DECISION=RECAST_D6` with `DECISION_FORMED=true`. Its exact SHA-256 is
+`95c60538bdf36b0cd78e68ef91ecd20548b7d68e473c7a5f609d27c3e2b473b7`. The B01 line remains
+stopped: `RUN-02A` and `RUN-02B` are not reopened, the valid base branch stays bounded by uniform
+swapped-arm absorption, the graded diagnostic stays A/RECON and FCEOV `.3` stays an exact consumed
+nonpass.
+
+The admitted independent mechanism is D6: one duration-conditioned value head shares learning
+across `k`, compared with a same-information D8 menu whose duration-specific heads do not share.
+The decision-relevant quantity is the samples or updates needed for competent native composite
+action choice, measured by normalized native decision regret and an action-consequence witness;
+prediction accuracy alone cannot activate a result branch. This is distinct from flexible-skill-
+duration D2, which changes mid-segment interruption authority.
+
+The strongest support is the clean D6/D8 treatment-null pair, a native host where duration can
+change consequences and a feasible B-scale learner/evaluator path. The strongest contradiction is
+that the nearest survivable B01 neighbour had only a `0.00045788` mean gap, with one zero and one
+negative state. The strongest live alternative is ordinary regularization/easier optimization or
+negative transfer, not meaningful duration structure.
+
+The finite claim ceiling is B/EXPLORE on the exact declared host, six fresh states,
+`{0,10,12}×{7,13}` actions, common data, three seeds and fixed budget. No general superiority,
+unseen-duration transfer, semigroup invariance, D2 value, safety or deployment claim is available.
+The next discriminator is `SCDMP-D6-CROSS-K-Q-SHARING-B01`, frozen in
+`SCDMP_D6_CROSS_K_Q_SHARING_B01_SCIENCE_CARD_20260904.md`. No experiment has run; launch remains
+held for the runner's numeric per-arm cost projection.
+
+The provider response completed and archived normally. Its one return receipt failed only because
+direct app-server input is unavailable to Multi-Agent v2 subagents; Root supplied the verified
+archive directly, and the DM consumed it without retry. Exact intake, archive and transport facts
+are in `SCDMP_D6_RECAST_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-recast-convergence-01/`. Portfolio lifecycle and investment remain
+outside this direction-local decision.
