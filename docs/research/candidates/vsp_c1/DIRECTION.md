@@ -1,5 +1,15 @@
 # Direction vsp_c1: VSP-C1
 
+## Research organization — 2026-09-04
+
+This source belongs to route **K4 — 跨时长共享、组合与负迁移**, in the **duration 表示与价值共享** family
+of **灵活 skill duration**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority

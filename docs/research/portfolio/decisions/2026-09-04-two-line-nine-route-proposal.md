@@ -1,7 +1,8 @@
 # 两类、六族、九路线：修订提案
 
 日期：2026-09-04
-状态：`PRO_PROPOSAL / OWNER_REVIEW`；尚未更改生命周期、优先级或恢复执行
+状态：`PRO_FINAL / OWNER_DIRECT / ROOT_INTEGRATED`；所有者随后批准推进自动研究，见
+[采用与恢复记录](2026-09-04-adopt-nine-routes-and-resume.md)。以下提案正文保留审阅时语境。
 来源：[所有者复制的完整 6 Pro 回复](../../../external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md)
 证据参考：`b35eadf954a0bc56f3291f3b3d2b9ece0748e4a9`
 

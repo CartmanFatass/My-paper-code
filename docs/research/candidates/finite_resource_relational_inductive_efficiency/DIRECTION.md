@@ -1,5 +1,15 @@
 # Direction finite_resource_relational_inductive_efficiency: finite-resource relational inductive efficiency
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N1 — 关系归纳与学习效率**, in the **集合与关系表示** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This is the prospective scientific authority for a single-host successor distilled from the former
 CCIC, EGRCR, SGSP, and VQFP investment lines. Current lifecycle, priority, and owner remain solely in
 `docs/research/portfolio/PORTFOLIO.md`.

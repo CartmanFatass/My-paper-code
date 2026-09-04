@@ -1,5 +1,15 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配置与几何** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
