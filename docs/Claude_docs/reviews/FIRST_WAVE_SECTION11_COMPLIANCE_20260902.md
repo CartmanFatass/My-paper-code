@@ -1175,6 +1175,57 @@ refused relaunch at 21:15:26Z (`BLOCKED_UNCOMMITTED`, HEAD moved between push an
 nothing created) is a deviation for the result document, as is the first attempt. Early pace
 40–50 s per slice, projecting 25–35 minutes against the 120-minute cap.
 
+### E.8 Second and third attempts, three orchestration defects, fourth launch (2026-09-03, 16:59 PDT)
+
+The second attempt (`b1-340ffb3c…`) trained all 12 arm-seeds to checkpoint 48 and stopped in
+the post-learner publication path: `policy replay active-mode provenance differs`. Established by
+reproduction over the recorded bytes: `observe_active_modes` returns the modes that violate
+frozen FP32 CPU execution, so a conformant slice records an empty list, and the gate demanded a
+non-empty one; two downstream consumers require it empty, so the predicate pair was
+unsatisfiable by any conformant run. The runner itself classified the attempt
+`B1_ENGINEERING_ATTEMPT_INCOMPLETE`, `scientific_branch: null`, object not consumed. Repair
+`09acf0539` with three pinning tests (`1 failed, 287 passed`, the failure pre-existing).
+
+The third attempt (`b1_scout_r03`) cleared that gate, completed all twelve arm-seeds and failed
+at the next check. Rather than a fourth blind repair at 37 minutes per attempt, the implementer
+exercised the whole post-learner path offline against the quarantined evidence and found the two
+remaining defects together: the evaluation coverage key read a metrics-table column
+(`checkpoint_update`) where the raw records carry `update`, so every evaluation keyed to `None`;
+and the formal profile hard-coded 128 evaluation join records per slot against the canonical 4,
+which only the test-only branch had right, so the one end-to-end test could never have caught
+it. Repair `0b629eff4` with two pinning tests (`1 failed, 289 passed`); offline validation:
+12 of 12 slots prepared, one replay child end to end in 22.9 s, the full twelve-child batch with
+its witness in 323.5 s.
+
+Reviewer's classification, adopting the implementer's: technical defects in orchestration
+predicates, none scientific, none an instrumentation failure of the learner; the learner's
+outputs from the failed attempts are quarantined evidence and nothing is resumed. The defects
+were reached after the learner ran, which the reviewer's E.6/E.7 categories did not name; the
+disposition (repair, fresh attempt, no resume, no salvage) is the same, and every attempt is a
+fresh run from a fresh RNG master at a new sha.
+
+Fourth launch: sha `0b629eff4`, 23:46:34Z, run root `b1_scout_r04`, detached, path budget 250
+of 260, healthy at 5 of 12 slots at report time; learner about 00:23Z, publication about
+00:30Z.
+
+Three items put on record with the reviewer's recommendation and the delegated selection:
+
+1. The result document waits for the completed run. No decision.
+2. `supervise_policy_replay_child` still enforces every `B1_RESOURCE_CAPS` entry and kills on any
+   cap failure, where the recast makes RSS, scratch and durable size recorded budgets and only
+   the wall cap stops a run. It did not fire (202 MiB against the 512 MiB durable cap). Options:
+   (a) leave it for this attempt, record it as a known defect in the result document, repair it
+   with a pinning test after the result is published; if it fires during r04, quarantine and
+   repair; (b) stop r04 and repair now. **Owner-delegated decision (unattended): (a).**
+3. The unified end-to-end test profile does not exercise the formal path, which is why three
+   defects reached production. Options: (a) after the B1 result, repair the profile so the formal
+   constants and the post-learner path are covered, as a separate engineering commit; (b) leave
+   it. **Owner-delegated decision (unattended): (a).**
+
+Also recorded: incident preservation writes `.raw-*.json` receipts past `MAX_PATH` (readable only
+through the `\\?\` prefix); the path budget covers the staging root, not the incident root. An
+engineering item for the same follow-up commit.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
