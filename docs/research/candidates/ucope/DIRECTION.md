@@ -880,3 +880,27 @@ Owner decision (2026-09-03, compliance note D.25): `PAID_ACQUISITION_STATUS=UNEV
 competence; **PA-B is recorded beside them as the measured status under `A_paid`**
 (`PAID_ACQUISITION_MEASURED_A_PAID=5_OF_6_TREATMENT_6_OF_6_REFERENCE`). The chain is paused; the
 three-witness hinge object is queued as its next object when a concurrency slot frees.
+
+## Three-witness hinge result — 2026-09-04
+
+Object `UCOPE-B-EXPLORE-THREE-WITNESS-HINGE-R01`, card
+`UCOPE_THREE_WITNESS_HINGE_R01_CARD_20260904.md`, result
+`UCOPE_THREE_WITNESS_HINGE_R01_RESULT_EVIDENCE_20260904.md`: branch **TW-B**. On the reused paired
+draw, oracle-signed coverage of all three odd-support witnesses closes the even-support tail
+agreement gate in 6 of 6 policies, against 4 of 6 for a live equal-total-dose one-witness null.
+Every comparator pass survives, all three held-out direction gaps are positive under the treatment,
+and tripling the single-witness dose does not remove the two uncovered-direction failures.
+
+The native contradiction is equally sharp. Full `C_even` remains 3 of 6 for both arms: the two
+repaired tail policies become false-positive roots that buy the probe at
+`LINKED-p17_20-c7_50`, incurring `0.028562899` regret each, while the earlier seed-02/fold-1 refusal
+at the profitable target remains. `C_root` is 5 of 6 for the dose null and 3 of 6 for the treatment;
+the paired exact reference is root-correct 6 of 6 and tail-competent 3 of 6. Thus direction coverage,
+not dose, is sufficient for this draw's tail criterion, but tail shaping alone translates rather
+than removes the remaining competence failures.
+
+Claim ceiling: six-policy, same-draw B/EXPLORE mechanism observation for an oracle-signed objective;
+no stable, seed-population, deployable-objective, acquisition, COUNT/RAW, generic MARL, transfer,
+safety or Portfolio conclusion. The paid-acquisition and COUNT/RAW records are unchanged. The next
+choice—root-safe joint shaping, fresh-draw replication, the paid-root refusal, or park—is direction
+tier and is pending `em:ucope:convergence`; no successor is locally registered.
