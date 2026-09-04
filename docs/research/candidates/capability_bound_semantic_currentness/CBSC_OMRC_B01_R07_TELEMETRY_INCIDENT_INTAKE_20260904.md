@@ -230,6 +230,28 @@ binding record is `temp/directions/capability_bound_semantic_currentness/control
 in its local worktree. This is evidence staging, not uncommitted source transport. Read the
 matched copy for the offline engineering check; preserve the original and its non-scientific status.
 
+## Prospective engineering-budget return
+
+Before a source freeze, CM reported a mutable diff of five existing runtime files, 179 additions
+and 251 deletions (net minus 72), and four existing tests, 123 additions and 21 deletions. The
+runtime changes concern supervision, resource handling and publication, so the conservative literal
+accounting is **430 orchestration lines of 430 changed runtime lines, 100%**, above section 5's
+30% ratio. Zero runner growth and zero added section-4 machinery do not make that ratio conformant.
+The final return must replace these provisional counts with the exact committed counts.
+
+Options: **(a)** finish the already-authorized minimal reversible repair, focused validation and
+independent review, returning the exact diff and its orchestration lines as the scope specification
+requires; or **(b)** return the currently unvalidated diff and leave its technical properties unknown.
+Recommendation: **(a)**. A concrete tested return is necessary to assess this requested bug repair.
+Padding the patch with unrelated science code is not an option.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Object tier, technical,
+`OWNER_DELEGATED`. This authorizes completion of the existing repair work, not a repository budget
+change, a claim of scope conformance, final technical acceptance, or a fresh B attempt. The
+independent review must name the budget breach and return the relevant lines beside its correctness
+findings. DM will take that concrete return in before any technical acceptance or next-run decision;
+Root has been informed. No unrequested machinery is accepted as the price of a result.
+
 ## Owner surface and integration
 
 Owner reviews were empty in both DM and Root checkouts; no CBSC owner override was present. The
@@ -244,6 +266,9 @@ Shared-ledger insertion anchor: `cbsc-r07-telemetry-incident`.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-09-04T15:07:23-07:00 | capability_bound_semantic_currentness | object | technical | (a) exit recheck only; (b) quarantine incomplete r07 and repair resource-only downgrade through existing publication; (c) resume or interpret partial r07 | (b) bounded resource-only repair; strict learner and independent wall checks; no r08 | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (b) | `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-013.json` | none | |
 | 2026-09-04T15:12:53-07:00 | capability_bound_semantic_currentness | object | technical | (a) include existing mechanical resource handling/completeness dependency; (b) drop rows or fabricate zeroes; (c) retain known downstream refusal | (a) bounded existing resource handling only; strict admission and non-resource facts retained | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-014.json` | none | |
+| 2026-09-04T15:23:40-07:00 | capability_bound_semantic_currentness | object | technical | (a) finish minimal repair validation/review and return exact orchestration breach; (b) return current unvalidated diff | (a) concrete reviewed return with budget breach explicit; no final acceptance or r08 | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-015.json` | none | |
 
 The second row's shared-ledger anchor is `cbsc-r07-resource-dependency` and its owner item is
 `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-014.json`.
+The third row's shared-ledger anchor is `cbsc-r07-repair-budget-return` and its owner item is
+`docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-015.json`.
