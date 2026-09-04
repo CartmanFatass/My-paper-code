@@ -4,7 +4,12 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
+import pytest
+
+from experiments.candidates.finite_resource_relational_inductive_efficiency.b01 import batch_collector
+from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.contract import B01ContractError
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.constants import (
     MIN_AVAILABLE_BYTES,
 )
@@ -25,6 +30,77 @@ from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02.tapes import (
     production_training_inputs,
 )
+
+from ..b01.test_batch_collector import _FakeBatchEnvironment, _model
+
+
+def test_factual_replay_relaxes_only_intermediate_bits(monkeypatch):
+    import torch
+
+    torch.set_num_threads(1)
+    monkeypatch.setattr(batch_collector, "B01NativeBatchEnvironment", _FakeBatchEnvironment)
+    tapes, origins = batch_collector.make_test_update_inputs(
+        b"C" * 32, seed_label=batch_collector.TEST_SEED_LABELS[0], update=1,
+    )
+    positions = tuple(range(0, 64, 2))
+    model = _model()
+
+    def actor(observations, roles, incoming_hidden):
+        # Exact test arithmetic isolates guard behavior from batch-width rounding.
+        probabilities = torch.from_numpy(batch_collector._expected_masks(roles.numpy())).float()
+        probabilities /= probabilities.sum(dim=2, keepdim=True)
+        return SimpleNamespace(hidden=incoming_hidden + 0.125, probabilities=probabilities)
+
+    monkeypatch.setattr(model, "actor_step_batch", actor)
+    factual = batch_collector._collect_factual_roster(
+        model=model, adapter=None, roster=9, positions=positions,
+        tapes=tuple(tapes[i] for i in positions),
+        origins=tuple(origins[i] for i in positions),
+    )
+
+    def audit(**kwargs):
+        with torch.no_grad():
+            return batch_collector._audit_factual_suffixes(
+                model=model, adapter=None, factual=factual, **kwargs,
+            )
+
+    assert audit()[1] == 624
+    for field, message in (
+        ("incoming_hidden", "predecision trace differs"),
+        ("postdecision_hidden", "actor trace differs"),
+        ("probabilities", "actor trace differs"),
+    ):
+        with monkeypatch.context() as changed:
+            for trace in factual.traces:
+                for row in trace:
+                    value = getattr(row, field)
+                    changed.setattr(row, field, value + 1e-7)
+            with pytest.raises(B01ContractError, match=message):
+                audit()  # Legacy callers retain strict comparison by default.
+            assert audit(require_intermediate_bit_equality=False)[1] == 624
+
+    sample = model.actions_from_uniforms_batch
+
+    def changed_action(probabilities, uniforms):
+        actions = sample(probabilities, uniforms).clone()
+        legal = batch_collector.LEGAL_ACTION_INDICES[0]
+        actions[0, 0] = next(action for action in legal if action != actions[0, 0])
+        return actions
+
+    with monkeypatch.context() as changed:
+        changed.setattr(model, "actions_from_uniforms_batch", changed_action)
+        with pytest.raises(B01ContractError, match="actor trace differs"):
+            audit(require_intermediate_bit_equality=False)
+
+    class ChangedTrajectory(_FakeBatchEnvironment):
+        def step(self, actions):
+            result = super().step(actions)
+            self.scores[0] += 1
+            return result
+
+    monkeypatch.setattr(batch_collector, "B01NativeBatchEnvironment", ChangedTrajectory)
+    with pytest.raises(B01ContractError, match="origin transition differs"):
+        audit(require_intermediate_bit_equality=False)
 
 
 def _rule(**overrides):

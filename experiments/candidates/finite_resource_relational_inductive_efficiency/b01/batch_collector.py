@@ -312,6 +312,7 @@ def _chunks(values: Sequence[Any], width: int = 32):
 
 def _audit_factual_suffixes(
     *, model: FRRIEActorCritic, adapter: object, factual: _FactualRoster,
+    require_intermediate_bit_equality: bool = True,
 ) -> tuple[tuple[BatchWorkLedger, ...], int, int]:
     import torch
 
@@ -346,7 +347,8 @@ def _audit_factual_suffixes(
                         or not _same_array(frame.observations[lane], expected.observations)
                         or not _same_array(frame.roles[lane], expected.roles)
                         or not _same_array(frame.legal_masks[lane], expected.masks)
-                        or not torch.equal(hidden[lane], expected.incoming_hidden)
+                        or (require_intermediate_bit_equality
+                            and not torch.equal(hidden[lane], expected.incoming_hidden))
                     ):
                         raise B01ContractError("B01 factual suffix predecision trace differs")
                 observations, roles = _torch_frame(frame)
@@ -362,8 +364,10 @@ def _audit_factual_suffixes(
                 for lane, task in enumerate(chunk):
                     expected = factual.traces[task.episode_lane][future]
                     if (
-                        not torch.equal(actor.hidden[lane], expected.postdecision_hidden)
-                        or not torch.equal(actor.probabilities[lane], expected.probabilities)
+                        (require_intermediate_bit_equality and (
+                            not torch.equal(actor.hidden[lane], expected.postdecision_hidden)
+                            or not torch.equal(actor.probabilities[lane], expected.probabilities)
+                        ))
                         or not torch.equal(actions[lane], expected.actions)
                     ):
                         raise B01ContractError("B01 factual suffix actor trace differs")

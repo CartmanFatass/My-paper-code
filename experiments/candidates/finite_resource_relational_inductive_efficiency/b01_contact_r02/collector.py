@@ -153,6 +153,7 @@ def collect_r02_arm_update(
         with torch.no_grad():
             audit_ledgers, roster_audit_slots, audit_calls = _audit_factual_suffixes(
                 model=model, adapter=adapter, factual=factual,
+                require_intermediate_bit_equality=False,
             )
             values, alternative_ledgers, alternative_roster_slots, alternative_calls = (
                 _collect_nonfactual_suffixes(model=model, adapter=adapter, factual=factual)
@@ -236,7 +237,8 @@ def collect_r02_arm_update(
         total_environment_slots=total_slots,
         factual_suffixes_audited=192,
         alternative_suffixes_executed=448,
-        factual_trace_direct_equal=True,
+        # Actions and native trajectories are exact; intermediate FP32 bits are not audited.
+        factual_trace_direct_equal=False,
         model_bytes_unchanged=True,
         torch_actor_batch_calls=actor_calls,
         torch_critic_batch_calls=2,
