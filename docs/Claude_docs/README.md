@@ -88,6 +88,12 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `OWNER_INTERVENTION_WORKFLOW_PLAN_20260904.md` — the plan behind the owner-intervention decision
+  of 2026-09-04: intervene in selection pressure and output format, never in execution; the
+  owner's four answers (Chinese brief per valid result, soft veto for new cards, no prediction
+  wait, MEI 5%/25% and recast budget one, no hard stops added); every file changed and why; how a
+  decision flows through ledger, digest, prediction queue and briefs; the owner's rhythm; what
+  Codex does first; what is still open.
 - `MARL_EXPLORATION_GUIDANCE_20260904.md` — alignment draft for the owner and Codex Root on how to
   explore MARL algorithms after the 2026-09-04 portfolio snapshot: the observed outcome pattern
   (`NEITHER`, comparator weak, generic wins, narrow positives), a three-part diagnosis, five

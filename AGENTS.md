@@ -45,6 +45,17 @@ node is re-opened with that document rather than a new round.
 
 Only the owner takes Portfolio-tier decisions in the owner's absence; see §4.
 
+**Investment policy** (owner decision 2026-09-04, evidence spec §11.7). A mechanism B object
+family is opened only when the direction has on record a headroom measurement on its host, the
+gap between a stated upper reference and the tuned same-information baseline, of at least 5% of
+the baseline return; until then the direction's next object is that measurement. A B result is
+read against that headroom: closing at least 25% of it is a positive signal, less is `NEITHER`,
+the opposite sign closes the exact object. Each direction has a recast budget of one: a second
+Convergence `RECAST` still executes (the Pro decision is final for its node), but the direction
+drops to the lowest sequencing priority among ACTIVE directions and the DM flags a digest row
+`second-recast`; the owner may PARK it asynchronously. Nothing in this paragraph waits for the
+owner, none of it is a §11.4 launch condition, and ladders already open continue.
+
 ## 3. Blocker rule
 
 A connector, evidence, or transport blocker means no Pro decision was formed. It never transfers
@@ -70,11 +81,29 @@ When the owner is absent the loop keeps running under a standing delegation (own
    history rewrites, deletion of evidence roots, or any other irreversible action outside the
    ordinary research loop; edits to this file, `.codex/`, `.agents/`, or `CLAUDE.md`.
 4. **Audit ledger.** Every automatic decision is appended to
-   `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, options,
-   chosen option, reversible (yes/no), provenance label, evidence path, and an empty `owner`
-   column. The owner intervenes by filling that column; a non-empty entry overrides the decision
-   and the loop applies it at the next clean boundary.
-5. The delegation lasts until the owner revokes it.
+   `docs/research/portfolio/audit/<YYYY-MM-DD>.md` as one row: time, direction, tier, kind,
+   options, chosen option, reversible (yes/no), provenance label, evidence path, owner flag, and
+   an empty `owner` column. `kind` is `selection` when the choice picks what to run next or
+   changes a treatment, comparator, arm set or budget, otherwise `technical`. The owner flag is
+   `none` or one of `close-call` (the recommendation and its runner-up were not clearly
+   separated), `critic-dissent` (a critic's material objection was overruled), `second-recast`,
+   `portfolio`. The owner intervenes by filling the `owner` column; a non-empty entry overrides
+   the decision and the loop applies it at the next clean boundary.
+5. **Owner surfaces** (owner decision 2026-09-04,
+   `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`). The loop never
+   waits for the owner. It writes to three append-only surfaces under
+   `docs/research/portfolio/owner/` (schemas in that directory's `README.md`) and reads the
+   owner's replies there and in the ledger at every clean boundary:
+   - `digest/<YYYY-MM-DD>.md`: one row per new science card (its one-sentence claim, binding MARL
+     structure, path), per ledger row whose owner flag is not `none`, per new brief, and per
+     Portfolio proposal awaiting ratification. A filled `owner` cell is an instruction.
+   - `PREDICTIONS.md`: one row per ladder, not per invocation, written when the ladder's first
+     card is frozen: the two competing mechanisms, the differentiating measurement, the DM's
+     prediction, an empty owner cell. At intake the DM scores whatever the cell holds and records
+     `not taken` otherwise.
+   - `briefs/<direction>/<YYYY-MM-DD>_<object>.md`: a one-page owner brief in Chinese for every
+     valid result, written at intake beside the English intake document.
+6. The delegation lasts until the owner revokes it.
 
 ## 5. Capacity and resume
 

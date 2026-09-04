@@ -50,6 +50,31 @@ Distinguish technical success, bounded task competence, comparative algorithm ad
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
 
+## Investment policy (owner decision 2026-09-04)
+
+Controlling record: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`;
+rule text: evidence spec §11.7 and `AGENTS.md` §2. These are investment rules, not launch gates.
+
+- **Headroom floor 5%.** A direction opens a mechanism B family only with a recorded headroom
+  measurement on its host (upper reference minus tuned same-information baseline) of at least 5%
+  of the baseline return. A direction without one has, as its smallest next investment, that
+  A/RECON measurement; Root sequences those first when comparing investments.
+- **Closure share 25%.** Compare B signals across directions by the share of recorded headroom
+  they close, not by absolute edge.
+- **Recast budget one.** A direction at its second Convergence `RECAST` continues (the Pro
+  decision is final for its node) but takes the lowest sequencing priority among ACTIVE
+  directions: Root admits every other ACTIVE direction's work first. It appears in the owner
+  digest as `second-recast`; Root does not mutate the lifecycle field, and an owner reply may PARK
+  it. Nothing waits for that reply.
+- **Usage per valid result.** `PORTFOLIO.md` carries one column per direction: usage consumed
+  per valid result (`AGENTS.md` §5 currency), filled from run summaries where wall time is
+  recorded and `unmeasured` otherwise. Root refreshes it with every snapshot and cites it in every
+  cross-direction proposal.
+- **Digest.** Every Portfolio proposal awaiting ratification, and every direction recommendation
+  a DM returns, is one row of `docs/research/portfolio/owner/digest/<YYYY-MM-DD>.md` with kind
+  `portfolio` (schema in `docs/research/portfolio/owner/README.md`). Root reads the `owner`
+  cells there at every clean boundary; a filled cell is the owner's ratification or refusal.
+
 ## Lifecycle semantics
 
 Update the smallest implicated unit:

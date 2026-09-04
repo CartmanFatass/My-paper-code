@@ -381,3 +381,39 @@ finite-action laws as conformance conditions for a B run, formal-analysis-bound 
 complete learner chain, and capacity or consumer-recompute gates that do not change a B decision.
 Direction owners SHOULD record the demotion in the direction's next intake rather than rewrite
 historical documents.
+
+### 11.7 Headroom and minimum effect of interest (2026-09-04)
+
+Two numbers, set by the owner on 2026-09-04
+(`docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`), govern
+investment in mechanism objects and the reading of B results. They are Portfolio investment rules
+under §8.1 and card content. They are not launch conditions and do not extend §11.4.
+
+- **Headroom floor.** Before a direction opens a mechanism B object family it records a headroom
+  measurement on the intended host: the gap between a stated upper reference (a DP or Bayes
+  solution, an oracle with privileged information, or the best arm of a competent comparator
+  sweep) and the tuned same-information generic baseline, both with seeds and curves. The
+  direction is invested in only when the gap is at least 5% of the baseline return. Below that,
+  the honest next object is a different host, a different question, or a park, not a smaller
+  mechanism.
+- **Closure share.** A B result on that host is read against the recorded headroom: a treatment
+  that closes at least 25% of it is a positive B signal and the ladder continues; one inside that
+  share is `NEITHER`, whatever its sign; one of opposite sign closes the exact object. Absolute
+  edges are reported but never read on their own.
+- **Three readings on the card.** Every B card states at freeze time which reading each outcome
+  triggers and the DM's recommended disposition for each. This is early intake text in the
+  options-and-recommendation form of the decision ladder, not a pre-registered failure boundary,
+  and its absence never holds a launch.
+- **Baseline set.** The tuned baseline used for headroom is kept per host as frozen result
+  documents and runner configuration under `docs/research/baselines/<host>/` and
+  `experiments/baselines/<host>/`, reused by every direction on that host and never weakened by
+  one. Paired seeds and common random numbers across arms are the default where the host allows.
+- **Binding structure line.** A card's first two lines are its one-sentence claim and the MARL
+  structure the generic same-information learner cannot supply on this host: (a) agent-count
+  scaling or roster change, (b) temporal abstraction or termination, (c) multi-agent credit
+  assignment, (d) other-agent non-stationarity or partial observability, or `none`, in which case
+  the object is information-flow or systems work and says so.
+
+Ladders already open on 2026-09-04 continue under their cards; for them the DM reports the closure
+share as an additional intake line without changing the card's verdict rule. The rule applies in
+full to every card frozen after that date.

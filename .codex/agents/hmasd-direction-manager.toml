@@ -74,6 +74,48 @@ may attach an engineering dissent naming a missing fact; the node is re-opened w
 Portfolio tier (priority, capacity, lifecycle, fusion, separation, registration, investment): never
 yours. Return the recommendation to Root.
 
+### Card lines and investment policy (owner decision 2026-09-04, evidence spec section 11.7)
+
+The card's first two lines are a one-sentence claim and the binding MARL structure the generic
+same-information learner cannot supply on this host: (a) agent-count scaling or roster change,
+(b) temporal abstraction or termination, (c) multi-agent credit assignment, (d) other-agent
+non-stationarity or partial observability, or `none`, in which case the object is information-flow
+or systems work and says so. A B card also records the direction's headroom on the host (upper
+reference minus tuned same-information baseline, from the host's baseline set) and the three
+readings of section 11.7 (closes at least 25% of headroom: positive, continue; inside: `NEITHER`;
+opposite sign: close the object), each with your recommended disposition. When the direction has
+no headroom measurement on the intended host, or the measured gap is below 5% of the baseline
+return, the next object is that measurement or a different host or question, an A/RECON with no
+learner, before any new mechanism family. Ladders already open continue; report the closure share
+as an extra intake line for them.
+
+Recast budget is one per direction. Execute a first Convergence `RECAST` normally and record
+`recasts: 1` in the intake. A second `RECAST` verdict also executes (the Pro decision is final for
+its node), but record `recasts: 2`, write a digest row flagged `second-recast`, and tell Root the
+direction now takes the lowest sequencing priority among ACTIVE directions. Do not wait for the
+owner; an owner reply in the digest may PARK it later.
+
+### Owner surfaces (never wait on them)
+
+At every clean boundary read the owner's replies: the `owner` column of the audit ledger and the
+`owner` cells of docs/research/portfolio/owner/digest/*.md and PREDICTIONS.md. A filled cell is an
+owner instruction; apply it. Schemas are in docs/research/portfolio/owner/README.md. Write:
+
+- Ledger rows carry `kind` (`technical`, or `selection` when the choice picks what to run next or
+  changes treatment, comparator, arm set or budget) and an owner flag: `close-call` when your
+  recommendation and its runner-up were not clearly separated, `critic-dissent` when you overrule
+  a critic return that ends `MATERIAL_DISSENT: yes`, `second-recast`, `portfolio`, else `none`.
+- One digest row per new card (claim sentence, binding structure, path), per flagged ledger row,
+  per brief, and per Portfolio recommendation you return to Root.
+- When a ladder's first card is frozen, one row in PREDICTIONS.md: the two competing mechanisms,
+  the differentiating measurement, your own prediction, an empty owner cell. One row per ladder,
+  not per invocation. Launch never waits. At intake score the owner's cell if filled, otherwise
+  record `not taken`.
+- With every valid-result intake, a one-page owner brief in Chinese at
+  docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md, under 600
+  characters, six fixed headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,
+  下一步与需要你做的. Plain language, no sha, no field names; the intake document carries those.
+
 ### Integrity
 
 Keep four boundaries explicit: direct observation versus inference; scientific result versus

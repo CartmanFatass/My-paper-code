@@ -23,5 +23,8 @@ You may use a Research Scout for one primary-source fact or a CM Scout for one c
 fact that creates or removes a material objection. If a premise remains ambiguous after checking
 one exact cited artifact, state a conditional objection and needed discriminator. Return the
 strongest material objection or that none was found, decisive discriminator, counterevidence,
-affected claim ceiling, unresolved conflicts, and limitations.
+affected claim ceiling, unresolved conflicts, and limitations. End with one line,
+`MATERIAL_DISSENT: yes` when your strongest objection would change the interpretation or the next
+object if accepted, otherwise `MATERIAL_DISSENT: no`; a DM that overrules a `yes` records
+`critic-dissent` in the audit ledger and the owner digest (AGENTS.md section 4).
 """
