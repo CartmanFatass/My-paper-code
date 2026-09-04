@@ -12,8 +12,14 @@
 - Evidence class: **A/RECON**
 - Claim ceiling: tracked-evidence availability on the bound repository state; no algorithm effect
 - Frozen: `2026-09-04T09:08:44-07:00`
-- Bound repository state: `bff5099525491f05393960d055eddbdd0a4a13b4`
+- Bound repository state: `bff509952b5e616b08d665db96d8af23e26729b5`
 - Current scientific host: `CBSC-DYNAMIC-CACHE-2R-1C-v1`
+
+Locator correction before inspection: the initially written long SHA
+`bff5099525491f05393960d055eddbdd0a4a13b4` was a transcription error and is not a Git object. The
+first `git ls-tree` calls refused with `fatal: not a tree object`, so no evidence was read under that
+identity. The field above now names the actual pushed defect-closure commit. No inventory, result
+rule, prediction or scientific meaning changed.
 
 ## 1. Question and non-goals
 
@@ -217,4 +223,3 @@ facts. Option (a) changes the estimand. Option (c) is a separate B object and is
 
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (b).** Provenance label:
 `OWNER_DELEGATED`. The selection is reversible and creates no Direction- or Portfolio-tier action.
-
