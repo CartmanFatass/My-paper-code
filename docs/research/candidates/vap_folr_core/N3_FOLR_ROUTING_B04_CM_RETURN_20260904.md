@@ -71,3 +71,66 @@ runner, and five minutes for the focused suite. Stop on the first failing step; 
 
 Static checks: three new Python files parse; the six reading-rule/count/cost tests pass locally
 in 0.10 seconds. They launch no learner. No B3 source or unrelated path has changed.
+
+## Technical acceptance and recorded cost before full launch
+
+Implementation SHA **`0f83132fb3484f8366eaaa5863559d203f0cb369`** is committed and pushed.
+Independent reviewer found no material defect: 506 research-code lines, runner 178 lines,
+approximately 23–26% orchestration, no section 4 additions. CM inspected the integrated diff.
+
+Remote smoke task `n3-folr-b04-smoke-20260904-a1` finished with exit 0, supervisor PID 82693.
+The seven-test suite passed in **4.69 s**; learner wall was **2.382219321 s**, peak RSS
+**483,033,088 bytes**. Actual smoke activity: 512 training episodes, 8 updates, 5,888
+evaluation episodes, 6,400 complete episodes and 19,200 primitive transitions.
+At `2026-09-04T22:06:11.717379Z`, node admission measured physical and effective available
+memory of **12,773,167,104 bytes**, both above 4 GiB. The output contains four readable final
+checkpoints with optimizer states, five plain evaluation files and the final summary.
+Smoke checks compare frozen writer tensors, native reward rows, probability normalization,
+zero obsolete-flip TV for TYPED/RESET, actual counts and nonzero parameter displacement.
+
+**Per-arm cost projection:** measured smoke coefficients below use the runner's law
+`train_episodes * seconds_per_train_episode + eval_episodes * seconds_per_eval_episode`.
+Each routing phase has 24,576 train and 13,824 evaluation episodes across three seeds;
+the writer has 24,576 train and 6,912 evaluation episodes. LATCH has 1,536 eval episodes.
+Final flip diagnostics are included in evaluation wall; their separately recorded subtime
+must not be added again. Checkpoint/publication and process startup overhead are outside
+this episode law; observed smoke total wall remains recorded above.
+
+| Phase | Train s/episode | Eval s/episode | Projected phase s | Arm s including full shared writer |
+| --- | ---: | ---: | ---: | ---: |
+| WRITER | 0.0005884640781346206 | 0.00031719232812103354 | 16.65452655620902 | — |
+| TYPED | 0.0002527308749904478 | 0.00025939302409009696 | 9.796963148786745 | 26.451489704995765 |
+| GENERIC | 0.00027637393753821016 | 0.00025631476563129735 | 10.335461209026107 | 26.989987765235128 |
+| RESET | 0.0002827966640666091 | 0.00026871563867321885 | 10.664735805119562 | 27.319262361328583 |
+| LATCH | 0 | 0.000239170589850346 | 0.36736602601013146 | evaluation only |
+
+Total projected invocation: **47.819052745151566 s**. All projected phases and charged arms
+fit 600 s; the invocation fits 2,400 s. No arm is dropped. This is a budget projection,
+not a throughput claim or runtime resource disposition.
+
+**Post-learner path coverage:** the one smoke reached the actual final publication path with
+formal batch size 64 and evaluation size 256, all three routing arms and final LATCH. It
+exercises the full path at two updates, not the formal 128-update endpoint; full-endpoint
+execution coverage remains an open engineering item until the full run completes.
+No post-learner failure has occurred in B04.
+
+One remote preparation correction occurred before any learner: a fetch without the declared
+login/interactive network shell made no progress for 82 s and was terminated explicitly.
+The same branch fetch through configured `zsh -lic` then succeeded in the five-second
+preparation command. This is an observed invocation difference; no source repair, learner
+retry or scientific root duplication occurred. Shell startup printed unrelated gitstatus
+initialization messages but fetch/worktree creation exited 0.
+
+## Frozen full invocation
+
+Launch source remains `0f83132fb3484f8366eaaa5863559d203f0cb369`; the subsequent report-only
+commit changes no execution bytes. Node `wsl_4070`, detached cwd
+`/home/wu/hmasd-worktrees/cm-n3-folr-b04-20260904-a1`, task
+`n3-folr-b04-full-20260904-a1`. Exact command after `cd`:
+
+```sh
+/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/vap_folr_core/exp/n3_routing_b04_full_20260904_a1/resource_admission.json && timeout 2400s /home/wu/.venvs/hmasd/bin/python scripts/run_folr_n3_routing_b04.py --seeds 96041 96042 96043 --output-root temp/directions/vap_folr_core/exp/n3_routing_b04_full_20260904_a1
+```
+
+One accepted process will be handed to the DM for the shared tracker. No duplicate observer,
+new heartbeat, restart or migration is added. Completion/timeout/failure is the stop condition.
