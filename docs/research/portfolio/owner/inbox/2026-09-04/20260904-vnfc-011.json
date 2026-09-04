@@ -1,0 +1,68 @@
+{
+  "id": "20260904-vnfc-011",
+  "created": "2026-09-04T12:08:31-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "direction",
+  "kind": "second-recast",
+  "title": "VNFC controller-headroom second recast",
+  "context": "The valid K1024 result was MB1024-D, while its earlier sparse-manifest failure remains technical only. Persistent Convergence selected a same-host, same-information causal one-deviation A/RECON successor. This is the direction's second recast, so current authority executes it but lowers sequencing priority among ACTIVE directions; only the owner may later PARK.",
+  "options": [
+    {
+      "key": "continue-low-priority",
+      "label": "Continue R03 at lowest ACTIVE sequencing priority",
+      "consequence": "R03 continues through CM/calibration/one remote result if admitted; lifecycle remains ACTIVE."
+    },
+    {
+      "key": "park",
+      "label": "PARK the direction",
+      "consequence": "Root records PARK; R03 stops at the next clean boundary and evidence remains immutable."
+    }
+  ],
+  "recommended": "continue-low-priority",
+  "auto_applied": "continue-low-priority",
+  "dm_reason": "A concrete reversible A/RECON discriminator exists, so the second-recast rule continues it at lowest sequencing priority.",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_RECAST_ESTIMAND_CONVERGENCE_02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-controller-headroom-r03-pro-final",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "VNFC 已发生第二次 direction recast，所有者是否让它按规则以 ACTIVE 最低排程优先级继续，还是改为 PARK？",
+    "changes_if_approved": [
+      {
+        "target": "ACTIVE sequencing",
+        "from": "当前工作集排程位置",
+        "to": "ACTIVE 方向中的最低排程优先级；不改变 lifecycle"
+      }
+    ],
+    "if_refused": "若所有者选择 PARK，由 Root 形成 Portfolio 记录；当前科学结果、R03 卡片和所有历史 provenance 不重写。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/external/2026-09-04-vnfc-controller-headroom-convergence-02/2026-09-04-vnfc-controller-headroom-convergence-02--variable_n_fleet_churn--attempt-01__02_RESPONSE.md",
+        "quote": "Primary decision: RECAST_ESTIMAND_OR_INFORMATION_BOUNDARY.",
+        "why": "完整的 persistent Convergence node 明确形成第二次 recast 决定并给出可执行最小对象。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_INTAKE_20260904.md",
+        "quote": "It adds no lower-bound headroom. The sole material world remains zone 2 row 3.",
+        "why": "K1024 的新增科学信息有限，继续投资的机会成本应受最低排程约束。"
+      }
+    ],
+    "uncertainty": [
+      "R03 可能因 wall cap 或 causal-key feasibility 形成技术 blocker。",
+      "R03 即使为 CI-A 也只支持 in-panel one-deviation 结论。"
+    ],
+    "cost": {
+      "compute": "先一次低于 60 秒 calibration，最多再一次 2700 秒 remote result invocation。",
+      "owner_time": "异步二选一，无需阻塞研究循环。",
+      "reversibility": "reversible",
+      "waits_on_this": "研究不等待 owner；owner 的 PARK 指令在下一 clean boundary 应用。"
+    },
+    "verdict_text": "PRO_FINAL=RECAST_ESTIMAND_OR_INFORMATION_BOUNDARY; recasts: 2",
+    "source": "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_RECAST_ESTIMAND_CONVERGENCE_02_INTAKE_20260904.md"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "20260904-vnfc-012",
+  "created": "2026-09-04T12:08:32-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "VNFC causal one-deviation R03 card",
+  "context": "Claim: an exact finite same-information one-deviation class may expose material native R_fail_60 headroom above BCRH on the unchanged sixteen-world host. Binding structure: roster change after unannounced executor loss. The card implements the exact PRO_FINAL successor, with absolute MEI 0.10, no learner exposure, one result-blind calibration and at most one remote result.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "Accept the frozen R03 card",
+      "consequence": "CM implements the exact card and the admitted loop may continue without waiting."
+    },
+    {
+      "key": "reject",
+      "label": "Reject and do not launch R03",
+      "consequence": "No R03 result is launched; the direction returns to Root/owner without rewriting evidence."
+    },
+    {
+      "key": "revise",
+      "label": "Revise before further execution",
+      "consequence": "Stop before result launch and apply the owner's specified card change at the next clean boundary."
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "It is the smallest class-correct object specified by the final Convergence response and preserves all scientific boundaries.",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_CAUSAL_ONE_DEVIATION_R03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-controller-headroom-r03-card",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受并继续执行 Pro 已选定的 VNFC 因果单次偏离 R03 A/RECON 卡片？",
+    "changes_if_approved": [
+      {
+        "target": "controller-headroom scientific estimand",
+        "from": "特权完整未来带的 K256/K1024 宽度下界",
+        "to": "同一 host、同一十六世界、同信息的 BCRH 单次因果偏离有限策略类"
+      }
+    ],
+    "if_refused": "不启动 R03；K256/K1024 结果与 MB1024-D 解释保持不变，方向返回 owner/Root 决定下一步。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/external/2026-09-04-vnfc-controller-headroom-convergence-02/2026-09-04-vnfc-controller-headroom-convergence-02--variable_n_fleet_churn--attempt-01__02_RESPONSE.md",
+        "quote": "The smallest supported continuation is to retain the exact native host, sixteen-world population, R_fail_60 endpoint, and delta_fail=0.10, while replacing the information-asymmetric physical-headroom bracket with a finite same-information causal policy-improvement estimand around BCRH-PERSIST.",
+        "why": "这是完整的 direction-tier PRO_FINAL，对后继对象给出唯一具体定义。"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_INTAKE_20260904.md",
+        "quote": "The fourfold width increase resolves one predecessor pruning loss but does not resolve the panel-wide headroom bracket.",
+        "why": "有效 R02 支持停止继续加宽，并把可因果选择性作为更近的未决因素。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_RECAST_ESTIMAND_CONVERGENCE_02_INTAKE_20260904.md",
+        "quote": "Even CI-A can establish only an in-panel deterministic lookup-map ceiling for a one-deviation class.",
+        "why": "结果的外推范围很窄，且不能建立 learner competence 或 unrestricted causal optimum。"
+      }
+    ],
+    "uncertainty": [
+      "完整有限 census 的 conservative wall projection 需由 result-blind calibration 给出。",
+      "因果 history class 是否可由现有公开字段无歧义定义需 CM 直接验证。",
+      "全 panel 既用于策略选择又用于测量，因此没有 held-out/generalization 含义。"
+    ],
+    "cost": {
+      "compute": "一次低于 60 秒的 result-blind calibration；若投影低于 2700 秒，再允许一次 remote-first 结果调用。",
+      "owner_time": "无需等待；可异步接受、拒绝或要求修订。",
+      "reversibility": "reversible",
+      "waits_on_this": "不等待 owner；CM 技术接受和 fresh remote admission 仍是运行前边界。"
+    },
+    "verdict_text": "PRO_FINAL=RECAST_ESTIMAND_OR_INFORMATION_BOUNDARY; successor=VNFC-CONTROLLER-HEADROOM-A-RECON-CAUSAL-ONE-DEVIATION-R03",
+    "source": "docs/research/candidates/variable_n_fleet_churn/external/2026-09-04-vnfc-controller-headroom-convergence-02/2026-09-04-vnfc-controller-headroom-convergence-02--variable_n_fleet_churn--attempt-01__02_RESPONSE.md"
+  }
+}
