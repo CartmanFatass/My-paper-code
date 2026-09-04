@@ -1,0 +1,37 @@
+{
+  "id": "20260904-folr-004",
+  "created": "2026-09-04T14:54:46-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "decision",
+  "title": "N3 B04：复用真实替换环境，只改变事件状态掩码",
+  "context": "FOLR B3 已有成员替换环境，但旧写入器停止使通用接收器比较为空。本次延长固定写入预算并无条件训练类型化、通用与 RESET 接收器，单独测简单 latch。只选择已接受机制内的小步，不恢复 RCLE、DISH 或 VSP02 的旧链。",
+  "options": [
+    {
+      "key": "a",
+      "label": "运行单一环境的 B04 掩码比较",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "重复已完成的只读清点",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "建立联合状态与优化器平台",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "直接补上缺失比较，同时保留简单控制及信息切断边界。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L226",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
