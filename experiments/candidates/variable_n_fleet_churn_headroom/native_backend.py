@@ -6,6 +6,7 @@ import ctypes
 import os
 from pathlib import Path
 import subprocess
+import sys
 
 from experiments.candidates.variable_n_fleet_churn_bpcr_r09.contracts import MSVC_COMPILE_FLAGS
 from experiments.candidates.variable_n_fleet_churn_bpcr_r09.native_backend import (
@@ -17,10 +18,37 @@ from experiments.candidates.variable_n_fleet_churn_bpcr_r09.native_backend impor
 
 _SOURCE = Path(__file__).with_name("native") / "headroom_backend.cpp"
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
-_BINARY = (
+_BUILD_ROOT = (
     _REPOSITORY_ROOT
-    / "temp/directions/variable_n_fleet_churn/build/controller_headroom/headroom_analysis.dll"
+    / "temp/directions/variable_n_fleet_churn/build/controller_headroom"
 )
+
+
+def _analysis_binary_path(platform_name: str | None = None) -> Path:
+    platform_name = sys.platform if platform_name is None else platform_name
+    if platform_name == "win32":
+        suffix = ".dll"
+    elif platform_name.startswith("linux"):
+        suffix = ".so"
+    else:
+        raise RuntimeError(f"unsupported headroom analysis platform: {platform_name}")
+    return _BUILD_ROOT / f"headroom_analysis{suffix}"
+
+
+def _linux_build_command(binary: Path, compiler: str | None = None) -> tuple[str, ...]:
+    return (
+        compiler or os.environ.get("CXX", "c++"),
+        "-std=c++20",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        f"-I{_SOURCE.parent}",
+        str(_SOURCE),
+        "-o",
+        str(binary),
+    )
 
 
 class _BCRHCandidateRecord(ctypes.Structure):
@@ -97,38 +125,51 @@ class _HeadroomOutput(ctypes.Structure):
 
 
 def build_analysis_backend() -> Path:
-    """Build the single analysis DLL outside the scientific result root."""
-    _BINARY.parent.mkdir(parents=True, exist_ok=True)
-    installation = _vs_installation()
-    vcvars = installation / "VC/Auxiliary/Build/vcvars64.bat"
-    obj = _BINARY.with_suffix(".obj")
-    command = (
-        f'call "{vcvars}" >nul && cl {" ".join(MSVC_COMPILE_FLAGS)} '
-        f'"{_SOURCE}" /Fo:"{obj}" /link /OUT:"{_BINARY}"'
-    )
-    completed = subprocess.run(
-        command,
-        shell=True,
-        executable=os.environ.get("COMSPEC", "cmd.exe"),
-        cwd=_BINARY.parent,
-        capture_output=True,
-        text=True,
-    )
-    if completed.returncode or not _BINARY.is_file():
+    """Build the single analysis library outside the scientific result root."""
+    binary = _analysis_binary_path()
+    binary.parent.mkdir(parents=True, exist_ok=True)
+    if sys.platform == "win32":
+        installation = _vs_installation()
+        vcvars = installation / "VC/Auxiliary/Build/vcvars64.bat"
+        obj = binary.with_suffix(".obj")
+        command: str | tuple[str, ...] = (
+            f'call "{vcvars}" >nul && cl {" ".join(MSVC_COMPILE_FLAGS)} '
+            f'"{_SOURCE}" /Fo:"{obj}" /link /OUT:"{binary}"'
+        )
+        completed = subprocess.run(
+            command,
+            shell=True,
+            executable=os.environ.get("COMSPEC", "cmd.exe"),
+            cwd=binary.parent,
+            capture_output=True,
+            text=True,
+        )
+    elif sys.platform.startswith("linux"):
+        command = _linux_build_command(binary)
+        completed = subprocess.run(
+            command,
+            cwd=binary.parent,
+            capture_output=True,
+            text=True,
+        )
+    else:
+        raise RuntimeError(f"unsupported headroom analysis platform: {sys.platform}")
+    if completed.returncode or not binary.is_file():
         raise RuntimeError(
             f"headroom analysis backend build failed ({completed.returncode}):\n"
             f"{completed.stdout}\n{completed.stderr}"
         )
-    return _BINARY
+    return binary
 
 
 def require_analysis_backend() -> ctypes.CDLL:
     """Load the prebuilt adapter without compiling inside a result invocation."""
-    if not _BINARY.is_file():
+    binary = _analysis_binary_path()
+    if not binary.is_file():
         raise RuntimeError(
             "headroom analysis backend is not prebuilt; call build_analysis_backend before launch"
         )
-    library = ctypes.CDLL(str(_BINARY))
+    library = ctypes.CDLL(str(binary))
     library.vnfc_headroom_sizeof_output.argtypes = []
     library.vnfc_headroom_sizeof_output.restype = ctypes.c_size_t
     library.vnfc_headroom_run.argtypes = [
