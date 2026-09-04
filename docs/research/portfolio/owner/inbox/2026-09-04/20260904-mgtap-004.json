@@ -1,0 +1,37 @@
+{
+  "id": "20260904-mgtap-004",
+  "created": "2026-09-04T15:28:34-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "N5 B02：先做双算法完整曲线和短成本测量",
+  "context": "采用已获准的新 B 探索议程，在 N=4/8 相同信息、同表达能力、相同 SGD 和采样下比较 METRIC/FREE；旧 C 继续终止。",
+  "options": [
+    {
+      "key": "a",
+      "label": "双算法曲线及短成本测量",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "先扩大为参数和 binding 扫描",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "重复旧稳定性门槛",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是直接回答新问题的最小训练比较；先计价，避免没有预算依据的扩张。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

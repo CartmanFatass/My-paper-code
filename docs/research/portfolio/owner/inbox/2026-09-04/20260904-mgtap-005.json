@@ -1,0 +1,78 @@
+{
+  "id": "20260904-mgtap-005",
+  "created": "2026-09-04T15:28:34-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "N5 B02 新卡：相同信息下的配置结构与 FREE",
+  "context": "Claim: METRIC coordinates may change finite-budget native-return curves versus equal-class FREE. Binding structure: multi-agent credit assignment through shared residual capacity and team return.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续短成本测量与上限内固定三种子比较；旧 C 不变。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下个干净边界停止尚未运行的后续工作。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按意见修订后续新 B 对象，保留已观察结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "是否接受 N5 的首个小型探索对象：在相同信息和预算下比较 METRIC 与 FREE 的完整学习曲线？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md",
+        "from": "已获准探索但尚无具体对象",
+        "to": "两个等表达能力算法、三个配对种子、256 次更新及短成本测量"
+      }
+    ],
+    "if_refused": "在下一个干净边界停止尚未开始的后续运行，按意见修订新 B 对象；两个旧 C 的终止结论保持。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md",
+        "quote": "N3 and N5 may form small discriminating objects without waiting for all six to finish.",
+        "why": "所有者已采用小型探索议程。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md",
+        "quote": "The primary estimand integrates the curve through update 256.",
+        "why": "直接观察有限预算学习，不依赖旧稳定性门槛。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md",
+        "quote": "The strongest live alternative is generic coordinate-dependent conditioning or effective step size, followed by the implicit regularization of finite SGD; a shared fixed learning rate need not optimize both coordinate systems.",
+        "why": "即使有优势，也不能归因于几何本身；只有三个种子。"
+      }
+    ],
+    "uncertainty": [
+      "成本先用同配置的短训练实测；若超过每算法 300 秒上限，另作有记录的对象级调整。",
+      "当前没有已调优的同信息基线结果；本轮只是固定配置的早期观察。"
+    ],
+    "cost": {
+      "compute": "全对象至多 720 秒 CPU 时间窗；两算法主体各 300 秒，短成本运行 60 秒，共享准备 60 秒。",
+      "owner_time": "约两分钟阅读；无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐接受最小的双算法完整学习曲线对象，保留一般条件数与优化速度解释，不恢复旧 C。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md"
+  }
+}
