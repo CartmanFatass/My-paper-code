@@ -39,12 +39,20 @@ The panel is regenerated, not selected after this object's outcome:
 
 - R02 configuration identity: `B1-B3-PRIMARY`, seed `2026090311`, updates field `64` only because
   that field is part of the already recorded R02 namespace;
-- seed derivation and world law: `derive_seed_master` and `_build_world` in
-  `scripts/run_vnfc_bpcr_b_explore.py` at the launch sha;
+- R02 installation, seed derivation and world law: first call `install_r02()` from
+  `scripts/run_vnfc_bpcr_r02.py`, then use the inherited `derive_seed_master` and `_build_world`
+  path from `scripts/run_vnfc_bpcr_b_explore.py` at the launch sha;
 - purpose: `conclusion`; roster size: `N=7`;
 - cells: failed zone `z in {1,2}`, rows `0..7`, exactly eight worlds per zone;
-- namespace: `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R01/B1-B3-PRIMARY/2026090311` under the
+- namespace: `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02/B1-B3-PRIMARY/2026090311` under the
   existing R02 canonical-sort adaptation.
+
+**Pre-launch population-identity correction (2026-09-04T09:55:50Z).** The initial card commit
+mistakenly printed the inherited R01 namespace even though every surrounding population clause
+named the first valid R02 primary panel. The actual historical R02 runner calls `install_r02()`,
+which changes `RUN_NAMESPACE` and the valid seed family before world generation. The R02 namespace
+above is controlling; generating the corresponding R01 namespace is forbidden and would not
+observe this object.
 
 The choice of the first valid primary seed is outcome-blind with respect to controller headroom and
 implements the owner's literal sixteen-world instruction. The other two R02 primary panels are not
