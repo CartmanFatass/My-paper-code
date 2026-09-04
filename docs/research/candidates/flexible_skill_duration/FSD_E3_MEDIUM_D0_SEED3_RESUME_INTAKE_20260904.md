@@ -143,3 +143,23 @@ frozen large-row competence, paired-return and regional event-path rule then app
 This slice leaves the claim ceiling at B/EXPLORE. The next unlaunched cell after an accepted
 `medium_d0_seed3` launch is `medium_d2_seed3`; further invocation selection belongs to the
 continued unchanged ladder and is outside this one-launch handoff.
+
+## Intake of the running receipt
+
+CM returned and pushed run-record commit `2a40b1531da19aaaf1e11693bc4bb4bfb55bdf70`.
+I checked that document against the assignment: the one accepted task uses launch SHA
+`9c0a990537a8ffef58306429a1ff402550fc4b82`, seed 3, medium D0, CPU/four threads, all frozen
+rollout/evaluation arguments and the correct repaired source. Its immediately preceding remote
+receipt passed at `2026-09-04T21:39:47.176686Z`, physical/effective available bytes both
+`15429533696`. The supervisor wrapper and learner argv independently agree with the command.
+CM also checked the initial manifest configuration. The task is running, not valid complete.
+
+Accepted running task: `fsd_e3_medium_d0_seed3_20260904_01`, wrapper PID `74470`, learner PID
+`74473`. The run record contains its exact command, node, worktree, root and receipt. E3 now has
+10 valid cells, one running, seven never-launched and the one preserved historical quarantine.
+The owner reviews were checked again and contain no unapplied instruction. No additional
+selection, valid-result brief or scientific branch is produced by this running receipt.
+
+The durable next boundary is the existing task's completion and CM artifact intake. Root routes
+that continued observation; this DM returns the running handoff now rather than occupying the
+control-plane session until completion. No further invocation was admitted in this slice.
