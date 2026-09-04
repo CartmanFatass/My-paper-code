@@ -1,9 +1,13 @@
 # EGRCR finite-resource censored-substitution B01 result evidence — 2026-09-04
 
-Object: `EGRCR-FRCS-B01-20260904`  
-Evidence class: `B/EXPLORE`  
-Result branch: `FRCS-D-MIXED`  
-Launch SHA: `3c9124396430e88c619e91831cd7f8e14a08fa75`  
+Object: `EGRCR-FRCS-B01-20260904`
+
+Evidence class: `B/EXPLORE`
+
+Result branch: `FRCS-D-MIXED`
+
+Launch SHA: `3c9124396430e88c619e91831cd7f8e14a08fa75`
+
 Scientific seed: `2026090401`
 
 ## E0 result
@@ -156,4 +160,3 @@ critic. It produced a more decisive temperature-one policy and a `0.0120448` exp
 but that movement coexisted with larger Q and gradient errors, identical `8/8` greedy competence,
 and identical sampled utility. The result therefore supports neither clean factorization efficiency
 nor clean factorization failure on native utility. It is a valid mixed B observation.
-
