@@ -310,6 +310,24 @@ def test_r05_formal_publication_with_absent_resources(monkeypatch, tmp_path):
     def historical_bytes(relative):
         return subprocess.run(["git", "show", f"{commit}:{relative}"], cwd=b1.REPO_ROOT,
                               check=True, capture_output=True).stdout
+    historical_docs = tmp_path / "historical-specifications"
+    for relative in (production.LITERAL_BINDING_SPEC_RELATIVE_PATH,
+                     production.B1_METRICS_ONLY_SPEC_RELATIVE_PATH):
+        target = historical_docs / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(historical_bytes(relative))
+    literal_sha = hashlib.sha256(
+        (historical_docs / production.LITERAL_BINDING_SPEC_RELATIVE_PATH).read_bytes()
+    ).hexdigest()
+    assert literal_sha == "08cd6294cc1557ac1356862ba011be225acd00b826bdfe5a6e443f7c84d9fb1c"
+    # Only source-identity document reads use historical bytes. Production's
+    # archive lookup retains its actual repository root.
+    source_identity = production._source_identity
+    identity_context = dict(source_identity.__globals__, REPO_ROOT=historical_docs)
+    monkeypatch.setattr(production, "_source_identity", types.FunctionType(
+        source_identity.__code__, identity_context, source_identity.__name__,
+        source_identity.__defaults__,
+    ))
     preflight_sha = hashlib.sha256(historical_bytes("scripts/hmasd_resource_preflight.py")).hexdigest()
     assert preflight_sha == "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
     originals, relative_paths, raw_locations = {}, {}, {}
@@ -393,7 +411,7 @@ def test_r05_formal_publication_with_absent_resources(monkeypatch, tmp_path):
     replay = production.make_b1_policy_replay_batch_witness(staging_root=staging,
         allowed_root=tmp_path, attempt_id=attempt, implementation_commit=commit,
         source_conformance_sha256=conformance,
-        literal_binding_spec_sha256=hashlib.sha256((b1.REPO_ROOT / production.LITERAL_BINDING_SPEC_RELATIVE_PATH).read_bytes()).hexdigest(),
+        literal_binding_spec_sha256=literal_sha,
         test_only=False)
     published = production._assemble_and_publish_b1_metrics(staging_root=staging,
         final_path=final, grouped_raw_slices=groups, implementation_commit=commit,
