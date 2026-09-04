@@ -57,9 +57,10 @@ its operator UUID never selects a provider conversation.
     "last_observed_at": "...Z",
     "cursor": null
   },
-  "visible_model": "Pro",
-  "underlying_model": "GPT-6 Astra",
-  "thinking_effort": "5/5",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "provider_requirement": {"model": "GPT-6 Astra", "mode": "Pro", "label": "6 Pro", "selector_hint": "Latest"},
   "source_mode": "upload",
   "prompt_sha256": "...",
   "reference_files": [
@@ -79,6 +80,7 @@ its operator UUID never selects a provider conversation.
     "url_observed": true,
     "user_node_observed": true,
     "user_node_exact": true,
+    "user_message_id": "<observed DOM message ID>",
     "attachment_observed": true
   },
   "timestamps": {
@@ -157,9 +159,20 @@ attempt count, delivery status, sent timestamp, or terminal delivery state freez
 the old receipt as historical evidence. A record without a parent task is marked
 ineligible for an automatic receipt and is never sent to an old destination.
 
-## Contaminated provider-context reset
+## Explicit provider-conversation replacement
 
-Serial reuse is the default. A binding may leave that default only when an explicit
+An owner-directed new conversation uses `reset_invalid_provider_context=true`
+with `provider_context_reset_evidence={previous_request_id, reset_authority:
+"OWNER_DIRECT", owner_instruction: "<exact owner instruction>"}`. It requires a
+distinct replacement request ID, preserves the complete prior record (including
+unfinished/accepted-send state), and records `reason=owner_requested_new_conversation`.
+It does not require or fabricate a blocked answer, zero retrieved paths, or
+contamination. Stop the superseded operator's future actions and wake before takeover.
+The legacy `quarantined_conversations` map stores the retired provider ID without
+assigning scientific polarity. Repeating the same pending replacement preparation
+is idempotent; a different pending replacement is refused.
+
+Serial reuse is the default. Without an owner instruction, replacement still requires an explicit
 `reset_invalid_provider_context=true` handoff supplies complete routing evidence and
 the active record is the immediately previous `ARCHIVED` round: its outcome is
 `DECISION_NOT_FORMED` or `BLOCKED`, `repository_paths_read` is exactly `0`, and an
@@ -178,7 +191,7 @@ conversation during this interval.
 Only a new concrete webpage `/c/<uuid>` URL observed after successful send may
 replace that empty binding. Bind it with `observed_after_successful_send=true`; reject
 all old quarantined IDs for every node, every unobserved replacement, and every
-incomplete reset gate. The replacement record begins at `SEND_CONFIRMED` with
+incomplete applicable reset record. The replacement record begins at `SEND_CONFIRMED` with
 `send_click_count=1` and durable URL/user-node/attachment send evidence, so its next
 reachable lifecycle step is generation waiting rather than another send. Reset
 metadata is routing-only and never belongs in
@@ -213,7 +226,7 @@ The normal sequence is:
 `WAITING_UNKNOWN` and `WAITING_TIMEOUT` are recoverable attention states, not send
 failures. Terminal or attention states are `SEND_UNCERTAIN`, `SENT_INPUT_MISMATCH`,
 `UPLOAD_READY_SEND_DISABLED`, `MODEL_UNVERIFIED`, `DIRECTION_UNVERIFIED`,
-`ARCHIVE_CONFLICT`, `RECOVERY_URL_MISMATCH`, `MONITOR_IDENTITY_MISMATCH`,
+`ARCHIVE_CONFLICT`, `RESPONSE_IDENTITY_MISMATCH`, `RECOVERY_URL_MISMATCH`, `MONITOR_IDENTITY_MISMATCH`,
 `RETURN_RECEIPT_UNCERTAIN`, and `BLOCKED`. `RETURN_RECEIPT_BLOCKED` is a receipt
 substate for a missing parent route; it does not replace an `ARCHIVED` scientific
 transport state.
@@ -259,15 +272,23 @@ exact URL/conversation observation is not monitor evidence and must produce
 
 A URL alone, a cleared composer, a spinner, an attachment chip before Send, or a
 `ChatGPT said` heading without a complete response is insufficient.
+A transient `/c/WEB:<uuid>` after Send is awaiting a concrete provider URL, not
+evidence of a failed click. Observe the same tab; do not send again.
 
 ## Natural completion and archive evidence
 
-Capture only when the same conversation has a complete assistant node, the active
+Capture only when the same conversation has the complete assistant node paired
+with this request's recorded user message, the active
 generation controls are absent, and the page reports completion (for example
 `Response complete`). Keep the raw assistant node separate from status text and UI
 labels. Hash the exact bytes written to the response file. Set `ARCHIVE_PENDING`,
 write and verify the canonical artifacts, then set `ARCHIVED`; do not close a tab
 before this sequence.
+Record `user_message_id` and `assistant_message_id` when exposed by the DOM. New
+Prompt Author responses identify their request ID and pinned ref; compare both
+before accepting the capture. An older or mismatched capture is preserved and
+re-inspected on the same page, never repaired by a new Send. Legacy and owner-authored
+follow-ups may lack these echoes: identify their exact user/assistant pair and question.
 
 ## Heartbeat and asynchronous processing
 
@@ -293,6 +314,13 @@ automation to `PAUSED` exactly once, verify the disabled status, and persist
 are separate facts. Never archive the singleton task as part of request cleanup.
 
 ## Automatic return outbox
+
+Default execution remains `REUSE_SINGLETON`. An explicitly owner-directed
+`CALLER_DIRECT` request identifies the exact source caller as operator, includes
+`owner_execution_instruction`, and has no dispatch. When source equals parent,
+record `return_receipt.required=false`, `status=LOCAL_INTAKE`, and
+`attempt_count=0`; archive/intake in the same task without staging a self-message.
+Otherwise the existing parent outbox procedure applies.
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
 using `send_message_to_thread` exactly once on the validated parent task. The deterministic `message_key` remains

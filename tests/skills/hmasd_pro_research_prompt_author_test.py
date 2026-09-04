@@ -87,6 +87,66 @@ def _render(renderer, request: dict[str, object], project_root: Path, out_dir: P
     return json.loads((out_dir / "HANDOFF.json").read_text(encoding="utf-8"))
 
 
+@pytest.mark.parametrize("direct", [False, True])
+def test_provider_requirement_and_direct_executor_survive_author_transport_handoff(
+    project_root: Path, tmp_path: Path, direct: bool
+) -> None:
+    renderer = _renderer()
+    config = project_root / ".codex/hmasd-transport.toml"
+    config.write_text(config.read_text() + '\n[provider]\nmodel = "GPT-6 Astra"\nmode = "Pro"\nlabel = "6 Pro"\nselector_hint = "Latest"\n')
+    request = _request()
+    request["parent_thread_id"] = request["source_thread_id"]
+    if direct:
+        request.update(execution_mode="CALLER_DIRECT", owner_execution_instruction="Root performs this request personally.")
+        config.write_text(config.read_text().replace('status = "active"', 'status = "paused"'))
+    out = tmp_path / "packet"
+    result = renderer.render(renderer.validate(request, project_root), out)
+    handoff = json.loads((out / "HANDOFF.json").read_text())
+    transport = dict(handoff["transport_request"])
+    transport["prompt_path"] = str(out / "PROMPT_BODY.md")
+    scripts = ROOT / ".agents/skills/hmasd-chatgpt-pro-transport/scripts"
+    sys.path.insert(0, str(scripts))
+    spec = importlib.util.spec_from_file_location("provider_handoff_validation", scripts / "validate_request.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    validated = module.validate(transport, project_root)
+    assert validated["request_id"] == request["request_id"]
+    assert validated["provider_requirement"] == handoff["provider_requirement"] == result["provider_requirement"]
+    assert validated["provider_requirement"]["label"] == "6 Pro"
+    assert validated["operator_thread_id"] == (request["source_thread_id"] if direct else SINGLETON_THREAD_ID)
+    assert result["dispatch_required"] is (not direct)
+    assert result["dispatch_prompt"] == handoff["dispatch_prompt"]
+    assert result["pro_send_from_caller"] is direct
+    assert validated["return_receipt_ready"] is (not direct)
+    if direct:
+        assert result["dispatch_prompt"] is None
+        assert result["dispatch_state"] == "CALLER_READY"
+        assert validated["operator_model"] is None
+    else:
+        assert validated["operator_model"] == "gpt-5.6-luna"
+    body = (out / "PROMPT_BODY.md").read_text()
+    assert body.startswith(f"REQUEST_ID={request['request_id']}\nPINNED_REFERENCE={request['commit_or_ref']}\n")
+    assert "Root performs this request personally." not in body
+
+
+def test_caller_direct_requires_owner_instruction(project_root: Path) -> None:
+    renderer = _renderer()
+    with pytest.raises(renderer.PacketInputError, match="owner_execution_instruction"):
+        renderer.validate({**_request(), "execution_mode": "CALLER_DIRECT"}, project_root)
+
+
+def test_owner_new_conversation_does_not_invent_contamination_or_change_body(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    evidence = {"previous_request_id": "previous-accepted", "reset_authority": "OWNER_DIRECT", "owner_instruction": "Use a new conversation for 6 Pro."}
+    base = _render(renderer, _request(), project_root, tmp_path / "base")
+    reset = _render(renderer, {**_request(), "reset_invalid_provider_context": True, "provider_context_reset_evidence": evidence}, project_root, tmp_path / "reset")
+    assert reset["transport_request"]["provider_context_reset_evidence"] == evidence
+    assert (tmp_path / "base/PROMPT_BODY.md").read_bytes() == (tmp_path / "reset/PROMPT_BODY.md").read_bytes()
+    assert reset["transport_request"]["companion_prompt"] == base["transport_request"]["companion_prompt"]
+
+
 def test_omitted_companion_prompt_uses_the_fixed_default(project_root: Path, tmp_path: Path) -> None:
     renderer = _renderer()
     packet = renderer.validate(_request(), project_root)

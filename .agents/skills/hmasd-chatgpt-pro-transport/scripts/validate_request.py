@@ -245,13 +245,26 @@ def validate(request: dict, project_root: Path) -> dict:
     if canonical_handoff and operator_thread_id is None:
         raise ValueError("canonical handoff requires the configured Transport singleton operator_thread_id")
     dispatch_mode = request.get("dispatch_mode")
-    if dispatch_mode not in {None, "REUSE_SINGLETON"}:
-        raise ValueError("dispatch_mode must be REUSE_SINGLETON for new canonical handoffs")
-    if canonical_handoff and dispatch_mode != "REUSE_SINGLETON":
-        raise ValueError("new canonical handoffs require dispatch_mode=REUSE_SINGLETON")
+    if dispatch_mode not in {None, "REUSE_SINGLETON", "CALLER_DIRECT"}:
+        raise ValueError("dispatch_mode=REUSE_SINGLETON or owner-directed CALLER_DIRECT is required")
+    if canonical_handoff and dispatch_mode not in {"REUSE_SINGLETON", "CALLER_DIRECT"}:
+        raise ValueError("new canonical handoffs require an explicit dispatch_mode")
+    owner_execution_instruction = request.get("owner_execution_instruction")
+    if dispatch_mode == "CALLER_DIRECT":
+        if not isinstance(owner_execution_instruction, str) or not owner_execution_instruction.strip():
+            raise ValueError("CALLER_DIRECT requires the owner's execution instruction")
+        if operator_thread_id != source_thread_id:
+            raise ValueError("CALLER_DIRECT executor must be the exact source caller")
     operator_reuse_required = request.get("operator_reuse_required")
     operator_model = request.get("operator_model")
     operator_thinking = request.get("operator_thinking")
+    provider_requirement = request.get("provider_requirement", {})
+    if not isinstance(provider_requirement, dict) or any(
+        key not in {"model", "mode", "label", "selector_hint"}
+        or not isinstance(value, str) or not value.strip()
+        for key, value in provider_requirement.items()
+    ):
+        raise ValueError("provider_requirement must contain non-empty provider selection fields")
     if dispatch_mode == "REUSE_SINGLETON":
         if operator_reuse_required is not True:
             raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")
@@ -297,12 +310,14 @@ def validate(request: dict, project_root: Path) -> dict:
         "parent_thread_id": parent_thread_id,
         "operator_thread_id": operator_thread_id,
         "dispatch_mode": dispatch_mode,
+        "owner_execution_instruction": owner_execution_instruction,
         "operator_reuse_required": operator_reuse_required is True,
         "operator_model": operator_model,
         "operator_thinking": operator_thinking,
+        "provider_requirement": dict(provider_requirement),
         "return_route": return_route,
         "return_receipt_thread_id": return_receipt_thread_id,
-        "return_receipt_ready": bool(parent_thread_id),
+        "return_receipt_ready": bool(parent_thread_id) and not (dispatch_mode == "CALLER_DIRECT" and parent_thread_id == source_thread_id),
         "reference_files": reference_files,
         "packet": packet,
     }

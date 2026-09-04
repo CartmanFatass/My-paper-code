@@ -21,9 +21,18 @@ confirmed Send and an active generation on the persistent Portfolio conversation
 and natural-completion archive. Its answer is superseded for this owner's model
 requirement and does not become the final consolidation review.
 
-The unchanged scientific question may be reviewed through a distinct 6 Pro handoff
-after that request is archived. It reuses `portfolio:cross_direction` and the same
-evidence snapshot. No duplicate Send is authorized for request 01, and no research
-experiment or paused research heartbeat is resumed by this model change.
+The owner subsequently requested a new provider conversation and personal execution
+by Root. This supersedes the earlier same-conversation plan. Root sent request
+`2026-09-04-two-line-consolidation-portfolio-03-root-6pro` once in
+`6a9b2be3-3b34-83e8-9864-59783c44768e`, retaining the `portfolio:cross_direction`
+binding key and pinned evidence ref. The observed UI was `6 Pro`, checked `Latest`,
+effort `Pro, 5 of 5.`. Request 02 had zero accepted provider sends; the old operator
+stopped. No duplicate Send was made for any accepted request.
+
+The new response is archived, but its two-investment disposition was not applied:
+the owner directly asked Pro for more routes and supplied the revised reply, clarifying
+that the two lines are classification frameworks rather than one-route-per-line limits. See
+[the walkthrough and current review boundary](2026-09-04-pro-transport-root-walkthrough.md).
+The original research execution and its heartbeat remain paused.
 
 Scope: none.

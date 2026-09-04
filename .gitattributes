@@ -5,6 +5,8 @@
 /docs/research/candidates/**/DIRECTION.md text eol=lf
 /docs/research/candidates/**/workflow/**/*.json text eol=lf
 /docs/external-review/directions/** text eol=lf
+# Exact transport captures retain original line endings and trailing spaces.
+/docs/external-review/2026-09-04-two-line-consolidation-6pro/** -text -whitespace
 /tests/fixtures/hmasd_external_review/*.json text eol=lf
 /tests/fixtures/hmasd_external_review/prompts/*.md text eol=lf
 /tests/fixtures/hmasd_phase0/*.json text eol=lf

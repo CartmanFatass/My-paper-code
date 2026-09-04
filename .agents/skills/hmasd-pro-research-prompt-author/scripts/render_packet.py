@@ -200,7 +200,7 @@ def _parent_thread_id(value: object) -> str:
     return _thread_id(value, "parent_thread_id")
 
 
-def _singleton_transport_config(project_root: Path) -> dict[str, str]:
+def _singleton_transport_config(project_root: Path, *, caller_direct: bool = False) -> dict[str, object]:
     config_path = project_root / TRANSPORT_CONFIG_RELATIVE_PATH
     if not config_path.is_file():
         raise PacketInputError(
@@ -220,6 +220,20 @@ def _singleton_transport_config(project_root: Path) -> dict[str, str]:
             "Transport singleton config schema_version must be 1",
             field="transport_singleton_config.schema_version",
         )
+    provider = config.get("provider", {})
+    if not isinstance(provider, dict):
+        raise PacketInputError("provider config must be a table", field="transport_singleton_config.provider")
+    provider_requirement = {
+        key: _text(provider[key], f"provider.{key}")
+        for key in ("model", "mode", "label", "selector_hint") if key in provider
+    }
+    if caller_direct:
+        return {
+            "thread_id": None, "model": None, "thinking": None,
+            "environment": "local", "project_id": config.get("project_id"),
+            "config_path": TRANSPORT_CONFIG_RELATIVE_PATH.as_posix(),
+            "provider_requirement": provider_requirement,
+        }
     if config.get("mode") != "singleton" or config.get("status") != "active":
         raise PacketInputError(
             "Transport singleton config must declare mode=singleton and status=active",
@@ -247,6 +261,7 @@ def _singleton_transport_config(project_root: Path) -> dict[str, str]:
         "environment": environment,
         "project_id": project_id,
         "config_path": TRANSPORT_CONFIG_RELATIVE_PATH.as_posix(),
+        "provider_requirement": provider_requirement,
     }
 
 
@@ -257,6 +272,12 @@ def _provider_context_reset_evidence(value: object) -> dict[str, object]:
             field="provider_context_reset_evidence",
         )
     previous_request_id = _text(value.get("previous_request_id"), "previous_request_id")
+    if value.get("reset_authority") == "OWNER_DIRECT":
+        return {
+            "previous_request_id": previous_request_id,
+            "reset_authority": "OWNER_DIRECT",
+            "owner_instruction": _text(value.get("owner_instruction"), "owner_instruction"),
+        }
     decision_outcome = _text(value.get("decision_outcome"), "decision_outcome")
     if decision_outcome not in RESET_DECISION_OUTCOMES:
         raise PacketInputError(
@@ -309,7 +330,13 @@ def validate(data: dict, project_root: Path) -> dict:
     request_id = _text(data.get("request_id"), "request_id")
     source_thread_id = _source_thread_id(data.get("source_thread_id"))
     parent_thread_id = _parent_thread_id(data.get("parent_thread_id"))
-    transport_singleton = _singleton_transport_config(project_root)
+    execution_mode = data.get("execution_mode", DISPATCH_MODE)
+    if execution_mode not in {DISPATCH_MODE, "CALLER_DIRECT"}:
+        raise PacketInputError("execution_mode must be REUSE_SINGLETON or CALLER_DIRECT", field="execution_mode")
+    owner_execution_instruction = None
+    if execution_mode == "CALLER_DIRECT":
+        owner_execution_instruction = _text(data.get("owner_execution_instruction"), "owner_execution_instruction")
+    transport_singleton = _singleton_transport_config(project_root, caller_direct=execution_mode == "CALLER_DIRECT")
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
     portfolio = portfolio_path.read_text(encoding="utf-8") if portfolio_path.is_file() else ""
     if role == "em":
@@ -406,12 +433,15 @@ def validate(data: dict, project_root: Path) -> dict:
         "request_id": request_id,
         "source_thread_id": source_thread_id,
         "parent_thread_id": parent_thread_id,
-        "operator_thread_id": transport_singleton["thread_id"],
-        "operator_model": transport_singleton["model"],
-        "operator_thinking": transport_singleton["thinking"],
+        "execution_mode": execution_mode,
+        "owner_execution_instruction": owner_execution_instruction,
+        "operator_thread_id": source_thread_id if execution_mode == "CALLER_DIRECT" else transport_singleton["thread_id"],
+        "operator_model": None if execution_mode == "CALLER_DIRECT" else transport_singleton["model"],
+        "operator_thinking": None if execution_mode == "CALLER_DIRECT" else transport_singleton["thinking"],
         "operator_project_id": transport_singleton["project_id"],
         "operator_environment": transport_singleton["environment"],
         "operator_config_path": transport_singleton["config_path"],
+        "provider_requirement": transport_singleton["provider_requirement"],
         "caller_role": role,
         "workflow_node": workflow_node,
         "request_class": REQUEST_CLASSES[workflow_node],
@@ -491,7 +521,9 @@ def render(packet: dict, out_dir: Path) -> dict:
     schema = "\n".join(f"- {x}" for x in packet["response_schema"]) or "- conclusion-first answer, evidence/provenance, uncertainty, limitations, next discriminator"
     direction_scope = ",".join(packet["direction_ids"])
     node_contract = _node_decision_contract(packet["workflow_node"])
-    body = f"""REQUEST_CLASS={packet['request_class']}
+    body = f"""REQUEST_ID={packet['request_id']}
+PINNED_REFERENCE={packet['commit_or_ref']}
+REQUEST_CLASS={packet['request_class']}
 CALLER_ROLE={packet['caller_role']}
 WORKFLOW_NODE={packet['workflow_node']}
 CONVERSATION_BINDING_KEY={packet['conversation_binding_key']}
@@ -525,7 +557,8 @@ blocker and explicitly state DECISION_NOT_FORMED; do not manufacture a decision.
 Additional caller constraints:
 {constraints}
 
-Return the requested deliverable in this response, followed by:
+Start the response with this packet's REQUEST_ID and PINNED_REFERENCE, then return
+the requested deliverable in this response, followed by:
 {schema}
 
 TASK_BOUNDARY=This is the exact {packet['workflow_node']} decision node. The
@@ -572,6 +605,7 @@ GITHUB_EVIDENCE_MANIFEST
         "operator_environment": packet["operator_environment"],
         "operator_model": packet["operator_model"],
         "operator_thinking": packet["operator_thinking"],
+        "provider_requirement": packet["provider_requirement"],
         "operator_thread_id": packet["operator_thread_id"],
         "operator_thread_url": f"codex://threads/{packet['operator_thread_id']}",
         "return_receipt_thread_id": packet["parent_thread_id"],
@@ -587,6 +621,7 @@ GITHUB_EVIDENCE_MANIFEST
         "pro_send_from_caller": False,
         "prompt_body_file": "PROMPT_BODY.md",
         "transport_request": {
+            "request_id": packet["request_id"],
             "source_thread_id": packet["source_thread_id"],
             "creator_thread_id": packet["source_thread_id"],
             "parent_thread_id": packet["parent_thread_id"],
@@ -595,6 +630,7 @@ GITHUB_EVIDENCE_MANIFEST
             "operator_reuse_required": True,
             "operator_model": packet["operator_model"],
             "operator_thinking": packet["operator_thinking"],
+            "provider_requirement": packet["provider_requirement"],
             "return_route": "PARENT_SESSION",
             "return_receipt_thread_id": packet["parent_thread_id"],
             "direction_id": packet["direction_id"],
@@ -613,8 +649,22 @@ GITHUB_EVIDENCE_MANIFEST
         },
         "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. The project Transport singleton exclusively owns Pro/browser send, model/connector checks, conversation binding, request-scoped wait, archive, cleanup, and Transport evidence, and sends exactly one receipt to this handoff's parent_thread_id before returning to idle for later requests.",
     }
+    if packet["execution_mode"] == "CALLER_DIRECT":
+        handoff.update({
+            "dispatch_mode": "CALLER_DIRECT", "dispatch_required": False,
+            "dispatch_once": False, "dispatch_state": "CALLER_READY",
+            "operator_reuse_required": False, "pro_send_from_caller": True,
+            "dispatch_prompt": None,
+            "owner_execution_instruction": packet["owner_execution_instruction"],
+            "dispatch_instruction": "Do not dispatch this handoff. The owner requested direct execution by its caller.",
+            "instruction": "The caller executes this one request with the Transport skill. Preserve exact input, one Send, request-scoped waiting and archive. If caller and parent are the same task, intake locally without sending a receipt to itself; otherwise return the usual single parent receipt.",
+        })
+        handoff["transport_request"].update({
+            "dispatch_mode": "CALLER_DIRECT", "operator_reuse_required": False,
+            "owner_execution_instruction": packet["owner_execution_instruction"],
+        })
     (out_dir / "HANDOFF.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    return {
+    result = {
         "valid": True,
         "output_dir": str(out_dir.resolve()),
         "files": ["PROMPT_BODY.md", "HANDOFF.json"],
@@ -650,6 +700,11 @@ GITHUB_EVIDENCE_MANIFEST
         ),
         "pro_send_from_caller": False,
     }
+    for key in ("dispatch_mode", "dispatch_state", "dispatch_required", "dispatch_once",
+                "operator_reuse_required", "dispatch_prompt", "dispatch_instruction",
+                "pro_send_from_caller", "provider_requirement"):
+        result[key] = handoff[key]
+    return result
 
 
 def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) -> dict:

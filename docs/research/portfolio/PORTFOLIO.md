@@ -19,6 +19,13 @@ Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-co
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current pause: `docs/research/portfolio/decisions/2026-09-04-pause-after-current-round.md`
 
+Current organization review: the owner classifies research into flexible agent count and
+flexible skill duration, with multiple complementary routes allowed in each. The initial 6 Pro
+two-investment recommendation is archived but **not applied**. The owner supplied Pro's revised
+two-category, six-family, nine-route proposal for review. No lifecycle/priority or execution
+change has been made from either reply. See `decisions/2026-09-04-two-line-nine-route-proposal.md`
+and `decisions/2026-09-04-pro-transport-root-walkthrough.md`.
+
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
 technical or instrumentation failure has no scientific polarity. Toy and benchmark evidence remains

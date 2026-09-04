@@ -1,0 +1,80 @@
+{
+  "id": "20260904-root-003",
+  "created": "2026-09-04T14:12:26-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "两类六族九路线：保留互补研究，减少重复管理",
+  "context": "所有者明确两条线只是分类，并要求扩展路线回来后共同审阅。Pro 已撤回仅保留 FSD/FRRIE 的旧建议；此修订仍未应用，不恢复实验。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "按修订地图归组并记录投资位置；实验继续暂停。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "维持现有生命周期和暂停，保留归档。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "按所有者点名的路线或边界修改提案。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-04-two-line-nine-route-proposal.md",
+    "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L208",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否采用两类、六机制族、九路线的修订组织和投资地图，继续保持实验暂停？",
+    "changes_if_approved": [
+      {
+        "target": "研究组织地图",
+        "from": "22 个来源分散呈现",
+        "to": "两类、六机制族、九条非排他路线，同族共享管理与适用资产，保留来源 ID"
+      },
+      {
+        "target": "Portfolio 投资位置",
+        "from": "当前旧生命周期快照；两项总投资方案未执行",
+        "to": "保留六项具名入口，N3/N5 有界探索，K4 前瞻，八个其他来源作为具名储备；停止家族不恢复"
+      }
+    ],
+    "if_refused": "维持当前 19 ACTIVE / 3 PARKED 生命周期及暂停，按反馈修改组织提案；已授权技能修复继续生效。",
+    "evidence_for": [
+      {
+        "path": "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md",
+        "quote": "**我的最终建议是：两个分类用于归档与协调，六个机制族用于组织共享，九条路线用于保留有区别的科学问题。先恢复六项既有研究入口，再让状态恢复与配置几何形成小型探索对象，而不是在“只做两项”和“恢复二十二条独立链”之间二选一。**",
+        "why": "Pro 根据所有者分类澄清撤回单路线限额，逐项解释不同科学问题与可共享资产。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md",
+        "quote": "成本方面不做新的虚构排名。",
+        "why": "新对象、工程依赖与共享节约尚未全部量化，不能宣称九条路线全部就绪或已证成成本最优。"
+      }
+    ],
+    "uncertainty": [
+      "N3 应先选择哪个状态干预、N5 的最小对象与成本尚未冻结。",
+      "K4 只保留前瞻问题，不能重开旧 D6。",
+      "VNFC second-recast 的最低排序仍保留；路线编号不是执行顺序。"
+    ],
+    "cost": {
+      "compute": "本次零新增实验计算；共享节约尚未实测。",
+      "owner_time": "预计 3 分钟核对路线表和八个储备来源。",
+      "reversibility": "reversible",
+      "waits_on_this": "新组织与投资状态的正式应用；技能修复和已完成归档不等待。"
+    },
+    "verdict_text": "**我的最终建议是：两个分类用于归档与协调，六个机制族用于组织共享，九条路线用于保留有区别的科学问题。先恢复六项既有研究入口，再让状态恢复与配置几何形成小型探索对象，而不是在“只做两项”和“恢复二十二条独立链”之间二选一。**",
+    "source": "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md"
+  }
+}

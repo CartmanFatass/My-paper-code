@@ -172,6 +172,49 @@ def _persist_reset_facts(contract, record: dict, *, outcome: str = "DECISION_NOT
     )
 
 
+@pytest.mark.parametrize("prior_state", ["WAITING_GENERATION", "ARCHIVED"])
+def test_owner_replacement_preserves_real_history_and_binds_one_observed_send(tmp_path, prior_state) -> None:
+    binder = _module("owner_replacement_bind", "bind_conversation.py")
+    registry = tmp_path / "registry.json"
+    key = "em:alpha:innovator"
+    old_id = "66666666-6666-6666-6666-666666666666"
+    new_id = "77777777-7777-7777-7777-777777777777"
+    common = dict(workflow_node="em_innovator", binding_key=key, direction_id="alpha", direction_ids=["alpha"])
+    assert binder.bind(_bind_args(registry, **common, conversation_id=old_id, request_id="old-review")) == 0
+    data = json.loads(registry.read_text())
+    prior = data["bindings"][key]
+    prior.update(state=prior_state, send_click_count=1, archive={"response_sha256": "a" * 64, "actual_repository_paths_read": 17})
+    registry.write_text(json.dumps(data))
+    evidence = {"previous_request_id": "old-review", "reset_authority": "OWNER_DIRECT", "owner_instruction": "Open a new conversation for 6 Pro."}
+    kwargs = dict(conversation_binding_key=key, replacement_request_id="new-review", reset_invalid_provider_context=True, provider_context_reset_evidence=evidence)
+    original = registry.read_bytes()
+    with pytest.raises(ValueError, match="distinct request_id"):
+        binder.prepare_context_reset(registry, **{**kwargs, "replacement_request_id": "old-review"})
+    assert registry.read_bytes() == original
+    binder.prepare_context_reset(registry, **kwargs)
+    pending = registry.read_bytes()
+    binder.prepare_context_reset(registry, **kwargs)
+    assert registry.read_bytes() == pending
+    with pytest.raises(ValueError, match="different replacement"):
+        binder.prepare_context_reset(registry, **{**kwargs, "replacement_request_id": "another-review"})
+    assert registry.read_bytes() == pending
+    retired = json.loads(pending)["quarantined_conversations"][old_id]
+    assert retired["reason"] == "owner_requested_new_conversation"
+    assert retired["archived_facts"]["prior_record"] == prior
+    next_args = _bind_args(registry, **common, conversation_id=new_id, request_id="new-review", reset_invalid_provider_context=True, provider_context_reset_evidence=evidence)
+    assert binder.bind(next_args) == 3
+    assert registry.read_bytes() == pending
+    next_args.observed_after_successful_send = True
+    assert binder.bind(next_args) == 0
+    accepted = json.loads(registry.read_text())["bindings"][key]
+    assert accepted["state"] == "SEND_CONFIRMED"
+    assert accepted["send_click_count"] == 1
+    assert accepted["conversation_id"] == new_id
+    assert accepted["request_history"][-1]["request_id"] == "old-review"
+    assert binder.bind(next_args) == 0
+    assert json.loads(registry.read_text())["bindings"][key]["send_click_count"] == 1
+
+
 def test_registry_binds_two_direction_nodes_and_one_portfolio_node_separately(
     tmp_path: Path,
 ) -> None:

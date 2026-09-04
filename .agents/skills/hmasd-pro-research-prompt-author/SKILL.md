@@ -6,12 +6,18 @@ description: "Use when Portfolio or an HMASD EM must turn a direction or multi-d
 # HMASD Pro Research Prompt Author
 
 This is an authoring-and-dispatch skill for `portfolio` and an HMASD direction
-`em`. It validates and renders a packet, then performs exactly one Codex task
+`em`. By default it validates and renders a packet, then performs exactly one Codex task
 dispatch to `hmasd-chatgpt-pro-transport`. It never performs Pro/browser
-transport or interprets a result. Every validated handoff reuses the one project
+transport or interprets a result in that default authoring role. Every default handoff reuses the one project
 Transport task declared in `.codex/hmasd-transport.toml`; authors never create a
 Transport task per handoff. That task UUID is a repository-global execution endpoint,
 not a provider-conversation binding or a receipt destination.
+
+If the owner explicitly asks the caller to perform transport personally, render
+`execution_mode=CALLER_DIRECT` with the exact `owner_execution_instruction`.
+The renderer emits `dispatch_required=false`, `pro_send_from_caller=true`, and no
+dispatch prompt. Apply the Transport skill in the same task; do not also dispatch
+to the singleton. Waiting, exact archival, and research intake remain unchanged.
 
 **Decision boundary:** the packet is one of exactly three Pro decision nodes:
 `em_innovator`, `em_convergence`, or `portfolio_decision`. Repository code,
@@ -42,8 +48,10 @@ Require an input object with:
   provider conversation; otherwise Transport binds the first concrete conversation;
 - optional `reset_invalid_provider_context=false`, plus
   `provider_context_reset_evidence` only when it is explicitly `true`; this is
-  routing metadata for the exceptional contaminated-context reset, never
+  routing metadata for an explicit owner replacement or evidenced contaminated-context reset, never
   scientific content;
+- optional `execution_mode=REUSE_SINGLETON`; `CALLER_DIRECT` requires the owner's
+  exact `owner_execution_instruction` and identifies the caller as executor;
 - optional non-empty `companion_prompt`, preserved byte-for-byte when supplied;
 - optional `constraints`, `response_schema`, and `archive_label` supplied by the
   caller, preserved without invention. If `companion_prompt` is omitted, use the
@@ -84,9 +92,12 @@ The first two are independent conversations for each direction. The Portfolio
 key is one global conversation reused across all multi-direction rounds. Never
 infer a replacement key from a request ID, title, lifecycle state, or tab.
 
-Normal behavior is serial reuse of that binding's exact provider conversation. The
-only exception is an explicit `reset_invalid_provider_context=true` with complete
-evidence: the immediately previous round is archived, its outcome is
+Normal behavior is serial reuse of that binding's exact provider conversation. An
+explicit `reset_invalid_provider_context=true` supports two routing cases. The owner
+may request a new conversation, recorded as `reset_authority=OWNER_DIRECT`, exact
+`owner_instruction`, and `previous_request_id`. Preserve that previous request's
+actual outcome and send state; no contamination claim is required or invented.
+Automated recovery still requires complete evidence: the immediately previous round is archived, its outcome is
 `DECISION_NOT_FORMED` or `BLOCKED`, it read exactly zero repository paths, and its
 acknowledged cause is provider-context contamination from a named prompt defect.
 For this exception, `conversation_id` must be absent; the caller never selects a
@@ -108,11 +119,13 @@ Write two provider/dispatch outputs:
 1. `PROMPT_BODY.md`: the sole provider attachment. It contains both the exact
    user-facing request and the read-only GitHub evidence manifest; and
 2. `HANDOFF.json`: a machine-readable handoff for the project Transport singleton,
-   with `pro_send_from_caller=false`.
+   with `pro_send_from_caller=false` by default, or the explicit caller-direct route.
 
 The body must contain these slots in this order:
 
 ```text
+REQUEST_ID=<exact request ID>
+PINNED_REFERENCE=<exact evidence ref>
 REQUEST_CLASS=<SCIENTIFIC_INNOVATION|SCIENTIFIC_CONVERGENCE|PORTFOLIO_DECISION>
 CALLER_ROLE=<portfolio|em>
 WORKFLOW_NODE=<em_innovator|em_convergence|portfolio_decision>
@@ -134,6 +147,8 @@ A Portfolio response decides priority, capacity, lifecycle, fusion, separation,
 new-direction registration, or next investment across the supplied scope. The
 response must make one explicit final decision or return an exact blocker; it
 must not call a blocker a decision.
+Ask the response to identify its request ID and pinned reference at the top so a
+later round cannot be mistaken for an earlier answer in the same conversation.
 
 The body must instruct Pro to verify that the GitHub connector is available and
 read-only, retrieve only the listed paths at the pinned ref, cite observations by
@@ -163,6 +178,10 @@ that its contents were retrieved.
    node, direction scope, conversation binding key, optional requested provider
    conversation ID, and `decision_authority=pro_final`. Routing metadata is written
    only to `HANDOFF.json` and its `transport_request` object.
+   The configured `[provider]` requirement is copied into both objects, separately
+   from `operator_model`; changing ChatGPT to 6 Pro does not change the Codex executor.
+   For `CALLER_DIRECT`, the renderer instead emits `CALLER_READY`, the exact caller
+   as executor, and no dispatch. Skip steps 3–5 and execute the Transport skill once.
 3. Validate that the configured singleton is active, local, and pinned to
    `gpt-5.6-luna` with `xhigh` reasoning. Never call `create_thread` from this
    sequence, and never substitute another task ID.
@@ -176,10 +195,12 @@ that its contents were retrieved.
    non-complete state; preserve the packet, report `SINGLETON_TRANSPORT_UNAVAILABLE`,
    and do not create or message a replacement operator.
 
-Portfolio/EM sends only one execution message per handoff. The reusable Transport
+In the default route, Portfolio/EM sends only one execution message per handoff. The reusable Transport
 task exclusively owns Pro/browser send, model and connector checks, conversation
 binding, send evidence, waiting, archive, cleanup, and Transport-state evidence.
-The author must not perform any of those operations.
+The author must not perform any of those operations unless the owner explicitly
+selected `CALLER_DIRECT`. An owner takeover first stops the old operator and reads
+its accepted-send state; it never duplicates an already accepted provider request.
 
 The configured singleton UUID is reused only as the Codex execution target. It must
 never enter `conversation_binding_key` or replace `parent_thread_id` as the return
@@ -193,7 +214,7 @@ returns to idle for later handoffs.
 `HANDOFF.json` identifies the source caller (`portfolio` or `em`), exact
 `source_thread_id`, exact `parent_thread_id`, workflow node, exact direction scope/request ID, durable
 conversation binding key, body path, repository/ref,
-`dispatch_mode=REUSE_SINGLETON`, the configured operator ID, and
+the selected `dispatch_mode`, the configured operator ID or owner-directed caller, and
 `return_receipt_thread_id=parent_thread_id`. It says that the operator
 should upload the body verbatim as the sole scientific packet, then apply
 `hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
@@ -204,14 +225,14 @@ This provider-visible companion is not an author-to-Transport instruction: all
 routing and execution workflow remains in `HANDOFF.json` and its dispatch fields.
 If the handoff carries `reset_invalid_provider_context=true`, it is routing evidence
 only: the author must not supply a replacement conversation ID or alter provider
-text. Transport alone verifies the old archived round, quarantines its old provider
-ID, and binds a replacement only after a successful send yields a newly observed
+text. The executing Transport role verifies the recorded owner instruction or old
+archived contamination facts, retires its old provider ID, and binds a replacement only after a successful send yields a newly observed
 webpage `/c/<uuid>` URL.
 Do not merge routing metadata into the body or reference; preserve the `PROMPT_BODY.md` and
 bytes unchanged. It exposes only `prompt_path=PROMPT_BODY.md` (or the equivalent
 absolute path after handoff); it must not declare or upload a reference attachment.
 
-The author performs the single Codex task dispatch in the closed sequence but
+In the default route, the author performs the single Codex task dispatch in the closed sequence but
 does not send to Pro or operate browser, connector, or conversation state. If
 the Transport task reports a blocker, preserve the packet and
 report the blocker; do not "repair" it by changing the scientific body or
@@ -236,7 +257,7 @@ must not become an author-side blocker. Red flags are:
 - silently using the latest/default branch or external web search;
 - copying full files into the body;
 - turning the task into code review, implementation, debugging, or AMA;
-- sending to Pro directly from the author session, calling `create_thread`, or
+- sending to Pro directly without an owner-directed `CALLER_DIRECT` handoff, calling `create_thread`, or
   dispatching to any task other than the configured singleton;
 - dropping claim ceilings, provenance, or the exact requested deliverable.
 - treating an incomplete/blocked Pro response as a final decision or overriding
