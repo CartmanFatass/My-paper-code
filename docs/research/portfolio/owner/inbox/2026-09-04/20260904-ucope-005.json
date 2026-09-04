@@ -1,0 +1,38 @@
+{
+  "id": "20260904-ucope-005",
+  "created": "2026-09-04T11:20:13-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "定位 root reconstruction 的跨节点数值边界",
+  "context": "远端 attempt 02 已被隔离：8/24 个 solver-derived reconstruction checks 超出冻结的绝对 1e-12 容差，但当前证据不能区分 design、FP32 target 或 lstsq backend。该选择只运行一个失败 block 的双节点字节/solver 技术定位，保持原 A/RECON 对象、容差、solver、分支与样本不变；所有分支均无科学极性。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行双节点 byte/solver locus 诊断",
+      "consequence": "定位最早差异边界，为后续独立技术修复提供事实，不产生机制结论。"
+    },
+    {
+      "key": "b",
+      "label": "放宽容差或选择通过行",
+      "consequence": "事后改写冻结规则，因而不执行。"
+    },
+    {
+      "key": "c",
+      "label": "盲目重复 parent runner",
+      "consequence": "不能定位已复现边界且可能制造重复 attempt。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "同字节跨节点求解是保留冻结科学对象的最小可逆判别。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_NUMERICAL_LOCUS_PLAN_20260904.md",
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_ATTEMPT02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L69",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
