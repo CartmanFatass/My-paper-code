@@ -1,7 +1,7 @@
 {
   "packet_version": 2,
   "request_id": "2026-09-04-scdmp-d6-recast-convergence-01",
-  "source_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+  "source_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
   "caller_role": "em",
   "source_role": "em",
   "workflow_node": "em_convergence",
@@ -26,7 +26,7 @@
   "dispatch_state": "DISPATCH_ACCEPTED",
   "operator_thread_id": "01a06bc9-12fb-7da2-abfb-4bb1830efab7",
   "operator_thread_url": "codex://threads/01a06bc9-12fb-7da2-abfb-4bb1830efab7",
-  "return_receipt_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+  "return_receipt_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
   "operator_bootstrap_prompt": "Act as the on-demand hmasd-chatgpt-pro-transport operator for request 2026-09-04-scdmp-d6-recast-convergence-01. Wait for the creator's execution message; do not inspect, execute, or dispatch any handoff before that message arrives.",
   "dispatch_handoff_path": "C:\\Projects\\HMASD-worktrees\\codex-scdmp-d6-recast-20260904\\docs\\research\\candidates\\semigroup_consistent_duration_model_policy\\external\\2026-09-04-scdmp-d6-recast-convergence-01\\HANDOFF.json",
   "dispatch_prompt": "Execute the handoff packet at C:\\Projects\\HMASD-worktrees\\codex-scdmp-d6-recast-20260904\\docs\\research\\candidates\\semigroup_consistent_duration_model_policy\\external\\2026-09-04-scdmp-d6-recast-convergence-01\\HANDOFF.json exactly once.",
@@ -34,11 +34,11 @@
   "pro_send_from_caller": false,
   "prompt_body_file": "PROMPT_BODY.md",
   "transport_request": {
-    "source_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
-    "creator_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+    "source_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
+    "creator_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
     "operator_thread_id": "01a06bc9-12fb-7da2-abfb-4bb1830efab7",
     "return_route": "CREATOR_SESSION",
-    "return_receipt_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+    "return_receipt_thread_id": "01a06bc3-f436-73a3-903d-2c9f0cce27f9",
     "direction_id": "semigroup_consistent_duration_model_policy",
     "direction_ids": [
       "semigroup_consistent_duration_model_policy"
