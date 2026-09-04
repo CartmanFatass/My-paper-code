@@ -282,3 +282,31 @@ complete 512-update runner, 98 evaluation cells per seed, exact shadow/action-TV
 all 28 quantities, and a clean commit-bound source gate remain absent. See
 `FRRIE_B01_CM_ENGINEERING_MILESTONE_20260901.md`. This engineering progress does not change the
 Innovator selection or create a B01 scientific result.
+
+## B01 section-11 R128 one-seed result — 2026-09-04
+
+The later section-11 rung supersedes the pre-result status lines above without rewriting their
+historical meaning. One clean, committed, prospectively admitted run on
+`FRRIE-B01-FRESH-BLOCK-001` completed 128 paired real RSCF/Adam updates and the adaptation-free
+`{0,32,64,128} x N={9,15} x INTACT` panel. All direct learner, work, evaluation, exposure, and
+pairing checks completed. Peak RSS was unavailable, so the valid result is marked
+`resources_unmeasured`.
+
+The accepted branch is `R128_VALID_NO_CONTACT`. The tight projection changed no FP32 coordinate;
+first contact is null; full model/optimizer state and direct evaluation traces stayed equal on the
+entire observed path; and `J_PHY-J_EDGE=0` in all eight checkpoint/roster cells. The identical
+learned curve peaked at update 64 and declined by update 128. EDGE minus uniform at update 128 was
+small and positive on both seen rosters (`+0.0009013`, `+0.0002314`), after a small negative value
+at `N=15` update 0.
+
+This establishes only one literal no-contact path. It does not establish a tight-package effect,
+universal equality, stable EDGE competence, held-out transfer, reassociation sensitivity, semantic
+or relational mechanism value, arbitrary-`N`, churn, deployment, or safety. The treatment did not
+activate, which is the strongest contradiction to any package-value interpretation. Surviving
+explanations include insufficient exposure for contact, common-chart host alignment, generic Adam
+geometry, and literal-seed evaluation noise.
+
+The next discriminator is the unchanged three-seed B01 rung using the already generated ordered
+roots `001..003`; no result-sensitive treatment, comparator, seed, or configuration change is
+authorized. See `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_SECTION11_R128_SMOKE_RESULT_INTAKE_20260904.md`.
