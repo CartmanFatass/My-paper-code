@@ -1,0 +1,44 @@
+{
+  "question": "是否保留 DISH B01 原比较，补齐效应阈值等描述，并修正已复现的启动目录错误以取得首个真实学习结果？",
+  "changes_if_approved": [
+    {
+      "target": "DISH B01 科学卡与 C04 工程目标",
+      "from": "未运行；缺少效应兴趣阈值描述；旧工程记录把零测试收集归因为缺文件",
+      "to": "原种子、预算、三分支和结果规则保持；补充五个服务 tick 的描述阈值；受控复用候选并修正命令工作目录"
+    }
+  ],
+  "if_refused": "在下一个安全边界按回复修订或停止本次实现；原有效 FOLR 结果、四个来源 ID、DISH 旧隔离记录及方向状态均保留。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_INTAKE_20260904.md",
+      "quote": "Reproduction from that cwd produced the same missing relative test target.",
+      "why": "失败发生在启动位置，尚未接触学习器或机制结果；修复不需要更改科学比较。"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md",
+      "quote": "The next useful N3 discriminator is state-source value at an actual handover, separating RETAIN, COPY and SHADOW rather than another mask repeat.",
+      "why": "N3 的下一项区分问题已具名，DISH B01 提供相应干预。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_SCIENCE_CARD_20260904.md",
+      "quote": "The policy is trained with shadow preparation, so a SHADOW advantage may reflect that training convention rather than unique environment information.",
+      "why": "即使取得正差异，也不能声称影子状态有独有信息或普遍优势。"
+    }
+  ],
+  "uncertainty": [
+    "候选源码尚未通过本轮完整动态核对，实际学习开销未观察。",
+    "64 次更新可能不足以出现可用交接触发；无触发不等于状态来源无价值。",
+    "五 tick 仅帮助解释效应大小，原结果分支仍按符号、尾部及非伤害条件读取。",
+    "当前主机没有匹配预算、信息和面板的已调优基线，headroom 未知。"
+  ],
+  "cost": {
+    "compute": "每种子预测 1474.54 秒；三种子总预测约 73.73 分钟机器时间；每个来源分支完整计费且每臂上限 1800 秒。",
+    "owner_time": "可异步阅读和修订，不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "选择 C04：复用当前且已审查的 11 个源码/测试文件，修正启动工作目录，保持 B01 原定义并完成首个有效比较。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_INTAKE_20260904.md"
+}

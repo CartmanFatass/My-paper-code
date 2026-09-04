@@ -1,0 +1,37 @@
+{
+  "id": "20260904-dish-010",
+  "created": "2026-09-04T16:49:58-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "DISH B01 original ladder prediction before first result",
+  "context": "No earlier B01 prediction item or result exists. Preserve the original on-card prediction: 64 learner updates may not supply enough first-valid triggers; conditional on usable support, generic remap is more likely than a repeated shadow increment. Owner slot is not taken (unattended).",
+  "options": [
+    {
+      "key": "a",
+      "label": "Insufficient usable trigger support",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "Shadow source improves recovery and tail",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "Generic remap suffices with no shadow increment",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "I retain the original FTS-B0 prediction; conditional on usable support I predict FTS-BC because finite exposure and shadow-trained co-adaptation do not establish unique preparation value.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-c04-continuation",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
