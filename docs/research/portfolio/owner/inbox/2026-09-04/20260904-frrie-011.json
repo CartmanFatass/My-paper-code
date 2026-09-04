@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-011",
+  "created": "2026-09-04T14:39:43-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "补齐原提交中的准入依赖后继续 R02",
+  "context": "首个远端 supervisor 已退出，资源准入前因缺少 hmasd_platform 导入失败。CM 在原提交重现相同错误，确认稀疏 checkout 漏掉已在该提交和远端 Git 对象库中的 2599 字节 helper；没有准入 receipt、科学 root、模型、训练或评估。选择只把这个原提交文件物化，再用新 supervisor 标识执行原 admission && runner。保留失败日志，不改卡、科学源、RNG、CPU FP32 或预算。",
+  "options": [
+    {
+      "key": "a",
+      "label": "物化原提交依赖并运行新唯一 task",
+      "consequence": "修复已重现的 checkout 漏项，科学字节不变，_02 任务仍须自己的即时资源准入。"
+    },
+    {
+      "key": "b",
+      "label": "保留失败边界暂不继续",
+      "consequence": "保留可修复且尚未观测的对象，不产生科学结论。"
+    },
+    {
+      "key": "c",
+      "label": "修改准入源码或换主机",
+      "consequence": "扩大技术变化并引入不必要的新执行差异。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "缺陷是已提交 helper 未被物化；恢复同一 blob 即可，改源码或换主机没有必要。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_RESUME_HANDOFF_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L215",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
