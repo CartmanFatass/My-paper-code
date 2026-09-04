@@ -79,3 +79,13 @@ literal remote resource admission joined to the exact runner by `&&`; it does no
 guard, scheduler, retry loop, lease or other object machinery. Before supervisor acceptance, the
 operator verifies task 02, its worktree/input/result roots and the local result root are absent.
 After terminal status, only task 02 is observed and only its request-specific result root is copied.
+
+## Attempt 02 terminal disposition
+
+Task 02 was accepted once and completed its remote admission plus runner. The runner emitted
+`complete=false` and `RECONSTRUCTION_OR_BINDING_FAILURE_NO_SCIENCE` because 8 of 24 numerical
+predicates exceeded the frozen `1e-12` tolerance. The copied artifact, independent predicate
+reproduction and quarantine decision are recorded in
+`UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_ATTEMPT02_EVIDENCE_20260904.md` and
+`UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_ATTEMPT02_INTAKE_20260904.md`. No retry or local fallback
+is authorized by this record.
