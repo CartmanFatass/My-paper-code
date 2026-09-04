@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-04-scdmp-d6-a01-result-convergence-03--semigroup_consistent_duration_model_policy",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-04-scdmp-d6-a01-result-convergence-03",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\codex-scdmp-d6-recast-20260904\\temp\\sessions\\hmasd-pro-research-prompt-author\\20260904-scdmp-d6-a01-result-convergence-03\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-04-scdmp-d6-a01-result-convergence-03--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "bytes": 8884,
+    "sha256": "6dcbc0a3fa3ca0ec058d850d0a0f24fdc8fdb26fbdeb2809ed9c012d21f03cc2",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a01\\2026-09-04-scdmp-d6-a01-result-convergence-03--semigroup_consistent_duration_model_policy__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a01\\2026-09-04-scdmp-d6-a01-result-convergence-03--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a01\\2026-09-04-scdmp-d6-a01-result-convergence-03--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "6dcbc0a3fa3ca0ec058d850d0a0f24fdc8fdb26fbdeb2809ed9c012d21f03cc2",
+    "references": []
+  }
+}
