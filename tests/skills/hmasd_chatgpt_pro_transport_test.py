@@ -55,7 +55,7 @@ def upload_request(tmp_path: Path) -> dict[str, object]:
         "direction_id": "demo_direction",
         "prompt_path": str(prompt.resolve()),
         "reference_paths": [str(reference.resolve())],
-        "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+        "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
         "companion_prompt": "Execute the canonical packet exactly once.",
     }
 
@@ -115,7 +115,7 @@ def _record() -> dict[str, object]:
         "conversation_id": "6a95b06d-0104-83e8-9493-f59f26b61c82",
         "provider_url": "https://chatgpt.com/c/6a95b06d-0104-83e8-9493-f59f26b61c82",
         "state": "SEND_CONFIRMED",
-        "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+        "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
         "tab_id": "17",
         "tab_lease": {"handle": "17", "lifecycle": "OPEN", "origin": "agent", "reusable": True},
     }
@@ -155,7 +155,7 @@ def test_tab_cannot_close_before_archive_and_receipt_staging() -> None:
     contract.transition_record(record, "NATURAL_COMPLETION")
     contract.transition_record(record, "ARCHIVE_PENDING")
     contract.transition_record(record, "ARCHIVED")
-    with pytest.raises(ValueError, match="staged completion receipt"):
+    with pytest.raises(ValueError, match="staged or explicitly blocked completion receipt"):
         contract.close_tab_lease(record, reason="archive complete")
 
     contract.stage_receipt(
@@ -176,50 +176,128 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     key = record["return_receipt"]["message_key"]
     assert key == contract.receipt_message_key("req-1", "demo_direction", record["conversation_id"], "b" * 64)
     assert record["return_receipt"]["status"] == "PENDING"
+    assert record["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
+    assert record["return_receipt"]["destination_thread_id"] == record["source_thread_id"]
+    assert record["return_receipt"]["fallback_enabled"] is False
     contract.record_receipt_result(record, "UNCERTAIN", delivery_status="timeout", error="unknown")
     assert record["return_receipt"]["status"] == "UNCERTAIN"
     assert record["return_receipt"]["retry_allowed"] is False
     assert record["return_receipt"]["attempt_count"] == 1
 
 
-def test_missing_source_still_routes_to_the_fixed_session() -> None:
-    record = _record()
-    record["state"] = "ARCHIVED"
-    record["source_thread_id"] = None
-    contract.stage_receipt(record, {"response_file": "response.md"}, "c" * 64)
-    receipt = record["return_receipt"]
-    assert receipt["status"] == "PENDING"
-    assert receipt["routing_mode"] == "FIXED_FALLBACK"
-    assert receipt["fallback_enabled"] is True
-    assert receipt["fallback_used"] is True
-    assert receipt["source_thread_id"] is None
-    assert receipt["primary_destination_thread_id"] is None
-    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
-
-
-def test_explicit_fallback_routes_missing_source_to_the_bound_session() -> None:
+def test_missing_source_blocks_completion_receipt_without_a_destination() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
     record["source_thread_id"] = None
     record["fallback_enabled"] = True
-    record["fallback_thread_id"] = contract.DEFAULT_FALLBACK_THREAD_ID
-    contract.stage_receipt(record, {"response_file": "response.md"}, "d" * 64)
+    record["fallback_thread_id"] = "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+    record["return_receipt"] = {
+        "status": "PENDING",
+        "attempt_count": 0,
+        "message_key": "legacy-unsent-key",
+        "routing_mode": "FIXED_FALLBACK",
+        "fallback_enabled": True,
+        "fallback_thread_id": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    }
+    contract.stage_receipt(record, {"response_file": "response.md"}, "c" * 64)
     receipt = record["return_receipt"]
+    assert receipt["required"] is False
+    assert receipt["status"] == "BLOCKED"
+    assert receipt["receipt_state"] == "RETURN_RECEIPT_BLOCKED"
+    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["fallback_enabled"] is False
+    assert receipt["source_thread_id"] is None
+    assert receipt["destination_thread_id"] is None
+    assert receipt.get("message_key") is None
+    assert "fallback_thread_id" not in receipt
+    assert "fallback_thread_id" not in record
+    assert record["state"] == "ARCHIVED"
+    contract.close_tab_lease(record, reason="archive complete; receipt unavailable")
+    assert record["tab_lifecycle"] == "CLOSED"
+
+
+def test_unattempted_legacy_pending_receipt_migrates_even_when_destination_already_matches_source() -> None:
+    record = _record()
+    record["state"] = "ARCHIVED"
+    response_sha256 = "d" * 64
+    key = contract.receipt_message_key(
+        str(record["request_id"]),
+        str(record["direction_id"]),
+        str(record["conversation_id"]),
+        response_sha256,
+    )
+    record["return_receipt"] = {
+        "required": True,
+        "source_thread_id": record["source_thread_id"],
+        "destination_thread_id": record["source_thread_id"],
+        "status": "PENDING",
+        "attempt_count": 0,
+        "message_key": key,
+        "routing_mode": "FIXED_FALLBACK",
+        "fallback_enabled": True,
+        "fallback_thread_id": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    }
+
+    contract.stage_receipt(record, {"response_file": "response.md"}, response_sha256)
+
+    receipt = record["return_receipt"]
+    assert receipt["message_key"] == key
+    assert receipt["destination_thread_id"] == record["source_thread_id"]
+    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["fallback_enabled"] is False
+    assert "fallback_thread_id" not in receipt
+
+
+def test_any_legacy_delivery_evidence_preserves_mixed_fallback_receipt_without_restaging() -> None:
+    record = _record()
+    record["state"] = "ARCHIVED"
+    mixed_receipt = {
+        "required": True,
+        "destination_thread_id": record["source_thread_id"],
+        "status": "BLOCKED",
+        "attempt_count": 0,
+        "message_key": "legacy-logical-key",
+        "delivery_status": "rejected",
+        "fallback_enabled": True,
+        "fallback_status": "SENT",
+        "fallback_used": True,
+        "fallback_attempt_count": 1,
+        "fallback_delivery_status": "accepted",
+        "fallback_sent_at": "2026-09-01T11:26:41Z",
+    }
+    record["return_receipt"] = dict(mixed_receipt)
+
+    contract.stage_receipt(record, {"response_file": "response.md"}, "e" * 64)
+
+    assert record["return_receipt"] == mixed_receipt
+    assert contract.receipt_has_delivery_evidence(record["return_receipt"]) is True
+
+
+def test_terminal_blocker_receipt_routes_once_to_the_creator() -> None:
+    record = _record()
+    record["state"] = "BLOCKED"
+    contract.stage_blocker_receipt(
+        record,
+        "BLOCKED",
+        "provider URL no longer resolves",
+        now="2026-08-31T00:40:00Z",
+    )
+    receipt = record["return_receipt"]
+    message_key = receipt["message_key"]
     assert receipt["status"] == "PENDING"
-    assert receipt["fallback_used"] is True
+    assert receipt["kind"] == "TERMINAL_BLOCKER"
+    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["fallback_enabled"] is False
     assert receipt["return_control_after_attempt"] is True
-    assert receipt["fallback_delivery_mode"] == "bounded_single_attempt"
-    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
-    assert receipt["fallback_status"] == "PENDING"
-    assert receipt["fallback_message_key"] == receipt["message_key"]
-    assert "|fallback|" not in receipt["fallback_message_key"]
+    assert receipt["destination_thread_id"] == record["source_thread_id"]
+    contract.stage_blocker_receipt(record, "BLOCKED", "provider URL no longer resolves")
+    assert record["return_receipt"]["message_key"] == message_key
 
 
-def test_explicit_fallback_stages_terminal_blocker_without_archive() -> None:
+def test_terminal_blocker_without_source_is_receipt_blocked() -> None:
     record = _record()
     record["state"] = "BLOCKED"
     record["source_thread_id"] = None
-    record["fallback_enabled"] = True
     contract.stage_blocker_receipt(
         record,
         "BLOCKED",
@@ -228,29 +306,29 @@ def test_explicit_fallback_stages_terminal_blocker_without_archive() -> None:
     )
     receipt = record["return_receipt"]
     assert receipt["kind"] == "TERMINAL_BLOCKER"
-    assert receipt["status"] == "PENDING"
-    assert receipt["fallback_used"] is True
-    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
-    assert receipt["fallback_staged_at"] == "2026-08-31T00:40:00Z"
+    assert receipt["status"] == "BLOCKED"
+    assert receipt["receipt_state"] == "RETURN_RECEIPT_BLOCKED"
+    assert receipt["destination_thread_id"] is None
+    assert receipt["fallback_enabled"] is False
+    assert receipt.get("message_key") is None
+    assert record["state"] == "BLOCKED"
 
 
-def test_fixed_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
+def test_creator_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
-    record["source_thread_id"] = "01a05860-6919-7bd3-9b04-99f8344ed73d"
+    record["source_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
     contract.stage_receipt(record, {"response_file": "response.md"}, "e" * 64)
     receipt = record["return_receipt"]
-    assert receipt["source_thread_id"] == "01a05860-6919-7bd3-9b04-99f8344ed73d"
-    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
+    assert receipt["source_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    assert receipt["destination_thread_id"] == record["source_thread_id"]
     contract.record_receipt_result(record, "FAILED", error="send tool failed")
     receipt = record["return_receipt"]
     assert receipt["status"] == "FAILED"
-    assert receipt["fallback_status"] == "FAILED"
-    assert receipt["fallback_used"] is True
     assert receipt["attempt_count"] == 1
     assert receipt["retry_allowed"] is False
     with pytest.raises(ValueError, match="one pending, unsent receipt"):
-        contract.record_fallback_result(record, "SENT", delivery_status="accepted")
+        contract.record_receipt_result(record, "SENT", delivery_status="accepted")
     assert record["return_receipt"]["status"] == "FAILED"
 
     uncertain = _record()
@@ -258,22 +336,24 @@ def test_fixed_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
     contract.stage_receipt(uncertain, {"response_file": "response.md"}, "f" * 64)
     contract.record_receipt_result(uncertain, "UNCERTAIN", error="timeout")
     assert uncertain["return_receipt"]["status"] == "UNCERTAIN"
-    assert uncertain["return_receipt"]["fallback_status"] == "UNCERTAIN"
-    assert uncertain["return_receipt"]["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
+    assert uncertain["return_receipt"]["destination_thread_id"] == uncertain["source_thread_id"]
     with pytest.raises(ValueError, match="one pending, unsent receipt"):
         contract.record_receipt_result(uncertain, "SENT")
 
 
-def test_only_the_configured_fallback_uuid_is_accepted() -> None:
-    with pytest.raises(ValueError, match=contract.DEFAULT_FALLBACK_THREAD_ID):
-        contract.validate_fallback_thread_id("6a95b06d-0104-83e8-9493-f59f26b61c82")
+def test_source_thread_validator_accepts_any_uuid_and_no_fallback_api_exists() -> None:
+    source = "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    assert contract.validate_source_thread_id(source) == source
+    with pytest.raises(ValueError, match="source_thread_id"):
+        contract.validate_source_thread_id("not-a-task")
+    assert not hasattr(contract, "DEFAULT_FALLBACK_THREAD_ID")
+    assert not hasattr(contract, "validate_fallback_thread_id")
 
 
-def test_uncertain_or_invalid_conversation_states_cannot_stage_fallback() -> None:
+def test_uncertain_or_invalid_conversation_states_cannot_stage_receipt() -> None:
     uncertain = _record()
     uncertain["state"] = "SEND_UNCERTAIN"
     uncertain["source_thread_id"] = None
-    uncertain["fallback_enabled"] = True
     with pytest.raises(ValueError, match="ARCHIVED"):
         contract.stage_receipt(uncertain, {"response_file": "response.md"}, "1" * 64)
     assert "return_receipt" not in uncertain
@@ -282,7 +362,6 @@ def test_uncertain_or_invalid_conversation_states_cannot_stage_fallback() -> Non
     invalid_identity["state"] = "ARCHIVED"
     invalid_identity["conversation_id"] = None
     invalid_identity["source_thread_id"] = None
-    invalid_identity["fallback_enabled"] = True
     with pytest.raises(ValueError, match="monitor identity missing"):
         contract.stage_receipt(invalid_identity, {"response_file": "response.md"}, "2" * 64)
     assert "return_receipt" not in invalid_identity
@@ -307,24 +386,53 @@ def test_validate_request_exposes_packet_plan_and_return_readiness(
         "req-transport-01--demo_direction__01_REF_001_"
     )
     assert result["return_receipt_ready"] is True
-    enabled = TRANSPORT_VALIDATE.validate(
-        {
-            **upload_request,
-            "fallback_enabled": True,
-            "fallback_thread_id": contract.DEFAULT_FALLBACK_THREAD_ID,
-        },
+    assert result["creator_thread_id"] == upload_request["source_thread_id"]
+    assert result["return_receipt_thread_id"] == upload_request["source_thread_id"]
+    assert result["return_route"] == "CREATOR_SESSION"
+    assert "fallback_thread_id" not in result
+
+
+def test_validate_request_requires_operator_for_every_canonical_workflow(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    canonical = {
+        **upload_request,
+        "workflow_node": "em_innovator",
+        "direction_ids": ["demo_direction"],
+        "conversation_binding_key": "em:demo_direction:innovator",
+        "decision_authority": "pro_final",
+    }
+    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+        TRANSPORT_VALIDATE.validate(canonical, project_root)
+
+    accepted = TRANSPORT_VALIDATE.validate(
+        {**canonical, "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"},
         project_root,
     )
-    assert enabled["fallback_enabled"] is True
-    assert enabled["fallback_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
-    assert enabled["fallback_thread_url"] == contract.DEFAULT_FALLBACK_THREAD_URL
+    assert accepted["operator_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
-def test_validate_request_requires_the_explicit_fallback_flag() -> None:
-    # Validation reaches direction registration first in a real project; this
-    # focused assertion checks the helper's fixed-target validator directly.
-    with pytest.raises(ValueError, match=contract.DEFAULT_FALLBACK_THREAD_ID):
-        contract.validate_fallback_thread_id("not-the-bound-session")
+def test_validate_request_allows_legacy_transport_without_a_receipt_source(
+    project_root: Path, upload_request: dict[str, object]
+) -> None:
+    legacy = dict(upload_request)
+    legacy.pop("source_thread_id")
+    accepted = TRANSPORT_VALIDATE.validate(legacy, project_root)
+    assert accepted["workflow_node"] == "legacy"
+    assert accepted["source_thread_id"] is None
+    assert accepted["return_receipt_ready"] is False
+    assert accepted["return_receipt_thread_id"] is None
+
+
+@pytest.mark.parametrize(
+    "field",
+    ["fallback_enabled", "fallback_thread_id", "fallback_destination_thread_id", "primary_destination_thread_id"],
+)
+def test_validate_request_rejects_every_legacy_fallback_field(
+    project_root: Path, upload_request: dict[str, object], field: str
+) -> None:
+    with pytest.raises(ValueError, match="legacy fallback routing fields"):
+        TRANSPORT_VALIDATE.validate({**upload_request, field: None}, project_root)
 
 
 def test_validate_request_accepts_only_evidenced_provider_context_reset(
@@ -362,6 +470,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
     canonical = {
         **upload_request,
         "source_mode": "single_body_attachment",
+        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
     }
     canonical.pop("reference_paths")
     accepted = TRANSPORT_VALIDATE.validate(canonical, project_root)
@@ -380,8 +489,18 @@ def test_validate_request_enforces_canonical_single_body_attachment(
             project_root,
         )
 
+    without_source = {**canonical}
+    without_source.pop("source_thread_id")
+    with pytest.raises(ValueError, match="canonical handoff requires source_thread_id"):
+        TRANSPORT_VALIDATE.validate(without_source, project_root)
 
-def test_bind_records_v2_lease_monitor_and_outbox(tmp_path: Path) -> None:
+    without_operator = {**canonical}
+    without_operator.pop("operator_thread_id")
+    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+        TRANSPORT_VALIDATE.validate(without_operator, project_root)
+
+
+def test_bind_records_v3_creator_route_lease_monitor_and_outbox(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     args = Namespace(
         registry=registry,
@@ -400,9 +519,8 @@ def test_bind_records_v2_lease_monitor_and_outbox(tmp_path: Path) -> None:
         source_mode="upload",
         prompt_sha256="a" * 64,
         reference_files_json=json.dumps([{"filename": "REFERENCE_FILES.md", "bytes": 1, "sha256": "b" * 64}]),
-        source_thread_id="01a04f5a-1c9f-7331-b1d9-249fb767362e",
-        fallback_enabled=False,
-        fallback_thread_id=None,
+        source_thread_id="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=str((tmp_path / "PACKET_MANIFEST.json").resolve()),
         tab_origin="agent",
@@ -410,15 +528,20 @@ def test_bind_records_v2_lease_monitor_and_outbox(tmp_path: Path) -> None:
 
     assert BIND.bind(args) == 0
     record = json.loads(registry.read_text(encoding="utf-8"))["directions"]["demo_direction"]
-    assert record["schema_version"] == 2
+    assert record["schema_version"] == 3
     assert record["tab_lease"]["lifecycle"] == "OPEN"
     assert record["monitor"]["identity_key"] == contract.monitor_identity_key(record)
+    assert record["creator_thread_id"] == args.source_thread_id
+    assert record["operator_thread_id"] == args.operator_thread_id
+    assert record["return_route"] == "CREATOR_SESSION"
     assert record["return_receipt"]["destination_thread_id"] == args.source_thread_id
+    assert record["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
+    assert record["return_receipt"]["fallback_enabled"] is False
     assert record["heartbeat"]["status"] == "PENDING"
     assert record["reference_files"][0]["canonical_filename"].endswith("REFERENCE_FILES.md")
 
 
-def test_bind_persists_explicit_fallback_binding(tmp_path: Path) -> None:
+def test_bind_legacy_without_source_disables_automatic_receipt(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     args = Namespace(
         registry=registry,
@@ -430,7 +553,7 @@ def test_bind_persists_explicit_fallback_binding(tmp_path: Path) -> None:
         conversation_id="6a95b06d-0104-83e8-9493-f59f26b61c82",
         provider_url="https://chatgpt.com/c/6a95b06d-0104-83e8-9493-f59f26b61c82",
         tab_id="17",
-        request_id="req-fallback",
+        request_id="req-no-source",
         visible_model="Pro",
         underlying_model="GPT-5.6 Sol",
         thinking_effort="5/5",
@@ -438,8 +561,7 @@ def test_bind_persists_explicit_fallback_binding(tmp_path: Path) -> None:
         prompt_sha256="a" * 64,
         reference_files_json="[]",
         source_thread_id=None,
-        fallback_enabled=True,
-        fallback_thread_id=contract.DEFAULT_FALLBACK_THREAD_ID,
+        operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=None,
         tab_origin="agent",
@@ -447,10 +569,14 @@ def test_bind_persists_explicit_fallback_binding(tmp_path: Path) -> None:
 
     assert BIND.bind(args) == 0
     record = json.loads(registry.read_text(encoding="utf-8"))["bindings"][args.conversation_binding_key]
-    assert record["fallback_enabled"] is True
-    assert record["fallback_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
-    assert record["fallback_thread_url"] == contract.DEFAULT_FALLBACK_THREAD_URL
-    assert record["return_receipt"]["fallback_enabled"] is True
+    assert "fallback_enabled" not in record
+    assert "fallback_thread_id" not in record
+    assert record["source_thread_id"] is None
+    assert record["return_receipt"]["required"] is False
+    assert record["return_receipt"]["status"] == "BLOCKED"
+    assert record["return_receipt"]["receipt_state"] == "RETURN_RECEIPT_BLOCKED"
+    assert record["return_receipt"]["destination_thread_id"] is None
+    assert record["return_receipt"]["fallback_enabled"] is False
 
 
 def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
@@ -472,13 +598,69 @@ def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
         source_mode="upload",
         prompt_sha256="a" * 64,
         reference_files_json="[]",
-        source_thread_id="01a04f5a-1c9f-7331-b1d9-249fb767362e",
-        fallback_enabled=False,
-        fallback_thread_id=None,
+        source_thread_id="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=None,
         tab_origin="agent",
     )
+
+
+def test_bind_rejects_canonical_request_without_runtime_operator(tmp_path: Path) -> None:
+    request = _em_bind_args(tmp_path, "req-no-operator")
+    request.operator_thread_id = None
+    assert BIND.bind(request) == 2
+    assert not request.registry.exists()
+
+
+def test_next_round_preserves_delivered_legacy_receipt_only_in_history(tmp_path: Path) -> None:
+    first = _em_bind_args(tmp_path, "req-legacy-delivered")
+    assert BIND.bind(first) == 0
+    registry = json.loads(first.registry.read_text(encoding="utf-8"))
+    key = first.conversation_binding_key
+    mixed_receipt = {
+        "required": True,
+        "destination_thread_id": first.source_thread_id,
+        "status": "BLOCKED",
+        "attempt_count": 0,
+        "message_key": "legacy-logical-key",
+        "delivery_status": "rejected",
+        "fallback_enabled": True,
+        "fallback_status": "SENT",
+        "fallback_used": True,
+        "fallback_attempt_count": 1,
+        "fallback_delivery_status": "accepted",
+        "fallback_sent_at": "2026-09-01T11:26:41Z",
+    }
+    for record in (registry["bindings"][key], registry["directions"][first.direction_id]):
+        record.update(
+            {
+                "state": "ARCHIVED",
+                "fallback_enabled": True,
+                "fallback_thread_id": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+                "fallback_thread_url": "codex://threads/eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+                "return_receipt": dict(mixed_receipt),
+                "archive": {"response_file": "response.md"},
+                "timestamps": {"archived_at": "2026-09-01T11:26:41Z"},
+            }
+        )
+    first.registry.write_text(json.dumps(registry), encoding="utf-8")
+
+    second = _em_bind_args(tmp_path, "req-current-creator-route")
+    second.source_thread_id = "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    second.operator_thread_id = "dddddddd-dddd-dddd-dddd-dddddddddddd"
+    assert BIND.bind(second) == 0
+
+    current = json.loads(second.registry.read_text(encoding="utf-8"))["bindings"][key]
+    historical = current["request_history"][-1]
+    assert historical["return_receipt"] == mixed_receipt
+    assert historical["fallback_thread_id"] == "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+    assert current["source_thread_id"] == second.source_thread_id
+    assert current["operator_thread_id"] == second.operator_thread_id
+    assert current["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
+    assert current["return_receipt"]["fallback_enabled"] is False
+    assert "fallback_thread_id" not in current
+    assert "fallback_thread_url" not in current
 
 
 def test_archived_direction_mirror_releases_stale_binding_for_next_serial_round(
@@ -549,14 +731,17 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "request_id|conversation_binding_key|conversation_id|provider_url",
         "stage_receipt",
         "provider filename suffix or normalization",
-        "01a04f5a-1c9f-7331-b1d9-249fb767362e",
-        "callers cannot opt out or",
+        "`source_thread_id` is the sole completion",
+        "`fallback_enabled=false`",
         "a rejection must not cause a second send",
-        "it is never a send destination",
+        "`RETURN_RECEIPT_BLOCKED`",
+        "Never multiplex a later",
         "stage_blocker_receipt",
     ):
         assert phrase in transport_text
     assert "fallback_enabled=true" not in transport_text
+    assert "01a05860-" not in transport_text
+    assert "01a04f5a-" not in transport_text
     assert "owns the complete edit and verification" in outsource_text
     assert "never silently fan out, duplicate, or replace an agent" in outsource_text
     assert "close the temporary tab\nafter recording that state" not in transport_text

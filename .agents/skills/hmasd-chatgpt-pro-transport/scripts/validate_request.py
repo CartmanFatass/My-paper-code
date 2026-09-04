@@ -16,10 +16,9 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from transport_contract import (  # noqa: E402
-    DEFAULT_FALLBACK_THREAD_ID,
     packet_artifacts,
-    validate_fallback_thread_id,
     validate_provider_context_reset_evidence,
+    validate_source_thread_id,
 )
 
 
@@ -39,6 +38,22 @@ def _portfolio_has_direction(portfolio: Path, direction_id: str) -> bool:
 
 
 def validate(request: dict, project_root: Path) -> dict:
+    forbidden_route_fields = sorted(
+        field
+        for field in (
+            "fallback_enabled",
+            "fallback_thread_id",
+            "fallback_thread_url",
+            "fallback_destination_thread_id",
+            "primary_destination_thread_id",
+        )
+        if field in request
+    )
+    if forbidden_route_fields:
+        raise ValueError(
+            "legacy fallback routing fields are not accepted: "
+            + ", ".join(forbidden_route_fields)
+        )
     request_id = request.get("request_id")
     direction_id = request.get("direction_id")
     if not isinstance(request_id, str) or not request_id.strip():
@@ -176,24 +191,31 @@ def validate(request: dict, project_root: Path) -> dict:
             }
         )
 
+    canonical_handoff = workflow_node != "legacy" or declared_source_mode == "single_body_attachment"
     source_thread_id = request.get("source_thread_id")
-    if source_thread_id is not None:
-        if not isinstance(source_thread_id, str) or not re.fullmatch(
-            r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
-            source_thread_id,
-        ):
-            raise ValueError("source_thread_id must be a UUID when supplied")
-
-    fallback_enabled = request.get("fallback_enabled", False)
-    if not isinstance(fallback_enabled, bool):
-        raise ValueError("fallback_enabled must be a boolean when supplied")
-    fallback_thread_id = request.get("fallback_thread_id")
-    if fallback_thread_id is not None:
-        validate_fallback_thread_id(fallback_thread_id)
-    if fallback_enabled:
-        fallback_thread_id = validate_fallback_thread_id(
-            fallback_thread_id or DEFAULT_FALLBACK_THREAD_ID
-        )
+    if source_thread_id is None:
+        if canonical_handoff:
+            raise ValueError("canonical handoff requires source_thread_id")
+    else:
+        source_thread_id = validate_source_thread_id(source_thread_id)
+    creator_thread_id = request.get("creator_thread_id", source_thread_id)
+    if creator_thread_id is not None:
+        creator_thread_id = validate_source_thread_id(creator_thread_id)
+        if creator_thread_id != source_thread_id:
+            raise ValueError("creator_thread_id must equal source_thread_id")
+    return_receipt_thread_id = request.get("return_receipt_thread_id", source_thread_id)
+    if return_receipt_thread_id is not None:
+        return_receipt_thread_id = validate_source_thread_id(return_receipt_thread_id)
+        if return_receipt_thread_id != source_thread_id:
+            raise ValueError("return_receipt_thread_id must equal source_thread_id")
+    return_route = request.get("return_route", "CREATOR_SESSION" if source_thread_id else None)
+    if return_route not in {None, "CREATOR_SESSION"}:
+        raise ValueError("return_route must be CREATOR_SESSION when supplied")
+    operator_thread_id = request.get("operator_thread_id")
+    if operator_thread_id is not None:
+        operator_thread_id = validate_source_thread_id(operator_thread_id)
+    if canonical_handoff and operator_thread_id is None:
+        raise ValueError("canonical handoff requires operator_thread_id after create_thread")
 
     packet = packet_artifacts(
         request_id,
@@ -228,12 +250,11 @@ def validate(request: dict, project_root: Path) -> dict:
         "companion_prompt": companion_prompt,
         "companion_prompt_sha256": hashlib.sha256(companion_prompt.encode("utf-8")).hexdigest() if companion_prompt is not None else None,
         "source_thread_id": source_thread_id,
+        "creator_thread_id": creator_thread_id,
+        "operator_thread_id": operator_thread_id,
+        "return_route": return_route,
+        "return_receipt_thread_id": return_receipt_thread_id,
         "return_receipt_ready": bool(source_thread_id),
-        "fallback_enabled": fallback_enabled,
-        "fallback_thread_id": fallback_thread_id if fallback_enabled else None,
-        "fallback_thread_url": (
-            f"codex://threads/{fallback_thread_id}" if fallback_enabled else None
-        ),
         "reference_files": reference_files,
         "packet": packet,
     }

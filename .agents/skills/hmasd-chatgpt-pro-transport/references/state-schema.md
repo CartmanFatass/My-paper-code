@@ -8,11 +8,13 @@ The registry is JSON at a caller-supplied path (default project-local path:
 has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
-handles, heartbeat wakeups, and executor turns remain ephemeral observations.
+handles, heartbeat wakeups, and executor turns remain ephemeral observations. The
+registry is shared across all on-demand operators; an operator UUID never selects a
+provider conversation.
 
 ```json
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "conversation_binding_key": "em:finite_resource_relational_inductive_efficiency:innovator",
   "workflow_node": "em_innovator",
   "direction_id": "finite_resource_relational_inductive_efficiency",
@@ -21,9 +23,9 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
   "request_id": "portfolio-frrie-r02-exact-law-20260831-01",
   "packet_id": "portfolio-frrie-r02-exact-law-20260831-01--finite_resource_relational_inductive_efficiency",
   "source_thread_id": "01a...",
-  "fallback_enabled": true,
-  "fallback_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
-  "fallback_thread_url": "codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e",
+  "creator_thread_id": "01a...",
+  "operator_thread_id": "01b...",
+  "return_route": "CREATOR_SESSION",
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
   "state": "WAITING_GENERATION",
@@ -99,23 +101,16 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
   },
   "return_receipt": {
     "required": true,
-    "primary_destination_thread_id": "01a...",
     "source_thread_id": "01a...",
-    "destination_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+    "destination_thread_id": "01a...",
     "status": "PENDING",
     "message_key": null,
     "attempt_count": 0,
     "retry_allowed": false,
     "delivery_mode": "bounded_single_attempt",
     "return_control_after_attempt": true,
-    "routing_mode": "FIXED_FALLBACK",
-    "fallback_enabled": true,
-    "fallback_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
-    "fallback_destination_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
-    "fallback_status": "PENDING",
-    "fallback_used": true,
-    "fallback_message_key": "<same deterministic message_key>",
-    "fallback_delivery_mode": "bounded_single_attempt",
+    "routing_mode": "CREATOR_SESSION",
+    "fallback_enabled": false,
     "delivery_status": null,
     "error": null
   },
@@ -143,6 +138,18 @@ already be `ARCHIVED`. Move its request/packet/archive/receipt facts into
 `request_history`, reset only request-local state, and continue with the same
 `conversation_id` and `provider_url`. A second request while the first is pending
 is `BINDING_BUSY`, not permission to create another conversation.
+
+Each `request_history` entry preserves that round's `source_thread_id`,
+`creator_thread_id`, `operator_thread_id`, and `return_route` alongside its archive
+and receipt. A new round may use a different operator and creator while retaining
+the binding's exact provider conversation. Completed old fixed-route receipts remain
+historical evidence and are not rewritten or resent. An old `PENDING` or `BLOCKED`
+receipt may migrate to `CREATOR_SESSION` only when `attempt_count=0`, no send is
+recorded on either its primary or fallback route, and that same round has a valid
+`source_thread_id`; its deterministic message key is preserved. Any primary/fallback
+attempt count, delivery status, sent timestamp, or terminal delivery state freezes
+the old receipt as historical evidence. A record without a source is marked
+ineligible for an automatic receipt and is never sent to an old destination.
 
 ## Contaminated provider-context reset
 
@@ -201,7 +208,9 @@ The normal sequence is:
 failures. Terminal or attention states are `SEND_UNCERTAIN`, `SENT_INPUT_MISMATCH`,
 `UPLOAD_READY_SEND_DISABLED`, `MODEL_UNVERIFIED`, `DIRECTION_UNVERIFIED`,
 `ARCHIVE_CONFLICT`, `RECOVERY_URL_MISMATCH`, `MONITOR_IDENTITY_MISMATCH`,
-`RETURN_RECEIPT_UNCERTAIN`, `RETURN_RECEIPT_BLOCKED`, and `BLOCKED`.
+`RETURN_RECEIPT_UNCERTAIN`, and `BLOCKED`. `RETURN_RECEIPT_BLOCKED` is a receipt
+substate for a missing creator route; it does not replace an `ARCHIVED` scientific
+transport state.
 `BOUND` is accepted only as a legacy result label; new records start at
 `DIRECTION_VERIFIED`. A timeout or browser exception is never converted into a new
 conversation.
@@ -212,7 +221,8 @@ conversation.
 conversation identity. The tab lease must remain `OPEN` throughout every
 `WAITING_*` state. Ending an executor turn or returning from a heartbeat wake does
 not close the tab. Only after natural completion, exact response capture, durable
-archive verification, and receipt staging may an agent-created tab be closed by the
+archive verification, and either receipt staging or an explicit blocked-receipt
+record may an agent-created tab be closed by the
 normal completion policy; the close must then clear `tab_id` while retaining the
 conversation URL/ID and archive paths. A user-owned/explicitly mentioned tab is not
 closed without authorization.
@@ -267,8 +277,9 @@ provider URL; the loaded URL and direction must be re-verified before observatio
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-For a heartbeat shared by multiple directions, retain it while any record requires
-a wake or recoverable timeout. After the final record is durably archived, or is an
+Each on-demand operator owns one handoff and does not multiplex later directions.
+Retain its heartbeat while that record requires a wake or recoverable timeout. After
+the record is durably archived, or is an
 explicit terminal/blocker state with no scheduled recovery, update the existing
 automation to `PAUSED` exactly once, verify the disabled status, and persist
 `retired_at` plus `retirement_verified=true`. Heartbeat retirement and tab closure
@@ -277,19 +288,17 @@ are separate facts.
 ## Automatic return outbox
 
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
-using `send_message_to_thread`. The deterministic `message_key` is
+using `send_message_to_thread`. The deterministic `message_key` remains
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
-from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the fixed
-destination, timestamp, attempt count, delivery status, and error. The source
-thread is retained in `source_thread_id` and `primary_destination_thread_id` for
-audit only. The actual `destination_thread_id` is always the exact configured
-fallback session `01a04f5a-1c9f-7331-b1d9-249fb767362e`; `fallback_enabled` is
-therefore always true for a staged receipt and cannot select another ID.
+from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the exact
+creator destination, timestamp, attempt count, delivery status, and error.
+`destination_thread_id` must equal the validated `source_thread_id`,
+`routing_mode` is `CREATOR_SESSION`, and `fallback_enabled` is false.
 
-The fixed destination is
-`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`. Its ID must validate as
-that exact UUID. The fallback route does not add a second message-key suffix: its
-message key is the same deterministic key for the one logical receipt. An
-uncertain delivery, a rejection, or a blocked fixed-route send is terminal for that
-outbox entry and is never retried, rerouted, or duplicated. Terminal blockers
-without an archive use `stage_blocker_receipt` with the same fixed-route rule.
+An uncertain delivery or rejection is terminal for that outbox entry and is never
+retried, rerouted, or duplicated. Terminal blockers without an archive use
+`stage_blocker_receipt` with the same creator-session rule. If no valid source is
+available, no outbox message is staged: the receipt records
+`required=false`, `receipt_state=RETURN_RECEIPT_BLOCKED`,
+`destination_thread_id=null`, and no message key. Legacy transport may still
+complete, but it cannot send a receipt.

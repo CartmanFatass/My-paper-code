@@ -17,18 +17,26 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from transport_contract import (  # noqa: E402
-    DEFAULT_FALLBACK_THREAD_ID,
+    SCHEMA_VERSION,
     archived_provider_context_reset_facts,
     monitor_identity_key,
     packet_artifacts,
     packet_id,
+    receipt_has_delivery_evidence,
     registry_lock,
-    validate_fallback_thread_id,
     validate_provider_context_reset_evidence,
+    validate_source_thread_id,
 )
 
 
 UUID_RE = re.compile(r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+LEGACY_TOP_LEVEL_ROUTE_FIELDS = (
+    "fallback_enabled",
+    "fallback_thread_id",
+    "fallback_thread_url",
+    "fallback_destination_thread_id",
+    "primary_destination_thread_id",
+)
 
 
 def _result(payload: dict, code: int = 0) -> int:
@@ -38,13 +46,13 @@ def _result(payload: dict, code: int = 0) -> int:
 
 def _load(path: Path) -> dict:
     if not path.exists():
-        return {"version": 2, "directions": {}, "bindings": {}, "quarantined_conversations": {}}
+        return {"version": SCHEMA_VERSION, "directions": {}, "bindings": {}, "quarantined_conversations": {}}
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict) or not isinstance(value.get("directions", {}), dict):
         raise ValueError("registry must be an object with a directions object")
     if not isinstance(value.get("bindings", {}), dict):
         raise ValueError("registry bindings must be an object")
-    value.setdefault("version", 2)
+    value["version"] = max(int(value.get("version", 0)), SCHEMA_VERSION)
     value.setdefault("directions", {})
     value.setdefault("bindings", {})
     value.setdefault("quarantined_conversations", {})
@@ -62,23 +70,41 @@ def _tab_handle(value: object) -> str | None:
     return text
 
 
+def _clear_active_legacy_routing(record: dict) -> None:
+    """Remove obsolete active-route fields after preserving the old round."""
+
+    for key in LEGACY_TOP_LEVEL_ROUTE_FIELDS:
+        record.pop(key, None)
+    record.pop("return_receipt_state", None)
+
+
 def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
-    """Add v2 control-plane fields without replacing existing transport facts."""
+    """Add creator-route fields and migrate only definitely unsent legacy receipts."""
 
     handle = _tab_handle(args.tab_id) or _tab_handle(record.get("tab_id"))
     logical_packet_id = record.get("packet_id") or getattr(args, "packet_id", None) or packet_id(args.request_id, args.direction_id)
-    source_thread_id = record.get("source_thread_id") or getattr(args, "source_thread_id", None)
-    fallback_enabled = bool(getattr(args, "fallback_enabled", False))
-    fallback_thread_id = getattr(args, "fallback_thread_id", None)
-    if fallback_enabled:
-        fallback_thread_id = validate_fallback_thread_id(
-            fallback_thread_id or DEFAULT_FALLBACK_THREAD_ID
-        )
+    incoming_source_thread_id = getattr(args, "source_thread_id", None)
+    existing_source_thread_id = record.get("source_thread_id")
+    if existing_source_thread_id and incoming_source_thread_id and existing_source_thread_id != incoming_source_thread_id:
+        raise ValueError("source_thread_id conflicts with the existing request creator")
+    source_thread_id = existing_source_thread_id or incoming_source_thread_id
+    if source_thread_id is not None:
+        source_thread_id = validate_source_thread_id(source_thread_id)
+    incoming_operator_thread_id = getattr(args, "operator_thread_id", None)
+    existing_operator_thread_id = record.get("operator_thread_id")
+    if existing_operator_thread_id and incoming_operator_thread_id and existing_operator_thread_id != incoming_operator_thread_id:
+        raise ValueError("operator_thread_id conflicts with the existing request operator")
+    operator_thread_id = existing_operator_thread_id or incoming_operator_thread_id
+    if operator_thread_id is not None:
+        operator_thread_id = validate_source_thread_id(operator_thread_id)
     binding_key = getattr(args, "conversation_binding_key", None)
     workflow_node = getattr(args, "workflow_node", "legacy")
     direction_ids = getattr(args, "direction_ids", [args.direction_id])
     decision_authority = getattr(args, "decision_authority", None)
-    record.setdefault("schema_version", 2)
+    historical_receipt = record.get("return_receipt")
+    if receipt_has_delivery_evidence(historical_receipt):
+        return record
+    record["schema_version"] = SCHEMA_VERSION
     record.setdefault("conversation_binding_key", binding_key)
     record.setdefault("workflow_node", workflow_node)
     record.setdefault("direction_ids", direction_ids)
@@ -92,9 +118,10 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
             "manifest_path": getattr(args, "packet_manifest", None),
         },
     )
-    record.setdefault("source_thread_id", source_thread_id)
-    if not record.get("source_thread_id") and source_thread_id:
-        record["source_thread_id"] = source_thread_id
+    record["source_thread_id"] = source_thread_id
+    record["creator_thread_id"] = source_thread_id
+    record["operator_thread_id"] = operator_thread_id
+    record["return_route"] = "CREATOR_SESSION"
     record.setdefault("tab_id", handle)
     record.setdefault("tab_lifecycle", "OPEN" if handle else "HANDOFF")
     record.setdefault(
@@ -121,28 +148,20 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     )
     if not record["monitor"].get("identity_key"):
         record["monitor"]["identity_key"] = monitor_identity_key(record)
-    record.setdefault(
-        "return_receipt",
-        {
-            "required": True,
-            "destination_thread_id": source_thread_id,
-            "status": "PENDING" if source_thread_id else "BLOCKED",
-            "attempt_count": 0,
-            "message_key": None,
-            "retry_allowed": False,
-            "fallback_enabled": fallback_enabled,
-            "fallback_thread_id": fallback_thread_id if fallback_enabled else None,
-            "fallback_destination_thread_id": fallback_thread_id if fallback_enabled else None,
-            "fallback_status": "NOT_NEEDED",
-            "fallback_used": False,
-        },
-    )
-    record.setdefault("fallback_enabled", fallback_enabled)
-    record.setdefault("fallback_thread_id", fallback_thread_id if fallback_enabled else None)
-    record.setdefault(
-        "fallback_thread_url",
-        f"codex://threads/{fallback_thread_id}" if fallback_enabled else None,
-    )
+    receipt = dict(record.get("return_receipt") or {})
+    if receipt.get("status") in {"PENDING", "BLOCKED", None} and int(receipt.get("attempt_count", 0)) == 0:
+        existing_message_key = receipt.get("message_key")
+        for key in tuple(receipt):
+            if key.startswith("fallback_") or key == "primary_destination_thread_id":
+                receipt.pop(key, None)
+        receipt.update(_new_return_receipt(source_thread_id))
+        if existing_message_key:
+            receipt["message_key"] = existing_message_key
+        if source_thread_id is not None:
+            receipt.pop("receipt_state", None)
+            receipt.pop("error", None)
+        record["return_receipt"] = receipt
+    _clear_active_legacy_routing(record)
     record.setdefault(
         "heartbeat",
         {
@@ -155,6 +174,34 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     )
     record.setdefault("updated_at", None)
     return record
+
+
+def _new_return_receipt(source_thread_id: str | None) -> dict:
+    receipt = {
+        "required": source_thread_id is not None,
+        "source_thread_id": source_thread_id,
+        "destination_thread_id": source_thread_id,
+        "status": "PENDING" if source_thread_id else "BLOCKED",
+        "attempt_count": 0,
+        "message_key": None,
+        "retry_allowed": False,
+        "routing_mode": "CREATOR_SESSION",
+        "fallback_enabled": False,
+    }
+    if source_thread_id is None:
+        receipt["receipt_state"] = "RETURN_RECEIPT_BLOCKED"
+        receipt["error"] = "RETURN_RECEIPT_BLOCKED: legacy request has no source_thread_id"
+    return receipt
+
+
+def _request_routing(args: argparse.Namespace) -> tuple[str | None, str | None, dict]:
+    source_thread_id = getattr(args, "source_thread_id", None)
+    if source_thread_id is not None:
+        source_thread_id = validate_source_thread_id(source_thread_id)
+    operator_thread_id = getattr(args, "operator_thread_id", None)
+    if operator_thread_id is not None:
+        operator_thread_id = validate_source_thread_id(operator_thread_id)
+    return source_thread_id, operator_thread_id, _new_return_receipt(source_thread_id)
 
 
 def _atomic_write(path: Path, value: dict) -> None:
@@ -193,15 +240,23 @@ def _expected_binding_key(workflow_node: str, direction_id: str, direction_ids: 
 def _archived_round(record: dict) -> dict:
     """Preserve the completed provider round before clearing an admitted reset."""
 
-    return {
+    archived = {
         "request_id": record.get("request_id"),
         "packet_id": record.get("packet_id"),
         "state": record.get("state"),
+        "source_thread_id": record.get("source_thread_id"),
+        "creator_thread_id": record.get("creator_thread_id") or record.get("source_thread_id"),
+        "operator_thread_id": record.get("operator_thread_id"),
+        "return_route": record.get("return_route"),
         "conversation_id": record.get("conversation_id"),
         "provider_url": record.get("provider_url"),
         "archive": record.get("archive"),
         "return_receipt": record.get("return_receipt"),
     }
+    for key in LEGACY_TOP_LEVEL_ROUTE_FIELDS:
+        if key in record:
+            archived[key] = record[key]
+    return archived
 
 
 def _archived_direction_mirror(
@@ -367,8 +422,14 @@ def prepare_context_reset(
                     "last_observed_at": None,
                     "cursor": None,
                 },
+                "source_thread_id": None,
+                "creator_thread_id": None,
+                "operator_thread_id": None,
+                "return_route": None,
+                "return_receipt": None,
             }
         )
+        _clear_active_legacy_routing(record)
         registry["quarantined_conversations"][old_conversation_id] = quarantine
         registry["bindings"][conversation_binding_key] = record
         registry["directions"][str(record["direction_id"])] = record
@@ -424,15 +485,23 @@ def bind(args: argparse.Namespace) -> int:
             {"bound": False, "state": "CONVERSATION_UNVERIFIED", "error": "observed_after_successful_send must be boolean"},
             2,
         )
-    if args.source_thread_id is not None and not UUID_RE.fullmatch(args.source_thread_id):
-        return _result({"bound": False, "state": "SOURCE_THREAD_UNVERIFIED", "error": "source_thread_id must be UUID"}, 2)
-    if args.fallback_thread_id is not None:
-        try:
-            args.fallback_thread_id = validate_fallback_thread_id(args.fallback_thread_id)
-        except ValueError as exc:
-            return _result({"bound": False, "state": "FALLBACK_UNVERIFIED", "error": str(exc)}, 2)
-    if args.fallback_enabled:
-        args.fallback_thread_id = args.fallback_thread_id or DEFAULT_FALLBACK_THREAD_ID
+    if args.source_thread_id is None and args.workflow_node != "legacy":
+        return _result(
+            {"bound": False, "state": "SOURCE_THREAD_UNVERIFIED", "error": "canonical binding requires source_thread_id"},
+            2,
+        )
+    if getattr(args, "operator_thread_id", None) is None and args.workflow_node != "legacy":
+        return _result(
+            {"bound": False, "state": "OPERATOR_THREAD_UNVERIFIED", "error": "canonical binding requires operator_thread_id"},
+            2,
+        )
+    try:
+        if args.source_thread_id is not None:
+            args.source_thread_id = validate_source_thread_id(args.source_thread_id)
+        if getattr(args, "operator_thread_id", None) is not None:
+            args.operator_thread_id = validate_source_thread_id(args.operator_thread_id)
+    except ValueError as exc:
+        return _result({"bound": False, "state": "SOURCE_THREAD_UNVERIFIED", "error": str(exc)}, 2)
     if args.packet_manifest is not None and not Path(args.packet_manifest).is_absolute():
         return _result({"bound": False, "state": "PACKET_UNVERIFIED", "error": "packet_manifest must be absolute"}, 2)
     try:
@@ -444,6 +513,7 @@ def bind(args: argparse.Namespace) -> int:
     for item in reference_files:
         if not isinstance(item, dict):
             return _result({"bound": False, "state": "REFERENCE_METADATA_INVALID", "error": "each reference metadata entry must be an object"}, 2)
+    source_thread_id, operator_thread_id, return_receipt = _request_routing(args)
 
     registry_path = args.registry.resolve()
     with registry_lock(registry_path):
@@ -527,6 +597,7 @@ def bind(args: argparse.Namespace) -> int:
             logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
             old.update(
                 {
+                    "schema_version": SCHEMA_VERSION,
                     "conversation_id": args.conversation_id,
                     "provider_url": args.provider_url,
                     "direction_ids": direction_ids,
@@ -537,7 +608,10 @@ def bind(args: argparse.Namespace) -> int:
                         "canonical_form": "logical_packet_manifest",
                         "manifest_path": args.packet_manifest,
                     },
-                    "source_thread_id": args.source_thread_id,
+                    "source_thread_id": source_thread_id,
+                    "creator_thread_id": source_thread_id,
+                    "operator_thread_id": operator_thread_id,
+                    "return_route": "CREATOR_SESSION",
                     "tab_id": tab_handle,
                     "tab_lifecycle": "OPEN" if tab_handle else "HANDOFF",
                     "tab_lease": {
@@ -572,18 +646,7 @@ def bind(args: argparse.Namespace) -> int:
                         "last_observed_at": None,
                         "cursor": None,
                     },
-                    "return_receipt": {
-                        "required": True,
-                        "destination_thread_id": args.source_thread_id,
-                        "status": "PENDING" if args.source_thread_id else "BLOCKED",
-                        "attempt_count": 0,
-                        "message_key": None,
-                        "retry_allowed": False,
-                        "fallback_enabled": args.fallback_enabled,
-                        "fallback_thread_id": args.fallback_thread_id if args.fallback_enabled else None,
-                        "fallback_status": "NOT_NEEDED",
-                        "fallback_used": False,
-                    },
+                    "return_receipt": dict(return_receipt),
                     "heartbeat": {
                         "automation_id": None,
                         "status": "PENDING",
@@ -598,6 +661,7 @@ def bind(args: argparse.Namespace) -> int:
                     "updated_at": None,
                 }
             )
+            _clear_active_legacy_routing(old)
             old["monitor"]["identity_key"] = monitor_identity_key(old)
             bindings[args.conversation_binding_key] = old
             directions[args.direction_id] = old
@@ -661,6 +725,7 @@ def bind(args: argparse.Namespace) -> int:
                 logical_packet_id = args.packet_id or packet_id(args.request_id, args.direction_id)
                 old.update(
                     {
+                        "schema_version": SCHEMA_VERSION,
                         "direction_ids": direction_ids,
                         "request_id": args.request_id,
                         "request_history": history,
@@ -670,7 +735,10 @@ def bind(args: argparse.Namespace) -> int:
                             "canonical_form": "logical_packet_manifest",
                             "manifest_path": args.packet_manifest,
                         },
-                        "source_thread_id": args.source_thread_id,
+                        "source_thread_id": source_thread_id,
+                        "creator_thread_id": source_thread_id,
+                        "operator_thread_id": operator_thread_id,
+                        "return_route": "CREATOR_SESSION",
                         "tab_id": tab_handle,
                         "tab_lifecycle": "OPEN" if tab_handle else "HANDOFF",
                         "tab_lease": {
@@ -697,18 +765,7 @@ def bind(args: argparse.Namespace) -> int:
                             "last_observed_at": None,
                             "cursor": None,
                         },
-                        "return_receipt": {
-                            "required": True,
-                            "destination_thread_id": args.source_thread_id,
-                            "status": "PENDING" if args.source_thread_id else "BLOCKED",
-                            "attempt_count": 0,
-                            "message_key": None,
-                            "retry_allowed": False,
-                            "fallback_enabled": args.fallback_enabled,
-                            "fallback_thread_id": args.fallback_thread_id if args.fallback_enabled else None,
-                            "fallback_status": "NOT_NEEDED",
-                            "fallback_used": False,
-                        },
+                        "return_receipt": dict(return_receipt),
                         "heartbeat": {
                             "automation_id": None,
                             "status": "PENDING",
@@ -721,6 +778,7 @@ def bind(args: argparse.Namespace) -> int:
                         "updated_at": None,
                     }
                 )
+                _clear_active_legacy_routing(old)
                 old["monitor"]["identity_key"] = monitor_identity_key(old)
                 bindings[args.conversation_binding_key] = old
                 directions[args.direction_id] = old
@@ -747,7 +805,7 @@ def bind(args: argparse.Namespace) -> int:
             enriched.setdefault("canonical_filename", packet_names["reference_filenames"][index]["canonical_filename"])
             canonical_refs.append(enriched)
         record = {
-            "schema_version": 2,
+            "schema_version": SCHEMA_VERSION,
             "conversation_binding_key": args.conversation_binding_key,
             "workflow_node": args.workflow_node,
             "direction_id": args.direction_id,
@@ -773,12 +831,10 @@ def bind(args: argparse.Namespace) -> int:
                 "lease_expires_at": None,
             },
             "request_id": args.request_id,
-            "source_thread_id": args.source_thread_id,
-            "fallback_enabled": args.fallback_enabled,
-            "fallback_thread_id": args.fallback_thread_id if args.fallback_enabled else None,
-            "fallback_thread_url": (
-                f"codex://threads/{args.fallback_thread_id}" if args.fallback_enabled else None
-            ),
+            "source_thread_id": source_thread_id,
+            "creator_thread_id": source_thread_id,
+            "operator_thread_id": operator_thread_id,
+            "return_route": "CREATOR_SESSION",
             "visible_model": args.visible_model,
             "underlying_model": args.underlying_model,
             "thinking_effort": args.thinking_effort,
@@ -795,19 +851,7 @@ def bind(args: argparse.Namespace) -> int:
                 "last_observed_at": None,
                 "cursor": None,
             },
-            "return_receipt": {
-                "required": True,
-                "destination_thread_id": args.source_thread_id,
-                "status": "PENDING" if args.source_thread_id else "BLOCKED",
-                "attempt_count": 0,
-                "message_key": None,
-                "retry_allowed": False,
-                "fallback_enabled": args.fallback_enabled,
-                "fallback_thread_id": args.fallback_thread_id if args.fallback_enabled else None,
-                "fallback_destination_thread_id": args.fallback_thread_id if args.fallback_enabled else None,
-                "fallback_status": "NOT_NEEDED",
-                "fallback_used": False,
-            },
+            "return_receipt": dict(return_receipt),
             "heartbeat": {
                 "automation_id": None,
                 "status": "PENDING",
@@ -847,8 +891,7 @@ def main() -> int:
     parser.add_argument("--prompt-sha256", required=True)
     parser.add_argument("--reference-files-json", default="[]")
     parser.add_argument("--source-thread-id", default=None)
-    parser.add_argument("--fallback-enabled", action="store_true")
-    parser.add_argument("--fallback-thread-id", default=None)
+    parser.add_argument("--operator-thread-id", default=None)
     parser.add_argument("--reset-invalid-provider-context", action="store_true")
     parser.add_argument("--provider-context-reset-evidence-json", default=None)
     parser.add_argument("--observed-after-successful-send", action="store_true")

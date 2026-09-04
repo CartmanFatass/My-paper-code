@@ -44,6 +44,8 @@ def _transport_request(**changes: object) -> dict[str, object]:
         "workflow_node": "em_innovator",
         "conversation_binding_key": "em:alpha:innovator",
         "decision_authority": "pro_final",
+        "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         "prompt": "Decide the next bounded object.",
     }
     request.update(changes)
@@ -92,6 +94,8 @@ def _bind_args(
     reset_invalid_provider_context: bool = False,
     provider_context_reset_evidence: dict[str, object] | None = None,
     observed_after_successful_send: bool = False,
+    source_thread_id: str = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    operator_thread_id: str = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
 ) -> argparse.Namespace:
     return argparse.Namespace(
         registry=registry,
@@ -110,9 +114,8 @@ def _bind_args(
         source_mode="upload",
         prompt_sha256="0" * 64,
         reference_files_json="[]",
-        source_thread_id=None,
-        fallback_enabled=False,
-        fallback_thread_id=None,
+        source_thread_id=source_thread_id,
+        operator_thread_id=operator_thread_id,
         packet_id=None,
         packet_manifest=None,
         tab_origin="agent",
@@ -252,6 +255,8 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
         direction_ids=["alpha"],
         conversation_id=conversation_id,
         request_id="alpha-innovator-02",
+        source_thread_id="cccccccc-cccc-cccc-cccc-cccccccccccc",
+        operator_thread_id="dddddddd-dddd-dddd-dddd-dddddddddddd",
     )
 
     assert binder.bind(first) == 0
@@ -268,6 +273,10 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["request_id"] == "alpha-innovator-02"
     assert current["state"] == "DIRECTION_VERIFIED"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"
+    assert current["request_history"][-1]["creator_thread_id"] == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+    assert current["request_history"][-1]["operator_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    assert current["creator_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    assert current["operator_thread_id"] == "dddddddd-dddd-dddd-dddd-dddddddddddd"
 
 
 def test_evidenced_provider_context_reset_quarantines_then_binds_only_new_observed_url(

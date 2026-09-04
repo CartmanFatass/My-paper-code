@@ -26,7 +26,7 @@ def _request() -> dict[str, object]:
         "caller_role": "em",
         "workflow_node": "em_convergence",
         "request_id": "req-companion-01",
-        "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+        "source_thread_id": "11111111-1111-1111-1111-111111111111",
         "direction_id": "demo_direction",
         "repository": "C:/repo",
         "repository_url": "https://github.com/example/repo",
@@ -288,20 +288,30 @@ def test_author_remains_authoring_only_and_operator_gets_companion_contract(
     assert "must not declare or upload a reference attachment" in skill_text
 
 
-def test_handoff_requires_one_dispatch_to_the_fixed_transport_task(
+def test_handoff_creates_one_transport_operator_on_demand(
     project_root: Path, tmp_path: Path
 ) -> None:
     renderer = _renderer()
     out_dir = tmp_path / "packet"
     handoff = _render(renderer, _request(), project_root, out_dir)
-    target_id = "01a05860-6919-7bd3-9b04-99f8344ed73d"
-    target_url = f"codex://threads/{target_id}"
     handoff_path = str((out_dir / "HANDOFF.json").resolve())
 
+    assert handoff["packet_version"] == 2
+    assert handoff["dispatch_mode"] == "CREATE_ON_DEMAND"
+    assert handoff["dispatch_state"] == "PENDING_CREATE"
     assert handoff["dispatch_required"] is True
     assert handoff["dispatch_once"] is True
-    assert handoff["dispatch_target_thread_id"] == target_id
-    assert handoff["dispatch_target_thread_url"] == target_url
+    assert handoff["operator_thread_id"] is None
+    assert handoff["operator_thread_url"] is None
+    assert handoff["return_receipt_thread_id"] == handoff["source_thread_id"]
+    assert "Wait for the creator's execution message" in handoff["operator_bootstrap_prompt"]
+    for legacy_field in (
+        "transport_operator_thread",
+        "transport_operator_thread_id",
+        "dispatch_target_thread_id",
+        "dispatch_target_thread_url",
+    ):
+        assert legacy_field not in handoff
     assert handoff["pro_send_from_caller"] is False
     assert handoff["workflow_node"] == "em_convergence"
     assert handoff["direction_ids"] == ["demo_direction"]
@@ -310,17 +320,79 @@ def test_handoff_requires_one_dispatch_to_the_fixed_transport_task(
     assert handoff["decision_authority"] == "pro_final"
     assert handoff["dispatch_handoff_path"] == handoff_path
     assert handoff["dispatch_prompt"] == f"Execute the handoff packet at {handoff_path} exactly once."
-    assert handoff["dispatch_instruction"] == (
-        f"Call send_message_to_thread exactly once with threadId={target_id} "
-        f"and prompt=Execute the handoff packet at {handoff_path} exactly once."
+    assert "Call create_thread exactly once" in handoff["dispatch_instruction"]
+    assert "dynamic threadId" in handoff["dispatch_instruction"]
+    assert f"prompt=Execute the handoff packet at {handoff_path} exactly once." in handoff["dispatch_instruction"]
+
+
+def test_each_handoff_records_its_own_operator_without_changing_provider_binding(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    first_dir = tmp_path / "operator-a"
+    second_dir = tmp_path / "operator-b"
+    first = _render(renderer, _request(), project_root, first_dir)
+    second = _render(
+        renderer,
+        {**_request(), "request_id": "req-companion-02"},
+        project_root,
+        second_dir,
     )
+    first_body = (first_dir / "PROMPT_BODY.md").read_bytes()
+    second_body = (second_dir / "PROMPT_BODY.md").read_bytes()
+
+    first = renderer.record_operator_thread_id(
+        first_dir / "HANDOFF.json",
+        "22222222-2222-2222-2222-222222222222",
+    )
+    second = renderer.record_operator_thread_id(
+        second_dir / "HANDOFF.json",
+        "33333333-3333-3333-3333-333333333333",
+    )
+
+    assert first["operator_thread_id"] != second["operator_thread_id"]
+    assert first["conversation_binding_key"] == second["conversation_binding_key"]
+    assert first["transport_request"]["operator_thread_id"] == first["operator_thread_id"]
+    assert second["transport_request"]["operator_thread_id"] == second["operator_thread_id"]
+    assert first["return_receipt_thread_id"] == first["source_thread_id"]
+    assert second["return_receipt_thread_id"] == second["source_thread_id"]
+    assert (first_dir / "PROMPT_BODY.md").read_bytes() == first_body
+    assert (second_dir / "PROMPT_BODY.md").read_bytes() == second_body
+
+    renderer.record_operator_thread_id(
+        first_dir / "HANDOFF.json",
+        first["operator_thread_id"],
+    )
+    with pytest.raises(renderer.PacketInputError, match="different operator_thread_id"):
+        renderer.record_operator_thread_id(
+            first_dir / "HANDOFF.json",
+            "44444444-4444-4444-4444-444444444444",
+        )
+
+
+def test_operator_recording_rejects_a_mismatched_nested_creator_route(
+    project_root: Path, tmp_path: Path
+) -> None:
+    renderer = _renderer()
+    out_dir = tmp_path / "mismatched-source"
+    _render(renderer, _request(), project_root, out_dir)
+    handoff_path = out_dir / "HANDOFF.json"
+    handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
+    handoff["transport_request"]["source_thread_id"] = "55555555-5555-5555-5555-555555555555"
+    handoff_path.write_text(json.dumps(handoff), encoding="utf-8")
+
+    with pytest.raises(renderer.PacketInputError, match="must equal top-level source_thread_id"):
+        renderer.record_operator_thread_id(
+            handoff_path,
+            "22222222-2222-2222-2222-222222222222",
+        )
 
 
 @pytest.mark.parametrize(
     ("caller_role", "workflow_node", "source_thread_id"),
     [
-        ("em", "em_innovator", "01A04F5A-1C9F-7331-B1D9-249FB767362E"),
-        ("em", "em_convergence", "01a04f5a-1c9f-7331-b1d9-249fb767362e"),
+        ("em", "em_innovator", "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA"),
+        ("em", "em_convergence", "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
         ("portfolio", "portfolio_decision", "ABCDEFAB-CDEF-ABCD-EFAB-CDEFABCDEFAB"),
     ],
 )
@@ -347,6 +419,10 @@ def test_source_thread_id_is_exactly_propagated_for_every_decision_node(
 
     assert handoff["source_thread_id"] == source_thread_id
     assert handoff["transport_request"]["source_thread_id"] == source_thread_id
+    assert handoff["return_receipt_thread_id"] == source_thread_id
+    assert handoff["transport_request"]["return_receipt_thread_id"] == source_thread_id
+    assert handoff["transport_request"]["creator_thread_id"] == source_thread_id
+    assert handoff["transport_request"]["return_route"] == "CREATOR_SESSION"
     assert not handoff.get("fallback_enabled", False)
     assert not handoff["transport_request"].get("fallback_enabled", False)
     assert source_thread_id not in (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
@@ -360,7 +436,7 @@ def test_source_thread_id_changes_only_handoff_routing_content(
     second_dir = tmp_path / "second"
     first = _render(
         renderer,
-        {**_request(), "source_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e"},
+        {**_request(), "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"},
         project_root,
         first_dir,
     )
@@ -398,6 +474,7 @@ def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separ
 
     assert "Validate the caller input" in skill_text
     assert "Render exactly the two files" in skill_text
+    assert "`create_thread` exactly once" in skill_text
     assert "`send_message_to_thread` exactly once" in skill_text
     assert "authoring task is not complete until" in skill_text
     assert "task exclusively owns Pro/browser send" in skill_text
@@ -417,7 +494,8 @@ def test_author_skill_closes_the_dispatch_sequence_and_keeps_pro_transport_separ
     assert ("does not call " + "the transport operator") not in skill_text
     assert ("does not send" + ", open a browser") not in skill_text
     assert ("send_from_" + "author") not in skill_text
-    assert handoff["dispatch_target_thread_url"] == "codex://threads/01a05860-6919-7bd3-9b04-99f8344ed73d"
+    assert handoff["dispatch_mode"] == "CREATE_ON_DEMAND"
+    assert handoff["operator_thread_id"] is None
 
 
 def test_missing_required_input_returns_one_consolidated_caller_question_without_rendering(

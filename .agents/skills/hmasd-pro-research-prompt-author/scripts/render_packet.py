@@ -10,8 +10,7 @@ import sys
 from pathlib import Path
 
 
-OPERATOR_THREAD_ID = "01a05860-6919-7bd3-9b04-99f8344ed73d"
-OPERATOR_THREAD = f"codex://threads/{OPERATOR_THREAD_ID}"
+DISPATCH_MODE = "CREATE_ON_DEMAND"
 ROLE_SET = {"portfolio", "em"}
 WORKFLOW_NODE_ROLES = {
     "em_innovator": "em",
@@ -469,9 +468,14 @@ GITHUB_EVIDENCE_MANIFEST
     (out_dir / "PROMPT_BODY.md").write_text(body, encoding="utf-8", newline="\n")
 
     handoff_path = str((out_dir / "HANDOFF.json").resolve())
+    operator_bootstrap_prompt = (
+        "Act as the on-demand hmasd-chatgpt-pro-transport operator for request "
+        f"{packet['request_id']}. Wait for the creator's execution message; do not inspect, "
+        "execute, or dispatch any handoff before that message arrives."
+    )
     dispatch_prompt = f"Execute the handoff packet at {handoff_path} exactly once."
     handoff = {
-        "packet_version": 1,
+        "packet_version": 2,
         "request_id": packet["request_id"],
         "source_thread_id": packet["source_thread_id"],
         "caller_role": packet["caller_role"],
@@ -489,23 +493,31 @@ GITHUB_EVIDENCE_MANIFEST
         "repository_url": packet["repository_url"],
         "commit_or_ref": packet["commit_or_ref"],
         "destination_role": "transport_operator",
-        "transport_operator_thread": OPERATOR_THREAD,
-        "transport_operator_thread_id": OPERATOR_THREAD_ID,
         "transport_skill": "hmasd-chatgpt-pro-transport",
+        "dispatch_mode": DISPATCH_MODE,
         "dispatch_required": True,
         "dispatch_once": True,
-        "dispatch_target_thread_id": OPERATOR_THREAD_ID,
-        "dispatch_target_thread_url": OPERATOR_THREAD,
+        "dispatch_state": "PENDING_CREATE",
+        "operator_thread_id": None,
+        "operator_thread_url": None,
+        "return_receipt_thread_id": packet["source_thread_id"],
+        "operator_bootstrap_prompt": operator_bootstrap_prompt,
         "dispatch_handoff_path": handoff_path,
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
-            f"Call send_message_to_thread exactly once with threadId={OPERATOR_THREAD_ID} "
-            f"and prompt={dispatch_prompt}"
+            "Call create_thread exactly once for a new transport operator in the same local "
+            "HMASD project with operator_bootstrap_prompt. Record the returned canonical threadId "
+            "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
+            f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
         ),
         "pro_send_from_caller": False,
         "prompt_body_file": "PROMPT_BODY.md",
         "transport_request": {
             "source_thread_id": packet["source_thread_id"],
+            "creator_thread_id": packet["source_thread_id"],
+            "operator_thread_id": None,
+            "return_route": "CREATOR_SESSION",
+            "return_receipt_thread_id": packet["source_thread_id"],
             "direction_id": packet["direction_id"],
             "direction_ids": packet["direction_ids"],
             "caller_role": packet["caller_role"],
@@ -520,17 +532,19 @@ GITHUB_EVIDENCE_MANIFEST
             "companion_prompt": packet["companion_prompt"],
             "source_mode": "single_body_attachment",
         },
-        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent conversation on first use, then reuse that exact conversation ID. The fixed Transport task exclusively owns Pro/browser send, model/connector checks, conversation binding, wait, archive, cleanup, and Transport evidence.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. This on-demand Transport operator exclusively owns Pro/browser send, model/connector checks, conversation binding, wait, archive, cleanup, and Transport evidence, and returns exactly one receipt to source_thread_id.",
     }
     (out_dir / "HANDOFF.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return {
         "valid": True,
         "output_dir": str(out_dir.resolve()),
         "files": ["PROMPT_BODY.md", "HANDOFF.json"],
-        "operator_thread": OPERATOR_THREAD,
-        "operator_thread_id": OPERATOR_THREAD_ID,
-        "dispatch_target_thread_id": OPERATOR_THREAD_ID,
-        "dispatch_target_thread_url": OPERATOR_THREAD,
+        "dispatch_mode": DISPATCH_MODE,
+        "dispatch_state": "PENDING_CREATE",
+        "operator_thread_id": None,
+        "operator_thread_url": None,
+        "return_receipt_thread_id": packet["source_thread_id"],
+        "operator_bootstrap_prompt": operator_bootstrap_prompt,
         "dispatch_required": True,
         "dispatch_once": True,
         "dispatch_handoff_path": handoff_path,
@@ -543,20 +557,104 @@ GITHUB_EVIDENCE_MANIFEST
         "reset_invalid_provider_context": packet["reset_invalid_provider_context"],
         "decision_authority": packet["decision_authority"],
         "dispatch_instruction": (
-            f"Call send_message_to_thread exactly once with threadId={OPERATOR_THREAD_ID} "
-            f"and prompt={dispatch_prompt}"
+            "Call create_thread exactly once for a new transport operator in the same local "
+            "HMASD project with operator_bootstrap_prompt. Record the returned canonical threadId "
+            "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
+            f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
         ),
         "pro_send_from_caller": False,
     }
 
 
+def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) -> dict:
+    """Persist the one on-demand operator UUID after ``create_thread`` succeeds."""
+
+    thread_id = _text(operator_thread_id, "operator_thread_id")
+    if not re.fullmatch(SOURCE_THREAD_ID_RE, thread_id):
+        raise PacketInputError(
+            "operator_thread_id must be the canonical Codex task UUID returned by create_thread",
+            field="operator_thread_id",
+        )
+    if not handoff_path.is_file():
+        raise PacketInputError(f"HANDOFF.json not found: {handoff_path}", field="handoff_path")
+    handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
+    if not isinstance(handoff, dict) or handoff.get("dispatch_mode") != DISPATCH_MODE:
+        raise PacketInputError(
+            "HANDOFF.json is not a CREATE_ON_DEMAND packet",
+            field="dispatch_mode",
+        )
+    existing = handoff.get("operator_thread_id")
+    if existing not in (None, thread_id):
+        raise PacketInputError(
+            "HANDOFF.json is already bound to a different operator_thread_id",
+            field="operator_thread_id",
+        )
+    transport_request = handoff.get("transport_request")
+    if not isinstance(transport_request, dict):
+        raise PacketInputError("HANDOFF.json has no transport_request object", field="transport_request")
+    source_thread_id = _source_thread_id(handoff.get("source_thread_id"))
+    transport_source_thread_id = _source_thread_id(transport_request.get("source_thread_id"))
+    if transport_source_thread_id != source_thread_id:
+        raise PacketInputError(
+            "transport_request.source_thread_id must equal top-level source_thread_id",
+            field="transport_request.source_thread_id",
+        )
+    if handoff.get("return_receipt_thread_id") != source_thread_id:
+        raise PacketInputError(
+            "return_receipt_thread_id must equal source_thread_id",
+            field="return_receipt_thread_id",
+        )
+    handoff["operator_thread_id"] = thread_id
+    handoff["operator_thread_url"] = f"codex://threads/{thread_id}"
+    handoff["dispatch_state"] = "OPERATOR_CREATED"
+    transport_request["operator_thread_id"] = thread_id
+    transport_request["creator_thread_id"] = source_thread_id
+    transport_request["return_route"] = "CREATOR_SESSION"
+    transport_request["return_receipt_thread_id"] = source_thread_id
+    handoff_path.write_text(
+        json.dumps(handoff, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    return handoff
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("request_json", type=Path)
-    parser.add_argument("--out-dir", type=Path, required=True)
+    parser.add_argument("request_json", type=Path, nargs="?")
+    parser.add_argument("--out-dir", type=Path)
     parser.add_argument("--project-root", type=Path, default=Path(__file__).resolve().parents[4])
+    parser.add_argument("--record-operator-thread-id")
+    parser.add_argument("--handoff-path", type=Path)
     args = parser.parse_args()
     try:
+        if args.record_operator_thread_id is not None:
+            if args.handoff_path is None or args.request_json is not None or args.out_dir is not None:
+                raise PacketInputError(
+                    "operator recording requires only --record-operator-thread-id and --handoff-path",
+                    field="operator_thread_id",
+                )
+            handoff = record_operator_thread_id(
+                args.handoff_path.resolve(),
+                args.record_operator_thread_id,
+            )
+            print(
+                json.dumps(
+                    {
+                        "valid": True,
+                        "dispatch_state": handoff["dispatch_state"],
+                        "operator_thread_id": handoff["operator_thread_id"],
+                        "handoff_path": str(args.handoff_path.resolve()),
+                    },
+                    ensure_ascii=False,
+                )
+            )
+            return 0
+        if args.request_json is None or args.out_dir is None:
+            raise PacketInputError(
+                "rendering requires request_json and --out-dir",
+                field="request_json",
+            )
         data = json.loads(args.request_json.read_text(encoding="utf-8"))
         if not isinstance(data, dict):
             return fail("request JSON must be an object")

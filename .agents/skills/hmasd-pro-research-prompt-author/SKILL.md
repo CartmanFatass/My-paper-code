@@ -8,9 +8,9 @@ description: "Use when Portfolio or an HMASD EM must turn a direction or multi-d
 This is an authoring-and-dispatch skill for `portfolio` and an HMASD direction
 `em`. It validates and renders a packet, then performs exactly one Codex task
 dispatch to `hmasd-chatgpt-pro-transport`. It never performs Pro/browser
-transport or interprets a result. The fixed Transport task is
-`codex://threads/01a05860-6919-7bd3-9b04-99f8344ed73d` (UUID
-`01a05860-6919-7bd3-9b04-99f8344ed73d`).
+transport or interprets a result. Each validated handoff creates one short-lived
+Transport operator task on demand; no operator task UUID is a repository-global
+dispatch target.
 
 **Decision boundary:** the packet is one of exactly three Pro decision nodes:
 `em_innovator`, `em_convergence`, or `portfolio_decision`. Repository code,
@@ -61,8 +61,9 @@ Validate it as the exact source-task UUID and preserve it byte-for-byte in the
 machine-readable handoff. It is never scientific content, a Pro conversation
 identity, or a caller-authority field, and must never be copied into
 the provider-visible `PROMPT_BODY.md`. Transport delivers the completion receipt to
-its fixed return session; `source_thread_id` is retained in the receipt as an audit
-fact only and is never a send destination.
+the exact `source_thread_id` that created this handoff. It is the only completion or
+terminal-blocker receipt destination; Transport must never infer or substitute a
+fallback task.
 
 The calling Portfolio/EM owns direction scope, wording, scientific meaning,
 claim ceiling, and reference selection. Pro owns the final decision at the
@@ -105,7 +106,7 @@ Write two provider/dispatch outputs:
 
 1. `PROMPT_BODY.md`: the sole provider attachment. It contains both the exact
    user-facing request and the read-only GitHub evidence manifest; and
-2. `HANDOFF.json`: a machine-readable handoff to the designated Transport task,
+2. `HANDOFF.json`: a machine-readable handoff for an on-demand Transport operator,
    with `pro_send_from_caller=false`.
 
 The body must contain these slots in this order:
@@ -151,37 +152,48 @@ that its contents were retrieved.
    unsafe, unregistered, unpinned, duplicate, or structurally incomplete input.
    Connector availability and GitHub retrieval are Transport/Pro checks, not
    author-side validation gates.
-2. Render exactly the two files `PROMPT_BODY.md` and `HANDOFF.json`. The renderer records the fixed Transport UUID/URL, an
-   absolute `HANDOFF.json` path, `dispatch_required=true`, and
-   `dispatch_once=true`, plus the exact workflow node, direction scope,
-   conversation binding key, optional requested conversation ID, exact
-   `source_thread_id`, and `decision_authority=pro_final`. Routing metadata is
-   written only to `HANDOFF.json` and its `transport_request` object. This includes
-   an explicit contaminated-context reset flag/evidence when the caller supplied it.
-3. Call `send_message_to_thread` exactly once with `threadId=01a05860-6919-7bd3-9b04-99f8344ed73d`
-   and the minimal prompt `Execute the handoff packet at <absolute HANDOFF.json
-   path> exactly once.` Use the exact path emitted by the renderer.
-4. The authoring task is not complete until that Codex task dispatch is accepted
-   (queued or delivered by the tool). Record `DISPATCH_ACCEPTED` only for that
-   tool fact. Missing, failed, or uncertain dispatch is an explicit
-   non-complete state; preserve the packet and do not retry or create a second
-   task.
+2. Render exactly the two files `PROMPT_BODY.md` and `HANDOFF.json`. The renderer
+   records `dispatch_mode=CREATE_ON_DEMAND`, `operator_thread_id=null`,
+   `dispatch_state=PENDING_CREATE`,
+   `return_receipt_thread_id=<source_thread_id>`, the absolute handoff path,
+   `dispatch_required=true`, and `dispatch_once=true`, plus the exact workflow
+   node, direction scope, conversation binding key, optional requested provider
+   conversation ID, and `decision_authority=pro_final`. Routing metadata is written
+   only to `HANDOFF.json` and its `transport_request` object.
+3. Resolve the current saved HMASD project, then call `create_thread` exactly once
+   with that project's `local` environment and the emitted
+   `operator_bootstrap_prompt`. The bootstrap tells the new operator to wait; it
+   must not inspect or execute the handoff yet. Do not reuse a prior operator. If
+   creation returns only a `clientThreadId`, do not record it as the operator UUID
+   and do not create another task; wait for the canonical `threadId`.
+4. Immediately record that canonical ID with
+   `scripts/render_packet.py --record-operator-thread-id <threadId>
+   --handoff-path <absolute HANDOFF.json path>`. This updates both the top-level
+   handoff and `transport_request` without changing `PROMPT_BODY.md`. Then call
+   `send_message_to_thread` exactly once on that dynamic `threadId` with the
+   emitted `dispatch_prompt`.
+5. The authoring task is not complete until the dynamic execution message is
+   accepted (queued or delivered by the tool). Record `DISPATCH_ACCEPTED` only for
+   that tool fact. Missing, failed, or uncertain creation or dispatch is an
+   explicit non-complete state; preserve the packet and do not create or message
+   a second operator.
 
-Portfolio/EM may perform only this one Codex task dispatch. The fixed Transport
-task exclusively owns Pro/browser send, model and connector checks, conversation
+Portfolio/EM may create only this one operator and send only its one execution
+message. That on-demand Transport task exclusively owns Pro/browser send, model and connector checks, conversation
 binding, send evidence, waiting, archive, cleanup, and Transport-state evidence.
 The author must not perform any of those operations.
 
-Do not infer a same-session or current-task target, recurse back to the caller,
-use a default-target convention, or refuse based on a title. The fixed UUID above
-is the only dispatch target.
+The created operator's UUID is a runtime fact for this handoff only. It must not be
+reused as a global target, enter `conversation_binding_key`, or replace
+`source_thread_id` as the return destination.
 
 ## Handoff and transport boundary
 
 `HANDOFF.json` identifies the source caller (`portfolio` or `em`), exact
 `source_thread_id`, workflow node, exact direction scope/request ID, durable
 conversation binding key, body path,
-repository/ref, and the fixed operator target above. It says that the operator
+repository/ref, `dispatch_mode=CREATE_ON_DEMAND`, the runtime operator ID after
+creation, and `return_receipt_thread_id=source_thread_id`. It says that the operator
 should upload the body verbatim as the sole scientific packet, then apply
 `hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
 conversation binding, send evidence, long wait, archive, and tab cleanup.
@@ -213,7 +225,7 @@ an invalid `source_thread_id`, a
 caller/workflow mismatch, unknown direction scope, unpinned/mismatched repository
 ref, or duplicate/unlisted paths. Missing or genuinely ambiguous
 required fields use the single consolidated caller clarification instead. A
-connector-inaccessible evidence report belongs to the fixed Transport task and
+connector-inaccessible evidence report belongs to the on-demand Transport task and
 must not become an author-side blocker. Red flags are:
 
 - inventing or normalizing `direction_id`;
@@ -223,8 +235,8 @@ must not become an author-side blocker. Red flags are:
 - silently using the latest/default branch or external web search;
 - copying full files into the body;
 - turning the task into code review, implementation, debugging, or AMA;
-- sending to Pro directly from the author session instead of dispatching the fixed
-  Codex Transport task;
+- sending to Pro directly from the author session instead of creating and dispatching
+  the one on-demand Codex Transport operator;
 - dropping claim ceilings, provenance, or the exact requested deliverable.
 - treating an incomplete/blocked Pro response as a final decision or overriding
   a complete Pro decision locally.

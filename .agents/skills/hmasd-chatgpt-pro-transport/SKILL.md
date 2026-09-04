@@ -26,10 +26,12 @@ exactly one body source:
 - absolute `prompt_path` for file-upload mode, plus an exact `companion_prompt` only
   when the page requires text before its Send control becomes enabled.
 
-The handoff must also provide the exact originating Codex `source_thread_id` for
-completion-receipt auditability. Treat it as routing metadata, never as scientific
-content; do not infer it from the provider conversation URL or from prose. It is
-recorded as the source only: it is never a send destination.
+Every canonical handoff must provide the exact creator Codex `source_thread_id` and
+the runtime `operator_thread_id` recorded after `create_thread`. Treat both as routing
+metadata, never as scientific content; do not infer either from the provider
+conversation URL, a task title, or prose. `source_thread_id` is the sole completion
+or terminal-blocker receipt destination. `operator_thread_id` is a per-handoff
+runtime fact and never a provider-conversation binding.
 
 An optional `reference_paths` list contains one or more absolute reference files
 for bounded noncanonical/legacy transport. Validate and hash every
@@ -48,6 +50,19 @@ requires the sole `PROMPT_BODY.md` upload, and rejects any reference attachment
 declaration in that mode.
 Use the body bytes verbatim and retain any generic legacy reference support only for
 non-Author transport requests.
+
+Reject every canonical request that lacks a valid `source_thread_id`. Reject legacy
+fallback routing fields even when false or null. A legacy request may omit its source
+and still execute transport, but it is then ineligible for an automatic receipt; mark
+its receipt substate `RETURN_RECEIPT_BLOCKED`, do not guess a destination, and do not
+send any receipt.
+
+When loading legacy outbox state, normalize only a provably unsent `PENDING` or
+`BLOCKED` receipt. Check both the primary and old fallback route: any attempt count,
+delivery status, sent timestamp, or terminal delivery state preserves the complete
+old receipt as historical evidence and forbids a new send. A valid source permits
+only the zero-attempt migration to `CREATOR_SESSION`; no source records
+`required=false` and remains ineligible for return.
 
 The allowed decision-node bindings are exact:
 
@@ -78,6 +93,7 @@ Portfolio and `DIRECTION.md` for EM nodes; for Portfolio validate every
 
 Persist the registry described in [references/state-schema.md](references/state-schema.md).
 It is a one-to-one map from `conversation_binding_key` to provider conversation ID.
+It is project-shared across on-demand operators, never scoped to one operator task.
 The same direction therefore has two independent EM conversations, while Portfolio
 has one conversation shared across direction scopes. Only one request may be active
 per binding; a later round reuses the same conversation after the preceding request
@@ -208,9 +224,9 @@ the tab lease remains active while generation is pending. During Pro generation,
 observations. Never click `Answer now`, Retry, Continue, or Stop. A timeout becomes
 `WAITING_UNKNOWN`, not a send failure.
 
-Use one existing heartbeat automation as a bounded wake-up, normally
+Use this operator task's heartbeat automation as a bounded wake-up, normally
 `FREQ=MINUTELY;INTERVAL=15`; never use `INTERVAL=1` busy polling. Each wake acquires
-one per-conversation lock, reuses the active tab lease when it is valid, performs
+the conversation lock, reuses the active tab lease when it is valid, performs
 one bounded DOM status read, persists the observation, and returns. A 20–60 minute
 generation may span several wakes. At 60 minutes, persist the same conversation and
 mark `WAITING_TIMEOUT`; keep the tab active for recovery and human visibility. Do
@@ -241,12 +257,12 @@ The executor turn ending, a heartbeat wake returning, or a timeout is never
 sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
-### Completion receipt to the fixed fallback session
+### Completion receipt to the creator session
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
-completion receipt in the persisted outbox, then send it once to the fixed fallback
-session `01a04f5a-1c9f-7331-b1d9-249fb767362e` using
+completion receipt in the persisted outbox, then send it once to the exact validated
+`source_thread_id` using
 `mcp__codex_app__send_message_to_thread`. The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
@@ -254,30 +270,28 @@ SHA-256, archive paths, and heartbeat retirement status; it must report
 transport facts only and must not add scientific interpretation. Record the receipt
 timestamp, destination thread ID, deterministic message key, attempt count, and
 delivery status in the registry or transport-fact file. Treat the logical receipt as
-idempotent; the deterministic message key is unchanged by this routing choice. On
+idempotent; the deterministic message key is unchanged by this routing choice. Its
+route record is `routing_mode=CREATOR_SESSION`,
+`destination_thread_id=<source_thread_id>`, and `fallback_enabled=false`. On
 uncertain delivery, do not create a duplicate or send again—record
-`RETURN_RECEIPT_UNCERTAIN` and report it. Preserve `source_thread_id` and
-`primary_destination_thread_id` as audit facts, but force every
-`destination_thread_id` to `01a04f5a-1c9f-7331-b1d9-249fb767362e`, including when
-the source is present, absent, stale, or a multi-agent v2 session. The fallback ID
-is valid only when it is exactly
-`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`; callers cannot opt out or
-select another destination. Persist the one bounded attempt's result and return
-control immediately; a rejection must not cause a second send. For an explicit
-terminal/blocker state with no archive, `stage_blocker_receipt` applies the same
-fixed-route, one-send rule.
+`RETURN_RECEIPT_UNCERTAIN` and report it. Persist the one bounded attempt's result
+and return control immediately; a rejection must not cause a second send. For an
+explicit terminal/blocker state with no archive, `stage_blocker_receipt` applies the
+same creator-route, one-send rule. If the source is missing or invalid, staging
+records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or
+destination and performs no send. Never use the operator task itself, an old receipt
+task, or any repository UUID as a fallback.
 
 ### Heartbeat retirement at task close
 
-Persist the heartbeat automation ID and status with the transport facts. A shared
-heartbeat remains active while any mapped conversation still needs a bounded wake
+Persist the heartbeat automation ID and status with the transport facts. This
+operator's heartbeat remains active while its conversation still needs a bounded wake
 (`WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`, or a recoverable
 `WAITING_TIMEOUT`). When every conversation in this transport task is durably
 `ARCHIVED`, or is an explicit terminal/blocker state with no scheduled recovery,
 disable the existing heartbeat exactly once (for example by updating it to `PAUSED`)
-and record the retirement timestamp and verification. If one heartbeat multiplexes
-multiple directions, do not retire it when only one direction finishes; retire it
-only after the last pending record is closed. Never leave a task-close heartbeat
+and record the retirement timestamp and verification. Never multiplex a later
+handoff into this on-demand operator. Never leave a task-close heartbeat
 active after the task has no pending recovery work, and never create a replacement
 heartbeat merely to avoid retiring the existing one.
 
