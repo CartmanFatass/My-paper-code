@@ -190,6 +190,46 @@ Technical success can establish compliance of the repaired resource handling, no
 The next discriminator within this assignment is the unchanged formal publication path accepting
 missing resource measurements while still rejecting incomplete or corrupt learner evidence.
 
+## CM-discovered dependency — bounded contract extension
+
+Before editing, the implementer traced `_build_mechanical_facts` into the existing
+`b1_mechanical.py` resource loop (launch-source lines 623–650), and its resource-cap contribution
+to completeness (lines 931–947). Its unconditional numeric reads of wall/RSS/scratch/durable
+quantities reject explicit null resource measurements. Omitting the row would lose its strict
+admission check; inventing zeroes would misreport unknown measurements. Merely accepting nulls
+while folding a false resource-cap flag into `all(components.values())` would still reject the
+otherwise complete learner assignment.
+
+Options are **(a)** extend ownership to this existing resource loop only, preserving its admission
+check while carrying the existing unmeasured-resource meaning; **(b)** drop the row or fabricate
+zeroes; or **(c)** leave a known downstream resource-only rejection after repairing earlier stages.
+Recommendation: **(a)**. It is a directly traced dependency of the selected end-to-end repair, with
+no new scientific or infrastructure feature.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Object tier, technical,
+`OWNER_DELEGATED`. The one additional owned runtime file is
+`experiments/candidates/capability_bound_semantic_currentness/omrc_b01/b1_mechanical.py`, limited
+to resource handling and that resource-only completeness contribution. Unknown measurements/cap
+facts remain unknown and explicitly unmeasured; resource-only unknowns or recorded budget
+exceedances do not invalidate learner completeness. The independent wall stop, admission and all
+non-resource mechanical/scientific facts remain strict.
+All other scope, testing, numerical, evidence and no-launch limits above continue unchanged.
+
+CM also located the complete r05 snapshot (`snap_r05`: 385 files, 311,364,169 bytes, 36 worker and
+12 replay results). The earlier accepted profile used `TEST_ONLY` publication; its acceptance is
+evidence for that test path, not evidence that missing-resource records pass production formal
+mode. The current contract therefore still requires an offline check using the real formal
+constants and this complete historical engineering evidence. No scientific polarity transfers.
+
+Frozen offline input binding before remote staging: original
+`C:/Projects/HMASD/temp/directions/capability_bound_semantic_currentness/exp/snap_r05`, packaged as
+74,799,401 bytes with archive SHA-256
+`70c72b8c075093d7ddc3682ae0e2e45a36a9b04e0dadcbb81175b7194ee00d4f`. The configured staging target
+is `/home/wu/hmasd-inputs/cbsc-r07-resource-repair-20260904/r05-snapshot.tar.gz`. CM's original
+binding record is `temp/directions/capability_bound_semantic_currentness/control/r07-repair/r05-input-binding.json`
+in its local worktree. This is evidence staging, not uncommitted source transport. Read the
+matched copy for the offline engineering check; preserve the original and its non-scientific status.
+
 ## Owner surface and integration
 
 Owner reviews were empty in both DM and Root checkouts; no CBSC owner override was present. The
@@ -203,3 +243,7 @@ Shared-ledger insertion anchor: `cbsc-r07-telemetry-incident`.
 | time | direction | tier | kind | options | chosen option | reversible | provenance label | evidence path | owner flag | owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-09-04T15:07:23-07:00 | capability_bound_semantic_currentness | object | technical | (a) exit recheck only; (b) quarantine incomplete r07 and repair resource-only downgrade through existing publication; (c) resume or interpret partial r07 | (b) bounded resource-only repair; strict learner and independent wall checks; no r08 | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (b) | `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-013.json` | none | |
+| 2026-09-04T15:12:53-07:00 | capability_bound_semantic_currentness | object | technical | (a) include existing mechanical resource handling/completeness dependency; (b) drop rows or fabricate zeroes; (c) retain known downstream refusal | (a) bounded existing resource handling only; strict admission and non-resource facts retained | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | `docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-014.json` | none | |
+
+The second row's shared-ledger anchor is `cbsc-r07-resource-dependency` and its owner item is
+`docs/research/portfolio/owner/inbox/2026-09-04/20260904-cbsc-014.json`.

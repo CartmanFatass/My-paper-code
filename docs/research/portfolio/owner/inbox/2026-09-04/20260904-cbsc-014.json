@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-014",
+  "created": "2026-09-04T15:12:53-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 遥测修复补齐现有机械核对依赖",
+  "context": "实现前发现现有机械核对的资源循环会拒绝空的墙钟和内存等资源数值；这会阻断已选的资源缺失降级。整行仍承载严格准入检查，不能删除，也不能用零冒充未知值。仅扩展到这一现有资源循环，保留所有非资源检查。",
+  "options": [
+    {
+      "key": "a",
+      "label": "纳入现有机械核对资源循环",
+      "consequence": "允许已有未测量标记通过资源读取，同时保留严格准入和科学事实，不增加新机制。"
+    },
+    {
+      "key": "b",
+      "label": "删行或填零",
+      "consequence": "会丢失准入检查或伪造资源测量，不能满足原分配。"
+    },
+    {
+      "key": "c",
+      "label": "保留已知下游拒绝",
+      "consequence": "上游修复后仍可能仅因资源缺失而无法完成发布。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是端到端资源降级的直接代码依赖，窄改现有循环即可，范围与科学含义不扩展。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R07_TELEMETRY_INCIDENT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r07-resource-dependency",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
