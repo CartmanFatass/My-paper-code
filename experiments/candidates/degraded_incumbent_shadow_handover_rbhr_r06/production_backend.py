@@ -320,10 +320,7 @@ def source_sha256() -> str:
 def _production_toolchain() -> Mapping[str, object]:
     if os.name == "nt":
         return _toolchain()
-    compiler_name = shutil.which("c++")
-    if compiler_name is None:
-        raise ProductionBackendError("the native C++ compiler is unavailable")
-    compiler = Path(compiler_name).resolve()
+    compiler = Path(shutil.which("c++")).resolve()
     result = subprocess.run(
         [str(compiler), "--version"], check=True, capture_output=True, text=True,
     )
@@ -462,7 +459,23 @@ def require_cpp_batched_production_backend() -> ctypes.CDLL:
 
 def artifact_identity() -> dict[str, object]:
     key, source = _build_material(); path = _artifact_path(key); existed = path.is_file(); started = time.perf_counter(); lib = require_cpp_batched_production_backend()
-    gate = retained_gate_artifact_identity()
+    if os.name == "nt":
+        gate = retained_gate_artifact_identity()
+    else:
+        gate = {
+            "schema": "DISH_RBHR_R06_NATIVE_RNG_GENERATOR_SERVICE_IDENTITY_V1",
+            "component": COMPONENT,
+            "artifact": str(path),
+            "artifact_sha256": _sha256(path),
+            "artifact_bytes": path.stat().st_size,
+            "source_sha256": hashlib.sha256(source).hexdigest(),
+            "build_key": key,
+            "cache_present_before": existed,
+            "abi_version": lib.dish_rbhr_r06_prod_abi_version(),
+            "rng_entry_point": "dish_rbhr_r06_prod_rng_words_batch",
+            "toolchain": _production_toolchain(),
+            "python_fallback": False,
+        }
     return {
         "component": COMPONENT,
         "artifact": str(path),

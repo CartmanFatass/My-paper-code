@@ -302,21 +302,27 @@ class BatchedRecurrentPolicy:
         rows["arm_mode"] = ARMS.index(self.arm)
         owner_tensor = torch.as_tensor(owner, dtype=torch.long)
         motion, prepare_logit, commit_logit = _role_policy_heads(heads, owner_tensor)
-        means = 3.0 * torch.tanh(motion)
-        log_std = torch.clamp(self.model.log_std.detach(), -5.0, 1.0)
+        means = (3.0 * torch.tanh(motion)).detach().cpu().numpy()
+        log_std = torch.clamp(
+            self.model.log_std.detach(), -5.0, 1.0,
+        ).cpu().numpy()
         renew = np.asarray(observation["renew"], dtype=bool)
-        action = torch.empty((width, 4), dtype=torch.float32)
         for lane in range(width):
             for component, field in enumerate(("MOTION_OWNER_X", "MOTION_OWNER_Y", "MOTION_STANDBY_X", "MOTION_STANDBY_Y")):
                 if renew[lane]:
                     noise = 0.0 if deterministic else sampler.normal(lane=lane, tick=global_tick, field=field)
-                    action[lane, component] = means[lane, component] + torch.exp(log_std[component]) * torch.tensor(noise, dtype=torch.float32)
+                    rows["raw_action"][lane, component] = (
+                        float(means[lane, component])
+                        + math.exp(float(log_std[component])) * noise
+                    )
                 else:
                     physical_u0 = 0 if owner[lane] == 0 else 1
                     physical_u1 = 2 if owner[lane] == 1 else 3
                     physical = physical_u0 if component < 2 else physical_u1
-                    action[lane, component] = actor[lane, physical, 8 + (component % 2)]
-        rows["raw_action"] = action.detach().cpu().numpy().astype(np.float64)
+                    rows["raw_action"][lane, component] = float(
+                        actor[lane, physical, 8 + (component % 2)]
+                    )
+        action = torch.from_numpy(rows["raw_action"].astype(np.float32, copy=True))
         prepare_all = torch.sigmoid(prepare_logit).detach().cpu().numpy()
         commit_all = torch.sigmoid(commit_logit).detach().cpu().numpy()
         for lane in range(width):
@@ -467,7 +473,7 @@ class NativePersistentTrainingFlow:
             return np.ascontiguousarray(value.transpose(1, 0, *range(2, value.ndim)).reshape(64, 64, *value.shape[2:]))
         actor_raw = fragment(observation_stack("actor"))
         actor = fragment(np.stack(normalized_actor_ticks, axis=0))
-        critic_tick = observation_stack("critic")
+        critic_tick = outcome_stack("critic")
         def label(name: str) -> np.ndarray:
             return np.stack([np.asarray(row[name]) for row in label_ticks], axis=0)
         action = np.stack(action_ticks, axis=0)
