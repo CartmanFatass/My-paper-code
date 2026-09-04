@@ -1,8 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T13:41:57Z
+Updated at: 2026-09-04T16:10:38Z
 Owner: Root
-Investment capacity: `UNBOUNDED` at the repository-policy layer for both concurrent implementer sessions and concurrent result-bearing runs (owner, 2026-09-04; runtime availability and the per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
+Lifecycle admission: all 19 `ACTIVE` directions remain admitted; the lifecycle count is not an execution-parallelism target
+Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
+Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 Evidence standard: `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
@@ -13,6 +15,7 @@ Controlling decision:
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
 Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-transport.md`
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
+Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
@@ -56,8 +59,30 @@ provenance, but result polarity never transfers into an accepting direction.
 4. `semigroup_consistent_duration_model_policy`
 5. `ucope`
 
-This order is scientific value, not a capacity or WIP limit. Independent ACTIVE A/B preparation may
-proceed in parallel.
+This order records scientific value; it is not the lifecycle count. Concurrent direction-level
+execution follows the five-chain working set below, while other `ACTIVE` directions remain admitted
+and queued.
+
+### Current direction working set — 2026-09-04
+
+The current five direction-level slots are:
+
+1. `finite_resource_relational_inductive_efficiency` — high-priority live B01 algorithm evidence.
+2. `flexible_skill_duration` — high-priority remote E3 discriminator with valid partial results.
+3. `capability_bound_semantic_currentness` — high-priority production-conformance closure before
+   its next formal B attempt.
+4. `ucope` — high-priority three-witness/headroom sequence with a portable clean-boundary next
+   discriminator.
+5. `variable_n_fleet_churn` — high-priority R02/Convergence boundary whose returned direction
+   decision determines the smallest next object.
+
+Root refills a slot when its chain completes, reaches a terminal tier blocker, or cannot advance a named
+dependency. Selection favors promising runnable work and decision-relevant information. Temporary
+overlap drains at clean boundaries; live work is not interrupted. Directions outside this list are
+queued `ACTIVE`, not `PARKED`, and the roster itself changes no priority, lifecycle, fusion,
+scientific meaning, or result polarity. FSD/VNFC or any other similar directions are considered for
+fusion only through a concrete Portfolio question after material identity of question, comparator,
+estimand, and next object is shown.
 
 ### Execution snapshot — 2026-09-01
 
@@ -87,11 +112,12 @@ capacity decision. Detailed current evidence and non-goals are recorded in
 
 ### Execution snapshot — 2026-09-04
 
-The repository-level research-capacity ceiling is removed. Independent ACTIVE directions advance
-concurrently subject only to actual runtime availability, path ownership, frozen scientific
-contracts, runner-owned per-arm cost limits, and a fresh memory admission for every result-bearing
-invocation. New portable result-bearing work is placed on the configured `wsl_4070` node first;
-local placement is not the default and follows only the recorded portability/fallback boundary.
+The repository-level fixed ceiling on nested implementer sessions and result-bearing runs remains
+removed. Direction-level execution uses the five-chain working set above, subject to actual runtime
+availability, path ownership, frozen scientific contracts, runner-owned per-arm cost limits, and a
+fresh memory admission for every result-bearing invocation. New portable result-bearing work is
+placed on the configured `wsl_4070` node first; local placement is not the default and follows only
+the recorded portability/fallback boundary.
 
 Current clean boundaries are:
 
@@ -106,9 +132,9 @@ Current clean boundaries are:
   dispatched Convergence boundary. All later handoffs reuse the project Luna/xhigh Transport
   singleton and retain handoff-specific parent receipts.
 - DISH is in its meaning-complete conformance CM; CRTO awaits its bounded RAW-only A/RECON trace;
-  the remaining admitted ACTIVE directions continue independently at their recorded CM/DM/run
-  boundaries.
+  the remaining admitted `ACTIVE` directions stay queued at their recorded CM/DM/run boundaries
+  and rotate into the five-chain working set as slots open.
 
-This snapshot integrates EGRCR's final Direction-tier park and changes no Portfolio-tier priority,
-capacity, fusion, separation, registration, ownership, or investment decision. Those remain owner
-choices.
+This factual evidence snapshot integrates EGRCR's final Direction-tier park and does not itself
+change Portfolio-tier priority, lifecycle, fusion, separation, registration, ownership, or
+investment. The later owner-direct working-set decision above changes execution sequencing only.

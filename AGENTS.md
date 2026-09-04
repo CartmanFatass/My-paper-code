@@ -55,9 +55,16 @@ repository-wide number, and the declared value informs Portfolio comparison with
 card's own result branches. Each direction has a recast budget of one: a second Convergence
 `RECAST` still executes (the Pro decision is final for its node), but the direction drops to the
 lowest sequencing priority among ACTIVE directions and the DM flags a digest row `second-recast`;
-the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: all ACTIVE
-directions continue in parallel under the unbounded-capacity decision. Nothing in this paragraph
-waits for the owner, none of it is a §11.4 launch condition, and ladders already open continue.
+the owner may PARK it asynchronously. Sequencing never becomes a lifecycle disposition: every
+`ACTIVE` direction remains admitted to the research queue, while Root maintains a target working
+set of five concurrently advancing top-level DM chains (owner clarification 2026-09-04). A queued
+`ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
+priority, scientific meaning, or evidence polarity. Root refills a free slot at a clean boundary
+with the most promising runnable direction, and drains temporary overlap without interrupting live
+work. Five is an execution-parallelism target, not a direction-count or fusion target. Directions
+share assets without fusing; fusion is proposed on demand only when their question, comparator,
+estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
+none of it is a §11.4 launch condition, and ladders already open continue.
 
 ## 3. Blocker rule
 
@@ -118,11 +125,20 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-The repository imposes no fixed limit on concurrent implementer sessions or concurrent
-result-bearing runs (owner, 2026-09-04). Root and the DMs admit work according to actual runtime
-availability, dependency ownership, and the fresh per-invocation resource check in section 7.
-Runtime thread limits are implementation constraints, not research-capacity policy: a nested
-DM -> CM -> implementer chain may need several threads per direction.
+Root maintains a target of five concurrently advancing top-level direction/DM chains (owner,
+2026-09-04 clarification). Count only the direction-level chains: Root, Transport, CM,
+implementer, reviewer, critic, verifier, operator, and detached experiment processes do not each
+consume another direction slot. When fewer than five chains can advance, Root selects the most
+promising runnable `ACTIVE` directions; when more than five overlap, it does not interrupt live
+work and stops refilling until the excess reaches clean boundaries. This working set is scheduling
+state only and never changes lifecycle.
+
+Within the direction working set, the repository imposes no fixed limit on concurrent implementer
+sessions or concurrent result-bearing runs (owner, 2026-09-04). Root and the DMs admit work
+according to actual runtime availability, dependency ownership, and the fresh per-invocation
+resource check in section 7. Runtime thread limits are implementation constraints, not
+research-capacity policy: a nested DM -> CM -> implementer chain may need several threads per
+direction.
 
 Result-bearing and other compute-intensive execution is **remote-first** (owner, 2026-09-04). The
 active node and exact access, checkout, interpreter, GPU, and task-supervisor facts are declared in
