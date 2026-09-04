@@ -1,9 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T18:56:58Z
+Updated at: 2026-09-04T19:38:07Z
 Owner: Root
 Lifecycle admission: all 19 `ACTIVE` directions remain admitted; the lifecycle count is not an execution-parallelism target
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
+Loop state: `PAUSED_AT_CLEAN_BOUNDARY / OWNER_DIRECT`; 0 advancing DM chains and no refill until an explicit owner resume
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -16,6 +17,7 @@ direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02
 Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-transport.md`
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
+Current pause: `docs/research/portfolio/decisions/2026-09-04-pause-after-current-round.md`
 
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
@@ -30,23 +32,23 @@ provenance, but result polarity never transfers into an accepting direction.
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
 | acvc | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:40:06Z | The exact remote R02 certificate is valid `HC-D / CERTIFICATE_INTERVAL_UNRESOLVED`: legal history value is positive (`Delta_L=124861/5625000`) but the certificate interval straddles the carded `0.25` threshold. This is the direction's second RECAST, so the decision executes while ACVC moves to the lowest sequencing priority among `ACTIVE` directions; the owner may asynchronously PARK it. |
-| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-04T18:56:58Z | Defect-8 and the Linux short-child telemetry repair are technically accepted; exact-SHA final readiness passed. The sole r06 task then failed before import because its child worker resolved from the project venv to a UV base interpreter without NumPy. Exact-byte reproduction confirmed a technical incomplete attempt with no model, learner, evaluation, or scientific object consumption; r06 is quarantined and the narrow subprocess-identity repair is active for a fresh r07. |
+| capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | Defect-8 and Linux telemetry remain technically accepted. The sole r06 task failed before import because its child resolved from the project venv to a UV base interpreter without NumPy; exact-byte reproduction confirmed a technical, non-consuming attempt. The narrow interpreter-identity repair passed independent review and exact remote readiness (`17 passed`, `B1_FORMAL_READY`); r06 stays quarantined and r07 is uncreated under the owner pause. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:35:09Z | The RAW-only update-252..264 A/RECON implementation is accepted, but the remote exact-SHA sparse worktree materialized `0/1903` required files and blocked in the partial-clone promisor fetch before any task or preflight. A01 remains unobserved and is queued behind the named remote materialization dependency. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:35:09Z | The first-trigger RETAIN/COPY/SHADOW B01 remains unconsumed. C03 reached its terminal technical rule when the remote sparse checkout omitted the frozen test (`0` collected); no cost or science ran, the unaccepted code was quarantined, and the direction is queued behind that named checkout dependency. |
 | ec4g_r1 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | Repair B1 activity aggregation and continue adaptive dynamic receipt-content learning against Direct-tau, RAW, shuffled, and blinded controls. Prior B diagnostics remain adverse evidence, not terminal polarity. |
 | eociv_lite | ACTIVE | MEDIUM | ROOT | 2026-09-04T18:35:09Z | The Convergence-admitted B10 fixed-score exposure curve is valid `B10_FIXED_SCORE_EXPOSURE_RESCUE_NOT_SUPPORTED`: relative `J` rises with exposure while absolute receiver performance becomes more negative. The receiver-addressed family is direction-locally parked pending genuinely new evidence; Portfolio lifecycle remains `ACTIVE`, and A1 headroom is not identified because the matched upper/tuned-generic pair is absent. |
 | expressibility_gated_renewal_credit_relay | PARKED | MEDIUM | ROOT | 2026-09-04T12:10:53Z | Convergence returned `PRO_FINAL=PARK_CURRENT_FACTORIZATION`: the generic critic wins every direct estimation diagnostic, while the factorized arm's 0.0120448 exact-utility edge is scale/calibration ambiguity rather than identified value. Unchanged replication, direction-local scale-controlled B02, and telemetry rerun are rejected. Re-entry requires a separately authorized prospective scale-invariant native advantage under common calibration/trust and a competent same-information comparator. |
-| finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-04T18:35:09Z | All three ordered 512-update B01 roots are valid `B01_OBSERVED_PATH_EQUIVALENCE`: the tight projection never contacted and the paired learner/evaluator paths remained equal. A fresh-root contact-active R128 R02 card is frozen (`PHY_TRUST_004` versus `EDGE_FLEX_150`) and its bounded CM implementation is active. |
-| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-04T18:35:09Z | E2 remains valid `NEITHER`. E3 has 9/18 valid cells, one quarantined publication attempt, and one active remote invocation, `medium_d2_seed2`, at exact pushed SHA after a fresh 15.44 GB admission; eight cells have never launched. No aggregate branch is applied before all 18 cells are valid. |
+| finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | All three ordered 512-update B01 roots remain valid `B01_OBSERVED_PATH_EQUIVALENCE`. The contact-active R128 R02 card and implementation are frozen at exact SHA `36b538ba1`; a verified pack materialized a clean remote worktree with the matching 61-file surface, but no task, admission, model, learner, evaluation, or result was accepted before the owner pause. |
+| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | E2 remains valid `NEITHER`. E3 is `10/18` valid, `0` running, with one quarantined publication attempt and eight never-launched cells. `medium_d2_seed2` completed validly; `medium_d0_seed3` remains the next frozen cell but is uncreated. No aggregate branch applies before all 18 cells are valid. |
 | metric_ground_transport_allocation | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE METRIC/FREE finite-budget learning curves across named budgets. Both prior C objects stopped before efficacy and carry no metric polarity. |
 | orbit_shadow_read | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Kernel actionability exists, but no return population, learner, or evaluator is defined. Reactivate when an owner-by-role host changes the competent optimal action under matched owner-role/owner-blind/validity-only comparisons. |
 | recct_lite | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE consequence-distinct LR/RL/no-update target intervention with proximal measurement and downstream return. The one-port equal-intervention result closes only that host. |
 | roster_consistent_latent_exploration | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE persistent-common versus containing FLEX finite-budget churn recovery, absorbing VSP-06 partner memory. Information-necessity claims remain structurally closed. |
 | scope_1s | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE real learner/trainer/evaluator wrapper for the exact Q16 carrier/current-only/deranged toy. Missing production authentication is not a toy-mechanism negative. |
-| semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-04T18:40:06Z | A01 validly established one-sided duration-action relevance (`W=2498`, `R7=0`, `R13=1`) without learner exposure. The sole Convergence-admitted A02 then validly stopped at `A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED` after 321 candidate missions. No B or local derivative is authorized; its DM chain is now reopening the persistent direction-tier Convergence node. |
+| semigroup_consistent_duration_model_policy | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | A01 validly established one-sided duration-action relevance (`W=2498`, `R7=0`, `R13=1`); A02 validly stopped at `A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED` after 321 candidate missions. Convergence returned `PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY`: only that A01/A02 family is direction-locally parked, with no successor authority; the broader Portfolio lifecycle remains `ACTIVE`. |
 | ucope | ACTIVE | HIGH | ROOT | 2026-09-04T18:35:09Z | The proposed numerical-locus implementation cannot satisfy the normative orchestration budget: its irreducible source-only form is `98/295 = 33.22%`, above 30%. The draft was removed without a run; the A/RECON remains unresolved and the direction is queued behind this exact engineering-scope blocker and the missing competent tuned baseline. |
 | vap_folr_core | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | Continue typed/generic/reset B3 after writer-competence repair, retaining stale-load routing controls and complete curves. Earlier calibration nonidentification is a B diagnostic. |
-| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-04T18:35:09Z | The exact K1024 remote result is valid `MB1024-D / BOUNDED_SEARCH_REMAINS_UNRESOLVED`: wider search repairs one predecessor-pruning loss but creates no new lower-bound headroom. The persistent Convergence receipt is being recovered through the singleton Transport; the separate same-information headroom census remains read-only and no wider-K ladder is locally open. |
+| variable_n_fleet_churn | ACTIVE | HIGH | ROOT | 2026-09-04T19:38:07Z | The exact K1024 result remains valid `MB1024-D / BOUNDED_SEARCH_REMAINS_UNRESOLVED`. Convergence returned `PRO_FINAL=RECAST_ESTIMAND_OR_INFORMATION_BOUNDARY`; this is the second recast, so VNFC remains `ACTIVE` at the lowest sequencing priority. The causal one-deviation R03 A/RECON card is frozen, but no R03 CM, calibration, experiment, receipt, result root, or further Pro round was created before the pause. |
 | vsp_02 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE competence-first Adam CARRY/RESET trajectories across lifecycle ages, with OEER as optimizer-history control. Equal exact success sets do not establish transient equivalence. |
 | vsp_03 | ACTIVE | LOW | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE event-aware termination in a persistent-target semi-Markov toy against one-hit, dwell, debounce, hysteresis, and same-information generic controls. |
 | vsp_c1 | ACTIVE | MEDIUM | ROOT | 2026-09-01T09:55:33Z | B/EXPLORE `2x2x2` identity-by-period toy with a held-out fourth corner and partners. No-production-host evidence cannot decide bounded compositional learning. |
@@ -63,36 +65,31 @@ This order records scientific value; it is not the lifecycle count. Concurrent d
 execution follows the five-chain working set below, while other `ACTIVE` directions remain admitted
 and queued.
 
-### Current direction working set — 2026-09-04
+### Current direction working set — paused 2026-09-04
 
-The current five direction-level slots are:
+The owner-directed drain is complete. There are currently zero advancing direction-level chains;
+Root does not refill any slot or create successor work while the pause is in force. The standing
+five-chain target remains the resume policy, not a current reservation or a lifecycle count.
 
-1. `flexible_skill_duration` — high-priority E3 discriminator; nine cells are valid and the exact
-   `medium_d2_seed2` cell is running remotely under its own admission.
-2. `finite_resource_relational_inductive_efficiency` — high-priority learner evidence; the
-   contact-active R128 R02 card is in bounded CM implementation after three no-contact roots.
-3. `capability_bound_semantic_currentness` — high-priority B1 chain; exact readiness passed, but
-   r06 was quarantined after exact-byte reproduction showed its child worker lost the project venv
-   and failed before import. A narrow subprocess-identity repair is active for a fresh r07.
-4. `variable_n_fleet_churn` — high-priority direction evidence; valid K1024 intake is integrated
-   and the persistent Convergence decision is being recovered without duplicate provider send.
-5. `semigroup_consistent_duration_model_policy` — high-priority direction evidence; the valid A02
-   population failure is being returned to the persistent Convergence node for its exact next decision.
+The last five slots ended at these recoverable boundaries:
 
-Root refills a slot when its chain completes, reaches a terminal tier blocker, or cannot advance a named
-dependency. Selection favors promising runnable work and decision-relevant information. Temporary
-overlap drains at clean boundaries; live work is not interrupted. Directions outside this list are
-queued `ACTIVE`, not `PARKED`, and the roster itself changes no priority, lifecycle, fusion,
-scientific meaning, or result polarity. FSD/VNFC or any other similar directions are considered for
-fusion only through a concrete Portfolio question after material identity of question, comparator,
-estimand, and next object is shown.
+1. `flexible_skill_duration` — E3 is `10/18` valid and `0` running; the next frozen cell,
+   `medium_d0_seed3`, is uncreated and unlaunched.
+2. `finite_resource_relational_inductive_efficiency` — the contact-active R128 R02 exact SHA is
+   materialized in a verified clean remote worktree; the planned result task and admission remain
+   absent.
+3. `capability_bound_semantic_currentness` — r06 is quarantined as a reproduced technical,
+   non-consuming failure; the narrow interpreter repair and exact remote readiness pass are
+   integrated, while r07 remains uncreated.
+4. `variable_n_fleet_churn` — the second Convergence recast is integrated and its causal
+   one-deviation R03 A/RECON card is frozen; no R03 engineering or result work exists.
+5. `semigroup_consistent_duration_model_policy` — the complete Pro decision parks only the current
+   D6 action-choice family; no successor object or Pro round is authorized.
 
-At the 18:40Z rotation, UCOPE, CRTO and DISH had each reached a named engineering dependency and
-returned their execution slots without lifecycle or scientific-polarity changes. CBSC and VNFC
-re-entered because their next boundaries are actively repairable or decision-forming. ACVC briefly
-filled the last vacancy to consume its completed exact result, then yielded under the mandatory
-second-RECAST sequencing rule; SCDMP immediately replaced it. The roster remains scheduling state
-only, and each queued `ACTIVE` direction remains admitted.
+All other `ACTIVE` directions remain admitted and queued at their recorded boundaries. This pause
+changes no priority, lifecycle, fusion, scientific meaning, or evidence polarity. On explicit owner
+resume, Root reads owner reviews and live process state, then chooses the most promising runnable
+five-direction roster under the standing policy; the last roster is not automatically reinstated.
 
 ### Execution snapshot — 2026-09-01
 
@@ -123,28 +120,23 @@ capacity decision. Detailed current evidence and non-goals are recorded in
 ### Execution snapshot — 2026-09-04
 
 The repository-level fixed ceiling on nested implementer sessions and result-bearing runs remains
-removed. Direction-level execution uses the five-chain working set above, subject to actual runtime
+removed. Direction-level execution ordinarily uses the five-chain target, subject to actual runtime
 availability, path ownership, frozen scientific contracts, runner-owned per-arm cost limits, and a
-fresh memory admission for every result-bearing invocation. New portable result-bearing work is
-placed on the configured `wsl_4070` node first; local placement is not the default and follows only
-the recorded portability/fallback boundary.
+fresh memory admission for every result-bearing invocation. Portable result-bearing work remains
+remote-first on `wsl_4070`; the pause does not alter that future routing rule.
 
-Current clean boundaries are:
+At `19:38Z`, every accepted chain and external operation had drained. The remote `agent-task` list
+contained no active task, the Transport singleton was idle, its final SCDMP request was archived
+after exactly one provider Send and one accepted parent receipt, and no local result process was
+retained by the working set. The current advancing-chain count is zero.
 
-- FRRIE root 001 is live after fresh admission; FSD has three valid E3 invocations and three more
-  running. Both remain outcome-blind until their frozen aggregate rules become applicable.
-- UCOPE and VNFC are technically admitted but have no scientific invocation because their latest
-  local official preflights were below the 4 GiB floor. Those receipts do not admit a remote run.
-  Their next portable invocation is routed to `wsl_4070` and requires a distinct fresh passing
-  receipt there; neither direction gains scientific polarity from the placement change.
-- ACVC and SCDMP have consumed their parent-routed Pro decisions and are in bounded CM chains for
-  exact non-learner A/RECON objects. EGRCR is direction-level `PARKED`. EOCIV remains at its already
-  dispatched Convergence boundary. All later handoffs reuse the project Luna/xhigh Transport
-  singleton and retain handoff-specific parent receipts.
-- DISH is in its meaning-complete conformance CM; CRTO awaits its bounded RAW-only A/RECON trace;
-  the remaining admitted `ACTIVE` directions stay queued at their recorded CM/DM/run boundaries
-  and rotate into the five-chain working set as slots open.
+The principal resume boundaries are the five entries in the paused working-set section above.
+Other recently drained directions remain at their recorded dependencies: CRTO awaits exact sparse
+materialization before its RAW trace; UCOPE's proposed numerical-locus implementation exceeded the
+30% orchestration budget and was removed without a run; DISH awaits its checkout dependency; ACVC
+and VNFC are subject to the second-recast sequencing rule. None of those facts creates scientific
+polarity or a lifecycle change.
 
-This factual evidence snapshot integrates EGRCR's final Direction-tier park and does not itself
-change Portfolio-tier priority, lifecycle, fusion, separation, registration, ownership, or
-investment. The later owner-direct working-set decision above changes execution sequencing only.
+This snapshot executes the owner's direct pause instruction only. It changes no Portfolio priority,
+lifecycle, fusion, separation, registration, ownership, investment rule, evidence class, or claim
+ceiling. All 19 lifecycle-`ACTIVE` directions remain admitted for a later explicit resume.
