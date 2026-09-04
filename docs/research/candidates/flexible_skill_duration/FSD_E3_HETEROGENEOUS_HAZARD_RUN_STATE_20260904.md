@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T13:17:02Z`
+Snapshot: `2026-09-04T13:55:43Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -22,20 +22,22 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
   preceding `admit-memory` receipt with at least 4 GiB physical and effective availability.
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
-- Current counts at this snapshot: card-accepted `18`; independently admitted/launched `6`;
-  running `2`; valid complete `4`; quarantined `0`; not admitted/launched `12`. One of the
-  twelve has only a refused admission receipt and no learner or scientific output.
+- Current counts at this snapshot: card-accepted `18`; independently admitted/launched `7`;
+  running `1`; valid complete `6`; quarantined `0`; not admitted/launched `11`. The earlier local
+  refusal for the currently running remote invocation is preserved as evidence but was not itself
+  an admission.
 
-## Detached processes at the snapshot
+## Detached process at the snapshot
 
-| invocation | PID | receipt assessed UTC | physical/effective available bytes | progress | stderr | terminal artifact |
-| --- | ---: | --- | ---: | --- | ---: | --- |
-| `small_d2_seed2` | `24664` | `2026-09-04T11:43:50.271300Z` | `9409052672 / 9409052672` | `19/20` rollouts, `3/4` evals | `0 B` | none; process alive |
-| `small_d2_seed3` | `19048` | `2026-09-04T12:06:20.328822Z` | `7045365760 / 7045365760` | `15/20` rollouts, `3/4` evals | `0 B` | none; process alive |
+| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | progress | terminal artifact |
+| --- | --- | --- | ---: | --- | --- |
+| `medium_d0_seed1` | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_01`; wrapper PID `11443` | `2026-09-04T13:45:42.145553Z` | `15438573568 / 15438573568` | `5/20` rollouts, `1/4` evals | none; task `running`, tmux active |
 
-Each process was started separately with `Start-Process -WindowStyle Hidden`; its standard output
-and error are redirected inside its own invocation directory. Each `preflight.json` passed before
-that process was created. No receipt was reused as batch admission.
+The task runs in detached remote worktree
+`/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_01` at exact pushed SHA
+`e6108e466eeea3df31db52c53e49eef828bde41a`. Its one supervised command performed the remote
+`admit-memory` immediately before the exact runner. No receipt was reused as batch admission and
+no request-specific evidence input needed staging outside Git.
 
 ## Valid complete invocations
 
@@ -48,10 +50,12 @@ applied before all 18 invocations complete.
 | `small_d0_seed2` | same frozen counts and artifacts | `5044.9601495 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d2_seed1` | same frozen counts and artifacts | `6330.0531559 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d0_seed3` | same frozen counts and artifacts | `5315.1814547 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
+| `small_d2_seed2` | same frozen counts and artifacts | `6590.2443548 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
+| `small_d2_seed3` | same frozen counts and artifacts | `6468.8387185 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 
 Missing peak RSS leaves these invocations valid under the repository telemetry rule. Their wall
 times remain below the per-invocation 8 h cap. The first three launched while the code SHA was the
-launch implementation SHA. `small_d0_seed3` records state-only code SHA
+launch implementation SHA. The other three record state-only code SHA
 `5b84d8b072abda9650403b7fef7303a85205c48c`; the runner and focused-test byte surface at that SHA
 is identical to launch implementation SHA `e6108e466eeea3df31db52c53e49eef828bde41a`.
 
@@ -66,29 +70,30 @@ created. The evidence-only receipt is preserved as
 It is neither a launch nor an admission for any node.
 
 Owner routing changed immediately afterward: do not retry this or any other new portable E3
-invocation locally. The two already accepted/live local processes above remain local and must not
-be migrated or duplicated. The twelve not-yet-launched invocations are held at `REMOTE_FIRST`
-until the current main control-plane file `.codex/hmasd-compute.toml` changes from
-`status = "provisioning"` to an active state. A future remote launch requires the exact pushed SHA,
-a detached remote worktree, and one remote `agent-task` payload whose remote command performs its
-own `admit-memory` immediately before the exact runner. The refused local receipt cannot admit a
-remote invocation. Local fallback additionally requires definitive evidence of no remote process,
-prospective portability, and a fresh local admission.
+invocation locally. The two then-live local processes were observed without migration or
+duplication and have now terminated validly. Current main `.codex/hmasd-compute.toml` changed to
+`status = "active"`; `medium_d0_seed1` was therefore launched once on `wsl_4070` using the exact
+pushed SHA, a detached remote worktree, and one `agent-task` payload whose remote command performed
+its own `admit-memory` immediately before the exact runner. The local refused receipt did not admit
+the remote invocation. The remaining eleven not-yet-launched invocations stay `REMOTE_FIRST_HOLD`
+while this one task is observed. Local fallback additionally requires definitive evidence of no
+remote process, prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
 
-`RUNNING` means independently admitted and detached. `NOT_CREATED` means no result root, RNG
-master, model, optimizer, checkpoint, or scientific output has been created for that invocation.
+`RUNNING_REMOTE` means independently admitted and detached under the named remote task.
+`REMOTE_FIRST_HOLD` means no result root, RNG master, model, optimizer, checkpoint, or scientific
+output has been created for that invocation.
 
 | row | arm | seed | fixed science | runtime state at snapshot |
 | --- | --- | ---: | --- | --- |
 | small | D0 | 1 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 2 | `k=20`, `c=inf` | `VALID_COMPLETE` |
-| small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`, PID `24664` |
+| small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 3 | `k=20`, `c=inf` | `VALID_COMPLETE` |
-| small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`, PID `19048` |
-| medium | D0 | 1 | `k=5`, `c=inf` | `ADMISSION_REFUSED`; receipt only; `REMOTE_FIRST_HOLD` |
+| small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
+| medium | D0 | 1 | `k=5`, `c=inf` | `RUNNING_REMOTE`; task `fsd_e3_medium_d0_seed1_20260904_01`; local refusal retained separately |
 | medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | medium | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -103,13 +108,14 @@ master, model, optimizer, checkpoint, or scientific output has been created for 
 
 ## Resume boundary
 
-Observe the two named local PIDs and invocation directories to terminal without altering them.
-Do not retry `medium_d0_seed1` locally or start another new portable invocation while the remote
-control plane is provisioning. Once Root marks the compute configuration active, resume with
-`medium_d0_seed1`, followed by its D2 pair and then the remaining medium and large row pairs. This
-order is an operational plan, not a batch admission: each individual remote payload must combine
-its own fresh 4 GiB remote preflight and exact runner invocation under the remote supervisor. A
-refused admission creates no learner state and is not a scientific result.
+Observe only remote task `fsd_e3_medium_d0_seed1_20260904_01` to terminal without resending it.
+Do not retry it locally, migrate it, or start another new portable invocation while it runs. After
+terminal success, copy its request-specific result root back, verify the copied bytes and frozen
+output contract, and then continue with its D2 pair followed by the remaining medium and large row
+pairs as actual resource and dependency state allow. This order is an operational plan, not a
+batch admission: each individual remote payload must combine its own fresh 4 GiB remote preflight
+and exact runner invocation under the remote supervisor. A refused admission creates no learner
+state and is not a scientific result.
 
 Do not apply the frozen E3 result rule until all 18 required invocations are validly complete. Do
 not revive E2b, retune `c`, or use any intermediate return to alter the remaining launch set.
