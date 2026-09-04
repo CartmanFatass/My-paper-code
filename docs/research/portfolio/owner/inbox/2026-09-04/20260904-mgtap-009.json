@@ -1,0 +1,32 @@
+{
+  "id": "20260904-mgtap-009",
+  "created": "2026-09-04T15:46:38-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "B02 短成本运行简报",
+  "context": "两个学习器确实更新且成本充足，主 AUC 还没有结果。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_PILOT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L303",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-04_b02_pilot.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
