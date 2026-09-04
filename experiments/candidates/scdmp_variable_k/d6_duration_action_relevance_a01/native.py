@@ -64,7 +64,6 @@ def compile_host(build_root: Path) -> ctypes.CDLL:
 class Host:
     def __init__(self, build_root: Path) -> None:
         self.library = compile_host(build_root)
-        self._previous = None
 
     def __enter__(self) -> "Host":
         self._previous = abi.require_native_backend
@@ -73,6 +72,8 @@ class Host:
 
     def __exit__(self, *_args: object) -> None:
         abi.require_native_backend = self._previous
+        handle, self.library._handle = self.library._handle, 0
+        ctypes.windll.kernel32.FreeLibrary(ctypes.c_void_p(handle))
 
     @staticmethod
     def _duration_clone(payload: bytes, k: int) -> bytes:

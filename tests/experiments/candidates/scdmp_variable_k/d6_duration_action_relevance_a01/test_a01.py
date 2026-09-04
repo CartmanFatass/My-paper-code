@@ -4,10 +4,12 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from tempfile import TemporaryDirectory
 
 import pytest
 
 from experiments.candidates.scdmp_variable_k.d6_duration_action_relevance_a01 import decide_branch
+from experiments.candidates.scdmp_variable_k.d6_duration_action_relevance_a01.native import Host
 
 
 ROOT = Path(__file__).resolve().parents[5]
@@ -64,3 +66,12 @@ def test_runner_toy_native_smoke(tmp_path: Path) -> None:
     assert payload["projected_seconds"] > 60
     assert (tmp_path / "native-build" / "d6_a01_native.cpp").is_file()
     assert "branch" not in payload
+
+
+def test_host_releases_temporary_native_build() -> None:
+    with TemporaryDirectory(prefix="scdmp-a01-host-") as directory:
+        build_root = Path(directory)
+        with Host(build_root):
+            assert (build_root / "d6_a01_native.dll").is_file()
+
+    assert not build_root.exists()
