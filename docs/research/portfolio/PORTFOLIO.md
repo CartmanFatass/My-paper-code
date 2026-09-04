@@ -1,8 +1,8 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-03T16:38:28Z
+Updated at: 2026-09-04T09:06:41Z
 Owner: Root
-Investment capacity: `2` concurrent implementer sessions, `2` concurrent result-bearing runs (owner, 2026-09-03; `AGENTS.md` §5)
+Investment capacity: `UNBOUNDED` at the repository-policy layer for both concurrent implementer sessions and concurrent result-bearing runs (owner, 2026-09-04; runtime availability and the per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 Evidence standard: `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
 Engineering scope: `docs/project/ENGINEERING_SCOPE_SPEC.md`

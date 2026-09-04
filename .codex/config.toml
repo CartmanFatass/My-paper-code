@@ -5,8 +5,8 @@ multi_agent_v2 = true
 hooks = false
 
 [agents]
-# The two-direction cap of AGENTS.md section 5 is a rule, not this knob: nested DM -> CM -> implementer
-# chains need several threads per direction.
+# Research capacity is repository-unbounded under AGENTS.md section 5. This knob limits only the
+# runtime's thread fan-out; nested DM -> CM -> implementer chains may need several threads each.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 

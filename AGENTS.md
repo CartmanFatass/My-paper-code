@@ -78,10 +78,11 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-The binding resource is the agent runtime's usage limit, not compute. Capacity is stated as
-numbers in `PORTFOLIO.md`: concurrent implementer sessions (owner, 2026-09-03: **2**) and
-concurrent result-bearing runs (**2**). The cap is a rule applied by Root and the DMs, not a
-runtime thread limit: a nested DM -> CM -> implementer chain needs several threads per direction.
+The repository imposes no fixed limit on concurrent implementer sessions or concurrent
+result-bearing runs (owner, 2026-09-04). Root and the DMs admit work according to actual runtime
+availability, dependency ownership, and the fresh per-invocation resource check in section 7.
+Runtime thread limits are implementation constraints, not research-capacity policy: a nested
+DM -> CM -> implementer chain may need several threads per direction.
 
 Before any sweep, the DM records a per-arm cost projection from the runner's own cost law (for
 the coordinator route, `M = num_envs × rollout_length / k`); the machine-time cap applies per arm,
