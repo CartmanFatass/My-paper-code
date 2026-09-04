@@ -1,0 +1,37 @@
+{
+  "id": "20260904-vnfc-014",
+  "created": "2026-09-04T12:08:33-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "VNFC R03 branch prediction",
+  "context": "Before any R03 calibration or result, the DM predicts localized/tradeoff causal headroom. The privileged evidence has one material zone-2 world, while the only zone-1 width repair merely ties BCRH. This predicts a one-zone or incompatible-map signal rather than robust two-zone improvement.",
+  "options": [
+    {
+      "key": "ci-a",
+      "label": "Material robust causal headroom",
+      "consequence": ""
+    },
+    {
+      "key": "ci-b",
+      "label": "Localized or tradeoff causal headroom",
+      "consequence": ""
+    },
+    {
+      "key": "ci-c",
+      "label": "No material one-deviation causal headroom",
+      "consequence": ""
+    }
+  ],
+  "recommended": "ci-b",
+  "auto_applied": null,
+  "dm_reason": "The existing opportunity is localized and the zone-1 width effect does not beat BCRH.",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_CAUSAL_ONE_DEVIATION_R03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-controller-headroom-r03-prediction",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

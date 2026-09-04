@@ -46,12 +46,23 @@ zone 1 remains zero. The surviving alternative is not another width: the cumulat
 current host/population, or failed-zone estimand may leave the unknown optimum unidentified, while
 the physical upper bounds remain intentionally loose.
 
-The frozen branch returns the family to `em:variable_n_fleet_churn:convergence` for
-`RECAST_HOST_OR_ESTIMAND`. No MAPR ladder or wider K is opened locally. The parallel Portfolio A1
-headroom census is also not satisfied by this object because its full-tape reference is
-information-advantaged and its controls are not a tuned generic learner; that gap is handled by a
-separate A/RECON card without repeating R02 or applying an unratified MEI/lifecycle threshold. See
-`VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_RESULT_EVIDENCE_20260904.md` and
+The frozen branch returned the family to `em:variable_n_fleet_churn:convergence`. The complete
+Convergence-02 response formed
+`PRO_FINAL=RECAST_ESTIMAND_OR_INFORMATION_BOUNDARY`: the privileged full-tape K lineage stops,
+while the host, sixteen worlds, endpoint and native material margin stay fixed. Its exact
+sequential successor is
+`VNFC-CONTROLLER-HEADROOM-A-RECON-CAUSAL-ONE-DEVIATION-R03`, an in-panel finite census of
+deterministic policies that follow BCRH except for one causal-history-keyed legal command at one
+fixed decision epoch. The strongest same-information comparator is unchanged BCRH. The branch
+asks whether the exact class has robust, localized, or no material causal headroom; it does not
+identify the unrestricted causal optimum or a learner effect.
+
+No MAPR ladder, wider K, multiple-deviation class, fresh seed, or host change is opened locally.
+The separate Portfolio A1 headroom census is also not satisfied: R03 supplies neither a tuned
+generic learner nor an unrestricted same-information upper reference. See
+`VNFC_CONTROLLER_HEADROOM_RECAST_ESTIMAND_CONVERGENCE_02_INTAKE_20260904.md`,
+`VNFC_CONTROLLER_HEADROOM_A_RECON_CAUSAL_ONE_DEVIATION_R03_SCIENCE_CARD_20260904.md`,
+`VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_RESULT_EVIDENCE_20260904.md`, and
 `VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_INTAKE_20260904.md`.
 
 ### Section 11 recast (2026-09-03)
