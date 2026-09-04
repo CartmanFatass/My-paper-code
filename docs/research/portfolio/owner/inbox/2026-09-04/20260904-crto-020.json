@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-020",
+  "created": "2026-09-04T16:49:14-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B02：完整三步 RAW 读出判别",
+  "context": "A03 仅在 phase-0 达到双侧胜任，聚合 regret 无超过 MEI 的改善。现在选择一条共享 RAW 轨迹，在 255、256、257 三个固定结束点比较平均动作分数与普通终点；这是已开放 B 梯子的对象层后续。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一条共享轨迹检查完整周期读出",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "先增加三个种子",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "先扩大 RAW 或重跑残差臂",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "先用最小训练量判断具体读出是否可用，再决定是否值得扩大暴露。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_SELECTION_INTAKE_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b02-full-cycle-readout-start",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
