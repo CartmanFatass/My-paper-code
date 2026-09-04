@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-007",
+  "created": "2026-09-04T11:24:08-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept reproduced remote sparse-materialization dependency and prohibit launch",
+  "context": "The new exact-SHA wsl_4070 worktree has the correct HEAD and sparse specification but materialized 0 of 1,903 required tracked files and reports 5,193 tracked deletions. The explicit read-tree step remained in the GitHub HTTPS promisor-blob fetch for 3m48s before bounded cleanup. The reserved technical probe task is authoritatively not_found, so agent-task argument transport remains untested and no scientific work occurred. Under the standing delegation, option (a) returns the dependency to Root without bypass or fallback.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept the dependency, keep A01 unobserved, prohibit launch, and return to Root",
+      "consequence": "Preserve exact-source and launch integrity while another runnable direction uses the slot."
+    },
+    {
+      "key": "b",
+      "label": "bypass the clean worktree gate and submit the probe or A01",
+      "consequence": "Accept a task from a worktree missing every required runtime file."
+    },
+    {
+      "key": "c",
+      "label": "silently route locally or add out-of-scope transport machinery",
+      "consequence": "Change the requested route or engineering scope before the named dependency is resolved."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Option (a) is the only reversible choice consistent with 0/1,903 materialized files, the not-found task receipt, and the mandatory exact-source launch boundary.",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_REMOTE_PREREQUISITE_ENGINEERING_EVIDENCE_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_REMOTE_PREREQUISITE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L73",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
