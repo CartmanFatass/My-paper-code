@@ -339,3 +339,25 @@ REMOTE_FIRST control plane, new invocations use exact pushed bytes in freshly ad
 remote worktrees; root 001 is not migrated or repeated. See
 `FRRIE_B01_THREE_SEED_ROOT001_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_THREE_SEED_ROOT001_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-002 full-path result — 2026-09-04
+
+The second ordered root also completed 512 paired RSCF/Adam updates and the full 98-cell fixed-host
+panel. All 23 completion checks passed. It is separately `B01_SEED_VALID_DIRECT` and remains a
+single-seed result; the three-seed branch is not applied before root 003.
+
+No tight FP32 coordinate changed. Complete model/optimizer state, direct action traces, and native
+return rows remained equal between `PHY_TRUST` and `EDGE_FLEX` at every checkpoint, roster, and
+intervention. Overall displacement reached
+`L_inf(theta_512-theta_0)/0.05 = 2.017686367` in both arms, yet tight-projection displacement was
+zero. At update 512, EDGE minus uniform was only `+0.0058027` at `N=9` and `+0.0055035` at `N=15`;
+the maximum held-out within-PHY reassociation TV was `0.000270478`.
+
+Roots 001 and 002 now supply two direct, distinct literal-root instances of no contact and
+observed-path arm equality. That strengthens the bounded path description but still establishes no
+three-seed equality branch, comparator competence, post-contact effect, or seed-population claim.
+Peak RSS was unavailable, so root 002 remains valid as `resources_unmeasured`.
+
+The next discriminator is the unchanged ordered root 003 on the same Windows host. See
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_INTAKE_20260904.md`.

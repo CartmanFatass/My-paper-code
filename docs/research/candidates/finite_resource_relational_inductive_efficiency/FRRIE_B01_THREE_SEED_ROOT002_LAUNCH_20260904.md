@@ -1,6 +1,6 @@
 # FRRIE B01 three-seed root 002 launch — 2026-09-04
 
-Status: `DETACHED_RUNNING / RESULT_UNOBSERVED`
+Status: `TERMINAL / COMPLETE SUMMARY / RESULT INTAKE RECORDED`
 
 Object: `FRRIE-B01-THREE-SEED-SECTION11-20260904`
 
@@ -80,3 +80,12 @@ invocation, within four attributed wall-hours per arm and eight wall-hours total
 acceptance and later exit are engineering facts only. They establish no projection contact,
 comparator competence, return difference, reassociation effect, seed validity, or three-seed
 branch.
+
+## Terminal observation
+
+The process was observed absent at `2026-09-04T16:14:16.6421124Z`. It wrote one complete
+59,094-byte `summary.json` at `2026-09-04T16:06:26.8164508Z`, with SHA-256
+`c993fd694db31294e220d6b921c1c097a308ee406744d80d7c1c85a4318c47fa`; both redirected logs are
+empty. The monitor retained no numeric Windows exit code. Scientific validity and bounded reading
+are recorded separately in `FRRIE_B01_THREE_SEED_ROOT002_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_INTAKE_20260904.md`.
