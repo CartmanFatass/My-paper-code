@@ -201,12 +201,16 @@ P = 2 × (t_native_mission × 1,154
 | technical smoke | `t_native_mission` | native missions | `t_adamw_step` | AdamW steps | `t_candidate_score` | candidate scores | `P` | cap |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `2026-09-04 A01 toy` | `0.002741849995800294 s` | `1,154` | `0 s` | `0` | `0 s` | `0` | `66.32818979030708 s` | `1,800 s` |
+| `2026-09-04 A01 cleanup-repair toy` | `0.003209300004527904 s` | `1,154` | `0 s` | `0` | `0 s` | `0` | `67.4070644104504 s` | `1,800 s` |
 
-No numeric projection existed at freeze; the appended outcome-blind row now supplies it without
-changing scientific meaning. The scientific invocation is not started while that row is absent or
-above `1,800 s`; its hard observed cap is also `1,800 s`. Failed admission, excessive projection or
-a cap stop has no scientific polarity. The smoke is technical only: it must use toy coordinates,
-create no scientific state/tape/result root and publish no A branch.
+No numeric projection existed at freeze; the appended outcome-blind rows supply the original and
+post-repair measurements without changing scientific meaning. The current launch projection is the
+latest row. The scientific invocation is not started while that row is absent or above `1,800 s`;
+its hard observed cap is also `1,800 s`. Failed admission, excessive projection or a cap stop has no
+scientific polarity. Each smoke is technical only: it uses toy coordinates, creates no scientific
+state/tape/result root and publishes no A branch. The second row followed the attempt-01 DLL
+lifecycle repair at commit `8abe26362816f0bb25e84496361a1a447cc4e72e`; it does not replace the
+historical first row.
 
 ## Stop rule
 
