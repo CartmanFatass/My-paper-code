@@ -17,6 +17,37 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > Expressibility/selectivity passed, but utility and allocation improvement were zero.
 
+## Section-11 finite-resource cycle — 2026-09-04
+
+The Portfolio decision
+`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`
+reactivated EGRCR as a separate B/EXPLORE credit-estimator question after the exact-population
+association-information family closed. The reactivated object compares finite-data estimation by an
+association-factorized critic and a competent unrestricted pair-cell critic against exact
+conditional Q on one native censored-substitution allocation/utility host. It does not reopen the
+historical relay-information claim.
+
+`EGRCR-FRCS-B01-20260904` completed validly on one seed with branch `FRCS-D-MIXED`. The generic arm
+was competent in all eight action contexts and had lower Q RMSE (`0.05276` versus `0.09627`) and
+lower source-gradient error (`0.05236` versus `0.09820`). The factorized arm nevertheless produced a
+larger temperature-one action gap and `0.0120448` higher enumerated expected utility. Both arms had
+`8/8` greedy action competence and equal paired sampled utility `0.484375`.
+
+The bounded reading is no clean finite-resource factorization polarity. Direct estimation evidence
+favours the generic critic on this rung; direct smooth-policy utility favours the factorized arm.
+The strongest surviving explanation is action-gap scale/calibration rather than more accurate
+association credit, but one seed does not identify it. Unequal recorded forward arithmetic also
+precludes a compute-efficiency claim. Full evidence and intake are in
+`EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_RESULT_EVIDENCE_20260904.md` and
+`EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_INTAKE_20260904.md`.
+
+No unchanged three-seed replication is locally authorized: the card reserved that rung for a clean
+factorized endpoint gain, which did not occur. The direction is at a clean boundary pending its
+persistent Convergence decision on whether to park the present factorization, recast one
+scale-controlled decision discriminator, or continue. The current claim ceiling is this fixed
+four-agent host, one seed, 192 episodes, 128 updates, the two frozen 32-parameter critics, and the
+temperature-one evaluator.
+
 ## Current material cycle
 
 Four-direction successor material cycle
