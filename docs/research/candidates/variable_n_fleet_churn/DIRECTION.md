@@ -29,6 +29,29 @@ return-bearing question are not closed. Its prospectively distinct, sequential s
 `VNFC-BPCR-BEXP-PRESENTATION-SAFE-RETURN-R02` at `B/EXPLORE`. R02 is motivated by a known
 conformance defect and is not independent confirmation.
 
+### Controller-headroom reconnaissance (2026-09-04; current)
+
+The valid complete `VNFC-CONTROLLER-HEADROOM-A-RECON-R01` result on the actual first-primary R02
+`heldout-N7` panel is `CH-D / HEADROOM_BRACKET_UNRESOLVED`. Against unchanged `BCRH-PERSIST`, the
+deterministic full-tape `K=256` beam plus exact persistent-command maximum gives aggregate mean
+headroom lower bound `7/960`, zone-1 `0`, and zone-2 `7/480`; only zone 2, row 3 has a positive
+witness (`7/60`). Exact physical upper-bound means remain `3299/4800`, `183/320`, and `3853/4800`.
+
+Bounded conclusion: BCRH is not pointwise optimal on the panel, but this search neither establishes
+material panel-wide controller headroom nor establishes host saturation. The strongest support for
+unused headroom is the one legal path that doubles failed-zone delivery from `14/120` to `28/120`;
+the strongest contradiction is no witnessed improvement in the other fifteen worlds and zero
+zone-1 lower-bound headroom. The surviving alternative is delayed benefit pruned by the width-256
+beam.
+
+The reversible next discriminator is a prospectively carded `K=1024` version of the same bracket,
+selected at object tier because its conservative runner-derived wall projection is `723.80 s`
+under the unchanged 2,700-second cap. It is not registered or launched here: a result-blind RSS
+pilot must first admit the wider materialized beam. Failure of that resource disposition requires
+a direction-tier recast question through the convergence node, not a scientific negative. See
+`VNFC_CONTROLLER_HEADROOM_A_RECON_R01_RESULT_EVIDENCE_20260904.md` and
+`VNFC_CONTROLLER_HEADROOM_A_RECON_R01_INTAKE_20260904.md`.
+
 ### Section 11 recast (2026-09-03)
 
 The owner-approved section 11 recast of this direction is recorded in
@@ -226,6 +249,9 @@ its finite claim ceiling.
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R09_CHATGPT_PRO_RESULT_CONVERGENCE_INTAKE_20260821.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_CLOSED_EM_INTAKE_20260822.md`
 - `docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_BOUNDED_TEST_GATE_FREEZE_RETURN_FINAL_EM_INTAKE_AND_NO_CURRENT_RECOMMENDATION_20260822.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_R01_RESULT_EVIDENCE_20260904.md`
+- `docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_R01_INTAKE_20260904.md`
 - `scripts/run_vnfc_bpcr_b_explore.py`
 - `tests/vnfc_bpcr_b_explore_test.py`
 
