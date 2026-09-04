@@ -2,7 +2,7 @@
 
 Date: 2026-09-04
 Provenance: `OWNER_DIRECT`
-Execution state: `DRAIN_CURRENT_ROUND`; final handoff pending.
+Execution state: `PAUSED / ROUND_COMPLETE`; final handoff completed 2026-09-04T23:13:10Z.
 
 Owner instruction:
 
@@ -43,13 +43,14 @@ current-round verification/pilot work can still be accepted within the table abo
 
 ## Finalization
 
-The existing `hmasd-research-loop` heartbeat remains ACTIVE in drain-only mode at its retained
-30-minute recurrence until permitted work is complete and recoverable. It cannot refill slots.
-Root integrates and pushes ready commits, reads actual owner reviews, reconciles local/remote
-accepted handles and Transport, then writes
-[the restart handoff](../handoffs/2026-09-04-tracker-restart.md), marks execution PAUSED in Portfolio,
-and sets this existing heartbeat to PAUSED while retaining its configuration. A new research round
-or app/task restart is not launched automatically.
+All seven DMs and their current CM/children have completed. Root integrated the final results and
+intakes, reconciled the accepted local/remote handles and idle Transport, and completed
+[the restart handoff](../handoffs/2026-09-04-tracker-restart.md). The remote task list has no live
+handle; no local research Python process was found. Owner reviews returned no pending instruction.
+The existing `hmasd-research-loop` heartbeat was set to PAUSED through the automation tool at
+23:04:29Z, retaining its 30-minute recurrence and drain prompt; Portfolio execution is PAUSED.
+No research round, app/task restart or Pro resend is automatic. The handoff records the final
+DM/source/evidence branches, preserved raw roots, unaccepted CBSC source and unstarted next steps.
 
 The fresh runtime should select `hmasd-experiment-tracker` by its configured name and verify one
 actual direct DM ACK before claiming tracker outbound delivery. Preserve the saved project's
