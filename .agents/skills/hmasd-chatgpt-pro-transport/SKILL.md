@@ -27,13 +27,17 @@ exactly one body source:
   when the page requires text before its Send control becomes enabled.
 
 Every canonical handoff must provide the exact creator Codex `source_thread_id`, its
-exact `parent_thread_id`, and the runtime `operator_thread_id` recorded after
-`create_thread`. Treat all three as routing metadata, never as scientific content;
+exact `parent_thread_id`, and the project Transport singleton `operator_thread_id`
+declared in `.codex/hmasd-transport.toml`. Treat all three as routing metadata, never as scientific content;
 do not infer them from the provider conversation URL, a task title, or prose.
 `parent_thread_id` is the sole completion or terminal-blocker receipt destination.
 `source_thread_id` identifies the handoff author but is not a receipt destination.
-`operator_thread_id` is a per-handoff runtime fact and never a provider-conversation
-binding.
+`operator_thread_id` is the reusable Codex execution endpoint and never a
+provider-conversation binding or receipt destination. New canonical handoffs must
+declare `dispatch_mode=REUSE_SINGLETON`, `operator_reuse_required=true`,
+`operator_model=gpt-5.6-luna`, and `operator_thinking=xhigh`; validate all four and
+reject a singleton ID that differs from the project config. Historical in-flight
+`CREATE_ON_DEMAND` requests may finish, but they do not authorize another task creation.
 
 An optional `reference_paths` list contains one or more absolute reference files
 for bounded noncanonical/legacy transport. Validate and hash every
@@ -96,7 +100,8 @@ Portfolio and `DIRECTION.md` for EM nodes; for Portfolio validate every
 
 Persist the registry described in [references/state-schema.md](references/state-schema.md).
 It is a one-to-one map from `conversation_binding_key` to provider conversation ID.
-It is project-shared across on-demand operators, never scoped to one operator task.
+It is project-shared across every request handled by the singleton and is not keyed
+by the singleton task ID.
 The same direction therefore has two independent EM conversations, while Portfolio
 has one conversation shared across direction scopes. Only one request may be active
 per binding; a later round reuses the same conversation after the preceding request
@@ -229,7 +234,7 @@ the tab lease remains active while generation is pending. During Pro generation,
 observations. Never click `Answer now`, Retry, Continue, or Stop. A timeout becomes
 `WAITING_UNKNOWN`, not a send failure.
 
-Use this operator task's heartbeat automation as a bounded wake-up, normally
+Use the active request's heartbeat automation as a bounded wake-up, normally
 `FREQ=MINUTELY;INTERVAL=15`; never use `INTERVAL=1` busy polling. Each wake acquires
 the conversation lock, reuses the active tab lease when it is valid, performs
 one bounded DOM status read, persists the observation, and returns. A 20–60 minute
@@ -287,18 +292,19 @@ records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or
 destination and performs no send. Never use the source/creator task, the operator task itself, an old receipt
 task, or any repository UUID as a fallback.
 
-### Heartbeat retirement at task close
+### Request heartbeat retirement and singleton reuse
 
-Persist the heartbeat automation ID and status with the transport facts. This
-operator's heartbeat remains active while its conversation still needs a bounded wake
+Persist each request's heartbeat automation ID and status with that request's transport facts. A
+request heartbeat remains active while its conversation still needs a bounded wake
 (`WAITING_GENERATION`, `WAITING_HEARTBEAT`, `ARCHIVE_PENDING`, or a recoverable
-`WAITING_TIMEOUT`). When every conversation in this transport task is durably
-`ARCHIVED`, or is an explicit terminal/blocker state with no scheduled recovery,
-disable the existing heartbeat exactly once (for example by updating it to `PAUSED`)
-and record the retirement timestamp and verification. Never multiplex a later
-handoff into this on-demand operator. Never leave a task-close heartbeat
-active after the task has no pending recovery work, and never create a replacement
-heartbeat merely to avoid retiring the existing one.
+`WAITING_TIMEOUT`). When that request is durably `ARCHIVED`, or is an explicit
+terminal/blocker state with no scheduled recovery, delete or disable only that
+request's existing heartbeat exactly once and record the retirement timestamp and
+verification. Never archive or close the singleton task after a request. Later
+handoffs may be queued or active concurrently in other provider conversations, but
+their tabs, heartbeat IDs, facts, archives, receipts, and idempotency keys remain
+strictly request-scoped. Never reuse one request's heartbeat for another or leave a
+retired request heartbeat active merely because the singleton remains alive.
 
 When a later wake needs a lost or stale page, create at most one recovery tab in the
 same in-app browser and navigate to the persisted exact `provider_url`. Verify the

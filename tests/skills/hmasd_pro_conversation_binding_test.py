@@ -11,6 +11,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "scripts"
+SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
 def _module(name: str, filename: str):
@@ -33,6 +34,23 @@ def _project(tmp_path: Path) -> Path:
         (direction / "DIRECTION.md").write_text(f"# {direction_id}\n", encoding="utf-8")
         rows.append(f"| {direction_id} | ACTIVE |")
     (portfolio / "PORTFOLIO.md").write_text("\n".join(rows) + "\n", encoding="utf-8")
+    codex = tmp_path / ".codex"
+    codex.mkdir()
+    (codex / "hmasd-transport.toml").write_text(
+        "\n".join(
+            (
+                "schema_version = 1",
+                'mode = "singleton"',
+                'status = "active"',
+                f'thread_id = "{SINGLETON_THREAD_ID}"',
+                'environment = "local"',
+                'model = "gpt-5.6-luna"',
+                'reasoning_effort = "xhigh"',
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
     return tmp_path
 
 
@@ -46,7 +64,11 @@ def _transport_request(**changes: object) -> dict[str, object]:
         "decision_authority": "pro_final",
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
         "parent_thread_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "operator_thread_id": SINGLETON_THREAD_ID,
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
         "prompt": "Decide the next bounded object.",
     }
     request.update(changes)

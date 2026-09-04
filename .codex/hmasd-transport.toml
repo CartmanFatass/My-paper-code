@@ -1,0 +1,12 @@
+schema_version = 1
+mode = "singleton"
+status = "active"
+
+# Project-owned reusable Transport task. Handoffs reuse this task but retain
+# request-specific source_thread_id, parent_thread_id, receipt, tab, and heartbeat state.
+thread_id = "01a06c45-e279-7813-822f-9ea90cb14a72"
+task_title = "transport_lxh_project_singleton"
+project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
+environment = "local"
+model = "gpt-5.6-luna"
+reasoning_effort = "xhigh"

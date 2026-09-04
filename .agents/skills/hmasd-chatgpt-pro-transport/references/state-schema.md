@@ -9,8 +9,8 @@ has two independent EM conversations and Portfolio has one conversation reused
 across changing multi-direction scopes. Only one request may be active per key;
 archive it before sending the next turn in that same conversation. Browser tab
 handles, heartbeat wakeups, and executor turns remain ephemeral observations. The
-registry is shared across all on-demand operators; an operator UUID never selects a
-provider conversation.
+registry is shared across all requests handled by the project Transport singleton;
+its operator UUID never selects a provider conversation.
 
 ```json
 {
@@ -26,6 +26,9 @@ provider conversation.
   "creator_thread_id": "01a...",
   "parent_thread_id": "01p...",
   "operator_thread_id": "01b...",
+  "operator_mode": "PROJECT_SINGLETON",
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "xhigh",
   "return_route": "PARENT_SESSION",
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
@@ -143,8 +146,9 @@ is `BINDING_BUSY`, not permission to create another conversation.
 
 Each `request_history` entry preserves that round's `source_thread_id`,
 `creator_thread_id`, `parent_thread_id`, `operator_thread_id`, and `return_route` alongside its archive
-and receipt. A new round may use a different operator and creator while retaining
-the binding's exact provider conversation. Completed old fixed-route receipts remain
+and receipt. A singleton-era round reuses the configured operator but may use a
+different creator while retaining the binding's exact provider conversation;
+historical entries may preserve old per-handoff operator IDs. Completed old fixed-route receipts remain
 historical evidence and are not rewritten or resent. An old `PENDING` or `BLOCKED`
 receipt may migrate to `PARENT_SESSION` only when `attempt_count=0`, no send is
 recorded on either its primary or fallback route, and that same round has a valid
@@ -279,13 +283,14 @@ provider URL; the loaded URL and direction must be re-verified before observatio
 Never call `tabs.get()` on an old handle and never treat the new tab ID as a new
 identity. The recovered tab remains active while the conversation is pending.
 
-Each on-demand operator owns one handoff and does not multiplex later directions.
-Retain its heartbeat while that record requires a wake or recoverable timeout. After
-the record is durably archived, or is an
+The singleton may own several request records, including provider generations that
+overlap in time, but every tab lease, heartbeat, outbox entry, archive and
+idempotency key remains request-scoped. Retain a request's heartbeat while that
+record requires a wake or recoverable timeout. After the record is durably archived, or is an
 explicit terminal/blocker state with no scheduled recovery, update the existing
 automation to `PAUSED` exactly once, verify the disabled status, and persist
 `retired_at` plus `retirement_verified=true`. Heartbeat retirement and tab closure
-are separate facts.
+are separate facts. Never archive the singleton task as part of request cleanup.
 
 ## Automatic return outbox
 

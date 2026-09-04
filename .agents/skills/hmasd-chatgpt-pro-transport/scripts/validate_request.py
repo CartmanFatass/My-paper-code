@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import sys
+import tomllib
 from pathlib import Path
 
 
@@ -36,6 +37,26 @@ def _portfolio_has_direction(portfolio: Path, direction_id: str) -> bool:
         return False
     pattern = re.compile(rf"^\|\s*{re.escape(direction_id)}\s*\|")
     return any(pattern.search(line) for line in portfolio.read_text(encoding="utf-8").splitlines())
+
+
+def _singleton_thread_id(project_root: Path) -> str:
+    config_path = project_root / ".codex" / "hmasd-transport.toml"
+    if not config_path.is_file():
+        raise ValueError(f"Transport singleton config not found: {config_path}")
+    try:
+        with config_path.open("rb") as stream:
+            config = tomllib.load(stream)
+    except (OSError, tomllib.TOMLDecodeError) as exc:
+        raise ValueError(f"invalid Transport singleton config: {exc}") from exc
+    if config.get("schema_version") != 1 or config.get("mode") != "singleton" or config.get("status") != "active":
+        raise ValueError("Transport singleton config must be schema 1, singleton, and active")
+    if (
+        config.get("model") != "gpt-5.6-luna"
+        or config.get("reasoning_effort") != "xhigh"
+        or config.get("environment") != "local"
+    ):
+        raise ValueError("Transport singleton config must pin gpt-5.6-luna/xhigh in the local project")
+    return validate_source_thread_id(config.get("thread_id"))
 
 
 def validate(request: dict, project_root: Path) -> dict:
@@ -222,7 +243,22 @@ def validate(request: dict, project_root: Path) -> dict:
     if operator_thread_id is not None:
         operator_thread_id = validate_source_thread_id(operator_thread_id)
     if canonical_handoff and operator_thread_id is None:
-        raise ValueError("canonical handoff requires operator_thread_id after create_thread")
+        raise ValueError("canonical handoff requires the configured Transport singleton operator_thread_id")
+    dispatch_mode = request.get("dispatch_mode")
+    if dispatch_mode not in {None, "REUSE_SINGLETON"}:
+        raise ValueError("dispatch_mode must be REUSE_SINGLETON for new canonical handoffs")
+    if canonical_handoff and dispatch_mode != "REUSE_SINGLETON":
+        raise ValueError("new canonical handoffs require dispatch_mode=REUSE_SINGLETON")
+    operator_reuse_required = request.get("operator_reuse_required")
+    operator_model = request.get("operator_model")
+    operator_thinking = request.get("operator_thinking")
+    if dispatch_mode == "REUSE_SINGLETON":
+        if operator_reuse_required is not True:
+            raise ValueError("REUSE_SINGLETON requires operator_reuse_required=true")
+        if operator_model != "gpt-5.6-luna" or operator_thinking != "xhigh":
+            raise ValueError("Transport singleton must use gpt-5.6-luna with xhigh reasoning")
+        if operator_thread_id != _singleton_thread_id(project_root):
+            raise ValueError("operator_thread_id does not match the configured project Transport singleton")
 
     packet = packet_artifacts(
         request_id,
@@ -260,6 +296,10 @@ def validate(request: dict, project_root: Path) -> dict:
         "creator_thread_id": creator_thread_id,
         "parent_thread_id": parent_thread_id,
         "operator_thread_id": operator_thread_id,
+        "dispatch_mode": dispatch_mode,
+        "operator_reuse_required": operator_reuse_required is True,
+        "operator_model": operator_model,
+        "operator_thinking": operator_thinking,
         "return_route": return_route,
         "return_receipt_thread_id": return_receipt_thread_id,
         "return_receipt_ready": bool(parent_thread_id),

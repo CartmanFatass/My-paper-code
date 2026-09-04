@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T11:49:10Z
+Updated at: 2026-09-04T12:03:37Z
 Owner: Root
 Investment capacity: `UNBOUNDED` at the repository-policy layer for both concurrent implementer sessions and concurrent result-bearing runs (owner, 2026-09-04; runtime availability and the per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -10,6 +10,7 @@ Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
+Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-transport.md`
 
 ACTIVE denotes a valuable, concrete, tier-appropriate next object. A/B work is adaptive and has no
 one-shot consumption state. Only a valid complete frozen C observation consumes that exact object;
@@ -23,7 +24,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | Direction | Lifecycle | Priority | Direction owner | Updated at | Reason/condition |
 | --- | --- | --- | --- | --- | --- |
 | active_post_churn_population_flow_identification | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Current CCF collapses to a two-event XOR/DFA, but a scientifically independent non-reducible censored-flow question remains. Reactivate only after prospective acceptance of a non-XOR/non-DFA construction that matches low-order marginals yet requires opposite native actions or returns against a competent low-order controller. |
-| acvc | ACTIVE | MEDIUM | ROOT | 2026-09-04T11:49:10Z | The one-seed uncertain/delayed veto R01 is valid `B2-C / FIXED_RULE_CONTAINS`: both learned arms moved but exactly matched `ALWAYS-PROBE` on all 4,096 paired episodes, while `DET-CF` led by 0.8645508 return. This bounds only the present A2C competence/host/budget. The direction is parked at Convergence over a competent same-information history-aware headroom recast versus learner recast, park, or close; its Luna/high operator returns only to Root as parent. |
+| acvc | ACTIVE | MEDIUM | ROOT | 2026-09-04T11:49:10Z | The one-seed uncertain/delayed veto R01 is valid `B2-C / FIXED_RULE_CONTAINS`: both learned arms moved but exactly matched `ALWAYS-PROBE` on all 4,096 paired episodes, while `DET-CF` led by 0.8645508 return. This bounds only the present A2C competence/host/budget. The direction is parked at Convergence over a competent same-information history-aware headroom recast versus learner recast, park, or close; its already-dispatched Luna/high request returns only to Root as parent, while later handoffs use the project singleton. |
 | capability_bound_semantic_currentness | ACTIVE | HIGH | ROOT | 2026-09-03T02:56:28Z | Recast to evidence spec §11 on 2026-09-02 (`CBSC_OMRC_B01_SECTION11_RECAST_INTAKE_20260902.md`): publication gates are recorded fields, descriptive curves published by the runner, B1b declared as the next rung. B0 artifact directory restored by the owner 2026-09-03 (33 files, 12,807,274 bytes, matching the authority constant); the frozen three-seed B1 released as a single-thread process the same day. B/EXPLORE online multi-opportunity OWNER/refresh/capability/receiver-content learning. Exact protocol value remains positive and narrow; LR01 remains a valid `UNRESOLVED` codec/optimizer object. |
 | commitment_residual_triggered_options | ACTIVE | MEDIUM | ROOT | 2026-09-04T11:49:10Z | The constructed KEEP/REPLAN-balanced RAW/TRUE-RESIDUAL/CALIBRATED-DERANGEMENT B01 implementation is reviewed with a 336.70048016922266 s projection per representation. One corrected final-byte fixture has not yet received its authorized prelaunch focused test, so no result-bearing run or scientific branch exists. The consumed natural K8 targets retain zero material KEEP support and no residual polarity. |
 | degraded_incumbent_shadow_handover | ACTIVE | MEDIUM | ROOT | 2026-09-04T11:49:10Z | The first-trigger RETAIN/COPY/SHADOW B01 remains unconsumed after a reproduced zero-effect technical refusal. An outcome-blind production-conformance engineering objective now owns the missing learner/replay/evaluator/native surfaces without weakening the frozen causal cut; its CM chain is active and no scientific launch is authorized yet. |
@@ -97,8 +98,9 @@ Current clean boundaries are:
   amended A/RECON objects. SCDMP withheld launch and reopened Convergence because the proposed
   pre-model census conflicts with the four and only four §11.4 launch conditions.
 - ACVC, EGRCR and EOCIV each reached a valid B result and are parked at clean direction-tier
-  Convergence boundaries. Their on-demand Luna/high operators return one terminal receipt only to
-  this Root parent task and do not block other directions.
+  Convergence boundaries. Their already-dispatched Luna/high tasks finish only the current request;
+  all later handoffs reuse the project Luna/xhigh Transport singleton and retain handoff-specific
+  parent receipts.
 - DISH is in its meaning-complete conformance CM; CRTO is at final-byte prelaunch verification;
   the remaining admitted ACTIVE directions continue independently at their recorded CM/DM/run
   boundaries.

@@ -7,12 +7,14 @@ import argparse
 import json
 import re
 import sys
+import tomllib
 from pathlib import Path
 
 
-DISPATCH_MODE = "CREATE_ON_DEMAND"
+DISPATCH_MODE = "REUSE_SINGLETON"
 OPERATOR_MODEL = "gpt-5.6-luna"
-OPERATOR_THINKING = "high"
+OPERATOR_THINKING = "xhigh"
+TRANSPORT_CONFIG_RELATIVE_PATH = Path(".codex") / "hmasd-transport.toml"
 ROLE_SET = {"portfolio", "em"}
 WORKFLOW_NODE_ROLES = {
     "em_innovator": "em",
@@ -198,6 +200,56 @@ def _parent_thread_id(value: object) -> str:
     return _thread_id(value, "parent_thread_id")
 
 
+def _singleton_transport_config(project_root: Path) -> dict[str, str]:
+    config_path = project_root / TRANSPORT_CONFIG_RELATIVE_PATH
+    if not config_path.is_file():
+        raise PacketInputError(
+            f"project Transport singleton config not found: {config_path}",
+            field="transport_singleton_config",
+        )
+    try:
+        with config_path.open("rb") as stream:
+            config = tomllib.load(stream)
+    except (OSError, tomllib.TOMLDecodeError) as exc:
+        raise PacketInputError(
+            f"invalid project Transport singleton config: {exc}",
+            field="transport_singleton_config",
+        ) from exc
+    if config.get("schema_version") != 1:
+        raise PacketInputError(
+            "Transport singleton config schema_version must be 1",
+            field="transport_singleton_config.schema_version",
+        )
+    if config.get("mode") != "singleton" or config.get("status") != "active":
+        raise PacketInputError(
+            "Transport singleton config must declare mode=singleton and status=active",
+            field="transport_singleton_config.mode",
+        )
+    thread_id = _thread_id(config.get("thread_id"), "transport_singleton_config.thread_id")
+    model = _text(config.get("model"), "transport_singleton_config.model")
+    thinking = _text(config.get("reasoning_effort"), "transport_singleton_config.reasoning_effort")
+    environment = _text(config.get("environment"), "transport_singleton_config.environment")
+    project_id = _text(config.get("project_id"), "transport_singleton_config.project_id")
+    if model != OPERATOR_MODEL or thinking != OPERATOR_THINKING or environment != "local":
+        raise PacketInputError(
+            f"Transport singleton must use model={OPERATOR_MODEL}, reasoning_effort={OPERATOR_THINKING}, environment=local",
+            field="transport_singleton_config",
+        )
+    if not re.fullmatch(SOURCE_THREAD_ID_RE, project_id):
+        raise PacketInputError(
+            "transport_singleton_config.project_id must be the saved HMASD project UUID",
+            field="transport_singleton_config.project_id",
+        )
+    return {
+        "thread_id": thread_id,
+        "model": model,
+        "thinking": thinking,
+        "environment": environment,
+        "project_id": project_id,
+        "config_path": TRANSPORT_CONFIG_RELATIVE_PATH.as_posix(),
+    }
+
+
 def _provider_context_reset_evidence(value: object) -> dict[str, object]:
     if not isinstance(value, dict):
         raise PacketInputError(
@@ -257,6 +309,7 @@ def validate(data: dict, project_root: Path) -> dict:
     request_id = _text(data.get("request_id"), "request_id")
     source_thread_id = _source_thread_id(data.get("source_thread_id"))
     parent_thread_id = _parent_thread_id(data.get("parent_thread_id"))
+    transport_singleton = _singleton_transport_config(project_root)
     portfolio_path = project_root / "docs" / "research" / "portfolio" / "PORTFOLIO.md"
     portfolio = portfolio_path.read_text(encoding="utf-8") if portfolio_path.is_file() else ""
     if role == "em":
@@ -353,6 +406,12 @@ def validate(data: dict, project_root: Path) -> dict:
         "request_id": request_id,
         "source_thread_id": source_thread_id,
         "parent_thread_id": parent_thread_id,
+        "operator_thread_id": transport_singleton["thread_id"],
+        "operator_model": transport_singleton["model"],
+        "operator_thinking": transport_singleton["thinking"],
+        "operator_project_id": transport_singleton["project_id"],
+        "operator_environment": transport_singleton["environment"],
+        "operator_config_path": transport_singleton["config_path"],
         "caller_role": role,
         "workflow_node": workflow_node,
         "request_class": REQUEST_CLASSES[workflow_node],
@@ -481,14 +540,9 @@ GITHUB_EVIDENCE_MANIFEST
     (out_dir / "PROMPT_BODY.md").write_text(body, encoding="utf-8", newline="\n")
 
     handoff_path = str((out_dir / "HANDOFF.json").resolve())
-    operator_bootstrap_prompt = (
-        "Act as the on-demand hmasd-chatgpt-pro-transport operator for request "
-        f"{packet['request_id']}. Wait for the creator's execution message; do not inspect, "
-        "execute, or dispatch any handoff before that message arrives."
-    )
     dispatch_prompt = f"Execute the handoff packet at {handoff_path} exactly once."
     handoff = {
-        "packet_version": 3,
+        "packet_version": 4,
         "request_id": packet["request_id"],
         "source_thread_id": packet["source_thread_id"],
         "parent_thread_id": packet["parent_thread_id"],
@@ -511,21 +565,24 @@ GITHUB_EVIDENCE_MANIFEST
         "dispatch_mode": DISPATCH_MODE,
         "dispatch_required": True,
         "dispatch_once": True,
-        "dispatch_state": "PENDING_CREATE",
-        "operator_model": OPERATOR_MODEL,
-        "operator_thinking": OPERATOR_THINKING,
-        "operator_thread_id": None,
-        "operator_thread_url": None,
+        "dispatch_state": "READY_TO_DISPATCH",
+        "operator_reuse_required": True,
+        "operator_config_path": packet["operator_config_path"],
+        "operator_project_id": packet["operator_project_id"],
+        "operator_environment": packet["operator_environment"],
+        "operator_model": packet["operator_model"],
+        "operator_thinking": packet["operator_thinking"],
+        "operator_thread_id": packet["operator_thread_id"],
+        "operator_thread_url": f"codex://threads/{packet['operator_thread_id']}",
         "return_receipt_thread_id": packet["parent_thread_id"],
-        "operator_bootstrap_prompt": operator_bootstrap_prompt,
         "dispatch_handoff_path": handoff_path,
         "dispatch_prompt": dispatch_prompt,
         "dispatch_instruction": (
-            "Call create_thread exactly once for a new transport operator in the same local "
-            f"HMASD project with model={OPERATOR_MODEL}, thinking={OPERATOR_THINKING}, and "
-            "operator_bootstrap_prompt. Record the returned canonical threadId "
-            "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
-            f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
+            "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
+            f"project Transport singleton threadId={packet['operator_thread_id']} with "
+            f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
+            f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
+            "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
         ),
         "pro_send_from_caller": False,
         "prompt_body_file": "PROMPT_BODY.md",
@@ -533,7 +590,11 @@ GITHUB_EVIDENCE_MANIFEST
             "source_thread_id": packet["source_thread_id"],
             "creator_thread_id": packet["source_thread_id"],
             "parent_thread_id": packet["parent_thread_id"],
-            "operator_thread_id": None,
+            "operator_thread_id": packet["operator_thread_id"],
+            "dispatch_mode": DISPATCH_MODE,
+            "operator_reuse_required": True,
+            "operator_model": packet["operator_model"],
+            "operator_thinking": packet["operator_thinking"],
             "return_route": "PARENT_SESSION",
             "return_receipt_thread_id": packet["parent_thread_id"],
             "direction_id": packet["direction_id"],
@@ -550,7 +611,7 @@ GITHUB_EVIDENCE_MANIFEST
             "companion_prompt": packet["companion_prompt"],
             "source_mode": "single_body_attachment",
         },
-        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. This on-demand Transport operator exclusively owns Pro/browser send, model/connector checks, conversation binding, wait, archive, cleanup, and Transport evidence, and sends exactly one receipt to parent_thread_id.",
+        "instruction": "Upload PROMPT_BODY.md verbatim as the sole scientific packet; it contains the read-only evidence manifest. Preserve workflow node, direction scope, binding key, ref, claim ceiling, and bytes. Create and bind the requested persistent provider conversation on first use, then reuse that exact conversation ID. The project Transport singleton exclusively owns Pro/browser send, model/connector checks, conversation binding, request-scoped wait, archive, cleanup, and Transport evidence, and sends exactly one receipt to this handoff's parent_thread_id before returning to idle for later requests.",
     }
     (out_dir / "HANDOFF.json").write_text(json.dumps(handoff, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return {
@@ -558,13 +619,16 @@ GITHUB_EVIDENCE_MANIFEST
         "output_dir": str(out_dir.resolve()),
         "files": ["PROMPT_BODY.md", "HANDOFF.json"],
         "dispatch_mode": DISPATCH_MODE,
-        "dispatch_state": "PENDING_CREATE",
-        "operator_model": OPERATOR_MODEL,
-        "operator_thinking": OPERATOR_THINKING,
-        "operator_thread_id": None,
-        "operator_thread_url": None,
+        "dispatch_state": "READY_TO_DISPATCH",
+        "operator_reuse_required": True,
+        "operator_config_path": packet["operator_config_path"],
+        "operator_project_id": packet["operator_project_id"],
+        "operator_environment": packet["operator_environment"],
+        "operator_model": packet["operator_model"],
+        "operator_thinking": packet["operator_thinking"],
+        "operator_thread_id": packet["operator_thread_id"],
+        "operator_thread_url": f"codex://threads/{packet['operator_thread_id']}",
         "return_receipt_thread_id": packet["parent_thread_id"],
-        "operator_bootstrap_prompt": operator_bootstrap_prompt,
         "dispatch_required": True,
         "dispatch_once": True,
         "dispatch_handoff_path": handoff_path,
@@ -578,23 +642,23 @@ GITHUB_EVIDENCE_MANIFEST
         "reset_invalid_provider_context": packet["reset_invalid_provider_context"],
         "decision_authority": packet["decision_authority"],
         "dispatch_instruction": (
-            "Call create_thread exactly once for a new transport operator in the same local "
-            f"HMASD project with model={OPERATOR_MODEL}, thinking={OPERATOR_THINKING}, and "
-            "operator_bootstrap_prompt. Record the returned canonical threadId "
-            "in operator_thread_id, then call send_message_to_thread exactly once on that dynamic "
-            f"threadId with prompt={dispatch_prompt}. Never reuse a prior operator task."
+            "Do not call create_thread. Call send_message_to_thread exactly once on the configured "
+            f"project Transport singleton threadId={packet['operator_thread_id']} with "
+            f"model={packet['operator_model']}, thinking={packet['operator_thinking']}, and "
+            f"prompt={dispatch_prompt}. If the singleton is unavailable, preserve the packet and "
+            "report SINGLETON_TRANSPORT_UNAVAILABLE; do not create a replacement task."
         ),
         "pro_send_from_caller": False,
     }
 
 
 def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) -> dict:
-    """Persist the one on-demand operator UUID after ``create_thread`` succeeds."""
+    """Idempotently confirm the configured singleton UUID on an already-rendered handoff."""
 
     thread_id = _text(operator_thread_id, "operator_thread_id")
     if not re.fullmatch(SOURCE_THREAD_ID_RE, thread_id):
         raise PacketInputError(
-            "operator_thread_id must be the canonical Codex task UUID returned by create_thread",
+            "operator_thread_id must be the configured canonical Transport singleton task UUID",
             field="operator_thread_id",
         )
     if not handoff_path.is_file():
@@ -602,7 +666,7 @@ def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) ->
     handoff = json.loads(handoff_path.read_text(encoding="utf-8"))
     if not isinstance(handoff, dict) or handoff.get("dispatch_mode") != DISPATCH_MODE:
         raise PacketInputError(
-            "HANDOFF.json is not a CREATE_ON_DEMAND packet",
+            "HANDOFF.json is not a REUSE_SINGLETON packet",
             field="dispatch_mode",
         )
     existing = handoff.get("operator_thread_id")
@@ -650,7 +714,7 @@ def record_operator_thread_id(handoff_path: Path, operator_thread_id: object) ->
         )
     handoff["operator_thread_id"] = thread_id
     handoff["operator_thread_url"] = f"codex://threads/{thread_id}"
-    handoff["dispatch_state"] = "OPERATOR_CREATED"
+    handoff["dispatch_state"] = "SINGLETON_BOUND"
     transport_request["operator_thread_id"] = thread_id
     transport_request["creator_thread_id"] = source_thread_id
     transport_request["parent_thread_id"] = parent_thread_id

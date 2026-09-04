@@ -31,6 +31,7 @@ MATERIALIZE = _load("transport_materialize", SCRIPT_DIR / "materialize_packet.py
 BIND = _load("transport_bind", SCRIPT_DIR / "bind_conversation.py")
 TRANSPORT_SKILL = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "SKILL.md"
 OUTSOURCE_SKILL = ROOT / ".agents" / "skills" / "hmasd-workflow-outsource" / "SKILL.md"
+SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
 @pytest.fixture
@@ -41,6 +42,23 @@ def project_root(tmp_path: Path) -> Path:
     portfolio.mkdir(parents=True)
     (direction / "DIRECTION.md").write_text("# Demo\n", encoding="utf-8")
     (portfolio / "PORTFOLIO.md").write_text("| demo_direction | ACTIVE |\n", encoding="utf-8")
+    codex = tmp_path / ".codex"
+    codex.mkdir()
+    (codex / "hmasd-transport.toml").write_text(
+        "\n".join(
+            (
+                "schema_version = 1",
+                'mode = "singleton"',
+                'status = "active"',
+                f'thread_id = "{SINGLETON_THREAD_ID}"',
+                'environment = "local"',
+                'model = "gpt-5.6-luna"',
+                'reasoning_effort = "xhigh"',
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
     return tmp_path
 
 
@@ -408,15 +426,35 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "direction_ids": ["demo_direction"],
         "conversation_binding_key": "em:demo_direction:innovator",
         "decision_authority": "pro_final",
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
     }
-    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
     accepted = TRANSPORT_VALIDATE.validate(
-        {**canonical, "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"},
+        {**canonical, "operator_thread_id": SINGLETON_THREAD_ID},
         project_root,
     )
-    assert accepted["operator_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    assert accepted["operator_thread_id"] == SINGLETON_THREAD_ID
+
+    with pytest.raises(ValueError, match="dispatch_mode=REUSE_SINGLETON"):
+        TRANSPORT_VALIDATE.validate(
+            {
+                **canonical,
+                "dispatch_mode": "CREATE_ON_DEMAND",
+                "operator_thread_id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+            },
+            project_root,
+        )
+
+    with pytest.raises(ValueError, match="does not match the configured project Transport singleton"):
+        TRANSPORT_VALIDATE.validate(
+            {**canonical, "operator_thread_id": "dddddddd-dddd-dddd-dddd-dddddddddddd"},
+            project_root,
+        )
 
 
 def test_validate_request_allows_legacy_transport_without_a_receipt_parent(
@@ -478,7 +516,11 @@ def test_validate_request_enforces_canonical_single_body_attachment(
     canonical = {
         **upload_request,
         "source_mode": "single_body_attachment",
-        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
+        "operator_thread_id": SINGLETON_THREAD_ID,
     }
     canonical.pop("reference_paths")
     accepted = TRANSPORT_VALIDATE.validate(canonical, project_root)
@@ -509,7 +551,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
 
     without_operator = {**canonical}
     without_operator.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(without_operator, project_root)
 
 
