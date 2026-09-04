@@ -375,7 +375,7 @@ def test_r05_formal_publication_with_absent_resources(monkeypatch, tmp_path):
     monkeypatch.setattr(production, "ensure_confined", locate)
 
     groups = []
-    for index, (seed, arm) in enumerate(b1.B1_SLOT_ORDER):
+    for index, (seed, arm) in enumerate(production.B1_SLOT_ORDER):
         tag = f"{index:02d}-seed-{seed}-{arm}"
         group = [json.loads(path.read_bytes())["raw_evidence"]
                  for path in sorted((staging / "workers" / tag).glob("slice-*/result.json"))]
