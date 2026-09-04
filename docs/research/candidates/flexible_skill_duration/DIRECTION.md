@@ -21,15 +21,34 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 - Theory ceiling (evidence spec §11.2): a suboptimality bound for the implemented rule against the best fixed `k` on the corridor host, stated with its assumptions; no invariance proof, no semigroup claim.
 - Claim ceiling now: B — EXPLORE. Promotion to C-BENCH only after E3 or E4 repeats across three to five seeds (plan §5).
 
-## Objects and their state (2026-09-02)
+## Accepted mechanism-level science (2026-09-04)
+
+- E1 does not support carrying the age feature forward at fixed `k`.
+- E2 is a valid two-seed B observation on the homogeneous corridor. Its frozen verdict is
+  `NEITHER`: no finite `c` reaches the range-tolerant D0 bar in both seeds, event alignment is
+  below `0.5` everywhere, and `c = 0.25` passes the return bar only in seed 1. D2's mean segment
+  length nevertheless increases monotonically with `c` in both seeds, so the threshold is a
+  duration control even though the event-driven explanation is not supported on this population.
+- Strongest support: monotone segment duration and the seed-1 `c = 0.25` return pass. Strongest
+  contradiction: every raw D2 return is below the learned best D0 return, alignment peaks at only
+  `0.124684`, and the best D2 cost differs by seed.
+- Surviving alternative: homogeneous hazards let one tuned fixed clock fit both regions; E3 tests
+  whether the registered heterogeneous rows make regional renewal actionable. The competing
+  explanation is that the policy gap remains optimizer noise.
+- Next discriminator: E3 at the three registered hazard rows, D2 `c = 0.25` versus the exact best
+  fixed-`k` D0 learner, with paired return and region-specific event-to-renewal measurements.
+
+## Objects and their state (2026-09-04)
 
 | Object | State | Record |
 | --- | --- | --- |
 | ADR 01 — D2 on the HMASD base route | accepted revision 3; implemented; `off` byte-identical | `docs/Claude_docs/plans/ADR_01_D2_POLICY_INTERRUPTION.md`; review Parts I–III, VII, VIII |
 | ADR 02 — relay corridor host family | accepted revision 4; implemented with exact references and both margins | `docs/Claude_docs/plans/ADR_02_RELAY_CORRIDOR_HOST.md`, `RELAY_CORRIDOR_MECHANICS_20260902.md`; review Parts IV–VI, VIII |
 | E0 — exposure line and frozen probe set | complete, two seeds, four arms, no quarantine | `docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md`; review Part IX |
-| E1 — age input at fixed `k` | contract written, prediction on record, launches after the throughput refactor | `docs/Claude_docs/experiments/E1_AGE_INPUT_20260902.md` |
-| Advancement plan | E1 → E2 (homogeneous corridor) → E2b → E3 → E4 → C-gate; launch and budget policy confirmed | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
+| E1 — age input at fixed `k` | complete; owner prediction stands unrefuted; age not carried forward | `docs/Claude_docs/experiments/E1_AGE_INPUT_RESULT_20260902.md` |
+| E2 — D2 cost sweep on homogeneous corridor | complete; 15 valid runs; frozen verdict `NEITHER`; accepted B intake | `FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md`; `FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md` |
+| E3 — heterogeneous hazard | selected over E2b by object-tier unattended decision; card frozen, not launched | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md` |
+| Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
 
@@ -37,8 +56,8 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | --- | --- |
 | D2 on the base route | `config_1.py` (`policy_interruption_mode`, `interruption_cost_c`, `interruption_cost_c_Z`, `skill_cap_k_max`, `team_cap_k_Z`, `age_feature`), `hmasd/agent.py` (`_batched_assign_skills_d2`, `_d2_store_transition`, `update_coordinator_d2`), `hmasd/networks.py` (`evaluate_held_batch`, `assign_partial_batch`, `evaluate_training_batch_ordered`), `hmasd/utils.py` (D2 tables, `_compute_d2_high_level_advantages`, `get_d2_coordinator_sampler`) |
 | Corridor host | `envs/relay_corridor/` (`host.py`, `references.py`, `adapter.py`, `hmasd_driver.py`) |
-| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop) |
-| Tests | `tests/flexible_skill_duration_d2_test.py`, `tests/relay_corridor_host_test.py`, `tests/relay_corridor_hmasd_test.py`, `tests/uav_env_channel_equivalence_test.py` (throughput refactor) |
+| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop), `scripts/run_flexible_skill_duration_e2.py` and its study aggregator; E3 runner pending CM |
+| Tests | `tests/flexible_skill_duration_d2_test.py`, `tests/flexible_skill_duration_e2_test.py`, `tests/relay_corridor_host_test.py`, `tests/relay_corridor_hmasd_test.py`, `tests/uav_env_channel_equivalence_test.py` (throughput refactor) |
 | Fixtures | `tests/fixtures/flexible_skill_duration_d2/fingerprint_off.json` (the `off` byte-identity guard) |
 | Local evidence | `temp/directions/flexible_skill_duration/exp/`, `temp/directions/flexible_skill_duration/probes/` (gitignored; content digests recorded in the result documents) |
 
