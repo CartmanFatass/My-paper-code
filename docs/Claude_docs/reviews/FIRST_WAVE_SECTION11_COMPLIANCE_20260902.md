@@ -1246,6 +1246,40 @@ process: four attempts have now failed on four different post-learner guards tha
 own end-to-end test never exercised; the engineering follow-up of E.8 item 3 is the condition for
 any CBSC object after B1.
 
+### E.10 Guard repaired by reproduction, rehearsal impossible by construction, fifth launch (2026-09-03, 18:00 PDT)
+
+The implementer reproduced E.9's reading rather than adopting it: across the three commits
+between the bound commit `0b629eff4` and HEAD, all 41 paths of the canonical source surface are
+byte-identical (`git diff --quiet` returns 0 against both HEAD and the working tree), so the
+publication refusal was over a fact about other sessions' work, not the run. Repair `4679e8dc8`:
+the conformance check gains a `require_head_match` switch, true at launch and false at the two
+publication call sites; the checks that establish the real property (no uncommitted surface
+change, surface byte-identical to the bound commit) are untouched, and a changed surface or an
+unreadable HEAD still refuses. The implementer declined the reviewer's "with the bound sha
+recorded" wording for a reason the reviewer accepts: the receipt is hashed and compared
+byte-for-byte against its launch-time copy by the authority witness, so recording the observed
+HEAD in it would reintroduce the same fragility one layer down; the bound sha is already the
+receipt's `commit`. Four pinning tests (doc-only HEAD advance passes with the moved sha absent
+from the receipt; changed surface refuses; uncommitted surface edit refuses; launch-time
+requirement unchanged). Suite `1 failed, 293 passed`, the failure the pre-existing unified-profile
+test.
+
+The offline publication rehearsal on r04's evidence could not be completed, and the reason is
+structural: the evidence is bound to the commit and to the absolute repository root (admission
+receipts record the preflight script by absolute path, checkpoints embed the commit), so
+publishing it needs the main tree at exactly `0b629eff4`, which any surface repair makes
+impossible. A detached worktree at the bound commit reached source conformance, validated all
+twelve admissions and loaded 36 raw slices, then failed in the replay child on the worktree's own
+path binding. Worktree removed. Consequence for the record: every repair to the canonical surface
+invalidates every prior attempt's evidence, so each defect on the publication path costs a full
+run to find, and the final fifteen-table assembly remains the one stretch never exercised. That is
+the reviewer's reason for holding E.8 item 3 (the end-to-end profile repair) as the condition for
+any CBSC object after B1, and it is carried into the control-plane review as T3(b).
+
+Fifth launch: sha `4679e8dc8`, 2026-09-04T00:56:05Z, run root `b1_scout_r05`, PID 16772,
+detached, path budget 250 of 260; source conformance, B0 binding, path budget and confinement
+cleared at report time. Known risk carried: the table assembly. No decision.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
