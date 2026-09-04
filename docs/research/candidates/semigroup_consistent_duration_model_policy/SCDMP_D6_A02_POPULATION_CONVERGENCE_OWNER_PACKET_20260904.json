@@ -1,0 +1,39 @@
+{
+  "question": "是否保留已执行的 Pro 有界裁决：仅停放当前 D6 action-choice 对象家族，而不把它扩大成方向生命周期 PARK 或科学关闭？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "from": "A02 有效总体失败后等待同一 Convergence 节点裁决",
+      "to": "当前 D6 action-choice 家族 direction-local PARK；无下一对象，仅保留独立机制证据的精确重入条件"
+    }
+  ],
+  "if_refused": "所有者可在后续干净边界直接给出不同方向指令；在此之前不启动任何对象。A01/A02 原始结果、有限 claim ceiling、无 B 权限以及 Portfolio 生命周期均保持不变。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/external/2026-09-04-scdmp-d6-a02-population-convergence-04/2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy--attempt-01__02_RESPONSE.md",
+      "quote": "The conclusion is therefore to park, rather than close, the D6 action-choice family. Parking is warranted because no authorized next object exists; closure would be too broad because A02 supplied no duration-policy contrast and A/RECON evidence does not establish structural impossibility.",
+      "why": "它同时给出停放的正面依据和不得扩大成科学关闭的边界。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_INTAKE_20260904.md",
+      "quote": "The bounded inference is population failure, not duration-policy failure.",
+      "why": "仍可能存在独立定义、可表示的事件相位总体；当前证据不能声称机制不存在。"
+    }
+  ],
+  "uncertainty": [
+    "独立于 A01/A02 搜索谱系的自然环境是否会同时产生短、长持续时间动作区制仍未知。",
+    "D6 共享若未来有独立机制重新支持，究竟提高样本效率、只作正则化、造成负迁移或无作用仍未知。",
+    "分离的同信息 headroom 仍未测量，但它不是本家族的重入证据。"
+  ],
+  "cost": {
+    "compute": "0；本裁决不授权新卡、CM、实验或下一 Pro round",
+    "owner_time": "约 1 分钟",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；drain 后方向停在干净边界"
+  },
+  "verdict_text": "PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY",
+  "source": "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md"
+}
+

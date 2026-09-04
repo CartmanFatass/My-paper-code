@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-04-scdmp-d6-a02-population-convergence-04",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\codex-scdmp-d6-recast-20260904\\temp\\sessions\\hmasd-pro-research-prompt-author\\20260904-scdmp-d6-a02-population-convergence-04\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "bytes": 9269,
+    "sha256": "e1416f5df214bd2f2f63cbb70964947164d016f04352effda0fa4002516aa225",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a02\\2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a02\\2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260904-scdmp-d6-a02\\2026-09-04-scdmp-d6-a02-population-convergence-04--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "e1416f5df214bd2f2f63cbb70964947164d016f04352effda0fa4002516aa225",
+    "references": []
+  }
+}

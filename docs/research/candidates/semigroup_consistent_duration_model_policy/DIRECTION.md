@@ -587,3 +587,38 @@ source-search lineage supports a qualitatively different recast. Exact evidence 
 `SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_EVIDENCE_20260904.md` and
 `SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_INTAKE_20260904.md`. Portfolio state and
 the separate unmeasured A1 headroom item remain unchanged.
+
+## D6 action-choice family park — 2026-09-04
+
+The complete archived response from the same persistent Convergence node formed
+`DECISION_FORMED=true` and
+`PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY`. Its exact response SHA-256 is
+`4b3b746e16edbdb770dcb55cacd57a86b775509148f6d23434be9c2c94191656`. The decision is executed
+without local override.
+
+The parked unit is the current D6 action-choice source-search family: the proposal to justify a
+shared `Q(s,z,k)` learner by first establishing materially action-relevant preferences for both
+`k=7` and `k=13`. A01 established a uniform material `k=13` preference; the sole independently
+admitted A02 population validly stopped before its contrast estimand existed. The prior
+one-population/no-derivative boundary therefore leaves no authorized and presently
+decision-relevant next object.
+
+This is direction-local parking, not a Portfolio lifecycle change, broad SCDMP closure or evidence
+against the abstract D6 architecture. The strongest support is A01's six non-borderline one-sided
+contrasts plus A02's valid all-cells population failure. The strongest contradiction to closure is
+that A02 supplied no duration-policy contrast; event-phase value may exist in some independently
+defined population. The family is parked, not declared false.
+
+Re-entry requires a committed record outside the A01/A02 source/countdown-search lineage that
+identifies a qualitatively distinct, pre-outcome, native-action-linked mechanism and a
+class-correct decision-changing object. Meeting that condition only reopens the persistent
+Convergence node; it does not authorize an object. Another source state, countdown, host-neighbour
+row or sign search, partial A02 data, historical ancestry, the unmeasured A1 headroom item or an MEI
+does not qualify.
+
+There is no next discriminator and no A, B, learner, sweep, source-population, countdown-search or
+automatic-derivative authority. The finite claim ceiling is only that the exact `.92/.25` A01/A02
+lineage has no current decision-relevant continuation. Exact decision intake and archived provider
+bytes are in `SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-a02-population-convergence-04/`. Portfolio state and the separate
+unmeasured headroom item remain unchanged.
