@@ -12,6 +12,8 @@
   `95c60538bdf36b0cd78e68ef91ecd20548b7d68e473c7a5f609d27c3e2b473b7`
 - Object-tier architecture/RNG closure: `OWNER_DELEGATED`, intake section "Decisions this intake
   produces", option (a)
+- Object-tier source-law closure: `OWNER_DELEGATED`,
+  `SCDMP_D6_CROSS_K_Q_SHARING_B01_SOURCE_LAW_CLARIFICATION_20260904.md`, option (a)
 - No result-bearing run, root, model, optimizer, training record or evaluation tape exists at this
   freeze.
 
@@ -106,6 +108,9 @@ return is imported.
 
 Generate six treatment-common public renewal states before learner initialization:
 
+- native reset uses the literal `pre_event_q=0` for both streams and every candidate source
+  renewal; it is never drawn, alternated or keyed by stream, `k`, target, tape or outcome, and the
+  existing identity `pre_event_p=(1,2,3,4)` is unchanged;
 - fixed state-source stream `9011` uses `COMMON=0` at every source renewal on a constant `k=7`
   clock;
 - fixed state-source stream `9013` uses `COMMON=0` on a constant `k=13` clock;
@@ -120,6 +125,11 @@ Generate six treatment-common public renewal states before learner initializatio
 No B01 or FCEOV foundation, state, checkpoint, tape, `q_by_cell`, result root, selected action map,
 threshold or inference rule may be read or reused. Existing source code may supply the unchanged
 native equations; runtime scientific artifacts are fresh.
+
+`pre_event_q=0` is an outcome-blind finite-population coordinate, not a scientific arm. Native
+HR/RH composition still overwrites post-event `q` exactly as before. Consequences accumulated in
+the source prefix remain part of the public renewal state; no learner receives the hidden reset
+bit itself. The old B01 checkerboard is not imported.
 
 ## Action, continuation and endpoint
 
@@ -177,7 +187,7 @@ Use learner seeds exactly `3119`, `5171`, and `8089`, with no replacement or bes
 For each seed, address-separate model initialization, training native tapes, fixed schedule and
 evaluation. D6 and D8 use the same training addresses and identical common-encoder initialization;
 arm/head initialization has an arm-labelled domain. No library-global RNG may select scientific
-coordinates.
+coordinates. The source-law literal `pre_event_q=0` consumes no RNG address.
 
 Every affine weight uses address-stable Xavier-uniform float32 initialization; biases are exactly
 zero. The head-weight denominator in the exposure measurement must be strictly positive. Models,
