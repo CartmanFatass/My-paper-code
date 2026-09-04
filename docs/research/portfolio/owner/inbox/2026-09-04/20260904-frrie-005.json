@@ -1,0 +1,79 @@
+{
+  "id": "20260904-frrie-005",
+  "created": "2026-09-04T11:26:05-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FRRIE contact-active R128 新卡",
+  "context": "新卡冻结一根 fresh-root、contact-active、真实 learner 的 B 探索：PHY_TRUST_004 与包含型 EDGE_FLEX_150 使用相同原始初始化、训练 tape 和评估 episode；N={9,15}、INTACT、单 seed、128 次真实 Adam 更新。紧臂在 checkpoint 0 前投影到 ±0.04，预卡参数检查显示 18 个 beta 中 5 个会被移动，因此本次路径会实际接触约束。MEI 为两 roster 上 d128=PHY004−EDGE150 的绝对 0.005。该结果不能建立机制等价、生命周期判断或 C 级结论。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按冻结卡继续实现和运行；有效结果仅支持一根 B 探索的有界判断。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "不启动该对象，并在下一干净边界重新选择更小判别器。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "保留现有 aggregate，不运行当前卡；另写修订卡后再创建新鲜尝试。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "是否接受并继续执行一个新根上的 contact-active R128 B 卡，用真实 learner 区分旧 B01 的无接触与激活投影后的直接效果？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE B01 下一对象",
+        "from": "三根无接触结果已接收，A1 仅为只读候选边界，尚无下一运行对象",
+        "to": "冻结一根、128 更新、紧边界 ±0.04 对宽边界 ±1.50 的真实 learner 探索对象，并按 remote-first 执行"
+      }
+    ],
+    "if_refused": "不启动该卡；保留三根观测路径等价的原结论与未运行的根 004、005，并在下一个对象级边界重新比较 A1 或另一 contact-capable 设计。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md",
+        "quote": "The tight projection never changed a coordinate. Full model/optimizer states and paired evaluation traces stayed equal through all 512 updates on every root.",
+        "why": "当前最直接的未决问题是投影真正激活后是否改变学习，而不是再重复无接触路径。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_A1_HEADROOM_CENSUS_READONLY_INTAKE_20260904.md",
+        "quote": "Result of the read-only census: no retained current-host feasible-policy upper-return reference and no tuned generic same-information learner baseline are present.",
+        "why": "A1 已经把 headroom 缺口记清；缺口是排序信息，不是阻塞真实 B learner 的条件。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_A1_HEADROOM_CENSUS_READONLY_INTAKE_20260904.md",
+        "quote": "These are raw local causal spans under one fixed partner joint action. They do not identify a globally optimal joint action, a feasible full-horizon upper policy, tuned-generic regret, learner exposure, value after co-adaptation, or the cause of B01 nonactivation.",
+        "why": "跳过其执行会放弃一份廉价局部动作地图；但该地图本身不能回答本卡的 learner 问题。"
+      }
+    ],
+    "uncertainty": [
+      "一根 B 只能给出初步方向，不能支持稳定效果。",
+      "EDGE 可能仍低于共享随机参考，届时处理为比较器不具识别力，而不是机制极性。",
+      "±0.04 的初始裁剪保证接触，但不能保证动作或回报达到 0.005 的 MEI。"
+    ],
+    "cost": {
+      "compute": "每臂 655,360 个环境槽和 128 次 Adam；既有同形运行约每臂 383 秒、整次约 33.6 分钟，本卡上限每臂 4 小时、整次 8 小时",
+      "owner_time": "约 2 分钟复核卡片；循环不等待",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; CM 与运行按无人值守委托继续"
+    },
+    "verdict_text": "Recommendation: option 2. The A1 map already established that neither a current-host feasible upper policy nor a tuned same-information generic baseline exists. Its proposed focal replays hold partner actions fixed and truncate every alternative after one step; a zero or nonzero local span would not decide whether projection contact changes learned return. It therefore remains useful design provenance, not a gate before the direct learner discriminator.",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md"
+  }
+}
