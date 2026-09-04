@@ -1,0 +1,32 @@
+{
+  "id": "20260904-cbsc-016",
+  "created": "2026-09-04T15:49:04-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 当前工程轮以具名夹具阻塞交接",
+  "context": "资源缺测降级补丁已有 42 项针对性检查通过和独立静态审查；正式验证三次停在测试夹具接线或历史身份绑定，生产发布与读回尚未被有效检验。旧 Windows CRLF 规格字节可精确复现原记录哈希，当前夹具却读取 Git LF 字节。运行时新增 194 行、删除 266 行，460 行全部属于编排，比例 100% 超过 30% 预算。保留已推送工程分支但不接受运行时代码，先整合报告并按所有者收尾指令停止本轮；没有 r08 或后续试跑。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留未接受补丁及证据，按当前夹具阻塞交接",
+      "consequence": "报告分别列明正确性证据、正式路径未覆盖和编排预算违例；后续重启再处理，不创建新尝试。"
+    },
+    {
+      "key": "b",
+      "label": "仅凭针对性测试宣布完整技术合格",
+      "consequence": "会把未执行的生产路径和已知预算违例误报为通过，不能支持下一次科学运行。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "可复现的夹具身份差异提供了具体下一步；现有测试和静态审查只能支持局部工程性质，不能替代完整正式路径验证或预算接受。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R07_RESOURCE_REPAIR_RETURN_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r07-resource-repair-handoff",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
