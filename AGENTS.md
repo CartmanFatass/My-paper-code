@@ -80,7 +80,8 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 The binding resource is the agent runtime's usage limit, not compute. Capacity is stated as
 numbers in `PORTFOLIO.md`: concurrent implementer sessions (owner, 2026-09-03: **2**) and
-concurrent result-bearing runs (**2**). Runtime concurrency settings must not exceed them.
+concurrent result-bearing runs (**2**). The cap is a rule applied by Root and the DMs, not a
+runtime thread limit: a nested DM -> CM -> implementer chain needs several threads per direction.
 
 Before any sweep, the DM records a per-arm cost projection from the runner's own cost law (for
 the coordinator route, `M = num_envs × rollout_length / k`); the machine-time cap applies per arm,

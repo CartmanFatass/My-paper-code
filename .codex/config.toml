@@ -5,8 +5,9 @@ multi_agent_v2 = true
 hooks = false
 
 [agents]
-# AGENTS.md section 5: two implementer sessions and two result-bearing runs.
-max_concurrent_threads_per_session = 2
+# The two-direction cap of AGENTS.md section 5 is a rule, not this knob: nested DM -> CM -> implementer
+# chains need several threads per direction.
+max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
