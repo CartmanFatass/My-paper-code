@@ -82,8 +82,88 @@ def _split_row(s: str) -> list[str]:
 
 # ----------------------------------------------------------------------------- items and replies
 
+# grading priority buckets: 1 = needs the owner's ruling, 4 = read when convenient
+KIND_PRIORITY = {"portfolio": 1, "second-recast": 1, "critic-dissent": 2, "close-call": 2,
+                 "new-card": 2, "decision": 3, "prediction": 3, "brief": 4}
+DIR_PRIORITY_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2}
+
+
 def owner_dir(root: Path) -> Path:
     return root / OWNER_REL
+
+
+def item_priority(item: dict) -> int:
+    p = KIND_PRIORITY.get(item.get("kind"), 3)
+    if item.get("kind") == "decision":
+        if item.get("tier") in ("direction", "portfolio"):
+            p = 2
+        elif item.get("ledger_kind") == "technical":
+            p = 4
+    return p
+
+
+def new_item(root: Path, direction: str, kind: str, title: str, options: list[dict], *,
+             recommended: str | None = None, auto_applied: str | None = None, context: str = "",
+             dm_reason: str = "", evidence: list[str] | None = None, tier: str = "object",
+             ledger_row: str = "", brief: str = "", ledger_kind: str = "", day: str | None = None) -> Path:
+    """Write one validated item; the id is <YYYYMMDD>-<prefix>-<nnn> with the next free nnn."""
+    if kind not in KINDS:
+        raise ValueError(f"kind must be one of {KINDS}")
+    if not title.strip():
+        raise ValueError("title is required")
+    if not options:
+        raise ValueError("at least one option is required")
+    keys = [o.get("key") for o in options]
+    if len(set(keys)) != len(keys) or any(not k for k in keys):
+        raise ValueError("option keys must be unique and non-empty")
+    for name, val in (("recommended", recommended), ("auto_applied", auto_applied)):
+        if val is not None and val not in keys:
+            raise ValueError(f"{name}={val!r} is not an option key")
+    day = day or dt.date.today().isoformat()
+    prefix = PREFIX.get(direction) or re.sub(r"[^a-z0-9]", "", direction.lower())[:8] or "x"
+    day_dir = owner_dir(root) / "inbox" / day
+    n = 1 + len(list(day_dir.glob(f"{day.replace('-', '')}-{prefix}-*.json"))) if day_dir.exists() else 1
+    existing = {p.stem for p in day_dir.glob("*.json")} if day_dir.exists() else set()
+    while f"{day.replace('-', '')}-{prefix}-{n:03d}" in existing:
+        n += 1
+    item_id = f"{day.replace('-', '')}-{prefix}-{n:03d}"
+    item = {
+        "id": item_id,
+        "created": dt.datetime.now(dt.timezone.utc).astimezone().isoformat(timespec="seconds"),
+        "direction": direction, "tier": tier, "kind": kind, "title": title.strip(),
+        "context": context, "options": options, "recommended": recommended,
+        "auto_applied": auto_applied, "dm_reason": dm_reason, "evidence": evidence or [],
+        "ledger_row": ledger_row, "brief": brief, "ledger_kind": ledger_kind, "status": "open",
+    }
+    out = day_dir / f"{item_id}.json"
+    _atomic_write(out, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
+    return out
+
+
+def mark_answered(root: Path, item_id: str) -> Path:
+    p = item_path(root, item_id)
+    if p is None:
+        raise FileNotFoundError(f"no item {item_id}")
+    item = json.loads(p.read_text(encoding="utf-8"))
+    item["status"] = "answered"
+    _atomic_write(p, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
+    return p
+
+
+def pending_instructions(root: Path, days: int = 2) -> list[dict]:
+    """Replies whose item is not yet marked answered in the item file: what the loop must apply."""
+    out = []
+    for item in load_items(root, days=days):
+        reply = item.get("reply")
+        if not reply:
+            continue
+        raw = json.loads((root / item["path"]).read_text(encoding="utf-8"))
+        if raw.get("status") == "answered":
+            continue
+        out.append({"id": item["id"], "direction": item.get("direction"), "kind": item.get("kind"),
+                    "title": item.get("title"), "choice": reply.get("choice"), "comment": reply.get("comment", ""),
+                    "instruction": instruction_for(item, reply), "answered_at": reply.get("answered_at")})
+    return out
 
 
 def item_path(root: Path, item_id: str) -> Path | None:
@@ -253,6 +333,69 @@ def parse_portfolio(root: Path) -> dict:
     return {"updated": m.group(1).strip() if m else "", "rows": parse_md_table(text)}
 
 
+def investment_wave(root: Path) -> dict[str, int]:
+    """Direction -> rank in the '## First investment wave' numbered list of PORTFOLIO.md."""
+    p = root / PORTFOLIO_REL
+    if not p.exists():
+        return {}
+    text = p.read_text(encoding="utf-8")
+    m = re.search(r"^## First investment wave\s*$(.*?)^(?:##|###) ", text, re.M | re.S)
+    if not m:
+        return {}
+    return {d: int(n) for n, d in re.findall(r"^\s*(\d+)\.\s+`([^`]+)`", m.group(1), re.M)}
+
+
+def enrich_items(root: Path, items: list[dict]) -> list[dict]:
+    prio = {r.get("Direction"): r.get("Priority", "") for r in parse_portfolio(root)["rows"]}
+    for it in items:
+        it["priority"] = item_priority(it)
+        it["code"] = PREFIX.get(it.get("direction", ""), (it.get("direction") or "?")[:6])
+        it["dir_priority"] = prio.get(it.get("direction"), "")
+    return items
+
+
+def active_board(root: Path) -> dict:
+    """ACTIVE directions with item statistics, for the board page."""
+    port = parse_portfolio(root)
+    wave = investment_wave(root)
+    items = load_items(root, days=30)
+    briefs = list_briefs(root)
+    stats: dict[str, dict] = {}
+    for it in items:
+        s = stats.setdefault(it.get("direction"), {"open": 0, "answered": 0, "p1": 0, "last": ""})
+        if it["status"] == "answered":
+            s["answered"] += 1
+        else:
+            s["open"] += 1
+            if item_priority(it) == 1:
+                s["p1"] += 1
+        s["last"] = max(s["last"], it.get("created") or it.get("day") or "")
+    last_brief = {}
+    for b in briefs:
+        last_brief.setdefault(b["direction"], b)
+    rows = []
+    for r in port["rows"]:
+        d = r.get("Direction", "")
+        s = stats.get(d, {"open": 0, "answered": 0, "p1": 0, "last": ""})
+        rows.append({
+            "direction": d, "code": PREFIX.get(d, d[:6]), "lifecycle": r.get("Lifecycle", ""),
+            "priority": r.get("Priority", ""), "updated": r.get("Updated at", ""),
+            "reason": r.get("Reason/condition", ""), "wave": wave.get(d),
+            "open": s["open"], "answered": s["answered"], "p1": s["p1"], "last_item": s["last"],
+            "brief": (last_brief.get(d) or {}).get("path"),
+            "direction_doc": f"docs/research/candidates/{d}/DIRECTION.md",
+        })
+    rows.sort(key=lambda r: (0 if r["lifecycle"] == "ACTIVE" else 1,
+                             DIR_PRIORITY_RANK.get(r["priority"], 9), r["wave"] or 99,
+                             -r["open"], r["updated"]), reverse=False)
+    today = dt.date.today().isoformat()
+    return {"updated": port["updated"], "rows": rows,
+            "totals": {"directions": len(rows), "active": sum(r["lifecycle"] == "ACTIVE" for r in rows),
+                       "parked": sum(r["lifecycle"] == "PARKED" for r in rows),
+                       "open": sum(r["open"] for r in rows),
+                       "answered_today": sum(1 for it in items if it.get("reply") and str(it["reply"].get("answered_at", "")).startswith(today))}}
+
+
 def list_briefs(root: Path) -> list[dict]:
     out = []
     bdir = owner_dir(root) / "briefs"
@@ -397,7 +540,10 @@ class Handler(BaseHTTPRequestHandler):
             if url.path in ("/", "/index.html"):
                 self._send(200, (HERE / "index.html").read_bytes(), "text/html; charset=utf-8")
             elif url.path == "/api/items":
-                self._json({"items": load_items(self.root, int(q.get("days", ["7"])[0])), "today": dt.date.today().isoformat()})
+                items = enrich_items(self.root, load_items(self.root, int(q.get("days", ["7"])[0])))
+                self._json({"items": items, "today": dt.date.today().isoformat()})
+            elif url.path == "/api/active":
+                self._json(active_board(self.root))
             elif url.path == "/api/portfolio":
                 self._json(parse_portfolio(self.root))
             elif url.path == "/api/briefs":

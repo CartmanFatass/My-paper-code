@@ -28,11 +28,39 @@ owner/
   briefs/<direction>/<YYYY-MM-DD>_<object>.md   one-page Chinese brief per valid result
 ```
 
-## Item schema (agents write this)
+## How the loop writes items (the stable contract)
+
+Agents never write item JSON by hand. They call `tools/owner_console/item.py`, which validates the
+fields, assigns the id and writes the file; `tests/tools/owner_console/` pins the schema, and the
+skill `.agents/skills/hmasd-owner-item/SKILL.md` names every insertion point with the exact
+command. The DM definition and the Portfolio skill reference that skill.
+
+| Moment in the loop | kind |
+| --- | --- |
+| an object-tier decision is recorded in the audit ledger | `decision` (executed option in `auto_applied`) |
+| a science card is frozen | `new-card` |
+| a ladder's first card is frozen | `prediction` |
+| a valid result is taken in and its brief written | `brief` |
+| a critic's material dissent is overruled | `critic-dissent` |
+| a recommendation and its runner-up were not clearly separated | `close-call` |
+| Convergence returns a second `RECAST` | `second-recast` |
+| Root records a Portfolio proposal or a DM returns a direction recommendation | `portfolio` |
+
+```
+python tools/owner_console/item.py add --direction <id> --kind <kind> --title "…" [--context "…"] \
+  --option a "…" --option b "…" --recommended a [--auto-applied a] [--evidence <path>] …
+python tools/owner_console/item.py reviews              # at every clean boundary
+python tools/owner_console/item.py mark-answered <id>   # after applying an instruction
+```
+
+## Item schema (what `item.py add` writes)
 
 One JSON file per item at `inbox/<YYYY-MM-DD>/<id>.json`, written at the moment the decision is
 made or the card is frozen, next to the ledger row. `id` is `<YYYYMMDD>-<script prefix>-<nnn>`
-(prefixes in `docs/research/RESEARCH_MAP.md`; Root uses `root`).
+(prefixes in `docs/research/RESEARCH_MAP.md`; Root uses `root`). The console assigns a grading
+priority from `kind` and `tier`: P1 `portfolio`, `second-recast`; P2 `new-card`,
+`critic-dissent`, `close-call`, direction-tier decisions; P3 delegated decisions and predictions;
+P4 briefs and decisions whose `ledger_kind` is `technical`.
 
 ```json
 {

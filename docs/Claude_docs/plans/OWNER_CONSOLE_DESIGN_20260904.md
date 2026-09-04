@@ -177,3 +177,49 @@ owner-side carve-out.
 - Seeded: the 2026-09-04 ledger rows as items, so the console has real content on first open.
 
 Not built: runs view, Windows toast, the per-direction result timeline (phase 3).
+
+## 8. Revision 3 (08:10 PDT): the loop's write contract, the board page, the redesign
+
+Owner feedback: explain how Codex updates the console and where the update node sits, guarantee
+it with a skill or document; the page was cluttered, wanted a separate page for active directions
+with priority ordering, and a redesign.
+
+**Write contract.** The loop no longer writes item JSON by hand. `tools/owner_console/item.py add`
+validates fields, assigns the id and writes the file; `item.py reviews` prints the owner's
+unapplied instructions; `item.py mark-answered` closes them. The insertion points are pinned in a
+new Codex skill, `.agents/skills/hmasd-owner-item/SKILL.md` (one row per moment in the loop with
+the kind and the exact command), referenced from the DM definition and the Portfolio skill.
+Stability is enforced by `tests/tools/owner_console/`: schema validation, id numbering, the CLI
+round trip, and a contract test that the skill names every kind and every command and that the DM
+definition references the skill.
+
+**Insertion points.** Ledger row written → `decision` (same step, one command); card frozen →
+`new-card`, plus `prediction` for a ladder's first card; valid result taken in → `brief`; critic
+overruled → `critic-dissent`; recommendation and runner-up not separated → `close-call`; second
+Convergence `RECAST` → `second-recast`; Root records a Portfolio proposal → `portfolio`. Read point:
+every clean boundary, `item.py reviews`, apply, `mark-answered`.
+
+**Board page (活跃方向).** A separate page: one row per direction, ACTIVE first, sorted by
+priority then first-investment-wave rank then open items (other sorts: open count, recent
+activity); columns wave rank, code and id, priority, open items with P1 count, last item age,
+snapshot age, the Portfolio reason (two-line clamp, click to expand), links to `DIRECTION.md`, the
+latest brief and the direction's inbox. PARKED rows sit below a divider. New endpoint `/api/active`.
+
+**Priority in the inbox.** Items carry a grading priority computed server-side: P1 `portfolio`,
+`second-recast`; P2 `new-card`, `critic-dissent`, `close-call`, direction-tier decisions; P3
+delegated decisions and predictions; P4 briefs and `technical` decisions. The inbox groups by
+these buckets and sorts by direction priority inside each.
+
+**Redesign.** Metaphor: the flight-progress-strip bay of an air-traffic desk, which fits both the
+grading task (rule quickly, in priority order) and the multi-UAV subject. Each item is one strip
+with a coloured holder for its priority bucket; the selected strip unfolds into the grading form;
+the rail filters by priority, kind and direction. Type: Bahnschrift SemiCondensed (the DIN family
+of airport signage, shipped with Windows) for labels and codes, Segoe UI and Microsoft YaHei UI
+for body, Cascadia Mono for ids and times; no web fonts, works offline. Palette: cool board grey
+with white strips, deep teal for actions, vermilion/amber/steel/slate holders for P1–P4, green,
+amber and slate dots for HIGH/MEDIUM/LOW directions; dark scheme follows the OS. Motion is limited
+to the strip unfold and respects reduced-motion. Keyboard: `j/k`, `x`, `a`–`e`, `g`, `Enter`,
+`Ctrl+Enter`, `]` for the evidence pane, which is closed by default so the bay has the width.
+
+Not verified visually in this session: the Chrome extension was not connected, so no screenshot
+was taken; the endpoints and the 12 tests were exercised.

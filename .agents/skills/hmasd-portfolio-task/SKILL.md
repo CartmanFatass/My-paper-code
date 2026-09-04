@@ -81,12 +81,11 @@ and never parks a direction by itself.
   interfaces without fusing. Fusion is proposed only when question, comparator, estimand and next
   object are shown to be materially the same.
 - **Owner items.** Every Portfolio proposal awaiting ratification, and every direction
-  recommendation a DM returns, is one item file
-  `docs/research/portfolio/owner/inbox/<YYYY-MM-DD>/<id>.json` of kind `portfolio` with options
-  `ratify`, `refuse`, `amend` (schema in `docs/research/portfolio/owner/README.md`). Root reads
-  today's and yesterday's `docs/research/portfolio/owner/reviews/<YYYY-MM-DD>.md` at every clean
-  boundary; a `ratify` instruction there is the owner's ratification, `refuse` or `amend` is not.
-  Nothing waits for it.
+  recommendation a DM returns, is one owner item of kind `portfolio` written with
+  `python tools/owner_console/item.py add --direction portfolio --tier portfolio --kind portfolio ...`
+  (`$hmasd-owner-item`; never by hand). At every clean boundary Root runs
+  `python tools/owner_console/item.py reviews`: a `ratify` instruction is the owner's
+  ratification, `refuse` or `amend` is not; then `mark-answered`. Nothing waits for it.
 
 ## Lifecycle semantics
 

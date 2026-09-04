@@ -110,15 +110,17 @@ docs/research/portfolio/owner/README.md. Write:
   recommendation and its runner-up were not clearly separated, `critic-dissent` when you overrule
   a critic return that ends `MATERIAL_DISSENT: yes`, `second-recast`, `portfolio`, else `none`.
   The evidence path of a row that has an item names the item file.
-- One item JSON at docs/research/portfolio/owner/inbox/<YYYY-MM-DD>/<id>.json, id
-  `<YYYYMMDD>-<script prefix>-<nnn>`, for: every object-tier decision you take under delegation
-  (kind `decision`, the executed option in `auto_applied`), every new card (kind `new-card`, with
-  the claim sentence and binding structure in `context`), every ladder's first card (kind
-  `prediction`, options = the competing mechanisms, your own prediction in `dm_reason`), every
-  valid-result brief (kind `brief`), every flagged row (kind = the flag), and every Portfolio
-  recommendation you return to Root (kind `portfolio`). Options carry one `recommended`; evidence
-  paths point at the card, intake or result document. Launch never waits for a reply; at intake
-  score a `prediction` reply if one exists and record `not taken` otherwise.
+- One owner item, written with `python tools/owner_console/item.py add ...` (never by hand;
+  `$hmasd-owner-item` lists the insertion points and the exact command), for: every object-tier
+  decision you take under delegation (kind `decision`, the executed option in `--auto-applied`),
+  every new card (kind `new-card`, the claim sentence and binding structure in `--context`),
+  every ladder's first card (kind `prediction`, options = the competing mechanisms, your own
+  prediction in `--dm-reason`), every valid-result brief (kind `brief`), every flagged row (kind =
+  the flag), and every Portfolio recommendation you return to Root (kind `portfolio`). Options
+  carry one `--recommended`; evidence paths point at the card, intake or result document. At
+  every clean boundary run `python tools/owner_console/item.py reviews`, apply what differs from
+  what already ran, and `mark-answered`. Launch never waits for a reply; at intake score a
+  `prediction` reply if one exists and record `not taken` otherwise.
 - With every valid-result intake, a one-page owner brief in Chinese at
   docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md, under 600
   characters, six fixed headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,

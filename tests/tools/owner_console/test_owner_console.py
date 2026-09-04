@@ -105,6 +105,90 @@ def test_parse_portfolio(tmp_path):
     assert p["rows"][0]["Direction"] == "ucope"
 
 
+def test_new_item_validates_and_numbers_ids(tmp_path):
+    root = make_repo(tmp_path, "2026-09-01")
+    opts = [{"key": "a", "label": "x"}, {"key": "b", "label": "y"}]
+    with pytest.raises(ValueError):
+        srv.new_item(root, "ucope", "nonsense", "t", opts)
+    with pytest.raises(ValueError):
+        srv.new_item(root, "ucope", "decision", "t", opts, recommended="z")
+    p1 = srv.new_item(root, "ucope", "decision", "first", opts, recommended="a", auto_applied="a", day="2026-09-06")
+    p2 = srv.new_item(root, "ucope", "new-card", "second", opts, day="2026-09-06")
+    assert p1.name == "20260906-ucope-001.json" and p2.name == "20260906-ucope-002.json"
+    item = json.loads(p1.read_text(encoding="utf-8"))
+    assert item["status"] == "open" and item["auto_applied"] == "a"
+
+
+def test_pending_instructions_and_mark_answered(tmp_path):
+    import datetime as dt
+    today = dt.date.today().isoformat()
+    root = make_repo(tmp_path, today)
+    assert srv.pending_instructions(root) == []
+    srv.write_reply(root, "20260905-fsd-001", "b", "reason")
+    rows = srv.pending_instructions(root)
+    assert len(rows) == 1 and rows[0]["choice"] == "b" and "supersede" in rows[0]["instruction"]
+    srv.mark_answered(root, "20260905-fsd-001")
+    assert srv.pending_instructions(root) == []
+
+
+def test_item_priority_buckets():
+    assert srv.item_priority({"kind": "portfolio"}) == 1
+    assert srv.item_priority({"kind": "new-card"}) == 2
+    assert srv.item_priority({"kind": "decision", "tier": "direction"}) == 2
+    assert srv.item_priority({"kind": "decision", "tier": "object"}) == 3
+    assert srv.item_priority({"kind": "decision", "ledger_kind": "technical"}) == 4
+    assert srv.item_priority({"kind": "brief"}) == 4
+
+
+def test_active_board_and_wave(tmp_path):
+    import datetime as dt
+    today = dt.date.today().isoformat()
+    root = make_repo(tmp_path, today)
+    (root / "docs/research/portfolio/PORTFOLIO.md").write_text(
+        "# P\n\nUpdated at: 2026-09-04T13:41:57Z\n\n"
+        "| Direction | Lifecycle | Priority | Updated at | Reason/condition |\n| --- | --- | --- | --- | --- |\n"
+        "| flexible_skill_duration | ACTIVE | HIGH | 2026-09-04T12:07:40Z | E3 running |\n"
+        "| orbit_shadow_read | PARKED | LOW | 2026-09-01T09:55:33Z | parked |\n\n"
+        "## First investment wave\n\n1. `finite_resource_relational_inductive_efficiency`\n2. `flexible_skill_duration`\n\n### Execution snapshot\n",
+        encoding="utf-8")
+    assert srv.investment_wave(root)["flexible_skill_duration"] == 2
+    b = srv.active_board(root)
+    assert b["totals"] == {"directions": 2, "active": 1, "parked": 1, "open": 1, "answered_today": 0}
+    fsd = b["rows"][0]
+    assert fsd["direction"] == "flexible_skill_duration" and fsd["code"] == "fsd" and fsd["wave"] == 2 and fsd["open"] == 1
+    assert b["rows"][1]["lifecycle"] == "PARKED"
+
+
+def test_item_cli_add_and_reviews(tmp_path, capsys):
+    import datetime as dt
+    today = dt.date.today().isoformat()
+    root = make_repo(tmp_path, today)
+    spec = importlib.util.spec_from_file_location("owner_console_item", ROOT / "tools/owner_console/item.py")
+    cli = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cli)
+    rc = cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "new-card", "--title", "card X",
+                   "--context", "claim; structure (b)", "--evidence", "docs/x/CARD.md"])
+    assert rc == 0
+    printed = capsys.readouterr().out.strip()
+    item = json.loads((root / printed).read_text(encoding="utf-8"))
+    assert [o["key"] for o in item["options"]] == ["accept", "reject", "revise"]
+    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "decision", "--title", "t"]) == 2
+    srv.write_reply(root, item["id"], "reject", "not MARL")
+    assert cli.main(["--root", str(root), "reviews"]) == 0
+    out = capsys.readouterr().out
+    assert item["id"] in out and "do not launch" in out
+
+
+def test_skill_names_every_kind_and_command():
+    text = (ROOT / ".agents/skills/hmasd-owner-item/SKILL.md").read_text(encoding="utf-8")
+    for kind in srv.KINDS:
+        assert f"`{kind}`" in text, kind
+    for cmd in ("item.py add", "item.py reviews", "item.py mark-answered"):
+        assert cmd in text, cmd
+    dm = (ROOT / ".codex/agents/hmasd-direction-manager.toml").read_text(encoding="utf-8")
+    assert "$hmasd-owner-item" in dm and "item.py add" in dm and "item.py reviews" in dm
+
+
 def test_export_selected(tmp_path):
     import datetime as dt
     today = dt.date.today().isoformat()
