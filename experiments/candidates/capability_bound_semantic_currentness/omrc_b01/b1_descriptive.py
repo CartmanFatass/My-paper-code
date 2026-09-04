@@ -78,6 +78,10 @@ def _read_fraction(value: object, *, label: str) -> Fraction:
 
 
 def _fp32_from_bits(value: object, *, label: str) -> float:
+    if type(value) is str:
+        if len(value) != 8 or any(character not in "0123456789abcdef" for character in value):
+            raise B1DescriptiveError(f"{label} is not an FP32 bit pattern")
+        value = int(value, 16)
     if type(value) is not int or not 0 <= value <= 0xFFFFFFFF:
         raise B1DescriptiveError(f"{label} is not an FP32 bit pattern")
     number = struct.unpack(">f", struct.pack(">I", value))[0]

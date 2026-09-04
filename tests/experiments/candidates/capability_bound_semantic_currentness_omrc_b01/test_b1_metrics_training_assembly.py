@@ -3,6 +3,7 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import asdict
 from functools import lru_cache
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -38,7 +39,6 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.host 
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.ppo import (
     PPOConfig,
     config_digest,
-    ordered_episode_indices,
 )
 
 
@@ -52,7 +52,7 @@ def _training_records(start_update: int = 0, stop_update: int = 48) -> dict[str,
     episodes: list[dict[str, object]] = []
     steps: list[dict[str, object]] = []
     for update in range(start_update, stop_update):
-        for episode_id in range(update * 8, (update + 1) * 8):
+        for episode_id in range(update, update + 1):
             for opportunity_id in range(24):
                 decisions.append({
                     "run_order": 0, "run_name": B1_RUN_NAME, "seed": SEED,
@@ -73,20 +73,19 @@ def _training_records(start_update: int = 0, stop_update: int = 48) -> dict[str,
                 "action_count_refresh": 8, "action_count_safe_fallback": 8,
             })
         for epoch in range(4):
-            for minibatch in range(4):
-                base = update * 8 + 2 * minibatch
+            for minibatch in range(1):
                 steps.append({
                     "run_order": 0, "run_name": B1_RUN_NAME, "seed": SEED,
                     "arm_order": 0, "arm": ARM, "rollout_update": update,
                     "ppo_epoch": epoch, "minibatch_index": minibatch,
-                    "ordered_episode_ids": [base, base + 1],
+                    "ordered_episode_ids": [update],
                     "actor_loss_fp32_bits": "00000000",
                     "value_loss_fp32_bits": "00000000",
                     "entropy_fp32_bits": "00000000",
                     "total_loss_fp32_bits": "00000000",
                     "preclip_gradient_norm_fp32_bits": "00000000",
                     "postclip_gradient_norm_fp32_bits": "00000000",
-                    "optimizer_step_count": update * 16 + epoch * 4 + minibatch + 1,
+                    "optimizer_step_count": update * 4 + epoch + 1,
                     "parameter_sha256_after_step": DIGEST,
                 })
     return {
@@ -104,8 +103,8 @@ def _slice_counts(start_update: int, stop_update: int) -> dict[str, int]:
     rollout_updates = stop_update - start_update
     return {
         "rollout_updates": rollout_updates,
-        "train_episodes": rollout_updates * 8,
-        "train_transitions": rollout_updates * 8 * 152,
+        "train_episodes": rollout_updates,
+        "train_transitions": rollout_updates * 152,
         "evaluation_checkpoints": len(checkpoints),
         "evaluation_episodes": len(checkpoints) * 64,
         "evaluation_transitions": len(checkpoints) * 64 * 152,
@@ -126,7 +125,7 @@ def _json_digest(value: object) -> str:
 @lru_cache(maxsize=1)
 def _full_panel_bindings() -> tuple[str, str]:
     host = DynamicHost(B1_RUN_NAME, SEED)
-    tapes = tuple(host.build_stochastic(addressing.TRAIN, episode) for episode in range(384))
+    tapes = tuple(host.build_stochastic(addressing.TRAIN, episode) for episode in range(48))
     _, action_digest, _ = _training_action_uniforms(tapes, B1_RUN_NAME, SEED)
     return _tape_primitive_digest(tapes), action_digest
 
@@ -144,9 +143,7 @@ def _canonical_slice_evidence(start_update: int, stop_update: int) -> dict[str, 
     for update in range(stop_update):
         epoch_orders: list[tuple[int, ...]] = []
         for epoch in range(4):
-            order, addresses = ordered_episode_indices(
-                B1_RUN_NAME, SEED, update, epoch, address_u64=addressing.u64
-            )
+            order, addresses = (0,), ()
             payload = {
                 "update": update, "epoch": epoch, "order": list(order),
                 "addresses": [list(address) for address in addresses],
@@ -160,7 +157,7 @@ def _canonical_slice_evidence(start_update: int, stop_update: int) -> dict[str, 
             continue
         tapes = tuple(
             host.build_stochastic(addressing.TRAIN, episode)
-            for episode in range(update * 8, (update + 1) * 8)
+            for episode in range(update, update + 1)
         )
         _, chunk_action_digest, uniform_records = _training_action_uniforms(
             tapes, B1_RUN_NAME, SEED
@@ -218,28 +215,28 @@ def _canonical_slice_evidence(start_update: int, stop_update: int) -> dict[str, 
                 "nonzero_outside_ledger_rows": [],
             })
         for epoch, order in enumerate(epoch_orders):
-            for minibatch in range(4):
-                selected = order[2 * minibatch : 2 * minibatch + 2]
+            for minibatch in range(1):
+                selected = order
                 steps.append({
                     "run_order": 0, "run_name": B1_RUN_NAME, "seed": SEED,
                     "arm_order": 0, "arm": ARM, "rollout_update": update,
                     "ppo_epoch": epoch, "minibatch_index": minibatch,
-                    "ordered_episode_ids": [update * 8 + index for index in selected],
+                    "ordered_episode_ids": [update + index for index in selected],
                     "actor_loss_fp32_bits": "00000000",
                     "value_loss_fp32_bits": "00000000",
                     "entropy_fp32_bits": "00000000",
                     "total_loss_fp32_bits": "00000000",
                     "preclip_gradient_norm_fp32_bits": "00000000",
                     "postclip_gradient_norm_fp32_bits": "00000000",
-                    "optimizer_step_count": update * 16 + epoch * 4 + minibatch + 1,
+                    "optimizer_step_count": update * 4 + epoch + 1,
                     "parameter_sha256_after_step": DIGEST,
                 })
         optimizer_digest = hashlib.sha256(f"optimizer:{update}".encode()).hexdigest()
         counters = {
-            "rollout_updates": update + 1, "adam_steps": (update + 1) * 16,
-            "train_episodes": (update + 1) * 8,
-            "train_transitions": (update + 1) * 8 * 152,
-            "train_decisions": (update + 1) * 8 * 24,
+            "rollout_updates": update + 1, "adam_steps": (update + 1) * 4,
+            "train_episodes": update + 1,
+            "train_transitions": (update + 1) * 152,
+            "train_decisions": (update + 1) * 24,
         }
         rollouts.append({
             "update_before": update, "update_after": update + 1,
@@ -250,12 +247,12 @@ def _canonical_slice_evidence(start_update: int, stop_update: int) -> dict[str, 
                 "draw_count_observed": tape.generation_audit.draw_count,
             } for tape in tapes],
             "raw_rollout": {
-                "observation_shape": [8, 152, 168],
+                "observation_shape": [1, 152, 168],
                 "actions": action_traces, "uniforms": uniform_records,
-                "uniforms_consumed_rows": [decision_rows[:] for _ in range(8)],
-                "forced_wait_rows": [forced_rows[:] for _ in range(8)],
+                "uniforms_consumed_rows": [decision_rows[:]],
+                "forced_wait_rows": [forced_rows[:]],
                 "rewards": reward_traces,
-                "terminated_rows": [[151] for _ in range(8)],
+                "terminated_rows": [[151]],
             },
             "chunk_action_uniform_digest": chunk_action_digest,
             "counters_after": counters,
@@ -478,9 +475,9 @@ def test_test_only_assembly_rehydrates_training_and_computes_direct_mechanical()
         telemetry_groups=[[_telemetry()]], shared_tables=shared,
         policy_tables=policy, test_only=True,
     )
-    assert len(result["tables"]["training_decisions"]) == 9_216
-    assert len(result["tables"]["training_episodes"]) == 384
-    assert len(result["tables"]["optimizer_steps"]) == 768
+    assert len(result["tables"]["training_decisions"]) == 1_152
+    assert len(result["tables"]["training_episodes"]) == 48
+    assert len(result["tables"]["optimizer_steps"]) == 192
     assert result["tables"]["resource_admissions"][0]["run_order"] == 0
     assert result["tables"]["telemetry"][0]["attempt_order"] == 0
     assert [row["seed"] for row in result["tables"]["raw_competence"]] == [21101, 21121, 21143]
@@ -562,8 +559,8 @@ def test_three_fresh_slices_join_telemetry_without_last_value_laundering() -> No
     )
     assert telemetry_work == {
         "name": "21101:0:telemetry-work",
-        "expected_count": 97_280,
-        "observed_count": 97_280,
+        "expected_count": 46_208,
+        "observed_count": 46_208,
     }
     assert [row["attempt_order"] for row in result["tables"]["telemetry"]] == [0, 1, 2]
 
@@ -758,10 +755,10 @@ def test_pointer_audits_reread_worker_source_and_reject_descriptor_tamper(
         "scientific_branch": None,
     }
     payload = canonical_json_bytes(wrapper) + b"\n"
-    relative = f"workers/00-seed-{SEED}-{ARM}/slice-00-48/result.json"
+    relative = f"workers/00-seed-{SEED}-{ARM}/slice-00-48/result.json.gz"
     path = tmp_path / relative
     path.parent.mkdir(parents=True)
-    path.write_bytes(payload)
+    path.write_bytes(gzip.compress(payload, compresslevel=9, mtime=0))
     sources = [[{
         "source_relative_path": relative,
         "source_file_sha256": hashlib.sha256(payload).hexdigest(),

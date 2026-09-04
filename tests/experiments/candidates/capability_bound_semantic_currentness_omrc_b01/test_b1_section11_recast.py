@@ -20,6 +20,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from fractions import Fraction
+import json
 from pathlib import Path
 import struct
 
@@ -67,6 +68,7 @@ from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01
     _laws,
     _mechanical,
     _null_packet,
+    _summary_binding,
     _tables,
 )
 
@@ -245,20 +247,23 @@ def test_published_manifest_carries_descriptive_curves_and_keeps_derived_nulls(
     inventory = materialize_metrics_only_tables(
         staging, _tables(), allowed_root=tmp_path, allow_test_only=True
     )
-    artifact_inventory = build_complete_artifact_inventory(staging)
     descriptive = compute_b1_descriptive_curves(**_smoke_descriptive_inputs())
+    summary_binding = _summary_binding(staging, inventory, descriptive)
+    artifact_inventory = build_complete_artifact_inventory(staging)
     manifest = build_metrics_only_manifest(
         identity=identity, b0_evidence=b0, table_inventory=inventory,
         law_digests=_laws(), artifact_inventory=artifact_inventory,
         literal_nulls=_null_packet(), mechanical=_mechanical(),
-        incident_references=[], test_only=True,
-        descriptive_curves=descriptive,
+        incident_references=[], summary_binding=summary_binding, test_only=True,
     )
     validated = validate_metrics_only_manifest(
         manifest, root=staging, allow_test_only=True
     )
 
-    published = validated["descriptive_curves"]
+    summary = json.loads(
+        (staging / "summary.json").read_text(encoding="ascii")
+    )
+    published = summary["descriptive_curves"]
     assert published["status"] == DESCRIPTIVE_STATUS_PUBLISHED
     assert published["heldout_return_curves"], "descriptive curves must not be empty"
     assert published["exposure_line"], "the exposure line must be published"
@@ -272,11 +277,14 @@ def test_published_manifest_carries_descriptive_curves_and_keeps_derived_nulls(
     assert all(value is None for value in validated["derived_fields"].values())
     assert validated["formal_analysis_record"]["gating"] is False
 
-    tampered = deepcopy(manifest)
-    tampered["descriptive_curves"]["status"] = "SOMETHING_ELSE"
+    summary["descriptive_curves"]["status"] = "SOMETHING_ELSE"
+    (staging / "summary.json").write_bytes(
+        json.dumps(summary, sort_keys=True, separators=(",", ":")).encode("ascii")
+        + b"\n"
+    )
     with pytest.raises(Exception):
         validate_metrics_only_manifest(
-            tampered, root=staging, allow_test_only=True
+            manifest, root=staging, allow_test_only=True
         )
 
 

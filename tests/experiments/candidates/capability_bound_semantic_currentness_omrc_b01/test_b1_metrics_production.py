@@ -3,6 +3,7 @@ from __future__ import annotations
 import inspect
 from copy import deepcopy
 from dataclasses import asdict
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -12,8 +13,12 @@ import pytest
 
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import addressing
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_contract import (
+    B1_SLOT_ORDER,
+)
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_engine import (
-    B1CheckpointBinding, capture_b1_checkpoint, save_b1_checkpoint,
+    B1_RAW_EVIDENCE_SCHEMA, B1CheckpointBinding, capture_b1_checkpoint,
+    save_b1_checkpoint,
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_artifact import (
     make_b1_incident_lineage_witness,
@@ -27,6 +32,9 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.check
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.model import (
     CommonRecurrentActorCritic,
 )
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.host import (
+    DynamicHost,
+)
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.ppo import (
     PPOConfig, PPOCounters, RecurrentPPOTrainer, config_digest, make_adam,
 )
@@ -39,22 +47,27 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_me
     _require_reconstructed_rows,
     _validate_relocated_training_admission,
     _resolve_descriptor_source,
+    _compress_result_dumps,
+    _remove_uncompressed_result_dumps,
     assemble_and_publish_b1_metrics,
     assemble_and_publish_b1_metrics_test_only,
+    reconstruct_b1_mechanical_from_artifact,
     reread_materialized_digest_records,
     stage_reviewed_b0_evidence,
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import (
     _validate_materialized_b0,
     MetricsArtifactError,
+    TABLE_KEY_FIELDS,
     validate_metrics_only_manifest,
+    validate_prospective_output_cap,
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_training_assembly import (
     assemble_b1_metrics_training,
     finalize_audit_table_bindings,
 )
 from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_metrics_rehydrate import (
-    ATTEMPT_ID, canonical_raw_slice_groups,
+    ATTEMPT_ID,
 )
 from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_metrics_training_assembly import (
     _admission as training_admission,
@@ -268,6 +281,8 @@ def _add_checkpoint_slot(staging: Path, raw: dict, index: int) -> None:
             optimizer=make_adam(model), address_u64=addressing.u64,
         )
         trainer.counters = PPOCounters(
+            # Checkpoint envelopes preserve the frozen PPO contract even when
+            # the surrounding TEST_ONLY publication uses one episode/update.
             rollout_updates=update, adam_steps=update * 16,
             train_episodes=update * 8, train_transitions=update * 8 * 152,
             train_decisions=update * 8 * 24,
@@ -326,6 +341,8 @@ def _write_direct_invocations(
             staging / "workers" / tag / invocation / "result.json",
             {"raw_evidence": raw},
         )
+    _compress_result_dumps(staging)
+    _remove_uncompressed_result_dumps(staging)
 
 
 def test_formal_production_api_accepts_no_tables_models_fact_booleans_or_factories() -> None:
@@ -588,22 +605,76 @@ def test_reviewed_b0_source_is_snapshotted_once_before_copy(
     )
 
 
+def test_result_dumps_publish_as_deterministic_gzip_with_decoded_locators(
+    tmp_path: Path,
+) -> None:
+    roots = (tmp_path / "a", tmp_path / "b")
+    payloads = {}
+    for root in roots:
+        worker = root / "workers/slot/slice-00-48/result.json"
+        replay = root / "policy-replay/00/result.json"
+        _write_json(worker, {"raw_evidence": {"value": 1}})
+        _write_json(replay, {"policy_decisions": [{"value": 2}]})
+        payloads[root] = worker.read_bytes()
+        _compress_result_dumps(root)
+    first = roots[0] / "workers/slot/slice-00-48/result.json.gz"
+    second = roots[1] / "workers/slot/slice-00-48/result.json.gz"
+    assert first.read_bytes() == second.read_bytes()
+    assert first.read_bytes()[3] & 0x08 == 0  # empty gzip filename
+    assert first.read_bytes()[4:8] == b"\0\0\0\0"  # mtime=0
+    assert gzip.decompress(first.read_bytes()) == payloads[roots[0]]
+    descriptor = {
+        "source_relative_path": first.relative_to(roots[0]).as_posix(),
+        "source_file_sha256": hashlib.sha256(payloads[roots[0]]).hexdigest(),
+        "json_pointer": "/raw_evidence",
+    }
+    assert _resolve_descriptor_source(roots[0], descriptor) == {"value": 1}
+    _remove_uncompressed_result_dumps(roots[0])
+    assert not (roots[0] / "workers/slot/slice-00-48/result.json").exists()
+    assert first.is_file()
+
+
 def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
     tmp_path: Path,
 ) -> None:
-    groups = deepcopy(canonical_raw_slice_groups.__wrapped__())
+    training = training_raw_slice()
+    training.update({
+        "schema": B1_RAW_EVIDENCE_SCHEMA, "attempt_id": ATTEMPT_ID,
+        "scientific_branch": None, "train_tapes": [],
+    })
+    training["full_bindings"].update({
+        "train_episode_ids_sha256": hashlib.sha256(
+            canonical_json_bytes(list(range(48)))
+        ).hexdigest(),
+        "implementation_commit": "1" * 40,
+        "source_conformance_sha256": "2" * 64,
+    })
+    heldout_records = {}
+    for seed in sorted({seed for seed, _ in B1_SLOT_ORDER}):
+        host = DynamicHost(addressing.B1_RUN, seed)
+        heldout_records[seed] = [{
+            "identity": asdict(tape.identity),
+            "primitive_digest_observed": tape.primitive_digest,
+            "draw_digest_observed": tape.generation_audit.draw_digest,
+            "draw_count_observed": tape.generation_audit.draw_count,
+        } for tape in (
+            host.build_stochastic(addressing.EVAL_STOCHASTIC, 0),
+            host.build_motif(0),
+        )]
+    groups = tuple(({
+        "schema": B1_RAW_EVIDENCE_SCHEMA, "attempt_id": ATTEMPT_ID,
+        "run_name": addressing.B1_RUN, "seed": seed, "arm": arm,
+        "scientific_branch": None,
+        "slice": {"start_update": 0, "stop_update": 48},
+        "full_bindings": deepcopy(training["full_bindings"]),
+        "train_tapes": [], "evaluation_tapes": deepcopy(heldout_records[seed]),
+    },) for seed, arm in B1_SLOT_ORDER)
+    training["evaluation_tapes"] = deepcopy(heldout_records[training["seed"]])
+    groups = ((training,), *groups[1:])
     staging = tmp_path / ".metrics.partial-test"
     staging.mkdir()
     for index in (1, 5, 9):
         _add_checkpoint_slot(staging, groups[index][0], index)
-    training = training_raw_slice()
-    for field in (
-        "training_records", "rollouts", "slice_counts", "evaluations",
-        "mechanical_direct", "final_counters", "final_model_parameter_digest",
-        "final_optimizer_digest", "final_minibatch_order_digest",
-    ):
-        groups[0][0][field] = deepcopy(training[field])
-    groups[0][0]["scientific_branch"] = None
     _add_checkpoint_slot(staging, groups[0][0], 0)
 
     tag = "00-seed-21101-STRUCT-CURRENTNESS-GRU"
@@ -650,11 +721,82 @@ def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
     )
     manifest = json.loads((published / "manifest.json").read_text(encoding="ascii"))
     assert len(manifest["table_inventory"]) == 15
+    counts = {row["table"]: row["row_count"] for row in manifest["table_inventory"]}
+    assert counts["training_episodes"] == 48
+    assert counts["training_decisions"] == 48 * 24
+    assert counts["optimizer_steps"] == 48 * 4
+    assert counts["tape_transitions"] == 3 * 2 * 152
+    assert counts["evaluator_decision_truth"] == 3 * 2 * 24
     assert manifest["schema"].endswith("test_only_v1")
     assert manifest["convergence_required"] is False
     assert manifest["formal_analysis_bound"] is False
     assert manifest["scientific_branch"] is None
-    assert manifest["mechanical"]["inputs"]["authority"] == "BOUND_ARTIFACT_EVIDENCE"
+    inputs = manifest["mechanical"]["inputs"]
+    assert inputs["authority"] == "BOUND_ARTIFACT_EVIDENCE"
+    assert inputs["raw_worker_sources"]
+    assert all(
+        source["source_relative_path"].endswith("/result.json.gz")
+        for group in inputs["raw_worker_sources"] for source in group
+    )
+    summary = json.loads((published / "summary.json").read_text(encoding="ascii"))
+    assert summary["schema"] == "cbsc_omrc_b01_b1_result_rule_summary_v1"
+    assert (published / "summary.json").read_bytes() == canonical_json_bytes(summary) + b"\n"
+    assert summary["descriptive_curves"]["raw_competence_flags"]
+    assert not list(published.glob("workers/*/slice-*/result.json"))
+    assert not list(published.glob("policy-replay/*/result.json"))
+    assert list(published.glob("workers/*/slice-*/result.json.gz"))
+    for group in inputs["raw_worker_sources"]:
+        for source in group:
+            assert _resolve_descriptor_source(published, source)
+    audit_rows = [
+        json.loads(line) for line in
+        (published / "metrics/raw/audits.jsonl").read_text(encoding="ascii").splitlines()
+    ]
+    direct_audits = [
+        row for row in audit_rows
+        if str(row["authority_type"]).startswith("DIRECT_RAW_FACT")
+    ]
+    assert direct_audits
+    assert all(
+        row["source_relative_path"].endswith("/result.json.gz")
+        for row in direct_audits
+    )
+    assert all(
+        (published / row["source_relative_path"]).is_file()
+        for row in direct_audits
+    )
+    published_tables = {
+        descriptor["table"]: [
+            json.loads(line) for line in
+            (published / descriptor["relative_path"]).read_text(
+                encoding="ascii"
+            ).splitlines()
+        ]
+        for descriptor in manifest["table_inventory"]
+    }
+    assert reconstruct_b1_mechanical_from_artifact(
+        root=published,
+        descriptor=inputs,
+        tables=published_tables,
+        table_inventory=manifest["table_inventory"],
+        artifact_inventory=manifest["artifact_inventory"],
+        source_identity=manifest["source_identity"],
+        test_only=True,
+    ) == manifest["mechanical"]
+    assert len(list(published.glob("arm-seeds/*/checkpoint-update-*.pt"))) == 16
+    assert [row["table"] for row in manifest["table_inventory"]] == list(TABLE_KEY_FIELDS)
+    for descriptor in manifest["table_inventory"]:
+        assert len(published_tables[descriptor["table"]]) == descriptor["row_count"]
+    assert list((published / "b0-reviewed-evidence").rglob("*"))
+    assert list((published / "admissions").glob("*.json"))
+    assert list(published.glob("workers/*/slice-*/telemetry.json"))
+    actual_bytes = sum(path.stat().st_size for path in published.rglob("*") if path.is_file())
+    prospective = validate_prospective_output_cap(
+        artifact_inventory=manifest["artifact_inventory"], manifest=manifest
+    )
+    assert prospective["total_bytes"] <= 536_870_912
+    assert actual_bytes == manifest["durable_size_bytes"]
+    assert actual_bytes <= 536_870_912
     assert manifest["formal_capacity_projection"]["performance_disposition"] == "REPAIR_REQUIRED"
     assert manifest["formal_capacity_projection"]["depends_on_observed_or_test_bytes"] is False
 
@@ -686,6 +828,26 @@ def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
     artifact_descriptor["sha256"] = raw_sha
     artifact_descriptor["byte_count"] = len(raw_payload)
     manifest["mechanical"]["raw_competence_by_seed"][0] = deepcopy(raw_rows[0])
+    summary_binding = next(
+        row for row in summary["raw_table_bindings"]
+        if row["table"] == "raw_competence"
+    )
+    summary_binding["sha256"] = raw_sha
+    summary_binding["byte_count"] = len(raw_payload)
+    summary["descriptive_curves"]["raw_competence_flags"][0][
+        "raw_competence_pass"
+    ] = raw_rows[0]["raw_competence_pass"]
+    summary_payload = canonical_json_bytes(summary) + b"\n"
+    (published / "summary.json").write_bytes(summary_payload)
+    summary_sha = hashlib.sha256(summary_payload).hexdigest()
+    manifest["summary"]["sha256"] = summary_sha
+    manifest["summary"]["byte_count"] = len(summary_payload)
+    summary_artifact = next(
+        row for row in manifest["artifact_inventory"]
+        if row["relative_path"] == "summary.json"
+    )
+    summary_artifact["sha256"] = summary_sha
+    summary_artifact["byte_count"] = len(summary_payload)
     manifest["mechanical"]["inputs"]["artifact_inventory_sha256"] = hashlib.sha256(
         canonical_json_bytes(manifest["artifact_inventory"])
     ).hexdigest()

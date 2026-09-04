@@ -10,6 +10,7 @@ from __future__ import annotations
 from collections import defaultdict
 from copy import deepcopy
 from fractions import Fraction
+import gzip
 import hashlib
 import json
 import math
@@ -233,7 +234,7 @@ def _training_chunk(value: object) -> TrainingExposureRecords:
 
 
 def _merge_training_group(
-    group: Sequence[Mapping[str, Any]], identity: tuple[int, str]
+    group: Sequence[Mapping[str, Any]], identity: tuple[int, str], *, test_only: bool,
 ) -> TrainingExposureRecords:
     expected_start = 0
     chunks: list[TrainingExposureRecords] = []
@@ -259,6 +260,35 @@ def _merge_training_group(
         expected_start = stop
     if expected_start != 48:
         raise B1MetricsTrainingAssemblyError("arm-seed training slice coverage does not reach update 48")
+    if test_only:
+        merged = TrainingExposureRecords(
+            tuple(row for chunk in chunks for row in chunk.training_decisions),
+            tuple(row for chunk in chunks for row in chunk.training_episodes),
+            tuple(row for chunk in chunks for row in chunk.optimizer_steps),
+        )
+        decision_keys = sorted(
+            (row.get("training_episode_id"), row.get("opportunity_id"))
+            for row in merged.training_decisions
+        )
+        episode_ids = sorted(row.get("training_episode_id") for row in merged.training_episodes)
+        step_keys = sorted(
+            (row.get("rollout_update"), row.get("ppo_epoch"), row.get("minibatch_index"))
+            for row in merged.optimizer_steps
+        )
+        if (
+            decision_keys != [
+                (update, opportunity)
+                for update in range(48) for opportunity in range(OPPORTUNITY_COUNT)
+            ]
+            or episode_ids != list(range(48))
+            or step_keys != [
+                (update, epoch, 0) for update in range(48) for epoch in range(4)
+            ]
+        ):
+            raise B1MetricsTrainingAssemblyError(
+                "TEST_ONLY training records must be exactly 48 updates x 1 episode"
+            )
+        return merged
     try:
         return merge_training_exposure_slices(
             chunks, start_update=0, stop_update=48, require_full_b1=True
@@ -596,6 +626,15 @@ def _competence_inputs(
     return output
 
 
+def reconstruct_raw_competence_from_tables(
+    tables: Mapping[str, object], *, test_only: bool,
+) -> list[dict[str, Any]]:
+    """Independently rebuild the three RAW gates from their canonical tables."""
+
+    inputs = _competence_inputs(tables, tables, test_only=test_only)
+    return [compute_raw_competence(record) for record in inputs]
+
+
 def _direct_mechanical(raw: Mapping[str, Any], prefix: str) -> Mapping[str, Any]:
     direct = raw.get("mechanical_direct")
     if not isinstance(direct, Mapping) or frozenset(direct) != _DIRECT_FIELDS:
@@ -624,23 +663,28 @@ def _raw_facts(
     telemetry_rows: Sequence[Mapping[str, Any]],
     shared_tables: Mapping[str, object],
     policy_tables: Mapping[str, object],
+    test_only: bool,
 ) -> dict[str, Any]:
+    episodes_per_update = 1 if test_only else 8
+    adam_steps_per_update = 4 if test_only else 16
     slot_keys = [_key_text(0, seed, ARM_ORDER[arm]) for seed, arm in identities]
     decisions = [row for records in merged for row in records.training_decisions]
     episodes = [row for records in merged for row in records.training_episodes]
     steps = [row for records in merged for row in records.optimizer_steps]
     expected_decision_keys = [
         _key_text(0, seed, ARM_ORDER[arm], episode, opportunity)
-        for seed, arm in identities for episode in range(384) for opportunity in range(24)
+        for seed, arm in identities
+        for episode in range(48 * episodes_per_update)
+        for opportunity in range(24)
     ]
     expected_episode_keys = [
         _key_text(0, seed, ARM_ORDER[arm], episode)
-        for seed, arm in identities for episode in range(384)
+        for seed, arm in identities for episode in range(48 * episodes_per_update)
     ]
     expected_step_keys = [
         _key_text(0, seed, ARM_ORDER[arm], update, epoch, minibatch)
         for seed, arm in identities for update in range(48)
-        for epoch in range(4) for minibatch in range(4)
+        for epoch in range(4) for minibatch in range(adam_steps_per_update // 4)
     ]
     observed_decision_keys = [
         _key_text(row["run_order"], row["seed"], row["arm_order"],
@@ -788,19 +832,26 @@ def _raw_facts(
                         "active_modes": active_modes,
                     })
         work_bindings.extend([
-            {"name": f"{seed}:{arm_order}:train-episodes", "expected_count": 384,
+            {"name": f"{seed}:{arm_order}:train-episodes",
+             "expected_count": 48 * episodes_per_update,
              "observed_count": train_episodes},
-            {"name": f"{seed}:{arm_order}:train-transitions", "expected_count": 58_368,
+            {"name": f"{seed}:{arm_order}:train-transitions",
+             "expected_count": 48 * episodes_per_update * EPISODE_TRANSITIONS,
              "observed_count": train_transitions},
             {"name": f"{seed}:{arm_order}:evaluation-episodes", "expected_count": 256,
              "observed_count": eval_episodes},
             {"name": f"{seed}:{arm_order}:evaluation-transitions", "expected_count": 38_912,
              "observed_count": eval_transitions},
-            {"name": f"{seed}:{arm_order}:training-decision-rows", "expected_count": 9_216,
+            {"name": f"{seed}:{arm_order}:training-decision-rows",
+             "expected_count": 48 * episodes_per_update * OPPORTUNITY_COUNT,
              "observed_count": len(records.training_decisions)},
-            {"name": f"{seed}:{arm_order}:optimizer-rows", "expected_count": 768,
+            {"name": f"{seed}:{arm_order}:optimizer-rows",
+             "expected_count": 48 * adam_steps_per_update,
              "observed_count": len(records.optimizer_steps)},
-            {"name": f"{seed}:{arm_order}:telemetry-work", "expected_count": 97_280,
+            {"name": f"{seed}:{arm_order}:telemetry-work",
+             "expected_count": (
+                 48 * episodes_per_update * EPISODE_TRANSITIONS + 38_912
+             ),
              "observed_count": sum(
                  row["measurement"]["scientific_work_transitions"]
                  for row in telemetry_index[(seed, arm_order)]
@@ -1061,7 +1112,7 @@ def _source_descriptor(value: object) -> dict[str, str]:
         or relative.startswith("/") or any(
             part in {"", ".", ".."} for part in relative.split("/")
         )
-        or not relative.endswith("/result.json")
+        or not relative.endswith("/result.json.gz")
     ):
         raise B1MetricsTrainingAssemblyError("raw source relative path differs")
     if type(pointer) is not str or pointer != "/raw_evidence":
@@ -1120,7 +1171,7 @@ def _validate_source_groups(
                 f"slice-{interval['start_update']:02d}-{interval['stop_update']:02d}/"
                 "result.json"
             )
-            if source["source_relative_path"] != expected_relative:
+            if source["source_relative_path"] != expected_relative + ".gz":
                 raise B1MetricsTrainingAssemblyError(
                     "raw source path differs from exact worker invocation"
                 )
@@ -1164,7 +1215,9 @@ def _pointer_audit_row(
 def _direct_audit_rows(
     raw_groups: Sequence[Sequence[Mapping[str, Any]]],
     source_groups: Sequence[Sequence[Mapping[str, str]]],
+    *, test_only: bool,
 ) -> list[dict[str, Any]]:
+    episodes_per_update = 1 if test_only else 8
     rows: list[dict[str, Any]] = []
     expected_config = config_digest(PPOConfig())
     expected_source: str | None = None
@@ -1264,7 +1317,7 @@ def _direct_audit_rows(
                 checkpoint for checkpoint in (12, 24, 48) if start < checkpoint <= stop
             ]
             for name, expected in (
-                ("train_transitions", (stop - start) * 8 * 152),
+                ("train_transitions", (stop - start) * episodes_per_update * 152),
                 ("evaluation_transitions", len(checkpoints) * 64 * 152),
             ):
                 add(
@@ -1348,6 +1401,7 @@ def _rollout_rng_audit_rows(
     *, raw_groups: Sequence[Sequence[Mapping[str, Any]]],
     merged: Sequence[TrainingExposureRecords],
     source_groups: Sequence[Sequence[Mapping[str, str]]],
+    test_only: bool,
 ) -> list[dict[str, Any]]:
     """Rebuild every training tape/RNG/ledger/order fact from frozen primitives."""
 
@@ -1357,6 +1411,8 @@ def _rollout_rng_audit_rows(
         row for row in range(EPISODE_TRANSITIONS) if row not in decision_rows
     ]
     empty_order_digest = hashlib.sha256(b"").hexdigest()
+    episodes_per_update = 1 if test_only else 8
+    minibatches_per_epoch = 1 if test_only else 4
     for group, exposure, provenance_group in zip(
         raw_groups, merged, source_groups, strict=True
     ):
@@ -1407,7 +1463,10 @@ def _rollout_rng_audit_rows(
                 last_update = update
                 tapes = tuple(
                     host.build_stochastic(addressing.TRAIN, episode_id)
-                    for episode_id in range(update * 8, (update + 1) * 8)
+                    for episode_id in range(
+                        update * episodes_per_update,
+                        (update + 1) * episodes_per_update,
+                    )
                 )
                 expected_tapes = [
                     {
@@ -1448,7 +1507,10 @@ def _rollout_rng_audit_rows(
                         "ROLLOUT_RECORD_SCHEMA_MISMATCH", source, f"update-{update}:raw"
                     )
                 observed_uniforms = raw_rollout.get("uniforms")
-                if not isinstance(observed_uniforms, list) or len(observed_uniforms) != 192:
+                if (
+                    not isinstance(observed_uniforms, list)
+                    or len(observed_uniforms) != episodes_per_update * OPPORTUNITY_COUNT
+                ):
                     _rollout_adverse(
                         "ACTION_UNIFORM_IDENTITY_MISMATCH", source,
                         f"update-{update}:inventory",
@@ -1501,14 +1563,17 @@ def _rollout_rng_audit_rows(
                 )
                 _require_rollout_equal(
                     "OBSERVATION_SHAPE_MISMATCH", source, f"update-{update}",
-                    [8, EPISODE_TRANSITIONS, 168], raw_rollout.get("observation_shape"),
+                    [episodes_per_update, EPISODE_TRANSITIONS, 168],
+                    raw_rollout.get("observation_shape"),
                 )
 
                 action_traces = raw_rollout.get("actions")
                 reward_traces = raw_rollout.get("rewards")
                 if (
-                    not isinstance(action_traces, list) or len(action_traces) != 8
-                    or not isinstance(reward_traces, list) or len(reward_traces) != 8
+                    not isinstance(action_traces, list)
+                    or len(action_traces) != episodes_per_update
+                    or not isinstance(reward_traces, list)
+                    or len(reward_traces) != episodes_per_update
                 ):
                     _rollout_adverse(
                         "ROLLOUT_RECORD_SCHEMA_MISMATCH", source,
@@ -1622,10 +1687,13 @@ def _rollout_rng_audit_rows(
                     )
 
                 for epoch in range(4):
-                    order, addresses = ordered_episode_indices(
-                        B1_RUN_NAME, seed, update, epoch,
-                        address_u64=addressing.u64,
-                    )
+                    if test_only:
+                        order, addresses = (0,), ()
+                    else:
+                        order, addresses = ordered_episode_indices(
+                            B1_RUN_NAME, seed, update, epoch,
+                            address_u64=addressing.u64,
+                        )
                     payload = {
                         "update": update, "epoch": epoch, "order": list(order),
                         "addresses": [list(address) for address in addresses],
@@ -1637,13 +1705,13 @@ def _rollout_rng_audit_rows(
                     order_digest = hashlib.sha256(
                         bytes.fromhex(order_digest) + encoded
                     ).hexdigest()
-                    for minibatch in range(4):
-                        selected = order[2 * minibatch : 2 * minibatch + 2]
+                    for minibatch in range(minibatches_per_epoch):
+                        selected = order if test_only else order[2 * minibatch : 2 * minibatch + 2]
                         step = optimizer[(update, epoch, minibatch)]
                         _require_rollout_equal(
                             "MINIBATCH_ORDER_ROWS_MISMATCH", source,
                             f"update-{update}:epoch-{epoch}:minibatch-{minibatch}",
-                            [update * 8 + index for index in selected],
+                            [update * episodes_per_update + index for index in selected],
                             step["ordered_episode_ids"],
                         )
                 _require_rollout_equal(
@@ -1652,16 +1720,20 @@ def _rollout_rng_audit_rows(
                 )
                 expected_counters = {
                     "rollout_updates": update + 1,
-                    "adam_steps": (update + 1) * 16,
-                    "train_episodes": (update + 1) * 8,
-                    "train_transitions": (update + 1) * 8 * EPISODE_TRANSITIONS,
-                    "train_decisions": (update + 1) * 8 * OPPORTUNITY_COUNT,
+                    "adam_steps": (update + 1) * 4 * minibatches_per_epoch,
+                    "train_episodes": (update + 1) * episodes_per_update,
+                    "train_transitions": (
+                        (update + 1) * episodes_per_update * EPISODE_TRANSITIONS
+                    ),
+                    "train_decisions": (
+                        (update + 1) * episodes_per_update * OPPORTUNITY_COUNT
+                    ),
                 }
                 _require_rollout_equal(
                     "TRAINING_COUNTER_MISMATCH", source, f"update-{update}",
                     expected_counters, record.get("counters_after"),
                 )
-                last_step = optimizer[(update, 3, 3)]
+                last_step = optimizer[(update, 3, minibatches_per_epoch - 1)]
                 _require_rollout_equal(
                     "MODEL_PARAMETER_CHAIN_MISMATCH", source, f"update-{update}",
                     last_step["parameter_sha256_after_step"],
@@ -1752,10 +1824,11 @@ def _audit_rows(
     source_groups: Sequence[Sequence[Mapping[str, str]]],
     authority_tables: Mapping[str, list[Mapping[str, Any]]],
     rollout_audit_rows: Sequence[Mapping[str, Any]],
+    test_only: bool,
 ) -> list[dict[str, Any]]:
     rows = [
         *_table_audit_rows(authority_tables),
-        *_direct_audit_rows(raw_groups, source_groups),
+        *_direct_audit_rows(raw_groups, source_groups, test_only=test_only),
         *(dict(row) for row in rollout_audit_rows),
     ]
     rows.sort(key=lambda row: (
@@ -1846,6 +1919,7 @@ def finalize_audit_pointer_bindings(
         if (
             type(relative) is not str or type(pointer) is not str
             or type(row["source_file_sha256"]) is not str
+            or not relative.endswith("/result.json.gz")
             or not pointer.startswith("/raw_evidence/")
         ):
             raise B1MetricsTrainingAssemblyError("direct raw pointer schema differs")
@@ -1857,7 +1931,13 @@ def finalize_audit_pointer_bindings(
                 raise B1MetricsTrainingAssemblyError(
                     "direct raw source escapes source root"
                 ) from exc
-            payload = source.read_bytes()
+            try:
+                stored = source.read_bytes()
+                payload = gzip.decompress(stored)
+            except (OSError, EOFError) as exc:
+                raise B1MetricsTrainingAssemblyError(
+                    "direct raw worker result is unreadable"
+                ) from exc
             if hashlib.sha256(payload).hexdigest() != row["source_file_sha256"]:
                 raise B1MetricsTrainingAssemblyError("direct raw source file SHA differs")
             try:
@@ -2034,7 +2114,7 @@ def assemble_b1_metrics_training(
     else:
         source_groups = _validate_source_groups(raw_source_groups, raw_groups)
     merged = [
-        _merge_training_group(group, identity)
+        _merge_training_group(group, identity, test_only=test_only)
         for group, identity in zip(raw_groups, identities, strict=True)
     ]
 
@@ -2141,10 +2221,12 @@ def assemble_b1_metrics_training(
         raw_groups=raw_groups, identities=identities, merged=merged,
         admission_rows=admission_rows, telemetry_rows=telemetry_rows,
         shared_tables=shared_tables, policy_tables=policy_tables,
+        test_only=test_only,
     )
     raw_competence = [compute_raw_competence(record) for record in competence_inputs]
     rollout_audits = _rollout_rng_audit_rows(
-        raw_groups=raw_groups, merged=merged, source_groups=source_groups
+        raw_groups=raw_groups, merged=merged, source_groups=source_groups,
+        test_only=test_only,
     )
     authority_tables = {
         "training_decisions": training_decisions,
@@ -2162,6 +2244,7 @@ def assemble_b1_metrics_training(
         raw_groups=raw_groups, source_groups=source_groups,
         authority_tables=authority_tables,
         rollout_audit_rows=rollout_audits,
+        test_only=test_only,
     )
     tables = {
         "training_decisions": training_decisions,
@@ -2201,4 +2284,5 @@ __all__ = [
     "finalize_audit_pointer_bindings",
     "finalize_audit_table_bindings",
     "finalize_materialized_raw_facts",
+    "reconstruct_raw_competence_from_tables",
 ]

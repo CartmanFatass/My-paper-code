@@ -19,6 +19,7 @@ from typing import Any, Mapping, Sequence
 from .artifact import canonical_json_bytes, ensure_confined
 from .b1_descriptive import (
     B1DescriptiveError,
+    compute_b1_descriptive_curves,
     unavailable_descriptive_curves,
     validate_descriptive_curves,
 )
@@ -42,7 +43,12 @@ from .b1_contract import (
 
 B1_METRICS_SCHEMA = "cbsc_omrc_b01_b_explore_result_v1"
 B1_METRICS_TEST_SCHEMA = "cbsc_omrc_b01_b_explore_result_test_only_v1"
+B1_RESULT_RULE_SUMMARY_SCHEMA = "cbsc_omrc_b01_b1_result_rule_summary_v1"
 OBJECT_ID = "CBSC-OMRC-B01"
+SUMMARY_SOURCE_TABLES = (
+    "policy_decisions", "per_tape_curves", "training_episodes",
+    "optimizer_steps", "raw_competence",
+)
 #: Section-11 recast, owner decision 3 of 2026-09-02.  ``FORMAL_ANALYSIS_BOUND``
 #: and ``READINESS_DISPOSITION`` keep their historical values and are still
 #: published in every manifest, but nothing reads them as a gate any more: the
@@ -792,8 +798,7 @@ def conservative_formal_size_projection() -> dict[str, Any]:
             "policy_replay_slot_count": 12,
             "resource_invocation_max": 48,
             "includes": [
-                "raw_worker_results",
-                "policy_replay_results",
+                "deterministic_gzip_full_result_sources",
                 "bound_admissions",
                 "raw_admission_receipts",
                 "telemetry",
@@ -810,7 +815,6 @@ def conservative_formal_size_projection() -> dict[str, Any]:
             "audit_code_and_fact_name_utf8_length",
             "source_and_incident_relative_path_utf8_length",
             "checkpoint_envelope_canonical_byte_length",
-            "raw_worker_and_policy_replay_result_canonical_byte_length",
             "reviewed_b0_pro_decision_and_incident_evidence_byte_length",
         ],
         "depends_on_observed_or_test_bytes": False,
@@ -821,7 +825,9 @@ def conservative_formal_size_projection() -> dict[str, Any]:
         "performance_disposition": "REPAIR_REQUIRED",
         "reason": (
             "A finite full-formal canonical byte upper bound is not established because "
-            "the frozen schema does not cap every retained variable-width field/container."
+            "the frozen schema does not cap every retained variable-width field/container; "
+            "the transaction therefore applies an exact prospective byte census after "
+            "canonical table materialization and deterministic result-source gzip."
         ),
     }
 
@@ -834,17 +840,17 @@ def _validate_null_packet(value: object) -> tuple[dict[str, None], dict[str, Non
     derived = value["derived_fields"]
     auc = value["auc_metadata"]
     diagnostics = value["diagnostic_metadata"]
-    if not isinstance(derived, Mapping) or tuple(derived) != LITERAL_NULL_DERIVED_FIELDS:
-        raise MetricsArtifactError("derived field names/order differ")
-    if not isinstance(auc, Mapping) or tuple(auc) != AUC_METADATA_FIELDS:
-        raise MetricsArtifactError("AUC metadata names/order differ")
-    if not isinstance(diagnostics, Mapping) or tuple(diagnostics) != DIAGNOSTIC_NAMES:
-        raise MetricsArtifactError("diagnostic metadata names/order differ")
+    if not isinstance(derived, Mapping) or set(derived) != set(LITERAL_NULL_DERIVED_FIELDS):
+        raise MetricsArtifactError("derived fields differ")
+    if not isinstance(auc, Mapping) or set(auc) != set(AUC_METADATA_FIELDS):
+        raise MetricsArtifactError("AUC metadata fields differ")
+    if not isinstance(diagnostics, Mapping) or set(diagnostics) != set(DIAGNOSTIC_NAMES):
+        raise MetricsArtifactError("diagnostic metadata fields differ")
     if any(item is not None for item in derived.values()) or any(item is not None for item in auc.values()):
         raise MetricsArtifactError("every derived and AUC metadata field must be literal null")
     for name, metadata in diagnostics.items():
-        if not isinstance(metadata, Mapping) or tuple(metadata) != DIAGNOSTIC_METADATA_FIELDS:
-            raise MetricsArtifactError(f"diagnostic metadata fields/order differ: {name}")
+        if not isinstance(metadata, Mapping) or set(metadata) != set(DIAGNOSTIC_METADATA_FIELDS):
+            raise MetricsArtifactError(f"diagnostic metadata fields differ: {name}")
         if any(item is not None for item in metadata.values()):
             raise MetricsArtifactError(f"diagnostic metadata must be literal null: {name}")
     return dict(derived), dict(auc), {name: dict(metadata) for name, metadata in diagnostics.items()}
@@ -1390,6 +1396,100 @@ def _descriptive_packet(value: object) -> dict[str, Any]:
         raise MetricsArtifactError(f"descriptive curves are invalid: {exc}") from exc
 
 
+def build_result_rule_summary(
+    *, table_inventory: Sequence[Mapping[str, Any]],
+    tables: Mapping[str, Sequence[Mapping[str, Any]]],
+    test_only: bool,
+) -> dict[str, Any]:
+    """Build the compact rule interface from the five materialized source tables."""
+
+    if type(test_only) is not bool:
+        raise MetricsArtifactError("result-rule summary test_only differs")
+    by_name = {
+        row.get("table"): row for row in table_inventory if isinstance(row, Mapping)
+    }
+    bindings: list[dict[str, Any]] = []
+    for name in SUMMARY_SOURCE_TABLES:
+        row = by_name.get(name)
+        if not isinstance(row, Mapping):
+            raise MetricsArtifactError("result-rule summary source table is absent")
+        bindings.append({
+            "table": name,
+            "relative_path": row["relative_path"],
+            "row_count": row["row_count"],
+            "byte_count": row["byte_count"],
+            "sha256": row["sha256"],
+        })
+    if not isinstance(tables, Mapping) or any(name not in tables for name in SUMMARY_SOURCE_TABLES):
+        raise MetricsArtifactError("result-rule summary source tables differ")
+    try:
+        from .b1_metrics_training_assembly import reconstruct_raw_competence_from_tables
+
+        independent_competence = reconstruct_raw_competence_from_tables(
+            tables, test_only=test_only
+        )
+        if canonical_json_bytes(independent_competence) != canonical_json_bytes(
+            tables["raw_competence"]
+        ):
+            raise ValueError(
+                "raw competence differs from independent table reconstruction"
+            )
+        descriptive = validate_descriptive_curves(compute_b1_descriptive_curves(
+            per_tape_curves=tables["per_tape_curves"],
+            policy_decisions=tables["policy_decisions"],
+            training_episodes=tables["training_episodes"],
+            optimizer_steps=tables["optimizer_steps"],
+            raw_competence=independent_competence,
+        ))
+    except (B1DescriptiveError, KeyError, TypeError, ValueError) as exc:
+        raise MetricsArtifactError(
+            f"consumer reconstruction failed: result-rule summary cannot be derived: {exc}"
+        ) from exc
+    return {
+        "schema": B1_RESULT_RULE_SUMMARY_SCHEMA,
+        "raw_table_bindings": bindings,
+        "descriptive_curves": descriptive,
+    }
+
+
+def materialize_result_rule_summary(
+    root: Path, summary: Mapping[str, Any], *, allowed_root: Path,
+) -> dict[str, Any]:
+    """Create the standalone canonical summary and return its manifest binding."""
+
+    base = ensure_confined(Path(root), Path(allowed_root))
+    path = base / "summary.json"
+    if path.exists():
+        raise FileExistsError("create-only result-rule summary exists")
+    payload = canonical_json_bytes(summary) + b"\n"
+    with path.open("xb") as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return {
+        "schema": B1_RESULT_RULE_SUMMARY_SCHEMA,
+        "relative_path": "summary.json",
+        "byte_count": len(payload),
+        "sha256": _digest(payload),
+    }
+
+
+def _validate_summary_binding(value: object) -> dict[str, Any]:
+    if not isinstance(value, Mapping) or set(value) != {
+        "schema", "relative_path", "byte_count", "sha256"
+    }:
+        raise MetricsArtifactError("result-rule summary binding fields differ")
+    binding = dict(value)
+    if (
+        binding["schema"] != B1_RESULT_RULE_SUMMARY_SCHEMA
+        or binding["relative_path"] != "summary.json"
+        or type(binding["byte_count"]) is not int or binding["byte_count"] <= 0
+    ):
+        raise MetricsArtifactError("result-rule summary binding values differ")
+    _require_hex("result-rule summary SHA", binding["sha256"], 64)
+    return binding
+
+
 def _claim_boundary(source: Mapping[str, Any]) -> dict[str, str]:
     return {
         "maximum_claim": MAXIMUM_CLAIM_CEILING,
@@ -1412,8 +1512,8 @@ def _build_metrics_only_manifest(
     table_inventory: Sequence[Mapping[str, Any]], artifact_inventory: Sequence[Mapping[str, Any]],
     literal_nulls: Mapping[str, Any],
     mechanical: Mapping[str, Any], incident_references: Sequence[Mapping[str, Any]],
+    summary_binding: Mapping[str, Any],
     test_only: bool = False, _transaction_witness: object = None,
-    descriptive_curves: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a manifest only after raw-table bytes have been materialized.
 
@@ -1431,6 +1531,7 @@ def _build_metrics_only_manifest(
     laws = _validate_law_digests(law_digests)
     derived, auc, diagnostics = _validate_null_packet(literal_nulls)
     mechanical_full = _validate_mechanical(mechanical)
+    compact_summary = _validate_summary_binding(summary_binding)
     lineage = _validate_incident_lineage(incident_references)
     inventory = [dict(row) for row in table_inventory]
     if [row.get("table") for row in inventory] != list(TABLE_KEY_FIELDS):
@@ -1471,6 +1572,7 @@ def _build_metrics_only_manifest(
         "formal_capacity_projection": conservative_formal_size_projection(),
         "table_inventory": inventory,
         "artifact_inventory": all_files,
+        "summary": compact_summary,
         "mechanical": mechanical_packet,
         "incident_references": lineage,
         "derived_fields": derived,
@@ -1487,7 +1589,6 @@ def _build_metrics_only_manifest(
         "formal_analysis_bound": FORMAL_ANALYSIS_BOUND,
         "readiness_disposition": READINESS_DISPOSITION,
         "formal_analysis_record": formal_analysis_record(),
-        "descriptive_curves": _descriptive_packet(descriptive_curves),
         "durable_size_bytes": artifact_bytes,
     }
     for _ in range(16):
@@ -1509,8 +1610,8 @@ def build_metrics_only_manifest(
     table_inventory: Sequence[Mapping[str, Any]],
     artifact_inventory: Sequence[Mapping[str, Any]],
     literal_nulls: Mapping[str, Any], mechanical: Mapping[str, Any],
-    incident_references: Sequence[Mapping[str, Any]], test_only: bool = False,
-    descriptive_curves: Mapping[str, Any] | None = None,
+    incident_references: Sequence[Mapping[str, Any]],
+    summary_binding: Mapping[str, Any], test_only: bool = False,
 ) -> dict[str, Any]:
     """TEST_ONLY manifest builder; formal construction is production-internal."""
 
@@ -1519,7 +1620,7 @@ def build_metrics_only_manifest(
         table_inventory=table_inventory, artifact_inventory=artifact_inventory,
         literal_nulls=literal_nulls, mechanical=mechanical,
         incident_references=incident_references, test_only=test_only,
-        _transaction_witness=None, descriptive_curves=descriptive_curves,
+        summary_binding=summary_binding, _transaction_witness=None,
     )
 
 
@@ -1557,7 +1658,7 @@ def validate_metrics_only_manifest(
         "convergence_required", "scientific_branch",
         "scientific_polarity", "promotion_eligible", "b2_extension_trigger",
         "formal_analysis_bound", "readiness_disposition", "formal_analysis_record",
-        "descriptive_curves", "durable_size_bytes",
+        "summary", "durable_size_bytes",
     }
     if set(manifest) != required:
         raise MetricsArtifactError("metrics-only manifest fields differ")
@@ -1598,7 +1699,7 @@ def validate_metrics_only_manifest(
     if manifest["formal_analysis_bound"] is not FORMAL_ANALYSIS_BOUND or manifest["readiness_disposition"] != READINESS_DISPOSITION:
         raise MetricsArtifactError("recorded readiness fields differ from the source constants")
     _validate_formal_analysis_record(manifest["formal_analysis_record"])
-    _descriptive_packet(manifest["descriptive_curves"])
+    summary_binding = _validate_summary_binding(manifest["summary"])
     inventory = manifest["table_inventory"]
     if not isinstance(inventory, list) or [row.get("table") for row in inventory if isinstance(row, Mapping)] != list(TABLE_KEY_FIELDS):
         raise MetricsArtifactError("table inventory names/order differ")
@@ -1639,11 +1740,44 @@ def validate_metrics_only_manifest(
     actual_inventory = build_complete_artifact_inventory(base)
     if manifest["artifact_inventory"] != actual_inventory:
         raise MetricsArtifactError("complete artifact inventory digest differs")
+    summary_path = (base / summary_binding["relative_path"]).resolve(strict=True)
+    summary_path.relative_to(base)
+    summary_payload = summary_path.read_bytes()
+    if (
+        len(summary_payload) != summary_binding["byte_count"]
+        or _digest(summary_payload) != summary_binding["sha256"]
+        or not summary_payload.endswith(b"\n")
+    ):
+        raise MetricsArtifactError("result-rule summary byte binding differs")
+    try:
+        summary = json.loads(summary_payload.decode("ascii"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise MetricsArtifactError("result-rule summary is unreadable") from exc
+    if canonical_json_bytes(summary) + b"\n" != summary_payload:
+        raise MetricsArtifactError("result-rule summary is not canonical JSON")
     inputs = supplied_mechanical["inputs"]
     arguments_only = (
         test_only and isinstance(inputs, Mapping)
         and inputs.get("authority") == "TEST_ARGUMENTS_ONLY"
     )
+    if arguments_only:
+        if (
+            summary.get("schema") != B1_RESULT_RULE_SUMMARY_SCHEMA
+            or set(summary) != {
+                "schema", "raw_table_bindings", "descriptive_curves"
+            }
+        ):
+            raise MetricsArtifactError("TEST_ONLY result-rule summary fields differ")
+        _descriptive_packet(summary.get("descriptive_curves"))
+    else:
+        expected_summary = build_result_rule_summary(
+            table_inventory=inventory, tables=materialized_tables,
+            test_only=test_only,
+        )
+        if canonical_json_bytes(summary) != canonical_json_bytes(expected_summary):
+            raise MetricsArtifactError(
+                "result-rule summary differs from raw table reconstruction"
+            )
     if not arguments_only:
         try:
             from .b1_metrics_production import reconstruct_b1_mechanical_from_artifact
@@ -1756,11 +1890,13 @@ def publish_metrics_only_complete(
 
 __all__ = [
     "AUC_METADATA_FIELDS", "B1_METRICS_SCHEMA", "B1_METRICS_TEST_SCHEMA",
+    "B1_RESULT_RULE_SUMMARY_SCHEMA",
     "DIAGNOSTIC_METADATA_FIELDS", "DIAGNOSTIC_NAMES", "FORMAL_ANALYSIS_BOUND",
     "LITERAL_NULL_DERIVED_FIELDS", "MetricsArtifactError", "PARALLEL_MODULE_PROTOCOL",
     "READINESS_DISPOSITION", "FORMAL_ANALYSIS_GATES_PUBLICATION",
     "SECTION11_RECAST_DECISION", "SECTION11_RECAST_INTAKE", "formal_analysis_record",
     "TABLE_KEY_FIELDS", "build_metrics_only_manifest",
+    "build_result_rule_summary", "materialize_result_rule_summary",
     "canonicalize_metrics_table_order",
     "build_complete_artifact_inventory",
     "build_prospective_artifact_inventory", "PreparedMetricsTables",
