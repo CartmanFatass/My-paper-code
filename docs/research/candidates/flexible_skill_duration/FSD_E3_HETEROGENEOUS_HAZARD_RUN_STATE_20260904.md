@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T14:42:02Z`
+Snapshot: `2026-09-04T15:33:27Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -28,23 +28,27 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `8`; running `1`; valid complete cells `6`; quarantined attempts
-  `1`; unfulfilled cells `12`, of which `11` have never launched. The earlier local refusal is
+  independently admitted/launched `8`; running `0`; valid complete cells `7`; quarantined attempts
+  `1`; unfulfilled cells `11`, all of which have never launched. The earlier local refusal is
   preserved as evidence but was not itself an admission or launch.
 
-## Active detached process at the snapshot
+## Accepted terminal replacement attempt
 
-| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | current state |
+| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | terminal state |
 | --- | --- | --- | ---: | --- | --- |
-| `medium_d0_seed1` attempt 02 | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_02`; wrapper PID `21170` | `2026-09-04T14:41:52.389634Z` | `15434072064 / 15434072064` | pushed SHA `ee7fdae278cede2200ab8c356c4f238cce980edb`; runner SHA-256 `4c4a002868378bd7fba8125e1d36d633101c5dd07a703f33a3d3e524d4fd9ba1` | `running`; tmux active |
+| `medium_d0_seed1` attempt 02 | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_02`; wrapper PID `21170` | `2026-09-04T14:41:52.389634Z` | `15434072064 / 15434072064` | pushed SHA `ee7fdae278cede2200ab8c356c4f238cce980edb`; runner SHA-256 `4c4a002868378bd7fba8125e1d36d633101c5dd07a703f33a3d3e524d4fd9ba1` | `finished`, exit `0` at `2026-09-04T15:26:31Z`; tmux inactive; CM accepted |
 
-Attempt 02 runs in detached worktree
+Attempt 02 ran in detached worktree
 `/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_02`. Its one supervised payload ran the
 fresh remote `admit-memory` immediately before the exact full runner and passed both 4 GiB floors.
 It is a new attempt at the repaired SHA, not a resume, salvage, migration, or duplicate of attempt
-01. No other new invocation was admitted by this receipt.
+01. No other new invocation was admitted by this receipt. All ten top-level artifact files were
+copied to a request-specific local staging root and matched the remote SHA-256 list exactly before
+being copied into canonical local root
+`temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d0_seed1`; the earlier refused local
+receipt remains alongside, under its distinct filename.
 
-## Terminal remote attempt at the snapshot
+## Quarantined remote attempt
 
 | invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | progress | terminal artifact |
 | --- | --- | --- | ---: | --- | --- |
@@ -73,6 +77,7 @@ applied before all 18 invocations complete.
 | `small_d0_seed3` | same frozen counts and artifacts | `5315.1814547 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d2_seed2` | same frozen counts and artifacts | `6590.2443548 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d2_seed3` | same frozen counts and artifacts | `6468.8387185 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
+| `medium_d0_seed1` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 path rows, checkpoint, rollout-1/final five-network exposure | `2677.041620939 s` | `resources_unmeasured` | attempt 02 valid complete; exact remote/local hashes; CM accepted; attempt 01 remains quarantined |
 
 Missing peak RSS leaves these invocations valid under the repository telemetry rule. Their wall
 times remain below the per-invocation 8 h cap. The first three launched while the code SHA was the
@@ -117,7 +122,7 @@ output has been created for that invocation.
 | small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 3 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
-| medium | D0 | 1 | `k=5`, `c=inf` | `RUNNING_REMOTE_ATTEMPT_02`; task `fsd_e3_medium_d0_seed1_20260904_02`; attempt 01 quarantined and local refusal retained separately |
+| medium | D0 | 1 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 02 task `fsd_e3_medium_d0_seed1_20260904_02`; attempt 01 quarantined and local refusal retained separately |
 | medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | medium | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -133,12 +138,11 @@ output has been created for that invocation.
 ## Resume boundary
 
 Attempt 01 is terminal and must not be resent, resumed, migrated, postprocessed into acceptance, or
-used to alter the frozen sequence. Observe only attempt 02 to terminal without sending another
-payload for this cell or admitting another E3 cell concurrently in this ordinary sequence. On
-terminal success, fetch its request-specific root, verify copied bytes and every frozen output
-receipt, then continue with its D2 pair and the remaining medium and large row pairs as actual
-resource and dependency state allow. Any next payload requires its own fresh 4 GiB remote
-preflight immediately before its exact runner. This is an operational order, not a batch
+used to alter the frozen sequence. Attempt 02 is accepted only as the valid `medium_d0_seed1`
+invocation cell; no E3 result branch is applied. The next ordinary invocation is its frozen D2
+pair, `medium_d2_seed1`, followed by the remaining medium and large row pairs as actual resource
+and dependency state allow. Any next payload requires its own exact pushed SHA and fresh 4 GiB
+remote preflight immediately before its exact runner. This is an operational order, not a batch
 admission. A refused admission creates no learner state; the quarantined attempt creates no
 scientific result.
 
