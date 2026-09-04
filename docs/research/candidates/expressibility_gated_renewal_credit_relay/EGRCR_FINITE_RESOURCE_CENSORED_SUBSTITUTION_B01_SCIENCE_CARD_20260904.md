@@ -71,7 +71,8 @@ semi-Markov discount claim.
 The source policy used for evaluation is the temperature-one softmax of the two learned Q values.
 Its native scarce-allocation observable is probability assigned to `a=c`; its native return is
 measured by paired environment episodes and also enumerated exactly over all source/content/mode
-cells. The nonlearned exact-Q policy is a ceiling reference, not an empirical arm.
+cells. The nonlearned exact-Q policy uses the same temperature-one transform and is a calibrated
+reference, not a native-optimal ceiling or an empirical arm.
 
 ## Frozen learners and strongest comparator
 
@@ -198,7 +199,7 @@ The primary estimation differences are
 `Delta_Q = RMSE_GENERIC - RMSE_FACTOR` and
 `Delta_g = grad_error_GENERIC - grad_error_FACTOR`. The primary native difference is
 `Delta_U = exact_utility_FACTOR - exact_utility_GENERIC`; sampled utility is supporting evidence.
-The exact-Q ceiling supplies scale but never counts as a learned-arm win.
+The exact-Q reference supplies scale but never counts as a learned-arm win.
 
 ## Frozen result rule
 
