@@ -1152,3 +1152,80 @@ def test_policy_replay_still_refuses_genuinely_duplicated_evaluations(tmp_path):
         b1.B1OrchestrationError, match="evaluation coverage duplicates"
     ):
         _prepare_replay(tmp_path, [record])
+def _fake_git(*, head_sha, surface_differs, status_dirty=False):
+    """Stand in for the git calls verify_source_conformance makes."""
+    import subprocess as _sp
+
+    def run(args, **kwargs):
+        argv = list(args)[1:]
+        if argv[:1] == ["rev-parse"]:
+            return _sp.CompletedProcess(args, 0, stdout=head_sha + chr(10), stderr="")
+        if argv[:1] == ["ls-files"]:
+            return _sp.CompletedProcess(args, 0, stdout="", stderr="")
+        if argv[:1] == ["status"]:
+            out = " M something" + chr(10) if status_dirty else ""
+            return _sp.CompletedProcess(args, 0, stdout=out, stderr="")
+        if argv[:1] == ["diff"]:
+            return _sp.CompletedProcess(args, 1 if surface_differs else 0, stdout="", stderr="")
+        raise AssertionError("unexpected git call: %r" % (argv,))
+
+    return run
+
+
+BOUND_COMMIT = "0" * 40
+MOVED_HEAD = "1" * 40
+
+
+def test_publication_conformance_survives_a_doc_only_head_advance(monkeypatch):
+    """A B1 attempt runs for tens of minutes while other sessions commit to main.
+
+    Which commit HEAD points at when the artifact is written is not a property of
+    the run and carries no scientific meaning. What must hold is that the
+    canonical surface is byte-identical to the bound commit, which
+    `git diff --quiet <commit>` already establishes.
+    """
+    monkeypatch.setattr(
+        b1.subprocess, "run",
+        _fake_git(head_sha=MOVED_HEAD, surface_differs=False),
+    )
+    receipt = b1.verify_source_conformance(BOUND_COMMIT, require_head_match=False)
+    assert receipt["status"] == "COMMIT_CONFORMANT"
+    assert receipt["commit"] == BOUND_COMMIT
+    # The receipt is hashed into source_conformance_sha256 and compared
+    # byte-for-byte against the launch-time receipt, so the moved HEAD must not
+    # appear anywhere in it.
+    assert MOVED_HEAD not in json.dumps(receipt)
+
+
+def test_publication_conformance_still_refuses_a_changed_cbsc_surface(monkeypatch):
+    """A real change to the canonical surface refuses even though HEAD moved."""
+    monkeypatch.setattr(
+        b1.subprocess, "run",
+        _fake_git(head_sha=MOVED_HEAD, surface_differs=True),
+    )
+    with pytest.raises(b1.B1OrchestrationError, match="source bytes differ from commit"):
+        b1.verify_source_conformance(BOUND_COMMIT, require_head_match=False)
+
+
+def test_publication_conformance_still_refuses_an_uncommitted_surface(monkeypatch):
+    """An uncommitted edit to the canonical surface still refuses."""
+    monkeypatch.setattr(
+        b1.subprocess, "run",
+        _fake_git(head_sha=MOVED_HEAD, surface_differs=False, status_dirty=True),
+    )
+    with pytest.raises(
+        b1.B1OrchestrationError, match="implementation source differs from HEAD"
+    ):
+        b1.verify_source_conformance(BOUND_COMMIT, require_head_match=False)
+
+
+def test_launch_conformance_still_requires_the_bound_commit_to_be_head(monkeypatch):
+    """The launch-time requirement is unchanged: the bound commit IS HEAD."""
+    monkeypatch.setattr(
+        b1.subprocess, "run",
+        _fake_git(head_sha=MOVED_HEAD, surface_differs=False),
+    )
+    with pytest.raises(
+        b1.B1OrchestrationError, match="implementation_commit is not current HEAD"
+    ):
+        b1.verify_source_conformance(BOUND_COMMIT)

@@ -255,8 +255,28 @@ def canonical_engine_identity() -> dict[str, str]:
     }
 
 
-def verify_source_conformance(implementation_commit: str) -> dict[str, Any]:
-    """Bind every formal source byte to the current clean commit."""
+def verify_source_conformance(
+    implementation_commit: str, *, require_head_match: bool = True
+) -> dict[str, Any]:
+    """Bind every formal source byte to the bound commit.
+
+    ``require_head_match`` is the launch-time requirement that the bound commit
+    IS current HEAD, and it stays true there.  At publication time it is false.
+    A B1 attempt runs for tens of minutes while other sessions commit to main,
+    so which commit HEAD happens to point at when the artifact is written is not
+    a property of this run and carries no scientific meaning.  What must hold in
+    both cases is that the executing bytes are the bound bytes, and the two
+    checks below already establish exactly that: the working tree carries no
+    uncommitted change to the canonical surface, and that surface is
+    byte-identical to the bound commit's.  A change to the canonical surface
+    therefore still refuses, through "source bytes differ from commit", whether
+    or not HEAD has moved.
+
+    The returned receipt is deliberately unchanged by this flag: it is hashed
+    into ``source_conformance_sha256`` and compared byte-for-byte against the
+    launch-time receipt by ``materialize_b1_canonical_authority_witness``, so
+    recording the observed HEAD in it would reintroduce the same fragility.
+    """
 
     commit = _require_commit(implementation_commit)
 
@@ -267,7 +287,9 @@ def verify_source_conformance(implementation_commit: str) -> dict[str, Any]:
         )
 
     head = git("rev-parse", "HEAD")
-    if head.returncode != 0 or head.stdout.strip() != commit:
+    if head.returncode != 0:
+        raise B1OrchestrationError("BLOCKED_UNCOMMITTED: HEAD is unreadable")
+    if require_head_match and head.stdout.strip() != commit:
         raise B1OrchestrationError("BLOCKED_UNCOMMITTED: implementation_commit is not current HEAD")
     paths = [(REPO_ROOT / relative).resolve() for relative in CANONICAL_SOURCE_SURFACE]
     if any(not path.is_file() for path in paths):

@@ -145,7 +145,10 @@ def make_b1_canonical_authority_witness(
 
     root = Path(allowed_root).resolve(strict=False)
     staging = ensure_confined(Path(staging_root), root).resolve(strict=True)
-    source = verify_source_conformance(implementation_commit)
+    # Publication time: HEAD may have advanced under concurrent sessions.
+    source = verify_source_conformance(
+        implementation_commit, require_head_match=False
+    )
     b0 = locate_b0_evidence(Path(b0_root))
     laws = _law_digests(source)
     inventory, snapshots = _canonical_staging_authority_snapshot(staging)
@@ -181,7 +184,9 @@ def materialize_b1_canonical_authority_witness(
         raise B1MetricsProductionError("canonical authority witness root/attempt differs")
     from .b1 import _law_digests, locate_b0_evidence, verify_source_conformance
 
-    source = verify_source_conformance(witness.implementation_commit)
+    source = verify_source_conformance(
+        witness.implementation_commit, require_head_match=False
+    )
     b0 = locate_b0_evidence(witness.b0_root)
     laws = _law_digests(source)
     inventory, snapshots = _canonical_staging_authority_snapshot(staging)
