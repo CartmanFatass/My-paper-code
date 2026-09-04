@@ -555,3 +555,36 @@ duration-action relevance, not upper-reference minus tuned-generic-baseline head
 headroom gap is absent rather than zero. The minimal follow-up definition is held separately until
 exact baseline assets exist, with no MEI, B or lifecycle effect. See
 `SCDMP_PORTFOLIO_A1_HEADROOM_EQUIVALENCE_INTAKE_20260904.md`.
+
+## D6 event-phase A02 result — 2026-09-04
+
+The sole admitted A02 invocation completed at launch SHA
+`c8010f2f14a23d36476c0e1d4f129f888917275d` with
+`integrity_valid=true`, `population_established=false`, and first matching branch
+`A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED`. Fresh admission passed at `13,330,087,936` bytes.
+
+Both source trajectories completed, but the required `K7-tick-273`, countdown `78`, clock `7`, HR
+group produced one safe dock before the scheduled event. The runner stopped under the frozen
+population rule after 321 candidate missions. Its partial terminal inventory is 320 timeouts, one
+safe dock and zero failures; total native inventory is 323 missions and 64,684 transitions, with
+zero model, dataset, optimizer, AdamW and learner activity. Wall time is
+`4.797502100002021 s`; peak RSS is unmeasured, which does not annul this non-resource result.
+
+No `K_b,d`, `K_d`, state-count or alignment quantity exists, so this result supplies no `k=7` or
+`k=13` polarity. It establishes only that the exact six-state event-phase population failed its
+all-cells requirement because a declared late-state/countdown mission terminated before event
+time. Earlier partial cells do not license salvage or a rewritten estimand.
+
+The strongest support is the integrity-valid safe-dock-before-event row and exact first-match rule.
+The strongest contradiction to a broad closure is that 320 earlier missions reached their terminal
+groups without this stop, but the frozen population and contrast require all cells. A01's uniform
+`k=13` result remains the only action-value sign, and A02 does not provide the missing opposed
+event-phase substrate.
+
+No B, second population, countdown sweep, replacement state or automatic derivative is authorized.
+The next discriminator is direction-tier: reopen the same persistent convergence node to decide
+whether the current D6 action-choice family should park or whether evidence outside this exhausted
+source-search lineage supports a qualitatively different recast. Exact evidence and intake are
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_EVIDENCE_20260904.md` and
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_INTAKE_20260904.md`. Portfolio state and
+the separate unmeasured A1 headroom item remain unchanged.
