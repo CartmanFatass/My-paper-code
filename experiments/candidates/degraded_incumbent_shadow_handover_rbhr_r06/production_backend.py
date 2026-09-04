@@ -11,6 +11,7 @@ import ctypes
 import hashlib
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import tempfile
 import threading
@@ -35,6 +36,10 @@ from .production_population import TEST_MASTER, address, complete_evaluation_coo
 ABI_VERSION = 1
 _SOURCE = Path(__file__).with_name("native") / "rbhr_r06_production_backend.cpp"
 _FLAGS = ("/nologo", "/std:c++20", "/O2", "/EHsc", "/LD", "/fp:strict", "/W4")
+_POSIX_FLAGS = (
+    "-std=c++20", "-O2", "-shared", "-fPIC", "-fno-fast-math",
+    "-ffp-contract=off", "-frounding-math", "-Wall",
+)
 
 
 class ProductionBackendError(RuntimeError):
@@ -215,6 +220,32 @@ class _PromotionSourceForkOutput(ctypes.Structure):
     ]
 
 
+class _PhysicsTick(ctypes.Structure):
+    _fields_ = [
+        ("gx", ctypes.c_double), ("gy", ctypes.c_double),
+        ("gvx", ctypes.c_double), ("gvy", ctypes.c_double),
+        ("camera_z", ctypes.c_double * 4),
+        ("camera_present", ctypes.c_int32 * 2),
+        ("radio", ctypes.c_double * 6),
+        ("source_noise", ctypes.c_double * 4),
+        ("wind_eta", ctypes.c_double * 2),
+    ]
+
+
+class _B01PreparedTick(ctypes.Structure):
+    _fields_ = [
+        ("state", _State), ("observation", _StepOutput),
+        ("physics", _PhysicsTick),
+        ("snapshot_delivered", ctypes.c_int32),
+        ("readiness_delivered", ctypes.c_int32),
+        ("origin_valid", ctypes.c_int32),
+    ]
+
+
+class _B01RecurrentHandoff(ctypes.Structure):
+    _fields_ = [("controller_hidden", ctypes.c_double * 512)]
+
+
 class _PassiveLabelOutput(ctypes.Structure):
     _fields_ = [
         ("target", ctypes.c_double * 4), ("links", ctypes.c_double * 8),
@@ -259,6 +290,25 @@ _LOCK = threading.RLock()
 _LOADED: dict[str, ctypes.CDLL] = {}
 
 
+def _decode_step_outputs(outputs: object, width: int) -> Mapping[str, np.ndarray]:
+    raw = np.frombuffer(outputs, dtype=np.dtype(_StepOutput), count=width)
+    return {
+        "actor": raw["actor"].reshape(width, 4, 54).copy(),
+        "critic": raw["critic"].reshape(width, 58).copy(),
+        **{name: raw[name].copy() for name in (
+            "service", "renew", "terminal", "owner", "service_epoch",
+            "next_payload_sequence", "handover_used", "invalid_commit", "token_gap",
+            "dual_owner", "dual_payload", "buffer_clear", "command_slew_breach",
+            "separation_breach", "tick", "protocol_bytes", "min_separation",
+            "total_energy", "snapshot_accepted", "readiness_accepted",
+            "application_reason", "cas_applied", "actuator_owner",
+            "protocol_wire_hash", "protocol_wire_messages", "snapshot_payload",
+            "readiness_candidate", "snapshot_delivery_mask", "readiness_delivery_mask",
+            "version_match",
+        )},
+    }
+
+
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -267,21 +317,35 @@ def source_sha256() -> str:
     return _sha256(_SOURCE)
 
 
+def _production_toolchain() -> Mapping[str, object]:
+    if os.name == "nt":
+        return _toolchain()
+    compiler = Path(shutil.which("c++")).resolve()
+    result = subprocess.run(
+        [str(compiler), "--version"], check=True, capture_output=True, text=True,
+    )
+    return {
+        "compiler": str(compiler), "compiler_sha256": _sha256(compiler),
+        "version": result.stdout.strip(), "flags": list(_POSIX_FLAGS),
+    }
+
+
 def _build_material() -> tuple[str, bytes]:
     source = _SOURCE.read_bytes()
-    toolchain = _toolchain()
+    toolchain = _production_toolchain()
     digest = hashlib.sha256()
     digest.update(b"DISH-RBHR-R06-PRODUCTION-HOST-v1\0")
     digest.update(hashlib.sha256(source).digest())
     digest.update(str(toolchain["compiler_sha256"]).encode("ascii"))
     digest.update(ABI_VERSION.to_bytes(4, "big"))
-    for flag in _FLAGS:
+    for flag in toolchain["flags"]:
         digest.update(flag.encode("ascii") + b"\0")
     return digest.hexdigest(), source
 
 
 def _artifact_path(key: str) -> Path:
-    return Path(tempfile.gettempdir()) / "hmasd_dish_rbhr_r06_production" / key / "rbhr_r06_production_backend.dll"
+    suffix = ".dll" if os.name == "nt" else ".so"
+    return Path(tempfile.gettempdir()) / "hmasd_dish_rbhr_r06_production" / key / f"rbhr_r06_production_backend{suffix}"
 
 
 def _compile(key: str, source: bytes) -> Path:
@@ -297,12 +361,18 @@ def _compile(key: str, source: bytes) -> Path:
         os.replace(temporary, snapshot)
     if target.is_file():
         return target
-    vcvars = _vs_installation() / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
     suffix = f"{os.getpid()}.{threading.get_ident()}"
-    obj = target.parent / f"rbhr_r06_production_backend.{suffix}.obj"
-    candidate = target.parent / f"rbhr_r06_production_backend.{suffix}.dll"
-    command = f'call "{vcvars}" >nul && cl {" ".join(_FLAGS)} "{snapshot}" /Fo:"{obj}" /link /OUT:"{candidate}"'
-    result = subprocess.run(command, shell=True, executable=os.environ.get("COMSPEC", "cmd.exe"), cwd=target.parent, capture_output=True, text=True)
+    candidate = target.parent / f"rbhr_r06_production_backend.{suffix}{target.suffix}"
+    if os.name == "nt":
+        vcvars = _vs_installation() / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
+        obj = target.parent / f"rbhr_r06_production_backend.{suffix}.obj"
+        command: str | list[str] = f'call "{vcvars}" >nul && cl {" ".join(_FLAGS)} "{snapshot}" /Fo:"{obj}" /link /OUT:"{candidate}"'
+        result = subprocess.run(command, shell=True, executable=os.environ.get("COMSPEC", "cmd.exe"), cwd=target.parent, capture_output=True, text=True)
+    else:
+        toolchain = _production_toolchain()
+        obj = None
+        command = [str(toolchain["compiler"]), *toolchain["flags"], str(snapshot), "-o", str(candidate)]
+        result = subprocess.run(command, cwd=target.parent, capture_output=True, text=True)
     if result.returncode != 0 or not candidate.is_file():
         raise ProductionBackendError(f"native compilation failed ({result.returncode}):\n{result.stdout}\n{result.stderr}")
     try:
@@ -312,7 +382,8 @@ def _compile(key: str, source: bytes) -> Path:
             raise
         candidate.unlink(missing_ok=True)
     finally:
-        obj.unlink(missing_ok=True)
+        if obj is not None:
+            obj.unlink(missing_ok=True)
     return target
 
 
@@ -332,6 +403,14 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
     ))]
     if observed != expected:
         raise ProductionBackendError(f"production ABI differs: observed={observed}, expected={expected}")
+    for name, expected_size in (
+        ("b01_prepared_tick", ctypes.sizeof(_B01PreparedTick)),
+        ("b01_recurrent_handoff", ctypes.sizeof(_B01RecurrentHandoff)),
+    ):
+        function = getattr(lib, f"dish_rbhr_r06_prod_{name}_size")
+        function.argtypes = []; function.restype = ctypes.c_uint64
+        if function() != expected_size:
+            raise ProductionBackendError(f"private B01 ABI differs: {name}")
     lib.dish_rbhr_r06_prod_reset_batch.argtypes = [ctypes.POINTER(_ResetInput), ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepOutput)]
     lib.dish_rbhr_r06_prod_reset_selected_batch.argtypes = [ctypes.POINTER(_ResetInput), ctypes.POINTER(ctypes.c_int32), ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepOutput)]
     lib.dish_rbhr_r06_prod_step_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_StepOutput)]
@@ -339,6 +418,10 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
     lib.dish_rbhr_r06_prod_passive_labels_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_PassiveLabelOutput)]
     lib.dish_rbhr_r06_prod_first_application_valid_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(ctypes.c_int32)]
     lib.dish_rbhr_r06_prod_clone_promotion_source_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_PromotionSourceForkOutput)]
+    lib.dish_rbhr_r06_prod_b01_prepare_batch.argtypes = [ctypes.POINTER(_State), ctypes.c_uint64, ctypes.POINTER(_B01PreparedTick)]
+    lib.dish_rbhr_r06_prod_b01_complete_batch.argtypes = [ctypes.POINTER(_B01PreparedTick), ctypes.POINTER(_StepInput), ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepOutput)]
+    lib.dish_rbhr_r06_prod_b01_clone_prepared_batch.argtypes = [ctypes.POINTER(_B01PreparedTick), ctypes.POINTER(_B01RecurrentHandoff), ctypes.c_uint64, ctypes.POINTER(_PromotionSourceForkOutput)]
+    lib.dish_rbhr_r06_prod_b01_test_fixture_batch.argtypes = [ctypes.c_int32, ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepOutput)]
     lib.clone_promotion_source_batch.argtypes = [ctypes.POINTER(_State), ctypes.POINTER(_StepInput), ctypes.c_size_t, ctypes.POINTER(_PromotionSourceForkOutput)]
     lib.clone_promotion_source_batch.restype = ctypes.c_int32
     lib.dish_rbhr_r06_prod_source_factored_test_fixture_batch.argtypes = [ctypes.c_uint64, ctypes.POINTER(_State), ctypes.POINTER(_StepInput)]
@@ -359,7 +442,8 @@ def _configure(lib: ctypes.CDLL) -> ctypes.CDLL:
         "reset_batch", "reset_selected_batch", "step_batch", "rollout_batch", "passive_labels_batch", "first_application_valid_batch", "clone_real_sham_batch",
         "script_batch", "recovery_witness_batch", "rng_words_batch",
         "clone_promotion_source_batch", "source_factored_test_fixture_batch",
-        "source_factored_test_mismatch_fixture_batch",
+        "source_factored_test_mismatch_fixture_batch", "b01_prepare_batch",
+        "b01_complete_batch", "b01_clone_prepared_batch", "b01_test_fixture_batch",
     ):
         getattr(lib, f"dish_rbhr_r06_prod_{name}").restype = ctypes.c_int32
     return lib
@@ -375,7 +459,23 @@ def require_cpp_batched_production_backend() -> ctypes.CDLL:
 
 def artifact_identity() -> dict[str, object]:
     key, source = _build_material(); path = _artifact_path(key); existed = path.is_file(); started = time.perf_counter(); lib = require_cpp_batched_production_backend()
-    gate = retained_gate_artifact_identity()
+    if os.name == "nt":
+        gate = retained_gate_artifact_identity()
+    else:
+        gate = {
+            "schema": "DISH_RBHR_R06_NATIVE_RNG_GENERATOR_SERVICE_IDENTITY_V1",
+            "component": COMPONENT,
+            "artifact": str(path),
+            "artifact_sha256": _sha256(path),
+            "artifact_bytes": path.stat().st_size,
+            "source_sha256": hashlib.sha256(source).hexdigest(),
+            "build_key": key,
+            "cache_present_before": existed,
+            "abi_version": lib.dish_rbhr_r06_prod_abi_version(),
+            "rng_entry_point": "dish_rbhr_r06_prod_rng_words_batch",
+            "toolchain": _production_toolchain(),
+            "python_fallback": False,
+        }
     return {
         "component": COMPONENT,
         "artifact": str(path),
@@ -402,6 +502,29 @@ def artifact_identity() -> dict[str, object]:
     }
 
 
+class B01PreparedBatch:
+    """Immutable normal-mode state after arrivals and before application policy/CAS."""
+
+    def __init__(self, values: object, width: int) -> None:
+        self._values = values
+        self.width = width
+
+    def snapshot_bytes(self) -> bytes:
+        return bytes(self._values)
+
+    def observe(self) -> Mapping[str, np.ndarray]:
+        raw = np.frombuffer(self._values, dtype=np.dtype(_B01PreparedTick), count=self.width)
+        outputs = (_StepOutput * self.width)()
+        for index in range(self.width):
+            outputs[index] = _StepOutput.from_buffer_copy(raw[index]["observation"].tobytes())
+        return _decode_step_outputs(outputs, self.width)
+
+    @property
+    def origin_valid(self) -> np.ndarray:
+        raw = np.frombuffer(self._values, dtype=np.dtype(_B01PreparedTick), count=self.width)
+        return raw["origin_valid"].astype(bool, copy=True)
+
+
 class NativeBatch:
     """Persistent native state with NumPy-backed batch inputs and no scalar loop."""
 
@@ -421,23 +544,7 @@ class NativeBatch:
 
     def observe(self) -> Mapping[str, np.ndarray]:
         """Copy the current reset/step boundary without advancing native state."""
-
-        raw = np.frombuffer(self._outputs, dtype=np.dtype(_StepOutput), count=self.width)
-        return {
-            "actor": raw["actor"].reshape(self.width, 4, 54).copy(),
-            "critic": raw["critic"].reshape(self.width, 58).copy(),
-            **{name: raw[name].copy() for name in (
-                "service", "renew", "terminal", "owner", "service_epoch",
-                "next_payload_sequence", "handover_used", "invalid_commit", "token_gap",
-                "dual_owner", "dual_payload", "buffer_clear", "command_slew_breach",
-                "separation_breach", "tick", "protocol_bytes", "min_separation",
-                "total_energy", "snapshot_accepted", "readiness_accepted",
-                "application_reason", "cas_applied", "actuator_owner",
-                "protocol_wire_hash", "protocol_wire_messages", "snapshot_payload",
-                "readiness_candidate", "snapshot_delivery_mask",
-                "readiness_delivery_mask", "version_match",
-            )},
-        }
+        return _decode_step_outputs(self._outputs, self.width)
 
     def reset_selected(self, mask: np.ndarray, rows: tuple[Mapping[str, object], ...]) -> Mapping[str, np.ndarray]:
         selected = np.asarray(mask, dtype=np.int32)
@@ -491,6 +598,102 @@ class NativeBatch:
 
     def snapshot_bytes(self) -> bytes:
         return bytes(self._states) + bytes(self._outputs)
+
+    def prepare_b01_tick(self) -> B01PreparedBatch:
+        prepared = (_B01PreparedTick * self.width)()
+        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_prepare_batch(
+            self._states, self.width, prepared,
+        )
+        if code:
+            raise ProductionBackendError(f"native B01 prepare rejected batch ({code})")
+        return B01PreparedBatch(prepared, self.width)
+
+    def complete_b01_tick(
+        self, prepared: B01PreparedBatch, rows: np.ndarray,
+    ) -> Mapping[str, np.ndarray]:
+        if prepared.width != self.width:
+            raise ProductionBackendError("B01 prepared width differs")
+        values = np.ascontiguousarray(rows, dtype=np.dtype(_StepInput))
+        if values.shape != (self.width,):
+            raise ProductionBackendError("B01 completion rows differ")
+        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_complete_batch(
+            prepared._values, values.ctypes.data_as(ctypes.POINTER(_StepInput)), self.width,
+            self._states, self._outputs,
+        )
+        if code:
+            raise ProductionBackendError(f"native B01 completion rejected batch ({code})")
+        return self.observe()
+
+    def clone_b01_prepared_batches(
+        self, prepared: B01PreparedBatch, hidden: np.ndarray,
+    ) -> tuple[Mapping[str, "NativeBatch"], Mapping[str, Mapping[str, np.ndarray]], Mapping[str, object]]:
+        if prepared.width != self.width:
+            raise ProductionBackendError("B01 prepared clone width differs")
+        recurrent = np.asarray(hidden, dtype=np.float64)
+        if recurrent.shape != (self.width, 4, 128):
+            raise ProductionBackendError("B01 recurrent handoff shape differs")
+        if not np.isfinite(recurrent).all() or np.any(np.abs(recurrent) > 1.0):
+            raise ProductionBackendError("B01 recurrent handoff values differ")
+        handoffs = (_B01RecurrentHandoff * self.width)()
+        flat = recurrent.reshape(self.width, 512)
+        for index in range(self.width):
+            handoffs[index] = _B01RecurrentHandoff(
+                (ctypes.c_double * 512)(*map(float, flat[index]))
+            )
+        outputs = (_PromotionSourceForkOutput * self.width)()
+        code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_clone_prepared_batch(
+            prepared._values, handoffs, self.width, outputs,
+        )
+        if code:
+            raise ProductionBackendError(f"native B01 prepared clone rejected batch ({code})")
+        raw = np.frombuffer(outputs, dtype=np.dtype(_PromotionSourceForkOutput), count=self.width).copy()
+        if not (
+            np.all(raw["retain_cas_applied"] == 0)
+            and np.all(raw["transfer_copy_cas_applied"] == 1)
+            and np.all(raw["transfer_shadow_cas_applied"] == 1)
+            and np.all(raw["transaction_energy"] == 0.48)
+        ):
+            raise ProductionBackendError("native B01 branch contract differs")
+        names = ("RETAIN", "TRANSFER_COPY", "TRANSFER_SHADOW")
+        state_fields = ("retain_state", "transfer_copy_state", "transfer_shadow_state")
+        observation_fields = ("retain_observation", "transfer_copy_observation", "transfer_shadow_observation")
+        receipt_fields = ("retain_receipt", "transfer_copy_receipt", "transfer_shadow_receipt")
+        batches: dict[str, NativeBatch] = {}
+        observations: dict[str, Mapping[str, np.ndarray]] = {}
+        receipts: dict[str, tuple[bytes, ...]] = {}
+        branch_hidden: dict[str, np.ndarray] = {}
+        branch_prepared: dict[str, B01PreparedBatch] = {}
+        for mode, name, state_field, observation_field, receipt_field in zip(
+            range(3), names, state_fields, observation_fields, receipt_fields,
+        ):
+            states = tuple(_State.from_buffer_copy(raw[index][state_field].tobytes()) for index in range(self.width))
+            batch = NativeBatch._from_states(states)
+            branch_outputs = (_StepOutput * self.width)()
+            for index in range(self.width):
+                branch_outputs[index] = _StepOutput.from_buffer_copy(raw[index][observation_field].tobytes())
+                batch._outputs[index] = branch_outputs[index]
+            batches[name] = batch
+            observations[name] = _decode_step_outputs(branch_outputs, self.width)
+            tokens = (_B01PreparedTick * self.width)()
+            for index in range(self.width):
+                tokens[index].state = states[index]
+                tokens[index].observation = branch_outputs[index]
+                tokens[index].physics = prepared._values[index].physics
+                tokens[index].snapshot_delivered = prepared._values[index].snapshot_delivered
+                tokens[index].readiness_delivered = prepared._values[index].readiness_delivered
+                tokens[index].origin_valid = 0
+            branch_prepared[name] = B01PreparedBatch(tokens, self.width)
+            receipts[name] = tuple(bytes(raw[index][receipt_field]) for index in range(self.width))
+            if any(decode_promotion_source_receipt(value)["source_mode"] != mode for value in receipts[name]):
+                raise ProductionBackendError("native B01 receipt mode differs")
+            branch_hidden[name] = np.stack([
+                np.asarray(raw[index][state_field]["controller_hidden"], dtype=np.float64).reshape(4, 128)
+                for index in range(self.width)
+            ])
+        return batches, observations, {
+            "raw_receipts": receipts, "branch_hidden": branch_hidden,
+            "branch_prepared": branch_prepared, "materialized_before_policy_forward": True,
+        }
 
     def step(self, rows: np.ndarray) -> Mapping[str, np.ndarray]:
         expected = np.dtype(_StepInput)
@@ -873,6 +1076,23 @@ def source_factored_mismatch_test_fixture(
     )
 
 
+def b01_production_test_fixture(width: int, *, origin_valid: bool = True) -> NativeBatch:
+    """Fixed TEST fixture whose native state is normal production mode."""
+
+    if width <= 0 or width > 32:
+        raise ProductionBackendError("B01 TEST width differs")
+    states = (_State * width)(); outputs = (_StepOutput * width)()
+    code = require_cpp_batched_production_backend().dish_rbhr_r06_prod_b01_test_fixture_batch(
+        int(origin_valid), width, states, outputs,
+    )
+    if code:
+        raise ProductionBackendError(f"native B01 TEST fixture rejected batch ({code})")
+    batch = NativeBatch._from_states(tuple(states[index] for index in range(width)))
+    for index in range(width):
+        batch._outputs[index] = outputs[index]
+    return batch
+
+
 def _test_reset_inputs(width: int, *, test_mode: int = 1) -> tuple[_ResetInput, ...]:
     coordinates = complete_evaluation_coordinates()
     if width <= 0 or width > len(coordinates):
@@ -1103,7 +1323,7 @@ def open_production_batch(*, authority: object | None, width: int) -> NativeBatc
 
 
 __all__ = [
-    "TEST_NAMESPACE", "NativeBatch", "ProductionBackendError", "TestNativeBatch", "TestProtocolNativeBatch",
-    "artifact_identity", "empty_step_rows", "flow_local_native_abi_self_audit", "native_batch_from_rows", "native_natural_protocol_trace", "native_protocol_audit", "native_protocol_transition_probe", "open_production_batch", "rng_words_native", "rng_words_test_native",
+    "TEST_NAMESPACE", "B01PreparedBatch", "NativeBatch", "ProductionBackendError", "TestNativeBatch", "TestProtocolNativeBatch",
+    "artifact_identity", "b01_production_test_fixture", "empty_step_rows", "flow_local_native_abi_self_audit", "native_batch_from_rows", "native_natural_protocol_trace", "native_protocol_audit", "native_protocol_transition_probe", "open_production_batch", "rng_words_native", "rng_words_test_native",
     "recovery_witness_test_rows", "require_cpp_batched_production_backend", "source_sha256",
 ]

@@ -22,7 +22,9 @@ from .production_contract import ARMS, TRAIN_LANES, TRANSITIONS_PER_UPDATE, UPDA
 from .production_population import address
 from .production_train_reset import TrainResetKey, arm_substream, build_train_reset_row
 from .production_training import PersistentTrainer
-from .production_training_engine import ExactPolicyGraph, WelfordState
+from .production_training_engine import (
+    ExactPolicyGraph, WelfordState, _policy_log_prob, _role_policy_heads,
+)
 
 
 TICKS_PER_UPDATE_PER_LANE: Final = 128
@@ -249,59 +251,84 @@ class BatchedRecurrentPolicy:
         if arm != state.arm:
             raise RecurrentTrainerError("policy/state arm binding differs")
         self.arm = arm; self.model = _load_policy(checkpoint_bytes); self.state = state
+        self.last_behavior_log_prob = torch.empty(state.hidden.shape[0], dtype=torch.float32)
         if checkpoint_bytes is not None:
             retained = torch.load(io.BytesIO(bytes(checkpoint_bytes)), map_location="cpu", weights_only=False)
             welford = retained.get("welford", {})
-            if self.state.actor_welford.count == 0 and {"actor", "snapshot", "critic"}.issubset(welford):
+            if {"actor", "snapshot", "critic"}.issubset(welford):
                 self.state.actor_welford = welford["actor"]
                 self.state.snapshot_welford = welford["snapshot"]
                 self.state.critic_welford = welford["critic"]
 
+    def normalized_actor(self, observation: Mapping[str, np.ndarray]) -> torch.Tensor:
+        actor = torch.as_tensor(observation["actor"], dtype=torch.float32)
+        width = self.state.hidden.shape[0]
+        if actor.shape != (width, 4, 54):
+            raise RecurrentTrainerError("native actor batch differs")
+        return self.state.actor_welford.normalized(actor)
+
+    def prepare_recurrent(
+        self, observation: Mapping[str, np.ndarray], *, reset_lanes: np.ndarray | None = None,
+    ) -> None:
+        width = self.state.hidden.shape[0]
+        resets = np.zeros(width, dtype=bool) if reset_lanes is None else np.asarray(reset_lanes, dtype=bool)
+        if resets.shape != (width,):
+            raise RecurrentTrainerError("episode-reset lane vector differs")
+        self.state.hidden = self.model.prepare_recurrent_hidden(
+            self.state.hidden,
+            torch.as_tensor(observation["snapshot_payload"], dtype=torch.float32),
+            torch.as_tensor(np.asarray(observation["snapshot_delivery_mask"]) != 0),
+            torch.as_tensor(~resets, dtype=torch.float32),
+            torch.as_tensor(observation["owner"], dtype=torch.long),
+        )
+
     def step_rows(
         self, observation: Mapping[str, np.ndarray], *, sampler: AddressedPolicySampler,
-        global_tick: int, deterministic: bool,
+        global_tick: int, deterministic: bool, reset_lanes: np.ndarray | None = None,
+        recurrent_prepared: bool = False,
     ) -> np.ndarray:
         actor = torch.as_tensor(observation["actor"], dtype=torch.float32)
         width = self.state.hidden.shape[0]
         if actor.shape != (width, 4, 54):
             raise RecurrentTrainerError("native actor batch differs")
-        reset = torch.as_tensor(np.asarray(observation["terminal"]) == 0, dtype=torch.float32)[:, None, None]
-        self.state.hidden = self.state.hidden * reset
         owner = np.asarray(observation["owner"], dtype=np.int64)
-        snapshot_mask = torch.as_tensor(np.asarray(observation["snapshot_delivery_mask"]) != 0)
-        if bool(snapshot_mask.any()):
-            payload = torch.as_tensor(observation["snapshot_payload"], dtype=torch.float32)
-            encoded = torch.tanh(self.model.snapshot_encoder(payload))
-            for lane in np.flatnonzero(snapshot_mask.cpu().numpy()):
-                standby_shadow = 2 * (1 - int(owner[lane])) + 1
-                prior = self.state.hidden[lane, standby_shadow]
-                self.state.hidden[lane, standby_shadow] = torch.tanh(self.model.snapshot_bridge(torch.cat((prior, encoded[lane]), dim=-1)))
-        normalized = self.state.actor_welford.normalized(actor)
+        if not recurrent_prepared:
+            self.prepare_recurrent(observation, reset_lanes=reset_lanes)
+        normalized = self.normalized_actor(observation)
         with torch.no_grad():
-            encoded = self.model.encode(normalized.reshape(-1, 54))
-            self.state.hidden = self.model.gru_step(encoded, self.state.hidden.reshape(-1, 128)).reshape(width, 4, 128)
+            self.state.hidden = self.model.advance_recurrent_hidden(normalized, self.state.hidden)
             heads = self.model.heads(self.state.hidden)
         rows = empty_step_rows(width)
         rows["arm_mode"] = ARMS.index(self.arm)
-        motion = heads["motion"].detach().cpu().numpy()
-        means = 3.0 * np.tanh(np.stack((motion[:, 0, 0], motion[:, 0, 1], motion[:, 2, 0], motion[:, 2, 1]), axis=-1))
-        log_std = np.clip(self.model.log_std.detach().cpu().numpy(), -5.0, 1.0)
+        owner_tensor = torch.as_tensor(owner, dtype=torch.long)
+        motion, prepare_logit, commit_logit = _role_policy_heads(heads, owner_tensor)
+        means = (3.0 * torch.tanh(motion)).detach().cpu().numpy()
+        log_std = torch.clamp(
+            self.model.log_std.detach(), -5.0, 1.0,
+        ).cpu().numpy()
         renew = np.asarray(observation["renew"], dtype=bool)
         for lane in range(width):
             for component, field in enumerate(("MOTION_OWNER_X", "MOTION_OWNER_Y", "MOTION_STANDBY_X", "MOTION_STANDBY_Y")):
                 if renew[lane]:
                     noise = 0.0 if deterministic else sampler.normal(lane=lane, tick=global_tick, field=field)
-                    rows["raw_action"][lane, component] = means[lane, component] + math.exp(float(log_std[component])) * noise
+                    rows["raw_action"][lane, component] = (
+                        float(means[lane, component])
+                        + math.exp(float(log_std[component])) * noise
+                    )
                 else:
-                    physical = 0 if component < 2 else 2
-                    rows["raw_action"][lane, component] = actor[lane, physical, 8 + (component % 2)]
-        prepare_all = torch.sigmoid(heads["prepare"][:, :, 0]).detach().cpu().numpy()
-        commit_all = torch.sigmoid(heads["commit"][:, :, 0]).detach().cpu().numpy()
+                    physical_u0 = 0 if owner[lane] == 0 else 1
+                    physical_u1 = 2 if owner[lane] == 1 else 3
+                    physical = physical_u0 if component < 2 else physical_u1
+                    rows["raw_action"][lane, component] = float(
+                        actor[lane, physical, 8 + (component % 2)]
+                    )
+        action = torch.from_numpy(rows["raw_action"].astype(np.float32, copy=True))
+        prepare_all = torch.sigmoid(prepare_logit).detach().cpu().numpy()
+        commit_all = torch.sigmoid(commit_logit).detach().cpu().numpy()
         for lane in range(width):
             if renew[lane] and self.arm in ("STRUCTURED", "FLEX", "NEVER"):
-                active = 2 * int(owner[lane])
-                prepare_probability = float(prepare_all[lane, active])
-                commit_probability = float(commit_all[lane, active])
+                prepare_probability = float(prepare_all[lane])
+                commit_probability = float(commit_all[lane])
                 rows["prepare"][lane, owner[lane]] = int(prepare_probability >= 0.5) if deterministic else sampler.bernoulli(lane=lane, tick=global_tick, field="PREPARE_BERNOULLI", probability=prepare_probability)
                 rows["commit"][lane, owner[lane]] = int(commit_probability >= 0.5) if deterministic else sampler.bernoulli(lane=lane, tick=global_tick, field="COMMIT_BERNOULLI", probability=commit_probability)
                 if self.arm == "NEVER":
@@ -334,6 +361,14 @@ class BatchedRecurrentPolicy:
         if self.arm == "FLEX":
             alpha_all = heads["flex_alpha"][:, :, 0].detach().cpu().numpy()
             rows["promotion_alpha"] = np.asarray([alpha_all[lane, 2 * int(owner[lane])] for lane in range(width)])
+        lane = np.arange(width)
+        prepare_outcome = torch.from_numpy(rows["prepare"][lane, owner].astype(np.float32))
+        commit_outcome = torch.from_numpy(rows["commit"][lane, owner].astype(np.float32))
+        _, self.last_behavior_log_prob = _policy_log_prob(
+            self.arm, motion, self.model.log_std.detach(), action,
+            prepare_logit, commit_logit, prepare_outcome, commit_outcome,
+            torch.as_tensor(renew),
+        )
         return rows
 
     def apply_native_promotion(
@@ -371,23 +406,36 @@ class NativePersistentTrainingFlow:
     def collect_update(self, initial_observation: Mapping[str, np.ndarray]) -> Mapping[str, torch.Tensor]:
         """Collect exactly 32x128 native transitions for one PPO update."""
 
-        rows_by_tick: list[Mapping[str, np.ndarray]] = []
+        observation_by_tick: list[Mapping[str, np.ndarray]] = []
+        outcome_by_tick: list[Mapping[str, np.ndarray]] = []
         labels_by_tick: list[Mapping[str, np.ndarray]] = []
         actions_by_tick: list[np.ndarray] = []
+        behavior_log_prob_by_tick: list[np.ndarray] = []
+        normalized_actor_by_tick: list[np.ndarray] = []
+        hidden_before_tick: list[np.ndarray] = []
+        reset_by_tick: list[np.ndarray] = []
         observation = initial_observation
         owner_before = np.asarray(observation["owner"], dtype=np.int64)
+        reset_lanes = np.zeros(TRAIN_LANES, dtype=bool)
         for offset in range(TICKS_PER_UPDATE_PER_LANE):
+            observation_by_tick.append({name: np.asarray(value).copy() for name, value in observation.items()})
+            normalized_actor_by_tick.append(self.policy.normalized_actor(observation).detach().cpu().numpy().copy())
+            hidden_before_tick.append(self.state.hidden.detach().cpu().numpy().copy())
+            reset_by_tick.append(reset_lanes.copy())
             action_rows = self.policy.step_rows(
                 observation, sampler=self.sampler,
                 global_tick=self.state.updates_completed * TICKS_PER_UPDATE_PER_LANE + offset,
-                deterministic=False,
+                deterministic=False, reset_lanes=reset_lanes,
+            )
+            behavior_log_prob_by_tick.append(
+                self.policy.last_behavior_log_prob.detach().cpu().numpy().copy()
             )
             labels_by_tick.append(self.native.passive_labels(action_rows))
             next_observation = self.native.step(action_rows)
             self.policy.apply_native_promotion(
                 owner_before=owner_before, step_rows=action_rows, observation_after=next_observation,
             )
-            rows_by_tick.append(next_observation); actions_by_tick.append(action_rows.copy())
+            outcome_by_tick.append(next_observation); actions_by_tick.append(action_rows.copy())
             owner_before = np.asarray(next_observation["owner"], dtype=np.int64)
             terminal = np.asarray(next_observation["terminal"], dtype=bool)
             self.state.lane_episode_tick += 1
@@ -396,40 +444,68 @@ class NativePersistentTrainingFlow:
             observation = self.native.reset_selected(
                 ended, self.reset_factory.rows(self.state.lane_episode_wave),
             ) if bool(np.any(ended)) else next_observation
-        if len(rows_by_tick) * TRAIN_LANES != TRANSITIONS_PER_UPDATE:
+            owner_before = np.asarray(observation["owner"], dtype=np.int64)
+            reset_lanes = ended
+        if bool(np.any(reset_lanes)):
+            self.state.hidden[torch.as_tensor(reset_lanes)] = 0.0
+        if len(observation_by_tick) * TRAIN_LANES != TRANSITIONS_PER_UPDATE:
             raise RecurrentTrainerError("TRAIN update transition count differs")
-        return self._fragments(rows_by_tick, actions_by_tick, labels_by_tick)
+        return self._fragments(
+            observation_by_tick, outcome_by_tick, actions_by_tick, labels_by_tick,
+            normalized_actor_by_tick, hidden_before_tick, reset_by_tick,
+            behavior_log_prob_by_tick,
+        )
 
     def _fragments(
-        self, native_ticks: list[Mapping[str, np.ndarray]], action_ticks: list[np.ndarray],
-        label_ticks: list[Mapping[str, np.ndarray]],
+        self, observation_ticks: list[Mapping[str, np.ndarray]],
+        outcome_ticks: list[Mapping[str, np.ndarray]], action_ticks: list[np.ndarray],
+        label_ticks: list[Mapping[str, np.ndarray]], normalized_actor_ticks: list[np.ndarray],
+        hidden_before_ticks: list[np.ndarray], reset_ticks: list[np.ndarray],
+        behavior_log_prob_ticks: list[np.ndarray],
     ) -> Mapping[str, torch.Tensor]:
         """Bind collected rows to the retained 64-fragment PPO schema."""
 
-        def stack(name: str) -> np.ndarray:
-            return np.stack([np.asarray(row[name]) for row in native_ticks], axis=0)
+        def observation_stack(name: str) -> np.ndarray:
+            return np.stack([np.asarray(row[name]) for row in observation_ticks], axis=0)
+        def outcome_stack(name: str) -> np.ndarray:
+            return np.stack([np.asarray(row[name]) for row in outcome_ticks], axis=0)
         def fragment(value: np.ndarray) -> np.ndarray:
             return np.ascontiguousarray(value.transpose(1, 0, *range(2, value.ndim)).reshape(64, 64, *value.shape[2:]))
-        actor = fragment(stack("actor")); critic_tick = stack("critic")
+        actor_raw = fragment(observation_stack("actor"))
+        actor = fragment(np.stack(normalized_actor_ticks, axis=0))
+        critic_tick = outcome_stack("critic")
         def label(name: str) -> np.ndarray:
             return np.stack([np.asarray(row[name]) for row in label_ticks], axis=0)
         action = np.stack(action_ticks, axis=0)
+        owner = fragment(observation_stack("owner")).astype(np.int64)
+        lane = np.arange(TRAIN_LANES)[None, :]
+        owner_action = np.stack([np.asarray(row["owner"], dtype=np.int64) for row in observation_ticks], axis=0)
+        prepare_outcome = action["prepare"][np.arange(128)[:, None], lane, owner_action]
+        commit_outcome = action["commit"][np.arange(128)[:, None], lane, owner_action]
+        hidden_sequence = np.stack(hidden_before_ticks, axis=0).transpose(1, 0, 2, 3)
+        initial_hidden = hidden_sequence[:, (0, 64)].reshape(64, 4, 128)
         result = {
             "observation": torch.from_numpy(actor).float(),
+            "actor_raw": torch.from_numpy(actor_raw).float(),
+            "initial_hidden": torch.from_numpy(np.ascontiguousarray(initial_hidden)).float(),
+            "owner": torch.from_numpy(owner).long(),
             "critic": torch.from_numpy(np.ascontiguousarray(critic_tick.transpose(1, 0, 2).reshape(4096, 58))).float(),
-            "snapshot": torch.from_numpy(fragment(stack("snapshot_payload"))).float(),
-            "snapshot_mask": torch.from_numpy(fragment(stack("snapshot_delivery_mask")).astype(bool)),
-            "promotion_mask": torch.from_numpy(fragment(stack("cas_applied")).astype(bool)),
+            "snapshot": torch.from_numpy(fragment(observation_stack("snapshot_payload"))).float(),
+            "snapshot_mask": torch.from_numpy(fragment(observation_stack("snapshot_delivery_mask")).astype(bool)),
+            "promotion_mask": torch.from_numpy(fragment(outcome_stack("cas_applied")).astype(bool)),
             "promotion_alpha": torch.from_numpy(fragment(action["promotion_alpha"]).astype(np.float32)),
-            "reset_mask": torch.from_numpy((~fragment(stack("terminal")).astype(bool)).astype(np.float32)),
-            "renew": torch.from_numpy(fragment(stack("renew")).astype(bool)),
-            "prepare_mask": torch.from_numpy(fragment(stack("renew")).astype(bool)),
-            "commit_mask": torch.from_numpy(fragment(stack("renew")).astype(bool)),
+            "reset_mask": torch.from_numpy((~fragment(np.stack(reset_ticks, axis=0)).astype(bool)).astype(np.float32)),
+            "renew": torch.from_numpy(fragment(observation_stack("renew")).astype(bool)),
+            "prepare_mask": torch.from_numpy(fragment(observation_stack("renew")).astype(bool)),
+            "commit_mask": torch.from_numpy(fragment(observation_stack("renew")).astype(bool)),
             "action": torch.from_numpy(fragment(action["raw_action"])).float(),
-            "prepare_outcome": torch.from_numpy(fragment(action["prepare"][:, :, 0]).astype(np.float32)),
-            "commit_outcome": torch.from_numpy(fragment(action["commit"][:, :, 0]).astype(np.float32)),
-            "reward": torch.from_numpy(np.ascontiguousarray(stack("service").T)).float(),
-            "done": torch.from_numpy(np.ascontiguousarray(stack("terminal").T)).float(),
+            "prepare_outcome": torch.from_numpy(fragment(prepare_outcome).astype(np.float32)),
+            "commit_outcome": torch.from_numpy(fragment(commit_outcome).astype(np.float32)),
+            "behavior_log_prob": torch.from_numpy(fragment(
+                np.stack(behavior_log_prob_ticks, axis=0)
+            ).astype(np.float32)),
+            "reward": torch.from_numpy(np.ascontiguousarray(outcome_stack("service").T)).float(),
+            "done": torch.from_numpy(np.ascontiguousarray(outcome_stack("terminal").T)).float(),
             "target": torch.from_numpy(np.ascontiguousarray(label("target").transpose(1, 0, 2).reshape(4096, 4))).float(),
             "links": torch.from_numpy(np.ascontiguousarray(label("links").transpose(1, 0, 2, 3).reshape(4096, 4, 2))).float(),
             "missing": torch.from_numpy(np.ascontiguousarray(label("missing").transpose(1, 0, 2).reshape(4096, 4))).float(),
@@ -447,6 +523,10 @@ class NativePersistentTrainingFlow:
         self.state.updates_completed += 1
         if int(receipt["update"]) != self.state.updates_completed:
             raise RecurrentTrainerError("persistent update sequence differs")
+        retained = torch.load(io.BytesIO(self.trainer.checkpoint_bytes), map_location="cpu", weights_only=False)
+        self.state.actor_welford = retained["welford"]["actor"]
+        self.state.snapshot_welford = retained["welford"]["snapshot"]
+        self.state.critic_welford = retained["welford"]["critic"]
         self.policy = BatchedRecurrentPolicy(
             arm=self.state.arm, checkpoint_bytes=self.trainer.checkpoint_bytes, state=self.state,
         )
