@@ -428,40 +428,50 @@ def stage_receipt(
     fallback_enabled: bool | None = None,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Stage one completion receipt after archive verification, without sending it."""
+    """Stage one completion receipt on the fixed, user-designated return route.
+
+    ``source_thread_id`` is retained solely as audit metadata.  It must never
+    become a receipt destination: multi-agent v2 source sessions can reject
+    direct app-server input.  The caller may supply legacy fallback arguments
+    only when they name the one configured destination; they cannot disable or
+    redirect the fixed route.
+    """
 
     if str(record.get("state")) != "ARCHIVED":
         raise ValueError("completion receipt may be staged only after ARCHIVED")
     monitor_identity_key(record)
     timestamp = now or utc_now()
     source_thread_id = record.get("source_thread_id")
-    enabled = bool(
-        record.get("fallback_enabled", False)
-        if fallback_enabled is None
-        else fallback_enabled
-    )
-    configured_fallback = (
-        fallback_thread_id
-        or record.get("fallback_thread_id")
-        or DEFAULT_FALLBACK_THREAD_ID
-    )
-    fallback_id = validate_fallback_thread_id(configured_fallback)
-    fallback_used = source_thread_id is None and enabled
-    destination_thread_id = fallback_id if fallback_used else source_thread_id
+    if fallback_thread_id is not None:
+        validate_fallback_thread_id(fallback_thread_id)
+    if record.get("fallback_thread_id") is not None:
+        validate_fallback_thread_id(str(record["fallback_thread_id"]))
+    fallback_id = DEFAULT_FALLBACK_THREAD_ID
+    destination_thread_id = fallback_id
     base_key = receipt_message_key(
         str(record["request_id"]),
         str(record["direction_id"]),
         str(record["conversation_id"]),
         response_sha256,
     )
-    message_key = f"{base_key}|fallback|{fallback_id}" if fallback_used else base_key
+    message_key = base_key
     existing = dict(record.get("return_receipt") or {})
+    if existing.get("message_key") and existing["message_key"] != message_key:
+        raise ValueError("completion receipt message key conflicts with the archived response")
+    if existing.get("status") in {"SENT", "UNCERTAIN", "BLOCKED", "FAILED"} or (
+        existing.get("status") == "PENDING" and existing.get("message_key")
+    ):
+        # A receipt is never restaged.  The narrowly gated legacy migration
+        # helper below is the sole exception for an old, source-routed BLOCKED
+        # record whose first send was definitely rejected before this policy.
+        return record
     existing.update(
         {
             "required": True,
             "primary_destination_thread_id": source_thread_id,
+            "source_thread_id": source_thread_id,
             "destination_thread_id": destination_thread_id,
-            "status": "PENDING" if destination_thread_id else "BLOCKED",
+            "status": "PENDING",
             "message_key": message_key,
             "attempt_count": int(existing.get("attempt_count", 0)),
             "retry_allowed": False,
@@ -470,21 +480,77 @@ def stage_receipt(
             "archive_paths": dict(archive_paths),
             "response_sha256": response_sha256,
             "staged_at": timestamp,
-            "fallback_enabled": enabled,
-            "fallback_thread_id": fallback_id if enabled else None,
-            "fallback_thread_url": f"codex://threads/{fallback_id}" if enabled else None,
-            "fallback_destination_thread_id": fallback_id if enabled else None,
-            "fallback_used": fallback_used,
-            "fallback_status": "PENDING" if fallback_used else "NOT_NEEDED",
-            "fallback_message_key": f"{base_key}|fallback|{fallback_id}" if enabled else None,
-            "fallback_delivery_mode": "bounded_single_attempt" if enabled else None,
+            "routing_mode": "FIXED_FALLBACK",
+            "fallback_enabled": True,
+            "fallback_thread_id": fallback_id,
+            "fallback_thread_url": DEFAULT_FALLBACK_THREAD_URL,
+            "fallback_destination_thread_id": fallback_id,
+            "fallback_used": True,
+            "fallback_status": "PENDING",
+            "fallback_message_key": message_key,
+            "fallback_delivery_mode": "bounded_single_attempt",
         }
     )
-    if not source_thread_id and not enabled:
-        existing["error"] = "source_thread_id is required for automatic return"
-    elif fallback_used:
-        existing["fallback_staged_at"] = timestamp
+    existing["fallback_staged_at"] = timestamp
     record["return_receipt"] = existing
+    return record
+
+
+def reroute_legacy_blocked_receipt(
+    record: MutableMapping[str, Any],
+    *,
+    now: str | None = None,
+) -> MutableMapping[str, Any]:
+    """Prepare one rejected, pre-policy archived receipt for the fixed route.
+
+    This is intentionally not a retry primitive.  It admits only a receipt that
+    was definitely ``BLOCKED`` before it ever targeted the fixed fallback, has
+    no recorded send attempt, and keeps its original deterministic message key.
+    A caller must persist this ``PENDING`` state before its one bounded send.
+    """
+
+    if str(record.get("state")) != "ARCHIVED":
+        raise ValueError("legacy receipt reroute requires ARCHIVED")
+    monitor_identity_key(record)
+    receipt = dict(record.get("return_receipt") or {})
+    if receipt.get("status") != "BLOCKED":
+        raise ValueError("legacy receipt reroute requires a definitely BLOCKED receipt")
+    if receipt.get("destination_thread_id") == DEFAULT_FALLBACK_THREAD_ID:
+        raise ValueError("fixed-route receipt may not be sent a second time")
+    if int(receipt.get("attempt_count", 0)) != 0:
+        raise ValueError("legacy receipt reroute requires no recorded send attempt")
+    response_sha256 = str(record.get("response_sha256") or receipt.get("response_sha256") or "")
+    expected_key = receipt_message_key(
+        str(record["request_id"]),
+        str(record["direction_id"]),
+        str(record["conversation_id"]),
+        response_sha256,
+    )
+    if not response_sha256 or receipt.get("message_key") != expected_key:
+        raise ValueError("legacy receipt reroute requires the original deterministic message key")
+    timestamp = now or utc_now()
+    receipt.update(
+        {
+            "source_thread_id": record.get("source_thread_id"),
+            "destination_thread_id": DEFAULT_FALLBACK_THREAD_ID,
+            "status": "PENDING",
+            "routing_mode": "FIXED_FALLBACK",
+            "fallback_enabled": True,
+            "fallback_thread_id": DEFAULT_FALLBACK_THREAD_ID,
+            "fallback_thread_url": DEFAULT_FALLBACK_THREAD_URL,
+            "fallback_destination_thread_id": DEFAULT_FALLBACK_THREAD_ID,
+            "fallback_used": True,
+            "fallback_status": "PENDING",
+            "fallback_message_key": expected_key,
+            "fallback_delivery_mode": "bounded_single_attempt",
+            "fallback_staged_at": timestamp,
+            "legacy_source_route_rejected_at": receipt.get("updated_at"),
+            "legacy_source_route_error": receipt.get("error"),
+            "rerouted_at": timestamp,
+            "retry_allowed": False,
+        }
+    )
+    record["return_receipt"] = receipt
     return record
 
 
@@ -497,7 +563,7 @@ def stage_blocker_receipt(
     fallback_enabled: bool | None = None,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Stage a transport-only terminal blocker receipt without an archive."""
+    """Stage a terminal blocker receipt on the fixed, user-designated route."""
 
     if blocker_state not in TERMINAL_STATES or blocker_state == "ARCHIVED":
         raise ValueError("blocker_state must be a non-archive terminal transport state")
@@ -506,19 +572,12 @@ def stage_blocker_receipt(
     monitor_identity_key(record)
     timestamp = now or utc_now()
     source_thread_id = record.get("source_thread_id")
-    enabled = bool(
-        record.get("fallback_enabled", False)
-        if fallback_enabled is None
-        else fallback_enabled
-    )
-    configured_fallback = (
-        fallback_thread_id
-        or record.get("fallback_thread_id")
-        or DEFAULT_FALLBACK_THREAD_ID
-    )
-    fallback_id = validate_fallback_thread_id(configured_fallback)
-    fallback_used = source_thread_id is None and enabled
-    destination_thread_id = fallback_id if fallback_used else source_thread_id
+    if fallback_thread_id is not None:
+        validate_fallback_thread_id(fallback_thread_id)
+    if record.get("fallback_thread_id") is not None:
+        validate_fallback_thread_id(str(record["fallback_thread_id"]))
+    fallback_id = DEFAULT_FALLBACK_THREAD_ID
+    destination_thread_id = fallback_id
     binding = str(record.get("conversation_binding_key") or f"legacy:{record.get('direction_id', '')}")
     error_key = hashlib.sha256(error.encode("utf-8")).hexdigest()[:16]
     base_key = "|".join(
@@ -532,6 +591,12 @@ def stage_blocker_receipt(
         )
     )
     existing = dict(record.get("return_receipt") or {})
+    if existing.get("message_key") and existing["message_key"] != base_key:
+        raise ValueError("blocker receipt message key conflicts with the terminal state")
+    if existing.get("status") in {"SENT", "UNCERTAIN", "BLOCKED", "FAILED"} or (
+        existing.get("status") == "PENDING" and existing.get("message_key")
+    ):
+        return record
     existing.update(
         {
             "kind": "TERMINAL_BLOCKER",
@@ -539,28 +604,27 @@ def stage_blocker_receipt(
             "error": error,
             "required": True,
             "primary_destination_thread_id": source_thread_id,
+            "source_thread_id": source_thread_id,
             "destination_thread_id": destination_thread_id,
-            "status": "PENDING" if destination_thread_id else "BLOCKED",
-            "message_key": f"{base_key}|fallback|{fallback_id}" if fallback_used else base_key,
+            "status": "PENDING",
+            "message_key": base_key,
             "attempt_count": int(existing.get("attempt_count", 0)),
             "retry_allowed": False,
             "delivery_mode": "bounded_single_attempt",
             "return_control_after_attempt": True,
             "staged_at": timestamp,
-            "fallback_enabled": enabled,
-            "fallback_thread_id": fallback_id if enabled else None,
-            "fallback_thread_url": f"codex://threads/{fallback_id}" if enabled else None,
-            "fallback_destination_thread_id": fallback_id if enabled else None,
-            "fallback_used": fallback_used,
-            "fallback_status": "PENDING" if fallback_used else "NOT_NEEDED",
-            "fallback_message_key": f"{base_key}|fallback|{fallback_id}" if enabled else None,
-            "fallback_delivery_mode": "bounded_single_attempt" if enabled else None,
+            "routing_mode": "FIXED_FALLBACK",
+            "fallback_enabled": True,
+            "fallback_thread_id": fallback_id,
+            "fallback_thread_url": DEFAULT_FALLBACK_THREAD_URL,
+            "fallback_destination_thread_id": fallback_id,
+            "fallback_used": True,
+            "fallback_status": "PENDING",
+            "fallback_message_key": base_key,
+            "fallback_delivery_mode": "bounded_single_attempt",
         }
     )
-    if not source_thread_id and not enabled:
-        existing["error"] = "source_thread_id is required for automatic return"
-    elif fallback_used:
-        existing["fallback_staged_at"] = timestamp
+    existing["fallback_staged_at"] = timestamp
     record["return_receipt"] = existing
     return record
 
@@ -579,39 +643,23 @@ def record_receipt_result(
         raise ValueError("receipt status must be SENT, UNCERTAIN, BLOCKED, or FAILED")
     timestamp = now or utc_now()
     receipt = dict(record.get("return_receipt") or {})
+    if receipt.get("status") != "PENDING":
+        raise ValueError("receipt result requires one pending, unsent receipt")
+    if receipt.get("destination_thread_id") != DEFAULT_FALLBACK_THREAD_ID:
+        raise ValueError("receipt result destination must be the fixed fallback session")
     receipt["status"] = status
     receipt["delivery_status"] = delivery_status
     receipt["updated_at"] = timestamp
-    receipt["attempt_count"] = int(receipt.get("attempt_count", 0)) + (1 if status != "BLOCKED" else 0)
+    receipt["attempt_count"] = int(receipt.get("attempt_count", 0)) + 1
     receipt["retry_allowed"] = False
     if status == "SENT":
         receipt["sent_at"] = timestamp
     if error:
         receipt["error"] = error
-    if status in {"BLOCKED", "FAILED"}:
-        fallback_enabled = bool(receipt.get("fallback_enabled", False))
-        fallback_id = receipt.get("fallback_thread_id") or DEFAULT_FALLBACK_THREAD_ID
-        primary_id = receipt.get("primary_destination_thread_id")
-        if receipt.get("fallback_thread_id") is not None or fallback_enabled:
-            validate_fallback_thread_id(fallback_id)
-        if fallback_enabled and fallback_id != primary_id and not receipt.get("fallback_used"):
-            receipt["fallback_thread_id"] = fallback_id
-            receipt["fallback_thread_url"] = f"codex://threads/{fallback_id}"
-            receipt["fallback_destination_thread_id"] = fallback_id
-            receipt["fallback_status"] = "PENDING"
-            receipt["fallback_used"] = True
-            receipt["fallback_staged_at"] = timestamp
-            receipt["fallback_message_key"] = receipt.get("fallback_message_key") or (
-                f"{receipt.get('message_key', '')}|fallback|{fallback_id}"
-            )
-            receipt["fallback_reason"] = error or "primary completion receipt send failed"
-        elif not fallback_enabled:
-            receipt["fallback_status"] = "NOT_AUTHORIZED"
-            receipt["fallback_used"] = False
-    elif status == "UNCERTAIN":
-        # An uncertain primary delivery is deliberately not rerouted: it may have
-        # been accepted remotely, and a second receipt could duplicate the result.
-        receipt.setdefault("fallback_status", "NOT_NEEDED")
+    receipt["destination_thread_id"] = DEFAULT_FALLBACK_THREAD_ID
+    receipt["fallback_destination_thread_id"] = DEFAULT_FALLBACK_THREAD_ID
+    receipt["fallback_status"] = status
+    receipt["fallback_used"] = True
     record["return_receipt"] = receipt
     return record
 
@@ -624,25 +672,17 @@ def record_fallback_result(
     error: str | None = None,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Persist the explicitly bound fallback outcome without blocking the primary task."""
+    """Compatibility alias for recording the one fixed-route receipt outcome."""
 
     if status not in {"SENT", "UNCERTAIN", "BLOCKED"}:
         raise ValueError("fallback status must be SENT, UNCERTAIN, or BLOCKED")
-    receipt = dict(record.get("return_receipt") or {})
-    if receipt.get("fallback_status") != "PENDING":
-        raise ValueError("fallback receipt is not pending")
-    timestamp = now or utc_now()
-    receipt["fallback_status"] = status
-    receipt["fallback_delivery_status"] = delivery_status
-    receipt["fallback_updated_at"] = timestamp
-    receipt["fallback_attempt_count"] = int(receipt.get("fallback_attempt_count", 0)) + 1
-    receipt["fallback_retry_allowed"] = False
-    if status == "SENT":
-        receipt["fallback_sent_at"] = timestamp
-    if error:
-        receipt["fallback_error"] = error
-    record["return_receipt"] = receipt
-    return record
+    return record_receipt_result(
+        record,
+        status,
+        delivery_status=delivery_status,
+        error=error,
+        now=now,
+    )
 
 
 def observe_monitor(

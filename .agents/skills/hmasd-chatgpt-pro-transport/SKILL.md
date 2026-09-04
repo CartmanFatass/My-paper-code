@@ -27,8 +27,9 @@ exactly one body source:
   when the page requires text before its Send control becomes enabled.
 
 The handoff must also provide the exact originating Codex `source_thread_id` for
-the completion receipt. Treat it as routing metadata, never as scientific content;
-do not infer it from the provider conversation URL or from prose.
+completion-receipt auditability. Treat it as routing metadata, never as scientific
+content; do not infer it from the provider conversation URL or from prose. It is
+recorded as the source only: it is never a send destination.
 
 An optional `reference_paths` list contains one or more absolute reference files
 for bounded noncanonical/legacy transport. Validate and hash every
@@ -240,34 +241,31 @@ The executor turn ending, a heartbeat wake returning, or a timeout is never
 sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
-### Completion receipt to the originating session
+### Completion receipt to the fixed fallback session
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
-completion receipt in the persisted outbox, then send it once to the supplied
-`source_thread_id` using `mcp__codex_app__send_message_to_thread`. The receipt must contain at least
+completion receipt in the persisted outbox, then send it once to the fixed fallback
+session `01a04f5a-1c9f-7331-b1d9-249fb767362e` using
+`mcp__codex_app__send_message_to_thread`. The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
 SHA-256, archive paths, and heartbeat retirement status; it must report
 transport facts only and must not add scientific interpretation. Record the receipt
 timestamp, destination thread ID, deterministic message key, attempt count, and
 delivery status in the registry or transport-fact file. Treat the logical receipt as
-idempotent; on uncertain delivery, do not create a duplicate or send to another
-session—record `RETURN_RECEIPT_UNCERTAIN` and report it. If `source_thread_id` is
-missing or no longer resolves, archive remains valid but mark
-`RETURN_RECEIPT_BLOCKED` and report the exact routing gap. For an explicit
-terminal/blocker state with no archive, call `stage_blocker_receipt` and send the
-analogous structured blocker receipt when the source thread is available.
-
-The only configured send-failure fallback is the exact source session
-`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`. It is routing metadata only.
-Use it only when the request explicitly carries `fallback_enabled=true` and the
-primary receipt send has a definite `FAILED`/`BLOCKED` result, or when the primary
-`source_thread_id` is absent at staging time. An ordinary request without the flag
-remains `RETURN_RECEIPT_BLOCKED` when its source is absent. Never use or reroute the
-fallback for `UNCERTAIN`, `SEND_UNCERTAIN`, direction mismatch, or unknown
-conversation identity. Persist fallback status and return control immediately after
-a bounded attempt; a blocked subagent send must not hold the transport task open.
+idempotent; the deterministic message key is unchanged by this routing choice. On
+uncertain delivery, do not create a duplicate or send again—record
+`RETURN_RECEIPT_UNCERTAIN` and report it. Preserve `source_thread_id` and
+`primary_destination_thread_id` as audit facts, but force every
+`destination_thread_id` to `01a04f5a-1c9f-7331-b1d9-249fb767362e`, including when
+the source is present, absent, stale, or a multi-agent v2 session. The fallback ID
+is valid only when it is exactly
+`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`; callers cannot opt out or
+select another destination. Persist the one bounded attempt's result and return
+control immediately; a rejection must not cause a second send. For an explicit
+terminal/blocker state with no archive, `stage_blocker_receipt` applies the same
+fixed-route, one-send rule.
 
 ### Heartbeat retirement at task close
 

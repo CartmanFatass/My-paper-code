@@ -182,16 +182,19 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     assert record["return_receipt"]["attempt_count"] == 1
 
 
-def test_missing_source_without_explicit_fallback_remains_blocked() -> None:
+def test_missing_source_still_routes_to_the_fixed_session() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
     record["source_thread_id"] = None
     contract.stage_receipt(record, {"response_file": "response.md"}, "c" * 64)
     receipt = record["return_receipt"]
-    assert receipt["status"] == "BLOCKED"
-    assert receipt["fallback_enabled"] is False
-    assert receipt["fallback_used"] is False
-    assert receipt["destination_thread_id"] is None
+    assert receipt["status"] == "PENDING"
+    assert receipt["routing_mode"] == "FIXED_FALLBACK"
+    assert receipt["fallback_enabled"] is True
+    assert receipt["fallback_used"] is True
+    assert receipt["source_thread_id"] is None
+    assert receipt["primary_destination_thread_id"] is None
+    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
 
 
 def test_explicit_fallback_routes_missing_source_to_the_bound_session() -> None:
@@ -208,9 +211,8 @@ def test_explicit_fallback_routes_missing_source_to_the_bound_session() -> None:
     assert receipt["fallback_delivery_mode"] == "bounded_single_attempt"
     assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
     assert receipt["fallback_status"] == "PENDING"
-    assert receipt["fallback_message_key"].endswith(
-        f"|fallback|{contract.DEFAULT_FALLBACK_THREAD_ID}"
-    )
+    assert receipt["fallback_message_key"] == receipt["message_key"]
+    assert "|fallback|" not in receipt["fallback_message_key"]
 
 
 def test_explicit_fallback_stages_terminal_blocker_without_archive() -> None:
@@ -232,28 +234,34 @@ def test_explicit_fallback_stages_terminal_blocker_without_archive() -> None:
     assert receipt["fallback_staged_at"] == "2026-08-31T00:40:00Z"
 
 
-def test_definite_primary_failure_stages_fallback_but_uncertain_does_not() -> None:
+def test_fixed_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
     record["source_thread_id"] = "01a05860-6919-7bd3-9b04-99f8344ed73d"
-    record["fallback_enabled"] = True
-    record["fallback_thread_id"] = contract.DEFAULT_FALLBACK_THREAD_ID
     contract.stage_receipt(record, {"response_file": "response.md"}, "e" * 64)
+    receipt = record["return_receipt"]
+    assert receipt["source_thread_id"] == "01a05860-6919-7bd3-9b04-99f8344ed73d"
+    assert receipt["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
     contract.record_receipt_result(record, "FAILED", error="send tool failed")
     receipt = record["return_receipt"]
+    assert receipt["status"] == "FAILED"
+    assert receipt["fallback_status"] == "FAILED"
     assert receipt["fallback_used"] is True
-    assert receipt["fallback_status"] == "PENDING"
-    contract.record_fallback_result(record, "SENT", delivery_status="accepted")
-    assert record["return_receipt"]["fallback_status"] == "SENT"
+    assert receipt["attempt_count"] == 1
+    assert receipt["retry_allowed"] is False
+    with pytest.raises(ValueError, match="one pending, unsent receipt"):
+        contract.record_fallback_result(record, "SENT", delivery_status="accepted")
+    assert record["return_receipt"]["status"] == "FAILED"
 
     uncertain = _record()
     uncertain["state"] = "ARCHIVED"
-    uncertain["fallback_enabled"] = True
-    uncertain["fallback_thread_id"] = contract.DEFAULT_FALLBACK_THREAD_ID
     contract.stage_receipt(uncertain, {"response_file": "response.md"}, "f" * 64)
     contract.record_receipt_result(uncertain, "UNCERTAIN", error="timeout")
-    assert uncertain["return_receipt"]["fallback_used"] is False
-    assert uncertain["return_receipt"]["fallback_status"] == "NOT_NEEDED"
+    assert uncertain["return_receipt"]["status"] == "UNCERTAIN"
+    assert uncertain["return_receipt"]["fallback_status"] == "UNCERTAIN"
+    assert uncertain["return_receipt"]["destination_thread_id"] == contract.DEFAULT_FALLBACK_THREAD_ID
+    with pytest.raises(ValueError, match="one pending, unsent receipt"):
+        contract.record_receipt_result(uncertain, "SENT")
 
 
 def test_only_the_configured_fallback_uuid_is_accepted() -> None:
@@ -541,14 +549,16 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "request_id|conversation_binding_key|conversation_id|provider_url",
         "stage_receipt",
         "provider filename suffix or normalization",
-        "fallback_enabled=true",
         "01a04f5a-1c9f-7331-b1d9-249fb767362e",
-        "fallback for `UNCERTAIN`, `SEND_UNCERTAIN`",
+        "callers cannot opt out or",
+        "a rejection must not cause a second send",
+        "it is never a send destination",
         "stage_blocker_receipt",
     ):
         assert phrase in transport_text
-    assert "The target is responsible for the full lifecycle after acceptance" in outsource_text
-    assert "do not dispatch the task to itself" in outsource_text
+    assert "fallback_enabled=true" not in transport_text
+    assert "owns the complete edit and verification" in outsource_text
+    assert "never silently fan out, duplicate, or replace an agent" in outsource_text
     assert "close the temporary tab\nafter recording that state" not in transport_text
 
 

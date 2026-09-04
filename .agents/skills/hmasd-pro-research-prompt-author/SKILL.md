@@ -59,8 +59,9 @@ preserved as provider-visible text.
 Validate it as the exact source-task UUID and preserve it byte-for-byte in the
 machine-readable handoff. It is never scientific content, a Pro conversation
 identity, or a caller-authority field, and must never be copied into
-the provider-visible `PROMPT_BODY.md`. The normal path returns to this exact source
-thread; it must not rely on Transport fallback routing.
+the provider-visible `PROMPT_BODY.md`. Transport delivers the completion receipt to
+its fixed return session; `source_thread_id` is retained in the receipt as an audit
+fact only and is never a send destination.
 
 The calling Portfolio/EM owns direction scope, wording, scientific meaning,
 claim ceiling, and reference selection. Pro owns the final decision at the

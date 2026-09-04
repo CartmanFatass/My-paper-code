@@ -21,9 +21,9 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
   "request_id": "portfolio-frrie-r02-exact-law-20260831-01",
   "packet_id": "portfolio-frrie-r02-exact-law-20260831-01--finite_resource_relational_inductive_efficiency",
   "source_thread_id": "01a...",
-  "fallback_enabled": false,
-  "fallback_thread_id": null,
-  "fallback_thread_url": null,
+  "fallback_enabled": true,
+  "fallback_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+  "fallback_thread_url": "codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e",
   "conversation_id": "6a...",
   "provider_url": "https://chatgpt.com/c/6a...",
   "state": "WAITING_GENERATION",
@@ -100,20 +100,22 @@ handles, heartbeat wakeups, and executor turns remain ephemeral observations.
   "return_receipt": {
     "required": true,
     "primary_destination_thread_id": "01a...",
-    "destination_thread_id": "01a...",
+    "source_thread_id": "01a...",
+    "destination_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
     "status": "PENDING",
     "message_key": null,
     "attempt_count": 0,
     "retry_allowed": false,
     "delivery_mode": "bounded_single_attempt",
     "return_control_after_attempt": true,
-    "fallback_enabled": false,
-    "fallback_thread_id": null,
-    "fallback_destination_thread_id": null,
-    "fallback_status": "NOT_NEEDED",
-    "fallback_used": false,
-    "fallback_message_key": null,
-    "fallback_delivery_mode": null,
+    "routing_mode": "FIXED_FALLBACK",
+    "fallback_enabled": true,
+    "fallback_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+    "fallback_destination_thread_id": "01a04f5a-1c9f-7331-b1d9-249fb767362e",
+    "fallback_status": "PENDING",
+    "fallback_used": true,
+    "fallback_message_key": "<same deterministic message_key>",
+    "fallback_delivery_mode": "bounded_single_attempt",
     "delivery_status": null,
     "error": null
   },
@@ -277,19 +279,17 @@ are separate facts.
 After `ARCHIVED`, call `stage_receipt` from `scripts/transport_contract.py` before
 using `send_message_to_thread`. The deterministic `message_key` is
 `request_id|direction_id|conversation_id|response_sha256`. The outbox transitions
-from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the
-destination, timestamp, attempt count, delivery status, and error. An uncertain
-send is never retried or rerouted; a missing/unresolved source thread leaves the
-archive valid and sets `RETURN_RECEIPT_BLOCKED` unless the request explicitly sets
-`fallback_enabled=true`.
+from `PENDING` to `SENT`, `UNCERTAIN`, `FAILED`, or `BLOCKED` and records the fixed
+destination, timestamp, attempt count, delivery status, and error. The source
+thread is retained in `source_thread_id` and `primary_destination_thread_id` for
+audit only. The actual `destination_thread_id` is always the exact configured
+fallback session `01a04f5a-1c9f-7331-b1d9-249fb767362e`; `fallback_enabled` is
+therefore always true for a staged receipt and cannot select another ID.
 
-The only configured fallback is the exact Codex session
-`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`. With explicit
-`fallback_enabled=true`, a missing source thread or a definite primary send failure
-stages one fallback outbox entry with `fallback_used=true`, the fallback destination,
-timestamp, and `message_key=<primary-key>|fallback|<fallback-thread-id>`. A normal
-request without that flag never uses the fallback. `UNCERTAIN` and
-`SEND_UNCERTAIN` never use it because the primary may already have been accepted.
-Terminal blockers without an archive use `stage_blocker_receipt` with the same
-explicit fallback rule. Fallback delivery is a separate bounded action; its failure is recorded and does not
-block archive completion.
+The fixed destination is
+`codex://threads/01a04f5a-1c9f-7331-b1d9-249fb767362e`. Its ID must validate as
+that exact UUID. The fallback route does not add a second message-key suffix: its
+message key is the same deterministic key for the one logical receipt. An
+uncertain delivery, a rejection, or a blocked fixed-route send is terminal for that
+outbox entry and is never retried, rerouted, or duplicated. Terminal blockers
+without an archive use `stage_blocker_receipt` with the same fixed-route rule.
