@@ -5,6 +5,8 @@ from __future__ import annotations
 import ctypes
 from datetime import datetime, timezone
 from fractions import Fraction
+import json
+from pathlib import Path
 from typing import Iterable, Sequence
 
 from experiments.candidates.variable_n_fleet_churn_bpcr_r09.native_backend import (
@@ -18,13 +20,20 @@ from scripts import run_vnfc_bpcr_r02 as r02
 
 TARGET_SEED = 2026090311
 TARGET_UPDATES = 64
-TARGET_BEAM_WIDTH = 256
+TARGET_BEAM_WIDTH = 1024
 MATERIAL_MARGIN = Fraction(1, 10)
+OBJECT = "VNFC-CONTROLLER-HEADROOM-A-RECON-MEMORY-BOUNDED-K1024-R02"
+_WITNESS = (
+    Path(__file__).resolve().parents[3]
+    / "docs/research/candidates/variable_n_fleet_churn/"
+    "VNFC_CONTROLLER_HEADROOM_K256_ACCEPTED_WITNESS_20260904.json"
+)
 
 
-def prospective_cost(beam_width: int, world_count: int = 16) -> dict[str, int | str]:
+def prospective_cost(beam_width: int, world_count: int = 16) -> dict[str, object]:
     per_world = 1961 + 2 * beam_width * 1961
     total = world_count * per_world
+    projected_wall = 723.80 * total / 64_289_424
     return {
         "law": "beam_expansions_per_world(K)<=1961+2*K*1961; "
         "beam_expansions_total(K)<=worlds*(1961+2*K*1961); "
@@ -37,6 +46,10 @@ def prospective_cost(beam_width: int, world_count: int = 16) -> dict[str, int | 
         "persistent_native_ticks_total_upper_bound": world_count * 1961 * 60,
         "bcrh_decision_calls": world_count * 6,
         "bcrh_scored_candidates_upper_bound": world_count * 6 * 1961,
+        "result_blind_projected_wall_seconds": projected_wall,
+        "projection_basis": "723.80 seconds at K=1024 over 16 frozen worlds",
+        "per_invocation_wall_cap_seconds": 2700.0,
+        "projection_within_wall_cap": projected_wall <= 2700.0,
     }
 
 
@@ -96,26 +109,56 @@ def _endpoint_fraction(endpoint: object) -> Fraction:
     return Fraction(int(numerator), int(denominator))
 
 
-def summarize_world(zone: int, row: int, native: dict[str, object]) -> dict[str, object]:
+def accepted_k256_worlds() -> dict[tuple[int, int], dict[str, object]]:
+    payload = json.loads(_WITNESS.read_text(encoding="utf-8"))
+    return {
+        (int(world["zone"]), int(world["row"])): world
+        for world in payload["worlds"]
+    }
+
+
+def _witness_endpoint(value: object) -> Fraction:
+    endpoint = value  # type: ignore[assignment]
+    return Fraction(int(endpoint["numerator"]), int(endpoint["denominator"]))  # type: ignore[index]
+
+
+def summarize_world(
+    zone: int, row: int, native: dict[str, object],
+    accepted: dict[str, object] | None = None,
+) -> dict[str, object]:
     endpoints = native["endpoints"]  # type: ignore[assignment]
     fractions = {
         name: _endpoint_fraction(endpoint)
         for name, endpoint in endpoints.items()  # type: ignore[union-attr]
     }
-    witness_name = min(
-        ("ORACLE_BEAM_FAIL60", "PERSIST_MAX_C60", "BCRH"),
-        key=lambda name: (-fractions[name], ("ORACLE_BEAM_FAIL60", "PERSIST_MAX_C60", "BCRH").index(name)),
+    accepted_k256 = (
+        _witness_endpoint(accepted["accepted_k256"]["endpoint"])  # type: ignore[index]
+        if accepted is not None
+        else None
+    )
+    candidates = [
+        ("ORACLE_BEAM_FAIL60_K1024", fractions["ORACLE_BEAM_FAIL60"]),
+        ("PERSIST_MAX_C60", fractions["PERSIST_MAX_C60"]),
+        ("BCRH", fractions["BCRH"]),
+    ]
+    if accepted_k256 is not None:
+        candidates.insert(1, ("ORACLE_BEAM_FAIL60_K256_ACCEPTED", accepted_k256))
+    witness_name, witness_fraction = min(
+        candidates,
+        key=lambda item: (-item[1], candidates.index(item)),
     )
     bcrh = fractions["BCRH"]
-    lower = fractions[witness_name] - bcrh
+    lower = witness_fraction - bcrh
     upper = Fraction(1) - bcrh
     bcrh_facts = native["bcrh_decisions"]  # type: ignore[assignment]
-    bcrh_valid = all(
+    bcrh_valid = len(bcrh_facts) == 6 and all(
         fact["scorer_checker_equal"]
         and fact["independent_enumerator_equal"]
         and fact["all_candidate_records_exact"]
         and fact["scorer_command"] == fact["checker_command"]
         and fact["candidate_digest"] == fact["checker_digest"]
+        and len(fact["candidate_records"]) == fact["candidate_count"]
+        and all(record["exact_match"] for record in fact["candidate_records"])
         and 0 < fact["candidate_count"] <= 1961
         for fact in bcrh_facts  # type: ignore[union-attr]
     )
@@ -125,45 +168,108 @@ def summarize_world(zone: int, row: int, native: dict[str, object]) -> dict[str,
     )
     endpoint_valid = all(Fraction(0) <= value <= Fraction(1) for value in fractions.values())
     bound_valid = Fraction(0) <= lower <= upper
+    nonregression = (
+        accepted_k256 is None or fractions["ORACLE_BEAM_FAIL60"] >= accepted_k256
+    )
+    historical_baselines_equal = (
+        accepted is None
+        or (
+            fractions["BCRH"] == _witness_endpoint(accepted["accepted_bcrh_endpoint"])
+            and fractions["PERSIST_MAX_C60"]
+            == _witness_endpoint(accepted["accepted_persist_endpoint"])
+        )
+    )
+    storage = native["search_storage"]  # type: ignore[assignment]
+    selector_valid = (
+        storage["max_current_frontier_capacity"] <= native["beam_width"]  # type: ignore[index]
+        and storage["max_next_selector_capacity"] <= native["beam_width"]  # type: ignore[index]
+        and storage["max_live_nodes_high_water"] <= 2 * native["beam_width"] + 1  # type: ignore[index]
+        and all(
+            depth["transient"]["nodes_high_water"] <= 1
+            and depth["enumerator_count_high_water"] <= 1961
+            for depth in native["beam_depths"]  # type: ignore[union-attr]
+        )
+    )
     valid = (
         bcrh_valid
         and native_valid
         and endpoint_valid
         and bound_valid
+        and nonregression
+        and historical_baselines_equal
+        and selector_valid
         and bool(native["persist_sensitivity_agreement"])
     )
+    published_names = {
+        "BCRH": "BCRH",
+        "PERSIST_MAX_C60": "PERSIST_MAX_C60",
+        "ORACLE_BEAM_FAIL60": "ORACLE_BEAM_FAIL60_K1024_MEMBOUND",
+    }
+    endpoint_payload = {
+        published_names[name]: {
+            "numerator": int(endpoints[name][0]),  # type: ignore[index]
+            "denominator": int(endpoints[name][1]),  # type: ignore[index]
+            "ratio": fraction_payload(value),
+        }
+        for name, value in fractions.items()
+    }
+    trajectories = {
+        published_names[name]: trajectory
+        for name, trajectory in native["trajectories"].items()  # type: ignore[union-attr]
+    }
+    if accepted is not None and accepted_k256 is not None:
+        endpoint_payload["ORACLE_BEAM_FAIL60_K256_ACCEPTED"] = {
+            "numerator": accepted_k256.numerator,
+            "denominator": accepted_k256.denominator,
+            "ratio": fraction_payload(accepted_k256),
+        }
+        trajectories["ORACLE_BEAM_FAIL60_K256_ACCEPTED"] = accepted["accepted_k256"][  # type: ignore[index]
+            "complete_command_history"
+        ]
     return {
         "zone": zone,
         "row": row,
         "failed_rank": native["failed_rank"],
-        "endpoints": {
-            name: {
-                "numerator": int(endpoints[name][0]),  # type: ignore[index]
-                "denominator": int(endpoints[name][1]),  # type: ignore[index]
-                "ratio": fraction_payload(value),
-            }
-            for name, value in fractions.items()
-        },
+        "endpoints": endpoint_payload,
         "measurement_complete": True,
         "search_commands": {
-            name: native["trajectories"][name][:3]  # type: ignore[index]
+            published_names[name]: native["trajectories"][name][:3]  # type: ignore[index]
             for name in ("PERSIST_MAX_C60", "ORACLE_BEAM_FAIL60")
         },
-        "trajectories": native["trajectories"],
-        "terminal_completion_commands": native["terminal_completion_commands"],
+        "trajectories": trajectories,
+        "accepted_k256_command_history_sha256": (
+            accepted["accepted_k256"]["command_history_sha256"]  # type: ignore[index]
+            if accepted is not None else None
+        ),
+        "terminal_completion_commands": {
+            published_names[name]: commands
+            for name, commands in native["terminal_completion_commands"].items()  # type: ignore[union-attr]
+        },
         "bcrh_decisions": bcrh_facts,
         "beam_depths": native["beam_depths"],
         "counts": native["counts"],
+        "search_storage": storage,
         "witness_source": witness_name,
+        "k1024_minus_accepted_k256": (
+            fraction_payload(fractions["ORACLE_BEAM_FAIL60"] - accepted_k256)
+            if accepted_k256 is not None else None
+        ),
+        "k1024_nonregression": nonregression,
         "L": fraction_payload(lower),
         "U": fraction_payload(upper),
+        "individual_world_material": lower >= MATERIAL_MARGIN,
         "validity": {
             "bcrh_scorer_checker_enumerator_candidates": bcrh_valid,
             "persist_sensitivity_maximum": bool(native["persist_sensitivity_agreement"]),
             "terminal_safety_exclusivity": native_valid,
             "endpoint_unit_interval": endpoint_valid,
             "bound_order_0_le_L_le_H_le_U": bound_valid,
-            "complete": valid,
+            "selector_conformance": selector_valid,
+            "k1024_ge_accepted_k256": nonregression,
+            "historical_bcrh_persist_equal": historical_baselines_equal,
+            "resource": False,
+            "complete": False,
+            "complete_except_resource": valid,
         },
     }
 
@@ -174,25 +280,16 @@ def mean_fraction(values: Iterable[Fraction]) -> Fraction:
 
 
 def classify_means(
-    aggregate_l: Fraction, aggregate_u: Fraction,
-    zone_l: dict[int, Fraction], zone_u: dict[int, Fraction]
+    aggregate_l: Fraction, zone_l: dict[int, Fraction]
 ) -> tuple[str, str]:
     if aggregate_l >= MATERIAL_MARGIN and all(zone_l[zone] >= MATERIAL_MARGIN for zone in (1, 2)):
-        return "CH-A", "MATERIAL_HEADROOM"
-    if aggregate_u < MATERIAL_MARGIN and all(zone_u[zone] < MATERIAL_MARGIN for zone in (1, 2)):
-        return "CH-B", "NO_MATERIAL_HEADROOM"
-    if (
-        zone_l[1] >= MATERIAL_MARGIN and zone_u[2] < MATERIAL_MARGIN
-    ) or (
-        zone_l[2] >= MATERIAL_MARGIN and zone_u[1] < MATERIAL_MARGIN
-    ):
-        return "CH-C", "ZONE_HETEROGENEOUS_HEADROOM"
-    return "CH-D", "HEADROOM_BRACKET_UNRESOLVED"
+        return "MB1024-A", "MATERIAL_PANEL_HEADROOM_WITNESSED"
+    return "MB1024-D", "BOUNDED_SEARCH_REMAINS_UNRESOLVED"
 
 
 def aggregate_worlds(worlds: Sequence[dict[str, object]]) -> dict[str, object]:
     if len(worlds) != 16 or any(not world["validity"]["complete"] for world in worlds):  # type: ignore[index]
-        return {"branch": "INCOMPLETE", "reason": "missing_or_invalid_world"}
+        return {"branch": "MB1024-INCOMPLETE", "reason": "missing_or_invalid_world"}
     lower = {id(world): Fraction(world["L"]["numerator"], world["L"]["denominator"]) for world in worlds}  # type: ignore[index]
     upper = {id(world): Fraction(world["U"]["numerator"], world["U"]["denominator"]) for world in worlds}  # type: ignore[index]
     aggregate_l = mean_fraction(lower[id(world)] for world in worlds)
@@ -205,11 +302,14 @@ def aggregate_worlds(worlds: Sequence[dict[str, object]]) -> dict[str, object]:
         zone: mean_fraction(upper[id(world)] for world in worlds if world["zone"] == zone)
         for zone in (1, 2)
     }
-    code, label = classify_means(aggregate_l, aggregate_u, zone_l, zone_u)
+    code, label = classify_means(aggregate_l, zone_l)
     return {
         "branch": code,
         "label": label,
         "material_margin": fraction_payload(MATERIAL_MARGIN),
+        "zone_localized_witness": sum(
+            zone_l[zone] >= MATERIAL_MARGIN for zone in (1, 2)
+        ) == 1,
         "aggregate": {"L_mean": fraction_payload(aggregate_l), "U_mean": fraction_payload(aggregate_u)},
         "zones": {
             str(zone): {"L_mean": fraction_payload(zone_l[zone]), "U_mean": fraction_payload(zone_u[zone])}
@@ -221,7 +321,11 @@ def aggregate_worlds(worlds: Sequence[dict[str, object]]) -> dict[str, object]:
 def analyze_fixtures(
     fixtures: Sequence[tuple[int, int, object]], beam_width: int
 ) -> tuple[dict[str, object], ...]:
+    accepted = accepted_k256_worlds()
     return tuple(
-        summarize_world(zone, row, run_headroom_fixture(fixture, beam_width))
+        summarize_world(
+            zone, row, run_headroom_fixture(fixture, beam_width),
+            accepted.get((zone, row)),
+        )
         for zone, row, fixture in fixtures
     )
