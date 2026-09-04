@@ -511,3 +511,47 @@ different, independently justified A/RECON source population. Exact evidence and
 `SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_EVIDENCE_20260904.md` and
 `SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_INTAKE_20260904.md`. Portfolio state remains
 unchanged.
+
+## D6 event-phase A02 admission — 2026-09-04
+
+The complete archived response from the same persistent convergence node formed
+`DECISION_FORMED=true` and `PRO_FINAL=ADMIT_ONE_PROSPECTIVE_A_RECON`. Its exact response SHA-256 is
+`b69700d63df75fc62342e4b8ef88f114460a60eba97cc3bb79ff3d7f3b1fff7d`. The direction executes that
+decision unchanged.
+
+The smallest supported conclusion closes the stationary/post-event A01 population as substrate
+for the intended bidirectional D6 action-choice question. It does not close D6 on every population
+and does not create D6/D8 learner polarity. Exactly one independently grounded population is
+admitted: `SCDMP-D6-EVENT-PHASE-DURATION-ACTION-RELEVANCE-A02`, A/RECON.
+
+A02 fixes the same `.92/.25` native host and compares same-information `EVENT_CLOCK_7` and
+`EVENT_CLOCK_13` policies around a public scheduled HR/RH event. At countdown `7`, `k=7` responds
+at the event while `k=13` is six ticks late; at countdown `78`, `k=13` responds at the event while
+`k=7` is six ticks late. These opposed phase alignments follow prospectively from
+`lcm(7,13)=91`, not from an A01 outcome search. Six base states at common renewals
+`91/182/273`, both countdowns, balanced graphs and sixteen paired tapes define a fixed 768-mission
+panel with no model, optimizer or learner.
+
+The strongest support is the exact event-to-renewal-to-action-to-native-return mechanism and its
+opposed six-tick predictions. The strongest contradiction is A01's uniform `k=13` advantage of
+179--197 numerator units across all six states. A general longer-hold docking-time benefit remains
+the strongest live alternative; event-phase effects may also be nonmaterial, heterogeneous or
+unrepresentable under unchanged native semantics.
+
+The finite claim ceiling is the exact host, base states, countdowns, fixed clock policies, HR/RH
+events, tapes and native endpoint. It excludes D6/D8 competence, cross-`k` sharing value, sample
+efficiency, regularization or negative-transfer causation, D2 interruption, unseen-duration
+transfer, semigroup invariance, general MARL value, safety and deployment.
+
+The sole next discriminator is the complete A02 object in
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_SCIENCE_CARD_20260904.md`. After valid intake,
+the same convergence binding decides whether a separately frozen B is warranted or the family
+parks. No A02 branch authorizes B, another population or a countdown sweep. Exact decision intake
+and durable provider bytes are in `SCDMP_D6_A01_RESULT_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-a01-result-convergence-03/`.
+
+The parallel Portfolio A1 audit does not change this mechanism conclusion. Completed A01 measured
+duration-action relevance, not upper-reference minus tuned-generic-baseline headroom; its raw
+headroom gap is absent rather than zero. The minimal follow-up definition is held separately until
+exact baseline assets exist, with no MEI, B or lifecycle effect. See
+`SCDMP_PORTFOLIO_A1_HEADROOM_EQUIVALENCE_INTAKE_20260904.md`.
