@@ -1,0 +1,78 @@
+{
+  "schema_version": 4,
+  "request_id": "ucope-em-convergence-20260904-02",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:ucope:convergence",
+  "direction_id": "ucope",
+  "direction_ids": [
+    "ucope"
+  ],
+  "decision_authority": "pro_final",
+  "state": "ARCHIVED",
+  "conversation_id": "6a9642a3-cdd0-83e8-9334-21262386768c",
+  "provider_url": "https://chatgpt.com/c/6a9642a3-cdd0-83e8-9334-21262386768c",
+  "tab_id": "1",
+  "visible_model": "Pro",
+  "underlying_model": "GPT-5.6 Sol",
+  "thinking_effort": "5/5",
+  "source_mode": "upload",
+  "prompt_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope__00_PROMPT.md",
+  "prompt_sha256": "ab838ca8eeb77a651d752fdb9a127f99c17b3447ab5dc5e0c263147432ad388b",
+  "reference_files": [],
+  "timestamps": {
+    "received_at": "2026-09-04T11:30:33Z",
+    "sent_at": "2026-09-04T11:30:33Z",
+    "generation_started_at": "2026-09-04T11:30:33Z",
+    "completed_at": "2026-09-04T11:30:33Z",
+    "captured_at": "2026-09-04T11:30:33Z",
+    "archived_at": "2026-09-04T11:30:33Z"
+  },
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": true
+  },
+  "wait_status": {
+    "natural_completion": true,
+    "active_generation_control": false,
+    "observed_url": "https://chatgpt.com/c/6a9642a3-cdd0-83e8-9334-21262386768c"
+  },
+  "response_sha256": "7924ae06b82d61ffd25fde935bb31216b481373a0249a039b0eb7f94f3a22411",
+  "archive": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope--attempt-01__02_RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope--attempt-01__03_TRANSPORT_FACTS.json"
+  },
+  "heartbeat": {
+    "automation_id": "ucope-convergence-transport-wake-2026-09-04-request-02",
+    "status": "ACTIVE",
+    "next_wake_at": null,
+    "retired_at": null,
+    "retirement_verified": false
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a06bc3-aca0-7143-85dc-4035d77c7c11",
+    "parent_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+    "destination_thread_id": "01a06b74-8a54-79d3-ae8b-3c02ade3b031",
+    "status": "PENDING",
+    "attempt_count": 0,
+    "message_key": "ucope-em-convergence-20260904-02|ucope|6a9642a3-cdd0-83e8-9334-21262386768c|7924ae06b82d61ffd25fde935bb31216b481373a0249a039b0eb7f94f3a22411",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope__00_PROMPT.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope--attempt-01__02_RESPONSE.md",
+      "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope__PACKET_MANIFEST.json",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\ucope\\ucope-em-convergence-20260904-02\\ucope-em-convergence-20260904-02--ucope--attempt-01__03_TRANSPORT_FACTS.json"
+    },
+    "response_sha256": "7924ae06b82d61ffd25fde935bb31216b481373a0249a039b0eb7f94f3a22411",
+    "staged_at": "2026-09-04T11:30:33Z",
+    "fallback_enabled": false
+  }
+}

@@ -944,3 +944,45 @@ No successor card is frozen and no result is launched. Per the engineering-disse
 persistent convergence node must be reopened with the missing-byte fact before direction work can
 continue. The paid-acquisition and COUNT/RAW locks remain unchanged; Portfolio effects remain
 reserved.
+
+## Reopened convergence amendment — 2026-09-04
+
+The complete response for reopened request `ucope-em-convergence-20260904-02`, persistent binding
+`em:ucope:convergence`, is archived at SHA-256
+`7924ae06b82d61ffd25fde935bb31216b481373a0249a039b0eb7f94f3a22411`. Its final decision is:
+
+```text
+FINAL_DIRECTION_DECISION=CONTINUE
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+PRIOR_SELECTED_OBJECT_DISPOSITION=AMENDED
+NEXT_OBJECT_FAMILY=UCOPE-A-RECON-THREE-WITNESS-ROOT-TARGET-VS-ROOT-FIT-AUDIT-R01
+NEXT_EVIDENCE_CLASS=A/RECON
+DETERMINISTIC_ROW_RECONSTRUCTION_ALLOWED=true
+```
+
+The amendment resolves the engineering dissent without changing TW-B or the selected causal
+question. One exact deterministic replay of the accepted draw is authorized and counted as
+`983,040` environment episodes and `4,915,200` transitions. These are new runtime executions but
+zero fresh draw identities, independent sample units, optimizer constructions, optimizer steps,
+parameter updates, or algorithm-effect observations.
+
+The audit compares the retained `THREE-WITNESS` and matched `DOSE-MATCHED-SINGLE` learned tails on
+the same six reconstructed root blocks. It retains all twelve live target arrays and twelve
+live-tail exact-root vectors, compares them with the retained finite roots, and returns one of
+`ROOT_TARGET_PIPELINE_SHIFT_SUPPORTED`, `FINITE_ROOT_FIT_RESIDUAL_SUPPORTED`, or
+`MIXED_ROOT_CAUSE`; any binding or reconstruction failure has no scientific polarity. The six
+MSE-exact-reference roots are reconstruction checks only because they use different tail-induced
+targets.
+
+The frozen total cost projection and cap are both `185.481 s`; the exposure line has six root
+blocks, twelve live target arrays, twelve exact solves and evaluations, and no learner exposure.
+The full direction provenance and result map are recorded in
+`UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_CONVERGENCE_INTAKE_20260904.md`; the amended prospective
+contract is `UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_CARD_20260904.md`.
+
+Claim ceiling: same-draw, six-policy A/RECON localization of target/exact-projection pipeline versus
+finite root fitting only. No stability, fresh-draw, algorithm-effect, deployable-objective,
+acquisition, COUNT/RAW, generic UCOPE/MARL/UAV, transfer, safety, deployment, or Portfolio claim.
+The paid-acquisition and COUNT/RAW locks remain unchanged.
