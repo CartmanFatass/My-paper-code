@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-008",
+  "created": "2026-09-04T14:36:32-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "恢复未观测的 RAW 252–264 诊断",
+  "context": "所有者已恢复自动研究。CM 直接核对旧任务：它只执行 cd，零秒退出，结果目录不存在，也没有 RAW 运行进程。选择保留失败记录，以精确已提交 Git 对象恢复远端文件，做一次非结果命令传递核验，再执行原卡片的一次新身份远端诊断；科学含义与预算不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "恢复精确源码并执行原诊断",
+      "consequence": "保留旧证据，读取尚未观测的十三个检查点。"
+    },
+    {
+      "key": "b",
+      "label": "继续停留在旧运输依赖",
+      "consequence": "该诊断仍无观察，保留相同依赖。"
+    },
+    {
+      "key": "c",
+      "label": "把退出码当结果或改变语义",
+      "consequence": "不能形成符合卡片的科学结果。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "旧任务没有科学执行；已授权的精确对象恢复可以在不改变比较器、信息与数值路径的条件下完成原问题。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_RESUME_BOUNDARY_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L214",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
