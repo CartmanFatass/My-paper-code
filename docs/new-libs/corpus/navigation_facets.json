@@ -1,0 +1,858 @@
+{
+  "by_evidence_type": {
+    "ablations": [
+      "P17"
+    ],
+    "algorithm derivation": [
+      "P05"
+    ],
+    "algorithm exposition": [
+      "B01"
+    ],
+    "algorithm proposal": [
+      "P17"
+    ],
+    "algorithms": [
+      "B02"
+    ],
+    "asymptotic approximation bounds": [
+      "P21"
+    ],
+    "benchmark experiments": [
+      "P17"
+    ],
+    "complexity results": [
+      "B03"
+    ],
+    "computational experiments": [
+      "P03"
+    ],
+    "conceptual position paper": [
+      "P01",
+      "P18"
+    ],
+    "conceptual reframing": [
+      "P06"
+    ],
+    "constructed counterexamples": [
+      "P04"
+    ],
+    "convergence argument": [
+      "P08"
+    ],
+    "empirical evaluation": [
+      "P06",
+      "P07",
+      "P08",
+      "P12",
+      "P14",
+      "P15",
+      "P16",
+      "P24"
+    ],
+    "epsilon-Nash guarantee": [
+      "P21"
+    ],
+    "error-propagation theorem": [
+      "P24"
+    ],
+    "evaluation guidance": [
+      "B01"
+    ],
+    "formal convergence analysis": [
+      "P02",
+      "P05"
+    ],
+    "formal counterexample family": [
+      "P17"
+    ],
+    "formal dynamical-systems analysis": [
+      "P04"
+    ],
+    "formal existence analysis": [
+      "P21"
+    ],
+    "formal finite-time analysis": [
+      "P13"
+    ],
+    "formal guarantee": [
+      "P07"
+    ],
+    "formal guarantees": [
+      "P03",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P14",
+      "P16",
+      "P20",
+      "P22",
+      "P25"
+    ],
+    "formal lower bound": [
+      "P19"
+    ],
+    "formal theorems": [
+      "B02"
+    ],
+    "formal upper bounds": [
+      "P19"
+    ],
+    "heuristic experiment": [
+      "P11"
+    ],
+    "lower bound": [
+      "P11"
+    ],
+    "numerical examples": [
+      "P09"
+    ],
+    "numerical experiments": [
+      "P22"
+    ],
+    "oracle-complexity bounds": [
+      "P05"
+    ],
+    "planning algorithms": [
+      "B03"
+    ],
+    "preprint": [
+      "P06"
+    ],
+    "proposed objectives": [
+      "P18"
+    ],
+    "proposition": [
+      "P15"
+    ],
+    "recent preprint": [
+      "P24"
+    ],
+    "selective literature synthesis": [
+      "P01"
+    ],
+    "simulation experiments": [
+      "P19"
+    ],
+    "synthetic numerical experiments": [
+      "P13"
+    ],
+    "tabular experiments": [
+      "P02"
+    ],
+    "textbook synthesis": [
+      "B01",
+      "B02",
+      "B03"
+    ],
+    "trajectory illustration": [
+      "P04"
+    ],
+    "unreviewed preprint": [
+      "P07",
+      "P13",
+      "P18"
+    ],
+    "worked derivations": [
+      "B01"
+    ],
+    "worked domains": [
+      "B03"
+    ],
+    "worked examples": [
+      "B02"
+    ],
+    "worked game examples": [
+      "P01"
+    ]
+  },
+  "by_hmasd_axis": {
+    "communication": [
+      "B01",
+      "B02",
+      "B03",
+      "P15"
+    ],
+    "credit": [
+      "B01",
+      "P08",
+      "P15",
+      "P16",
+      "P17"
+    ],
+    "foundations": [
+      "B01",
+      "B02",
+      "B03",
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P18",
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "P24",
+      "P25"
+    ],
+    "optimization": [
+      "B01",
+      "B02",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P10",
+      "P13",
+      "P16",
+      "P17",
+      "P18",
+      "P19",
+      "P20",
+      "P25"
+    ],
+    "planning": [
+      "B01",
+      "B02",
+      "B03",
+      "P09",
+      "P11",
+      "P12",
+      "P14",
+      "P17",
+      "P21",
+      "P24",
+      "P25"
+    ],
+    "variable_N": [
+      "B01",
+      "P03",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P14",
+      "P15",
+      "P16",
+      "P18",
+      "P20",
+      "P21",
+      "P22",
+      "P24"
+    ]
+  },
+  "by_method": {
+    "AVLPR": [
+      "P20"
+    ],
+    "Armijo verification": [
+      "P07"
+    ],
+    "Bregman proximal geometry": [
+      "P05"
+    ],
+    "CTDE": [
+      "P06",
+      "P08",
+      "P16"
+    ],
+    "EXP3": [
+      "P20"
+    ],
+    "GOLF": [
+      "P25"
+    ],
+    "HJB control": [
+      "P21"
+    ],
+    "L2 operator norm": [
+      "P22"
+    ],
+    "MADDPG": [
+      "P15"
+    ],
+    "McKean-Vlasov fixed point": [
+      "P21"
+    ],
+    "PPO": [
+      "P12",
+      "P16"
+    ],
+    "Q-learning": [
+      "B01",
+      "P17"
+    ],
+    "QMIX": [
+      "P15",
+      "P17"
+    ],
+    "STORM": [
+      "P07"
+    ],
+    "TRPO": [
+      "P16"
+    ],
+    "Wasserstein objectives": [
+      "P18"
+    ],
+    "action-dependent bonuses": [
+      "P20"
+    ],
+    "actor-critic": [
+      "B01",
+      "P06"
+    ],
+    "asymptotic epsilon-Nash analysis": [
+      "P21"
+    ],
+    "attention scheduling": [
+      "P15"
+    ],
+    "averaging": [
+      "P05"
+    ],
+    "block approximation": [
+      "P12"
+    ],
+    "bridge policy": [
+      "P11"
+    ],
+    "conceptual decomposition": [
+      "P18"
+    ],
+    "conceptual taxonomy": [
+      "P01"
+    ],
+    "conditional TD learning": [
+      "P10"
+    ],
+    "conditional normalizing flow": [
+      "P24"
+    ],
+    "confidence sets": [
+      "P25"
+    ],
+    "conservation-law analysis": [
+      "P04"
+    ],
+    "continuous-time dynamical systems": [
+      "P04"
+    ],
+    "decentralized feedback": [
+      "P21"
+    ],
+    "deep RL": [
+      "P24"
+    ],
+    "deep actor-critic": [
+      "P09"
+    ],
+    "descent-ascent": [
+      "P07"
+    ],
+    "distributed constraint solving": [
+      "B02"
+    ],
+    "dual extrapolation": [
+      "P05"
+    ],
+    "dynamic programming": [
+      "B03",
+      "P09",
+      "P14"
+    ],
+    "entropy smoothing": [
+      "P13"
+    ],
+    "epistemic logic": [
+      "B02"
+    ],
+    "equilibrium computation": [
+      "B02"
+    ],
+    "exploiter": [
+      "P25"
+    ],
+    "extragradient": [
+      "P05",
+      "P06"
+    ],
+    "factored planning": [
+      "B03"
+    ],
+    "fictitious play": [
+      "P24"
+    ],
+    "finite-state controller optimization": [
+      "B03"
+    ],
+    "game-theoretic solution concepts": [
+      "B02"
+    ],
+    "gradient-descent-ascent": [
+      "P04"
+    ],
+    "graphon control": [
+      "P12"
+    ],
+    "graphon limit": [
+      "P22"
+    ],
+    "heuristic search": [
+      "B03"
+    ],
+    "hierarchical latent policy": [
+      "P17"
+    ],
+    "independent natural policy gradient": [
+      "P13"
+    ],
+    "kernel Q-learning": [
+      "P14"
+    ],
+    "linear function approximation": [
+      "P03"
+    ],
+    "macro-actions": [
+      "B03"
+    ],
+    "magnitude-reduced estimation": [
+      "P20"
+    ],
+    "mean-field ODE": [
+      "P22"
+    ],
+    "mean-field Q-learning": [
+      "P08"
+    ],
+    "mean-field actor-critic": [
+      "P08"
+    ],
+    "mean-field approximation": [
+      "P14"
+    ],
+    "mechanism design": [
+      "B02"
+    ],
+    "model elimination": [
+      "P11"
+    ],
+    "model-based learning": [
+      "P01"
+    ],
+    "model-free learning": [
+      "P01"
+    ],
+    "multiplicative weights": [
+      "P02",
+      "P13"
+    ],
+    "natural policy gradient": [
+      "P02"
+    ],
+    "nested lookahead": [
+      "P06"
+    ],
+    "optimal transport": [
+      "P18"
+    ],
+    "optimism": [
+      "P25"
+    ],
+    "optimistic gradient": [
+      "P03"
+    ],
+    "policy gradient": [
+      "B01",
+      "P03",
+      "P16"
+    ],
+    "policy mirror ascent": [
+      "P10"
+    ],
+    "population-based training": [
+      "B01"
+    ],
+    "potential-function analysis": [
+      "P02"
+    ],
+    "projected gradient": [
+      "P03"
+    ],
+    "regret minimization": [
+      "P01"
+    ],
+    "reinforcement and no-regret learning": [
+      "B02"
+    ],
+    "reinforcement learning": [
+      "B03"
+    ],
+    "self-play": [
+      "B01"
+    ],
+    "simplex discretization": [
+      "P09"
+    ],
+    "single-trajectory learning": [
+      "P10"
+    ],
+    "stochastic approximation": [
+      "P19"
+    ],
+    "strategic exploration": [
+      "P11"
+    ],
+    "supervised policy averaging": [
+      "P24"
+    ],
+    "synchronous and asynchronous analysis": [
+      "P19"
+    ],
+    "tabular Q-learning": [
+      "P09",
+      "P19"
+    ],
+    "value decomposition": [
+      "B01"
+    ],
+    "variational information bottleneck": [
+      "P15"
+    ],
+    "variational mutual information": [
+      "P17"
+    ]
+  },
+  "by_topic": {
+    "Bellman-Eluder dimension": [
+      "P25"
+    ],
+    "CTDE": [
+      "P17"
+    ],
+    "Dec-POMDP": [
+      "B03"
+    ],
+    "MARL foundations": [
+      "B01"
+    ],
+    "MARL optimization": [
+      "P06"
+    ],
+    "MARL scalability": [
+      "P18"
+    ],
+    "Markov games": [
+      "P20"
+    ],
+    "Markov potential games": [
+      "P02",
+      "P03"
+    ],
+    "McKean-Vlasov systems": [
+      "P21"
+    ],
+    "Nash certainty equivalence": [
+      "P21"
+    ],
+    "P-MBED": [
+      "P11"
+    ],
+    "Poincare recurrence": [
+      "P04"
+    ],
+    "Q-learning": [
+      "P14",
+      "P19"
+    ],
+    "Wasserstein distance": [
+      "P18"
+    ],
+    "adaptive stepsizes": [
+      "P07"
+    ],
+    "bandwidth": [
+      "P15"
+    ],
+    "bias bounds": [
+      "P22"
+    ],
+    "centralized training decentralized execution": [
+      "B01"
+    ],
+    "coarse correlated equilibrium": [
+      "P20"
+    ],
+    "common noise": [
+      "P09"
+    ],
+    "communication": [
+      "B02",
+      "B03"
+    ],
+    "congestion games": [
+      "P02"
+    ],
+    "continuous mean-field games": [
+      "P24"
+    ],
+    "cooperative MARL": [
+      "P12",
+      "P14"
+    ],
+    "credit assignment": [
+      "B01"
+    ],
+    "decentralized planning": [
+      "B03"
+    ],
+    "dense graphs": [
+      "P22"
+    ],
+    "density modeling": [
+      "P24"
+    ],
+    "dual extrapolation": [
+      "P05"
+    ],
+    "entropy regularization": [
+      "P13"
+    ],
+    "epistemic logic": [
+      "B02"
+    ],
+    "evaluation criteria": [
+      "P01"
+    ],
+    "factored planning": [
+      "B03"
+    ],
+    "fictitious play": [
+      "P24"
+    ],
+    "finite-N approximation": [
+      "P10",
+      "P12",
+      "P14"
+    ],
+    "finite-state controllers": [
+      "B03"
+    ],
+    "finite-time convergence": [
+      "P19"
+    ],
+    "function approximation": [
+      "P03"
+    ],
+    "general function approximation": [
+      "P25"
+    ],
+    "gradient-descent-ascent": [
+      "P04"
+    ],
+    "graphon mean-field approximation": [
+      "P22"
+    ],
+    "graphon mean-field control": [
+      "P12"
+    ],
+    "heterogeneous agents": [
+      "P16"
+    ],
+    "heterogeneous interactions": [
+      "P12"
+    ],
+    "hidden bilinear games": [
+      "P04"
+    ],
+    "independent learning": [
+      "P10"
+    ],
+    "independent linear function approximation": [
+      "P20"
+    ],
+    "independent natural policy gradient": [
+      "P02"
+    ],
+    "independent policy gradient": [
+      "P03"
+    ],
+    "information bottleneck": [
+      "P15"
+    ],
+    "interacting particle systems": [
+      "P22"
+    ],
+    "large populations": [
+      "P08"
+    ],
+    "large-population stochastic games": [
+      "P21"
+    ],
+    "last-iterate convergence": [
+      "P02"
+    ],
+    "latent-variable control": [
+      "P17"
+    ],
+    "learning-rate schedules": [
+      "P19"
+    ],
+    "mean-field MARL": [
+      "P08"
+    ],
+    "mean-field MDP": [
+      "P09"
+    ],
+    "mean-field Q-learning": [
+      "P09"
+    ],
+    "mean-field control": [
+      "P09",
+      "P14"
+    ],
+    "mean-field games": [
+      "P10",
+      "P11",
+      "P21"
+    ],
+    "mechanism design": [
+      "B02"
+    ],
+    "model-based RL": [
+      "P11"
+    ],
+    "monotone operators": [
+      "P05"
+    ],
+    "monotonic improvement": [
+      "P16"
+    ],
+    "multi-agent communication": [
+      "P15"
+    ],
+    "multi-agent exploration": [
+      "P17"
+    ],
+    "multi-agent learning": [
+      "B02"
+    ],
+    "multi-agent learning agendas": [
+      "P01"
+    ],
+    "multiagent systems foundations": [
+      "B02"
+    ],
+    "mutual information": [
+      "P17"
+    ],
+    "natural policy gradient": [
+      "P13"
+    ],
+    "neighbor-action aggregation": [
+      "P08"
+    ],
+    "no-regret learning": [
+      "P01"
+    ],
+    "non-monotone optimization": [
+      "P07"
+    ],
+    "non-stationary dynamics": [
+      "P24"
+    ],
+    "normal-form and extensive-form games": [
+      "B02"
+    ],
+    "optimal transport": [
+      "P18"
+    ],
+    "partial observability": [
+      "B03"
+    ],
+    "policy alignment": [
+      "P18"
+    ],
+    "policy mirror ascent": [
+      "P10"
+    ],
+    "quantal response equilibrium": [
+      "P13"
+    ],
+    "reproducibility": [
+      "P06"
+    ],
+    "resource allocation": [
+      "P18"
+    ],
+    "rotational dynamics": [
+      "P06"
+    ],
+    "saddle points": [
+      "P05"
+    ],
+    "sample complexity": [
+      "P03",
+      "P11",
+      "P19",
+      "P20",
+      "P25"
+    ],
+    "scheduling": [
+      "P15"
+    ],
+    "sequential policy updates": [
+      "P16"
+    ],
+    "solution concepts": [
+      "B01"
+    ],
+    "spurious equilibria": [
+      "P04"
+    ],
+    "static potential games": [
+      "P13"
+    ],
+    "stochastic and potential games": [
+      "B02"
+    ],
+    "stochastic games": [
+      "B01",
+      "P01"
+    ],
+    "stochastic variational inequalities": [
+      "P07"
+    ],
+    "trust region MARL": [
+      "P16"
+    ],
+    "two-player zero-sum Markov games": [
+      "P25"
+    ],
+    "value decomposition": [
+      "P17"
+    ],
+    "variance reduction": [
+      "P07"
+    ],
+    "variational inequalities": [
+      "P05",
+      "P06"
+    ]
+  }
+}

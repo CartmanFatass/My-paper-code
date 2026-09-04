@@ -1,0 +1,79 @@
+{
+  "file": "P05_Nesterov_Dual_Extrapolation_CORE2003.pdf",
+  "citation_key": "Nesterov2007",
+  "title": "Dual Extrapolation and Its Applications to Solving Variational Inequalities and Related Problems",
+  "authors": [
+    "Yurii Nesterov"
+  ],
+  "year": 2003,
+  "venue": "CORE Discussion Paper 2003/68; journal version in Mathematical Programming 109 (2007)",
+  "version": "August 2003 CORE working paper, not the journal typesetting",
+  "doi": "10.1007/s10107-006-0034-z",
+  "arxiv": null,
+  "source_urls": [
+    "https://dial.uclouvain.be/pr/boreal/object/boreal%3A4947"
+  ],
+  "primary_topics": [
+    "variational inequalities",
+    "monotone operators",
+    "dual extrapolation",
+    "saddle points"
+  ],
+  "method_families": [
+    "dual extrapolation",
+    "Bregman proximal geometry",
+    "extragradient",
+    "averaging"
+  ],
+  "problem_classes": [
+    "monotone variational inequalities",
+    "nonsmooth convex optimization",
+    "convex-concave saddle points",
+    "bilinear matrix games"
+  ],
+  "evidence_types": [
+    "formal convergence analysis",
+    "oracle-complexity bounds",
+    "algorithm derivation"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "paper_id": "P05",
+  "source_pdf": "docs/new-libs/papers/P05_Nesterov_Dual_Extrapolation_CORE2003.pdf",
+  "pdf_pages": 22,
+  "text_extractable_pages": 22,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P05/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P05/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P05/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P05/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P05/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:2e04ca0ac2073a3b1bf47156651c027ec5a22e8a63c50c8c71ccb39859582b43"
+}

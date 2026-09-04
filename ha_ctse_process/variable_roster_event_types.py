@@ -263,6 +263,12 @@ class EventTokenRow:
     old_token_log_probability: float
     old_owner_value: float
     action_kind: str
+    # MSSR's action head consumes the provenance-authenticated partner value
+    # that exists immediately before this token.  The partner history is
+    # advanced later in the same production transaction, so replay must retain
+    # this exact scalar rather than consult mutable lifecycle state.  Ordinary
+    # F0/F1 rows keep ``None`` and preserve their existing replay path.
+    authenticated_partner_p: float | None = None
     # --- FOLR S03 direct-kernel witness (optional; None unless a capture sink
     # is installed on the core).  External Pro ruling FOLR_S03_BINDING_SELECTED
     # requires that the immutable row carry the complete directly produced
@@ -474,6 +480,7 @@ class PackedEventHighReplay:
     active_high_hidden: torch.Tensor
     critic_member_features: torch.Tensor
     critic_global_features: torch.Tensor
+    authenticated_partner_p: float | None
     owner_index: int
     action: int
     old_logp: torch.Tensor

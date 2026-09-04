@@ -70,6 +70,7 @@ RAW_OUTPUT_BINDING = "folr_core.branch_snapshot.v1"
 ARCHITECTURE_FIELDS = (
     "architecture_mode",
     "runtime_mode",
+    "partner_interaction_enabled",
     "obs_dim",
     "critic_member_dim",
     "critic_global_dim",

@@ -1,0 +1,70 @@
+{
+  "file": "P02_Fox_INPG_MPG_2021.pdf",
+  "citation_key": "FoxEtAl2022",
+  "title": "Independent Natural Policy Gradient Always Converges in Markov Potential Games",
+  "authors": [
+    "Roy Fox",
+    "Stephen McAleer",
+    "Will Overman",
+    "Ioannis Panageas"
+  ],
+  "year": 2022,
+  "venue": "AISTATS 2022, PMLR 151, 4414-4425",
+  "version": "arXiv:2110.10614v1 (2021), later published at AISTATS 2022",
+  "doi": null,
+  "arxiv": "2110.10614",
+  "source_urls": [
+    "https://proceedings.mlr.press/v151/fox22a.html"
+  ],
+  "primary_topics": [
+    "Markov potential games",
+    "independent natural policy gradient",
+    "last-iterate convergence",
+    "congestion games"
+  ],
+  "method_families": [
+    "natural policy gradient",
+    "multiplicative weights",
+    "potential-function analysis"
+  ],
+  "problem_classes": [
+    "discounted Markov potential games",
+    "routing and stochastic congestion games"
+  ],
+  "evidence_types": [
+    "formal convergence analysis",
+    "tabular experiments"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "paper_id": "P02",
+  "source_pdf": "docs/new-libs/papers/P02_Fox_INPG_MPG_2021.pdf",
+  "pdf_pages": 24,
+  "text_extractable_pages": 24,
+  "warning_pages": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P02/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P02/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P02/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P02/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P02/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:eda038cbfbb4e5c87b38c538e941d479183c780f2f7edee4dd905c90dfb0ee10"
+}

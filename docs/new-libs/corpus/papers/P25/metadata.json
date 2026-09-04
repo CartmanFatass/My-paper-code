@@ -1,0 +1,85 @@
+{
+  "paper_id": "P25",
+  "citation_key": "jin2022exploiter",
+  "title": "The Power of Exploiter: Provable Multi-Agent RL in Large State Spaces",
+  "authors": [
+    "Chi Jin",
+    "Qinghua Liu",
+    "Tiancheng Yu"
+  ],
+  "year": 2022,
+  "venue": "Proceedings of the 39th International Conference on Machine Learning (PMLR 162)",
+  "version": "ICML 2022 full paper with appendices",
+  "source_pdf": "docs/new-libs/papers/P25_Jin_Power_of_Exploiter_ICML2022.pdf",
+  "pdf_pages": 29,
+  "text_extractable_pages": 29,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "doi": null,
+  "arxiv": "2106.03352",
+  "source_urls": [
+    "https://proceedings.mlr.press/v162/jin22c.html",
+    "https://arxiv.org/abs/2106.03352"
+  ],
+  "primary_topics": [
+    "two-player zero-sum Markov games",
+    "general function approximation",
+    "sample complexity",
+    "Bellman-Eluder dimension"
+  ],
+  "method_families": [
+    "GOLF",
+    "exploiter",
+    "optimism",
+    "confidence sets"
+  ],
+  "problem_classes": [
+    "finite-horizon two-player zero-sum Markov games"
+  ],
+  "evidence_types": [
+    "formal guarantees"
+  ],
+  "hmasd_axes": [
+    "foundations",
+    "planning",
+    "optimization"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P25/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P25/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P25/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P25/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P25/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:d916b780c7604e0febaca31134279e125373743d87e84d625004730ceb6a0a3c"
+}

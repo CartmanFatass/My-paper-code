@@ -1,0 +1,78 @@
+{
+  "paper_id": "P09",
+  "pdf_pages": 45,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract, Contents, and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Model Description and Notation",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        8
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Mean-Field MDP",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        12
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Relations Between Models",
+      "level": 1,
+      "pdf_pages": [
+        13,
+        17
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Mean-Field Q-Learning",
+      "level": 1,
+      "pdf_pages": [
+        18,
+        27
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Numerical Examples",
+      "level": 1,
+      "pdf_pages": [
+        28,
+        33
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        34,
+        39
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        40,
+        45
+      ]
+    }
+  ]
+}

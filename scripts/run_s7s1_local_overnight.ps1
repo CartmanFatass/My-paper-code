@@ -1,5 +1,5 @@
 param(
-    [string]$Python = "C:\Users\wu\.conda\envs\SB3\python.exe",
+    [string]$Python = "python",
     [string[]]$Experiment = @(
         "k_full_sync",
         "k_fixed_d7",

@@ -1,0 +1,73 @@
+{
+  "paper_id": "P24",
+  "citation_key": "magnino2025deda",
+  "title": "Solving Continuous Mean Field Games: Deep Reinforcement Learning for Non-Stationary Dynamics",
+  "authors": [
+    "Lorenzo Magnino",
+    "Kai Shao",
+    "Zida Wu",
+    "Jiacheng Shen",
+    "Mathieu Laurière"
+  ],
+  "year": 2025,
+  "venue": "Advances in Neural Information Processing Systems 39",
+  "version": "NeurIPS 2025 / arXiv:2510.22158v1",
+  "source_pdf": "docs/new-libs/papers/P24_Magnino_DEDA_FP_NeurIPS2025.pdf",
+  "pdf_pages": 23,
+  "text_extractable_pages": 23,
+  "warning_pages": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18
+  ],
+  "doi": null,
+  "arxiv": "2510.22158",
+  "source_urls": [
+    "https://proceedings.neurips.cc/paper_files/paper/2025/hash/968582fc27a1f2213c3e3d96e92f008a-Abstract-Conference.html",
+    "https://arxiv.org/abs/2510.22158"
+  ],
+  "primary_topics": [
+    "continuous mean-field games",
+    "non-stationary dynamics",
+    "fictitious play",
+    "density modeling"
+  ],
+  "method_families": [
+    "deep RL",
+    "fictitious play",
+    "supervised policy averaging",
+    "conditional normalizing flow"
+  ],
+  "problem_classes": [
+    "continuous-state/action nonstationary MFG"
+  ],
+  "evidence_types": [
+    "error-propagation theorem",
+    "empirical evaluation",
+    "recent preprint"
+  ],
+  "hmasd_axes": [
+    "planning",
+    "foundations",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P24/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P24/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P24/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P24/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P24/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:2ad8ad51db68cb853b7d0dee6fa8d7187044d034e958c7935c27f5002255c4d2"
+}

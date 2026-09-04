@@ -1,117 +1,76 @@
-# HMASD Claude Code Entry
+# CLAUDE.md
 
-`AGENTS.md` is the sole project authority and routing contract for this
-repository; it is hard read-only from this branch. Since the 2026-08-05
-takeover the Codex role sessions are dormant: a Claude session here does NOT
-resolve a Codex role. Instead the Claude orchestrator (the main session)
-operates per `.claude/ORCHESTRATOR_WORKFLOW.md`, which fixes the actual
-logical model: the orchestrator holds the local Explorer remainder plus all
-Code Manager (cm/cpm) duties inline; ALL scientific judgment is externalized
-to External Pro review (adversarial validation before any freeze, alignment
-audit after every science commit); subagents are task tools, not roles.
-That document organizes Claude-side work only and adds no authority over
-`AGENTS.md`.
+Guidance for Claude Code in this repository. The collaboration and authority rules are in
+`AGENTS.md` (runtime-neutral; Appendix B is the Claude Code part) and are imported here:
 
-## The subagent workflow is mandatory, not optional
+@AGENTS.md
 
-Work runs as **orchestrator → implementer → reviewer**, defined in
-`.claude/ORCHESTRATOR_WORKFLOW.md` §6 and registered in
-`.claude/CAPABILITY_MAP.md`. Read §6 before doing implementation work; the
-short form:
+Directory conventions live next to the code, one `AGENTS.md` per top-level area, each imported by
+a one-line `CLAUDE.md` beside it: `experiments/`, `ha_ctse_process/`, `envs/`, `tests/`,
+`scripts/`, `docs/`. `docs/project/PROJECT_MAP.md` is the one-page index of those files. What
+research code may and may not build is `docs/project/ENGINEERING_SCOPE_SPEC.md`.
 
-- Freeze the assignment first — frozen brief, writable scope, focused tests,
-  completion condition, forbidden paths. If that block cannot be written, the
-  unit is not ready to delegate.
-- **`hmasd-reviewer` is REQUIRED before technical acceptance of any
-  claim-bearing change, and before any document goes to External Pro.** A
-  clean-context reader is the one thing this session structurally cannot be:
-  having written the code, it has also written the reasoning that makes the
-  code look correct.
-- `hmasd-implementer` when the brief is already frozen **and** this session
-  holds reasoning the implementation should not inherit (typically: it argued
-  the science, so it will build toward its own argument) — or, regardless of
-  that second condition, when two or more independent bounded units exist and
-  should run concurrently. §6.2 has the exact conjunction.
-- `hmasd-verifier` (long suites, CLI exercises), `hmasd-experiment-operator`
-  (registered runs of minutes or hours), `hmasd-scout` (read-only existence
-  and semantics), `hmasd-mechanic` (read-only mechanical facts) exist to keep
-  raw output out of the orchestrator's context.
-- Children return raw facts and **never accept their own work**. Re-run their
-  tests here before accepting; give every finding an explicit disposition
-  (`APPLIED` / `RISK_ACCEPTED(reason)` / `REJECTED(reason)`); technical
-  acceptance, git and all science stay with the orchestrator.
+## What this repository is
 
-These six contracts in `.claude/agents/` are self-contained and Claude-native.
-They operate inside `AGENTS.md` authority boundaries, do not load Codex session
-charters, and grant no new authority. `.claude/CAPABILITY_MAP.md` is the full
-logical migration of the Codex role/skill/agent structure — including the
-capabilities deliberately NOT migrated (all research-critic roles stay with
-External Pro; the workflow control plane is dormant) — written out in full so
-no Codex surface has to be read to act on it.
+Two systems share one directory: a PyTorch MARL research codebase (HMASD, Yang et al. 2023, on
+multi-UAV base-station scenarios, plus later lineages and 22 current research directions with 53
+implementation directories under `experiments/candidates/`), and a research workflow and evidence
+layer (`AGENTS.md`, `.agents/skills/`, `.codex/agents/*.toml`, `scripts/hmasd_*.py`,
+`docs/research/`) that governs how scientific objects are frozen, run and recorded. Most day-to-day
+work follows the second system's conventions even when the edit lands in the first.
 
-Before dispatching anything to External Pro, use the `hmasd-science-dispatch`
-skill. Its gate script exits non-zero and is not advisory; the clean-context
-document review it requires can be waived only by writing a
-`document_review_waiver_reason` into the manifest, which then travels in the
-receipt.
+## Environment
 
-## Research before you edit
+The project runs on a conda environment that is **not** the `python` on PATH (a bare system
+Python 3.11 without torch). Use the explicit interpreter:
 
-- **Read a file before editing it** — in full, not just the region you intend
-  to change.
-- **Before modifying a function, grep for all of its callers** and check each
-  one. A signature or return-shape change that compiles is not a safe change.
-- **Research first, edit second.** Establish what the code actually does before
-  writing the change, not while writing it.
+```powershell
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe        # main env: Python 3.10, torch 2.7.0+cpu, pytest 9
+C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe  # isolated analysis env (Python 3.11, no torch)
+```
 
-## Experiment performance: backend, batching, parallelism — under one hard constraint
+The second environment is declared in `configs/scientific-capabilities-v1.toml`
+(`python scripts/hmasd_science_capabilities.py list|show|doctor`). Never install into either
+environment to satisfy an analysis need; report the capability as unavailable and let the owner
+decide. Neither environment has CUDA.
 
-Experiments here run far slower than they should when they step a pure-Python
-env one transition at a time and run independent seeds sequentially. Three
-levers, in order of leverage:
+## Commands
 
-1. **Compiled backend over pure Python.** Where a native/C++ backend exists for
-   an environment (e.g. `envs/continuous_roster/cpp_backend.py` →
-   `native/continuous_roster_toy_backend.cpp`) and covers the dynamics a
-   candidate needs, route through it instead of re-stepping the Python env. A
-   pure-Python reimplementation of an env that already has a compiled backend is
-   the first thing to question — that is exactly why the UCOPE sibling
-   (`runtime_capacity.py`, pure Python + numpy) is far slower than the Codex-era
-   cpp-backed toy env.
-2. **Batch the policy forward.** Thousands of batch-size-1 torch calls are
-   dominated by dispatch overhead, not compute. Step N envs in lockstep and do
-   one batch-N forward where the design allows.
-3. **Parallelize independent runs.** Independent (seed, arm) runs are
-   embarrassingly parallel; dispatch them across a process pool sized to the
-   machine (this box: AMD 8745H, 8 cores / 16 threads).
+```powershell
+# tests (pytest.ini sets testpaths and both file patterns; see tests/AGENTS.md)
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/experiments/candidates/ucope/
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/hmasd_run_test.py::test_name
+# evidence-bearing test runs isolate their temp dir under the direction's scratch root
+... -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag>
 
-**The hard constraint that governs all three:** a speedup must be EITHER
-behavior-preserving — byte-identical outputs, proven by a local same-seed
-comparison of old vs new — OR treated as a **new registered design**: re-freeze
-the registration digest, and re-dispatch to Pro any result whose licensed
-reading carries numbers. Bit-identity is a LOCAL mechanical check
-(`ORCHESTRATOR_WORKFLOW.md` §3 routing rule), never a Pro question.
+# original HMASD/UAV route
+python main.py --mode train --scenario 1 --n_uavs 5 --n_users 50
+python main.py --mode eval  --scenario 2 --model_path models/hmasd_model.pt --render
 
-Which lever is which:
+# standalone process-core route
+python -m ha_ctse_process.train
+python -m ha_ctse_process.smoke
 
-- **Process-parallelism of independent deterministic runs is byte-identical** —
-  dispatch order cannot change a self-contained computation. Safe; only the
-  source-content digest moves, and equality is proven locally.
-- **Batching the rollout, changing the torch thread count, or swapping to a C++
-  backend with different float ops all CHANGE the numbers** (RNG consumption
-  order, matmul batch size, reduction order). Each is a new registration whose
-  reading goes back to Pro.
+# mandatory resource admission, immediately before every result-bearing run, resume or queue element
+python scripts/hmasd_resource_preflight.py admit-memory --out <receipt.json>
+```
 
-Reproducibility note: results already silently depend on the ambient torch
-thread count (`torch.get_num_threads()` was 8 on this box), which the
-registration digest does not pin. Pin it explicitly when re-registering, and
-prefer `torch.set_num_threads(1)` inside a parallel worker so the pool does not
-oversubscribe.
+There is no lint, format or type-check tooling, no dashboard, and no C++ build step (native
+extensions compile through PyTorch's JIT loader on first use). Do not add any of them.
 
-Historical handoffs, archived results and unreferenced files are not active
-instructions.
+## Working rules specific to this repository
 
-Longitudinal state lives in `local_research/RESEARCH_CONTINUITY.md` — read it
-before resuming candidate work. This worktree and its branch
-(`claude/hmasd-full-takeover-20260805`) are the permanent workspace; merges
-to mainline happen only on explicit user instruction.
+- Scientific integrity, quarantine of incomplete attempts, the telemetry rule, diagnosis by
+  reproduction and the post-learner rule: `AGENTS.md` §8.
+- Git under concurrent sessions (worktree per implementer, stage by path, commit by pathspec,
+  never `git add -A` / stash / reset): `AGENTS.md` §6. Commits end with the trailers the runtime
+  supplies plus `scope: none` or `scope: <item> per <card line>` (scope spec §7).
+- Scratch belongs under `temp/directions/<direction-id>/{exp,test}/`; nothing at the repository
+  root, nothing loose under `temp/`.
+- Line endings: `.gitattributes` pins `eol=lf` on byte-addressed authorities (`docs/research/portfolio/`,
+  every `DIRECTION.md`, `.codex/`, `.agents/`, `AGENTS.md`, `scripts/hmasd_*.py`, named fixture
+  sets, the two VNFC science cards). Do not normalise them by hand.
+- Workflow-layer edits are made directly by the current agent; `$hmasd-workflow-outsource` only
+  when the owner names it.
+- `CONCEPT_MAP.md` and `LEARNING_LOG.md` (now under `docs/personal/`) are the owner's learning
+  notes, not project authorities.

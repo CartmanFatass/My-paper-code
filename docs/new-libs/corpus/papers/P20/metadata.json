@@ -1,0 +1,101 @@
+{
+  "paper_id": "P20",
+  "citation_key": "dai2024refined",
+  "title": "Refined Sample Complexity for Markov Games with Independent Linear Function Approximation",
+  "authors": [
+    "Yan Dai",
+    "Qiwen Cui",
+    "Simon S. Du"
+  ],
+  "year": 2024,
+  "venue": "Conference on Learning Theory (PMLR 247)",
+  "version": "arXiv:2402.07082v2 full manuscript; COLT 2024",
+  "source_pdf": "docs/new-libs/papers/P20_Dai_MarkovGames_LinearFA_COLT2024.pdf",
+  "pdf_pages": 46,
+  "text_extractable_pages": 46,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "doi": null,
+  "arxiv": "2402.07082",
+  "source_urls": [
+    "https://proceedings.mlr.press/v247/dai24a.html",
+    "https://arxiv.org/abs/2402.07082"
+  ],
+  "primary_topics": [
+    "Markov games",
+    "sample complexity",
+    "independent linear function approximation",
+    "coarse correlated equilibrium"
+  ],
+  "method_families": [
+    "AVLPR",
+    "EXP3",
+    "magnitude-reduced estimation",
+    "action-dependent bonuses"
+  ],
+  "problem_classes": [
+    "multi-player general-sum finite-horizon Markov games"
+  ],
+  "evidence_types": [
+    "formal guarantees"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P20/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P20/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P20/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P20/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P20/chunks"
+  },
+  "chunk_count": 11,
+  "content_fingerprint": "sha256:d0be386a77df3d920dadec36d9720ea2d5a0b8e84eaa72d6d0321b9fafb682c3"
+}

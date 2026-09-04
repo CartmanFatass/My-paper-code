@@ -1,0 +1,45 @@
+{
+  "artifact_kind": "VSP05_A3_RETAINED_ROW_OFFLINE_AUDIT",
+  "audit_activity": {
+    "environment_episodes": 0,
+    "environment_transitions": 0,
+    "evaluations": 0,
+    "executor_calls": 0,
+    "hypothetical_transitions": 0,
+    "learner_calls": 0,
+    "new_trace_passes": 0,
+    "optimizer_updates": 0,
+    "proposal_calls": 0,
+    "registered_offline_audits": 1,
+    "retries_or_recoveries": 0,
+    "trainer_calls": 0
+  },
+  "branch_precedence_applied": [
+    "A3_INVALID_CONTRACT",
+    "A3_NO_TWO_SIDED_TARGET_SUPPORT",
+    "A3_GATE_NULL_SUFFICIENT_OR_TYPED_SHAM_EQUIVALENT",
+    "A3_BEHAVIORALLY_PASSIVE",
+    "A3_EXPOSURE_MATCHED_COMPARATOR_REQUIRED",
+    "A3_SEPARATE_B_QUESTION_ASKABLE"
+  ],
+  "candidate_id": "CAND-VSP-05@adversarial-revision-v7",
+  "claim_boundary": "invalid source/row contract; no scientific or successor conclusion",
+  "contract_failures": [
+    {
+      "detail": "input path is not the registered A1 raw path: C:\\Users\\fires\\OneDrive\\\u6587\u6863\\HMASD-new\\logs\\vsp05_a1_truth_reachability_1a09bccf_r1\\raw_result.json",
+      "kind": "SOURCE_BINDING_OR_ROW_CONTRACT"
+    }
+  ],
+  "evidence_level": "A_POST_OUTCOME_DESCRIPTIVE",
+  "formal": false,
+  "schema_version": 1,
+  "scientific_disposition": null,
+  "source_binding": {
+    "path": "C:/Users/fires/OneDrive/\u6587\u6863/HMASD-new/logs/vsp05_a1_truth_reachability_1a09bccf_r1/raw_result.json",
+    "status": "INVALID"
+  },
+  "stage": "post_a2_descriptive_audit",
+  "successor_selected": false,
+  "terminal_branch": "A3_INVALID_CONTRACT",
+  "treatment_id": "VSP05-A3-TYPED-COMPLETION-SUBJECT-RETAINED-ROW-AUDIT"
+}

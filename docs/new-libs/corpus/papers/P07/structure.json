@@ -1,0 +1,69 @@
+{
+  "paper_id": "P07",
+  "pdf_pages": 13,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        1
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Related Work",
+      "level": 1,
+      "pdf_pages": [
+        2,
+        2
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Preliminaries",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "VR-SDA-A and Theoretical Analysis",
+      "level": 1,
+      "pdf_pages": [
+        5,
+        5
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Complexity and Experiments",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Conclusion and References",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        13
+      ]
+    }
+  ]
+}

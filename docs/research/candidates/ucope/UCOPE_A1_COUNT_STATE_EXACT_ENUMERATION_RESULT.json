@@ -1,0 +1,2783 @@
+{
+  "activity": {
+    "environment_transitions": 0,
+    "evaluation_calls": 0,
+    "gradients": 0,
+    "learner_calls": 0,
+    "optimizer_calls": 0,
+    "policy_calls": 0,
+    "retirement_actions": 0,
+    "seeds": 0,
+    "stochastic_draws": 0,
+    "task_return_observations": 0,
+    "trainer_calls": 0
+  },
+  "alias_projection_witness": {
+    "byte_equal": true,
+    "merged_projection": {
+      "downstream_primary_canonical_json": "{\"aggregates\":{\"AUC_gain_over_CB_AUC\":\"6571/20000\",\"CB_AUC_expected_auc\":\"1\",\"CB_AUC_terminal_coverage\":\"1/2\",\"UCOPE_conditional_auc_by_regime\":{\"THETA_L\":\"86339/100000\",\"THETA_S\":\"179371/100000\"},\"UCOPE_expected_auc\":\"26571/20000\",\"UCOPE_terminal_coverage\":\"1097/1250\",\"terminal_coverage_gain\":\"236/625\"},\"mode\":\"primary\",\"rows\":[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]}",
+      "durations": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "effective_tape": [
+        "S",
+        "S",
+        "L",
+        "L"
+      ],
+      "execution_laws": [
+        "effective-short-execution-law",
+        "effective-short-execution-law",
+        "effective-long-execution-law",
+        "effective-long-execution-law"
+      ]
+    },
+    "merged_raw_tape": [
+      "s",
+      "s",
+      "long_a",
+      "long_a"
+    ],
+    "split_projection": {
+      "downstream_primary_canonical_json": "{\"aggregates\":{\"AUC_gain_over_CB_AUC\":\"6571/20000\",\"CB_AUC_expected_auc\":\"1\",\"CB_AUC_terminal_coverage\":\"1/2\",\"UCOPE_conditional_auc_by_regime\":{\"THETA_L\":\"86339/100000\",\"THETA_S\":\"179371/100000\"},\"UCOPE_expected_auc\":\"26571/20000\",\"UCOPE_terminal_coverage\":\"1097/1250\",\"terminal_coverage_gain\":\"236/625\"},\"mode\":\"primary\",\"rows\":[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]}",
+      "durations": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "effective_tape": [
+        "S",
+        "S",
+        "L",
+        "L"
+      ],
+      "execution_laws": [
+        "effective-short-execution-law",
+        "effective-short-execution-law",
+        "effective-long-execution-law",
+        "effective-long-execution-law"
+      ]
+    },
+    "split_raw_tape": [
+      "s",
+      "s",
+      "long_a",
+      "long_b"
+    ]
+  },
+  "artifact_kind": "ucope_a1_count_state_exact_enumeration_result",
+  "boundaries": {
+    "censor": {
+      "L_at_t1": "CENSOR",
+      "L_binary_denominator_increment": 0,
+      "S_at_t1": "HIT",
+      "S_binary_denominator_increment": 1,
+      "administrative_limit": 1,
+      "ledger_after_L_censor": {
+        "E": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "N": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "ledger_before": {
+        "E": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "N": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "primary_after_canonical_json": "{\"aggregates\":{\"AUC_gain_over_CB_AUC\":\"6571/20000\",\"CB_AUC_expected_auc\":\"1\",\"CB_AUC_terminal_coverage\":\"1/2\",\"UCOPE_conditional_auc_by_regime\":{\"THETA_L\":\"86339/100000\",\"THETA_S\":\"179371/100000\"},\"UCOPE_expected_auc\":\"26571/20000\",\"UCOPE_terminal_coverage\":\"1097/1250\",\"terminal_coverage_gain\":\"236/625\"},\"mode\":\"primary\",\"rows\":[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]}",
+      "primary_before_canonical_json": "{\"aggregates\":{\"AUC_gain_over_CB_AUC\":\"6571/20000\",\"CB_AUC_expected_auc\":\"1\",\"CB_AUC_terminal_coverage\":\"1/2\",\"UCOPE_conditional_auc_by_regime\":{\"THETA_L\":\"86339/100000\",\"THETA_S\":\"179371/100000\"},\"UCOPE_expected_auc\":\"26571/20000\",\"UCOPE_terminal_coverage\":\"1097/1250\",\"terminal_coverage_gain\":\"236/625\"},\"mode\":\"primary\",\"rows\":[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]}",
+      "primary_bytes_equal": true
+    },
+    "homogeneous": {
+      "aggregates": {
+        "AUC_gain_over_CB_AUC": "0",
+        "CB_AUC_expected_auc": "1",
+        "CB_AUC_terminal_coverage": "1/2",
+        "UCOPE_conditional_auc_by_regime": {
+          "THETA_L": "1",
+          "THETA_S": "1"
+        },
+        "UCOPE_expected_auc": "1",
+        "UCOPE_terminal_coverage": "1/2",
+        "terminal_coverage_gain": "0"
+      },
+      "mode": "homogeneous",
+      "rows": [
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0000",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0001",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0010",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0011",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0100",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0101",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0110",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "0111",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1000",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1001",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1010",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1011",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1100",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1101",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1110",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1",
+            "THETA_S": "1"
+          },
+          "history_bits": "1111",
+          "history_weight": "1/16",
+          "joint_regime_weights": {
+            "THETA_L": "1/32",
+            "THETA_S": "1/32"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        }
+      ]
+    },
+    "independent_redraw": {
+      "aggregates": {
+        "AUC_gain_over_CB_AUC": "0",
+        "CB_AUC_expected_auc": "1",
+        "CB_AUC_terminal_coverage": "1/2",
+        "UCOPE_conditional_auc_by_regime": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "UCOPE_expected_auc": "1",
+        "UCOPE_terminal_coverage": "1/2",
+        "terminal_coverage_gain": "0"
+      },
+      "mode": "independent_redraw",
+      "rows": [
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0000",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0001",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0010",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 0
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0011",
+          "history_weight": "3281/10000",
+          "joint_regime_weights": {
+            "THETA_L": "3281/20000",
+            "THETA_S": "3281/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0100",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0101",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0110",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "0111",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1000",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1001",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1010",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 1
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1011",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 0,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1100",
+          "history_weight": "3281/10000",
+          "joint_regime_weights": {
+            "THETA_L": "3281/20000",
+            "THETA_S": "3281/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1101",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 1,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1110",
+          "history_weight": "369/10000",
+          "joint_regime_weights": {
+            "THETA_L": "369/20000",
+            "THETA_S": "369/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        },
+        {
+          "CB_AUC_action": "S",
+          "CB_AUC_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "E": {
+            "L": 2,
+            "S": 2
+          },
+          "N": {
+            "L": 2,
+            "S": 2
+          },
+          "SG_RATE_action": "S",
+          "SG_RATE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "UCOPE_action": "S",
+          "UCOPE_margin": "1/2",
+          "UCOPE_scores": {
+            "L": "1/2",
+            "S": "1"
+          },
+          "conditional_trial_5_auc": {
+            "THETA_L": "1/5",
+            "THETA_S": "9/5"
+          },
+          "history_bits": "1111",
+          "history_weight": "81/10000",
+          "joint_regime_weights": {
+            "THETA_L": "81/20000",
+            "THETA_S": "81/20000"
+          },
+          "predictive_hazards": {
+            "L": "1/2",
+            "S": "1/2"
+          },
+          "rho": "1/2"
+        }
+      ]
+    }
+  },
+  "branch": "A1_COUNT_STATE_DECISION_RELEVANCE_SUPPORTED",
+  "enumeration_errors": [],
+  "first_failure_id": null,
+  "forbidden_dependency_witness": {
+    "activity": {
+      "environment_transitions": 0,
+      "evaluation_calls": 0,
+      "gradients": 0,
+      "learner_calls": 0,
+      "optimizer_calls": 0,
+      "policy_calls": 0,
+      "retirement_actions": 0,
+      "seeds": 0,
+      "stochastic_draws": 0,
+      "task_return_observations": 0,
+      "trainer_calls": 0
+    },
+    "all_required_activity_zero": true,
+    "forbidden_call_tokens": [
+      "environment_step",
+      "evaluate",
+      "learner_step",
+      "optimizer_step",
+      "policy_forward",
+      "retire",
+      "task_reward",
+      "trainer_step"
+    ],
+    "forbidden_calls_present": [],
+    "forbidden_import_roots": [
+      "gym",
+      "numpy",
+      "random",
+      "torch"
+    ],
+    "forbidden_imports_present": [],
+    "forbidden_surface_absent": true,
+    "observed_calls": [
+      "AuditResult",
+      "Family",
+      "Fraction",
+      "HazardTable",
+      "Ledger",
+      "Ledger.empty",
+      "NominalPeriod",
+      "PERIODS.index",
+      "Row",
+      "RuntimeError",
+      "Trial",
+      "TypeError",
+      "ValueError",
+      "_FRACTION_RE.fullmatch",
+      "_REVISION_RE.fullmatch",
+      "_RUN_ID_RE.fullmatch",
+      "_a1_row_payload",
+      "_alias_projection_witness",
+      "_all_rational_strings",
+      "_assemble_a1_result",
+      "_ast_call_name",
+      "_boundary_mode_zero",
+      "_boundary_zero",
+      "_build_a1_evidence",
+      "_canonical_bytes",
+      "_canonical_text",
+      "_censor_projection_witness",
+      "_conditional_auc",
+      "_contains_any_key",
+      "_contains_float",
+      "_derive_a1_invariants",
+      "_evaluate_history",
+      "_expected_primary_row",
+      "_find",
+      "_forbidden_dependency_witness",
+      "_fraction",
+      "_frozen_noncount_state",
+      "_identity_free_projection",
+      "_identity_projection_witness",
+      "_joint_weights",
+      "_likelihood",
+      "_matched_noncount_state_witness",
+      "_mode_joint_weights",
+      "_mode_payload",
+      "_parse_fraction_text",
+      "_prior_probability",
+      "_row_payload",
+      "_signatures",
+      "_slot",
+      "_stop_failures",
+      "_theta_name",
+      "_validate_activity",
+      "_validate_boundary_literal",
+      "_validate_generated_evidence",
+      "activity.values",
+      "after_projection.encode",
+      "alias.get",
+      "all",
+      "any",
+      "ast.parse",
+      "ast.walk",
+      "base_projection.decode",
+      "before_projection.encode",
+      "bool",
+      "boundaries.get",
+      "boundary.get",
+      "build_a1_manifest",
+      "build_family",
+      "cls",
+      "dataclass",
+      "decode",
+      "dict",
+      "encode",
+      "enumerate_histories",
+      "evidence.get",
+      "execution_law.decode",
+      "expected_rows.append",
+      "family.cells.index",
+      "family.hazards.probability",
+      "family.nominal",
+      "field_name.lower",
+      "fields",
+      "forbidden.get",
+      "get",
+      "identity.get",
+      "inspect.getmodule",
+      "inspect.getsource",
+      "int",
+      "invariants.get",
+      "isinstance",
+      "issues.append",
+      "issues.extend",
+      "items",
+      "join",
+      "json.dumps",
+      "json.loads",
+      "len",
+      "list",
+      "manifest.get",
+      "map",
+      "matched_state.get",
+      "min",
+      "name.split",
+      "name.startswith",
+      "next",
+      "observed_calls.add",
+      "observed_imports.add",
+      "observed_imports.update",
+      "payload.get",
+      "permuted_projection.decode",
+      "persistence.get",
+      "posterior",
+      "primary.get",
+      "product",
+      "project",
+      "re.compile",
+      "reversed",
+      "row.get",
+      "select_a1_branch",
+      "set",
+      "sorted",
+      "str",
+      "sum",
+      "tuple",
+      "type",
+      "update_ledger",
+      "validate_a1_manifest",
+      "validate_family",
+      "value.items",
+      "values",
+      "version.get",
+      "zero_activity",
+      "zip"
+    ],
+    "observed_imports": [
+      "__future__",
+      "ast",
+      "dataclasses",
+      "enum",
+      "fractions",
+      "inspect",
+      "itertools",
+      "json",
+      "re"
+    ],
+    "postoutcome_filter_absent": true,
+    "pre_outcome_tape_fields": [
+      "index",
+      "cell",
+      "limit",
+      "forced_nominal"
+    ]
+  },
+  "identity_projection_witness": {
+    "base_labels": {
+      "message_source": "source-A",
+      "owner_epoch": "epoch-4",
+      "partner_id": "partner-A",
+      "policy_identity": "policy-A",
+      "roster_slot": "slot-0"
+    },
+    "base_projection_canonical_json": "[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]",
+    "byte_equal": true,
+    "excluded_labels": [
+      "message_source",
+      "owner_epoch",
+      "partner_id",
+      "policy_identity",
+      "roster_slot"
+    ],
+    "identity_fields_absent": true,
+    "permuted_labels": {
+      "message_source": "source-Z",
+      "owner_epoch": "epoch-99",
+      "partner_id": "partner-Z",
+      "policy_identity": "policy-Z",
+      "roster_slot": "slot-9"
+    },
+    "permuted_projection_canonical_json": "[{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0000\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0001\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0010\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":0},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"4591/6562\",\"UCOPE_scores\":{\"L\":\"5905/6562\",\"S\":\"657/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0011\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"6561/20000\",\"THETA_S\":\"1/20000\"},\"predictive_hazards\":{\"L\":\"5905/6562\",\"S\":\"657/6562\"},\"rho\":\"1/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0100\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0101\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"0110\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"0111\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1000\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1001\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1010\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":1},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"L\",\"UCOPE_margin\":\"55/82\",\"UCOPE_scores\":{\"L\":\"73/82\",\"S\":\"9/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"9/10\",\"THETA_S\":\"1/10\"},\"history_bits\":\"1011\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"729/20000\",\"THETA_S\":\"9/20000\"},\"predictive_hazards\":{\"L\":\"73/82\",\"S\":\"9/82\"},\"rho\":\"1/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":0,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"11153/6562\",\"UCOPE_scores\":{\"L\":\"657/6562\",\"S\":\"5905/3281\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1100\",\"history_weight\":\"3281/10000\",\"joint_regime_weights\":{\"THETA_L\":\"1/20000\",\"THETA_S\":\"6561/20000\"},\"predictive_hazards\":{\"L\":\"657/6562\",\"S\":\"5905/6562\"},\"rho\":\"6561/6562\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1101\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":1,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"137/82\",\"UCOPE_scores\":{\"L\":\"9/82\",\"S\":\"73/41\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1110\",\"history_weight\":\"369/10000\",\"joint_regime_weights\":{\"THETA_L\":\"9/20000\",\"THETA_S\":\"729/20000\"},\"predictive_hazards\":{\"L\":\"9/82\",\"S\":\"73/82\"},\"rho\":\"81/82\"},{\"CB_AUC_action\":\"S\",\"CB_AUC_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"E\":{\"L\":2,\"S\":2},\"N\":{\"L\":2,\"S\":2},\"SG_RATE_action\":\"S\",\"SG_RATE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"UCOPE_action\":\"S\",\"UCOPE_margin\":\"1/2\",\"UCOPE_scores\":{\"L\":\"1/2\",\"S\":\"1\"},\"conditional_trial_5_auc\":{\"THETA_L\":\"1/5\",\"THETA_S\":\"9/5\"},\"history_bits\":\"1111\",\"history_weight\":\"81/10000\",\"joint_regime_weights\":{\"THETA_L\":\"81/20000\",\"THETA_S\":\"81/20000\"},\"predictive_hazards\":{\"L\":\"1/2\",\"S\":\"1/2\"},\"rho\":\"1/2\"}]",
+    "projected_row_fields": [
+      "CB_AUC_action",
+      "CB_AUC_scores",
+      "E",
+      "N",
+      "SG_RATE_action",
+      "SG_RATE_scores",
+      "UCOPE_action",
+      "UCOPE_margin",
+      "UCOPE_scores",
+      "conditional_trial_5_auc",
+      "history_bits",
+      "history_weight",
+      "joint_regime_weights",
+      "predictive_hazards",
+      "rho"
+    ]
+  },
+  "invariants": {
+    "S01_registered_persistence_law": true,
+    "S02_version_pooling_rejected": true,
+    "S03_matched_noncount_state_and_exposure": true,
+    "S04_homogeneous_zero_effect": true,
+    "S05_independent_redraw_zero_effect": true,
+    "S06_alias_split_merge_invariant": true,
+    "S07_censor_is_distinct_from_failure": true,
+    "S08_identity_permutation_invariant": true,
+    "S09_primary_comparator_is_cb_auc": true,
+    "S10_primary_auc_gain_positive": true,
+    "S11_count_only_matched_switch": true,
+    "S12_no_forbidden_dependency": true,
+    "canonical_history_order": true,
+    "exact_regime_conditioned_cells": true,
+    "exposure_is_pre_outcome": true,
+    "joint_weight_numerators_sum": true,
+    "score_and_key_are_identity_free": true,
+    "tape_has_no_outcome_field": true
+  },
+  "manifest": {
+    "artifact_kind": "ucope_a1_count_state_exact_enumeration_manifest",
+    "assignment_id": "UCOPE-A1-COUNT-STATE-EXACT-ENUMERATION",
+    "candidate": "CAND-VSP-07-UCOPE@adversarial-revision-v6",
+    "caps": {
+      "canonical_histories_per_mode": 16,
+      "random_samples": 0,
+      "regime_conditioned_rational_cells": 96,
+      "seeds": 0
+    },
+    "comparators": {
+      "cb_auc_scores": {
+        "L": "1/2",
+        "S": "1"
+      },
+      "primary": "CB-AUC",
+      "secondary": "SG-RATE"
+    },
+    "excluded_score_and_key_labels": [
+      "partner_id",
+      "roster_slot",
+      "owner_epoch",
+      "message_source",
+      "policy_identity"
+    ],
+    "family": {
+      "canonical_tie_order": [
+        "S",
+        "L"
+      ],
+      "cell_weights": [
+        "1",
+        "1"
+      ],
+      "cells": [
+        "c1",
+        "c2"
+      ],
+      "durations": {
+        "L": 2,
+        "S": 1
+      },
+      "effective_quotient": {
+        "long_a": "L",
+        "long_b": "L",
+        "s": "S"
+      },
+      "hazards": {
+        "THETA_L": {
+          "L": "9/10",
+          "S": "1/10"
+        },
+        "THETA_S": {
+          "L": "1/10",
+          "S": "9/10"
+        }
+      },
+      "horizon": 3,
+      "latent_regimes": [
+        "THETA_S",
+        "THETA_L"
+      ],
+      "persistent_through_trial": 5,
+      "pre_outcome_tape": [
+        {
+          "cell": "c1",
+          "limit": 3,
+          "period": "s",
+          "trial": 1
+        },
+        {
+          "cell": "c2",
+          "limit": 3,
+          "period": "s",
+          "trial": 2
+        },
+        {
+          "cell": "c1",
+          "limit": 3,
+          "period": "long_a",
+          "trial": 3
+        },
+        {
+          "cell": "c2",
+          "limit": 3,
+          "period": "long_b",
+          "trial": 4
+        },
+        {
+          "cell": "c1",
+          "limit": 3,
+          "period": "DECISION",
+          "trial": 5
+        }
+      ],
+      "prior": {
+        "THETA_L": "1/2",
+        "THETA_S": "1/2"
+      },
+      "raw_periods": [
+        "s",
+        "long_a",
+        "long_b"
+      ],
+      "trial_5_structural_support": {
+        "c1": {
+          "L": 1,
+          "S": 1
+        },
+        "c2": {
+          "L": 0,
+          "S": 0
+        }
+      }
+    },
+    "formal": false,
+    "modes": [
+      "primary",
+      "homogeneous",
+      "independent_redraw"
+    ],
+    "required_zero_activity": [
+      "environment_transitions",
+      "policy_calls",
+      "learner_calls",
+      "trainer_calls",
+      "optimizer_calls",
+      "evaluation_calls",
+      "stochastic_draws",
+      "seeds",
+      "gradients",
+      "retirement_actions",
+      "task_return_observations"
+    ],
+    "run_id": "ucope_a1_count_state_exact_enumeration_61f84b6f_r1",
+    "schema_version": 1,
+    "scientific_stage": "derivation",
+    "source_revision": "61f84b6f419df4c64078e37fdba9eff080a0361f",
+    "technical_only": false,
+    "treatment": "A"
+  },
+  "manifest_errors": [],
+  "matched_histories": {
+    "HL": {
+      "CB_AUC_action": "S",
+      "CB_AUC_scores": {
+        "L": "1/2",
+        "S": "1"
+      },
+      "E": {
+        "L": 2,
+        "S": 2
+      },
+      "N": {
+        "L": 2,
+        "S": 0
+      },
+      "SG_RATE_action": "S",
+      "SG_RATE_scores": {
+        "L": "1/2",
+        "S": "1"
+      },
+      "UCOPE_action": "L",
+      "UCOPE_margin": "4591/6562",
+      "UCOPE_scores": {
+        "L": "5905/6562",
+        "S": "657/3281"
+      },
+      "conditional_trial_5_auc": {
+        "THETA_L": "9/10",
+        "THETA_S": "1/10"
+      },
+      "history_bits": "0011",
+      "history_weight": "3281/10000",
+      "joint_regime_weights": {
+        "THETA_L": "6561/20000",
+        "THETA_S": "1/20000"
+      },
+      "predictive_hazards": {
+        "L": "5905/6562",
+        "S": "657/6562"
+      },
+      "rho": "1/6562"
+    },
+    "HS": {
+      "CB_AUC_action": "S",
+      "CB_AUC_scores": {
+        "L": "1/2",
+        "S": "1"
+      },
+      "E": {
+        "L": 2,
+        "S": 2
+      },
+      "N": {
+        "L": 0,
+        "S": 2
+      },
+      "SG_RATE_action": "S",
+      "SG_RATE_scores": {
+        "L": "1/2",
+        "S": "1"
+      },
+      "UCOPE_action": "S",
+      "UCOPE_margin": "11153/6562",
+      "UCOPE_scores": {
+        "L": "657/6562",
+        "S": "5905/3281"
+      },
+      "conditional_trial_5_auc": {
+        "THETA_L": "1/5",
+        "THETA_S": "9/5"
+      },
+      "history_bits": "1100",
+      "history_weight": "3281/10000",
+      "joint_regime_weights": {
+        "THETA_L": "1/20000",
+        "THETA_S": "6561/20000"
+      },
+      "predictive_hazards": {
+        "L": "657/6562",
+        "S": "5905/6562"
+      },
+      "rho": "6561/6562"
+    }
+  },
+  "matched_noncount_state_witness": {
+    "HL": {
+      "E": {
+        "L": 2,
+        "S": 2
+      },
+      "N": {
+        "L": 2,
+        "S": 0
+      },
+      "noncount_state": {
+        "Q_str": {
+          "c1": {
+            "L": 1,
+            "S": 1
+          },
+          "c2": {
+            "L": 0,
+            "S": 0
+          }
+        },
+        "censor_law": {
+          "limit_1": {
+            "period_L": "CENSOR",
+            "period_S": "OBSERVED_AT_T1"
+          },
+          "limit_3": {
+            "period_L": "BINARY_FIRST_HIT",
+            "period_S": "BINARY_FIRST_HIT"
+          }
+        },
+        "costs": {
+          "L": 2,
+          "S": 1
+        },
+        "current_opportunity": {
+          "administrative_limit": 3,
+          "eligible_cell": "c1",
+          "trial": 5
+        },
+        "executor_generation": "ucope-family-v1",
+        "exposure_ledger": {
+          "pooled": {
+            "L": 2,
+            "S": 2
+          },
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "forced_action_sequence": [
+          "S",
+          "S",
+          "L",
+          "L"
+        ],
+        "horizon": 3,
+        "noncount_policy_state": {
+          "bytes": "",
+          "encoding": "canonical-empty"
+        },
+        "noncount_recurrent_state": {
+          "bytes": "",
+          "encoding": "canonical-empty"
+        },
+        "partner_policy_generation": "ucope-partner-policy-generation-v1",
+        "uncovered_set": [
+          "c1"
+        ]
+      },
+      "rho": "1/6562"
+    },
+    "HS": {
+      "E": {
+        "L": 2,
+        "S": 2
+      },
+      "N": {
+        "L": 0,
+        "S": 2
+      },
+      "noncount_state": {
+        "Q_str": {
+          "c1": {
+            "L": 1,
+            "S": 1
+          },
+          "c2": {
+            "L": 0,
+            "S": 0
+          }
+        },
+        "censor_law": {
+          "limit_1": {
+            "period_L": "CENSOR",
+            "period_S": "OBSERVED_AT_T1"
+          },
+          "limit_3": {
+            "period_L": "BINARY_FIRST_HIT",
+            "period_S": "BINARY_FIRST_HIT"
+          }
+        },
+        "costs": {
+          "L": 2,
+          "S": 1
+        },
+        "current_opportunity": {
+          "administrative_limit": 3,
+          "eligible_cell": "c1",
+          "trial": 5
+        },
+        "executor_generation": "ucope-family-v1",
+        "exposure_ledger": {
+          "pooled": {
+            "L": 2,
+            "S": 2
+          },
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "forced_action_sequence": [
+          "S",
+          "S",
+          "L",
+          "L"
+        ],
+        "horizon": 3,
+        "noncount_policy_state": {
+          "bytes": "",
+          "encoding": "canonical-empty"
+        },
+        "noncount_recurrent_state": {
+          "bytes": "",
+          "encoding": "canonical-empty"
+        },
+        "partner_policy_generation": "ucope-partner-policy-generation-v1",
+        "uncovered_set": [
+          "c1"
+        ]
+      },
+      "rho": "6561/6562"
+    },
+    "count_and_posterior_differ": true,
+    "noncount_state_bytes_equal": true
+  },
+  "persistence_witness": {
+    "persistent_through_trial_5": true,
+    "registered_family_version": "ucope-family-v1",
+    "theta_scope": "ONE_FIVE_TRIAL_BLOCK"
+  },
+  "primary": {
+    "aggregates": {
+      "AUC_gain_over_CB_AUC": "6571/20000",
+      "CB_AUC_expected_auc": "1",
+      "CB_AUC_terminal_coverage": "1/2",
+      "UCOPE_conditional_auc_by_regime": {
+        "THETA_L": "86339/100000",
+        "THETA_S": "179371/100000"
+      },
+      "UCOPE_expected_auc": "26571/20000",
+      "UCOPE_terminal_coverage": "1097/1250",
+      "terminal_coverage_gain": "236/625"
+    },
+    "mode": "primary",
+    "rows": [
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 0,
+          "S": 0
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "0000",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 0
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "L",
+        "UCOPE_margin": "55/82",
+        "UCOPE_scores": {
+          "L": "73/82",
+          "S": "9/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "9/10",
+          "THETA_S": "1/10"
+        },
+        "history_bits": "0001",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "729/20000",
+          "THETA_S": "9/20000"
+        },
+        "predictive_hazards": {
+          "L": "73/82",
+          "S": "9/82"
+        },
+        "rho": "1/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 0
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "L",
+        "UCOPE_margin": "55/82",
+        "UCOPE_scores": {
+          "L": "73/82",
+          "S": "9/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "9/10",
+          "THETA_S": "1/10"
+        },
+        "history_bits": "0010",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "729/20000",
+          "THETA_S": "9/20000"
+        },
+        "predictive_hazards": {
+          "L": "73/82",
+          "S": "9/82"
+        },
+        "rho": "1/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 2,
+          "S": 0
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "L",
+        "UCOPE_margin": "4591/6562",
+        "UCOPE_scores": {
+          "L": "5905/6562",
+          "S": "657/3281"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "9/10",
+          "THETA_S": "1/10"
+        },
+        "history_bits": "0011",
+        "history_weight": "3281/10000",
+        "joint_regime_weights": {
+          "THETA_L": "6561/20000",
+          "THETA_S": "1/20000"
+        },
+        "predictive_hazards": {
+          "L": "5905/6562",
+          "S": "657/6562"
+        },
+        "rho": "1/6562"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 0,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "137/82",
+        "UCOPE_scores": {
+          "L": "9/82",
+          "S": "73/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "0100",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "9/20000",
+          "THETA_S": "729/20000"
+        },
+        "predictive_hazards": {
+          "L": "9/82",
+          "S": "73/82"
+        },
+        "rho": "81/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "0101",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "0110",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 2,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "L",
+        "UCOPE_margin": "55/82",
+        "UCOPE_scores": {
+          "L": "73/82",
+          "S": "9/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "9/10",
+          "THETA_S": "1/10"
+        },
+        "history_bits": "0111",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "729/20000",
+          "THETA_S": "9/20000"
+        },
+        "predictive_hazards": {
+          "L": "73/82",
+          "S": "9/82"
+        },
+        "rho": "1/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 0,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "137/82",
+        "UCOPE_scores": {
+          "L": "9/82",
+          "S": "73/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1000",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "9/20000",
+          "THETA_S": "729/20000"
+        },
+        "predictive_hazards": {
+          "L": "9/82",
+          "S": "73/82"
+        },
+        "rho": "81/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1001",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1010",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 2,
+          "S": 1
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "L",
+        "UCOPE_margin": "55/82",
+        "UCOPE_scores": {
+          "L": "73/82",
+          "S": "9/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "9/10",
+          "THETA_S": "1/10"
+        },
+        "history_bits": "1011",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "729/20000",
+          "THETA_S": "9/20000"
+        },
+        "predictive_hazards": {
+          "L": "73/82",
+          "S": "9/82"
+        },
+        "rho": "1/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 0,
+          "S": 2
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "11153/6562",
+        "UCOPE_scores": {
+          "L": "657/6562",
+          "S": "5905/3281"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1100",
+        "history_weight": "3281/10000",
+        "joint_regime_weights": {
+          "THETA_L": "1/20000",
+          "THETA_S": "6561/20000"
+        },
+        "predictive_hazards": {
+          "L": "657/6562",
+          "S": "5905/6562"
+        },
+        "rho": "6561/6562"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 2
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "137/82",
+        "UCOPE_scores": {
+          "L": "9/82",
+          "S": "73/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1101",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "9/20000",
+          "THETA_S": "729/20000"
+        },
+        "predictive_hazards": {
+          "L": "9/82",
+          "S": "73/82"
+        },
+        "rho": "81/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 1,
+          "S": 2
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "137/82",
+        "UCOPE_scores": {
+          "L": "9/82",
+          "S": "73/41"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1110",
+        "history_weight": "369/10000",
+        "joint_regime_weights": {
+          "THETA_L": "9/20000",
+          "THETA_S": "729/20000"
+        },
+        "predictive_hazards": {
+          "L": "9/82",
+          "S": "73/82"
+        },
+        "rho": "81/82"
+      },
+      {
+        "CB_AUC_action": "S",
+        "CB_AUC_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "E": {
+          "L": 2,
+          "S": 2
+        },
+        "N": {
+          "L": 2,
+          "S": 2
+        },
+        "SG_RATE_action": "S",
+        "SG_RATE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "UCOPE_action": "S",
+        "UCOPE_margin": "1/2",
+        "UCOPE_scores": {
+          "L": "1/2",
+          "S": "1"
+        },
+        "conditional_trial_5_auc": {
+          "THETA_L": "1/5",
+          "THETA_S": "9/5"
+        },
+        "history_bits": "1111",
+        "history_weight": "81/10000",
+        "joint_regime_weights": {
+          "THETA_L": "81/20000",
+          "THETA_S": "81/20000"
+        },
+        "predictive_hazards": {
+          "L": "1/2",
+          "S": "1/2"
+        },
+        "rho": "1/2"
+      }
+    ]
+  },
+  "resource_accounting": {
+    "history_rows": 48,
+    "regime_conditioned_rational_cells": 96,
+    "unique_histories_reused": 16
+  },
+  "schema_version": 1,
+  "scientific_terminal_admitted": true,
+  "stop_failures": [],
+  "version_closure_witness": {
+    "family_generation": "ucope-family-v1",
+    "mixed_ledger_generation": "mixed-executor-generation",
+    "mixed_version_update": "REJECTED"
+  }
+}

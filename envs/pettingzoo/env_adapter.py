@@ -4,6 +4,7 @@ from gymnasium.spaces import Box
 import os
 import multiprocessing as mp
 import copy
+from collections.abc import Mapping
 
 # 确保在子进程中使用安全的matplotlib后端
 try:
@@ -225,7 +226,19 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         next_state = self._state_array()
 
         # 将字典格式的观测转换为数组格式
-        next_observations_array = self._dict_to_array(observations_dict)
+        # Parallel environments may omit an observation only for an agent whose
+        # transition is terminal.  Keep that padding rule explicit: absent
+        # observations for every other agent are an adapter contract violation.
+        terminal_agents = {
+            agent
+            for agent in self.agents
+            if bool(terminations_dict.get(agent, False))
+            or bool(truncations_dict.get(agent, False))
+        }
+        next_observations_array = self._dict_to_array(
+            observations_dict,
+            terminal_agents=terminal_agents,
+        )
 
         # 【重要改动】构建丰富的奖励信息字典而不是简单的标量奖励
         first_agent = self.agents[0]
@@ -303,12 +316,15 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
 
         return next_observations_array.astype(np.float32), float(scalar_reward), terminated, truncated, info
 
-    def _dict_to_array(self, data_dict):
+    def _dict_to_array(self, data_dict, *, terminal_agents=()):
         """
-        将PettingZoo字典格式的观测/动作转换为数组格式
-        Assumes data_dict contains the actual observation/action under the 'obs' key if it's a Dict space,
-        or is the observation/action directly if it's a Box space.
-        Handles cases where agents might be missing from the dict (e.g., after termination).
+        Convert a PettingZoo observation mapping into the fixed-team array.
+
+        Every non-terminal configured agent must have one valid observation.
+        Padding is intentionally limited to agents named in ``terminal_agents``
+        by the immediately preceding Parallel API transition.  This retains a
+        fixed output shape for terminal transitions without interpreting a
+        missing active row as a zero observation.
 
         参数:
             data_dict: 字典格式的数据 {agent_id: data}
@@ -316,74 +332,95 @@ class ParallelToArrayAdapter(gym.Env): # Inherit from gym.Env
         返回:
             data_array: 数组格式的数据 [n_agents, data_dim]
         """
+        if not isinstance(data_dict, Mapping):
+            raise TypeError(
+                "Parallel observation payload must be a mapping keyed by agent id; "
+                f"got {type(data_dict).__name__}"
+            )
+
+        terminal_agents = frozenset(terminal_agents)
+        unknown_terminal_agents = terminal_agents.difference(self.agents)
+        if unknown_terminal_agents:
+            raise ValueError(
+                "terminal_agents contains unknown adapter agents: "
+                f"{sorted(unknown_terminal_agents)!r}"
+            )
+        unexpected_agents = set(data_dict).difference(self.agents)
+        if unexpected_agents:
+            raise ValueError(
+                "Parallel observation payload contains unknown agents: "
+                f"{sorted(unexpected_agents)!r}"
+            )
+
         data_array = []
-        default_value = None # Need a default if an agent is missing
+        for agent in self.agents:
+            original_obs_space = self.env.observation_space(agent)
+            if isinstance(original_obs_space, gym.spaces.Dict):
+                if "obs" not in original_obs_space.spaces:
+                    raise ValueError(
+                        f"Observation space for {agent!r} is a Dict without required 'obs' field"
+                    )
+                value_space = original_obs_space.spaces["obs"]
+            else:
+                value_space = original_obs_space
 
-        for agent in self.agents: # Iterate through possible agents for consistent order
-            agent_data = data_dict.get(agent)
+            if not isinstance(value_space, gym.spaces.Box):
+                raise TypeError(
+                    f"Observation space for {agent!r} must expose a Box observation; "
+                    f"got {type(value_space).__name__}"
+                )
 
-            if agent_data is not None:
-                 # Check if the original observation space was a Dict
-                original_obs_space = self.env.observation_space(agent)
-                if isinstance(original_obs_space, gym.spaces.Dict) and "obs" in original_obs_space.spaces:
-                     # Extract the 'obs' part if it's a Dict space observation
-                     actual_data = agent_data.get("obs") if isinstance(agent_data, dict) else agent_data # Handle potential direct obs return
-                else:
-                     # Assume it's already the correct data (e.g., action)
-                     actual_data = agent_data
+            if agent not in data_dict:
+                if agent not in terminal_agents:
+                    raise ValueError(
+                        f"Missing observation for active agent {agent!r}"
+                    )
+                data_array.append(np.zeros(value_space.shape, dtype=value_space.dtype))
+                continue
 
-                if actual_data is not None:
-                    data_array.append(actual_data)
-                    if default_value is None: # Infer default value shape/type from first valid data
-                         default_value = np.zeros_like(actual_data)
-                elif default_value is not None:
-                     data_array.append(default_value) # Use default if agent data is None but we have a default shape
-                # else: Cannot determine shape yet, skip or raise error? For now, skip.
+            agent_data = data_dict[agent]
+            if agent_data is None:
+                raise ValueError(f"Observation for {agent!r} must not be None")
 
-            elif default_value is not None:
-                # Agent not in dict (e.g., terminated), use default value
-                data_array.append(default_value)
-            # else: Agent not in dict and no default value yet. This case should ideally not happen
-            # if the environment correctly returns observations for all agents upon reset.
-            # If it happens mid-episode, we need a strategy (e.g., zero padding).
+            if isinstance(original_obs_space, gym.spaces.Dict):
+                if not isinstance(agent_data, Mapping):
+                    raise TypeError(
+                        f"Observation for {agent!r} must be a mapping with an 'obs' field"
+                    )
+                if "obs" not in agent_data:
+                    raise ValueError(f"Observation mapping for {agent!r} is missing 'obs'")
+                actual_data = agent_data["obs"]
+            else:
+                actual_data = agent_data
 
-        # Ensure all appended data has the same shape before stacking
-        if not data_array:
-             # Handle case where no data was collected (e.g., env terminates immediately)
-             # Return an empty array with the correct shape if possible
-             if default_value is not None:
-                 return np.array([default_value] * len(self.agents)) # Should not happen often
-             else:
-                 # Cannot determine shape, return empty or raise error
-                 # Let's return an empty array matching the expected space shape
-                 if isinstance(data_dict, dict) and data_dict: # Check if it was observation dict
-                     return np.zeros(self.observation_space.shape, dtype=self.observation_space.dtype)
-                 else: # Assume action dict
-                     return np.zeros(self.action_space.shape, dtype=self.action_space.dtype)
+            if actual_data is None:
+                raise ValueError(f"Observation value for {agent!r} must not be None")
+            if not isinstance(actual_data, np.ndarray):
+                raise TypeError(
+                    f"Observation value for {agent!r} must be a numpy.ndarray; "
+                    f"got {type(actual_data).__name__}"
+                )
+            if actual_data.shape != value_space.shape:
+                raise ValueError(
+                    f"Observation shape for {agent!r} is {actual_data.shape}; "
+                    f"expected {value_space.shape}"
+                )
+            if actual_data.dtype != value_space.dtype:
+                raise TypeError(
+                    f"Observation dtype for {agent!r} is {actual_data.dtype}; "
+                    f"expected {value_space.dtype}"
+                )
+            if not np.isfinite(actual_data).all():
+                raise ValueError(f"Observation for {agent!r} contains non-finite values")
+            data_array.append(actual_data)
 
-
-        # Find the maximum length among sub-arrays if shapes differ (shouldn't happen with Box spaces)
-        # max_len = max(len(arr) for arr in data_array)
-        # Pad arrays if necessary (again, shouldn't be needed for Box)
-        # padded_array = [np.pad(arr, (0, max_len - len(arr)), 'constant') for arr in data_array]
-
-        try:
-            result_array = np.stack(data_array)
-            # Ensure dtype matches the space definition
-            if result_array.dtype != self.observation_space.dtype:
-                 if self.observation_space.contains(result_array.astype(self.observation_space.dtype)):
-                     return result_array.astype(self.observation_space.dtype)
-            return result_array
-
-        except ValueError as e:
-             print(f"Error stacking array: {e}")
-             print(f"Data array contents: {[arr.shape for arr in data_array]}")
-             # Fallback: return zero array matching space shape
-             # This might hide issues but prevents crashes
-             if default_value is not None: # Check if it was observation dict based on shape
-                 if default_value.shape == self.observation_space.shape[1:]:
-                     return np.zeros(self.observation_space.shape, dtype=self.observation_space.dtype)
-             return np.zeros(self.action_space.shape, dtype=self.action_space.dtype)
+        result_array = np.stack(data_array, axis=0)
+        if result_array.shape != self.observation_space.shape:
+            raise ValueError(
+                "Stacked observation shape does not match the adapter observation space: "
+                f"got {result_array.shape}, expected {self.observation_space.shape}"
+            )
+        return result_array
 
 
 

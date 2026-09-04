@@ -1,0 +1,35 @@
+schema_version = 2
+manifest_id = "exp_manifest_native_execution_preflight"
+assignment_id = "asg_native_execution_preflight"
+evidence_class = "B"
+strictness_profile = "R2_EXPERIMENT_EXECUTION"
+runtime_profile = "TOY_EXPLORATORY"
+result_bearing = true
+requirement_ids = ["UR-EXEC-001", "UR-EXEC-002", "UR-RESOURCE-001", "UR-PERF-001"]
+nonrequirement_ids = ["NR-WORKER-LIMIT-001", "NR-DIRECTION-CAP-001", "NR-HASH-HANDOFF-001"]
+resource_preflight_ref = "docs/research/workflow-runs/2026-08-22_low-intrusion-control-plane/resources/RESOURCE_PREFLIGHT_native_execution.json"
+
+[code_surface]
+project_map_anchor = "Native boundary"
+entrypoint = "envs/continuous_roster/cpp_backend.py"
+runner = "tools/benchmarks/benchmark_continuous_roster_toy_cpp_backend.py"
+environment_factory = "envs/continuous_roster/cpp_backend.py"
+native_boundary = "envs/continuous_roster/cpp_backend.py"
+direct_consumer = "tests/ha_ctse_process_continuous_roster_toy_cpp_backend_test.py"
+
+[execution]
+route_id = "continuous_roster_native"
+backend = "cpp"
+parallel = true
+worker_count = 2
+worker_count_source = "RESOURCE_PREFLIGHT"
+threads_per_worker = 1
+silent_fallback_allowed = false
+deviation_ref = ""
+
+[measurement]
+warmup_steps = 100
+sample_steps = 500
+sample_wall_seconds = 5.0
+estimated_target_steps = 50000
+estimate_ref = "docs/research/workflow-runs/2026-08-22_low-intrusion-control-plane/RUNTIME_BASELINE.md"

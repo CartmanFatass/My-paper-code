@@ -4,11 +4,74 @@ import numpy as np
 import pytest
 
 from envs.continuous_roster import runtime_capacity as roster_env
+from experiments.candidates.eociv_lite import actuation_runtime as art
 from experiments.candidates.eociv_lite import sibling_env as sib
 
 MASTER_SEED = 20260807
 SIBLING_SEED = 90731
 PROFILE = roster_env.TRAIN_PROFILES[0]
+
+
+class TestProfileQualifiedStreams:
+    def test_manifest_is_reproducible_separated_and_collision_checked(self):
+        profile_ids = tuple(profile.name for profile in roster_env.TRAIN_PROFILES)
+        first = sib.registered_profile_stream_manifest(
+            profile_ids,
+            world_seed=MASTER_SEED,
+            action_noise_seed=art.ACTION_NOISE_SEED,
+        )
+        second = sib.registered_profile_stream_manifest(
+            profile_ids,
+            world_seed=MASTER_SEED,
+            action_noise_seed=art.ACTION_NOISE_SEED,
+        )
+        assert first == second
+        identities = {
+            int(row[field])
+            for row in first
+            for field in ("world_seed_identity", "action_noise_seed_identity")
+        }
+        assert len(identities) == 2 * len(profile_ids)
+        with pytest.raises(ValueError, match="duplicate"):
+            sib.registered_profile_stream_manifest(
+                (profile_ids[0], profile_ids[0]),
+                world_seed=MASTER_SEED,
+                action_noise_seed=art.ACTION_NOISE_SEED,
+            )
+
+    def test_equal_episode_ids_do_not_alias_world_or_noise_across_profiles(self):
+        worlds = []
+        noises = []
+        for profile in roster_env.TRAIN_PROFILES:
+            world_seed = sib.profile_stream_identity(
+                sib.BASE_WORLD_STREAM, MASTER_SEED, profile.name
+            )
+            noise_seed = sib.profile_stream_identity(
+                sib.ACTION_NOISE_STREAM, art.ACTION_NOISE_SEED, profile.name
+            )
+            ledger = roster_env.make_ledger(0, master_seed=world_seed, profile=profile)
+            worlds.append(ledger.capabilities.tobytes())
+            noises.append(
+                roster_env.make_action_noise(
+                    [0], action_seed=noise_seed, member_capacity=profile.member_capacity
+                ).tobytes()
+            )
+        assert len(set(worlds)) == len(worlds)
+        assert len(set(noises)) == len(noises)
+        reference_seed = sib.profile_stream_identity(
+            sib.BASE_WORLD_STREAM, MASTER_SEED, PROFILE.name
+        )
+        assert worlds[0] == roster_env.make_ledger(
+            0, master_seed=reference_seed, profile=PROFILE
+        ).capabilities.tobytes()
+        reference_noise_seed = sib.profile_stream_identity(
+            sib.ACTION_NOISE_STREAM, art.ACTION_NOISE_SEED, PROFILE.name
+        )
+        assert noises[0] == roster_env.make_action_noise(
+            [0],
+            action_seed=reference_noise_seed,
+            member_capacity=PROFILE.member_capacity,
+        ).tobytes()
 
 
 def _ledger(episode_id: int = 0):

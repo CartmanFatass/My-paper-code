@@ -1,0 +1,99 @@
+{
+  "file": "B02_Multiagent_Systems_CUP2009.pdf",
+  "citation_key": "ShohamLeytonBrown2009",
+  "title": "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations",
+  "authors": [
+    "Yoav Shoham",
+    "Kevin Leyton-Brown"
+  ],
+  "year": 2009,
+  "venue": "Cambridge University Press",
+  "version": "2009 uncorrected manuscript for personal on-screen use",
+  "doi": "10.1017/CBO9780511811654",
+  "arxiv": null,
+  "source_urls": [
+    "https://www.masfoundations.org/download.html"
+  ],
+  "primary_topics": [
+    "multiagent systems foundations",
+    "normal-form and extensive-form games",
+    "stochastic and potential games",
+    "multi-agent learning",
+    "communication",
+    "mechanism design",
+    "epistemic logic"
+  ],
+  "method_families": [
+    "distributed constraint solving",
+    "game-theoretic solution concepts",
+    "equilibrium computation",
+    "reinforcement and no-regret learning",
+    "mechanism design",
+    "epistemic logic"
+  ],
+  "problem_classes": [
+    "distributed CSP and optimization",
+    "finite games",
+    "stochastic games",
+    "auctions and allocation",
+    "knowledge and belief reasoning"
+  ],
+  "evidence_types": [
+    "textbook synthesis",
+    "formal theorems",
+    "algorithms",
+    "worked examples"
+  ],
+  "hmasd_axes": [
+    "foundations",
+    "optimization",
+    "planning",
+    "communication"
+  ],
+  "paper_id": "B02",
+  "source_pdf": "docs/new-libs/papers/B02_Multiagent_Systems_CUP2009.pdf",
+  "pdf_pages": 532,
+  "text_extractable_pages": 521,
+  "warning_pages": [
+    11,
+    19,
+    22,
+    24,
+    32,
+    40,
+    42,
+    43,
+    100,
+    114,
+    115,
+    116,
+    135,
+    165,
+    217,
+    281,
+    291,
+    297,
+    347,
+    385,
+    386,
+    401,
+    431,
+    432,
+    449,
+    458,
+    463,
+    477,
+    485,
+    493,
+    499
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/B02/overview.md",
+    "structure": "docs/new-libs/corpus/papers/B02/structure.json",
+    "claims": "docs/new-libs/corpus/papers/B02/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/B02/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/B02/chunks"
+  },
+  "chunk_count": 100,
+  "content_fingerprint": "sha256:1f7e9d608cf7192db7018de673d79080a7cd1f4fc8c3764d28fc0956162d7518"
+}

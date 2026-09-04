@@ -1,5 +1,11 @@
 # HMASD Idea Portfolio
 
+> Current-status boundary (2026-08-23): this file retains generic idea-lineage
+> context but is nonauthoritative for the exact 33 candidate-directory queues,
+> owners, next events, revisit conditions, or code pointers. Use
+> `docs/HR/RESEARCH_DIRECTION_DASHBOARD.md` and its structured registry for
+> recovery, then follow the cited owner artifact for authority.
+
 The portfolio preserves legal scientific explanations. Active role authority is
 defined by `AGENTS.md` and `.agents/roles/`; Project Manager schedules the next
 bounded action inside user authority. Status never grants implementation or

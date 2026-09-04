@@ -1,0 +1,90 @@
+{
+  "paper_id": "P09",
+  "citation_key": "carmona2023modelfree",
+  "title": "Model-Free Mean-Field Reinforcement Learning: Mean-Field MDP and Mean-Field Q-Learning",
+  "authors": [
+    "René Carmona",
+    "Mathieu Laurière",
+    "Zongjun Tan"
+  ],
+  "year": 2023,
+  "venue": "The Annals of Applied Probability",
+  "version": "2019 arXiv manuscript; formal journal version published 2023",
+  "source_pdf": "docs/new-libs/papers/P09_Carmona_ModelFree_MFRL_2019.pdf",
+  "pdf_pages": 45,
+  "text_extractable_pages": 45,
+  "warning_pages": [
+    3,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    26,
+    27,
+    28,
+    34,
+    35,
+    36,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "doi": "10.1214/23-AAP1949",
+  "arxiv": "1910.12802",
+  "source_urls": [
+    "https://arxiv.org/abs/1910.12802",
+    "https://doi.org/10.1214/23-AAP1949"
+  ],
+  "primary_topics": [
+    "mean-field control",
+    "mean-field MDP",
+    "mean-field Q-learning",
+    "common noise"
+  ],
+  "method_families": [
+    "dynamic programming",
+    "tabular Q-learning",
+    "simplex discretization",
+    "deep actor-critic"
+  ],
+  "problem_classes": [
+    "infinite-horizon discounted mean-field control",
+    "McKean-Vlasov control"
+  ],
+  "evidence_types": [
+    "formal guarantees",
+    "numerical examples"
+  ],
+  "hmasd_axes": [
+    "foundations",
+    "planning",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P09/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P09/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P09/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P09/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P09/chunks"
+  },
+  "chunk_count": 10,
+  "content_fingerprint": "sha256:2fbb95458e7a75aa1ee46ffb65bf35357fb5185a605a9eae0b5a1e52530be26a"
+}

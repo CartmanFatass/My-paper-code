@@ -1,24 +1,47 @@
 # HMASD External Review Workflow
 
-Canonical authority is in `AGENTS.md` and `.agents/roles/`. This file describes
+Canonical authority is in `AGENTS.md`. This file describes
 the compact artifact and transport sequence only.
+
+## Default two-provider direction policy
+
+Every eligible active algorithm direction receives two separate external
+conversations by default:
+
+1. **ChatGPT External Pro** for rigorous causal/mathematical scrutiny,
+   comparator and shortcut adequacy, claim boundaries, result challenge, and
+   convergence.
+2. **External Gemini innovator** for divergent search using broad world/domain
+   knowledge: mechanisms, analogies, overlooked regimes, counterexamples,
+   scenario families, controls, and toy-to-UAV bridges.
+
+Gemini never counts as or replaces ChatGPT External Pro. It supplies hypotheses,
+not convergence, formal acceptance, technical acceptance, or portfolio choice.
+The same-direction EM filters both answers locally; Root owns portfolio use and
+CM owns technical acceptance. Freeze the two questions independently and retain
+separate conversations, raw archives, and intakes. Agentify capacity may
+serialize transport without merging the reviews.
 
 ## Research Operations Manager sequence
 
 1. Research Operations Manager follows the active grant or exact clarification
    request and authors the reviewer-visible brief, allow-list and question.
 2. Research Operations Manager commits and pushes that exact boundary.
-3. In the same task, `$hmasd-agentify-pro-transport` submits the question once.
-4. The exact natural response is archived, reread for equality, and accompanied
-   by a provenance-only intake record. No semantic relay or second reviewer is
-   created.
-5. Research Operations Manager mechanically records the External-Pro
-   disposition and continues the exact in-scope operations sequence.
+3. The registered Pro transport submits the ChatGPT External Pro question once;
+   the registered Gemini transport separately submits the divergent Gemini
+   question once when Agentify capacity is idle.
+4. Each exact natural response is archived and accompanied by its own
+   provenance-bound same-direction intake. Neither archive is a substitute for
+   the other and neither provider receives the other's current answer by
+   default.
+5. The same-direction scientific owner reconciles Gemini as innovation input
+   and ChatGPT External Pro as rigorous review input. Root decides portfolio use;
+   local scientific and technical authority remain unchanged.
 
-External Pro owns its exact question-scoped scientific answer. Research
-Operations Manager owns packaging, transport, archival and operational use.
-Code Project Manager owns implementation and technical acceptance. Review does
-not itself authorize code or compute.
+Each provider owns only its exact question-scoped answer. The same-direction
+scientific owner owns interpretation; Root owns portfolio use; Code Project
+Manager owns implementation and technical acceptance. Neither review itself
+authorizes code or compute.
 
 ## Transport identity
 

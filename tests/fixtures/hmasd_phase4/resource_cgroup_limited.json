@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "preflight_id": "fixture-limited",
+  "captured_at": "2026-08-24T00:00:00Z",
+  "host_identity": "fixture-host",
+  "cpu": {
+    "physical_cores": 4,
+    "logical_processors": 8,
+    "load_average_1m": 0.0,
+    "load_percent": 0.0
+  },
+  "memory": {
+    "total_bytes": 17179869184,
+    "available_bytes": 12884901888,
+    "total_gib": 16.0,
+    "available_gib": 12.0,
+    "cgroup_memory_max_raw": "10737418240",
+    "cgroup_memory_max_bytes": 10737418240,
+    "cgroup_memory_max_gib": 10.0,
+    "cgroup_memory_current_raw": "2147483648",
+    "cgroup_memory_current_bytes": 2147483648,
+    "cgroup_memory_current_gib": 2.0
+  }
+}

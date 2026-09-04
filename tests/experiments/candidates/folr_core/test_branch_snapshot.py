@@ -40,7 +40,12 @@ initial_join = _helpers.initial_join
 no_membership_transaction = _helpers.no_membership_transaction
 
 
-def make_core(mode: str = "f1", *, model_seed: int = 17) -> VariableRosterEventCore:
+def make_core(
+    mode: str = "f1",
+    *,
+    model_seed: int = 17,
+    partner_interaction_enabled: bool = False,
+) -> VariableRosterEventCore:
     """A supplied-executor core, which is the FOLR instantiation.
 
     Pro chose this runtime for the experiment -- "the cleanest instantiation is
@@ -65,6 +70,7 @@ def make_core(mode: str = "f1", *, model_seed: int = 17) -> VariableRosterEventC
         frontier_seed=51,
         action_seed=61,
         runtime_mode="supplied_executor",
+        partner_interaction_enabled=partner_interaction_enabled,
     )
 
 
@@ -171,10 +177,10 @@ def test_the_digest_notices_a_single_hidden_coordinate():
 
 
 def test_restore_refuses_an_architecture_mismatch():
-    source = make_core("f1")
+    source = make_core(partner_interaction_enabled=True)
     snapshot = bs.capture(source)
-    other = make_core("f0")
-    with pytest.raises(ValueError, match="architecture mismatch"):
+    other = make_core(partner_interaction_enabled=False)
+    with pytest.raises(ValueError, match="partner_interaction_enabled"):
         bs.restore(other, snapshot)
 
 

@@ -1,0 +1,759 @@
+{
+  "actual_counts": {
+    "evaluated_episodes": 288,
+    "evaluation_transitions": 23040,
+    "optimizer_updates": 768,
+    "total_transitions": 30720,
+    "training_episodes": 96,
+    "training_transitions": 7680
+  },
+  "aggregates": {
+    "DET_GATE_ONLY": {
+      "changed_action_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      },
+      "episodes": 96,
+      "event_rank_handoff_delay": {
+        "censored": 0,
+        "mean_event_ranks": null,
+        "observed": 0,
+        "sum_event_ranks": 0
+      },
+      "miss_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "premature_handoff_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      },
+      "return_mean": 0.5745171440972222,
+      "safe_hold_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "support": {
+        "alias": 23,
+        "gated": 23,
+        "truth": 0,
+        "unresolved": 2980
+      },
+      "terminal_tenure_mean": 60.013020833333336,
+      "veto_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      }
+    },
+    "SHAM_LOGISTIC_VETO": {
+      "changed_action_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "episodes": 96,
+      "event_rank_handoff_delay": {
+        "censored": 0,
+        "mean_event_ranks": null,
+        "observed": 0,
+        "sum_event_ranks": 0
+      },
+      "miss_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "premature_handoff_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "return_mean": 0.5,
+      "safe_hold_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      },
+      "support": {
+        "alias": 23,
+        "gated": 23,
+        "truth": 0,
+        "unresolved": 2980
+      },
+      "terminal_tenure_mean": 60.052083333333336,
+      "veto_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      }
+    },
+    "TARGET_LOGISTIC_VETO": {
+      "changed_action_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "episodes": 96,
+      "event_rank_handoff_delay": {
+        "censored": 0,
+        "mean_event_ranks": null,
+        "observed": 0,
+        "sum_event_ranks": 0
+      },
+      "miss_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "premature_handoff_rate": {
+        "denominator": 23,
+        "numerator": 0,
+        "value": 0.0
+      },
+      "return_mean": 0.5,
+      "safe_hold_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      },
+      "support": {
+        "alias": 23,
+        "gated": 23,
+        "truth": 0,
+        "unresolved": 2980
+      },
+      "terminal_tenure_mean": 60.052083333333336,
+      "veto_rate": {
+        "denominator": 23,
+        "numerator": 23,
+        "value": 1.0
+      }
+    }
+  },
+  "call_counts": {
+    "candidate_policy": 14319,
+    "environment_transition": 30720,
+    "evaluation_runner": 9,
+    "learner_forward": 826,
+    "supplied_executor": 30720,
+    "trainer": 6,
+    "variable_roster_event_core_transaction": 30720
+  },
+  "candidate_id": "CAND-VSP-05@adversarial-revision-v7",
+  "claim_boundary": "descriptive fixed-budget toy evidence only; no promotion, retirement, utility, generalization, deployment, or scientific acceptance",
+  "configuration": {
+    "adam_betas": [
+      0.9,
+      0.999
+    ],
+    "adam_eps": 1e-08,
+    "arms": [
+      "TARGET_LOGISTIC_VETO",
+      "SHAM_LOGISTIC_VETO",
+      "DET_GATE_ONLY"
+    ],
+    "evaluation_episodes_per_seed_arm": 32,
+    "evaluation_task_seeds": [
+      97057,
+      97058,
+      97059
+    ],
+    "feature_fields": [
+      "position",
+      "velocity",
+      "current_skill_one_hot_0",
+      "current_skill_one_hot_1",
+      "current_skill_one_hot_2",
+      "proposed_skill_one_hot_0",
+      "proposed_skill_one_hot_1",
+      "proposed_skill_one_hot_2"
+    ],
+    "full_batch_fixed_record_order": true,
+    "hard_position_threshold": 0.125,
+    "hard_velocity_threshold": 0.25,
+    "horizon": 80,
+    "hypothetical_transitions": 0,
+    "l2_coefficient": 0.001,
+    "learning_rate": 0.05,
+    "linear_feature_dim": 8,
+    "name": "registered",
+    "optimizer_steps": 128,
+    "proposal_rule": "current-process coarse target; if already incumbent or no coarse target, propose cyclic successor; genuine joins start at skill 2",
+    "reject_threshold": 0.8,
+    "search_candidates": 0,
+    "training_episodes_per_seed": 32,
+    "training_task_seeds": [
+      67057,
+      67058,
+      67059
+    ],
+    "truth_position_threshold": 0.25,
+    "truth_velocity_threshold": 0.0625,
+    "zero_initialization": true
+  },
+  "declared_counts": {
+    "evaluated_episodes": 288,
+    "evaluation_transitions": 23040,
+    "optimizer_updates": 768,
+    "total_transitions": 30720,
+    "training_episodes": 96,
+    "training_transitions": 7680
+  },
+  "evaluation_by_seed_and_arm": [
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 6,
+          "gated": 6,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.46875,
+        "veto_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        }
+      },
+      "arm": "TARGET_LOGISTIC_VETO",
+      "task_seed": 97057
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 6,
+          "gated": 6,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.46875,
+        "veto_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        }
+      },
+      "arm": "SHAM_LOGISTIC_VETO",
+      "task_seed": 97057
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 6,
+          "numerator": 6,
+          "value": 1.0
+        },
+        "return_mean": 0.5655924479166667,
+        "safe_hold_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "support": {
+          "alias": 6,
+          "gated": 6,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.4375,
+        "veto_rate": {
+          "denominator": 6,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      "arm": "DET_GATE_ONLY",
+      "task_seed": 97057
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 7,
+          "gated": 7,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.3125,
+        "veto_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        }
+      },
+      "arm": "TARGET_LOGISTIC_VETO",
+      "task_seed": 97058
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 7,
+          "gated": 7,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.3125,
+        "veto_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        }
+      },
+      "arm": "SHAM_LOGISTIC_VETO",
+      "task_seed": 97058
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 7,
+          "numerator": 7,
+          "value": 1.0
+        },
+        "return_mean": 0.57421875,
+        "safe_hold_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "support": {
+          "alias": 7,
+          "gated": 7,
+          "truth": 0,
+          "unresolved": 996
+        },
+        "terminal_tenure_mean": 60.2890625,
+        "veto_rate": {
+          "denominator": 7,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      "arm": "DET_GATE_ONLY",
+      "task_seed": 97058
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 10,
+          "gated": 10,
+          "truth": 0,
+          "unresolved": 988
+        },
+        "terminal_tenure_mean": 59.375,
+        "veto_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        }
+      },
+      "arm": "TARGET_LOGISTIC_VETO",
+      "task_seed": 97059
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "return_mean": 0.5,
+        "safe_hold_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        },
+        "support": {
+          "alias": 10,
+          "gated": 10,
+          "truth": 0,
+          "unresolved": 988
+        },
+        "terminal_tenure_mean": 59.375,
+        "veto_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        }
+      },
+      "arm": "SHAM_LOGISTIC_VETO",
+      "task_seed": 97059
+    },
+    {
+      "aggregate": {
+        "changed_action_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        },
+        "episodes": 32,
+        "event_rank_handoff_delay": {
+          "censored": 0,
+          "mean_event_ranks": null,
+          "observed": 0,
+          "sum_event_ranks": 0
+        },
+        "miss_rate": {
+          "denominator": 0,
+          "numerator": 0,
+          "value": null
+        },
+        "premature_handoff_rate": {
+          "denominator": 10,
+          "numerator": 10,
+          "value": 1.0
+        },
+        "return_mean": 0.583740234375,
+        "safe_hold_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        },
+        "support": {
+          "alias": 10,
+          "gated": 10,
+          "truth": 0,
+          "unresolved": 988
+        },
+        "terminal_tenure_mean": 59.3125,
+        "veto_rate": {
+          "denominator": 10,
+          "numerator": 0,
+          "value": 0.0
+        }
+      },
+      "arm": "DET_GATE_ONLY",
+      "task_seed": 97059
+    }
+  ],
+  "execution_command": "python -m experiments.candidates.vsp_05.real_toy_semantic_veto --config registered --code-revision e50b43e30b2010c5320f0e23d0f2ba5c28804b1e --output <explicit-output>",
+  "mechanical_analysis": {
+    "claim_boundary": "descriptive fixed-budget B-level toy evidence only",
+    "primary_premature_handoff_rate": {
+      "DET_GATE_ONLY": 1.0,
+      "SHAM_LOGISTIC_VETO": 0.0,
+      "TARGET_LOGISTIC_VETO": 0.0
+    },
+    "scientific_disposition": null,
+    "source_commit": "e50b43e30b2010c5320f0e23d0f2ba5c28804b1e",
+    "status": "MECHANICAL_ANALYSIS_COMPLETE",
+    "target_minus_det": -1.0,
+    "target_minus_sham": 0.0
+  },
+  "raw_evidence_locator": "logs/vsp05_b1_real_toy_semantic_veto_e50b43e3_r1/raw_result.json",
+  "real_calls": {
+    "environment": true,
+    "evaluation_runner": true,
+    "learner": true,
+    "policy": true,
+    "supplied_executor": true,
+    "trainer": true,
+    "variable_roster_event_core": true
+  },
+  "run_id": "vsp05_b1_e50b43e3_r1",
+  "scientific_acceptance": false,
+  "scientific_disposition": null,
+  "source_commit": "e50b43e30b2010c5320f0e23d0f2ba5c28804b1e",
+  "stage": "experiment",
+  "technical_disposition": "COMPLETED_FIXED_B_LEVEL_TOY_RUN",
+  "training_by_seed": [
+    {
+      "collection": {
+        "alias_support": 9,
+        "candidate_policy_calls": 1199,
+        "environment_transitions": 2560,
+        "real_environment": true,
+        "real_supplied_executor": true,
+        "real_variable_roster_core": true,
+        "records": 9,
+        "truth_support": 0,
+        "unresolved": 998
+      },
+      "sham_label_multiset_preserved": true,
+      "sham_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 9,
+        "records": 9,
+        "weight_l2": 2.5402297973632812
+      },
+      "sham_permutation_seed": 567057,
+      "target_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 9,
+        "records": 9,
+        "weight_l2": 2.5402297973632812
+      },
+      "task_seed": 67057
+    },
+    {
+      "collection": {
+        "alias_support": 6,
+        "candidate_policy_calls": 1190,
+        "environment_transitions": 2560,
+        "real_environment": true,
+        "real_supplied_executor": true,
+        "real_variable_roster_core": true,
+        "records": 6,
+        "truth_support": 0,
+        "unresolved": 992
+      },
+      "sham_label_multiset_preserved": true,
+      "sham_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 6,
+        "records": 6,
+        "weight_l2": 2.5402297973632812
+      },
+      "sham_permutation_seed": 567058,
+      "target_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 6,
+        "records": 6,
+        "weight_l2": 2.5402297973632812
+      },
+      "task_seed": 67058
+    },
+    {
+      "collection": {
+        "alias_support": 6,
+        "candidate_policy_calls": 1193,
+        "environment_transitions": 2560,
+        "real_environment": true,
+        "real_supplied_executor": true,
+        "real_variable_roster_core": true,
+        "records": 6,
+        "truth_support": 0,
+        "unresolved": 995
+      },
+      "sham_label_multiset_preserved": true,
+      "sham_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 6,
+        "records": 6,
+        "weight_l2": 2.5402297973632812
+      },
+      "sham_permutation_seed": 567059,
+      "target_learner": {
+        "bias": 1.5506067276000977,
+        "final_loss": 0.015742920339107513,
+        "initial_loss": 0.6931471824645996,
+        "optimizer_updates": 128,
+        "positive_labels": 6,
+        "records": 6,
+        "weight_l2": 2.5402297973632812
+      },
+      "task_seed": 67059
+    }
+  ],
+  "treatment_id": "VSP05-B1-REAL-TOY-SEMANTIC-VETO",
+  "validation_locator": "logs/vsp05_b1_real_toy_semantic_veto_e50b43e3_r1/evaluation_validation.json"
+}

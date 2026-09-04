@@ -1,0 +1,701 @@
+from __future__ import annotations
+
+import inspect
+from copy import deepcopy
+from dataclasses import asdict
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+import pytest
+
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import addressing
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_engine import (
+    B1CheckpointBinding, capture_b1_checkpoint, save_b1_checkpoint,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_artifact import (
+    make_b1_incident_lineage_witness,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.artifact import (
+    canonical_json_bytes,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.checkpoint import (
+    model_parameter_digest_from_state,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.model import (
+    CommonRecurrentActorCritic,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.ppo import (
+    PPOConfig, PPOCounters, RecurrentPPOTrainer, config_digest, make_adam,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_production import (
+    B1MetricsProductionError,
+    _direct_invocation_groups,
+    _materialized_audit_authority_records,
+    _require_checkpoint_manifest_identity,
+    _require_raw_manifest_identity,
+    _require_reconstructed_rows,
+    _validate_relocated_training_admission,
+    _resolve_descriptor_source,
+    assemble_and_publish_b1_metrics,
+    assemble_and_publish_b1_metrics_test_only,
+    reread_materialized_digest_records,
+    stage_reviewed_b0_evidence,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import (
+    _validate_materialized_b0,
+    MetricsArtifactError,
+    validate_metrics_only_manifest,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_training_assembly import (
+    assemble_b1_metrics_training,
+    finalize_audit_table_bindings,
+)
+from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_metrics_rehydrate import (
+    ATTEMPT_ID, canonical_raw_slice_groups,
+)
+from tests.experiments.candidates.capability_bound_semantic_currentness_omrc_b01.test_b1_metrics_training_assembly import (
+    _admission as training_admission,
+    _raw_slice as training_raw_slice,
+    _shared_policy_tables,
+    _telemetry as training_telemetry,
+)
+
+
+def _write_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(json.dumps(
+        value, ensure_ascii=True, allow_nan=False, sort_keys=True,
+        separators=(",", ":"),
+    ).encode("ascii") + b"\n")
+
+
+def test_mechanical_source_descriptor_rejects_sha_and_pointer_tamper(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "worker.json"
+    _write_json(source, {"raw_evidence": {"value": 7}})
+    descriptor = {
+        "source_relative_path": "worker.json",
+        "source_file_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "json_pointer": "/raw_evidence",
+    }
+    assert _resolve_descriptor_source(tmp_path, descriptor) == {"value": 7}
+
+    bad_sha = {**descriptor, "source_file_sha256": "0" * 64}
+    with pytest.raises(B1MetricsProductionError, match="source SHA differs"):
+        _resolve_descriptor_source(tmp_path, bad_sha)
+    bad_pointer = {**descriptor, "json_pointer": "/raw_evidence/missing"}
+    with pytest.raises(B1MetricsProductionError, match="pointer is absent"):
+        _resolve_descriptor_source(tmp_path, bad_pointer)
+
+
+def test_consumer_rejects_coordinated_rehash_identity_resource_replay_and_checkpoint_classes() -> None:
+    identity = {
+        "attempt_id": "attempt-1",
+        "implementation_commit": "1" * 40,
+        "source_conformance_sha256": "2" * 64,
+    }
+    raw = {
+        "attempt_id": "attempt-1",
+        "seed": 21101,
+        "arm": "STRUCT-CURRENTNESS-GRU",
+        "full_bindings": {
+            "implementation_commit": "1" * 40,
+            "source_conformance_sha256": "2" * 64,
+        },
+    }
+    _require_raw_manifest_identity(raw, identity)
+    attacker_rehashed_raw = deepcopy(raw)
+    attacker_rehashed_raw["attempt_id"] = "attempt-2"
+    with pytest.raises(B1MetricsProductionError, match="manifest source identity"):
+        _require_raw_manifest_identity(attacker_rehashed_raw, identity)
+
+    for evidence_class in (
+        "training admission", "training telemetry", "policy replay wrapper",
+        "policy replay admission", "policy replay raw receipt",
+    ):
+        published = [{"identity": evidence_class, "sha256": "a" * 64, "value": 1}]
+        attacker_rehashed = [{
+            "identity": evidence_class, "sha256": "b" * 64, "value": 2,
+        }]
+        with pytest.raises(B1MetricsProductionError, match="reopened evidence"):
+            _require_reconstructed_rows(
+                evidence_class, attacker_rehashed, published
+            )
+
+    binding = {
+        "attempt_id": "attempt-1",
+        "implementation_commit": "1" * 40,
+        "source_conformance_sha256": "2" * 64,
+        "seed": 21101,
+        "arm": "STRUCT-CURRENTNESS-GRU",
+        "completed_rollout_updates": 48,
+    }
+    record = {"binding": dict(binding), "update": 48}
+    _require_checkpoint_manifest_identity(binding, raw, record, identity)
+    attacker_rehashed_binding = {
+        **binding, "source_conformance_sha256": "3" * 64,
+    }
+    attacker_rehashed_record = {
+        "binding": dict(attacker_rehashed_binding), "update": 48,
+    }
+    with pytest.raises(B1MetricsProductionError, match="checkpoint envelope"):
+        _require_checkpoint_manifest_identity(
+            attacker_rehashed_binding, raw, attacker_rehashed_record, identity
+        )
+
+
+def test_relocated_training_admission_revalidates_after_atomic_root_rename(
+    tmp_path: Path,
+) -> None:
+    old_root = tmp_path / ".artifact.partial-old"
+    final_root = tmp_path / "artifact"
+    admission_path = final_root / "admissions" / "slot-admission.json"
+    admission_path.parent.mkdir(parents=True)
+    historical_bound = old_root / "admissions" / admission_path.name
+    historical_raw = historical_bound.with_name(
+        f".{historical_bound.name}.raw-test.json"
+    )
+    relocated_raw = admission_path.parent / historical_raw.name
+    receipt = {
+        "passed": True,
+        "physical_floor_pass": True,
+        "effective_floor_pass": True,
+        "available_physical_bytes": 5 * 1024**3,
+        "effective_available_bytes": 5 * 1024**3,
+    }
+    _write_json(relocated_raw, receipt)
+    executable = Path(sys.executable).resolve()
+    preflight = b1.CANONICAL_PREFLIGHT
+    bound = {
+        "schema": b1.B1_BOUND_ADMISSION_SCHEMA,
+        "attempt_id": "attempt-1",
+        "run_name": b1.B1_RUN_NAME,
+        "arm": "STRUCT-CURRENTNESS-GRU",
+        "seed": 21101,
+        "implementation_commit": "1" * 40,
+        "source_conformance_sha256": "2" * 64,
+        "bound_receipt_path": str(historical_bound.resolve(strict=False)),
+        "raw_output_path": str(historical_raw.resolve(strict=False)),
+        "python_executable": str(executable),
+        "python_sha256": hashlib.sha256(executable.read_bytes()).hexdigest(),
+        "preflight_script": str(preflight),
+        "preflight_script_sha256": hashlib.sha256(preflight.read_bytes()).hexdigest(),
+        "exact_command": [
+            str(executable), str(preflight), "admit-memory", "--out",
+            str(historical_raw.resolve(strict=False)),
+        ],
+        "raw_receipt_sha256": hashlib.sha256(relocated_raw.read_bytes()).hexdigest(),
+        "receipt": receipt,
+    }
+    _write_json(admission_path, bound)
+    validated = _validate_relocated_training_admission(
+        admission_path,
+        bound,
+        attempt_id="attempt-1",
+        arm="STRUCT-CURRENTNESS-GRU",
+        seed=21101,
+        implementation_commit="1" * 40,
+        source_conformance_sha256="2" * 64,
+    )
+    assert validated["bound_receipt_path"] != str(admission_path)
+
+    relocated_raw.write_bytes(b"{}\n")
+    with pytest.raises(B1MetricsProductionError, match="relocated training raw"):
+        _validate_relocated_training_admission(
+            admission_path,
+            bound,
+            attempt_id="attempt-1",
+            arm="STRUCT-CURRENTNESS-GRU",
+            seed=21101,
+            implementation_commit="1" * 40,
+            source_conformance_sha256="2" * 64,
+        )
+
+
+def test_unified_test_profile_fixture_carries_complete_rollout_inventory() -> None:
+    training = training_raw_slice()
+    assert training["slice"] == {"start_update": 0, "stop_update": 48}
+    assert len(training["rollouts"]) == 48
+    assert [row["update_before"] for row in training["rollouts"]] == list(range(48))
+    assert [row["update_after"] for row in training["rollouts"]] == list(range(1, 49))
+
+
+def _b0_source(tmp_path: Path) -> tuple[Path, dict[str, object]]:
+    source = tmp_path / "reviewed-b0-source"
+    worker = source / "workers" / "slot-00" / "result.json"
+    evaluation = {"heldout": {"return": 1.25, "count": 2}}
+    arm = {"records": {"diagnostics": {"evaluation": evaluation}}}
+    _write_json(worker, arm)
+    _write_json(source / "manifest.json", {
+        "schema": "reviewed-b0-test", "arm_records": [arm],
+    })
+    files = sorted(
+        (path for path in source.rglob("*") if path.is_file()),
+        key=lambda path: path.relative_to(source).as_posix(),
+    )
+    inventory = [{
+        "path": path.relative_to(source).as_posix(),
+        "byte_count": len(path.read_bytes()),
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    } for path in files]
+    manifest = source / "manifest.json"
+    return source, {
+        "manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+        "manifest_bytes": len(manifest.read_bytes()),
+        "reviewed_receipt_sha256": "4" * 64,
+        "inventory_sha256": hashlib.sha256(
+            json.dumps(inventory, ensure_ascii=True, allow_nan=False, sort_keys=True,
+                       separators=(",", ":")).encode("ascii")
+        ).hexdigest(),
+        "file_count": len(files),
+        "total_bytes": sum(len(path.read_bytes()) for path in files),
+    }
+
+
+def _add_checkpoint_slot(staging: Path, raw: dict, index: int) -> None:
+    seed, arm = raw["seed"], raw["arm"]
+    durable = staging / "arm-seeds" / f"{index:02d}-seed-{seed}-{arm}"
+    durable.mkdir(parents=True)
+    model = CommonRecurrentActorCritic(seed, address_u64=addressing.u64)
+    checkpoints = []
+    for update in (0, 12, 24, 48):
+        trainer = RecurrentPPOTrainer(
+            model, run_name=raw["run_name"], seed=seed,
+            optimizer=make_adam(model), address_u64=addressing.u64,
+        )
+        trainer.counters = PPOCounters(
+            rollout_updates=update, adam_steps=update * 16,
+            train_episodes=update * 8, train_transitions=update * 8 * 152,
+            train_decisions=update * 8 * 24,
+        )
+        full = raw["full_bindings"]
+        binding = B1CheckpointBinding(
+            object_id="CBSC-OMRC-B01", attempt_id=ATTEMPT_ID,
+            run_name=raw["run_name"], arm=arm, seed=seed,
+            completed_rollout_updates=update,
+            train_episode_ids_sha256=full["train_episode_ids_sha256"],
+            full_training_tape_digest=full["full_training_tape_digest"],
+            full_action_uniform_digest=full["full_action_uniform_digest"],
+            ppo_configuration_digest=config_digest(PPOConfig()),
+            implementation_commit="1" * 40,
+            source_conformance_sha256="2" * 64,
+        )
+        envelope = capture_b1_checkpoint(trainer, binding)
+        path = durable / f"checkpoint-update-{update}.pt"
+        save_b1_checkpoint(path, envelope)
+        payload = path.read_bytes()
+        inner = envelope["recurrent_ppo_checkpoint"]
+        checkpoints.append({
+            "update": update, "relative_path": path.name,
+            "sha256": hashlib.sha256(payload).hexdigest(),
+            "byte_count": len(payload), "binding": asdict(binding),
+            "counters": dict(inner["counters"]), "digests": dict(inner["digests"]),
+            "model_parameter_digest": model_parameter_digest_from_state(inner["model_state"]),
+        })
+    raw["checkpoints_created"] = checkpoints
+    raw["scientific_branch"] = None
+
+
+def _write_direct_invocations(
+    staging: Path, raw_group: list[dict[str, object]], slot_index: int = 0,
+) -> None:
+    seed, arm = raw_group[0]["seed"], raw_group[0]["arm"]
+    tag = f"{slot_index:02d}-seed-{seed}-{arm}"
+    for order, raw in enumerate(raw_group):
+        interval = raw["slice"]
+        invocation = f"slice-{interval['start_update']:02d}-{interval['stop_update']:02d}"
+        admission = training_admission(order)
+        _write_json(
+            staging / "admissions" / f"{tag}-{invocation}-admission.json",
+            {**admission, "receipt": {
+                "available_physical_bytes": admission["available_physical_bytes"],
+                "effective_available_bytes": admission["effective_available_bytes"],
+            }},
+        )
+        _write_json(
+            staging / "workers" / tag / invocation / "telemetry.json",
+            training_telemetry(
+                interval["start_update"], interval["stop_update"], order
+            )["measurement"],
+        )
+        _write_json(
+            staging / "workers" / tag / invocation / "result.json",
+            {"raw_evidence": raw},
+        )
+
+
+def test_formal_production_api_accepts_no_tables_models_fact_booleans_or_factories() -> None:
+    parameters = set(inspect.signature(assemble_and_publish_b1_metrics).parameters)
+    assert not parameters & {
+        "tables", "shared_tables", "policy_tables", "training_tables",
+        "models", "model", "factory", "fact_booleans", "mechanical",
+        "implementation_commit", "source_conformance_sha256", "b0_evidence",
+        "law_digests", "test_only",
+    }
+    assert {
+        "staging_root", "final_path", "grouped_raw_slices",
+        "authority_witness", "incident_lineage_witness", "policy_replay_witness",
+        "allowed_root",
+    } == parameters
+
+
+def test_formal_entry_refuses_before_mutation_and_runtime_surface_is_bound(
+    tmp_path: Path,
+) -> None:
+    # Section-11 recast (owner decision 3, 2026-09-02): the two
+    # `REPAIR_REQUIRED: formal metrics publication awaits whole-pipeline CLEAN
+    # review` raises are removed.  The formal entry still refuses a caller that
+    # supplies no canonical authority witness, and still mutates nothing first.
+    staging = tmp_path / ".result.partial-test"
+    staging.mkdir()
+    before = list(staging.rglob("*"))
+    with pytest.raises((B1MetricsProductionError, TypeError, ValueError)):
+        assemble_and_publish_b1_metrics(
+            staging_root=staging,
+            final_path=tmp_path / "result",
+            grouped_raw_slices=(),
+            authority_witness=None,
+            incident_lineage_witness=make_b1_incident_lineage_witness(
+                [], allowed_root=tmp_path
+            ),
+            policy_replay_witness=None,
+            allowed_root=tmp_path,
+        )
+    assert list(staging.rglob("*")) == before
+    assert not (tmp_path / "result").exists()
+    for name in (
+        "b1_metrics_rehydrate.py", "b1_metrics_policy_assembly.py",
+        "b1_metrics_training_assembly.py", "b1_metrics_production.py",
+    ):
+        assert any(path.endswith(name) for path in b1.CANONICAL_SOURCE_SURFACE)
+
+
+def test_orchestrator_complete_assembly_refuses_empty_evidence_and_cannot_publish(
+    tmp_path: Path,
+) -> None:
+    # Was gated by `_refuse_pending_analysis()`; that gate is demoted.  The
+    # assembly still refuses an empty raw-slice sequence and publishes nothing.
+    staging = tmp_path / ".formal.partial-test"
+    staging.mkdir()
+    with pytest.raises(b1.B1OrchestrationError):
+        b1._assemble_and_publish_complete(
+            staging=staging,
+            final_path=tmp_path / "formal",
+            implementation_commit="1" * 40,
+            source_receipt={"source_conformance_sha256": "2" * 64},
+            b0_evidence={}, raw_slices=[], admissions=[], telemetry_records=[],
+            laws={}, incident_lineage_witness=make_b1_incident_lineage_witness(
+                [], allowed_root=b1.CONFINED_ROOT
+            ),
+        )
+    assert not (tmp_path / "formal").exists()
+    assert list(staging.rglob("*")) == []
+
+
+@pytest.mark.parametrize(
+    "intervals",
+    [((0, 12), (12, 24), (24, 48)), ((0, 24), (24, 48))],
+    ids=("fresh-three", "resume-two"),
+)
+def test_direct_invocation_groups_bind_attempt_order_and_feed_training_assembly(
+    tmp_path: Path, intervals: tuple[tuple[int, int], ...],
+) -> None:
+    raw_group = [training_raw_slice(start, stop) for start, stop in intervals]
+    _write_direct_invocations(tmp_path, raw_group)
+    admissions, telemetry, sources = _direct_invocation_groups(
+        tmp_path, [raw_group], [0]
+    )
+    assert [row["attempt_order"] for row in admissions[0]] == list(range(len(intervals)))
+    assert [row["attempt_order"] for row in telemetry[0]] == list(range(len(intervals)))
+    shared, policy = _shared_policy_tables()
+    packet = assemble_b1_metrics_training(
+        raw_slice_groups=[raw_group], admission_groups=admissions,
+        telemetry_groups=telemetry, shared_tables=shared,
+        policy_tables=policy, raw_source_groups=sources, test_only=True,
+    )
+    assert [row["attempt_order"] for row in packet["tables"]["resource_admissions"]] == list(
+        range(len(intervals))
+    )
+    assert [
+        (row["slice_start_update"], row["slice_stop_update"])
+        for row in packet["tables"]["telemetry"]
+    ] == list(intervals)
+
+
+def test_materialized_reread_exposes_table_checkpoint_and_inventory_drift(
+    tmp_path: Path,
+) -> None:
+    table = tmp_path / "metrics" / "raw" / "tape_transitions.jsonl"
+    checkpoint = tmp_path / "arm-seeds" / "slot" / "checkpoint-update-0.pt"
+    table.parent.mkdir(parents=True)
+    checkpoint.parent.mkdir(parents=True)
+    table.write_bytes(b"{}\n")
+    checkpoint.write_bytes(b"checkpoint")
+    table_sha = hashlib.sha256(table.read_bytes()).hexdigest()
+    checkpoint_sha = hashlib.sha256(checkpoint.read_bytes()).hexdigest()
+    table_inventory = [{
+        "table": "tape_transitions",
+        "relative_path": "metrics/raw/tape_transitions.jsonl",
+        "sha256": table_sha, "byte_count": 3,
+    }]
+    artifact_inventory = [{
+        "relative_path": "metrics/raw/tape_transitions.jsonl",
+        "sha256": table_sha, "byte_count": 3,
+    }, {
+        "relative_path": "arm-seeds/slot/checkpoint-update-0.pt",
+        "sha256": checkpoint_sha, "byte_count": len(b"checkpoint"),
+    }]
+    clean = reread_materialized_digest_records(
+        tmp_path, table_inventory=table_inventory,
+        artifact_inventory=artifact_inventory,
+    )
+    assert all(row["expected_sha256"] == row["actual_sha256"] for row in clean["tables"])
+
+    table.write_bytes(b"tampered\n")
+    drift = reread_materialized_digest_records(
+        tmp_path, table_inventory=table_inventory,
+        artifact_inventory=artifact_inventory,
+    )
+    assert drift["tables"][0]["expected_sha256"] != drift["tables"][0]["actual_sha256"]
+    checkpoint.write_bytes(b"checkpoint-drift")
+    drift = reread_materialized_digest_records(
+        tmp_path, table_inventory=table_inventory,
+        artifact_inventory=artifact_inventory,
+    )
+    assert drift["checkpoints"][0]["expected_byte_count"] != drift["checkpoints"][0]["actual_byte_count"]
+    table.unlink()
+    with pytest.raises(B1MetricsProductionError, match="absent"):
+        reread_materialized_digest_records(
+            tmp_path, table_inventory=table_inventory,
+            artifact_inventory=artifact_inventory,
+        )
+
+
+def test_typed_audit_authority_is_bound_only_after_materialized_reread(
+    tmp_path: Path,
+) -> None:
+    rows = [{"run_order": 0, "seed": 1}, {"run_order": 0, "seed": 2}]
+    payload = b"".join(
+        json.dumps(row, sort_keys=True, separators=(",", ":")).encode("ascii") + b"\n"
+        for row in rows
+    )
+    path = tmp_path / "metrics" / "raw" / "training_episodes.jsonl"
+    path.parent.mkdir(parents=True)
+    path.write_bytes(payload)
+    audit = {
+        "run_order": 0, "attempt_order": 0, "seed_or_minus_one": -1,
+        "arm_or_minus_one": -1, "audit_code": "TABLE:training_episodes",
+        "authority_type": "CANONICAL_TABLE_AUTHORITY",
+        "source_table": "training_episodes",
+        "source_key_range": {
+            "key_fields": ["run_order", "seed"], "first_key": [0, 1],
+            "last_key": [0, 2],
+        },
+        "source_raw_slice": None, "fact_name": None,
+        "expected": {"row_count": 2}, "observed": None,
+        "expected_sha256": hashlib.sha256(payload).hexdigest(),
+        "actual_sha256": None,
+        "binding_status": "PENDING_MATERIALIZED_TABLE_REREAD",
+        "source_relative_path": None, "json_pointer": None,
+        "source_file_sha256": None, "payload_shape": None,
+        "payload_dtype": None, "payload_nonzero_count": None,
+    }
+    inventory = [{
+        "table": "training_episodes",
+        "relative_path": "metrics/raw/training_episodes.jsonl",
+        "sha256": hashlib.sha256(payload).hexdigest(), "byte_count": len(payload),
+    }]
+    reread = _materialized_audit_authority_records(
+        tmp_path, audit_rows=[audit], table_inventory=inventory
+    )
+    final = finalize_audit_table_bindings([audit], reread)
+    assert final[0]["binding_status"] == "BOUND_MATERIALIZED_TABLE_REREAD"
+    assert final[0]["observed"] == {"row_count": 2}
+    path.write_bytes(
+        payload + json.dumps(
+            {"run_order": 0, "seed": 3}, sort_keys=True, separators=(",", ":")
+        ).encode("ascii") + b"\n"
+    )
+    tampered = _materialized_audit_authority_records(
+        tmp_path, audit_rows=[audit], table_inventory=inventory
+    )
+    with pytest.raises(ValueError, match="materialized table reread binding differs"):
+        finalize_audit_table_bindings([audit], tampered)
+    path.unlink()
+    with pytest.raises(B1MetricsProductionError, match="absent after stage one"):
+        _materialized_audit_authority_records(
+            tmp_path, audit_rows=[audit], table_inventory=inventory
+        )
+
+
+def test_reviewed_b0_is_copied_losslessly_and_every_evaluator_leaf_is_nonpolar(
+    tmp_path: Path,
+) -> None:
+    source, authority = _b0_source(tmp_path)
+    staging = tmp_path / ".b0.partial-test"
+    staging.mkdir()
+    descriptor = stage_reviewed_b0_evidence(
+        source_root=source, staging_root=staging, expected=authority,
+        allowed_root=tmp_path, test_only=True,
+    )
+
+
+def test_reviewed_b0_source_is_snapshotted_once_before_copy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source, authority = _b0_source(tmp_path)
+    source_files = {
+        path.resolve() for path in source.rglob("*") if path.is_file()
+    }
+    original = Path.read_bytes
+    reads: dict[Path, int] = {}
+
+    def unstable_read(path: Path) -> bytes:
+        resolved = path.resolve()
+        if resolved in source_files:
+            reads[resolved] = reads.get(resolved, 0) + 1
+            if reads[resolved] > 1:
+                return b"outcome-informed-source-mutation\n"
+        return original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", unstable_read)
+    staging = tmp_path / ".b0-snapshot.partial-test"
+    staging.mkdir()
+    descriptor = stage_reviewed_b0_evidence(
+        source_root=source, staging_root=staging, expected=authority,
+        allowed_root=tmp_path, test_only=True,
+    )
+    _validate_materialized_b0(staging, descriptor)
+    assert reads == {path: 1 for path in source_files}
+    _validate_materialized_b0(staging, descriptor)
+    index = json.loads(
+        (staging / descriptor["nonpolarity_index"]["relative_path"]).read_text(
+            encoding="ascii"
+        )
+    )
+    assert len(index["evaluator_leaves"]) == 4
+    assert all(
+        row[flag] is False
+        for row in index["evaluator_leaves"]
+        for flag in (
+            "scientific_eligible", "classifier_eligible",
+            "threshold_tuning_eligible", "b2_trigger_eligible", "promotion_eligible",
+        )
+    )
+
+
+def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
+    tmp_path: Path,
+) -> None:
+    groups = deepcopy(canonical_raw_slice_groups.__wrapped__())
+    staging = tmp_path / ".metrics.partial-test"
+    staging.mkdir()
+    for index in (1, 5, 9):
+        _add_checkpoint_slot(staging, groups[index][0], index)
+    training = training_raw_slice()
+    for field in (
+        "training_records", "rollouts", "slice_counts", "evaluations",
+        "mechanical_direct",
+    ):
+        groups[0][0][field] = deepcopy(training[field])
+    groups[0][0]["scientific_branch"] = None
+    _add_checkpoint_slot(staging, groups[0][0], 0)
+
+    tag = "00-seed-21101-STRUCT-CURRENTNESS-GRU"
+    invocation = "slice-00-48"
+    admission = {
+        "attempt_id": ATTEMPT_ID,
+        "run_name": groups[0][0]["run_name"],
+        "seed": 21101, "arm": "STRUCT-CURRENTNESS-GRU",
+        "receipt": {
+            "available_physical_bytes": 5 * 1024**3,
+            "effective_available_bytes": 5 * 1024**3,
+        },
+    }
+    _write_json(
+        staging / "admissions" / f"{tag}-{invocation}-admission.json", admission
+    )
+    _write_json(
+        staging / "workers" / tag / invocation / "telemetry.json",
+        training_telemetry()["measurement"],
+    )
+    _write_json(
+        staging / "workers" / tag / invocation / "result.json",
+        {
+            "schema": "cbsc_omrc_b01_test_only_worker_result_v1",
+            "raw_evidence": groups[0][0],
+            "scientific_branch": None,
+        },
+    )
+    b0_root, b0_authority = _b0_source(tmp_path)
+    published = assemble_and_publish_b1_metrics_test_only(
+        staging_root=staging, final_path=tmp_path / "metrics",
+        grouped_raw_slices=groups,
+        implementation_commit="1" * 40,
+        source_conformance_sha256="2" * 64,
+        b0_root=b0_root, b0_evidence=b0_authority,
+        law_digests={name: value * 64 for name, value in (
+            ("environment", "6"), ("adapter", "7"),
+            ("token", "8"), ("analysis", "9"),
+        )},
+        incident_lineage_witness=make_b1_incident_lineage_witness(
+            [], allowed_root=tmp_path
+        ),
+        allowed_root=tmp_path,
+    )
+    manifest = json.loads((published / "manifest.json").read_text(encoding="ascii"))
+    assert len(manifest["table_inventory"]) == 15
+    assert manifest["schema"].endswith("test_only_v1")
+    assert manifest["convergence_required"] is False
+    assert manifest["formal_analysis_bound"] is False
+    assert manifest["scientific_branch"] is None
+    assert manifest["mechanical"]["inputs"]["authority"] == "BOUND_ARTIFACT_EVIDENCE"
+    assert manifest["formal_capacity_projection"]["performance_disposition"] == "REPAIR_REQUIRED"
+    assert manifest["formal_capacity_projection"]["depends_on_observed_or_test_bytes"] is False
+
+    # Coordinated attacker mutation: alter RAW competence, rehash the table,
+    # table binding, artifact inventory, compact descriptor, full packet, and
+    # manifest fixed point.  The consumer must still derive competence from
+    # truth/policy bytes and reject the forged self-consistent publication.
+    raw_path = published / "metrics" / "raw" / "raw_competence.jsonl"
+    raw_rows = [json.loads(line) for line in raw_path.read_text(encoding="ascii").splitlines()]
+    raw_rows[0]["raw_competence_pass"] = not bool(raw_rows[0]["raw_competence_pass"])
+    raw_payload = b"".join(canonical_json_bytes(row) + b"\n" for row in raw_rows)
+    raw_path.write_bytes(raw_payload)
+    raw_sha = hashlib.sha256(raw_payload).hexdigest()
+    table_descriptor = next(
+        row for row in manifest["table_inventory"] if row["table"] == "raw_competence"
+    )
+    table_descriptor["sha256"] = raw_sha
+    table_descriptor["byte_count"] = len(raw_payload)
+    table_binding = next(
+        row for row in manifest["mechanical"]["inputs"]["table_bindings"]
+        if row["table"] == "raw_competence"
+    )
+    table_binding["sha256"] = raw_sha
+    table_binding["byte_count"] = len(raw_payload)
+    artifact_descriptor = next(
+        row for row in manifest["artifact_inventory"]
+        if row["relative_path"] == "metrics/raw/raw_competence.jsonl"
+    )
+    artifact_descriptor["sha256"] = raw_sha
+    artifact_descriptor["byte_count"] = len(raw_payload)
+    manifest["mechanical"]["raw_competence_by_seed"][0] = deepcopy(raw_rows[0])
+    manifest["mechanical"]["inputs"]["artifact_inventory_sha256"] = hashlib.sha256(
+        canonical_json_bytes(manifest["artifact_inventory"])
+    ).hexdigest()
+    artifact_bytes = sum(row["byte_count"] for row in manifest["artifact_inventory"])
+    for _ in range(16):
+        fixed = artifact_bytes + len(canonical_json_bytes(manifest)) + 1
+        if fixed == manifest["durable_size_bytes"]:
+            break
+        manifest["durable_size_bytes"] = fixed
+    (published / "manifest.json").write_bytes(canonical_json_bytes(manifest) + b"\n")
+    with pytest.raises(MetricsArtifactError, match="consumer reconstruction failed"):
+        validate_metrics_only_manifest(
+            manifest, root=published, allow_test_only=True
+        )

@@ -1,0 +1,78 @@
+{
+  "paper_id": "P08",
+  "pdf_pages": 10,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        1
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Preliminaries",
+      "level": 1,
+      "pdf_pages": [
+        2,
+        2
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Mean Field MARL",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Implementation and Convergence",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        4
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Related Work",
+      "level": 1,
+      "pdf_pages": [
+        5,
+        5
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Experiments",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "Conclusion",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        10
+      ]
+    }
+  ]
+}

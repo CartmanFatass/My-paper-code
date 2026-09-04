@@ -1,9 +1,11 @@
 # Gemini 3.1 Pro Review Question
 
-## Decision needed
+## Divergent innovation objective
 
-State one decision that the review must improve. Do not request an automatic
-successor algorithm.
+State the one direction-local uncertainty for which broader mechanisms,
+world/domain analogies, overlooked regimes, or counterexamples would be useful.
+Do not ask Gemini to select a final direction, converge the evidence, accept a
+result, or authorize an experiment.
 
 ## Final capability map
 
@@ -16,25 +18,33 @@ coordination, credit and computational scaling.
 Separate verified facts from controller inference. Point to the accompanying
 `SOURCE_MANIFEST.md`; do not duplicate large local documents in this prompt.
 
-## Live hypothesis portfolio
+## Current mechanism and strongest ordinary alternative
 
-List two to four structurally distinct causal explanations. For each, state
-what it replaces, retains and adds. These are hypotheses, not parallel tasks.
+Describe the current mechanism and the strongest simple explanation already
+known locally. Ask Gemini to range beyond them without ranking the project or
+assuming either is correct.
 
-## Candidate observation or experiment
+## Divergent search space
 
-Describe at most one candidate evidence source and show which hypotheses each
-possible outcome would strengthen, weaken or retire. Prefer reanalysis or a
-shared testbed to another bespoke toy.
+Name any frozen resource, observation, action, communication, safety, and
+physical-time constraints. Invite mechanisms, domain analogies, failure
+scenarios, shortcut controls, unusual operating regimes, and toy-to-UAV bridge
+ideas that respect those constraints. Proposals are hypotheses for local
+filtering, not experiment authorization.
 
 ## Requested response
 
 Require:
 
-1. evidence-supported findings versus inference;
-2. strongest missing hypothesis or ordinary-MARL reduction;
-3. revised portfolio with relative support;
-4. the smallest discriminating evidence;
-5. disposition of the candidate experiment: `PROCEED`, `PAUSE`, `REPURPOSE`
-   or `RETIRE`;
-6. one active experiment at most, or an explicit stop.
+1. clearly separated known premises, imported world/domain knowledge, and
+   speculation;
+2. several structurally different mechanisms or analogies, not cosmetic
+   variants;
+3. overlooked regimes and concrete counterexamples;
+4. shortcut controls or alternative explanations each idea would need to face;
+5. one or two unusually informative toy or scenario constructions;
+6. explicit toy-to-UAV mappings and transfer failures;
+7. residual uncertainties requiring local analysis or ChatGPT External Pro.
+
+Do not provide a final ranking, convergence claim, acceptance decision,
+`PROCEED/PAUSE/RETIRE` disposition, technical validation, or portfolio action.

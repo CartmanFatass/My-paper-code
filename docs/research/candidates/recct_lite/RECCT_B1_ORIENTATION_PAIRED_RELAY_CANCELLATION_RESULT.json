@@ -1,0 +1,132 @@
+{
+  "activity_caps": {
+    "committed_live_updates": 1024,
+    "evaluation_episodes": 512,
+    "joint_environment_transitions_evaluation": 16384,
+    "joint_environment_transitions_total": 49152,
+    "joint_environment_transitions_train": 32768,
+    "learner_update_calls": 5120,
+    "model_fits": 32,
+    "named_full_runs": 1,
+    "optimizer_transition_calls": 5120,
+    "policy_calls_evaluation": 40960,
+    "policy_calls_total": 122880,
+    "policy_calls_train": 81920,
+    "pure_shadow_transition_calls": 4096,
+    "sweeps_retries_rescues_early_stops": 0,
+    "train_episodes": 1024
+  },
+  "activity_counts": {
+    "committed_live_updates": 1024,
+    "evaluation_episodes": 512,
+    "joint_environment_transitions_evaluation": 16384,
+    "joint_environment_transitions_total": 49152,
+    "joint_environment_transitions_train": 32768,
+    "learner_update_calls": 5120,
+    "model_fits": 32,
+    "named_full_runs": 1,
+    "optimizer_transition_calls": 5120,
+    "policy_calls_evaluation": 40960,
+    "policy_calls_total": 122880,
+    "policy_calls_train": 81920,
+    "pure_shadow_transition_calls": 4096,
+    "sweeps_retries_rescues_early_stops": 0,
+    "train_episodes": 1024
+  },
+  "algorithm": "RECCT-B1-ORIENTATION-PAIRED-RELAY-CANCELLATION-V1",
+  "branch": "B_RESOURCE_OR_UPDATE_NORM_CONFOUNDED",
+  "configuration_digest": "d58698ba42d52f940d2c4e5b0b8de2104e91a7b9b53c6d641332e55f3ba3295f",
+  "evaluation_manifest_digest": "0dda6b0cef39a5f28fc1ce57e69b1811835c2c4169ff9543f1ec266fc0ff52bf",
+  "matching": {
+    "active_port_count_difference": {
+      "G_AGG_SYM": 1.0,
+      "G_SD": 0.0
+    },
+    "diagnostics": {
+      "ALL_11": {
+        "active_ports": 2.0,
+        "clipping_frequency": 0.7890625,
+        "update_norm": 0.014043517421669094
+      },
+      "G_AGG_SYM": {
+        "active_ports": 1.0,
+        "clipping_frequency": 0.7890625,
+        "update_norm": 0.014045786916540237
+      },
+      "G_SD": {
+        "active_ports": 0.0,
+        "clipping_frequency": 0.7734375,
+        "update_norm": 0.01404063732479699
+      },
+      "RECCT_SIGNED": {
+        "active_ports": 0.0,
+        "clipping_frequency": 0.7734375,
+        "update_norm": 0.01404063732479699
+      }
+    },
+    "passed": false,
+    "signed_to_control_norm_ratio": {
+      "G_AGG_SYM": 0.9996333710760497,
+      "G_SD": 1.0
+    },
+    "within_arm_clipping_frequency_change": {
+      "ALL_11": 0.03125,
+      "G_AGG_SYM": 0.03125,
+      "G_SD": 0.046875,
+      "RECCT_SIGNED": 0.046875
+    },
+    "within_arm_orientation_norm_change": {
+      "ALL_11": 0.006410783240196061,
+      "G_AGG_SYM": 0.006287082230504559,
+      "G_SD": 0.006239705573418242,
+      "RECCT_SIGNED": 0.006239705573418242
+    }
+  },
+  "metrics": {
+    "alignment": {
+      "ALL_11": 0.0,
+      "G_AGG_SYM": 0.0,
+      "G_SD": 0.0,
+      "RECCT_SIGNED": 0.0
+    },
+    "crossing_rate": {
+      "ALL_11": 0.0,
+      "G_AGG_SYM": 0.0,
+      "G_SD": 0.0,
+      "RECCT_SIGNED": 0.0
+    },
+    "heldout_return": {
+      "ALL_11": 0.474609375,
+      "G_AGG_SYM": 0.4677734375,
+      "G_SD": 0.474609375,
+      "RECCT_SIGNED": 0.474609375
+    },
+    "negative_orientation_halves": 0,
+    "positive_seed_pairs": {
+      "G_AGG_SYM": 1,
+      "G_SD": 0
+    },
+    "primary_return_contrasts": {
+      "ALL_11": 0.0,
+      "G_AGG_SYM": 0.0068359375,
+      "G_SD": 0.0
+    }
+  },
+  "retry_recovery_history": [],
+  "schema_version": 1,
+  "scientific_branch_suppressed": false,
+  "scientific_matching_gate_evaluated": true,
+  "stage": "analyze",
+  "status": "INVALID",
+  "technical_only": false,
+  "train_manifest_digest": "4956c10ee06fa4958285bde1389056dad5367bfc23b60cbdd3aa455e639e1049",
+  "validity": {
+    "contract_activity": true,
+    "fresh_commit": true,
+    "host_geometry": true,
+    "information_split": true,
+    "matching": false,
+    "preaggregation": true,
+    "readiness": true
+  }
+}

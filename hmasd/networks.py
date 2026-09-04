@@ -114,6 +114,14 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
             nn.init.zeros_(module.bias)
 
 
+def _d2_age_feature_enabled(config):
+    """True only under D2 with `age_feature = "normalized"` (ADR 01, plan section 9)."""
+    return (
+        str(getattr(config, 'policy_interruption_mode', 'off')) == 'd2'
+        and str(getattr(config, 'age_feature', 'off')) == 'normalized'
+    )
+
+
 class ResBlock(nn.Module):
     """残差块 - 用于构建更深的网络"""
     def __init__(self, hidden_dim):
@@ -956,6 +964,268 @@ class SkillCoordinator(nn.Module):
             'cd_loss': torch.tensor(0.0, device=device, requires_grad=True),
             'profile': profile,
         }
+
+    def evaluate_held_batch(self, state, observations, held_Z, held_z):
+        """
+        D2 trigger statistic (ADR 01): one teacher-forced pass in canonical order
+        over the held joint action.  Returns the logits and value heads the caller
+        needs to compute
+
+            g_Z = max_Z log pi(Z) - log pi(held_Z)
+            g_i = max_z ell_i(z) - ell_i(held_z_i),
+            ell_i(z) = log pi(z | Z_held, z_held_{<i})
+
+        (the softmax normaliser cancels in both gaps, so raw logits suffice).
+        This method must not sample and must not draw RNG.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+
+        state = state.float()
+        observations = observations.float()
+        held_Z = held_Z.long()
+        held_z = held_z.long()
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+
+        z_logits = []
+        for i in range(n_agents):
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                held_Z,
+                held_z[:, :i] if i > 0 else None,
+                step=i + 1,
+                agent_specific_query=encoded_observations[:, i:i + 1, :],
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            z_logits.append(zi_logits)
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=state.device)
+
+        return {
+            'Z_logits': Z_logits,
+            'z_logits': torch.stack(z_logits, dim=1),
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+        }
+
+    def assign_partial_batch(
+        self,
+        state,
+        observations,
+        held_Z,
+        held_z,
+        sample_Z_mask,
+        sampled_mask,
+        deterministic=False,
+    ):
+        """
+        D2 partial re-assignment (ADR 01): decode in order O_t = (kept agents in
+        canonical order, then S_t in canonical order).  The team token is sampled
+        where `sample_Z_mask` and forced to `held_Z` otherwise; kept agents are
+        forced to their held skills and `S_t` agents are sampled.  Policy terms
+        are zero at forced positions.  Positional encoding follows decode
+        position, exactly as the canonical decoder does with `step`.  No new
+        parameters are introduced.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+        device = state.device
+
+        state = state.float()
+        observations = observations.float()
+        held_Z = held_Z.long()
+        held_z = held_z.long()
+        sample_Z_mask = sample_Z_mask.bool()
+        sampled_mask = sampled_mask.bool()
+
+        # O_t per batch element: kept agents first (canonical), then sampled
+        # agents (canonical).  Keys are unique per row, so argsort is exact.
+        agent_range = torch.arange(n_agents, device=device).unsqueeze(0).expand(batch_size, -1)
+        sort_key = agent_range + n_agents * sampled_mask.long()
+        order = torch.argsort(sort_key, dim=1)
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        # Team token: sampled where sample_Z_mask, forced to held_Z otherwise.
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+        Z_dist = Categorical(logits=Z_logits)
+        sampled_team = Z_logits.argmax(dim=-1) if deterministic else Z_dist.sample()
+        team_skills = torch.where(sample_Z_mask, sampled_team, held_Z)
+        team_log_probs = torch.where(
+            sample_Z_mask,
+            Z_dist.log_prob(team_skills),
+            torch.zeros(batch_size, device=device),
+        )
+
+        # Agent tokens in decode order O_t.
+        batch_idx = torch.arange(batch_size, device=device)
+        decoded_in_order = torch.zeros(batch_size, n_agents, dtype=torch.long, device=device)
+        agent_log_probs = torch.zeros(batch_size, n_agents, device=device)
+        for p in range(n_agents):
+            agent_at_p = order[:, p]
+            forced_at_p = ~sampled_mask[batch_idx, agent_at_p]
+            held_at_p = held_z[batch_idx, agent_at_p]
+            query = encoded_observations[batch_idx, agent_at_p].unsqueeze(1)
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                team_skills,
+                decoded_in_order[:, :p] if p > 0 else None,
+                step=p + 1,
+                agent_specific_query=query,
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            zi_dist = Categorical(logits=zi_logits)
+            sampled_at_p = zi_logits.argmax(dim=-1) if deterministic else zi_dist.sample()
+            token_at_p = torch.where(forced_at_p, held_at_p, sampled_at_p)
+            decoded_in_order[:, p] = token_at_p
+            log_prob_at_p = torch.where(
+                forced_at_p,
+                torch.zeros(batch_size, device=device),
+                zi_dist.log_prob(token_at_p),
+            )
+            agent_log_probs[batch_idx, agent_at_p] = log_prob_at_p
+
+        agent_skills = torch.zeros(batch_size, n_agents, dtype=torch.long, device=device)
+        agent_skills[batch_idx.unsqueeze(1), order] = decoded_in_order
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=device)
+
+        return {
+            'team_skills': team_skills,
+            'agent_skills': agent_skills,
+            'team_log_probs': team_log_probs,
+            'agent_log_probs': agent_log_probs,
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+            'order': order,
+        }
+
+    def evaluate_training_batch_ordered(
+        self,
+        state,
+        observations,
+        team_skills,
+        agent_skills,
+        order,
+        sampled_mask,
+        sample_Z_mask,
+    ):
+        """
+        D2 PPO replay (ADR 01): teacher-forced replay of the stored joint action
+        in the stored decode order.  Log-probabilities and entropies are zero at
+        forced positions; team terms are zero where the team token was not
+        sampled.  At the collecting parameters this reproduces exactly the
+        log-probabilities recorded by `assign_partial_batch`.
+        """
+        batch_size = state.size(0)
+        n_agents = observations.size(1)
+        device = state.device
+
+        state = state.float()
+        observations = observations.float()
+        team_skills = team_skills.long()
+        agent_skills = agent_skills.long()
+        order = order.long()
+        sampled_mask = sampled_mask.bool()
+        sample_Z_mask = sample_Z_mask.bool()
+
+        entity_features = self._build_entity_sequence(state, observations)
+        processed_features = self.encoder(entity_features)
+        encoded_state = processed_features[:, 0:1, :]
+        encoded_observations = processed_features[:, 1:, :]
+
+        Z_logits = self.skill_decoder(encoded_state, encoded_observations)
+        Z_logits = torch.clamp(torch.nan_to_num(Z_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+        Z_dist = Categorical(logits=Z_logits)
+        team_log_probs = torch.where(
+            sample_Z_mask,
+            Z_dist.log_prob(team_skills),
+            torch.zeros(batch_size, device=device),
+        )
+        team_entropy = torch.where(
+            sample_Z_mask,
+            Z_dist.entropy(),
+            torch.zeros(batch_size, device=device),
+        )
+
+        batch_idx = torch.arange(batch_size, device=device)
+        ordered_skills = torch.gather(agent_skills, 1, order)
+        agent_log_probs = torch.zeros(batch_size, n_agents, device=device)
+        agent_entropies = torch.zeros(batch_size, n_agents, device=device)
+        for p in range(n_agents):
+            agent_at_p = order[:, p]
+            sampled_at_p = sampled_mask[batch_idx, agent_at_p]
+            query = encoded_observations[batch_idx, agent_at_p].unsqueeze(1)
+            zi_logits = self.skill_decoder(
+                encoded_state,
+                encoded_observations,
+                team_skills,
+                ordered_skills[:, :p] if p > 0 else None,
+                step=p + 1,
+                agent_specific_query=query,
+            )
+            zi_logits = torch.clamp(torch.nan_to_num(zi_logits, nan=0.0, posinf=50.0, neginf=-50.0), -50.0, 50.0)
+            zi_dist = Categorical(logits=zi_logits)
+            token = ordered_skills[:, p]
+            agent_log_probs[batch_idx, agent_at_p] = torch.where(
+                sampled_at_p,
+                zi_dist.log_prob(token),
+                torch.zeros(batch_size, device=device),
+            )
+            agent_entropies[batch_idx, agent_at_p] = torch.where(
+                sampled_at_p,
+                zi_dist.entropy(),
+                torch.zeros(batch_size, device=device),
+            )
+
+        state_values = self.value_head_state(encoded_state.squeeze(1))
+        agent_values = [
+            self.value_heads_obs[i](encoded_observations[:, i, :])
+            for i in range(n_agents)
+        ]
+        if agent_values:
+            agent_values_tensor = torch.stack(agent_values, dim=1).squeeze(-1)
+        else:
+            agent_values_tensor = torch.zeros(batch_size, 0, device=device)
+
+        return {
+            'team_log_probs': team_log_probs,
+            'agent_log_probs': agent_log_probs,
+            'team_entropy': team_entropy,
+            'agent_entropies': agent_entropies,
+            'state_values': state_values,
+            'agent_values': agent_values_tensor,
+            'cd_loss': torch.tensor(0.0, device=device, requires_grad=True),
+        }
     
     def forward(self, state, observations, deterministic=False, history_context=None):
         """
@@ -1138,6 +1408,7 @@ class R_Actor(nn.Module):
         self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
         self._use_recurrent_policy = args.use_recurrent_policy
         self._recurrent_N = args.recurrent_N
+        self._rnn_sequence_backend = getattr(args, "rnn_sequence_backend", "step_reference")
         self.tpdv = dict(dtype=torch.float32, device=device)
 
         obs_shape = get_shape_from_obs_space(obs_space)
@@ -1147,7 +1418,13 @@ class R_Actor(nn.Module):
         self.film_generator = nn.Linear(n_z, 2 * self.hidden_size)
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
-            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+            self.rnn = RNNLayer(
+                self.hidden_size,
+                self.hidden_size,
+                self._recurrent_N,
+                self._use_orthogonal,
+                sequence_backend=self._rnn_sequence_backend,
+            )
 
         self.act = ACTLayer(
             action_space,
@@ -1229,6 +1506,7 @@ class R_Critic(nn.Module):
         self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
         self._use_recurrent_policy = args.use_recurrent_policy
         self._recurrent_N = args.recurrent_N
+        self._rnn_sequence_backend = getattr(args, "rnn_sequence_backend", "step_reference")
         self._use_popart = args.use_popart
         self.tpdv = dict(dtype=torch.float32, device=device)
         init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][self._use_orthogonal]
@@ -1240,7 +1518,13 @@ class R_Critic(nn.Module):
         self.film_generator = nn.Linear(n_Z, 2 * self.hidden_size)
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
-            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+            self.rnn = RNNLayer(
+                self.hidden_size,
+                self.hidden_size,
+                self._recurrent_N,
+                self._use_orthogonal,
+                sequence_backend=self._rnn_sequence_backend,
+            )
 
         def init_(m):
             return init(m, init_method, lambda x: nn.init.constant_(x, 0))
@@ -1306,6 +1590,9 @@ class SkillDiscoverer(nn.Module):
                 self.use_naive_recurrent_policy = False
                 self.use_recurrent_policy = True
                 self.recurrent_N = 1
+                self.rnn_sequence_backend = getattr(
+                    config, "rnn_sequence_backend", "step_reference"
+                )
                 self.use_feature_normalization = False
                 self.use_popart = False
                 self.continuous_action_distribution = getattr(
@@ -1413,10 +1700,19 @@ class SkillDiscoverer(nn.Module):
 
     def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None, compact_context_seq=None):
         T, B, _ = observations_seq.shape
-        # The dones_seq from buffer might be (T, B, 1), ensure it's (T, B) for mask creation
+        if dones_seq is None:
+            dones_seq = torch.zeros((T, B), device=observations_seq.device)
+        # A stored done belongs to the transition leaving that row.  RNN masks
+        # are entry masks, so the done vector must be shifted by one row.
         if dones_seq.dim() > 2:
             dones_seq = dones_seq.squeeze(-1)
-        masks = (1 - dones_seq.float())
+        if dones_seq.shape != (T, B):
+            raise ValueError(
+                f"dones_seq must have shape {(T, B)} or {(T, B, 1)}, got {tuple(dones_seq.shape)}"
+            )
+        masks = torch.ones_like(dones_seq, dtype=torch.float32)
+        if T > 1:
+            masks[1:] = 1.0 - dones_seq[:-1].float()
         actor_observations = self._apply_compact_context(
             observations_seq,
             compact_context_seq,
@@ -1456,12 +1752,17 @@ class TeamDiscriminator(nn.Module):
     def __init__(self, config):
         super(TeamDiscriminator, self).__init__()
         
+        # D2 age feature (ADR 01, plan section 9). `off` keeps the exact input
+        # dimension and therefore the exact checkpoint keys/shapes it had.
+        self.age_input_dim = 1 if _d2_age_feature_enabled(config) else 0
+        input_dim = config.state_dim + self.age_input_dim
+
         # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
         # SMAC 的状态数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
-        self.input_norm = nn.LayerNorm(config.state_dim)
-        
+        self.input_norm = nn.LayerNorm(input_dim)
+
         # 输入投影层：将状态维度映射到隐藏维度
-        self.input_projection = nn.Linear(config.state_dim, config.hidden_size)
+        self.input_projection = nn.Linear(input_dim, config.hidden_size)
         
         # 【关键增强】添加残差块以提升学习能力和梯度流
         self.res_blocks = nn.ModuleList([
@@ -1483,17 +1784,24 @@ class TeamDiscriminator(nn.Module):
             if isinstance(layer, nn.Linear):
                 initialize_weights(layer, gain=1.0)
     
-    def forward(self, state):
+    def forward(self, state, age=None):
         """
         参数:
             state: 全局状态 [batch_size, state_dim]
-            
+            age: 归一化团队年龄 a_Z / k_Z [batch_size]，仅在 D2 age_feature="normalized" 下需要
+
         返回:
             logits: 团队技能logits [batch_size, n_Z]
         """
         # 确保state是float32类型
         state = state.float()
-        
+
+        if self.age_input_dim:
+            if age is None:
+                raise ValueError("TeamDiscriminator requires a normalized team age when age_feature='normalized'")
+            age_tensor = torch.as_tensor(age, dtype=torch.float32, device=state.device).reshape(state.shape[0], 1)
+            state = torch.cat([state, age_tensor], dim=-1)
+
         # 【关键修复】先进行 LayerNorm 归一化，再投影
         x = self.input_norm(state)
         x = self.input_projection(x)
@@ -1516,12 +1824,17 @@ class IndividualDiscriminator(nn.Module):
         super(IndividualDiscriminator, self).__init__()
         self.config = config
         
+        # D2 age feature (ADR 01, plan section 9). `off` keeps the exact input
+        # dimension and therefore the exact checkpoint keys/shapes it had.
+        self.age_input_dim = 1 if _d2_age_feature_enabled(config) else 0
+        input_dim = config.obs_dim + self.age_input_dim
+
         # 【关键修复1】添加输入层 LayerNorm 以稳定输入尺度
         # 观测的数值范围差异巨大，LayerNorm 能强行拉回标准正态分布
-        self.input_norm = nn.LayerNorm(config.obs_dim)
-        
+        self.input_norm = nn.LayerNorm(input_dim)
+
         # 1. 观测编码器 - 使用残差连接的深度架构
-        self.obs_input_projection = nn.Linear(config.obs_dim, config.hidden_size)
+        self.obs_input_projection = nn.Linear(input_dim, config.hidden_size)
         
         # 【关键增强】为观测编码器添加残差块
         self.obs_res_blocks = nn.ModuleList([
@@ -1567,14 +1880,25 @@ class IndividualDiscriminator(nn.Module):
             if isinstance(layer, nn.Linear):
                 initialize_weights(layer, gain=1.0)
 
-    def forward(self, observation, team_skill):
+    def forward(self, observation, team_skill, age=None):
         # 确保 team_skill 是长整型的索引
         if team_skill.dtype != torch.long:
             team_skill = team_skill.long()
 
         # --- 增强版 Discriminator FiLM 架构实现（使用残差连接）---
+        observation = observation.float()
+        if self.age_input_dim:
+            if age is None:
+                raise ValueError(
+                    "IndividualDiscriminator requires a normalized agent age when age_feature='normalized'"
+                )
+            age_tensor = torch.as_tensor(
+                age, dtype=torch.float32, device=observation.device
+            ).reshape(observation.shape[0], 1)
+            observation = torch.cat([observation, age_tensor], dim=-1)
+
         # 【关键修复】先进行 LayerNorm 归一化，再投影
-        observation = self.input_norm(observation.float())
+        observation = self.input_norm(observation)
         
         # 1. 观测编码 - 使用残差连接
         # 输入投影

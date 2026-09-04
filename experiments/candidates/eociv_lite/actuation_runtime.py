@@ -23,15 +23,6 @@ never verified an actuation binding.  This module supplies the required objects:
 The policy is untrained: its weights are drawn once from a registered seed.
 The gate's propositions are about the executable path and the environment
 mechanism, not about learned behavior.
-
-v2 (Pro's loop-7 C1 correction): the receipt verifier binds to the ACTUAL
-slot tensor fed into ``CommonPolicy.forward`` (focal row equals
-``slot_features(actuation.slot)``, all non-focal rows zero) and to the full
-current opportunity identity, route, decision source and ingestion cost;
-receipts carry the issuing runner's block identity so cross-runner receipts
-at the same tick are rejected; and every boundary action carries an
-``ActionReceipt`` (policy-input/kernel/action/recurrent-write digests) that
-the registered ``bound_step`` wrapper verifies before ``step()``.
 """
 
 from __future__ import annotations
@@ -65,13 +56,12 @@ class ReceiptError(RuntimeError):
 class ActuationReceipt:
     """Immutable single-use record binding an actuation to its boundary.
 
-    Single-use enforcement is TRAJECTORY-SCOPED (the registered design is one
-    runner per arm-episode), and ``runner_binding`` carries the issuing
-    runner's full environment/block identity (arm, profile registration id,
-    episode id), so a receipt from another runner at the SAME physical tick
-    is rejected by identity, not merely documented as unsupported (Pro's
-    loop-7 C1 correction).  Cross-tick replay is stopped by the staleness
-    check.
+    Single-use enforcement is TRAJECTORY-SCOPED: each ``ArmEpisodeRunner``
+    tracks consumption for its own trajectory (the registered design is one
+    runner per arm-episode).  Cross-runner replay at a DIFFERENT tick is
+    stopped by the staleness check; a harness that shared one receipt across
+    two runners at the same physical tick would need its own global registry
+    — do not build such a harness against this type.
     """
 
     opportunity_identity: sib.EdgeIdentity
@@ -80,34 +70,24 @@ class ActuationReceipt:
     decision_source: str
     slot_digest: str
     ingestion_cost: int
-    runner_binding: str
 
 
 @dataclass(frozen=True)
 class ActionReceipt:
-    """Immutable record binding one boundary action to its actuation receipt.
+    """Immutable receipt for the exact policy input and resulting writes."""
 
-    Created only after ``_verify_and_consume`` accepted the actuation receipt
-    against the ACTUAL policy-input tensors.  ``bound_step`` refuses any
-    boundary action that does not carry a matching one, so an action altered
-    after the forward pass fails closed.
-    """
-
-    actuation_receipt_digest: str
+    opportunity_identity: sib.EdgeIdentity
+    physical_tick: int
+    route: str
+    decision_source: str
+    ingestion_cost: int
     policy_input_digest: str
     kernel_digest: str
     sampled_action_digest: str
     recurrent_write_digest: str
-    physical_tick: int
 
 
-def receipt_digest(receipt: ActuationReceipt) -> str:
-    return hashlib.sha256(repr(receipt).encode("utf-8")).hexdigest()
-
-
-def make_receipt(
-    opportunity: sib.Opportunity, actuation: sib.Actuation, *, runner_binding: str
-) -> ActuationReceipt:
+def make_receipt(opportunity: sib.Opportunity, actuation: sib.Actuation) -> ActuationReceipt:
     return ActuationReceipt(
         opportunity_identity=opportunity.identity,
         physical_tick=opportunity.physical_tick,
@@ -115,35 +95,7 @@ def make_receipt(
         decision_source=actuation.decision_source,
         slot_digest=hashlib.sha256(actuation.slot).hexdigest(),
         ingestion_cost=actuation.ingestion_cost,
-        runner_binding=str(runner_binding),
     )
-
-
-def bound_step(
-    env: sib.EocivSiblingRosterEnv,
-    actions: np.ndarray,
-    action_receipt: ActionReceipt | None,
-) -> tuple[float, bool, dict[str, float]]:
-    """The registered bound-step wrapper for boundary actions.
-
-    Only an action carrying an ``ActionReceipt`` whose sampled-action digest
-    matches the submitted tensor at the current tick may enter ``step()``.
-    The wrapper's contract is exactly (tick, sampled-action digest); the
-    receipt's input/kernel/recurrent digests are provenance records — they
-    are computed from the verified forward pass inside ``run_episode`` and
-    bind the action to it there, not re-derived here (the wrapper has no
-    access to the policy internals to recompute them).
-    """
-    if action_receipt is None:
-        raise ReceiptError("missing action receipt at a bound step")
-    if action_receipt.physical_tick != env.time:
-        raise ReceiptError(
-            f"action receipt tick {action_receipt.physical_tick} "
-            f"vs env time {env.time}"
-        )
-    if _digest(actions) != action_receipt.sampled_action_digest:
-        raise ReceiptError("action altered after the verified forward pass")
-    return env.step(actions)
 
 
 def slot_features(slot: bytes) -> np.ndarray:
@@ -207,6 +159,7 @@ class BoundaryRecord:
     """What the runner did at one lifecycle boundary."""
 
     receipt: ActuationReceipt
+    action_receipt: ActionReceipt
     w_minus: bytes
     actuation_route: str
     slot: bytes
@@ -241,146 +194,199 @@ class ArmEpisodeRunner:
         tape_seed: int,
         d_learned_fn,
         body_override: bytes | None = None,
+        body_fn=None,
         policy=None,
-        action_noise_seed: int | None = None,
-        runner_binding: str | None = None,
         d_control_fn=None,
     ):
         if arm not in sib.ARMS:
             raise ValueError(f"unknown arm: {arm}")
+        if body_override is not None and body_fn is not None:
+            raise ValueError("fixed and callable body overrides are mutually exclusive")
         self.env = env
         self.arm = arm
         self.tape_seed = int(tape_seed)
         self.d_learned_fn = d_learned_fn
-        # D_C source.  Default: the gate-support Bernoulli probe
-        # (sib.control_tape_open) under tape_seed — the CLOSED gate
-        # population's registered control.  The Stage-0 outcome harness
-        # passes its exact-rate permutation-tape decisions here instead; the
-        # registered outcome design forbids the gate probe, and supplying
-        # d_control_fn means the probe is never called on that path.
         self.d_control_fn = d_control_fn
         self.body_override = body_override
-        # Full environment/block identity of this runner.  The default —
-        # (arm, profile, episode) — is the block identity of the CLOSED gate
-        # population (one runner per arm-episode).  The Stage-0 outcome
-        # harness passes the COMPLETE registered block identity (pool, actor
-        # training seed, profile, episode, arm, event scope, member/spell
-        # epochs) through ``runner_binding`` instead, per the acceptance
-        # ruling's 6.2.
-        self.runner_binding = (
-            runner_binding
-            if runner_binding is not None
-            else f"{arm}|{env.ledger.profile.name}|ep{env.ledger.episode_id}"
-        )
+        self.body_fn = body_fn
         capacity = env.ledger.member_capacity
-        # The policy must expose the CommonPolicy interface:
-        # initial_state() and forward(obs, mask, slot_block, hidden, noise).
-        # The default keeps the accepted gate probe; the Stage-0 harness
-        # passes the trainable actor through the SAME verified path.
-        self.policy = policy if policy is not None else CommonPolicy(capacity)
+        # The Stage-0 capability path retains CommonPolicy as its exact
+        # default.  Candidate-local experiments may inject an object with the
+        # same initial_state/forward surface; no runner or receipt semantics
+        # change when the seam is unused.
+        self.policy = CommonPolicy(capacity) if policy is None else policy
         self.hidden = self.policy.initial_state()
+        self.action_noise_seed_identity = sib.profile_stream_identity(
+            sib.ACTION_NOISE_STREAM,
+            ACTION_NOISE_SEED,
+            env.ledger.profile.name,
+        )
         self.noise = roster_env.make_action_noise(
             [env.ledger.episode_id],
-            action_seed=(
-                ACTION_NOISE_SEED if action_noise_seed is None
-                else int(action_noise_seed)
-            ),
+            action_seed=self.action_noise_seed_identity,
             member_capacity=capacity,
         )[:, 0, :, :]
         self._consumed: set[tuple] = set()
         self.boundary_records: list[BoundaryRecord] = []
-        self.action_receipts: list[ActionReceipt] = []
         self.step_traces: list[StepTrace] = []
 
     # -- receipt discipline --------------------------------------------------
 
-    def _verify_and_consume(
+    def _verify_pre_receipt(
         self,
         receipt: ActuationReceipt | None,
         opportunity: sib.Opportunity,
         actuation: sib.Actuation,
         slot_block: np.ndarray,
-        focal_receiver: int,
     ) -> None:
-        """Fail-closed binding of the receipt to the ACTUAL policy input.
-
-        Pro's loop-7 C1 correction: the verifier must check the slot tensor
-        that entered ``CommonPolicy.forward`` — not separately saved bytes —
-        plus the complete current opportunity identity, route, decision
-        source, ingestion cost, and the issuing runner's block identity.
-        """
         if receipt is None:
             raise ReceiptError("missing actuation receipt at a boundary step")
-        if receipt.runner_binding != self.runner_binding:
-            raise ReceiptError(
-                f"cross-runner receipt: issued by {receipt.runner_binding!r}, "
-                f"consumed by {self.runner_binding!r}"
-            )
         if receipt.physical_tick != self.env.time:
             raise ReceiptError(
                 f"stale or post-action receipt: tick {receipt.physical_tick} "
                 f"vs env time {self.env.time}"
             )
         if receipt.opportunity_identity != opportunity.identity:
-            raise ReceiptError(
-                "receipt identity does not match the current opportunity "
-                "(profile/episode/event/spell-epoch/member binding)"
-            )
-        if receipt.opportunity_identity.receiver_member_key != focal_receiver:
-            raise ReceiptError("wrong-owner receipt: focal receiver mismatch")
-        if receipt.route != actuation.route:
-            raise ReceiptError("receipt route does not match the actuation")
-        if receipt.decision_source != actuation.decision_source:
-            raise ReceiptError("receipt decision source does not match the actuation")
-        if receipt.ingestion_cost != actuation.ingestion_cost:
-            raise ReceiptError("receipt ingestion cost does not match the actuation")
+            raise ReceiptError("wrong or cross-runner opportunity identity")
+        if receipt.physical_tick != opportunity.physical_tick:
+            raise ReceiptError("receipt tick does not match opportunity")
+        if (
+            receipt.route != actuation.route
+            or receipt.decision_source != actuation.decision_source
+            or receipt.ingestion_cost != actuation.ingestion_cost
+        ):
+            raise ReceiptError("receipt route/source/cost does not match actuation")
         if hashlib.sha256(actuation.slot).hexdigest() != receipt.slot_digest:
             raise ReceiptError("slot digest does not match the bound receipt")
-        if not np.array_equal(slot_block[focal_receiver], slot_features(actuation.slot)):
-            raise ReceiptError(
-                "the focal policy slot tensor does not match the receipted slot"
-            )
-        nonfocal = np.delete(slot_block, focal_receiver, axis=0)
-        if np.count_nonzero(nonfocal):
-            raise ReceiptError("nonzero non-focal slot rows in the policy input")
+        expected_shape = (self.env.ledger.member_capacity, SLOT_DIM)
+        if slot_block.shape != expected_shape or slot_block.dtype != np.float32:
+            raise ReceiptError("policy slot block has wrong shape or dtype")
+        focal = opportunity.identity.receiver_member_key
+        if not np.array_equal(slot_block[focal], slot_features(actuation.slot)):
+            raise ReceiptError("actual focal row differs from receipt-bound slot")
+        nonfocal = slot_block.copy()
+        nonfocal[focal, :] = np.float32(0.0)
+        if np.any(nonfocal != np.float32(0.0)):
+            raise ReceiptError("actual policy input contains nonzero non-focal row")
+        key = (receipt.opportunity_identity, receipt.physical_tick)
+        if key in self._consumed:
+            raise ReceiptError("duplicate receipt consumption for one opportunity")
+
+    def _consume(self, receipt: ActuationReceipt) -> None:
         key = (receipt.opportunity_identity, receipt.physical_tick)
         if key in self._consumed:
             raise ReceiptError("duplicate receipt consumption for one opportunity")
         self._consumed.add(key)
 
+    def verify_action_receipt(
+        self,
+        receipt: ActionReceipt,
+        *,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        hidden: np.ndarray,
+        kernel: np.ndarray,
+        actions: np.ndarray,
+        new_hidden: np.ndarray,
+    ) -> None:
+        expected = ActionReceipt(
+            opportunity_identity=opportunity.identity,
+            physical_tick=opportunity.physical_tick,
+            route=actuation.route,
+            decision_source=actuation.decision_source,
+            ingestion_cost=actuation.ingestion_cost,
+            policy_input_digest=_digest(observations, active_mask, slot_block, hidden),
+            kernel_digest=_digest(kernel),
+            sampled_action_digest=_digest(actions),
+            recurrent_write_digest=_digest(new_hidden),
+        )
+        if receipt != expected:
+            raise ReceiptError("action receipt does not match executed digest material")
+
+    def bound_step(
+        self,
+        *,
+        receipt: ActuationReceipt | None,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        noise: np.ndarray,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, ActionReceipt]:
+        """Validate input, execute the common policy, seal writes, then consume."""
+        self._verify_pre_receipt(receipt, opportunity, actuation, slot_block)
+        actions, kernel, new_hidden = self.policy.forward(
+            observations, active_mask, slot_block, self.hidden, noise
+        )
+        action_receipt = ActionReceipt(
+            opportunity_identity=opportunity.identity,
+            physical_tick=opportunity.physical_tick,
+            route=actuation.route,
+            decision_source=actuation.decision_source,
+            ingestion_cost=actuation.ingestion_cost,
+            policy_input_digest=_digest(observations, active_mask, slot_block, self.hidden),
+            kernel_digest=_digest(kernel),
+            sampled_action_digest=_digest(actions),
+            recurrent_write_digest=_digest(new_hidden),
+        )
+        self.verify_action_receipt(
+            action_receipt,
+            opportunity=opportunity,
+            actuation=actuation,
+            observations=observations,
+            active_mask=active_mask,
+            slot_block=slot_block,
+            hidden=self.hidden,
+            kernel=kernel,
+            actions=actions,
+            new_hidden=new_hidden,
+        )
+        if receipt is None:  # guarded above; keeps the type boundary explicit.
+            raise ReceiptError("missing actuation receipt at consumption")
+        self._consume(receipt)
+        return actions, kernel, new_hidden, action_receipt
+
     # -- the drive -----------------------------------------------------------
 
     def _boundary(
         self, event_index: int
-    ) -> tuple[np.ndarray, ActuationReceipt, int, sib.Opportunity, sib.Actuation]:
+    ) -> tuple[
+        np.ndarray, ActuationReceipt, sib.Opportunity, sib.Actuation, bytes
+    ]:
         env = self.env
         opportunity = env.opportunity(event_index)
         view = env.observe()
         w_bytes = sib.w_minus(view, opportunity)
-        body = self.body_override if self.body_override is not None else env.focal_payload(event_index)
+        if self.body_override is not None:
+            body = self.body_override
+        elif self.body_fn is not None:
+            body = self.body_fn(event_index, env)
+        else:
+            body = env.focal_payload(event_index)
         d_learned = bool(self.d_learned_fn(w_bytes))
         d_control = (
-            bool(self.d_control_fn(event_index))
-            if self.d_control_fn is not None
-            else sib.control_tape_open(
-                env.ledger.profile.name, env.ledger.episode_id, event_index,
+            sib.control_tape_open(
+                env.ledger.profile.name,
+                env.ledger.episode_id,
+                event_index,
                 tape_seed=self.tape_seed,
             )
+            if self.d_control_fn is None
+            else bool(self.d_control_fn(w_bytes))
         )
         actuation = sib.actuate(
             self.arm, opportunity, body, d_learned=d_learned, d_control=d_control
         )
-        receipt = make_receipt(
-            opportunity, actuation, runner_binding=self.runner_binding
-        )
+        receipt = make_receipt(opportunity, actuation)
         capacity = env.ledger.member_capacity
         slot_block = np.zeros((capacity, SLOT_DIM), dtype=np.float32)
         focal = opportunity.identity.receiver_member_key
         slot_block[focal, :] = slot_features(actuation.slot)
-        self.boundary_records.append(
-            BoundaryRecord(receipt, w_bytes, actuation.route, actuation.slot)
-        )
-        return slot_block, receipt, focal, opportunity, actuation
+        return slot_block, receipt, opportunity, actuation, w_bytes
 
     def run_episode(self) -> float:
         env = self.env
@@ -391,47 +397,48 @@ class ArmEpisodeRunner:
                 sib.EVENT_TIMES.index(time) if time in sib.EVENT_TIMES else None
             )
             if event_index is not None:
-                slot_block, receipt, focal, opportunity, actuation = (
-                    self._boundary(event_index)
+                slot_block, receipt, opportunity, actuation, w_bytes = self._boundary(
+                    event_index
                 )
             else:
-                slot_block, receipt, focal, opportunity, actuation = (
-                    np.zeros((capacity, SLOT_DIM), dtype=np.float32),
-                    None, None, None, None,
-                )
+                slot_block = np.zeros((capacity, SLOT_DIM), dtype=np.float32)
             view = env.observe()
-            actions, kernel, new_hidden = self.policy.forward(
-                view.observations, view.active_mask, slot_block,
-                self.hidden, self.noise[time],
-            )
-            trace = StepTrace(
-                time=time,
-                input_digest=_digest(view.observations, view.active_mask, slot_block, self.hidden),
-                kernel_digest=_digest(kernel),
-                action_digest=_digest(actions),
-                hidden_digest=_digest(new_hidden),
-            )
-            self.step_traces.append(trace)
-            self.hidden = new_hidden
             if event_index is not None:
-                # The binding chain (Pro's C1): the actuation receipt is
-                # verified against the ACTUAL slot tensor that entered the
-                # forward pass, then the resulting action carries an
-                # ActionReceipt, and only the bound-step wrapper may submit
-                # it to the environment.
-                self._verify_and_consume(
-                    receipt, opportunity, actuation, slot_block, focal
+                actions, kernel, new_hidden, action_receipt = self.bound_step(
+                    receipt=receipt,
+                    opportunity=opportunity,
+                    actuation=actuation,
+                    observations=view.observations,
+                    active_mask=view.active_mask,
+                    slot_block=slot_block,
+                    noise=self.noise[time],
                 )
-                action_receipt = ActionReceipt(
-                    actuation_receipt_digest=receipt_digest(receipt),
-                    policy_input_digest=trace.input_digest,
-                    kernel_digest=trace.kernel_digest,
-                    sampled_action_digest=trace.action_digest,
-                    recurrent_write_digest=trace.hidden_digest,
-                    physical_tick=time,
+                self.boundary_records.append(
+                    BoundaryRecord(
+                        receipt,
+                        action_receipt,
+                        w_bytes,
+                        actuation.route,
+                        actuation.slot,
+                    )
                 )
-                self.action_receipts.append(action_receipt)
-                bound_step(env, actions, action_receipt)
             else:
-                env.step(actions)
+                actions, kernel, new_hidden = self.policy.forward(
+                    view.observations,
+                    view.active_mask,
+                    slot_block,
+                    self.hidden,
+                    self.noise[time],
+                )
+            self.step_traces.append(
+                StepTrace(
+                    time=time,
+                    input_digest=_digest(view.observations, view.active_mask, slot_block, self.hidden),
+                    kernel_digest=_digest(kernel),
+                    action_digest=_digest(actions),
+                    hidden_digest=_digest(new_hidden),
+                )
+            )
+            self.hidden = new_hidden
+            env.step(actions)
         return env.episode_total()

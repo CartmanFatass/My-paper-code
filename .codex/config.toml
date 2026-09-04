@@ -1,81 +1,50 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Luna is account-visible but currently omitted from the Sol/v2 child-agent
-# surface. This generated local catalog changes only the routing-version field.
-model_catalog_json = "C:\\project\\HMASD\\runtime\\model-catalog-v2-workaround.json"
-
 [features]
 multi_agent_v2 = true
+hooks = false
 
 [agents]
-max_threads = 8
-max_depth = 1
+# The two-direction cap of AGENTS.md section 5 is a rule, not this knob: nested DM -> CM -> implementer
+# chains need several threads per direction.
+max_concurrent_threads_per_session = 40
 interrupt_message = true
 
-[agents."HMASDCodeScout"]
-description = "Read-only HMASD code scout for bounded interface mapping and safe parallel-work discovery."
-config_file = "./agents/hmasd-code-scout.toml"
-nickname_candidates = ["HMASD Scout", "Interface Scout", "Dependency Scout"]
+[agents.HMASDDirectionManager]
+description = "Fixed loop driver for one research direction (card, intake, delegated decisions, Pro escalation)."
+config_file = "./agents/hmasd-direction-manager.toml"
 
-[agents."HMASDImplementer"]
-description = "HMASD implementation worker for one frozen bounded work package."
-config_file = "./agents/hmasd-implementer.toml"
-nickname_candidates = ["HMASD Implementer", "Algorithm Implementer", "Runtime Implementer"]
+[agents.HMASDCM]
+description = "Fixed native engineering and implementation subagent."
+config_file = "./agents/hmasd-cm.toml"
 
-[agents."HMASDRoutineImplementer"]
-description = "Terra-high implementation worker for one frozen routine engineering package."
-config_file = "./agents/hmasd-implementer-terra.toml"
-nickname_candidates = ["Routine Implementer", "Maintenance Implementer", "Refactor Implementer"]
+[agents.HMASDCMScout]
+description = "Optional engineering-surface mapping method."
+config_file = "./agents/hmasd-cm-scout.toml"
 
-[agents."HMASDVerifier"]
-description = "HMASD focused CUDA and runtime verifier for an integrated package."
-config_file = "./agents/hmasd-verifier.toml"
-nickname_candidates = ["HMASD Verifier", "CUDA Verifier", "Evidence Verifier"]
-
-[agents."HMASDReviewer"]
-description = "Read-only HMASD reviewer for an integrated implementation package."
+[agents.HMASDReviewer]
+description = "Optional engineering-analysis method."
 config_file = "./agents/hmasd-reviewer.toml"
-nickname_candidates = ["HMASD Reviewer", "Algorithm Reviewer", "Runtime Reviewer"]
 
-[agents."HMASDWorkflowAuditor"]
-description = "Read-only Luna-high auditor for workflow impact mapping and verification."
-config_file = "./agents/hmasd-workflow-auditor.toml"
-nickname_candidates = ["Workflow Auditor", "Control Plane Auditor", "Workflow Verifier"]
+[agents.HMASDVerifier]
+description = "Optional focused runtime-observation method."
+config_file = "./agents/hmasd-verifier.toml"
 
-[agents."HMASDWorkflowImplementer"]
-description = "Luna-high implementer for one confirmed nonoverlapping workflow slice."
-config_file = "./agents/hmasd-workflow-implementer.toml"
-nickname_candidates = ["Workflow Implementer", "Control Plane Implementer"]
-
-[agents."HMASDWorkflowReviewer"]
-description = "Read-only Sol-xhigh reviewer for risk-triggered workflow changes."
-config_file = "./agents/hmasd-workflow-reviewer.toml"
-nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
-
-[agents."HMASDExperimentOperator"]
-description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."
+[agents.HMASDExperimentOperator]
+description = "Optional operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
-nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 
-[agents."HMASDResearchScout"]
-description = "Read-only Sol-high scout for one bounded independent research axis."
-config_file = "./agents/hmasd-research-scout.toml"
-nickname_candidates = ["Research Scout", "Evidence Scout", "Counterexample Scout"]
-
-[agents."HMASDResearchInnovator"]
-description = "Read-only Sol-max innovator for one bounded advisory research direction."
-config_file = "./agents/hmasd-research-innovator.toml"
-nickname_candidates = ["Research Innovator", "Mechanism Explorer", "Direction Builder"]
-
-[agents."HMASDResearchCritic"]
-description = "Read-only Sol-max critic for one post-principles adversarial assessment."
+[agents.HMASDResearchCritic]
+description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
-nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]
 
-[agents."HMASDResearchPrinciplesAnalyst"]
-description = "Read-only Sol-max analyst for one constructive RL-principles assessment."
-config_file = "./agents/hmasd-research-principles-analyst.toml"
-nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "Learning Dynamics Analyst"]
+[agents.HMASDImplementer]
+description = "Optional semantic implementation method."
+config_file = "./agents/hmasd-implementer.toml"
+
+[agents.HMASDRoutineImplementer]
+description = "Optional routine implementation method."
+config_file = "./agents/hmasd-routine-implementer.toml"
 
 [mcp_servers.agentify-desktop]
 command = "node"

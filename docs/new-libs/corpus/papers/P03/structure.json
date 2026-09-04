@@ -1,0 +1,96 @@
+{
+  "paper_id": "P03",
+  "pdf_pages": 55,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Preliminaries",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Independent Learning and Policy Gradient",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        5
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Function Approximation",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Game-Agnostic Convergence",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Experiments and Conclusion",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        9
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        10,
+        13
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendix: Algorithms",
+      "level": 1,
+      "pdf_pages": [
+        14,
+        15
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "Appendix: Proofs",
+      "level": 1,
+      "pdf_pages": [
+        16,
+        48
+      ]
+    },
+    {
+      "section_id": "S010",
+      "heading": "Appendix: Additional Experiments",
+      "level": 1,
+      "pdf_pages": [
+        49,
+        55
+      ]
+    }
+  ]
+}

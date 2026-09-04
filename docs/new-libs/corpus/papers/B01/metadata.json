@@ -1,0 +1,87 @@
+{
+  "paper_id": "B01",
+  "citation_key": "albrecht2024marl",
+  "title": "Multi-Agent Reinforcement Learning: Foundations and Modern Approaches",
+  "authors": [
+    "Stefano V. Albrecht",
+    "Filippos Christianos",
+    "Lukas Schäfer"
+  ],
+  "year": 2024,
+  "venue": "MIT Press",
+  "version": "Open-access PDF edition; pdfTeX build dated 2026-03-24; previously indexed build 2025-06-18",
+  "source_pdf": "docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf",
+  "pdf_pages": 395,
+  "text_extractable_pages": 376,
+  "warning_pages": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    9,
+    18,
+    19,
+    24,
+    25,
+    29,
+    47,
+    71,
+    143,
+    189,
+    211,
+    333,
+    365,
+    391
+  ],
+  "doi": null,
+  "arxiv": null,
+  "source_urls": [
+    "https://mitpress.mit.edu/9780262049375/multi-agent-reinforcement-learning/",
+    "https://huggingface.co/datasets/Ujjwal-Tyagi/ai-ml-foundations-book-collection/blob/main/marl-book.pdf"
+  ],
+  "primary_topics": [
+    "MARL foundations",
+    "stochastic games",
+    "solution concepts",
+    "centralized training decentralized execution",
+    "credit assignment"
+  ],
+  "method_families": [
+    "Q-learning",
+    "policy gradient",
+    "actor-critic",
+    "value decomposition",
+    "self-play",
+    "population-based training"
+  ],
+  "problem_classes": [
+    "stochastic games",
+    "partially observable stochastic games",
+    "cooperative MARL",
+    "competitive MARL"
+  ],
+  "evidence_types": [
+    "textbook synthesis",
+    "worked derivations",
+    "algorithm exposition",
+    "evaluation guidance"
+  ],
+  "hmasd_axes": [
+    "foundations",
+    "communication",
+    "credit",
+    "optimization",
+    "planning",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/B01/overview.md",
+    "structure": "docs/new-libs/corpus/papers/B01/structure.json",
+    "claims": "docs/new-libs/corpus/papers/B01/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/B01/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/B01/chunks"
+  },
+  "chunk_count": 85,
+  "content_fingerprint": "sha256:4eec7be5bcabaf912846ddd295925c35d46502d92fcd9f7ba3311656fd2e9091"
+}

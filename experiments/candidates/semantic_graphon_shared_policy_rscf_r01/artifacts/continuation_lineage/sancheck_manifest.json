@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "candidate_id": "SGSP-RG2Z-RSCF-SCIENCE-20260821-01|FROZEN_OLD_IDENTITY_AT_VALID_BLINDED_GENERATION154|EXPLICIT_CONTINUATION_LINEAGE_CANDIDATE",
+  "workload_class": "toy",
+  "entrypoint": "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_launcher.py",
+  "hot_path_files": [
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_launcher.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_boundary.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_runner.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/continuation_lineage.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/runner.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/policy.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/training.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native_contract.py",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native_loader.py"
+  ],
+  "native": {
+    "backend": "cpp",
+    "cpp_source_files": [
+      "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native/rscf_r01_full_suffix_host.cpp"
+    ],
+    "artifact_path": "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native/accepted/4a09f6e71eff77333e00aa30f0adcafc162485279a41a7fa79e9dec851d53962/sgsp_rscf_native_v4_0c14c2f7b3fa5840fe53.pyd",
+    "artifact_sha256": "4a09f6e71eff77333e00aa30f0adcafc162485279a41a7fa79e9dec851d53962",
+    "preflight_passed": true,
+    "full_reset_step_cpp": true,
+    "python_fallback": false,
+    "batch_width": 32,
+    "parallel_mode": "cpu_workers",
+    "worker_count": 1,
+    "native_thread_count": 1,
+    "allocated_cpu_cores": 1,
+    "gpu": false
+  },
+  "precision": {
+    "profile": "HMASD-MARL-FP32-BASELINE-V1",
+    "model_dtype": "float32",
+    "rollout_dtype": "float32",
+    "environment_dtype": "float32",
+    "exception_id": "NONE"
+  },
+  "measurement": {
+    "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe tools/benchmarks/benchmark_sgsp_rscf_update_audit.py --output experiments/candidates/semantic_graphon_shared_policy_rscf_r01/artifacts/continuation_lineage/update154_result_blind_benchmark.json",
+    "observed_at_utc": "2026-08-23T21:23:37Z",
+    "phase_profiled": true,
+    "dominant_bottleneck": "torch_forward_backward_optimizer_update154_fixture",
+    "reference_throughput_units_per_second": 8.796656918599222,
+    "production_throughput_units_per_second": 210.62837343796912,
+    "effective_concurrency": 1.0,
+    "parallel_overhead_fraction": 0.0,
+    "accelerator_utilization_fraction": 0.0,
+    "projected_complete_wall_seconds": 744938.572103712
+  }
+}

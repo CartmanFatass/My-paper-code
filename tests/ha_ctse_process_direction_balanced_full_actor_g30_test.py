@@ -20,7 +20,7 @@ from ha_ctse_process.direction_balanced_full_actor_g30 import (
     optimize_direction_balanced_update,
 )
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from scripts import screen_direction_balanced_full_actor_g30 as screen
+from tools.analysis import screen_direction_balanced_full_actor_g30 as screen
 
 
 def _battery_model() -> DirectionBalancedFullActorPolicy:

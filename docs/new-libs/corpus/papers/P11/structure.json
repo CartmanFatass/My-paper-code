@@ -1,0 +1,87 @@
+{
+  "paper_id": "P11",
+  "pdf_pages": 55,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Background",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Partial Model-Based Eluder Dimension",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        4
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Sample Efficiency in MFGs",
+      "level": 1,
+      "pdf_pages": [
+        5,
+        7
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Multi-Type MFGs",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Heuristic and Conclusion",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        9
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        10,
+        12
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        13,
+        53
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "Experimental Appendix",
+      "level": 1,
+      "pdf_pages": [
+        54,
+        55
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "anomalies": [
+    {
+      "kind": "HostInterfaceError",
+      "message": "registered preactivity decodability probe failed"
+    }
+  ],
+  "artifact_kind": "CRTO_B1_REGISTERED_RESULT",
+  "complete": false,
+  "manifest": {
+    "algorithm_seeds": [
+      2101,
+      2111,
+      2129,
+      2141,
+      2161,
+      2179,
+      2203,
+      2221
+    ],
+    "artifact_kind": "CRTO_B1_REGISTERED_RESULT",
+    "configuration": {
+      "algorithm_seeds": [
+        2101,
+        2111,
+        2129,
+        2141,
+        2161,
+        2179,
+        2203,
+        2221
+      ],
+      "cpu_workers": 1,
+      "gpu_enabled": false,
+      "horizon": 256,
+      "peak_rss_bytes": 2147483648,
+      "registered_max_steps": 10715136,
+      "revision": "CRTO-B1-SCIENCE-20260812-04",
+      "wall_seconds": 7200
+    },
+    "cut_arms": [
+      "DERANGED-RESIDUAL-CRTO",
+      "Q-ONLY-CRTO",
+      "RATE-MATCHED-HAZARD-CRTO",
+      "FORCED-RENEWAL-ONLY"
+    ],
+    "event_classes": [
+      "NONE",
+      "UNANNOUNCED-DIFFERENTIAL",
+      "CUED-DIFFERENTIAL",
+      "COMMON-SENSOR"
+    ],
+    "learned_arms": [
+      "CRTO",
+      "FULL-HISTORY-AUX-TERM"
+    ],
+    "ledger": {
+      "formulas": {
+        "audit_action_enumeration": "8 seeds * 4 regimes * 64 episodes * at most 7 actions * 16",
+        "complete_rollout_cuts": "8 seeds * 3 cuts * 4 regimes * 64 episodes * 256",
+        "deranged_replays": "8 seeds * 4 regimes * 64 episodes * 256",
+        "donor_only": "8 seeds * 4 regimes * 256 episodes * 256",
+        "hazard_development": "8 seeds * 4 regimes * 64 episodes * 256",
+        "learned_arm_training": "8 seeds * 2 arms * 1024 episodes * 256",
+        "main_evaluation": "8 seeds * 2 arms * 4 regimes * 64 episodes * 256",
+        "predictor_data": "8 seeds * 256 episodes * 256"
+      },
+      "maximum_steps": {
+        "audit_action_enumeration": 229376,
+        "complete_rollout_cuts": 1572864,
+        "deranged_replays": 524288,
+        "donor_only": 2097152,
+        "hazard_development": 524288,
+        "learned_arm_training": 4194304,
+        "main_evaluation": 1048576,
+        "predictor_data": 524288,
+        "registered_maximum": 10715136
+      }
+    },
+    "options_in_tie_order": [
+      "TRACK-L",
+      "TRACK-R",
+      "RELAY-L",
+      "RELAY-R",
+      "TRANSIT-L",
+      "TRANSIT-R",
+      "RETURN"
+    ],
+    "output_root": "C:\\Projects\\HMASD\\artifacts\\commitment_residual_triggered_options\\crto_b1_v4_registered",
+    "production_command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.commitment_residual_triggered_options train-evaluate-analyze --output-root <fresh-root> --result <fresh-result.json>",
+    "regimes": [
+      "K8",
+      "K16",
+      "K4_TO_16",
+      "K16_TO_4"
+    ],
+    "result_path": "C:\\Projects\\HMASD\\docs\\research\\candidates\\commitment_residual_triggered_options\\CRTO_B1_RESULT.json",
+    "result_schema": {
+      "required_per_seed": [
+        "seed",
+        "predictor",
+        "training",
+        "hazard_development",
+        "scored_evaluation",
+        "donor_only",
+        "mechanism_cuts",
+        "audit",
+        "checkpoints",
+        "panel_identities",
+        "raw_output_exists",
+        "question_relevant_output_exists",
+        "anomalies"
+      ],
+      "required_top_level": [
+        "artifact_kind",
+        "treatment",
+        "revision",
+        "manifest",
+        "scientific_activity",
+        "resource_ledger",
+        "per_seed",
+        "aggregate",
+        "question_relevant_output_exists",
+        "anomalies"
+      ]
+    },
+    "revision": "CRTO-B1-SCIENCE-20260812-04",
+    "treatment": "CRTO-B1-COMMITMENT-RESIDUAL-TRIGGERED-OPTIONS"
+  },
+  "per_seed": {},
+  "preactivity": {},
+  "question_relevant_output_exists": false,
+  "resource_ledger": {
+    "actual_completed_steps": {
+      "audit_action_enumeration": 0,
+      "complete_rollout_cuts": 0,
+      "deranged_replays": 0,
+      "donor_only": 0,
+      "hazard_development": 0,
+      "learned_arm_training": 0,
+      "main_evaluation": 0,
+      "predictor_data": 65536
+    },
+    "actual_total_steps": 65536,
+    "all_categories_within_registered_maximum": true,
+    "completed_rows": {
+      "audit_action_enumeration": 0,
+      "complete_rollout_cuts": 0,
+      "deranged_replays": 0,
+      "donor_only": 0,
+      "hazard_development": 0,
+      "learned_arm_training": 0,
+      "main_evaluation": 0,
+      "predictor_data": 256
+    },
+    "cpu_workers": 1,
+    "formulas": {
+      "audit_action_enumeration": "8 seeds * 4 regimes * 64 episodes * at most 7 actions * 16",
+      "complete_rollout_cuts": "8 seeds * 3 cuts * 4 regimes * 64 episodes * 256",
+      "deranged_replays": "8 seeds * 4 regimes * 64 episodes * 256",
+      "donor_only": "8 seeds * 4 regimes * 256 episodes * 256",
+      "hazard_development": "8 seeds * 4 regimes * 64 episodes * 256",
+      "learned_arm_training": "8 seeds * 2 arms * 1024 episodes * 256",
+      "main_evaluation": "8 seeds * 2 arms * 4 regimes * 64 episodes * 256",
+      "predictor_data": "8 seeds * 256 episodes * 256"
+    },
+    "gpu_enabled": false,
+    "maximum_steps": {
+      "audit_action_enumeration": 229376,
+      "complete_rollout_cuts": 1572864,
+      "deranged_replays": 524288,
+      "donor_only": 2097152,
+      "hazard_development": 524288,
+      "learned_arm_training": 4194304,
+      "main_evaluation": 1048576,
+      "predictor_data": 524288,
+      "registered_maximum": 10715136
+    },
+    "peak_rss_bytes": 1807167488,
+    "wall_seconds": 464.38672700000006
+  },
+  "revision": "CRTO-B1-SCIENCE-20260812-04",
+  "scientific_activity": {
+    "criterion": "first learned-arm optimizer update under CRTO-B1-SCIENCE-20260812-04",
+    "started": false
+  },
+  "treatment": "CRTO-B1-COMMITMENT-RESIDUAL-TRIGGERED-OPTIONS"
+}

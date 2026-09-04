@@ -25,7 +25,7 @@ if str(_ROOT) not in sys.path:
 
 _SPEC = importlib.util.spec_from_file_location(
     "analyze_stage_c_skill_semantics",
-    _ROOT / "scripts" / "analyze_stage_c_skill_semantics.py",
+    _ROOT / "tools" / "analysis" / "analyze_stage_c_skill_semantics.py",
 )
 assert _SPEC is not None and _SPEC.loader is not None
 _AUDIT = importlib.util.module_from_spec(_SPEC)
@@ -552,7 +552,7 @@ def test_direct_script_execution_bootstraps_repo_root_for_checkpoint_dataclass_u
     completed = subprocess.run(
         [
             sys.executable,
-            str(_ROOT / "scripts" / "analyze_stage_c_skill_semantics.py"),
+            str(_ROOT / "tools" / "analysis" / "analyze_stage_c_skill_semantics.py"),
             "--f0",
             str(arm_root),
             "--f1",

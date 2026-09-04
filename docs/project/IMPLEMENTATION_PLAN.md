@@ -1,4 +1,12 @@
-# G33 UAV localized-demand-burst source-witness transition
+# Historical G33 UAV localized-demand-burst source-witness transition
+
+> **HISTORICAL_NONOPERATIVE.** This preserved G33 plan records the original
+> nested-search cost observation and its then-current response. Its former
+> `16/16H`, `K_search`, wall-time, and `NON_EXECUTABLE_EVIDENCE_DESIGN`
+> language has no current implementation, review, scientific, portfolio, or
+> routing authority. Object-level complexity is now disclosed under
+> `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`; no reader may reuse this plan
+> to refuse construction or stop a direction.
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -605,13 +613,13 @@ physics and reward, a hidden future burst ledger, visible current per-user
 demand without desired-UAV assignment, and the registered constructive/null/
 feasibility checks before implementation.
 
-The code-worker benchmark selects Terra-high implementer and Luna-max reviewer.
-The registered profiles are loaded after restart. Machine-resolved workspace
-tickets protect isolated worktrees. Code Project Manager directly owns Agentify
-Pro transport and exact raw archival for formal and Explorer-to-project review;
+The historical code-worker benchmark selected Terra-high implementer and
+Luna-max reviewer; those rows remain historical evidence. Root now handles
+agent configuration and routing directly. Registered profiles are loaded after
+restart. Code Project Manager directly owns Agentify Pro transport and exact
+raw archival for formal and Explorer-to-project review;
 the Independent Research Explorer directly owns its independent direction
-reviews, while Workflow Design Manager owns only stable workflow contract
-design. Every cross-task send explicitly passes the assignment-current target
+reviews. Every cross-task send explicitly passes the assignment-current target
 model and effort. These operational changes consume no conclusion-bearing
 iteration. Continue the G33 design audit under the remaining 13-iteration
 grant.

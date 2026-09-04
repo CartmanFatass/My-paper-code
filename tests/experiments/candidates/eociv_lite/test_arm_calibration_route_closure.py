@@ -315,22 +315,26 @@ def test_report_is_byte_stable_and_states_only_intervention_nonclaims() -> None:
     assert b'"PASS_INTERVENTION_CLOSURE"' in first
 
 
-def test_candidate_is_small_and_bounded_scan_finds_no_direct_production_consumer() -> None:
+def test_bounded_scan_finds_no_default_runtime_consumer_and_only_opt_in_script() -> None:
     root = Path(__file__).resolve().parents[4]
-    source = root / "experiments/candidates/eociv_lite/arm_calibration_route_closure.py"
-    active_lines = [
-        line
-        for line in source.read_text(encoding="utf-8").splitlines()
-        if line.strip() and not line.lstrip().startswith("#")
-    ]
-    assert len(active_lines) <= 500
-
     needles = ("eociv_lite", "arm_calibration_route_closure")
-    for top in ("ha_ctse_process", "envs", "scripts"):
+    for top in ("ha_ctse_process", "envs"):
         for path in (root / top).rglob("*"):
             if path.is_file():
                 text = path.read_text(encoding="utf-8", errors="ignore")
                 assert not any(needle in text for needle in needles), path
+
+    script_consumers = []
+    for path in (root / "scripts").rglob("*.py"):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        assert "arm_calibration_route_closure" not in text, path
+        if "eociv_lite" in text:
+            script_consumers.append(path.relative_to(root).as_posix())
+    assert script_consumers
+    assert all(
+        Path(relative).name.startswith("run_eociv_")
+        for relative in script_consumers
+    )
 
 
 def test_report_records_actual_binding_gap_without_scientific_failure() -> None:

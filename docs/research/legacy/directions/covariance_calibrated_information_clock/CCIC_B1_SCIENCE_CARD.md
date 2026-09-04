@@ -1,0 +1,1481 @@
+# CCIC B1 science card
+
+```text
+direction=covariance_calibrated_information_clock
+revision=CCIC-B1-SCIENCE-20260813-08
+supersedes_revision=CCIC-B1-SCIENCE-20260813-07
+predecessor_disposition=PREACTIVITY_MODE_SPECIFIC_WORK_CAPACITY_UNCLOSED
+owner=EM_covariance_calibrated_information_clock
+object=result-blind prospective B1 discriminator
+scientific_activity_started=false
+mathematical_closure=revision_08_PREPARED_NOT_SENT
+cm_release=withheld
+production_authorization=none
+chatgpt_external_pro=PREPARED_NOT_SENT
+external_gemini=PREPARED_NOT_SENT
+```
+
+## Conclusion first
+
+This revision freezes a small, causal test of a distinct algorithm family: a
+lineage-aware, covariance-calibrated information clock used by one
+decentralized shared policy across roster size `N` and externally imposed skill
+period `k`. The decisive test is not generic mean-field pooling. It asks whether
+the clock assigns zero *new information value* to a successfully received
+literal retransmission, assigns increasing information to partially correlated
+and conditionally independent new origins, and converts that distinction into
+better sense/relay/commit timing at held-out `N` and/or held-out `k`.
+
+The frozen first discriminator contains an analytic HMM/GLS Bayes object as a
+theory-only ceiling and a separately named numerical reference as teacher. The
+deployed path is decentralized: every agent receives the same abstract packets
+through a matched one-round all-gather,
+computes the same fixed-rank sufficient statistics locally, runs the same
+shared actor, and executes its own action. No deployed arm receives a privileged
+global covariance matrix or centralized inference result.
+
+The strongest alternative is simpler lineage-aware unique-origin counting, or
+a sufficiently expressive replication-safe set encoder, rather than learned
+covariance. Revision 05 ended before activity because its nominal RI comparator
+was deterministically outside the frozen work ratio in every cell. Revision 06
+ended before activity when static construction exposed a hidden second learned
+evaluation. Revision 07 repaired that conflict, but same-conversation Pro review
+found that it matched work and capacity only when both outputs were active,
+not on the necessarily prospective-only initial decision or terminal modes.
+Revision 08 freezes four invocation modes and a one-call `RI-STRONG-v4` whose
+metadata trunk is output-connected to prospective information in every active
+row. Exact modewise useful work, peak state, and active capacity are matched
+without represented-value leakage, dummy work, or a second evaluation. If a
+frozen equivalence or reverse-superiority rule favors an alternative, the
+corresponding extra covariance or analytic-clock machinery is deleted.
+Prospective static resource reconciliation found the former 90-minute ceiling
+incredible even under ideal eight-way seed parallelism. The complete unsent
+revision therefore also freezes a 180-minute, complete-seed-process envelope
+whose scheduling cannot enter any random address, within-seed reduction,
+estimator, work-replay tuple, or retained evidence block.
+Nothing in this card authorizes CM,
+construction, tests, training, evaluation, provider contact, or production.
+
+## Five-line science card
+
+- **Question.** Under a frozen Gaussian cooperative sense/commit process, does
+  a learned covariance-calibrated clock cause one shared decentralized policy
+  to ignore literal retransmissions yet exploit new correlated/independent
+  origins on held-out `N` and/or `k`?
+- **Treatment.** `CCIC-R1`: quotient immutable evidence lineage, learn a
+  diagonal-plus-rank-one conditional residual covariance, compute distributed
+  GLS increments `(q_hat, J_hat)`, propagate belief in physical time, and feed
+  those quantities to the one shared frozen actor.
+- **Comparators.** A capacity/exposure/work-matched nonlinear replication-safe
+  set encoder (`RI-STRONG-v4`), an information-matched flexible calibration head
+  (`INFO-FLEX-v2`), a scalar equicorrelation effective-sample-size arm
+  (`ESS-SCALAR`), and a lineage-deduplicated independence/count arm
+  (`ORIGIN-COUNT`), with numerical-reference, received-count, mean-pooling, and shuffled-clock
+  diagnostics.
+- **Observable.** Paired normalized error-delay-sensing loss, numerical-reference excess loss,
+  posterior log score/Brier score, `J` ordering, exact-copy identity, action
+  sensitivity to information, and inference/communication exposure across the
+  frozen `2 x 2` train and `3 x 3` evaluate grid.
+- **Strongest alternative and ceiling.** A positive result may still be a
+  provenance-counting or flexible set-learning effect. At maximum, B1 supports
+  a causal timing benefit in this frozen toy on only the held-out axes and
+  comparator boundaries that pass; it cannot establish universal information
+  estimation, general MARL coordination, arbitrary-`N`/`k` robustness, or UAV
+  benefit.
+
+## 1. Scientific object and nonclaims
+
+### 1.1 Target distinction
+
+The elementary information unit is one physical sensing draw, identified for
+the whole episode by `origin_key=(origin_id,capture_tick)`, not a received
+packet. Every agent keeps the same episode-persistent set of assimilated keys.
+A key enters the Bayes update at most once; a later relay of that key has
+increment `(Delta q,Delta J)=(0,0)`. A 32-bit origin ID may identify lineage
+across time, while capture tick distinguishes fresh physical draws. Two cases
+with the same received values and packet count can therefore
+require opposite precision updates:
+
+- `DUPLICATE`: rows carry the same immutable origin ID and the same captured
+  random variable. They are literal copies and add no likelihood factor after
+  the first successful receipt.
+- `INDEPENDENT_REPEAT`: rows carry distinct origin IDs and were separate
+  conditional draws. Even if their represented values happen to be equal, each
+  likelihood factor is valid and information adds.
+
+Equality of represented values is never a duplicate rule. Provenance is an
+execution-visible input in this toy. Without trustworthy lineage, the two cases
+are not identifiable and the exact-copy claim must be deleted.
+
+### 1.2 Transport boundary
+
+Copy invariance is conditional on matched successful receipt, latency,
+available sufficient-origin set, topology, consensus rounds, packet size, and
+bandwidth contention. Here `packet size` means the frozen one-real-symbol plus
+64-metadata-bit accounting unit, not a finite encoding of the scalar.
+Retransmission may legitimately improve delivery
+reliability or reachability in another environment. B1 tests information-value
+invariance after receipt, not general communication-value invariance.
+
+### 1.3 Result-blindness and theory boundary
+
+No direction result is an input to this object. The local `docs/new-libs`
+corpus supplies background mechanisms and claim boundaries only; it is not
+experimental evidence for CCIC. In particular, parameter sharing, mean-field
+approximations, and message information bottlenecks do not establish learned
+duplicate rejection, one frozen policy across held-out `N`, or variable skill
+period `k`.
+
+## 2. Frozen cooperative process
+
+### 2.1 Physical time and latent state
+
+An episode has primitive physical ticks `t = 0,...,30`. The hidden task state is
+
+\[
+Y_t\in\{-1,+1\},\qquad P(Y_0=+1)=1/2,
+\]
+
+and independently at every primitive transition
+
+\[
+P(Y_{t+1}=-Y_t)=q_f=0.04.
+\]
+
+The externally supplied skill period is constant within an episode. Training
+uses `k in {1,3}` and evaluation adds held-out `k=5`. A nonterminal team action
+chosen at `t` occupies exactly `k` primitive ticks and the next decision occurs
+at `t+k`. At `t=30`, or whenever fewer than `k` ticks remain, only commit
+actions are legal.
+
+### 2.2 Roster and evidence regimes
+
+Training uses `N in {2,5}` active agents and evaluation adds held-out `N=8`.
+Roster membership is constant within B1. Every `SENSE` block ends with one
+abstract packet row per active agent. Conditional on the new hidden state
+`Y_{t+k}`, the delivered real-valued evidence has signal gain `mu=0.75` and
+unit marginal residual variance.
+
+The evidence regime and its overlap code are public episode context from
+`t=0`; the realized covariance and hidden state are not public. The three
+equally weighted evidence regimes are:
+
+1. `DUP` (`rho=1`, literal copy): draw one origin
+   \(Z=\mu Y+\epsilon_0\), then deliver `N` packet rows with the same origin ID
+   and exactly the same represented value. The unique-origin count is `M=1`.
+2. `CORR` (`rho=0.5`): deliver `M=N` distinct origins
+   \[
+   Z_i=\mu Y+\sqrt{0.5}\,C+\sqrt{0.5}\,\epsilon_i.
+   \]
+3. `IND` (`rho=0`): deliver `M=N` distinct origins
+   \[
+   Z_i=\mu Y+\epsilon_i.
+   \]
+
+All `C`, `epsilon_0`, and `epsilon_i` are standard normal and independent across
+capture ticks unless the equations explicitly share them. A scalar observed
+overlap code `o in {1,0.5,0}` and an observed quality value `s=1` accompany
+each packet. `o` is exogenous metadata whose relation to covariance must be
+learned; it is not an oracle covariance matrix.
+
+This is the complete Stage-1 correlation family. `DUP` tests exact lineage
+quotienting, `CORR` tests nonbinary covariance calibration, and `IND` tests
+sensitivity to genuinely new evidence. The exact analytic information table is
+
+| `N` | `J_DUP` | `J_CORR` | `J_IND` |
+|---:|---:|---:|---:|
+| 2 | 0.5625 | 0.75 | 1.125 |
+| 5 | 0.5625 | 0.9375 | 2.8125 |
+| 8 | 0.5625 | 1.0 | 4.5 |
+
+Thus `DUP<CORR<IND` at every training and held-out roster, not merely at
+`N=5`.
+
+### 2.3 Packet and consensus law
+
+The Stage-1 statistical channel is idealized: each packet contains one
+noiseless mathematical real scalar `z`, a 32-bit immutable origin ID, a 16-bit
+capture tick, an 8-bit overlap code, and an 8-bit validity/check field. The
+fixed public quality value `s=1` is episode context and is not transmitted.
+Communication is therefore accounted as **one real scalar symbol plus 64
+metadata bits per row**, not as a literal finite-bit encoding of a Gaussian
+random variable. B1 makes no bit-rate, rounding, quantization, or finite-word
+channel claim. Every arm uses this identical abstract packet and accounting
+unit.
+
+At each decision epoch, every agent sends one packet through a complete-graph,
+one-round all-gather; every successful row is delivered to every agent.
+Receipt is deterministic in B1. A `RELAY` action resends the last row with the
+original origin ID and capture tick; before any sense it sends a valid null
+row. A relay creates no new evidence origin.
+The assimilated-key ledger is updated only after a valid new composite key is
+incorporated and is identical at all agents under deterministic receipt.
+
+All arms receive the identical packet table, masks, lineage, `o`, `t`, `k`, and
+public action random number. All arms have exactly one fusion invocation and
+one actor call per agent per decision. That single fusion invocation receives
+both the current newly assimilable table, if any, and the public metadata-only
+template for one additional legal `SENSE` block. It returns the observed
+evidence update and prospective information together. A nominal API call that
+performs two learned row/head evaluations violates this rule. No arm obtains
+future packets, future represented values, rewards, hidden state, oracle
+statistics, or held-out normalization at execution.
+
+Before fusion, one identical deterministic `PREVALIDATE` procedure performs
+packet validity, quotienting, assimilated-ledger filtering, ascending composite-
+key ordering, finite checks, and relevant-view cardinality/order/public-metadata
+alignment. It returns immutable canonical views plus two Booleans
+`observed_enabled` and `prospective_enabled`. Online, it runs once per arm-local
+agent/decision on that rollout's packet table and ledger; its arm-local
+`V_mode` and peak are reported, and its cumulative totals may diverge
+endogenously with the arms' histories. In action-independent offline matched
+replay only, it runs once on the shared canonical tuple and the same immutable
+output feeds both claim-bearing fusions. That shared replay `V_mode` is outside
+the differential fusion-work boundary. Any online or replay failure produces
+the identical fail-closed action before the corresponding fusion is invoked.
+
+Exactly four modes exist. `BOTH` has a fresh unique-origin observed view and a
+legal next-`SENSE` metadata template. `PROSPECTIVE_ONLY` has no fresh observed
+view and has the template. `OBSERVED_ONLY` has a fresh observed view and no
+legal template. `NEITHER` has neither view. In `BOTH`, observed and template
+views have equal unique cardinality `M`, ascending row slots, and equal public
+`(o,s,log M,t/30,k/5)` values; origin IDs and represented values are never
+required to match. `PREVALIDATE` rejects any other pairing. The two Boolean
+loads and two conditional selects that dispatch an already valid object remain
+inside both arms' fusion boundary as exactly four operations.
+
+### 2.4 Decentralized actions and joint support
+
+Every agent has the same local action set
+
+```text
+{SENSE, RELAY, COMMIT_MINUS, COMMIT_PLUS}
+```
+
+and the same actor parameters for every agent, `N`, `k`, and evidence regime.
+After all-gather, every agent independently reconstructs the same sufficient
+summary and actor logits. A common public uniform variate selects a common plan,
+so the joint support consists of the four diagonal joint plans in which all
+active agents execute the same named action. At nonterminal states the deployed
+law is `(1-0.02)*softmax(logits) + 0.02/4`; at terminal states it is the same
+mixture restricted and renormalized over the two commit signs. Thus all arms
+have exactly the same legal joint-action support.
+
+Commit terminates the episode. Let `tau` be its physical tick, `S` the number
+of sense blocks, `R` the number of relay blocks, and `Y_tau` the hidden state at
+commit. Team loss is
+
+\[
+L=1\{\widehat Y\ne Y_\tau\}+0.20\,\tau/30+0.02S+0.01R,
+\qquad L_{norm}=L/1.8.
+\]
+
+The team return is `-L`. This reward and every action cost are common to all
+agents and arms. The primitive horizon, potential evidence tape, legal support,
+and costs are held fixed within a pair; realized delivery histories may differ
+after arms choose different actions.
+
+## 3. Analytic Bayes/GLS teacher and ceiling
+
+### 3.1 Unique-origin likelihood
+
+For one capture batch with `M` unique origins,
+
+\[
+Z\mid Y\sim N(Yh,\Sigma),\qquad h=\mu\mathbf 1,
+\]
+
+where
+
+\[
+\Sigma=(1-\rho)I+\rho\mathbf 1\mathbf 1^T
+\]
+
+for `CORR` and `IND`, while `DUP` is quotiented to `M=1`. Define
+
+\[
+q=h^T\Sigma^{-1}Z,\qquad J=h^T\Sigma^{-1}h.
+\]
+
+Then the observation log-likelihood ratio is `2q` and
+
+\[
+J=\frac{\mu^2 M}{1+(M-1)\rho}.
+\]
+
+For a prior log odds `ell`, a no-observation transition across `k` physical
+ticks is
+
+\[
+\ell^-_{t+k}=2\operatorname{atanh}\left((1-2q_f)^k
+\tanh(\ell_t/2)\right),
+\]
+
+and a sense update is `ell_(t+k) = ell^-_(t+k) + 2q`.
+
+### 3.2 Singular duplicate law
+
+Let `A` be an `N x M` replication map with exactly one `1` per row and at
+least one `1` per column. Therefore `A` has full column rank. If `X=AZ`,
+`Omega=A Sigma A^T`, `Sigma` is positive definite, the mean is `AYh`, and the
+distribution is interpreted on its actual support `col(A)`, then
+
+\[
+A^T(A\Sigma A^T)^+A=\Sigma^{-1}.
+\]
+
+Consequently
+
+\[
+(Ah)^T\Omega^+X=q,\qquad (Ah)^T\Omega^+(Ah)=J.
+\]
+
+The likelihood on `col(A)` uses the Moore-Penrose inverse and
+pseudodeterminant. Adding an off-support nugget to each copied row changes the
+model and is forbidden: it would manufacture fictitious independent evidence.
+If the received vector is not on `col(A)`, if lineage is inconsistent, or if a
+column has no received representative, this identity does not apply and the
+packet set is invalid rather than silently regularized.
+
+### 3.3 Analytic Bayes object and numerical reference
+
+The mathematical Bayes object uses the exact HMM update, true covariance, and
+the Bellman integral under `L`. Its continuation expectation is the
+one-dimensional Gaussian-mixture expectation induced by the next `q`. This
+analytic object defines the ideal decision problem but is not claimed to be
+computed with a certified uniform error bound.
+
+The centralized computed arm and labeler is therefore named
+`NUMERICAL-REFERENCE`, never `ORACLE`. Its frozen fine construction uses a
+log-odds grid `[-24,24]` at spacing `0.005`, 128-node Gauss-Hermite quadrature,
+float64 value arrays, linear interpolation, and endpoint clipping to `-24` or
+`+24`. At every state, minimize action value. Values within absolute `1e-12`
+are tied and resolved by the total priority
+
+```text
+SENSE > RELAY > COMMIT_PLUS > COMMIT_MINUS
+```
+
+after removal of illegal actions. Thus the terminal tie at `ell=0` chooses
+`COMMIT_PLUS`; no hidden random tie rule enters labels.
+
+Before activity, compare it against a coarse construction on `[-16,16]` at
+spacing `0.01` with 64-node quadrature. On every coarse-grid state, the fine
+interpolated action values must differ by at most `1e-4`, and every action whose
+coarse gap exceeds `1e-12` must retain its minimizer. Otherwise no training or
+stochastic evaluation begins. Passing is only a numerical-stability contract;
+it does not turn either grid into the exact Bellman oracle or supply a uniform
+tail/interpolation theorem.
+
+`NUMERICAL-REFERENCE` supplies deterministic labels on the frozen state grid
+below and receives a complete evaluation rollout as a centralized reference.
+No behavior-policy rollout generates its label states. No deployed arm calls
+the dynamic program, reads true `rho`, or receives a reference posterior or
+action.
+
+## 4. Shared actor, treatment, and arms
+
+### 4.1 One frozen shared actor
+
+For each training seed, one actor is trained once from numerical-reference states and
+then frozen and reused unchanged by every deployable arm. Its five inputs
+are clipped posterior log odds `ell/16`,
+`log(1+J_next)/log(5.5)`, `t/30`, `(30-t)/30`, and `k/5`. The architecture is
+`5 -> 32 -> 32 -> 4` with SiLU activations. It is trained for exactly 1,500
+Adam updates, batch size 128, learning rate `1e-3`, betas `(0.9,0.999)`, epsilon
+`1e-8`, no weight decay, on exactly 9,216 label states: 768 from each of the
+12 training `(N,k,rho)` cells. There is no centralized
+critic and no arm-specific actor fine-tuning.
+
+The 768 states in each cell are the exact Cartesian product of `j=0,...,23`
+and `m=0,...,31`. Let `T_k=floor(30/k)`. Their physical tick and prior log odds
+are
+
+\[
+t_{k,j}=k\left\lfloor\frac{(j+1/2)T_k}{24}\right\rfloor,
+\qquad \ell_m=-15.5+m.
+\]
+
+The cell's true prospective `J_next` completes each label state. The target is
+the one-hot action selected by the fine `NUMERICAL-REFERENCE` under the total
+tie priority above. Actor loss is mean categorical cross-entropy over the 128
+minibatch rows. There is no rollout behavior policy, outcome filtering, state
+selection, or adaptive relabeling.
+
+The expected-next-information input is computed by each arm from a public
+metadata-only template for one additional legal `SENSE` block: public regime,
+roster, expected unique-origin lineage pattern, overlap code, quality, current
+physical time, and `k`. The template contains no represented-value field; its
+mathematical zero placeholder is used only where an unchanged analytic
+interface requires one and is never processed as a second learned row. It
+never uses a future realized measurement. This makes the first decision
+well-defined and gives every arm the same prospective-information opportunity.
+
+The current Stage-1 actual `SENSE` batch and its next-SENSE template have the
+same public `(o,s,M,t,k)` row metadata in ascending unique-key order because
+membership and regime are fixed, receipt is deterministic, and every `SENSE`
+creates a complete new origin set. In both branches `t` is the current
+post-delivery decision tick, not a future capture tick; covariance is
+stationary within the episode. The single fusion invocation may therefore
+compute public metadata features once and reuse them for both the actual
+evidence update and prospective information. An initial, `RELAY`, valid-null,
+or already-assimilated-copy decision has no observed evidence branch and
+returns an exact zero likelihood increment while still computing the metadata
+template branch once. At terminal support, where another `SENSE` is illegal,
+prospective information is set to zero and cannot affect the renormalized
+commit-only actor law. Any row-cardinality, order, or public-metadata mismatch
+fails closed.
+
+At execution, each agent locally runs this actor on the arm's reconstructed
+belief and expected information from one additional `SENSE` block. The
+numerical reference is therefore a centralized teacher/reference, not the
+deployed actor; the analytic Bayes object remains a theory-only ceiling.
+
+### 4.2 `CCIC-R1` treatment
+
+Agents quotient the current table by composite `origin_key`, reject
+inconsistent same-key payloads, and remove every key already in the persistent
+assimilated ledger. Only remaining new keys update belief; relay-only tables
+have zero likelihood and information increment. A shared covariance network
+receives only `(o,s)` and has
+architecture `2 -> 16 -> 2` with SiLU, exactly 82 trainable scalars. For unique
+row `i`, its two raw outputs are explicitly named `(a_i,b_i)` and it emits
+
+\[
+d_i=10^{-4}+\operatorname{softplus}(a_i),\qquad
+u_i=\operatorname{softplus}(b_i).
+\]
+
+Let `D=diag(d_1,...,d_M)` and `u=(u_1,...,u_M)^T`. It constructs on
+the unique-origin set
+
+\[
+\widehat\Sigma=D+uu^T.
+\]
+
+The second row equation is the literal definition of the Latin-letter
+covariance loading: in plain text, `u_i := softplus(b_i)`. There is no
+separately named `nu_i`, no square-root interpretation, and no further
+transform between this assignment and the vector `u` used in every covariance,
+Woodbury, loss, gradient, `q`, and `J` expression.
+
+The network cannot see represented evidence values, received roster count,
+unique-origin count, duplicate multiplicity, `t`, `k`, reward, action, future
+data, or evaluation statistics. It is trained only from labeled training-cell
+residuals `r=Z-mu*Y` using Gaussian residual negative log likelihood.
+
+At every action interval, CCIC first applies the exact known-`q_f` HMM
+transition for elapsed physical `k`, then adds `2*q_hat` only for new keys.
+`J_hat` is the current batch's Fisher-information increment and the prospective
+next-batch actor input; it is never summed across latent-state transitions as
+if it were posterior precision for a static state. Every comparator applies the
+same physical-time transition before its declared evidence update.
+
+For rank one, every agent obtains the same GLS result from five additive sums
+
+\[
+S_1=\sum d_i^{-1},\quad S_z=\sum z_i/d_i,\quad
+S_u=\sum u_i/d_i,\quad S_{uz}=\sum u_i z_i/d_i,\quad
+S_{uu}=\sum u_i^2/d_i,
+\]
+
+then computes
+
+\[
+\widehat q=\mu\left(S_z-\frac{S_uS_{uz}}{1+S_{uu}}\right),\qquad
+\widehat J=\mu^2\left(S_1-\frac{S_u^2}{1+S_{uu}}\right).
+\]
+
+No matrix or global classifier is transmitted. Each agent computes the row
+parameters and sums from the same received table. Cholesky/Woodbury operations
+must remain positive definite; invalid or nonfinite outputs fail closed.
+
+### 4.3 Deployable comparators
+
+1. **`ESS-SCALAR`.** Quotient lineage, fit one marginal variance and one
+   nonnegative equicorrelation per observed overlap code by the same residual
+   likelihood, and use
+   \[
+   \widehat q=
+   \frac{\mu\sum_{i=1}^{M}z_i}
+        {\widehat\nu[1+(M-1)\widehat\rho]},\qquad
+   \widehat J=
+   \frac{\mu^2M}
+        {\widehat\nu[1+(M-1)\widehat\rho]},
+   \]
+   so `n_eff=M/[1+(M-1)\widehat\rho]` is only a derived report. The Gaussian
+   likelihood uses
+   `Sigma_hat=nu_hat[(1-rho_hat)I+rho_hat*11^T]` on unique rows. For code `o`,
+   `nu_hat_o=1e-4+softplus(alpha_o)`. For `CORR` and `IND`,
+   `rho_hat_o=0.999*sigmoid(beta_o)`; `rho_DUP` is fixed to zero after lineage
+   quotienting. The three `alpha` and two `beta` values are exactly five
+   trainable scalars. This is the simplest
+   covariance-aware alternative and is exact for the homogeneous Stage-1
+   family.
+2. **`RI-STRONG-v4`.** Lineage quotienting occurs in the common prevalidator.
+   One fusion invocation receives the canonical actual view and/or aligned
+   public next-`SENSE` metadata view selected by the two mode Booleans. For each
+   enabled aligned row, compute once in float64
+
+   ```text
+   m_i = (o_i,s_i,log M,t/30,k/5)
+   a_i = SiLU(W_a m_i+b_a),                  W_a: 5 -> 3
+   c_i = SiLU(W_c a_i+b_c),                  W_c: 3 -> 16
+   alpha_i = mean(c_i[1],...,c_i[8])
+   beta_i  = mean(c_i[9],...,c_i[16])
+   r_J_i   = (alpha_i+beta_i)/2
+   r_ell_i = (alpha_i+gamma_z)*z_i+beta_i
+   h_J_i   = r_J_i+tanh(r_J_i)
+   h_ell_i = r_ell_i+tanh(r_ell_i).
+   ```
+
+   Only enabled expressions are evaluated. Ascending-order row means give
+   `g_J=mean_i h_J_i` and `g_ell=mean_i h_ell_i`; decode
+   `J_next_hat=1e-4+softplus(g_J)` and
+   `Delta ell_hat=8*sinh(g_ell)` with no clipping. `PROSPECTIVE_ONLY` evaluates
+   the metadata trunk, `r_J`, its residual, pool, and decode once and returns
+   exact zero observed increment. `OBSERVED_ONLY` evaluates the same metadata
+   trunk, the actual-`z` evidence expression, its residual, pool, and decode
+   once and returns exact zero prospective information. `BOTH` reuses the one
+   metadata evaluation for both outputs. `NEITHER` evaluates no learned row and
+   returns two exact zeros after the common four-operation dispatch.
+
+   The parameter count is exactly `18+64+1=83`: 18 for `5 -> 3`, 64 for
+   `3 -> 16`, and one for `gamma_z`. The two fixed width-eight means introduce
+   no parameters. Every one of the 82 metadata-network scalars has a directed
+   path to `J_next_hat`; every observed mode additionally activates
+   `gamma_z`. Thus active learned capacity is 82 in `PROSPECTIVE_ONLY`, 83 in
+   `BOTH` and `OBSERVED_ONLY`, and zero in `NEITHER`, versus CCIC's 82, 82, 82,
+   and zero. The prospective branch cannot receive represented `z`; the
+   evidence branch is a nonlinear metadata-conditioned affine function of
+   actual `z`, matching the conditional-linear form of the frozen Gaussian
+   evidence law while retaining a generic replication-safe set parameterization.
+
+   Both scalar residual paths and every width-eight basis contribution are
+   output-connected in training and execution. A second learned row evaluation,
+   an ignored output, dummy arithmetic, or work-ledger-only increment is
+   forbidden. RI-v4 receives the same packets and has the same update count,
+   batch size, optimizer, initialization family, and hyperparameter-search
+   budget. It is the primary information/capacity/exposure/work-matched
+   nonlinear baseline; a mean-only ablation or inertly padded comparator is
+   never the strongest comparator.
+3. **`INFO-FLEX-v2`.** Reuse one evaluation of the frozen metadata-only CCIC
+   covariance estimator for the aligned observed/template rows. Inside the same
+   fusion invocation, decode the observed posterior with
+
+   ```text
+   g_ell = MLP_4->8->1(ell_minus,q_hat,J_hat,k/5)
+   ell_posterior_hat = 8*sinh(g_ell),
+   ```
+
+   and prospective information with the causally separate branch
+
+   ```text
+   g_J = MLP_2->7->1(J_hat_template,k/5)+gamma_J*J_hat_template
+   J_next_hat = 1e-4+softplus(g_J).
+   ```
+
+   The observed branch has 49 parameters, the prospective branch 29, and the
+   direct skip one, totaling exactly 79 additional scalars. The prospective
+   branch cannot see `q_hat`, the observed posterior, or represented values.
+   Both branches are trained and used, and no second CCIC/head evaluation is
+   permitted. It replaces only the analytic Gaussian evidence-update/posterior
+   mapping conditional on the shared exact physical-time HMM transition; it
+   does not replace or test that transition. Because it has extra capacity, it
+   is an intentionally advantaged diagnostic. CCIC can make an analytic
+   Gaussian evidence-update/posterior specificity claim only if its frozen
+   primary advantage interval rule also passes against this arm.
+4. **`ORIGIN-COUNT`.** Quotient lineage, assume unique origins are conditionally
+   independent with unit variance, and use `q=mu*sum(z)` and `J=mu^2*M`. This is
+   the strongest simple provenance-count/dedup explanation.
+
+Every learned fusion arm uses exactly 1,500 Adam updates, batch size 64,
+learning rate `3e-3`, betas `(0.9,0.999)`, epsilon `1e-8`, no weight decay, and
+the same 9,216 labeled snapshots, 768 per training cell. There is one frozen
+configuration and no adaptive hyperparameter search. `RI-STRONG-v4` minimizes the
+equal-weight mean of squared errors for `asinh(Delta ell/8)` and
+`log(1+J_hat)/log(5.5)` against the corresponding exact GLS targets.
+`INFO-FLEX-v2` represents posterior log odds with the same invertible transform,
+`ell_hat=8*sinh(g_ell)`, and minimizes equal-weight squared errors for
+`asinh(ell_posterior/8)` and normalized positive `J`. There is no target
+clipping before either inverse. Nonfinite decoded values fail closed.
+
+For every training cell, the fusion snapshot bank uses the same 768
+`(j,m)` rows as the label grid, with row index `r=32*j+m`. Cell index `c` is
+lexicographic in ascending `N`, ascending `k`, then
+`DUP,CORR,IND`. Row parity fixes `Y=(-1)^(j+m)`; its unique
+residual vector is generated from the declared training-snapshot Philox stream
+and the cell's exact `rho`, then `Z=mu*Y+r`. For fusion targets, `ell_m` is the
+pre-action posterior; apply the exact `k`-tick HMM map to obtain `ell_minus`,
+then use `Delta ell=2q` and `ell_posterior=ell_minus+2q`. `CCIC` and
+`ESS-SCALAR` fit the
+per-snapshot unique-origin residual loss
+
+\[
+\tfrac12\{\log\det\widehat\Sigma+
+r^T\widehat\Sigma^{-1}r+M\log(2\pi)\}.
+\]
+
+`RI-STRONG-v4` and `INFO-FLEX-v2` use the targets above. Their two branch losses
+are evaluated inside one model invocation per snapshot: the evidence/posterior
+target comes from the actual batch and the prospective-information target from
+the aligned public metadata template. Training order is `CCIC`, `ESS-SCALAR`,
+`RI-STRONG-v4`, `INFO-FLEX-v2`, then the actor; the completed CCIC estimator is
+frozen before the INFO-FLEX-v2 head is trained. Each batch loss is the
+arithmetic mean in ascending batch-slot order.
+All parameters, forward/backward values, reductions, and Adam state are
+float64. They use numerical-reference or exact analytic targets only in
+training; no target or reference value is available at execution.
+
+At execution, the single `RI-STRONG-v4` invocation sets the post-batch belief
+to `ell_minus+Delta ell_hat` and returns `J_next_hat` from its aligned
+metadata-only branch. The single `INFO-FLEX-v2` invocation returns its decoded
+observed posterior and prospective information from its causally separate
+metadata-only branch. Neither arm performs a second row/head evaluation or
+feeds represented value into prospective information. CCIC and ESS use their
+analytic declared maps. Every arm applies the same exact physical-time HMM
+transition before its batch-specific map, and no arm receives a future realized
+value.
+
+### 4.4 Diagnostics, not superiority baselines
+
+- `NUMERICAL-REFERENCE`: the frozen fine HMM/GLS DP teacher/reference above;
+  it is not labeled an exact oracle.
+- `RECEIVED-COUNT`: treats every received row as independent, exposing count
+  inflation.
+- `MEAN-RI`: mean-pools represented values without unique-origin count,
+  exposing the replication collision.
+- `J-SHUFFLE`: define the literal ordered list
+  `C=((2,DUP),(2,CORR),(2,IND),(5,DUP),(5,CORR),(5,IND),` followed by
+  `(8,DUP),(8,CORR),(8,IND))`. At fixed `(seed,k,t,episode)`, class `C_j`
+  receives the CCIC `J_next` belonging to `C_((j+1) mod 9)`, for
+  `j=0,...,8`. This successor cyclic assignment breaks the
+  information/context assignment while preserving the
+  balanced evaluation-wide marginal `J` distribution. Shuffling within a cell
+  is forbidden because Stage-1 `J_next` is deterministic from metadata and such
+  a shuffle would be a no-op.
+- `J-CLAMP`: replaces CCIC `J_next` by its training-cell grand mean.
+
+Diagnostics cannot satisfy a superiority claim. If either `J-SHUFFLE` or
+`J-CLAMP` fails its frozen lower-bound degradation rule, the information-clock
+causal claim is unsupported on that axis.
+`NUMERICAL-REFERENCE`, `J-SHUFFLE`, and `J-CLAMP` receive complete paired rollouts.
+`RECEIVED-COUNT` and `MEAN-RI` are restricted to the collision/shadow tables and
+do not add environment trajectories.
+
+## 5. Replication-collision family falsifier
+
+Before outcome evaluation, construct two legal shadow packet tables with
+`N=5`, represented value `z=+0.75` in every row, the same tick, packet accounting, and
+successful receipt:
+
+- `COLLIDE-DUP`: all five rows carry one origin ID and `o=1`.
+- `COLLIDE-IND`: the five rows carry five distinct origin IDs and `o=0`.
+
+The first demands `M=1`, `q=0.5625`, and `J=0.5625`; the second demands
+`M=5`, `q=2.8125`, and `J=2.8125` under the analytic GLS law. This audit is a contract
+state, not a claim about the probability of exact equality under a continuous
+distribution. Treating equal values as copies fails the audit. Treating the
+same lineage five times as five likelihood factors also fails it.
+
+A second shadow family fixes `N=5` and traverses `rho={1,0.5,0}`. The required
+analytic ordering is `0.5625 < 0.9375 < 2.8125`. Passing only the endpoints
+supports binary deduplication, not covariance calibration.
+
+The temporal collision fixture first assimilates key `(7,5)` with value
+`+0.75`, then delivers the same key/value at the next decision; its required
+increment is exactly `(0,0)`. A paired fresh-evidence fixture instead delivers
+the equal value under key `(7,10)` with `o=0`; it must receive one new
+independent likelihood factor.
+
+## 6. Train/evaluate axes, tapes, and counts
+
+### 6.1 Factorial
+
+The training support is the full `2 x 2` cross
+
+```text
+N_train = {2,5}
+k_train = {1,3}
+rho_family = {DUP, CORR, IND}
+```
+
+After all weights and normalization constants are frozen, evaluate the full
+`3 x 3` grid
+
+```text
+N_eval = {2,5,8}
+k_eval = {1,3,5}
+```
+
+at all three evidence regimes. The held-out-`N` surface is `N=8,k in {1,3}`;
+the held-out-`k` surface is `k=5,N in {2,5}`; `(8,5)` is the jointly held-out
+corner. No cell-specific retraining, threshold, temperature, normalization,
+rank, or policy is permitted.
+
+### 6.2 Seeds and paired tapes
+
+There are exactly 32 training-seed blocks. Block `b=0,...,31` uses master seed
+`1009 + 7919*b`. Each block generates one actor and one instance of every
+learned fusion arm. Evaluation uses exactly 256 episodes per
+`(N,k,rho)` cell and arm, all paired within seed block.
+
+Randomness uses counter-addressed `Philox4x32-10`. Its 64-bit key is the
+seed represented as `(low32(seed),high32(seed))`; training and evaluation use
+the block's master seed, while inference uses the fixed seed `8675309`. Its four unsigned 32-bit
+counter words are `(phase,stream,item,address)`. One addressed call returns four
+words. A uniform is `(word+0.5)/2^32`; a standard normal is the inverse standard
+normal CDF of that uniform. Only lane zero is used unless a rule explicitly
+requests another lane. All ranges below are disjoint, so no logical draw is
+reused.
+
+The phase words are `1=TRAIN_SNAPSHOT`, `2=TRAIN_OPT`, `3=EVAL`, and
+`4=INFERENCE`. Within `TRAIN_SNAPSHOT`, streams are `11=common residual` and
+`12=idiosyncratic residual`; `item=768*c+r` for lexicographic training-cell
+index `c=0,...,11` and row
+`r=0,...,767`; common residual uses `address=physical_tick*16` and
+idiosyncratic residual uses `address=physical_tick*16+origin_index`. Within `EVAL`, streams
+are `1=Y0`, `11=latent flip`, `13=common residual`, `17=idiosyncratic residual`,
+and `19=public action uniform`; `item=episode in {0,...,255}` and `address=0`
+for `Y0`, `physical_tick` for scalar streams, or
+`physical_tick*16+origin_index` for idiosyncratic residuals. `Y0=+1` iff its
+uniform is at least `0.5`; each flip occurs iff its uniform is below `q_f`.
+
+No evaluation address contains `N`, `k`, `rho`, or arm. `N` selects a nested
+source prefix, `k` selects reachable physical ticks, `CORR` mixes common and
+idiosyncratic base normals, `IND` uses only idiosyncratic normals, and `DUP`
+reads origin zero and replicates it. Thus all axes transform one potential tape
+and arm order never changes a draw. Training and evaluation cannot collide
+because their phase words differ.
+
+Within `TRAIN_OPT`, `stream=29` initializes parameters and `stream=23` selects
+minibatches. Module IDs are `0=CCIC`, `1=ESS-SCALAR`, `2=RI-STRONG-v4`,
+`3=INFO-FLEX-v2`, and `4=actor`. Initialization uses
+`item=module_id,address=parameter_index` in row-major layer order. Every linear
+weight uses Glorot uniform
+`[-sqrt(6/(fan_in+fan_out)),+sqrt(6/(fan_in+fan_out))]`; every bias is exactly
+zero, as are all standalone ESS raw scalars. The RI-v4 parameter-index order is
+`W_a,b_a,W_c,b_c,gamma_z`; the INFO-FLEX-v2 order is
+observed `W_1,b_1,W_2,b_2`, prospective `W_1,b_1,W_2,b_2`, then `gamma_J`.
+Each gamma is a one-input/one-output linear weight initialized by the same
+Glorot rule with `fan_in=fan_out=1`, not a bias or fixed identity. Adam
+first/second moments are exactly zero. For minibatch slot `s`, use
+`item=module_id*1500+update,address=s` and index
+`floor(9216*U)` with replacement. Updates are numbered `0,...,1499`; slots are
+`0,...,63` for fusion modules and `0,...,127` for the actor. `INFERENCE` uses
+only stream `31` for the 100,000 bootstrap resamples, with
+`item=resample,address=slot`; it maps `floor(32*U)` to a common seed-block index
+for every contrast family. No training or evaluation draw uses that phase.
+
+There is no adaptive stopping. All 32 seed blocks are required. A missing or
+invalid block is reported and no efficacy conclusion is drawn; it is not
+replaced after scientific activity. Engineering repair before activity may
+preserve this exact science object, but any science-bearing change returns to
+this EM.
+
+Thirty-two seeds are a resource-bounded Stage-1 choice, not an assertion of
+prospective 80% power for the `0.02` smallest effect. The simultaneous interval
+itself is the precision gate: if its upper bound is not below `-0.02`, the
+population-advantage relation is unresolved unless the separately defined
+lower-bound rule excludes such a material advantage. No branch may translate a
+wide interval into equivalence or evidence of no effect.
+
+### 6.3 Exposure and work matching
+
+Within a cell and tape, all arms have identical potential tapes, packet schema,
+transition/receipt rules, legal support, public-uniform rule, per-decision call
+opportunity, horizon, and reward accounting. Realized histories and call counts
+may differ endogenously after actions or commit. `CCIC-R1` and `RI-STRONG-v4`
+differ by one trainable scalar (82 versus 83, intentionally advantaging RI-v4),
+receive exactly the same 1,500 updates and samples, and have no search variants.
+Their measured per-decision scalar-operation count and peak temporary state are
+reported by invocation mode, per call, and cumulatively per episode.
+
+`PREVALIDATE` is the identical sequential deterministic procedure before every
+online fusion, but it acts on each arm-local history; its realized online count
+and peak are reported per arm and contribute only to endogenous online totals.
+In the action-independent matched replay, the procedure runs once on each
+shared canonical tuple, produces immutable views and a mode certificate for
+both fusions, and reports one common `V_mode`. Only that shared replay
+`V_mode` is excluded from the differential fusion ratio. Fusion alignment cost
+is therefore exactly zero. The counted fusion boundary
+begins with two Boolean loads and two conditional selects (`D=4`) and ends after
+the enabled decoded scalar or exact-zero output is returned. The shared HMM
+transition, actor, communication, and environment remain outside because they
+are identical across these two arms.
+
+A common offline potential-state replay calls both fusions on the exact
+prevalidated multiset
+
+```text
+{(seed,N,k,rho,episode,t,mode):
+ seed=0..31, every 27 evaluation cells, episode=0..255,
+ mode in {BOTH,PROSPECTIVE_ONLY} at t in {0,k,2k,...,30-k},
+ mode in {OBSERVED_ONLY,NEITHER} at terminal decision tick t=30}.
+```
+
+For `BOTH`, the actual view is a fresh unassimilated potential `SENSE` table
+and the aligned next-`SENSE` template is present. For `PROSPECTIVE_ONLY`, the
+observed view is absent and the same legal template is present; the certificate
+also exercises initial-null, `RELAY`-null, and already-assimilated-copy inputs
+and requires that all map to this canonical mode. For `OBSERVED_ONLY`, the
+fresh actual table is present and the template is absent. For `NEITHER`, both
+views are absent; the certificate also exercises terminal null and assimilated
+copy paths. Every declared row is valid and canonical rows are ascending. `DUP`
+has `N` received rows but one unique key (`M=1`); `CORR/IND` have `N` distinct
+keys (`M=N`). No mode or cell is weighted by an arm's realized action.
+
+The frozen work grammar expands every computation rather than treating a
+library call as free. One work unit is each scalar float64 or integer add,
+subtract, multiply, divide, comparison, Boolean combination, conditional
+select, load/store into a live temporary, or elementary call in
+`{exp,log,sqrt,sinh,cosh,tanh,atanh,asinh}`. The symbolic count uses
+`sigmoid(x)=1/(1+exp(-x))`, `softplus(x)=log(1+exp(x))`, and
+`SiLU(x)=x*sigmoid(x)`, expanded into those elementary operations even if the
+implementation uses an algebraically equivalent stable kernel. Matrix/vector
+operations and reductions are expanded elementwise in ascending index order.
+Validity checks and each 32-bit field equality cost one unit, a pair-key
+conjunction costs one, every compared ledger entry is counted, and each
+quotient insertion costs one; immutable input
+and parameter storage, loop-index increments, counter-address generation, and
+final two-scalar output storage are reported separately and excluded. Peak
+temporary state is the maximum simultaneous live scalar float64, integer, and
+Boolean slots between those endpoints, excluding immutable inputs, model
+parameters, and final outputs. No hardware timing or fused-kernel convention
+can replace this grammar.
+
+Every tuple has weight one; no cell, episode, action, or observed outcome
+reweights the multiset. Let `M=1` in `DUP` and `M=N` otherwise. Excluding the
+common `V_mode` but including `D=4`, the literal mode formulas are
+
+```text
+W_CCIC_BOTH(M)             = 391M+17
+W_CCIC_PROSPECTIVE_ONLY(M) = 379M+12
+W_CCIC_OBSERVED_ONLY(M)    = 387M+11
+W_CCIC_NEITHER             = 4
+
+W_RI_v4_BOTH(M)             = 417M+16
+W_RI_v4_PROSPECTIVE_ONLY(M) = 408M+11
+W_RI_v4_OBSERVED_ONLY(M)    = 409M+9
+W_RI_v4_NEITHER             = 4.
+```
+
+CCIC's row network is exactly `144M` for `2 -> 16` linear work, `80M`
+for width-16 SiLU, `130M` for the `16 -> 2` head, `4M` for the `d` decode,
+and `3M` for the `u` decode, totaling `361M`. The fixed ascending GLS ledgers
+are `30M+13` for five-sum `BOTH`, `18M+8` for three-sum prospective-only `J`,
+and `26M+7` for four-sum observed-only `q`. Adding `D=4` gives the four CCIC
+formulas above.
+
+RI-v4's row ledger is exactly: `5 -> 3` linear `63M`, width-three SiLU
+`15M`, `3 -> 16` linear `208M`, width-16 SiLU `80M`, two fixed width-eight
+means `34M`, `r_J` `2M`, `r_ell` `3M`, one scalar residual `4M` per enabled
+output, one ascending row pool `2M+1` per enabled output, evidence decode `4`,
+and prospective-information decode `6`. This yields `417M+12`, `408M+7`,
+`409M+5`, and zero before the common four-operation dispatch. No second row
+evaluation, ignored output, or counter-only padding may replace any term.
+
+The exact cache-free liveness schedule excludes immutable canonical inputs,
+parameters, and final outputs and retains no hidden row across row boundaries.
+For CCIC, hidden `[16]`, two live head accumulators, one product scratch, and
+respectively five/three/four persistent GLS sums give fusion peaks
+`24/22/23` in `BOTH/PROSPECTIVE_ONLY/OBSERVED_ONLY`. For RI-v4, `a[3]` remains
+causally live while `c[16]` is materialized because every `c_j` depends on all
+three `a` values; one product scratch and respectively two/one/one persistent
+output sums give peaks `22/21/21`. `NEITHER` has one selector scratch in both
+arms. These live values are output-connected; retaining any other hidden row,
+cache, ignored output, or nonstreaming scratch fails the gate.
+
+Mode-active capacity is the number of distinct trainable scalars with a
+directed computational-graph path to at least one enabled returned learned
+scalar in that mode, independent of the realized parameter value, activation,
+or input value. CCIC has all 82 covariance-network scalars active in every
+positive mode. RI-v4 has its 82 metadata-network scalars active in
+`PROSPECTIVE_ONLY`, all 83 scalars active when the observed channel is enabled,
+and no active scalar in `NEITHER`.
+
+| mode | `M` | CCIC ops | RI-v4 ops | operation ratio | CCIC peak | RI-v4 peak | peak ratio | active capacity CCIC/RI |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `BOTH` | 1 | 408 | 433 | 1.061275 | 24 | 22 | 1.090909 | 82/83 |
+| `BOTH` | 2 | 799 | 850 | 1.063830 | 24 | 22 | 1.090909 | 82/83 |
+| `BOTH` | 5 | 1972 | 2101 | 1.065416 | 24 | 22 | 1.090909 | 82/83 |
+| `BOTH` | 8 | 3145 | 3352 | 1.065819 | 24 | 22 | 1.090909 | 82/83 |
+| `PROSPECTIVE_ONLY` | 1 | 391 | 419 | 1.071611 | 22 | 21 | 1.047619 | 82/82 |
+| `PROSPECTIVE_ONLY` | 2 | 770 | 827 | 1.074026 | 22 | 21 | 1.047619 | 82/82 |
+| `PROSPECTIVE_ONLY` | 5 | 1907 | 2051 | 1.075511 | 22 | 21 | 1.047619 | 82/82 |
+| `PROSPECTIVE_ONLY` | 8 | 3044 | 3275 | 1.075887 | 22 | 21 | 1.047619 | 82/82 |
+| `OBSERVED_ONLY` | 1 | 398 | 418 | 1.050251 | 23 | 21 | 1.095238 | 82/83 |
+| `OBSERVED_ONLY` | 2 | 785 | 827 | 1.053503 | 23 | 21 | 1.095238 | 82/83 |
+| `OBSERVED_ONLY` | 5 | 1946 | 2054 | 1.055498 | 23 | 21 | 1.095238 | 82/83 |
+| `OBSERVED_ONLY` | 8 | 3107 | 3281 | 1.056003 | 23 | 21 | 1.095238 | 82/83 |
+| `NEITHER` | 0 | 4 | 4 | 1.000000 | 1 | 1 | 1.000000 | 0/0 exact equality |
+
+For each positive pair, “ratio” means `max(CCIC,RI)/min(CCIC,RI)`; it is not
+directionally chosen after inspection. `NEITHER` capacity is checked by exact
+equality to zero and is never numerically divided.
+
+Before any learned update or stochastic evaluation, the certificate must
+recompute the formulas and expand all four modes across all 27 `(N,k,rho)`
+cells, require every positive operation, peak, and active-capacity ratio
+`<=1.10`, require exact zero learned capacity for both arms in `NEITHER`, and
+materialize aggregate `passed=true`. Showing that 108 mode-cells were merely
+encoded is not a pass. It must also require that adding the same nonnegative
+  common replay `V_mode` operations or sequential common replay peak cannot
+  worsen either ratio. During replay, paired operation and peak counts for every tuple and
+their medians are reported separately by mode and cell and must equal the
+prospective table. A zero positive-mode denominator, mismatch, hidden second
+evaluation, actual/future-`z` access by the prospective branch, ignored work,
+nonstreaming peak, or valid-input failure fails the gate. A global median is
+inadmissible. Online totals are endogenous timing outcomes, charged by loss
+and reported rather than forced equal.
+
+The exposure audit must also show that duplicate multiplicity, received `N`,
+future values, reward, held-out-cell moments, and actor outputs cannot enter the
+CCIC covariance network. Unique-set dimension affects only the declared sums.
+
+## 7. Observables and inference
+
+### 7.1 Endpoints
+
+For every seed and cell report:
+
+- mean `L_norm` and paired excess loss relative to `NUMERICAL-REFERENCE`;
+- posterior negative log score and Brier score at every decision and commit;
+- physical commit tick, sense count, relay count, and task error rate;
+- predicted `q`, `J`, unique count, received count, and analytic-GLS discrepancy;
+- actor plan probabilities, selected plan, packet accounting units, inference calls,
+  invocation mode, arm-local online `V_mode`, common matched-replay `V_mode`,
+  scalar-operation count, peak temporary state, and mode-active learned
+  capacity;
+- exact-copy collision outputs and `rho`-ordering outputs.
+
+Training seeds, not episodes or ticks, are the inferential replicates.
+
+### 7.2 Quantitative covariance-calibration panel
+
+Before task returns are read, evaluate CCIC on a fixed shadow panel. For each
+seed and each `(N,rho)` in `{2,5,8} x {DUP,CORR,IND}`, use the first potential
+`SENSE` batch ending at tick `k` from all 256 evaluation episodes and each
+`k in {1,3,5}`, for 768 batches. After lineage quotienting, compare against the
+true unique-origin covariance, `q`, and `J`. Define
+
+\[
+E_{diag}=\max_i|\widehat\Sigma_{ii}-1|,
+\quad
+E_{off}=\begin{cases}
+0,&M=1,\\
+\max_{i\ne j}|\widehat\Sigma_{ij}-\rho|,&M>1,
+\end{cases}
+\]
+
+\[
+E_J=|\widehat J/J-1|,
+\qquad
+E_q=\sqrt{\frac{1}{768J}\sum_{b=1}^{768}
+(\widehat q_b-q_b)^2}.
+\]
+
+A seed passes a cell only if all four errors are at most `0.10`. It passes the
+calibration panel only if all nine cells pass and its learned information is
+strictly ordered `J_DUP<J_CORR<J_IND` separately at every `N in {2,5,8}`.
+The overall gate passes only if at least 29 of 32 seeds pass and the
+equal-seed mean of each of the 36 named cell-error quantities is at most
+`0.10`. Every seed and pooled quantity is reported; no failing cell can be
+averaged across roster sizes or correlation classes. This is an empirical
+metadata-conditioned covariance/GLS calibration requirement over the tested
+family, not a claim for arbitrary covariance.
+
+### 7.3 Primary held-out contrasts
+
+For each comparator in
+`{RI-STRONG-v4, INFO-FLEX-v2, ORIGIN-COUNT}`, define paired seed-level
+differences `d = mean(L_norm_CCIC - L_norm_comparator)` on:
+
+1. held-out `N`: equal average over `N=8`, `k in {1,3}`, and all three regimes;
+2. held-out `k`: equal average over `k=5`, `N in {2,5}`, and all three regimes.
+
+This creates six prespecified primary contrasts. For any contrast vector
+`d_1,...,d_32`, use mean `dbar`, sample standard deviation
+`s=sqrt(sum_b(d_b-dbar)^2/31)`, and `SE=s/sqrt(32)`. Generate exactly 100,000
+common nonparametric seed-block resamples from inference seed `8675309`. For
+each family and draw, resample the complete contrast vector with the same 32
+indices, center by the original contrast mean, recompute its bootstrap sample
+standard deviation, and form the centered studentized statistic. The draw's
+max-`T` is the maximum absolute statistic over that family's contrasts. The
+critical value is sorted draw number 95,000 in ascending one-indexed order;
+the simultaneous two-sided interval is `dbar +/- critical*SE`.
+
+Except for the separately certified deterministic exact-copy family in
+Section 7.4, if an original stochastic contrast has zero observed seed
+variance, that contrast is `INFERENCE_UNRESOLVED` and cannot support
+superiority, equivalence, reverse superiority, deletion, or a no-material
+conclusion. It is not assigned a point interval and is omitted from the other
+contrasts' maximum. If a bootstrap
+standard error is zero for a nonzero-variance original contrast, that draw's
+absolute statistic is `+infinity`, conservatively making the family unresolved
+if it enters the 95th percentile.
+
+A primary contrast supports a population advantage of at least the `0.02`
+SESOI only when its simultaneous upper bound is strictly below `-0.02`.
+Equivalence requires the entire interval inside `[-0.005,+0.005]`; reverse
+superiority of the comparator requires the lower bound strictly above `+0.02`.
+Every other pattern is unresolved for those relations. An axis-level CCIC claim
+requires the primary advantage rule against all three comparators on that axis.
+The jointly held-out `(8,5)` corner uses a separately reported three-contrast
+family with the same convention and remains secondary; it cannot rescue either
+primary axis.
+
+For the result-blind covariance-specificity branch, retain the three regime
+components of each primary contrast. For each comparator and axis define two
+independent regime-difference contrasts
+
+```text
+s_1 = d_CORR-d_DUP,
+s_2 = d_IND-d_CORR.
+```
+
+The twelve contrasts (two regime differences times three comparators times two
+axes) form one simultaneous two-sided max-`T` family. "Uniform advantage across
+`DUP/CORR/IND`" is available only when, on a supported axis, all six relevant
+intervals lie wholly inside `[-0.005,+0.005]`. Otherwise full uniformity is
+unresolved; non-rejection and equality to a regime average are not uniformity.
+This family diagnoses attribution and cannot create primary support.
+
+`ESS-SCALAR` is a prespecified co-treatment/reduction test, not an arm that the
+rank-one parameterization must outperform in the homogeneous family where the
+scalar formula is exact. On each axis, report the paired CCIC-minus-ESS
+difference with a simultaneous two-sided interval and equivalence margin
+`[-0.005,+0.005]`. Equivalence, or ESS reverse superiority defined by a lower
+bound above `+0.02`, triggers the scalar-deletion
+branch; it does not erase support for the broader covariance-calibrated clock
+when the primary advantage rules pass against the non-covariance alternatives.
+The two ESS reduction contrasts form their own two-sided max-`T` family with
+the same 100,000 paired-seed bootstrap resamples.
+
+For each of `J-SHUFFLE` and `J-CLAMP`, define two paired diagnostic contrasts as
+`mean(L_norm_diagnostic-L_norm_CCIC)` on the same held-out-`N` and held-out-`k`
+surfaces. The four contrasts form one two-sided max-`T` family under the same
+construction. A diagnostic supports clock causality only when its simultaneous
+lower 95% bound is strictly above `+0.01`. Failure by either diagnostic
+on an otherwise positive axis removes the clock-causality claim for that axis.
+
+### 7.4 Deterministic exact-copy identity family
+
+For CCIC, compare `N=5` and `N=8` against `N=2` under `DUP`, separately for the
+two training `k` values. This is a deterministic structural family, not a
+stochastic-equivalence family. Before activity, a pathwise-identity certificate
+must prove that lineage quotienting maps all three rosters to the same single
+origin-zero table; the nested latent, origin-zero, and public-action tapes are
+the same; and every subsequent transition, ledger update, fusion call, actor
+input, action, and loss reduction has the same operation order. During the
+paired evaluation, all 32 seeds and 256 episodes must then have identical
+action trajectories and `L_norm`, and paired post-receipt `q`, `J`, posterior,
+and actor probabilities must agree within absolute `1e-10`.
+
+If both the prospective proof and every paired check pass, each of the four
+declared loss contrasts is the algebraic point `[0,0]` and the exact-copy gate
+passes without bootstrap. This is the sole carve-out from the stochastic
+zero-variance rule. If the proof or any paired check fails, the gate fails;
+there is no stochastic-bootstrap fallback and no efficacy claim. This is an
+information-value identity under matched receipt, not a transport claim.
+
+### 7.5 Mechanism gates
+
+All of the following are required before any efficacy claim:
+
+1. lineage collision audit passes both `COLLIDE-DUP` and `COLLIDE-IND`;
+2. learned `q` and `J` are invariant to literal duplicate multiplicity, and the
+   full quantitative covariance-calibration panel passes at every
+   `N in {2,5,8}`;
+3. the actor has reward-independent information sensitivity as defined below;
+4. `J-SHUFFLE` and `J-CLAMP` each have a simultaneous lower degradation bound
+   strictly above `+0.01` on the relevant held-out surface;
+5. paired packet, inference, search, the deterministic exact-copy certificate,
+   and every claim-relevant mode-cell operation, peak, and active-capacity
+   condition pass;
+6. the numerical reference itself separates the information regimes in expected loss. This
+   is a deterministic preactivity feasibility check: at the initial belief,
+   `N=5,k=3`, both the coarse and fine frozen DP constructions must give
+   expected
+   `L_norm_NUMERICAL_REFERENCE(DUP)-L_norm_NUMERICAL_REFERENCE(IND) >= 0.01`.
+   Each term is the corresponding construction's own value at
+   `(t=0,ell=0,N=5,k=3,rho)`, divided by `1.8`; no rollout estimate enters.
+   If either does not, no training or stochastic evaluation starts. This check
+   is not empirical evidence for a learned arm and is not called an exact
+   oracle result.
+
+Structural collision, support, packet, and forbidden-input checks must pass for
+every arm and all 32 seeds; a missing/nonfinite value is a failure. Learned
+calibration and actor-activity gates use their explicit 29-of-32 plus pooled
+rules. Work uses the literal replay multiset and cellwise gate. Stochastic
+inferential claims use only the simultaneous seed-level intervals; exact-copy
+identity uses only its deterministic certificate. No majority, pooled average, or task return
+may override a failed hard structural gate.
+
+## 8. Preactivity certificate and activity criterion
+
+### 8.1 Required certificate before scientific activity
+
+The owner-prepared implementation may not consume a training label, reward, or
+evaluation tape until a machine-readable certificate shows:
+
+- the DGP constants, axes, loss, seed formula, stream keys, counts, and stop
+  rule equal this revision;
+- the ideal-real statistical channel and one-real-symbol-plus-64-metadata-bit
+  accounting are used without a finite-word Gaussian likelihood claim;
+- the analytic `J` values above and the singular replication-map identity hold
+  under the stated support conditions;
+- the covariance network's Latin loading is literally
+  `u_i := softplus(b_i)` with no alternate symbol or transform;
+- the two collision tables produce their exact analytic GLS values;
+- all packet schemas, legal joint supports, actor calls, and packet accounting units
+  match across arms;
+- static feature tracing proves the CCIC covariance network cannot receive
+  forbidden multiplicity, future, reward, held-out, or actor-output inputs;
+- static and dynamic feature tracing proves every deployable arm makes exactly
+  one fusion invocation per decision; RI-v4 and INFO-FLEX-v2 return observed
+  update/posterior and prospective information from their frozen causally
+  separated branches; prospective-information branches cannot receive actual
+  or future represented values; aligned public row metadata is evaluated once;
+  terminal/no-new-evidence behavior and mismatch fail-closed rules equal this
+  revision;
+- the identical deterministic `PREVALIDATE` procedure owns all validity,
+  finite, quotient, ledger, order, cardinality, and alignment work; online it
+  runs once per arm-local agent/decision and reports arm-local endogenous
+  `V_mode`, while matched replay runs it once per shared tuple and feeds both
+  fusions; its canonical views, four-mode certificate, fail-closed outputs, and
+  exactly four counted fusion-dispatch operations equal this revision;
+- the coarse/fine numerical-reference stability check passes, and the frozen
+  state/snapshot grids, losses, targets, counter namespaces, initialization,
+  reductions, update order, and minibatch mapping equal this revision;
+- the exact-copy pathwise-identity proof, complete `J-SHUFFLE` successor
+  permutation, all canonical and edge-path mode inputs, expanded operation
+  grammar, literal mode formulas and liveness schedules, active-capacity paths,
+  and 108 mode-cell work/peak/capacity rows equal this revision and return
+  aggregate `passed=true`, including the ban on a second functional row/head
+  evaluation hidden inside one nominal call;
+- the fine numerical reference has at least 24 eligible information-sensitive base states among
+  the 96 base `(t,k,ell)` states formed by `t in {5,10,15,20}`,
+  `k in {1,3,5}`, and the eight signed values generated from
+  `abs(ell) in {0.25,0.75,1.25,1.75}`. Each base state is evaluated at all three
+  frozen `N=5` values `J_next in {0.5625,0.9375,2.8125}`, for exactly 288
+  actor evaluations;
+- all output roots are fresh and the projected bounds are no more than 180
+  wall minutes, 20 aggregate process-tree CPU-hours, 16 GiB aggregate
+  process-tree peak RSS, 8 simultaneous numerical CPU execution slots, and 2
+  GiB of temporary-plus-retained regular-file bytes under the fresh output
+  root, while retaining exactly 240,000 learned optimizer updates and fewer
+  than 60 million primitive environment ticks.
+
+The resource ledger is literal: eight arms receive full rollouts
+`{CCIC,ESS,RI-STRONG-v4,INFO-FLEX-v2,ORIGIN-COUNT,NUMERICAL-REFERENCE,J-SHUFFLE,J-CLAMP}`, for a
+worst-case `32*27*256*30*8 = 53,084,160` evaluation ticks. The shared snapshot
+bank adds at most `32*9,216 = 294,912` one-tick draws; 288 shadow evaluations
+per seed and offline work replay remain below the 60-million ceiling. Learned
+updates are exactly `32*(one actor + four learned fusion modules)*1,500 =
+240,000`. `RECEIVED-COUNT` and `MEAN-RI` have shadow-only evaluations.
+
+Parallel execution is permitted only at the complete seed-block boundary.
+There is one worker process for each block `b`; at most eight such processes
+are live concurrently, and each owns that block's models, optimizer state,
+snapshot bank, all arms/cells/episodes, calibration/activity/collision objects,
+and offline work replay from start through complete retention. Each worker has
+exactly one numerical thread, with `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS`,
+`MKL_NUM_THREADS`, and `NUMEXPR_NUM_THREADS` all equal to `1`; nested numerical
+pools are forbidden. Across the full process tree there are at most eight
+simultaneous numerical CPU execution slots, and the coordinator performs no
+numerical work while any seed worker is active. The coordinator may perform
+only scheduling, resource monitoring, interprocess activity-gate control, and
+atomic retention during that interval.
+
+Worker identity, PID, launch order, completion order, and concurrency count
+never enter an RNG address, array/reduction order, model input, endpoint, or
+estimator. Every worker preserves the frozen within-seed module, update,
+minibatch-slot, row, cell, arm, episode, and reduction orders. Paired arms and
+tapes remain inside that worker; every matched-replay tuple keeps its one shared
+`PREVALIDATE` object and both fusions in the same worker. Arms and individual
+replay tuples may not be split across workers. The deterministic numerical
+reference may be exposed as one read-only memory-mapped object or as bitwise-
+identical immutable worker copies; neither representation may alter values or
+iteration order.
+
+After the certificate passes, all workers wait at an interprocess barrier. The
+coordinator durably records and releases the first-update boundary before any
+worker may execute update zero. If that boundary is recorded but execution
+terminates before an update, the run is conservatively treated as having begun
+scientific activity. Each complete block is then durably retained atomically
+under its fixed `(b,seed)` address. The coordinator admits inference only when
+blocks `0,...,31` all exist, validates them, and consumes them in increasing
+`b` order. It may not accumulate all 32 full seed objects in memory. A partial
+or missing block, worker failure, address/order mismatch, or seed substitution
+yields no estimator.
+
+Resource accounting spans the coordinator and all descendants from immediately
+after fresh-root creation through durable terminal finalization. Aggregate
+CPU-hours are the sum of user-plus-kernel CPU seconds of the coordinator and
+every live or exited child divided by 3,600. Aggregate peak RSS is the maximum
+over time of the sum of resident bytes of the coordinator and all live
+descendants. Disk use is the sum of logical lengths of all regular files below
+the fresh output root, including staging and retained artifacts. Exceeding any
+wall, CPU-hour, RSS, CPU-slot, or disk bound fails closed and cannot yield
+efficacy inference. Scheduler, process, serialization, and monitoring overhead
+never counts as matched fusion work and cannot be used as padding; the literal
+modewise tuple work laws remain unchanged.
+
+These checks are feasibility/contract checks, not evidence that CCIC works.
+
+### 8.2 When scientific activity begins
+
+Question-relevant scientific activity begins at the earliest of:
+
+1. the first optimizer update using a generated training label, residual, or
+   numerical-reference target from this DGP;
+2. the first actor/fusion evaluation on a frozen stochastic train or evaluation
+   tape; or
+3. the first computation of a result-bearing endpoint from such data.
+
+Pure schema tests, hand-written collision constants, symbolic identities, and
+resource projection before those events are preactivity.
+
+### 8.3 Reward-independent activity gate
+
+After training but before reading task return, evaluate the 96 frozen base
+shadow states at the three analytic `N=5` values
+`J_next in {0.5625,0.9375,2.8125}` (288 actor evaluations per seed).
+The eligible set `E` is fixed once, before training, as the base states where
+the fine numerical-reference plan differs between endpoint `J_next` values;
+the preactivity rule requires `|E|>=24`. For each seed report the two
+numerators below over denominator `|E|`. Also pool over the exact denominator
+`32*|E|`; every seed has equal weight. At least 29 of 32 seeds and the pooled
+counts must both satisfy: at least 80% obey
+
+```text
+P(SENSE | J_IND) >= P(SENSE | J_CORR) >= P(SENSE | J_DUP)
+```
+
+within `1e-8`, and at least 25% have
+`P(SENSE | J_IND)-P(SENSE | J_DUP) >= 0.10`. The estimator must also satisfy
+the full quantitative calibration panel, including `J_DUP < J_CORR < J_IND`
+at every tested `N`. Failure means the proposed clock was not materially
+active/calibrated; returns cannot answer the causal question. Missing or
+nonfinite actor probabilities count as failures, never as removed denominators.
+
+## 9. Result-blind interpretation map
+
+1. **Both-axis specific support.** All mechanism/work/exact-copy gates pass;
+   CCIC meets the primary advantage interval rule against all three comparators
+   on both held-out axes. Support is limited to covariance-calibrated timing in
+   this toy across the tested `N` and `k` values.
+2. **One-axis support.** The full rule passes only for held-out `N` or only for
+   held-out `k`. Claim only that axis; do not say the algorithm spans both.
+3. **Covariance-aware but not analytic-evidence-update-specific.** CCIC passes every mechanism
+   and calibration gate and its primary advantage rule passes against
+   `RI-STRONG-v4` and `ORIGIN-COUNT` on an axis, but its interval versus
+   `INFO-FLEX-v2` lies inside `[-0.005,+0.005]` or has lower bound above `+0.02`.
+   Support the bounded covariance-aware timing family on that axis, not the
+   analytic Gaussian evidence-update/posterior mapping conditional on the
+   shared exact HMM transition. If the INFO-FLEX-v2 relation is neither
+   equivalence nor reverse superiority, that evidence-update specificity is
+   unresolved. B1 never identifies the HMM transition against INFO-FLEX-v2.
+4. **Scalar reduction supported.** The simultaneous CCIC-minus-ESS interval is
+   wholly inside `[-0.005,+0.005]`, or its lower bound is above `+0.02`, on the
+   relevant axis. Delete learned low-rank fusion for the homogeneous surface
+   and retain the scalar clock for the next discriminator. Any other failure to
+   show CCIC superiority is unresolved, not scalar sufficiency.
+5. **Flexible set encoder reduction supported.** The primary simultaneous
+   CCIC-minus-RI interval is equivalent or its lower bound exceeds `+0.02`, and
+   work matching passes. Structured covariance advantage is unsupported;
+   prefer the replication-safe set learner unless a heterogeneous second
+   surface is answer-changing. Otherwise `RI-STRONG-v4` merely not being beaten is
+   unresolved.
+6. **Counting reduction supported.** The primary simultaneous CCIC-minus-count
+   interval is equivalent or its lower bound exceeds `+0.02`. Retain provenance
+   quotienting and delete covariance calibration on that surface. If only
+   exact-copy invariance passes while `CORR` calibration/order fails, binary
+   deduplication alone is supported and covariance calibration is falsified;
+   counting is not declared sufficient without the interval rule.
+7. **Numerical reference separates, estimator fails.** Both frozen reference
+   constructions pass their preactivity gap and exhibit information-sensitive
+   plans, but learned CCIC fails calibration/activity. The estimator is the
+   failed object; the analytic information-clock principle remains unresolved.
+8. **Numerical reference fails.** Either frozen numerical construction fails
+   the preactivity expected-loss separation. Stage 1 lacks a verified
+   information-timing discriminator and stochastic work does not start. This is
+   not a theorem that the exact Bayes object has no separation.
+9. **Clock not causal.** Either `J-SHUFFLE` or `J-CLAMP` fails to have a
+   simultaneous lower degradation bound above `+0.01`, or return changes
+   without calibrated `J`. No covariance-information causal claim.
+10. **Exposure explanation.** A packet, capacity, inference-opportunity, or
+    work gate fails. No primary superiority interpretation is available;
+    attribute any raw difference to an unresolved exposure/work alternative,
+    not covariance.
+11. **Core falsification.** Literal duplicate multiplicity changes CCIC `q`,
+    `J`, action probabilities, or paired loss beyond the equivalence boundary,
+    or independent equal-valued origins are collapsed. Reject this revision's
+    information-value invariance.
+12. **Activity failure or incomplete seeds.** No efficacy interpretation,
+    regardless of observed return. Repair only through the proper scientific or
+    engineering owner route.
+13. **Held-out threshold not met.** If the simultaneous interval overlaps
+    `-0.02`, report the held-out relation as unresolved. Only a simultaneous
+    lower bound strictly above `-0.02` excludes a population advantage of at
+    least the `0.02` SESOI against that comparator; call this "no material CCIC
+    advantage at the frozen threshold," not equivalence or general no effect.
+    Trained-cell improvement alone is interpolation and never supports
+    variable-`N` or variable-`k` robustness.
+14. **Uniform advantage across `DUP/CORR/IND`.** On a supported axis, all six
+    pairwise specificity intervals lie inside `[-0.005,+0.005]`. Retain the primary
+    task relation but delete correlation-specific performance attribution and
+    investigate representation, optimization, or posterior temperature. If
+    the specificity family is not equivalent, uniformity is unresolved.
+
+## 10. Strongest alternative, deletion map, and claim ceiling
+
+### Strongest alternative
+
+Trusted lineage plus unique-origin count may contain all useful structure in
+this toy; alternatively, `RI-STRONG-v4` may learn the relevant conditional
+precision without an explicit covariance model. Both are scientifically
+stronger explanations than a mean-pooling-only comparison. `INFO-FLEX-v2` is the
+strongest explanation for any apparent benefit attributed specifically to the
+analytic Gaussian evidence-update/posterior mapping conditional on the shared
+exact HMM transition; it cannot explain or test the transition itself.
+
+### Deletion map
+
+- Delete low-rank covariance only if the frozen ESS equivalence or
+  reverse-superiority interval rule passes.
+- Delete covariance calibration only if the frozen ORIGIN-COUNT equivalence or
+  reverse-superiority rule passes, or quantitative intermediate-correlation
+  calibration/order is falsified.
+- Delete analytic Gaussian evidence-update/posterior specificity, conditional
+  on the shared exact HMM transition, only if the frozen INFO-FLEX-v2 equivalence
+  or reverse-superiority rule passes. INFO-FLEX-v2 never licenses a conclusion
+  about the physical-time HMM transition.
+- Delete structured-fusion specificity only if the frozen RI-STRONG-v4
+  equivalence or reverse-superiority rule passes with work matching.
+- Delete exact-copy claims if lineage is unavailable or the collision audit
+  fails.
+- Delete the `k` claim if only `N` passes, and vice versa.
+- Delete task-value claims if only posterior metrics improve.
+- Delete correlation-specific performance attribution when the exact
+  specificity-equivalence family passes.
+- Treat every relation that meets neither superiority, equivalence, nor
+  reverse-superiority criteria as unresolved; non-rejection never licenses a
+  deletion.
+- Delete general communication-redundancy language; the frozen claim is only
+  conditional information value after matched receipt.
+
+### Maximum claim
+
+Even the strongest positive outcome supports only this statement:
+
+> In the frozen cooperative Gaussian HMM toy, under trustworthy evidence
+> lineage, matched successful receipt and abstract packet accounting, and the tested
+> conditional covariance family, one frozen decentralized shared policy using
+> a learned covariance-calibrated information clock caused lower paired
+> error-delay-sensing loss than the named matched alternatives on the specific
+> held-out `N` and/or `k` surfaces that passed, while remaining identical under
+> literal packet replication.
+
+It does not support universal Bayes optimality of the learned estimator,
+semantic duplicate detection, arbitrary correlation or bias robustness,
+arbitrary roster/churn or duration generalization, real-UAV benefit, generic
+mean-field or information-bottleneck claims, or superiority of the analytic
+Gaussian evidence-update/posterior map unless the primary advantage interval
+also passes against `INFO-FLEX-v2`. It never identifies the HMM transition.
+
+## 11. Prospective second surface and UAV bridge
+
+No second-surface work is authorized. It becomes answer-changing only if, on
+the same held-out axis, B1 passes exact-copy, calibration, activity,
+clock-diagnostic, packet, and claim-relevant work gates; the primary
+CCIC-minus-`ORIGIN-COUNT` simultaneous upper bound is below `-0.02`; and the
+CCIC-minus-`ESS-SCALAR` simultaneous upper bound in its frozen two-contrast
+family is also below `-0.02`. These two literal bounds are the definition of
+"count and scalar do not fully explain" for activation. `RI-STRONG-v4`
+equivalence, reverse superiority, or an unresolved RI relation does not by
+itself block activation: under those conditions the heterogeneous surface is
+answer-changing precisely as a direct discriminator between explicit
+structured covariance and a generic replication-safe set encoder. Exposure,
+binary-dedup-only, count-sufficient, scalar-sufficient, or clock-noncausal
+branches do not activate it.
+
+The proposed second surface is a heterogeneous **relay-viewpoint switch**. A
+binary landing-zone or target-confirmation state is observed by UAV-like agents
+with class-dependent gains, a rank-two weather/illumination factor, a sparse
+pose-overlap residual, and exact relay copies carrying capture lineage. At
+physical tick 15, the roster switches `3 -> 7` or `7 -> 3`; externally supplied
+scan/loiter periods are `k in {2,5,8}`, with one held out. Packet receipt,
+delivery reliability, and topology are manipulated separately from
+information value. Agents use the same row network, finite-round additive
+consensus, and shared sense/relay/commit actor. The decisive comparison is
+clone-heavy entry versus genuinely new-viewpoint entry at the same roster size,
+then a within-episode switch between them.
+
+The UAV mapping is literal but prospective: origin ID is camera capture ID;
+overlap metadata comes from pose/time; common factors represent weather,
+illumination, or shared preprocessing; relay storms create exact copies; new
+viewpoints create partially independent evidence; `N` changes through launch,
+recovery, or link dropout; and `k` is an externally imposed scan, loiter, or
+tracking-skill duration. The intended benefit is avoiding false confidence from
+relay/co-located evidence while committing sooner when new viewpoints add real
+information. B1 cannot establish that bridge.
+
+## 12. Literature provenance and boundaries
+
+The following local sources motivate ingredients, not outcomes:
+
+- `B01` motivates identical parameter sharing for strongly homogeneous agents
+  but explicitly does not establish dynamic rosters or held-out-`N` transfer.
+- `P08` motivates mean-action summaries; its fixed-size experiments are not one
+  frozen learned policy tested across unseen `N`.
+- `P14` gives an assumption-bound `O(N^-1/2)` cooperative-MARL/mean-field
+  approximation for interchangeable agents; it does not prove CCIC or learned
+  held-out-`N` generalization.
+- `P12` treats dense heterogeneous graphon interactions with label-indexed
+  policies and does not supply this shared-policy result.
+- `B03` supplies the decentralized information-structure boundary: execution
+  information must arrive through local history/communication.
+- `P15` bounds marginal message entropy using covariance and studies an
+  information bottleneck; it does not estimate conditional novelty or reject
+  duplicates.
+- `P17` uses an episode-persistent latent; it is not variable skill period `k`.
+
+The corpus contains no direct variable-`k` theorem and no evidence for the
+replication-collision claim. Every CCIC conclusion therefore depends on the
+prospective experiment above, not on those papers.
+
+## 13. Owner routing
+
+The complete frozen revision is this file plus:
+
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_ROOT_TO_CM_HANDOFF.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_MATH_CLOSURE_REQUEST.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_GEMINI_INNOVATOR_REQUEST.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V5_CLOSED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V5_PREACTIVITY_WORK_INFEASIBILITY_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V6_CLOSED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V6_POSTCLOSURE_SINGLE_CALL_WORK_AMBIGUITY_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V7_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V8_CURRENT_AUTHORITY_DISPOSITION.md`
+
+Revisions 03 and 04 received `REVISION_REQUIRED`; exact revision 05 received
+natural same-conversation Pro `CLOSED` but then ended before activity when CM
+showed its work gate was deterministically infeasible in all 27 cells. Revision
+06 also received Pro `CLOSED`, but ended before activity when static construction
+showed its single-call exposure and two-context learned-evaluation requirements
+could not satisfy its one-evaluation work formula together. Neither fact is
+outcome evidence. Revision 07 then received `REVISION_REQUIRED` because only
+its `BOTH` path had frozen work and active-capacity matching; its necessarily
+prospective-only initial action and terminal paths were unclosed. Revision 08
+is the complete prospective successor, with four mode-specific objects and
+`RI-STRONG-v4`; both mutually blind provider requesters are
+`PREPARED_NOT_SENT`. It requires publication followed by same-conversation Pro
+`CLOSED` plus this EM's intake before any CM relay. Root retains portfolio and
+sequencing authority and CM retains implementation/runtime authority. No
+revision-08 provider turn, CM release, test, compute, production, or scientific
+activity has occurred.

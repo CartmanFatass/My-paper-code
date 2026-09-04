@@ -1,0 +1,77 @@
+{
+  "authority": "RESULT_BLIND_ENGINEERING_SANITY_ONLY|EXPLANATION_RECORDED_REQUIRES_CM_JUDGMENT|NO_SCIENCE_LEASE_OR_ACTIVITY_AUTHORITY",
+  "candidate_id": "SGSP-RG2Z-RSCF-SCIENCE-20260821-01|FROZEN_OLD_IDENTITY_AT_VALID_BLINDED_GENERATION154|EXPLICIT_CONTINUATION_LINEAGE_CANDIDATE",
+  "checks": [
+    "MANIFEST",
+    "CURRENT_FILES",
+    "CPP_ARTIFACT_BINDING",
+    "CPP_PRODUCTION_GUARD",
+    "FULL_RESET_STEP_CPP",
+    "NO_PYTHON_FALLBACK",
+    "BATCHED",
+    "PARALLEL_MEASURED",
+    "REFERENCE_SPEEDUP",
+    "FULL_CHAIN_PROFILED",
+    "FP32_HOT_PATH",
+    "NO_PROOF_GRADE_NUMERICS",
+    "COMPLETE_WALL_BOUND"
+  ],
+  "cm_judgment_required": true,
+  "evidence_manifest_sha256": "c52e3366a25a0cef9f60937ee4c5e9a1bf74d69f9e40129a6b2788d933bef77a",
+  "explainable_findings": [
+    {
+      "code": "CPU_PARALLELISM_ABSENT",
+      "message": "cpu_workers requires worker_count >= 2"
+    },
+    {
+      "code": "TOY_WALL_OVER_1800S",
+      "message": "complete toy plan projects above 1800 seconds; profile and repair before any long lease"
+    }
+  ],
+  "failed_checks": [],
+  "findings": [
+    {
+      "code": "CPU_PARALLELISM_ABSENT",
+      "message": "cpu_workers requires worker_count >= 2"
+    },
+    {
+      "code": "TOY_WALL_OVER_1800S",
+      "message": "complete toy plan projects above 1800 seconds; profile and repair before any long lease"
+    }
+  ],
+  "hard_failures": [],
+  "portfolio_science_route_required": false,
+  "responsible_explanation": {
+    "errors": [],
+    "path": "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/artifacts/continuation_lineage/sancheck_deviation_explanation.json",
+    "requested_cm_disposition": "ACCEPT_DEVIATION_FOR_CM_REVIEW",
+    "responsible_role": "hmasd-implementer",
+    "responsible_subagent_task": "/root/sgsp_identity_feasibility_cm/sgsp_lineage_implementer",
+    "scientific_semantics_changed": false,
+    "sha256": "3a0c87175a77bacad2bdf38e65529f9b3f43b46a3565339a97daa76b0ee77f89",
+    "status": "VALID"
+  },
+  "schema_version": 1,
+  "source_and_artifact_sha256": {
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/continuation_lineage.py": "dab652260cbcd28c2b088f7918d156d7d5ea4eb9bf82edd1eaa93b94f0dcff2b",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native/accepted/4a09f6e71eff77333e00aa30f0adcafc162485279a41a7fa79e9dec851d53962/sgsp_rscf_native_v4_0c14c2f7b3fa5840fe53.pyd": "4a09f6e71eff77333e00aa30f0adcafc162485279a41a7fa79e9dec851d53962",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native/rscf_r01_full_suffix_host.cpp": "014b7246c677f1bd12539a808c551fa7a80379e0312a7706b84020ee5e6dd5c0",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native_contract.py": "bd6ebc42e5cfd7ce9e11dcd504edc55b1fc808ff6b1832be10e770d1075dd353",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/native_loader.py": "e4b90b7ef76a8866be4ba593bccecf581622aed3bb3bec105b3f40192f964a77",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/policy.py": "512c7f0e4353698a0b04b39480d8bbd8d15aa2cbcc5dbcd5d5e48ca3aa2118ab",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_boundary.py": "a956c792dea59a5dbc4d3087ef7b6b9633d086aff4d34e7ab5ac85fb55770bb7",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_launcher.py": "923baefad1d9b32771bf9dfb25d8a827396d4b0de1bd78e7c2503ffe4ca61160",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/production_runner.py": "20f49ea21059b7f966e5ce0d7591c880bac6291e8893d83f4a1f16dc292a4ea1",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/runner.py": "6208674617e71102f11c0a4ab346857cbcbb048a4b7302acd678f661b85c3857",
+    "experiments/candidates/semantic_graphon_shared_policy_rscf_r01/training.py": "c0256da19db78a0c8ad82b79bc3903221cc9dfbb13e56472a686a138a42519c3"
+  },
+  "status": "EXPLANATION_RECORDED",
+  "thresholds": {
+    "maximum_parallel_overhead_fraction": 0.3,
+    "minimum_parallel_efficiency": 0.75,
+    "minimum_speedup_vs_reference": 1.25,
+    "minimum_toy_batch_width": 8,
+    "toy_complete_wall_seconds": 1800.0
+  },
+  "workload_class": "toy"
+}

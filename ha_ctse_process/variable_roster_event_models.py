@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 import numpy as np
@@ -11,6 +12,50 @@ import torch.nn.functional as F
 
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
 from ha_ctse_process import variable_roster_event_support
+
+
+@dataclass(frozen=True)
+class MSSRSelectiveSPFPartition:
+    """The production-owned selective state read for one MSSR decision.
+
+    ``S`` is the current slow/set context, ``P`` is the authenticated retained
+    partner history, and ``F`` is the owner's fast pre-recurrence control
+    state.  The object is deliberately typed rather than a tuple of labels:
+    :meth:`EventCommitmentPolicy.first_logits` consumes all three tensors when
+    constructing the production action logits.
+    """
+
+    slow_context: torch.Tensor
+    partner_history: torch.Tensor
+    fast_control: torch.Tensor
+    owners: tuple[str, str, str] = (
+        "unit.slow_context",
+        "unit.partner_interaction",
+        "unit.fast_control",
+    )
+
+    def validate(self, *, summary_dim: int, high_hidden_dim: int) -> None:
+        if self.owners != (
+            "unit.slow_context",
+            "unit.partner_interaction",
+            "unit.fast_control",
+        ):
+            raise ValueError("MSSR S/P/F partition owners are not registered")
+        if tuple(self.slow_context.shape) != (1, int(summary_dim)):
+            raise ValueError("MSSR S partition has the wrong shape")
+        if tuple(self.partner_history.shape) != (1, 1):
+            raise ValueError("MSSR P partition has the wrong shape")
+        if tuple(self.fast_control.shape) != (1, int(high_hidden_dim)):
+            raise ValueError("MSSR F partition has the wrong shape")
+        tensors = (
+            self.slow_context,
+            self.partner_history,
+            self.fast_control,
+        )
+        if len({(item.device, item.dtype) for item in tensors}) != 1:
+            raise ValueError("MSSR S/P/F partition tensors must share device/dtype")
+        if not all(bool(torch.all(torch.isfinite(item)).item()) for item in tensors):
+            raise ValueError("MSSR S/P/F partition contains a non-finite value")
 
 
 class EventCommitmentPolicy(nn.Module):
@@ -139,12 +184,38 @@ class EventCommitmentPolicy(nn.Module):
         hidden = self.decoder_hidden(torch.cat((new_hidden, selected_summary), dim=-1))
         return self.skill_head(hidden).squeeze(0), new_hidden.squeeze(0)
 
+    def selective_spf_partition(
+        self,
+        selected_summary: torch.Tensor,
+        pre_hidden: torch.Tensor,
+        partner_p: torch.Tensor | float,
+    ) -> MSSRSelectiveSPFPartition:
+        """Bind the registered S/P/F owners to the action-read tensors."""
+
+        slow = selected_summary.reshape(1, self.summary_dim)
+        fast = pre_hidden.reshape(1, self.high_hidden_dim)
+        partner = torch.as_tensor(
+            partner_p, dtype=fast.dtype, device=fast.device
+        ).reshape(1, 1)
+        partition = MSSRSelectiveSPFPartition(
+            slow_context=slow,
+            partner_history=partner,
+            fast_control=fast,
+        )
+        partition.validate(
+            summary_dim=self.summary_dim,
+            high_hidden_dim=self.high_hidden_dim,
+        )
+        return partition
+
     def first_logits(
         self,
         member_embedding: torch.Tensor,
         selected_summary: torch.Tensor,
         pre_hidden: torch.Tensor,
         partner_p: torch.Tensor | float | None = None,
+        *,
+        partition: MSSRSelectiveSPFPartition | None = None,
     ) -> tuple[torch.Tensor, torch.Tensor]:
         """Seq-12 support-native pre-recurrence action head.
 
@@ -163,17 +234,30 @@ class EventCommitmentPolicy(nn.Module):
         member_embedding = member_embedding.reshape(1, self.member_hidden_dim)
         selected_summary = selected_summary.reshape(1, self.summary_dim)
         pre_hidden = pre_hidden.reshape(1, self.high_hidden_dim)
-        if partner_p is None:
-            p_value = torch.zeros(
-                1, 1, dtype=pre_hidden.dtype, device=pre_hidden.device
+        if partition is not None and partner_p is not None:
+            raise ValueError("supply either MSSR partition or partner_p, not both")
+        if partition is None:
+            partition = self.selective_spf_partition(
+                selected_summary,
+                pre_hidden,
+                0.0 if partner_p is None else partner_p,
             )
-        else:
-            p_value = torch.as_tensor(
-                partner_p, dtype=pre_hidden.dtype, device=pre_hidden.device
-            ).reshape(1, 1)
-        # Action logits FIRST, from the pre-recurrence hidden and historical P.
+        partition.validate(
+            summary_dim=self.summary_dim,
+            high_hidden_dim=self.high_hidden_dim,
+        )
+        # Action logits FIRST.  The typed production partition is the sole
+        # action-head input, so S/P/F are consumed state rather than audit-only
+        # labels.  The member embedding is used only by the later recurrence.
         first_hidden = self.first_decoder(
-            torch.cat((pre_hidden, selected_summary, p_value), dim=-1)
+            torch.cat(
+                (
+                    partition.fast_control,
+                    partition.slow_context,
+                    partition.partner_history,
+                ),
+                dim=-1,
+            )
         )
         first = self.first_head(first_hidden)
         # Recurrent update AFTERWARDS; carried but not read by the action head.

@@ -1,15 +1,99 @@
-# EC4G-R1 execution-digest census: code-science index
+# EC4G-R1 execution-digest censuses: code-science index
 
 Candidate: `CAND-VAP-EC4G-R1@adversarial-revision-v7`
 
-Treatment: proof-sized deterministic `EC4G-EXECUTION-DIGEST-CENSUS-D1`
+Project treatment: zero-runtime deterministic
+`EC4G-A1-EXECUTION-DIGEST-CENSUS`
 
-Status of this evidence: synthetic implementation conformance only.
+Predecessor treatment: proof-sized deterministic synthetic conformance unit
+`EC4G-EXECUTION-DIGEST-CENSUS-D1/x0`.
+
+These are separate evidence surfaces. The synthetic x0 cell below is retained
+only as a legacy action-map/conformance unit and is never a row, support fact,
+mass declaration, or contract object for the registered A1 project census.
 
 This tracked index is self-contained so an external reviewer can inspect the
 exact pushed revision without access to temporary cross-role handoff files. It
 does not claim that an empirical project EC4G cell exists or that EC4G has
 operational value.
+
+## Registered A1 project-binding census
+
+Accepted registered result: `INCOMPLETE_CONTRACT`. The sole invocation was
+`ec4g_a1_d4248863_r1` at source commit
+`d4248863c55bdac294cb2b494e794ffa680f5222`. Its byte-exact public artifact is
+`docs/research/candidates/ec4g_r1/EC4G_A1_EXECUTION_DIGEST_CENSUS_RESULT.json`
+(SHA-256
+`db6e751ab0c1a5479f40c65f119be1672c2e64f1c78315ac0197c11e02cdd707`).
+It retains 14 absent project-object bindings plus the empty-registry and
+mass-normalization witnesses. Consequently `D_A`, every active-domain
+aggregate, and `vacuous_active_domain` are null rather than inferred from an
+empty or synthetic domain. The result records exactly one registered census
+run and zero environment, policy, learner, trainer, optimizer, return-evaluation,
+and model-fit activity. This is a technical acceptance of the incomplete
+contract boundary, not an execution-equivalence or value conclusion.
+
+The A1 source adds a pure validator/analyzer and a thin one-shot runner. The
+project census requires independently bound identities for the objective,
+ordered decision-cell and receipt registries, coherent seven-arm joint moments,
+costs, immutable decision parameters and both total maps, fallback programs,
+payload-preserving donor operation, canonical execution compiler, prospective
+support and deployed mass, and the source/order freeze manifest. Missing,
+unfrozen, non-total, or incoherent objects return `INCOMPLETE_CONTRACT` with an
+exact object witness. Missing objects are not converted into empty registries,
+zero mass, synthetic rows, or vacuous support.
+
+At the implementation revision, the project package contains no complete
+prospective binding for those objects. In particular, the synthetic x0
+`executor_measure=1` is not a prospective deployed-mass registry. Therefore
+`build_registered_project_binding` binds no fabricated rows and records every
+required object as absent. The unique registered invocation can naturally and
+technically return `INCOMPLETE_CONTRACT`; `D_A` remains undefined in that
+branch.
+
+For a complete future binding supplied without changing the frozen analyzer,
+the terminal precedence is:
+
+1. `INCOMPLETE_CONTRACT` for any global or row-bound contract failure;
+2. `SUPPORTED_POSITIVE_MASS_BEHAVIORAL_DISCORDANCE` when the exact active
+   discordance mass `D_A` is positive;
+3. `LABEL_ONLY_DIFFERENCE` when `D_A=0` and an active literal label differs;
+4. `EXECUTION_EQUIVALENT` otherwise, with `vacuous_active_domain=true` only
+   when a nonempty complete registry has no supported positive-mass row. An
+   empty decision-cell registry is an incomplete contract, and its deployed
+   mass total of zero separately fails the exact normalization check.
+
+Program equality compares every literal receipt/donor execution branch. The
+stored SHA-256 digest is audit evidence only: an equal digest never makes
+unequal complete programs equivalent. Unsupported and zero-mass differences
+remain full row witnesses but cannot promote the terminal branch.
+
+The one-shot runner requires the declared lowercase 40-hex source revision to
+equal checkout `HEAD`. It rejects an existing result path before binding or
+analyzing any project object, then uses exclusive `xb` creation as the atomic
+write guard. The
+result schema carries the frozen source revision and run identity, complete
+missing-object evidence, complete row programs for every admitted row, exact
+decimal masses/cross-tabs, and activity counters. It invokes no environment,
+policy, learner, trainer, optimizer, return evaluator, model fit, or RNG.
+
+### A1 traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Synthetic x0 cannot enter the project census; every absent project object is an explicit fail-closed witness | `experiments/candidates/ec4g_r1/execution_digest_census.py::build_registered_project_binding`; `::run_project_census` | `tests/experiments/candidates/ec4g_r1/test_execution_digest_census.py::test_registered_project_binding_fails_closed_with_exact_missing_objects` |
+| Exact terminal precedence, exact decimal `D_A`, label-only and vacuous handling, and audit-only unsupported differences | `::run_project_census`; `::_validate_project_binding` | `::test_project_terminal_precedence_and_exact_discordance_mass`; `::test_label_only_execution_equivalent_and_vacuous_branches` |
+| Complete execution programs, not supplied digests, determine equality | `CanonicalExecutionProgram.execution_equal` | `::test_complete_program_equality_overrides_a_supplied_digest_collision` |
+| Source revision is frozen and result creation is one-shot | `scripts/run_ec4g_a1_execution_digest_census.py::_require_source_revision`; `::_write_new` | `::test_runner_source_freeze_and_one_shot_output_are_fail_closed` |
+| Empty registries and zero total deployed mass fail closed; existing output aborts before analyzer activity | `::_validate_project_binding`; `scripts/run_ec4g_a1_execution_digest_census.py::main` | `::test_empty_declared_registry_is_incomplete_not_vacuously_equivalent`; `::test_runner_existing_output_preflight_never_constructs_or_analyzes` |
+
+A1 nonclaims: `INCOMPLETE_CONTRACT` establishes neither equivalence nor
+discordance. A positive discordance in a complete contract would establish
+only supported positive-mass program difference, not positive return, causal
+benefit, receipt-content value, executor invariance, transfer, promotion,
+retirement, B/C readiness, External Pro need, or formal-compute readiness.
+
+## Legacy synthetic conformance unit
 
 ## Frozen object
 
@@ -126,3 +210,145 @@ Narrow nonclaims: this proves synthetic contract and action-map conformance
 only. It does not establish an empirical EC4G cell, natural receipt
 availability, positive deployed executor mass, transport safety, causal effect,
 or operational value.
+
+## EC4G-A2 prospective contract-binding audit implementation
+
+### Registered A2 publication result
+
+The registered A2 audit is published at
+`docs/research/candidates/ec4g_r1/EC4G_A2_PROSPECTIVE_CONTRACT_BINDING_AUDIT_RESULT.json`
+for source commit `3ca57cb2969de0f9a307219d6844f29a1be52797`, auditing the
+published A1 artifact at commit `497d1429beaf648b0cb6672523d0e87370ad736e`.
+It records exactly one registered audit, a five-entry frozen inventory, and
+fourteen missing roles. The first failure is
+`objective_contract/MISSING_PREEXISTING_BINDING`; terminal branch is
+`A2_PARTIAL_OR_INCOHERENT_BINDING`. Environment, policy, learner, trainer,
+optimizer, return-evaluation, model-fit, and stochastic activity are each
+zero. This publication is a byte-materialized audit only: it makes no repair,
+inference, scientific disposition, or future-action claim.
+
+`EC4G-A2-PROSPECTIVE-CONTRACT-BINDING-AUDIT` is a read-only analyzer for the
+immutable publication snapshot
+`497d1429beaf648b0cb6672523d0e87370ad736e`. Before inspecting any scientific
+role it freezes exactly the five A1 result/source/runner/test/index paths plus
+only same-commit project paths directly named by this index, resolving those
+references once and deduplicating them. A declaration may point only into that
+already-frozen inventory; an outside locator is an incoherent witness and never
+extends the inventory.
+
+The analyzer inspects exactly fourteen roles in frozen order: objective
+contract; `K`; `R_k`; coherent seven-arm mean/covariance; cost object; decision
+parameters; `M_E`; `M_D`; fallback `F`; donor `J`; canonicalizer/equality
+`Gamma`; support `s`; deployed measure `m`; and freeze manifest. An admissible
+pre-existing declaration must bind immutable identity and same-snapshot
+provenance (including the exact frozen source-blob digest), totality, freeze ordinal, and one
+cross-object population/horizon/unit/snapshot/domain/ordering/serialization/
+freeze-order tuple. The freeze manifest must exactly bind the publication
+commit, frozen inventory path order, and fourteen-role order.
+
+The A1 result is retained only as negative evidence about its absent bindings;
+it is never promoted into an A2 role object. The synthetic `x0` conformance
+cell, narrative intent, analyzer defaults, and source-level class definitions
+are likewise ineligible. The analyzer performs no copy, amendment,
+normalization, inference, imputation, or repair and never adds a path after
+role inspection begins.
+
+Terminal precedence is frozen as:
+
+1. `A2_INVENTORY_FREEZE_INVALID`;
+2. `A2_POST_FREEZE_OBJECT_OR_REPAIR`;
+3. `A2_AMBIGUOUS_BINDING`;
+4. `A2_PARTIAL_OR_INCOHERENT_BINDING`;
+5. `A2_COMPLETE_PREEXISTING_BINDING`.
+
+Only branch 5 marks eligibility to *consider* a newly frozen census; the A2
+runner never performs that census. Every other branch parks the route pending a
+future complete prospective contract, without retry, rescan, or same-audit
+repair. The artifact carries the frozen inventory, a fourteen-row role witness
+table, first failure, all retained missing/ambiguous/incoherent witnesses,
+source/publication identities, commit-pinned inventory locators, one
+CPM-owned technical acceptance identifier, and exact activity counters.
+
+The one-shot runner is
+`scripts/run_ec4g_a2_prospective_contract_binding_audit.py`; it rejects an
+existing output before inventory freeze or analyzer construction and creates a
+new artifact with exclusive `xb` semantics. Environment transitions, policy,
+learner, trainer, optimizer, return evaluation, model-fit, and stochastic calls
+are all structurally fixed at zero. The registered A2 audit and result
+publication are not part of this implementation receipt and remain CPM-owned.
+
+### A2 traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Finite same-commit inventory is resolved once and frozen before roles | `experiments/candidates/ec4g_r1/prospective_contract_binding_audit.py::freeze_inventory` | `tests/experiments/candidates/ec4g_r1/test_prospective_contract_binding_audit.py::test_real_publication_inventory_freezes_exact_five_paths_before_role_inspection` |
+| Exact fourteen-role validation, A1/synthetic exclusion, and frozen precedence | `::audit_frozen_inventory`; `::_candidate_issues`; `::_cross_object_issues` | `::test_publication_snapshot_technical_smoke_is_partial_and_retains_fourteen_missing_witnesses`; `::test_ambiguous_binding_precedes_missing_and_retains_both_witness_sets`; `::test_complete_preexisting_binding_requires_all_fourteen_exact_coherent_objects` |
+| One-shot artifact and zero runtime/stochastic activity | `scripts/run_ec4g_a2_prospective_contract_binding_audit.py::main`; `::_write_new` | `::test_runner_existing_output_aborts_before_inventory_freeze`; `::test_runner_writes_one_canonical_registered_artifact`; `::test_all_runtime_and_stochastic_activity_is_exactly_zero` |
+
+## EC4G-A3 complete RER3 prospective binding audit source
+
+`EC4G-A3-RER3-COMPLETE-PROSPECTIVE-BINDING-AUDIT` is a zero-runtime,
+two-snapshot binding audit for
+`CAND-VAP-EC4G-R1@rer3-prospective-complete-v8`. The immutable C0 source is
+`docs/research/candidates/ec4g_r1/EC4G_RER3_COMPLETE_CONTRACT_V1.json` at
+commit `c0beef960f5f731f0c994ecd2298a1e889210c7b`, blob
+`6d37b33c933ee16f89186a507e67e1080b674ca0`, and SHA-256
+`0d0c9b6f24ae2bb96fc0a3f542c737557f1cd66be1edbdb72d809dfce9bb0183`.
+The deterministic C1 source is
+`docs/research/candidates/ec4g_r1/EC4G_RER3_BINDING_RECORD_V1.json`: exactly
+fourteen ordered rows, each binding the role/object ID, RFC6901 pointer, C0
+commit/path/blob/SHA, canonical subtree SHA, exact `common_literals` tuple and
+`total=true`. It contains no predicted C1 identity.
+
+The runner requires the externally supplied actual C1 checkout commit, rejects
+an existing output before snapshot or role inspection, freezes only the C0
+contract blob and C1 binding blob, and writes one canonical artifact with
+exclusive creation. The analyzer rejects invalid UTF-8, duplicate keys,
+nonfinite/bare noninteger numbers and noncanonical binding bytes. It applies
+the frozen precedence `A3_FREEZE_PAIR_INVALID`,
+`A3_POST_FREEZE_CHANGE_OR_IMPORT`, `A3_AMBIGUOUS_ROLE_BINDING`,
+`A3_PARTIAL_OR_SCIENTIFICALLY_INCOHERENT_CONTRACT`, then
+`A3_COMPLETE_PROSPECTIVE_CONTRACT_BINDING`.
+
+On the complete branch it inspects exactly fourteen roles and declares three
+cells, twenty-one cell-arms, and 243 finite outcome-support points. It checks
+the exact coherence tuple, dimensions, probabilities, diagonal PSD covariance,
+one-time costs, total state/receipt/fallback/donor/compiler/support definitions,
+positive configured mass and exact normalization. It only inspects the two map
+definitions and their predeclared predictions: map calls, program compilation,
+program comparison and `D_RER3` calculation are structurally fixed at zero,
+along with every runtime, learning, stochastic, retry, rescue and rescan count.
+
+### A3 source traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Exact deterministic fourteen-row C0-derived record, canonical subtree hashes, coherence and no C1 self-reference | `experiments/candidates/ec4g_r1/rer3_complete_prospective_binding_audit.py::derive_binding_record`; `::freeze_snapshot_pair` | `tests/experiments/candidates/ec4g_r1/test_rer3_complete_prospective_binding_audit.py::test_c0_worktree_materialization_normalizes_to_the_exact_read_only_blob_identity`; `::test_binding_record_is_exact_canonical_deterministic_fourteen_row_derivation`; `::test_c1_self_reference_invalidates_the_freeze_pair` |
+| Strict two-blob freeze, branch precedence and fourteen retained witnesses | `::freeze_snapshot_pair`; `::audit_frozen_pair` | `::test_strict_utf8_duplicate_nonfinite_and_canonical_mutations_invalidate_freeze`; `::test_post_freeze_change_precedes_all_role_inspection`; `::test_ambiguous_binding_precedes_missing_and_retains_both_witness_sets` |
+| Exact scientific structure is inspected without maps, compilation, comparison or D calculation | `::_scientific_issues`; `::_result` | `::test_complete_pair_inspects_exact_counts_and_never_executes_forbidden_activity`; `::test_scientific_literal_validators_reject_probability_psd_cost_support_and_mass_mutations` |
+| Actual external C1 identity, pre-inspection output guard and write-once canonical artifact | `scripts/run_ec4g_a3_rer3_complete_prospective_binding_audit.py::main`; `::_write_new` | `::test_runner_preflights_existing_output_before_source_or_snapshot_inspection`; `::test_runner_rejects_declared_c1_that_is_not_the_actual_checkout`; `::test_runner_writes_one_canonical_registered_result` |
+
+A complete A3 branch establishes only immutable complete prospective binding
+and eligibility for Explorer to consider a separately frozen future census.
+It is not an observed `0.25` result, map/program comparison, return/value
+claim, A2 repair, runtime readiness decision, technical acceptance, or census
+authorization. The registered audit, result publication, readiness receipt and
+CPM acceptance are deliberately not executed by this source package.
+
+### Registered A3 publication
+
+The retained `EC4G-A3-RER3-COMPLETE-PROSPECTIVE-BINDING-AUDIT` result is
+`EC4G_A3_RER3_COMPLETE_PROSPECTIVE_BINDING_AUDIT_RESULT.json`, sourced from
+C0 commit/blob `c0beef960f5f731f0c994ecd2298a1e889210c7b` /
+`6d37b33c933ee16f89186a507e67e1080b674ca0` (SHA-256
+`0d0c9b6f24ae2bb96fc0a3f542c737557f1cd66be1edbdb72d809dfce9bb0183`) and
+C1/source commit `ba9eae5cfc21c014f210e061561fe7b8f47f5592`. It records branch
+`A3_COMPLETE_PROSPECTIVE_CONTRACT_BINDING`, result id
+`ec4g-a3-3eaec2a3e9c6d26f990e0dbfd40e48309f21c2b38ba0964e2e7bff3ffe725b4c`,
+one audit/freeze, two blobs, fourteen roles, three cells, twenty-one arms and
+243 support points. Map/compile/compare/`D_RER3`, runtime, learning,
+stochastic, retry, rescue and rescan counts are all zero. The operator receipt
+is `COMPLETE`. A bounded preflight parent-directory recovery was observed:
+the first command failed before audit/output and the internal registered-audit
+count remains one. Eligibility is strict and audit-only: non-census,
+non-value, with no successor boundary.

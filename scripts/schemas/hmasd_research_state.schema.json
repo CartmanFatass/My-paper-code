@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_research_state",
+  "title": "HMASD current EM milestone snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "direction", "role", "revision", "updated_at", "milestone", "snapshot_state",
+    "completed_summary", "refs", "blockers", "reentry_condition", "next_action",
+    "claim_ceiling", "next_discriminator", "research_cycle"
+  ],
+  "properties": {
+    "direction": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,127}$"},
+    "role": {"const": "EM"},
+    "revision": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "milestone": {"enum": ["SCOPE_FROZEN", "SYNTHESIS_READY", "REVIEW_RESOLVED", "HANDOFF_READY"]},
+    "snapshot_state": {"enum": ["WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"]},
+    "completed_summary": {"type": "string", "minLength": 1},
+    "refs": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "blockers": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "reentry_condition": {"type": ["string", "null"]},
+    "next_action": {"type": "string", "minLength": 1},
+    "claim_ceiling": {"type": "string", "minLength": 1},
+    "next_discriminator": {"type": ["string", "null"]},
+    "research_cycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "opened_at", "reason", "pro_innovator", "pro_convergence"],
+      "properties": {
+        "label": {"$ref": "#/$defs/text"},
+        "opened_at": {"type": "string", "format": "date-time"},
+        "reason": {"$ref": "#/$defs/text"},
+        "pro_innovator": {"$ref": "#/$defs/pro_review"},
+        "pro_convergence": {"$ref": "#/$defs/pro_review"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "WAITING_REENTRY"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {"properties": {"reentry_condition": {"$ref": "#/$defs/text"}}},
+      "else": {"properties": {"reentry_condition": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "COMPLETE"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {"properties": {"milestone": {"const": "HANDOFF_READY"}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "snapshot_state": {"enum": ["TERMINAL_GAP", "COMPLETE"]}
+        },
+        "required": ["snapshot_state"]
+      },
+      "then": {
+        "properties": {
+          "research_cycle": {
+            "properties": {
+              "pro_innovator": {
+                "properties": {
+                  "status": {
+                    "not": {
+                      "enum": ["COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"]
+                    }
+                  }
+                }
+              },
+              "pro_convergence": {
+                "properties": {
+                  "status": {
+                    "not": {
+                      "enum": ["COMMITMENT_UNKNOWN", "SENT_WAITING", "SENT_UNREADABLE"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "pro_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "response", "replacement_used"],
+      "properties": {
+        "status": {
+          "enum": [
+            "PENDING",
+            "ZERO_SEND_FAILED",
+            "COMMITMENT_UNKNOWN",
+            "SENT_WAITING",
+            "COMPLETE",
+            "SENT_INPUT_MISMATCH",
+            "SENT_UNREADABLE",
+            "SENT_MODEL_MISMATCH",
+            "CONVERSATION_LOST",
+            "WAIVED"
+          ]
+        },
+        "response": {"type": ["string", "null"]},
+        "replacement_used": {"type": "boolean"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "COMPLETE"}}, "required": ["status"]},
+          "then": {"properties": {"response": {"$ref": "#/$defs/text"}}},
+          "else": {"properties": {"response": {"type": "null"}}}
+        }
+      ]
+    }
+  }
+}

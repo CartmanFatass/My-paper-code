@@ -24,8 +24,10 @@ from ha_ctse_process.standalone_metrics import (
 )
 from ha_ctse_process.checkpoint_io import (
     load_checkpoint,
+    load_training_checkpoint,
     prune_periodic_checkpoints,
     save_checkpoint,
+    save_training_checkpoint,
 )
 from ha_ctse_process.standalone_agent import (
     StandaloneProcessAgent,
@@ -58,6 +60,48 @@ def empty_r30_no_high_metrics() -> dict[str, float]:
 def _cuda_synchronize_callback(agent: StandaloneProcessAgent):
     device = torch.device(getattr(agent, "device", "cuda"))
     return lambda: torch.cuda.synchronize(device)
+
+
+def _strict_runner_state(
+    *,
+    num_envs: int,
+    observations,
+    states,
+    prev_state_info,
+    prev_reward_info,
+    last_eval_step: int,
+    proto_ratio_over05_count: int,
+    proto_ratio_consecutive_over05_count: int,
+    proto_ratio_kill_triggered_count: int,
+    team_disc_ratio_over05_count: int,
+    team_disc_ratio_consecutive_over05_count: int,
+    team_disc_ratio_kill_triggered_count: int,
+    combined_intrinsic_ratio_over05_count: int,
+    combined_intrinsic_ratio_consecutive_over05_count: int,
+    combined_intrinsic_ratio_kill_triggered_count: int,
+) -> dict:
+    return {
+        "runner_state_schema_version": 1,
+        "num_envs": int(num_envs),
+        "observations": [np.asarray(value).copy() for value in observations],
+        "states": [None if value is None else np.asarray(value).copy() for value in states],
+        "prev_state_info": [dict(value) for value in prev_state_info],
+        "prev_reward_info": [dict(value) for value in prev_reward_info],
+        "last_eval_step": int(last_eval_step),
+        "proto_ratio_over05_count": int(proto_ratio_over05_count),
+        "proto_ratio_consecutive_over05_count": int(proto_ratio_consecutive_over05_count),
+        "proto_ratio_kill_triggered_count": int(proto_ratio_kill_triggered_count),
+        "team_disc_ratio_over05_count": int(team_disc_ratio_over05_count),
+        "team_disc_ratio_consecutive_over05_count": int(team_disc_ratio_consecutive_over05_count),
+        "team_disc_ratio_kill_triggered_count": int(team_disc_ratio_kill_triggered_count),
+        "combined_intrinsic_ratio_over05_count": int(combined_intrinsic_ratio_over05_count),
+        "combined_intrinsic_ratio_consecutive_over05_count": int(
+            combined_intrinsic_ratio_consecutive_over05_count
+        ),
+        "combined_intrinsic_ratio_kill_triggered_count": int(
+            combined_intrinsic_ratio_kill_triggered_count
+        ),
+    }
 
 
 def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProcessAgent, int, int]:
@@ -96,6 +140,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             else None
         )
         agent = create_agent(config, args, env, num_envs=num_envs, state_dim=state_dim)
+        agent.initialize_standalone_rngs(int(args.seed))
         profiler = None
         profile_interval = int(getattr(args, "infrastructure_profile_interval", 0))
         if profile_interval > 0:
@@ -112,8 +157,22 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             )
         total_steps = 0
         update_idx = 0
+        resume_runner_state = None
         if args.resume_from:
-            total_steps, update_idx = load_checkpoint(args.resume_from, agent, load_optimizers=True)
+            total_steps, update_idx, resume_runner_state = load_training_checkpoint(
+                args.resume_from,
+                agent,
+                collector=collector,
+                args=args,
+                config=config,
+            )
+            observations = [np.asarray(value).copy() for value in resume_runner_state["observations"]]
+            states = [
+                None if value is None else np.asarray(value).copy()
+                for value in resume_runner_state["states"]
+            ]
+            prev_state_info = [dict(value) for value in resume_runner_state["prev_state_info"]]
+            prev_reward_info = [dict(value) for value in resume_runner_state["prev_reward_info"]]
             emit(
                 args,
                 "standalone_resume "
@@ -249,21 +308,94 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             f"save_interval={args.save_interval} checkpoint_keep_last={args.checkpoint_keep_last}"
         )
 
-        last_eval_step = int(total_steps)
-        proto_ratio_over05_count = 0
-        proto_ratio_consecutive_over05_count = 0
-        proto_ratio_kill_triggered_count = 0
+        last_eval_step = int(
+            resume_runner_state["last_eval_step"]
+            if resume_runner_state is not None
+            else total_steps
+        )
+        proto_ratio_over05_count = int(
+            resume_runner_state["proto_ratio_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        proto_ratio_consecutive_over05_count = int(
+            resume_runner_state["proto_ratio_consecutive_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        proto_ratio_kill_triggered_count = int(
+            resume_runner_state["proto_ratio_kill_triggered_count"]
+            if resume_runner_state is not None
+            else 0
+        )
         proto_ratio_guard_warmup_steps = int(getattr(config, "prototype_disc_warmup_steps", 0))
         reward_ratio_guard_mode = str(getattr(config, "reward_ratio_guard_mode", "kill")).lower()
         if reward_ratio_guard_mode not in {"kill", "warn"}:
             reward_ratio_guard_mode = "kill"
-        team_disc_ratio_over05_count = 0
-        team_disc_ratio_consecutive_over05_count = 0
-        team_disc_ratio_kill_triggered_count = 0
+        team_disc_ratio_over05_count = int(
+            resume_runner_state["team_disc_ratio_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        team_disc_ratio_consecutive_over05_count = int(
+            resume_runner_state["team_disc_ratio_consecutive_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        team_disc_ratio_kill_triggered_count = int(
+            resume_runner_state["team_disc_ratio_kill_triggered_count"]
+            if resume_runner_state is not None
+            else 0
+        )
         team_disc_ratio_guard_warmup_steps = int(getattr(config, "team_disc_warmup_steps", 0))
-        combined_intrinsic_ratio_over05_count = 0
-        combined_intrinsic_ratio_consecutive_over05_count = 0
-        combined_intrinsic_ratio_kill_triggered_count = 0
+        combined_intrinsic_ratio_over05_count = int(
+            resume_runner_state["combined_intrinsic_ratio_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        combined_intrinsic_ratio_consecutive_over05_count = int(
+            resume_runner_state["combined_intrinsic_ratio_consecutive_over05_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+        combined_intrinsic_ratio_kill_triggered_count = int(
+            resume_runner_state["combined_intrinsic_ratio_kill_triggered_count"]
+            if resume_runner_state is not None
+            else 0
+        )
+
+        def save_strict_training_frontier(path: Path) -> None:
+            save_training_checkpoint(
+                path,
+                agent,
+                args,
+                config,
+                total_steps,
+                update_idx,
+                collector=collector,
+                runner_state=_strict_runner_state(
+                    num_envs=num_envs,
+                    observations=observations,
+                    states=states,
+                    prev_state_info=prev_state_info,
+                    prev_reward_info=prev_reward_info,
+                    last_eval_step=last_eval_step,
+                    proto_ratio_over05_count=proto_ratio_over05_count,
+                    proto_ratio_consecutive_over05_count=proto_ratio_consecutive_over05_count,
+                    proto_ratio_kill_triggered_count=proto_ratio_kill_triggered_count,
+                    team_disc_ratio_over05_count=team_disc_ratio_over05_count,
+                    team_disc_ratio_consecutive_over05_count=team_disc_ratio_consecutive_over05_count,
+                    team_disc_ratio_kill_triggered_count=team_disc_ratio_kill_triggered_count,
+                    combined_intrinsic_ratio_over05_count=combined_intrinsic_ratio_over05_count,
+                    combined_intrinsic_ratio_consecutive_over05_count=(
+                        combined_intrinsic_ratio_consecutive_over05_count
+                    ),
+                    combined_intrinsic_ratio_kill_triggered_count=(
+                        combined_intrinsic_ratio_kill_triggered_count
+                    ),
+                ),
+            )
+
         while total_steps < int(args.total_timesteps):
             rollout = Rollout()
             episode_rewards = []
@@ -798,17 +930,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
 
             if profiler is not None:
                 profiler.start("checkpoint_eval")
-            if int(args.save_interval) > 0 and update_idx % int(args.save_interval) == 0:
-                save_checkpoint(
-                    Path(args.log_dir) / f"standalone_process_core_update_{update_idx}.pt",
-                    agent,
-                    args,
-                    config,
-                    total_steps,
-                    update_idx,
-                )
-                prune_periodic_checkpoints(args.log_dir, int(args.checkpoint_keep_last))
-
             if int(args.eval_interval) > 0 and total_steps - last_eval_step >= int(args.eval_interval):
                 eval_metrics = evaluate(
                     agent,
@@ -819,17 +940,22 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 )
                 log_eval_metrics(writer, total_steps, eval_metrics)
                 last_eval_step = int(total_steps)
+
+            # The periodic frontier includes completion of any evaluation due
+            # at this update.  Saving before this block would replay the same
+            # scheduled evaluation after a strict trajectory resume.
+            if int(args.save_interval) > 0 and update_idx % int(args.save_interval) == 0:
+                save_strict_training_frontier(
+                    Path(args.log_dir)
+                    / f"standalone_process_core_update_{update_idx}.pt"
+                )
+                prune_periodic_checkpoints(args.log_dir, int(args.checkpoint_keep_last))
             if profiler is not None:
                 profiler.stop()
                 profiler.finish_update(update=update_idx, total_steps=total_steps)
 
-        save_checkpoint(
-            Path(args.log_dir) / "standalone_process_core_final.pt",
-            agent,
-            args,
-            config,
-            total_steps,
-            update_idx,
+        save_strict_training_frontier(
+            Path(args.log_dir) / "standalone_process_core_final.pt"
         )
         standalone_manifest.export_run_manifest(
             args,

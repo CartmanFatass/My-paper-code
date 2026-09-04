@@ -1,0 +1,162 @@
+{
+  "accepted_full_host_cpp": true,
+  "component": "risp.g_init_reach.r01.full_host",
+  "direction_id": "renewal_indexed_score_plasticity",
+  "efficiency_review": {
+    "baseline": {
+      "backend": "python_reference",
+      "projected_complete_wall_hours": 35.708796456921846,
+      "worker_count": 1
+    },
+    "chain_coverage": [
+      "environment",
+      "loader",
+      "batch",
+      "forward_backward",
+      "rollout",
+      "evaluation",
+      "io",
+      "resume"
+    ],
+    "dominant_bottleneck": "exact episode-major differentiable replay required to preserve the frozen binary64 gradient, AdamW and checkpoint trajectory",
+    "lease_ready": true,
+    "optimized": {
+      "backend": "cpp",
+      "cpu_cores": 2,
+      "process_group_rss_limit_bytes": 1610612736,
+      "projected_complete_wall_hours": 20.48458851911231,
+      "worker_count": 2
+    },
+    "projected_complete_cpu_hours": 29.921666666666667,
+    "projected_complete_wall_seconds": 73744.51866880432,
+    "representative_workers": {
+      "evaluation_semantic_hashes": [
+        "5e3a32fd8cc79ff69e1b159763fe1bbc8ce4b21849bb58d4b27e269ed3283a12",
+        "d87ebf92fbdf8adf9aa25f7a77474f6ffdc3f45da1d40eec6429e481b61962a3",
+        "3479d4b2928a1264ce880e81e1252766525ad63efd8aa012fc2645e022035c11",
+        "348101931b4d459dbf18b6257a0b2014c6c80843cf25c0a6774a70881f306ca0"
+      ],
+      "exact_semantic_hashes": true,
+      "per_worker_peak_rss_bytes": 485580800,
+      "process_group_ram_bytes": 1203560448,
+      "schema": "RISP-G-INIT-REACH-TEST-REPRESENTATIVE-WORKERS-BENCHMARK-V1",
+      "training_semantic_hashes": [
+        "c9410106fab892047d1dde9e37e753d0a58374bf73b7b492ae9a3d097f24b6d4",
+        "9d31e6c112c10f82b890a6ef065b060a9a9bdad82a8c9d064eeb2b358e172397",
+        "5b66f2bb4cf1f64d640ce33239c4b5a59748547904f8dd9402c4c73901cba8aa",
+        "954f31216eeb6fb45c1e3b977e4eeb5b6c0a38a8aaaa74de18aa30dae6c9dada"
+      ],
+      "worker_count": 2
+    },
+    "rollback_canary": {
+      "malformed_input_rejected": true,
+      "native_fallback_to_python": false,
+      "uncommitted_batch_installed": false
+    },
+    "schema": "RISP-G-INIT-REACH-R01-MANDATORY-EFFICIENCY-REVIEW-V1",
+    "semantic_equivalence": {
+      "all_five_schedules": true,
+      "artifact_identity": true,
+      "atomic_resume": true,
+      "checkpoint_hash": true,
+      "evaluation_hash": true,
+      "gradient_and_adamw": true,
+      "raw_draw_and_event_order": true,
+      "worker_count_1_2_4_hashes_equal": true
+    },
+    "status": "COMPLETE"
+  },
+  "exact_object_revision": "RISP-G-INIT-REACH-R01-FULL-PANEL / RISP-G-INIT-REACH-SCIENCE-20260821-01",
+  "native_artifact": {
+    "abi_version": 1,
+    "artifact_path": "C:\\Users\\fires\\AppData\\Local\\Temp\\hmasd_risp_g_init_r01_native\\76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b\\g_init_r01_native_backend.dll",
+    "artifact_sha256": "3b20ba9e5a55c2cc0df9ad5582bb957155931856fc2e643422104ca8d56c7709",
+    "artifact_size": 139776,
+    "batch_widths": [
+      1,
+      8,
+      32
+    ],
+    "build_key": "76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b",
+    "full_reset_step_cpp": true,
+    "load_seconds": 0.0940176000003703,
+    "python_environment_state": false,
+    "python_fallback": false,
+    "python_interactive_call_loop": true,
+    "python_materialized_event_adapter": true,
+    "python_reset_step_transition": false,
+    "runtime_abi": {
+      "abi_version": 1,
+      "byteorder": "little",
+      "machine": "AMD64",
+      "pointer_bytes": 8,
+      "python_cache_tag": "cpython-310",
+      "python_implementation": "CPython",
+      "python_version": "3.10.20",
+      "struct_sizes": {
+        "extended_step_input": 288,
+        "reset_input": 160,
+        "step_input": 64,
+        "transition_output": 104
+      }
+    },
+    "schema": "RISP-G-INIT-REACH-R01-NATIVE-ARTIFACT-IDENTITY-V1",
+    "source_path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.cpp",
+    "source_sha256": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+    "toolchain": {
+      "compile_flags": [
+        "/nologo",
+        "/std:c++17",
+        "/O2",
+        "/EHsc",
+        "/LD",
+        "/fp:strict"
+      ],
+      "compiler_mtime_ns": 1784991808639768100,
+      "compiler_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+      "compiler_sha256": "88c8344236a27a6e727e0a8edc49aaa2690bdc7a9464b9d18cc7abe70a9f1c0d",
+      "compiler_size": 677736,
+      "compiler_version_output": "usage: cl [ option... ] filename... [ /link linkoption... ]\nMicrosoft (R) C/C++ Optimizing Compiler Version 19.44.35228 for x64\nCopyright (C) Microsoft Corporation.  All rights reserved."
+    }
+  },
+  "rollback_nodes": [
+    "reject_backend_binding",
+    "reject_lease_binding",
+    "reject_coordinate_certificate",
+    "discard_uncommitted_atomic_batch",
+    "resume_same_coordinate_from_committed_frontier"
+  ],
+  "schema": "RISP-G-INIT-REACH-R01-ACCEPTED-SHARED-FULL-HOST-CPP-BINDING-V1",
+  "shared_functional_acceptance": {
+    "backend": "cpp",
+    "batch_width": 32,
+    "component": "risp.g_init_reach.r01.full_host",
+    "full_reset_step_cpp": true,
+    "native": {
+      "artifact": "C:\\Users\\fires\\AppData\\Local\\Temp\\hmasd_risp_g_init_r01_native\\76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b\\g_init_r01_native_backend.dll",
+      "artifact_sha256": "3b20ba9e5a55c2cc0df9ad5582bb957155931856fc2e643422104ca8d56c7709",
+      "binding_kind": "ctypes_cdll",
+      "module": "CDLL"
+    },
+    "native_boundary": "complete_g_init_r01_cpp_host_with_batched_interactive_reset_raw_prefix_motion_ack_step_close_and_no_python_environment_fallback",
+    "python_fallback": false,
+    "schema": "HMASD_CPP_BATCHED_PRODUCTION_PREFLIGHT_V1"
+  },
+  "source_hashes": {
+    "C:\\Projects\\HMASD\\envs\\native\\production_backend.py": "086f107f045939dc465ac0e98abd15877ce9e76bb8b75435dc56b6dcea7e0571",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_coordinate_certificate.py": "0f01cba1efca1492fafe6a24bc252e480e07eef2fa12ad00f606eea0aefab8f4",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_experiment.py": "4b218d50e1ca73b51ba0cd2088c478fed935a46186d6539d4e6fdb56ba9e33b8",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.cpp": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.py": "8e246c7b7792a763db432ce6d7ada5dc37244695b756187f5c33449bea803503",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_resume.py": "e7a850ffde01bbd0d8576cf9730ba4e5a32a4afbf516ec76be4f67c02561fbad",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\run_g_init_r01_resume.py": "a336aa4bf96fe7066167fa1076aeaffe77db9170b8cb280357d97f770cc96bd5"
+  },
+  "test_hashes": {
+    "C:\\Projects\\HMASD\\tests\\experiments\\candidates\\renewal_indexed_score_plasticity\\test_g_init_r01_coordinate_certificate.py": "9a9d47d04d1714586437c6a2bc4aa1e37b7e228b5fee90c6e26ee29f487a3daa",
+    "C:\\Projects\\HMASD\\tests\\experiments\\candidates\\renewal_indexed_score_plasticity\\test_g_init_r01_experiment.py": "4ecd746018f03377963b5cfe8c2427ebe2b111a79540cd7c17bb67d7673dd3c1",
+    "C:\\Projects\\HMASD\\tests\\experiments\\candidates\\renewal_indexed_score_plasticity\\test_g_init_r01_native_backend.py": "bb8f035471b191a8f06c416e6aa56f4aec59f790dde3cdda2bdc9f4c5e7781cf",
+    "C:\\Projects\\HMASD\\tests\\experiments\\candidates\\renewal_indexed_score_plasticity\\test_g_init_r01_resume.py": "ba2626d652a1b797388aaff6d86f27fc8cffcb2a1566a79d380b578a532c5672",
+    "C:\\Projects\\HMASD\\tests\\production_backend_policy_test.py": "a9f82f64af5a6f7eeff2c66c16bd2efafbc19a09c1f946594d772981fb78bbb1"
+  }
+}

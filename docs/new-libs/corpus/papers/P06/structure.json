@@ -1,0 +1,87 @@
+{
+  "paper_id": "P06",
+  "pdf_pages": 30,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        1
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Related Work",
+      "level": 1,
+      "pdf_pages": [
+        2,
+        2
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Preliminaries",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "VI Perspective and Proposed Methods",
+      "level": 1,
+      "pdf_pages": [
+        5,
+        5
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Experiments",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Discussion",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        13
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendices: Background and Algorithms",
+      "level": 1,
+      "pdf_pages": [
+        14,
+        23
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "Appendices: Implementation and Additional Results",
+      "level": 1,
+      "pdf_pages": [
+        24,
+        30
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import math
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -23,6 +24,7 @@ from ha_ctse_process.continuous_roster_seed import (
     seed_block_from_bases,
 )
 from ha_ctse_process.anchored_residual_g19 import (
+    AnchoredRosterReplay,
     ENTROPY_COEFFICIENT,
     PPO_CLIP,
     VALUE_COEFFICIENT,
@@ -31,6 +33,7 @@ from ha_ctse_process.anchored_residual_g19 import (
     replay_errors,
     replay_trajectory,
 )
+from ha_ctse_process.continuous_roster_policy import ContinuousStepOutput
 from ha_ctse_process.direction_balanced_full_actor_g30 import (
     compose_direction_balanced_gradients,
 )
@@ -131,6 +134,273 @@ class G40NativeSixPolicy(g39.G39NativeSixPolicy):
         for parameter in self.credit_baselines.parameters():
             parameter.requires_grad_(True)
         self.phase = "credit_branch"
+
+
+@dataclass(frozen=True)
+class G40DirectedLearningPort:
+    """One authenticated source-to-receiver learning path in G40 replay.
+
+    Slots are supplied by the caller's authenticated agent-instance roster;
+    this seam never derives identity from an observation coordinate.  The
+    perturbation factor exists only for proof-sized path-locality checks.  A
+    production masked update uses the frozen value ``1.0``.
+    """
+
+    source_slot: int
+    receiver_slot: int
+    enabled: bool
+    perturbation: float = 1.0
+
+
+def _validate_directed_learning_ports(
+    member_capacity: int,
+    ports: Sequence[G40DirectedLearningPort],
+) -> tuple[G40DirectedLearningPort, ...]:
+    rows = tuple(ports)
+    pairs = tuple((int(row.source_slot), int(row.receiver_slot)) for row in rows)
+    if not rows or len(set(pairs)) != len(pairs):
+        raise ValueError("G40 directed learning ports must be nonempty and unique")
+    if any(
+        source == receiver
+        or source < 0
+        or receiver < 0
+        or source >= int(member_capacity)
+        or receiver >= int(member_capacity)
+        for source, receiver in pairs
+    ):
+        raise ValueError("G40 directed learning port left the authenticated roster")
+    if any(
+        not isinstance(row.enabled, bool)
+        or not math.isfinite(float(row.perturbation))
+        or float(row.perturbation) <= 0.0
+        for row in rows
+    ):
+        raise ValueError("G40 directed learning port state is invalid")
+    return rows
+
+
+def directed_learning_port_path_inventory(
+    member_capacity: int,
+    ports: Sequence[G40DirectedLearningPort],
+) -> dict[str, object]:
+    """Derive the declared pre-aggregation path inventory from port rows."""
+
+    rows = _validate_directed_learning_ports(member_capacity, ports)
+    pairs = tuple((row.source_slot, row.receiver_slot) for row in rows)
+    counts = {pair: pairs.count(pair) for pair in set(pairs)}
+    duplicate_count = sum(max(0, count - 1) for count in counts.values())
+    return {
+        "declared_pairs": tuple(sorted(pairs)),
+        "declared_path_count": len(pairs),
+        "undeclared_duplicate_path_count": duplicate_count,
+        "post_aggregate_cancellation_path_count": 0,
+        "structural_preaggregation_gate": True,
+    }
+
+
+def _directed_learning_forward_step(
+    model: G40NativeSixPolicy,
+    *,
+    observations: torch.Tensor,
+    active_mask: torch.Tensor,
+    critic_state: torch.Tensor,
+    hidden: torch.Tensor,
+    teacher_pre_tanh: torch.Tensor,
+    ports: Sequence[G40DirectedLearningPort],
+) -> ContinuousStepOutput:
+    """Replay one step with independently maskable pre-aggregation paths.
+
+    Every receiver sees the exact ordinary forward context.  The expression
+    ``x.detach() + scale * (x - x.detach())`` preserves that value while making
+    the source contribution's learning path explicit.  Scale zero therefore
+    removes only that path; it does not change policy communication or action
+    values.  Unregistered source/receiver paths remain ordinary scale one.
+    """
+
+    rows = _validate_directed_learning_ports(model.member_capacity, ports)
+    actor = model.policy
+    actor_observations = model.actor_input(observations, active_mask)
+    expected_observation_shape = (model.member_capacity, actor.observation_dim)
+    if (
+        actor_observations.ndim != 3
+        or actor_observations.shape[1:] != expected_observation_shape
+    ):
+        raise ValueError("G40 directed replay observation shape mismatch")
+    batch = actor_observations.shape[0]
+    if active_mask.shape != (batch, model.member_capacity) or active_mask.dtype != torch.bool:
+        raise ValueError("G40 directed replay active-mask mismatch")
+    if critic_state.shape != (batch, model.critic_state_dim):
+        raise ValueError("G40 directed replay critic-state mismatch")
+    if hidden.shape != (batch, model.member_capacity, model.hidden_dim):
+        raise ValueError("G40 directed replay hidden-state mismatch")
+    expected_action_shape = (batch, model.member_capacity, actor.action_dim)
+    if teacher_pre_tanh.shape != expected_action_shape:
+        raise ValueError("G40 directed replay teacher-latent mismatch")
+    if any(
+        not bool(active_mask[:, row.source_slot].all())
+        or not bool(active_mask[:, row.receiver_slot].all())
+        for row in rows
+    ):
+        raise ValueError("G40 directed learning port is not active for the sealed batch")
+
+    active_count = active_mask.sum(dim=1)
+    if bool((active_count <= 0).any()):
+        raise ValueError("G40 directed replay requires an active lifecycle")
+    dtype = actor_observations.dtype
+    device = actor_observations.device
+    batch_index = torch.arange(batch, device=device)
+    encoded = actor.member_encoder(actor_observations)
+    active_encoded = encoded * active_mask.to(dtype).unsqueeze(-1)
+    count_coordinate = torch.log1p(active_count.to(dtype)).unsqueeze(-1)
+
+    # Build each receiver aggregate from its source terms exactly once.  A
+    # disabled named port contributes only its immutable forward value; its
+    # learning path is absent before the sum.  There is no aggregate-then-
+    # cancel route and therefore no duplicate post-aggregation path.
+    by_pair = {(row.source_slot, row.receiver_slot): row for row in rows}
+    receiver_rows = []
+    for receiver_slot in range(model.member_capacity):
+        source_terms = []
+        for source_slot in range(model.member_capacity):
+            live = active_encoded[:, source_slot]
+            port = by_pair.get((source_slot, receiver_slot))
+            if port is None:
+                term = live
+            elif port.enabled:
+                scale = float(port.perturbation)
+                term = live.detach() + scale * (live - live.detach())
+            else:
+                term = live.detach()
+            source_terms.append(term)
+        receiver_rows.append(torch.stack(source_terms, dim=1).sum(dim=1))
+    receiver_sums = torch.stack(receiver_rows, dim=1)
+    count_rows = count_coordinate.unsqueeze(1).expand(
+        batch, model.member_capacity, 1
+    )
+    context_input = torch.cat((receiver_sums, count_rows), dim=-1)
+    contexts = actor.context_encoder(context_input)
+    slow_value = model.slow_critic(
+        torch.cat(
+            (critic_state, torch.log1p(active_count.to(dtype)).unsqueeze(-1)),
+            dim=-1,
+        )
+    ).squeeze(-1)
+
+    order = actor._routing_order(active_mask, actor_observations)
+    positions = torch.arange(model.member_capacity, device=device).unsqueeze(0)
+    valid_positions = positions < active_count.unsqueeze(1)
+    next_hidden = actor._initialize_next_hidden(hidden)
+    actions = torch.zeros(expected_action_shape, dtype=dtype, device=device)
+    pre_tanh_actions = torch.zeros_like(actions)
+    log_probs = torch.zeros((batch, model.member_capacity), dtype=dtype, device=device)
+    entropies = torch.zeros_like(log_probs)
+    prefix_rows = torch.zeros_like(actions)
+    prefix_sum = torch.zeros((batch, actor.action_dim), dtype=dtype, device=device)
+    denominator = active_count.to(dtype).unsqueeze(-1)
+    log_std = actor.log_std.clamp(-5.0, 2.0)
+    std = torch.exp(log_std)
+
+    for position in range(model.member_capacity):
+        valid = valid_positions[:, position]
+        if not bool(valid.any()):
+            break
+        owner = order[:, position]
+        prefix_fraction = prefix_sum / denominator
+        owner_encoded = encoded[batch_index, owner]
+        owner_hidden = actor._actor_hidden_input(
+            owner_encoded, next_hidden[batch_index, owner]
+        )
+        candidate = actor.actor_rnn(
+            torch.cat(
+                (owner_encoded, contexts[batch_index, owner], prefix_fraction),
+                dim=-1,
+            ),
+            owner_hidden,
+        )
+        mean = actor._action_mean_for_member(
+            candidate=candidate,
+            prefix_fraction=prefix_fraction,
+            observation=actor_observations[batch_index, owner],
+        )
+        distribution = torch.distributions.Normal(mean, std.expand_as(mean))
+        raw = teacher_pre_tanh[batch_index, owner]
+        chosen = torch.tanh(raw)
+        log_jacobian = 2.0 * (
+            math.log(2.0) - raw - torch.nn.functional.softplus(-2.0 * raw)
+        )
+        chosen_logp = (distribution.log_prob(raw) - log_jacobian).sum(dim=-1)
+        entropy = distribution.entropy().sum(dim=-1)
+        valid_batch = batch_index[valid]
+        valid_owner = owner[valid]
+        carried = actor._carried_hidden(candidate)
+        next_hidden[valid_batch, valid_owner] = carried[valid]
+        actions[valid_batch, valid_owner] = chosen[valid]
+        pre_tanh_actions[valid_batch, valid_owner] = raw[valid]
+        log_probs[valid_batch, valid_owner] = chosen_logp[valid]
+        entropies[valid_batch, valid_owner] = entropy[valid]
+        prefix_rows[:, position] = prefix_sum
+        prefix_sum = prefix_sum + torch.where(
+            valid.unsqueeze(-1), chosen, torch.zeros_like(chosen)
+        )
+
+    return ContinuousStepOutput(
+        actions=actions,
+        pre_tanh_actions=pre_tanh_actions,
+        token_log_probs=log_probs,
+        token_entropies=entropies,
+        value=slow_value,
+        next_hidden=next_hidden,
+        prefix_action_sums=prefix_rows,
+        likelihood_mask=active_mask,
+    )
+
+
+def replay_trajectory_with_directed_learning_ports(
+    model: G40NativeSixPolicy,
+    trajectory: AnchoredRosterTrajectory,
+    *,
+    device: torch.device,
+    ports: Sequence[G40DirectedLearningPort],
+) -> AnchoredRosterReplay:
+    """Replay through the learner-only directed port seam.
+
+    The all-enabled ordinary setting dispatches directly to G40's accepted
+    replay, making mask ``11`` exactly the ordinary update path.  Any disabled
+    port uses the value-identical derivative seam above.
+    """
+
+    rows = _validate_directed_learning_ports(model.member_capacity, ports)
+    if all(row.enabled and float(row.perturbation) == 1.0 for row in rows):
+        return replay_trajectory(model, trajectory, device=device)
+    hidden = trajectory.hidden_before[0].to(device)
+    outputs: list[ContinuousStepOutput] = []
+    terminal_hidden_reset_mask = trajectory.terminal_hidden_reset_mask
+    for time in range(trajectory.rewards.shape[0]):
+        if terminal_hidden_reset_mask is not None:
+            reset = terminal_hidden_reset_mask[time].to(device)
+            hidden = torch.where(reset.unsqueeze(-1), 0.0, hidden)
+        output = _directed_learning_forward_step(
+            model,
+            observations=trajectory.observations[time].to(device),
+            active_mask=trajectory.active_mask[time].to(device),
+            critic_state=trajectory.critic_states[time].to(device),
+            hidden=hidden,
+            teacher_pre_tanh=trajectory.pre_tanh_actions[time].to(device),
+            ports=rows,
+        )
+        outputs.append(output)
+        hidden = output.next_hidden
+    immediate, successor = model.baseline_values(trajectory.critic_states.to(device))
+    return AnchoredRosterReplay(
+        log_probs=torch.stack([row.token_log_probs for row in outputs]),
+        entropies=torch.stack([row.token_entropies for row in outputs]),
+        values=torch.stack([row.value for row in outputs]),
+        immediate_baselines=immediate,
+        successor_baselines=successor,
+        hidden_after=torch.stack([row.next_hidden for row in outputs]),
+        prefix_action_sums=torch.stack([row.prefix_action_sums for row in outputs]),
+        active_mask=trajectory.active_mask.to(device),
+    )
 
 
 def _new_shell(member_capacity: int) -> G40NativeSixPolicy:

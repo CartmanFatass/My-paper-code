@@ -34,6 +34,7 @@ CATASTROPHE_STREAK = 10
 EPISODE_IDS = tuple(range(128))
 BOOTSTRAP_RESAMPLES = 10_000
 BOOTSTRAP_SEED = 2_026_072_901
+BOOTSTRAP_INDEX_SHA256 = "a87a2d4ea8b4f4613b875ac33ff55174705f665a6ddd59e3e7f76779f30c2349"
 
 INVALID_BRANCH = "INVALID_UAV_G0_REALIZATION"
 INFEASIBLE_BRANCH = "INFEASIBLE_UAV_G0_SOURCE"
@@ -157,14 +158,29 @@ def compute_episode_metrics(
     )
 
 
-def make_bootstrap_index_plan() -> np.ndarray:
+def _initialize_bootstrap_index_plan() -> np.ndarray:
     indices = np.random.Generator(np.random.PCG64(BOOTSTRAP_SEED)).integers(
         0,
         len(EPISODE_IDS),
         size=(BOOTSTRAP_RESAMPLES, len(EPISODE_IDS)),
         dtype=np.int64,
     )
+    digest = hashlib.sha256(indices.tobytes(order="C")).hexdigest()
+    if digest != BOOTSTRAP_INDEX_SHA256:
+        raise G0RealizationError(
+            "bootstrap index plan fingerprint differs from frozen PCG64 contract"
+        )
+    indices.flags.writeable = False
     return indices
+
+
+_BOOTSTRAP_INDEX_PLAN = _initialize_bootstrap_index_plan()
+
+
+def make_bootstrap_index_plan() -> np.ndarray:
+    """Return the shared immutable frozen PCG64 bootstrap plan."""
+
+    return _BOOTSTRAP_INDEX_PLAN
 
 
 def bootstrap_bounds(

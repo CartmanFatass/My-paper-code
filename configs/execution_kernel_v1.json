@@ -1,0 +1,22 @@
+{
+  "schema": "hmasd.execution-kernel-binding.v1",
+  "mode": "external_cli",
+  "version": "v1",
+  "python": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+  "source": "C:/Users/fires/AppData/Local/HMASD/execution-kernel/versions/v1/execution_kernel.py",
+  "source_sha256": "A613A29A05E3F083348D27062F8A00565C9F20F731CC328B347DB252ED401617",
+  "ledger": "C:/Users/fires/AppData/Local/HMASD/execution-kernel/runtime/kernel.sqlite3",
+  "authority_commands": [
+    "intent-commit",
+    "execution-commit",
+    "result-promote"
+  ],
+  "read_only_commands": [
+    "health",
+    "operation-get"
+  ],
+  "codex_mcp": false,
+  "daemon": false,
+  "project_role_or_actor_authority": false,
+  "tests_are_runtime_authority": false
+}

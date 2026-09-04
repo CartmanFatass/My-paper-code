@@ -1,0 +1,24 @@
+{
+  "schema": "DISH_RBHR_R05_TEST_SYNTHETIC_BRANCH_VECTORS_V1",
+  "namespace": "TEST/DISH-RBHR-R05/GATE-AB/V1",
+  "science_object": "DISH-RBHR-SCIENCE-20260821-05",
+  "synthetic_only": true,
+  "question_relevant_output": false,
+  "cases": [
+    {"id":"B01","expected_branch":1,"expected_label":"INVALID_PROTOCOL_OR_MEASUREMENT","protocol_ok":false},
+    {"id":"B02","expected_branch":2,"expected_label":"LEARNED_ARM_COMPETENCE_NOT_ESTABLISHED","protocol_ok":true,"comp":false},
+    {"id":"B03","expected_branch":3,"expected_label":"NO_REGISTERED_RECOVERY_WITNESS","protocol_ok":true,"comp":true,"witness":false},
+    {"id":"B04","expected_branch":4,"expected_label":"NONANSWERABLE_OR_NO_HEADROOM","protocol_ok":true,"comp":true,"witness":true,"headroom":false},
+    {"id":"B05","expected_branch":5,"expected_label":"EFFECTIVE_HANDOVER_SUPPORT_NOT_ESTABLISHED","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":false},
+    {"id":"B06","expected_branch":6,"expected_label":"TARGET_SPECIFIC_HARM","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"harm":true},
+    {"id":"B07","expected_branch":7,"expected_label":"NONACTUATION_PACKAGE_EFFECT","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"package_effect":true},
+    {"id":"B08","expected_branch":8,"expected_label":"SHADOW_ACTUATION_NONPASS","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"fork_excluded":true,"nm_all":false},
+    {"id":"B09","expected_branch":9,"expected_label":"SIMPLE_RULE_SUFFICIENT[IMMEDIATE]","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"rulequal_i":true,"rulequal_h":true},
+    {"id":"B10","expected_branch":10,"expected_label":"SIMPLE_RULE_SUFFICIENT[HYSTERESIS]","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"rulequal_h":true},
+    {"id":"B11","expected_branch":11,"expected_label":"FLEXIBLE_CONTAINER_SUPERIOR","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"flexqual":true},
+    {"id":"B12","expected_branch":12,"expected_label":"FLEX_RELATIVE_NONRETENTION","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"flex_rel":true},
+    {"id":"B13","expected_branch":13,"expected_label":"STRUCTURED_ATOMIC_VALUE","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"core":true},
+    {"id":"B14","expected_branch":14,"expected_label":"TARGET_SPECIFIC_NO_MATERIAL","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true,"nm_all":true},
+    {"id":"B15","expected_branch":15,"expected_label":"UNRESOLVED","protocol_ok":true,"comp":true,"witness":true,"headroom":true,"precision":true,"support":true}
+  ]
+}

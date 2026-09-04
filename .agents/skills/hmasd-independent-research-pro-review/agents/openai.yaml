@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD Independent Pro Review"
-  short_description: "Explorer-owned independent-research Pro review"
-  default_prompt: "Use $hmasd-independent-research-pro-review only in the persistent Explorer task for one frozen direction or methodology review; keep formal HMASD operations untouched and archive before local FIFO reconciliation."
-policy:
-  allow_implicit_invocation: false

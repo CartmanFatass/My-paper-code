@@ -1,0 +1,76 @@
+{
+  "benchmark": "standalone_collector_transport_v2",
+  "configuration": {
+    "acceptance": {
+      "optimized_median_strictly_less_than_reference": true,
+      "semantic_rng_equivalence_required": true
+    },
+    "multiprocessing_start_method": "spawn",
+    "optimized_transport": "shared_memory_v1",
+    "pickle_protocol": 5,
+    "production_default_under_test": "shared_memory_v1",
+    "reference_transport": "pipe_pickle",
+    "sample_execution_order": "alternating_reference_first_by_sample_parity",
+    "shared_memory_bytes_per_worker": 1048576,
+    "statistic": "median_seconds_per_collector_step",
+    "synthetic_environment": {
+      "action_dim": 5,
+      "action_dtype": "int64",
+      "class": "BenchmarkCollectorEnv",
+      "n_uavs": 8,
+      "nested_process_outcome_included": true,
+      "obs_dim_contract": 128,
+      "observation_dtype": "float32",
+      "state_dim_contract": 256,
+      "state_dtype": "float32",
+      "terminated": false,
+      "truncated": false
+    },
+    "timing_clock": "time.perf_counter",
+    "warmup_steps": 5
+  },
+  "configuration_workload_sha256": "f1c68d6d74d3e4082f782aa6f38faa40eee48a75eb6aeb9dcb84be1184774d9c",
+  "machine": {
+    "numpy": "1.26.3",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "python": "3.10.20",
+    "python_executable": "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"
+  },
+  "pipe_pickle_median_seconds": 0.0003515730000071926,
+  "production_default_under_test": "shared_memory_v1",
+  "semantic_rng_equivalence": true,
+  "shared_memory_positive_median": true,
+  "shared_memory_speedup": 1.0329824664556608,
+  "shared_memory_v1_median_seconds": 0.00034034750000500936,
+  "source_fingerprint": {
+    "aggregate_sha256": "67ceea52410df10519abf992d829bbe402f61d197327b5c4fb2faa8afe770603",
+    "algorithm": "sha256",
+    "files": {
+      "ha_ctse_process/collectors.py": "3704ecd19e6849f3cd81ed338d9021d049abe97209c52f00fd0a90d5683a912c",
+      "tools/benchmarks/benchmark_collectors.py": "6df651029e117cf86b37dc323a4cb165cc10a3573da555f4762972e99b80492f"
+    },
+    "production_default_declaration": {
+      "sha256": "e6ad3b7c546700f7b205c139f25a23c2d1e98554a5e88cb3ef0f311039a2508b",
+      "symbol": "ha_ctse_process.collectors.DEFAULT_SUBPROC_TRANSPORT",
+      "value": "shared_memory_v1"
+    }
+  },
+  "workload": {
+    "action_shape_per_env": [
+      8
+    ],
+    "iterations_per_sample": 200,
+    "measured_collector_steps_per_transport": 6200,
+    "num_envs": 4,
+    "observation_shape_per_env": [
+      8,
+      64
+    ],
+    "repeats": 31,
+    "seed": 20260815,
+    "state_shape_per_env": [
+      128
+    ]
+  }
+}

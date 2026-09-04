@@ -24,6 +24,19 @@ from hmasd.logging import init_multiproc_logging, get_logger, shutdown_logging, 
 # 初始化主日志器（如果尚未初始化）
 main_logger = get_logger("HMASD-Main")
 
+
+def bind_runtime_seed(config, seed):
+    """Bind the CLI seed to every agent-owned deterministic RNG stream."""
+
+    if isinstance(seed, (bool, np.bool_)) or not isinstance(seed, (int, np.integer)):
+        raise ValueError("runtime seed must be an integer")
+    value = int(seed)
+    if value < 0:
+        raise ValueError("runtime seed must be non-negative")
+    config.runtime_seed = value
+    config.seed = value
+    return value
+
 def normalize_scenario(scenario):
     """Normalize legacy numeric scenario ids to semantic scenario names."""
     scenario_key = str(scenario).strip().lower()
@@ -4307,12 +4320,14 @@ def train(vec_env, eval_vec_env, config, args, device, trial=None, eval_env_fns=
     main_logger.info(f"开始训练HMASD (多进程版本，使用 {num_envs} 个并行环境)...")
     main_logger.info(f"配置已预先初始化: state_dim={config.state_dim}, obs_dim={config.obs_dim}, n_agents={config.n_agents}")
 
-    # 设置随机种子以保证可复现性
+    # 设置随机种子以保证可复现性。先显式绑定到 config，确保 agent
+    # 自有的命名 Generator 与环境/全局 RNG 使用同一个 CLI 根 seed。
     import random
-    torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
-    random.seed(args.seed)
-    main_logger.info(f"已为torch, numpy, random设置随机种子: {args.seed}")
+    runtime_seed = bind_runtime_seed(config, args.seed)
+    torch.manual_seed(runtime_seed)
+    np.random.seed(runtime_seed)
+    random.seed(runtime_seed)
+    main_logger.info(f"已为torch, numpy, random设置随机种子: {runtime_seed}")
 
     # 使用统一的 algorithm/scenario-prefix/settings 结构创建日志目录。
     log_dir = getattr(args, "run_log_dir", None) or build_structured_log_dir(args, config, mode="train")
@@ -7089,6 +7104,7 @@ def main():
     # 创建环境构造函数列表 (使用修改后的 make_env)
     # 确保基础种子与命令行参数一致
     base_seed = args.seed
+    bind_runtime_seed(config, base_seed)
     main_logger.info(f"基础种子: {base_seed}")
 
     train_env_fns = [make_env(

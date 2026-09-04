@@ -1,0 +1,686 @@
+{
+  "all_required_structural_fixtures_passed": true,
+  "anomalies": [],
+  "certificate_result": "PASS",
+  "checks": {
+    "containment_and_action_reachability": {
+      "analytic_full_class_translation": [
+        "W_G=W_R+M_RISP-M_SIGN_RNN",
+        "W_R=W_G+M_SIGN_RNN-M_RISP"
+      ],
+      "containment_fixtures": [
+        {
+          "candidate_preprojection": [
+            0.06000000238418579,
+            -0.08000000566244125
+          ],
+          "id": "C1",
+          "packet_coordinates": 13,
+          "reference_postprojection": [
+            "3/50",
+            "-2/25"
+          ],
+          "reference_preprojection": [
+            "3/50",
+            "-2/25"
+          ],
+          "state": [
+            0.06000000238418579,
+            -0.08000000566244125
+          ]
+        },
+        {
+          "candidate_preprojection": [
+            3.0899999141693115,
+            0.0
+          ],
+          "id": "C2",
+          "packet_coordinates": 13,
+          "reference_postprojection": [
+            "3",
+            "0"
+          ],
+          "reference_preprojection": [
+            "309/100",
+            "0"
+          ],
+          "state": [
+            3.0,
+            0.0
+          ]
+        },
+        {
+          "candidate_preprojection": [
+            0.23000000417232513,
+            -0.14000000059604645
+          ],
+          "id": "C3",
+          "packet_coordinates": 13,
+          "reference_postprojection": [
+            "23/100",
+            "-7/50"
+          ],
+          "reference_preprojection": [
+            "23/100",
+            "-7/50"
+          ],
+          "state": [
+            0.23000000417232513,
+            -0.14000000059604645
+          ]
+        }
+      ],
+      "mask_nonzeros": {
+        "RISP": [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "SIGN_RNN": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            10
+          ]
+        ]
+      },
+      "packet_coordinates": [
+        "x0",
+        "x1",
+        "LEFT",
+        "HOLD",
+        "RIGHT",
+        "sign",
+        "e0",
+        "e1",
+        "sign_e0",
+        "sign_e1",
+        "sign_norm_e",
+        "k_over_12",
+        "tau_over_T"
+      ],
+      "reachability": {
+        "candidate_path": "binary32 tanh(2^-20) -> literal V -> literal transition state -> literal U -> raw logits -> independent candidate rational head",
+        "candidate_raw_logits": [
+          0.5,
+          0.0,
+          -0.5
+        ],
+        "integer_masses": [
+          2440,
+          2197,
+          1972
+        ],
+        "no_update_masses": [
+          1,
+          1,
+          1
+        ],
+        "raw_logits": [
+          "1/2",
+          "0",
+          "-1/2"
+        ],
+        "reference_raw_logits": [
+          "1/2",
+          "0",
+          "-1/2"
+        ],
+        "tv": "237/6609",
+        "tv_gt_0.03": true,
+        "updated_state": [
+          "1/8",
+          "0"
+        ]
+      }
+    },
+    "literal_exactcat": {
+      "category_rule": "first_strict_cumulative_mass_greater_than_J",
+      "event_local_retry_isolation": true,
+      "literal_fixture_count": 3,
+      "multiword_assembly": "little_endian_64_bit_words",
+      "random_words_materialized": 0,
+      "reduction": "LCM_then_joint_GCD",
+      "rejection_boundary": "X>=L"
+    },
+    "marginal_twin_no_leakage": {
+      "controller_visible_fields_identical": true,
+      "divergent_recipient_inputs_flowed_through_tested_function": true,
+      "duration_baseline_delta_sign": {
+        "12": {
+          "B": "-113615128283870719341199/60000000000000000000000",
+          "C": "113615128283870719341199/10000000000000000000000",
+          "delta_negative": "-113615128283870719341199/12000000000000000000000",
+          "delta_positive": "795305897987095035388393/60000000000000000000000",
+          "signs": [
+            1,
+            -1
+          ]
+        },
+        "4": {
+          "B": "-3940399/6000000",
+          "C": "3940399/1000000",
+          "delta_negative": "-3940399/1200000",
+          "delta_positive": "27582793/6000000",
+          "signs": [
+            1,
+            -1
+          ]
+        },
+        "8": {
+          "B": "-772553055720799/600000000000000",
+          "C": "772553055720799/100000000000000",
+          "delta_negative": "-772553055720799/120000000000000",
+          "delta_positive": "5407871390045593/600000000000000",
+          "signs": [
+            1,
+            -1
+          ]
+        }
+      },
+      "first_step": {
+        "baseline": "-3940399/6000000",
+        "controller_belief": [
+          "1",
+          "0",
+          "0"
+        ],
+        "dependency_fields": [
+          "prior_rho",
+          "prior_controller_belief",
+          "prior_fast_state",
+          "selected_action",
+          "literal_twin_residue",
+          "eligibility",
+          "duration",
+          "exact_policy"
+        ],
+        "discount_factor": "3940399/1000000",
+        "duration": 4,
+        "fast_state": [
+          "3/50",
+          "-2/25"
+        ],
+        "pbar": "5/12",
+        "replicate_delta": "27582793/6000000",
+        "rho": [
+          "5/12",
+          "7/24",
+          "7/24"
+        ],
+        "selected_action": "LEFT",
+        "supplied_sign": 1
+      },
+      "recipient_diagnostics_minus": [
+        {
+          "actual_recipient_outcome": -1,
+          "actual_recipient_target": "LEFT"
+        },
+        {
+          "actual_recipient_outcome": 1,
+          "actual_recipient_target": "RIGHT"
+        }
+      ],
+      "recipient_diagnostics_plus": [
+        {
+          "actual_recipient_outcome": 1,
+          "actual_recipient_target": "LEFT"
+        },
+        {
+          "actual_recipient_outcome": -1,
+          "actual_recipient_target": "LEFT"
+        }
+      ],
+      "recipient_outcome_or_target_dependency": false,
+      "recipient_worlds": 2,
+      "second_step": {
+        "baseline": "-196440556802812473740933071/132180000000000000000000000",
+        "controller_belief": [
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        "dependency_fields": [
+          "prior_rho",
+          "prior_controller_belief",
+          "prior_fast_state",
+          "selected_action",
+          "literal_twin_residue",
+          "eligibility",
+          "duration",
+          "exact_policy"
+        ],
+        "discount_factor": "113615128283870719341199/10000000000000000000000",
+        "duration": 12,
+        "fast_state": [
+          "1/25",
+          "-3/25"
+        ],
+        "pbar": "19/48",
+        "replicate_delta": "-1305324208853390694511035311/132180000000000000000000000",
+        "rho": [
+          "29/96",
+          "19/48",
+          "29/96"
+        ],
+        "selected_action": "HOLD",
+        "supplied_sign": -1
+      }
+    },
+    "rat32_raw_head_score_fisher_eligibility": {
+      "eligibility_norm": 1.0,
+      "fisher_regularizer": "1/20",
+      "implementation_paths": {
+        "candidate": "explicit binary32 tensor-output rounding + independent rational-head code + binary64 score/Fisher solve",
+        "reference": "Fraction Rat32/raw/head/score/Fisher solve"
+      },
+      "nonfinite_rejected": true,
+      "policy_integer_masses": [
+        727065006885802,
+        625721221642257,
+        755416874265642
+      ],
+      "rat32_cases": 5,
+      "raw_logits": [
+        "15/128",
+        "-37/64",
+        "19/64"
+      ],
+      "score_fixture_selected_action": "LEFT",
+      "tolerance": 1e-06
+    },
+    "resource_and_activity_boundary": {
+      "activity_boundary_assertion": "no registered Lock-2 stochastic object or random word was created, inspected, or consumed",
+      "below_one_gib": true,
+      "learned_checkpoints_initialized": 0,
+      "lock2_executed": false,
+      "manifest": {
+        "activation_scalars_per_node": 75,
+        "agents_per_episode": 2,
+        "allocator_alignment_bytes_per_live_tensor": 256,
+        "autograd_saved_copies_assumption": 4,
+        "cpu_processes": 1,
+        "discard_graph_after_each_adam_update": true,
+        "episodes_per_vectorized_batch": 16,
+        "exact_fraction_slots": 512,
+        "exact_integer_bits_per_numerator_or_denominator": 16384,
+        "exact_rational_event_workspace": "streamed one event at a time",
+        "gpu": false,
+        "learned_tensor_dtype": "binary32",
+        "max_live_renewal_nodes": 1536,
+        "max_renewal_states_per_episode_graph": 48,
+        "per_row_durable_json": false,
+        "per_tick_graph": false,
+        "processes": 1,
+        "renewal_tensor_shapes_f32_scalars": {
+          "all_action_raw_derivatives": 6,
+          "all_action_scores": 6,
+          "base_logits": 3,
+          "controller_belief": 3,
+          "eligibility": 2,
+          "encoder_hidden_4": 4,
+          "encoder_hidden_8": 8,
+          "fast_logits": 3,
+          "fast_state_input": 2,
+          "fast_state_output": 2,
+          "fisher": 4,
+          "head_weights": 3,
+          "observation": 2,
+          "packet": 13,
+          "probabilities": 3,
+          "raw_logits": 3,
+          "return_baseline_delta_sign": 4,
+          "safe_logits": 3,
+          "selected_log_probability": 1
+        },
+        "seed_schedule_summaries": "streamed",
+        "serial_seed_lifecycle": true,
+        "split_batches_by_duration": true
+      },
+      "registered_random_words_created_or_consumed": 0,
+      "registered_stochastic_objects_created": 0,
+      "scientific_activity_started": false,
+      "sixty_minute_wall_claimed_by_lock1": false,
+      "source_imports": [
+        "__future__",
+        "ast",
+        "dataclasses",
+        "fractions",
+        "functools",
+        "json",
+        "lock1_certificate",
+        "math",
+        "pathlib",
+        "struct",
+        "sys"
+      ],
+      "static_live_memory_bound_bytes": 302549616,
+      "static_live_memory_bound_mib": 288.53379821777344,
+      "static_live_memory_components_bytes": {
+        "117_f32_parameters_gradients_and_two_adam_moments": 1872,
+        "256_byte_allocator_alignment_per_live_saved_tensor": 29884416,
+        "duration_split_batch_rewards_indices_and_audit_counters": 172032,
+        "renewal_graph_explicit_f32_activation_and_saved_backward_scalars": 1843200,
+        "separate_interpreter_tensor_runtime_overhead_reserve": 268435456,
+        "single_seed_100_word_initialization_buffer": 800,
+        "streamed_exact_fraction_512_slot_16384_bit_workspace": 2129920,
+        "streamed_seed_schedule_f64_summaries": 81920
+      },
+      "stochastic_constructor_calls": 0,
+      "training_or_evaluation_rows": 0
+    },
+    "schedule_terminal_keys_and_counts": {
+      "counts": {
+        "base_agent_ticks": 31064064,
+        "categorical_ledger": {
+          "descriptive_controls": {
+            "ACTION": 311296,
+            "ALT": 311296,
+            "INIT": 10240,
+            "TWIN": 0,
+            "Y": 311296,
+            "total": 944128
+          },
+          "factorial_evaluation": {
+            "ACTION": 622592,
+            "ALT": 622592,
+            "INIT": 20480,
+            "TWIN": 301056,
+            "Y": 622592,
+            "total": 2189312
+          },
+          "immediate_forks": {
+            "ACTION": 12288,
+            "ALT": 12288,
+            "INIT": 0,
+            "TWIN": 0,
+            "Y": 12288,
+            "total": 36864
+          },
+          "training": {
+            "ACTION": 4718592,
+            "ALT": 4718592,
+            "INIT": 131072,
+            "TWIN": 0,
+            "Y": 4718592,
+            "total": 14286848
+          }
+        },
+        "categorical_totals": {
+          "ACTION": 5664768,
+          "ALT": 5664768,
+          "INIT": 161792,
+          "TWIN": 301056,
+          "Y": 5664768,
+          "total": 17457152
+        },
+        "control_decisions": 311296,
+        "distinct_event_key_total": 7775232,
+        "distinct_event_keys": {
+          "evaluation_control": 472064,
+          "fork": 9216,
+          "training": 7143424,
+          "twin": 150528
+        },
+        "evaluation_decisions": 622592,
+        "evaluation_updates": 602112,
+        "fork_agent_ticks": 114688,
+        "total_agent_ticks_with_forks": 31178752,
+        "training_decisions": 4718592,
+        "training_updates": 4587520,
+        "twin_calls": 301056
+      },
+      "deliberate_reuse": {
+        "base_events": "complete typed tuple reused across paired architectures/feedback/controllers",
+        "fork": "both branches and architectures replay the same typed fork event",
+        "twin": "architecture-free identity reused across paired architecture calls only where specified",
+        "unequal_typed_tuples": "separate event identities"
+      },
+      "event_local_variable_retry": true,
+      "fixed_raw_word_total_predicted": false,
+      "initialization": {
+        "coordinates_per_seed": 100,
+        "reuse": "paired RISP/SIGN_RNN only at identical seed stratum; different seeds disjoint",
+        "seed_address": "60000000000+s",
+        "total_literal_coordinate_count": 800,
+        "traversal": [
+          {
+            "q_start": 0,
+            "q_stop_exclusive": 16,
+            "row_major": true,
+            "tensor": "encoder_8x2"
+          },
+          {
+            "q_start": 16,
+            "q_stop_exclusive": 48,
+            "row_major": true,
+            "tensor": "encoder_4x8"
+          },
+          {
+            "q_start": 48,
+            "q_stop_exclusive": 60,
+            "row_major": true,
+            "tensor": "base_3x4"
+          },
+          {
+            "q_start": 60,
+            "q_stop_exclusive": 66,
+            "row_major": true,
+            "tensor": "U_3x2"
+          },
+          {
+            "q_start": 66,
+            "q_stop_exclusive": 74,
+            "row_major": true,
+            "tensor": "V_4x2"
+          },
+          {
+            "q_start": 74,
+            "q_stop_exclusive": 100,
+            "row_major": true,
+            "tensor": "W_2x13"
+          }
+        ]
+      },
+      "injectivity_proof": "mixed_radix rows + disjoint within-row offsets + disjoint namespace intervals",
+      "key_formula_representatives": {
+        "eval_action_max": 50005119031,
+        "eval_alt_max": 20005119231,
+        "eval_init_min": 20000000000,
+        "fork_action_max": 80005119000,
+        "fork_alt_max": 70005119001,
+        "fork_y_min": 70000256000,
+        "initialization_family_max": 60000000007,
+        "initialization_family_min": 60000000000,
+        "train_Y_max": 10065535123,
+        "train_action_max": 40065535023,
+        "train_alt_max": 10065535223,
+        "train_init_max": 10065535000,
+        "train_init_min": 10000000000,
+        "twin_max": 37463001030,
+        "twin_min": 30000000000
+      },
+      "namespace_intervals": {
+        "eval_action": [
+          50000000000,
+          50005119031
+        ],
+        "eval_init_y_alt": [
+          20000000000,
+          20005119231
+        ],
+        "fork_action": [
+          80000256000,
+          80005119000
+        ],
+        "fork_y_alt": [
+          70000256000,
+          70005119001
+        ],
+        "initialization_family": [
+          60000000000,
+          60000000007
+        ],
+        "train_action": [
+          40000000000,
+          40065535023
+        ],
+        "train_init_y_alt": [
+          10000000000,
+          10065535223
+        ],
+        "twin": [
+          30000000000,
+          37463001046
+        ]
+      },
+      "post_feedback_windows": {
+        "12": [
+          0,
+          191,
+          192
+        ],
+        "12->4": [
+          100,
+          191,
+          92
+        ],
+        "4->12": [
+          108,
+          191,
+          84
+        ]
+      },
+      "schedules": {
+        "0": {
+          "decisions": 48,
+          "nonterminal_updates": 47,
+          "terminal_twin": false,
+          "terminal_update": false
+        },
+        "1": {
+          "decisions": 24,
+          "nonterminal_updates": 23,
+          "terminal_twin": false,
+          "terminal_update": false
+        },
+        "2": {
+          "decisions": 16,
+          "nonterminal_updates": 15,
+          "terminal_twin": false,
+          "terminal_update": false
+        },
+        "3": {
+          "decisions": 32,
+          "nonterminal_updates": 31,
+          "terminal_twin": false,
+          "terminal_update": false
+        },
+        "4": {
+          "decisions": 32,
+          "nonterminal_updates": 31,
+          "terminal_twin": false,
+          "terminal_update": false
+        }
+      },
+      "terminal_rule": "terminal completed hold records recipient diagnostic and detached residual; no packet/update/belief/rho/twin",
+      "typed_event_fields": {
+        "eval_Y": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent",
+          "renewal"
+        ],
+        "eval_action": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent",
+          "renewal"
+        ],
+        "eval_alt": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent",
+          "renewal"
+        ],
+        "eval_init": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent"
+        ],
+        "fork_Y": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent"
+        ],
+        "fork_action": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent"
+        ],
+        "fork_alt": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent"
+        ],
+        "train_Y": [
+          "algorithm_seed",
+          "optimizer_update",
+          "episode_in_batch",
+          "agent",
+          "renewal"
+        ],
+        "train_action": [
+          "algorithm_seed",
+          "optimizer_update",
+          "episode_in_batch",
+          "agent",
+          "renewal"
+        ],
+        "train_alt": [
+          "algorithm_seed",
+          "optimizer_update",
+          "episode_in_batch",
+          "agent",
+          "renewal"
+        ],
+        "train_init": [
+          "algorithm_seed",
+          "optimizer_update",
+          "episode_in_batch",
+          "agent"
+        ],
+        "twin": [
+          "algorithm_seed",
+          "schedule_id",
+          "episode",
+          "agent",
+          "renewal"
+        ]
+      },
+      "uint64_range": true
+    }
+  },
+  "interpretation": "deterministic structural answerability/conformance only; no algorithm, efficacy, competence, mechanism, or portfolio evidence",
+  "registered_stochastic_object_created": false,
+  "required_structural_fixture_groups": 6,
+  "required_structural_fixture_groups_passed": 6,
+  "schema": "RISP-B1-LOCK1-20260813-07",
+  "science_revision": "RISP-B1-SCIENCE-20260813-07",
+  "scientific_activity_started": false
+}

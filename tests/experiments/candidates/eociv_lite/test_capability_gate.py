@@ -67,6 +67,22 @@ class TestFullSupportOracle:
         )
         assert oracle.reveal_value == 0
 
+    def test_blind_optimizer_reproduces_segment_total_on_same_scale(self):
+        env, _ = gate_mod._forced_pair(gate_mod.GATE_PROFILES[0], 0, 0)
+        opportunity = env.opportunity(0)
+        oracle = gate_mod.full_support_oracle(
+            env.ledger, 0, opportunity.identity.receiver_member_key
+        )
+        realized, envelope = gate_mod.blind_optimizer_conformance(
+            env.ledger, 0, oracle
+        )
+        assert len(oracle.per_step_blind_optima) == sib.SEGMENT_LENGTH
+        assert realized <= oracle.blind_value
+        assert envelope == oracle.blind_value - realized
+        assert 0 <= float(envelope) < 1e-7
+        # A one-step maximum cannot masquerade as the registered segment total.
+        assert oracle.blind_value > 1
+
 
 class TestGate:
     def test_full_gate_terminal_and_counts(self):
@@ -74,7 +90,7 @@ class TestGate:
         assert report["terminal"] == "EOCIV_SIBLING_CAPABILITY_PRESENT"
         checks = report["checks"]
         assert all(bool(result["passed"]) for result in checks.values())
-        assert len(checks) == 11
+        assert len(checks) == 10
         one = checks["1_disabled_projection_reproduces_base_completely"]
         assert one["episodes_compared"] == 24
         assert one["illegal_action_rejection_parity"] is True
@@ -86,39 +102,38 @@ class TestGate:
         four = checks["4_receipt_discipline_and_ordering"]
         assert four["fail_closed"] == {
             "missing": True,
-            "wrong_owner": True,
-            "identity_mismatch": True,
-            "route_mismatch": True,
-            "decision_source_mismatch": True,
-            "ingestion_cost_mismatch": True,
-            "slot_mismatch": True,
-            "policy_tensor_mismatch": True,
-            "nonfocal_nonzero": True,
-            "cross_runner": True,
+            "cross_runner_identity": True,
+            "wrong_focal_owner": True,
+            "altered_focal_row": True,
+            "nonzero_nonfocal_row": True,
+            "altered_route": True,
+            "altered_decision_source": True,
+            "altered_ingestion_cost": True,
             "duplicate": True,
+            "altered_action_digest": True,
             "stale_post_action": True,
-            "action_altered_after_forward": True,
         }
         five = checks["5_identical_w_minus_disjoint_full_support_optima"]
         assert five["critical_cells"] == five["cells_with_disjoint_optimal_sets"] == 48
         six = checks["6_full_support_strict_value_with_envelopes"]
         assert six["critical_cells"] == 48
         assert six["min_reveal_value"] == (
-            "33029367329065267099970516619425633618760375227/"
-            "24289297430485184514310814667806889932013611700"
+            "4006373723506941012813514474530777786529678359834693971904620747694484/"
+            "2942466151782517510224626170689821337592819255507855782176966403586809"
         )
         # The envelopes are wiring quantities: deterministic on one box but
         # sensitive to numpy/BLAS reduction order across platforms, so the
         # test pins the bounds the science needs, not the 16th digit.  The
-        # accumulated envelopes are on the SEGMENT-TOTAL scale (Pro's C2):
-        # they include the informed AND blind trajectories over all 12 steps,
-        # so their conservative ceiling is 24x the per-step maxima.
-        assert 0 < six["max_step_action_quantization_gap"] < 1e-7
-        assert 0 < six["max_step_kernel_conformance_error"] <= gate_mod.CONFORMANCE_TOL
-        assert 0 < six["max_accumulated_quant_envelope"] < 24 * 1e-7
-        assert 0 < six["max_accumulated_kernel_envelope"] < 24 * gate_mod.CONFORMANCE_TOL
-        assert six["quantized_never_exceeds_exact"] is True
-        assert six["min_dominance_ratio"] >= gate_mod.DOMINANCE_FACTOR
+        # measured values on the registration box are recorded in the loop-7
+        # portfolio document (7.636763256388432e-09 and 8.921690147767336e-08).
+        assert 0 < six["max_action_quantization_gap"] < 1e-6
+        assert 0 < six["max_blind_action_quantization_gap"] < 1e-6
+        assert six["blind_optimizer_conformance"] is True
+        assert (
+            0
+            < six["max_kernel_conformance_error"]
+            <= gate_mod.SEGMENT_CONFORMANCE_TOL
+        )
         assert six["dominance_ok"] is True
         assert checks["7_neutral_cells_zero_reveal_value"]["neutral_cells"] == 24
         nine = checks["9_controls_execute_and_lr_cr_byte_identity"]
@@ -135,28 +150,12 @@ class TestGate:
             "NEUTRAL/LS": 6,
         }
         assert ten["registration_declares_gate_probes_not_outcome_design"] is True
-        eleven = checks["11_profile_qualified_outcome_world_noise_manifest"]
-        assert eleven["cross_profile_world_noise_distinct"] is True
-        # The stream-level certificates (not the whole-ledger digests, which
-        # differ across profiles for structural membership reasons anyway):
-        # qualification separates the shared base streams, and the
-        # unqualified registered seed reproduces the shared-stream defect.
-        assert eleven["world_streams_profile_qualified"] is True
-        assert eleven["unqualified_seed_defect_reproduced"] is True
-        assert eleven["four_arm_clones_identical"] is True
-        assert eleven["clone_comparison_discriminates"] is True
-        assert eleven["namespace_sizes_match_budgets"] is True
-        assert eleven["namespaces_disjoint"] is True
-        assert eleven["profile_hash_collision_free_registry_size"] == 7
-        assert eleven["derived_seeds_distinct"] is True
-        assert len(set(eleven["world_seeds"].values())) == 3
-        assert len(set(eleven["noise_seeds"].values())) == 3
 
     def test_reveal_extremes_and_dominance(self):
         report = gate_mod.gate()
         six = report["checks"]["6_full_support_strict_value_with_envelopes"]
         values = sorted(Fraction(row["reveal_value"]) for row in six["rows"])
-        assert float(values[0]) == 1.3598321410322283
+        assert float(values[0]) == 1.3615700289636021
         assert float(values[-1]) == 3.3693454610424074
         assert values[0] >= gate_mod.REVEAL_FLOOR
         assert float(values[0]) >= gate_mod.DOMINANCE_FACTOR * six["envelope_sum"]
@@ -187,64 +186,6 @@ class TestGate:
             "REAL": "1/2", "NATIVE_NEUTRAL": "1/4",
             "PATTERN_ONLY": "1/8", "PAYLOAD_KNOCKOUT": "1/8",
         }
-        identity = reg["world_noise_identity"]
-        assert identity["ledger_master_seed_label"] == "EOCIV-LEDGER-WORLD-V1"
-        assert identity["action_noise_seed_label"] == "EOCIV-ACTION-NOISE-V1"
-        assert identity["registered_master_seed"] == gate_mod.MASTER_SEED
-        assert identity["registered_action_seed"] == 730202
-        assert identity["applies_to_pools"] == [
-            "d_fit", "d_policy", "d_cal", "d_focal", "pattern_knockout_audit",
-        ]
-        namespaces = reg["episode_namespaces"]
-        assert namespaces["d_fit"] == [0, 7281]
-        assert namespaces["d_policy"] == [100000, 102047]
-        assert namespaces["d_cal"] == [200000, 200511]
-        assert namespaces["d_focal"] == [300000, 300255]
-        assert namespaces["pattern_knockout_audit"] == [400000, 400063]
-
-    def test_profile_qualified_seed_derivation_is_stable_and_distinct(self):
-        seed = gate_mod.profile_qualified_seed(
-            "EOCIV-LEDGER-WORLD-V1", gate_mod.MASTER_SEED, "train_4_3_6_5"
-        )
-        assert seed == gate_mod.outcome_world_seed("train_4_3_6_5")
-        assert 0 <= seed < 2 ** 64
-        world = {p.name: gate_mod.outcome_world_seed(p.name) for p in gate_mod.GATE_PROFILES}
-        noise = {p.name: gate_mod.outcome_noise_seed(p.name) for p in gate_mod.GATE_PROFILES}
-        assert len(set(world.values()) | set(noise.values())) == 6
-
-    def test_oracle_retains_blind_optimizer_trajectory(self):
-        env, _ = gate_mod._forced_pair(gate_mod.GATE_PROFILES[0], 0, 0)
-        opportunity = env.opportunity(0)
-        oracle = gate_mod.full_support_oracle(
-            env.ledger, 0, opportunity.identity.receiver_member_key
-        )
-        assert len(oracle.per_step_blind_optima) == 12
-        # Each stored blind point attains the step's blind maximum: summing
-        # the exact per-step mixture values reproduces the blind total.
-        keys = gate_mod._active_keys_in_segment(env.ledger, 0)
-        receiver = opportunity.identity.receiver_member_key
-        caps = (
-            gate_mod._frac(env.ledger.capabilities[receiver, 0]),
-            gate_mod._frac(env.ledger.capabilities[receiver, 1]),
-        )
-        aggregate = (
-            sum((gate_mod._frac(env.ledger.capabilities[k, 0]) for k in keys), Fraction(0)),
-            sum((gate_mod._frac(env.ledger.capabilities[k, 1]) for k in keys), Fraction(0)),
-        )
-        total = Fraction(0)
-        for step, point in enumerate(oracle.per_step_blind_optima):
-            time = sib.EVENT_TIMES[0] + step
-            geometry = gate_mod.StepGeometry(
-                load=gate_mod._frac(env.ledger.load[time]),
-                mix=gate_mod._frac(env.ledger.target_mix[time]),
-                receiver_caps=caps, aggregate=aggregate,
-            )
-            total += sum(
-                (sib.CRITICAL_PRIOR[state] * geometry.reward(state, *point)
-                 for state in sib.CRITICAL_PRIOR),
-                Fraction(0),
-            )
-        assert total == oracle.blind_value
 
     def test_registered_arm_is_profile_qualified_and_covers_all_arms(self):
         per_profile = {

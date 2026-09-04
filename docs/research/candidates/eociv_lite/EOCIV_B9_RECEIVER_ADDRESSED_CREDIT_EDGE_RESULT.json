@@ -1,0 +1,193 @@
+{
+  "artifact_kind": "EOCIV_B9_REGISTERED_RESULT_IN_MEMORY",
+  "binding_failure": "cannot read process RSS for the B9 hard cap",
+  "binding_valid": false,
+  "candidate_revision": "f8e430bee4e9e09f164cacb7e4cad3ea47784e9f",
+  "configuration": {
+    "activity_factorization": {
+      "collection": "2 anchors x 3 profiles x 4 forced critical-shock tuples",
+      "evaluation": "2 anchors x 3 profiles x 8 roots x 3 endpoints x 2 bodies",
+      "optimizer_calls": "2 anchors x 2 addressing branches",
+      "transitions": "312 episodes x 48"
+    },
+    "adam_lr": 0.0003,
+    "addressing_branches": [
+      "RECEIVER_ADDRESSED",
+      "AUTHENTICATED_SOURCE_ADDRESSED_CONTROL"
+    ],
+    "anchor_endpoint": "0_NO_STEP",
+    "anchor_seeds": {
+      "A0": 990031,
+      "A1": 990032
+    },
+    "anchors": [
+      "A0",
+      "A1"
+    ],
+    "artifact_inputs": [],
+    "collection_roots": {
+      "A0|train_4_3_6_5": [
+        990100,
+        990101,
+        990102,
+        990103
+      ],
+      "A0|train_5_3_7_6": [
+        990110,
+        990111,
+        990112,
+        990113
+      ],
+      "A0|train_6_4_8_6": [
+        990120,
+        990121,
+        990122,
+        990123
+      ],
+      "A1|train_4_3_6_5": [
+        990200,
+        990201,
+        990202,
+        990203
+      ],
+      "A1|train_5_3_7_6": [
+        990210,
+        990211,
+        990212,
+        990213
+      ],
+      "A1|train_6_4_8_6": [
+        990220,
+        990221,
+        990222,
+        990223
+      ]
+    },
+    "cpu_threads": 1,
+    "cpu_time_cap_seconds": 300,
+    "critic_loss": false,
+    "critical_segments": [
+      [
+        12,
+        24
+      ],
+      [
+        36,
+        48
+      ]
+    ],
+    "critical_shock_order": [
+      [
+        "A",
+        "A"
+      ],
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ],
+      [
+        "B",
+        "B"
+      ]
+    ],
+    "direction": "CAND-VAP-EOCIV-LITE",
+    "encoder_kind": "content_separating",
+    "endpoints": [
+      "0",
+      "R",
+      "S"
+    ],
+    "evaluation_bodies": [
+      "CORRECT",
+      "SWAPPED"
+    ],
+    "full_expected_counts": {
+      "checkpoint_selection": 0,
+      "collection_episodes": 24,
+      "critic_loss_calls": 0,
+      "environment_transitions": 14976,
+      "episodes": 312,
+      "evaluation_episodes": 288,
+      "global_clip_calls": 0,
+      "hypothetical_transitions": 0,
+      "k_search": 0,
+      "optimizer_calls": 4,
+      "policy_calls": 14976,
+      "receiver_optimizer_calls": 2,
+      "rescue": 0,
+      "retry": 0,
+      "second_updates": 0,
+      "source_control_optimizer_calls": 2,
+      "sweep": 0,
+      "value_gradient_calls": 0
+    },
+    "gae_lambda": 0.95,
+    "gamma": 0.99,
+    "global_clipping": false,
+    "heldout_roots": [
+      991001,
+      991002,
+      991003,
+      991004,
+      991005,
+      991006,
+      991007,
+      991008
+    ],
+    "horizon": 48,
+    "k_search": 0,
+    "learner": "detached_GAE_normalized_team_credit_score_row",
+    "normalization_epsilon": 1e-08,
+    "optimizer_state_before_each_branch": "EMPTY",
+    "optimizer_steps_per_branch": 1,
+    "parent_base_revision_provenance": "8144af6273145dd9c64184a654c91f0e06d521ce",
+    "predecessor_checkpoint_root_history_artifact_reuse": false,
+    "profiles": [
+      "train_4_3_6_5",
+      "train_5_3_7_6",
+      "train_6_4_8_6"
+    ],
+    "raw_output_binding": "eociv_lite.receiver_addressed_credit_edge.b9.v1",
+    "retention_condition": "SEGMENT_LATCH_RNN",
+    "rss_cap_bytes": 1073741824,
+    "second_update": false,
+    "treatment": "EOCIV-B9-RECEIVER-ADDRESSED-CREDIT-EDGE",
+    "value_gradient": false
+  },
+  "counts": {
+    "checkpoint_selection": 0,
+    "collection_episodes": 0,
+    "critic_loss_calls": 0,
+    "environment_transitions": 0,
+    "episodes": 0,
+    "evaluation_episodes": 0,
+    "global_clip_calls": 0,
+    "hypothetical_transitions": 0,
+    "k_search": 0,
+    "optimizer_calls": 0,
+    "policy_calls": 0,
+    "receiver_optimizer_calls": 0,
+    "rescue": 0,
+    "retry": 0,
+    "second_updates": 0,
+    "source_control_optimizer_calls": 0,
+    "sweep": 0,
+    "value_gradient_calls": 0
+  },
+  "direction": "CAND-VAP-EOCIV-LITE",
+  "exclusive_claim_digest": "abb394a7b7a52c0fc9ba4de5d0d3be2e22488588086fbcbb65de5465b1c9b67b",
+  "interpretation_boundary": "Fail-closed B9 binding outcome; the exclusive outer lifecycle may persist this terminal at the sole reserved path, with no retry, rescue, extension, retained direction, successor, or additional artifact.",
+  "parent_base_revision_provenance": "8144af6273145dd9c64184a654c91f0e06d521ce",
+  "raw_output_binding": "eociv_lite.receiver_addressed_credit_edge.b9.v1",
+  "resource_witness": null,
+  "result_relative_path": "docs/research/candidates/eociv_lite/EOCIV_B9_RECEIVER_ADDRESSED_CREDIT_EDGE_RESULT.json",
+  "run_id": "eociv-b9-loop05-full-20260811",
+  "scientific_terminal_admitted": true,
+  "stage": "B_EXPLORATORY_REAL_TOY_EXPERIMENT",
+  "terminal_branch": "B9_INVALID_BINDING",
+  "treatment": "EOCIV-B9-RECEIVER-ADDRESSED-CREDIT-EDGE"
+}

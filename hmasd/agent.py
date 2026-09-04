@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from copy import deepcopy
 from torch.optim import Adam
 from torch.distributions import Categorical
 import time
@@ -72,6 +73,113 @@ from hmasd.process_exploration import (
     process_positive_skill_labels,
 )
 import random
+
+
+def _split_legacy_discriminator_adam_state_dict(
+    legacy_state_dict,
+    team_parameters,
+    individual_parameters,
+):
+    """Strictly split the old one-group Adam state by registered parameter order."""
+
+    if not isinstance(legacy_state_dict, dict) or set(legacy_state_dict) != {
+        'state', 'param_groups'
+    }:
+        raise ValueError('legacy discriminator optimizer state has an invalid schema')
+    groups = legacy_state_dict['param_groups']
+    states = legacy_state_dict['state']
+    if not isinstance(groups, list) or len(groups) != 1 or not isinstance(states, dict):
+        raise ValueError('legacy discriminator optimizer must contain exactly one Adam group')
+    group = groups[0]
+    if not isinstance(group, dict) or 'params' not in group:
+        raise ValueError('legacy discriminator optimizer parameter group is invalid')
+    parameter_ids = list(group['params'])
+    team_parameters = tuple(team_parameters)
+    individual_parameters = tuple(individual_parameters)
+    expected_count = len(team_parameters) + len(individual_parameters)
+    if len(parameter_ids) != expected_count or len(set(parameter_ids)) != expected_count:
+        raise ValueError('legacy discriminator optimizer parameter inventory mismatch')
+    if not set(states).issubset(set(parameter_ids)):
+        raise ValueError('legacy discriminator optimizer contains foreign state rows')
+
+    parameters = team_parameters + individual_parameters
+    allowed_state_fields = {'step', 'exp_avg', 'exp_avg_sq', 'max_exp_avg_sq'}
+    for parameter_id, parameter in zip(parameter_ids, parameters):
+        row = states.get(parameter_id)
+        if row is None:
+            continue
+        if not isinstance(row, dict) or not set(row).issubset(allowed_state_fields):
+            raise ValueError('legacy discriminator Adam state row is invalid')
+        if not {'step', 'exp_avg', 'exp_avg_sq'}.issubset(row):
+            raise ValueError('legacy discriminator Adam state row is incomplete')
+        for field in ('exp_avg', 'exp_avg_sq', 'max_exp_avg_sq'):
+            if field in row and (
+                not torch.is_tensor(row[field])
+                or tuple(row[field].shape) != tuple(parameter.shape)
+            ):
+                raise ValueError(
+                    f'legacy discriminator Adam {field} shape does not match parameter'
+                )
+        step = row['step']
+        if torch.is_tensor(step):
+            if step.numel() != 1:
+                raise ValueError('legacy discriminator Adam step must be scalar')
+        elif not isinstance(step, (int, float)):
+            raise ValueError('legacy discriminator Adam step has an invalid type')
+
+    team_count = len(team_parameters)
+
+    def split_group(selected_ids, start, stop):
+        selected = deepcopy(group)
+        selected['params'] = list(selected_ids)
+        if 'param_names' in selected:
+            names = list(selected['param_names'])
+            if len(names) != expected_count:
+                raise ValueError('legacy discriminator optimizer param_names mismatch')
+            selected['param_names'] = names[start:stop]
+        return {
+            'state': {
+                parameter_id: deepcopy(states[parameter_id])
+                for parameter_id in selected_ids
+                if parameter_id in states
+            },
+            'param_groups': [selected],
+        }
+
+    return (
+        split_group(parameter_ids[:team_count], 0, team_count),
+        split_group(parameter_ids[team_count:], team_count, expected_count),
+    )
+
+
+def _rollout_sampler_seed_from_config(config, *, stream: int) -> int:
+    """Derive one named sampler stream without consuming process-global RNG."""
+
+    explicit = getattr(config, 'rollout_sampler_seed', None)
+    if explicit is not None:
+        if isinstance(explicit, bool) or not isinstance(explicit, (int, np.integer)):
+            raise ValueError('rollout_sampler_seed must be an integer')
+        if int(explicit) < 0:
+            raise ValueError('rollout_sampler_seed must be non-negative')
+        return int(explicit)
+    run_seed = getattr(config, 'runtime_seed', None)
+    if run_seed is None:
+        run_seed = getattr(config, 'seed', None)
+    if run_seed is None:
+        raise ValueError(
+            'HMASDAgent requires config.runtime_seed or config.seed for rollout sampling'
+        )
+    if isinstance(run_seed, bool) or not isinstance(run_seed, (int, np.integer)):
+        raise ValueError('config.seed must be an integer for rollout sampling')
+    if int(run_seed) < 0:
+        raise ValueError('config.seed must be non-negative for rollout sampling')
+    if isinstance(stream, bool) or not isinstance(stream, int) or stream < 0:
+        raise ValueError('rollout sampler stream must be a non-negative integer')
+    return int(
+        np.random.SeedSequence(
+            [int(run_seed), 0x484D4153, int(stream)]
+        ).generate_state(1, dtype=np.uint64)[0]
+    )
 
 # 导入SB3集成功能
 try:
@@ -363,6 +471,24 @@ class HMASDAgent:
         }
         
         self.use_ha_ctse = bool(getattr(config, 'use_horizon_window', False))
+        # D2 policy-based interruption (ADR 01 revision 3). `off` is the default and
+        # must stay byte-identical to the pre-D2 route: every `d2` branch below is
+        # guarded by `self.d2_enabled`, and nothing is allocated or drawn in `off`.
+        self.policy_interruption_mode = str(getattr(config, 'policy_interruption_mode', 'off'))
+        self.d2_enabled = (self.policy_interruption_mode == 'd2')
+        if self.d2_enabled:
+            self.d2_cost_c = float(getattr(config, 'interruption_cost_c', float('inf')))
+            self.d2_cost_c_Z = float(getattr(config, 'interruption_cost_c_Z', float('inf')))
+            self.d2_k_max = int(getattr(config, 'skill_cap_k_max', getattr(config, 'k', 10)))
+            _team_cap = getattr(config, 'team_cap_k_Z', None)
+            self.d2_k_Z = self.d2_k_max if _team_cap is None else int(_team_cap)
+            self.d2_age_feature = str(getattr(config, 'age_feature', 'off'))
+        else:
+            self.d2_cost_c = float('inf')
+            self.d2_cost_c_Z = float('inf')
+            self.d2_k_max = int(getattr(config, 'k', 10))
+            self.d2_k_Z = self.d2_k_max
+            self.d2_age_feature = 'off'
         self.use_low_level_compact = bool(getattr(config, 'use_compact_in_low_level_actor', False))
         self.use_process_exploration = bool(
             self.use_ha_ctse and getattr(config, 'use_process_exploration', False)
@@ -419,6 +545,21 @@ class HMASDAgent:
 
         # 创建网络
         self.skill_coordinator = SkillCoordinator(config).to(self.device)
+        if self.d2_enabled:
+            # theta_0 for the exposure line's ||theta - theta_0|| / ||theta_0||
+            # (ADR 01 "Metrics to log", plan section 8).
+            with torch.no_grad():
+                self.d2_coordinator_theta0 = [
+                    p.detach().clone() for p in self.skill_coordinator.parameters()
+                ]
+                self.d2_coordinator_theta0_norm = float(
+                    torch.sqrt(
+                        sum((p.double() ** 2).sum() for p in self.d2_coordinator_theta0)
+                    ).item()
+                )
+        else:
+            self.d2_coordinator_theta0 = None
+            self.d2_coordinator_theta0_norm = 0.0
         self.ha_ctse_editor = HorizonSkillEditor(config).to(self.device) if self.use_ha_ctse else None
         self.low_level_compact_extractor = (
             OPTCompactExtractor(config).to(self.device)
@@ -513,10 +654,18 @@ class HMASDAgent:
             lr=config.lr_discoverer_critic, # 使用独立的critic学习率
             weight_decay=config.weight_decay
         )
-        self.discriminator_optimizer = (
+        self.team_discriminator_optimizer = (
             Adam(
-                list(self.team_discriminator.parameters()) +
-                list(self.individual_discriminator.parameters()),
+                self.team_discriminator.parameters(),
+                lr=config.lr_discriminator,
+                weight_decay=config.weight_decay
+            )
+            if self.use_discriminator_path
+            else None
+        )
+        self.individual_discriminator_optimizer = (
+            Adam(
+                self.individual_discriminator.parameters(),
                 lr=config.lr_discriminator,
                 weight_decay=config.weight_decay
             )
@@ -561,14 +710,24 @@ class HMASDAgent:
                     total_iters=config.lr_decay_steps
                 )
                 self.discoverer_scheduler = None # 兼容性设置
-                self.discriminator_scheduler = (
+                self.team_discriminator_scheduler = (
                     LinearLR(
-                        self.discriminator_optimizer,
+                        self.team_discriminator_optimizer,
                         start_factor=1.0,
                         end_factor=config.discriminator_lr_decay_factor,
                         total_iters=config.lr_decay_steps
                     )
-                    if self.discriminator_optimizer is not None
+                    if self.team_discriminator_optimizer is not None
+                    else None
+                )
+                self.individual_discriminator_scheduler = (
+                    LinearLR(
+                        self.individual_discriminator_optimizer,
+                        start_factor=1.0,
+                        end_factor=config.discriminator_lr_decay_factor,
+                        total_iters=config.lr_decay_steps
+                    )
+                    if self.individual_discriminator_optimizer is not None
                     else None
                 )
             elif config.lr_decay_schedule == 'cosine':
@@ -582,11 +741,19 @@ class HMASDAgent:
                     self.discoverer_critic_optimizer, T_max=config.lr_decay_steps
                 )
                 self.discoverer_scheduler = None # 兼容性设置
-                self.discriminator_scheduler = (
+                self.team_discriminator_scheduler = (
                     CosineAnnealingLR(
-                        self.discriminator_optimizer, T_max=config.lr_decay_steps
+                        self.team_discriminator_optimizer, T_max=config.lr_decay_steps
                     )
-                    if self.discriminator_optimizer is not None
+                    if self.team_discriminator_optimizer is not None
+                    else None
+                )
+                self.individual_discriminator_scheduler = (
+                    CosineAnnealingLR(
+                        self.individual_discriminator_optimizer,
+                        T_max=config.lr_decay_steps
+                    )
+                    if self.individual_discriminator_optimizer is not None
                     else None
                 )
             
@@ -594,7 +761,8 @@ class HMASDAgent:
         else:
             self.coordinator_scheduler = None
             self.discoverer_scheduler = None  
-            self.discriminator_scheduler = None
+            self.team_discriminator_scheduler = None
+            self.individual_discriminator_scheduler = None
             main_logger.info("未启用学习率衰减")
         
         # 判别器只使用当前rollout数据，update后在clear_buffers中清空。
@@ -606,6 +774,11 @@ class HMASDAgent:
         num_envs = getattr(config, 'num_envs', 1)  # 并行环境数量
         gru_hidden_size = getattr(config, 'gru_hidden_size', 128)  # GRU隐状态大小
         action_space_type = getattr(config, 'action_space_type', 'continuous')  # 动作空间类型
+        rollout_sampler_seed = _rollout_sampler_seed_from_config(
+            config,
+            stream=0,
+        )
+        self.rollout_sampler_seed = rollout_sampler_seed
         
         self.rollout_buffer = RolloutBuffer(
             num_steps=rollout_length,
@@ -618,7 +791,9 @@ class HMASDAgent:
             n_z=config.n_z,
             state_dim=config.state_dim,
             action_space_type=action_space_type,
-            compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0
+            compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0,
+            sampler_seed=rollout_sampler_seed,
+            d2_enabled=self.d2_enabled,
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -661,6 +836,15 @@ class HMASDAgent:
         self.env_skill_ages = {}
         self.env_skill_duration_remaining = {}
         self.env_skill_duration_target = {}
+        # D2 per-env bookkeeping (ADR 01). Allocated in both modes as empty dicts so
+        # that `clear_buffers`/`reset_env_state` have a uniform surface, but only
+        # written by the `d2` branches.
+        self.env_team_ages = {}
+        self.env_d2_last_decision = {}
+        self._d2_last_step = None
+        self.d2_open_agent_segments = {}
+        self.d2_open_team_segments = {}
+        self.d2_metrics = self._new_d2_metrics() if self.d2_enabled else None
         self.process_outcome_extractor = (
             SkillProcessOutcomeExtractor(
                 normalize=getattr(config, 'normalize_process_outcomes', True),
@@ -1288,6 +1472,13 @@ class HMASDAgent:
         self.env_skill_ages = {}
         self.env_skill_duration_remaining = {}
         self.env_skill_duration_target = {}
+        if self.d2_enabled:
+            # D2 per-rollout state: ages, replay metadata and open segment
+            # bookkeeping are all rollout-scoped, exactly like the buffer.
+            self.env_team_ages = {}
+            self.env_d2_last_decision = {}
+            self._d2_reset_open_segments()
+            self.d2_metrics = self._new_d2_metrics()
         if self.process_segment_buffer is not None:
             self.process_segment_buffer.reset()
         if self._uses_process_high_level_flow():
@@ -1410,6 +1601,8 @@ class HMASDAgent:
             self.env_timers[env_id] = 0
             main_logger.debug(f"已重置环境 {env_id} 的技能计时器为0")
         self.env_skill_ages[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
+        if self.d2_enabled:
+            self.env_team_ages[env_id] = 0
         self.env_skill_duration_remaining[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
         self.env_skill_duration_target[env_id] = np.zeros(self.config.n_agents, dtype=np.int64)
         if self.process_segment_buffer is not None:
@@ -1739,6 +1932,14 @@ class HMASDAgent:
                 dones_batch,
                 deterministic=deterministic,
             )
+        if self.d2_enabled:
+            return self._batched_assign_skills_d2(
+                states_batch,
+                observations_batch,
+                env_steps_batch,
+                dones_batch,
+                deterministic=deterministic,
+            )
 
         num_envs = states_batch.shape[0]
         
@@ -1832,6 +2033,589 @@ class HMASDAgent:
             self.env_agent_skills[i] = new_agent_skills_batch[i]
             self.env_log_probs[i] = new_log_probs_batch[i]
             
+        return new_team_skills_batch, new_agent_skills_batch, new_log_probs_batch
+
+    # ------------------------------------------------------------------
+    # D2 policy-based interruption (ADR 01 revision 3).  Everything below is
+    # reachable only when `policy_interruption_mode == "d2"`.
+    # ------------------------------------------------------------------
+
+    D2_CAUSE_NONE = 0
+    D2_CAUSE_RESET = 1
+    D2_CAUSE_TEAM_GAP = 2
+    D2_CAUSE_TEAM_CAP = 3
+    D2_CAUSE_GAP = 4
+    D2_CAUSE_CAP = 5
+    D2_CAUSE_NAMES = {
+        0: 'none',
+        1: 'reset',
+        2: 'team_gap',
+        3: 'team_cap',
+        4: 'gap',
+        5: 'cap',
+    }
+
+    @staticmethod
+    def _new_d2_metrics():
+        """Fresh D2 metric accumulators (ADR 01 "Metrics to log", plan section 5)."""
+        return {
+            'steps': 0,
+            'decision_steps': 0,
+            'team_decisions': 0,
+            'sampled_total': 0,
+            'forced_total': 0,
+            'S_t_sizes': [],
+            'gap_agent': [],
+            'gap_team': [],
+            'switch_count_by_agent': [],
+            'segment_lengths_agent': [],
+            'segment_lengths_team': [],
+            'cause_counts': {name: 0 for name in ('reset', 'team_gap', 'team_cap', 'gap', 'cap')},
+            'coordinator_inference_seconds': 0.0,
+            'coordinator_inference_calls': 0,
+            'rows_M_agent': 0,
+            'rows_M_team': 0,
+            'rows_M': 0,
+            'optimizer_steps': 0,
+            'param_displacement': 0.0,
+            'target_scale_team': 0.0,
+            'target_scale_agent': 0.0,
+            'target_var_team': 0.0,
+            'target_var_agent': 0.0,
+        }
+
+    def reset_d2_metrics(self):
+        """Reset the D2 metric accumulators (called at rollout boundaries)."""
+        if self.d2_enabled:
+            self.d2_metrics = self._new_d2_metrics()
+
+    def _d2_reset_open_segments(self):
+        """Drop all open D2 segment bookkeeping (rollout boundary)."""
+        self.d2_open_agent_segments = {}
+        self.d2_open_team_segments = {}
+
+    def _d2_open_agent(self, env_id):
+        seg = self.d2_open_agent_segments.get(env_id)
+        if seg is None:
+            seg = {
+                'start': np.full(self.config.n_agents, -1, dtype=np.int64),
+                'disc': np.zeros(self.config.n_agents, dtype=np.float64),
+            }
+            self.d2_open_agent_segments[env_id] = seg
+        return seg
+
+    def _d2_open_team(self, env_id):
+        seg = self.d2_open_team_segments.get(env_id)
+        if seg is None:
+            seg = {'start': -1, 'disc': 0.0}
+            self.d2_open_team_segments[env_id] = seg
+        return seg
+
+    def _d2_store_transition(self, env_id, rollout_step_idx, reward, done, d2_step):
+        """
+        D2 storage (plan section 6): maintain the open per-agent and team
+        segments, write a closed row at the segment's start index, and
+        accumulate the discounted within-segment reward `sum_u gamma^u r`.
+
+        Close rules: an agent segment closes when the agent is sampled again,
+        at episode end (`terminal`), or at rollout end (bootstrap, written by
+        `_d2_flush_open_segments`).  The team segment closes on a team
+        decision, episode end, or rollout end.  A team decision samples every
+        agent, so it closes every agent segment (invariant 7).
+        """
+        if rollout_step_idx is None:
+            main_logger.error("D2 storage requires rollout_step_idx")
+            return False
+
+        t = int(rollout_step_idx)
+        gamma = float(self.config.gamma)
+        n_agents = self.config.n_agents
+        seg = self._d2_open_agent(env_id)
+        team = self._d2_open_team(env_id)
+
+        sampled = np.asarray(d2_step['sampled_mask'], dtype=np.bool_)
+        sample_Z = bool(d2_step['sample_Z'])
+        decision = bool(d2_step['decision'])
+
+        # 1. Close the segments that this step's decision ends.
+        for i in range(n_agents):
+            if sampled[i] and seg['start'][i] >= 0:
+                start = int(seg['start'][i])
+                elapsed = t - start
+                self.rollout_buffer.close_d2_agent_segment(
+                    env_id, i, start, float(seg['disc'][i]), elapsed, False
+                )
+                self.d2_metrics['segment_lengths_agent'].append(int(max(1, elapsed)))
+                seg['start'][i] = -1
+                seg['disc'][i] = 0.0
+        if sample_Z and team['start'] >= 0:
+            start = int(team['start'])
+            elapsed = t - start
+            self.rollout_buffer.close_d2_team_segment(
+                env_id, start, float(team['disc']), elapsed, False
+            )
+            self.d2_metrics['segment_lengths_team'].append(int(max(1, elapsed)))
+            team['start'] = -1
+            team['disc'] = 0.0
+
+        # 2. Open the segments this step's decision starts, and record the
+        #    replay metadata / ages of the step.
+        for i in range(n_agents):
+            if sampled[i]:
+                seg['start'][i] = t
+                seg['disc'][i] = 0.0
+        if sample_Z:
+            team['start'] = t
+            team['disc'] = 0.0
+
+        log_probs = self.env_log_probs.get(env_id, {})
+        self.rollout_buffer.add_d2_step(
+            env_idx=env_id,
+            time_step=t,
+            agent_age=d2_step['agent_ages'],
+            team_age=d2_step['team_age'],
+            decision=decision,
+            team_skill=int(self.env_team_skills.get(env_id, -1)),
+            agent_skills=np.asarray(
+                self.env_agent_skills.get(env_id, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ),
+            sampled_mask=sampled,
+            sample_Z=sample_Z,
+            order=d2_step['order'],
+            team_log_prob=float(log_probs.get('team_log_prob', 0.0)),
+            agent_log_probs=np.asarray(
+                log_probs.get('agent_log_probs', [0.0] * n_agents), dtype=np.float32
+            ),
+            team_value=float(log_probs.get('state_value', 0.0)),
+            agent_values=np.asarray(
+                log_probs.get('agent_values', [0.0] * n_agents), dtype=np.float32
+            ),
+            agent_cause=d2_step['agent_cause'],
+            team_cause=d2_step['team_cause'],
+        )
+
+        # 3. Accumulate the discounted within-segment reward for this step.
+        r = float(reward)
+        for i in range(n_agents):
+            start = int(seg['start'][i])
+            if start >= 0:
+                seg['disc'][i] += (gamma ** (t - start)) * r
+        if team['start'] >= 0:
+            team['disc'] += (gamma ** (t - int(team['start']))) * r
+
+        # 4. Episode end closes every open segment as terminal.
+        any_done = bool(np.any(done)) if hasattr(done, '__iter__') else bool(done)
+        if any_done:
+            for i in range(n_agents):
+                start = int(seg['start'][i])
+                if start >= 0:
+                    self.rollout_buffer.close_d2_agent_segment(
+                        env_id, i, start, float(seg['disc'][i]), t - start + 1, True
+                    )
+                    self.d2_metrics['segment_lengths_agent'].append(int(t - start + 1))
+                    seg['start'][i] = -1
+                    seg['disc'][i] = 0.0
+            if team['start'] >= 0:
+                start = int(team['start'])
+                self.rollout_buffer.close_d2_team_segment(
+                    env_id, start, float(team['disc']), t - start + 1, True
+                )
+                self.d2_metrics['segment_lengths_team'].append(int(t - start + 1))
+                team['start'] = -1
+                team['disc'] = 0.0
+        return True
+
+    def _d2_flush_open_segments(self, num_steps):
+        """
+        Close every still-open D2 segment at the rollout boundary with
+        `terminal = False`, so the GAE bootstraps it with the value of the next
+        state (plan section 6, mirroring `high_level_last_values` in `off`).
+        """
+        if not self.d2_enabled:
+            return 0
+        last_t = int(num_steps) - 1
+        if last_t < 0:
+            return 0
+        closed = 0
+        for env_id, seg in self.d2_open_agent_segments.items():
+            for i in range(self.config.n_agents):
+                start = int(seg['start'][i])
+                if start >= 0:
+                    self.rollout_buffer.close_d2_agent_segment(
+                        env_id, i, start, float(seg['disc'][i]), last_t - start + 1, False
+                    )
+                    self.d2_metrics['segment_lengths_agent'].append(int(last_t - start + 1))
+                    seg['start'][i] = -1
+                    seg['disc'][i] = 0.0
+                    closed += 1
+        for env_id, team in self.d2_open_team_segments.items():
+            start = int(team['start'])
+            if start >= 0:
+                self.rollout_buffer.close_d2_team_segment(
+                    env_id, start, float(team['disc']), last_t - start + 1, False
+                )
+                self.d2_metrics['segment_lengths_team'].append(int(last_t - start + 1))
+                team['start'] = -1
+                team['disc'] = 0.0
+                closed += 1
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        if tables is not None:
+            self.d2_metrics['rows_M_agent'] = int(tables['agent_valid'].sum())
+            self.d2_metrics['rows_M_team'] = int(tables['team_valid'].sum())
+            self.d2_metrics['rows_M'] = int(
+                (tables['agent_valid'].any(axis=-1) | tables['team_valid']).sum()
+            )
+        return closed
+
+    def get_d2_metrics(self):
+        """Return a JSON-friendly summary of the accumulated D2 metrics."""
+        if not self.d2_enabled or self.d2_metrics is None:
+            return None
+        m = self.d2_metrics
+        n_agents = int(self.config.n_agents)
+        switch_by_agent = np.zeros(n_agents, dtype=np.int64)
+        for row in m['switch_count_by_agent']:
+            switch_by_agent += np.asarray(row, dtype=np.int64)
+        gap_agent = np.asarray(m['gap_agent'], dtype=np.float64) if m['gap_agent'] else np.zeros(0)
+        gap_team = np.asarray(m['gap_team'], dtype=np.float64) if m['gap_team'] else np.zeros(0)
+
+        def _hist(values):
+            if values.size == 0:
+                return {'count': 0}
+            return {
+                'count': int(values.size),
+                'mean': float(np.mean(values)),
+                'std': float(np.std(values)),
+                'min': float(np.min(values)),
+                'max': float(np.max(values)),
+                'quantiles': [float(q) for q in np.quantile(values, [0.1, 0.5, 0.9])],
+            }
+
+        steps = max(1, int(m['steps']))
+        return {
+            'steps': int(m['steps']),
+            'decision_steps': int(m['decision_steps']),
+            'team_decisions': int(m['team_decisions']),
+            'sampled_total': int(m['sampled_total']),
+            'forced_total': int(m['forced_total']),
+            'mean_S_t': float(np.mean(m['S_t_sizes'])) if m['S_t_sizes'] else 0.0,
+            'S_t_fraction': (
+                float(np.mean(m['S_t_sizes'])) / float(n_agents) if m['S_t_sizes'] else 0.0
+            ),
+            'switch_rate_by_agent': [float(c) / steps for c in switch_by_agent.tolist()],
+            'switch_count_by_agent': switch_by_agent.tolist(),
+            'gap_agent_hist': _hist(gap_agent),
+            'gap_team_hist': _hist(gap_team),
+            'cause_counts': dict(m['cause_counts']),
+            'coordinator_inference_seconds': float(m['coordinator_inference_seconds']),
+            'coordinator_inference_calls': int(m['coordinator_inference_calls']),
+            'segment_length_agent_mean': (
+                float(np.mean(m['segment_lengths_agent'])) if m['segment_lengths_agent'] else 0.0
+            ),
+            'segment_length_team_mean': (
+                float(np.mean(m['segment_lengths_team'])) if m['segment_lengths_team'] else 0.0
+            ),
+            'rows_M_agent': int(m['rows_M_agent']),
+            'rows_M_team': int(m['rows_M_team']),
+            'rows_M': int(m['rows_M']),
+            'optimizer_steps': int(m['optimizer_steps']),
+            'param_displacement': float(m['param_displacement']),
+            'target_scale_team': float(m['target_scale_team']),
+            'target_scale_agent': float(m['target_scale_agent']),
+            'target_var_team': float(m['target_var_team']),
+            'target_var_agent': float(m['target_var_agent']),
+        }
+
+    def _batched_assign_skills_d2(self, states_batch, observations_batch, env_steps_batch,
+                                  dones_batch, deterministic=False):
+        """
+        D2 rollout logic (plan section 5, ADR 01 "Decision").
+
+        Per env and step: reset/done/invalid forces a team decision with every
+        agent sampled; otherwise one teacher-forced pass over the held joint
+        action gives the gaps `g_Z`, `g_i`, a team decision fires on
+        `g_Z >= c_Z` or `a_Z >= k_Z`, and otherwise agent `i` is sampled on
+        `g_i >= c` or `a_i >= k_max`.  The teacher-forced pass draws no RNG;
+        sampling happens only in `assign_partial_batch` and only for `S_t`.
+
+        Age convention: `a_x` is the number of steps elapsed since the decision
+        that produced the currently held skill, evaluated *before* this step's
+        decision.  A skill decided at step `t` has age 0 while it executes at
+        step `t` and age `k_max` at step `t + k_max`, so `a_i >= k_max`
+        reproduces the `env_steps % k == 0` boundaries of `off` when
+        `k_max = k_Z = k`.
+        """
+        num_envs = states_batch.shape[0]
+        n_agents = self.config.n_agents
+        dones_mask = np.asarray(dones_batch, dtype=np.bool_).reshape(num_envs)
+        env_steps = np.asarray(env_steps_batch, dtype=np.int64).reshape(num_envs)
+
+        has_invalid_team_skill = np.array([
+            self.env_team_skills.get(i, -1) == -1 for i in range(num_envs)
+        ])
+        has_invalid_agent_skills = np.array([
+            np.any(np.asarray(
+                self.env_agent_skills.get(i, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ) == -1)
+            for i in range(num_envs)
+        ])
+        invalid_skills_mask = has_invalid_team_skill | has_invalid_agent_skills
+        # `env_steps == 0` is the first step of an episode; `reset_env_state`
+        # additionally invalidates the held skills, so the two agree on the base
+        # route.  Both are kept so a collector that omits one still resets.
+        reset_mask = (env_steps == 0) | dones_mask | invalid_skills_mask
+
+        for i in range(num_envs):
+            if i not in self.env_skill_ages:
+                self.env_skill_ages[i] = np.zeros(n_agents, dtype=np.int64)
+            if i not in self.env_team_ages:
+                self.env_team_ages[i] = 0
+        agent_ages = np.stack(
+            [np.asarray(self.env_skill_ages[i], dtype=np.int64) for i in range(num_envs)]
+        ).astype(np.int64, copy=False)
+        team_ages = np.array([int(self.env_team_ages[i]) for i in range(num_envs)], dtype=np.int64)
+
+        held_team = np.array(
+            [self.env_team_skills.get(i, -1) for i in range(num_envs)], dtype=np.int64
+        )
+        held_agents = np.array(
+            [np.asarray(
+                self.env_agent_skills.get(i, np.full(n_agents, -1, dtype=np.int64)),
+                dtype=np.int64,
+            ) for i in range(num_envs)],
+            dtype=np.int64,
+        )
+
+        sampled_mask = np.zeros((num_envs, n_agents), dtype=np.bool_)
+        sample_Z_mask = np.zeros(num_envs, dtype=np.bool_)
+        team_decision_mask = np.zeros(num_envs, dtype=np.bool_)
+        agent_cause = np.zeros((num_envs, n_agents), dtype=np.int64)
+        team_cause = np.zeros(num_envs, dtype=np.int64)
+        g_agents = np.full((num_envs, n_agents), np.nan, dtype=np.float64)
+        g_team = np.full(num_envs, np.nan, dtype=np.float64)
+
+        # 1. Reset / done / invalid: team decision, every agent sampled.
+        if np.any(reset_mask):
+            sampled_mask[reset_mask] = True
+            sample_Z_mask[reset_mask] = True
+            team_decision_mask[reset_mask] = True
+            agent_cause[reset_mask] = self.D2_CAUSE_RESET
+            team_cause[reset_mask] = self.D2_CAUSE_RESET
+
+        # 2. Otherwise: the teacher-forced gap pass, then the cap/gap tests.
+        eval_indices = np.where(~reset_mask)[0]
+        if eval_indices.size > 0:
+            inference_start = time.perf_counter()
+            eval_states = torch.as_tensor(
+                self._normalize_states(states_batch[eval_indices], update=False),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            eval_obs = torch.as_tensor(
+                self._normalize_observations(observations_batch[eval_indices], update=False),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            held_Z_t = torch.as_tensor(held_team[eval_indices], dtype=torch.long, device=self.device)
+            held_z_t = torch.as_tensor(held_agents[eval_indices], dtype=torch.long, device=self.device)
+            with torch.no_grad():
+                held_eval = self.skill_coordinator.evaluate_held_batch(
+                    eval_states, eval_obs, held_Z_t, held_z_t
+                )
+                Z_logits = held_eval['Z_logits']
+                z_logits = held_eval['z_logits']
+                gap_Z = (
+                    Z_logits.max(dim=-1).values
+                    - Z_logits.gather(1, held_Z_t.unsqueeze(1)).squeeze(1)
+                ).detach().cpu().numpy()
+                gap_z = (
+                    z_logits.max(dim=-1).values
+                    - z_logits.gather(2, held_z_t.unsqueeze(-1)).squeeze(-1)
+                ).detach().cpu().numpy()
+            elapsed = time.perf_counter() - inference_start
+            self.d2_metrics['coordinator_inference_seconds'] += float(elapsed)
+            self.d2_metrics['coordinator_inference_calls'] += 1
+            self._add_transition_profile('d2_trigger_inference', elapsed)
+
+            g_team[eval_indices] = gap_Z.astype(np.float64, copy=False)
+            g_agents[eval_indices] = gap_z.astype(np.float64, copy=False)
+
+            team_gap_fire = gap_Z >= self.d2_cost_c_Z
+            team_cap_fire = team_ages[eval_indices] >= self.d2_k_Z
+            team_fire = team_gap_fire | team_cap_fire
+            fire_idx = eval_indices[team_fire]
+            if fire_idx.size > 0:
+                sampled_mask[fire_idx] = True
+                sample_Z_mask[fire_idx] = True
+                team_decision_mask[fire_idx] = True
+                causes = np.where(
+                    team_gap_fire[team_fire], self.D2_CAUSE_TEAM_GAP, self.D2_CAUSE_TEAM_CAP
+                )
+                team_cause[fire_idx] = causes
+                agent_cause[fire_idx] = causes[:, None]
+
+            hold_local = ~team_fire
+            hold_idx = eval_indices[hold_local]
+            if hold_idx.size > 0:
+                agent_gap_fire = gap_z[hold_local] >= self.d2_cost_c
+                agent_cap_fire = agent_ages[hold_idx] >= self.d2_k_max
+                fire = agent_gap_fire | agent_cap_fire
+                sampled_mask[hold_idx] = fire
+                cause_here = np.where(
+                    agent_gap_fire, self.D2_CAUSE_GAP, self.D2_CAUSE_CAP
+                )
+                agent_cause[hold_idx] = np.where(fire, cause_here, self.D2_CAUSE_NONE)
+
+        # Cheap D2-only invariant asserts (plan section 5).
+        if not np.isfinite(self.d2_cost_c):
+            assert not np.any(agent_cause == self.D2_CAUSE_GAP), \
+                "D2: c = inf produced a `gap` boundary cause"
+        if not np.isfinite(self.d2_cost_c_Z):
+            assert not np.any(team_cause == self.D2_CAUSE_TEAM_GAP), \
+                "D2: c_Z = inf produced a `team_gap` boundary cause"
+        assert np.all(sampled_mask[team_decision_mask]), \
+            "D2: a team decision did not force every agent into S_t (invariant 7)"
+
+        decision_mask = sampled_mask.any(axis=1)
+
+        new_team_skills_batch = held_team.copy()
+        new_agent_skills_batch = held_agents.copy()
+        new_log_probs_batch = [self.env_log_probs.get(i, {}) for i in range(num_envs)]
+
+        decision_indices = np.where(decision_mask)[0]
+        if decision_indices.size > 0:
+            inference_start = time.perf_counter()
+            # `update=True` on the decision subset only, exactly as `off` does,
+            # so the running normalisers see the same states at D0.
+            assign_states = torch.as_tensor(
+                self._normalize_states(states_batch[decision_indices]),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            assign_obs = torch.as_tensor(
+                self._normalize_observations(observations_batch[decision_indices]),
+                dtype=torch.float32,
+                device=self.device,
+            )
+            with torch.no_grad():
+                assignment = self.skill_coordinator.assign_partial_batch(
+                    assign_states,
+                    assign_obs,
+                    torch.as_tensor(held_team[decision_indices], dtype=torch.long, device=self.device),
+                    torch.as_tensor(held_agents[decision_indices], dtype=torch.long, device=self.device),
+                    torch.as_tensor(sample_Z_mask[decision_indices], dtype=torch.bool, device=self.device),
+                    torch.as_tensor(sampled_mask[decision_indices], dtype=torch.bool, device=self.device),
+                    deterministic=deterministic,
+                )
+                state_values = assignment['state_values']
+                agent_values_tensor = assignment['agent_values']
+                if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+                    state_values = self._denormalize_values(state_values, self.value_norm_coordinator)
+                    agent_value_columns = [
+                        self._denormalize_values(
+                            agent_values_tensor[:, agent_idx:agent_idx + 1],
+                            self.value_norm_coordinator,
+                        ).squeeze(-1)
+                        for agent_idx in range(agent_values_tensor.size(1))
+                    ]
+                    if agent_value_columns:
+                        agent_values_tensor = torch.stack(agent_value_columns, dim=1)
+
+                team_skills_np = assignment['team_skills'].detach().cpu().numpy()
+                agent_skills_np = assignment['agent_skills'].detach().cpu().numpy()
+                team_log_probs_np = assignment['team_log_probs'].detach().cpu().numpy()
+                agent_log_probs_np = assignment['agent_log_probs'].detach().cpu().numpy()
+                order_np = assignment['order'].detach().cpu().numpy()
+                state_values_np = state_values.squeeze(-1).detach().cpu().numpy()
+                agent_values_np = agent_values_tensor.detach().cpu().numpy()
+            elapsed = time.perf_counter() - inference_start
+            self.d2_metrics['coordinator_inference_seconds'] += float(elapsed)
+            self.d2_metrics['coordinator_inference_calls'] += 1
+            self._add_transition_profile('d2_assign_inference', elapsed)
+        else:
+            order_np = np.zeros((0, n_agents), dtype=np.int64)
+
+        order_batch = np.tile(np.arange(n_agents, dtype=np.int64), (num_envs, 1))
+        for local_idx, env_idx in enumerate(decision_indices):
+            env_idx = int(env_idx)
+            new_team_skills_batch[env_idx] = int(team_skills_np[local_idx])
+            new_agent_skills_batch[env_idx] = agent_skills_np[local_idx]
+            order_batch[env_idx] = order_np[local_idx]
+            new_log_probs_batch[env_idx] = {
+                'team_log_prob': float(team_log_probs_np[local_idx]),
+                'agent_log_probs': agent_log_probs_np[local_idx].astype(np.float32, copy=False).tolist(),
+                'state_value': float(state_values_np[local_idx]),
+                'agent_values': agent_values_np[local_idx].astype(np.float32, copy=False).tolist(),
+            }
+            self.env_timers[env_idx] = 0
+
+        for env_idx in np.where(~decision_mask)[0]:
+            self.env_timers[int(env_idx)] = self.env_timers.get(int(env_idx), 0) + 1
+
+        # Ages of the skills that actually execute at this step: 0 where the
+        # skill was just decided, the pre-decision age otherwise.
+        exec_agent_ages = np.where(sampled_mask, 0, agent_ages).astype(np.int64, copy=False)
+        exec_team_ages = np.where(sample_Z_mask, 0, team_ages).astype(np.int64, copy=False)
+
+        switched = (new_agent_skills_batch != held_agents) & sampled_mask & (held_agents >= 0)
+
+        for i in range(num_envs):
+            self.env_team_skills[i] = int(new_team_skills_batch[i])
+            self.env_agent_skills[i] = new_agent_skills_batch[i]
+            self.env_log_probs[i] = new_log_probs_batch[i]
+            self.env_skill_ages[i] = exec_agent_ages[i] + 1
+            self.env_team_ages[i] = int(exec_team_ages[i]) + 1
+
+        self._d2_last_step = {
+            'decision': decision_mask.copy(),
+            'team_decision': team_decision_mask.copy(),
+            'sampled_mask': sampled_mask.copy(),
+            'sample_Z': sample_Z_mask.copy(),
+            'order': order_batch,
+            'agent_ages': exec_agent_ages,
+            'team_ages': exec_team_ages,
+            'agent_cause': agent_cause,
+            'team_cause': team_cause,
+            'g_agents': g_agents,
+            'g_team': g_team,
+        }
+        for env_idx in range(num_envs):
+            self.env_d2_last_decision[env_idx] = {
+                'decision': bool(decision_mask[env_idx]),
+                'team_decision': bool(team_decision_mask[env_idx]),
+                'sampled_mask': sampled_mask[env_idx].copy(),
+                'sample_Z': bool(sample_Z_mask[env_idx]),
+                'order': order_batch[env_idx].copy(),
+                'agent_ages': exec_agent_ages[env_idx].copy(),
+                'team_age': int(exec_team_ages[env_idx]),
+                'agent_cause': agent_cause[env_idx].copy(),
+                'team_cause': int(team_cause[env_idx]),
+            }
+
+        metrics = self.d2_metrics
+        metrics['steps'] += num_envs
+        metrics['decision_steps'] += int(decision_mask.sum())
+        metrics['team_decisions'] += int(team_decision_mask.sum())
+        metrics['sampled_total'] += int(sampled_mask.sum())
+        metrics['forced_total'] += int((~sampled_mask).sum())
+        metrics['S_t_sizes'].extend(sampled_mask.sum(axis=1).astype(np.int64).tolist())
+        metrics['switch_count_by_agent'].append(switched.sum(axis=0).astype(np.int64))
+        finite_agent_gaps = g_agents[np.isfinite(g_agents)]
+        if finite_agent_gaps.size:
+            metrics['gap_agent'].extend(finite_agent_gaps.tolist())
+        finite_team_gaps = g_team[np.isfinite(g_team)]
+        if finite_team_gaps.size:
+            metrics['gap_team'].extend(finite_team_gaps.tolist())
+        # Team-level causes are counted once per env; per-agent causes are counted
+        # per sampled (env, agent) position.
+        metrics['cause_counts']['reset'] += int(np.sum(team_cause == self.D2_CAUSE_RESET))
+        metrics['cause_counts']['team_gap'] += int(np.sum(team_cause == self.D2_CAUSE_TEAM_GAP))
+        metrics['cause_counts']['team_cap'] += int(np.sum(team_cause == self.D2_CAUSE_TEAM_CAP))
+        metrics['cause_counts']['gap'] += int(np.sum(agent_cause == self.D2_CAUSE_GAP))
+        metrics['cause_counts']['cap'] += int(np.sum(agent_cause == self.D2_CAUSE_CAP))
+
         return new_team_skills_batch, new_agent_skills_batch, new_log_probs_batch
 
     def _batched_assign_skills_ha_ctse(self, states_batch, observations_batch, env_steps_batch, dones_batch, deterministic=False):
@@ -2324,6 +3108,10 @@ class HMASDAgent:
                 [self._is_new_high_level_decision(log_probs) for log_probs in log_probs_list],
                 dtype=bool,
             ) | np.asarray(dones_batch, dtype=bool)
+        elif self.d2_enabled:
+            # A D2 boundary is any step where at least one agent is re-decided;
+            # a team decision implies every agent is sampled (invariant 7).
+            skill_changed = np.asarray(self._d2_last_step['decision'], dtype=bool)
         else:
             skill_changed = ((env_steps_batch % self.config.k) == 0) | np.asarray(dones_batch, dtype=bool)
         skill_timers = np.asarray([self.env_timers[i] for i in range(num_envs)], dtype=np.int64)
@@ -2337,6 +3125,17 @@ class HMASDAgent:
             'log_probs': log_probs_list,
             'env_id': np.arange(num_envs, dtype=np.int64),
         }
+        if self.d2_enabled:
+            # Replay metadata and ages for the D2 storage path (plan sections 6, 9).
+            step_data['d2_decision'] = self._d2_last_step['decision']
+            step_data['d2_team_decision'] = self._d2_last_step['team_decision']
+            step_data['d2_sampled_mask'] = self._d2_last_step['sampled_mask']
+            step_data['d2_sample_Z'] = self._d2_last_step['sample_Z']
+            step_data['d2_order'] = self._d2_last_step['order']
+            step_data['d2_agent_ages'] = self._d2_last_step['agent_ages']
+            step_data['d2_team_ages'] = self._d2_last_step['team_ages']
+            step_data['d2_agent_cause'] = self._d2_last_step['agent_cause']
+            step_data['d2_team_cause'] = self._d2_last_step['team_cause']
         # 3. 准备info字典列表
         profile_start = time.perf_counter() if profile_enabled else 0.0
         infos_list = None
@@ -2758,7 +3557,8 @@ class HMASDAgent:
         
         return True
 
-    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills):
+    def _store_discriminator_data(self, next_state, team_skill, next_observations, agent_skills,
+                                  env_id=None):
         """
         将状态-技能对存储到当前rollout的判别器缓存中。
         
@@ -2777,12 +3577,18 @@ class HMASDAgent:
                 compact_np = self._compute_ha_discriminator_compact_tensor(state_tensor, obs_tensor)
                 compact_np = compact_np.squeeze(0).detach().cpu().numpy().astype(np.float32, copy=False)
         
+        d2_decision = (
+            self.env_d2_last_decision.get(env_id) if self._d2_uses_age_feature() else None
+        )
+
         # 存储团队技能数据（使用归一化状态）
         team_experience = {'type': 'team', 'state': normalized_state, 'skill': team_skill}
         if compact_np is not None:
             team_experience['compact'] = compact_np
+        if d2_decision is not None:
+            team_experience['d2_age'] = float(d2_decision['team_age']) / float(max(1, self.d2_k_Z))
         self.discriminator_buffer.push(team_experience)
-        
+
         # 存储每个智能体的个体技能数据（使用归一化观测）
         for i in range(self.config.n_agents):
             ind_experience = {
@@ -2793,9 +3599,14 @@ class HMASDAgent:
             }
             if compact_np is not None:
                 ind_experience['compact'] = compact_np
+            if d2_decision is not None:
+                ind_experience['d2_age'] = (
+                    float(d2_decision['agent_ages'][i]) / float(max(1, self.d2_k_max))
+                )
             self.discriminator_buffer.push(ind_experience)
 
-    def _store_discriminator_data_batch(self, normalized_states, team_skills, normalized_observations, agent_skills):
+    def _store_discriminator_data_batch(self, normalized_states, team_skills, normalized_observations, agent_skills,
+                                        team_ages=None, agent_ages=None):
         """
         批量存储判别器训练数据。输入必须已经归一化，避免与批量内在奖励路径重复归一化。
         """
@@ -2823,6 +3634,16 @@ class HMASDAgent:
                 if compact_tensor is not None:
                     compact_np = compact_tensor.detach().cpu().numpy().astype(np.float32, copy=False)
 
+        store_ages = self._d2_uses_age_feature()
+        team_ages_np = (
+            np.asarray(team_ages, dtype=np.float32).reshape(num_envs)
+            if (store_ages and team_ages is not None) else np.zeros(num_envs, dtype=np.float32)
+        )
+        agent_ages_np = (
+            np.asarray(agent_ages, dtype=np.float32).reshape(num_envs, n_agents)
+            if (store_ages and agent_ages is not None) else np.zeros((num_envs, n_agents), dtype=np.float32)
+        )
+
         experiences = []
         for env_idx in range(num_envs):
             team_experience = {
@@ -2832,6 +3653,8 @@ class HMASDAgent:
             }
             if compact_np is not None:
                 team_experience['compact'] = compact_np[env_idx]
+            if store_ages:
+                team_experience['d2_age'] = float(team_ages_np[env_idx]) / float(max(1, self.d2_k_Z))
             experiences.append(team_experience)
             for agent_idx in range(n_agents):
                 ind_experience = {
@@ -2842,6 +3665,10 @@ class HMASDAgent:
                 }
                 if compact_np is not None:
                     ind_experience['compact'] = compact_np[env_idx]
+                if store_ages:
+                    ind_experience['d2_age'] = (
+                        float(agent_ages_np[env_idx, agent_idx]) / float(max(1, self.d2_k_max))
+                    )
                 experiences.append(ind_experience)
 
         self.discriminator_buffer.extend(experiences)
@@ -2849,7 +3676,8 @@ class HMASDAgent:
     def store_transition(self, state, next_state, observations, next_observations, 
                          actions, rewards, dones, team_skill, agent_skills, action_logprobs, log_probs=None, 
                          skill_timer_for_env=None, env_id=0, values=None, rollout_step_idx=None,
-                         reward_info=None, _precomputed_reward_components=None, _skip_discriminator_store=False):
+                         reward_info=None, _precomputed_reward_components=None, _skip_discriminator_store=False,
+                         d2_step=None):
         """
         存储环境交互经验（重构后的简化版本）
         
@@ -2910,7 +3738,9 @@ class HMASDAgent:
         # 根据论文，我们使用 t+1 时刻的状态/观测
         if (not _skip_discriminator_store) and not getattr(self.config, 'disable_discriminator_training', False):
             profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
-            self._store_discriminator_data(next_state, team_skill, next_observations, agent_skills)
+            self._store_discriminator_data(
+                next_state, team_skill, next_observations, agent_skills, env_id=env_id
+            )
             if self.enable_runtime_profiling:
                 self._add_transition_profile('discriminator_buffer_write', time.perf_counter() - profile_start)
 
@@ -2919,6 +3749,20 @@ class HMASDAgent:
         # without a new high-level action. Keep the existing pending sample
         # open across such boundaries.
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
+        if self.d2_enabled:
+            # D2 owns its own segment tables; the `off` pending/close mechanism
+            # (which assumes one global k-boundary per env) is bypassed entirely.
+            if d2_step is None:
+                d2_step = self.env_d2_last_decision.get(env_id)
+            if d2_step is None:
+                main_logger.error(f"D2 storage: no decision metadata for env {env_id}")
+            else:
+                self._d2_store_transition(
+                    env_id, rollout_step_idx, current_reward, dones, d2_step
+                )
+            if self.enable_runtime_profiling:
+                self._add_transition_profile('high_level_bookkeeping', time.perf_counter() - profile_start)
+            return returned_reward_components
         if (
             rollout_step_idx is not None
             and skill_timer_for_env == 0
@@ -3044,12 +3888,47 @@ class HMASDAgent:
             log_probs_batch = [info['log_probs'] for info in infos_batch]
             skill_timers = np.asarray([info['skill_timer'] for info in infos_batch], dtype=np.int64)
 
+        d2_steps = None
+        if self.d2_enabled:
+            if step_data is not None and 'd2_sampled_mask' in step_data:
+                d2_steps = [
+                    {
+                        'decision': bool(step_data['d2_decision'][env_id]),
+                        'team_decision': bool(step_data['d2_team_decision'][env_id]),
+                        'sampled_mask': np.asarray(step_data['d2_sampled_mask'][env_id], dtype=np.bool_),
+                        'sample_Z': bool(step_data['d2_sample_Z'][env_id]),
+                        'order': np.asarray(step_data['d2_order'][env_id], dtype=np.int64),
+                        'agent_ages': np.asarray(step_data['d2_agent_ages'][env_id], dtype=np.int64),
+                        'team_age': int(step_data['d2_team_ages'][env_id]),
+                        'agent_cause': np.asarray(step_data['d2_agent_cause'][env_id], dtype=np.int64),
+                        'team_cause': int(step_data['d2_team_cause'][env_id]),
+                    }
+                    for env_id in range(num_envs)
+                ]
+            else:
+                d2_steps = [self.env_d2_last_decision.get(env_id) for env_id in range(num_envs)]
+
+        d2_team_ages = d2_agent_ages = None
+        if self._d2_uses_age_feature() and d2_steps is not None:
+            d2_team_ages = np.asarray(
+                [(s['team_age'] if s is not None else 0) for s in d2_steps], dtype=np.int64
+            )
+            d2_agent_ages = np.asarray(
+                [
+                    (s['agent_ages'] if s is not None else np.zeros(self.config.n_agents, dtype=np.int64))
+                    for s in d2_steps
+                ],
+                dtype=np.int64,
+            )
+
         intrinsic_batch = self._compute_intrinsic_rewards_batch(
             next_states=next_states,
             rewards=rewards,
             next_observations=next_observations,
             team_skills=team_skills,
-            agent_skills=agent_skills_batch
+            agent_skills=agent_skills_batch,
+            team_ages=d2_team_ages,
+            agent_ages=d2_agent_ages,
         )
 
         if not getattr(self.config, 'disable_discriminator_training', False):
@@ -3058,7 +3937,9 @@ class HMASDAgent:
                 intrinsic_batch['normalized_states'],
                 team_skills,
                 intrinsic_batch['normalized_observations'],
-                agent_skills_batch
+                agent_skills_batch,
+                team_ages=d2_team_ages,
+                agent_ages=d2_agent_ages,
             )
             if self.enable_runtime_profiling:
                 self._add_transition_profile('discriminator_buffer_write', time.perf_counter() - profile_start)
@@ -3092,7 +3973,8 @@ class HMASDAgent:
                     rollout_step_idx=rollout_step_idx,
                     reward_info=reward_info,
                     _precomputed_reward_components=env_reward_components,
-                    _skip_discriminator_store=True
+                    _skip_discriminator_store=True,
+                    d2_step=(d2_steps[env_id] if d2_steps is not None else None),
                 )
             )
         return reward_components
@@ -3180,23 +4062,48 @@ class HMASDAgent:
         compact, _, _, _, _ = self.low_level_compact_extractor(states_tensor, joint_observations_tensor)
         return compact
 
-    def _team_discriminator_logits(self, states_tensor, compact_tensor=None):
+    def _d2_uses_age_feature(self):
+        """True when the D2 discriminator age feature is active (plan section 9)."""
+        return self.d2_enabled and self.d2_age_feature == 'normalized'
+
+    def _d2_normalized_team_age(self, team_ages, batch_size):
+        ages = np.asarray(team_ages, dtype=np.float32).reshape(-1)
+        if ages.size != batch_size:
+            ages = np.resize(ages, batch_size)
+        return ages / float(max(1, self.d2_k_Z))
+
+    def _d2_normalized_agent_age(self, agent_ages, batch_size):
+        ages = np.asarray(agent_ages, dtype=np.float32).reshape(-1)
+        if ages.size != batch_size:
+            ages = np.resize(ages, batch_size)
+        return ages / float(max(1, self.d2_k_max))
+
+    def _team_discriminator_logits(self, states_tensor, compact_tensor=None, age=None):
         if self.use_compact_team_discriminator:
             if compact_tensor is None:
                 compact_tensor = self._zero_compact_tensor(states_tensor.shape[0])
             return self.team_discriminator(states_tensor, compact_tensor)
+        if self._d2_uses_age_feature():
+            if age is None:
+                age = np.zeros(states_tensor.shape[0], dtype=np.float32)
+            return self.team_discriminator(states_tensor, age)
         return self.team_discriminator(states_tensor)
 
-    def _individual_discriminator_logits(self, obs_tensor, team_skill_tensor, compact_tensor=None):
+    def _individual_discriminator_logits(self, obs_tensor, team_skill_tensor, compact_tensor=None, age=None):
         if team_skill_tensor.dim() == 0:
             team_skill_tensor = team_skill_tensor.unsqueeze(0)
         if self.use_compact_individual_discriminator:
             if compact_tensor is None:
                 compact_tensor = self._zero_compact_tensor(obs_tensor.shape[0])
             return self.individual_discriminator(obs_tensor, team_skill_tensor, compact_tensor)
+        if self._d2_uses_age_feature():
+            if age is None:
+                age = np.zeros(obs_tensor.shape[0], dtype=np.float32)
+            return self.individual_discriminator(obs_tensor, team_skill_tensor, age)
         return self.individual_discriminator(obs_tensor, team_skill_tensor)
 
-    def _compute_intrinsic_rewards_batch(self, next_states, rewards, next_observations, team_skills, agent_skills):
+    def _compute_intrinsic_rewards_batch(self, next_states, rewards, next_observations, team_skills, agent_skills,
+                                         team_ages=None, agent_ages=None):
         """
         Vectorized discriminator reward computation for one VecEnv step.
 
@@ -3250,7 +4157,19 @@ class HMASDAgent:
 
                 self._sync_cuda_for_profile()
                 team_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
-                team_disc_logits = self._team_discriminator_logits(state_tensor, compact_tensor)
+                team_age_input = None
+                agent_age_input = None
+                if self._d2_uses_age_feature():
+                    team_age_input = self._d2_normalized_team_age(
+                        team_ages if team_ages is not None else np.zeros(num_envs), num_envs
+                    )
+                    agent_age_input = self._d2_normalized_agent_age(
+                        agent_ages if agent_ages is not None else np.zeros((num_envs, n_agents)),
+                        num_envs * n_agents,
+                    )
+                team_disc_logits = self._team_discriminator_logits(
+                    state_tensor, compact_tensor, age=team_age_input
+                )
                 team_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
                     team_disc_logits, "team_disc_logits_batch"
                 )
@@ -3280,6 +4199,7 @@ class HMASDAgent:
                     obs_tensor,
                     team_skill_tensor,
                     flat_compact_tensor,
+                    age=agent_age_input,
                 )
                 agent_disc_logits = self.numerical_stabilizer.check_and_fix_tensor(
                     agent_disc_logits, "agent_disc_logits_batch"
@@ -4539,6 +5459,12 @@ class HMASDAgent:
         if self.use_ha_ctse:
             return self.update_coordinator_ha_ctse(num_steps, bootstrap_values=bootstrap_values)
 
+        if self.d2_enabled:
+            # Close every still-open segment at the rollout boundary before the
+            # tables are read (plan section 6), then run the masked D2 update.
+            self._d2_flush_open_segments(num_steps)
+            return self.update_coordinator_d2(num_steps, bootstrap_values=bootstrap_values)
+
         # num_steps 现在是实际在缓冲区中的有效数据量
         
         # 【修复】首先从缓冲区获取数据以检查有效样本数
@@ -4905,6 +5831,260 @@ class HMASDAgent:
                avg_team_entropy, avg_agent_entropy, \
                mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
     
+    def update_coordinator_d2(self, num_steps, bootstrap_values=None):
+        """
+        D2 masked PPO update (plan section 8, ADR 01 invariant 6).
+
+        Rows are `(t, e)` pairs with at least one valid segment row.  The joint
+        action is replayed in the stored decode order with
+        `evaluate_training_batch_ordered`; policy losses, entropies and value
+        losses are masked by the per-head `valid` masks (`valid` implies
+        `sampled`, so forced positions never enter any term).
+        """
+        rollout_data = self.rollout_buffer._get_full_rollout_data()
+        if rollout_data is None:
+            main_logger.warning("没有有效的Rollout数据，跳过D2 Coordinator更新")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        row_mask = tables['agent_valid'].any(axis=-1) | tables['team_valid']
+        rows_M = int(row_mask.sum())
+        if rows_M == 0:
+            main_logger.warning("没有有效的D2高层策略数据，跳过Coordinator更新")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        if bootstrap_values is not None:
+            high_level_last_values = bootstrap_values
+        else:
+            high_level_last_values = self._compute_high_level_bootstrap_values(num_steps)
+
+        profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
+        self.rollout_buffer.compute_high_level_advantages(
+            high_level_last_values,
+            gamma=self.config.gamma,
+            value_normalizer=None,
+        )
+        if self.enable_runtime_profiling:
+            self._add_update_profile('coord_advantage', time.perf_counter() - profile_start)
+
+        # Exposure line: M, target scale and variance per head (ADR 01 metrics).
+        tables = self.rollout_buffer.get_d2_tables(num_steps)
+        team_returns_all = tables['team_returns'][tables['team_valid']]
+        agent_returns_all = tables['agent_returns'][tables['agent_valid']]
+        metrics = self.d2_metrics
+        metrics['rows_M'] = rows_M
+        metrics['rows_M_agent'] = int(tables['agent_valid'].sum())
+        metrics['rows_M_team'] = int(tables['team_valid'].sum())
+        metrics['target_scale_team'] = (
+            float(np.mean(np.abs(team_returns_all))) if team_returns_all.size else 0.0
+        )
+        metrics['target_scale_agent'] = (
+            float(np.mean(np.abs(agent_returns_all))) if agent_returns_all.size else 0.0
+        )
+        metrics['target_var_team'] = (
+            float(np.var(team_returns_all)) if team_returns_all.size else 0.0
+        )
+        metrics['target_var_agent'] = (
+            float(np.var(agent_returns_all)) if agent_returns_all.size else 0.0
+        )
+
+        if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+            all_returns = self.rollout_buffer.get_all_high_level_returns(num_steps)
+            if all_returns.size > 0:
+                self.value_norm_coordinator.update(all_returns)
+
+        coordinator_batch_size = getattr(self.config, 'coordinator_batch_size', 128)
+        sampler = self.rollout_buffer.get_d2_coordinator_sampler(
+            num_steps,
+            getattr(self.config, 'ppo_epochs', 10),
+            coordinator_batch_size,
+            device=self.device,
+        )
+        if sampler is None:
+            main_logger.error("无法获取D2 Coordinator采样器")
+            return 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+        obs_norm_mean = obs_norm_var = None
+        if getattr(self.config, 'use_obsnorm', False) and self.obs_norm is not None:
+            obs_norm_mean = torch.as_tensor(self.obs_norm.mean, device=self.device, dtype=torch.float32)
+            obs_norm_var = torch.as_tensor(self.obs_norm.var, device=self.device, dtype=torch.float32)
+        state_norm_mean = state_norm_var = None
+        if getattr(self.config, 'use_statenorm', True) and self.state_norm is not None:
+            state_norm_mean = torch.as_tensor(self.state_norm.mean, device=self.device, dtype=torch.float32)
+            state_norm_var = torch.as_tensor(self.state_norm.var, device=self.device, dtype=torch.float32)
+
+        coord_value_norm_tensors = self._value_norm_tensors(self.value_norm_coordinator)
+
+        total_policy_loss = torch.zeros((), device=self.device)
+        total_value_loss = torch.zeros((), device=self.device)
+        total_entropy_loss = torch.zeros((), device=self.device)
+        total_loss_acc = torch.zeros((), device=self.device)
+        total_team_entropy = torch.zeros((), device=self.device)
+        total_agent_entropy = torch.zeros((), device=self.device)
+        update_count = 0
+
+        for batch in sampler:
+            observations_batch = batch['observations']
+            states_batch = batch['states']
+            if obs_norm_mean is not None:
+                observations_batch = torch.clamp(
+                    (observations_batch - obs_norm_mean) / torch.sqrt(obs_norm_var + 1e-8), -10.0, 10.0
+                )
+            if state_norm_mean is not None:
+                states_batch = torch.clamp(
+                    (states_batch - state_norm_mean) / torch.sqrt(state_norm_var + 1e-8), -10.0, 10.0
+                )
+
+            team_mask = batch['team_valid']
+            agent_mask = batch['agent_valid']
+            team_count = torch.clamp(team_mask.sum(), min=1.0)
+            agent_count = torch.clamp(agent_mask.sum(), min=1.0)
+            batch_size = observations_batch.shape[0]
+
+            with self._update_autocast():
+                coord_eval = self.skill_coordinator.evaluate_training_batch_ordered(
+                    states_batch,
+                    observations_batch,
+                    batch['team_skills'],
+                    batch['agent_skills'],
+                    batch['order'],
+                    batch['sampled_mask'],
+                    batch['sample_Z'],
+                )
+
+            team_log_probs = coord_eval['team_log_probs']
+            agent_log_probs = coord_eval['agent_log_probs']
+            team_entropy = coord_eval['team_entropy']
+            agent_entropies_tensor = coord_eval['agent_entropies']
+
+            # Entropy sums over sampled (valid) positions only (ADR invariant 6).
+            total_entropy_per_sample = (
+                team_entropy * team_mask + (agent_entropies_tensor * agent_mask).sum(dim=1)
+            )
+            entropy = total_entropy_per_sample.sum() / max(1, batch_size)
+
+            state_values = coord_eval['state_values'].squeeze(-1)
+            agent_values_tensor = coord_eval['agent_values']
+
+            team_advantages_batch = batch['team_advantages'] * team_mask
+            agent_advantages_batch = batch['agent_advantages'] * agent_mask
+            all_advantages = torch.cat(
+                [team_advantages_batch.reshape(-1), agent_advantages_batch.reshape(-1)], dim=0
+            )
+            all_mask = torch.cat([team_mask.reshape(-1), agent_mask.reshape(-1)], dim=0)
+            mask_total = torch.clamp(all_mask.sum(), min=1.0)
+            global_mean = (all_advantages * all_mask).sum() / mask_total
+            global_var = ((all_advantages - global_mean) ** 2 * all_mask).sum() / mask_total
+            global_std = torch.sqrt(global_var) + 1e-8
+            team_advantages_batch = (batch['team_advantages'] - global_mean) / global_std
+            agent_advantages_batch = (batch['agent_advantages'] - global_mean) / global_std
+
+            clip = self.config.clip_epsilon
+            team_ratios = torch.exp(team_log_probs - batch['old_team_log_probs'].detach())
+            team_surr1 = team_ratios * team_advantages_batch
+            team_surr2 = torch.clamp(team_ratios, 1.0 - clip, 1.0 + clip) * team_advantages_batch
+            team_policy_loss = -(torch.min(team_surr1, team_surr2) * team_mask).sum() / team_count
+
+            agent_ratios = torch.exp(agent_log_probs - batch['old_agent_log_probs'].detach())
+            agent_surr1 = agent_ratios * agent_advantages_batch
+            agent_surr2 = torch.clamp(agent_ratios, 1.0 - clip, 1.0 + clip) * agent_advantages_batch
+            agent_policy_loss = -(torch.min(agent_surr1, agent_surr2) * agent_mask).sum() / agent_count
+
+            policy_loss = team_policy_loss + agent_policy_loss
+
+            team_returns_tensor = batch['team_returns']
+            agent_returns_tensor = batch['agent_returns']
+            if coord_value_norm_tensors is not None:
+                mean, var, std = coord_value_norm_tensors
+                team_target = (team_returns_tensor - mean) / std
+                agent_target = (agent_returns_tensor - mean) / std
+                if hasattr(self.config, "value_clip"):
+                    team_target = torch.clamp(team_target, -self.config.value_clip, self.config.value_clip)
+                    agent_target = torch.clamp(agent_target, -self.config.value_clip, self.config.value_clip)
+            else:
+                team_target = team_returns_tensor
+                agent_target = agent_returns_tensor
+
+            team_value_loss = (
+                ((state_values - team_target.detach()) ** 2) * team_mask
+            ).sum() / team_count
+            agent_value_loss = (
+                ((agent_values_tensor - agent_target.detach()) ** 2) * agent_mask
+            ).sum() / agent_count
+            value_loss = team_value_loss + agent_value_loss
+
+            entropy_loss = -self.config.lambda_h * entropy
+            loss = policy_loss + self.config.value_loss_coef * value_loss + entropy_loss
+
+            if torch.isnan(loss).any() or torch.isinf(loss).any():
+                main_logger.error("D2 coordinator loss contains NaN or Inf! Skipping update.")
+                continue
+
+            self.coordinator_optimizer.zero_grad()
+            if self.update_amp_enabled:
+                self.update_grad_scaler.scale(loss).backward()
+                self.update_grad_scaler.unscale_(self.coordinator_optimizer)
+            else:
+                loss.backward()
+            torch.nn.utils.clip_grad_norm_(self.skill_coordinator.parameters(), self.config.max_grad_norm)
+            if self.update_amp_enabled:
+                self.update_grad_scaler.step(self.coordinator_optimizer)
+                self.update_grad_scaler.update()
+            else:
+                self.coordinator_optimizer.step()
+
+            total_policy_loss = total_policy_loss + policy_loss.detach()
+            total_value_loss = total_value_loss + value_loss.detach()
+            total_entropy_loss = total_entropy_loss + entropy_loss.detach()
+            total_loss_acc = total_loss_acc + loss.detach()
+            total_team_entropy = total_team_entropy + (
+                (team_entropy * team_mask).sum() / team_count
+            ).detach()
+            total_agent_entropy = total_agent_entropy + (
+                (agent_entropies_tensor * agent_mask).sum() / agent_count
+            ).detach()
+            update_count += 1
+
+        metrics['optimizer_steps'] += int(update_count)
+        if self.d2_coordinator_theta0 is not None and self.d2_coordinator_theta0_norm > 0.0:
+            with torch.no_grad():
+                displacement = torch.sqrt(
+                    sum(
+                        ((p.detach() - p0).double() ** 2).sum()
+                        for p, p0 in zip(self.skill_coordinator.parameters(), self.d2_coordinator_theta0)
+                    )
+                ).item()
+            metrics['param_displacement'] = float(displacement) / self.d2_coordinator_theta0_norm
+
+        avg_policy_loss = (total_policy_loss / update_count).item() if update_count > 0 else 0.0
+        avg_value_loss = (total_value_loss / update_count).item() if update_count > 0 else 0.0
+        avg_entropy_loss = (total_entropy_loss / update_count).item() if update_count > 0 else 0.0
+        avg_total_loss = (total_loss_acc / update_count).item() if update_count > 0 else 0.0
+        avg_team_entropy = (total_team_entropy / update_count).item() if update_count > 0 else 0.0
+        avg_agent_entropy = (total_agent_entropy / update_count).item() if update_count > 0 else 0.0
+
+        rewards_all = np.concatenate([
+            tables['team_reward'][tables['team_valid']].ravel(),
+            tables['agent_reward'][tables['agent_valid']].ravel(),
+        ])
+        avg_high_level_reward = float(np.mean(rewards_all)) if rewards_all.size else 0.0
+        mean_state_value = (
+            float(np.mean(tables['team_value'][tables['team_valid']]))
+            if tables['team_valid'].any() else 0.0
+        )
+        mean_agent_value = (
+            float(np.mean(tables['agent_values'][tables['agent_valid']]))
+            if tables['agent_valid'].any() else 0.0
+        )
+
+        main_logger.info(
+            f"D2 Coordinator 更新完成: {update_count}次更新, M={rows_M}, "
+            f"平均损失={avg_total_loss:.6f}, 参数位移={metrics['param_displacement']:.6g}"
+        )
+        return avg_total_loss, avg_policy_loss, avg_value_loss, \
+            avg_team_entropy, avg_agent_entropy, \
+            mean_state_value, mean_agent_value, avg_high_level_reward, 0.0
+
     def update_discoverer_from_rollout(self, last_values, dones):
         """
         使用重构后的RolloutBuffer更新低层技能发现器网络。
@@ -5234,6 +6414,8 @@ class HMASDAgent:
         update_epochs,
         batch_size,
         noise_std,
+        team_ages=None,
+        ind_ages=None,
     ):
         num_team_samples = int(team_states.size(0)) if team_states is not None else 0
         num_ind_samples = int(ind_observations.size(0)) if ind_observations is not None else 0
@@ -5249,6 +6431,8 @@ class HMASDAgent:
 
             for start_idx in range(0, max_samples, batch_size):
                 loss_terms = []
+                update_team = False
+                update_individual = False
 
                 if team_indices is not None and start_idx < num_team_samples:
                     end_idx = min(start_idx + batch_size, num_team_samples)
@@ -5258,9 +6442,13 @@ class HMASDAgent:
                     batch_compacts = team_compacts[batch_indices] if team_compacts is not None else None
                     with torch.no_grad():
                         state_noise = torch.randn_like(batch_states) * noise_std
-                    team_disc_logits = self._team_discriminator_logits(batch_states + state_noise, batch_compacts)
+                    batch_team_ages = team_ages[batch_indices] if team_ages is not None else None
+                    team_disc_logits = self._team_discriminator_logits(
+                        batch_states + state_noise, batch_compacts, age=batch_team_ages
+                    )
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     loss_terms.append(team_disc_loss)
+                    update_team = True
                     team_loss_accumulated += team_disc_loss.item()
                     team_update_count += 1
 
@@ -5273,13 +6461,16 @@ class HMASDAgent:
                     batch_compacts = ind_compacts[batch_indices] if ind_compacts is not None else None
                     with torch.no_grad():
                         obs_noise = torch.randn_like(batch_obs) * noise_std
+                    batch_ind_ages = ind_ages[batch_indices] if ind_ages is not None else None
                     agent_disc_logits = self._individual_discriminator_logits(
                         batch_obs + obs_noise,
                         batch_team_skills,
                         batch_compacts,
+                        age=batch_ind_ages,
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     loss_terms.append(agent_disc_loss)
+                    update_individual = True
                     ind_loss_accumulated += agent_disc_loss.item()
                     ind_update_count += 1
 
@@ -5287,13 +6478,24 @@ class HMASDAgent:
                     continue
 
                 fused_loss = torch.stack(loss_terms).sum()
-                self.discriminator_optimizer.zero_grad()
+                if update_team:
+                    self.team_discriminator_optimizer.zero_grad()
+                if update_individual:
+                    self.individual_discriminator_optimizer.zero_grad()
                 fused_loss.backward()
-                torch.nn.utils.clip_grad_norm_(
-                    list(self.team_discriminator.parameters()) + list(self.individual_discriminator.parameters()),
-                    self.config.max_grad_norm
-                )
-                self.discriminator_optimizer.step()
+                # The legacy combined Adam held independent per-parameter
+                # moments but clipped the fused parameter inventory together.
+                # Retain that clipping contract while separating optimizer state.
+                active_parameters = []
+                if update_team:
+                    active_parameters.extend(self.team_discriminator.parameters())
+                if update_individual:
+                    active_parameters.extend(self.individual_discriminator.parameters())
+                torch.nn.utils.clip_grad_norm_(active_parameters, self.config.max_grad_norm)
+                if update_team:
+                    self.team_discriminator_optimizer.step()
+                if update_individual:
+                    self.individual_discriminator_optimizer.step()
                 if self.r39_native_hmasd_toy:
                     self.native_toy_optimizer_updates['discriminator'] += 1
 
@@ -5307,11 +6509,11 @@ class HMASDAgent:
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         with torch.no_grad():
             team_acc = (
-                (self._team_discriminator_logits(team_states, team_compacts).argmax(-1) == team_skills_tensor).float().mean().item()
+                (self._team_discriminator_logits(team_states, team_compacts, age=team_ages).argmax(-1) == team_skills_tensor).float().mean().item()
                 if team_states is not None else 0.0
             )
             ind_acc = (
-                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts).argmax(-1) == ind_agent_skills).float().mean().item()
+                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts, age=ind_ages).argmax(-1) == ind_agent_skills).float().mean().item()
                 if ind_observations is not None else 0.0
             )
         if self.enable_runtime_profiling:
@@ -5372,6 +6574,7 @@ class HMASDAgent:
         
         # 预处理数据为张量
         team_states, team_skills_tensor, team_compacts = None, None, None
+        team_ages_tensor, ind_ages_tensor = None, None
         if len(team_data) > 0:
             team_states = torch.FloatTensor(np.array([d['state'] for d in team_data])).to(self.device)
             team_skills_tensor = torch.LongTensor([d['skill'] for d in team_data]).to(self.device)
@@ -5381,6 +6584,10 @@ class HMASDAgent:
                         d.get('compact', np.zeros(int(getattr(self.config, 'opt_compact_dim', 1)), dtype=np.float32))
                         for d in team_data
                     ])
+                ).to(self.device)
+            if self._d2_uses_age_feature():
+                team_ages_tensor = torch.FloatTensor(
+                    np.array([float(d.get('d2_age', 0.0)) for d in team_data], dtype=np.float32)
                 ).to(self.device)
 
         ind_observations, ind_team_skills_cond, ind_agent_skills, ind_compacts = None, None, None, None
@@ -5394,6 +6601,10 @@ class HMASDAgent:
                         d.get('compact', np.zeros(int(getattr(self.config, 'opt_compact_dim', 1)), dtype=np.float32))
                         for d in ind_data
                     ])
+                ).to(self.device)
+            if self._d2_uses_age_feature():
+                ind_ages_tensor = torch.FloatTensor(
+                    np.array([float(d.get('d2_age', 0.0)) for d in ind_data], dtype=np.float32)
                 ).to(self.device)
         if self.enable_runtime_profiling:
             self._add_update_profile('disc_pack', time.perf_counter() - profile_start)
@@ -5410,6 +6621,8 @@ class HMASDAgent:
                 update_epochs,
                 getattr(self.config, 'discriminator_batch_size', self.config.batch_size),
                 noise_std,
+                team_ages=team_ages_tensor,
+                ind_ages=ind_ages_tensor,
             )
         
         # 【修复】分别追踪两个判别器的损失
@@ -5439,13 +6652,16 @@ class HMASDAgent:
                     noisy_batch_states = batch_states + state_noise
                     # ================= [噪声注入结束] =================
                     
-                    team_disc_logits = self._team_discriminator_logits(noisy_batch_states, batch_compacts)
+                    batch_team_ages = team_ages_tensor[batch_indices] if team_ages_tensor is not None else None
+                    team_disc_logits = self._team_discriminator_logits(
+                        noisy_batch_states, batch_compacts, age=batch_team_ages
+                    )
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     
-                    self.discriminator_optimizer.zero_grad()
+                    self.team_discriminator_optimizer.zero_grad()
                     team_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.team_discriminator.parameters(), self.config.max_grad_norm)
-                    self.discriminator_optimizer.step()
+                    self.team_discriminator_optimizer.step()
                     if self.r39_native_hmasd_toy:
                         self.native_toy_optimizer_updates['discriminator'] += 1
                     
@@ -5472,17 +6688,19 @@ class HMASDAgent:
                     noisy_batch_obs = batch_obs + obs_noise
                     # ================= [噪声注入结束] =================
                     
+                    batch_ind_ages = ind_ages_tensor[batch_indices] if ind_ages_tensor is not None else None
                     agent_disc_logits = self._individual_discriminator_logits(
                         noisy_batch_obs,
                         batch_team_skills,
                         batch_compacts,
+                        age=batch_ind_ages,
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     
-                    self.discriminator_optimizer.zero_grad()
+                    self.individual_discriminator_optimizer.zero_grad()
                     agent_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.individual_discriminator.parameters(), self.config.max_grad_norm)
-                    self.discriminator_optimizer.step()
+                    self.individual_discriminator_optimizer.step()
                     if self.r39_native_hmasd_toy:
                         self.native_toy_optimizer_updates['discriminator'] += 1
                     
@@ -5500,11 +6718,11 @@ class HMASDAgent:
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         with torch.no_grad():
             team_acc = (
-                (self._team_discriminator_logits(team_states, team_compacts).argmax(-1) == team_skills_tensor).float().mean().item()
+                (self._team_discriminator_logits(team_states, team_compacts, age=team_ages_tensor).argmax(-1) == team_skills_tensor).float().mean().item()
                 if team_states is not None else 0.0
             )
             ind_acc = (
-                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts).argmax(-1) == ind_agent_skills).float().mean().item()
+                (self._individual_discriminator_logits(ind_observations, ind_team_skills_cond, ind_compacts, age=ind_ages_tensor).argmax(-1) == ind_agent_skills).float().mean().item()
                 if ind_observations is not None else 0.0
             )
         if self.enable_runtime_profiling:
@@ -5788,8 +7006,10 @@ class HMASDAgent:
                 self.discoverer_actor_scheduler.step()
             if hasattr(self, 'discoverer_critic_scheduler') and self.discoverer_critic_scheduler is not None:
                 self.discoverer_critic_scheduler.step()
-            if self.discriminator_scheduler is not None:
-                self.discriminator_scheduler.step()
+            if self.team_discriminator_scheduler is not None:
+                self.team_discriminator_scheduler.step()
+            if self.individual_discriminator_scheduler is not None:
+                self.individual_discriminator_scheduler.step()
 
         # 更新训练信息
         self.training_info['high_level_loss'].append(coordinator_loss)
@@ -5836,11 +7056,18 @@ class HMASDAgent:
         current_coord_lr = self.coordinator_optimizer.param_groups[0]['lr']
         current_disc_actor_lr = self.discoverer_actor_optimizer.param_groups[0]['lr']
         current_disc_critic_lr = self.discoverer_critic_optimizer.param_groups[0]['lr']
-        current_discriminator_lr = (
-            self.discriminator_optimizer.param_groups[0]['lr']
-            if self.discriminator_optimizer is not None
+        current_team_discriminator_lr = (
+            self.team_discriminator_optimizer.param_groups[0]['lr']
+            if self.team_discriminator_optimizer is not None
             else 0.0
         )
+        current_individual_discriminator_lr = (
+            self.individual_discriminator_optimizer.param_groups[0]['lr']
+            if self.individual_discriminator_optimizer is not None
+            else 0.0
+        )
+        if current_team_discriminator_lr != current_individual_discriminator_lr:
+            raise RuntimeError('split discriminator learning rates diverged')
         current_process_lr = (
             self.process_optimizer.param_groups[0]['lr']
             if self.process_optimizer is not None
@@ -5851,7 +7078,9 @@ class HMASDAgent:
             'coordinator_lr': current_coord_lr,
             'discoverer_actor_lr': current_disc_actor_lr,
             'discoverer_critic_lr': current_disc_critic_lr,
-            'discriminator_lr': current_discriminator_lr,
+            'discriminator_lr': current_team_discriminator_lr,
+            'team_discriminator_lr': current_team_discriminator_lr,
+            'individual_discriminator_lr': current_individual_discriminator_lr,
             'process_encoder_lr': current_process_lr,
         }
 
@@ -5946,9 +7175,25 @@ class HMASDAgent:
             'coordinator_optimizer': self.coordinator_optimizer.state_dict(),
             'discoverer_actor_optimizer': self.discoverer_actor_optimizer.state_dict(),
             'discoverer_critic_optimizer': self.discoverer_critic_optimizer.state_dict(),
-            'discriminator_optimizer': (
-                self.discriminator_optimizer.state_dict()
-                if self.discriminator_optimizer is not None
+            'discriminator_optimizer_schema': 'split_team_individual_adam_v1',
+            'team_discriminator_optimizer': (
+                self.team_discriminator_optimizer.state_dict()
+                if self.team_discriminator_optimizer is not None
+                else None
+            ),
+            'individual_discriminator_optimizer': (
+                self.individual_discriminator_optimizer.state_dict()
+                if self.individual_discriminator_optimizer is not None
+                else None
+            ),
+            'team_discriminator_scheduler': (
+                self.team_discriminator_scheduler.state_dict()
+                if self.team_discriminator_scheduler is not None
+                else None
+            ),
+            'individual_discriminator_scheduler': (
+                self.individual_discriminator_scheduler.state_dict()
+                if self.individual_discriminator_scheduler is not None
                 else None
             ),
             'process_optimizer': self.process_optimizer.state_dict() if self.process_optimizer is not None else None,
@@ -5989,6 +7234,15 @@ class HMASDAgent:
                 'last_action_entropy': float(self.last_action_entropy),
             },
             'training_progress': dict(getattr(self, 'training_progress', {})),
+            'rollout_sampler_rng': {
+                'schema': 'hmasd_rollout_sampler_rng_v1',
+                'streams': {
+                    'main_rollout': {
+                        'seed': int(self.rollout_sampler_seed),
+                        'state': self.rollout_buffer.get_sampler_rng_state(),
+                    },
+                },
+            },
             'scenario7_safety_dual_state': dict(
                 getattr(self, 'scenario7_safety_dual_state', {})
             ),
@@ -6103,12 +7357,22 @@ class HMASDAgent:
             saved_optimizer_updates = saved_training_progress.get(
                 'native_toy_optimizer_updates', {}
             )
-            if isinstance(saved_optimizer_updates, dict):
-                self.native_toy_optimizer_updates.update(
+            if not isinstance(saved_optimizer_updates, dict):
+                raise ValueError('native toy optimizer progress must be a dictionary')
+            if saved_optimizer_updates:
+                native_toy_optimizer_updates = getattr(
+                    self, 'native_toy_optimizer_updates', None
+                )
+                if not isinstance(native_toy_optimizer_updates, dict):
+                    raise ValueError(
+                        'checkpoint contains native toy optimizer progress but '
+                        'the current agent has no matching counter inventory'
+                    )
+                native_toy_optimizer_updates.update(
                     {
                         key: int(value)
                         for key, value in saved_optimizer_updates.items()
-                        if key in self.native_toy_optimizer_updates
+                        if key in native_toy_optimizer_updates
                     }
                 )
 
@@ -6204,6 +7468,33 @@ class HMASDAgent:
             self.scenario7_safety_dual_state = dict(
                 checkpoint.get('scenario7_safety_dual_state', {})
             )
+
+        sampler_rng = checkpoint.get('rollout_sampler_rng')
+        if sampler_rng is not None:
+            if (
+                not isinstance(sampler_rng, dict)
+                or set(sampler_rng) != {'schema', 'streams'}
+                or sampler_rng['schema'] != 'hmasd_rollout_sampler_rng_v1'
+                or not isinstance(sampler_rng['streams'], dict)
+                or set(sampler_rng['streams']) != {'main_rollout'}
+            ):
+                raise ValueError('rollout sampler RNG checkpoint metadata is invalid')
+            main_rollout_rng = sampler_rng['streams']['main_rollout']
+            if (
+                not isinstance(main_rollout_rng, dict)
+                or set(main_rollout_rng) != {'seed', 'state'}
+                or isinstance(main_rollout_rng['seed'], bool)
+                or not isinstance(main_rollout_rng['seed'], int)
+                or main_rollout_rng['seed'] < 0
+            ):
+                raise ValueError('main rollout sampler RNG checkpoint is invalid')
+            self.rollout_buffer.set_sampler_rng_state(main_rollout_rng['state'])
+            self.rollout_sampler_seed = int(main_rollout_rng['seed'])
+        else:
+            main_logger.warning(
+                '旧检查点没有Rollout sampler RNG状态；仅可视为显式warm-start，'
+                '不得宣称严格轨迹续训。'
+            )
         
         # 使用 strict=False 来处理模型架构不匹配的问题
         # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）
@@ -6245,9 +7536,73 @@ class HMASDAgent:
                 main_logger.warning("从旧的组合优化器状态恢复Discoverer Actor和Critic优化器")
             except ValueError as e:
                 main_logger.warning(f"旧Discoverer优化器状态与当前参数组不兼容，跳过恢复: {e}")
-        if self.discriminator_optimizer is not None and checkpoint.get('discriminator_optimizer') is not None:
-            self.discriminator_optimizer.load_state_dict(checkpoint['discriminator_optimizer'])
-            main_logger.info("已恢复Discriminator优化器状态")
+        if self.team_discriminator_optimizer is not None:
+            split_optimizer_fields = (
+                'team_discriminator_optimizer',
+                'individual_discriminator_optimizer',
+            )
+            has_split_optimizer = any(
+                field in checkpoint for field in split_optimizer_fields
+            )
+            if has_split_optimizer:
+                if (
+                    checkpoint.get('discriminator_optimizer_schema')
+                    != 'split_team_individual_adam_v1'
+                    or any(checkpoint.get(field) is None for field in split_optimizer_fields)
+                ):
+                    raise ValueError('split discriminator optimizer checkpoint is incomplete')
+                self.team_discriminator_optimizer.load_state_dict(
+                    checkpoint['team_discriminator_optimizer']
+                )
+                self.individual_discriminator_optimizer.load_state_dict(
+                    checkpoint['individual_discriminator_optimizer']
+                )
+                main_logger.info("已恢复拆分的Team和Individual Discriminator优化器状态")
+            elif checkpoint.get('discriminator_optimizer') is not None:
+                team_state, individual_state = (
+                    _split_legacy_discriminator_adam_state_dict(
+                        checkpoint['discriminator_optimizer'],
+                        self.team_discriminator.parameters(),
+                        self.individual_discriminator.parameters(),
+                    )
+                )
+                self.team_discriminator_optimizer.load_state_dict(team_state)
+                self.individual_discriminator_optimizer.load_state_dict(
+                    individual_state
+                )
+                main_logger.info("已严格拆分并恢复旧版Discriminator Adam状态")
+
+            split_scheduler_fields = (
+                'team_discriminator_scheduler',
+                'individual_discriminator_scheduler',
+            )
+            has_split_scheduler = any(
+                checkpoint.get(field) is not None for field in split_scheduler_fields
+            )
+            if has_split_scheduler:
+                if (
+                    self.team_discriminator_scheduler is None
+                    or self.individual_discriminator_scheduler is None
+                    or any(checkpoint.get(field) is None for field in split_scheduler_fields)
+                ):
+                    raise ValueError('split discriminator scheduler checkpoint is incompatible')
+                self.team_discriminator_scheduler.load_state_dict(
+                    checkpoint['team_discriminator_scheduler']
+                )
+                self.individual_discriminator_scheduler.load_state_dict(
+                    checkpoint['individual_discriminator_scheduler']
+                )
+            elif (
+                checkpoint.get('discriminator_scheduler') is not None
+                and self.team_discriminator_scheduler is not None
+                and self.individual_discriminator_scheduler is not None
+            ):
+                self.team_discriminator_scheduler.load_state_dict(
+                    checkpoint['discriminator_scheduler']
+                )
+                self.individual_discriminator_scheduler.load_state_dict(
+                    checkpoint['discriminator_scheduler']
+                )
         if self.process_optimizer is not None and checkpoint.get('process_optimizer') is not None:
             try:
                 self.process_optimizer.load_state_dict(checkpoint['process_optimizer'])

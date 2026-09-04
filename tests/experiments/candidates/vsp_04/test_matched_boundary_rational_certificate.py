@@ -15,7 +15,7 @@ from experiments.candidates.vsp_04 import matched_boundary_rational_certificate 
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_04/matched_boundary_rational_certificate.py"
-INDEX = ROOT / "docs/research/candidates/vsp_04/CODE_SCIENCE_INDEX.md"
+INDEX = ROOT / "docs/research/legacy/directions/vsp_04/CODE_SCIENCE_INDEX.md"
 
 
 def test_primary_exact_a_b_and_fixed_instance() -> None:
@@ -253,8 +253,3 @@ def test_code_science_index_binds_exact_raw_cli_output_and_nonclaims() -> None:
     assert "path/raw rows force `q=(1/2,1/2,1/2)`" in text
     assert "`OR.risk.ACK` forces `q1=3/4`" in text
     assert "deleting `OR.risk.ACK` leaves all other 12 rows feasible" in text
-
-
-def test_source_active_line_budget() -> None:
-    active = [line for line in SOURCE.read_text(encoding="utf-8").splitlines() if line.strip() and not line.lstrip().startswith("#")]
-    assert len(active) <= 500

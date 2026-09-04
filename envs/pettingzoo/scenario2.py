@@ -1,4 +1,5 @@
 import numpy as np
+from gymnasium.spaces import Box, Dict
 from envs.pettingzoo.uav_env import MultiUAVEnv
 
 class UAVCooperativeNetworkEnv(MultiUAVEnv):
@@ -38,6 +39,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         use_fdma=True,  # 是否启用FDMA频分多址
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
         ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
+        step_path_loss_cache=True,
     ):
         """
         初始化UAV协作组网环境
@@ -72,6 +74,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         self.min_sinr = min_sinr
         self.max_connections = max_connections
         self.area_size = area_size  # 需要在初始化地面基站之前设置
+        self.np_random = np.random.RandomState(seed)
         
         # 初始化地面基站位置（在调用父类初始化之前）
         self._init_ground_bs()
@@ -96,6 +99,7 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             use_fdma=use_fdma,
             bandwidth=bandwidth,
             ground_bs_tx_power=ground_bs_tx_power,
+            step_path_loss_cache=step_path_loss_cache,
         )
         
         # 场景名称
@@ -108,6 +112,25 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
         
         # 扩展观测空间
         self.obs_dim += self.n_ground_bs + 1  # 添加到地面基站的连接(n_ground_bs)和跳数信息(1)
+        self.observation_spaces = {
+            agent: Dict(
+                {
+                    "obs": Box(
+                        low=-float("inf"),
+                        high=float("inf"),
+                        shape=(self.obs_dim,),
+                        dtype=np.float32,
+                    ),
+                    "action_mask": Box(
+                        low=0,
+                        high=1,
+                        shape=(3,),
+                        dtype=np.float32,
+                    ),
+                }
+            )
+            for agent in self.possible_agents
+        }
     
     def _init_ground_bs(self):
         """初始化地面基站位置"""
@@ -155,8 +178,8 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                 # 随机分布
                 for i in range(self.n_ground_bs):
                     self.ground_bs_positions[i] = [
-                        np.random.uniform(self.area_size * 0.1, self.area_size * 0.9),
-                        np.random.uniform(self.area_size * 0.1, self.area_size * 0.9),
+                        self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9),
+                        self.np_random.uniform(self.area_size * 0.1, self.area_size * 0.9),
                         30  # 固定高度
                     ]
     
@@ -175,6 +198,9 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
             
         # 调用父类的reset
         observations, infos = super().reset(seed, options)
+
+        # Ground-BS layouts with random members are part of the seeded episode.
+        self._init_ground_bs()
         
         # 重置UAV连接矩阵
         self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
@@ -219,7 +245,9 @@ class UAVCooperativeNetworkEnv(MultiUAVEnv):
                 normalized_hop = 1.0  # 无路径时设为最大值
             
             # 组合新的观测（不包括角色信息）
-            new_obs = np.concatenate([obs, bs_connections, [normalized_hop]])
+            new_obs = np.concatenate(
+                [obs, bs_connections, [normalized_hop]]
+            ).astype(np.float32, copy=False)
             
             # 更新观测字典
             updated_obs_dict = {

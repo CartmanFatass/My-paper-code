@@ -1,0 +1,53 @@
+{
+  "bounded_workload": true,
+  "config": {
+    "atol": 1e-07,
+    "backends": [
+      "step_reference",
+      "segmented"
+    ],
+    "batch_size": 16,
+    "dtype": "float32",
+    "hidden_size": 128,
+    "input_dim": 64,
+    "iterations": 20,
+    "repeats": 31,
+    "rtol": 1e-06,
+    "seed": 20260815,
+    "timesteps": 32,
+    "timing_scope": "forward_backward"
+  },
+  "config_fingerprint": "91166d74964e13e32b61d65cda700944f85bb62a0a2a9a6a63610adf83abb4e3",
+  "current_production_default": "step_reference",
+  "gate_passed": false,
+  "machine_fingerprint": {
+    "device": "cpu",
+    "machine": "AMD64",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "python": "3.10.20",
+    "sha256": "cac4412e7de856708bd38a68d0f55437f9cc26849577ce67ff48c61fbe1c177c",
+    "torch": "2.7.0+cpu"
+  },
+  "numeric_equivalent": false,
+  "numeric_mismatches": [
+    "input_gradient",
+    "hidden_gradient",
+    "parameter_gradient:rnn.weight_ih_l0",
+    "parameter_gradient:rnn.weight_hh_l0",
+    "parameter_gradient:rnn.bias_ih_l0",
+    "parameter_gradient:rnn.bias_hh_l0"
+  ],
+  "positive_median": true,
+  "production_default_if_gate_fails": "step_reference",
+  "recommended_production_default": "step_reference",
+  "rng_preserved": true,
+  "schema": "hmasd.rnn_sequence_backend_benchmark.v1",
+  "segmented_median_seconds": 0.18235850000201026,
+  "segmented_speedup": 1.4514426253646648,
+  "source_fingerprint": {
+    "path": "hmasd/r_mappo_utils.py",
+    "sha256": "ffbeeaf891252b1b0766a60fd069c93947593f17e6091e68f410660e9d5d03ee"
+  },
+  "step_reference_median_seconds": 0.26468290000048
+}

@@ -6,6 +6,12 @@ from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict, Discrete
 from scipy.spatial.distance import cdist
 from envs.pettingzoo.relay.channel_geometry import RelayChannelGeometry
+from envs.pettingzoo.uav_cpp_backend import (
+    DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND,
+    VALID_RELAY_GEOMETRY_BACKENDS,
+    compute_relay_radio_batch,
+    step_relay_geometry_batch,
+)
 
 _STEP_CACHE_UNSET = object()
 
@@ -159,6 +165,9 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
             self.max_observed_overloaded_uavs = kwargs.get('max_observed_overloaded_uavs', 3) # 新增：观测过载无人机的数量
             self.routing_protocol = kwargs.get('routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
             self.action_space_type = kwargs.get('action_space_type', 'discrete')
+            self.relay_geometry_backend = kwargs.get(
+                'relay_geometry_backend', DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND
+            )
         else:
             # 使用config对象通过getattr获取参数
             # 基本环境参数
@@ -259,6 +268,22 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
             self.max_observed_overloaded_uavs = getattr(config, 'max_observed_overloaded_uavs', 3) # 新增：观测过载无人机的数量
             self.routing_protocol = getattr(config, 'routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
             self.action_space_type = getattr(config, 'action_space_type', 'discrete')
+            self.relay_geometry_backend = getattr(
+                config,
+                'relay_geometry_backend',
+                kwargs.get(
+                    'relay_geometry_backend',
+                    DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND,
+                ),
+            )
+
+        self.relay_geometry_backend = str(self.relay_geometry_backend)
+        if self.relay_geometry_backend not in VALID_RELAY_GEOMETRY_BACKENDS:
+            raise ValueError(
+                f"Unknown relay_geometry_backend {self.relay_geometry_backend!r}; "
+                f"expected one of {sorted(VALID_RELAY_GEOMETRY_BACKENDS)}"
+            )
+        self._relay_geometry_state = None
 
         # === 无人机动力学参数 (基于 IEEE TWC 论文: Zeng et al. 2019) ===
         # 参考型号: 类似 DJI Phantom 4 的小型旋翼机
@@ -2106,6 +2131,11 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         
         self.current_step = 0
         self.agents = self.possible_agents.copy()
+        self.global_bs_cache = {}
+        self.last_global_sync_step = -1
+        self.hop_map = {i: float('inf') for i in range(self.n_uavs)}
+        self._step_communication_cache = None
+        self._relay_geometry_state = None
 
         # Init visit map for exploration reward
         self.last_visit_time_map.fill(0)
@@ -2159,10 +2189,18 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router') and self.router is not None:
             self.router.reset()
         
-        # 4. 更新信道状态、连接和路由
-        self._update_channel_state()
-        self._update_uav_connections()
-        self._compute_routing_paths()  # 使用本类的路由计算
+        # 4. 更新信道状态、连接和路由。Scenario 7 must first sample its
+        # episode-owned energy/failure state, so it performs this materialization
+        # once in its reset override instead of exposing a stale preliminary pass.
+        defer_topology = bool(
+            getattr(self, "_defer_base_topology_materialization", False)
+        )
+        if not defer_topology:
+            self._update_channel_state()
+            self._update_uav_connections()
+            if self.routing_protocol == 'hggr':
+                self.hop_map = self._calculate_hop_map()
+            self._compute_routing_paths()  # 使用本类的路由计算
         
         # 4.5 初始化新增的 Reward Shaping 相关变量
         self.previous_bottleneck_capacities.fill(0)
@@ -2492,6 +2530,8 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         """
         # 使用精确的A2G路径损耗模型
         step_cache = self._current_step_communication_cache()
+        if step_cache is not None and "radio" in step_cache:
+            return float(step_cache["radio"].access_sinr[0, uav_idx, user_idx])
         path_loss = self._cached_user_path_loss(
             uav_idx, user_idx, step_cache=step_cache
         )
@@ -2615,22 +2655,157 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
             [unavailable(index) for index in range(self.n_uavs)], dtype=bool
         )
 
+    def _relay_geometry_signature(self):
+        return (
+            float(self.carrier_frequency),
+            str(getattr(self, "environment_type", "urban")),
+        )
+
+    def _run_relay_geometry(self, prepared_velocities, movable_mask):
+        """Run the configured deterministic geometry implementation explicitly."""
+
+        result = step_relay_geometry_batch(
+            backend=self.relay_geometry_backend,
+            uav_positions=np.ascontiguousarray(
+                np.asarray(self.uav_positions, dtype=np.float64)[None, ...]
+            ),
+            user_positions=np.ascontiguousarray(
+                np.asarray(self.user_positions, dtype=np.float64)[None, ...]
+            ),
+            ground_bs_positions=np.ascontiguousarray(
+                np.asarray(self.ground_bs_positions, dtype=np.float64)[None, ...]
+            ),
+            prepared_velocities=np.ascontiguousarray(
+                np.asarray(prepared_velocities, dtype=np.float32)[None, ...]
+            ),
+            movable_mask=np.ascontiguousarray(
+                np.asarray(movable_mask, dtype=np.bool_)[None, ...]
+            ),
+            time_step=float(self.time_step),
+            area_size=float(self.area_size),
+            height_range=(float(self.height_range[0]), float(self.height_range[1])),
+            carrier_frequency=float(self.carrier_frequency),
+            environment_type=str(getattr(self, "environment_type", "urban")),
+        )
+        return result
+
+    def _retain_relay_geometry(self, result):
+        next_positions = np.ascontiguousarray(result.next_uav_positions[0])
+        self._relay_geometry_state = {
+            "uav_positions": next_positions.copy(),
+            "user_positions": np.asarray(self.user_positions).copy(),
+            "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
+            "config": self._relay_geometry_signature(),
+            "access_path_loss": np.ascontiguousarray(result.access_path_loss[0]),
+            "air_path_loss": np.ascontiguousarray(result.air_path_loss[0]),
+            "base_path_loss": np.ascontiguousarray(result.base_path_loss[0]),
+        }
+        return next_positions
+
+    def _relay_geometry_for_current_state(self):
+        retained = getattr(self, "_relay_geometry_state", None)
+        if (
+            retained is not None
+            and retained["config"] == self._relay_geometry_signature()
+            and np.array_equal(retained["uav_positions"], self.uav_positions)
+            and np.array_equal(retained["user_positions"], self.user_positions)
+            and np.array_equal(retained["ground_bs_positions"], self.ground_bs_positions)
+        ):
+            return retained
+        result = self._run_relay_geometry(
+            np.zeros((self.n_uavs, 3), dtype=np.float32),
+            np.zeros(self.n_uavs, dtype=np.bool_),
+        )
+        self._retain_relay_geometry(result)
+        return self._relay_geometry_state
+
     def _refresh_step_communication_cache(self):
         """Start an exact-state cache for deterministic communication calculations."""
         if bool(getattr(self, "_disable_step_communication_cache", False)):
             self._step_communication_cache = None
             return None
+        geometry = self._relay_geometry_for_current_state()
+        radio = compute_relay_radio_batch(
+            backend=self.relay_geometry_backend,
+            uav_positions=np.ascontiguousarray(
+                np.asarray(self.uav_positions, dtype=np.float64)[None, ...]
+            ),
+            user_positions=np.ascontiguousarray(
+                np.asarray(self.user_positions, dtype=np.float64)[None, ...]
+            ),
+            ground_bs_positions=np.ascontiguousarray(
+                np.asarray(self.ground_bs_positions, dtype=np.float64)[None, ...]
+            ),
+            access_path_loss=np.ascontiguousarray(
+                geometry["access_path_loss"][None, ...]
+            ),
+            air_path_loss=np.ascontiguousarray(
+                geometry["air_path_loss"][None, ...]
+            ),
+            base_path_loss=np.ascontiguousarray(
+                geometry["base_path_loss"][None, ...]
+            ),
+            uav_tx_power_dbm=float(self.tx_power),
+            ground_bs_tx_power_dbm=float(self.ground_bs_tx_power),
+            noise_power_dbm=float(self.noise_power),
+            interference_radius=float(self._compute_interference_radius()),
+            use_fdma=bool(self.use_fdma),
+            aclr_linear=float(self.aclr_linear),
+            exclude_receiver_uav=True,
+        )
         cache = {
             "uav_positions": np.asarray(self.uav_positions).copy(),
             "user_positions": np.asarray(self.user_positions).copy(),
             "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
             "unavailable": self._communication_unavailable_mask(),
             "config": self._communication_config_signature(),
-            "user_path_loss": {},
+            "radio": radio,
+            "user_path_loss": {
+                (uav_idx, user_idx): float(
+                    geometry["access_path_loss"][uav_idx, user_idx]
+                )
+                for uav_idx in range(self.n_uavs)
+                for user_idx in range(self.n_users)
+            },
             "link_path_loss": {},
             "link_sinr": {},
             "link_capacity": {},
         }
+        for uav_idx in range(self.n_uavs):
+            for peer_idx in range(self.n_uavs):
+                path_loss = float(geometry["air_path_loss"][uav_idx, peer_idx])
+                cache["link_path_loss"][("uav", uav_idx, "uav", peer_idx)] = path_loss
+                cache["link_sinr"][
+                    (
+                        "uav",
+                        uav_idx,
+                        "uav",
+                        peer_idx,
+                        float(self.tx_power - path_loss),
+                    )
+                ] = float(radio.air_sinr[0, uav_idx, peer_idx])
+            for bs_idx in range(self.n_ground_bs):
+                path_loss = float(geometry["base_path_loss"][uav_idx, bs_idx])
+                cache["link_path_loss"][("uav", uav_idx, "ground_bs", bs_idx)] = path_loss
+                cache["link_path_loss"][("ground_bs", bs_idx, "uav", uav_idx)] = path_loss
+                cache["link_sinr"][
+                    (
+                        "uav",
+                        uav_idx,
+                        "ground_bs",
+                        bs_idx,
+                        float(self.tx_power - path_loss),
+                    )
+                ] = float(radio.uav_to_base_sinr[0, uav_idx, bs_idx])
+                cache["link_sinr"][
+                    (
+                        "ground_bs",
+                        bs_idx,
+                        "uav",
+                        uav_idx,
+                        float(self.ground_bs_tx_power - path_loss),
+                    )
+                ] = float(radio.base_to_uav_sinr[0, uav_idx, bs_idx])
         self._step_communication_cache = cache
         return cache
 
@@ -2801,12 +2976,18 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         同时在此函数中计算发现奖励，确保使用最新的信道状态
         """
         # 计算所有UAV-用户对的SINR
-        self._refresh_step_communication_cache()
+        cache = self._refresh_step_communication_cache()
         self._channel_update_cache_active = True
         try:
-            for i in range(self.n_uavs):
-                for j in range(self.n_users):
-                    self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+            if cache is None:
+                for i in range(self.n_uavs):
+                    for j in range(self.n_users):
+                        self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+            else:
+                self.sinr_matrix[...] = cache["radio"].access_sinr[0]
+                unavailable = cache["unavailable"]
+                if np.any(unavailable):
+                    self.sinr_matrix[unavailable, :] = -np.inf
         finally:
             self._channel_update_cache_active = False
 
@@ -3212,7 +3393,10 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         self.backhaul_guard_checked_actions = 0
         self.backhaul_guard_blocked_actions = 0
 
-        # 2. Update agent positions based on actions
+        # 2. Preserve the existing per-action dtype/order for movement.  The
+        # deterministic geometry backend is then evaluated once at the exact
+        # resulting positions, avoiding any float32 narrowing of discrete moves.
+        next_uav_positions = self.uav_positions.copy()
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
                 if self.action_space_type == 'discrete':
@@ -3233,12 +3417,13 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
 
                 velocity = self._apply_backhaul_action_guard(agent_idx, velocity)
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
-                
-                # Boundary checks
                 new_position[0] = np.clip(new_position[0], 0, self.area_size)
                 new_position[1] = np.clip(new_position[1], 0, self.area_size)
                 new_position[2] = np.clip(new_position[2], *self.height_range)
-                self.uav_positions[agent_idx] = new_position
+                next_uav_positions[agent_idx] = new_position
+
+        self.uav_positions = next_uav_positions
+        self._relay_geometry_state = None
         
         # 3.5. 更新无人机访问地图 (用于探索奖励)
         self._update_visit_map()
@@ -3750,6 +3935,18 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
 
 
     def _get_observation(self, agent):
+        """Materialize one view under one exact cache validation."""
+        cache = self._current_step_communication_cache()
+        if cache is None:
+            return self._get_observation_cached_body(agent)
+        previous = bool(getattr(self, "_channel_update_cache_active", False))
+        self._channel_update_cache_active = True
+        try:
+            return self._get_observation_cached_body(agent)
+        finally:
+            self._channel_update_cache_active = previous
+
+    def _get_observation_cached_body(self, agent):
         """
         获取指定智能体基于通信能力的局部观测
         
@@ -3784,7 +3981,10 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
                 min_dist_to_neighbor = dist
                 nearest_neighbor_pos = self.uav_positions[other_idx]
 
-        if nearest_neighbor_pos is not None:
+        if (
+            nearest_neighbor_pos is not None
+            and min_dist_to_neighbor <= self.observation_radius
+        ):
             # 归一化距离
             normalized_dist = min_dist_to_neighbor / self.area_size
             # 归一化相对位置 (x, y)
@@ -3817,11 +4017,12 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         min_bs_dist_sq = float('inf')
         relative_pos_to_bs = np.zeros(2)
 
+        max_bs_dist_sq = float(self.observation_radius) ** 2
         for bs_idx in range(self.n_ground_bs):
             bs_pos = self.ground_bs_positions[bs_idx]
-            # 使用平方距离避免开根号，以提高效率
-            dist_sq = np.sum(np.square(own_position[:2] - bs_pos[:2]))
-            if dist_sq < min_bs_dist_sq:
+            # Use the same 3-D radius contract as all other local entity views.
+            dist_sq = np.sum(np.square(own_position - bs_pos))
+            if dist_sq <= max_bs_dist_sq and dist_sq < min_bs_dist_sq:
                 min_bs_dist_sq = dist_sq
                 # 计算归一化的相对位置向量
                 relative_pos = (bs_pos[:2] - own_position[:2]) / self.area_size
@@ -3976,7 +4177,10 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         action_mask_dim = self.n_discrete_actions if self.action_space_type == 'discrete' else 3
         action_mask = np.ones(action_mask_dim)
         
-        return {"obs": obs, "action_mask": action_mask}
+        return {
+            "obs": obs.astype(np.float32, copy=False),
+            "action_mask": action_mask.astype(np.float32, copy=False),
+        }
 
 
 
@@ -4338,6 +4542,18 @@ class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
         return sinr_db
     
     def _compute_routing_paths(self):
+        """Build routes under one exact communication-cache validation."""
+        cache = self._current_step_communication_cache()
+        if cache is None:
+            return self._compute_routing_paths_cached_body()
+        previous = bool(getattr(self, "_channel_update_cache_active", False))
+        self._channel_update_cache_active = True
+        try:
+            return self._compute_routing_paths_cached_body()
+        finally:
+            self._channel_update_cache_active = previous
+
+    def _compute_routing_paths_cached_body(self):
         """
         根据指定的路由协议计算路由路径。
         这是一个调度器方法，会调用具体的路由算法实现。

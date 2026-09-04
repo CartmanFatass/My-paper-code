@@ -167,6 +167,15 @@ class Config:
     lambda_cd = 0.0
     lambda_mi = 0.0
 
+    # D2 policy-based interruption (ADR 01, revision 3; defaults keep the route in `off`)
+    policy_interruption_mode = "off"      # {"off", "d2"}
+    interruption_delta = 1                # fixed at 1
+    interruption_cost_c = float("inf")    # c
+    interruption_cost_c_Z = float("inf")  # c_Z
+    skill_cap_k_max = 10                   # k_max
+    team_cap_k_Z = None                    # k_Z; None -> k_max
+    age_feature = "off"                    # {"off", "normalized"}
+
 
 
     # 训练参数
@@ -714,7 +723,12 @@ class Config:
                     f"return_cost_cap={self.return_cost_cap!r}, "
                     f"expected {cap!r} for arm {self.scenario7_experiment_arm}"
                 )
-        if self.episode_length % self.k != 0:
+        # D2 (ADR 01) replaces the global-k divisibility contract with the per-agent
+        # cap validation in `_validate_policy_interruption`; `off` keeps this check.
+        if (
+            getattr(self, "policy_interruption_mode", "off") == "off"
+            and self.episode_length % self.k != 0
+        ):
             errors.append(
                 f"episode_length={self.episode_length} must be divisible by k={self.k}"
             )
@@ -757,6 +771,77 @@ class Config:
             self.n_heads = self.n_heads + 1 if self.n_heads > 1 else 2
         if self.embedding_dim % self.n_heads != 0:
             self.embedding_dim = ((self.embedding_dim // self.n_heads) + 1) * self.n_heads
+        self._validate_policy_interruption()
+
+    def _validate_policy_interruption(self):
+        """Validate the D2 interruption parameters (ADR 01). Inert in `off` mode."""
+        mode = getattr(self, "policy_interruption_mode", "off")
+        if mode == "off":
+            return
+        if mode != "d2":
+            raise ValueError(
+                f"policy_interruption_mode must be 'off' or 'd2', got {mode!r}"
+            )
+        if int(getattr(self, "interruption_delta", 1)) != 1:
+            raise ValueError(
+                "interruption_delta is fixed at 1, got "
+                f"{getattr(self, 'interruption_delta', None)!r}"
+            )
+        if float(getattr(self, "interruption_cost_c", float("inf"))) < 0:
+            raise ValueError("interruption_cost_c must be >= 0")
+        if float(getattr(self, "interruption_cost_c_Z", float("inf"))) < 0:
+            raise ValueError("interruption_cost_c_Z must be >= 0")
+        k_max = int(getattr(self, "skill_cap_k_max", self.k))
+        team_cap = getattr(self, "team_cap_k_Z", None)
+        k_Z = k_max if team_cap is None else int(team_cap)
+        episode_length = int(self.episode_length)
+        if not (1 <= k_max <= episode_length):
+            raise ValueError(
+                f"skill_cap_k_max={k_max} must satisfy "
+                f"1 <= k_max <= episode_length={episode_length}"
+            )
+        if not (k_max <= k_Z <= episode_length):
+            raise ValueError(
+                f"team_cap_k_Z={k_Z} must satisfy "
+                f"k_max={k_max} <= k_Z <= episode_length={episode_length}"
+            )
+        if getattr(self, "age_feature", "off") not in ("off", "normalized"):
+            raise ValueError(
+                "age_feature must be 'off' or 'normalized', got "
+                f"{getattr(self, 'age_feature', None)!r}"
+            )
+        # Review VII.2 F4: the compact (HA-CTSE) discriminators do not accept the
+        # age feature, so a `d2` configuration that asks for it together with
+        # either compact discriminator would silently drop the age.
+        if getattr(self, "age_feature", "off") == "normalized":
+            compact_flags = [
+                name
+                for name in (
+                    "use_compact_team_discriminator",
+                    "use_compact_individual_discriminator",
+                )
+                if bool(getattr(self, name, False))
+            ]
+            if compact_flags:
+                raise ValueError(
+                    "age_feature='normalized' is not implemented for the compact "
+                    "discriminators; remove "
+                    + ", ".join(compact_flags)
+                    + " or set age_feature='off'"
+                )
+        # Review VII.2 F1 (owner decision VII.5): a rollout that starts mid-episode
+        # can begin with every skill held, and the steps before that rollout's first
+        # decision would then enter no segment row.  Registered as an E-series
+        # constraint for `d2`; `off` is unaffected.
+        rollout_length = int(getattr(self, "rollout_length", episode_length))
+        if episode_length <= 0 or rollout_length % episode_length != 0:
+            raise ValueError(
+                f"policy_interruption_mode='d2' requires rollout_length "
+                f"({rollout_length}) to be a multiple of episode_length "
+                f"({episode_length}); otherwise a rollout can start mid-episode "
+                "with every skill held and the steps before its first decision "
+                "enter no segment row"
+            )
 
     def update_env_dims(self, state_dim, obs_dim, n_agents=None):
         self.state_dim = state_dim

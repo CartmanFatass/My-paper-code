@@ -1,11 +1,19 @@
+from copy import deepcopy
+import random
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 import torch
 
 from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import standalone_evaluation as process_evaluation
+from ha_ctse_process import standalone_train_runner
+from ha_ctse_process.assignment_actionability import (
+    AssignmentActionabilityDiscriminator,
+)
+from ha_ctse_process.metrics_io import read_csv_records
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
 from ha_ctse_process.standalone_ar_selection import StandaloneARSelectionMixin
 from ha_ctse_process.standalone_lifecycle import StandaloneLifecycleMixin
@@ -58,6 +66,9 @@ def make_args(**overrides):
         scenario="base",
         seed=1,
         skill_interval=2,
+        rollout_length=4,
+        total_timesteps=100,
+        log_dir="",
         eval_max_steps=3,
     )
     for key, value in overrides.items():
@@ -536,6 +547,479 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
         assert restored.low_value_norm.state_dict() == agent.low_value_norm.state_dict()
 
 
+class _StrictSnapshotCollector:
+    def __init__(self):
+        self.frontier = np.asarray([3.0, 5.0], dtype=np.float32)
+        self.restored = None
+
+    def snapshot_training_state(self):
+        return {
+            "snapshot_capability_name": "standalone_collector_training_state",
+            "snapshot_capability_version": 1,
+            "frontier": self.frontier.copy(),
+        }
+
+    def restore_training_state(self, snapshot):
+        # Strict restore installs global RNG last, so collector internals may use
+        # randomness while rebuilding without advancing the resumed stream.
+        random.random()
+        np.random.random()
+        torch.rand(())
+        self.restored = deepcopy(snapshot)
+        self.frontier = np.asarray(snapshot["frontier"], dtype=np.float32).copy()
+
+
+def _strict_test_runner_state():
+    return standalone_train_runner._strict_runner_state(
+        num_envs=1,
+        observations=[np.asarray([[1.0, 2.0, 3.0, 4.0]], dtype=np.float32)],
+        states=[np.arange(8, dtype=np.float32)],
+        prev_state_info=[{"step": 7}],
+        prev_reward_info=[{"reward": 0.25}],
+        last_eval_step=9,
+        proto_ratio_over05_count=1,
+        proto_ratio_consecutive_over05_count=2,
+        proto_ratio_kill_triggered_count=3,
+        team_disc_ratio_over05_count=4,
+        team_disc_ratio_consecutive_over05_count=5,
+        team_disc_ratio_kill_triggered_count=6,
+        combined_intrinsic_ratio_over05_count=7,
+        combined_intrinsic_ratio_consecutive_over05_count=8,
+        combined_intrinsic_ratio_kill_triggered_count=9,
+    )
+
+
+def test_schema4_strict_resume_restores_complete_frontier_and_rng(tmp_path):
+    cfg = make_process_config(seed=41)
+    args = make_args(seed=41, total_timesteps=200)
+    agent = make_agent(cfg)
+    agent.initialize_standalone_rngs(args.seed)
+    agent.active_skills[:] = np.asarray([[2, 1]], dtype=np.int64)
+    agent.has_active_skill[:] = True
+    agent.episode_steps[:] = 17
+    collector = _StrictSnapshotCollector()
+    checkpoint_path = tmp_path / "strict-schema4.pt"
+
+    random.seed(101)
+    np.random.seed(103)
+    torch.manual_seed(107)
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        agent,
+        args,
+        cfg,
+        total_steps=123,
+        update_idx=11,
+        collector=collector,
+        runner_state=_strict_test_runner_state(),
+    )
+    next_obs = np.arange(8, dtype=np.float32).reshape(2, 4) / 10.0
+    next_state = np.arange(8, dtype=np.float32) / 20.0
+    expected_action = agent.act_low(next_obs, env_id=0, state=next_state)
+    expected_shuffle = agent._low_update_shuffle_rng.permutation(13)
+    expected_global = (random.random(), np.random.random(), torch.rand(()).item())
+
+    restored = make_agent(cfg)
+    restored.initialize_standalone_rngs(999)
+    restored.active_skills[:] = 0
+    random.seed(1)
+    np.random.seed(2)
+    torch.manual_seed(3)
+    restore_collector = _StrictSnapshotCollector()
+    restore_collector.frontier[:] = -1.0
+
+    total_steps, update_idx, runner_state = checkpoint_io.load_training_checkpoint(
+        checkpoint_path,
+        restored,
+        collector=restore_collector,
+        args=args,
+        config=cfg,
+    )
+
+    assert (total_steps, update_idx) == (123, 11)
+    np.testing.assert_array_equal(restored.active_skills, np.asarray([[2, 1]]))
+    np.testing.assert_array_equal(restored.episode_steps, np.asarray([17]))
+    actual_action = restored.act_low(next_obs, env_id=0, state=next_state)
+    for actual, expected in zip(actual_action, expected_action):
+        np.testing.assert_array_equal(actual, expected)
+    np.testing.assert_array_equal(
+        restored._low_update_shuffle_rng.permutation(13), expected_shuffle
+    )
+    actual_global = (random.random(), np.random.random(), torch.rand(()).item())
+    assert actual_global == expected_global
+    np.testing.assert_array_equal(restore_collector.frontier, collector.frontier)
+    assert runner_state["combined_intrinsic_ratio_kill_triggered_count"] == 9
+    torch.testing.assert_close(
+        next(restored.high.parameters()), next(agent.high.parameters())
+    )
+
+
+def test_schema4_restores_nonzero_actionability_gate_for_next_update(tmp_path):
+    cfg = make_process_config(
+        enable_team_intent=True,
+        enable_team_disc_probe=True,
+        enable_team_disc_reward=True,
+        team_disc_coef=0.05,
+        team_disc_warmup_steps=0,
+        team_disc_actionability_floor=0.25,
+    )
+    args = make_args()
+    agent = make_agent(cfg)
+    agent.initialize_standalone_rngs(args.seed)
+    agent._last_forced_z_assignment_kl = 0.375
+    checkpoint_path = tmp_path / "strict-actionability-gate.pt"
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        agent,
+        args,
+        cfg,
+        total_steps=32,
+        update_idx=4,
+        collector=_StrictSnapshotCollector(),
+        runner_state=_strict_test_runner_state(),
+    )
+
+    restored = make_agent(cfg)
+    restored.initialize_standalone_rngs(999)
+    checkpoint_io.load_training_checkpoint(
+        checkpoint_path,
+        restored,
+        collector=_StrictSnapshotCollector(),
+        args=args,
+        config=cfg,
+    )
+
+    assert agent._team_disc_actionability_gate_open()
+    assert restored._team_disc_actionability_gate_open()
+    assert restored._last_forced_z_assignment_kl == 0.375
+    rollout_source = Rollout(
+        next_states=[
+            np.linspace(0.0, 0.7, 8, dtype=np.float32),
+            np.linspace(0.2, 0.9, 8, dtype=np.float32),
+        ],
+        team_codes=[0, 1],
+        rewards=[
+            np.zeros(2, dtype=np.float32),
+            np.zeros(2, dtype=np.float32),
+        ],
+    )
+    uninterrupted_rollout = deepcopy(rollout_source)
+    resumed_rollout = deepcopy(rollout_source)
+    uninterrupted_metrics = agent._team_intent_rollout_update(
+        uninterrupted_rollout, total_steps=32
+    )
+    resumed_metrics = restored._team_intent_rollout_update(
+        resumed_rollout, total_steps=32
+    )
+
+    assert uninterrupted_metrics == pytest.approx(resumed_metrics, abs=0.0)
+    assert resumed_metrics["team_disc_reward_gated_off"] == 0.0
+    assert resumed_metrics["team_disc_forced_z_kl"] == 0.375
+    for uninterrupted_reward, resumed_reward in zip(
+        uninterrupted_rollout.rewards, resumed_rollout.rewards
+    ):
+        np.testing.assert_array_equal(uninterrupted_reward, resumed_reward)
+    torch.testing.assert_close(
+        next(agent.team_discriminator.parameters()),
+        next(restored.team_discriminator.parameters()),
+        rtol=0.0,
+        atol=0.0,
+    )
+
+
+def test_schema4_lazy_actionability_roundtrip_from_fresh_agent(tmp_path):
+    cfg = make_process_config(
+        enable_assignment_actionability_probe=True,
+        assignment_actionability_hidden_dim=12,
+    )
+    args = make_args(total_timesteps=200)
+    agent = make_agent(cfg)
+    agent.assignment_actionability = AssignmentActionabilityDiscriminator(
+        xi_dim=5,
+        context_dim=3,
+        num_team_codes=agent.num_team_codes,
+        hidden_dim=agent.assignment_actionability_cfg.hidden_dim,
+    ).to(agent.device)
+    agent.q_a_opt = torch.optim.Adam(
+        agent.assignment_actionability.parameters(), lr=1e-3
+    )
+    xi = torch.arange(20, dtype=torch.float32).reshape(4, 5) / 10.0
+    context = torch.arange(12, dtype=torch.float32).reshape(4, 3) / 10.0
+    labels = torch.tensor([0, 1, 0, 1], dtype=torch.long)
+    prior = torch.full((agent.num_team_codes,), 1.0 / agent.num_team_codes)
+    terms = agent.assignment_actionability.losses(xi, context, labels, prior)
+    agent.q_a_opt.zero_grad()
+    (terms["loss_full"] + terms["loss_prior"]).backward()
+    agent.q_a_opt.step()
+    expected_parameters = [
+        parameter.detach().clone()
+        for parameter in agent.assignment_actionability.parameters()
+    ]
+    expected_optimizer = deepcopy(agent.q_a_opt.state_dict())
+    checkpoint_path = tmp_path / "strict-lazy-actionability.pt"
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        agent,
+        args,
+        cfg,
+        total_steps=40,
+        update_idx=5,
+        collector=_StrictSnapshotCollector(),
+        runner_state=_strict_test_runner_state(),
+    )
+
+    corrupt_path = tmp_path / "strict-lazy-bad-runner.pt"
+    corrupt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    del corrupt["strict_trajectory"]["runner_state"]["last_eval_step"]
+    torch.save(corrupt, corrupt_path)
+    unmaterialized = make_agent(cfg)
+    assert unmaterialized.assignment_actionability is None
+    assert unmaterialized.q_a_opt is None
+    with pytest.raises(ValueError, match="runner state schema mismatch"):
+        checkpoint_io.load_training_checkpoint(
+            corrupt_path,
+            unmaterialized,
+            collector=_StrictSnapshotCollector(),
+            args=args,
+            config=cfg,
+        )
+    assert unmaterialized.assignment_actionability is None
+    assert unmaterialized.q_a_opt is None
+
+    restored = make_agent(cfg)
+    assert restored.assignment_actionability is None
+    assert restored.q_a_opt is None
+    checkpoint_io.load_training_checkpoint(
+        checkpoint_path,
+        restored,
+        collector=_StrictSnapshotCollector(),
+        args=args,
+        config=cfg,
+    )
+
+    assert restored.assignment_actionability is not None
+    assert restored.q_a_opt is not None
+    for expected, actual in zip(
+        expected_parameters, restored.assignment_actionability.parameters()
+    ):
+        torch.testing.assert_close(actual, expected, rtol=0.0, atol=0.0)
+    actual_optimizer = restored.q_a_opt.state_dict()
+    assert actual_optimizer["param_groups"] == expected_optimizer["param_groups"]
+    assert actual_optimizer["state"].keys() == expected_optimizer["state"].keys()
+    for parameter_id, expected_state in expected_optimizer["state"].items():
+        for name, expected in expected_state.items():
+            actual = actual_optimizer["state"][parameter_id][name]
+            if isinstance(expected, torch.Tensor):
+                torch.testing.assert_close(actual, expected, rtol=0.0, atol=0.0)
+            else:
+                assert actual == expected
+
+
+def test_schema4_contract_mismatch_fails_before_any_restore(tmp_path):
+    cfg = make_process_config(seed=29)
+    args = make_args(seed=29)
+    checkpoint_path = tmp_path / "strict-contract.pt"
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        make_agent(cfg),
+        args,
+        cfg,
+        total_steps=16,
+        update_idx=2,
+        collector=_StrictSnapshotCollector(),
+        runner_state=_strict_test_runner_state(),
+    )
+
+    changed_cfg = make_process_config(seed=29, gamma=0.91)
+    restored = make_agent(changed_cfg)
+    with torch.no_grad():
+        next(restored.high.parameters()).fill_(7.0)
+    restored.active_skills[:] = 2
+    parameter_before = next(restored.high.parameters()).detach().clone()
+    active_skills_before = restored.active_skills.copy()
+    restore_collector = _StrictSnapshotCollector()
+
+    with pytest.raises(ValueError, match="effective training contract mismatch"):
+        checkpoint_io.load_training_checkpoint(
+            checkpoint_path,
+            restored,
+            collector=restore_collector,
+            args=args,
+            config=changed_cfg,
+        )
+
+    torch.testing.assert_close(
+        next(restored.high.parameters()), parameter_before, rtol=0.0, atol=0.0
+    )
+    assert restore_collector.restored is None
+    np.testing.assert_array_equal(restored.active_skills, active_skills_before)
+
+
+def test_schema4_contract_names_core_update_semantics():
+    cfg = make_process_config(
+        gamma=0.97,
+        low_gae_lambda=0.91,
+        r30_high_gae_lambda=0.87,
+        clip_epsilon=0.19,
+        low_clip_epsilon=0.08,
+        low_ppo_epochs=4,
+        r30_high_ppo_epochs=1,
+        process_reward_coef=0.07,
+        transition_skill_reward_coef=0.03,
+        intrinsic_reward_normalize=True,
+    )
+    args = make_args(rollout_length=23, total_timesteps=1000)
+    contract = checkpoint_io.effective_training_contract(
+        make_agent(cfg), args, cfg
+    )
+
+    for field, expected in {
+        "gamma": 0.97,
+        "low_gae_lambda": 0.91,
+        "r30_high_gae_lambda": 0.87,
+        "clip_epsilon": 0.19,
+        "low_clip_epsilon": 0.08,
+        "low_ppo_epochs": 4,
+        "r30_high_ppo_epochs": 1,
+        "process_reward_coef": 0.07,
+        "transition_skill_reward_coef": 0.03,
+        "intrinsic_reward_normalize": True,
+    }.items():
+        assert contract["config"][field] == expected
+    assert contract["args"]["rollout_length"] == 23
+    assert contract["resume_constraints"]["minimum_total_timesteps"] == 1000
+
+
+def test_schema4_contract_rejects_rollout_change_but_allows_operational_changes(
+    tmp_path,
+):
+    cfg = make_process_config(seed=31)
+    args = make_args(seed=31, rollout_length=4, total_timesteps=100, log_dir="old")
+    checkpoint_path = tmp_path / "strict-contract-args.pt"
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        make_agent(cfg),
+        args,
+        cfg,
+        total_steps=16,
+        update_idx=2,
+        collector=_StrictSnapshotCollector(),
+        runner_state=_strict_test_runner_state(),
+    )
+
+    changed_rollout_args = make_args(
+        seed=31, rollout_length=5, total_timesteps=500, log_dir="new"
+    )
+    with pytest.raises(ValueError, match="effective training contract mismatch"):
+        checkpoint_io.load_training_checkpoint(
+            checkpoint_path,
+            make_agent(cfg),
+            collector=_StrictSnapshotCollector(),
+            args=changed_rollout_args,
+            config=cfg,
+        )
+
+    shortened_args = make_args(
+        seed=31, rollout_length=4, total_timesteps=50, log_dir="new"
+    )
+    with pytest.raises(ValueError, match="effective training contract mismatch"):
+        checkpoint_io.load_training_checkpoint(
+            checkpoint_path,
+            make_agent(cfg),
+            collector=_StrictSnapshotCollector(),
+            args=shortened_args,
+            config=cfg,
+        )
+
+    operational_args = make_args(
+        seed=31,
+        rollout_length=4,
+        total_timesteps=500,
+        log_dir="new",
+        resume_from=str(checkpoint_path),
+        checkpoint_keep_last=9,
+    )
+    total_steps, update_idx, _ = checkpoint_io.load_training_checkpoint(
+        checkpoint_path,
+        make_agent(cfg),
+        collector=_StrictSnapshotCollector(),
+        args=operational_args,
+        config=cfg,
+    )
+    assert (total_steps, update_idx) == (16, 2)
+
+
+def test_schema2_is_rejected_for_strict_training_resume(tmp_path):
+    cfg = make_process_config()
+    args = make_args()
+    agent = make_agent(cfg)
+    checkpoint_path = tmp_path / "warm-start-schema2.pt"
+    checkpoint_io.save_checkpoint(
+        checkpoint_path, agent, args, cfg, total_steps=4, update_idx=2
+    )
+
+    with pytest.raises(ValueError, match="requires standalone schema-4"):
+        checkpoint_io.load_training_checkpoint(
+            checkpoint_path,
+            make_agent(cfg),
+            collector=_StrictSnapshotCollector(),
+            args=args,
+            config=cfg,
+        )
+
+
+def test_schema4_optimizer_mismatch_is_not_swallowed(tmp_path):
+    cfg = make_process_config(seed=17)
+    args = make_args(seed=17)
+    checkpoint_path = tmp_path / "strict-bad-opt.pt"
+    checkpoint_io.save_training_checkpoint(
+        checkpoint_path,
+        make_agent(cfg),
+        args,
+        cfg,
+        total_steps=8,
+        update_idx=3,
+        collector=_StrictSnapshotCollector(),
+        runner_state=_strict_test_runner_state(),
+    )
+    payload = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    payload["strict_trajectory"]["optimizers"]["high_opt"]["param_groups"] = []
+    torch.save(payload, checkpoint_path)
+
+    with pytest.raises(ValueError):
+        checkpoint_io.load_training_checkpoint(
+            checkpoint_path,
+            make_agent(cfg),
+            collector=_StrictSnapshotCollector(),
+            args=args,
+            config=cfg,
+        )
+
+
+def test_evaluation_restores_global_rng_even_when_evaluation_raises(monkeypatch):
+    random.seed(211)
+    np.random.seed(223)
+    torch.manual_seed(227)
+    before = checkpoint_io.capture_global_rng_state()
+
+    def fail_after_consuming_rng(*_args, **_kwargs):
+        random.random()
+        np.random.random()
+        torch.rand(())
+        raise RuntimeError("synthetic evaluation failure")
+
+    monkeypatch.setattr(process_evaluation, "_evaluate_impl", fail_after_consuming_rng)
+    with pytest.raises(RuntimeError, match="synthetic evaluation failure"):
+        process_evaluation.evaluate(None, None, None, episodes=1, total_steps=0)
+    after = checkpoint_io.capture_global_rng_state()
+
+    assert before["python"] == after["python"]
+    assert before["numpy"][0] == after["numpy"][0]
+    np.testing.assert_array_equal(before["numpy"][1], after["numpy"][1])
+    assert before["numpy"][2:] == after["numpy"][2:]
+    torch.testing.assert_close(before["torch_cpu"], after["torch_cpu"])
+
+
 def test_process_update_injects_reward_into_matching_rollout_agent():
     np.random.seed(2)
     torch.manual_seed(2)
@@ -619,7 +1103,92 @@ class DummyEvalEnv:
         return None
 
 
-def test_standalone_eval_restores_runtime_state(monkeypatch):
+class DummyMixedBackhaulEvalEnv(DummyEvalEnv):
+    def __init__(self):
+        super().__init__()
+        self.episode_index = -1
+
+    def reset(self, seed=None):
+        self.episode_index += 1
+        return super().reset(seed=seed)
+
+    def step(self, actions):
+        obs, reward, terminated, truncated, info = super().step(actions)
+        if self.episode_index == 0:
+            info["reward_info"]["backhaul_connected_flag"] = 0.0
+        return obs, reward, terminated, truncated, info
+
+
+class _OneStepTrainCollector:
+    def __init__(self):
+        self.spec = {
+            "obs_dim": 4,
+            "action_dim": 3,
+            "n_uavs": 2,
+            "state_dim": 8,
+            "action_space": SimpleNamespace(
+                dtype=np.dtype(np.int64),
+                low=np.asarray([0], dtype=np.int64),
+                high=np.asarray([2], dtype=np.int64),
+            ),
+        }
+        self.closed = False
+
+    def reset_all(self, seed):
+        return (
+            [np.zeros((2, 4), dtype=np.float32)],
+            [np.zeros(8, dtype=np.float32)],
+            [{}],
+        )
+
+    def step(self, actions):
+        return [
+            SimpleNamespace(
+                obs=np.ones((2, 4), dtype=np.float32),
+                reward=1.0,
+                terminated=False,
+                truncated=False,
+                info={
+                    "next_state": np.ones(8, dtype=np.float32),
+                    "state_info": {},
+                    "reward_info": {},
+                    "reward_components": {
+                        "individual_rewards": np.ones(2, dtype=np.float32)
+                    },
+                },
+            )
+        ]
+
+    def snapshot_training_state(self):
+        return {
+            "snapshot_capability_name": "standalone_collector_training_state",
+            "snapshot_capability_version": 1,
+            "frontier": np.asarray([1], dtype=np.int64),
+        }
+
+    def close(self):
+        self.closed = True
+
+
+def test_standalone_eval_does_not_average_over_partial_metric_episodes(monkeypatch):
+    cfg = make_process_config(scenario="base")
+    args = make_args(eval_max_steps=3)
+    agent = make_agent(cfg)
+    monkeypatch.setattr(
+        process_evaluation,
+        "create_env",
+        lambda *args, **kwargs: DummyMixedBackhaulEvalEnv(),
+    )
+
+    metrics = process_evaluation.evaluate(
+        agent, cfg, args, episodes=2, total_steps=10
+    )
+
+    assert "backhaul_connected_flag" not in metrics
+    assert "backhaul_connected_step_fraction" not in metrics
+
+
+def test_standalone_eval_restores_runtime_state(monkeypatch, capsys):
     cfg = make_process_config(scenario="base")
     args = make_args(eval_max_steps=3)
     agent = make_agent(cfg)
@@ -638,8 +1207,122 @@ def test_standalone_eval_restores_runtime_state(monkeypatch):
 
     assert metrics["reward_mean"] == 2.0
     assert metrics["coverage"] == 0.5
+    assert "backhaul_connected_flag" not in metrics
+    assert "backhaul_connected_step_fraction" not in metrics
+    assert "throughput_when_backhaul_connected_mbps" not in metrics
+    output = capsys.readouterr().out
+    assert "backhaul_connected_frac=NA" in output
+    assert "throughput_when_backhaul_connected=NA" in output
     np.testing.assert_array_equal(agent.active_skills, active_before)
     np.testing.assert_array_equal(agent.duration_remaining, duration_before)
     np.testing.assert_array_equal(agent.skill_age, age_before)
     np.testing.assert_array_equal(agent.has_active_skill, has_active_before)
     assert agent.segments is segments_before
+
+
+def test_periodic_evaluation_records_grouping_identity_and_renders_plots(
+    tmp_path, monkeypatch
+):
+    cfg = make_process_config(scenario="base")
+    args = make_args(
+        seed=13,
+        log_dir=str(tmp_path),
+        eval_episodes=2,
+        eval_max_steps=3,
+    )
+    agent = make_agent(cfg)
+    monkeypatch.setattr(
+        process_evaluation, "create_env", lambda *args, **kwargs: DummyEvalEnv()
+    )
+
+    process_evaluation.evaluate(agent, cfg, args, episodes=2, total_steps=80)
+
+    rows = read_csv_records(tmp_path / "metrics" / "eval_episodes.csv")
+    assert len(rows) == 2
+    assert [row["checkpoint"] for row in rows] == [
+        "in_training_step_80",
+        "in_training_step_80",
+    ]
+    assert [row["eval_step"] for row in rows] == [80.0, 80.0]
+    assert [row["run_seed"] for row in rows] == [13.0, 13.0]
+    assert [row["seed"] for row in rows] == [100013.0, 100013.0]
+    assert [row["reset_seed"] for row in rows] == [100013.0, 100014.0]
+    assert (tmp_path / "eval_reward.png").is_file()
+
+
+def test_train_runner_periodic_evaluation_renders_and_saves_completed_frontier(
+    tmp_path, monkeypatch
+):
+    cfg = make_process_config(scenario="base")
+    args = make_args(
+        num_envs=1,
+        collector_backend="sync",
+        preset="",
+        resume_from="",
+        rollout_length=1,
+        total_timesteps=1,
+        save_interval=1,
+        checkpoint_keep_last=2,
+        eval_interval=1,
+        eval_episodes=2,
+        infrastructure_profile_interval=0,
+        log_dir=str(tmp_path),
+    )
+    collector = _OneStepTrainCollector()
+    agent = make_agent(cfg)
+    zero_process_metrics = {
+        "process_segments": 0.0,
+        "process_loss": 0.0,
+        "process_reward_mean": 0.0,
+        "outcome_available_mean": 0.0,
+        "outcome_abs_mean": 0.0,
+        "high_loss": 0.0,
+        "high_entropy": 0.0,
+        "high_return_mean": 0.0,
+    }
+    zero_low_metrics = {
+        "low_loss": 0.0,
+        "low_entropy": 0.0,
+        "return_mean": 0.0,
+    }
+    agent.process_update = lambda *_args, **_kwargs: dict(zero_process_metrics)
+    agent.update_low = lambda *_args, **_kwargs: dict(zero_low_metrics)
+    monkeypatch.setattr(
+        standalone_train_runner, "create_collector", lambda *_args, **_kwargs: collector
+    )
+    monkeypatch.setattr(
+        standalone_train_runner, "create_agent", lambda *_args, **_kwargs: agent
+    )
+    monkeypatch.setattr(
+        standalone_train_runner.standalone_manifest,
+        "export_run_manifest",
+        lambda *_args, **_kwargs: None,
+    )
+    monkeypatch.setattr(
+        standalone_train_runner, "export_update_metrics", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(standalone_train_runner, "emit", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(
+        process_evaluation, "create_env", lambda *_args, **_kwargs: DummyEvalEnv()
+    )
+
+    returned_agent, total_steps, update_idx = standalone_train_runner.train_loop(
+        cfg, args, writer=None
+    )
+
+    assert returned_agent is agent
+    assert (total_steps, update_idx) == (1, 1)
+    assert collector.closed
+    rows = read_csv_records(tmp_path / "metrics" / "eval_episodes.csv")
+    assert len(rows) == 2
+    assert {row["checkpoint"] for row in rows} == {"in_training_step_1"}
+    assert {row["eval_step"] for row in rows} == {1.0}
+    assert {row["run_seed"] for row in rows} == {1.0}
+    assert {row["seed"] for row in rows} == {100001.0}
+    assert (tmp_path / "eval_reward.png").is_file()
+    periodic = torch.load(
+        tmp_path / "standalone_process_core_update_1.pt",
+        map_location="cpu",
+        weights_only=False,
+    )
+    assert periodic["strict_trajectory"]["runner_state"]["last_eval_step"] == 1

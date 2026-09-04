@@ -51,6 +51,115 @@ used-information comparator in the fixed synthetic instance. It does not support
 policy value, adaptive-duration retirement in general, production bookkeeping,
 return, deployment, or new physical worlds.
 
+## Owner-action-responsive lifecycle A1 source
+
+Accepted registered result:
+`A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_SUPPORTED`. The sole invocation was
+`vsp02_a1_617290fb_r1` at source commit
+`617290fb333d3dcd5ebf47525fcca04e05b0cce9`. The byte-exact public artifact is
+`docs/research/candidates/vsp_02/VSP02_A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_RESULT.json`
+(SHA-256
+`68e91ead4d1cc2ab838de79f6fffcbf8665c266f11de95ea8ab9b083d25e9b4f`).
+Its matched 2x2 separator is candidate `RELEASE=ENDED_RELEASE`, candidate
+`HOLD=ACTIVE`, Z0 `RELEASE=ACTIVE`, and Z0 `HOLD=ACTIVE`. The artifact records
+one registered deterministic A invocation and zero environment, policy,
+learner, trainer, optimizer, return-evaluation, model-fit, stochastic, or
+retry/rescue/sweep activity. This certifies only the frozen lifecycle action
+edge and its matched-control boundary.
+
+```text
+treatment=VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE
+candidate=CAND-VSP-02@adversarial-revision-v8
+source=experiments/candidates/vsp_02/owner_action_responsive_lifecycle.py
+runner=scripts/run_vsp02_a1_owner_action_responsive_lifecycle.py
+tests=tests/experiments/candidates/vsp_02/test_owner_action_responsive_lifecycle.py
+evidence=A_READONLY_OR_ZERO_RUNTIME
+registered_activity_cap=one deterministic invocation; all environment/policy/learner/trainer/optimizer/return/model-fit counts zero
+scope=lifecycle actionability certificate only
+```
+
+This A1 package is independent of the earlier duration-escrow value
+conformance above.  It binds an immutable owner epoch and behavior version,
+separates authoritative membership from visible roster state, makes candidate
+`RELEASE` an idempotent causal stopping edge, and keeps the matched Z0
+post-claim `RELEASE` command log-only.  Its registered first observation is
+the committed post-boundary phase on one matched positive-survival tape.
+
+The package does not reuse the earlier synthetic return calculation as a
+lifecycle certificate.  It makes no claim about learning, value, escrow
+superiority, adaptive superiority, production deployment, promotion,
+retirement, B/C readiness, or formal-compute readiness.
+
+## Crossed physical-value support A2 source
+
+This is the publication binding for
+`VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT`. The sole registered A invocation
+supports the strict crossing branch below; this records only the frozen exact
+audit and makes no scientific disposition.
+
+```text
+treatment=VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT
+candidate=CAND-VSP-02@adversarial-revision-v8
+source=experiments/candidates/vsp_02/crossed_physical_value_support.py
+runner=scripts/run_vsp02_a2_crossed_physical_value_support.py
+tests=tests/experiments/candidates/vsp_02/test_crossed_physical_value_support.py
+evidence=A_READONLY_OR_ZERO_RUNTIME
+arithmetic=exact Fraction
+cells=(X_b=1,RELEASE)|(X_b=1,HOLD)|(X_b=0,RELEASE)|(X_b=0,HOLD)
+contrasts=Delta_1=Q_1(RELEASE)-Q_1(HOLD)|Delta_0=Q_0(RELEASE)-Q_0(HOLD)
+registered_activity_cap=one deterministic A invocation; all environment/policy/learner/trainer/optimizer/evaluation-episode/model-fit/stochastic activity zero
+registered_audit_status=COMPLETE
+registered_audit_binding_source=c8bf3d8e71985d404bd742257c6ca3cb28cbcf9b
+branch=A2_REGISTERED_STRICT_CROSSING_SUPPORTED
+q_cells=X_b=1|RELEASE=1;X_b=1|HOLD=-1;X_b=0|RELEASE=1;X_b=0|HOLD=2
+delta_cells=Delta_1=2;Delta_0=-1
+registered_a_invocation=1
+all_other_activity_retry_B_C_formal=0
+strict_nonclaims=no scientific disposition; no learning, deployment, promotion, retirement, B/C, Pro, or formal-compute claim
+```
+
+The byte-exact public result is
+`docs/research/candidates/vsp_02/VSP02_A2_CROSSED_PHYSICAL_VALUE_SUPPORT_RESULT.json`
+(SHA-256
+`61f3f645bcc903a21f9210605b6a6ef57c0bc5a77f38cb0ba925ae23d1f9dd31`). It
+contains exactly the four required cue/action cells, with Q values
+`X_b=1: RELEASE=1, HOLD=-1` and `X_b=0: RELEASE=1, HOLD=2`, hence
+`Delta_1=2` and `Delta_0=-1`. This is a registered A read-only/zero-runtime
+materialization only; all retry, B/C, and formal activity are zero. No
+scientific disposition is made.
+
+`frozen_contract()` owns the single reward, transition, discount, horizon,
+continuation/partner/primitive-policy, owner/version, target/score, cue, and
+matched-tape object.  The cue is prospectively and permanently mapped from the
+public predecision cutoff-request bit: present is `X_b=1`, absent is `X_b=0`.
+Its source-field allow-list excludes future termination, future reward, hidden
+tape, realized end cause, treatment, branch, Q, and delta information.  Each
+cue tape has exact weight `1/2`; RELEASE and HOLD each have exact registered
+legal propensity `1/2` in both cue states.  The same cue tape is reused across
+the two forced actions, so realized end cause is never selected.
+
+`_evaluate_cell()` reuses the accepted A1 immutable-owner lifecycle edge.  A
+legal RELEASE commits `ENDED_RELEASE`; a legal HOLD commits one frozen
+primitive boundary and then `ENDED_NATURAL`.  It returns one exact physical
+target/score witness per cell without policy, learner, optimizer, episode, or
+model-fit execution.  `classify_a2()` recomputes both registered deltas from
+the exact four-cell domain and applies, in order, invalid/leak, absent support,
+registered strict crossing, reversed strict crossing, nonzero non-crossing,
+and both-zero branches.  Reversed crossing is terminal as reversed and has no
+cue-label or sign repair.
+
+The runner separates prospective manifest creation, technical reconstruction,
+the unique `registered-audit`, and validation.  The registered path creates an
+exclusive claim before evaluation; an existing claim or result forbids retry,
+and a post-claim failure consumes the invocation.  Before that claim, source
+integrity covers both the four A2-owned claim paths and the immediate executed
+runtime dependency
+`experiments/candidates/vsp_02/owner_action_responsive_lifecycle.py`.  An
+absent, untracked, or dirty A1 dependency fails before claim creation, so the
+result cannot claim the checkout HEAD while executing altered local lifecycle
+semantics.  This package supports no B, C, Pro, formal, promotion, retirement,
+rescue, sweep, or adjusted same-audit path.
+
 ## Byte-stable raw audit output
 
 Command: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -B experiments/candidates/vsp_02/duration_escrow_oracle.py`

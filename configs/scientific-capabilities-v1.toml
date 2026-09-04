@@ -1,0 +1,58 @@
+[catalog]
+version = 1
+
+[[capability]]
+capability = "scientific-python"
+status = "active"
+purpose = "Deterministic symbolic, numerical, tabular, statistical, and plotting probes in the isolated Windows CPU environment."
+entrypoint = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
+environment = "environments/hmasd-science-tools/manifest.json"
+allowed_effects = ["local-read", "direction-temp-write"]
+
+[[capability]]
+capability = "networkx"
+status = "active"
+purpose = "Graph construction, invariants, counterexamples, and reference algorithms using the isolated scientific Python environment."
+entrypoint = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
+environment = "environments/hmasd-science-tools/manifest.json"
+allowed_effects = ["local-read", "direction-temp-write"]
+
+[[capability]]
+capability = "paper-lookup"
+status = "unavailable"
+purpose = "Dedicated publisher-metadata and paper-retrieval adapter is not installed; use an explicitly assigned Research Scout or general download leaf."
+entrypoint = ""
+environment = ""
+allowed_effects = ["external-read", "direction-temp-write"]
+
+[[capability]]
+capability = "stable-baselines3-reference"
+status = "unavailable"
+purpose = "Optional single-agent reference adapter remains isolated until a direction explicitly needs it."
+entrypoint = ""
+environment = ""
+allowed_effects = ["local-read", "direction-temp-write"]
+
+[[capability]]
+capability = "torch-geometric-probe"
+status = "unavailable"
+purpose = "Optional graph-learning adapter remains isolated until a direction explicitly needs it."
+entrypoint = ""
+environment = ""
+allowed_effects = ["local-read", "direction-temp-write"]
+
+[[capability]]
+capability = "pufferlib-marl-probe"
+status = "unavailable"
+purpose = "Optional MARL environment/performance adapter remains isolated until a direction explicitly needs it."
+entrypoint = ""
+environment = ""
+allowed_effects = ["local-read", "direction-temp-write"]
+
+[[capability]]
+capability = "wolfram"
+status = "unavailable"
+purpose = "Paid or plugin-backed symbolic provider is outside the current authorized local tool surface."
+entrypoint = ""
+environment = ""
+allowed_effects = ["external-provider"]

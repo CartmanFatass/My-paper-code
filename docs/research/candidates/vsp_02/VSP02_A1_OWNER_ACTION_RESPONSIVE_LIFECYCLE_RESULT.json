@@ -1,0 +1,233 @@
+{
+  "activity": {
+    "environment_transitions": 0,
+    "learner_calls": 0,
+    "model_fits": 0,
+    "optimizer_updates": 0,
+    "policy_calls": 0,
+    "registered_a_invocations": 1,
+    "retries_rescues_sweeps": 0,
+    "return_evaluations": 0,
+    "stochastic_draws": 0,
+    "trainer_calls": 0
+  },
+  "artifact_kind": "vsp02_a1_owner_action_responsive_lifecycle_result",
+  "branch": "A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_SUPPORTED",
+  "manifest": {
+    "artifact_kind": "vsp02_a1_frozen_manifest",
+    "assignment_id": "VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE",
+    "candidate": "CAND-VSP-02@adversarial-revision-v8",
+    "evidence_level": "A",
+    "formal": false,
+    "frozen_separator": {
+      "CANDIDATE|HOLD": "ACTIVE",
+      "CANDIDATE|RELEASE": "ENDED_RELEASE",
+      "Z0|HOLD": "ACTIVE",
+      "Z0|RELEASE": "ACTIVE"
+    },
+    "pool_units": 0,
+    "resource_class": "A_READONLY_OR_ZERO_RUNTIME",
+    "run_id": "vsp02_a1_617290fb_r1",
+    "schema_version": 1,
+    "source_revision": "617290fb333d3dcd5ebf47525fcca04e05b0cce9",
+    "technical_only": false,
+    "terminal_branch_precedence": [
+      "A1_INVALID_CONTRACT",
+      "A1_POSITIVE_SURVIVAL_SUPPORT_ABSENT",
+      "A1_OWNER_AUTHORIZATION_FAILED",
+      "A1_LEDGER_OR_CLOSURE_FAILED",
+      "A1_RELEASE_NOT_CAUSAL",
+      "A1_Z0_RELEASE_RESPONSIVE",
+      "A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_SUPPORTED"
+    ]
+  },
+  "report": {
+    "arm_contracts": {
+      "candidate": {
+        "backend": "CANDIDATE",
+        "command_alphabet": [
+          "HOLD",
+          "RELEASE"
+        ],
+        "command_bandwidth_bits": 1,
+        "computation_cells": 4,
+        "horizon": 4,
+        "information_fields": [
+          "committed_phase",
+          "prior_acknowledgements",
+          "physical_clock",
+          "primitive_clock",
+          "own_boundary_clock",
+          "owner_epoch_token",
+          "visible_roster",
+          "opaque_post_claim_cue"
+        ],
+        "ledger_schema": "TARGET_SCORE_TOMBSTONE_V1",
+        "memory_cells": 2,
+        "optimizer_exposure": 0,
+        "primitive_policy": "FROZEN_PRIMITIVE_V1",
+        "release_has_stopping_edge": true,
+        "reward_contract": "NO_CLAIM_RELEASE_DURATION_OR_END_REWARD",
+        "tape_id": "VSP02-A1-PAIRED-TAPE-1"
+      },
+      "sole_treatment_difference": "release_has_stopping_edge",
+      "z0": {
+        "backend": "Z0",
+        "command_alphabet": [
+          "HOLD",
+          "RELEASE"
+        ],
+        "command_bandwidth_bits": 1,
+        "computation_cells": 4,
+        "horizon": 4,
+        "information_fields": [
+          "committed_phase",
+          "prior_acknowledgements",
+          "physical_clock",
+          "primitive_clock",
+          "own_boundary_clock",
+          "owner_epoch_token",
+          "visible_roster",
+          "opaque_post_claim_cue"
+        ],
+        "ledger_schema": "TARGET_SCORE_TOMBSTONE_V1",
+        "memory_cells": 2,
+        "optimizer_exposure": 0,
+        "primitive_policy": "FROZEN_PRIMITIVE_V1",
+        "release_has_stopping_edge": false,
+        "reward_contract": "NO_CLAIM_RELEASE_DURATION_OR_END_REWARD",
+        "tape_id": "VSP02-A1-PAIRED-TAPE-1"
+      }
+    },
+    "authority": {
+      "nonmember_rejected": true,
+      "stale_version_rejected": true,
+      "valid_owner_release": true,
+      "visibility_not_authority": true,
+      "wrong_epoch_rejected": true,
+      "wrong_owner_rejected": true
+    },
+    "branch": "A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_SUPPORTED",
+    "contract": {
+      "arm_match_except_release_edge": true,
+      "claim_time_mapping_enumeration_exact": true,
+      "eight_phase_total_schema": true,
+      "fixed_primitive_reward_horizon_optimizer_match": true,
+      "fixed_randomized_shuffled_recurrent_actuator_controls_present": true,
+      "information_memory_compute_command_match": true,
+      "observation_firewall": true,
+      "paired_tape_identity": true,
+      "release_before_eligibility_rejected": true,
+      "release_without_claim_rejected": true,
+      "separator_complete": true,
+      "tie_precedence_exact": true
+    },
+    "first_observation": {
+      "cells": {
+        "CANDIDATE|HOLD": "ACTIVE",
+        "CANDIDATE|RELEASE": "ENDED_RELEASE",
+        "Z0|HOLD": "ACTIVE",
+        "Z0|RELEASE": "ACTIVE"
+      },
+      "kind": "COMMITTED_PHASE_IMMEDIATELY_AFTER_BOUNDARY"
+    },
+    "ledger_closure": {
+      "exact_once_closure": true,
+      "release_ledger_exact_once": true,
+      "stale_version_cannot_change_closed_record": true,
+      "target_score_exact": true,
+      "tombstone_preserves_end_cause": true,
+      "version_advances_only_after_closure": true
+    },
+    "named_tabular_controls": {
+      "actuator_matched": true,
+      "fixed": true,
+      "joint_context_shuffle": true,
+      "private_randomized": true,
+      "recurrent": true
+    },
+    "nonclaims": [
+      "learning value",
+      "escrow superiority",
+      "adaptive superiority",
+      "return improvement",
+      "production actionability",
+      "promotion or retirement"
+    ],
+    "phase_schema": [
+      "UNCLAIMED",
+      "ACTIVE",
+      "ENDED_RELEASE",
+      "ENDED_INTERRUPT",
+      "ENDED_NATURAL",
+      "ENDED_TERMINAL",
+      "ENDED_HORIZON",
+      "TARGET_CLOSED_TOMBSTONE"
+    ],
+    "positive_survival_support": true,
+    "separator": {
+      "CANDIDATE|HOLD": "ACTIVE",
+      "CANDIDATE|RELEASE": "ENDED_RELEASE",
+      "Z0|HOLD": "ACTIVE",
+      "Z0|RELEASE": "ACTIVE"
+    },
+    "terminal_precedence": [
+      "TERMINAL",
+      "INTERRUPT",
+      "AUTHORIZED_RELEASE",
+      "NATURAL",
+      "HORIZON"
+    ],
+    "z0_claim_time_enumeration": {
+      "all_survive_registered_boundary": true,
+      "completion_laws": [
+        "SURVIVE_ONE_MORE_BOUNDARY",
+        "SURVIVE_TWO_MORE_BOUNDARIES"
+      ],
+      "cue_domain": [
+        "cue-0",
+        "cue-1"
+      ],
+      "mapping_count": 4,
+      "mapping_witnesses": {
+        "cue-0:SURVIVE_ONE_MORE_BOUNDARY|cue-1:SURVIVE_ONE_MORE_BOUNDARY": {
+          "HOLD": "ACTIVE",
+          "RELEASE": "ACTIVE"
+        },
+        "cue-0:SURVIVE_ONE_MORE_BOUNDARY|cue-1:SURVIVE_TWO_MORE_BOUNDARIES": {
+          "HOLD": "ACTIVE",
+          "RELEASE": "ACTIVE"
+        },
+        "cue-0:SURVIVE_TWO_MORE_BOUNDARIES|cue-1:SURVIVE_ONE_MORE_BOUNDARY": {
+          "HOLD": "ACTIVE",
+          "RELEASE": "ACTIVE"
+        },
+        "cue-0:SURVIVE_TWO_MORE_BOUNDARIES|cue-1:SURVIVE_TWO_MORE_BOUNDARIES": {
+          "HOLD": "ACTIVE",
+          "RELEASE": "ACTIVE"
+        }
+      },
+      "mappings": [
+        [
+          "cue-0:SURVIVE_ONE_MORE_BOUNDARY",
+          "cue-1:SURVIVE_ONE_MORE_BOUNDARY"
+        ],
+        [
+          "cue-0:SURVIVE_ONE_MORE_BOUNDARY",
+          "cue-1:SURVIVE_TWO_MORE_BOUNDARIES"
+        ],
+        [
+          "cue-0:SURVIVE_TWO_MORE_BOUNDARIES",
+          "cue-1:SURVIVE_ONE_MORE_BOUNDARY"
+        ],
+        [
+          "cue-0:SURVIVE_TWO_MORE_BOUNDARIES",
+          "cue-1:SURVIVE_TWO_MORE_BOUNDARIES"
+        ]
+      ],
+      "post_claim_release_is_log_only_for_every_mapping": true
+    }
+  },
+  "schema_version": 1,
+  "smallest_technical_fact": "On one byte-matched positive-survival tape, candidate RELEASE alone commits ENDED_RELEASE; candidate HOLD and both Z0 commands remain ACTIVE."
+}

@@ -1,0 +1,67 @@
+{
+  "file": "P04_Vlatakis_GDA_Cycles_NeurIPS2019.pdf",
+  "citation_key": "VlatakisEtAl2019",
+  "title": "Poincare Recurrence, Cycles and Spurious Equilibria in Gradient-Descent-Ascent for Non-Convex Non-Concave Zero-Sum Games",
+  "authors": [
+    "Emmanouil-Vasileios Vlatakis-Gkaragkounis",
+    "Lampros Flokas",
+    "Georgios Piliouras"
+  ],
+  "year": 2019,
+  "venue": "NeurIPS 2019",
+  "version": "NeurIPS 2019 proceedings paper; arXiv:1910.13010",
+  "doi": null,
+  "arxiv": "1910.13010",
+  "source_urls": [
+    "https://proceedings.neurips.cc/paper/2019/hash/6c7cd904122e623ce625613d6af337c4-Abstract.html"
+  ],
+  "primary_topics": [
+    "gradient-descent-ascent",
+    "hidden bilinear games",
+    "Poincare recurrence",
+    "spurious equilibria"
+  ],
+  "method_families": [
+    "continuous-time dynamical systems",
+    "gradient-descent-ascent",
+    "conservation-law analysis"
+  ],
+  "problem_classes": [
+    "non-convex non-concave zero-sum games",
+    "hidden bilinear games"
+  ],
+  "evidence_types": [
+    "formal dynamical-systems analysis",
+    "constructed counterexamples",
+    "trajectory illustration"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "paper_id": "P04",
+  "source_pdf": "docs/new-libs/papers/P04_Vlatakis_GDA_Cycles_NeurIPS2019.pdf",
+  "pdf_pages": 12,
+  "text_extractable_pages": 12,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    11,
+    12
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P04/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P04/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P04/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P04/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P04/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:ef2de0fb86f626ca398591377be408a607fba155c01c2dd8e358e05b6fac2044"
+}

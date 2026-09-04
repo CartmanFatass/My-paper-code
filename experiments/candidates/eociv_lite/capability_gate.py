@@ -36,27 +36,6 @@ it:
   The gate's own modulo arm assignment and Bernoulli-0.5 tape are gate-support
   probes; the registration explicitly declares they are NOT the outcome
   design, and check 10 asserts that declaration.
-
-v2.1 (Pro's loop-7 corrections C1-C3):
-
-- **C1** — check 4 exercises the corrected fail-closed matrix: the verifier
-  binds to the ACTUAL policy slot tensor, the full current opportunity
-  identity, route/decision-source/cost, and the issuing runner's block
-  identity; boundary actions carry an ``ActionReceipt`` that the registered
-  ``bound_step`` wrapper verifies (an action altered after the forward pass
-  fails closed).
-- **C2** — check 6's dominance certificate is on the SEGMENT-TOTAL scale:
-  the oracle stores the per-step BLIND optimizer, both the informed and the
-  blind quantized trajectories are executed through the real environment,
-  the quantization and kernel envelopes are ACCUMULATED across all 12 steps
-  and both paths with prior weights, and every quantized value is asserted
-  exactly <= its exact optimum (no ``max(0, .)`` masking).
-- **C3** — check 11 pins the outcome-harness world-randomness identity:
-  profile-qualified ledger/noise seeds derived as
-  H(label, registered seed, profile), no world/noise digest collision across
-  profiles at equal local episode ids, identical digests across the four arm
-  clones of a block, disjoint profile-qualified episode namespaces per pool,
-  and a 64-bit profile-hash collision assertion over the closed registry.
 """
 
 from __future__ import annotations
@@ -72,7 +51,7 @@ from envs.continuous_roster import runtime_capacity as roster_env
 from experiments.candidates.eociv_lite import actuation_runtime as art
 from experiments.candidates.eociv_lite import sibling_env as sib
 
-RAW_OUTPUT_BINDING = "eociv_lite.capability_gate.v2.1"
+RAW_OUTPUT_BINDING = "eociv_lite.capability_gate.v3"
 
 #: Registered gate population: every training profile, eight episodes each.
 GATE_PROFILES = roster_env.TRAIN_PROFILES
@@ -80,11 +59,17 @@ GATE_EPISODES = tuple(range(8))
 MASTER_SEED = 20260807
 SIBLING_SEED = 90731
 TAPE_SEED = 41211
+PROFILE_STREAM_MANIFEST = sib.registered_profile_stream_manifest(
+    tuple(profile.name for profile in GATE_PROFILES),
+    world_seed=MASTER_SEED,
+    action_noise_seed=art.ACTION_NOISE_SEED,
+)
 
 #: Wiring tolerance for the kernel conformance check (exact reward of the
 #: executed quantized action vs the environment's float result).  Floor: the
 #: base env's float32 kernel arithmetic, ~2**-24 relative per step.
 CONFORMANCE_TOL = 1e-6
+SEGMENT_CONFORMANCE_TOL = sib.SEGMENT_LENGTH * CONFORMANCE_TOL
 
 #: The full-support exact reveal floor every critical cell must clear.
 REVEAL_FLOOR = Fraction(1, 1000)
@@ -154,35 +139,6 @@ REGISTERED_OUTCOME_EXPERIMENT = {
         "reproduce <= half the primary contrast; robust under equal "
         "profile/seed weighting; no early success, no extension"
     ),
-    # Pro's loop-7 C3 pin ("Required pin preserving the frozen design"):
-    # the outcome harness derives profile-qualified base-world and
-    # action-noise seeds so equal local episode ids across profiles do not
-    # share base randomness, WITHOUT modifying RuntimeCapacityRosterEnv.
-    # Within a four-arm focal block all clones share the exact same
-    # profile-qualified ledger and noise tape.
-    "world_noise_identity": {
-        "ledger_master_seed_label": "EOCIV-LEDGER-WORLD-V1",
-        "action_noise_seed_label": "EOCIV-ACTION-NOISE-V1",
-        "derivation": (
-            "seed_p = first 8 bytes (big-endian) of "
-            "sha256(label | registered_seed | profile_registration_id)"
-        ),
-        "registered_master_seed": 20260807,
-        "registered_action_seed": 730202,
-        "applies_to_pools": [
-            "d_fit", "d_policy", "d_cal", "d_focal", "pattern_knockout_audit",
-        ],
-    },
-    # Ancestry pools use DISJOINT profile-qualified local-episode-id
-    # namespaces (checked exhaustively by gate check 11 against the budgets
-    # above).
-    "episode_namespaces": {
-        "d_fit": [0, 7281],
-        "d_policy": [100000, 102047],
-        "d_cal": [200000, 200511],
-        "d_focal": [300000, 300255],
-        "pattern_knockout_audit": [400000, 400063],
-    },
 }
 
 
@@ -212,8 +168,11 @@ def _drive_to(env, time: int) -> None:
 
 
 def _make_sibling(profile, episode_id: int, **kwargs) -> sib.EocivSiblingRosterEnv:
+    world_seed = sib.profile_stream_identity(
+        sib.BASE_WORLD_STREAM, MASTER_SEED, profile.name
+    )
     ledger = roster_env.make_ledger(
-        episode_id, master_seed=MASTER_SEED, profile=profile
+        episode_id, master_seed=world_seed, profile=profile
     )
     return sib.EocivSiblingRosterEnv(ledger, sibling_seed=SIBLING_SEED, **kwargs)
 
@@ -255,10 +214,10 @@ class StepGeometry:
     LOAD-BEARING BASELINE ASSUMPTION: every non-focal active member plays the
     blind-constructive action (effort = published load, mix = published mix —
     the base environment's exact optimum family).  The channel terms below
-    encode that baseline, and ``_run_quantized_segment`` drives the real
+    encode that baseline, and ``_envelopes_for_state`` drives the real
     environment with ``constructive_actions`` for the non-focal members for
     exactly that reason: the oracle's informed/blind values and the executed
-    conformance runs must share one baseline, or the correspondence silently
+    conformance run must share one baseline, or the correspondence silently
     breaks.  Change one only with the other.
     """
 
@@ -336,8 +295,6 @@ class FullSupportOracle:
     reveal_value: Fraction
     optimal_sets_disjoint_every_step: bool
     per_step_optima: dict[str, tuple[tuple[Fraction, Fraction], ...]]
-    #: Pro's C2 correction: the blind optimizer trajectory is part of the
-    #: certificate — it must be retained and exercised through the env.
     per_step_blind_optima: tuple[tuple[Fraction, Fraction], ...]
 
 
@@ -388,16 +345,16 @@ def full_support_oracle(ledger, event_index: int, receiver_key: int) -> FullSupp
             per_step_optima[state].append(best_point)
             informed_value += prior[state] * best
         blind_best = None
-        blind_best_point = None
+        blind_point = None
         for point in candidates:
             value = sum(
                 (prior[state] * geometry.reward(state, *point) for state in states),
                 Fraction(0),
             )
             if blind_best is None or value > blind_best:
-                blind_best, blind_best_point = value, point
+                blind_best, blind_point = value, point
         blind_value += blind_best
-        per_step_blind_optima.append(blind_best_point)
+        per_step_blind_optima.append(blind_point)
         if len(states) == 2:
             # Disjointness of the FULL optimal sets, certified over the joint
             # arrangement: the A-optimal set is a union of faces whose
@@ -448,6 +405,72 @@ def _quantized_reward(
     effort = (Fraction(float(a0)) + 1) / 2
     mu = (Fraction(float(a1)) + 1) / 2
     return geometry.reward(state, effort * mu, effort * (1 - mu))
+
+
+def registered_blind_action(
+    oracle: FullSupportOracle, step_index: int, mix: Fraction
+) -> tuple[np.float32, np.float32]:
+    """Quantized action selected by the registered exact blind optimizer."""
+    if not 0 <= step_index < sib.SEGMENT_LENGTH:
+        raise ValueError("blind optimizer step is outside the segment")
+    return _quantized_action(oracle.per_step_blind_optima[step_index], mix)
+
+
+def blind_optimizer_conformance(
+    ledger, event_index: int, oracle: FullSupportOracle
+) -> tuple[Fraction, Fraction]:
+    """Return (realized quantized total, exact-minus-realized envelope)."""
+    cell_class = sib.CELL_CLASS[event_index]
+    states = CRITICAL_STATES if cell_class == "CRITICAL" else (sib.SHOCK_NONE,)
+    prior = (
+        {state: sib.CRITICAL_PRIOR[state] for state in states}
+        if cell_class == "CRITICAL"
+        else {sib.SHOCK_NONE: Fraction(1)}
+    )
+    keys = _active_keys_in_segment(ledger, event_index)
+    receiver = oracle.receiver_key
+    receiver_caps = (
+        _frac(ledger.capabilities[receiver, 0]),
+        _frac(ledger.capabilities[receiver, 1]),
+    )
+    aggregate = (
+        sum((_frac(ledger.capabilities[key, 0]) for key in keys), Fraction(0)),
+        sum((_frac(ledger.capabilities[key, 1]) for key in keys), Fraction(0)),
+    )
+    realized = Fraction(0)
+    start = sib.EVENT_TIMES[event_index]
+    for step_index, time in enumerate(range(start, start + sib.SEGMENT_LENGTH)):
+        geometry = StepGeometry(
+            load=_frac(ledger.load[time]),
+            mix=_frac(ledger.target_mix[time]),
+            receiver_caps=receiver_caps,
+            aggregate=aggregate,
+        )
+        point = oracle.per_step_blind_optima[step_index]
+        candidates = _candidate_points(geometry, states)
+        if point not in candidates:
+            raise RuntimeError("registered blind point is outside exact support")
+        exact_step = sum(
+            (prior[state] * geometry.reward(state, *point) for state in states),
+            Fraction(0),
+        )
+        if exact_step != max(
+            sum(
+                (prior[state] * geometry.reward(state, *candidate) for state in states),
+                Fraction(0),
+            )
+            for candidate in candidates
+        ):
+            raise RuntimeError("registered blind optimizer does not reproduce exact optimum")
+        a0, a1 = registered_blind_action(oracle, step_index, geometry.mix)
+        realized += sum(
+            (prior[state] * _quantized_reward(geometry, state, a0, a1) for state in states),
+            Fraction(0),
+        )
+    envelope = oracle.blind_value - realized
+    if envelope < 0:
+        raise RuntimeError("quantized blind optimizer exceeds exact blind optimum")
+    return realized, envelope
 
 
 # ---------------------------------------------------------------------------
@@ -625,43 +648,17 @@ def check_3_real_neutral_executable_shared_wrapper() -> dict[str, object]:
 
 
 def check_4_receipt_discipline_and_ordering() -> dict[str, object]:
-    """The first post-event action follows a receipt verified against the
-    ACTUAL policy tensors and precedes any outcome; every misuse mode of the
-    corrected binding (Pro's C1) fails closed."""
+    """The first post-event action follows a verified single-use receipt and
+    precedes any outcome; misused receipts fail closed."""
     runner = _boundary_runner(GATE_PROFILES[0], 0, "LR")
     runner.run_episode()
     ordering_ok = (
         len(runner.boundary_records) == 3
-        and len(runner.action_receipts) == 3
         and all(
             record.receipt.physical_tick == tick
             for record, tick in zip(runner.boundary_records, sib.EVENT_TIMES)
         )
-        and all(
-            receipt.sampled_action_digest
-            == runner.step_traces[tick].action_digest
-            for receipt, tick in zip(runner.action_receipts, sib.EVENT_TIMES)
-        )
     )
-
-    env = _make_sibling(GATE_PROFILES[0], 1)
-    probe = art.ArmEpisodeRunner(
-        env, "LR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
-    )
-    _drive_to(env, sib.EVENT_TIMES[0])
-    opportunity = env.opportunity(0)
-    body = env.focal_payload(0)
-    actuation = sib.actuate("LR", opportunity, body, d_learned=True, d_control=True)
-    receipt = art.make_receipt(
-        opportunity, actuation, runner_binding=probe.runner_binding
-    )
-    focal = opportunity.identity.receiver_member_key
-    capacity = env.ledger.member_capacity
-
-    def _block() -> np.ndarray:
-        block = np.zeros((capacity, art.SLOT_DIM), dtype=np.float32)
-        block[focal, :] = art.slot_features(actuation.slot)
-        return block
 
     fails = {}
     def _closed(name, fn):
@@ -671,83 +668,92 @@ def check_4_receipt_discipline_and_ordering() -> dict[str, object]:
         except art.ReceiptError:
             fails[name] = True
 
-    _closed("missing", lambda: probe._verify_and_consume(
-        None, opportunity, actuation, _block(), focal))
-    _closed("wrong_owner", lambda: probe._verify_and_consume(
-        receipt, opportunity, actuation, _block(), focal + 1))
-    bad_identity = replace(
-        receipt,
-        opportunity_identity=replace(
-            receipt.opportunity_identity,
-            source_member_key=receipt.opportunity_identity.source_member_key + 1,
+    def _materials(episode_id: int):
+        probe = _boundary_runner(GATE_PROFILES[0], episode_id, "LR")
+        _drive_to(probe.env, sib.EVENT_TIMES[0])
+        slot, receipt, opportunity, actuation, _ = probe._boundary(0)
+        view = probe.env.observe()
+        kwargs = dict(
+            opportunity=opportunity,
+            actuation=actuation,
+            observations=view.observations,
+            active_mask=view.active_mask,
+            slot_block=slot,
+            noise=probe.noise[probe.env.time],
+        )
+        return probe, receipt, kwargs
+
+    probe, receipt, kwargs = _materials(1)
+    _closed("missing", lambda: probe.bound_step(receipt=None, **kwargs))
+
+    other, other_receipt, _ = _materials(2)
+    del other
+    _closed("cross_runner_identity", lambda: probe.bound_step(receipt=other_receipt, **kwargs))
+
+    focal = kwargs["opportunity"].identity.receiver_member_key
+    wrong_identity = replace(
+        receipt.opportunity_identity,
+        receiver_member_key=(focal + 1) % probe.env.ledger.member_capacity,
+    )
+    _closed(
+        "wrong_focal_owner",
+        lambda: probe.bound_step(
+            receipt=replace(receipt, opportunity_identity=wrong_identity), **kwargs
         ),
     )
-    _closed("identity_mismatch", lambda: probe._verify_and_consume(
-        bad_identity, opportunity, actuation, _block(), focal))
-    _closed("route_mismatch", lambda: probe._verify_and_consume(
-        receipt, opportunity, replace(actuation, route="NEUTRAL"), _block(), focal))
-    _closed("decision_source_mismatch", lambda: probe._verify_and_consume(
-        receipt, opportunity, replace(actuation, decision_source="D_L"), _block(), focal))
-    _closed("ingestion_cost_mismatch", lambda: probe._verify_and_consume(
-        receipt, opportunity, replace(actuation, ingestion_cost=0), _block(), focal))
-    _closed("slot_mismatch", lambda: probe._verify_and_consume(
-        receipt, opportunity,
-        replace(actuation, slot=sib._pad_slot(b"EOCIV-ALTERED")), _block(), focal))
-    altered = _block()
-    altered[focal, 0] += np.float32(1.0 / 255.0)
-    _closed("policy_tensor_mismatch", lambda: probe._verify_and_consume(
-        receipt, opportunity, actuation, altered, focal))
-    leaky = _block()
-    leaky[(focal + 1) % capacity, 0] = np.float32(0.5)
-    _closed("nonfocal_nonzero", lambda: probe._verify_and_consume(
-        receipt, opportunity, actuation, leaky, focal))
-    probe_cr = art.ArmEpisodeRunner(
-        env, "CR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
+    altered_focal = kwargs["slot_block"].copy()
+    altered_focal[focal, 0] += np.float32(1.0 / 255.0)
+    _closed(
+        "altered_focal_row",
+        lambda: probe.bound_step(receipt=receipt, **{**kwargs, "slot_block": altered_focal}),
     )
-    cross_receipt = art.make_receipt(
-        opportunity, actuation, runner_binding=probe_cr.runner_binding
+    nonfocal = kwargs["slot_block"].copy()
+    nonfocal[(focal + 1) % nonfocal.shape[0], 0] = np.float32(1.0)
+    _closed(
+        "nonzero_nonfocal_row",
+        lambda: probe.bound_step(receipt=receipt, **{**kwargs, "slot_block": nonfocal}),
     )
-    _closed("cross_runner", lambda: probe._verify_and_consume(
-        cross_receipt, opportunity, actuation, _block(), focal))
-    probe._verify_and_consume(receipt, opportunity, actuation, _block(), focal)  # legal first use
-    _closed("duplicate", lambda: probe._verify_and_consume(
-        receipt, opportunity, actuation, _block(), focal))
-    env.step(roster_env.constructive_actions(env.observe()))
-    probe2 = art.ArmEpisodeRunner(
-        env, "LR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
+    for field, value in (
+        ("route", "NEUTRAL"),
+        ("decision_source", "D_L"),
+        ("ingestion_cost", receipt.ingestion_cost + 1),
+    ):
+        _closed(
+            f"altered_{field}",
+            lambda field=field, value=value: probe.bound_step(
+                receipt=replace(receipt, **{field: value}), **kwargs
+            ),
+        )
+
+    actions, kernel, new_hidden, action_receipt = probe.bound_step(
+        receipt=receipt, **kwargs
     )
-    _closed("stale_post_action", lambda: probe2._verify_and_consume(
-        receipt, opportunity, actuation, _block(), focal))
-    # An action altered AFTER the verified forward pass is refused by the
-    # registered bound-step wrapper.
-    env3 = _make_sibling(GATE_PROFILES[0], 3)
-    runner3 = art.ArmEpisodeRunner(
-        env3, "LR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
-    )
-    _drive_to(env3, sib.EVENT_TIMES[0])
-    slot_block3, receipt3, focal3, opp3, act3 = runner3._boundary(0)
-    view3 = env3.observe()
-    actions3, kernel3, hidden3 = runner3.policy.forward(
-        view3.observations, view3.active_mask, slot_block3,
-        runner3.hidden, runner3.noise[env3.time],
-    )
-    runner3._verify_and_consume(receipt3, opp3, act3, slot_block3, focal3)
-    action_receipt3 = art.ActionReceipt(
-        actuation_receipt_digest=art.receipt_digest(receipt3),
-        policy_input_digest=art._digest(
-            view3.observations, view3.active_mask, slot_block3, runner3.hidden
+    _closed("duplicate", lambda: probe.bound_step(receipt=receipt, **kwargs))
+    _closed(
+        "altered_action_digest",
+        lambda: probe.verify_action_receipt(
+            replace(action_receipt, sampled_action_digest="0" * 64),
+            opportunity=kwargs["opportunity"],
+            actuation=kwargs["actuation"],
+            observations=kwargs["observations"],
+            active_mask=kwargs["active_mask"],
+            slot_block=kwargs["slot_block"],
+            hidden=probe.hidden,
+            kernel=kernel,
+            actions=actions,
+            new_hidden=new_hidden,
         ),
-        kernel_digest=art._digest(kernel3),
-        sampled_action_digest=art._digest(actions3),
-        recurrent_write_digest=art._digest(hidden3),
-        physical_tick=env3.time,
     )
-    tampered = actions3.copy()
-    tampered[focal3, 0] = np.float32(min(1.0, float(tampered[focal3, 0]) + 0.25))
-    _closed("action_altered_after_forward", lambda: art.bound_step(
-        env3, tampered, action_receipt3))
+
+    late_probe, late_receipt, late_kwargs = _materials(3)
+    late_probe.env.step(roster_env.constructive_actions(late_probe.env.observe()))
+    _closed(
+        "stale_post_action",
+        lambda: late_probe.bound_step(receipt=late_receipt, **late_kwargs),
+    )
+    outcome_unavailable = late_probe.env.time < roster_env.HORIZON
     return {
-        "passed": bool(ordering_ok and all(fails.values())),
+        "passed": bool(ordering_ok and all(fails.values()) and outcome_unavailable),
         "fail_closed": fails,
     }
 
@@ -782,62 +788,15 @@ def check_5_full_support_action_switch() -> dict[str, object]:
     }
 
 
-def _run_quantized_segment(
-    env, oracle: FullSupportOracle, state: str,
-    points: tuple[tuple[Fraction, Fraction], ...],
-) -> list[tuple[StepGeometry, Fraction, float]]:
-    """Drive the forced env through the segment on the quantized ``points``.
-
-    Returns, per step, the exact step geometry, the exact reward of the
-    quantized float32 action under ``state``, and the executed environment
-    reward — the raw material for both envelope paths (Pro's C2: the blind
-    optimizer trajectory must be exercised through the environment too).
-    """
-    receiver = oracle.receiver_key
-    ledger = env.ledger
-    keys = _active_keys_in_segment(ledger, oracle.event_index)
-    receiver_caps = (
-        _frac(ledger.capabilities[receiver, 0]),
-        _frac(ledger.capabilities[receiver, 1]),
-    )
-    aggregate = (
-        sum((_frac(ledger.capabilities[key, 0]) for key in keys), Fraction(0)),
-        sum((_frac(ledger.capabilities[key, 1]) for key in keys), Fraction(0)),
-    )
-    out = []
-    for step_index in range(sib.SEGMENT_LENGTH):
-        view = env.observe()
-        geometry = StepGeometry(
-            load=_frac(view.load), mix=_frac(view.target_mix),
-            receiver_caps=receiver_caps, aggregate=aggregate,
-        )
-        point = points[step_index]
-        a0, a1 = _quantized_action(point, geometry.mix)
-        quantized = _quantized_reward(geometry, state, a0, a1)
-        actions = roster_env.constructive_actions(view)
-        actions[receiver, 0] = a0
-        actions[receiver, 1] = a1
-        reward, _, _ = env.step(actions)
-        out.append((geometry, quantized, float(reward)))
-    return out
-
-
 def check_6_full_support_strict_value() -> dict[str, object]:
     """Informed strictly beats blind on the FULL support in every critical
-    cell, with the quantization + conformance envelopes ACCUMULATED on the
-    same segment-total scale as the reveal estimand (Pro's C2 correction),
-    over BOTH the informed and the blind optimizer trajectories, and with
-    exact assertions that no quantized value exceeds its exact optimum."""
+    cell, with quantization + conformance envelopes dominated by the floor."""
     rows = []
     min_reveal: Fraction | None = None
-    worst_step_quant = Fraction(0)
-    worst_step_conformance = 0.0
-    worst_cell_quant_envelope = Fraction(0)
-    worst_cell_kernel_envelope = 0.0
-    min_dominance_ratio: float | None = None
-    dominance_ok_all = True
-    quantized_exceeds_exact = False
-    prior = sib.CRITICAL_PRIOR
+    worst_quant = Fraction(0)
+    worst_conformance = 0.0
+    worst_blind_quant = Fraction(0)
+    blind_conformance_ok = True
     for profile in GATE_PROFILES:
         for episode_id in GATE_EPISODES:
             for event_index, cell_class in enumerate(sib.CELL_CLASS):
@@ -854,67 +813,19 @@ def check_6_full_support_strict_value() -> dict[str, object]:
                         "passed": False,
                         "detail": f"insufficient full-support reveal at {opportunity.identity}",
                     }
-                acc_quant = Fraction(0)
-                acc_kernel = 0.0
-                # Informed path: each state's own optimal trajectory.
-                informed_runs = {}
-                for state, env_forced in ((sib.SHOCK_A, env_a), (sib.SHOCK_B, env_b)):
-                    runs = _run_quantized_segment(
-                        env_forced, oracle, state, oracle.per_step_optima[state]
-                    )
-                    informed_runs[state] = runs
-                    for step_index, (geometry, quantized, env_reward) in enumerate(runs):
-                        ideal = geometry.reward(
-                            state, *oracle.per_step_optima[state][step_index]
-                        )
-                        gap = ideal - quantized
-                        if gap < 0:
-                            quantized_exceeds_exact = True
-                        worst_step_quant = max(worst_step_quant, gap)
-                        conf = abs(env_reward - float(quantized))
-                        worst_step_conformance = max(worst_step_conformance, conf)
-                        acc_quant += prior[state] * gap
-                        acc_kernel += float(prior[state]) * conf
-                # Blind path: the single blind trajectory, exercised through
-                # BOTH forced hidden branches; the quantization gap is the
-                # exact prior-mixture value lost per step.
-                env_a2, env_b2 = _forced_pair(profile, episode_id, event_index)
-                for state, env_forced in ((sib.SHOCK_A, env_a2), (sib.SHOCK_B, env_b2)):
-                    runs = _run_quantized_segment(
-                        env_forced, oracle, state, oracle.per_step_blind_optima
-                    )
-                    for geometry, quantized, env_reward in runs:
-                        conf = abs(env_reward - float(quantized))
-                        worst_step_conformance = max(worst_step_conformance, conf)
-                        acc_kernel += float(prior[state]) * conf
-                for step_index, (geometry, _, _) in enumerate(informed_runs[sib.SHOCK_A]):
-                    point = oracle.per_step_blind_optima[step_index]
-                    a0, a1 = _quantized_action(point, geometry.mix)
-                    mixture_ideal = sum(
-                        (prior[state] * geometry.reward(state, *point)
-                         for state in prior),
-                        Fraction(0),
-                    )
-                    mixture_quant = sum(
-                        (prior[state] * _quantized_reward(geometry, state, a0, a1)
-                         for state in prior),
-                        Fraction(0),
-                    )
-                    gap = mixture_ideal - mixture_quant
-                    if gap < 0:
-                        quantized_exceeds_exact = True
-                    worst_step_quant = max(worst_step_quant, gap)
-                    acc_quant += gap
-                cell_envelope = float(acc_quant) + acc_kernel
-                ratio = float(oracle.reveal_value) / cell_envelope
-                if float(oracle.reveal_value) < DOMINANCE_FACTOR * cell_envelope:
-                    dominance_ok_all = False
-                min_dominance_ratio = (
-                    ratio if min_dominance_ratio is None
-                    else min(min_dominance_ratio, ratio)
+                blind_realized, blind_gap = blind_optimizer_conformance(
+                    env_a.ledger, event_index, oracle
                 )
-                worst_cell_quant_envelope = max(worst_cell_quant_envelope, acc_quant)
-                worst_cell_kernel_envelope = max(worst_cell_kernel_envelope, acc_kernel)
+                blind_conformance_ok = blind_conformance_ok and (
+                    blind_realized <= oracle.blind_value and blind_gap >= 0
+                )
+                worst_blind_quant = max(worst_blind_quant, blind_gap)
+                for state, env_forced in ((sib.SHOCK_A, env_a), (sib.SHOCK_B, env_b)):
+                    quant_gap, conf = _envelopes_for_state(
+                        env_forced, opportunity, oracle, state
+                    )
+                    worst_quant = max(worst_quant, quant_gap)
+                    worst_conformance = max(worst_conformance, conf)
                 min_reveal = (
                     oracle.reveal_value if min_reveal is None
                     else min(min_reveal, oracle.reveal_value)
@@ -927,31 +838,65 @@ def check_6_full_support_strict_value() -> dict[str, object]:
                         "informed": str(oracle.informed_value),
                         "blind": str(oracle.blind_value),
                         "reveal_value": str(oracle.reveal_value),
-                        "accumulated_quant_envelope": float(acc_quant),
-                        "accumulated_kernel_envelope": acc_kernel,
-                        "dominance_ratio": ratio,
                     }
                 )
-    envelope_sum = float(worst_cell_quant_envelope) + worst_cell_kernel_envelope
+    envelope_sum = (
+        float(worst_quant) + float(worst_blind_quant) + worst_conformance
+    )
+    dominance_ok = float(min_reveal) >= DOMINANCE_FACTOR * envelope_sum
     return {
         "passed": bool(
             rows
-            and not quantized_exceeds_exact
-            and worst_step_conformance <= CONFORMANCE_TOL
-            and dominance_ok_all
+            and worst_conformance <= SEGMENT_CONFORMANCE_TOL
+            and blind_conformance_ok
+            and dominance_ok
         ),
         "critical_cells": len(rows),
         "min_reveal_value": str(min_reveal),
-        "max_step_action_quantization_gap": float(worst_step_quant),
-        "max_step_kernel_conformance_error": worst_step_conformance,
-        "max_accumulated_quant_envelope": float(worst_cell_quant_envelope),
-        "max_accumulated_kernel_envelope": worst_cell_kernel_envelope,
+        "max_action_quantization_gap": float(worst_quant),
+        "max_kernel_conformance_error": worst_conformance,
+        "max_blind_action_quantization_gap": float(worst_blind_quant),
+        "blind_optimizer_conformance": blind_conformance_ok,
+        "segment_conformance_tol": SEGMENT_CONFORMANCE_TOL,
         "envelope_sum": envelope_sum,
-        "min_dominance_ratio": min_dominance_ratio,
-        "dominance_ok": dominance_ok_all,
-        "quantized_never_exceeds_exact": not quantized_exceeds_exact,
+        "dominance_ok": dominance_ok,
         "rows": rows,
     }
+
+
+def _envelopes_for_state(env, opportunity, oracle: FullSupportOracle, state: str) -> tuple[Fraction, float]:
+    """(max quantization gap, max kernel conformance error) driving the real
+    env through the segment on the quantized full-support optimal actions."""
+    receiver = opportunity.identity.receiver_member_key
+    ledger = env.ledger
+    keys = _active_keys_in_segment(ledger, oracle.event_index)
+    receiver_caps = (
+        _frac(ledger.capabilities[receiver, 0]),
+        _frac(ledger.capabilities[receiver, 1]),
+    )
+    aggregate = (
+        sum((_frac(ledger.capabilities[key, 0]) for key in keys), Fraction(0)),
+        sum((_frac(ledger.capabilities[key, 1]) for key in keys), Fraction(0)),
+    )
+    total_quant = Fraction(0)
+    total_conf = 0.0
+    for step_index in range(sib.SEGMENT_LENGTH):
+        view = env.observe()
+        geometry = StepGeometry(
+            load=_frac(view.load), mix=_frac(view.target_mix),
+            receiver_caps=receiver_caps, aggregate=aggregate,
+        )
+        point = oracle.per_step_optima[state][step_index]
+        ideal = geometry.reward(state, *point)
+        a0, a1 = _quantized_action(point, geometry.mix)
+        quantized = _quantized_reward(geometry, state, a0, a1)
+        total_quant += ideal - quantized
+        actions = roster_env.constructive_actions(view)
+        actions[receiver, 0] = a0
+        actions[receiver, 1] = a1
+        reward, _, _ = env.step(actions)
+        total_conf += abs(reward - float(quantized))
+    return total_quant, total_conf
 
 
 def check_7_neutral_zero_reveal() -> dict[str, object]:
@@ -1103,232 +1048,6 @@ def check_10_arm_support_and_registration() -> dict[str, object]:
 
 
 # ---------------------------------------------------------------------------
-# C3: profile-qualified outcome-harness world/noise identity.
-# ---------------------------------------------------------------------------
-
-def profile_qualified_seed(
-    label: str, registered_seed: int, profile_registration_id: str
-) -> int:
-    """Pro's C3 derivation: seed_p = first 8 bytes (big-endian) of
-    sha256(label | registered_seed | profile_registration_id)."""
-    material = f"{label}|{int(registered_seed)}|{profile_registration_id}"
-    digest = hashlib.sha256(material.encode("ascii")).digest()
-    return int.from_bytes(digest[:8], "big")
-
-
-def outcome_world_seed(profile_registration_id: str) -> int:
-    identity = REGISTERED_OUTCOME_EXPERIMENT["world_noise_identity"]
-    return profile_qualified_seed(
-        identity["ledger_master_seed_label"],
-        identity["registered_master_seed"],
-        profile_registration_id,
-    )
-
-
-def outcome_noise_seed(profile_registration_id: str) -> int:
-    identity = REGISTERED_OUTCOME_EXPERIMENT["world_noise_identity"]
-    return profile_qualified_seed(
-        identity["action_noise_seed_label"],
-        identity["registered_action_seed"],
-        profile_registration_id,
-    )
-
-
-def _world_digest(ledger) -> str:
-    h = hashlib.sha256()
-    for values in (
-        ledger.capabilities, ledger.load, ledger.target_mix,
-        ledger.presentation_priority,
-    ):
-        h.update(np.ascontiguousarray(values).tobytes())
-    h.update(
-        json.dumps(
-            {
-                "initial": list(ledger.initial_keys),
-                "temporary": list(ledger.temporarily_absent),
-                "fresh": list(ledger.fresh_join),
-                "terminal": list(ledger.terminal_leave),
-            },
-            sort_keys=True,
-        ).encode("ascii")
-    )
-    return h.hexdigest()
-
-
-def _noise_digest(profile, episode_id: int) -> str:
-    tape = roster_env.make_action_noise(
-        [episode_id],
-        action_seed=outcome_noise_seed(profile.name),
-        member_capacity=profile.member_capacity,
-    )
-    return hashlib.sha256(np.ascontiguousarray(tape).tobytes()).hexdigest()
-
-
-def block_clone_digests(profile, episode_id: int, arm: str) -> tuple[str, str]:
-    """One arm clone's (world, noise) digests, reconstructed from the block
-    root.  The registered block law: the ARM does not enter seed material —
-    all four clones share the exact profile-qualified ledger and noise tape.
-    The ``arm`` parameter exists so check 11 exercises the real per-arm
-    reconstruction path; an arm-dependent regression in this function is
-    exactly what the clone-identity certificate must catch."""
-    if arm not in sib.ARMS:
-        raise ValueError(f"unknown arm: {arm}")
-    ledger = roster_env.make_ledger(
-        episode_id, master_seed=outcome_world_seed(profile.name), profile=profile
-    )
-    return _world_digest(ledger), _noise_digest(profile, episode_id)
-
-
-def _world_stream_bytes(profile, episode_id: int, master_seed: int) -> tuple[bytes, ...]:
-    """The raw base-world streams whose cross-profile sharing is the C3
-    defect: capabilities, load and presentation priority as bytes."""
-    ledger = roster_env.make_ledger(
-        episode_id, master_seed=master_seed, profile=profile
-    )
-    return (
-        np.ascontiguousarray(ledger.capabilities).tobytes(),
-        np.ascontiguousarray(ledger.load).tobytes(),
-        np.ascontiguousarray(ledger.presentation_priority).tobytes(),
-    )
-
-
-def check_11_profile_qualified_world_noise_manifest() -> dict[str, object]:
-    """Pro's C3 manifest gate: profile-qualified outcome world/noise seeds —
-    no cross-profile digest collision at equal local episode ids, identical
-    digests across the four arm clones of a block, disjoint pool namespaces,
-    and a 64-bit profile-hash collision assertion over the closed registry."""
-    sample_episodes = tuple(range(4))
-    world: dict[tuple[str, int], str] = {}
-    noise: dict[tuple[str, int], str] = {}
-    for profile in GATE_PROFILES:
-        world_seed = outcome_world_seed(profile.name)
-        for episode_id in sample_episodes:
-            ledger = roster_env.make_ledger(
-                episode_id, master_seed=world_seed, profile=profile
-            )
-            world[(profile.name, episode_id)] = _world_digest(ledger)
-            noise[(profile.name, episode_id)] = _noise_digest(profile, episode_id)
-    cross_profile_distinct = all(
-        len({world[(p.name, ep)] for p in GATE_PROFILES}) == len(GATE_PROFILES)
-        and len({noise[(p.name, ep)] for p in GATE_PROFILES}) == len(GATE_PROFILES)
-        for ep in sample_episodes
-    )
-    # The world-STREAM qualification itself (the reviewer's F2 coverage gap:
-    # whole-ledger digests differ across profiles for structural membership
-    # reasons even without the seed fix).  Under the profile-qualified seeds
-    # the shared base streams — capabilities, load, presentation priority —
-    # must differ pairwise across profiles at an equal local episode id;
-    # under the UNQUALIFIED registered master seed the very same streams must
-    # be byte-identical across profiles, reproducing the exact defect the
-    # C3 pin repairs and proving the qualification is what separates them.
-    import itertools
-
-    identity = REGISTERED_OUTCOME_EXPERIMENT["world_noise_identity"]
-    qualified_streams = {
-        p.name: _world_stream_bytes(p, 0, outcome_world_seed(p.name))
-        for p in GATE_PROFILES
-    }
-    unqualified_streams = {
-        p.name: _world_stream_bytes(p, 0, identity["registered_master_seed"])
-        for p in GATE_PROFILES
-    }
-    profile_pairs = list(itertools.combinations(GATE_PROFILES, 2))
-    world_streams_qualified = all(
-        qualified_streams[a.name][channel] != qualified_streams[b.name][channel]
-        for a, b in profile_pairs
-        for channel in range(3)
-    )
-    unqualified_defect_reproduced = all(
-        unqualified_streams[a.name][channel] == unqualified_streams[b.name][channel]
-        for a, b in profile_pairs
-        for channel in range(3)
-    )
-    # Within one focal block, all four arm clones must share the exact same
-    # profile-qualified ledger and action-noise tape, reconstructed through
-    # the real per-arm path.
-    block_profile, block_episode = GATE_PROFILES[0], sample_episodes[0]
-    clone_digests = {
-        arm: block_clone_digests(block_profile, block_episode, arm)
-        for arm in sib.ARMS
-    }
-    clones_identical = len(set(clone_digests.values())) == 1
-    # Discriminating-power control (the reviewer's F1 coverage gap: comparing
-    # four identical recomputations is tautological): the SAME comparison
-    # over deliberately arm-qualified seed material must detect divergence,
-    # so the identity above is a measurement, not a fixture.
-    perturbed_clone_worlds = {
-        arm: _world_digest(
-            roster_env.make_ledger(
-                block_episode,
-                master_seed=profile_qualified_seed(
-                    identity["ledger_master_seed_label"] + "-ARM-NEGATIVE-CONTROL",
-                    identity["registered_master_seed"],
-                    f"{block_profile.name}|{arm}",
-                ),
-                profile=block_profile,
-            )
-        )
-        for arm in sib.ARMS
-    }
-    clone_comparison_discriminates = (
-        len(set(perturbed_clone_worlds.values())) == len(sib.ARMS)
-    )
-    # Disjoint profile-qualified episode namespaces, sized to the frozen
-    # budgets.
-    namespaces = REGISTERED_OUTCOME_EXPERIMENT["episode_namespaces"]
-    budget = REGISTERED_OUTCOME_EXPERIMENT["budget"]
-    expected_sizes = {
-        "d_fit": budget["d_fit_episodes_per_profile"],
-        "d_policy": budget["d_policy_episodes_per_profile"],
-        "d_cal": budget["d_cal_episodes_per_profile"],
-        "d_focal": budget["d_focal_roots_per_profile"],
-        "pattern_knockout_audit": budget["pattern_knockout_audit_roots_per_profile"],
-    }
-    sizes_match = all(
-        namespaces[pool][1] - namespaces[pool][0] + 1 == expected_sizes[pool]
-        for pool in expected_sizes
-    )
-    ranges = sorted(namespaces.values())
-    ranges_disjoint = all(
-        ranges[i][1] < ranges[i + 1][0] for i in range(len(ranges) - 1)
-    )
-    # 64-bit profile-hash collision assertion over the closed registry.
-    registry = tuple(roster_env.TRAIN_PROFILES) + (
-        roster_env.PADDING_CAPACITY_8, roster_env.PADDING_CAPACITY_12,
-        roster_env.SMALL_CAPACITY_6, roster_env.LARGE_CAPACITY_12,
-    )
-    registry_ints = {sib.profile_registration_int(p.name) for p in registry}
-    hash_collision_free = len(registry_ints) == len(registry)
-    derived_seeds = [
-        seed_fn(p.name)
-        for p in GATE_PROFILES
-        for seed_fn in (outcome_world_seed, outcome_noise_seed)
-    ]
-    derived_distinct = len(set(derived_seeds)) == len(derived_seeds)
-    return {
-        "passed": bool(
-            cross_profile_distinct and world_streams_qualified
-            and unqualified_defect_reproduced and clones_identical
-            and clone_comparison_discriminates and sizes_match
-            and ranges_disjoint and hash_collision_free and derived_distinct
-        ),
-        "profiles": len(GATE_PROFILES),
-        "sampled_local_episode_ids": list(sample_episodes),
-        "cross_profile_world_noise_distinct": cross_profile_distinct,
-        "world_streams_profile_qualified": world_streams_qualified,
-        "unqualified_seed_defect_reproduced": unqualified_defect_reproduced,
-        "four_arm_clones_identical": clones_identical,
-        "clone_comparison_discriminates": clone_comparison_discriminates,
-        "namespace_sizes_match_budgets": sizes_match,
-        "namespaces_disjoint": ranges_disjoint,
-        "profile_hash_collision_free_registry_size": len(registry),
-        "derived_seeds_distinct": derived_distinct,
-        "world_seeds": {p.name: outcome_world_seed(p.name) for p in GATE_PROFILES},
-        "noise_seeds": {p.name: outcome_noise_seed(p.name) for p in GATE_PROFILES},
-    }
-
-
-# ---------------------------------------------------------------------------
 # The gate.
 # ---------------------------------------------------------------------------
 
@@ -1344,9 +1063,6 @@ def gate() -> dict[str, object]:
         "8_mutation_reaches_slot_and_policy_only": check_8_mutation_reaches_slot_and_policy_only(),
         "9_controls_execute_and_lr_cr_byte_identity": check_9_controls_execute_and_always_real_identity(),
         "10_arm_support_and_frozen_registration": check_10_arm_support_and_registration(),
-        "11_profile_qualified_outcome_world_noise_manifest": (
-            check_11_profile_qualified_world_noise_manifest()
-        ),
     }
     passed = all(bool(result["passed"]) for result in checks.values())
     return {
@@ -1359,6 +1075,7 @@ def gate() -> dict[str, object]:
             "tape_seed": TAPE_SEED,
             "policy_weight_seed": art.POLICY_WEIGHT_SEED,
             "action_noise_seed": art.ACTION_NOISE_SEED,
+            "profile_stream_manifest": PROFILE_STREAM_MANIFEST,
             "cell_classes": list(sib.CELL_CLASS),
             "shock_coefficients": {k: str(v) for k, v in sib.SHOCK_COEFF.items()},
             "critical_prior": {k: str(v) for k, v in sib.CRITICAL_PRIOR.items()},

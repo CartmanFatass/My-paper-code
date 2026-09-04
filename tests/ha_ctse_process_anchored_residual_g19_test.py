@@ -17,7 +17,7 @@ from ha_ctse_process.anchored_residual_g19 import (
 )
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from scripts import screen_fast_policy_anchored_residual_g19 as screen
+from tools.analysis import screen_fast_policy_anchored_residual_g19 as screen
 
 
 def _battery_model() -> FastAnchoredResidualPolicy:

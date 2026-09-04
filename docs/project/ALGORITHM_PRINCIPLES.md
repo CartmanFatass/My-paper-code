@@ -4,14 +4,14 @@ This file is the durable scientific contract for HMASD algorithm exploration.
 It contains cross-experiment principles, not the active route, implementation
 specification, experiment dashboard, or research history.
 
-Current ownership and the scheduled action belong in
-`docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
-counterexamples, idea status and evidence notes live under
-`docs/research/cdc/`. Canonical role authority for scientific decisions,
-adoption, realization and acceptance is defined only in root `AGENTS.md` and
-the applicable `.agents/roles/*.md` contracts; this file does not restate it.
-Formal experiment contracts and dispositions belong in
-`docs/project/ExpRecord.md`. Git history preserves removed research history.
+Current direction science belongs in
+`docs/research/candidates/<direction>/DIRECTION.md` and its cited evidence;
+current cross-direction investment belongs in
+`docs/research/portfolio/PORTFOLIO.md`. Shared meanings are defined in root
+`AGENTS.md`; the fixed EM and CM subagent methods are defined directly in
+`.codex/agents/hmasd-em.toml` and `.codex/agents/hmasd-cm.toml`. This file does not restate workflow authority. Formal
+experiment contracts and dispositions belong in `docs/project/ExpRecord.md`.
+Git history preserves removed research history.
 
 ## 1. Research Mission
 
@@ -97,12 +97,63 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 
 ## 3. CDC Open Research Loop
 
-Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-Operate this loop under the canonical role contracts. External Pro owns
-scientific design, result interpretation and successor selection; Project
-Manager owns code realization and technical acceptance. New conclusion-bearing
-designs use the triggered design and code-science audits in
-`docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` before formal compute.
+Use the default loop `Conjecture -> minimum necessary derivation or
+counterexample -> real algorithm implementation -> environment experiment ->
+interpretation -> revision or retirement`. EM owns scientific interpretation,
+claim ceiling and acceptance; an independent Pro consultation supplies bounded
+scientific challenge but does not own the conclusion. CM owns code realization,
+runtime observation and technical acceptance. A useful next action
+is not delayed until every possible interpretation is frozen. Once a mechanism is implementable, has a
+differentiating prediction and a simple matched comparator, has no
+meaning-changing internal contradiction, and can use a real toy path or an
+independently justified sibling environment, implementation and a small
+experiment are the default next steps. Additional synthetic fixtures,
+certificates or enumerations require a named unresolved question whose answer
+could change the result or next decision; they are not the default substitute
+for implementation or experiment.
+
+Classify the next evidence action by its scientific burden:
+
+- **A — engineering/evidence reconnaissance or a read-only runtime probe.**
+  State one question, the data or runtime path, the non-intervention boundary
+  and a fixed small resource cap. A probe may reveal a new observation or
+  establish that an existing object is reusable, but it does not establish an
+  algorithm effect.
+- **B — small exploratory toy algorithm experiment.** State the question,
+  candidate and matched comparator, and an initial toy path. Before each named
+  run, fix the exact code revision, configuration, seeds and small budget cap so
+  that run is reproducible. Between named B runs, the toy host, threshold,
+  observations, sample composition and training settings may change when the
+  change and its reason are recorded. B is the normal path once the conditions
+  above hold. It must call the real environment, policy, learner, trainer and
+  evaluation runner and produce nonzero transitions, updates **and** evaluations.
+  Tests, truth tables, enumerators, censuses, certificates and byte-stability
+  checks are useful evidence but, alone, are neither an algorithm implementation
+  nor an experiment. Missing support, unstable training, comparator equivalence
+  and non-discriminating observations are valid B outcomes that guide the next
+  run; B does not itself make a terminal support, promotion or retirement claim.
+- **C — conclusion-bearing, promotion/retirement or expensive experiment.**
+  Before collecting or observing a run intended to support superiority,
+  promotion or retirement, freeze the outcome or estimand, null and comparator,
+  instance or population, stop rule, budget, decision criterion and
+  interpretation boundary. Require thresholds,
+  confidence, checkpoint/exclusion and multiple-comparison controls only when
+  omitting them could change the conclusion. Formal compute authority remains
+  user-only. An expensive exploratory run still obeys its resource and compute
+  controls, but expense alone does not make its diagnostics conclusion-bearing
+  or require irrelevant decision thresholds. The strict methodology in
+  `research-methodology.md` is a reference for conclusion-bearing C work, not a
+  prerequisite for ordinary B iteration.
+
+Reports identify the current stages `conjecture | derivation | algorithm
+implementation | experiment` and state the real calls, transition/update/
+evaluation counts, result, strongest alternative explanation and next step.
+Binding, closure, PASS counts or certificate production cannot stand in for
+those stages. For a new conclusion-bearing design, the same-direction EM
+freezes the scientific object, obtains the exact Pro closure required by
+`AGENTS.md`, and the CM establishes implementation conformance before formal
+compute. `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` preserves legacy audit
+names only; it is not an additional workflow gate.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -115,25 +166,44 @@ without the intended semantics. A useful counterexample, corrected definition,
 retained lemma or benchmark-identification result is progress even when no code
 is launched.
 
-Schedule one resource-consuming action at a time for attribution, not one legal
-research direction. Choose by information gain, cost and reversibility,
+Scientific attribution is treatment/direction/design/source/run/root/seed
+isolation. Already-selected and independently frozen ordinary A/B work across
+directions is parallel-first. Serialize only for a named direction dependency
+or intake, a shared mutable/path conflict, or an observed resource constraint;
+there is no CPM experiment pool, default one-treatment rule, WIP limit, or
+experiment-capacity admission condition. Do not invent or fill capacity,
+reprioritize science, or reactivate parked directions. Choose by information
+gain, cost and reversibility,
 normally in this order: derivation, counterexample, accepted-evidence
 reanalysis, toy, bounded prototype, formal experiment. Unscheduled ideas remain
 live or parked with a reactivation condition.
 
 ## 4. Evidence Design
 
-Freeze evidence, not theory. Before observing a conclusion-bearing result,
-freeze provenance, primary estimand, comparator information and resource
-boundaries, probability and credit authority, external/intrinsic reward
+Freeze evidence, not theory. For A, record only the local question, path,
+non-intervention boundary and fixed resource cap. For B, record each run's exact
+code revision, configuration, seeds, small budget cap, real calls and counts,
+then record every between-run change and its reason in the natural-language task
+or result brief; do not turn these cues into a required file, schema or admission
+checklist. A common exploratory progression is support mapping, then learnability
+under a discriminating host, then a small multi-seed estimate of direction,
+variance and failure modes. These are judgment-guided questions, not required
+states. A controlled host may be adjusted to expose both sides of a support or
+label distinction, but that result establishes only controlled identifiability
+or learnability, not value in a natural production distribution. Report every
+run: a favorable adjusted run must not be presented as preregistered confirmation
+or used to erase earlier null, unstable, equivalent or non-discriminating runs.
+Before collecting or observing a conclusion-bearing C result, freeze provenance,
+primary estimand, comparator information, resource boundaries, stop rule,
+decision criterion, probability and credit authority, external/intrinsic reward
 semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
 preserve the observation and its registered meaning while allowing the
 conjecture, definition, scope, benchmark or architecture to be corrected.
 
-An evidence note states the local question, implicated conjectures, cheapest
-separating observation, matched controls, frozen estimand and metrics, budget
-and optimizer exposure, prohibited changes and plausible portfolio deltas. It
-does not claim that all future theoretical interpretations are exhausted.
+An evidence note states the cheapest separating observation and the controls
+needed for its selected A/B/C burden. It does not claim that all future
+theoretical interpretations are exhausted, and it must not smuggle C-level
+freeze requirements into ordinary exploratory work.
 
 Match the comparator to the claim. Use diagnostic nulls for incremental signal,
 mechanism-matched controls for a component claim, temporal controls for a
@@ -144,20 +214,23 @@ capacity, optimizer exposure, environment, seed, or evaluation changes.
 Report both environment interaction and optimizer-update exposure. Equal
 environment steps do not imply equal learning opportunity.
 
-Create an implementation plan only when implementation is the cheapest
-necessary evidence action and the research object is precise enough that two
-reasonable implementations instantiate the same estimand. Add at most one
-focused operational check for a concrete corruption risk the evidence-bearing
-run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
-concrete contradiction.
+Create an implementation plan when implementation is the cheapest necessary
+evidence action and the research object is precise enough that two reasonable
+implementations instantiate the same intended comparison. Add focused
+operational checks only for concrete corruption risks the evidence-bearing run
+cannot cheaply expose; their number and scope follow the named risk, not a
+fixed project limit. Do not repeatedly re-prove accepted facts without a
+concrete contradiction or named result-relevant question.
 
-Before design freeze, evaluate claimed learning signals at the forced initial
-state, prove that a positive control makes the target behavior necessary rather
-than merely permitted, construct witnesses for result gates, check threshold
-arithmetic and zero denominators, and freeze result-sensitive choices. Before a
-formal run, External Pro reads the pushed implementation commit and decides
-whether code and scientific contract align. These are scientific assertion
-checks, not generic review layers.
+For C, evaluate claimed learning signals at the forced initial state, prove
+that a positive control makes the target behavior necessary rather than merely
+permitted, construct witnesses for result gates, check threshold arithmetic
+and zero denominators, and freeze result-sensitive choices. External Pro
+remains science-only: it may assess the frozen scientific object and claim
+boundary under the governing science route, but never reads a pushed
+implementation commit for code acceptance. CM owns implementation conformance
+and technical acceptance. These are scoped scientific assertion checks, not
+generic review layers or a per-iteration gate on B.
 
 ## 5. Toys, Access, and Transfer
 
@@ -198,11 +271,13 @@ Interpret outcomes narrowly and update the smallest implicated unit:
   scope;
 - a valid positive supports only the frozen causal claim.
 
-Mixed and underpowered results preserve unresolved explanations. Retry only a
-failed operational path. Do not rescue a valid negative by changing seed,
-budget, model, learning rate, metric, threshold, reward or name. Broad mechanism
-retirement requires a structural contradiction, equivalence proof or multiple
-independent identified counterexamples.
+Mixed and underpowered results preserve unresolved explanations. A B result may
+motivate a new named run with recorded changes, but the new run does not replace
+or reinterpret the earlier observation. Do not rescue a valid conclusion-bearing
+C negative by changing seed, budget, model, learning rate, metric, threshold,
+reward or name after the frozen decision contract. Broad mechanism retirement
+requires a structural contradiction, equivalence proof or multiple independent
+identified counterexamples.
 
 Every result records the smallest supported or refuted proposition, a retained
 lemma, any counterexample, what the result does not imply and the portfolio
@@ -216,10 +291,10 @@ counterexample, a corrected definition, a retained lemma, a benchmark
 identification result or a portfolio update. Documentation and workflow status
 alone are support work.
 
-Role-specific responsibilities for scientific review, adoption, implementation,
-acceptance, provenance, resources and communication are defined only in root
-`AGENTS.md` and `.agents/roles/*.md`. This principles file specifies the
-scientific result and evidence semantics those roles must preserve.
+Shared responsibilities for scientific review, adoption, implementation,
+acceptance, provenance, resources and communication are defined in root
+`AGENTS.md` and the fixed custom-subagent files under `.codex/agents/`. This principles file
+specifies the scientific result and evidence semantics those subagents must preserve.
 
 Review output never authorizes code or compute by itself.
 

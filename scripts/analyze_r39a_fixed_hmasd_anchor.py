@@ -328,6 +328,135 @@ def _validate_optimizer(name: str, value: Any, failures: list[str]) -> None:
         _add_failure(failures, f"checkpoint.{name}.state is empty")
 
 
+_SPLIT_DISCRIMINATOR_OPTIMIZER_SCHEMA = "split_team_individual_adam_v1"
+_SPLIT_DISCRIMINATOR_OPTIMIZER_FIELDS = (
+    "team_discriminator_optimizer",
+    "individual_discriminator_optimizer",
+)
+_SPLIT_DISCRIMINATOR_SCHEDULER_FIELDS = (
+    "team_discriminator_scheduler",
+    "individual_discriminator_scheduler",
+)
+
+
+def _validate_scheduler_state(
+    name: str,
+    value: Any,
+    runtime_scheduler: Any,
+    failures: list[str],
+) -> None:
+    """Validate the persisted scheduler against the evaluation runtime.
+
+    A split-format checkpoint always records both scheduler fields.  ``None``
+    is the only valid representation when this fixed-k runtime has no
+    scheduler; otherwise loading a scheduler state into a runtime without the
+    matching scheduler would silently discard training state.
+    """
+    if runtime_scheduler is None:
+        if value is not None:
+            _add_failure(
+                failures,
+                f"checkpoint.{name} is present but the current runtime has no matching scheduler",
+            )
+        return
+    if not isinstance(value, dict) or not value:
+        _add_failure(failures, f"checkpoint.{name} is missing or empty")
+
+
+def _validate_discriminator_checkpoint_format(
+    checkpoint: dict[str, Any],
+    agent: Any,
+    failures: list[str],
+) -> tuple[str, list[str]]:
+    """Accept exactly one discriminator optimizer serialization family.
+
+    New checkpoints carry independently serialised team/individual Adam and
+    scheduler state.  Old checkpoints carry only the combined Adam state.
+    Treating a partial or mixed payload as either family would let
+    ``agent.load_model`` restore a subset of the checkpoint, so those payloads
+    are intentionally rejected before model loading.
+    """
+    split_markers = (
+        "discriminator_optimizer_schema",
+        *_SPLIT_DISCRIMINATOR_OPTIMIZER_FIELDS,
+        *_SPLIT_DISCRIMINATOR_SCHEDULER_FIELDS,
+    )
+    has_split_marker = any(name in checkpoint for name in split_markers)
+    has_legacy_optimizer = "discriminator_optimizer" in checkpoint
+    has_legacy_scheduler = "discriminator_scheduler" in checkpoint
+
+    for name in (
+        "team_discriminator_optimizer",
+        "individual_discriminator_optimizer",
+    ):
+        if getattr(agent, name, None) is None:
+            _add_failure(
+                failures,
+                f"current runtime {name} is absent and cannot strictly load discriminator state",
+            )
+
+    if has_split_marker:
+        if has_legacy_optimizer or has_legacy_scheduler:
+            _add_failure(
+                failures,
+                "checkpoint split discriminator format must not include legacy discriminator optimizer or scheduler fields",
+            )
+        if (
+            checkpoint.get("discriminator_optimizer_schema")
+            != _SPLIT_DISCRIMINATOR_OPTIMIZER_SCHEMA
+        ):
+            _add_failure(
+                failures,
+                "checkpoint.discriminator_optimizer_schema is not the required split discriminator schema",
+            )
+        for name in _SPLIT_DISCRIMINATOR_OPTIMIZER_FIELDS:
+            if name not in checkpoint:
+                _add_failure(failures, f"checkpoint.{name} is missing from split discriminator format")
+            else:
+                _validate_optimizer(name, checkpoint[name], failures)
+        for name, runtime_name in zip(
+            _SPLIT_DISCRIMINATOR_SCHEDULER_FIELDS,
+            (
+                "team_discriminator_scheduler",
+                "individual_discriminator_scheduler",
+            ),
+        ):
+            if name not in checkpoint:
+                _add_failure(failures, f"checkpoint.{name} is missing from split discriminator format")
+                continue
+            _validate_scheduler_state(
+                name,
+                checkpoint[name],
+                getattr(agent, runtime_name, None),
+                failures,
+            )
+        return "split_team_individual_adam_v1", list(
+            _SPLIT_DISCRIMINATOR_OPTIMIZER_FIELDS
+            + _SPLIT_DISCRIMINATOR_SCHEDULER_FIELDS
+        )
+
+    if not has_legacy_optimizer:
+        _add_failure(failures, "checkpoint.discriminator_optimizer is missing from legacy format")
+        return "invalid", []
+
+    _validate_optimizer("discriminator_optimizer", checkpoint["discriminator_optimizer"], failures)
+    if has_legacy_scheduler:
+        legacy_scheduler = checkpoint["discriminator_scheduler"]
+        if legacy_scheduler is not None and (
+            not isinstance(legacy_scheduler, dict) or not legacy_scheduler
+        ):
+            _add_failure(failures, "checkpoint.discriminator_scheduler is malformed")
+        if legacy_scheduler is not None and (
+            getattr(agent, "team_discriminator_scheduler", None) is None
+            or getattr(agent, "individual_discriminator_scheduler", None) is None
+        ):
+            _add_failure(
+                failures,
+                "checkpoint.discriminator_scheduler is incompatible with the current runtime schedulers",
+            )
+    return "legacy_combined_adam", ["discriminator_optimizer"]
+
+
 def _validate_checkpoint_and_summary(
     checkpoint: dict[str, Any],
     summary: dict[str, Any],
@@ -344,7 +473,6 @@ def _validate_checkpoint_and_summary(
         "coordinator_optimizer",
         "discoverer_actor_optimizer",
         "discoverer_critic_optimizer",
-        "discriminator_optimizer",
         "config",
         "policy_interface",
         "training_interface",
@@ -426,9 +554,11 @@ def _validate_checkpoint_and_summary(
         "coordinator_optimizer",
         "discoverer_actor_optimizer",
         "discoverer_critic_optimizer",
-        "discriminator_optimizer",
     ):
         _validate_optimizer(name, checkpoint.get(name), failures)
+    discriminator_optimizer_format, discriminator_optimizer_states = (
+        _validate_discriminator_checkpoint_format(checkpoint, agent, failures)
+    )
 
     for name in (
         "ha_ctse_editor",
@@ -568,8 +698,9 @@ def _validate_checkpoint_and_summary(
             "coordinator_optimizer",
             "discoverer_actor_optimizer",
             "discoverer_critic_optimizer",
-            "discriminator_optimizer",
+            *discriminator_optimizer_states,
         ],
+        "checkpoint_discriminator_optimizer_format": discriminator_optimizer_format,
     }
 
 

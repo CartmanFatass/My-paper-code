@@ -1,12 +1,16 @@
-# UAV G0 Readiness Performance Contract
+# Historical UAV G0 readiness receipt contract
 
 ```text
-document_kind=execution_readiness_performance_contract
-request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V2
+document_kind=historical_object_local_execution_readiness_receipt
+request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V3
+current_routing_authority=none
+science_stop_authority=none
+portfolio_stop_authority=none
+attempt_timeout_authority=mechanical_receipt_only
 selected_option=B_EVIDENCE_BACKED_TIMEOUT_REVISION
-observed_timeout_candidate_commit=379726e325236a02c3a45bf7049bedaaa90d4e31
-scientific_contract_stage_commit=8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc
-scientific_contract_disposition=G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT
+candidate_identity=checked_out_clean_HEAD
+source_execution_bridge=forbidden
+execution_support_delta=forbidden
 interface_smoke_timeout_seconds=60
 bounded_exercise_timeout_seconds=1200
 artifact_validation_timeout_seconds=300
@@ -21,8 +25,8 @@ failed_root_reuse=forbidden
 candidate_attempt_limit=3
 fresh_absent_root_required=true
 candidate_commit_rule=new_commit_required_for_any_code_change
-unchanged_clean_candidate_rule=operational_retry_budget_under_unchanged_v2_contract
-full_six_phase_commit_bound_receipt=required
+unchanged_clean_candidate_rule=up_to_three_fresh_attempts_under_this_contract
+full_six_phase_candidate_bound_receipt=required
 current_oracle_reproduction=continues_under_code_project_manager
 formal_compute=forbidden
 nonformal_scientific_compute=forbidden
@@ -34,11 +38,23 @@ automatic_timeout_increase=forbidden
 automatic_retry=operational_only_within_unchanged_candidate_and_contract
 ```
 
+## Historical and local-only status
+
+The timeout values, ordered phases, clean-root records, and three-attempt
+inventory below are preserved measurements and receipt mechanics for this
+named historical UAV G0 object only. They do not govern a current project
+route, construction decision, experiment admission, scientific interpretation,
+portfolio allocation, or direction stop. A timeout or exhausted receipt attempt
+is an engineering observation for CM; it cannot change science, consume a
+direction, or prevent unchanged-science repair under a later appropriate
+resource slice.
+
 ## Frozen boundary
 
 This contract revises only the proof-sized readiness time budget for the UAV
 native environment and safety ledger. It preserves the accepted G0 source
-contract, geometry, `R=273`, `O(H*K_search)`, RNG and seed identities, pairing,
+contract, geometry, `R=273`, its recorded historical complexity notation, RNG
+and seed identities, pairing,
 controls, oracle, metrics, estimator, first-match order and independent replay.
 It also preserves the real production entry, proof inventory, artifact schema,
 canonical validators and reload requirements. A readiness attempt remains
@@ -47,10 +63,11 @@ disposition.
 
 The Code Project Manager's current Oracle `EVENT`/`NO_EVENT` reproduction and
 repair continues independently. This contract neither cancels, preempts,
-accepts nor changes that work. If it changes code, the readiness candidate must
-be its new clean pushed commit. An unchanged clean candidate may use only the
-bounded operational retry budget defined below. Every attempt requires a new
-exact spec and a fresh absent root.
+accepts nor changes that work. CM binds each focused observation to the exact
+source and scientific configuration it inspected. A pushed commit, fresh root,
+attempt identity or retry budget is not required for local evidence or
+unchanged-science repair; Root publication remains later integration work when
+a downstream consumer actually needs it.
 
 Code Project Manager retains the exact thirteen-path implementation boundary:
 
@@ -75,9 +92,9 @@ artifact-claim change or scientific-identity change is authorized.
 
 ## Ordered phase gates
 
-The registered verifier executes one wrapper run on one clean candidate, one
-exact spec and one fresh absent root. Phases are serial and a phase starts only
-after its predecessor succeeds:
+The registered verifier executes one wrapper run on one clean candidate `HEAD`,
+one exact spec and one fresh absent root. Phases are serial and a phase starts
+only after its predecessor succeeds:
 
 | Phase | Timeout | Success gate |
 |---|---:|---|
@@ -91,9 +108,9 @@ after its predecessor succeeds:
 Every successful phase records a duration strictly below its own timeout. The
 outer `run --spec` timeout is 2520 seconds: the sum of the six phase timeouts
 plus 60 seconds. After all six phases succeed, `finalize --spec` has a separate
-120-second limit, reruns no phase and must revalidate the exact candidate,
+120-second limit, reruns no phase and must revalidate the exact candidate `HEAD`,
 paths, spec, artifacts and candidate receipt before emitting the Git-private
-commit-bound receipt.
+receipt.
 
 Focused candidate checks remain separate from these phases and do not pre-run
 or replay a phase. Technical acceptance requires every expected artifact, all
@@ -103,31 +120,38 @@ six successful phase records and the matching finalized receipt.
 
 The r2 failed root is terminal and cannot be used as acceptance evidence,
 reused, resumed or repaired in place. One unchanged clean candidate may make at most
-three attempts under this unchanged v2 contract. Every attempt has one exact
+three attempts under this unchanged contract. Every attempt has one exact
 spec, one new root that must be absent before the wrapper starts and one wrapper
 run. A failed root remains terminal regardless of failure class.
+
+A root in which any readiness phase started is a failed attempt and consumes one
+of the three unchanged-candidate attempts. A pure zero-compute finalizer retry
+after a successful `run` starts no phase, creates no new scientific evidence and
+does not consume another attempt; it may only repeat the same candidate receipt
+write with identical content.
 
 - A phase timeout is `READINESS_PHASE_TIMEOUT`: technical readiness evidence,
   zero scientific iterations, no scientific disposition and no receipt.
 - A nonzero command exit, missing artifact, validator rejection, reload
-  mismatch or identity mismatch is `READINESS_TECHNICAL_FAILURE`: the first
-  causal phase is reported and later phases plus finalization do not run.
-- A phase that cannot satisfy its v2 cap without changing the frozen boundary
-  returns `READINESS_PERFORMANCE_BLOCKED`.
-- Finalizer failure is `READINESS_FINALIZATION_FAILURE`; it reruns no phase and
-  produces no successful receipt.
+  mismatch or identity mismatch is reported as the exact observed technical
+  fact. Later independent safe observations may continue when they can add
+  evidence; no status token or phase order controls scientific work.
+- A check that cannot satisfy its operational observation bound returns the
+  measured fact and remaining unknown to CM. It is not `BLOCKED` and cannot
+  pause the scientific direction.
+- Finalizer failure means only that its optional receipt was not produced. It
+  grants or removes no readiness, technical acceptance or scientific validity.
 
-Only a transient environment, launcher, path or operating-system failure may
-use the remaining operational retry budget automatically. A code defect,
-validator rejection or reproducible artifact mismatch returns to Code Project
-Manager and requires a new clean pushed candidate before another attempt. No
-outcome authorizes a higher timeout, evidence weakening or scientific
-abandonment. Changing a timeout, the frozen boundary or the evidence contract
-requires a new explicit workflow contract.
+Environment, launcher, path, operating-system, code, validator and artifact
+failures return as evidence to Code Project Manager. CM chooses
+semantics-preserving repair and fresh verification without a fixed retry budget,
+pushed-candidate prerequisite or attempt identity. A higher operational timeout
+or another resource slice is a CM/Root scheduling decision; changing the frozen
+scientific boundary or weakening evidence remains science-bearing and returns
+to EM.
 
-The runtime workflow may resume only after Code Project Manager returns a
-pushed `CODE_ACCEPTED` candidate with its exact changed path subset, focused
-verification and matching full six-phase execution-readiness receipt. Code
-Project Manager then applies the existing same-source preflight and formal
-admission rules. This contract authorizes no preflight, nonformal scientific
-execution or formal execution.
+The runtime workflow continues when Code Project Manager has enough focused
+technical evidence for the exact changed risk. No pushed candidate, status
+token, fixed six-phase receipt or formal admission state is required. Git and
+optional receipts document accepted work for downstream consumers; they never
+admit or terminate scientific execution.

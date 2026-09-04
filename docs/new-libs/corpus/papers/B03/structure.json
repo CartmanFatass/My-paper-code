@@ -1,0 +1,224 @@
+{
+  "paper_id": "B03",
+  "pdf_pages": 141,
+  "sections": [
+    {
+      "title": "Front matter and contents",
+      "pdf_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_pdf_page": 1,
+      "end_pdf_page": 7
+    },
+    {
+      "title": "1 Multiagent Systems under Uncertainty",
+      "pdf_pages": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "start_pdf_page": 8,
+      "end_pdf_page": 17
+    },
+    {
+      "title": "2 The Decentralized POMDP Framework",
+      "pdf_pages": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "start_pdf_page": 18,
+      "end_pdf_page": 39
+    },
+    {
+      "title": "3 Finite-Horizon Dec-POMDPs",
+      "pdf_pages": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "start_pdf_page": 40,
+      "end_pdf_page": 47
+    },
+    {
+      "title": "4 Exact Finite-Horizon Planning Methods",
+      "pdf_pages": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "start_pdf_page": 48,
+      "end_pdf_page": 61
+    },
+    {
+      "title": "5 Approximate and Heuristic Finite-Horizon Planning",
+      "pdf_pages": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ],
+      "start_pdf_page": 62,
+      "end_pdf_page": 73
+    },
+    {
+      "title": "6 Infinite-Horizon Dec-POMDPs",
+      "pdf_pages": [
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ],
+      "start_pdf_page": 74,
+      "end_pdf_page": 83
+    },
+    {
+      "title": "7 Infinite-Horizon Planning Methods",
+      "pdf_pages": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "start_pdf_page": 84,
+      "end_pdf_page": 95
+    },
+    {
+      "title": "8 Further Topics",
+      "pdf_pages": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121
+      ],
+      "start_pdf_page": 96,
+      "end_pdf_page": 121
+    },
+    {
+      "title": "9 Conclusion",
+      "pdf_pages": [
+        122,
+        123
+      ],
+      "start_pdf_page": 122,
+      "end_pdf_page": 123
+    },
+    {
+      "title": "References",
+      "pdf_pages": [
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      "start_pdf_page": 124,
+      "end_pdf_page": 141
+    }
+  ]
+}

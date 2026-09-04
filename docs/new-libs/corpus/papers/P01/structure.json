@@ -1,0 +1,76 @@
+{
+  "paper_id": "P01",
+  "pdf_pages": 21,
+  "sections": [
+    {
+      "title": "Abstract and Introduction",
+      "pdf_pages": [
+        1,
+        2
+      ],
+      "start_pdf_page": 1,
+      "end_pdf_page": 2
+    },
+    {
+      "title": "2 Formal Setting",
+      "pdf_pages": [
+        3,
+        4
+      ],
+      "start_pdf_page": 3,
+      "end_pdf_page": 4
+    },
+    {
+      "title": "3 Special Characteristics of Multi-Agent Learning",
+      "pdf_pages": [
+        5,
+        6
+      ],
+      "start_pdf_page": 5,
+      "end_pdf_page": 6
+    },
+    {
+      "title": "4 Sample of Multi-Agent Learning Work",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "start_pdf_page": 7,
+      "end_pdf_page": 13
+    },
+    {
+      "title": "5 Five Distinct Agendas",
+      "pdf_pages": [
+        14,
+        15
+      ],
+      "start_pdf_page": 14,
+      "end_pdf_page": 15
+    },
+    {
+      "title": "6 Summary",
+      "pdf_pages": [
+        16
+      ],
+      "start_pdf_page": 16,
+      "end_pdf_page": 16
+    },
+    {
+      "title": "References",
+      "pdf_pages": [
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "start_pdf_page": 17,
+      "end_pdf_page": 21
+    }
+  ]
+}

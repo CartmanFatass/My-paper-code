@@ -1,0 +1,78 @@
+{
+  "paper_id": "P16",
+  "pdf_pages": 27,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        1
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Background and Limitations",
+      "level": 1,
+      "pdf_pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Trust-Region Theory for MARL",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        5
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Practical HATRPO/HAPPO",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Experiments",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Conclusion",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        9
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        10,
+        12
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        13,
+        27
+      ]
+    }
+  ]
+}

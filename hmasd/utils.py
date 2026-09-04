@@ -1,19 +1,36 @@
 import torch
 import numpy as np
 import time
+import copy
 from collections import deque
 import random
 from hmasd.logging import main_logger
 from hmasd.process_exploration import SkillProcessOutcomeExtractor
 
+
+def clone_replay_data(value):
+    """Detach replay data from caller-owned mutable storage recursively."""
+    if torch.is_tensor(value):
+        return value.detach().clone()
+    if isinstance(value, np.ndarray):
+        return value.copy()
+    if isinstance(value, dict):
+        return {clone_replay_data(key): clone_replay_data(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [clone_replay_data(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(clone_replay_data(item) for item in value)
+    return copy.deepcopy(value)
+
 class ReplayBuffer:
     """经验回放缓冲区，用于存储和采样训练数据"""
-    def __init__(self, capacity):
+    def __init__(self, capacity, rng_seed=0):
         self.buffer = deque(maxlen=capacity)
         self.capacity = capacity
         self._total_added = 0
         self._total_sampled = 0
         self._structure_validated = False
+        self._rng = random.Random(int(rng_seed))
     
     def push(self, experience):
         """
@@ -22,13 +39,13 @@ class ReplayBuffer:
         参数:
             experience: 经验元组，或参数列表(通过*args收集的多个参数)
         """
-        if not isinstance(experience, tuple):
+        if not isinstance(experience, (tuple, dict)):
             experience = (experience,)
 
         if len(self.buffer) >= self.capacity:
             self._total_added += 1
 
-        self.buffer.append(experience)
+        self.buffer.append(clone_replay_data(experience))
         
     def clear(self):
         """清空缓冲区"""
@@ -39,7 +56,7 @@ class ReplayBuffer:
     
     def sample(self, batch_size):
         """从缓冲区中随机采样一批经验"""
-        sampled_batch = random.sample(self.buffer, min(len(self.buffer), batch_size))
+        sampled_batch = self._rng.sample(self.buffer, min(len(self.buffer), batch_size))
         self._total_sampled += len(sampled_batch)
         
         # 验证样本结构
@@ -49,6 +66,98 @@ class ReplayBuffer:
             self._structure_validated = True
             
         return sampled_batch
+
+    def get_rng_state(self):
+        return self._rng.getstate()
+
+    def set_rng_state(self, state):
+        restored = random.Random()
+        try:
+            restored.setstate(state)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("invalid ReplayBuffer RNG state") from exc
+        self._rng = restored
+
+    def state_dict(self):
+        """Return the complete replay state required for an exact continuation."""
+        return {
+            "version": 1,
+            "capacity": self.capacity,
+            "buffer": copy.deepcopy(list(self.buffer)),
+            "total_added": self._total_added,
+            "total_sampled": self._total_sampled,
+            "structure_validated": self._structure_validated,
+            "rng_state": self.get_rng_state(),
+        }
+
+    def load_state_dict(self, state):
+        required = {
+            "version", "capacity", "buffer", "total_added", "total_sampled",
+            "structure_validated", "rng_state",
+        }
+        if not isinstance(state, dict) or not required.issubset(state):
+            raise ValueError("ReplayBuffer checkpoint is missing strict continuation state")
+        if state["version"] != 1:
+            raise ValueError("unsupported ReplayBuffer checkpoint version")
+        if int(state["capacity"]) != int(self.capacity):
+            raise ValueError("ReplayBuffer checkpoint capacity does not match runtime topology")
+        rows = state["buffer"]
+        if not isinstance(rows, list) or len(rows) > self.capacity:
+            raise ValueError("invalid ReplayBuffer checkpoint contents")
+        for name in ("total_added", "total_sampled"):
+            if not isinstance(state[name], (int, np.integer)) or int(state[name]) < 0:
+                raise ValueError(f"invalid ReplayBuffer {name}")
+        if not isinstance(state["structure_validated"], (bool, np.bool_)):
+            raise ValueError("invalid ReplayBuffer structure-validation flag")
+        self.set_rng_state(state["rng_state"])
+        self.buffer = deque(copy.deepcopy(rows), maxlen=self.capacity)
+        self._total_added = int(state["total_added"])
+        self._total_sampled = int(state["total_sampled"])
+        self._structure_validated = bool(state["structure_validated"])
+
+    def sample_torch(self, batch_size, device):
+        """Sample GNN-HMASD rows whose GAE was frozen before shuffling."""
+        sampled_batch = self.sample(batch_size)
+        if not sampled_batch:
+            return None
+        required = {
+            "obs",
+            "next_obs",
+            "action",
+            "reward",
+            "done",
+            "old_log_prob",
+            "role",
+            "old_value",
+            "advantage",
+            "return",
+            "trajectory_id",
+            "timestep",
+        }
+        if any(not isinstance(row, dict) or not required.issubset(row) for row in sampled_batch):
+            raise ValueError(
+                "GNN replay rows must be trajectory-finalized dictionaries with frozen GAE"
+            )
+
+        def tensor_column(values, *, dtype):
+            if torch.is_tensor(values[0]):
+                return torch.stack(
+                    [value.detach().to(device=device, dtype=dtype) for value in values]
+                )
+            return torch.as_tensor(np.asarray(values), dtype=dtype, device=device)
+
+        return (
+            tensor_column([row["obs"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["next_obs"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["action"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["reward"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["done"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["old_log_prob"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["role"] for row in sampled_batch], dtype=torch.long),
+            tensor_column([row["old_value"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["advantage"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["return"] for row in sampled_batch], dtype=torch.float32),
+        )
     
     def __len__(self):
         """返回缓冲区的当前大小"""
@@ -83,6 +192,8 @@ class RolloutBuffer:
         state_dim,
         action_space_type='continuous',
         compact_dim=0,
+        sampler_seed=0,
+        d2_enabled=False,
     ):
         self.num_steps = num_steps
         self.num_envs = num_envs
@@ -95,6 +206,11 @@ class RolloutBuffer:
         self.state_dim = state_dim
         self.action_space_type = action_space_type
         self.compact_dim = max(1, int(compact_dim or 0))
+        # D2 policy-based interruption (ADR 01).  The per-agent segment table and
+        # the team table are allocated only in `d2`; `off` keeps exactly the
+        # arrays it had before.
+        self.d2_enabled = bool(d2_enabled)
+        self._sampler_rng = np.random.default_rng(int(sampler_seed))
 
         self.reset()
         main_logger.info("已初始化重构后的RolloutBuffer，采用预分配数组存储。")
@@ -174,6 +290,9 @@ class RolloutBuffer:
         self.high_level_agent_advantages = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
         self.high_level_team_returns = np.zeros((self.num_steps, self.num_envs), dtype=np.float32)
         self.high_level_agent_returns = np.zeros((self.num_steps, self.num_envs, self.n_agents), dtype=np.float32)
+
+        if self.d2_enabled:
+            self._reset_d2_tables()
 
         self._cached_rollout_data = None
         self._profile = {
@@ -311,6 +430,161 @@ class RolloutBuffer:
         if applied > 0:
             self._cached_rollout_data = None
         return applied
+
+    # ------------------------------------------------------------------
+    # D2 policy-based interruption tables (ADR 01 revision 3, plan section 6).
+    # Allocated and written only when `d2_enabled`.
+    # ------------------------------------------------------------------
+
+    def _reset_d2_tables(self):
+        T, E, N = self.num_steps, self.num_envs, self.n_agents
+
+        # Per-(step, env) replay metadata of the assignment decided at that step.
+        self.d2_decision = np.zeros((T, E), dtype=np.bool_)
+        self.d2_sample_Z = np.zeros((T, E), dtype=np.bool_)
+        self.d2_sampled_mask = np.zeros((T, E, N), dtype=np.bool_)
+        self.d2_order = np.tile(np.arange(N, dtype=np.int64), (T, E, 1))
+        self.d2_team_skill = np.full((T, E), -1, dtype=np.int64)
+        self.d2_agent_skills = np.full((T, E, N), -1, dtype=np.int64)
+        self.d2_team_old_log_prob = np.zeros((T, E), dtype=np.float32)
+        self.d2_agent_old_log_probs = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_team_value = np.zeros((T, E), dtype=np.float32)
+        self.d2_agent_values = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_agent_cause = np.zeros((T, E, N), dtype=np.int64)
+        self.d2_team_cause = np.zeros((T, E), dtype=np.int64)
+
+        # Ages at the step the transition was collected (plan section 9).
+        self.d2_agent_age = np.zeros((T, E, N), dtype=np.int64)
+        self.d2_team_age = np.zeros((T, E), dtype=np.int64)
+
+        # Per-agent segment table [T, E, N] and team table [T, E].  A row is
+        # written at the segment's start index when the segment closes.
+        self.d2_agent_valid = np.zeros((T, E, N), dtype=np.bool_)
+        self.d2_agent_reward = np.zeros((T, E, N), dtype=np.float32)
+        self.d2_agent_elapsed = np.ones((T, E, N), dtype=np.int32)
+        self.d2_agent_terminal = np.zeros((T, E, N), dtype=np.bool_)
+
+        self.d2_team_valid = np.zeros((T, E), dtype=np.bool_)
+        self.d2_team_reward = np.zeros((T, E), dtype=np.float32)
+        self.d2_team_elapsed = np.ones((T, E), dtype=np.int32)
+        self.d2_team_terminal = np.zeros((T, E), dtype=np.bool_)
+
+    def add_d2_step(self, env_idx, time_step, agent_age, team_age, decision=False,
+                    team_skill=None, agent_skills=None, sampled_mask=None, sample_Z=False,
+                    order=None, team_log_prob=0.0, agent_log_probs=None,
+                    team_value=0.0, agent_values=None, agent_cause=None, team_cause=0):
+        """Record one D2 step: the per-step ages and, on a decision, the replay metadata."""
+        if not self.d2_enabled:
+            raise RuntimeError("add_d2_step called on a buffer that is not in d2 mode")
+        if env_idx >= self.num_envs or time_step < 0 or time_step >= self.num_steps:
+            main_logger.error(
+                f"add_d2_step: index out of range env_idx={env_idx}, time_step={time_step}"
+            )
+            return False
+        if not self.masks[time_step, env_idx]:
+            main_logger.error(
+                f"add_d2_step: low-level data missing at env_idx={env_idx}, time_step={time_step}"
+            )
+            return False
+
+        self.d2_agent_age[time_step, env_idx] = self._agent_vector(agent_age, np.int64, "d2_agent_age")
+        self.d2_team_age[time_step, env_idx] = int(team_age)
+
+        if decision:
+            self.d2_decision[time_step, env_idx] = True
+            self.d2_sample_Z[time_step, env_idx] = bool(sample_Z)
+            self.d2_sampled_mask[time_step, env_idx] = self._agent_vector(
+                sampled_mask, np.bool_, "d2_sampled_mask"
+            )
+            self.d2_order[time_step, env_idx] = self._agent_vector(order, np.int64, "d2_order")
+            self.d2_team_skill[time_step, env_idx] = int(team_skill)
+            self.d2_agent_skills[time_step, env_idx] = self._agent_vector(
+                agent_skills, np.int64, "d2_agent_skills"
+            )
+            self.d2_team_old_log_prob[time_step, env_idx] = float(team_log_prob)
+            self.d2_agent_old_log_probs[time_step, env_idx] = self._agent_vector(
+                agent_log_probs, np.float32, "d2_agent_old_log_probs"
+            )
+            self.d2_team_value[time_step, env_idx] = float(team_value)
+            self.d2_agent_values[time_step, env_idx] = self._agent_vector(
+                agent_values, np.float32, "d2_agent_values"
+            )
+            if agent_cause is not None:
+                self.d2_agent_cause[time_step, env_idx] = self._agent_vector(
+                    agent_cause, np.int64, "d2_agent_cause"
+                )
+            self.d2_team_cause[time_step, env_idx] = int(team_cause)
+
+        self._cached_rollout_data = None
+        return True
+
+    def close_d2_agent_segment(self, env_idx, agent_idx, start_step, reward, elapsed, terminal):
+        """Write one closed per-agent segment row at its start index."""
+        if not self.d2_enabled:
+            raise RuntimeError("close_d2_agent_segment called on a buffer that is not in d2 mode")
+        if start_step < 0 or start_step >= self.num_steps or env_idx >= self.num_envs:
+            main_logger.error(
+                f"close_d2_agent_segment: index out of range env={env_idx}, t={start_step}"
+            )
+            return False
+        self.d2_agent_valid[start_step, env_idx, agent_idx] = True
+        self.d2_agent_reward[start_step, env_idx, agent_idx] = float(reward)
+        self.d2_agent_elapsed[start_step, env_idx, agent_idx] = max(1, int(elapsed))
+        self.d2_agent_terminal[start_step, env_idx, agent_idx] = bool(terminal)
+        self.high_level_valid_mask[start_step, env_idx] = True
+        self._cached_rollout_data = None
+        return True
+
+    def close_d2_team_segment(self, env_idx, start_step, reward, elapsed, terminal):
+        """Write one closed team segment row at its start index."""
+        if not self.d2_enabled:
+            raise RuntimeError("close_d2_team_segment called on a buffer that is not in d2 mode")
+        if start_step < 0 or start_step >= self.num_steps or env_idx >= self.num_envs:
+            main_logger.error(
+                f"close_d2_team_segment: index out of range env={env_idx}, t={start_step}"
+            )
+            return False
+        self.d2_team_valid[start_step, env_idx] = True
+        self.d2_team_reward[start_step, env_idx] = float(reward)
+        self.d2_team_elapsed[start_step, env_idx] = max(1, int(elapsed))
+        self.d2_team_terminal[start_step, env_idx] = bool(terminal)
+        self.high_level_valid_mask[start_step, env_idx] = True
+        self._cached_rollout_data = None
+        return True
+
+    def get_d2_tables(self, num_steps=None):
+        """Return views of the D2 tables truncated to `num_steps` (diagnostics/tests)."""
+        if not self.d2_enabled:
+            return None
+        sl = slice(0, self.num_steps if num_steps is None else int(num_steps))
+        return {
+            'decision': self.d2_decision[sl],
+            'sample_Z': self.d2_sample_Z[sl],
+            'sampled_mask': self.d2_sampled_mask[sl],
+            'order': self.d2_order[sl],
+            'team_skill': self.d2_team_skill[sl],
+            'agent_skills': self.d2_agent_skills[sl],
+            'team_old_log_prob': self.d2_team_old_log_prob[sl],
+            'agent_old_log_probs': self.d2_agent_old_log_probs[sl],
+            'team_value': self.d2_team_value[sl],
+            'agent_values': self.d2_agent_values[sl],
+            'agent_cause': self.d2_agent_cause[sl],
+            'team_cause': self.d2_team_cause[sl],
+            'agent_age': self.d2_agent_age[sl],
+            'team_age': self.d2_team_age[sl],
+            'agent_valid': self.d2_agent_valid[sl],
+            'agent_reward': self.d2_agent_reward[sl],
+            'agent_elapsed': self.d2_agent_elapsed[sl],
+            'agent_terminal': self.d2_agent_terminal[sl],
+            'team_valid': self.d2_team_valid[sl],
+            'team_reward': self.d2_team_reward[sl],
+            'team_elapsed': self.d2_team_elapsed[sl],
+            'team_terminal': self.d2_team_terminal[sl],
+            'agent_advantages': self.high_level_agent_advantages[sl],
+            'agent_returns': self.high_level_agent_returns[sl],
+            'team_advantages': self.high_level_team_advantages[sl],
+            'team_returns': self.high_level_team_returns[sl],
+        }
 
     def add_high_level_data(self, env_idx, time_step, state_value=None, agent_values=None,
                            team_log_prob=None, agent_log_probs=None, accumulated_reward=None, **kwargs):
@@ -549,7 +823,10 @@ class RolloutBuffer:
                 next_non_terminal = 1.0 - dones
                 curr_next_val = last_values_real
             else:
-                next_non_terminal = 1.0 - dones_rollout[t + 1]
+                # ``dones_rollout[t]`` belongs to the transition from t to
+                # t+1.  Looking at t+1 leaks the first transition of a new
+                # episode into the preceding episode's GAE recursion.
+                next_non_terminal = 1.0 - dones_rollout[t]
                 curr_next_val = values_real[t + 1]
 
             curr_val = values_real[t]
@@ -578,7 +855,16 @@ class RolloutBuffer:
             return
         
         num_actual_steps = data["num_actual_steps"]
-        
+
+        if self.d2_enabled:
+            return self._compute_d2_high_level_advantages(
+                high_level_last_values,
+                gamma=gamma,
+                gae_lambda=gae_lambda,
+                value_normalizer=value_normalizer,
+                num_actual_steps=num_actual_steps,
+            )
+
         if isinstance(high_level_last_values, dict):
             last_state_values = high_level_last_values.get('state', np.zeros(self.num_envs))
             last_agent_values = high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents)))
@@ -679,6 +965,107 @@ class RolloutBuffer:
 
         main_logger.debug("高层策略GAE计算完成。")
 
+    def _compute_d2_high_level_advantages(self, high_level_last_values, gamma, gae_lambda,
+                                          value_normalizer, num_actual_steps):
+        """
+        D2 SMDP advantages (plan section 7, ADR 01 target formula).
+
+        One discounted-GAE sequence per `(env, agent)` over that agent's valid
+        segment rows, and one per env over the team table, both with
+        `discounts = gamma ** elapsed`.  The last valid row of each sequence
+        bootstraps with the value of the next state, exactly as `off` does via
+        `high_level_last_values`.
+        """
+        # Review VII.2 F5: D2 stores values that were already denormalised at
+        # collection (`_batched_assign_skills_d2` denormalises through
+        # `value_norm_coordinator` before writing them), and the bootstrap values
+        # are denormalised the same way, so GAE here runs on real values.
+        # `update_coordinator_d2` passes `None`, exactly as `off` does; anything
+        # else would denormalise twice.
+        assert value_normalizer is None, (
+            "D2 advantages must be computed with value_normalizer=None: the "
+            "stored segment values and the bootstrap values are already "
+            "denormalised at collection time"
+        )
+        if isinstance(high_level_last_values, dict):
+            last_state_values = np.asarray(
+                high_level_last_values.get('state', np.zeros(self.num_envs))
+            )
+            last_agent_values = np.asarray(
+                high_level_last_values.get('agents', np.zeros((self.num_envs, self.n_agents)))
+            )
+        else:
+            last_state_values = np.asarray(high_level_last_values)
+            if last_state_values.ndim == 2:
+                last_agent_values = last_state_values
+                last_state_values = last_state_values[:, 0]
+            else:
+                last_agent_values = np.tile(
+                    last_state_values[:, np.newaxis], (1, self.n_agents)
+                )
+
+        if value_normalizer is not None:
+            mean = value_normalizer.mean
+            std = np.sqrt(value_normalizer.var + 1e-8)
+        else:
+            mean, std = 0.0, 1.0
+
+        last_state_values_real = last_state_values * std + mean
+        last_agent_values_real = last_agent_values * std + mean
+
+        def _sequence(rewards, values, elapsed, terminal, last_value):
+            values_real = values.astype(np.float32) * std + mean
+            next_values = np.zeros_like(values_real)
+            if values_real.size > 1:
+                next_values[:-1] = values_real[1:]
+            next_values[-1] = last_value
+            discounts = np.power(
+                float(gamma), np.maximum(elapsed.astype(np.float32), 1.0)
+            ).astype(np.float32)
+            return self._compute_gae_with_discounts_torch(
+                rewards.astype(np.float32),
+                values_real,
+                next_values,
+                terminal.astype(np.float32),
+                discounts,
+                gae_lambda,
+            )
+
+        for env_idx in range(self.num_envs):
+            team_rows = np.flatnonzero(self.d2_team_valid[:num_actual_steps, env_idx])
+            if team_rows.size > 0:
+                advantages, returns = _sequence(
+                    self.d2_team_reward[team_rows, env_idx],
+                    self.d2_team_value[team_rows, env_idx],
+                    self.d2_team_elapsed[team_rows, env_idx],
+                    self.d2_team_terminal[team_rows, env_idx],
+                    last_state_values_real[env_idx],
+                )
+                for i, t in enumerate(team_rows):
+                    self.high_level_team_advantages[t, env_idx] = advantages[i].item()
+                    self.high_level_team_returns[t, env_idx] = returns[i].item()
+                    self.high_level_advantages[t, env_idx] = advantages[i].item()
+                    self.high_level_returns[t, env_idx] = returns[i].item()
+
+            for agent_idx in range(self.n_agents):
+                agent_rows = np.flatnonzero(
+                    self.d2_agent_valid[:num_actual_steps, env_idx, agent_idx]
+                )
+                if agent_rows.size == 0:
+                    continue
+                advantages, returns = _sequence(
+                    self.d2_agent_reward[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_values[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_elapsed[agent_rows, env_idx, agent_idx],
+                    self.d2_agent_terminal[agent_rows, env_idx, agent_idx],
+                    last_agent_values_real[env_idx, agent_idx],
+                )
+                for i, t in enumerate(agent_rows):
+                    self.high_level_agent_advantages[t, env_idx, agent_idx] = advantages[i].item()
+                    self.high_level_agent_returns[t, env_idx, agent_idx] = returns[i].item()
+
+        main_logger.debug("D2 高层策略GAE计算完成。")
+
     def _compute_gae_torch(self, rewards, values, next_values, dones, gamma, lam):
         rewards = torch.tensor(rewards, dtype=torch.float32)
         values = torch.tensor(values, dtype=torch.float32)
@@ -710,10 +1097,19 @@ class RolloutBuffer:
         if data is None:
             return np.array([])
         
+        if self.d2_enabled:
+            # D2 heads have their own valid masks: the team row and the agent
+            # rows of one (t, e) pair do not have to be valid together.
+            team_mask = self.d2_team_valid[:num_steps]
+            agent_mask = self.d2_agent_valid[:num_steps]
+            team_returns = self.high_level_team_returns[:num_steps][team_mask]
+            agent_returns = self.high_level_agent_returns[:num_steps][agent_mask]
+            return np.concatenate([team_returns.flatten(), agent_returns.flatten()])
+
         valid_mask = data["high_level_valid_mask"][:num_steps]
         team_returns = self.high_level_team_returns[:num_steps][valid_mask]
         agent_returns = self.high_level_agent_returns[:num_steps][valid_mask]
-        
+
         # 将团队和个体回报合并为一个列表
         all_returns = np.concatenate([team_returns.flatten(), agent_returns.flatten()])
         return all_returns
@@ -862,7 +1258,7 @@ class RolloutBuffer:
             }
         
         for epoch in range(ppo_epochs):
-            np.random.shuffle(sequence_indices)
+            self._sampler_rng.shuffle(sequence_indices)
             for start in range(0, num_total_sequences, num_sequences_per_batch):
                 end = min(start + num_sequences_per_batch, num_total_sequences)
                 batch_indices = sequence_indices[start:end]
@@ -908,6 +1304,65 @@ class RolloutBuffer:
                         'dones': torch.from_numpy(dones_flat[:, batch_indices]).float(),
                         'masks': torch.from_numpy(masks_flat[:, batch_indices]).bool()
                     }
+
+    def get_d2_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch, device=None):
+        """
+        D2 coordinator sampler (plan section 8).
+
+        Rows are `(t, e)` pairs where at least one agent segment row or the team
+        segment row is valid; each row carries the `[N]` replay metadata and the
+        per-head valid masks so the update can mask log-probs, entropies and
+        value losses.
+        """
+        if not self.d2_enabled:
+            raise RuntimeError("get_d2_coordinator_sampler called on a buffer that is not in d2 mode")
+        data = self._get_full_rollout_data()
+        if data is None:
+            main_logger.warning("无有效数据，无法创建D2 Coordinator采样器。")
+            return None
+
+        row_mask = (
+            self.d2_agent_valid[:num_steps].any(axis=-1) | self.d2_team_valid[:num_steps]
+        )
+        valid_time_steps, valid_env_indices = np.where(row_mask)
+        num_valid_samples = len(valid_time_steps)
+        if num_valid_samples == 0:
+            return None
+
+        valid_indices = np.arange(num_valid_samples)
+
+        def _pack(time_batch, env_batch):
+            def _t(array, dtype):
+                view = array[time_batch, env_batch]
+                tensor = torch.as_tensor(np.ascontiguousarray(view), dtype=dtype)
+                return tensor.to(device) if device is not None else tensor
+
+            return {
+                'observations': _t(data["obs"], torch.float32),
+                'states': _t(data["states"], torch.float32),
+                'team_skills': _t(self.d2_team_skill, torch.long),
+                'agent_skills': _t(self.d2_agent_skills, torch.long),
+                'order': _t(self.d2_order, torch.long),
+                'sampled_mask': _t(self.d2_sampled_mask, torch.bool),
+                'sample_Z': _t(self.d2_sample_Z, torch.bool),
+                'team_valid': _t(self.d2_team_valid, torch.float32),
+                'agent_valid': _t(self.d2_agent_valid, torch.float32),
+                'old_team_log_probs': _t(self.d2_team_old_log_prob, torch.float32),
+                'old_agent_log_probs': _t(self.d2_agent_old_log_probs, torch.float32),
+                'team_advantages': _t(self.high_level_team_advantages, torch.float32),
+                'agent_advantages': _t(self.high_level_agent_advantages, torch.float32),
+                'team_returns': _t(self.high_level_team_returns, torch.float32),
+                'agent_returns': _t(self.high_level_agent_returns, torch.float32),
+                'team_age': _t(self.d2_team_age, torch.long),
+                'agent_age': _t(self.d2_agent_age, torch.long),
+            }
+
+        for _epoch in range(ppo_epochs):
+            self._sampler_rng.shuffle(valid_indices)
+            for start in range(0, num_valid_samples, num_sequences_per_batch):
+                end = min(start + num_sequences_per_batch, num_valid_samples)
+                batch_indices = valid_indices[start:end]
+                yield _pack(valid_time_steps[batch_indices], valid_env_indices[batch_indices])
 
     def get_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch, device=None, cache_tensors=False):
         """
@@ -966,7 +1421,7 @@ class RolloutBuffer:
             }
         
         for epoch in range(ppo_epochs):
-            np.random.shuffle(valid_indices)
+            self._sampler_rng.shuffle(valid_indices)
             for start in range(0, num_valid_samples, num_sequences_per_batch):
                 end = min(start + num_sequences_per_batch, num_valid_samples)
                 batch_indices = valid_indices[start:end]
@@ -1016,6 +1471,18 @@ class RolloutBuffer:
                         'agent_returns': torch.from_numpy(self.high_level_agent_returns[time_batch, env_batch]).float(),
                         'values': torch.from_numpy(data["high_level_state_values"][time_batch, env_batch]).float(),
                     }
+
+    def get_sampler_rng_state(self):
+        """Return an isolated, checkpoint-safe snapshot of sampler RNG state."""
+        return copy.deepcopy(self._sampler_rng.bit_generator.state)
+
+    def set_sampler_rng_state(self, state):
+        """Restore sampler RNG state, failing closed on incompatible state."""
+        if not isinstance(state, dict):
+            raise TypeError("sampler RNG state must be a bit-generator state dictionary")
+        restored = np.random.default_rng()
+        restored.bit_generator.state = copy.deepcopy(state)
+        self._sampler_rng = restored
 
 class SkillProcessSegmentBuffer:
     """Tracks variable-duration executed skill process segments.
@@ -1296,6 +1763,72 @@ def compute_gae(rewards, values, next_values, dones, gamma, lam):
     returns = advantages + values
     
     return advantages, returns
+
+
+def compute_ordered_trajectory_gae(
+    rewards,
+    values,
+    next_values,
+    dones,
+    trajectory_ids,
+    timesteps,
+    gamma,
+    lam,
+):
+    """Freeze GAE for one continuous, explicitly indexed trajectory segment."""
+    if not all(torch.is_tensor(item) for item in (rewards, values, next_values, dones)):
+        raise TypeError("trajectory GAE inputs must be torch tensors")
+    if not (rewards.shape == values.shape == next_values.shape == dones.shape):
+        raise ValueError(
+            "trajectory GAE inputs must have identical shapes: "
+            f"rewards={tuple(rewards.shape)}, values={tuple(values.shape)}, "
+            f"next_values={tuple(next_values.shape)}, dones={tuple(dones.shape)}"
+        )
+    if rewards.ndim != 1 or rewards.numel() == 0:
+        raise ValueError("trajectory GAE requires a non-empty one-dimensional segment")
+    if len(trajectory_ids) != rewards.numel() or len(timesteps) != rewards.numel():
+        raise ValueError("trajectory metadata length must match tensor length")
+    if len(set(trajectory_ids)) != 1:
+        raise ValueError("trajectory GAE segment contains multiple trajectory IDs")
+    integer_timesteps = [int(timestep) for timestep in timesteps]
+    if any(value != timestep for value, timestep in zip(integer_timesteps, timesteps)):
+        raise ValueError("trajectory timesteps must be integers")
+    expected = list(range(integer_timesteps[0], integer_timesteps[0] + rewards.numel()))
+    if integer_timesteps != expected:
+        raise ValueError(
+            f"trajectory timesteps must be contiguous and ordered: got {integer_timesteps}"
+        )
+    if bool(torch.any(dones[:-1].to(torch.bool)).item()):
+        raise ValueError("a terminal transition may only appear at the end of a segment")
+    for name, tensor in (
+        ("rewards", rewards),
+        ("values", values),
+        ("next_values", next_values),
+        ("dones", dones),
+    ):
+        if not bool(torch.all(torch.isfinite(tensor)).item()):
+            raise ValueError(f"trajectory GAE {name} must be finite")
+    if not bool(torch.all((dones == 0) | (dones == 1)).item()):
+        raise ValueError("trajectory GAE dones must contain only zero or one")
+    if not np.isfinite(float(gamma)) or not np.isfinite(float(lam)):
+        raise ValueError("trajectory GAE gamma and lambda must be finite")
+
+    dones = dones.to(rewards.dtype)
+    advantages = torch.zeros_like(rewards)
+    last_advantage = torch.zeros((), dtype=rewards.dtype, device=rewards.device)
+    for index in reversed(range(rewards.numel())):
+        non_terminal = 1.0 - dones[index]
+        delta = (
+            rewards[index]
+            + float(gamma) * non_terminal * next_values[index]
+            - values[index]
+        )
+        last_advantage = (
+            delta
+            + float(gamma) * float(lam) * non_terminal * last_advantage
+        )
+        advantages[index] = last_advantage
+    return advantages, advantages + values
 
 def compute_ppo_loss(policy, values, old_log_probs, actions, advantages, returns, 
                      clip_epsilon, entropy_coef, value_loss_coef):

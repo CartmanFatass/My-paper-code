@@ -1,5 +1,13 @@
 # G40 formal result update (mechanically recorded from External Pro)
 
+> Current-status boundary (2026-08-23): this longitudinal ledger remains
+> scientific lineage evidence, but it is nonauthoritative for the exact current
+> queue, custody, next event, revisit condition, or code navigation of the 33
+> directories under `docs/research/candidates/`. Start at
+> `docs/HR/RESEARCH_DIRECTION_DASHBOARD.md`, then follow the structured registry
+> to the cited owner artifact. This notice does not revise any historical
+> scientific disposition below.
+
 g40_credit_row_supersedes=G39 native-six continuous-roster G31 credit package local necessity/open replacement row
 g40_credit_row_status=SUPPORTED_RETAINED
 g40_credit_row_evidence=docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40_FORMAL_RESULT.md|docs/report/ITERATION_31.md|docs/external-review/rounds/20260727_continuous_roster_native_six_credit_reduction_g40_formal_result_review/21_PRO_OPEN_RAW.md

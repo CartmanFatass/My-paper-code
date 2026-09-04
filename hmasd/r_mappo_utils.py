@@ -257,15 +257,44 @@ class ACTLayer(nn.Module):
     def evaluate_actions(self, x, action, available_actions=None, active_masks=None):
         if self.multi_discrete:
             action_log_probs = []
-            dist_entropy = []
+            component_entropies = []
             for i, action_out in enumerate(self.action_outs):
                 dist = action_out(x)
                 log_prob = dist.log_probs(action[:, i:i+1])
                 action_log_probs.append(log_prob)
-                dist_entropy.append(dist.entropy())
+                component_entropies.append(dist.entropy())
 
             action_log_probs = torch.cat(action_log_probs, -1).sum(-1, keepdim=True)
-            dist_entropy = torch.cat(dist_entropy, -1).mean()
+            # A MultiDiscrete action is one joint action: aggregate all component
+            # entropies for each sample before applying the policy-active mask.
+            # Concatenating one-dimensional entropy tensors would flatten the
+            # batch and components together, which makes inactive samples affect
+            # the reported entropy.
+            per_sample_entropy = torch.stack(component_entropies, dim=-1).sum(dim=-1)
+            if active_masks is not None:
+                if active_masks.shape == per_sample_entropy.shape + (1,):
+                    entropy_masks = active_masks.squeeze(-1)
+                elif active_masks.shape == per_sample_entropy.shape:
+                    entropy_masks = active_masks
+                else:
+                    raise ValueError(
+                        "MultiDiscrete active_masks must match the entropy batch "
+                        f"shape {tuple(per_sample_entropy.shape)} (optionally with "
+                        f"a trailing singleton), got {tuple(active_masks.shape)}"
+                    )
+                entropy_masks = entropy_masks.to(
+                    device=per_sample_entropy.device, dtype=per_sample_entropy.dtype
+                )
+                denominator = entropy_masks.sum()
+                if not bool(torch.isfinite(denominator).item()) or bool(
+                    (denominator <= 0).item()
+                ):
+                    raise ValueError(
+                        "MultiDiscrete active_masks must have a finite positive sum"
+                    )
+                dist_entropy = (per_sample_entropy * entropy_masks).sum() / denominator
+            else:
+                dist_entropy = per_sample_entropy.mean()
             return action_log_probs, dist_entropy
         elif self.action_type == "Discrete":
             return self.action_out.evaluate_actions(x, action, available_actions, active_masks)
@@ -312,10 +341,27 @@ class MLPBase(nn.Module):
         return self.mlp(x)
 
 class RNNLayer(nn.Module):
-    def __init__(self, inputs_dim, outputs_dim, recurrent_N, use_orthogonal):
+    _SEQUENCE_BACKENDS = frozenset({"step_reference", "segmented"})
+
+    def __init__(
+        self,
+        inputs_dim,
+        outputs_dim,
+        recurrent_N,
+        use_orthogonal,
+        sequence_backend="step_reference",
+    ):
         super(RNNLayer, self).__init__()
         self._recurrent_N = recurrent_N
         self._use_orthogonal = use_orthogonal
+        if sequence_backend not in self._SEQUENCE_BACKENDS:
+            raise ValueError(
+                f"unknown RNN sequence backend {sequence_backend!r}; "
+                f"expected one of {sorted(self._SEQUENCE_BACKENDS)}"
+            )
+        if sequence_backend == "segmented" and recurrent_N != 1:
+            raise ValueError("segmented RNN sequence backend requires recurrent_N == 1")
+        self.sequence_backend = sequence_backend
 
         self.rnn = nn.GRU(inputs_dim, outputs_dim, num_layers=self._recurrent_N)
         for name, param in self.rnn.named_parameters():
@@ -327,6 +373,52 @@ class RNNLayer(nn.Module):
                 else:
                     nn.init.xavier_uniform_(param)
         self.norm = nn.LayerNorm(outputs_dim)
+
+    def _initial_hidden(self, hxs, batch_size):
+        if hxs.dim() == 2:
+            if self._recurrent_N != 1:
+                raise ValueError(
+                    "a two-dimensional hidden state is only valid for recurrent_N == 1"
+                )
+            if hxs.shape[0] != batch_size:
+                raise ValueError("hidden-state batch dimension does not match sequence batch")
+            return hxs.unsqueeze(0), True
+        if hxs.dim() == 3:
+            expected = (self._recurrent_N, batch_size)
+            if hxs.shape[:2] != expected:
+                raise ValueError(
+                    f"hidden state must start with {expected}, got {tuple(hxs.shape[:2])}"
+                )
+            return hxs, False
+        raise ValueError("hidden state must have shape (B,H) or (N,B,H)")
+
+    def _forward_sequence_step_reference(self, x, hxs, masks):
+        outputs = []
+        for i in range(x.shape[0]):
+            hxs = hxs * masks[i].unsqueeze(0)
+            out, hxs = self.rnn(x[i].unsqueeze(0), hxs)
+            outputs.append(out.squeeze(0))
+        return torch.stack(outputs, dim=0), hxs
+
+    def _forward_sequence_segmented(self, x, hxs, masks):
+        if self._recurrent_N != 1:
+            raise ValueError("segmented RNN sequence backend requires recurrent_N == 1")
+
+        # A segment begins whenever at least one batch member resets.  Inside a
+        # segment every entry mask is one, so a single fused GRU invocation is
+        # exactly the same recurrence as the timestep reference implementation.
+        reset_rows = torch.nonzero(
+            torch.any(masks[1:] != 1, dim=(1, 2)), as_tuple=False
+        ).flatten()
+        starts = [0] + [int(index) + 1 for index in reset_rows.detach().cpu().tolist()]
+        ends = starts[1:] + [x.shape[0]]
+
+        outputs = []
+        for start, end in zip(starts, ends):
+            hxs = hxs * masks[start].unsqueeze(0)
+            out, hxs = self.rnn(x[start:end], hxs)
+            outputs.append(out)
+        return torch.cat(outputs, dim=0), hxs
 
     def forward(self, x, hxs, masks):
         # Check if the input is a sequence
@@ -352,42 +444,20 @@ class RNNLayer(nn.Module):
             # The masks are of shape (T, B), need to be (T, B, 1) for broadcasting
             if masks.dim() == 2:
                 masks = masks.unsqueeze(-1)
-            
-            # Apply masks to hidden states at each time step
-            # We can't apply masks to hxs before the loop as hxs is (1, B, H)
-            # and masks are (T, B, 1). We let the GRU handle the sequence.
-            
-            # Reshape hxs for GRU: (num_layers, B, H)
-            hxs = hxs.unsqueeze(0)
-            
-            # Let GRU process the whole sequence. We will handle masking manually if needed,
-            # but GRU is often used with packed sequences for efficiency.
-            # A simple approach is to let it run and then zero out states where mask is 0.
-            # However, the original logic intended to stop gradient flow for done states.
-            
-            # A more correct way to handle masks with sequences in GRU
-            # is to iterate, but that can be slow.
-            # Let's try a compromise: process the whole sequence and then apply masks.
-            # This is an approximation but avoids manual unrolling.
-            
-            # The input x is already (T, B, D), which is what GRU expects.
-            # The hidden state hxs is (B, H), needs to be (1, B, H).
-            
-            # The most robust way is to iterate, as the original code did.
-            # Let's refine that logic to be cleaner.
-            outputs = []
-            for i in range(T):
-                # Mask the hidden state before feeding it to the next step
-                # hxs is (1, B, H)
-                hxs = hxs * masks[i]
-                
-                # x[i] is (B, D), needs to be (1, B, D)
-                out, hxs = self.rnn(x[i].unsqueeze(0), hxs)
-                outputs.append(out.squeeze(0))
-            
-            x = torch.stack(outputs, dim=0)
-            # The hidden state for the next call is the last hidden state
-            hxs = hxs.squeeze(0)
+            if masks.shape != (T, B, 1):
+                raise ValueError(
+                    f"sequence masks must have shape {(T, B)} or {(T, B, 1)}, "
+                    f"got {tuple(masks.shape)}"
+                )
+            hxs, squeeze_hidden = self._initial_hidden(hxs, B)
+            if self.sequence_backend == "step_reference":
+                x, hxs = self._forward_sequence_step_reference(x, hxs, masks)
+            elif self.sequence_backend == "segmented":
+                x, hxs = self._forward_sequence_segmented(x, hxs, masks)
+            else:  # constructor validation makes this corruption-only.
+                raise RuntimeError(f"invalid configured RNN backend {self.sequence_backend!r}")
+            if squeeze_hidden:
+                hxs = hxs.squeeze(0)
 
         x = self.norm(x)
         return x, hxs

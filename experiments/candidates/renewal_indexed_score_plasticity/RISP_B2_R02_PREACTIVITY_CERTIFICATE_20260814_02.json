@@ -1,0 +1,74 @@
+{
+  "certificate_schema": "RISP-B2-R02-PREACTIVITY-CERTIFICATE-20260814-02",
+  "direction_id": "renewal_indexed_score_plasticity",
+  "science_revision": "RISP-B2-SCIENCE-20260814-02",
+  "production_activity_started": false,
+  "partial_scientific_values_retained": false,
+  "panel": {
+    "algorithm_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "architectures": [
+      "DIRECT-ANCHOR",
+      "DIRECT-CONTAIN"
+    ],
+    "feedback_cells": [
+      "INTACT",
+      "MARGINAL-TWIN"
+    ],
+    "qualification_controls": [
+      "UNIFORM",
+      "STATE-ORACLE"
+    ],
+    "schedule_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "training_updates_per_architecture_seed": 256,
+    "training_episodes_per_update": 16,
+    "evaluation_episodes_per_seed_schedule_cell": 64,
+    "complete_panel_only": true
+  },
+  "fresh_paths": {
+    "result_root": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B2_R02_RESULTS_20260814_02",
+    "result": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B2_R02_RESULTS_20260814_02\\RISP_B2_R02_20260814_02.json",
+    "frontier": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B2_R02_RESUME_20260814_02"
+  },
+  "production_command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe experiments/candidates/renewal_indexed_score_plasticity/run_b2_r02_resume.py --slice-wall-seconds 13800 --rss-limit-bytes 1073741824 --frontier experiments/candidates/renewal_indexed_score_plasticity/RISP_B2_R02_RESUME_20260814_02 --result experiments/candidates/renewal_indexed_score_plasticity/RISP_B2_R02_RESULTS_20260814_02/RISP_B2_R02_20260814_02.json",
+  "required_runtime_envelope": {
+    "concurrent_processes": 1,
+    "cpu_workers": 1,
+    "gpu": false,
+    "process_lifetime_rss_bytes_strictly_below": 1073741824,
+    "rolling_slice_wall_seconds_max": 14400,
+    "command_slice_wall_seconds": 13800,
+    "cumulative_wall_or_attempt_limit": null,
+    "repeat_identical_command_until_complete": true
+  },
+  "binding_hashes_sha256": {
+    "docs/research/candidates/renewal_indexed_score_plasticity/RISP_B2_OUTCOME_COUPLED_RECURRENCE_COMPOSITE_R02.md": "c38213dbd42223a41e8675089545b71d3e74d8dba384b297c0563915be0aaa10",
+    "experiments/candidates/renewal_indexed_score_plasticity/b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+    "experiments/candidates/renewal_indexed_score_plasticity/b2_r02_resume.py": "a985ae644da9c0cc3e684cd2a34f41ae55959b1dbe5d1b4e266c9fac494cefeb",
+    "experiments/candidates/renewal_indexed_score_plasticity/run_b2_r02_resume.py": "fdfa49e45f7d93da9b4f662135ac536ac94956d74900ddd782f2a76e0a15a784",
+    "tests/experiments/candidates/renewal_indexed_score_plasticity/test_b2_r02.py": "82f70de5de0c3b0c8158b4904136d3e6abce569f6d928029aa199c72a6d0a9a9"
+  },
+  "proposed_root_lease": "C:\\Projects\\HMASD\\docs\\research\\workflow-runs\\2026-08-11_five-round-research-team\\RISP_B2_R02_COMPUTE_LEASE_20260814_02.md"
+}

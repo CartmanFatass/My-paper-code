@@ -1,0 +1,26 @@
+{
+  "packet_version": 1,
+  "request_id": "DISH-R02-CLOSURE-RECAST-PRO-20260831-01",
+  "caller_role": "em",
+  "source_role": "em",
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code.git",
+  "commit_or_ref": "aa50efc9f61af7a558e1373ea445f97ff0784b56",
+  "destination_role": "transport_operator",
+  "transport_operator_thread": "codex://threads/01a05860-6919-7bd3-9b04-99f8344ed73d",
+  "transport_skill": "hmasd-chatgpt-pro-transport",
+  "send_from_author": false,
+  "prompt_body_file": "PROMPT_BODY.md",
+  "reference_file": "REFERENCE_FILES.md",
+  "transport_request": {
+    "direction_id": "degraded_incumbent_shadow_handover",
+    "prompt_path": "PROMPT_BODY.md",
+    "reference_paths": [
+      "REFERENCE_FILES.md"
+    ],
+    "companion_prompt": "Execute the exact scientific research request in the attached PROMPT_BODY.md. Use the separately attached REFERENCE_FILES.md only as its read-only GitHub evidence manifest. The author remains authoring-only and must not send, open a browser, bind a conversation, or validate Transport state.",
+    "source_mode": "body_plus_reference_attachment"
+  },
+  "instruction": "Use PROMPT_BODY.md verbatim as the prompt and attach REFERENCE_FILES.md verbatim; preserve direction, ref, claim ceiling, and bytes."
+}

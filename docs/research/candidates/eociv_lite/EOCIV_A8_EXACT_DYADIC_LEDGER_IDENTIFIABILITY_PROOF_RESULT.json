@@ -1,0 +1,162 @@
+{
+  "activity_ledger": {
+    "checkpoint_reconstructions": 0,
+    "environment_episodes": 0,
+    "environment_transitions": 0,
+    "evaluations": 0,
+    "learner_calls": 0,
+    "model_fits": 0,
+    "optimizer_calls": 0,
+    "policy_calls": 0,
+    "pool_units": 0,
+    "registered_audits": 1,
+    "retries_rescues_sweeps": 0,
+    "rng_draws": 0,
+    "trainer_calls": 0
+  },
+  "b8_authorized": false,
+  "branch_precedence": [
+    "A8_INVALID_SOURCE_OR_ACTIVITY_CONTRACT",
+    "A8_REWARD_INTERFACE_OR_EXACT_DECODER_UNIDENTIFIED",
+    "A8_FORK_TAPE_OR_MASK_IDENTITY_UNIDENTIFIED",
+    "A8_PHASE_ENDPOINT_OR_FIREWALL_UNIDENTIFIED",
+    "A8_FRESHNESS_OR_IDENTITY_FAILURE",
+    "A8_EXACT_DYADIC_LEDGER_AND_CAUSAL_PANEL_CONSTRUCTIBLE"
+  ],
+  "certificates": [
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "reward_interface_manifest",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "capture_site_census",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "dtype_decoder",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "fork_tape_dependency",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "mask_raw_bit_identity",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "phase_count_oracle",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "endpoint_context_no_target_outcome_firewall",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    },
+    {
+      "failures": [
+        "not_evaluated_due_source_or_payload_binding",
+        "payload_internal:natural_seed_span_mismatch",
+        "payload_internal:action_seed_span_mismatch"
+      ],
+      "name": "b6_b7_freshness",
+      "passed": false,
+      "source_digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+      "witnesses": []
+    }
+  ],
+  "conclusion": "A8_INVALID_SOURCE_OR_ACTIVITY_CONTRACT",
+  "design_id": "DESIGN-2026-08-10-EOCIV-A8-EXACT-DYADIC-LEDGER-IDENTIFIABILITY-V1",
+  "document_kind": "eociv_a8_exact_dyadic_ledger_identifiability_result",
+  "payload_failures": [
+    "payload_internal:natural_seed_span_mismatch",
+    "payload_internal:action_seed_span_mismatch"
+  ],
+  "payload_sha256": "9b04f7fac747a23c0985c940138386d2eba46d60d25e72ec4b2eea70f03b2409",
+  "payload_valid": false,
+  "predecessor_anchors": {
+    "b7_publication_commit": "c95772c842175ca8c8b14db2815414aaa09bf8c8",
+    "b7_source_commit": "8f3bba4a8e86a4706bd7510f070f97377ff873ec"
+  },
+  "roster_digest": "b1411c561f35336403861bd4c28c4f781e890ba66db2e2ad6cfb1d109bf18c48",
+  "schema_version": 1,
+  "scientific_effect_claimed": false,
+  "source_binding": {
+    "actual_commit": "317348bf1d8fc5b82484910be0c762aa3fd4ac67",
+    "audited_paths": [
+      "experiments/candidates/eociv_lite/sibling_env.py",
+      "experiments/candidates/eociv_lite/actuation_runtime.py",
+      "experiments/candidates/eociv_lite/exact_dyadic_ledger_identifiability.py",
+      "scripts/run_eociv_a8_exact_dyadic_ledger_identifiability.py"
+    ],
+    "cwd": "C:\\worktrees\\HMASD\\eociv_a8_source_readiness_clean_candidate_20260810_r2",
+    "expected_commit": "317348bf1d8fc5b82484910be0c762aa3fd4ac67",
+    "failures": [],
+    "file_sha256": {
+      "experiments/candidates/eociv_lite/actuation_runtime.py": "4b337af61b6c18c4c68a858a0dac9240849dc3caac34d9d40bb5eba34e970e9b",
+      "experiments/candidates/eociv_lite/exact_dyadic_ledger_identifiability.py": "6b14494c2359d42abc94b53561236d97720fc2f82b3e2ba074a0aa001aa373e9",
+      "experiments/candidates/eociv_lite/sibling_env.py": "2d0ce5d39143d67fb6bf2b8233817b0eace4b199ba8556c5b0bbcbd7cf9e8101",
+      "scripts/run_eociv_a8_exact_dyadic_ledger_identifiability.py": "f61d3df0ae6992b290812c91514bc628c39a2bfe75d1569c944c3de8d983fe44"
+    },
+    "passed": true,
+    "runtime_core_file": "C:\\worktrees\\HMASD\\eociv_a8_source_readiness_clean_candidate_20260810_r2\\experiments\\candidates\\eociv_lite\\exact_dyadic_ledger_identifiability.py",
+    "runtime_runner_file": "C:\\worktrees\\HMASD\\eociv_a8_source_readiness_clean_candidate_20260810_r2\\scripts\\run_eociv_a8_exact_dyadic_ledger_identifiability.py",
+    "source_root": "C:\\worktrees\\HMASD\\eociv_a8_source_readiness_clean_candidate_20260810_r2"
+  },
+  "source_snapshot": {
+    "digest": "4126ac43fa8eb755a804b1ed273371250c80ea6a644f4700fdeb3ac0b333dc39",
+    "manifest_locator": null,
+    "manifest_present": false
+  },
+  "target_version_id": "CAND-VAP-EOCIV-LITE@adversarial-revision-v8",
+  "terminal_branch": "A8_INVALID_SOURCE_OR_ACTIVITY_CONTRACT",
+  "treatment_id": "EOCIV-A8-EXACT-DYADIC-LEDGER-IDENTIFIABILITY-PROOF"
+}

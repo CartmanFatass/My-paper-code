@@ -205,8 +205,18 @@ class UAVBeliefMapEnv(ParallelEnv, RelayChannelGeometry):
         self.obs_dim = 3 + 3 + 4 + max_observed_users * 4 + max_observed_uavs * 4 + max_observed_bs * 4 + 1
         self.observation_spaces = {
             agent: Dict({
-                "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
-                "action_mask": Box(low=0, high=1, shape=(3,))
+                "obs": Box(
+                    low=-float('inf'),
+                    high=float('inf'),
+                    shape=(self.obs_dim,),
+                    dtype=np.float32,
+                ),
+                "action_mask": Box(
+                    low=0,
+                    high=1,
+                    shape=(3,),
+                    dtype=np.float32,
+                )
             }) for agent in self.possible_agents
         }
         self.action_spaces = {
@@ -2099,10 +2109,12 @@ class UAVBeliefMapEnv(ParallelEnv, RelayChannelGeometry):
         obs_components.append(step_normalized)
         
         # 组合所有观测
-        obs = np.concatenate(obs_components)
+        obs_dtype = self.observation_spaces[agent].spaces["obs"].dtype
+        obs = np.asarray(np.concatenate(obs_components), dtype=obs_dtype)
         
         # 动作掩码（这里我们不限制动作，所以全为1）
-        action_mask = np.ones(3)
+        action_mask_dtype = self.observation_spaces[agent].spaces["action_mask"].dtype
+        action_mask = np.ones((3,), dtype=action_mask_dtype)
         
         return {"obs": obs, "action_mask": action_mask}
 

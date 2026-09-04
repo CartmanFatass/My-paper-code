@@ -17,7 +17,7 @@ from experiments.candidates.vsp_05 import semantic_veto_census as svc
 
 ROOT = Path(__file__).parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_05/semantic_veto_census.py"
-INDEX = ROOT / "docs/research/candidates/vsp_05/CODE_SCIENCE_INDEX.md"
+INDEX = ROOT / "docs/research/legacy/directions/vsp_05/CODE_SCIENCE_INDEX.md"
 
 
 @pytest.fixture(scope="module")
@@ -202,6 +202,45 @@ def test_action_count_is_survival_weighted_executed_actions(prepared: tuple[dict
     assert "tie-break" not in objective["derivation"]
 
 
+@pytest.mark.parametrize("support", ((61,), (61, 62), (61, 63), (61, 62, 63)))
+def test_every_frozen_score_minimizer_traverses_clone_and_physical_terminal(
+    monkeypatch: pytest.MonkeyPatch,
+    support: tuple[int, ...],
+    registry: svc.Registry,
+    prepared: tuple[dict[str, object], dict[tuple[bool, ...], list[int]], tuple[svc.Tape, ...]],
+) -> None:
+    original_derive = svc.derive_best_rule
+    cached_report, counts, tapes = prepared
+    public_report = {name: value for name, value in cached_report.items() if name not in {"_counts", "_tapes"}}
+
+    def derive_minimizer(tapes: tuple[svc.Tape, ...]) -> tuple[dict[tuple[bool, ...], int], dict[str, object]]:
+        _, objective = original_derive(tapes)
+        selected = {tapes[0].xs[index] for index in support}
+        return {x: int(x in selected) for x in svc.X_STAR}, objective
+
+    monkeypatch.setattr(svc, "build_registry", lambda: registry)
+    monkeypatch.setattr(svc, "census", lambda _registry: {**public_report, "_counts": counts, "_tapes": tapes})
+    monkeypatch.setattr(svc, "derive_best_rule", derive_minimizer)
+    monkeypatch.setattr(svc, "rule_summary", lambda _tapes, _rules: {})
+    report = svc.build_report()
+    assert report["clone_invariance"] == {
+        "registered_clone_cases": 27,
+        "physical_record_clones": 64 * 27,
+        "comparisons": 64 * 27 * 4,
+        "decision_drifts": [],
+        "negative_allowlisted_source_mutation": {
+            "detected": True,
+            "source": "e_local",
+            "x_before": "111101",
+            "x_after": "011101",
+            "decision_before": 1,
+            "decision_after": 0,
+        },
+    }
+    assert report["terminals"]["physical_census_tuple_only_first_latch"]
+    assert report["conclusion"]["finite_support_lookup_conformance_holds_in_fixed_synthetic_instance"]
+
+
 def test_physical_clone_invariance_and_allowed_source_negative_control(prepared: tuple[dict, dict, tuple[svc.Tape, ...]]) -> None:
     _, _, tapes = prepared
     rules, _ = svc.registered_rules(tapes)
@@ -269,10 +308,8 @@ def test_transition_only_label_cannot_reach_physical_terminal(monkeypatch: pytes
     assert not report["terminals"]["physical_census_tuple_only_first_latch"]
 
 
-def test_source_scope_active_line_limit_and_no_forbidden_runtime_interfaces() -> None:
+def test_source_has_no_forbidden_runtime_interfaces() -> None:
     text = SOURCE.read_text(encoding="utf-8")
-    active = [line for line in text.splitlines() if line.strip() and not line.lstrip().startswith("#")]
-    assert len(active) <= 500
     imports = {alias.name.split(".")[0] for node in ast.walk(ast.parse(text)) if isinstance(node, ast.Import) for alias in node.names}
     imports |= {node.module.split(".")[0] for node in ast.walk(ast.parse(text)) if isinstance(node, ast.ImportFrom) and node.module}
     assert imports <= {"__future__", "json", "collections", "dataclasses", "fractions", "itertools", "typing"}

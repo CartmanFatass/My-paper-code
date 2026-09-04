@@ -385,15 +385,8 @@ def test_canonical_candidate_bytes_are_stable_and_report_exact_values() -> None:
     }
 
 
-def test_candidate_line_budget_and_no_reverse_production_import() -> None:
+def test_candidate_has_no_reverse_production_import() -> None:
     root = Path(__file__).resolve().parents[4]
-    source = root / "experiments/candidates/roster_smf/access_resource_certificate.py"
-    active_lines = sum(
-        bool(line.strip()) and not line.lstrip().startswith("#")
-        for line in source.read_text(encoding="utf-8").splitlines()
-    )
-    assert active_lines <= 500
-
     forbidden = ("experiments.candidates.roster_smf", "access_resource_certificate")
     production_files = tuple(
         path

@@ -1,0 +1,69 @@
+{
+  "paper_id": "P10",
+  "pdf_pages": 33,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Abstract and Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Mean-Field Game Formalization",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Operators and Exact PMA",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        5
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Sample-Based Learning with N Agents",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Main Results",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        8
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Discussion and References",
+      "level": 1,
+      "pdf_pages": [
+        9,
+        11
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        12,
+        33
+      ]
+    }
+  ]
+}

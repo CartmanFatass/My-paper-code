@@ -1,0 +1,68 @@
+{
+  "paper_id": "P08",
+  "citation_key": "yang2018meanfield",
+  "title": "Mean Field Multi-Agent Reinforcement Learning",
+  "authors": [
+    "Yaodong Yang",
+    "Rui Luo",
+    "Minne Li",
+    "Ming Zhou",
+    "Weinan Zhang",
+    "Jun Wang"
+  ],
+  "year": 2018,
+  "venue": "Proceedings of the 35th International Conference on Machine Learning (PMLR 80)",
+  "version": "ICML 2018 paper",
+  "source_pdf": "docs/new-libs/papers/P08_Yang_MeanField_MARL_ICML2018.pdf",
+  "pdf_pages": 10,
+  "text_extractable_pages": 10,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "doi": null,
+  "arxiv": null,
+  "source_urls": [
+    "https://proceedings.mlr.press/v80/yang18d.html"
+  ],
+  "primary_topics": [
+    "mean-field MARL",
+    "large populations",
+    "neighbor-action aggregation"
+  ],
+  "method_families": [
+    "mean-field Q-learning",
+    "mean-field actor-critic",
+    "CTDE"
+  ],
+  "problem_classes": [
+    "homogeneous many-agent games",
+    "mixed cooperative-competitive games"
+  ],
+  "evidence_types": [
+    "convergence argument",
+    "empirical evaluation"
+  ],
+  "hmasd_axes": [
+    "variable_N",
+    "foundations",
+    "credit"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P08/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P08/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P08/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P08/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P08/chunks"
+  },
+  "chunk_count": 4,
+  "content_fingerprint": "sha256:0655475afb5cce4be4c534d0bef3471f69b389319827b0684b25aa7a5d718e84"
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hmasd_engineering_state",
+  "title": "HMASD current CM milestone snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "direction", "role", "revision", "updated_at", "milestone", "snapshot_state",
+    "completed_summary", "refs", "blockers", "reentry_condition", "next_action",
+    "worktree", "branch", "changed_paths", "verification_summary", "run"
+  ],
+  "properties": {
+    "direction": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,127}$"},
+    "role": {"const": "CM"},
+    "revision": {"type": "integer", "minimum": 1},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "milestone": {"enum": ["SCOPE_FROZEN", "CANDIDATE_READY", "REVIEW_RESOLVED", "RUN_OR_HANDOFF_READY"]},
+    "snapshot_state": {"enum": ["WORKING", "WAITING_REENTRY", "TERMINAL_GAP", "COMPLETE"]},
+    "completed_summary": {"type": "string", "minLength": 1},
+    "refs": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "blockers": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "reentry_condition": {"type": ["string", "null"]},
+    "next_action": {"type": "string", "minLength": 1},
+    "worktree": {"type": ["string", "null"]},
+    "branch": {"type": ["string", "null"]},
+    "changed_paths": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+    "verification_summary": {"type": "string"},
+    "run": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["run_id", "status", "manifest", "result"],
+          "properties": {
+            "run_id": {"$ref": "#/$defs/text"},
+            "status": {"enum": ["PREPARED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "UNKNOWN"]},
+            "manifest": {"$ref": "#/$defs/text"},
+            "result": {"type": ["string", "null"]}
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "WAITING_REENTRY"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {"properties": {"reentry_condition": {"$ref": "#/$defs/text"}}},
+      "else": {"properties": {"reentry_condition": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {"snapshot_state": {"const": "COMPLETE"}},
+        "required": ["snapshot_state"]
+      },
+      "then": {
+        "properties": {"milestone": {"const": "RUN_OR_HANDOFF_READY"}}
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "snapshot_state": {"enum": ["TERMINAL_GAP", "COMPLETE"]}
+        },
+        "required": ["snapshot_state"]
+      },
+      "then": {
+        "properties": {
+          "run": {
+            "not": {
+              "type": "object",
+              "properties": {"status": {"enum": ["RUNNING", "UNKNOWN"]}},
+              "required": ["status"]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {"text": {"type": "string", "minLength": 1}}
+}

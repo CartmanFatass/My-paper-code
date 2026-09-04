@@ -1,0 +1,19 @@
+{
+  "bounded_workload": true,
+  "device": "cpu",
+  "environments": 8,
+  "iterations": 200,
+  "legacy_median_seconds": 0.0065068000003520865,
+  "machine": "AMD64",
+  "oracle_equal": true,
+  "packed_is_faster": false,
+  "packed_median_seconds": 0.010141000002477085,
+  "packed_speedup": 0.641632974929761,
+  "production_default": "legacy",
+  "promotion_allowed": false,
+  "python": "3.10.20",
+  "repeats": 31,
+  "rows": 64,
+  "schema": "hmasd.variable_roster_low_step_host_transfer_benchmark.v1",
+  "torch_version": "2.7.0+cpu"
+}

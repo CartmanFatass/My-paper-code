@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RISP-ECR-R01-SPEC-V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "direction_id", "binding_class", "native_registry_key", "zero_learning",
+    "actions", "acks", "tie_order", "controllers", "host", "support", "acceptance",
+    "resources", "artifact"
+  ],
+  "properties": {
+    "schema": {"const": "RISP-ECR-R01-SPEC-V1"},
+    "direction_id": {"const": "renewal_indexed_score_plasticity"},
+    "binding_class": {"const": "REGISTERED"},
+    "native_registry_key": {"const": "RISP_ECR_R01_EXACT_EVENT_HOST_V1"},
+    "zero_learning": {"type": "object"},
+    "actions": {"const": ["LEFT", "CENTER", "RIGHT"]},
+    "acks": {"const": ["+", "-"]},
+    "tie_order": {"const": ["LEFT", "CENTER", "RIGHT"]},
+    "controllers": {"const": ["RAW_HISTORY_BAYES", "FULL_BAYES_K", "FULL_BAYES_K_ERASED", "LAST_ACK_BAYES", "LAST_ACK_G"]},
+    "host": {"type": "object"},
+    "support": {
+      "type": "object",
+      "required": ["reference_action_law", "full_support_required", "twin_side_weight", "twins"],
+      "properties": {
+        "reference_action_law": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/rational"}},
+        "full_support_required": {"const": true},
+        "twin_side_weight": {"const": [1, 2]},
+        "twins": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"$ref": "#/$defs/twin"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "acceptance": {"type": "object"},
+    "resources": {"type": "object"},
+    "artifact": {"type": "object"}
+  },
+  "$defs": {
+    "rational": {
+      "type": "array",
+      "prefixItems": [{"type": "integer"}, {"type": "integer", "minimum": 1}],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["side", "population_weight", "expected_raw_action", "history"],
+      "properties": {
+        "side": {"enum": ["A", "B"]},
+        "population_weight": {"const": [1, 2]},
+        "expected_raw_action": {"enum": ["LEFT", "CENTER", "RIGHT"]},
+        "history": {"type": "object"}
+      }
+    },
+    "twin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["twin_id", "coarsened_controller", "rows"],
+      "properties": {
+        "twin_id": {"enum": ["PRIOR_HISTORY_ACK_TWIN", "DURATION_ORDER_TWIN"]},
+        "coarsened_controller": {"enum": ["LAST_ACK_BAYES", "FULL_BAYES_K_ERASED"]},
+        "rows": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/row"}}
+      }
+    }
+  }
+}

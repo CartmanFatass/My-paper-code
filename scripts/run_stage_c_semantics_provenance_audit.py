@@ -32,7 +32,7 @@ for search_root in (PROJECT_ROOT, SCRIPT_ROOT):
 import numpy as np
 import torch
 
-from analyze_stage_c_skill_semantics import (
+from tools.analysis.analyze_stage_c_skill_semantics import (
     DELTA,
     DELTA_STRATUM,
     LINEAGE_THRESHOLD,

@@ -3,9 +3,15 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import io
+import json
 import re
 import argparse
+import os
+import tempfile
 import warnings
+from collections import OrderedDict
 from pathlib import Path
 from typing import Any
 
@@ -557,6 +563,9 @@ UPDATE_FIELDS = (
 EVAL_FIELDS = (
     "checkpoint",
     "total_steps",
+    "eval_step",
+    "run_seed",
+    "seed",
     "episode",
     "reset_seed",
     "action_mode_code",
@@ -644,21 +653,29 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
                 metrics[canonical] = scalar
                 break
     throughput = metrics.get("system_throughput_mbps")
-    served_backhaul = metrics.get(
-        "current_backhaul_served_users",
-        metrics.get("effective_connected_users", metrics.get("served_users", 0.0)),
+    served_backhaul = next(
+        (
+            metrics[key]
+            for key in (
+                "current_backhaul_served_users",
+                "effective_connected_users",
+                "served_users",
+            )
+            if key in metrics
+        ),
+        None,
     )
-    full_disconnect = metrics.get("full_network_disconnect", 0.0)
-    outage_ratio = metrics.get("backhaul_outage_ratio", 0.0)
-    backhaul_connected = (
-        served_backhaul is not None
-        and float(served_backhaul) > 0.0
-        and float(full_disconnect) < 0.5
-        and float(outage_ratio) < 0.999
-    )
-    metrics["backhaul_connected_flag"] = 1.0 if backhaul_connected else 0.0
-    if throughput is not None and backhaul_connected:
-        metrics["throughput_when_backhaul_connected_mbps"] = float(throughput)
+    full_disconnect = metrics.get("full_network_disconnect")
+    outage_ratio = metrics.get("backhaul_outage_ratio")
+    if served_backhaul is not None and full_disconnect is not None and outage_ratio is not None:
+        backhaul_connected = (
+            float(served_backhaul) > 0.0
+            and float(full_disconnect) < 0.5
+            and float(outage_ratio) < 0.999
+        )
+        metrics["backhaul_connected_flag"] = 1.0 if backhaul_connected else 0.0
+        if throughput is not None and backhaul_connected:
+            metrics["throughput_when_backhaul_connected_mbps"] = float(throughput)
     return metrics
 
 
@@ -666,19 +683,74 @@ def moving_average(values: np.ndarray, window: int) -> np.ndarray:
     values = np.asarray(values, dtype=float)
     if values.size == 0:
         return values
+    if not np.isfinite(values).all():
+        result = np.full_like(values, np.nan, dtype=float)
+        finite = np.isfinite(values)
+        starts = np.flatnonzero(finite & np.concatenate(([True], ~finite[:-1])))
+        stops = np.flatnonzero(finite & np.concatenate((~finite[1:], [True]))) + 1
+        for start, stop in zip(starts, stops):
+            result[start:stop] = moving_average(values[start:stop], window)
+        return result
     window = max(1, min(int(window), values.size))
     kernel = np.ones(window, dtype=float) / float(window)
     return np.convolve(values, kernel, mode="same")
 
 
-def _series(records: list[dict[str, float]], key: str) -> tuple[np.ndarray, np.ndarray]:
-    xs = []
-    ys = []
+def _numeric(value: Any) -> float | None:
+    if isinstance(value, bool):
+        return float(value)
+    if not isinstance(value, (int, float, np.number)):
+        return None
+    result = float(value)
+    return result if np.isfinite(result) else None
+
+
+def _record_group(record: dict[str, Any]) -> tuple[str, str, str, str]:
+    checkpoint = record.get("checkpoint")
+    eval_step = record.get("eval_step", record.get("total_steps"))
+    run_seed = record.get("run_seed")
+    seed = record.get("seed", record.get("reset_seed"))
+    missing = [
+        name
+        for name, value in (
+            ("checkpoint", checkpoint),
+            ("eval_step", eval_step),
+            ("run_seed", run_seed),
+            ("seed", seed),
+        )
+        if value in (None, "")
+    ]
+    if missing:
+        raise ValueError(f"evaluation row is missing grouping identifiers: {missing}")
+    return str(checkpoint), str(eval_step), str(run_seed), str(seed)
+
+
+def _series(records: list[dict[str, Any]], key: str) -> tuple[np.ndarray, np.ndarray]:
+    """Return numeric series with NaN separators between evaluation identities."""
+
+    grouped: OrderedDict[tuple[str, str, str, str], list[tuple[float, float]]] = OrderedDict()
+    eval_records = any("episode" in record for record in records)
     for idx, record in enumerate(records):
-        if key not in record:
+        value = _numeric(record.get(key))
+        if value is None:
             continue
-        xs.append(record.get("total_steps", idx + 1))
-        ys.append(record[key])
+        x = _numeric(record.get("total_steps", record.get("eval_step", idx + 1)))
+        if x is None:
+            continue
+        group = (
+            _record_group(record)
+            if eval_records
+            else ("train", "train", "train", "train")
+        )
+        grouped.setdefault(group, []).append((x, value))
+    xs: list[float] = []
+    ys: list[float] = []
+    for values in grouped.values():
+        if xs:
+            xs.append(float("nan"))
+            ys.append(float("nan"))
+        xs.extend(value[0] for value in values)
+        ys.extend(value[1] for value in values)
     return np.asarray(xs, dtype=float), np.asarray(ys, dtype=float)
 
 
@@ -1030,13 +1102,157 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
     fig.savefig(log_dir / "ha_ctse_topology_role_fields.png", dpi=180)
     plt.close(fig)
 
-def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
+
+EVAL_PLOT_MODES = ("reference", "optimized")
+# Promoted after the fixed-machine 31-sample gate appended one complete eval
+# group to independent reference/optimized files before every sample, then
+# established exact final-record/PNG equivalence and a lower optimized median.
+# ``reference`` remains explicit for regression checks and rebuilds.
+EVAL_PLOT_DEFAULT_MODE = "optimized"
+_EVAL_RECORD_CACHE: dict[Path, dict[str, Any]] = {}
+_EVAL_RENDER_CACHE: dict[tuple[Path, int], tuple[str, tuple[tuple[Path, str], ...]]] = {}
+
+
+def _eval_sidecar_path(csv_path: Path) -> Path:
+    return csv_path.with_name(f"{csv_path.name}.plot-cache.json")
+
+
+def _coerce_csv_row(row: dict[str, str]) -> dict[str, float | str]:
+    record: dict[str, float | str] = {}
+    for key, value in row.items():
+        if value in (None, ""):
+            continue
+        try:
+            record[key] = float(value)
+        except ValueError:
+            record[key] = value
+    return record
+
+
+def _parse_appended_csv(header: str, payload: bytes) -> list[dict[str, float | str]]:
+    if not payload:
+        return []
+    text = header + "\n" + payload.decode("utf-8")
+    return [
+        record
+        for row in csv.DictReader(io.StringIO(text, newline=""))
+        if (record := _coerce_csv_row(row))
+    ]
+
+
+def _write_eval_sidecar(csv_path: Path, state: dict[str, Any]) -> None:
+    sidecar = _eval_sidecar_path(csv_path)
+    payload = {
+        "schema_version": 1,
+        "csv_path": str(csv_path.resolve()),
+        "byte_offset": int(state["byte_offset"]),
+        "prefix_sha256": str(state["prefix_sha256"]),
+        "series_keys": sorted({key for row in state["records"] for key in row}),
+        "last_checkpoint": next(
+            (str(row["checkpoint"]) for row in reversed(state["records"]) if "checkpoint" in row),
+            None,
+        ),
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    temp_name: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w+b", prefix=f".{sidecar.name}.", suffix=".tmp", dir=sidecar.parent, delete=False
+        ) as temp:
+            temp_name = temp.name
+            temp.write(encoded)
+            temp.flush()
+            os.fsync(temp.fileno())
+        os.replace(temp_name, sidecar)
+        temp_name = None
+    finally:
+        if temp_name is not None:
+            try:
+                os.unlink(temp_name)
+            except FileNotFoundError:
+                pass
+
+
+def load_eval_plot_records(
+    csv_path: str | Path, *, mode: str = EVAL_PLOT_DEFAULT_MODE
+) -> list[dict[str, float | str]]:
+    """Load evaluation rows through an explicit reference or incremental path."""
+
+    if mode not in EVAL_PLOT_MODES:
+        raise ValueError(f"unknown eval plot mode {mode!r}; expected one of {EVAL_PLOT_MODES}")
+    path = Path(csv_path).resolve()
+    if mode == "reference":
+        return read_csv_records(path)
+    if not path.exists():
+        return []
+
+    raw = path.read_bytes()
+    if not raw:
+        return []
+    cached = _EVAL_RECORD_CACHE.get(path)
+    if cached is not None:
+        offset = int(cached["byte_offset"])
+        if len(raw) < offset:
+            raise RuntimeError("eval CSV was truncated while incremental plotting state was live")
+        prefix_digest = hashlib.sha256(raw[:offset]).hexdigest()
+        if prefix_digest != cached["prefix_sha256"]:
+            raise RuntimeError("eval CSV prefix changed; refusing stale incremental plot state")
+        if len(raw) == offset:
+            return cached["records"]
+        cached["records"].extend(_parse_appended_csv(cached["header"], raw[offset:]))
+        cached["byte_offset"] = len(raw)
+        cached["prefix_sha256"] = hashlib.sha256(raw).hexdigest()
+        _write_eval_sidecar(path, cached)
+        return cached["records"]
+
+    sidecar_path = _eval_sidecar_path(path)
+    if sidecar_path.exists():
+        metadata = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        if metadata.get("schema_version") != 1 or metadata.get("csv_path") != str(path):
+            raise RuntimeError("eval plot sidecar identity mismatch")
+        offset = int(metadata.get("byte_offset", -1))
+        if offset < 0 or offset > len(raw):
+            raise RuntimeError("eval plot sidecar offset is outside the CSV")
+        if hashlib.sha256(raw[:offset]).hexdigest() != metadata.get("prefix_sha256"):
+            raise RuntimeError("eval plot sidecar prefix digest mismatch")
+
+    header = raw.splitlines()[0].decode("utf-8") if raw else ""
+    records = read_csv_records(path)
+    state = {
+        "header": header,
+        "records": records,
+        "byte_offset": len(raw),
+        "prefix_sha256": hashlib.sha256(raw).hexdigest(),
+    }
+    _EVAL_RECORD_CACHE[path] = state
+    _write_eval_sidecar(path, state)
+    return records
+
+
+def save_eval_plots(
+    log_dir: str | Path,
+    window: int = 5,
+    *,
+    mode: str | None = None,
+) -> None:
     if plt is None:
         return
     log_dir = Path(log_dir)
-    records = read_csv_records(log_dir / "metrics" / "eval_episodes.csv")
+    selected_mode = EVAL_PLOT_DEFAULT_MODE if mode is None else mode
+    csv_path = (log_dir / "metrics" / "eval_episodes.csv").resolve()
+    records = load_eval_plot_records(csv_path, mode=selected_mode)
     if not records:
         return
+    render_key = (log_dir.resolve(), int(window))
+    render_signature = hashlib.sha256(csv_path.read_bytes()).hexdigest()
+    if selected_mode == "optimized" and render_key in _EVAL_RENDER_CACHE:
+        cached_signature, outputs = _EVAL_RENDER_CACHE[render_key]
+        outputs_valid = outputs and all(
+            path.exists() and hashlib.sha256(path.read_bytes()).hexdigest() == digest
+            for path, digest in outputs
+        )
+        if cached_signature == render_signature and outputs_valid:
+            return
 
     fig, ax = plt.subplots(figsize=(12, 6))
     x, reward = _series(records, "reward")
@@ -1225,6 +1441,13 @@ def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
         fig.savefig(log_dir / "eval_backhaul_capacity_guard.png", dpi=180)
     plt.close(fig)
 
+    outputs = tuple(
+        (path, hashlib.sha256(path.read_bytes()).hexdigest())
+        for path in sorted(log_dir.glob("eval_*.png"))
+    )
+    if selected_mode == "optimized":
+        _EVAL_RENDER_CACHE[render_key] = (render_signature, outputs)
+
 
 LOG_KEY_ALIASES = {
     "duration_only_acc": "duration_only_accuracy",
@@ -1392,12 +1615,17 @@ def main() -> None:
     parser.add_argument("--log_dir", required=True)
     parser.add_argument("--from_log", action="store_true")
     parser.add_argument("--window", type=int, default=5)
+    parser.add_argument(
+        "--eval-plot-mode",
+        choices=EVAL_PLOT_MODES,
+        default=EVAL_PLOT_DEFAULT_MODE,
+    )
     args = parser.parse_args()
     if args.from_log:
         rows = parse_standalone_train_log(args.log_dir)
         print(f"parsed_updates={len(rows)} log_dir={args.log_dir}")
     save_update_plots(args.log_dir, window=args.window)
-    save_eval_plots(args.log_dir, window=args.window)
+    save_eval_plots(args.log_dir, window=args.window, mode=args.eval_plot_mode)
 
 
 if __name__ == "__main__":

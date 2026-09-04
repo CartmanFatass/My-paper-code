@@ -1,0 +1,2386 @@
+{
+  "conclusion": "CLOSED_LOOP_PATTERN_SURVIVES_THIS_PHASE_SHIFT. Exact historical-control reuse passed, but the single frozen 20-to-19 temporary-leave treatment did not open clean two-sided real support. Paired state/frontier occupancy changed while incumbent-bearing truth remained incumbent-only and actual-proposal strict truth remained zero; the exact toy learner route must therefore be parked under the preregistered finite search budget.",
+  "treatment": "VSP05-A2-LIFECYCLE-PHASE-SUPPORT-DISCRIMINATION",
+  "candidate_id": "CAND-VSP-05@adversarial-revision-v7",
+  "primary_direction": "CAND-VSP-05@adversarial-revision-v7",
+  "stage": "experiment",
+  "evidence_level": "A_REAL_RUNTIME_INSTANCE_DISCRIMINATOR",
+  "implementation_source_commit": "e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a",
+  "run_identity": "vsp05_a2_lifecycle_phase_support_e40d1ed7_r1",
+  "formal": false,
+  "route": "DET_GATE_ONLY",
+  "terminal_label": "CLOSED_LOOP_PATTERN_SURVIVES_THIS_PHASE_SHIFT",
+  "historical_control_reuse_passed": true,
+  "clean_two_sided_real_support_opened": false,
+  "toy_route_must_park": true,
+  "operator_terminal": "COMPLETE",
+  "technical_acceptance": "ACCEPTED",
+  "control_binding": {
+    "reuse_mode": "IMMUTABLE_ACCEPTED_A1_FULL_CONTROL",
+    "source_commit": "1a09bccf9bd64c756865531bc55a871afa286dd3",
+    "public_result_commit": "9f3c57f809a0c0ee11868e025adbeea762832a46",
+    "raw_path": "logs/vsp05_a1_truth_reachability_1a09bccf_r1/raw_result.json",
+    "raw_sha256": "d4ba7e00ae65c4f0cfd6f84b37c300e9e580868c42bd3c3f02eff20b0b3a3f2e",
+    "full_control_rerun": false
+  },
+  "scientific_delta": {
+    "K_search": 0,
+    "changed_fields": [
+      "temporary_leave_physical_time"
+    ],
+    "control_leave_time": 20,
+    "hypothetical_environment_transitions": 0,
+    "rejoin_time": 40,
+    "treatment_leave_time": 19
+  },
+  "counts": {
+    "cells": 6,
+    "task_seeds": 3,
+    "episodes_per_seed_per_cell": 24,
+    "episodes": 432,
+    "horizon": 80,
+    "environment_transitions": 34560,
+    "proposal_policy_calls_and_real_frontier_rows": 15896,
+    "supplied_executor_calls": 34560,
+    "variable_roster_event_core_transactions": 34560,
+    "trace_hook_calls": 34560,
+    "learner_calls": 0,
+    "trainer_calls": 0,
+    "optimizer_updates": 0,
+    "hypothetical_environment_transitions": 0
+  },
+  "configuration": {
+    "cells": [
+      "REFERENCE",
+      "THRESHOLD_MID",
+      "THRESHOLD_NEAR_GATE",
+      "DRIVE_HIGH",
+      "STEP_HIGH",
+      "DRIVE_STEP_HIGH"
+    ],
+    "episode_namespace_unchanged": true,
+    "episodes_per_seed_cell": 24,
+    "horizon": 80,
+    "name": "full",
+    "steps": 80,
+    "task_seeds": [
+      68101,
+      68102,
+      68103
+    ]
+  },
+  "real_activity": {
+    "environment": true,
+    "hypothetical_environment": false,
+    "learner": false,
+    "optimizer": false,
+    "proposal_policy": true,
+    "supplied_executor": true,
+    "trainer": false,
+    "variable_roster_event_core": true
+  },
+  "technical_equivalence": {
+    "cap": 82,
+    "technical_only": true,
+    "scientific_terminal_admitted": false,
+    "all_checks_passed": true,
+    "checks": {
+      "absence_window_is_t19_through_t39": true,
+      "control_treated_keys_active_and_incumbent_bearing": true,
+      "decision_trace_equal_through_t18": true,
+      "environment_ledgers_equal": true,
+      "exactly_one_relative_primitive_skip_each": true,
+      "frontier_rows_equal_through_t18": true,
+      "incumbent_not_reset_at_rejoin": true,
+      "leave_and_rejoin_audited": true,
+      "primitive_trace_equal_through_t18": true,
+      "reward_trace_equal_through_t18": true,
+      "state_did_not_advance_while_absent": true,
+      "treatment_omits_exactly_two_primitive_actions": true,
+      "unchanged_key_actions_equal_at_t19": true
+    }
+  },
+  "matching_receipt": {
+    "all_control_treated_lineages_active_and_incumbent_bearing_at_t19": true,
+    "causal_separation_begins_at_t19": true,
+    "compared_frontier_rows_through_t18": 4435,
+    "control_equal_through_t18": true,
+    "control_t19_proof": "initial lifecycle remained active before the registered control leave at t20, and its accepted t40 rejoin retained a non-null incumbent across the absence",
+    "episode_namespace_identity_preserved": true,
+    "exogenous_ledger_identity_preserved": true
+  },
+  "schedule_delta_receipt": {
+    "control_leave_time": 20,
+    "event_collisions": 0,
+    "leave_shift_rows": 864,
+    "other_membership_deltas": 0,
+    "rejoin_time": 40,
+    "treatment_leave_time": 19,
+    "unchanged_rejoin_rows": 864
+  },
+  "lineage_receipt": {
+    "all_treatment_incumbents_preserved_at_rejoin": true,
+    "all_treatment_state_frozen_while_absent": true,
+    "incumbent_mismatch_due_to_suppression": 1,
+    "known_lineage": {
+      "cell": "STEP_HIGH",
+      "complete_mask": {
+        "actual_proposal_gate": true,
+        "different_successor": true,
+        "eligible_strict_truth": false,
+        "frontier_present": true,
+        "incumbent_present": true,
+        "truth_actual_proposal": false,
+        "truth_any_skill": true,
+        "truth_non_incumbent_skill": false
+      },
+      "control_real_frontier_id": "STEP_HIGH:68102:20401022:19:1:3",
+      "different_successor": true,
+      "episode_id": 20401022,
+      "incumbent": 1,
+      "lifecycle_key": "1",
+      "position": 0.1867071970152665,
+      "proposal": 2,
+      "proposal_gate": true,
+      "proposal_strict_truth": false,
+      "suppression_changes_time40_incumbent": true,
+      "task_seed": 68102,
+      "treatment_control_t40_incumbent_match": false,
+      "treatment_t19_proposal_suppressed": true,
+      "truth_skill_set": [
+        1
+      ],
+      "velocity": 0.001409427528415108
+    },
+    "paired_t40_rejoins": 864,
+    "primitive_skips": 864,
+    "suppressed_control_t19_proposals": 88
+  },
+  "outcome_counts": {
+    "ambiguous_mismatch_lineage_eligible_strict_truth": 0,
+    "clean_eligible_strict_truth": 0,
+    "eligible_strict_truth": 0,
+    "gated_alias_different_successor": 137,
+    "paired_rejoin_separation": 864,
+    "truth_actual_proposal": 0,
+    "truth_non_incumbent_skill": 0
+  },
+  "complete_zero_retaining_predicate_tables": {
+    "by_actual_proposal": [
+      {
+        "actual_proposal": 0,
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 12781,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 12472,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "actual_proposal": 1,
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 106,
+        "real_frontier_rows": 106,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "actual_proposal": 2,
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 31,
+        "real_frontier_rows": 3009,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2990,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_cell": [
+      {
+        "cell": "REFERENCE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 29,
+        "real_frontier_rows": 2681,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2565,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_MID",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 25,
+        "real_frontier_rows": 2623,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2556,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_NEAR_GATE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 20,
+        "real_frontier_rows": 2604,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2565,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 2660,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2593,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 63,
+        "real_frontier_rows": 2650,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2558,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 2678,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2625,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_cell_seed": [
+      {
+        "cell": "REFERENCE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 10,
+        "real_frontier_rows": 899,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 857,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "REFERENCE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 12,
+        "real_frontier_rows": 888,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 855,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "REFERENCE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 7,
+        "real_frontier_rows": 894,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 853,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_MID",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 5,
+        "real_frontier_rows": 881,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 861,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_MID",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 12,
+        "real_frontier_rows": 876,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 846,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_MID",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 8,
+        "real_frontier_rows": 866,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 849,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_NEAR_GATE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 7,
+        "real_frontier_rows": 892,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 876,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_NEAR_GATE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 5,
+        "real_frontier_rows": 843,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 833,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "THRESHOLD_NEAR_GATE",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 8,
+        "real_frontier_rows": 869,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 856,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 871,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 853,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 894,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 875,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 895,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 865,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 17,
+        "real_frontier_rows": 889,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 861,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 24,
+        "real_frontier_rows": 877,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 845,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 22,
+        "real_frontier_rows": 884,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 852,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 889,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 870,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 904,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 886,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "cell": "DRIVE_STEP_HIGH",
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 885,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 869,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_incumbent": [
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "incumbent_skill": null,
+        "real_frontier_rows": 2592,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2592,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "incumbent_skill": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 31,
+        "incumbent_skill": 1,
+        "real_frontier_rows": 417,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 398,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 106,
+        "incumbent_skill": 2,
+        "real_frontier_rows": 12887,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 12472,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_lifecycle_category": [
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "lifecycle_category": "JOIN",
+        "real_frontier_rows": 2592,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2592,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 3,
+        "lifecycle_category": "REJOIN",
+        "real_frontier_rows": 864,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 864,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 134,
+        "lifecycle_category": "SURVIVOR",
+        "real_frontier_rows": 12440,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 12006,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_seed": [
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 39,
+        "real_frontier_rows": 5321,
+        "task_seed": 68101,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 5178,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 53,
+        "real_frontier_rows": 5282,
+        "task_seed": 68102,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 5140,
+        "truth_non_incumbent_skill": 0
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 45,
+        "real_frontier_rows": 5293,
+        "task_seed": 68103,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 5144,
+        "truth_non_incumbent_skill": 0
+      }
+    ],
+    "by_semantic_near_miss": [
+      {
+        "count": 0,
+        "semantic_near_miss_class": "ELIGIBLE_STRICT_TRUTH"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 12870,
+        "semantic_near_miss_class": "MISSING:truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 434,
+        "semantic_near_miss_class": "MISSING:truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_any_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 2592,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:different_successor|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_any_skill|truth_non_incumbent_skill"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_any_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|different_successor|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:incumbent_present|different_successor|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      },
+      {
+        "count": 0,
+        "semantic_near_miss_class": "MISSING:frontier_present|incumbent_present|different_successor|truth_any_skill|truth_non_incumbent_skill|truth_actual_proposal"
+      }
+    ],
+    "by_truth_skill_set": [
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 113,
+        "real_frontier_rows": 434,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "NONE"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "0"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 24,
+        "real_frontier_rows": 2990,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 2990,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "1"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 12472,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 12472,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "2"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "0|1"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "0|2"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "1|2"
+      },
+      {
+        "eligible_strict_truth": 0,
+        "gated_alias_different_successor": 0,
+        "real_frontier_rows": 0,
+        "truth_actual_proposal": 0,
+        "truth_any_skill": 0,
+        "truth_non_incumbent_skill": 0,
+        "truth_skill_set_label": "0|1|2"
+      }
+    ],
+    "complete_mask_histogram": [
+      {
+        "count": 0,
+        "mask_bits": "00000000",
+        "mask_code": 0
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000001",
+        "mask_code": 1
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000010",
+        "mask_code": 2
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000011",
+        "mask_code": 3
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000100",
+        "mask_code": 4
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000101",
+        "mask_code": 5
+      },
+      {
+        "count": 0,
+        "mask_bits": "00000110",
+        "mask_code": 6
+      },
+      {
+        "count": 321,
+        "mask_bits": "00000111",
+        "mask_code": 7
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001000",
+        "mask_code": 8
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001001",
+        "mask_code": 9
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001010",
+        "mask_code": 10
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001011",
+        "mask_code": 11
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001100",
+        "mask_code": 12
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001101",
+        "mask_code": 13
+      },
+      {
+        "count": 0,
+        "mask_bits": "00001110",
+        "mask_code": 14
+      },
+      {
+        "count": 113,
+        "mask_bits": "00001111",
+        "mask_code": 15
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010000",
+        "mask_code": 16
+      },
+      {
+        "count": 2592,
+        "mask_bits": "00010001",
+        "mask_code": 17
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010010",
+        "mask_code": 18
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010011",
+        "mask_code": 19
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010100",
+        "mask_code": 20
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010101",
+        "mask_code": 21
+      },
+      {
+        "count": 0,
+        "mask_bits": "00010110",
+        "mask_code": 22
+      },
+      {
+        "count": 12846,
+        "mask_bits": "00010111",
+        "mask_code": 23
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011000",
+        "mask_code": 24
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011001",
+        "mask_code": 25
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011010",
+        "mask_code": 26
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011011",
+        "mask_code": 27
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011100",
+        "mask_code": 28
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011101",
+        "mask_code": 29
+      },
+      {
+        "count": 0,
+        "mask_bits": "00011110",
+        "mask_code": 30
+      },
+      {
+        "count": 24,
+        "mask_bits": "00011111",
+        "mask_code": 31
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100000",
+        "mask_code": 32
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100001",
+        "mask_code": 33
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100010",
+        "mask_code": 34
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100011",
+        "mask_code": 35
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100100",
+        "mask_code": 36
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100101",
+        "mask_code": 37
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100110",
+        "mask_code": 38
+      },
+      {
+        "count": 0,
+        "mask_bits": "00100111",
+        "mask_code": 39
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101000",
+        "mask_code": 40
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101001",
+        "mask_code": 41
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101010",
+        "mask_code": 42
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101011",
+        "mask_code": 43
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101100",
+        "mask_code": 44
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101101",
+        "mask_code": 45
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101110",
+        "mask_code": 46
+      },
+      {
+        "count": 0,
+        "mask_bits": "00101111",
+        "mask_code": 47
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110000",
+        "mask_code": 48
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110001",
+        "mask_code": 49
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110010",
+        "mask_code": 50
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110011",
+        "mask_code": 51
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110100",
+        "mask_code": 52
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110101",
+        "mask_code": 53
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110110",
+        "mask_code": 54
+      },
+      {
+        "count": 0,
+        "mask_bits": "00110111",
+        "mask_code": 55
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111000",
+        "mask_code": 56
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111001",
+        "mask_code": 57
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111010",
+        "mask_code": 58
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111011",
+        "mask_code": 59
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111100",
+        "mask_code": 60
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111101",
+        "mask_code": 61
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111110",
+        "mask_code": 62
+      },
+      {
+        "count": 0,
+        "mask_bits": "00111111",
+        "mask_code": 63
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000000",
+        "mask_code": 64
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000001",
+        "mask_code": 65
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000010",
+        "mask_code": 66
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000011",
+        "mask_code": 67
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000100",
+        "mask_code": 68
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000101",
+        "mask_code": 69
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000110",
+        "mask_code": 70
+      },
+      {
+        "count": 0,
+        "mask_bits": "01000111",
+        "mask_code": 71
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001000",
+        "mask_code": 72
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001001",
+        "mask_code": 73
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001010",
+        "mask_code": 74
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001011",
+        "mask_code": 75
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001100",
+        "mask_code": 76
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001101",
+        "mask_code": 77
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001110",
+        "mask_code": 78
+      },
+      {
+        "count": 0,
+        "mask_bits": "01001111",
+        "mask_code": 79
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010000",
+        "mask_code": 80
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010001",
+        "mask_code": 81
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010010",
+        "mask_code": 82
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010011",
+        "mask_code": 83
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010100",
+        "mask_code": 84
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010101",
+        "mask_code": 85
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010110",
+        "mask_code": 86
+      },
+      {
+        "count": 0,
+        "mask_bits": "01010111",
+        "mask_code": 87
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011000",
+        "mask_code": 88
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011001",
+        "mask_code": 89
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011010",
+        "mask_code": 90
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011011",
+        "mask_code": 91
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011100",
+        "mask_code": 92
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011101",
+        "mask_code": 93
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011110",
+        "mask_code": 94
+      },
+      {
+        "count": 0,
+        "mask_bits": "01011111",
+        "mask_code": 95
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100000",
+        "mask_code": 96
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100001",
+        "mask_code": 97
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100010",
+        "mask_code": 98
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100011",
+        "mask_code": 99
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100100",
+        "mask_code": 100
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100101",
+        "mask_code": 101
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100110",
+        "mask_code": 102
+      },
+      {
+        "count": 0,
+        "mask_bits": "01100111",
+        "mask_code": 103
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101000",
+        "mask_code": 104
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101001",
+        "mask_code": 105
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101010",
+        "mask_code": 106
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101011",
+        "mask_code": 107
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101100",
+        "mask_code": 108
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101101",
+        "mask_code": 109
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101110",
+        "mask_code": 110
+      },
+      {
+        "count": 0,
+        "mask_bits": "01101111",
+        "mask_code": 111
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110000",
+        "mask_code": 112
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110001",
+        "mask_code": 113
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110010",
+        "mask_code": 114
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110011",
+        "mask_code": 115
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110100",
+        "mask_code": 116
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110101",
+        "mask_code": 117
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110110",
+        "mask_code": 118
+      },
+      {
+        "count": 0,
+        "mask_bits": "01110111",
+        "mask_code": 119
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111000",
+        "mask_code": 120
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111001",
+        "mask_code": 121
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111010",
+        "mask_code": 122
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111011",
+        "mask_code": 123
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111100",
+        "mask_code": 124
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111101",
+        "mask_code": 125
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111110",
+        "mask_code": 126
+      },
+      {
+        "count": 0,
+        "mask_bits": "01111111",
+        "mask_code": 127
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000000",
+        "mask_code": 128
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000001",
+        "mask_code": 129
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000010",
+        "mask_code": 130
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000011",
+        "mask_code": 131
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000100",
+        "mask_code": 132
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000101",
+        "mask_code": 133
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000110",
+        "mask_code": 134
+      },
+      {
+        "count": 0,
+        "mask_bits": "10000111",
+        "mask_code": 135
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001000",
+        "mask_code": 136
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001001",
+        "mask_code": 137
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001010",
+        "mask_code": 138
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001011",
+        "mask_code": 139
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001100",
+        "mask_code": 140
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001101",
+        "mask_code": 141
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001110",
+        "mask_code": 142
+      },
+      {
+        "count": 0,
+        "mask_bits": "10001111",
+        "mask_code": 143
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010000",
+        "mask_code": 144
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010001",
+        "mask_code": 145
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010010",
+        "mask_code": 146
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010011",
+        "mask_code": 147
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010100",
+        "mask_code": 148
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010101",
+        "mask_code": 149
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010110",
+        "mask_code": 150
+      },
+      {
+        "count": 0,
+        "mask_bits": "10010111",
+        "mask_code": 151
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011000",
+        "mask_code": 152
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011001",
+        "mask_code": 153
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011010",
+        "mask_code": 154
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011011",
+        "mask_code": 155
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011100",
+        "mask_code": 156
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011101",
+        "mask_code": 157
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011110",
+        "mask_code": 158
+      },
+      {
+        "count": 0,
+        "mask_bits": "10011111",
+        "mask_code": 159
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100000",
+        "mask_code": 160
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100001",
+        "mask_code": 161
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100010",
+        "mask_code": 162
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100011",
+        "mask_code": 163
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100100",
+        "mask_code": 164
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100101",
+        "mask_code": 165
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100110",
+        "mask_code": 166
+      },
+      {
+        "count": 0,
+        "mask_bits": "10100111",
+        "mask_code": 167
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101000",
+        "mask_code": 168
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101001",
+        "mask_code": 169
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101010",
+        "mask_code": 170
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101011",
+        "mask_code": 171
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101100",
+        "mask_code": 172
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101101",
+        "mask_code": 173
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101110",
+        "mask_code": 174
+      },
+      {
+        "count": 0,
+        "mask_bits": "10101111",
+        "mask_code": 175
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110000",
+        "mask_code": 176
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110001",
+        "mask_code": 177
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110010",
+        "mask_code": 178
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110011",
+        "mask_code": 179
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110100",
+        "mask_code": 180
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110101",
+        "mask_code": 181
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110110",
+        "mask_code": 182
+      },
+      {
+        "count": 0,
+        "mask_bits": "10110111",
+        "mask_code": 183
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111000",
+        "mask_code": 184
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111001",
+        "mask_code": 185
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111010",
+        "mask_code": 186
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111011",
+        "mask_code": 187
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111100",
+        "mask_code": 188
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111101",
+        "mask_code": 189
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111110",
+        "mask_code": 190
+      },
+      {
+        "count": 0,
+        "mask_bits": "10111111",
+        "mask_code": 191
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000000",
+        "mask_code": 192
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000001",
+        "mask_code": 193
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000010",
+        "mask_code": 194
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000011",
+        "mask_code": 195
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000100",
+        "mask_code": 196
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000101",
+        "mask_code": 197
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000110",
+        "mask_code": 198
+      },
+      {
+        "count": 0,
+        "mask_bits": "11000111",
+        "mask_code": 199
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001000",
+        "mask_code": 200
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001001",
+        "mask_code": 201
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001010",
+        "mask_code": 202
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001011",
+        "mask_code": 203
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001100",
+        "mask_code": 204
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001101",
+        "mask_code": 205
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001110",
+        "mask_code": 206
+      },
+      {
+        "count": 0,
+        "mask_bits": "11001111",
+        "mask_code": 207
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010000",
+        "mask_code": 208
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010001",
+        "mask_code": 209
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010010",
+        "mask_code": 210
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010011",
+        "mask_code": 211
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010100",
+        "mask_code": 212
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010101",
+        "mask_code": 213
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010110",
+        "mask_code": 214
+      },
+      {
+        "count": 0,
+        "mask_bits": "11010111",
+        "mask_code": 215
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011000",
+        "mask_code": 216
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011001",
+        "mask_code": 217
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011010",
+        "mask_code": 218
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011011",
+        "mask_code": 219
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011100",
+        "mask_code": 220
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011101",
+        "mask_code": 221
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011110",
+        "mask_code": 222
+      },
+      {
+        "count": 0,
+        "mask_bits": "11011111",
+        "mask_code": 223
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100000",
+        "mask_code": 224
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100001",
+        "mask_code": 225
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100010",
+        "mask_code": 226
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100011",
+        "mask_code": 227
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100100",
+        "mask_code": 228
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100101",
+        "mask_code": 229
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100110",
+        "mask_code": 230
+      },
+      {
+        "count": 0,
+        "mask_bits": "11100111",
+        "mask_code": 231
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101000",
+        "mask_code": 232
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101001",
+        "mask_code": 233
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101010",
+        "mask_code": 234
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101011",
+        "mask_code": 235
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101100",
+        "mask_code": 236
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101101",
+        "mask_code": 237
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101110",
+        "mask_code": 238
+      },
+      {
+        "count": 0,
+        "mask_bits": "11101111",
+        "mask_code": 239
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110000",
+        "mask_code": 240
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110001",
+        "mask_code": 241
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110010",
+        "mask_code": 242
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110011",
+        "mask_code": 243
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110100",
+        "mask_code": 244
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110101",
+        "mask_code": 245
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110110",
+        "mask_code": 246
+      },
+      {
+        "count": 0,
+        "mask_bits": "11110111",
+        "mask_code": 247
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111000",
+        "mask_code": 248
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111001",
+        "mask_code": 249
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111010",
+        "mask_code": 250
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111011",
+        "mask_code": 251
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111100",
+        "mask_code": 252
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111101",
+        "mask_code": 253
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111110",
+        "mask_code": 254
+      },
+      {
+        "count": 0,
+        "mask_bits": "11111111",
+        "mask_code": 255
+      }
+    ],
+    "mask_field_bit_order": [
+      "frontier_present",
+      "incumbent_present",
+      "different_successor",
+      "actual_proposal_gate",
+      "truth_any_skill",
+      "truth_non_incumbent_skill",
+      "truth_actual_proposal",
+      "eligible_strict_truth"
+    ]
+  },
+  "membership_event_coverage": [
+    {
+      "cell": "REFERENCE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "REFERENCE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "REFERENCE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    },
+    {
+      "cell": "THRESHOLD_MID",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "THRESHOLD_MID",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "THRESHOLD_MID",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    },
+    {
+      "cell": "THRESHOLD_NEAR_GATE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "THRESHOLD_NEAR_GATE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "THRESHOLD_NEAR_GATE",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    },
+    {
+      "cell": "DRIVE_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "DRIVE_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "DRIVE_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    },
+    {
+      "cell": "STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    },
+    {
+      "cell": "DRIVE_STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68101
+    },
+    {
+      "cell": "DRIVE_STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68102
+    },
+    {
+      "cell": "DRIVE_STEP_HIGH",
+      "counts": {
+        "JOIN": 144,
+        "REJOIN": 48,
+        "TEMPORARY_LEAVE": 48,
+        "TERMINAL_LEAVE": 48
+      },
+      "task_seed": 68103
+    }
+  ],
+  "retained_evidence_shapes": {
+    "real_frontier_rows": 15896,
+    "schedule_delta_rows": 864,
+    "lineage_runtime_audits": 432,
+    "suppressed_t19_control_frontiers": 88,
+    "paired_t40_rejoin_rows": 864,
+    "complete_mask_histogram_rows": 256,
+    "semantic_near_miss_rows": 64
+  },
+  "raw_evidence": {
+    "local_root": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1",
+    "raw_path": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/raw_result.json",
+    "raw_sha256": "117dcc2f20f5d3cf4dd4ccbb342626e3e5048fbdcfd20a86420952ef7249d1d2",
+    "retains_complete_treatment_frontier_rows": true,
+    "retains_exact_864_row_t40_pair_table": true,
+    "retains_all_88_suppressed_t19_control_frontiers": true,
+    "public_result_is_compact": true
+  },
+  "technical_evidence": {
+    "operator_receipt": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/operator_terminal_receipt.json",
+    "equivalence_receipt": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/equivalence_receipt.json",
+    "evaluation_validation": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/evaluation_validation.json",
+    "analysis": "logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/analysis.json",
+    "receipt_helper_schema": "hmasd_experiment_operator_receipt.py",
+    "raw_terminal_admission": false,
+    "evaluation_terminal_admission": true,
+    "analysis_terminal_admission": true,
+    "phase_exit_codes": {
+      "train": 0,
+      "evaluate": 0,
+      "analyze": 0
+    },
+    "receipt_process_live": false,
+    "receipt_direct_error": null
+  },
+  "source_locators": {
+    "source": "https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/experiments/candidates/vsp_05/lifecycle_phase_support_discrimination.py",
+    "runner": "https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/scripts/run_vsp05_a2_lifecycle_phase_support.py",
+    "focused_tests": "https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/tests/experiments/candidates/vsp_05/test_lifecycle_phase_support_discrimination.py"
+  },
+  "decision_boundary": "Only CLEAN_TWO_SIDED_SUPPORT_OPENS keeps support feasibility open; all other labels park this exact toy learner route.",
+  "claim_boundary": "finite fixed A2 phase intervention only; no prevalence, learner value, utility, return, generalization, superiority, C authorization, global impossibility or direction retirement",
+  "strongest_residual_ambiguity": "This fixed-cap A2 instance isolates only the declared lifecycle-phase shift. It does not establish prevalence outside the cap, learner value, utility, return, generalization, superiority, C authorization, global impossibility, broader-direction retirement, or portfolio status.",
+  "scientific_disposition": null,
+  "c_treatment_licensed": false,
+  "promotion_or_retirement_decision": null,
+  "external_pro_requested": false
+}

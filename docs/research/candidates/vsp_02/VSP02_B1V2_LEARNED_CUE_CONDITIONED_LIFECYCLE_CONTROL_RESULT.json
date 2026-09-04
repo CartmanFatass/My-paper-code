@@ -1,0 +1,18 @@
+{
+  "admission": "B_TOY_LIGHT",
+  "analysis_artifact": "analysis.json",
+  "artifact_kind": "vsp02_b1v2_result",
+  "assignment_id": "VSP02-B1V2-LEARNED-CUE-CONDITIONED-LIFECYCLE-CONTROL",
+  "branch": "B1V2_FULL_LEARNER_FAILED",
+  "candidate": "CAND-VSP-02@adversarial-revision-v8",
+  "manifest_identity": "67f05010efa83d9804dd0eb2ee7a9121c676b519f16a849345f1701a4bcbafc7",
+  "nonclaims": [
+    "escrow or recurrent superiority",
+    "long-horizon credit",
+    "multi-boundary adaptation",
+    "partner learning or transfer",
+    "promotion, retirement, C, or formal claims"
+  ],
+  "strongest_technical_limitation": "The fixed host has one transient cue, one decision boundary, one fixed partner, and held-out owner epochs; it supplies no transfer or long-horizon claim.",
+  "technical_only": false
+}

@@ -1,173 +1,92 @@
-# Python字节码
+# .gitignore — ignore generated artifacts and scratch only. Source and documents are visible by
+# default; there is no global rule on *.md, *.txt, *.pdf, *.png or test*.py. Layout standard:
+# docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md. Rules for run output are anchored
+# at the repository root so that archived copies under docs/ stay visible.
+
+# Python and tool caches
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-
-# 虚拟环境
+*.egg-info/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
 env/
 venv/
-ENV/
-env.bak/
-venv.bak/
+.venv/
 
-# 发行版/打包相关
-dist/
-build/
-*.egg-info/
-*.egg
-
-# PyCharm项目设置
-.idea/
-*.iml
-*.iws
-*.ipr
-*.iws
-out/
-.idea_modules/
-
-# VSCode设置
-.vscode/
-
-# 日志和数据
-logs/
-logs*/
-tf-logs/
-*.log
-*.tfevents.*
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.zip
-data/
-*.pdf
-*.md
-!README.md
-!CLAUDE.md
-!AGENTS.md
-# Repository-scoped skill instructions and references are durable workflow source.
-!.agents/skills/**/*.md
-# Stable role charters are durable workflow authority.
-!.agents/roles/
-!.agents/roles/*.md
-# Canonical project memory + plan docs are load-bearing collaboration state — track them
-# (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
-!memory/*.md
-# Project control plane is load-bearing collaboration state.
-!docs/project/*.md
-!docs/project/current-work/
-!docs/project/current-work/**/*.md
-!docs/session-workspaces/
-!docs/session-workspaces/**/*.md
-!docs/report/*.md
-!docs/plans/*.md
-!docs/superpowers/plans/*.md
-!docs/superpowers/specs/*.md
-# CDC records are durable algorithm-research state.
-!docs/research/cdc/**/*.md
-# PM-accepted active research designs are durable algorithm source.
-!docs/research/designs/*.md
-# Active candidate evidence mirrors candidate code under experiments/candidates.
-!docs/research/candidates/
-!docs/research/candidates/**/*.md
-# The whole Claude control plane is durable project tooling, not scratch: agent
-# contracts, skills, the orchestrator workflow and the capability map. The
-# narrower `!.claude/agents/*.md` silently dropped SKILL.md from the commit that
-# created it, and would have dropped CAPABILITY_MAP.md the same way -- `git add`
-# on an ignored path errors, but `git add -A` just omits it without a word.
-!.claude/
-!.claude/**/*.md
-# Visual brainstorming and runtime capability probes are local scratch.
-.superpowers/
-# User-requested isolated Git worktrees for parallel HMASD implementation.
-.worktrees/
-# Generated from the account-visible Codex model cache; never commit account
-# catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
-runtime/model-catalog-v2-workaround.json
-# Exact R27-G2 design/review evidence is durable project state.
-!docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
-!docs/external-review/R27_G2_design_review_20260712_Claude.md
-!docs/external-review/gemini_3_1_pro/**/*.md
-!docs/external-review/gpt5_6_pro/**/*.md
-!docs/external-review/rounds/**/*.md
-!docs/external-review/GPT5_6_PRO_OPEN_HANDOFF_TEMPLATE.md
-!docs/external-review/OPEN_REVIEW_PRINCIPLES.md
-!docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md
-!docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md
-# LTM holds the rotated long-form history the compact files point at. It is the
-# archive half of the compact-memory contract, so it must be tracked too.
-!memory/LTM/*.md
-!memory/LTM/external_reviews/INDEX.md
-!memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md
-*.txt
-!/requirements_server.txt
-!/requirements_sb3.txt
-!scripts/r27_g2_runtime_package_manifest.txt
-*.tar
-!ref/hmasd.tar
-ref/hmasd/
-ref/OPT-main/
-*.png
-
-# Keep the curated N/k/many-agent literature analyses trackable while leaving
-# downloaded papers and third-party source trees local-only.
-!docs/research/literature/n_k_many_agent_deep_dive/**/*.md
-docs/research/literature/n_k_many_agent_deep_dive/code/
-
-# 生成的模型和结果
-models/
-results/
+# Model, result and log output (never versioned; historical logs live under docs/archive/logs/)
+/models/
+/results/
+/logs/
+/logs*/
+/tf-logs/
+/evaluation/
+/runtime/
+/data/
 *.pt
 *.pkl
 *.npy
-evaluation/
+*.npz
+*.sqlite3
+*.tfevents.*
+*.log
+*.pid
+*.csv
+*.dat
+*.out
+/experiments/**/RISP_*_RESUME_*/
+/experiments/**/RISP_*_RESULTS_*/
+/experiments/**/RISP_*_CHECKPOINTS_*/
+/experiments/**/RCLE_*_RESULTS_*/
 
-# 临时文件
-.DS_Store
-._.DS_Store
-*~
-.*.swp
-._*
-.pytest_cache/
+# Scratch: temp/directions/<direction-id>/{exp,test}/ is the only scratch root
+/temp/**
+!/temp/README.md
+/.tmp*
+/tmp/
+/scratch/
+/.scratch/
+/work/
+/worktrees/
+/.worktrees/
+/.cache/
+/cache/
+/artifacts/
+/.charter/cache/
+/.omp/runtime/
 .pytest_tmp*/
 .pytest-*/
-.pytest_r*_tmp*/
 .codex_tmp_pytest*/
 .tmp_pytest*/
 tmp_pytest*/
 pytest_tmp*/
-.pycache*/
-tests/.pytest_tmp/
-tests/.tmp/
-test/.pytest_tmp/
-test/.tmp/
-test*.py
-# Candidate tests mirror experiments/candidates and remain visible to Git.
-!tests/experiments/
-!tests/experiments/**/*.py
-# Tests for the Claude-side tooling in .claude/ are tracked for the same reason:
-# the pre-dispatch gate's guarantee is that it exits non-zero, and an untracked
-# test suite guarantees nothing.
-!tests/claude/
-!tests/claude/**/*.py
-*.doc
-*.docx
+/temp_*.json
 debug/
-#test/
 temp_collection_log/
-
-# User-controlled independent research is local-only and never enters Git.
 /local_research/
 
-# Live cross-task semantic handoffs are ignored under temp/handoffs; only their stable contract is tracked.
-/temp/*
-!/temp/README.md
+# Agent runtime state (agent definitions and settings are tracked; worktrees and locks are not)
+/.claude/worktrees/
+/.claude/*.lock
+/.remember/
+/.codex/runtime/
 
-# Keep the isolated remote log sync utility trackable under dist.
-!dist/
-dist/*
-!dist/remote_log_sync/
-!dist/remote_log_sync/**
+# Owner's personal notes
+/docs/personal/
+
+# Archives and large binaries
+ref/hmasd/
+ref/OPT-main/
+*.tar
+!ref/hmasd.tar
+*.zip
+*.gz
+*.doc
+*.docx

@@ -1,0 +1,117 @@
+{
+  "schema": "RISP-G-INIT-REACH-R01-EVAL-MEASUREMENT-COMPONENT-V1",
+  "component_revision": "RISP-G-INIT-REACH-R01-EVAL-MEASUREMENT-COMPONENT-20260823-01",
+  "exact_object_revision": "RISP-G-INIT-REACH-R01-FULL-PANEL|RISP-G-INIT-REACH-SCIENCE-20260821-01",
+  "armed": false,
+  "measurement_authority": false,
+  "production_identity_materialized": false,
+  "fixture": {
+    "namespace_class": "TEST_ONLY",
+    "namespace": "TEST/RISP-G-INIT-REACH/CERTIFICATE-FIXTURE/V1",
+    "coordinate_schema": "RISP-G-INIT-REACH-TEST-CERTIFICATE-V1",
+    "fixture_revision": "RISP-G-INIT-REACH-TEST-FIXTURE-20260821-01",
+    "fixture_root": "9999999999999999999999999999999999999999999999999999999999999999",
+    "checkpoint_schema": "RISP-G-INIT-REACH-TEST-TRAINING-UNIT-V1",
+    "registered": false,
+    "test_fixture": true,
+    "tensor_dtype": "torch.float64",
+    "construction": "DETERMINISTIC_CHECKPOINT_SHAPED_TENSORS_IN_MEMORY_ONLY"
+  },
+  "protected_files": {
+    "envs/native/production_backend.py": "b867019cf7ef08d1a0dcbcfaf2cb5c9f8f60d8a7363c3374d057a9544c4caf8e",
+    "experiments/candidates/renewal_indexed_score_plasticity/b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+    "experiments/candidates/renewal_indexed_score_plasticity/g_init_r01_coordinate_certificate.py": "0f01cba1efca1492fafe6a24bc252e480e07eef2fa12ad00f606eea0aefab8f4",
+    "experiments/candidates/renewal_indexed_score_plasticity/g_init_r01_experiment.py": "4b218d50e1ca73b51ba0cd2088c478fed935a46186d6539d4e6fdb56ba9e33b8",
+    "experiments/candidates/renewal_indexed_score_plasticity/g_init_r01_native_backend.cpp": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+    "experiments/candidates/renewal_indexed_score_plasticity/g_init_r01_native_backend.py": "8e246c7b7792a763db432ce6d7ada5dc37244695b756187f5c33449bea803503",
+    "experiments/candidates/renewal_indexed_score_plasticity/g_init_r01_resume.py": "e7a850ffde01bbd0d8576cf9730ba4e5a32a4afbf516ec76be4f67c02561fbad",
+    "experiments/candidates/renewal_indexed_score_plasticity/run_g_init_r01_resume.py": "a336aa4bf96fe7066167fa1076aeaffe77db9170b8cb280357d97f770cc96bd5"
+  },
+  "accepted_backend_record": {
+    "path": "experiments/candidates/renewal_indexed_score_plasticity/RISP_G_INIT_REACH_R01_BACKEND_EFFICIENCY_ACCEPTANCE_20260821_01.json",
+    "sha256": "7d1f170c2090e145af60753fa4619f7da41f3de63f769c996e3fce8e01764a20"
+  },
+  "accepted_native": {
+    "component": "risp.g_init_reach.r01.full_host",
+    "backend": "cpp",
+    "batch_width": 32,
+    "build_key": "76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b",
+    "artifact_path": "C:/Users/fires/AppData/Local/Temp/hmasd_risp_g_init_r01_native/76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b/g_init_r01_native_backend.dll",
+    "artifact_sha256": "3b20ba9e5a55c2cc0df9ad5582bb957155931856fc2e643422104ca8d56c7709",
+    "artifact_size_bytes": 139776,
+    "full_reset_step_cpp": true,
+    "python_fallback": false,
+    "native_boundary": "complete_g_init_r01_cpp_host_with_batched_interactive_reset_raw_prefix_motion_ack_step_close_and_no_python_environment_fallback"
+  },
+  "grouped_eval": {
+    "helper": "g_init_r01_experiment._evaluate_episode_group_native",
+    "episode_groups": [[0, 16], [16, 32], [32, 48], [48, 64]],
+    "episodes_per_fixture": 64,
+    "agent_lanes_per_group": 32,
+    "workers": 2,
+    "start_method": "spawn",
+    "passes": ["A_UNINSTRUMENTED_FORECAST_ONLY", "B_DIAGNOSTIC_ONLY"]
+  },
+  "stages": [
+    "CPP_BATCHED_ENVIRONMENT",
+    "PYTHON_INTERACTIVE_EVENT_ADAPTER",
+    "EXACT_INTERVAL_AND_ADDRESSING",
+    "TRACE_REPLAY",
+    "PYTORCH_FLOAT64_FORWARD_NO_GRAD",
+    "PROCESS_ORCHESTRATION"
+  ],
+  "trace_replay": {
+    "status": "NOT_APPLICABLE_SOURCE_PROVED",
+    "required_call_count": 0,
+    "forbidden_helper_tokens": ["_train_episode", "_train_episode_group_native", "backward", "optimizer", "replay"]
+  },
+  "strata": [
+    {"id": "schedule_0_k4__g_start_intact", "schedule_id": 0, "cell": "G-START/ZERO-CENTER-INTACT", "fixture_seeds": [100, 101]},
+    {"id": "schedule_0_k4__zero_start_intact", "schedule_id": 0, "cell": "ZERO-START/ZERO-CENTER-INTACT", "fixture_seeds": [102, 103]},
+    {"id": "schedule_0_k4__uniform", "schedule_id": 0, "cell": "UNIFORM", "fixture_seeds": [104, 105]},
+    {"id": "schedule_0_k4__state_oracle", "schedule_id": 0, "cell": "STATE-ORACLE", "fixture_seeds": [106, 107]},
+    {"id": "schedule_1_k8__g_start_intact", "schedule_id": 1, "cell": "G-START/ZERO-CENTER-INTACT", "fixture_seeds": [108, 109]},
+    {"id": "schedule_1_k8__zero_start_intact", "schedule_id": 1, "cell": "ZERO-START/ZERO-CENTER-INTACT", "fixture_seeds": [110, 111]},
+    {"id": "schedule_1_k8__uniform", "schedule_id": 1, "cell": "UNIFORM", "fixture_seeds": [112, 113]},
+    {"id": "schedule_1_k8__state_oracle", "schedule_id": 1, "cell": "STATE-ORACLE", "fixture_seeds": [114, 115]},
+    {"id": "schedule_2_k12__g_start_intact", "schedule_id": 2, "cell": "G-START/ZERO-CENTER-INTACT", "fixture_seeds": [116, 117]},
+    {"id": "schedule_2_k12__zero_start_intact", "schedule_id": 2, "cell": "ZERO-START/ZERO-CENTER-INTACT", "fixture_seeds": [118, 119]},
+    {"id": "schedule_2_k12__uniform", "schedule_id": 2, "cell": "UNIFORM", "fixture_seeds": [120, 121]},
+    {"id": "schedule_2_k12__state_oracle", "schedule_id": 2, "cell": "STATE-ORACLE", "fixture_seeds": [122, 123]},
+    {"id": "schedule_3_4_to_12__g_start_intact", "schedule_id": 3, "cell": "G-START/ZERO-CENTER-INTACT", "fixture_seeds": [124, 125]},
+    {"id": "schedule_3_4_to_12__zero_start_intact", "schedule_id": 3, "cell": "ZERO-START/ZERO-CENTER-INTACT", "fixture_seeds": [126, 127]},
+    {"id": "schedule_3_4_to_12__uniform", "schedule_id": 3, "cell": "UNIFORM", "fixture_seeds": [128, 129]},
+    {"id": "schedule_3_4_to_12__state_oracle", "schedule_id": 3, "cell": "STATE-ORACLE", "fixture_seeds": [130, 131]},
+    {"id": "schedule_4_12_to_4__g_start_intact", "schedule_id": 4, "cell": "G-START/ZERO-CENTER-INTACT", "fixture_seeds": [132, 133]},
+    {"id": "schedule_4_12_to_4__zero_start_intact", "schedule_id": 4, "cell": "ZERO-START/ZERO-CENTER-INTACT", "fixture_seeds": [134, 135]},
+    {"id": "schedule_4_12_to_4__uniform", "schedule_id": 4, "cell": "UNIFORM", "fixture_seeds": [136, 137]},
+    {"id": "schedule_4_12_to_4__state_oracle", "schedule_id": 4, "cell": "STATE-ORACLE", "fixture_seeds": [138, 139]}
+  ],
+  "projection": {
+    "production_two_worker_batches_per_stratum": 8,
+    "production_eval_batches": 160,
+    "forecast_source": "PASS_A_UNINSTRUMENTED_ONLY",
+    "unobserved_tail_status": "RETAINED_EXPLICITLY_NO_PROBABILISTIC_UPPER_BOUND"
+  },
+  "limits": {
+    "maximum_batches": 20,
+    "maximum_fixture_units": 40,
+    "maximum_incremental_cpu_seconds": 28800,
+    "maximum_foreground_wall_seconds": 13800,
+    "workers": 2,
+    "cpu_cores": 2,
+    "gpu": false,
+    "per_worker_rss_limit_bytes": 1073741824,
+    "process_group_rss_limit_bytes": 2684354560,
+    "scratch_limit_bytes": 1073741824,
+    "durable_output_limit_bytes": 67108864,
+    "dispatches": 1,
+    "automatic_relaunch": false
+  },
+  "output": {
+    "schema": "RISP-G-INIT-REACH-R01-EVAL-MEASUREMENT-RESOURCE-ACCOUNTING-V1",
+    "facts_only": ["RESOURCE", "STRUCTURAL_EQUIVALENCE", "ACCOUNTING"],
+    "completed_uncommitted_separation": true,
+    "forbidden_payload_values": ["ACTION", "ACK", "REWARD", "BELIEF", "OFFLINE", "QUALIFICATION", "TENSOR", "PACKET"]
+  }
+}

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import pickle
 
 import numpy as np
+import pytest
 
 from ha_ctse_process.dynamic_roster_clean_process_testbed import (
     CleanProcessDynamicRosterEnv,
@@ -69,6 +71,21 @@ def test_clean_process_channel_is_task_neutral_and_lifecycle_owned() -> None:
                 assert np.array_equal(
                     restored.process_states[key], clean.process_states[key]
                 )
+
+
+def test_invalid_late_action_is_atomic_across_task_and_process_state() -> None:
+    env = CleanProcessDynamicRosterEnv(
+        make_clean_process_dynamic_roster_ledger(9, master_seed=12_345)
+    )
+    view = env.observe()
+    actions = constructive_actions(env, view)
+    actions[view.active_keys[-1]] = 99
+    before = pickle.dumps(env.snapshot_state(), protocol=5)
+
+    with pytest.raises(ValueError, match="primitive actions"):
+        env.step(actions)
+
+    assert pickle.dumps(env.snapshot_state(), protocol=5) == before
 
 
 def test_clean_process_direct_runner_smoke(tmp_path) -> None:

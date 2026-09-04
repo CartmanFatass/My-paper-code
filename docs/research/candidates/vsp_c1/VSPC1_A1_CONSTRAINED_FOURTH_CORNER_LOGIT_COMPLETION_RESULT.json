@@ -1,0 +1,114 @@
+{
+  "activity_caps": {
+    "boundary_states": 1,
+    "checkpoints": 1,
+    "clones": 4,
+    "deterministic_predictor_fits": 2,
+    "environment_transitions": 0,
+    "focused_production_kernel_calls": 4,
+    "learner_calls": 0,
+    "model_fits": 0,
+    "optimizer_updates": 0,
+    "registered_audits": 1,
+    "return_evaluations": 0,
+    "rosters": 1,
+    "sealed_prediction_receipts": 2,
+    "stochastic_calls": 0,
+    "sweeps_retries_rescues": 0,
+    "trainer_calls": 0
+  },
+  "activity_counts": {
+    "boundary_states": 0,
+    "checkpoints": 0,
+    "clones": 0,
+    "deterministic_predictor_fits": 0,
+    "environment_transitions": 0,
+    "focused_production_kernel_calls": 0,
+    "learner_calls": 0,
+    "model_fits": 0,
+    "optimizer_updates": 0,
+    "registered_audits": 1,
+    "return_evaluations": 0,
+    "rosters": 0,
+    "sealed_prediction_receipts": 0,
+    "stochastic_calls": 0,
+    "sweeps_retries_rescues": 0,
+    "trainer_calls": 0
+  },
+  "attempted_kernel_reads": [],
+  "bound_identities": {
+    "boundary_state_id": null,
+    "checkpoint_id": null,
+    "heldout_cell": "i1p1",
+    "i0": null,
+    "i1": null,
+    "legal_action_order": null,
+    "p0": null,
+    "p1": null,
+    "roster_id": null
+  },
+  "candidate_version": "CAND-VSP-C1-CROSSED_IDENTITY_PERIOD_FACTORIZATION@constrained-fourth-corner-v9",
+  "construction_failures": [
+    "no production constructor is registered for the exact authenticated identity-period four-clone host contract"
+  ],
+  "design_id": "VSP-C1-CCLC-BOUND-A-V1",
+  "estimands": {
+    "D_C": null,
+    "D_N": null,
+    "Delta": null,
+    "mixed_logit_residual": null
+  },
+  "host_observation": {
+    "constructor_count": 0,
+    "host_contract_id": "vspc1.authenticated-identity-period-four-clone-host.v1",
+    "inspection": [
+      {
+        "contract_marked_callables": [],
+        "identity_period_clone_named_callables": [],
+        "module": "ha_ctse_process.dynamic_roster_supplied_executor"
+      },
+      {
+        "contract_marked_callables": [],
+        "identity_period_clone_named_callables": [],
+        "module": "ha_ctse_process.variable_roster_event"
+      }
+    ],
+    "mssr_shared_model_factory_present": true,
+    "qualified_constructor": null,
+    "rejected_substitutions": [
+      "toy",
+      "ORBIT",
+      "lifecycle",
+      "MSSR"
+    ],
+    "status": "unreachable"
+  },
+  "interpretation": "Reactivate only with a prospectively reachable 2x2 authenticated identity-period rectangle satisfying the exact port-free equality/common-support manifest.",
+  "kernels": {},
+  "pre_reveal_js": null,
+  "predictor_fits": {},
+  "publication_binding": {
+    "acceptance_owned_by": "Code Project Manager",
+    "accepted_result_commit": null,
+    "accepted_source_commit": null,
+    "index_locator": "docs/research/candidates/vsp_c1/CODE_SCIENCE_INDEX.md",
+    "result_locator": null,
+    "source_locator": "experiments/candidates/vsp_c1/constrained_fourth_corner_logit_completion.py"
+  },
+  "raw_output_binding": "vsp_c1.constrained_fourth_corner_logit_completion.a1.v1",
+  "schema_version": 1,
+  "scientific_disposition": null,
+  "scientific_nonclaims": [
+    "no semantic identity",
+    "no global factorization",
+    "no same-support superiority",
+    "no task-return or transfer",
+    "no learning/sample-complexity law",
+    "no C formal promotion ranking retirement or Pro"
+  ],
+  "sealed_prediction_receipts": {},
+  "state_equality_manifest": null,
+  "successor_selected": false,
+  "terminal_branch": "A1_HOST_RECTANGLE_UNREACHABLE",
+  "treatment_id": "VSPC1-A1-CONSTRAINED-FOURTH-CORNER-LOGIT-COMPLETION"
+}

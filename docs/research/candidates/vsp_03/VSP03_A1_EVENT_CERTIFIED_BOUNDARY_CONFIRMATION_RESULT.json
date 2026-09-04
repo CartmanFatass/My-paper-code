@@ -1,0 +1,160 @@
+{
+  "activity": {
+    "environment_calls": 0,
+    "environment_episodes": 0,
+    "environment_transitions": 0,
+    "evaluation_calls": 0,
+    "learner_calls": 0,
+    "lookup_evaluations": 0,
+    "model_fit_calls": 0,
+    "optimizer_updates": 0,
+    "policy_calls": 0,
+    "registered_audits": 1,
+    "retries_or_recoveries": 0,
+    "return_computations": 0,
+    "rng_draws": 0,
+    "trainer_calls": 0
+  },
+  "artifact_kind": "VSP03_A1_EVENT_CERTIFIED_BOUNDARY_CONFIRMATION",
+  "branch_precedence_applied": [
+    "A1_INVALID_EVENT_CAUSALITY_OR_SCOPE",
+    "A1_INVALID_PARITY_OR_CAUSE_CONTRACT",
+    "A1_EXACT_DEBOUNCE_NOT_REPRODUCED",
+    "A1_BCTT_EC_HOLD_REGRESSION",
+    "A1_BCTT_EC_REPAIR_COLLAPSES_TO_DEBOUNCE",
+    "A1_LATCH_RESET_OR_REARM_FAILED",
+    "A1_EVENT_CERTIFIED_BOUNDARY_DIVERGENCE_SUPPORTED"
+  ],
+  "candidate_id": "CAND-VSP-03-BCTT",
+  "claim_boundary": "causal-information-interface and truth-table evidence only; no natural value, novelty, return, or deployment claim",
+  "contract_failures": [
+    {
+      "detail": "NO_AUTHENTICATED_CAUSAL_SOURCE_BOUND",
+      "kind": "EVENT_CAUSALITY_OR_SCOPE"
+    }
+  ],
+  "formal": false,
+  "frozen_contract": {
+    "armed_bit": "a",
+    "availability": "y_k and e_k are available before the decision at tau_k",
+    "bctt_ec_rule": "a AND y AND NOT e",
+    "boundary_order": "tau_0<tau_1<tau_2; no tied event",
+    "bypass_behavior": "complete on first positive",
+    "bypass_scopes": [
+      "FIRST_PASSAGE",
+      "ABSORBING",
+      "SAFETY_HANDOFF"
+    ],
+    "debounce_rule": "a AND y",
+    "eligible_scope": "PERSISTENT_OCCUPANCY",
+    "event_latch": "while armed, first target-negative primitive event strictly inside interval; sticky through reentry",
+    "inference_boundary": "truth-table and causal-information-interface evidence only; no value or novelty claim",
+    "order": "evaluate lookup; if continuing set a=y and clear e; termination, identity change, or reset clears both",
+    "trace_specifications": {
+      "CLEAN_TAU2": "continuing BCTT-EC has a1=1, cleared latch, y2=1,e2=0 => target-terminate at tau2",
+      "EXCURSION_REENTRY": "tau0<t_minus<t_plus<tau1; target-negative at t_minus; reentry at t_plus; e1=1,y1=1 => 10",
+      "HOLD": "e1=0,y1=1 => 11 and both target-terminate at tau1",
+      "INITIAL": "a_-1=0,y0=1 => 00 then a0=1"
+    },
+    "truth_rows": [
+      {
+        "a_y_e": "000",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "001",
+        "causal_state": "INVALID_UNARMED_LATCH",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "010",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "011",
+        "causal_state": "INVALID_UNARMED_LATCH",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "100",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "101",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "00"
+      },
+      {
+        "a_y_e": "110",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "11"
+      },
+      {
+        "a_y_e": "111",
+        "causal_state": "VALID",
+        "debounce_bctt_ec": "10"
+      }
+    ]
+  },
+  "lifecycle_contract_receipt": {
+    "contract": {
+      "bypass_completes_on_first_positive": true,
+      "continuing_clears_event_latch": true,
+      "continuing_sets_armed_to_current_positive": true,
+      "evaluate_before_update": true,
+      "first_negative_while_armed_sets_latch": true,
+      "identity_change_clears_armed_and_latch": true,
+      "latch_sticky_through_reentry": true,
+      "reset_clears_armed_and_latch": true,
+      "termination_clears_armed_and_latch": true
+    },
+    "failures": []
+  },
+  "parity_cause_credit_receipt": {
+    "contract": {
+      "armed_bits_bctt_ec": 1,
+      "armed_bits_exact": 1,
+      "bit_identical_clocks": true,
+      "bit_identical_credit_assignment": true,
+      "bit_identical_eligibility_classes": true,
+      "bit_identical_inputs": true,
+      "bit_identical_primitive_events": true,
+      "bit_identical_resets": true,
+      "bit_identical_termination_causes": true,
+      "event_latch_is_costed_in_both_arms": true,
+      "event_latches_bctt_ec": 1,
+      "event_latches_exact": 1,
+      "lookup_width_bctt_ec": 3,
+      "lookup_width_exact": 3
+    },
+    "failures": []
+  },
+  "registered_source_status": "NO_GENUINE_TARGET_NEGATIVE_CAUSAL_DEPLOYMENT_EVENT_SEAM",
+  "schema_version": 1,
+  "scientific_disposition": null,
+  "source_receipt": {
+    "authentication_id": null,
+    "event_observations": [],
+    "fabricated_event_latches": 0,
+    "failures": [
+      "NO_AUTHENTICATED_CAUSAL_SOURCE_BOUND"
+    ],
+    "source_id": null,
+    "status": "UNBOUND"
+  },
+  "successor_selected": false,
+  "terminal_branch": "A1_INVALID_EVENT_CAUSALITY_OR_SCOPE",
+  "trace_audit": {
+    "status": "NOT_EVALUATED",
+    "traces": {}
+  },
+  "treatment_id": "VSP03-A1-EVENT-CERTIFIED-BOUNDARY-CONFIRMATION",
+  "truth_table_audit": {
+    "rows": [],
+    "status": "NOT_EVALUATED"
+  },
+  "version_id": "CAND-VSP-03-BCTT@event-certified-boundary-revision-v4"
+}

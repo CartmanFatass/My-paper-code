@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "packet_id": "first-wave-latest-model-2026-09-01",
+  "purpose": "Independent review of the motivations, difficulties, evidence boundaries, and next discriminators for the five ACTIVE/HIGH HMASD directions.",
+  "snapshot": {
+    "date": "2026-09-01",
+    "head": "b4d738537c2a3e098e141770ecf716d51321c3b3",
+    "origin_main_at_capture": "b4d738537c2a3e098e141770ecf716d51321c3b3",
+    "working_tree_note": "The local tree also contains uncommitted CBSC and FRRIE implementation work. Paths explicitly marked local_wip_uncommitted are not present at the recorded Git snapshot."
+  },
+  "evidence_precedence": [
+    "Direction-local valid result evidence and retained-audit records",
+    "FIRST_INVESTMENT_WAVE_USAGE_SAFE_STOP_HANDOFF_20260901.md for later engineering and execution facts",
+    "Direction DIRECTION.md for scientific object, lifecycle narrative, and claim boundary",
+    "PORTFOLIO.md for the current Root lifecycle and priority snapshot",
+    "This review packet as a non-authoritative synthesis"
+  ],
+  "shared_sources": [
+    {
+      "path": "C:/Projects/HMASD/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "role": "Current empirical evidence burden and claim-ceiling specification",
+      "visibility": "committed_at_snapshot"
+    },
+    {
+      "path": "C:/Projects/HMASD/docs/research/portfolio/PORTFOLIO.md",
+      "role": "Root lifecycle and priority snapshot",
+      "visibility": "committed_at_snapshot"
+    },
+    {
+      "path": "C:/Projects/HMASD/docs/research/portfolio/FIRST_INVESTMENT_WAVE_USAGE_SAFE_STOP_HANDOFF_20260901.md",
+      "role": "Latest cross-direction engineering and result handoff used by this packet",
+      "visibility": "committed_at_snapshot"
+    }
+  ],
+  "directions": [
+    {
+      "id": "finite_resource_relational_inductive_efficiency",
+      "alias": "FRRIE",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "scientific_object": "Matched finite-budget comparison of a tight relational projection/optimizer package against a strictly containing package across training and held-out rosters.",
+      "current_state": "Engineering A/RECON and plan admission are clean; no B01 learner observation exists.",
+      "current_blockers": [
+        "The full 512-update paired training/evaluation/checkpoint/telemetry chain is incomplete.",
+        "Local Slice B checkpoint and shard work lacks an authoritative combined suite, resume-suffix validation, parameter inventory, and full paired-shard validation."
+      ],
+      "smallest_next_decision": "Complete the bounded Slice B chain and run the frozen three-seed B/EXPLORE comparison.",
+      "sources": [
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+          "role": "Direction definition and current scientific boundary",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_PRODUCTION_CHAIN_ENGINEERING_PLAN_20260901.md",
+          "role": "Production-chain plan and readiness boundary",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/experiments/candidates/finite_resource_relational_inductive_efficiency/b01/training_runner.py",
+          "role": "Local Slice B runner work",
+          "visibility": "local_wip_uncommitted"
+        },
+        {
+          "path": "C:/Projects/HMASD/experiments/candidates/finite_resource_relational_inductive_efficiency/b01/training_shards.py",
+          "role": "Local Slice B shard work",
+          "visibility": "local_wip_uncommitted"
+        }
+      ]
+    },
+    {
+      "id": "variable_n_fleet_churn",
+      "alias": "VNFC",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "scientific_object": "Learned recovery after an unannounced within-episode executor loss while preserving presentation-safe physical commands.",
+      "current_state": "R01 was closed after a binary64 presentation-action counterexample; R02 has one candidate finite action law but no A0 or learner result.",
+      "current_blockers": [
+        "Math-kernel and dependency bytes are not prospectively closed.",
+        "Primitive token cardinality is ambiguous.",
+        "CDF subaddress, indexing, probe, and endpoint rules are incomplete.",
+        "Logical steps are not cleanly separated from presentation-specific evaluations."
+      ],
+      "smallest_next_decision": "Close the four law-definition gaps and run the non-result 304-row A0 conformance falsifier before a fresh R02 DEBUG.",
+      "sources": [
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+          "role": "Direction definition and current scientific boundary",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R02_FINITE_PHYSICAL_ACTION_LAW_A0_FREEZE_20260901.md",
+          "role": "R02 finite-law and A0 freeze under review",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/variable_n_fleet_churn/VNFC_BPCR_R01_CLOSE_R02_FINITE_ACTION_LAW_INNOVATOR_INTAKE_20260901.md",
+          "role": "R01 closure and R02 selection intake",
+          "visibility": "committed_at_snapshot"
+        }
+      ]
+    },
+    {
+      "id": "capability_bound_semantic_currentness",
+      "alias": "CBSC",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "scientific_object": "Finite-budget recurrent learning value of OWNER-, epoch-, capability-, and receiver-content-aligned currentness against containing and deranged controls.",
+      "current_state": "The exact factorial establishes narrow protocol value and RAW equality; LR01 is unresolved; online B01 has not run.",
+      "current_blockers": [
+        "The result consumer does not yet independently reconstruct mechanical and RAW competence from bound raw evidence.",
+        "The full formal payload lacks a result-blind capacity projection.",
+        "The local 15-table implementation chain is uncommitted and remains REPAIR_REQUIRED."
+      ],
+      "smallest_next_decision": "Repair consumer recomputation and capacity admission, then run the frozen three-seed online B1.",
+      "sources": [
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+          "role": "Direction definition plus local B01 state",
+          "visibility": "local_wip_uncommitted"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/CBSC_EXACT_FACTORIAL_RESULT_INTAKE_20260830.md",
+          "role": "Valid exact-factorial result intake",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_RESULT_INTAKE_20260831.md",
+          "role": "Valid unresolved LR01 result intake",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_METRICS_ONLY_CONVERGENCE_SPEC.md",
+          "role": "Local metrics-publication and consumer contract",
+          "visibility": "local_wip_uncommitted"
+        }
+      ]
+    },
+    {
+      "id": "semigroup_consistent_duration_model_policy",
+      "alias": "SCDMP",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "scientific_object": "Bounded exploratory test of whether H-to-R versus R-to-H event order changes held-out native action value across two foundations, reachable states, and durations.",
+      "current_state": "The multi-foundation B01 is frozen and its engineering package is clean; the first run was quarantined for telemetry failure and has no scientific polarity.",
+      "current_blockers": [
+        "The science card requires retry reuse of the RNG master while quarantine forbids reading or salvaging the old master and q values.",
+        "A replacement identity rule has not been formed for this B/EXPLORE attempt."
+      ],
+      "smallest_next_decision": "Decide whether an unread, outcome-blind failure permits a fresh named RNG attempt, then launch exactly one complete replacement attempt.",
+      "sources": [
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+          "role": "Direction definition and current scientific boundary",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_MF_RS_MK_ORDER_VALUE_B01_SCIENCE_CARD_20260901.md",
+          "role": "Frozen multi-foundation order-value B01 object",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_FCEOV_REPLACEMENT_03_VALID_RESULT_INTAKE_20260831.md",
+          "role": "Earlier valid nonpass object and its claim boundary",
+          "visibility": "committed_at_snapshot"
+        }
+      ]
+    },
+    {
+      "id": "ucope",
+      "alias": "UCOPE",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH",
+      "scientific_object": "Competence-first test of paid diagnostic acquisition, followed only conditionally by a protected COUNT-versus-containing-RAW representation comparison.",
+      "current_state": "B1 and the retained odd/even audit both establish zero competence under their bounded packages; acquisition and COUNT/RAW remain unevaluated.",
+      "current_blockers": [
+        "The retained audit maps to no unique frozen convergence route.",
+        "The next scientific choice is whether one optimizer or conditioning discriminator is worth running versus parking or recasting the direction."
+      ],
+      "smallest_next_decision": "Obtain a new direction-local convergence judgment from the retained audit without rerunning it.",
+      "sources": [
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/ucope/DIRECTION.md",
+          "role": "Direction definition and claim ordering",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/ucope/UCOPE_COMPETENCE_FIRST_SCOUT_R01_B1_RESULT_EVIDENCE_20260901.md",
+          "role": "Valid competence-first B1 evidence",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/ucope/UCOPE_A_RECON_B1_ODD_SUPPORT_VS_EVEN_HELDOUT_COMPETENCE_AUDIT_R01_RESULT_EVIDENCE_20260901.md",
+          "role": "Retained read-only odd/even audit evidence",
+          "visibility": "committed_at_snapshot"
+        },
+        {
+          "path": "C:/Projects/HMASD/docs/research/candidates/ucope/UCOPE_A_RECON_B1_ODD_SUPPORT_VS_EVEN_HELDOUT_COMPETENCE_AUDIT_R01_CONVERGENCE_DECISION_INTAKE_20260901.md",
+          "role": "Non-unique route record requiring a new convergence judgment",
+          "visibility": "committed_at_snapshot"
+        }
+      ]
+    }
+  ],
+  "literature_libraries": [
+    {
+      "id": "docs-new-libs",
+      "root": "C:/Projects/HMASD/docs/new-libs",
+      "in_repository": true,
+      "verified_work_count": 27,
+      "current_pdf_count": 0,
+      "primary_index": "C:/Projects/HMASD/docs/new-libs/LIBRARY_INDEX.md",
+      "claim_index": "C:/Projects/HMASD/docs/new-libs/corpus/claim_index.jsonl",
+      "note": "Use committed overviews, claims, chunks, and source links. The README's historical local-PDF statement does not mean PDFs are present in this snapshot."
+    },
+    {
+      "id": "instsci-mylib",
+      "root": "C:/Projects/Inst-sci/papers/MyLib",
+      "in_repository": false,
+      "pdf_count": 190,
+      "structured_json_count": 190,
+      "metadata_record_count": 190,
+      "missing_json_count": 0,
+      "integrity": "C:/Projects/Inst-sci/papers/MyLib/metadata/integrity.json",
+      "catalog": "C:/Projects/Inst-sci/papers/MyLib/llm-index/catalog.v2.jsonl",
+      "metadata_v2": "C:/Projects/Inst-sci/papers/MyLib/metadata/v2/papers.v2.jsonl",
+      "note": "Use metadata for recall, structured JSON for substantive checks, and PDF only when necessary. This library is local and outside the HMASD GitHub repository."
+    }
+  ],
+  "packet_files": [
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/README.md",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/REVIEW_PROMPT.md",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/DIRECTIONS.md",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/SOURCE_MANIFEST.json",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/literature/README.md",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/literature/DIRECTION_MAP.md",
+    "C:/Projects/HMASD/docs/research/review_packets/2026-09-01-first-wave-latest-model/literature/selected_references.jsonl"
+  ]
+}

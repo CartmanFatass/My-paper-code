@@ -44,6 +44,8 @@ from ha_ctse_process.variable_roster_event_types import (
     MembershipDelta,
     MembershipTransaction,
     PackedActiveBatch,
+    PartnerInteractionHistory,
+    PartnerInteractionRow,
 )
 from ha_ctse_process.variable_roster_event_support import (
     ROLLOUT_TRUNCATION,
@@ -750,6 +752,79 @@ def test_schema3_checkpoint_roundtrip_restores_runtime_collector_and_rngs(tmp_pa
         )
 
 
+def test_partner_interaction_checkpoint_roundtrip_restores_and_appends(tmp_path):
+    core = make_core("f1", partner_interaction_enabled=True)
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    expected_histories = {
+        key: deepcopy(core.records[key].partner_interaction_history)
+        for key in ("a", "b")
+    }
+    payload = core.checkpoint_payload(
+        collector_snapshot=SyncEnvCollector([SnapshotEnv(value=23)]).snapshot_event_runtime(),
+        current_observation_state_boundary={"time": core.physical_time},
+        optimizer_states={"high": {"steps": 0}, "low": {"steps": 0}},
+        normalizer_states={"high": {"mean": 0.0}, "low": {"mean": 0.0}},
+    )
+    record_states = payload["event_architecture"]["lifecycle_records"]
+    for state in record_states.values():
+        history = state["partner_interaction_history"]
+        state["partner_interaction_history"] = {
+            "current_p": history.current_p,
+            "rows": [deepcopy(row.__dict__) for row in history.rows],
+        }
+    checkpoint_path = tmp_path / "partner_interaction_schema3.pt"
+    torch.save(payload, checkpoint_path)
+    reloaded_payload = torch.load(
+        checkpoint_path, map_location="cpu", weights_only=False
+    )
+
+    malformed = deepcopy(reloaded_payload)
+    malformed["event_architecture"]["lifecycle_records"]["a"][
+        "partner_interaction_history"
+    ]["rows"] = {"not": "an ordered row sequence"}
+    with pytest.raises(
+        ValueError, match="partner interaction history rows must be a list or tuple"
+    ):
+        make_core("f1", partner_interaction_enabled=True).restore_checkpoint_payload(
+            malformed, collector=SyncEnvCollector([SnapshotEnv()])
+        )
+
+    restored = make_core(
+        "f1", model_seed=999, opportunity_seed=999, partner_interaction_enabled=True
+    )
+    restored.restore_checkpoint_payload(
+        reloaded_payload, collector=SyncEnvCollector([SnapshotEnv(value=-1)])
+    )
+    for key in ("a", "b"):
+        expected = expected_histories[key]
+        actual = restored.records[key].partner_interaction_history
+        assert isinstance(actual, PartnerInteractionHistory)
+        assert actual.current_p == expected.current_p
+        assert actual.rows == expected.rows
+        assert all(isinstance(row, PartnerInteractionRow) for row in actual.rows)
+
+    restored_row_counts = {
+        key: len(restored.records[key].partner_interaction_history.rows)
+        for key in ("a", "b")
+    }
+    low_then_transition(restored, ("a", "b"), 0.25)
+    assert set(restored.due_frontier()) == {"a", "b"}
+    restored.apply_transaction(
+        no_membership_transaction(restored, ("a", "b"), ("a", "b")),
+        teacher_order=("a", "b"),
+        teacher_actions={"a": 2, "b": 1},
+    )
+    for key in ("a", "b"):
+        history = restored.records[key].partner_interaction_history
+        assert len(history.rows) == restored_row_counts[key] + 1
+        assert history.rows[:-1] == expected_histories[key].rows
+        appended = history.rows[-1]
+        assert appended.owner_lifecycle_key == key
+        assert appended.partner_lifecycle_key in {"a", "b"} - {key}
+        assert appended.prior_p == expected_histories[key].current_p
+        assert appended.next_p == history.current_p
+
+
 def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(monkeypatch):
     config = SimpleNamespace(
         high_controller=EVENT_CONTROLLER,
@@ -857,8 +932,11 @@ def _assert_low_row_equal(left, right):
             assert lhs == rhs, item.name
 
 
+@pytest.mark.parametrize("host_transfer", ("legacy", "packed"))
 @pytest.mark.parametrize("device", ("cpu", "cuda"))
-def test_cross_environment_ragged_low_batch_matches_scalar_deterministic(device):
+def test_cross_environment_ragged_low_batch_matches_scalar_deterministic(
+    device, host_transfer
+):
     if device == "cuda" and not torch.cuda.is_available():
         pytest.skip("CUDA is unavailable")
     scalar, batched, keys = _low_equivalence_groups(device)
@@ -867,7 +945,12 @@ def test_cross_environment_ragged_low_batch_matches_scalar_deterministic(device)
         for core, active in zip(scalar, keys)
     ]
     snapshots = [boundary(core, active) for core, active in zip(batched, keys)]
-    batch_result = batched_low_step(batched, snapshots, deterministic=True)
+    batch_result = batched_low_step(
+        batched,
+        snapshots,
+        deterministic=True,
+        host_transfer=host_transfer,
+    )
     for core_index, (scalar_result, packed_result) in enumerate(
         zip(scalar_results, batch_result.per_core)
     ):
@@ -905,8 +988,11 @@ def test_cross_environment_ragged_low_batch_matches_scalar_deterministic(device)
             )
 
 
+@pytest.mark.parametrize("host_transfer", ("legacy", "packed"))
 @pytest.mark.parametrize("device", ("cpu", "cuda"))
-def test_cross_environment_stochastic_uniforms_preserve_rng_and_replay(device):
+def test_cross_environment_stochastic_uniforms_preserve_rng_and_replay(
+    device, host_transfer
+):
     if device == "cuda" and not torch.cuda.is_available():
         pytest.skip("CUDA is unavailable")
     scalar, batched, keys = _low_equivalence_groups(device)
@@ -915,7 +1001,12 @@ def test_cross_environment_stochastic_uniforms_preserve_rng_and_replay(device):
         for core, active in zip(scalar, keys)
     ]
     snapshots = [boundary(core, active) for core, active in zip(batched, keys)]
-    batch_result = batched_low_step(batched, snapshots, deterministic=False)
+    batch_result = batched_low_step(
+        batched,
+        snapshots,
+        deterministic=False,
+        host_transfer=host_transfer,
+    )
     for core_index, (scalar_result, packed_result) in enumerate(
         zip(scalar_results, batch_result.per_core)
     ):
@@ -934,6 +1025,46 @@ def test_cross_environment_stochastic_uniforms_preserve_rng_and_replay(device):
             _assert_low_row_equal(left, right)
         for row in batched[core_index].low_ledger:
             _replay_low_chunk(batched[core_index], [row])
+
+
+def test_low_step_host_transfer_is_explicit_fail_closed_and_legacy_default():
+    _scalar, batched, keys = _low_equivalence_groups()
+    snapshots = [boundary(core, active) for core, active in zip(batched, keys)]
+    assert (
+        variable_roster_event_batching.DEFAULT_LOW_STEP_HOST_TRANSFER
+        == variable_roster_event_batching.LEGACY_LOW_STEP_HOST_TRANSFER
+    )
+    with pytest.raises(ValueError, match="exactly 'legacy' or 'packed'"):
+        batched_low_step(batched, snapshots, host_transfer="automatic")
+    assert all(not core.low_ledger for core in batched)
+
+
+def test_packed_low_step_transfer_preserves_shapes_dtypes_and_values():
+    tensors = {
+        "member_obs": torch.arange(12, dtype=torch.float32).reshape(4, 3),
+        "skills": torch.tensor([0, 1, 2, 0], dtype=torch.int64),
+        "critic_member_features": torch.arange(8, dtype=torch.float32).reshape(4, 2),
+        "critic_global_features": torch.arange(4, dtype=torch.float32).reshape(2, 2),
+        "actor_hidden_before": torch.arange(16, dtype=torch.float32).reshape(4, 4),
+        "critic_hidden_before": torch.arange(16, dtype=torch.float32).reshape(4, 4),
+        "actions": torch.tensor([1, 0, 1, 1], dtype=torch.int64),
+        "logp": torch.linspace(-1.0, -0.1, 4, dtype=torch.float32),
+        "values": torch.linspace(0.1, 0.4, 4, dtype=torch.float32),
+        "actor_hidden": torch.arange(16, dtype=torch.float32).reshape(4, 4) + 1.0,
+        "critic_hidden": torch.arange(16, dtype=torch.float32).reshape(4, 4) + 2.0,
+        "critic_source": torch.arange(20, dtype=torch.float32).reshape(4, 5),
+    }
+    reference = variable_roster_event_batching._legacy_low_step_cpu_cache(tensors)
+    packed = variable_roster_event_batching._packed_low_step_cpu_cache(tensors)
+    assert tuple(reference) == tuple(tensors)
+    assert set(packed) == set(reference)
+    for name in reference:
+        assert packed[name].shape == reference[name].shape
+        assert packed[name].dtype == reference[name].dtype
+        assert np.array_equal(packed[name], reference[name])
+    assert packed["member_obs"].base is packed["values"].base
+    assert packed["skills"].base is packed["actions"].base
+    assert packed["member_obs"].base is not packed["skills"].base
 
 
 def _make_closed_ppo_group(model_seed, device="cpu"):
