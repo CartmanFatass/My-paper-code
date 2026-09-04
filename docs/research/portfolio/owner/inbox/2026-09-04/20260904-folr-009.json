@@ -1,0 +1,32 @@
+{
+  "id": "20260904-folr-009",
+  "created": "2026-09-04T15:23:18-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "brief",
+  "title": "B04：记住信息有用，类型化掩码增益很小",
+  "context": "三次完整训练支持本环境和预算内的小差异结果；信息切断与同信息比较保持分开。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "普通通用网络已学会高回报，简单记忆对照也高；原生回报支持该有界解读。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L236",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-04_n3_folr_routing_b04.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
