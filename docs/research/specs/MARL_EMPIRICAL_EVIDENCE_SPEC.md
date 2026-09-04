@@ -382,38 +382,43 @@ complete learner chain, and capacity or consumer-recompute gates that do not cha
 Direction owners SHOULD record the demotion in the direction's next intake rather than rewrite
 historical documents.
 
-### 11.7 Headroom and minimum effect of interest (2026-09-04)
+### 11.7 Headroom, minimum effect of interest, and card description fields (2026-09-04)
 
-Two numbers, set by the owner on 2026-09-04
-(`docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`), govern
-investment in mechanism objects and the reading of B results. They are Portfolio investment rules
-under §8.1 and card content. They are not launch conditions and do not extend §11.4.
+Set by the owner on 2026-09-04 and revised the same day after Codex Root's review
+(`docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`). Everything in
+this section is a description field or a Portfolio comparison input under §8.1. Nothing here is a
+launch condition, an exclusion rule, or a rewrite of a B result's polarity, and nothing extends
+§11.4.
 
-- **Headroom floor.** Before a direction opens a mechanism B object family it records a headroom
-  measurement on the intended host: the gap between a stated upper reference (a DP or Bayes
-  solution, an oracle with privileged information, or the best arm of a competent comparator
-  sweep) and the tuned same-information generic baseline, both with seeds and curves. The
-  direction is invested in only when the gap is at least 5% of the baseline return. Below that,
-  the honest next object is a different host, a different question, or a park, not a smaller
-  mechanism.
-- **Closure share.** A B result on that host is read against the recorded headroom: a treatment
-  that closes at least 25% of it is a positive B signal and the ladder continues; one inside that
-  share is `NEITHER`, whatever its sign; one of opposite sign closes the exact object. Absolute
-  edges are reported but never read on their own.
-- **Three readings on the card.** Every B card states at freeze time which reading each outcome
-  triggers and the DM's recommended disposition for each. This is early intake text in the
-  options-and-recommendation form of the decision ladder, not a pre-registered failure boundary,
-  and its absence never holds a launch.
-- **Baseline set.** The tuned baseline used for headroom is kept per host as frozen result
-  documents and runner configuration under `docs/research/baselines/<host>/` and
-  `experiments/baselines/<host>/`, reused by every direction on that host and never weakened by
-  one. Paired seeds and common random numbers across arms are the default where the host allows.
+- **Headroom record.** A direction's headroom on a host is the gap between a stated upper
+  reference (a DP or Bayes solution, an oracle with privileged information, or the best arm of a
+  competent comparator sweep) and a tuned same-information generic baseline, both with seeds and
+  curves. Computing it from existing results is A/RECON; training or tuning a baseline for it is a
+  B object and is declared as one. Headroom is a diagnostic and a sequencing input: Portfolio
+  proposals state each direction's record or its absence, and a missing record is a reason to
+  sequence the measurement early, never a reason to stop investing.
+- **Minimum effect of interest (MEI).** Each card declares its own MEI, absolute, relative to the
+  baseline return, or both, with the DM's reason for the choice. There is no repository-wide
+  value; a relative value alone is unsuitable where the baseline return is near zero, negative, or
+  on a different scale from other hosts. The declared MEI informs Portfolio comparison across
+  directions. The card's own result branches remain the reading rule for the result.
+- **Reading narrative.** Every B card carries a short narrative field, "how the result will be
+  interpreted": what an effect above the MEI, inside it, and of opposite sign would each suggest
+  and what the DM would then recommend. It is descriptive intake text written early, not a frozen
+  decision rule and not a pre-registered failure boundary; its absence never holds a launch.
+- **Baseline set.** Tuned baselines are kept per host as reusable evidence packages, frozen
+  result documents and runner configuration under `docs/research/baselines/<host>/` and
+  `experiments/baselines/<host>/`. A direction reuses them when its observation, action,
+  information and budget match, and otherwise records which of those does not; they are never a
+  mandatory comparator. Paired seeds and common random numbers across arms are the default where
+  the host allows.
 - **Binding structure line.** A card's first two lines are its one-sentence claim and the MARL
-  structure the generic same-information learner cannot supply on this host: (a) agent-count
-  scaling or roster change, (b) temporal abstraction or termination, (c) multi-agent credit
-  assignment, (d) other-agent non-stationarity or partial observability, or `none`, in which case
-  the object is information-flow or systems work and says so.
+  structure the DM holds responsible for the effect: (a) agent-count scaling or roster change,
+  (b) temporal abstraction or termination, (c) multi-agent credit assignment, (d) other-agent
+  non-stationarity or partial observability, or `systems / information flow`. The field is a
+  classification. A `systems / information flow` entry excludes nothing; the DM adds one sentence
+  on how the question arises from multi-agent partial observability or non-stationarity, or states
+  that it does not.
 
-Ladders already open on 2026-09-04 continue under their cards; for them the DM reports the closure
-share as an additional intake line without changing the card's verdict rule. The rule applies in
-full to every card frozen after that date.
+Ladders already open on 2026-09-04 continue under their cards unchanged. The fields apply to
+every card frozen after that date.

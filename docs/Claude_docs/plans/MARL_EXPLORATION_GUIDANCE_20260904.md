@@ -196,3 +196,27 @@ This document does not touch `AGENTS.md`, `.codex/`, `.agents/`, or `CLAUDE.md`;
 propose new machinery from the engineering scope spec's default-prohibited list; and does not
 reinterpret any recorded result. The classification in §4 is a proposal for a Portfolio-tier
 decision and has no effect until ratified.
+
+## 8. Addendum 2026-09-04 07:35 PDT: owner stance after Codex Root's review
+
+Codex Root recommended against approving this draft as a package, on the ground that it mixed
+diagnostic method with Portfolio policy that would narrow scope, and that most ACTIVE directions
+lack the measurement assets P1 presumes (a same-information upper reference and a tuned generic
+baseline), so a hard P1 would stop them for missing assets rather than for small headroom. The
+owner agreed and added that the Codex loop is deliberately unbounded in direction count. The
+resulting stance, now in `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`:
+
+- P1 kept as diagnosis and sequencing, not a threshold; training a baseline is B, not A.
+- The 5%/25% numbers withdrawn; each card declares its own MEI.
+- P2 kept as reusable evidence packages, never a mandatory comparator.
+- P3 kept as a classification field; `systems / information flow` excludes nothing.
+- P4 withdrawn: all ACTIVE directions continue in parallel; sequencing is not disposition.
+- §4's fusion proposals deferred; hosts and baselines are shared instead.
+- UCOPE stays ACTIVE with the order competent baseline, headroom, mechanism.
+- A4 becomes "prepare a direction-level proposal", with no pre-authorized B.
+- A5 uses two compute measures with node, device and missing values kept.
+- A6 adds description fields only.
+
+The author's residual view, for the record: the case for fewer, deeper ladders was a Claude-side
+default and does not hold where agent parallelism is free; the binding constraints on the Codex
+loop are compute and owner attention, which the sequencing rule and the owner surfaces address.

@@ -37,6 +37,32 @@ flag (`none`, `close-call`, `critic-dissent`, `second-recast`, `portfolio`); the
 return with `MATERIAL_DISSENT: yes|no`; the Portfolio skill records usage per valid result as a
 column and treats the two MEI numbers and the recast budget as investment policy.
 
+## Revision after Codex Root's review (07:22–07:35 PDT, `OWNER_DIRECT`)
+
+Codex Root reviewed the guidance draft and recommended not approving it as one package, because
+it mixed diagnostic method with Portfolio policy that would narrow the research scope. The owner
+adopted the following stance, and item 4 above is superseded by it:
+
+1. Headroom is a diagnostic and a sequencing input, never an investment threshold. Computing it
+   from existing results is A/RECON; training or tuning a baseline for it is a declared B.
+2. No repository-wide MEI. Each card declares its own (absolute, relative, or both) with the DM's
+   reason; it informs Portfolio comparison and never rewrites a card's result branches.
+3. All ACTIVE directions continue in parallel; there is no batch PARK and sequencing never becomes
+   a lifecycle disposition. The owner does not limit the direction count on the Codex loop.
+4. No fusion now; directions on one host share baseline sets and evidence interfaces.
+5. UCOPE stays `ACTIVE` with the object order competent baseline, then headroom, then mechanism.
+6. FSD and VNFC prepare a direction-level multi-UAV proposal after E3 / R02; no B is
+   pre-authorized.
+7. Usage per valid result is recorded in two measures (the valid result's own compute; total
+   accepted-attempt compute divided by valid results), with node, device and missing values kept.
+8. Card fields are descriptive: binding MARL structure (or `systems / information flow`, which
+   excludes nothing) and a reading narrative; no numeric gate.
+9. Recast budget one remains, as lowest sequencing priority only.
+
+Codex Root will form the persistent `portfolio:cross_direction` Pro packet from this stance and
+return a formal Portfolio proposal for the owner's ratification; `PORTFOLIO.md` is not changed by
+this record.
+
 ## Files changed under this decision
 
 `AGENTS.md` §2 and §4; `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11.7;

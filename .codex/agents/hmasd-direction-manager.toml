@@ -74,20 +74,22 @@ may attach an engineering dissent naming a missing fact; the node is re-opened w
 Portfolio tier (priority, capacity, lifecycle, fusion, separation, registration, investment): never
 yours. Return the recommendation to Root.
 
-### Card lines and investment policy (owner decision 2026-09-04, evidence spec section 11.7)
+### Card description fields (owner decision 2026-09-04 as revised, evidence spec section 11.7)
 
-The card's first two lines are a one-sentence claim and the binding MARL structure the generic
-same-information learner cannot supply on this host: (a) agent-count scaling or roster change,
-(b) temporal abstraction or termination, (c) multi-agent credit assignment, (d) other-agent
-non-stationarity or partial observability, or `none`, in which case the object is information-flow
-or systems work and says so. A B card also records the direction's headroom on the host (upper
-reference minus tuned same-information baseline, from the host's baseline set) and the three
-readings of section 11.7 (closes at least 25% of headroom: positive, continue; inside: `NEITHER`;
-opposite sign: close the object), each with your recommended disposition. When the direction has
-no headroom measurement on the intended host, or the measured gap is below 5% of the baseline
-return, the next object is that measurement or a different host or question, an A/RECON with no
-learner, before any new mechanism family. Ladders already open continue; report the closure share
-as an extra intake line for them.
+The card's first two lines are a one-sentence claim and the binding MARL structure you hold
+responsible for the effect: (a) agent-count scaling or roster change, (b) temporal abstraction or
+termination, (c) multi-agent credit assignment, (d) other-agent non-stationarity or partial
+observability, or `systems / information flow`. This is a classification, not an exclusion; for
+the last entry add one sentence on how the question arises from multi-agent partial observability
+or non-stationarity, or say that it does not. A card also declares its own minimum effect of
+interest (absolute, relative, or both, with your reason; there is no repository-wide number), the
+direction's headroom record on the host or its absence, and a short narrative "how the result will
+be interpreted" (above the MEI, inside it, opposite sign, and what you would then recommend). The
+narrative is descriptive; the card's result branches remain the reading rule. Headroom computed
+from existing results is A/RECON; training or tuning a baseline for it is a B object and is
+declared as one. A missing headroom record is a reason to sequence that measurement early, never a
+reason to stop the direction. Reuse the host's baseline set when observation, action, information
+and budget match, and otherwise record which does not. Ladders already open continue unchanged.
 
 Recast budget is one per direction. Execute a first Convergence `RECAST` normally and record
 `recasts: 1` in the intake. A second `RECAST` verdict also executes (the Pro decision is final for

@@ -22,7 +22,7 @@ surfaces, and reads the owner's replies at clean boundaries. Nothing waits on th
 | Owner brief scope and language | every valid result, Chinese |
 | Entry triage for new cards | soft veto through the digest, launch never blocked |
 | Prediction wait | none; one request per ladder, scored if filled, `not taken` otherwise |
-| Policy parameters | MEI 5% headroom floor, 25% closure share; recast budget one |
+| Policy parameters | initially MEI 5%/25% and recast budget one; **revised 07:35 PDT after Codex Root's review**: no repository-wide MEI (each card declares its own), headroom is a diagnostic and sequencing input only, recast budget one kept as lowest sequencing priority |
 | Hard stops (asked 07:17 PDT) | none added; every surface is append-only and the loop never waits; the pre-existing owner ratification of Portfolio-tier actions is unchanged |
 
 ## 2. What changes, file by file
@@ -99,3 +99,17 @@ Root will surface them as `portfolio` rows in the first digest; the owner answer
 - The two edited TOML files parse (`tomllib`).
 - `tests/skills` run after the edits; result recorded in the commit message.
 - No frozen object, live run, comparator, budget, RNG or claim meaning was touched.
+
+## 8. Addendum 2026-09-04 07:35 PDT: revision after Codex Root's review
+
+Codex Root reviewed the guidance draft and advised against approving it as one package. The owner
+adopted its stance with two refinements from this session (headroom stays a mandatory proposal
+field and a compute-sequencing tie-breaker; recast budget one stays as sequencing priority). The
+committed authority text was revised accordingly: `AGENTS.md` §2 (investment fields, no numbers,
+sequencing never a lifecycle disposition), evidence spec §11.7 (headroom record, declared MEI,
+reading narrative, baseline set as reusable evidence, binding structure as classification with
+`systems / information flow` excluding nothing), the DM definition, and the Portfolio skill (two
+usage measures; share assets, do not fuse). The nine-point stance is recorded in the decision
+record. §5 items 3 and 4 of this plan are read under that stance: the headroom census is
+sequencing, not a precondition, and a baseline that must be trained is a declared B. §6 is
+superseded: no batch PARK, no fusion now, UCOPE stays ACTIVE with competence-first ordering.
