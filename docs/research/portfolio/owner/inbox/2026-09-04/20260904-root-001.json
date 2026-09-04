@@ -1,0 +1,36 @@
+{
+  "id": "20260904-root-001",
+  "created": "2026-09-04T08:13:07-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "九点投资政策：正式 Portfolio proposal 待 ratification",
+  "context": "Pro 在冻结提交 dfd9c5dbd 的 31/31 条证据上形成 ADOPT_WITH_BOUNDED_REVISIONS：19 ACTIVE/3 PARKED 及科学优先级不变；不融合、不注册、不授权新 B；headroom、MEI、用量和 remote-first 仅作比较与排序。请重点裁决 H→M→O 竞争队列、accepted-attempt 用量定义，以及 SCDMP 既有两次 recast 是否追溯计入 second-recast。批准前 Root 不修改 PORTFOLIO.md。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": ""
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": ""
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": ""
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-04-nine-point-investment-policy-portfolio-01/2026-09-04-nine-point-investment-policy-portfolio-01--portfolio--attempt-01__02_RESPONSE.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open"
+}
