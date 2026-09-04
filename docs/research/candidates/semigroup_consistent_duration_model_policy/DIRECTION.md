@@ -482,3 +482,32 @@ supported. Exact intake, card and archive are
 `SCDMP_D6_SECTION11_REOPEN_CONVERGENCE_INTAKE_20260904.md`,
 `SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_SCIENCE_CARD_20260904.md`, and
 `external/2026-09-04-scdmp-d6-section11-reopen-convergence-02/`. Portfolio state is unchanged.
+
+## D6 duration-action A01 result — 2026-09-04
+
+Fresh attempt-02 completed as valid A/RECON evidence at launch SHA
+`630ce0f3423fef0e831bbc6bd2b2c990c3e9994f`. The exact frozen six-state population was established;
+all 1,152 candidate missions and evaluator calls completed with 203,877 total native transitions,
+zero learner/model/optimizer activity and no failure or timeout. The integer result is `W=2498`,
+`R7=0`, `R13=1`, so the first matching branch is
+`A_ONE_SIDED_DURATION_ACTION_RELEVANCE`.
+
+Every state has nonzero action span, but the best `k=13` action exceeds the best `k=7` action in all
+six states by 179–197 numerator units. Thus this exact finite host/population/action panel supports
+one-sided native duration-action relevance and contradicts the predicted bidirectional substrate.
+Because every mission safe-docked, the observed contrast is docking-time value rather than failure
+incidence. It supplies no learner, cross-duration sharing, regularization or negative-transfer
+polarity.
+
+The strongest support is the complete paired table, exact integer rule and nonzero native counts.
+The strongest contradiction is the absence of any materially `k=7`-favoring state. A simple
+longer-hold consequence remains the strongest alternative. The finite claim ceiling excludes D6/D8
+performance, unseen-duration transfer, semigroup invariance, general MARL value, safety and
+deployment.
+
+No B is authorized. The next discriminator is direction-tier: reopen the same persistent
+convergence binding to choose between parking this D6 action-choice family and one prospectively
+different, independently justified A/RECON source population. Exact evidence and intake are
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_EVIDENCE_20260904.md` and
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_INTAKE_20260904.md`. Portfolio state remains
+unchanged.
