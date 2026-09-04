@@ -26,18 +26,41 @@ Before investing or making a material lifecycle recommendation, Root identifies:
   live choices; and
 - the contrary observation that would change the recommendation.
 
-Executing every already `ACTIVE`, independently admitted direction under the current unbounded
-capacity policy is ordinary sequencing, not a new Portfolio decision. Runtime availability and
-dependency ownership may change launch order, but Root must not silently turn scheduling into a
-priority, lifecycle, exclusion, fusion, separation, or investment decision. If scarce resources
-force a choice among directions rather than a queue in which all remain admitted, use the
-Portfolio decision path below.
+Every `ACTIVE` direction remains admitted to the research queue. Root ordinarily schedules that
+queue through a target working set of five concurrently advancing top-level DM chains; choosing
+which admitted direction occupies a slot is sequencing, not a new lifecycle decision. Runtime
+availability and dependency ownership may change launch order, but Root must not silently turn
+scheduling into a priority, lifecycle, exclusion, fusion, separation, or investment decision. A
+queued `ACTIVE` direction is not `PARKED`.
 
 Execution placement is remote-first under `.codex/hmasd-compute.toml`. Route new portable
 result-bearing invocations to the enabled remote node while the local machine retains the control
 plane and acts as a prospectively authorized fallback. This is capacity routing, not evidence or a
 direction-priority signal. A node change must preserve the card's declared host/device semantics,
 must occur before question-relevant output, and requires a fresh admission on the destination.
+
+## Direction execution working set
+
+The target parallelism is five direction-level DM chains. Count neither Root nor Transport,
+CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
+direction slots.
+
+- Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
+  Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
+  expected information gain, cost/reversibility, current dependency state, and contrary evidence.
+- Prefer real algorithm implementation and decision-relevant evidence over ceremony when the
+  claim does not require a stronger class. A direction waiting on a Direction- or Portfolio-tier
+  dependency yields its slot when another admitted direction can advance.
+- Do not interrupt live work to correct temporary overlap above five. Let chains reach clean
+  boundaries and do not refill until the working set returns to five.
+- Queue membership has no lifecycle or priority effect. Five is not a target count for `ACTIVE`
+  directions and does not authorize batch `PARK`, closure, fusion, or absorption.
+- Refilling a slot under this recorded owner policy is ordinary sequencing and does not itself
+  require a Portfolio Pro round. Any proposed priority, investment, lifecycle, fusion, separation,
+  or registration change still uses the Portfolio decision path.
+- Consider fusion only on demand, through the Portfolio decision path, after showing that question,
+  comparator, estimand, and next object are materially the same. Similar vocabulary, host, or
+  reusable baselines is insufficient.
 
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
@@ -52,11 +75,13 @@ promote a later one.
 
 ## Investment fields (owner decision 2026-09-04, revised the same day)
 
-Controlling record: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`;
-field text: evidence spec §11.7 and `AGENTS.md` §2. These are comparison inputs and sequencing
-rules, not launch gates, exclusion rules, or lifecycle dispositions. All ACTIVE directions
-continue in parallel under the unbounded-capacity decision; sequencing orders contended compute
-and never parks a direction by itself.
+Controlling records: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`
+and its execution-parallelism clarification,
+`docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`; field text:
+evidence spec §11.7 and `AGENTS.md` §2. These are comparison inputs and sequencing rules, not launch
+gates, exclusion rules, or lifecycle dispositions. All `ACTIVE` directions remain admitted, while
+the five-chain direction working set controls which ones advance concurrently; sequencing orders
+work and never parks a direction by itself.
 
 - **Headroom record.** Every Portfolio proposal states each in-scope direction's headroom record
   on its host or its absence. A missing record sequences that measurement early (A/RECON when

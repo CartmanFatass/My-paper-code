@@ -24,6 +24,14 @@ reports.
 > local processes are not migrated. The controlling owner decision is
 > `decisions/2026-09-04-remote-first-compute-routing.md`. No Codex restart is required; new tasks
 > load the updated project configuration.
+>
+> **Direction-parallelism overlay (owner clarification, 2026-09-04).** The absence of a fixed
+> repository cap on implementer sessions and result-bearing runs does not mean all lifecycle-ACTIVE
+> directions run simultaneously. Root maintains a target working set of five concurrently advancing
+> top-level DM chains. Other `ACTIVE` directions remain admitted and queued, without lifecycle or
+> priority change. Five is not a target direction count or fusion target; consolidation is proposed
+> on demand only for materially identical questions, comparators, estimands, and next objects. The
+> controlling record is `decisions/2026-09-04-five-direction-execution-parallelism.md`.
 
 ## 1. Read in this order
 
