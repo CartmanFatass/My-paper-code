@@ -5,17 +5,27 @@
 - Object: `SCDMP-D6-CROSS-K-Q-SHARING-B01`
 - Direction: `semigroup_consistent_duration_model_policy`
 - Evidence class: **B/EXPLORE**
-- Scientific contract: **FROZEN before implementation or observation**; CM may append only the
-  outcome-blind numeric cost table required below, which changes no scientific field
-- Launch readiness: **HELD for CM runner-owned numeric cost projection**
+- Current direction-local status: **`NOT_LAUNCHABLE_SECTION_11_4_METHOD_CONFLICT`**
+- Scientific contract: **historically frozen, withdrawn from launch before any observation**
+- Launch readiness: **PROHIBITED**; no smoke, census, dataset, model, optimizer, learner,
+  evaluator or result command may execute under this card
 - Direction authority: `PRO_FINAL — RECAST_D6`, archived response SHA-256
   `95c60538bdf36b0cd78e68ef91ecd20548b7d68e473c7a5f609d27c3e2b473b7`
 - Object-tier architecture/RNG closure: `OWNER_DELEGATED`, intake section "Decisions this intake
   produces", option (a)
 - Object-tier source-law closure: `OWNER_DELEGATED`,
   `SCDMP_D6_CROSS_K_Q_SHARING_B01_SOURCE_LAW_CLARIFICATION_20260904.md`, option (a)
+- Correcting direction authority: `PRO_FINAL — SPLIT_A_RECON_THEN_REOPEN_B`, archived response
+  SHA-256 `a98efe074a2bd0ec714e5495209555b4745d724a9894c2f8c72669c40bdb8621`
 - No result-bearing run, root, model, optimizer, training record or evaluation tape exists at this
   freeze.
+
+The controlling correction removes the 1,152-mission census entirely from B launch authority.
+This card may not be repaired in place by deleting its early return: no B object is authorized.
+Only the separately named `SCDMP-D6-DURATION-ACTION-RELEVANCE-A01` A/RECON object may proceed.
+After a valid A intake, the same convergence node must decide whether to freeze a newly named B.
+All detailed B wording below is retained as historical prospective provenance, not executable
+authority.
 
 This is a new, transparently outcome-informed object. It is not B01 `RUN-02A`/`RUN-02B`, a
 reinterpretation of the graded diagnostic, an FCEOV `.3` continuation, D2 interruption or learned
