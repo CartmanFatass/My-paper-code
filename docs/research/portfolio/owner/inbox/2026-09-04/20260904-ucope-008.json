@@ -1,0 +1,38 @@
+{
+  "id": "20260904-ucope-008",
+  "created": "2026-09-04T14:45:57-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "退回超预算复用草案并交还执行位",
+  "context": "独立审查重新计数：研究模块198行中106行编排，运行器21行全部编排，总计127/219=57.9909%；即使宽松分类97/219也超标。直接复用已减少总代码但未解决依赖。草案字节已保留，未提交的代码与测试已精确删除；没有测试、资源准入、数值诊断或父审计重跑。原A类问题未解，付费采集B类5/6信号不变。",
+  "options": [
+    {
+      "key": "a",
+      "label": "拒绝草案，保留证据并返回具体实现缺口",
+      "consequence": "不启动实验，让Root推进其他方向，原诊断继续保留。"
+    },
+    {
+      "key": "b",
+      "label": "接受超预算代码、重分类或添加无关计算",
+      "consequence": "违反30%工程预算，不执行。"
+    },
+    {
+      "key": "c",
+      "label": "重跑父审计或省略诊断要求",
+      "consequence": "偏离已接受的赋值，不能回答原数值问题。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整独立分类明确超标，继续运行不能产生符合原计划的证据。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_RESUME_TERMINAL_INTAKE_20260904.md",
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_DIRECT_REUSE_BLOCKER_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#ucope-numerical-locus-terminal-scope-return",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

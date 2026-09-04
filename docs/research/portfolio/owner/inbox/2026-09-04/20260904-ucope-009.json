@@ -1,0 +1,32 @@
+{
+  "id": "20260904-ucope-009",
+  "created": "2026-09-04T14:45:59-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "brief",
+  "title": "UCOPE实现检查结束：未启动数值诊断",
+  "context": "本简报报告可复核的静态工程范围检查，不是数值诊断或学习器结果。复用草案仍超30%编排上限；原问题与已有B类信号保持不变。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "将静态工程发现与未产生的数值观察清楚分开。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_RESUME_TERMINAL_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#ucope-numerical-locus-terminal-scope-return",
+  "brief": "docs/research/portfolio/owner/briefs/ucope/2026-09-04_numerical_locus_resume_scope.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
