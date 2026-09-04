@@ -1,0 +1,73 @@
+{
+  "id": "20260904-crto-014",
+  "created": "2026-09-04T14:58:56-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "A03：只读取已经完成的 RAW 诊断轨迹",
+  "context": "Claim: The complete A02 diagnostic artifact permits a bounded reading of the fixed seed-0 RAW actions and regrets at updates252..264, with its diagnostic execution provenance retained. Binding MARL structure: systems / information flow; these are four-agent common-history decisions under partial observability, but this read isolates learner exposure and checkpoint phase rather than a multi-agent or residual effect.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "检查全部十三个固定检查点，不新增学习器曝光，结论限于这一条诊断轨迹。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "保留数据而不解读，原RAW问题继续没有读数。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按批注意见调整读取范围，保留原始结果与来源。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "完整数据已经存在，独立命名并披露诊断来源即可避免重复训练和误标旧失败。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L230",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否把已经完整保存的诊断轨迹作为独立命名的A类观察读取，而不再训练？",
+    "changes_if_approved": [
+      {
+        "target": "CRTO已有诊断数据的使用",
+        "from": "只接受一次未复现故障的技术完成事实",
+        "to": "保留诊断来源，独立检查原定十三个检查点的RAW动作与后悔值"
+      }
+    ],
+    "if_refused": "保留完整原始文件与A02技术结论，不解读轨迹，不新增训练。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_INTAKE_20260904.md",
+        "quote": "One invocation with fault reporting completed and produced the fixed runner's full output before the cap.",
+        "why": "原定轨迹已经存在，直接读取即可回答原问题，无需再支付学习器成本。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md",
+        "quote": "This is an explicitly outcome-informed reading, selected after A02 completed normally and before its phase metrics were read by the DM.",
+        "why": "它不是独立确认，也不能把诊断开关或此前失败的来源隐藏。"
+      }
+    ],
+    "uncertainty": [
+      "完整性、固定锚点和逐行重算尚待检查。",
+      "一条轨迹不能支持残差效果、选出未见数据上的检查点或稳定性结论。"
+    ],
+    "cost": {
+      "compute": "仅一次本地已有JSON读取，最多30秒；新增环境步、更新、评估均为零。",
+      "owner_time": "可异步核对，无需等待。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommendation: **(a)**. It answers the already accepted fixed-checkpoint question using existing data, with no new exposure and without rewriting either earlier attempt's identity or branch.",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md"
+  }
+}

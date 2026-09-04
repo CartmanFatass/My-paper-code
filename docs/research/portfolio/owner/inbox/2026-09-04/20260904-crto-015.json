@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-015",
+  "created": "2026-09-04T14:58:58-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "选择读取已有完整轨迹，保留诊断身份",
+  "context": "A02技术结果已接受。Root明确支持在对象层另名读取已有RAW轨迹。选择A03只读观察，按原问题检查完整性、锚点、逐行动作与两侧阈值，不改A02分支，不将R02失败改为成功，也不重跑。",
+  "options": [
+    {
+      "key": "a",
+      "label": "另名A03读取已有数据",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "保留完整数据但不读取",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "重跑学习器或改写旧任务",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "该选择回答原固定检查点问题，同时保持零新增学习器曝光和完整诊断来源。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L231",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
