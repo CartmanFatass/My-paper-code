@@ -49,6 +49,22 @@ The earlier memory-bounded saturation pilot remains technically admitted. This r
 only transient host availability for the result invocation; it neither contradicts the pilot's
 191,859,553-byte conservative process high water nor changes the frozen 723.80-second projection.
 
+## Fresh admission after the first pressure change
+
+UCOPE completed without a runner. At `2026-09-04T12:16:10Z`, a read-only operating-system query
+reported 5,040,775,168 free physical bytes, making one official retry reasonable rather than a
+rapid blind poll. A distinct fresh receipt was therefore requested at
+`temp/directions/variable_n_fleet_churn/exp/controller_headroom_mb1024_r02/attempt_02_preflight.json`.
+
+The authoritative `GlobalMemoryStatusEx` measurement at `2026-09-04T12:16:21Z` reported physical
+and effective availability of 4,101,500,928 bytes. Both remained below 4,294,967,296; both floor
+flags and `passed` were false. The short-lived discrepancy with the earlier read-only observation
+is host pressure variation, not a measurement failure and not evidence about this object.
+
+No result root or process was created. The clean wait remains controlling until another meaningful
+pressure change, such as completion of active FSD work, makes one later official admission
+reasonable. No rapid polling is permitted.
+
 ## Decisions this refusal produces
 
 Options:
