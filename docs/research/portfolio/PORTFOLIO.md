@@ -1,10 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T23:09:39Z
+Updated at: 2026-09-04T23:41:04Z
 Owner: Root
 Lifecycle admission: 14 ACTIVE source IDs organized into nine route agendas; 8 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: `PAUSED / OWNER_DIRECT`; current round complete, zero advancing DM chains, no automatic refill or next-round launch
+Loop state: `ACTIVE / OWNER_DIRECT`; research resumed from the completed safe handoff, five DM chains dispatched with automatic clean-boundary refill
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -18,12 +18,13 @@ Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-tra
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
-Current drain instruction (supersedes automatic refill): `docs/research/portfolio/decisions/2026-09-04-drain-for-tracker-restart.md`
+Current resume instruction: `docs/research/portfolio/decisions/2026-09-04-resume-with-default-tracker.md`
+Previous drain (completed and superseded): `docs/research/portfolio/decisions/2026-09-04-drain-for-tracker-restart.md`
 Final restart handoff: `docs/research/portfolio/handoffs/2026-09-04-tracker-restart.md`
 Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause-after-current-round.md`
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
-map. That resumed round is now complete and execution is paused for the tracker configuration handoff. Five reserve sources changed to PARKED; all historical IDs,
+map. The tracker handoff round is complete and the owner has now resumed automatic execution with the dedicated tracker. Five reserve sources changed to PARKED; all historical IDs,
 cards, results and family boundaries are preserved. The initial two-investment recommendation
 was never applied. See `decisions/2026-09-04-adopt-nine-routes-and-resume.md` and the complete owner-supplied 6 Pro archive.
 
@@ -84,7 +85,32 @@ The eight reserves are `acvc`, `eociv_lite`, `recct_lite`, `ec4g_r1`, `scope_1s`
 `active_post_churn_population_flow_identification`. Read the controlling decision for re-entry;
 historical evidence can be reused without restarting their independent chains.
 
-### Current direction working set — paused at safe boundaries
+### Current direction working set — resumed with dedicated tracker
+
+Root task: `01a06ec7-fd64-7281-9bc1-fc42ed53a2ca`. Integration checkout and upstream remain
+`C:/Projects/HMASD-worktrees/root-integration-02-20260904`, `origin/main`.
+Existing heartbeat `hmasd-research-loop` is ACTIVE with its retained 30-minute recurrence,
+retargeted to this Root. [The explicit owner resume](decisions/2026-09-04-resume-with-default-tracker.md)
+supersedes the completed drain. Initial resumed assignments:
+
+| Route | Native DM | Next bounded work |
+| --- | --- | --- |
+| K1 / FSD | `/root/dm_amx_fsd_continue` | Unchanged E3 medium_d2_seed3, then remaining cells under the original contract |
+| N1 / FRRIE | `/root/dm_amx_frrie_continue` | Recorded-byte r04 diagnosis before deciding repair; no blind attempt05 |
+| N3 / state recovery | `/root/dm_amx_n3_continue` | Resolve DISH state-source intervention's concrete checkout dependency |
+| N5 / allocation | `/root/dm_amx_n5_continue` | Assess same-information conditioning/step-size discriminator after valid B02 |
+| K2 / CRTO | `/root/dm_amx_crto_continue` | Assess full three-update-cycle RAW discriminator with original evidence identities |
+
+CBSC and UCOPE are queued at their recorded implementation blockers for clean-boundary refill.
+Every ACTIVE route remains admitted; no lifecycle or priority field changes. Default tracker is
+`/root/tracker_tl_experiments`, actual custom role `hmasd-experiment-tracker`, Terra/low, on
+`codex/experiment-tracker-resumed-20260904` in the same-named worktree under
+`C:/Projects/HMASD-worktrees/`. It solely owns `EXPERIMENT_TRACKING.md`; accepted handles and
+notices travel directly between tracker and DMs/CMs. Both tracker and FSD confirmed the native
+two-way ACK `tracker-resume-fsd-20260904-01`. Tracker is reusable and consumes no direction slot.
+The restart supervisor snapshot had zero live handles; new launch records supersede that snapshot.
+
+### Historical completed boundary before this resume
 
 Root task: `01a06df5-528a-7b32-8475-9b098c2b33c2`. Integration checkout:
 `C:/Projects/HMASD-worktrees/root-integration-02-20260904`, upstream `origin/main`.
