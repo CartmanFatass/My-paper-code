@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-014",
+  "created": "2026-09-04T15:14:40-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "最小审计修复通过后新鲜运行原 R02",
+  "context": "最小补丁只让 R02 跳过隐藏状态和概率的中间量逐位检查；其他调用保持默认严格，R02 的动作、native 状态、回报与工作量检查保留，底层计算和卡不变。独立复核无实质问题，针对回归和原真实 learner toy 各通过一次。选择在新提交、新 worktree、输出和即时准入下执行原 R02；R04 只是第四次执行标识，不是新科学对象，不复用旧失败状态。",
+  "options": [
+    {
+      "key": "a",
+      "label": "新鲜执行修复后的原 R02",
+      "consequence": "原根、CPU FP32、比较器、128 次更新和读数规则保持不变，旧失败证据保留。"
+    },
+    {
+      "key": "b",
+      "label": "重复已通过的工程检查",
+      "consequence": "增加技术成本，当前没有未解决的补丁验证问题。"
+    },
+    {
+      "key": "c",
+      "label": "保留已修复对象未观测",
+      "consequence": "避免新增计算，但不能回答已授权的最小 learner 问题。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "补丁通过了保持真实动作与 native 完整性的验证，原科学问题可以按原卡在独立新尝试中继续。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_LAUNCH_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L218",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
