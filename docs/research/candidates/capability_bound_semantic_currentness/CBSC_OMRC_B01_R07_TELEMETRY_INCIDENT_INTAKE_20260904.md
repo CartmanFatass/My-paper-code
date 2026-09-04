@@ -254,6 +254,19 @@ Root has been informed. No unrequested machinery is accepted as the price of a r
 
 ## Owner surface and integration
 
+### Current-round handoff boundary
+
+After the bounded repair had begun, Root relayed the owner's instruction to let each direction
+finish its current round and leave a recoverable handoff for a later Root/configuration restart.
+This supersedes any earlier scheduling expectation that automation would immediately continue
+from technical repair to another attempt. Finish the already-authorized independent review and
+focused/offline formal publication check; then stop at the engineering return and DM intake.
+There is **no r08, new scientific invocation, new object or Pro round** in this work. An independent
+publication defect, if reproduced by that existing check, is returned as a concrete blocker, not
+used to expand the current repair. Root further specified that unaccepted runtime source remains
+on its pushed engineering branch, while the report and DM intake are separately integrable.
+This is `OWNER_DIRECT` scheduling, not a change to lifecycle, evidence class or scientific meaning.
+
 Owner reviews were empty in both DM and Root checkouts; no CBSC owner override was present. The
 owner's prediction remains `not taken (unattended)` and is not scored on incomplete evidence.
 This technical incident is not a valid-result brief. The decision item and exact daily-ledger row
