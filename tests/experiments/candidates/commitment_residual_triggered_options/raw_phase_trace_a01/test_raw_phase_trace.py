@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import json
 import math
+import os
 from pathlib import Path
 
 from experiments.candidates.commitment_residual_triggered_options.raw_phase_trace_a01 import experiment
@@ -24,6 +25,15 @@ def test_exact_panel_namespace_and_prospective_counts() -> None:
     assert cost["fixed_planning_law"] == "3 * 434.7066687 = 1304.1200061 seconds"
     assert cost["projected_raw_trace_arm_seconds"] == 1304.1200061
     assert cost["projection_within_cap"] is True
+    assert cost["thread_contract"] == {
+        "required_computational_threads": 1,
+        "native_thread_environment": {
+            "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
+            "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1",
+        },
+        "torch_intraop_threads": 1, "torch_interop_threads": 1, "matches": True,
+    }
+    assert all(os.environ[name] == "1" for name in experiment.THREAD_ENVIRONMENT)
     assert cost["prospective_work_counts"] == {
         "predictor_tapes": 128, "predictor_updates": 100,
         "predictor_batch_size": 128, "predictor_processed_examples": 12800,
@@ -143,6 +153,8 @@ def test_toy_runner_end_to_end_under_60_seconds(tmp_path: Path, monkeypatch) -> 
     assert summary["result_branch"] == "A01-RAW-PHASE-INCOMPLETE"
     assert summary["completeness_issues"] == ["TOY_SMOKE_NOT_A_SCIENTIFIC_POPULATION"]
     assert summary["representation"] == "RAW"
+    assert summary["thread_contract"]["torch_intraop_threads"] == 1
+    assert summary["thread_contract"]["torch_interop_threads"] == 1
     assert summary["absent_representations"] == ["TRUE_RESIDUAL", "CALIBRATED_DERANGEMENT"]
     assert summary["work_counts"]["true_residual_gate_updates"] == 0
     assert summary["work_counts"]["calibrated_derangement_evaluation_rows"] == 0

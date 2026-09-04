@@ -8,13 +8,21 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import math
+import os
 from pathlib import Path
 import subprocess
 import time
 from typing import Mapping, Sequence
 
+THREAD_ENVIRONMENT = ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS")
+for _thread_variable in THREAD_ENVIRONMENT:
+    os.environ[_thread_variable] = "1"
+
 import numpy as np
 import torch
+
+torch.set_num_threads(1)
+torch.set_num_interop_threads(1)
 
 from experiments.candidates.commitment_residual_triggered_options.host import ScenarioTape
 from experiments.candidates.commitment_residual_triggered_options_common_history_gate_r01.config import (
@@ -64,6 +72,21 @@ UPDATE_256_ANCHOR = {
     "REPLAN": {"exact_action_count": 4, "mean_regret": 0.0066464623737892345},
     "equal_side_regret": 0.0033232311868946172,
 }
+
+
+def thread_contract() -> dict[str, object]:
+    observed = {
+        "torch_intraop_threads": torch.get_num_threads(),
+        "torch_interop_threads": torch.get_num_interop_threads(),
+    }
+    if any(os.environ[name] != "1" for name in THREAD_ENVIRONMENT) or any(
+            count != 1 for count in observed.values()):
+        raise RuntimeError("RAW trace requires one computational thread")
+    return {
+        "required_computational_threads": 1,
+        "native_thread_environment": {name: os.environ[name] for name in THREAD_ENVIRONMENT},
+        **observed, "matches": True,
+    }
 
 
 @dataclass(frozen=True)
@@ -188,6 +211,7 @@ def _cost_payload(anchor: Mapping[str, object]) -> dict[str, object]:
         "planning_multiplier": 3, "projected_raw_trace_arm_seconds": PROJECTED_ARM_SECONDS,
         "per_arm_and_invocation_wall_cap_seconds": INVOCATION_CAP_SECONDS,
         "projection_within_cap": PROJECTED_ARM_SECONDS < INVOCATION_CAP_SECONDS,
+        "thread_contract": thread_contract(),
         "prospective_work_counts": {
             "predictor_tapes": 128, "predictor_updates": 100,
             "predictor_batch_size": 128, "predictor_processed_examples": 12_800,
@@ -204,6 +228,7 @@ def _cost_payload(anchor: Mapping[str, object]) -> dict[str, object]:
 
 
 def project_cost(seed: int = SEED) -> dict[str, object]:
+    thread_contract()
     return _cost_payload(initialization_anchor(seed))
 
 
@@ -539,6 +564,7 @@ def run_experiment(output_dir: str | Path, *, admission_receipt: str | Path,
                    toy: bool = False) -> dict[str, object]:
     if seed != SEED:
         raise ValueError("this object has fixed learner seed 0")
+    threads = thread_contract()
     admission = validate_admission_receipt(admission_receipt)
     output = Path(output_dir).resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -618,6 +644,7 @@ def run_experiment(output_dir: str | Path, *, admission_receipt: str | Path,
         "object_id": OBJECT_ID, "seed": seed, "toy": toy, "result_branch": branch,
         "completeness_issues": issues, "launch_sha": current_launch_sha(),
         "exact_argv": list(argv), "execution_node": execution_node,
+        "thread_contract": threads,
         "result_root": str(output), "source_law": {
             "rng_namespace": SOURCE_NAMESPACE, "source_split_coordinate": "EVALUATION",
             "regime": "K8", "source_slots": list(range(8)), "count_per_source_slot": 64,
