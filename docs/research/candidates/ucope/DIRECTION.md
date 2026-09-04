@@ -904,3 +904,43 @@ no stable, seed-population, deployable-objective, acquisition, COUNT/RAW, generi
 safety or Portfolio conclusion. The paid-acquisition and COUNT/RAW records are unchanged. The next
 choice—root-safe joint shaping, fresh-draw replication, the paid-root refusal, or park—is direction
 tier and is pending `em:ucope:convergence`; no successor is locally registered.
+
+## Three-witness convergence decision and engineering dissent — 2026-09-04
+
+The complete archived response for request `ucope-em-convergence-20260904-01` is verified at
+SHA-256 `5ff9e0225ef058fddab6942fbae0ef159775e20e3750bc29a0e816c66e3e0698`. Its final direction
+decision is:
+
+```text
+FINAL_DIRECTION_DECISION=CONTINUE
+DECISION_AUTHORITY=PRO_FINAL
+DECISION_FORMED=true
+BLOCKER=NONE
+NEXT_OBJECT_FAMILY=UCOPE-A-RECON-THREE-WITNESS-ROOT-TARGET-VS-ROOT-FIT-AUDIT-R01
+NEXT_EVIDENCE_CLASS=A/RECON
+```
+
+The node accepts TW-B's smallest reading: covering all three witnesses closes the named same-draw
+tail residual beyond equal total hinge dose, but the two repairs become negative-value root probes
+and leave full competence at `3/6`. It selects one read-only localization of induced target shift
+versus finite root fitting before any root-safe, bilevel, fresh-draw, or paid-root successor. Its
+claim ceiling is same-draw, six-policy A/RECON localization with no algorithm-effect, stability,
+acquisition, COUNT/RAW, generic UCOPE, transfer, safety, deployment, or Portfolio conclusion.
+
+The selected audit is not executable from the retained artifact under its own zero-new-episode and
+zero-new-transition boundary. The result kept all twelve live learned-tail and finite-step-root
+vectors but discarded every live root-target array, live-tail exact-root vector, root design, and
+equivalent sufficient statistic. The exact-reference roots solve different MSE-tail targets. Exact
+reconstruction would require regenerating and staging the accepted draw's rows, a direction-tier
+change to the selected boundary.
+
+The exact missing fact and source-level evidence are recorded in
+`UCOPE_THREE_WITNESS_ROOT_TARGET_AUDIT_ENGINEERING_DISSENT_20260904.md`; the full Pro provenance,
+decision, and terminal single-attempt creator-receipt rejection are recorded in
+`UCOPE_THREE_WITNESS_HINGE_R01_CONVERGENCE_DECISION_INTAKE_20260904.md`. The receipt incident does
+not block or weaken the formed Pro decision and is not retried or rerouted.
+
+No successor card is frozen and no result is launched. Per the engineering-dissent rule, the same
+persistent convergence node must be reopened with the missing-byte fact before direction work can
+continue. The paid-acquisition and COUNT/RAW locks remain unchanged; Portfolio effects remain
+reserved.
