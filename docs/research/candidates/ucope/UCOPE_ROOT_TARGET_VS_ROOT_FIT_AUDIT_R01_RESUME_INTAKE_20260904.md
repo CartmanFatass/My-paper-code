@@ -106,6 +106,10 @@ absolute boundary. Owner prediction remains `not taken (unattended)`. No predict
 before a complete two-node result. The next discriminator is the plan's six-branch comparison,
 subject to conformant implementation and fresh node-local admission at each invocation.
 
+Terminal follow-up: direct reuse also exceeded the scope budget and was returned without any
+launch. See `UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_RESUME_TERMINAL_INTAKE_20260904.md` for the
+independent 127/219 classification, no-run counts, owner items and clean scheduling handoff.
+
 ## Evidence
 
 - `UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_NUMERICAL_LOCUS_PLAN_20260904.md`
