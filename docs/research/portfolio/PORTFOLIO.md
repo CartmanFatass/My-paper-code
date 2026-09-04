@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T23:41:04Z
+Updated at: 2026-09-04T23:49:00Z
 Owner: Root
 Lifecycle admission: 14 ACTIVE source IDs organized into nine route agendas; 8 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
@@ -48,7 +48,7 @@ provenance, but result polarity never transfers into an accepting direction.
 | eociv_lite | PARKED | MEDIUM | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: The Convergence-admitted B10 fixed-score exposure curve is valid `B10_FIXED_SCORE_EXPOSURE_RESCUE_NOT_SUPPORTED`: relative `J` rises with exposure while absolute receiver performance becomes more negative. The receiver-addressed family is direction-locally parked pending genuinely new evidence; Portfolio lifecycle remains `ACTIVE`, and A1 headroom is not identified because the matched upper/tuned-generic pair is absent. |
 | expressibility_gated_renewal_credit_relay | PARKED | MEDIUM | ROOT | 2026-09-04T12:10:53Z | Convergence returned `PRO_FINAL=PARK_CURRENT_FACTORIZATION`: the generic critic wins every direct estimation diagnostic, while the factorized arm's 0.0120448 exact-utility edge is scale/calibration ambiguity rather than identified value. Unchanged replication, direction-local scale-controlled B02, and telemetry rerun are rejected. Re-entry requires a separately authorized prospective scale-invariant native advantage under common calibration/trust and a competent same-information comparator. |
 | finite_resource_relational_inductive_efficiency | ACTIVE | HIGH | ROOT | 2026-09-04T23:09:39Z | Route N1 (关系归纳与学习效率). Contact-active R128 R02 attempt04 at exact source 732cc2b2 exited 1 during training-tape dataclass serialization. No summary, checkpoint or failing update/address state was retained; the observed failure's cause remains unresolved without exact-step reproduction. Terminal evidence/intake are complete, with no scientific polarity, attempt05 or new repair loop. The earlier R02-only FP32 intermediate-check repair remains distinct accepted engineering. See FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_TERMINAL_INTAKE_20260904.md. |
-| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-04T23:09:39Z | Route K1 (中断时机). E2 remains valid NEITHER. The complete medium_d0_seed3 cell is valid; E3 is now 11/18 valid, 0 running, 7 never launched, with one historic quarantined attempt. Required artifacts and all 10 transfer hashes agree. Next medium_d2_seed3 is uncreated; no aggregate E3 branch before all 18 cells are valid. See FSD_E3_MEDIUM_D0_SEED3_INTAKE_20260904.md and FSD_E3_HETEROGENEOUS_HAZARD_RUN_STATE_20260904.md. |
+| flexible_skill_duration | ACTIVE | HIGH | ROOT | 2026-09-04T23:49:00Z | Route K1 (中断时机). E2 remains valid NEITHER; E3 has 11/18 valid cells, 1 running medium_d2_seed3, 6 never launched and one historic quarantined attempt. Remote task fsd_e3_medium_d2_seed3_20260904_01 uses pushed source 31bfecd79; fresh admission passed and tracker directly adopted it after confirming runner state. No aggregate E3 branch before all 18 cells are valid. See FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md and EXPERIMENT_TRACKING.md. |
 | metric_ground_transport_allocation | ACTIVE | MEDIUM | ROOT | 2026-09-04T23:09:39Z | Route N5 (配置结构与 FREE). B02 pilot and fixed three-seed panel are complete and valid B02_INSIDE_MEI: METRIC-minus-FREE curve AUC +0.00839669 against MEI 0.01; all three seed differences are positive. This bounds the trained N=4/8 bundled-coordinate toy, with conditioning/step-size alternatives still live. Main runner cost 8.17278 s, 8.93954 s including pilot, wsl_4070 CPU. No successor, old-C restart or UAV promotion. See MGTAP_B02_MAIN_INTAKE_20260904.md. |
 | orbit_shadow_read | PARKED | LOW | ROOT | 2026-09-01T09:55:33Z | Kernel actionability exists, but no return population, learner, or evaluator is defined. Reactivate when an owner-by-role host changes the competent optimal action under matched owner-role/owner-blind/validity-only comparisons. |
 | recct_lite | PARKED | MEDIUM | ROOT | 2026-09-04T21:36:45Z | OWNER_DIRECT reserve; no independent research chain. Re-entry and preserved contrary evidence: `decisions/2026-09-04-adopt-nine-routes-and-resume.md`. Previous boundary: B/EXPLORE consequence-distinct LR/RL/no-update target intervention with proximal measurement and downstream return. The one-port equal-intervention result closes only that host. |
@@ -74,8 +74,8 @@ two exploratory agendas (N3/N5), and one prospective agenda (K4) remain. The nin
 | N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | causal one-deviation R03；second-recast 最低排序 |
 | N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | FOLR B04 有效、差异在 MEI 内，intake 完成；下一状态来源干预未启动 |
 | N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | online B1 r07 不完整隔离；修复因 scope 与历史 fixture 绑定停在未接受边界 |
-| N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | B02 固定 panel 有效、差异在 MEI 内，intake 完成；旧 C 不重开 |
-| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3 11/18 有效、0 运行；下一 medium_d2_seed3 未创建 |
+| N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | B02 有效、差异在 MEI 内；B03 同预算四步长三种子控制已记录，CM 实现中；旧 C 不重开 |
+| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3 11/18 有效、1 运行 medium_d2_seed3、6 未启动；tracker 直接接管 |
 | K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | A03 读取已完成；完整三步周期的后续判别尚未冻结 |
 | K3 | 灵活 skill duration | 信息获取与续约 | 付费获取：`ucope` | 最新 root/数值诊断；保持具体节点约定与 scope |
 | K4 | 灵活 skill duration | duration 表示与价值共享 | 跨时长共享、组合与负迁移：`semigroup_consistent_duration_model_policy`, `vsp_c1` | 前瞻议程；无新冻结对象，旧 D6 家族 PARK 保留 |
@@ -95,10 +95,10 @@ supersedes the completed drain. Initial resumed assignments:
 
 | Route | Native DM | Next bounded work |
 | --- | --- | --- |
-| K1 / FSD | `/root/dm_amx_fsd_continue` | Unchanged E3 medium_d2_seed3, then remaining cells under the original contract |
+| K1 / FSD | `/root/dm_amx_fsd_continue` | E3 medium_d2_seed3 running with passed admission and direct tracker adoption; remaining cells retain original contract |
 | N1 / FRRIE | `/root/dm_amx_frrie_continue` | Recorded-byte r04 diagnosis before deciding repair; no blind attempt05 |
-| N3 / state recovery | `/root/dm_amx_n3_continue` | Resolve DISH state-source intervention's concrete checkout dependency |
-| N5 / allocation | `/root/dm_amx_n5_continue` | Assess same-information conditioning/step-size discriminator after valid B02 |
+| N3 / state recovery | `/root/dm_amx_n3_continue` | CM reproduced C03 launcher cwd-quoting defect; sparse-file-absence diagnosis superseded; preparing bounded C04 correction |
+| N5 / allocation | `/root/dm_amx_n5_continue` | B03 four-rate, three-seed same-information control card recorded and integrated; CM implementation ongoing |
 | K2 / CRTO | `/root/dm_amx_crto_continue` | Assess full three-update-cycle RAW discriminator with original evidence identities |
 
 CBSC and UCOPE are queued at their recorded implementation blockers for clean-boundary refill.
@@ -109,6 +109,12 @@ Every ACTIVE route remains admitted; no lifecycle or priority field changes. Def
 notices travel directly between tracker and DMs/CMs. Both tracker and FSD confirmed the native
 two-way ACK `tracker-resume-fsd-20260904-01`. Tracker is reusable and consumes no direction slot.
 The restart supervisor snapshot had zero live handles; new launch records supersede that snapshot.
+At 23:47:19Z tracker confirmed the first new FSD handle running. Fresh admission measured
+15,432,294,400 bytes physical and effective available memory; wrapper/learner identities and
+exact source/root/receipt are recorded in `EXPERIMENT_TRACKING.md`. This is runtime state,
+not a new valid scientific result. N5 B03 selection/card/owner items are integrated from `da765da0a`;
+the card projects each configuration within its 60-second cap and labels same-panel rate selection
+exploratory. N3's reproduced launcher correction preserves the old C03 failure record.
 
 ### Historical completed boundary before this resume
 
