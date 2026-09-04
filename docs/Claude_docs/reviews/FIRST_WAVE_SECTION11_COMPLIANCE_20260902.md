@@ -1305,6 +1305,35 @@ any CBSC object after B1, r06 cannot pass the replay admission alongside two E2 
 relying on a memory coincidence, and E2's cap is already overrun. The two-direction cap is kept:
 CBSC's slot is occupied by the engineering follow-up, not a run.
 
+### E.12 E.11 confirmed by reproduction; two engineering items (2026-09-03, 18:50 PDT)
+
+The implementer reproduced E.11 over the recorded bytes: exit 6 is the preflight's own code for a
+measured floor failure (receipt written, stderr empty), and replay slot 01's receipt reads
+`available physical memory is below 4 GiB`, 3.42 GiB, `physical_floor_pass: false`, source
+`GlobalMemoryStatusEx`; argv, cwd, script identity and create-only receipt at the call site are
+correct, so an invocation defect is excluded by evidence. Across the 38 admissions availability
+fell from 11.49 GiB to 3.42, the last step 2.48 GiB in 33 seconds, matching one E2 process's
+footprint. Classification confirmed: admission refusal, cause (a), `ENGINEERING_INCIDENT_ONLY`,
+nothing consumed; a fresh attempt is a new launch at the same sha `4679e8dc8`.
+
+Two items the implementer surfaced, with the delegated selections:
+
+1. `run_memory_preflight` raises with stderr only, while a `passed: false` refusal writes its
+   reasons to stdout, which is why E.11 read "exit 6" with an empty message. Options: (a) bundle a
+   one-line fix with a pinning test into the E.8 item 3 engineering commit; (b) leave it.
+   **Owner-delegated decision (unattended): (a).**
+2. The replay phase issues twelve sequential admissions about forty minutes in, when contention is
+   worst and after all expensive work is done; r05 lost 41 minutes to a 0.58 GiB shortfall in a
+   33-second window. A bounded wait-and-retry before a phase's admissions would prevent it but
+   changes the frozen "immediately before each invocation" semantics of the resource admission.
+   **Held for the owner; not delegated.** Recorded as an open item on the B1 result.
+
+Instruction to the implementer (E.11 decision (b) executed): hold r06 until the E2 queue frees a
+run slot; meanwhile extend the end-to-end profile to the formal path with its real constants and
+the final table assembly, exercise it offline against r05's quarantined evidence where the
+absolute-path binding permits, bundle item 1 and the E.8 incident-root path-budget item, commit by
+pathspec, report which stretches of the publication path are exercised and which are not.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
