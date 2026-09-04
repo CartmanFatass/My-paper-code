@@ -1,0 +1,73 @@
+{
+  "id": "20260904-crto-010",
+  "created": "2026-09-04T14:48:15-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CRTO 原生崩溃：一次90秒定位诊断",
+  "context": "Claim: One bounded repetition of the recorded CRTO Python path with external fault reporting can locate or bound the native failure that prevented the RAW phase trace from being published. Binding MARL structure: systems / information flow; this is an execution-path diagnostic for a four-agent common-history learner and does not estimate a partial-observability, non-stationarity, or residual effect.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "执行一次既定运行环境的短诊断，保留堆栈和边界。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "不继续诊断；原RAW问题仍未观测。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下次调用前按批注意见调整诊断，原科学含义不变。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "原始失败18秒内发生且无core，增加内置堆栈输出可在90秒内补足定位依据。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L221",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受一次最多90秒、只为定位原生崩溃的原路径诊断？",
+    "changes_if_approved": [
+      {
+        "target": "CRTO A01诊断步骤",
+        "from": "已通过远端准入，但18秒后崩溃且没有结果或core",
+        "to": "同一源码和运行环境，增加Python自带堆栈报告，执行一次90秒内的定位诊断"
+      }
+    ],
+    "if_refused": "不执行后续诊断，保留未完成尝试及原RAW科学卡片；不产生残差或比较器结论。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_RESUME_R02_RESULT_EVIDENCE_20260904.md",
+        "quote": "No failing learner step was reproduced.",
+        "why": "当前缺少足以定位下一步修复的堆栈，短诊断直接补这条证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_SCIENCE_CARD_20260904.md",
+        "quote": "The flag reports fatal-signal stacks; it changes diagnostic signal handling and may affect timing, which is a declared limitation.",
+        "why": "诊断开关可能改变复现时机，即使没有再次崩溃也不能认定问题消失。"
+      }
+    ],
+    "uncertainty": [
+      "崩溃发生在哪一步仍未知。",
+      "堆栈能定位活动路径，但未必能证明原生缺陷的根因。"
+    ],
+    "cost": {
+      "compute": "一台既定远端CPU、一个计算线程、一次调用，最多90秒，启动前重新检查至少4GiB可用内存。",
+      "owner_time": "可异步查看，无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommendation: **(a)**, because it directly addresses the missing failing-step evidence within the owner's resumed bounded workflow.",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_SCIENCE_CARD_20260904.md"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-009",
+  "created": "2026-09-04T14:48:14-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "保留未完成的 RAW 尝试，原因待复现",
+  "context": "新任务已使用精确已推送源码通过远端内存准入，但18秒后以139退出；结果目录为空。没有core，崩溃步骤未复现，训练计数未知。保留全部证据，将本次尝试记为未完成，原卡片和预测均不改。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留未完成尝试与未知原因",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "立即无诊断重跑或改为本地",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把崩溃或工程通过解释为科学结论",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "必需的学习器测量缺失；通过准入或测试不能替代科学结果，错误文本也不能确定根因。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_RESUME_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L220",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
