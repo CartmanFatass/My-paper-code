@@ -254,6 +254,10 @@ $$
 P=2\left(t_{\mathrm{native\ mission}}\times770\right)+60\ \mathrm{s},
 $$
 
+| technical smoke | `t_native_mission` | native missions | `P` | cap |
+| --- | ---: | ---: | ---: | ---: |
+| `2026-09-04 A02 toy` | `0.0013297499972395599 s` | `770` | `62.04781499574892 s` | `1,800 s` |
+
 where 770 counts two source trajectories plus 768 missions. No numeric A02 projection exists at
 freeze. The A01 wall time `8.115556099975947 s` is historical evidence only and must not be used as
 the A02 projection.
