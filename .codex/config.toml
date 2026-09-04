@@ -40,6 +40,10 @@ config_file = "./agents/hmasd-verifier.toml"
 description = "Optional operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
+[agents.HMASDExperimentTracker]
+description = "Shared Luna/xhigh sibling for accepted experiment handles, tracking, and direct DM reminders."
+config_file = "./agents/hmasd-experiment-tracker.toml"
+
 [agents.HMASDResearchCritic]
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"

@@ -89,6 +89,15 @@ Root task: `01a06df5-528a-7b32-8475-9b098c2b33c2`. Integration checkout:
 Existing heartbeat: `hmasd-research-loop`, retained 30-minute interval, resumed for this Root.
 The saved project checkout has unrelated owner edits and an older HEAD; do not overwrite it.
 
+Shared process observer: `/root/tracker_lxh_experiments`, model `gpt-5.6-luna`, effort `xhigh`.
+DMs hand accepted handles to this sibling and receive reminders directly. It consumes no direction
+slot; CM retains technical acceptance and DM retains scientific intake. Its single-writer record is
+`docs/research/portfolio/EXPERIMENT_TRACKING.md`, worktree
+`C:/Projects/HMASD-worktrees/experiment-tracker-20260904`, branch
+`codex/experiment-tracker-20260904`. Root integrates meaningful tracking commits and restores the
+same observer/handles through the existing heartbeat; it does not relay routine process messages.
+See `decisions/2026-09-04-shared-experiment-tracker.md`.
+
 | Route / source | Current DM | Worktree / branch suffix | Resume boundary |
 | --- | --- | --- | --- |
 | K1 / FSD | `dm_amx_fsd_resume` | `dm-fsd-resume-20260904` | E3 10/18 valid; sole next cell medium_d0_seed3; check roots, then unchanged remote launch |

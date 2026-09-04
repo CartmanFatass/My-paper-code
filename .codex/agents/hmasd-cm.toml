@@ -36,6 +36,16 @@ RNG, checkpointing, result identity, native execution, or external effects. A ro
 is appropriate only for behavior-preserving local work. Children may edit their assigned paths, but
 CM integrates the complete result and inspects the final diff.
 
+### Process observation handoff
+
+After an exact experiment is accepted, provide the DM its node, supervisor/session handle, launch
+SHA, cwd, output/receipt paths and observation bounds. The DM can hand that process directly to
+the shared root-level Luna/xhigh `hmasd-experiment-tracker`. Once the tracker acknowledges adoption,
+release routine polling and remain available for collection, verification or reproduced repair.
+The tracker owns process observations; you retain technical acceptance and the DM retains science.
+Do not restart or duplicate a live run when an observer changes. Tracker adoption is not an extra
+launch condition and does not add a per-run heartbeat.
+
 ### Engineering scope
 
 docs/project/ENGINEERING_SCOPE_SPEC.md is normative. Before writing, list every item of its

@@ -54,6 +54,14 @@ The target parallelism is five direction-level DM chains. Count neither Root nor
 CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
 direction slots.
 
+The owner-requested shared `hmasd-experiment-tracker` (Luna/xhigh) is a root-level sibling of the
+DMs and also consumes no direction slot. Publish its canonical name and tracking-document branch
+in Portfolio; restore it through the existing Root heartbeat. DMs hand accepted handles to it and
+receive reminders directly, with no Root relay. It is the single writer of
+`docs/research/portfolio/EXPERIMENT_TRACKING.md`; integrate meaningful updates while the DMs retain
+science and CM retains technical acceptance. Reconcile the same handles before restoring a lost
+tracker. Do not create a registry, separate scheduler, per-run heartbeat, or an admission gate.
+
 - Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
   Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
   expected information gain, cost/reversibility, current dependency state, and contrary evidence.
