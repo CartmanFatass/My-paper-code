@@ -1,0 +1,38 @@
+{
+  "id": "20260904-mgtap-012",
+  "created": "2026-09-04T16:47:24-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "N5 B03：先测对称步长对照",
+  "context": "B02 的三个差异均为正，但均值 0.00840 小于 MEI 0.01。当前恢复指令允许继续现有 B 梯子；用双方相同四档步长和三个新种子，直接检验有效步长解释。选择与读取共用探索面板，不是独立确认。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行对称步长对照",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "先执行绑定切断对照",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "延长固定步长训练",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "固定优化器是 B02 最直接、最便宜可检验的替代解释。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_SELECTION_INTAKE_20260904.md",
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n5-b03-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
