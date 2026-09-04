@@ -78,6 +78,18 @@ def _finite_positive(value: Any, name: str) -> float:
     return number
 
 
+def _finite_nonnegative(value: Any, name: str) -> float:
+    if isinstance(value, bool):
+        raise TelemetryError(f"{name} must be a nonnegative finite number")
+    try:
+        number = float(value)
+    except (TypeError, ValueError) as exc:
+        raise TelemetryError(f"{name} must be a nonnegative finite number") from exc
+    if not math.isfinite(number) or number < 0:
+        raise TelemetryError(f"{name} must be a nonnegative finite number")
+    return number
+
+
 def _nonnegative_int(value: Any, name: str) -> int:
     if type(value) is not int or value < 0:
         raise TelemetryError(f"{name} must be a nonnegative integer")
@@ -107,9 +119,15 @@ def validate_telemetry(
     if sample_count < 2:
         raise TelemetryError("telemetry requires at least two process-tree samples")
     wall = _finite_positive(record["end_to_end_wall_seconds"], "end_to_end_wall_seconds")
-    cpu = _finite_positive(record["end_to_end_cpu_seconds"], "end_to_end_cpu_seconds")
-    core_equivalents = _finite_positive(record["cpu_core_equivalents"], "cpu_core_equivalents")
-    occupancy = _finite_positive(record["cpu_occupancy_fraction"], "cpu_occupancy_fraction")
+    cpu = _finite_nonnegative(
+        record["end_to_end_cpu_seconds"], "end_to_end_cpu_seconds"
+    )
+    core_equivalents = _finite_nonnegative(
+        record["cpu_core_equivalents"], "cpu_core_equivalents"
+    )
+    occupancy = _finite_nonnegative(
+        record["cpu_occupancy_fraction"], "cpu_occupancy_fraction"
+    )
     rss = _nonnegative_int(
         record["process_tree_peak_rss_bytes"], "process_tree_peak_rss_bytes"
     )
@@ -152,7 +170,7 @@ def validate_telemetry(
         if not isinstance(stage.get("stage"), str) or not stage["stage"].strip():
             raise TelemetryError(f"stage_measurements[{index}].stage is absent")
         _finite_positive(stage.get("wall_seconds"), f"stage[{index}].wall_seconds")
-        _finite_positive(stage.get("cpu_seconds"), f"stage[{index}].cpu_seconds")
+        _finite_nonnegative(stage.get("cpu_seconds"), f"stage[{index}].cpu_seconds")
         stage_wall = float(stage["wall_seconds"])
         stage_transitions = _nonnegative_int(
             stage.get("transitions"), f"stage[{index}].transitions"
@@ -417,6 +435,7 @@ class ProcessTreeMonitor:
         self.worker_count = worker_count
         self.threads_per_worker = threads_per_worker
         self.interval_seconds = interval_seconds
+        self._subtract_initial_counters = root_pid is None
         self.root_pid = os.getpid() if root_pid is None else int(root_pid)
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
@@ -476,9 +495,13 @@ class ProcessTreeMonitor:
         if observed == 0:
             raise TelemetryError("no process-tree member could be observed")
         if self._samples == 0:
-            self._start_cpu = cpu
-            self._start_read = read
-            self._start_write = write
+            # Counters for an explicitly supplied child PID cover that child's
+            # whole lifetime, including work before the monitor's first poll.
+            # Counters for this already-running process need a local baseline.
+            if self._subtract_initial_counters:
+                self._start_cpu = cpu
+                self._start_read = read
+                self._start_write = write
         self._last_cpu = cpu
         self._last_read = read
         self._last_write = write
