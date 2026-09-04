@@ -85,3 +85,29 @@ was checked before insertion; the highest prior MGTAP item was 011.
 
 The tracker `/root/tracker_tl_experiments` directly acknowledged this DM route;
 no B03 handle exists yet. This establishes communication, not result validity.
+
+## Accepted execution handoff — after implementation
+
+CM `/root/dm_amx_n5_continue/cm_am_n5_b03` reports one accepted task:
+`mgtap_b03_main_307_311_313_19531d07`, execution node `wsl_4070`, SSH
+`hmasd-wsl-node`, launch SHA `19531d07023637a0940fd9c6cfa51005d13fe0a7`,
+cwd `/home/wu/hmasd-worktrees/mgtap_b03_20260904`. The fixed seed list is
+307 then 311 then 313; each has adjacent destination-local admission and runner.
+Exact argv and technical acceptance are CM's result evidence responsibility.
+
+Output roots are cwd plus
+`temp/directions/metric_ground_transport_allocation/exp/mgtap_b03_main_<seed>`;
+each has `admission.json`, `summary.json`, and the declared learner traces/arrays.
+Supervisor witnesses are
+`/home/wu/.agent-tasks/mgtap_b03_main_307_311_313_19531d07/task.log` and
+`exit_code`. The card bound is 540 seconds, with summed projections approximately
+70.54 seconds. CM reports seven focused remote prelaunch checks passed in
+3.52 seconds; that is technical evidence only, not a native-return observation.
+
+The DM and CM sent this same accepted handle directly to
+`/root/tracker_tl_experiments`, which acknowledged adoption and will notify
+`/root/dm_amx_n5_continue` at terminal, lost observation or bound exceedance.
+There is one observer, no duplicate launch and no independent DM polling loop.
+On reminder, acknowledge the tracker event and resume CM collection/technical
+acceptance, then write a scientific intake against the unchanged card. A later
+result intake, not this launch record, holds the terminal scientific reading.
