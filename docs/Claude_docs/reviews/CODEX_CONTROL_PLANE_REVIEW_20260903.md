@@ -227,3 +227,65 @@ The control plane still describes a five-hop, Pro-final, C-shaped process that h
 the calibration, while the two-hop owner-and-reviewer loop that produced seventeen results in two
 days exists only in intake sections and memory files; write down the loop that works, keep the
 integrity rules that made it safe, and cut the roster and gates to what that loop uses.
+
+## 9. Addendum, 2026-09-03 18:07 PDT: the owner's intent for the Pro nodes
+
+The owner clarified why the Pro nodes exist: the Codex side is meant to run a highly automated
+research loop, unattended most of the time, with the owner stepping in only at key decisions and
+only from the records. That changes the reading of §3 S1 and §5 T2. The Pro nodes are not a
+ceremony to demote; they are the Codex side's substitute for the absent owner, the same role the
+reviewer has played on the Claude side since the 13:58 PDT delegation. The two runtimes have the
+same goal and differ only in who decides when the owner is away.
+
+What the measurements then say is narrower than §2 put it: not "the Pro path does not work" but
+"the Pro path is too expensive to sit on every object-level decision". Two days produced sixteen
+object-level decision points and three direction- or portfolio-level records. A Pro round costs a
+packet, a browser transport with a 15-minute heartbeat, a 20–60 minute generation, an archive and
+a receipt; under those costs, the loop chose not to use it at all. Sixteen rounds a day is not an
+unattended loop; three is.
+
+Revised recommendations (they replace T2 and amend T7; the rest of §5 stands):
+
+T2′. **Three tiers, Pro at the top two, local at the bottom.** Object-level decisions (next rung,
+card wording, arm drops, budget deviations inside a cap, quarantine of an attempt) are taken
+locally by the loop driver under the written delegation policy: options, recommendation, selection,
+provenance line, reversible actions only. Direction-level decisions (open or close an object
+family, park, recast, the next object after a consumed C) go to `em:<direction>:convergence`
+automatically, with the exposure card attached, and the owner audits from the record. Portfolio-
+level decisions go to `portfolio:cross_direction`, which proposes; the owner ratifies from the
+record, or the proposal takes effect after a stated audit window if the owner is silent and the
+action is reversible. This keeps the Pro nodes exactly where the owner wants to look and takes
+them off the path that was stalling.
+
+T2″. **A blocker must not stall the loop.** `AGENTS.md` says a connector, evidence or transport
+blocker "never transfers final authority back to a local model". Under unattended operation that
+clause halts the direction until a human returns, which is the opposite of the intent. Replace it
+with: on a Pro blocker, the loop driver takes the recommended option as a *provisional* decision
+labelled `PRO_BLOCKED / LOCAL_PROVISIONAL`, restricted to reversible actions, queues the Pro round
+for retry, and lists the item first in the owner's audit ledger. Authority is not transferred;
+progress is.
+
+T7′. **Keep DM as the loop driver.** For an unattended Codex loop the per-direction manager is
+the natural analogue of the Claude reviewer-plus-implementer pair: it holds the card, the
+prediction on record, the delegation policy, the intake and the escalation to Pro. Fold EM into it
+(the card already carries class, ceiling, predictions and stop rule); keep CM and the fenced
+implementers, scout, reviewer, critic, verifier and operator. Sixteen definitions become nine.
+
+Three things the unattended Codex loop needs that this session had to improvise on the Claude
+side, and that should be written into `AGENTS.md` once for both runtimes:
+
+1. **An owner audit ledger.** One file per day or per wave listing every automatic decision with
+   its tier, options, chosen option, reversibility, provenance label, and an empty owner column.
+   The owner's intervention is editing that column; a non-empty entry overrides the decision and
+   the loop applies it at the next boundary. This is the concrete form of "介入关键决策".
+2. **A resume model.** Commit before launch, launch detached, a heartbeat that resumes killed
+   agents, and every agent's state recoverable from the repository alone. One rate limit killed
+   four agents on 09-03; the cron heartbeat that now resumes them is not in any authority file.
+3. **A cost model the loop can read.** The rate limit, not compute, bounds both runtimes. The
+   loop needs the per-arm cost projection (T3a) before a sweep and a usage budget per direction
+   (T4) so that it can decide, unattended, what not to launch.
+
+The prior review's R2 (exposure card in every packet) and R3 (engineering dissent record) become
+the mechanism that makes the two Pro tiers affordable: the card gives the node the facts that
+decided this wave, and the dissent record lets a wrong engineering premise be corrected in one
+message instead of a round.
