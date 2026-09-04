@@ -117,8 +117,12 @@ docs/research/portfolio/owner/README.md. Write:
   every ladder's first card (kind `prediction`, options = the competing mechanisms, your own
   prediction in `--dm-reason`), every valid-result brief (kind `brief`), every flagged row (kind =
   the flag), and every Portfolio recommendation you return to Root (kind `portfolio`). Options
-  carry one `--recommended`; evidence paths point at the card, intake or result document. At
-  every clean boundary run `python tools/owner_console/item.py reviews`, apply what differs from
+  carry one `--recommended`; evidence paths point at the card, intake or result document. Any
+  item the owner must rule on (`new-card`, `critic-dissent`, `close-call`, `second-recast`,
+  `portfolio`, or any direction-tier item) needs `--packet <file.json>`, the Chinese decision
+  packet of the owner README (question, changes, if refused, evidence with quotes, cost and
+  reversibility, verdict text), and a consequence on every option; the command refuses it
+  otherwise. At every clean boundary run `python tools/owner_console/item.py reviews`, apply what differs from
   what already ran, and `mark-answered`. Launch never waits for a reply; at intake score a
   `prediction` reply if one exists and record `not taken` otherwise.
 - With every valid-result intake, a one-page owner brief in Chinese at

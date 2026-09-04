@@ -102,6 +102,10 @@ When the owner is absent the loop keeps running under a standing delegation (own
      marked `auto_applied`), a new card, a prediction request (one per ladder, not per
      invocation), a brief, a critic dissent, a close call, a second recast, a Portfolio proposal.
      Each item carries its options with one `recommended`, its evidence paths, and its ledger row.
+     Items are written only through `tools/owner_console/item.py`; an item the owner must rule on
+     (Portfolio proposal, second recast, critic dissent, close call, new card, any direction- or
+     portfolio-tier item) carries the decision packet defined in that README and is refused
+     without it.
    - `reviews/<YYYY-MM-DD>.md`: written by the owner's console from the owner's replies. Each
      section carries the chosen option, a comment, and one `instruction` line; the DM and Root
      apply the instructions that differ from what already ran and cite the review line in the
