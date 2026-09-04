@@ -1,0 +1,74 @@
+{
+  "id": "20260904-crto-016",
+  "created": "2026-09-04T15:07:34-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "A03读取口径明确：允许原生负回报，后悔值仍须非负",
+  "context": "Claim: The complete A02 diagnostic artifact permits a bounded reading of the fixed seed-0 RAW actions and regrets at updates252..264, with its diagnostic execution provenance retained. Binding structure: systems / information flow. 本次明确允许原生评分中的有限负G16，保留所有合法性、有限性、后悔值非负、固定锚点与计数检查；原失败标记和停止读数不改。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "仅按真实评分定义继续读取同一文件，不修改数据或学习器。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "保留已停止读数，不新增性能结论。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按批注明确读取口径，保留原始证据。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "CM已逐行复现，唯一失败是G16符号限制，未发现非法、非有限值或负后悔值。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L237",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否按原生评分定义读取有限的负G16，并继续要求后悔值非负？",
+    "changes_if_approved": [
+      {
+        "target": "A03已有数据读取规则",
+        "from": "沿用G16必须非负的检查而停止",
+        "to": "允许有限带符号G16；合法性、有限性、后悔值非负、固定锚点和所有计数仍严格检查"
+      }
+    ],
+    "if_refused": "保留停止记录和原始完整数据，不读取性能，不新增训练。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md",
+        "quote": "The sole failing conjunct is `value >= 0.0` applied to legal G16.",
+        "why": "已复现的唯一问题是分数符号限制；原生回报本来会扣成本，不能把负分误判为坏数据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md",
+        "quote": "This is a disclosed correction to this adaptive A/RECON reading, made after technical sign diagnosis and before performance metrics were seen.",
+        "why": "读取规则作过明确的适应性修正，必须保留来源，不能冒称原卡片未经变化地成功。"
+      }
+    ],
+    "uncertainty": [
+      "这一条诊断轨迹的性能读数尚未解读。",
+      "原先崩溃原因仍未知；此处不修复或推断运行可靠性。"
+    ],
+    "cost": {
+      "compute": "仅重读已有303260字节文件，最多30秒；无新增学习器。",
+      "owner_time": "异步查看即可。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommendation: **(a)**. It matches the accepted scoring law without changing any measurement, comparison, or threshold.",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md"
+  }
+}
