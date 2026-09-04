@@ -1280,6 +1280,31 @@ Fifth launch: sha `4679e8dc8`, 2026-09-04T00:56:05Z, run root `b1_scout_r05`, PI
 detached, path budget 250 of 260; source conformance, B0 binding, path budget and confinement
 cleared at report time. Known risk carried: the table assembly. No decision.
 
+### E.11 Fifth attempt refused at the replay-phase memory admission (2026-09-03, 18:50 PDT)
+
+`b1_scout_r05` (pid 16772) exited 01:37:17Z refused: `B1 memory admission failed with exit 6`
+(incident `b1-61d8b522…`, `B1_ENGINEERING_ATTEMPT_INCOMPLETE`, `scientific_branch: null`, nothing
+consumed). The learner phase completed: all 36 slice admissions passed at 7.0–8.7 GiB available.
+Replay child 00 was admitted at 01:36:39Z with 5.89 GiB available; replay child 01's admission at
+01:37:12Z measured 3.42 GiB against the 4 GiB floor, `passed: false`, exit 6 by the preflight's
+own code, and the orchestrator refused the attempt. A machine capture at 01:40Z showed 8.7 GiB of
+29.8 available with the two E2 runs (about 2.5 GB each) still running. Reviewer's provisional
+reading, pending the implementer's reproduction (reproduction rule, control-plane review T6): an
+admission refusal, not a defect; the floor was crossed because three result-bearing processes
+(two E2 runs and a CBSC replay child) plus the machine's baseline load coincided, which is the
+third run beyond the two-run plan. Nothing to repair in code; the guard did what it is for.
+
+Options put on record: (a) relaunch r06 now at the same sha and accept a likely repeat at the
+replay phase; (b) hold r06 until the E2 queue frees a run slot (about seven hours), and in the
+meantime have the implementer do the E.8 item 3 engineering follow-up (end-to-end profile
+covering the formal publication path, offline exercise on the quarantined evidence), so that r06
+runs at the repaired sha with the table assembly exercised beforehand; (c) reduce E2 to one
+concurrent run to free the slot now, doubling E2's remaining time. **Owner-delegated decision
+(unattended, 2026-09-03 instruction): (b).** The E.8 item 3 repair is already the condition for
+any CBSC object after B1, r06 cannot pass the replay admission alongside two E2 runs without
+relying on a memory coincidence, and E2's cap is already overrun. The two-direction cap is kept:
+CBSC's slot is occupied by the engineering follow-up, not a run.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`

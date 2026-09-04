@@ -331,3 +331,33 @@ decided directly, and the Claude reviewer took the object-level selections under
 13:58. When the owner is absent and the Codex loop drives, the same selections go to Pro. The
 Claude-side delegation of 09-03 is the fallback for a runtime without a Pro transport, not the
 model for the Codex side.
+
+## 11. Addendum, 2026-09-03 18:15–18:50 PDT: owner alignment and the draft
+
+The owner answered the eight decisions of §7 (revised by §9–10) through aligned questions; the
+answers are recorded in `docs/research/portfolio/decisions/2026-09-03-control-plane-revision.md`.
+In short: Pro decides at the direction and portfolio tiers, the DM decides object-tier questions
+locally under the delegation policy; a blocker parks the direction except at the object tier,
+where a reversible provisional decision is allowed; the roster goes from sixteen to nine with the
+DM as loop driver; the CM performance gate becomes two recorded lines; `AGENTS.md` is rewritten
+runtime-neutral by the reviewer for the owner's review; the 09:57 edits are committed with the
+receipt route aligned; all four housekeeping items are done; the routine-implementer swap is
+intentional; `ALGORITHM_PRINCIPLES.md` is background.
+
+Done on `main`: `ac5cd664e` (the 09:57 edits, prompt-author S8 fix, four transport tests
+rewritten to the fixed-route contract, `tests/skills` 76 passed), `502896633` (third-party
+skills to `.agents/third_party/`, `.gitignore` re-include, external-review README pointer;
+untracked `.codex/runtime/`, `.agents/roles/`, `.codex/prompts/` and five empty skill
+directories removed on disk). One deviation: `scripts/hmasd_operator_result.py` stays because
+`scripts/hmasd_run.py` imports it for `promote`; only the CM definition's citation is dropped.
+
+Draft for review on branch `control-plane-revision-20260903` (worktree
+`.claude/worktrees/control-plane-20260903`, not merged): the new `AGENTS.md` (eight sections and
+two appendices), the DM definition absorbing EM, the CM definition with the two recorded lines,
+the implementer definitions without the disposition vocabulary, seven definitions removed,
+`config.toml` at nine registrations and two threads, the portfolio skill parking on a blocker with
+owner ratification from the record, the prompt author naming the DM as the `em` caller, and two
+`CLAUDE.md` lines. Two things the draft introduces that the owner did not answer explicitly and
+should read first: the audit ledger path `docs/research/portfolio/audit/<date>.md` (§4 item 4 of
+the draft) and the audit-window rule for unratified portfolio proposals (portfolio skill). Both
+are reversible wording.
