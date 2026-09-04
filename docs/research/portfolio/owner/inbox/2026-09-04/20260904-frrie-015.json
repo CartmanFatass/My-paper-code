@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-015",
+  "created": "2026-09-04T15:44:59-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "保留第四次执行的终止证据，按负责人指示结束本轮",
+  "context": "第四次执行退出，输出目录为空；保存的日志没有失败时的更新编号、地址或进程状态，确切原因尚未复现，也没有可接受的学习计数或科学结果。负责人现要求安全交接并停在新尝试之前。本轮只整理既有证据，没有第五次执行、修复重跑循环或其他进程修改。",
+  "options": [
+    {
+      "key": "a",
+      "label": "完成记录并停在新尝试之前",
+      "consequence": "保留原始远端证据和本地副本；后续须有新的恢复指示，科学卡与既有结论不变。"
+    },
+    {
+      "key": "b",
+      "label": "启动第五次执行",
+      "consequence": "会重新投入学习计算，超出当前停止指示，因此不执行。"
+    },
+    {
+      "key": "c",
+      "label": "继续修复并反复运行",
+      "consequence": "在确切原因未复现时扩展工作，超出本轮边界，因此不执行。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "执行负责人当前的安全收尾指示；缺少失败时的状态，不能凭错误文字给原因或科学结果定性。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_TERMINAL_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L219",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

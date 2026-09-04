@@ -1,18 +1,21 @@
 # FRRIE contact-active R128 R02 resume handoff — 2026-09-04
 
-Status: `R03_QUARANTINED / REPAIR_ACCEPTED / FRESH_R04_ACCEPTED / NO_SCIENTIFIC_RESULT`
+Status: `R04_FAILED / CAUSE_PROVISIONAL_UNRESOLVED / NO_SCIENTIFIC_RESULT / OWNER_DIRECT_HOLD`
 
-Current execution is attempt 04 at repaired source `732cc2b2299821a58d644e202c4b95c392932447`,
-task `frrie_b01_contact_r02_732cc2b2_04`. Its fresh worktree, admission, command and observation
-handoff are in `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_LAUNCH_20260904.md`. The `_01..03` records
-below are preserved history, not live-task instructions.
+Attempt 04 at repaired source `732cc2b2299821a58d644e202c4b95c392932447`, task
+`frrie_b01_contact_r02_732cc2b2_04`, is terminal: exit 1 at `2026-09-04T22:26:33Z`, after
+733 seconds, with an empty output root. The owner now directs an end-of-round safe handoff
+before any fresh attempt. **No attempt 05 or continuing repair-run loop is authorized.**
+The current recovery facts, counts limitation and decisions are in
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_TERMINAL_INTAKE_20260904.md`.
+The `_01..04` launch and running observations below are preserved history.
 
-This is a recoverable execution handoff, not a scientific result or result intake. The owner's
-2026-09-04 instruction, “我们开始推进自动研究流程”, supersedes the earlier drain pause. Root assigned
-execution of the unchanged R02 card after exact-source and no-duplicate checks. No new object
-family, Pro request, Portfolio disposition, or scientific polarity is created here.
+This is a recoverable execution handoff, not a scientific result. The earlier instruction,
+“我们开始推进自动研究流程”, had superseded the initial drain pause and authorized the unchanged R02
+resume. The later owner safe-stop instruction now controls. No new object family, Pro request,
+Portfolio disposition, direction lifecycle change or scientific polarity is created here.
 
-## Authority and checks at this boundary
+## Authority and checks at the original resume boundary
 
 The DM read root `AGENTS.md` §§2–8, the evidence specification with §11 controlling, engineering
 scope §§4–5, the current Portfolio row, `DIRECTION.md`, the R02 card and drain record, the accepted
@@ -23,7 +26,7 @@ pause occurred before task acceptance; its old instruction to remain paused is s
 The new DM worktree is `C:/Projects/HMASD-worktrees/dm-frrie-resume-20260904`, branch
 `codex/dm-frrie-resume-20260904`, based on integrated commit
 `8d1c597871b38edc7d5f139f34f5a3ce2941c7d0`. The owner-dirty main checkout is outside this work.
-The launch implementation stays at the already-pushed commit
+The original attempts 01..03 used the already-pushed commit
 `36b538ba1b91eede9f528dd315fa624f8c1d53e5`; later documentation commits do not change its scientific
 or source authority.
 
@@ -319,4 +322,25 @@ The repaired source was subsequently accepted after independent review, the focu
 and the existing real learner toy each completed as recorded in the R04 launch document. The DM
 selected one fresh unchanged-card invocation, owner item `20260904-frrie-014`. CM observed its
 acceptance at `2026-09-04T22:14:20Z`; the original `_03` evidence remains quarantined and no
-scientific result has been accepted. Root and the shared observer receive the new exact handle.
+scientific result has been accepted. Root and the shared observer received the new exact handle.
+
+## Superseding attempt 04 terminal boundary and owner hold
+
+CM confirmed exit 1 after 733 seconds during training-tape construction. The output root is
+empty, and no original learner count, curve, checkpoint, failing address or process state was
+retained. The traceback reaches `dataclasses.asdict` with
+`AttributeError: 'tuple_iterator' object has no attribute 'name'`; that text locates the failure
+but does not establish its cause. The exact update and prior successful learner work are unknown.
+No source, host, interpreter, native-memory, instrumentation or scientific cause is classified.
+
+The owner's bounded stop precludes the fresh learner execution needed to reconstruct that
+unsaved state. CM performed only terminal inspection and preservation, with no representative
+probe, source change, attempt 05 or other-process modification. The original remote evidence
+and a local ignored byte-copy recovery folder remain intact, as inventoried in the terminal
+intake and CM receipt at `e8df4b6d4836d00c7fb408d58a7831061967a03b`.
+
+Owner item `20260904-frrie-015` records the object-tier `OWNER_DIRECT` hold. DM, CM and the shared
+observer acknowledged the terminal task. The next technical discriminator requires separate
+resume authorization and a bounded capture of the failing address/update/runtime state before
+selecting a repair. No invocation is queued. The unchanged scientific card has no valid result;
+`DIRECTION.md`, prediction and original result branches retain their meaning.
