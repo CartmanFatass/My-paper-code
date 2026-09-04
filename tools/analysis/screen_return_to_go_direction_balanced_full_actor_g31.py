@@ -1,4 +1,4 @@
-"""Run the bounded paired G30 direction-balanced full-actor screen."""
+"""Run the bounded paired G31 return-to-go direction screen."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import sys
 import time
 from typing import Any
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -23,52 +23,52 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.direction_balanced_full_actor_g30 import (
-    DirectionBalancedFullActorPolicy,
-    optimize_direction_balanced_update,
+from ha_ctse_process.return_to_go_direction_balanced_full_actor_g31 import (
+    ReturnToGoDirectionBalancedFullActorPolicy,
+    optimize_return_to_go_direction_balanced_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
     evaluate_battery_policy,
 )
 from scripts import run_continuous_service_roster_proxy_g17 as g17_runner
-from scripts import screen_fast_policy_anchored_residual_g19 as g19_screen
+from tools.analysis import screen_direction_balanced_full_actor_g30 as g30_screen
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "DIRECTION_BALANCED_FULL_ACTOR_G30"
-GAMMA = g19_screen.GAMMA
-HIDDEN_DIM = g19_screen.HIDDEN_DIM
-LEARNING_RATE = g19_screen.LEARNING_RATE
-INITIAL_LOG_STD = g19_screen.INITIAL_LOG_STD
-PPO_PASSES = g19_screen.PPO_PASSES
-NUM_ENVS = g19_screen.NUM_ENVS
-G17_FAST_UPDATES = g19_screen.G17_FAST_UPDATES
-G17_DIRECTION_BALANCED_UPDATES = g19_screen.G17_DELAYED_UPDATES
-G18_FAST_UPDATES = g19_screen.G18_FAST_UPDATES
-G18_DIRECTION_BALANCED_UPDATES = g19_screen.G18_DELAYED_UPDATES
-G17_EVAL_EPISODES = g19_screen.G17_EVAL_EPISODES
+ALGORITHM_ID = "RETURN_TO_GO_DIRECTION_BALANCED_FULL_ACTOR_G31"
+GAMMA = g30_screen.GAMMA
+HIDDEN_DIM = g30_screen.HIDDEN_DIM
+LEARNING_RATE = g30_screen.LEARNING_RATE
+INITIAL_LOG_STD = g30_screen.INITIAL_LOG_STD
+PPO_PASSES = g30_screen.PPO_PASSES
+NUM_ENVS = g30_screen.NUM_ENVS
+G17_FAST_UPDATES = g30_screen.G17_FAST_UPDATES
+G17_RETURN_TO_GO_UPDATES = g30_screen.G17_DIRECTION_BALANCED_UPDATES
+G18_FAST_UPDATES = g30_screen.G18_FAST_UPDATES
+G18_RETURN_TO_GO_UPDATES = g30_screen.G18_DIRECTION_BALANCED_UPDATES
+G17_EVAL_EPISODES = g30_screen.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 6_119_000,
-        "ledger": 6_129_000,
-        "action": 6_139_000,
-        "evaluation_ledger": 6_149_000,
-        "evaluation_action": 6_159_000,
+        "model": 9_119_000,
+        "ledger": 9_129_000,
+        "action": 9_139_000,
+        "evaluation_ledger": 9_149_000,
+        "evaluation_action": 9_159_000,
     },
-    "g18": {"model": 6_219_000, "action": 6_239_000},
+    "g18": {"model": 9_219_000, "action": 9_239_000},
 }
 
-REPLAY_TOLERANCE = g19_screen.REPLAY_TOLERANCE
-DIRECTION_DOT_TOLERANCE = 1e-7
-IDENTITY_TOLERANCE = 1e-7
+REPLAY_TOLERANCE = g30_screen.REPLAY_TOLERANCE
+DIRECTION_DOT_TOLERANCE = g30_screen.DIRECTION_DOT_TOLERANCE
+IDENTITY_TOLERANCE = g30_screen.IDENTITY_TOLERANCE
 
-INVALID_BRANCH = "INVALID_DIRECTION_BALANCED_FULL_ACTOR_G30"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_DIRECTION_BALANCED_G30"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_DIRECTION_BALANCED_G30"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_DIRECTION_BALANCED_G30"
-PROMISING_BRANCH = "NONFORMAL_DIRECTION_BALANCED_FULL_ACTOR_PROMISING_G30"
+INVALID_BRANCH = "INVALID_RETURN_TO_GO_DIRECTION_BALANCED_G31"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_RETURN_TO_GO_G31"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_RETURN_TO_GO_G31"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_RETURN_TO_GO_G31"
+PROMISING_BRANCH = "NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31"
 
 
 def _configuration() -> dict[str, Any]:
@@ -80,26 +80,28 @@ def _configuration() -> dict[str, Any]:
         "ppo_passes": PPO_PASSES,
         "num_envs": NUM_ENVS,
         "g17_fast_updates": G17_FAST_UPDATES,
-        "g17_direction_balanced_updates": G17_DIRECTION_BALANCED_UPDATES,
+        "g17_return_to_go_updates": G17_RETURN_TO_GO_UPDATES,
         "g18_fast_updates": G18_FAST_UPDATES,
-        "g18_direction_balanced_updates": G18_DIRECTION_BALANCED_UPDATES,
+        "g18_return_to_go_updates": G18_RETURN_TO_GO_UPDATES,
         "g17_eval_episodes": G17_EVAL_EPISODES,
-        "fast_optimizer": "adam",
-        "direction_balanced_actor_optimizer": "adam_single_state_step",
-        "critic_optimizer": "adam",
-        "residual": "exact_zero_frozen",
+        "successor_actor_target": (
+            "detached_discounted_realized_future_tail_excluding_current"
+        ),
+        "slow_critic_target": "full_discounted_return_including_current",
         "actor_gradient_rule": "equal_global_unit_gradient_directions",
         "actor_global_rescale": "none_existing_gradient_clip_only",
         "actor_optimizer_state_rule": "ordinary_adam_on_applied_direction",
-        "checkpoint_identity": "fresh_no_g28_g29_resume",
+        "future_actor_input": "none_training_target_only",
+        "checkpoint_identity": "fresh_no_g30_resume",
+        "residual": "exact_zero_frozen",
     }
 
 
-def make_model(source: str) -> DirectionBalancedFullActorPolicy:
+def make_model(source: str) -> ReturnToGoDirectionBalancedFullActorPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = (
-        g19_screen._dimensions(source)
+        g30_screen.g19_screen._dimensions(source)
     )
-    model = DirectionBalancedFullActorPolicy(
+    model = ReturnToGoDirectionBalancedFullActorPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -114,10 +116,10 @@ def make_model(source: str) -> DirectionBalancedFullActorPolicy:
 
 def _collect(
     source: str,
-    model: DirectionBalancedFullActorPolicy,
+    model: ReturnToGoDirectionBalancedFullActorPolicy,
     *,
     episode_ids: tuple[int, ...],
-) -> Any:
+):
     seeds = SEEDS[source]
     if source == "g17":
         raw = g17_source.collect_trajectory(
@@ -140,7 +142,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: DirectionBalancedFullActorPolicy, domain: str
+    model: ReturnToGoDirectionBalancedFullActorPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -164,7 +166,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: DirectionBalancedFullActorPolicy
+    source: str, model: ReturnToGoDirectionBalancedFullActorPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -180,12 +182,12 @@ def _evaluate_phase(
 
 def _phase_updates(source: str) -> tuple[int, int]:
     if source == "g17":
-        return G17_FAST_UPDATES, G17_DIRECTION_BALANCED_UPDATES
-    return G18_FAST_UPDATES, G18_DIRECTION_BALANCED_UPDATES
+        return G17_FAST_UPDATES, G17_RETURN_TO_GO_UPDATES
+    return G18_FAST_UPDATES, G18_RETURN_TO_GO_UPDATES
 
 
 def _actor_state(
-    model: DirectionBalancedFullActorPolicy,
+    model: ReturnToGoDirectionBalancedFullActorPolicy,
 ) -> dict[str, torch.Tensor]:
     names = set(model.full_actor_parameter_names())
     return {
@@ -193,32 +195,6 @@ def _actor_state(
         for name, parameter in model.policy.named_parameters()
         if name in names
     }
-
-
-def _optimizer_ownership_valid(
-    model: DirectionBalancedFullActorPolicy,
-) -> bool:
-    actor = {id(row) for row in model.full_actor_parameters()}
-    critic = {id(row) for row in model.critic_parameters()}
-    residual = {id(row) for row in model.residual_parameters()}
-    core_critic = {id(row) for row in model.policy.critic.parameters()}
-    expected_actor = {
-        id(parameter)
-        for name, parameter in model.policy.named_parameters()
-        if not name.startswith("delayed_residual.")
-        and not name.startswith("critic.")
-    }
-    return bool(
-        actor
-        and critic
-        and actor == expected_actor
-        and actor.isdisjoint(critic | residual | core_critic)
-        and critic.isdisjoint(residual | core_critic)
-        and all(parameter.requires_grad for parameter in model.full_actor_parameters())
-        and all(parameter.requires_grad for parameter in model.critic_parameters())
-        and all(not parameter.requires_grad for parameter in model.residual_parameters())
-        and all(not parameter.requires_grad for parameter in model.policy.critic.parameters())
-    )
 
 
 def _train_source(source: str) -> dict[str, Any]:
@@ -231,7 +207,7 @@ def _train_source(source: str) -> dict[str, Any]:
         + tuple(model.credit_baselines.parameters()),
         lr=LEARNING_RATE,
     )
-    fast_updates, direction_updates = _phase_updates(source)
+    fast_updates, return_to_go_updates = _phase_updates(source)
     maximum_replay_errors: dict[str, float] = {}
     lifecycle_valid = True
     finite = True
@@ -241,10 +217,15 @@ def _train_source(source: str) -> dict[str, Any]:
         trajectory = _collect(
             source,
             model,
-            episode_ids=tuple(range(first_episode, first_episode + NUM_ENVS)),
+            episode_ids=tuple(
+                range(first_episode, first_episode + NUM_ENVS)
+            ),
         )
-        lifecycle_valid = lifecycle_valid and g19_screen._trajectory_contract_valid(
-            source, trajectory
+        lifecycle_valid = (
+            lifecycle_valid
+            and g30_screen.g19_screen._trajectory_contract_valid(
+                source, trajectory
+            )
         )
         metrics = optimize_fast_anchor_update(
             model,
@@ -263,7 +244,7 @@ def _train_source(source: str) -> dict[str, Any]:
     anchor_evaluation = _evaluate_phase(source, model)
     direction_start = _actor_state(model)
     model.begin_direction_balanced_phase()
-    optimizer_ownership_valid = _optimizer_ownership_valid(model)
+    ownership_valid = g30_screen._optimizer_ownership_valid(model)
     actor_optimizer = torch.optim.Adam(
         model.full_actor_parameters(), lr=LEARNING_RATE
     )
@@ -272,20 +253,25 @@ def _train_source(source: str) -> dict[str, Any]:
     )
     minimum_direction_dot = float("inf")
     maximum_identity_error = 0.0
-    immediate_zero_passes = 0.0
-    successor_zero_passes = 0.0
-    minimum_optimizer_step_increment = float("inf")
-    for update in range(direction_updates):
+    minimum_step_increment = float("inf")
+    maximum_return_to_go_target = 0.0
+    maximum_terminal_tail_error = 0.0
+    for update in range(return_to_go_updates):
         first_episode = (fast_updates + update) * NUM_ENVS
         trajectory = _collect(
             source,
             model,
-            episode_ids=tuple(range(first_episode, first_episode + NUM_ENVS)),
+            episode_ids=tuple(
+                range(first_episode, first_episode + NUM_ENVS)
+            ),
         )
-        lifecycle_valid = lifecycle_valid and g19_screen._trajectory_contract_valid(
-            source, trajectory
+        lifecycle_valid = (
+            lifecycle_valid
+            and g30_screen.g19_screen._trajectory_contract_valid(
+                source, trajectory
+            )
         )
-        metrics = optimize_direction_balanced_update(
+        metrics = optimize_return_to_go_direction_balanced_update(
             model,
             actor_optimizer,
             critic_optimizer,
@@ -303,15 +289,17 @@ def _train_source(source: str) -> dict[str, Any]:
             maximum_identity_error,
             float(metrics["maximum_direction_composition_identity_error"]),
         )
-        immediate_zero_passes += (
-            float(metrics["direction_immediate_zero"]) * PPO_PASSES
-        )
-        successor_zero_passes += (
-            float(metrics["direction_successor_zero"]) * PPO_PASSES
-        )
-        minimum_optimizer_step_increment = min(
-            minimum_optimizer_step_increment,
+        minimum_step_increment = min(
+            minimum_step_increment,
             float(metrics["minimum_actor_optimizer_step_increment"]),
+        )
+        maximum_return_to_go_target = max(
+            maximum_return_to_go_target,
+            float(metrics["maximum_return_to_go_target_absolute_value"]),
+        )
+        maximum_terminal_tail_error = max(
+            maximum_terminal_tail_error,
+            float(metrics["terminal_return_to_go_error"]),
         )
         for name, value in metrics.items():
             if name.endswith("_error") or name.endswith("_max_abs"):
@@ -334,28 +322,31 @@ def _train_source(source: str) -> dict[str, Any]:
         "source": source,
         "seeds": seeds,
         "fast_updates": fast_updates,
-        "direction_balanced_updates": direction_updates,
-        "optimizer_steps": 2 * (fast_updates + 2 * direction_updates),
+        "return_to_go_updates": return_to_go_updates,
+        "optimizer_steps": 2
+        * (fast_updates + 2 * return_to_go_updates),
         "active_rows": int(active_rows),
         "finite_updates": bool(finite),
         "lifecycle_contract_valid": bool(lifecycle_valid),
-        "optimizer_ownership_valid": bool(optimizer_ownership_valid),
+        "optimizer_ownership_valid": bool(ownership_valid),
         "maximum_replay_errors": maximum_replay_errors,
         "anchor_maximum_difference": float(actor_difference),
         "actor_maximum_difference": float(actor_difference),
         "residual_output_layer_maximum_absolute_value": (
             model.residual_output_layer_maximum_absolute_value()
         ),
-        "minimum_direction_immediate_dot": float(
-            minimum_direction_dot
-        ),
+        "minimum_direction_immediate_dot": float(minimum_direction_dot),
         "maximum_direction_composition_identity_error": float(
             maximum_identity_error
         ),
-        "direction_immediate_zero_passes": float(immediate_zero_passes),
-        "direction_successor_zero_passes": float(successor_zero_passes),
         "minimum_actor_optimizer_step_increment": float(
-            minimum_optimizer_step_increment
+            minimum_step_increment
+        ),
+        "maximum_return_to_go_target_absolute_value": float(
+            maximum_return_to_go_target
+        ),
+        "maximum_terminal_return_to_go_error": float(
+            maximum_terminal_tail_error
         ),
         "zero_evaluation": zero_evaluation,
         "anchor_evaluation": anchor_evaluation,
@@ -365,81 +356,46 @@ def _train_source(source: str) -> dict[str, Any]:
 
 
 def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    shared_rows = [
-        row
-        | {
-            "minimum_projection_post_dot": row[
-                "minimum_direction_immediate_dot"
-            ]
-        }
-        for row in rows
-    ]
-    metrics = g19_screen._metrics(shared_rows)
-    metrics.pop("maximum_anchor_difference")
-    metrics.pop("minimum_projection_post_dot")
-    replay_maximum = max(
-        value
-        for row in rows
-        for value in row["maximum_replay_errors"].values()
-    )
+    metrics = g30_screen._metrics(rows)
     metrics.update(
         {
-            "maximum_actor_difference": float(
-                max(row["actor_maximum_difference"] for row in rows)
-            ),
-            "minimum_actor_difference": float(
-                min(row["actor_maximum_difference"] for row in rows)
-            ),
-            "maximum_direction_composition_identity_error": float(
+            "maximum_return_to_go_target_absolute_value": float(
                 max(
-                    row["maximum_direction_composition_identity_error"]
+                    row["maximum_return_to_go_target_absolute_value"]
+                    for row in rows
+                )
+            ),
+            "maximum_terminal_return_to_go_error": float(
+                max(
+                    row["maximum_terminal_return_to_go_error"]
                     for row in rows
                 )
             ),
         }
     )
     metrics["operational_valid"] = bool(
-        all(row["finite_updates"] for row in rows)
-        and all(row["lifecycle_contract_valid"] for row in rows)
-        and all(row["optimizer_ownership_valid"] for row in rows)
-        and replay_maximum <= REPLAY_TOLERANCE
-        and all(row["actor_maximum_difference"] > 0.0 for row in rows)
-        and all(
-            row["residual_output_layer_maximum_absolute_value"] == 0.0
-            for row in rows
-        )
-        and all(
-            row["minimum_direction_immediate_dot"]
-            >= -DIRECTION_DOT_TOLERANCE
-            for row in rows
-        )
-        and all(
-            row["maximum_direction_composition_identity_error"]
-            <= IDENTITY_TOLERANCE
-            for row in rows
-        )
-        and all(
-            row["minimum_actor_optimizer_step_increment"] == 1.0
-            for row in rows
-        )
+        metrics["operational_valid"]
+        and np.isfinite(metrics["maximum_return_to_go_target_absolute_value"])
+        and metrics["maximum_return_to_go_target_absolute_value"] > 0.0
+        and metrics["maximum_terminal_return_to_go_error"] == 0.0
     )
     return metrics
 
 
 def select_result_branch(metrics: dict[str, Any]) -> str:
-    branch = g19_screen.select_result_branch(metrics)
+    branch = g30_screen.g19_screen.select_result_branch(metrics)
     return {
-        g19_screen.INVALID_BRANCH: INVALID_BRANCH,
-        g19_screen.NO_G17_BRANCH: NO_G17_BRANCH,
-        g19_screen.NO_G18_ACCESS_BRANCH: NO_G18_ACCESS_BRANCH,
-        g19_screen.NO_G18_MECHANISM_BRANCH: NO_G18_MECHANISM_BRANCH,
-        g19_screen.PROMISING_BRANCH: PROMISING_BRANCH,
+        g30_screen.g19_screen.INVALID_BRANCH: INVALID_BRANCH,
+        g30_screen.g19_screen.NO_G17_BRANCH: NO_G17_BRANCH,
+        g30_screen.g19_screen.NO_G18_ACCESS_BRANCH: NO_G18_ACCESS_BRANCH,
+        g30_screen.g19_screen.NO_G18_MECHANISM_BRANCH: NO_G18_MECHANISM_BRANCH,
+        g30_screen.g19_screen.PROMISING_BRANCH: PROMISING_BRANCH,
     }[branch]
 
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G30 screen requires an integrated source commit")
+        raise ValueError("G31 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()
@@ -462,7 +418,7 @@ def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "status": "COMPLETE",
         "formal": False,
         "source_commit": source_commit,
-        "runtime": g19_screen._runtime_identity(),
+        "runtime": g30_screen.g19_screen._runtime_identity(),
         "configuration": _configuration(),
         "source_controls": source_controls,
         "source_results": source_rows,
@@ -470,19 +426,15 @@ def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "branch": select_result_branch(metrics),
         "wall_seconds": float(time.perf_counter() - started),
     }
-    g19_screen._write_json(run_root / "result.json", result)
+    g30_screen.g19_screen._write_json(run_root / "result.json", result)
     return result
 
 
-def _parse_args() -> argparse.Namespace:
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", type=Path, required=True)
     parser.add_argument("--source-commit", required=True)
-    return parser.parse_args()
-
-
-def main() -> None:
-    arguments = _parse_args()
+    arguments = parser.parse_args()
     result = run_screen(
         run_root=arguments.run_root,
         source_commit=arguments.source_commit,

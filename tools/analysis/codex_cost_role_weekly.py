@@ -23,7 +23,7 @@ from typing import Dict, Tuple
 
 
 def _repo_default_pricing_path() -> Path:
-    return Path(__file__).resolve().parents[1] / "references" / "default-pricing.json"
+    return Path(__file__).resolve().parents[2] / "references" / "default-pricing.json"
 
 
 def _normalize_path(value: str | None) -> str | None:

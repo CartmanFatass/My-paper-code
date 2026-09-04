@@ -15,7 +15,7 @@ from ha_ctse_process.return_to_go_direction_balanced_full_actor_g31 import (
     optimize_return_to_go_direction_balanced_update,
 )
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from scripts import screen_return_to_go_direction_balanced_full_actor_g31 as screen
+from tools.analysis import screen_return_to_go_direction_balanced_full_actor_g31 as screen
 
 
 def _model() -> ReturnToGoDirectionBalancedFullActorPolicy:

@@ -39,8 +39,10 @@ manifold_hmasd/
 └── __pycache__/
 
 scripts/
-├── collect_good_states.py      # 收集高奖励状态数据
 └── train_vae.py               # 训练VAE模型
+
+tools/analysis/
+└── collect_good_states.py      # 收集高奖励状态数据
 
 train_manifold_hmasd.py         # 主训练脚本
 ```
@@ -53,7 +55,7 @@ train_manifold_hmasd.py         # 主训练脚本
 
 ```bash
 # 使用启发式策略收集100个episodes的数据
-python scripts/collect_good_states.py \
+python tools/analysis/collect_good_states.py \
     --n_episodes 100 \
     --reward_threshold 0.7 \
     --n_uavs 12 \

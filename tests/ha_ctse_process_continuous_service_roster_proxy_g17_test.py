@@ -22,7 +22,7 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     replay_trajectory,
 )
 from scripts import run_continuous_service_roster_proxy_g17 as runner
-from scripts import screen_continuous_roster_td0_g18 as td0_screen
+from tools.analysis import screen_continuous_roster_td0_g18 as td0_screen
 
 
 def test_continuous_policy_masks_inactive_rows_and_bounds_actions() -> None:

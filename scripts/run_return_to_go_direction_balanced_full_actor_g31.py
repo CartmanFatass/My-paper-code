@@ -33,7 +33,7 @@ from ha_ctse_process.separated_credit_g18 import (
     evaluate_battery_policy,
 )
 from scripts import run_continuous_service_roster_proxy_g17 as g17_runner
-from scripts import screen_return_to_go_direction_balanced_full_actor_g31 as screen
+from tools.analysis import screen_return_to_go_direction_balanced_full_actor_g31 as screen
 
 
 SCHEMA_VERSION = 1
