@@ -11,6 +11,11 @@ protected invariants, relevant behavior, diff, callers/consumers, and runtime pa
 to a direct fact, a reachable failure, and its impact; prefer concrete defects over speculative
 preferences.
 
+First check, before correctness: docs/project/ENGINEERING_SCOPE_SPEC.md sections 4 and 5. List
+every prohibited item the diff adds without a card line and every budget it breaches; those are
+findings that return the diff. A finding of the form "this could fail if ..." about a condition
+that cannot occur on this machine is not a finding.
+
 Focus on scientific meaning, numerical precision, RNG/order, replay and recurrent state,
 checkpoint/resume compatibility, result identity, concurrency, resource observation, and external
 effects when they are in scope. Use a CM Scout or Verifier child only for a named fact that can

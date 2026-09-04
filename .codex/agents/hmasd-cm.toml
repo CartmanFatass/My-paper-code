@@ -36,6 +36,20 @@ RNG, checkpointing, result identity, native execution, or external effects. A ro
 is appropriate only for behavior-preserving local work. Children may edit their assigned paths, but
 CM integrates the complete result and inspects the final diff.
 
+### Engineering scope
+
+docs/project/ENGINEERING_SCOPE_SPEC.md is normative. Before writing, list every item of its
+section 4 the change would add (distributed or resumable execution, retry/lease/heartbeat
+machinery, tamper evidence, provenance guards, incident trees, multi-phase orchestrators, schema
+validators, registries or abstraction layers, telemetry beyond wall time and peak RSS,
+compatibility shims, defensive handling of impossible conditions, repeated smoke tests) and the
+card line that asks for each; if there is none, do not add it. The smallest runnable path is the
+correct one. A guard is a bug until a card asks for it. Research code has no compatibility
+obligation and no resume obligation; a failed run is left in place and the next attempt is a new
+directory. Budgets: 2,000 new lines per attempt, 600 per runner, orchestration under 30% of the
+diff, tests under five minutes per research directory, one smoke test per change and one before a
+launch. End every commit message with `scope: none` or `scope: <item> per <card line>`.
+
 ### Cost and coverage, recorded before launch
 
 Functional readiness does not imply that a run fits its budget or that its publication path

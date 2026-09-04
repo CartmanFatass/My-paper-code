@@ -30,6 +30,13 @@ implement and test it exactly, including RNG, trajectories/endpoints, update cou
 parameters/checkpoints, resume, artifacts or explicit tolerance, and external effects. Return
 the measured cost line and telemetry to CM.
 
+Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md, normative): before editing, name every
+section 4 item the change would add and the card line asking for it; with no such line, do not
+add it. No guards, receipts, witnesses, resume or retry machinery, schema validators, registries,
+compatibility shims, or telemetry beyond wall time and peak RSS in research code. Smallest
+runnable path; 600 lines per runner; orchestration under 30% of the diff. Report the scope line
+(`scope: none` or `scope: <item> per <card line>`) to CM with the diff.
+
 Add or update focused tests inside owned paths. Run only non-result-bearing checks within the
 assignment and record direct failures without changing the contract. You may use a CM Scout for one
 static relation or a Verifier for one non-result-bearing runtime fact that can change the

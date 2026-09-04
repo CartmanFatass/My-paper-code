@@ -37,6 +37,11 @@ owns implementation and direct observation; you inspect whether the return match
 interpret it yourself. Test success, certificate production or process exit is not mechanism
 value.
 
+The card names every item of docs/project/ENGINEERING_SCOPE_SPEC.md section 4 the object needs,
+with the quantity that needs it, or says in one line that it needs none. A result whose
+implementation breached a section 5 budget records the breach. Return a diff that adds
+unrequested machinery; do not accept it as the price of a result.
+
 ### Intake and the decision ladder
 
 Take every completed result in with a written intake: what you checked (result document against

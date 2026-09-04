@@ -23,6 +23,7 @@ GIT_DESTINATION=<worktree/branch/remote target, or NONE when no commit/push is a
 OWNED_PATHS=<exact files/directories the fresh agent may change>
 ALLOWED_EFFECTS=<read/edit/test/commit/push; list each explicitly>
 FORBIDDEN_EFFECTS=<unlisted paths, extra roles/skills/subagents, experiments, external sends, scientific or permission changes>
+SCOPE=<none, or each docs/project/ENGINEERING_SCOPE_SPEC.md section 4 item this contract authorizes and why>
 DELIVERABLES=<files or reports that must exist when done>
 ACCEPTANCE_CRITERIA
 1. <mechanical condition with expected value>

@@ -22,6 +22,10 @@ work to the Semantic Implementer under CM with the exact performance question an
 return `REPAIR_REQUIRED` when that handoff or contract is missing. Routine work may rely on an
 already CM-frozen cost contract but may not choose, reinterpret, or improve it.
 
+Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md): a routine change adds no item of
+its section 4; if the requested delta would, stop and return it to CM as out of scope. Report
+`scope: none` with the diff.
+
 If a check fails, inspect the nearest direct error and make one reversible in-scope correction. If
 the failure reveals a semantic or architecture choice, stop for CM rather than choosing it. Return
 the behavior-preserving change, owned paths, focused tests, direct failures, ambiguity, and

@@ -2,6 +2,9 @@
 
 This file governs repository work on every agent runtime the owner uses (Codex, Claude Code, or
 another). The body is runtime-neutral. Runtime-specific mechanics are in the two appendices.
+Directory conventions live beside the code in one `AGENTS.md` per area (`experiments/`,
+`ha_ctse_process/`, `envs/`, `tests/`, `scripts/`, `docs/`), each imported by a one-line `CLAUDE.md`;
+`docs/project/PROJECT_MAP.md` indexes them. Nearest file wins on a conflict.
 
 ## 1. Operating model
 
@@ -100,6 +103,9 @@ Several sessions commit to the primary target concurrently. Rules for all of the
 - A currentness guard compares the bound commit's *surface* (the byte content of the declared
   source paths) with the working tree, never the commit identity. Doc-only commits by another
   session must not refuse a conformant run.
+- Every commit message ends with the runtime's attribution trailers and one scope line,
+  `scope: none` or `scope: <item> per <card line>`, naming any item of the engineering scope
+  specification §4 the change adds (`docs/project/ENGINEERING_SCOPE_SPEC.md`).
 - After every commit created for an authorized task, push the checked-out branch to its configured
   upstream immediately; no repository-internal approval or verification gate sits between commit
   and push. An external credential, network, non-fast-forward, or branch-protection failure
@@ -119,7 +125,16 @@ launch. Recheck for each invocation before creating scientific roots, RNG master
 optimizers, checkpoints, or results. A passing resource check never overrides a scientific or
 engineering blocker.
 
-## 8. Scientific and external-effect integrity
+## 8. Scientific, engineering and external-effect integrity
+
+**Engineering scope.** `docs/project/ENGINEERING_SCOPE_SPEC.md` is normative: two tiers (core
+preserves compatibility; research code is runnable now and disposable later), a default-prohibited
+list of machinery that a science card must name before it is built (distributed or resumable
+execution, tamper evidence, provenance guards, retry and lease machinery, incident trees,
+schema validators, registries, telemetry beyond wall time and peak RSS, compatibility shims,
+repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
+under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
+a card asks for it.
 
 Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
 bit identity, declared comparison, or external side effects. State material assumptions and
