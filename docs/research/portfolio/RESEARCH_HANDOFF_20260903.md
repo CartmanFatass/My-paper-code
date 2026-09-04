@@ -88,15 +88,17 @@ Merged on `main`:
 | Direction | State at handoff | Next (held by the pause) |
 | --- | --- | --- |
 | flexible_skill_duration | E2 interruption-cost sweep running detached on branch `worktree-agent-a88287f2315bb99a0` (launch sha `92243f413`; branch tip `8329f4e4a`, pushed, declares the study's two §4 items: the two-slot launch queue with a JSON state file and the `wait_for_pids` liveness probe, both instruction-named). 15-run plan after the `k = 1` arm was dropped (XII.6), re-projected 10.3 h (XII.7). **12 of 15** summaries at 06:35Z: `d0` k ∈ {2, 5, 20, 40} × both seeds (k = 2 seed 2 not in the plan), `d2` c ∈ {0.25, 0.5 (seed 1), 1.0}; running `d2_c0p5` seed 2 and `d2_c2p0` seed 1; pending `d2_c2p0` seed 2 (about 1.5 h). Seed-1 D0 ordering so far matches the exact references; `d0_k5` across-seed range 3.1e-5 against `d0_k40`'s 0.086. The implementer was stopped by the session limit at 21:04 PDT; queue state and per-run summaries are in the study root (§5). Result document and Part XIII intake **not written** | Codex: when 15 summaries exist, write the E2 result document from the study root in the E0 format (rule from the E2 card applied verbatim; the §5 return test with `s` from the D2 arm's own across-seed range), intake it, merge the branch, then decide E2b/E3 (per-arm cost projection rule, `AGENTS.md` §5) |
-| capability_bound_semantic_currentness | B1 attempts r01–r05 all refused by orchestration guards or, for r05, a memory-admission floor crossed at the replay phase (E.6–E.12); guard repairs `2e5bc4695`, `09acf0539`, `0b629eff4`, `4679e8dc8`. The implementer was on the E.8 item 3 follow-up (end-to-end profile covering the formal publication path, preflight message fix, incident path budget) when the session limit stopped it at 21:04 PDT; it was resumed at 23:35 PDT with the instruction to commit a clean boundary — *see the E.13 line below when it reports* | r06 at the repaired sha when a run slot is free (E.11 decision (b)); the object is unconsumed |
+| capability_bound_semantic_currentness | B1 attempts r01–r05 all refused by orchestration guards or, for r05, a memory-admission floor crossed at the replay phase (E.6–E.12); guard repairs `2e5bc4695`, `09acf0539`, `0b629eff4`, `4679e8dc8`. E.8 item 3 follow-up committed as `81dfbd72e` (E.13): four more formal-path defects repaired with ten pinning tests, preflight refusal reasons surfaced, offline coverage of the whole publication path; `84 passed, 1 deselected`. Unfinished: the unified end-to-end profile is red at `test_b1_metrics_production.py:699`; incident-root path budget drafted only; **defect 8** (durable cap 512 MiB versus a 685 MiB formal artifact) held for the owner with three options and a recommendation in E.13. Working tree clean for CBSC paths | Owner decision on defect 8 → unified profile green (short `--basetemp`) → `b1_scout_r06` at that sha, detached, short incident root (E.11 decision (b)). Do not launch r06 before the cap decision; it would stop after ~40 min of replay. The object is unconsumed |
 | ucope | paid-acquisition B object answered PA-B (D.24); chain paused by the owner (D.25) | three-witness hinge object (card first) |
 | variable_n_fleet_churn | R02 consumed: `INSTABILITY/HETEROGENEITY`, BCRH not beaten (F.5) | controller-headroom A/RECON object (card first, F.6) |
 | semigroup_consistent_duration_model_policy | B01 line stopped with the base run and the graded diagnostic (C.6); k-split survival is an E4 design input for FSD | D6 recast, no object yet |
 | finite_resource_relational_inductive_efficiency | §11 recast not yet executed (three untracked `b01/` files and their tests exist in the working tree, unreviewed) | one-seed 128-update smoke on the Slice-B trainer, then three seeds |
 
-Owner items still open (not delegated): the replay-phase admission semantics (E.12 item 2: a
-bounded wait-and-retry before a phase's admissions would change "immediately before each
-invocation"); a Git LFS or size rule for tracked `RESULT.json` evidence (377 MiB).
+Owner items still open (not delegated): CBSC defect 8, the durable artifact cap (E.13; the
+reviewer recommends publishing a `summary.json` and dropping the raw dump below the cap); the
+replay-phase admission semantics (E.12 item 2: a bounded wait-and-retry before a phase's
+admissions would change "immediately before each invocation"); a Git LFS or size rule for tracked
+`RESULT.json` evidence (377 MiB).
 
 ## 5. Runtime facts a resuming session needs
 
@@ -111,10 +113,9 @@ invocation"); a Git LFS or size rule for tracked `RESULT.json` evidence (377 MiB
 - E2 monitor: `bw9qgennf` reports each completed run; study root
   `.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E2_20260903/`.
 
-## 6. Open at the pause (2026-09-03 23:40 PDT)
+## 6. Open at the pause (2026-09-03 23:58 PDT; research paused, heartbeat cron deleted)
 
-- CBSC implementer's clean-boundary commit (§4 row; E.13 in the compliance record).
-- E2 completion (3 runs) → result document, Part XIII intake, merge → §4 row. Not started.
+- E2 completion (2 runs; 13 of 15 at 06:39Z) → result document, Part XIII intake, merge → §4 row. Not started.
 - Layout standard items not yet applied (owner-approved, `decisions/2026-09-03-control-plane-revision.md`):
   `docs/` consolidation into `docs/archive/` (`new/`, `new-libs/` including its 96 untracked corpus
   files, `report/`, `superpowers/`, `benchmarks/`, `operations/`, `agents/`, empty `plans/`,

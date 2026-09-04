@@ -1334,6 +1334,58 @@ the final table assembly, exercise it offline against r05's quarantined evidence
 absolute-path binding permits, bundle item 1 and the E.8 incident-root path-budget item, commit by
 pathspec, report which stretches of the publication path are exercised and which are not.
 
+### E.13 Clean boundary at the research pause: four formal-path defects repaired, r06 not launched (2026-09-03, 23:55 PDT)
+
+The implementer was stopped by the session limit at 21:04 PDT and resumed at 23:35 PDT with the
+instruction to reach a clean boundary because the owner is migrating the loop to Codex now.
+Commit `81dfbd72e` on `main` (seven files, +402/−16, pathspec, `scope: none`; the four
+conformance-hashed sources verified LF-only so the currentness surface is intact). Test line:
+`84 passed, 1 deselected` in 4 min 08 s over the production, formal-path-repair, CLI
+orchestration and training-assembly files, with the unified profile deselected (see below).
+
+What E.8 item 3 produced, checked by the reviewer against the commit:
+
+1. **Four further defects on the formal publication path**, found by driving it offline over
+   r05's quarantined evidence while the tree still matched r05's bound commit, each with pinning
+   tests in the new `test_b1_formal_path_repairs.py` (ten tests): B0 evidence staging demanded
+   canonical JSON of receipt siblings the preflight writes with `indent=2`; the B0 leaf rows
+   required a `diagnostics.evaluation` key that B0 worker results do not carry; the preliminary
+   audit pass demanded the output of the re-read step that had not run yet; and the table audit
+   hashed over a raw-tuple sort while publication orders by the canonical key, so the motif-twin
+   index could never bind. None of these is reachable by the four-minute profile; all four sit
+   past the learner. This is the post-learner rule of `AGENTS.md` §8 doing its work: every one of
+   them would have refused r06 after about forty minutes of replay.
+2. **E.12 item 1 done**: `run_memory_preflight` now surfaces the stdout `failure_reasons`, with
+   two pinning tests.
+3. **Offline coverage now exercised**: twelve sequential slot replays, the batch witness, the
+   canonical authority witness (so the E.10 head-match repair is proven on real bytes), B0
+   staging, table materialization, both audit-binding passes.
+4. **Item 4 respected**: no wait-and-retry before any admission (E.12 item 2 stays with the owner).
+
+Unfinished, recorded on every future CBSC result until closed:
+
+- The unified end-to-end profile is still red, now at the post-publication attacker-mutation
+  section (`test_b1_metrics_production.py:699`), far past its original four-minute counter
+  mismatch; its last standalone run was one failure in 59 min 31 s. Two of its tests also fail on
+  Windows `MAX_PATH` alone under a long `--basetemp`. Until it is green the direction records
+  "end-to-end test does not cover the publication path" (`AGENTS.md` §8).
+- The incident-root path budget (E.8 item 3, the `WinError 3` that ended r01) is drafted, not
+  applied.
+- **Defect 8, held for the owner**: `B1_OBJECT_DURABLE_CAP_BYTES` is 512 MiB and the measured
+  formal artifact is about 685 MiB, so every formal publication, r06 included, would stop there
+  after the replay. Raising a declared budget changes frozen meaning and is outside the
+  delegation (`AGENTS.md` §4 item 3). Options for the owner: (a) raise the cap to 1 GiB with a
+  card addendum stating the measured size; (b) publish a `summary.json` of the numbers the rule
+  reads and drop the raw dump below the cap (`docs/AGENTS.md`); (c) keep the cap and treat the
+  artifact size as a defect of the publication path. The reviewer recommends (b): it also answers
+  the 377 MiB tracked-evidence problem and changes no scientific meaning.
+- Replay-supervisor cap enforcement unchanged, still a known defect.
+
+Decision: **r06 is not launched.** Sequence for the resuming session: owner decision on defect 8;
+unified profile to green with a short `--basetemp`; then `b1_scout_r06` at the resulting sha,
+detached, incident root under a short path. r01–r05 remain technical failures with no polarity;
+the object is unconsumed. State is recoverable from `main` at `81dfbd72e` alone.
+
 ## Part F — VNFC recast intake, no B result (2026-09-03)
 
 Object: decision 4 of A.4 executed by an Opus session on `main`: commits `55a46c206`
