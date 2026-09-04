@@ -1,0 +1,40 @@
+{
+  "id": "20260904-vnfc-008",
+  "created": "2026-09-04 2026-09-04T12:09:09Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept `PILOT_ADMITTED`, then require the final focused pass, fresh 4-GiB admission, no-du…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T12:09:09Z). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept the memory-bounded K=1024 saturation admission and proceed to the sole carded result",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "refuse for unavailable or >=2 GiB telemetry",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "repeat an uncarded/materializing pilot",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "change the frozen object",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_MEMORY_BOUNDED_K1024_R02_TECHNICAL_ADMISSION_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

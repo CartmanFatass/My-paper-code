@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vspc1-001",
+  "created": "2026-09-04 2026-09-04T07:03:33-07:00",
+  "direction": "vsp_c1",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) complete the minimal read-only census and report missing assets without a threshold",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:03:33-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "complete a read-only existing-asset/raw-gap A/RECON census",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "construct or train a new host/learner",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "treat production-host absence as zero headroom and PARK advice",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_c1/VSPC1_IDENTITY_PERIOD_HEADROOM_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

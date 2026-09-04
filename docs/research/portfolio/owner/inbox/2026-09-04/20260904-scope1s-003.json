@@ -1,0 +1,35 @@
+{
+  "id": "20260904-scope1s-003",
+  "created": "2026-09-04 2026-09-04T07:06:01-07:00",
+  "direction": "scope_1s",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) no B or local successor; return to Root's A1 aggregation",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:06:01-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "launch no B/open no local successor and return baseline deficit plus binding-structure flag to Root",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "locally construct/tune a same-information generic learner",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "infer algorithm negativity and PARK/CLOSE",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/scope_1s/SCOPE1S_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md#decision-2--next-rung-at-this-clean-boundary-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

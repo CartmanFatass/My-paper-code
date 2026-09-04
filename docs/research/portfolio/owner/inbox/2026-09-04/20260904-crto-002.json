@@ -1,0 +1,35 @@
+{
+  "id": "20260904-crto-002",
+  "created": "2026-09-04 2026-09-04T04:49:00-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept complete `BR-E — COMPARATOR_WEAK` without rerun",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T04:49:00-07:00). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete BR-E",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine for missing RSS/exit code",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun for execution fields",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md#decision-1--accept-the-completed-result-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

@@ -80,10 +80,13 @@ and never parks a direction by itself.
 - **Fusion and shared assets.** Directions on one host share baseline sets and evidence
   interfaces without fusing. Fusion is proposed only when question, comparator, estimand and next
   object are shown to be materially the same.
-- **Digest.** Every Portfolio proposal awaiting ratification, and every direction recommendation
-  a DM returns, is one row of `docs/research/portfolio/owner/digest/<YYYY-MM-DD>.md` with kind
-  `portfolio` (schema in `docs/research/portfolio/owner/README.md`). Root reads the `owner`
-  cells there at every clean boundary; a filled cell is the owner's ratification or refusal.
+- **Owner items.** Every Portfolio proposal awaiting ratification, and every direction
+  recommendation a DM returns, is one item file
+  `docs/research/portfolio/owner/inbox/<YYYY-MM-DD>/<id>.json` of kind `portfolio` with options
+  `ratify`, `refuse`, `amend` (schema in `docs/research/portfolio/owner/README.md`). Root reads
+  today's and yesterday's `docs/research/portfolio/owner/reviews/<YYYY-MM-DD>.md` at every clean
+  boundary; a `ratify` instruction there is the owner's ratification, `refuse` or `amend` is not.
+  Nothing waits for it.
 
 ## Lifecycle semantics
 

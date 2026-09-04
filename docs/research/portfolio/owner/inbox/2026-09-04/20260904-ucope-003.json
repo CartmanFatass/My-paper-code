@@ -1,0 +1,35 @@
+{
+  "id": "20260904-ucope-003",
+  "created": "2026-09-04 04:35 PDT",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b)",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 04:35 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "bitwise solver-value binding",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "exact input/count binding plus absolute solver tolerance `1e-12`",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "replace with a fresh draw",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_CARD_20260904.md#12-object-tier-numerical-freeze"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "20260904-recct-003",
+  "created": "2026-09-04 2026-09-04T07:10:57-07:00",
+  "direction": "recct_lite",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(d) no local launch or successor; preserve lifecycle and return the two-asset deficit to R…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:10:57-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (d). Reversible: yes.",
+  "options": [
+    {
+      "key": "d",
+      "label": "return `HC-D` to Root A1 aggregation and launch nothing",
+      "consequence": ""
+    },
+    {
+      "key": "e",
+      "label": "construct/tune a learner or redesign the host inside this object",
+      "consequence": ""
+    },
+    {
+      "key": "f",
+      "label": "apply unratified MEI or PARK locally",
+      "consequence": ""
+    }
+  ],
+  "recommended": "d",
+  "auto_applied": "d",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/recct_lite/RECCT_HEADROOM_CENSUS_A01_INTAKE_20260904.md#decision-2--local-action-after-the-census-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

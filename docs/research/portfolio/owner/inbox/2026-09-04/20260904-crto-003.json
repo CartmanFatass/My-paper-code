@@ -1,0 +1,35 @@
+{
+  "id": "20260904-crto-003",
+  "created": "2026-09-04 2026-09-04T04:49:01-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "RAW-only A/RECON update-252..264 phase trace, not launched here",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T04:49:01-07:00). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "RAW-only update-252..264 phase trace",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "larger-budget three-path rerun",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "replace/enlarge RAW first",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md#decision-2--select-the-next-rung-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

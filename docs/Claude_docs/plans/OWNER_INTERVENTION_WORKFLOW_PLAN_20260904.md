@@ -113,3 +113,11 @@ usage measures; share assets, do not fuse). The nine-point stance is recorded in
 record. §5 items 3 and 4 of this plan are read under that stance: the headroom census is
 sequencing, not a precondition, and a baseline that must be trained is a declared B. §6 is
 superseded: no batch PARK, no fusion now, UCOPE stays ACTIVE with competence-first ordering.
+
+## 9. Addendum 2026-09-04 08:15 PDT: surfaces replaced by the owner console
+
+The digest table and `PREDICTIONS.md` of §2 are superseded by structured items under
+`owner/inbox/` and the review document `owner/reviews/<date>.md`, graded through
+`tools/owner_console/` (design and build record: `OWNER_CONSOLE_DESIGN_20260904.md`). §3 reads
+with "item" in place of "digest row" and "review instruction" in place of "filled owner cell";
+the rhythm in §4 is unchanged. Briefs stay as files and are referenced from `brief` items.

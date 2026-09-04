@@ -1,0 +1,35 @@
+{
+  "id": "20260904-eociv-001",
+  "created": "2026-09-04 2026-09-04T10:55:41Z",
+  "direction": "eociv_lite",
+  "tier": "object",
+  "kind": "decision",
+  "title": "preserve invalid artifact and build a fresh minimal B9R1 path with corrected RSS observati…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T10:55:41Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "overwrite/reuse historical result namespace",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "preserve invalid artifact and build fresh minimal B9R1 path",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "redesign as multi-update/new-comparator study",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/eociv_lite/EOCIV_B9R1_RECEIVER_ADDRESSED_CREDIT_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

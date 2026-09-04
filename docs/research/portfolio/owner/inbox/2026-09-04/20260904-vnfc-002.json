@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vnfc-002",
+  "created": "2026-09-04 2026-09-04T09:45:04Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "lexicographically smallest legal post-60 terminal suffix, recorded separately and excluded…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T09:45:04Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "lexicographically smallest legal post-60 terminal suffix",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "BCRH post-60 suffix",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "leave terminal serialization ambiguous",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

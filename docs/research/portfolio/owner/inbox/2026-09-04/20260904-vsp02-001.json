@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vsp02-001",
+  "created": "2026-09-04 2026-09-04T07:06:00-07:00",
+  "direction": "vsp_02",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b) freeze and execute the matched greedy retained-evidence census; no scientific invocati…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:06:00-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (b). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "treat deterministic-oracle minus exploratory-baseline `0.15` as A1 headroom",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "freeze a no-learner retained-evidence greedy census and preserve `0.15` separately",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "construct/tune a learner, open roster-age science, or launch B",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md#9-object-tier-design-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

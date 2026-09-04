@@ -1,0 +1,35 @@
+{
+  "id": "20260904-ec4g-002",
+  "created": "2026-09-04 2026-09-04T07:06:10-07:00",
+  "direction": "ec4g_r1",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept `HC-N / HEADROOM_NOT_IDENTIFIED` without reclassification or rerun",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:06:10-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `HC-N` with all primary values null",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "infer a gap from invalid B1 raw panels",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "substitute A5 structural or DEARS different-host evidence",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/ec4g_r1/EC4G_CURRENT_HOST_HEADROOM_A_RECON_INTAKE_20260904.md#decision-1--accept-the-completed-census-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

@@ -1,55 +1,100 @@
 # Owner surfaces（所有者介入面）
 
-这个目录是自动研究循环与所有者之间唯一的异步接口。循环只追加、从不等待；所有者只在需要时填一个
-`owner` 单元格，循环在下一个干净边界执行。控制决定：
+这个目录是自动研究循环与所有者之间唯一的异步接口。循环只写条目、从不等待；所有者在批改台上批改，
+批改结果生成 `reviews/<日期>.md`，循环在下一个干净边界读取并执行。控制决定：
 `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`；规则文本在
-`AGENTS.md` §4.5 和证据规范 §11.7。
+`AGENTS.md` §4.5 和证据规范 §11.7。批改台：`python tools/owner_console/server.py`，然后打开
+`http://127.0.0.1:8765/`。
 
 ## 所有者每天怎么用（约 15 分钟）
 
-1. 打开今天的 `digest/<YYYY-MM-DD>.md`。只有需要你看的行会出现在这里：新卡片、被标记的账本行、
-   新简报、等待批准的 Portfolio 提案。
-2. 不同意的行，在 `owner` 单元格里写一句指令（例如 `PARK`、`reject: 不是 MARL 结构`、
-   `use option (b)`）。空着表示同意。
-3. 有空时在 `PREDICTIONS.md` 里填几句预测。没填也不影响发射。
-4. 每周读 `briefs/` 下头部方向的简报，处理 digest 里累积的 `portfolio` 行。
+1. 打开批改台的收件箱。只有需要你看的条目会出现：已按委托执行的决定、新卡片、预测请求、简报、
+   批评者异议、二次重铸、等待批准的 Portfolio 提案。
+2. 每张卡片：看一眼推荐项（★）和已执行项（✓），同意就按 `g`；不同意就选另一项并写一句原因，
+   `Ctrl+Enter` 提交。每次提交都会写入 reply 文件、重生成当天的 `reviews/<日期>.md` 并按 pathspec
+   commit。推送由你手动按。
+3. 右侧面板可以直接读证据文档、简报和账本行，不用离开页面。
+4. 需要把一批批改交给 Pro 或 Codex 时，用"导出选中"生成一份单独的 md。
 
-## Surfaces and row schemas (agents write these)
+## Layout
 
-### `digest/<YYYY-MM-DD>.md`
-
-Append-only, created by the first agent that writes a row that day. Header:
-
-```markdown
-# Owner digest — <YYYY-MM-DD>
-
-Rows are appended by DMs and Root. The owner replies in the `owner` cell; a filled cell is an
-instruction applied at the next clean boundary.
-
-| time | direction | kind | summary | path | owner |
-| --- | --- | --- | --- | --- | --- |
+```
+owner/
+  README.md              this file (schemas for agents; routine for the owner)
+  inbox/<YYYY-MM-DD>/<id>.json         items written by the DM or Root
+  inbox/<YYYY-MM-DD>/<id>.reply.json   the owner's reply, written by the console
+  reviews/<YYYY-MM-DD>.md              regenerated from replies; THE FILE THE LOOP READS
+  reviews/<YYYY-MM-DD>_<slug>.md       hand-picked exports
+  briefs/<direction>/<YYYY-MM-DD>_<object>.md   one-page Chinese brief per valid result
 ```
 
-`kind` is one of:
+## Item schema (agents write this)
 
-- `new-card`: summary = the card's one-sentence claim and its binding MARL structure.
-- `close-call`, `critic-dissent`, `second-recast`, `portfolio`: summary = the ledger row's chosen
-  option and why it was flagged; path = the ledger row's evidence path.
-- `brief`: summary = the brief's 结果一句话; path = the brief.
-- `prediction-open`: summary = the ladder whose prediction cell is still empty; path =
-  `PREDICTIONS.md`.
+One JSON file per item at `inbox/<YYYY-MM-DD>/<id>.json`, written at the moment the decision is
+made or the card is frozen, next to the ledger row. `id` is `<YYYYMMDD>-<script prefix>-<nnn>`
+(prefixes in `docs/research/RESEARCH_MAP.md`; Root uses `root`).
 
-### `PREDICTIONS.md`
+```json
+{
+  "id": "20260905-fsd-003",
+  "created": "2026-09-05T03:12:00Z",
+  "direction": "flexible_skill_duration",
+  "tier": "object | direction | portfolio",
+  "kind": "decision | new-card | prediction | brief | critic-dissent | close-call | second-recast | portfolio",
+  "title": "one line",
+  "context": "<= 200 words of markdown: what is being decided, why now, what the DM saw",
+  "options": [
+    {"key": "a", "label": "…", "consequence": "one line, optional"},
+    {"key": "b", "label": "…", "consequence": "…"}
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "one sentence",
+  "evidence": ["docs/research/candidates/<direction>/<card or intake>.md"],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#L14",
+  "brief": "docs/research/portfolio/owner/briefs/<direction>/2026-09-05_<object>.md",
+  "status": "open"
+}
+```
 
-One row per ladder, appended when the ladder's first card is frozen. Launch never waits.
+Fields other than `id`, `direction`, `kind`, `title`, `options` are optional. `auto_applied` names
+the option already executed under the standing delegation; omit it when nothing has run yet.
+Options per kind:
 
-### `briefs/<direction>/<YYYY-MM-DD>_<object>.md`
+| kind | options the DM writes | what a reply means |
+| --- | --- | --- |
+| `decision` | the object-tier options, one marked `recommended`; `auto_applied` = the one executed | `agree` or the same key: delegated decision stands; another key: override at the next clean boundary |
+| `new-card` | `accept`, `reject`, `revise` | reject or revise carries the reason in the comment; launch is not blocked meanwhile |
+| `prediction` | the competing mechanisms (two or three) | the owner's prediction; scored at intake; comment carries magnitude or `unclear` |
+| `brief` | `reading-agreed`, `reading-disputed` | dispute with the comment |
+| `critic-dissent`, `close-call` | the DM's options plus the critic's position as one option | as `decision` |
+| `second-recast` | `continue-low-priority`, `park` | park is a Portfolio record; continue keeps lowest sequencing priority |
+| `portfolio` | `ratify`, `refuse`, `amend` | ratification or refusal of a Portfolio proposal; amend with the comment |
 
-One page in Chinese, under 600 characters, six fixed headings:
+Every item is also one ledger row (audit record) whose evidence path names the item file.
+
+## Review document (the loop reads this)
+
+`reviews/<YYYY-MM-DD>.md` is regenerated by the console from every reply answered that day. One
+section per item with `owner:` (the chosen option), `comment:`, and one `instruction:` line. At
+every clean boundary the DM and Root read today's and yesterday's review files, apply each
+`instruction` that differs from what already ran, mark the item's `status` as `answered` in the
+item file, and cite the review line in the ledger. `agree` means seen; nothing changes.
+
+```markdown
+## 20260905-fsd-003 · flexible_skill_duration · decision · E3 之后的下一 rung
+- recommended: (a) · auto-applied: (a) · **owner: (b) E4：随机时长事件**
+- comment: 先看 E4。
+- instruction: apply (b) at the next clean boundary; supersede the delegated (a)
+```
+
+## Briefs
+
+One page in Chinese, under 600 characters, six fixed headings, written by the DM at every
+valid-result intake beside the English intake document, and referenced from a `brief` item:
 
 ```markdown
 # <direction> · <object> · <date>
-
 ## 问题
 ## 机制与比较器
 ## 结果一句话
@@ -60,9 +105,8 @@ One page in Chinese, under 600 characters, six fixed headings:
 
 Plain language, no commit sha, no field names; the English intake document carries those.
 
-## What the loop reads back
+## Guarantees
 
-At every clean boundary the DM and Root read the `owner` column of the audit ledger, the `owner`
-cells of every digest file, and the owner cells of `PREDICTIONS.md`. A filled cell is an owner
-instruction and overrides the delegated decision it points at. Nothing here changes a frozen
-scientific object or a live run's comparator, budget, RNG or claim meaning.
+The loop never waits for a reply. A missing console changes nothing: the owner can write a
+`.reply.json` by hand and run `python tools/owner_console/server.py render-review <date>`. Nothing
+here changes a frozen scientific object or a live run's comparator, budget, RNG or claim meaning.

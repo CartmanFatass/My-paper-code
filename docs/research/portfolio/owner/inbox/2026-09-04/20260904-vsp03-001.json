@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vsp03-001",
+  "created": "2026-09-04 2026-09-04T07:04:47-07:00",
+  "direction": "vsp_03",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b) complete the minimal read-only census; no learner or result-bearing invocation",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:04:47-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (b). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "treat the old event-interface audit or Boolean truth-table divergence as numeric headroom and proceed toward B",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "freeze a minimal read-only census and report a matched raw gap or the exact upper/baseline/population/exposure deficit",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "construct the host/oracle/learner, apply MEI, fuse into FSD E4, or select PARK",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md#10-object-tier-design-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

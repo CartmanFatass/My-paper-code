@@ -1,0 +1,35 @@
+{
+  "id": "20260904-egrcr-003",
+  "created": "2026-09-04 04:37 PDT",
+  "direction": "expressibility_gated_renewal_credit_relay",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept the complete valid mixed result without rerun",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 04:37 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `FRCS-D-MIXED` as `resources_unmeasured`",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine for missing RSS/exit code",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun for execution fields",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_INTAKE_20260904.md#decision-1--accept-the-result-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

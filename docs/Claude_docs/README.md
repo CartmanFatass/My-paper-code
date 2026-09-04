@@ -88,6 +88,12 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `OWNER_CONSOLE_DESIGN_20260904.md` — design and build record of the owner console
+  (`tools/owner_console/`): Codex writes one JSON item per thing needing the owner's eye, the
+  local page renders them as grading cards (options with ★ recommended and ✓ executed, free
+  comment), replies regenerate `owner/reviews/<date>.md` for Codex and are committed by pathspec;
+  the item and review schemas, the four decisions taken with the owner, what was built and what
+  is deferred.
 - `OWNER_INTERVENTION_WORKFLOW_PLAN_20260904.md` — the plan behind the owner-intervention decision
   of 2026-09-04: intervene in selection pressure and output format, never in execution; the
   owner's four answers (Chinese brief per valid result, soft veto for new cards, no prediction

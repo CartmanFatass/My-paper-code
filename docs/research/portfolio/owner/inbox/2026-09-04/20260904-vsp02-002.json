@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vsp02-002",
+  "created": "2026-09-04 2026-09-04T07:12:02-07:00",
+  "direction": "vsp_02",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept `HC-A / MATCHED_GREEDY_HEADROOM_ZERO` with raw matched gap `0`",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:12:02-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `HC-A` and preserve raw `0.15` only as unmatched policy-law provenance",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine despite exact five-seed greedy saturation",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun/retune/build a learner",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_02/VSP02_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md#decision-1--accept-or-quarantine-the-a1-result-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

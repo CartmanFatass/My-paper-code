@@ -94,18 +94,22 @@ When the owner is absent the loop keeps running under a standing delegation (own
    the decision and the loop applies it at the next clean boundary.
 5. **Owner surfaces** (owner decision 2026-09-04,
    `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`). The loop never
-   waits for the owner. It writes to three append-only surfaces under
-   `docs/research/portfolio/owner/` (schemas in that directory's `README.md`) and reads the
-   owner's replies there and in the ledger at every clean boundary:
-   - `digest/<YYYY-MM-DD>.md`: one row per new science card (its one-sentence claim, binding MARL
-     structure, path), per ledger row whose owner flag is not `none`, per new brief, and per
-     Portfolio proposal awaiting ratification. A filled `owner` cell is an instruction.
-   - `PREDICTIONS.md`: one row per ladder, not per invocation, written when the ladder's first
-     card is frozen: the two competing mechanisms, the differentiating measurement, the DM's
-     prediction, an empty owner cell. At intake the DM scores whatever the cell holds and records
-     `not taken` otherwise.
+   waits for the owner. It writes structured items under `docs/research/portfolio/owner/`
+   (schemas in that directory's `README.md`) and reads the owner's reviews there and the ledger
+   `owner` column at every clean boundary:
+   - `inbox/<YYYY-MM-DD>/<id>.json`: one item per thing that needs the owner's eye, written when
+     the decision is made or the card is frozen: a delegated decision (with the executed option
+     marked `auto_applied`), a new card, a prediction request (one per ladder, not per
+     invocation), a brief, a critic dissent, a close call, a second recast, a Portfolio proposal.
+     Each item carries its options with one `recommended`, its evidence paths, and its ledger row.
+   - `reviews/<YYYY-MM-DD>.md`: written by the owner's console from the owner's replies. Each
+     section carries the chosen option, a comment, and one `instruction` line; the DM and Root
+     apply the instructions that differ from what already ran and cite the review line in the
+     ledger. `agree` means seen. At intake the DM scores a `prediction` reply if one exists and
+     records `not taken` otherwise.
    - `briefs/<direction>/<YYYY-MM-DD>_<object>.md`: a one-page owner brief in Chinese for every
-     valid result, written at intake beside the English intake document.
+     valid result, written at intake beside the English intake document and referenced from a
+     `brief` item.
 6. The delegation lasts until the owner revokes it.
 
 ## 5. Capacity and resume

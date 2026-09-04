@@ -1,0 +1,35 @@
+{
+  "id": "20260904-ucope-004",
+  "created": "2026-09-04 05:12 PDT",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a)",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 05:12 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "queue unchanged invocation for a new fresh 4 GiB admission",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "park indefinitely",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "lower/bypass the floor (inadmissible)",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_PRELAUNCH_20260904.md#decision-1--disposition-after-refused-admission-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

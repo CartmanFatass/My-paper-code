@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HMASD 批改台</title>
+<style>
+  :root{
+    --bg:#f6f5f1;--panel:#ffffff;--ink:#1f2328;--muted:#6b7280;--line:#e5e2da;
+    --accent:#2f5d8a;--accent-ink:#ffffff;--star:#b8860b;--ok:#2e7d32;--warn:#b45309;--bad:#b3261e;
+    --chip:#eef0f3;--sel:#e8f0f8;--mono:ui-monospace,Consolas,"SF Mono",Menlo,monospace;
+    --sans:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){:root{
+    --bg:#15171a;--panel:#1d2024;--ink:#e6e6e3;--muted:#9aa0a6;--line:#2c3036;--accent:#7fb0e0;
+    --accent-ink:#0f1a26;--star:#e0b040;--chip:#272b31;--sel:#22303f;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans)}
+  header{display:flex;align-items:center;gap:14px;padding:8px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
+  header h1{font-size:15px;margin:0;font-weight:600;letter-spacing:.02em}
+  header .tabs button{background:none;border:0;padding:6px 10px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;font-size:14px}
+  header .tabs button.on{color:var(--ink);border-color:var(--accent)}
+  header .spacer{flex:1}
+  header .git{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:default}
+  main{display:grid;grid-template-columns:220px minmax(420px,1fr) minmax(360px,44%);height:calc(100vh - 46px)}
+  #rail{border-right:1px solid var(--line);overflow:auto;padding:10px}
+  #queue{overflow:auto;padding:14px 18px}
+  #pane{border-left:1px solid var(--line);overflow:auto;padding:14px 18px;background:var(--panel)}
+  .rail-item{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .rail-item:hover,.rail-item.on{background:var(--sel)}
+  .rail-item small{color:var(--muted);font-family:var(--mono)}
+  .badge{background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:0 7px;font-size:11px;font-family:var(--mono)}
+  .badge.zero{background:var(--chip);color:var(--muted)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{background:var(--chip);border-radius:12px;padding:2px 10px;font-size:12px;cursor:pointer;border:1px solid transparent}
+  .chip.on{border-color:var(--accent);color:var(--accent)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+  .card.focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
+  .card.answered{opacity:.72}
+  .card .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+  .card .title{font-weight:600;font-size:15px}
+  .tag{font-size:11px;padding:1px 7px;border-radius:4px;background:var(--chip);color:var(--muted);font-family:var(--mono)}
+  .tag.kind{color:var(--accent)}
+  .tag.auto{color:var(--ok)}
+  .tag.ans{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+  .ctx{color:var(--ink);margin:6px 0 10px;white-space:pre-wrap}
+  .opts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+  .opt:hover{background:var(--sel)}
+  .opt.sel{border-color:var(--accent);background:var(--sel)}
+  .opt .k{font-family:var(--mono);font-weight:600;min-width:22px}
+  .opt .star{color:var(--star);font-size:12px;margin-left:6px}
+  .opt .ok{color:var(--ok);font-size:12px;margin-left:6px}
+  .opt .cons{color:var(--muted);font-size:12px}
+  textarea{width:100%;min-height:54px;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);color:var(--ink);font:13px/1.5 var(--sans);resize:vertical}
+  .row{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .row .meta{color:var(--muted);font-size:12px;font-family:var(--mono);flex:1}
+  .links a{color:var(--accent);text-decoration:none;font-size:12px;margin-right:10px;cursor:pointer}
+  .reply{border-left:3px solid var(--ok);padding:4px 10px;margin-top:8px;color:var(--muted);font-size:13px}
+  .empty{color:var(--muted);padding:40px;text-align:center}
+  /* rendered markdown */
+  .md h1{font-size:18px}.md h2{font-size:16px;margin-top:20px}.md h3{font-size:14px}
+  .md table{border-collapse:collapse;font-size:12px;display:block;overflow-x:auto;max-width:100%}
+  .md th,.md td{border:1px solid var(--line);padding:3px 6px;text-align:left;vertical-align:top}
+  .md code{font-family:var(--mono);font-size:12px;background:var(--chip);padding:0 4px;border-radius:3px}
+  .md pre{background:var(--chip);padding:10px;border-radius:8px;overflow:auto;font-size:12px}
+  .md pre code{background:none;padding:0}
+  .md blockquote{border-left:3px solid var(--line);margin:0;padding:2px 12px;color:var(--muted)}
+  .pane-head{display:flex;gap:8px;align-items:center;margin-bottom:8px;font-family:var(--mono);font-size:12px;color:var(--muted);word-break:break-all}
+  .toast{position:fixed;bottom:16px;right:16px;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .2s}
+  .toast.show{opacity:1}
+  .overview table{border-collapse:collapse;font-size:12px;width:100%}
+  .overview th,.overview td{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  .overview td.reason{max-width:640px;color:var(--muted)}
+  .lc{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:4px;background:var(--chip)}
+  .lc.ACTIVE{color:var(--ok)}.lc.PARKED{color:var(--warn)}.lc.CLOSED{color:var(--bad)}
+  kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:3px;padding:0 4px;color:var(--muted)}
+  .help{color:var(--muted);font-size:12px;margin:6px 0 12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>HMASD 批改台</h1>
+  <div class="tabs">
+    <button data-tab="inbox" class="on">收件箱</button>
+    <button data-tab="overview">组合</button>
+    <button data-tab="briefs">简报</button>
+    <button data-tab="reviews">评审文档</button>
+  </div>
+  <div class="spacer"></div>
+  <span class="git" id="gitline">git …</span>
+  <button class="btn ghost" id="exportBtn" title="把当前筛选出的已答条目导出为一份 md">导出选中</button>
+  <button class="btn" id="pushBtn">推送</button>
+</header>
+<main>
+  <nav id="rail"></nav>
+  <section id="queue"></section>
+  <aside id="pane"><div class="empty">点击卡片右下角的证据链接，在这里阅读原文。</div></aside>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const S = { items:[], today:'', tab:'inbox', dir:null, kinds:new Set(), showAnswered:false, focus:0, days:7, sel:{}, portfolio:null, briefs:[], reviews:[] };
+const KIND_ZH = {decision:'决定','new-card':'新卡片',prediction:'预测',brief:'简报','critic-dissent':'批评者异议','close-call':'接近',
+  'second-recast':'二次重铸',portfolio:'组合'};
+const ORDER = ['portfolio','second-recast','new-card','critic-dissent','close-call','decision','prediction','brief'];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function api(path, body){
+  const r = await fetch(path, body ? {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)} : undefined);
+  const j = await r.json();
+  if (!r.ok || j.error) throw new Error(j.error || r.statusText);
+  return j;
+}
+function toast(msg, ms=2200){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'), ms); }
+
+async function load(){
+  try{
+    const [it, g] = await Promise.all([api('/api/items?days='+S.days), api('/api/git')]);
+    S.items = it.items; S.today = it.today;
+    $('#gitline').textContent = `${g.branch} · ${g.log[0]||''}${g.ahead ? ` · 待推送 ${g.ahead}` : ''}`;
+    $('#pushBtn').disabled = !g.ahead;
+    render();
+  }catch(e){ toast('加载失败: '+e.message, 4000); }
+}
+
+function pending(){ return S.items.filter(i => i.status !== 'answered'); }
+function visible(){
+  let v = S.items.filter(i => S.showAnswered || i.status !== 'answered');
+  if (S.dir) v = v.filter(i => i.direction === S.dir);
+  if (S.kinds.size) v = v.filter(i => S.kinds.has(i.kind));
+  return v.sort((a,b) => (ORDER.indexOf(a.kind) - ORDER.indexOf(b.kind)) || (b.created||'').localeCompare(a.created||''));
+}
+
+function render(){
+  const n = pending().length; document.title = (n ? `(${n}) ` : '') + 'HMASD 批改台';
+  renderRail();
+  if (S.tab === 'inbox') renderQueue();
+  else if (S.tab === 'overview') renderOverview();
+  else if (S.tab === 'briefs') renderBriefs();
+  else renderReviews();
+}
+
+function renderRail(){
+  const by = {}; for (const i of pending()) by[i.direction] = (by[i.direction]||0)+1;
+  const dirs = [...new Set(S.items.map(i=>i.direction))].sort();
+  let h = `<div class="rail-item ${S.dir?'':'on'}" data-dir=""><span>全部</span><span class="badge ${pending().length?'':'zero'}">${pending().length}</span></div>`;
+  for (const d of dirs) h += `<div class="rail-item ${S.dir===d?'on':''}" data-dir="${esc(d)}" title="${esc(d)}"><small>${esc(short(d))}</small><span class="badge ${by[d]?'':'zero'}">${by[d]||0}</span></div>`;
+  h += `<div class="help" style="margin-top:14px">快捷键：<kbd>j</kbd>/<kbd>k</kbd> 移动 · <kbd>a</kbd>–<kbd>e</kbd> 选项 · <kbd>Enter</kbd> 评论 · <kbd>Ctrl+Enter</kbd> 提交 · <kbd>g</kbd> 同意</div>`;
+  $('#rail').innerHTML = h;
+  $('#rail').querySelectorAll('.rail-item').forEach(el => el.onclick = () => { S.dir = el.dataset.dir || null; S.focus=0; render(); });
+}
+function short(d){ return d.length > 26 ? d.split('_').map(w=>w[0]).join('').toUpperCase()+' '+d.slice(0,14)+'…' : d; }
+
+function renderQueue(){
+  const v = visible();
+  const kinds = [...new Set(S.items.map(i=>i.kind))].sort((a,b)=>ORDER.indexOf(a)-ORDER.indexOf(b));
+  let h = `<div class="filters">${kinds.map(k=>`<span class="chip ${S.kinds.has(k)?'on':''}" data-k="${k}">${KIND_ZH[k]||k}</span>`).join('')}
+    <span class="chip ${S.showAnswered?'on':''}" data-k="__ans">显示已答</span>
+    <span class="chip" data-k="__days">最近 ${S.days} 天</span></div>`;
+  if (!v.length) h += `<div class="empty">没有待批改的条目。</div>`;
+  v.forEach((it, idx) => h += card(it, idx));
+  $('#queue').innerHTML = h;
+  $('#queue').querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    const k = c.dataset.k;
+    if (k === '__ans') S.showAnswered = !S.showAnswered;
+    else if (k === '__days') { S.days = S.days === 7 ? 30 : 7; return load(); }
+    else S.kinds.has(k) ? S.kinds.delete(k) : S.kinds.add(k);
+    S.focus = 0; renderQueue();
+  });
+  v.forEach((it, idx) => wire(it, idx));
+}
+
+function card(it, idx){
+  const sel = S.sel[it.id] ?? (it.reply ? it.reply.choice : null);
+  const opts = (it.options||[]).map(o => `<div class="opt ${sel===o.key?'sel':''}" data-k="${esc(o.key)}">
+      <span class="k">${esc(o.key)}</span><div><div>${esc(o.label)}${o.key===it.recommended?'<span class="star">★ 推荐</span>':''}${o.key===it.auto_applied?'<span class="ok">✓ 已执行</span>':''}</div>${o.consequence?`<div class="cons">${esc(o.consequence)}</div>`:''}</div></div>`).join('');
+  const links = [...(it.evidence||[]).map(e=>`<a data-doc="${esc(e)}">证据 ${esc(e.split('/').pop())}</a>`),
+    it.brief?`<a data-doc="${esc(it.brief)}">简报</a>`:'', it.ledger_row?`<a data-doc="${esc(it.ledger_row)}">账本</a>`:'', `<a data-doc="${esc(it.path)}">item</a>`].join('');
+  return `<article class="card ${idx===S.focus?'focus':''} ${it.status==='answered'?'answered':''}" data-id="${esc(it.id)}" data-idx="${idx}">
+    <div class="top"><span class="tag kind">${KIND_ZH[it.kind]||esc(it.kind)}</span><span class="tag">${esc(it.direction)}</span><span class="tag">${esc(it.tier||'')}</span>
+      ${it.auto_applied?'<span class="tag auto">已按委托执行</span>':''}${it.status==='answered'?'<span class="tag ans">已答</span>':''}
+      <span class="tag" style="margin-left:auto">${esc(it.id)} · ${esc(it.created||it.day)}</span></div>
+    <div class="title">${esc(it.title)}</div>
+    ${it.context?`<div class="ctx">${esc(it.context)}</div>`:''}
+    ${it.dm_reason?`<div class="ctx" style="color:var(--muted)">DM：${esc(it.dm_reason)}</div>`:''}
+    <div class="opts">${opts}</div>
+    <textarea placeholder="自由评论（可空）。选了非推荐项时请写一句为什么。">${esc(S.sel[it.id+'#c'] ?? (it.reply?.comment||''))}</textarea>
+    <div class="row"><span class="links">${links}</span><span class="meta"></span>
+      <button class="btn ghost" data-act="agree">同意 (g)</button><button class="btn" data-act="submit">提交</button></div>
+    ${it.reply?`<div class="reply">已答 ${esc(it.reply.answered_at)} · owner: ${esc(it.reply.choice)}${it.reply.comment?' · '+esc(it.reply.comment):''}</div>`:''}
+  </article>`;
+}
+
+function wire(it, idx){
+  const el = $('#queue').querySelector(`.card[data-id="${CSS.escape(it.id)}"]`);
+  el.onclick = e => { if (!e.target.closest('button,a,textarea,.opt')) { S.focus = idx; refocus(); } };
+  el.querySelectorAll('.opt').forEach(o => o.onclick = () => { S.sel[it.id] = o.dataset.k; S.focus = idx; renderQueue(); });
+  el.querySelector('textarea').oninput = e => S.sel[it.id+'#c'] = e.target.value;
+  el.querySelector('textarea').onkeydown = e => { if (e.key==='Enter' && e.ctrlKey) submit(it); e.stopPropagation(); };
+  el.querySelectorAll('a[data-doc]').forEach(a => a.onclick = () => openDoc(a.dataset.doc));
+  el.querySelector('[data-act=agree]').onclick = () => submit(it, 'agree');
+  el.querySelector('[data-act=submit]').onclick = () => submit(it);
+}
+function refocus(){ $('#queue').querySelectorAll('.card').forEach(c => c.classList.toggle('focus', +c.dataset.idx === S.focus)); const f = $('#queue').querySelector('.card.focus'); f && f.scrollIntoView({block:'nearest'}); }
+
+async function submit(it, forced){
+  const choice = forced || S.sel[it.id];
+  const comment = S.sel[it.id+'#c'] ?? '';
+  if (!choice) return toast('先选一个选项，或点“同意”。');
+  if (!forced && it.auto_applied && choice !== it.auto_applied && !comment.trim()) return toast('覆盖已执行的决定，请写一句原因。', 3000);
+  try{
+    const r = await api('/api/reply', {id: it.id, choice, comment});
+    toast(r.git.ok ? `已写入并提交 ${r.git.sha} → ${r.review}` : `已写入，但 git ${r.git.step} 失败：${r.git.err}`, 3500);
+    delete S.sel[it.id]; delete S.sel[it.id+'#c'];
+    await load();
+  }catch(e){ toast('提交失败: '+e.message, 4000); }
+}
+
+async function openDoc(path){
+  try{
+    const d = await api('/api/doc?path='+encodeURIComponent(path));
+    $('#pane').innerHTML = `<div class="pane-head">${esc(d.path)}</div><div class="md">${path.endsWith('.json') ? `<pre><code>${esc(d.text)}</code></pre>` : md(d.text)}</div>`;
+    $('#pane').scrollTop = 0;
+    const anchor = path.split('#')[1]; if (anchor && /^L\d+$/.test(anchor)) toast('账本行 '+anchor);
+  }catch(e){ toast('无法打开: '+e.message, 3500); }
+}
+
+async function renderOverview(){
+  if (!S.portfolio) S.portfolio = await api('/api/portfolio');
+  const p = S.portfolio, by = {}; for (const i of pending()) by[i.direction]=(by[i.direction]||0)+1;
+  const cols = Object.keys(p.rows[0]||{});
+  let h = `<div class="overview"><div class="help">PORTFOLIO.md · 更新于 ${esc(p.updated)} · 只读</div><table><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}<th>待批</th></tr></thead><tbody>`;
+  for (const r of p.rows){
+    h += '<tr>' + cols.map(c => c==='Lifecycle' ? `<td><span class="lc ${esc(r[c])}">${esc(r[c])}</span></td>` : `<td class="${c.startsWith('Reason')?'reason':''}">${esc(r[c])}</td>`).join('') + `<td>${by[r.Direction]||''}</td></tr>`;
+  }
+  $('#queue').innerHTML = h + '</tbody></table></div>';
+}
+
+async function renderBriefs(){
+  S.briefs = (await api('/api/briefs')).briefs;
+  if (!S.briefs.length) return $('#queue').innerHTML = '<div class="empty">还没有简报。DM 在每个有效结果的 intake 时写入 owner/briefs/。</div>';
+  $('#queue').innerHTML = S.briefs.map(b => `<div class="card"><div class="top"><span class="tag">${esc(b.direction)}</span><span class="tag" style="margin-left:auto">${esc(b.mtime)}</span></div><div class="title"><a style="cursor:pointer;color:var(--accent)" data-doc="${esc(b.path)}">${esc(b.name)}</a></div></div>`).join('');
+  $('#queue').querySelectorAll('a[data-doc]').forEach(a => a.onclick = () => openDoc(a.dataset.doc));
+}
+
+async function renderReviews(){
+  S.reviews = (await api('/api/reviews')).reviews;
+  if (!S.reviews.length) return $('#queue').innerHTML = '<div class="empty">还没有评审文档。提交第一条批改后会生成 owner/reviews/&lt;日期&gt;.md。</div>';
+  $('#queue').innerHTML = `<div class="help">这些是 Codex 在干净边界读取的文件。</div>` + S.reviews.map(r => `<div class="card"><div class="title"><a style="cursor:pointer;color:var(--accent)" data-doc="${esc(r)}">${esc(r.split('/').pop())}</a></div></div>`).join('');
+  $('#queue').querySelectorAll('a[data-doc]').forEach(a => a.onclick = () => openDoc(a.dataset.doc));
+}
+
+// tiny markdown renderer: headings, lists, tables, fences, quotes, inline code/bold/links
+function md(src){
+  const lines = src.replace(/\r\n?/g,'\n').split('\n'); let out='', i=0, inList=null;
+  const inline = s => esc(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,(m,t,u)=>/^https?:/.test(u)?`<a href="${u}" target="_blank">${t}</a>`:`<a data-doc="${u}" style="cursor:pointer;color:var(--accent)">${t}</a>`);
+  const closeList = () => { if (inList){ out += `</${inList}>`; inList=null; } };
+  while (i < lines.length){
+    const l = lines[i];
+    if (/^```/.test(l)){ closeList(); let b=''; i++; while (i<lines.length && !/^```/.test(lines[i])) b += lines[i++]+'\n'; out += `<pre><code>${esc(b)}</code></pre>`; i++; continue; }
+    if (/^\|.*\|\s*$/.test(l)){ closeList(); const rows=[]; while (i<lines.length && /^\|.*\|\s*$/.test(lines[i])) rows.push(lines[i++]);
+      const cells = r => r.trim().slice(1,-1).replace(/\\\|/g,'\x00').split('|').map(c=>inline(c.trim().replace(/\x00/g,'|')));
+      const body = rows.filter(r => !/^\|\s*:?-{3,}/.test(r));
+      out += '<table><thead><tr>' + cells(body[0]).map(c=>`<th>${c}</th>`).join('') + '</tr></thead><tbody>' + body.slice(1).map(r=>'<tr>'+cells(r).map(c=>`<td>${c}</td>`).join('')+'</tr>').join('') + '</tbody></table>'; continue; }
+    let m;
+    if ((m = /^(#{1,6})\s+(.*)/.exec(l))){ closeList(); out += `<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`; }
+    else if ((m = /^\s*[-*]\s+(.*)/.exec(l))){ if (inList!=='ul'){ closeList(); out+='<ul>'; inList='ul'; } out += `<li>${inline(m[1])}</li>`; }
+    else if ((m = /^\s*\d+\.\s+(.*)/.exec(l))){ if (inList!=='ol'){ closeList(); out+='<ol>'; inList='ol'; } out += `<li>${inline(m[1])}</li>`; }
+    else if ((m = /^>\s?(.*)/.exec(l))){ closeList(); out += `<blockquote>${inline(m[1])}</blockquote>`; }
+    else if (!l.trim()){ closeList(); }
+    else { closeList(); let p=l; while (i+1<lines.length && lines[i+1].trim() && !/^(#|[-*]\s|\d+\.\s|>|\||```)/.test(lines[i+1])) p += ' '+lines[++i]; out += `<p>${inline(p)}</p>`; }
+    i++;
+  }
+  closeList();
+  setTimeout(() => $('#pane').querySelectorAll('a[data-doc]').forEach(a => a.onclick = () => openDoc(a.dataset.doc)), 0);
+  return out;
+}
+
+document.querySelectorAll('header .tabs button').forEach(b => b.onclick = () => { document.querySelectorAll('header .tabs button').forEach(x=>x.classList.toggle('on', x===b)); S.tab = b.dataset.tab; render(); });
+$('#pushBtn').onclick = async () => { $('#pushBtn').disabled = true; try { const r = await api('/api/push', {}); toast(r.ok ? '已推送' : '推送失败：'+r.out, 5000); } catch(e){ toast('推送失败: '+e.message, 4000); } load(); };
+$('#exportBtn').onclick = async () => {
+  const ids = visible().filter(i=>i.reply).map(i=>i.id);
+  if (!ids.length) return toast('当前筛选里没有已答条目；打开“显示已答”或先批改。', 3500);
+  const slug = prompt('导出文件名后缀（英文/数字/短横线）', S.dir ? S.dir.slice(0,20) : 'selection'); if (slug === null) return;
+  try { const r = await api('/api/export', {ids, slug}); toast(`已导出 ${r.path}`, 4000); } catch(e){ toast('导出失败: '+e.message, 4000); }
+};
+document.addEventListener('keydown', e => {
+  if (S.tab !== 'inbox' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+  const v = visible(); if (!v.length) return; const it = v[S.focus];
+  if (e.key === 'j'){ S.focus = Math.min(S.focus+1, v.length-1); refocus(); }
+  else if (e.key === 'k'){ S.focus = Math.max(S.focus-1, 0); refocus(); }
+  else if (/^[a-e]$/.test(e.key) && it.options.some(o=>o.key===e.key)){ S.sel[it.id] = e.key; renderQueue(); }
+  else if (e.key === 'g'){ submit(it, 'agree'); }
+  else if (e.key === 'Enter'){ const ta = $('#queue').querySelector('.card.focus textarea'); ta && ta.focus(); e.preventDefault(); }
+});
+load(); setInterval(load, 20000);
+</script>
+</body>
+</html>

@@ -99,20 +99,26 @@ owner; an owner reply in the digest may PARK it later.
 
 ### Owner surfaces (never wait on them)
 
-At every clean boundary read the owner's replies: the `owner` column of the audit ledger and the
-`owner` cells of docs/research/portfolio/owner/digest/*.md and PREDICTIONS.md. A filled cell is an
-owner instruction; apply it. Schemas are in docs/research/portfolio/owner/README.md. Write:
+At every clean boundary read the owner's replies: today's and yesterday's
+docs/research/portfolio/owner/reviews/<YYYY-MM-DD>.md and the `owner` column of the audit ledger.
+Apply every review `instruction` line that differs from what already ran, set the item's `status`
+to `answered`, and cite the review line in the ledger. `agree` means seen. Schemas are in
+docs/research/portfolio/owner/README.md. Write:
 
 - Ledger rows carry `kind` (`technical`, or `selection` when the choice picks what to run next or
   changes treatment, comparator, arm set or budget) and an owner flag: `close-call` when your
   recommendation and its runner-up were not clearly separated, `critic-dissent` when you overrule
   a critic return that ends `MATERIAL_DISSENT: yes`, `second-recast`, `portfolio`, else `none`.
-- One digest row per new card (claim sentence, binding structure, path), per flagged ledger row,
-  per brief, and per Portfolio recommendation you return to Root.
-- When a ladder's first card is frozen, one row in PREDICTIONS.md: the two competing mechanisms,
-  the differentiating measurement, your own prediction, an empty owner cell. One row per ladder,
-  not per invocation. Launch never waits. At intake score the owner's cell if filled, otherwise
-  record `not taken`.
+  The evidence path of a row that has an item names the item file.
+- One item JSON at docs/research/portfolio/owner/inbox/<YYYY-MM-DD>/<id>.json, id
+  `<YYYYMMDD>-<script prefix>-<nnn>`, for: every object-tier decision you take under delegation
+  (kind `decision`, the executed option in `auto_applied`), every new card (kind `new-card`, with
+  the claim sentence and binding structure in `context`), every ladder's first card (kind
+  `prediction`, options = the competing mechanisms, your own prediction in `dm_reason`), every
+  valid-result brief (kind `brief`), every flagged row (kind = the flag), and every Portfolio
+  recommendation you return to Root (kind `portfolio`). Options carry one `recommended`; evidence
+  paths point at the card, intake or result document. Launch never waits for a reply; at intake
+  score a `prediction` reply if one exists and record `not taken` otherwise.
 - With every valid-result intake, a one-page owner brief in Chinese at
   docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md, under 600
   characters, six fixed headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,

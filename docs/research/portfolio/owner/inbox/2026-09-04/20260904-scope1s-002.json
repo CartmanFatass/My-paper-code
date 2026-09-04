@@ -1,0 +1,35 @@
+{
+  "id": "20260904-scope1s-002",
+  "created": "2026-09-04 2026-09-04T07:06:00-07:00",
+  "direction": "scope_1s",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept complete `HC-B / UPPER_PRESENT_BASELINE_MISSING`",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:06:00-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `HC-B` and preserve raw 28 only as mismatched-information provenance",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "relabel raw 28 as A1 headroom",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "quarantine/repeat for absent experiment preflight/telemetry",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/scope_1s/SCOPE1S_GUIDANCE_A1_HEADROOM_CENSUS_INTAKE_20260904.md#decision-1--accept-the-completed-arecon-census-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

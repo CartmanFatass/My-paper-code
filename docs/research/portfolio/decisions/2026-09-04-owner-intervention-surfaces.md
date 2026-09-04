@@ -63,6 +63,25 @@ Codex Root will form the persistent `portfolio:cross_direction` Pro packet from 
 return a formal Portfolio proposal for the owner's ratification; `PORTFOLIO.md` is not changed by
 this record.
 
+## Revision 2: owner console and structured items (07:36–08:10 PDT, `OWNER_DIRECT`)
+
+The owner asked for a localhost console whose content is updated by the Codex side, where each
+item is graded (a choice among options with a marked recommendation, plus a free comment) and the
+graded items are exported as a markdown document Codex reads. Four choices, owner present:
+
+1. Content is written by the Codex loop as one JSON item per thing needing the owner's eye
+   (`docs/research/portfolio/owner/inbox/<date>/<id>.json`); the console is built by Claude and
+   may later be maintained by Codex.
+2. The digest table and `PREDICTIONS.md` created in the morning are replaced by the inbox items;
+   predictions and briefs are items too. The ledger stays as the audit record.
+3. On every save the console writes the reply file, regenerates
+   `docs/research/portfolio/owner/reviews/<date>.md` (the document the loop reads at clean
+   boundaries), and commits both by pathspec; push is a manual button.
+4. Location `tools/owner_console/` (standard library, `127.0.0.1` only); `CLAUDE.md` gains the
+   owner-side exception to its no-dashboard line.
+
+No wait is added: the loop writes items and continues; the owner replies when convenient.
+
 ## Files changed under this decision
 
 `AGENTS.md` §2 and §4; `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11.7;

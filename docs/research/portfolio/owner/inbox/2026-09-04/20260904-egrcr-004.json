@@ -1,0 +1,35 @@
+{
+  "id": "20260904-egrcr-004",
+  "created": "2026-09-04 04:37 PDT",
+  "direction": "expressibility_gated_renewal_credit_relay",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(f) no local run; direction-tier Convergence chooses park, recast, or continue",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 04:37 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "d",
+      "label": "unchanged three-seed replication",
+      "consequence": ""
+    },
+    {
+      "key": "e",
+      "label": "locally define common-scale B02",
+      "consequence": ""
+    },
+    {
+      "key": "f",
+      "label": "select no local run and escalate family disposition to Convergence",
+      "consequence": ""
+    }
+  ],
+  "recommended": "f",
+  "auto_applied": "f",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_INTAKE_20260904.md#decision-2--next-rung-object-tier-direction-consequence-escalated"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

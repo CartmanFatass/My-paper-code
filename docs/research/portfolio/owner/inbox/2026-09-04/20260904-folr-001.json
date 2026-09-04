@@ -1,0 +1,35 @@
+{
+  "id": "20260904-folr-001",
+  "created": "2026-09-04 2026-09-04T07:05:01-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b) freeze the read-only B3 census; preserve host/information parity and make no learner o…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:05:01-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (b). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "substitute the fixed-config B2 generic result from a different host",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "freeze a minimal read-only current-host census and report a raw matched gap or exact deficit",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "repair/tune a learner, apply proposed MEI, or launch Phase R/B",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md#8-object-tier-unattended-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

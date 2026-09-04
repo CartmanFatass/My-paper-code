@@ -1,0 +1,35 @@
+{
+  "id": "20260904-acvc-002",
+  "created": "2026-09-04 2026-09-04T11:34:56Z",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) accept complete `B2-C / FIXED_RULE_CONTAINS` without rerun",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T11:34:56Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete `B2-C`",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine for integrity mismatch",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun unchanged object",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_UNCERTAIN_DELAYED_VETO_R01_INTAKE_20260904.md#decision-1--accept-or-quarantine-this-attempt-object-tier"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

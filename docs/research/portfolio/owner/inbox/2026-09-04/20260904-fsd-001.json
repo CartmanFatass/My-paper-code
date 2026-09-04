@@ -1,0 +1,30 @@
+{
+  "id": "20260904-fsd-001",
+  "created": "2026-09-04 02:45 PDT",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b) E3",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 02:45 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "E2b transfer of `c=0.25` to UAV scenario 1",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "E3 heterogeneous-hazard discriminator",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

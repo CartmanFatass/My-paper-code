@@ -1,0 +1,40 @@
+{
+  "id": "20260904-frrie-003",
+  "created": "2026-09-04 03:59 PDT",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "prepare unchanged three-seed B01",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 03:59 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "prepare unchanged three-seed B01",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "repeat valid R128",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "change treatment/comparator/seed/config",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "park family",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_SECTION11_R128_SMOKE_RESULT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

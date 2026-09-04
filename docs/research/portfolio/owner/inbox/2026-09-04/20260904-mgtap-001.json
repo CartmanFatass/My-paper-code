@@ -1,0 +1,35 @@
+{
+  "id": "20260904-mgtap-001",
+  "created": "2026-09-04 2026-09-04T07:18:00-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(b) complete the read-only census; no learner or result-bearing invocation",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:18:00-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (b). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "substitute oracle-minus-load or stopped-C contrasts for the missing matched pair",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "perform a read-only availability census and report a raw gap only if a valid matched pair exists",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "construct/tune a learner, launch B, or apply draft MEI",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md#8-object-tier-choice"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

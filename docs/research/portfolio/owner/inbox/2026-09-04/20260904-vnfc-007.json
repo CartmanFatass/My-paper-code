@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vnfc-007",
+  "created": "2026-09-04 2026-09-04T10:50:00Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept the technical refusal, freeze and launch no successor, and return the family choice…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T10:50:00Z). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept the K=1024 technical refusal and return the family choice to convergence",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "treat RSS sentinel 0 as zero and proceed",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "treat 3.42% allocation coverage as sufficient or run another uncarded pilot",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_K1024_RSS_PILOT_TECHNICAL_REFUSAL_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

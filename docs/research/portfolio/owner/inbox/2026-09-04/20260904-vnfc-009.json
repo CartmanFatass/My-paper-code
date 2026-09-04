@@ -1,0 +1,40 @@
+{
+  "id": "20260904-vnfc-009",
+  "created": "2026-09-04 2026-09-04T12:13:37Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "wait at the clean resource boundary without rapid polling; use a distinct fresh receipt af…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T12:13:37Z). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a), with Root capacity coordination. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "wait cleanly for active FSD/UCOPE pressure to change and then make one new fresh 4-GiB admission",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "launch below threshold",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "kill unrelated work",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "assign scientific polarity to the resource refusal",
+      "consequence": ""
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_MEMORY_BOUNDED_K1024_R02_RESOURCE_ADMISSION_REFUSAL_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}
