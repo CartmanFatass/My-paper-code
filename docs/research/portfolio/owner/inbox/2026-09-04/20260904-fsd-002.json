@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-002",
+  "created": "2026-09-04T14:36:19-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "恢复 E3 的下一格 medium D0 seed 3",
+  "context": "所有者已明确恢复自动研究。E3 保持原卡，当前十格有效；远端任务和全部已登记本地工作树均未发现下一格的任务或结果目录。选择仅恢复下一格，不加入新控制或改变比较器。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按原卡在远端启动下一格并留下运行交接",
+      "consequence": "一次新鲜资源准入后运行 medium D0 seed 3；训练、比较和读取规则不变"
+    },
+    {
+      "key": "b",
+      "label": "继续保持旧暂停状态",
+      "consequence": "下一格保持未创建，自动研究继续暂停"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "新恢复指令明确，下一格尚未运行，原卡及已接受实现已经完整指定本次工作。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D0_SEED3_RESUME_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-resume-20260904",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
