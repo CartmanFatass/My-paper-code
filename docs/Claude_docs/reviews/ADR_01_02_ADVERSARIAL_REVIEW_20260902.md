@@ -1339,3 +1339,38 @@ as deviation D2 in the result document with the estimate and the first real eval
 Stop rule added: re-project after every completed pair; if the projection exceeds 9.0 h (12.5%
 over), §4.4 applies to whatever has not launched. Intermediate state is committed to the branch
 as each pair finishes.
+
+## XII.6 E2 budget: the `k` sweep's cost law and the `k = 1` arm (2026-09-03, 17:25 PDT)
+
+The 8.45 h projection of XII.5 assumed every arm costs what `d0_k40` costs. It does not: the
+coordinator row count is `M = num_envs × rollout_length / k`, so the D0 sweep grows as `k`
+falls (ADR 01's "M is the binding resolution term at long holds", read the other way).
+Measured over six rollouts of both `d0_k1` seeds: `M = 6,400` and 750 coordinator optimizer
+steps per rollout against 160 and 30 at `k = 40`; 530 s per rollout against 85. A two-point
+fit (66.5 s fixed plus 0.618 s per coordinator step) projects per-run totals of 204 min at
+`k = 1`, 127 at `k = 2`, 80 at `k = 5`, 59 at `k = 20`, 56 at `k = 40` (measured) and about 57
+for each D2 arm, 12.6 h for the 18 runs; the `d0_k1` pair alone is 6.8 h on measured numbers.
+Under XII.5's stop rule the implementer applied §4.4 to what had not launched (dropping
+`d0_k2:2`, `d2_c0p25:2`, `d2_c2p0:2`), which still projects to 10.7 h, and §4.4 has nothing
+further to drop. The queue script gained `--skip`, `--wait-pids` and `--state-name` (commits
+`21ffc0825`, `452cda9e3`); runner, aggregator and test are byte-identical to the launch sha
+`92243f413`, test line `36 passed`.
+
+Options put on record: (a) accept 10.7 h with the three §4.4 drops, which leaves §5's
+segment-length monotonicity clause unevaluable in seed 2; (b) stop `d0_k1` seed 2 now, saving
+about 1.5–2 h, keeping `k = 1` at one seed; (c) stop both `d0_k1` runs and drop the arm, about
+8.4 h; (d) reduce `R` for the remaining runs, breaking comparability; (e) stop both `d0_k1`
+runs, drop the arm, and restore the two D2 seed-2 runs §4.4 removed, keeping `d0_k2:2`
+dropped: eleven remaining runs, about 9.4 h.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): (e).** The study's question is
+D2 at finite `c` against the best fixed `k`, and §5's mechanism-A clause needs all four `c`
+arms in both seeds; that is worth more than the degenerate `k = 1` arm (reference return 0.001
+against `J_switch = 0.392`) at 6.8 h of budget. The D0 sanity check reads the ordering at the
+top, which `k ∈ {2, 5, 20, 40}` determines; the `k = 1` reference stays in the manifests. The
+two `d0_k1` runs are quarantined as stopped by the budget rule, nothing read from them, not an
+instrumentation event. A 17% overrun of the cap is accepted on XII.5's grounds. Recorded in
+the result as D2b with the cost law, the §4.4 application and its partial reversal, and the
+open item that any `k` sweep on this route must be projected per arm from `M` before launch
+(carried to the E3/E4 contracts). Reviewer's own erratum: XII.5's overrun figure and my
+acceptance of it rested on a one-arm projection I did not question.
