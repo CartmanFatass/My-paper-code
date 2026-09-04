@@ -139,8 +139,6 @@ def main(argv=None) -> int:
 
     queue = build_queue(tuple(args.seeds), args.drop_outer_seed2,
                         skip=[_parse_pair(x) for x in args.skip])
-    if args.wait_pids:
-        wait_for_pids(args.wait_pids)
     state = {
         "started_at": _utc_now(),
         "study_root": str(root),
@@ -159,6 +157,8 @@ def main(argv=None) -> int:
         state_path.write_text(json.dumps(state, indent=2), encoding="utf-8")
 
     write_state()
+    if args.wait_pids:
+        wait_for_pids(args.wait_pids)
 
     running = []  # (index, Popen, stdout handle, stderr handle)
     next_index = 0
