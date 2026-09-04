@@ -1,0 +1,32 @@
+{
+  "id": "20260904-mgtap-011",
+  "created": "2026-09-04T15:55:08-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "N5 B02 完整曲线：+0.00840，小于0.010",
+  "context": "完整三种子比较有效；主运行8.17秒，含短运行8.94秒。按所有者要求收尾，无新对象。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_MAIN_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L311",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-04_b02_main.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
