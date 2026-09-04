@@ -18,7 +18,8 @@ which leaves the imported modules untouched.
 
 Usage (explicit interpreter, per CLAUDE.md):
 
-    C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/run_flexible_skill_duration_e0.py \
+    # use the hmasd-amd-cpu interpreter
+    python scripts/run_flexible_skill_duration_e0.py \
         --arm off --seed 1 --rollouts 10 --num-envs 32 \
         --output-root temp/directions/flexible_skill_duration/exp/E0_20260902
 """

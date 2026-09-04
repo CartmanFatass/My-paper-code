@@ -25,7 +25,8 @@ in `train(False)` with `update=False` normalisation.
 
 Usage (explicit interpreter, per CLAUDE.md):
 
-    C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe \
+    # use the hmasd-amd-cpu interpreter
+    python \
         scripts/run_flexible_skill_duration_e1.py \
         --arm d1 --seed 1 --rollouts 20 --num-envs 32 --threads 4 \
         --launch-commit 6fba1c7ba \

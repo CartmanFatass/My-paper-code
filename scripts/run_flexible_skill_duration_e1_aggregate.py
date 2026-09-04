@@ -19,7 +19,8 @@ beside it.
 
 Usage:
 
-    C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe \
+    # use the hmasd-amd-cpu interpreter
+    python \
         scripts/run_flexible_skill_duration_e1_aggregate.py \
         --output-root C:/Projects/HMASD/temp/directions/flexible_skill_duration/exp/E1_20260902 \
         --seeds 1 2 3 --rollouts 20

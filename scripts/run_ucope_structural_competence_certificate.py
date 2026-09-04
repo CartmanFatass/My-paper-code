@@ -26,7 +26,7 @@ from typing import Any, Mapping
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-FROZEN_PROJECT_ROOT = Path("C:/Projects/HMASD")
+FROZEN_PROJECT_ROOT = PROJECT_ROOT
 FROZEN_PYTHON_EXECUTABLE = Path(
     "C:/Users/fires/AppData/Local/Programs/Python/Python311/python.exe"
 )
