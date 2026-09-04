@@ -1,252 +1,92 @@
-# Python字节码
+# .gitignore — ignore generated artifacts and scratch only. Source and documents are visible by
+# default; there is no global rule on *.md, *.txt, *.pdf, *.png or test*.py. Layout standard:
+# docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md. Rules for run output are anchored
+# at the repository root so that archived copies under docs/ stay visible.
+
+# Python and tool caches
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-
-# 虚拟环境
+*.egg-info/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
 env/
 venv/
-ENV/
-env.bak/
-venv.bak/
+.venv/
 
-# 发行版/打包相关
-dist/
-build/
-*.egg-info/
-*.egg
-
-# PyCharm项目设置
-.idea/
-*.iml
-*.iws
-*.ipr
-*.iws
-out/
-.idea_modules/
-
-# VSCode设置
-.vscode/
-
-# 日志和数据
-logs/
-logs*/
-tf-logs/
-*.log
-*.tfevents.*
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.zip
-data/
-*.pdf
-*.md
-!README.md
-!CONTEXT.md
-!AGENTS.md
-!CLAUDE.md
-# Stable project and research documentation.
-!memory/*.md
-!docs/project/*.md
-!docs/agents/
-!docs/agents/*.md
-!docs/report/*.md
-!docs/plans/*.md
-!docs/migration/
-!docs/migration/*.md
-!tests/fixtures/hmasd_external_review/prompts/
-!tests/fixtures/hmasd_external_review/prompts/*.md
-!docs/research/portfolio/
-!docs/research/portfolio/**
-!docs/external-review/directions/
-!docs/external-review/directions/**
-!docs/research/RESEARCH_MAP.md
-!docs/research/cdc/**/*.md
-!docs/research/designs/*.md
-!docs/research/specs/
-!docs/research/specs/*.md
-!docs/research/candidates/
-!docs/research/candidates/**/*.md
-!docs/research/legacy/
-!docs/research/legacy/directions/
-!docs/research/legacy/directions/**/*.md
-# Visual brainstorming and runtime capability probes are local scratch.
-.superpowers/
-/.scratch/
-
-# Codex project skills are durable workflow definitions. Other retired
-# assistant layouts must not reappear as hidden local state.
-!/.agents/
-!/.agents/roles/
-!/.agents/roles/*.md
-!/.agents/skills/
-!/.agents/skills/**/
-!/.agents/skills/**/SKILL.md
-!/.agents/skills/**/*.md
-!/.agents/third_party/
-!/.agents/third_party/**/
-!/.agents/third_party/**/*.md
-/.codex/runtime/**
-/.omp/runtime/**
-/.claude/
-# Generated from the account-visible Codex model cache; never commit account
-# catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
-runtime/model-catalog-v2-workaround.json
-# Version the human-readable prompts used by optional native Codex advisors.
-!.codex/prompts/
-!.codex/prompts/*.md
-# Exact R27-G2 design/review evidence is durable project state.
-!docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md
-!docs/external-review/R27_G2_design_review_20260712_Claude.md
-!docs/external-review/gemini_3_1_pro/**/*.md
-!docs/external-review/gpt5_6_pro/**/*.md
-!docs/external-review/rounds/**/*.md
-!docs/external-review/GPT5_6_PRO_OPEN_HANDOFF_TEMPLATE.md
-!docs/external-review/OPEN_REVIEW_PRINCIPLES.md
-!docs/external-review/CONVERGENT_REVIEW_PRINCIPLES.md
-!docs/operations/R27_G2_REMOTE_AUTOMATION_20260712.md
-# LTM holds the rotated long-form history the compact files point at. It is the
-# archive half of the compact-memory contract, so it must be tracked too.
-!memory/LTM/*.md
-!memory/LTM/external_reviews/INDEX.md
-!memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md
-*.txt
-!/requirements_server.txt
-!/requirements_sb3.txt
-!scripts/r27_g2_runtime_package_manifest.txt
-*.tar
-!ref/hmasd.tar
-ref/hmasd/
-ref/OPT-main/
-*.png
-
-# Keep the curated N/k/many-agent literature analyses trackable while leaving
-# downloaded papers and third-party source trees local-only.
-!docs/research/literature/n_k_many_agent_deep_dive/**/*.md
-docs/research/literature/n_k_many_agent_deep_dive/code/
-
-# Keep the LLM-oriented navigation and page-traceable derivative corpus
-# trackable. Source PDFs under docs/new-libs/papers remain ignored by *.pdf.
-!docs/new-libs/*.md
-!docs/new-libs/corpus/*.md
-!docs/new-libs/corpus/qa/*.md
-!docs/new-libs/corpus/papers/*/overview.md
-!docs/new-libs/corpus/papers/*/SECTION_INDEX.md
-
-# Claude Code session deliverables (reviews, research notes, design advice, toy studies).
-!docs/Claude_docs/**
-
-# 生成的模型和结果
-models/
-results/
+# Model, result and log output (never versioned; historical logs live under docs/archive/logs/)
+/models/
+/results/
+/logs/
+/logs*/
+/tf-logs/
+/evaluation/
+/runtime/
+/data/
 *.pt
 *.pkl
 *.npy
-evaluation/
-
-# 临时文件
-.DS_Store
-._.DS_Store
-*~
-.*.swp
-._*
-*.tmp
-*.temp
-*.bak
-*.orig
-.pytest_cache/
-**/.pytest_cache/
-.pytest_tmp*/
-.pytest-*/
-.pytest_r*_tmp*/
-.codex_tmp_pytest*/
-.tmp_pytest*/
-.mypy_cache/
-.ruff_cache/
-.coverage
-.coverage.*
-htmlcov/
-
-# Local generated workflow/test output. These directories contain rebuildable
-# runtime traces, benchmark payloads, and scratch frontiers; durable research
-# decisions remain under docs/ and source remains under experiments/.
-/.tmp*
-/artifacts/
-/runtime/
-/tmp/
-/.charter/cache/
-
-# Canonical local scratch layout. All repository-local generated work goes
-# under temp/; only its short layout guide is versioned. Linked Git worktrees
-# live outside the checkout under C:/Projects/HMASD-worktrees/.
-/temp/**
-!/temp/README.md
-/.cache/
-/cache/
-/scratch/
-/work/
-/worktrees/
-/.worktrees/
-
-# Candidate-local generated result/checkpoint trees. Keep candidate source
-# files visible so new implementations can still be reviewed and committed.
+*.npz
+*.sqlite3
+*.tfevents.*
+*.log
+*.pid
+*.csv
+*.dat
+*.out
 /experiments/**/RISP_*_RESUME_*/
 /experiments/**/RISP_*_RESULTS_*/
 /experiments/**/RISP_*_CHECKPOINTS_*/
 /experiments/**/RCLE_*_RESULTS_*/
-*.npz
-*.sqlite3
 
-# One-off root-level operator scratch payloads.
-/temp_*.json
+# Scratch: temp/directions/<direction-id>/{exp,test}/ is the only scratch root
+/temp/**
+!/temp/README.md
+/.tmp*
+/tmp/
+/scratch/
+/.scratch/
+/work/
+/worktrees/
+/.worktrees/
+/.cache/
+/cache/
+/artifacts/
+/.charter/cache/
+/.omp/runtime/
+.pytest_tmp*/
+.pytest-*/
+.codex_tmp_pytest*/
+.tmp_pytest*/
 tmp_pytest*/
 pytest_tmp*/
-.pycache*/
-tests/.pytest_tmp/
-tests/.tmp/
-test/.pytest_tmp/
-test/.tmp/
-test*.py
-# Candidate tests mirror experiments/candidates and remain visible to Git.
-!tests/experiments/
-!tests/experiments/**/*.py
-# Semantic overlay tests are durable control-plane evidence.
-!tests/codex_semantic_mvp/
-!tests/codex_semantic_mvp/**/*.py
-!tests/codex_context_lifecycle/
-!tests/codex_context_lifecycle/**/*.py
-!tests/codex_supervisor/
-!tests/codex_supervisor/**/*.py
-# Semantic overlay acceptance and topology reports are durable control-plane evidence.
-!docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/
-!docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/**/*.md
-!docs/research/workflow-runs/2026-08-18_codex-app-server-observer/
-!docs/research/workflow-runs/2026-08-18_codex-app-server-observer/**/*.md
-!docs/research/workflow-runs/2026-08-18_codex-managed-actors/
-!docs/research/workflow-runs/2026-08-18_codex-managed-actors/**/*.md
-!docs/research/workflow-runs/2026-08-19_codex-supervisor-durability-kernel/
-!docs/research/workflow-runs/2026-08-19_codex-supervisor-durability-kernel/**/*.md
-!docs/project/decisions/
-!docs/project/decisions/**/*.md
-*.doc
-*.docx
+/temp_*.json
 debug/
-#test/
 temp_collection_log/
-
-# User-controlled independent research is local-only and never enters Git.
 /local_research/
 
-/runtime/codex-semantic-mvp/
+# Agent runtime state (agent definitions and settings are tracked; worktrees and locks are not)
+/.claude/worktrees/
+/.claude/*.lock
+/.remember/
+/.codex/runtime/
 
-# Local handoffs are ordinary scratch payloads under the canonical temp root.
+# Owner's personal notes
+/docs/personal/
 
-# Keep the isolated remote log sync utility trackable under dist.
-!dist/
-dist/*
-!dist/remote_log_sync/
-!dist/remote_log_sync/**
+# Archives and large binaries
+ref/hmasd/
+ref/OPT-main/
+*.tar
+!ref/hmasd.tar
+*.zip
+*.gz
+*.doc
+*.docx
