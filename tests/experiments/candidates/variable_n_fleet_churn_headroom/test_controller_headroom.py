@@ -117,6 +117,10 @@ def test_wall_cap_is_checked_at_the_final_world_boundary(monkeypatch: pytest.Mon
     assert summary["result"] == {"branch": "INCOMPLETE"}
 
 
+@pytest.mark.skipif(
+    sys.platform != "win32",
+    reason="historical R09 interactive cross-check is MSVC-only",
+)
 def test_epoch_zero_failed_service_tie_uses_native_lexicographic_command(
     toy_summary: dict[str, object],
 ) -> None:
@@ -131,6 +135,10 @@ def test_epoch_zero_failed_service_tie_uses_native_lexicographic_command(
     assert tuple(beam_first) == tuple(expected)
 
 
+@pytest.mark.skipif(
+    sys.platform != "win32",
+    reason="historical R09 interactive cross-check is MSVC-only",
+)
 def test_bcrh_path_matches_unchanged_interactive_native_api(
     toy_summary: dict[str, object],
 ) -> None:
