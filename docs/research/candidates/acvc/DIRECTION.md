@@ -28,9 +28,10 @@ produced `B2-C / FIXED_RULE_CONTAINS` on its one-seed host/budget rung.
 
 Exact binding remains a useful protocol primitive, but neither accepted object supports adaptive
 ACVC superiority over its strongest competent fixed control. R01 closes only its declared
-seed/host/budget rung. It does not show that episode history has no native decision value: both
-learners may share an optimization or objective bias, and no competent history-conditioned policy
-has yet established return headroom over `DET-CF`.
+seed/host/budget rung. It does not show that episode history has no native decision value: R02 now
+establishes a small exact positive legal-history gain, while both learners may still share an
+optimization or objective bias. No accepted policy has established material `0.25` headroom over
+`DET-CF`.
 
 The first persistent Convergence decision was `PRO_FINAL / RECAST_HEADROOM_FIRST`. Its exact
 full-value object encountered a reproduced engineering blocker: the exact alpha envelope retained
@@ -42,31 +43,39 @@ evidence only and supplies no scientific polarity.
 
 The reopened Convergence node then formed `PRO_FINAL / RECAST_CERTIFIED_BOUND`. Do not reopen B1,
 uncertain/delayed R01, or the blocked full-DP object, and do not start a learner ladder. The
-admitted next discriminator is `ACVC-A-RECON-HISTORY-HEADROOM-CERTIFICATE-R02`: one exact fixed
+admitted discriminator was `ACVC-A-RECON-HISTORY-HEADROOM-CERTIFICATE-R02`: one exact fixed
 legal receiver-history lower witness plus an exact harm-constrained regime-oracle upper certificate
 against unchanged `DET-CF`, on the unchanged twelve-opportunity host and at the unchanged `0.25`
 threshold and harm envelope.
 
-The certificate does not claim exact optimal history-policy value when its interval remains open.
-`HC-A` alone establishes material compatible headroom and admits, but does not launch, one later
-learner-competence object. `HC-C` certifies such headroom impossible and closes the current host
-family; `HC-B` isolates a consequence-envelope conflict; `HC-D` records an unresolved interval and
-an exact re-entry dependency. Any integrity or admission failure is `HC-X` with no scientific
-branch. Until the certificate completes, competent history headroom remains unmeasured and no
-learner is authorized.
+R02 completed once at exact implementation commit
+`3831a66da19788f549e39faeb8a898221186252a` after prospective project-cost and fresh remote memory
+admission. The exact values are `J_D=2088/625`, `J_L=18916861/5625000`, and
+`J_U=13365083/3671875`, giving
+`Delta_L=124861/5625000=0.022197511111... < 1/4 <=
+Delta_U=1098083/3671875=0.299052391489...`. The legal lower policy is harm-compatible, changes a
+later action at positive visible-history mass, and has positive aggregate forced-`DET-CF` native
+advantage. The 24-cell extra-information upper has exact feasible primal and dual certificates,
+equal objectives, and zero complementary-slackness products.
 
-The strongest support is that the additive frozen host admits a finite exact threshold certificate
-without enumerating the blocked full belief envelope. The strongest contradiction is that learned
-adaptation has already lost to competent fixed rules on two constructed hosts and the restricted
-lower witness may not clear the threshold while the oracle upper bound remains loose. The
-surviving alternative is that receiver-visible history has material native-return value but both
-R01 learners were driven by shared objective, credit, or optimization effects to blanket probing.
-The competing explanation is that every harm-compatible legal history policy is within `0.25` of
-`DET-CF`.
+The accepted branch is **`HC-D / CERTIFICATE_INTERVAL_UNRESOLVED`**. It establishes exact positive
+history-conditioned action value for this deliberately restricted lower policy, but neither
+material compatible headroom nor its absence. The upper is a certificate-only regime oracle, not
+a legal policy or same-information comparator. No learner is admitted. In execution of the prior
+`PRO_FINAL / RECAST_CERTIFIED_BOUND` mapping, ACVC is parked at the exact direction-local
+engineering/scientific dependency; this does not change its Portfolio lifecycle.
 
-The R02 card is frozen but not launched. Current execution policy requires Root to mark the node
-active before any portable result-bearing work proceeds through an exact pushed SHA, detached
-remote worktree, and remote memory-admission-plus-runner task.
+The strongest support is the positive legal action witness and exact harm-compatible lower gain.
+The strongest contradiction is that this gain is only about 8.9% of the registered `0.25`
+threshold, while both prior learners lost to `DET-CF`. The upper certificate remains above the
+threshold, so the competing possibility that a stronger compatible legal history policy has
+material value survives. Exact re-entry requires either such a prospectively admitted lower
+certificate or a prospectively admitted tighter exact upper below `1/4`; learner budget,
+approximation, threshold tuning, or a cap increase is not a discriminator.
+
+Guidance census A1 remains separate and incomplete. R02 does not supply its required
+same-information upper minus tuned generic baseline pair, its raw gap remains unidentified, and no
+5%/25% MEI threshold is applied.
 
 ## Evidence set
 
@@ -87,10 +96,16 @@ The accepted evidence set is:
 - `docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_HEADROOM_CERTIFICATE_R02_CONVERGENCE_DECISION_INTAKE_20260904.md`
 - `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESULT_20260904.json`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESOURCE_ADMISSION_20260904.json`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESULT_EVIDENCE_20260904.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md`
+- `docs/research/candidates/acvc/ACVC_A1_HEADROOM_CENSUS_ALIGNMENT_INTAKE_20260904.md`
+- `docs/research/candidates/acvc/ACVC_A1_SAME_INFORMATION_TUNED_BASELINE_GAP_A_RECON_FOLLOWUP_20260904.md`
 
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. The current synthesis above
 is bounded by the cited accepted result records and both complete archived Convergence decisions.
-The direction-local certified-bound recast does not alter Portfolio lifecycle, priority,
-ownership, capacity, or investment.
+The accepted HC-D result executes the direction-local certified-bound mapping but does not alter
+Portfolio lifecycle, priority, ownership, capacity, fusion, or investment.
