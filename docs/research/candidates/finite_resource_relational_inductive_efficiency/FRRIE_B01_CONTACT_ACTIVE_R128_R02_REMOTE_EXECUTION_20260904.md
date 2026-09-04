@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 remote execution — 2026-09-04
 
-Status: `TASK_03_QUARANTINED / R02_REPAIR_COMMITTED_AND_VERIFIED / NO_FRESH_RESULT_LAUNCH`. Engineering observation only.
+Status: `REPAIR_VERIFIED / FRESH_TASK_04_ADMITTED_AND_RUNNING / OBSERVER_HANDOFF`. Engineering observation only.
 
 The owner resumed automated research; Root/DM assigned the unchanged
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` invocation. This supersedes the old drain pause
@@ -456,3 +456,50 @@ pass over exact committed bytes. All assigned check tasks are terminal and both 
 are clean. DM receives this technical acceptance before choosing any fresh result invocation.
 A production invocation must use a new exact-SHA remote worktree: this test checkout now retains
 a native artifact, which the unchanged fresh-build policy will reject in another process.
+
+## Fresh repaired-source invocation `_04`
+
+DM inspected and accepted source `732cc2b2299821a58d644e202c4b95c392932447` with the independent
+review, passed regression and real toy. It selected one fresh unchanged scientific invocation
+over repeating passed checks or leaving the repaired object unobserved, owner-delegated option
+(a), owner item `20260904-frrie-014`. There is no outcome-sensitive adaptation or salvage.
+
+The new detached worktree is `/home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2`, on
+`hmasd-wsl-node / wsl_4070`, at exact repaired source SHA. It contains the necessary committed
+FRRIE source and preflight/platform/runner files. Before launch its source diff and status were
+empty, its entire `temp/` directory was absent, and task `frrie_b01_contact_r02_732cc2b2_04`
+was `not_found`. The already-materialized committed Git objects sufficed; no source transfer,
+fetch, additional test, earlier native artifact, partial tape or model state was used.
+
+Exact accepted supervisor command:
+
+```sh
+/usr/local/bin/agent-task run frrie_b01_contact_r02_732cc2b2_04 'cd /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r04_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_frrie_b01_contact_r02.py --output-root /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2/temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r02_r04 --admission-receipt /home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r04_admission.json --seed 1'
+```
+
+All card settings, literal seed/root, CPU FP32, initialization/projection, RSCF/Adam128,
+training/evaluation tapes and opportunities, comparator, MEI/branches, 14,400 attributed seconds
+per arm and 28,800 total seconds remain unchanged. The repaired-source per-arm cost projection
+and publication-coverage limitation recorded above apply. Stop only at completion/publication
+or an existing meaningful integrity/resource failure; no automatic retry or resume.
+
+Task `_04` was accepted at 2026-09-04T22:14:20Z. Admission at 22:14:20.624055Z passed physical
+and effective available memory, each 12,882,489,344 bytes against 4,294,967,296 bytes minimum,
+source `/proc/meminfo`, both floors true, no failure reasons. At two supervisor seconds its
+status was `running / exit_code=null / tmux_active=true`, supervisor PID 98520; exact runner
+argv was directly visible as PID 98525, parent 98520, RSS snapshot 339,308 KiB. This is a
+running-process observation, not full-run resource conformance or a scientific result.
+
+CM delivered the exact handle/node/SHA/cwd/root/admission to DM, Root and
+`/root/tracker_lxh_experiments`. The shared observer owns routine status/log observation;
+CM remains available for technical diagnosis. Its supervisor files remain under
+`/home/wu/.agent-tasks/frrie_b01_contact_r02_732cc2b2_04/` and expected publication is
+`summary.json` under the new output root. Do not submit another invocation if observation
+becomes uncertain. The previous failures, diagnostics, tests, receipts and native artifacts
+remain preserved.
+
+At the next direct observation, supervisor uptime was 92 seconds and the same task remained
+`running / exit_code=null / tmux_active=true`, PID 98520. Runner PID 98525 was alive at 90 seconds,
+RSS snapshot 598,688 KiB, with unchanged argv; the log tail contained no exception. No persisted
+learner count or published scientific result was read. This later process observation was sent
+to DM and Root before CM's clean handoff; full completion remains unobserved here.
