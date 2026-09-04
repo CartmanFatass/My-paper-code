@@ -8,10 +8,10 @@ reports.
 
 ## 1. Read in this order
 
-1. `AGENTS.md` on branch `control-plane-revision-20260903` (not yet merged; §3 below). It carries
+1. `AGENTS.md` on `main` (merged 2026-09-03 20:26 PDT as `824b499aa`; §3 below). It carries
    the decision ladder, the blocker rule, unattended operation with the audit ledger, capacity,
    Git under concurrent sessions, and the integrity rules including the 2026-09-02 telemetry rule.
-2. `docs/project/ENGINEERING_SCOPE_SPEC.md` (same branch): two tiers, the default-prohibited
+2. `docs/project/ENGINEERING_SCOPE_SPEC.md`: two tiers, the default-prohibited
    machinery list, budgets. Confirmed by the owner 2026-09-03.
 3. `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §11.
 4. `docs/research/portfolio/PORTFOLIO.md` rows for the six live directions, then the intake
@@ -19,7 +19,7 @@ reports.
    `docs/Claude_docs/reviews/ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` (Parts IX–XII) for every
    decision taken since the calibration, each with its options and provenance line.
 5. The nested `AGENTS.md` files (`experiments/`, `tests/`, `scripts/`, `envs/`,
-   `ha_ctse_process/`, `docs/`) on the same branch, and
+   `ha_ctse_process/`, `docs/`), and
    `docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md` with the owner's answers in
    `docs/research/portfolio/decisions/2026-09-03-control-plane-revision.md`.
 
@@ -48,36 +48,47 @@ Merged on `main`:
   `docs/Claude_docs/reviews/CODEX_CONTROL_PLANE_REVIEW_20260903.md` §1–§11, inventory
   `docs/Claude_docs/reviews/CODEBASE_INVENTORY_20260903.md`.
 
-On branch `control-plane-revision-20260903` (worktree `.claude/worktrees/control-plane-20260903`,
-pushed, **awaiting the owner's review and merge**):
-- `4ca97fd61` runtime-neutral `AGENTS.md`; DM absorbs EM; CM performance gate → two recorded
-  lines; seven definitions retired (`em`, `research-innovator`, `research-principles-analyst`,
-  `research-scout`, `workflow-designer`, `design-reviewer`, `general-leaf`); `config.toml` at nine
-  registrations and `max_concurrent_threads_per_session = 2`; portfolio skill parks on a blocker;
-  prompt author names the DM as the `em` caller.
-- `9bcc5ce5d` `ENGINEERING_SCOPE_SPEC.md`; nested `AGENTS.md` × 6 with one-line `CLAUDE.md`
-  imports; root `CLAUDE.md` thinned to environment and commands; `PROJECT_MAP.md` one-page index;
-  `RESEARCH_MAP.md` script-prefix column; `pytest.ini`; scope self-check in CM, implementers,
-  reviewer, critic, DM and the outsource template; `scope:` commit trailer rule.
-- `.gitignore` rewrite (visible by default; run output anchored at the root) — *see §6 for the
-  pending pieces*.
-
-After merge, the following are owed on `main`: `PORTFOLIO.md` capacity line replaced by the two
-numbers (`AGENTS.md` §5); `docs/research/portfolio/audit/` created on first delegated decision;
-`.codex/config.toml` re-checked against the Codex version in use.
-
-Housekeeping delegated to an Opus agent on `main` at 20:05 PDT (report *pending*): empty
-directories, 13 analysis scripts → `tools/analysis/`, eight absolute interpreter paths replaced,
-scratch cleanup (789 `temp/pytest*`, 31 root basetemp dirs, `.tmp/`, non-direction buckets,
-backup toml), merged worktrees removed, branch prune after tag `archive/branches-20260903`.
-`git gc --prune=now` is still to be run at a quiet moment (716 MiB of garbage objects).
+- `824b499aa` merge of `control-plane-revision-20260903` (owner instruction 20:22 PDT; the
+  worktree `.claude/worktrees/control-plane-20260903` can be removed): `4ca97fd61` runtime-neutral
+  `AGENTS.md`; DM absorbs EM; CM performance gate → two recorded lines; seven definitions retired
+  (`em`, `research-innovator`, `research-principles-analyst`, `research-scout`,
+  `workflow-designer`, `design-reviewer`, `general-leaf`); `config.toml` at nine registrations;
+  portfolio skill parks on a blocker; prompt author names the DM as the `em` caller.
+  `9bcc5ce5d` `ENGINEERING_SCOPE_SPEC.md`; nested `AGENTS.md` × 6 with one-line `CLAUDE.md`
+  imports; root `CLAUDE.md` thinned; `PROJECT_MAP.md` one-page index; `RESEARCH_MAP.md`
+  script-prefix column; `pytest.ini`; scope self-check in CM, implementers, reviewer, critic, DM
+  and the outsource template; `scope:` commit trailer rule; `.gitignore` rewrite (visible by
+  default; run output anchored at the root). `656bdffea` keeps
+  `max_concurrent_threads_per_session = 40`: the two-direction cap is a rule applied by Root and
+  the DMs (`AGENTS.md` §5), not a thread limit, because a DM → CM → implementer chain needs
+  several threads.
+- `f368aedb5` `PORTFOLIO.md` capacity line as the two numbers, with pointers to the scope spec
+  and the audit ledger. `docs/research/portfolio/audit/` is created on the first delegated
+  decision. `.codex/config.toml` is still to be re-checked against the Codex version in use.
+- Housekeeping (Opus agent, reported 21:04 PDT): `fd0cb36e6` seven analysis scripts →
+  `tools/analysis/` (six left in `scripts/` because a frozen document or a candidate cites them
+  by path; 55 tests pass); `a1ce91797` user-profile interpreter paths removed from six scripts
+  (the UCOPE certificate runner's `FROZEN_PYTHON_EXECUTABLE` and the VNFC R02 runner are kept
+  because a test and a byte manifest pin them). Not committed: three empty directories and 46
+  `__pycache__` removed; scratch reduced (`temp/` top level 1,158 → 912; `.scratch/`,
+  `.pytest_cache/`, the four non-direction `temp/directions/` buckets, the backup toml removed;
+  `temp/directions/crto/` kept because two CRTO evidence documents cite it); 22 root
+  `.tmp_pytest_b1_*`, `.pytest_tmp`, and 20 `.tmp/cm_scdmp_*`/`vnfc_*` entries are locked by
+  ACLs set by confinement tests and need an elevated shell; six merged worktrees removed (two
+  untracked, superseded files discarded from `ucope-engineering-s2c1`); 30 branches deleted
+  after tag `archive/branches-20260903` (pushed; every deleted tip reachable from it), 18 local
+  branches remain; nine unmerged sibling worktrees under `C:/Projects/HMASD-worktrees/` and
+  `C:/Projects/HMASD-app-server-availability-runtime` are listed in the agent report for the
+  owner. `git gc --prune=now` was not run.
+- Personal notes (`CONCEPT_MAP.md`, `LEARNING_LOG.md`, the 2026-08-26 tutoring summary) moved
+  to `docs/personal/` (ignored).
 
 ## 4. Research: state per direction
 
 | Direction | State at handoff | Next (held by the pause) |
 | --- | --- | --- |
-| flexible_skill_duration | E2 interruption-cost sweep running on branch `worktree-agent-a88287f2315bb99a0` (launch sha `92243f413`, result doc commits through `9b0b10a3a`); 15-run plan after the `k = 1` arm was dropped (XII.6), re-projected 10.3 h (XII.7); 6 of 15 evidence-bearing summaries at 03:07Z; *pending* the implementer's final result document and the reviewer's Part XIII intake | E2 result → intake → merge branch → decide E2b/E3 (cost projection rule from XII.7 applies) |
-| capability_bound_semantic_currentness | B1 attempts r01–r05 all refused by orchestration guards or, for r05, a memory-admission floor crossed at the replay phase (E.6–E.12); guard repairs `2e5bc4695`, `09acf0539`, `0b629eff4`, `4679e8dc8`; the implementer is on the E.8 item 3 engineering follow-up (end-to-end profile covering the formal publication path, preflight message fix, incident path budget) — *pending* its commit sha and test line | r06 at the repaired sha when a run slot is free (E.11 decision (b)); the object is unconsumed |
+| flexible_skill_duration | E2 interruption-cost sweep running detached on branch `worktree-agent-a88287f2315bb99a0` (launch sha `92243f413`; branch tip `8329f4e4a`, pushed, declares the study's two §4 items: the two-slot launch queue with a JSON state file and the `wait_for_pids` liveness probe, both instruction-named). 15-run plan after the `k = 1` arm was dropped (XII.6), re-projected 10.3 h (XII.7). **12 of 15** summaries at 06:35Z: `d0` k ∈ {2, 5, 20, 40} × both seeds (k = 2 seed 2 not in the plan), `d2` c ∈ {0.25, 0.5 (seed 1), 1.0}; running `d2_c0p5` seed 2 and `d2_c2p0` seed 1; pending `d2_c2p0` seed 2 (about 1.5 h). Seed-1 D0 ordering so far matches the exact references; `d0_k5` across-seed range 3.1e-5 against `d0_k40`'s 0.086. The implementer was stopped by the session limit at 21:04 PDT; queue state and per-run summaries are in the study root (§5). Result document and Part XIII intake **not written** | Codex: when 15 summaries exist, write the E2 result document from the study root in the E0 format (rule from the E2 card applied verbatim; the §5 return test with `s` from the D2 arm's own across-seed range), intake it, merge the branch, then decide E2b/E3 (per-arm cost projection rule, `AGENTS.md` §5) |
+| capability_bound_semantic_currentness | B1 attempts r01–r05 all refused by orchestration guards or, for r05, a memory-admission floor crossed at the replay phase (E.6–E.12); guard repairs `2e5bc4695`, `09acf0539`, `0b629eff4`, `4679e8dc8`. The implementer was on the E.8 item 3 follow-up (end-to-end profile covering the formal publication path, preflight message fix, incident path budget) when the session limit stopped it at 21:04 PDT; it was resumed at 23:35 PDT with the instruction to commit a clean boundary — *see the E.13 line below when it reports* | r06 at the repaired sha when a run slot is free (E.11 decision (b)); the object is unconsumed |
 | ucope | paid-acquisition B object answered PA-B (D.24); chain paused by the owner (D.25) | three-witness hinge object (card first) |
 | variable_n_fleet_churn | R02 consumed: `INSTABILITY/HETEROGENEITY`, BCRH not beaten (F.5) | controller-headroom A/RECON object (card first, F.6) |
 | semigroup_consistent_duration_model_policy | B01 line stopped with the base run and the graded diagnostic (C.6); k-split survival is an E4 design input for FSD | D6 recast, no object yet |
@@ -95,18 +106,22 @@ invocation"); a Git LFS or size rule for tracked `RESULT.json` evidence (377 MiB
   stash or reset; push immediately; on this host push outside the Codex sandbox.
 - Machine: 29.8 GiB RAM; two E2 runs take about 2.5 GB each; the 4 GiB floor is crossed when a
   third result-bearing process joins them (E.11).
-- Heartbeat cron in the Claude session (`23,53 * * * *`, job `bb7c8b33`) resumes agents killed by
-  rate limits; it is deleted when the pause begins.
+- The Claude session's heartbeat cron (`23,53 * * * *`, job `bb7c8b33`) is deleted when the pause
+  begins; after that nothing resumes a stopped agent, and the detached E2 queue does not need one.
 - E2 monitor: `bw9qgennf` reports each completed run; study root
   `.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E2_20260903/`.
 
-## 6. Pending at the time of writing
+## 6. Open at the pause (2026-09-03 23:40 PDT)
 
-- Opus housekeeping agent report (§3).
-- `.gitignore` commit on the branch; `docs/` consolidation into `docs/archive/` (`new/`,
-  `new-libs/` including its 96 untracked corpus files, `report/`, `superpowers/`, `benchmarks/`,
-  `operations/`, `agents/`, empty `plans/`, `migration/`); `logs/` → `docs/archive/logs/`; personal
-  notes → `docs/personal/` (ignored); `.claude/settings.json` and `.claude/agents/` tracked when
-  they exist.
-- CBSC implementer report → §4 row and E.13.
-- E2 completion → result document, Part XIII intake, merge → §4 row.
+- CBSC implementer's clean-boundary commit (§4 row; E.13 in the compliance record).
+- E2 completion (3 runs) → result document, Part XIII intake, merge → §4 row. Not started.
+- Layout standard items not yet applied (owner-approved, `decisions/2026-09-03-control-plane-revision.md`):
+  `docs/` consolidation into `docs/archive/` (`new/`, `new-libs/` including its 96 untracked corpus
+  files, `report/`, `superpowers/`, `benchmarks/`, `operations/`, `agents/`, empty `plans/`,
+  `migration/`); `logs/` → `docs/archive/logs/`; `.claude/settings.json` and `.claude/agents/`
+  tracked when they exist; `git gc --prune=now`; the ACL-locked scratch entries (§3) from an
+  elevated shell.
+- Untracked owner work left uncommitted on purpose: FRRIE `b01/{b4_induction_pilot,training_runner,training_shards}.py`
+  with their three tests, modified FRRIE `b01/{checkpoint,trainer}.py` and `test_checkpoint.py`,
+  and `tests/skills/hmasd_workflow_outsource_test.py`.
+- `.codex/config.toml` re-check against the Codex version in use.
