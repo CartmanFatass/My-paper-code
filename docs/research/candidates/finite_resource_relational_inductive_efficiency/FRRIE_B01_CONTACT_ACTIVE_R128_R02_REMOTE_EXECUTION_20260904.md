@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 remote execution — 2026-09-04
 
-Status: `TASK_03_TERMINAL / INTERMEDIATE_BIT_IDENTITY_FAILURE_REPRODUCED / REPAIR_PROPOSED`. Engineering observation only.
+Status: `TASK_03_QUARANTINED / R02_REPAIR_COMMITTED_AND_VERIFIED / NO_FRESH_RESULT_LAUNCH`. Engineering observation only.
 
 The owner resumed automated research; Root/DM assigned the unchanged
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` invocation. This supersedes the old drain pause
@@ -361,3 +361,98 @@ needs a fresh exact-source worktree unless a separate artifact-handling change i
 All currently assigned diagnostic/production tasks are terminal. Source and scientific contract
 remain unchanged; `_01`'s fixed sparse omission, `_02`'s unresolved TypeError and `_03`'s
 reproduced actor-boundary failure remain separate facts. No valid scientific result exists.
+
+## Selected R02 repair and committed verification
+
+DM selected the bounded R02-only removal of intermediate bit-identity rejection, preserving
+native/action/factual-Q integrity, as owner-delegated option (a), owner item
+`20260904-frrie-013`. Alternatives were changing actor batch/numerical work or treating rounding
+as a scientific failure. The failed `_03` is an incomplete implementation attempt, retained
+without scientific polarity or salvage. The old `_02` TypeError remains a separate unresolved
+observation.
+
+Implementation was isolated in `C:/Projects/HMASD-worktrees/impl-frrie-r02-replay-20260904`.
+CM committed only the three assigned files and immediately pushed source commit
+`732cc2b2299821a58d644e202c4b95c392932447`, then integrated it by fast-forward into the CM
+branch and pushed that branch. The production diff is ten insertions/four deletions; tests add
+76 lines. Engineering scope section 4 additions: none.
+
+- `b01/batch_collector.py`: existing private audit gains
+  `require_intermediate_bit_equality=True`; only incoming hidden, postdecision hidden and
+  probability exact comparisons depend on it. Legacy default behavior remains strict.
+- `b01_contact_r02/collector.py`: passes false. Sampled actions, native pre/post snapshots,
+  observations/roles/masks, primitives/returns/terminal facts, model immutability and work
+  inventory remain unchanged. The R02 audit no longer asserts full intermediate trace identity
+  (`factual_trace_direct_equal=False`, with a comment); its completion/branch path does not
+  consume that field.
+- Mirrored `b01_contact_r02/test_experiment.py`: adds
+  `test_factual_replay_relaxes_only_intermediate_bits`, reusing the existing fake batch
+  environment and real sampler. It tests strict default rejection of each floating mismatch,
+  relaxed acceptance, and retained rejection of altered sampled actions and native state.
+  The real end-to-end toy test is unchanged.
+
+CM inspected the full diff. An independent reviewer inspected exact commit `732cc2b2` and
+reported no material finding or scope breach. R02 remains 1,270 code lines including its
+16-line entry point; no new numerical calculation, RNG, model/native call, batching, recurrence,
+grad mode, optimizer step, tolerance, padding, rounding, telemetry, framework or launch condition
+was added. Review alone establishes no runtime or scientific result.
+
+### Remote checks, run once per actual test
+
+Exact pushed source/test bytes were materialized through the previously selected Git-pack route:
+504,295 bytes, SHA-256
+`3a40038b73d5207d48191132894daa832978829584c1783371eedd5dcc244d86`, matching on both hosts.
+This contains committed objects only. The fresh detached verification worktree
+`/home/wu/hmasd-worktrees/frrie-contact-repair-check-732cc2b2` is at exact source SHA and had
+empty source diff/status after its sparse index was populated. No original artifact was removed.
+
+Frozen verification command: in that cwd, existing `agent-task` runs remote
+`/home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out
+<cwd>/temp/directions/finite_resource_relational_inductive_efficiency/technical/repair_check_admission.json`
+immediately `&& timeout 180 /home/wu/.venvs/hmasd/bin/python -m pytest -q -p no:cacheprovider
+--basetemp <cwd>/temp/directions/finite_resource_relational_inductive_efficiency/test/repair-732cc2b2
+tests/experiments/candidates/finite_resource_relational_inductive_efficiency/b01_contact_r02/test_experiment.py`.
+
+Task `frrie_contact_repair_check_732cc2b2_01` was admitted at 22:09:31.444780Z with
+physical/effective available 12,893,958,144 bytes. The focused regression passed. The toy never
+entered its body: pytest's `tmp_path` setup called `mkdir(parents=False)` below a nonexistent
+scratch `test/` parent. The result was one pass, one setup error in 5.21 seconds. CM reproduced
+that exact `Path.mkdir(mode=448, parents=False, exist_ok=False)` failure, then created only the
+missing scratch parent. No source fix was needed and no native artifact had been built.
+
+Only the previously unexecuted toy was then selected:
+`test_experiment.py::test_frozen_projection_counts_branches_and_real_test_only_runner`,
+with the same other pytest arguments and timeout. Fresh task
+`frrie_contact_repair_check_732cc2b2_02` used a distinct
+`technical/repair_check_toy_admission.json` receipt at 22:10:37.933657Z,
+physical/effective available 12,875,837,440 bytes. It finished at 22:10:53Z, exit 0:
+one pass in 15.19 pytest seconds (16 supervisor seconds). The already-passed regression was not
+repeated. Both commands emitted the known `cache_dir` warning because the cache plugin was
+disabled; it caused no failure.
+
+The toy published `TEST_ONLY_NON_RESULT`, `complete=true`, bound launch SHA `732cc2b2`,
+one paired real update, 4,928 training slots per arm, 1,536 total factual learner transitions,
+two backward/Adam steps and ten evaluation episodes/cells. Its measured runner wall was
+7.989510778 s and peak RSS 595,697,664 bytes. It used the separate test root, not a scientific
+comparison. Its summary and both task logs were copied into the CM worktree's ignored
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/repair-check-732cc2b2/`
+as `toy-summary.json`, `check-01.log`, `check-02.log`. Remote supervisor directories retain
+the exact accepted commands, admission output and terminal status.
+
+Per-arm cost projection for any subsequent unchanged production invocation: the same-node toy
+observed PHY 1.280900390 s and EDGE 1.190476307 s per 4,976 total slots. Applying the unchanged
+runner law of 655,360 production slots per arm yields PHY 168.700 s and EDGE 156.791 s, each
+below its own 14,400 s cap. These are planning estimates, not full-run resource guarantees.
+The card's eight-hour total cap is unchanged.
+
+Post-learner publication coverage: the actual toy learner/evaluation/publication path passed.
+A full formal-constant 128-update end-to-end publication test remains unperformed and is still
+an open engineering item; no additional full run was launched to close it. The tests and review
+support this repair's conformance, not every future replay's native agreement or a scientific
+branch. A real action/native divergence must still stop.
+
+CM technical acceptance: the selected repair exists and its required focused/real-toy checks
+pass over exact committed bytes. All assigned check tasks are terminal and both local worktrees
+are clean. DM receives this technical acceptance before choosing any fresh result invocation.
+A production invocation must use a new exact-SHA remote worktree: this test checkout now retains
+a native artifact, which the unchanged fresh-build policy will reject in another process.
