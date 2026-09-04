@@ -1,0 +1,32 @@
+{
+  "id": "20260904-cbsc-012",
+  "created": "2026-09-04T14:36:33-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 恢复原 B1：修复源码上启动 fresh r07",
+  "context": "所有者已要求开始推进自动研究流程，原暂停被解除。r06 的导入故障已在原始源码与请求上复现并隔离；仅修复解释器路径身份，独立审查通过、远程 17 项检查通过、B1 就绪。此次沿用原三种子四比较臂、随机性、CPU FP32、训练预算与解释边界，以新提交和新目录运行 r07。",
+  "options": [
+    {
+      "key": "a",
+      "label": "启动原分配的 fresh r07",
+      "consequence": "按原 B1 完成唯一远程任务，保留全部技术与科学边界，在运行中或终止后交接。"
+    },
+    {
+      "key": "b",
+      "label": "解除暂停后仍不启动",
+      "consequence": "保留就绪状态而无新证据，原问题继续未答。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "已复现的技术故障已闭合，所有者已恢复流程，原 B1 的含义与预算均无需修改。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R07_RESUME_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r07-resume",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
