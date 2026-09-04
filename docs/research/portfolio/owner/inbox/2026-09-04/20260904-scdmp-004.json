@@ -1,0 +1,37 @@
+{
+  "id": "20260904-scdmp-004",
+  "created": "2026-09-04T11:46:24-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 A02 技术闭合并启动唯一冻结调用",
+  "context": "CM 在冻结科学语义下完成 A02 日历、配对、整数规则、计数与成本实现；聚焦测试和 toy smoke 通过，投影 62.04781499574892 秒，低于 1800 秒上限。DM 已按 2026-09-03 无人值守委托选择启动唯一 A/RECON 调用。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受 reviewed A02 implementation/cost 并启动唯一冻结调用",
+      "consequence": "使用新 root 与新鲜资源 admission 运行固定 A/RECON；不授权 learner、B 或改卡。"
+    },
+    {
+      "key": "b",
+      "label": "无命名缺陷地重复测试或 smoke",
+      "consequence": "增加工程检查但不改变科学对象或已闭合的技术事实。"
+    },
+    {
+      "key": "c",
+      "label": "尽管 review 闭合仍拒绝或重铸",
+      "consequence": "停止当前对象并把方向问题升级；不会产生 A02 结果。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "测试、toy 端到端、成本与独立 review 均已闭合，只有 (a) 继续冻结对象且不增加无命名门槛。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_CM_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L99",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
