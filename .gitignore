@@ -87,6 +87,9 @@ data/
 !/.agents/skills/**/
 !/.agents/skills/**/SKILL.md
 !/.agents/skills/**/*.md
+!/.agents/third_party/
+!/.agents/third_party/**/
+!/.agents/third_party/**/*.md
 /.codex/runtime/**
 /.omp/runtime/**
 /.claude/
