@@ -296,7 +296,7 @@ def initial_exposure(base_seed: int = BASE_SEED) -> dict[str, Any]:
 
 def train_arm(
     arm: str, *, base_seed: int = BASE_SEED, updates: int = TRAIN_UPDATES,
-    batch_size: int = TRAIN_BATCH,
+    batch_size: int = TRAIN_BATCH, deadline: float | None = None,
 ) -> tuple[nn.Module, dict[str, Any]]:
     seeds = derived_seeds(base_seed)
     model = make_model(arm, base_seed=base_seed)
@@ -339,6 +339,8 @@ def train_arm(
         if any(not bool(torch.isfinite(parameter).all()) for parameter in model.parameters()):
             raise FloatingPointError(f"{arm} parameter became nonfinite")
         entropy_sum += float(rollout["entropies"].detach().sum())
+        if deadline is not None and time.perf_counter() > deadline:
+            raise RuntimeError(f"{arm} exceeded its wall cap at an optimizer update boundary")
     wall_seconds = time.perf_counter() - started
     final = _flat_parameters(model)
     displacement = final - initial
@@ -586,7 +588,9 @@ def project_cost() -> dict[str, Any]:
     technical_seeds = derived_seeds(TECHNICAL_SEED)
     learned = {}
     for arm in LEARNED_ARMS:
-        model, train = train_arm(arm, base_seed=TECHNICAL_SEED, updates=2, batch_size=64)
+        model, train = train_arm(
+            arm, base_seed=TECHNICAL_SEED, updates=2, batch_size=64, deadline=None,
+        )
         eval_bp = generate_blueprints(np.random.default_rng(technical_seeds["evaluation_worlds"]), 512)
         evaluated = evaluate_arm(arm, eval_bp, model)
         train_seconds_per_decision = train["wall_seconds"] / (2 * 64 * OPPORTUNITIES)
@@ -690,48 +694,54 @@ def run_object(
     if not exposure["valid"]:
         raise RuntimeError("exposure line does not permit learner movement")
     seeds = derived_seeds(base_seed)
-    models, training = {}, {}
+    evaluation_bp = generate_blueprints(
+        np.random.default_rng(seeds["evaluation_worlds"]), eval_episodes,
+    )
+    arms = {}
+    actual_exposure_rows = {}
     for arm in LEARNED_ARMS:
-        models[arm], training[arm] = train_arm(
+        arm_started = time.perf_counter()
+        deadline = None if toy else arm_started + LEARNED_CAP_SECONDS
+        model, training = train_arm(
             arm, base_seed=base_seed, updates=updates, batch_size=batch_size,
+            deadline=deadline,
         )
-    actual_exposure = {
-        "arms": {
-            arm: {
-                key: training[arm][key] for key in (
-                    "parameter_count", "initial_l2", "final_l2", "displacement_l2",
-                    "displacement_rms", "displacement_to_initial_l2",
-                    "displacement_rms_to_initial_rms", "nonzero_gradient_update_count",
-                    "action_entropy",
-                )
-            }
-            for arm in LEARNED_ARMS
-        },
-        "valid": all(
-            all(
-                math.isfinite(float(value))
-                for key, value in training[arm].items()
-                if key in {
-                    "initial_l2", "final_l2", "displacement_l2", "displacement_rms",
-                    "displacement_to_initial_l2", "displacement_rms_to_initial_rms",
-                    "action_entropy",
-                }
+        arm_record = evaluate_arm(arm, evaluation_bp, model)
+        arm_record["training"] = training
+        actual_exposure_rows[arm] = {
+            key: training[key] for key in (
+                "parameter_count", "initial_l2", "final_l2", "displacement_l2",
+                "displacement_rms", "displacement_to_initial_l2",
+                "displacement_rms_to_initial_rms", "nonzero_gradient_update_count",
+                "action_entropy",
             )
-            and training[arm]["displacement_l2"] > 0.0
-            and training[arm]["nonzero_gradient_update_count"] > 0
+        }
+        arm_record["actual_total_wall_seconds"] = time.perf_counter() - arm_started
+        arm_record["wall_cap_seconds"] = LEARNED_CAP_SECONDS
+        arm_record["wall_cap_enforced"] = not toy
+        if not toy and arm_record["actual_total_wall_seconds"] > LEARNED_CAP_SECONDS:
+            raise RuntimeError(f"{arm} exceeded its combined train/evaluation wall cap")
+        arms[arm] = arm_record
+    actual_exposure = {
+        "arms": actual_exposure_rows,
+        "valid": all(
+            all(math.isfinite(float(value)) for value in actual_exposure_rows[arm].values())
+            and actual_exposure_rows[arm]["displacement_l2"] > 0.0
+            and actual_exposure_rows[arm]["nonzero_gradient_update_count"] > 0
             for arm in LEARNED_ARMS
         ),
     }
     if not actual_exposure["valid"]:
         raise RuntimeError("actual learner exposure is incomplete or nonfinite")
-    evaluation_bp = generate_blueprints(
-        np.random.default_rng(seeds["evaluation_worlds"]), eval_episodes,
-    )
-    arms = {}
-    for arm in ARMS:
-        arms[arm] = evaluate_arm(arm, evaluation_bp, models.get(arm))
-        if arm in training:
-            arms[arm]["training"] = training[arm]
+    for arm in FIXED_ARMS:
+        arm_started = time.perf_counter()
+        arm_record = evaluate_arm(arm, evaluation_bp)
+        arm_record["actual_total_wall_seconds"] = time.perf_counter() - arm_started
+        arm_record["wall_cap_seconds"] = FIXED_CAP_SECONDS
+        arm_record["wall_cap_enforced"] = not toy
+        if not toy and arm_record["actual_total_wall_seconds"] > FIXED_CAP_SECONDS:
+            raise RuntimeError(f"{arm} exceeded its evaluation wall cap")
+        arms[arm] = arm_record
     reading = None if toy else apply_result_rule(arms)
     peak = _peak_rss_bytes()
     record = {

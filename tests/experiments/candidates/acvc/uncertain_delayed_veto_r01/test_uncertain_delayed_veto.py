@@ -100,6 +100,14 @@ def test_formal_run_rejects_a_false_arm_cost_before_launch_sha(tmp_path, monkeyp
         )
 
 
+def test_train_arm_rejects_an_expired_deadline_at_update_boundary():
+    with pytest.raises(RuntimeError, match="optimizer update boundary"):
+        EXP.train_arm(
+            "ACVC-HISTORY-GATE", updates=1, batch_size=2,
+            deadline=time.perf_counter() - 1.0,
+        )
+
+
 def test_toy_runner_is_complete_paired_and_under_sixty_seconds(tmp_path):
     receipt = tmp_path / "admission.json"
     receipt.write_text(json.dumps({
@@ -126,6 +134,8 @@ def test_toy_runner_is_complete_paired_and_under_sixty_seconds(tmp_path):
     assert record["counts"]["evaluation_episodes_per_arm"] == 32
     assert set(record["arms"]) == set(EXP.ARMS)
     assert all(len(record["arms"][arm]["episode_return"]["all"]) == 32 for arm in EXP.ARMS)
+    assert all(record["arms"][arm]["actual_total_wall_seconds"] > 0.0 for arm in EXP.ARMS)
+    assert all(record["arms"][arm]["wall_cap_enforced"] is False for arm in EXP.ARMS)
     assert record["arms"]["ACVC-HISTORY-GATE"]["training"]["nonzero_gradient_update_count"] == 2
     assert record["arms"]["RAW-GRU"]["training"]["nonzero_gradient_update_count"] == 2
     assert record["resources"]["wall_seconds"] > 0.0
