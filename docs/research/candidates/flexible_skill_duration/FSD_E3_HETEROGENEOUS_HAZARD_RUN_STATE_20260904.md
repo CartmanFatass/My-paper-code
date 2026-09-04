@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T12:06:57Z`
+Snapshot: `2026-09-04T13:17:02Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -23,15 +23,15 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted `18`; independently admitted/launched `6`;
-  running `3`; valid complete `3`; quarantined `0`; not created/admitted `12`.
+  running `2`; valid complete `4`; quarantined `0`; not admitted/launched `12`. One of the
+  twelve has only a refused admission receipt and no learner or scientific output.
 
 ## Detached processes at the snapshot
 
 | invocation | PID | receipt assessed UTC | physical/effective available bytes | progress | stderr | terminal artifact |
 | --- | ---: | --- | ---: | --- | ---: | --- |
-| `small_d2_seed2` | `24664` | `2026-09-04T11:43:50.271300Z` | `9409052672 / 9409052672` | `4/20` rollouts, `0/4` evals | `0 B` | none; process alive |
-| `small_d0_seed3` | `6744` | `2026-09-04T11:45:29.417212Z` | `9487990784 / 9487990784` | `5/20` rollouts, `1/4` evals | `0 B` | none; process alive |
-| `small_d2_seed3` | `19048` | `2026-09-04T12:06:20.328822Z` | `7045365760 / 7045365760` | first rollout in flight | `0 B` | none; process alive |
+| `small_d2_seed2` | `24664` | `2026-09-04T11:43:50.271300Z` | `9409052672 / 9409052672` | `19/20` rollouts, `3/4` evals | `0 B` | none; process alive |
+| `small_d2_seed3` | `19048` | `2026-09-04T12:06:20.328822Z` | `7045365760 / 7045365760` | `15/20` rollouts, `3/4` evals | `0 B` | none; process alive |
 
 Each process was started separately with `Start-Process -WindowStyle Hidden`; its standard output
 and error are redirected inside its own invocation directory. Each `preflight.json` passed before
@@ -47,10 +47,33 @@ applied before all 18 invocations complete.
 | `small_d0_seed1` | 20 rollouts, 128000 transitions, 320 train episodes, eval `512/512/512/2048`, 20 path rows, checkpoint, rollout-1/final five-network exposure | `4956.5854953 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d0_seed2` | same frozen counts and artifacts | `5044.9601495 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 | `small_d2_seed1` | same frozen counts and artifacts | `6330.0531559 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
+| `small_d0_seed3` | same frozen counts and artifacts | `5315.1814547 s` | `resources_unmeasured` | valid complete; no stderr/quarantine |
 
 Missing peak RSS leaves these invocations valid under the repository telemetry rule. Their wall
-times remain below the per-invocation 8 h cap. All three launched while the code SHA was the launch
-implementation SHA.
+times remain below the per-invocation 8 h cap. The first three launched while the code SHA was the
+launch implementation SHA. `small_d0_seed3` records state-only code SHA
+`5b84d8b072abda9650403b7fef7303a85205c48c`; the runner and focused-test byte surface at that SHA
+is identical to launch implementation SHA `e6108e466eeea3df31db52c53e49eef828bde41a`.
+
+## Refused admission and current compute route
+
+At `2026-09-04T13:16:07.609566Z`, after `small_d0_seed3` terminated, a fresh local preflight for
+prospective invocation `medium_d0_seed1` measured `4094947328` bytes physical and effective
+availability. That was `200019968` bytes below the 4 GiB floor, so the preflight exited `6` and no
+runner process, RNG master, model, optimizer, checkpoint, manifest, or scientific result was
+created. The evidence-only receipt is preserved as
+`temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d0_seed1/preflight_refused_20260904T131607Z.json`.
+It is neither a launch nor an admission for any node.
+
+Owner routing changed immediately afterward: do not retry this or any other new portable E3
+invocation locally. The two already accepted/live local processes above remain local and must not
+be migrated or duplicated. The twelve not-yet-launched invocations are held at `REMOTE_FIRST`
+until the current main control-plane file `.codex/hmasd-compute.toml` changes from
+`status = "provisioning"` to an active state. A future remote launch requires the exact pushed SHA,
+a detached remote worktree, and one remote `agent-task` payload whose remote command performs its
+own `admit-memory` immediately before the exact runner. The refused local receipt cannot admit a
+remote invocation. Local fallback additionally requires definitive evidence of no remote process,
+prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
 
@@ -63,29 +86,30 @@ master, model, optimizer, checkpoint, or scientific output has been created for 
 | small | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 2 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`, PID `24664` |
-| small | D0 | 3 | `k=20`, `c=inf` | `RUNNING`, PID `6744` |
+| small | D0 | 3 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `RUNNING`, PID `19048` |
-| medium | D0 | 1 | `k=5`, `c=inf` | `NOT_CREATED` |
-| medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
-| medium | D0 | 2 | `k=5`, `c=inf` | `NOT_CREATED` |
-| medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
-| medium | D0 | 3 | `k=5`, `c=inf` | `NOT_CREATED` |
-| medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
-| large | D0 | 1 | `k=5`, `c=inf` | `NOT_CREATED` |
-| large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
-| large | D0 | 2 | `k=5`, `c=inf` | `NOT_CREATED` |
-| large | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
-| large | D0 | 3 | `k=5`, `c=inf` | `NOT_CREATED` |
-| large | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `NOT_CREATED` |
+| medium | D0 | 1 | `k=5`, `c=inf` | `ADMISSION_REFUSED`; receipt only; `REMOTE_FIRST_HOLD` |
+| medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
+| medium | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
+| medium | D0 | 3 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
+| large | D0 | 1 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
+| large | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| large | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
+| large | D0 | 3 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| large | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 
 ## Resume boundary
 
-Observe the three named PIDs and invocation directories to terminal without altering them. When a
-slot clears, the next intended invocation is `medium_d0_seed1`, followed by its D2 pair and then
-the remaining medium and large row pairs. This order is an operational plan, not a batch
-admission: immediately before every individual detached launch, create only that invocation's
-directory, run a fresh 4 GiB memory preflight into its `preflight.json`, and launch only when it
-passes. A refused admission creates no learner state and is not a scientific result.
+Observe the two named local PIDs and invocation directories to terminal without altering them.
+Do not retry `medium_d0_seed1` locally or start another new portable invocation while the remote
+control plane is provisioning. Once Root marks the compute configuration active, resume with
+`medium_d0_seed1`, followed by its D2 pair and then the remaining medium and large row pairs. This
+order is an operational plan, not a batch admission: each individual remote payload must combine
+its own fresh 4 GiB remote preflight and exact runner invocation under the remote supervisor. A
+refused admission creates no learner state and is not a scientific result.
 
 Do not apply the frozen E3 result rule until all 18 required invocations are validly complete. Do
 not revive E2b, retune `c`, or use any intermediate return to alter the remaining launch set.
