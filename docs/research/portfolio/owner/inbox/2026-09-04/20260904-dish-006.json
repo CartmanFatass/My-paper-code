@@ -1,0 +1,37 @@
+{
+  "id": "20260904-dish-006",
+  "created": "2026-09-04T10:43:33-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "Stop DISH B01 C03 after zero test collection",
+  "context": "The review-clean exact-SHA WSL candidate reached its sole frozen suite, but the remote sparse checkout omitted one frozen legacy test path. Pytest exited 4 with zero tests, and the && gate skipped project-cost. No admission, seed, learner, checkpoint, panel row, or scientific result exists; B01 remains unlaunched and unconsumed.",
+  "options": [
+    {
+      "key": "a",
+      "label": "stop C03 and rotate the slot",
+      "consequence": "Quarantines the unaccepted code and preserves B01 without scientific polarity; a future fresh attempt may fix packaging prospectively."
+    },
+    {
+      "key": "b",
+      "label": "expand checkout and rerun C03",
+      "consequence": "Rewrites the recorded one-suite terminal rule after seeing its failure."
+    },
+    {
+      "key": "c",
+      "label": "accept static or local conformance and launch",
+      "consequence": "Would launch without exact-SHA WSL execution or accepted final-byte cost rows."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Zero collection cannot satisfy technical acceptance, and technical packaging invalidity cannot become mechanism polarity.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_CONFORMANCE_C03_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L80",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
