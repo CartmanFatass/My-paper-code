@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 resume handoff — 2026-09-04
 
-Status: `R03_ACCEPTED_DETACHED / OBSERVER_HANDOFF / NO_SCIENTIFIC_RESULT`
+Status: `R03_QUARANTINED / B_CLASS_CHECK_REPAIR_SELECTED / NO_SCIENTIFIC_RESULT`
 
 This is a recoverable execution handoff, not a scientific result or result intake. The owner's
 2026-09-04 instruction, “我们开始推进自动研究流程”, supersedes the earlier drain pause. Root assigned
@@ -242,7 +242,7 @@ CM verifies this task has not already been accepted, then submits the same singl
 probe, source edit, host change, or scientific gate is added. The shared observer receives the
 new accepted handle directly and sends any terminal observation to DM, CM, and Root.
 
-## Current recoverable task
+## Historical `_03` acceptance and recoverable task identity
 
 Task `frrie_b01_contact_r02_36b538ba_03` was accepted at `2026-09-04T21:45:48Z`, supervisor PID
 `75958`, runner PID `75963`. Fresh admission at `2026-09-04T21:45:48.033417Z` passed physical and
@@ -274,3 +274,38 @@ evaluation episodes, paired information/work, exposure, exactly five initial cli
 projection/moment facts, direct curves and comparator reference before assigning its first-match
 branch. The original `_02` runtime error remains an unresolved risk; neither its cause nor a
 scientific polarity is inferred from successful diagnostics or process acceptance.
+
+## Superseding `_03` terminal notification
+
+The shared tracker directly observed `_03` failed, and Root relayed that terminal event to DM.
+CM confirmed exit 1 at `2026-09-04T21:46:23Z`, after 35 seconds. The result directory exists but
+contains no files; no `summary.json` or valid R02 result exists. The traceback reaches the
+first-update factual-suffix audit in the collector and ends with
+`B01ContractError: B01 factual suffix actor trace differs`. This supersedes the earlier initial
+acceptance snapshot; `_03` must not be represented as running or blindly resubmitted.
+
+The guard bundles exact hidden-state, probability-tensor, and sampled-action equality between a
+width-32 factual rollout and a variable-width suffix replay. Their autograd modes also differ.
+Those source facts identify possible numerical-path differences, not an established cause. CM
+is reproducing the exact recorded first-update collector step at the same SHA/root/node after
+fresh admission, recording the exception's field-level comparisons. No source edit or full
+learner retry is authorized by this diagnostic.
+
+The scientific distinction controlling a repair is explicit: current R02 requires factual native
+action/transition/return reproduction for legitimate factual-Q reuse and preserves FP32
+computation, RNG coupling, recurrence, information, comparator, and matched work. It makes no
+claim of intermediate hidden/probability bit identity across replay batch widths or grad modes.
+A repair may not suppress actual native-path divergence or silently weaken the comparison.
+The reproduction resolved that distinction on the observed suffix: only the intermediate tensors
+failed bit identity, while all sampled actions, native steps, snapshots, next observations, and
+terminal returns remained exact through the complete seven-lane suffix. Padding diagnostic inputs
+to width 32 removed the intermediate discrepancy; changing grad mode did not. No scientific
+polarity follows from this incomplete attempt.
+
+The DM took in the reproduced failure in
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R03_FAILURE_INTAKE_20260904.md`, quarantined `_03`, and selected
+only an R02-path check repair, owner item `20260904-frrie-013`. The repair omits intermediate
+incoming/postdecision-hidden and probability bit-identity predicates while retaining exact
+sampled-action/native integrity and every underlying computation, root, RNG, dtype, work, and
+card rule. CM owns implementation through a separate worktree and one focused committed remote
+verification. No fresh full result invocation is selected before that narrow diff is accepted.
