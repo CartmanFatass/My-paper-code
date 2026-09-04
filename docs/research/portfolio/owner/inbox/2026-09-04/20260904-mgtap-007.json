@@ -1,0 +1,37 @@
+{
+  "id": "20260904-mgtap-007",
+  "created": "2026-09-04T15:46:37-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B02：接受完整成本运行，保留探索上限",
+  "context": "实际两个算法各完成 16 次更新，采样、测量及资源准入均与卡片一致。成本估计只用于原定主实验，不把短端点差异当成主结果。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受短运行及成本测量",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "隔离或重复已符合卡片的运行",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把短端点差异当成主实验结果",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整记录与卡片一致；仍是单种子开发数据，不能代替主曲线。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_PILOT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L301",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
