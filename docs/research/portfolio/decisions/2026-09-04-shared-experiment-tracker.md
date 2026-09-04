@@ -26,4 +26,20 @@ Root creates the same tracker using the default native agent with the explicit o
 model/effort and the installed role instructions. Future sessions can select the registered role.
 No other agent's model is changed. Existing user model edits in the saved project are preserved.
 
+## Live validation and remaining limitation
+
+The Luna/xhigh tracker successfully adopted same-handle process observations and committed its
+tracking table. This live runtime did not expose native outbound sibling tools to that agent.
+Its app task-message attempt was rejected with
+`direct app-server input is not allowed for multi-agent v2 sub-agents`; that path is not retried or
+bypassed. A Root attempt to select the newly registered role returned `unknown agent_type` in this
+already-running turn. Configuration registration alone has therefore not proved direct delivery.
+
+Root delivered the initial CBSC/FRRIE terminal notifications and FSD adoption ACK through Root's
+native collaboration tools so scientific work could continue. The direct-sibling requirement is
+explicitly **not yet complete**. The next fresh Root runtime/configuration load should test native
+outbound capability once before claiming it works. If absent, report the limitation immediately,
+retain bounded tracker observations and required Root delivery, and avoid repeated transport
+workarounds. No experiment is duplicated or blocked by this communication limitation.
+
 Scope: owner-requested native process observation and coordination; no new runtime machinery.

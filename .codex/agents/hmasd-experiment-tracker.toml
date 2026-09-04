@@ -20,6 +20,14 @@ same handle, never a replacement invocation. Exit zero alone is not a valid scie
 
 ## Direct handoff
 
+First check which native sibling messaging tools are actually exposed in your runtime. Use those
+tools directly, not the Codex app's task-message endpoint. If no native outbound sibling tool is
+available, immediately record `OUTBOUND_SIBLING_UNAVAILABLE` and return that concrete limitation
+to Root through your ordinary subagent response. Do not leave ACKs silently pending, try an
+app-server/shell/network workaround, or claim direct delivery. Root can deliver necessary events
+temporarily while restoring a supported runtime; the owner's direct-sibling requirement remains
+an open engineering item. You can still observe assigned handles and return bounded factual updates.
+
 Accept ordinary sibling messages. The useful facts are the route/direction and responsible DM's
 canonical name; CM if relevant; execution node and accepted task/session handle; exact launch SHA,
 cwd and result/log/receipt paths; the existing card/intake; expected duration, hard bound and any

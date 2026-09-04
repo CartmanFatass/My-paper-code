@@ -97,6 +97,10 @@ slot; CM retains technical acceptance and DM retains scientific intake. Its sing
 `codex/experiment-tracker-20260904`. Root integrates meaningful tracking commits and restores the
 same observer/handles through the existing heartbeat; it does not relay routine process messages.
 See `decisions/2026-09-04-shared-experiment-tracker.md`.
+Live validation limitation: this Luna runtime lacks native outbound sibling tools; app task-message
+input was rejected. Tracking works, but direct DM delivery is not yet verified. Root delivered the
+initial terminal/ACK messages and will recheck native capability after a fresh configuration load;
+no rejected messaging path is bypassed. The direct-sibling requirement remains open.
 
 | Route / source | Current DM | Worktree / branch suffix | Resume boundary |
 | --- | --- | --- | --- |
