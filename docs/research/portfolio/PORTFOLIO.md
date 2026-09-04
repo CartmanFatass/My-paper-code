@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-04T16:10:38Z
+Updated at: 2026-09-04T16:39:55Z
 Owner: Root
 Lifecycle admission: all 19 `ACTIVE` directions remain admitted; the lifecycle count is not an execution-parallelism target
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
@@ -67,14 +67,16 @@ and queued.
 
 The current five direction-level slots are:
 
-1. `finite_resource_relational_inductive_efficiency` — high-priority live B01 algorithm evidence.
-2. `flexible_skill_duration` — high-priority remote E3 discriminator with valid partial results.
-3. `capability_bound_semantic_currentness` — high-priority production-conformance closure before
-   its next formal B attempt.
-4. `ucope` — high-priority three-witness/headroom sequence with a portable clean-boundary next
-   discriminator.
-5. `variable_n_fleet_churn` — high-priority R02/Convergence boundary whose returned direction
-   decision determines the smallest next object.
+1. `finite_resource_relational_inductive_efficiency` — high-priority B01 algorithm evidence; the
+   sequential third root is live under the unchanged fixed-host exception.
+2. `flexible_skill_duration` — high-priority E3 discriminator; eight of eighteen cells are valid
+   and the next frozen remote cell is advancing without reading the partial aggregate.
+3. `ucope` — high-priority three-witness/headroom sequence; a bounded cross-node numerical-locus
+   discriminator is advancing after the quarantined reconstruction attempt.
+4. `commitment_residual_triggered_options` — the accepted comparator-weak B result has one selected
+   RAW-only update-252..264 A/RECON trace as its smallest runnable next discriminator.
+5. `degraded_incumbent_shadow_handover` — the materially smaller first-valid-trigger
+   RETAIN/COPY/SHADOW B/EXPLORE recast is being resumed at its production-conformance boundary.
 
 Root refills a slot when its chain completes, reaches a terminal tier blocker, or cannot advance a named
 dependency. Selection favors promising runnable work and decision-relevant information. Temporary
@@ -83,6 +85,12 @@ queued `ACTIVE`, not `PARKED`, and the roster itself changes no priority, lifecy
 scientific meaning, or result polarity. FSD/VNFC or any other similar directions are considered for
 fusion only through a concrete Portfolio question after material identity of question, comparator,
 estimand, and next object is shown.
+
+At the 16:39Z rotation, CBSC yielded after its defect-8 closure and current-host headroom census;
+VNFC yielded because its already accepted Convergence handoff produced no provider send or
+`PRO_FINAL` and cannot be resent under the exactly-once contract. Neither yield changes lifecycle
+or scientific polarity. FSD remained admitted because its frozen E3 next cell is directly runnable;
+CRTO and DISH filled the other two clean-boundary vacancies.
 
 ### Execution snapshot — 2026-09-01
 
