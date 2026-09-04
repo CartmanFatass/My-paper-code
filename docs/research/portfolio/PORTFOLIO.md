@@ -4,7 +4,7 @@ Updated at: 2026-09-04T22:24:39Z
 Owner: Root
 Lifecycle admission: 14 ACTIVE source IDs organized into nine route agendas; 8 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: `ACTIVE / OWNER_DIRECT`; rolling five-chain working set; reconcile accepted handles and terminal intake before every new invocation
+Loop state: `DRAIN_CURRENT_ROUND / OWNER_DIRECT`; finish only current assigned boundaries, no slot refill or next-round launch
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -18,6 +18,8 @@ Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-tra
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
+Current drain instruction (supersedes automatic refill): `docs/research/portfolio/decisions/2026-09-04-drain-for-tracker-restart.md`
+Restart handoff in progress: `docs/research/portfolio/handoffs/2026-09-04-tracker-restart.md`
 Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause-after-current-round.md`
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
@@ -86,7 +88,7 @@ historical evidence can be reused without restarting their independent chains.
 
 Root task: `01a06df5-528a-7b32-8475-9b098c2b33c2`. Integration checkout:
 `C:/Projects/HMASD-worktrees/root-integration-02-20260904`, upstream `origin/main`.
-Existing heartbeat: `hmasd-research-loop`, retained 30-minute interval, resumed for this Root.
+Existing heartbeat: `hmasd-research-loop`, retained 30-minute interval, ACTIVE for drain completion only; set PAUSED after final handoff.
 The saved project checkout has unrelated owner edits and an older HEAD; do not overwrite it.
 
 Shared process observer: `/root/tracker_lxh_experiments`, a temporary `default` instance with
