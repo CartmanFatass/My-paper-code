@@ -1,0 +1,73 @@
+{
+  "id": "20260904-crto-021",
+  "created": "2026-09-04T16:49:16-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CRTO B02：冻结单种子完整周期读出卡",
+  "context": "Claim: A full three-update mean RAW score readout may stabilize two-sided action competence across ending phases without material native-regret loss on the exposed balanced panel. Binding MARL structure: systems / information flow; four-agent common-history partial observability, measuring a learner readout rather than a residual or causal order effect.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡运行一次，完整报告三个结束点；仍是探索性结果。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "安全边界停止本读出，保留现有科学结论。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按意见修订尚未执行的部分并记录改变。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "固定全部三个相位和配对训练暴露，直接回答下一不确定性。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b02-full-cycle-readout-start",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受在同一条 RAW 训练轨迹上，用完整三次更新的平均动作分数检查双侧胜任是否稳定？",
+    "changes_if_approved": [
+      {
+        "target": "CRTO 当前 B 梯子的下一对象",
+        "from": "完整三步读出仅为建议，尚无新卡",
+        "to": "冻结 B02：一个种子、同一训练轨迹、两个读出、三个固定结束点"
+      }
+    ],
+    "if_refused": "在下一个安全边界停止或修订这一读出；既有 A01、A02、A03 和 B01 的结论保持原义，生命周期与优先级不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md",
+        "quote": "The strongest support is five phase-0 competence passes under complete row, count and anchor verification.",
+        "why": "双侧胜任依赖局部结束点，完整周期读出是已选下一不确定性。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md",
+        "quote": "The strongest contradiction to a practical improvement claim is that competent checkpoints have slightly worse aggregate regret than the weak update-256 anchor.",
+        "why": "不能把胜任阈值变化当作实质收益，且平均分数可能仍不胜任。"
+      }
+    ],
+    "uncertainty": [
+      "只有一个已暴露种子和固定面板；不推断稳定收益或周期顺序的因果作用。",
+      "A01 原生崩溃原因仍未复现定位，A02 正常完成不等于修复。"
+    ],
+    "cost": {
+      "compute": "一次远端 CPU 训练；按已有 runner 阶段成本每读出保守预计 240.303 秒，共享整次上限 600 秒，机器时间只计一次。",
+      "owner_time": "约 2 分钟核对问题与范围",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；按常设委托继续，异步意见在安全边界应用"
+    },
+    "verdict_text": "推荐执行 B02：保持训练、信息和例子顺序不变，在三个结束相位逐一比较平均动作分数与普通终点，不选择最好检查点。",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_SCIENCE_CARD_20260904.md"
+  }
+}
