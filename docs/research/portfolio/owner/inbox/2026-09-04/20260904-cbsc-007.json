@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-007",
+  "created": "2026-09-04T09:18:14-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 CBSC A01 候选资产错配结果",
+  "context": "12个固定 tracked 路径均可读。旧 exact RAW 上界属于一次机会协议；LR01 RAW 属于不同离线有限面板；当前 dynamic RAW-GRU 只有正确设计，没有有效且已调优的 return。当前宿主 J_upper、J_generic 与 G_raw 均为 null，不能解释为零或负面。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受 HC-M，保留当前宿主数值为 null",
+      "consequence": "完成证据可用性记录，旧量保留原估量。"
+    },
+    {
+      "key": "b",
+      "label": "把旧 exact residual/contrasts 改标为动态 headroom",
+      "consequence": "混淆宿主/对象并制造伪差值。"
+    },
+    {
+      "key": "c",
+      "label": "因没有 learner/preflight 而隔离 A/RECON",
+      "consequence": "错误地把零调用的只读设计当作缺失实验。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "候选角色、错配轴、计数与 null 均满足冻结规则，HC-M 是首个匹配分支。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L73",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
