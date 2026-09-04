@@ -380,3 +380,41 @@ The accepted evidence set additionally includes:
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md`
+
+## Diagnostic RAW trace reading A03 — 2026-09-04
+
+Separately named `CRTO-RAW-DIAGNOSTIC-TRACE-READ-A03` validly reads all updates `252..264` from
+the complete A02 diagnostic artifact at `A/RECON` ceiling. The reading explicitly uses the native
+finite signed G16 domain and nonnegative regret after reproducing the original A01 sign-check
+conflict. It preserves the original A01 INCOMPLETE flag, the earlier R02 runtime failure, and
+A02's technical `NO-FAULT-WITHIN-BOUND` identity. No learner was rerun for A03.
+
+All 64 fixed population members, 208 evaluation rows, counts, information boundaries, and both
+anchors check. Updates `252,255,258,261,264` meet the unchanged two-sided competence predicate:
+both sides have `6/8` exact actions, KEEP regret `0.003754710220270765`, and REPLAN regret
+`0.0038081499511370583`. These are all the phase-0 updates; the other eight are not competent.
+This contradicts the A03 prediction that no nearby checkpoint would pass both sides.
+
+The bounded conclusion is a local association between update phase and the competence predicate
+on this one diagnostic trajectory. Its strongest support is the five phase-0 passes. Its strongest
+contradiction to a practical improvement reading is that all equal-side regret changes from 256
+are in `[-0.0009494669522523771,0]`, within the `0.0025` MEI, with no aggregate improvement.
+The lowest-regret checkpoints are not two-sided competent, and phase-1 actions also drift within
+the bracket. Cyclic order has not been isolated causally from exposure, predictor/numerical
+variation, or the selected panel.
+
+No checkpoint is selected from this exposed EVAL set; no tuned headroom baseline, residual effect,
+policy/MARL value, or stable advantage is established. B01's comparator-weak reading stays at its
+own checkpoint. The next discriminator is a B/EXPLORE RAW readout specified over a complete
+three-update cycle, with matched examples and explicit development exposure, asking whether
+two-sided competence stabilizes without material native-regret loss. No successor is launched
+or frozen here.
+
+References:
+
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CHECK_EVIDENCE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_EVIDENCE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_20260904.json`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md`
