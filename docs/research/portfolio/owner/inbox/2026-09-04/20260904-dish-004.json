@@ -1,0 +1,37 @@
+{
+  "id": "20260904-dish-004",
+  "created": "2026-09-04T09:49:39-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "Open fresh DISH B01 conformance C03 on clean bytes",
+  "context": "B01 remains unconsumed. C01/C02 substantive production changes were statically clean, but the mandatory smoke stopped before its branch loop on a missing NumPy test import. C03 prospectively reuses only reviewed meaning-complete semantics in a fresh worktree, restores the import, and requires one independent review, final suite, and three runner-generated cost rows before any launch review.",
+  "options": [
+    {
+      "key": "a",
+      "label": "fresh C03 reuse on clean current bytes",
+      "consequence": "One reversible CM chain runs; scientific launch remains held."
+    },
+    {
+      "key": "b",
+      "label": "rebuild all conformance work from baseline",
+      "consequence": "Repeats inspected engineering work with no new scientific information."
+    },
+    {
+      "key": "c",
+      "label": "stop or park B01 from the technical failure",
+      "consequence": "Would incorrectly convert technical invalidity into mechanism or lifecycle polarity."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "The observed failure is isolated to test assembly; prospective clean-byte reuse is the smallest outcome-blind conformance path.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_CONFORMANCE_C03_OBJECTIVE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L78",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
