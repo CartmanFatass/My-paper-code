@@ -1,5 +1,10 @@
 # FSD E3 medium D0 seed 3 attempt 01 — remote launch receipt
 
+Terminal update, 2026-09-04: **technically accepted complete cell**. The original task finished
+with exit 0; all required artifacts were collected, checked and copied to the previously absent
+canonical seed-3 root. The owner-requested execution drain stops here, before `medium_d2_seed3`.
+No paired scientific comparison or aggregate E3 branch has been applied.
+
 ## Engineering boundary
 
 This record owns the acceptance of exactly one detached invocation of unchanged B/EXPLORE
@@ -106,13 +111,13 @@ slice's read-only fetch and diagnostic were terminated. The configured `zsh -lic
 succeeded. A transient CRLF argument error in that preparation was corrected before fetching;
 no supervisor submission or learner existed during these transport steps. No source changed.
 
-## Handoff and limits
+## Initial running handoff
 
 The accepted task identity, PIDs, SHA, root and passing receipt were sent immediately to the DM.
-The task remains detached. This assigned observation ends at running acceptance; terminal exit,
-20-rollout completion, checkpoint, final publication and complete artifact counts are **not yet
-observed or accepted**. This document does not count the cell as valid and makes no outcome
-comparison, comparator-competence finding, event-path finding, or E3 branch claim.
+The initial assignment ended at detached running acceptance. Terminal exit, completion and
+publication were not then observed or accepted. Root's tracker subsequently adopted the exact
+task, and CM routine polling ended after its acknowledgment. The later terminal acceptance is
+recorded below; neither boundary supplies a paired outcome comparison or aggregate E3 branch.
 
 Continue observation using the existing task only:
 
@@ -124,3 +129,95 @@ ssh hmasd-wsl-node '/usr/local/bin/agent-task logs fsd_e3_medium_d0_seed3_202609
 Root routes resumed CM observation to terminal evidence and subsequent technical artifact intake.
 Loss of observation is not authorization for another launch. Scientific interpretation remains
 with the DM after the full frozen matrix is complete.
+
+## Terminal technical acceptance and safe drain
+
+The DM resumed this CM solely to collect the existing completed cell. The actual CM branch was
+clean at `2a40b1531da19aaaf1e11693bc4bb4bfb55bdf70`. The original remote worktree remained clean
+at launch SHA `9c0a990537a8ffef58306429a1ff402550fc4b82`. No new experiment, preflight, source
+edit, suite, repair, heartbeat, or tracker was created. Engineering-scope additions remain none.
+
+Authoritative `/usr/local/bin/agent-task status fsd_e3_medium_d0_seed3_20260904_01` reported
+`finished`, exit `0`, wrapper PID `74470`, `tmux_active: false`. The retained supervisor log
+records terminal time `2026-09-05T06:26:00+08:00` (`2026-09-04T22:26:00Z`) and duration
+**2,773 seconds**. The published runner wall is **2,687.7446834669972 seconds**. These are
+distinct reported timing observations; neither has been substituted for the other. Both are
+below the 1.68-hour projection and the eight-hour cap. No runtime peak-RSS bound is claimed.
+
+Direct reads used the existing Python JSON parser and Torch checkpoint loader on copied
+evidence, without constructing a learner or running evaluations. Inspection established:
+
+| Required observation | Observed |
+| --- | --- |
+| Completion | `completed=true`, 20 requested/completed rollouts, `timing_only=false`, `instability=null`; no quarantine file |
+| Training exposure | 128,000 transitions, 320 episodes; each rollout 6,400 transitions and 16 episodes; 1,280 coordinator rows each |
+| Optimizer updates | coordinator 3,000; discoverer actor 72,000; discoverer critic 72,000; team discriminator 300; individual discriminator 1,200; positive in every rollout |
+| Learner and path records | 20 each in metrics, path, interruptions and gaps; ordered rollout IDs 1–20; 400 steps, 16 lanes, six agents and both regional records |
+| Evaluation | rollout/episode counts `(5,512)`, `(10,512)`, `(15,512)`, `(20,2048)`; total 3,584; deterministic, master 770003, chunk 512 |
+| Paired inputs | ordered IDs `0..episodes-1` and one finite return per ID in every evaluation; exact agreement between eval JSONL and summary inputs; keyed tape law unchanged |
+| Frozen configuration | medium host, seed 3, CPU/four threads, both costs infinity, both caps 5, age off, no probe/coupling; manifest agrees with summary and copied admission |
+| Numerical integrity | all recorded learner losses and training/evaluation returns finite; network checkpoint tensors finite and float32 |
+| Final publication | summary and manifest identify E3 and the launch SHA; `reduced_from_contract=false`; reference, competence-input, final/cumulative two-region path, exposure and artifact fields present |
+| Checkpoint | readable, 64,782,527 bytes; network, all five optimizer, config, coordinator/discoverer value-normalizer and rollout-sampler RNG states present |
+| Resources | `resource_telemetry_status=resources_unmeasured`, peak RSS null; collected artifact payload 67,857,158 bytes; no peak-scratch measurement is published |
+
+The checkpoint contains 89 skill-coordinator, 29 skill-discoverer, 24 team-discriminator and
+29 individual-discriminator state tensors. Its training interface is skill interval 5 and
+rollout/episode length 400. The inherited RNG schema remains `hmasd_rollout_sampler_rng_v1`.
+Checkpoint inspection establishes readable saved evidence, not a new resume-equivalence claim.
+The accepted source still deep-copies evaluator normalizers and preserves evaluation RNG state;
+this slice makes no additional cross-host bit-identity claim.
+
+Machine-generated per-network `||theta-theta_0||_2 / ||theta_0||_2` values below agree exactly
+between summary and rollout-1/20 learner records. The unchanged E0 helper explicitly converts
+parameters and displacement computations to float64.
+
+| Network | Rollout 1 | Rollout 20 |
+| --- | ---: | ---: |
+| coordinator | 0.04080823588801077 | 0.11708156078197213 |
+| discoverer actor | 0.16684791425000306 | 0.8676006529359155 |
+| discoverer critic | 0.24597084848341444 | 0.9337023457398214 |
+| team discriminator | 0.009194614542247207 | 0.03807650598342086 |
+| individual discriminator | 0.012286576779590372 | 0.05680384685020319 |
+
+## Artifact collection and provenance
+
+Original remote root remains unchanged:
+`/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d0_seed3`.
+
+Distinct ignored local staging root:
+`C:/Projects/HMASD-worktrees/cm-fsd-seed3-resume-20260904/temp/directions/flexible_skill_duration/exp/E3_20260904/remote_fetch_seed3_terminal_01/medium_d0_seed3`.
+
+Verified canonical root, created only after confirming it was absent:
+`C:/Projects/HMASD/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d0_seed3`.
+
+Collection used `scp -r hmasd-wsl-node:<original remote root> <distinct staging parent>/`.
+Remote `find <root> -type f -exec sha256sum {} \;` supplied the hashes below. All ten staged
+files matched. After technical acceptance, PowerShell `Copy-Item -LiteralPath <staged cell>
+-Destination <absent canonical cell> -Recurse` copied the complete cell; all ten canonical
+file hashes matched the staging copy again. Existing cells and the quarantined attempt were
+neither overwritten nor modified. Hashes here record transfer verification; no runtime guard or
+provenance machinery was added.
+
+| File | SHA-256 |
+| --- | --- |
+| checkpoint_final.pt | `92fa61b25076d215769adc990aa203616c061214593cb9b9b89373df5eaea022` |
+| eval.jsonl | `dcb14e5f52c1f6398c56901fd29457578cf11b4e2f358b47d8c1ca59c47eef9c` |
+| gaps.jsonl | `559c6582e927b8a785f6615a863623fe86ed05f263050918b94cfdab6cf696aa` |
+| interruptions.jsonl | `5ba44905230fd1012bf9ecffdf30c027e57dc25659b084c7b53a20d4a7fe8d1b` |
+| manifest.json | `f85d1a7af6e2f889d2a36401e05dba5ff7ac54f8dbd9783de43117217e5ac075` |
+| metrics.jsonl | `dc776ccd6c89a5abdcec917b19c612775e03c03f7c3ab7af3647028fb54a86ef` |
+| path.jsonl | `75be6bb5b3280d2402e03557b3c3058d6dad892da8dd75050d33b625673f8cbb` |
+| preflight.json | `d0cf5a6731fe6037b3b33dcaa5b08db25c2c25196de585e8865c8324bac97d89` |
+| rollout1_match.npz | `6d5ca367b7ea7e25e1bfacb533f14f6074b9048564a33d181de79e19d92ffdda` |
+| summary.json | `4895b4c92ed28f5e36b4e92ca407a952b22011faac3218b0ede7233ed1b52a52` |
+
+The post-learner coverage line remains the previously accepted offline publication repair and
+13/13 focused suite with real evaluation constants. Required E3 publication succeeded here; no
+new publication-path engineering defect was found. Missing peak RSS and unmeasured peak scratch
+remain resource limitations, not learner instrumentation defects or scientific findings.
+
+**Disposition:** technically accept this complete single cell and return its verified summary
+to DM for intake. The owner-requested safe drain stops before `medium_d2_seed3`; no next cell
+was launched or admitted. No paired-arm return comparison, aggregate mechanism interpretation,
+or E3 result branch is made by this receipt.
