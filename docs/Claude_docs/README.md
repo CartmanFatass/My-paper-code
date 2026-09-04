@@ -41,6 +41,15 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   `.codex/agents`, skills, gates, portfolio) read as a research process: measured output, seven
   failure modes F1–F7, nine recommendations R1–R9, and a 2026-09-02 addendum mapping them onto the
   owner's calibration. R4 (telemetry as a recorded field) is left open for the owner.
+- `CODEX_CONTROL_PLANE_REVIEW_20260903.md` — the Codex control plane (`AGENTS.md`, sixteen
+  `.codex/agents` TOMLs, the HMASD skills, the empty authority surfaces, the uncommitted 09-03
+  edits) reviewed against evidence spec §11 and the 2026-09-02/03 practice. Measured: zero Pro
+  rounds and seventeen result documents since the calibration under an owner-and-reviewer loop
+  the authority files do not describe. Twelve stale clauses S1–S12 with fixes, written versus
+  practiced topology, nine recommendations T1–T9 (decision ladder, runtime-neutral `AGENTS.md`,
+  two recorded lines in place of the performance gate, capacity as numbers, a git model for
+  concurrent sessions, diagnosis by reproduction, roster 16 → 8, housekeeping, codified
+  unattended mode), and eight owner decisions.
 - `ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` — adversarial review of the two GPT Pro ADR drafts:
   citation audit, ranked findings (both `REVISE`), the six decisions only the owner can take, and
   three predict-then-verify prompts. Headline: the interruption statistic is not computable by the
