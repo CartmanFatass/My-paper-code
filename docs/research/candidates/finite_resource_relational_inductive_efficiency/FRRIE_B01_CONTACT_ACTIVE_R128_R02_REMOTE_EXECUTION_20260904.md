@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 remote execution — 2026-09-04
 
-Status: `TERMINAL_FAILURE_BEFORE_NATIVE_OR_LEARNER / NO_SCIENTIFIC_RESULT`. Engineering observation only.
+Status: `FRESH_TASK_03_ADMITTED_AND_RUNNING / SHARED_OBSERVER_HANDOFF`. Engineering observation only.
 
 The owner resumed automated research; Root/DM assigned the unchanged
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` invocation. This supersedes the old drain pause
@@ -187,7 +187,42 @@ interpreter replacement, or source modification was performed; none is implicate
 evidence.
 
 The second failure remains an unclassified technical observation. There is no scientific result,
-branch, contact observation, or learner evidence. All three supervisor tasks are terminal; no
-process remains to hand off. DM and Root's shared tracker received these terminal facts. DM owns
-the next outcome-blind technical decision; this receipt authorizes no fresh invocation. The
+branch, contact observation, or learner evidence. At that boundary all three supervisor tasks were
+terminal; no process remained to hand off. DM and Root's shared tracker received those terminal
+facts. DM owned the next outcome-blind technical decision. The
 original source, frozen scientific object, failed logs, and passed diagnostic remain in place.
+
+## Fresh unchanged invocation `_03`
+
+DM subsequently selected one fresh unchanged invocation after the exact tape expression passed,
+over expanding diagnosis without a reproduced defect or leaving the object unobserved. This is
+the owner-delegated technical selection recorded by DM as owner item `20260904-frrie-012`, under
+the 2026-09-03 instruction. The `_02` cause remains unclassified and has no scientific polarity.
+No further probe, test, source edit, partial-state reuse, or repair was performed.
+
+Before launch, exact remote SHA remained `36b538ba1b91eede9f528dd315fa624f8c1d53e5`, source diff
+including restored `hmasd_platform.py` was empty, `_03` was `not_found`, new output and admission
+paths were absent, and no FRRIE runner existed. The new paths preserve the earlier invocation's
+evidence; they change no seed/root/card/CPU FP32/work/evaluation/budget/stop semantics. The same
+per-arm cost projection, resource bounds, and publication coverage limitation above apply.
+
+Exact accepted command:
+
+```sh
+/usr/local/bin/agent-task run frrie_b01_contact_r02_36b538ba_03 'cd /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r03_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_frrie_b01_contact_r02.py --output-root /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba/temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r02_r03 --admission-receipt /home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r03_admission.json --seed 1'
+```
+
+Task `_03` was accepted at 2026-09-04T21:45:48Z. Fresh memory admission at
+21:45:48.033417Z passed both physical and effective floors: each available value was
+13,205,676,032 bytes against minimum 4,294,967,296 bytes, `/proc/meminfo`, no failure reasons.
+At one second, status was `running`, `exit_code=null`, supervisor PID 75958, `tmux_active=true`;
+the exact full-runner argv was visible as PID 75963, parent 75958, RSS snapshot 334,368 KiB.
+This is direct launch acceptance, not measured full-run resource conformance or a learner result.
+
+CM sent node/SHA/cwd/task/root/admission facts to DM and shared observer
+`/root/tracker_lxh_experiments`, which owns routine status/log observation after acknowledgment.
+CM retains technical diagnosis. Follow only this task; observation loss never permits a duplicate.
+Its log/status/accepted command are under
+`/home/wu/.agent-tasks/frrie_b01_contact_r02_36b538ba_03/`; expected publication is
+`temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r02_r03/summary.json`
+under the exact remote worktree. Completion and scientific result remain unobserved at acceptance.
