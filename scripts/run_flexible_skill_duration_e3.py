@@ -80,6 +80,10 @@ def load_preflight(run_dir: Path) -> dict:
 
 def peak_rss_bytes() -> int:
     """Read this Windows process's peak working set."""
+    windll = getattr(ctypes, "windll", None)
+    if windll is None:
+        raise OSError("process peak RSS is unavailable on this platform")
+
     class Counters(ctypes.Structure):
         _fields_ = [
             ("cb", ctypes.c_ulong), ("faults", ctypes.c_ulong),
@@ -90,8 +94,8 @@ def peak_rss_bytes() -> int:
         ]
     counters = Counters()
     counters.cb = ctypes.sizeof(counters)
-    handle = ctypes.windll.kernel32.GetCurrentProcess()
-    if not ctypes.windll.psapi.GetProcessMemoryInfo(
+    handle = windll.kernel32.GetCurrentProcess()
+    if not windll.psapi.GetProcessMemoryInfo(
             handle, ctypes.byref(counters), counters.cb):
         raise OSError("could not read process peak RSS")
     return int(counters.peak_working_set)
