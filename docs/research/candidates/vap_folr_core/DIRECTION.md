@@ -51,12 +51,17 @@ the unchanged B3 host. No such successor is opened or launched by the census.
 
 ## Evidence set
 
-The bootstrap evidence set is the existing navigation record and the cited candidate source documents below. No conclusion is inferred beyond the recorded current position.
+The bootstrap provenance is the existing navigation record and the cited B3 source document:
+
 - `docs/research/RESEARCH_MAP.md`
 - `docs/research/candidates/vap_folr_core/FOLR_B3_CALIBRATED_PARTNER_WRITER_STALE_LOAD_ROUTING_CODE_SCIENCE_INDEX.md`
+
+The accepted 2026-09-04 current-host evidence is:
+
 - `docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_RESULT_EVIDENCE_20260904.md`
 - `docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_INTAKE_20260904.md`
+
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
