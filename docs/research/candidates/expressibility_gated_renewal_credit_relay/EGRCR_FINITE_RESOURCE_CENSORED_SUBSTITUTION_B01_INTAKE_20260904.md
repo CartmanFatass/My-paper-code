@@ -1,7 +1,9 @@
 # EGRCR finite-resource censored-substitution B01 intake — 2026-09-04
 
-Object: `EGRCR-FRCS-B01-20260904`  
-Evidence class: `B/EXPLORE`  
+Object: `EGRCR-FRCS-B01-20260904`
+
+Evidence class: `B/EXPLORE`
+
 Intake decision: `ACCEPT_VALID / FRCS-D-MIXED`
 
 ## What the DM checked
@@ -123,4 +125,3 @@ There is no locally authorized next run. If Convergence selects a recast, the sm
 one prospectively frozen common-calibration decision test that holds action-gap scale or trust map
 fixed across the two already competent critics, then measures whether any native difference remains.
 That would be a new B object and cannot rewrite this mixed result.
-
