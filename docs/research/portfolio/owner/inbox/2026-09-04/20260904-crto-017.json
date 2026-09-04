@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-017",
+  "created": "2026-09-04T15:07:35-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "按带符号原生回报继续A03只读观察",
+  "context": "精确离线复现发现208行均合法且有限，后悔值非负并与独立重算一致。十三个错误均只因要求G16非负，而原生评分允许扣成本后的负值。选择明确修正A03读取口径，保留原卡片和原始错误；性能指标尚未解读，无需重跑学习器。",
+  "options": [
+    {
+      "key": "a",
+      "label": "允许有限带符号G16，其余完整性检查不变",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "保留错误符号限制而不读取",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "改数据或重跑以消除标记",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "修正的是读取口径，不是回报、比较器、阈值或训练；合法负回报必须保留。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L238",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

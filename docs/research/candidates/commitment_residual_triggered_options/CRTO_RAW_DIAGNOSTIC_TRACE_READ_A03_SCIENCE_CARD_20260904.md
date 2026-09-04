@@ -114,3 +114,26 @@ data, with no new exposure and without rewriting either earlier attempt's identi
 **Owner-delegated decision (unattended, 2026-09-03 instruction): (a).** Root's 2026-09-04 follow-up
 explicitly supports this class-correct reading under object delegation. No Direction or Portfolio
 decision, scientific family, or Pro request is introduced.
+
+## 2026-09-04 signed-score clarification before phase-metric reading
+
+The first A03 numerical read stopped at the recorded runner's nonempty completeness list before
+reading phase metrics. CM then reproduced the exact failing predicate over the existing bytes:
+every reported issue comes solely from `legal G16 >= 0`. All 208 selected actions are legal;
+legal G16 values and regrets are finite; no regret is negative; and independent oracle-minus-action
+regret recomputation agrees. The native score subtracts costs and permits signed returns. See
+`CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CHECK_EVIDENCE_20260904.md` and the sign-correction intake.
+
+Under the object-tier wording decision in that intake, A03 explicitly reads **finite signed legal
+G16 and finite nonnegative native regret**. References above to original complete-path integrity
+conditions exclude the original A01 card's nonnegative-G16 restriction. The original summary's
+completeness flag may be set aside for A03 only when every listed issue is reproduced as this sole
+sign predicate and all actual legality, finiteness, population, anchor, information, and count
+checks pass. The three A03 branch names, thresholds, fixed updates, and MEI remain unchanged.
+
+This is a disclosed correction to this adaptive A/RECON reading, made after technical sign
+diagnosis and before performance metrics were seen. Original A01's card and emitted INCOMPLETE
+branch are not rewritten; A02 still has its technical no-fault branch. No original failed attempt
+is salvaged, no raw data are altered, and no scientific code or learner invocation changes. One
+newly admitted, at-most-30-second reading of the same fixed summary now completes A03. Preserve
+the first stopped read receipt and write the corrected read to a distinct output file.
