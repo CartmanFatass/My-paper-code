@@ -5,16 +5,13 @@ multi_agent_v2 = true
 hooks = false
 
 [agents]
-max_concurrent_threads_per_session = 40
+# AGENTS.md section 5: two implementer sessions and two result-bearing runs.
+max_concurrent_threads_per_session = 2
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Optional native coordination method for one research direction."
+description = "Fixed loop driver for one research direction (card, intake, delegated decisions, Pro escalation)."
 config_file = "./agents/hmasd-direction-manager.toml"
-
-[agents.HMASDEM]
-description = "Fixed native scientific evidence and experiment subagent."
-config_file = "./agents/hmasd-em.toml"
 
 [agents.HMASDCM]
 description = "Fixed native engineering and implementation subagent."
@@ -28,14 +25,6 @@ config_file = "./agents/hmasd-cm-scout.toml"
 description = "Optional engineering-analysis method."
 config_file = "./agents/hmasd-reviewer.toml"
 
-[agents.HMASDWorkflowDesigner]
-description = "Optional workflow-design method."
-config_file = "./agents/hmasd-workflow-designer.toml"
-
-[agents.HMASDDesignReviewer]
-description = "Optional design-analysis method."
-config_file = "./agents/hmasd-design-reviewer.toml"
-
 [agents.HMASDVerifier]
 description = "Optional focused runtime-observation method."
 config_file = "./agents/hmasd-verifier.toml"
@@ -44,25 +33,9 @@ config_file = "./agents/hmasd-verifier.toml"
 description = "Optional operator for one exact result-bearing command."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
-[agents.HMASDResearchScout]
-description = "Optional primary and multi-source research method."
-config_file = "./agents/hmasd-research-scout.toml"
-
 [agents.HMASDResearchCritic]
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
-
-[agents.HMASDGeneralLeaf]
-description = "Optional general native child method."
-config_file = "./agents/hmasd-general-leaf.toml"
-
-[agents.HMASDResearchInnovator]
-description = "Optional mechanism and discriminator exploration method."
-config_file = "./agents/hmasd-research-innovator.toml"
-
-[agents.HMASDResearchPrinciplesAnalyst]
-description = "Optional MARL principles-analysis method."
-config_file = "./agents/hmasd-research-principles-analyst.toml"
 
 [agents.HMASDImplementer]
 description = "Optional semantic implementation method."

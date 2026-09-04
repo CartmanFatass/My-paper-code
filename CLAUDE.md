@@ -242,7 +242,7 @@ repo-wide.
 | The 21 directions, position, code/test paths | `docs/research/RESEARCH_MAP.md` |
 | Lifecycle, priority, owner, capacity | `docs/research/portfolio/PORTFOLIO.md` |
 | Exact scientific meaning of a direction | that direction's `DIRECTION.md` and cited evidence |
-| Collaboration/authority model, Git and push policy | `AGENTS.md` |
+| Collaboration/authority model (runtime-neutral), decision ladder, unattended operation, capacity, Git under concurrent sessions | `AGENTS.md` (Appendix B is the Claude Code part) |
 | Evidence class / rigor tier a claim needs | `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` |
 | Parked defects and open questions that block interpretation | `docs/project/PROBLEM_CACHE.md` |
 | Measured throughput numbers and their conditions | `docs/project/EFFICIENCY_PRACTICES.md` |
@@ -270,8 +270,8 @@ and audits itself. Do not reach for it on your own initiative.
 `*.md`, `*.txt`, `test*.py`, and `temp/**` are ignored with a long hand-maintained allowlist of `!`
 re-includes; `*.csv`, `*.png`, `*.pdf`, `*.pt`, `models/`, `results/`, `logs/`, and `runtime/` have
 no re-includes at all, so nothing under those ever enters Git. A new document under an un-allowlisted
-path is invisible. Run `git check-ignore -v <path>` when adding anything new. (This file is one such
-case — root `CLAUDE.md` matches `.gitignore:47`, the `*.md` rule.)
+path is invisible. Run `git check-ignore -v <path>` when adding anything new. (Root `CLAUDE.md`
+is re-included and tracked.)
 
 **Line endings.** `.gitattributes` pins `text eol=lf` on byte-addressed authorities: everything under
 `docs/research/portfolio/`, each `DIRECTION.md`, `docs/research/candidates/**/workflow/**/*.json`,

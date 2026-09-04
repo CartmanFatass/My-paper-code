@@ -69,13 +69,15 @@ Transport task creates the provider conversation on first use and reuses its exa
 for all later Portfolio rounds.
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
-the final Portfolio decision. Root executes it, records its evidence and bounded rationale in
-`PORTFOLIO.md`, and performs integration; Root does not replace or override it with a local-model
-judgment. If Pro reports missing connector access or insufficient evidence, Transport has not
-archived a complete response, or the answer rejects bounded empirical work solely for lacking an
-unrequested stronger class, no class-correct Portfolio decision exists. Root may continue reversible
-evidence collection or request a class-corrected answer but must not convert the mismatch into
-scientific polarity.
+the Portfolio proposal. Root records it with its evidence and bounded rationale in a decision record
+and in `PORTFOLIO.md`; the owner ratifies it from that record (an unratified proposal whose actions
+are reversible takes effect after the audit window stated in the record). Root does not replace or
+override it with a local-model judgment. If Pro reports missing connector access or insufficient
+evidence, Transport has not archived a complete response, or the answer rejects bounded empirical
+work solely for lacking an unrequested stronger class, no class-correct Portfolio decision exists:
+the question parks (AGENTS.md section 3), Root drives other directions, and nothing is decided
+provisionally at this tier. Root may continue reversible evidence collection or request a
+class-corrected answer but must not convert the mismatch into scientific polarity.
 
 Read `docs/research/portfolio/PORTFOLIO.md` for current state and the relevant `DIRECTION.md` files
 for scientific authority. Compare claim ceiling, decision relevance, complementarity, substitution,

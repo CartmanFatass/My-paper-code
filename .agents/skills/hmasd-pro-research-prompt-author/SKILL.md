@@ -25,7 +25,8 @@ response is not a decision and must not transfer authority to the local caller.
 
 Require an input object with:
 
-- `caller_role`: exactly `portfolio` or `em`; reject `operator` and unknown roles;
+- `caller_role`: exactly `portfolio` or `em` (the Direction Manager acts as the `em` caller);
+  reject `operator` and unknown roles;
 - `workflow_node`: `em_innovator` or `em_convergence` for an `em` caller, and
   `portfolio_decision` for a `portfolio` caller;
 - `request_id` and the exact originating Codex `source_thread_id`, plus exact
