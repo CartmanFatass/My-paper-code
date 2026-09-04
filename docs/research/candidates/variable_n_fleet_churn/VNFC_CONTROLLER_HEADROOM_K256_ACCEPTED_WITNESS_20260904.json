@@ -1,0 +1,1175 @@
+{
+  "allowed_uses": [
+    "frozen post-execution non-regression check",
+    "preserve the accepted K=256 same-world lower-bound witness",
+    "finite result-blind selector-conformance tests on synthetic candidate inventories"
+  ],
+  "artifact": "accepted_r01_k256_same_world_comparator",
+  "canonicalization": "command_history_sha256 is SHA-256 of UTF-8 json.dumps(the complete six-command K=256 trajectory, ensure_ascii=True, separators=(comma,colon)); null slots are preserved",
+  "forbidden_uses": [
+    "world, width, command, data-structure, threshold, stopping-point, or invocation selection",
+    "isolating or reweighting the known positive zone-2 row-3 world"
+  ],
+  "object": "VNFC-CONTROLLER-HEADROOM-A-RECON-MEMORY-BOUNDED-K1024-R02",
+  "source": {
+    "accepted_result_commit": "f6101bdb4db900fbefd9253a271068de17a2b9d0",
+    "launch_sha": "7cddfa241019feaab7897ab793d603433ca38140",
+    "object": "VNFC-CONTROLLER-HEADROOM-A-RECON-R01",
+    "result_evidence": "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_R01_RESULT_EVIDENCE_20260904.md",
+    "summary_sha256": "5687572b44574f2ab7ff4055b2789e431eef05a6893002625198e2da3e910831"
+  },
+  "worlds": [
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "7d656c3c603c81ce0adc751af3b4f57207a4a64a7409ce8f14ee1f0fdb07b86e",
+        "complete_command_history": [
+          [
+            6,
+            3,
+            1,
+            4
+          ],
+          [
+            6,
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            4,
+            3,
+            7
+          ],
+          [
+            2,
+            4,
+            3,
+            7
+          ],
+          [
+            4,
+            1,
+            3,
+            7
+          ],
+          [
+            4,
+            1,
+            3,
+            7
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.23333333333333334,
+            "denominator": 30,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "row": 0,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "38eea4a1bef70ff8028fe54fd95af3a6dbea374c3db329fab9c6a2e0734eef75",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 24,
+          "ratio": {
+            "binary64": 0.4,
+            "denominator": 5,
+            "numerator": 2
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "row": 1,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 80,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.3,
+          "denominator": 10,
+          "numerator": 3
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "84524d90246b4f739aefec300f27c4fb9682377b1074def5f2e16834cee623dc",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            1,
+            4
+          ],
+          [
+            3,
+            2,
+            6,
+            4
+          ],
+          [
+            3,
+            2,
+            6,
+            4
+          ],
+          [
+            2,
+            3,
+            6,
+            4
+          ],
+          [
+            2,
+            1,
+            4,
+            3
+          ],
+          [
+            7,
+            1,
+            4,
+            3
+          ]
+        ],
+        "endpoint": {
+          "denominator": 80,
+          "numerator": 24,
+          "ratio": {
+            "binary64": 0.3,
+            "denominator": 10,
+            "numerator": 3
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 80,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.3,
+          "denominator": 10,
+          "numerator": 3
+        }
+      },
+      "row": 2,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "02cea3203609d1b5cfcc4900df6d9917000092f7c2ce84a9c31636596b84f9f6",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            1,
+            4
+          ],
+          [
+            3,
+            2,
+            6,
+            4
+          ],
+          [
+            3,
+            2,
+            6,
+            4
+          ],
+          [
+            2,
+            3,
+            6,
+            4
+          ],
+          [
+            2,
+            1,
+            4,
+            3
+          ],
+          [
+            2,
+            1,
+            4,
+            3
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 24,
+          "ratio": {
+            "binary64": 0.4,
+            "denominator": 5,
+            "numerator": 2
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "row": 3,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 80,
+        "numerator": 34,
+        "ratio": {
+          "binary64": 0.425,
+          "denominator": 40,
+          "numerator": 17
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "7cf9c1f6475fcba4d40200c8cb5b9313f0fcc95e66c2e6d75b29732ec21185d7",
+        "complete_command_history": [
+          [
+            6,
+            3,
+            4,
+            5
+          ],
+          [
+            6,
+            3,
+            4,
+            5
+          ],
+          [
+            6,
+            3,
+            4,
+            2
+          ],
+          [
+            3,
+            4,
+            7,
+            2
+          ],
+          [
+            3,
+            4,
+            7,
+            2
+          ],
+          [
+            3,
+            4,
+            7,
+            2
+          ]
+        ],
+        "endpoint": {
+          "denominator": 80,
+          "numerator": 34,
+          "ratio": {
+            "binary64": 0.425,
+            "denominator": 40,
+            "numerator": 17
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 80,
+        "numerator": 34,
+        "ratio": {
+          "binary64": 0.425,
+          "denominator": 40,
+          "numerator": 17
+        }
+      },
+      "row": 4,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 80,
+        "numerator": 34,
+        "ratio": {
+          "binary64": 0.425,
+          "denominator": 40,
+          "numerator": 17
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "a6fcf6742e64647279df5e8160eac83f14212b3ec094ffdb46fb65dace3b6d8f",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            1,
+            4
+          ],
+          [
+            3,
+            2,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ],
+          [
+            2,
+            1,
+            4,
+            6
+          ],
+          [
+            6,
+            1,
+            4,
+            3
+          ]
+        ],
+        "endpoint": {
+          "denominator": 80,
+          "numerator": 24,
+          "ratio": {
+            "binary64": 0.3,
+            "denominator": 10,
+            "numerator": 3
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 80,
+        "numerator": 34,
+        "ratio": {
+          "binary64": 0.425,
+          "denominator": 40,
+          "numerator": 17
+        }
+      },
+      "row": 5,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 80,
+        "numerator": 54,
+        "ratio": {
+          "binary64": 0.675,
+          "denominator": 40,
+          "numerator": 27
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "9febf1e1462de6e1ec08c01fb9cf7cee1213cc37fb948ff30804c9ebc612b911",
+        "complete_command_history": [
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            4,
+            6,
+            7
+          ],
+          [
+            3,
+            4,
+            6,
+            7
+          ]
+        ],
+        "endpoint": {
+          "denominator": 80,
+          "numerator": 54,
+          "ratio": {
+            "binary64": 0.675,
+            "denominator": 40,
+            "numerator": 27
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 80,
+        "numerator": 54,
+        "ratio": {
+          "binary64": 0.675,
+          "denominator": 40,
+          "numerator": 27
+        }
+      },
+      "row": 6,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "1a1d7946ce0c65ac326754d648b6aa4992f3683e57f6fc137bb29ca4fdf0b033",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            4,
+            6
+          ],
+          [
+            3,
+            2,
+            4,
+            6
+          ],
+          [
+            3,
+            2,
+            4,
+            6
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 24,
+          "ratio": {
+            "binary64": 0.4,
+            "denominator": 5,
+            "numerator": 2
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 24,
+        "ratio": {
+          "binary64": 0.4,
+          "denominator": 5,
+          "numerator": 2
+        }
+      },
+      "row": 7,
+      "zone": 1
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 120,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.11666666666666667,
+          "denominator": 60,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "685c224c732d72eaf2ffc1adab91e05f797b4188b59cc6489056b3c8dc80327e",
+        "complete_command_history": [
+          [
+            3,
+            2,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            4,
+            6,
+            5
+          ],
+          [
+            3,
+            4,
+            6,
+            5
+          ]
+        ],
+        "endpoint": {
+          "denominator": 120,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.11666666666666667,
+            "denominator": 60,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 120,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.11666666666666667,
+          "denominator": 60,
+          "numerator": 7
+        }
+      },
+      "row": 0,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "cfa8c0d84fba7fecf2dc3241a1f7a71cec34477d08570b33e927292b92729a86",
+        "complete_command_history": [
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            5,
+            4,
+            6
+          ]
+        ],
+        "endpoint": {
+          "denominator": 100,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.14,
+            "denominator": 50,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "row": 1,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "4a068019e53a2212258a08dc1a5e16f8ada7f90f1980594cfc51f16a85a5b281",
+        "complete_command_history": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            1,
+            3,
+            4
+          ],
+          [
+            2,
+            4,
+            3,
+            6
+          ]
+        ],
+        "endpoint": {
+          "denominator": 100,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.14,
+            "denominator": 50,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "row": 2,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 120,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.11666666666666667,
+          "denominator": 60,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "6e0076536aef4beea955a8c0e312fb5763a2317b50bf7797cff77e0763e9ce15",
+        "complete_command_history": [
+          [
+            3,
+            4,
+            null,
+            2
+          ],
+          [
+            3,
+            4,
+            2,
+            6
+          ],
+          [
+            3,
+            4,
+            2,
+            6
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ]
+        ],
+        "endpoint": {
+          "denominator": 120,
+          "numerator": 28,
+          "ratio": {
+            "binary64": 0.23333333333333334,
+            "denominator": 30,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 120,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.11666666666666667,
+          "denominator": 60,
+          "numerator": 7
+        }
+      },
+      "row": 3,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "b13554c17271b3bc65dfc6f92df09c29c53ed2d0ba6017879a9689929e41d41e",
+        "complete_command_history": [
+          [
+            2,
+            3,
+            7,
+            6
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "endpoint": {
+          "denominator": 100,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.14,
+            "denominator": 50,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 100,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.14,
+          "denominator": 50,
+          "numerator": 7
+        }
+      },
+      "row": 4,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.23333333333333334,
+          "denominator": 30,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "4a068019e53a2212258a08dc1a5e16f8ada7f90f1980594cfc51f16a85a5b281",
+        "complete_command_history": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            1,
+            3,
+            4
+          ],
+          [
+            2,
+            4,
+            3,
+            6
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.23333333333333334,
+            "denominator": 30,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.23333333333333334,
+          "denominator": 30,
+          "numerator": 7
+        }
+      },
+      "row": 5,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 80,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.175,
+          "denominator": 40,
+          "numerator": 7
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "db8cc15e6f8e6716d61bafa926b4968bc283f860eec31294ef7a188e66fa0930",
+        "complete_command_history": [
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            2,
+            3,
+            7,
+            4
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            3,
+            2,
+            4,
+            5
+          ]
+        ],
+        "endpoint": {
+          "denominator": 80,
+          "numerator": 14,
+          "ratio": {
+            "binary64": 0.175,
+            "denominator": 40,
+            "numerator": 7
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 80,
+        "numerator": 14,
+        "ratio": {
+          "binary64": 0.175,
+          "denominator": 40,
+          "numerator": 7
+        }
+      },
+      "row": 6,
+      "zone": 2
+    },
+    {
+      "accepted_bcrh_endpoint": {
+        "denominator": 60,
+        "numerator": 31,
+        "ratio": {
+          "binary64": 0.5166666666666667,
+          "denominator": 60,
+          "numerator": 31
+        }
+      },
+      "accepted_k256": {
+        "command_history_sha256": "60d4092fc9b8a724c36d03e6802a9e8b89d06c6eac63f42e5b685d318fb10043",
+        "complete_command_history": [
+          [
+            1,
+            2,
+            7,
+            3
+          ],
+          [
+            1,
+            2,
+            7,
+            3
+          ],
+          [
+            1,
+            2,
+            7,
+            3
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            1,
+            3,
+            4
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ]
+        ],
+        "endpoint": {
+          "denominator": 60,
+          "numerator": 31,
+          "ratio": {
+            "binary64": 0.5166666666666667,
+            "denominator": 60,
+            "numerator": 31
+          }
+        }
+      },
+      "accepted_persist_endpoint": {
+        "denominator": 60,
+        "numerator": 31,
+        "ratio": {
+          "binary64": 0.5166666666666667,
+          "denominator": 60,
+          "numerator": 31
+        }
+      },
+      "row": 7,
+      "zone": 2
+    }
+  ]
+}
