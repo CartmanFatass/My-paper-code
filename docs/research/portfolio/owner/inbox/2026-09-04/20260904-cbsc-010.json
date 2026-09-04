@@ -1,0 +1,39 @@
+{
+  "id": "20260904-cbsc-010",
+  "created": "2026-09-04T11:47:06-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC B1 r06 远端启动选择",
+  "context": "defect 8 与 Linux 短进程遥测阻断均已直接复现、窄修复、独立复审，并在 exact-SHA 远端 profile 通过。B0、真实非零 learner/evaluator counts、机器暴露线、每 arm-seed 成本投影与 fresh remote admission 路径均满足；A01 的 headroom 缺失仅是非阻断诊断。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按冻结卡片启动唯一 remote r06",
+      "consequence": "在最终 pushed exact SHA 上以一次 atomic admit-memory 与 runner 任务产生最小 B/EXPLORE 判别结果；不创建本地重复。"
+    },
+    {
+      "key": "b",
+      "label": "因缺 headroom/MEI 保持未启动",
+      "consequence": "把现行规范明确的非阻断诊断提升为额外 launch gate，方向不会得到新的机制证据。"
+    },
+    {
+      "key": "c",
+      "label": "扩展工程或更改卡片后再运行",
+      "consequence": "会改变已冻结 cap、比较器、暴露或执行路线，超出当前对象与工程范围。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "唯一已复现的 Linux blocker 已闭合，§11.4 真正启动条件和保守成本投影均满足，因此选择最小 fresh remote rung。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R06_LAUNCH_READINESS_INTAKE_20260904.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_DEFECT8_TECHNICAL_CLOSURE_INTAKE_20260904.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-b1-r06-launch",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
