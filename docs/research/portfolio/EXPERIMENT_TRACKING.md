@@ -25,6 +25,12 @@ terminal historical handles, not candidates for restart. The direct FSD tracker/
 (`tracker-resume-fsd-20260904-01`) completed at recovery: FSD received the tracker adoption
 request and the tracker received and acknowledged FSD's receipt. No new FSD handle was accepted.
 
+## Active accepted work
+
+| DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
+| --- | --- | --- | --- | --- | --- | --- |
+| `flexible_skill_duration` — DM `/root/dm_amx_fsd_continue`; [prospective continuation intake](../../candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md) | `wsl_4070` via `hmasd-wsl-node`; `fsd_e3_medium_d2_seed3_20260904_01` | `31bfecd79fc0f708546786ee26dfd8faa9e85dfb` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01` | `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3`; receipt `/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01/temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d2_seed3/preflight.json`; log `/home/wu/.agent-tasks/fsd_e3_medium_d2_seed3_20260904_01/task.log` | Adoption check `2026-09-04T23:47:19Z`: `running`, exit `null`, wrapper PID `106154`, learner PID `106170` (parent `106154`), uptime `49s`, `tmux_active=true`. Bounded log tail contains the fresh admission receipt: assessed `2026-09-04T23:46:29Z`, physical/effective available `15432294400` bytes, both floor checks passed. DM confirmed the direct adoption receipt; existing supervisor witnesses are `runner.sh`, `status`, `pid`, `start_time`, and `task.log`. | Observe same handle; notify DM on terminal, failed/refused, lost observation, or approaching/exceeding conservative `4.63h` / cap `8h`. At terminal CM `/root/dm_amx_fsd_continue/cm_am_fsd_continue` collects and verifies; no relaunch. |
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
