@@ -1,6 +1,6 @@
 {
   "id": "20260904-mgtap-002",
-  "created": "2026-09-04 2026-09-04T07:18:01-07:00",
+  "created": "2026-09-04T07:18:01-07:00",
   "direction": "metric_ground_transport_allocation",
   "tier": "object",
   "kind": "decision",

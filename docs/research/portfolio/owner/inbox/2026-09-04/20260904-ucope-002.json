@@ -4,7 +4,7 @@
   "direction": "ucope",
   "tier": "object",
   "kind": "decision",
-  "title": "(a)",
+  "title": "(a) accept valid complete TW-B",
   "context": "Delegated decision recorded in the audit ledger (2026-09-04, 03:00 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
   "options": [
     {

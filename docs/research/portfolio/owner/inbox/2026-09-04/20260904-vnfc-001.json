@@ -1,6 +1,6 @@
 {
   "id": "20260904-vnfc-001",
-  "created": "2026-09-04 2026-09-04T09:39:49Z",
+  "created": "2026-09-04T09:39:49Z",
   "direction": "variable_n_fleet_churn",
   "tier": "object",
   "kind": "decision",

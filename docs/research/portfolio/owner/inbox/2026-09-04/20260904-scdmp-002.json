@@ -1,10 +1,10 @@
 {
   "id": "20260904-scdmp-002",
-  "created": "2026-09-04 2026-09-04T04:24:48-07:00",
+  "created": "2026-09-04T04:24:48-07:00",
   "direction": "semigroup_consistent_duration_model_policy",
   "tier": "object",
   "kind": "decision",
-  "title": "(a)",
+  "title": "(a) literal pre_event_q=0 for both source streams and all prefix candidates",
   "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T04:24:48-07:00). Provenance: OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction). Reversible: yes, before launch.",
   "options": [
     {

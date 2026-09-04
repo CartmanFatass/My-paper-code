@@ -462,10 +462,14 @@ def seed_from_ledger(root: Path, date: str) -> list[Path]:
         options = _split_options(row.get("options", ""))
         chosen = row.get("chosen option", "")
         auto = _match_option(options, chosen)
+        if re.fullmatch(r"\(([a-z])\)\s*", chosen) and auto:
+            chosen = next((f"({auto}) {o['label']}" for o in options if o["key"] == auto), chosen)
         evidence = [e.strip("` ") for e in re.findall(r"`([^`]+)`", row.get("evidence path", ""))] or \
                    ([row.get("evidence path", "").strip("` ")] if row.get("evidence path") else [])
+        t = row.get("time", "").strip()
+        created = t if re.match(r"\d{4}-\d{2}-\d{2}", t) else f"{date} {t}".strip()
         item = {
-            "id": item_id, "created": f"{date} {row.get('time', '')}".strip(),
+            "id": item_id, "created": created,
             "direction": direction, "tier": row.get("tier", "object"), "kind": "decision",
             "title": (chosen[:90] + "…") if len(chosen) > 90 else chosen,
             "context": f"Delegated decision recorded in the audit ledger ({date}, {row.get('time', '')}). "
