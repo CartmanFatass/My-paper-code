@@ -1,0 +1,37 @@
+{
+  "id": "20260904-dish-005",
+  "created": "2026-09-04T10:17:19-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "Select truthful POSIX identity for DISH B01 C03",
+  "context": "C03 review found that the new R06 WSL loader still called a separate R05 MSVC-only nested identity. No test, cost, admission, seed, learner, or result ran. The selected repair truthfully describes the exact loaded R06 service-bearing artifact on POSIX while preserving top-level identity, native behavior, and all Windows output bytes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "truthful POSIX R06 self-identity in the owned backend",
+      "consequence": "Keeps remote-first portability; final independent review and the sole WSL suite remain mandatory."
+    },
+    {
+      "key": "b",
+      "label": "expand ownership and port the R05 retained identity",
+      "consequence": "Adds out-of-scope R05 work and unrelated compiler machinery."
+    },
+    {
+      "key": "c",
+      "label": "refuse WSL portability and verify locally only",
+      "consequence": "Leaves the portable B01 card not launch-ready on the remote-first route."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "The loaded R06 artifact is the actual POSIX service-bearing artifact; truthful self-description preserves runtime science without path expansion or false R05 claims.",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_FIRST_TRIGGER_SOURCE_SCOUT_B01_CONFORMANCE_C03_REVIEW_DECISION_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L79",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
