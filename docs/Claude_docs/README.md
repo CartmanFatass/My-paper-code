@@ -50,6 +50,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   two recorded lines in place of the performance gate, capacity as numbers, a git model for
   concurrent sessions, diagnosis by reproduction, roster 16 → 8, housekeeping, codified
   unattended mode), and eight owner decisions.
+- `CODEBASE_INVENTORY_20260903.md` — facts-only inventory of the whole checkout (Sonnet agent,
+  three forks): top level, code modules, scripts, tests, agent configuration, worktrees and
+  branches, scratch, documentation tree and map-document staleness, `.gitignore` structure, sizes;
+  every count names its command. Basis for the layout standard.
 - `ADR_01_02_ADVERSARIAL_REVIEW_20260902.md` — adversarial review of the two GPT Pro ADR drafts:
   citation audit, ranked findings (both `REVISE`), the six decisions only the owner can take, and
   three predict-then-verify prompts. Headline: the interruption statistic is not computable by the
@@ -84,6 +88,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `CODEBASE_LAYOUT_STANDARD_20260903.md` — alignment draft for the directory standard: nine
+  principles-to-application sections (target layout, candidate directories, tests, scripts,
+  scratch/worktrees/branches/git hygiene, `.gitignore` rewrite, layered `AGENTS.md` with one-line
+  `CLAUDE.md` imports), with [DECIDE]/[ASK] markers and the order of application.
 - `FLEXIBLE_SKILL_DURATION_PLAN_20260902.md` — alignment draft for the duration direction: the
   claim in two parts, a ten-item concern register (C1–C10) with mitigations and measurables, the
   scheme ladder D0–D8 with the policy-based interruption rule as the proposed first B object,
