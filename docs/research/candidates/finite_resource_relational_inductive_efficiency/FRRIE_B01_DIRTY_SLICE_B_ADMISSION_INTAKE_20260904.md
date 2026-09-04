@@ -167,4 +167,3 @@ effectful B4 pilot was deliberately not run because it is not the selected R128 
 success would not close these gaps.
 
 No `DIRECTION.md` update is warranted: no mechanism-level scientific result was observed.
-
