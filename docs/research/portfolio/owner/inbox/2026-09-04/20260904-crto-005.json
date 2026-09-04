@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-005",
+  "created": "2026-09-04T09:51:14-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "confirm RAW-only update-252..264 trace as smallest runnable rung",
+  "context": "Current mainline keeps B01-R1 as valid BR-E / COMPARATOR_WEAK. The existing accepted runner exposes the exact seed, panel, RAW packet, cyclic order, learner, and evaluator; only thirteen predeclared checkpoints are missing. A larger three-path rerun or RAW redesign would change or enlarge the comparison before localizing the observed update-256 side flip. Under the standing delegation, option (a) is frozen and implementation proceeds without waiting.",
+  "options": [
+    {
+      "key": "a",
+      "label": "freeze and implement the RAW-only update-252..264 A/RECON trace",
+      "consequence": "Measure the exact existing RAW path only; no residual polarity or lifecycle change."
+    },
+    {
+      "key": "b",
+      "label": "run a larger-budget three-path B comparison",
+      "consequence": "Spend more compute before comparator localization and reopen irrelevant arms."
+    },
+    {
+      "key": "c",
+      "label": "replace/enlarge RAW or lower thresholds first",
+      "consequence": "Change the comparator meaning or threshold before diagnosing the accepted path."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Option (a) is the smallest reversible measurement that distinguishes local checkpoint phase from persistent RAW path limitation.",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_SCIENCE_CARD_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L71",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
