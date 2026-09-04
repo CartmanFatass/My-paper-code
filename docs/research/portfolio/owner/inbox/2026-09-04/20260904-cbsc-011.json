@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-011",
+  "created": "2026-09-04T11:54:57-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC r06 解释器事故隔离与 fresh r07 选择",
+  "context": "r06 的 outer 与 slice admission 均通过，但首个 worker 在模型创建前因 realpath 丢失 venv site-packages 而退出。相同 base interpreter、module 与 preserved request 已在 exact bytes 上直接复现；incident 明确无 completed arm-seed，object 未消费、无科学极性。",
+  "options": [
+    {
+      "key": "a",
+      "label": "隔离 r06，窄修 venv 绑定后 fresh r07",
+      "consequence": "保留失败根为历史工程证据，在新 pushed SHA/新 task/新 root 上重新执行完整冻结 runner。"
+    },
+    {
+      "key": "b",
+      "label": "复用 r06 或注入 PYTHONPATH",
+      "consequence": "会混用旧 attempt 或引入未绑定环境路径，破坏 create-only 与执行身份。"
+    },
+    {
+      "key": "c",
+      "label": "解释为科学结果或改变卡片",
+      "consequence": "在 learner 尚未创建时伪造极性或更改冻结科学含义。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "直接复现把故障限定为 venv symlink launcher defect；最窄修复加 fresh attempt 可逆且不消费对象。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R06_INTERPRETER_INCIDENT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r06-interpreter-incident",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
