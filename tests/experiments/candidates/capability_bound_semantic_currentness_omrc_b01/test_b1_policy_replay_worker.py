@@ -4,6 +4,7 @@ from dataclasses import asdict
 from copy import deepcopy
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -144,7 +145,7 @@ def _admission(
     raw_path.write_bytes(canonical_json_bytes(receipt) + b"\n")
     repo = Path(__file__).resolve().parents[4]
     preflight = repo / "scripts" / "hmasd_resource_preflight.py"
-    executable = Path(sys.executable).resolve()
+    executable = Path(os.path.abspath(sys.executable))
     bound = {
         "schema": "cbsc_omrc_b01_b1_bound_admission_v1",
         "attempt_id": attempt_id,

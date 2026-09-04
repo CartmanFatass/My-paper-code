@@ -6,6 +6,7 @@ from dataclasses import asdict
 import gzip
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -181,7 +182,7 @@ def test_relocated_training_admission_revalidates_after_atomic_root_rename(
         "effective_available_bytes": 5 * 1024**3,
     }
     _write_json(relocated_raw, receipt)
-    executable = Path(sys.executable).resolve()
+    executable = Path(os.path.abspath(sys.executable))
     preflight = b1.CANONICAL_PREFLIGHT
     bound = {
         "schema": b1.B1_BOUND_ADMISSION_SCHEMA,
