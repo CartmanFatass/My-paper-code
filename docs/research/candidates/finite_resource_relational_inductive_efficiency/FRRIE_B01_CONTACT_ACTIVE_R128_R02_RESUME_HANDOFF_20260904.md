@@ -1,6 +1,11 @@
 # FRRIE contact-active R128 R02 resume handoff — 2026-09-04
 
-Status: `R03_QUARANTINED / B_CLASS_CHECK_REPAIR_SELECTED / NO_SCIENTIFIC_RESULT`
+Status: `R03_QUARANTINED / REPAIR_ACCEPTED / FRESH_R04_ACCEPTED / NO_SCIENTIFIC_RESULT`
+
+Current execution is attempt 04 at repaired source `732cc2b2299821a58d644e202c4b95c392932447`,
+task `frrie_b01_contact_r02_732cc2b2_04`. Its fresh worktree, admission, command and observation
+handoff are in `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_LAUNCH_20260904.md`. The `_01..03` records
+below are preserved history, not live-task instructions.
 
 This is a recoverable execution handoff, not a scientific result or result intake. The owner's
 2026-09-04 instruction, “我们开始推进自动研究流程”, supersedes the earlier drain pause. Root assigned
@@ -309,3 +314,9 @@ incoming/postdecision-hidden and probability bit-identity predicates while retai
 sampled-action/native integrity and every underlying computation, root, RNG, dtype, work, and
 card rule. CM owns implementation through a separate worktree and one focused committed remote
 verification. No fresh full result invocation is selected before that narrow diff is accepted.
+
+The repaired source was subsequently accepted after independent review, the focused regression,
+and the existing real learner toy each completed as recorded in the R04 launch document. The DM
+selected one fresh unchanged-card invocation, owner item `20260904-frrie-014`. CM observed its
+acceptance at `2026-09-04T22:14:20Z`; the original `_03` evidence remains quarantined and no
+scientific result has been accepted. Root and the shared observer receive the new exact handle.

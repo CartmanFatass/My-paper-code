@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 — R03 failure intake (2026-09-04)
 
-Status: `R03_IMPLEMENTATION_INVALID / EXACTNESS_GUARD_REPRODUCED / B_OBJECT_UNCHANGED`.
+Status: `R03_IMPLEMENTATION_INVALID / REPAIR_ACCEPTED / B_OBJECT_UNCHANGED`.
 
 This is an intake of a failed implementation attempt and its technical reproduction, not a valid
 algorithm result. The reproduction has A/RECON ceiling: a numerical execution-path fact on the
@@ -45,9 +45,11 @@ consumption state. The attempted card's semantic branch order is not rewritten.
   under the source worktree, present but empty.
 - Receipt: the source worktree's
   `temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_r03_admission.json`.
-- The traceback reached first-update collection. No optimizer step was completed and no valid
-  learner/evaluation summary or terminal learning curve was published. Native work before the
-  failure is not a complete R128 observation and is not assigned return polarity.
+- The traceback reached collection, and the matching reproduction failed at the first update
+  before any optimizer step. Original counters were not persisted, so exact original stage counts
+  are inferred from the matching reproduction and committed loop, not read from an original
+  counter artifact. No valid learner/evaluation summary or terminal learning curve was published.
+  Native work before the failure is not a complete R128 observation and has no return polarity.
 - Successful exact-step reproduction used a fresh same-SHA worktree because an existing native
   build guard refused reusing the original worktree's retained library. Its fresh admission
   measured physical/effective availability `12,966,584,320` bytes; the reproduced guard exited 1
@@ -150,3 +152,22 @@ native-return advantage.
 Evidence: `FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md`,
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_REMOTE_EXECUTION_20260904.md`, and
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_RESUME_HANDOFF_20260904.md`.
+
+## Subsequent technical acceptance
+
+The exact minimal repair is committed and pushed at
+`732cc2b2299821a58d644e202c4b95c392932447`. DM inspected the diff: only the three R02 intermediate
+identity predicates are skipped, the shared default and actual action/native checks remain, and
+R02 no longer asserts its old full-trace-identity flag. No policy/native numerical computation,
+RNG, work, root, optimizer, comparison, or result rule changed.
+
+Independent review found no material issue. The focused regression passed once and demonstrated
+both strict-default preservation and continued rejection of action/native divergence. The
+existing real learner toy passed once in 15.19 seconds after a reproduced pytest scratch-parent
+setup issue was repaired; that setup issue never ran the toy, and no successful test was
+repeated. This closes the selected repair's focused conformance check, not the scientific object.
+
+The DM then selected a fresh unchanged-card attempt 04 under owner item `20260904-frrie-014`.
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_LAUNCH_20260904.md` records the new source/worktree,
+admission, acceptance and observer handoff. `_03` remains incomplete and quarantined. Its
+technical diagnosis supplies no treatment advantage or equivalence claim.
