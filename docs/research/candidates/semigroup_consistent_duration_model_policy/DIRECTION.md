@@ -445,3 +445,40 @@ archive directly, and the DM consumed it without retry. Exact intake, archive an
 are in `SCDMP_D6_RECAST_CONVERGENCE_INTAKE_20260904.md` and
 `external/2026-09-04-scdmp-d6-recast-convergence-01/`. Portfolio lifecycle and investment remain
 outside this direction-local decision.
+
+## D6 section-11 class correction — 2026-09-04
+
+The engineering dissent reopened the same persistent convergence node before any command ran. Its
+complete archived response formed `DECISION_FORMED=true` and
+`FINAL_DECISION=SPLIT_A_RECON_THEN_REOPEN_B`; exact response SHA-256 is
+`a98efe074a2bd0ec714e5495209555b4745d724a9894c2f8c72669c40bdb8621`.
+
+Historical `RECAST_D6` remains the mechanism-level conclusion, but
+`SCDMP-D6-CROSS-K-Q-SHARING-B01` now has status
+`NOT_LAUNCHABLE_SECTION_11_4_METHOD_CONFLICT`. Its 1,152-mission pre-model census was a fifth B
+launch hold that could terminate with zero learner activity, contrary to controlling evidence spec
+§11.4. It may not be repaired in place, and no B learner object is authorized. No smoke, census,
+dataset, model, optimizer, evaluator or result existed when the conflict was corrected.
+
+The only admitted next discriminator is
+`SCDMP-D6-DURATION-ACTION-RELEVANCE-A01`, A/RECON: exact row `TAU_LEAK=.92`, `Z_LIMIT=.25`; source
+streams `9011/k7` and `9013/k13`; targets `64/160/256`; six HR/RH public twins;
+`{0,10,12}×{7,13}` actions; evaluation domain `9029`; sixteen tapes per state; two source
+trajectories and 1,152 candidate-evaluation missions. Exact integer quantities `W`, `R7` and
+`R13` distinguish two-sided, one-sided, action-
+relevant/no-material-cross-k and zero-span panels. There is no learner or parameter exposure.
+
+The strongest support is that this exact native-return census can change whether an action-linked
+D6 learner question exists, while §11.4 forbids hiding it as a B prerequisite. The strongest
+contradiction is the delay and transparent outcome dependence introduced by sequencing A before
+any B. A positive A branch establishes only finite host/population/action relevance; an adverse
+branch closes only the exact panel. Ordinary regularization/easier optimization and heterogeneous
+state-by-duration negative transfer remain live explanations for any later B.
+
+After valid A intake, reopen `em:semigroup_consistent_duration_model_policy:convergence` to decide
+whether `W>0`, `R7=1`, `R13=1` justify a newly named three-seed D6-versus-D8 B with fresh tapes and
+no census launch gate, or whether one prospectively different host/population object or parking is
+supported. Exact intake, card and archive are
+`SCDMP_D6_SECTION11_REOPEN_CONVERGENCE_INTAKE_20260904.md`,
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_SCIENCE_CARD_20260904.md`, and
+`external/2026-09-04-scdmp-d6-section11-reopen-convergence-02/`. Portfolio state is unchanged.

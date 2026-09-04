@@ -1,0 +1,47 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-04-scdmp-d6-section11-reopen-convergence-02",
+  "packet_id": "2026-09-04-scdmp-d6-section11-reopen-convergence-02--semigroup_consistent_duration_model_policy",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:semigroup_consistent_duration_model_policy:convergence",
+  "direction_id": "semigroup_consistent_duration_model_policy",
+  "direction_ids": [
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "decision_authority": "pro_final",
+  "conversation_id": "6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "provider_url": "https://chatgpt.com/c/6a961753-0424-83e8-848c-dbe2cfe3369c",
+  "tab_id": "1",
+  "tab_lifecycle": "OPEN",
+  "visible_model": "Pro",
+  "underlying_model": "GPT-5.6 Sol",
+  "thinking_effort": "5/5",
+  "source_mode": "single_body_attachment",
+  "prompt_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/semigroup_consistent_duration_model_policy/2026-09-04-scdmp-d6-section11-reopen-convergence-02/2026-09-04-scdmp-d6-section11-reopen-convergence-02--semigroup_consistent_duration_model_policy__00_PROMPT.md",
+  "prompt_sha256": "b6e7b13014009b2408045e536b3925658853a96609834716801bdca8ac1dc76d",
+  "companion_prompt": "Execute the attached PROMPT_BODY.md exactly. It contains the complete read-only evidence manifest. Return this node's final decision or the exact blocker.",
+  "companion_prompt_sha256": "25d60fd10fe5a3a21b24d47d37beee201512694a835c187c3619200518170de1",
+  "manifest_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/semigroup_consistent_duration_model_policy/2026-09-04-scdmp-d6-section11-reopen-convergence-02/2026-09-04-scdmp-d6-section11-reopen-convergence-02--semigroup_consistent_duration_model_policy__PACKET_MANIFEST.json",
+  "manifest_sha256": "b5ce03aac89b5fa342fef4d9155a7d3715e0c165e2b2b3ff577de3fc600cb5d3",
+  "response_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/semigroup_consistent_duration_model_policy/2026-09-04-scdmp-d6-section11-reopen-convergence-02/2026-09-04-scdmp-d6-section11-reopen-convergence-02--semigroup_consistent_duration_model_policy--attempt-01__02_RESPONSE.md",
+  "response_sha256": "a98efe074a2bd0ec714e5495209555b4745d724a9894c2f8c72669c40bdb8621",
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "wait_status": "NATURAL_COMPLETION",
+  "timestamps": {
+    "sent_at": "2026-09-04T11:57:54.975708Z",
+    "completed_at": "2026-09-04T12:11:46.725Z",
+    "captured_at": "2026-09-04T12:11:46.725Z",
+    "archived_at": "2026-09-04T12:11:46.725Z"
+  },
+  "heartbeat": {
+    "automation_id": "scdmp-d6-convergence-transport-wake-2026-09-04",
+    "status": "ACTIVE"
+  }
+}
