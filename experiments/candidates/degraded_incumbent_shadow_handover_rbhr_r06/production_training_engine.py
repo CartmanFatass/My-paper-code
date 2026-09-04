@@ -82,6 +82,33 @@ class ExactPolicyGraph(nn.Module):
     def critic(self, value: torch.Tensor) -> torch.Tensor:
         return self.critic_out(torch.tanh(self.critic2(torch.tanh(self.critic1(value))))).squeeze(-1)
 
+    def prepare_recurrent_hidden(
+        self, hidden: torch.Tensor, snapshot: torch.Tensor,
+        snapshot_mask: torch.Tensor, reset_mask: torch.Tensor, owner: torch.Tensor,
+    ) -> torch.Tensor:
+        hidden = hidden * reset_mask[:, None, None]
+        active = snapshot_mask.to(torch.bool)
+        if torch.any(active):
+            encoded_snapshot = torch.tanh(self.snapshot_encoder(snapshot))
+            lane = torch.arange(hidden.shape[0], device=hidden.device)
+            standby_index = 2 * (1 - owner.long()) + 1
+            standby = hidden[lane, standby_index]
+            bridged = torch.tanh(
+                self.snapshot_bridge(torch.cat((standby, encoded_snapshot), dim=-1))
+            )
+            edited = hidden.clone()
+            edited[lane, standby_index] = torch.where(active[:, None], bridged, standby)
+            hidden = edited
+        return hidden
+
+    def advance_recurrent_hidden(
+        self, observation: torch.Tensor, hidden: torch.Tensor,
+    ) -> torch.Tensor:
+        encoded = self.encode(observation.reshape(-1, 54))
+        return self.gru_step(encoded, hidden.reshape(-1, 128)).reshape(
+            hidden.shape[0], 4, 128,
+        )
+
     def replay(
         self,
         observation: torch.Tensor,
@@ -89,6 +116,7 @@ class ExactPolicyGraph(nn.Module):
         snapshot: torch.Tensor,
         snapshot_mask: torch.Tensor,
         reset_mask: torch.Tensor,
+        owner: torch.Tensor,
         promotion_mask: torch.Tensor | None = None,
         promotion_alpha: torch.Tensor | None = None,
         training_heads_only: bool = False,
@@ -98,6 +126,8 @@ class ExactPolicyGraph(nn.Module):
         fragments = observation.shape[0]
         if initial_hidden.shape != (fragments, 4, 128):
             raise TrainingBoundaryError("fragment hidden shape differs")
+        if owner.shape != (fragments, 64) or torch.any((owner != 0) & (owner != 1)):
+            raise TrainingBoundaryError("replay owner history differs")
         hidden = initial_hidden
         if promotion_mask is None:
             promotion_mask = torch.zeros((fragments, 64), dtype=torch.bool, device=observation.device)
@@ -105,25 +135,27 @@ class ExactPolicyGraph(nn.Module):
             promotion_alpha = torch.ones((fragments, 64), dtype=observation.dtype, device=observation.device)
         histories: list[torch.Tensor] = []
         for tick in range(64):
-            hidden = hidden * reset_mask[:, tick, None, None]
+            hidden = self.prepare_recurrent_hidden(
+                hidden, snapshot[:, tick], snapshot_mask[:, tick],
+                reset_mask[:, tick], owner[:, tick],
+            )
+            hidden = self.advance_recurrent_hidden(observation[:, tick], hidden)
+            histories.append(hidden)
             promote = promotion_mask[:, tick]
             if torch.any(promote):
-                old = hidden
+                lane = torch.arange(fragments, device=observation.device)
+                old_owner = owner[:, tick].long(); standby_owner = 1 - old_owner
+                old_i = 2 * old_owner; old_s = old_i + 1
+                new_i = 2 * standby_owner; new_s = new_i + 1
                 alpha = promotion_alpha[:, tick, None]
-                promoted = torch.clamp(alpha * old[:, 1] + (1.0 - alpha) * old[:, 0], -1.0, 1.0)
-                edited = old.clone()
-                edited[:, 0] = torch.where(promote[:, None], promoted, old[:, 0])
-                edited[:, 3] = torch.where(promote[:, None], old[:, 0], old[:, 3])
+                promoted = torch.clamp(
+                    alpha * hidden[lane, new_s] + (1.0 - alpha) * hidden[lane, old_i],
+                    -1.0, 1.0,
+                )
+                edited = hidden.clone()
+                edited[lane, new_i] = torch.where(promote[:, None], promoted, hidden[lane, new_i])
+                edited[lane, old_s] = torch.where(promote[:, None], hidden[lane, old_i], hidden[lane, old_s])
                 hidden = edited
-            active = snapshot_mask[:, tick]
-            if torch.any(active):
-                encoded_snapshot = torch.tanh(self.snapshot_encoder(snapshot[:, tick]))
-                standby = hidden[:, 1]
-                bridged = torch.tanh(self.snapshot_bridge(torch.cat((standby, encoded_snapshot), dim=-1)))
-                hidden = hidden.clone(); hidden[:, 1] = torch.where(active[:, None], bridged, standby)
-            encoded = self.encode(observation[:, tick].reshape(-1, 54))
-            hidden = self.gru_step(encoded, hidden.reshape(-1, 128)).reshape(fragments, 4, 128)
-            histories.append(hidden)
         states = torch.stack(histories, dim=1)
         return states, self.training_heads(states) if training_heads_only else self.heads(states)
 
@@ -206,15 +238,17 @@ def run_result_blind_training_seam() -> dict[str, object]:
         )
         observation, critic, snapshot, snapshot_mask, reset_mask, action, reward = _test_fragments()
         initial_hidden = torch.zeros((8, 4, 128), dtype=torch.float32)
-        states, heads = model.replay(observation, initial_hidden, snapshot, snapshot_mask, reset_mask)
-        authoritative = torch.stack((heads["motion"][:, :, 0, 0], heads["motion"][:, :, 0, 1], heads["motion"][:, :, 1, 0], heads["motion"][:, :, 1, 1]), dim=-1).reshape(512, 4)
+        owner = torch.zeros((8, 64), dtype=torch.long)
+        states, heads = model.replay(observation, initial_hidden, snapshot, snapshot_mask, reset_mask, owner)
+        authoritative, _, _ = _role_policy_heads(heads, owner)
+        authoritative = authoritative.reshape(512, 4)
         mean = 3.0 * torch.tanh(authoritative); log_std = torch.clamp(model.log_std, -5.0, 1.0)
         log_prob = -0.5 * ((((action - mean) / torch.exp(log_std)) ** 2) + 2 * log_std + math.log(2 * math.pi)).sum(-1)
         advantage = reward - reward.mean(); advantage = advantage / torch.clamp(advantage.std(unbiased=False), min=1e-8)
         policy_loss = -(log_prob * advantage).mean()
         value = model.critic(critic); target = reward
         value_loss = (value - target).square().mean()
-        q_logits = heads["service_q"][:, :, 1].reshape(512, 20)
+        q_logits = heads["service_q"][:, :, 3].reshape(512, 20)
         q_labels = ((torch.arange(512)[:, None] + torch.arange(20)[None]) % 7 < 4).to(torch.float32)
         passive = F.binary_cross_entropy_with_logits(q_logits, q_labels)
         loss = policy_loss + 0.5 * value_loss + 0.1 * passive
@@ -283,7 +317,66 @@ def _synthetic_complete_update() -> dict[str, torch.Tensor]:
     q_mask = torch.ones(4_096, dtype=torch.bool)
     next_mask = torch.ones(4_096, dtype=torch.bool)
     q_copy_index = torch.ones(4_096, dtype=torch.long)
+    initial_hidden = torch.sin(
+        torch.arange(64, dtype=torch.float32)[:, None, None] * 0.013
+        + torch.arange(4, dtype=torch.float32)[None, :, None] * 0.17
+        + torch.arange(128, dtype=torch.float32)[None, None, :] * 0.003
+    )
+    owner = ((fragment[:, None] + tick[:, None]) % 2).long().reshape(64, 64)
+    actor_raw = observation.clone()
+    model = ExactPolicyGraph(); deterministic_test_initialize(model)
+    with torch.no_grad():
+        _, heads = model.replay(
+            observation, initial_hidden, snapshot, snapshot_mask, reset_mask, owner,
+            promotion_mask, promotion_alpha, training_heads_only=True,
+        )
+        motion, prepare_logit, commit_logit = _role_policy_heads(heads, owner)
+        _, behavior_log_prob = _policy_log_prob(
+            "STRUCTURED", motion, model.log_std, action, prepare_logit, commit_logit,
+            prepare_outcome, commit_outcome, renew, prepare_mask, commit_mask,
+        )
     return locals()
+
+
+def _role_policy_heads(
+    heads: Mapping[str, torch.Tensor], owner: torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Select physical motion and proposal heads from the four role copies."""
+
+    if owner.ndim == 1:
+        lane = torch.arange(owner.shape[0], device=owner.device)
+        owner = owner.long()
+        u0 = torch.where(owner == 0, torch.zeros_like(owner), torch.ones_like(owner))
+        u1 = torch.where(owner == 1, torch.full_like(owner, 2), torch.full_like(owner, 3))
+        owner_i = 2 * owner
+        standby_s = 2 * (1 - owner) + 1
+        motion = heads["motion"]
+        physical_motion = torch.stack((
+            motion[lane, u0, 0], motion[lane, u0, 1],
+            motion[lane, u1, 0], motion[lane, u1, 1],
+        ), dim=-1)
+        return (
+            physical_motion,
+            heads["prepare"][lane, owner_i, 0],
+            heads["commit"][lane, standby_s, 0],
+        )
+    if owner.ndim != 2:
+        raise TrainingBoundaryError("role owner rank differs")
+    lane = torch.arange(owner.shape[0], device=owner.device)[:, None]
+    tick = torch.arange(owner.shape[1], device=owner.device)[None, :]
+    owner = owner.long()
+    u0 = torch.where(owner == 0, torch.zeros_like(owner), torch.ones_like(owner))
+    u1 = torch.where(owner == 1, torch.full_like(owner, 2), torch.full_like(owner, 3))
+    owner_i = 2 * owner
+    standby_s = 2 * (1 - owner) + 1
+    motion = heads["motion"]
+    physical_motion = torch.stack((
+        motion[lane, tick, u0, 0], motion[lane, tick, u0, 1],
+        motion[lane, tick, u1, 0], motion[lane, tick, u1, 1],
+    ), dim=-1)
+    prepare = heads["prepare"][lane, tick, owner_i, 0]
+    commit = heads["commit"][lane, tick, standby_s, 0]
+    return physical_motion, prepare, commit
 
 
 def _gae(
@@ -328,6 +421,40 @@ def _arm_policy_terms(
     return log_prob, entropy, active
 
 
+def _policy_log_prob(
+    arm: str,
+    motion: torch.Tensor,
+    log_std: torch.Tensor,
+    action: torch.Tensor,
+    prepare_logit: torch.Tensor,
+    commit_logit: torch.Tensor,
+    prepare_outcome: torch.Tensor,
+    commit_outcome: torch.Tensor,
+    renew: torch.Tensor,
+    prepare_mask: torch.Tensor | None = None,
+    commit_mask: torch.Tensor | None = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Common FP32 live/replay action mean and behavior likelihood law."""
+
+    mean = 3.0 * torch.tanh(motion)
+    ell = torch.clamp(log_std, -5.0, 1.0)
+    motion_log_prob = -0.5 * (
+        ((action - mean) / torch.exp(ell)).square()
+        + 2 * ell + math.log(2 * math.pi)
+    ).sum(-1)
+    active = renew.to(motion_log_prob.dtype)
+    log_prob = motion_log_prob * active
+    if arm in ("STRUCTURED", "FLEX", "NEVER"):
+        prepare_active = renew if prepare_mask is None else prepare_mask
+        commit_active = renew if commit_mask is None else commit_mask
+        log_prob = log_prob + _bernoulli_log_prob(
+            prepare_logit, prepare_outcome,
+        ) * prepare_active + _bernoulli_log_prob(
+            commit_logit, commit_outcome,
+        ) * commit_active
+    return mean, log_prob
+
+
 def arm_mask_inventory() -> dict[str, dict[str, int]]:
     data = _synthetic_complete_update()
     renew = int(data["renew"].sum())
@@ -362,6 +489,7 @@ def run_full_4096_dry_update(
             "promotion_alpha", "reset_mask", "renew", "prepare_mask", "commit_mask",
             "action", "prepare_outcome", "commit_outcome", "reward", "done", "target",
             "links", "missing", "q_labels", "q_mask", "next_mask", "q_copy_index",
+            "initial_hidden", "owner", "actor_raw", "behavior_log_prob",
         }
         if not required.issubset(data):
             raise TrainingBoundaryError(
@@ -383,13 +511,8 @@ def run_full_4096_dry_update(
             model.load_state_dict(restored_input["model"])
             optimizer.load_state_dict(restored_input["optimizer"])
             previous_update = int(restored_input["update"])
-        initial_hidden = torch.zeros((64, 4, 128), dtype=torch.float32)
+        initial_hidden = data["initial_hidden"]
         with torch.no_grad():
-            old_states, old_heads = model.replay(
-                data["observation"], initial_hidden, data["snapshot"], data["snapshot_mask"],
-                data["reset_mask"], data["promotion_mask"], data["promotion_alpha"],
-                training_heads_only=True,
-            )
             old_value_flat = model.critic(data["critic"])
             old_value = old_value_flat.reshape(32, 128)
             bootstrap = old_value[:, -1].clone()
@@ -399,21 +522,7 @@ def run_full_4096_dry_update(
             policy_advantage = torch.zeros_like(advantage_fragment)
             if active_advantage.numel() and active_advantage.std(unbiased=False) >= 1e-8:
                 policy_advantage[data["renew"]] = (active_advantage - active_advantage.mean()) / active_advantage.std(unbiased=False)
-            old_motion = old_heads["motion"]
-            old_mean = 3.0 * torch.tanh(torch.stack((old_motion[:, :, 0, 0], old_motion[:, :, 0, 1], old_motion[:, :, 1, 0], old_motion[:, :, 1, 1]), dim=-1))
-            ell = torch.clamp(model.log_std, -5.0, 1.0)
-            old_motion_lp = -0.5 * ((((data["action"] - old_mean) / torch.exp(ell)) ** 2) + 2 * ell + math.log(2 * math.pi)).sum(-1)
-            old_motion_entropy = torch.full_like(old_motion_lp, float((ell + 0.5 * math.log(2 * math.pi * math.e)).sum()))
-            old_prepare = old_heads["prepare"][:, :, 0, 0]
-            old_commit = old_heads["commit"][:, :, 1, 0]
-            old_prepare_lp = _bernoulli_log_prob(old_prepare, data["prepare_outcome"])
-            old_commit_lp = _bernoulli_log_prob(old_commit, data["commit_outcome"])
-            old_prepare_entropy = torch.distributions.Bernoulli(logits=old_prepare).entropy()
-            old_commit_entropy = torch.distributions.Bernoulli(logits=old_commit).entropy()
-            old_log_prob, _, _ = _arm_policy_terms(
-                arm, old_motion_lp, old_motion_entropy, old_prepare_lp, old_prepare_entropy,
-                old_commit_lp, old_commit_entropy, data["renew"], data["prepare_mask"], data["commit_mask"],
-            )
+            old_log_prob = data["behavior_log_prob"]
         losses: list[float] = []
         gradient_norms: list[float] = []
         optimizer_steps = 0
@@ -429,21 +538,26 @@ def run_full_4096_dry_update(
                 states, heads = model.replay(
                     data["observation"][selected], initial_hidden[selected], data["snapshot"][selected],
                     data["snapshot_mask"][selected], data["reset_mask"][selected],
-                    data["promotion_mask"][selected], data["promotion_alpha"][selected],
+                    data["owner"][selected], data["promotion_mask"][selected],
+                    data["promotion_alpha"][selected],
                     training_heads_only=True,
                 )
-                motion = heads["motion"]
-                mean = 3.0 * torch.tanh(torch.stack((motion[:, :, 0, 0], motion[:, :, 0, 1], motion[:, :, 1, 0], motion[:, :, 1, 1]), dim=-1))
+                motion, prepare_logit, commit_logit = _role_policy_heads(heads, data["owner"][selected])
                 ell = torch.clamp(model.log_std, -5.0, 1.0)
+                _, log_prob = _policy_log_prob(
+                    arm, motion, model.log_std, data["action"][selected],
+                    prepare_logit, commit_logit, data["prepare_outcome"][selected],
+                    data["commit_outcome"][selected], data["renew"][selected],
+                    data["prepare_mask"][selected], data["commit_mask"][selected],
+                )
+                mean = 3.0 * torch.tanh(motion)
                 motion_lp = -0.5 * ((((data["action"][selected] - mean) / torch.exp(ell)) ** 2) + 2 * ell + math.log(2 * math.pi)).sum(-1)
                 motion_entropy = torch.ones_like(motion_lp) * (ell + 0.5 * math.log(2 * math.pi * math.e)).sum()
-                prepare_logit = heads["prepare"][:, :, 0, 0]
-                commit_logit = heads["commit"][:, :, 1, 0]
                 prepare_lp = _bernoulli_log_prob(prepare_logit, data["prepare_outcome"][selected])
                 commit_lp = _bernoulli_log_prob(commit_logit, data["commit_outcome"][selected])
                 prepare_entropy = torch.distributions.Bernoulli(logits=prepare_logit).entropy()
                 commit_entropy = torch.distributions.Bernoulli(logits=commit_logit).entropy()
-                log_prob, entropy, active = _arm_policy_terms(
+                _, entropy, active = _arm_policy_terms(
                     arm, motion_lp, motion_entropy, prepare_lp, prepare_entropy, commit_lp, commit_entropy,
                     data["renew"][selected], data["prepare_mask"][selected], data["commit_mask"][selected],
                 )
@@ -485,7 +599,7 @@ def run_full_4096_dry_update(
                 optimizer.zero_grad(set_to_none=True); loss.backward()
                 norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5); optimizer.step()
                 losses.append(float(loss.detach())); gradient_norms.append(float(norm)); optimizer_steps += 1
-        actor_welford = restored_input["welford"]["actor"] if restored_input is not None else WelfordState.empty(54); actor_welford.update(data["observation"])
+        actor_welford = restored_input["welford"]["actor"] if restored_input is not None else WelfordState.empty(54); actor_welford.update(data["actor_raw"])
         snapshot_welford = restored_input["welford"]["snapshot"] if restored_input is not None else WelfordState.empty(18); snapshot_welford.update(data["snapshot"], data["snapshot_mask"])
         critic_welford = restored_input["welford"]["critic"] if restored_input is not None else WelfordState.empty(58); critic_welford.update(data["critic"])
         checkpoint = {
