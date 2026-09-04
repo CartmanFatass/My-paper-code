@@ -11,6 +11,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "scripts"
+SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
 def _module(name: str, filename: str):
@@ -33,6 +34,23 @@ def _project(tmp_path: Path) -> Path:
         (direction / "DIRECTION.md").write_text(f"# {direction_id}\n", encoding="utf-8")
         rows.append(f"| {direction_id} | ACTIVE |")
     (portfolio / "PORTFOLIO.md").write_text("\n".join(rows) + "\n", encoding="utf-8")
+    codex = tmp_path / ".codex"
+    codex.mkdir()
+    (codex / "hmasd-transport.toml").write_text(
+        "\n".join(
+            (
+                "schema_version = 1",
+                'mode = "singleton"',
+                'status = "active"',
+                f'thread_id = "{SINGLETON_THREAD_ID}"',
+                'environment = "local"',
+                'model = "gpt-5.6-luna"',
+                'reasoning_effort = "xhigh"',
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
     return tmp_path
 
 
@@ -45,7 +63,12 @@ def _transport_request(**changes: object) -> dict[str, object]:
         "conversation_binding_key": "em:alpha:innovator",
         "decision_authority": "pro_final",
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "parent_thread_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+        "operator_thread_id": SINGLETON_THREAD_ID,
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
         "prompt": "Decide the next bounded object.",
     }
     request.update(changes)
@@ -95,6 +118,7 @@ def _bind_args(
     provider_context_reset_evidence: dict[str, object] | None = None,
     observed_after_successful_send: bool = False,
     source_thread_id: str = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    parent_thread_id: str = "cccccccc-cccc-cccc-cccc-cccccccccccc",
     operator_thread_id: str = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
 ) -> argparse.Namespace:
     return argparse.Namespace(
@@ -115,6 +139,7 @@ def _bind_args(
         prompt_sha256="0" * 64,
         reference_files_json="[]",
         source_thread_id=source_thread_id,
+        parent_thread_id=parent_thread_id,
         operator_thread_id=operator_thread_id,
         packet_id=None,
         packet_manifest=None,
@@ -256,6 +281,7 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
         conversation_id=conversation_id,
         request_id="alpha-innovator-02",
         source_thread_id="cccccccc-cccc-cccc-cccc-cccccccccccc",
+        parent_thread_id="eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
         operator_thread_id="dddddddd-dddd-dddd-dddd-dddddddddddd",
     )
 
@@ -274,8 +300,10 @@ def test_persistent_binding_allows_next_round_only_after_archive(tmp_path: Path)
     assert current["state"] == "DIRECTION_VERIFIED"
     assert current["request_history"][-1]["request_id"] == "alpha-innovator-01"
     assert current["request_history"][-1]["creator_thread_id"] == "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+    assert current["request_history"][-1]["parent_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
     assert current["request_history"][-1]["operator_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
     assert current["creator_thread_id"] == "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    assert current["parent_thread_id"] == "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
     assert current["operator_thread_id"] == "dddddddd-dddd-dddd-dddd-dddddddddddd"
 
 

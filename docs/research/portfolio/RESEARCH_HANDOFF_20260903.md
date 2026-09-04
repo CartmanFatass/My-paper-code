@@ -8,11 +8,30 @@ reports.
 
 > **Current-status overlay (owner, 2026-09-04).** The owner lifted the handoff pause and directed
 > automatic research to resume. The repository now has no fixed research-concurrency cap, Direction
-> Managers run at `gpt-5.6-sol` / `max`, and every Pro handoff creates an on-demand Transport
-> operator whose single receipt returns to its creator `source_thread_id`. Root `AGENTS.md`,
+> Managers run at `gpt-5.6-sol` / `max`, and every Pro handoff reuses the single project Transport
+> task declared in `.codex/hmasd-transport.toml`, running at `gpt-5.6-luna` / `xhigh`; authors do
+> not call `create_thread`. Each request's single receipt returns to the handoff author's declared
+> `parent_thread_id`, never the source/creator subtask or the Transport singleton. Root `AGENTS.md`,
 > `PORTFOLIO.md`, and `decisions/2026-09-04-dm-max-and-unbounded-research-capacity.md` are the current
 > control plane. Statements below about the old pause, two-direction cap, deleted Claude heartbeat,
 > or fixed receipt routing describe the historical handoff state only.
+>
+> **Remote-compute overlay (owner, 2026-09-04).** New portable result-bearing invocations are
+> remote-first on the `wsl_4070` node declared in `.codex/hmasd-compute.toml`; local Windows remains
+> the control plane and prospectively authorized fallback. The node uses exact-sha detached
+> worktrees, `/home/wu/.venvs/hmasd`, one remote 4 GiB admission per invocation, and the existing
+> `/usr/local/bin/agent-task` supervisor. Credentials remain outside the repository. Existing live
+> local processes are not migrated. The controlling owner decision is
+> `decisions/2026-09-04-remote-first-compute-routing.md`. No Codex restart is required; new tasks
+> load the updated project configuration.
+>
+> **Direction-parallelism overlay (owner clarification, 2026-09-04).** The absence of a fixed
+> repository cap on implementer sessions and result-bearing runs does not mean all lifecycle-ACTIVE
+> directions run simultaneously. Root maintains a target working set of five concurrently advancing
+> top-level DM chains. Other `ACTIVE` directions remain admitted and queued, without lifecycle or
+> priority change. Five is not a target direction count or fusion target; consolidation is proposed
+> on demand only for materially identical questions, comparators, estimands, and next objects. The
+> controlling record is `decisions/2026-09-04-five-direction-execution-parallelism.md`.
 
 ## 1. Read in this order
 

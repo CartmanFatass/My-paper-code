@@ -55,8 +55,11 @@ python -m ha_ctse_process.smoke
 python scripts/hmasd_resource_preflight.py admit-memory --out <receipt.json>
 ```
 
-There is no lint, format or type-check tooling, no dashboard, and no C++ build step (native
-extensions compile through PyTorch's JIT loader on first use). Do not add any of them.
+There is no lint, format or type-check tooling, no dashboard for research code, and no C++ build
+step (native extensions compile through PyTorch's JIT loader on first use). Do not add any of
+them. The one owner-side exception is `tools/owner_console/` (owner decision 2026-09-04): a
+standard-library local page that reads and writes only the owner surfaces under
+`docs/research/portfolio/owner/`; the research loop never depends on it.
 
 ## Working rules specific to this repository
 

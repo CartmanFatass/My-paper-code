@@ -1,0 +1,35 @@
+{
+  "id": "20260904-scope1s-001",
+  "created": "2026-09-04T07:05:00-07:00",
+  "direction": "scope_1s",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) minimal no-learner exact-SHA A/RECON census",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T07:05:00-07:00). Provenance: `OWNER_DELEGATED` — Owner-delegated decision (unattended, 2026-09-03 instruction): (a). Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "freeze and execute a minimal no-learner exact-SHA A/RECON headroom-availability census",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "construct/tune a generic learner baseline now",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "treat raw `60-32` information-set separation as A1 headroom",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/scope_1s/SCOPE1S_GUIDANCE_A1_HEADROOM_CENSUS_SCIENCE_CARD_20260904.md#7-object-tier-unattended-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

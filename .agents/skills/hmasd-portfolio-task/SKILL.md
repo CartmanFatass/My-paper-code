@@ -26,12 +26,41 @@ Before investing or making a material lifecycle recommendation, Root identifies:
   live choices; and
 - the contrary observation that would change the recommendation.
 
-Executing every already `ACTIVE`, independently admitted direction under the current unbounded
-capacity policy is ordinary sequencing, not a new Portfolio decision. Runtime availability and
-dependency ownership may change launch order, but Root must not silently turn scheduling into a
-priority, lifecycle, exclusion, fusion, separation, or investment decision. If scarce resources
-force a choice among directions rather than a queue in which all remain admitted, use the
-Portfolio decision path below.
+Every `ACTIVE` direction remains admitted to the research queue. Root ordinarily schedules that
+queue through a target working set of five concurrently advancing top-level DM chains; choosing
+which admitted direction occupies a slot is sequencing, not a new lifecycle decision. Runtime
+availability and dependency ownership may change launch order, but Root must not silently turn
+scheduling into a priority, lifecycle, exclusion, fusion, separation, or investment decision. A
+queued `ACTIVE` direction is not `PARKED`.
+
+Execution placement is remote-first under `.codex/hmasd-compute.toml`. Route new portable
+result-bearing invocations to the enabled remote node while the local machine retains the control
+plane and acts as a prospectively authorized fallback. This is capacity routing, not evidence or a
+direction-priority signal. A node change must preserve the card's declared host/device semantics,
+must occur before question-relevant output, and requires a fresh admission on the destination.
+
+## Direction execution working set
+
+The target parallelism is five direction-level DM chains. Count neither Root nor Transport,
+CM/implementer/reviewer/critic/verifier/operator children, nor detached result processes as extra
+direction slots.
+
+- Refill an open slot at a clean boundary with the most promising runnable `ACTIVE` direction.
+  Compare decision relevance, the smallest sufficient evidence class, honest claim ceiling,
+  expected information gain, cost/reversibility, current dependency state, and contrary evidence.
+- Prefer real algorithm implementation and decision-relevant evidence over ceremony when the
+  claim does not require a stronger class. A direction waiting on a Direction- or Portfolio-tier
+  dependency yields its slot when another admitted direction can advance.
+- Do not interrupt live work to correct temporary overlap above five. Let chains reach clean
+  boundaries and do not refill until the working set returns to five.
+- Queue membership has no lifecycle or priority effect. Five is not a target count for `ACTIVE`
+  directions and does not authorize batch `PARK`, closure, fusion, or absorption.
+- Refilling a slot under this recorded owner policy is ordinary sequencing and does not itself
+  require a Portfolio Pro round. Any proposed priority, investment, lifecycle, fusion, separation,
+  or registration change still uses the Portfolio decision path.
+- Consider fusion only on demand, through the Portfolio decision path, after showing that question,
+  comparator, estimand, and next object are materially the same. Similar vocabulary, host, or
+  reusable baselines is insufficient.
 
 Compare directions at their honest claim ceilings. Do not reward a direction merely for producing
 more formal artifacts, and do not penalize a bounded empirical direction for lacking a theorem,
@@ -43,6 +72,45 @@ C-FORMAL work.
 Distinguish technical success, bounded task competence, comparative algorithm advantage,
 cross-scenario transfer, safety, and deployment. Evidence for an earlier claim does not silently
 promote a later one.
+
+## Investment fields (owner decision 2026-09-04, revised the same day)
+
+Controlling records: `docs/research/portfolio/decisions/2026-09-04-owner-intervention-surfaces.md`
+and its execution-parallelism clarification,
+`docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`; field text:
+evidence spec §11.7 and `AGENTS.md` §2. These are comparison inputs and sequencing rules, not launch
+gates, exclusion rules, or lifecycle dispositions. All `ACTIVE` directions remain admitted, while
+the five-chain direction working set controls which ones advance concurrently; sequencing orders
+work and never parks a direction by itself.
+
+- **Headroom record.** Every Portfolio proposal states each in-scope direction's headroom record
+  on its host or its absence. A missing record sequences that measurement early (A/RECON when
+  computed from existing results, a declared B when a baseline must be trained); it is never a
+  reason to stop investing. When compute is contended, a direction with a record sequences ahead
+  of one without.
+- **Declared MEI.** Compare B signals across directions against each card's own declared minimum
+  effect of interest (absolute, relative, or both), not against a repository-wide number and not
+  by absolute edge alone. The declared MEI never rewrites a card's result branches.
+- **Recast budget one.** A direction at its second Convergence `RECAST` continues (the Pro
+  decision is final for its node) but takes the lowest sequencing priority among ACTIVE
+  directions: Root admits every other ACTIVE direction's work first. It appears in the owner
+  digest as `second-recast`; Root does not mutate the lifecycle field, and an owner reply may PARK
+  it. Nothing waits for that reply.
+- **Usage per valid result, two measures.** `PORTFOLIO.md` carries two columns per direction:
+  the compute of each valid result itself, and the total compute of all accepted attempts divided
+  by the number of valid results. Each value names its node and device and is `unmeasured` where
+  the summary lacks it; a single wall-time number is not used because it mixes hardware, technical
+  failure and scientific cost. Root refreshes both with every snapshot and cites them in every
+  cross-direction proposal.
+- **Fusion and shared assets.** Directions on one host share baseline sets and evidence
+  interfaces without fusing. Fusion is proposed only when question, comparator, estimand and next
+  object are shown to be materially the same.
+- **Owner items.** Every Portfolio proposal awaiting ratification, and every direction
+  recommendation a DM returns, is one owner item of kind `portfolio` written with
+  `python tools/owner_console/item.py add --direction portfolio --tier portfolio --kind portfolio ...`
+  (`$hmasd-owner-item`; never by hand). At every clean boundary Root runs
+  `python tools/owner_console/item.py reviews`: a `ratify` instruction is the owner's
+  ratification, `refuse` or `amend` is not; then `mark-answered`. Nothing waits for it.
 
 ## Lifecycle semantics
 
@@ -79,10 +147,11 @@ and includes the current Portfolio snapshot, this evidence specification, the se
 class and claim ceiling, plus the exact direction/evidence paths needed for the decision. The
 project-shared registry creates or binds the provider conversation on first use under the stable
 conversation binding key and reuses that exact provider conversation for later Portfolio rounds.
-Each handoff creates one Transport operator task on demand, records its per-handoff runtime
-`operator_thread_id`, and sends exactly one completion or terminal-blocker receipt back to the
-originating `source_thread_id`. An operator task ID is never a provider-conversation binding or a
-global dispatch target.
+Each handoff reuses the one project Transport task declared in `.codex/hmasd-transport.toml` and
+sends exactly one completion or terminal-blocker receipt back to the handoff author's declared
+`parent_thread_id`. Dispatch passes `model=gpt-5.6-luna` and `thinking=xhigh` explicitly; it never
+calls `create_thread` or selects a replacement task. The singleton task ID is an execution endpoint,
+never a provider-conversation binding or receipt destination.
 
 A complete archived Pro response that decides the posed question at its declared evidence class is
 the Portfolio proposal. Root records it with its evidence and bounded rationale in a decision record

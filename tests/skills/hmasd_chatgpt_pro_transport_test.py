@@ -31,6 +31,7 @@ MATERIALIZE = _load("transport_materialize", SCRIPT_DIR / "materialize_packet.py
 BIND = _load("transport_bind", SCRIPT_DIR / "bind_conversation.py")
 TRANSPORT_SKILL = ROOT / ".agents" / "skills" / "hmasd-chatgpt-pro-transport" / "SKILL.md"
 OUTSOURCE_SKILL = ROOT / ".agents" / "skills" / "hmasd-workflow-outsource" / "SKILL.md"
+SINGLETON_THREAD_ID = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
 
 
 @pytest.fixture
@@ -41,6 +42,23 @@ def project_root(tmp_path: Path) -> Path:
     portfolio.mkdir(parents=True)
     (direction / "DIRECTION.md").write_text("# Demo\n", encoding="utf-8")
     (portfolio / "PORTFOLIO.md").write_text("| demo_direction | ACTIVE |\n", encoding="utf-8")
+    codex = tmp_path / ".codex"
+    codex.mkdir()
+    (codex / "hmasd-transport.toml").write_text(
+        "\n".join(
+            (
+                "schema_version = 1",
+                'mode = "singleton"',
+                'status = "active"',
+                f'thread_id = "{SINGLETON_THREAD_ID}"',
+                'environment = "local"',
+                'model = "gpt-5.6-luna"',
+                'reasoning_effort = "xhigh"',
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
     return tmp_path
 
 
@@ -56,6 +74,7 @@ def upload_request(tmp_path: Path) -> dict[str, object]:
         "prompt_path": str(prompt.resolve()),
         "reference_paths": [str(reference.resolve())],
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "parent_thread_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
         "companion_prompt": "Execute the canonical packet exactly once.",
     }
 
@@ -116,6 +135,7 @@ def _record() -> dict[str, object]:
         "provider_url": "https://chatgpt.com/c/6a95b06d-0104-83e8-9493-f59f26b61c82",
         "state": "SEND_CONFIRMED",
         "source_thread_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "parent_thread_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
         "tab_id": "17",
         "tab_lease": {"handle": "17", "lifecycle": "OPEN", "origin": "agent", "reusable": True},
     }
@@ -176,8 +196,8 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     key = record["return_receipt"]["message_key"]
     assert key == contract.receipt_message_key("req-1", "demo_direction", record["conversation_id"], "b" * 64)
     assert record["return_receipt"]["status"] == "PENDING"
-    assert record["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
-    assert record["return_receipt"]["destination_thread_id"] == record["source_thread_id"]
+    assert record["return_receipt"]["routing_mode"] == "PARENT_SESSION"
+    assert record["return_receipt"]["destination_thread_id"] == record["parent_thread_id"]
     assert record["return_receipt"]["fallback_enabled"] is False
     contract.record_receipt_result(record, "UNCERTAIN", delivery_status="timeout", error="unknown")
     assert record["return_receipt"]["status"] == "UNCERTAIN"
@@ -185,10 +205,10 @@ def test_receipt_outbox_is_deterministic_and_uncertain_is_not_retryable() -> Non
     assert record["return_receipt"]["attempt_count"] == 1
 
 
-def test_missing_source_blocks_completion_receipt_without_a_destination() -> None:
+def test_missing_parent_blocks_completion_receipt_without_a_destination() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
-    record["source_thread_id"] = None
+    record["parent_thread_id"] = None
     record["fallback_enabled"] = True
     record["fallback_thread_id"] = "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
     record["return_receipt"] = {
@@ -204,9 +224,9 @@ def test_missing_source_blocks_completion_receipt_without_a_destination() -> Non
     assert receipt["required"] is False
     assert receipt["status"] == "BLOCKED"
     assert receipt["receipt_state"] == "RETURN_RECEIPT_BLOCKED"
-    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["routing_mode"] == "PARENT_SESSION"
     assert receipt["fallback_enabled"] is False
-    assert receipt["source_thread_id"] is None
+    assert receipt["parent_thread_id"] is None
     assert receipt["destination_thread_id"] is None
     assert receipt.get("message_key") is None
     assert "fallback_thread_id" not in receipt
@@ -216,7 +236,7 @@ def test_missing_source_blocks_completion_receipt_without_a_destination() -> Non
     assert record["tab_lifecycle"] == "CLOSED"
 
 
-def test_unattempted_legacy_pending_receipt_migrates_even_when_destination_already_matches_source() -> None:
+def test_unattempted_legacy_pending_receipt_migrates_to_parent() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
     response_sha256 = "d" * 64
@@ -229,6 +249,7 @@ def test_unattempted_legacy_pending_receipt_migrates_even_when_destination_alrea
     record["return_receipt"] = {
         "required": True,
         "source_thread_id": record["source_thread_id"],
+        "parent_thread_id": record["parent_thread_id"],
         "destination_thread_id": record["source_thread_id"],
         "status": "PENDING",
         "attempt_count": 0,
@@ -242,8 +263,8 @@ def test_unattempted_legacy_pending_receipt_migrates_even_when_destination_alrea
 
     receipt = record["return_receipt"]
     assert receipt["message_key"] == key
-    assert receipt["destination_thread_id"] == record["source_thread_id"]
-    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["destination_thread_id"] == record["parent_thread_id"]
+    assert receipt["routing_mode"] == "PARENT_SESSION"
     assert receipt["fallback_enabled"] is False
     assert "fallback_thread_id" not in receipt
 
@@ -273,7 +294,7 @@ def test_any_legacy_delivery_evidence_preserves_mixed_fallback_receipt_without_r
     assert contract.receipt_has_delivery_evidence(record["return_receipt"]) is True
 
 
-def test_terminal_blocker_receipt_routes_once_to_the_creator() -> None:
+def test_terminal_blocker_receipt_routes_once_to_the_parent() -> None:
     record = _record()
     record["state"] = "BLOCKED"
     contract.stage_blocker_receipt(
@@ -286,18 +307,18 @@ def test_terminal_blocker_receipt_routes_once_to_the_creator() -> None:
     message_key = receipt["message_key"]
     assert receipt["status"] == "PENDING"
     assert receipt["kind"] == "TERMINAL_BLOCKER"
-    assert receipt["routing_mode"] == "CREATOR_SESSION"
+    assert receipt["routing_mode"] == "PARENT_SESSION"
     assert receipt["fallback_enabled"] is False
     assert receipt["return_control_after_attempt"] is True
-    assert receipt["destination_thread_id"] == record["source_thread_id"]
+    assert receipt["destination_thread_id"] == record["parent_thread_id"]
     contract.stage_blocker_receipt(record, "BLOCKED", "provider URL no longer resolves")
     assert record["return_receipt"]["message_key"] == message_key
 
 
-def test_terminal_blocker_without_source_is_receipt_blocked() -> None:
+def test_terminal_blocker_without_parent_is_receipt_blocked() -> None:
     record = _record()
     record["state"] = "BLOCKED"
-    record["source_thread_id"] = None
+    record["parent_thread_id"] = None
     contract.stage_blocker_receipt(
         record,
         "BLOCKED",
@@ -314,14 +335,14 @@ def test_terminal_blocker_without_source_is_receipt_blocked() -> None:
     assert record["state"] == "BLOCKED"
 
 
-def test_creator_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
+def test_parent_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
     record = _record()
     record["state"] = "ARCHIVED"
-    record["source_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    record["parent_thread_id"] = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
     contract.stage_receipt(record, {"response_file": "response.md"}, "e" * 64)
     receipt = record["return_receipt"]
-    assert receipt["source_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
-    assert receipt["destination_thread_id"] == record["source_thread_id"]
+    assert receipt["parent_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    assert receipt["destination_thread_id"] == record["parent_thread_id"]
     contract.record_receipt_result(record, "FAILED", error="send tool failed")
     receipt = record["return_receipt"]
     assert receipt["status"] == "FAILED"
@@ -336,7 +357,7 @@ def test_creator_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
     contract.stage_receipt(uncertain, {"response_file": "response.md"}, "f" * 64)
     contract.record_receipt_result(uncertain, "UNCERTAIN", error="timeout")
     assert uncertain["return_receipt"]["status"] == "UNCERTAIN"
-    assert uncertain["return_receipt"]["destination_thread_id"] == uncertain["source_thread_id"]
+    assert uncertain["return_receipt"]["destination_thread_id"] == uncertain["parent_thread_id"]
     with pytest.raises(ValueError, match="one pending, unsent receipt"):
         contract.record_receipt_result(uncertain, "SENT")
 
@@ -344,8 +365,11 @@ def test_creator_route_receipt_outcome_is_terminal_and_never_rerouted() -> None:
 def test_source_thread_validator_accepts_any_uuid_and_no_fallback_api_exists() -> None:
     source = "cccccccc-cccc-cccc-cccc-cccccccccccc"
     assert contract.validate_source_thread_id(source) == source
+    assert contract.validate_parent_thread_id(source) == source
     with pytest.raises(ValueError, match="source_thread_id"):
         contract.validate_source_thread_id("not-a-task")
+    with pytest.raises(ValueError, match="parent_thread_id"):
+        contract.validate_parent_thread_id("not-a-task")
     assert not hasattr(contract, "DEFAULT_FALLBACK_THREAD_ID")
     assert not hasattr(contract, "validate_fallback_thread_id")
 
@@ -387,8 +411,9 @@ def test_validate_request_exposes_packet_plan_and_return_readiness(
     )
     assert result["return_receipt_ready"] is True
     assert result["creator_thread_id"] == upload_request["source_thread_id"]
-    assert result["return_receipt_thread_id"] == upload_request["source_thread_id"]
-    assert result["return_route"] == "CREATOR_SESSION"
+    assert result["parent_thread_id"] == upload_request["parent_thread_id"]
+    assert result["return_receipt_thread_id"] == upload_request["parent_thread_id"]
+    assert result["return_route"] == "PARENT_SESSION"
     assert "fallback_thread_id" not in result
 
 
@@ -401,25 +426,46 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "direction_ids": ["demo_direction"],
         "conversation_binding_key": "em:demo_direction:innovator",
         "decision_authority": "pro_final",
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
     }
-    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
     accepted = TRANSPORT_VALIDATE.validate(
-        {**canonical, "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"},
+        {**canonical, "operator_thread_id": SINGLETON_THREAD_ID},
         project_root,
     )
-    assert accepted["operator_thread_id"] == "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    assert accepted["operator_thread_id"] == SINGLETON_THREAD_ID
+
+    with pytest.raises(ValueError, match="dispatch_mode=REUSE_SINGLETON"):
+        TRANSPORT_VALIDATE.validate(
+            {
+                **canonical,
+                "dispatch_mode": "CREATE_ON_DEMAND",
+                "operator_thread_id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+            },
+            project_root,
+        )
+
+    with pytest.raises(ValueError, match="does not match the configured project Transport singleton"):
+        TRANSPORT_VALIDATE.validate(
+            {**canonical, "operator_thread_id": "dddddddd-dddd-dddd-dddd-dddddddddddd"},
+            project_root,
+        )
 
 
-def test_validate_request_allows_legacy_transport_without_a_receipt_source(
+def test_validate_request_allows_legacy_transport_without_a_receipt_parent(
     project_root: Path, upload_request: dict[str, object]
 ) -> None:
     legacy = dict(upload_request)
-    legacy.pop("source_thread_id")
+    legacy.pop("parent_thread_id")
     accepted = TRANSPORT_VALIDATE.validate(legacy, project_root)
     assert accepted["workflow_node"] == "legacy"
-    assert accepted["source_thread_id"] is None
+    assert accepted["source_thread_id"] == upload_request["source_thread_id"]
+    assert accepted["parent_thread_id"] is None
     assert accepted["return_receipt_ready"] is False
     assert accepted["return_receipt_thread_id"] is None
 
@@ -470,7 +516,11 @@ def test_validate_request_enforces_canonical_single_body_attachment(
     canonical = {
         **upload_request,
         "source_mode": "single_body_attachment",
-        "operator_thread_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "dispatch_mode": "REUSE_SINGLETON",
+        "operator_reuse_required": True,
+        "operator_model": "gpt-5.6-luna",
+        "operator_thinking": "xhigh",
+        "operator_thread_id": SINGLETON_THREAD_ID,
     }
     canonical.pop("reference_paths")
     accepted = TRANSPORT_VALIDATE.validate(canonical, project_root)
@@ -494,13 +544,18 @@ def test_validate_request_enforces_canonical_single_body_attachment(
     with pytest.raises(ValueError, match="canonical handoff requires source_thread_id"):
         TRANSPORT_VALIDATE.validate(without_source, project_root)
 
+    without_parent = {**canonical}
+    without_parent.pop("parent_thread_id")
+    with pytest.raises(ValueError, match="canonical handoff requires parent_thread_id"):
+        TRANSPORT_VALIDATE.validate(without_parent, project_root)
+
     without_operator = {**canonical}
     without_operator.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires operator_thread_id after create_thread"):
+    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
         TRANSPORT_VALIDATE.validate(without_operator, project_root)
 
 
-def test_bind_records_v3_creator_route_lease_monitor_and_outbox(tmp_path: Path) -> None:
+def test_bind_records_v4_parent_route_lease_monitor_and_outbox(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     args = Namespace(
         registry=registry,
@@ -520,6 +575,7 @@ def test_bind_records_v3_creator_route_lease_monitor_and_outbox(tmp_path: Path) 
         prompt_sha256="a" * 64,
         reference_files_json=json.dumps([{"filename": "REFERENCE_FILES.md", "bytes": 1, "sha256": "b" * 64}]),
         source_thread_id="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        parent_thread_id="cccccccc-cccc-cccc-cccc-cccccccccccc",
         operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=str((tmp_path / "PACKET_MANIFEST.json").resolve()),
@@ -528,20 +584,21 @@ def test_bind_records_v3_creator_route_lease_monitor_and_outbox(tmp_path: Path) 
 
     assert BIND.bind(args) == 0
     record = json.loads(registry.read_text(encoding="utf-8"))["directions"]["demo_direction"]
-    assert record["schema_version"] == 3
+    assert record["schema_version"] == 4
     assert record["tab_lease"]["lifecycle"] == "OPEN"
     assert record["monitor"]["identity_key"] == contract.monitor_identity_key(record)
     assert record["creator_thread_id"] == args.source_thread_id
+    assert record["parent_thread_id"] == args.parent_thread_id
     assert record["operator_thread_id"] == args.operator_thread_id
-    assert record["return_route"] == "CREATOR_SESSION"
-    assert record["return_receipt"]["destination_thread_id"] == args.source_thread_id
-    assert record["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
+    assert record["return_route"] == "PARENT_SESSION"
+    assert record["return_receipt"]["destination_thread_id"] == args.parent_thread_id
+    assert record["return_receipt"]["routing_mode"] == "PARENT_SESSION"
     assert record["return_receipt"]["fallback_enabled"] is False
     assert record["heartbeat"]["status"] == "PENDING"
     assert record["reference_files"][0]["canonical_filename"].endswith("REFERENCE_FILES.md")
 
 
-def test_bind_legacy_without_source_disables_automatic_receipt(tmp_path: Path) -> None:
+def test_bind_legacy_without_parent_disables_automatic_receipt(tmp_path: Path) -> None:
     registry = tmp_path / "registry.json"
     args = Namespace(
         registry=registry,
@@ -560,7 +617,8 @@ def test_bind_legacy_without_source_disables_automatic_receipt(tmp_path: Path) -
         source_mode="upload",
         prompt_sha256="a" * 64,
         reference_files_json="[]",
-        source_thread_id=None,
+        source_thread_id="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        parent_thread_id=None,
         operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=None,
@@ -571,7 +629,8 @@ def test_bind_legacy_without_source_disables_automatic_receipt(tmp_path: Path) -
     record = json.loads(registry.read_text(encoding="utf-8"))["bindings"][args.conversation_binding_key]
     assert "fallback_enabled" not in record
     assert "fallback_thread_id" not in record
-    assert record["source_thread_id"] is None
+    assert record["source_thread_id"] == args.source_thread_id
+    assert record["parent_thread_id"] is None
     assert record["return_receipt"]["required"] is False
     assert record["return_receipt"]["status"] == "BLOCKED"
     assert record["return_receipt"]["receipt_state"] == "RETURN_RECEIPT_BLOCKED"
@@ -599,6 +658,7 @@ def _em_bind_args(tmp_path: Path, request_id: str) -> Namespace:
         prompt_sha256="a" * 64,
         reference_files_json="[]",
         source_thread_id="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        parent_thread_id="cccccccc-cccc-cccc-cccc-cccccccccccc",
         operator_thread_id="bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         packet_id=None,
         packet_manifest=None,
@@ -646,8 +706,9 @@ def test_next_round_preserves_delivered_legacy_receipt_only_in_history(tmp_path:
         )
     first.registry.write_text(json.dumps(registry), encoding="utf-8")
 
-    second = _em_bind_args(tmp_path, "req-current-creator-route")
+    second = _em_bind_args(tmp_path, "req-current-parent-route")
     second.source_thread_id = "cccccccc-cccc-cccc-cccc-cccccccccccc"
+    second.parent_thread_id = "ffffffff-ffff-ffff-ffff-ffffffffffff"
     second.operator_thread_id = "dddddddd-dddd-dddd-dddd-dddddddddddd"
     assert BIND.bind(second) == 0
 
@@ -657,7 +718,8 @@ def test_next_round_preserves_delivered_legacy_receipt_only_in_history(tmp_path:
     assert historical["fallback_thread_id"] == "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
     assert current["source_thread_id"] == second.source_thread_id
     assert current["operator_thread_id"] == second.operator_thread_id
-    assert current["return_receipt"]["routing_mode"] == "CREATOR_SESSION"
+    assert current["parent_thread_id"] == second.parent_thread_id
+    assert current["return_receipt"]["routing_mode"] == "PARENT_SESSION"
     assert current["return_receipt"]["fallback_enabled"] is False
     assert "fallback_thread_id" not in current
     assert "fallback_thread_url" not in current
@@ -735,7 +797,7 @@ def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> No
         "Do not request\naction-time confirmation before upload or immediately before Send",
         "does not extend to any other local file, destination, replacement packet, or second",
         "rejected before acceptance and produced no external effect",
-        "`source_thread_id` is the sole completion",
+        "`parent_thread_id` is the sole completion",
         "`fallback_enabled=false`",
         "a rejection must not cause a second send",
         "`RETURN_RECEIPT_BLOCKED`",

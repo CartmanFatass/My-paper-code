@@ -1,0 +1,35 @@
+{
+  "id": "20260904-egrcr-001",
+  "created": "2026-09-04 03:56 PDT",
+  "direction": "expressibility_gated_renewal_credit_relay",
+  "tier": "object",
+  "kind": "decision",
+  "title": "(a) one-seed 128-update finite-resource censored-substitution rung",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 03:56 PDT). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "one-seed 128-update finite-resource censored-substitution rung",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "three seeds and budget curve immediately",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "reopen the closed exact-population search",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/expressibility_gated_renewal_credit_relay/EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_SCIENCE_CARD_20260904.md#object-tier-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

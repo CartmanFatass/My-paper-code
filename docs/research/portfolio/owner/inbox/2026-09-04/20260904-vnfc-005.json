@@ -1,0 +1,35 @@
+{
+  "id": "20260904-vnfc-005",
+  "created": "2026-09-04T10:19:53Z",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "accept complete A/RECON `CH-D / HEADROOM_BRACKET_UNRESOLVED` result without rerun",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T10:19:53Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "accept complete A/RECON CH-D result",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "quarantine for unavailable RSS/exit code",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "rerun",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_R01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

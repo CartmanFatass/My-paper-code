@@ -4,6 +4,12 @@ Date: 2026-09-04
 
 Decision: `FINAL / OWNER_DIRECT / ROOT_INTEGRATED`
 
+Supersession: current-rules item 5 was replaced later on 2026-09-04 by
+`2026-09-04-singleton-transport.md`; it is retained below only as the decision state at this
+record's timestamp. New handoffs reuse the configured Luna/xhigh singleton and do not create a
+task. Result-compute placement is additionally governed by
+`2026-09-04-remote-first-compute-routing.md`.
+
 ## Provenance
 
 The owner instructed Root to clear the identified specification drift and then resume automatic
@@ -25,8 +31,8 @@ records or old provider facts.
    separation, registration, or investment action takes effect before owner ratification.
 5. Every Pro handoff creates one Transport operator task on demand. The provider conversation is
    bound only by its stable `conversation_binding_key`; `operator_thread_id` is a per-handoff
-   runtime fact; the one completion or terminal-blocker receipt returns only to the creator
-   `source_thread_id`.
+   runtime fact; the operator is created with `gpt-5.6-luna` / `high`; and the one completion or
+   terminal-blocker receipt returns only to the handoff author's declared `parent_thread_id`.
 6. The 2026-09-03 research pause is lifted. The active Codex heartbeat may resume and coordinate
    research from repository state.
 

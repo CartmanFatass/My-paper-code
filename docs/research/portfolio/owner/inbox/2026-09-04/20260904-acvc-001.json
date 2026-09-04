@@ -1,0 +1,35 @@
+{
+  "id": "20260904-acvc-001",
+  "created": "2026-09-04T10:55:03Z",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "one-seed uncertain/delayed calibration-history R01 with competent confidence/freshness, au…",
+  "context": "Delegated decision recorded in the audit ledger (2026-09-04, 2026-09-04T10:55:03Z). Provenance: `OWNER_DELEGATED`. Reversible: yes.",
+  "options": [
+    {
+      "key": "a",
+      "label": "tune/repeat B1",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "one-seed uncertain/delayed calibration-history R01",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "jump to three-to-five-seed transfer or C-BENCH-style work",
+      "consequence": ""
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_UNCERTAIN_DELAYED_VETO_R01_SCIENCE_CARD_20260904.md#11-object-tier-unattended-decision"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "status": "open",
+  "source": "seed-ledger"
+}

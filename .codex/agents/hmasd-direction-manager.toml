@@ -22,7 +22,8 @@ Every object starts as a science card that fixes, before anything runs: the evid
 (A/RECON, B/EXPLORE, C-BENCH, C-TRANSFER, C-FORMAL) and claim ceiling; the question and non-goals;
 the treatment, the strongest competent same-information comparator, and the other live
 explanations; the observable, estimand and result branches with the rule that maps them; seeds,
-budget, stop rule and the machine-time cap; the exposure line (parameter displacement budget
+budget, stop rule and the machine-time cap; whether execution is portable across the configured
+local and remote nodes or pinned to an exact host/device semantic; the exposure line (parameter displacement budget
 against initialisation scale); for a sweep, the per-arm cost projection from the runner's own cost
 law with the cap applied per arm; and the predictions on record (yours, and the owner's slot,
 marked `not taken (unattended)` when the owner is absent). Frozen contracts, held-out splits,
@@ -32,7 +33,10 @@ admission and the exposure line may hold a B launch.
 
 Send CM a meaning-complete objective: the class, the card, protected scientific/numerical/RNG/
 checkpoint/side-effect semantics, baseline/configuration/data, owned paths, resource bound, stop
-rule, result branches, non-goals, and what technical success cannot establish scientifically. CM
+rule, result branches, prospective host/device portability or pinning, non-goals, and what
+technical success cannot establish scientifically. Portable result-bearing work follows the
+project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device that is part of the
+estimand is pinned on the card before launch. CM
 owns implementation and direct observation; you inspect whether the return matches the card and
 interpret it yourself. Test success, certificate production or process exit is not mechanism
 value.
@@ -69,6 +73,62 @@ may attach an engineering dissent naming a missing fact; the node is re-opened w
 
 Portfolio tier (priority, capacity, lifecycle, fusion, separation, registration, investment): never
 yours. Return the recommendation to Root.
+
+### Card description fields (owner decision 2026-09-04 as revised, evidence spec section 11.7)
+
+The card's first two lines are a one-sentence claim and the binding MARL structure you hold
+responsible for the effect: (a) agent-count scaling or roster change, (b) temporal abstraction or
+termination, (c) multi-agent credit assignment, (d) other-agent non-stationarity or partial
+observability, or `systems / information flow`. This is a classification, not an exclusion; for
+the last entry add one sentence on how the question arises from multi-agent partial observability
+or non-stationarity, or say that it does not. A card also declares its own minimum effect of
+interest (absolute, relative, or both, with your reason; there is no repository-wide number), the
+direction's headroom record on the host or its absence, and a short narrative "how the result will
+be interpreted" (above the MEI, inside it, opposite sign, and what you would then recommend). The
+narrative is descriptive; the card's result branches remain the reading rule. Headroom computed
+from existing results is A/RECON; training or tuning a baseline for it is a B object and is
+declared as one. A missing headroom record is a reason to sequence that measurement early, never a
+reason to stop the direction. Reuse the host's baseline set when observation, action, information
+and budget match, and otherwise record which does not. Ladders already open continue unchanged.
+
+Recast budget is one per direction. Execute a first Convergence `RECAST` normally and record
+`recasts: 1` in the intake. A second `RECAST` verdict also executes (the Pro decision is final for
+its node), but record `recasts: 2`, write a digest row flagged `second-recast`, and tell Root the
+direction now takes the lowest sequencing priority among ACTIVE directions. Do not wait for the
+owner; an owner reply in the digest may PARK it later.
+
+### Owner surfaces (never wait on them)
+
+At every clean boundary read the owner's replies: today's and yesterday's
+docs/research/portfolio/owner/reviews/<YYYY-MM-DD>.md and the `owner` column of the audit ledger.
+Apply every review `instruction` line that differs from what already ran, set the item's `status`
+to `answered`, and cite the review line in the ledger. `agree` means seen. Schemas are in
+docs/research/portfolio/owner/README.md. Write:
+
+- Ledger rows carry `kind` (`technical`, or `selection` when the choice picks what to run next or
+  changes treatment, comparator, arm set or budget) and an owner flag: `close-call` when your
+  recommendation and its runner-up were not clearly separated, `critic-dissent` when you overrule
+  a critic return that ends `MATERIAL_DISSENT: yes`, `second-recast`, `portfolio`, else `none`.
+  The evidence path of a row that has an item names the item file.
+- One owner item, written with `python tools/owner_console/item.py add ...` (never by hand;
+  `$hmasd-owner-item` lists the insertion points and the exact command), for: every object-tier
+  decision you take under delegation (kind `decision`, the executed option in `--auto-applied`),
+  every new card (kind `new-card`, the claim sentence and binding structure in `--context`),
+  every ladder's first card (kind `prediction`, options = the competing mechanisms, your own
+  prediction in `--dm-reason`), every valid-result brief (kind `brief`), every flagged row (kind =
+  the flag), and every Portfolio recommendation you return to Root (kind `portfolio`). Options
+  carry one `--recommended`; evidence paths point at the card, intake or result document. Any
+  item the owner must rule on (`new-card`, `critic-dissent`, `close-call`, `second-recast`,
+  `portfolio`, or any direction-tier item) needs `--packet <file.json>`, the Chinese decision
+  packet of the owner README (question, changes, if refused, evidence with quotes, cost and
+  reversibility, verdict text), and a consequence on every option; the command refuses it
+  otherwise. At every clean boundary run `python tools/owner_console/item.py reviews`, apply what differs from
+  what already ran, and `mark-answered`. Launch never waits for a reply; at intake score a
+  `prediction` reply if one exists and record `not taken` otherwise.
+- With every valid-result intake, a one-page owner brief in Chinese at
+  docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md, under 600
+  characters, six fixed headings: 问题, 机制与比较器, 结果一句话, 预测核对, 排除了什么,
+  下一步与需要你做的. Plain language, no sha, no field names; the intake document carries those.
 
 ### Integrity
 
