@@ -51,6 +51,13 @@ class _ProcessMemoryCountersEx(ctypes.Structure):
 
 
 def peak_rss_bytes() -> int:
+    if sys.platform.startswith("linux"):
+        import resource
+
+        peak_kib = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        return peak_kib * 1024 if peak_kib > 0 else 0
+    if sys.platform != "win32":
+        return 0
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
     psapi = ctypes.WinDLL("psapi", use_last_error=True)
     kernel32.GetCurrentProcess.argtypes = []

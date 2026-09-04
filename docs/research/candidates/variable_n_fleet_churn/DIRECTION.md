@@ -31,26 +31,28 @@ conformance defect and is not independent confirmation.
 
 ### Controller-headroom reconnaissance (2026-09-04; current)
 
-The valid complete `VNFC-CONTROLLER-HEADROOM-A-RECON-R01` result on the actual first-primary R02
-`heldout-N7` panel is `CH-D / HEADROOM_BRACKET_UNRESOLVED`. Against unchanged `BCRH-PERSIST`, the
-deterministic full-tape `K=256` beam plus exact persistent-command maximum gives aggregate mean
-headroom lower bound `7/960`, zone-1 `0`, and zone-2 `7/480`; only zone 2, row 3 has a positive
-witness (`7/60`). Exact physical upper-bound means remain `3299/4800`, `183/320`, and `3853/4800`.
+The valid complete sequential result
+`VNFC-CONTROLLER-HEADROOM-A-RECON-MEMORY-BOUNDED-K1024-R02` is
+`MB1024-D / BOUNDED_SEARCH_REMAINS_UNRESOLVED`. On the identical first-primary R02
+`heldout-N7` panel, exact K=1024 improves accepted K=256 in one world, zone 1 row 5, by `1/8`, but
+only reaches PERSIST/BCRH. It adds no lower-bound headroom. Aggregate, zone-1, and zone-2 means
+remain `7/960`, `0`, and `7/480`; exact physical upper-bound means remain `3299/4800`, `183/320`,
+and `3853/4800`. Zone 2 row 3 remains the sole individual material witness (`7/60`).
 
-Bounded conclusion: BCRH is not pointwise optimal on the panel, but this search neither establishes
-material panel-wide controller headroom nor establishes host saturation. The strongest support for
-unused headroom is the one legal path that doubles failed-zone delivery from `14/120` to `28/120`;
-the strongest contradiction is no witnessed improvement in the other fifteen worlds and zero
-zone-1 lower-bound headroom. The surviving alternative is delayed benefit pruned by the width-256
-beam.
+Bounded conclusion: fourfold width resolves one predecessor pruning loss but does not resolve the
+panel-wide headroom bracket. The strongest support for a width effect is the zone-1 row-5 recovery;
+the strongest contradiction is that it merely ties the exact controls, no new `L` appears, and
+zone 1 remains zero. The surviving alternative is not another width: the cumulative-service rank,
+current host/population, or failed-zone estimand may leave the unknown optimum unidentified, while
+the physical upper bounds remain intentionally loose.
 
-The reversible next discriminator is a prospectively carded `K=1024` version of the same bracket,
-selected at object tier because its conservative runner-derived wall projection is `723.80 s`
-under the unchanged 2,700-second cap. It is not registered or launched here: a result-blind RSS
-pilot must first admit the wider materialized beam. Failure of that resource disposition requires
-a direction-tier recast question through the convergence node, not a scientific negative. See
-`VNFC_CONTROLLER_HEADROOM_A_RECON_R01_RESULT_EVIDENCE_20260904.md` and
-`VNFC_CONTROLLER_HEADROOM_A_RECON_R01_INTAKE_20260904.md`.
+The frozen branch returns the family to `em:variable_n_fleet_churn:convergence` for
+`RECAST_HOST_OR_ESTIMAND`. No MAPR ladder or wider K is opened locally. The parallel Portfolio A1
+headroom census is also not satisfied by this object because its full-tape reference is
+information-advantaged and its controls are not a tuned generic learner; that gap is handled by a
+separate A/RECON card without repeating R02 or applying an unratified MEI/lifecycle threshold. See
+`VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_RESULT_EVIDENCE_20260904.md` and
+`VNFC_CONTROLLER_HEADROOM_A_RECON_MEMORY_BOUNDED_K1024_R02_INTAKE_20260904.md`.
 
 ### Section 11 recast (2026-09-03)
 
