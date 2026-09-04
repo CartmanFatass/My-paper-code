@@ -1,0 +1,74 @@
+{
+  "id": "20260904-frrie-017",
+  "created": "2026-09-04T16:50:43-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "r04 原调用链 A01 诊断卡",
+  "context": "一句话主张：一次有界重建可以检查 r04 序列化错误是否再现并保留异常现场，不能证明算法效果。绑定结构：systems / information flow；问题发生在多智能体部分观察学习器的地址化输入执行链。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按固定原调用顺序执行一次有界诊断，算法与原科学卡不变。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "停止尚未接受的诊断调用，保留原失败与未解状态。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "在下一个安全边界依批改修改诊断范围，再考虑下一次调用。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "缺失的异常现场是选择针对性修复所需的最小新观察。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r04-reconstruction-a01-selection",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "是否接受一次最多三十分钟的 r04 原调用链诊断，在异常时保留缺失的更新号、地址和字段状态？",
+    "changes_if_approved": [
+      {
+        "target": "FRRIE 当前技术下一步",
+        "from": "r04 已失败，原因未确认，尚无新调用",
+        "to": "按新 A 类卡执行一次原调用链诊断，不改变学习比较或方向状态"
+      }
+    ],
+    "if_refused": "停止尚未接受的新诊断调用，保留全部原证据；r04 仍无科学结果，方向生命周期与优先级不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R04_TERMINAL_INTAKE_20260904.md",
+        "quote": "The log does not retain the failing update/address, dataclass field contents or process-local state.",
+        "why": "缺少这些信息，继续同样运行不能区分根因；只在失败现场读取它们是具体的新诊断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md",
+        "quote": "A matching exception reproduces a signature and operation, not the missing original process state or its cause.",
+        "why": "即使错误再现，也不能自动证明相同根因；不再现只能说明本次范围内未看到。"
+      }
+    ],
+    "uncertainty": [
+      "原失败时的进程状态不可恢复，重建过程可能不再出现同样错误。",
+      "旧 attempt02 的不同异常仍独立未解，不能推定共同原因。",
+      "调试器终止行为需以一个纯标准库检查核对，避免第二次执行脚本主体。"
+    ],
+    "cost": {
+      "compute": "一次诊断最多 1800 秒，终止宽限最多 5 秒；此前失败用时 733 秒；另有一次不足一分钟的调试器退出边界检查。",
+      "owner_time": "约一分钟阅读；循环不等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐一次保留完整调用顺序的有界诊断，只读取异常现场，保持算法、随机数、精度、种子和比较器不变。",
+    "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md"
+  }
+}

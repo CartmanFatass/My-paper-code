@@ -1,0 +1,38 @@
+{
+  "id": "20260904-frrie-016",
+  "created": "2026-09-04T16:50:20-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "r04 先做一次有现场记录的有界诊断",
+  "context": "所有者恢复研究后，r04 留存证据仍缺少失败更新号和地址，CM 只读核对源码与旧运行一致。选择一次最多 1800 秒的完整原调用链诊断，异常时读取现场；不直接开启 attempt05，不改学习配置，不把错误当科学结果。",
+  "options": [
+    {
+      "key": "a",
+      "label": "执行有界 A 类诊断",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "直接重跑 R02 学习尝试",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "保留旧执行暂停",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "诊断补上缺失的可判别现场，且保留原调用顺序和全部计算语义。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SELECTION_INTAKE_20260904.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r04-reconstruction-a01-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
