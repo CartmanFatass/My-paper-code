@@ -344,7 +344,10 @@ def _canonical_key(row: Mapping[str, Any], fields: Sequence[str]) -> tuple[Any, 
     return tuple(values)
 
 
-def _validate_rows(table: str, value: object, *, allow_test_only: bool) -> list[Mapping[str, Any]]:
+def _validate_rows(
+    table: str, value: object, *, allow_test_only: bool,
+    allow_pending_audits: bool = False,
+) -> list[Mapping[str, Any]]:
     if not isinstance(value, list):
         raise MetricsArtifactError(f"{table} must be a list of lossless raw rows")
     if not value and not allow_test_only:
@@ -374,9 +377,22 @@ def _validate_rows(table: str, value: object, *, allow_test_only: bool) -> list[
                 raise MetricsArtifactError("formal typed audit row fields differ")
             table_authority = row["authority_type"] == "CANONICAL_TABLE_AUTHORITY"
             direct_authority = str(row["authority_type"]).startswith("DIRECT_RAW_FACT")
-            if "PENDING" in str(row["binding_status"]):
+            # Table-authority binding is a two-pass construction: the
+            # preliminary pass encodes and materializes the fourteen authority
+            # tables so that finalize_audit_table_bindings can reread their
+            # bytes, and only then can a CANONICAL_TABLE_AUTHORITY row become
+            # BOUND_MATERIALIZED_TABLE_REREAD.  Demanding that state on the
+            # preliminary pass required the output of a step that had not run
+            # yet, so no formal assembly could reach the binding at all.  The
+            # exemption is scoped to exactly the rows that step binds: the
+            # audits table is excluded from the preliminary materialization, and
+            # the published payloads come from the second pass, which is strict.
+            # DIRECT_RAW_FACT rows are bound before either pass and stay strict
+            # in both.
+            unbound_table_row = allow_pending_audits and table_authority
+            if "PENDING" in str(row["binding_status"]) and not unbound_table_row:
                 raise MetricsArtifactError("formal typed audit remains pending/unbound")
-            if table_authority and (
+            if table_authority and not unbound_table_row and (
                 row["binding_status"] != "BOUND_MATERIALIZED_TABLE_REREAD"
                 or row["observed"] is None or row["actual_sha256"] is None
             ):
@@ -535,6 +551,7 @@ def prepare_metrics_only_tables(
     formal_invocation_keys: Sequence[
         tuple[str, int, int, int, int, int | None, int | None]
     ] | None = None,
+    allow_pending_audits: bool = False,
     _transaction_witness: object = None,
 ) -> PreparedMetricsTables:
     """Encode canonical table bytes without touching the filesystem."""
@@ -544,7 +561,10 @@ def prepare_metrics_only_tables(
     if not allow_test_only:
         _require_transaction_witness(_transaction_witness)
     validated = {
-        name: _validate_rows(name, tables[name], allow_test_only=allow_test_only)
+        name: _validate_rows(
+            name, tables[name], allow_test_only=allow_test_only,
+            allow_pending_audits=allow_pending_audits,
+        )
         for name in TABLE_KEY_FIELDS
     }
     if not allow_test_only:
@@ -1030,11 +1050,27 @@ def _b0_leaf_rows(
         source_relative_path.startswith("workers/")
         and source_relative_path.endswith("/result.json")
     ):
+        # A reviewed B0 worker result carries engine raw evidence
+        # (``engine_evidence_schema: cbsc_omrc_b01_engine_raw_evidence_v1``):
+        # its ``records`` holds evaluation_actions / evaluation_tapes /
+        # rollout_observations and has no ``diagnostics`` key at all.  The
+        # evaluator-diagnostics view lives only in ``manifest.json``, under
+        # ``arm_records[i]/records/diagnostics/evaluation``, one per arm, and
+        # that branch above remains strict.  Requiring the same subtree here
+        # demanded a shape B0 has never written, so it refused every formal B1
+        # publication with "reviewed B0 worker evaluator subtree is absent".
+        #
+        # A worker result that does carry the subtree is still indexed; one that
+        # does not contributes no leaf rows rather than refusing.  The census
+        # therefore comes from the reviewed manifest, whose bytes are bound by
+        # B0_REVIEWED_AUTHORITY, and the emptiness/duplication check in
+        # build_b0_nonpolarity_leaf_index still applies to the result.
         try:
             evaluation = value["records"]["diagnostics"]["evaluation"]
-        except (KeyError, TypeError) as exc:
-            raise MetricsArtifactError("reviewed B0 worker evaluator subtree is absent") from exc
-        roots.append(("/records/diagnostics/evaluation", evaluation))
+        except (KeyError, TypeError):
+            evaluation = None
+        if evaluation is not None:
+            roots.append(("/records/diagnostics/evaluation", evaluation))
     output: list[dict[str, Any]] = []
     flags = {
         "scientific_eligible": False,

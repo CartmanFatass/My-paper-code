@@ -453,10 +453,10 @@ def _shared_policy_tables() -> tuple[dict[str, object], dict[str, object]]:
         "evaluator_decision_truth": truth,
         "motif_twin_index": [{
             "run_order": 0, "seed": 21101, "motif_family": 0,
-            "tape_id": 0, "pair_id": "pair-0", "member_role": "A",
+            "tape_id": 0, "pair_id": "21101:0:0", "member_role": "A",
         }, {
             "run_order": 0, "seed": 21101, "motif_family": 0,
-            "tape_id": 0, "pair_id": "pair-0", "member_role": "B",
+            "tape_id": 0, "pair_id": "21101:0:0", "member_role": "B",
         }],
     }
     return shared, {

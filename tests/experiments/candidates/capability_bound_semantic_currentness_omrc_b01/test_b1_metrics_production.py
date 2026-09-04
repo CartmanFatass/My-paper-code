@@ -599,7 +599,8 @@ def test_unified_test_profile_runs_canonical_a_b_c_and_publishes_15_tables(
     training = training_raw_slice()
     for field in (
         "training_records", "rollouts", "slice_counts", "evaluations",
-        "mechanical_direct",
+        "mechanical_direct", "final_counters", "final_model_parameter_digest",
+        "final_optimizer_digest", "final_minibatch_order_digest",
     ):
         groups[0][0][field] = deepcopy(training[field])
     groups[0][0]["scientific_branch"] = None

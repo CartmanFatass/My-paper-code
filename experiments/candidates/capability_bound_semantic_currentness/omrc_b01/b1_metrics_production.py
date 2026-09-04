@@ -549,6 +549,27 @@ def stage_pro_decision_evidence(
     return inventory
 
 
+def _b0_record_is_indexed(relative: str) -> bool:
+    """The only reviewed-B0 files whose CONTENT the nonpolarity index reads.
+
+    ``_b0_leaf_rows`` indexes exactly ``manifest.json`` and
+    ``workers/**/result.json``; every other file yields no leaf rows, so parsing
+    it here never affected the published index.  The reviewed B0 root also
+    legitimately contains the preflight's raw receipt siblings
+    (``.<name>.raw-<hex>.json``), which ``scripts/hmasd_resource_preflight.py``
+    writes pretty-printed with ``indent=2`` and which are therefore never
+    canonical JSON.  Requiring canonical bytes of every ``.json`` file refused
+    every formal B1 publication against that root, with "B0 worker result bytes
+    are not canonical JSON", although the offending files carry no indexed
+    content.  Their bytes remain fully covered by the byte_count / sha256 /
+    copied_inventory_sha256 checks above, which are unchanged.
+    """
+
+    return relative == "manifest.json" or (
+        relative.startswith("workers/") and relative.endswith("/result.json")
+    )
+
+
 def stage_reviewed_b0_evidence(
     *, source_root: Path, staging_root: Path,
     expected: Mapping[str, Any], allowed_root: Path, test_only: bool,
@@ -614,7 +635,7 @@ def stage_reviewed_b0_evidence(
     json_records: dict[str, Mapping[str, Any]] = {}
     for _, relative_path, payload in snapshots:
         relative = relative_path.as_posix()
-        if not relative.endswith(".json"):
+        if not _b0_record_is_indexed(relative):
             continue
         try:
             value = json.loads(payload.decode("ascii"))
@@ -1720,7 +1741,13 @@ def _assemble_and_publish_b1_metrics(
     )
     tables = {
         "tape_transitions": shared["tape_transitions"],
-        "evaluator_decision_truth": shared["evaluator_decision_truth"],
+        # The audit authority for this table is built from ``training_shared``,
+        # which the test-only profile narrows to two splits of tape 0.
+        # Publishing the unnarrowed table while auditing the narrowed one made
+        # the two disagree, so finalize_audit_table_bindings refused with
+        # "materialized table reread binding differs: evaluator_decision_truth".
+        # In the formal profile training_shared IS shared, so this is a no-op.
+        "evaluator_decision_truth": training_shared["evaluator_decision_truth"],
         "policy_decisions": policy_tables["policy_decisions"],
         "per_tape_curves": policy_tables["per_tape_curves"],
         "motif_twin_index": shared["motif_twin_index"],
@@ -1750,6 +1777,9 @@ def _assemble_and_publish_b1_metrics(
     preliminary = prepare_metrics_only_tables(
         tables, allow_test_only=test_only,
         formal_invocation_keys=None if test_only else invocation_keys,
+        # The audits table is not materialized from this pass, and its rows
+        # cannot be bound until the authority tables below have been reread.
+        allow_pending_audits=True,
         _transaction_witness=None if test_only else transaction,
     )
     authority_table_names = tuple(name for name in TABLE_KEY_FIELDS if name != "audits")

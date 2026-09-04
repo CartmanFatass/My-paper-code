@@ -482,6 +482,34 @@ def validate_bound_admission(
     return bound
 
 
+def _admission_failure_detail(
+    completed: "subprocess.CompletedProcess[str]",
+) -> str:
+    """Say why the admission was refused, using the preflight's own reasons.
+
+    ``scripts/hmasd_resource_preflight.py`` returns 6 for two different things.
+    A ``ValueError`` refusal prints to stderr, but the ordinary floor refusal
+    writes the receipt, prints the payload to STDOUT and returns 6 with an empty
+    stderr.  Reporting only stderr therefore produced "exit 6: " with no reason
+    at all, while ``failure_reasons`` sat in the captured stdout - which is what
+    happened to the fifth B1 attempt, refused for
+    "available physical memory is below 4 GiB" without saying so.
+    """
+
+    detail = (completed.stderr or "").strip()
+    reasons: object = None
+    try:
+        payload = json.loads(completed.stdout or "")
+    except (json.JSONDecodeError, TypeError):
+        payload = None
+    if isinstance(payload, Mapping):
+        reasons = payload.get("failure_reasons")
+    if isinstance(reasons, (list, tuple)) and reasons:
+        joined = "; ".join(str(reason) for reason in reasons)
+        return f"{detail}: {joined}" if detail else joined
+    return detail
+
+
 def run_memory_preflight(
     receipt_path: Path, *, attempt_id: str, arm: str, seed: int,
     implementation_commit: str, source_conformance_sha256: str,
@@ -500,7 +528,8 @@ def run_memory_preflight(
     completed = subprocess.run(command, capture_output=True, text=True, shell=False, timeout=120)
     if completed.returncode != 0:
         raise B1OrchestrationError(
-            f"B1 memory admission failed with exit {completed.returncode}: {completed.stderr.strip()}"
+            f"B1 memory admission failed with exit {completed.returncode}: "
+            f"{_admission_failure_detail(completed)}"
         )
     try:
         raw = json.loads(raw_path.read_text(encoding="utf-8"))

@@ -915,6 +915,9 @@ def _raw_facts(
     }
 
 
+from .b1_metrics_artifact import _canonical_key  # canonical publication ordering
+
+
 def _table_audit_rows(
     authority_tables: Mapping[str, list[Mapping[str, Any]]]
 ) -> list[dict[str, Any]]:
@@ -929,8 +932,20 @@ def _table_audit_rows(
             raise B1MetricsTrainingAssemblyError(
                 f"audit authority key fields differ: {table}"
             )
-        ordered = sorted(source, key=lambda row: tuple(row[field] for field in key_fields))
-        keys = [tuple(row[field] for field in key_fields) for row in ordered]
+        # Order exactly as the publication orders it.  canonicalize_metrics_table_order
+        # and _validate_rows both sort by _canonical_key, which decodes composite
+        # and categorical key values -- notably a string ``pair_id`` such as
+        # "21101:0:10", which sorts numerically there but lexically as a raw
+        # string.  motif_twin_index is the one authority table carrying such a
+        # key, so sorting raw tuples here produced an expected_sha256 over a byte
+        # order the publication never writes, and every formal assembly refused
+        # with "materialized table reread binding differs: motif_twin_index".
+        # The reported first/last key stay RAW, because
+        # _materialized_audit_authority_records reads them straight out of the
+        # materialized row.
+        ordered = sorted(source, key=lambda row: _canonical_key(row, key_fields))
+        keys = [_canonical_key(row, key_fields) for row in ordered]
+        raw_keys = [tuple(row[field] for field in key_fields) for row in ordered]
         if len(keys) != len(set(keys)):
             raise B1MetricsTrainingAssemblyError(
                 f"audit authority table key duplicated: {table}"
@@ -944,7 +959,7 @@ def _table_audit_rows(
             "source_table": table,
             "source_key_range": {
                 "key_fields": list(key_fields),
-                "first_key": list(keys[0]), "last_key": list(keys[-1]),
+                "first_key": list(raw_keys[0]), "last_key": list(raw_keys[-1]),
             },
             "source_raw_slice": None, "fact_name": None,
             "expected": {"row_count": len(ordered)}, "observed": None,
