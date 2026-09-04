@@ -198,6 +198,10 @@ P = 2 × (t_native_mission × 1,154
     + 60 seconds
 ```
 
+| technical smoke | `t_native_mission` | native missions | `t_adamw_step` | AdamW steps | `t_candidate_score` | candidate scores | `P` | cap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `2026-09-04 A01 toy` | `0.002741849995800294 s` | `1,154` | `0 s` | `0` | `0 s` | `0` | `66.32818979030708 s` | `1,800 s` |
+
 No numeric projection exists at freeze. The scientific invocation is not started while that row
 is absent or above `1,800 s`; its hard observed cap is also `1,800 s`. Failed admission, excessive
 projection or a cap stop has no scientific polarity. The smoke is technical only: it must use toy
