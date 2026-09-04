@@ -1,0 +1,83 @@
+{
+  "id": "20260904-folr-010",
+  "created": "2026-09-04T15:23:20-07:00",
+  "direction": "vap_folr_core",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "N3 下一判别建议：考虑已有交接状态来源对象",
+  "context": "这是返回 Root 的下一对象建议，没有自动投资或生命周期变更。本次掩码差异很小且通用基线已高；已有交接状态来源对象能回答另一具名机制，但必须先解决其自己的技术依赖。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "ratify the proposal",
+      "consequence": "Root 在既有 N3 议程内考虑交接状态来源对象，按其技术边界选择下一小步。"
+    },
+    {
+      "key": "refuse",
+      "label": "refuse",
+      "consequence": "保留本次结果，由 Root 选择其他明确问题，不改变生命周期。"
+    },
+    {
+      "key": "amend",
+      "label": "amend per the comment",
+      "consequence": "依照新建议修订下一对象提议，保留本次证据原意。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": null,
+  "dm_reason": "下一个对象应改变判别问题，已有来源对照比原样重复掩码更有信息。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L237",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否支持把已注册的交接状态来源问题作为 N3 下一候选，而不原样重复这次状态掩码实验？",
+    "changes_if_approved": [
+      {
+        "target": "Root 对 N3 下一小步的选择",
+        "from": "本次状态掩码实验已完成，尚未选择下一对象",
+        "to": "优先考虑已有 RETAIN、COPY、SHADOW 问题及其具名技术依赖；不在本卡直接启动"
+      }
+    ],
+    "if_refused": "保留已完成结果和可复用通用比较器，由 Root 选择已接受议程内的其他明确问题；不修改任何方向生命周期。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md",
+        "quote": "Both learned arms attain mean final STALE_LOAD return `0.98828125`.",
+        "why": "当前主比较已接近该环境上限，原样重复缺少新判别问题。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+        "quote": "The next object uses three-to-five independent seeds on a small predeclared first-valid-trigger panel and compares RETAIN, COPY, and SHADOW under the same checkpoints and future tapes.",
+        "why": "现有注册问题可以区分状态来源，避免把 N3 限制在记忆是否被清空。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "quote": "C03 reached its terminal technical rule when the remote sparse checkout omitted the frozen test (`0` collected); no cost or science ran, the unaccepted code was quarantined, and the direction is queued behind that named checkout dependency.",
+        "why": "此对象尚有自己的技术依赖，不能直接使用未接受实现或把技术缺失解释成结果。"
+      },
+      {
+        "path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md",
+        "quote": "Three seeds, one scalar host and one update budget cannot establish exact equivalence or close the broader state-retention/reconstruction agenda.",
+        "why": "本次小差异只限制本次掩码主张，不能作为关闭整条研究路线的依据。"
+      }
+    ],
+    "uncertainty": [
+      "交接状态来源对象的技术修复成本尚未确定。",
+      "新建多步恢复家族仍需相应方向层决策；本提议不重开任何旧 C 家族。"
+    ],
+    "cost": {
+      "compute": "本次正式运行约四十秒，开发小样本约两秒；下一对象成本仍需自己的测量。",
+      "owner_time": "可异步回应，当前完成结果与其它路线继续推进。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "The next useful N3 discriminator is state-source value at an actual handover, separating RETAIN, COPY and SHADOW rather than another mask repeat; resolve the already-registered DISH B01 technical dependency before scientific use.",
+    "source": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md"
+  }
+}

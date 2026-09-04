@@ -1,0 +1,19 @@
+{
+  "question": "是否支持把已注册的交接状态来源问题作为 N3 下一候选，而不原样重复这次状态掩码实验？",
+  "changes_if_approved": [
+    {"target": "Root 对 N3 下一小步的选择", "from": "本次状态掩码实验已完成，尚未选择下一对象", "to": "优先考虑已有 RETAIN、COPY、SHADOW 问题及其具名技术依赖；不在本卡直接启动"}
+  ],
+  "if_refused": "保留已完成结果和可复用通用比较器，由 Root 选择已接受议程内的其他明确问题；不修改任何方向生命周期。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md", "quote": "Both learned arms attain mean final STALE_LOAD return `0.98828125`.", "why": "当前主比较已接近该环境上限，原样重复缺少新判别问题。"},
+    {"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md", "quote": "The next object uses three-to-five independent seeds on a small predeclared first-valid-trigger panel and compares RETAIN, COPY, and SHADOW under the same checkpoints and future tapes.", "why": "现有注册问题可以区分状态来源，避免把 N3 限制在记忆是否被清空。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/portfolio/PORTFOLIO.md", "quote": "C03 reached its terminal technical rule when the remote sparse checkout omitted the frozen test (`0` collected); no cost or science ran, the unaccepted code was quarantined, and the direction is queued behind that named checkout dependency.", "why": "此对象尚有自己的技术依赖，不能直接使用未接受实现或把技术缺失解释成结果。"},
+    {"path": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md", "quote": "Three seeds, one scalar host and one update budget cannot establish exact equivalence or close the broader state-retention/reconstruction agenda.", "why": "本次小差异只限制本次掩码主张，不能作为关闭整条研究路线的依据。"}
+  ],
+  "uncertainty": ["交接状态来源对象的技术修复成本尚未确定。", "新建多步恢复家族仍需相应方向层决策；本提议不重开任何旧 C 家族。"],
+  "cost": {"compute": "本次正式运行约四十秒，开发小样本约两秒；下一对象成本仍需自己的测量。", "owner_time": "可异步回应，当前完成结果与其它路线继续推进。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "The next useful N3 discriminator is state-source value at an actual handover, separating RETAIN, COPY and SHADOW rather than another mask repeat; resolve the already-registered DISH B01 technical dependency before scientific use.",
+  "source": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md"
+}

@@ -1,0 +1,1080 @@
+{
+  "object": "N3-FOLR-ROUTING-B04",
+  "launch_sha": "0f83132fb3484f8366eaaa5863559d203f0cb369",
+  "configuration": {
+    "seeds": [
+      96041,
+      96042,
+      96043
+    ],
+    "updates": 128,
+    "batch_size": 64,
+    "eval_episodes": 256,
+    "eval_every": 16,
+    "technical_only": false,
+    "device": "cpu",
+    "dtype": "float32",
+    "learning_rate": 0.025,
+    "torch_threads": 1,
+    "rng": "Explicit seed namespaces; paired routing initialization, data and action uniforms; fixed separate evaluation tapes."
+  },
+  "exposure": {
+    "updates_per_learner": 128,
+    "Adam_lr": 0.025,
+    "nominal_coordinate_path": 3.2,
+    "writer_min_nonzero_Xavier_RMS": 0.5773502691896257,
+    "writer_nominal_ratio": 5.542562584220408,
+    "router_min_nonzero_Xavier_RMS": 0.408248290463863,
+    "router_nominal_ratio": 7.8383671769061705,
+    "meaning": "Nominal learning-rate path, not a realized displacement bound."
+  },
+  "counts": {
+    "train_episodes": 98304,
+    "eval_episodes": 49920,
+    "updates": 1536,
+    "primitive_transitions": 444672,
+    "complete_episodes": 148224
+  },
+  "expected_counts": {
+    "writer_training_episodes": 24576,
+    "routing_training_episodes": 73728,
+    "training_episodes": 98304,
+    "writer_updates": 384,
+    "routing_updates": 1152,
+    "learner_updates": 1536,
+    "writer_evaluation_episodes": 6912,
+    "routing_evaluation_episodes": 41472,
+    "latch_evaluation_episodes": 1536,
+    "evaluation_episodes": 49920,
+    "complete_episodes": 148224,
+    "primitive_transitions": 444672
+  },
+  "result_rule": {
+    "branch": "B04_WITHIN_MEI",
+    "mean_stale_auc_difference": 0.0026041666666666665,
+    "seed_stale_auc_differences": [
+      0.001953125,
+      -0.000244140625,
+      0.006103515625
+    ],
+    "mei": 0.05
+  },
+  "descriptive_flags": {
+    "writer_weak": false,
+    "simple_control_headroom": false,
+    "mean_final_writer_return": 1.0,
+    "mean_final_latch_stale_return": 0.9986979166666666,
+    "mean_final_stale_return_by_arm": {
+      "TYPED": 0.98828125,
+      "GENERIC": 0.98828125,
+      "RESET": 0.5065104166666666
+    }
+  },
+  "resources": {
+    "wall_seconds": 40.371824955997,
+    "peak_rss_bytes": 484229120,
+    "status": "measured"
+  },
+  "seed_comparisons": [
+    {
+      "seed": 96041,
+      "regimes": {
+        "CLEAN": {
+          "typed_minus_generic_auc": 0.000732421875,
+          "typed_minus_generic_final_return": 0.00390625
+        },
+        "STALE_LOAD": {
+          "typed_minus_generic_auc": 0.001953125,
+          "typed_minus_generic_final_return": 0.0
+        }
+      }
+    },
+    {
+      "seed": 96042,
+      "regimes": {
+        "CLEAN": {
+          "typed_minus_generic_auc": -0.0009765625,
+          "typed_minus_generic_final_return": 0.0
+        },
+        "STALE_LOAD": {
+          "typed_minus_generic_auc": -0.000244140625,
+          "typed_minus_generic_final_return": 0.0
+        }
+      }
+    },
+    {
+      "seed": 96043,
+      "regimes": {
+        "CLEAN": {
+          "typed_minus_generic_auc": 0.001953125,
+          "typed_minus_generic_final_return": 0.0
+        },
+        "STALE_LOAD": {
+          "typed_minus_generic_auc": 0.006103515625,
+          "typed_minus_generic_final_return": 0.0
+        }
+      }
+    }
+  ],
+  "cost_projection": {
+    "cost_law": "train_episodes * seconds_per_train_episode + eval_episodes * seconds_per_eval_episode",
+    "coefficients": {
+      "WRITER": {
+        "seconds_per_train_episode": 0.0002703733679198332,
+        "seconds_per_eval_episode": 0.0002688376704285205
+      },
+      "TYPED": {
+        "seconds_per_train_episode": 0.0002859060175749069,
+        "seconds_per_eval_episode": 0.00025010559158263106
+      },
+      "GENERIC": {
+        "seconds_per_train_episode": 0.0002729376062398832,
+        "seconds_per_eval_episode": 0.00025165621274707235
+      },
+      "RESET": {
+        "seconds_per_train_episode": 0.0002676612602915777,
+        "seconds_per_eval_episode": 0.000250098152561775
+      },
+      "LATCH": {
+        "seconds_per_train_episode": 0.0,
+        "seconds_per_eval_episode": 0.00022811889778040495
+      }
+    },
+    "three_seed_phase_seconds": {
+      "WRITER": 8.502901867999753,
+      "TYPED": 10.483885985959205,
+      "GENERIC": 10.186610095966898,
+      "RESET": 10.03539999393979
+    },
+    "three_seed_routing_arm_seconds_with_full_shared_writer": {
+      "TYPED": 18.98678785395896,
+      "GENERIC": 18.689511963966652,
+      "RESET": 18.538301861939544
+    },
+    "three_seed_latch_seconds": 0.350390626990702,
+    "total_seconds": 39.55918857085635,
+    "per_phase_or_charged_arm_cap_seconds": 600,
+    "full_invocation_cap_seconds": 2400
+  },
+  "resource_admission": {
+    "assessed_at": "2026-09-04T22:08:30.583381Z",
+    "available_physical_bytes": 12932308992,
+    "captured_at": "2026-09-04T22:08:30.583003Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 12932308992,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "seed_results": [
+    {
+      "seed": 96041,
+      "WRITER": {
+        "final": {
+          "CALIBRATION": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9991269111633301,
+            "owner_accuracy": null,
+            "new_bit_accuracy": 1.0
+          }
+        },
+        "auc": {
+          "CALIBRATION": 0.96923828125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 2304,
+          "updates": 128,
+          "primitive_transitions": 31488,
+          "policy_calls": {
+            "train": {
+              "new_partner_writer": 128,
+              "writer_readout": 128
+            },
+            "evaluation": {
+              "new_partner_writer": 9,
+              "writer_readout": 9
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 2304
+          }
+        },
+        "wall_seconds": {
+          "train": 2.1635658999948646,
+          "evaluation": 0.6293232690077275,
+          "diagnostic": 0.0
+        },
+        "parameters": {
+          "initial_norm": 1.9402371968067493,
+          "final_norm": 4.200376207512725,
+          "displacement_norm": 3.080392095256403,
+          "relative_displacement": 1.5876368623002,
+          "updates": 128
+        }
+      },
+      "TYPED": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9916468858718872,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9916468262672424,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.853515625,
+          "STALE_LOAD": 0.87158203125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.3664940119342646,
+          "evaluation": 1.0966696569958003,
+          "diagnostic": 0.0005499040053109638
+        },
+        "parameters": {
+          "initial_norm": 3.8454136965203327,
+          "final_norm": 8.120001503967307,
+          "displacement_norm": 6.1827816377631315,
+          "relative_displacement": 1.6078326353697274,
+          "updates": 128
+        }
+      },
+      "GENERIC": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.98828125,
+            "expected_reward_probability": 0.99183589220047,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9918633699417114,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 6.780141848139465e-05
+          }
+        },
+        "auc": {
+          "CLEAN": 0.852783203125,
+          "STALE_LOAD": 0.86962890625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.350285165986861,
+          "evaluation": 1.1311775460126228,
+          "diagnostic": 0.0004986550047760829
+        },
+        "parameters": {
+          "initial_norm": 3.8454136965203327,
+          "final_norm": 8.0229876706118,
+          "displacement_norm": 6.314870747195485,
+          "relative_displacement": 1.6421824140559267,
+          "updates": 128
+        }
+      },
+      "RESET": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.5234375,
+            "expected_reward_probability": 0.4990101158618927,
+            "owner_accuracy": 0.5234375,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.5078125,
+            "expected_reward_probability": 0.4990101158618927,
+            "owner_accuracy": 0.5078125,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.487548828125,
+          "STALE_LOAD": 0.48291015625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.261190787954547,
+          "evaluation": 1.203221593023045,
+          "diagnostic": 0.0005145249961060472
+        },
+        "parameters": {
+          "initial_norm": 3.8454136965203327,
+          "final_norm": 5.577462029601915,
+          "displacement_norm": 3.463308300547413,
+          "relative_displacement": 0.9006334750618166,
+          "updates": 128
+        }
+      },
+      "LATCH": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9991269111633301,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 1.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9991269111633301,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 1.0
+          }
+        },
+        "auc": {},
+        "counts": {
+          "train_episodes": 0,
+          "eval_episodes": 512,
+          "updates": 0,
+          "primitive_transitions": 1536,
+          "policy_calls": {
+            "train": {},
+            "evaluation": {
+              "new_partner_writer": 2,
+              "writer_readout": 2
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 0,
+            "evaluation": 512
+          }
+        },
+        "wall_seconds": {
+          "train": 0.0,
+          "evaluation": 0.12290887099516112,
+          "diagnostic": 0.0
+        }
+      }
+    },
+    {
+      "seed": 96042,
+      "WRITER": {
+        "final": {
+          "CALIBRATION": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9985788464546204,
+            "owner_accuracy": null,
+            "new_bit_accuracy": 1.0
+          }
+        },
+        "auc": {
+          "CALIBRATION": 0.95556640625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 2304,
+          "updates": 128,
+          "primitive_transitions": 31488,
+          "policy_calls": {
+            "train": {
+              "new_partner_writer": 128,
+              "writer_readout": 128
+            },
+            "evaluation": {
+              "new_partner_writer": 9,
+              "writer_readout": 9
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 2304
+          }
+        },
+        "wall_seconds": {
+          "train": 2.25372501496895,
+          "evaluation": 0.6767717949915095,
+          "diagnostic": 0.0
+        },
+        "parameters": {
+          "initial_norm": 2.160742521694182,
+          "final_norm": 4.210875621845921,
+          "displacement_norm": 3.126974723713527,
+          "relative_displacement": 1.4471760019151876,
+          "updates": 128
+        }
+      },
+      "TYPED": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.99609375,
+            "expected_reward_probability": 0.9917482137680054,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9917482733726501,
+            "owner_accuracy": 0.99609375,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.888427734375,
+          "STALE_LOAD": 0.898681640625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.442295777014806,
+          "evaluation": 1.202171653007099,
+          "diagnostic": 0.0005477209997479804
+        },
+        "parameters": {
+          "initial_norm": 3.328846502389916,
+          "final_norm": 8.044154076073685,
+          "displacement_norm": 6.10578209007485,
+          "relative_displacement": 1.8342035554031277,
+          "updates": 128
+        }
+      },
+      "GENERIC": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.99609375,
+            "expected_reward_probability": 0.9920207858085632,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9920238852500916,
+            "owner_accuracy": 0.99609375,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 8.928193710744381e-05
+          }
+        },
+        "auc": {
+          "CLEAN": 0.889404296875,
+          "STALE_LOAD": 0.89892578125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.1168718099506805,
+          "evaluation": 1.1663153740009875,
+          "diagnostic": 0.0004125440027564764
+        },
+        "parameters": {
+          "initial_norm": 3.328846502389916,
+          "final_norm": 8.013903301923234,
+          "displacement_norm": 6.142714489691736,
+          "relative_displacement": 1.8452982092390346,
+          "updates": 128
+        }
+      },
+      "RESET": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.49609375,
+            "expected_reward_probability": 0.4993817210197449,
+            "owner_accuracy": 0.5,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.50390625,
+            "expected_reward_probability": 0.49938175082206726,
+            "owner_accuracy": 0.50390625,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.475830078125,
+          "STALE_LOAD": 0.477783203125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.113204904984741,
+          "evaluation": 1.0559573559876299,
+          "diagnostic": 0.00048397800128441304
+        },
+        "parameters": {
+          "initial_norm": 3.328846502389916,
+          "final_norm": 5.667088974118862,
+          "displacement_norm": 3.876380601765843,
+          "relative_displacement": 1.1644816301931704,
+          "updates": 128
+        }
+      },
+      "LATCH": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.99609375,
+            "expected_reward_probability": 0.9985788464546204,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 0.99609375
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.99609375,
+            "expected_reward_probability": 0.9985787272453308,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 0.99609375
+          }
+        },
+        "auc": {},
+        "counts": {
+          "train_episodes": 0,
+          "eval_episodes": 512,
+          "updates": 0,
+          "primitive_transitions": 1536,
+          "policy_calls": {
+            "train": {},
+            "evaluation": {
+              "new_partner_writer": 2,
+              "writer_readout": 2
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 0,
+            "evaluation": 512
+          }
+        },
+        "wall_seconds": {
+          "train": 0.0,
+          "evaluation": 0.10521522299677599,
+          "diagnostic": 0.0
+        }
+      }
+    },
+    {
+      "seed": 96043,
+      "WRITER": {
+        "final": {
+          "CALIBRATION": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9993211030960083,
+            "owner_accuracy": null,
+            "new_bit_accuracy": 1.0
+          }
+        },
+        "auc": {
+          "CALIBRATION": 0.98876953125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 2304,
+          "updates": 128,
+          "primitive_transitions": 31488,
+          "policy_calls": {
+            "train": {
+              "new_partner_writer": 128,
+              "writer_readout": 128
+            },
+            "evaluation": {
+              "new_partner_writer": 9,
+              "writer_readout": 9
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 2304
+          }
+        },
+        "wall_seconds": {
+          "train": 2.2274049750340055,
+          "evaluation": 0.5521109140026965,
+          "diagnostic": 0.0
+        },
+        "parameters": {
+          "initial_norm": 2.5390549333803363,
+          "final_norm": 4.42070079749072,
+          "displacement_norm": 2.282208535236116,
+          "relative_displacement": 0.8988417325015212,
+          "updates": 128
+        }
+      },
+      "TYPED": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9896432161331177,
+            "owner_accuracy": 0.99609375,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.98046875,
+            "expected_reward_probability": 0.9896432161331177,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 0.98828125,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.874267578125,
+          "STALE_LOAD": 0.867431640625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.2176364989718422,
+          "evaluation": 1.1586183880353929,
+          "diagnostic": 0.0005786909969174303
+        },
+        "parameters": {
+          "initial_norm": 3.3707729179525647,
+          "final_norm": 8.177754947148795,
+          "displacement_norm": 6.465608434190025,
+          "relative_displacement": 1.918138240566288,
+          "updates": 128
+        }
+      },
+      "GENERIC": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.9921875,
+            "expected_reward_probability": 0.9893184900283813,
+            "owner_accuracy": 0.99609375,
+            "new_bit_accuracy": 0.99609375,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.98046875,
+            "expected_reward_probability": 0.9895867705345154,
+            "owner_accuracy": 0.9921875,
+            "new_bit_accuracy": 0.98828125,
+            "n_old_flip_tv": 0.0005514706717804074
+          }
+        },
+        "auc": {
+          "CLEAN": 0.872314453125,
+          "STALE_LOAD": 0.861328125
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.240557635013829,
+          "evaluation": 1.1814025650019175,
+          "diagnostic": 0.0004409100001794286
+        },
+        "parameters": {
+          "initial_norm": 3.3707729179525647,
+          "final_norm": 8.220039419319509,
+          "displacement_norm": 6.674441687861825,
+          "relative_displacement": 1.9800923557662662,
+          "updates": 128
+        }
+      },
+      "RESET": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 0.48828125,
+            "expected_reward_probability": 0.4991770386695862,
+            "owner_accuracy": 0.48828125,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 0.5078125,
+            "expected_reward_probability": 0.4991770088672638,
+            "owner_accuracy": 0.5078125,
+            "new_bit_accuracy": 1.0,
+            "n_old_flip_tv": 0.0
+          }
+        },
+        "auc": {
+          "CLEAN": 0.456787109375,
+          "STALE_LOAD": 0.49072265625
+        },
+        "counts": {
+          "train_episodes": 8192,
+          "eval_episodes": 4608,
+          "updates": 128,
+          "primitive_transitions": 38400,
+          "policy_calls": {
+            "train": {
+              "owner_encoder": 128,
+              "obsolete_partner_encoder": 128,
+              "new_partner_writer": 128,
+              "event_updater": 128,
+              "owner_action_head": 128
+            },
+            "evaluation": {
+              "owner_encoder": 18,
+              "obsolete_partner_encoder": 18,
+              "new_partner_writer": 18,
+              "event_updater": 18,
+              "owner_action_head": 18
+            },
+            "diagnostic": {
+              "owner_encoder": 2,
+              "obsolete_partner_encoder": 2,
+              "event_updater": 2,
+              "owner_action_head": 2
+            }
+          },
+          "terminal_decisions": {
+            "train": 8192,
+            "evaluation": 4608
+          },
+          "counterfactual_kernel_rows": 512
+        },
+        "wall_seconds": {
+          "train": 2.2036474399865256,
+          "evaluation": 1.1981779120033025,
+          "diagnostic": 0.0007944590033730492
+        },
+        "parameters": {
+          "initial_norm": 3.3707729179525647,
+          "final_norm": 5.426366977277193,
+          "displacement_norm": 3.918966673281783,
+          "relative_displacement": 1.162631470191767,
+          "updates": 128
+        }
+      },
+      "LATCH": {
+        "final": {
+          "CLEAN": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9993211030960083,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 1.0
+          },
+          "STALE_LOAD": {
+            "episodes": 256,
+            "return": 1.0,
+            "expected_reward_probability": 0.9993211030960083,
+            "owner_accuracy": 1.0,
+            "new_bit_accuracy": 1.0
+          }
+        },
+        "auc": {},
+        "counts": {
+          "train_episodes": 0,
+          "eval_episodes": 512,
+          "updates": 0,
+          "primitive_transitions": 1536,
+          "policy_calls": {
+            "train": {},
+            "evaluation": {
+              "new_partner_writer": 2,
+              "writer_readout": 2
+            },
+            "diagnostic": {}
+          },
+          "terminal_decisions": {
+            "train": 0,
+            "evaluation": 512
+          }
+        },
+        "wall_seconds": {
+          "train": 0.0,
+          "evaluation": 0.12226653299876489,
+          "diagnostic": 0.0
+        }
+      }
+    }
+  ],
+  "dm_reconstruction": {
+    "final_rows_checked": 6912,
+    "native_reward_and_final_means_recomputed": true,
+    "full_auc_recomputed": true,
+    "no_new_learner_execution": true
+  }
+}

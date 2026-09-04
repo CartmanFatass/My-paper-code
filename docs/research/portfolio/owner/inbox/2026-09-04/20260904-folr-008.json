@@ -1,0 +1,37 @@
+{
+  "id": "20260904-folr-008",
+  "created": "2026-09-04T15:23:17-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B04：完成本轮，不原样重跑",
+  "context": "本轮小问题已有完整回答，并保留可复用的固定配置通用比较器。将证据与下一判别边界返回 Root，不把本结果扩成 N3 停止或新状态来源、优化器家族的自动启动。",
+  "options": [
+    {
+      "key": "a",
+      "label": "完成有界任务并返回证据及下一判别建议",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "没有复现实验问题地重复同种子和预算",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "直接关闭 N3 或自动打开另一家族",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原样重跑没有新增判别问题，另一家族须遵守自己的对象和技术边界。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L235",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

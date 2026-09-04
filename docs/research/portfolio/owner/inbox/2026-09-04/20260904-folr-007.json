@@ -1,0 +1,38 @@
+{
+  "id": "20260904-folr-007",
+  "created": "2026-09-04T15:23:15-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B04：接受有效的小差异结果",
+  "context": "完整三种子实验和逐行回报复核完成。类型化减通用的学习曲线差0.002604，低于0.05；两者终点均0.988。按原规则接受 B04_WITHIN_MEI，不推断精确等价或广泛优越。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受并发布原规则下的有界结果",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把终点相同当作精确等价或稳定优势",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "丢弃小差异并重复至出现更大效果",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "计数、真实回报、曲线和执行收据均完整，规则第三分支成立。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_INTAKE_20260904.md",
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L234",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
