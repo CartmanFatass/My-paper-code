@@ -1,0 +1,5186 @@
+{
+  "REGIME-ORACLE-ENVELOPE": {
+    "candidate_arrangement": {
+      "candidate_slots": 2701,
+      "exact_action_score_evaluations": 194472,
+      "objective": {
+        "decimal": "0.303321032624113475177304964539",
+        "denominator": 44062500,
+        "numerator": 13365083
+      },
+      "selected_multipliers": [
+        {
+          "decimal": "0.161702127659574468085106382979",
+          "denominator": 235,
+          "numerator": 38
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        }
+      ],
+      "tie_line_count": 72,
+      "valid_nonnegative_candidates": 186
+    },
+    "certificate_only_extra_information": true,
+    "coefficient_table": [
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.723926380368098159509202453988",
+              "denominator": 163,
+              "numerator": 118
+            },
+            "unsafe_numerator": {
+              "decimal": "0.0552147239263803680981595092025",
+              "denominator": 163,
+              "numerator": 9
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.566871165644171779141104294479",
+              "denominator": 815,
+              "numerator": 462
+            },
+            "gain": {
+              "decimal": "0.344785276073619631901840490798",
+              "denominator": 815,
+              "numerator": 281
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.944785276073619631901840490798",
+              "denominator": 163,
+              "numerator": 154
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=7/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.0552147239263803680981595092025",
+          "denominator": 163,
+          "numerator": 9
+        },
+        "weight": {
+          "decimal": "0.0543333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 163
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.279141104294478527607361963190",
+              "denominator": 326,
+              "numerator": 91
+            },
+            "unsafe_numerator": {
+              "decimal": "0.144171779141104294478527607362",
+              "denominator": 326,
+              "numerator": 47
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.513496932515337423312883435583",
+              "denominator": 1630,
+              "numerator": 837
+            },
+            "gain": {
+              "decimal": "0.255828220858895705521472392638",
+              "denominator": 1630,
+              "numerator": 417
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.855828220858895705521472392638",
+              "denominator": 326,
+              "numerator": 279
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=7/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.144171779141104294478527607362",
+          "denominator": 326,
+          "numerator": 47
+        },
+        "weight": {
+          "decimal": "0.0543333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 163
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.0766871165644171779141104294479",
+              "denominator": 326,
+              "numerator": -25
+            },
+            "unsafe_numerator": {
+              "decimal": "0.215337423312883435582822085890",
+              "denominator": 1630,
+              "numerator": 351
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.470797546012269938650306748466",
+              "denominator": 8150,
+              "numerator": 3837
+            },
+            "gain": {
+              "decimal": "0.184662576687116564417177914110",
+              "denominator": 1630,
+              "numerator": 301
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.784662576687116564417177914110",
+              "denominator": 1630,
+              "numerator": 1279
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=7/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.215337423312883435582822085890",
+          "denominator": 1630,
+          "numerator": 351
+        },
+        "weight": {
+          "decimal": "0.0543333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 163
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.925373134328358208955223880597",
+              "denominator": 67,
+              "numerator": 62
+            },
+            "unsafe_numerator": {
+              "decimal": "0.0149253731343283582089552238806",
+              "denominator": 67,
+              "numerator": 1
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.591044776119402985074626865672",
+              "denominator": 335,
+              "numerator": 198
+            },
+            "gain": {
+              "decimal": "0.385074626865671641791044776119",
+              "denominator": 335,
+              "numerator": 129
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.985074626865671641791044776119",
+              "denominator": 67,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=9/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.0149253731343283582089552238806",
+          "denominator": 67,
+          "numerator": 1
+        },
+        "weight": {
+          "decimal": "0.067",
+          "denominator": 1000,
+          "numerator": 67
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.440298507462686567164179104478",
+              "denominator": 134,
+              "numerator": 59
+            },
+            "unsafe_numerator": {
+              "decimal": "0.111940298507462686567164179104",
+              "denominator": 134,
+              "numerator": 15
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.532835820895522388059701492537",
+              "denominator": 670,
+              "numerator": 357
+            },
+            "gain": {
+              "decimal": "0.288059701492537313432835820896",
+              "denominator": 670,
+              "numerator": 193
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.888059701492537313432835820896",
+              "denominator": 134,
+              "numerator": 119
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=9/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.111940298507462686567164179104",
+          "denominator": 134,
+          "numerator": 15
+        },
+        "weight": {
+          "decimal": "0.067",
+          "denominator": 1000,
+          "numerator": 67
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.0522388059701492537313432835821",
+              "denominator": 134,
+              "numerator": 7
+            },
+            "unsafe_numerator": {
+              "decimal": "0.189552238805970149253731343284",
+              "denominator": 670,
+              "numerator": 127
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.486268656716417910447761194030",
+              "denominator": 3350,
+              "numerator": 1629
+            },
+            "gain": {
+              "decimal": "0.210447761194029850746268656716",
+              "denominator": 670,
+              "numerator": 141
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.810447761194029850746268656716",
+              "denominator": 670,
+              "numerator": 543
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=0|q=9/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.189552238805970149253731343284",
+          "denominator": 670,
+          "numerator": 127
+        },
+        "weight": {
+          "decimal": "0.067",
+          "denominator": 1000,
+          "numerator": 67
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.206896551724137931034482758621",
+              "denominator": 29,
+              "numerator": -6
+            },
+            "unsafe_numerator": {
+              "decimal": "0.241379310344827586206896551724",
+              "denominator": 29,
+              "numerator": 7
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.455172413793103448275862068966",
+              "denominator": 145,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0.158620689655172413793103448276",
+              "denominator": 145,
+              "numerator": 23
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.758620689655172413793103448276",
+              "denominator": 29,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=7/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.241379310344827586206896551724",
+          "denominator": 29,
+          "numerator": 7
+        },
+        "weight": {
+          "decimal": "0.029",
+          "denominator": 1000,
+          "numerator": 29
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.465517241379310344827586206897",
+              "denominator": 58,
+              "numerator": -27
+            },
+            "unsafe_numerator": {
+              "decimal": "0.293103448275862068965517241379",
+              "denominator": 58,
+              "numerator": 17
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.424137931034482758620689655172",
+              "denominator": 290,
+              "numerator": 123
+            },
+            "gain": {
+              "decimal": "0.106896551724137931034482758621",
+              "denominator": 290,
+              "numerator": 31
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.706896551724137931034482758621",
+              "denominator": 58,
+              "numerator": 41
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=7/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.293103448275862068965517241379",
+          "denominator": 58,
+          "numerator": 17
+        },
+        "weight": {
+          "decimal": "0.029",
+          "denominator": 1000,
+          "numerator": 29
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.672413793103448275862068965517",
+              "denominator": 58,
+              "numerator": -39
+            },
+            "unsafe_numerator": {
+              "decimal": "0.334482758620689655172413793103",
+              "denominator": 290,
+              "numerator": 97
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.399310344827586206896551724138",
+              "denominator": 1450,
+              "numerator": 579
+            },
+            "gain": {
+              "decimal": "0.0655172413793103448275862068966",
+              "denominator": 290,
+              "numerator": 19
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.665517241379310344827586206897",
+              "denominator": 290,
+              "numerator": 193
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=7/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.334482758620689655172413793103",
+          "denominator": 290,
+          "numerator": 97
+        },
+        "weight": {
+          "decimal": "0.029",
+          "denominator": 1000,
+          "numerator": 29
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-1.75510204081632653061224489796",
+              "denominator": 49,
+              "numerator": -86
+            },
+            "unsafe_numerator": {
+              "decimal": "0.551020408163265306122448979592",
+              "denominator": 49,
+              "numerator": 27
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.269387755102040816326530612245",
+              "denominator": 245,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "-0.151020408163265306122448979592",
+              "denominator": 245,
+              "numerator": -37
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.448979591836734693877551020408",
+              "denominator": 49,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=9/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.551020408163265306122448979592",
+          "denominator": 49,
+          "numerator": 27
+        },
+        "weight": {
+          "decimal": "0.0163333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 49
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-1.70408163265306122448979591837",
+              "denominator": 98,
+              "numerator": -167
+            },
+            "unsafe_numerator": {
+              "decimal": "0.540816326530612244897959183673",
+              "denominator": 98,
+              "numerator": 53
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.275510204081632653061224489796",
+              "denominator": 98,
+              "numerator": 27
+            },
+            "gain": {
+              "decimal": "-0.140816326530612244897959183673",
+              "denominator": 490,
+              "numerator": -69
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.459183673469387755102040816327",
+              "denominator": 98,
+              "numerator": 45
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=9/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.540816326530612244897959183673",
+          "denominator": 98,
+          "numerator": 53
+        },
+        "weight": {
+          "decimal": "0.0163333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 49
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-1.66326530612244897959183673469",
+              "denominator": 98,
+              "numerator": -163
+            },
+            "unsafe_numerator": {
+              "decimal": "0.532653061224489795918367346939",
+              "denominator": 490,
+              "numerator": 261
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.280408163265306122448979591837",
+              "denominator": 2450,
+              "numerator": 687
+            },
+            "gain": {
+              "decimal": "-0.132653061224489795918367346939",
+              "denominator": 98,
+              "numerator": -13
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.467346938775510204081632653061",
+              "denominator": 490,
+              "numerator": 229
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "CALIBRATED|b=1|q=9/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.532653061224489795918367346939",
+          "denominator": 490,
+          "numerator": 261
+        },
+        "weight": {
+          "decimal": "0.0163333333333333333333333333333",
+          "denominator": 3000,
+          "numerator": 49
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.4",
+              "denominator": 5,
+              "numerator": 2
+            },
+            "unsafe_numerator": {
+              "decimal": "0.12",
+              "denominator": 25,
+              "numerator": 3
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.528",
+              "denominator": 125,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0.28",
+              "denominator": 25,
+              "numerator": 7
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.88",
+              "denominator": 25,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=7/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.12",
+          "denominator": 25,
+          "numerator": 3
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.02",
+              "denominator": 50,
+              "numerator": 1
+            },
+            "unsafe_numerator": {
+              "decimal": "0.196",
+              "denominator": 250,
+              "numerator": 49
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.4824",
+              "denominator": 1250,
+              "numerator": 603
+            },
+            "gain": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.804",
+              "denominator": 250,
+              "numerator": 201
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=7/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.196",
+          "denominator": 250,
+          "numerator": 49
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.284",
+              "denominator": 250,
+              "numerator": -71
+            },
+            "unsafe_numerator": {
+              "decimal": "0.2568",
+              "denominator": 1250,
+              "numerator": 321
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.44592",
+              "denominator": 6250,
+              "numerator": 2787
+            },
+            "gain": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.7432",
+              "denominator": 1250,
+              "numerator": 929
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=7/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.2568",
+          "denominator": 1250,
+          "numerator": 321
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.4",
+              "denominator": 5,
+              "numerator": 2
+            },
+            "unsafe_numerator": {
+              "decimal": "0.12",
+              "denominator": 25,
+              "numerator": 3
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.528",
+              "denominator": 125,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0.28",
+              "denominator": 25,
+              "numerator": 7
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.88",
+              "denominator": 25,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=9/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.12",
+          "denominator": 25,
+          "numerator": 3
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.02",
+              "denominator": 50,
+              "numerator": 1
+            },
+            "unsafe_numerator": {
+              "decimal": "0.196",
+              "denominator": 250,
+              "numerator": 49
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.4824",
+              "denominator": 1250,
+              "numerator": 603
+            },
+            "gain": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.804",
+              "denominator": 250,
+              "numerator": 201
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=9/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.196",
+          "denominator": 250,
+          "numerator": 49
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.284",
+              "denominator": 250,
+              "numerator": -71
+            },
+            "unsafe_numerator": {
+              "decimal": "0.2568",
+              "denominator": 1250,
+              "numerator": 321
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.44592",
+              "denominator": 6250,
+              "numerator": 2787
+            },
+            "gain": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.7432",
+              "denominator": 1250,
+              "numerator": 929
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=0|q=9/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.2568",
+          "denominator": 1250,
+          "numerator": 321
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.4",
+              "denominator": 5,
+              "numerator": 2
+            },
+            "unsafe_numerator": {
+              "decimal": "0.12",
+              "denominator": 25,
+              "numerator": 3
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.528",
+              "denominator": 125,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0.28",
+              "denominator": 25,
+              "numerator": 7
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.88",
+              "denominator": 25,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=7/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.12",
+          "denominator": 25,
+          "numerator": 3
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.02",
+              "denominator": 50,
+              "numerator": 1
+            },
+            "unsafe_numerator": {
+              "decimal": "0.196",
+              "denominator": 250,
+              "numerator": 49
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.4824",
+              "denominator": 1250,
+              "numerator": 603
+            },
+            "gain": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.804",
+              "denominator": 250,
+              "numerator": 201
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=7/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.196",
+          "denominator": 250,
+          "numerator": 49
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.284",
+              "denominator": 250,
+              "numerator": -71
+            },
+            "unsafe_numerator": {
+              "decimal": "0.2568",
+              "denominator": 1250,
+              "numerator": 321
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.44592",
+              "denominator": 6250,
+              "numerator": 2787
+            },
+            "gain": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.7432",
+              "denominator": 1250,
+              "numerator": 929
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=7/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.2568",
+          "denominator": 1250,
+          "numerator": 321
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.4",
+              "denominator": 5,
+              "numerator": 2
+            },
+            "unsafe_numerator": {
+              "decimal": "0.12",
+              "denominator": 25,
+              "numerator": 3
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.528",
+              "denominator": 125,
+              "numerator": 66
+            },
+            "gain": {
+              "decimal": "0.28",
+              "denominator": 25,
+              "numerator": 7
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.88",
+              "denominator": 25,
+              "numerator": 22
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=9/10|d=0",
+        "unsafe_probability": {
+          "decimal": "0.12",
+          "denominator": 25,
+          "numerator": 3
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "0.02",
+              "denominator": 50,
+              "numerator": 1
+            },
+            "unsafe_numerator": {
+              "decimal": "0.196",
+              "denominator": 250,
+              "numerator": 49
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.4824",
+              "denominator": 1250,
+              "numerator": 603
+            },
+            "gain": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.804",
+              "denominator": 250,
+              "numerator": 201
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=9/10|d=1",
+        "unsafe_probability": {
+          "decimal": "0.196",
+          "denominator": 250,
+          "numerator": 49
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      },
+      {
+        "actions": [
+          {
+            "action": "EXECUTE",
+            "clean_loss_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "gain": {
+              "decimal": "-0.284",
+              "denominator": 250,
+              "numerator": -71
+            },
+            "unsafe_numerator": {
+              "decimal": "0.2568",
+              "denominator": 1250,
+              "numerator": 321
+            }
+          },
+          {
+            "action": "PROBE",
+            "clean_loss_numerator": {
+              "decimal": "0.44592",
+              "denominator": 6250,
+              "numerator": 2787
+            },
+            "gain": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          {
+            "action": "VETO",
+            "clean_loss_numerator": {
+              "decimal": "0.7432",
+              "denominator": 1250,
+              "numerator": 929
+            },
+            "gain": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "unsafe_numerator": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          }
+        ],
+        "cell": "UNINFORMATIVE|b=1|q=9/10|d=2",
+        "unsafe_probability": {
+          "decimal": "0.2568",
+          "denominator": 1250,
+          "numerator": 321
+        },
+        "weight": {
+          "decimal": "0.0416666666666666666666666666667",
+          "denominator": 24,
+          "numerator": 1
+        }
+      }
+    ],
+    "complementary_slackness": {
+      "all_zero": true,
+      "resource_products": [
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        }
+      ],
+      "variable_products": [
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        },
+        {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        }
+      ]
+    },
+    "dual": {
+      "clean_loss_multiplier": {
+        "decimal": "0",
+        "denominator": 1,
+        "numerator": 0
+      },
+      "feasible": true,
+      "objective": {
+        "decimal": "0.303321032624113475177304964539",
+        "denominator": 44062500,
+        "numerator": 13365083
+      },
+      "rows": [
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.370212765957446808510638297872",
+              "denominator": 235,
+              "numerator": 87
+            },
+            "VETO": {
+              "decimal": "0.714998042031066440412478788670",
+              "denominator": 38305,
+              "numerator": 27388
+            }
+          },
+          "alpha": {
+            "decimal": "0.714998042031066440412478788670",
+            "denominator": 38305,
+            "numerator": 27388
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.255828220858895705521472392638",
+              "denominator": 1630,
+              "numerator": 417
+            }
+          },
+          "alpha": {
+            "decimal": "0.255828220858895705521472392638",
+            "denominator": 1630,
+            "numerator": 417
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.296170212765957446808510638298",
+              "denominator": 1175,
+              "numerator": 348
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.184662576687116564417177914110",
+              "denominator": 1630,
+              "numerator": 301
+            }
+          },
+          "alpha": {
+            "decimal": "0.184662576687116564417177914110",
+            "denominator": 1630,
+            "numerator": 301
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.537885042870752619879326770403",
+              "denominator": 15745,
+              "numerator": 8469
+            },
+            "VETO": {
+              "decimal": "0.922959669736424261670371546523",
+              "denominator": 15745,
+              "numerator": 14532
+            }
+          },
+          "alpha": {
+            "decimal": "0.922959669736424261670371546523",
+            "denominator": 15745,
+            "numerator": 14532
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.134137821530644649094950778025",
+              "denominator": 15745,
+              "numerator": 2112
+            },
+            "VETO": {
+              "decimal": "0.422197523023181962527786598920",
+              "denominator": 6298,
+              "numerator": 2659
+            }
+          },
+          "alpha": {
+            "decimal": "0.422197523023181962527786598920",
+            "denominator": 6298,
+            "numerator": 2659
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.188859955541441727532550015878",
+              "denominator": 78725,
+              "numerator": 14868
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.210447761194029850746268656716",
+              "denominator": 670,
+              "numerator": 141
+            }
+          },
+          "alpha": {
+            "decimal": "0.210447761194029850746268656716",
+            "denominator": 670,
+            "numerator": 141
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.404548789435069699192956713133",
+              "denominator": 6815,
+              "numerator": 2757
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.158620689655172413793103448276",
+              "denominator": 145,
+              "numerator": 23
+            }
+          },
+          "alpha": {
+            "decimal": "0.158620689655172413793103448276",
+            "denominator": 145,
+            "numerator": 23
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.619809244314013206162876008804",
+              "denominator": 6815,
+              "numerator": 4224
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.106896551724137931034482758621",
+              "denominator": 290,
+              "numerator": 31
+            }
+          },
+          "alpha": {
+            "decimal": "0.106896551724137931034482758621",
+            "denominator": 290,
+            "numerator": 31
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.792017608217168011738811445341",
+              "denominator": 34075,
+              "numerator": 26988
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.0655172413793103448275862068966",
+              "denominator": 290,
+              "numerator": 19
+            }
+          },
+          "alpha": {
+            "decimal": "0.0655172413793103448275862068966",
+            "denominator": 290,
+            "numerator": 19
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "1.84420321320017368649587494572",
+              "denominator": 11515,
+              "numerator": 21236
+            },
+            "PROBE": {
+              "decimal": "0.151020408163265306122448979592",
+              "denominator": 245,
+              "numerator": 37
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "alpha": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "1.79153278332609639600521059488",
+              "denominator": 23030,
+              "numerator": 41259
+            },
+            "PROBE": {
+              "decimal": "0.140816326530612244897959183673",
+              "denominator": 490,
+              "numerator": 69
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "alpha": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "1.74939643942683456361267911420",
+              "denominator": 115150,
+              "numerator": 201443
+            },
+            "PROBE": {
+              "decimal": "0.132653061224489795918367346939",
+              "denominator": 98,
+              "numerator": 13
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "alpha": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.100595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 591
+            },
+            "VETO": {
+              "decimal": "0.380595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 2236
+            }
+          },
+          "alpha": {
+            "decimal": "0.380595744680851063829787234043",
+            "denominator": 5875,
+            "numerator": 2236
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.215693617021276595744680851064",
+              "denominator": 29375,
+              "numerator": 6336
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            }
+          },
+          "alpha": {
+            "decimal": "0.204",
+            "denominator": 250,
+            "numerator": 51
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.468725106382978723404255319149",
+              "denominator": 146875,
+              "numerator": 68844
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            }
+          },
+          "alpha": {
+            "decimal": "0.1432",
+            "denominator": 1250,
+            "numerator": 179
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.100595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 591
+            },
+            "VETO": {
+              "decimal": "0.380595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 2236
+            }
+          },
+          "alpha": {
+            "decimal": "0.380595744680851063829787234043",
+            "denominator": 5875,
+            "numerator": 2236
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.215693617021276595744680851064",
+              "denominator": 29375,
+              "numerator": 6336
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            }
+          },
+          "alpha": {
+            "decimal": "0.204",
+            "denominator": 250,
+            "numerator": 51
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.468725106382978723404255319149",
+              "denominator": 146875,
+              "numerator": 68844
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            }
+          },
+          "alpha": {
+            "decimal": "0.1432",
+            "denominator": 1250,
+            "numerator": 179
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.100595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 591
+            },
+            "VETO": {
+              "decimal": "0.380595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 2236
+            }
+          },
+          "alpha": {
+            "decimal": "0.380595744680851063829787234043",
+            "denominator": 5875,
+            "numerator": 2236
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.215693617021276595744680851064",
+              "denominator": 29375,
+              "numerator": 6336
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            }
+          },
+          "alpha": {
+            "decimal": "0.204",
+            "denominator": 250,
+            "numerator": 51
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.468725106382978723404255319149",
+              "denominator": 146875,
+              "numerator": 68844
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            }
+          },
+          "alpha": {
+            "decimal": "0.1432",
+            "denominator": 1250,
+            "numerator": 179
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=2"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.100595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 591
+            },
+            "VETO": {
+              "decimal": "0.380595744680851063829787234043",
+              "denominator": 5875,
+              "numerator": 2236
+            }
+          },
+          "alpha": {
+            "decimal": "0.380595744680851063829787234043",
+            "denominator": 5875,
+            "numerator": 2236
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=0"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.215693617021276595744680851064",
+              "denominator": 29375,
+              "numerator": 6336
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.204",
+              "denominator": 250,
+              "numerator": 51
+            }
+          },
+          "alpha": {
+            "decimal": "0.204",
+            "denominator": 250,
+            "numerator": 51
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=1"
+        },
+        {
+          "action_slacks": {
+            "EXECUTE": {
+              "decimal": "0.468725106382978723404255319149",
+              "denominator": 146875,
+              "numerator": 68844
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.1432",
+              "denominator": 1250,
+              "numerator": 179
+            }
+          },
+          "alpha": {
+            "decimal": "0.1432",
+            "denominator": 1250,
+            "numerator": 179
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=2"
+        }
+      ],
+      "unsafe_multiplier": {
+        "decimal": "0.161702127659574468085106382979",
+        "denominator": 235,
+        "numerator": 38
+      }
+    },
+    "equal_primal_dual_objective": true,
+    "legal_treatment": false,
+    "primal": {
+      "clean_loss_cap": {
+        "decimal": "0.355693333333333333333333333333",
+        "denominator": 75000,
+        "numerator": 26677
+      },
+      "clean_loss_numerator": {
+        "decimal": "0.293255500709219858156028368794",
+        "denominator": 88125000,
+        "numerator": 25843141
+      },
+      "feasible": true,
+      "objective": {
+        "decimal": "0.303321032624113475177304964539",
+        "denominator": 44062500,
+        "numerator": 13365083
+      },
+      "rows": [
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0543333333333333333333333333333",
+              "denominator": 3000,
+              "numerator": 163
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0137706099290780141843971631206",
+              "denominator": 17625000,
+              "numerator": 242707
+            },
+            "PROBE": {
+              "decimal": "0.0405627234042553191489361702128",
+              "denominator": 2937500,
+              "numerator": 119153
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0543333333333333333333333333333",
+              "denominator": 3000,
+              "numerator": 163
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=7/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.067",
+              "denominator": 1000,
+              "numerator": 67
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.067",
+              "denominator": 1000,
+              "numerator": 67
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.067",
+              "denominator": 1000,
+              "numerator": 67
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=0|q=9/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.029",
+              "denominator": 1000,
+              "numerator": 29
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.029",
+              "denominator": 1000,
+              "numerator": 29
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.029",
+              "denominator": 1000,
+              "numerator": 29
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=7/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.0163333333333333333333333333333",
+              "denominator": 3000,
+              "numerator": 49
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.0163333333333333333333333333333",
+              "denominator": 3000,
+              "numerator": 49
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0.0163333333333333333333333333333",
+              "denominator": 3000,
+              "numerator": 49
+            }
+          },
+          "cell": "CALIBRATED|b=1|q=9/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=7/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=0|q=9/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=7/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "PROBE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=0",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=1",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "action_mass": {
+            "EXECUTE": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            },
+            "PROBE": {
+              "decimal": "0.0416666666666666666666666666667",
+              "denominator": 24,
+              "numerator": 1
+            },
+            "VETO": {
+              "decimal": "0",
+              "denominator": 1,
+              "numerator": 0
+            }
+          },
+          "cell": "UNINFORMATIVE|b=1|q=9/10|d=2",
+          "normalization_residual": {
+            "decimal": "0",
+            "denominator": 1,
+            "numerator": 0
+          }
+        }
+      ],
+      "unsafe_cap": {
+        "decimal": "0.0334853333333333333333333333333",
+        "denominator": 375000,
+        "numerator": 12557
+      },
+      "unsafe_numerator": {
+        "decimal": "0.0334853333333333333333333333333",
+        "denominator": 375000,
+        "numerator": 12557
+      }
+    },
+    "safe_opportunity_probability": {
+      "decimal": "0.809066666666666666666666666667",
+      "denominator": 1875,
+      "numerator": 1517
+    },
+    "unsafe_opportunity_probability": {
+      "decimal": "0.190933333333333333333333333333",
+      "denominator": 1875,
+      "numerator": 358
+    }
+  },
+  "admission_receipt": {
+    "path": "/home/wu/hmasd-worktrees/acvc-r02-3831a66d/temp/directions/acvc/exp/history_headroom_certificate_r02_20260904/resource_admission_result_01.json",
+    "record": {
+      "assessed_at": "2026-09-04T15:01:46.279068Z",
+      "available_physical_bytes": 12913889280,
+      "captured_at": "2026-09-04T15:01:46.278573Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12913889280,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "argv": [
+    "scripts/run_acvc_history_headroom_certificate_r02.py",
+    "result",
+    "--output-root",
+    "/home/wu/hmasd-worktrees/acvc-r02-3831a66d/temp/directions/acvc/exp/history_headroom_certificate_r02_20260904/result_01",
+    "--admission-receipt",
+    "/home/wu/hmasd-worktrees/acvc-r02-3831a66d/temp/directions/acvc/exp/history_headroom_certificate_r02_20260904/resource_admission_result_01.json",
+    "--launch-sha",
+    "3831a66da19788f549e39faeb8a898221186252a"
+  ],
+  "arithmetic": "fractions.Fraction exact rational",
+  "complete": true,
+  "evidence_class": "A/RECON",
+  "harm_compatibility": {
+    "clean_loss_allowance": {
+      "decimal": "0.05",
+      "denominator": 20,
+      "numerator": 1
+    },
+    "lower_compatible": true,
+    "unsafe_allowance": {
+      "decimal": "0.02",
+      "denominator": 50,
+      "numerator": 1
+    }
+  },
+  "launch_sha": "3831a66da19788f549e39faeb8a898221186252a",
+  "learner_exposure": {
+    "checkpoints": 0,
+    "displacement_to_initialization": "N/A",
+    "gradient_bearing_updates": 0,
+    "initialization_l2": "N/A",
+    "initialization_rms": "N/A",
+    "initialization_scale": "N/A",
+    "optimizer_transitions": 0,
+    "parameter_displacement_l2": 0,
+    "parameter_displacement_rms": 0,
+    "selection_exposure": 0,
+    "trainable_parameter_count": 0,
+    "training_episodes": 0
+  },
+  "no_rng": true,
+  "normalization_checks": {
+    "all_exactly_normalized": true,
+    "likelihood_rows": [
+      {
+        "age": 0,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 1,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 2,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 0,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 1,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 2,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "CALIBRATED",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 0,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 1,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 2,
+        "confidence": {
+          "decimal": "0.7",
+          "denominator": 10,
+          "numerator": 7
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 0,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 1,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      {
+        "age": 2,
+        "confidence": {
+          "decimal": "0.9",
+          "denominator": 10,
+          "numerator": 9
+        },
+        "regime": "UNINFORMATIVE",
+        "sum_b_y": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      }
+    ],
+    "oracle_cell_weight_sum": {
+      "decimal": "1",
+      "denominator": 1,
+      "numerator": 1
+    }
+  },
+  "object_id": "ACVC-A-RECON-HISTORY-HEADROOM-CERTIFICATE-R02",
+  "one_process_one_thread": true,
+  "policies": {
+    "DET-CF": {
+      "action_rates": {
+        "EXECUTE": {
+          "decimal": "0.313333333333333333333333333333",
+          "denominator": 150,
+          "numerator": 47
+        },
+        "PROBE": {
+          "decimal": "0.686666666666666666666666666667",
+          "denominator": 150,
+          "numerator": 103
+        },
+        "VETO": {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        }
+      },
+      "clean_opportunity_loss": {
+        "decimal": "0.389634146341463414634146341463",
+        "denominator": 1640,
+        "numerator": 639
+      },
+      "expected_return": {
+        "decimal": "3.3408",
+        "denominator": 625,
+        "numerator": 2088
+      },
+      "normalization": {
+        "action_rate_sum": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        },
+        "episode_opportunity_mass": {
+          "decimal": "12",
+          "denominator": 1,
+          "numerator": 12
+        },
+        "one_opportunity_mass": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      "regime_stratified_return": {
+        "CALIBRATED": {
+          "decimal": "4.1168",
+          "denominator": 625,
+          "numerator": 2573
+        },
+        "UNINFORMATIVE": {
+          "decimal": "2.5648",
+          "denominator": 625,
+          "numerator": 1603
+        }
+      },
+      "unsafe_execution_rate": {
+        "decimal": "0.155377094972067039106145251397",
+        "denominator": 2864,
+        "numerator": 445
+      }
+    },
+    "HIST-1UPDATE-CF": {
+      "action_rates": {
+        "EXECUTE": {
+          "decimal": "0.295631481481481481481481481481",
+          "denominator": 540000,
+          "numerator": 159641
+        },
+        "PROBE": {
+          "decimal": "0.704368518518518518518518518519",
+          "denominator": 540000,
+          "numerator": 380359
+        },
+        "VETO": {
+          "decimal": "0",
+          "denominator": 1,
+          "numerator": 0
+        }
+      },
+      "anchor_histories": [
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.583333333333333333333333333333",
+              "denominator": 12,
+              "numerator": 7
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.088",
+            "denominator": 125,
+            "numerator": 11
+          }
+        },
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.375",
+              "denominator": 8,
+              "numerator": 3
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.008",
+            "denominator": 125,
+            "numerator": 1
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.58125",
+              "denominator": 160,
+              "numerator": 93
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.08",
+            "denominator": 25,
+            "numerator": 2
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.489583333333333333333333333333",
+              "denominator": 96,
+              "numerator": 47
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.016",
+            "denominator": 125,
+            "numerator": 2
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.579257246376811594202898550725",
+              "denominator": 2208,
+              "numerator": 1279
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.0736",
+            "denominator": 625,
+            "numerator": 46
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.522321428571428571428571428571",
+              "denominator": 224,
+              "numerator": 117
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.0224",
+            "denominator": 625,
+            "numerator": 14
+          }
+        },
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.642857142857142857142857142857",
+              "denominator": 14,
+              "numerator": 9
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.102666666666666666666666666667",
+            "denominator": 750,
+            "numerator": 77
+          }
+        },
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.166666666666666666666666666667",
+              "denominator": 6,
+              "numerator": 1
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.006",
+            "denominator": 500,
+            "numerator": 3
+          }
+        },
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.639784946236559139784946236559",
+              "denominator": 186,
+              "numerator": 119
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.093",
+            "denominator": 1000,
+            "numerator": 93
+          }
+        },
+        {
+          "history": {
+            "action": "EXECUTE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.478723404255319148936170212766",
+              "denominator": 94,
+              "numerator": 45
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.0156666666666666666666666666667",
+            "denominator": 3000,
+            "numerator": 47
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.636825645035183737294761532447",
+              "denominator": 2558,
+              "numerator": 1629
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.0852666666666666666666666666667",
+            "denominator": 15000,
+            "numerator": 1279
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.542735042735042735042735042735",
+              "denominator": 234,
+              "numerator": 127
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 0
+          },
+          "positive_mass": {
+            "decimal": "0.0234",
+            "denominator": 5000,
+            "numerator": 117
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.375",
+              "denominator": 8,
+              "numerator": 3
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0586666666666666666666666666667",
+            "denominator": 375,
+            "numerator": 22
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.583333333333333333333333333333",
+              "denominator": 12,
+              "numerator": 7
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.012",
+            "denominator": 250,
+            "numerator": 3
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.379629629629629629629629629630",
+              "denominator": 108,
+              "numerator": 41
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.054",
+            "denominator": 500,
+            "numerator": 27
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.51",
+              "denominator": 100,
+              "numerator": 51
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0166666666666666666666666666667",
+            "denominator": 60,
+            "numerator": 1
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.383952254641909814323607427056",
+              "denominator": 1508,
+              "numerator": 579
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0502666666666666666666666666667",
+            "denominator": 7500,
+            "numerator": 377
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.475490196078431372549019607843",
+              "denominator": 204,
+              "numerator": 97
+            },
+            "confidence": {
+              "decimal": "0.7",
+              "denominator": 10,
+              "numerator": 7
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0204",
+            "denominator": 2500,
+            "numerator": 51
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.166666666666666666666666666667",
+              "denominator": 6,
+              "numerator": 1
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.044",
+            "denominator": 250,
+            "numerator": 11
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 0,
+            "anchor_belief": {
+              "decimal": "0.642857142857142857142857142857",
+              "denominator": 14,
+              "numerator": 9
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.014",
+            "denominator": 500,
+            "numerator": 7
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.182926829268292682926829268293",
+              "denominator": 82,
+              "numerator": 15
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.041",
+            "denominator": 1000,
+            "numerator": 41
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 1,
+            "anchor_belief": {
+              "decimal": "0.519607843137254901960784313725",
+              "denominator": 102,
+              "numerator": 53
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.017",
+            "denominator": 1000,
+            "numerator": 17
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.197754749568221070811744386874",
+              "denominator": 1158,
+              "numerator": 229
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 0,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0386",
+            "denominator": 5000,
+            "numerator": 193
+          }
+        },
+        {
+          "history": {
+            "action": "PROBE",
+            "age": 2,
+            "anchor_belief": {
+              "decimal": "0.448453608247422680412371134021",
+              "denominator": 194,
+              "numerator": 87
+            },
+            "confidence": {
+              "decimal": "0.9",
+              "denominator": 10,
+              "numerator": 9
+            },
+            "revealed_truth": 1,
+            "truth_revealed": true,
+            "verdict": 1
+          },
+          "positive_mass": {
+            "decimal": "0.0194",
+            "denominator": 5000,
+            "numerator": 97
+          }
+        }
+      ],
+      "clean_opportunity_loss": {
+        "decimal": "0.400449664908811250274664908811",
+        "denominator": 182040000,
+        "numerator": 72897857
+      },
+      "disagreement": {
+        "expected_count_per_episode": {
+          "decimal": "0.436943466666666666666666666667",
+          "denominator": 1875000,
+          "numerator": 819269
+        },
+        "opportunity_mass": {
+          "decimal": "0.0364119555555555555555555555556",
+          "denominator": 22500000,
+          "numerator": 819269
+        },
+        "positive_state_count": 132,
+        "probability_weighted_forced_det_cf_advantage": {
+          "decimal": "0.0221975111111111111111111111111",
+          "denominator": 5625000,
+          "numerator": 124861
+        },
+        "states": [
+          {
+            "expected_episode_count": {
+              "decimal": "0.00900533333333333333333333333333",
+              "denominator": 375000,
+              "numerator": 3377
+            },
+            "first_opportunity_history": {
+              "action": "EXECUTE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.375",
+                "denominator": 8,
+                "numerator": 3
+              },
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "revealed_truth": 1,
+              "truth_revealed": true,
+              "verdict": 0
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0188925081433224755700325732899",
+              "denominator": 1535,
+              "numerator": 29
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.000818666666666666666666666666667",
+              "denominator": 375000,
+              "numerator": 307
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0000154666666666666666666666666667",
+              "denominator": 1875000,
+              "numerator": 29
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.00605733333333333333333333333333",
+              "denominator": 750000,
+              "numerator": 4543
+            },
+            "first_opportunity_history": {
+              "action": "EXECUTE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.166666666666666666666666666667",
+                "denominator": 6,
+                "numerator": 1
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 1,
+              "truth_revealed": true,
+              "verdict": 0
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.102179176755447941888619854722",
+              "denominator": 2065,
+              "numerator": 211
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.000550666666666666666666666666667",
+              "denominator": 750000,
+              "numerator": 413
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0000562666666666666666666666666667",
+              "denominator": 3750000,
+              "numerator": 211
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.00522133333333333333333333333333",
+              "denominator": 187500,
+              "numerator": 979
+            },
+            "first_opportunity_history": {
+              "action": "EXECUTE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.166666666666666666666666666667",
+                "denominator": 6,
+                "numerator": 1
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 1,
+              "truth_revealed": true,
+              "verdict": 0
+            },
+            "forced_det_cf_action": "PROBE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0606741573033707865168539325843",
+              "denominator": 445,
+              "numerator": 27
+            },
+            "later_current_context": {
+              "age": 0,
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "verdict": 1
+            },
+            "lower_action": "EXECUTE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.000474666666666666666666666666667",
+              "denominator": 187500,
+              "numerator": 89
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0000288",
+              "denominator": 312500,
+              "numerator": 9
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0660391111111111111111111111111",
+              "denominator": 562500,
+              "numerator": 37147
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.375",
+                "denominator": 8,
+                "numerator": 3
+              },
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0188925081433224755700325732899",
+              "denominator": 1535,
+              "numerator": 29
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00600355555555555555555555555556",
+              "denominator": 562500,
+              "numerator": 3377
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.000113422222222222222222222222222",
+              "denominator": 2812500,
+              "numerator": 319
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0609253333333333333333333333333",
+              "denominator": 375000,
+              "numerator": 22847
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 1,
+              "anchor_belief": {
+                "decimal": "0.379629629629629629629629629630",
+                "denominator": 108,
+                "numerator": 41
+              },
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0172363986519017814155031295137",
+              "denominator": 10385,
+              "numerator": 179
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00553866666666666666666666666667",
+              "denominator": 375000,
+              "numerator": 2077
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0000954666666666666666666666666667",
+              "denominator": 1875000,
+              "numerator": 179
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0568343111111111111111111111111",
+              "denominator": 5625000,
+              "numerator": 319693
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 2,
+              "anchor_belief": {
+                "decimal": "0.383952254641909814323607427056",
+                "denominator": 1508,
+                "numerator": 579
+              },
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0156969342462925369025909231669",
+              "denominator": 145315,
+              "numerator": 2281
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00516675555555555555555555555556",
+              "denominator": 5625000,
+              "numerator": 29063
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0000811022222222222222222222222222",
+              "denominator": 28125000,
+              "numerator": 2281
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0444204444444444444444444444444",
+              "denominator": 1125000,
+              "numerator": 49973
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.166666666666666666666666666667",
+                "denominator": 6,
+                "numerator": 1
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.102179176755447941888619854722",
+              "denominator": 2065,
+              "numerator": 211
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00403822222222222222222222222222",
+              "denominator": 1125000,
+              "numerator": 4543
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.000412622222222222222222222222222",
+              "denominator": 5625000,
+              "numerator": 2321
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0382897777777777777777777777778",
+              "denominator": 281250,
+              "numerator": 10769
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 0,
+              "anchor_belief": {
+                "decimal": "0.166666666666666666666666666667",
+                "denominator": 6,
+                "numerator": 1
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "PROBE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0606741573033707865168539325843",
+              "denominator": 445,
+              "numerator": 27
+            },
+            "later_current_context": {
+              "age": 0,
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "verdict": 1
+            },
+            "lower_action": "EXECUTE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00348088888888888888888888888889",
+              "denominator": 281250,
+              "numerator": 979
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.0002112",
+              "denominator": 156250,
+              "numerator": 33
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0417633333333333333333333333333",
+              "denominator": 300000,
+              "numerator": 12529
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 1,
+              "anchor_belief": {
+                "decimal": "0.182926829268292682926829268293",
+                "denominator": 82,
+                "numerator": 15
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0949956101843722563652326602283",
+              "denominator": 5695,
+              "numerator": 541
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00379666666666666666666666666667",
+              "denominator": 300000,
+              "numerator": 1139
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.000360666666666666666666666666667",
+              "denominator": 1500000,
+              "numerator": 541
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0354933333333333333333333333333",
+              "denominator": 37500,
+              "numerator": 1331
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 1,
+              "anchor_belief": {
+                "decimal": "0.182926829268292682926829268293",
+                "denominator": 82,
+                "numerator": 15
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "PROBE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0545454545454545454545454545455",
+              "denominator": 55,
+              "numerator": 3
+            },
+            "later_current_context": {
+              "age": 0,
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "verdict": 1
+            },
+            "lower_action": "EXECUTE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00322666666666666666666666666667",
+              "denominator": 37500,
+              "numerator": 121
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.000176",
+              "denominator": 62500,
+              "numerator": 11
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0396376444444444444444444444444",
+              "denominator": 22500000,
+              "numerator": 891847
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 2,
+              "anchor_belief": {
+                "decimal": "0.197754749568221070811744386874",
+                "denominator": 1158,
+                "numerator": 229
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "EXECUTE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0885553239513055490459686470886",
+              "denominator": 405385,
+              "numerator": 35899
+            },
+            "later_current_context": {
+              "age": 1,
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "verdict": 0
+            },
+            "lower_action": "PROBE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00360342222222222222222222222222",
+              "denominator": 22500000,
+              "numerator": 81077
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.000319102222222222222222222222222",
+              "denominator": 112500000,
+              "numerator": 35899
+            }
+          },
+          {
+            "expected_episode_count": {
+              "decimal": "0.0332561777777777777777777777778",
+              "denominator": 2812500,
+              "numerator": 93533
+            },
+            "first_opportunity_history": {
+              "action": "PROBE",
+              "age": 2,
+              "anchor_belief": {
+                "decimal": "0.197754749568221070811744386874",
+                "denominator": 1158,
+                "numerator": 229
+              },
+              "confidence": {
+                "decimal": "0.9",
+                "denominator": 10,
+                "numerator": 9
+              },
+              "revealed_truth": 0,
+              "truth_revealed": true,
+              "verdict": 1
+            },
+            "forced_det_cf_action": "PROBE",
+            "forced_det_cf_native_q_advantage": {
+              "decimal": "0.0489003880983182406209573091850",
+              "denominator": 3865,
+              "numerator": 189
+            },
+            "later_current_context": {
+              "age": 0,
+              "confidence": {
+                "decimal": "0.7",
+                "denominator": 10,
+                "numerator": 7
+              },
+              "verdict": 1
+            },
+            "lower_action": "EXECUTE",
+            "opportunity_indices": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "positive_mass_per_opportunity": {
+              "decimal": "0.00302328888888888888888888888889",
+              "denominator": 2812500,
+              "numerator": 8503
+            },
+            "weighted_advantage_per_opportunity": {
+              "decimal": "0.00014784",
+              "denominator": 1562500,
+              "numerator": 231
+            }
+          }
+        ]
+      },
+      "exact_lower_action_score_evaluations": 864,
+      "expected_return": {
+        "decimal": "3.36299751111111111111111111111",
+        "denominator": 5625000,
+        "numerator": 18916861
+      },
+      "history_action_witness": {
+        "identical_later_current_context": {
+          "age": 1,
+          "confidence": {
+            "decimal": "0.9",
+            "denominator": 10,
+            "numerator": 9
+          },
+          "verdict": 0
+        },
+        "left": {
+          "action": "EXECUTE",
+          "age": 0,
+          "anchor_belief": {
+            "decimal": "0.583333333333333333333333333333",
+            "denominator": 12,
+            "numerator": 7
+          },
+          "confidence": {
+            "decimal": "0.7",
+            "denominator": 10,
+            "numerator": 7
+          },
+          "revealed_truth": 0,
+          "truth_revealed": true,
+          "verdict": 0
+        },
+        "left_action": "EXECUTE",
+        "left_positive_mass": {
+          "decimal": "0.088",
+          "denominator": 125,
+          "numerator": 11
+        },
+        "right": {
+          "action": "EXECUTE",
+          "age": 0,
+          "anchor_belief": {
+            "decimal": "0.375",
+            "denominator": 8,
+            "numerator": 3
+          },
+          "confidence": {
+            "decimal": "0.7",
+            "denominator": 10,
+            "numerator": 7
+          },
+          "revealed_truth": 1,
+          "truth_revealed": true,
+          "verdict": 0
+        },
+        "right_action": "PROBE",
+        "right_positive_mass": {
+          "decimal": "0.008",
+          "denominator": 125,
+          "numerator": 1
+        },
+        "selection_order": "(left_visible_history,right_visible_history,current_context)"
+      },
+      "information_boundary": {
+        "anchor_uses_only_first_opportunity": true,
+        "hidden_regime_used_for_action": false,
+        "later_frame_update_is_transient": true,
+        "later_outcomes_change_anchor": false,
+        "truth_inserted_after_veto": false
+      },
+      "no_witness_certificate": null,
+      "normalization": {
+        "action_rate_sum": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        },
+        "episode_opportunity_mass": {
+          "decimal": "12",
+          "denominator": 1,
+          "numerator": 12
+        },
+        "first_atom_mass": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        },
+        "later_event_mass_per_opportunity": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        },
+        "visible_anchor_mass": {
+          "decimal": "1",
+          "denominator": 1,
+          "numerator": 1
+        }
+      },
+      "regime_stratified_return": {
+        "CALIBRATED": {
+          "decimal": "4.06624106666666666666666666667",
+          "denominator": 937500,
+          "numerator": 3812101
+        },
+        "UNINFORMATIVE": {
+          "decimal": "2.65975395555555555555555555556",
+          "denominator": 1406250,
+          "numerator": 3740279
+        }
+      },
+      "unsafe_execution_rate": {
+        "decimal": "0.139048223153320918684047175667",
+        "denominator": 25776000,
+        "numerator": 3584107
+      }
+    }
+  },
+  "primary": {
+    "Delta_L": {
+      "decimal": "0.0221975111111111111111111111111",
+      "denominator": 5625000,
+      "numerator": 124861
+    },
+    "Delta_U": {
+      "decimal": "0.299052391489361702127659574468",
+      "denominator": 3671875,
+      "numerator": 1098083
+    },
+    "J_D": {
+      "decimal": "3.3408",
+      "denominator": 625,
+      "numerator": 2088
+    },
+    "J_L": {
+      "decimal": "3.36299751111111111111111111111",
+      "denominator": 5625000,
+      "numerator": 18916861
+    },
+    "J_U": {
+      "decimal": "3.63985239148936170212765957447",
+      "denominator": 3671875,
+      "numerator": 13365083
+    }
+  },
+  "resources": {
+    "peak_rss_bytes": 19333120,
+    "peak_rss_cap_bytes": 1610612736,
+    "status": "measured",
+    "wall_cap_seconds": 120.0,
+    "wall_seconds": 2.288506333999976
+  },
+  "result_bearing": true,
+  "result_rule": {
+    "branch": "HC-D / CERTIFICATE_INTERVAL_UNRESOLVED",
+    "integrity_failures": [],
+    "mapping": "Admit no learner; park at the exact certificate dependency.",
+    "ordered_precedence": [
+      "HC-X",
+      "HC-A",
+      "HC-C",
+      "HC-B",
+      "HC-D"
+    ]
+  },
+  "scientific_polarity": null,
+  "static_work_counts": {
+    "dual_candidate_slots": 2701,
+    "dual_tie_lines": 72,
+    "first_contexts": 12,
+    "harm_inequalities": 2,
+    "latent_first_step_atoms": 48,
+    "later_contexts": 12,
+    "lower_action_score_evaluations": 864,
+    "normalization_equalities": 24,
+    "oracle_action_variables": 72,
+    "oracle_cells": 24,
+    "visible_anchor_histories": 24
+  }
+}

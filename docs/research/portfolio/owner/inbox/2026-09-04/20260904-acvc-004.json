@@ -1,0 +1,37 @@
+{
+  "id": "20260904-acvc-004",
+  "created": "2026-09-04T11:33:10-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "A1 不把 R02 上下界误记为 matched headroom",
+  "context": "Guidance A1 要求同宿主、同信息 upper 减 tuned generic baseline。R02 upper 额外知道隐藏 regime，DET-CF 也不是 tuned generic baseline，因此 DM 保持 R02 不变、把 A1 记为未完成，只冻结缺失的差额项而不启动代码或 B。",
+  "options": [
+    {
+      "key": "a",
+      "label": "把 privileged R02 upper 计作 A1",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把 legal R02 lower 计作 A1 upper",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "保持 R02 不变并只冻结缺失的 matched-gap 项",
+      "consequence": ""
+    }
+  ],
+  "recommended": "c",
+  "auto_applied": "c",
+  "dm_reason": "只有选项 c 保留同信息和 tuned-baseline 定义。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_A1_HEADROOM_CENSUS_ALIGNMENT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L92",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

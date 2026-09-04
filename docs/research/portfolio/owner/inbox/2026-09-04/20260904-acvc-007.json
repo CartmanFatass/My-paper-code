@@ -1,0 +1,37 @@
+{
+  "id": "20260904-acvc-007",
+  "created": "2026-09-04T11:33:14-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受 R02 完整 HC-D 开放区间",
+  "context": "唯一有效 invocation 的 exact lower 为 0.0221975，低于 0.25；exact upper 为 0.2990524，高于 0.25。合法 lower 满足 harm、存在动作证据，LP primal/dual 完整且资源合规，因此 DM 接受 HC-D，不隔离也不结果导向重跑。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整 HC-D",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "按 HC-X 隔离",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "重跑或扩展对象",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "所有前瞻字段、证书、计数和 receipts 完整，冻结规则唯一映射为 HC-D。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L95",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

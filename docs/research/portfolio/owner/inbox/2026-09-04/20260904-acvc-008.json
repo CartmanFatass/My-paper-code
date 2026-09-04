@@ -1,0 +1,32 @@
+{
+  "id": "20260904-acvc-008",
+  "created": "2026-09-04T11:33:15-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "brief",
+  "title": "R02 有效结果简报：实质余量仍未决",
+  "context": "合法历史策略有小幅正 native-return 值，但不达注册阈值；精确上界又不足以排除阈值。结果有效，不启动 learner，完整中文简报已写入 owner surface。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "英文 intake 与中文简报给出相同的 HC-D 有界解释。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L96",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-04_ACVC-A-RECON-HISTORY-HEADROOM-CERTIFICATE-R02.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

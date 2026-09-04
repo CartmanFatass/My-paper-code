@@ -1,0 +1,70 @@
+{
+  "id": "20260904-acvc-009",
+  "created": "2026-09-04T11:33:17-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "second-recast",
+  "title": "ACVC 第二次 RECAST：继续最低顺序或 PARK",
+  "context": "ACVC 的第一次重铸选择 full-DP headroom，因精确状态增长形成工程阻塞；第二次重铸选择 certified bound 并已形成有效 HC-D。按投资政策，第二次 RECAST 仍执行，但方向降到 ACTIVE 中最低争用顺序，所有者可异步 PARK。",
+  "options": [
+    {
+      "key": "continue-low-priority",
+      "label": "continue at lowest sequencing priority",
+      "consequence": "continue at lowest sequencing priority"
+    },
+    {
+      "key": "park",
+      "label": "PARK the direction",
+      "consequence": "PARK the direction"
+    }
+  ],
+  "recommended": "continue-low-priority",
+  "auto_applied": "continue-low-priority",
+  "dm_reason": "仍有两条精确定义的 re-entry 判别器，且不需要 learner；保留 ACTIVE 但最低排序最可逆。",
+  "evidence": [
+    "docs/research/candidates/acvc/external/2026-09-04-acvc-headroom-engineering-dissent-convergence-02/RESPONSE.md",
+    "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L97",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "ACVC 第二次 Convergence 重铸已执行为精确证书路线后，是否继续以 ACTIVE 最低争用顺序推进精确 re-entry，还是将方向 PARK？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/portfolio/PORTFOLIO.md · acvc",
+        "from": "ACTIVE/MEDIUM，仍显示 R01 卡和 CM active",
+        "to": "仍为 ACTIVE，但标记 second-recast、按最低争用顺序推进；当前结果为 HC-D，只允许精确 re-entry"
+      }
+    ],
+    "if_refused": "若选择 PARK，Root 记录 Portfolio 裁决并停止补充 ACVC 工作槽；R02 的 HC-D 证据、阈值和解释保持不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md",
+        "quote": "The only registered re-entry discriminator is either a prospectively resource-admitted stronger legal same-information lower certificate that clears `1/4` with a visible action witness and positive forced-`DET-CF` advantage, or a prospectively resource-admitted tighter exact upper below `1/4`.",
+        "why": "仍有两个精确定义且可验证的方向内判别器，不需要立即投入 learner。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md",
+        "quote": "Its gain is only `0.022197511111...`, far below `0.25`.",
+        "why": "当前最强合法下界仅达到目标的约 8.9%，且此前两个 learner 都输给固定规则。"
+      }
+    ],
+    "uncertainty": [
+      "更强合法累计历史策略能否在 120 秒内精确枚举尚未测量。",
+      "更紧上界若重新引入全 DP，可能再次遇到已记录的状态增长。",
+      "当前隐藏状态 oracle 上界距离阈值仅约 0.0491，但未知哪条精确路线更快闭合区间。"
+    ],
+    "cost": {
+      "compute": "本条本身零计算；后续对象在任何科学输出前先做 result-blind project-cost admission。",
+      "owner_time": "约 1 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；未回复时循环按 ACTIVE 最低争用顺序继续"
+    },
+    "verdict_text": "继续但置于 ACTIVE 方向最低争用顺序；只推进冻结的精确 re-entry，不启动 learner。",
+    "source": "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  }
+}
