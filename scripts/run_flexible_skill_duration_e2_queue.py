@@ -45,15 +45,62 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def build_queue(seeds=(1, 2), drop_outer_seed2: bool = False):
-    """Contract section 2 order; section 4.4 drop rule when asked for."""
+def build_queue(seeds=(1, 2), drop_outer_seed2: bool = False, skip=()):
+    """Contract section 2 order; section 4.4 drop rule when asked for.
+
+    ``skip`` removes named ``(arm, seed)`` pairs outright.  It exists so that
+    a queue can be replaced mid-study without re-running what has already
+    finished or is still in flight: review XII.5 applies section 4.4 to
+    "whatever has not launched", which needs exactly that distinction.
+    """
+    skip = {(str(a), int(x)) for a, x in skip}
     queue = []
     for arm in ARM_ORDER:
         for seed in seeds:
             if drop_outer_seed2 and seed == 2 and arm in OUTER_ARMS:
                 continue
+            if (arm, int(seed)) in skip:
+                continue
             queue.append((arm, int(seed)))
     return queue
+
+
+def _parse_pair(text):
+    arm, _, seed = str(text).partition(":")
+    return (arm, int(seed))
+
+
+def wait_for_pids(pids, poll_seconds=30.0):
+    """Block until every named process id has exited.
+
+    Used when this queue replaces an earlier one whose runs are still going:
+    the replacement must not add load until those finish, or the machine
+    would carry more than the two concurrent runs the budget assumes.
+    """
+    import ctypes
+
+    pids = [int(x) for x in pids if int(x) > 0]
+    if not pids:
+        return
+    kernel32 = getattr(ctypes, "windll", None)
+    kernel32 = None if kernel32 is None else kernel32.kernel32
+    while True:
+        alive = []
+        for pid in pids:
+            if kernel32 is not None:
+                handle = kernel32.OpenProcess(0x1000, False, pid)
+                if handle:
+                    kernel32.CloseHandle(handle)
+                    alive.append(pid)
+            else:
+                try:
+                    os.kill(pid, 0)
+                    alive.append(pid)
+                except OSError:
+                    pass
+        if not alive:
+            return
+        time.sleep(float(poll_seconds))
 
 
 def main(argv=None) -> int:
@@ -73,17 +120,33 @@ def main(argv=None) -> int:
     parser.add_argument("--seeds", type=int, nargs="+", default=[1, 2])
     parser.add_argument("--drop-outer-seed2", action="store_true",
                         help="contract section 4.4 drop rule")
+    parser.add_argument("--skip", nargs="*", default=[], metavar="ARM:SEED",
+                        help="arm-seed pairs this queue must not run (already "
+                             "finished, still in flight, or dropped)")
+    parser.add_argument("--wait-pids", type=int, nargs="*", default=[],
+                        help="wait for these process ids to exit before "
+                             "launching anything (used when replacing a "
+                             "running queue)")
+    parser.add_argument("--state-name", default="queue_state.json",
+                        help="state file name, so a replacement queue does "
+                             "not overwrite its predecessor record")
     parser.add_argument("--poll-seconds", type=float, default=20.0)
     args = parser.parse_args(argv)
 
     root = Path(args.output_root).resolve()
     root.mkdir(parents=True, exist_ok=True)
-    state_path = root / "queue_state.json"
+    state_path = root / args.state_name
 
-    queue = build_queue(tuple(args.seeds), args.drop_outer_seed2)
+    queue = build_queue(tuple(args.seeds), args.drop_outer_seed2,
+                        skip=[_parse_pair(x) for x in args.skip])
+    if args.wait_pids:
+        wait_for_pids(args.wait_pids)
     state = {
         "started_at": _utc_now(),
         "study_root": str(root),
+        "skipped": [x for x in args.skip],
+        "waited_for_pids": [int(x) for x in args.wait_pids],
+        "drop_outer_seed2": bool(args.drop_outer_seed2),
         "launch_commit": args.launch_commit,
         "concurrency": int(args.concurrency),
         "queue": [{"arm": arm, "seed": seed, "status": "pending",
