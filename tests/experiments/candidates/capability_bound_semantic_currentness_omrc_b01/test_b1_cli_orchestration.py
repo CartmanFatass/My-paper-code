@@ -38,6 +38,7 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_co
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b0 import ARMS
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.telemetry import (
+    ProcessTreeMonitor,
     ResourceCaps,
     TelemetryError,
 )
@@ -88,6 +89,19 @@ def _scientific_identity() -> dict[str, object]:
         "metrics_only_archive_path": plan.metrics_only_archive_path,
         "metrics_only_response_sha256": plan.metrics_only_response_sha256,
     }
+
+
+def _force_zero_process_cpu(monkeypatch) -> None:
+    original = ProcessTreeMonitor.finish
+
+    def finish(self, **kwargs):
+        measured = original(self, **kwargs)
+        measured["end_to_end_cpu_seconds"] = 0.0
+        measured["cpu_core_equivalents"] = 0.0
+        measured["cpu_occupancy_fraction"] = 0.0
+        return measured
+
+    monkeypatch.setattr(ProcessTreeMonitor, "finish", finish)
 
 
 def test_raw_slice_reducer_accepts_36_contiguous_seed_major_slices() -> None:
@@ -312,7 +326,10 @@ def test_parent_supervision_kills_test_only_sleeper_and_preserves_incident(tmp_p
     assert incident["scientific_branch"] is None
 
 
-def test_parent_supervision_reads_create_only_test_result_and_measures_child(tmp_path) -> None:
+def test_parent_supervision_reads_create_only_test_result_and_measures_child(
+    monkeypatch, tmp_path
+) -> None:
+    _force_zero_process_cpu(monkeypatch)
     result = tmp_path / "result.json"
     raw = {
         "schema": B1_RAW_EVIDENCE_SCHEMA,
@@ -347,6 +364,64 @@ def test_parent_supervision_reads_create_only_test_result_and_measures_child(tmp
     assert telemetry["stage_measurements"] == raw["stage_measurements"]
     assert telemetry["process_tree_peak_rss_bytes"] > 0
     assert telemetry["sample_count"] >= 2
+    assert telemetry["end_to_end_cpu_seconds"] == 0.0
+    assert telemetry["cpu_core_equivalents"] == pytest.approx(
+        telemetry["end_to_end_cpu_seconds"] / telemetry["end_to_end_wall_seconds"]
+    )
+    assert telemetry["cpu_occupancy_fraction"] == pytest.approx(
+        telemetry["cpu_core_equivalents"] / telemetry["worker_count"]
+    )
+
+
+def test_process_monitor_counts_external_child_from_process_creation(
+    monkeypatch, tmp_path
+) -> None:
+    monitor = ProcessTreeMonitor(
+        tmp_path / "scratch", tmp_path, worker_count=1, threads_per_worker=1,
+        root_pid=123,
+    )
+    samples = iter([
+        [(123, 1, 0.25, 3, 4, 1)],
+        [(123, 1, 0.25, 3, 4, 1)],
+    ])
+    monkeypatch.setattr(monitor, "_process_samples", lambda: next(samples))
+    monitor.begin()
+    monitor._observe()
+    measured = monitor.finish(
+        scientific_work_transitions=1,
+        stage_measurements=[{
+            "stage": "fixture", "wall_seconds": 1.0, "cpu_seconds": 0.5,
+            "transitions": 1, "transitions_per_second": 1.0,
+        }],
+    )
+    assert measured["end_to_end_cpu_seconds"] == 0.25
+    assert measured["io_read_bytes"] == 3
+    assert measured["io_write_bytes"] == 4
+
+
+def test_process_monitor_baselines_the_already_running_current_process(
+    monkeypatch, tmp_path
+) -> None:
+    monitor = ProcessTreeMonitor(
+        tmp_path / "scratch", tmp_path, worker_count=1, threads_per_worker=1
+    )
+    samples = iter([
+        [(monitor.root_pid, 1, 0.25, 3, 4, 1)],
+        [(monitor.root_pid, 1, 0.30, 8, 10, 1)],
+    ])
+    monkeypatch.setattr(monitor, "_process_samples", lambda: next(samples))
+    monitor.begin()
+    monitor._observe()
+    measured = monitor.finish(
+        scientific_work_transitions=1,
+        stage_measurements=[{
+            "stage": "fixture", "wall_seconds": 1.0, "cpu_seconds": 0.5,
+            "transitions": 1, "transitions_per_second": 1.0,
+        }],
+    )
+    assert measured["end_to_end_cpu_seconds"] == pytest.approx(0.05)
+    assert measured["io_read_bytes"] == 5
+    assert measured["io_write_bytes"] == 6
 
 
 def test_parent_supervision_short_lived_canonical_result_does_not_race_telemetry(
@@ -437,7 +512,7 @@ def test_worker_wrapper_and_engine_raw_schema_are_exact_and_science_null() -> No
 
 def test_stage_work_sum_refuses_missing_or_nonpositive_engine_measurements() -> None:
     assert b1._validate_stage_measurements([{
-        "stage": "a", "wall_seconds": 2.0, "cpu_seconds": 1.0,
+        "stage": "a", "wall_seconds": 2.0, "cpu_seconds": 0.0,
         "transitions": 6, "transitions_per_second": 3.0,
     }, {
         "stage": "b", "wall_seconds": 1.0, "cpu_seconds": 0.5,
@@ -934,7 +1009,10 @@ def test_policy_replay_batch_invokes_all_slots_in_fixed_order_and_builds_witness
     assert calls[-1] == ("witness", "attempt")
 
 
-def test_policy_replay_supervisor_uses_result_rows_as_work_units(tmp_path) -> None:
+def test_policy_replay_supervisor_uses_result_rows_as_work_units(
+    monkeypatch, tmp_path
+) -> None:
+    _force_zero_process_cpu(monkeypatch)
     result = tmp_path / "result.json"
     counts = {
         "policy_decisions": 192, "policy_curves": 2,
@@ -966,6 +1044,13 @@ def test_policy_replay_supervisor_uses_result_rows_as_work_units(tmp_path) -> No
     assert measurement["scientific_work_transitions"] == 192
     assert measurement["stage_measurements"][0]["stage"] == (
         "policy-replay-model-forward-units"
+    )
+    assert measurement["end_to_end_cpu_seconds"] == 0.0
+    assert measurement["cpu_core_equivalents"] == pytest.approx(
+        measurement["end_to_end_cpu_seconds"] / measurement["end_to_end_wall_seconds"]
+    )
+    assert measurement["cpu_occupancy_fraction"] == pytest.approx(
+        measurement["cpu_core_equivalents"] / measurement["worker_count"]
     )
 
 
