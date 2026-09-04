@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T19:13:05Z`
+Snapshot: `2026-09-04T21:40:28Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -23,14 +23,48 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 - Pre-launch focused suite on the launch SHA: `12 passed in 10.83s`
 - Study root:
   `temp/directions/flexible_skill_duration/exp/E3_20260904`
+- The ten previously accepted local cell roots are in
+  `C:/Projects/HMASD/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E3_20260904`.
+  The newly running cell remains in the remote worktree named below; no completed artifact has
+  yet been fetched for it.
 - All 18 row/arm/seed invocations are card-accepted. Each still requires its own immediately
   preceding `admit-memory` receipt with at least 4 GiB physical and effective availability.
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
 - Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
-  independently admitted/launched `11`; running `0`; valid complete cells `10`; quarantined
-  attempts `1`; unfulfilled cells `8`, all of which have never launched. The earlier local refusal
+  independently admitted/launched `12`; running `1`; valid complete cells `10`; quarantined
+  attempts `1`; unfulfilled cells `8`, of which `1` is running and `7` have never launched. The earlier local refusal
   is preserved as evidence but was not itself an admission or launch.
+
+## Accepted running D0 seed-3 cell
+
+The owner's instruction “我们开始推进自动研究流程” supersedes the old drained pause. The
+object-tier resume intake is
+`FSD_E3_MEDIUM_D0_SEED3_RESUME_INTAKE_20260904.md`; owner item `20260904-fsd-002` records the
+unchanged next-cell selection. No new card, VSP-03 control, family or result branch was added.
+
+| invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | launch boundary | observed state |
+| --- | --- | --- | ---: | --- | --- |
+| `medium_d0_seed3` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed3_20260904_01`; wrapper PID `74470`, learner PID `74473` | `2026-09-04T21:39:47.176686Z` | `15429533696 / 15429533696` | pushed SHA `9c0a990537a8ffef58306429a1ff402550fc4b82`; runner SHA-256 `4c4a002868378bd7fba8125e1d36d633101c5dd07a703f33a3d3e524d4fd9ba1` | `running`, exit `null`, tmux active; one launch accepted; completion unobserved |
+
+Detached remote worktree:
+`/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed3_20260904_01`.
+Run root: that worktree's
+`temp/directions/flexible_skill_duration/exp/E3_20260904/medium_d0_seed3`.
+Admission receipt: `<run-root>/preflight.json`.
+Supervisor log:
+`/home/wu/.agent-tasks/fsd_e3_medium_d0_seed3_20260904_01/task.log`.
+
+CM checked the task and scientific roots before sending, then observed the supervisor and learner
+argv after the one accepted launch. One supervised payload joined the cell's fresh remote
+`admit-memory` to the exact runner with `&&`; both 4 GiB floors passed. CPU/four-thread,
+seed-3, `k=5`, 20-rollout and evaluation semantics remain frozen. The entire source comparison
+against the accepted repair has no executable difference; its E0 docstring example is the only
+wider-surface change. CM's exact command and acceptance evidence are recorded at
+`docs/Claude_docs/experiments/FSD_E3_MEDIUM_D0_SEED3_REMOTE_RUN_20260904.md`.
+
+This is running engineering work, not an eleventh valid result. The current invocation has no
+terminal artifact acceptance, measured total wall, result branch or new scientific polarity.
 
 ## Accepted terminal D2 seed-2 cell
 
@@ -138,7 +172,7 @@ SHA was the launch implementation SHA. The remaining three small cells record st
 `5b84d8b072abda9650403b7fef7303a85205c48c`; its runner and focused-test byte surface is identical
 to launch implementation SHA `e6108e466eeea3df31db52c53e49eef828bde41a`. The accepted medium
 cells use the exact pushed SHAs named in their terminal tables and the same accepted repaired
-runner SHA-256.
+runner SHA-256. The running medium D0 seed-3 invocation is not included in this valid-cell table.
 
 ## Refused admission and current compute route
 
@@ -157,8 +191,8 @@ duplication and have now terminated validly. Current main `.codex/hmasd-compute.
 pushed SHA, a detached remote worktree, and one `agent-task` payload whose remote command performed
 its own `admit-memory` immediately before the exact runner. The local refused receipt did not admit
 the remote attempt. Attempt 01 is terminal and quarantined after reproduced publication failure;
-the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. The eight
-never-launched invocations stay `REMOTE_FIRST_HOLD`. Local fallback additionally requires
+the repaired outcome-blind attempt 02 subsequently fulfilled that invocation cell. Seven
+never-launched invocations stay `REMOTE_FIRST_HOLD`; medium D0 seed 3 is now running. Local fallback additionally requires
 definitive evidence of no remote process, prospective portability, and a fresh local admission.
 
 ## Full 18-invocation matrix
@@ -180,7 +214,7 @@ output has been created for that invocation.
 | medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed1_20260904_01` |
 | medium | D0 | 2 | `k=5`, `c=inf` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d0_seed2_20260904_01` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE`; attempt 01 task `fsd_e3_medium_d2_seed2_20260904_01` |
-| medium | D0 | 3 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
+| medium | D0 | 3 | `k=5`, `c=inf` | `RUNNING`; attempt 01 task `fsd_e3_medium_d0_seed3_20260904_01` |
 | medium | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | large | D0 | 1 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | large | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -192,14 +226,23 @@ output has been created for that invocation.
 ## Resume boundary
 
 The quarantined D0 seed-1 attempt 01 must not be resent, resumed, migrated, postprocessed into
-acceptance, or used to alter the frozen sequence. Four medium-row cells are now valid; no return
-comparison or E3 result branch is applied. Owner instruction received after `medium_d2_seed2`
-terminated requires the direction to pause at this drained boundary. `medium_d0_seed3` is the next
-frozen invocation but remains uncreated and unlaunched: no task, preflight, result root, model,
-optimizer or RNG master exists for it. When the owner or Root resumes this direction, every later
-invocation still requires the exact pushed SHA and its own fresh 4 GiB remote preflight immediately
-before its exact runner. A refused admission creates no learner state; the quarantined attempt
-creates no scientific result.
+acceptance, or used to alter the frozen sequence. Four medium-row cells are valid and the next D0
+seed-3 cell is running; no return comparison or E3 result branch is applied. The prior pause after
+`medium_d2_seed2` terminated is historical provenance, superseded by the owner's explicit resume.
+
+Root/DM resumes scheduling and scientific intake from this repository record; CM resumes direct
+runtime observation and technical acceptance of the existing task. Query its authoritative
+state with `ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_medium_d0_seed3_20260904_01'`.
+The existing accepted task must not be duplicated. On completion, check the original artifact
+root against the frozen output contract and preserve it; a terminal exit alone is insufficient.
+If execution is incomplete, reproduce the failing step over its recorded bytes before assigning
+a failure class, then retain the attempt without interpreting or salvaging it.
+
+The next never-launched cell is `medium_d2_seed3`; all six large-row cells are also uncreated.
+This one-invocation handoff does not admit those cells. Each later invocation still requires the
+exact pushed SHA and its own fresh 4 GiB remote preflight immediately before its exact runner.
+A refused admission creates no learner state; the historical quarantine creates no scientific
+result. The current task is detached and can continue independently of this DM session.
 
 Do not apply the frozen E3 result rule until all 18 required invocations are validly complete. Do
 not revive E2b, retune `c`, or use any intermediate return to alter the remaining launch set.
