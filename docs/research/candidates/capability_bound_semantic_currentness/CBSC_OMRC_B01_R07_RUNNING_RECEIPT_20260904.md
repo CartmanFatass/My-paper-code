@@ -5,6 +5,11 @@ This receipt records execution of the object-tier selection in
 `CBSC_OMRC_B01_R07_RESUME_INTAKE_20260904.md`; it creates no new scientific decision.
 The evidence class remains **B/EXPLORE**, with no complete scientific result or assigned polarity.
 
+Later terminal update: the task exited 6 at `2026-09-04T21:41:56Z`. The observed first-slot
+training files are not a complete B1. See `CBSC_OMRC_B01_R07_TELEMETRY_INCIDENT_INTAKE_20260904.md`
+for collected evidence, the controlled reproduction and its limits, quarantine and bounded repair.
+The timestamped running observations below remain unchanged historical records.
+
 ## Accepted invocation
 
 | Field | Recorded value |
