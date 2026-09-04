@@ -17,6 +17,39 @@ The following sentence is preserved from the current `RESEARCH_MAP.md` row and i
 
 > Expressibility/selectivity passed, but utility and allocation improvement were zero.
 
+## Current direction disposition — 2026-09-04
+
+Direction-tier scientific status: `PARKED / PARK_CURRENT_FACTORIZATION`.
+
+The persistent Convergence node returned
+`PRO_FINAL: PARK_CURRENT_FACTORIZATION` for request
+`2026-09-04-egrcr-frcs-b01-convergence-01`. This direction-level disposition parks the present
+EGRCR factorization and all local continuation; it does not itself mutate the Portfolio lifecycle
+record held in `docs/research/portfolio/PORTFOLIO.md`.
+
+The final decision was formed on conversation binding
+`em:expressibility_gated_renewal_credit_relay:convergence` after all eight authorized paths were
+read at pinned ref `abcc7c27c6b7d610794f9727d4daef3a6a545564`. The exact response is retained at
+`external/2026-09-04-egrcr-frcs-b01-convergence-01/RESPONSE.md` with SHA-256
+`38f8842dcffef8f98b8d39e3b9336cf54e585c187c7a1b836d3d7ec328c6a5b8`; provider, send, archive,
+receipt, and cleanup facts are retained byte-for-byte in the adjacent `TRANSPORT_FACTS.json`.
+
+The smallest supported conclusion is that the current association factorization offers no
+warranted local continuation after losing every registered direct estimation diagnostic to the
+competent containing critic. The strongest contradiction is preserved: its exactly enumerated
+temperature-one utility was higher by `0.0120447653`. Because both critics were `8/8`
+decision-competent, sampled utility tied, exact Q and source-gradient errors favored the generic
+critic, and even the scale-free gradient cosine slightly favored generic, the positive smooth
+utility is a scale/calibration ambiguity rather than evidence of association-credit value.
+
+The decision rejects unchanged replication, rejects a scale-controlled B02 inside this direction,
+and rejects a telemetry-only rerun. It does not establish stable failure of all structured
+factorizations. Re-entry requires separate authorization for a prospectively motivated new
+factorization or decision mechanism that predicts a scale-invariant native allocation or utility
+advantage under a predeclared common calibration or trust map and a competent containing
+same-information comparator. Such an object would be new evidence, not B01 replication, repair, or
+continuation.
+
 ## Section-11 finite-resource cycle — 2026-09-04
 
 The Portfolio decision
@@ -41,12 +74,13 @@ precludes a compute-efficiency claim. Full evidence and intake are in
 `EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_RESULT_EVIDENCE_20260904.md` and
 `EGRCR_FINITE_RESOURCE_CENSORED_SUBSTITUTION_B01_INTAKE_20260904.md`.
 
-No unchanged three-seed replication is locally authorized: the card reserved that rung for a clean
-factorized endpoint gain, which did not occur. The direction is at a clean boundary pending its
-persistent Convergence decision on whether to park the present factorization, recast one
-scale-controlled decision discriminator, or continue. The current claim ceiling is this fixed
-four-agent host, one seed, 192 episodes, 128 updates, the two frozen 32-parameter critics, and the
-temperature-one evaluator.
+No unchanged three-seed replication is authorized: the card reserved that rung for a clean
+factorized endpoint gain, which did not occur. Convergence has now rejected both unchanged
+replication and a scale-controlled B02 as local continuation. The direction is parked at a clean
+boundary. The current claim ceiling remains this fixed four-agent host, one seed, 192 episodes,
+128 updates, the two frozen 32-parameter critics, and the temperature-one evaluator; no stable
+factorization failure, general relay-information, compute-efficiency, transfer, or deployment
+claim is available.
 
 ## Current material cycle
 
