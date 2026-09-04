@@ -8,7 +8,8 @@ status is closed)
 > **Current-status overlay (2026-09-04).** This record remains evidence of the 2026-09-03
 > revision. Its fixed receipt route, two-direction capacity, and unratified Portfolio audit-window
 > behavior are superseded. Current routing is one on-demand Transport operator per handoff with one
-> receipt to the creator `source_thread_id`; repository research capacity has no fixed cap; and a
+> receipt to the handoff author's declared `parent_thread_id`; new operators use Luna/high;
+> repository research capacity has no fixed cap; and a
 > Portfolio proposal never takes effect before owner ratification. See root `AGENTS.md` and
 > `2026-09-04-dm-max-and-unbounded-research-capacity.md`.
 

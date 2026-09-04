@@ -25,8 +25,8 @@ records or old provider facts.
    separation, registration, or investment action takes effect before owner ratification.
 5. Every Pro handoff creates one Transport operator task on demand. The provider conversation is
    bound only by its stable `conversation_binding_key`; `operator_thread_id` is a per-handoff
-   runtime fact; the one completion or terminal-blocker receipt returns only to the creator
-   `source_thread_id`.
+   runtime fact; the operator is created with `gpt-5.6-luna` / `high`; and the one completion or
+   terminal-blocker receipt returns only to the handoff author's declared `parent_thread_id`.
 6. The 2026-09-03 research pause is lifted. The active Codex heartbeat may resume and coordinate
    research from repository state.
 

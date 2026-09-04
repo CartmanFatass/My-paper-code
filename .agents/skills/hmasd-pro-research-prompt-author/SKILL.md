@@ -29,7 +29,8 @@ Require an input object with:
   reject `operator` and unknown roles;
 - `workflow_node`: `em_innovator` or `em_convergence` for an `em` caller, and
   `portfolio_decision` for a `portfolio` caller;
-- `request_id` and the exact originating Codex `source_thread_id`, plus exact
+- `request_id`, the exact originating Codex `source_thread_id`, and its exact
+  `parent_thread_id`, plus exact
   `scientific_question`, exact `deliverable`, and explicit `claim_ceiling`;
 - one opaque registered `direction_id` for an EM node, or a non-empty unique
   `direction_ids` list for the Portfolio node;
@@ -56,14 +57,13 @@ Those instructions belong only in the author-to-Transport `HANDOFF.json` and its
 dispatch fields. A caller-supplied non-empty companion override remains byte-for-byte
 preserved as provider-visible text.
 
-`source_thread_id` is required routing metadata for the originating Codex task.
-Validate it as the exact source-task UUID and preserve it byte-for-byte in the
-machine-readable handoff. It is never scientific content, a Pro conversation
-identity, or a caller-authority field, and must never be copied into
-the provider-visible `PROMPT_BODY.md`. Transport delivers the completion receipt to
-the exact `source_thread_id` that created this handoff. It is the only completion or
-terminal-blocker receipt destination; Transport must never infer or substitute a
-fallback task.
+`source_thread_id` and `parent_thread_id` are required routing metadata. Validate
+each as an exact task UUID and preserve both byte-for-byte in the machine-readable
+handoff. Neither is scientific content, a Pro conversation identity, or a
+caller-authority field, and neither may enter the provider-visible
+`PROMPT_BODY.md`. `source_thread_id` identifies the task that authored the handoff;
+Transport delivers the completion or terminal-blocker receipt only to its declared
+`parent_thread_id`. Transport must never infer or substitute a fallback task.
 
 The calling Portfolio/EM owns direction scope, wording, scientific meaning,
 claim ceiling, and reference selection. Pro owns the final decision at the
@@ -155,14 +155,14 @@ that its contents were retrieved.
 2. Render exactly the two files `PROMPT_BODY.md` and `HANDOFF.json`. The renderer
    records `dispatch_mode=CREATE_ON_DEMAND`, `operator_thread_id=null`,
    `dispatch_state=PENDING_CREATE`,
-   `return_receipt_thread_id=<source_thread_id>`, the absolute handoff path,
+   `return_receipt_thread_id=<parent_thread_id>`, the absolute handoff path,
    `dispatch_required=true`, and `dispatch_once=true`, plus the exact workflow
    node, direction scope, conversation binding key, optional requested provider
    conversation ID, and `decision_authority=pro_final`. Routing metadata is written
    only to `HANDOFF.json` and its `transport_request` object.
 3. Resolve the current saved HMASD project, then call `create_thread` exactly once
    with that project's `local` environment, `model=gpt-5.6-luna`,
-   `thinking=medium`, and the emitted `operator_bootstrap_prompt`. Pass the model
+   `thinking=high`, and the emitted `operator_bootstrap_prompt`. Pass the model
    and thinking fields explicitly; never inherit them from the creator task. The
    bootstrap tells the new operator to wait; it must not inspect or execute the
    handoff yet. Do not reuse a prior operator. If creation returns only a
@@ -187,17 +187,17 @@ The author must not perform any of those operations.
 
 The created operator's UUID is a runtime fact for this handoff only. It must not be
 reused as a global target, enter `conversation_binding_key`, or replace
-`source_thread_id` as the return destination. After its terminal receipt is delivered
-and its heartbeat is retired, the creator archives that operator task; every later
-handoff creates a fresh Luna/medium operator.
+`parent_thread_id` as the return destination. After its terminal receipt is delivered
+and its heartbeat is retired, the parent archives that operator task; every later
+handoff creates a fresh Luna/high operator.
 
 ## Handoff and transport boundary
 
 `HANDOFF.json` identifies the source caller (`portfolio` or `em`), exact
-`source_thread_id`, workflow node, exact direction scope/request ID, durable
+`source_thread_id`, exact `parent_thread_id`, workflow node, exact direction scope/request ID, durable
 conversation binding key, body path,
 repository/ref, `dispatch_mode=CREATE_ON_DEMAND`, the runtime operator ID after
-creation, and `return_receipt_thread_id=source_thread_id`. It says that the operator
+creation, and `return_receipt_thread_id=parent_thread_id`. It says that the operator
 should upload the body verbatim as the sole scientific packet, then apply
 `hmasd-chatgpt-pro-transport` for Pro verification, one-to-one
 conversation binding, send evidence, long wait, archive, and tab cleanup.
@@ -225,7 +225,7 @@ resume the ordinary validate-render-dispatch sequence.
 ## Red flags and stop states
 
 Stop with a structured error on malformed or unsafe supplied values, including
-an invalid `source_thread_id`, a
+an invalid `source_thread_id` or `parent_thread_id`, a
 caller/workflow mismatch, unknown direction scope, unpinned/mismatched repository
 ref, or duplicate/unlisted paths. Missing or genuinely ambiguous
 required fields use the single consolidated caller clarification instead. A

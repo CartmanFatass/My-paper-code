@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Mapping, MutableMapping
 
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 RESET_DECISION_OUTCOMES = frozenset({"DECISION_NOT_FORMED", "BLOCKED"})
 THREAD_ID_RE = re.compile(
     r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
@@ -313,10 +313,18 @@ def receipt_message_key(
 
 
 def validate_source_thread_id(value: object) -> str:
-    """Validate the creator task UUID used as the sole return destination."""
+    """Validate the task UUID that authored the handoff."""
 
     if not isinstance(value, str) or not re.fullmatch(THREAD_ID_RE, value):
         raise ValueError("source_thread_id must be the canonical creator Codex task UUID")
+    return value
+
+
+def validate_parent_thread_id(value: object) -> str:
+    """Validate the parent task UUID used as the sole return destination."""
+
+    if not isinstance(value, str) or not re.fullmatch(THREAD_ID_RE, value):
+        raise ValueError("parent_thread_id must be the canonical parent Codex task UUID")
     return value
 
 
@@ -462,7 +470,7 @@ def stage_receipt(
     *,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Stage one completion receipt to the task that created this operator."""
+    """Stage one completion receipt to the handoff's exact parent task."""
 
     if str(record.get("state")) != "ARCHIVED":
         raise ValueError("completion receipt may be staged only after ARCHIVED")
@@ -472,7 +480,7 @@ def stage_receipt(
     if receipt_has_delivery_evidence(existing):
         return record
     try:
-        source_thread_id = validate_source_thread_id(record.get("source_thread_id"))
+        parent_thread_id = validate_parent_thread_id(record.get("parent_thread_id"))
     except ValueError as exc:
         for key in tuple(existing):
             if key.startswith("fallback_") or key == "primary_destination_thread_id":
@@ -481,12 +489,13 @@ def stage_receipt(
             {
                 "required": False,
                 "source_thread_id": record.get("source_thread_id"),
+                "parent_thread_id": record.get("parent_thread_id"),
                 "destination_thread_id": None,
                 "status": "BLOCKED",
                 "attempt_count": int(existing.get("attempt_count", 0)),
                 "message_key": None,
                 "retry_allowed": False,
-                "routing_mode": "CREATOR_SESSION",
+                "routing_mode": "PARENT_SESSION",
                 "fallback_enabled": False,
                 "receipt_state": "RETURN_RECEIPT_BLOCKED",
                 "error": f"RETURN_RECEIPT_BLOCKED: {exc}",
@@ -499,6 +508,9 @@ def stage_receipt(
         record["return_receipt_state"] = "RETURN_RECEIPT_BLOCKED"
         record["updated_at"] = timestamp
         return record
+    source_thread_id = record.get("source_thread_id")
+    if source_thread_id is not None:
+        source_thread_id = validate_source_thread_id(source_thread_id)
     creator_thread_id = record.get("creator_thread_id")
     if creator_thread_id is not None and creator_thread_id != source_thread_id:
         raise ValueError("creator_thread_id must equal source_thread_id")
@@ -512,8 +524,8 @@ def stage_receipt(
         raise ValueError("completion receipt message key conflicts with the archived response")
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
-            existing.get("destination_thread_id") == source_thread_id
-            and existing.get("routing_mode") == "CREATOR_SESSION"
+            existing.get("destination_thread_id") == parent_thread_id
+            and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
         ):
             return record
@@ -529,7 +541,8 @@ def stage_receipt(
         {
             "required": True,
             "source_thread_id": source_thread_id,
-            "destination_thread_id": source_thread_id,
+            "parent_thread_id": parent_thread_id,
+            "destination_thread_id": parent_thread_id,
             "status": "PENDING",
             "message_key": message_key,
             "attempt_count": int(existing.get("attempt_count", 0)),
@@ -539,12 +552,13 @@ def stage_receipt(
             "archive_paths": dict(archive_paths),
             "response_sha256": response_sha256,
             "staged_at": timestamp,
-            "routing_mode": "CREATOR_SESSION",
+            "routing_mode": "PARENT_SESSION",
             "fallback_enabled": False,
         }
     )
     record["creator_thread_id"] = source_thread_id
-    record["return_route"] = "CREATOR_SESSION"
+    record["parent_thread_id"] = parent_thread_id
+    record["return_route"] = "PARENT_SESSION"
     record["return_receipt"] = existing
     return record
 
@@ -556,7 +570,7 @@ def stage_blocker_receipt(
     *,
     now: str | None = None,
 ) -> MutableMapping[str, Any]:
-    """Stage one terminal-blocker receipt to the creator task."""
+    """Stage one terminal-blocker receipt to the handoff's exact parent task."""
 
     if blocker_state not in TERMINAL_STATES or blocker_state == "ARCHIVED":
         raise ValueError("blocker_state must be a non-archive terminal transport state")
@@ -568,7 +582,7 @@ def stage_blocker_receipt(
     if receipt_has_delivery_evidence(existing):
         return record
     try:
-        source_thread_id = validate_source_thread_id(record.get("source_thread_id"))
+        parent_thread_id = validate_parent_thread_id(record.get("parent_thread_id"))
     except ValueError as exc:
         for key in tuple(existing):
             if key.startswith("fallback_") or key == "primary_destination_thread_id":
@@ -580,12 +594,13 @@ def stage_blocker_receipt(
                 "error": f"RETURN_RECEIPT_BLOCKED: {exc}; transport blocker: {error}",
                 "required": False,
                 "source_thread_id": record.get("source_thread_id"),
+                "parent_thread_id": record.get("parent_thread_id"),
                 "destination_thread_id": None,
                 "status": "BLOCKED",
                 "attempt_count": int(existing.get("attempt_count", 0)),
                 "message_key": None,
                 "retry_allowed": False,
-                "routing_mode": "CREATOR_SESSION",
+                "routing_mode": "PARENT_SESSION",
                 "fallback_enabled": False,
                 "receipt_state": "RETURN_RECEIPT_BLOCKED",
                 "blocked_at": timestamp,
@@ -597,6 +612,9 @@ def stage_blocker_receipt(
         record["return_receipt_state"] = "RETURN_RECEIPT_BLOCKED"
         record["updated_at"] = timestamp
         return record
+    source_thread_id = record.get("source_thread_id")
+    if source_thread_id is not None:
+        source_thread_id = validate_source_thread_id(source_thread_id)
     creator_thread_id = record.get("creator_thread_id")
     if creator_thread_id is not None and creator_thread_id != source_thread_id:
         raise ValueError("creator_thread_id must equal source_thread_id")
@@ -616,8 +634,8 @@ def stage_blocker_receipt(
         raise ValueError("blocker receipt message key conflicts with the terminal state")
     if existing.get("status") == "PENDING" and existing.get("message_key"):
         if (
-            existing.get("destination_thread_id") == source_thread_id
-            and existing.get("routing_mode") == "CREATOR_SESSION"
+            existing.get("destination_thread_id") == parent_thread_id
+            and existing.get("routing_mode") == "PARENT_SESSION"
             and existing.get("fallback_enabled") is False
         ):
             return record
@@ -634,7 +652,8 @@ def stage_blocker_receipt(
             "error": error,
             "required": True,
             "source_thread_id": source_thread_id,
-            "destination_thread_id": source_thread_id,
+            "parent_thread_id": parent_thread_id,
+            "destination_thread_id": parent_thread_id,
             "status": "PENDING",
             "message_key": base_key,
             "attempt_count": int(existing.get("attempt_count", 0)),
@@ -642,12 +661,13 @@ def stage_blocker_receipt(
             "delivery_mode": "bounded_single_attempt",
             "return_control_after_attempt": True,
             "staged_at": timestamp,
-            "routing_mode": "CREATOR_SESSION",
+            "routing_mode": "PARENT_SESSION",
             "fallback_enabled": False,
         }
     )
     record["creator_thread_id"] = source_thread_id
-    record["return_route"] = "CREATOR_SESSION"
+    record["parent_thread_id"] = parent_thread_id
+    record["return_route"] = "PARENT_SESSION"
     record["return_receipt"] = existing
     return record
 
@@ -668,13 +688,13 @@ def record_receipt_result(
     receipt = dict(record.get("return_receipt") or {})
     if receipt.get("status") != "PENDING":
         raise ValueError("receipt result requires one pending, unsent receipt")
-    source_thread_id = validate_source_thread_id(
-        receipt.get("source_thread_id") or record.get("source_thread_id")
+    parent_thread_id = validate_parent_thread_id(
+        receipt.get("parent_thread_id") or record.get("parent_thread_id")
     )
-    if receipt.get("destination_thread_id") != source_thread_id:
-        raise ValueError("receipt result destination must equal source_thread_id")
-    if receipt.get("routing_mode") != "CREATOR_SESSION" or receipt.get("fallback_enabled") is not False:
-        raise ValueError("receipt result requires the creator-session route")
+    if receipt.get("destination_thread_id") != parent_thread_id:
+        raise ValueError("receipt result destination must equal parent_thread_id")
+    if receipt.get("routing_mode") != "PARENT_SESSION" or receipt.get("fallback_enabled") is not False:
+        raise ValueError("receipt result requires the parent-session route")
     receipt["status"] = status
     receipt["delivery_status"] = delivery_status
     receipt["updated_at"] = timestamp
@@ -684,7 +704,7 @@ def record_receipt_result(
         receipt["sent_at"] = timestamp
     if error:
         receipt["error"] = error
-    receipt["destination_thread_id"] = source_thread_id
+    receipt["destination_thread_id"] = parent_thread_id
     record["return_receipt"] = receipt
     return record
 

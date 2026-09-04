@@ -9,7 +9,8 @@ reports.
 > **Current-status overlay (owner, 2026-09-04).** The owner lifted the handoff pause and directed
 > automatic research to resume. The repository now has no fixed research-concurrency cap, Direction
 > Managers run at `gpt-5.6-sol` / `max`, and every Pro handoff creates an on-demand Transport
-> operator whose single receipt returns to its creator `source_thread_id`. Root `AGENTS.md`,
+> operator at `gpt-5.6-luna` / `high`; its single receipt returns to the handoff author's declared
+> `parent_thread_id`, never the source/creator subtask. Root `AGENTS.md`,
 > `PORTFOLIO.md`, and `decisions/2026-09-04-dm-max-and-unbounded-research-capacity.md` are the current
 > control plane. Statements below about the old pause, two-direction cap, deleted Claude heartbeat,
 > or fixed receipt routing describe the historical handoff state only.

@@ -18,6 +18,7 @@ if str(SCRIPT_DIR) not in sys.path:
 from transport_contract import (  # noqa: E402
     packet_artifacts,
     validate_provider_context_reset_evidence,
+    validate_parent_thread_id,
     validate_source_thread_id,
 )
 
@@ -203,14 +204,20 @@ def validate(request: dict, project_root: Path) -> dict:
         creator_thread_id = validate_source_thread_id(creator_thread_id)
         if creator_thread_id != source_thread_id:
             raise ValueError("creator_thread_id must equal source_thread_id")
-    return_receipt_thread_id = request.get("return_receipt_thread_id", source_thread_id)
+    parent_thread_id = request.get("parent_thread_id")
+    if parent_thread_id is None:
+        if canonical_handoff:
+            raise ValueError("canonical handoff requires parent_thread_id")
+    else:
+        parent_thread_id = validate_parent_thread_id(parent_thread_id)
+    return_receipt_thread_id = request.get("return_receipt_thread_id", parent_thread_id)
     if return_receipt_thread_id is not None:
-        return_receipt_thread_id = validate_source_thread_id(return_receipt_thread_id)
-        if return_receipt_thread_id != source_thread_id:
-            raise ValueError("return_receipt_thread_id must equal source_thread_id")
-    return_route = request.get("return_route", "CREATOR_SESSION" if source_thread_id else None)
-    if return_route not in {None, "CREATOR_SESSION"}:
-        raise ValueError("return_route must be CREATOR_SESSION when supplied")
+        return_receipt_thread_id = validate_parent_thread_id(return_receipt_thread_id)
+        if return_receipt_thread_id != parent_thread_id:
+            raise ValueError("return_receipt_thread_id must equal parent_thread_id")
+    return_route = request.get("return_route", "PARENT_SESSION" if parent_thread_id else None)
+    if return_route not in {None, "PARENT_SESSION"}:
+        raise ValueError("return_route must be PARENT_SESSION when supplied")
     operator_thread_id = request.get("operator_thread_id")
     if operator_thread_id is not None:
         operator_thread_id = validate_source_thread_id(operator_thread_id)
@@ -251,10 +258,11 @@ def validate(request: dict, project_root: Path) -> dict:
         "companion_prompt_sha256": hashlib.sha256(companion_prompt.encode("utf-8")).hexdigest() if companion_prompt is not None else None,
         "source_thread_id": source_thread_id,
         "creator_thread_id": creator_thread_id,
+        "parent_thread_id": parent_thread_id,
         "operator_thread_id": operator_thread_id,
         "return_route": return_route,
         "return_receipt_thread_id": return_receipt_thread_id,
-        "return_receipt_ready": bool(source_thread_id),
+        "return_receipt_ready": bool(parent_thread_id),
         "reference_files": reference_files,
         "packet": packet,
     }

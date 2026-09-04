@@ -26,12 +26,14 @@ exactly one body source:
 - absolute `prompt_path` for file-upload mode, plus an exact `companion_prompt` only
   when the page requires text before its Send control becomes enabled.
 
-Every canonical handoff must provide the exact creator Codex `source_thread_id` and
-the runtime `operator_thread_id` recorded after `create_thread`. Treat both as routing
-metadata, never as scientific content; do not infer either from the provider
-conversation URL, a task title, or prose. `source_thread_id` is the sole completion
-or terminal-blocker receipt destination. `operator_thread_id` is a per-handoff
-runtime fact and never a provider-conversation binding.
+Every canonical handoff must provide the exact creator Codex `source_thread_id`, its
+exact `parent_thread_id`, and the runtime `operator_thread_id` recorded after
+`create_thread`. Treat all three as routing metadata, never as scientific content;
+do not infer them from the provider conversation URL, a task title, or prose.
+`parent_thread_id` is the sole completion or terminal-blocker receipt destination.
+`source_thread_id` identifies the handoff author but is not a receipt destination.
+`operator_thread_id` is a per-handoff runtime fact and never a provider-conversation
+binding.
 
 An optional `reference_paths` list contains one or more absolute reference files
 for bounded noncanonical/legacy transport. Validate and hash every
@@ -51,17 +53,18 @@ declaration in that mode.
 Use the body bytes verbatim and retain any generic legacy reference support only for
 non-Author transport requests.
 
-Reject every canonical request that lacks a valid `source_thread_id`. Reject legacy
+Reject every canonical request that lacks a valid `source_thread_id` or
+`parent_thread_id`. Reject legacy
 fallback routing fields even when false or null. A legacy request may omit its source
-and still execute transport, but it is then ineligible for an automatic receipt; mark
+or parent and still execute transport, but without a valid parent it is ineligible for an automatic receipt; mark
 its receipt substate `RETURN_RECEIPT_BLOCKED`, do not guess a destination, and do not
 send any receipt.
 
 When loading legacy outbox state, normalize only a provably unsent `PENDING` or
 `BLOCKED` receipt. Check both the primary and old fallback route: any attempt count,
 delivery status, sent timestamp, or terminal delivery state preserves the complete
-old receipt as historical evidence and forbids a new send. A valid source permits
-only the zero-attempt migration to `CREATOR_SESSION`; no source records
+old receipt as historical evidence and forbids a new send. A valid parent permits
+only the zero-attempt migration to `PARENT_SESSION`; no parent records
 `required=false` and remains ineligible for return.
 
 The allowed decision-node bindings are exact:
@@ -259,12 +262,12 @@ The executor turn ending, a heartbeat wake returning, or a timeout is never
 sufficient reason to close it; closure occurs only after natural completion and
 archive verification.
 
-### Completion receipt to the creator session
+### Completion receipt to the parent session
 
 After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
 completion receipt in the persisted outbox, then send it once to the exact validated
-`source_thread_id` using
+`parent_thread_id` using
 `mcp__codex_app__send_message_to_thread`. The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
@@ -273,15 +276,15 @@ transport facts only and must not add scientific interpretation. Record the rece
 timestamp, destination thread ID, deterministic message key, attempt count, and
 delivery status in the registry or transport-fact file. Treat the logical receipt as
 idempotent; the deterministic message key is unchanged by this routing choice. Its
-route record is `routing_mode=CREATOR_SESSION`,
-`destination_thread_id=<source_thread_id>`, and `fallback_enabled=false`. On
+route record is `routing_mode=PARENT_SESSION`,
+`destination_thread_id=<parent_thread_id>`, and `fallback_enabled=false`. On
 uncertain delivery, do not create a duplicate or send again—record
 `RETURN_RECEIPT_UNCERTAIN` and report it. Persist the one bounded attempt's result
 and return control immediately; a rejection must not cause a second send. For an
 explicit terminal/blocker state with no archive, `stage_blocker_receipt` applies the
-same creator-route, one-send rule. If the source is missing or invalid, staging
+same parent-route, one-send rule. If the parent is missing or invalid, staging
 records the receipt substate `RETURN_RECEIPT_BLOCKED` without a message key or
-destination and performs no send. Never use the operator task itself, an old receipt
+destination and performs no send. Never use the source/creator task, the operator task itself, an old receipt
 task, or any repository UUID as a fallback.
 
 ### Heartbeat retirement at task close
