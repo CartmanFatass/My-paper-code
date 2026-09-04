@@ -41,6 +41,14 @@ positive-probability legal-action disagreement and the existing harm envelope. A
 admitted only by the frozen `HR-A` mapping; `HR-B`, `HR-C`, and `HR-D` instead constrain or park
 the line as registered.
 
+Engineering intake then reproduced that exact main-value calculation crosses the frozen
+120-second invocation cap before horizon 5 completes; horizon 12 and its required metrics were not
+run. This creates no HR branch and no scientific polarity. The incomplete diagnostic bytes remain
+only on commit `5e0fdbfd68af381ede7f212364d94457faa4a2f1` with `DO_NOT_INTEGRATE` status. Because changing
+horizon, exactness, observables, or cap is direction tier, an engineering dissent reopens the same
+Convergence node. ACVC is parked at a clean engineering boundary until that node forms a new
+decision; no headroom or learner launch is authorized meanwhile.
+
 ## Evidence set
 
 The accepted evidence set is:
@@ -56,6 +64,7 @@ The accepted evidence set is:
 - `docs/research/candidates/acvc/external/2026-09-04-acvc-b2c-convergence-01/RESPONSE.md`
 - `docs/research/candidates/acvc/ACVC_B2C_CONVERGENCE_DECISION_INTAKE_20260904.md`
 - `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_R01_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_R01_ENGINEERING_DISSENT_20260904.md`
 
 ## Provenance boundary
 
