@@ -3,6 +3,7 @@ from __future__ import annotations
 import inspect
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -11,6 +12,9 @@ import pytest
 
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import b1_artifact
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01 import (
+    b1_policy_replay_worker,
+)
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.artifact import (
     canonical_json_bytes,
 )
@@ -47,6 +51,14 @@ from scripts import run_cbsc_omrc_b01_b1 as cli
 
 def test_execution_order_is_fixed_seed_major_then_arm() -> None:
     assert b1.ARM_SEED_ORDER == tuple((seed, arm) for seed in B1_SEEDS for arm in ARMS)
+
+
+def test_b1_child_interpreters_preserve_the_invoked_environment() -> None:
+    invoked = Path(os.path.abspath(sys.executable))
+    assert b1._invoked_python_executable() == invoked
+    assert b1_policy_replay_worker._invoked_python_executable() == invoked
+    if invoked.is_symlink():
+        assert b1._invoked_python_executable() != invoked.resolve()
 
 
 def _ordered_raw_slices() -> list[dict]:

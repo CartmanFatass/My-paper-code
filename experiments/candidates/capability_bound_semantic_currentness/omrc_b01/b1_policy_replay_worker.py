@@ -74,6 +74,12 @@ class PolicyReplayWorkerError(ValueError):
     """A replay request, admission, or publication boundary differs."""
 
 
+def _invoked_python_executable() -> Path:
+    """Keep the active environment's interpreter path without resolving symlinks."""
+
+    return Path(os.path.abspath(sys.executable))
+
+
 @dataclass(frozen=True)
 class PolicyReplayInvocation:
     attempt_root: Path
@@ -306,7 +312,7 @@ def _validate_fresh_admission(invocation: PolicyReplayInvocation) -> dict[str, A
         or Path(bound["bound_receipt_path"]).resolve(strict=False) != path.resolve()
     ):
         raise PolicyReplayWorkerError("fresh bound admission identity is stale")
-    executable = Path(sys.executable).resolve()
+    executable = _invoked_python_executable()
     preflight = CANONICAL_PREFLIGHT
     raw_path = Path(bound["raw_output_path"]).resolve(strict=True)
     if (
