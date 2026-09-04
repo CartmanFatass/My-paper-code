@@ -205,12 +205,6 @@ def _digest(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
-def _invoked_python_executable() -> Path:
-    """Keep the active environment's interpreter path without resolving symlinks."""
-
-    return Path(os.path.abspath(sys.executable))
-
-
 def _require_commit(value: str) -> str:
     if type(value) is not str or len(value) != 40:
         raise B1OrchestrationError("implementation_commit must be lowercase Git hex")
@@ -446,7 +440,7 @@ def validate_bound_admission(
         or bound.get("implementation_commit") != expected_commit
     ):
         raise B1OrchestrationError("bound B1 admission invocation identity differs")
-    executable = _invoked_python_executable()
+    executable = Path(os.path.abspath(sys.executable))
     if (
         bound.get("python_executable") != str(executable)
         or bound.get("python_sha256") != _digest(executable.read_bytes())
@@ -526,7 +520,7 @@ def run_memory_preflight(
         raise B1OrchestrationError("B1 admission arm/seed/attempt differs")
     if receipt_path.exists():
         raise FileExistsError("create-only B1 bound admission receipt exists")
-    executable = _invoked_python_executable()
+    executable = Path(os.path.abspath(sys.executable))
     raw_path = receipt_path.with_name(f".{receipt_path.name}.raw-{uuid.uuid4().hex}.json")
     command = [
         str(executable), str(CANONICAL_PREFLIGHT), "admit-memory", "--out", str(raw_path)
@@ -661,7 +655,7 @@ def _prepare_worker_invocation(
     error_path = worker_root / "error.json"
     _atomic_create_json(request_path, payload)
     command = [
-        str(_invoked_python_executable()), "-m", CANONICAL_WORKER_MODULE,
+        str(Path(os.path.abspath(sys.executable))), "-m", CANONICAL_WORKER_MODULE,
         "--request", str(request_path), "--result", str(result_path),
         "--error", str(error_path),
     ]
@@ -1051,7 +1045,7 @@ def run_assess_preflight(receipt_path: Path) -> dict[str, Any]:
         raise FileExistsError(f"create-only assess-run receipt exists: {output}")
     output.parent.mkdir(parents=True, exist_ok=True)
     command = [
-        str(_invoked_python_executable()), str(CANONICAL_PREFLIGHT), "assess-run",
+        str(Path(os.path.abspath(sys.executable))), str(CANONICAL_PREFLIGHT), "assess-run",
         "--direction", DIRECTION_ID,
         "--run-id", "cbsc_omrc_b1_three_seed_scout",
         "--workers", str(LiteralB1ArmSeedEngine.worker_count),
@@ -1835,7 +1829,7 @@ def _prepare_policy_replay_invocation(
     )
     _atomic_create_json(request_path, request)
     command = [
-        str(_invoked_python_executable()), "-m",
+        str(Path(os.path.abspath(sys.executable))), "-m",
         "experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_policy_replay_worker",
         "--request", str(request_path.resolve(strict=True)),
     ]
