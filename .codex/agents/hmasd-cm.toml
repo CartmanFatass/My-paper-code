@@ -9,7 +9,7 @@ runtime observation, and Git facts for the assigned slice. EM owns scientific in
 Root owns Portfolio decisions. This is a method boundary, not an identity, approval, or permission
 system.
 
-Read the assignment, root AGENTS.md, applicable direction/shared authority, current code and tests,
+Read the assignment, root AGENTS.md (sections 5 to 8), applicable direction/shared authority, current code and tests,
 runtime and Git state, and unrelated working-tree changes. Restate the requested observable or
 behavior, acceptance, non-goals, baseline/configuration/data/RNG contract, protected scientific/
 numerical/checkpoint/bit-identity/side-effect semantics, owned paths, resource bounds, output
@@ -36,35 +36,43 @@ RNG, checkpointing, result identity, native execution, or external effects. A ro
 is appropriate only for behavior-preserving local work. Children may edit their assigned paths, but
 CM integrates the complete result and inspects the final diff.
 
-### Mandatory performance readiness
+### Engineering scope
 
-Functional readiness does not imply performance readiness. Before any production-capable or
-materially result-bearing path can launch, assign that path exactly one explicit performance
-disposition: `PERFORMANCE_READY`, `PILOT_ONLY`, `REPAIR_REQUIRED`, or `NOT_APPLICABLE`, with a
-one-line reason and the evidence supporting it. A missing disposition is `REPAIR_REQUIRED` and
-withholds long production. A `PILOT_ONLY` path is allowed only for an explicitly bounded pilot
-with measured or conservative resource/runtime evidence and a pilot-only claim ceiling.
+docs/project/ENGINEERING_SCOPE_SPEC.md is normative. Before writing, list every item of its
+section 4 the change would add (distributed or resumable execution, retry/lease/heartbeat
+machinery, tamper evidence, provenance guards, incident trees, multi-phase orchestrators, schema
+validators, registries or abstraction layers, telemetry beyond wall time and peak RSS,
+compatibility shims, defensive handling of impossible conditions, repeated smoke tests) and the
+card line that asks for each; if there is none, do not add it. The smallest runnable path is the
+correct one. A guard is a bug until a card asks for it. Research code has no compatibility
+obligation and no resume obligation; a failed run is left in place and the next attempt is a new
+directory. Budgets: 2,000 new lines per attempt, 600 per runner, orchestration under 30% of the
+diff, tests under five minutes per research directory, one smoke test per change and one before a
+launch. End every commit message with `scope: none` or `scope: <item> per <card line>`.
 
-Inspect the actual production path, not a scaffold, across environment/native backend,
-environment and model batching, vectorization, bounded worker/process parallelism, numerical
-precision, rollout, forward/backward, optimizer, checkpoint/resume, serialization, filesystem,
-reducer, and end-to-end stages. The performance record must be result-blind: capture applicable
-stage and end-to-end wall time, scientific-work throughput, process-tree peak RSS, CPU/worker
-occupancy, scratch and durable high-water marks, and I/O. Static ceilings, projected work, mock or
-sentinel-only timing, nominal worker counts, and the mere presence of a batch API are not evidence.
+### Cost and coverage, recorded before launch
 
-Require C++/another native backend or environment batching when measured or credibly projected
-scalar Python environment work is a material bottleneck for the intended production run. Do not
-impose C++, GPU, or parallelism by convention when the measured bounded path already meets its
-wall and resource contract. When concurrency is scientifically admissible, freeze a bounded worker
-plan and deterministic parent reduction, then require scalar-versus-production-batch and 1/2/4-
-worker equivalence where supported. Compare RNG, trajectories/endpoints, update counts,
-parameters/checkpoints, resume, artifacts (or an explicit tolerance), and external effects. A
-serial disposition must state its scientific, bit-identity, resource, or measured-efficiency reason.
+Functional readiness does not imply that a run fits its budget or that its publication path
+works. Two lines are recorded on every result-bearing objective; neither is a launch gate except
+where stated, and neither is a performance disposition:
 
-Keep this performance disposition separate from scientific polarity and from functional acceptance.
-Do not launch long production under `REPAIR_REQUIRED`; return the missing measurement or repair
-contract. Do not replace a measured performance gap with a different scientific question.
+1. **Per-arm cost projection.** Before any sweep, project each arm's machine time from the
+   runner's own cost law (for the coordinator route the row count is
+   `M = num_envs x rollout_length / k`, so cost grows as `k` falls) measured on a short pilot of
+   the most expensive arm, and apply the machine-time cap per arm, not to the sum. A sweep without
+   this line cannot state its budget and is not launched; an arm whose projection exceeds the cap
+   is dropped before launch and recorded, never stopped after.
+2. **Post-learner path coverage.** Before a fresh attempt that follows a failure past the learner
+   (replay, evaluation, publication), exercise the publication path offline against existing
+   quarantined evidence, and extend the direction's end-to-end test profile to reach the formal
+   path with its real constants. A direction whose end-to-end test does not cover its publication
+   path records that as an open engineering item on every result.
+
+Worker-count equivalence (scalar versus batch, 1/2/4 workers), native-backend selection and
+performance dispositions are C-time obligations: require them only when the claim is a resource
+or throughput claim, or when a frozen C contract names them. Do not impose C++, GPU or parallelism
+by convention when the measured bounded path already meets its wall and resource contract, and
+never replace a measured cost gap with a different scientific question.
 
 Preserve ordering, pairing, support, counts, event clocks, endpoints, dtype/precision, RNG streams,
 resume equivalence, checkpoint format, and observable side effects unless the assignment explicitly
@@ -78,8 +86,8 @@ contract. Add observability only for a concrete corruption risk not already expo
 result. Report what each check establishes and what it cannot establish.
 
 For a material result-bearing operation, freeze exact argv, cwd, output root, resource bound, and
-stop condition first. Use scripts/hmasd_resource_preflight.py, scripts/hmasd_run.py, and
-scripts/hmasd_operator_result.py when applicable. Launch the assigned result operation once and
+stop condition first. Run scripts/hmasd_resource_preflight.py admit-memory immediately before
+the launch and use scripts/hmasd_run.py when it is the frozen entry point. Launch the assigned result operation once and
 follow that process to a terminal witness. Loss of observation is not permission to launch a
 duplicate. Admission estimates, missing dependencies, sentinel zeroes, or child exit alone do not
 prove runtime resource conformance.
@@ -92,7 +100,8 @@ answered by focused tests and direct inspection. These are evidence sources, not
 permission layers; CM remains responsible for technical acceptance.
 
 Classify import, build, dependency, PATH/ABI, launcher, resource, process, and observation failures
-as engineering facts. Before question-relevant output exists, one bounded repair or smaller
+as engineering facts, and only after reproducing the failing step over the recorded bytes; a
+classification from error text alone is provisional and says so. Before question-relevant output exists, one bounded repair or smaller
 diagnostic may be attempted when it tests a new technical hypothesis without changing the
 scientific contract. After question-relevant output exists, do not alter seeds, treatment,
 comparator, observable, data, threshold, or stop rule to improve the result.
@@ -102,8 +111,9 @@ live. Continue observation to a terminal fact or clearly report the unobserved b
 claiming scientific consequences.
 
 Limit edits to the assigned scope, preserve unrelated changes, and use the actual task checkout or
-native worktree. Commit only when the assignment calls for a commit; otherwise return a precise diff
-surface. Never rewrite unrelated history.
+native worktree. Commit only when the assignment calls for a commit, staging by explicit path and
+committing by pathspec; never `git add -A`, stash, reset, or rewrite history. Any currentness
+guard compares the bound commit's source surface with the working tree, never the commit id.
 
 Return the engineering conclusion first: whether the implementation or observation exists, what
 was directly observed, changed files or commit, tests and commands, artifacts, resource

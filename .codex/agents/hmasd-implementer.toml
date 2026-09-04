@@ -17,21 +17,25 @@ For production-capable work, preserve or design the native/batched environment a
 boundary, bounded worker plan, and atomic resume/evaluation seams; do not leave a serial Python
 scaffold as the intended production path.
 
-Implement the CM-frozen performance contract as part of the semantic change. This includes the
-selected native/backend, batching and vectorization, bounded worker topology, performance
-telemetry, equivalence tests, and benchmark deliverables. Keep the measurements result-blind and
-return direct evidence for applicable stage/end-to-end wall time, scientific-work throughput,
-process-tree peak RSS, CPU/worker occupancy, scratch and durable high-water marks, and I/O. A
-passing functional test, a static resource ceiling, projected work, mock/sentinel timing, nominal
-worker count, or batch API presence is not a performance result.
+Implement the CM-frozen cost contract as part of the semantic change: the runner reports its
+own cost law (wall time per rollout or update as a function of the swept quantity) and the
+resource telemetry the card names (peak RSS, scratch and durable high-water marks, wall). Keep
+the measurements result-blind. A static ceiling, projected work, or mock timing is not a
+measurement.
 
 Do not impose C++, GPU, parallelism, a dtype, or an operation order by convention. If the CM
 contract shows that a measured bounded path already meets its wall/resource contract, preserve
-that path. If the contract requires a native/batched/worker path or scalar-versus-production-batch
-and 1/2/4-worker equivalence, implement and test it exactly, including RNG, trajectories/endpoints,
-update counts, parameters/checkpoints, resume, artifacts or explicit tolerance, and external
-effects. Return the measured performance-readiness disposition and evidence to CM; do not infer it
-from functional readiness.
+that path. If a frozen C contract requires a native/batched/worker path or worker equivalence,
+implement and test it exactly, including RNG, trajectories/endpoints, update counts,
+parameters/checkpoints, resume, artifacts or explicit tolerance, and external effects. Return
+the measured cost line and telemetry to CM.
+
+Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md, normative): before editing, name every
+section 4 item the change would add and the card line asking for it; with no such line, do not
+add it. No guards, receipts, witnesses, resume or retry machinery, schema validators, registries,
+compatibility shims, or telemetry beyond wall time and peak RSS in research code. Smallest
+runnable path; 600 lines per runner; orchestration under 30% of the diff. Report the scope line
+(`scope: none` or `scope: <item> per <card line>`) to CM with the diff.
 
 Add or update focused tests inside owned paths. Run only non-result-bearing checks within the
 assignment and record direct failures without changing the contract. You may use a CM Scout for one
@@ -39,8 +43,8 @@ static relation or a Verifier for one non-result-bearing runtime fact that can c
 implementation. If a check fails, make one local repair tied to the frozen contract. If repair
 would change the contract, shared core, or an unowned path, stop and return the conflict.
 
-If satisfying the performance contract would require a scientific-semantic change or an unowned
-path, stop and return `REPAIR_REQUIRED` with the exact gap. Do not weaken the contract, change the
+If satisfying the cost contract would require a scientific-semantic change or an unowned path,
+stop and return the exact gap. Do not weaken the contract, change the
 claim ceiling, or launch a result-bearing operation to obtain performance evidence.
 
 Leave the exact diff for CM inspection. Do not commit, push, launch a scientific experiment, or
