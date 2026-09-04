@@ -325,3 +325,20 @@ This is the direction-local Pro decision. It does not itself perform the later
 `portfolio:cross_direction` lifecycle mutation, which remains a separate Root-owned authority event
 and must not be conflated with this direction's scientific ceiling or no-successor judgment. See
 `CRTO_EM_CONVERGENCE_DECISION_INTAKE_20260831.md`.
+
+## Empirical-standard Portfolio reopening — 2026-09-01
+
+The later final Portfolio Pro decision
+`docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`
+keeps this direction `ACTIVE/MEDIUM` and opens one scientifically distinct B/EXPLORE successor:
+an explicitly outcome-informed KEEP/REPLAN-balanced population comparing RAW, true residual, and
+deranged residual at matched short/long exposure. This Portfolio action supersedes the older
+`NO_SUCCESSOR_PRESENTLY_JUSTIFIED` lifecycle consequence; it does not overturn the natural K8
+first-boundary closure or transfer any residual polarity from the zero-KEEP support objects.
+
+The first rung is frozen in
+`CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`. It selects exact high-cost rows from the
+already observed `2026083192` census in matched event/onset pairs, labels the selection
+outcome-informed, and makes no natural-K8 prevalence claim. The strongest comparator is the
+same-information RAW packet, the treatment is the aligned calibrated residual, and a within-cell
+packet derangement tests generic preprocessing. No result has yet been produced.
