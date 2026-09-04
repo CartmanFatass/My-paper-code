@@ -26,9 +26,16 @@ robust absolute receiver-addressed benefit, not a general negative or a directio
 
 Strongest support for the mechanism is A1's positive relative contrast. Strongest contradiction is
 the A0 reversal plus global absolute harm. The surviving alternative is that receiver addressing
-needs sustained exposure or a different initialization regime. The next discriminator is a
-direction-tier choice pending `em:eociv_lite:convergence`: the recommended option is a small
-short-curve multi-update recast against the same source-addressed and unchanged comparators.
+needs greater exposure or a different initialization regime.
+
+The corrective full `em:eociv_lite:convergence` response is final:
+**`PRO_FINAL — CONTINUE`** through exactly one B/EXPLORE object,
+`EOCIV-B10-RECEIVER-CREDIT-FROZEN-SCORE-EXPOSURE-CURVE`. B10 freezes the common trajectories and
+complete score tensor, forms authenticated receiver and distinct-source gradient vectors once,
+and compares 16 cumulative empty-state Adam steps at mandatory endpoints `m=1,4,16` against each
+other and the unchanged anchor. This tests exposure magnitude versus credit direction without the
+endogenous data-distribution divergence of an ordinary on-policy curve. A valid terminal falsifier
+parks only the receiver-addressed credit family; no direction or Portfolio conclusion follows.
 
 Historical map statement retained as provenance, not current authority:
 
@@ -43,6 +50,11 @@ Historical map statement retained as provenance, not current authority:
 - `docs/research/candidates/eociv_lite/EOCIV_B9R1_RECEIVER_ADDRESSED_CREDIT_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/eociv_lite/EOCIV_B9R1_RECEIVER_ADDRESSED_CREDIT_RESULT_EVIDENCE_20260904.md`
 - `docs/research/candidates/eociv_lite/EOCIV_B9R1_RECEIVER_ADDRESSED_CREDIT_INTAKE_20260904.md`
+- `docs/research/candidates/eociv_lite/external/2026-09-04-eociv-b9r1-convergence-01/PRO_RESPONSE_FULL_RECOVERY.md`
+- `docs/research/candidates/eociv_lite/external/2026-09-04-eociv-b9r1-convergence-01/CORRECTIVE_TRANSPORT_FACTS.json`
+- `docs/research/candidates/eociv_lite/EOCIV_B9R1_CONVERGENCE_PRO_FINAL_INTAKE_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_B10_FROZEN_COLLECTION_TAPE_MANIFEST_20260904.json`
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.

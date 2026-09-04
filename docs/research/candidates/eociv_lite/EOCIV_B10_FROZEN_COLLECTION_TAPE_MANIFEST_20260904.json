@@ -1,0 +1,487 @@
+{
+  "object": "EOCIV-B10-RECEIVER-CREDIT-FROZEN-SCORE-EXPOSURE-CURVE",
+  "manifest_role": "PROSPECTIVE_FROZEN_COLLECTION_TAPE_COORDINATES",
+  "manifest_semantics": "These 36 ordered coordinates are fixed before implementation. The runtime collection path derives the real environment tape from exactly the listed profile, root, and forced critical shock tuple. Receiver and authenticated-source contractions consume the same stored trajectory and complete score tensor for each coordinate.",
+  "horizon": 48,
+  "critical_segments": [
+    [
+      12,
+      24
+    ],
+    [
+      36,
+      48
+    ]
+  ],
+  "profiles": [
+    "train_4_3_6_5",
+    "train_5_3_7_6",
+    "train_6_4_8_6"
+  ],
+  "initializations": [
+    {
+      "anchor_id": "A0",
+      "initialization_seed": 990031
+    },
+    {
+      "anchor_id": "A1",
+      "initialization_seed": 990032
+    },
+    {
+      "anchor_id": "A2",
+      "initialization_seed": 990033
+    }
+  ],
+  "ordered_shock_tuples": [
+    [
+      "A",
+      "A"
+    ],
+    [
+      "A",
+      "B"
+    ],
+    [
+      "B",
+      "A"
+    ],
+    [
+      "B",
+      "B"
+    ]
+  ],
+  "tapes": [
+    {
+      "tape_index": 0,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990100,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 1,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990101,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 2,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990102,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 3,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990103,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 4,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990110,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 5,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990111,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 6,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990112,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 7,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990113,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 8,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990120,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 9,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990121,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 10,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990122,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 11,
+      "anchor_id": "A0",
+      "initialization_seed": 990031,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990123,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 12,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990200,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 13,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990201,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 14,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990202,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 15,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990203,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 16,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990210,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 17,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990211,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 18,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990212,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 19,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990213,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 20,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990220,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 21,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990221,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 22,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990222,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 23,
+      "anchor_id": "A1",
+      "initialization_seed": 990032,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990223,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 24,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990300,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 25,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990301,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 26,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990302,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 27,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_4_3_6_5",
+      "collection_root": 990303,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 28,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990310,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 29,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990311,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 30,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990312,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 31,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_5_3_7_6",
+      "collection_root": 990313,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 32,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990320,
+      "shock_index": 0,
+      "forced_critical_shock_tuple": [
+        "A",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 33,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990321,
+      "shock_index": 1,
+      "forced_critical_shock_tuple": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "tape_index": 34,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990322,
+      "shock_index": 2,
+      "forced_critical_shock_tuple": [
+        "B",
+        "A"
+      ]
+    },
+    {
+      "tape_index": 35,
+      "anchor_id": "A2",
+      "initialization_seed": 990033,
+      "profile": "train_6_4_8_6",
+      "collection_root": 990323,
+      "shock_index": 3,
+      "forced_critical_shock_tuple": [
+        "B",
+        "B"
+      ]
+    }
+  ]
+}

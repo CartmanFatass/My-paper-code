@@ -1,0 +1,20 @@
+{
+  "request_id": "eociv-b9r1-convergence-20260904-01",
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:eociv_lite:convergence",
+  "direction_id": "eociv_lite",
+  "conversation_id": "6a9ab0d1-ff9c-83e8-8e7c-6ac082ab11fd",
+  "provider_url": "https://chatgpt.com/c/6a9ab0d1-ff9c-83e8-8e7c-6ac082ab11fd",
+  "underlying_model": "GPT-5.6 Sol",
+  "old_excerpt_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\eociv_lite\\eociv-b9r1-convergence-20260904-01\\eociv-b9r1-convergence-20260904-01--eociv_lite--attempt-01__02_RESPONSE.md",
+  "old_excerpt_sha256": "9139028c9f9f27cde4cd463d6ab5c783277f3429566a4f2ca944c706bb8c5994",
+  "full_recovery_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\eociv_lite\\eociv-b9r1-convergence-20260904-01\\eociv-b9r1-convergence-20260904-01--eociv_lite--attempt-01__02_RESPONSE_FULL_RECOVERY.md",
+  "full_recovery_sha256": "6a2f94bf2ee12aa0e9bc8e1c455a14b68f6f905df8f597aebed4b64eb18e4628",
+  "no_provider_send": true,
+  "receipt_resend": false,
+  "historical_receipt_unchanged": true,
+  "defect_classification": "ARCHIVE_INCOMPLETE_RECOVERED",
+  "tab_lifecycle": "CLOSED_AFTER_RECOVERY",
+  "captured_at": "2026-09-04T12:31:28.0889187Z"
+}
+
