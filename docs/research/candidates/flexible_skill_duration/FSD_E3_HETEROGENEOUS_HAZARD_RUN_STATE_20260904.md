@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-04T13:55:43Z`
+Snapshot: `2026-09-04T14:34:50Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -12,6 +12,11 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
   `docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`
 - Card blob: `2939b751f3cf5ed22b1c9b59d3620d9107955036`
 - Launch implementation SHA: `e6108e466eeea3df31db52c53e49eef828bde41a`
+- Accepted portability-repair SHA:
+  `69b24de052f19d3fbdf457358edd1a9c222585f4`. It changes only the E3 runner's
+  unavailable-peak-RSS handling and the focused publication-path test. The replacement runner is
+  560 lines, the full focused E3 file passes `13/13`, and no frozen scientific, numerical, RNG,
+  checkpoint, evaluation, or result-rule byte was changed.
 - Later state-only commit `5b84d8b072abda9650403b7fef7303a85205c48c` changes neither the
   runner nor its focused test bytes relative to the launch implementation SHA.
 - Runner: `scripts/run_flexible_skill_duration_e3.py`
@@ -22,22 +27,26 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
   preceding `admit-memory` receipt with at least 4 GiB physical and effective availability.
 - Frozen projections per invocation: D0 small `1.16 h`; D0 medium/large `1.68 h`; D2 conservative
   mechanical maximum `4.63 h`; all are below the `8 h` per-arm cap.
-- Current counts at this snapshot: card-accepted `18`; independently admitted/launched `7`;
-  running `1`; valid complete `6`; quarantined `0`; not admitted/launched `11`. The earlier local
-  refusal for the currently running remote invocation is preserved as evidence but was not itself
-  an admission.
+- Current counts at this snapshot: card-accepted invocation cells `18`; result-bearing attempts
+  independently admitted/launched `7`; running `0`; valid complete cells `6`; quarantined attempts
+  `1`; unfulfilled cells `12`, of which `11` have never launched. The earlier local refusal is
+  preserved as evidence but was not itself an admission or launch.
 
-## Detached process at the snapshot
+## Terminal remote attempt at the snapshot
 
 | invocation | execution node and handle | receipt assessed UTC | physical/effective available bytes | progress | terminal artifact |
 | --- | --- | --- | ---: | --- | --- |
-| `medium_d0_seed1` | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_01`; wrapper PID `11443` | `2026-09-04T13:45:42.145553Z` | `15438573568 / 15438573568` | `5/20` rollouts, `1/4` evals | none; task `running`, tmux active |
+| `medium_d0_seed1` attempt 01 | `wsl_4070`; `agent-task` `fsd_e3_medium_d0_seed1_20260904_01`; wrapper PID `11443` | `2026-09-04T13:45:42.145553Z` | `15438573568 / 15438573568` | learner reached `20/20` rollouts and `4/4` evals; E3 postprocess incomplete | task `failed`, exit `1`, tmux inactive; attempt quarantined |
 
-The task runs in detached remote worktree
+The task ran in detached remote worktree
 `/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_01` at exact pushed SHA
 `e6108e466eeea3df31db52c53e49eef828bde41a`. Its one supervised command performed the remote
 `admit-memory` immediately before the exact runner. No receipt was reused as batch admission and
-no request-specific evidence input needed staging outside Git.
+no request-specific evidence input needed staging outside Git. The learner/evaluation stage
+finished, but the Linux publication step reproduced a `ctypes.windll` `AttributeError`; required
+E3 fields were not written. The attempt is engineering-incomplete, is not interpreted, and is
+recorded in
+`FSD_E3_MEDIUM_D0_SEED1_ATTEMPT01_QUARANTINE_INTAKE_20260904.md`.
 
 ## Valid complete invocations
 
@@ -72,16 +81,19 @@ It is neither a launch nor an admission for any node.
 Owner routing changed immediately afterward: do not retry this or any other new portable E3
 invocation locally. The two then-live local processes were observed without migration or
 duplication and have now terminated validly. Current main `.codex/hmasd-compute.toml` changed to
-`status = "active"`; `medium_d0_seed1` was therefore launched once on `wsl_4070` using the exact
+`status = "active"`; `medium_d0_seed1` attempt 01 was therefore launched once on `wsl_4070` using the exact
 pushed SHA, a detached remote worktree, and one `agent-task` payload whose remote command performed
 its own `admit-memory` immediately before the exact runner. The local refused receipt did not admit
-the remote invocation. The remaining eleven not-yet-launched invocations stay `REMOTE_FIRST_HOLD`
-while this one task is observed. Local fallback additionally requires definitive evidence of no
-remote process, prospective portability, and a fresh local admission.
+the remote attempt. It is now terminal and quarantined after reproduced publication failure. The
+same invocation cell remains unfulfilled and is held for an outcome-blind portability repair at a
+new SHA; the other eleven never-launched invocations stay `REMOTE_FIRST_HOLD`. Local fallback
+additionally requires definitive evidence of no remote process, prospective portability, and a
+fresh local admission.
 
 ## Full 18-invocation matrix
 
-`RUNNING_REMOTE` means independently admitted and detached under the named remote task.
+`QUARANTINED_ATTEMPT` means the named evidence attempt is terminal and contributes nothing to the
+frozen result rule; the invocation cell remains unfulfilled.
 `REMOTE_FIRST_HOLD` means no result root, RNG master, model, optimizer, checkpoint, or scientific
 output has been created for that invocation.
 
@@ -93,7 +105,7 @@ output has been created for that invocation.
 | small | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
 | small | D0 | 3 | `k=20`, `c=inf` | `VALID_COMPLETE` |
 | small | D2 | 3 | `k_max=40`, `k_Z=400`, `c=0.25` | `VALID_COMPLETE` |
-| medium | D0 | 1 | `k=5`, `c=inf` | `RUNNING_REMOTE`; task `fsd_e3_medium_d0_seed1_20260904_01`; local refusal retained separately |
+| medium | D0 | 1 | `k=5`, `c=inf` | `QUARANTINED_ATTEMPT_01 / REPAIR_HOLD`; task `fsd_e3_medium_d0_seed1_20260904_01`; local refusal retained separately |
 | medium | D2 | 1 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
 | medium | D0 | 2 | `k=5`, `c=inf` | `REMOTE_FIRST_HOLD` |
 | medium | D2 | 2 | `k_max=40`, `k_Z=400`, `c=0.25` | `REMOTE_FIRST_HOLD` |
@@ -108,14 +120,15 @@ output has been created for that invocation.
 
 ## Resume boundary
 
-Observe only remote task `fsd_e3_medium_d0_seed1_20260904_01` to terminal without resending it.
-Do not retry it locally, migrate it, or start another new portable invocation while it runs. After
-terminal success, copy its request-specific result root back, verify the copied bytes and frozen
-output contract, and then continue with its D2 pair followed by the remaining medium and large row
-pairs as actual resource and dependency state allow. This order is an operational plan, not a
-batch admission: each individual remote payload must combine its own fresh 4 GiB remote preflight
-and exact runner invocation under the remote supervisor. A refused admission creates no learner
-state and is not a scientific result.
+Attempt 01 is terminal and must not be resent, resumed, migrated, postprocessed into acceptance, or
+used to alter the frozen sequence. The next action is the smallest outcome-blind portability fix
+and an end-to-end publication-path test. Only after those bytes are accepted, explicitly
+committed, and pushed may a new detached remote task make one fresh `medium_d0_seed1` attempt at the
+new exact SHA. Its one payload must combine its own fresh 4 GiB remote preflight and exact runner
+under the remote supervisor. After a valid complete replacement, continue with its D2 pair and
+then the remaining medium and large row pairs as actual resource and dependency state allow. This
+is an operational order, not a batch admission. A refused admission creates no learner state; the
+quarantined attempt creates no scientific result.
 
 Do not apply the frozen E3 result rule until all 18 required invocations are validly complete. Do
 not revive E2b, retune `c`, or use any intermediate return to alter the remaining launch set.
