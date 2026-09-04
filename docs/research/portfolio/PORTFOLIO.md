@@ -2,9 +2,11 @@
 
 Updated at: 2026-09-03T16:38:28Z
 Owner: Root
-Investment capacity: `UNBOUNDED`
+Investment capacity: `2` concurrent implementer sessions, `2` concurrent result-bearing runs (owner, 2026-09-03; `AGENTS.md` §5)
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
 Evidence standard: `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`
+Engineering scope: `docs/project/ENGINEERING_SCOPE_SPEC.md`
+Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.md`
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
