@@ -71,6 +71,17 @@ The treatment is a deterministic, omniscient trajectory search, not a policy:
    maximum below, and the separately replayed BCRH trajectory. It therefore cannot fall below the
    incumbent because of beam pruning.
 
+**Pre-launch terminal-completion clarification (2026-09-04T09:45:04Z).** `R_fail_60` is complete
+after the epoch-2 command has advanced the native host to sixty post-loss seconds, while the native
+episode's `terminal` flag is reached only after epochs 3–5. For each selected beam or persistent
+prefix, the runner sets `measurement_complete=true` at sixty seconds and freezes every selection,
+endpoint and headroom quantity. It then completes epochs 3–5 with the lexicographically smallest
+command returned by the unchanged current-state legal enumerator. Those commands are recorded
+separately as `terminal_completion_commands` and are never inputs to search ranking, `R_fail_60`,
+`L_i`, or `U_i`. BCRH retains its own unchanged six-command trajectory. A suffix terminal, safety,
+or exclusivity failure conservatively makes the attempt `INCOMPLETE`; it never changes a headroom
+value or creates result polarity.
+
 The full tape is deliberately illegal information for BCRH and the learners. It is admissible here
 only because the estimand is physical headroom, not attainable causal performance.
 
@@ -103,6 +114,8 @@ The runner publishes, for every `(zone,row)`:
 
 - exact integer numerator/denominator for BCRH, persistent maximum, and beam best;
 - all three physical command trajectories;
+- `measurement_complete` at sixty seconds and the separately named three-command terminal suffix
+  for the beam and persistent paths;
 - BCRH scorer/checker/enumerator agreement and candidate counts;
 - beam state, expansion, legal-command and native-tick counts by depth;
 - `L_i = max(R_beam,R_persist,R_BCRH) - R_BCRH`;
