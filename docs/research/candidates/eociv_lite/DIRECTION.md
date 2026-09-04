@@ -44,10 +44,20 @@ absolute receiver harm. Every leave-one-profile/root `Delta_R16` was negative. T
 conclusion is that the bounded fixed-vector exposure range did not rescue receiver-addressed credit,
 not that receiver content is generally harmful or source addressing is superior.
 
-The `PRO_FINAL` contingent disposition is now active: **park the receiver-addressed credit family
-at B/EXPLORE pending genuinely new evidence**. This does not close or park `eociv_lite` generally,
-transfer polarity to CBSC, or change any Portfolio field. There is no same-family next discriminator;
-a different mechanism or lifecycle choice returns to its proper direction or Portfolio tier.
+The zero-learner A1 headroom-reference inventory then checked the committed B1--B7, A8,
+B9/B9R1 and B10 evidence.
+Several generic/control or unchanged-baseline endpoints beat their treatments, but no record
+contains a feasible same-information native-return upper reference paired with a prospectively
+tuned generic baseline on the same population and return coordinate. Raw headroom
+`Y_upper - Y_tuned_generic` is therefore **not identified**. In particular, B9R1/B10 negative
+`Delta_R` values are treatment-versus-anchor gaps, and their `0.006814690014960328` bounds are
+parameter-displacement bounds; neither is native-return headroom.
+
+The archived `PRO_FINAL` contingent disposition remains bounded to parking the
+receiver-addressed credit family at B/EXPLORE pending genuinely new evidence. It does not close or
+park `eociv_lite` generally, transfer polarity to CBSC, or change a Portfolio field. The current
+Portfolio authority remains `ACTIVE / MEDIUM`; a separate Portfolio PARK proposal is not approved.
+A1 makes no MEI, threshold, direction-lifecycle or Portfolio decision, and authorizes no new B.
 
 Historical map statement retained as provenance, not current authority:
 
@@ -70,6 +80,10 @@ Historical map statement retained as provenance, not current authority:
 - `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_RESULT.json`
 - `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_RESULT_EVIDENCE_20260904.md`
 - `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_INTAKE_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_A1_HEADROOM_REFERENCE_INVENTORY_SCIENCE_CARD_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_A1_HEADROOM_REFERENCE_INVENTORY_RESULT_EVIDENCE_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_A1_HEADROOM_REFERENCE_INVENTORY_INTAKE_20260904.md`
+
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
