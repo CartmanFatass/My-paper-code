@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 remote execution — 2026-09-04
 
-Status: `ADMITTED / ACCEPTED_RUNNING / RESULT_NOT_YET_OBSERVED`. Engineering observation only.
+Status: `TERMINAL_FAILURE_BEFORE_NATIVE_OR_LEARNER / NO_SCIENTIFIC_RESULT`. Engineering observation only.
 
 The owner resumed automated research; Root/DM assigned the unchanged
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` invocation. This supersedes the old drain pause
@@ -123,9 +123,9 @@ both floor checks true, no failure reasons. Admission and runner were joined by 
 same supervisor command. A process snapshot reported RSS 334,696 KiB at nine seconds; this is
 not peak RSS and does not establish full-run resource conformance.
 
-The production result is `summary.json` under the fixed output root. DM receives runtime
-observation ownership at this explicit running boundary; completion and scientific output remain
-unobserved by this receipt. Continue the same task with:
+The nine-second running observation above is historical. Before final handoff, `_02` was observed
+terminal: exit 1, `tmux_active=false`, ending 2026-09-04T21:39:36Z after 13 supervisor seconds.
+No production result exists. The exact retained task can be inspected with:
 
 ```sh
 ssh hmasd-wsl-node '/usr/local/bin/agent-task status frrie_b01_contact_r02_36b538ba_02'
@@ -135,3 +135,59 @@ ssh hmasd-wsl-node '/usr/local/bin/agent-task logs frrie_b01_contact_r02_36b538b
 Do not submit another task if observation is lost. Missing optional RSS is `resources_unmeasured`;
 learner-instrumentation failure needs reproduction before classification. Admission is not proof
 of runtime resource conformance, and child process acceptance is not scientific completion.
+
+
+## Terminal tape-construction failure and bounded diagnostic
+
+The `_02` traceback is in `experiment.py:156`, constructing evaluation tapes, through
+`tapes.py:217` (uplink address), `_address` at line 181, and `validate` at line 71:
+
+```text
+for field, upper in bounds.items():
+TypeError: '�' object is not iterable
+```
+
+The failure preceded `output_root.mkdir` (line 165), native build, uniform evaluation,
+model/optimizer creation, and learner updates. Only the production admission receipt exists;
+the result root and `summary.json` are absent. The literal source declares `bounds` as a dict,
+so the error text alone does not establish a source defect, bytecode defect, native effect, or
+host fault. None of those causes is claimed.
+
+An address-only check called one legal uplink address's `validate()` 100,000 times on the same
+remote source/interpreter and passed. It created no RNG, environment, or learner and did not
+reproduce the failure. DM then explicitly assigned one bounded exact tape-expression diagnostic,
+without a full runner or source edit.
+
+Diagnostic task: `frrie_contact_r02_tape_diag_36b538ba_01`, same node/cwd/source/interpreter.
+It executed fresh `admit-memory --out` with absolute path
+`/home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba/temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r02_tape_diag_admission.json`,
+joined by `&&` to `timeout 120 /home/wu/.venvs/hmasd/bin/python -c` with the following exact
+Python payload. For SSH quoting, the actual `-c` argument was `exec(bytes.fromhex("<hex>"))`,
+where `<hex>` is the lowercase UTF-8 hex encoding of this body, including its terminal newline;
+the complete accepted shell command remains in the diagnostic supervisor's `runner.sh`.
+
+```python
+import time
+from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02.tapes import evaluation_tape
+from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02.semantics import ROOT_HEX, SEED_LABEL, ROSTERS
+started=time.monotonic()
+root=bytes.fromhex(ROOT_HEX)
+seed_label=SEED_LABEL
+eval_episodes=256
+evaluation_tapes={roster:tuple(evaluation_tape(root,seed_label=seed_label,roster=roster,episode=episode) for episode in range(eval_episodes)) for roster in ROSTERS}
+print({"tape_counts":{roster:len(tapes) for roster,tapes in evaluation_tapes.items()},"wall_seconds":time.monotonic()-started})
+```
+
+Diagnostic admission passed at 2026-09-04T21:42:31.649560Z with physical/effective available
+13,165,150,208 bytes. It finished at 21:42:56Z, exit 0, 25 supervisor seconds. Output was
+`{'tape_counts': {9: 256, 15: 256}, 'wall_seconds': 22.849624478003534}`. The exact production
+root/rosters/256-episode tape expression therefore completed, but the original failure did not
+reproduce. Source diff against the bound SHA remained empty. No pyc removal, native invocation,
+interpreter replacement, or source modification was performed; none is implicated by direct
+evidence.
+
+The second failure remains an unclassified technical observation. There is no scientific result,
+branch, contact observation, or learner evidence. All three supervisor tasks are terminal; no
+process remains to hand off. DM and Root's shared tracker received these terminal facts. DM owns
+the next outcome-blind technical decision; this receipt authorizes no fresh invocation. The
+original source, frozen scientific object, failed logs, and passed diagnostic remain in place.
