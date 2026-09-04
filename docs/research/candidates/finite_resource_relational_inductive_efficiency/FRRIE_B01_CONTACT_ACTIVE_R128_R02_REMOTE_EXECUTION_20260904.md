@@ -1,6 +1,6 @@
 # FRRIE contact-active R128 R02 remote execution — 2026-09-04
 
-Status: `REPAIR_VERIFIED / FRESH_TASK_04_ADMITTED_AND_RUNNING / OBSERVER_HANDOFF`. Engineering observation only.
+Status: `TASK_04_TERMINAL_INCOMPLETE / CAUSE_UNRESOLVED / OWNER_DIRECT_SAFE_STOP`. Engineering observation only.
 
 The owner resumed automated research; Root/DM assigned the unchanged
 `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904` invocation. This supersedes the old drain pause
@@ -503,3 +503,98 @@ At the next direct observation, supervisor uptime was 92 seconds and the same ta
 RSS snapshot 598,688 KiB, with unchanged argv; the log tail contained no exception. No persisted
 learner count or published scientific result was read. This later process observation was sent
 to DM and Root before CM's clean handoff; full completion remains unobserved here.
+
+## Owner-directed terminal collection and safe stop
+
+The owner directed an end-of-round safe handoff before any fresh attempt. Root's terminal alert
+was independently confirmed through the exact supervisor: task
+`frrie_b01_contact_r02_732cc2b2_04` is `failed`, exit code 1, supervisor PID 98520,
+`tmux_active=false`. Its log records termination at **2026-09-04T22:26:33Z**, after **733 seconds**
+from 22:14:20Z. Status `uptime_seconds` at later inspection is time since task start, not task
+runtime; the 733-second duration comes from the preserved terminal log.
+
+The original traceback is:
+
+```text
+experiment.py:231 execute
+  tapes, origins = production_training_inputs(root, seed_label, number)
+b01_contact_r02/tapes.py:246-247 production_training_inputs
+  generate_episode_tape(...)
+tapes.py:373 generate_episode_tape
+  uplink_uniform[slot, sender, receiver] = rng.uniform_float32(...)
+rng.py:273 uniform_float32 -> rng.py:251 block -> rng.py:205 canonical_bytes
+  return canonical_json_bytes(asdict(self))
+.../cpython-3.10-linux-x86_64-gnu/lib/python3.10/dataclasses.py:1245 _asdict_inner
+  value = _asdict_inner(getattr(obj, f.name), dict_factory)
+AttributeError: 'tuple_iterator' object has no attribute 'name'
+```
+
+The exact source remains `732cc2b2299821a58d644e202c4b95c392932447`; direct source diff against
+that commit is empty. The invoked address class is `SemanticRNGAddress`; the recorded source
+calls `asdict(self)` after validation, and the interpreter's source accesses `f.name` while
+walking `fields(obj)`. These locate the failure; they do not establish its cause.
+
+### Original evidence inventory and limits
+
+The original output directory exists and is **empty**:
+
+`/home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2/temp/directions/finite_resource_relational_inductive_efficiency/exp/frrie_b01_contact_r02_r04`.
+
+The only file anywhere under that invocation's direction `temp/` tree is the 504-byte admission
+receipt at the previously recorded `technical/frrie_b01_contact_r02_r04_admission.json` path.
+No `summary.json`, partial result, checkpoint, saved model/optimizer, training curve, update
+counter, failing address values, dataclass field contents or process-local state was retained.
+The existing package-native `.so` remains in place and was preserved without loading it.
+
+The committed runner retains learner counters, curves and checkpoint-state descriptions only
+in memory and writes `summary.json` once at line 488 after completing the loops. The traceback
+is inside training-input preparation at line 231, **not** that publication write. Source order
+places it before collection for some update in 1..128; the exact update and number of prior
+successful updates are not known from an original artifact. The 733 seconds and previous RSS
+snapshots cannot substitute for those missing counts. No completion, nonzero learner count,
+zero learner count, exact loss/return, result branch or scientific polarity is inferred.
+
+Fresh admission was valid; total supervisor wall is known. Full-run peak RSS, per-arm wall and
+resource conformance are unavailable. This does not turn the incomplete invocation into a
+resource result or identify resource exhaustion.
+
+### Preservation and reproduction boundary
+
+Original supervisor evidence remains under
+`/home/wu/.agent-tasks/frrie_b01_contact_r02_732cc2b2_04/`:
+`task.log` (3,182 bytes), `runner.sh` (1,762 bytes), `status` (7 bytes), `exit_code` (2 bytes),
+`pid` (6 bytes), and `start_time` (11 bytes). The admission remains at its original path;
+the empty result root and 24,488-byte `libfrrie_ridgegate2z_external.so` remain untouched.
+
+Byte copies of all six supervisor files, the admission, empty result directory and native
+artifact are retained in the CM worktree's ignored recovery directory:
+
+`C:/Projects/HMASD-worktrees/cm-frrie-r02-resume-20260904/temp/directions/finite_resource_relational_inductive_efficiency/technical/r04-terminal-handoff/`.
+
+Its subdirectories are `frrie_b01_contact_r02_732cc2b2_04/` (supervisor),
+`frrie_b01_contact_r02_r04/` (empty original output), and `_native/` (retained library), with the
+admission JSON at the recovery-directory root. No original evidence was removed or rewritten.
+
+Exact failing-step reproduction is unavailable within this stop slice: the failure log omits
+the update/address and dataclass/process state, and no retained checkpoint or memory evidence
+can reconstruct the failing process. Recreating its preceding state would require a fresh
+learner execution; choosing a representative fresh address would test a different state.
+Neither was performed. There was no native/model/RNG run, proxy probe, source edit, interpreter
+change, artifact deletion or new attempt. Inspection and evidence copying were read-only with
+respect to the original execution.
+
+The cause remains **provisional/unresolved**. The traceback does not justify labeling a source,
+native-memory, host, interpreter, instrumentation or scientific failure. It also does not
+establish a shared cause with `_02`'s separate unresolved TypeError. The directly supported
+conclusion is incomplete execution with no valid scientific result.
+
+CM sent the shared tracker an explicit acknowledgment that `_04` is terminal and **no next
+invocation is authorized**. DM and Root received the terminal facts and recovery paths. All
+prior attempts, diagnostics and checks remain preserved; no other process or configuration
+was modified. Source repair `732cc2b2` remains committed and verified as above, without claiming
+that it explains or fixes this later exception.
+
+The next possible technical action, only after separate authorization, is a prospectively
+bounded capture of the failing update, address and runtime state on the same committed source
+before selecting any source repair. The current owner stop forbids executing that action now.
+There is no attempt `_05`, scheduled retry or continuing repair-run loop in this CM slice.
