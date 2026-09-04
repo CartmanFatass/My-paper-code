@@ -34,8 +34,20 @@ The corrective full `em:eociv_lite:convergence` response is final:
 complete score tensor, forms authenticated receiver and distinct-source gradient vectors once,
 and compares 16 cumulative empty-state Adam steps at mandatory endpoints `m=1,4,16` against each
 other and the unchanged anchor. This tests exposure magnitude versus credit direction without the
-endogenous data-distribution divergence of an ordinary on-policy curve. A valid terminal falsifier
-parks only the receiver-addressed credit family; no direction or Portfolio conclusion follows.
+endogenous data-distribution divergence of an ordinary on-policy curve.
+
+B10 completed validly as `B10_FIXED_SCORE_EXPOSURE_RESCUE_NOT_SUPPORTED`. Global relative `J`
+increased with exposure (`0.000407` at `m=1`, `0.001562` at `m=4`, `0.004910` at `m=16`), but
+global `Delta_R` and receiver CORRECT versus unchanged became progressively more negative. A1 was a
+bounded positive terminal initialization; A0 reversed the relative sign; A2 was relative-only with
+absolute receiver harm. Every leave-one-profile/root `Delta_R16` was negative. The supported
+conclusion is that the bounded fixed-vector exposure range did not rescue receiver-addressed credit,
+not that receiver content is generally harmful or source addressing is superior.
+
+The `PRO_FINAL` contingent disposition is now active: **park the receiver-addressed credit family
+at B/EXPLORE pending genuinely new evidence**. This does not close or park `eociv_lite` generally,
+transfer polarity to CBSC, or change any Portfolio field. There is no same-family next discriminator;
+a different mechanism or lifecycle choice returns to its proper direction or Portfolio tier.
 
 Historical map statement retained as provenance, not current authority:
 
@@ -55,6 +67,9 @@ Historical map statement retained as provenance, not current authority:
 - `docs/research/candidates/eociv_lite/EOCIV_B9R1_CONVERGENCE_PRO_FINAL_INTAKE_20260904.md`
 - `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/eociv_lite/EOCIV_B10_FROZEN_COLLECTION_TAPE_MANIFEST_20260904.json`
+- `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_RESULT.json`
+- `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_RESULT_EVIDENCE_20260904.md`
+- `docs/research/candidates/eociv_lite/EOCIV_B10_RECEIVER_CREDIT_FROZEN_SCORE_EXPOSURE_CURVE_INTAKE_20260904.md`
 ## Provenance boundary
 
 The historical map and candidate source documents remain provenance. This file does not rewrite historical source files or claim results that they do not state.
