@@ -1,0 +1,32 @@
+{
+  "id": "20260904-scdmp-003",
+  "created": "2026-09-04T11:43:46-07:00",
+  "direction": "semigroup_consistent_duration_model_policy",
+  "tier": "object",
+  "kind": "brief",
+  "title": "A02 有效结果简报：事件相位总体未建立",
+  "context": "A02 的唯一科学调用按冻结规则有效停止：最晚的 k=7 源状态在 78 tick 事件前安全停靠，完整总体无法建立，未形成任何 k 差值。中文简报保留总体失败与持续时间机制否定的边界。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": null,
+  "auto_applied": null,
+  "dm_reason": "英文 intake 与中文简报均把直接观察限定为 population-not-established，不从部分终止行推断持续时间极性。",
+  "evidence": [
+    "docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L99",
+  "brief": "docs/research/portfolio/owner/briefs/semigroup_consistent_duration_model_policy/2026-09-04_SCDMP-D6-EVENT-PHASE-DURATION-ACTION-RELEVANCE-A02.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
