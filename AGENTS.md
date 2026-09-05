@@ -217,7 +217,15 @@ execution, tamper evidence, provenance guards, retry and lease machinery, incide
 schema validators, registries, telemetry beyond wall time and peak RSS, compatibility shims,
 repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
 under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
-a card asks for it.
+a card asks for it. The section 5 small reuse / net-deletion exception applies only to a
+prospectively declared whole logical research change that reuses existing scientific computation
+or has strictly more source deletions than additions, cumulatively adds at most 100 non-test
+source lines across files and commits, and adds no section 4 machinery. For this class, report
+A, D and O/(A+D); the existing independent reviewer assesses necessity and all affected science,
+observations, consumers and publication paths instead of rejecting solely on the ratio. Preserve
+science outside explicitly selected changes; no artificial splitting, compression, relocation,
+padding or unchanged-helper denominator. All other budgets, integrity and launch conditions stay;
+this exception itself accepts no old patch and authorizes no experiment.
 
 Do not silently change scientific meaning, numerical precision, RNG behavior, checkpoint format,
 bit identity, declared comparison, or external side effects. State material assumptions and

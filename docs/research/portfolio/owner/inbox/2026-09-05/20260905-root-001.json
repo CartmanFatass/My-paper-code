@@ -40,7 +40,7 @@
   "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#portfolio-next-investment-proposal-20260905",
   "brief": "",
   "ledger_kind": "selection",
-  "status": "open",
+  "status": "answered",
   "packet": {
     "question": "是否批准条件研究投入安排，并采用“小规模复用／净删除、整项新增源码≤100行”的编排比例例外（推荐B）？",
     "changes_if_approved": [

@@ -94,3 +94,9 @@ resuming an otherwise blocked implementation. No duplicate P3/P4 review items ar
 
 Owner item: `20260905-root-001`, written through item.py as one portfolio/P1 item, recommended
 `ratify` (policy B), auto_applied=null. No owner reply is fabricated.
+
+## Later owner ratification
+
+The later current-task 「同意」 ratifies recommended B; see
+`2026-09-05-next-investment-owner-ratification.md`. The pending language above records
+the original proposal intake, not the current execution state.

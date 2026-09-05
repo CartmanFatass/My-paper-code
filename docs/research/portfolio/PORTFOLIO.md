@@ -88,7 +88,7 @@ The seven current reserves are `eociv_lite`, `recct_lite`, `ec4g_r1`, `scope_1s`
 `active_post_churn_population_flow_identification`. Read the controlling decision for re-entry;
 historical evidence can be reused without restarting their independent chains. ACVC was later restored to ACTIVE by the owner on2026-09-05 at second-recast lowest sequencing; see the review application record.
 
-### Root-owned next-investment synthesis — final proposal awaits owner
+### Root-owned next-investment synthesis — policy B ratified
 
 Root analysis `decisions/2026-09-05-next-investment-root-assessment.md` led to a complete
 Portfolio Pro proposal, intaken at `decisions/2026-09-05-next-investment-pro-intake.md`.
@@ -101,9 +101,13 @@ and replacement flags remain disclosed pending factual clarification, not silent
 PRO_FINAL recommends conditional FSD/N3 progression, FRRIE third fixed independent path as the
 next executable candidate, and policy B: a narrowly reviewed reuse/net-deletion exception with
 at most100 added non-test source lines across the whole logical change. Single P1 owner item
-`20260905-root-001` is pending, auto_applied=null. Exact rule text and an unapplied two-file patch
-are linked from the item. New investment/rule dispositions are NOT applied. AGENTS and the
-engineering specification remain unchanged. Existing FSD work continues under prior authority.
+`20260905-root-001` was ratified by the owner's current 「同意」. The complete bounded
+policy B is applied in AGENTS section 8 and ENGINEERING_SCOPE_SPEC section 5;
+see `decisions/2026-09-05-next-investment-owner-ratification.md`. FRRIE third-path
+implementation is the preferred next executable candidate under normal DM authority;
+CBSC requires complete independent review and actual publication repair. No old patch
+is accepted by this rule change. FSD follows the original full E3 branch and N3 retains
+its accepted scientific card and remaining scope boundary.
 Later A05 final source adds190 lines against the accepted pre-A05 baseline, so it is not silently
 made eligible by a net deletion relative to its own unaccepted draft. See intake for all later
 facts distinct from the immutable Pro pin. Lifecycle, priority and target capacity remain intact.
