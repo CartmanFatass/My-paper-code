@@ -24,13 +24,14 @@ These paths apply only to new handles and do not revive historical DM routes rec
 
 ## Current observation snapshot
 
-Current snapshot: one tracker-owned accepted live handle is running: CBSC formal-only
+Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC formal-only
 `cbsc-approved-profile-8003b96bd-02` on `wsl_4070`, SHA
 `8003b96bd79910864e9372ad6f1ea81f1c80520c`, PID `1692419`, and cwd
-`/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905`. Same-handle observation
-at `2026-09-05T19:28:xxZ` found `running`, exit `null`, and active tmux. Fresh admission passed
-with physical/effective availability `15426654208` bytes. Its bound is `232s`; terminal, lost
-observation, or bound facts go directly to CBSC DM and CM. FRRIE A01 and
+`/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905` failed exit `139` after
+`51s`, with inactive tmux; its bounded supervisor tail reports a monitored-command core dump in
+pytest context. Fresh admission had passed with physical/effective availability `15426654208`
+bytes. Direct terminal notices went to CBSC DM and CM for collection/reproduction; this is a
+process fact only, and no restart, replacement, or classification follows. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
