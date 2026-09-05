@@ -13,9 +13,10 @@ and focused implementation evidence; CM owns integration, Git, and technical acc
 Read the self-contained contract, current code map, owned paths, invariants, competing expected
 outcomes, and focused tests before editing. Trace the existing data/state path and preserve all
 out-of-scope semantics. Make the smallest coherent implementation satisfying the frozen observable.
-For production-capable work, preserve or design the native/batched environment and rollout
-boundary, bounded worker plan, and atomic resume/evaluation seams; do not leave a serial Python
-scaffold as the intended production path.
+For production-capable work, implement the accepted complete execution and evaluation path.
+Preserve required native/batched boundaries where the contract selects them; do not add native,
+batch, worker or resume structures by default. Follow docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md
+for complete work, ownership, measurement coverage and the exact object appendix.
 
 Implement the CM-frozen cost contract as part of the semantic change: the runner reports its
 own cost law (wall time per rollout or update as a function of the swept quantity) and the
@@ -25,7 +26,8 @@ measurement.
 
 Do not impose C++, GPU, parallelism, a dtype, or an operation order by convention. If the CM
 contract shows that a measured bounded path already meets its wall/resource contract, preserve
-that path. If a frozen C contract requires a native/batched/worker path or worker equivalence,
+that path. When the accepted task (including a selected A-class execution-feasibility assessment)
+requires a native/batched/worker path or execution equivalence,
 implement and test it exactly, including RNG, trajectories/endpoints, update counts,
 parameters/checkpoints, resume, artifacts or explicit tolerance, and external effects. Return
 the measured cost line and telemetry to CM.
@@ -33,7 +35,10 @@ the measured cost line and telemetry to CM.
 Engineering scope (docs/project/ENGINEERING_SCOPE_SPEC.md, normative): before editing, name every
 section 4 item the change would add and the card line asking for it; with no such line, do not
 add it. No guards, receipts, witnesses, resume or retry machinery, schema validators, registries,
-compatibility shims, or telemetry beyond wall time and peak RSS in research code. Smallest
+compatibility shims, or telemetry beyond wall time and peak RSS in research code except the
+runtime spec's task-limited whole-invocation aggregate CPU accounting. Apply its fixed synchronous
+native team allowance only within the accepted topology; never choose device/dtype/topology or
+launch the formal assessment yourself. Smallest
 runnable path; 600 lines per runner; orchestration under 30% of the diff. Report the scope line
 (`scope: none` or `scope: <item> per <card line>`) to CM with the diff.
 

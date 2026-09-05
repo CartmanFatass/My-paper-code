@@ -51,7 +51,10 @@ message: "adds <item> because card line <n> asks for <quantity>". Without that l
 returns the diff.
 
 - Distributed, multi-process, or multi-node execution; worker pools; queues beyond a list of
-  commands run in order; a scheduler.
+  commands run in order; a scheduler. Ordinary in-process tensor/array batching and a named
+  computation's single-layer fixed synchronous native team are not generic worker pools when
+  they satisfy MARL_RUNTIME_ENGINEERING_SPEC §4 (General requirements). Original card topology
+  constraints still require an object-specific appendix; no dynamic executor or service follows.
 - Checkpoint, resume, or recovery orchestration beyond what the learner already has; retry loops;
   leases, locks, heartbeats, liveness probes, supervisors that kill and restart.
 - Tamper evidence of any kind: hash chains, byte manifests, content-addressed receipts,
@@ -63,8 +66,13 @@ returns the diff.
 - Schema validation of internal JSON; registries, plugin systems, abstract base classes, factory
   layers, or configuration layering for a single use; custom exception hierarchies; logging
   frameworks; CLI frameworks beyond `argparse`.
-- Telemetry beyond wall time and peak RSS; performance dispositions; worker-count equivalence
-  studies; benchmarks that are not the experiment.
+- Telemetry beyond wall time and peak RSS; performance dispositions; unselected worker-count
+  sweeps or benchmarks. Exception: minimal whole-invocation aggregate user+system CPU accounting
+  under MARL_RUNTIME_ENGINEERING_SPEC §6 when parallelism changes budget meaning or the named
+  engineering task assesses resource/throughput feasibility. Include actual children without
+  double-counting threads; use existing OS cumulative accounting, no standing profiler/framework.
+  A selected bounded A-class execution-equivalence assessment is allowed under its actual semantic
+  and resource contract; such assessments are not categorically restricted to C evidence.
 - Backward-compatibility shims, deprecation paths, or version fields inside research code.
 - Defensive handling of conditions that cannot occur on this machine (missing interpreter,
   hostile input, concurrent writers to a directory only this run writes).
@@ -79,7 +87,7 @@ returns the diff.
 | Runner script | 600 lines | same |
 | Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% of the diff | the reviewer returns the diff with the orchestration lines listed |
 | Launch conditions | the four of evidence spec §11.4 | any other gate is deleted, not recorded |
-| Test wall time per research directory | 5 minutes total excluding the smoke of the runner | slow tests are deleted or become the experiment |
+| Test wall time per research directory | 5 minutes total excluding the smoke of the runner | delete unrequired duplication only; required scientific coverage remains, and insufficient budget returns a concrete gap; another bounded engineering task is separately selected, never automatic |
 | Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
 
 ### Owner-ratified small reuse / net-deletion exception (2026-09-05)
@@ -113,6 +121,22 @@ CBSC运行源码仅限`experiments/candidates/capability_bound_semantic_currentn
 
 **5．完成与停止。** 不得拆分逻辑变更、重置基线、挪移／压缩代码或填充计算规避计数。预算内只处理该范围内明确发现的问题；出现所列范围之外依赖、保护语义改变或预算不足时，返回整个变更与具体缺口，不自动扩展。A05在原完整读数intake后、CBSC在完整工程验证intake后结束本项投入；后继对象与新learner运行不继承此例外。此结束是投资边界，不是A/B消费或科学负面。
 
+### VNFC exact batch feasibility E01 appendix (2026-09-05)
+
+The complete [runtime specification appendix](MARL_RUNTIME_ENGINEERING_SPEC.md#vnfc唯一对象限定附款)
+applies only to `VNFC-R03-EXACT-BATCH-FEASIBILITY-E01`: configured `wsl_4070`, one scientific
+process, calling thread plus three native threads (four total), fixed batch8, no nested compute
+team, ordinary single-job build included. One complete assessment is limited to60s wall and300
+aggregate CPU-seconds including imports/build/reference/candidate/checks/merge/publication.
+Freeze deterministic non-target fixture bytes and full coverage before any E01 measurement.
+Original R03 cumulative2000 non-test source/600 runner budgets include existing483/58; ordinary
+orchestration/test limits remain. No CBSC/N3 exception is inherited. The original2700s full-census
+cap remains; this appendix allocates no new full-census CPU budget or four-thread full launch.
+All three selected design components, exact four-map/tie semantics, independent checks and full
+cost law remain required. Missing dependencies, unsafe ownership, inequivalence, incomplete cost,
+over-limit assessment or full wall projection >=2700s ends this one investment and returns the
+precise gap to existing Convergence; no automatic configuration/fixture/node/timing retry.
+
 ## 6. Core code discipline
 
 Core changes are rare and small. They preserve every route, checkpoint format, RNG stream, and
@@ -122,6 +146,13 @@ measured cost line on a real study exceeds its cap, and the measurement is the j
 never grows a service layer: no daemons, no dashboards, no control plane in Python.
 
 ## 7. How agents apply this
+
+Apply `MARL_RUNTIME_ENGINEERING_SPEC.md` and the actual object appendix before interpreting §4/§5.
+CM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
+scope, validation and stop. Semantic implementation follows that contract; routine implementation
+does not choose batching/native/parallel/reduction/CPU semantics. Independent review checks full
+dependencies, internal threads, scientific outputs and publication as well as complete cost scope.
+No new profiling task or launch condition follows merely from this reference.
 
 - **Direction Manager**: the card names every §4 item the object needs, with the quantity that
   needs it; an object that needs none says so in one line. The DM returns a result whose

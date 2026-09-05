@@ -87,6 +87,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-pro-natural-language-presentation.md",
       "state": "applied",
       "summary": "按本轮明确指令，d7dd21845 已推main：Pro正文/回复采用自然语言，去除请求ID与envelope回显；内部配对归档保留，93项测试通过。六个Luna/max正并行查证MARL源码并生成各级AGENTS，Root负责规范起草。"
+    },
+    {
+      "at": "2026-09-05T20:41:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md",
+      "state": "applied",
+      "summary": "完整6 Pro方案已落实：新增MARL运行工程规范，同步AGENTS、scope、四工程角色和历史效率指导，VNFC附款固定四参与者/batch8/一次60秒与300 CPU秒。定向检查通过；尚无E01源码验收或运行。按既有所有者委托高亮追溯，无再次请批。"
     }
   ]
 }

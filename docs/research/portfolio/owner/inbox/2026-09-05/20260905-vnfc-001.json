@@ -74,6 +74,14 @@
       "record": "docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md",
       "state": "applied",
       "summary": "原方向裁决已intake：仅继续一个结果盲等价batch评估方案。31证据Portfolio规范审阅已单次派发，原2700秒不扩大；尚未实施/测得新加速，无census或旧校准重跑。"
+    },
+    {
+      "at": "2026-09-05T20:41:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md",
+      "state": "applied",
+      "summary": "正确Portfolio完整方案已应用，仅E01四计算参与者、batch8、60秒wall/300 CPU秒；原2700秒完整运行cap及科学量保留，完整运行未获新CPU额度。现在进入CM实现与完整依赖/fixture核对，尚未运行。"
     }
   ]
 }
