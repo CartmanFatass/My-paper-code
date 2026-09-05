@@ -337,7 +337,13 @@ After a response is durably archived and hash-verified, call
 `scripts/transport_contract.py:stage_receipt` to stage exactly one structured
 completion receipt in the persisted outbox, then send it once to the exact validated
 `parent_thread_id` using
-`mcp__codex_app__send_message_to_thread`. The receipt must contain at least
+`mcp__codex_app__send_message_to_thread`. Omit `model` and `thinking` on every
+parent receipt, including blocker receipts, so the receiving Root/DM retains its
+own settings. `operator_model` and `operator_thinking` apply only to dispatch INTO
+the Transport singleton; copying them onto a receipt changes the parent model.
+Use `send_message_to_thread({threadId: parent_thread_id, prompt: receipt_text})`.
+Do not send an extra receipt to repair a prior model override.
+The receipt must contain at least
 `request_id`, `workflow_node`, `conversation_binding_key`, `direction_id`,
 `direction_ids`, `state=ARCHIVED`, `conversation_id`, `provider_url`, response
 SHA-256, archive paths, and heartbeat retirement status; it must report

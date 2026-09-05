@@ -183,6 +183,8 @@ that its contents were retrieved.
    the emitted `dispatch_prompt`, passing `model=gpt-5.6-luna` and `thinking=xhigh`
    explicitly for the request turn. Execution messages may queue behind another
    handoff; queueing is accepted dispatch, not a reason to create another task.
+   These model overrides apply only to the destination Transport executor. Its
+   return receipt must omit `model` and `thinking` to preserve the parent settings.
 5. The authoring task is not complete until that execution message is
    accepted (queued or delivered by the tool). Record `DISPATCH_ACCEPTED` only for
    that tool fact. Missing, failed, or uncertain singleton dispatch is an explicit
