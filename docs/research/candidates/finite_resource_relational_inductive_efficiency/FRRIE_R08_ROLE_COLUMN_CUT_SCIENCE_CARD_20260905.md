@@ -3,8 +3,14 @@ Binding structure: `systems / information flow` — the common prior chart weigh
 
 # FRRIE R08 conditional role-column cut card — 2026-09-05
 
-Status: `FROZEN / B_EXPLORE / IMPLEMENTATION_REQUIRED / NO_LAUNCH_SHA`.
+Status: `FROZEN / B_EXPLORE / ACCEPTED_RUNNING / TRACKER_ADOPTED`.
 Object ID: `FRRIE-B01-R128-LR003-R08-ROLE-COLUMN-CUT-20260905`.
+
+Current execution boundary: sole task `frrie_b01_contact_r08_58710424`, exact pushed source
+`58710424a6b25f3e4bdf019dc337423d2d54a75b`, accepted on wsl_4070 at
+2026-09-05T11:30:34Z. `FRRIE_R08_ACCEPTED_RUN_INTAKE_20260905.md` preserves technical
+acceptance, exact receipt/output locations and the direct tracker handoff. Scientific outcome
+is pending; the frozen question, counts, MEI, prediction and reading rule below are unchanged.
 
 ## Class, question, selection and ceiling
 
