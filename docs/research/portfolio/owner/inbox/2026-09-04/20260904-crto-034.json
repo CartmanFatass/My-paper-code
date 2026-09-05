@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-034",
+  "created": "2026-09-04T18:47:10-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B04：胜任比较器下的残差负结果",
+  "context": "一次182秒远端运行；原始信息长终点胜任，真实与打乱残差均未改善。单种子、开发面板与适应选定终点是边界。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "同意此有限读法",
+      "consequence": ""
+    },
+    {
+      "key": "reading-disputed",
+      "label": "对读法有异议",
+      "consequence": ""
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "中文简报对应完整独立重算，结论不扩大到整个残差家族。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b04-complete-cycle-residual-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-04_residual_cycle_endpoints_b04.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
