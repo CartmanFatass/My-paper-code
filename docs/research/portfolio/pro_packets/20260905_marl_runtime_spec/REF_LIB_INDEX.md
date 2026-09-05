@@ -13,7 +13,7 @@ executed.
 | MAPPO on-policy | `C:/Projects/ref-lib/on-policy` | `de66d7a4b23fac2513f56f96f73b3f5cb96695ac` | MIT | report and overlay archived |
 | BenchMARL | `C:/Projects/ref-lib/BenchMARL` | `65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1` | MIT | report and overlay archived |
 | MARLlib | `C:/Projects/ref-lib/MARLlib` | `80e9973a430271a93c781d7422133acb1198f84b` | MIT | overlay archived; evidence pending |
-| Mava | `C:/Projects/ref-lib/Mava` | `83f7f0d19d6fdbe07264bb226a64baf8a0b17514` | Apache-2.0 | overlay archived; evidence pending |
+| Mava | `C:/Projects/ref-lib/Mava` | `83f7f0d19d6fdbe07264bb226a64baf8a0b17514` | Apache-2.0 | core/root report and overlay archived; AGENTS_INDEX pending |
 | JaxMARL | `C:/Projects/ref-lib/JaxMARL` | `b0c4d77b2cc06711031aec846a55ed0c8cf0f6e9` | Apache-2.0 | report and overlay archived |
 
 The collection root navigation overlay is mirrored at

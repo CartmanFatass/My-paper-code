@@ -215,7 +215,10 @@
         "mava/wrappers/AGENTS.md",
         "test/AGENTS.md"
       ],
-      "worker_artifacts": [],
+      "worker_artifacts": [
+        "worker-reports/Mava/CORE_EVIDENCE.md",
+        "worker-reports/Mava/ROOT_RETURN.md"
+      ],
       "source_focus": [
         "mava/systems/ppo/anakin/ff_mappo.py",
         "mava/systems/ppo/sebulba/ff_mappo.py",
