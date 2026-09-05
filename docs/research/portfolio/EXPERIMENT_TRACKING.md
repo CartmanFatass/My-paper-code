@@ -51,6 +51,8 @@ FRRIE R05 `(wsl_4070, frrie_b01_contact_r02_5e6d47f0_05)` is closed after CM col
 
 Paused drain boundary, `2026-09-05T01:46Z`–`01:47Z`: authoritative `agent-task list` shows **zero live handles** and `TMUX_ACTIVE=no` for every listed task. Newly completed accepted handles are FSD `fsd_e3_large_d0_seed1_20260904_01`, N3 `dish_b01_c04_seed47_e0541d0c_a1`, CRTO `crto_residual_b04_c53f3bb1_01`, and VNFC result-blind calibration `vnfc_causal_r03_calibration_20260904_01`; their responsible DMs/CMs were directly notified, and terminal notices were acknowledged where received. FSD collection/intake continues on its same evidence; N3 seed47 was handed off with no successor; CRTO B04 collection/intake continues; VNFC calibration was `BLOCKED_WALL_CAP` and remains non-scientific. No accepted successor, retry, repair, or reservation is held by the tracker. The research heartbeat is paused by Root; this tracker creates no replacement monitor.
 
+Resume snapshot, `2026-09-05` OWNER_DIRECT: the prior pause is superseded. This resumed default tracker remains `/root/tracker_tl_experiments` on `hmasd-experiment-tracker` Terra/low. Root's authoritative remote supervisor check found zero live handles and no pending owner review. FSD, FRRIE, N3, CRTO, and CBSC are the initial advancing chains; VNFC remains queued after its cost block and the N5 allocation family remains parked. Historical rows above remain terminal; no historical handle is restarted. The tracker is ready to accept only new direct DM handoffs and will notify their current DMs/CMs directly.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
