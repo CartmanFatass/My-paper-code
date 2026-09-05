@@ -1,6 +1,6 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-05T13:55:56Z`
+Snapshot: `2026-09-05T14:06:32Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
 `FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
@@ -9,7 +9,9 @@ polarity, a queue implementation, or authority to bypass a fresh resource admiss
 **Current OWNER_DIRECT boundary:** automatic work resumed on 2026-09-05. The previous pause is
 superseded; E3 is **18/18 valid, zero running, zero never launched**. Original final
 `large_d2_seed3` is terminal and accepted; its earlier SSH recovery involved no restart.
-The original full-matrix rule is unchanged. Historical
+Full original reading after the cell18 intake is complete: `E3-H0-NO-ADVANTAGE`;
+see `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md`. No successor is launched; the next
+direction disposition is escalated to Convergence. The full-matrix rule is unchanged. Historical
 drains below remain provenance; lifecycle, priority, card and science are unchanged.
 Latest OWNER_DIRECT P1/P2 maintenance cutoff is applied: ordinary P3/P4 inbox items stop;
 science/intake/Chinese evidence briefs/audit and existing review instructions continue.
@@ -53,8 +55,9 @@ supervisor duration2575s, runnerwall2458.311039228007s. CM terminal receipt
 remote/staged/canonical hashes. DM accepted cell18 in
 `FSD_E3_LARGE_D2_SEED3_INTAKE_20260905.md`; single-cell E0 evidence carries counts/exposure/cost.
 Resources_unmeasured; no source/scope breach or publication gap. Original tracker event directly
-acknowledged; collection complete, no historical polling or successor. Full original matrix
-reading is now permitted and is the next action, after this individual acceptance.
+acknowledged; collection complete, no historical polling or successor. Full original reading
+followed this individual acceptance and is complete in
+`FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md`; no new result-bearing invocation.
 
 ### Historical observation loss and recovery
 
@@ -632,8 +635,9 @@ was superseded by the explicit resume that launched exactly `medium_d0_seed3`. T
 finished and passed both CM technical acceptance and DM intake.
 
 **Current owner-direct boundary:** all18 original cells are valid complete, zero running or
-unstarted. The final individual intake is complete; read the original nine pairs and full rule
-next. Lifecycle, priority and claim ceiling stay unchanged. No historical handle is polled or
+unstarted. The final individual intake and original nine-pair study reading are complete. Frozen
+branch E3-H0-NO-ADVANTAGE is intaken; next direction decision is escalated, no successor launched.
+Lifecycle, priority and claim ceiling stay unchanged. No historical handle is polled or
 relaunched; no aggregate was read before this18-valid boundary.
 
 The original accepted handle remains recoverable with
