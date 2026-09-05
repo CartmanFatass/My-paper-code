@@ -1,0 +1,27 @@
+{
+  "question": "是否在固定的种子 1 和 2 上，将 RAW 训练从 258 更新延至 516，同时检查动作胜任性和原生 regret 代价？",
+  "changes_if_approved": [
+    {"target": "CRTO 已开放残差家族的比较器梯子", "from": "两个新种子的 RAW 均差一次 REPLAN 精确动作通过胜任条件", "to": "每个种子一条训练轨迹，固定读取 258 和 516 更新，不运行残差臂"}
+  ],
+  "if_refused": "在干净边界取消或修订尚未执行的这次预算比较，保留 B04 的负结果和 B05 的比较器受限读法。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_INTAKE_20260905.md", "quote": "Both side mean regrets pass.005 at RAW-LONG; the sole failing qualifier in each new seed is REPLAN exact count5 rather than the required6.", "why": "缺口集中在一次动作，增加固定暴露量直接检查是否仍是优化不足。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_INTAKE_20260905.md", "quote": "Strongest counterpoint to calling RAW broadly unlearnable is that both side mean regrets pass and seed1 has lower aggregate regret than historical seed0.", "why": "单纯多答对一次可能没有实际收益，也可能损害其余动作，因此先判断原生 regret 的实质代价。"}
+  ],
+  "uncertainty": [
+    "面板和新增预算来自已看过的开发结果，不能估计新环境泛化或稳定胜任。",
+    "每个种子共同改变预测器和门控，预算比较不能分离种子的组成部分。",
+    "新诊断阈值 0.000625 对应一个最低材料动作错误对十六行均值的贡献；旧残差阈值 0.0025 完全保留。",
+    "省略 RAW 不使用的校准准备有源码依据，历史 258 数字只作描述性对照，不能新增精确值 gate。"
+  ],
+  "cost": {
+    "compute": "两次各 516 更新、16512 个样本；按已有同节点成本律预计各 470/467 秒，上限每次 1500 秒、每臂 1200 秒。一个小型适配模块复用既有训练与读出。",
+    "owner_time": "约两分钟核对预算、动作与 regret 的区别",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；常设委托继续，异步批注在干净边界应用"
+  },
+  "verdict_text": "推荐固定种子 1 和 2 的 RAW 258/516 暴露比较，先报告原生 regret 代价，再解释胜任条件变化，不改写旧残差结果。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_SCIENCE_CARD_20260905.md"
+}
