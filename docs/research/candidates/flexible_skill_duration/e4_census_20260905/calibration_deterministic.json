@@ -1,0 +1,105 @@
+{
+  "config": {
+    "n_agents": 6,
+    "n_roles": 2,
+    "n_zones": 4,
+    "n_regions": 2,
+    "horizon": 400,
+    "delta": 0.4,
+    "event_process": "renewal",
+    "lambda_regions": [
+      0.005,
+      0.02
+    ],
+    "renewal_law": "deterministic",
+    "renewal_mean": 20.0,
+    "lognormal_shape": 1.0,
+    "d0_k_set": [
+      1,
+      2,
+      5,
+      20,
+      40
+    ],
+    "rho": 0.0,
+    "c_probe": 0.0,
+    "e5_coupling_enabled": false,
+    "role_decode": "argmax"
+  },
+  "law": {
+    "mean": 20.0,
+    "variance": 0.0,
+    "dp_age_cap": 19,
+    "hazard": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "launch_sha": "bc3eaeecf5f97e630a886028db0053ba2d08d56f",
+  "node": "wsl_4070",
+  "command": [
+    "scripts/run_flexible_skill_duration_e4_census.py",
+    "--law",
+    "deterministic",
+    "--mode",
+    "calibration",
+    "--horizon",
+    "400",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "bc3eaeecf5f97e630a886028db0053ba2d08d56f",
+    "--node",
+    "wsl_4070",
+    "--output",
+    "/home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf/temp/directions/flexible_skill_duration/exp/e4_census_20260905/calibration_deterministic/summary.json"
+  ],
+  "seed": 0,
+  "seed_active": false,
+  "mode": "calibration",
+  "toy": false,
+  "cold_seconds": 4.823099880013615e-05,
+  "mean_discrepancy": 0.0,
+  "resources_unmeasured": [
+    "peak_rss"
+  ],
+  "learner_exposure": {
+    "episodes": 0,
+    "transitions": 0,
+    "optimizer_updates": 0,
+    "checkpoint_selection": 0
+  },
+  "dp_seconds": {
+    "switching": 0.021496598987141624,
+    "oracle_1": 0.008622936002211645,
+    "oracle_40": 0.008700391001184471,
+    "open_1": 0.008711065995157696,
+    "open_40": 0.00867162000213284,
+    "open_None": 0.008446173000265844
+  },
+  "age_states": 20,
+  "dp_calls_per_census": 36,
+  "projection_seconds": 1.5478515890717972,
+  "cost_law": "2 * (cold_seconds + 36 * max(dp_seconds)); empirical heuristic",
+  "wall_seconds_before_publication": 0.13272366298770066,
+  "timing_window": "module body before numpy import through computation; excludes interpreter startup/output",
+  "status": "COMPLETE"
+}
