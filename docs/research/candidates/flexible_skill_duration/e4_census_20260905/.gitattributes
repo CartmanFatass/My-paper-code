@@ -1,0 +1,2 @@
+# Preserve the captured CRLF task-status responses without Git newline conversion.
+census_*_task_status.json -text
