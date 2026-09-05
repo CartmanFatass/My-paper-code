@@ -117,3 +117,7 @@ write; external timeout covers whole Python process. Preserve supervisor termina
 JSON, task log/stdout, time output, admission and summary. A summary alone never
 establishes success. The /usr/bin/time process observation is separate from the
 runner's truthful self-only RSS and does not measure scratch.
+
+## Sequencing correction before runtime
+
+DM corrected its dispatch: the original A05 card and approved exception require reviewed, committed and pushed exact bytes, not a main-only SHA or Root ACK. The earlier main-integration wait above was an added constraint and is withdrawn prospectively. Root integration remains requested independently. Execute at this CM record commit with unchanged accepted source blob 876efd82afac89c7f9c89790f4d2432a792279f3, recording its resolved SHA before remote preparation. All frozen commands, source review, science, admission and stop bounds remain. This changes no code and bypasses no refusal.
