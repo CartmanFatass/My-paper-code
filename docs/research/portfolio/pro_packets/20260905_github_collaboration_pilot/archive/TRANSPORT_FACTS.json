@@ -1,0 +1,116 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-github-tool-collaboration-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "creator_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "upload",
+  "prompt_sha256": "54cd23bd35c047a6850c3d1880ad0da0ea8fba756b3b9047c01ac676288232ac",
+  "prompt_bytes": 12220,
+  "manifest_sha256": "9310806ddc99196eab59ca7f8f3ec2c4d52cfead721f42c823a736ef65b77005",
+  "manifest_bytes": 1916,
+  "response_sha256": "d2fc0b0927161beb565e3c97ff355bfa2faaf78b70d6daf8fc58c9c2ccd6a2ac",
+  "response_bytes": 11866,
+  "response_characters": 6185,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "4874e04c-6ce2-4119-b032-6f7cb6937ab9",
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "upload_evidence": {
+    "expected_file": "PROMPT_BODY.md",
+    "provider_filename": "PROMPT_BODY(20260905-200008).md",
+    "attachment_observed": true,
+    "bytes": 12220,
+    "sha256": "54cd23bd35c047a6850c3d1880ad0da0ea8fba756b3b9047c01ac676288232ac"
+  },
+  "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete newest assistant response; Copy response present; no active generation control",
+  "capture_method": "Newest assistant Copy response control via browser CUA locator nth(2) click and CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "d2fc0b0927161beb565e3c97ff355bfa2faaf78b70d6daf8fc58c9c2ccd6a2ac"
+  },
+  "timestamps": {
+    "received_at": "2026-09-05T22:00:00Z",
+    "sent_at": "2026-09-05T22:00:00Z",
+    "generation_started_at": "2026-09-05T22:00:00Z",
+    "completed_at": "2026-09-05T23:28:06Z",
+    "captured_at": "2026-09-05T23:28:13Z",
+    "archived_at": "2026-09-05T23:30:38Z",
+    "tab_closed_at": "2026-09-05T23:31:13Z"
+  },
+  "heartbeat": {
+    "automation_id": null,
+    "status": "PENDING",
+    "next_wake_at": null,
+    "retired_at": null,
+    "retirement_verified": false
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-github-tool-collaboration-portfolio-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|d2fc0b0927161beb565e3c97ff355bfa2faaf78b70d6daf8fc58c9c2ccd6a2ac",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "fallback_enabled": false,
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-github-tool-collaboration-portfolio-01\\2026-09-05-github-tool-collaboration-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "d2fc0b0927161beb565e3c97ff355bfa2faaf78b70d6daf8fc58c9c2ccd6a2ac"
+    },
+    "response_sha256": "d2fc0b0927161beb565e3c97ff355bfa2faaf78b70d6daf8fc58c9c2ccd6a2ac",
+    "staged_at": "2026-09-05T23:30:58Z",
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-05T23:30:58Z",
+    "sent_at": "2026-09-05T23:30:58Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "4874e04c-6ce2-4119-b032-6f7cb6937ab9",
+    "assistant_message_id": "request-6a9c109e-b264-83e8-a78b-f9ea1b767b7b-0"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed on reused portfolio binding.",
+    "Newest response disambiguated from earlier responses by user and assistant IDs.",
+    "No second Send was attempted."
+  ],
+  "updated_at": "2026-09-05T23:31:13Z"
+}
