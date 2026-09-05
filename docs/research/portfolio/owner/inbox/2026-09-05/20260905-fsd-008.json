@@ -102,6 +102,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md",
       "state": "applied",
       "summary": "无训练census调用卡已冻结并整合cb1e81437，新增卡片项fsd009；CM正在补齐runner与逐law成本测量，尚无census结果或learner。"
+    },
+    {
+      "at": "2026-09-05T16:59:15+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "原Pro选择的唯一无训练census已完成并intake；三个law均为COMPLETE，publicgreedy匹配switching。既有E3有界H0不变，未选择learner或第二对象。"
     }
   ],
   "starred": true

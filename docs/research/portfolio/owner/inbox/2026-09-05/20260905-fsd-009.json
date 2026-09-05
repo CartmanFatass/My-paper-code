@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "accept",
-  "auto_applied": null,
+  "auto_applied": "accept",
   "dm_reason": "已有数值参考可回答时长机会，不能据此推出学习收益。",
   "evidence": [
     "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md",
@@ -77,5 +77,15 @@
     "verdict_text": "Recommend/select (a): it fills the actual cost and output gap without making a new scientific selection. Owner-delegated decision (unattended, 2026-09-05 instruction): (a).",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-05T16:59:15+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "完整A/RECON census已完成3/3law、288候选，零learner；随机law反应式对最佳固定时钟差距约.09710/.09823，但publicgreedy完全匹配switching，不构成学习收益。13测试通过，正式processwall2.35秒；无后继对象。"
+    }
+  ]
 }
