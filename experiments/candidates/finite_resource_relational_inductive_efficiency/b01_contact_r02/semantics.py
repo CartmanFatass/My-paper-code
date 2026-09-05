@@ -119,12 +119,16 @@ def classify_r02(
         return "TEST_ONLY_NON_RESULT"
     required_true = (
         "complete", "admission_valid", "exposure_present",
-        "raw_paired_initialization_equal", "initial_tight_clip_changed_exactly_five",
+        "raw_paired_initialization_equal",
         "optimizer_moments_unchanged_by_projection", "paired_information_work_equal",
         "evaluation_preserved_model_bytes", "same_evaluation_tapes",
         "required_curves_and_counts_present",
     )
-    if branch_prefix == "R06" and any(
+    required_true += (
+        ("r07_binding", "initial_projection_conformant", "contact_history_truthful")
+        if branch_prefix == "R07" else ("initial_tight_clip_changed_exactly_five",)
+    )
+    if branch_prefix in ("R06", "R07") and any(
         rule_inputs.get(name) != {public: [0.003] for public in PUBLIC_ARM.values()}
         for name in ("initial_optimizer_group_lr", "final_optimizer_group_lr")
     ):
@@ -140,10 +144,21 @@ def classify_r02(
             type(rule_inputs.get(name)) is not int or rule_inputs[name] <= 0
             for name in required_positive
         )
-        or rule_inputs.get("first_tight_contact_update") != 0
+        or (branch_prefix != "R07" and rule_inputs.get("first_tight_contact_update") != 0)
         or descriptors is None
     ):
         return f"{branch_prefix}_INVALID_INCOMPLETE"
+    if branch_prefix == "R07":
+        if rule_inputs["first_tight_contact_update"] is None:
+            return "R07_NO_OBSERVED_CONTACT"
+        d_value, e_value = descriptors[15]
+        if e_value < 0.0:
+            return "R07_N15_EDGE_BELOW_UNIFORM"
+        if d_value >= MEI:
+            return "R07_N15_MATERIAL_TIGHT_FAVORED"
+        if d_value <= -MEI:
+            return "R07_N15_MATERIAL_TIGHT_ADVERSE"
+        return "R07_N15_WITHIN_MEI"
     if any(e_value < 0.0 for _, e_value in descriptors.values()):
         return f"{branch_prefix}_EDGE_BELOW_UNIFORM"
     if all(d_value >= MEI for d_value, _ in descriptors.values()):
@@ -151,6 +166,26 @@ def classify_r02(
     if any(d_value <= -MEI for d_value, _ in descriptors.values()):
         return f"{branch_prefix}_ADVERSE_OR_MIXED"
     return f"{branch_prefix}_SMALL_OR_ROSTER_MIXED"
+
+
+def contact_integrity(initial: Mapping[str, Any], curves: Mapping[str, Any], first: int | None) -> dict[str, bool]:
+    indices = initial["tight_changed_coordinate_indices"]
+    expected_first = 0 if indices else next((
+        row["update"] for row in curves["PHY_TRUST"] if row["projection_changed_indices"]
+    ), None)
+    return {
+        "initial_projection_conformant": (
+            initial["tight_projection_matches_direct_clip"]
+            and initial["wide_initial_projection_identity"]
+            and initial["tight_changed_coordinates"] == len(indices) == len(set(indices))
+        ),
+        "contact_history_truthful": (
+            initial["first_tight_contact_update"] == (0 if indices else None)
+            and first == expected_first
+            and all(row["box_contact"] == bool(row["projection_changed_indices"])
+                    for rows in curves.values() for row in rows)
+        ),
+    }
 
 
 def _initialize_contact_pair(root_hex: str, seed_label: str, *, adam_lr: float = 0.0003) -> tuple[
@@ -222,7 +257,7 @@ def _initialize_contact_pair(root_hex: str, seed_label: str, *, adam_lr: float =
             PUBLIC_ARM[arm]: hashlib.sha256(optimizer_after[arm]).hexdigest()
             for arm in LEARNED_ARMS
         },
-        "first_tight_contact_update": 0,
+        "first_tight_contact_update": 0 if changed_indices else None,
     }
     return models, optimizers, audit, raw_model_bytes
 
