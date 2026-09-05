@@ -12,6 +12,38 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Convergence family boundary after B03 — 2026-09-04
+
+The complete same-node Convergence answer executes
+`PRO_FINAL=PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY`: reversibly park this
+allocation-coordinate family pending a concrete native-value B discriminator
+against equally exposed, competent same-information tuned FREE. No successor
+learner, automatic grid extension or recast is selected. This family boundary
+does not close the broader direction or change Portfolio lifecycle or priority.
+
+The strongest support is the recurring small low-rate contrast together with
+its reduction to +0.000655478018 under equal rate selection, while FREE's own
+gain is +0.200872633192. Generic finite-optimization sensitivity is the leading
+explanation at this toy's declared scale. The strongest contradiction to parking
+is METRIC's positive mean at every common rate, the upper grid edge, and FREE's
+remaining endpoint headroom. That 0.040598777488 endpoint gap is neither the AUC
+estimand nor a forecast of recoverable metric advantage. Anisotropic conditioning,
+clipping, implicit regularization and binding/population effects remain live.
+
+Re-entry must name the structural event, available information, action/credit
+path and learner exposure that predict a consequential native-return difference
+relative to tuned FREE, plus the choice each outcome would change. For the same
+host/estimand retain paired normalized AUC, matched training/selection exposure,
+the demonstrated FREE rate-3 anchor and working MEI 0.01; CUT may supplement
+but cannot replace that competent comparator. This asks for a worthwhile question,
+not a positive result in advance or C-time confirmation. No new object is defined.
+
+The claim ceiling remains B/EXPLORE on the centralized balanced trained-N=4/8
+allocation toy. B02 and B03 stay valid inside-MEI observations, without equivalence,
+stable superiority or pure metric causality. Both historical C terminal meanings
+are preserved. Evidence: `MGTAP_B03_CONVERGENCE_INTAKE_20260904.md` and the exact
+answer `pro_packets/b03_convergence_fresh6pro_20260904/archive/RESPONSE.md`.
+
 ## Accepted B03 scalar-rate control — 2026-09-04
 
 The complete same-information, equal-search-budget B03 panel is valid
