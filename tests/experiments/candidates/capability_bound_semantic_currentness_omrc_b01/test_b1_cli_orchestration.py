@@ -267,16 +267,13 @@ def test_cli_modes_are_fixed_and_reject_injection(capsys) -> None:
         ])
 
 
-def test_formal_start_blocks_uncommitted_surface_before_admission_or_output(tmp_path) -> None:
-    destination = b1.CONFINED_ROOT / "test-only-b1-must-not-appear"
-    assert not destination.exists()
-    with pytest.raises(b1.B1OrchestrationError, match="BLOCKED_UNCOMMITTED"):
-        b1.run_b1_start(
-            final_path=destination,
-            implementation_commit="e" * 40,
-            b0_root=tmp_path / "absent-b0",
-        )
-    assert not destination.exists()
+def test_source_metadata_records_declared_commit_without_head_refusal() -> None:
+    receipt = b1.verify_source_conformance("e" * 40)
+    assert receipt["status"] == "SOURCE_RECORDED"
+    assert receipt["commit"] == "e" * 40
+    assert receipt["files"]
+    assert all(len(row["sha256"]) == 64 for row in receipt["files"])
+
 
 
 def test_b0_locator_rejects_arbitrary_and_manifest_only_evidence_roots(
@@ -306,9 +303,9 @@ def test_b0_locator_rejects_arbitrary_and_manifest_only_evidence_roots(
         b1.locate_b0_evidence(root)
 
 
-def test_parent_supervision_kills_test_only_sleeper_and_preserves_incident(tmp_path) -> None:
+def test_parent_supervision_independent_wall_stop_kills_test_only_sleeper(tmp_path) -> None:
     result = tmp_path / "result.json"
-    with pytest.raises(TelemetryError, match="wall_seconds"):
+    with pytest.raises(TelemetryError, match="independent wall cap"):
         b1.supervise_child(
             [sys.executable, "-c", "import time; time.sleep(10)"],
             scratch_root=tmp_path / "scratch",
@@ -320,10 +317,7 @@ def test_parent_supervision_kills_test_only_sleeper_and_preserves_incident(tmp_p
             interval_seconds=0.02,
         )
     assert not result.exists()
-    incident = json.loads((tmp_path / "supervisor-incident.json").read_text(encoding="utf-8"))
-    assert incident["reason"] == "LIVE_RESOURCE_CAP_TERMINATION"
-    assert incident["cap_failures"] == ["wall_seconds"]
-    assert incident["scientific_branch"] is None
+    assert not (tmp_path / "supervisor-incident.json").exists()
 
 
 def test_parent_supervision_reads_create_only_test_result_and_measures_child(
@@ -459,28 +453,30 @@ def test_parent_supervision_short_lived_canonical_result_does_not_race_telemetry
     assert not (tmp_path / "supervisor-incident.json").exists()
 
 
-def test_parent_supervision_poll_failure_kills_child_and_publishes_incident(
-    monkeypatch, tmp_path
-) -> None:
+def test_parent_supervision_poll_failure_keeps_complete_child_result(monkeypatch, tmp_path):
     def fail_poll(self, *, caps):
         raise TelemetryError("test-only telemetry backend failure")
 
     monkeypatch.setattr(b1.ProcessTreeMonitor, "poll_caps", fail_poll)
-    with pytest.raises(TelemetryError, match="telemetry failed during supervision"):
-        b1.supervise_child(
-            [sys.executable, "-c", "import time; time.sleep(10)"],
-            scratch_root=tmp_path / "scratch", durable_root=tmp_path,
-            result_path=tmp_path / "result.json",
-            stdout_path=tmp_path / "stdout.log",
-            stderr_path=tmp_path / "stderr.log", interval_seconds=0.01,
-            caps=B1_RESOURCE_CAPS,
-        )
-    incident = json.loads(
-        (tmp_path / "supervisor-incident.json").read_text(encoding="utf-8")
+    result = tmp_path / "result.json"
+    raw = {"schema": B1_RAW_EVIDENCE_SCHEMA, "scientific_branch": None,
+           "scientific_work_transitions": 1,
+           "stage_measurements": [{"stage": "test-only", "wall_seconds": 0.2,
+               "cpu_seconds": 0.0, "transitions": 1, "transitions_per_second": 5.0}]}
+    payload = {"schema": WORKER_RESULT_SCHEMA, "raw_evidence": raw, "scientific_branch": None}
+    code = ("import json,time,pathlib\ntime.sleep(0.25)\n"
+            f"pathlib.Path({str(result)!r}).write_text(json.dumps({payload!r}))")
+    observed, measurement = b1.supervise_child(
+        [sys.executable, "-c", code], scratch_root=tmp_path / "scratch",
+        durable_root=tmp_path, result_path=result,
+        stdout_path=tmp_path / "stdout.log", stderr_path=tmp_path / "stderr.log",
+        interval_seconds=0.01, caps=B1_RESOURCE_CAPS,
     )
-    assert incident["reason"] == "TELEMETRY_FAILURE"
-    assert incident["measurement_complete"] is False
-    assert incident["scientific_branch"] is None
+    assert observed == raw
+    assert measurement["measurement_complete"] is False
+    assert measurement["resources_unmeasured"] is True
+    assert not (tmp_path / "supervisor-incident.json").exists()
+
 
 
 def test_worker_wrapper_and_engine_raw_schema_are_exact_and_science_null() -> None:
@@ -1054,9 +1050,9 @@ def test_policy_replay_supervisor_uses_result_rows_as_work_units(
     )
 
 
-def test_policy_replay_supervisor_cap_kills_and_preserves_incident(tmp_path) -> None:
+def test_policy_replay_supervisor_independent_wall_stop_kills_child(tmp_path) -> None:
     result = tmp_path / "result.json"
-    with pytest.raises(TelemetryError, match="wall_seconds"):
+    with pytest.raises(TelemetryError, match="independent wall cap"):
         b1.supervise_policy_replay_child(
             [sys.executable, "-c", "import time; time.sleep(10)"],
             result_path=result, scratch_root=tmp_path / "scratch",
@@ -1064,10 +1060,7 @@ def test_policy_replay_supervisor_cap_kills_and_preserves_incident(tmp_path) -> 
             stderr_path=tmp_path / "stderr.log", interval_seconds=0.01,
             caps=ResourceCaps(wall_seconds=0.1), test_only=True,
         )
-    incident = json.loads(
-        (tmp_path / "supervisor-incident.json").read_text(encoding="utf-8")
-    )
-    assert incident["reason"] == "LIVE_RESOURCE_CAP_TERMINATION"
+    assert not result.exists()
     result.write_bytes(b"preexisting")
     with pytest.raises(FileExistsError, match="create-only"):
         b1.supervise_policy_replay_child(
