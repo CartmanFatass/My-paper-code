@@ -1,0 +1,65 @@
+{
+  "reference": {
+    "repository": "https://github.com/uoe-agents/epymarl.git",
+    "clone_path": "C:/Projects/ref-lib/epymarl",
+    "commit": "cbc38c09588064eab978501d0f12c2cf58fa7fc2",
+    "official_identity_source": "https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/README.md#L1-L10",
+    "license": "Apache License 2.0",
+    "license_path": "LICENSE",
+    "notice_path": "NOTICE",
+    "source_changes": "none"
+  },
+  "navigation_overlays": [
+    {
+      "source_path": "AGENTS.md",
+      "overlay_path": "epymarl/AGENTS.md",
+      "backup_path": "agents-overlays/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "58CE1527E32A80CCE55CB8604E0540EED6AA6DECB1061BB06F8122B113635B0B"
+    },
+    {
+      "source_path": "src/runners/AGENTS.md",
+      "overlay_path": "epymarl/src/runners/AGENTS.md",
+      "backup_path": "agents-overlays/src/runners/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "7045BDA214B49C0ED8F2541030E0743A386550D1906FA4ECE080CEB9EA8565D4"
+    },
+    {
+      "source_path": "src/envs/AGENTS.md",
+      "overlay_path": "epymarl/src/envs/AGENTS.md",
+      "backup_path": "agents-overlays/src/envs/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "2008AF5AE34048F0B4C7FAEA5FD2D39A339693D042D9520955CBD4E77DEE7F15"
+    },
+    {
+      "source_path": "src/controllers/AGENTS.md",
+      "overlay_path": "epymarl/src/controllers/AGENTS.md",
+      "backup_path": "agents-overlays/src/controllers/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "B5F98928E1120D298CB8F076615F6AF95D97594108321D6557BEA3E584F7162E"
+    },
+    {
+      "source_path": "src/components/AGENTS.md",
+      "overlay_path": "epymarl/src/components/AGENTS.md",
+      "backup_path": "agents-overlays/src/components/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "58A9C315A637233B3E8ECB85107A3EC85ED562F8AD38636BC397DAC1800D17BC"
+    },
+    {
+      "source_path": "src/learners/AGENTS.md",
+      "overlay_path": "epymarl/src/learners/AGENTS.md",
+      "backup_path": "agents-overlays/src/learners/AGENTS.md",
+      "source_preexisting": false,
+      "overlay_sha256": "F26DC5FB91D7B3EF4BB782C730AAD16F4C1245E8BDA7C78C61486A768D9DF1A3"
+    }
+  ],
+  "verification": {
+    "line_check": "rg --files plus numbered Get-Content at pinned checkout",
+    "overlay_status": "only local AGENTS overlays are untracked in reference checkout",
+    "runtime_work": "none",
+    "thresholds": {
+      "toy45min": "engineering investigation threshold only",
+      "UAV12h": "engineering investigation threshold only"
+    }
+  }
+}
