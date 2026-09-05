@@ -32,7 +32,7 @@ LOCK = threading.Lock()
 OWNER_REL = Path("docs/research/portfolio/owner")
 AUDIT_REL = Path("docs/research/portfolio/audit")
 PORTFOLIO_REL = Path("docs/research/portfolio/PORTFOLIO.md")
-DOC_SUFFIXES = {".md", ".json", ".txt", ".toml"}
+DOC_SUFFIXES = {".md", ".json", ".txt", ".toml", ".patch"}
 
 KINDS = ("decision", "new-card", "prediction", "brief", "critic-dissent", "close-call",
          "second-recast", "portfolio")
