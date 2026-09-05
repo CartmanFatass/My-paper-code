@@ -1,0 +1,30 @@
+{
+  "MAPR": {
+    "completed_rounds": 10,
+    "completed_transitions": 1920,
+    "completed_optimizer_steps": 320,
+    "last_parameters": {
+      "count": 89090,
+      "norm": 33.94209963371241,
+      "max_abs": 1.0423786924662992,
+      "rms": 0.11371669379116597,
+      "displacement_norm": 4.970286551211113,
+      "relative_displacement": 0.14918319335703578
+    }
+  },
+  "DIRECT": {
+    "completed_rounds": 10,
+    "completed_transitions": 1920,
+    "completed_optimizer_steps": 320,
+    "last_parameters": {
+      "count": 148739,
+      "norm": 39.31593568477246,
+      "max_abs": 1.059782700459088,
+      "rms": 0.10194271300331176,
+      "displacement_norm": 5.708897852100123,
+      "relative_displacement": 0.1476987924175785,
+      "residual_parameter_norm": 20.164493057822188,
+      "residual_output_parameter_norm": 0.1830907133884257
+    }
+  }
+}
