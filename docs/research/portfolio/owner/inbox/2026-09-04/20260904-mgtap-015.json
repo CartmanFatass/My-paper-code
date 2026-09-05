@@ -1,0 +1,32 @@
+{
+  "id": "20260904-mgtap-015",
+  "created": "2026-09-04T17:11:07-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "brief",
+  "title": "N5 B03：步长对照结果简报",
+  "context": "完整结果与预测一致，调步长影响大于坐标残余差异；下一步交方向裁决。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n5-b03-main-intake",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-04_b03_main.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

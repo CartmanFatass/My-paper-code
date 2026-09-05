@@ -1,0 +1,37 @@
+{
+  "id": "20260904-mgtap-014",
+  "created": "2026-09-04T17:11:07-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "N5 B03：接受步长控制后的有限结果",
+  "context": "完整 24 次拟合均符合卡片。双方选择 3.0；差异 0.000655 小于 0.01，且三个种子有正有负。固定 0.1 的小正差异仍在，但通用策略的调参改善约 0.201。记录为探索面板内、有限网格的步长敏感性，不作等价或方向否定。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受卡片规定的有限读取",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "宣称等价或广泛失败",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把固定步长正差异当作材料性优势",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "只有 a 同时保留旧现象、更强比较器和探索性边界。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n5-b03-main-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

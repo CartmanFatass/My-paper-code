@@ -12,6 +12,44 @@ second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
+## Accepted B03 scalar-rate control — 2026-09-04
+
+The complete same-information, equal-search-budget B03 panel is valid
+`B03_SELECTED_INSIDE_MEI`. Both METRIC and FREE select scalar SGD rate 3.0
+from {0.1,0.3,1,3} by mean learning-curve AUC over three fresh seeds. The
+selected METRIC-minus-FREE difference is +0.0006554780183014955, inside the
+declared absolute MEI 0.01, with seed contrasts +0.0009539286, -0.0006710476
+and +0.0016835531. Both winners are at the grid edge; same-panel selection
+makes this a development observation, not independent confirmation or equivalence.
+
+The fresh rate-0.1 anchor remains +0.0084101359, close to B02, while rate
+selection improves METRIC AUC by 0.1931180 and FREE by 0.2008726. Selected
+FREE exceeds METRIC at rate 0.1 by 0.1924625. The strongest supported inference
+is therefore scalar-step-size sensitivity of the earlier small separation;
+that separation is no longer evidence of distinctive metric value over the
+observed competent generic comparator. The selected residual remains small
+at both trained N=4 and N=8. This does not settle anisotropic conditioning,
+clipping, implicit regularization, ground binding or a different population.
+
+The matched oracle is 0.66875 and selected FREE's endpoint is
+0.6281512225115741, giving a grid-tuned trained-population headroom diagnostic
+of 0.040598777488426, with full seed curves. Globally tuned and held-out-N=6/12
+headroom remain absent. Strongest contradiction to further fixed-coordinate
+advantage claims is the below-MEI residual under equal tuning exposure;
+strongest caution against closure is the grid boundary and only three exploratory
+seeds. The ceiling remains the centralized balanced N=4/8 allocation toy, without
+churn, transfer, warehouse or UAV claims. Both old C meanings are unchanged.
+
+The next scientific question is whether any proposed ground-binding or roster
+discriminator can identify native value beyond this tuned same-information FREE
+null at matched work. A weaker binding comparator or a predictive statistic
+alone would not answer that question. No such further result exists yet.
+
+Evidence: `MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md`,
+`MGTAP_B03_MAIN_RESULT_EVIDENCE_20260904.md`,
+`MGTAP_B03_MAIN_SUMMARY_20260904.json`, `MGTAP_B03_MAIN_INTAKE_20260904.md`,
+and `MGTAP_B03_STEPSIZE_20260904.png`.
+
 ## Accepted B02 learning-curve observation — 2026-09-04
 
 The new owner-adopted B/EXPLORE question is finite-budget learning geometry on
