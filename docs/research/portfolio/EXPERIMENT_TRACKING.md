@@ -47,6 +47,8 @@ N3 C04 seed29 adopted: `(wsl_4070, dish_b01_c04_seed29_e0541d0c_a1)`, the same S
 
 FSD large D0 seed1 adopted: `(wsl_4070, fsd_e3_large_d0_seed1_20260904_01)`, SHA `f42dcb7a76f6341d3552a27134ca674674b29718`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed1_20260904_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed1`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d0_seed1_20260904_01/task.log`. At `2026-09-05T00:53:14Z`: `running`, exit `null`, wrapper PID `802417`, learner PID `802469`, `tmux_active=true`; fresh physical/effective admission `15042007040` bytes passed. Notify FSD DM/CM on terminal, failure/loss, or projected `1.68h` / `8h` cap; no relaunch.
 
+FRRIE R05 `(wsl_4070, frrie_b01_contact_r02_5e6d47f0_05)` is closed after CM collection: original runner `SystemExit0` plus full summary was assessed as valid B/EXPLORE `R02_SMALL_OR_ROSTER_MIXED` by CM, with terminal end `2026-09-05T01:09:35Z` / `937s`; no R06 or retry. N3 final seed47 `(wsl_4070, dish_b01_c04_seed47_e0541d0c_a1)` is active at SHA `e0541d0cb3e9e63731c72f4dacb10b44d268fd39`, cwd `/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c`, log `/home/wu/.agent-tasks/dish_b01_c04_seed47_e0541d0c_a1/task.log`, receipt/output under `temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed47_a1`; it is the final authorized seed, with `1800s` cap and no successor.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
