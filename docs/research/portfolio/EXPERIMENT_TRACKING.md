@@ -81,6 +81,8 @@ FSD large D0 seed2 terminal: `fsd_e3_large_d0_seed2_20260905_01` finished exit `
 
 FSD large D2 seed2 adoption: `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`. Same-handle observation at `2026-09-05T11:07:48Z`: `running`, exit `null`, PID `1663230`, tmux active; fresh physical/effective admission `15425314816` bytes passed. Projection `4.63h`, hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly, with no restart, repair, or validity inference.
 
+N3/ACVC terminal handoffs: N3 A03 focused verification `dish_endpoint_a03_verify_818b2566_01` and its unique result pair `dish_ground_endpoint_a03_seed11_pair_a1` each finished exit `0` and were ACKed by N3 DM for CM collection/verification. ACVC profile-cost `acvc_upper_r03_cost_c4c46e50_01` and unique actual result `acvc_upper_r03_actual_c4c46e50_01` each finished exit `0` and were ACKed by ACVC DM for CM collection. These supervisor facts carry no tracker scientific classification or authorization for an additional invocation.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
