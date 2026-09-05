@@ -1,0 +1,38 @@
+{
+  "id": "20260905-frrie-015",
+  "created": "2026-09-05T04:40:08-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R08 已按冻结卡完成技术接受并启动",
+  "context": "唯一 R08 已在远端接受，完整训练后追加四个角色列旋转评估格；技术检查通过，科学结果尚未产生。此前选择条件诊断而非第三个根的 close-call 记录保留。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受符合卡约束的技术交付，保留唯一已启动的 R08",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把测试通过或进程接受当作科学价值",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "没有新发现便增加根、运行或重复检查",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "精确提交、实际工程预算、干预与计数、根和学习率绑定、新鲜节点准入均符合冻结卡。Tracker 直接观察唯一句柄；科学读数等完整证据核验后按预写规则解释。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_ACCEPTED_RUN_INTAKE_20260905.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r08-accepted-run",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
