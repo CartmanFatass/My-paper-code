@@ -128,8 +128,9 @@ Root independently verified prompt, manifest and response SHA256; response diges
 `06c05c1f52736d7f274e1e6491611b8d7d528a90`. Complete class-correct decision is
 `PRO_FINAL=CONTINUE` for the existing RETAIN/COPY/SHADOW source-selection exploratory family.
 It selects a bounded prospective host qualification, not a numerical remedy, source-effect
-experiment, RECAST or Portfolio change. Original DM owns exact archive integration, final intake
-and the separately specified next A card. Original transport timestamps have insufficient duration
+experiment, RECAST or Portfolio change. Exact archive and final DM intake are integrated; see
+`candidates/degraded_incumbent_shadow_handover/DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md`
+under `docs/research/`. Original DM now owns the separately specified next A card. Original transport timestamps have insufficient duration
 resolution; actual provider duration is unmeasured, not zero. Request wake retirement was verified;
 do not resend this archived request or return to pre-cutover conversations.
 N5 request `2026-09-04-mgtap-b03-convergence-02` remains ARCHIVED, one Send, final
