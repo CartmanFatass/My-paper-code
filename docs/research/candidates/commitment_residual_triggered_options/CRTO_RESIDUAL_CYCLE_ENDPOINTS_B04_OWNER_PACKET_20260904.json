@@ -1,0 +1,38 @@
+{
+  "question": "是否用原顺序，在完整周期的33和258更新处比较RAW、真实残差与校准打乱残差？",
+  "changes_if_approved": [
+    {
+      "target": "CRTO 已开放平衡残差 B 梯子",
+      "from": "B01在32/256比较器弱；B02与B03替代方案已各自有效不胜任",
+      "to": "B04同种子三臂在33/258预定终点比较，原顺序RAW胜任条件重新实测"
+    }
+  ],
+  "if_refused": "在干净边界修订或停止这张卡；可以先测另一RAW初始化，保留既有结果和残差问题。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md",
+      "quote": "Strongest support for the negative is REPLAN 4/8 at all three exact-row-matched endpoints against the competent 6/8 CANONICAL comparator.",
+      "why": "原顺序在计划的长终点有胜任比较器依据，可回到已经打开的残差比较。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md",
+      "quote": "Directly, the same-information RAW path had lower equal-side regret than TRUE_RESIDUAL at both observed budgets, and no aligned TRUE advantage appeared in this literal run.",
+      "why": "真实残差先前未显示改善；新结果的价值是带胜任比较器的明确读法，未必给出阳性。"
+    }
+  ],
+  "uncertainty": [
+    "面板与258终点已被观察，短终点也按完整周期适应选择；只支持这一种子的开发性判断。",
+    "打乱控制保持完整包及固定双射；阳性仍不能证明信息增益或一般MARL收益。",
+    "校准阶段没有远端实测加速依据，预算用Windows历史实测保守投影。"
+  ],
+  "cost": {
+    "compute": "一轮三臂共24768个门控样本；保守预计各臂1016/1078/990秒、共享1307秒；上限每臂1200秒、整轮1500秒，共享准备只计一次。",
+    "owner_time": "约2分钟核对比较器、开发集边界和预算",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；按常设委托推进，异步意见在干净边界应用"
+  },
+  "verdict_text": "推荐同种子、原顺序、33/258完整周期的三臂B比较；先回答残差是否超过已胜任RAW，再考虑扩大种子。",
+  "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_SCIENCE_CARD_20260904.md"
+}
