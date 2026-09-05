@@ -121,3 +121,7 @@ runner's truthful self-only RSS and does not measure scratch.
 ## Sequencing correction before runtime
 
 DM corrected its dispatch: the original A05 card and approved exception require reviewed, committed and pushed exact bytes, not a main-only SHA or Root ACK. The earlier main-integration wait above was an added constraint and is withdrawn prospectively. Root integration remains requested independently. Execute at this CM record commit with unchanged accepted source blob 876efd82afac89c7f9c89790f4d2432a792279f3, recording its resolved SHA before remote preparation. All frozen commands, source review, science, admission and stop bounds remain. This changes no code and bypasses no refusal.
+
+## Runtime completed and accepted
+
+Exact d3884812a remote smoke completed4/4, then the unique original formal invocation completed exit0. Full source/runtime independent review found no remaining material issue. E0 and raw command/admission/log/status/summary/time artifacts are in DISH_A05_APPROVED_RESULT_EVIDENCE_20260905.md and a05_approved_20260905/. Original runner2.233209421s, external2.40s, no parameter displacement; resource coverage remains truthfully incomplete. No additional invocation or successor. DM receives the complete result; this technical assignment is complete.
