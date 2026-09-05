@@ -162,3 +162,47 @@ or new scientific learner occurs; focused fixtures are synthetic/no optimizer,
 and smoke uses existing synthetic checkpoint/model-forward fixtures. Any actual
 verification failure remains preserved, and time is charged before another
 invocation rather than reset. No process is accepted at this freeze.
+
+## First verification observations and exact continuation
+
+Root integrated source8003b96bd as363286861 and record7614be377 as26096e969,
+then explicitly confirmed the frozen verification sequence. Remote fetch using
+default shell stalled; CM terminated only its identified git-remote-https process
+before any worktree/test acceptance. The configured zsh -lic fetched successfully.
+An all-docs sparse expansion hit a promisor TLS EOF; fetching the actual required
+CBSC direction docs succeeded. Existing Git gc warnings were left untouched.
+These preparation facts are not scientific failures. The original nine Pro
+response/facts/manifest evidence files were copied at their recorded digests into
+the configured input staging root, with an evidence-only path link in the checkout;
+exact paths/digests are in APPROVED_REPAIR_INPUTS_20260905.json.
+
+Accepted smoke01 exited2 before memory admission or pytest because agent-task
+joins arguments with spaces: separate bash,-lc,command arguments lost the inner
+command quoting. The resulting preflight looked under /home/wu/scripts. CM
+reproduced `bash -lc cd <cwd> && pwd` yielding /home/wu. Sending one fully
+shell-quoted `bash -lc '<inner-command>'` argument preserves the frozen inner
+command. The original accepted handle/log remains; no test time occurred there.
+
+Smoke02 accepted once and exited0:1passed,13.46pytest seconds,13.84external
+process seconds,540876KiB maximumRSS,14whole supervisor seconds. It exercised
+the original smoke including RAW computation and table/summary byte readback.
+
+Profile01 accepted once and exited1:19focused tests passed,1formal test failed,
+9.92pytest seconds,10.64external process seconds,1234360KiB maximumRSS.
+Formal setup validated48original rawreceipt digests, loaded12original replay
+witness slots, then failed at locate_b0_evidence before publication because the
+existing B0 input was in the old checkout outside this direction's confined root.
+The independent reviewer reproduced the exact pathlib.resolve().relative_to()
+step on wsl with exit1/same ValueError, establishing a technical input-path
+failure. No fifteen-table publication or scientific result was produced.
+
+CM copied the same33B0 files/12807274bytes inside this execution direction root;
+all destination bytes equal source, manifest SHA256
+c7c6f73be17e785cbe6ffaba6cfd30c4c8483ecf23e43bbd48df535c676bc298.
+Original input metadata and source8003b96bd are unchanged. Formal-only02 has a
+new basetemp/output root; profile01 is preserved and its19passed checks are not
+repeated. Charging10.64process seconds leaves232.91s; the new timeout231s plus
+1s kill bound totals232s. Its exact command is frozen in
+APPROVED_REPAIR_FORMAL02_COMMAND_20260905.json before acceptance.
+Tracker independently confirmed all three original terminal handles and the DM
+ACKed them. No process is live at this continuation freeze.
