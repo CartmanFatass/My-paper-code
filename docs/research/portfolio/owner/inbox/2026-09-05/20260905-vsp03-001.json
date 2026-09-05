@@ -1,0 +1,84 @@
+{
+  "id": "20260905-vsp03-001",
+  "created": "2026-09-05T16:44:54-07:00",
+  "direction": "vsp_03",
+  "tier": "direction",
+  "kind": "new-card",
+  "title": "VSP-03单控制器直接B01",
+  "context": "完整Pro已选定并成卡；当前继续工程准备，保留旧证据。供异步审阅，不等待再次批准。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续已选卡与必要工程。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界停止未执行的受影响工作并保留证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体修改意见处理受影响的后续工作。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/vsp_03/VSP03_B01_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "已按完整 Pro 决定选择最小 N1 真实学习比较；请异步审阅该新卡，若需干预可保留、否决或修订。实施不等待回复。",
+    "changes_if_approved": [
+      {
+        "target": "VSP-03 当前科学卡",
+        "from": "仅有来源未绑定与 headroom 缺失记录，没有新 learner 对象",
+        "to": "执行一个事件规则初始化 learner 与同信息同网络 generic learner 的直接 B；另有固定规则参考，整对上限 1800 秒"
+      }
+    ],
+    "if_refused": "在下一个干净边界停止该新对象的未来动作并按具体回复处理；已发生的真实数据、旧审计与 FSD 停止范围保持原义，不虚构阴性。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vsp_03/pro_packets/20260905_k1_host_innovator/archive/RESPONSE.md",
+        "quote": "我选择一个直接的 B/EXPLORE：在新定义、固定 \\(N=1\\) 的持久目标任务上，比较“事件锁存规则软启动的完成／继续 learner”与“同信息、同网络、同预算的通用 learner”，把最小 host、动作消费者和原生回报实现纳入这同一个对象。",
+        "why": "完整裁决直接选择真实学习，未把上界、穷举或重构放在前面。"
+      },
+      {
+        "path": "docs/research/candidates/vsp_03/VSP03_B01_COUNTS_20260905.json",
+        "quote": "\"primitive_ticks\": 1454400",
+        "why": "工具已复算完整工作量；这不是耗时实测，秒数仍未知。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vsp_03/pro_packets/20260905_k1_host_innovator/archive/RESPONSE.md",
+        "quote": "最强替代解释始终保留：公开驻留年龄已经足够、普通 MLP 能学会相同决策、收益只来自初始化、事件频率与等待价格造成排序，以及实际决策样本数量随策略而变。",
+        "why": "同信息 generic 可能追平；一个正差值也可能只是先验或配置收益，不证明超越固定规则。"
+      }
+    ],
+    "uncertainty": [
+      "新 host 正确性、实际学习能力、原生回报排序和节点耗时尚未测量。",
+      "只有一个训练配对，不能估计训练种子总体不确定性，也不支持 MARL 特异性。"
+    ],
+    "cost": {
+      "compute": "一个完整逻辑调用，单 CPU 计算线程，最多 1800 秒；包含两臂训练、评价、固定规则、必要检查及发布。",
+      "owner_time": "可异步阅读和干预，不要求逐项批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "下一步仅是记录并实现上述一个 B 对象，完成第一对真实比较。",
+    "source": "docs/research/candidates/vsp_03/pro_packets/20260905_k1_host_innovator/archive/RESPONSE.md",
+    "option_consequences_for_root_item": {
+      "accept": "按已选卡继续一个 B；不追加精确上界、全控制网格或下一家族。",
+      "reject": "在可恢复边界停止未来 B 动作，保留已有真实证据和历史结果。",
+      "revise": "按具体异步指令调整尚未执行内容；已观察结果不追溯改写。"
+    }
+  },
+  "starred": true
+}
