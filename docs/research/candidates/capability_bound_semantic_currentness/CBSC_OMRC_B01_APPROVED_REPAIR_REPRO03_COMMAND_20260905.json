@@ -1,0 +1,13 @@
+{
+  "source_sha": "8003b96bd79910864e9372ad6f1ea81f1c80520c",
+  "node": "wsl_4070",
+  "task": "cbsc-approved-repro-8003b96bd-03",
+  "cwd": "/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905",
+  "command": "cd /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/repro03-admission.json && CBSC_R05_FIXTURE=/home/wu/hmasd-inputs/cbsc-r07-resource-repair-20260904/snap_r05 CBSC_B0_FIXTURE=/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/input-b0 /usr/bin/time -f 'process_wall_seconds=%e peak_rss_kib=%M' -o /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/repro03-time.txt timeout -k 1s 181s /home/wu/.venvs/hmasd/bin/python -m pytest -q -s -p no:cacheprovider --maxfail=1 --basetemp /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/repro03 tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_formal_path_repairs.py::test_r05_complete_formal_publication_preserves_original_receipts",
+  "selection": "DM OWNER_DELEGATED: exactly one reproduction of existing full formal failed step, then stop regardless of outcome. Same code, interpreter, inputs and formal test. No new diagnostic family or source repair.",
+  "already_charged_process_seconds": 61.47,
+  "remaining_seconds": 182.08,
+  "bound_seconds": 182,
+  "operator": "independent existing reviewer; launch only after Root exact command integration",
+  "stop": "No fourth formal invocation, no automatic source/budget expansion. Recurrence does not establish unique cause; pass or different failure does not erase formal02."
+}

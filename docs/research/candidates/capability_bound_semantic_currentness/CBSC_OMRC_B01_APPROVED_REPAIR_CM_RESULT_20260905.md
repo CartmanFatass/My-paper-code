@@ -270,3 +270,18 @@ Tracker's observation and DM's acknowledgement are separate from technical
 acceptance. **Return: full implementation candidate and actual partial coverage,
 with complete publication/readback still missing.** Scientific object, original
 r05 quarantine, comparison, labels, direction lifecycle and priority are unchanged.
+
+## DM-selected one exact reproduction, prospectively frozen
+
+After the above terminal report, the DM selected option(a), one exact existing
+failed formal-step reproduction, over(b), returning unclassified without
+recurrence evidence. OWNER_DELEGATED, same original remaining182.08s, same8003
+bytes/interpreter/r05/B0/archive inputs and the same formal test; only fresh
+task/root/basetemp/receipt and181s+1s kill bound differ. This is a bounded
+technical recurrence observation, not a new science family or source repair.
+The existing independent reviewer owns the one reproduction invocation after
+Root integration of APPROVED_REPAIR_REPRO03_COMMAND_20260905.json. No launch
+is claimed by this freeze. Stop after this invocation regardless of result;
+no fourth formal run or automatic source/scope/budget growth. Same failure
+establishes recurrence of the publication-step failure, not its unique cause;
+different failure/pass records non-recurrence without erasing formal02.
