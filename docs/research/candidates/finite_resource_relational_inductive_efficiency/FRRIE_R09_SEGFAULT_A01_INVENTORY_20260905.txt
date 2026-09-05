@@ -1,0 +1,122 @@
+2026-09-06T00:25:39+08:00
+LAPTOP-U9TDKC8A
+Python 3.10.21
+/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10
+43eec21e9584c83e5e8d940402d7e4570b454e59
+{"task": "frrie_r09_segfault_a01_43eec21e_20260905", "status": "finished", "exit_code": 0, "pid": 1683892, "uptime_seconds": 256, "tmux_active": false}
+1788625283
+0
+temp/directions/finite_resource_relational_inductive_efficiency/technical/r09_segfault_a01_admission.json 504 bytes
+temp/directions/finite_resource_relational_inductive_efficiency
+temp/directions/finite_resource_relational_inductive_efficiency/technical
+TASK_NAME            STATUS       EXIT_CODE  TMUX_ACTIVE
+---------------------------------------------------------
+acvc_r02_cost_3831a66d_01 finished     0          no        
+acvc_r02_cost_3831a66d_02 failed       128        no        
+acvc_r02_cost_3831a66d_03 finished     0          no        
+acvc_r02_result_3831a66d_01 finished     0          no        
+acvc_r02_result_3831a66d_02 finished     0          no        
+acvc_upper_prefix_cost_782f6965_01 failed       2          no        
+acvc_upper_prefix_cost_b18a098d_02 finished     0          no        
+acvc_upper_r03_actual_c4c46e50_01 finished     0          no        
+acvc_upper_r03_cost_c4c46e50_01 finished     0          no        
+cbsc-b1-final-profile-a138b01534-01 finished     0          no        
+cbsc-b1-final-readiness-a138b01534-01 finished     0          no        
+cbsc-b1-r06-a138b01534-01 failed       6          no        
+cbsc-b1-r07-b230e476ec-01 failed       6          no        
+cbsc-b1-readiness-2aaf43a8a-01 failed       1          no        
+cbsc-b1-readiness-2aaf43a8a-02 failed       1          no        
+cbsc-b1-zero-cpu-55e405a2-01 finished     0          no        
+cbsc-d8-profile-4f8fe0f6e-01 failed       4          no        
+cbsc-d8-profile-4f8fe0f6e-02 failed       1          no        
+cbsc-d8-profile-4f8fe0f6e-03 failed       1          no        
+cbsc-d8-profile-4f8fe0f6e-04 finished     0          no        
+cbsc-r07-formal-profile-ce94f5afd-01 failed       1          no        
+cbsc-r07-formal-profile-f15b77ecc-01 failed       1          no        
+cbsc-r07-resource-profile-261ca37e28-01 failed       1          no        
+cbsc_b1_focused_5a1b1b7fe_07 finished     0          no        
+cbsc_b1_policy_help_5a1b1b7fe_06 finished     0          no        
+cbsc_b1_policy_help_7508b8b72_04 finished     0          no        
+cbsc_b1_readiness_5a1b1b7fe_08 finished     0          no        
+cbsc_b1_venv_profile_7508b8b72_01 failed       1          no        
+cbsc_b1_venv_profile_7508b8b72_02 failed       1          no        
+cbsc_b1_worker_help_5a1b1b7fe_05 finished     0          no        
+cbsc_b1_worker_help_7508b8b72_03 finished     0          no        
+crto_joint_seed_b05_s1_c53f3bb1_01 finished     0          no        
+crto_joint_seed_b05_s2_c53f3bb1_01 finished     0          no        
+crto_paired_order_b03_fd76e7d7_01 finished     0          no        
+crto_raw_centered_b07_s1_5a4b5c20_01 finished     0          no        
+crto_raw_centered_b07_s2_5a4b5c20_01 finished     0          no        
+crto_raw_cycle_b02_2b667289_01 finished     0          no        
+crto_raw_exposure_b06_s1_7cad2758_01 finished     0          no        
+crto_raw_exposure_b06_s2_7cad2758_01 finished     0          no        
+crto_raw_phase_a01_8d1c5978_resume_r02 failed       139        no        
+crto_raw_phase_a01_c8247c2d_01 finished     0          no        
+crto_raw_phase_native_repro_a02_8d1c5978_01 finished     0          no        
+crto_raw_phase_probe_8d1c5978_r02 finished     0          no        
+crto_residual_b04_c53f3bb1_01 finished     0          no        
+dish_b01_c03_final_b0c63b69_01 failed       4          no        
+dish_b01_c04_final_e15c1794_01 failed       1          no        
+dish_b01_c04_repair_e0541d0c_01 finished     0          no        
+dish_b01_c04_seed11_e0541d0c_a1 finished     0          no        
+dish_b01_c04_seed29_e0541d0c_a1 finished     0          no        
+dish_b01_c04_seed47_e0541d0c_a1 finished     0          no        
+dish_certificate_a04_verify_d543146c_01 finished     0          no        
+dish_endpoint_a03_verify_818b2566_01 finished     0          no        
+dish_ground_a02_verify_dd0e01bb_01 finished     0          no        
+dish_ground_endpoint_a03_seed11_pair_a1 finished     0          no        
+dish_ground_source_a02_seed11_a1 finished     0          no        
+dish_origin_certificate_a04_a1 finished     0          no        
+dish_prefix_a01_smoke_bfe4952b_01 finished     0          no        
+dish_prefix_a01_verify_bfe4952b_01 failed       1          no        
+dish_prefix_funnel_a01_seed11_a1 finished     0          no        
+frrie_a01_pdb_check_b41a6ba7 finished     0          no        
+frrie_b01_contact_r02_36b538ba_01 failed       1          no        
+frrie_b01_contact_r02_36b538ba_02 failed       1          no        
+frrie_b01_contact_r02_36b538ba_03 failed       1          no        
+frrie_b01_contact_r02_5e6d47f0_05 finished     0          no        
+frrie_b01_contact_r02_732cc2b2_04 failed       1          no        
+frrie_b01_contact_r06_72b1bd00 finished     0          no        
+frrie_b01_contact_r07_10ae9781 finished     0          no        
+frrie_b01_contact_r08_58710424 finished     0          no        
+frrie_b01_contact_r09_43eec21e failed       139        no        
+frrie_contact_r02_actor_diag_36b538ba_01 failed       1          no        
+frrie_contact_r02_actor_diag_36b538ba_02 failed       1          no        
+frrie_contact_r02_tape_diag_36b538ba_01 finished     0          no        
+frrie_contact_repair_check_732cc2b2_01 failed       1          no        
+frrie_contact_repair_check_732cc2b2_02 finished     0          no        
+frrie_r04_reconstruction_a01_b41a6ba7 finished     0          no        
+frrie_r06_focused_72b1bd00 finished     0          no        
+frrie_r06_focused_eb5a4547 finished     0          no        
+frrie_r06_import_f0bfe7a5_20260905 failed       1          no        
+frrie_r07_focused_10ae9781 finished     0          no        
+frrie_r08_focused_58710424 finished     0          no        
+frrie_r09_focused_43eec21e finished     0          no        
+frrie_r09_segfault_a01_43eec21e_20260905 finished     0          no        
+fsd_e3_large_d0_seed1_20260904_01 finished     0          no        
+fsd_e3_large_d0_seed2_20260905_01 finished     0          no        
+fsd_e3_large_d0_seed3_20260905_01 finished     0          no        
+fsd_e3_large_d2_seed1_20260905_01 finished     0          no        
+fsd_e3_large_d2_seed2_20260905_01 finished     0          no        
+fsd_e3_large_d2_seed3_20260905_01 finished     0          no        
+fsd_e3_medium_d0_seed1_20260904_01 failed       1          no        
+fsd_e3_medium_d0_seed1_20260904_02 finished     0          no        
+fsd_e3_medium_d0_seed2_20260904_01 finished     0          no        
+fsd_e3_medium_d0_seed3_20260904_01 finished     0          no        
+fsd_e3_medium_d2_seed1_20260904_01 finished     0          no        
+fsd_e3_medium_d2_seed2_20260904_01 finished     0          no        
+fsd_e3_medium_d2_seed3_20260904_01 finished     0          no        
+hmasd_env_20260904   stopped      -          no        
+hmasd_env_20260904_v2 finished     0          no        
+hmasd_route_smoke_20260904_01 finished     0          no        
+mgtap_b02_main_203_211_223_f3595bfe finished     0          no        
+mgtap_b02_pilot_1907_f3595bfe finished     0          no        
+mgtap_b03_main_307_311_313_19531d07 finished     0          no        
+n3-folr-b04-full-20260904-a1 finished     0          no        
+n3-folr-b04-smoke-20260904-a1 finished     0          no        
+ucope_root_target_fit_r01_997f49c3_01 failed       2          no        
+ucope_root_target_fit_r01_997f49c3_02 failed       6          no        
+vnfc-mb1024-r02-6bd4e37d-20260904-02 finished     0          no        
+vnfc-mb1024-r02-cccecffd-20260904-01 failed       2          no        
+vnfc_causal_r03_build_9c41484a_01 finished     0          no        
+vnfc_causal_r03_calibration_20260904_01 finished     0          no        
