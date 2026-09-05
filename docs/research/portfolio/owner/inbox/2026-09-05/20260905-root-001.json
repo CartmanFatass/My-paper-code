@@ -111,6 +111,14 @@
       "state": "applied",
       "summary": "本次明确批准现有政策B及条件投入；100行上限不变。0ffca930b为历史实施提交，本记录纠正授权归因。",
       "correction": "此前Root将含义未确认的「同意」归因为正式批准，依据不足；原回复不是此前授权的证明。本次明确指令从现在生效，未追认此前已获授权。"
+    },
+    {
+      "at": "2026-09-05T15:42:59+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "所有者当前明确批准策略B及涉及修改，并确认先前修改符合本意；按当前时间追加确认，保留历史授权核实不足及原始回复。"
     }
   ],
   "starred": true

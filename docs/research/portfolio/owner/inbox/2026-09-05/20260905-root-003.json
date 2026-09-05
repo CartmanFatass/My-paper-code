@@ -64,6 +64,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
       "state": "applied",
       "summary": "按明确指令更新Pro6执行委托、规范与Dashboard星标追溯。重要改动全历史可见，记录实际裁决与实施，不伪写owner回复。"
+    },
+    {
+      "at": "2026-09-05T15:43:00+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "所有者明确批准后续subagent委派和研究方向调整；继续按6 Pro裁决与Dashboard星标追溯流程执行。"
     }
   ]
 }
