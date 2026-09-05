@@ -103,8 +103,8 @@ preparation under configured network shell succeeded in4.8s. This supports corre
 the shell mismatch, not an exclusive diagnosis of every possible network delay.
 Git auto-GC emitted an unrelated historical missing-parent warning while the overall
 fetch/worktree command succeeded; no history or configuration was repaired. Git
-preparation time is outside the result forecast/cap. No scientific object existed
-during this preparation issue, and no scientific failure classification follows.
+preparation time is outside the result forecast/cap. No scientific invocation or scientific output root had been initialized during this
+preparation issue, and no scientific failure classification follows.
 
 Local collection initially searched stdout for the wrong sorted first key and
 returned StopIteration before any evidence copy; selecting the existing JSON line
