@@ -18,11 +18,15 @@ population, weights, same-information reference and minimum controls. A may esta
 and measurement facts only; a learner or baseline tuning is B. No theorem, production four-clone
 host or complete headroom package is a generic prerequisite for B.
 
-The DM recommends a small research-tier A host/action probe because no executable common
-population exists and the cheapest unresolved fact is whether the proposed comparisons ask
-different native decisions. This is advice for selection, not an automatic A-to-B ladder. If Pro
-can specify a complete B more economically, direct B is a legitimate alternative. A scripted
-generic rule matching an upper reference does not by itself disprove finite-budget learning value.
+The DM recommends constructing the small research-tier host within a direct one-seed B learner
+comparison, as concretized below. The missing executable host is a real implementation need;
+it does not imply a separate exact reference A must run first. The 40-mission enumeration is an
+optional cheap diagnostic, not a prerequisite. This adopts the owner's 2026-09-05 clarification
+that exploration and paper-claim rigor differ: a genuine single-run performance improvement can
+justify bounded independent-seed follow-up before full mechanism attribution or exact reference
+work. A scripted generic rule matching an upper reference also does not by itself disprove
+finite-budget learning value. Pro may choose an A only if it resolves a concrete implementation
+or measurement question more economically than the direct B.
 
 ## A concrete candidate host, offered for revision
 
@@ -85,6 +89,56 @@ it cannot produce the tuned generic-learner headroom required for a learning cla
 
 ## What a selected B must decide rather than inherit by name
 
+### Concrete direct-B option for selection
+
+Train on both periods, both partner strata and both mirrored contexts. No corner or partner is
+held out in this first exploration. The complete 2x2x2 forced-first-action table is a final
+diagnostic; the primary measurement is each learned selector's free-choice native return.
+This asks about finite-budget sharing and negative transfer on seen support, not held-out
+composition. A later named run may select a withheld corner or partner if it changes the question.
+
+The proposed treatment is a small learned factorized action-value model
+`Q_shared(s,i,p)=u(s,i)^T v(p)`, with a rank-four learned embedding and a 16-unit nonlinear state
+encoder. The generic comparator is a fully conditioned nonlinear action-value model receiving
+the same `s`, identity action and period, without this factorization. Both can condition their
+first identity choice on period; the candidate does not impose a duration-blind selector.
+`s` contains the public context, schedule, primitive clock and last partner action. Because that
+is sufficient state for this proposed deterministic host, a recurrence requirement is unnecessary
+for the first B; recurrence remains an alternative if a revised host hides history. Pro should
+fix the generic width so capacity and actual work are comparable, report both parameter counts,
+and avoid a deliberately weak generic arm. Exact equality of parameter counts is not itself a
+new launch gate or proof of fair learning difficulty.
+
+Use ordinary epsilon-greedy Q learning on real complete episodes, with identical prospective
+epsilon schedule and optimizer settings across arms. One transition spans one actual held
+segment. Its target is that segment's native reward divided by six, plus the next-boundary
+maximum Q when nonterminal; the terminal continuation is zero. Undiscounted six-tick utility
+uses `gamma=1`, so period does not generate a reward/discount artifact. Each policy acts on its
+own generated trajectory; pair only the exogenous context schedule and random seeds, not
+outcome-dependent action histories. Model, policy selection, trainer update and evaluator must
+all execute, with nonzero counts and the implemented displacement/initialization exposure line.
+
+Proposed first size: seed 0, batch 32 with 16 lanes per period and balanced partner/context
+strata; 128 cycles of six-tick rollouts followed by one full-batch optimizer update. This gives
+4,096 complete training episodes, 24,576 joint primitive steps, 8,192 renewal transitions and
+128 optimizer updates per arm. Evaluate the free-choice policy at initialization and every 16
+updates on all eight exogenous contexts: nine evaluations, 432 additional joint steps per arm.
+At the final checkpoint, evaluate the 16 forced-first-action context cells once (96 steps).
+Thus the proposed complete two-arm first B costs 25,104 joint steps per arm, 50,208 in total,
+before a separately disclosed smoke check; no tuning sweep, future seed or exact census is hidden
+in those counts. The same complete evaluator supplies baseline and treatment results.
+
+Record the native-return learning curves, final paired difference, nonzero learner counts and
+real parameter displacement. A real positive difference or useful learning-curve improvement
+may justify a bounded seed-1/seed-2 follow-up even if below the descriptive MEI; do not require
+exact reproduction, a certified upper, a full mechanism account or a paper-ready conclusion.
+An apparent improvement from mismatched information, omitted evaluation or a failed learner is
+not an improvement to follow up. Flat/equal returns remain valid exploration and may motivate
+a different budget or comparison; they do not close K4. Pro selects the first object here; no
+additional seeds are launched or irrevocably selected by this proposal.
+
+### Remaining interpretation choices
+
 The old additive centered-logit completion is not automatically the candidate learner. Pro must
 name the actual shared parameter path and how it changes a legal policy: for example, whether
 identity-conditioned low-level execution is shared across periods while a period-aware selector
@@ -97,7 +151,10 @@ The principal comparator should be a competent generic recurrent/value learner r
 same observation history, public schedule, identities/actions and period. Match primitive
 environment exposure, action availability, model-selection work and meaningful parameter/update
 budgets. A period-only controller with less useful information is an ablation, not the efficiency
-null. Neither an untrained network nor a scripted optimum is a tuned learned comparator.
+null. Neither an untrained network nor a scripted optimum is a learned comparator. The first B
+may honestly report that its generic tuning is provisional; exhaustive tuning or oracle-level
+competence is not a precursor to exploratory comparison. A candidate signal motivates a stronger
+generic/independent-seed check before any stronger claim.
 
 Select the smallest control set that changes the next decision. The historical dummy-code,
 shuffled-code, persistent-noise and recurrence alternatives remain visible; do not require five
@@ -128,9 +185,10 @@ one process and one compute thread, ordinary in-process array batching permitted
 reported. No C++ speedup or measured sub-second completion is asserted. A missing/failed resource
 measurement or actual runtime failure is not a negative mechanism result.
 
-For a possible B, a concrete sizing example is batch 32, six primitive ticks, 128 rollout/update
-cycles: 24,576 joint transitions per arm and seed, before evaluator/tuning work. It is a sizing
-example, not an admitted training budget or a measured projection. At fixed period `p`, renewal
+For the concrete proposed B above, batch 32, six primitive ticks and 128 rollout/update
+cycles give 24,576 training joint transitions per arm and seed. Including all proposed evaluation
+work gives 25,104. These are proposed counts, not an admitted budget or a measured projection.
+At fixed period `p`, renewal
 rows are `M=32*6/p` per cycle: 96 at period 2 and 32 at period 6. If the design instead conditions
 on three training cells or batches variable periods, count those rows explicitly; do not credit
 both periods with equal optimizer exposure merely because primitive exposure matches.
@@ -164,9 +222,11 @@ Owner prediction: not taken (unattended).
 
 For a future normalized-return B, a provisional MEI of `1/12` would mean half one service step
 per six-tick episode, making the scale concrete. It is an offered DM design choice, not a
-repository threshold or a frozen branch. Above it would motivate a repeat/stronger generic check;
-inside it would favor a cheaper control or a different discriminator; opposite sign would
-motivate locating representation/optimization negative transfer. The selected card's actual
+repository threshold or a frozen branch. Above it would motivate an independent-seed/stronger
+generic check; a genuine positive effect inside it may also justify bounded independent seeds,
+with its smaller magnitude stated. No detectable effect can favor a cheaper control or a different
+discriminator; opposite sign can motivate locating representation/optimization negative transfer.
+The selected card's actual
 branches remain the reading rule. A feasibility A has no efficacy MEI.
 
 The requested final answer should select or revise one next object and explain what observation
