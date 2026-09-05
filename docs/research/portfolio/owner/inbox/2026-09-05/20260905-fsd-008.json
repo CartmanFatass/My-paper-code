@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "a",
-  "auto_applied": null,
+  "auto_applied": "a",
   "dm_reason": "随机时长与已测 Bernoulli 行不同，现有纯函数可以先回答结构机会，避免无新理由复制训练矩阵。",
   "evidence": [
     "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md",
@@ -77,5 +77,16 @@
     },
     "verdict_text": "DM recommends **(a), A/RECON before any E4 training**, because random-duration renewal is a different accepted question and its opportunity can be checked without another multi-arm learner study.",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md"
-  }
+  },
+  "execution_history": [
+    {
+      "at": "2026-09-05T15:45:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_e3_complete_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "完整6 Pro裁决已整合为8c82f6cd1：仅选择无训练A/RECON参考枚举；E3有界H0保留，枚举尚未运行。"
+    }
+  ],
+  "starred": true
 }
