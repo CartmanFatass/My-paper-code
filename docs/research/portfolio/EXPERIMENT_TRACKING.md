@@ -20,11 +20,23 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T10:15:xxZ`, the only tracker-owned live process is FSD
+At `2026-09-05T10:30:48Z`, tracker-owned live processes are FSD
 `(wsl_4070, fsd_e3_large_d0_seed2_20260905_01)`: `running`, exit `null`, wrapper PID `1656091`,
-and `tmux_active=true` on the configured `hmasd-wsl-node` supervisor. Its receipt passed at
-`2026-09-05T10:09:55.213783Z`. Terminal/loss/cap wakes FSD DM and CM directly; all other current
-records in this document are terminal or awaiting a separately handed accepted handle. The
+and `tmux_active=true`; and FRRIE `(wsl_4070, frrie_b01_contact_r07_10ae9781)`: `running`, exit
+`null`, PID `1657968`, `tmux_active=true`, SHA `10ae9781f74ae26931fa8231918844f4921b80f2`, cwd
+`/home/wu/hmasd-worktrees/frrie-contact-r07-10ae9781`, receipt
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r07_admission.json`,
+output sibling `exp/frrie_b01_contact_r07/summary.json`, log
+`/home/wu/.agent-tasks/frrie_b01_contact_r07_10ae9781/task.log`, fresh physical/effective admission
+`12896010240` bytes, and outer bound `2026-09-05T18:30:13Z`. Terminal/loss/bound wakes the
+respective DM and CM directly; a fixed pdb module means FRRIE exit `0` is not itself learner success.
+CRTO B07 seed1 `(wsl_4070, crto_raw_centered_b07_s1_5a4b5c20_01)` and seed2
+`(wsl_4070, crto_raw_centered_b07_s2_5a4b5c20_01)` are also accepted and running on SHA
+`5a4b5c20dd3e54350a0b18377541a0ae585d38bc`, with respective cwds
+`/home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20` and `.../crto-b07-s2-5a4b5c20`, frozen output
+roots `raw_centered_loss_b07_20260905/seed01|seed02/attempt01`, and 1200s-arm/1500s-invocation
+caps. Each has its own supervisor log under `/home/wu/.agent-tasks/<task>/task.log`; terminal/loss/cap
+wakes CRTO DM and CM once per seed. All other current records in this document are terminal or awaiting a separately handed accepted handle. The
 `2026-09-04T23:39:35Z` all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
@@ -58,7 +70,7 @@ FSD resume adoption: `(wsl_4070, fsd_e3_large_d2_seed1_20260905_01)`, SHA `e6d04
 
 Current terminal handoffs: N3 focused verification `dish_prefix_a01_verify_bfe4952b_01` failed at setup before a result run and was acknowledged; the restricted smoke `dish_prefix_a01_smoke_bfe4952b_01` finished and was acknowledged; N3 A01 seed11 `dish_prefix_funnel_a01_seed11_a1` finished and was handed to CM/DM for collection before intake. CRTO B05 fixed seed1 `crto_joint_seed_b05_s1_c53f3bb1_01` and seed2 `crto_joint_seed_b05_s2_c53f3bb1_01` both finished exit `0`; CM retained summaries, admissions and supervisor evidence (durations 185s and 183s), and both terminal reminders are complete. FRRIE R06 is the sole current FRRIE handle: `(wsl_4070, frrie_b01_contact_r06_72b1bd00)`, SHA `72b1bd001f7aff4d383f7cbec296bed2edf675dd`, cwd `/home/wu/hmasd-worktrees/frrie-contact-r06-72b1bd00`, receipt `temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r06_admission.json`, output sibling `exp/frrie_b01_contact_r06`, log `/home/wu/.agent-tasks/frrie_b01_contact_r06_72b1bd00/task.log`, and outer bound `2026-09-05T17:19:47Z`. Fixed `pdb` context means supervisor exit `0` alone never establishes learner success; terminal wakes FRRIE DM/CM for collection and no retry is selected.
 
-Latest terminal/recovery record: ACVC synthetic cost `acvc_upper_prefix_cost_782f6965_01` ended `cost_cap_reached` (exit `2`, 40.23s, peak RSS `18841600`) and was acknowledged for CM assessment only; no ACVC scientific branch was inferred. FRRIE R06 ended under the same pdb warning context, was collected and intaken as a distinct completed object; R07 has no handle yet. N3 A02 synthetic verification and its one prepared-point seed11 handle both completed and were acknowledged; no N3 successor is adopted. CRTO B06 seed1 and seed2 completed (97s and 92s) and DM intake is complete. FSD large D2 seed1 completed and was accepted as valid cell 14; its historical handle is closed. The only current FSD handle is `(wsl_4070, fsd_e3_large_d0_seed2_20260905_01)`, SHA `ac4db77371659c25d4ac39e1a20990fe098bc42d`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed2_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed2`, receipt sibling `preflight.json`, log `/home/wu/.agent-tasks/fsd_e3_large_d0_seed2_20260905_01/task.log`. It was running with wrapper PID `1656091`, learner PID `1656107`, tmux active; fresh physical/effective admission `15430356992` bytes passed. Its expected projection is `1.68h`, cap `8h`; terminal/loss/bound wakes FSD DM/CM only, with no relaunch.
+Latest terminal/recovery record: ACVC synthetic cost `acvc_upper_prefix_cost_782f6965_01` ended `cost_cap_reached` (exit `2`, 40.23s, peak RSS `18841600`) and was acknowledged for CM assessment only; no ACVC scientific branch was inferred. FRRIE R06 ended under the same pdb warning context and was collected/intaken as a distinct completed object. N3 A02 synthetic verification and its one prepared-point seed11 handle both completed and were acknowledged; no N3 successor is adopted. CRTO B06 seed1 and seed2 completed (97s and 92s) and DM intake is complete. FSD large D2 seed1 completed and was accepted as valid cell 14; its historical handle is closed. Current FSD seed2 facts and direct terminal/loss/bound routing remain as recorded above; no historical FSD task is revived.
 
 ## Accepted work and terminal handoffs
 
