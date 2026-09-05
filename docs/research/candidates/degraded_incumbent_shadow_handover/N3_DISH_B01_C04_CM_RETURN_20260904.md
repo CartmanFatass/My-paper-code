@@ -159,3 +159,48 @@ and join fresh node-local >=4 GiB physical/effective admission with runner by `&
 and logs outside the absent output child because `_run` creates that child at publication.
 Scientific output root remains the objective's `temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/`.
 This CM return authorizes no scientific run by itself and assigns no FTS polarity.
+
+## Accepted seed 11 launch — 2026-09-05 00:12:03 UTC
+
+DM subsequently accepted the technical return and selected only seed 11 in
+`N3_DISH_B01_C04_LAUNCH_INTAKE_20260904.md`, pushed commit `551fd251f`.
+Before dispatch, task `dish_b01_c04_seed11_e0541d0c_a1` returned `not_found`; its output child
+and admission path were absent. The execution worktree was clean at exact source
+`e0541d0cb3e9e63731c72f4dacb10b44d268fd39`. No repeated smoke was performed.
+
+The following exact single command string was accepted once by `/usr/local/bin/agent-task run`
+on `wsl_4070` via `hmasd-wsl-node`:
+
+```sh
+cd /home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1_admission.json && /home/wu/.venvs/hmasd/bin/python scripts/run_dish_first_trigger_source_scout_b01.py run --seed 11 --admission temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1_admission.json --out temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1
+```
+
+- Supervisor task: `dish_b01_c04_seed11_e0541d0c_a1`; tmux `agent_dish_b01_c04_seed11_e0541d0c_a1`.
+- Supervisor start epoch: `1788567123` (2026-09-05 00:12:03 UTC / September 4 17:12:03 PDT).
+- Supervisor PID: `112219`; this is launch metadata, not proof of learner completion.
+- Cwd: `/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c`.
+- Log: `/home/wu/.agent-tasks/dish_b01_c04_seed11_e0541d0c_a1/task.log`;
+  existing `status`, `exit_code` when terminal, `start_time`, `pid`, `runner.sh` reside beside it.
+- Receipt relative to cwd:
+  `temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1_admission.json`.
+- Output relative to cwd:
+  `temp/directions/degraded_incumbent_shadow_handover/exp/n3_b01_c04_20260904/seed11_a1`.
+
+Destination receipt captured at `2026-09-05T00:12:03.356900Z`, assessed at
+`2026-09-05T00:12:03.357208Z`, measurement `/proc/meminfo`:
+physical available **12,531,122,176 bytes**, effective available **12,531,122,176 bytes**;
+minimum **4,294,967,296 bytes**; both floor flags and `passed` true; failure reasons empty.
+The receipt lives outside the absent-at-launch result child, and `&&` admits only this invocation.
+These admission readings do not establish runtime peak RSS or resource conformance.
+
+Expected duration remains 1474.544745605439 seconds, charged independently to each arm;
+the 1800-second stop is checked at the runner's declared boundaries. CPU/one Torch thread,
+FP32 learner/float64 native and all scientific semantics are unchanged.
+
+Tracker `/root/tracker_tl_experiments` ACKed adoption of this exact scientific handle and is
+the sole observer/reminder for terminal, observation-loss and bound events. CM read only the
+initial admission and start metadata after acceptance, then released polling. DM is
+`/root/dm_amx_n3_continue`; CM collector is `/root/dm_amx_n3_continue/cm_am_n3_dish_c04`.
+No terminal result is claimed here. Seeds **29 and 47 remain queued**, contingent only on
+seed 11 technical completeness, with no efficacy/trigger-support screening or changed seed law.
+The recorded learner/publication coverage limitation remains open pending collection.
