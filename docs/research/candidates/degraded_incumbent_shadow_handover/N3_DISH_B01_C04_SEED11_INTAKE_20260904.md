@@ -81,6 +81,21 @@ The real no-trigger publication path is observed; full automated `_run` publicat
 a scientific triggered branch remain open engineering observations, not extra B launch gates.
 Headroom remains absent. The next discriminator is the unchanged remaining seeds.
 
+## Accepted seed 29 detached boundary
+
+CM recorded and pushed acceptance at `97982d5c0b9cd29d47a4c08d5a25c4a9e05c5be6`.
+The exact prospective command above was accepted once as `dish_b01_c04_seed29_e0541d0c_a1`
+at `2026-09-05T00:47:14Z` (September 4, 17:47:14 PDT), PID 607075, source/cwd unchanged.
+Before dispatch the task returned not found and its receipt/output paths were absent.
+Fresh receipt at `2026-09-05T00:47:14.317386Z` reports physical and effective available memory
+each `15,432,970,240` bytes, above `4,294,967,296`, all pass flags true.
+Log: `/home/wu/.agent-tasks/dish_b01_c04_seed29_e0541d0c_a1/task.log`; start/status/eventual-exit
+witnesses reside beside it. Receipt/output remain at the exact command paths.
+
+Tracker ACKed adoption and DM acknowledged the direct handoff. It alone observes; CM/DM yield
+cleanly and resume collection/intake on its terminal reminder. No seed 29 result is claimed.
+Seed 47 remains queued. Owner reviews again returned no pending instruction at this boundary.
+
 ## Append-ready shared audit rows
 
 Root owns the shared ledger; append under `n3-dish-b01-seed11-intake`.
