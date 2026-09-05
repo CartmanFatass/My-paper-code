@@ -523,3 +523,33 @@ References: `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_SCIENCE_CARD_20260904.md`,
 `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_EVIDENCE_20260904.md`,
 `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json`,
 `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md`.
+
+## Joint-seed B05 result — 2026-09-05
+
+The fixed new coupled seeds1/2 both complete validly as BR-E COMPARATOR_WEAK; aggregate
+B05-COMPARATOR-LIMITED. RAW-LONG seed1 is KEEP8/8, REPLAN5/8, R=.0021294544930598857;
+seed2 is KEEP6/8, REPLAN5/8, R=.004055601013485903. Both side mean regrets pass.005;
+REPLAN exact count alone misses the unchanged6/8 qualifier. All192 decisions, two pairs
+of48/16 donor maps,22/172 recipient/donor counts and actual exposure lines recompute.
+
+Seed1 d_RT is+.00280321561048486 SHORT and-.010677145051567178 LONG; seed2 is
+-.0037842910830349864/-.012916737883990694. These remain diagnostic signs because neither
+new RAW-LONG comparator is competent. B04 retains its seed0 competent-comparator negative;
+B05 does not extend that polarity to three seeds or reverse it.
+
+Strongest support is the shared one-action REPLAN deficit. The counterpoint is low side
+mean regret and real RAW budget improvement, including seed1's lower aggregate regret than
+historical seed0; broad RAW unlearnability is not established. Predictor, gate and derangement
+seed changed jointly, so no one component is isolated. The panel/endpoints remain exposed,
+headroom untuned, and policy/MARL or independent-population value untested.
+
+The next selected discriminator is RAW-only258/516 exposure on the same two joint seeds,
+using unchanged information and a separately declared native-action/regret reading.
+Unused calibration may be omitted on the accepted source map; that is not numerical evidence.
+No successor is frozen or launched in this intake, and no family or Portfolio action is taken.
+
+References: CRTO_JOINT_SEED_B05_SCIENCE_CARD_20260905.md,
+CRTO_JOINT_SEED_B05_RESULT_EVIDENCE_20260905.md,
+CRTO_JOINT_SEED_B05_SEED01_RESULT_20260905.json,
+CRTO_JOINT_SEED_B05_SEED02_RESULT_20260905.json,
+CRTO_JOINT_SEED_B05_INTAKE_20260905.md.
