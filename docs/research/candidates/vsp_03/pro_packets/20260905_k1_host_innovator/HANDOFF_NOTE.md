@@ -4,12 +4,17 @@
 single singleton dispatch for this assignment. No Pro send, accepted provider conversation,
 complete response, new scientific card, source acceptance or experiment is claimed here.
 
+Revised before dispatch under the owner's exploration-versus-paper-claim clarification. Root
+confirmed that the initial packet had not been dispatched; its four original files are retained
+byte-for-byte in `unsent_initial/`. This active packet replaces those unsent bytes at the same
+request identity. The replacement also remains unsent; Root must dispatch it only once.
+
 ## Exact preparation state
 
 - Worktree: `C:/Projects/HMASD-worktrees/dm-k1-vsp03-design-20260905`.
 - Branch: `codex/dm-k1-vsp03-design-20260905`.
 - Source base: `5f1ec0cc8dc6132557877d967e20ffca36cdb84d`.
-- Pushed evidence pin: `0be2b4b5da25ec0003ab40a52dc4fb71e8398039`.
+- Pushed revised evidence pin: `b7da502be0f37e974be05c1058f5f4108c981c8e`.
 - Request: `2026-09-05-vsp03-k1-host-innovator-01`.
 - Correct node: `em:vsp_03:innovator`; request scope is only `vsp_03` within route K1.
 - Author native task: `01a07355-29e4-7041-8361-3746dace66d3`.
@@ -30,10 +35,17 @@ settings. Its absolute handoff path points into the retained DM worktree, and th
 the scientific attachment. The provider reads only `PROMPT_BODY.md`; `REQUEST.json`,
 `HANDOFF.json` and this note are internal author-to-Root/Transport metadata.
 
-The request asks for one minimal native-return event-aware termination host/reference or bounded
-A/B object, or an explicit no-object decision. It preserves the source-unbound audit, undefined
-VSP-03 headroom, K1 source grouping and the complete FSD fixed-K2 family PARK. The recommendation
-is prospective host/reference definition, not a locally selected new family or an oracle gate.
+The revised request prefers one minimal direct B comparison, with necessary executable host
+implementation inside that B. It permits a separate prior step only for an actual missing
+environment, native action/return or execution fact. Exact upper/census, complete tuning,
+bit identity and full reconstruction are not gates. A valid interpretable positive B signal
+normally proceeds to independent training-seed replication of the same comparison, keeping all
+positive, null and adverse results; all seeds need not be positive. Paper-level validation is a
+later claim burden. Actual integrity defects still require targeted repair.
+
+It preserves the source-unbound audit, undefined VSP-03 headroom, K1 source grouping and the
+complete FSD fixed-K2 family PARK. This is a prospective recommendation, not a locally selected
+new family, accepted experiment or relaxed scientific-integrity rule.
 
 ## Validation and recovery
 

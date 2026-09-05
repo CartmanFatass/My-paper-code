@@ -7,16 +7,16 @@
   "direction_id": "vsp_03",
   "repository": "CartmanFatass/My-paper-code",
   "repository_url": "https://github.com/CartmanFatass/My-paper-code",
-  "commit_or_ref": "0be2b4b5da25ec0003ab40a52dc4fb71e8398039",
+  "commit_or_ref": "b7da502be0f37e974be05c1058f5f4108c981c8e",
   "execution_mode": "REUSE_SINGLETON",
-  "scientific_question": "在 K1 中断时机路线内，VSP-03 的事件感知完成／继续问题现在是否值得选择一个最小的新对象？已完成的现有证据普查表明：持久目标半马尔可夫 host 的人口、原生回报上界和调优的同信息通用基线都尚未实例化；旧事件接口审计没有真实事件来源，也没有环境、学习或回报活动。可复用的 relay corridor 则具有公开事件、角色、租约续约、原生服务回报和有限参考计算，但它的 epoch 失效语义不同于目标在确认区间内离开后又返回。FSD 已完成的三种时长分布普查，其全部 switching-reference 机会均由 public greedy 解释；后续完整裁决已暂停当前固定 K2 policy-gap 学习分支且未选择后继。请针对 VSP-03 自身的前瞻问题，选择至多一个真正增加判别信息的最小 host／reference 定义或有界 A/B 对象，说明实际任务后果、最强同信息通用解释和可复用范围；若只有改名重复、规则自证或尚无有价值的具体任务后果，请明确不选择新对象，并指出能改变这个判断的最小事实。",
-  "deliverable": "请先用自然语言给出一个明确的最终选择，随后说明最强依据、最强反证、未决解释和下一判别。若选择下一对象，请完整定义其最低必要人口、固定 agent 数量及角色、原始事件与可用信息、完成／继续或续约动作、独立于候选规则的原生回报、原语时间与机会时间、边界顺序、终止和删失、参考与通用比较器、可观察量及估计量、结果的不同读法、证据类别和有限主张、暴露与逐臂工作／成本计划、整次调用上限和停止规则。明确已有源码支持什么、还需要哪一项最小实现；优先复用真正兼容的资产，不预设需要先造统一平台或完整 baseline 集。只有当一个参考计算确实能改变下一决策时才选择它，不把精确上界或正 headroom 变成 B 的前置条件。若选择 B，需说明真实环境、policy、learner、trainer、evaluator 及非零工作如何进入原生结果；若只选择无 learner 的定义或测量，保持其有限含义，不自动附带后续训练。若不选对象，请限定最小适用问题及具体重入事实，不改变 Portfolio 的生命周期、优先级、容量、融合或 source 登记。请用结论、解释、证据和局限组织回答，必要时使用简短表格、公式和来源引用；不输出机器状态块或复述传输标识。",
+  "scientific_question": "在 K1 中断时机路线内，VSP-03 的事件感知完成／继续问题，能否现在选择一个最小可运行 host 上的直接 B 探索比较？已有普查显示 VSP-03 尚无实际持久目标环境、动作消费者与原生回报路径；精确上界、调优通用基线及 headroom 也缺失，但后三项不是探索启动门槛。可复用的 relay corridor 已有公开事件、角色、租约续约、原生服务回报和向量化执行，不过 epoch 失效与目标在确认区间内离开后返回的语义不同。FSD 既有 K2 参考机会已由 public greedy 解释，当前 policy-gap 学习分支的完整 PARK 裁决保持不变。请优先选择一个具有新增学习判别价值的最小 B 比较，并把必要的新 host 定义／实现包含在该比较中；只有一个具体缺失的环境、动作或回报事实实际阻止比较定义或执行时，才选择解决该缺口的最小前置工作。不要默认先做精确上界、完整枚举或重构审计。若仍不存在区别于已完成工作的有价值比较，请明确不选择新对象及真正需要的新事实。",
+  "deliverable": "请先用自然语言给出一个明确的最终选择及其最低必要理由。优先说明最小可运行环境、固定 agent 数量与角色、可用事件／历史、原生动作和独立于候选规则的任务回报、一个可信且胜任的同信息通用比较器，以及真实 policy、learner、trainer、evaluator 的完整执行链。给出足以实施和解释的数量、暴露、实际工作／逐臂成本计划、整次调用上限、停止规则和结果读法；区分缺失的可运行 host 与可选的精确上界、完整 baseline sweep、证明和重构。最小 host 实现可以属于 B 本身，不必另立 A 对象。若必须先解决某个真实缺口，请命名该事实、最小工作以及它如何改变后续比较；不要把纯文档定义、精确 census 或未获正 headroom 当默认前置。若 B 出现一个有效、可科学解释的阳性信号，优先安排同一比较的独立训练种子复验，保留首个阳性和全部后续正、零、负结果；不要要求每个 seed 都为正，也不要用同一 checkpoint 的重复评估替代独立训练。说明探索信号与论文级稳定结论的不同证据负担；只在实际完整性缺陷影响解释时做针对性修复或核查。请保留旧 VSP-03 审计和 FSD 完整裁决，不改 Portfolio 或重开其停下的家族。若不选对象，限定最小适用问题及具体重入事实。用结论、依据、反证、未知和下一步组织自然语言回答，引用文件与节即可，不输出传输标识或机器状态模板。",
   "claim_ceiling": "当前 VSP-03 证据仅为 A/RECON 的接口与资产缺失事实，headroom 不可计算而非零；旧未来事件 truth table 不是原生效果。设计选择本身不产生经验结果。任何新无 learner 对象最多支持已声明有限 host 上的实现、测量或数值参考事实；真实 learner 的早期比较最多为 B/EXPLORE 的有限预算初步信号。固定多个 agent、布尔分歧、参数移动或公共脚本收益均不单独建立 MARL 特异价值、学习优势、稳定优越性、迁移或部署能力。FSD 原 E3 有界 H0、合格 small seed2 正例及 E4 原 A 结果保持原义；本请求不重开其已暂停的固定 K2 policy-gap 学习分支。",
   "reference_files": [
     {
       "path": "docs/research/candidates/vsp_03/VSP03_K1_HOST_DESIGN_EVIDENCE_20260905.md",
-      "purpose": "Source-based host compatibility comparison, alternatives, recommendation, native chain and exact non-launch boundary.",
-      "provenance": "Current DM design brief, not a science card or Pro decision; observations and inferences are separated."
+      "purpose": "Revised source-based host compatibility and direct-B recommendation, with minimal executable host versus optional exact references and positive-signal independent-seed continuation separated.",
+      "provenance": "Current DM design brief revised under the owner exploration-versus-paper-claim clarification before dispatch; the initial unsent packet is preserved, and no scientific result is rewritten."
     },
     {
       "path": "docs/research/candidates/vsp_03/pro_packets/20260905_k1_host_innovator/EXPOSURE_AND_COST.json",
@@ -141,14 +141,15 @@
   ],
   "constraints": [
     "本问题只选择 VSP-03 在 K1 内的最小下一科学对象或不选择对象，不重开另一 source 的固定 K2 policy-gap 学习分支。当前组织分组允许具名控制共享，但不授权修改已有 E3/E4、旧事件审计或 Portfolio。请保留完整已形成的 FSD 裁决，即使其旧归档含有机器格式，也不要沿用那种答复格式。",
-    "当前建议是先做有实际任务后果的最小 host/reference 定义，尚未选择任何运行；该建议可以被你的最终设计选择取代。不要把缺失 headroom 或完整通用基线当作普遍停止投资理由，也不要为保持活跃而自动选择训练。精确参考是可选的便宜判别，不是 B 的前置仪式。",
+    "当前修订建议是最小可运行 host 上的直接 B 探索，必要的环境实现可随该 B 一起完成。只在真实 event→information→action→native return 路径或执行依赖缺失时补最小工作；精确上界、完整 headroom、完整调优基线、bit identity、全轨迹／checkpoint 重构和 C-time 冻结义务都不是 B 门槛。一个自洽的 inspiration model 可以直接进入真实 learner 比较，无需先证明方法具有价值。",
     "旧事件 latch 的目标负事件必须与新任务的原生过程区分；不要把 timestamp、一般 occupancy、区域 change flag 或测试用 future manifest 宣称为旧来源已被认证。新玩具可以有自己明确定义的模拟事件，但它是新 host 假设，不能修复或翻转旧审计。",
     "请逐项比较 observation、action、information、reward、population 和 budget 的实际兼容性。当前 corridor 在 K2 中从公开 flag/cue 恢复 latent，事件使 lease 持续失效，RENEW 付出一个零服务 step；这些已解释的参考收益不能被当成事件认证或 policy-gap 特有收益。固定多个 agent 不能替代实际 joint consequence；若只有单控制器或信息流问题，应直说。",
-    "最强同信息通用控制必须得到 treatment 的全部合法 event/history/age/identity 信息和合理的状态、模型选择与学习预算；one-hit、dwell、debounce、hysteresis 是具名简单控制，不能代替通用控制。当前-only 或去事件臂可测信息价值，但不构成同信息效率优势。参考需区分 stated upper、最优合法策略、privileged oracle、固定规则和调优 learner。",
+    "选择最小但有解释力的比较：同信息通用控制得到 treatment 的全部合法 event/history/age/identity 信息及合理的学习、状态与选择预算；不能人为弱化它来制造胜利。完整调优 sweep、oracle-retuned comparator 和全部 one-hit/dwell/debounce/hysteresis 臂表不是 B 前置，额外控制只在能改变当前解释时添加。当前-only 或去事件臂测信息价值而非同信息效率。可选参考需区分 stated upper、privileged oracle、固定规则和真实 learner，缺失精确 upper 不阻止真实 B。",
     "设计需保持固定 N；不得顺带引入成员变化、agent 替换、probe、team credit 或新的隐私信息边界。若一个新定义必须改变某项，应明确科学问题变化而不是称其为不变的既有 host。必须说明 primitive time、边界机会、reward accumulation、终止/censoring 和适用的半马尔可夫 discount；不能通过截短、丢尾或少计算检查来制造速度或效果。",
     "机器生成 exposure 文件显示旧 VSP-03 全部运行活动为零，E4 learner episodes/transitions/optimizer updates/checkpoint selection 均为零；本次准备选择的新实验、模型和更新也为零。参数相对初始化位移不适用，不是 absent generic learner 的零位移结论。若选择 B，请给出能够产生非零更新和评估的真实链，并明确后续卡片需要机器生成的可移动暴露量。",
     "成本保持诚实：E4 正式 process wall 合计 2.35 秒、加校准 3.09 秒；E3 十八有效单元 wall 合计 66087.00043219907 秒。它们不是新对象的测量或预算，DP 成本式也不是 learner 成本式。新对象的实际节点、shape、完整工作量、初始化/计算/评估/检查/发布计时与每臂投影需对应其真正实现；当前未知秒数不可填零或按核心数相除。",
-    "Toy 45 分钟、UAV 12 小时按完整逻辑调用调查工程成本，不是自动获得的上限或额度；若选择新计算应另给适合该问题的更小上限与停止规则。优先已有普通进程内 batching 和最小代码，不添加平台、通用 worker 池、validator、retry 服务或 profiler。此处不继承 VNFC、DISH、CBSC 对象限定预算。",
+    "一个有效且可科学解释的正 B 信号足以支持同一比较的独立训练 seed 复验；它不证明稳定优势，也不要求先完成漫长取证链。通常可由首个 seed 增补独立训练 starts 到三份探索观察，具体次数与预算按实际成本记录；保留所有结果，混合符号说明不稳定，不要求全 seed 阳性。新评价 seed 或同一 checkpoint 重评不是独立训练。针对实际发生、影响解释的缺陷保持完整性修复；不因尚无完全重构、精确值重放或全部因果解释而把有效阳性降成无效。论文级主张再承担其比较、调优、最终评估隔离与不确定性要求，不把该负担倒灌给当前探索。",
+    "请保留 event frequency、delay cost、ordinary memory、公开简单规则、reward construction、censoring 和优化暴露这些替代解释，但不要求一次 B 先排除全部解释。任务 reward 不能直接奖励对候选 certifier 的赞同；布尔差异、预测相关性或参数移动不能冒充原生学习效果。选择一个当前比较和清楚的结果读法即可；阳性后同一 B 比较的独立训练 seed 复验属于常规探索推进，不需要逐个 seed 再发 Pro，也不产生自动论文结论。",
     "请明确一种支持、零或相反结果各自改变什么判断，并保留 event frequency、delay cost、ordinary memory、公开简单规则、reward construction、censoring 和优化暴露这些替代解释。设计不能把对 event certifier 的赞同直接编码成 reward，也不能把相关性或布尔分歧当作原生算法价值。最多选择一个对象，不自动追加后续训练、recast 或运行清单。",
     "回复请以普通自然语言呈现最终决定、理由、实际读到的证据范围、未知和下一步，引用文件与节即可。不要以 request ID、task ID、conversation binding、状态字段或 JSON/envelope 作为标题或输出要求。无法读取某个列出来源时，精确指出缺口；未形成决定不得被写成局部代理已获科学裁决。"
   ],
