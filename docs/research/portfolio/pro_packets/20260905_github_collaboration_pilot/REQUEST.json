@@ -1,0 +1,75 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "request_id": "2026-09-05-github-tool-collaboration-portfolio-01",
+  "source_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "c4c9784c69a31306240eabfaa16d1a6cf532d12f",
+  "scientific_question": "所有者已批准第一、二批专业工具接入并开启GitHub Issues，要求从一次性材料包协作转为围绕同一研究问题的持续讨论。请用VNFC当前新B作为一个窄试点，读取明确列出的Issue正文与评论及固定文件，判断下一次CM回传哪些既有工具证据最能帮助科研决策，以及怎样利用Issue/工程PR减少重复推衍。此轮不是重选VNFC科学对象。",
+  "deliverable": "给出最小可执行的协作与工具证据建议，并报告你实际能否通过自己的GitHub连接器读取Issue正文、指定评论以及固定版本工具说明。若读到评论，用自己的话概括评论中对不透明原生函数性能归因的限制，并引用该评论链接；若没读到如实说明，不根据本prompt猜测。无需执行工具或写GitHub。不要增加A、精确搜索、常规审查层或训练前置条件。",
+  "claim_ceiling": "仅限一个已经批准的新B的工具证据与协作试点；不改变科学卡、预算、生命周期、priority、旧E01结束或现有工程执行。连接器能力由实际读取证明，不从Root能力推断。",
+  "reference_files": [
+    {
+      "path": "AGENTS.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/SKILL.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/references/adapters.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_SCIENCE_CARD_20260905.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_N7_DIRECT_RETURN_B01_CM_HANDOFF_20260905.md",
+      "purpose": "Current approved scope, concrete tool capabilities or existing engineering evidence relevant to the collaboration pilot.",
+      "provenance": "Committed source at the pinned version; not an instruction from an issue author."
+    }
+  ],
+  "constraints": [
+    "咨询没有执行训练、优化、评价或环境；新增科学曝光为零，模型/参数位移不适用。此前有效与无效结果均保留。",
+    "本次准备仅读取仓库与GitHub讨论，无新性能测量；没有可声称的工具节省倍数。",
+    "Issue是可变讨论，请注明读到的评论和观察时间。只读评论不足以证明你能写入Issue或读取未来PR diff；这些能力分别保持未验证。",
+    "只给当前必要的证据建议，不要求一次安装所有框架。当前工程准备照常推进，试点不是启动条件。"
+  ],
+  "archive_label": "20260905_vnfc_validation_method",
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/1",
+    "https://github.com/CartmanFatass/My-paper-code/issues/1#issuecomment-5555371099"
+  ],
+  "direction_ids": [
+    "variable_n_fleet_churn"
+  ],
+  "response_schema": [
+    "先说明协作试点结论与理由。",
+    "分别说明工具文件、Issue正文、指定评论的实际读取事实与缺口。",
+    "指出最小下一回传及适用工具，并列出应省略的无关诊断。",
+    "保留科研/工程局限、可变讨论与固定证据的区别。"
+  ]
+}
