@@ -8,7 +8,8 @@ from pathlib import Path
 
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02 import experiment
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01_contact_r02.semantics import (
-    OBJECT_ID, TEST_ROOT_HEX, classify_r02, exposure_record, initialize_contact_pair,
+    OBJECT_ID, TEST_ROOT_HEX, TEST_SEED_LABEL, classify_r02, exposure_record,
+    _initialize_contact_pair,
     initialize_test_contact_pair,
 )
 from experiments.candidates.finite_resource_relational_inductive_efficiency.b01.constants import MIN_AVAILABLE_BYTES
@@ -60,13 +61,16 @@ def _admission(path):
 
 
 def test_selected_lr_defaults_branches_and_real_publisher(tmp_path):
-    for function in (initialize_contact_pair, initialize_test_contact_pair, experiment.execute, experiment.main):
+    for function in (_initialize_contact_pair, experiment.execute, experiment.main):
         assert inspect.signature(function).parameters["adam_lr"].default == 0.0003
     for function in (experiment.execute, experiment.main):
         assert inspect.signature(function).parameters["object_id"].default == OBJECT_ID
         assert inspect.signature(function).parameters["branch_prefix"].default == "R02"
-    for kwargs, expected_lr in (({}, 0.0003), ({"adam_lr": 0.003}, 0.003)):
-        _, optimizers, audit, _ = initialize_test_contact_pair(**kwargs)
+    for expected_lr in (0.0003, 0.003):
+        _, optimizers, audit, _ = (
+            initialize_test_contact_pair() if expected_lr == 0.0003 else
+            _initialize_contact_pair(TEST_ROOT_HEX, TEST_SEED_LABEL, adam_lr=0.003)
+        )
         assert all(group["lr"] == expected_lr for opt in optimizers.values() for group in opt.param_groups)
         assert audit["initial_optimizer_group_lr"] == {
             "PHY_TRUST_004": [expected_lr], "EDGE_FLEX_150": [expected_lr],

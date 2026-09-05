@@ -227,13 +227,13 @@ def _initialize_contact_pair(root_hex: str, seed_label: str, *, adam_lr: float =
     return models, optimizers, audit, raw_model_bytes
 
 
-def initialize_contact_pair(*, adam_lr: float = 0.0003) -> tuple[
+def initialize_contact_pair() -> tuple[
     dict[str, Any], dict[str, Any], dict[str, Any], dict[str, bytes]
 ]:
-    return _initialize_contact_pair(ROOT_HEX, SEED_LABEL, adam_lr=adam_lr)
+    return _initialize_contact_pair(ROOT_HEX, SEED_LABEL)
 
 
-def initialize_test_contact_pair(*, adam_lr: float = 0.0003) -> tuple[
+def initialize_test_contact_pair() -> tuple[
     dict[str, Any], dict[str, Any], dict[str, Any], dict[str, bytes]
 ]:
-    return _initialize_contact_pair(TEST_ROOT_HEX, TEST_SEED_LABEL, adam_lr=adam_lr)
+    return _initialize_contact_pair(TEST_ROOT_HEX, TEST_SEED_LABEL)
