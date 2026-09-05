@@ -26,6 +26,24 @@ competent fixed `BCRH-PERSIST` controller?
 
 ## Current scientific disposition
 
+### Current engineering continuation — 2026-09-05
+
+Complete direction Convergence selected only `VNFC-R03-EXACT-BATCH-FEASIBILITY-E01`;
+the subsequent complete Portfolio plan is applied in `aaaad1212`. The runtime specification
+and exact E01 appendix are operative, and CM `/root/cm_am_vnfc_e01` is implementing the bounded
+assessment. Original R03 scientific meaning,2700s full cap and recast history are unchanged.
+The one E01 assignment uses four total compute participants, batch8 and one60s wall/300 CPU-s
+complete evaluation, with all required non-target equivalence, checks and cost coverage.
+No E01 source acceptance, measured speedup, target endpoint, learner or full census follows
+from specification activation; no new full-census CPU budget is allocated. The prescribed
+failure/gap boundary returns to the existing Convergence node without retuning or negative
+headroom inference. See `VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md`,
+`VNFC_R03_EXACT_BATCH_FEASIBILITY_E01_TECHNICAL_TASK_20260905.md`, and
+`docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md`.
+
+The Innovator record below is historical provenance for the learner lineage; the newer
+controller-headroom and E01 decisions define the current bounded work.
+
 The latest complete `em:variable_n_fleet_churn:innovator` decision is:
 
 ```text

@@ -1,0 +1,25 @@
+{
+  "request_id": "2026-09-05-vnfc-r03-cost-convergence-01",
+  "state": "DISPATCH_ACCEPTED",
+  "recorded_at_utc": "2026-09-05 18:57:38 UTC",
+  "dispatch_count": 1,
+  "packet_commit": "d3710ffdd",
+  "evidence_pin": "3d0171e0d53f53b602092e9791f45ea00e803568",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "operator_model": "gpt-5.6-luna",
+  "operator_thinking": "xhigh",
+  "conversation_binding_key": "em:variable_n_fleet_churn:convergence",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "provider_send_state": "UNOBSERVED_BY_AUTHOR",
+  "decision_state": "PENDING",
+  "tool_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a06f0e-5eab-7431-8491-e7c2c62705b6\"}"
+      }
+    ],
+    "isError": false
+  },
+  "note": "One author dispatch after validated packet commit/push. Queued/accepted message is not evidence of provider Send or decision; never redispatch blindly."
+}

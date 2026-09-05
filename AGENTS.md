@@ -178,6 +178,13 @@ the coordinator route, `M = num_envs × rollout_length / k`); the machine-time c
 and an arm whose projection exceeds it is not launched. Usage consumed per valid result is
 recorded per direction and is the ranking currency across directions.
 
+Engineering investigation follows `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`: toy >2700s
+and UAV >43200s apply to the complete logical invocation per arm/training seed, or the complete
+card invocation for seedless A work. Required initialization, learning, evaluation/checking and
+publication remain one chain across scripts/slices. Distinguish study elapsed critical path,
+sum of invocation wall and aggregate CPU work; these thresholds are not study caps, extra budget,
+or launch gates, and never override a stricter original cap.
+
 Resume model: commit and push before every launch; launch every result-bearing run detached from
 the agent's process; on the remote route use a detached worktree at the exact launch sha and the
 configured `agent-task` supervisor; keep a recurring heartbeat that resumes agents killed by a
@@ -233,6 +240,13 @@ schema validators, registries, telemetry beyond wall time and peak RSS, compatib
 repeated smoke tests), and budgets (2,000 new lines per attempt, 600 per runner, orchestration
 under 30% of a diff, the four §11.4 launch conditions and no other gate). A guard is a bug until
 a card asks for it.
+
+The runtime specification limits ordinary in-process tensor/array batching, a named function's
+single-layer fixed synchronous native team, and minimal whole-invocation aggregate CPU accounting.
+These do not authorize a generic worker pool, service, profiler or new guard, and do not override
+a card's single-thread/device/batch constraints. Only the named VNFC E01 appendix replaces its
+original single compute thread with four participants and batch8 for one60s wall/300 CPU-s
+assessment; no full-census CPU allocation or scientific reduction follows.
 
 The object-specific appendix in ENGINEERING_SCOPE_SPEC §5 applies only to complete DISH A05
 from d543146cc (A<=250,D=0) and the declared CBSC B1 execution/publication repair from0ffca930b

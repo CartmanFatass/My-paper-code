@@ -13,20 +13,44 @@ scientific intake. Terminal rows stay here until the owning DM has the evidence 
 New accepted work is sent directly to this tracker, then terminal, lost-observation, bound, or
 specified-reminder facts are delivered directly to the responsible current DM and CM. The current
 successor routes are FSD DM `/root/dm_amx_fsd_e4_census` with CM
-`/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census`, and FRRIE DM
+`/root/dm_amx_fsd_e4_census/cm_am_fsd_e4_census` (E4 complete and no next
+object), FRRIE DM
 `/root/dm_amx_frrie_a01_resume` with CM
-`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`. Both DMs ACKed direct delivery;
-the FRRIE CM also ACKed tracker adoption. These paths apply only to new handles and do not revive
-historical DM routes recorded below.
+`/root/dm_amx_frrie_a01_resume/cm_am_frrie_a01_diagnostic`, N3 DM
+`/root/dm_amx_n3_approved` with CM `/root/dm_amx_n3_approved/cm_am_n3_a05_approved`,
+and CBSC DM `/root/dm_amx_cbsc_approved` (its CM is supplied only with an actual handoff).
+FSD, FRRIE, and N3 ACKed direct delivery; the FRRIE and N3 CMs also ACKed tracker adoption.
+These paths apply only to new handles and do not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-Current snapshot: there are **zero** tracker-owned accepted live handles. FRRIE A01 and
+Current snapshot: there are **zero** tracker-owned accepted live handles. CBSC formal-only
+`cbsc-approved-profile-8003b96bd-02` on `wsl_4070`, SHA
+`8003b96bd79910864e9372ad6f1ea81f1c80520c`, PID `1692419`, and cwd
+`/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905` failed exit `139` after
+`51s`, with inactive tmux; its bounded supervisor tail reports a monitored-command core dump in
+pytest context. Fresh admission had passed with physical/effective availability `15426654208`
+bytes. Direct terminal notices went to CBSC DM and CM for collection/reproduction; this is a
+process fact only, and no restart, replacement, or classification follows. Reviewer-owned
+same-step reproduction `cbsc-approved-repro-8003b96bd-03` is also terminal: exit `1`, PID
+`1693212`, inactive tmux, supervisor duration `6s`, and one failed formal test in `5.71s`
+pytest with the bounded log recording a `TypeError` at `token.py:251`. The reviewer, CBSC CM,
+and CBSC DM were directly notified; raw collection remains with CM. This too is a process fact
+only and creates no restart or fourth formal run. FRRIE A01 and
 the FSD E4 technical-test, three calibration, and three formal-census handles are terminal and
 closed to repeat reminders. FSD's DM ACKed all three formal census terminal facts after CM
 technical acceptance; FRRIE's DM ACKed A01, and its CM has collected the original evidence.
-FRRIE may hand over one separately accepted A02 handle. All other rows below are historical
-terminal records or prospective work awaiting a separately accepted handle.
+N3 smoke `n3_a05_approved_smoke_20260905` is also terminal and acknowledged by its DM: exit
+`0`, PID `1690059`, inactive tmux, passed fresh admission with physical/effective availability
+`15412580352` bytes, and completed `4` tests in `4s` (one warning). CM was directly woken for
+collection. The unique formal N3 A05 handle `n3_a05_approved_formal_20260905` is terminal and
+awaits CM collection/DM intake: exit `0`, PID `1690627`, inactive tmux, SHA
+`d3884812aa30b278ccfdcdfd3fd802314b026fcb`, seed `50511`, fresh physical/effective admission
+`15421362176` bytes, supervisor duration `2s`, runner wall `2.2332094209996285s`, and peak RSS
+`374198272` bytes. These are process facts only; no restart or validity inference is made.
+FRRIE may hand over one separately accepted A02 handle; CBSC work also requires a separately
+accepted handle. All other rows below are historical terminal records or prospective work awaiting
+a separately accepted handle.
 
 ## Active accepted work
 
@@ -62,6 +86,21 @@ are `/home/wu/.agent-tasks/<handle>/task.log`. The three formal handles each fin
 with `96` candidates; CM collected the task status/log evidence and DM ACKed terminal delivery.
 These are process and collection facts only. No further FSD invocation, restart, or replacement
 has been selected.
+
+CBSC approved-repair closed-handle handoff: CM
+`/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair` supplied three accepted handles on
+`wsl_4070`, all at SHA `8003b96bd79910864e9372ad6f1ea81f1c80520c` and cwd
+`/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905`.
+`cbsc-approved-smoke-8003b96bd-01` failed exit `2`, PID `1691156`, before preflight or test
+body because its outer command resolved the preflight script path incorrectly. The replacement
+`cbsc-approved-smoke-8003b96bd-02` finished exit `0`, PID `1691362`, with `1 passed` in
+`13.46s` pytest / `14s` supervisor. `cbsc-approved-profile-8003b96bd-01` failed exit `1`, PID
+`1691518`, with `19` passed and one formal failure after `9.92s` pytest / `10s` supervisor; the
+bounded log names a confined-direction-root artifact-path error. All three had inactive tmux;
+their logs are `/home/wu/.agent-tasks/<handle>/task.log`, and receipt/timing paths are under
+`temp/directions/capability_bound_semantic_currentness/test/approved-repair/`. CBSC DM ACKed
+each terminal fact and CM retains collection/input-path repair. No restart, classification, or
+new handle is implied by these rows.
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
 | --- | --- | --- | --- | --- | --- | --- |

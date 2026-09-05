@@ -121,24 +121,18 @@ Write two provider/dispatch outputs:
 2. `HANDOFF.json`: a machine-readable handoff for the project Transport singleton,
    with `pro_send_from_caller=false` by default, or the explicit caller-direct route.
 
-The body must contain these slots in this order:
-
-```text
-REQUEST_ID=<exact request ID>
-PINNED_REFERENCE=<exact evidence ref>
-REQUEST_CLASS=<SCIENTIFIC_INNOVATION|SCIENTIFIC_CONVERGENCE|PORTFOLIO_DECISION>
-CALLER_ROLE=<portfolio|em>
-WORKFLOW_NODE=<em_innovator|em_convergence|portfolio_decision>
-CONVERSATION_BINDING_KEY=<derived stable key>
-DIRECTION_SCOPE=<one exact ID or ordered list>
-SCIENTIFIC_QUESTION=<exact question>
-DELIVERABLE=<exact requested output>
-CLAIM_CEILING=<exact finite limits>
-DECISION_AUTHORITY=PRO_FINAL
-GITHUB_EVIDENCE_CONTRACT=<read-only repo/ref/path rules>
-RESPONSE_CONTRACT=<conclusion, evidence, uncertainty, limitations, next discriminator>
-TASK_BOUNDARY=<node-specific decision only; no code implementation or task-class drift>
-```
+Write the body as natural-language research prose: question, direction scope,
+requested decision, finite claim ceiling, evidence access rules, constraints,
+and the evidence list. Request a conclusion-first natural-language answer with
+evidence, uncertainty, limitations and the next discriminator. Readable headings,
+tables, equations and source citations are welcome; machine envelopes are not.
+Keep request IDs, caller/task identities, workflow codes, conversation bindings,
+routing and status fields solely in HANDOFF.json and internal archive metadata.
+The exact repository, pinned source version and file paths remain in the evidence
+list for reproducible retrieval; do not require their repetition as answer headers.
+Author new constraints and requested content in ordinary language, not an output
+schema. Never ask Pro to echo an ID, emit JSON/status blocks, or reproduce envelope
+labels. This is the owner's explicit presentation instruction of 2026-09-05.
 
 An Innovator response selects the next scientific object, mechanism, or cheapest
 decision-relevant discriminator. A Convergence response decides the smallest
@@ -147,17 +141,17 @@ A Portfolio response decides priority, capacity, lifecycle, fusion, separation,
 new-direction registration, or next investment across the supplied scope. The
 response must make one explicit final decision or return an exact blocker; it
 must not call a blocker a decision.
-Ask the response to identify its request ID and pinned reference at the top so a
-later round cannot be mistaken for an earlier answer in the same conversation.
+Transport identifies the reply through the recorded provider conversation and
+paired user/assistant messages, not through identifiers echoed in its prose.
 
 The body must instruct Pro to verify that the GitHub connector is available and
 read-only, retrieve only the listed paths at the pinned ref, cite observations by
 path/ref/section where possible, and distinguish observation from inference. If
-the connector, repository, ref, or any listed path is unavailable, it must return
-`BLOCKED_CONNECTOR_ACCESS` with the exact gap. It must not use an unlisted file,
+the connector, repository, ref, or any listed path is unavailable, it must explain
+the exact gap in natural language. It must not use an unlisted file,
 default branch, web mirror, local clone, or a pasted full-repository substitute.
 
-The `GITHUB_EVIDENCE_MANIFEST` is part of `PROMPT_BODY.md`, not a second upload.
+The evidence list is part of `PROMPT_BODY.md`, not a second upload.
 It describes the exact repository, pinned ref, direction scope, and allowed paths;
 do not paste entire repository files into the body. Do not treat a filename as proof
 that its contents were retrieved.

@@ -97,9 +97,32 @@ def _nonnegative_int(value: Any, name: str) -> int:
 
 
 def validate_telemetry(
-    value: Mapping[str, Any], *, caps: ResourceCaps = ResourceCaps()
+    value: Mapping[str, Any], *, caps: ResourceCaps = ResourceCaps(), allow_missing: bool = False
 ) -> dict[str, Any]:
     """Validate measured, nonzero B0 work without interpreting outcomes."""
+
+    if allow_missing:
+        record = dict(value) if isinstance(value, Mapping) else {}
+        for name in REQUIRED_TELEMETRY_FIELDS:
+            record.setdefault(name, None)
+        try:
+            validate_telemetry(record, caps=RECORDED_BUDGET_CAPS)
+        except (TelemetryError, TypeError, ValueError):
+            record["measurement_complete"] = False
+        for name in REQUIRED_TELEMETRY_FIELDS - {"measurement_complete", "measurement_source", "stage_measurements"}:
+            number = record[name]
+            if not isinstance(number, (int, float)) or isinstance(number, bool) or not math.isfinite(number) or number < 0:
+                record[name] = None
+        if record["sample_count"] in (None, 0):
+            for name in (
+                "end_to_end_cpu_seconds", "cpu_core_equivalents", "cpu_occupancy_fraction",
+                "process_tree_peak_rss_bytes", "peak_process_count", "peak_thread_count",
+                "io_read_bytes", "io_write_bytes", "scratch_high_water_bytes", "durable_high_water_bytes",
+            ):
+                if record[name] == 0:
+                    record[name] = None
+        record["resources_unmeasured"] = record["measurement_complete"] is not True
+        return record
 
     missing = REQUIRED_TELEMETRY_FIELDS - set(value)
     if missing:
@@ -214,7 +237,7 @@ RESOURCE_ASSESSMENT_SCHEMA = "cbsc_omrc_b01_resource_assessment_v1"
 
 
 def assess_resource_telemetry(
-    value: object, *, caps: ResourceCaps = ResourceCaps()
+    value: object, *, caps: ResourceCaps = ResourceCaps(), allow_missing: bool = False
 ) -> dict[str, Any]:
     """Assess one invocation's resource telemetry without refusing on it.
 
@@ -238,6 +261,22 @@ def assess_resource_telemetry(
         "caps": caps.as_dict(),
         "measurement": None,
     }
+    if allow_missing:
+        measured = validate_telemetry(value, caps=caps, allow_missing=True)
+        record["measurement"] = measured
+        record["resources_unmeasured"] = measured["resources_unmeasured"]
+        record["unmeasured_reasons"] = ["telemetry_incomplete"] if measured["resources_unmeasured"] else []
+        for field, limit, name in (
+            ("end_to_end_wall_seconds", caps.wall_seconds, "wall_seconds"),
+            ("process_tree_peak_rss_bytes", caps.process_tree_peak_rss_bytes, "process_tree_peak_rss_bytes"),
+            ("scratch_high_water_bytes", caps.scratch_high_water_bytes, "scratch_high_water_bytes"),
+            ("durable_high_water_bytes", caps.durable_high_water_bytes, "durable_high_water_bytes"),
+        ):
+            if measured[field] is not None and measured[field] > limit:
+                record["cap_exceedances"].append(name)
+        record["stopping_cap_exceedances"] = [name for name in record["cap_exceedances"] if name in STOPPING_CAPS]
+        record["stop_run"] = bool(record["stopping_cap_exceedances"])
+        return record
     if value is None:
         record["resources_unmeasured"] = True
         record["unmeasured_reasons"] = ["telemetry_missing"]
@@ -452,6 +491,8 @@ class ProcessTreeMonitor:
         self._peak_threads = 0
         self._scratch_high = 0
         self._durable_high = 0
+        self._scratch_observed = False
+        self._durable_observed = False
         self._error: BaseException | None = None
         self._measurement_source = "uninitialized_process_tree_sampler"
 
@@ -510,10 +551,12 @@ class ProcessTreeMonitor:
         self._peak_processes = max(self._peak_processes, observed)
         self._peak_threads = max(self._peak_threads, threads)
         self._scratch_high = max(self._scratch_high, _tree_size(self.scratch_root))
+        self._scratch_observed = True
         self._durable_high = max(
             self._durable_high,
             _tree_size(self.durable_root, exclude=self.scratch_root),
         )
+        self._durable_observed = True
 
     def _sample_loop(self) -> None:
         while not self._stop.wait(self.interval_seconds):
@@ -547,20 +590,21 @@ class ProcessTreeMonitor:
         return tuple(failures)
 
     def finish(
-        self, *, scientific_work_transitions: int, stage_measurements: list[dict[str, Any]]
+        self, *, scientific_work_transitions: int, stage_measurements: list[dict[str, Any]],
+        allow_incomplete: bool = False,
     ) -> dict[str, Any]:
         self._stop.set()
         if self._thread is not None:
             self._thread.join(timeout=max(1.0, self.interval_seconds * 4))
         # The supervised child normally no longer exists here.  Its last live
         # sample is retained rather than substituting the parent's resources.
-        if self._error is not None:
+        if self._error is not None and not allow_incomplete:
             raise TelemetryError("process-tree telemetry failed") from self._error
         wall = time.perf_counter() - self._started
         cpu = self._last_cpu - self._start_cpu
         read = max(0, self._last_read - self._start_read)
         write = max(0, self._last_write - self._start_write)
-        return {
+        record = {
             "measurement_complete": True,
             "measurement_source": self._measurement_source,
             "sample_interval_seconds": self.interval_seconds,
@@ -584,6 +628,16 @@ class ProcessTreeMonitor:
             ),
             "stage_measurements": stage_measurements,
         }
+        if allow_incomplete:
+            record["measurement_complete"] = self._error is None and self._samples >= 2
+            if self._samples == 0:
+                for field in ("end_to_end_cpu_seconds", "cpu_core_equivalents", "cpu_occupancy_fraction", "process_tree_peak_rss_bytes", "peak_process_count", "peak_thread_count", "io_read_bytes", "io_write_bytes"):
+                    record[field] = None
+            if not self._scratch_observed:
+                record["scratch_high_water_bytes"] = None
+            if not self._durable_observed:
+                record["durable_high_water_bytes"] = None
+        return record
 
     def incident_snapshot(
         self, *, reason: str, cap_failures: tuple[str, ...] = ()

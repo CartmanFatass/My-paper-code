@@ -305,14 +305,17 @@ key, direction scope, conversation, tab, model, source mode/path, timestamps,
 hashes, reference hashes, send evidence, wait status, and archive status.
 Record the paired user and assistant message identities. Use that response's Copy
 control and the browser clipboard API to preserve Markdown when available. For
-new Prompt Author packets, compare the response's request ID and pinned reference
-with `validate_response_identity` before accepting it as this request's archive.
-A mismatch means inspect the same conversation for the correct paired answer;
-preserve the mismatched capture as evidence and never submit a correction or repeat
-the packet automatically. Missing echoed fields require manual pairing inspection,
-not a new scientific verdict or another Send. A legacy response is identified by
-its recorded user/assistant pair and exact question, not retroactively required to
-echo fields its prompt never requested.
+all packets, use the recorded conversation and paired user/assistant messages to
+identify the answer. `validate_response_identity` compares the recorded binding
+with the binding of the actual captured node; obtain these independently from the
+accepted-send record and the scoped conversation inspection, never fabricate them
+from the answer's prose. If IDs are unavailable, inspect the exact question and its
+paired reply manually and record that evidence. A mismatch means re-inspect the
+same conversation and preserve the mismatched capture, never send a repair prompt.
+The owner requires natural-language Pro answers: no request-ID echo, envelope,
+JSON/status block or pinned-ref header is required. Keep identifiers and hashes in
+internal handoff/transport facts. Preserve old accepted prompts and exact responses;
+do not edit archives or resend accepted requests to change their presentation.
 Deduplicate by `(conversation_binding_key, request_id, conversation_id,
 response_sha256)`; an identical existing archive is
 idempotent, while a different response for the same key is a conflict and must not

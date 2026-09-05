@@ -869,9 +869,20 @@ def test_provider_model_is_verified_separately_from_executor(visible, underlying
 
 
 def test_old_answer_capture_is_not_accepted_as_new_request() -> None:
+    binding = {"conversation_id": "conversation", "user_message_id": "question", "assistant_message_id": "answer"}
+    answer = "建议继续这一项有界研究。证据支持该选择，但加速效果尚未实测。"
     with pytest.raises(ValueError, match="RESPONSE_IDENTITY_MISMATCH"):
-        contract.validate_response_identity("PINNED_REFERENCE=old-ref\nKeep the prior 19 ACTIVE directions.", request_id="new-review", pinned_reference="new-ref")
-    contract.validate_response_identity("REQUEST_ID=new-review\nPINNED_REFERENCE=new-ref\nDecision.", request_id="new-review", pinned_reference="new-ref")
+        contract.validate_response_identity(answer, expected_binding=binding, observed_binding={**binding, "assistant_message_id": "earlier-answer"})
+    contract.validate_response_identity(answer, expected_binding=binding, observed_binding=dict(binding))
+
+
+@pytest.mark.parametrize("field", ["conversation_id", "user_message_id", "assistant_message_id"])
+def test_response_pairing_requires_complete_matching_provider_evidence(field) -> None:
+    binding = {"conversation_id": "conversation", "user_message_id": "question", "assistant_message_id": "answer"}
+    with pytest.raises(ValueError, match="RESPONSE_IDENTITY_MISMATCH"):
+        contract.validate_response_identity("结论", expected_binding=binding, observed_binding={**binding, field: "other"})
+    with pytest.raises(ValueError, match="missing recorded provider binding"):
+        contract.validate_response_identity("结论", expected_binding={**binding, field: ""}, observed_binding=binding)
 
 
 def test_direct_transport_requires_owner_and_exact_caller(project_root, upload_request) -> None:

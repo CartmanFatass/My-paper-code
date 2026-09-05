@@ -125,7 +125,10 @@ def test_provider_requirement_and_direct_executor_survive_author_transport_hando
     else:
         assert validated["operator_model"] == "gpt-5.6-luna"
     body = (out / "PROMPT_BODY.md").read_text()
-    assert body.startswith(f"REQUEST_ID={request['request_id']}\nPINNED_REFERENCE={request['commit_or_ref']}\n")
+    assert body.startswith("# Research question\n")
+    assert request["request_id"] not in body
+    assert request["commit_or_ref"] in body
+    assert handoff["conversation_binding_key"] not in body
     assert "Root performs this request personally." not in body
 
 
@@ -166,7 +169,7 @@ def test_omitted_companion_prompt_uses_the_fixed_default(project_root: Path, tmp
     assert "reference_paths" not in handoff["transport_request"]
     assert handoff["transport_request"]["source_mode"] == "single_body_attachment"
     body = (out_dir / "PROMPT_BODY.md").read_text(encoding="utf-8")
-    assert "GITHUB_EVIDENCE_MANIFEST" in body
+    assert "## Evidence to read" in body
     assert "docs/research/candidates/demo_direction/DIRECTION.md" in body
     assert "purpose: direction definition" in body
 
@@ -723,9 +726,9 @@ def test_em_innovator_and_convergence_use_distinct_persistent_bindings(
     assert innovator["conversation_binding_key"] == "em:demo_direction:innovator"
     assert convergence["conversation_binding_key"] != innovator["conversation_binding_key"]
     body = (tmp_path / "innovator" / "PROMPT_BODY.md").read_text(encoding="utf-8")
-    assert "REQUEST_CLASS=SCIENTIFIC_INNOVATION" in body
-    assert "DECISION_AUTHORITY=PRO_FINAL" in body
-    assert "final decision for this workflow node" in body
+    assert "Select the next scientific object" in body
+    assert "DECISION_AUTHORITY=" not in body
+    assert "final decision on the question above" in body
 
 
 def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority(
@@ -748,8 +751,8 @@ def test_portfolio_uses_one_cross_direction_binding_and_final_decision_authority
     assert handoff["decision_authority"] == "pro_final"
     assert handoff["transport_request"]["conversation_binding_key"] == "portfolio:cross_direction"
     body = (tmp_path / "portfolio" / "PROMPT_BODY.md").read_text(encoding="utf-8")
-    assert "REQUEST_CLASS=PORTFOLIO_DECISION" in body
-    assert "DIRECTION_SCOPE=demo_direction,second_direction" in body
+    assert "REQUEST_CLASS=" not in body
+    assert "directions in scope are: demo_direction,second_direction" in body
     assert "priority, capacity, lifecycle, fusion, separation" in body
 
 

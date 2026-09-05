@@ -82,6 +82,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-cbsc-n3-pro-intake.md",
       "state": "applied",
       "summary": "所有者本轮明确批准；已应用完整Pro方案：N3 A05累计A250/D0，CBSC完整修复A200/D500，保留完整科学/验证/停止边界。同步AGENTS、工程规范与Portfolio；旧候选未自动验收。今后同类规范按正确节点完整Pro方案执行，高亮追溯，无逐项重复批准。"
+    },
+    {
+      "at": "2026-09-05T19:55:21+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md",
+      "record": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_APPROVED_REPAIR_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "批准的CBSC规范与完整修复投入已执行并结束；源码174A/429D合规，smoke及19focused通过，但十五表/summary完整发布未成立。正式139后唯一复现出现不同TypeError，两根因未知；无第四次调用、源码扩展或learner。N3原完整A05另已完成接受。"
     }
   ]
 }
