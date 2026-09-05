@@ -1,0 +1,33 @@
+{
+  "id": "20260904-vnfc-015",
+  "created": "2026-09-04T18:26:11-07:00",
+  "direction": "variable_n_fleet_churn",
+  "tier": "object",
+  "kind": "decision",
+  "title": "恢复 R03 因果单次偏离重建",
+  "context": "Root 已将 CBSC 释放的执行槽分配给 N2。R03 卡片及 Convergence 第二次 recast 裁决保持原样，尚无 R03 运行或结果。现选择由 CM 完成精确因果历史分组、合法动作枚举、有限优化和一次不看结果的成本校准，再按卡片预算执行唯一结果臂。",
+  "options": [
+    {
+      "key": "a",
+      "label": "按冻结 R03 继续 CM 实现和有界校准",
+      "consequence": "保留原世界、因果信息边界与单次偏离，成本和资源准入通过后执行结果臂。"
+    },
+    {
+      "key": "b",
+      "label": "保持排队",
+      "consequence": "当前不推进已获执行槽的冻结对象。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是已裁决的最小后续对象，当前没有支持继续延后的新证据。",
+  "evidence": [
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CAUSAL_ONE_DEVIATION_R03_CONTINUATION_INTAKE_20260904.md",
+    "docs/research/candidates/variable_n_fleet_churn/VNFC_CONTROLLER_HEADROOM_A_RECON_CAUSAL_ONE_DEVIATION_R03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-r03-continuation-20260904",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
