@@ -342,3 +342,22 @@ learning or forced trigger follows from A02. Evidence:
 `DISH_GROUND_SOURCE_POINT_A02_SUMMARY_20260905.json`,
 `DISH_GROUND_SOURCE_POINT_A02_COLLECTION_20260905.md`,
 `DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md`.
+
+## Final host-qualification Convergence — 2026-09-05
+
+The complete archived response selects **PRO_FINAL CONTINUE** for the existing
+first-application-valid RETAIN/COPY/SHADOW exploratory family. It identifies a concrete
+host-information obstruction that a bounded native-path comparison can discriminate;
+the rationale is not merely that source value remains untested. B01 FTS-B0 and both A
+observations remain valid, R02 remains closed, and no RECAST or Portfolio change occurs.
+
+The next discriminator first needs one prospectively distinct ground-endpoint access
+definition, then one paired original-coordinate ordinary native trace under a fixed
+causal controller. It must observe real arrivals/common SOURCE, snapshot/readiness,
+legal actions and native service as well as camera/filter inputs. Partial restoration
+and failed proposals remain informative. No ray-point-only qualification, forced margin,
+accepted state, readiness or ownership is allowed; no new learner or source-effect study
+is authorized. The numeric host law and bounded card are still to be selected locally
+within this family decision. Evidence:
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md` and the exact response under
+`external/2026-09-05-dish-a02-host-convergence-01/`.
