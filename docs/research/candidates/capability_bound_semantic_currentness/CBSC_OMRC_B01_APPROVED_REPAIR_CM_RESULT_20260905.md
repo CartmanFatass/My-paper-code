@@ -1,11 +1,14 @@
 # CBSC approved complete repair: CM evidence
 
-Date: 2026-09-05. **Complete static candidate exists; full technical acceptance
-is not established.** Smoke and19focused checks passed. Real-constant offline
-publication terminated with SIGSEGV/139 before any table/summary was produced.
-The cause is unclassified and unreproduced; the protected host/JSON call stack
-does not identify a root cause. This bounded slice returns that concrete full
-publication gap, with original scientific requirements and evidence retained.
+Date: 2026-09-05. **FULL_TECHNICAL_ACCEPTANCE_NOT_ESTABLISHED.**
+The complete static candidate exists; smoke and 19 focused checks passed.
+The real-constant formal publication failed with SIGSEGV/139. The sole selected
+reproduction terminated with a different token-packing TypeError/exit 1 and did
+not reproduce that SIGSEGV. Neither the earlier fatal cause nor a unique cause
+of the new exception is established. No complete fifteen-table publication or
+summary readback exists. All five accepted tasks are terminal, evidence is
+retained, and this bounded repair ends here without a fourth formal invocation.
+Original scientific requirements and the historical r05 quarantine remain intact.
 
 ## Contract and ownership
 
@@ -285,3 +288,57 @@ is claimed by this freeze. Stop after this invocation regardless of result;
 no fourth formal run or automatic source/scope/budget growth. Same failure
 establishes recurrence of the publication-step failure, not its unique cause;
 different failure/pass records non-recurrence without erasing formal02.
+
+## Final terminal return after the sole reproduction
+
+Root integrated the exact repro03 command record 88f09f824 at
+5e0fda87216f833baf9bd8ecd24e1093fce774de and pushed before execution.
+The same independent reviewer executed the frozen command once; Tracker adopted
+and independently observed the accepted handle. No source or interpreter change
+was made. Actual execution SHA remains
+8003b96bd79910864e9372ad6f1ea81f1c80520c; historical fixture SHA remains
+4679e8dc86fb39b7b72fe7404f3f837f11ebbaad. These are distinct identities.
+
+| Accepted task | Terminal | Pytest seconds | External process seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: |
+| cbsc-approved-repro-8003b96bd-03 | exit 1; different TypeError; 1 failed | 5.71 | 6.57 | 1222060 |
+
+PID 1693212 is terminal and tmux inactive. Supervisor duration was 6 seconds,
+from 2026-09-05 19:37:39 UTC to 19:37:45 UTC. Fresh actual-node admission at
+19:37:39.155362 UTC measured physical and effective available memory both
+15,428,243,456 bytes and passed. The prospective bound was 181 seconds plus
+1 second kill grace. Raw receipt and external time observations exist; these
+are invocation observations and do not certify missing historical resource
+telemetry or full scientific resource conformance.
+
+The failing path was production._assemble_and_publish_b1_metrics -> rehydrate
+canonical seed panel -> host._finish -> EpisodeTape.__post_init__ -> token.py:251
+pack, evaluating int(value) over token.flag_values(). The exact error was
+`TypeError: int() argument must be a string, a bytes-like object or a real number, not 'type'`.
+The raw log does not capture the particular offending token values. The reviewer
+confirms a different failure, not recurrence of the earlier SIGSEGV; neither
+observation identifies a unique host, interpreter, or scientific cause. The
+prior fatal remains unresolved, and the new TypeError is not independently
+reproduced. No further diagnostic or repair was run.
+
+CM's terminal read-only inventory confirms 428 files, zero tracked source
+changes, and no offline-publication directory, summary.json, or jsonl table in
+repro03. Therefore all fifteen formal table rowcounts, final RAW input and null
+interpretation coverage, all seven complete interpretations, and summary
+readback remain **unverified**. Absent tables are not zero scientific results.
+Earlier smoke and the 19 focused passes remain partial engineering evidence.
+No new learner or scientific result was produced, and old r05 evidence remains
+quarantined. Full technical acceptance is not established.
+
+Final charged focused/offline process time is 10.64 + 50.83 + 6.57 = **68.04 s**.
+Including the prior 56.45 s gives **124.49 / 300 s**, leaving **175.51 s unused**.
+The separate smoke took 13.84 s. Unused allowance does not select another run;
+the DM's prospective stop ends this investment after the sole reproduction.
+There is no fourth formal invocation, source expansion, host/interpreter change,
+new learner, performance claim, or scientific interpretation in this return.
+
+Raw repro03 task log, supervisor wrapper, exit/start witnesses, admission, time,
+and terminal inventory are retained beside all earlier evidence in
+`approved_repair_20260905/`. All original remote failed roots are retained.
+The final engineering disposition is a reviewed source candidate with demonstrated
+partial checks and an unresolved complete publication gap, returned to DM intake.
