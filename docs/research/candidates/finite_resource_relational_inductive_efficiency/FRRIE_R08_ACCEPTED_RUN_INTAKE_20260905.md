@@ -1,7 +1,10 @@
 # FRRIE R08 technical acceptance and running handoff — 2026-09-05
 
-Status: `ACCEPTED_RUNNING / TECHNICALLY_CONFORMANT / TRACKER_ADOPTED`.
-Scientific outcome and actual complete work remain pending.
+Status: `TERMINAL_COLLECTED / VALID_B_EXPLORE / INTAKE_COMPLETE`.
+Current boundary: the sole task ended naturally at 2026-09-05T11:45:08Z. The original
+`R08_INTERACTION_WITHIN_MEI` branch, full N9 qualifier and matched conditional prediction
+are recorded in `FRRIE_R08_RESULT_INTAKE_20260905.md`; the tracker event is acknowledged.
+Launch-time observations below retain their historical meanings.
 
 ## What DM checked
 
