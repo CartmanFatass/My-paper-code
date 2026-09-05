@@ -32,6 +32,11 @@
         "worker-reports/epymarl/ROOT_RETURN.md",
         "worker-reports/epymarl/AGENTS_INDEX.json"
       ],
+      "worker_artifact_sha256": {
+        "worker-reports/epymarl/CORE_EVIDENCE.md": "6256351632eed5700602a2f090aa24bce066fad62ba733d611ab729d3ebc9af3",
+        "worker-reports/epymarl/ROOT_RETURN.md": "a3c15d9953d2cfde6e103f4807d5841b45531f4c7eb925df7be1d89a9c50b845",
+        "worker-reports/epymarl/AGENTS_INDEX.json": "fd44b2674fa4a63fa8e99fb85a483897daee546b697421a4009f7f1e401208bc"
+      },
       "source_focus": [
         "src/runners/parallel_runner.py",
         "src/components/episode_buffer.py",
@@ -76,6 +81,11 @@
         "worker-reports/on-policy/ROOT_RETURN.md",
         "worker-reports/on-policy/AGENTS_INDEX.json"
       ],
+      "worker_artifact_sha256": {
+        "worker-reports/on-policy/CORE_EVIDENCE.md": "49b17a0c76c48119f6e2658de432d868e69f70eba6172015375758976f7f4298",
+        "worker-reports/on-policy/ROOT_RETURN.md": "84c79ebcce7abe3765a08f95291b63d3840a13b2f42fff80e23e00c14c288f5d",
+        "worker-reports/on-policy/AGENTS_INDEX.json": "4bc4671eeae697f7db08c39be4b68cf8e63d81b6a1eab3b82f2745905b92036a"
+      },
       "source_focus": [
         "onpolicy/envs/env_wrappers.py",
         "onpolicy/runner/shared/base_runner.py",
@@ -111,6 +121,11 @@
         "worker-reports/BenchMARL/ROOT_RETURN.md",
         "worker-reports/BenchMARL/AGENTS_INDEX.json"
       ],
+      "worker_artifact_sha256": {
+        "worker-reports/BenchMARL/CORE_EVIDENCE.md": "5dc904835fde5b4c3d0bd7d180a6f56fabc2ff79e15a64aae7006731c1c3124a",
+        "worker-reports/BenchMARL/ROOT_RETURN.md": "4c710e5eb144ec75cd41b6ff1ccdb34167c0a8a911ba5c5bc65f597dbff6146d",
+        "worker-reports/BenchMARL/AGENTS_INDEX.json": "80fbbee0f137b7791752de60215744e0857b4bfca4fa1bcf7a1b740aa47fe545"
+      },
       "source_focus": [
         "benchmarl/run.py",
         "benchmarl/experiment/experiment.py",
@@ -182,7 +197,7 @@
       },
       "worker_artifact_sha256": {
         "worker-reports/MARLlib/CORE_EVIDENCE.md": "634f2d9ca9d5ea731a4935c59660303d1f4b029d21184d3bddaf31b7ee5dcbaf",
-        "worker-reports/MARLlib/ROOT_RETURN.md": "c249d9460ae0dce09645a50116e618f1b38a7828fac45bf9fce6d75e14afacb",
+        "worker-reports/MARLlib/ROOT_RETURN.md": "c249d9460ae0dce09645a50116e618f1b38a7828fac45bf9fce6d75e14afacba",
         "worker-reports/MARLlib/AGENTS_INDEX.json": "c6342b00e3468932d92d95aa5e284b93064dab395b1b1f458b564855e757f44d"
       },
       "source_focus": [
@@ -239,6 +254,11 @@
         "worker-reports/Mava/ROOT_RETURN.md",
         "worker-reports/Mava/AGENTS_INDEX.json"
       ],
+      "worker_artifact_sha256": {
+        "worker-reports/Mava/CORE_EVIDENCE.md": "98d68a8a890bed58e61d903cce98da6a3adfed5b6ab5f9107d748786331a0d97",
+        "worker-reports/Mava/ROOT_RETURN.md": "12b6a5bee8618bffbd39f2dd903d7ab62d32641b276a913ef61d84f53ee4ee88",
+        "worker-reports/Mava/AGENTS_INDEX.json": "de36970c88159f794fba8f73857ab699254acec0d1ae03d4493ef9cd67e8191f"
+      },
       "source_focus": [
         "mava/systems/ppo/anakin/ff_mappo.py",
         "mava/systems/ppo/sebulba/ff_mappo.py",
@@ -282,6 +302,11 @@
         "worker-reports/JaxMARL/ROOT_RETURN.md",
         "worker-reports/JaxMARL/AGENTS_INDEX.json"
       ],
+      "worker_artifact_sha256": {
+        "worker-reports/JaxMARL/CORE_EVIDENCE.md": "80cfa62aab7d828dc161a2b16aa823a1d06e043cd504c68350fbeb5438150e35",
+        "worker-reports/JaxMARL/ROOT_RETURN.md": "03b7b51c2e639a472e6159321a11d33b2a3b397ce6fddb0fd00ed5ef45cf863f",
+        "worker-reports/JaxMARL/AGENTS_INDEX.json": "ea05258b62dfc820a8b9040321d2ac6d14464555f5f79c7f9da5e30968d5b05c"
+      },
       "source_focus": [
         "baselines/QLearning/vdn_ff.py",
         "baselines/IPPO/ippo_rnn_smax.py",

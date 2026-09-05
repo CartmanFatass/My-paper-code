@@ -17,6 +17,45 @@ Gymnasium、PettingZoo、VMAS、SMACv2、SMAClite、额外算法及无参数共�
 本地 `LICENSE:2-4` 标明 Apache License 2.0；`NOTICE:1-35` 保留相对原 PyMARL 的修改/新增
 文件清单。没有修改、安装依赖、训练或 benchmark；这里是源码查证，不是加速实测。
 
+关键源码的固定 SHA permalink 索引如下；正文中的短路径与行号均指向这些链接：
+
+| 源码路径 | 关键行 | 固定 SHA permalink |
+| --- | --- | --- |
+| `src/main.py` | 35-44, 90-109 | [main.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/main.py#L35-L109) |
+| `src/run.py` | 98-147, 198-267 | [run.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/run.py#L98-L267) |
+| `src/runners/parallel_runner.py` | 19-47, 127-195, 288-336 | [parallel_runner.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/runners/parallel_runner.py#L19-L336) |
+| `src/runners/episode_runner.py` | 10-29, 68-125 | [episode_runner.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/runners/episode_runner.py#L10-L125) |
+| `src/envs/__init__.py`, `multiagentenv.py` | 31-60, 53-61 | [env registry](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/envs/__init__.py#L31-L60) |
+| `src/envs/gymma.py` | 73-138 | [gymma.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/envs/gymma.py#L73-L138) |
+| `src/envs/wrappers.py`, `pz_wrapper.py`, `vmas_wrapper.py` | 34-40, 16-64, 14-28 | [PettingZoo wrapper](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/envs/pz_wrapper.py#L16-L64) |
+| `src/envs/smac_wrapper.py`, `smacv2_wrapper.py` | 6-16, 24-34 | [SMAC wrapper](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/envs/smac_wrapper.py#L6-L16) |
+| `src/components/episode_buffer.py` | 30-113, 208-242 | [episode_buffer.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/components/episode_buffer.py#L30-L242) |
+| `src/components/transforms.py` | 12-22 | [transforms.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/components/transforms.py#L12-L22) |
+| `src/controllers/basic_controller.py`, `non_shared_controller.py` | 19-78, 17-76 | [shared MAC](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/controllers/basic_controller.py#L19-L78) |
+| `src/modules/agents/rnn_agent.py`, `rnn_ns_agent.py` | 12-36 | [shared RNN](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/modules/agents/rnn_agent.py#L12-L31) |
+| `src/learners/q_learner.py`, `ppo_learner.py` | 51-201, 41-235 | [Q learner](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/learners/q_learner.py#L51-L201) |
+| `src/utils/logging.py` | 85-129 | [logging.py](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/utils/logging.py#L85-L129) |
+| `src/config/default.yaml`, `src/config/algs/mappo.yaml`, `iql.yaml` | 4-20, 6-10, 9-14 | [default config](https://github.com/uoe-agents/epymarl/blob/cbc38c09588064eab978501d0f12c2cf58fa7fc2/src/config/default.yaml#L4-L20) |
+
+代表性短片段（仅保留能证明边界的必要行）：
+
+```python
+# parallel_runner.py:127-153 — action device/IPC boundary
+actions = self.mac.select_actions(...)
+cpu_actions = actions.to("cpu").numpy()
+parent_conn.send(("step", cpu_actions[action_idx]))
+
+# episode_buffer.py:102-113 — Python data becomes a tensor on batch.device
+if type(v) == list:
+    v = th.tensor(np.array(v), dtype=dtype, device=self.device)
+target[k][_slices] = v.view_as(target[k][_slices])
+
+# basic_controller.py:26-40 — full B forward, then B×A×U view
+agent_inputs = self._build_inputs(ep_batch, t)
+agent_outs, self.hidden_states = self.agent(agent_inputs, self.hidden_states)
+return agent_outs.view(ep_batch.batch_size, self.n_agents, -1)
+```
+
 ## 端到端调用链
 
 ```text

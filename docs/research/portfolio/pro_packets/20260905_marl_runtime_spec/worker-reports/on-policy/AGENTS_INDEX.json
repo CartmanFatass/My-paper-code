@@ -19,7 +19,9 @@
   "overlay_policy": {
     "source_files_read_only": true,
     "upstream_agents_preserved": true,
+    "upstream_navigation_files_checked": ["AGENTS.md", "CLAUDE.md"],
     "upstream_agents_status_at_fixed_sha": "absent_at_all_listed_paths",
+    "upstream_claude_status_at_fixed_sha": "absent_at_all_listed_paths",
     "backup_root": "agents-overlays",
     "backup_note": "Each backup record preserves the pre-overlay absence of an upstream AGENTS.md at the same relative path."
   },
