@@ -114,6 +114,24 @@ SHADOW value; a later same-information replay or different training convention m
 No-trigger rows cannot establish source equality. B04's small typed-mask effect supplies no
 source-transfer polarity, and no result here can close N3 as a route.
 
+## Accepted detached boundary
+
+CM's pushed launch record `1bdac26c07977f7dd3b903956ba3df4809eb0e94` confirms that the exact
+prospective command was accepted once at `2026-09-05T00:12:03Z` (September 4, 17:12:03 PDT).
+Supervisor `dish_b01_c04_seed11_e0541d0c_a1`, launch PID 112219, source/cwd as above. CM first
+reconciled the task as not found and the output/receipt as absent. The fresh receipt at
+`2026-09-05T00:12:03.356900Z` reports physical and effective available memory both
+`12,531,122,176` bytes against the `4,294,967,296`-byte floor, all pass flags true.
+It does not measure later peak memory or establish completion.
+
+Log: `/home/wu/.agent-tasks/dish_b01_c04_seed11_e0541d0c_a1/task.log`; supervisor start/status/
+eventual exit witnesses are beside it. Receipt/output remain at the exact paths in the command.
+Tracker ACKed the handle; DM acknowledged that handoff directly. Tracker alone observes while
+CM and DM yield at committed, recoverable boundaries. On a terminal reminder, resume CM
+collection and DM intake; do not relaunch or reinterpret this handle. Seeds 29/47 remain queued
+only behind seed 11 technical completeness. No scientific result or aggregate branch is claimed.
+Owner reviews were checked again at this boundary and returned no pending instruction.
+
 ## Append-ready shared audit rows
 
 Root owns the ledger; append under `n3-dish-b01-c04-launch`.
