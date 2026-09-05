@@ -1,10 +1,10 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05T01:24:10Z
+Updated at: 2026-09-05T01:49:53Z
 Owner: Root
 Lifecycle admission: 14 ACTIVE source IDs organized into nine route agendas; 8 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
-Loop state: `ACTIVE / OWNER_DIRECT`; research resumed from the completed safe handoff, five DM chains dispatched with automatic clean-boundary refill
+Loop state: `DRAINING_RESULTS / OWNER_DIRECT`; no new launches, retries, successors, refill or Pro; existing results and clean handoffs only. Heartbeat PAUSED.
 Nested execution capacity: no repository-level fixed limit on implementer sessions or result-bearing runs inside the working set (runtime availability and per-invocation resource admission still apply; `AGENTS.md` §5 and §7)
 Execution routing: `REMOTE_FIRST / ACTIVE` for prospectively portable result-bearing invocations via `.codex/hmasd-compute.toml`; local Windows remains control plane and constrained fallback
 Result-run memory floor: `4 GiB physical and effective available memory, freshly measured per invocation`
@@ -22,6 +22,8 @@ Current resume instruction: `docs/research/portfolio/decisions/2026-09-04-resume
 Previous drain (completed and superseded): `docs/research/portfolio/decisions/2026-09-04-drain-for-tracker-restart.md`
 Final restart handoff: `docs/research/portfolio/handoffs/2026-09-04-tracker-restart.md`
 Previous pause (superseded): `docs/research/portfolio/decisions/2026-09-04-pause-after-current-round.md`
+
+Current controlling pause: `decisions/2026-09-04-pause-after-resumed-round.md`. The owner's latest instruction 「这轮完毕后暂停即可」 supersedes all earlier active/resume/launch descriptions below. Remote running count is zero at the drain check; final records are being integrated. Historical ACTIVE execution prose does not authorize another round. Lifecycle ACTIVE/PARKED fields remain unchanged.
 
 Current organization: the owner has adopted the revised two-category, six-family, nine-route
 map. The tracker handoff round is complete and the owner has now resumed automatic execution with the dedicated tracker. Five reserve sources changed to PARKED; all historical IDs,
