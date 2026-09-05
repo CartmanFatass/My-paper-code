@@ -1,9 +1,10 @@
 # Efficiency Practices
 
-Living document. Throughput measurements, dead ends, and what is currently
-blocked. The rules these support are in
-`docs/project/ENGINEERING_ADDITIONS.md`; read that for the brief and this for
-the numbers.
+Historical measurements and unresolved paths for the named2026-07-21 host and
+object. Preserve these numbers and their unmeasured boundaries; current policy is
+`docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`, with conditional guidance in
+`docs/project/ENGINEERING_ADDITIONS.md`. Old WDDM limits and replay tolerances do
+not become global constraints on other objects or current Linux execution.
 
 Record the conditions with every measurement — hardware, model shape, batch
 width. A number without its conditions becomes a false generalization within
@@ -32,7 +33,7 @@ per pass, about 2,400 per update per arm. `validate_replay` is a fifth full
 replay on top of the four epochs.
 
 Registered formal training, three arms and five replicates at 250 updates:
-**7.5 h serial on CUDA**.
+**7.5 h serial on CUDA (projection, not a completed formal-study measurement)**.
 
 ### Device
 
@@ -105,13 +106,14 @@ suggests, which is why exactness was affordable.
 
 ## Refuted
 
-Record here so no one spends time re-deriving these.
+These are historical configuration-specific findings, not universal performance
+dispositions or authorization to retry the original object.
 
 - **`torch.compile` on the recurrent replay: 1.00x.** No speedup at default
   settings; warmup of 1.9 s suggests it fell back to eager. Inductor fuses
   operators inside one `forward_step` call, but the 80x6 loop lives in Python,
-  so each iteration still emits its own launches. Removing that overhead needs
-  whole-walk CUDA graph capture, which would require restructuring the replay to
+  so each iteration still emits its own launches. Whole-walk CUDA graph capture
+  is an untested candidate for that overhead and would require restructuring the replay to
   preallocated outputs. Shapes are static — exactly one input-shape signature
   across all 80 steps — so capture is not ruled out, only unbuilt.
 - **Process-level concurrency on one CUDA card: capped at 2.0x.** Adding
@@ -122,7 +124,11 @@ Record here so no one spends time re-deriving these.
   registered subsample is 320 pairs at about 5.65 minutes, so a batched fork
   engine would save minutes.
 
-## Blocked
+## Blocked in the historical object
+
+These describe the original object and its then-current implementation. They do
+not impose a general CPU, batch-width or current-host ban. Retain their exact
+unmeasured scope and apply a new object's actual numerical contract.
 
 - **CPU execution path.** `validate_replay` rejects it: `event_joint` reaches
   1.91e-6 on CPU against the registered `REPLAY_TOLERANCE` of 1e-6, where CUDA

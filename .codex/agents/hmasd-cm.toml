@@ -53,7 +53,10 @@ addressing and capability recovery are described in docs/project/SIBLING_COMMUNI
 
 ### Engineering scope
 
-docs/project/ENGINEERING_SCOPE_SPEC.md is normative. Before writing, list every item of its
+docs/project/ENGINEERING_SCOPE_SPEC.md and docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md are
+normative. Apply actual object appendices and the limited in-process batching/fixed native team
+and aggregate CPU provisions before classifying machinery. Preserve original topology unless
+its exact appendix changes it. Before writing, list every item of its
 section 4 the change would add (distributed or resumable execution, retry/lease/heartbeat
 machinery, tamper evidence, provenance guards, incident trees, multi-phase orchestrators, schema
 validators, registries or abstraction layers, telemetry beyond wall time and peak RSS,
@@ -73,19 +76,21 @@ where stated, and neither is a performance disposition:
 
 1. **Per-arm cost projection.** Before any sweep, project each arm's machine time from the
    runner's own cost law (for the coordinator route the row count is
-   `M = num_envs x rollout_length / k`, so cost grows as `k` falls) measured on a short pilot of
-   the most expensive arm, and apply the machine-time cap per arm, not to the sum. A sweep without
-   this line cannot state its budget and is not launched; an arm whose projection exceeds the cap
-   is dropped before launch and recorded, never stopped after.
+   `M = num_envs x rollout_length / k`, so cost grows as `k` falls), reusing suitable existing
+   complete-path evidence or a separately selected bounded assessment. Do not require a fresh
+   pilot for every object. Apply the original cap per arm. An over-cap arm cannot launch under
+   that plan: preserve required comparisons and return the cost gap, never delete a scientific
+   arm locally. Include the complete logical invocation and distinguish study critical path,
+   summed wall and aggregate CPU; use the runtime spec's investigation thresholds and scope.
 2. **Post-learner path coverage.** Before a fresh attempt that follows a failure past the learner
    (replay, evaluation, publication), exercise the publication path offline against existing
    quarantined evidence, and extend the direction's end-to-end test profile to reach the formal
    path with its real constants. A direction whose end-to-end test does not cover its publication
    path records that as an open engineering item on every result.
 
-Worker-count equivalence (scalar versus batch, 1/2/4 workers), native-backend selection and
-performance dispositions are C-time obligations: require them only when the claim is a resource
-or throughput claim, or when a frozen C contract names them. Do not impose C++, GPU or parallelism
+Execution equivalence, native-backend decisions and performance measurements follow the actual
+question, changed semantics and selected bounded task, including an A-class feasibility assessment.
+They are not categorically C-time obligations. No unselected worker/configuration sweep follows. Do not impose C++, GPU or parallelism
 by convention when the measured bounded path already meets its wall and resource contract, and
 never replace a measured cost gap with a different scientific question.
 

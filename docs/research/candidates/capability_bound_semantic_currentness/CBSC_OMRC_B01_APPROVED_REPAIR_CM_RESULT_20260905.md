@@ -1,0 +1,344 @@
+# CBSC approved complete repair: CM evidence
+
+Date: 2026-09-05. **FULL_TECHNICAL_ACCEPTANCE_NOT_ESTABLISHED.**
+The complete static candidate exists; smoke and 19 focused checks passed.
+The real-constant formal publication failed with SIGSEGV/139. The sole selected
+reproduction terminated with a different token-packing TypeError/exit 1 and did
+not reproduce that SIGSEGV. Neither the earlier fatal cause nor a unique cause
+of the new exception is established. No complete fifteen-table publication or
+summary readback exists. All five accepted tasks are terminal, evidence is
+retained, and this bounded repair ends here without a fourth formal invocation.
+Original scientific requirements and the historical r05 quarantine remain intact.
+
+## Contract and ownership
+
+The assignment is `CBSC_OMRC_B01_APPROVED_REPAIR_ASSIGNMENT_20260905.md`
+(DM commit339fd79ff), implementing the approved complete Pro optionB and
+`CBSC_B01_OBJECT_EXCEPTION_REPAIR_20260905.md`. Owner approval is recorded in
+`../../portfolio/decisions/2026-09-05-pro-directed-spec-delegation.md`.
+Counting baseline remains0ffca930b9e43b0c6402fce65493cdf6ae24f66f.
+CM worktree: `C:/Projects/HMASD-worktrees/cm-cbsc-approved-20260905`, branch
+`codex/cm-cbsc-approved-20260905`, starting atd3710ffdd. The runtime subtree
+at this start has no Git diff from the counting baseline. Historical165A/426D
+candidatecfbe91367 remains unaccepted substrate until the complete revised
+change is independently reviewed; its lines are included in cumulative limits.
+
+Owned source is the seven existing omrc_b01 files named by the appendix and
+existing focused tests. CM owns this report, source coherence and observation;
+DM owns science/assignment/intake, Root owns main/shared records. No other
+worktree or owner changes are overwritten. Section4 machinery added: **none**.
+Limits: cumulative non-testA<=200,D<=500,A+D<=700; report orchestration without
+reclassifying the prior taxonomy. Remaining focused/offline243.55s cumulative;
+one original smoke under60s separate. No new runner, framework or performance
+study is included.
+
+The observable is truthful resource completeness through both training and
+replay assembly, while preserving available numeric measurements and complete
+B science; same original receipt location in staged r05; and full real-constant
+publication/readback of all fifteen tables plus summary. Partial low samples
+cannot certify a complete resource cap. Optional missing telemetry does not
+erase actual learner failure, nonfinite data, missing records, incorrect work
+counts or nonzero child exit. The independent7200s wall stop remains.
+
+All original host/adapters, STRUCT/RAW/PI/DERANGED, three seeds21101/21121/21143,
+twelve arm-seeds, CPU FP32/one Torch thread,121349parameters and per-slot384
+episodes/58368transitions/9216decisions/48updates/768Adamsteps remain protected.
+Checkpoints0/12/24/48 and32+32evaluations, initialization, PRF/action uniforms,
+PPO/minibatch order, recurrence, checkpoint format, evaluation resets, pairing,
+zero selection and all raw/derived scientific quantities remain unchanged.
+This assignment selects no learner, r08, B1B, B2, new seed or successor.
+
+## Source and cost map
+
+The existing two supervisors in b1.py own process exit and independent wall
+handling. telemetry.py owns resource sampling and B1 incomplete normalization,
+with B0 retaining its strict default. Training assembly and production's replay
+resource projection feed mechanical resource facts. Mechanical resource-cap
+certification is distinct from complete/readable scientific records. Production
+constructs the original fifteen tables; artifact computes the descriptive
+summary and publication readback. Rehydrate and protected learner/host source
+remain outside the intended edit.
+
+The original cost law is documented in R06_LAUNCH_READINESS_INTAKE section3:
+P_arm,seed=sum(wall of slices0:12,12:24,24:48)+wall of matching replay.
+Twelve historical engineering slots ranged197.446350000042 to323.7225416000001s.
+The componentwise envelope296.92813109999406+36.342732699995395=
+333.27086379998945s combines maxima, and is4.628762% of7200s. It is not a
+measurement of this repair or a new sweep. Twelve serial envelope slots would
+be3999.2503656s, about66.65min, before unmeasured overhead;7200s is a separate
+per-invocation stop, not an observed duration.
+
+Direct source reading: host.py uses Python dataclasses/Fraction, state/tape and
+ledger functions. Its `native_ledger` is Python action/reward semantics, not a
+C++ backend claim. engine.py projects NumPy observations then stacks episode
+tensors; model.py applies Torch FP32 matrix operations and recurrent steps to
+episode batches. ppo.py selects two complete episodes per minibatch, applies
+batched tensor losses and Adam, preserving the original serial minibatch order.
+b1_engine.py explicitly sets one Torch thread and restores it on exit. This
+is evidence of existing episode batching, not measured C++ host acceleration
+or multi-worker/thread equivalence. Publication uses Python/JSON and existing
+scientific builders. The substrate removes repeated full training/mechanical
+reconstruction and duplicate summary/consumer reconstruction after initial
+assembly; no measured speedup can be claimed before verification.
+
+## Execution boundary
+
+Portable heavy verification uses configured wsl_4070, shared Python and exact
+pushed-source detached worktree under agent-task, only after Root integration.
+Each invocation joins actual-node admit-memory immediately with its command;
+physical/effective available memory must both be>=4GiB. Historical receipt is
+input provenance only and never replaces fresh admission.
+
+Full r05 input remains quarantined:385files/311364169bytes,36training and12
+replay results; archive74799401bytes SHA256
+70c72b8c075093d7ddc3682ae0e2e45a36a9b04e0dadcbb81175b7194ee00d4f.
+Remote root `/home/wu/hmasd-inputs/cbsc-r07-resource-repair-20260904/snap_r05`
+exists by read-only inventory. The existing B0 fixture manifest was located at
+`/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02`.
+New validation output has its own execution SHA and engineering role. No input
+identity, historical metadata or performance contrast is altered to choose a
+repair. Stop at complete technical intake or a concrete unmet scope/budget gap.
+
+CM directly compared all12 original Windows replay raw receipts to the saved
+same-slot snap_r05 copies: every pair was byte-identical and every digest matched
+its original admission.raw_receipt_sha256. Slots00-03/05-08 have509bytes,
+04/09-11 have511bytes. This read-only comparison confirms the local originals
+and staged copies are the same receipt; remote execution/load remains unverified.
+
+## Static whole-source review
+
+Independent native reviewer:
+`/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair/rev_ah_cbsc_complete_repair`.
+It inspected the complete baseline diff, affected scientific builders/consumers,
+all source and focused-test changes. Its source review found no material defect
+after the completeness/receipt fixes and no new section4 machinery. Partial
+measurement propagates through training and replay constructors and the exact
+mechanical field set; full resource-cap/conformance is false while otherwise
+complete/readable B science remains true. Original duplicate telemetry-work
+checks were removed, with actual child/raw work reconciliation retained.
+
+| Source file | A | D | O |
+| --- | ---: | ---: | ---: |
+| b1.py | 47 | 182 | 229 |
+| b1_mechanical.py | 7 | 3 | 3 |
+| b1_metrics_artifact.py | 7 | 70 | 59 |
+| b1_metrics_production.py | 50 | 142 | 162 |
+| b1_metrics_training_assembly.py | 4 | 27 | 31 |
+| telemetry.py | 59 | 5 | 64 |
+| Total | 174 | 429 | 548 |
+
+O/(A+D)=548/603=90.88%. The prior55-line generous computational allowance is
+preserved exactly; all incremental resource/path handling is orchestration.
+No source was reclassified, compressed or moved to qualify. This falls inside
+the named appendix; eligibility does not establish runtime conformance.
+
+CM compared all32 remaining baseline omrc_b01/runner files using Git checkout
+filters against worktree bytes: zero mismatches. Implementer parsed all12
+changed Python files without importing modules; diff whitespace check passed.
+Reviewer identified an obsolete smoke assertion expecting the deleted duplicate
+consumer reconstruction error; the same test is being corrected to retain RAW
+calculation/readback checks without restoring the demoted gate. Final test/SHA
+binding and actual verification were pending at that intermediate review.
+
+### Final static binding and prospective verification
+
+The reviewer re-read the corrected smoke and returned **no material finding**.
+It directly reconstructs RAW competence from truth/policy tables, compares to
+published values, shows a changed reported flag does not change computation,
+and checks changed table/summary bytes. No removed consumer gate is restored.
+The full real-constant test preserves48admission/raw receipt pairs plus the
+original ledger; this is planned runtime coverage, distinct from CM's already
+observed12local receipt comparisons. Reconstructed Git-blob law metadata is
+explicitly not the original Windows checkout law digest.
+
+CM committed/pushed implementer1534b545d, then integrated/pushed
+**8003b96bd79910864e9372ad6f1ea81f1c80520c** on its own branch. Six source and
+six existing tests; testsA227/D107 separate from source. The revised smoke blob
+8d048b40c binds the review. Runtime source remains8003b96bd for verification,
+historical fixture source remains4679e8dc86fb39b7b72fe7404f3f837f11ebbaad.
+
+Exact commands/cwd/roots/task IDs are in
+`CBSC_OMRC_B01_APPROVED_REPAIR_COMMANDS_20260905.json`. Root must confirm
+source and command integration before any verification. Prepare only the
+named parent test directory and exact worktree, including required committed
+docs. Existing r05/B0 inputs are read-only. One original smoke has58s timeout
+plus1s kill bound, below60s. One focused-plus-full-formal profile has242.55s
+timeout plus1s kill bound, within remaining243.55s, with --maxfail=1. The timeout
+is a prospective engineering bound, not a measured performance claim. No sweep
+or new scientific learner occurs; focused fixtures are synthetic/no optimizer,
+and smoke uses existing synthetic checkpoint/model-forward fixtures. Any actual
+verification failure remains preserved, and time is charged before another
+invocation rather than reset. No process is accepted at this freeze.
+
+## First verification observations and exact continuation
+
+Root integrated source8003b96bd as363286861 and record7614be377 as26096e969,
+then explicitly confirmed the frozen verification sequence. Remote fetch using
+default shell stalled; CM terminated only its identified git-remote-https process
+before any worktree/test acceptance. The configured zsh -lic fetched successfully.
+An all-docs sparse expansion hit a promisor TLS EOF; fetching the actual required
+CBSC direction docs succeeded. Existing Git gc warnings were left untouched.
+These preparation facts are not scientific failures. The original nine Pro
+response/facts/manifest evidence files were copied at their recorded digests into
+the configured input staging root, with an evidence-only path link in the checkout;
+exact paths/digests are in APPROVED_REPAIR_INPUTS_20260905.json.
+
+Accepted smoke01 exited2 before memory admission or pytest because agent-task
+joins arguments with spaces: separate bash,-lc,command arguments lost the inner
+command quoting. The resulting preflight looked under /home/wu/scripts. CM
+reproduced `bash -lc cd <cwd> && pwd` yielding /home/wu. Sending one fully
+shell-quoted `bash -lc '<inner-command>'` argument preserves the frozen inner
+command. The original accepted handle/log remains; no test time occurred there.
+
+Smoke02 accepted once and exited0:1passed,13.46pytest seconds,13.84external
+process seconds,540876KiB maximumRSS,14whole supervisor seconds. It exercised
+the original smoke including RAW computation and table/summary byte readback.
+
+Profile01 accepted once and exited1:19focused tests passed,1formal test failed,
+9.92pytest seconds,10.64external process seconds,1234360KiB maximumRSS.
+Formal setup validated48original rawreceipt digests, loaded12original replay
+witness slots, then failed at locate_b0_evidence before publication because the
+existing B0 input was in the old checkout outside this direction's confined root.
+The independent reviewer reproduced the exact pathlib.resolve().relative_to()
+step on wsl with exit1/same ValueError, establishing a technical input-path
+failure. No fifteen-table publication or scientific result was produced.
+
+CM copied the same33B0 files/12807274bytes inside this execution direction root;
+all destination bytes equal source, manifest SHA256
+c7c6f73be17e785cbe6ffaba6cfd30c4c8483ecf23e43bbd48df535c676bc298.
+Original input metadata and source8003b96bd are unchanged. Formal-only02 has a
+new basetemp/output root; profile01 is preserved and its19passed checks are not
+repeated. Charging10.64process seconds leaves232.91s; the new timeout231s plus
+1s kill bound totals232s. Its exact command is frozen in
+APPROVED_REPAIR_FORMAL02_COMMAND_20260905.json before acceptance.
+Tracker independently confirmed all three original terminal handles and the DM
+ACKed them. No process is live at this continuation freeze.
+
+## Terminal formal02 observation and bounded return
+
+Root integrated continuation5d8344bf2 as90661cbd1 and confirmed execution.
+Formal02 was accepted exactly once at19:28:20Z; Tracker adopted it before CM
+released routine observation. The same task ended19:29:11Z, exit139, PID1692419,
+tmux inactive. Fresh physical/effective available memory was15426654208bytes,
+above4GiB; external time reports signal11,50.83process seconds and1687772KiB
+maximumRSS. This is observed admission/RSS, not proof of the crash cause or
+complete resource coverage. No timeout branch was observed.
+
+Fatal Python stack, most-recent first: json.encoder.iterencode/encode/dumps,
+addressing.canonical_json/audit_digest, host._finish/build_stochastic,
+b1_shared_tables._validated_tapes/build_b1_shared_truth_tables,
+b1_metrics_rehydrate.rehydrate_b1_metrics, and production's full
+_assemble_and_publish_b1_metrics at line1677. It reached the original full
+rehydration/shared-truth path. No cause is classified from this stack alone:
+there is no reproduced inference of interpreter, resource, host or patch defect.
+No scientific performance contrast was used to select source changes.
+
+The independent reviewer rechecked0ffca930b->8003b96bd: only the six declared
+source files differ, A174/D429; addressing.py,host.py,b1_shared_tables.py and
+b1_metrics_rehydrate.py in the stack remain unchanged. It confirms that full
+technical acceptance remains unestablished and the concrete gap is consistent
+with this assignment's stopping boundary. No protected-path repair, interpreter
+change, new learner, blind repeat or automatic scope/budget growth was made.
+
+CM's terminal read-only inventory records actualexecution8003b96bd, zero tracked
+changes,428files in the preserved profile02 tree, **zero offline-publication
+directory, zero summary.json and zero jsonl tables**. Accordingly, all fifteen
+formal scientific table rowcounts, final RAW inputs/null interpretations and
+summary readback remain **unverified**, not zero scientific quantities. Smoke
+coverage of their smaller counterparts and original19focused passes stand;
+they do not substitute for this missing complete real-constant observation.
+
+| Accepted task | Terminal | Pytest seconds | External process seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: |
+| cbsc-approved-smoke-8003b96bd-01 | exit2 beforepreflight/test | notrun | unmeasured | unmeasured |
+| cbsc-approved-smoke-8003b96bd-02 | exit0,1passed | 13.46 | 13.84 | 540876 |
+| cbsc-approved-profile-8003b96bd-01 | exit1,19passed,formal inputpath failure | 9.92 | 10.64 | 1234360 |
+| cbsc-approved-profile-8003b96bd-02 | signal11/exit139,formal incomplete | nofinalpytestsummary | 50.83 | 1687772 |
+
+Current focused/offline charged61.47process seconds; adding the prior56.45s
+conservatively gives117.92s of300s, leaving182.08s. The separate original smoke
+took13.84s of60s. These costs exclude Git/environment preparation, input copying,
+agent work, read-only collection and the pre-admission failed wrapper. There is
+no valid completed formal result denominator and no claimed acceleration ratio.
+No learner/optimizer step was run by this assignment. The smoke fixture setup
+constructs four synthetic models and16optimizer/checkpoint envelopes, and the
+smoke exercises additional model-forward
+fixture paths; synthetic checkpoint counters do not represent performed training.
+Formal work reconstructs original host/tape records without a new B learner.
+
+Raw retained logs, generated supervisor wrappers, receipts, times and terminal
+inventory are under `approved_repair_20260905/`. The remote failed root stays
+untouched at the frozen profile02 path. All four accepted handles are terminal;
+Tracker's observation and DM's acknowledgement are separate from technical
+acceptance. **Return: full implementation candidate and actual partial coverage,
+with complete publication/readback still missing.** Scientific object, original
+r05 quarantine, comparison, labels, direction lifecycle and priority are unchanged.
+
+## DM-selected one exact reproduction, prospectively frozen
+
+After the above terminal report, the DM selected option(a), one exact existing
+failed formal-step reproduction, over(b), returning unclassified without
+recurrence evidence. OWNER_DELEGATED, same original remaining182.08s, same8003
+bytes/interpreter/r05/B0/archive inputs and the same formal test; only fresh
+task/root/basetemp/receipt and181s+1s kill bound differ. This is a bounded
+technical recurrence observation, not a new science family or source repair.
+The existing independent reviewer owns the one reproduction invocation after
+Root integration of APPROVED_REPAIR_REPRO03_COMMAND_20260905.json. No launch
+is claimed by this freeze. Stop after this invocation regardless of result;
+no fourth formal run or automatic source/scope/budget growth. Same failure
+establishes recurrence of the publication-step failure, not its unique cause;
+different failure/pass records non-recurrence without erasing formal02.
+
+## Final terminal return after the sole reproduction
+
+Root integrated the exact repro03 command record 88f09f824 at
+5e0fda87216f833baf9bd8ecd24e1093fce774de and pushed before execution.
+The same independent reviewer executed the frozen command once; Tracker adopted
+and independently observed the accepted handle. No source or interpreter change
+was made. Actual execution SHA remains
+8003b96bd79910864e9372ad6f1ea81f1c80520c; historical fixture SHA remains
+4679e8dc86fb39b7b72fe7404f3f837f11ebbaad. These are distinct identities.
+
+| Accepted task | Terminal | Pytest seconds | External process seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: |
+| cbsc-approved-repro-8003b96bd-03 | exit 1; different TypeError; 1 failed | 5.71 | 6.57 | 1222060 |
+
+PID 1693212 is terminal and tmux inactive. Supervisor duration was 6 seconds,
+from 2026-09-05 19:37:39 UTC to 19:37:45 UTC. Fresh actual-node admission at
+19:37:39.155362 UTC measured physical and effective available memory both
+15,428,243,456 bytes and passed. The prospective bound was 181 seconds plus
+1 second kill grace. Raw receipt and external time observations exist; these
+are invocation observations and do not certify missing historical resource
+telemetry or full scientific resource conformance.
+
+The failing path was production._assemble_and_publish_b1_metrics -> rehydrate
+canonical seed panel -> host._finish -> EpisodeTape.__post_init__ -> token.py:251
+pack, evaluating int(value) over token.flag_values(). The exact error was
+`TypeError: int() argument must be a string, a bytes-like object or a real number, not 'type'`.
+The raw log does not capture the particular offending token values. The reviewer
+confirms a different failure, not recurrence of the earlier SIGSEGV; neither
+observation identifies a unique host, interpreter, or scientific cause. The
+prior fatal remains unresolved, and the new TypeError is not independently
+reproduced. No further diagnostic or repair was run.
+
+CM's terminal read-only inventory confirms 428 files, zero tracked source
+changes, and no offline-publication directory, summary.json, or jsonl table in
+repro03. Therefore all fifteen formal table rowcounts, final RAW input and null
+interpretation coverage, all seven complete interpretations, and summary
+readback remain **unverified**. Absent tables are not zero scientific results.
+Earlier smoke and the 19 focused passes remain partial engineering evidence.
+No new learner or scientific result was produced, and old r05 evidence remains
+quarantined. Full technical acceptance is not established.
+
+Final charged focused/offline process time is 10.64 + 50.83 + 6.57 = **68.04 s**.
+Including the prior 56.45 s gives **124.49 / 300 s**, leaving **175.51 s unused**.
+The separate smoke took 13.84 s. Unused allowance does not select another run;
+the DM's prospective stop ends this investment after the sole reproduction.
+There is no fourth formal invocation, source expansion, host/interpreter change,
+new learner, performance claim, or scientific interpretation in this return.
+
+Raw repro03 task log, supervisor wrapper, exit/start witnesses, admission, time,
+and terminal inventory are retained beside all earlier evidence in
+`approved_repair_20260905/`. All original remote failed roots are retained.
+The final engineering disposition is a reviewed source candidate with demonstrated
+partial checks and an unresolved complete publication gap, returned to DM intake.

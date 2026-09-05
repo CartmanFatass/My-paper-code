@@ -1,21 +1,22 @@
 # Engineering Principles — Measured Additions
 
-Practical rules derived from measurements on this project. These extend, and do
-not replace, the active-line engineering constraints (batch independent
-dimensions, pack once, no scalar CUDA sync, no serial evaluation).
+Conditional guidance derived from the 2026-07-21 workload and host measurements.
+Current execution policy is `docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md`.
+Preserve the actual object's complete scientific and numerical contract; these
+historical observations do not select a device, topology or new benchmark.
 
 Numbers and conditions are in `docs/project/EFFICIENCY_PRACTICES.md`.
 
 ## Device selection
 
-**Pick the device by the ratio of kernel launch overhead to work per launch.**
-Few parameters, small batch and many sequential steps means the launch dominates
-the arithmetic, and CPU wins. Large batch, large model or long fused kernels
-means GPU wins. Measure both before committing; do not inherit a default.
+**Choose a device from the current complete path's launch, compute and transfer costs.**
+Model size and batch affect that choice; a conformant path does not require a
+fresh CPU/GPU comparison. Historical small-model CPU forward advantage does not
+establish CPU whole-training advantage or an advantage on the current Linux node.
 
 Current benchmark: 14,980 parameters, batch 16, ~480 sequential calls per epoch.
-CPU single-thread is 2.7-2.9x faster than CUDA. Expect this to reverse once
-agent count or batch width grows.
+CPU single-thread forward was 2.7-2.9x faster than CUDA under those conditions.
+Other widths, models and complete training paths were not established by that result.
 
 **Set one thread per worker when tensors are small.** `torch.set_num_threads(1)`
 beat 14 threads by 1.5x here — thread synchronization costs more than it saves
@@ -23,31 +24,32 @@ on a 32-wide GRU cell at batch 16.
 
 ## Parallelism
 
-**Batch independent runs as a replica dimension inside one known-good process
-and device topology.** Reuse the verified tensor path, preserve RNG and
-common-random-number coupling, and avoid duplicate CUDA contexts. One process
-per replica is not a scaling strategy for this project.
+**Prefer in-process batching where independence and the scientific contract permit it.**
+Preserve RNG, common-random-number coupling and state ownership. Process topology
+depends on the actual environment API and assigned resources; a library's topology
+does not itself authorize a new worker framework.
 
-**Know the ceiling before changing topology.** One CUDA card saturated near
-2.0x across concurrent processes because kernels from separate WDDM contexts
-serialize. Separate processes are allowed only for work that cannot share the
-registered tensor/device path and has an explicit resource assignment.
+**Scope a measured limit to its host and workload.** The old WDDM multi-process
+GPU measurement saturated near2.0x. It is not a limit for all hosts or proof that
+one or many processes is always preferable. Apply the current runtime scope rules.
 
 **Batch branches and replicas when they are independent.** Counterfactual forks
-and repeated evidence runs are batched by default; keep a loop only for genuine
-causal, autoregressive, simulator or recurrent dependence.
+and repeated evidence runs are candidates for batching when their full semantics
+allow it; preserve causal, autoregressive, simulator and recurrent dependence.
 
 ## Wasted compute
 
-**Every produced artifact must have a reader.** Trace each output to the code
-that consumes it. Three of four evaluation cells feed no gate; the intervention
-metric was computed for all four cells and read from one.
+**Trace each output's scientific use, including analysis and reported diagnostics.**
+Three of four historical evaluation cells fed no gate; the intervention metric was
+computed for all four and read from one. Required diagnostics still remain required.
 
 **Look for a validation pass that duplicates a training pass.**
 `validate_replay` is a fifth full forward on top of four PPO epochs — about 20%
-of the update — because it recomputes what an epoch already computes.
+of the update — because it recomputes what an epoch already computes. Remove only
+true duplication consistent with the original requirements and independent checking;
+the observation alone does not authorize removal of validation.
 
-**Reconstruct at the same batch width as the original.** float32 reduction order
+**Honor the original reconstruction contract.** float32 reduction order
 depends on tensor shape, so a width-1 reconstruction of a width-16 collection
 does not reproduce it bitwise. Matching the width removes an entire class of
 drift rather than bounding it.
@@ -59,18 +61,18 @@ component errors will be the marginal one under a single scalar bound.
 `event_joint` sums eight mark components plus a categorical term and is the only
 quantity that ever approaches the tolerance.
 
-**A tolerance is valid only for the device and batch width it was measured on.**
+**Bind a measured tolerance to its original object, device and batch width.**
 State those conditions with the constant. Ours was calibrated on CUDA at width
-16 and rejects both CPU execution and width-1 reconstruction.
+16 and rejects both CPU execution and width-1 reconstruction in that object.
+This is not a project-wide CPU or batch-change ban; new execution semantics are
+validated against their own accepted exactness/tolerance contract.
 
-## Refuted here — do not retry
+## Historical negative measurements and untested candidates
 
-**`torch.compile` does not remove launch overhead from a Python-level loop.**
-Measured 1.00x on the recurrent replay. Inductor fuses operators inside one
-call; the 80x6 loop lives in Python, so every iteration still emits its own
-launches. Whole-walk CUDA graph capture is the mechanism that would work, and
-shapes are static enough to allow it, but it needs the replay restructured to
-preallocated outputs.
+**The measured recurrent replay obtained1.00x from `torch.compile`.**
+No acceleration was observed in that configuration. The80x6 Python-level loop
+was the suspected boundary; whole-walk CUDA graph capture with preallocated
+outputs remains an unimplemented candidate, not a proven remedy.
 
-**Deep-copying immutable state per fork is not a bottleneck.** 288 microseconds
-per environment clone, 1.2 seconds across the entire fork budget.
+**The measured immutable-state clone cost was small for that fork budget:**
+288 microseconds per environment clone,1.2 seconds across its full budget.

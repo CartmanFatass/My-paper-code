@@ -380,12 +380,17 @@ def verify_provider_selection(requirement: Mapping[str, str], *, visible_model: 
         raise ValueError("provider thinking mode does not match")
 
 
-def validate_response_identity(response: str, *, request_id: str, pinned_reference: str) -> None:
-    """Reject a capture of an earlier reply before archival; never send a repair prompt."""
-    if not request_id or not pinned_reference:
-        raise ValueError("request_id and pinned_reference are required")
-    if request_id not in response or pinned_reference not in response:
-        raise ValueError("RESPONSE_IDENTITY_MISMATCH: captured answer does not identify this request and ref")
+def validate_response_identity(response: str, *, expected_binding: Mapping[str, str],
+                               observed_binding: Mapping[str, str]) -> None:
+    """Match the captured reply to its recorded provider message pair, outside prose."""
+    if not response.strip():
+        raise ValueError("RESPONSE_IDENTITY_MISMATCH: captured answer is empty")
+    for field in ("conversation_id", "user_message_id", "assistant_message_id"):
+        expected = expected_binding.get(field)
+        if not isinstance(expected, str) or not expected.strip():
+            raise ValueError(f"missing recorded provider binding: {field}")
+        if observed_binding.get(field) != expected:
+            raise ValueError(f"RESPONSE_IDENTITY_MISMATCH: captured {field} differs from recorded pair")
 
 
 def validate_provider_context_reset_evidence(value: object) -> dict[str, object]:
