@@ -83,7 +83,34 @@ baseline. No scientific run or diagnostic edit occurred before this decision.
 Owner-delegated decision (unattended, 2026-09-03 instruction): (a).
 Provenance `OWNER_DELEGATED`; reversible; owner flag `none`.
 
+### 4. Prospective A01 measurement wording refinement — object tier, technical
+
+Before implementation CM identified a concrete last-live-tick ambiguity: native may latch
+preparation during completion immediately before terminal, so a prepared-only presence
+label would discard a directly observed latch. Options: (a) count prepared and completion
+states separately and use either live boundary for observed latch presence; (b) use only
+prepared state; (c) postpone the diagnostic. Recommend/select **(a)**, preserving the
+card's first-absent-observed-stage meaning. This is not a changed policy or gate.
+
+The card now fixes action-tick attribution (`t` versus resulting native `t+1`), pre-emission
+version relation plus same-tick completion latch, actual delivery events, live versus
+terminal padding denominators, state-based cumulative invalid-commit deltas, and separate
+inspected/completed counts at an unexpected valid boundary. No budget, checkpoint, panel,
+source law or result polarity changes. Owner-delegated decision (unattended, 2026-09-03
+instruction): (a). Provenance `OWNER_DELEGATED`; reversible; owner flag `none`.
+
 ## Owner boundary and practical limits
+
+**Later owner instruction supersedes continuation:** `这轮完毕后暂停即可` (received through
+Root on 2026-09-04). Complete B01 intake is saved; A01 does not launch. CM confirms that
+only the dependency assembly was completed: merge `1b5b21ff65a7d6025fe04ce05f32400f06b2024f`
+is pushed, and the accepted B01 source surface still equals `e0541d0c`. No diagnostic code,
+test, verification invocation or result-bearing process was created. The prospective
+wording above is saved for a later authorized resumption, not permission to continue now.
+There is no live N3 process. Pause was cascaded to CM/its implementer and the shared tracker;
+no new seed, successor, retry or Pro request is allowed by the previous continuation.
+Provenance `OWNER_DIRECT`; scheduling pause only, with no lifecycle/priority/scientific change.
+See `N3_DISH_B01_COMPLETE_A01_PAUSE_HANDOFF_20260904.md` for recoverable state.
 
 Owner reviews in this and current integration worktree returned `[]`; today's review has
 only the already-answered Portfolio agree and yesterday's file is absent. No instruction
@@ -111,3 +138,5 @@ Root owns the ledger; append under `n3-dish-b01-complete-intake`. Items were ins
 | 2026-09-04T18:41:22-07:00 | degraded_incumbent_shadow_handover | object | technical | reading-agreed; reading-disputed | complete-result Chinese brief published; no owner reading auto-applied | yes | DM_INTAKE | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-021.json | none | |
 | 2026-09-04T18:41:22-07:00 | degraded_incumbent_shadow_handover | object | selection | accept; reject; revise | A01 card frozen; recommendation accept, asynchronous owner surface | yes | DM_CARD | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-022.json | none | |
 | 2026-09-04T18:45:23-07:00 | degraded_incumbent_shadow_handover | object | technical | (a) merge accepted CM dependency; (b) ad hoc restore; (c) await other integration | (a) assemble accepted source and DM docs in A01 branch, no production redesign | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-023.json | none | |
+| 2026-09-04T18:47:47-07:00 | degraded_incumbent_shadow_handover | object | technical | (a) observe either live latch boundary separately; (b) prepared only; (c) postpone | (a) explicit prospective timing/denominator convention, no native change | yes | OWNER_DELEGATED — Owner-delegated decision (unattended, 2026-09-03 instruction): (a) | docs/research/portfolio/owner/inbox/2026-09-04/20260904-dish-024.json | none | |
+| 2026-09-04 owner pause | degraded_incumbent_shadow_handover | object | technical | owner: finish round then pause | complete B01 saved; unimplemented A01 not launched; no live N3 process | yes | OWNER_DIRECT | docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_COMPLETE_A01_PAUSE_HANDOFF_20260904.md | none | |
