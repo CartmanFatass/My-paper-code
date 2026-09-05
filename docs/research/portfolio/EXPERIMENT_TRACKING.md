@@ -20,25 +20,16 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T10:30:48Z`, tracker-owned live processes are FSD
-`(wsl_4070, fsd_e3_large_d0_seed2_20260905_01)`: `running`, exit `null`, wrapper PID `1656091`,
-and `tmux_active=true`; and FRRIE `(wsl_4070, frrie_b01_contact_r07_10ae9781)`: `running`, exit
-`null`, PID `1657968`, `tmux_active=true`, SHA `10ae9781f74ae26931fa8231918844f4921b80f2`, cwd
-`/home/wu/hmasd-worktrees/frrie-contact-r07-10ae9781`, receipt
-`temp/directions/finite_resource_relational_inductive_efficiency/technical/frrie_b01_contact_r07_admission.json`,
-output sibling `exp/frrie_b01_contact_r07/summary.json`, log
-`/home/wu/.agent-tasks/frrie_b01_contact_r07_10ae9781/task.log`, fresh physical/effective admission
-`12896010240` bytes, and outer bound `2026-09-05T18:30:13Z`. Terminal/loss/bound wakes the
-respective DM and CM directly; a fixed pdb module means FRRIE exit `0` is not itself learner success.
-CRTO B07 seed1 `(wsl_4070, crto_raw_centered_b07_s1_5a4b5c20_01)` and seed2
-`(wsl_4070, crto_raw_centered_b07_s2_5a4b5c20_01)` are also accepted and running on SHA
-`5a4b5c20dd3e54350a0b18377541a0ae585d38bc`, with respective cwds
-`/home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20` and `.../crto-b07-s2-5a4b5c20`, frozen output
-roots `raw_centered_loss_b07_20260905/seed01|seed02/attempt01`, and 1200s-arm/1500s-invocation
-caps. Each has its own supervisor log under `/home/wu/.agent-tasks/<task>/task.log`; terminal/loss/cap
-wakes CRTO DM and CM once per seed. FRRIE R07 is terminal and handed off; all other current records in
-this document are terminal or awaiting a separately handed accepted handle. The
-`2026-09-04T23:39:35Z` all-terminal snapshot is historical recovery evidence only.
+At `2026-09-05T11:27:xxZ`, the sole live tracker-owned process is FSD
+`(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`: `running`, exit `null`, PID `1663230`,
+`tmux_active=true`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd
+`/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output
+`temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling
+`preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`.
+Fresh physical/effective admission was `15425314816` bytes. The expected projection is `4.63h`
+and hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly. Every other current
+record is terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
+all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
 
