@@ -1,0 +1,38 @@
+{
+  "id": "20260904-frrie-021",
+  "created": "2026-09-04T17:49:00-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R05：新执行原 B 对象并保留异常读取",
+  "context": "A01 完整调用链已完成，但按预先边界不能升级为算法结果。没有已确认的修复或新的原因判别量；选择一份新的原 R02 学习观察，使用同随机根、参数、预算和结果规则，并继续使用已验证的异常现场读取方式。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次新的原 B 对象执行",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "再做相同 A 类完整流程诊断",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "事后将 A01 升级为 B 结果",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "新 B 执行能回答已接受的学习问题，失败时保留同等诊断能力；重复 A 无新增判别量。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R04_RECONSTRUCTION_A01_INTAKE_20260904.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_EXECUTION_ADDENDUM_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-a01-intake-r05-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
