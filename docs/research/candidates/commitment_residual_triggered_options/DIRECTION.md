@@ -467,3 +467,29 @@ References:
 - `CRTO_RAW_CYCLE_READOUT_B02_RESULT_EVIDENCE_20260904.md`
 - `CRTO_RAW_CYCLE_READOUT_B02_RESULT_20260904.json`
 - `CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md`
+
+## Paired TRAIN order B03 — 2026-09-04
+
+The seed-0 labelled original-pair order comparison is valid `B03-PAIRED-ORDER-INCOMPETENT`.
+At complete-cycle updates252/255/258, every TRAIN row has exactly168/170/172 occurrences in
+each arm. Canonical ordering is competent at every point (KEEP6/8, REPLAN6/8,
+R=0.0037814300857039115). The paired ordering instead has KEEP7/8, REPLAN4/8,
+R=0.004272698139146994 and fails REPLAN competence at every point. All three native differences,
+including primary258, are -0.0004912680534430829, inside MEI .0025.
+
+The bounded update is to retain canonical ordering and drop only this tested paired-order
+candidate. Strongest support is the repeated REPLAN failure at exact-row-matched exposure against
+a competent canonical comparator. Improved KEEP and the small aggregate difference constrain
+broader conclusions: the intervention combines side balance, pair adjacency and event grouping,
+and does not isolate any one of them. B02's mean-readout negative, B01's own comparator-weak
+checkpoint and A01's unresolved crash keep their meanings. No independent-seed, tuned headroom,
+residual, policy/MARL or general order claim is established.
+
+The next discriminator returns to the accepted RAW/aligned-residual/derangement question using
+canonical order and a prospectively declared common short/long complete-cycle exposure. It needs
+a new explicitly outcome-informed B card; this result provides the local comparator choice but
+no residual polarity. No successor is frozen or launched in this intake.
+
+References: `CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md`,
+`CRTO_PAIRED_ORDER_B03_RESULT_EVIDENCE_20260904.md`,
+`CRTO_PAIRED_ORDER_B03_RESULT_20260904.json`, `CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md`.
