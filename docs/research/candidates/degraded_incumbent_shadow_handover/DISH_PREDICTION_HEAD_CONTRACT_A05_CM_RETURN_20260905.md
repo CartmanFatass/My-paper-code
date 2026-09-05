@@ -70,3 +70,30 @@ protected818productionfiles remain unchanged; genuine calls and top-level/nested
 matchcard. One noncardtoypublication/rule suite is authored but unexecuted. These static
 facts do not override the scope conflict. Return the concrete draft/line ranges to DM
 for object-tier disposition; no waiver, newinbox, modifiedscience or successor is chosen.
+
+## One authorized consolidation: final unaccepted return
+
+DM675cbe5ff authorized exactly one consolidation, not a waiver. The updated docs are
+assembled/pushed on this CM branch at66a0b37d54408a775a5be2650ae7e53f6aad2512;
+independent draft branch retains initial9cd267827 and docsassembly476194911. Final
+consolidated draft is pushed ea05e9308e9e417d610e5cd41c66a4df91883c23, same implementer
+worktree/branch; it remains unaccepted and is not merged into the CM accepted-source chain.
+
+Final source: scripts/run_dish_prediction_head_contract_a05.py185lines, thin
+experiments/candidates/degraded_incumbent_shadow_handover/head_contract_a05.cpp5lines;
+190non-testtotal. Tests58lines, import-only adaptation. Separate154line module deleted.
+Diff versus476194911: module-154; runner+141/-3; tests+1/-1; aggregate+142/-158.
+
+Independent final review confirms65/190=34.21% orchestration. Named ranges are runner
+1–14(imports/header),49–59(run/timing/import setup),114–122(actualcompile/load),
+160–185(publication/resource/CLI), plusCPP1–5(thinexport). Prior conservative classifications
+are retained; savings come from duplicate imports and wrapper/handoff removal, not padding
+or reclassification. All rawvalues, genuinecalls, two backwards, nine helperinvocations,
+comparators, rulebranches and exposure/cost remain. The four protected818files remain
+byte-identical; git diff --check passes. Reviewer found no additional concrete semantic
+finding. This is static review only and cannot establish runtime conformance.
+
+The permitted single layout attempt is complete. No further compression, fixture,
+scientific quantity, exception, verification or result is selected. No model/compiler/test
+has run and no accepted handle exists. Return the exact pushed draft and this boundary
+for DM/Root disposition; proposed exceptions are not current authority.
