@@ -72,13 +72,13 @@ two exploratory agendas (N3/N5), and one prospective agenda (K4) remain. The nin
 
 | 路线 | 分类 | 机制族 | 研究问题 / 来源 | 当前入口 |
 | --- | --- | --- | --- | --- |
-| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R05 有效，两个差异均在 MEI 内；R06 源码未接受、未启动，暂停 |
-| N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | 结果盲校准预计超2700秒；无完整枚举，无科学结果，暂停 |
-| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | DISH B01完整有效FTS-B0：0/3可用种子；A01未实现、未启动，暂停 |
-| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 最小直接路径仍超预算且不完整；工程交接完成，无 r08，ACTIVE 排队 |
+| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | R05结果保留；R06最小修复已恢复，尚无新运行 |
+| N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | 校准成本超限保留；ACTIVE排队，未启动完整枚举 |
+| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | B01完整FTS-B0保留；原保留前缀A01实现已恢复 |
+| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 恢复一段既有执行/发布路径排障；旧候选未接受，无r08 |
 | N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | 全新6 Pro裁决暂存当前配置坐标家族，无后继实验；正式 intake 已整合，方向生命周期未变 |
-| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3 已接受13/18；0运行，五格未启动，停在large_d2_seed1之前 |
-| K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B04有效BR-D：真实残差未胜过胜任RAW；无后继卡或运行，暂停 |
+| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3为13/18；准备原large_d2_seed1及剩余四格 |
+| K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | B04负面结果保留；DM选择后续同家族判别对象 |
 | K3 | 灵活 skill duration | 信息获取与续约 | 付费获取：`ucope` | 有界接口检查结束；未建立合规实现，数值诊断未启动 |
 | K4 | 灵活 skill duration | duration 表示与价值共享 | 跨时长共享、组合与负迁移：`semigroup_consistent_duration_model_policy`, `vsp_c1` | 前瞻议程；无新冻结对象，旧 D6 家族 PARK 保留 |
 
@@ -168,24 +168,24 @@ packet's evidence table at `decisions/2026-09-04-two-line-consolidation-candidat
 dispositions are superseded). Compare per-valid-result compute and accepted-attempt compute per
 valid result on named nodes/devices; refresh from each intake, never substitute hypothetical savings.
 
-## Headroom and measured cost at the final round boundary
+## Headroom and measured cost at the September 5 resume
 
-These are named observation windows, updated with the completed FSD cell, N3 B04 and N5 B02.
+These are named observation windows from the latest integrated result intakes. The resume itself has no new result compute. The all-accepted-attempt denominator is reported only where the complete window is available; unknown full-history totals are not inferred from successful runs.
 Unknown historical totals remain unmeasured. Node/device and valid-result denominator stay explicit;
 a competent fixed configuration or untuned oracle gap does not establish tuned headroom.
 
 | Source direction | Current-host headroom record | Valid result's own compute available here | Accepted-attempt compute / valid results available here |
 | --- | --- | --- | --- |
-| flexible_skill_duration | Tuned same-information generic pair absent; E2 fixed-clock sweep is not that pair | E3 medium_d0_seed3 2687.744683 s runner wall, wsl_4070 CPU; peak RSS resources_unmeasured, cell remains valid | full E3 and direction history not aggregated; local/remote windows remain separate |
-| finite_resource_relational_inductive_efficiency | Upper and tuned generic absent; uniform is not tuned baseline | B01 three-root panel 19,204.580804 s, local Windows/MSVC CPU; earlier R128 2,017.963704 s | Observed four-valid-result window 21,222.544508 / 4 = 5,305.636127 s, same local CPU; not a lifetime total |
-| variable_n_fleet_churn | K search and physical upper do not form tuned-generic pair | K1024 R02 18.210753208 s runner wall, wsl_4070 CPU; supervisor 21 s separately | unmeasured across full direction history |
+| flexible_skill_duration | Tuned same-information generic pair absent; E2 fixed-clock sweep is not that pair | Latest E3 large_d0_seed1:2837.5571884999954 s runner,2960 s supervisor, wsl_4070 CPU/four threads; RSS resources_unmeasured. Valid comparator cell, study13/18. | Full E3 accepted-attempt total not aggregated;13 valid cells and local/remote windows remain separate. No full-study cost denominator yet. |
+| finite_resource_relational_inductive_efficiency | Upper and tuned generic absent; uniform is not tuned baseline | Latest R05:898.651633 s runner,937 s supervisor,615534592 B RSS, wsl_4070 CPU/FP32. A01 reconstruction:902.249676 s runner separately, not a B result. | Full remote accepted-attempt total including prior failures unmeasured. Historical local four-valid-result window21222.544508/4=5305.636127 s remains a distinct Windows/MSVC CPU window. |
+| variable_n_fleet_churn | K search and physical upper do not form tuned-generic pair | R03 result-blind calibration:4.096142978 s wall, RSS122736640 B, wsl_4070 CPU; technical cost evidence only, no census result. K1024 R02:18.210753208 s runner. | Full accepted-attempt history unmeasured. R03 calibration1 invocation/1 technical observation; projected347623.1843 s is not consumed compute and no census denominator exists. |
 | roster_consistent_latent_exploration | Both terms absent on current TBCFV | no current-host result; historic other-host compute unmeasured here | unmeasured |
 | vap_folr_core | B04 generic fixed configuration is competent but untuned; LATCH 0.99869792 is a named reference, not a tuned pair | B04 full runner 40.371825 s, peak RSS 484229120 B, wsl_4070 CPU | full result cost per 1 B04 comparison; smoke/review and direction history not aggregated here |
-| degraded_incumbent_shadow_handover | Matched current learner pair absent | No B01 scientific result; C03 was technical verification only | undefined for B01 (zero valid results); full history unmeasured |
+| degraded_incumbent_shadow_handover | Matched current learner pair absent | Complete B01 three-seed panel:3041.225 s summed runner wall, max observed RSS640073728 B, wsl_4070 CPU; valid FTS-B0 diagnostic reading, not a source-effect estimate. | Completed three-seed invocation window3041.225 s /1 full B01 panel. Full accepted-attempt total including earlier technical failures unmeasured; do not equate it to this successful window. |
 | vsp_02 | Exact matched terminal greedy gap 0; no transient-efficiency conclusion | Historical learner cost unmeasured here | unmeasured |
 | metric_ground_transport_allocation | B03 common rate grid supplies exploratory same-panel N=4/8 selected-FREE diagnostic; both optima at grid boundary; tuned pair at N=6/12 absent | B03 36.314234316 s runner wall, max RSS 483786752 B, wsl_4070 CPU/float64; B02 main 8.172778808 s | B03 accepted panel 36.314234316 s / 1 valid comparison; B02 pilot+main window 8.939538596 s / 1 comparison; technical checks and full historical total not aggregated |
 | semigroup_consistent_duration_model_policy | A01 duration contrast is not upper-minus-tuned-generic headroom | A01/A02 costs unmeasured in this digest | unmeasured |
-| commitment_residual_triggered_options | Competent tuned RAW and compatible upper pair not established | B02 86.526832178 s runner wall, 90 s supervisor, peak RSS 1286844416 B, wsl_4070 CPU | One accepted B02 run / one valid result, same reported runner wall; prior direction-wide accepted-attempt total unmeasured |
+| commitment_residual_triggered_options | Competent tuned RAW and compatible upper pair not established | Latest B04:182 s supervisor, RSS1541214208 B, wsl_4070 CPU; B03:115 s supervisor; B02:86.526832178 s runner/90 s supervisor. Metrics kept separate. | Full accepted-attempt total including A01 failures/diagnostics unmeasured. B04 one accepted invocation/one valid result:182 s supervisor; no lifetime efficiency claim. |
 | vsp_03 | Host/reference and tuned baseline missing | A1 read-only census only; no learner result | undefined for proposed learner |
 | ucope | No competent tuned generic current-host pair | Paid-acquisition B01 61.827 s wall / 61.516 s CPU, local Windows CPU, one thread | unmeasured across conditioning/hinge/audit history |
 | vsp_c1 | Executable common host and both terms missing | No learner result; reachability/census only | undefined for proposed learner |
