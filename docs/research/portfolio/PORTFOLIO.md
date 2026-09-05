@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05T00:44:36Z
+Updated at: 2026-09-05T00:59:33Z
 Owner: Root
 Lifecycle admission: 14 ACTIVE source IDs organized into nine route agendas; 8 PARKED reserves. Source IDs within a route do not create independent DM chains.
 Direction execution parallelism: target 5 concurrently advancing top-level DM chains (`OWNER_DIRECT`, 2026-09-04); off-roster `ACTIVE` directions are queued without lifecycle effect
@@ -14,7 +14,7 @@ Audit ledger (delegated decisions): `docs/research/portfolio/audit/<YYYY-MM-DD>.
 Controlling decision:
 `docs/research/portfolio/decisions/2026-09-01-empirical-standard-full-direction-reaudit.md`;
 direction registration 2026-09-02: `docs/research/portfolio/decisions/2026-09-02-register-flexible-skill-duration.md`
-Transport execution: `docs/research/portfolio/decisions/2026-09-04-singleton-transport.md`
+Transport execution: `docs/research/portfolio/decisions/2026-09-04-new-transport-fresh-6pro-conversations.md` (supersedes old executor/old provider-ID reuse; prior singleton record is historical)
 Compute execution: `docs/research/portfolio/decisions/2026-09-04-remote-first-compute-routing.md`
 Direction working set: `docs/research/portfolio/decisions/2026-09-04-five-direction-execution-parallelism.md`
 Current organization and resume: `docs/research/portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md`
@@ -86,6 +86,10 @@ The eight reserves are `acvc`, `eociv_lite`, `recct_lite`, `ec4g_r1`, `scope_1s`
 historical evidence can be reused without restarting their independent chains.
 
 ### Current direction working set — resumed with dedicated tracker
+
+Owner Transport cutover 2026-09-05T00:59:33Z: new sole task `01a06f0e-5eab-7431-8491-e7c2c62705b6`; old task archived. All pre-cutover provider conversation IDs are retired for future use. N5 request01 is BLOCKED/providerSend0 with no scientific decision; distinct request02 retains the exact science/pin and requires a fresh verified6Pro context. [Cutover and inventory](decisions/2026-09-04-new-transport-fresh-6pro-conversations.md) are authoritative over older binding-reuse prose. Root heartbeat now carries this policy.
+
+Current execution roster: FSD, FRRIE, N3, CRTO, and new CBSC `/root/dm_amx_cbsc_continue`. UCOPE `/root/dm_amx_ucope_continue` completed a bounded helper assessment without a concrete scope-compliant implementation and is returning clean with no run; N5 awaits fresh-context Convergence. These are execution-slot changes only. Four accepted scientific/diagnostic handles were reported running by the tracker: FSD large_d0_seed1, FRRIE R05, DISH seed29 and CRTO paired-order B03; source/intake integration follows their exact records. DISH seed11 is accepted valid no-trigger, not source equivalence or nonharm; its three-seed aggregate remains unapplied.
 
 Progress check 2026-09-05T00:44:36Z: remote supervisor snapshot at 00:36:59Z had zero live tasks. FSD current cell, FRRIE A01 and DISH seed11 were terminal; tracker directly woke their DMs/CMs for collection. N5 B03 and CRTO B02 are valid completed intakes. N5 request `2026-09-04-mgtap-b03-convergence-01` was dispatched once to the existing singleton; app execution acceptance is not provider Send or Pro decision. CRTO resumed next bounded discriminator design. Historical running-state paragraphs below are timestamped provenance and are superseded by this check. Existing 30-minute heartbeat remains ACTIVE; owner reviews returned [].
 
