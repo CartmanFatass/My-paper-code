@@ -1,7 +1,11 @@
 # CBSC approved complete repair: CM evidence
 
-Date: 2026-09-05. Engineering implementation and verification in progress;
-no source or runtime acceptance is claimed by this prospective section.
+Date: 2026-09-05. **Complete static candidate exists; full technical acceptance
+is not established.** Smoke and19focused checks passed. Real-constant offline
+publication terminated with SIGSEGV/139 before any table/summary was produced.
+The cause is unclassified and unreproduced; the protected host/JSON call stack
+does not identify a root cause. This bounded slice returns that concrete full
+publication gap, with original scientific requirements and evidence retained.
 
 ## Contract and ownership
 
@@ -206,3 +210,63 @@ repeated. Charging10.64process seconds leaves232.91s; the new timeout231s plus
 APPROVED_REPAIR_FORMAL02_COMMAND_20260905.json before acceptance.
 Tracker independently confirmed all three original terminal handles and the DM
 ACKed them. No process is live at this continuation freeze.
+
+## Terminal formal02 observation and bounded return
+
+Root integrated continuation5d8344bf2 as90661cbd1 and confirmed execution.
+Formal02 was accepted exactly once at19:28:20Z; Tracker adopted it before CM
+released routine observation. The same task ended19:29:11Z, exit139, PID1692419,
+tmux inactive. Fresh physical/effective available memory was15426654208bytes,
+above4GiB; external time reports signal11,50.83process seconds and1687772KiB
+maximumRSS. This is observed admission/RSS, not proof of the crash cause or
+complete resource coverage. No timeout branch was observed.
+
+Fatal Python stack, most-recent first: json.encoder.iterencode/encode/dumps,
+addressing.canonical_json/audit_digest, host._finish/build_stochastic,
+b1_shared_tables._validated_tapes/build_b1_shared_truth_tables,
+b1_metrics_rehydrate.rehydrate_b1_metrics, and production's full
+_assemble_and_publish_b1_metrics at line1677. It reached the original full
+rehydration/shared-truth path. No cause is classified from this stack alone:
+there is no reproduced inference of interpreter, resource, host or patch defect.
+No scientific performance contrast was used to select source changes.
+
+The independent reviewer rechecked0ffca930b->8003b96bd: only the six declared
+source files differ, A174/D429; addressing.py,host.py,b1_shared_tables.py and
+b1_metrics_rehydrate.py in the stack remain unchanged. It confirms that full
+technical acceptance remains unestablished and the concrete gap is consistent
+with this assignment's stopping boundary. No protected-path repair, interpreter
+change, new learner, blind repeat or automatic scope/budget growth was made.
+
+CM's terminal read-only inventory records actualexecution8003b96bd, zero tracked
+changes,428files in the preserved profile02 tree, **zero offline-publication
+directory, zero summary.json and zero jsonl tables**. Accordingly, all fifteen
+formal scientific table rowcounts, final RAW inputs/null interpretations and
+summary readback remain **unverified**, not zero scientific quantities. Smoke
+coverage of their smaller counterparts and original19focused passes stand;
+they do not substitute for this missing complete real-constant observation.
+
+| Accepted task | Terminal | Pytest seconds | External process seconds | Peak RSS KiB |
+| --- | --- | ---: | ---: | ---: |
+| cbsc-approved-smoke-8003b96bd-01 | exit2 beforepreflight/test | notrun | unmeasured | unmeasured |
+| cbsc-approved-smoke-8003b96bd-02 | exit0,1passed | 13.46 | 13.84 | 540876 |
+| cbsc-approved-profile-8003b96bd-01 | exit1,19passed,formal inputpath failure | 9.92 | 10.64 | 1234360 |
+| cbsc-approved-profile-8003b96bd-02 | signal11/exit139,formal incomplete | nofinalpytestsummary | 50.83 | 1687772 |
+
+Current focused/offline charged61.47process seconds; adding the prior56.45s
+conservatively gives117.92s of300s, leaving182.08s. The separate original smoke
+took13.84s of60s. These costs exclude Git/environment preparation, input copying,
+agent work, read-only collection and the pre-admission failed wrapper. There is
+no valid completed formal result denominator and no claimed acceleration ratio.
+No learner/optimizer step was run by this assignment. The smoke fixture setup
+constructs four synthetic models and16optimizer/checkpoint envelopes, and the
+smoke exercises additional model-forward
+fixture paths; synthetic checkpoint counters do not represent performed training.
+Formal work reconstructs original host/tape records without a new B learner.
+
+Raw retained logs, generated supervisor wrappers, receipts, times and terminal
+inventory are under `approved_repair_20260905/`. The remote failed root stays
+untouched at the frozen profile02 path. All four accepted handles are terminal;
+Tracker's observation and DM's acknowledgement are separate from technical
+acceptance. **Return: full implementation candidate and actual partial coverage,
+with complete publication/readback still missing.** Scientific object, original
+r05 quarantine, comparison, labels, direction lifecycle and priority are unchanged.

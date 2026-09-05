@@ -1,0 +1,2 @@
+Command exited with non-zero status 1
+process_wall_seconds=10.64 peak_rss_kib=1234360

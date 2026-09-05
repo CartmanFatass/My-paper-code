@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo $$ > "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/pid"
+START_TS=$(date +%s)
+echo "=== Task 'cbsc-approved-profile-8003b96bd-01' started at $(date -Iseconds) ===" >> "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/task.log"
+
+# Execute command capturing output
+set +e
+eval 'bash -lc '\''cd /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile-admission.json && CBSC_R05_FIXTURE=/home/wu/hmasd-inputs/cbsc-r07-resource-repair-20260904/snap_r05 CBSC_B0_FIXTURE=/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01/temp/directions/capability_bound_semantic_currentness/exp/cbsc_omrc_b0_instrument_888bd9f50_r02 /usr/bin/time -f '\''"'\''"'\''process_wall_seconds=%e peak_rss_kib=%M'\''"'\''"'\'' -o /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile-time.txt timeout -k 1s 242.55s /home/wu/.venvs/hmasd/bin/python -m pytest -q -s -p no:cacheprovider --maxfail=1 --basetemp /home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905/temp/directions/capability_bound_semantic_currentness/test/approved-repair/profile tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_metrics_training_assembly.py::test_partial_resource_samples_survive_projection_without_full_certificate tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_metrics_training_assembly.py::test_slice_telemetry_join_rejects_missing_duplicate_reorder_and_work_mismatch tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_metrics_training_assembly.py::test_formal_shape_and_missing_direct_instrumentation_fail_closed tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_metrics_production.py::test_replay_resource_projection_keeps_partial_status_and_original_receipt tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_cli_orchestration.py::test_source_metadata_records_declared_commit_without_head_refusal tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_cli_orchestration.py::test_parent_supervision_independent_wall_stop_kills_test_only_sleeper tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_cli_orchestration.py::test_policy_replay_supervisor_independent_wall_stop_kills_child tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_cli_orchestration.py::test_parent_supervision_poll_failure_keeps_complete_child_result tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_cli_orchestration.py::test_stage_work_sum_refuses_missing_or_nonpositive_engine_measurements tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_section11_recast.py::test_learner_side_instrumentation_failure_still_quarantines tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_section11_recast.py::test_absent_worker_result_still_refuses_at_the_slot_boundary tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_section11_recast.py::test_slot_evidence_records_unmeasured_resources_without_refusing tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_mechanical.py::test_raw_competence_missing_duplicate_or_nonfinite_is_null tests/experiments/candidates/capability_bound_semantic_currentness_omrc_b01/test_b1_formal_path_repairs.py::test_r05_complete_formal_publication_preserves_original_receipts'\''' >> "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/task.log" 2>&1
+EXIT_CODE=$?
+set -e
+
+END_TS=$(date +%s)
+echo $EXIT_CODE > "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/exit_code"
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "finished" > "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/status"
+else
+    echo "failed" > "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/status"
+fi
+echo "=== Task 'cbsc-approved-profile-8003b96bd-01' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===" >> "/home/wu/.agent-tasks/cbsc-approved-profile-8003b96bd-01/task.log"
+
+# Keep session alive briefly for inspection, then exit
+sleep 1
