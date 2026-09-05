@@ -1,0 +1,44 @@
+{
+  "question": "异步复核 VNFC 新 N7 真实学习比较的范围；本轮已按完整 Pro 决定选定，不等待重复批准。",
+  "changes_if_approved": [
+    {
+      "target": "VNFC 当前下一对象",
+      "from": "R03 精确 census 投入已结束，E01 工程观察保留",
+      "to": "N7 同分布 MAPR 与 DIRECT 各一新训练实例，固定 BCRH 参照，总完整调用 wall 上限2700秒"
+    }
+  ],
+  "if_refused": "按异步批注修订下一次尚未执行的工作；保留本次 Pro 原文、已发生的工程事实和所有历史负面，不重跑 E01。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_validation_method_convergence/archive/RESPONSE.md",
+      "quote": "唯一下一对象是一轮新的、损失后N=7同分布训练与评价的直接B性能比较：MAPR-4对同信息的DIRECT-SET-AR，并以不变BCRH-PERSIST作为原生回报参照。",
+      "why": "方向节点明确选定真实训练和原生回报，消除了精确最大值作为学习前置的错误依赖。"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "quote": "A performance exploration does not need to establish the exact maximum of a policy class, complete headroom, or a unique causal explanation before real training and sampled return comparison.",
+      "why": "当前规范要求按实际性能问题选择必要观察，不能把有界搜索重新包装成前置。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_validation_method_convergence/archive/RESPONSE.md",
+      "quote": "本轮最强反对意见正是：历史MAPR已经不理想，机会可能小而局部；新训练仍可能输给BCRH。",
+      "why": "新卡仅支持有限探索，不承诺算法优势，也不改写旧比较中的负面。"
+    }
+  ],
+  "uncertainty": [
+    "N7 专用薄 runner 和实际优化曝光需由 CM 落实，Pro 返回不等于代码可执行。",
+    "两臂完整训练、评价和发布的真实耗时尚未在新设定测量；旧 E01 秒数不能代替训练成本。",
+    "DIRECT 的训练后能力与重复 seed 的稳定性未知；一个训练实例不能估计训练 seed 总体不确定性。",
+    "原始 Transport facts 有上传子记录和发送时间不一致，已保留原文并请求事实校正，不重发已答问题。"
+  ],
+  "cost": {
+    "compute": "计划每臂64轮×32完整episode，初中终各64评价episode，BCRH共64；整个对象累计完整wall≤2700秒。当前没有新实验运行。",
+    "owner_time": "无需实时答复；可异步批注卡的比较范围和解释。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "最终只推进这一新B及其必要的有界准备。原R03保持未完成，E01保持已完成的工程成本观察，旧MAPR反证、特权witness和revision-09无效结论全部保留。既有委托足以落实这项正确方向节点的决定，不要求重复所有者批准；Portfolio生命周期、优先级及既有排序不变。",
+  "source": "docs/research/candidates/variable_n_fleet_churn/pro_packets/20260905_validation_method_convergence/archive/RESPONSE.md"
+}
