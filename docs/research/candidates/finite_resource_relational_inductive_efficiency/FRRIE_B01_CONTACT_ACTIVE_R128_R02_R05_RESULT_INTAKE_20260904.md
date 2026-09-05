@@ -3,9 +3,9 @@
 Status: `VALID_B_EXPLORE / R02_SMALL_OR_ROSTER_MIXED`.
 
 Current execution overlay: the owner's 2026-09-05 instruction **“继续自动推进任务”** supersedes
-the earlier pause and resumes bounded R06 engineering before any conforming scientific launch.
+the earlier pause. The conforming R06 revision was accepted for one run on 2026-09-05T09:19:47Z.
 This R05 result and its interpretation remain unchanged. See
-`FRRIE_R06_OWNER_DIRECT_RESUME_INTAKE_20260905.md`; the previous pause handoff remains historical.
+`FRRIE_R06_ACCEPTED_RUN_INTAKE_20260905.md`; the previous pause handoff remains historical.
 
 ## What DM checked
 
