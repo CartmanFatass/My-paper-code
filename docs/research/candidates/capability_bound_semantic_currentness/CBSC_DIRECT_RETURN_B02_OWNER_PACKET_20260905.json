@@ -1,0 +1,48 @@
+{
+  "question": "Pro 已选择的新 CBSC 直接回报探索是否需要您异步纠正？当前按委托继续实施，不等待逐项批准。",
+  "changes_if_approved": [
+    {
+      "target": "CBSC 当前下一科学对象",
+      "from": "旧完整发布修复结束，尚无在线主性能结论",
+      "to": "同机制新 B：新 seed21203，STRUCT 对完整同信息RAW，以32个配对episode的终点原生回报为主测量；不增加recast。"
+    },
+    {
+      "target": "新对象的必要验证与成本",
+      "from": "旧三seed四臂、motif、十五表及全历史重建是旧对象义务",
+      "to": "保留真实host/PPO/配对/原生奖励和直接主输出；唯一新主路径检查使用现有175.51秒余额，每臂正式整次最多600秒，共两臂。"
+    }
+  ],
+  "if_refused": "若您给出不同指令，循环在下个干净边界更正未执行部分；保留已取得证据、Pro原文和历史失败，不伪写旧B1通过，也不自动重跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_post_repair_convergence/archive/RESPONSE.md",
+      "quote": "**选择继续：开展一个独立的新直接回报 B，以新训练 seed 21203 做 STRUCT 对同信息 RAW 的一次配对比较。现在不优先补齐旧十五表发布，也不暂停这项最小比较；这属于既有机制下缩小主张的延续，不是机制 recast。**",
+      "why": "完整方向Pro选择较小的真实学习比较，并明确属于既有机制延续。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_post_repair_convergence/archive/RESPONSE.md",
+      "quote": "直接路径仍要经过这些组件，所以不能说“绕过发布器便绕过了故障”。",
+      "why": "旧失败触及共享host/token/addressing，仍需检查新主路径；源码提案不等于运行正确。"
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "quote": "RAW containment is equality, not a positive CBSC-over-RAW residual.",
+      "why": "RAW具有相同信息，旧精确结果没有建立结构化策略普遍优势。"
+    }
+  ],
+  "uncertainty": [
+    "共享host两种历史异常根因仍未确定。",
+    "新直接路径的实际整次时间和seed21203性能未知。",
+    "单个配对训练seed不能估计跨训练seed的稳定优越；弱RAW会限制比较结论。"
+  ],
+  "cost": {
+    "compute": "每臂600秒整次wall、至多两臂；155648次计划训练与评估transition。唯一工程检查至多175秒，扣既有共享测试余额；真实耗时与节省量未知。",
+    "owner_time": "按需异步查看，无新审批关卡。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；卡片与工程准备按已形成Pro决定继续。"
+  },
+  "verdict_text": "**选择继续：开展一个独立的新直接回报 B，以新训练 seed 21203 做 STRUCT 对同信息 RAW 的一次配对比较。现在不优先补齐旧十五表发布，也不暂停这项最小比较；这属于既有机制下缩小主张的延续，不是机制 recast。**",
+  "source": "docs/research/candidates/capability_bound_semantic_currentness/pro_packets/20260905_post_repair_convergence/archive/RESPONSE.md"
+}

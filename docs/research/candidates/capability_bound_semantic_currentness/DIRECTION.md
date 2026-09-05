@@ -1,5 +1,25 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
+## Current selected learning object — 2026-09-05
+
+Complete Convergence selects **CBSC-DIRECT-RETURN-B02**, a same-mechanism
+B/EXPLORE continuation, not a mechanism recast. Seed21203 trains STRUCT and
+same-information RAW with the existing recurrent PPO; the primary observable
+is their mean paired native return difference over32fixed stochastic episodes
+at update48. Four checkpoint curves remain visible. The one-seed ceiling
+does not establish stable superiority or semantic specificity.
+
+The next discriminator is that real direct-return comparison, with primary
+measurement generated during evaluation. It does not inherit the old
+fifteen-table/historical-reconstruction path. Shared host/token/addressing
+correctness still requires the selected focused primary-path check.
+No new performance result is present. Exact RAW equality and mixed LR01
+remain the strongest contrary evidence; no old B1/r05 result is rehabilitated.
+See CBSC_DIRECT_RETURN_B02_PRO_INTAKE_20260905.md and
+CBSC_DIRECT_RETURN_B02_SCIENCE_CARD_20260905.md. Earlier B1 execution and
+publication requirements below are historical definitions of that separate
+object, not the default requirements of this newly selected B.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N4 — 旧信息有效性**, in the **成员变化后的恢复** family
