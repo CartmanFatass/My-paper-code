@@ -1,0 +1,155 @@
+{
+  "kind": "tool-computed planned counts and retained historical exposure; no new experiment",
+  "config": {
+    "object": "DISH-FORECAST-PACKAGE-B02",
+    "seed": 61,
+    "master_ascii": "DISH-FORECAST-PACKAGE-B02/seed/61",
+    "master_sha256_hex": "ef9ec35ce27cf52e4c1d82292b22cfbe4926183ec1f29b19657280f6234814b1",
+    "arms": [
+      "CONTROL",
+      "FORECAST_PACKAGE"
+    ],
+    "algorithm_arm": "STRUCTURED",
+    "train_lanes": 32,
+    "ticks_per_lane_update": 128,
+    "updates_per_arm": 16,
+    "epochs": 4,
+    "minibatches_per_epoch": 8,
+    "degradation_packages": [
+      "TARGET_VISUAL_MASK",
+      "TERRAIN_RELAY_MASK"
+    ],
+    "schedules": [
+      "K8",
+      "K4_TO_K12"
+    ],
+    "evaluation_speeds": [
+      4
+    ],
+    "evaluation_slots": [
+      0
+    ],
+    "evaluation_block": 0,
+    "episode_horizon_ticks": 1200,
+    "wall_allowance_per_arm_seconds": 1800,
+    "mean_service_tick_mei": 24,
+    "native_step_seconds": 0.1
+  },
+  "units": "transitions and native calls are not independent training samples; wall seconds are invocation allowances or named observations",
+  "per_arm_planned_counts": {
+    "updates": 16,
+    "ordinary_training_transitions": 65536,
+    "optimizer_steps": 512,
+    "final_checkpoint_evaluation_episodes": 4,
+    "ordinary_evaluation_ticks_upper": 4800,
+    "native_training_step_calls_upper": 1572864,
+    "native_train_plus_eval_step_calls_upper": 1577664,
+    "training_arm_runs": 1
+  },
+  "complete_pair_planned_counts": {
+    "updates": 32,
+    "ordinary_training_transitions": 131072,
+    "optimizer_steps": 1024,
+    "final_checkpoint_evaluation_episodes": 8,
+    "ordinary_evaluation_ticks_upper": 9600,
+    "native_training_step_calls_upper": 3145728,
+    "native_train_plus_eval_step_calls_upper": 3155328,
+    "training_arm_runs": 2
+  },
+  "independent_training_seed_pairs": 1,
+  "native_training_work_law": "2*N + 2*E + H; 0 <= E <= N; 0 <= H <= 20*E; upper 24*N",
+  "mean_service_fraction_mei": 0.02,
+  "mean_service_seconds_mei": 2.4000000000000004,
+  "complete_pair_wall_allowance_seconds": 3600,
+  "matching_new_wall_projection_seconds": null,
+  "matching_new_cpu_projection_seconds": null,
+  "B01_retained_seed_records": [
+    {
+      "seed": 11,
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json",
+      "training_transitions": 262144,
+      "learner_updates": 64,
+      "optimizer_steps": 2048,
+      "evaluation_prefix_ticks": 19200,
+      "branch_consequence_ticks": 0,
+      "trigger_count": 0,
+      "wall_seconds": 1068.1102725170058,
+      "relative_l2_displacement": 0.42465718774783356
+    },
+    {
+      "seed": 29,
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_SEED29_SUMMARY_20260904.json",
+      "training_transitions": 262144,
+      "learner_updates": 64,
+      "optimizer_steps": 2048,
+      "evaluation_prefix_ticks": 19200,
+      "branch_consequence_ticks": 0,
+      "trigger_count": 0,
+      "wall_seconds": 977.5005878610027,
+      "relative_l2_displacement": 0.419585027483137
+    },
+    {
+      "seed": 47,
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_SEED47_SUMMARY_20260904.json",
+      "training_transitions": 262144,
+      "learner_updates": 64,
+      "optimizer_steps": 2048,
+      "evaluation_prefix_ticks": 19200,
+      "branch_consequence_ticks": 0,
+      "trigger_count": 0,
+      "wall_seconds": 995.6141687410054,
+      "relative_l2_displacement": 0.4196544358013136
+    }
+  ],
+  "B01_totals": {
+    "training_transitions": 786432,
+    "learner_updates": 192,
+    "optimizer_steps": 6144,
+    "evaluation_prefix_ticks": 57600,
+    "branch_consequence_ticks": 0,
+    "trigger_count": 0,
+    "wall_seconds": 3041.225029119014
+  },
+  "A05_retained_exposure": {
+    "backward_passes": 2,
+    "checkpoint_reads": 0,
+    "extra_service_q_calls": 1,
+    "full_heads_control_calls": 1,
+    "learner_updates": 0,
+    "model_policy_initializations": 1,
+    "native_compile_load_calls": 1,
+    "native_completions": 0,
+    "native_episodes": 0,
+    "native_helper_calls": 9,
+    "native_helper_cases": 3,
+    "native_prepares": 0,
+    "native_resets": 0,
+    "native_state_initializations": 0,
+    "nested_cholesky_calls": 2,
+    "nested_heads_calls": 2,
+    "nested_service_q_calls": 4,
+    "optimizer_initializations": 0,
+    "optimizer_steps": 0,
+    "policy_recurrent_forwards": 1,
+    "policy_rows": 2,
+    "trace_reads": 0,
+    "training_heads_calls": 1,
+    "training_master_initializations": 0,
+    "training_transitions": 0
+  },
+  "A05_retained_parameter_change": {
+    "final_norm": 24.0576157790677,
+    "initial_norm": 24.0576157790677,
+    "l2_displacement": 0.0,
+    "relative_displacement": 0.0
+  },
+  "new_analysis_exposure": {
+    "models": 0,
+    "native_states": 0,
+    "transitions": 0,
+    "backwards": 0,
+    "optimizer_steps": 0,
+    "experiments": 0
+  },
+  "pairing_note": "Two separately trained arm runs share one paired seed/root and matched initial parameters; the independent training replicate count is one pair, not two independent seeds."
+}
