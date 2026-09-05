@@ -451,3 +451,24 @@ root, with N15 primary and N9 fully reported. This outcome-informed B successor 
 R06's original reading and the old B01 three-root stop. See
 `FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_RESULT_20260905.md`,
 `FRRIE_R06_RESULT_INTAKE_20260905.md` and `FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md`.
+
+## Second literal path at higher exposure — 2026-09-05
+
+The complete R07 B/EXPLORE result is `R07_N15_WITHIN_MEI`: final tight-minus-wide return
+is -0.001948094523 at primary N15 and +0.000910016910 at N9, both within the prospective
+0.005 margin. EDGE exceeds uniform by +0.026623984248 / +0.014817785945 respectively.
+Thus R06's material N15 gap did not reappear on this second prespecified literal path.
+
+The treatment is active: three initial clips, 127 later contact updates and 995 coordinate
+events, with preserved optimizer moments and Linf motion about 4.50/4.57 initial half-ranges.
+At N15, tight/wide deliver 95/98; delivery, balance and waste contributions all favor wide
+slightly. More contact is not itself native value. R06 remains conditional positive support,
+while R07 contradicts assuming material reappearance across the two chosen paths. Neither
+supplies a material N9 benefit. No equivalence or sampled-root population conclusion follows.
+
+Root-specific initialization/tapes/co-adaptation, generic projected-Adam geometry, common K0
+alignment and roster dependence survive. The next discriminator targets chart dependence of
+the known positive root-1 signal by rotating common role-prior columns at final evaluation,
+with unchanged training. This is an outcome-informed conditional B diagnostic, not a robustness
+test or semantic-mechanism claim. See `FRRIE_R07_RESULT_20260905.md`,
+`FRRIE_R07_RESULT_INTAKE_20260905.md` and `FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md`.

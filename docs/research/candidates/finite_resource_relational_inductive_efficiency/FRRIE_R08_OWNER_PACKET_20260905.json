@@ -1,0 +1,40 @@
+{
+  "question": "是否针对唯一已知的大规模正信号，做公共角色先验列旋转的条件诊断？",
+  "changes_if_approved": [
+    {
+      "target": "FRRIE 下一 B 类对象",
+      "from": "第二固定轨迹没有重现第一条轨迹的大规模实质收益；共同先验与优化几何仍未区分",
+      "to": "明确选取已知正信号的根1，保持学习率与128次训练，追加最终两规模的先验列旋转评估"
+    }
+  ],
+  "if_refused": "在安全边界应用修改或停止未接受的后续调用；R06/R07原规则、结果与旧面板停止边界保留。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_RESULT_INTAKE_20260905.md",
+      "quote": "The next direct uncertainty is what the one known signal depends on.",
+      "why": "这是对已知条件信号的机制敏感性检查；继续换根不能直接回答它是否依赖公共图表对齐。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R07_RESULT_INTAKE_20260905.md",
+      "quote": "Root 1 is explicitly selected because it supplied that signal. This diagnostic was chosen after observing the result and cannot establish root robustness or a population effect.",
+      "why": "选择已知正信号的轨迹具有结果依赖，必须限制为条件诊断；旋转共同先验也不能证明语义正确或学习到的关系特异性。"
+    }
+  ],
+  "uncertainty": [
+    "新的完整训练是否仍呈现实质正锚点，由预定分支如实处理，不把端点不同自动称为故障。",
+    "旋转后的宽约束臂可能低于随机参考，届时条件解释不成立但保留完整有效数据。",
+    "旧运行没有可加载模型，需要新完整训练，不能叫离线重放。",
+    "新增评价的独立秒率未知；编排占比须审核实际补丁。",
+    "第三个固定根能直接扩展重现性信息，与条件图表诊断的价值没有明显分离；DM 已标记 close-call，按委托执行并接受异步覆盖。"
+  ],
+  "cost": {
+    "compute": "新增4个评价单元；每臂661,504原生时隙，总1,329,152。基准运行约15分钟，但新增评价独立耗时未知；保守全调用排程留75.25分钟，资源上限仍每臂4小时、整次8小时。臂限在单个操作后检查，整次保留外部退出上限；每次新鲜实际节点准入。",
+    "owner_time": "约一分钟；循环不等待回复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "推荐对已知正信号的根1做条件先验列旋转诊断，完整保留两规模；明确承担新训练成本，不把结果提升为跨根稳健性或关系语义证明。",
+  "source": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md"
+}

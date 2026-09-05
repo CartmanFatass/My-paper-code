@@ -3,13 +3,16 @@ Binding structure: `systems / information flow` — role-to-role weights aggrega
 
 # FRRIE R07 second-root science card — 2026-09-05
 
-Status: `FROZEN / B_EXPLORE / ACCEPTED_RUNNING / RESULT_PENDING`.
+Status: `COMPLETE / VALID_B_EXPLORE / R07_N15_WITHIN_MEI / N9_WITHIN_MEI`.
 Object ID: `FRRIE-B01-CONTACT-R128-LR003-R07-SECOND-ROOT-20260905`.
 
 Accepted source `10ae9781f74ae26931fa8231918844f4921b80f2`, sole task
 `frrie_b01_contact_r07_10ae9781`, `wsl_4070`, 2026-09-05T10:30:13Z; tracker adopted.
 See `FRRIE_R07_ACCEPTED_RUN_INTAKE_20260905.md` for exact admission, paths, bound and
 technical acceptance. The prospective scientific contract and predictions below are unchanged.
+
+The exact handle ended naturally at 2026-09-05T10:45:16Z. Final reading and prediction score
+are in `FRRIE_R07_RESULT_INTAKE_20260905.md`; no FRRIE handle remains live at this boundary.
 
 ## Class, question, adaptation and ceiling
 
