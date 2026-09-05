@@ -2,6 +2,10 @@
 
 Status: `VALID_B_EXPLORE / R02_SMALL_OR_ROSTER_MIXED`.
 
+Current execution overlay: the later owner instruction **“这轮完毕后暂停即可”** pauses R06
+before scientific launch. Its selected scientific design below is preserved, while conditional
+launch authorization is withdrawn. See `FRRIE_OWNER_DIRECT_PAUSE_HANDOFF_20260904.md`.
+
 ## What DM checked
 
 DM read the original R02 card, prospective R05 addendum, E0 Markdown, unchanged publisher JSON
