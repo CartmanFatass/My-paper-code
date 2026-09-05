@@ -93,8 +93,12 @@ packet -> KEEP or legal replacement -> finite learner exposure -> signed G16 ove
 
 B07 intake/brief/owner 013–015 are clean and pushed at
 fffd9ca060463f3a2a9ae99dcb8776f58911f768. CM source 5a4b5c20 and E0 992fd69ae are pushed.
-All experiments are terminal; no successor or retry exists. Root supplies the single integrated,
-pushed full SHA containing the reference set before rendering; a moving branch is not a pin.
+All experiments are terminal; no successor or retry exists. To complete authoring independently
+of Root's next integration turn, the already accepted three-file E0 commit was cherry-picked
+unchanged into this DM branch. The nine scientific references are all present at pushed pin
+4d1572b9282af887e238ad1c7e3d0af45d72d027; the E0 and both JSON blobs have zero diff from
+992fd69ae. Root's main and saved checkout were not edited. Root can integrate the original CM
+commit and ignore this duplicate reference-join commit. This pin is not a new launch source.
 
 Actual DM environment source_thread_id is 01a06ecb-6b70-7dc3-95c4-c62d56a92fdb.
 Parent/sole receipt UUID supplied by Root is 01a06ec7-fd64-7281-9bc1-fc42ed53a2ca.
@@ -103,7 +107,18 @@ uses gpt-5.6-luna/xhigh and current 6 Pro provider requirements. The shared regi
 previous request is crto-em-convergence-20260831-03, ARCHIVED. Owner-directed fresh context
 metadata preserves that history; no retired provider ID is supplied for navigation or binding.
 Only the renderer's emitted handoff will be dispatched, once. At this record's creation,
-rendering/dispatch have not occurred; accepted tool facts will be appended here.
+rendering/dispatch had not occurred; the following facts record subsequent authoring.
+
+The official render_packet.py accepted CRTO_BALANCED_FAMILY_CONVERGENCE_INPUT_20260905.json
+with current integration-root Transport configuration. It emitted exactly PROMPT_BODY.md and
+HANDOFF.json under C:/Projects/HMASD/temp/sessions/hmasd-pro-research-prompt-author/
+2026-09-05-crto-balanced-family-convergence-01/. State is READY_TO_DISPATCH, sole receipt is Root,
+requested provider ID is null and the actual previous request appears only in reset metadata.
+The complete generated body and handoff were read; routing UUIDs/reset metadata are absent from
+the provider body. Body SHA256 is c98335cfe400018080e96b44551a14ee62c2ac1955ee87db7d3ce6f2706ccecb;
+handoff SHA256 is 0b0e5864e67b01db6b617d11eca60f482e515be599614bbebe1472327054fa56.
+Dispatch has not yet occurred at this record boundary; acceptance will be recorded only after
+the one task-message tool result. Generated packet bytes remain unchanged after dispatch.
 
 Owner reviews at the clean boundary returned no unapplied instructions; no CRTO audit override.
 Root owns the shared audit and current Portfolio. A connector/evidence/transport blocker leaves
