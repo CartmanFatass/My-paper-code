@@ -1,7 +1,7 @@
 # MARL runtime engineering specification — draft
 
 Status: DRAFT_NOT_OPERATIVE. Root-authored under the owner's 2026-09-05 instruction;
-the six-library source evidence is being assembled. A complete proper-node Pro decision
+the six-library source evidence is complete and archived. A complete proper-node Pro decision
 must settle the proposed provisions and the VNFC appendix before activation. This draft
 does not itself approve source, change a frozen object, or authorize a measurement.
 
@@ -114,8 +114,8 @@ contract, state that explicitly and obtain the proper scientific decision before
 ## Reference evidence and the engineering handoff
 
 The source packet provides pinned studies of EPyMARL, MAPPO, BenchMARL, MARLlib, JaxMARL
-and Mava, including local navigation overlays under `C:/Projects/ref-lib`. Root will map
-each adopted recommendation to the returned core implementation evidence before Pro review.
+and Mava, including local navigation overlays under `C:/Projects/ref-lib`. Root maps
+the proposed recommendations to returned core evidence in `REFERENCE_EVIDENCE.md`.
 Their architectures are implementation examples, not measured performance promises for
 HMASD. External dependencies not inspected remain declared gaps. Use the referenced commit
 and local AGENTS index to reopen the actual code; preserve upstream licenses and instructions

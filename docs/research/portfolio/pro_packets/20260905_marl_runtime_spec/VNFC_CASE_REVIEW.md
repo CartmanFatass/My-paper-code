@@ -3,7 +3,7 @@
 Status: DRAFT_NOT_OPERATIVE. This is an engineering investment proposal for Portfolio Pro,
 not permission to run. The accepted direction decision and exact response are in
 `docs/research/candidates/variable_n_fleet_churn/VNFC_R03_COST_CONVERGENCE_INTAKE_20260905.md`
-and its linked four-artifact archive. The source-library study is being completed alongside it.
+and its linked four-artifact archive. The completed six-library study is archived alongside it.
 
 ## Facts and competing interpretations
 

@@ -2,9 +2,10 @@
 
 Status: DRAFT_NOT_OPERATIVE; Root owns normative drafting and integration.
 
-1. Receive the six Luna/max core-code evidence reports and multi-level AGENTS inventories.
-   Verify their fixed commits, actual references, upstream preservation and recoverable
-   overlay copies. The original Luna/xhigh worker owns only index/manifest/archive aggregation.
+1. Completed: six Luna/max core-code evidence reports and multi-level AGENTS inventories
+   are received and archived, with fixed commits, actual references, upstream preservation
+   and recoverable overlay copies verified by the responsible workers and aggregator.
+   The original Luna/xhigh worker owns only index/manifest/archive aggregation.
 2. Complete DRAFT_SPEC and the VNFC E01 appendix from that evidence and the complete accepted
    direction Pro response. Submit one proper Portfolio question on the shared engineering
    investment and the explicitly bounded VNFC exception; preserve each decision's scope.
