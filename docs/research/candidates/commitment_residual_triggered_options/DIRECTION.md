@@ -428,3 +428,42 @@ References:
 - `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_EVIDENCE_20260904.md`
 - `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_20260904.json`
 - `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md`
+
+## Full-cycle RAW readout B02 — 2026-09-04
+
+The new one-seed B/EXPLORE readout comparison is valid
+`B02-CYCLE-COMPETENCE-NOT-STABILIZED`. The unchanged RAW trajectory reaches update 257;
+three-score means ending at 255/256/257 and their ordinary endpoints share each ending's
+training path and examples. All five snapshots and 96 decisions are present and independently
+recomputed. The mean readout has the same complete action vector at every ending, but at all
+three it is KEEP 6/8 with regret 0.003754710220270765 and REPLAN 5/8 with regret
+0.0052316106205794015, failing unchanged two-sided competence.
+
+Its equal-side regret is 0.004493160420425083 at every ending. Endpoint-minus-mean differences
+are -0.0007117303347211716, -0.001169929233530466 and -0.00022046228127808876, averaging
+-0.0007007072831765755; all are adverse but inside MEI 0.0025. The ordinary phase-0 endpoint
+remains competent. The bounded conclusion is that this mean-score readout does not supply
+full-cycle comparator competence on the exposed panel/seed and should not be adopted from this
+result. This is not a material-cost claim or broad anti-averaging conclusion.
+
+The strongest support is failure of both REPLAN criteria at every declared ending and no paired
+aggregate gain. The strongest counterpoint is that averaging removes the local action-vector
+variation and improves REPLAN over the two weak endpoints; its side tradeoff still misses the
+target. Cyclic order has not been causally isolated, and no residual arm, independent seed,
+held-out comparator, tuned headroom baseline or policy/MARL value is established. A01's native
+crash and A02's separate no-fault identity remain unchanged.
+
+The surviving next discriminator is a prospectively declared TRAIN-order intervention against
+the unchanged ordinary RAW readout. It must show changed competent native actions or return,
+not just a predictive batch statistic. The original declared TRAIN pairs admit labelled side-
+balanced interleaving; source-slot/episode sorting currently separates them. Matched per-row
+accumulated exposure holds only at full three-update endpoints, while intermediate prefixes may
+differ despite equal total examples. The next card must preserve that distinction in its primary
+contrast and full-cycle diagnostics. No successor is frozen or launched in this intake.
+
+References:
+
+- `CRTO_RAW_CYCLE_READOUT_B02_SCIENCE_CARD_20260904.md`
+- `CRTO_RAW_CYCLE_READOUT_B02_RESULT_EVIDENCE_20260904.md`
+- `CRTO_RAW_CYCLE_READOUT_B02_RESULT_20260904.json`
+- `CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md`
