@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-010",
+  "created": "2026-09-05T03:10:54-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B06：REPLAN 缺口未修复，但一枚种子有原生改善",
+  "context": "两次有效 RAW 暴露比较已完成。合并读法仍受比较器限制；种子 2 的 KEEP 修正带来超过新诊断阈值的原生改善，不能称训练完全无效。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "逐种子报告动作变化和原生收益，并保持旧残差结论的范围。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b06-raw-exposure-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-05_raw_exposure_b06.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

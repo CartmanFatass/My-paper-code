@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-009",
+  "created": "2026-09-05T03:10:53-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B06：不采用这次翻倍作为胜任修复",
+  "context": "258 到 516 更新没有修复指定 REPLAN 缺口，且不是所有训练都无效。保留种子 2 的原生收益改善，结束对此次固定预算干预的修复预期，再评估其他比较器解释。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留局部结果并评估下一解释",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原样重跑 516 更新",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "判定 RAW 一般失败",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "两种子已有完整指定暴露，无需原样重复或扩大负结论；新的损失或预算比较需另立卡。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b06-raw-exposure-result",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

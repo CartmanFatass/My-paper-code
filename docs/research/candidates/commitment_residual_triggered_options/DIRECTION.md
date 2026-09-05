@@ -553,3 +553,29 @@ CRTO_JOINT_SEED_B05_RESULT_EVIDENCE_20260905.md,
 CRTO_JOINT_SEED_B05_SEED01_RESULT_20260905.json,
 CRTO_JOINT_SEED_B05_SEED02_RESULT_20260905.json,
 CRTO_JOINT_SEED_B05_INTAKE_20260905.md.
+
+## RAW exposure B06 — 2026-09-05
+
+The fixed 258-to-516 doubling is valid **B06-COMPARATOR-LIMITED**, with both seeds individually
+**B06-COMPARATOR-STILL-WEAK**. REPLAN remains 5/8 with unchanged actions in both. Seed 1 keeps
+KEEP 8/8 and R=.0021294544930598857, D=0. Seed 2 improves KEEP 6/8 to 7/8, ending
+R=.003127712855602898; D=.0009278881578830053 exceeds the new comparator diagnostic MEI .000625.
+That gain is exactly one KEEP correction; it does not supply the missing REPLAN competence.
+
+All 64 new decisions, canonical 172/344 row exposures and native source metadata independently
+recompute. Both 258 readouts equal B05 RAW-LONG descriptively, with no historical equality gate.
+Substantial parameter movement and seed 2's native improvement constrain any broad training
+failure interpretation. The bounded update is to reject only this doubling as a competence
+repair, preserving its observed gain. B04 residual MEI .0025 and seed-0 BR-D remain unchanged.
+
+A next candidate is legal-action-centered training loss versus absolute-return MSE at fixed
+RAW information and exposure; further budget remains a live alternative. Common-return fitting
+is an untested explanation. No successor is selected or launched in this intake. The exposed
+panel, coupled seeds, untuned headroom and lack of policy/MARL or independent-population evidence
+continue to bound the direction; no family or Portfolio disposition is taken.
+
+References: CRTO_RAW_EXPOSURE_B06_SCIENCE_CARD_20260905.md,
+CRTO_RAW_EXPOSURE_B06_RESULT_EVIDENCE_20260905.md,
+CRTO_RAW_EXPOSURE_B06_SEED01_RESULT_20260905.json,
+CRTO_RAW_EXPOSURE_B06_SEED02_RESULT_20260905.json,
+CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md.
