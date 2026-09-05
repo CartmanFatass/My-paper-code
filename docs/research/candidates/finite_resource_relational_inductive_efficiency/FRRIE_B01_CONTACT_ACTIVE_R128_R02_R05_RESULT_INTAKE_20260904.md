@@ -2,9 +2,10 @@
 
 Status: `VALID_B_EXPLORE / R02_SMALL_OR_ROSTER_MIXED`.
 
-Current execution overlay: the later owner instruction **“这轮完毕后暂停即可”** pauses R06
-before scientific launch. Its selected scientific design below is preserved, while conditional
-launch authorization is withdrawn. See `FRRIE_OWNER_DIRECT_PAUSE_HANDOFF_20260904.md`.
+Current execution overlay: the owner's 2026-09-05 instruction **“继续自动推进任务”** supersedes
+the earlier pause and resumes bounded R06 engineering before any conforming scientific launch.
+This R05 result and its interpretation remain unchanged. See
+`FRRIE_R06_OWNER_DIRECT_RESUME_INTAKE_20260905.md`; the previous pause handoff remains historical.
 
 ## What DM checked
 
