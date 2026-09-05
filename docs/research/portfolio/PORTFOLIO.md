@@ -68,6 +68,14 @@ provenance, but result polarity never transfers into an accepting direction.
 
 ## Current unattended working set — 2026-09-05 successor
 
+Latest progress: FSD census invocation card is frozen (source005643177, integrationcb1e81437),
+owner item20260905-fsd-009; CM implements the thin runner and cost measurement, no census result yet.
+FRRIE existing A01 completed its sole invocation in19s; tracker terminal handoff is integrated
+as582ae4e1f. Supervisor0 is not validity; a different original Python failure was observed and
+DM technical intake is pending. No R10 or repair was selected. CBSC/N3 request
+`2026-09-05-portfolio-cbsc-n3-evidence-followup-01` is DISPATCH_ACCEPTED at the existing6Pro
+Transport singleton, evidence pinaa20ae77f, two-direction scope; no Pro decision yet.
+
 Two advancing direction chains: FSD census and FRRIE existing A01. Tracker is a shared sibling,
 not a third direction. Each DM uses its assigned isolated local worktree; Root integrates local main.
 Tracker workspace is `C:/Projects/HMASD-worktrees/tracker-successor-20260905`, branch

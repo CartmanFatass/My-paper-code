@@ -119,6 +119,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
       "state": "applied",
       "summary": "所有者当前明确批准策略B及涉及修改，并确认先前修改符合本意；按当前时间追加确认，保留历史授权核实不足及原始回复。"
+    },
+    {
+      "at": "2026-09-05T16:27:22+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/portfolio/pro_packets/20260905_cbsc_n3_followup/DISPATCH.json",
+      "state": "applied",
+      "summary": "按所有者要求，把CBSC A165和N3 A190的新完整实施证据送入同一Portfolio6Pro节点；单次Transport派发已接受，Pro回复未到，不代表新规则、源码或投入已被裁决。"
     }
   ],
   "starred": true

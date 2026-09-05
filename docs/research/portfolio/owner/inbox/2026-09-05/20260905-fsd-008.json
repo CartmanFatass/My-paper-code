@@ -94,6 +94,14 @@
       "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_PREPARATION_20260905.md",
       "state": "applied",
       "summary": "已完成既定无训练census的源码与调用准备：36DP/96候选每law；明确CLI、完整序列化及逐law实测成本/上限缺口。尚未冻结调用卡、未运行census，未扩大到学习实验。"
+    },
+    {
+      "at": "2026-09-05T16:27:23+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-unattended-confirmed-resume.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md",
+      "state": "applied",
+      "summary": "无训练census调用卡已冻结并整合cb1e81437，新增卡片项fsd009；CM正在补齐runner与逐law成本测量，尚无census结果或learner。"
     }
   ],
   "starred": true

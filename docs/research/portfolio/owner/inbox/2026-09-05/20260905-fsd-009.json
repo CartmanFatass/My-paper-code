@@ -1,0 +1,81 @@
+{
+  "id": "20260905-fsd-009",
+  "created": "2026-09-05T09:26:16-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FSD E4：无训练 renewal/reference census 调用卡",
+  "context": "已选定既有census：N6/K2/Z4/H400/Delta.4，mean20，三law，age0，每law全部96候选与publicgreedy。先有界测成本，再完成同一无训练数值观察。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "继续按已授权调用卡测成本并完成同一 census，零 learner"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下一干净边界停止未启动调用，保留既有证据"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按具体 owner 指令修订后续调用，保留 E3 与已运行证据"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "已有数值参考可回答时长机会，不能据此推出学习收益。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_ENGINEERING_ASSIGNMENT_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e4-census-invocation-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "审阅已按无人值守委托冻结的 FSD 无训练调用卡：先测三种 law 的实际成本，再完成同一有限参考 census。",
+    "changes_if_approved": [
+      {
+        "target": "FSD_E4_CENSUS_SCIENCE_CARD_20260905.md",
+        "from": "已有 Pro 选择，但逐 law 调用成本与输出契约未冻结",
+        "to": "冻结六条代表 DP 路径的冷启动计时、每 law 120 秒计时上限与 300 秒正式上限、完整 96 候选输出；保留零 learner"
+      }
+    ],
+    "if_refused": "在下一干净边界停止后续未启动调用并保留既有输出；按 owner 的具体修改修订调用。E3 的有效 H0 和 Pro 的原方向选择不被追改。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_e3_complete_convergence/archive/RESPONSE.md",
+        "quote": "唯一下一方向动作：继续到一个无训练的、基于现有 E4 renewal/reference 的同信息原生动作机会 census，证据类别为 A/RECON。不开启 E4 学习矩阵，不重跑 E3，不转向 D3。",
+        "why": "该调用把已决定的唯一对象变为可审阅、可执行的有限测量，不另选学习对象。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_PREPARATION_20260905.md",
+        "quote": "The public API is `envs.relay_corridor.references.enumerate_references(config)`. `ReferenceReport` includes all open-loop candidates in memory, while `as_dict()` omits them.",
+        "why": "复用已有数值计算，薄 runner 补齐完整输出即可，不改核心算法。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_e3_complete_convergence/archive/RESPONSE.md",
+        "quote": "有限模型中的 reactive-over-fixed-clock 差距，可完全由公共事件触发的脚本规则解释；该差距本身不要求 D2 的学习机制。",
+        "why": "任何结构正差距都不能作为 D2/D8 学习收益或下一训练的理由。"
+      }
+    ],
+    "uncertainty": [
+      "实际节点计时尚未发生；二倍最大代表 DP 投影是经验估算，不是最坏时间证明。",
+      "rounded-lognormal 使用既有有限矩截断与浮点质量；残余质量为零不意味着无穷尾部为零。",
+      "当前 renewal host 没有充分调优的通用同信息 baseline headroom 记录。"
+    ],
+    "cost": {
+      "compute": "预设三 law 计时合计最多 6 分钟，正式 census 最多 15 分钟；这些是上限，不是已消耗或实测预测。18 次计时 DP 加 108 次正式 DP，正式输出 288 候选，学习暴露为零。",
+      "owner_time": "可异步审阅，无需回复才能启动已授权调用。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommend/select (a): it fills the actual cost and output gap without making a new scientific selection. Owner-delegated decision (unattended, 2026-09-05 instruction): (a).",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_E4_CENSUS_SCIENCE_CARD_20260905.md"
+  },
+  "starred": false
+}
