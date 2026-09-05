@@ -17,3 +17,7 @@ Exact supervisor task: frrie_r09_segfault_a01_43eec21e_20260905. Actual-node adm
 ```
 
 Accepted handle will go directly to shared /root/tracker_tl_experiments and DM /root/dm_amx_frrie_a01_resume. Terminal facts are appended after collection.
+
+## Terminal collection
+
+Sole task accepted at16:21:23Z, PID1683892; tracker adoption ACK then terminal reminder. End16:21:42Z,19s, supervisor exit0 after original AttributeError in dataclasses._asdict_inner during evaluation-tape address serialization. No recurring SIGSEGV, no summary or output directory; counters unmeasured. Candidate A01_DIFFERENT_ORIGINAL_FAILURE. Full result evidence and raw command/log/admission/inventory are adjacent. No source change, repair, second invocation or new test. Stop condition reached.
