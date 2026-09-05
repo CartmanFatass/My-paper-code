@@ -1,18 +1,20 @@
 # FSD E3 heterogeneous-hazard detached run state
 
-Snapshot: `2026-09-05T14:06:32Z`
+Snapshot: `2026-09-05T14:31:00Z`
 
 This is an operational recoverability snapshot for the frozen B/EXPLORE object
-`FSD-E3-HET-R01`. It records runtime facts only. It is not a result, an intake, a scientific
-polarity, a queue implementation, or authority to bypass a fresh resource admission.
+`FSD-E3-HET-R01`. It records runtime facts and pointers to accepted intakes. Scientific meaning
+lives in those intakes; this snapshot is no queue or authority to bypass fresh admission.
 
 **Current OWNER_DIRECT boundary:** automatic work resumed on 2026-09-05. The previous pause is
 superseded; E3 is **18/18 valid, zero running, zero never launched**. Original final
 `large_d2_seed3` is terminal and accepted; its earlier SSH recovery involved no restart.
 Full original reading after the cell18 intake is complete: `E3-H0-NO-ADVANTAGE`;
 see `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md`. No successor is launched; the next
-direction disposition is escalated to Convergence. The full-matrix rule is unchanged. Historical
-drains below remain provenance; lifecycle, priority, card and science are unchanged.
+direction disposition is escalated to Convergence. Request2026-09-05-fsd-e3-complete-convergence-01
+was app-dispatched once to the current singleton; no Pro verdict exists yet. Recovery record:
+`FSD_E3_COMPLETE_CONVERGENCE_DISPATCH_20260905.md`. Do not redispatch. Full-matrix rule is unchanged.
+Historical drains below remain provenance; lifecycle, priority and card are unchanged.
 Latest OWNER_DIRECT P1/P2 maintenance cutoff is applied: ordinary P3/P4 inbox items stop;
 science/intake/Chinese evidence briefs/audit and existing review instructions continue.
 
