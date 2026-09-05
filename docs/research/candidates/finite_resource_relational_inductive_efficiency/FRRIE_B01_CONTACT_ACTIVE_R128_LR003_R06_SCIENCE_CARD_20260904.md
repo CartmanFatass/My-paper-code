@@ -3,14 +3,13 @@ Binding structure: `systems / information flow` — role-to-role residual weight
 
 # FRRIE B01 contact-active R128 LR003 R06 science card — 2026-09-04
 
-Status: `FROZEN / B_EXPLORE / OWNER_PAUSED / CANDIDATE_UNACCEPTED / NO_LAUNCH_SHA`.
+Status: `FROZEN / B_EXPLORE / OWNER_RESUMED / REPAIR_REQUIRED / NO_LAUNCH_SHA`.
 
-Current execution authority: owner instructed **“这轮完毕后暂停即可”**, relayed by Root on
-2026-09-04. No R06 scientific invocation was accepted. The previous conditional implementation/
-launch authorization is withdrawn for any unaccepted invocation; no new result-bearing check,
-repair/retry, successor or Pro round follows. Preserve the scientific card below as prospective
-design only. The exact resume boundary is
-`FRRIE_OWNER_DIRECT_PAUSE_HANDOFF_20260904.md`; resume requires a new owner instruction.
+Current execution authority: owner instructed **“继续自动推进任务”**, relayed by Root on
+2026-09-05. This supersedes the 2026-09-04 pause and authorizes bounded R06 engineering repair,
+focused verification and one conforming invocation at the unchanged scientific meaning below.
+The prior candidate is still unaccepted and no R06 scientific invocation has yet been accepted.
+See `FRRIE_R06_OWNER_DIRECT_RESUME_INTAKE_20260905.md`; the old pause handoff remains history.
 
 Object ID: `FRRIE-B01-CONTACT-ACTIVE-R128-LR003-R06-20260904`.
 
