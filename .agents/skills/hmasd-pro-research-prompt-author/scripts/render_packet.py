@@ -418,6 +418,14 @@ def validate(data: dict, project_root: Path) -> dict:
             }
         )
 
+    discussion_urls = data.get("discussion_urls", [])
+    if not isinstance(discussion_urls, list) or any(
+        not isinstance(url, str) or not re.fullmatch(
+            rf"https://github\.com/{re.escape(repository)}/(?:issues|pull)/[1-9][0-9]*(?:#[A-Za-z0-9_-]+)?", url
+        ) for url in discussion_urls
+    ):
+        raise PacketInputError("discussion_urls must name this repository's issue or PR URLs", field="discussion_urls")
+
     constraints = data.get("constraints", [])
     if constraints is None:
         constraints = []
@@ -460,6 +468,7 @@ def validate(data: dict, project_root: Path) -> dict:
         "claim_ceiling": claim_ceiling,
         "companion_prompt": companion_prompt,
         "reference_files": clean_refs,
+        "discussion_urls": discussion_urls,
         "constraints": list(constraints),
         "response_schema": list(response_schema),
     }
@@ -510,6 +519,10 @@ def render(packet: dict, out_dir: Path) -> dict:
             "If access is missing, explain the exact unavailable source in ordinary language; do not substitute another source.",
         ]
     )
+    if packet.get("discussion_urls"):
+        ref_lines.extend(["", "Explicit additional GitHub discussion sources (mutable, not commit-pinned):"])
+        ref_lines.extend(f"- {url}" for url in packet["discussion_urls"])
+        ref_lines.append("Read the named issue/PR body and relevant comments via the connector; report actual access, comment links and observation time. PR code evidence still uses the declared source ref. Do not follow unlisted links or claim access from a title alone. If discussions are inaccessible, report that narrow gap; available listed file evidence remains usable.")
     reference_manifest = "\n".join(ref_lines)
 
     constraints = "\n".join(f"- {x}" for x in packet["constraints"]) or "- Preserve the stated question and claim ceiling exactly."
@@ -530,8 +543,8 @@ Limit the conclusion to the following scope: {packet['claim_ceiling']}
 
 You are acting as an HMASD scientific research analyst. Use the connected GitHub
 connector in read-only mode for repository `{packet['repository']}` at the exact
-`{packet['commit_or_ref']}` reference. Retrieve only the paths listed in the
-evidence list below and report which paths were actually read.
+`{packet['commit_or_ref']}` reference. Retrieve only the paths and any explicitly
+listed additional discussion URLs in the evidence list below; report actual access.
 If the connector, repository, ref, or any listed path is unavailable, explain
 the exact access gap in natural language. Do not use an unlisted file, a
 moving/default branch, a web mirror, a local clone, or pasted full-file substitute.

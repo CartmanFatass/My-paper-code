@@ -39,6 +39,15 @@ run tools or resend accepted packets merely to add this guidance.
 
 ## Caller contract
 
+Owner-approved GitHub collaboration pilot (2026-09-05): optional `discussion_urls`
+lists same-repository issue/PR URLs. The renderer explicitly allows those discussion
+bodies/comments in addition to pinned file evidence. Issues are mutable: retain a
+read-back snapshot and relevant comment permalinks for each decision. Pro must report
+actual access, never infer issue/comment capability from repository-file access.
+An inaccessible discussion does not erase usable file evidence. Root/DM may publish
+attributed Pro suggestions and link engineering PRs under the owner's authorization;
+Pro remains read-only. Do not resend accepted packets or add an issue launch gate.
+
 Require an input object with:
 
 - `caller_role`: exactly `portfolio` or `em` (the Direction Manager acts as the `em` caller);

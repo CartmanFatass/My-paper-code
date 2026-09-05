@@ -1,5 +1,12 @@
 # GitHub connector contract
 
+2026-09-05 owner-approved pilot extends the explicit evidence list with optional
+same-repository issue/PR discussion URLs. File evidence remains commit-pinned;
+discussion text is time-specific and Root retains its snapshot/comment links.
+Pro-side body/comment access is experimentally unverified until an actual response
+shows what was read. Missing comments are a specific capability gap, not permission
+to claim they were read. Root's GitHub write tools do not establish Pro capabilities.
+
 The official OpenAI Help Center says that a connected GitHub app can retrieve
 permitted repository content on demand, including code, README files, and other
 documentation; availability can vary by plan, workspace, and product surface.
