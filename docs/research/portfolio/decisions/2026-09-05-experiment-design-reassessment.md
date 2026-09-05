@@ -1,6 +1,9 @@
 # Owner-directed experiment design reassessment
 
-Authority: OWNER_DIRECT, 2026-09-05. Status: in progress, not a new launch gate.
+Authority: OWNER_DIRECT, 2026-09-05. Status: independent reviews and four DM proposal reviews complete; successor intake continues. Not a new launch gate.
+
+Completed findings and current handoffs: `2026-09-05-completed-design-reviews.md`.
+The chronology below preserves the preliminary findings; the completion record supersedes its pending-status wording.
 
 The owner asks to reassess current experiments after the evidence-spec correction:
 repeatedly proposing very expensive verification and then stopping at a resource
