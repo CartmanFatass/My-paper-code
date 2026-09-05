@@ -28,14 +28,9 @@ At `2026-09-05T11:31:15Z`, live tracker-owned processes are FSD
 `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`.
 Fresh physical/effective admission was `15425314816` bytes. The expected projection is `4.63h`
 and hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly. FRRIE R08
-`(wsl_4070, frrie_b01_contact_r08_58710424)` is also `running`, exit `null`, PID `1666370`, tmux
-active, SHA `58710424a6b25f3e4bdf019dc337423d2d54a75b`, cwd
-`/home/wu/hmasd-worktrees/frrie-contact-r08-58710424`, output sibling `exp/frrie_b01_contact_r08/summary.json`,
-receipt sibling `technical/frrie_b01_contact_r08_admission.json`, and log
-`/home/wu/.agent-tasks/frrie_b01_contact_r08_58710424/task.log`; admission physical/effective
-`12880740352` bytes passed and the outer bound is `2026-09-05T19:30:34Z`. Fixed pdb means exit
-`0` alone is not learner success; terminal/loss/bound wakes FRRIE DM and CM directly. Every other
-current record is terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
+`frrie_b01_contact_r08_58710424` is terminal/ACKed and awaits CM same-evidence collection; its
+fixed pdb context means exit `0` never established learner success. Every other current record is
+terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
 all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
@@ -80,6 +75,8 @@ FSD large D0 seed2 terminal: `fsd_e3_large_d0_seed2_20260905_01` finished exit `
 FSD large D2 seed2 adoption: `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`. Same-handle observation at `2026-09-05T11:07:48Z`: `running`, exit `null`, PID `1663230`, tmux active; fresh physical/effective admission `15425314816` bytes passed. Projection `4.63h`, hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly, with no restart, repair, or validity inference.
 
 N3/ACVC terminal handoffs: N3 A03 focused verification `dish_endpoint_a03_verify_818b2566_01` and its unique result pair `dish_ground_endpoint_a03_seed11_pair_a1` each finished exit `0` and were ACKed by N3 DM for CM collection/verification. ACVC profile-cost `acvc_upper_r03_cost_c4c46e50_01` and unique actual result `acvc_upper_r03_actual_c4c46e50_01` each finished exit `0` and were ACKed by ACVC DM for CM collection. These supervisor facts carry no tracker scientific classification or authorization for an additional invocation.
+
+FRRIE R08 terminal: `frrie_b01_contact_r08_58710424` finished exit `0`, PID `1666370`, tmux inactive; supervisor duration was `874s` (observer uptime `935s`). The bounded log records `sys.exit()` and fixed-pdb interaction; the DM ACKed terminal delivery and CM was woken to collect the original outcome. No learner-success inference, retry, or successor follows from this tracker record.
 
 ## Accepted work and terminal handoffs
 
