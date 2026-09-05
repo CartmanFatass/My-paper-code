@@ -20,15 +20,22 @@ not revive historical DM routes recorded below.
 
 ## Current observation snapshot
 
-At `2026-09-05T11:27:xxZ`, the sole live tracker-owned process is FSD
+At `2026-09-05T11:31:15Z`, live tracker-owned processes are FSD
 `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`: `running`, exit `null`, PID `1663230`,
 `tmux_active=true`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd
 `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output
 `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling
 `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`.
 Fresh physical/effective admission was `15425314816` bytes. The expected projection is `4.63h`
-and hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly. Every other current
-record is terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
+and hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly. FRRIE R08
+`(wsl_4070, frrie_b01_contact_r08_58710424)` is also `running`, exit `null`, PID `1666370`, tmux
+active, SHA `58710424a6b25f3e4bdf019dc337423d2d54a75b`, cwd
+`/home/wu/hmasd-worktrees/frrie-contact-r08-58710424`, output sibling `exp/frrie_b01_contact_r08/summary.json`,
+receipt sibling `technical/frrie_b01_contact_r08_admission.json`, and log
+`/home/wu/.agent-tasks/frrie_b01_contact_r08_58710424/task.log`; admission physical/effective
+`12880740352` bytes passed and the outer bound is `2026-09-05T19:30:34Z`. Fixed pdb means exit
+`0` alone is not learner success; terminal/loss/bound wakes FRRIE DM and CM directly. Every other
+current record is terminal or awaiting a separately handed accepted handle. The `2026-09-04T23:39:35Z`
 all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
