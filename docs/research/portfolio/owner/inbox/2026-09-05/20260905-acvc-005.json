@@ -1,0 +1,37 @@
+{
+  "id": "20260905-acvc-005",
+  "created": "2026-09-05T03:39:53-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：接受规定输入的通用计算器成本",
+  "context": "修复后的完整输入在调用前已核对：所有分数不超过 512 位，原子等指定分母实际保持 512 位。唯一远端测试完整完成，耗时 29.26 秒、峰值内存约 17 MiB，三倍时间投影约 87.78 秒，低于 120 秒。接受此工程成本测量；没有真实 ACVC 上界、科学分支或 learner，下一步仍需单独科学卡。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受有限工程测量并返回真实上界卡边界",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "因具体不一致拒绝本次测量",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "把工程通过当科学结果并自动启动",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "规定输入、完整遍历、原资源投影和代码预算均已核对，结论只覆盖通用计算器成本。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-common-denominator-cost-intake-20260905",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
