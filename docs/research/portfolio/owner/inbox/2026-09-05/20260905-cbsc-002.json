@@ -1,0 +1,38 @@
+{
+  "id": "20260905-cbsc-002",
+  "created": "2026-09-05T02:16:25-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 原位删除候选仍超编排预算，按有界分支返回",
+  "context": "已实际删除现有publisher的重复重算段：3行新增、91行删除；独立审查宽松计入科学调用后，编排仍为64/94（68.09%）。首次十五表、摘要及最后一次mechanical计算仍在，但下游consumer、上游source/law和资源完整性依赖未解除。37个其余受保护文件字节不变；零测试、离线发布或实验。只接受报告，候选独立保留未接受，不将此推为所有实现均不可行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受具体报告并保留未接受候选，结束本有界修改",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "接受超预算候选或从中启动实验",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "继续扩展架构或填充计算改变比例",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "真实diff及独立计数命中既定停止条件，未解除的依赖也不支持声称修复完整。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_EXISTING_PATH_RETURN_INTAKE_20260905.md",
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_EXISTING_PATH_CM_RESULT_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#cbsc-existing-path-return",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-013",
+  "created": "2026-09-04T14:58:55-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO短诊断正常完成，原故障尚未定位",
+  "context": "",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "保留一次成功诊断与此前失败的差异，不据此推断故障消失或残差效果。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L229",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-04_raw_phase_native_repro_a02.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

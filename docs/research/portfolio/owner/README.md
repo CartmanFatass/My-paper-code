@@ -6,6 +6,33 @@
 `AGENTS.md` §4.5 和证据规范 §11.7。批改台：`python tools/owner_console/server.py`，然后打开
 `http://127.0.0.1:8765/`。
 
+## 当前维护范围（OWNER_DIRECT，2026-09-05）
+
+所有者指令：「我们停止维护P2级别以下的问题 P3P4问题太多 我也审核不过来」。
+此项覆盖下文及旧 insertion-point 规则中的 P3/P4 独立条目要求。
+仅维护 P1/P2 批改项；P3 普通委托决定/预测、P4 技术项/简报停止新建、补写、催审，
+历史项退出收件箱及待批计数，保留原文件和回复，不伪记为已审核。
+`item.py add` 对 P3/P4 返回成功并输出 `skipped`，不创建文件、不分配 ID；审计直接引用
+card/intake。`seed-ledger` 停止批量补建旧条目。既有 owner 指令仍须读取并执行。
+科学卡片、预测记录、结果证据、intake、中文结果简报和必要审计照常保留；不再为这些
+普通记录另建批改任务。真实的新卡、close-call、重大异议、方向决定和 Portfolio 提案
+按原 P1/P2 分类处理，不为绕过限制而升级普通条目。
+决定：[2026-09-05-owner-review-p2-cutoff.md](../decisions/2026-09-05-owner-review-p2-cutoff.md)。
+
+## ★ 重要改动与 6 Pro 执行委托（当前边界）
+
+完整裁决的执行委托及此前批准归因纠正见 [本次明确指令](../decisions/2026-09-05-pro6-delegation-and-starred-trace.md)。
+方向/Portfolio 层级及重大异议、close-call、second-recast 新项自动星标；重要治理改动用既有 P1 项。
+「★ 重要改动」显示全部历史星标项，包含已答项。星标不代表 owner 逐项批准。
+
+执行时通过 CLI 追加记录，保留原回复与 status，不伪写 owner ratify：
+
+```
+python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DELEGATED" --source <archived-response.md> --record <application-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
+```
+
+`--state planned|applied|blocked`；仅已执行可填 `--auto-applied`。`--authority OWNER_DIRECT` 仅用于有明确 owner 指令的事项。application record 列出变化前后、修改文件和提交定位；`execution_history` 逐条追加时间、来源、状态与记录链接。`--correction` 用于保留原回复并明确纠正其授权归因，不冒充新回复。新 owner 回复仍按原流程生效。此记录不新增运行关卡。
+
 ## 所有者每天怎么用（约 15 分钟）
 
 1. 打开批改台的收件箱。只有需要你看的条目会出现：已按委托执行的决定、新卡片、预测请求、简报、

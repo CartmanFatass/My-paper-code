@@ -1,5 +1,15 @@
 # Direction finite_resource_relational_inductive_efficiency: finite-resource relational inductive efficiency
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N1 — 关系归纳与学习效率**, in the **集合与关系表示** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This is the prospective scientific authority for a single-host successor distilled from the former
 CCIC, EGRCR, SGSP, and VQFP investment lines. Current lifecycle, priority, and owner remain solely in
 `docs/research/portfolio/PORTFOLIO.md`.
@@ -310,3 +320,183 @@ The next discriminator is the unchanged three-seed B01 rung using the already ge
 roots `001..003`; no result-sensitive treatment, comparator, seed, or configuration change is
 authorized. See `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_EVIDENCE_20260904.md` and
 `FRRIE_B01_SECTION11_R128_SMOKE_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-001 full-path result — 2026-09-04
+
+The first ordered root has now completed the full 512-update B01 learner and planned 98-cell
+actual-host panel. All 23 completion checks passed. Each arm completed 512 paired RSCF/Adam updates,
+393,216 factual learner transitions, and 2,523,136 total training slots; evaluation completed
+25,088 episodes and 301,056 transitions. Peak RSS remained unavailable, so the valid result is
+marked `resources_unmeasured`.
+
+Root 001 is `B01_SEED_VALID_DIRECT`, not a three-seed branch. The tight projection changed no FP32
+coordinate through update 512; complete model/optimizer state and direct evaluation traces remained
+equal across all checkpoints, rosters, and interventions; hence every intact and rotated
+`PHY_TRUST-EDGE_FLEX` return difference is zero on this path. Overall model displacement was
+`L_inf(theta_512-theta_0)/0.05 = 2.092398852` in both arms, so movement elsewhere exceeded 0.10
+without tight-`beta` contact. Update-512 EDGE margins over uniform were only `+0.0068689` at `N=9`
+and `+0.0126184` at `N=15`; the maximum held-out within-PHY reassociation TV was `0.000226887`.
+
+This establishes observed-path equality for one literal root only. It does not apply
+`B01_OBSERVED_PATH_EQUIVALENCE`, `B01_WIDE_INCOMPETENT`, or another aggregate branch; roots 002 and
+003 remain unobserved. The strongest support is the complete paired learner/evaluator trace. The
+strongest contradiction to package value is that the treatment never activated. Surviving
+explanations include coordinate-specific noncontact, common `K0` alignment, generic Adam geometry,
+literal-root variation, and contact on another ordered root.
+
+The next discriminator remains root 002 and then root 003 under the unchanged card. Per the active
+REMOTE_FIRST control plane, new invocations use exact pushed bytes in freshly admitted detached
+remote worktrees; root 001 is not migrated or repeated. See
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT001_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed root-002 full-path result — 2026-09-04
+
+The second ordered root also completed 512 paired RSCF/Adam updates and the full 98-cell fixed-host
+panel. All 23 completion checks passed. It is separately `B01_SEED_VALID_DIRECT` and remains a
+single-seed result; the three-seed branch is not applied before root 003.
+
+No tight FP32 coordinate changed. Complete model/optimizer state, direct action traces, and native
+return rows remained equal between `PHY_TRUST` and `EDGE_FLEX` at every checkpoint, roster, and
+intervention. Overall displacement reached
+`L_inf(theta_512-theta_0)/0.05 = 2.017686367` in both arms, yet tight-projection displacement was
+zero. At update 512, EDGE minus uniform was only `+0.0058027` at `N=9` and `+0.0055035` at `N=15`;
+the maximum held-out within-PHY reassociation TV was `0.000270478`.
+
+Roots 001 and 002 now supply two direct, distinct literal-root instances of no contact and
+observed-path arm equality. That strengthens the bounded path description but still establishes no
+three-seed equality branch, comparator competence, post-contact effect, or seed-population claim.
+Peak RSS was unavailable, so root 002 remains valid as `resources_unmeasured`.
+
+The next discriminator is the unchanged ordered root 003 on the same Windows host. See
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_ROOT002_RESULT_INTAKE_20260904.md`.
+
+## B01 three-seed aggregate result — 2026-09-04
+
+All three prospectively ordered roots completed the real 512-update learner and planned 98-cell
+fixed-host panel. Every root passed all 23 completion checks, fresh admission, exposure, paired
+work, state preservation, and nonzero learner/optimizer/evaluator counts. Peak RSS was unavailable
+for all three, so the valid aggregate is marked `resources_unmeasured`.
+
+The accepted branch is `B01_OBSERVED_PATH_EQUIVALENCE`. Tight projection changed no FP32
+coordinate on roots `001..003`; complete model/optimizer states and direct evaluation traces
+remained equal across all checkpoints, rosters, and interventions. The panel therefore stops at
+three, leaving roots `004..005` unopened. The later numerical wide-incompetence row is not applied
+because the registered rule stops at the earlier fully determined branch.
+
+The bounded claim is observed-path equality on those literal roots, the local Windows/MSVC/CPU
+surface, the declared schedule, and 512 updates. Strongest support is three complete paired
+learner/evaluator traces. Strongest contradiction to any mechanism-value claim is that the only
+treatment difference never activated; no post-contact value or equivalence follows. Surviving
+alternatives include common `K0` alignment, generic optimizer geometry, and treatment-coordinate
+noncontact at this budget.
+
+The conditional DM prediction is not scored because no root contacted; the predeclared no-contact
+alternative applied. No next object is selected by this result. A contact-capable discriminator
+would require a separately authorized outcome-blind card. The existing A1 local action-headroom
+census remains only a read-only boundary, not a frozen successor. See
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_EVIDENCE_20260904.md` and
+`FRRIE_B01_THREE_SEED_AGGREGATE_RESULT_INTAKE_20260904.md`.
+
+## B01 contact-active R128 result — 2026-09-04
+
+The first valid contact-active R128 result is `R02_SMALL_OR_ROSTER_MIXED`, at B/EXPLORE ceiling.
+On one literal root, the tight `[-0.04,0.04]` package changes five coordinates before checkpoint 0
+and contacts in 50 subsequent updates, while the containing `[-1.50,1.50]` comparator does not
+contact. Both arms complete 128 real RSCF/Adam updates with equal information and work.
+
+At update 128, tight minus wide native return is `+0.000467050572` at N=9 and `-0.000867790232`
+at N=15. Both absolute gaps are below the declared 0.005 MEI. Wide minus uniform is only
+`+0.000507024660` and `+0.000484763443`, respectively: it passes this card's minimal competence
+branch without establishing a tuned comparator or a host headroom record.
+
+Strongest support is the complete paired native learner/evaluator trace with actual repeated
+projection contact. Strongest contradiction to a meaningful tight-box advantage at this budget
+is the two sub-MEI, opposite-sign gaps after activation. Nonactivation no longer explains this
+particular result; equivalence, stable superiority and relation specificity remain unestablished.
+Surviving alternatives include limited low-LR learning exposure, common K0 dominance, generic
+shrinkage/Adam geometry, one-root variation and roster dependence. The bounded claim covers
+this root, Linux CPU FP32, INTACT and seen N={9,15}, without held-out or membership-change claims.
+
+The next discriminator is a new B rung with tenfold shared LR at the same 128-update information
+and work budget. This tests dose while retaining the paired tight/wide comparison; it does not
+reinterpret the accepted low-LR result or create a family/lifecycle decision. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md`,
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md` and
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md`.
+
+## B01 higher-exposure contact-active result — 2026-09-05
+
+The complete R06 B/EXPLORE result is `R06_SMALL_OR_ROSTER_MIXED`: tight minus wide return
+is +0.001066907914 at N=9 and +0.005548293532 at N=15. Both are positive, but only N15
+exceeds the prospective 0.005 MEI. The wide arm exceeds uniform by +0.007199240468 and
++0.014761398958. The original favorable-both branch therefore does not apply.
+
+At the same literal root and 128-update work, shared LR 0.003 produced Linf movement about
+4.37/4.11 times the initialization half-range, versus about 0.52/0.53 at LR 0.0003. Tight
+contact occurred in 125 later updates. At N15, tight/wide made 92/80 deliveries; higher
+delivery and balance terms outweighed a slightly worse waste term. This is a native package
+consequence under actually increased learning exposure, not just a parameter statistic.
+
+Strongest support is the complete paired learner/evaluator trace and above-MEI N15 difference
+against the same-information containing arm. Strongest contradiction to an across-roster
+material advantage is N9's sub-MEI gap. N15 is only slightly above threshold on one root,
+and earlier checkpoints do not show stable positive separation. Root-specific co-adaptation,
+generic shrinkage/Adam geometry, common K0 alignment and roster dependence remain live;
+relation specificity, held-out transfer and seed-population superiority are unestablished.
+
+The next discriminator keeps LR/work/boxes fixed on a second prospectively specified literal
+root, with N15 primary and N9 fully reported. This outcome-informed B successor preserves
+R06's original reading and the old B01 three-root stop. See
+`FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_RESULT_20260905.md`,
+`FRRIE_R06_RESULT_INTAKE_20260905.md` and `FRRIE_R07_SECOND_ROOT_SCIENCE_CARD_20260905.md`.
+
+## Second literal path at higher exposure — 2026-09-05
+
+The complete R07 B/EXPLORE result is `R07_N15_WITHIN_MEI`: final tight-minus-wide return
+is -0.001948094523 at primary N15 and +0.000910016910 at N9, both within the prospective
+0.005 margin. EDGE exceeds uniform by +0.026623984248 / +0.014817785945 respectively.
+Thus R06's material N15 gap did not reappear on this second prespecified literal path.
+
+The treatment is active: three initial clips, 127 later contact updates and 995 coordinate
+events, with preserved optimizer moments and Linf motion about 4.50/4.57 initial half-ranges.
+At N15, tight/wide deliver 95/98; delivery, balance and waste contributions all favor wide
+slightly. More contact is not itself native value. R06 remains conditional positive support,
+while R07 contradicts assuming material reappearance across the two chosen paths. Neither
+supplies a material N9 benefit. No equivalence or sampled-root population conclusion follows.
+
+Root-specific initialization/tapes/co-adaptation, generic projected-Adam geometry, common K0
+alignment and roster dependence survive. The next discriminator targets chart dependence of
+the known positive root-1 signal by rotating common role-prior columns at final evaluation,
+with unchanged training. This is an outcome-informed conditional B diagnostic, not a robustness
+test or semantic-mechanism claim. See `FRRIE_R07_RESULT_20260905.md`,
+`FRRIE_R07_RESULT_INTAKE_20260905.md` and `FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md`.
+
+## Conditional common-chart cut on the positive path — 2026-09-05
+
+The complete R08 B/EXPLORE result is `R08_INTERACTION_WITHIN_MEI`. At primary N15,
+the intact tight-minus-wide gap is +0.005548293532 and the rotated gap is +0.005538119438:
+attenuation is only +0.000010174094, below the prospective absolute 0.005 MEI.
+The containing arm remains above uniform under both conditions. N9's interaction is
++0.000001569022, also small; its intact gap remains below the primary anchor threshold.
+
+All 128 paired learner updates and 22 evaluation cells completed. The cut actually
+rotates common prior-probability/latency sender columns and permits different native
+trajectories; it leaves delivery and balance quantities unchanged in all four final
+learned cells. Small changes in actions/events and waste account for the tiny return
+changes. Contact and parameter movement remain substantial; this is not nonactivation.
+
+The strongest direct support remains the selected root-1 N15 package gap. The strongest
+contradiction to common-chart alignment being necessary for that gap is its survival
+under this precise cut. R07 remains the contradiction to assuming recurrence across
+literal paths. R08 reuses root-1 training/tapes and cannot count as independent-root
+evidence. No equivalence, semantic correctness, universal cut insensitivity or family
+closure follows. Generic projected-Adam/shrinkage, training-path co-adaptation and roster
+dependence remain live; this evaluation cut does not isolate training influence.
+
+The next unresolved discriminator is another prospectively fixed literal path at the
+same LR/work, without selecting it for its outcome. It remains an unexecuted proposal;
+`FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md` records current representation
+feasibility rather than a new card or scientific disposition. See
+`FRRIE_R08_RESULT_20260905.md` and `FRRIE_R08_RESULT_INTAKE_20260905.md`.

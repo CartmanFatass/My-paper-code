@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-019",
+  "created": "2026-09-04T15:17:07-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO已有RAW轨迹：五个相位检查点通过，总体收益未改善",
+  "context": "",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "只保留这条诊断轨迹的直接读数和预测纠正，后续比较器仍需明确规定读出方式。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L245",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-04_raw_diagnostic_trace_read_a03.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

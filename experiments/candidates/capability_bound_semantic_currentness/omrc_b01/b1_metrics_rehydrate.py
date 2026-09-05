@@ -30,6 +30,9 @@ from .tapes import EpisodeTape
 
 ARM_SEED_ORDER = B1_SLOT_ORDER
 REHYDRATION_SCHEMA = "cbsc_omrc_b01_b1_metrics_rehydration_v1"
+TEST_ONLY_REHYDRATION_SCHEMA = "cbsc_omrc_b01_b1_metrics_rehydration_test_only_v1"
+_TEST_ONLY_STOCHASTIC_IDS = (0,)
+_TEST_ONLY_MOTIF_IDS = (0,)
 _TAPE_RECORD_FIELDS = frozenset(
     {
         "identity",
@@ -74,9 +77,13 @@ class B1MetricsRehydration:
     canonical_shared_tables: Mapping[str, Any]
 
     def __post_init__(self) -> None:
-        if self.schema != REHYDRATION_SCHEMA:
+        expected_tapes = {
+            REHYDRATION_SCHEMA: len(B1_SEEDS) * 448,
+            TEST_ONLY_REHYDRATION_SCHEMA: len(B1_SEEDS) * 2,
+        }.get(self.schema)
+        if expected_tapes is None:
             raise B1MetricsRehydrateError("rehydration schema differs")
-        if len(self.unique_tapes) != len(B1_SEEDS) * 448:
+        if len(self.unique_tapes) != expected_tapes:
             raise B1MetricsRehydrateError("rehydrated B1 tape inventory is incomplete")
         if (
             "tape_transitions" not in self.canonical_shared_tables
@@ -154,17 +161,21 @@ def _action_uniform_digest(tapes: Sequence[EpisodeTape], seed: int) -> str:
 
 
 def _canonical_seed_panel(
-    seed: int,
+    seed: int, *, test_only: bool,
 ) -> tuple[tuple[EpisodeTape, ...], tuple[EpisodeTape, ...]]:
     host = DynamicHost(addressing.B1_RUN, seed)
     train = tuple(
         host.build_stochastic(addressing.TRAIN, episode_id)
-        for episode_id in B1_TRAIN_EPISODE_IDS
+        for episode_id in (() if test_only else B1_TRAIN_EPISODE_IDS)
     )
     evaluation = tuple(
         host.build_stochastic(addressing.EVAL_STOCHASTIC, episode_id)
-        for episode_id in B1_EVAL_STOCHASTIC_IDS
-    ) + tuple(host.build_motif(tape_id) for tape_id in B1_EVAL_MOTIF_IDS)
+        for episode_id in (
+            _TEST_ONLY_STOCHASTIC_IDS if test_only else B1_EVAL_STOCHASTIC_IDS
+        )
+    ) + tuple(host.build_motif(tape_id) for tape_id in (
+        _TEST_ONLY_MOTIF_IDS if test_only else B1_EVAL_MOTIF_IDS
+    ))
     return train, evaluation
 
 
@@ -226,8 +237,12 @@ def _validate_full_bindings(
 ) -> tuple[str, str]:
     if not isinstance(value, Mapping) or frozenset(value) != _FULL_BINDING_FIELDS:
         raise B1MetricsRehydrateError("full binding fields differ")
+    for name in _FULL_BINDING_FIELDS:
+        _require_digest(
+            name, value[name], length=40 if name == "implementation_commit" else 64
+        )
     for name, expected_digest in expected.items():
-        if _require_digest(name, value[name]) != expected_digest:
+        if value[name] != expected_digest:
             raise B1MetricsRehydrateError(f"{name} differs from canonical reconstruction")
     implementation_commit = _require_digest(
         "implementation_commit", value["implementation_commit"], length=40
@@ -250,6 +265,7 @@ def _validate_group(
     train: Sequence[EpisodeTape],
     evaluation: Sequence[EpisodeTape],
     global_source_identity: tuple[str, str] | None,
+    test_only: bool,
 ) -> tuple[str, str]:
     if (
         isinstance(group, (str, bytes, bytearray, Mapping))
@@ -259,7 +275,14 @@ def _validate_group(
         raise B1MetricsRehydrateError("each arm-seed slot requires raw slice records")
     cursor = 0
     source_identity = global_source_identity
-    expected_bindings = _expected_full_bindings(train, expected_seed)
+    # This TEST_ONLY schema claims only the six held-out shared-truth tapes.
+    # The fixed 48-update/48-episode TEST_ONLY training assembly independently
+    # validates its reduced training/action bindings; rehydration does not
+    # claim that work.  Formal rehydration remains the 384-episode panel.
+    expected_bindings = (
+        {"ppo_configuration_digest": config_digest(PPOConfig())}
+        if test_only else _expected_full_bindings(train, expected_seed)
+    )
     for raw in group:
         if not isinstance(raw, Mapping) or not _REQUIRED_RAW_FIELDS <= frozenset(raw):
             raise B1MetricsRehydrateError("raw slice fields are incomplete")
@@ -330,9 +353,12 @@ def rehydrate_b1_metrics(
     *,
     attempt_id: str,
     literal_binding_spec_sha256: str,
+    test_only: bool = False,
 ) -> B1MetricsRehydration:
     """Reconstruct the complete unique B1 tape inventory from fixed raw slots."""
 
+    if type(test_only) is not bool:
+        raise B1MetricsRehydrateError("test_only must be literal bool")
     if type(attempt_id) is not str or not attempt_id:
         raise B1MetricsRehydrateError("attempt_id must be a nonempty string")
     _require_digest("literal_binding_spec_sha256", literal_binding_spec_sha256)
@@ -343,7 +369,9 @@ def rehydrate_b1_metrics(
     ):
         raise B1MetricsRehydrateError("raw slices must contain fixed ARM_SEED_ORDER groups")
 
-    panels = {seed: _canonical_seed_panel(seed) for seed in B1_SEEDS}
+    panels = {
+        seed: _canonical_seed_panel(seed, test_only=test_only) for seed in B1_SEEDS
+    }
     for train, evaluation in panels.values():
         _validate_split_address_disjointness(train, evaluation)
 
@@ -358,6 +386,7 @@ def rehydrate_b1_metrics(
             train=train,
             evaluation=evaluation,
             global_source_identity=source_identity,
+            test_only=test_only,
         )
 
     unique_tapes = tuple(
@@ -371,7 +400,7 @@ def rehydrate_b1_metrics(
         literal_binding_spec_sha256=literal_binding_spec_sha256,
     )
     return B1MetricsRehydration(
-        schema=REHYDRATION_SCHEMA,
+        schema=TEST_ONLY_REHYDRATION_SCHEMA if test_only else REHYDRATION_SCHEMA,
         unique_tapes=unique_tapes,
         canonical_shared_tables=_canonicalize_shared_tables(producer),
     )
@@ -382,5 +411,6 @@ __all__ = [
     "B1MetricsRehydrateError",
     "B1MetricsRehydration",
     "REHYDRATION_SCHEMA",
+    "TEST_ONLY_REHYDRATION_SCHEMA",
     "rehydrate_b1_metrics",
 ]

@@ -1,0 +1,73 @@
+{
+  "id": "20260904-mgtap-013",
+  "created": "2026-09-04T16:47:24-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "N5 B03：同信息步长控制卡",
+  "context": "主张：双方相同预算选择标量学习率，可能吸收固定步长下 METRIC 与 FREE 的小幅曲线差异。绑定结构：多智能体信用分配；一个分配会改变后来智能体的剩余容量，共享 actor 接收联合收益。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡执行当前 B 级探索对照并保留全部曲线。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下个干净边界停止未启动部分，保留旧证据和方向状态。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "下个干净边界按回复修订新卡，已经取得的结果保持原意。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "以同预算的更强 FREE 对照检验标量步长解释，结论限制在探索网格。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n5-b03-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受用双方相同的四档步长预算，检查 N5 的小幅曲线差异是否来自有效步长？",
+    "changes_if_approved": [
+      {
+        "target": "N5 的现有探索梯子",
+        "from": "已完成单一步长比较",
+        "to": "执行 B03 四档步长、三个新种子的对照，保留全部曲线"
+      }
+    ],
+    "if_refused": "在下一个干净边界停止未启动部分并重新说明或修改这张 B 卡；已有结果原样保留，生命周期和优先级不变。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_MAIN_INTAKE_20260904.md",
+        "quote": "The next scientific discriminator, if the owner later resumes research, is a same-information step-size/conditioning control within the existing finite-budget learning question.",
+        "why": "前轮已经指出该替代解释，当前恢复指令允许继续现有探索梯子。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_MAIN_INTAKE_20260904.md",
+        "quote": "The three-seed observation does not establish statistical equivalence or an upper confidence bound below the MEI.",
+        "why": "小样本与同面板调参限制了结论，不能用本轮宣称等价或稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "最优步长可能位于网格边缘；这会限制搜索范围的解释，不使有效结果作废。",
+      "即使剩余差异明显，非标量条件数和隐式正则化仍可能解释它。"
+    ],
+    "cost": {
+      "compute": "预计每档约 6 至 12 秒，八档；每档独立上限 60 秒，含共享准备总上限 540 秒。",
+      "owner_time": "阅读卡片并可异步修正，无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "推荐执行对称步长对照：它以小预算直接测量 B02 最清楚的简单替代解释，同时保留探索与确认的边界。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md"
+  }
+}

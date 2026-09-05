@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-005",
+  "created": "2026-09-04T16:44:46-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "E3 恢复：接续 medium D2 seed 3 与余下大差异单元",
+  "context": "所有者从最终 handoff 恢复自动研究，E3 目前 11/18 有效、0 运行。CM 已核对下一远端任务和远端/本地结果根不存在，接受的运行器字节未改。按原卡接续 medium_d2_seed3，再逐格完成六个大差异单元；逐次远端准入，CPU 四线程和八小时每格上限保持不变。完整 18 格前不作聚合判断。专用 Tracker 已双向直接 ACK。",
+  "options": [
+    {
+      "key": "a",
+      "label": "继续原卡下一格及余下六格，逐格收集 intake",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "维持已经被取代的暂停边界",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "当前明确恢复指令和既有卡已经确定下一格，来源字节与未创建状态均已核对。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_CONTINUATION_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-continue-tracker-20260904",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

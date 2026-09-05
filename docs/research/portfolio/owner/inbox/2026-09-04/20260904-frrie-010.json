@@ -1,0 +1,38 @@
+{
+  "id": "20260904-frrie-010",
+  "created": "2026-09-04T14:36:16-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "按所有者恢复指令执行原 R02 远端单次运行",
+  "context": "所有者已明确说“我们开始推进自动研究流程”，Root 随后指定恢复原 contact-active R128 R02。先前暂停发生在任何任务、准入、模型、训练或评估被接受之前；本次保留原卡、根、CPU FP32、双方预算与 seen N={9,15}。只执行既有对象，不开启新族、不重新预测、不扩展旧三根结果。CM 在独立 worktree 核实原远端 task 无重复与精确已提交源，再用一次 detached admission && runner 运行。",
+  "options": [
+    {
+      "key": "a",
+      "label": "恢复原卡唯一远端运行",
+      "consequence": "执行已授权的真实 learner 判别器，结论仍限一根 B 探索；后续可在干净边界改变下一对象。"
+    },
+    {
+      "key": "b",
+      "label": "继续旧暂停",
+      "consequence": "继续搁置可运行对象，违背当前恢复指令。"
+    },
+    {
+      "key": "c",
+      "label": "改卡或换根后再运行",
+      "consequence": "改变未观测对象，需另行说明科学差异；当前没有必要。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原对象未启动且源已提交，当前所有者指令已解除暂停，因此继续原单次运行。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_RESUME_HANDOFF_20260904.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L214",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

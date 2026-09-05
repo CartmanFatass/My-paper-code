@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-005",
+  "created": "2026-09-04T09:11:10-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "CBSC A01 当前宿主 headroom 资产预测",
+  "context": "这是该只读 census ladder 的首次预测。DM 预计旧 exact upper 与 LR01/动态 RAW 证据因宿主、population、对象和 tuning 不匹配，当前动态宿主没有可相减 pair；owner prediction 不阻塞盘点。",
+  "options": [
+    {
+      "key": "a",
+      "label": "matched raw gap 已存在",
+      "consequence": "盘点将报告两项 raw return 与差值，不作阈值判断。"
+    },
+    {
+      "key": "b",
+      "label": "只有一个当前宿主项存在",
+      "consequence": "盘点报告缺失的一项，gap 保持 null。"
+    },
+    {
+      "key": "c",
+      "label": "候选错配或缺失，没有 matched pair",
+      "consequence": "盘点记录所有错配/缺失，gap 保持 null。"
+    }
+  ],
+  "recommended": "c",
+  "auto_applied": null,
+  "dm_reason": "exact RAW optimum 是旧一次机会协议，LR01 是不同离线有限面板，动态 B1 尚无有效结果。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L71",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

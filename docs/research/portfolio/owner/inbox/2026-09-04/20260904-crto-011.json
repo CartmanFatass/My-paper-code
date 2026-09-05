@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-011",
+  "created": "2026-09-04T14:48:16-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "选择一次带堆栈输出的原路径复现",
+  "context": "Root要求继续推进可行的有界精确复现。原始失败无core可供离线检查。选择同一源码、CPU与解释器，以Python自带faulthandler做一次最多90秒的诊断，启动前重新准入；不修改源码、数值语义、RAW卡片或运行环境。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次90秒原路径堆栈诊断",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "停在未知原因",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "无诊断重跑或切换运行环境",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "该诊断直接补充缺失的失败步骤证据，既不扩展原实验，也不把未完成记录变成科学结果。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_NATIVE_REPRO_A02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L222",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

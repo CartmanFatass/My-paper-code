@@ -1,0 +1,32 @@
+{
+  "id": "20260904-mgtap-008",
+  "created": "2026-09-04T15:46:37-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "decision",
+  "title": "B02：按原卡完成三种子主曲线后收尾",
+  "context": "实测预计 METRIC/FREE 三种子各 11.48/6.16 秒，均小于各 300 秒上限。所有者允许当前原卡主实验完成后安全收尾。",
+  "options": [
+    {
+      "key": "a",
+      "label": "原卡三种子主实验，每次重新准入",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "仅以成本运行结束本轮",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "成本远低于已定上限；原卡主实验能回答当前问题，且不扩展范围。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B02_PILOT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L302",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

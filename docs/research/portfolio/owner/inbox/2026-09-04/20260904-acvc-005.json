@@ -1,0 +1,37 @@
+{
+  "id": "20260904-acvc-005",
+  "created": "2026-09-04T11:33:11-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "远端 cost 准备跳过已复现的冗余 fetch",
+  "context": "远端 exact commit 已存在，但唯一 cost payload 在执行计算前因 GitHub SSL fetch 超时。DM 选择直接核验现有对象、建立 detached worktree，并只运行一次结果盲 cost；没有本地 fallback 或科学输出。",
+  "options": [
+    {
+      "key": "a",
+      "label": "使用现有 exact object 且不再 fetch",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "转为本地 fallback",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "在 cost 前停驻",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是结果盲、可逆且符合 remote-first 的最小准备修复。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L93",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

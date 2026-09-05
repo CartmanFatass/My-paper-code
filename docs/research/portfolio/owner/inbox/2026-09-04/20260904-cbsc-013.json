@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-013",
+  "created": "2026-09-04T15:07:23-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC r07 隔离并修复资源遥测拒绝路径",
+  "context": "r07 在首个组合训练文件齐全后终止；其计数与检查点通过核对，但没有回放，其余十一组合和完整发布缺失。原底层异常未保存。受控复现确认资源采样错误可触发终止，并确认发布器仅因资源测量不完整就拒绝真实学习记录。选择修复现有路径以执行所有者的资源缺失降级规则。",
+  "options": [
+    {
+      "key": "a",
+      "label": "只增加进程退出复查",
+      "consequence": "针对未证实的竞态，仍保留已复现的下游资源拒绝。"
+    },
+    {
+      "key": "b",
+      "label": "隔离未完成尝试，修复完整资源降级路径",
+      "consequence": "资源缺失记录为未测量；真实学习计数、退出、检查点、回放与墙钟限制继续严格检查，不启动 r08。"
+    },
+    {
+      "key": "c",
+      "label": "续跑或解释 r07 的局部数据",
+      "consequence": "会把不完整尝试当成原 B1 结果，改变科学分配。"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "原故障细节仍不明，但资源错误本身导致的终止及发布拒绝已经在原源码上受控复现，修复该规则边界有直接依据。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R07_TELEMETRY_INCIDENT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r07-telemetry-incident",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

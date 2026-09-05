@@ -1,6 +1,124 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配置与几何** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
+
+## Convergence family boundary after B03 — 2026-09-04
+
+The complete same-node Convergence answer executes
+`PRO_FINAL=PARK_CURRENT_ALLOCATION_COORDINATE_FAMILY`: reversibly park this
+allocation-coordinate family pending a concrete native-value B discriminator
+against equally exposed, competent same-information tuned FREE. No successor
+learner, automatic grid extension or recast is selected. This family boundary
+does not close the broader direction or change Portfolio lifecycle or priority.
+
+The strongest support is the recurring small low-rate contrast together with
+its reduction to +0.000655478018 under equal rate selection, while FREE's own
+gain is +0.200872633192. Generic finite-optimization sensitivity is the leading
+explanation at this toy's declared scale. The strongest contradiction to parking
+is METRIC's positive mean at every common rate, the upper grid edge, and FREE's
+remaining endpoint headroom. That 0.040598777488 endpoint gap is neither the AUC
+estimand nor a forecast of recoverable metric advantage. Anisotropic conditioning,
+clipping, implicit regularization and binding/population effects remain live.
+
+Re-entry must name the structural event, available information, action/credit
+path and learner exposure that predict a consequential native-return difference
+relative to tuned FREE, plus the choice each outcome would change. For the same
+host/estimand retain paired normalized AUC, matched training/selection exposure,
+the demonstrated FREE rate-3 anchor and working MEI 0.01; CUT may supplement
+but cannot replace that competent comparator. This asks for a worthwhile question,
+not a positive result in advance or C-time confirmation. No new object is defined.
+
+The claim ceiling remains B/EXPLORE on the centralized balanced trained-N=4/8
+allocation toy. B02 and B03 stay valid inside-MEI observations, without equivalence,
+stable superiority or pure metric causality. Both historical C terminal meanings
+are preserved. Evidence: `MGTAP_B03_CONVERGENCE_INTAKE_20260904.md` and the exact
+answer `pro_packets/b03_convergence_fresh6pro_20260904/archive/RESPONSE.md`.
+
+## Accepted B03 scalar-rate control — 2026-09-04
+
+The complete same-information, equal-search-budget B03 panel is valid
+`B03_SELECTED_INSIDE_MEI`. Both METRIC and FREE select scalar SGD rate 3.0
+from {0.1,0.3,1,3} by mean learning-curve AUC over three fresh seeds. The
+selected METRIC-minus-FREE difference is +0.0006554780183014955, inside the
+declared absolute MEI 0.01, with seed contrasts +0.0009539286, -0.0006710476
+and +0.0016835531. Both winners are at the grid edge; same-panel selection
+makes this a development observation, not independent confirmation or equivalence.
+
+The fresh rate-0.1 anchor remains +0.0084101359, close to B02, while rate
+selection improves METRIC AUC by 0.1931180 and FREE by 0.2008726. Selected
+FREE exceeds METRIC at rate 0.1 by 0.1924625. The strongest supported inference
+is therefore scalar-step-size sensitivity of the earlier small separation;
+that separation is no longer evidence of distinctive metric value over the
+observed competent generic comparator. The selected residual remains small
+at both trained N=4 and N=8. This does not settle anisotropic conditioning,
+clipping, implicit regularization, ground binding or a different population.
+
+The matched oracle is 0.66875 and selected FREE's endpoint is
+0.6281512225115741, giving a grid-tuned trained-population headroom diagnostic
+of 0.040598777488426, with full seed curves. Globally tuned and held-out-N=6/12
+headroom remain absent. Strongest contradiction to further fixed-coordinate
+advantage claims is the below-MEI residual under equal tuning exposure;
+strongest caution against closure is the grid boundary and only three exploratory
+seeds. The ceiling remains the centralized balanced N=4/8 allocation toy, without
+churn, transfer, warehouse or UAV claims. Both old C meanings are unchanged.
+
+The next scientific question is whether any proposed ground-binding or roster
+discriminator can identify native value beyond this tuned same-information FREE
+null at matched work. A weaker binding comparator or a predictive statistic
+alone would not answer that question. No such further result exists yet.
+
+Evidence: `MGTAP_B03_STEPSIZE_SCIENCE_CARD_20260904.md`,
+`MGTAP_B03_MAIN_RESULT_EVIDENCE_20260904.md`,
+`MGTAP_B03_MAIN_SUMMARY_20260904.json`, `MGTAP_B03_MAIN_INTAKE_20260904.md`,
+and `MGTAP_B03_STEPSIZE_20260904.png`.
+
+## Accepted B02 learning-curve observation — 2026-09-04
+
+The new owner-adopted B/EXPLORE question is finite-budget learning geometry on
+the existing allocation toy. Its first complete comparison is
+`B02_INSIDE_MEI`: mean METRIC-minus-FREE curve AUC is
+`+0.008396685564959483`, below this object's absolute MEI `0.01`. The three paired
+seed contrasts are `+0.008041720920139`, `+0.007686614990234` and
+`+0.009461720784505`. This is a positive observed difference below the declared
+effect of interest; it is neither practical equivalence nor a metric-family negative.
+
+Both equal-class, same-information actors trained at N=4/8 for 256 updates per
+seed, with zero initialization, SGD 0.1 and no explicit weight decay. All 17
+evaluation points and learner traces are complete. Mean return at update 256 is
+0.491427951388889 for METRIC and 0.484165219907407 for FREE. The same-population
+oracle is 0.66875; the untuned finite-budget FREE gap is 0.184584780092593.
+The tuned baseline headroom record, particularly at held-out N=6/12, remains absent.
+
+Strongest support is positive AUC separation in all three paired seeds with real
+native-return learning and matched work. Strongest contradiction to a material
+advantage is the below-MEI aggregate and the single fixed optimizer setting.
+Generic conditioning/effective step size and implicit finite-training regularization
+remain the strongest alternatives. No binding-cut or conditioning-matched control
+isolates a metric-specific cause. The ceiling is preliminary centralized balanced
+allocation learning at trained sizes, without churn, transfer, warehouse or UAV claims.
+
+The next candidate discriminator is a same-information step-size/conditioning
+control, to be selected only after a later research resume. The current round
+ends at completed intake; no successor card or launch is created. The two old
+C objects below remain terminal at their original structural-nonidentification
+meanings. Their stationarity gate is historical authority for those objects and
+does not control the new B learning curves.
+
+Evidence: `MGTAP_B02_CURVES_SCIENCE_CARD_20260904.md`,
+`MGTAP_B02_PILOT_INTAKE_20260904.md`,
+`MGTAP_B02_MAIN_RESULT_EVIDENCE_20260904.md`,
+`MGTAP_B02_MAIN_SUMMARY_20260904.json`,
+`MGTAP_B02_MAIN_INTAKE_20260904.md`, and `MGTAP_B02_CURVES_20260904.png`.
 
 ## Authority
 

@@ -1,0 +1,19 @@
+{
+  "question": "是否认可在现有成员替换环境上，用一次小规模实验比较类型化状态保留、通用更新和信息切断，并保留简单记忆控制？",
+  "changes_if_approved": [
+    {"target": "N3 的 FOLR 子问题", "from": "只有旧写入器结果，通用接收器尚未运行", "to": "三个种子，各用固定一百二十八次更新，观察真实替换后的完整回报曲线"}
+  ],
+  "if_refused": "在下一干净边界应用修改或拒绝意见；保留全部历史结果，不改变其他路线或已停止对象。",
+  "evidence_for": [
+    {"path": "docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_RESULT_EVIDENCE_20260904.md", "quote": "No eligible tuned same-host generic learner baseline exists in the accepted B3 record.", "why": "现有环境的关键比较仍为空，直接补测比重做资料清点更有用。"},
+    {"path": "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md", "quote": "这组可以先选择一个已有、最容易回答问题的 host；不必先搭建统一大平台，也不必恢复四套独立基线与四条完整管理链。", "why": "本卡只使用一个现有环境、一个状态掩码干预。"}
+  ],
+  "evidence_against": [
+    {"path": "docs/external-review/2026-09-04-two-line-consolidation-6pro/OWNER_FOLLOWUP_02_RESPONSE.md", "quote": "已有 FOLR 技术接受记录中，S03 KEEP 的平均回报约为 `0.852`，RESET 为 `0.5`，简单 latch 约为 `0.970`。", "why": "简单记忆可能吸收复杂表示的表面价值，所以本次明确测量简单控制。"},
+    {"path": "docs/research/candidates/vap_folr_core/FOLR_B3_HEADROOM_CENSUS_A01_RESULT_EVIDENCE_20260904.md", "quote": "Representation containment is not achieved finite-budget return.", "why": "通用类能表示类型化映射，但当前预算是否学会仍未知。"}
+  ],
+  "uncertainty": ["延长写入器训练可能仍不足，但不会阻止本次接收器比较。", "三个种子只能提供探索信号，不能证明稳定优势或无人机迁移。", "简单控制的额外训练量为零，其计算成本与匹配的学习比较单独报告。"],
+  "cost": {"compute": "总运行上限四十分钟；技术小样本产生各臂成本预测，每臂含共享写入成本不得超过十分钟。", "owner_time": "可异步查看，无需现在答复。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "Recommend and select (a): a fixed B04 host/mask continuation, obtaining the missing generic comparison on a real replacement host with one intervention while retaining the simpler latch and the information-cut control.",
+  "source": "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_SCIENCE_CARD_20260904.md"
+}

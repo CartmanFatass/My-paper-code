@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-029",
+  "created": "2026-09-04T18:06:57-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B03：原顺序胜任，配对顺序未胜任",
+  "context": "",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "每行暴露相同，但局部侧别收益和损失互相抵消，未满足比较器目标。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b03-paired-order-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-04_paired_order_b03.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

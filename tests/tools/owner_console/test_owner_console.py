@@ -153,9 +153,9 @@ def test_active_board_and_wave(tmp_path):
         encoding="utf-8")
     assert srv.investment_wave(root)["flexible_skill_duration"] == 2
     b = srv.active_board(root)
-    assert b["totals"] == {"directions": 2, "active": 1, "parked": 1, "open": 1, "answered_today": 0}
+    assert b["totals"] == {"directions": 2, "active": 1, "parked": 1, "open": 0, "answered_today": 0}
     fsd = b["rows"][0]
-    assert fsd["direction"] == "flexible_skill_duration" and fsd["code"] == "fsd" and fsd["wave"] == 2 and fsd["open"] == 1
+    assert fsd["direction"] == "flexible_skill_duration" and fsd["code"] == "fsd" and fsd["wave"] == 2 and fsd["open"] == 0
     assert b["rows"][1]["lifecycle"] == "PARKED"
 
 
@@ -177,7 +177,7 @@ def test_item_cli_add_and_reviews(tmp_path, capsys):
     printed = capsys.readouterr().out.strip()
     item = json.loads((root / printed).read_text(encoding="utf-8"))
     assert [o["key"] for o in item["options"]] == ["accept", "reject", "revise"]
-    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "decision", "--title", "t"]) == 2
+    assert cli.main(["--root", str(root), "add", "--direction", "ucope", "--kind", "decision", "--title", "t"]) == 0
     srv.write_reply(root, item["id"], "reject", "not MARL")
     assert cli.main(["--root", str(root), "reviews"]) == 0
     out = capsys.readouterr().out
@@ -241,3 +241,85 @@ def test_export_selected(tmp_path):
     out = srv.export_selected(root, ["20260905-fsd-001"], "pro packet")
     assert out.name.endswith("_pro-packet.md")
     assert "(a) E2b ★" in out.read_text(encoding="utf-8")
+
+
+def test_p2_queue_preserves_low_priority_owner_instructions(tmp_path):
+    import datetime as dt
+    root = make_repo(tmp_path, dt.date.today().isoformat())
+    before = (root / srv.OWNER_REL / "inbox" / dt.date.today().isoformat() / "20260905-fsd-001.json").read_bytes()
+    assert srv.review_items(root) == []
+    assert srv.active_board(root)["totals"]["open"] == 0
+    srv.write_reply(root, "20260905-fsd-001", "b", "apply my existing override")
+    assert srv.pending_instructions(root)[0]["choice"] == "b"
+    assert (root / srv.OWNER_REL / "inbox" / dt.date.today().isoformat() / "20260905-fsd-001.json").read_bytes() == before
+    p = srv.new_item(root, "portfolio", "portfolio", "keep important review", [
+        {"key": "ratify", "label": "ratify", "consequence": "apply proposal"}],
+        tier="portfolio", packet=PACKET)
+    assert [i["id"] for i in srv.review_items(root)] == [p.stem]
+    assert srv.active_board(root)["totals"]["answered_today"] == 0
+
+
+def test_cli_skips_p3_p4_without_creating_inbox(tmp_path):
+    import subprocess
+    for kind in ("decision", "prediction", "brief"):
+        result = subprocess.run([sys.executable, str(ROOT / "tools/owner_console/item.py"),
+            "--root", str(tmp_path), "add", "--direction", "ucope", "--kind", kind,
+            "--title", "ordinary record"], capture_output=True, text=True)
+        assert result.returncode == 0, result.stderr
+        assert result.stdout.startswith("skipped P")
+    assert not (tmp_path / srv.OWNER_REL).exists()
+
+
+def test_important_trace_retains_old_answer_and_stays_visible(tmp_path):
+    root = make_repo(tmp_path, "2020-01-01")
+    p = srv.new_item(root, "portfolio", "portfolio", "policy", [
+        {"key": "apply", "label": "apply", "consequence": "bounded change"}],
+        tier="portfolio", packet=PACKET, day="2020-01-01")
+    srv.write_reply(root, p.stem, "apply", "original attribution")
+    reply = p.with_suffix(".reply.json")
+    original = reply.read_bytes()
+    srv.mark_answered(root, p.stem)
+    srv.record_trace(root, p.stem, authority="OWNER_DIRECT", source="docs/current.md",
+        record="docs/correction.md", state="applied", summary="explicit approval now",
+        auto_applied="apply", correction="Prior approval attribution was unsupported.")
+    assert reply.read_bytes() == original
+    it = next(i for i in srv.starred_items(root) if i["id"] == p.stem)
+    assert it["status"] == "answered" and it["reply_attribution_corrected"]
+    assert it["execution_history"][0]["state"] == "applied"
+    assert srv.review_items(root, days=7) == []
+    review = srv.render_review(root, json.loads(original)["answered_at"][:10])
+    assert "historical reply attribution superseded" in review.read_text(encoding="utf-8")
+    exported = srv.export_selected(root, [p.stem], "starred")
+    assert "authorization correction:" in exported.read_text(encoding="utf-8")
+    assert "docs/correction.md" in exported.read_text(encoding="utf-8")
+    # A later real owner reply must not inherit the superseded attribution.
+    newer = json.loads(original)
+    newer["answered_at"] = "2099-01-02T01:00:00+00:00"
+    reply.write_text(json.dumps(newer), encoding="utf-8")
+    assert not srv.starred_items(root)[0]["reply_attribution_corrected"]
+
+
+def test_trace_does_not_fabricate_reply_or_promote_ordinary_item(tmp_path):
+    root = make_repo(tmp_path, "2020-01-01")
+    p = srv.new_item(root, "portfolio", "portfolio", "policy", [
+        {"key": "apply", "label": "apply", "consequence": "bounded change"}],
+        tier="portfolio", packet=PACKET)
+    args = dict(authority="PRO_FINAL / OWNER_DELEGATED", source="docs/pro.md",
+                record="docs/intake.md", state="applied", summary="selected scope")
+    srv.record_trace(root, p.stem, **args, auto_applied="apply")
+    assert not p.with_suffix(".reply.json").exists()
+    assert json.loads(p.read_text(encoding="utf-8"))["status"] == "open"
+    with pytest.raises(ValueError, match="P3/P4"):
+        srv.record_trace(root, "20260905-fsd-001", **args)
+    with pytest.raises(ValueError, match="requires an applied option"):
+        srv.record_trace(root, p.stem, **{**args, "state": "planned"}, auto_applied="apply")
+
+
+def test_new_owner_override_reopens_previously_applied_reply(tmp_path):
+    import datetime as dt
+    root = make_repo(tmp_path, dt.date.today().isoformat())
+    srv.write_reply(root, "20260905-fsd-001", "a", "first")
+    srv.mark_answered(root, "20260905-fsd-001")
+    assert srv.pending_instructions(root) == []
+    srv.write_reply(root, "20260905-fsd-001", "b", "new override")
+    assert srv.pending_instructions(root)[0]["choice"] == "b"

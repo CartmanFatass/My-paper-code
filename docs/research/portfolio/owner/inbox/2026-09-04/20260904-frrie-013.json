@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-013",
+  "created": "2026-09-04T15:03:52-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "隔离 R03，并只移除 R02 未要求的浮点中间量逐位门槛",
+  "context": "CM 已复现首个更新的后缀审计失败：七路重放对三十二路原轨迹的少量隐藏状态和概率相差约三千万分之一，动作完全相同。继续全部七路后缀，动作、native 状态、观察与最终回报都完全相同；同样输入补到三十二路则中间量也相同。R02 只要求实际动作和 native 路径可复现，不声称不同批宽的浮点中间量逐位一致。隔离没有完整结果的 R03，只对 R02 路径去掉这三项中间量逐位检查，保留全部动作和 native 检查及原计算、RNG、预算和卡。",
+  "options": [
+    {
+      "key": "a",
+      "label": "隔离失败尝试并做 R02 最小检查修复",
+      "consequence": "新实现保留真实动作与 native 轨迹约束；只去掉卡未要求的中间量逐位门槛，旧尝试不恢复或解释。"
+    },
+    {
+      "key": "b",
+      "label": "补齐批宽或改变计算以追求逐位一致",
+      "consequence": "会改变执行计算或工作量，超出最小修复并需重新说明比较语义。"
+    },
+    {
+      "key": "c",
+      "label": "继续被中间量逐位门槛阻挡",
+      "consequence": "已证明在该后缀不改变实际动作或回报的舍入差异仍阻止 B 探索。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "直接重现区分了数值中间量与实际行为，保留实际 native 约束而移除未要求的逐位门槛最符合原 B 卡。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R03_FAILURE_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L217",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

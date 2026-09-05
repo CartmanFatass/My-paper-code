@@ -29,6 +29,7 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_co
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_metrics_artifact import (
     AUC_METADATA_FIELDS,
     B1_METRICS_TEST_SCHEMA,
+    B1_RESULT_RULE_SUMMARY_SCHEMA,
     DIAGNOSTIC_METADATA_FIELDS,
     LITERAL_NULL_DERIVED_FIELDS,
     MetricsArtifactError,
@@ -38,6 +39,7 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_me
     canonicalize_metrics_table_order,
     conservative_formal_size_projection,
     materialize_metrics_only_tables,
+    materialize_result_rule_summary,
     prepare_metrics_only_tables,
     publish_metrics_only_complete,
     require_parallel_module_protocols,
@@ -48,6 +50,9 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_me
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_mechanical import (
     b0_nonpolarity_record,
+)
+from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_descriptive import (
+    unavailable_descriptive_curves,
 )
 
 
@@ -311,6 +316,23 @@ def _laws() -> dict[str, str]:
     )}
 
 
+def _summary_binding(staging: Path, inventory, descriptive=None):
+    by_name = {row["table"]: row for row in inventory}
+    summary = {
+        "schema": B1_RESULT_RULE_SUMMARY_SCHEMA,
+        "raw_table_bindings": [{
+            "table": name, "relative_path": by_name[name]["relative_path"],
+            "row_count": by_name[name]["row_count"],
+            "byte_count": by_name[name]["byte_count"], "sha256": by_name[name]["sha256"],
+        } for name in (
+            "policy_decisions", "per_tape_curves", "training_episodes",
+            "optimizer_steps", "raw_competence",
+        )],
+        "descriptive_curves": descriptive or unavailable_descriptive_curves("TEST_ONLY fixture"),
+    }
+    return materialize_result_rule_summary(staging, summary, allowed_root=staging.parent)
+
+
 def test_plan_binds_metrics_only_spec_and_response_identity() -> None:
     plan = B1Plan().as_dict()
     assert plan["metrics_only_spec_path"] == B1_METRICS_ONLY_SPEC_RELATIVE_PATH
@@ -332,13 +354,14 @@ def test_metrics_bundle_is_lossless_create_only_and_literal_null(
     inventory = materialize_metrics_only_tables(
         staging, _tables(), allowed_root=tmp_path, allow_test_only=True
     )
+    summary_binding = _summary_binding(staging, inventory)
     artifact_inventory = build_complete_artifact_inventory(staging)
     manifest = build_metrics_only_manifest(
         identity=identity, b0_evidence=b0, table_inventory=inventory,
         law_digests=_laws(),
         artifact_inventory=artifact_inventory,
         literal_nulls=_null_packet(), mechanical=_mechanical(),
-        incident_references=[], test_only=True,
+        incident_references=[], summary_binding=summary_binding, test_only=True,
     )
     validated = validate_metrics_only_manifest(
         manifest, root=staging, allow_test_only=True
@@ -403,13 +426,14 @@ def test_metrics_bundle_rejects_reordered_rows_digest_drift_and_nonnull_derivati
     inventory = materialize_metrics_only_tables(
         staging, _tables(), allowed_root=tmp_path, allow_test_only=True
     )
+    summary_binding = _summary_binding(staging, inventory)
     artifact_inventory = build_complete_artifact_inventory(staging)
     manifest = build_metrics_only_manifest(
         identity=identity, b0_evidence=b0, table_inventory=inventory,
         law_digests=_laws(),
         artifact_inventory=artifact_inventory,
         literal_nulls=_null_packet(), mechanical=_mechanical(),
-        incident_references=[], test_only=True,
+        incident_references=[], summary_binding=summary_binding, test_only=True,
     )
     (staging / inventory[0]["relative_path"]).write_bytes(b"{}\n")
     with pytest.raises(MetricsArtifactError, match="digest"):
@@ -450,7 +474,7 @@ def test_formal_manifest_is_fail_closed_until_full_module_integration() -> None:
             identity=_identity(), b0_evidence=_b0(), table_inventory=[],
             law_digests=_laws(), artifact_inventory=[],
             literal_nulls=_null_packet(), mechanical=_mechanical(),
-            incident_references=[], test_only=False,
+            incident_references=[], summary_binding={}, test_only=False,
         )
 
 
@@ -463,7 +487,7 @@ def test_gate_true_cannot_enable_caller_formal_build_or_publish(
             identity=_identity(), b0_evidence=_b0(), table_inventory=[],
             law_digests=_laws(), artifact_inventory=[],
             literal_nulls=_null_packet(), mechanical=_mechanical(),
-            incident_references=[], test_only=False,
+            incident_references=[], summary_binding={}, test_only=False,
         )
     with pytest.raises(MetricsArtifactError, match="only through"):
         publish_metrics_only_complete(
@@ -491,12 +515,13 @@ def test_prospective_census_preserves_nested_manifest_and_publish_is_create_only
     inventory = materialize_metrics_only_tables(
         staging, _tables(), allowed_root=tmp_path, allow_test_only=True
     )
+    summary_binding = _summary_binding(staging, inventory)
     artifact_inventory = build_complete_artifact_inventory(staging)
     manifest = build_metrics_only_manifest(
         identity=identity, b0_evidence=b0, law_digests=_laws(),
         table_inventory=inventory, artifact_inventory=artifact_inventory,
         literal_nulls=_null_packet(), mechanical=_mechanical(),
-        incident_references=[], test_only=True,
+        incident_references=[], summary_binding=summary_binding, test_only=True,
     )
     estimate = validate_prospective_output_cap(
         artifact_inventory=artifact_inventory, manifest=manifest

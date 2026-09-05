@@ -1,0 +1,43 @@
+{
+  "question": "是否接受一次合成接口复现，核实服务预测的概率语义和协方差头的训练图路径？",
+  "changes_if_approved": [
+    {
+      "target": "DISH · A05 科学卡",
+      "from": "A04 已解释四次拒绝；训练到证书的接口问题只有静态源码定位",
+      "to": "一次有界合成调用：检查真实角色映射、训练头图及原生概率函数，随后 intake"
+    }
+  ],
+  "if_refused": "保留 A04 和现有家族结论；不执行 A05，不修改预测头、门槛或旧实验。先按回复重写具体判别。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_ORIGIN_CERTIFICATE_A04_INTAKE_20260905.md",
+      "quote": "A runtime reproduction can distinguish an actual boundary/training-path fact from an inference based only on code, before any changed controller is proposed.",
+      "why": "四次拒绝已有两个明确预测条件；先复现源码指出的接口路径，可避免把静态推测直接当成修复依据。"
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCIENCE_CARD_20260905.md",
+      "quote": "Use the genuine constructor and methods, without monkeypatching model outputs, dummy policy objects, copied trainer logic, source-string extraction or replacement factories.",
+      "why": "合成数据经过原来的真实函数；两种角色、显式概率对照和图连接正对照均提前固定。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCIENCE_CARD_20260905.md",
+      "quote": "This concerns the actual API and this synthetic scalar only. It cannot measure old B01 mask support, its full learner gradients, training convergence or indirect changes through the shared encoder/GRU.",
+      "why": "即使接口问题被复现，也不能据此声称真实预测已校准、更多训练有效或迁移有收益。"
+    }
+  ],
+  "uncertainty": [
+    "实际训练中的标签掩码覆盖、逐头更新和预测质量仍未测量。",
+    "新原生入口只转调原函数，不推进环境；其结果不能替代合法交接与服务证据。",
+    "任何概率转换、协方差训练或控制器修复都需要结果后的独立决定。"
+  ],
+  "cost": {
+    "compute": "正式一次调用预计 25.5 秒，上限 60 秒；另有一次不同合成输入的完整测试，上限 60 秒。正式调用含一个模型、两次反向传播、九次纯 native 函数调用；零优化器和环境步。",
+    "owner_time": "本卡约一分钟；不创建普通决定、技术或简报批改项。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；按现有委托推进，回复在下一干净边界生效。"
+  },
+  "verdict_text": "建议接受 A05：先用真实函数完成合成接口复现，保持旧生产代码、参数和环境不变，再根据记录选择是否需要单独修复或新的科学判别。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCIENCE_CARD_20260905.md"
+}

@@ -60,6 +60,7 @@ from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.artif
     canonical_json_bytes,
 )
 from experiments.candidates.capability_bound_semantic_currentness.omrc_b01.telemetry import (
+    TelemetryError,
     validate_telemetry,
 )
 
@@ -407,23 +408,23 @@ def test_stage_measurements_are_monitor_validatable_and_use_slice_counts() -> No
     stages = build_stage_measurements(
         counts,
         train_wall_seconds=2.0,
-        train_cpu_seconds=1.5,
+        train_cpu_seconds=0.0,
         evaluation_wall_seconds=1.0,
-        evaluation_cpu_seconds=0.75,
+        evaluation_cpu_seconds=0.0,
     )
     assert isinstance(stages, list)
     assert stages == [
         {
             "stage": "train",
             "wall_seconds": 2.0,
-            "cpu_seconds": 1.5,
+            "cpu_seconds": 0.0,
             "transitions": 12 * 8 * 152,
             "transitions_per_second": 12 * 8 * 152 / 2.0,
         },
         {
             "stage": "evaluate",
             "wall_seconds": 1.0,
-            "cpu_seconds": 0.75,
+            "cpu_seconds": 0.0,
             "transitions": 64 * 152,
             "transitions_per_second": 64 * 152 / 1.0,
         },
@@ -435,9 +436,9 @@ def test_stage_measurements_are_monitor_validatable_and_use_slice_counts() -> No
             "sample_interval_seconds": 0.05,
             "sample_count": 2,
             "end_to_end_wall_seconds": 3.0,
-            "end_to_end_cpu_seconds": 2.25,
-            "cpu_core_equivalents": 0.75,
-            "cpu_occupancy_fraction": 0.75,
+            "end_to_end_cpu_seconds": 0.0,
+            "cpu_core_equivalents": 0.0,
+            "cpu_occupancy_fraction": 0.0,
             "process_tree_peak_rss_bytes": 1,
             "peak_process_count": 1,
             "peak_thread_count": 1,
@@ -455,6 +456,61 @@ def test_stage_measurements_are_monitor_validatable_and_use_slice_counts() -> No
         }
     )
     assert validated["stage_measurements"] == stages
+    for invalid in (-1.0, float("nan"), float("inf"), True):
+        with pytest.raises(B1EngineError):
+            build_stage_measurements(
+                counts,
+                train_wall_seconds=2.0,
+                train_cpu_seconds=invalid,
+                evaluation_wall_seconds=1.0,
+                evaluation_cpu_seconds=0.0,
+            )
+
+
+def test_zero_quantized_process_cpu_is_valid_but_invalid_cpu_values_are_refused() -> None:
+    measurement = {
+        "measurement_complete": True,
+        "measurement_source": "bounded-test-process-tree",
+        "sample_interval_seconds": 0.05,
+        "sample_count": 2,
+        "end_to_end_wall_seconds": 1.0,
+        "end_to_end_cpu_seconds": 0.0,
+        "cpu_core_equivalents": 0.0,
+        "cpu_occupancy_fraction": 0.0,
+        "process_tree_peak_rss_bytes": 1,
+        "peak_process_count": 1,
+        "peak_thread_count": 1,
+        "worker_count": 1,
+        "threads_per_worker": 1,
+        "io_read_bytes": 0,
+        "io_write_bytes": 0,
+        "scratch_high_water_bytes": 0,
+        "durable_high_water_bytes": 0,
+        "scientific_work_transitions": 1,
+        "scientific_work_transitions_per_second": 1.0,
+        "stage_measurements": [{
+            "stage": "fixture", "wall_seconds": 1.0, "cpu_seconds": 0.0,
+            "transitions": 1, "transitions_per_second": 1.0,
+        }],
+    }
+    validated = validate_telemetry(measurement)
+    assert validated["end_to_end_cpu_seconds"] == 0.0
+    assert validated["cpu_core_equivalents"] == 0.0
+    assert validated["cpu_occupancy_fraction"] == 0.0
+
+    for field in (
+        "end_to_end_cpu_seconds", "cpu_core_equivalents", "cpu_occupancy_fraction"
+    ):
+        for invalid in (-1.0, float("nan"), float("inf"), True):
+            with pytest.raises(TelemetryError, match="nonnegative finite number"):
+                validate_telemetry({**measurement, field: invalid})
+    for invalid in (-1.0, float("nan"), float("inf"), True):
+        invalid_stage = dict(measurement)
+        invalid_stage["stage_measurements"] = [{
+            **measurement["stage_measurements"][0], "cpu_seconds": invalid,
+        }]
+        with pytest.raises(TelemetryError, match="nonnegative finite number"):
+            validate_telemetry(invalid_stage)
 
 
 def test_worker_result_wrapper_has_independent_schema_and_null_science() -> None:

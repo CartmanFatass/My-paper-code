@@ -1,0 +1,9 @@
+where
+p ("FIELD_TYPES", type(obj).__name__, type(f).__name__, getattr(f, "name", None))
+p ("FIELD_INVENTORY", [(k, type(v).__name__, getattr(v, "name", None)) for k, v in type(obj).__dataclass_fields__.items()])
+up 2
+p ("ADDRESS", self.seed_block, self.purpose, self.roster, self.update, self.episode, self.basin, self.event_ordinal, self.slot, self.public_role, self.role_local_index, self.sender, self.receiver, self.kind, self.draw)
+up 6
+p ("COUNTERS", number, update, paired_updates, adam, backward, training_slots)
+where
+q

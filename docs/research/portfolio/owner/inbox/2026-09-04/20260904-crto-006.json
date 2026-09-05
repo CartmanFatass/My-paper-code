@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-006",
+  "created": "2026-09-04T10:35:31-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "quarantine accepted pre-run launcher failure and return exact dependency",
+  "context": "The accepted remote supervisor task executed only a directory change: its recorded runner lost both mandatory admission and the scientific runner payload. No RNG, model, optimizer, checkpoint, evaluation, result root, or confirmation read occurred. The exact-SHA remote worktree also has 5,193 tracked deletions. Under the standing delegation, option (a) quarantines this attempt without assigning scientific polarity or authorizing a duplicate launch.",
+  "options": [
+    {
+      "key": "a",
+      "label": "quarantine the task, preserve unobserved A01, and return the exact transport dependency",
+      "consequence": "Keep the frozen RAW trace scientifically unobserved and let Root rotate the slot pending an independently verified repair."
+    },
+    {
+      "key": "b",
+      "label": "accept supervisor exit 0 as a measured RAW trace",
+      "consequence": "Misclassify a successful cd as training and fabricate scientific evidence."
+    },
+    {
+      "key": "c",
+      "label": "retry or fall back locally after the accepted remote task",
+      "consequence": "Violate the one-invocation and duplicate-launch boundary without first resolving authoritative task state."
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "Only option (a) matches the exact executed bytes, zero scientific counts, missing admission, and the card stop rule while remaining reversible.",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_INTAKE_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_RESULT_EVIDENCE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L72",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

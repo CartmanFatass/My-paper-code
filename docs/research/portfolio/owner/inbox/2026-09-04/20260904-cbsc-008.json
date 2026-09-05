@@ -1,0 +1,37 @@
+{
+  "id": "20260904-cbsc-008",
+  "created": "2026-09-04T09:18:15-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "A01 后不启动 B，向 Root 返回 headroom 资产缺口",
+  "context": "A01 只证明当前动态宿主没有匹配的上界与已调优通用基线结果对。已选择在干净边界返回 Root，不构造/调优资产、不启动 r06、不应用 MEI，也不本地改变 lifecycle、fusion、priority 或五链工作集。",
+  "options": [
+    {
+      "key": "d",
+      "label": "返回缺口并启动 nothing",
+      "consequence": "保持对象与 Portfolio 不变，让 Root 轮转方向槽位。"
+    },
+    {
+      "key": "e",
+      "label": "在 A01 内构造/调优或启动 r06",
+      "consequence": "打开未经选择的新 B 或混入 formal run。"
+    },
+    {
+      "key": "f",
+      "label": "推断零并改变 MEI/生命周期/融合",
+      "consequence": "越过证据和决策层级。"
+    }
+  ],
+  "recommended": "d",
+  "auto_applied": "d",
+  "dm_reason": "完成被分配的 census 后，任何数值资产建设都是独立对象，Portfolio 动作不属于 DM。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L74",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

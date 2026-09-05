@@ -1,0 +1,78 @@
+{
+  "id": "20260904-crto-004",
+  "created": "2026-09-04T09:50:14-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RAW update-252..264 phase-trace A/RECON",
+  "context": "Claim: On the unchanged B01 finite panel and exact seed-0 RAW trajectory, updates 252 through 264 provide a bounded measurement of local checkpoint-phase sensitivity around the comparator-weak update-256 observation. Binding structure: systems / information flow; the RAW gate acts on a four-agent common-history packet under partial observability, while this A/RECON isolates learner-order exposure and makes no residual-information claim.",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "Freeze the exact RAW-only card and continue through the bounded CM chain without waiting."
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "Stop before launch and return the unchanged BR-E boundary to Root."
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "Apply the owner's prospective revision before any later launch; prior B01 remains unchanged."
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": null,
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "question": "是否接受并继续执行 CRTO 的 RAW-only 更新 252..264 A/RECON 卡片？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_SCIENCE_CARD_20260904.md",
+        "from": "下一步只有已选择但未冻结、未实现的 RAW checkpoint trace",
+        "to": "冻结为单一路径、13 个预先声明 checkpoint、无残差效应结论的 A/RECON，并进入有界 CM 链"
+      }
+    ],
+    "if_refused": "不启动、不实现该 trace；B01 仍保持 BR-E / COMPARATOR_WEAK，方向与 Portfolio 状态均不改变，并在干净边界返回 Root。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md",
+        "quote": "The cheapest next discriminator is a separate RAW-only A/RECON trace on the same exact population, initialization, order, and batch size, with every checkpoint `252..264` declared before the run.",
+        "why": "已接受结果明确指出该 trace 是最小的下一判别器。"
+      },
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md",
+        "quote": "It separates checkpoint phase from inadequate RAW exposure/model capacity before another three-path comparison is paid for or interpreted.",
+        "why": "先定位 RAW 路径可避免在比较器尚未胜任时扩大三臂实验。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md",
+        "quote": "RAW-LONG passed the KEEP condition with `8/8` exact and zero mean regret. It failed the REPLAN condition in both ways: `4/8` exact is below the required `6/8`, and mean regret `0.0066464624` is above `0.005`.",
+        "why": "当前比较器确实较弱；此卡只能测量局部路径，不能把某个暴露后的 checkpoint 事后升级为胜任基线。"
+      }
+    ],
+    "uncertainty": [
+      "wsl_4070 CPU 是否重现本地 B01 的 update-256 锚点；若不重现则该尝试不完整且无科学极性。",
+      "即使局部相位波动明显，单 seed、结果知情面板仍不能支持稳定算法效应。"
+    ],
+    "cost": {
+      "compute": "单 RAW 臂预计 1304.1200061 秒，硬上限 1800 秒；一次 remote-first 调用。",
+      "owner_time": "约 2 分钟审阅卡片与边界。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；循环不会等待回复。"
+    },
+    "verdict_text": "Recommendation: (a). It is the smallest runnable object because it reuses the accepted B01 population and learner primitives, observes only the missing thirteen checkpoints, and preserves the exact comparator meaning.",
+    "source": "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_PHASE_TRACE_A01_SCIENCE_CARD_20260904.md"
+  }
+}

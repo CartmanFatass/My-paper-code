@@ -1,0 +1,32 @@
+{
+  "id": "20260904-cbsc-015",
+  "created": "2026-09-04T15:23:40-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CBSC 修复差异明确记录编排比例超预算",
+  "context": "当前五个运行时代码文件新增 179 行、删除 251 行，净减少 72 行；四个既有测试新增 123 行、删除 21 行。运行时差异全部属于监督、资源处理和发布，保守计数编排比例为 100%，超过 30% 预算。无新增架构、无 runner 增长。继续把已授权修复做成可审查结果，并明确返回超预算事实；尚不作最终技术接受或新尝试决定。",
+  "options": [
+    {
+      "key": "a",
+      "label": "完成验证与审查，明确返回超预算差异",
+      "consequence": "审查者列出具体编排行及正确性结论，DM 再入库裁定；不称预算合规，不启动 r08。"
+    },
+    {
+      "key": "b",
+      "label": "现在返回未验证差异",
+      "consequence": "保留超预算事实，但修复的技术性质尚未核验。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "当前任务已经授权这项可逆修复；先形成可审查结果并如实列出预算违例，比隐去比例或添加无关代码更能支持后续裁定。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_R07_TELEMETRY_INCIDENT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#cbsc-r07-repair-budget-return",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

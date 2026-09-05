@@ -1,0 +1,37 @@
+{
+  "id": "20260905-frrie-004",
+  "created": "2026-09-05T02:25:34-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接受符合后的 R06 单次运行交接",
+  "context": "最终差异的编排占比为 23/79，独立审查无实质问题，修订字节的聚焦发布测试通过一次。原 R06 已用新内存准入在远端接受，tracker 接管唯一进程；完整科学结果尚未产生。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接收符合的技术返回并保留唯一原卡运行",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "把测试或启动成功当作科学价值",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "无新理由再建运行、随机根或检查",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "当前实现满足原范围和完整性要求；只等待这一已接受运行的完整证据。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R06_ACCEPTED_RUN_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#frrie-r06-accepted-run",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

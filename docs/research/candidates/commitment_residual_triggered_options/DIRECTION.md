@@ -1,5 +1,15 @@
 # Direction commitment_residual_triggered_options: commitment residual-triggered options
 
+## Research organization — 2026-09-04
+
+This source belongs to route **K2 — 动作边界学习**, in the **中断与续约** family
+of **灵活 skill duration**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
@@ -380,3 +390,262 @@ The accepted evidence set additionally includes:
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_SCIENCE_CARD_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_RESULT_20260904.md`
 - `docs/research/candidates/commitment_residual_triggered_options/CRTO_BALANCED_RESIDUAL_B01_R1_INTAKE_20260904.md`
+
+## Diagnostic RAW trace reading A03 — 2026-09-04
+
+Separately named `CRTO-RAW-DIAGNOSTIC-TRACE-READ-A03` validly reads all updates `252..264` from
+the complete A02 diagnostic artifact at `A/RECON` ceiling. The reading explicitly uses the native
+finite signed G16 domain and nonnegative regret after reproducing the original A01 sign-check
+conflict. It preserves the original A01 INCOMPLETE flag, the earlier R02 runtime failure, and
+A02's technical `NO-FAULT-WITHIN-BOUND` identity. No learner was rerun for A03.
+
+All 64 fixed population members, 208 evaluation rows, counts, information boundaries, and both
+anchors check. Updates `252,255,258,261,264` meet the unchanged two-sided competence predicate:
+both sides have `6/8` exact actions, KEEP regret `0.003754710220270765`, and REPLAN regret
+`0.0038081499511370583`. These are all the phase-0 updates; the other eight are not competent.
+This contradicts the A03 prediction that no nearby checkpoint would pass both sides.
+
+The bounded conclusion is a local association between update phase and the competence predicate
+on this one diagnostic trajectory. Its strongest support is the five phase-0 passes. Its strongest
+contradiction to a practical improvement reading is that all equal-side regret changes from 256
+are in `[-0.0009494669522523771,0]`, within the `0.0025` MEI, with no aggregate improvement.
+The lowest-regret checkpoints are not two-sided competent, and phase-1 actions also drift within
+the bracket. Cyclic order has not been isolated causally from exposure, predictor/numerical
+variation, or the selected panel.
+
+No checkpoint is selected from this exposed EVAL set; no tuned headroom baseline, residual effect,
+policy/MARL value, or stable advantage is established. B01's comparator-weak reading stays at its
+own checkpoint. The next discriminator is a B/EXPLORE RAW readout specified over a complete
+three-update cycle, with matched examples and explicit development exposure, asking whether
+two-sided competence stabilizes without material native-regret loss. No successor is launched
+or frozen here.
+
+References:
+
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SCIENCE_CARD_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CHECK_EVIDENCE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_SIGN_CORRECTION_INTAKE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_EVIDENCE_20260904.md`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_RESULT_20260904.json`
+- `CRTO_RAW_DIAGNOSTIC_TRACE_READ_A03_INTAKE_20260904.md`
+
+## Full-cycle RAW readout B02 — 2026-09-04
+
+The new one-seed B/EXPLORE readout comparison is valid
+`B02-CYCLE-COMPETENCE-NOT-STABILIZED`. The unchanged RAW trajectory reaches update 257;
+three-score means ending at 255/256/257 and their ordinary endpoints share each ending's
+training path and examples. All five snapshots and 96 decisions are present and independently
+recomputed. The mean readout has the same complete action vector at every ending, but at all
+three it is KEEP 6/8 with regret 0.003754710220270765 and REPLAN 5/8 with regret
+0.0052316106205794015, failing unchanged two-sided competence.
+
+Its equal-side regret is 0.004493160420425083 at every ending. Endpoint-minus-mean differences
+are -0.0007117303347211716, -0.001169929233530466 and -0.00022046228127808876, averaging
+-0.0007007072831765755; all are adverse but inside MEI 0.0025. The ordinary phase-0 endpoint
+remains competent. The bounded conclusion is that this mean-score readout does not supply
+full-cycle comparator competence on the exposed panel/seed and should not be adopted from this
+result. This is not a material-cost claim or broad anti-averaging conclusion.
+
+The strongest support is failure of both REPLAN criteria at every declared ending and no paired
+aggregate gain. The strongest counterpoint is that averaging removes the local action-vector
+variation and improves REPLAN over the two weak endpoints; its side tradeoff still misses the
+target. Cyclic order has not been causally isolated, and no residual arm, independent seed,
+held-out comparator, tuned headroom baseline or policy/MARL value is established. A01's native
+crash and A02's separate no-fault identity remain unchanged.
+
+The surviving next discriminator is a prospectively declared TRAIN-order intervention against
+the unchanged ordinary RAW readout. It must show changed competent native actions or return,
+not just a predictive batch statistic. The original declared TRAIN pairs admit labelled side-
+balanced interleaving; source-slot/episode sorting currently separates them. Matched per-row
+accumulated exposure holds only at full three-update endpoints, while intermediate prefixes may
+differ despite equal total examples. The next card must preserve that distinction in its primary
+contrast and full-cycle diagnostics. No successor is frozen or launched in this intake.
+
+References:
+
+- `CRTO_RAW_CYCLE_READOUT_B02_SCIENCE_CARD_20260904.md`
+- `CRTO_RAW_CYCLE_READOUT_B02_RESULT_EVIDENCE_20260904.md`
+- `CRTO_RAW_CYCLE_READOUT_B02_RESULT_20260904.json`
+- `CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md`
+
+## Paired TRAIN order B03 — 2026-09-04
+
+The seed-0 labelled original-pair order comparison is valid `B03-PAIRED-ORDER-INCOMPETENT`.
+At complete-cycle updates252/255/258, every TRAIN row has exactly168/170/172 occurrences in
+each arm. Canonical ordering is competent at every point (KEEP6/8, REPLAN6/8,
+R=0.0037814300857039115). The paired ordering instead has KEEP7/8, REPLAN4/8,
+R=0.004272698139146994 and fails REPLAN competence at every point. All three native differences,
+including primary258, are -0.0004912680534430829, inside MEI .0025.
+
+The bounded update is to retain canonical ordering and drop only this tested paired-order
+candidate. Strongest support is the repeated REPLAN failure at exact-row-matched exposure against
+a competent canonical comparator. Improved KEEP and the small aggregate difference constrain
+broader conclusions: the intervention combines side balance, pair adjacency and event grouping,
+and does not isolate any one of them. B02's mean-readout negative, B01's own comparator-weak
+checkpoint and A01's unresolved crash keep their meanings. No independent-seed, tuned headroom,
+residual, policy/MARL or general order claim is established.
+
+The next discriminator returns to the accepted RAW/aligned-residual/derangement question using
+canonical order and a prospectively declared common short/long complete-cycle exposure. It needs
+a new explicitly outcome-informed B card; this result provides the local comparator choice but
+no residual polarity. No successor is frozen or launched in this intake.
+
+References: `CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md`,
+`CRTO_PAIRED_ORDER_B03_RESULT_EVIDENCE_20260904.md`,
+`CRTO_PAIRED_ORDER_B03_RESULT_20260904.json`, `CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md`.
+
+## Residual complete-cycle endpoints B04 — 2026-09-04
+
+The same-seed RAW/TRUE_RESIDUAL/CALIBRATED_DERANGEMENT comparison at prospectively fixed33/258
+is valid **BR-D — NO_TRUE_GAIN**. Canonical RAW-LONG is competent, KEEP6/8 and REPLAN6/8,
+R=.0037814300857039115. TRUE has R=.018114012084314506 atSHORT and.010915533713999911 atLONG,
+versus RAW.006581880989529963/.0037814300857039115. Both d_RT values,
+-.011532131094784542 and-.007134103628296, are adverse beyond MEI.0025.
+
+DERANGED R=.009491068185733439/.00965134486557058 does not improve RAW either. TRUE loses
+to DERANGED beyond MEI atSHORT; their LONG difference is inside MEI. All96 action decisions,
+48/16 donor maps,22/172 recipient/donor exposures and nonzero counts independently recompute.
+
+The bounded conclusion is no aligned or generic-preprocessing benefit in this exact
+seed0/33-and258 intervention; retain RAW and drop only that unchanged residual intervention.
+Strongest support is material TRUE cost against competent RAW-LONG. The counterpoint is TRUE's
+own SHORT-to-LONG learning improvement of.007198478370314595, which limits any general failure
+claim. The one coupled seed, exposed selected panel and adaptive endpoint choice remain limits.
+No tuned headroom, stable/independent, information, policy/MARL or general residual polarity follows.
+
+B01's comparator-weak32/256 result, B02/B03's specific negatives, A01's unresolved crash and
+the closed natural-support family retain their meanings. The next discriminator is a separately
+declared fixed-seed expansion at the same endpoints. Existing seed law jointly changes predictor,
+gate and derangement, so it does not isolate gate initialization. No successor is frozen or
+launched here; no direction or Portfolio action is taken.
+
+References: `CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_SCIENCE_CARD_20260904.md`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_EVIDENCE_20260904.md`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_RESULT_20260904.json`,
+`CRTO_RESIDUAL_CYCLE_ENDPOINTS_B04_INTAKE_20260904.md`.
+
+## Joint-seed B05 result — 2026-09-05
+
+The fixed new coupled seeds1/2 both complete validly as BR-E COMPARATOR_WEAK; aggregate
+B05-COMPARATOR-LIMITED. RAW-LONG seed1 is KEEP8/8, REPLAN5/8, R=.0021294544930598857;
+seed2 is KEEP6/8, REPLAN5/8, R=.004055601013485903. Both side mean regrets pass.005;
+REPLAN exact count alone misses the unchanged6/8 qualifier. All192 decisions, two pairs
+of48/16 donor maps,22/172 recipient/donor counts and actual exposure lines recompute.
+
+Seed1 d_RT is+.00280321561048486 SHORT and-.010677145051567178 LONG; seed2 is
+-.0037842910830349864/-.012916737883990694. These remain diagnostic signs because neither
+new RAW-LONG comparator is competent. B04 retains its seed0 competent-comparator negative;
+B05 does not extend that polarity to three seeds or reverse it.
+
+Strongest support is the shared one-action REPLAN deficit. The counterpoint is low side
+mean regret and real RAW budget improvement, including seed1's lower aggregate regret than
+historical seed0; broad RAW unlearnability is not established. Predictor, gate and derangement
+seed changed jointly, so no one component is isolated. The panel/endpoints remain exposed,
+headroom untuned, and policy/MARL or independent-population value untested.
+
+The next selected discriminator is RAW-only258/516 exposure on the same two joint seeds,
+using unchanged information and a separately declared native-action/regret reading.
+Unused calibration may be omitted on the accepted source map; that is not numerical evidence.
+No successor is frozen or launched in this intake, and no family or Portfolio action is taken.
+
+References: CRTO_JOINT_SEED_B05_SCIENCE_CARD_20260905.md,
+CRTO_JOINT_SEED_B05_RESULT_EVIDENCE_20260905.md,
+CRTO_JOINT_SEED_B05_SEED01_RESULT_20260905.json,
+CRTO_JOINT_SEED_B05_SEED02_RESULT_20260905.json,
+CRTO_JOINT_SEED_B05_INTAKE_20260905.md.
+
+## RAW exposure B06 — 2026-09-05
+
+The fixed 258-to-516 doubling is valid **B06-COMPARATOR-LIMITED**, with both seeds individually
+**B06-COMPARATOR-STILL-WEAK**. REPLAN remains 5/8 with unchanged actions in both. Seed 1 keeps
+KEEP 8/8 and R=.0021294544930598857, D=0. Seed 2 improves KEEP 6/8 to 7/8, ending
+R=.003127712855602898; D=.0009278881578830053 exceeds the new comparator diagnostic MEI .000625.
+That gain is exactly one KEEP correction; it does not supply the missing REPLAN competence.
+
+All 64 new decisions, canonical 172/344 row exposures and native source metadata independently
+recompute. Both 258 readouts equal B05 RAW-LONG descriptively, with no historical equality gate.
+Substantial parameter movement and seed 2's native improvement constrain any broad training
+failure interpretation. The bounded update is to reject only this doubling as a competence
+repair, preserving its observed gain. B04 residual MEI .0025 and seed-0 BR-D remain unchanged.
+
+A next candidate is legal-action-centered training loss versus absolute-return MSE at fixed
+RAW information and exposure; further budget remains a live alternative. Common-return fitting
+is an untested explanation. No successor is selected or launched in this intake. The exposed
+panel, coupled seeds, untuned headroom and lack of policy/MARL or independent-population evidence
+continue to bound the direction; no family or Portfolio disposition is taken.
+
+References: CRTO_RAW_EXPOSURE_B06_SCIENCE_CARD_20260905.md,
+CRTO_RAW_EXPOSURE_B06_RESULT_EVIDENCE_20260905.md,
+CRTO_RAW_EXPOSURE_B06_SEED01_RESULT_20260905.json,
+CRTO_RAW_EXPOSURE_B06_SEED02_RESULT_20260905.json,
+CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md.
+
+## RAW centered loss B07 — 2026-09-05
+
+The fixed 516-update legal-action-centered loss comparison is valid **B07-COMPARATOR-LIMITED**;
+both seeds are **B07-COMPARATOR-STILL-WEAK**, with REPLAN exact count 5/8. Seed 1 retains KEEP
+8/8 and reaches R=.002127840061573334, a gain of .0000016144314865518261 over its fixed B06
+baseline. One corrected REPLAN action is offset by a newly wrong REPLAN action. Seed 2 retains
+KEEP 7/8 and R=.003127712855602898, with no action change. Both gains are inside MEI .000625.
+
+All 32 new and 32 fixed historical native decision records, source metadata, 344-row exposure,
+initialization and positive finite movement independently check. The bounded update rejects
+only this centered-loss intervention as a competence repair. Native action sensitivity in seed 1
+limits broader failure claims; changed gradient scale, clipping and Adam prevent attribution
+to common-return fitting alone. No family-wide or information/function-class conclusion follows.
+
+B04's competent seed-0 residual negative, B05/B06 comparator limitation, residual MEI .0025,
+natural-support closure and A01 uncertainty keep their meanings. Headroom remains untuned and
+the exposed panel/coupled seeds supply no stable, independent or policy/MARL result. The next
+question is Direction Convergence on whether this selected-panel balanced residual family
+should continue and which scientific discriminator is justified. No new experiment or local
+family, lifecycle, priority or recast disposition is made at this boundary.
+
+References: CRTO_RAW_CENTERED_LOSS_B07_SCIENCE_CARD_20260905.md,
+CRTO_RAW_CENTERED_LOSS_B07_RESULT_EVIDENCE_20260905.md,
+CRTO_RAW_CENTERED_LOSS_B07_SEED01_RESULT_20260905.json,
+CRTO_RAW_CENTERED_LOSS_B07_SEED02_RESULT_20260905.json,
+CRTO_RAW_CENTERED_LOSS_B07_INTAKE_20260905.md.
+
+## Balanced-family Convergence disposition — 2026-09-05
+
+The complete class-correct Convergence answer to
+`2026-09-05-crto-balanced-family-convergence-01` is final:
+**PARK_CURRENT_SELECTED_PANEL_BALANCED_RESIDUAL_FAMILY**. This reversible family boundary is
+executed. The standing finite-budget inductive-bias question remains; no further learner, B08,
+unchanged repeat, seed search or budget extension is selected. This is not CLOSE or RECAST;
+recast counts and Portfolio lifecycle/priority/capacity remain unchanged.
+
+Strongest support is B04's one competent seed-0 residual negative beyond MEI .0025, followed by
+comparator-limited seeds 1/2 and two unsuccessful REPLAN competence repairs. Strongest
+contradiction to a broader failure claim is native learning: TRUE improves with exposure, B06
+seed 2 corrects a KEEP choice, and B07 changes two REPLAN choices. Later side-mean regrets pass;
+the exact-count qualifier is not a total ordering of native value. Ordinary finite-budget
+surrogate optimization, joint initialization, calibration, capacity and objective/optimizer
+interactions remain live. CONTINUE_B is a close runner-up, not an excluded possibility.
+
+Re-entry is one specified B discriminator with a falsifiable legal-action/credit change and
+paired native-value prediction, including offsetting losses, which can resolve aligned residual
+value against competent same-information RAW and calibrated derangement at original MEI .0025.
+It is on specification, not prior experimental success. Comparator repair may be inside the B
+experiment; competence is an interpretation qualifier, not a new launch gate. A claim to repair
+the observed two-seed problem retains both joint seed packages; another scope is a new B object.
+No next intervention, seed set, endpoint or budget is selected. Exposure and per-arm cost belong
+to any actual new proposal, with unmeasured preparation/update/evaluation/node costs explicit.
+
+The response adds a fixed-baseline arithmetic limit: native gain is the sum of paired G16
+changes divided by 16, so the original .0025 margin needs net gain>.04; the .000625 diagnostic
+margin needs net gain>.01. Since treatment regret is nonnegative, improvement cannot exceed
+RAW regret. Seed 1's existing LONG RAW regret .0021294544930598857 is below .0025, making a
+LONG improvement beyond that margin unattainable against this baseline, even at zero treatment
+regret. This is not tuned headroom, an accessible oracle, a competence finding or a restriction
+on SHORT-budget value. No independent empirical observation was added by this algebra.
+
+All existing B readings retain the exposed selected-panel ceiling; natural-support closure,
+A01 uncertainty, and the absence of tuned same-information headroom remain intact. No residual
+equivalence, family exhaustion, RAW unlearnability, information/function-class or policy/MARL
+claim follows. The DM and CM return at a recoverable zero-live operational boundary.
+
+References: CRTO_BALANCED_FAMILY_CONVERGENCE_INTAKE_20260905.md and the byte-preserved
+pro/2026-09-05-crto-balanced-family-convergence-01/RESPONSE.md (request/pin and nine reported
+read paths match the authored packet). The other three original archive files are alongside it.

@@ -1,0 +1,32 @@
+{
+  "id": "20260904-ucope-007",
+  "created": "2026-09-04T14:37:28-07:00",
+  "direction": "ucope",
+  "tier": "object",
+  "kind": "decision",
+  "title": "按原数值定位计划直接复用既有函数",
+  "context": "所有者已恢复自动研究。父审计仍未解决；现有诊断固定为两节点各一个失败块，每节点327680回放事件、1638400转移，零学习器或优化器。保留目标的既有FP32计算与float64存储、求解器和绝对容差，检查通过直接复用消除重复包装能否满足30%编排上限；先前33.22%草案无结果且继续保留。付费采集5/6的B类观察不受影响。",
+  "options": [
+    {
+      "key": "a",
+      "label": "直接复用并仅接受符合原计划与工程预算的实现",
+      "consequence": "若符合预算则执行已选诊断，否则带具体阻塞让出执行位。"
+    },
+    {
+      "key": "b",
+      "label": "不检查具体复用路径，返回旧架构阻塞",
+      "consequence": "保留原问题，立即让出执行位。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "现有代码已经提供数值路径与绑定、平台资源事实函数，有明确可逆的减少重复包装路径。",
+  "evidence": [
+    "docs/research/candidates/ucope/UCOPE_ROOT_TARGET_VS_ROOT_FIT_AUDIT_R01_RESUME_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#ucope-numerical-locus-resume",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20260904-crto-024",
+  "created": "2026-09-04T17:13:50-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "brief",
+  "title": "CRTO B02：平均读出不胜任简报",
+  "context": "",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "动作稳定与双侧胜任是不同观察，本次只得到前者。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_CYCLE_READOUT_B02_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b02-full-cycle-readout-result",
+  "brief": "docs/research/portfolio/owner/briefs/commitment_residual_triggered_options/2026-09-04_raw_cycle_readout_b02.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

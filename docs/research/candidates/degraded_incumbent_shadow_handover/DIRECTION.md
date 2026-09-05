@@ -1,5 +1,15 @@
 # Direction degraded_incumbent_shadow_handover: degraded incumbent shadow handover
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N3 — 状态保留、重建与迁移**, in the **成员变化后的恢复** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
@@ -250,3 +260,171 @@ law and full R02 production surface are not B admission gates.
 exactly-once FSM axis. VSP-05 asks whether a proposed handoff should be accepted; DISH's original
 contrast asks which state source should be transferred. Evidence for either axis cannot substitute
 for the other, and no legacy polarity transfers.
+
+## Accepted complete B01 observation — 2026-09-04
+
+**Conclusion and bounded claim.** All three original B01 seeds (11, 29, 47) completed 64 updates
+and the full sixteen-row panel: zero first-valid triggers over 57,600 total prefix ticks. The
+unchanged ordered rule selects **FTS-B0 — TRIGGER_SUPPORT_INSUFFICIENT**, with zero usable seeds.
+No COPY/SHADOW effect is identified; B has no consumption state.
+
+**Strongest support and limitation.** The exact declared panel completed, model/optimizer state
+was finite, and total relative parameter displacement was 0.42465718774783356,
+0.419585027483137 and 0.4196544358013136. No source branch was exposed, so empty-support reducer
+zeros are not source equality and their nonharm Boolean is not observed nonharm. Trigger
+competence, preparation/delivery, application eligibility, terminal/live opportunity and
+seed/budget/panel dependence remain unresolved. No R02 or FOLR polarity transfers.
+
+**Surviving alternative and next discriminator.** Useful shadow preparation may remain hidden
+behind a policy that rarely proposes an application-valid handover at this exposure. Conversely,
+COPY or deadline-bound replay may absorb its value if an opportunity is reached. Replay the
+retained seed-11 checkpoint's original sixteen rows in A/RECON to measure where the exposure
+chain stops, without training or forcing a handover. No tuned B01 headroom is available;
+the five-tick MEI cannot be estimated. No lifecycle or family disposition follows.
+
+Evidence: `N3_DISH_B01_C04_SEED11_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED11_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED11_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED11_COLLECTION_20260904.md`.
+Seed 29 evidence: `N3_DISH_B01_C04_SEED29_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED29_SUMMARY_20260904.json`, `N3_DISH_B01_C04_SEED29_INTAKE_20260904.md`,
+and `N3_DISH_B01_C04_SEED29_COLLECTION_20260904.md`.
+Complete evidence: `N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md`,
+`N3_DISH_B01_C04_SEED47_SUMMARY_20260904.json`,
+`N3_DISH_B01_C04_SEED47_COLLECTION_20260904.md`,
+`N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md`.
+
+## Accepted retained-prefix A01 measurement — 2026-09-05
+
+**Conclusion and bounded claim.** The retained seed-11 checkpoint exactly reproduced its
+original sixteen no-trigger prefixes, with zero new learning/parameter movement. All 19,200
+prepared inputs were live, with 2,720 renewal opportunities, 2,234 prepare proposals,
+1,131 commit proposals and 19,148 completion-latch ticks. Common-source support, snapshot/
+readiness delivery, emitted intent and native service were all zero. The card reads
+**A01-PREFIX-FUNNEL-OBSERVED**, sixteen **PREPARATION_SUPPORT_GAP(snapshot_delivery)** rows.
+This is A/RECON measurement evidence, not a source-effect estimate; B01 FTS-B0 is unchanged.
+
+**Strongest support and contradiction.** Preparation/latch presence together with full live
+prefixes narrows the missing exposure upstream of source selection. No early terminal
+padding or complete absence of prepare proposals explains these rows. One retained
+checkpoint and zero downstream exposure cannot establish a remedy, source equality,
+headroom, native-host defect or general policy incapacity.
+
+**Surviving alternative and next discriminator.** Ground-source visibility/admission may
+prevent common-source and snapshot support; learned motion and later protocol constraints
+remain alternatives. Qualify that exact native source/spec path before more training or a
+physics change. No new family, recast or lifecycle action follows. Evidence:
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_RESULT_EVIDENCE_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_SUMMARY_20260905.json`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_COLLECTION_20260905.md`,
+`DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md`.
+
+## Accepted native ground-source A02 point — 2026-09-05
+
+**Conclusion and bounded claim.** At the original seed-11 first coordinate and native
+tick 0, one normal prepared point has both camera flags absent and source-hop margins
+-9.303396681040274/-10.285571482315484 dB, both below the 6-dB send threshold. Both
+declared near-ground samples at height 0.703125 fail their terrain+8/+5 clearances.
+The rule reads **A02-ENDPOINT-CLEARANCE-WITNESS**, A/RECON with no model or completed tick.
+
+**Support, contradiction and surviving alternative.** Actual signals agree with the
+inherited host definition and strengthen A01's upstream information-path explanation.
+The code follows the definition; this is not a demonstrated implementation defect.
+The fixed 0/90 heights and nonnegative terrain imply the near-endpoint camera obstruction
+under changed horizontal motion, while noisy blocked radio is not impossible reception.
+One point neither tests a host remedy nor identifies any RETAIN/COPY/SHADOW effect.
+
+**Decision and next discriminator.** The completed node selected **PRO_FINAL CONTINUE**
+for the existing source-selection family, as recorded in
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md`. It authorizes a prospectively distinct,
+bounded host qualification; A02 itself establishes no remedy, learner or source effect.
+Evidence:
+`DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_SUMMARY_20260905.json`,
+`DISH_GROUND_SOURCE_POINT_A02_COLLECTION_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md`.
+
+## Final host-qualification Convergence — 2026-09-05
+
+The complete archived response selects **PRO_FINAL CONTINUE** for the existing
+first-application-valid RETAIN/COPY/SHADOW exploratory family. It identifies a concrete
+host-information obstruction that a bounded native-path comparison can discriminate;
+the rationale is not merely that source value remains untested. B01 FTS-B0 and both A
+observations remain valid, R02 remains closed, and no RECAST or Portfolio change occurs.
+
+The next discriminator first needs one prospectively distinct ground-endpoint access
+definition, then one paired original-coordinate ordinary native trace under a fixed
+causal controller. It must observe real arrivals/common SOURCE, snapshot/readiness,
+legal actions and native service as well as camera/filter inputs. Partial restoration
+and failed proposals remain informative. No ray-point-only qualification, forced margin,
+accepted state, readiness or ownership is allowed; no new learner or source-effect study
+is authorized. The locally selected A03 card now declares a terrain-referenced two-metre
+ground terminal, linear ground-linked clearance, the same retained causal policy and
+one ordinary episode per host at the original coordinate. Its literal comparator and
+all failed/partial stages are retained. Its now-complete A03 intake below observes
+restored access and incumbent service with a remaining legal-application gap. See
+`DISH_GROUND_ENDPOINT_PATH_A03_SCIENCE_CARD_20260905.md` and
+`DISH_GROUND_ENDPOINT_PATH_A03_SELECTION_INTAKE_20260905.md`. Decision evidence:
+`DISH_A02_HOST_CONVERGENCE_PRO_INTAKE_20260905.md` and the exact response under
+`external/2026-09-05-dish-a02-host-convergence-01/`.
+
+## Accepted ground-endpoint path A03 — 2026-09-05
+
+**Conclusion and bounded claim.** One complete paired A/RECON trajectory reaches
+**A03-DOWNSTREAM-STAGE-GAP** on the prospectively distinct ground-terminal host.
+Each host has 1,200 live completed ticks. The new host has actual SOURCE adoptions
+287/287, snapshot/readiness deliveries 331/634 and 299 native service ticks, while
+the literal host has none. Both remain with their initial physical owner. Four
+new-host intents carry certificate 0; no application-valid boundary or legal transfer
+occurs. The 299 service ticks all precede any transfer and are not source-selection value.
+
+**Strongest support and contradiction.** The declared endpoint law restores real
+information and ordinary incumbent service without parameter updates or forced signals.
+The absent legal application and four rejected intents prevent full path qualification.
+The complete data agree with the DM's predicted input-restoration/downstream-gap branch;
+test conformance and service under the original owner cannot establish shadow advantage.
+
+**Surviving alternative and next discriminator.** The fixed retained policy's certificate
+inputs and ordinary action/timing predicates remain unresolved. Select a separately carded,
+data-only reconstruction of all four recorded origin-certificate calls at the exact
+post-projection/pre-motion boundary. No new trace, learner, threshold override, source
+intervention, RECAST or Portfolio action is selected. No tuned headroom exists; the B01
+source-effect MEI remains unestimated. Existing RCLE/FOLR/VSP-02 meanings stay separate.
+
+Evidence: `DISH_GROUND_ENDPOINT_PATH_A03_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_SUMMARY_20260905.json`,
+`DISH_GROUND_ENDPOINT_PATH_A03_COLLECTION_20260905.md`,
+`DISH_GROUND_ENDPOINT_PATH_A03_INTAKE_20260905.md`.
+
+## Accepted origin-certificate A04 reconstruction — 2026-09-05
+
+**Conclusion and bounded claim.** The four actual A03 origin certificates are completely
+reconstructed from their retained inputs, selecting **A04-RECORDED-REJECTION-RECONSTRUCTED**.
+Every native/reconstructed value is false. Mahalanobis disagreement exceeds 5.99 and
+service q95 is below 0.60 at all four calls; these are the only failed predicates.
+All state/support and physical/action conditions pass, with no close comparison among
+56 predicates or 84 probability tails. This is adaptive A/RECON evidence, not replication,
+new learning, a remedy or a RETAIN/COPY/SHADOW effect.
+
+**Strongest support and contradiction.** Exact recorded-call agreement and non-close
+failure of both prediction conditions explain the observed rejections. They rule out
+missing preparation/source or the measured action restriction as the rejection predicate
+at these four calls. Zero legal application and transfer still prevent full host-path
+qualification; A03's 299 incumbent service ticks remain outside source-effect evidence.
+q95 failure matches the DM prediction but ties with Mahalanobis failure, rather than
+identifying one uniquely dominant restriction. Headroom and source MEI remain unestimated.
+
+**Surviving alternative and next discriminator.** The retained prediction-head semantics,
+learning signal and finite exposure need separation. A bounded static code map finds
+service outputs trained with a logits loss but sent raw to native probability clipping,
+and no direct Cholesky-head term in the formal training loss. Shared hidden state can
+still change; actual gradient/mask coverage and prediction competence are unmeasured.
+These are potential contract/training explanations, not reproduced defects. Select a
+separately carded synthetic reproduction of that existing boundary before any production
+repair or learned-controller intervention. No new native trajectory, optimizer update
+or source comparison is selected; PRO_FINAL CONTINUE and all N3 constituent IDs persist.
+
+Evidence: `DISH_ORIGIN_CERTIFICATE_A04_RESULT_EVIDENCE_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_SUMMARY_20260905.json`,
+`DISH_ORIGIN_CERTIFICATE_A04_COLLECTION_20260905.md`,
+`DISH_ORIGIN_CERTIFICATE_A04_INTAKE_20260905.md`.

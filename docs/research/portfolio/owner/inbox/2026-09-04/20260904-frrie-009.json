@@ -1,0 +1,42 @@
+{
+  "id": "20260904-frrie-009",
+  "created": "2026-09-04T12:07:58-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "R02 远端精确提交物化路径",
+  "context": "远端对已推送分支的首次 fetch 在约 300 秒后以 GitHub SSL connection timeout 终止。task、worktree、output root 与 admission 均不存在，因此没有科学尝试。下一步只改变传输路径：从本地 clean、已推送的精确提交 36b538ba… 生成并校验 Git pack，记录 pack 哈希与 source currentness，在远端仍物化同一 SHA；随后仍由同一唯一 agent-task 执行 fresh admission 与原 runner。",
+  "options": [
+    {
+      "key": "a",
+      "label": "稍后重试 GitHub fetch",
+      "consequence": "保留原网络路径，但无法给出恢复时间且会继续占用执行槽。"
+    },
+    {
+      "key": "b",
+      "label": "使用已推送精确提交的 verified Git pack",
+      "consequence": "仅改变 committed Git bytes 的传输方式；可校验 pack 哈希与 exact SHA，并继续原远端科学合同。"
+    },
+    {
+      "key": "c",
+      "label": "改用本地 fallback",
+      "consequence": "需要重新做本地资源准入且偏离已激活的 remote-first 路由，当前无必要。"
+    },
+    {
+      "key": "d",
+      "label": "停止 R02 于传输前置条件",
+      "consequence": "避免继续工程投入，但会留下已冻结且可运行的最小 learner 判别器未观测。"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "verified pack 保持 exact SHA、无 uncommitted source 且可逆，是网络 fetch timeout 后最小的非科学修复。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

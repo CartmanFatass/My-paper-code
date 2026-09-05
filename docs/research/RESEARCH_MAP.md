@@ -1,6 +1,6 @@
 # HMASD Research Map
 
-This is the human navigation map for the repository's 22 current candidate directions. It records
+This is the human navigation map for nine coordinated research routes and their 22 historical source IDs. It records
 a concise position and links to stable research and code directories. It is documentation, not an
 authorization, scheduling, lease, or workflow surface.
 
@@ -8,10 +8,29 @@ Current lifecycle, priority, capacity, and direction owner exist only in
 [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md). The 14 structurally closed or absorbed labels
 and their complete evidence live under [`legacy/directions/`](legacy/directions/README.md).
 
-## Current candidate directions
+## Adopted research organization — 2026-09-04
 
-| Direction | Current scientific position | Research directory | Candidate code | | Script prefix |
-| --- | --- | --- | --- | --- |
+| 路线 | 分类 | 机制族 | 研究问题 / 来源 | 当前入口 |
+| --- | --- | --- | --- | --- |
+| N1 | 灵活 agent 数量 | 集合与关系表示 | 关系归纳与学习效率：`finite_resource_relational_inductive_efficiency` | contact-active R128 R02；当前仅已见 N |
+| N2 | 灵活 agent 数量 | 成员变化后的恢复 | 恢复动作：`variable_n_fleet_churn` | causal one-deviation R03；second-recast 最低排序 |
+| N3 | 灵活 agent 数量 | 成员变化后的恢复 | 状态保留、重建与迁移：`roster_consistent_latent_exploration`, `vap_folr_core`, `degraded_incumbent_shadow_handover`, `vsp_02` | 一条有界探索议程；先选一个状态干预，不恢复四套独立链 |
+| N4 | 灵活 agent 数量 | 成员变化后的恢复 | 旧信息有效性：`capability_bound_semantic_currentness` | 现有 host 的 online B1；技术修复后 fresh r07 |
+| N5 | 灵活 agent 数量 | 资源配置与几何 | 配置结构与 FREE：`metric_ground_transport_allocation` | 小型 B 对象及成本待定义；旧 C 不重开 |
+| K1 | 灵活 skill duration | 中断与续约 | 中断时机：`flexible_skill_duration`, `vsp_03` | E3 原卡继续；后续对象再加入具名事件规则 |
+| K2 | 灵活 skill duration | 中断与续约 | 动作边界学习：`commitment_residual_triggered_options` | RAW-only 252..264 trace；先核对历史任务及 materialization |
+| K3 | 灵活 skill duration | 信息获取与续约 | 付费获取：`ucope` | 最新 root/数值诊断；保持具体节点约定与 scope |
+| K4 | 灵活 skill duration | duration 表示与价值共享 | 跨时长共享、组合与负迁移：`semigroup_consistent_duration_model_policy`, `vsp_c1` | 前瞻议程；无新冻结对象，旧 D6 家族 PARK 保留 |
+
+Eight other sources are reserves. Source lifecycle, PARK re-entry conditions and live scheduling
+remain in `portfolio/PORTFOLIO.md`. This grouping preserves the different scientific questions and
+source evidence; it does not combine outcomes or revive stopped families. Source descriptions below
+are historical navigation summaries; read each DIRECTION and latest intake for current science.
+
+## Source evidence and code index
+
+| Direction | Scientific position / historical navigation | Research directory | Candidate code | Script prefix |
+| --- | --- | --- | --- | --- |
 | APFI — active post-churn population-flow identification | The current CCF collapses to a pair-XOR/DFA. The independent censored-flow question remains parked until a non-reducible construction is prospectively accepted. | [`active_post_churn_population_flow_identification/`](candidates/active_post_churn_population_flow_identification/) | — | `apfi` |
 | ACVC | Deterministic exact matching contains the old host; a bounded uncertain/delayed veto-learning recast is live. | [`acvc/`](candidates/acvc/) | [`acvc/`](../../experiments/candidates/acvc/) | `acvc` |
 | CBSC — capability-bound semantic currentness | Exact protocol value is positive and narrow; LR01 is one mixed `UNRESOLVED` codec object. The live object is online multi-opportunity currentness learning. | [`capability_bound_semantic_currentness/`](candidates/capability_bound_semantic_currentness/) | [`exact factorial`](../../experiments/candidates/capability_bound_semantic_currentness/), [`learnability`](../../experiments/candidates/capability_bound_semantic_currentness_learnability_r01/) | `cbsc` |

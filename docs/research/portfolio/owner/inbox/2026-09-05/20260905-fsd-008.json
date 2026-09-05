@@ -1,0 +1,92 @@
+{
+  "id": "20260905-fsd-008",
+  "created": "2026-09-05T07:25:05-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "E3 完整无优势后：先核查随机时长机会，还是暂停或重构",
+  "context": "E3 已有 18 格有效结果，大差异行三个合格比较器上的回报差均为负；只关闭 c=0.25 在该行和预算下的结论。下一对象族选择提交 Convergence；建议先用现有模型做不训练核查，尚无后继裁决或训练。",
+  "options": [
+    {
+      "key": "a",
+      "label": "先做现有模型 A/RECON，再决定 E4",
+      "consequence": "仅选择不训练的理论机会核查；E4/D8 训练仍需独立对象和技术实现。"
+    },
+    {
+      "key": "b",
+      "label": "暂停当前策略差距对象族",
+      "consequence": "停止追加该对象族，保留全部证据；Portfolio 生命周期另由 Root 处理。"
+    },
+    {
+      "key": "c",
+      "label": "重构为另一中断信号",
+      "consequence": "按 Convergence 明确的新机制建立独立对象，记录 recast；不改写 E3。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "随机时长与已测 Bernoulli 行不同，现有纯函数可以先回答结构机会，避免无新理由复制训练矩阵。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#fsd-e3-complete-convergence-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "E3 完整无优势之后，是否继续政策差距中断的随机时长问题，先做不训练的现有模型核查，还是暂停该对象族或重构机制？",
+    "changes_if_approved": [
+      {
+        "target": "flexible_skill_duration 的下一个方向对象",
+        "from": "E3 已完整读为无优势，尚未选择后继",
+        "to": "建议 Convergence 选择一个 A/RECON：只用现有 renewal/reference 函数核查随机时长模型的理论机会；不自动批准 E4 训练"
+      }
+    ],
+    "if_refused": "执行 Convergence 或所有者给出的暂停／重构决定；保留 E3 的全部证据和最小负结论，不重跑或扩大负结论，不自行改变 Portfolio 生命周期和优先级。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md",
+        "quote": "DM recommends **(a), A/RECON before any E4 training**, because random-duration renewal is a different accepted question and its opportunity can be checked without another multi-arm learner study.",
+        "why": "先回答不同事件时长规律是否留下具体机会，成本低于直接再做训练矩阵；这是建议，不是已执行裁决。"
+      },
+      {
+        "path": "envs/relay_corridor/renewal.py",
+        "quote": "Build one of the three mean-matched E4 laws.",
+        "why": "现有纯函数已有确定性、几何和取整对数正态分布接口；核查不需要新建 D8 学习器。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md",
+        "quote": "All three large-row fixed-clock comparators are competent and policy-gap interruption at c=.25 loses return in every paired seed.",
+        "why": "当前阈值在最有结构机会的一行仍全部失败，没有证据支持直接追加同类训练。"
+      }
+    ],
+    "uncertainty": [
+      "损失尚不能归因于纯策略噪声：固定时钟的实际低层更新次数更多，团队续约还会同时影响两个区域。",
+      "累计路径与最后一轮路径不同，二者本次都给出无优势；后续卡片须明确测量窗口。",
+      "现有 fixed-k/open-loop 数值参考不是 D8 的 (z,k) 菜单学习器；E4/D8 训练链未验收。",
+      "取整对数正态使用有限截断矩和均值校准，不能称为无限支持精确矩；census 尚未执行或计时。"
+    ],
+    "cost": {
+      "compute": "本次为一次方向 Pro 决策，无新训练。E3 的 18 个有效结果共 18.3575 机器小时，峰值资源未测。候选 A 在三种 law、五个 k 下为 108 次有限 DP 和 288 个 open-loop 候选；尚无实测秒数，冻结未来卡片时另列成本和逐次上限。",
+      "owner_time": "可异步查看这一项 P2；不生成普通技术或简报待批项。",
+      "reversibility": "reversible",
+      "waits_on_this": "后继方向对象等待 Convergence 的完整裁决；不等待所有者回复来提交该请求。"
+    },
+    "verdict_text": "DM recommends **(a), A/RECON before any E4 training**, because random-duration renewal is a different accepted question and its opportunity can be checked without another multi-arm learner study.",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md"
+  },
+  "execution_history": [
+    {
+      "at": "2026-09-05T15:45:46+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260905_e3_complete_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md",
+      "state": "applied",
+      "summary": "完整6 Pro裁决已整合为8c82f6cd1：仅选择无训练A/RECON参考枚举；E3有界H0保留，枚举尚未运行。"
+    }
+  ],
+  "starred": true
+}

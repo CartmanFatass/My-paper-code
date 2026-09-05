@@ -248,7 +248,7 @@ def test_bound_mechanical_descriptor_rejects_argument_tamper_after_rehashable_su
     facts = _facts()
     competence = [_competence(seed) for seed in SEEDS]
     source = {
-        "source_relative_path": "workers/00/result.json",
+        "source_relative_path": "workers/00/result.json.gz",
         "source_file_sha256": "a" * 64,
         "json_pointer": "/raw_evidence",
     }

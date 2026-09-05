@@ -5,6 +5,18 @@ description: Use when Root is comparing or changing HMASD direction priority, li
 
 # HMASD Portfolio Decisions
 
+## Current owner boundary — 2026-09-05
+
+The owner explicitly approved policy B and delegated important HMASD changes to complete,
+verified 6 Pro final decisions at the correct node. This overrides the older per-item owner
+ratification requirements below, only within the response's explicit scope. See
+`docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md` and AGENTS §4.
+Root records PRO_FINAL / OWNER_DELEGATED, never invents an owner reply or approval time.
+At execution, star the existing P1/P2 item via `item.py trace` with source, application record,
+actual status and applied option. Missing/ambiguous/out-of-scope decisions retain the existing
+blocker boundary; platform safety limits remain. P3/P4 creation/reminders stay retired.
+
+
 ## Core principle
 
 Choose the smallest investment that can change a direction decision without confusing scientific

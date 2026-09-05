@@ -1,0 +1,32 @@
+{
+  "id": "20260905-acvc-006",
+  "created": "2026-09-05T03:39:53-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "brief",
+  "title": "ACVC：共同分母成本测试完成",
+  "context": "工程输入与成本依赖已解决；原 HC-D 科学区间不变。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "按卡接受完整成本测量，不解释为真实收益或科学改善。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-common-denominator-cost-brief-20260905",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-05_common_denominator_cost_r03.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

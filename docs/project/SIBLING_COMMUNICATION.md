@@ -2,6 +2,19 @@
 
 验证日期：2026-09-04。适用范围：本项目当前 Codex Desktop 原生 multi-agent 任务树。
 
+## 23:41Z 恢复后的实际能力
+
+新 Root `01a06ec7-fd64-7281-9bc1-fc42ed53a2ca` 已成功按名字创建实际 custom role
+`hmasd-experiment-tracker`：`/root/tracker_tl_experiments`，配置 Terra/low。
+tracker 报告原生 `send_message` 和 `followup_task` 已暴露；它与
+`/root/dm_amx_fsd_continue` 使用 `tracker-resume-fsd-20260904-01` 完成直接双向 ACK，
+两端分别确认收件，Root 没有转发。角色发现和双向收件均已验证。
+本轮尚未把 tracker 的 idle wake 单独记为实测；旧 DM 间的 idle wake 证据仍见下表。
+所有者将该专用角色指定为默认实验追踪及通知节点；具体当前工作树和恢复约定见
+[恢复记录](../research/portfolio/decisions/2026-09-04-resume-with-default-tracker.md)。
+下文关于旧 runtime unknown agent_type 和临时 Luna 缺少 outbound 工具的文字保留为历史，
+不代表新 Terra tracker 的当前状态。
+
 **可以直接通信。** 同一个 Root 下的 DM、tracker，以及嵌套的 CM，可以通过原生
 `collaboration` 工具联系任务树中的其他 agent。接收方用 canonical agent name 寻址，
 不需要 Root 转发。这里的 sibling 是同树 agent 之间的关系，没有一个另外叫 `sibling`

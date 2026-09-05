@@ -1,0 +1,37 @@
+{
+  "id": "20260904-crto-027",
+  "created": "2026-09-04T18:06:54-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B03：接受配对顺序不胜任结果",
+  "context": "两条训练顺序与原始配对身份、逐行次数及96个动作评分独立重算通过。原顺序在三个终点胜任，配对顺序重规划侧均4/8，主差异-0.000491，在MEI内。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整的配对顺序不胜任结果",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "因预测未中而隔离结果",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "只看保持侧改善便认作成功",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整数据唯一映射到卡定第五分支，改进一侧不等于满足目标。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b03-paired-order-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

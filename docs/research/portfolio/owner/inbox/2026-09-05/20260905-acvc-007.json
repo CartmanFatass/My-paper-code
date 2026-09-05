@@ -1,0 +1,37 @@
+{
+  "id": "20260905-acvc-007",
+  "created": "2026-09-05T04:01:35-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：选择真实输入与一次精确上界",
+  "context": "既有 HC-D 允许更紧精确上界；通用成本通过后，单独冻结实际系数、信息放松和完整成本，保留原阈值、harm dual 与 learner 禁令。",
+  "options": [
+    {
+      "key": "a",
+      "label": "实际输入检查、完整成本、一次上界",
+      "consequence": "输入与成本符合卡后最多执行一次真实 upper，并按原规则读取。"
+    },
+    {
+      "key": "b",
+      "label": "停在通用工程边界",
+      "consequence": "保留 HC-D，真实上界继续未测。"
+    },
+    {
+      "key": "c",
+      "label": "先寻找新的合法 lower 见证",
+      "consequence": "只评估另一已登记入口是否有具体策略，不自动启动计算或 learner。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "这是已命名且最小的可逆科学判别；另一路尚无达到原阈值的新合法策略见证。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_SCIENCE_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-actual-upper-r03-selection-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

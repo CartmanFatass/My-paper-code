@@ -1,0 +1,11 @@
+{
+  "question": "是否先用保留的第一个检查点重走原面板，记录交接链停在哪一步，再决定后续训练？",
+  "changes_if_approved": [{"target": "DISH 当前探索阶梯", "from": "三种子完整结果为触发不足，原因未定位", "to": "新增一次只读前缀诊断：固定第一个检查点、原十六行，不训练或强制交接"}],
+  "if_refused": "在下一个安全边界按回复修订或停止这项诊断；已完成的触发不足结果和方向状态保留，不自动增加训练预算。",
+  "evidence_for": [{"path": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_RESULT_EVIDENCE_20260904.md", "quote": "There are **zero usable seeds out of three**, with **zero triggered rows out of 48**.", "why": "来源干预尚未发生，先定位暴露链比继续猜测来源价值更能决定下一步。"}],
+  "evidence_against": [{"path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md", "quote": "Counts locate observed absence; they cannot identify a causal repair by themselves.", "why": "一个检查点的阶段计数只能定位观察缺口，不能证明修复有效或代表其他策略。"}],
+  "uncertainty": ["可能是没有准备提议、消息条件不足、时序不合或提前终止；现有摘要无法区分。", "诊断不估计影子状态增益，也不填补已调优基线的提升空间记录。"],
+  "cost": {"compute": "一次只读前缀诊断，预测450秒，上限600秒；没有新增训练或额外种子。", "owner_time": "约一分钟异步复核。", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "选择一次保留检查点的原面板诊断，先定位缺失的交接阶段，再决定最小下一步。",
+  "source": "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md"
+}

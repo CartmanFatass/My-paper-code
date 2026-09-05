@@ -1,0 +1,37 @@
+{
+  "id": "20260905-acvc-003",
+  "created": "2026-09-05T03:27:19-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "decision",
+  "title": "ACVC：按已命名依赖修复共同分母合成输入",
+  "context": "你已要求继续自动推进，Root 明确续派这项可逆修复。先用共同分母固定归一化后的输入位宽，再复用原 CM 和 reviewer，执行一次完整合成成本。遍历工作量、停止条件及科学边界保持原定值；不以测试或无关代码稀释预算，不自动计算真实上界。",
+  "options": [
+    {
+      "key": "a",
+      "label": "固定共同分母表示并做一次成本评估",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "将旧超位宽失败判作科学负面",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "扩大前缀或提高预算",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "修复已复现的输入表示缺陷，不改变科学问题。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_HC_D_COMMON_DENOMINATOR_COST_CARD_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#acvc-common-denominator-repair-selection-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

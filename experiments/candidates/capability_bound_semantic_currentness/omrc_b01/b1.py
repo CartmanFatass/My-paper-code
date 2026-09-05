@@ -440,7 +440,7 @@ def validate_bound_admission(
         or bound.get("implementation_commit") != expected_commit
     ):
         raise B1OrchestrationError("bound B1 admission invocation identity differs")
-    executable = Path(sys.executable).resolve()
+    executable = Path(os.path.abspath(sys.executable))
     if (
         bound.get("python_executable") != str(executable)
         or bound.get("python_sha256") != _digest(executable.read_bytes())
@@ -520,7 +520,7 @@ def run_memory_preflight(
         raise B1OrchestrationError("B1 admission arm/seed/attempt differs")
     if receipt_path.exists():
         raise FileExistsError("create-only B1 bound admission receipt exists")
-    executable = Path(sys.executable).resolve()
+    executable = Path(os.path.abspath(sys.executable))
     raw_path = receipt_path.with_name(f".{receipt_path.name}.raw-{uuid.uuid4().hex}.json")
     command = [
         str(executable), str(CANONICAL_PREFLIGHT), "admit-memory", "--out", str(raw_path)
@@ -655,7 +655,7 @@ def _prepare_worker_invocation(
     error_path = worker_root / "error.json"
     _atomic_create_json(request_path, payload)
     command = [
-        str(Path(sys.executable).resolve()), "-m", CANONICAL_WORKER_MODULE,
+        str(Path(os.path.abspath(sys.executable))), "-m", CANONICAL_WORKER_MODULE,
         "--request", str(request_path), "--result", str(result_path),
         "--error", str(error_path),
     ]
@@ -729,7 +729,9 @@ def _validate_stage_measurements(value: object) -> tuple[int, list[dict[str, Any
                 raise B1OrchestrationError(
                     f"B1 stage_measurements[{index}].{name} differs"
                 ) from exc
-            if not math.isfinite(number) or number <= 0:
+            if not math.isfinite(number) or (
+                number < 0 if name == "cpu_seconds" else number <= 0
+            ):
                 raise B1OrchestrationError(f"B1 stage_measurements[{index}].{name} differs")
         transitions = record.get("transitions")
         if type(transitions) is not int or transitions <= 0:
@@ -1015,11 +1017,11 @@ def supervise_policy_replay_child(
         )
         wall = measurement["end_to_end_wall_seconds"]
         cpu = measurement["end_to_end_cpu_seconds"]
-        if not (wall > 0 and cpu > 0):
+        if not wall > 0:
             _atomic_create_json(
                 incident_path, monitor.incident_snapshot(reason="TELEMETRY_FAILURE")
             )
-            raise TelemetryError("policy replay direct wall/CPU measurement is incomplete")
+            raise TelemetryError("policy replay direct wall measurement is incomplete")
         measurement["stage_measurements"] = [{
             "stage": "policy-replay-model-forward-units", "wall_seconds": wall,
             "cpu_seconds": cpu, "transitions": work_units,
@@ -1043,7 +1045,7 @@ def run_assess_preflight(receipt_path: Path) -> dict[str, Any]:
         raise FileExistsError(f"create-only assess-run receipt exists: {output}")
     output.parent.mkdir(parents=True, exist_ok=True)
     command = [
-        str(Path(sys.executable).resolve()), str(CANONICAL_PREFLIGHT), "assess-run",
+        str(Path(os.path.abspath(sys.executable))), str(CANONICAL_PREFLIGHT), "assess-run",
         "--direction", DIRECTION_ID,
         "--run-id", "cbsc_omrc_b1_three_seed_scout",
         "--workers", str(LiteralB1ArmSeedEngine.worker_count),
@@ -1827,7 +1829,7 @@ def _prepare_policy_replay_invocation(
     )
     _atomic_create_json(request_path, request)
     command = [
-        str(Path(sys.executable).resolve()), "-m",
+        str(Path(os.path.abspath(sys.executable))), "-m",
         "experiments.candidates.capability_bound_semantic_currentness.omrc_b01.b1_policy_replay_worker",
         "--request", str(request_path.resolve(strict=True)),
     ]
@@ -2078,13 +2080,14 @@ def _execute_resume_attempt(
         raise
 
 WINDOWS_MAX_PATH = 260
+WINDOWS_MAX_PATH_ENFORCED = os.name == "nt"
 #: Bytes reserved under `scratch/<slot>/<invocation>/` for engine-written files,
 #: whose names the orchestrator does not fix.
 SCRATCH_NAME_RESERVE = 48
 
 
 def projected_attempt_paths(final_path: Path) -> dict[str, Any]:
-    """Measure the longest absolute path this attempt will write.
+    """Measure the longest staging and incident path this attempt will write.
 
     Windows refuses a path over ``MAX_PATH`` (260) with ``WinError 3``, and the
     first thing an attempt writes is the bound admission receipt's raw sibling,
@@ -2097,36 +2100,50 @@ def projected_attempt_paths(final_path: Path) -> dict[str, Any]:
 
     final = Path(final_path).resolve(strict=False)
     staging = final.parent / f".{final.name}.partial-{'0' * 32}"
+    incident = final.parent / "incidents" / f"b1-{'0' * 32}-{'0' * 32}"
     longest = str(staging)
+    staging_longest = str(staging)
+    longest_surface = "STAGING"
     for index, (seed, arm) in enumerate(ARM_SEED_ORDER):
         tag = _slot_tag(index, seed, arm)
         for start, stop in ((0, 12), (12, 24), (24, 48), (0, 48)):
             invocation = f"slice-{start:02d}-{stop:02d}"
-            receipt = staging / "admissions" / f"{tag}-{invocation}-admission.json"
-            worker_root = staging / "workers" / tag / invocation
-            candidates = (
-                receipt,
-                receipt.with_name(f".{receipt.name}.raw-{'0' * 32}.json"),
-                worker_root / "supervisor-incident.json",
-                staging / "arm-seeds" / tag / f"checkpoint-update-{stop}.pt",
-                Path(
-                    str(staging / "scratch" / tag / invocation)
-                    + "\\" + "x" * SCRATCH_NAME_RESERVE
-                ),
-            )
-            for candidate in candidates:
-                text = str(candidate)
-                if len(text) > len(longest):
-                    longest = text
-    overhead = len(longest) - len(final.name)
+            for surface, root in (("STAGING", staging), ("INCIDENT", incident)):
+                receipt = root / "admissions" / f"{tag}-{invocation}-admission.json"
+                worker_root = root / "workers" / tag / invocation
+                candidates = (
+                    receipt,
+                    receipt.with_name(f".{receipt.name}.raw-{'0' * 32}.json"),
+                    worker_root / "result.json.gz",
+                    worker_root / "supervisor-incident.json",
+                    root / "arm-seeds" / tag / f"checkpoint-update-{stop}.pt",
+                    root / "scratch" / tag / invocation / ("x" * SCRATCH_NAME_RESERVE),
+                )
+                if surface == "STAGING":
+                    candidates += (
+                        root / "policy-replay" / f"{index:02d}" / "result.json.gz",
+                    )
+                for candidate in candidates:
+                    text = str(candidate)
+                    if len(text) > len(longest):
+                        longest = text
+                        longest_surface = surface
+                    if surface == "STAGING" and len(text) > len(staging_longest):
+                        staging_longest = text
+    staging_overhead = len(staging_longest) - len(final.name)
+    windows_fits = len(longest) < WINDOWS_MAX_PATH
+    platform_limit_enforced = WINDOWS_MAX_PATH_ENFORCED
     return {
         "final_path": str(final),
         "longest_projected_path": longest,
         "longest_projected_length": len(longest),
+        "longest_projected_surface": longest_surface,
         "limit": WINDOWS_MAX_PATH,
+        "platform_limit_enforced": platform_limit_enforced,
+        "windows_fits": windows_fits,
         "run_root_name": final.name,
-        "maximum_run_root_name_length": WINDOWS_MAX_PATH - 1 - overhead,
-        "fits": len(longest) < WINDOWS_MAX_PATH,
+        "maximum_run_root_name_length": WINDOWS_MAX_PATH - 1 - staging_overhead,
+        "fits": windows_fits if platform_limit_enforced else True,
     }
 
 
@@ -2135,13 +2152,20 @@ def require_attempt_path_budget(final_path: Path) -> dict[str, Any]:
 
     budget = projected_attempt_paths(final_path)
     if not budget["fits"]:
+        remedy = (
+            "the incident root is independent of the run root name and must use a shorter "
+            "output parent"
+            if budget["longest_projected_surface"] == "INCIDENT"
+            else (
+                f"the run root name {budget['run_root_name']!r} may be at most "
+                f"{budget['maximum_run_root_name_length']} characters at this output directory"
+            )
+        )
         raise B1OrchestrationError(
             "BLOCKED_PATH_BUDGET: the longest path this attempt writes is "
             f"{budget['longest_projected_length']} characters against the "
-            f"{WINDOWS_MAX_PATH}-character limit; the run root name "
-            f"{budget['run_root_name']!r} may be at most "
-            f"{budget['maximum_run_root_name_length']} characters at this "
-            "output directory"
+            f"{WINDOWS_MAX_PATH}-character limit on "
+            f"{budget['longest_projected_surface'].lower()}; {remedy}"
         )
     return budget
 

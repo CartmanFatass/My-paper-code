@@ -1,0 +1,390 @@
+{
+  "source": "A03 accepted read of A02 attempt01 summary; native labels from trace256 only; no learned predictions",
+  "source_launch_sha": "8d1c597871b38edc7d5f139f34f5a3ce2941c7d0",
+  "rows": [
+    {
+      "row_key": "0/EVALUATION/K8/850/156/0",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.21869770296967378,
+        null,
+        null,
+        null,
+        null,
+        -0.26169344944535616,
+        -0.20731001761413503,
+        null
+      ]
+    },
+    {
+      "row_key": "0/EVALUATION/K8/867/60/1",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.09073222903697185,
+        null,
+        null,
+        null,
+        null,
+        -0.13395101151269606,
+        -0.10670436283766005,
+        null
+      ]
+    },
+    {
+      "row_key": "0/EVALUATION/K8/870/108/1",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.1693799219869051,
+        null,
+        null,
+        null,
+        null,
+        -0.19837066692699862,
+        -0.18161235294322273,
+        null
+      ]
+    },
+    {
+      "row_key": "1/EVALUATION/K8/858/156/0",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.2003680270448002,
+        null,
+        null,
+        null,
+        null,
+        -0.24376357851260153,
+        -0.18904921301912153,
+        null
+      ]
+    },
+    {
+      "row_key": "1/EVALUATION/K8/869/108/1",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "g16": [
+        -0.21782139634195852,
+        null,
+        null,
+        -0.20548111563479127,
+        null,
+        null,
+        -0.21684297008654518,
+        -0.22560470064343915
+      ]
+    },
+    {
+      "row_key": "1/EVALUATION/K8/887/60/1",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "g16": [
+        -0.16704100182554404,
+        null,
+        null,
+        -0.14091148744374493,
+        null,
+        null,
+        -0.15595320557422887,
+        -0.17464564719961673
+      ]
+    },
+    {
+      "row_key": "2/EVALUATION/K8/888/76/0",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.11071671184302388,
+        null,
+        null,
+        null,
+        null,
+        -0.15286274000891018,
+        -0.12620840978333145,
+        null
+      ]
+    },
+    {
+      "row_key": "3/EVALUATION/K8/846/156/1",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.21939691715902632,
+        null,
+        null,
+        null,
+        null,
+        -0.23458838839506435,
+        -0.23458838839506435,
+        null
+      ]
+    },
+    {
+      "row_key": "4/EVALUATION/K8/838/156/1",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.2161397741915978,
+        null,
+        null,
+        null,
+        null,
+        -0.23230224668189806,
+        -0.23230224668189806,
+        null
+      ]
+    },
+    {
+      "row_key": "4/EVALUATION/K8/846/76/0",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "g16": [
+        -0.1724017470920767,
+        null,
+        null,
+        -0.1604799489508231,
+        null,
+        null,
+        -0.16830472404999303,
+        -0.18689373282740218
+      ]
+    },
+    {
+      "row_key": "4/EVALUATION/K8/868/76/0",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "g16": [
+        -0.1925326130835852,
+        null,
+        null,
+        -0.14834050795499637,
+        null,
+        null,
+        -0.16744093505635207,
+        -0.16280741995457793
+      ]
+    },
+    {
+      "row_key": "5/EVALUATION/K8/833/60/0",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.09608372561669823,
+        null,
+        null,
+        null,
+        null,
+        -0.13542348468212684,
+        -0.11200839597701774,
+        null
+      ]
+    },
+    {
+      "row_key": "6/EVALUATION/K8/838/108/2",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.20921478023311627,
+        null,
+        null,
+        null,
+        null,
+        -0.2246759225561846,
+        -0.2246759225561846,
+        null
+      ]
+    },
+    {
+      "row_key": "6/EVALUATION/K8/888/76/0",
+      "material_side": "KEEP",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.20365984064018638,
+        null,
+        null,
+        null,
+        null,
+        -0.21850605116631447,
+        -0.21850605116631447,
+        null
+      ]
+    },
+    {
+      "row_key": "7/EVALUATION/K8/866/60/1",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "g16": [
+        -0.16887065209353358,
+        null,
+        null,
+        -0.14650249619307407,
+        null,
+        null,
+        -0.1579120340509716,
+        -0.1763646554432845
+      ]
+    },
+    {
+      "row_key": "7/EVALUATION/K8/879/108/0",
+      "material_side": "REPLAN",
+      "legal_mask": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "g16": [
+        -0.19632671229988236,
+        null,
+        null,
+        null,
+        null,
+        -0.22905957163918805,
+        -0.1849619397921416,
+        null
+      ]
+    }
+  ]
+}

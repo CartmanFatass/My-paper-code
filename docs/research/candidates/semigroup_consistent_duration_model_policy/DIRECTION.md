@@ -1,5 +1,15 @@
 # Direction semigroup_consistent_duration_model_policy: semigroup-consistent duration model policy
 
+## Research organization — 2026-09-04
+
+This source belongs to route **K4 — 跨时长共享、组合与负迁移**, in the **duration 表示与价值共享** family
+of **灵活 skill duration**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority
@@ -482,3 +492,143 @@ supported. Exact intake, card and archive are
 `SCDMP_D6_SECTION11_REOPEN_CONVERGENCE_INTAKE_20260904.md`,
 `SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_SCIENCE_CARD_20260904.md`, and
 `external/2026-09-04-scdmp-d6-section11-reopen-convergence-02/`. Portfolio state is unchanged.
+## D6 duration-action A01 result — 2026-09-04
+
+Fresh attempt-02 completed as valid A/RECON evidence at launch SHA
+`630ce0f3423fef0e831bbc6bd2b2c990c3e9994f`. The exact frozen six-state population was established;
+all 1,152 candidate missions and evaluator calls completed with 203,877 total native transitions,
+zero learner/model/optimizer activity and no failure or timeout. The integer result is `W=2498`,
+`R7=0`, `R13=1`, so the first matching branch is
+`A_ONE_SIDED_DURATION_ACTION_RELEVANCE`.
+
+Every state has nonzero action span, but the best `k=13` action exceeds the best `k=7` action in all
+six states by 179–197 numerator units. Thus this exact finite host/population/action panel supports
+one-sided native duration-action relevance and contradicts the predicted bidirectional substrate.
+Because every mission safe-docked, the observed contrast is docking-time value rather than failure
+incidence. It supplies no learner, cross-duration sharing, regularization or negative-transfer
+polarity.
+
+The strongest support is the complete paired table, exact integer rule and nonzero native counts.
+The strongest contradiction is the absence of any materially `k=7`-favoring state. A simple
+longer-hold consequence remains the strongest alternative. The finite claim ceiling excludes D6/D8
+performance, unseen-duration transfer, semigroup invariance, general MARL value, safety and
+deployment.
+
+No B is authorized. The next discriminator is direction-tier: reopen the same persistent
+convergence binding to choose between parking this D6 action-choice family and one prospectively
+different, independently justified A/RECON source population. Exact evidence and intake are
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_EVIDENCE_20260904.md` and
+`SCDMP_D6_DURATION_ACTION_RELEVANCE_A01_RESULT_INTAKE_20260904.md`. Portfolio state remains
+unchanged.
+
+## D6 event-phase A02 admission — 2026-09-04
+
+The complete archived response from the same persistent convergence node formed
+`DECISION_FORMED=true` and `PRO_FINAL=ADMIT_ONE_PROSPECTIVE_A_RECON`. Its exact response SHA-256 is
+`b69700d63df75fc62342e4b8ef88f114460a60eba97cc3bb79ff3d7f3b1fff7d`. The direction executes that
+decision unchanged.
+
+The smallest supported conclusion closes the stationary/post-event A01 population as substrate
+for the intended bidirectional D6 action-choice question. It does not close D6 on every population
+and does not create D6/D8 learner polarity. Exactly one independently grounded population is
+admitted: `SCDMP-D6-EVENT-PHASE-DURATION-ACTION-RELEVANCE-A02`, A/RECON.
+
+A02 fixes the same `.92/.25` native host and compares same-information `EVENT_CLOCK_7` and
+`EVENT_CLOCK_13` policies around a public scheduled HR/RH event. At countdown `7`, `k=7` responds
+at the event while `k=13` is six ticks late; at countdown `78`, `k=13` responds at the event while
+`k=7` is six ticks late. These opposed phase alignments follow prospectively from
+`lcm(7,13)=91`, not from an A01 outcome search. Six base states at common renewals
+`91/182/273`, both countdowns, balanced graphs and sixteen paired tapes define a fixed 768-mission
+panel with no model, optimizer or learner.
+
+The strongest support is the exact event-to-renewal-to-action-to-native-return mechanism and its
+opposed six-tick predictions. The strongest contradiction is A01's uniform `k=13` advantage of
+179--197 numerator units across all six states. A general longer-hold docking-time benefit remains
+the strongest live alternative; event-phase effects may also be nonmaterial, heterogeneous or
+unrepresentable under unchanged native semantics.
+
+The finite claim ceiling is the exact host, base states, countdowns, fixed clock policies, HR/RH
+events, tapes and native endpoint. It excludes D6/D8 competence, cross-`k` sharing value, sample
+efficiency, regularization or negative-transfer causation, D2 interruption, unseen-duration
+transfer, semigroup invariance, general MARL value, safety and deployment.
+
+The sole next discriminator is the complete A02 object in
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_SCIENCE_CARD_20260904.md`. After valid intake,
+the same convergence binding decides whether a separately frozen B is warranted or the family
+parks. No A02 branch authorizes B, another population or a countdown sweep. Exact decision intake
+and durable provider bytes are in `SCDMP_D6_A01_RESULT_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-a01-result-convergence-03/`.
+
+The parallel Portfolio A1 audit does not change this mechanism conclusion. Completed A01 measured
+duration-action relevance, not upper-reference minus tuned-generic-baseline headroom; its raw
+headroom gap is absent rather than zero. The minimal follow-up definition is held separately until
+exact baseline assets exist, with no MEI, B or lifecycle effect. See
+`SCDMP_PORTFOLIO_A1_HEADROOM_EQUIVALENCE_INTAKE_20260904.md`.
+
+## D6 event-phase A02 result — 2026-09-04
+
+The sole admitted A02 invocation completed at launch SHA
+`c8010f2f14a23d36476c0e1d4f129f888917275d` with
+`integrity_valid=true`, `population_established=false`, and first matching branch
+`A02_EVENT_PHASE_POPULATION_NOT_ESTABLISHED`. Fresh admission passed at `13,330,087,936` bytes.
+
+Both source trajectories completed, but the required `K7-tick-273`, countdown `78`, clock `7`, HR
+group produced one safe dock before the scheduled event. The runner stopped under the frozen
+population rule after 321 candidate missions. Its partial terminal inventory is 320 timeouts, one
+safe dock and zero failures; total native inventory is 323 missions and 64,684 transitions, with
+zero model, dataset, optimizer, AdamW and learner activity. Wall time is
+`4.797502100002021 s`; peak RSS is unmeasured, which does not annul this non-resource result.
+
+No `K_b,d`, `K_d`, state-count or alignment quantity exists, so this result supplies no `k=7` or
+`k=13` polarity. It establishes only that the exact six-state event-phase population failed its
+all-cells requirement because a declared late-state/countdown mission terminated before event
+time. Earlier partial cells do not license salvage or a rewritten estimand.
+
+The strongest support is the integrity-valid safe-dock-before-event row and exact first-match rule.
+The strongest contradiction to a broad closure is that 320 earlier missions reached their terminal
+groups without this stop, but the frozen population and contrast require all cells. A01's uniform
+`k=13` result remains the only action-value sign, and A02 does not provide the missing opposed
+event-phase substrate.
+
+No B, second population, countdown sweep, replacement state or automatic derivative is authorized.
+The next discriminator is direction-tier: reopen the same persistent convergence node to decide
+whether the current D6 action-choice family should park or whether evidence outside this exhausted
+source-search lineage supports a qualitatively different recast. Exact evidence and intake are
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_EVIDENCE_20260904.md` and
+`SCDMP_D6_EVENT_PHASE_DURATION_ACTION_RELEVANCE_A02_RESULT_INTAKE_20260904.md`. Portfolio state and
+the separate unmeasured A1 headroom item remain unchanged.
+
+## D6 action-choice family park — 2026-09-04
+
+The complete archived response from the same persistent Convergence node formed
+`DECISION_FORMED=true` and
+`PRO_FINAL=PARK_CURRENT_D6_ACTION_CHOICE_OBJECT_FAMILY`. Its exact response SHA-256 is
+`4b3b746e16edbdb770dcb55cacd57a86b775509148f6d23434be9c2c94191656`. The decision is executed
+without local override.
+
+The parked unit is the current D6 action-choice source-search family: the proposal to justify a
+shared `Q(s,z,k)` learner by first establishing materially action-relevant preferences for both
+`k=7` and `k=13`. A01 established a uniform material `k=13` preference; the sole independently
+admitted A02 population validly stopped before its contrast estimand existed. The prior
+one-population/no-derivative boundary therefore leaves no authorized and presently
+decision-relevant next object.
+
+This is direction-local parking, not a Portfolio lifecycle change, broad SCDMP closure or evidence
+against the abstract D6 architecture. The strongest support is A01's six non-borderline one-sided
+contrasts plus A02's valid all-cells population failure. The strongest contradiction to closure is
+that A02 supplied no duration-policy contrast; event-phase value may exist in some independently
+defined population. The family is parked, not declared false.
+
+Re-entry requires a committed record outside the A01/A02 source/countdown-search lineage that
+identifies a qualitatively distinct, pre-outcome, native-action-linked mechanism and a
+class-correct decision-changing object. Meeting that condition only reopens the persistent
+Convergence node; it does not authorize an object. Another source state, countdown, host-neighbour
+row or sign search, partial A02 data, historical ancestry, the unmeasured A1 headroom item or an MEI
+does not qualify.
+
+There is no next discriminator and no A, B, learner, sweep, source-population, countdown-search or
+automatic-derivative authority. The finite claim ceiling is only that the exact `.92/.25` A01/A02
+lineage has no current decision-relevant continuation. Exact decision intake and archived provider
+bytes are in `SCDMP_D6_A02_POPULATION_CONVERGENCE_INTAKE_20260904.md` and
+`external/2026-09-04-scdmp-d6-a02-population-convergence-04/`. Portfolio state and the separate
+unmeasured headroom item remain unchanged.

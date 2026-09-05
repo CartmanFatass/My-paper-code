@@ -1,5 +1,15 @@
 # Direction capability_bound_semantic_currentness: capability-bound semantic currentness
 
+## Research organization — 2026-09-04
+
+This source belongs to route **N4 — 旧信息有效性**, in the **成员变化后的恢复** family
+of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This direction's registered exact factorial and distinct finite-resource learned successor are
 complete. Portfolio has reactivated the direction, and the persistent Innovator has selected an
 online multi-opportunity B/EXPLORE successor. Its host, mechanism, recurrent-PPO comparison,

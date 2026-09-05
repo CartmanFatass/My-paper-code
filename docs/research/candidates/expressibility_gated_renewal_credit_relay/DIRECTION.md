@@ -1,5 +1,15 @@
 # Direction expressibility_gated_renewal_credit_relay: expressibility-gated renewal credit relay
 
+## Research organization — 2026-09-04
+
+This source is a callable research reserve. Its independent investment and re-entry condition
+are recorded in Portfolio; retained evidence may serve a named receiving object without restarting
+a separate management chain.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
 
 ## Authority

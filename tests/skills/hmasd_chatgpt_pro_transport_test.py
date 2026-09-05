@@ -824,8 +824,8 @@ def test_skill_contracts_bound_locator_coordinate_offset_recovery() -> None:
         "visibleCount=1",
         "disabled=false",
         "No element found at point",
-        "dom_cua.get_visible_dom()",
-        "exact visible Send prompt `node_id`",
+        "fresh DOM state using the current browser",
+        "exact visible Send prompt node",
         "the URL is unchanged from the\npre-send observation",
         "no visible user-message node exists for the exact prompt",
         "enabled and\nvisible",
@@ -847,3 +847,39 @@ def test_transport_contracts_require_one_attachment_for_prompt_author_packets() 
     assert "must not declare, upload, or synthesize `reference_paths`" in transport_text
     assert "upload only `PROMPT_BODY.md`" in transport_text
     assert "must not be\nsplit back out for upload" in transport_text
+
+
+@pytest.mark.parametrize("visible,underlying,effort,valid", [
+    ("6 Pro", "Latest", "Pro, 5 of 5.", True),
+    ("6 Pro", "GPT-6 Astra", "Pro, 5 of 5.", True),
+    ("Pro", "GPT-6 Astra", "Pro, 5 of 5.", True),
+    ("Pro", "GPT-5.6 Sol", "Pro, 5 of 5.", False),
+    ("7 Pro", "Latest", "Pro, 5 of 5.", False),
+    ("Pro", "Latest", "Pro, 5 of 5.", False),
+    ("6 Pro", "Latest", "Thinking, 4 of 5.", False),
+])
+def test_provider_model_is_verified_separately_from_executor(visible, underlying, effort, valid) -> None:
+    requirement = {"model": "GPT-6 Astra", "mode": "Pro", "label": "6 Pro", "selector_hint": "Latest"}
+    args = dict(visible_model=visible, underlying_model=underlying, thinking_effort=effort)
+    if valid:
+        contract.verify_provider_selection(requirement, **args)
+    else:
+        with pytest.raises(ValueError):
+            contract.verify_provider_selection(requirement, **args)
+
+
+def test_old_answer_capture_is_not_accepted_as_new_request() -> None:
+    with pytest.raises(ValueError, match="RESPONSE_IDENTITY_MISMATCH"):
+        contract.validate_response_identity("PINNED_REFERENCE=old-ref\nKeep the prior 19 ACTIVE directions.", request_id="new-review", pinned_reference="new-ref")
+    contract.validate_response_identity("REQUEST_ID=new-review\nPINNED_REFERENCE=new-ref\nDecision.", request_id="new-review", pinned_reference="new-ref")
+
+
+def test_direct_transport_requires_owner_and_exact_caller(project_root, upload_request) -> None:
+    request = {**upload_request, "dispatch_mode": "CALLER_DIRECT", "operator_thread_id": upload_request["source_thread_id"]}
+    with pytest.raises(ValueError, match="owner's execution instruction"):
+        TRANSPORT_VALIDATE.validate(request, project_root)
+    request["owner_execution_instruction"] = "Root operates personally."
+    assert TRANSPORT_VALIDATE.validate(request, project_root)["return_receipt_ready"] is True
+    request["operator_thread_id"] = SINGLETON_THREAD_ID
+    with pytest.raises(ValueError, match="exact source caller"):
+        TRANSPORT_VALIDATE.validate(request, project_root)

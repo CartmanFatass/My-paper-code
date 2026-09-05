@@ -1,5 +1,15 @@
 # Direction flexible_skill_duration: policy-based interruption of fixed-duration skills
 
+## Research organization — 2026-09-04
+
+This source belongs to route **K1 — 中断时机**, in the **中断与续约** family
+of **灵活 skill duration**. Sources in the same route share one agenda with named subdirections;
+this does not establish scientific equivalence or pool result polarity.
+See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
+Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
+older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+second-recast counts and stopped object-family boundaries remain unchanged.
+
 This authority preserves the direction's scientific question, evidence references, and provenance.
 
 ## Authority
@@ -21,7 +31,7 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 - Theory ceiling (evidence spec §11.2): a suboptimality bound for the implemented rule against the best fixed `k` on the corridor host, stated with its assumptions; no invariance proof, no semigroup claim.
 - Claim ceiling now: B — EXPLORE. Promotion to C-BENCH only after E3 or E4 repeats across three to five seeds (plan §5).
 
-## Accepted mechanism-level science (2026-09-04)
+## Accepted mechanism-level science (2026-09-05)
 
 - E1 does not support carrying the age feature forward at fixed `k`.
 - E2 is a valid two-seed B observation on the homogeneous corridor. Its frozen verdict is
@@ -29,16 +39,31 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   below `0.5` everywhere, and `c = 0.25` passes the return bar only in seed 1. D2's mean segment
   length nevertheless increases monotonically with `c` in both seeds, so the threshold is a
   duration control even though the event-driven explanation is not supported on this population.
-- Strongest support: monotone segment duration and the seed-1 `c = 0.25` return pass. Strongest
-  contradiction: every raw D2 return is below the learned best D0 return, alignment peaks at only
-  `0.124684`, and the best D2 cost differs by seed.
-- Surviving alternative: homogeneous hazards let one tuned fixed clock fit both regions; E3 tests
-  whether the registered heterogeneous rows make regional renewal actionable. The competing
-  explanation is that the policy gap remains optimizer noise.
-- Next discriminator: E3 at the three registered hazard rows, D2 `c = 0.25` versus the exact best
-  fixed-`k` D0 learner, with paired return and region-specific event-to-renewal measurements.
+- E3 is complete,18/18 valid B cells, with frozen verdict `E3-H0-NO-ADVANTAGE`. All three large-row
+  D0 comparators are competent; paired gains are -0.071387329102,-0.108895874023,-0.086455281576.
+  Only large seed2 has the implementation's cumulative event path, yet it also loses return.
+  This closes only c=.25 on the declared large row/budget, not other thresholds or the direction.
+- Strongest support for some policy-gap value: E2 monotone duration control and E3 small seed2's
+  positive0.033291585 gain against competent D0. Small seed3 also gains but D0 is below the card's
+  competence line and cannot support superiority. Strongest contradiction: all medium/large
+  pairs lose; increasing structural margin does not deliver an increasing native gain.
+- Surviving alternatives: noisy policy gaps, seed quality, unequal realized optimizer exposure
+  under the preserved route and team-renewal interference. The experiment does not causally
+  distinguish them. Cumulative versus final path windows differ and are both reported; neither
+  changes this negative branch. No universal no-value or cross-host speed claim is supported.
+- Existing-data A/RECON headroom: upper-minus-trained-D0 row means .098784120/.175543309/.336673587,
+  versus exact structural margins .057037446/.144357787/.271218984. The difference includes
+  baseline undertraining; a fully tuned generic baseline set remains absent.
+- Convergence selected **CONTINUE** with one next A/RECON: existing deterministic/geometric/
+  rounded-lognormal renewal/reference same-information native-action opportunity census,
+  fixed members,K2,mean20,shape1,Delta.4,H400 and k={1,2,5,20,40}. Public greedy is the strongest
+  legal null; a structural gap does not establish D2/D8 learning value. No E4 learning matrix,
+  E3 rerun,c retune or D3 recast is selected. The census has not run; actual-node per-law cost/
+  cap and a later invocation card remain unfilled. Decision provenance PRO_FINAL /
+  OWNER_DELEGATED; no Portfolio change. Complete archive/intake:
+  `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md`. E3 result and bounded H0 remain unchanged.
 
-## Objects and their state (2026-09-04)
+## Objects and their state (2026-09-05)
 
 | Object | State | Record |
 | --- | --- | --- |
@@ -47,7 +72,8 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | E0 — exposure line and frozen probe set | complete, two seeds, four arms, no quarantine | `docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md`; review Part IX |
 | E1 — age input at fixed `k` | complete; owner prediction stands unrefuted; age not carried forward | `docs/Claude_docs/experiments/E1_AGE_INPUT_RESULT_20260902.md` |
 | E2 — D2 cost sweep on homogeneous corridor | complete; 15 valid runs; frozen verdict `NEITHER`; accepted B intake | `FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md`; `FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md` |
-| E3 — heterogeneous hazard | selected over E2b by object-tier unattended decision; card frozen, not launched | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md` |
+| E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
+| Post-E3 renewal/reference census | sole next A/RECON selected by PRO_FINAL CONTINUE; no training, call card not frozen, census unrun | `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md` and its exact archive |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
@@ -56,7 +82,7 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | --- | --- |
 | D2 on the base route | `config_1.py` (`policy_interruption_mode`, `interruption_cost_c`, `interruption_cost_c_Z`, `skill_cap_k_max`, `team_cap_k_Z`, `age_feature`), `hmasd/agent.py` (`_batched_assign_skills_d2`, `_d2_store_transition`, `update_coordinator_d2`), `hmasd/networks.py` (`evaluate_held_batch`, `assign_partial_batch`, `evaluate_training_batch_ordered`), `hmasd/utils.py` (D2 tables, `_compute_d2_high_level_advantages`, `get_d2_coordinator_sampler`) |
 | Corridor host | `envs/relay_corridor/` (`host.py`, `references.py`, `adapter.py`, `hmasd_driver.py`) |
-| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop), `scripts/run_flexible_skill_duration_e2.py` and its study aggregator; E3 runner pending CM |
+| Runners | `scripts/run_flexible_skill_duration_e0.py` (E0; E1 imports its loop), `scripts/run_flexible_skill_duration_e2.py` and its study aggregator; `scripts/run_flexible_skill_duration_e3.py` (accepted recorder/paired helpers) |
 | Tests | `tests/flexible_skill_duration_d2_test.py`, `tests/flexible_skill_duration_e2_test.py`, `tests/relay_corridor_host_test.py`, `tests/relay_corridor_hmasd_test.py`, `tests/uav_env_channel_equivalence_test.py` (throughput refactor) |
 | Fixtures | `tests/fixtures/flexible_skill_duration_d2/fingerprint_off.json` (the `off` byte-identity guard) |
 | Local evidence | `temp/directions/flexible_skill_duration/exp/`, `temp/directions/flexible_skill_duration/probes/` (gitignored; content digests recorded in the result documents) |

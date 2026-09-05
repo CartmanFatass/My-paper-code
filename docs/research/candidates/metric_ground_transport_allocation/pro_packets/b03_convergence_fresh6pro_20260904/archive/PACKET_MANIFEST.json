@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-04-mgtap-b03-convergence-02--metric_ground_transport_allocation",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-04-mgtap-b03-convergence-02",
+  "direction_id": "metric_ground_transport_allocation",
+  "direction_ids": [
+    "metric_ground_transport_allocation"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:metric_ground_transport_allocation:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "single_body_attachment",
+  "body": {
+    "role": "prompt",
+    "source_path": "C:\\Projects\\HMASD-worktrees\\dm-n5-continue-20260904\\docs\\research\\candidates\\metric_ground_transport_allocation\\pro_packets\\b03_convergence_fresh6pro_20260904\\PROMPT_BODY.md",
+    "canonical_filename": "2026-09-04-mgtap-b03-convergence-02--metric_ground_transport_allocation__00_PROMPT.md",
+    "bytes": 11187,
+    "sha256": "ca308405cf0b7e6d1e153e548f951aa9fc167d07335c224caf20f7829bb34dfd",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-04-mgtap-b03-convergence-02\\2026-09-04-mgtap-b03-convergence-02--metric_ground_transport_allocation__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-04-mgtap-b03-convergence-02\\2026-09-04-mgtap-b03-convergence-02--metric_ground_transport_allocation__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\2026-09-04-mgtap-b03-convergence-02\\2026-09-04-mgtap-b03-convergence-02--metric_ground_transport_allocation__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "ca308405cf0b7e6d1e153e548f951aa9fc167d07335c224caf20f7829bb34dfd",
+    "references": []
+  }
+}

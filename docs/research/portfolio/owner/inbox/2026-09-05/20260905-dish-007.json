@@ -1,0 +1,43 @@
+{
+  "id": "20260905-dish-007",
+  "created": "2026-09-05T03:07:03-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "接收原生净空见证，保留单点与未测试修复的限制",
+  "context": "原第一个坐标的一次准备态完整：两路相机为零，源链路余量低于门槛，派生净空条件均不满足。未创建模型或推进完整一步，监督进程1秒；接受修减后的40/135编排比例及完整A类观测，不把源码遵循规格读成实现缺陷。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接收完整单点观测并保留解释限制",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "称为实现缺陷并修改宿主",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "推断无线接收不可能或影子来源无效",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "重复同一个点",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原定读取规则得到完整测量支持；代码与规格一致，没有理由重复该点或改写结果含义。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-source-a02-intake",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

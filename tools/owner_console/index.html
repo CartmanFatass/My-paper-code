@@ -175,6 +175,7 @@
   <div class="brand">HMASD 批改台<small>owner console · 127.0.0.1</small></div>
   <nav class="tabs">
     <button data-tab="inbox" class="on">收件箱<b id="nInbox"></b></button>
+    <button data-tab="starred">★ 重要改动<b id="nStarred"></b></button>
     <button data-tab="board">活跃方向</button>
     <button data-tab="briefs">简报</button>
     <button data-tab="reviews">评审文档</button>
@@ -192,11 +193,11 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const S = { items:[], today:'', tab:'inbox', dir:null, prio:null, kinds:new Set(), showAnswered:false, days:7,
+const S = { items:[], starred:[], today:'', tab:'inbox', dir:null, prio:null, kinds:new Set(), showAnswered:false, days:7,
             focus:0, open:new Set(), sel:{}, board:null, boardSort:'priority', briefs:[], reviews:[] };
 const KIND_ZH = {decision:'决定','new-card':'新卡片',prediction:'预测',brief:'简报','critic-dissent':'批评者异议','close-call':'接近',
   'second-recast':'二次重铸',portfolio:'组合提案'};
-const GROUPS = {1:['P1','需要你裁决'],2:['P2','新卡片与异议'],3:['P3','已按委托执行，可复核'],4:['P4','简报与技术项']};
+const GROUPS = {1:['P1','重要决定与追溯'],2:['P2','新卡片与异议'],3:['P3','已按委托执行，可复核'],4:['P4','简报与技术项']};
 const DPR = {HIGH:0,MEDIUM:1,LOW:2};
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -211,8 +212,9 @@ const age = s => { if (!s) return '—'; const d = new Date(s); if (isNaN(d)) re
 
 async function load(){
   try{
-    const [it, g] = await Promise.all([api('/api/items?days='+S.days), api('/api/git')]);
-    S.items = it.items; S.today = it.today;
+    const [it, g, stars] = await Promise.all([api('/api/items?days='+S.days), api('/api/git'), api('/api/starred')]);
+    S.items = it.items; S.today = it.today; S.starred = stars.items;
+    $('#nStarred').textContent = S.starred.length || '';
     $('#gitline').textContent = `${g.branch} · ${g.log[0]||''}${g.ahead ? ` · 未推送 ${g.ahead}` : ''}`;
     $('#gitline').title = (g.log||[]).join('\n');
     $('#pushBtn').disabled = !g.ahead;
@@ -222,7 +224,7 @@ async function load(){
 }
 const pending = () => S.items.filter(i => i.status !== 'answered');
 function visible(){
-  let v = S.items.filter(i => S.showAnswered || i.status !== 'answered');
+  let v = S.tab === 'starred' ? S.starred.slice() : S.items.filter(i => S.showAnswered || i.status !== 'answered');
   if (S.dir) v = v.filter(i => i.direction === S.dir);
   if (S.prio) v = v.filter(i => i.priority === S.prio);
   if (S.kinds.size) v = v.filter(i => S.kinds.has(i.kind));
@@ -232,21 +234,22 @@ function visible(){
 function render(){
   const n = pending().length; document.title = (n ? `(${n}) ` : '') + 'HMASD 批改台'; $('#nInbox').textContent = n || '';
   renderRail();
-  ({inbox:renderBay, board:renderBoard, briefs:renderBriefs, reviews:renderReviews})[S.tab]();
+  ({inbox:renderBay, starred:renderBay, board:renderBoard, briefs:renderBriefs, reviews:renderReviews})[S.tab]();
 }
 
 function renderRail(){
-  const p = pending(); const byP = {1:0,2:0,3:0,4:0}, byD = {}, byK = {};
+  const all = S.tab === 'starred' ? S.starred : S.items;
+  const p = S.tab === 'starred' ? all : pending(); const byP = {1:0,2:0,3:0,4:0}, byD = {}, byK = {};
   for (const i of p){ byP[i.priority]=(byP[i.priority]||0)+1; byD[i.direction]=(byD[i.direction]||0)+1; byK[i.kind]=(byK[i.kind]||0)+1; }
-  const dirs = [...new Set(S.items.map(i=>i.direction))].sort((a,b)=>(byD[b]||0)-(byD[a]||0) || a.localeCompare(b));
-  let h = `<h4>优先级</h4>`;
+  const dirs = [...new Set(all.map(i=>i.direction))].sort((a,b)=>(byD[b]||0)-(byD[a]||0) || a.localeCompare(b));
+  let h = `<h4>仅维护 P1 / P2</h4>`;
   h += `<div class="rrow ${S.prio?'':'on'}" data-p="0"><span class="holder" style="background:transparent"></span><span class="name">全部</span><span class="n live">${p.length}</span></div>`;
-  for (const k of [1,2,3,4]) h += `<div class="rrow ${S.prio===k?'on':''}" data-p="${k}"><span class="holder" style="background:var(--p${k})"></span><span class="name">${GROUPS[k][0]} ${GROUPS[k][1]}</span><span class="n ${byP[k]?'live':''}">${byP[k]||0}</span></div>`;
+  for (const k of [1,2]) h += `<div class="rrow ${S.prio===k?'on':''}" data-p="${k}"><span class="holder" style="background:var(--p${k})"></span><span class="name">${GROUPS[k][0]} ${GROUPS[k][1]}</span><span class="n ${byP[k]?'live':''}">${byP[k]||0}</span></div>`;
   h += `<h4>类别</h4>`;
-  for (const k of Object.keys(KIND_ZH)) if (S.items.some(i=>i.kind===k)) h += `<div class="rrow ${S.kinds.has(k)?'on':''}" data-k="${k}"><span class="holder" style="background:transparent"></span><span class="name">${KIND_ZH[k]}</span><span class="n ${byK[k]?'live':''}">${byK[k]||0}</span></div>`;
+  for (const k of Object.keys(KIND_ZH)) if (all.some(i=>i.kind===k)) h += `<div class="rrow ${S.kinds.has(k)?'on':''}" data-k="${k}"><span class="holder" style="background:transparent"></span><span class="name">${KIND_ZH[k]}</span><span class="n ${byK[k]?'live':''}">${byK[k]||0}</span></div>`;
   h += `<h4>方向</h4>`;
   h += `<div class="rrow ${S.dir?'':'on'}" data-d=""><span class="holder" style="background:transparent"></span><span class="name">全部方向</span><span class="n"></span></div>`;
-  for (const d of dirs){ const it = S.items.find(i=>i.direction===d); h += `<div class="rrow ${S.dir===d?'on':''}" data-d="${esc(d)}" title="${esc(d)}"><span class="holder dp ${esc(it.dir_priority)}" style="background:var(--${({HIGH:'hi',MEDIUM:'md'})[it.dir_priority]||'lo'})"></span><span class="code">${esc(it.code)}</span><span class="n ${byD[d]?'live':''}">${byD[d]||0}</span></div>`; }
+  for (const d of dirs){ const it = all.find(i=>i.direction===d); h += `<div class="rrow ${S.dir===d?'on':''}" data-d="${esc(d)}" title="${esc(d)}"><span class="holder dp ${esc(it.dir_priority)}" style="background:var(--${({HIGH:'hi',MEDIUM:'md'})[it.dir_priority]||'lo'})"></span><span class="code">${esc(it.code)}</span><span class="n ${byD[d]?'live':''}">${byD[d]||0}</span></div>`; }
   h += `<div class="keys"><kbd>j</kbd>/<kbd>k</kbd> 上下 · <kbd>x</kbd> 展开 · <kbd>a</kbd>–<kbd>e</kbd> 选项 · <kbd>g</kbd> 同意 · <kbd>Enter</kbd> 评论 · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> 提交 · <kbd>]</kbd> 右栏</div>`;
   $('#rail').innerHTML = h;
   $('#rail').querySelectorAll('.rrow').forEach(el => el.onclick = () => {
@@ -260,6 +263,7 @@ function renderRail(){
 function renderBay(){
   const v = visible();
   let h = `<div class="sorts"><span>显示</span><button class="${S.showAnswered?'on':''}" data-a="ans">已答条目</button><button data-a="days">最近 ${S.days} 天</button><span style="margin-left:auto">${v.length} 条</span></div>`;
+  if (S.tab === 'starred') h = `<div class="status">★ 重要改动 · 全部历史，含已答条目 · ${v.length} 条<br>按授权与完整 6 Pro 裁决执行，可在此追溯并提出异议；星标不表示你已逐项批准。</div>`;
   if (!v.length) h += `<div class="empty"><b>这里没有待批改的条目</b>Codex 写入新条目后会出现在这里。要复核已答条目，打开“已答条目”。</div>`;
   let idx = 0, last = null;
   for (const it of v){
@@ -279,17 +283,25 @@ function strip(it, idx){
   const marks = `${it.recommended?`<span class="rec">★${esc(it.recommended)}</span>`:''} ${it.auto_applied?`<span class="ran">✓${esc(it.auto_applied)}</span>`:''}`;
   const links = [...(it.evidence||[]).map(e=>`<a data-doc="${esc(e)}">${esc(e.split('/').pop())}</a>`), it.brief?`<a data-doc="${esc(it.brief)}">简报</a>`:'', it.ledger_row?`<a data-doc="${esc(it.ledger_row)}">账本行</a>`:'', `<a data-doc="${esc(it.path)}">item.json</a>`].join('');
   return `<article class="strip p${it.priority} ${S.open.has(it.id)?'open':''} ${idx===S.focus?'focus':''} ${it.status==='answered'?'answered':''}" data-id="${esc(it.id)}" data-idx="${idx}">
-    <div class="srow"><span class="t">${esc(when(it.created||it.day))}</span><span class="code">${esc(it.code)}</span><span class="kind">${KIND_ZH[it.kind]||esc(it.kind)}</span><span class="title" title="${esc(it.title)}">${esc(it.title)}</span><span class="marks">${marks}</span><span class="dp ${esc(it.dir_priority)}" title="方向优先级 ${esc(it.dir_priority)}"></span><span class="chev">▶</span></div>
+    <div class="srow"><span class="t">${esc(when(it.created||it.day))}</span><span class="code">${esc(it.code)}</span><span class="kind">${KIND_ZH[it.kind]||esc(it.kind)}</span><span class="title" title="${esc(it.title)}">${it.starred?'<b class="rec" aria-label="重要改动">★ </b>':''}${esc(it.title)}</span><span class="marks">${marks}</span><span class="dp ${esc(it.dir_priority)}" title="方向优先级 ${esc(it.dir_priority)}"></span><span class="chev">▶</span></div>
     <div class="body"><div>
       ${(it.context_problems||[]).length?`<div class="lack"><b>上下文不足，无法裁决</b>${it.context_problems.map(p=>`<span>${esc(p)}</span>`).join('')}<button class="btn quiet" data-act="needs">要求补充决策包</button></div>`:''}
       ${it.context?`<div class="ctx">${esc(it.context)}</div>`:'<div class="ctx"></div>'}${it.dm_reason?`<div class="dm">DM：${esc(it.dm_reason)}</div>`:''}
+      ${executionTrace(it)}
       ${packet(it)}
       <div class="opts">${opts}</div>
       <textarea placeholder="评论（可空）。改掉已执行的决定时，写一句原因。">${esc(S.sel[it.id+'#c'] ?? (it.reply?.comment||''))}</textarea>
       <div class="acts"><button class="btn quiet" data-act="agree">同意</button><button class="btn" data-act="submit">提交批改</button><span class="hint">提交后写入 reviews/${esc(S.today)}.md 并 commit</span></div>
-      ${it.reply?`<div class="reply">已答 ${esc(it.reply.answered_at)} · owner: ${esc(it.reply.choice)}${it.reply.comment?' · '+esc(it.reply.comment):''}</div>`:''}
+      ${it.reply?`<div class="reply">${it.reply_attribution_corrected?'历史回复（授权归因已纠正，见上方）':'已答'} ${esc(it.reply.answered_at)} · owner: ${esc(it.reply.choice)}${it.reply.comment?' · '+esc(it.reply.comment):''}</div>`:''}
     </div><dl class="meta"><dt>条目</dt><dd>${esc(it.id)}</dd><dt>层级</dt><dd>${esc(it.tier||'object')}${it.ledger_kind?' · '+esc(it.ledger_kind):''}</dd><dt>方向</dt><dd>${esc(it.direction)} · ${esc(it.dir_priority||'')}</dd><dt>文档</dt><dd>${links}</dd></dl></div>
   </article>`;
+}
+
+function executionTrace(it){
+  const history = it.execution_history || [];
+  if (!history.length) return '';
+  const states = {planned:'计划中', applied:'已执行', blocked:'执行阻塞'};
+  return `<div class="pk"><h5>★ 执行与授权追溯</h5>${history.map(t => `<blockquote><b>${esc(states[t.state]||t.state)}</b> · ${esc(t.authority)} · ${esc(t.at)}<p>${esc(t.summary)}</p>${t.correction?`<p><b>授权记录纠正：</b>${esc(t.correction)}</p>`:''}<a data-doc="${esc(t.source)}">裁决 / 授权原文</a> · <a data-doc="${esc(t.record)}">实际变更与提交记录</a></blockquote>`).join('')}</div>`;
 }
 
 function packet(it){
@@ -413,11 +425,11 @@ function md(src){
   return out;
 }
 
-function setTab(t){ S.tab = t; document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x.dataset.tab===t)); render(); }
+function setTab(t){ if (t === 'starred'){ S.dir=null; S.prio=null; S.kinds.clear(); } S.tab = t; document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('on', x.dataset.tab===t)); render(); }
 document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
 $('#pushBtn').onclick = async () => { $('#pushBtn').disabled = true; try { const r = await api('/api/push', {}); toast(r.ok ? '已推送' : '推送失败：'+r.out, 5000); } catch(e){ toast('推送失败：'+e.message, 4000); } load(); };
 $('#exportBtn').onclick = async () => {
-  const ids = visible().filter(i=>i.reply).map(i=>i.id);
+  const ids = visible().filter(i=>S.tab==='starred' || i.reply).map(i=>i.id);
   if (!ids.length) return toast('当前筛选里没有已答条目。先批改，或打开“已答条目”。', 3500);
   const slug = prompt('文件名后缀（英文、数字、短横线）', S.dir ? S.dir.slice(0,20) : 'selection'); if (slug === null) return;
   try { const r = await api('/api/export', {ids, slug}); toast(`已导出 ${r.path}`, 4000); } catch(e){ toast('导出失败：'+e.message, 4000); }
@@ -425,7 +437,7 @@ $('#exportBtn').onclick = async () => {
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
   if (e.key === ']'){ $('#desk').classList.toggle('pane-open'); return; }
-  if (S.tab !== 'inbox') return;
+  if (!['inbox','starred'].includes(S.tab)) return;
   const v = visible(); if (!v.length) return; const it = v[S.focus];
   if (e.key === 'j'){ S.focus = Math.min(S.focus+1, v.length-1); refocus(); }
   else if (e.key === 'k'){ S.focus = Math.max(S.focus-1, 0); refocus(); }

@@ -1,0 +1,37 @@
+{
+  "id": "20260904-folr-006",
+  "created": "2026-09-04T14:55:08-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "prediction",
+  "title": "N3 B04 首张卡：状态掩码还是通用学习已足够",
+  "context": "预测本次真实替换环境上的早期回报曲线，RESET 只是信息切断控制。简单 latch 的表现用来检验学习读出是否仍是瓶颈。",
+  "options": [
+    {
+      "key": "a",
+      "label": "通用学习足够，掩码差异小于五个百分点",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "类型化掩码减少旧状态干扰，学习曲线明显更好",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "学习读出或写入器仍主导，两种学习器均落后简单控制",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "预计主要差异在五个百分点以内；通用接收器会改善，简单 latch 终点较高。所有者预测未取得，离线推进。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/N3_FOLR_ROUTING_B04_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L228",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

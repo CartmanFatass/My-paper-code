@@ -1,0 +1,78 @@
+{
+  "id": "20260904-cbsc-004",
+  "created": "2026-09-04T09:11:09-07:00",
+  "direction": "capability_bound_semantic_currentness",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "CBSC dynamic-host headroom census A01 新卡",
+  "context": "卡片只审计 tracked evidence：当前 host 是一控制器动态 POMDP；目标是查明 same-information upper 与 tuned RAW-GRU 是否在同宿主、同 population、同动作与 exposure 下都已有有效结果。没有 learner、runner、preflight 或 scientific root，结果不映射到 B/PARK/CLOSE。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "保留卡片并完成非阻塞只读盘点。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "下个干净边界标记卡片拒绝，不使用 A01 聚合；既有对象不变。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "按评论修订后再用于后续聚合；不会追溯改变已经读取的历史证据。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "当前缺的是可用性记录；只读卡能在不制造新证据的前提下明确匹配或缺口。",
+  "evidence": [
+    "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L70",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否接受 CBSC 当前动态宿主的最小只读 A/RECON headroom 证据盘点卡？",
+    "changes_if_approved": [
+      {
+        "target": "CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md",
+        "from": "没有当前动态宿主的 matched upper-minus-tuned-generic 可用性记录",
+        "to": "形成一次零 learner、零运行的固定证据盘点；只报告 raw gap 或明确缺失/错配"
+      }
+    ],
+    "if_refused": "在下一个干净边界把该卡标记为拒绝，不再把 A01 结果用于后续聚合；既有 exact、LR01、B1 技术历史和 Portfolio 生命周期保持不变，也不会启动 B。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+        "quote": "RAW containment is equality, not a positive CBSC-over-RAW residual.",
+        "why": "说明旧 exact 结果是机制/包含关系证据，不能直接当作当前动态宿主的 upper-minus-generic gap。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_LR01_RESULT_INTAKE_20260831.md",
+        "quote": "The result therefore supports neither a robust structured advantage, practical equivalence, nor uniform RAW/SHAM superiority.",
+        "why": "LR01 是不同离线有限面板与固定优化包，不能填充当前宿主的 tuned generic baseline。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+        "quote": "The exact factorial remains positive and narrow, and LR01 remains a valid UNRESOLVED result for its one fixed codec/optimizer package.",
+        "why": "仓库并非没有正面或学习证据；盘点必须清楚说明这些证据为何因宿主/对象不匹配而不能相减。"
+      }
+    ],
+    "uncertainty": [
+      "现有 tracked 记录可能没有任何当前动态宿主的有效 B1 return；盘点只允许把它记为缺失。",
+      "未来若另行授权训练或调优 RAW-GRU，那会是新的 B 对象而不是本 A01 的延伸。"
+    ],
+    "cost": {
+      "compute": "0 个实验调用；最多 15 分钟本地只读文档/Git 检查",
+      "owner_time": "约 1 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Recommendation: **(b)**. It answers the assigned A1 question at the smallest honest evidence class and preserves old-host mechanism value, dynamic-host headroom and technical failure as distinct facts.",
+    "source": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_DYNAMIC_HOST_HEADROOM_CENSUS_A01_SCIENCE_CARD_20260904.md"
+  }
+}

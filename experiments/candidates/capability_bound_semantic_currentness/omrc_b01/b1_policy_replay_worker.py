@@ -306,7 +306,7 @@ def _validate_fresh_admission(invocation: PolicyReplayInvocation) -> dict[str, A
         or Path(bound["bound_receipt_path"]).resolve(strict=False) != path.resolve()
     ):
         raise PolicyReplayWorkerError("fresh bound admission identity is stale")
-    executable = Path(sys.executable).resolve()
+    executable = Path(os.path.abspath(sys.executable))
     preflight = CANONICAL_PREFLIGHT
     raw_path = Path(bound["raw_output_path"]).resolve(strict=True)
     if (

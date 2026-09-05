@@ -1,0 +1,175 @@
+{
+  "technical_acceptance": "VALID_RESULT_BLIND_CALIBRATION / BLOCKED_WALL_CAP",
+  "scientific_result": false,
+  "summary": {
+    "object": "VNFC-CONTROLLER-HEADROOM-A-RECON-CAUSAL-ONE-DEVIATION-R03",
+    "mode": "calibration",
+    "launch_sha": "9c41484a068e266581b6456bddfd3f6448d3931c",
+    "fixed_panel_seed_metadata_only": 2026090311,
+    "native": {
+      "scores": [
+        {
+          "epoch": 0,
+          "seconds": 0.449180563,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        },
+        {
+          "epoch": 1,
+          "seconds": 0.332469345,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        },
+        {
+          "epoch": 2,
+          "seconds": 0.255135022,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        },
+        {
+          "epoch": 3,
+          "seconds": 0.18213524,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        },
+        {
+          "epoch": 4,
+          "seconds": 0.106291078,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        },
+        {
+          "epoch": 5,
+          "seconds": 0.063000095,
+          "candidate_count": 1961,
+          "scorer_checker_equal": true,
+          "independent_enumerator_equal": true,
+          "all_candidate_records_exact": true,
+          "agreement": true
+        }
+      ],
+      "ticks": {
+        "seconds": 6.8262e-05,
+        "count": 2560,
+        "cases": [
+          {
+            "case": "moving_7",
+            "seconds": 5.4231e-05,
+            "count": 2560
+          },
+          {
+            "case": "acquiring_7",
+            "seconds": 6.8262e-05,
+            "count": 2560
+          },
+          {
+            "case": "serving_7",
+            "seconds": 6.5261e-05,
+            "count": 2560
+          },
+          {
+            "case": "preloss_8",
+            "seconds": 5.9371e-05,
+            "count": 2560
+          }
+        ]
+      },
+      "prehistory": {
+        "seconds": 0.022342233,
+        "calls": 6,
+        "agents": 8
+      }
+    },
+    "synthetic_solver": {
+      "seconds": 2.5419622539993725,
+      "created": 502016,
+      "retained": 288,
+      "eliminated": 501728,
+      "complete": true,
+      "action_records": 31376,
+      "projected_created_upper": 903722928,
+      "projected_seconds": 9152.017350242992,
+      "source": "synthetic exact fractions; no native endpoint data"
+    },
+    "synthetic_serialization": {
+      "seconds": 0.08431098199798726,
+      "records": 1961,
+      "bytes": 32648689,
+      "projected_seconds": 8.093854271806777,
+      "basis": "synthetic 16KiB records; grouping/allocation/serialization allowance"
+    },
+    "projection": {
+      "total_native_ticks_upper": 9418560,
+      "full_bcrh_calls_upper": 376688,
+      "full_bcrh_scored_rows_upper": 738685168,
+      "continuations_upper": 94128,
+      "t_tick_measured": 2.6664843750000003e-08,
+      "t_score_measured": 0.00022905689087200407,
+      "safety_factor": 2.0,
+      "terms_seconds": {
+        "native_ticks": 0.5022888615000001,
+        "full_bcrh_rows": 338401.855830688,
+        "exact_solver": 9152.017350242992,
+        "history_serialization": 8.093854271806777,
+        "prehistory_enumeration": 0.714951456,
+        "fixed_setup_and_publication_allowance": 60.0
+      },
+      "projected_seconds": 347623.18427552027,
+      "cap_seconds": 2700,
+      "status": "BLOCKED_WALL_CAP",
+      "native_terms_alone_exceed_cap": true,
+      "interpretation": "planning estimate only; no CI branch or scientific result"
+    },
+    "new_rng_draws": 0,
+    "models": 0,
+    "optimizer_updates": 0,
+    "training_transitions": 0,
+    "checkpoints": 0,
+    "native_panel_worlds": 0,
+    "native_candidate_endpoints": 0,
+    "scientific_result": false,
+    "full_census_implemented": false,
+    "wall_seconds": 4.096142977999989,
+    "peak_rss_bytes": 122736640
+  },
+  "admission": {
+    "assessed_at": "2026-09-05T01:46:39.283002Z",
+    "available_physical_bytes": 15428743168,
+    "captured_at": "2026-09-05T01:46:39.282750Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15428743168,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "supervisor": {
+    "node": "wsl_4070",
+    "task": "vnfc_causal_r03_calibration_20260904_01",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 1598757,
+    "tmux_active": false
+  },
+  "task_log": "=== Task 'vnfc_causal_r03_calibration_20260904_01' started at 2026-09-05T09:46:39+08:00 ===\n{\n  \"assessed_at\": \"2026-09-05T01:46:39.283002Z\",\n  \"available_physical_bytes\": 15428743168,\n  \"captured_at\": \"2026-09-05T01:46:39.282750Z\",\n  \"cgroup_headroom_bytes\": null,\n  \"cgroup_memory_current_bytes\": null,\n  \"cgroup_memory_max_bytes\": null,\n  \"effective_available_bytes\": 15428743168,\n  \"effective_floor_pass\": true,\n  \"failure_reasons\": [],\n  \"measurement_source\": \"/proc/meminfo\",\n  \"minimum_available_bytes\": 4294967296,\n  \"passed\": true,\n  \"physical_floor_pass\": true,\n  \"schema_version\": 1\n}\n{\"status\": \"BLOCKED_WALL_CAP\", \"projected_seconds\": 347623.18427552027, \"summary\": \"/home/wu/hmasd-worktrees/vnfc-causal-r03-9c41484a/temp/directions/variable_n_fleet_churn/exp/causal_r03_20260904/calibration/summary.json\"}\n=== Task 'vnfc_causal_r03_calibration_20260904_01' exited with code 0 at 2026-09-05T09:46:43+08:00 (Duration: 4s) ===\n"
+}

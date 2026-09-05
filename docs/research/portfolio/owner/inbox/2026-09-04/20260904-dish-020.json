@@ -1,0 +1,43 @@
+{
+  "id": "20260904-dish-020",
+  "created": "2026-09-04T18:41:22-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "decision",
+  "title": "DISH 下一步：只读定位第一个检查点的交接链",
+  "context": "已完成的48行都没有来源干预，阶段计数尚缺。选择按原顺序的第一个检查点，重走其原16行定位缺失阶段；不训练或强制触发。",
+  "options": [
+    {
+      "key": "a",
+      "label": "一次固定检查点的原面板诊断",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "立即增加训练预算",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "强制交接",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "立即诊断全部三个检查点",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "一个完整原面板足以回答当前路径测量问题；扩大训练或重复更多检查点尚不能替代缺失的阶段观察。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/N3_DISH_B01_C04_COMPLETE_INTAKE_20260904.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREFIX_TRIGGER_FUNNEL_A01_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#n3-dish-b01-complete-intake",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}

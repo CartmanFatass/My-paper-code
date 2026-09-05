@@ -1,0 +1,37 @@
+{
+  "id": "20260904-frrie-012",
+  "created": "2026-09-04T14:46:24-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "原 tape 步骤完整通过后新鲜执行未改 R02",
+  "context": "_02 在准入后、native 环境与 learner 前的 tape 验证处退出。CM 在同一提交和节点重跑原表达式，512 张预定 tape 全部完成；原错误未复现，原因保持未分类，不能断言源码或主机故障。尚无任何学习或回报观察，因此选择新的 task、输出路径与即时准入，完整执行原 R02；不复用部分状态、不改种子、比较器、CPU FP32、卡或预算，不再扩展测试。",
+  "options": [
+    {
+      "key": "a",
+      "label": "新鲜执行一次未改卡 R02",
+      "consequence": "使用新 _03 标识和独立输出、准入路径运行原对象；原失败原因仍是明确风险。"
+    },
+    {
+      "key": "b",
+      "label": "继续扩大无复现故障的诊断",
+      "consequence": "增加技术时间但当前没有可修复的已复现源码缺陷。"
+    },
+    {
+      "key": "c",
+      "label": "保留对象未观测状态",
+      "consequence": "保存所有证据但不推进已授权的 learner 判别器。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原表达式已在相同提交和节点完整通过且没有科学结果暴露；保持全部科学条件新鲜运行最直接。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_RESUME_HANDOFF_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L216",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

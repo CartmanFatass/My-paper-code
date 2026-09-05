@@ -9,9 +9,12 @@ producer assemblers before a prospective byte census permits any table write.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import gzip
 import hashlib
 import json
+import os
 from pathlib import Path
+import shutil
 from typing import Any, Mapping, Sequence
 
 from .artifact import canonical_json_bytes, ensure_confined
@@ -37,12 +40,6 @@ from .b1_contract import (
     B1_SLOT_ORDER,
     B1Plan,
 )
-from .b1_descriptive import (
-    B1DescriptiveError,
-    compute_b1_descriptive_curves,
-    unavailable_descriptive_curves,
-    validate_descriptive_curves,
-)
 from .b1_metrics_artifact import (
     FORMAL_ANALYSIS_BOUND,
     LITERAL_BINDING_SPEC_RELATIVE_PATH,
@@ -54,10 +51,12 @@ from .b1_metrics_artifact import (
     _materialize_prepared_metrics_subset,
     _publish_metrics_only_complete,
     _start_canonical_transaction,
+    build_result_rule_summary,
     build_prospective_artifact_inventory,
     build_complete_artifact_inventory,
     canonicalize_metrics_table_order,
     prepare_metrics_only_tables,
+    materialize_result_rule_summary,
     validate_prospective_output_cap,
 )
 from .b1_metrics_policy_assembly import (
@@ -824,7 +823,7 @@ def _resolve_descriptor_source(root: Path, source: Mapping[str, Any]) -> object:
         path.relative_to(base)
     except ValueError as exc:
         raise B1MetricsProductionError("mechanical evidence source escapes artifact") from exc
-    payload = path.read_bytes()
+    payload = _decoded_json_bytes(path)
     if _digest(payload) != source["source_file_sha256"]:
         raise B1MetricsProductionError("mechanical evidence source SHA differs")
     try:
@@ -862,6 +861,43 @@ def _descriptor_worker_sources(
         ]
         for group in raw_source_groups
     ]
+
+
+def _compress_result_dumps(root: Path) -> None:
+    """Create deterministic gzip copies without changing decoded JSON bytes."""
+
+    paths = sorted(
+        (
+            *Path(root).glob("workers/*/slice-*/result.json"),
+            *Path(root).glob("policy-replay/*/result.json"),
+        ),
+        key=lambda item: item.relative_to(root).as_posix(),
+    )
+    for source in paths:
+        target = source.with_name(source.name + ".gz")
+        with source.open("rb") as reader, target.open("xb") as raw:
+            with gzip.GzipFile(
+                filename="", mode="wb", compresslevel=9, fileobj=raw, mtime=0
+            ) as encoded:
+                shutil.copyfileobj(reader, encoded)
+            raw.flush()
+            os.fsync(raw.fileno())
+
+
+def _remove_uncompressed_result_dumps(root: Path) -> None:
+    for path in (
+        *Path(root).glob("workers/*/slice-*/result.json"),
+        *Path(root).glob("policy-replay/*/result.json"),
+    ):
+        path.unlink()
+
+
+def _compressed_source_path(source: Mapping[str, str]) -> dict[str, str]:
+    output = dict(source)
+    relative = output.get("source_relative_path")
+    if type(relative) is str and relative.endswith("/result.json"):
+        output["source_relative_path"] = relative + ".gz"
+    return output
 
 
 def _policy_mode_sources(
@@ -1474,9 +1510,19 @@ def _attempt_id(groups: Sequence[Sequence[Mapping[str, Any]]]) -> str:
     return value
 
 
+def _decoded_json_bytes(path: Path) -> bytes:
+    payload = path.read_bytes()
+    if path.name.endswith(".json.gz"):
+        try:
+            return gzip.decompress(payload)
+        except (OSError, EOFError) as exc:
+            raise B1MetricsProductionError("gzip result source is unreadable") from exc
+    return payload
+
+
 def _load_json(path: Path, label: str) -> Mapping[str, Any]:
     try:
-        payload = path.read_bytes()
+        payload = _decoded_json_bytes(path)
         value = json.loads(payload.decode("ascii"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise B1MetricsProductionError(f"{label} is unreadable") from exc
@@ -1514,7 +1560,7 @@ def _direct_invocation_groups(
             invocation = f"slice-{interval.get('start_update'):02d}-{interval.get('stop_update'):02d}"
             admission_path = staging / "admissions" / f"{tag}-{invocation}-admission.json"
             telemetry_path = staging / "workers" / tag / invocation / "telemetry.json"
-            result_path = staging / "workers" / tag / invocation / "result.json"
+            result_path = staging / "workers" / tag / invocation / "result.json.gz"
             bound = _load_json(admission_path, "bound admission")
             measurement = _load_json(telemetry_path, "direct telemetry")
             result_wrapper = _load_json(result_path, "direct worker result")
@@ -1544,7 +1590,7 @@ def _direct_invocation_groups(
             })
             slot_sources.append({
                 "source_relative_path": result_path.relative_to(staging).as_posix(),
-                "source_file_sha256": _digest(result_path.read_bytes()),
+                "source_file_sha256": _digest(_decoded_json_bytes(result_path)),
                 "raw_json_pointer": "/raw_evidence",
             })
         admissions.append(slot_admissions)
@@ -1647,6 +1693,7 @@ def _assemble_and_publish_b1_metrics(
         groups,
         attempt_id=attempt,
         literal_binding_spec_sha256=identity["literal_binding_spec_sha256"],
+        test_only=test_only,
     )
     policy_indices = (1, 5, 9) if test_only else tuple(range(len(groups)))
     policy_tapes = tuple(
@@ -1709,6 +1756,11 @@ def _assemble_and_publish_b1_metrics(
         policy_replay_witness=policy_replay_witness,
         execution_mode_records=policy_tables["execution_mode_records"],
     )
+    _compress_result_dumps(root)
+    _remove_uncompressed_result_dumps(root)
+    policy_mode_sources = [
+        _compressed_source_path(source) for source in policy_mode_sources
+    ]
     training_indices = (0,) if test_only else tuple(range(len(groups)))
     training_groups = tuple(groups[index] for index in training_indices)
     admission_groups, telemetry_groups, raw_source_groups = _direct_invocation_groups(
@@ -1920,19 +1972,51 @@ def _assemble_and_publish_b1_metrics(
         raise B1MetricsProductionError(
             "formal final mechanical conformance/readability failed"
         )
+    summary = build_result_rule_summary(
+        table_inventory=prepared.inventory, tables=materialized,
+        test_only=test_only,
+    )
+    summary_binding = materialize_result_rule_summary(
+        root, summary, allowed_root=allowed_root
+    )
     actual_inventory = build_complete_artifact_inventory(root)
-    try:
-        descriptive = validate_descriptive_curves(compute_b1_descriptive_curves(
-            per_tape_curves=materialized["per_tape_curves"],
-            policy_decisions=materialized["policy_decisions"],
-            training_episodes=materialized["training_episodes"],
-            optimizer_steps=materialized["optimizer_steps"],
-            raw_competence=materialized["raw_competence"],
-        ))
-    except (B1DescriptiveError, KeyError, TypeError, ValueError) as exc:
-        # Decision 7 (2026-09-02): a summary that cannot be produced is recorded
-        # with its reason; it never annuls or quarantines the attempt.
-        descriptive = unavailable_descriptive_curves(str(exc))
+    final_reread = reread_materialized_digest_records(
+        root, table_inventory=prepared.inventory,
+        artifact_inventory=actual_inventory,
+    )
+    final_facts = finalize_materialized_raw_facts(
+        recomputed_training["prepublication_raw_facts"],
+        table_digest_records=final_reread["tables"],
+        artifact_digest_records=final_reread["artifacts"],
+        checkpoint_digest_records=final_reread["checkpoints"],
+    )
+    durable_descriptor = build_mechanical_input_descriptor(
+        final_facts,
+        recomputed_training["raw_competence_inputs"],
+        authority="BOUND_ARTIFACT_EVIDENCE",
+        test_only=test_only,
+        training_slot_indices=training_indices,
+        raw_worker_sources=_descriptor_worker_sources(raw_source_groups),
+        policy_execution_mode_sources=policy_mode_sources,
+        table_bindings=_table_bindings(prepared.inventory),
+        artifact_inventory_sha256=_digest(canonical_json_bytes(actual_inventory)),
+    )
+    final_mechanical = compute_b1_mechanical(
+        final_facts, recomputed_training["raw_competence_inputs"],
+        input_descriptor=durable_descriptor,
+    )
+    if not test_only and (
+        final_mechanical["mechanical_conformance_pass"] is not True
+        or final_mechanical["scientific_packet_readable"] is not True
+    ):
+        raise B1MetricsProductionError(
+            "durable artifact conformance/readability failed"
+        )
+    if not test_only:
+        _bind_transaction_reread(
+            transaction, prepared_inventory=prepared.inventory,
+            artifact_inventory=actual_inventory, reread=final_reread,
+        )
     manifest = _build_metrics_only_manifest(
         identity=identity,
         b0_evidence=materialized_b0,
@@ -1942,7 +2026,7 @@ def _assemble_and_publish_b1_metrics(
         literal_nulls=build_literal_null_manifest_fields(),
         mechanical=final_mechanical,
         incident_references=incident_references,
-        descriptive_curves=descriptive,
+        summary_binding=summary_binding,
         test_only=test_only,
         _transaction_witness=None if test_only else transaction,
     )

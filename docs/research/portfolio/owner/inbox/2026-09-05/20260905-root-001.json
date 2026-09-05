@@ -1,0 +1,125 @@
+{
+  "id": "20260905-root-001",
+  "created": "2026-09-05T06:19:27-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "下一阶段投入与小规模复用／净删除例外（综合P1）",
+  "context": "推荐B：按完整E3与实际交接/源后果推进FSD、N3；FRRIE第三固定路径作为首选新增可执行候选。只有整项新增非测试源码≤100行且满足完整例外条件的变更，才将比例自动退回改为报告及独立审阅。N3现有A05整体新增190行，CBSC仍有发布依赖，均不自动获接受。",
+  "options": [
+    {
+      "key": "ratify",
+      "label": "B：批准条件研究安排＋有界例外（推荐）",
+      "consequence": "应用完整≤100新增行例外并同步两份规范；FRRIE成为首选新增可执行候选，仍需实际方案和正常DM对象选择；不接受旧补丁、不启动新run。"
+    },
+    {
+      "key": "research-only",
+      "label": "A：批准研究安排，保持比例规则",
+      "consequence": "采用条件研究安排；ENGINEERING_SCOPE_SPEC和AGENTS比例规则不改，FRRIE等仍须建立现行规则内合规方案。"
+    },
+    {
+      "key": "remove-all",
+      "label": "C：全面取消研究代码比例限制（不推荐）",
+      "consequence": "按明确所有者指令取消全部research编排比例限制，其余科学完整性、代码/runner预算、发布、资源与计算上限保持；该范围超出Pro推荐。"
+    },
+    {
+      "key": "refuse",
+      "label": "拒绝整包，保持现行安排",
+      "consequence": "新规则和新投资安排均不实施；FSD原卡继续、N3原卡及现有阻塞保留，其他路线按已有权限推进。"
+    }
+  ],
+  "recommended": "ratify",
+  "auto_applied": "ratify",
+  "dm_reason": "完整19路径Pro评议推荐B；Root核验原文并补充A05新增190行不适用的后续事实，保留所有原始证据。",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-05-next-investment-pro-intake.md",
+    "docs\\research\\portfolio\\pro_packets\\20260905_next_investment\\PROPOSED_POLICY_TEXT.md",
+    "docs\\research\\portfolio\\pro_packets\\20260905_next_investment\\PROPOSED_POLICY_CHANGE.patch",
+    "docs\\research\\portfolio\\pro_packets\\20260905_next_investment\\archive\\RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#portfolio-next-investment-proposal-20260905",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "answered",
+  "packet": {
+    "question": "是否批准条件研究投入安排，并采用“小规模复用／净删除、整项新增源码≤100行”的编排比例例外（推荐B）？",
+    "changes_if_approved": [
+      {
+        "target": "docs/project/ENGINEERING_SCOPE_SPEC.md §5 与 AGENTS.md §8",
+        "from": "所有研究差分适用现行比例约束",
+        "to": "加入 PROPOSED_POLICY_TEXT.md 完整条文；仅符合小规模复用或整项净删除、累计新增≤100行等条件时，由报告比例及既有独立审阅替代比例自动退回"
+      },
+      {
+        "target": "PORTFOLIO.md · 下一阶段边际投入安排",
+        "from": "FRRIE第三路径尚未选卡且受工程预算阻塞",
+        "to": "优先作为新增可执行候选；FSD由完整E3分支选择后续，N3将下一投入导向合法交接和源后果；保留现有生命周期、Priority、五链目标和家族边界"
+      }
+    ],
+    "if_refused": "现行比例规则及已有研究权限继续；FSD最后原格继续。N3 A05当前190行新增实现仍在工程边界，不因未批准而新增等待条件或撤销旧卡；FRRIE/CBSC旧补丁不获豁免，不会自动启动任何新run。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260905_next_investment/archive/RESPONSE.md",
+        "quote": "推荐政策B；A是未获批准时的现行规则与最强保守替代，C不获推荐。",
+        "why": "完整19路径评议支持有界修订，而不支持全面取消比例约束。"
+      },
+      {
+        "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md",
+        "quote": "Reusing it correctly leaves most necessary differences in identity and routing.",
+        "why": "真实科学计算已存在，增加第三固定路径的差异主要是绑定；34/24仍是估算，需实际审查。"
+      },
+      {
+        "path": "docs/research/candidates/capability_bound_semantic_currentness/CBSC_OMRC_B01_EXISTING_PATH_RETURN_INTAKE_20260905.md",
+        "quote": "Only three source lines are added, the runner is unchanged, and section-4 machinery added is\n**none**.",
+        "why": "实际+3/-91说明净删除也可能因比例被退回，但没有证明发布完整。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260905_next_investment/archive/RESPONSE.md",
+        "quote": "行数资格不等于正确性或源码接受。",
+        "why": "FRRIE需真实完整方案；CBSC仍有发布/资源依赖。100行是治理选择，无已测效率净收益。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_PREDICTION_HEAD_CONTRACT_A05_SCOPE_INTAKE_20260905.md",
+        "quote": "The source has 185 runner lines and the unchanged 5-line thin\nC++ translation unit: 190 non-test lines.",
+        "why": "Pro pin之后的新事实：A05整体新增190行，不满足100行例外；不能将未验收中间草稿当新基线，批准B不会直接解除此阻塞。"
+      }
+    ],
+    "uncertainty": [
+      "FSD当前17/18有效，最后一格运行；未读总体分支。Pro固定pin只有16/18，后续事实单独保留。",
+      "N3 A05没有执行结果；整体新增190行，例外不是其现有草稿接受。",
+      "100行并非实证最优阈值；发现新设施、隐瞒发布缺口或拆包规避时应收紧未来适用。",
+      "Transport记录伴随文字不完全匹配及post_send_replacement标记；原文/附件摘要已核验，事实澄清单独归档，不重复科学请求。"
+    ],
+    "cost": {
+      "compute": "本提案不冻结run；FRRIE R05-R08命名窗口902.25 supervisor秒/有效B，非独立根数；FSD最后格原投影4.63h/8h cap。完整代理开销与规则节省未测。",
+      "owner_time": "一项综合P1；建议先看当前变化与反例，再看完整拟议条文。",
+      "reversibility": "reversible",
+      "waits_on_this": "具体规则变更和新增跨方向投入安排；现有FSD运行不等待，N3受原工程条件阻塞。"
+    },
+    "verdict_text": "> **请就本综合P1包择一：B（推荐）——批准保留FSD原E3与N3原A05继续，按完整结果选择后续，优先把FRRIE第三固定路径作为新增可执行候选；同时批准本文“小规模复用／净删除例外”的完整条文，整项新增非测试源码≤100行，比例改为报告和既有独立审阅，不豁免科学、发布、资源与计算边界。A——批准上述条件研究安排，但比例规则严格保持，相关候选仍须建立现行规则内合规方案。C——全部research代码取消比例限制，其他规则仍保留；本提案不推荐此范围。三项均不接受旧拒绝补丁、不冻结新run、不改生命周期、优先级、五链目标或家族再入条件。未批准或拒绝整包时，原规则及原投资权限保持，现有FSD和有界N3照常继续。**",
+    "source": "docs/research/portfolio/pro_packets/20260905_next_investment/archive/RESPONSE.md"
+  },
+  "approval_correction": "此前Root将含义未确认的「同意」归因为正式批准，依据不足；原回复不是此前授权的证明。本次明确指令从现在生效，未追认此前已获授权。",
+  "corrected_reply_at": "2026-09-05T07:06:59-07:00",
+  "execution_history": [
+    {
+      "at": "2026-09-05T15:17:17+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "本次明确批准现有政策B及条件投入；100行上限不变。0ffca930b为历史实施提交，本记录纠正授权归因。",
+      "correction": "此前Root将含义未确认的「同意」归因为正式批准，依据不足；原回复不是此前授权的证明。本次明确指令从现在生效，未追认此前已获授权。"
+    },
+    {
+      "at": "2026-09-05T15:42:59+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-pro6-delegation-and-starred-trace.md",
+      "state": "applied",
+      "summary": "所有者当前明确批准策略B及涉及修改，并确认先前修改符合本意；按当前时间追加确认，保留历史授权核实不足及原始回复。"
+    }
+  ],
+  "starred": true
+}

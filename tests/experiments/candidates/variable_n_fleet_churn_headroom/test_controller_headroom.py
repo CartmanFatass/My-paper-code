@@ -3,6 +3,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from fractions import Fraction
 import json
+from pathlib import Path
+import sys
 import time
 from types import SimpleNamespace
 
@@ -22,6 +24,8 @@ from experiments.candidates.variable_n_fleet_churn_headroom.analysis import (
     regenerate_r02_world,
 )
 from experiments.candidates.variable_n_fleet_churn_headroom.native_backend import (
+    _analysis_binary_path,
+    _linux_build_command,
     build_analysis_backend,
     select_top_k_fixture,
 )
@@ -113,6 +117,10 @@ def test_wall_cap_is_checked_at_the_final_world_boundary(monkeypatch: pytest.Mon
     assert summary["result"] == {"branch": "INCOMPLETE"}
 
 
+@pytest.mark.skipif(
+    sys.platform != "win32",
+    reason="historical R09 interactive cross-check is MSVC-only",
+)
 def test_epoch_zero_failed_service_tie_uses_native_lexicographic_command(
     toy_summary: dict[str, object],
 ) -> None:
@@ -127,6 +135,10 @@ def test_epoch_zero_failed_service_tie_uses_native_lexicographic_command(
     assert tuple(beam_first) == tuple(expected)
 
 
+@pytest.mark.skipif(
+    sys.platform != "win32",
+    reason="historical R09 interactive cross-check is MSVC-only",
+)
 def test_bcrh_path_matches_unchanged_interactive_native_api(
     toy_summary: dict[str, object],
 ) -> None:
@@ -316,3 +328,54 @@ def test_resource_rule_requires_positive_os_rss_and_strict_2_gib_bound(
     assert runner._resource_facts(native, 1.0)["strictly_below_2_gib"] is False
     monkeypatch.setattr(runner, "peak_rss_bytes", lambda: 2 * 1024**3)
     assert runner._resource_facts(native, 1.0)["strictly_below_2_gib"] is False
+
+
+def test_analysis_binary_and_linux_build_command_are_platform_exact() -> None:
+    assert _analysis_binary_path("win32").suffix == ".dll"
+    linux_binary = _analysis_binary_path("linux")
+    assert linux_binary.suffix == ".so"
+    command = _linux_build_command(linux_binary, compiler="g++")
+    repository_root = Path(__file__).resolve().parents[4]
+    assert command == (
+        "g++",
+        "-std=c++20",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        f"-I{repository_root / 'experiments/candidates/variable_n_fleet_churn_headroom/native'}",
+        str(
+            repository_root
+            / "experiments/candidates/variable_n_fleet_churn_headroom/native/headroom_backend.cpp"
+        ),
+        "-o",
+        str(linux_binary),
+    )
+
+
+def test_linux_peak_rss_uses_kib_to_byte_units(monkeypatch: pytest.MonkeyPatch) -> None:
+    class Usage:
+        ru_maxrss = 12_345
+
+    class Resource:
+        RUSAGE_SELF = object()
+
+        @staticmethod
+        def getrusage(who: object) -> Usage:
+            assert who is Resource.RUSAGE_SELF
+            return Usage()
+
+    monkeypatch.setattr(runner.sys, "platform", "linux")
+    monkeypatch.setitem(sys.modules, "resource", Resource)
+    assert runner.peak_rss_bytes() == 12_345 * 1024
+
+
+@pytest.mark.skipif(not sys.platform.startswith("linux"), reason="Linux native load check")
+def test_linux_shared_object_loads_exact_native_selector() -> None:
+    assert build_analysis_backend().suffix == ".so"
+    selected, replacements = select_top_k_fixture(
+        ((1, (3,)), (5, (2,)), (4, (1,)), (6, (0,))), 2, 1
+    )
+    assert selected == (3, 1)
+    assert replacements > 0

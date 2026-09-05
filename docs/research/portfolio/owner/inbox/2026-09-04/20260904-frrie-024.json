@@ -1,0 +1,32 @@
+{
+  "id": "20260904-frrie-024",
+  "created": "2026-09-04T18:35:16-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "brief",
+  "title": "接触生效后仍未达到最小效应",
+  "context": "有效结果中文简报：两种规模的小差异、预测核对和下一剂量判别。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "把有效小差异与稳定等价和未解故障原因分开。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r05-intake-r06-selection",
+  "brief": "docs/research/portfolio/owner/briefs/finite_resource_relational_inductive_efficiency/2026-09-04_contact_active_r05.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "20260905-crto-008",
+  "created": "2026-09-05T03:10:53-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B06：接受预算翻倍后的比较器受限结果",
+  "context": "两枚种子的 REPLAN 动作均未改变，仍为 5/8。种子 2 修正一个 KEEP 动作，regret 改善 0.000927888，超过新诊断阈值，但按优先规则仍为比较器受限。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受两个完整结果及合并读法",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "因未胜任而延后读取",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "独立逐行重算符合卡片，比较器未修复就是有效诊断，不能因结果负面延后接受。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_RAW_EXPOSURE_B06_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b06-raw-exposure-result",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

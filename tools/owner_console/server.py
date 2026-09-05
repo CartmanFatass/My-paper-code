@@ -32,7 +32,7 @@ LOCK = threading.Lock()
 OWNER_REL = Path("docs/research/portfolio/owner")
 AUDIT_REL = Path("docs/research/portfolio/audit")
 PORTFOLIO_REL = Path("docs/research/portfolio/PORTFOLIO.md")
-DOC_SUFFIXES = {".md", ".json", ".txt", ".toml"}
+DOC_SUFFIXES = {".md", ".json", ".txt", ".toml", ".patch"}
 
 KINDS = ("decision", "new-card", "prediction", "brief", "critic-dissent", "close-call",
          "second-recast", "portfolio")
@@ -171,10 +171,40 @@ def new_item(root: Path, direction: str, kind: str, title: str, options: list[di
         "auto_applied": auto_applied, "dm_reason": dm_reason, "evidence": evidence or [],
         "ledger_row": ledger_row, "brief": brief, "ledger_kind": ledger_kind, "status": "open",
         "packet": packet or None,
+        "starred": tier in ("direction", "portfolio") or kind in ("second-recast", "critic-dissent", "close-call"),
     }
     out = day_dir / f"{item_id}.json"
     _atomic_write(out, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
     return out
+
+
+def record_trace(root: Path, item_id: str, *, authority: str, source: str, record: str,
+                 state: str, summary: str, auto_applied: str | None = None,
+                 correction: str = "") -> Path:
+    """Annotate actual execution without manufacturing or replacing an owner reply."""
+    p = item_path(root, item_id)
+    if p is None:
+        raise FileNotFoundError(f"no item {item_id}")
+    item = json.loads(p.read_text(encoding="utf-8"))
+    if item_priority(item) > 2:
+        raise ValueError("P3/P4 maintenance remains retired")
+    if auto_applied is not None:
+        if state != "applied" or auto_applied not in {o["key"] for o in item["options"]}:
+            raise ValueError("auto_applied requires an applied option from this item")
+        item["auto_applied"] = auto_applied
+    trace = {"at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+             "authority": authority, "source": source, "record": record,
+             "state": state, "summary": summary}
+    if correction:
+        trace["correction"] = correction
+        item["approval_correction"] = correction
+        reply_path = p.with_suffix(".reply.json")
+        if reply_path.exists():
+            item["corrected_reply_at"] = json.loads(reply_path.read_text(encoding="utf-8")).get("answered_at")
+    item.setdefault("execution_history", []).append(trace)
+    item["starred"] = True
+    _atomic_write(p, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
+    return p
 
 
 def mark_answered(root: Path, item_id: str) -> Path:
@@ -209,11 +239,11 @@ def item_path(root: Path, item_id: str) -> Path | None:
     return None
 
 
-def load_items(root: Path, days: int = 7) -> list[dict]:
+def load_items(root: Path, days: int | None = 7) -> list[dict]:
     inbox = owner_dir(root) / "inbox"
     if not inbox.exists():
         return []
-    cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
+    cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat() if days is not None else ""
     items = []
     for day_dir in sorted(inbox.iterdir(), reverse=True):
         if not day_dir.is_dir() or day_dir.name < cutoff:
@@ -237,6 +267,8 @@ def load_items(root: Path, days: int = 7) -> list[dict]:
                 except (OSError, ValueError):
                     item["reply"] = None
             item["status"] = "answered" if item.get("reply") else item.get("status", "open")
+            item["reply_attribution_corrected"] = bool(item.get("corrected_reply_at") and
+                item["corrected_reply_at"] == (item.get("reply") or {}).get("answered_at"))
             items.append(item)
     return items
 
@@ -260,8 +292,12 @@ def write_reply(root: Path, item_id: str, choice: str, comment: str) -> dict:
     }
     rp = p.with_suffix(".reply.json")
     _atomic_write(rp, json.dumps(reply, ensure_ascii=False, indent=2) + "\n")
+    if item.get("status") == "answered":
+        item["status"] = "open"
+        _atomic_write(p, json.dumps(item, ensure_ascii=False, indent=2) + "\n")
     review = render_review(root, now.date().isoformat())
     return {"reply": str(rp.relative_to(root)).replace(os.sep, "/"),
+            "item": str(p.relative_to(root)).replace(os.sep, "/"),
             "review": str(review.relative_to(root)).replace(os.sep, "/")}
 
 
@@ -306,7 +342,7 @@ def instruction_for(item: dict, reply: dict) -> str:
 def render_review(root: Path, date: str) -> Path:
     """Regenerate reviews/<date>.md from every reply answered on `date`."""
     entries = []
-    for item in load_items(root, days=400):
+    for item in load_items(root, days=None):
         reply = item.get("reply")
         if not reply or not str(reply.get("answered_at", "")).startswith(date):
             continue
@@ -329,7 +365,13 @@ def render_review(root: Path, date: str) -> Path:
         lines.append("- " + " · ".join(meta))
         if reply.get("comment"):
             lines.append(f"- comment: {reply['comment']}")
-        lines.append(f"- instruction: {instruction_for(item, reply)}")
+        if item.get("reply_attribution_corrected"):
+            lines.append(f"- authorization correction: {item['approval_correction']}")
+            lines.append("- instruction: historical reply attribution superseded; consult the execution record")
+            for trace in item.get("execution_history", []):
+                lines.append(f"- execution record: `{trace['record']}` · {trace['authority']} · {trace['at']}")
+        else:
+            lines.append(f"- instruction: {instruction_for(item, reply)}")
         for ev in item.get("evidence", []) or []:
             lines.append(f"- evidence: `{ev}`")
         lines.append(f"- item: `{item['path']}` · answered {reply['answered_at']}")
@@ -344,7 +386,7 @@ def export_selected(root: Path, ids: list[str], slug: str) -> Path:
     date = dt.date.today().isoformat()
     wanted = set(ids)
     lines = [f"# Owner review (selection) — {date} — {slug}", ""]
-    for item in load_items(root, days=400):
+    for item in load_items(root, days=None):
         if item["id"] not in wanted:
             continue
         reply = item.get("reply") or {"choice": "unanswered", "comment": "", "answered_at": ""}
@@ -354,8 +396,13 @@ def export_selected(root: Path, ids: list[str], slug: str) -> Path:
             mark = " ★" if o.get("key") == item.get("recommended") else ""
             lines.append(f"- ({o.get('key')}) {o.get('label', '')}{mark}")
         lines.append(f"- **owner: {reply['choice']}** {reply.get('comment', '')}".rstrip())
-        if reply.get("answered_at"):
+        if item.get("reply_attribution_corrected"):
+            lines.append(f"- authorization correction: {item['approval_correction']}")
+        elif reply.get("answered_at"):
             lines.append(f"- instruction: {instruction_for(item, reply)}")
+        for trace in item.get("execution_history", []):
+            lines.append(f"- execution: {trace['state']} · {trace['authority']} · {trace['at']} · {trace['summary']}")
+            lines.append(f"- source: `{trace['source']}`; actual change record: `{trace['record']}`")
         lines.append("")
     out = owner_dir(root) / "reviews" / f"{date}_{slug}.md"
     _atomic_write(out, "\n".join(lines).rstrip() + "\n")
@@ -395,11 +442,20 @@ def enrich_items(root: Path, items: list[dict]) -> list[dict]:
     return items
 
 
+def review_items(root: Path, days: int = 7) -> list[dict]:
+    """Owner-directed P1/P2 queue; historical items and replies stay readable."""
+    return [it for it in load_items(root, days=days) if item_priority(it) <= 2]
+
+
+def starred_items(root: Path) -> list[dict]:
+    return [it for it in load_items(root, days=None) if it.get("starred") and item_priority(it) <= 2]
+
+
 def active_board(root: Path) -> dict:
     """ACTIVE directions with item statistics, for the board page."""
     port = parse_portfolio(root)
     wave = investment_wave(root)
-    items = load_items(root, days=30)
+    items = review_items(root, days=30)
     briefs = list_briefs(root)
     stats: dict[str, dict] = {}
     for it in items:
@@ -585,10 +641,12 @@ class Handler(BaseHTTPRequestHandler):
             if url.path in ("/", "/index.html"):
                 self._send(200, (HERE / "index.html").read_bytes(), "text/html; charset=utf-8")
             elif url.path == "/api/items":
-                items = enrich_items(self.root, load_items(self.root, int(q.get("days", ["7"])[0])))
+                items = enrich_items(self.root, review_items(self.root, int(q.get("days", ["7"])[0])))
                 self._json({"items": items, "today": dt.date.today().isoformat()})
             elif url.path == "/api/active":
                 self._json(active_board(self.root))
+            elif url.path == "/api/starred":
+                self._json({"items": enrich_items(self.root, starred_items(self.root))})
             elif url.path == "/api/portfolio":
                 self._json(parse_portfolio(self.root))
             elif url.path == "/api/briefs":
@@ -610,7 +668,7 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(n) or b"{}")
             if self.path == "/api/reply":
                 paths = write_reply(self.root, body["id"], body.get("choice", "agree"), body.get("comment", ""))
-                res = git_commit(self.root, [paths["reply"], paths["review"]],
+                res = git_commit(self.root, [paths["item"], paths["reply"], paths["review"]],
                                  f"owner: review {body['id']} ({body.get('choice', 'agree')})")
                 self._json({"ok": res.get("ok", False), **paths, "git": res})
             elif self.path == "/api/export":
@@ -620,7 +678,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._json({"ok": res.get("ok", False), "path": rel, "git": res})
             elif self.path == "/api/push":
                 with LOCK:
-                    r = git(self.root, "push")
+                    r = git(self.root, "-c", "push.default=upstream", "push")
                 self._json({"ok": r.returncode == 0, "out": (r.stdout + r.stderr)[-2000:]})
             else:
                 self._json({"error": "not found"}, 404)
@@ -650,8 +708,7 @@ def main(argv=None) -> int:
     r.add_argument("date")
     a = ap.parse_args(argv)
     if a.cmd == "seed-ledger":
-        for p in seed_from_ledger(a.root, a.date):
-            print(p.relative_to(a.root))
+        print("skipped: bulk P3/P4 ledger seeding retired by owner; use item.py for P1/P2")
         return 0
     if a.cmd == "render-review":
         print(render_review(a.root, a.date).relative_to(a.root))
