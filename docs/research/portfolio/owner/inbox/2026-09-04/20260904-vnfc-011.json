@@ -27,7 +27,7 @@
   "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#vnfc-controller-headroom-r03-pro-final",
   "brief": "",
   "ledger_kind": "selection",
-  "status": "open",
+  "status": "answered",
   "packet": {
     "question": "VNFC 已发生第二次 direction recast，所有者是否让它按规则以 ACTIVE 最低排程优先级继续，还是改为 PARK？",
     "changes_if_approved": [

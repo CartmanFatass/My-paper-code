@@ -32,7 +32,7 @@
   "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L237",
   "brief": "",
   "ledger_kind": "selection",
-  "status": "open",
+  "status": "answered",
   "packet": {
     "question": "是否支持把已注册的交接状态来源问题作为 N3 下一候选，而不原样重复这次状态掩码实验？",
     "changes_if_approved": [

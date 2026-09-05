@@ -28,7 +28,7 @@
   "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#L97",
   "brief": "",
   "ledger_kind": "selection",
-  "status": "open",
+  "status": "answered",
   "packet": {
     "question": "ACVC 第二次 Convergence 重铸已执行为精确证书路线后，是否继续以 ACTIVE 最低争用顺序推进精确 re-entry，还是将方向 PARK？",
     "changes_if_approved": [
