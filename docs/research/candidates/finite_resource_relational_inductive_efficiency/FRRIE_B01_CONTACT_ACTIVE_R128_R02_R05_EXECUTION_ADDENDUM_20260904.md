@@ -3,7 +3,11 @@ Binding structure: `systems / information flow` — the original role-to-role we
 
 # FRRIE contact-active R128 R02 — R05 execution addendum
 
-Status: `FROZEN / B_EXPLORE / R05_ACCEPTED / RESULT_PENDING`, 2026-09-04.
+Status: `COMPLETE / VALID_B_EXPLORE / R02_SMALL_OR_ROSTER_MIXED`, 2026-09-04.
+
+Terminal E0 and DM intake are in `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.md`
+and `FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md`. The prospective assignment
+below is retained without rewriting scientific meaning.
 
 Object remains `FRRIE-B01-CONTACT-ACTIVE-R128-R02-20260904`. This addendum accompanies
 `FRRIE_B01_CONTACT_ACTIVE_R128_R02_SCIENCE_CARD_20260904.md`; it selects a fresh invocation after

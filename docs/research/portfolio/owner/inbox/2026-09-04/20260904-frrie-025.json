@@ -1,0 +1,43 @@
+{
+  "id": "20260904-frrie-025",
+  "created": "2026-09-04T18:35:18-07:00",
+  "direction": "finite_resource_relational_inductive_efficiency",
+  "tier": "object",
+  "kind": "decision",
+  "title": "下一格提高共同学习率，保持训练工作固定",
+  "context": "R05 的约束已反复触发，比较器仅略高于随机参照。下一 B 格使用同一随机根和 128 次更新，把双方学习率从 0.0003 提高到 0.003；成本工作量不变，检验学习暴露不足。",
+  "options": [
+    {
+      "key": "a",
+      "label": "共同学习率 0.003，保持 128 次更新",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "原学习率延长到 512 次更新",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "原剂量换根复测",
+      "consequence": ""
+    },
+    {
+      "key": "d",
+      "label": "继续缩小投影框",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "提高十倍名义暴露且保持信息和工作固定，最直接地区分当前暴露解释；另外两臂仍获同等设置。",
+  "evidence": [
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_INTAKE_20260904.md",
+    "docs/research/candidates/finite_resource_relational_inductive_efficiency/FRRIE_B01_CONTACT_ACTIVE_R128_LR003_R06_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#frrie-r05-intake-r06-selection",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
