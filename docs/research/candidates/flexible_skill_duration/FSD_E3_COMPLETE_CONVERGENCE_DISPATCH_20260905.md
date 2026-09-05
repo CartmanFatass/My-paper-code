@@ -74,7 +74,7 @@ deletion policy adds no source acceptance or new launch here. Other today's/yest
 add no FSD instruction or owner prediction. No ordinary P3/P4 item is created/backfilled.
 
 CLI created genuine direction P2 `docs/research/portfolio/owner/inbox/2026-09-05/20260905-fsd-008.json`.
-Recommended a, no auto_applied field: no direction option has been executed. All options carry
+Recommended a, auto_applied null: no direction option has been executed. All options carry
 consequences and the full Chinese packet. It does not ask for another approval before dispatch.
 Tracker received direct final valid/zero-live handoff and has no FSD experiment to observe.
 Original CM is complete, no child/run remaining. Root integrates these records; all artifacts
