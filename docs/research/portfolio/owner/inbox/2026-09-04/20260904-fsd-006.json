@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-006",
+  "created": "2026-09-04T17:47:30-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "E3 medium D2 seed 3：接受第十二个有效单元",
+  "context": "CM 已确认本格二十次训练、完整评估、两地路径、参数位移及 checkpoint，十个文件三处一致。DM 独立核算四次评估均值和标准误，均与记录吻合。短暂 SSH 超时只是观察中断。接受本格为第十二个有效 B 单元，完整十八格前仍不作配对、总体分支或机制结论。",
+  "options": [
+    {
+      "key": "a",
+      "label": "接受完整单元并保留完整研究读取规则",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "等十八格全部存在后才接受本格有效性",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "所需学习器记录、准入和原始数据完整，单元有效性与总体机制规则分开记录。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_RESULT_EVIDENCE_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-medium-d2-seed3-terminal-20260904",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}

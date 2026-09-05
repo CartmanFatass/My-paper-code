@@ -1,0 +1,33 @@
+{
+  "id": "20260904-fsd-007",
+  "created": "2026-09-04T17:47:32-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "object",
+  "kind": "decision",
+  "title": "E3 接续原卡 large D0 seed 1",
+  "context": "中等差异第三个治疗种子已完整收录，十二格有效。按先前已选定的顺序，下一格是大差异固定时钟第一个种子；不因本格回报改成本、种子、比较器或规则。继续 CPU 四线程、原训练评估预算及八小时每格上限，使用新远端内存准入，并直接交 Tracker 观察。",
+  "options": [
+    {
+      "key": "a",
+      "label": "启动原卡 large_d0_seed1 并直接交 Tracker",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "在当前明确自动推进指令下仍保持下一格未创建",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "原卡和既有接续决定已确定此顺序，当前有效单元不会更改剩余实验设计。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_MEDIUM_D2_SEED3_INTAKE_20260904.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#fsd-e3-medium-d2-seed3-terminal-20260904",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
