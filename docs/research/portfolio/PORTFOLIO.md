@@ -75,15 +75,16 @@ Pro question. This is scheduling under the existing five-chain policy, not succe
 
 | Route | Active responsible chain | Concrete current work |
 | --- | --- | --- |
-| N2 / VNFC | Root with `/root/cm_am_vnfc_e01` | E01 complete; return measured projection gap at existing Convergence boundary |
-| N3 / DISH | `/root/dm_amx_n3_approved` | Prepare post-A05 Direction Pro question; preserve synthetic-only conclusion |
-| N4 / CBSC | `/root/dm_amx_cbsc_approved` | Prepare post-repair Direction Pro question from incomplete publication and unresolved causes |
+| N2 / VNFC | Root with `/root/cm_am_vnfc_e01` | E01 ended; validation-method Convergence request dispatched once, awaiting complete Pro response |
+| N3 / DISH | `/root/dm_amx_n3_post_a05` | Refresh and dispatch existing post-A05 Direction Pro question under audited §11.8 |
+| N4 / CBSC | `/root/dm_amx_cbsc_post_repair` | Refresh and dispatch existing post-repair Direction Pro question under audited §11.8 |
 | K1 / VSP-03 | `/root/dm_amx_k1_vsp03_design` | Prepare prospective native-return host/reference design for proper Innovator decision |
 | K4 / VSP-C1 | `/root/dm_amx_k4_vspc1_design` | Prepare prospective identity-period-partner host/reference design for proper Innovator decision |
 
-Four packet-preparation assignments are active; no new Pro send or scientific invocation is
-claimed by this refill. Root integrates their pushed evidence and dispatches ready packets through
-the existing singleton. Prior PARK decisions, investment endpoints, science and lifecycle remain
+Four DMs own refreshing and dispatching their existing unsent packets through the singleton;
+Root will not duplicate their sends. VNFC validation-method request was dispatched once after
+the owner challenged the cost of exact verification itself (packet1bcddf2d5). Provider Send is
+not inferred from accepted Codex dispatch. Root integrates pushed evidence and routes full replies. Prior PARK decisions, investment endpoints, science and lifecycle remain
 explicit inputs. N3/CBSC do not repeat completed invocations. K1/K4 do not revive FSD/D6 families.
 Recovery details: `handoffs/2026-09-05-five-chain-refill.md`.
 
