@@ -82,3 +82,38 @@ consumers. No denominator padding, scientific omission or old-source modificatio
 AST parsing and diff checks pass. Independent review traces actual nested 2/4/2 calls,
 all parameter and hidden outputs, all native vectors and q95 branches to publication.
 Four protected R06 surfaces compare unchanged against 818b2566 at CM source.
+
+## Prospective exact remote commands
+
+Node wsl_4070, cwd `/home/wu/hmasd-worktrees/n3-a05-approved-20260905`; detached
+at the Root-integrated SHA, recorded before preparation. Set PYTHONPATH to this
+cwd. Interpreter `/home/wu/.venvs/hmasd/bin/python`. Existing `/usr/local/bin/agent-task`
+supervises one bash command per task. No portability or numeric change. Each
+receipt precedes its invocation in that same command via `&&`.
+
+Let the absolute base be
+`/home/wu/hmasd-worktrees/n3-a05-approved-20260905/temp/directions/degraded_incumbent_shadow_handover/exp/prediction_head_contract_a05_20260905`.
+These abbreviations are expanded in the actual task command archive, not resolved
+from mutable environment variables at launch.
+
+- Task `n3_a05_approved_smoke_20260905`: `python scripts/hmasd_resource_preflight.py
+  admit-memory --out <base>/smoke/receipt.json && /usr/bin/timeout 60s /usr/bin/time
+  -v -o <base>/smoke/process_time.txt python -m pytest -q -p no:cacheprovider
+  --basetemp temp/directions/degraded_incumbent_shadow_handover/test/a05-approved-20260905
+  tests/experiments/candidates/degraded_incumbent_shadow_handover/test_head_contract_a05.py`.
+  One file, original three rule tests and one non-card smoke. The smoke's synthetic
+  `external-admission.json` argument is only its retained test field; this adjacent
+  actual-node receipt admits the process and is archived separately.
+- Task `n3_a05_approved_formal_20260905`: `python scripts/hmasd_resource_preflight.py
+  admit-memory --out <base>/formal-receipt.json && /usr/bin/timeout 60s /usr/bin/time
+  -v -o <base>/formal-process_time.txt python scripts/run_dish_prediction_head_contract_a05.py
+  run --seed 50511 --admission <base>/formal-receipt.json --out <base>/formal`.
+  Only after smoke passes and original frozen source remains conformant. This is
+  the unique original result, not another test. Its output child is fresh.
+
+The resource preflight and output parent directories are outside each fresh child;
+parent creation has no scientific exposure. Internal runner cap includes summary
+write; external timeout covers whole Python process. Preserve supervisor terminal
+JSON, task log/stdout, time output, admission and summary. A summary alone never
+establishes success. The /usr/bin/time process observation is separate from the
+runner's truthful self-only RSS and does not measure scratch.
