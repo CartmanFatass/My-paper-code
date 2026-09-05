@@ -1,5 +1,12 @@
 # FSD post-E3 Convergence — accepted dispatch and recovery boundary
 
+Later boundary2026-09-05T15:35:36Z: the original response is archived and fully intaken at
+`FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md`. PRO_FINAL CONTINUE selects only existing
+no-training A/RECON; no new invocation. Do not resend. The snapshot below is historical.
+Its earlier owner-ratification attribution is superseded by the current explicit authority
+correction in `2026-09-05-pro6-delegation-and-starred-trace.md`; no historical reply proves prior
+authorization. Original dispatch facts and provider-facing bytes remain unchanged.
+
 Snapshot2026-09-05T14:31:00Z. **Direction tier escalated; app dispatch accepted once.**
 No provider Send, model verification, connector access or Pro verdict is inferred from app
 acceptance. E3 remains18/18 valid,0 running,0 unstarted, B/EXPLORE H0 bounded to c=.25/large

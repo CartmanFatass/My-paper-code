@@ -54,11 +54,14 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 - Existing-data A/RECON headroom: upper-minus-trained-D0 row means .098784120/.175543309/.336673587,
   versus exact structural margins .057037446/.144357787/.271218984. The difference includes
   baseline undertraining; a fully tuned generic baseline set remains absent.
-- Next discriminator is a direction-level Convergence question: continue toward random-duration
-  E4 (DM recommends an existing-host no-learner reference/action-law census first), park this
-  family, or recast. No next family disposition or training is locally selected. Full evidence:
-  `FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md` and
-  `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md`.
+- Convergence selected **CONTINUE** with one next A/RECON: existing deterministic/geometric/
+  rounded-lognormal renewal/reference same-information native-action opportunity census,
+  fixed members,K2,mean20,shape1,Delta.4,H400 and k={1,2,5,20,40}. Public greedy is the strongest
+  legal null; a structural gap does not establish D2/D8 learning value. No E4 learning matrix,
+  E3 rerun,c retune or D3 recast is selected. The census has not run; actual-node per-law cost/
+  cap and a later invocation card remain unfilled. Decision provenance PRO_FINAL /
+  OWNER_DELEGATED; no Portfolio change. Complete archive/intake:
+  `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md`. E3 result and bounded H0 remain unchanged.
 
 ## Objects and their state (2026-09-05)
 
@@ -69,7 +72,8 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 | E0 — exposure line and frozen probe set | complete, two seeds, four arms, no quarantine | `docs/Claude_docs/experiments/E0_EXPOSURE_PROBE_SET_RESULT_20260902.md`; review Part IX |
 | E1 — age input at fixed `k` | complete; owner prediction stands unrefuted; age not carried forward | `docs/Claude_docs/experiments/E1_AGE_INPUT_RESULT_20260902.md` |
 | E2 — D2 cost sweep on homogeneous corridor | complete; 15 valid runs; frozen verdict `NEITHER`; accepted B intake | `FSD_E2_INTERRUPTION_COST_SWEEP_RESULT_EVIDENCE_20260904.md`; `FSD_E2_INTERRUPTION_COST_SWEEP_INTAKE_20260904.md` |
-| E3 — heterogeneous hazard | complete18/18 valid; E3-H0-NO-ADVANTAGE, bounded to c=.25/large row/budget; direction continuation versus park escalated | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
+| E3 — heterogeneous hazard | complete18/18 valid; original bounded E3-H0-NO-ADVANTAGE retained by complete Convergence | `FSD_E3_HETEROGENEOUS_HAZARD_SCIENCE_CARD_20260904.md`; `FSD_E3_HETEROGENEOUS_HAZARD_INTAKE_20260905.md` |
+| Post-E3 renewal/reference census | sole next A/RECON selected by PRO_FINAL CONTINUE; no training, call card not frozen, census unrun | `FSD_E3_COMPLETE_CONVERGENCE_INTAKE_20260905.md` and its exact archive |
 | Advancement plan | E1 → E2 → E2b/E3 → E4 → C-gate; E2b is not selected at this boundary | `docs/Claude_docs/plans/RESEARCH_ADVANCEMENT_PLAN_20260902.md` |
 
 ## Code
