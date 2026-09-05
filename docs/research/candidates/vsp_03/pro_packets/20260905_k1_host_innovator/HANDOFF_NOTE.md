@@ -4,6 +4,11 @@
 Record actual accepted Codex dispatch separately; preparation is not provider-send evidence.
 No complete response, selected successor, new scientific card or experiment is claimed here.
 
+Author dispatch is now accepted: the one `send_message_to_thread` call returned the configured
+Transport task and `isError=false`. `DISPATCH_ACCEPTED.json` preserves its exact arguments and
+tool return. That receipt is only the Codex dispatch fact, not provider Send or a Pro verdict.
+The accepted body and request are now fixed; do not render over them or dispatch again.
+
 Revised before dispatch under the owner's exploration-versus-paper-claim clarification. Root
 confirmed that the initial packet had not been dispatched; its four original files are retained
 byte-for-byte in `unsent_initial/`. This active packet replaces those unsent bytes at the same
