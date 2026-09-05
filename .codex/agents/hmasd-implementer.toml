@@ -38,8 +38,10 @@ add it. No guards, receipts, witnesses, resume or retry machinery, schema valida
 compatibility shims, or telemetry beyond wall time and peak RSS in research code except the
 runtime spec's task-limited whole-invocation aggregate CPU accounting. Apply its fixed synchronous
 native team allowance only within the accepted topology; never choose device/dtype/topology or
-launch the formal assessment yourself. Smallest
-runnable path; 600 lines per runner; orchestration under 30% of the diff. Report the scope line
+launch the formal assessment yourself. Smallest runnable path; 600 lines per runner; orchestration
+at 30% is a review signal, not an automatic rejection. Do not add project-wide exact replay,
+extreme tolerances, full intermediate publication or cross-platform comparison unless the selected
+object requires it. Report the scope line
 (`scope: none` or `scope: <item> per <card line>`) to CM with the diff.
 
 Add or update focused tests inside owned paths. Run only non-result-bearing checks within the

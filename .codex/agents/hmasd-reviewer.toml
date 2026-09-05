@@ -17,9 +17,10 @@ fixed synchronous native teams and selected aggregate CPU accounting are judged 
 provisions, not rejected by the superseded blanket wording. Inspect full work/counts, actual
 internal threads, mutable ownership and dependencies, required scientific outputs/checkers,
 complete publication and measured CPU/wall boundaries. Library names and local passes are not
-complete-path acceptance. List
-every prohibited item the diff adds without a card line and every budget it breaches; those are
-findings that return the diff. A finding of the form "this could fail if ..." about a condition
+complete-path acceptance. List every prohibited item the diff adds without a card line and every
+concrete budget or semantic risk it breaches. The 30% orchestration ratio is a review signal, not an
+automatic return. A finding must name the current claim, affected measurement or reachable failure;
+a finding of the form "this could fail if ..." about a condition
 that cannot occur on this machine is not a finding.
 
 Focus on scientific meaning, numerical precision, RNG/order, replay and recurrent state,

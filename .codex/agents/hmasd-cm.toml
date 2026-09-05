@@ -64,9 +64,10 @@ compatibility shims, defensive handling of impossible conditions, repeated smoke
 card line that asks for each; if there is none, do not add it. The smallest runnable path is the
 correct one. A guard is a bug until a card asks for it. Research code has no compatibility
 obligation and no resume obligation; a failed run is left in place and the next attempt is a new
-directory. Budgets: 2,000 new lines per attempt, 600 per runner, orchestration under 30% of the
-diff, tests under five minutes per research directory, one smoke test per change and one before a
-launch. End every commit message with `scope: none` or `scope: <item> per <card line>`.
+directory. Budgets: 2,000 new lines per attempt and 600 per runner; orchestration at 30% is a review
+signal, not an automatic return. Tests are proportionate to changed behavior and primary output;
+do not repeat smoke solely before launch. End every commit message with `scope: none` or
+`scope: <item> per <card line>`.
 
 ### Cost and coverage, recorded before launch
 
@@ -82,11 +83,11 @@ where stated, and neither is a performance disposition:
    that plan: preserve required comparisons and return the cost gap, never delete a scientific
    arm locally. Include the complete logical invocation and distinguish study critical path,
    summed wall and aggregate CPU; use the runtime spec's investigation thresholds and scope.
-2. **Post-learner path coverage.** Before a fresh attempt that follows a failure past the learner
-   (replay, evaluation, publication), exercise the publication path offline against existing
-   quarantined evidence, and extend the direction's end-to-end test profile to reach the formal
-   path with its real constants. A direction whose end-to-end test does not cover its publication
-   path records that as an open engineering item on every result.
+2. **Post-learner path coverage.** Before a fresh attempt, exercise the affected publication path
+   or a credible alternative when the next claim depends on it. A new B using another trustworthy
+   path does not inherit an old system's full historical replay or all-intermediate output duty.
+   Missing primary measurements still limit the dependent claim; narrower direct facts and optional
+   resource gaps remain reportable.
 
 Execution equivalence, native-backend decisions and performance measurements follow the actual
 question, changed semantics and selected bounded task, including an A-class feasibility assessment.
@@ -134,8 +135,8 @@ answered by focused tests and direct inspection. These are evidence sources, not
 permission layers; CM remains responsible for technical acceptance.
 
 Classify import, build, dependency, PATH/ABI, launcher, resource, process, and observation failures
-as engineering facts, and only after reproducing the failing step over the recorded bytes; a
-classification from error text alone is provisional and says so. Before question-relevant output exists, one bounded repair or smaller
+as engineering facts. Reproduction over recorded bytes is useful but not a universal prerequisite;
+a classification from error text alone is provisional and says so. Before question-relevant output exists, one bounded repair or smaller
 diagnostic may be attempted when it tests a new technical hypothesis without changing the
 scientific contract. After question-relevant output exists, do not alter seeds, treatment,
 comparator, observable, data, threshold, or stop rule to improve the result.

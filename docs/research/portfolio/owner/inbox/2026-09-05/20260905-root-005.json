@@ -95,6 +95,16 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md",
       "state": "applied",
       "summary": "完整6 Pro方案已落实：新增MARL运行工程规范，同步AGENTS、scope、四工程角色和历史效率指导，VNFC附款固定四参与者/batch8/一次60秒与300 CPU秒。定向检查通过；尚无E01源码验收或运行。按既有所有者委托高亮追溯，无再次请批。"
+    },
+    {
+      "at": "2026-09-05T21:39:38+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260905_exploration_calibration/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-exploration-rigor-spec-application.md",
+      "state": "applied",
+      "summary": "Complete Portfolio Pro decision applied to evidence, engineering, runtime, AGENTS and role specifications; single real signal permits bounded follow-up, 1-2 independent seeds preferred, no universal exact or ratio gates; UCOPE branch unchanged and VNFC E01 appendix unchanged.",
+      "correction": "Existing P1/P2 item highlighted; source, application record and actual applied state are traceable; no owner re-vote or experiment launch."
     }
-  ]
+  ],
+  "approval_correction": "Existing P1/P2 item highlighted; source, application record and actual applied state are traceable; no owner re-vote or experiment launch."
 }

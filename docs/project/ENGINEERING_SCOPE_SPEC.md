@@ -38,10 +38,13 @@ code core obligations.
    admitted, receipted, or witnessed.
 3. A launch sha recorded in the summary; the runner's own cost law reported (wall time per unit
    of the swept quantity) when the card asks for a projection.
-4. Tests: one smoke test that runs the runner end to end at toy size in under 60 seconds, plus
-   rule tests that pin the mapping from numbers to result branches. Nothing else is required.
-5. Reproducibility means re-running the recorded command at the recorded sha gives the recorded
-   numbers to the stated tolerance. It does not mean hash chains, byte manifests, or a witness.
+4. Tests: one proportionate focused check of changed behavior and the primary output, plus rule
+   tests when the object has branch rules. Reuse existing checks where the relevant path is
+   unchanged; a launch boundary alone does not require a second smoke run.
+5. Reproducibility is claim-dependent: deterministic numerical replay is for a named code path,
+   regression, diagnostic or exact semantic object; statistical replication uses independent
+   training runs, per-run outcomes and uncertainty for performance claims. Neither implies a
+   project-wide tolerance or cross-platform bit equality.
 
 ## 4. What is not built unless a science card names the need in writing
 
@@ -76,8 +79,8 @@ returns the diff.
 - Backward-compatibility shims, deprecation paths, or version fields inside research code.
 - Defensive handling of conditions that cannot occur on this machine (missing interpreter,
   hostile input, concurrent writers to a directory only this run writes).
-- Smoke tests run more than once per change: tests run once after an edit and once before a
-  launch. They do not run per slice, per phase, or per heartbeat.
+- Smoke checks are proportionate to the changed behavior and primary output. Do not repeat a smoke
+  solely because a launch boundary occurs, or run it per slice, phase, or heartbeat.
 
 ## 5. Budgets
 
@@ -85,7 +88,7 @@ returns the diff.
 | --- | --- | --- |
 | New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the implementer returns the excess as a named list |
 | Runner script | 600 lines | same |
-| Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% of the diff | the reviewer returns the diff with the orchestration lines listed |
+| Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% review signal | the reviewer identifies unnecessary machinery and concrete impact; ratio alone does not return the diff |
 | Launch conditions | the four of evidence spec §11.4 | any other gate is deleted, not recorded |
 | Test wall time per research directory | 5 minutes total excluding the smoke of the runner | delete unrequired duplication only; required scientific coverage remains, and insufficient budget returns a concrete gap; another bounded engineering task is separately selected, never automatic |
 | Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
@@ -94,11 +97,11 @@ returns the diff.
 
 **小规模复用／净删除例外。** 对research层、事前在既有科学卡或技术任务记录中声明的单一逻辑变更，若其目的为复用现有科学计算，或其全部非测试源代码删除行数严格大于新增行数；且整项逻辑变更累计新增非测试源代码不超过100行、不新增§4所列机械设施，则可适用本例外。例外不得改变未被相应权限明确选择的科学含义或对象之外的科学行为。
 
-从声明基线起跨文件、跨提交合并报告新增行数A、删除行数D及编排行数O；本例外的比例报告采用`O/(A+D)`，替换按删除和新增两侧计数，测试与文档分列。符合例外时，比例达到或超过30%本身不再构成自动退回理由；既有独立reviewer须说明编排变更为何必要，审阅全部受影响的科学计算、观测、消费者和发布路径，并明确尚未验证的事实。行数资格不等于正确性或源码接受。
+从声明基线起跨文件、跨提交合并报告新增行数A、删除行数D及编排行数O；本例外的比例报告采用`O/(A+D)`，替换按删除和新增两侧计数，测试与文档分列。对普通research变更，编排占比30%仅为审查提示，不是预算硬上限、源码接受否决条件或科学有效性判据；既有独立reviewer应说明必要性、受影响计算与未验证事实。不得填充计算、压缩代码或移动包装以制造比例合规。行数资格不等于正确性或源码接受。
 
 不得拆分同一逻辑变更、压缩或搬移代码、复制／添加无需求的计算或测试、把未改动helper计入分母来取得资格。净删除也不得删除冻结对象要求的科学量、改写历史证据或把真实learner工作完整性与可选资源遥测混为一谈。
 
-不符合本例外的research变更继续适用现行比例规则。2000新增行、600行runner、其余测试及scope预算、源码所有权、科学完整性、既有post-learner离线发布要求、资源准入、逐臂计算上限和证据规范§11.4保持不变。本条不接受任何已有拒绝补丁，不授权实验，不新增reviewer角色、登记服务、runtime validator或A/B启动关卡。
+不符合本例外的research变更也采用上述审查提示。2000新增行、600行runner、其余测试及scope预算、源码所有权、科学完整性、资源准入、逐臂计算上限和证据规范§11.4保持不变；post-learner发布要求按证据规范§11.8.6—7的实际依赖限定。本条不接受任何已有拒绝补丁，不授权实验，不新增reviewer角色、登记服务、runtime validator或A/B启动关卡。
 
 ### CBSC B1修复与DISH A05对象限定附款
 

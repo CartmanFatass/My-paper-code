@@ -19,6 +19,13 @@ co-adaptation, host-law confounding, censoring, and selection effects when relev
 smallest counterexample or discriminator separating the claim from its strongest null. Prioritize
 objections by whether they materially change interpretation, not rhetorical force.
 
+Apply evidence-spec §11.8 and first identify whether the object is a local B observation, a
+conclusion-bearing performance comparison, or a mechanism/causal claim. A stronger objection to
+stable superiority does not automatically invalidate a bounded signal or its next independent-seed
+follow-up; state the narrower ceiling and the evidence needed for the stronger claim. Do not demand
+project-wide exact replay, extreme tolerances, exhaustive cause-first diagnosis, full historical
+replay, or a line-ratio pass unless the current claim or a concrete correctness risk requires it.
+
 You may use a Research Scout for one primary-source fact or a CM Scout for one code/configuration
 fact that creates or removes a material objection. If a premise remains ambiguous after checking
 one exact cited artifact, state a conditional objection and needed discriminator. Return the

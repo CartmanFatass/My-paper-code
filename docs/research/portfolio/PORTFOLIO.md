@@ -1,6 +1,6 @@
 # HMASD Research Portfolio
 
-Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; runtime specification applied; VNFC E01 CM active)
+Updated at: 2026-09-05 (N3 and CBSC scoped intakes complete; UCOPE branch decision applied; exploration-burden calibration applied; runtime specification applied; VNFC E01 CM active)
 Owner: Root
 Current important-change authority: latest explicit owner approval applies CBSC/N3 B/B and delegates future same-kind specification changes plus their explicit Portfolio updates to complete appropriate-node Pro plans, with highlighted P1/P2 traces and no repeated owner vote. See `decisions/2026-09-05-pro-directed-spec-delegation.md`; historical authority/corrections remain preserved.
 Owner review maintenance: P1/P2 only (`OWNER_DIRECT`, 2026-09-05); P3/P4 creation, backfill and reminders retired. Preserve scientific evidence, audit and existing owner replies; see `decisions/2026-09-05-owner-review-p2-cutoff.md`.
@@ -86,6 +86,25 @@ claimed by this refill. Root integrates their pushed evidence and dispatches rea
 the existing singleton. Prior PARK decisions, investment endpoints, science and lifecycle remain
 explicit inputs. N3/CBSC do not repeat completed invocations. K1/K4 do not revive FSD/D6 families.
 Recovery details: `handoffs/2026-09-05-five-chain-refill.md`.
+
+### Exploration and publication burden calibration — 2026-09-05
+
+The complete Portfolio Pro decision `2026-09-05-exploration-rigor-spec-portfolio-01` is applied
+under the standing specification delegation. It makes evidence burden claim-dependent: one real,
+trustworthy, clearly comparable observation may justify a bounded next B investment; a learning
+question normally gets one or two new independent training seeds with every outcome retained; no
+universal all-positive, significance, cross-platform bit-equality, extreme-tolerance, exhaustive
+cause-first, full-replay, full-array or 30% orchestration gate remains. Paper-stage claims still
+need fair comparison, transparent selection, independent runs and uncertainty matched to their
+scope. This is a methodology correction only: no direction lifecycle, priority, recast, fusion,
+historical quarantine or scientific result changed. UCOPE may propose a new minimal B through its
+DM; the old retained-policy numerical-locus A branch remains parked and is not reopened. VNFC E01's
+named four-participant/batch8/60-second/300-CPU-second appendix is unchanged.
+
+The source-backed application record and complete Pro archive are
+`decisions/2026-09-05-exploration-rigor-spec-application.md` and
+`pro_packets/20260905_exploration_calibration/archive/`. The existing P1/P2 owner item is
+highlighted with this trace; no additional owner vote is pending.
 
 ## Completed intake boundary before five-chain refill
 

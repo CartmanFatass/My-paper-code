@@ -89,6 +89,19 @@ The exact response, SHA-256
 `UCOPE_POST_INTERFACE_CONVERGENCE_INTAKE_20260905.md` records the full intake, contrary evidence,
 unchanged counts/caps, owner-delegated execution and the separate Transport metadata correction.
 
+### Exploration burden calibration — 2026-09-05
+
+The Portfolio Pro calibration applies to future UCOPE objects without reopening this historical
+branch. The retained-policy root-residual A/RECON family keeps its frozen input binding, solver
+semantics, tolerance, arrays and publication boundary because those facts are its own estimand and
+re-entry question. A separately defined B/EXPLORE learning question may use the evidence-spec
+§11.8 minimum: a real learner, comparator, primary measurement, nonzero exposure, and a bounded
+follow-up. For a learning-performance question the DM should normally add one or two independent
+training seeds, retain every outcome, and report local/proxy gains separately from native losses;
+the old numerical-locus output is not an exclusive prerequisite. This clarification changes no
+historical quarantine, no consumption state, no lifecycle or priority, and no claim ceiling of the
+existing PA-B/TW-B evidence.
+
 ## Historical current position — 2026-09-01
 
 The complete persistent `em:ucope:innovator` round

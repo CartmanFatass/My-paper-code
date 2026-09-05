@@ -15,11 +15,11 @@ it, and run the named focused tests or formatting checks. Avoid broad refactors 
 cleanup. You may use a CM Scout for one static fact or a Verifier for one non-result-bearing runtime
 fact that decides whether the edit remains behavior-preserving.
 
-Apply docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md to the actual frozen scope; its CPU
-accounting and fixed native team provisions do not make semantic choices routine.
+Apply docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md and evidence-spec §11.8 to the actual frozen
+scope; its CPU accounting and fixed native team provisions do not make semantic choices routine.
 Routine Implementer must explicitly refuse any change that selects or alters the native/C++ backend,
 dtype or numeric operation order, batching/vectorization, worker/process topology,
-parallel reduction, resource telemetry, or checkpoint/resume performance semantics. Do not add C++, GPU, or parallelism by convention. Route such
+ parallel reduction, resource telemetry, or checkpoint/resume performance semantics. Do not add C++, GPU, or parallelism by convention. Do not add universal exact replay, extreme tolerances, cross-platform equality or exhaustive diagnostics by convention. Route such
 work to the Semantic Implementer under CM with the exact performance question and owned paths;
 return `REPAIR_REQUIRED` when that handoff or contract is missing. Routine work may rely on an
 already CM-frozen cost contract but may not choose, reinterpret, or improve it.

@@ -62,7 +62,8 @@ Every class MUST:
 3. preserve direct observations, including null, unstable, and adverse outcomes;
 4. distinguish environment interaction from optimizer-update and model-selection exposure;
 5. report material implementation, precision, RNG, checkpoint, leakage, and side-effect changes;
-6. treat an engineering or instrumentation failure as no scientific observation; and
+6. treat an engineering or instrumentation failure as limiting the dependent observation; a
+   separate direct fact remains reportable when it is independently trustworthy; and
 7. bound interpretation to the population, information set, resource budget, and measurement that
    were actually observed.
 
@@ -91,8 +92,8 @@ and failures remain visible.
 
 - One to three seeds can be sufficient for debugging or mechanism scouting.
 - Three to five seeds can estimate preliminary direction and obvious instability.
-- These counts do not support stable-performance, general-superiority, transfer, or retirement
-  claims.
+- These counts do not by themselves support stable-performance, general-superiority, transfer, or
+  retirement claims; they are defaults, not universal gates.
 - A B run MUST exercise the real environment, policy, learner, trainer, and evaluator and report
   nonzero transition, update, and evaluation counts when it is called an algorithm experiment.
 - Outcome-informed adaptation is legitimate exploration. It MUST NOT be relabelled as prospective
@@ -104,7 +105,9 @@ retire a direction.
 
 ### 5.3 C-BENCH — BOUNDED_BENCHMARK
 
-Development and hyperparameter selection MUST be separated from the frozen final evaluation.
+Development and hyperparameter selection MUST be separated from the frozen final evaluation when
+the study makes a conclusion-bearing claim. This separation is not a prerequisite for B
+exploration.
 Before final evaluation, freeze the treatment, competent comparator, task population, training and
 evaluation budgets, primary estimand, checkpoints or selection rule, stopping rule, uncertainty
 method, decision rule, and interpretation boundary.
@@ -185,7 +188,9 @@ The following do **not** consume a C object:
 - infrastructure and transport failures.
 
 After repair, an outcome-blind fresh attempt MAY implement the unchanged C object. The invalid
-artifact must be quarantined and cannot be interpreted or salvaged as scientific evidence.
+artifact must be quarantined and cannot be interpreted as a complete result or salvaged for the
+dependent claim. Independently trustworthy direct measurements from the same attempt may remain
+visible at their narrower ceiling.
 
 ### 6.3 Learning after a valid result
 
@@ -319,8 +324,9 @@ follows the order rather than preceding it:
 2. **B — EXPLORE ladder.** One-to-three-seed runs on the real learner, changed between named runs
    as the results suggest, with each change and its reason recorded. B is the default early mode
    (§5.2) and is entered directly from an inspiration model.
-3. **C-BENCH** only when a B signal is repeatable across three to five seeds and is being promoted
-   to a paper-level or portfolio-level claim.
+3. **C-BENCH** when a conclusion-bearing bounded comparison is justified by the claim, with its
+   independent runs and uncertainty chosen for the task, variance, margin and cost. A repeatable
+   B signal is useful evidence for promotion, but three to five seeds is not a universal gate.
 
 Frozen contracts, pre-registered failure boundaries, oracle-retuned comparators, held-out transfer
 splits (train-k / test-k′, train-N / test-N′), and consumption semantics are **C-time obligations**.
@@ -422,3 +428,92 @@ launch condition, an exclusion rule, or a rewrite of a B result's polarity, and 
 
 Ladders already open on 2026-09-04 continue under their cards unchanged. The fields apply to
 every card frozen after that date.
+
+### 11.8 Exploration and publication burden calibration (2026-09-05)
+
+This section is the final Portfolio Pro calibration for all ACTIVE directions. It removes defaults
+that do not serve the current claim; it does not rewrite historical results, completed objects or
+the named VNFC E01 appendix.
+
+#### 11.8.1 Claim determines burden
+
+B exploration asks whether a bounded next investment is worthwhile; a conclusion-bearing comparison
+asks what performance judgment the declared population supports. Ordinary A/B/C-BENCH work does not
+default to extreme tolerances, cross-platform element/bit equality, exhaustive mechanism explanation,
+full historical replay, full intermediate-array publication or exact support census. Require one only
+when the current claim depends on it or a concrete correctness risk requires it. Missing an exact upper,
+tuned headroom or complete causal explanation does not block performance exploration.
+
+#### 11.8.2 A credible signal supports bounded follow-up
+
+One real execution with a trustworthy primary measurement and clear comparison meaning may support a
+bounded B follow-up. It need not first be statistically significant, replicated on several seeds,
+positive on every seed or mechanistically localized. This is an investment signal, not stable
+superiority. A local or proxy improvement is reported as local; native-return losses, wrong actions
+or unchanged complete competence remain alongside it. Outcome selection of the best seed, checkpoint,
+metric or configuration must be disclosed.
+
+#### 11.8.3 Independent training seeds
+
+When the question is learning performance, prefer a small follow-up with one or two new independent
+training seeds using the same comparison and evaluation. Choose more when variance, margin, task
+population or claim requires it. Preserve every seed, failure, curve and exposure; do not run until
+all signs are positive. Paired treatment/control seeds or common exogenous randomness are allowed
+when declared, but repeated evaluation of one checkpoint, another fold on the same data, or more
+rollouts is not a new training sample. Few seeds require per-seed outcomes and a limited uncertainty
+statement; they cannot support a stable population claim by themselves.
+
+#### 11.8.4 Publication-stage claims
+
+Paper-level performance claims require fair comparators, transparent development/checkpoint selection,
+independent training and evaluation appropriate to the task, and uncertainty reporting. The values
+10 runs, 32 evaluation episodes and 95% intervals are planning defaults, not universal laws. Three
+to five seeds, all-positive seeds or one significance test alone never guarantees sufficiency.
+Mechanism attribution, exclusion of a competitor, invariance, safety or exact claims require only the
+interventions, ablations or proof that those stronger claims actually need. An unresolved mechanism
+does not erase an independently measured performance fact; it narrows the wording.
+
+#### 11.8.5 Three kinds of reproducibility
+
+Deterministic numerical replay serves a code path, regression, numerical diagnostic or explicitly
+exact semantic object, and is conditional on the stated execution boundary. Statistical replication
+serves a learning-performance claim through independent training runs, per-run results, aggregate
+effect and uncertainty; it does not require trace equality. Exact algorithm/semantic validation keeps
+the integer, support, ordering, tie or applicable tolerance checks needed by that named object only.
+Source SHA or input identity does not imply output bit equality. There is no project-wide `1e-12` or
+other extreme tolerance. Select absolute/relative or decision-level checks from dtype, scale,
+conditioning, accumulation and actual action/metric consequences. Near a decision boundary, checking
+the affected action, order or return can suffice; an equivalence claim cannot be made if its required
+semantic check fails.
+
+#### 11.8.6 Proportionate verification
+
+An ordinary B must run the real environment, policy, learner, trainer and evaluator; its transitions,
+updates, evaluation and selection exposure and primary comparison must be readable, with reward,
+information and budget semantics intact. Use existing trustworthy paths and checks where applicable.
+Add one focused verification for changed behavior and primary output; do not repeat smoke merely because
+a launch boundary occurred. Do not default to cross-platform solve, all-history replay, full arrays,
+support census or mechanism diagnosis. Resource admission remains required for each actual invocation.
+
+#### 11.8.7 Failure follows dependency
+
+Report observed exception, exit, missing output and counts immediately. Root-cause attribution requires
+direct evidence, but reproducing and uniquely locating every historical cause is not a universal
+prerequisite for later work. Repair or check a defect that threatens reward, information access,
+comparison, training or the primary measurement. A credible alternative path may proceed without
+solving unrelated historical failures, with the non-dependence stated. A damaged primary measurement
+cannot support its dependent performance claim; independently trustworthy narrower facts remain
+reportable. A new B that does not use an old publication system does not inherit that system's full
+replay obligation. These rules do not retroactively change quarantined artifacts.
+
+#### 11.8.8 Engineering proportion and transition
+
+For ordinary research changes, the 30% orchestration ratio is a review signal, not an automatic return,
+budget ceiling or scientific-validity test. Reviewers identify unnecessary machinery, concrete risk and
+impact; required I/O, serialization and parameter handling are judged by purpose and readability. Do
+not pad computation, compress code or move wrappers to satisfy a denominator. Existing 2,000-line,
+600-line-runner, test and resource budgets remain unless a named task changes them. Future A/B objects
+may remove or adjust unneeded diagnostics in their card/task and state the claim impact; no separate
+tolerance or ratio approval is needed. Existing records, failures and named tasks retain their original
+meaning. The current VNFC E01 exact appendix remains unchanged; finished CBSC/N3 work and old UCOPE
+attempt02 are not reopened by this calibration.

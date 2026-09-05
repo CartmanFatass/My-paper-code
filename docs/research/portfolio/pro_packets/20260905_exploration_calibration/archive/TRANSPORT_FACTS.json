@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-05-exploration-rigor-spec-portfolio-01",
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc",
+    "capability_bound_semantic_currentness",
+    "commitment_residual_triggered_options",
+    "degraded_incumbent_shadow_handover",
+    "finite_resource_relational_inductive_efficiency",
+    "flexible_skill_duration",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "semigroup_consistent_duration_model_policy",
+    "ucope",
+    "vap_folr_core",
+    "variable_n_fleet_churn",
+    "vsp_02",
+    "vsp_03",
+    "vsp_c1"
+  ],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "provider_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "user_message_id": "8e858b07-046c-47fb-adb4-06f603da044f",
+  "assistant_message_id": "a1afa81b-eea6-49de-b23f-c69bdfc3f55a",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "prompt_sha256": "91ffd8de589e04a78ef2df15dd95860ec3f7bbf014e7ad300a5ed82b95d0960a",
+  "response_sha256": "49b80de5018897f9c2ff54f0f113601159fb924a722666e359e03b700c31abb9",
+  "response_characters": 19773,
+  "response_bytes": 37532,
+  "send_click_count": 1,
+  "provider_filename": "2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__00_PROMPT.md",
+  "attachment_observed": true,
+  "identity_validation": "PASS",
+  "identity_expected": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "8e858b07-046c-47fb-adb4-06f603da044f",
+    "assistant_message_id": "a1afa81b-eea6-49de-b23f-c69bdfc3f55a"
+  },
+  "identity_observed": {
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "8e858b07-046c-47fb-adb4-06f603da044f",
+    "assistant_message_id": "a1afa81b-eea6-49de-b23f-c69bdfc3f55a"
+  },
+  "archive_paths": {
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__00_PROMPT.md",
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio--attempt-01__02_RESPONSE.md",
+    "packet_manifest": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio__PACKET_MANIFEST.json",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-05-exploration-rigor-spec-portfolio-01\\2026-09-05-exploration-rigor-spec-portfolio-01--portfolio--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "49b80de5018897f9c2ff54f0f113601159fb924a722666e359e03b700c31abb9"
+  },
+  "heartbeat": {
+    "automation_id": "exploration-rigor-spec-portfolio-transport-wake-2026-09-05",
+    "status": "PAUSED",
+    "retirement_verified": true,
+    "retired_at": "2026-09-05T21:28:30Z"
+  },
+  "captured_at": "2026-09-05T21:27:29Z",
+  "natural_completion_observed": "Stop answering absent; Start Voice visible; paired assistant node captured",
+  "notes": [
+    "Exact response obtained from paired Copy response and clipboard; CRLF normalized to LF only.",
+    "No second Send was attempted."
+  ],
+  "archived_at": "2026-09-05T21:28:30Z",
+  "return_receipt": {
+    "status": "SENT",
+    "attempt_count": 1,
+    "delivery_status": "accepted",
+    "message_key": "2026-09-05-exploration-rigor-spec-portfolio-01|portfolio|6a9c109e-b264-83e8-a78b-f9ea1b767b7b|49b80de5018897f9c2ff54f0f113601159fb924a722666e359e03b700c31abb9",
+    "sent_at": "2026-09-05T21:29:15Z"
+  }
+}

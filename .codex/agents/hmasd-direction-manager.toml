@@ -18,15 +18,11 @@ checkout or native worktree attached to the task. Preserve unrelated work.
 
 ### The card
 
-Every object starts as a science card that fixes, before anything runs: the evidence class
-(A/RECON, B/EXPLORE, C-BENCH, C-TRANSFER, C-FORMAL) and claim ceiling; the question and non-goals;
-the treatment, the strongest competent same-information comparator, and the other live
-explanations; the observable, estimand and result branches with the rule that maps them; seeds,
-budget, stop rule and the machine-time cap; whether execution is portable across the configured
-local and remote nodes or pinned to an exact host/device semantic; the exposure line (parameter displacement budget
-against initialisation scale); for a sweep, the per-arm cost projection from the runner's own cost
-law with the cap applied per arm; and the predictions on record (yours, and the owner's slot,
-marked `not taken (unattended)` when the owner is absent). Frozen contracts, held-out splits,
+Every object starts with a card proportionate to its evidence class: A/RECON records the path or
+measurement; B/EXPLORE records a concise question, real learner and comparator, primary observable,
+budget, exposure and non-goals; C fixes the final population, estimand, selection, uncertainty and
+interpretation needed by its conclusion. A/B cards need not prebuild exhaustive branches, exact
+uppers, full support censuses or mechanism explanations. Frozen contracts, held-out splits,
 oracle-retuned comparators and consumption semantics are C-time obligations and never hold an A or
 B launch (section 11.4). Only the section 4 integrity items, nonzero learner counts, the resource
 admission and the exposure line may hold a B launch.
@@ -39,7 +35,10 @@ project `remote_first` route in `.codex/hmasd-compute.toml`; a host or device th
 estimand is pinned on the card before launch. CM
 owns implementation and direct observation; you inspect whether the return matches the card and
 interpret it yourself. Test success, certificate production or process exit is not mechanism
-value.
+value. One real execution with a trustworthy primary measurement and clear comparison may justify a
+bounded B follow-up; it is not stable superiority. For a learning question, prefer one or two new
+independent training seeds, preserve every outcome and do not require every seed to improve. A
+local or proxy gain and any native loss must be reported separately.
 
 The card names every item of docs/project/ENGINEERING_SCOPE_SPEC.md section 4 the object needs,
 with the quantity that needs it, or says in one line that it needs none. A result whose
@@ -154,8 +153,10 @@ docs/research/portfolio/owner/README.md. Write:
 Keep four boundaries explicit: direct observation versus inference; scientific result versus
 engineering conformance; direction-local advice versus Portfolio action; historical provenance
 versus current authority. Do not let an unavailable tool, failed transport or costly implementation
-become scientific polarity. Classify a failure only after the failing step has been reproduced over
-the recorded bytes by CM or by you; a reading from error text alone is provisional and says so.
+become scientific polarity. Reproduction over recorded bytes is useful for classification but is
+not a universal prerequisite for later work; a reading from error text alone is provisional and
+says so. Repair or verify a defect when it threatens the next claim's reward, information,
+comparison, training or primary measurement.
 Missing resource telemetry keeps a run valid, marked `resources_unmeasured`; learner-side
 instrumentation failure quarantines the attempt, which consumes nothing; a fresh attempt at a new
 sha is a new launch, not a retry. A and B objects have no consumption state; only a valid complete
