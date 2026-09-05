@@ -285,10 +285,11 @@ labels. Hash the exact bytes written to the response file. Set `ARCHIVE_PENDING`
 write and verify the canonical artifacts, then set `ARCHIVED`; do not close a tab
 before this sequence.
 Record `user_message_id` and `assistant_message_id` when exposed by the DOM. New
-Prompt Author responses identify their request ID and pinned ref; compare both
-before accepting the capture. An older or mismatched capture is preserved and
-re-inspected on the same page, never repaired by a new Send. Legacy and owner-authored
-follow-ups may lack these echoes: identify their exact user/assistant pair and question.
+Prompt Author replies are natural-language answers and need not echo request IDs,
+pinned refs or status envelopes. Match the recorded conversation/user/assistant
+binding against the captured node with `validate_response_identity`; missing DOM
+IDs require documented manual pairing against the exact question. Preserve and
+re-inspect a mismatched capture on the same page, never repair it with a new Send.
 
 ## Heartbeat and asynchronous processing
 
