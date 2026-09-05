@@ -59,3 +59,9 @@ absent result child. No internal duplicate admission. Independent integration ow
 CLI returned[] at implementation boundary and is reread at this acceptance boundary.
 Tracker directly adopts accepted handle; CM releases polls and collects terminal evidence.
 No successor, physics tuning, new checkpoint or retry outcome choice is authorized.
+
+## Accepted ordered pair
+
+Unique task `dish_ground_endpoint_a03_seed11_pair_a1` accepted at exact818b2566d1bac7cafcc71ed0bbb90b8abd1c6b65/cwd/command above. Reconciliation found task not_found and output/receipt absent. Retained input again matched2070711bytes and frozenSHA256. PID1664694,start epoch1788606830 (2026-09-05T11:13:50Z). Log `/home/wu/.agent-tasks/dish_ground_endpoint_a03_seed11_pair_a1/task.log`.
+
+Fresh node receipt assessed2026-09-05T11:13:50.543010Z; physical/effective each13224554496bytes, minimum4294967296, both floor flags and passed=true, source/proc/meminfo. Integration ownerCLI again returned[] before dispatch. Tracker `/root/tracker_tl_experiments` directly ACKed sole observation with88.48s/host176.96s/pair projection and300/600s caps. CM releases routine polls; original summary/trace/receipt/log collection follows terminal reminder. No successor or outcome-informed repeat authorized.
