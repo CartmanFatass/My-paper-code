@@ -133,7 +133,12 @@ as the following actual values at the stated boundaries:
 4. **Action to native consequence:** actual relay emission, completed base-buffer
    arrival and source/relay age, native service indicator/count, batteries/energy,
    separation and terminal/failure event. Record any service following a legal transfer
-   separately from service before a transfer. No service is inferred from a margin.
+   separately from service before a transfer. Carry the actual pending relay's sender
+   and emission tick through each completed base adoption. Count a service tick as a
+   **promoted-owner consequence** only when its actual adopted base packet was relayed
+   by the promoted physical owner at or after the legal application tick. Already
+   in-flight old-owner packets, including service at the CAS tick, do not meet this
+   consequence criterion. No service is inferred from a margin.
 
 The estimands are the candidate-minus-literal stage counts and native service ticks over
 the complete bounded trajectories, plus which stage each host actually reaches. Both
@@ -151,7 +156,8 @@ alongside rather than used as a favourable-outcome admission rule:
 2. Otherwise, if there is no delivered snapshot, no delivered readiness, no ordinary
    application-valid boundary or no applied legal owner/actuator transfer:
    **A03-DOWNSTREAM-STAGE-GAP**, naming every absent stage and the earliest absent stage.
-3. Otherwise, if no valid native service occurs at or after the applied transfer:
+3. Otherwise, if no valid native service occurs from an actually adopted relay emitted
+   by the promoted owner at or after the legal application:
    **A03-CONSEQUENCE-NOT-REACHED**.
 4. Otherwise: **A03-BOUNDED-PATH-QUALIFIED**, only for this fixture/controller and host.
 
@@ -162,7 +168,8 @@ or a scientific-semantic implementation breach makes an incomplete attempt, not 
 of those scientific branches. CM reproduces a failure before assigning its cause.
 
 MEI: one actually observed event at each necessary stage, including one service tick
-(0.1 seconds) at/after a legal transition, is the diagnostic resolution of this path
+(0.1 seconds) from the promoted owner's post-application relay, is the diagnostic
+resolution of this path
 qualification. Candidate-minus-literal service of at least one tick is a descriptive
 host effect of interest, not a requirement for branch 4. Zero differences remain
 inside that descriptive MEI; negative differences are reported without relabelling a
