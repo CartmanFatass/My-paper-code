@@ -125,12 +125,12 @@ def classify_r02(
         "required_curves_and_counts_present",
     )
     required_true += (
-        ("r07_binding", "initial_projection_conformant", "contact_history_truthful")
-        if branch_prefix == "R07" else ("initial_tight_clip_changed_exactly_five",)
+        (f"{branch_prefix.lower()}_binding", "initial_projection_conformant", "contact_history_truthful")
+        if branch_prefix in ("R07", "R09") else ("initial_tight_clip_changed_exactly_five",)
     )
     if branch_prefix == "R08":
         required_true += ("r08_binding", "initial_projection_conformant", "cut_panel_complete")
-    if branch_prefix in ("R06", "R07", "R08") and any(
+    if branch_prefix in ("R06", "R07", "R08", "R09") and any(
         rule_inputs.get(name) != {public: [0.003] for public in PUBLIC_ARM.values()}
         for name in ("initial_optimizer_group_lr", "final_optimizer_group_lr")
     ):
@@ -146,7 +146,7 @@ def classify_r02(
             type(rule_inputs.get(name)) is not int or rule_inputs[name] <= 0
             for name in required_positive
         )
-        or (branch_prefix != "R07" and rule_inputs.get("first_tight_contact_update") != 0)
+        or (branch_prefix not in ("R07", "R09") and rule_inputs.get("first_tight_contact_update") != 0)
         or descriptors is None
     ):
         return f"{branch_prefix}_INVALID_INCOMPLETE"
@@ -168,17 +168,17 @@ def classify_r02(
         if primary["a"] <= -MEI:
             return "R08_MATERIAL_AMPLIFICATION"
         return "R08_INTERACTION_WITHIN_MEI"
-    if branch_prefix == "R07":
+    if branch_prefix in ("R07", "R09"):
         if rule_inputs["first_tight_contact_update"] is None:
-            return "R07_NO_OBSERVED_CONTACT"
+            return f"{branch_prefix}_NO_OBSERVED_CONTACT"
         d_value, e_value = descriptors[15]
         if e_value < 0.0:
-            return "R07_N15_EDGE_BELOW_UNIFORM"
+            return f"{branch_prefix}_N15_EDGE_BELOW_UNIFORM"
         if d_value >= MEI:
-            return "R07_N15_MATERIAL_TIGHT_FAVORED"
+            return f"{branch_prefix}_N15_MATERIAL_TIGHT_FAVORED"
         if d_value <= -MEI:
-            return "R07_N15_MATERIAL_TIGHT_ADVERSE"
-        return "R07_N15_WITHIN_MEI"
+            return f"{branch_prefix}_N15_MATERIAL_TIGHT_ADVERSE"
+        return f"{branch_prefix}_N15_WITHIN_MEI"
     if any(e_value < 0.0 for _, e_value in descriptors.values()):
         return f"{branch_prefix}_EDGE_BELOW_UNIFORM"
     if all(d_value >= MEI for d_value, _ in descriptors.values()):

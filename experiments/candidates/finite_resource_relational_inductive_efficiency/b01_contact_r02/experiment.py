@@ -158,6 +158,8 @@ def execute(
     seed_label = TEST_SEED_LABEL if test_only else SEED_LABEL
     if seed == 2:
         root_hex, seed_label, adam_lr = f"{seed:064x}", "FRRIE-B07-CONTACT-BLOCK-002", 0.003
+    if seed == 3:
+        root_hex, seed_label, adam_lr = "0000000000000000000000000000000000000000000000000000000000000003", "FRRIE-B09-CONTACT-BLOCK-003", 0.003
     if role_column_cut:
         seed, root_hex, seed_label, adam_lr = 1, ROOT_HEX, SEED_LABEL, 0.003
     root = bytes.fromhex(root_hex)
@@ -390,7 +392,7 @@ def execute(
                 arm: factual_episodes[arm] * HORIZON for arm in LEARNED_ARMS
             }),
         }
-        if seed == 2:
+        if seed in (2, 3):
             for name in ("initial_tight_clip_changed_coordinates", "first_tight_contact_update"):
                 del expected[name], observed[name]
             expected.update(initial_projection_conformant=True, contact_history_truthful=True)
@@ -414,6 +416,7 @@ def execute(
         "cut_panel_complete": cut_complete,
         "cut_contrasts": contrasts,
         "r07_binding": seed == int(root_hex, 16) == 2 and seed_label == "FRRIE-B07-CONTACT-BLOCK-002",
+        "r09_binding": seed == int(root_hex, 16) == 3 and seed_label == "FRRIE-B09-CONTACT-BLOCK-003",
         "initial_optimizer_group_lr": initial_audit["initial_optimizer_group_lr"],
         "final_optimizer_group_lr": final_group_lr,
         "complete": complete,
@@ -446,13 +449,14 @@ def execute(
     summary = {
         "object_id": (
             "FRRIE-B01-R128-LR003-R08-ROLE-COLUMN-CUT-20260905" if role_column_cut else
+            "FRRIE-B01-CONTACT-R128-LR003-R09-THIRD-ROOT-20260905" if seed == 3 else
             "FRRIE-B01-CONTACT-R128-LR003-R07-SECOND-ROOT-20260905" if seed == 2 else
             "FRRIE-B01-CONTACT-ACTIVE-R128-LR003-R06-20260904" if adam_lr == 0.003 else OBJECT_ID
         ),
         "evidence_class": "B/EXPLORE",
         "test_only": test_only,
         "branch": classify_r02(
-            rule_inputs, test_only=test_only, branch_prefix="R08" if role_column_cut else "R07" if seed == 2 else "R06" if adam_lr == 0.003 else "R02",
+            rule_inputs, test_only=test_only, branch_prefix="R08" if role_column_cut else "R09" if seed == 3 else "R07" if seed == 2 else "R06" if adam_lr == 0.003 else "R02",
         ),
         "seed": seed,
         "seed_label": seed_label,
@@ -551,8 +555,8 @@ def parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    if args.seed not in (1, 2):
-        raise B01ContractError("contact seed must be literal 1 or 2")
+    if args.seed not in (1, 2, 3):
+        raise B01ContractError("contact seed must be literal 1, 2 or 3")
     execute(
         output_root=args.output_root,
         admission_receipt=args.admission_receipt,
