@@ -41,7 +41,9 @@ ACVC superiority over its strongest competent fixed control. R01 closes only its
 seed/host/budget rung. It does not show that episode history has no native decision value: R02 now
 establishes a small exact positive legal-history gain, while both learners may still share an
 optimization or objective bias. No accepted policy has established material `0.25` headroom over
-`DET-CF`.
+`DET-CF`. The accepted R03 upper now certifies that no compatible legal history policy can
+reach that registered gain on the unchanged uncertain/delayed host. Its learner-investment family
+is closed by the existing HC-C mapping; this is not a general absence-of-history-value claim.
 
 The first persistent Convergence decision was `PRO_FINAL / RECAST_HEADROOM_FIRST`. Its exact
 full-value object encountered a reproduced engineering blocker: the exact alpha envelope retained
@@ -58,6 +60,8 @@ legal receiver-history lower witness plus an exact harm-constrained regime-oracl
 against unchanged `DET-CF`, on the unchanged twelve-opportunity host and at the unchanged `0.25`
 threshold and harm envelope.
 
+### R02 certificate — previous HC-D boundary
+
 R02 completed once at exact implementation commit
 `3831a66da19788f549e39faeb8a898221186252a` after prospective project-cost and fresh remote memory
 admission. The exact values are `J_D=2088/625`, `J_L=18916861/5625000`, and
@@ -68,22 +72,56 @@ later action at positive visible-history mass, and has positive aggregate forced
 advantage. The 24-cell extra-information upper has exact feasible primal and dual certificates,
 equal objectives, and zero complementary-slackness products.
 
-The accepted branch is **`HC-D / CERTIFICATE_INTERVAL_UNRESOLVED`**. It establishes exact positive
+The accepted R02 branch was **`HC-D / CERTIFICATE_INTERVAL_UNRESOLVED`**. It establishes exact positive
 history-conditioned action value for this deliberately restricted lower policy, but neither
 material compatible headroom nor its absence. The upper is a certificate-only regime oracle, not
 a legal policy or same-information comparator. No learner is admitted. In execution of the prior
 `PRO_FINAL / RECAST_CERTIFIED_BOUND` mapping, ACVC is parked at the exact direction-local
 engineering/scientific dependency; this does not change its Portfolio lifecycle.
 
-The strongest support is the positive legal action witness and exact harm-compatible lower gain.
-The strongest contradiction is that this gain is only about 8.9% of the registered `0.25`
-threshold, while both prior learners lost to `DET-CF`. The upper certificate remains above the
-threshold, so the competing possibility that a stronger compatible legal history policy has
-material value survives. Exact re-entry requires either such a prospectively admitted lower
+The strongest support at the R02 boundary was the positive legal action witness and exact
+harm-compatible lower gain. The strongest contradiction was that this gain is only about 8.9%
+of the registered `0.25` threshold, while both prior learners lost to `DET-CF`. That upper
+certificate remained above the threshold, so a stronger compatible legal history policy with
+material value was still possible. Exact re-entry then required either a prospectively admitted lower
 certificate or a prospectively admitted tighter exact upper below `1/4`; learner budget,
 approximation, threshold tuning, or a cap increase is not a discriminator.
 
-Guidance census A1 remains separate and incomplete. R02 does not supply its required
+### Actual tighter upper R03 — accepted 2026-09-05
+
+Within the registered tighter-exact-upper re-entry, R03 completed once at exact source
+`c4c46e50af614c8f3c12c7ec3a7290befc7c6dd8`. Its separate prospective card fixed the R02 actual
+coefficient source, information relaxation, harm dual and full cost boundary. Actual input
+inspection and a complete profile-cost preceded a fresh admitted scientific invocation; no prior
+valid object or learner was rerun.
+
+The exact information-prefix upper is
+`B4=1691610518141829913/475875000000000000=3.5547371014275...`. Therefore
+`Delta4=101807318141829913/475875000000000000=0.2139371014275... <1/4`.
+The receiver in this analytic relaxation knows all past outcomes for the first four opportunities
+and hidden regime from opportunity five. Current truth is integrated before action choice, and
+the unchanged fixed harm dual upper-bounds every compatible legal receiver-history policy.
+It is a certificate-only information relaxation, not a legal comparator or a new constrained
+optimal policy.
+
+The accepted branch is **HC-C / MATERIAL_COMPATIBLE_HEADROOM_CERTIFIED_IMPOSSIBLE**. With the
+retained legal lower, compatible history gain lies in approximately `[0.0221975,0.2139371]`.
+The strongest support for the finite negative is the exact upper below the prospectively fixed
+threshold. The strongest contradiction to any broader negative is the positive legal-history
+action witness and small compatible gain in R02; history is not valueless. Prior learner losses
+remain bounded observations, and their optimization, objective, representation or credit cause
+is not identified. Sub-threshold value and independently motivated other hosts remain live
+alternatives.
+
+Execute the previously archived `PRO_FINAL` HC-C consequence: close the uncertain/delayed R01
+host family as a learner-investment target, retain exact binding as a primitive/control, and stop
+at the direction-local boundary. No new recast or Portfolio disposition occurs. Re-entry now
+requires an independently motivated new host and a prospectively specified competent same-
+information history policy expected to change a legal action and clear1/4 native-return gain
+over its strongest competent fixed null. Opening that family requires direction-tier authority;
+the current threshold/envelope cannot be tuned. No next object is launched.
+
+Guidance census A1 remains separate and incomplete. Neither R02 nor R03 supplies its required
 same-information upper minus tuned generic baseline pair, its raw gap remains unidentified, and no
 5%/25% MEI threshold is applied.
 
@@ -110,6 +148,12 @@ The accepted evidence set is:
 - `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESOURCE_ADMISSION_20260904.json`
 - `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_RESULT_EVIDENCE_20260904.md`
 - `docs/research/candidates/acvc/ACVC_HISTORY_HEADROOM_CERTIFICATE_R02_INTAKE_20260904.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_SCIENCE_CARD_20260905.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_RESULT_EVIDENCE_20260905.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_CM_RESULT_20260905.json`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_CM_COST_20260905.json`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_CM_EVIDENCE_20260905.md`
+- `docs/research/candidates/acvc/ACVC_HISTORY_UPPER_PREFIX_R03_INTAKE_20260905.md`
 - `docs/research/candidates/acvc/ACVC_A1_HEADROOM_CENSUS_ALIGNMENT_INTAKE_20260904.md`
 - `docs/research/candidates/acvc/ACVC_A1_SAME_INFORMATION_TUNED_BASELINE_GAP_A_RECON_FOLLOWUP_20260904.md`
 
@@ -117,5 +161,5 @@ The accepted evidence set is:
 
 The historical map and candidate source documents remain provenance. The current synthesis above
 is bounded by the cited accepted result records and both complete archived Convergence decisions.
-The accepted HC-D result executes the direction-local certified-bound mapping but does not alter
+The accepted R03 HC-C result executes the prior direction-local certified-bound mapping but does not alter
 Portfolio lifecycle, priority, ownership, capacity, fusion, or investment.
