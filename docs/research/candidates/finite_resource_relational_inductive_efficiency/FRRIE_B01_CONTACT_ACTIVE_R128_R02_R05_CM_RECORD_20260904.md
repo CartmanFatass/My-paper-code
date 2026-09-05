@@ -1,7 +1,7 @@
 # FRRIE contact-active R128 R02 R05 CM record — 2026-09-04
 
-Status: `ACCEPTED / RUNNING / TRACKER_ADOPTED`. Terminal completion and scientific result are
-not yet observed. This is the one newly authorized scientific R05 execution of the original
+Status: `TERMINAL_COLLECTED / TECHNICALLY_CONFORMANT / R02_SMALL_OR_ROSTER_MIXED`.
+The running observations below are historical. This is the one authorized scientific R05 execution of the original
 R02 object, not an upgrade of A01 or reuse of any prior execution state.
 
 ## Authority, acceptance and source
@@ -78,3 +78,49 @@ DM `/root/dm_amx_frrie_continue` and CM
 `/root/dm_amx_frrie_continue/cm_am_frrie_r04_diagnosis`. CM releases routine polling and retains
 technical collection. DM retains scientific intake and all next-object selection. If transport
 or observation is lost, retain this exact handle; do not infer failure or launch another run.
+
+## Terminal evidence and technical acceptance
+
+Tracker notified CM and DM; CM collected only the same accepted task. Direct terminal status
+is `finished`, exit 0, PID 846702, tmux inactive. The log records **2026-09-05T01:09:35Z**
+termination after **937 seconds** from 00:53:58Z. Later uptime 1208 seconds is time since start,
+not runtime. The original runner explicitly reports `sys.exit()` status 0; this is separate
+from pdb/supervisor exit 0. No original exception traceback occurs. Fixed inspection commands
+at the normal post-terminal stop report absent exception locals and exit before any new script
+statement, as previously verified. Those debugger query errors are not learner exceptions.
+
+The original publisher produced a **118,913-byte** summary. A byte copy is tracked as
+`FRRIE_B01_CONTACT_ACTIVE_R128_R02_R05_RESULT_EVIDENCE_20260904.json`, retaining all 18 native
+evaluation cells, action/native-event counts, both 128-row learner/contact curves, checkpoint
+state descriptions, exposure, completion and resources. The adjacent result Markdown applies
+the original card's first-match rule. All 22 completion checks pass; local read-only extraction
+independently confirms sequential updates 1..128 in both curves, 18/18 expected cell episode,
+transition and total-action counts, and all eight d/e descriptors by direct cell subtraction.
+These are artifact checks, not repeated learner/test invocations.
+
+Raw initialization is paired. Initial tight clipping changes exactly coordinates [2,4,11,12,16]
+at update 0. PHY has contact at 50 of 128 subsequent updates, 99 coordinate-clipping events;
+EDGE has none. All projection moment-preservation rows and initial optimizer preservation pass.
+Each arm completed 128 backward/Adam calls, 8,192 factual episodes, 98,304 factual transitions,
+630,784 training slots and 2,048 learned-evaluation episodes. Total evaluation episodes: 4,608.
+No original integrity predicate or scientific rule was changed.
+
+Original branch: **R02_SMALL_OR_ROSTER_MIXED**. At N=9 and N=15 respectively,
+d128 = +0.00046705057223637644 / -0.0008677902321020704;
+e128 = +0.0005070246600856372 / +0.0004847634428491142. Both comparator gaps are nonnegative
+and both absolute treatment gaps are below MEI 0.005. This is one literal-root B/EXPLORE result,
+not a stable superiority/equivalence or relation-specific mechanism claim.
+
+Measured runner wall: 898.6516333679974 seconds; peak RSS: 615,534,592 bytes.
+PHY/EDGE attributed wall: 160.1987184420359 / 159.29206010704365 seconds; shared work is additional.
+Neither original cap fired. Final production-source diff against launch SHA is empty.
+No production code or test changed; no passing test was repeated. Formal-sized publication
+test coverage remains unrecorded despite A01 and R05 reaching publication. Historical r04 and
+attempt02 causes remain unresolved; successful R05 is not a repair diagnosis.
+
+Raw local collection directory:
+`temp/directions/finite_resource_relational_inductive_efficiency/technical/r05-collection/`
+in the CM worktree. It holds `summary.json` (118,913 bytes), original admission (504 bytes),
+and all six supervisor files under `frrie_b01_contact_r02_5e6d47f0_05/`: task.log 1,974 bytes,
+runner.sh 1,956, status 9, exit_code 2, pid 7, start_time 11. Remote originals remain untouched.
+CM returns technical conformance and complete evidence to DM; no R06 or retry is selected.
