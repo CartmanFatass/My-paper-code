@@ -472,3 +472,31 @@ the known positive root-1 signal by rotating common role-prior columns at final 
 with unchanged training. This is an outcome-informed conditional B diagnostic, not a robustness
 test or semantic-mechanism claim. See `FRRIE_R07_RESULT_20260905.md`,
 `FRRIE_R07_RESULT_INTAKE_20260905.md` and `FRRIE_R08_ROLE_COLUMN_CUT_SCIENCE_CARD_20260905.md`.
+
+## Conditional common-chart cut on the positive path — 2026-09-05
+
+The complete R08 B/EXPLORE result is `R08_INTERACTION_WITHIN_MEI`. At primary N15,
+the intact tight-minus-wide gap is +0.005548293532 and the rotated gap is +0.005538119438:
+attenuation is only +0.000010174094, below the prospective absolute 0.005 MEI.
+The containing arm remains above uniform under both conditions. N9's interaction is
++0.000001569022, also small; its intact gap remains below the primary anchor threshold.
+
+All 128 paired learner updates and 22 evaluation cells completed. The cut actually
+rotates common prior-probability/latency sender columns and permits different native
+trajectories; it leaves delivery and balance quantities unchanged in all four final
+learned cells. Small changes in actions/events and waste account for the tiny return
+changes. Contact and parameter movement remain substantial; this is not nonactivation.
+
+The strongest direct support remains the selected root-1 N15 package gap. The strongest
+contradiction to common-chart alignment being necessary for that gap is its survival
+under this precise cut. R07 remains the contradiction to assuming recurrence across
+literal paths. R08 reuses root-1 training/tapes and cannot count as independent-root
+evidence. No equivalence, semantic correctness, universal cut insensitivity or family
+closure follows. Generic projected-Adam/shrinkage, training-path co-adaptation and roster
+dependence remain live; this evaluation cut does not isolate training influence.
+
+The next unresolved discriminator is another prospectively fixed literal path at the
+same LR/work, without selecting it for its outcome. It remains an unexecuted proposal;
+`FRRIE_R09_THIRD_ROOT_IMPLEMENTATION_BOUNDARY_20260905.md` records current representation
+feasibility rather than a new card or scientific disposition. See
+`FRRIE_R08_RESULT_20260905.md` and `FRRIE_R08_RESULT_INTAKE_20260905.md`.
