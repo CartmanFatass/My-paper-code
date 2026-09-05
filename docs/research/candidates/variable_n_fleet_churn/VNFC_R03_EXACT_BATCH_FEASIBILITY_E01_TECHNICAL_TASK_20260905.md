@@ -77,3 +77,52 @@ This is not a full-census launch permit or a headroom result. On any specified d
 ownership, equivalence, resource, missing-cost or cost failure, end this investment and return
 the precise gap to Root for the existing Convergence node. No extra timing, fixture/config/node
 change, automatic repair expansion or repeated calibration. Preserve contrary evidence.
+
+## E01 fixture freeze before any measurement
+
+CM ownership/design record: `VNFC_R03_E01_ENGINEERING_CONTRACT_20260905.md`.
+The literal deterministic descriptor is
+`experiments/candidates/variable_n_fleet_churn_causal_headroom/e01_fixture.json`,
+1993 bytes, SHA-256
+`7050f9900f94adcad081be46e01218f6893c4881954c31c3fb40179c694d3eab`.
+Its expansion is the committed `e01.py` constructor, using no RNG and no target
+panel. This is a fixture byte record, not a runtime provenance guard.
+
+The descriptor fixes seven depot agents, all physical fields, public demand and
+obstruction values, and raw accrued counts. At each epoch0–5 the eight-call group
+alternates energy800/795 with identical public weight keys; the one-call tail
+has demand1=1 rather than2. There are54 direct calls per implementation,108 total
+serial+candidate complete calls. Every call evaluates its entire legal support,
+up to1961 records, with unchanged independent checker and enumeration.
+
+Two fixed non-target trajectories start with the same literal eight-agent input,
+twelve constant tape entries and presentation1–8. One follows BCRH; the other
+uses canonical legal command index0 at epoch1 then BCRH. This is predetermined,
+not selected by its endpoint; the command may coincide with BCRH and the result
+reports whether a distinct deviation occurred. Both reference and candidate run
+both paths:24 additional full calls,24 prehistory decisions,480 pre-loss and480
+post-loss ticks, four120s post-loss terminal completions. Candidate publication
+contains66 complete BCRH outputs (54 direct+12 trajectory), with reference equality
+checked for every named field/limb/candidate record; unused record slots are also
+compared. ABI padding is not a field and is excluded from equality.
+
+The fixed scale selector inputs contain3 epochs×16 synthetic public-history
+classes×1961 physical-command records=94,128 exact rational endpoint pairs.
+World membership remains separate from synthetic public history. The actual
+record→history-class→aligned-support→paired-Fraction sums→four-map path runs;
+the old exact solver is its reference. The descriptor includes explicit
+canonical/deviation/epoch and other-zone ties and cross-epoch gain conflict.
+The predetermined native pair also exercises the endpoint-pairing path without
+claiming to enumerate a target policy class.
+
+Natural tails2–7 and mixed-key lookup are covered by separate one-agent nonformal
+rules/smoke, not by a formal-fixture prerun. Formal measured widths remain8 and1;
+the other widths use the prospectively declared empirical full8 cost envelope.
+Batch-lifetime weight reuse is explicit: weights are rebuilt at the next batch,
+so no96-construction bound or checker-cache speedup is claimed.
+
+Required formal outputs are `records.json`, `trajectories.json`, `maps.json`,
+and `summary.json`, each written and read back. The outer OS accounting report
+covers startup through interpreter exit; final stdout reports the finite readings
+after summary readback. The exact source SHA/command/output root will be recorded
+after independent source review and Root integration, before invocation.
