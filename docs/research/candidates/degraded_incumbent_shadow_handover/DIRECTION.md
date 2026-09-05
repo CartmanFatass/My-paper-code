@@ -318,3 +318,27 @@ physics change. No new family, recast or lifecycle action follows. Evidence:
 `DISH_PREFIX_TRIGGER_FUNNEL_A01_SUMMARY_20260905.json`,
 `DISH_PREFIX_TRIGGER_FUNNEL_A01_COLLECTION_20260905.md`,
 `DISH_PREFIX_TRIGGER_FUNNEL_A01_INTAKE_20260905.md`.
+
+## Accepted native ground-source A02 point — 2026-09-05
+
+**Conclusion and bounded claim.** At the original seed-11 first coordinate and native
+tick 0, one normal prepared point has both camera flags absent and source-hop margins
+-9.303396681040274/-10.285571482315484 dB, both below the 6-dB send threshold. Both
+declared near-ground samples at height 0.703125 fail their terrain+8/+5 clearances.
+The rule reads **A02-ENDPOINT-CLEARANCE-WITNESS**, A/RECON with no model or completed tick.
+
+**Support, contradiction and surviving alternative.** Actual signals agree with the
+inherited host definition and strengthen A01's upstream information-path explanation.
+The code follows the definition; this is not a demonstrated implementation defect.
+The fixed 0/90 heights and nonnegative terrain imply the near-endpoint camera obstruction
+under changed horizontal motion, while noisy blocked radio is not impossible reception.
+One point neither tests a host remedy nor identifies any RETAIN/COPY/SHADOW effect.
+
+**Next decision/discriminator.** Decide whether to retain the accepted source-selection
+family through a prospectively distinct host qualification or change the family. This is
+being brought to the direction Convergence node; no local family disposition, new host,
+learning or forced trigger follows from A02. Evidence:
+`DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_SUMMARY_20260905.json`,
+`DISH_GROUND_SOURCE_POINT_A02_COLLECTION_20260905.md`,
+`DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md`.

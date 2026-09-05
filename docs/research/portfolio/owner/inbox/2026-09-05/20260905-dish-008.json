@@ -1,0 +1,33 @@
+{
+  "id": "20260905-dish-008",
+  "created": "2026-09-05T03:07:03-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "object",
+  "kind": "brief",
+  "title": "单点结果：源信息缺口与继承净空定义一致",
+  "context": "两路实际相机均不可见，余量约负九和负十；没有新学习、源交付或修改后宿主的观测。",
+  "options": [
+    {
+      "key": "reading-agreed",
+      "label": "the reading stands",
+      "consequence": "the reading stands"
+    },
+    {
+      "key": "reading-disputed",
+      "label": "re-read per the comment",
+      "consequence": "re-read per the comment"
+    }
+  ],
+  "recommended": "reading-agreed",
+  "auto_applied": null,
+  "dm_reason": "简报区分实际原生信号、派生几何与尚未执行的家族建议。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_INTAKE_20260905.md",
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_GROUND_SOURCE_POINT_A02_RESULT_EVIDENCE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#n3-ground-source-a02-intake",
+  "brief": "docs/research/portfolio/owner/briefs/degraded_incumbent_shadow_handover/2026-09-05_ground_source_a02.md",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": null
+}
