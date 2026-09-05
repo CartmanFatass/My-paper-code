@@ -1,0 +1,38 @@
+{
+  "id": "20260904-crto-025",
+  "created": "2026-09-04T17:45:18-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B03：逐行匹配的配对顺序判别",
+  "context": "B02 平均读出未胜任，普通完整周期终点已胜任。选择原始 TRAIN 配对交错顺序对照当前顺序，主终点258，另报252、255；每个终点两臂每行次数完全相同。",
+  "options": [
+    {
+      "key": "a",
+      "label": "同种子配对顺序对照当前顺序",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "先扩大 RAW 预算或模型",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "先重开残差比较",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "保持数据与逐行训练次数，直接检查一个可构造顺序方案的动作价值。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_SELECTION_INTAKE_20260904.md",
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_PAIRED_ORDER_B03_SCIENCE_CARD_20260904.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-04.md#crto-b03-paired-order-start",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
