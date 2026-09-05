@@ -1,0 +1,115 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-vspc1-k4-native-return-design-01",
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:vsp_c1:innovator",
+  "direction_id": "vsp_c1",
+  "direction_ids": [
+    "vsp_c1"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07355-5b4e-7190-9cf2-f71b41920ece",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "creator_thread_id": "01a07355-5b4e-7190-9cf2-f71b41920ece",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "commit_or_ref": "f87ceedc42dde8f49d178b79f3a5e860948f4bc9",
+  "conversation_id": "6a9c987d-b39c-83e8-a3f6-a9e4b6dff6db",
+  "provider_url": "https://chatgpt.com/c/6a9c987d-b39c-83e8-a3f6-a9e4b6dff6db",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "upload",
+  "prompt_sha256": "9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad",
+  "prompt_bytes": 17258,
+  "manifest_sha256": "2dc55fde65087cf7533d6d57eb629ddd5515b0017b0256e89fd5866b7840fc29",
+  "manifest_bytes": 1838,
+  "response_sha256": "76ba1bbf3a96cf82287f3587b3b70f97d94f13729484a761d7f89591f5316a07",
+  "response_bytes": 29249,
+  "response_characters": 17411,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "post_send_url": "https://chatgpt.com/c/6a9c987d-b39c-83e8-a3f6-a9e4b6dff6db",
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "b86b7444-bf83-4f0a-ad7e-b7e25c120d84",
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "upload_evidence": {
+    "expected_file": "PROMPT_BODY.md",
+    "bytes": 17258,
+    "sha256": "9e14fde70cfd15fff130afddf2843697dc3af7e48d507e7595992ac508f19aad",
+    "provider_filename": "2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md",
+    "attachment_observed": true
+  },
+  "assistant_message_id": "c178b56b-8f84-453e-aa0e-2df3726974cb",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; no active generation control",
+  "capture_method": "Current assistant Copy response control via browser CUA AX action and CUA clipboard; raw UTF-8 response preserved",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "76ba1bbf3a96cf82287f3587b3b70f97d94f13729484a761d7f89591f5316a07"
+  },
+  "timestamps": {
+    "completed_at": "2026-09-05T22:50:09Z",
+    "captured_at": "2026-09-05T22:50:09Z",
+    "archived_at": "2026-09-05T22:50:09Z",
+    "tab_closed_at": "2026-09-05T22:51:24Z"
+  },
+  "heartbeat": {
+    "automation_id": "vspc1-k4-native-return-design-transport-wake-2026-09-05",
+    "status": "PAUSED",
+    "next_wake_at": null,
+    "retired_at": "2026-09-05T22:50:49Z",
+    "retirement_verified": true
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07355-5b4e-7190-9cf2-f71b41920ece",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-vspc1-k4-native-return-design-01|vsp_c1|6a9c987d-b39c-83e8-a3f6-a9e4b6dff6db|76ba1bbf3a96cf82287f3587b3b70f97d94f13729484a761d7f89591f5316a07",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1__00_PROMPT.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_c1\\2026-09-05-vspc1-k4-native-return-design-01\\2026-09-05-vspc1-k4-native-return-design-01--vsp_c1--attempt-01__03_TRANSPORT_FACTS.json",
+      "reference_files": [],
+      "response_sha256": "76ba1bbf3a96cf82287f3587b3b70f97d94f13729484a761d7f89591f5316a07"
+    },
+    "response_sha256": "76ba1bbf3a96cf82287f3587b3b70f97d94f13729484a761d7f89591f5316a07",
+    "staged_at": "2026-09-05T22:50:09Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-05T22:51:07Z",
+    "sent_at": "2026-09-05T22:51:07Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9c987d-b39c-83e8-a3f6-a9e4b6dff6db",
+    "user_message_id": "b86b7444-bf83-4f0a-ad7e-b7e25c120d84",
+    "assistant_message_id": "c178b56b-8f84-453e-aa0e-2df3726974cb"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed.",
+    "Current response captured from the sole assistant response using its Copy response control and CUA clipboard.",
+    "Parent receipt must be sent without model or thinking overrides."
+  ],
+  "updated_at": "2026-09-05T22:51:24Z"
+}
