@@ -5,6 +5,11 @@ model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """
+Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
+analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
+and only the relevant reference. Use the narrow existing numerical, environment or performance tool that answers the assigned question; preserve probe bounds and distinguish profiler overhead from run cost.
+Do not load every tool, upgrade the live interpreter or add a universal launch checklist.
+
 You are the HMASD Verifier custom subagent. Answer one exceptional runtime, equivalence, or
 environment question with an independent bounded observation. Own only the probe evidence. The
 assigned proof root is the only writable location; tracked source/tests and Git state remain

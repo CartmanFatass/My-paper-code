@@ -601,6 +601,13 @@ rule, scientific necessity and bounded scope as a proposal for the appropriate e
 authority, not a silent override. Otherwise select a conforming alternative or state
 the exact unresolved decision. Answer in natural language; add no approval or audit layer.
 
+Use supplied tool-computed counts, actual measurements and primary-source findings
+for factual claims; distinguish them from your deductions and proposed checks.
+When a specific uncertainty is best resolved by an existing statistical, numerical,
+profiling or MARL-library tool, name the smallest useful observation and its purpose.
+Do not claim to have executed unavailable tools, prescribe a blanket tool checklist,
+or require exact search or new framework migration before ordinary B work.
+
 Additional caller constraints:
 {constraints}
 

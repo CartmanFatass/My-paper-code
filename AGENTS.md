@@ -25,6 +25,21 @@ evidence. The evidence standard is `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_
 §11 controls every B and C-BENCH object and prevails over any direction document that asks for
 more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
 
+## Scientific tool use (OWNER_DIRECT, 2026-09-05)
+
+The owner approved adoption batches 1 and 2 from
+`docs/project/SCIENTIFIC_TOOL_ADOPTION_REVIEW_20260905.md`. Root, DM/EM, CM and
+specialists use `.agents/skills/hmasd-scientific-tools/SKILL.md` when retrieving
+literature, calculating exposure/cost, analyzing results, resolving a concrete
+performance question or integrating a baseline/environment. Prefer executable facts
+and existing libraries over repeated prose derivation; read only relevant resources.
+A bounded use of existing profiling/benchmark tools inside the named CM assignment
+is permitted, with its purpose, invocation bound and overhead recorded; this does not
+authorize a standing profiler, mandatory profiling step, changed scientific semantics
+or additional experiment budget. Tool results inform existing intake, not another
+approval system. Optional baseline/analysis packages use task-isolated environments;
+no global dependency upgrade or third-batch framework migration follows.
+
 ## 2. Decision ladder
 
 Evidence-spec §11.8 controls default scientific burdens and ordinary research engineering

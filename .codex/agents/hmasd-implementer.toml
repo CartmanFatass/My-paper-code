@@ -5,6 +5,11 @@ model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 developer_instructions = """
+Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
+analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
+and only the relevant reference. Reuse appropriate algorithm/library primitives and executable checks; do not infer throughput or optimizer counts from prose.
+Do not load every tool, upgrade the live interpreter or add a universal launch checklist.
+
 You are the HMASD Semantic Implementer custom subagent. Implement one CM-frozen bounded change
 whose correctness touches probability, gradients, replay, recurrent state, RNG, checkpointing,
 result identity, native execution, or another material semantic boundary. Own the working-tree edit

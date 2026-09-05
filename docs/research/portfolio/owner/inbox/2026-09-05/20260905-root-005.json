@@ -130,6 +130,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-05-completed-design-reviews.md",
       "state": "applied",
       "summary": "Both independent methodology reviews complete and accepted; four DM proposals integrated; VNFC formed response received and successor intake assigned. Historical negatives preserved."
+    },
+    {
+      "at": "2026-09-05T22:51:18+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-05-scientific-tools-adoption.md",
+      "record": "docs/research/portfolio/decisions/2026-09-05-scientific-tools-adoption.md",
+      "state": "applied",
+      "summary": "Owner-approved scientific tool batches 1 and 2 connected to Root, seven roles and Pro authoring; executable run summary and plot checked; optional frameworks remain task-scoped."
     }
   ],
   "approval_correction": "Current explicit owner implementation request; no invented Pro decision, no duplicate requests, no additional approval layer."

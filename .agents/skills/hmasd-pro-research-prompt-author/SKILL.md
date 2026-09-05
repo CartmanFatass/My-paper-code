@@ -31,6 +31,12 @@ If the requested decision cannot be
 made from the listed evidence, Pro must report the exact evidence gap; a blocked
 response is not a decision and must not transfer authority to the local caller.
 
+For quantitative or literature-supported proposals, apply the relevant mode of
+`../hmasd-scientific-tools/SKILL.md`. Include compact computed tables, measured timings
+and primary-source findings already relevant to the decision. Pro must distinguish
+those observations from proposed/unexecuted checks; do not require every packet to
+run tools or resend accepted packets merely to add this guidance.
+
 ## Caller contract
 
 Require an input object with:
