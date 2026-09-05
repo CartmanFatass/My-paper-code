@@ -134,3 +134,20 @@ the declared remote node/exact source and actual-node resource admission.
 No runtime work is claimed at this document freeze. CM must return the whole
 bounded source/technical result or exact dependency/budget gap; a passing test
 does not choose scientific polarity.
+
+
+### Actual CM continuation handoff
+
+After card/archive commit923be288e was pushed, native followup_task accepted
+the bounded assignment to the existing CM
+/root/dm_amx_cbsc_approved/cm_am_cbsc_approved_repair.
+Its current scientific parent is /root/dm_amx_cbsc_post_repair; Root retains
+integration and shared surfaces. The task explicitly requests a new isolated
+CM worktree for this new object, preserving the ended repair worktree.
+
+This is an accepted CM preparation handoff, not evidence of implementation,
+test passage, resource admission or scientific launch. The assignment permits
+source/static review and routes any committed heavy check/formal source to
+Root integration and the configured remote node. Source and exact commands
+are the next CM return; actual accepted process handles go directly to the
+current shared tracker and this DM. There is no duplicate Pro request.
