@@ -4,8 +4,8 @@ status = "active"
 
 # Project-owned reusable Transport task. Handoffs reuse this task but retain
 # request-specific source_thread_id, parent_thread_id, receipt, tab, and heartbeat state.
-thread_id = "01a06c45-e279-7813-822f-9ea90cb14a72"
-task_title = "transport_lxh_project_singleton"
+thread_id = "01a06f0e-5eab-7431-8491-e7c2c62705b6"
+task_title = "transport_lxh_project_singleton_6pro"
 project_id = "177ab8d8-53ae-448c-9a9e-aaa2fecd2498"
 environment = "local"
 model = "gpt-5.6-luna"
@@ -18,3 +18,11 @@ model = "GPT-6 Astra"
 mode = "Pro"
 label = "6 Pro"
 selector_hint = "Latest"
+
+# Owner-directed cutover: old provider IDs are history only.
+[conversation_policy]
+mode = "fresh_after_owner_cutover"
+cutover_at = "2026-09-05T00:56:02Z"
+owner_instruction = "然后不要再使用旧的conversation id 这些没有兼容到6 pro"
+retired_ids_record = "docs/research/portfolio/decisions/2026-09-04-retired-provider-conversations.json"
+decision_record = "docs/research/portfolio/decisions/2026-09-04-new-transport-fresh-6pro-conversations.md"
