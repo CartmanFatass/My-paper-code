@@ -1,4 +1,4 @@
-# VSP-03 within K1: prospective host and reference selection
+# VSP-03 within K1: prospective exploration and host selection
 
 This is a source-based design brief for the direction's Innovator decision, not a new science
 card, experimental result, learner selection, or change to an existing object.
@@ -15,15 +15,23 @@ it does not make different source questions or evidence interchangeable.
 
 Select at most one cheapest useful next object for event-aware completion/continuation on a
 persistent-target semi-Markov host, or select no object and name the missing decision-relevant
-fact. Determine whether the next useful step is a no-learner host/reference definition or a
-bounded real-learner B comparison. This is a prospective scientific design decision at the
+fact. Prefer a bounded real-learner B comparison, including the minimum host implementation it
+actually needs. This is a prospective scientific design decision at the
 VSP-03 Innovator node, not an attempt to overturn the complete FSD Convergence decision.
 
-The present recommendation is a tightly bounded host/reference definition before committing to
-implementation or training. Its purpose is to identify an actual task consequence and a competent
-same-information null, not to make an exact oracle or positive headroom a prerequisite for B.
-Pro may instead select a meaningful B object directly if it can specify the missing actual path,
-or decline a new object if the only available comparison repeats completed evidence.
+The revised recommendation is to select one small direct B comparison on a minimally specified,
+executable native-return host, with a credible competent same-information comparator. An explicit
+executable environment law, legal observation/action path and return computation are needed to know what
+the experiment does; an exact upper, exhaustive census, fully tuned baseline sweep or checkpoint
+reconstruction is not. The minimal host can be built as part of the B implementation. A separate
+no-learner object is warranted only for a named concrete missing fact that prevents defining or
+executing that comparison and can change the decision. It is not the default first rung.
+
+This revision implements the owner's exploration-versus-paper-claim clarification conveyed by
+Root on 2026-09-05 before any dispatch. The earlier recommendation overemphasized a separate
+host/reference stage despite saying that exact references were not gates. Its unsent packet is
+preserved under `pro_packets/20260905_k1_host_innovator/unsent_initial/`. No sent request,
+observed result or prior Pro decision is rewritten.
 
 ## Accepted VSP-03 evidence
 
@@ -98,14 +106,15 @@ that final boundary.
 
 | Option | Smallest proposed action | What could change the decision | Main objection |
 | --- | --- | --- | --- |
-| Reuse unchanged corridor as a named control exercise | Define one-hit/dwell/debounce/hysteresis in its actual public-action interface | Useful only if a distinct native-action or learning-path uncertainty is identified beyond E4 | A renamed reference census or a weaker null would add no independent discriminator. |
-| Define a minimal persistent-target host/reference | Specify a finite task, event/observation law, completion versus continuation consequences, same-information reference and generic control; no learner yet | Determine whether the event latch changes a competent native action under independently motivated task costs, or is merely redundant timing/memory | The current source supplies no task/reward population. A reward chosen to favor the event-certified rule would make the comparison circular. |
-| Select a direct bounded B comparison | At most one small real environment/policy/learner/trainer/evaluator comparison with a containing same-information generic control | Compare finite-budget learning or control against ordinary event/history use | Host, generic learner, exposure and actual-node cost are currently unspecified; no ready-to-run claim is justified. |
+| Select a direct bounded B comparison, preferred | Define one small task and implement its minimum environment/policy/learner/trainer/evaluator path with a competent same-information generic control | Observe finite-budget native-return learning, then check a valid positive signal using independent training seeds | The actual event/action/return path must be specified; no exact upper or full reference census is needed. |
+| Resolve a specific host fact first, only if necessary | Name the concrete missing event, action consumer, task cost or executable dependency and the smallest inspection/implementation that resolves it | The result must change whether or how the direct B comparison can run | A separate abstract host/reference programme would delay B without adding a needed observation. |
+| Reuse unchanged corridor as a named control exercise | Define only the extra event-rule control needed by a distinct native-action or learning-path question | Useful only if it adds information beyond E4 and respects the parked FSD-family boundary | A renamed reference census or a weaker null would add no independent discriminator. |
 | Select no next object | Retain the event rules as named assets and state the concrete re-entry fact | New source/task evidence may later make a distinct control meaningful | Missing assets are not negative algorithm evidence and do not by themselves change Portfolio lifecycle. |
 
-The preferred second option is a design recommendation, not a frozen selection. A useful answer
-must choose at most one next object and not attach an automatic sequence of constructions,
-reference sweeps and learner runs.
+The preferred first option is a design recommendation, not a frozen selection. A useful answer
+chooses one current comparison, rather than a prerequisite chain of host studies, exact
+references and reconstruction audits. Independent-seed follow-up within a selected B family is
+ordinary exploration, not a new mechanism family or an automatic paper claim.
 
 ## Meaning a selected host must make explicit
 
@@ -122,9 +131,12 @@ discount by actual elapsed primitive time and account for its segment/update exp
 hold must not manufacture an advantage by hiding censored failures or changing the number of
 paid opportunities.
 
-One-hit, dwell, debounce and hysteresis are named simple controls; they do not replace a
-competent generic history controller. Give the latter every legal event, age, identity and
-history field given to the treatment, with fair state and tuning exposure. A current-only arm
+One-hit, dwell, debounce and hysteresis are available named simple controls, not a mandatory
+full arm grid. Select the smallest set that changes the actual question; do not substitute them
+for the strongest competent generic history controller. Give that comparator every legal event,
+age, identity and history field given to the treatment, with reasonable matched learning and
+selection exposure. A full tuning sweep or oracle-retuned comparator is not a B prerequisite.
+A current-only arm
 can answer information value but cannot establish same-information efficiency. An exact
 same-information finite reference is useful if cheap; a privileged oracle is labelled, and
 neither is a tuned generic learner result. Exact optimality is not a launch requirement for B.
@@ -133,6 +145,29 @@ Ask whether observed event-conditioned action differences would affect native re
 delay cost, rate matching, event frequency, ordinary memory, public greedy, censoring or reward
 construction. Do not pay reward for agreement with the proposed certifier. A numerical gap,
 predictive latch or Boolean divergence alone is insufficient to claim learning value.
+
+## How a positive exploratory result should be followed
+
+A single valid, scientifically interpretable positive B observation is an exploratory signal,
+not evidence of stable superiority. The default next step is independent training-seed
+replication of the same comparison at the same declared meaning and budget, retaining the first
+run and every new positive, null or adverse run. Typically two additional training seeds can
+bring a first exploratory comparison to three; the actual next card records its budget and
+cost. New evaluation seeds or replaying the same trained checkpoint do not substitute for
+independent training starts. Not every seed must be positive.
+
+This follow-up does not wait for exact upper computation, full trajectory/state reconstruction,
+bit identity, an exhaustive explanatory census or a new Pro round merely to repeat the same B
+comparison. If an actual integrity defect makes the result uninterpretable, resolve that named
+defect before interpreting it; reproducibility and instrumentation failures are not waived.
+Preserve source/configuration/commands, randomness, counts and outputs sufficient to inspect the
+real comparison. A targeted check addressing a real defect is different from routinely imposing
+a forensic reconstruction programme on every promising B signal.
+
+Paper-level validation is a later and explicitly higher claim: fair development/final-evaluation
+separation, adequate training-seed uncertainty, comparator tuning and any promised transfer or
+formal properties follow that claim's class. Exploratory replication can reveal instability
+without invalidating the original positive observation, and does not by itself promote to C.
 
 ## Exposure, cost and stopping boundary
 
@@ -147,8 +182,8 @@ process wall was 2.35 seconds in total and 3.09 seconds with calibration; E3 val
 to 66,087.00043219907 seconds. Those windows exclude agent and transport work and do not price a
 new host, counterfactual or learner. E4's DP formula and E3's learner formula are not interchangeable.
 
-The requested next design is capped at one finite question, no platform and no automatic
-successor. Pro should state an honest work-count/cost-law plan and a complete-invocation cap if
+The requested next design is capped at one finite question and no platform. Pro should state
+an honest work-count/cost-law plan and a complete-invocation cap if
 it selects a result-bearing A/B; missing new seconds remain unmeasured. Root/DM will record the
 selected card and CM will implement and measure its actual path. New portable execution is
 remote-first and detached at committed/pushed bytes with fresh actual-node memory admission.
