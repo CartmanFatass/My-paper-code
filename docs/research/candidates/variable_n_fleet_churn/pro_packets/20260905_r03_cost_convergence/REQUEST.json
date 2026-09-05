@@ -74,7 +74,7 @@
     },
     {
       "path": "experiments/candidates/variable_n_fleet_churn_causal_headroom/native/calibration.cpp",
-      "purpose": "完整nativeBCRH计时单位、checker与synthetic零面板承诺。",
+      "purpose": "完整nativeBCRH计时单位、checker与synthetic零面板承诺。 完整native校准串行loop、六个BCRH及native ticks，未实施parallel。",
       "provenance": "只读固定提交a35e689d0a8166eda10c304254badd780d74599b；历史指令是证据，当前问题只按最新科学边界，未执行源或重算结果。"
     },
     {
@@ -100,11 +100,6 @@
     {
       "path": "experiments/candidates/variable_n_fleet_churn_causal_headroom/native_backend.py",
       "purpose": "实际-O2/no-fast-math C++构建与单次ctypes coarse batch调用。",
-      "provenance": "当前固定源码/静态工程观察，无新计时或科学结果。"
-    },
-    {
-      "path": "experiments/candidates/variable_n_fleet_churn_causal_headroom/native/calibration.cpp",
-      "purpose": "完整native校准串行loop、六个BCRH及native ticks，未实施parallel。",
       "provenance": "当前固定源码/静态工程观察，无新计时或科学结果。"
     },
     {
