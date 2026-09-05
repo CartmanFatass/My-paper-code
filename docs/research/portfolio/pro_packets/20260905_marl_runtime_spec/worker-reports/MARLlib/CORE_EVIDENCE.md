@@ -5,11 +5,11 @@
 - 固定 commit：`80e9973a430271a93c781d7422133acb1198f84b`
 - 上游身份：[MARLlib 固定 commit（GitHub 官方页面）](https://github.com/Replicable-MARL/MARLlib/commit/80e9973a430271a93c781d7422133acb1198f84b)
 - 报告性质：只读源码取证；没有安装依赖、运行训练、启动 Ray、运行补丁链接或测量吞吐/内存/序列化。
-- 许可证：仓库 `LICENSE` 与 `setup.py#L18-L31` 声明 MIT。这里只保留必要短片段和行号，未大段复制代码。
+- 许可证：仓库 `LICENSE` 与 [`setup.py#L18-L31`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/setup.py#L18-L31) 声明 MIT。这里只保留必要短片段和行号，未大段复制代码。
 
 ## 1. 证据边界与标签
 
-本次固定树的 Git 工作树在查证时为 clean，库内原来没有任何上游 `AGENTS.md`。新增的 `AGENTS.md` 只是本地导航 overlay，完整文本备份在 `C:/Projects/ref-lib/reports/MARLlib/agents-overlays/`。一次早期相对路径误写曾落到共享 HMASD 工作区，Root 已在报告前精确恢复 tracked 文件并隔离误写文件；这不改变本库固定 commit 或下文源码行号。
+本次新增 overlay 前固定树的 Git 工作树为 clean，库内原来没有任何上游 `AGENTS.md`。新增的 `AGENTS.md` 只是本地导航 overlay，完整文本备份在 `C:/Projects/ref-lib/reports/MARLlib/agents-overlays/`。一次早期相对路径误写曾落到共享 HMASD 工作区，Root 已在报告前精确恢复 tracked 文件并隔离误写文件；这不改变本库固定 commit 或下文源码行号。
 
 证据标签如下：
 
@@ -39,14 +39,17 @@
 | [`base_env/mamujoco.py#L93-L153`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/envs/base_env/mamujoco.py#L93-L153) | 每个 agent 返回 `obs` + 同一 `state`；step 先按 key 排序动作，再 `np.array`、normalize，随后为每个 agent 写 reward/obs，返回 `__all__`。 | 排序、数组重建、归一化和 state 复制是本地可见的 CPU/内存工作（O）；其比例和跨进程代价未测（U）。 |
 | [`global_reward_env/mpe_fcoop.py#L35-L48`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/envs/global_reward_env/mpe_fcoop.py#L35-L48) | 合作 wrapper 汇总所有 `r[key]`，再把 `reward/self.num_agents` 发给每个活动 agent。 | reward 聚合和复制是 O；它没有提供通信/采样性能证据，不能把 cooperative reward 逻辑解释成共享 policy 或集中式 learner。 |
 
-`base_env/__init__.py` 和 `global_reward_env/__init__.py` 用 try/except 导入环境，把缺少依赖保存为字符串错误（O；见各自 `#L23-L39` 附近）。这说明“能否 import 某环境”受外部依赖影响，但本次没有安装或验证任何环境。
+`base_env/__init__.py` 和 `global_reward_env/__init__.py` 用 try/except 导入环境，把缺少依赖保存为字符串错误（O；见 [`base_env/__init__.py#L23-L39`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/envs/base_env/__init__.py#L23-L39) 与 [`global_reward_env/__init__.py#L23-L39`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/envs/global_reward_env/__init__.py#L23-L39)）。这说明“能否 import 某环境”受外部依赖影响，但本次没有安装或验证任何环境。
+
+本地 preprocessor snapshot 在 [`patch/rllib/models/preprocessors.py#L231-L375`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/models/preprocessors.py#L231-L375) 递归处理 Tuple/Dict 空间，并对 Discrete/MultiDiscrete 做 flatten/one-hot；这是 D/O 的输入整形路径。它可能在 nested observation 进入模型前产生 flatten 和新数组（I），但因 patch 未执行、未安装 RLlib，不能声称运行时使用该 snapshot 或量化该成本。
 
 ## 3. policy mapping、shared policy 与联合 Q grouping
 
 IL 的 [`run_il.py#L70-L118`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L70-L118) 和 CC 的 [`run_cc.py#L95-L146`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_cc.py#L95-L146) 都实现 `all/group/individual`：
 
-- `agent_level_batch_update=True` 时共享名是 `default_policy`，否则是 `shared_policy`（`run_il.py#L77-L84`；CC 对应 `#L102-L110`）。
-- `all` 需要 `all_agents_one_policy`，mapping lambda 恒返回共享名；`group` 按 `team_prefix` 创建 policy，lambda 使用 agent ID 的前缀（IL `#L86-L103`）；`individual` 按 `agent_name_ls.index(agent_id)` 映射到每 agent policy（`#L105-L115`）。
+- `agent_level_batch_update=True` 时共享名是 `default_policy`，否则是 `shared_policy`（IL [`run_il.py#L77-L84`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L77-L84)；CC [`run_cc.py#L102-L110`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_cc.py#L102-L110)）。
+- `all` 需要 `all_agents_one_policy`，mapping lambda 恒返回共享名；`group` 按 `team_prefix` 创建 policy，lambda 使用 agent ID 的前缀（IL [`#L86-L103`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L86-L103)）；`individual` 按 `agent_name_ls.index(agent_id)` 映射到每 agent policy（[`#L105-L115`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L105-L115)）。
+- IL 的 single-group 分支在 [`run_il.py#L93-L95`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L93-L95) 硬编码返回 `shared_policy`，而 `all` 分支使用上面的 `shared_policy_name`；CC single-group 分支使用 `shared_policy_name`。这个固定代码差异可能影响 `agent_level_batch_update` 下的 policy 名称/批处理，属于 O 的工程观察，是否触发运行错误或性能变化未测。
 - run config 将 policies、mapping fn、`num_workers`、`num_gpus`、`num_gpus_per_worker`、framework 和 `simple_optimizer=False` 交给 Tune/RLlib（IL [`#L124-L136`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L124-L136)；CC [`#L165-L178`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_cc.py#L165-L178)）。
 - HAPPO/HATRPO 会在 CC runner 中强制 individual mapping（[`run_cc.py#L148-L159`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_cc.py#L148-L159)），这是 O。
 - 对 qmix/vdn/iql，VD runner 不构造 policies/mapping，而是把全部 agent 通过 `with_agent_groups` 成为一个 `group_all_` 联合环境；joint Q 不支持 individual，代码见 [`run_vd.py#L89-L132`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_vd.py#L89-L132)。这改变了后续 batch 的形状和 learner 边界，不能与普通 shared policy batch 直接作速度比较。
@@ -59,7 +62,7 @@ O 只证明 mapping 函数、policy 集合和 config 字段被构造。mapping �
 
 `SampleBatch(own agent)` + `other_agent_batches` → 对齐/堆叠 state、opponent actions → central value → RLlib-style advantage。
 
-`other_agent_batches.values()` 的前 `n_agents-1` 个元素在 `#L78-L80` 被当作 opponents，随后又按 key 查找（`#L93-L100`）。这是固定代码的顺序假设；是否由 RLlib 保证 key 顺序、不同 agent episode 长度如何产生这些批次，本次未验证（O + U limitation）。
+`other_agent_batches.values()` 的前 `n_agents-1` 个元素在 [`#L78-L80`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/utils/centralized_critic.py#L78-L80) 被当作 opponents，随后又按 key 查找（[`#L93-L100`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/utils/centralized_critic.py#L93-L100)）。这是固定代码的顺序假设；是否由 RLlib 保证 key 顺序、不同 agent episode 长度如何产生这些批次，本次未验证（O + U limitation）。
 
 Q mixing 的 [`mixing_Q.py#L48-L58`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/utils/mixing_Q.py#L48-L58) 发现长度不等时截断较长 batch，或重复较短 batch 的末尾切片补齐。`before_learn_on_batch` 在 [`#L146-L226`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/utils/mixing_Q.py#L146-L226) 对每 policy `copy.deepcopy`、padding、计算 Q/target Q，再 `np.stack`；`#L228-L260` 为每 policy 构造并写入 `opponent_q` 和 `next_opponent_q`。因此 O 可见的 CPU/内存机制包括：
 
@@ -78,11 +81,13 @@ MARLlib 的本地 patch 文件说明了它想接入哪一代 RLlib 逻辑，但�
 
 本地 Torch policy snapshot 的 device 选择见 [`torch_policy.py#L153-L220`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/policy/torch_policy.py#L153-L220)：worker 0 使用 `num_gpus`，远程 worker 使用 `num_gpus_per_worker`；CPU/fake GPU 会保存一个或多个 model tower，真实 GPU 会 deep-copy model 到各 device。加载 batch 时 CPU shortcut 直接 padding 并保存一个 batch；多 device 路径先按设备 timeslice、每片 padding、再搬到设备（[`#L540-L591`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/policy/torch_policy.py#L540-L591)）。学习时 shared policy 有单独的 batch slicing，多个 tower 先同步权重，再平均梯度（[`#L600-L685`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/policy/torch_policy.py#L600-L685)）。多设备梯度路径用线程，分布式 world size 时还可 `all_reduce`（[`#L983-L1100`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/policy/torch_policy.py#L983-L1100)）。
 
+shared policy 的 multi-device slicing 分支在 [`torch_policy.py#L642-L655`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/policy/torch_policy.py#L642-L655) 使用 `b[:offset]`，非 shared 分支使用 `b[offset:offset+device_batch_size]`；这是 O 的固定差异，是否为预期语义或造成样本/性能变化未测。
+
 性能含义是 I/U：padding waste、timeslice copy、model deep-copy、device transfer、tower weight copy、thread/allreduce latency 都是潜在成本；本次没有 Ray/torch runtime，无法确认这些 snapshot 是否与安装版本一致，也没有任何序列长度分布或 GPU 测量。patch 的激活边界由 [`marllib/patch/add_patch.py#L32-L83`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/add_patch.py#L32-L83) 与 [`#L95-L106`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/add_patch.py#L95-L106) 明确：脚本会把本地 replay/preprocessor/RNN/Torch policy 文件链接到已安装 Ray 路径。本次没有运行脚本，因此不能声称当前 Ray 使用了这些补丁。
 
 ## 6. learner、execution plan 与 replay buffer
 
-IL/CC 使用旧版 RLlib Policy/Trainer 扩展。`core/IL/ppo.py#L23-L45` 从 RLlib PPO policy/trainer 派生 IPPO；`core/CC/mappo.py#L40-L92` 将 central critic postprocess/loss 与 `ppo_surrogate_loss` 组合，再用 `PPOTrainer.with_updates` 构造 MAPPO trainer。这里可观察到的 learner 入口是 Policy loss/Trainer（O），不是一个本地新式 Learner API；RLlib 实际训练循环仍是 D/U。
+IL/CC 使用旧版 RLlib Policy/Trainer 扩展。[`core/IL/ppo.py#L23-L45`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/core/IL/ppo.py#L23-L45) 从 RLlib PPO policy/trainer 派生 IPPO；[`core/CC/mappo.py#L40-L92`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/core/CC/mappo.py#L40-L92) 将 central critic postprocess/loss 与 `ppo_surrogate_loss` 组合，再用 `PPOTrainer.with_updates` 构造 MAPPO trainer。这里可观察到的 learner 入口是 Policy loss/Trainer（O），不是一个本地新式 Learner API；RLlib 实际训练循环仍是 D/U。
 
 联合 Q 路径的 [`core/VD/iql_vdn_qmix.py#L49-L168`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/core/VD/iql_vdn_qmix.py#L49-L168) 明确计算 `[B,T,n_agents]` 形状、可用动作 mask、Double Q 选项、mixer target 和 masked L2 loss；`learn_on_batch` 在 [`#L321-L423`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/core/VD/iql_vdn_qmix.py#L321-L423) 解包 grouped observation、构造 sequence mask、按 agent 组织数据、可选 reward standardize、反传并更新 optimizer；`JointQTrainer` 在 [`#L534-L539`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/core/VD/iql_vdn_qmix.py#L534-L539) 绑定旧版 `GenericOffPolicyTrainer` 与自定义 execution plan。
 
@@ -96,11 +101,11 @@ execution plan [`episode_execution_plan.py#L35-L82`](https://github.com/Replicab
 
 patched `LocalReplayBuffer` 文档称 Ray actor 单线程并可用多个 replay actor 扩展（[`replay_buffer.py#L386-L391`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/execution/replay_buffer.py#L386-L391)）。构造时将 `learning_starts`/capacity 除以 shard 数，并在 sequence length > 1 时把 replay batch 转成 sequence 数（`#L448-L465`）；按 policy 创建 `PrioritizedReplayBuffer`（`#L476-L480`）。`add_batch` 先 `batch.copy()` 以避免 pin plasma memory，再在 lockstep 或 independent 模式按 timestep/带 burn-in 的 sequence 切片（[`#L502-L538`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/execution/replay_buffer.py#L502-L538)）；replay 在 independent 模式对每个 policy 分别 sample 并返回 `MultiAgentBatch`（`#L540-L561`）。容量告警使用 item size 与 `psutil.virtual_memory().total`，超过总内存则 raise、超过 20% 则 warning（[`#L54-L70`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/execution/replay_buffer.py#L54-L70)）。
 
-这里能形成的性能判断仍为 I：batch copy、sequence padding、per-policy sampling、priority updates 和 actor/object-store 交互会产生额外 CPU/内存/传输成本；没有实际 replay size、RSS、Ray object store 或 wall-time 观测。`ReplayActor = ray.remote(num_cpus=0)(LocalReplayBuffer)`（`#L597`）是 O/D 的 actor 声明，不能单独证明实际跨进程部署、并发度或序列化耗时。
+这里能形成的性能判断仍为 I：batch copy、sequence padding、per-policy sampling、priority updates 和 actor/object-store 交互会产生额外 CPU/内存/传输成本；没有实际 replay size、RSS、Ray object store 或 wall-time 观测。`ReplayActor = ray.remote(num_cpus=0)(LocalReplayBuffer)`（[`#L597`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/patch/rllib/execution/replay_buffer.py#L597)）是 O/D 的 actor 声明，不能单独证明实际跨进程部署、并发度或序列化耗时。
 
 ## 7. 资源配置与跨进程成本
 
-默认 Ray 配置 [`marllib/marl/ray/ray.yaml#L23-L40`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/ray/ray.yaml#L23-L40) 为 `local_mode: True`、`num_workers: 1`、`num_gpus: 1`、每 worker CPU 1、每 worker GPU 0，并使用 Torch；这只是默认 YAML。IL runner 在 [`run_il.py#L36-L47`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L36-L47) 调 `ray.init(local_mode=..., num_gpus=...)`；CC/VD 有同样入口。worker 数和 worker 资源随后进入 Tune config，而不是由这行 `ray.init` 独立证明。
+默认 Ray 配置 [`marllib/marl/ray/ray.yaml#L23-L40`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/ray/ray.yaml#L23-L40) 为 `local_mode: True`、`num_workers: 1`、`num_gpus: 1`、每 worker CPU 1、每 worker GPU 0，并使用 Torch；这只是默认 YAML。IL runner 在 [`run_il.py#L36-L47`](https://github.com/Replicable-MARL/MARLlib/blob/80e9973a430271a93c781d7422133acb1198f84b/marllib/marl/algos/run_il.py#L36-L47) 调 `ray.init(local_mode=..., num_gpus=...)`；CC/VD 有同样入口。runner 的 `run_config` 明确带 `num_workers`、`num_gpus`、`num_gpus_per_worker`，但 IL/CC/VD 对应字典行段没有显式带 `num_cpus_per_worker`；YAML 字段最终是否由更上层 merge 保留，尚未在运行时核验。worker 数和 worker 资源随后进入 Tune config，而不是由这行 `ray.init` 独立证明。
 
 资源机制的可观察部分：
 

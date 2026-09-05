@@ -12,9 +12,8 @@ RNN 路径设置 `max_seq_len=episode_limit`。仓库内的 patch snapshot 会�
 
 learner 是旧版 Policy/Trainer 组合：IL/CC 包装 PPO/A2C policy/loss；Joint Q 自己实现 `[B,T,n_agents]` loss、动作 mask、mixer、optimizer 和 `learn_on_batch`。其 execution plan 是 bulk-sync rollouts → store replay → replay → `before_learn_on_batch` → TrainOneStep → target update，并以 1:1 round-robin 交替。Episode replay 保存完整 episode；patched LocalReplayBuffer 先复制 batch，按 policy 与 sequence/burn-in 切片，返回 MultiAgentBatch，并声明 Ray actor。copy、padding、每 policy sampling、priority update 和 actor/object-store 交互都是潜在成本，实际 replay capacity、RSS 和传输未测。
 
-默认资源配置是 `local_mode=True`、1 worker、driver 1 GPU、每 worker 1 CPU/0 GPU；runner 再把 worker/GPU 字段送入 Tune。local_mode、资源字段和 device 分支是 O；worker 是否独立进程、环境是否重建、SampleBatch 如何经对象存储、权重如何广播都是 RLlib/Ray D/U。依赖清单锁定 Ray/RLlib 1.8.0、Torch 1.9.0、Gym 0.20.0 等旧版本，兼容性没有在本机验证。
+默认资源配置是 `local_mode=True`、1 worker、driver 1 GPU、每 worker 1 CPU/0 GPU；runner 明确把 worker 数/GPU 字段送入 Tune，但没有在对应 `run_config` 字典中显式写 `num_cpus_per_worker`，是否由更上层 merge 保留未运行时核验。local_mode、资源字段和 device 分支是 O；worker 是否独立进程、环境是否重建、SampleBatch 如何经对象存储、权重如何广播都是 RLlib/Ray D/U。依赖清单锁定 Ray/RLlib 1.8.0、Torch 1.9.0、Gym 0.20.0 等旧版本，兼容性没有在本机验证。
 
-已新增 31 个真实关键目录的本地 `AGENTS.md` 导航，并将每个全文备份到 `reports/MARLlib/agents-overlays/`；索引是 `AGENTS_INDEX.json`。新增内容仅导航与报告，MARLlib 源文件未改。早期相对路径误写落到 HMASD 共享工作区，Root 已恢复原 tracked `AGENTS.md`/ `tests/AGENTS.md` 并隔离误写物；这项操作写入了报告局限，但没有删除证据或改历史。
+已新增 32 个真实关键目录的本地 `AGENTS.md` 导航，并将每个全文备份到 `reports/MARLlib/agents-overlays/`；索引是 `AGENTS_INDEX.json`。新增内容仅导航与报告，MARLlib 源文件未改。早期相对路径误写落到 HMASD 共享工作区，Root 已恢复原 tracked `AGENTS.md`/ `tests/AGENTS.md` 并隔离误写物；这项操作写入了报告局限，但没有删除证据或改历史。
 
 建议把本报告作为“工程集成机制与未测成本”输入：若要形成科学性能证据，另行锁定相同 commit、依赖、agent 数、episode limit、mapping、序列长度、worker/GPU、seed 和 budget，并按统一协议采集 step/batch wall time、peak RSS、序列化/object-store 指标。toy 超过 45 分钟或 UAV 超过 12 小时的工程查证不能放宽科学要求，也不能支持跨任务速度比较。MARLlib 以 MIT 授权发布，报告保留许可证信息且没有大片复制代码。
-
