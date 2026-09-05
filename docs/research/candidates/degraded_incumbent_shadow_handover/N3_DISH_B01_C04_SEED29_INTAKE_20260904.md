@@ -57,6 +57,29 @@ fully charged independently to every source arm, against the 1800-second cap. No
 source change, parameter tuning, new machinery or resume is selected. Tracker alone observes the
 accepted handle; CM collects and DM applies the unchanged full rule once all three are complete.
 
+### Accepted final-seed handoff — 2026-09-04 18:12:59 PDT
+
+CM launch record `4043aaba286ff258614f93cccd99946aae26b040` reports reconciliation of
+the task as not found, the output and receipt as absent, and the execution worktree clean at
+the unchanged source above. The single command above was accepted by `wsl_4070` as
+`dish_b01_c04_seed47_e0541d0c_a1`, tmux `agent_dish_b01_c04_seed47_e0541d0c_a1`,
+PID `1101576`, start epoch `1788570779` (2026-09-05 01:12:59 UTC).
+
+Fresh admission captured `2026-09-05T01:12:59.650750Z` and assessed
+`2026-09-05T01:12:59.651164Z`: physical and effective available memory each
+**13,040,766,976 bytes**, both above **4,294,967,296 bytes**, all pass flags true and no
+failure reason. This start receipt is not runtime telemetry. Cwd, output and separate receipt
+are the paths in the exact command above. Supervisor witnesses are under
+`/home/wu/.agent-tasks/dish_b01_c04_seed47_e0541d0c_a1/`, including `task.log`,
+`runner.sh`, `pid`, `start_time`, `status` and eventual `exit_code`.
+
+Tracker `/root/tracker_tl_experiments` ACKed direct coverage and alone observes the
+1474.544745605439-second projection / 1800-second declared cap, terminal state or observation
+loss. Responsible DM is `/root/dm_amx_n3_continue`; collector is
+`/root/dm_amx_n3_continue/cm_am_n3_dish_c04`. DM checked the pushed record and acknowledged
+the handoff. No completion, three-seed result or source-effect reading is asserted at this
+detached boundary. No extra seed or successor is selected.
+
 ## Owner review, interpretation and next discriminator
 
 Reviews returned `[]`; today's review only has an already-answered Portfolio agree, yesterday's
