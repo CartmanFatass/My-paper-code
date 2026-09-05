@@ -203,8 +203,22 @@ inline double normal(const HostState& s,const char* purpose,const char* field,in
 }
 inline double terrain(double x,double y){return 135.0*std::exp(-sq(x/75.0)-std::pow(y/220.0,4))+55.0*std::exp(-sq((x-90.0)/35.0)-sq((y+40.0)/85.0));}
 inline bool ray_blocked(const HostState& s,Vec3 a,Vec3 b,double clearance){for(int j=1;j<=127;++j){const double q=j/128.0,x=a.x+q*(b.x-a.x),y=a.y+q*(b.y-a.y),z=a.z+q*(b.z-a.z);if(z<=terrain(x,s.reflection*y)+clearance)return true;}return false;}
+#ifdef DISH_GROUND_ENDPOINT_A03
+inline bool ground_ray_blocked(const HostState& s,Vec3 a,Vec3 b,double clearance,bool from_ground){
+  for(int j=1;j<=127;++j){
+    const double u=j/128.0,q=from_ground?u:1.0-u;
+    const double x=a.x+u*(b.x-a.x),y=a.y+u*(b.y-a.y),z=a.z+u*(b.z-a.z);
+    if(z<=terrain(x,s.reflection*y)+clearance*q)return true;
+  }
+  return false;
+}
+#endif
 inline bool ray_prism(const HostState& s,Vec3 a,Vec3 b,double xmin,double xmax,double ymin,double ymax,double zmin,double zmax){for(int j=0;j<=128;++j){const double q=j/128.0,x=a.x+q*(b.x-a.x),y=s.reflection*(a.y+q*(b.y-a.y)),z=a.z+q*(b.z-a.z);if(x>=xmin&&x<=xmax&&y>=ymin&&y<=ymax&&z>=zmin&&z<=zmax)return true;}return false;}
+#ifdef DISH_GROUND_ENDPOINT_A03
+inline double radio_margin(const HostState& s,Vec3 a,Vec3 b,const char* hop,bool relay_mask){const double d=std::sqrt(sq(a.x-b.x)+sq(a.y-b.y)+sq(a.z-b.z));const bool ground=std::strcmp(hop,"G_TO_U0")==0||std::strcmp(hop,"G_TO_U1")==0;double blocked=(ground?ground_ray_blocked(s,a,b,8.0,true):ray_blocked(s,a,b,8.0))?1.0:0.0;if(relay_mask)blocked+=1.0;return 30.0-20.0*std::log10(std::max(d,1.0)/100.0)-35.0*blocked+normal(s,"RADIO","RADIO_EPSILON",s.tick,hop);}
+#else
 inline double radio_margin(const HostState& s,Vec3 a,Vec3 b,const char* hop,bool relay_mask){const double d=std::sqrt(sq(a.x-b.x)+sq(a.y-b.y)+sq(a.z-b.z));double blocked=ray_blocked(s,a,b,8.0)?1.0:0.0;if(relay_mask)blocked+=1.0;return 30.0-20.0*std::log10(std::max(d,1.0)/100.0)-35.0*blocked+normal(s,"RADIO","RADIO_EPSILON",s.tick,hop);}
+#endif
 
 struct PhysicsTick { double gx,gy,gvx,gvy; double camera_z[4]; std::int32_t camera_present[2]; double radio[6]; double source_noise[4]; double wind_eta[2]; };
 struct B01PreparedTick {
@@ -216,8 +230,16 @@ struct B01PreparedTick {
 struct B01RecurrentHandoff { double controller_hidden[512]; };
 
 inline PhysicsTick physics_tick(const HostState& s){
+#ifdef DISH_GROUND_ENDPOINT_A03
+  PhysicsTick p{};route(s,s.tick,p.gx,p.gy,p.gvx,p.gvy);const bool active=s.tick>=s.tau_d_tick&&s.tick<s.tau_d_tick+40;Vec3 g{p.gx,p.gy,terrain(p.gx,s.reflection*p.gy)+2.0},base{-600.0,0.0,20.0},u[2]{{s.p[0],s.p[1],90.0},{s.p[2],s.p[3],90.0}};
+#else
   PhysicsTick p{};route(s,s.tick,p.gx,p.gy,p.gvx,p.gvy);const bool active=s.tick>=s.tau_d_tick&&s.tick<s.tau_d_tick+40;Vec3 g{p.gx,p.gy,0.0},base{-600.0,0.0,20.0},u[2]{{s.p[0],s.p[1],90.0},{s.p[2],s.p[3],90.0}};
+#endif
+#ifdef DISH_GROUND_ENDPOINT_A03
+  for(int i=0;i<2;++i){bool clear=!ground_ray_blocked(s,u[i],g,5.0,false)&&std::sqrt(sq(u[i].x-g.x)+sq(u[i].y-g.y)+sq(u[i].z-g.z))<=500.0;if(s.mask_enabled&&s.package==0&&active&&i==s.initial_owner&&ray_prism(s,u[i],g,-20,30,-155,-85,0,120))clear=false;p.camera_present[i]=clear;if(clear){const char* fx=i==0?"CAMERA_U0_X":"CAMERA_U1_X";const char* fy=i==0?"CAMERA_U0_Y":"CAMERA_U1_Y";p.camera_z[2*i]=p.gx+2.0*normal(s,"CAMERA",fx,s.tick);p.camera_z[2*i+1]=p.gy+2.0*s.reflection*normal(s,"CAMERA",fy,s.tick);}}
+#else
   for(int i=0;i<2;++i){bool clear=!ray_blocked(s,u[i],g,5.0)&&std::sqrt(sq(u[i].x-g.x)+sq(u[i].y-g.y)+8100.0)<=500.0;if(s.mask_enabled&&s.package==0&&active&&i==s.initial_owner&&ray_prism(s,u[i],g,-20,30,-155,-85,0,120))clear=false;p.camera_present[i]=clear;if(clear){const char* fx=i==0?"CAMERA_U0_X":"CAMERA_U1_X";const char* fy=i==0?"CAMERA_U0_Y":"CAMERA_U1_Y";p.camera_z[2*i]=p.gx+2.0*normal(s,"CAMERA",fx,s.tick);p.camera_z[2*i+1]=p.gy+2.0*s.reflection*normal(s,"CAMERA",fy,s.tick);}}
+#endif
   p.radio[0]=radio_margin(s,g,u[0],"G_TO_U0",false);p.radio[1]=radio_margin(s,g,u[1],"G_TO_U1",false);
   p.radio[2]=radio_margin(s,u[0],base,"U0_TO_BASE",s.mask_enabled&&s.package==1&&active&&s.initial_owner==0&&ray_prism(s,u[0],base,-30,45,-80,80,0,130));
   p.radio[3]=radio_margin(s,u[1],base,"U1_TO_BASE",s.mask_enabled&&s.package==1&&active&&s.initial_owner==1&&ray_prism(s,u[1],base,-30,45,-80,80,0,130));
