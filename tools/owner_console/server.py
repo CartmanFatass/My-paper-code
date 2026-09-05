@@ -620,7 +620,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._json({"ok": res.get("ok", False), "path": rel, "git": res})
             elif self.path == "/api/push":
                 with LOCK:
-                    r = git(self.root, "push")
+                    r = git(self.root, "-c", "push.default=upstream", "push")
                 self._json({"ok": r.returncode == 0, "out": (r.stdout + r.stderr)[-2000:]})
             else:
                 self._json({"error": "not found"}, 404)
