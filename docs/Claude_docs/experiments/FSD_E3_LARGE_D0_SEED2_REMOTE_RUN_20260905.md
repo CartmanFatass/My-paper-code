@@ -1,4 +1,4 @@
-# FSD E3 large D0 seed2 — remote attempt01
+# FSD E3 large D0 seed2 â€” remote attempt01
 
 **Accepted once,running;terminal acceptance pending.** Only large_d0_seed2 is assigned.
 DM accepted14/18 valid cells,zero running,four never launched before this invocation.
@@ -75,3 +75,75 @@ Tracker is sole observer;CM idles until existing-task terminal collection dispat
 ssh hmasd-wsl-node '/usr/local/bin/agent-task status fsd_e3_large_d0_seed2_20260905_01'
 ssh hmasd-wsl-node '/usr/local/bin/agent-task logs fsd_e3_large_d0_seed2_20260905_01 30'
 ```
+
+
+## Terminal technical acceptance
+
+**Technically accept original large_d0_seed2 as complete.** Tracker woke CM;DM confirmed same-task
+collection. No new learner,admission,evaluation,replay,test,repair,source change or successor.
+Remote checkout clean at ac4db77371659c25d4ac39e1a20990fe098bc42d.
+Direct status finished/exit0/wrapper1656091/tmuxinactive. Log terminal2026-09-05T10:56:19Z,
+actual duration **2784s**;statusuptime2851s is time-since-start,not runtime.
+Runner wall **2603.2776923269994s**,mean rollout86.39206789325108s;below1.68hprojection/8hcap.
+
+JSON/NumPy and CPU Torch checkpoint reads verified the following without running a learner:
+
+| Contract | Direct observation |
+| --- | --- |
+| Completion |20requested/completed,completedtrue,timing_onlyfalse,instabilitynull,no quarantine|
+| Interaction |20x6400=128000 transitions;20x16=320episodes;1280 coordinatorrows each rollout|
+| Updates |3000coordinator,72000actor,72000critic,300team,1200individual;positive each rollout,sumsagree|
+| Records |20ordered IDs1–20 each metrics/path/interruptions/gaps;400steps/16lanes/6agents;both regions19200 agentsteps per rollout|
+| Evaluation |(5,512),(10,512),(15,512),(20,2048),3584total;ordered IDs0..n-1,master770003,deterministic,chunk512|
+| Arithmetic |eval means/sampleSE match per-episode inputs within1e-15;JSONL equals summary evaluations/return inputs|
+| Configuration |large(.02,.20),Delta1,N6/K2/Z4/H400,rho0,no probe/coupling,seed2,k5,infinite costs/bothcaps5,ageoff,CPU4|
+| Publication |E3/exactSHA,nonreduced eval,reference/cumulative/finalpath/exposure fields present;lastpath equals finalregionalpath|
+| Numerics |recorded learner losses and train/evalreturns finite;exposure positivefinite;all checkpoint nested tensors finite|
+| Resources |resources_unmeasured,peakRSSnull,peak scratchunmeasured;payload67845846bytes|
+
+Raw mean **0.5648811848958336**,SE **0.0004164077492897991**.
+Jk.619056016;D0/reference **0.912487998332987**,recomputed within1e-15.
+No paired G/Q,row aggregate or E3 branch was calculated.
+Checkpoint64782527bytes;network89/29/24/29tensors allfloat32;fiveoptimizerstates87/15/14/24/29.
+Config,coordinator/discoverer normalizers and hmasd_rollout_sampler_rng_v1 streams present.
+Traininginterface skill_interval5,rollout_length400,episode_length400;not a resume-equivalence
+or cross-host bit-identity result. Infinity string follows unchanged E0 serialization.
+
+Float64 helper exposure agrees exactly with rollout1/20 learnerrecords:
+
+| Network | Rollout1 | Rollout20 |
+| --- | ---: | ---: |
+|coordinator|0.04180633304054413|0.10621772056692431|
+|discoverer_actor|0.15479584233213217|0.8433220458564978|
+|discoverer_critic|0.2172988190776331|0.8944677205866685|
+|team_discriminator|0.009429305303445627|0.03559481001200934|
+|individual_discriminator|0.012601989682234131|0.054078531885410966|
+
+Receipt retains initial passed15430356992-byte physical/effective availability;admission is not
+runtime conformance. Accepted13/13 publication-path coverage remains applicable;full publication
+succeeded,no new publication defect. Resources_unmeasured limits peak-resource claims only.
+
+Original remote root is the launch root above. Unique ignored staging:
+`C:/Projects/HMASD-worktrees/cm-fsd-medium-d2-seed3-20260904/temp/directions/flexible_skill_duration/exp/E3_20260904/remote_fetch_large_d0_seed2_terminal_01/large_d0_seed2`.
+Canonical cell,created only after absence check:
+`C:/Projects/HMASD/.claude/worktrees/agent-a88287f2315bb99a0/temp/directions/flexible_skill_duration/exp/E3_20260904/large_d0_seed2`.
+scp transferred original evidence;remote find/sha256sum enumerated10files,all stagedhashes matched.
+PowerShell Copy-Item copied to absentcanonical;all10hashes matchedagain. Priorcells/quarantines
+untouched. Transfer hashes below are observations,not new runtime machinery.
+
+| File | SHA256 identical remote/staged/canonical |
+| --- | --- |
+|checkpoint_final.pt|d8c89284587eb5a2be6b2ade10fde501ead05d05d450af0105b77e7c73afdba6|
+|eval.jsonl|7ddb137d1830b0b25ed80936fa8052492bc577e0e9633cd9253e5788d90fb14a|
+|gaps.jsonl|f5a6a3793104f72a61693492f9282917c1722a5406889710d43d9d8d778742cd|
+|interruptions.jsonl|5a6a9e0f05eb1a21cd5dd8cf36c8bcac9ae73eb383964b83707983eb7641b9f1|
+|manifest.json|affbb18d55a3acd5ccdc0be8bcd68446ff3844db8f42139ee1dc8318354ed7b8|
+|metrics.jsonl|5650928e4a2150de7f8bc866f8ced19fd09a9b8e9685ecf17ff4a6d16e44657a|
+|path.jsonl|0a6ad357636df644dc32d3ae031598889957643d4b8da7bd3ffb11b01c5e1495|
+|preflight.json|9c48e157674013648591f8780a81efddf140d47125ac595f386025a44926f1d4|
+|rollout1_match.npz|623dd70376371f95e6716f0dc1e2beb0fff7a49459c9f2a56359381eeefbdc35|
+|summary.json|2d41dd5a3eaf02968806ec1c325c3fba128699c7d53dde09ab59ba599d834b73|
+
+Disposition:technical acceptance complete,return evidence for DM intake. Scope none.
+All collection processes terminal;no successor admitted. Large_d2_seed2 awaits its prospective
+DM SHA after this intake. CM remains available without routine polling.
