@@ -79,6 +79,8 @@ FRRIE R07 terminal: `frrie_b01_contact_r07_10ae9781` finished exit `0`, PID `165
 
 FSD large D0 seed2 terminal: `fsd_e3_large_d0_seed2_20260905_01` finished exit `0`, wrapper PID `1656091`, tmux inactive. Its supervisor logged a completed 20-rollout run, `128000` transitions, and authoritative duration `2784s` (reported runner total `2603.2776923269994s`); these are retained process facts only. Terminal delivery was ACKed directly by FSD DM, which resumed the original CM for collection/conformance and later intake. Routine observation and repeat reminders for this historical handle are closed; no successor was authorized by this event. There are currently zero tracker-owned live handles.
 
+FSD large D2 seed2 adoption: `(wsl_4070, fsd_e3_large_d2_seed2_20260905_01)`, SHA `6d64a95a1189523e39abb184ef284a574050b748`, cwd `/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01`, output `temp/directions/flexible_skill_duration/exp/E3_20260904/large_d2_seed2`, receipt sibling `preflight.json`, and log `/home/wu/.agent-tasks/fsd_e3_large_d2_seed2_20260905_01/task.log`. Same-handle observation at `2026-09-05T11:07:48Z`: `running`, exit `null`, PID `1663230`, tmux active; fresh physical/effective admission `15425314816` bytes passed. Projection `4.63h`, hard cap `8h`; terminal/failure/loss/cap wakes FSD DM and CM directly, with no restart, repair, or validity inference.
+
 ## Accepted work and terminal handoffs
 
 | DM / run record | Node and accepted handle | Launch SHA | Remote cwd | Output / receipt | Latest authoritative observation | Next owner step / notification |
