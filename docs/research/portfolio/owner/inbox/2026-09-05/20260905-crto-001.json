@@ -1,0 +1,37 @@
+{
+  "id": "20260905-crto-001",
+  "created": "2026-09-05T02:13:00-07:00",
+  "direction": "commitment_residual_triggered_options",
+  "tier": "object",
+  "kind": "decision",
+  "title": "CRTO B05：选择固定联合种子1和2",
+  "context": "B04种子0在胜任RAW比较器下无真实残差收益。新增seed会联合改变预测器、门控初始化和打乱映射；面板、原始顺序及33/258终点保持固定。",
+  "options": [
+    {
+      "key": "a",
+      "label": "同时预定种子1和2",
+      "consequence": ""
+    },
+    {
+      "key": "b",
+      "label": "只加种子1",
+      "consequence": ""
+    },
+    {
+      "key": "c",
+      "label": "先增加种子0预算",
+      "consequence": ""
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "零实现改动即可形成小规模三种子开发视图，并避免看完第一枚再选第二枚。",
+  "evidence": [
+    "docs/research/candidates/commitment_residual_triggered_options/CRTO_JOINT_SEED_B05_SELECTION_INTAKE_20260905.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-05.md#crto-b05-joint-seeds",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": null
+}
