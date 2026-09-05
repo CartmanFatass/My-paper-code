@@ -1,0 +1,116 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-05-vsp03-k1-host-innovator-01",
+  "workflow_node": "em_innovator",
+  "conversation_binding_key": "em:vsp_03:innovator",
+  "direction_id": "vsp_03",
+  "direction_ids": [
+    "vsp_03"
+  ],
+  "decision_authority": "pro_final",
+  "source_thread_id": "01a07355-29e4-7041-8361-3746dace66d3",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "operator_thread_id": "01a06f0e-5eab-7431-8491-e7c2c62705b6",
+  "creator_thread_id": "01a07355-29e4-7041-8361-3746dace66d3",
+  "return_route": "PARENT_SESSION",
+  "repository": "CartmanFatass/My-paper-code",
+  "conversation_id": "6a9c9de1-1b38-83e8-b882-e026aaa1b0cd",
+  "provider_url": "https://chatgpt.com/c/6a9c9de1-1b38-83e8-b882-e026aaa1b0cd",
+  "tab_id": null,
+  "tab_lifecycle": "CLOSED",
+  "visible_model": "6 Pro",
+  "underlying_model": "Latest",
+  "thinking_effort": "Pro, 5 of 5.",
+  "source_mode": "upload",
+  "prompt_sha256": "147338b059319a90f175668247b044a6f02e8439e03585c093969b3bffd81a6f",
+  "prompt_bytes": 20716,
+  "manifest_sha256": "b957a644d8991bb40041c27eb6f5e95d30f3e5addb0a70baff5e3f458138896c",
+  "manifest_bytes": 1801,
+  "response_sha256": "068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6",
+  "response_bytes": 28491,
+  "response_characters": 17215,
+  "send_evidence": {
+    "send_click_count": 1,
+    "url_observed": true,
+    "user_node_observed": true,
+    "user_node_exact": true,
+    "user_message_id": "acbb65e8-4608-40b0-8639-7d98a893ea72",
+    "attachment_observed": true,
+    "companion_prompt_exact": true
+  },
+  "upload_evidence": {
+    "expected_file": "PROMPT_BODY.md",
+    "provider_filename": "PROMPT_BODY(20260905-101740).md",
+    "attachment_observed": true,
+    "bytes": 20716,
+    "sha256": "147338b059319a90f175668247b044a6f02e8439e03585c093969b3bffd81a6f"
+  },
+  "assistant_message_id": "request-WEB:38c914e6-84ce-4047-9db2-eed2c07c560f-0",
+  "wait_status": "NATURAL_COMPLETION",
+  "observed_page_state": "complete assistant response; Copy response present; no active generation control",
+  "capture_method": "Current assistant Copy response control via browser CUA Playwright click and CUA clipboard.readText; raw UTF-8 response preserved",
+  "archive_paths": {
+    "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03__PACKET_MANIFEST.json",
+    "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03__00_PROMPT.md",
+    "reference_files": [],
+    "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__02_RESPONSE.md",
+    "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+    "response_sha256": "068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6"
+  },
+  "timestamps": {
+    "received_at": "2026-09-05T22:00:00Z",
+    "sent_at": "2026-09-05T22:00:00Z",
+    "generation_started_at": "2026-09-05T22:00:00Z",
+    "completed_at": "2026-09-05T23:11:58Z",
+    "captured_at": "2026-09-05T23:14:02Z",
+    "archived_at": "2026-09-05T23:21:45Z",
+    "tab_closed_at": "2026-09-05T23:23:26Z"
+  },
+  "heartbeat": {
+    "automation_id": "vsp03-k1-host-innovator-transport-wake-2026-09-05",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=15",
+    "retired_at": "2026-09-05T23:22:01Z",
+    "retirement_verified": true
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "01a07355-29e4-7041-8361-3746dace66d3",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "destination_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-05-vsp03-k1-host-innovator-01|vsp_03|6a9c9de1-1b38-83e8-b882-e026aaa1b0cd|068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "fallback_enabled": false,
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "manifest_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03__PACKET_MANIFEST.json",
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03__00_PROMPT.md",
+      "reference_files": [],
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__02_RESPONSE.md",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vsp_03\\2026-09-05-vsp03-k1-host-innovator-01\\2026-09-05-vsp03-k1-host-innovator-01--vsp_03--attempt-01__03_TRANSPORT_FACTS.json",
+      "response_sha256": "068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6"
+    },
+    "response_sha256": "068a9b6e123183ca9fda857a3874b35b91daed3e213e47eb61c7a97992b542f6",
+    "staged_at": "2026-09-05T23:22:22Z",
+    "delivery_status": "accepted",
+    "updated_at": "2026-09-05T23:22:22Z",
+    "sent_at": "2026-09-05T23:22:22Z"
+  },
+  "archive_status": "ARCHIVED",
+  "response_identity": "PASS",
+  "identity_binding": {
+    "conversation_id": "6a9c9de1-1b38-83e8-b882-e026aaa1b0cd",
+    "user_message_id": "acbb65e8-4608-40b0-8639-7d98a893ea72",
+    "assistant_message_id": "request-WEB:38c914e6-84ce-4047-9db2-eed2c07c560f-0"
+  },
+  "notes": [
+    "Exactly one provider Send confirmed.",
+    "Current response was disambiguated from the provider conversation and paired by user/assistant IDs.",
+    "No second Send was attempted."
+  ],
+  "updated_at": "2026-09-05T23:23:26Z"
+}
