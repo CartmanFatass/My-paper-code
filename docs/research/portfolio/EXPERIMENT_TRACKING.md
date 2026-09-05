@@ -36,7 +36,8 @@ CRTO B07 seed1 `(wsl_4070, crto_raw_centered_b07_s1_5a4b5c20_01)` and seed2
 `/home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20` and `.../crto-b07-s2-5a4b5c20`, frozen output
 roots `raw_centered_loss_b07_20260905/seed01|seed02/attempt01`, and 1200s-arm/1500s-invocation
 caps. Each has its own supervisor log under `/home/wu/.agent-tasks/<task>/task.log`; terminal/loss/cap
-wakes CRTO DM and CM once per seed. All other current records in this document are terminal or awaiting a separately handed accepted handle. The
+wakes CRTO DM and CM once per seed. FRRIE R07 is terminal and handed off; all other current records in
+this document are terminal or awaiting a separately handed accepted handle. The
 `2026-09-04T23:39:35Z` all-terminal snapshot is historical recovery evidence only.
 
 ## Active accepted work
@@ -73,6 +74,8 @@ Current terminal handoffs: N3 focused verification `dish_prefix_a01_verify_bfe49
 Latest terminal/recovery record: ACVC synthetic cost `acvc_upper_prefix_cost_782f6965_01` ended `cost_cap_reached` (exit `2`, 40.23s, peak RSS `18841600`) and was acknowledged for CM assessment only; no ACVC scientific branch was inferred. FRRIE R06 ended under the same pdb warning context and was collected/intaken as a distinct completed object. N3 A02 synthetic verification and its one prepared-point seed11 handle both completed and were acknowledged; no N3 successor is adopted. CRTO B06 seed1 and seed2 completed (97s and 92s) and DM intake is complete. FSD large D2 seed1 completed and was accepted as valid cell 14; its historical handle is closed. Current FSD seed2 facts and direct terminal/loss/bound routing remain as recorded above; no historical FSD task is revived.
 
 Subsequent terminal handoffs: CRTO B07 seed1 `crto_raw_centered_b07_s1_5a4b5c20_01` and seed2 `crto_raw_centered_b07_s2_5a4b5c20_01` each finished exit `0`; authoritative supervisor durations are `124s` and `126s` (not observer age), both were delivered once and CM collection is complete. ACVC repaired synthetic attempt `acvc_upper_prefix_cost_b18a098d_02` finished exit `0`, supervisor wall `29.25962231500307s`, peak RSS `17858560`, fresh admission passed; DM ACKed terminal delivery for CM collection. These are tracker observations only: no scientific classification, retry, or new handle is implied.
+
+FRRIE R07 terminal: `frrie_b01_contact_r07_10ae9781` finished exit `0`, PID `1657968`, tmux inactive; the supervisor log records `sys.exit()` with fixed-pdb interaction and authoritative duration `903s` (observer age `906s`). Terminal delivery was ACKed by the FRRIE DM and CM was woken for same-evidence collection. This terminal status is not a learner-success or scientific-validity assertion; no retry or successor is selected.
 
 ## Accepted work and terminal handoffs
 
